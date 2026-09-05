@@ -156,3 +156,25 @@ def solve_epochs(solutions: Iterable[Solution]) -> Solution:
             'action_records', 'final_frontier')),
         all(s.stats.complete for s in solutions),
         tuple(stage for s in solutions for stage in s.stats.stages)))
+
+
+def solve_separated_epoch(epoch, classes, class_zones):
+    """Exact R03 decomposition when public histories separate the two zones.
+
+    Membership is supplied by the admitted public history, never inferred from
+    zero advantages. Both coordinates can attain their individual maxima at the
+    same epoch. The robust aggregate tie therefore selects the aggregate map.
+    Zone-only objectives still select independently, including other-zone ties.
+    """
+    ordered = sorted(classes.items())
+    for key, options in ordered:
+        zone = class_zones[key]
+        if zone not in (0, 1) or any(o.zone_totals[1 - zone] for o in options):
+            raise ValueError("class is not separated by its public failed zone")
+    aggregate = _scalar_policy(epoch, ordered, lambda totals: sum(totals))
+    zones = tuple(_scalar_policy(epoch, ordered, lambda totals: totals[z])
+                  for z in range(2))
+    records = sum(len(options) for _, options in ordered)
+    return Solution(aggregate, aggregate, zones, Stats(
+        records, len(ordered), records - len(ordered), len(ordered), records,
+        1, True, tuple((epoch, key, len(options), 1) for key, options in ordered)))
