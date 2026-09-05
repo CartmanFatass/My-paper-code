@@ -29,6 +29,25 @@ rows are historical terminal records or prospective work awaiting a separately a
 
 ## Active accepted work
 
+FRRIE R09 A01 terminal handoff: `(wsl_4070,
+frrie_r09_segfault_a01_43eec21e_20260905)` was adopted at
+`2026-09-05T16:23Z` from CM
+`/root/dm_amx_frrie_a01_resume/cm_am_frrie_a01_diagnostic` for DM
+`/root/dm_amx_frrie_a01_resume`. The sole accepted handle used SHA
+`43eec21e9584c83e5e8d940402d7e4570b454e59`, PID `1683892`, and cwd
+`/home/wu/hmasd-worktrees/frrie-r09-segfault-a01-43eec21e-20260905`; its
+output, admission receipt, and supervisor log are respectively
+`temp/directions/finite_resource_relational_inductive_efficiency/exp/r09_segfault_a01`,
+`temp/directions/finite_resource_relational_inductive_efficiency/technical/r09_segfault_a01_admission.json`,
+and `/home/wu/.agent-tasks/frrie_r09_segfault_a01_43eec21e_20260905/task.log`.
+Admission passed with physical/effective availability `15422091264` bytes. Same-handle
+observation at `2026-09-05T16:23Z` found `finished`, exit `0`, PID `1683892`,
+`tmux_active=false`; the bounded supervisor log ended at
+`2026-09-06T00:21:42+08:00`, duration `19s`, after the existing `pdb` context.
+This is a terminal process fact only, not a learner-success or scientific-validity claim.
+Terminal notice has been sent directly to the named CM and DM for CM collection and DM intake;
+there is no relaunch, repair, or replacement handle.
+
 | DM / run record | Node and accepted handle | Launch SHA | Remote cwd | Output / receipt | Latest authoritative observation | Next owner step / notification |
 | --- | --- | --- | --- | --- | --- | --- |
 | `flexible_skill_duration` — DM `/root/dm_amx_fsd_continue`; [prospective continuation intake](../../candidates/flexible_skill_duration/FSD_E3_MEDIUM_D2_SEED3_CONTINUATION_INTAKE_20260904.md) | `wsl_4070` via `hmasd-wsl-node`; `fsd_e3_medium_d2_seed3_20260904_01` | `31bfecd79fc0f708546786ee26dfd8faa9e85dfb` | `/home/wu/hmasd-worktrees/fsd_e3_medium_d2_seed3_20260904_01` | `/home/wu/hmasd-worktrees/fsd_e3_medium_d2_seed3_20260904_01/temp/directions/flexible_skill_duration/exp/E3_20260904/medium_d2_seed3`; receipt `/home/wu/hmasd-worktrees/fsd_e3_medium_d2_seed3_20260904_01/temp/directions/flexible_skill_duration/exp/E3_20260904/medium_d2_seed3/preflight.json`; log `/home/wu/.agent-tasks/fsd_e3_medium_d2_seed3_20260904_01/task.log` | Adoption check `2026-09-04T23:47:19Z`: `running`, exit `null`, wrapper PID `106154`, learner PID `106170` (parent `106154`), uptime `49s`, `tmux_active=true`. Bounded log tail contains the fresh admission receipt: assessed `2026-09-04T23:46:29Z`, physical/effective available `15432294400` bytes, both floor checks passed. DM confirmed the direct adoption receipt; existing supervisor witnesses are `runner.sh`, `status`, `pid`, `start_time`, and `task.log`. | Observe same handle; notify DM on terminal, failed/refused, lost observation, or approaching/exceeding conservative `4.63h` / cap `8h`. At terminal CM `/root/dm_amx_fsd_continue/cm_am_fsd_continue` collects and verifies; no relaunch. |
