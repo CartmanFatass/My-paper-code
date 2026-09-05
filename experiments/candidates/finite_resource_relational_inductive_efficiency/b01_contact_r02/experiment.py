@@ -38,6 +38,7 @@ from .semantics import (
     TEST_SEED_LABEL,
     classify_r02,
     cost_config,
+    contact_integrity,
     exposure_record,
     _initialize_contact_pair,
     initialize_contact_pair,
@@ -142,7 +143,7 @@ def _training_curve_row(receipt: Any) -> dict[str, Any]:
 
 def execute(
     *, output_root: Path, admission_receipt: Path, test_only: bool = False,
-    adam_lr: float = 0.0003,
+    adam_lr: float = 0.0003, seed: int = SEED,
 ) -> dict[str, Any]:
     if not output_root.is_absolute() or not admission_receipt.is_absolute():
         raise B01ContractError("output and admission paths must be absolute")
@@ -153,6 +154,8 @@ def execute(
     eval_episodes = 1 if test_only else PRODUCTION_EVAL_EPISODES
     root_hex = TEST_ROOT_HEX if test_only else ROOT_HEX
     seed_label = TEST_SEED_LABEL if test_only else SEED_LABEL
+    if seed == 2:
+        root_hex, seed_label, adam_lr = f"{seed:064x}", "FRRIE-B07-CONTACT-BLOCK-002", 0.003
     root = bytes.fromhex(root_hex)
     evaluation_tapes = {
         roster: tuple(
@@ -194,12 +197,12 @@ def execute(
     models, optimizers, initial_audit, raw_initial = _initialize_contact_pair(
         root_hex, seed_label, adam_lr=adam_lr,
     )
-    if not test_only and initial_audit["tight_changed_coordinates"] != 5:
+    if seed == 1 and not test_only and initial_audit["tight_changed_coordinates"] != 5:
         raise B01ContractError("initial tight clip did not change exactly five coordinates")
-    if initial_audit["tight_changed_coordinates"] <= 0:
+    if seed == 1 and initial_audit["tight_changed_coordinates"] <= 0:
         raise B01ContractError("initial tight clip was not active")
     paired = PairedB01Trainer(models, optimizers)
-    paired.first_tight_contact_update = 0
+    paired.first_tight_contact_update = initial_audit["first_tight_contact_update"]
     paired.changed_coordinates = set(initial_audit["tight_changed_coordinate_indices"])
     paired.maximum_tight_overshoot = initial_audit["tight_maximum_overshoot"]
     paired.cumulative_tight_displacement = initial_audit["tight_projection_displacement"]
@@ -308,6 +311,7 @@ def execute(
         for curve in training_curves.values() for row in curve
     )
 
+    contact = contact_integrity(initial_audit, training_curves, projection["first_tight_contact_update"])
     if test_only:
         complete = True
         completion = {"complete": True, "status": "TEST_ONLY_NON_RESULT"}
@@ -369,6 +373,11 @@ def execute(
                 arm: factual_episodes[arm] * HORIZON for arm in LEARNED_ARMS
             }),
         }
+        if seed == 2:
+            for name in ("initial_tight_clip_changed_coordinates", "first_tight_contact_update"):
+                del expected[name], observed[name]
+            expected.update(initial_projection_conformant=True, contact_history_truthful=True)
+            observed.update(contact)
         checks = {name: observed[name] == value for name, value in expected.items()}
         complete = all(checks.values())
         completion = {
@@ -383,6 +392,8 @@ def execute(
         for arm in LEARNED_ARMS
     }
     rule_inputs = {
+        **contact,
+        "r07_binding": seed == int(root_hex, 16) == 2 and seed_label == "FRRIE-B07-CONTACT-BLOCK-002",
         "initial_optimizer_group_lr": initial_audit["initial_optimizer_group_lr"],
         "final_optimizer_group_lr": final_group_lr,
         "complete": complete,
@@ -414,14 +425,15 @@ def execute(
     peak = _peak_rss_bytes()
     summary = {
         "object_id": (
+            "FRRIE-B01-CONTACT-R128-LR003-R07-SECOND-ROOT-20260905" if seed == 2 else
             "FRRIE-B01-CONTACT-ACTIVE-R128-LR003-R06-20260904" if adam_lr == 0.003 else OBJECT_ID
         ),
         "evidence_class": "B/EXPLORE",
         "test_only": test_only,
         "branch": classify_r02(
-            rule_inputs, test_only=test_only, branch_prefix="R06" if adam_lr == 0.003 else "R02",
+            rule_inputs, test_only=test_only, branch_prefix="R07" if seed == 2 else "R06" if adam_lr == 0.003 else "R02",
         ),
-        "seed": SEED,
+        "seed": seed,
         "seed_label": seed_label,
         "seed_root_hex": root_hex,
         "launch_sha": launch_sha,
@@ -430,10 +442,10 @@ def execute(
             "validated": True,
             "facts": admission,
         },
-        "exposure": exposure_record(
+        "exposure": {**exposure_record(
             updates, initial_audit["tight_changed_coordinates"],
             adam_lr=initial_audit["initial_optimizer_group_lr"]["PHY_TRUST_004"][0],
-        ),
+        ), "first_tight_contact_update": projection["first_tight_contact_update"]},
         "deterministic_rule_inputs": rule_inputs,
         "runtime_configuration": {
             "device": "CPU",
@@ -516,12 +528,12 @@ def parser() -> argparse.ArgumentParser:
 
 def main(argv: Sequence[str] | None = None) -> int:
     args = parser().parse_args(argv)
-    if args.seed != SEED:
-        raise B01ContractError("R02 seed is fixed to literal seed 1")
+    if args.seed not in (1, 2):
+        raise B01ContractError("contact seed must be literal 1 or 2")
     execute(
         output_root=args.output_root,
         admission_receipt=args.admission_receipt,
         test_only=args.test_only,
-        adam_lr=0.003 if args.lr003 else 0.0003,
+        adam_lr=0.003 if args.lr003 else 0.0003, seed=args.seed,
     )
     return 0
