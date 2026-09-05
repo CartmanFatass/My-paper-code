@@ -1,0 +1,27 @@
+{
+  "question": "是否固定 516 更新，仅将 RAW 损失改为合法动作内分别中心化预测和目标，与已完成的 B06 比较？",
+  "changes_if_approved": [
+    {"target": "CRTO 比较器梯子", "from": "绝对 return 均方误差下，两枚种子的 REPLAN 均为 5/8", "to": "固定种子、信息和预算，训练动作差异；复用已完成的 B06 原始结果，不重跑基线"}
+  ],
+  "if_refused": "在干净边界取消或修订尚未执行的新损失比较，保留 B06 的有限负结果及种子 2 的原生收益改善。",
+  "evidence_for": [
+    {"path": "docs/research/candidates/commitment_residual_triggered_options/CRTO_RAW_EXPOSURE_B06_INTAKE_20260905.md", "quote": "The strongest support for the bounded failure is unchanged REPLAN actions in both seeds despite double per-row exposure and substantial parameter movement.", "why": "新的目标函数比较比再次延长同一预算曲线更直接地检验动作差异学习。"}
+  ],
+  "evidence_against": [
+    {"path": "docs/research/candidates/commitment_residual_triggered_options/CRTO_RAW_EXPOSURE_B06_INTAKE_20260905.md", "quote": "The strongest contradiction to general training ineffectiveness is seed 2's real KEEP correction and above-MEI native gain.", "why": "继续训练仍可能有效；中心化原因尚未确认，而且会同时改变梯度、裁剪和 Adam 轨迹。"}
+  ],
+  "uncertainty": [
+    "这是已暴露面板上的训练目标比较，不能证明共同 return 水平单独导致旧错误。",
+    "基线为固定历史结果且仍受精确动作计数限制；新结果首先诊断比较器，不能赋予残差正负极性。",
+    "单独计算预测与目标的合法均值、保留 pooled 分母和预测均值梯度是关键数值边界。",
+    "中心化开销尚未实测，成本用旧目标的同节点测量外推并保留原上限。"
+  ],
+  "cost": {
+    "compute": "两次各 516 更新和 16512 样本，预计 268/260 秒；各上限 1500 秒、每臂 1200 秒。仅新增 32 个动作读数，历史基线不重跑。局部小训练循环只替换损失调用。",
+    "owner_time": "约两分钟核对目标函数、历史比较器和解释边界",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing；按常设委托执行，异步批注在干净边界应用"
+  },
+  "verdict_text": "推荐固定预算下的合法动作中心化损失比较，复用 B06 绝对均方误差基线，不修改历史函数或扩展为新家族。",
+  "source": "docs/research/candidates/commitment_residual_triggered_options/CRTO_RAW_CENTERED_LOSS_B07_SCIENCE_CARD_20260905.md"
+}
