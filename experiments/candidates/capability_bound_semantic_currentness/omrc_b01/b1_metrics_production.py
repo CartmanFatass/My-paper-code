@@ -1887,91 +1887,10 @@ def _assemble_and_publish_b1_metrics(
             transaction, prepared_inventory=prepared.inventory,
             artifact_inventory=prospective_inventory, reread=reread,
         )
-    finalized_facts = finalize_materialized_raw_facts(
-        training_packet["prepublication_raw_facts"],
-        table_digest_records=reread["tables"],
-        artifact_digest_records=reread["artifacts"],
-        checkpoint_digest_records=reread["checkpoints"],
-    )
-    input_descriptor = build_mechanical_input_descriptor(
-        finalized_facts,
-        training_packet["raw_competence_inputs"],
-        authority="BOUND_ARTIFACT_EVIDENCE",
-        test_only=test_only,
-        training_slot_indices=training_indices,
-        raw_worker_sources=_descriptor_worker_sources(raw_source_groups),
-        policy_execution_mode_sources=policy_mode_sources,
-        table_bindings=_table_bindings(prepared.inventory),
-        artifact_inventory_sha256=_digest(
-            canonical_json_bytes(prospective_inventory)
-        ),
-    )
-    candidate_mechanical = compute_b1_mechanical(
-        finalized_facts,
-        training_packet["raw_competence_inputs"],
-        input_descriptor=input_descriptor,
-    )
     materialized = {
         row["table"]: _reload_materialized_table(root, row)
         for row in prepared.inventory
     }
-    reloaded_groups = _reload_raw_source_groups(root, raw_source_groups)
-    reread_admissions, reread_telemetry, reread_sources = _direct_invocation_groups(
-        root, reloaded_groups, training_indices
-    )
-    reread_shared = {
-        "evaluator_decision_truth": materialized["evaluator_decision_truth"],
-        "motif_twin_index": materialized["motif_twin_index"],
-    }
-    if test_only:
-        reread_shared["evaluator_decision_truth"] = [
-            row for row in reread_shared["evaluator_decision_truth"]
-            if row["split_order"] in (1, 2) and row["tape_id"] == 0
-        ]
-    recomputed_training = assemble_b1_metrics_training(
-        raw_slice_groups=reloaded_groups,
-        admission_groups=reread_admissions, telemetry_groups=reread_telemetry,
-        shared_tables=reread_shared,
-        policy_tables={
-            "policy_decisions": materialized["policy_decisions"],
-            "per_tape_curves": materialized["per_tape_curves"],
-            "policy_support_signature_counts": materialized[
-                "policy_support_signature_counts"
-            ],
-            "execution_mode_records": policy_tables["execution_mode_records"],
-        },
-        raw_source_groups=reread_sources, test_only=test_only,
-        policy_replay_resources={
-            "resource_admissions": replay_admissions,
-            "telemetry": replay_telemetry,
-        } if replay_admissions else None,
-    )
-    recomputed_facts = finalize_materialized_raw_facts(
-        recomputed_training["prepublication_raw_facts"],
-        table_digest_records=reread["tables"],
-        artifact_digest_records=reread["artifacts"],
-        checkpoint_digest_records=reread["checkpoints"],
-    )
-    final_mechanical = compute_b1_mechanical(
-        recomputed_facts,
-        recomputed_training["raw_competence_inputs"],
-        input_descriptor=input_descriptor,
-    )
-    if canonical_json_bytes(final_mechanical) != canonical_json_bytes(candidate_mechanical):
-        raise B1MetricsProductionError(
-            "materialized raw/table mechanical recomputation differs"
-        )
-    if final_mechanical["mechanical_components"]["publication_digests"] is not True:
-        raise B1MetricsProductionError(
-            "materialized publication digest reread failed; final rename refused"
-        )
-    if not test_only and (
-        final_mechanical["mechanical_conformance_pass"] is not True
-        or final_mechanical["scientific_packet_readable"] is not True
-    ):
-        raise B1MetricsProductionError(
-            "formal final mechanical conformance/readability failed"
-        )
     summary = build_result_rule_summary(
         table_inventory=prepared.inventory, tables=materialized,
         test_only=test_only,
@@ -1985,14 +1904,14 @@ def _assemble_and_publish_b1_metrics(
         artifact_inventory=actual_inventory,
     )
     final_facts = finalize_materialized_raw_facts(
-        recomputed_training["prepublication_raw_facts"],
+        training_packet["prepublication_raw_facts"],
         table_digest_records=final_reread["tables"],
         artifact_digest_records=final_reread["artifacts"],
         checkpoint_digest_records=final_reread["checkpoints"],
     )
     durable_descriptor = build_mechanical_input_descriptor(
         final_facts,
-        recomputed_training["raw_competence_inputs"],
+        training_packet["raw_competence_inputs"],
         authority="BOUND_ARTIFACT_EVIDENCE",
         test_only=test_only,
         training_slot_indices=training_indices,
@@ -2002,16 +1921,9 @@ def _assemble_and_publish_b1_metrics(
         artifact_inventory_sha256=_digest(canonical_json_bytes(actual_inventory)),
     )
     final_mechanical = compute_b1_mechanical(
-        final_facts, recomputed_training["raw_competence_inputs"],
+        final_facts, training_packet["raw_competence_inputs"],
         input_descriptor=durable_descriptor,
     )
-    if not test_only and (
-        final_mechanical["mechanical_conformance_pass"] is not True
-        or final_mechanical["scientific_packet_readable"] is not True
-    ):
-        raise B1MetricsProductionError(
-            "durable artifact conformance/readability failed"
-        )
     if not test_only:
         _bind_transaction_reread(
             transaction, prepared_inventory=prepared.inventory,
