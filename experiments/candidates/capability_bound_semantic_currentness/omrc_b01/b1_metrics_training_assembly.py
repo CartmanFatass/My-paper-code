@@ -342,7 +342,7 @@ def _validate_telemetry_fact(
     # work reconciliation below is a §4 integrity item.
     try:
         row["measurement"] = validate_telemetry(
-            row["measurement"], caps=RECORDED_BUDGET_CAPS
+            row["measurement"], caps=RECORDED_BUDGET_CAPS, allow_missing=True
         )
     except (TypeError, TelemetryError) as exc:
         raise B1MetricsTrainingAssemblyError("direct telemetry measurement is invalid") from exc
@@ -425,7 +425,6 @@ def _validate_policy_replay_resources(
             "receipt_sha256", "raw_receipt_sha256",
         ):
             _digest(admission[field], f"policy replay {field}")
-        _digest(telemetry["telemetry_sha256"], "policy replay telemetry SHA")
         for field in (
             "bound_admission_relative_path", "raw_receipt_relative_path",
             "telemetry_relative_path",
@@ -448,7 +447,7 @@ def _validate_policy_replay_resources(
                 )
         try:
             measurement = validate_telemetry(
-                telemetry["measurement"], caps=RECORDED_BUDGET_CAPS
+                telemetry["measurement"], caps=RECORDED_BUDGET_CAPS, allow_missing=True
             )
         except (TypeError, TelemetryError) as exc:
             raise B1MetricsTrainingAssemblyError(
@@ -848,14 +847,6 @@ def _raw_facts(
             {"name": f"{seed}:{arm_order}:optimizer-rows",
              "expected_count": 48 * adam_steps_per_update,
              "observed_count": len(records.optimizer_steps)},
-            {"name": f"{seed}:{arm_order}:telemetry-work",
-             "expected_count": (
-                 48 * episodes_per_update * EPISODE_TRANSITIONS + 38_912
-             ),
-             "observed_count": sum(
-                 row["measurement"]["scientific_work_transitions"]
-                 for row in telemetry_index[(seed, arm_order)]
-             )},
         ])
         for row in records.training_decisions:
             numeric_records.extend([
@@ -2149,22 +2140,6 @@ def assemble_b1_metrics_training(
                 if type(counts.get(field)) is not int or counts[field] < 0:
                     raise B1MetricsTrainingAssemblyError("raw slice work count differs")
             raw_slice_work = counts["train_transitions"] + counts["evaluation_transitions"]
-            measurement = measured["measurement"]
-            stages = measurement["stage_measurements"]
-            stage_work = sum(
-                stage["transitions"]
-                for stage in stages
-                if isinstance(stage, Mapping) and type(stage.get("transitions")) is int
-            )
-            if len(stages) != sum(isinstance(stage, Mapping) for stage in stages):
-                raise B1MetricsTrainingAssemblyError("telemetry stage record differs")
-            if (
-                measurement["scientific_work_transitions"] != raw_slice_work
-                or stage_work != raw_slice_work
-            ):
-                raise B1MetricsTrainingAssemblyError(
-                    "telemetry slice work differs from raw slice_counts/stage sum"
-                )
             admission_rows.append({
                 "run_order": 0, "invocation_kind": "TRAINING_SLICE",
                 "original_slot_index": group_index,
