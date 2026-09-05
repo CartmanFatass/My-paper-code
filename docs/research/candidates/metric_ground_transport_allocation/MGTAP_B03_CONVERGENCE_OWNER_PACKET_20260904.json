@@ -1,0 +1,18 @@
+{
+  "question": "在步长对照吸收了原有小差异后，当前配置坐标家族应暂缓、继续一个有区分力的实验，还是重设问题？",
+  "changes_if_approved": [
+    {"target": "N5 当前配置坐标实验家族", "from": "步长对照已完成，尚未选下一项实验", "to": "建议暂缓该家族，除非能提出相对已调参通用策略的具体原生收益问题；等待方向裁决"}
+  ],
+  "if_refused": "把你的修正一并送入方向裁决；已有有效结果及其探索性边界保持原样，不自动重跑或扩大网格。",
+  "evidence_for": [
+    {"path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_B03_MAIN_INTAKE_20260904.md", "quote": "Both actor-global selections are **3.0**, the upper grid edge.", "why": "调参后残差只有约 0.00066，通用策略已吸收固定步长下的小差异。"},
+    {"path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_B03_MAIN_RESULT_EVIDENCE_20260904.md", "quote": "Common-rate-0.1 contrast is 0.008410135904947899.", "why": "旧现象仍可见；新比较器揭示其步长敏感性，不能只保留旧的小正差异。"}
+  ],
+  "evidence_against": [
+    {"path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_B03_MAIN_INTAKE_20260904.md", "quote": "Strongest caveat: both selected rates are upper-edge winners, selected/read on three development seeds.", "why": "有限网格和探索种子不支持等价、广泛否定或最优调参结论。"}
+  ],
+  "uncertainty": ["非标量条件数、裁剪及隐式正则化仍可能产生不同结果。", "训练规模下通用策略与 oracle 尚有约 0.0406 差距，但未证明这就是该坐标机制能够获得的空间。"],
+  "cost": {"compute": "本轮完整面板约 36.3 秒；目前没有下一项已选实验。继续项必须另写预算与区分规则。", "owner_time": "可异步纠正方向建议。", "reversibility": "reversible", "waits_on_this": "方向层的新实验选择等待持久裁决节点；其他方向继续推进。"},
+  "verdict_text": "建议暂缓当前配置坐标家族，直到能明确说明相对已调参通用策略的原生收益问题；这不是方向整体不可能的结论。",
+  "source": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_B03_MAIN_INTAKE_20260904.md"
+}
