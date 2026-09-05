@@ -1,6 +1,6 @@
 # FSD E3 heterogeneous-hazard detached run state
 
-Snapshot: `2026-09-04T23:47:00Z`
+Snapshot: `2026-09-05T00:12:21Z`
 
 This is an operational recoverability snapshot for the frozen B/EXPLORE object
 `FSD-E3-HET-R01`. It records runtime facts only. It is not a result, an intake, a scientific
@@ -32,8 +32,9 @@ polarity, a queue implementation, or authority to bypass a fresh resource admiss
 - Frozen projections per invocation: D0 small `1.16 h`; D0 medium/large `1.68 h`; D2 conservative
   mechanical maximum `4.63 h`; all are below the `8 h` per-arm cap.
 - Current counts at this snapshot: card-accepted invocation cells `18`; result-bearing attempts
-  independently admitted/launched `13`; running `1`; valid complete cells `11`; quarantined
-  attempts `1`; unfulfilled cells `7`, comprising one running and six never launched. The earlier local refusal
+  independently admitted/launched `13`; last observed running `1`, current observation unknown
+  for that accepted task after SSH timeout; valid complete cells `11`; quarantined
+  attempts `1`; unfulfilled cells `7`, comprising one accepted nonterminal observation and six never launched. The earlier local refusal
   is preserved as evidence but was not itself an admission or launch.
 
 ## Accepted running D2 seed-3 cell and dedicated tracker
@@ -72,6 +73,21 @@ routine polling after the initial checks. Tracker owns the sole routine observer
 notifies this DM on terminal/failure, observation loss or the stated bound; it never relaunches.
 DM then resumes this same CM for terminal collection and acknowledges the reminder. Root relays
 neither handles nor terminal notices. ACK was a capability observation, not a launch gate.
+
+### Read-only observation interruption, 2026-09-05T00:10:58Z
+
+Tracker directly reported an SSH timeout from configured `hmasd-wsl-node` before it could read
+`agent-task status`. Its last successful poll at `2026-09-05T00:09:05Z` reported the same task
+running, wrapper PID `106154`, tmux active. The latest runtime state is therefore **unknown**;
+this does not establish learner failure, termination, cause, quarantine or scientific polarity.
+
+DM acknowledged this specific event directly, preserving the sole accepted supervisor and all
+original evidence. Tracker was asked to retain one bounded, read-only observer with backoff and
+notify DM on recovery or terminal status; CM receives an observation handoff only if tracker
+explicitly cannot retain coverage. No second polling chain, admission, stop or relaunch was
+created. This is an operational update under the existing unchanged-cell decision, not a new
+scientific selection. At this boundary both DM and integrated owner-review CLI reads returned
+`[]`; the FSD audit owner columns were empty.
 
 ## Accepted terminal D0 seed-3 cell
 
@@ -268,7 +284,7 @@ output has been created for that invocation.
 | medium | D0 | 2 | `k=5`, `c=inf` | `VALID_COMPLETE`; attempt 01 task `fsd_e3_medium_d0_seed2_20260904_01` |
 | medium | D2 | 2 | `k_max=40`, `k_Z=400`, `c=0.25` | `VALID_COMPLETE`; attempt 01 task `fsd_e3_medium_d2_seed2_20260904_01` |
 | medium | D0 | 3 | `k=5`, `c=inf` | `VALID_COMPLETE`; attempt 01 task `fsd_e3_medium_d0_seed3_20260904_01`; intake complete |
-| medium | D2 | 3 | `k_max=40`, `k_Z=400`, `c=0.25` | `RUNNING`; attempt 01 task `fsd_e3_medium_d2_seed3_20260904_01`; fresh admission passed and dedicated tracker adopted |
+| medium | D2 | 3 | `k_max=40`, `k_Z=400`, `c=0.25` | `OBSERVATION_UNKNOWN` after SSH timeout; last running at `2026-09-05T00:09:05Z`; attempt 01 task `fsd_e3_medium_d2_seed3_20260904_01` retained with tracker observation ownership |
 | large | D0 | 1 | `k=5`, `c=inf` | `REMOTE_FIRST_HOLD` |
 | large | D2 | 1 | `k_max=40`, `k_Z=400`, `c=0.25` | `REMOTE_FIRST_HOLD` |
 | large | D0 | 2 | `k=5`, `c=inf` | `REMOTE_FIRST_HOLD` |
@@ -285,7 +301,8 @@ was superseded by the explicit resume that launched exactly `medium_d0_seed3`. T
 finished and passed both CM technical acceptance and DM intake.
 
 **Current owner-direct boundary:** automatic research resumed after the Root/config restart.
-`medium_d2_seed3` is the sole current FSD running cell. The dedicated shared tracker holds its
+`medium_d2_seed3` is the sole accepted FSD task awaiting terminal observation; it was last seen
+running before the recorded SSH interruption. The dedicated shared tracker holds its
 accepted process identity and directly reminds the DM, which resumes CM collection and completes
 intake before continuing the original six large-row cells. Lifecycle, priority, card, claim
 ceiling and accepted mechanism science stay unchanged. All prior terminal handles remain
