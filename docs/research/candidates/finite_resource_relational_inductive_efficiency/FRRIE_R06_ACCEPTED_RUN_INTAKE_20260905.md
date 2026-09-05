@@ -1,6 +1,11 @@
 # FRRIE R06 technical acceptance and running handoff — 2026-09-05
 
-Status: `ACCEPTED_RUNNING / TECHNICALLY_CONFORMANT / TRACKER_ADOPTED / RESULT_PENDING`.
+Status: `TERMINAL_COLLECTED / VALID_B_EXPLORE / INTAKE_COMPLETE`.
+
+Current boundary: the exact handle ended naturally at 2026-09-05T09:34:42Z. Tracker's terminal
+event is acknowledged; no FRRIE handle remains live. `FRRIE_R06_RESULT_INTAKE_20260905.md`
+records the original mixed-roster branch, only N15 above MEI, mixed prediction score and
+the distinct R07 next-object selection. The launch-time observations below are historical.
 
 ## What DM checked
 

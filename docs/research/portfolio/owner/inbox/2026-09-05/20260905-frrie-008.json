@@ -1,0 +1,75 @@
+{
+  "id": "20260905-frrie-008",
+  "created": "2026-09-05T03:11:11-07:00",
+  "direction": "finite_resource_relational_inductive_efficiency",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "R07 第二字面根的大规模主问题卡",
+  "context": "Claim: a second prespecified literal-root R128 run can test whether the N15 high-LR tight-projection signal reappears, while fully reporting N9, at B/EXPLORE ceiling. Binding structure: systems / information flow; role weights aggregate partially observed partners before native actions.",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "继续最小实现与一次符合新卡的运行，记录实际接触和完整两规模结果。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "在安全边界停止尚未接受的后续调用，保留 R06 与当前候选证据。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "在安全边界应用修改并重写未运行新对象；不回改 R06 结果和旧规则。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": null,
+  "dm_reason": "用新根检查刚超过阈值的信号，比继续调参更直接；零初始接触也如实报告，不筛根。",
+  "evidence": [
+    "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R07_SECOND_ROOT_SCIENCE_CARD_20260905.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-05.md#frrie-r06-intake-r07-selection",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": {
+    "question": "是否接受固定第二个字面随机根，检验大规模上的高学习率信号是否重现，并完整保留小规模结果？",
+    "changes_if_approved": [
+      {
+        "target": "FRRIE 下一 B 类对象",
+        "from": "一个根上仅大规模超过 0.005，尚不清楚是否依赖该轨迹",
+        "to": "新对象固定种子 2，保持双方学习率 0.003、128 次更新和约束范围；大规模作为新主问题，小规模完整报告"
+      }
+    ],
+    "if_refused": "在下一个安全边界应用修改或停止未接受的后续调用；R05、R06 的规则、结果和旧 B01 停止边界保持不变。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R06_RESULT_INTAKE_20260905.md",
+        "quote": "Root sensitivity is the immediate live explanation for a barely above-MEI N15 gap; another dose change would leave it unresolved.",
+        "why": "先检查轨迹敏感性比继续调学习率更直接回应现有不确定性；新根事先固定，不按结果或初始触发情况筛选。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R06_RESULT_INTAKE_20260905.md",
+        "quote": "Strongest contradiction to an across-roster material advantage is the N9 sub-MEI gap; the N15 threshold margin is only about 0.000548 on one literal root and one prospectively selected endpoint.",
+        "why": "信号刚越过阈值；第二条固定轨迹即使重现，也不能推出随机根总体的稳定优势或关系特异性。"
+      }
+    ],
+    "uncertainty": [
+      "新根是否初始触发未知，零初始触发、后续触发或始终不触发都按预定规则报告，不换根。",
+      "新主问题在看过 R06 后选为大规模，属于透明的探索性适应，不回改旧结果。",
+      "第二个根是预先指定的字面种子，不宣称随机抽样总体推断。",
+      "新增字面 label 和真实接触记录需要局部实现，编排预算仍须实算，不予豁免。"
+    ],
+    "cost": {
+      "compute": "工作量保持每臂 655,360 个原生时隙，总 1,316,864；同节点 R06 总约 14–15 分钟。上限每臂 4 小时、全调用 8 小时，每次使用新的实际节点内存准入。",
+      "owner_time": "约一分钟；循环不等待回复。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "推荐固定新的字面种子 2，保持高学习率、训练工作和比较器不变，检查大规模信号是否重现，同时完整报告小规模；旧根和旧规则不回写。",
+    "source": "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R07_SECOND_ROOT_SCIENCE_CARD_20260905.md"
+  }
+}

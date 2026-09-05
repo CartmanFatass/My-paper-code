@@ -3,11 +3,13 @@ Binding structure: `systems / information flow` — role-to-role residual weight
 
 # FRRIE B01 contact-active R128 LR003 R06 science card — 2026-09-04
 
-Status: `FROZEN / B_EXPLORE / ACCEPTED_RUNNING / RESULT_PENDING`.
+Status: `COMPLETE / VALID_B_EXPLORE / R06_SMALL_OR_ROSTER_MIXED / N15_ONLY_ABOVE_MEI`.
 
 Accepted launch: `72b1bd001f7aff4d383f7cbec296bed2edf675dd`, task
 `frrie_b01_contact_r06_72b1bd00`, `wsl_4070`, 2026-09-05T09:19:47Z. Tracker adopted this
-unique handle. See `FRRIE_R06_ACCEPTED_RUN_INTAKE_20260905.md` for the current recoverable boundary.
+unique handle, which ended naturally on 2026-09-05T09:34:42Z. See
+`FRRIE_R06_RESULT_INTAKE_20260905.md` for the final reading, mixed prediction score and
+new-object R07 selection. The frozen meaning and predictions below remain unchanged.
 
 Current execution authority: owner instructed **“继续自动推进任务”**, relayed by Root on
 2026-09-05. This supersedes the 2026-09-04 pause and authorizes bounded R06 engineering repair,
