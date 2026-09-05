@@ -66,6 +66,7 @@ correct one. A guard is a bug until a card asks for it. Research code has no com
 obligation and no resume obligation; a failed run is left in place and the next attempt is a new
 directory. Budgets: 2,000 new lines per attempt and 600 per runner; orchestration at 30% is a review
 signal, not an automatic return. Tests are proportionate to changed behavior and primary output;
+the existing five-minute research-directory test budget (excluding runner smoke) remains.
 do not repeat smoke solely before launch. End every commit message with `scope: none` or
 `scope: <item> per <card line>`.
 

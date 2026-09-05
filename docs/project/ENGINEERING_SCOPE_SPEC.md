@@ -95,6 +95,10 @@ returns the diff.
 
 ### Owner-ratified small reuse / net-deletion exception (2026-09-05)
 
+For future ordinary research, §11.8 supersedes the ratio-exception procedure below: no 100-line
+application or new line-by-line orchestration census is needed. Preserve historical reports and
+independent named appendices; ordinary source, runner and test budgets remain.
+
 **小规模复用／净删除例外。** 对research层、事前在既有科学卡或技术任务记录中声明的单一逻辑变更，若其目的为复用现有科学计算，或其全部非测试源代码删除行数严格大于新增行数；且整项逻辑变更累计新增非测试源代码不超过100行、不新增§4所列机械设施，则可适用本例外。例外不得改变未被相应权限明确选择的科学含义或对象之外的科学行为。
 
 从声明基线起跨文件、跨提交合并报告新增行数A、删除行数D及编排行数O；本例外的比例报告采用`O/(A+D)`，替换按删除和新增两侧计数，测试与文档分列。对普通research变更，编排占比30%仅为审查提示，不是预算硬上限、源码接受否决条件或科学有效性判据；既有独立reviewer应说明必要性、受影响计算与未验证事实。不得填充计算、压缩代码或移动包装以制造比例合规。行数资格不等于正确性或源码接受。

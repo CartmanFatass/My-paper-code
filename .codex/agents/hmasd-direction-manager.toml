@@ -22,9 +22,9 @@ Every object starts with a card proportionate to its evidence class: A/RECON rec
 measurement; B/EXPLORE records a concise question, real learner and comparator, primary observable,
 budget, exposure and non-goals; C fixes the final population, estimand, selection, uncertainty and
 interpretation needed by its conclusion. A/B cards need not prebuild exhaustive branches, exact
-uppers, full support censuses or mechanism explanations. Frozen contracts, held-out splits,
-oracle-retuned comparators and consumption semantics are C-time obligations and never hold an A or
-B launch (section 11.4). Only the section 4 integrity items, nonzero learner counts, the resource
+uppers, full support censuses or mechanism explanations. Confirmatory obligations follow the
+specific C claim; held-out transfer splits and oracle-retuned comparators are not universal C
+requirements and never hold an A or B launch (section 11.4). Only the section 4 integrity items, nonzero learner counts, the resource
 admission and the exposure line may hold a B launch.
 
 Send CM a meaning-complete objective: the class, the card, protected scientific/numerical/RNG/
@@ -158,7 +158,8 @@ not a universal prerequisite for later work; a reading from error text alone is 
 says so. Repair or verify a defect when it threatens the next claim's reward, information,
 comparison, training or primary measurement.
 Missing resource telemetry keeps a run valid, marked `resources_unmeasured`; learner-side
-instrumentation failure quarantines the attempt, which consumes nothing; a fresh attempt at a new
+instrumentation failure limits its dependent claim under §11.8.7; independently trustworthy facts
+remain reportable, without retroactively lifting historical quarantine. A fresh attempt at a new
 sha is a new launch, not a retry. A and B objects have no consumption state; only a valid complete
 result of an explicitly frozen C object consumes that object, and its decision rule cannot be
 rewritten after the result. A valid negative closes at most the smallest supported unit.

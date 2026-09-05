@@ -1,12 +1,12 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-05 (N3 and CBSC scoped intakes complete; UCOPE branch decision applied; exploration-burden calibration applied; runtime specification applied; VNFC E01 CM active)
+Updated at: 2026-09-05 (N3 and CBSC scoped intakes complete; UCOPE branch decision applied; exploration-burden calibration applied; runtime specification applied; VNFC E01 completed; full projection blocked)
 Owner: Root
 Current important-change authority: latest explicit owner approval applies CBSC/N3 B/B and delegates future same-kind specification changes plus their explicit Portfolio updates to complete appropriate-node Pro plans, with highlighted P1/P2 traces and no repeated owner vote. See `decisions/2026-09-05-pro-directed-spec-delegation.md`; historical authority/corrections remain preserved.
 Owner review maintenance: P1/P2 only (`OWNER_DIRECT`, 2026-09-05); P3/P4 creation, backfill and reminders retired. Preserve scientific evidence, audit and existing owner replies; see `decisions/2026-09-05-owner-review-p2-cutoff.md`.
 Lifecycle admission: 15 ACTIVE source IDs: the existing nine route agendas plus ACVC restored to the queue by the September5 owner review;7 PARKED reserves. Source IDs within a route do not create independent DM chains.
 Direction execution parallelism: target 5 concurrently advancing top-level DM chains (`OWNER_DIRECT`, 2026-09-04); off-roster `ACTIVE` directions are queued without lifecycle effect
-Loop state: ACTIVE / OWNER_DIRECT. Root applied the complete runtime specification Portfolio Pro plan under standing delegation; VNFC E01 now enters CM implementation, not launch acceptance. Six library studies and all 104 navigation AGENTS are archived. N3 A05 is complete; CBSC bounded repair ends with incomplete runtime acceptance; UCOPE branch-local PARK is applied. All accepted experiment handles are terminal. No repeated owner approval is pending.
+Loop state: ACTIVE / OWNER_DIRECT. Root applied the complete runtime specification Portfolio Pro plan under standing delegation; VNFC E01 assessment completed in 28.11s wall/37.93 CPU-s; full-work projection 123765.5s exceeds 2700s, so this investment stops at technical intake. Six library studies and all 104 navigation AGENTS are archived. N3 A05 is complete; CBSC bounded repair ends with incomplete runtime acceptance; UCOPE branch-local PARK is applied. All accepted experiment handles are terminal. No repeated owner approval is pending.
 Nested execution capacity: no repository-level fixed limit on implementer sessions or result-bearing runs inside the working set (runtime availability and per-invocation resource admission still apply; `AGENTS.md` §5 and §7)
 Execution routing: `REMOTE_FIRST / ACTIVE` for prospectively portable result-bearing invocations via `.codex/hmasd-compute.toml`; local Windows remains control plane and constrained fallback
 Result-run memory floor: `4 GiB physical and effective available memory, freshly measured per invocation`
@@ -61,7 +61,7 @@ provenance, but result polarity never transfers into an accepting direction.
 | semigroup_consistent_duration_model_policy | ACTIVE | HIGH | ROOT | 2026-09-04T19:38:07Z | Route K4 (跨时长共享、组合与负迁移); coordinated as this route agenda. A01 validly established one-sided duration-action relevance (`W=2498`, `R7=0`, `R13=1`); A02 validly stopped at `A02_EVENT_PHASE_POPULATION_NOT_ESTABLISHED` after 321 candidate missions. Convergence returned `PRO_FINAL=PARK_CURRENT_D6_ACTION_CHOICE_OBJECT_FAMILY`: only that A01/A02 family is direction-locally parked, with no successor authority; the broader Portfolio lifecycle remains `ACTIVE`. |
 | ucope | ACTIVE | HIGH | ROOT | 2026-09-05 complete intake | Route K3. Complete6Pro decision applied: PARK only retained-policy root-residual localization branch at offset2000000, including numerical-locus; no next object/learner/recast. PA-B/TW-B benefits and contrary full-competence facts retained. Exact archive and full intake integrated7def833f2; P2 ucope001 applied. Re-entry needs actual complete conformant diagnostic interface. Whole-direction lifecycle/priority unchanged. |
 | vap_folr_core | ACTIVE | MEDIUM | ROOT | 2026-09-05T10:21:03Z | Route N3. FOLR B04 valid WITHIN_MEI (+0.00260417 vs0.05) preserved. Owner ratified handover-source agenda. DISH B01 FTS-B0, A01 no source delivery and A02 endpoint-clearance witness are valid bounded diagnostics; source effect remains unestimated. Host/family Convergence returned CONTINUE with bounded host qualification; no historical B01 repeat. |
-| variable_n_fleet_churn | ACTIVE | HIGH | ROOT | 2026-09-05 engineering review | Route N2. Direction6Pro selected only one outcome-blind exact batch feasibility E01; original2700s cap, science and recasts2/lowestsequencing unchanged. Correct Portfolio request2026-09-05-marl-runtime-spec-portfolio-01 dispatched once,31refs at635d80147, dispatch74bc4e57f. Complete Pro plan archived/applied: fixed four participants,batch8,one60s wall/300CPU-s E01 selected for implementation; no census or old calibration repeat. Six source studies/104AGENTS archived; no measured optimized speedup. P2 vnfc001 traces the direction decision; no repeated owner vote. |
+| variable_n_fleet_churn | ACTIVE | HIGH | ROOT | 2026-09-05 engineering review | Route N2. Direction6Pro selected only one outcome-blind exact batch feasibility E01; original2700s cap, science and recasts2/lowestsequencing unchanged. Correct Portfolio request2026-09-05-marl-runtime-spec-portfolio-01 dispatched once,31refs at635d80147, dispatch74bc4e57f. Complete Pro plan archived/applied: fixed four participants,batch8,one60s wall/300CPU-s E01 selected for implementation; no census or old calibration repeat. Six source studies/104AGENTS archived. E01 source integrated and unique assessment complete: 28.11s wall/37.93 CPU-s; full projected wall123765.5s exceeds2700s. E01 investment stopped, no science polarity; see VNFC_R03_E01_TECHNICAL_INTAKE_20260905.md. P2 vnfc001 traces the direction decision; no repeated owner vote. |
 | vsp_02 | ACTIVE | LOW | ROOT | 2026-09-01T09:55:33Z | Route N3 (状态保留、重建与迁移); coordinated as this route agenda. B/EXPLORE competence-first Adam CARRY/RESET trajectories across lifecycle ages, with OEER as optimizer-history control. Equal exact success sets do not establish transient equivalence. |
 | vsp_03 | ACTIVE | LOW | ROOT | 2026-09-01T09:55:33Z | Route K1 (中断时机); coordinated as this route agenda. B/EXPLORE event-aware termination in a persistent-target semi-Markov toy against one-hit, dwell, debounce, hysteresis, and same-information generic controls. |
 | vsp_c1 | ACTIVE | MEDIUM | ROOT | 2026-09-01T09:55:33Z | Route K4 (跨时长共享、组合与负迁移); coordinated as this route agenda. B/EXPLORE `2x2x2` identity-by-period toy with a held-out fourth corner and partners. No-production-host evidence cannot decide bounded compositional learning. |
@@ -75,7 +75,7 @@ Pro question. This is scheduling under the existing five-chain policy, not succe
 
 | Route | Active responsible chain | Concrete current work |
 | --- | --- | --- |
-| N2 / VNFC | Root with `/root/cm_am_vnfc_e01` | Complete bounded E01 implementation and independent engineering review |
+| N2 / VNFC | Root with `/root/cm_am_vnfc_e01` | E01 complete; return measured projection gap at existing Convergence boundary |
 | N3 / DISH | `/root/dm_amx_n3_approved` | Prepare post-A05 Direction Pro question; preserve synthetic-only conclusion |
 | N4 / CBSC | `/root/dm_amx_cbsc_approved` | Prepare post-repair Direction Pro question from incomplete publication and unresolved causes |
 | K1 / VSP-03 | `/root/dm_amx_k1_vsp03_design` | Prepare prospective native-return host/reference design for proper Innovator decision |
@@ -108,9 +108,10 @@ highlighted with this trace; no additional owner vote is pending.
 
 ## Completed intake boundary before five-chain refill
 
-Root owns the applied runtime specification and acts as VNFC direction caller. Active CM
-/root/cm_am_vnfc_e01 implements the unique E01 in its isolated worktree, baseaaaad1212.
-Recovery: handoffs/2026-09-05-vnfc-e01-cm.md. No formal handle or source acceptance yet.
+Root owns the applied runtime specification and acts as VNFC direction caller. CM source is
+integrated and the unique E01 assessment is terminal. The original full-work projection exceeds
+the cap; no retry or full census. Recovery and evidence: ../candidates/variable_n_fleet_churn/
+VNFC_R03_E01_TECHNICAL_INTAKE_20260905.md.
 Request `2026-09-05-marl-runtime-spec-portfolio-01` was dispatched exactly once to the existing
 Transport singleton; the pinned packet is under `pro_packets/20260905_marl_runtime_spec/pro_review_01/`.
 Complete response archived and read: the revised runtime specification and exact E01 appendix
@@ -122,7 +123,7 @@ No resend. The archived draft remains a proposal; the new docs/project specifica
 | N3 / DISH A05 | `/root/dm_amx_n3_approved` | Original A05 complete; no production repair or successor selected |
 | CBSC | `/root/dm_amx_cbsc_approved` | Bounded repair intake complete with runtime gap; no fourth formal or new repair investment |
 | UCOPE | `/root/dm_amx_ucope_queue` | Complete direction Pro branch-local PARK applied; no successor |
-| VNFC | Root acting direction caller | Complete Pro specification applied; exact E01 implementation assigned through CM, no accepted run |
+| VNFC | Root acting direction caller | E01 source accepted and assessment complete; projected123765.5s >2700s; investment stopped, no scientific result |
 
 The five-chain scheduling target remains. Completed chains and six completed library scouts do not
 count as advancing directions. Queue assessment found vsp03/vspc1 still prospective host agendas;

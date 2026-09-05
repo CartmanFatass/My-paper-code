@@ -103,6 +103,10 @@ A B result may justify implementation investment, a better discriminator, a boun
 study, or retirement of a narrow conjecture contradicted by direct evidence. It does not by itself
 retire a direction.
 
+A single trustworthy, meaningfully comparable observation may justify bounded follow-up under
+§11.8; prior statistical significance or positive replication is not required. Training-seed
+variation and evaluation noise are distinct; more episodes on one checkpoint do not add training runs.
+
 ### 5.3 C-BENCH — BOUNDED_BENCHMARK
 
 Development and hyperparameter selection MUST be separated from the frozen final evaluation when
@@ -181,7 +185,8 @@ not ban further research on the mechanism or direction.
 The following do **not** consume a C object:
 
 - failed or missing resource admission;
-- absent required telemetry or prospective instrumentation;
+- absent prospective instrumentation needed by the estimand (optional resource telemetry alone
+  does not invalidate a non-resource claim);
 - code that does not conform to the frozen algorithm/comparison;
 - truncated, corrupted, or unobserved output;
 - leakage, RNG, checkpoint, precision, or evaluator defects that invalidate the estimand; or
@@ -202,9 +207,10 @@ post-hoc seed, budget, metric, threshold, model, comparator, or population chang
   support law, intervention, or decision rule; or
 - a narrower or recast mechanism hypothesis.
 
-The new object does not erase the old observation. It is independent confirmation only if its
-motivation and design are genuinely independent of the earlier outcome; otherwise it is sequential
-follow-up evidence and must be labelled as such.
+The new object does not erase the old observation. Its motivation may use earlier outcomes while
+new training random streams remain independent. Disclose adaptive design and selection; distinguish
+fresh independent training evidence from reuse of observed data. Confirmation requires an applicable
+prospectively fixed evaluation and analysis, not a motivation uninfluenced by prior research.
 
 ## 7. Lifecycle implications
 
@@ -328,9 +334,10 @@ follows the order rather than preceding it:
    independent runs and uncertainty chosen for the task, variance, margin and cost. A repeatable
    B signal is useful evidence for promotion, but three to five seeds is not a universal gate.
 
-Frozen contracts, pre-registered failure boundaries, oracle-retuned comparators, held-out transfer
-splits (train-k / test-k′, train-N / test-N′), and consumption semantics are **C-time obligations**.
-They MUST NOT be launch conditions for A or B objects. A B object MAY be planned with them in mind,
+Confirmatory contracts and consumption semantics apply to their declared C objects. Oracle-retuned
+comparators and held-out transfer splits (train-k / test-k′, train-N / test-N′) apply only where the
+specific claim needs them, not to every C-BENCH. External preregistration is not a universal duty.
+These MUST NOT be launch conditions for A or B objects. A B object MAY be planned with them in mind,
 but their absence never blocks a B launch and never lowers a B result below its §5.2 ceiling.
 
 ### 11.2 Theory ceiling
@@ -453,6 +460,9 @@ superiority. A local or proxy improvement is reported as local; native-return lo
 or unchanged complete competence remain alongside it. Outcome selection of the best seed, checkpoint,
 metric or configuration must be disclosed.
 
+Absence of improvement may also motivate a specifically justified new B change. A positive result
+is neither a universal prerequisite for follow-up nor an entitlement to unlimited further compute.
+
 #### 11.8.3 Independent training seeds
 
 When the question is learning performance, prefer a small follow-up with one or two new independent
@@ -462,6 +472,10 @@ all signs are positive. Paired treatment/control seeds or common exogenous rando
 when declared, but repeated evaluation of one checkpoint, another fold on the same data, or more
 rollouts is not a new training sample. Few seeds require per-seed outcomes and a limited uncertainty
 statement; they cannot support a stable population claim by themselves.
+
+The one-or-two-seed follow-up is an economical starting point, not a launch requirement or assurance
+of statistical sufficiency. One training seed cannot estimate training-seed population uncertainty;
+resampling units must respect shared data, folds and actual independence.
 
 #### 11.8.4 Publication-stage claims
 
@@ -517,3 +531,8 @@ may remove or adjust unneeded diagnostics in their card/task and state the claim
 tolerance or ratio approval is needed. Existing records, failures and named tasks retain their original
 meaning. The current VNFC E01 exact appendix remains unchanged; finished CBSC/N3 work and old UCOPE
 attempt02 are not reopened by this calibration.
+
+No new line-by-line orchestration census or 100-line exception application is required for this
+ordinary rule. Explicitly labelled reanalysis may use a revised method if existing data support it;
+it must acknowledge observed outcomes and cannot be reported as passing the old rule or as fresh
+independent confirmation. Adjusting irrelevant diagnostic burden alone is not a mechanism recast.

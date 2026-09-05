@@ -27,6 +27,13 @@ more. `docs/project/ALGORITHM_PRINCIPLES.md` is historical background, not a req
 
 ## 2. Decision ladder
 
+Evidence-spec §11.8 controls default scientific burdens and ordinary research engineering
+checks over conflicting older direction, template or role wording. It does not retroactively
+reinterpret historical results or rewrite the current named VNFC E01 task. Consultation exposure
+may cite existing execution records and state zero new exposure; no new exposure experiment is
+required. Protecting frozen scientific meaning does not prohibit a properly selected new B or
+explicitly labelled outcome-informed reanalysis under the existing decision ladder.
+
 Every decision that selects what to run next belongs to one tier. The tier fixes who decides,
 where it is recorded, and its provenance label.
 

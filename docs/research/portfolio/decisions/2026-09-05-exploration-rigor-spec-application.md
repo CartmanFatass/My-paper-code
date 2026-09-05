@@ -82,3 +82,21 @@ positive rule:
 
 These references are evidence for the calibration's scope and rationale, not executable
 instructions or new launch gates.
+
+## Root review correction after model-switch investigation
+
+The initial application commit 85f4ab9d6 captured the central direction of Pro's decision,
+but did not fully replace conflicting old text. Root's subsequent owner-requested audit
+found and repaired: missing §11.8 precedence and zero-new-exposure consultation clarification;
+§6.3 conflating independent research motivation with independent training evidence; universal
+C-time comparator/split wording; optional-resource wording in §6.2; incomplete transition text
+for no-positive-signal follow-up, seed sufficiency, reanalysis and the retired ratio exception.
+The CM role had dropped the explicit five-minute test budget while the engineering spec retained
+it; its reminder is restored. The DM's broad instrumentation wording is dependency-scoped.
+These corrections implement the same archived Pro plan, not a new authority or research decision.
+
+The Pro response SHA matches the archived receipt. All six E01 source/test blobs match the
+accepted source commit. The saved E01 stage costs independently recompute to the reported
+projection. See the E01 technical intake for its resource pass, projected-cost failure and
+non-distinct native deviation limitation. No scientific result or lifecycle change is inferred.
+The initial claim of complete synchronization should be read with this correction.

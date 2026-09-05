@@ -104,7 +104,16 @@
       "state": "applied",
       "summary": "Complete Portfolio Pro decision applied to evidence, engineering, runtime, AGENTS and role specifications; single real signal permits bounded follow-up, 1-2 independent seeds preferred, no universal exact or ratio gates; UCOPE branch unchanged and VNFC E01 appendix unchanged.",
       "correction": "Existing P1/P2 item highlighted; source, application record and actual applied state are traceable; no owner re-vote or experiment launch."
+    },
+    {
+      "at": "2026-09-05T21:59:44+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260905_exploration_calibration/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/decisions/2026-09-05-exploration-rigor-spec-application.md",
+      "state": "applied",
+      "summary": "Root audit corrected incomplete synchronization: independent training versus motivation, claim-specific C burdens, precedence, transition wording and retained test budget.",
+      "correction": "Owner-requested review after model switch; same complete Pro plan, existing item highlighted; no new scientific or lifecycle decision."
     }
   ],
-  "approval_correction": "Existing P1/P2 item highlighted; source, application record and actual applied state are traceable; no owner re-vote or experiment launch."
+  "approval_correction": "Owner-requested review after model switch; same complete Pro plan, existing item highlighted; no new scientific or lifecycle decision."
 }

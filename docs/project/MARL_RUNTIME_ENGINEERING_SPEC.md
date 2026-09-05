@@ -5,6 +5,10 @@ and the owner's standing specification delegation. This is engineering guidance,
 new scientific evidence class or launch condition. The original object contract remains controlling
 except for an explicitly named applicable appendix below.
 
+For future ordinary work, evidence-spec §11.8 permits a properly selected new B or explicit
+revision of irrelevant diagnostic duties. This does not permit presenting changed semantics as
+an optimization of the unchanged original object. Current VNFC E01 remains unchanged.
+
 Source: [complete Pro decision](../research/portfolio/pro_packets/20260905_marl_runtime_spec/pro_review_01/archive/RESPONSE.md),
 response SHA-256 `da9e86d05bb34e070b936ca69aafdf4a1b912caf88bb4d1b150c3831e9a2125f`.
 Application: [decision record](../research/portfolio/decisions/2026-09-05-marl-runtime-engineering-spec.md).
