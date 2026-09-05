@@ -1,0 +1,87 @@
+{
+  "id": "20260905-crto-017",
+  "created": "2026-09-05T04:33:30-07:00",
+  "direction": "commitment_residual_triggered_options",
+  "tier": "direction",
+  "kind": "close-call",
+  "title": "最终裁决：可逆暂停已选面板的平衡残差对象族",
+  "context": "已完整核验 Convergence 的最终 B/EXPLORE 裁决并执行对象族 PARK。仅一个合格种子给出残差负结果，后续两种子仍受比较器限制；继续一次明确判别仍是接近的次选。保留原生价值再进入条件，没有新实验、关闭、重述或 Portfolio 变动。",
+  "options": [
+    {
+      "key": "park",
+      "label": "执行可逆的对象族暂停",
+      "consequence": "当前已执行；保留既有证据与明确再进入条件，不改变方向生命周期或优先级。"
+    },
+    {
+      "key": "continue-b",
+      "label": "所有者直接改选一次明确 B 判别",
+      "consequence": "按所有者的明确 Direction 指令制定具体可证伪问题、暴露和逐臂成本；不自动延长旧梯子。"
+    },
+    {
+      "key": "close",
+      "label": "所有者直接要求有限关闭",
+      "consequence": "需要明确限定关闭对象；既有负结果与比较器限制均不扩大为机制普遍无效。"
+    },
+    {
+      "key": "recast",
+      "label": "所有者直接要求重述机制",
+      "consequence": "明确新机制后按正常规则记录；本次 Pro 裁决本身没有发生 recast。"
+    }
+  ],
+  "recommended": "park",
+  "auto_applied": "park",
+  "dm_reason": "Pro 以预期科学判别力选择暂停，保留真实学习反例和继续 B 的接近次选；DM 按最终裁决执行，不作本地替代。",
+  "evidence": [
+    "docs/research/candidates/commitment_residual_triggered_options/CRTO_BALANCED_FAMILY_CONVERGENCE_INTAKE_20260905.md",
+    "docs/research/candidates/commitment_residual_triggered_options/pro/2026-09-05-crto-balanced-family-convergence-01/RESPONSE.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-05.md#crto-balanced-family-final",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "执行 Convergence 的可逆暂停裁决后，当前对象族保留什么结论、什么条件允许重新进入？",
+    "changes_if_approved": [
+      {
+        "target": "当前已选面板上的平衡残差对象族",
+        "from": "B07 已完成；家族处置为 PRO_PENDING",
+        "to": "已按 PRO_FINAL 执行可逆 PARK，保留明确再进入条件；无 B08、CLOSE、RECAST 或 Portfolio 变动"
+      }
+    ],
+    "if_refused": "此项已按最终节点裁决执行，不等待所有者确认。若所有者直接覆写，按明确的 Direction 指令调整；原档和既有结果始终保留，不因传输记录缺项重发请求。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/commitment_residual_triggered_options/pro/2026-09-05-crto-balanced-family-convergence-01/RESPONSE.md",
+        "quote": "**Reversibly park this selected-panel balanced residual family. Retain the direction’s finite-budget inductive-bias question, but select no additional learner run at this node.**",
+        "why": "节点形成的是当前对象族的有限暂停，保留方向问题，没有选择新学习实验。"
+      },
+      {
+        "path": "docs/research/candidates/commitment_residual_triggered_options/pro/2026-09-05-crto-balanced-family-convergence-01/RESPONSE.md",
+        "quote": "The decisive consideration is **expected discrimination, not implementation inconvenience or accumulated cost**.",
+        "why": "继续修改比较器尚未连接到一个明确可区分残差原生价值的问题。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/commitment_residual_triggered_options/pro/2026-09-05-crto-balanced-family-convergence-01/RESPONSE.md",
+        "quote": "They also make **CONTINUE_B a close runner-up**, rather than an excluded option.",
+        "why": "更多暴露曾带来真实收益，中心化也改变了动作；结论不能扩大成不可学习、机制无效或等价。"
+      }
+    ],
+    "uncertainty": [
+      "重新进入依靠一个可证伪的动作与原生收益规格，不要求实验先成功；RAW 合格性仍是结果解释条件，不是新增 B 启动门槛。",
+      "种子 1 现有 LONG 基线的后悔值低于 0.0025，无法承载超过原阈值的长期提升；这只是固定基线算术上界，短预算价值仍可能存在。",
+      "原残差阈值 0.0025 与诊断阈值 0.000625 不改；声称修复两种子问题须保留两个联合种子包。",
+      "没有调优的同信息余量记录；A01 原生崩溃仍未归因。",
+      "原档保留 companion false/null 及相同阶段时间戳；Pro 耗时未测量，不造数。"
+    ],
+    "cost": {
+      "compute": "本裁决新增学习调用为 0；B07 仍为 250 秒，B05/B06/B07 合计 807 秒监督器时间。Pro 耗时未测量。",
+      "owner_time": "约 2 分钟，可异步覆写。",
+      "reversibility": "reversible",
+      "waits_on_this": "不等待所有者确认；家族 PARK 已执行。下一实验尚未选择，Root 可推进其他方向。"
+    },
+    "verdict_text": "**PRO_FINAL=PARK_CURRENT_SELECTED_PANEL_BALANCED_RESIDUAL_FAMILY**",
+    "source": "docs/research/candidates/commitment_residual_triggered_options/pro/2026-09-05-crto-balanced-family-convergence-01/RESPONSE.md"
+  }
+}
