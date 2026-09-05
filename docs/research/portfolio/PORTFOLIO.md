@@ -2,6 +2,7 @@
 
 Updated at: 2026-09-05T11:35:03Z
 Owner: Root
+Owner review maintenance: P1/P2 only (`OWNER_DIRECT`, 2026-09-05); P3/P4 creation, backfill and reminders retired. Preserve scientific evidence, audit and existing owner replies; see `decisions/2026-09-05-owner-review-p2-cutoff.md`.
 Lifecycle admission: 15 ACTIVE source IDs: the existing nine route agendas plus ACVC restored to the queue by the September5 owner review;7 PARKED reserves. Source IDs within a route do not create independent DM chains.
 Direction execution parallelism: target 5 concurrently advancing top-level DM chains (`OWNER_DIRECT`, 2026-09-04); off-roster `ACTIVE` directions are queued without lifecycle effect
 Loop state: `ACTIVE / OWNER_DIRECT`; explicit2026-09-05 resume supersedes the completed pause. Five DM chains resumed with default tracker and retained30-minute heartbeat.

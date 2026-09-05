@@ -41,6 +41,10 @@ DEFAULT_OPTIONS = {
 
 
 def cmd_add(a) -> int:
+    priority = srv.item_priority({"kind": a.kind, "tier": a.tier, "ledger_kind": a.ledger_kind})
+    if priority > 2:
+        print(f"skipped P{priority}: owner maintains P1/P2 only; cite the card/intake in the audit ledger")
+        return 0
     options = [{"key": k, "label": label, "consequence": ""} for k, label in (a.option or [])]
     if not options and a.kind in DEFAULT_OPTIONS:
         options = [{"key": k, "label": l, "consequence": l} for k, l in DEFAULT_OPTIONS[a.kind]]

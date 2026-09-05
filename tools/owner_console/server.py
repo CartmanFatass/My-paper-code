@@ -395,11 +395,16 @@ def enrich_items(root: Path, items: list[dict]) -> list[dict]:
     return items
 
 
+def review_items(root: Path, days: int = 7) -> list[dict]:
+    """Owner-directed P1/P2 queue; historical items and replies stay readable."""
+    return [it for it in load_items(root, days=days) if item_priority(it) <= 2]
+
+
 def active_board(root: Path) -> dict:
     """ACTIVE directions with item statistics, for the board page."""
     port = parse_portfolio(root)
     wave = investment_wave(root)
-    items = load_items(root, days=30)
+    items = review_items(root, days=30)
     briefs = list_briefs(root)
     stats: dict[str, dict] = {}
     for it in items:
@@ -585,7 +590,7 @@ class Handler(BaseHTTPRequestHandler):
             if url.path in ("/", "/index.html"):
                 self._send(200, (HERE / "index.html").read_bytes(), "text/html; charset=utf-8")
             elif url.path == "/api/items":
-                items = enrich_items(self.root, load_items(self.root, int(q.get("days", ["7"])[0])))
+                items = enrich_items(self.root, review_items(self.root, int(q.get("days", ["7"])[0])))
                 self._json({"items": items, "today": dt.date.today().isoformat()})
             elif url.path == "/api/active":
                 self._json(active_board(self.root))
@@ -650,8 +655,7 @@ def main(argv=None) -> int:
     r.add_argument("date")
     a = ap.parse_args(argv)
     if a.cmd == "seed-ledger":
-        for p in seed_from_ledger(a.root, a.date):
-            print(p.relative_to(a.root))
+        print("skipped: bulk P3/P4 ledger seeding retired by owner; use item.py for P1/P2")
         return 0
     if a.cmd == "render-review":
         print(render_review(a.root, a.date).relative_to(a.root))

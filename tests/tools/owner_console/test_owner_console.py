@@ -153,9 +153,9 @@ def test_active_board_and_wave(tmp_path):
         encoding="utf-8")
     assert srv.investment_wave(root)["flexible_skill_duration"] == 2
     b = srv.active_board(root)
-    assert b["totals"] == {"directions": 2, "active": 1, "parked": 1, "open": 1, "answered_today": 0}
+    assert b["totals"] == {"directions": 2, "active": 1, "parked": 1, "open": 0, "answered_today": 0}
     fsd = b["rows"][0]
-    assert fsd["direction"] == "flexible_skill_duration" and fsd["code"] == "fsd" and fsd["wave"] == 2 and fsd["open"] == 1
+    assert fsd["direction"] == "flexible_skill_duration" and fsd["code"] == "fsd" and fsd["wave"] == 2 and fsd["open"] == 0
     assert b["rows"][1]["lifecycle"] == "PARKED"
 
 
@@ -177,7 +177,7 @@ def test_item_cli_add_and_reviews(tmp_path, capsys):
     printed = capsys.readouterr().out.strip()
     item = json.loads((root / printed).read_text(encoding="utf-8"))
     assert [o["key"] for o in item["options"]] == ["accept", "reject", "revise"]
-    assert cli.main(["--root", str(root), "add", "--direction", "ucope", "--kind", "decision", "--title", "t"]) == 2
+    assert cli.main(["--root", str(root), "add", "--direction", "ucope", "--kind", "decision", "--title", "t"]) == 0
     srv.write_reply(root, item["id"], "reject", "not MARL")
     assert cli.main(["--root", str(root), "reviews"]) == 0
     out = capsys.readouterr().out
@@ -241,3 +241,30 @@ def test_export_selected(tmp_path):
     out = srv.export_selected(root, ["20260905-fsd-001"], "pro packet")
     assert out.name.endswith("_pro-packet.md")
     assert "(a) E2b ★" in out.read_text(encoding="utf-8")
+
+
+def test_p2_queue_preserves_low_priority_owner_instructions(tmp_path):
+    import datetime as dt
+    root = make_repo(tmp_path, dt.date.today().isoformat())
+    before = (root / srv.OWNER_REL / "inbox" / dt.date.today().isoformat() / "20260905-fsd-001.json").read_bytes()
+    assert srv.review_items(root) == []
+    assert srv.active_board(root)["totals"]["open"] == 0
+    srv.write_reply(root, "20260905-fsd-001", "b", "apply my existing override")
+    assert srv.pending_instructions(root)[0]["choice"] == "b"
+    assert (root / srv.OWNER_REL / "inbox" / dt.date.today().isoformat() / "20260905-fsd-001.json").read_bytes() == before
+    p = srv.new_item(root, "portfolio", "portfolio", "keep important review", [
+        {"key": "ratify", "label": "ratify", "consequence": "apply proposal"}],
+        tier="portfolio", packet=PACKET)
+    assert [i["id"] for i in srv.review_items(root)] == [p.stem]
+    assert srv.active_board(root)["totals"]["answered_today"] == 0
+
+
+def test_cli_skips_p3_p4_without_creating_inbox(tmp_path):
+    import subprocess
+    for kind in ("decision", "prediction", "brief"):
+        result = subprocess.run([sys.executable, str(ROOT / "tools/owner_console/item.py"),
+            "--root", str(tmp_path), "add", "--direction", "ucope", "--kind", kind,
+            "--title", "ordinary record"], capture_output=True, text=True)
+        assert result.returncode == 0, result.stderr
+        assert result.stdout.startswith("skipped P")
+    assert not (tmp_path / srv.OWNER_REL).exists()

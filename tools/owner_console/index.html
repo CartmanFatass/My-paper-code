@@ -239,9 +239,9 @@ function renderRail(){
   const p = pending(); const byP = {1:0,2:0,3:0,4:0}, byD = {}, byK = {};
   for (const i of p){ byP[i.priority]=(byP[i.priority]||0)+1; byD[i.direction]=(byD[i.direction]||0)+1; byK[i.kind]=(byK[i.kind]||0)+1; }
   const dirs = [...new Set(S.items.map(i=>i.direction))].sort((a,b)=>(byD[b]||0)-(byD[a]||0) || a.localeCompare(b));
-  let h = `<h4>优先级</h4>`;
+  let h = `<h4>仅维护 P1 / P2</h4>`;
   h += `<div class="rrow ${S.prio?'':'on'}" data-p="0"><span class="holder" style="background:transparent"></span><span class="name">全部</span><span class="n live">${p.length}</span></div>`;
-  for (const k of [1,2,3,4]) h += `<div class="rrow ${S.prio===k?'on':''}" data-p="${k}"><span class="holder" style="background:var(--p${k})"></span><span class="name">${GROUPS[k][0]} ${GROUPS[k][1]}</span><span class="n ${byP[k]?'live':''}">${byP[k]||0}</span></div>`;
+  for (const k of [1,2]) h += `<div class="rrow ${S.prio===k?'on':''}" data-p="${k}"><span class="holder" style="background:var(--p${k})"></span><span class="name">${GROUPS[k][0]} ${GROUPS[k][1]}</span><span class="n ${byP[k]?'live':''}">${byP[k]||0}</span></div>`;
   h += `<h4>类别</h4>`;
   for (const k of Object.keys(KIND_ZH)) if (S.items.some(i=>i.kind===k)) h += `<div class="rrow ${S.kinds.has(k)?'on':''}" data-k="${k}"><span class="holder" style="background:transparent"></span><span class="name">${KIND_ZH[k]}</span><span class="n ${byK[k]?'live':''}">${byK[k]||0}</span></div>`;
   h += `<h4>方向</h4>`;
