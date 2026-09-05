@@ -1,15 +1,15 @@
 # FSD E3 heterogeneous-hazard detached run state
 
-Snapshot: `2026-09-05T13:16:20Z`
+Snapshot: `2026-09-05T13:21:18Z`
 
 This is an operational recoverability snapshot for the frozen B/EXPLORE object
 `FSD-E3-HET-R01`. It records runtime facts only. It is not a result, an intake, a scientific
 polarity, a queue implementation, or authority to bypass a fresh resource admission.
 
 **Current OWNER_DIRECT boundary:** automatic work resumed on 2026-09-05. The previous pause is
-superseded; E3 is **17/18 valid, one accepted task with current observation unknown, zero never
-launched**. Final `large_d2_seed3` has no confirmed terminal outcome after SSH timeouts; the
-original full-matrix rule is unchanged. Historical
+superseded; E3 is **17/18 valid, one running, zero never launched**. Observation of original
+final `large_d2_seed3` recovered after SSH timeouts; its supervisor/PID remain the same.
+The original full-matrix rule is unchanged. Historical
 drains below remain provenance; lifecycle, priority, card and science are unchanged.
 Latest OWNER_DIRECT P1/P2 maintenance cutoff is applied: ordinary P3/P4 inbox items stop;
 science/intake/Chinese evidence briefs/audit and existing review instructions continue.
@@ -41,21 +41,26 @@ science/intake/Chinese evidence briefs/audit and existing review instructions co
   mechanical maximum `4.63 h`; all are below the `8 h` per-arm cap.
 - Current counts at this snapshot: card-accepted invocation cells `18`; result-bearing attempts
   independently admitted/launched `19`; valid complete cells `17`; quarantined attempts `1`;
-  unfulfilled cells `1`, accepted with current runtime observation unknown (last observed running).
+  unfulfilled cells `1`, currently observed running after transport recovery.
   No invocation cell is never launched. The earlier local refusal
   is preserved as evidence but was not itself an admission or launch.
 
-## Accepted final large D2 seed-3 cell — observation unknown
+## Accepted running final large D2 seed-3 cell — observation restored
 
-At this snapshot, tracker reports repeated SSH status timeouts for the same accepted task.
-The latest bounded retry was initiated `2026-09-05T13:15:59.9915944Z` with `ConnectTimeout=10`
-and returned no supervisor state. Its most recent successful observation was running, exit null,
+At the preceding 13:16:20Z snapshot, tracker reported repeated SSH status timeouts for the same
+accepted task. The last timed-out retry was initiated `2026-09-05T13:15:59.9915944Z` with
+`ConnectTimeout=10` and returned no supervisor state. The earlier successful read was running, exit null,
 wrapper PID1674545, tmux active, uptime846s; that read did not persist a client UTC time, so none
 is inferred. This is observation loss, not failure, completion, quarantine or scientific polarity.
 DM and CM directly acknowledged it. Tracker remains the sole observer and uses existing bounded
 backoff on the original handle; CM/DM perform no duplicate read, restart, replacement or new
 attempt. Restore/terminal/cap concerns are notified directly. Existing source, roots and receipt
 remain unchanged; current owner-review CLI has no pending FSD instruction. No P3/P4 inbox item.
+
+Recovery recorded at this 13:21:18Z snapshot: tracker directly reported the original task
+running, exit null, PID1674545, tmux active, uptime1231s. DM and CM directly acknowledged the
+recovery; prior unknown is resolved, with no replacement, restart or validity inference. Tracker
+continues as the only observer, and CM still waits for the same task's terminal collection.
 
 Cell-17 intake and unchanged final assignment were pushed before launch at
 `0f31b04f245aa9d5273b9131835ef1be59955759`. Binding assignment:
@@ -64,7 +69,7 @@ continue. Current integration compute config remains `remote_first` on `wsl_4070
 
 | invocation | execution node and handle | receipt assessed UTC | physical/effective available bytes | launch boundary | observed state |
 | --- | --- | --- | ---: | --- | --- |
-| `large_d2_seed3` attempt 01 | `wsl_4070`; `agent-task` `fsd_e3_large_d2_seed3_20260905_01`; initial wrapper PID `1674545`, learner PID `1674561` | `2026-09-05T12:59:33.359585Z` | `15424135168 / 15424135168` | pushed SHA `0f31b04f245aa9d5273b9131835ef1be59955759` | current `unknown` after SSH timeouts; last successful tracker read running/exit null/tmux active/uptime846s; initial exact learner argv observed |
+| `large_d2_seed3` attempt 01 | `wsl_4070`; `agent-task` `fsd_e3_large_d2_seed3_20260905_01`; wrapper PID `1674545`, initial learner PID `1674561` | `2026-09-05T12:59:33.359585Z` | `15424135168 / 15424135168` | pushed SHA `0f31b04f245aa9d5273b9131835ef1be59955759` | recovered `running`, exit null, PID1674545, tmux active, uptime1231s; same supervisor, no restart |
 
 Detached cwd: `/home/wu/hmasd-worktrees/fsd_e3_large_d2_seed3_20260905_01`.
 Cell beneath it: `temp/directions/flexible_skill_duration/exp/E3_20260904/large_d2_seed3`;
@@ -575,7 +580,7 @@ its own `admit-memory` immediately before the exact runner. The local refused re
 the remote attempt. Attempt 01 is terminal and quarantined after reproduced publication failure;
 the repaired outcome-blind attempt 02 subsequently fulfilled that invocation cell. No
 invocation stays `REMOTE_FIRST_HOLD`; the first17 cells are valid complete and final large D2
-seed3 has current observation unknown. Its accepted handle must not be duplicated. Local fallback additionally requires
+seed3 is observed running after transport recovery. Its accepted handle must not be duplicated. Local fallback additionally requires
 definitive evidence of no remote process, prospective portability, and a fresh local admission.
 
 ## Full 18-invocation matrix
@@ -604,7 +609,7 @@ output has been created for that invocation.
 | large | D0 | 2 | `k=5`, `c=inf` | `VALID_COMPLETE`; attempt 01 task `fsd_e3_large_d0_seed2_20260905_01`; CM acceptance and DM intake complete |
 | large | D2 | 2 | `k_max=40`, `k_Z=400`, `c=0.25` | `VALID_COMPLETE`; attempt 01 task `fsd_e3_large_d2_seed2_20260905_01`; CM acceptance and DM intake complete |
 | large | D0 | 3 | `k=5`, `c=inf` | `VALID_COMPLETE`; attempt 01 task `fsd_e3_large_d0_seed3_20260905_01`; CM acceptance and DM intake complete |
-| large | D2 | 3 | `k_max=40`, `k_Z=400`, `c=0.25` | `OBSERVATION_UNKNOWN`; original attempt01 task `fsd_e3_large_d2_seed3_20260905_01` retained; last seen running, tracker alone retries bounded observation |
+| large | D2 | 3 | `k_max=40`, `k_Z=400`, `c=0.25` | `RUNNING`; original attempt01 task `fsd_e3_large_d2_seed3_20260905_01`; observation restored, tracker alone observes same supervisor |
 
 ## Resume boundary
 
@@ -616,11 +621,11 @@ finished and passed both CM technical acceptance and DM intake.
 
 **Current owner-direct boundary:** continue automatic work from 17 valid cells. The original
 `large_d0_seed3` task is terminal and its intake complete. Final `large_d2_seed3` is the sole
-accepted unfulfilled cell, with current observation unknown; none remains unlaunched. Lifecycle, priority, claim ceiling
+accepted unfulfilled cell, currently observed running after recovery; none remains unlaunched. Lifecycle, priority, claim ceiling
 and accepted mechanism science stay unchanged.
 No historical handle is polled or relaunched, and no aggregate is read before 18 valid cells.
 
-The original accepted handle remains recoverable when SSH returns with
+The original accepted handle remains recoverable with
 `ssh hmasd-wsl-node '/usr/local/bin/agent-task status fsd_e3_large_d2_seed3_20260905_01'`.
 Do not duplicate it or resume completed checkpoints. The accepted-task table above contains exact
 SHA, handle, receipt, process and output witnesses; terminal observation/collection is pending.
