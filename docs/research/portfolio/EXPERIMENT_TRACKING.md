@@ -77,6 +77,8 @@ Subsequent terminal handoffs: CRTO B07 seed1 `crto_raw_centered_b07_s1_5a4b5c20_
 
 FRRIE R07 terminal: `frrie_b01_contact_r07_10ae9781` finished exit `0`, PID `1657968`, tmux inactive; the supervisor log records `sys.exit()` with fixed-pdb interaction and authoritative duration `903s` (observer age `906s`). Terminal delivery was ACKed by the FRRIE DM and CM was woken for same-evidence collection. This terminal status is not a learner-success or scientific-validity assertion; no retry or successor is selected.
 
+FSD large D0 seed2 terminal: `fsd_e3_large_d0_seed2_20260905_01` finished exit `0`, wrapper PID `1656091`, tmux inactive. Its supervisor logged a completed 20-rollout run, `128000` transitions, and authoritative duration `2784s` (reported runner total `2603.2776923269994s`); these are retained process facts only. Terminal delivery was ACKed directly by FSD DM, which resumed the original CM for collection/conformance and later intake. Routine observation and repeat reminders for this historical handle are closed; no successor was authorized by this event. There are currently zero tracker-owned live handles.
+
 ## Accepted work and terminal handoffs
 
 | DM / run record | Node and accepted handle | Launch SHA | Remote cwd | Output / receipt | Latest authoritative observation | Next owner step / notification |
