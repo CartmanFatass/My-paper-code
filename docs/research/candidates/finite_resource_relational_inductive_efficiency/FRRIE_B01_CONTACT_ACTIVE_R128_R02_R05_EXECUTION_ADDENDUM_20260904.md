@@ -3,7 +3,7 @@ Binding structure: `systems / information flow` — the original role-to-role we
 
 # FRRIE contact-active R128 R02 — R05 execution addendum
 
-Status: `FROZEN / B_EXPLORE / R05_NOT_LAUNCHED`, 2026-09-04.
+Status: `FROZEN / B_EXPLORE / R05_ACCEPTED / RESULT_PENDING`, 2026-09-04.
 
 Object remains `FRRIE-B01-CONTACT-ACTIVE-R128-R02-20260904`. This addendum accompanies
 `FRRIE_B01_CONTACT_ACTIVE_R128_R02_SCIENCE_CARD_20260904.md`; it selects a fresh invocation after
@@ -112,3 +112,36 @@ CM owns exact-source preparation, fresh admission, detached launch, direct colle
 acceptance. DM owns intake and any later object decision; Root owns Portfolio/shared audit.
 All dirty saved-project files and old evidence remain outside ownership. Real publication was
 exercised by A01; formal-sized end-to-end test coverage remains unrecorded and is not a new B gate.
+
+## Accepted invocation — recoverable handoff
+
+CM's full record is `FRRIE_B01_CONTACT_ACTIVE_R128_R02_R05_CM_RECORD_20260904.md`, committed and
+pushed at `88526059ae5ccff7657c538564bde4e8c9ddc821`. DM read its literal command, source,
+receipt, cap and tracker adoption against this addendum and the original card. No new scientific
+decision was made by acceptance; this executes the previously recorded owner-delegated selection.
+
+| quantity | initial accepted observation |
+| --- | --- |
+| task | `frrie_b01_contact_r02_5e6d47f0_05` |
+| launch SHA | `5e6d47f0cc05dfdf345bfe7f3f8661d1ffcf7ecc` |
+| actual node | `wsl_4070`, configured Python 3.10, CPU FP32 |
+| cwd | `/home/wu/hmasd-worktrees/frrie-contact-r02-r05-5e6d47f0` |
+| accepted / supervisor PID | `2026-09-05T00:53:58Z` / `846702`, epoch `1788569638` |
+| fresh admission | `00:53:58.408321Z`, physical/effective each `12,670,226,432` bytes |
+| initial state only | at one second: running, exit null, tmux active |
+| outer planned cap | `2026-09-05T08:53:58Z`, including the fixed termination grace |
+
+Output under cwd:
+`temp/directions/finite_resource_relational_inductive_efficiency/exp/frrie_b01_contact_r02_r05`.
+Receipt under cwd:
+`temp/directions/finite_resource_relational_inductive_efficiency/technical/frrie_b01_contact_r02_r05_admission.json`.
+Supervisor log/exit witnesses:
+`/home/wu/.agent-tasks/frrie_b01_contact_r02_5e6d47f0_05/`.
+
+Production source remains equal to the recorded r04 surface. No implementation or test was repeated.
+Both CM and DM handed this same identity directly to `/root/tracker_tl_experiments`, which ACKed
+adoption; routine CM/DM polling is released. It wakes DM and CM at terminal or actual observation
+loss. A missing observation does not permit re-execution. CM collects and verifies the full B
+summary and original termination; DM then applies the original rule and takes the result in.
+No R06 or automatic retry is selected. The initial running observation is not a completed learner
+count or scientific result. Owner reviews remain `[]` at this clean boundary.
