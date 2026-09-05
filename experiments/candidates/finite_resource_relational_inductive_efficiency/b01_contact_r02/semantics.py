@@ -46,20 +46,22 @@ class ContactActorCritic(FRRIEActorCritic):
             self.beta.clamp_(*self.projection_box)
 
 
-def exposure_record(updates: int, changed_coordinates: int = 5) -> dict[str, Any]:
-    nominal = round(updates * 0.0003, 10)
+def exposure_record(
+    updates: int, changed_coordinates: int = 5, *, adam_lr: float = 0.0003,
+) -> dict[str, Any]:
+    nominal = round(updates * adam_lr, 10)
     ratio = round(nominal / 0.05, 10)
     return {
         "updates": updates,
-        "adam_lr": 0.0003,
+        "adam_lr": adam_lr,
         "nominal_lr_exposure": nominal,
         "init_half_range": 0.05,
         "nominal_exposure_over_init_half_range": ratio,
         "tight_box_half_width": 0.04,
         "initial_projection_changed_coordinates": changed_coordinates,
         "line": (
-            f"updates={updates}; adam_lr=0.0003; nominal_lr_exposure={nominal:.4f}; "
-            f"init_half_range=0.05; nominal_exposure_over_init_half_range={ratio:.3f}; "
+            f"updates={updates}; adam_lr={adam_lr:g}; nominal_lr_exposure={nominal:g}; "
+            f"init_half_range=0.05; nominal_exposure_over_init_half_range={ratio:g}; "
             f"tight_box_half_width=0.04; "
             f"initial_projection_changed_coordinates={changed_coordinates}"
         ),
@@ -110,7 +112,9 @@ def _finite_descriptors(rule_inputs: Mapping[str, Any]) -> dict[int, tuple[float
     return parsed if set(parsed) == set(ROSTERS) else None
 
 
-def classify_r02(rule_inputs: Mapping[str, Any], *, test_only: bool = False) -> str:
+def classify_r02(
+    rule_inputs: Mapping[str, Any], *, test_only: bool = False, branch_prefix: str = "R02",
+) -> str:
     if test_only:
         return "TEST_ONLY_NON_RESULT"
     required_true = (
@@ -120,6 +124,11 @@ def classify_r02(rule_inputs: Mapping[str, Any], *, test_only: bool = False) -> 
         "evaluation_preserved_model_bytes", "same_evaluation_tapes",
         "required_curves_and_counts_present",
     )
+    if branch_prefix == "R06" and any(
+        rule_inputs.get(name) != {public: [0.003] for public in PUBLIC_ARM.values()}
+        for name in ("initial_optimizer_group_lr", "final_optimizer_group_lr")
+    ):
+        return f"{branch_prefix}_INVALID_INCOMPLETE"
     required_positive = (
         "learner_transitions", "training_episodes", "backward_calls", "adam_steps",
         "evaluation_episodes",
@@ -134,17 +143,17 @@ def classify_r02(rule_inputs: Mapping[str, Any], *, test_only: bool = False) -> 
         or rule_inputs.get("first_tight_contact_update") != 0
         or descriptors is None
     ):
-        return "R02_INVALID_INCOMPLETE"
+        return f"{branch_prefix}_INVALID_INCOMPLETE"
     if any(e_value < 0.0 for _, e_value in descriptors.values()):
-        return "R02_EDGE_BELOW_UNIFORM"
+        return f"{branch_prefix}_EDGE_BELOW_UNIFORM"
     if all(d_value >= MEI for d_value, _ in descriptors.values()):
-        return "R02_FAVORABLE_BOTH"
+        return f"{branch_prefix}_FAVORABLE_BOTH"
     if any(d_value <= -MEI for d_value, _ in descriptors.values()):
-        return "R02_ADVERSE_OR_MIXED"
-    return "R02_SMALL_OR_ROSTER_MIXED"
+        return f"{branch_prefix}_ADVERSE_OR_MIXED"
+    return f"{branch_prefix}_SMALL_OR_ROSTER_MIXED"
 
 
-def _initialize_contact_pair(root_hex: str, seed_label: str) -> tuple[
+def _initialize_contact_pair(root_hex: str, seed_label: str, *, adam_lr: float = 0.0003) -> tuple[
     dict[str, Any], dict[str, Any], dict[str, Any], dict[str, bytes]
 ]:
     """Construct the raw pair, observe it, then apply the checkpoint-0 boxes."""
@@ -161,6 +170,13 @@ def _initialize_contact_pair(root_hex: str, seed_label: str) -> tuple[
     }
     raw_model_bytes = {arm: models[arm].parameter_bytes() for arm in LEARNED_ARMS}
     optimizers = {arm: make_optimizer(models[arm]) for arm in LEARNED_ARMS}
+    for optimizer in optimizers.values():
+        for group in optimizer.param_groups:
+            group["lr"] = adam_lr
+    initial_group_lr = {
+        PUBLIC_ARM[arm]: [group["lr"] for group in optimizers[arm].param_groups]
+        for arm in LEARNED_ARMS
+    }
     optimizer_before = {
         arm: encode_optimizer_state(models[arm], optimizers[arm]) for arm in LEARNED_ARMS
     }
@@ -179,6 +195,7 @@ def _initialize_contact_pair(root_hex: str, seed_label: str) -> tuple[
         arm: encode_optimizer_state(models[arm], optimizers[arm]) for arm in LEARNED_ARMS
     }
     audit = {
+        "initial_optimizer_group_lr": initial_group_lr,
         "raw_paired_arm_bytes_equal": raw_arm_bytes["PHY_TRUST"] == raw_arm_bytes["EDGE_FLEX"],
         "raw_paired_model_bytes_equal": raw_model_bytes["PHY_TRUST"] == raw_model_bytes["EDGE_FLEX"],
         "raw_parameter_sha256": hashlib.sha256(raw_model_bytes["PHY_TRUST"]).hexdigest(),

@@ -39,8 +39,8 @@ from .semantics import (
     classify_r02,
     cost_config,
     exposure_record,
+    _initialize_contact_pair,
     initialize_contact_pair,
-    initialize_test_contact_pair,
 )
 from .tapes import evaluation_tape, production_training_inputs
 
@@ -142,6 +142,7 @@ def _training_curve_row(receipt: Any) -> dict[str, Any]:
 
 def execute(
     *, output_root: Path, admission_receipt: Path, test_only: bool = False,
+    adam_lr: float = 0.0003,
 ) -> dict[str, Any]:
     if not output_root.is_absolute() or not admission_receipt.is_absolute():
         raise B01ContractError("output and admission paths must be absolute")
@@ -190,8 +191,9 @@ def execute(
 
     torch.set_num_threads(1)
     torch_threads = torch.get_num_threads()
-    initializer = initialize_test_contact_pair if test_only else initialize_contact_pair
-    models, optimizers, initial_audit, raw_initial = initializer()
+    models, optimizers, initial_audit, raw_initial = _initialize_contact_pair(
+        root_hex, seed_label, adam_lr=adam_lr,
+    )
     if not test_only and initial_audit["tight_changed_coordinates"] != 5:
         raise B01ContractError("initial tight clip did not change exactly five coordinates")
     if initial_audit["tight_changed_coordinates"] <= 0:
@@ -376,7 +378,13 @@ def execute(
             "observed": observed,
         }
 
+    final_group_lr = {
+        PUBLIC_ARM[arm]: [group["lr"] for group in optimizers[arm].param_groups]
+        for arm in LEARNED_ARMS
+    }
     rule_inputs = {
+        "initial_optimizer_group_lr": initial_audit["initial_optimizer_group_lr"],
+        "final_optimizer_group_lr": final_group_lr,
         "complete": complete,
         "admission_valid": True,
         "exposure_present": True,
@@ -405,10 +413,14 @@ def execute(
     wall = time.perf_counter() - started
     peak = _peak_rss_bytes()
     summary = {
-        "object_id": OBJECT_ID,
+        "object_id": (
+            "FRRIE-B01-CONTACT-ACTIVE-R128-LR003-R06-20260904" if adam_lr == 0.003 else OBJECT_ID
+        ),
         "evidence_class": "B/EXPLORE",
         "test_only": test_only,
-        "branch": classify_r02(rule_inputs, test_only=test_only),
+        "branch": classify_r02(
+            rule_inputs, test_only=test_only, branch_prefix="R06" if adam_lr == 0.003 else "R02",
+        ),
         "seed": SEED,
         "seed_label": seed_label,
         "seed_root_hex": root_hex,
@@ -418,7 +430,10 @@ def execute(
             "validated": True,
             "facts": admission,
         },
-        "exposure": exposure_record(updates, initial_audit["tight_changed_coordinates"]),
+        "exposure": exposure_record(
+            updates, initial_audit["tight_changed_coordinates"],
+            adam_lr=initial_audit["initial_optimizer_group_lr"]["PHY_TRUST_004"][0],
+        ),
         "deterministic_rule_inputs": rule_inputs,
         "runtime_configuration": {
             "device": "CPU",
@@ -495,6 +510,7 @@ def parser() -> argparse.ArgumentParser:
     value.add_argument("--admission-receipt", required=True, type=Path)
     value.add_argument("--seed", required=True, type=int)
     value.add_argument("--test-only", action="store_true")
+    value.add_argument("--lr003", action="store_true")
     return value
 
 
@@ -506,5 +522,6 @@ def main(argv: Sequence[str] | None = None) -> int:
         output_root=args.output_root,
         admission_receipt=args.admission_receipt,
         test_only=args.test_only,
+        adam_lr=0.003 if args.lr003 else 0.0003,
     )
     return 0
