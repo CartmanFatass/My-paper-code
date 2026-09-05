@@ -66,6 +66,16 @@ provenance, but result polarity never transfers into an accepting direction.
 | vsp_03 | ACTIVE | LOW | ROOT | 2026-09-01T09:55:33Z | Route K1 (中断时机); coordinated as this route agenda. B/EXPLORE event-aware termination in a persistent-target semi-Markov toy against one-hit, dwell, debounce, hysteresis, and same-information generic controls. |
 | vsp_c1 | ACTIVE | MEDIUM | ROOT | 2026-09-01T09:55:33Z | Route K4 (跨时长共享、组合与负迁移); coordinated as this route agenda. B/EXPLORE `2x2x2` identity-by-period toy with a held-out fourth corner and partners. No-production-host evidence cannot decide bounded compositional learning. |
 
+## Owner-directed experiment-design reassessment — 2026-09-05
+
+The owner asks to review experiment requirements across all15 ACTIVE directions after §11.8:
+repeated overlarge validation followed by cost refusal can be a methodology failure. Root and
+four working DMs reassess their current designs; two read-only critics cover the other ten.
+This is not another launch gate and does not suspend credible ordinary B work. Existing negative
+results and family boundaries remain. See `decisions/2026-09-05-experiment-design-reassessment.md`
+for exact coverage, initial VNFC cost decomposition and pending findings. Do not equate a cap
+multiple with a demonstrated cost-inflation ratio against a minimum adequate experiment.
+
 ## Current working set — owner-directed five-chain refill
 
 Owner instruction on September 5 explicitly requests continued research after observing only
