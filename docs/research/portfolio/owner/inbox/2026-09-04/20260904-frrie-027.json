@@ -1,0 +1,37 @@
+{
+  "id": "20260904-frrie-027",
+  "created": "2026-09-04T18:51:03-07:00",
+  "direction": "finite_resource_relational_inductive_efficiency",
+  "tier": "object",
+  "kind": "decision",
+  "title": "本轮结束后暂停，撤回尚未执行的 R06 启动授权",
+  "context": "所有者最新指令：这轮完毕后暂停即可。R05 已有效收录；R06 只有此前接受的小型检查自然结束，没有科学运行。当前候选仍因编排预算超限未获接受，保留静态导出绑定发现，不继续修复或复测。",
+  "options": [
+    {
+      "key": "a",
+      "label": "按指令暂停并保存精确未接受候选",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "继续旧启动或修复授权",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "中断已接受进程",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "执行所有者最新明确指令；当前无活跃进程，无须中断，历史科学结论保持原样。",
+  "evidence": [
+    "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_OWNER_DIRECT_PAUSE_HANDOFF_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#frrie-owner-direct-pause",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}
