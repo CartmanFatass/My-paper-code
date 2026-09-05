@@ -1,0 +1,163 @@
+{
+  "action_tick": 0,
+  "admission_receipt": "/home/wu/hmasd-worktrees/dish-ground-a02-dd0e01bb/temp/directions/degraded_incumbent_shadow_handover/exp/ground_source_point_a02_20260905/a1_admission.json",
+  "boundary_matches": true,
+  "coordinate": "DISH/RBHR/R06/EVALUATION_COORDINATE/0/CLAIM/TARGET_VISUAL_MASK/K8/0",
+  "declared_source_height": 0.0,
+  "derived_definition": {
+    "ray_samples": "j=1..127, q=j/128",
+    "strict_clearance": "sample_z > terrain + clearance",
+    "terrain": "135*exp(-(x/75)^2-(y/220)^4)+55*exp(-((x-90)/35)^2-((y+40)/85)^2)",
+    "terrain_y": "reflection * sample_y"
+  },
+  "expected_boundary": {
+    "block": 0,
+    "evaluation_slot": 0,
+    "initial_owner": 0,
+    "initialized": 1,
+    "mask_enabled": 1,
+    "owner": 0,
+    "package": 0,
+    "reflection": 1,
+    "route_speed": 4,
+    "schedule": 1,
+    "terminal": 0,
+    "test_mode": 0,
+    "tick": 0
+  },
+  "input_law": "seed_master(11), panel()[0], _reset_row; original normal-mode masks and addressed RNG",
+  "launch_sha": "dd0e01bbc4aa0efd3c22b475585511232c1de4fc",
+  "margin_interpretation": "Native send-margin eligibility only; no packet reception observed.",
+  "measured_cost": {
+    "prepared_points": 1,
+    "seconds_per_point": 0.0061659040075028315,
+    "wall_seconds": 0.0061659040075028315
+  },
+  "native_boundary": {
+    "block": 0,
+    "evaluation_slot": 0,
+    "initial_owner": 0,
+    "initialized": 1,
+    "mask_enabled": 1,
+    "owner": 0,
+    "package": 0,
+    "reflection": 1,
+    "route_speed": 4,
+    "schedule": 1,
+    "terminal": 0,
+    "test_mode": 0,
+    "tick": 0
+  },
+  "native_source_xy": [
+    -168.0,
+    -120.0
+  ],
+  "new_exposure": {
+    "completed_native_ticks": 0,
+    "learner_updates": 0,
+    "models_initialized": 0,
+    "optimizer_steps": 0,
+    "optimizers_initialized": 0,
+    "parameter_displacement": null,
+    "policies_initialized": 0,
+    "prepared_native_points": 1,
+    "training_transitions": 0
+  },
+  "object": "DISH-GROUND-SOURCE-POINT-A02",
+  "peak_rss_bytes": 342839296,
+  "receivers": [
+    {
+      "derived": {
+        "declared_uav_height": 90.0,
+        "radio_j1": {
+          "clearance": 8.0,
+          "j": 1,
+          "strict_clearance_pass": false,
+          "terrain_height": 0.8467255467868863,
+          "terrain_plus_clearance": 8.846725546786887,
+          "terrain_y": -120.9375,
+          "xyz": [
+            -167.375,
+            -120.9375,
+            0.703125
+          ]
+        },
+        "reverse_camera_j127": {
+          "clearance": 5.0,
+          "j": 127,
+          "strict_clearance_pass": false,
+          "terrain_height": 0.8467255467868863,
+          "terrain_plus_clearance": 5.846725546786886,
+          "terrain_y": -120.9375,
+          "xyz": [
+            -167.375,
+            -120.9375,
+            0.703125
+          ]
+        },
+        "source_hop_distance": 170.0
+      },
+      "hop": "G_TO_U0",
+      "native": {
+        "camera_present": 0,
+        "send_margin_eligible": false,
+        "source_hop_margin_db": -9.303396681040274,
+        "uav_xy": [
+          -88.0,
+          -240.0
+        ]
+      },
+      "receiver": 0,
+      "role": "owner"
+    },
+    {
+      "derived": {
+        "declared_uav_height": 90.0,
+        "radio_j1": {
+          "clearance": 8.0,
+          "j": 1,
+          "strict_clearance_pass": false,
+          "terrain_height": 0.7901657174358243,
+          "terrain_plus_clearance": 8.790165717435825,
+          "terrain_y": -119.0625,
+          "xyz": [
+            -168.625,
+            -119.0625,
+            0.703125
+          ]
+        },
+        "reverse_camera_j127": {
+          "clearance": 5.0,
+          "j": 127,
+          "strict_clearance_pass": false,
+          "terrain_height": 0.7901657174358243,
+          "terrain_plus_clearance": 5.7901657174358245,
+          "terrain_y": -119.0625,
+          "xyz": [
+            -168.625,
+            -119.0625,
+            0.703125
+          ]
+        },
+        "source_hop_distance": 170.0
+      },
+      "hop": "G_TO_U1",
+      "native": {
+        "camera_present": 0,
+        "send_margin_eligible": false,
+        "source_hop_margin_db": -10.285571482315484,
+        "uav_xy": [
+          -248.0,
+          0.0
+        ]
+      },
+      "receiver": 1,
+      "role": "standby"
+    }
+  ],
+  "resources_unmeasured": false,
+  "result": "A02-ENDPOINT-CLEARANCE-WITNESS",
+  "sample_interpretation": "Derived samples of the declared equation; not native exported ray flags.",
+  "seed": 11,
+  "wall_seconds": 0.0061659040075028315
+}
