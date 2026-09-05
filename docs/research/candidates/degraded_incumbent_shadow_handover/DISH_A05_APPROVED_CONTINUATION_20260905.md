@@ -93,8 +93,10 @@ time; no performance conclusion follows from the old allowance or from C++ use a
 Portable compute uses `wsl_4070`, committed/pushed exact source in a detached worktree
 and the configured `agent-task`. Each invocation has adjacent actual-node
 `admit-memory --out <receipt> && <command>` with physical and effective availability
-at least 4 GiB before model/input/compiler/results. Root integrates reviewed source
-before the original result; short local source checks do not create model/helper output.
+at least 4 GiB before model/input/compiler/results. Root receives reviewed source for
+ordinary integration; the original card requires accepted committed/pushed source, not
+a main-only commit identity or an integration ACK. Short local source checks do not
+create model/helper output.
 The accepted process handle is handed directly to `/root/tracker_tl_experiments`, with
 task, node, launch sha, cwd, outputs, receipt and cap. The tracker is not an approval gate.
 
@@ -115,3 +117,17 @@ Anchor `n3-a05-approved-continuation`; Root owns the shared ledger.
 | time | direction | tier | kind | options | chosen option | reversible | provenance | evidence path | owner flag | owner |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | 2026-09-05T19:01:15Z | degraded_incumbent_shadow_handover (N3) | object | technical | a complete original A05 under approved exception; b reduce scientific measurements; c repeat approval | a; implementation and independent review, no accepted source/result yet | yes | OWNER_DIRECT approved Pro B | docs/research/candidates/degraded_incumbent_shadow_handover/DISH_A05_APPROVED_CONTINUATION_20260905.md | none | |
+
+## Preparation sequencing correction
+
+The initial DM dispatch and preparation text unnecessarily put main integration before
+the original A05 result. The original A05 card and its approved Pro appendix require
+independently accepted, committed and pushed source; they do not require a main-only
+identity or an ACK. The CBSC-specific integration order is not an A05 requirement.
+Source `6d2500cb6` and CM records `e175da53a`/`2c38b0045` are already pushed and handed
+to Root for normal integration. CM/reviewer accepted the complete A198/D0 source,
+with all four protected surfaces unchanged. The same CM therefore binds an actual
+accepted pushed SHA, records the corrected prospective commands and proceeds with
+the original smoke/admission/result sequence. No source, scientific meaning, budget,
+review or process acceptance is skipped; no tool refusal occurred. No model/compiler
+output had been obtained when this preparation mistake was corrected.
