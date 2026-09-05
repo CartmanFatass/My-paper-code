@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "packet": "20260905_marl_runtime_spec",
-  "status": "draft_reference_collection",
+  "status": "reference_collection_complete",
   "captured_at": "2026-09-05",
   "collection_root": "C:/Projects/ref-lib",
   "hmasd_packet_root": "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec",

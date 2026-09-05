@@ -1,6 +1,6 @@
-# MARL reference collection index (draft)
+# MARL reference collection index
 
-Status: **reference collection in progress; not an operative engineering policy**.
+Status: **reference collection complete; the engineering specification remains DRAFT_NOT_OPERATIVE**.
 
 The source clones are external to HMASD at `C:/Projects/ref-lib`. Their exact immutable-at-capture
 identity is in [`SOURCE_MANIFEST.json`](SOURCE_MANIFEST.json). The collection was cloned shallowly
