@@ -239,3 +239,38 @@ observation loss or cap. DM `/root/dm_amx_n3_continue`; CM collector
 released polling. Seed **47 remains queued**. Seed 11's empty-support default differences are
 not effects and did not change seed selection. No seed 29 completion or scientific result is
 claimed at this accepted detached boundary.
+
+## Accepted seed 47 launch — 2026-09-05 01:12:59 UTC
+
+DM accepted seed 29 and selected the original final seed in
+`N3_DISH_B01_C04_SEED29_INTAKE_20260904.md`, pushed commit `478e836bb`.
+Reconciliation returned task `dish_b01_c04_seed47_e0541d0c_a1` not_found, output `seed47_a1`
+and receipt `seed47_a1_admission.json` absent, and clean execution worktree at unchanged source
+`e0541d0cb3e9e63731c72f4dacb10b44d268fd39`. No tests or source changes were performed.
+
+One supervisor command string was accepted once on `wsl_4070`:
+
+```sh
+cd /home/wu/hmasd-worktrees/dish-b01-c04-e0541d0c && /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/degraded_incumbent_shadow_handover/exp/n3_b01_c04_20260904/seed47_a1_admission.json && /home/wu/.venvs/hmasd/bin/python scripts/run_dish_first_trigger_source_scout_b01.py run --seed 47 --admission temp/directions/degraded_incumbent_shadow_handover/exp/n3_b01_c04_20260904/seed47_a1_admission.json --out temp/directions/degraded_incumbent_shadow_handover/exp/n3_b01_c04_20260904/seed47_a1
+```
+
+Task `dish_b01_c04_seed47_e0541d0c_a1`, tmux `agent_dish_b01_c04_seed47_e0541d0c_a1`;
+supervisor start epoch `1788570779` (2026-09-05 01:12:59 UTC / September 4 18:12:59 PDT),
+PID `1101576`. Cwd is `/home/wu/hmasd-worktrees/dish-b01-c04-e0541d0c`.
+Log `/home/wu/.agent-tasks/dish_b01_c04_seed47_e0541d0c_a1/task.log`, with status, eventual
+exit_code, start_time, pid and runner.sh beside it. Output and separate admission paths are the
+verbatim cwd-relative paths above.
+
+Fresh `/proc/meminfo` receipt captured `2026-09-05T01:12:59.650750Z`, assessed
+`2026-09-05T01:12:59.651164Z`: physical and effective available memory each
+**13,040,766,976 bytes**, floor **4,294,967,296 bytes**, physical/effective/pass flags true,
+failure reasons empty. This start admission is not runtime telemetry. Expected duration and
+fully charged per-arm projection remain **1474.544745605439 seconds**, cap **1800 seconds**
+at the declared boundaries. One Torch CPU thread, FP32 learner/float64 native, 64 updates,
+sixteen rows, RNG law and all other scientific semantics remain unchanged.
+
+Tracker `/root/tracker_tl_experiments` ACKed this exact handle and alone observes/reminds on
+terminal, loss or bound; DM `/root/dm_amx_n3_continue`, CM collector
+`/root/dm_amx_n3_continue/cm_am_n3_dish_c04`. CM read only initial receipt/start metadata and
+released polling. This is the final original seed; no further seed or successor is authorized.
+No seed 47 completion, aggregate rule or source-effect conclusion is asserted here.
