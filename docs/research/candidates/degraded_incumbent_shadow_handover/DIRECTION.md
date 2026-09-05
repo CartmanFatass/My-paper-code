@@ -395,3 +395,36 @@ Evidence: `DISH_GROUND_ENDPOINT_PATH_A03_RESULT_EVIDENCE_20260905.md`,
 `DISH_GROUND_ENDPOINT_PATH_A03_SUMMARY_20260905.json`,
 `DISH_GROUND_ENDPOINT_PATH_A03_COLLECTION_20260905.md`,
 `DISH_GROUND_ENDPOINT_PATH_A03_INTAKE_20260905.md`.
+
+## Accepted origin-certificate A04 reconstruction — 2026-09-05
+
+**Conclusion and bounded claim.** The four actual A03 origin certificates are completely
+reconstructed from their retained inputs, selecting **A04-RECORDED-REJECTION-RECONSTRUCTED**.
+Every native/reconstructed value is false. Mahalanobis disagreement exceeds 5.99 and
+service q95 is below 0.60 at all four calls; these are the only failed predicates.
+All state/support and physical/action conditions pass, with no close comparison among
+56 predicates or 84 probability tails. This is adaptive A/RECON evidence, not replication,
+new learning, a remedy or a RETAIN/COPY/SHADOW effect.
+
+**Strongest support and contradiction.** Exact recorded-call agreement and non-close
+failure of both prediction conditions explain the observed rejections. They rule out
+missing preparation/source or the measured action restriction as the rejection predicate
+at these four calls. Zero legal application and transfer still prevent full host-path
+qualification; A03's 299 incumbent service ticks remain outside source-effect evidence.
+q95 failure matches the DM prediction but ties with Mahalanobis failure, rather than
+identifying one uniquely dominant restriction. Headroom and source MEI remain unestimated.
+
+**Surviving alternative and next discriminator.** The retained prediction-head semantics,
+learning signal and finite exposure need separation. A bounded static code map finds
+service outputs trained with a logits loss but sent raw to native probability clipping,
+and no direct Cholesky-head term in the formal training loss. Shared hidden state can
+still change; actual gradient/mask coverage and prediction competence are unmeasured.
+These are potential contract/training explanations, not reproduced defects. Select a
+separately carded synthetic reproduction of that existing boundary before any production
+repair or learned-controller intervention. No new native trajectory, optimizer update
+or source comparison is selected; PRO_FINAL CONTINUE and all N3 constituent IDs persist.
+
+Evidence: `DISH_ORIGIN_CERTIFICATE_A04_RESULT_EVIDENCE_20260905.md`,
+`DISH_ORIGIN_CERTIFICATE_A04_SUMMARY_20260905.json`,
+`DISH_ORIGIN_CERTIFICATE_A04_COLLECTION_20260905.md`,
+`DISH_ORIGIN_CERTIFICATE_A04_INTAKE_20260905.md`.
