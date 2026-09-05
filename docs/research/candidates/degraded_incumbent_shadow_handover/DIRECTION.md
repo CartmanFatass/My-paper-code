@@ -261,25 +261,29 @@ exactly-once FSM axis. VSP-05 asks whether a proposed handoff should be accepted
 contrast asks which state source should be transferred. Evidence for either axis cannot substitute
 for the other, and no legacy polarity transfers.
 
-## Accepted B01 seed 11 observation — 2026-09-04
+## Accepted B01 partial observations — 2026-09-04
 
-**Conclusion and bounded claim.** One real B01 seed completed 64 updates and the complete sixteen-row
-first-valid-trigger panel, with zero triggered rows across 19,200 prefix ticks. This is a valid
-one-checkpoint, fixed-budget trigger-support observation. The three-seed aggregate is incomplete;
+**Conclusion and bounded claim.** Two real B01 seeds (11 and 29) each completed 64 updates and the
+complete sixteen-row first-valid-trigger panel, with zero triggered rows across 19,200 prefix
+ticks per seed. These are valid fixed-budget trigger-support observations. The three-seed aggregate is incomplete;
 no `FTS-*` result or COPY/SHADOW contrast is identified, and B has no consumption state.
 
 **Strongest support and limitation.** The exact declared panel completed, model/optimizer state
-was finite, and total relative parameter displacement was 0.42465718774783356. No source branch
+was finite, and total relative parameter displacement was 0.42465718774783356 and 0.419585027483137.
+No source branch
 was exposed, so empty-support reducer zeros are not source equality and their nonharm Boolean is
-not observed nonharm. Only one seed has run; trigger competence, physical opportunity and
+not observed nonharm. Only two seeds have run; trigger competence, physical opportunity and
 seed/budget/panel dependence remain unresolved. No R02 or FOLR polarity transfers.
 
 **Surviving alternative and next discriminator.** Useful shadow preparation may remain hidden
 behind a policy that rarely proposes an application-valid handover at this exposure. Conversely,
 COPY or deadline-bound replay may absorb its value if an opportunity is reached. Continue the
-unchanged queued seeds 29 and 47 before reading the original three-seed rule. No tuned B01
+unchanged queued seed 47 before reading the original three-seed rule. No tuned B01
 headroom is available, and no lifecycle or family disposition is made from this seed.
 
 Evidence: `N3_DISH_B01_C04_SEED11_RESULT_EVIDENCE_20260904.md`,
 `N3_DISH_B01_C04_SEED11_SUMMARY_20260904.json`, `N3_DISH_B01_C04_SEED11_INTAKE_20260904.md`,
 and `N3_DISH_B01_C04_SEED11_COLLECTION_20260904.md`.
+Seed 29 evidence: `N3_DISH_B01_C04_SEED29_RESULT_EVIDENCE_20260904.md`,
+`N3_DISH_B01_C04_SEED29_SUMMARY_20260904.json`, `N3_DISH_B01_C04_SEED29_INTAKE_20260904.md`,
+and `N3_DISH_B01_C04_SEED29_COLLECTION_20260904.md`.
