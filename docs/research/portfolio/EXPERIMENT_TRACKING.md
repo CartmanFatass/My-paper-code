@@ -31,7 +31,12 @@ Current snapshot: there are **zero** tracker-owned accepted live handles. CBSC f
 `51s`, with inactive tmux; its bounded supervisor tail reports a monitored-command core dump in
 pytest context. Fresh admission had passed with physical/effective availability `15426654208`
 bytes. Direct terminal notices went to CBSC DM and CM for collection/reproduction; this is a
-process fact only, and no restart, replacement, or classification follows. FRRIE A01 and
+process fact only, and no restart, replacement, or classification follows. Reviewer-owned
+same-step reproduction `cbsc-approved-repro-8003b96bd-03` is also terminal: exit `1`, PID
+`1693212`, inactive tmux, supervisor duration `6s`, and one failed formal test in `5.71s`
+pytest with the bounded log recording a `TypeError` at `token.py:251`. The reviewer, CBSC CM,
+and CBSC DM were directly notified; raw collection remains with CM. This too is a process fact
+only and creates no restart or fourth formal run. FRRIE A01 and
 the FSD E4 technical-test, three calibration, and three formal-census handles are terminal and
 closed to repeat reminders. FSD's DM ACKed all three formal census terminal facts after CM
 technical acceptance; FRRIE's DM ACKed A01, and its CM has collected the original evidence.
