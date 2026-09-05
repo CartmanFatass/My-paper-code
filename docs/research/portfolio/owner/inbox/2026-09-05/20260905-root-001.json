@@ -29,7 +29,7 @@
     }
   ],
   "recommended": "ratify",
-  "auto_applied": null,
+  "auto_applied": "ratify",
   "dm_reason": "完整19路径Pro评议推荐B；Root核验原文并补充A05新增190行不适用的后续事实，保留所有原始证据。",
   "evidence": [
     "docs/research/portfolio/decisions/2026-09-05-next-investment-pro-intake.md",
@@ -99,5 +99,19 @@
     },
     "verdict_text": "> **请就本综合P1包择一：B（推荐）——批准保留FSD原E3与N3原A05继续，按完整结果选择后续，优先把FRRIE第三固定路径作为新增可执行候选；同时批准本文“小规模复用／净删除例外”的完整条文，整项新增非测试源码≤100行，比例改为报告和既有独立审阅，不豁免科学、发布、资源与计算边界。A——批准上述条件研究安排，但比例规则严格保持，相关候选仍须建立现行规则内合规方案。C——全部research代码取消比例限制，其他规则仍保留；本提案不推荐此范围。三项均不接受旧拒绝补丁、不冻结新run、不改生命周期、优先级、五链目标或家族再入条件。未批准或拒绝整包时，原规则及原投资权限保持，现有FSD和有界N3照常继续。**",
     "source": "docs/research/portfolio/pro_packets/20260905_next_investment/archive/RESPONSE.md"
-  }
+  },
+  "approval_correction": "此前Root将含义未确认的「同意」归因为正式批准，依据不足；原回复不是此前授权的证明。本次明确指令从现在生效，未追认此前已获授权。",
+  "corrected_reply_at": "2026-09-05T07:06:59-07:00",
+  "execution_history": [
+    {
+      "at": "2026-09-05T15:17:17+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/decisions/2026-09-05-pro6-delegation-and-starred-trace.md",
+      "record": "docs/research/portfolio/decisions/2026-09-05-pro6-delegation-and-starred-trace.md",
+      "state": "applied",
+      "summary": "本次明确批准现有政策B及条件投入；100行上限不变。0ffca930b为历史实施提交，本记录纠正授权归因。",
+      "correction": "此前Root将含义未确认的「同意」归因为正式批准，依据不足；原回复不是此前授权的证明。本次明确指令从现在生效，未追认此前已获授权。"
+    }
+  ],
+  "starred": true
 }

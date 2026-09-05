@@ -1,12 +1,13 @@
 # Owner ratification of next investment and policy B
 
-Date: 2026-09-05. Provenance: OWNER_DIRECT / PRO_FINAL / ROOT_INTEGRATED.
+**Authorization attribution corrected.** The original 0ffca930b record below was written
+from an insufficiently established interpretation of 「同意」. It is not evidence of prior
+owner ratification. The owner has now explicitly approved this change and the new 6 Pro
+execution boundary; effective prospectively, see
+`2026-09-05-pro6-delegation-and-starred-trace.md` for the exact instruction and chronology.
+The original reply bytes and commit history are retained, with a visible correction on root-001.
 
-The owner replied 「同意」 in the current Root task to the pending combined P1
-20260905-root-001. Root applies the recommended B in its prepared concrete scope.
-This is the later approval of the completed proposal, distinct from the earlier
-agreement to prepare an assessment. The original proposal and archive remain intact.
-The owner-console reply records ratify and cites this chat origin; no extra vote is needed.
+The following scope describes the policy already implemented and now explicitly authorized:
 
 Applied: the complete proposed small reuse / net-deletion exception in
 ENGINEERING_SCOPE_SPEC section 5 and its AGENTS section 8 summary. Only the heading

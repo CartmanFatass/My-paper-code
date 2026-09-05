@@ -1,0 +1,69 @@
+{
+  "id": "20260905-root-003",
+  "created": "2026-09-05T08:17:17-07:00",
+  "direction": "portfolio",
+  "tier": "portfolio",
+  "kind": "portfolio",
+  "title": "6 Pro执行委托与星标追溯（所有者明确指令）",
+  "context": "重要改动按完整6 Pro最终裁决执行，Dashboard长期星标并展示实际变更；此前批准归因已纠正。",
+  "options": [
+    {
+      "key": "apply",
+      "label": "按已明确指令实施",
+      "consequence": "应用本次委托边界与Dashboard星标记录；保留平台限制、科学完整性及历史证据。"
+    },
+    {
+      "key": "amend",
+      "label": "异步调整或撤回边界",
+      "consequence": "按owner新的具体指令在干净边界调整未来执行。"
+    }
+  ],
+  "recommended": "apply",
+  "auto_applied": "apply",
+  "dm_reason": "",
+  "evidence": [
+    "docs/research/portfolio/decisions/2026-09-05-pro6-delegation-and-starred-trace.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-05.md#pro6-delegation-and-starred-trace",
+  "brief": "",
+  "ledger_kind": "",
+  "status": "open",
+  "packet": {
+    "question": "记录已明确批准的 6 Pro 执行委托与星标追溯边界",
+    "changes_if_approved": [
+      {
+        "target": "AGENTS §2/4、Portfolio skill、Dashboard",
+        "from": "重要 Portfolio/规范改动逐项 owner 批准",
+        "to": "完整 6 Pro 最终裁决范围内执行，重要项星标并保留实际执行轨迹"
+      }
+    ],
+    "if_refused": "owner 可异步撤回新委托；不改写已产生证据。",
+    "evidence_for": [
+      {
+        "path": "docs/research/portfolio/decisions/2026-09-05-pro6-delegation-and-starred-trace.md",
+        "quote": "那么我批准了这个更改了 我们修改一下边界 就是这些重要改动按照Pro6的回复继续, 但是需要在Dashboard中星标标出 方便我追溯"
+      }
+    ],
+    "uncertainty": [
+      "本次授权不证明此前批准归因正确，不豁免超限草稿或平台拒绝。"
+    ],
+    "cost": {
+      "reversibility": "reversible",
+      "waits_on_this": "nothing; OWNER_DIRECT 已明确",
+      "owner_time": "追溯或异议，不要求再次批准"
+    },
+    "source": "docs/research/portfolio/decisions/2026-09-05-pro6-delegation-and-starred-trace.md",
+    "verdict_text": "按上述明确 owner 指令实施；原始历史与纠正记录均保留。"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-05T15:19:25+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/decisions/2026-09-05-pro6-delegation-and-starred-trace.md",
+      "record": "docs/research/portfolio/decisions/2026-09-05-pro6-delegation-and-starred-trace.md",
+      "state": "applied",
+      "summary": "按明确指令更新Pro6执行委托、规范与Dashboard星标追溯。重要改动全历史可见，记录实际裁决与实施，不伪写owner回复。"
+    }
+  ]
+}

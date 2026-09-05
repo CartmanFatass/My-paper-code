@@ -34,7 +34,7 @@ where it is recorded, and its provenance label.
 | --- | --- | --- | --- |
 | Object | next rung of a ladder, card wording, treatment and comparator inside an accepted mechanism, dropping an arm, budget deviation inside the cap, quarantine of an attempt after reproduction | the DM, locally, under §4 when the owner is absent | intake section: options, recommendation, selection, `OWNER_DIRECT` or `OWNER_DELEGATED` |
 | Direction | open or close an object family, park, recast, the next object after a consumed C, promotion to C-BENCH | `em:<direction>:convergence` (or `:innovator` before a C freeze); the owner directly when present | decision record, `PRO_FINAL` or `OWNER_DIRECT` |
-| Portfolio | priority, capacity, lifecycle, fusion, separation, registration, investment | `portfolio:cross_direction` proposes; the owner ratifies from the record | `docs/research/portfolio/decisions/<date>-<slug>.md`, `PRO_FINAL / ROOT_INTEGRATED` or `OWNER_DIRECT` |
+| Portfolio | priority, capacity, lifecycle, fusion, separation, registration, investment | `portfolio:cross_direction` decides/proposes; Root executes its explicit final selection under the owner's 2026-09-05 delegation (§4), or the owner decides directly | `docs/research/portfolio/decisions/<date>-<slug>.md`, `PRO_FINAL / ROOT_INTEGRATED` or `OWNER_DIRECT` |
 
 A complete archived Pro response that decides the posed question at its declared evidence class is
 final for its node. Root and the DM execute and record it; they do not override it locally. A Pro
@@ -43,7 +43,7 @@ machine-generated exposure line and, for a sweep, the per-arm cost projection (�
 attach an engineering dissent (`*_ENGINEERING_DISSENT_<date>.md`) naming a missing fact; the
 node is re-opened with that document rather than a new round.
 
-Only the owner takes Portfolio-tier decisions in the owner's absence; see §4.
+The owner's 2026-09-05 delegation permits execution of complete verified 6 Pro final decisions at the correct node; important changes are starred for owner tracing. See §4.
 
 **Investment fields** (owner decision 2026-09-04 as revised the same day, evidence spec §11.7).
 Headroom, the gap between a stated upper reference and a tuned same-information baseline on the
@@ -87,9 +87,21 @@ When the owner is absent the loop keeps running under a standing delegation (own
 1. At every object-tier decision the DM lists the options and the recommendation, selects the
    recommended option, and records `Owner-delegated decision (unattended, <date> instruction): (x)`.
 2. Predict-then-verify continues; the owner's prediction slot is marked `not taken (unattended)`.
-3. Excluded from delegation: Portfolio-tier decisions; changes to frozen scientific meaning;
-   history rewrites, deletion of evidence roots, or any other irreversible action outside the
-   ordinary research loop; edits to this file, `.codex/`, `.agents/`, or `CLAUDE.md`.
+3. **6 Pro execution delegation (OWNER_DIRECT, 2026-09-05).** Important direction,
+   Portfolio and research-governance changes may follow the explicit final decision or unique
+   recommendation in a complete archived, verified 6 Pro response at the correct decision node,
+   without a separate owner vote. Record `PRO_FINAL / OWNER_DELEGATED`, never fabricate an
+   individual owner reply. This includes only the necessary, explicitly scoped normative edits
+   to this file, ENGINEERING_SCOPE_SPEC, related `.agents/` skills or `CLAUDE.md`.
+   Star the existing P1/P2 item and append the source, actual change/commit record, execution
+   time/status and applied option through `item.py trace`; owner corrections still take effect
+   at clean boundaries. This is traceability, not another A/B launch gate.
+   Missing/ambiguous final decisions or changes beyond their scope remain outside delegation.
+   Historical frozen science, evidence and result branches may not be retroactively changed.
+   History rewrites, evidence deletion, irreversible work outside the loop, unrelated external
+   communications and broad runtime/configuration edits remain excluded. System/platform safety
+   and tool limits are not overridden. Details and correction of the earlier approval attribution:
+   `docs/research/portfolio/decisions/2026-09-05-pro6-delegation-and-starred-trace.md`.
 4. **Audit ledger.** Every automatic decision is appended to
    `docs/research/portfolio/audit/<YYYY-MM-DD>.md` as one row: time, direction, tier, kind,
    options, chosen option, reversible (yes/no), provenance label, evidence path, owner flag, and

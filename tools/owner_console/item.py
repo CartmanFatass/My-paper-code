@@ -85,6 +85,14 @@ def cmd_mark(a) -> int:
     return 0
 
 
+def cmd_trace(a) -> int:
+    p = srv.record_trace(a.root, a.id, authority=a.authority, source=a.source, record=a.record,
+                         state=a.state, summary=a.summary, auto_applied=a.auto_applied,
+                         correction=a.correction)
+    print(str(p.relative_to(a.root)).replace("\\", "/"))
+    return 0
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--root", type=Path, default=srv.DEFAULT_ROOT)
@@ -118,6 +126,17 @@ def main(argv=None) -> int:
     m = sub.add_parser("mark-answered", help="record that the loop applied the owner's instruction")
     m.add_argument("ids", nargs="+")
     m.set_defaults(fn=cmd_mark)
+
+    t = sub.add_parser("trace", help="star an important change and append its execution record; never writes a reply")
+    t.add_argument("id")
+    t.add_argument("--authority", required=True, choices=("OWNER_DIRECT", "PRO_FINAL / OWNER_DELEGATED"))
+    t.add_argument("--source", required=True, help="archived Pro response or explicit owner instruction record")
+    t.add_argument("--record", required=True, help="intake/application record with changes and commit references")
+    t.add_argument("--state", required=True, choices=("planned", "applied", "blocked"))
+    t.add_argument("--summary", required=True)
+    t.add_argument("--auto-applied")
+    t.add_argument("--correction", default="")
+    t.set_defaults(fn=cmd_trace)
 
     a = ap.parse_args(argv)
     try:

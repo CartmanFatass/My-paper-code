@@ -2,6 +2,7 @@
 
 Updated at: 2026-09-05T14:45:48Z
 Owner: Root
+Current important-change authority: OWNER_DIRECT instruction in `decisions/2026-09-05-pro6-delegation-and-starred-trace.md` delegates execution of complete verified 6 Pro final decisions at the correct node, with permanent Dashboard stars and actual execution records. No fabricated owner votes; prior policy-B approval attribution is corrected, with explicit approval effective from that new record.
 Owner review maintenance: P1/P2 only (`OWNER_DIRECT`, 2026-09-05); P3/P4 creation, backfill and reminders retired. Preserve scientific evidence, audit and existing owner replies; see `decisions/2026-09-05-owner-review-p2-cutoff.md`.
 Lifecycle admission: 15 ACTIVE source IDs: the existing nine route agendas plus ACVC restored to the queue by the September5 owner review;7 PARKED reserves. Source IDs within a route do not create independent DM chains.
 Direction execution parallelism: target 5 concurrently advancing top-level DM chains (`OWNER_DIRECT`, 2026-09-04); off-roster `ACTIVE` directions are queued without lifecycle effect
@@ -101,7 +102,7 @@ and replacement flags remain disclosed pending factual clarification, not silent
 PRO_FINAL recommends conditional FSD/N3 progression, FRRIE third fixed independent path as the
 next executable candidate, and policy B: a narrowly reviewed reuse/net-deletion exception with
 at most100 added non-test source lines across the whole logical change. Single P1 owner item
-`20260905-root-001` was ratified by the owner's current 「同意」. The complete bounded
+`20260905-root-001` now carries the owner's explicit approval under the later boundary record; the earlier 「同意」 attribution was insufficient and is visibly corrected. The complete bounded
 policy B is applied in AGENTS section 8 and ENGINEERING_SCOPE_SPEC section 5;
 see `decisions/2026-09-05-next-investment-owner-ratification.md`. FRRIE third-path
 implementation is the preferred next executable candidate under normal DM authority;
