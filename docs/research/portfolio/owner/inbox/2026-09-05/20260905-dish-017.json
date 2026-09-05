@@ -1,0 +1,79 @@
+{
+  "id": "20260905-dish-017",
+  "created": "2026-09-05T04:35:29-07:00",
+  "direction": "degraded_incumbent_shadow_handover",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "DISH A04 新卡：四次实际意图的证书重构",
+  "context": "主张：复算四次已记录的原证书，能够定位普通交接意图被哪条不变条件拒绝。绑定结构为 systems / information flow；多智能体交接需要真实信息后的预测、置信度与安全动作同时满足。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "继续有界只读 A04，固定四个原时刻，结果仅定位这些调用的条件。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "在下一干净边界停止尚未执行的 A04，保留 A03 证据与读法。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "按具体意见修改未运行的诊断，不改写已有证据或阈值。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": null,
+  "dm_reason": "建议只读四次真实意图的既有输入，在原调用边界复算每条原证书条件；保留全部失败条件和数值边界，不重跑、不训练、不改阈值。",
+  "evidence": [
+    "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_ORIGIN_CERTIFICATE_A04_SCIENCE_CARD_20260905.md",
+    "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_GROUND_ENDPOINT_PATH_A03_INTAKE_20260905.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-05.md#n3-origin-certificate-a04-card",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否接受只用已保存四次意图输入、复算原证书条件的 A04 卡？",
+    "changes_if_approved": [
+      {
+        "target": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_ORIGIN_CERTIFICATE_A04_SCIENCE_CARD_20260905.md",
+        "from": "知道四次原生证书为零，但未分解谓词",
+        "to": "在固定四处原调用边界逐条复算现有条件；无新轨迹、策略或阈值变化"
+      }
+    ],
+    "if_refused": "在下一干净边界按你的具体修改意见调整尚未运行的诊断；保留 A03 下游缺口读法和所有原始证据。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_GROUND_ENDPOINT_PATH_A03_INTAKE_20260905.md",
+        "quote": "Four emitted intents (origins 340/364/388/596) all carry certificate 0",
+        "why": "缺口已落在四个具体可定位的普通调用，无需再造暴露。"
+      },
+      {
+        "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_GROUND_ENDPOINT_PATH_A03_COLLECTION_20260905.md",
+        "quote": "All required inputs for a data-only reconstruction of the four emitted-origin certificate calls are already in the original trace.",
+        "why": "已有数据可支持复算，静态映射已区分投影后命令与运动前位置。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_ORIGIN_CERTIFICATE_A04_SCIENCE_CARD_20260905.md",
+        "quote": "Multiple predicates can fail; do not force one cause.",
+        "why": "指出失败条件不代表改变它会提高服务，也不能反推普遍协议失败。"
+      }
+    ],
+    "uncertainty": [
+      "预测／服务置信度还是动作／状态条件占主导，尚未计算。",
+      "若数值紧贴阈值或与原生布尔值不一致，必须保留差异，不能放宽合法条件。"
+    ],
+    "cost": {
+      "compute": "预计19.5秒，上限60秒；远端读取一个已保存文件，四处计算，零模型与原生轨迹。",
+      "owner_time": "约一分钟",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing；循环不等待批改"
+    },
+    "verdict_text": "建议只读四次真实意图的既有输入，在原调用边界复算每条原证书条件；保留全部失败条件和数值边界，不重跑、不训练、不改阈值。",
+    "source": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_ORIGIN_CERTIFICATE_A04_SCIENCE_CARD_20260905.md"
+  }
+}
