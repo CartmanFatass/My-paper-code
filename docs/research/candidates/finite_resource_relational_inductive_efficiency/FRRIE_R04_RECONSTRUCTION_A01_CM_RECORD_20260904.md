@@ -96,3 +96,13 @@ Preparation notes: the routine child returned exactly the assigned files after a
 delay and one interrupted/reused agent turn; no experiment was interrupted. Direct non-login
 remote Git preparation made no progress and was terminated; configured `zsh -lic` completed
 fetch/checkout. These are control-plane observations, not failure diagnoses or result polarity.
+
+## Bounded observation restoration
+
+Tracker reported SSH timeout before status retrieval at 2026-09-05T00:10:58Z; its last
+successful state was running at 00:09:05Z. CM made exactly one read-only reconnect with
+`ssh -o ConnectTimeout=10 -o ConnectionAttempts=1 hmasd-wsl-node` and the same `agent-task status`.
+It succeeded: original task running, exit null, PID 111201, tmux active, uptime 372 seconds.
+CM sent this restoration directly to tracker and DM. Original launch source, supervisor,
+deadline and artifacts are unchanged; no retry, repair or duplicate polling loop was created.
+This transient loss of observation is not an experiment outcome or a diagnosed transport cause.
