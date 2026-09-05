@@ -2,6 +2,9 @@
 
 Status: `IMPORT_DEFECT_REPRODUCED / SMALLER_PLAN_SELECTED / NO_NEW_SOURCE_ACCEPTANCE`.
 
+This is the prospective pre-edit boundary. The conforming implementation was later accepted
+and R06 completed; current reading is in `FRRIE_R06_RESULT_INTAKE_20260905.md`.
+
 ## What DM checked and the bounded observation
 
 DM read CM's `FRRIE_R06_TECHNICAL_EVIDENCE_20260905.md`, committed/pushed at

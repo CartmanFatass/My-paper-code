@@ -425,3 +425,29 @@ reinterpret the accepted low-LR result or create a family/lifecycle decision. Se
 `FRRIE_B01_CONTACT_ACTIVE_R128_R02_R05_RESULT_EVIDENCE_20260904.md`,
 `FRRIE_B01_CONTACT_ACTIVE_R128_R02_R05_RESULT_INTAKE_20260904.md` and
 `FRRIE_B01_CONTACT_ACTIVE_R128_LR003_R06_SCIENCE_CARD_20260904.md`.
+
+## B01 higher-exposure contact-active result — 2026-09-05
+
+The complete R06 B/EXPLORE result is `R06_SMALL_OR_ROSTER_MIXED`: tight minus wide return
+is +0.001066907914 at N=9 and +0.005548293532 at N=15. Both are positive, but only N15
+exceeds the prospective 0.005 MEI. The wide arm exceeds uniform by +0.007199240468 and
++0.014761398958. The original favorable-both branch therefore does not apply.
+
+At the same literal root and 128-update work, shared LR 0.003 produced Linf movement about
+4.37/4.11 times the initialization half-range, versus about 0.52/0.53 at LR 0.0003. Tight
+contact occurred in 125 later updates. At N15, tight/wide made 92/80 deliveries; higher
+delivery and balance terms outweighed a slightly worse waste term. This is a native package
+consequence under actually increased learning exposure, not just a parameter statistic.
+
+Strongest support is the complete paired learner/evaluator trace and above-MEI N15 difference
+against the same-information containing arm. Strongest contradiction to an across-roster
+material advantage is N9's sub-MEI gap. N15 is only slightly above threshold on one root,
+and earlier checkpoints do not show stable positive separation. Root-specific co-adaptation,
+generic shrinkage/Adam geometry, common K0 alignment and roster dependence remain live;
+relation specificity, held-out transfer and seed-population superiority are unestablished.
+
+The next discriminator keeps LR/work/boxes fixed on a second prospectively specified literal
+root, with N15 primary and N9 fully reported. This outcome-informed B successor preserves
+R06's original reading and the old B01 three-root stop. See
+`FRRIE_B01_CONTACT_ACTIVE_R128_LR003_R06_RESULT_20260905.md`,
+`FRRIE_R06_RESULT_INTAKE_20260905.md` and `FRRIE_R07_SECOND_ROOT_SCIENCE_CARD_20260905.md`.

@@ -1,9 +1,10 @@
 # FRRIE R06 owner-directed resume intake — 2026-09-05
 
-Status: `OWNER_RESUMED / R06_ACCEPTED_RUNNING / RESULT_PENDING`.
+Status: `OWNER_RESUMED / R06_COMPLETE_VALID_B / RESULT_INTAKEN`.
 
-Current boundary: conforming revision accepted on 2026-09-05T09:19:47Z; see
-`FRRIE_R06_ACCEPTED_RUN_INTAKE_20260905.md`. The resume decision and pre-repair observations
+Current boundary: R06 ended naturally on 2026-09-05T09:34:42Z and its original rule yields
+`R06_SMALL_OR_ROSTER_MIXED`, with only N15 above MEI. See
+`FRRIE_R06_RESULT_INTAKE_20260905.md`. The resume decision and pre-repair observations
 below retain their original meanings.
 
 ## Current instruction and checked boundary
