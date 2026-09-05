@@ -40,10 +40,13 @@
   "proposed_B_training_joint_steps_per_arm_seed": 24576,
   "proposed_B_renewal_transitions_per_arm_seed": 8192,
   "proposed_B_optimizer_updates_per_arm_seed": 128,
-  "proposed_B_evaluation_joint_steps_per_arm_seed": 528,
-  "proposed_B_complete_joint_steps_per_arm_seed": 25104,
-  "proposed_B_complete_two_arm_joint_steps": 50208,
+  "proposed_B_evaluation_joint_steps_per_arm_seed": 432,
+  "proposed_B_complete_joint_steps_per_arm_seed": 25008,
+  "proposed_B_complete_two_arm_joint_steps": 50016,
   "proposed_B_runtime_seconds": null,
   "proposed_B_actual_displacement": null,
-  "proposed_B_status": "unselected, unimplemented, unrun; counts are prospective arithmetic only"
+  "proposed_B_status": "unselected, unimplemented, unrun; counts are prospective arithmetic only",
+  "optional_forced_action_diagnostic_joint_steps": 96,
+  "optional_reference_A_required_before_B": false,
+  "calibration": "Evidence spec 11.8; no new scientific execution or exposure experiment."
 }
