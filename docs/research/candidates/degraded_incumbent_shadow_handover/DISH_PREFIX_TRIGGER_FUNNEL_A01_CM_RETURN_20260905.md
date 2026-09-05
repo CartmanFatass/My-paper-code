@@ -61,3 +61,9 @@ one Torch CPU thread,FP32 policy,float64 native,16 original rows,1200 ticks each
 per-tick600s cap. No source fork or training. Full-size reference match and actual
 measurements remain unverified until collection. Toy publication coverage does not establish
 a scientific result. No extra seed or successor authorized.
+
+## Accepted invocation
+
+Accepted once as `dish_prefix_funnel_a01_seed11_a1` on wsl_4070 at source bfe4952beeff9cff237d5b16325c02e5c0c08664, exact command/cwd above. Supervisor PID1610547, start epoch1788599715 (2026-09-05T09:15:15Z), log `/home/wu/.agent-tasks/dish_prefix_funnel_a01_seed11_a1/task.log`. Before dispatch supervisor reported not_found and output/receipt were absent; retained input digest/size matched the card.
+
+Fresh receipt assessed2026-09-05T09:15:15.165793Z: physical12650926080bytes; effective12650926080bytes; both floor flags and passed=true; minimum4294967296bytes; source `/proc/meminfo`. Receipt path and output path are those frozen above. Expected450s/cap600s handed directly to tracker `/root/tracker_tl_experiments`, DM `/root/dm_amx_n3_continue`, CM collector current thread. No additional diagnostic/seed/successor. CM releases routine observation after adoption; terminal collection remains pending.
