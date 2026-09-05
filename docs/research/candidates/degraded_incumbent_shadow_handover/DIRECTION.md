@@ -260,3 +260,26 @@ law and full R02 production surface are not B admission gates.
 exactly-once FSM axis. VSP-05 asks whether a proposed handoff should be accepted; DISH's original
 contrast asks which state source should be transferred. Evidence for either axis cannot substitute
 for the other, and no legacy polarity transfers.
+
+## Accepted B01 seed 11 observation — 2026-09-04
+
+**Conclusion and bounded claim.** One real B01 seed completed 64 updates and the complete sixteen-row
+first-valid-trigger panel, with zero triggered rows across 19,200 prefix ticks. This is a valid
+one-checkpoint, fixed-budget trigger-support observation. The three-seed aggregate is incomplete;
+no `FTS-*` result or COPY/SHADOW contrast is identified, and B has no consumption state.
+
+**Strongest support and limitation.** The exact declared panel completed, model/optimizer state
+was finite, and total relative parameter displacement was 0.42465718774783356. No source branch
+was exposed, so empty-support reducer zeros are not source equality and their nonharm Boolean is
+not observed nonharm. Only one seed has run; trigger competence, physical opportunity and
+seed/budget/panel dependence remain unresolved. No R02 or FOLR polarity transfers.
+
+**Surviving alternative and next discriminator.** Useful shadow preparation may remain hidden
+behind a policy that rarely proposes an application-valid handover at this exposure. Conversely,
+COPY or deadline-bound replay may absorb its value if an opportunity is reached. Continue the
+unchanged queued seeds 29 and 47 before reading the original three-seed rule. No tuned B01
+headroom is available, and no lifecycle or family disposition is made from this seed.
+
+Evidence: `N3_DISH_B01_C04_SEED11_RESULT_EVIDENCE_20260904.md`,
+`N3_DISH_B01_C04_SEED11_SUMMARY_20260904.json`, `N3_DISH_B01_C04_SEED11_INTAKE_20260904.md`,
+and `N3_DISH_B01_C04_SEED11_COLLECTION_20260904.md`.
