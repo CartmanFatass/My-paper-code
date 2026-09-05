@@ -113,7 +113,16 @@
       "state": "applied",
       "summary": "Root audit corrected incomplete synchronization: independent training versus motivation, claim-specific C burdens, precedence, transition wording and retained test budget.",
       "correction": "Owner-requested review after model switch; same complete Pro plan, existing item highlighted; no new scientific or lifecycle decision."
+    },
+    {
+      "at": "2026-09-05T22:19:44+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/decisions/2026-09-05-methodology-in-skills.md",
+      "record": "docs/research/portfolio/decisions/2026-09-05-methodology-in-skills.md",
+      "state": "applied",
+      "summary": "Owner-directed methodology applied to skills, generated Pro body, DM and intake; bounded search and request complexity explicitly covered.",
+      "correction": "Current explicit owner implementation request; no invented Pro decision, no duplicate requests, no additional approval layer."
     }
   ],
-  "approval_correction": "Owner-requested review after model switch; same complete Pro plan, existing item highlighted; no new scientific or lifecycle decision."
+  "approval_correction": "Current explicit owner implementation request; no invented Pro decision, no duplicate requests, no additional approval layer."
 }

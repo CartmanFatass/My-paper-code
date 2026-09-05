@@ -20,6 +20,15 @@ Missing/ambiguous/out-of-scope decisions retain their actual boundary; P3/P4 rem
 
 ## Core principle
 
+Apply evidence-spec §11.8 to the chosen research question as well as its implementation.
+Do not treat exact headroom, full policy-class maxima or complete causal explanation as
+eligibility for ordinary learning investment. Compare proposed diagnostic value and known
+work with a minimal B; finite/zero-learner is not a cost argument. Cost refusal reopens
+the adequacy of the question, not only its execution design. In the existing intake,
+return any concrete Pro/spec conflict to that node before applying the affected clause;
+a complete answer cannot silently supersede owner instructions or specs. Explicit changes
+use the existing authority. No new reviewer layer, approval or launch condition follows.
+
 Choose the smallest investment that can change a direction decision without confusing scientific
 value with execution convenience or strength of claim with strength of ceremony.
 

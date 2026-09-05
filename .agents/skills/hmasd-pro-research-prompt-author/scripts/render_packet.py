@@ -544,9 +544,62 @@ uncertainties, and recommendations. Preserve the finite claim ceiling above.
 
 {node_contract}
 
-Your complete response provides the final decision on the question above. If
+Your complete response provides the final decision within current owner instructions
+and applicable specifications; completeness does not authorize a silent exception. If
 connector access or evidence is insufficient, explain the exact gap and state
 in ordinary language that no decision could be reached; do not manufacture one.
+
+## Scientific method and proportional burden
+
+Apply the current empirical evidence specification, especially section 11.8, as the
+methodological constraint for this decision. Identify any conflict in the caller's
+assumptions or inherited restrictions rather than accepting it as scientific necessity.
+Start with what the next observation needs to decide. Do not substitute proof of an
+exact maximum, complete support census or unique causal explanation for a performance
+exploration question. Choosing an exact claim is not itself a justification for studying it.
+
+If proposing an exact diagnostic, explain why its decision value warrants the work
+relative to a direct bounded learning comparison or finite measurement. Finiteness,
+determinism and zero learner exposure do not imply low cost. Discuss the proposed
+experiment's known dominant work and unknown costs even though this consultation runs
+no experiment; do not require a new cost experiment or invent a speedup. If a design is
+overbudget, reconsider the question and necessary evidence as well as implementation.
+
+Ordinary B may use a trustworthy single-run observation to justify bounded follow-up;
+independent training seeds then address repeatability without requiring all-positive
+outcomes. No positive result, exact upper or complete mechanism explanation is a
+universal prerequisite for a justified next B. Retain checks needed for actual reward,
+information access, training and primary comparison. Removing a diagnostic must state
+which stronger claim is relinquished; preserve contrary results and selection history.
+Moving a prohibited B prerequisite into a preceding A does not make it permissible.
+
+Nor does replacing exhaustive search with beam search, best-of-many or another bounded
+policy search repair an unnecessary search-before-learning dependency. Ordinary MARL
+performance exploration defaults to actual training and sampled return comparison.
+This is a MARL empirical-research repository: propose an implemented method on a selected
+task or benchmark, competent baseline comparison, and independent training seeds as needed
+for the claim. Bounded search can remain combinatorially expensive; do not presume it is
+cheaper or scientifically preferable to running those comparisons.
+Search must serve its own explicitly justified algorithmic or diagnostic purpose;
+a smaller budget alone does not justify it. Normal action selection and optimizer
+updates are distinct from a prerequisite search over policies or future trajectories.
+
+Assess request complexity before selecting its design. State the dominant work factors
+in ordinary prose or a small expression: arms, training seeds, environments/steps,
+evaluation checkpoints/episodes, and any nested candidate, joint-action or trajectory
+search with repeated solver/controller calls. Distinguish algorithm-required work from
+verification added by this request. Flag growth such as joint actions a^N, trajectories
+b^H, all subsets or cross-products; do not assume bounded, native or parallel makes it
+reasonable. Prefer removing unnecessary dimensions or using sampled empirical comparisons
+over accelerating an unjustified search. Do not impose universal multiplier limits,
+complexity proofs or fresh profiling as a prerequisite. Use known counts and clearly
+label estimates and unknowns; compare with a credible minimal design when available.
+
+Do not introduce requirements contrary to those principles as part of a scientific
+decision. If an explicit specification exception is genuinely necessary, identify the
+rule, scientific necessity and bounded scope as a proposal for the appropriate existing
+authority, not a silent override. Otherwise select a conforming alternative or state
+the exact unresolved decision. Answer in natural language; add no approval or audit layer.
 
 Additional caller constraints:
 {constraints}

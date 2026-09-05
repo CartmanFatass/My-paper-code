@@ -14,6 +14,11 @@ after it accepts a handoff it performs the complete transport, wait, archive, an
 return-receipt lifecycle in this task. It is not an advice-only monitor and it does
 not delegate the same handoff recursively.
 
+Archive completeness is a transport fact, not specification-conformance acceptance.
+The receiving Root/DM checks the formed decision against current owner/spec constraints
+at its existing intake. Transport preserves the full answer and reports it without
+adjudicating or rewriting scientific requirements; a conflict never permits a duplicate Send.
+
 Use the available `mcp__cua_repl` browser API. Initialize it using the tool's documented
 entry point, then read the returned documentation before acting. Use only available
 browser methods; an unavailable export or locator API is not permission to resend.

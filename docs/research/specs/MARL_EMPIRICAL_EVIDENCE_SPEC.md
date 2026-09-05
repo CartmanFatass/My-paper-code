@@ -536,3 +536,54 @@ No new line-by-line orchestration census or 100-line exception application is re
 ordinary rule. Explicitly labelled reanalysis may use a revised method if existing data support it;
 it must acknowledge observed outcomes and cannot be reported as passing the old rule or as fresh
 independent confirmation. Adjusting irrelevant diagnostic burden alone is not a mechanism recast.
+
+### 11.9 Applying the method in questions and decisions (OWNER_DIRECT, 2026-09-05)
+
+Select the question as well as its evidence burden proportionately. A performance exploration
+does not need to establish the exact maximum of a policy class, complete headroom, or a unique
+causal explanation before real training and sampled return comparison. Choosing an exact claim
+does not itself justify studying it. Replacing a census with bounded, beam or best-of-many search
+does not repair an unnecessary search-before-learning dependency. Search remains appropriate
+when it has an explicit algorithmic or separately justified diagnostic purpose; a smaller search
+budget alone is not that purpose. Ordinary action selection/optimization is not a prerequisite
+search over policies or future trajectories.
+
+Prompt authors and Pro compare the decision value and known dominant work of a proposed diagnostic
+with a minimal real learning comparison or directly sampled measurement. Finite, deterministic or
+zero-learner work is not presumed cheap. Discuss prospective work even when the consultation itself
+runs nothing; unknown cost is not zero and does not demand a separate calibration experiment.
+On cost refusal, reconsider the chosen question and necessary evidence as well as execution.
+Moving a prohibited B prerequisite into a preceding A does not make it permissible.
+
+Pro decisions are final within current owner instructions and applicable specifications. In the
+existing intake, Root/DM cites any concrete conflict and returns it to the same node for correction
+before executing the affected requirement, while independent conforming work continues. Preserve
+the exact response and do not invent a substitute decision. Explicit specification exceptions name
+the rule, scientific necessity and scope and follow existing appropriate-node authority. No silent
+exception follows from response completeness, and no extra reviewer/approval/launch gate is added.
+
+This owner-directed clarification changes future authoring and current decision intake; it does
+not rewrite accepted request bodies, historical results or completed experiment assignments.
+
+**Request complexity.** Before selecting a new experimental design, describe the dominant work
+factors. This is a MARL empirical-research repository: the default performance path is implement,
+train on a selected task/benchmark, compare with competent baselines, and assess repeatability with
+independent training seeds as the claim warrants. Neither bounded nor exhaustive policy search
+substitutes for that comparison or supplies a general prerequisite for it. A bounded search can
+still be combinatorially expensive; its cost advantage over actual experiments must not be assumed.
+
+Describe dominant work
+factors in its existing question/card: arms, independent training seeds, environment steps,
+evaluation checkpoints/episodes, and nested candidate/trajectory/controller/solver calls. Separate
+work intrinsic to the proposed algorithm from verification added to study it. Joint-action growth
+such as a^N, trajectory branching b^H, all subsets, full cross-products and per-candidate replanning
+are reasons to reconsider the question and sufficient measurement, not just accelerate its code.
+Smaller sampled empirical comparisons and removal of unnecessary dimensions are preferable when
+they answer the decision with an honest narrower claim. Intrinsic algorithmic search is assessed
+as part of that algorithm, not silently removed while retaining an equivalence claim.
+
+Use counts and existing measurements where available; distinguish total work, elapsed wall and
+parallel capacity. Finite counts, native code or batching alone do not establish affordability.
+No universal overhead multiplier, asymptotic proof, new profiling run or validation service is
+required. Unknown work/cost stays unknown; a ratio to a budget cap is not an inflation ratio against
+a minimal adequate experiment. This is design reasoning, not an extra §11.4 launch condition.

@@ -43,8 +43,14 @@ where it is recorded, and its provenance label.
 | Direction | open or close an object family, park, recast, the next object after a consumed C, promotion to C-BENCH | `em:<direction>:convergence` (or `:innovator` before a C freeze); the owner directly when present | decision record, `PRO_FINAL` or `OWNER_DIRECT` |
 | Portfolio | priority, capacity, lifecycle, fusion, separation, registration, investment | `portfolio:cross_direction` proposes; the owner ratifies from the record, or the explicit standing delegation in §4.7 applies | `docs/research/portfolio/decisions/<date>-<slug>.md`, `PRO_FINAL / ROOT_INTEGRATED` or `OWNER_DIRECT` |
 
-A complete archived Pro response that decides the posed question at its declared evidence class is
-final for its node. Root and the DM execute and record it; they do not override it locally. A Pro
+A complete archived Pro response that decides the posed question at its declared evidence class
+and within current owner instructions and applicable specifications is final for its node.
+Completeness alone does not authorize a silent specification exception. Root/DM checks this in
+the existing intake: cite any concrete conflict, preserve the response, and return that conflict
+to the same node for correction before executing the affected requirement. Execute independent
+conforming work meanwhile; do not invent a replacement decision or add an approval layer.
+An explicit specification-change proposal must identify the rule, necessity and scope and use
+the existing appropriate-node authority under §4.7. Root and DM execute conforming decisions. A Pro
 round is never a launch condition for an A or B object (§11.4). Every Pro packet carries the
 machine-generated exposure line and, for a sweep, the per-arm cost projection (§5). A DM or CM may
 attach an engineering dissent (`*_ENGINEERING_DISSENT_<date>.md`) naming a missing fact; the

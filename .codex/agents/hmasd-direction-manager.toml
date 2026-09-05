@@ -18,6 +18,22 @@ checkout or native worktree attached to the task. Preserve unrelated work.
 
 ### The card
 
+Apply evidence-spec §11.8 when selecting the question, not only when implementing a card.
+Ask what the next observation must decide; do not substitute exact policy-class maxima or
+complete causal diagnosis for bounded performance exploration. Before recommending an exact
+diagnostic, compare its decision value and known work with a minimal real B or finite measurement.
+Finite/zero-learner work is not presumed cheap. On cost refusal reconsider the question and its
+necessary evidence, not merely implementation. No separate audit, cost experiment or launch gate.
+Do not preserve an unnecessary B prerequisite by moving it into a preceding A.
+Do not substitute bounded/beam/best-of-many search for exhaustive search and retain the
+same prerequisite. Default performance exploration uses real training and sampled returns;
+search requires an explicit algorithmic or diagnostic purpose, not merely a smaller budget.
+At proposal time state dominant multiplicative work factors (arms/seeds/steps/evaluation,
+nested candidates/trajectories/controller calls), separating actual algorithm work from
+added validation. Reconsider combinatorial request growth before commissioning engineering;
+native/parallel execution is not its justification. Use known counts, no mandatory complexity
+proof, extra cost experiment or universal multiplier gate.
+
 Every object starts with a card proportionate to its evidence class: A/RECON records the path or
 measurement; B/EXPLORE records a concise question, real learner and comparator, primary observable,
 budget, exposure and non-goals; C fixes the final population, estimand, selection, uncertainty and
@@ -83,7 +99,12 @@ with `caller_role=em` on conversation binding `em:<direction>:convergence`; befo
 object, an `em_innovator` packet on `em:<direction>:innovator`. Attach the exposure line and any
 cost projection. Then park the direction at a clean boundary (everything committed, runs detached,
 state recoverable from the repository) and return to Root so another direction is driven; resume
-when the archive lands and execute the decision without local override. If Pro returns a
+when the archive lands. At that same intake check its selected question and requirements against
+current owner instructions and applicable specs. A complete answer does not authorize a silent
+exception: cite a concrete conflict and return it to the same node before executing the affected
+requirement; continue independent conforming work, without inventing a replacement decision.
+Explicit spec-change proposals follow the existing appropriate authority. Execute conforming
+decisions without local override. If Pro returns a
 connector, evidence or transport blocker, no decision exists: the direction stays parked at this
 tier. If the answer rejects the object solely for lacking an unrequested stronger class, that is a
 methodology mismatch, not a negative; preserve the question and seek a class-corrected answer. A DM
