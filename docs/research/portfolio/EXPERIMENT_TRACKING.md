@@ -31,9 +31,14 @@ technical acceptance; FRRIE's DM ACKed A01, and its CM has collected the origina
 N3 smoke `n3_a05_approved_smoke_20260905` is also terminal and acknowledged by its DM: exit
 `0`, PID `1690059`, inactive tmux, passed fresh admission with physical/effective availability
 `15412580352` bytes, and completed `4` tests in `4s` (one warning). CM was directly woken for
-collection. FRRIE may hand over one separately accepted A02 handle; N3 formal work and CBSC work
-also require separately accepted handles. All other rows below are historical terminal records or
-prospective work awaiting a separately accepted handle.
+collection. The unique formal N3 A05 handle `n3_a05_approved_formal_20260905` is terminal and
+awaits CM collection/DM intake: exit `0`, PID `1690627`, inactive tmux, SHA
+`d3884812aa30b278ccfdcdfd3fd802314b026fcb`, seed `50511`, fresh physical/effective admission
+`15421362176` bytes, supervisor duration `2s`, runner wall `2.2332094209996285s`, and peak RSS
+`374198272` bytes. These are process facts only; no restart or validity inference is made.
+FRRIE may hand over one separately accepted A02 handle; CBSC work also requires a separately
+accepted handle. All other rows below are historical terminal records or prospective work awaiting
+a separately accepted handle.
 
 ## Active accepted work
 
