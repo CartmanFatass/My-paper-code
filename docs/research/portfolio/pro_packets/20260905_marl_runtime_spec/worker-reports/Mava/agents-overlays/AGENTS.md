@@ -33,5 +33,3 @@ replay sampling semantics, and evaluation/logging definitions. Performance notes
 these semantics but must not silently tune or replace them. `toy45min` and `UAV12h` are pending
 normalization thresholds; this overlay does not claim either is reachable without a specified
 semantic change.
-
-

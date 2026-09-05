@@ -19,4 +19,3 @@ rollout time is scanned and learner minibatches/epochs are scanned inside the co
 Sebulba rollout data is collected on CPU vector environments, stacked as environment-major
 `(B,T,...)`, then partitioned over learner devices. Algorithm transitions, masks, dones,
 discounts, keys, and replay alignment are semantic data, not interchangeable layout axes.
-

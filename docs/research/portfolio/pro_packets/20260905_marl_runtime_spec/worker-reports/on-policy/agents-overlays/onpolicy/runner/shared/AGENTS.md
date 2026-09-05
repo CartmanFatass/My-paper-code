@@ -1,6 +1,8 @@
-# Upstream file snapshot
+# Local HMASD navigation overlay
 
-source_relative_path: `onpolicy/runner/shared/AGENTS.md`
-fixed_commit: `de66d7a4b23fac2513f56f96f73b3f5cb96695ac`
-upstream_status: `absent`
-upstream_text: none; this record preserves the pre-overlay state.
+Start with `base_runner.py` for policy/trainer/buffer construction, return computation, and train
+handoff. `smac_runner.py` is the clearest MAPPO rollout path; `mpe_runner.py`,
+`football_runner.py`, and `hanabi_runner_forward.py` adapt the same loop to their environment
+contracts. Shared collection concatenates `[rollout_threads, agents, ...]` into one policy batch
+per environment step, then converts outputs back to NumPy. Source is read-only; this local file
+only indexes the fixed upstream snapshot.

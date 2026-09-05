@@ -16,7 +16,9 @@ Navigation:
 - `src/learners/` covers representative Q-learning and actor/policy-critic training loops,
   target updates, optimizer steps, and learner logging.
 
-The report under `C:/Projects/ref-lib/reports/epymarl/` is the evidence index. Verify every claim
+The report under `C:/Projects/ref-lib/reports/epymarl/` is the evidence index; exact copies of
+these overlay navigation files are kept under its `agents-overlays/` tree.
+Verify every claim
 with `git show <sha>:<path>`, `rg -n`, and the fixed-SHA GitHub blob permalink recorded in the
 report. The line numbers are source line numbers at the pinned checkout, not inferred from current
 upstream `main`. No runtime result is implied by source inspection. `toy45min` and `UAV12h` are

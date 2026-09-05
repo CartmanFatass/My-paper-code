@@ -20,6 +20,3 @@ separate on-policy and off-policy frame, environment, minibatch, replay-memory a
 fields. Compare implementation throughput only after matching algorithm workload, model,
 environment, seed and logging/checkpoint settings. An ensemble must keep all component algorithms
 on the same policy mode (`experiment` docs, `features.rst:139-158`).
-
-
-

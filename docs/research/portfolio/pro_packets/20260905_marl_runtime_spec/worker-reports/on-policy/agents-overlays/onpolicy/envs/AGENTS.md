@@ -1,6 +1,7 @@
-# Upstream file snapshot
+# Local HMASD navigation overlay
 
-source_relative_path: `onpolicy/envs/AGENTS.md`
-fixed_commit: `de66d7a4b23fac2513f56f96f73b3f5cb96695ac`
-upstream_status: `absent`
-upstream_text: none; this record preserves the pre-overlay state.
+`env_wrappers.py` provides in-process dummy vectors and Pipe-backed subprocess vectors. MPE and
+Football use `SubprocVecEnv`/`DummyVecEnv`; SMAC uses `ShareSubprocVecEnv`/`ShareDummyVecEnv` to
+carry local observations, centralized observations, rewards, dones, infos, and available actions;
+Hanabi uses the choose-reset variants. Environment adapters below this directory define the
+per-agent spaces and step/reset contracts. Source is read-only; this is local additive navigation.

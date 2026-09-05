@@ -1,6 +1,6 @@
-# Upstream file snapshot
+# Local HMASD navigation overlay
 
-source_relative_path: `onpolicy/runner/separated/AGENTS.md`
-fixed_commit: `de66d7a4b23fac2513f56f96f73b3f5cb96695ac`
-upstream_status: `absent`
-upstream_text: none; this record preserves the pre-overlay state.
+Start with `base_runner.py` for one policy/trainer/`SeparatedReplayBuffer` per agent. The SMAC and
+MPE runners collect by iterating over `agent_id`; `base_runner.train` also iterates agents and
+re-evaluates old/new action log probabilities around each update. This file is additive local
+navigation for the fixed SHA; source remains read-only and no upstream file was present here.

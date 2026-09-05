@@ -1,6 +1,6 @@
-# Upstream file snapshot
+# Local HMASD navigation overlay
 
-source_relative_path: `onpolicy/envs/hanabi/AGENTS.md`
-fixed_commit: `de66d7a4b23fac2513f56f96f73b3f5cb96695ac`
-upstream_status: `absent`
-upstream_text: none; this record preserves the pre-overlay state.
+`Hanabi_Env.py` is the turn-based adapter; `ChooseSubprocVecEnv` and `ChooseDummyVecEnv` pass a
+per-environment reset choice and return local/shared observations plus available actions. The
+forward runner and choose insert path are specialized for this contract. This is additive local
+navigation for the fixed SHA; no upstream file was overwritten.

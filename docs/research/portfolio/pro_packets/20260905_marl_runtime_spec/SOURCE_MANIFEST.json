@@ -163,9 +163,14 @@
         "marllib/patch/rllib/execution/AGENTS.md",
         "marllib/patch/rllib/models/AGENTS.md",
         "marllib/patch/rllib/policy/AGENTS.md",
+        "marllib/patch/rllib/utils/AGENTS.md",
         "tests/AGENTS.md"
       ],
-      "worker_artifacts": [],
+      "worker_artifacts": [
+        "worker-reports/MARLlib/CORE_EVIDENCE.md",
+        "worker-reports/MARLlib/ROOT_RETURN.md",
+        "worker-reports/MARLlib/AGENTS_INDEX.json"
+      ],
       "source_focus": [
         "marllib/marl/algos/run_cc.py",
         "marllib/marl/algos/scripts/mappo.py",
@@ -217,7 +222,8 @@
       ],
       "worker_artifacts": [
         "worker-reports/Mava/CORE_EVIDENCE.md",
-        "worker-reports/Mava/ROOT_RETURN.md"
+        "worker-reports/Mava/ROOT_RETURN.md",
+        "worker-reports/Mava/AGENTS_INDEX.json"
       ],
       "source_focus": [
         "mava/systems/ppo/anakin/ff_mappo.py",

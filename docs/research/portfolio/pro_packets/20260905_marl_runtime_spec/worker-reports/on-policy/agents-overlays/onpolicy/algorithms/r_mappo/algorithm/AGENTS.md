@@ -1,6 +1,6 @@
-# Upstream file snapshot
+# Local HMASD navigation overlay
 
-source_relative_path: `onpolicy/algorithms/r_mappo/algorithm/AGENTS.md`
-fixed_commit: `de66d7a4b23fac2513f56f96f73b3f5cb96695ac`
-upstream_status: `absent`
-upstream_text: none; this record preserves the pre-overlay state.
+`rMAPPOPolicy.py` is the policy façade (`get_actions`, `get_values`, `evaluate_actions`, `act`).
+`r_actor_critic.py` builds the actor from local observations and the critic from centralized or
+local value inputs. Recurrent behavior is implemented by `algorithms/utils/rnn.py`. This is an
+additive survey overlay for the fixed snapshot; upstream code remains read-only.

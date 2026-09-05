@@ -15,4 +15,3 @@ device and batch `pmean`.
 Replay `min_length=explore_steps`, item batch size, delayed policy update, target entropy, key
 splits, and done masks are algorithm semantics. `block_until_ready` bounds the training timer,
 but first-call compilation is included; no warm-up or comparative speedup is established.
-

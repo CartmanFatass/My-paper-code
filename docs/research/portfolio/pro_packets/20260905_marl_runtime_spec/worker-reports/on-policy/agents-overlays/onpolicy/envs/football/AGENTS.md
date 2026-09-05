@@ -1,6 +1,6 @@
-# Upstream file snapshot
+# Local HMASD navigation overlay
 
-source_relative_path: `onpolicy/envs/football/AGENTS.md`
-fixed_commit: `de66d7a4b23fac2513f56f96f73b3f5cb96695ac`
-upstream_status: `absent`
-upstream_text: none; this record preserves the pre-overlay state.
+`Football_Env.py` adapts Google Research Football to per-agent observation/action spaces, rewards,
+dones, and info fields. The train entry point chooses dummy or Pipe-backed subprocess vectors and
+the shared/separated runners consume the resulting arrays. This local overlay indexes the fixed
+snapshot; source remains read-only.

@@ -14,5 +14,3 @@ Sable-specific hidden-state initialization, agent chunking, agent shuffling, don
 attention/retention network layout, and action log-probability semantics are scientific meaning.
 Sebulba's CPU actor/device learner split and explicit `learner_devices` mesh make its timing model
 different from Anakin; keep host transfer and queue costs visible.
-
-

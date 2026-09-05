@@ -1,6 +1,6 @@
-# Upstream file snapshot
+# Local HMASD navigation overlay
 
-source_relative_path: `onpolicy/scripts/AGENTS.md`
-fixed_commit: `de66d7a4b23fac2513f56f96f73b3f5cb96695ac`
-upstream_status: `absent`
-upstream_text: none; this record preserves the pre-overlay state.
+The shell files select environment/map defaults and hyperparameters. Python entry points under
+`train/` parse common config, initialize seeds/device and vector environments, choose shared versus
+separated runners, then call `runner.run()`. This local file indexes the fixed snapshot; it does
+not change training semantics or upstream source.

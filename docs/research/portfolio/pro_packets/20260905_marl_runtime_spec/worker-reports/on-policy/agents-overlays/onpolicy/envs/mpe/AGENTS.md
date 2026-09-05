@@ -1,6 +1,6 @@
-# Upstream file snapshot
+# Local HMASD navigation overlay
 
-source_relative_path: `onpolicy/envs/mpe/AGENTS.md`
-fixed_commit: `de66d7a4b23fac2513f56f96f73b3f5cb96695ac`
-upstream_status: `absent`
-upstream_text: none; this record preserves the pre-overlay state.
+`MPE_env.py` creates the scenario world and `environment.py` defines the multi-agent Gym contract,
+per-agent observations/actions, shared observation space, rewards, dones, and reset behavior.
+`runner/shared/mpe_runner.py` and `runner/separated/mpe_runner.py` consume these contracts. This
+file is local additive navigation for the fixed SHA; do not change source for the survey.

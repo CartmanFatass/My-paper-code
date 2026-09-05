@@ -9,4 +9,3 @@ time-major scans and reset hidden state from done flags. `sable_network.py` and 
 agent chunking/retention behavior. Preserve agent axis, observation/global-state selection,
 action masks, recurrent carry shape, and key use. Network batching is compatible with outer JAX
 transforms but does not itself establish a benchmark result.
-

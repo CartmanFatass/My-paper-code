@@ -22,6 +22,3 @@ wrapper and must not be conflated with a PettingZoo parallel API, a native vecto
 or a Hydra multi-run launcher. Adapter implementations define the actual simulator cost,
 reset/termination behavior and device support. This package contains no standalone performance
 benchmark for those costs.
-
-
-

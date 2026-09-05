@@ -11,4 +11,3 @@ documented in `docs/source/usage/running.rst:24-35`. They are sweep scheduling c
 from `ParallelEnv` inside one experiment. A sweep's wall time is therefore a product of experiment
 count, algorithm workload and launcher/device contention; `Benchmark` itself contains no measured
 throughput instrumentation or in-process concurrency.
-

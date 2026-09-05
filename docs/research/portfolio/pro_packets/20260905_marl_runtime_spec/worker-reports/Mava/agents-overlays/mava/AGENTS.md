@@ -21,5 +21,3 @@ environment, or time axes. Anakin owns JAX transforms and replicated state. Sebu
 environment interaction and explicit learner-device sharding. Wrapper reward, discount, terminal,
 and `real_next_obs` behavior is scientific meaning and must remain explicit in any downstream
 specification.
-
-

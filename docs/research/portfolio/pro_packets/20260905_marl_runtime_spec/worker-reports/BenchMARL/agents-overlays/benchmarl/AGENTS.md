@@ -16,6 +16,3 @@ ordering.
 There is no package-local scheduler, asynchronous prefetcher, custom C++ extension, or benchmark
 executor hidden at this level. Throughput observations must identify the external TorchRL,
 TensorDict, PyTorch, simulator, logger and launcher versions involved.
-
-
-

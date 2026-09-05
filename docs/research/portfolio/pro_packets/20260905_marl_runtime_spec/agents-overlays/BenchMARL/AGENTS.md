@@ -40,4 +40,3 @@ speedup expectation for vectorized VMAS when sampling and training use CUDA, but
 no measured speedup. Toy runs over 45 minutes and UAV runs over 12 hours are engineering
 investigation triggers for the target runtime; they are not comparable BenchMARL performance
 claims.
-

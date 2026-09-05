@@ -4,4 +4,3 @@ Default files compose logger, architecture, system, network, and environment gro
 name selects the algorithm/runtime entry point; inspect the composed groups before comparing
 throughput. Do not treat a default composition as proof that every architecture supports every
 environment.
-

@@ -17,5 +17,3 @@ minibatch flattening merges time and environment axes only after rollout. `pmean
 and then `device` is part of the optimizer semantics. Keys are split for network initialization,
 environment reset, action sampling, shuffling, and entropy. Preserve these meanings when writing
 runtime specifications; no steady-state speedup is implied by the transforms.
-
-

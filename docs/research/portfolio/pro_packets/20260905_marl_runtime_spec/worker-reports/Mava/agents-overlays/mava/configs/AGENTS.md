@@ -15,5 +15,3 @@ Hydra configuration is part of the runnable entry-point contract. Keep YAML sour
 Changing counts, seed, rollout length, minibatches, replay size, queue size, or device ids changes
 the object or its throughput denominator. Any normalization spec must record those values rather
 than assuming the defaults are portable to toy45min or UAV12h.
-
-

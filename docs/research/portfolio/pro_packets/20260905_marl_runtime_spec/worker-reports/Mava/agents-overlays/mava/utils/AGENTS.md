@@ -14,5 +14,3 @@ Sebulba coordination utilities. Preserve upstream source and treat this file as 
 Environment reward/discount/terminal and `real_next_obs`, PRNG split order, queue backpressure,
 replay ratio, device placement, and timing boundaries are part of the study contract. Utility
 refactors must preserve them or be called a semantic change.
-
-

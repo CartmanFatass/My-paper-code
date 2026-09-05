@@ -1,6 +1,7 @@
-# Upstream file snapshot
+# Local HMASD navigation overlay
 
-source_relative_path: `onpolicy/scripts/train/AGENTS.md`
-fixed_commit: `de66d7a4b23fac2513f56f96f73b3f5cb96695ac`
-upstream_status: `absent`
-upstream_text: none; this record preserves the pre-overlay state.
+`train_smac.py` is the shared/separated SMAC entry point; `train_mpe.py` covers MPE, and the
+Football/Hanabi scripts adapt their environment-specific arguments. `config.py` holds defaults
+for rollout threads, episode length, PPO epochs/minibatches, save/log/eval intervals, policy
+sharing, and recurrent mode. This additive overlay is for the fixed SHA; no source edits are in
+scope.

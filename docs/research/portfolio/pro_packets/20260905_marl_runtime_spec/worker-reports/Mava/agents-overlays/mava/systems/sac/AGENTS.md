@@ -9,5 +9,3 @@ Flashbax item buffer. `act` scans environment steps and appends transitions; `tr
 updates with delayed actor/alpha updates; outer `pmap` and update-batch `vmap` carry device/batch
 replicas. Preserve action/reward/done/next-observation semantics, target-network Polyak updates,
 and exploration fill before treating a buffer or transform as a performance substitution.
-
-
