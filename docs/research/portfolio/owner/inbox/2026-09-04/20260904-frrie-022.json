@@ -1,0 +1,74 @@
+{
+  "id": "20260904-frrie-022",
+  "created": "2026-09-04T17:49:01-07:00",
+  "direction": "finite_resource_relational_inductive_efficiency",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "R05 原科学卡的执行补充",
+  "context": "主张：原主动触边 R128 比较的新执行可得到固定随机根及已见规模上的初步原生收益差异。绑定结构：systems / information flow；投影框仍是角色间信息权重处理的唯一两臂差别。科学含义不变，只为本次补充现成异常现场读取。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "执行一次原 B 对象，保持原参数、随机根和结果规则，记录潜在异常现场。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "下一安全边界停止尚未接受的新执行，保留诊断及所有旧证据。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "下一安全边界依批改调整执行补充，不重写既有结果。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": null,
+  "dm_reason": "完整链已走通，现成调试器让潜在重复故障保持可观察。",
+  "evidence": [
+    "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_B01_CONTACT_ACTIVE_R128_R02_R05_EXECUTION_ADDENDUM_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#frrie-a01-intake-r05-selection",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": {
+    "question": "是否接受原 B 对象的新一次执行，并保留已验证的异常现场读取方式？",
+    "changes_if_approved": [
+      {
+        "target": "FRRIE R02 的下一次执行",
+        "from": "A01 诊断已完整结束，但不作为算法结果；尚无 R05",
+        "to": "新建一次同随机根、同计算和同结果规则的 B 执行，使用现成异常读取命令"
+      }
+    ],
+    "if_refused": "在下一个安全边界依批改停止尚未接受的 R05 或修改执行范围；原 A01 和所有失败证据保留，方向状态不变。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R04_RECONSTRUCTION_A01_RESULT_EVIDENCE_20260904.md",
+        "quote": "The unchanged full production chain completed through 128 paired updates without the recorded r04 serialization fault.",
+        "why": "完整原调用链已实际走通，不需要先假定某个修复或继续无新判别量的诊断。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R04_RECONSTRUCTION_A01_INTAKE_20260904.md",
+        "quote": "Strongest limitation is nonrecurrence: there is still no captured r04 failure state or demonstrated cause.",
+        "why": "再次失败仍有可能；一次未重现不能证明环境或源码已修复。"
+      }
+    ],
+    "uncertainty": [
+      "原错误及旧 attempt02 的根因各自未解。",
+      "调试器进程环境可能与最初运行不同；新结果只按实际执行面解释。",
+      "算法对比尚未读取，仍可能很小、不利或比较器能力不足。"
+    ],
+    "cost": {
+      "compute": "同节点完整诊断约 15 分钟；原上限仍为每臂 4 小时、全调用 8 小时，逐次新内存准入。",
+      "owner_time": "约一分钟；循环不等待回复。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "推荐一份新的原 B 对象执行，保持全部科学参数和结果规则，继续使用已验证的异常现场读取；不把 A01 升级为算法结果。",
+    "source": "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_B01_CONTACT_ACTIVE_R128_R02_R05_EXECUTION_ADDENDUM_20260904.md"
+  }
+}

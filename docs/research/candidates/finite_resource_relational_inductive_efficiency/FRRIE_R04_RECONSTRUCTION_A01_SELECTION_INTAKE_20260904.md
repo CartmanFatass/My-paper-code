@@ -1,6 +1,10 @@
 # FRRIE r04 diagnosis selection intake — 2026-09-04
 
-Status: `OWNER_RESUME_APPLIED / A01_ACCEPTED / RESULT_PENDING`.
+Status: `OWNER_RESUME_APPLIED / A01_COMPLETE_NO_FAULT_WITHIN_BOUND`.
+
+Superseding result intake: `FRRIE_R04_RECONSTRUCTION_A01_INTAKE_20260904.md`.
+The accepted-run snapshots below remain historical. A01 completed naturally; no scientific B
+result or r04 cause is inferred. The later intake separately selects the next invocation.
 
 ## What DM checked
 
