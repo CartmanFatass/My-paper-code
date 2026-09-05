@@ -28,6 +28,7 @@ read-only source inspection while drafting the MARL runtime engineering review.
 | `Mava/` | `mava/systems/ppo/anakin/`, `mava/systems/ppo/sebulba/`, `mava/utils/sebulba/pipelines.py`, `mava/configs/arch/` | root and only the `mava` subtrees used by the worker |
 | `JaxMARL/` | `baselines/QLearning/vdn_ff.py`, `baselines/IPPO/ippo_rnn_smax.py`, `jaxmarl/environments/`, `baselines/*/config/` | root and only the `baselines`/`jaxmarl` subtrees used by the worker |
 
-The packet manifest is authoritative for the actual overlay paths and worker ownership. This
-top-level index intentionally does not claim that every expected path exists until its worker has
-inspected the pinned tree and recorded the path.
+The packet manifest is authoritative for the actual overlay paths and worker ownership. The current
+collection is complete: all 103 library overlay paths plus this root overlay are recorded in the
+manifest and backed up in the packet. A future refresh must add a new manifest entry when it
+changes a pinned checkout.
