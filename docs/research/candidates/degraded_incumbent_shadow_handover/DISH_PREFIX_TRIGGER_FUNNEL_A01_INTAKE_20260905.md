@@ -92,7 +92,6 @@ created through `python -X utf8 tools/owner_console/item.py add`, not by hand.
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | 2026-09-05 02:39:26 | degraded_incumbent_shadow_handover (N3) | object | technical | a accept complete A01 with exposure limits; b infer negative source value; c discard no-handover diagnostic | a | yes | OWNER_DELEGATED, 2026-09-03 instruction | docs/research/portfolio/owner/inbox/2026-09-05/20260905-dish-002.json | none | |
 | 2026-09-05 02:39:26 | degraded_incumbent_shadow_handover (N3) | object | selection | a one separately carded native ground-source point; b more learning; c changed physics/forced handover; d repeat A01 | a | yes | OWNER_DELEGATED, 2026-09-03 instruction | docs/research/portfolio/owner/inbox/2026-09-05/20260905-dish-003.json | none | |
-
 | 2026-09-05 02:39:26 | degraded_incumbent_shadow_handover (N3) | object | technical | reading-agreed; reading-disputed | valid-result brief published; no owner reading auto-applied | yes | DM_INTAKE | docs/research/portfolio/owner/inbox/2026-09-05/20260905-dish-004.json | none | |
 | 2026-09-05 02:39:26 | degraded_incumbent_shadow_handover (N3) | object | selection | accept; reject; revise | A02 card frozen; recommendation accept, asynchronous owner surface | yes | DM_CARD | docs/research/portfolio/owner/inbox/2026-09-05/20260905-dish-005.json | none | |
 
