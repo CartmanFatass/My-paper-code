@@ -39,8 +39,7 @@ from .semantics import (
     classify_r02,
     cost_config,
     exposure_record,
-    initialize_contact_pair,
-    initialize_test_contact_pair,
+    _initialize_contact_pair,
 )
 from .tapes import evaluation_tape, production_training_inputs
 
@@ -191,8 +190,9 @@ def execute(
 
     torch.set_num_threads(1)
     torch_threads = torch.get_num_threads()
-    initializer = initialize_test_contact_pair if test_only else initialize_contact_pair
-    models, optimizers, initial_audit, raw_initial = initializer(adam_lr=adam_lr)
+    models, optimizers, initial_audit, raw_initial = _initialize_contact_pair(
+        root_hex, seed_label, adam_lr=adam_lr,
+    )
     if not test_only and initial_audit["tight_changed_coordinates"] != 5:
         raise B01ContractError("initial tight clip did not change exactly five coordinates")
     if initial_audit["tight_changed_coordinates"] <= 0:
