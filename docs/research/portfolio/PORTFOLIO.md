@@ -1,6 +1,6 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-05 (N3 and CBSC scoped intakes complete; UCOPE branch decision applied; runtime specification Pro review dispatched)
+Updated at: 2026-09-05 (N3 and CBSC scoped intakes complete; UCOPE branch decision applied; runtime specification applied; VNFC E01 CM active)
 Owner: Root
 Current important-change authority: latest explicit owner approval applies CBSC/N3 B/B and delegates future same-kind specification changes plus their explicit Portfolio updates to complete appropriate-node Pro plans, with highlighted P1/P2 traces and no repeated owner vote. See `decisions/2026-09-05-pro-directed-spec-delegation.md`; historical authority/corrections remain preserved.
 Owner review maintenance: P1/P2 only (`OWNER_DIRECT`, 2026-09-05); P3/P4 creation, backfill and reminders retired. Preserve scientific evidence, audit and existing owner replies; see `decisions/2026-09-05-owner-review-p2-cutoff.md`.
@@ -68,7 +68,9 @@ provenance, but result polarity never transfers into an accepting direction.
 
 ## Current working set after completed intakes
 
-Root owns the source-backed runtime specification and the one VNFC feasibility investment review.
+Root owns the applied runtime specification and acts as VNFC direction caller. Active CM
+/root/cm_am_vnfc_e01 implements the unique E01 in its isolated worktree, baseaaaad1212.
+Recovery: handoffs/2026-09-05-vnfc-e01-cm.md. No formal handle or source acceptance yet.
 Request `2026-09-05-marl-runtime-spec-portfolio-01` was dispatched exactly once to the existing
 Transport singleton; the pinned packet is under `pro_packets/20260905_marl_runtime_spec/pro_review_01/`.
 Complete response archived and read: the revised runtime specification and exact E01 appendix
