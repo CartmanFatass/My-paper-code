@@ -59,3 +59,97 @@ on 40 seconds or0.75 GiB RSS. Projected feasibility requires 3*wall<=120 seconds
 After accepted handle, tracker directly adopts observation and notifies DM/CM at terminal;
 CM collects the same output. Stop after returning this assessment. Even a pass requires a
 later separate DM science card before actual ACVC calculation.
+
+## Pre-acceptance verification on committed bytes
+
+Source `b18a098d3a5b24434946cb7c7857fc778d347687` was committed and immediately pushed.
+Configured login-shell Git fetch and detached worktree preparation succeeded. The existing
+remote automatic-repack warning about missing parent commit remained unrelated; no Git
+maintenance was performed. Cwd: `/home/wu/hmasd-worktrees/acvc-upper-prefix-cost-b18a098d`.
+
+The independent Reviewer confirmed the partition, exact literal labels and parity rule, and
+compared the whole runner and `prefix_bound` text against the original source unchanged.
+Reviewer and CM separately inspected the full generated input without calling the evaluator.
+CM's input-only check ran on the committed remote source before full cost acceptance:
+
+| Family | Fractions | Numerator bit range | Denominator bit range |
+| --- | ---: | ---: | ---: |
+| Atoms | 48 | 507-507 | 512-512 |
+| Context marginals | 24 | 500-507 | 504-511 |
+| Adjusted scores | 72 | 506-511 | 512-512 |
+| Multipliers | 2 | 510-511 | 512-512 |
+| Budgets | 2 | 509-511 | 512-512 |
+| Prior | 2 | 1-1 | 2-2 |
+
+Counts, positive probability rows, positive multipliers/budgets, exact row sums and paired
+marginals passed. The existing normalization test was extended, without adding another test.
+The final remote focused suite passed 5 tests in 0.05 seconds, including exactly one small
+publication smoke for this repair. Command:
+
+```sh
+/home/wu/.venvs/hmasd/bin/python -m pytest -q -p no:cacheprovider --basetemp temp/directions/acvc/test/common512_r03_20260905 tests/experiments/candidates/acvc/history_upper_prefix_assessment_r03/test_arithmetic.py
+```
+
+The pytest temp parent was created first. The only warning was the existing unknown
+`cache_dir` pytest configuration option. These checks establish the declared synthetic
+representation and unchanged generic arithmetic, not native ACVC coefficient construction.
+
+## Repair and cumulative scope accounting
+
+Repair: source +18/-10 and existing test +16/-3. All changed lines construct numerical inputs
+or evaluate representation. Orchestration is 0/47 changed lines and 0/34 additions; source-only
+0/28 changed and 0/18 additions. No changed orchestration line exists to list. The new document
+is excluded from code-diff denominators.
+
+Resulting attempt: 131 source lines (87 arithmetic, 44 runner) plus 91 test lines =222.
+The independent review uses the same conservative nonblank orchestration convention as before:
+
+- arithmetic lines 1-3,21,30,41,60,62,75,86: 10;
+- runner lines 1-6,8-11,14-21,23-25,27-29,32-40,43-44: 35;
+- test import lines 1-6,8-10,71: 10.
+
+Orchestration is 55/222=24.77% for the code-plus-test diff; source-only 45/131=34.35% is
+disclosed separately. Research line and runner budgets pass. No padding or section 4 addition
+was identified. The literal diff denominator includes the substantive existing tests.
+
+## Accepted process
+
+Unique task `acvc_upper_prefix_cost_b18a098d_02`, same source/cwd above. Accepted command:
+
+```sh
+/usr/local/bin/agent-task run acvc_upper_prefix_cost_b18a098d_02 "cd /home/wu/hmasd-worktrees/acvc-upper-prefix-cost-b18a098d && /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/acvc/exp/history_upper_prefix_assessment_r03_20260905/attempt02/admission.json && /home/wu/.venvs/hmasd/bin/python scripts/run_acvc_history_upper_prefix_cost_r03.py --out temp/directions/acvc/exp/history_upper_prefix_assessment_r03_20260905/attempt02"
+```
+
+Actual-node admission passed at `2026-09-05T10:33:02.304275Z`: physical and effective available
+memory each 11,465,871,360 bytes. CM sent the exact accepted handle directly to the shared
+tracker, which acknowledged sole observation and direct DM/CM terminal notification.
+
+## Terminal evidence and engineering acceptance
+
+Tracker directly reported `finished`, exit 0, PID 1659104, tmux inactive. CM collected the
+actual summary and supervisor log. Summary status is `complete`, calculation wall
+**29.25962231500307 seconds**, peak RSS **17,858,560 bytes**. The source traverses every
+history/action without pruning and reached normal return, so the complete declared envelope
+was evaluated: 14,425 histories, 519,300 prefix scores, 72 tail scores, 14,424 expansions.
+The static-count fields themselves are not independent execution counters; normal completion
+of the inspected exhaustive loops establishes completion here.
+
+Projected time: `3*29.25962231500307 = 87.77886694500921 seconds <=120`.
+Projected RSS: `2*17,858,560 = 35,717,120 bytes <=1.5 GiB`.
+Both projections pass. No finite-block overshoot occurred. One full cost was accepted for
+this repair, and no second full invocation, scientific value or policy output occurred.
+
+Authoritative outputs below the remote cwd:
+`temp/directions/acvc/exp/history_upper_prefix_assessment_r03_20260905/attempt02/admission.json`
+and `summary.json`. Supervisor log:
+`/home/wu/.agent-tasks/acvc_upper_prefix_cost_b18a098d_02/task.log`.
+CM copied these three files into the corresponding ignored local attempt02 root. Historical
+attempt01 remains unchanged, including its measured oversized-input failure.
+
+**Accepted engineering conclusion:** the unchanged generic evaluator completes the prescribed
+common-denominator synthetic input family within the original projected limits, with its
+complete full work envelope. This does not establish worst-case rational performance or the
+cost of actual ACVC host-coefficient construction. No ACVC B4, native-return difference,
+threshold comparison, HC branch, family decision or learner result exists from this task.
+Actual upper calculation remains subject to a separate DM scientific card covering its full
+source and cost boundary. CM stops here and returns the source and assessment commits.
