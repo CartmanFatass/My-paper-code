@@ -88,3 +88,16 @@ cd /home/wu/hmasd-worktrees/dish-certificate-a04-d543146c && /home/wu/.venvs/hma
 
 Acceptance/receipt/task metadata will be appended after dispatch. Existing DM authorization
 covers this single invocation following technical acceptance; no successor is authorized.
+
+## Accepted invocation
+
+Task dish_origin_certificate_a04_a1 was accepted once at source d543146cc11ccf880da1245bfb6884356772dd38,
+PID1668923, start epoch1788608948 (2026-09-05T11:49:08Z). Tracker directly adopted the
+unique handle and sole observation. Task not_found and absent result/receipt were
+reconciled before dispatch; fixed original input digest matched again, remote tree clean.
+Fresh receipt assessed2026-09-05T11:49:08.633521Z: physical/effective12912066560bytes,
+minimum4294967296, both flags/passed=true, source/proc/meminfo. Exact adjacent command
+above ran unchanged. Log/home/wu/.agent-tasks/dish_origin_certificate_a04_a1/task.log;
+output and receipt paths are the exact command's request-specific roots. No next run queued.
+Tracker terminal notification subsequently reported exit0,tmuxinactive,observeruptime28s.
+Collection and independent technical reading follow from existing artifacts only.
