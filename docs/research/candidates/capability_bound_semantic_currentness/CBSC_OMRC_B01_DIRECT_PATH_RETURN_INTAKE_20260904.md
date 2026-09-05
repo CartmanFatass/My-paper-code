@@ -151,6 +151,16 @@ row below belongs at `cbsc-b1-direct-path-return`. Root integrates that row and 
 it must not integrate candidate source `908729835c` or old repair source `ce94f5afd`.
 There is no valid-result brief, new science card or new ladder prediction item for this return.
 
+CM's final closeout confirms its tree is clean at report commit
+`7b6cbe90ad1daa2d4e9e42f209ff9e90c8dc61fc`, matching upstream. The implementer's separate
+tree `C:/Projects/HMASD-worktrees/impl-cbsc-direct-20260904` is clean at
+`7832e78b84c1907369834c18c8dcb9f569b607f5`, matching
+`origin/impl-cbsc-direct-20260904`; its two preserved candidate files match the CM candidate
+bytes. Implementer and reviewer are completed, with no outstanding command or experiment.
+The DM branch contains only the three documents and two owner items named in this slice,
+is pushed, and has no uncommitted files. The default tracker was told directly that no handle
+was accepted and no observation/reminder is needed.
+
 Owner item: `docs/research/portfolio/owner/inbox/2026-09-04/20260904-cbsc-018.json`.
 
 | time | direction | tier | kind | options | chosen option | reversible | provenance label | evidence path | owner flag | owner |
