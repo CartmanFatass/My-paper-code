@@ -101,6 +101,14 @@ outside that scope and are not claimed zero cost. Fresh actual-node physical and
 effective memory each>=4GiB is required immediately adjacent to invocation.
 Actual scratch/input/output/shared/build feasibility remains to be quantified.
 
+Read-only execution-node planning snapshot during implementation: GNU C++13.3.0;
+20 online/available logical CPUs, SSH process allowed list0–19; filesystem
+available1,002,625,638,400 bytes at the worktree root. The mounted cgroupv2
+`user.slice` and `user-1000.slice` report `cpu.max=max 100000` and
+`memory.max=max`; root-level cpu.max/memory.max files were absent. The transient
+SSH session was not the future supervisor task, so these parent observations do
+not certify future task constraints, exclusive CPUs or launch memory admission.
+
 Per-arm cost projection: no sweep or census is launched. E01 supplies the selected
 new unit evidence; existing calibration evidence is preserved, not repeated.
 Use9,418,560 ticks,376,688 full calls,738,685,168 scored rows,94,128 continuations,
@@ -120,6 +128,14 @@ for other natural tails only with the same function/team, no extra work per lane
 and no extra immutable weight keys. This does not measure tail2..7 cost or prove
 a universal timing bound; distinct nonformal rules must still verify their
 logical handling. Missing grouping, history or publication work remains explicit.
+
+The actual synthetic world-record input construction performs canonical public
+history grouping, per-member complete-support alignment, paired endpoint Fraction
+subtraction and class sums, then checks selected commands for every member of
+each of the four maps. The native predetermined pair uses the same grouping
+function. Short synthetic history does not stand in for long admitted history:
+the grouping estimate takes the larger per-record cost of the full scale input
+path and the native pair, from their already measured stages, across94,128 rows.
 
 Post-learner coverage: no learner or preceding post-learner failure exists here;
 E01 native and disk publication coverage must be observed in the single assessment.
