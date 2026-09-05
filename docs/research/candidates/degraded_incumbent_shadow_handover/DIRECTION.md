@@ -293,3 +293,28 @@ Complete evidence: `N3_DISH_B01_C04_RESULT_EVIDENCE_20260904.md`,
 `N3_DISH_B01_C04_SEED47_COLLECTION_20260904.md`,
 `N3_DISH_B01_C04_COMPLETE_INTAKE_20260904.md`,
 `DISH_PREFIX_TRIGGER_FUNNEL_A01_SCIENCE_CARD_20260904.md`.
+
+## Accepted retained-prefix A01 measurement — 2026-09-05
+
+**Conclusion and bounded claim.** The retained seed-11 checkpoint exactly reproduced its
+original sixteen no-trigger prefixes, with zero new learning/parameter movement. All 19,200
+prepared inputs were live, with 2,720 renewal opportunities, 2,234 prepare proposals,
+1,131 commit proposals and 19,148 completion-latch ticks. Common-source support, snapshot/
+readiness delivery, emitted intent and native service were all zero. The card reads
+**A01-PREFIX-FUNNEL-OBSERVED**, sixteen **PREPARATION_SUPPORT_GAP(snapshot_delivery)** rows.
+This is A/RECON measurement evidence, not a source-effect estimate; B01 FTS-B0 is unchanged.
+
+**Strongest support and contradiction.** Preparation/latch presence together with full live
+prefixes narrows the missing exposure upstream of source selection. No early terminal
+padding or complete absence of prepare proposals explains these rows. One retained
+checkpoint and zero downstream exposure cannot establish a remedy, source equality,
+headroom, native-host defect or general policy incapacity.
+
+**Surviving alternative and next discriminator.** Ground-source visibility/admission may
+prevent common-source and snapshot support; learned motion and later protocol constraints
+remain alternatives. Qualify that exact native source/spec path before more training or a
+physics change. No new family, recast or lifecycle action follows. Evidence:
+`DISH_PREFIX_TRIGGER_FUNNEL_A01_RESULT_EVIDENCE_20260905.md`,
+`DISH_PREFIX_TRIGGER_FUNNEL_A01_SUMMARY_20260905.json`,
+`DISH_PREFIX_TRIGGER_FUNNEL_A01_COLLECTION_20260905.md`,
+`DISH_PREFIX_TRIGGER_FUNNEL_A01_INTAKE_20260905.md`.

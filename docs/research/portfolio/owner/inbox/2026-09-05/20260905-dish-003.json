@@ -1,0 +1,43 @@
+{
+  "id": "20260905-dish-003",
+  "created": "2026-09-05T02:39:26-07:00",
+  "direction": "degraded_incumbent_shadow_handover",
+  "tier": "object",
+  "kind": "decision",
+  "title": "先用一个原生点核对源链路，再决定是否更改宿主",
+  "context": "2234次准备提议之后仍没有共同源或快照。源码与继承规格都规定地面高度为零及采样净空，尚无实现违反规格的证据；选择原种子11第一个坐标零时刻的原生观测，读取视线和链路余量，不加载策略或推进完整一步。",
+  "options": [
+    {
+      "key": "a",
+      "label": "执行已写卡的一次原生准备点观测",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "立即增加学习预算",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "立即改变物理规则或强制转交",
+      "consequence": ""
+    },
+    {
+      "key": "d",
+      "label": "重跑同一原前缀面板",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "先直接测量上游信息条件，可以避免在缺口尚未核实时改变学习或宿主语义。",
+  "evidence": [
+    "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_PREFIX_TRIGGER_FUNNEL_A01_INTAKE_20260905.md",
+    "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_GROUND_SOURCE_POINT_A02_SCIENCE_CARD_20260905.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-05.md#n3-prefix-a01-intake",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": null
+}
