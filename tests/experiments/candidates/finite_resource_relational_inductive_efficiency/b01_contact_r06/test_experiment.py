@@ -61,11 +61,12 @@ def _admission(path):
 
 
 def test_selected_lr_defaults_branches_and_real_publisher(tmp_path):
-    for function in (_initialize_contact_pair, experiment.execute, experiment.main):
+    for function in (_initialize_contact_pair, experiment.execute):
         assert inspect.signature(function).parameters["adam_lr"].default == 0.0003
-    for function in (experiment.execute, experiment.main):
-        assert inspect.signature(function).parameters["object_id"].default == OBJECT_ID
-        assert inspect.signature(function).parameters["branch_prefix"].default == "R02"
+    assert tuple(inspect.signature(experiment.main).parameters) == ("argv",)
+    assert inspect.signature(experiment.main).parameters["argv"].default is None
+    assert experiment.OBJECT_ID == OBJECT_ID
+    assert experiment.initialize_contact_pair.__name__ == "initialize_contact_pair"
     for expected_lr in (0.0003, 0.003):
         _, optimizers, audit, _ = (
             initialize_test_contact_pair() if expected_lr == 0.0003 else
@@ -97,7 +98,7 @@ def test_selected_lr_defaults_branches_and_real_publisher(tmp_path):
     output = (tmp_path / "result").resolve()
     root = Path(experiment.__file__).resolve().parents[4]
     completed = subprocess.run([
-        sys.executable, str(root / "scripts/run_frrie_b01_contact_r06.py"),
+        sys.executable, "-m", "scripts.run_frrie_b01_contact_r06",
         "--output-root", str(output), "--admission-receipt", str(receipt),
         "--seed", "1", "--test-only",
     ], cwd=root, capture_output=True, text=True, timeout=55)
