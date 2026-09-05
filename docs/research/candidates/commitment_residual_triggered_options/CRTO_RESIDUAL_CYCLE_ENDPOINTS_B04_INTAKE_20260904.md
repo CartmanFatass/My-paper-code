@@ -152,6 +152,13 @@ onlyseed0; existing function accepts other seeds, or the CLI can be changed tran
 The planning initial scales are seed0 history, not new-seed measurements. No successor is
 frozen or launched by this intake and no Pro decision is claimed.
 
+**OWNER_DIRECT execution boundary,2026-09-04:** Root relayed the owner's instruction,
+"这轮完毕后暂停即可", after the valid-result intake was committed. B04 is complete and
+CRTO stops at this clean boundary with zero live runs. The next-seed question stays pending;
+no additional card, launch, retry or Pro round is authorized by the earlier continuation.
+CM received the same stop instruction. This is scheduling state, not a scientific family
+closure, direction lifecycle or priority change.
+
 ## Append-ready audit rows for Root
 
 | time | direction | tier | kind | options | chosen option | reversible | provenance | evidence | owner flag | owner |
