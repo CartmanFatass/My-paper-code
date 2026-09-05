@@ -40,6 +40,8 @@ Observation-loss event: at `2026-09-05T00:10:58Z`, the configured `hmasd-wsl-nod
 
 N3 C04 seed11 adopted: `(wsl_4070, dish_b01_c04_seed11_e0541d0c_a1)`, SHA `e0541d0cb3e9e63731c72f4dacb10b44d268fd39`, cwd `/home/wu/hmasd-worktrees/dish-b01-c04-e0541d0c`, receipt `temp/directions/degraded_incumbent_shadow_handover/exp/n3_b01_c04_20260904/seed11_a1_admission.json`, output sibling `seed11_a1`, and log `/home/wu/.agent-tasks/dish_b01_c04_seed11_e0541d0c_a1/task.log`. At `2026-09-05T00:12:41Z` it was `running`, exit `null`, PID `112219`, `tmux_active=true`; fresh admission passed with physical/effective `12531122176` bytes. Notify N3 DM and CM on terminal, loss, or the `1474.544745605439s` expected / `1800s` cap; no restart or seed change.
 
+Terminal recheck at `2026-09-05T00:36:59Z`: FSD `fsd_e3_medium_d2_seed3_20260904_01` finished exit `0`, PID `106154`, tmux inactive; FRRIE diagnostic `frrie_r04_reconstruction_a01_b41a6ba7` finished exit `0`, PID `111201`, tmux inactive, with `pdb`/`sys.exit` log evidence that is not learner success; N3 seed11 `dish_b01_c04_seed11_e0541d0c_a1` finished exit `0`, PID `112219`, tmux inactive. Direct idle-wake notifications were sent to each DM and responsible CM for collection and intake. No scientific validity is inferred from these exits, no restart was made, and no later seed was launched. CRTO B02 intake is also complete (`d244425603ca016b4ab518d64107c64d552b6f18`); its terminal row needs no reminder.
+
 ## Accepted work and terminal handoffs
 
 | DM / run record | Node and accepted handle | Launch SHA | Remote cwd | Output / receipt | Latest authoritative observation | Next owner step / notification |
