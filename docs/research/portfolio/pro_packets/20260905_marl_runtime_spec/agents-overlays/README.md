@@ -14,5 +14,12 @@ Current coverage:
 | Relative path | Kind | Status |
 | --- | --- | --- |
 | `ref-lib/AGENTS.md` | collection root navigation overlay | captured |
-| `<library>/AGENTS.md` | library root navigation overlay | assigned to library worker |
-| `<library>/<module>/AGENTS.md` | relevant module navigation overlay | assigned to library worker after source inspection |
+| `epymarl/**/AGENTS.md` | EPyMARL root and source module overlays | captured; paths listed in manifest |
+| `BenchMARL/**/AGENTS.md` | BenchMARL root and source module overlays | captured; paths listed in manifest |
+| `on-policy/**/AGENTS.md` | MAPPO on-policy root and source module overlays | captured; paths listed in manifest |
+| `JaxMARL/**/AGENTS.md` | JaxMARL root and source module overlays | captured; paths listed in manifest |
+| `MARLlib/**/AGENTS.md` | MARLlib root and source module overlays | captured; paths listed in manifest |
+| `Mava/**/AGENTS.md` | Mava root and source module overlays | captured; paths listed in manifest |
+
+The full worker reports are archived under `../worker-reports/<library>/`; a library row may show
+its overlays captured while its core evidence report is still pending.
