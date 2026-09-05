@@ -1,0 +1,37 @@
+{
+  "id": "20260905-crto-014",
+  "created": "2026-09-05T03:46:11-07:00",
+  "direction": "commitment_residual_triggered_options",
+  "tier": "object",
+  "kind": "decision",
+  "title": "CRTO B07：结束这次中心化胜任修复干预",
+  "context": "固定 516 更新的中心化损失没有修复 REPLAN 缺口。保留两条动作变化及微小净收益，只结束这次具体干预的修复预期；家族是否继续将由方向级 Convergence 决定。",
+  "options": [
+    {
+      "key": "a",
+      "label": "保留结果并结束这次具体干预",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "原样重复中心化损失",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "判定家族一般失败",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "两枚种子的完整结果足以界定这次干预，不能扩展成信息不足或家族负面，也没有原样重跑理由。",
+  "evidence": [
+    "docs/research/candidates/commitment_residual_triggered_options/CRTO_RAW_CENTERED_LOSS_B07_INTAKE_20260905.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-05.md#crto-b07-centered-loss-result",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": null
+}

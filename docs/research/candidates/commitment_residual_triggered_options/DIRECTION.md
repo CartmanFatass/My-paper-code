@@ -579,3 +579,30 @@ CRTO_RAW_EXPOSURE_B06_RESULT_EVIDENCE_20260905.md,
 CRTO_RAW_EXPOSURE_B06_SEED01_RESULT_20260905.json,
 CRTO_RAW_EXPOSURE_B06_SEED02_RESULT_20260905.json,
 CRTO_RAW_EXPOSURE_B06_INTAKE_20260905.md.
+
+## RAW centered loss B07 — 2026-09-05
+
+The fixed 516-update legal-action-centered loss comparison is valid **B07-COMPARATOR-LIMITED**;
+both seeds are **B07-COMPARATOR-STILL-WEAK**, with REPLAN exact count 5/8. Seed 1 retains KEEP
+8/8 and reaches R=.002127840061573334, a gain of .0000016144314865518261 over its fixed B06
+baseline. One corrected REPLAN action is offset by a newly wrong REPLAN action. Seed 2 retains
+KEEP 7/8 and R=.003127712855602898, with no action change. Both gains are inside MEI .000625.
+
+All 32 new and 32 fixed historical native decision records, source metadata, 344-row exposure,
+initialization and positive finite movement independently check. The bounded update rejects
+only this centered-loss intervention as a competence repair. Native action sensitivity in seed 1
+limits broader failure claims; changed gradient scale, clipping and Adam prevent attribution
+to common-return fitting alone. No family-wide or information/function-class conclusion follows.
+
+B04's competent seed-0 residual negative, B05/B06 comparator limitation, residual MEI .0025,
+natural-support closure and A01 uncertainty keep their meanings. Headroom remains untuned and
+the exposed panel/coupled seeds supply no stable, independent or policy/MARL result. The next
+question is Direction Convergence on whether this selected-panel balanced residual family
+should continue and which scientific discriminator is justified. No new experiment or local
+family, lifecycle, priority or recast disposition is made at this boundary.
+
+References: CRTO_RAW_CENTERED_LOSS_B07_SCIENCE_CARD_20260905.md,
+CRTO_RAW_CENTERED_LOSS_B07_RESULT_EVIDENCE_20260905.md,
+CRTO_RAW_CENTERED_LOSS_B07_SEED01_RESULT_20260905.json,
+CRTO_RAW_CENTERED_LOSS_B07_SEED02_RESULT_20260905.json,
+CRTO_RAW_CENTERED_LOSS_B07_INTAKE_20260905.md.
