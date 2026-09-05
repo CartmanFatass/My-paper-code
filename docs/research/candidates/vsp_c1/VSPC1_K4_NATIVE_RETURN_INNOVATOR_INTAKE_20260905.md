@@ -100,3 +100,18 @@ Recommendation and selection: **(a)**. `Owner-delegated decision (unattended, 20
 Main's owner-review command returned no unapplied review on this intake pass. Per Root's explicit shared-surface ownership, this worktree edits only VSP-C1 documents; it does not write Portfolio, audit, owner inbox or reviews. Root can record the selections above, use the [Chinese decision packet](VSPC1_K4_FACTOR_VALUE_B01_OWNER_PACKET_20260905.json) with the owner-console command for the new card, and replace the Portfolio row's stale held-out-corner/partner wording with the selected full-support B pointer without changing lifecycle or priority. An owner reply is not a launch condition and none is fabricated.
 
 The next discriminator is the **actual seed-0 FACTOR versus GENERIC fixed-128-update return and nine-point learning curves** on the selected host. CM must implement and directly observe it under the card. Accepted run handles go to the existing shared experiment tracker, not to a duplicate observer. DM then compares both readable results with this card and selects the next bounded object-tier action from their actual observations. Strongest unresolved risks are implementation correctness, insufficient discrimination on an easy public-plan task, unmeasured learner movement/runtime, and initialization/optimization effects. None licenses an unrequested prelaunch census or converts absent evidence into a negative result.
+
+## Implementation handoff — 2026-09-05 follow-up
+
+Root integrated and pushed the complete archive/card commits and instructed continued execution
+of the already selected card §9. Current main at handoff was
+`481237e7a6654872a0e53f5cd422cbf7a190e0dd`; card content was unchanged. No live VSP-C1 CM existed,
+so the bounded native CM `/root/dm_amx_k4_vspc1_design/cm_am_vspc1_b01` was assigned the new
+attempt, thin runner, mirrored tests and
+`VSPC1_K4_FACTOR_VALUE_B01_CM_TECHNICAL_RECORD_20260905.md`. Its assignment includes independent
+review, proportionate technical verification and then direct serial execution of the two
+selected arm invocations at accepted, committed and pushed bytes with fresh remote admission.
+This continues decision 2, with no extra owner approval, GitHub capability pilot dependency,
+reference A, future seed, scientific alteration or enlarged budget. The DM retains scientific
+intake; Root retains shared records. A native engineering task has been assigned, but no
+result-bearing process has been reported accepted at this handoff.
