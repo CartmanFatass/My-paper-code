@@ -1,12 +1,12 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-05 (N3 complete intake; CBSC bounded reproduction; VNFC engineering-spec review; UCOPE final intake)
+Updated at: 2026-09-05 (N3 and CBSC scoped intakes complete; UCOPE branch decision applied; runtime specification Pro review dispatched)
 Owner: Root
 Current important-change authority: latest explicit owner approval applies CBSC/N3 B/B and delegates future same-kind specification changes plus their explicit Portfolio updates to complete appropriate-node Pro plans, with highlighted P1/P2 traces and no repeated owner vote. See `decisions/2026-09-05-pro-directed-spec-delegation.md`; historical authority/corrections remain preserved.
 Owner review maintenance: P1/P2 only (`OWNER_DIRECT`, 2026-09-05); P3/P4 creation, backfill and reminders retired. Preserve scientific evidence, audit and existing owner replies; see `decisions/2026-09-05-owner-review-p2-cutoff.md`.
 Lifecycle admission: 15 ACTIVE source IDs: the existing nine route agendas plus ACVC restored to the queue by the September5 owner review;7 PARKED reserves. Source IDs within a route do not create independent DM chains.
 Direction execution parallelism: target 5 concurrently advancing top-level DM chains (`OWNER_DIRECT`, 2026-09-04); off-roster `ACTIVE` directions are queued without lifecycle effect
-Loop state: ACTIVE / OWNER_DIRECT. CBSC performs one bounded publication failure reproduction; VNFC Root drives the Pro-selected exact batch feasibility/spec proposal; UCOPE DM integrates its complete branch-local PARK. N3 original A05 is complete at its specified stop boundary. Six Luna/max library studies plus the existing aggregator support Root specification drafting and count as no direction slots. No repeated owner approval is pending.
+Loop state: ACTIVE / OWNER_DIRECT. Root awaits the already-dispatched runtime specification Portfolio Pro review and will implement its complete plan under standing delegation. Six library studies and all 104 navigation AGENTS are archived. N3 A05 is complete; CBSC bounded repair ends with incomplete runtime acceptance; UCOPE branch-local PARK is applied. All accepted experiment handles are terminal. No repeated owner approval is pending.
 Nested execution capacity: no repository-level fixed limit on implementer sessions or result-bearing runs inside the working set (runtime availability and per-invocation resource admission still apply; `AGENTS.md` §5 and §7)
 Execution routing: `REMOTE_FIRST / ACTIVE` for prospectively portable result-bearing invocations via `.codex/hmasd-compute.toml`; local Windows remains control plane and constrained fallback
 Result-run memory floor: `4 GiB physical and effective available memory, freshly measured per invocation`
@@ -45,7 +45,7 @@ provenance, but result polarity never transfers into an accepting direction.
 | --- | --- | --- | --- | --- | --- |
 | active_post_churn_population_flow_identification | PARKED | LOW | ROOT | 2026-09-01T09:55:33Z | Current CCF collapses to a two-event XOR/DFA, but a scientifically independent non-reducible censored-flow question remains. Reactivate only after prospective acceptance of a non-XOR/non-DFA construction that matches low-order marginals yet requires opposite native actions or returns against a competent low-order controller. |
 | acvc | ACTIVE | MEDIUM | ROOT | 2026-09-05T11:35:03Z | ACTIVE/MEDIUM unchanged; recasts2/lowest sequencing retained. Actual R03 valid HC-C: exact compatible gain interval[0.0221975111,0.2139371014], upper below original1/4. Execute existing Pro finite-host learner-investment closure; no further calculation/learner selected. No whole-direction or general-history negative. Re-entry needs independently motivated host and proper direction authority. See ACVC_HISTORY_UPPER_PREFIX_R03_INTAKE_20260905.md. |
-| capability_bound_semantic_currentness | ACTIVE | HIGH | ROOT | 2026-09-05 current intake | Route N4. Approved cumulative repair source174A/429D independently reviewed and integrated363286861; smoke and19focused passed. Formal publication first hit confined B0 input path, reproduced and repaired by byte-identical input location. Next formal failed exit139 during JSON/address/host publication chain; all15tables+summary remain incomplete. One bounded same-source reproduction selected within remaining182.08s, main5e0fda872; no root-cause claim, host repair or learner. See CBSC_OMRC_B01_APPROVED_REPAIR_REPRO_SELECTION_20260905.md. |
+| capability_bound_semantic_currentness | ACTIVE | HIGH | ROOT | 2026-09-05 complete intake | Route N4. Approved source174A/429D independently accepted; smoke and19focused passed. Full publication exit139 was not reproduced by the sole same-source reproduction, which instead failed TypeError at token.py251. Full15tables+summary remain incomplete; neither root cause established. Scoped repair ends at technical intake, no fourth formal/host repair/learner. Cumulative focused124.49/300s is not automatic reinvestment. See CBSC_OMRC_B01_APPROVED_REPAIR_INTAKE_20260905.md; root004 application trace. |
 | commitment_residual_triggered_options | ACTIVE | MEDIUM | ROOT | 2026-09-05T11:28:54Z | Route K2. B07 valid COMPARATOR-LIMITED: REPLAN5/8 both, gains0.000001614431/0 inside diagnostic MEI. Fresh6Pro PRO_FINAL PARK_CURRENT_SELECTED_PANEL_BALANCED_RESIDUAL_FAMILY; retain B04 competent seed0 negative and later comparator limits/action sensitivity. No B08, recast or whole-direction lifecycle change. Re-entry needs a concrete native-value discriminator, not prior success. Exact archive and final intake integrated; see CRTO_BALANCED_FAMILY_CONVERGENCE_INTAKE_20260905.md. |
 | degraded_incumbent_shadow_handover | ACTIVE | MEDIUM | ROOT | 2026-09-05 current intake | Route N3. Complete original A05 accepted A05-SYNTHETIC-BOUNDARY-REPRODUCED; source A198/D0, four tests passed, formal runner2.233s/fullprocess2.40s under60s. All measurements retained, zero parameter displacement/learner/environment exposure. Original investment ends at intake, no production repair or successor. Main91170747e, P2 dish018 applied. See DISH_A05_APPROVED_INTAKE_20260905.md. |
 | ec4g_r1 | PARKED | LOW | ROOT | 2026-09-04T21:36:45Z | OWNER_DIRECT reserve; no independent research chain. Re-entry and preserved contrary evidence: `decisions/2026-09-04-adopt-nine-routes-and-resume.md`. Previous boundary: Repair B1 activity aggregation and continue adaptive dynamic receipt-content learning against Direct-tau, RAW, shuffled, and blinded controls. Prior B diagnostics remain adverse evidence, not terminal polarity. |
@@ -59,40 +59,35 @@ provenance, but result polarity never transfers into an accepting direction.
 | roster_consistent_latent_exploration | ACTIVE | MEDIUM | ROOT | 2026-09-01T09:55:33Z | Route N3 (状态保留、重建与迁移); coordinated as this route agenda. B/EXPLORE persistent-common versus containing FLEX finite-budget churn recovery, absorbing VSP-06 partner memory. Information-necessity claims remain structurally closed. |
 | scope_1s | PARKED | LOW | ROOT | 2026-09-04T21:36:45Z | OWNER_DIRECT reserve; no independent research chain. Re-entry and preserved contrary evidence: `decisions/2026-09-04-adopt-nine-routes-and-resume.md`. Previous boundary: B/EXPLORE real learner/trainer/evaluator wrapper for the exact Q16 carrier/current-only/deranged toy. Missing production authentication is not a toy-mechanism negative. |
 | semigroup_consistent_duration_model_policy | ACTIVE | HIGH | ROOT | 2026-09-04T19:38:07Z | Route K4 (跨时长共享、组合与负迁移); coordinated as this route agenda. A01 validly established one-sided duration-action relevance (`W=2498`, `R7=0`, `R13=1`); A02 validly stopped at `A02_EVENT_PHASE_POPULATION_NOT_ESTABLISHED` after 321 candidate missions. Convergence returned `PRO_FINAL=PARK_CURRENT_D6_ACTION_CHOICE_OBJECT_FAMILY`: only that A01/A02 family is direction-locally parked, with no successor authority; the broader Portfolio lifecycle remains `ACTIVE`. |
-| ucope | ACTIVE | HIGH | ROOT | 2026-09-05 current intake | Route K3. New6Pro post-interface Convergence fully archived, one Send, responsea1ed4517f38bf82b33eae027d3f6f6f120d383737945ad3193a67bc7fac06148. DM read complete answer: PARK only retained-policy root-residual localization branch at offset2000000, no next object/learner/recast; PA-B/TW-B retained. Full archive/intake integration underway. No whole-direction lifecycle/priority change. |
+| ucope | ACTIVE | HIGH | ROOT | 2026-09-05 complete intake | Route K3. Complete6Pro decision applied: PARK only retained-policy root-residual localization branch at offset2000000, including numerical-locus; no next object/learner/recast. PA-B/TW-B benefits and contrary full-competence facts retained. Exact archive and full intake integrated7def833f2; P2 ucope001 applied. Re-entry needs actual complete conformant diagnostic interface. Whole-direction lifecycle/priority unchanged. |
 | vap_folr_core | ACTIVE | MEDIUM | ROOT | 2026-09-05T10:21:03Z | Route N3. FOLR B04 valid WITHIN_MEI (+0.00260417 vs0.05) preserved. Owner ratified handover-source agenda. DISH B01 FTS-B0, A01 no source delivery and A02 endpoint-clearance witness are valid bounded diagnostics; source effect remains unestimated. Host/family Convergence returned CONTINUE with bounded host qualification; no historical B01 repeat. |
-| variable_n_fleet_churn | ACTIVE | HIGH | ROOT | 2026-09-05 current intake | Route N2. Complete6Pro cost Convergence CONTINUE only one exact outcome-blind batch feasibility E01, not a new scientific recast. Full2700s cap remains, no census or repeated old calibration. Proper Portfolio plan must settle single-thread exception and one proposed60s assessment/explicitCPU resources; standing owner delegation applies without another vote. Full intake05b1f42a5; Root drafting source-backed MARL runtime spec with6Luna/max library studies. Recasts2/lowestsequencing unchanged. |
+| variable_n_fleet_churn | ACTIVE | HIGH | ROOT | 2026-09-05 engineering review | Route N2. Direction6Pro selected only one outcome-blind exact batch feasibility E01; original2700s cap, science and recasts2/lowestsequencing unchanged. Correct Portfolio request2026-09-05-marl-runtime-spec-portfolio-01 dispatched once,31refs at635d80147, dispatch74bc4e57f. Complete runtime-spec/resource plan pending; no census or old calibration repeat. Six source studies/104AGENTS archived; no measured optimized speedup. P2 vnfc001 traces the direction decision; no repeated owner vote. |
 | vsp_02 | ACTIVE | LOW | ROOT | 2026-09-01T09:55:33Z | Route N3 (状态保留、重建与迁移); coordinated as this route agenda. B/EXPLORE competence-first Adam CARRY/RESET trajectories across lifecycle ages, with OEER as optimizer-history control. Equal exact success sets do not establish transient equivalence. |
 | vsp_03 | ACTIVE | LOW | ROOT | 2026-09-01T09:55:33Z | Route K1 (中断时机); coordinated as this route agenda. B/EXPLORE event-aware termination in a persistent-target semi-Markov toy against one-hit, dwell, debounce, hysteresis, and same-information generic controls. |
 | vsp_c1 | ACTIVE | MEDIUM | ROOT | 2026-09-01T09:55:33Z | Route K4 (跨时长共享、组合与负迁移); coordinated as this route agenda. B/EXPLORE `2x2x2` identity-by-period toy with a held-out fourth corner and partners. No-production-host evidence cannot decide bounded compositional learning. |
 
-## Current working-set refill after explicit owner approval
+## Current working set after completed intakes
 
-Four advancing chains, no extra direction counted for specialists or Transport:
+Root owns the source-backed runtime specification and the one VNFC feasibility investment review.
+Request `2026-09-05-marl-runtime-spec-portfolio-01` was dispatched exactly once to the existing
+Transport singleton; the pinned packet is under `pro_packets/20260905_marl_runtime_spec/pro_review_01/`.
+Read the complete returned archive before applying its plan. Dispatch acceptance is not a final
+provider decision; do not resend. The draft remains non-operative until that complete plan is applied.
 
-| Direction | Current responsible chain | Exact next bounded work |
+| Direction | Responsible chain at completed boundary | Current boundary |
 | --- | --- | --- |
-| N3 / DISH A05 | `/root/dm_amx_n3_approved` | Complete original A05 under owner-approved250addition/D0 exception; fullreview, originalverification/intake, nolearner |
-| CBSC | `/root/dm_amx_cbsc_approved` | Complete originalsevenfile repair under200addition/500deletion exception; Rootintegration beforefullr05offlinepublication/readback, technicalintakeonly |
-| UCOPE | `/root/dm_amx_ucope_queue`, Root receipt/intake | Newcorrect-nodeConvergence request2026-09-05-ucope-post-interface-convergence-01 acceptedonce, no providerdecision inferred |
-| VNFC | Root acting direction caller | Newcorrect-nodeConvergence request2026-09-05-vnfc-r03-cost-convergence-01 acceptedonce, including ownerCPP/batch/parallel feasibilityquestion |
+| N3 / DISH A05 | `/root/dm_amx_n3_approved` | Original A05 complete; no production repair or successor selected |
+| CBSC | `/root/dm_amx_cbsc_approved` | Bounded repair intake complete with runtime gap; no fourth formal or new repair investment |
+| UCOPE | `/root/dm_amx_ucope_queue` | Complete direction Pro branch-local PARK applied; no successor |
+| VNFC | Root acting direction caller | Runtime specification and exact E01 appendix under Portfolio Pro review |
 
-N3worktree C:/Projects/HMASD-worktrees/dm-n3-approved-20260905, branchcodex/dm-n3-approved-20260905;
-CBSCworktree C:/Projects/HMASD-worktrees/dm-cbsc-approved-20260905, branchcodex/dm-cbsc-approved-20260905.
-Both base d3710ffdd includes actualowner-approvedrules64364dfe0. UCOPEdraft5ceb96e4e was
-integrated3d0171e0d, then Root updatedauthority/refpin and renderedbothpacketsd3710ffdd.
-Both finalpackets reference3d0171e0d and werepushed beforeexactlyone dispatch each. Their
-DISPATCH.json records actualtoolacceptance, not providerSend orfinaldecision. Never resend.
+The five-chain scheduling target remains. Completed chains and six completed library scouts do not
+count as advancing directions. Queue assessment found vsp03/vspc1 still prospective host agendas;
+no fifth run or stopped family is revived merely to fill a slot. All accepted experiment handles
+are terminal. Shared tracker `/root/tracker_tl_experiments` receives any future accepted handles
+directly and retains process-only ownership. Earlier snapshots below are historical recovery evidence.
 
-The latest owner instruction is applied in AGENTS§4.7 and highlightedroot004/root005; neither
-CBSC/N3 nor future same-kind Pro specification plans wait for a repeatedowner vote. FSDcurrent
-family remainsatitsvalidPARK, FRRIEA02freshrefusal remainsisolated. Read-onlyqueueassessment
-found vsp03/vspc1 stillprospectivehostdefinition agendas, no alreadyselectedrunnableobject;
-no duplicatecensusorD6restartiscreatedsolelytofillthefifthslot. Targetfive remains, with
-furtherrefill atgenuineclean/runnableboundaries. Tracker/root/tracker_tl_experimentsreceives
-newacceptedhandlesdirectly; existinghandlesareterminal. Historicalsnapshotbelowispreserved.
-
-## Current unattended working set — 2026-09-05 successor
+## Earlier unattended working-set snapshot — 2026-09-05 successor
 
 Latest progress: FSD E4 census COMPLETE A/RECON,3/3 laws and288 unique candidate rows,
 zero learner exposure; complete DM intake integrated08ea837a0. Deterministic margin0;
@@ -138,8 +133,8 @@ two exploratory agendas (N3/N5), and one prospective agenda (K4) remain. The nin
 | --- | --- | --- | --- | --- |
 | N1 | 灵活 agent 数量 | 集合与关系表示 | 关系归纳与学习效率：`finite_resource_relational_inductive_efficiency` | R09源码合规、定向测试通过；正式调用16秒段错误，原因待复现，无有效结果 |
 | N2 | 灵活 agent 数量 | 成员变化后的恢复 | 恢复动作：`variable_n_fleet_churn` | 校准成本超限保留；ACTIVE排队，未启动完整枚举 |
-| N3 | 灵活 agent 数量 | 成员变化后的恢复 | 状态保留、重建与迁移：`roster_consistent_latent_exploration`, `vap_folr_core`, `degraded_incumbent_shadow_handover`, `vsp_02` | Convergence已CONTINUE；A04有效；A05唯一精简后仍超预算，未运行，工程返回 |
-| N4 | 灵活 agent 数量 | 成员变化后的恢复 | 旧信息有效性：`capability_bound_semantic_currentness` | 完整修复新增165行超例外上限，仍有资源标记及发布依赖；未接受、无r08 |
+| N3 | 灵活 agent 数量 | 成员变化后的恢复 | 状态保留、重建与迁移：`roster_consistent_latent_exploration`, `vap_folr_core`, `degraded_incumbent_shadow_handover`, `vsp_02` | 原A05已按批准例外完成并接收合成边界结果；无生产修复或后继 |
+| N4 | 灵活 agent 数量 | 成员变化后的恢复 | 旧信息有效性：`capability_bound_semantic_currentness` | 批准例外内源码已接受；完整发布及唯一复现分别失败，技术投入结束，无新r08 |
 | N5 | 灵活 agent 数量 | 资源配置与几何 | 配置结构与 FREE：`metric_ground_transport_allocation` | 全新6 Pro裁决暂存当前配置坐标家族，无后继实验；正式 intake 已整合，方向生命周期未变 |
 | K1 | 灵活 skill duration | 中断与续约 | 中断时机：`flexible_skill_duration`, `vsp_03` | E4完整3/3、288候选；6Pro可逆暂停当前固定K2 policy-gap学习分支，无后继实验；整方向ACTIVE/HIGH及vsp03独立问题不变 |
 | K2 | 灵活 skill duration | 中断与续约 | 动作边界学习：`commitment_residual_triggered_options` | B07有效但比较器仍不足；Convergence可逆暂存当前已选面板家族，无B08 |
