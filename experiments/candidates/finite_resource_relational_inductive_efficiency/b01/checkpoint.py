@@ -86,12 +86,20 @@ def _validate_work(value: Any, update: int) -> dict[str, Any]:
 
 
 def _validate_projection_audit(value: Any, update: int) -> dict[str, Any]:
-    fields = {
+    base_fields = {
         "first_tight_contact_update", "precontact_full_state_equal",
         "tight_projection_changed_coordinates", "wide_boundary_contact",
         "maximum_tight_overshoot", "cumulative_tight_displacement",
     }
-    if not isinstance(value, Mapping) or set(value) != fields:
+    fields = set(value) if isinstance(value, Mapping) else set()
+    accepted = (
+        base_fields,
+        base_fields | {"tight_projection_changed_indices"},
+        base_fields | {
+            "tight_projection_changed_indices", "continuation_audit_complete",
+        },
+    )
+    if fields not in accepted:
         raise B01ContractError("checkpoint projection audit fields differ")
     audit = dict(value)
     contact = audit["first_tight_contact_update"]
@@ -102,6 +110,21 @@ def _validate_projection_audit(value: Any, update: int) -> dict[str, Any]:
     changed = audit["tight_projection_changed_coordinates"]
     if type(changed) is not int or not 0 <= changed <= 18:
         raise B01ContractError("tight changed-coordinate count is outside the 18 beta coordinates")
+    indices = audit.get("tight_projection_changed_indices")
+    if indices is None:
+        indices = [] if changed == 0 else None
+    if indices is not None and (
+        not isinstance(indices, list)
+        or any(type(item) is not int or not 0 <= item < 18 for item in indices)
+        or indices != sorted(set(indices))
+        or len(indices) != changed
+    ):
+        raise B01ContractError("checkpoint tight changed-coordinate inventory differs")
+    complete = indices is not None
+    if "continuation_audit_complete" in audit and audit["continuation_audit_complete"] is not complete:
+        raise B01ContractError("checkpoint continuation audit completeness differs")
+    audit["tight_projection_changed_indices"] = None if indices is None else list(indices)
+    audit["continuation_audit_complete"] = complete
     if type(audit["wide_boundary_contact"]) is not bool:
         raise B01ContractError("wide boundary contact must be literal bool")
     for field in ("maximum_tight_overshoot", "cumulative_tight_displacement"):
@@ -154,6 +177,10 @@ def encode_checkpoint(
         encoded_optimizers[arm] = base64.b64encode(optimizer).decode("ascii")
     work0 = _validate_work(work, update)
     audit = _validate_projection_audit(projection_audit, update)
+    if audit["continuation_audit_complete"] is not True:
+        raise B01ContractError(
+            "new checkpoint encoding requires exact changed-coordinate continuation audit"
+        )
     if audit["first_tight_contact_update"] is None and (
         arm_state_bytes[LEARNED_ARMS[0]] != arm_state_bytes[LEARNED_ARMS[1]]
         or optimizer_state_bytes[LEARNED_ARMS[0]] != optimizer_state_bytes[LEARNED_ARMS[1]]
@@ -204,6 +231,12 @@ def decode_checkpoint(
     manifest0 = _bound_manifest(manifest, test_only=binding["test_only"])
     if payload["schema"] != expected_schema or payload["manifest_contract"] != manifest0:
         raise B01ContractError("checkpoint schema or manifest binding differs")
+    allowed_labels = (
+        [manifest0["seed_label"]] if binding["test_only"]
+        else manifest0["execution_labels"]
+    )
+    if expected_seed_label not in allowed_labels:
+        raise B01ContractError("expected checkpoint seed is outside this execution phase")
     if payload["seed_label"] != expected_seed_label or payload["update"] != expected_update:
         raise B01ContractError("checkpoint seed/update binding differs")
     if expected_update not in CHECKPOINTS:
@@ -241,6 +274,163 @@ def decode_checkpoint(
     payload["projection_audit"] = audit
     payload["invocation_binding"] = binding
     return payload
+
+
+def _resume_bridge_coordinate_order(update: int) -> tuple[str, ...]:
+    """Return the sole direct-byte coordinate inventory for one checkpoint."""
+
+    if update not in CHECKPOINTS:
+        raise B01ContractError("resume bridge checkpoint is outside the B01 curve")
+    coordinates: list[str] = []
+    if update == 0:
+        coordinates.append("uninterrupted_update_001_prestate")
+    else:
+        coordinates.append(f"uninterrupted_update_{update:03d}_postprojection")
+    if update < CHECKPOINTS[-1]:
+        next_update = update + 1
+        if update > 0:
+            coordinates.append(f"uninterrupted_update_{next_update:03d}_prestate")
+        coordinates.append(f"resumed_update_{next_update:03d}_prestate")
+    return tuple(coordinates)
+
+
+def validate_checkpoint_resume_bridge(
+    data: bytes, *, manifest: Mapping[str, Any], expected_seed_label: str,
+    expected_update: int,
+    state_coordinates: Mapping[str, Mapping[str, Mapping[str, bytes]]],
+    expected_test_only: bool | None = None,
+) -> dict[str, Any]:
+    """Validate the component-only direct-byte checkpoint/resume bridge.
+
+    The supplied coordinates are observations made by a caller around an
+    uninterrupted and a resumed execution.  This function validates those
+    bytes against the canonical checkpoint codec.  Codec validation decodes
+    each parameter blob into a ``LearnedArm`` value object, but this helper
+    does not construct or restore a Torch actor, optimizer, RNG, native
+    runtime, or file.  It therefore deliberately makes no training-transition
+    or production-readiness claim.
+    """
+
+    decoded = decode_checkpoint(
+        data,
+        manifest=manifest,
+        expected_seed_label=expected_seed_label,
+        expected_update=expected_update,
+        expected_test_only=expected_test_only,
+    )
+    expected_coordinates = _resume_bridge_coordinate_order(expected_update)
+    if (
+        not isinstance(state_coordinates, Mapping)
+        or set(state_coordinates) != set(expected_coordinates)
+    ):
+        raise B01ContractError("resume bridge coordinate inventory differs")
+
+    fields = {"model_state_bytes", "optimizer_state_bytes"}
+    for coordinate in expected_coordinates:
+        states = state_coordinates[coordinate]
+        if not isinstance(states, Mapping) or set(states) != set(LEARNED_ARMS):
+            raise B01ContractError(
+                f"resume bridge {coordinate} must bind exactly both learned arms"
+            )
+        for arm in LEARNED_ARMS:
+            arm_state = states[arm]
+            if not isinstance(arm_state, Mapping) or set(arm_state) != fields:
+                raise B01ContractError(
+                    f"resume bridge {coordinate}.{arm} direct state fields differ"
+                )
+            model = arm_state["model_state_bytes"]
+            optimizer = arm_state["optimizer_state_bytes"]
+            if type(model) is not bytes or model != decoded["arm_state_bytes"][arm]:
+                raise B01ContractError(
+                    f"resume bridge {coordinate}.{arm} direct model bytes differ"
+                )
+            if (
+                type(optimizer) is not bytes
+                or optimizer != decoded["optimizer_state_bytes"][arm]
+            ):
+                raise B01ContractError(
+                    f"resume bridge {coordinate}.{arm} direct optimizer bytes differ"
+                )
+
+    terminal = expected_update == CHECKPOINTS[-1]
+    return {
+        "schema": "FRRIE_B01_CHECKPOINT_RESUME_BRIDGE_COMPONENT_V1",
+        "seed_label": expected_seed_label,
+        "checkpoint": expected_update,
+        "coordinate_order": list(expected_coordinates),
+        "checkpoint_decode_complete": True,
+        "provided_resume_prestate_bytes_validated": not terminal,
+        "terminal_no_next_bridge": terminal,
+        "codec_only": True,
+        "training_transition_proven": False,
+        "training_validation_replay_complete": False,
+        "production_token": False,
+    }
+
+
+def continuation_state_from_decoded_checkpoint(decoded: Mapping[str, Any]) -> dict[str, Any]:
+    """Extract every non-model continuation field from one validated decode."""
+
+    required = {
+        "seed_label", "update", "frontier", "work", "projection_audit",
+        "arm_state_bytes", "optimizer_state_bytes",
+    }
+    if not isinstance(decoded, Mapping) or not required.issubset(decoded):
+        raise B01ContractError("decoded continuation checkpoint fields differ")
+    update = decoded["update"]
+    if update not in CHECKPOINTS:
+        raise B01ContractError("decoded continuation checkpoint update differs")
+    audit = _validate_projection_audit(decoded["projection_audit"], update)
+    if audit["continuation_audit_complete"] is not True:
+        raise B01ContractError("decoded checkpoint lacks exact continuation audit state")
+    work = _validate_work(decoded["work"], update)
+    expected_frontier = {
+        "training_update": update,
+        "training_episode_cursor": update * 64,
+        "evaluation_checkpoint_cursor": 0,
+        "completed_checkpoints": [item for item in CHECKPOINTS if item <= update],
+    }
+    if decoded["frontier"] != expected_frontier:
+        raise B01ContractError("decoded continuation frontier differs")
+    return {
+        "schema": "FRRIE_B01_TRAINER_CONTINUATION_STATE_V1",
+        "seed_label": decoded["seed_label"],
+        "update": update,
+        "first_tight_contact_update": audit["first_tight_contact_update"],
+        "precontact_full_state_equal": audit["precontact_full_state_equal"],
+        "tight_projection_changed_indices": list(
+            audit["tight_projection_changed_indices"]
+        ),
+        "wide_boundary_contact": audit["wide_boundary_contact"],
+        "maximum_tight_overshoot": audit["maximum_tight_overshoot"],
+        "cumulative_tight_displacement": audit["cumulative_tight_displacement"],
+        "work": work,
+        "frontier": dict(expected_frontier),
+    }
+
+
+def restore_trainer_continuation_state(
+    target: Any, decoded: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Restore via an explicit trainer-like continuation API and read back exactly."""
+
+    state = continuation_state_from_decoded_checkpoint(decoded)
+    restore = getattr(target, "restore_checkpoint_continuation_state", None)
+    observe = getattr(target, "checkpoint_continuation_state", None)
+    if not callable(restore) or not callable(observe):
+        raise B01ContractError(
+            "trainer target lacks explicit checkpoint continuation restore/readback API"
+        )
+    restore(state)
+    if observe() != state:
+        raise B01ContractError("trainer continuation state readback differs")
+    return {
+        "schema": "FRRIE_B01_TRAINER_CONTINUATION_RESTORE_RECEIPT_V1",
+        "seed_label": state["seed_label"], "checkpoint": state["update"],
+        "audit_state_complete": True, "work_frontier_complete": True,
+        "explicit_restore_api_used": True, "direct_readback_equal": True,
+        "complete": True,
+    }
 
 
 def snapshot_runtime(
@@ -335,6 +525,21 @@ def reopen_decode_restore_test_checkpoint0(
         raise B01ContractError("TEST checkpoint0 helper requires the canonical TEST seed")
     return _reopen_decode_restore_checkpoint(
         path, manifest=manifest, seed_label=seed_label, update=0,
+        expected_test_only=True,
+    )
+
+
+def reopen_decode_restore_test_checkpoint(
+    path: str | Path, *, manifest: Mapping[str, Any], seed_label: str, update: int,
+) -> dict[str, Any]:
+    """Literal TEST checkpoint restore at any legal B01 curve coordinate."""
+
+    from .constants import TEST_SEED_LABELS
+
+    if seed_label not in TEST_SEED_LABELS or update not in CHECKPOINTS:
+        raise B01ContractError("TEST checkpoint restore coordinate differs")
+    return _reopen_decode_restore_checkpoint(
+        path, manifest=manifest, seed_label=seed_label, update=update,
         expected_test_only=True,
     )
 

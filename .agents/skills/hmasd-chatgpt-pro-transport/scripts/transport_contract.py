@@ -365,6 +365,29 @@ def receipt_has_delivery_evidence(receipt: Mapping[str, Any] | None) -> bool:
     return False
 
 
+def verify_provider_selection(requirement: Mapping[str, str], *, visible_model: str,
+                              underlying_model: str, thinking_effort: str) -> None:
+    """Check the observed selector; 'Latest' alone does not identify a model."""
+    label, model = requirement.get("label"), requirement.get("model")
+    if label and visible_model != label:
+        if not (visible_model == requirement.get("mode") and underlying_model == model):
+            raise ValueError("provider model does not match the requested visible label")
+    if model and underlying_model != model:
+        if not (label and visible_model == label and underlying_model == requirement.get("selector_hint")):
+            raise ValueError("checked underlying provider model does not match")
+    mode = requirement.get("mode")
+    if mode and thinking_effort.split(",", 1)[0].strip() != mode:
+        raise ValueError("provider thinking mode does not match")
+
+
+def validate_response_identity(response: str, *, request_id: str, pinned_reference: str) -> None:
+    """Reject a capture of an earlier reply before archival; never send a repair prompt."""
+    if not request_id or not pinned_reference:
+        raise ValueError("request_id and pinned_reference are required")
+    if request_id not in response or pinned_reference not in response:
+        raise ValueError("RESPONSE_IDENTITY_MISMATCH: captured answer does not identify this request and ref")
+
+
 def validate_provider_context_reset_evidence(value: object) -> dict[str, object]:
     """Validate the narrow, caller-supplied evidence needed to quarantine a binding."""
 
@@ -373,6 +396,15 @@ def validate_provider_context_reset_evidence(value: object) -> dict[str, object]
     previous_request_id = value.get("previous_request_id")
     if not isinstance(previous_request_id, str) or not previous_request_id.strip():
         raise ValueError("provider_context_reset_evidence.previous_request_id must be non-empty")
+    if value.get("reset_authority") == "OWNER_DIRECT":
+        instruction = value.get("owner_instruction")
+        if not isinstance(instruction, str) or not instruction.strip():
+            raise ValueError("OWNER_DIRECT reset requires the owner's exact instruction")
+        return {
+            "previous_request_id": previous_request_id,
+            "reset_authority": "OWNER_DIRECT",
+            "owner_instruction": instruction,
+        }
     decision_outcome = value.get("decision_outcome")
     if decision_outcome not in RESET_DECISION_OUTCOMES:
         raise ValueError("provider_context_reset_evidence.decision_outcome must be DECISION_NOT_FORMED or BLOCKED")

@@ -14,7 +14,9 @@ after it accepts a handoff it performs the complete transport, wait, archive, an
 return-receipt lifecycle in this task. It is not an advice-only monitor and it does
 not delegate the same handoff recursively.
 
-**REQUIRED SUB-SKILL:** use `browser:control-in-app-browser` for the in-app browser.
+Use the available `mcp__cua_repl` browser API. Initialize it using the tool's documented
+entry point, then read the returned documentation before acting. Use only available
+browser methods; an unavailable export or locator API is not permission to resend.
 
 ## Input contract and authority
 
@@ -27,17 +29,25 @@ exactly one body source:
   when the page requires text before its Send control becomes enabled.
 
 Every canonical handoff must provide the exact creator Codex `source_thread_id`, its
-exact `parent_thread_id`, and the project Transport singleton `operator_thread_id`
-declared in `.codex/hmasd-transport.toml`. Treat all three as routing metadata, never as scientific content;
+exact `parent_thread_id`, and an explicit `operator_thread_id`. The default operator
+is the project singleton declared in `.codex/hmasd-transport.toml`.
+Treat all three as routing metadata, never as scientific content;
 do not infer them from the provider conversation URL, a task title, or prose.
 `parent_thread_id` is the sole completion or terminal-blocker receipt destination.
 `source_thread_id` identifies the handoff author but is not a receipt destination.
 `operator_thread_id` is the reusable Codex execution endpoint and never a
-provider-conversation binding or receipt destination. New canonical handoffs must
+provider-conversation binding or receipt destination. Default canonical handoffs must
 declare `dispatch_mode=REUSE_SINGLETON`, `operator_reuse_required=true`,
 `operator_model=gpt-5.6-luna`, and `operator_thinking=xhigh`; validate all four and
 reject a singleton ID that differs from the project config. Historical in-flight
 `CREATE_ON_DEMAND` requests may finish, but they do not authorize another task creation.
+
+When the owner explicitly asks Root/the caller to operate the browser personally,
+accept `dispatch_mode=CALLER_DIRECT`, `operator_thread_id=source_thread_id`, and the
+exact `owner_execution_instruction`. No singleton dispatch occurs. The caller follows
+this same transport lifecycle. When caller and parent are the same task, archive and
+intake locally without sending a message to itself; otherwise return the usual parent
+receipt. This exception changes the executor, not the provider model or decision node.
 
 An optional `reference_paths` list contains one or more absolute reference files
 for bounded noncanonical/legacy transport. Validate and hash every
@@ -106,22 +116,33 @@ The same direction therefore has two independent EM conversations, while Portfol
 has one conversation shared across direction scopes. Only one request may be active
 per binding; a later round reuses the same conversation after the preceding request
 is archived. If a mapping exists, continue that conversation; never create a replacement because
-of a timeout, stale tab, model mismatch, or uncertain click. A new mapping is bound
+of a timeout, stale tab, model mismatch, or uncertain click alone. A new mapping is bound
 only after a concrete `/c/<uuid>` URL is observed.
 Use `scripts/bind_conversation.py` for the first binding and every idempotent retry;
 it refuses a different conversation ID for an already-bound key.
 
 Normal operation reuses the same bound conversation serially. A provider-context
-reset is the sole exception and is available only when the handoff explicitly sets
+replacement requires the handoff to explicitly set
 `reset_invalid_provider_context=true` with complete
-`provider_context_reset_evidence`: the immediately previous round is `ARCHIVED`,
+`provider_context_reset_evidence`. There are two supported reasons:
+
+- **Owner-directed new conversation:** `reset_authority=OWNER_DIRECT`, the exact
+  `owner_instruction`, and `previous_request_id`. This covers an explicit request
+  to use a new conversation for a new model. Preserve the entire prior record and
+  all accepted-send facts, even if its generation is unfinished. Do not claim that
+  its answer was contaminated, blocked, or scientifically negative. Stop the old
+  operator's future actions and retire its superseded wake before taking over; an
+  accepted provider generation need not be stopped. Use a distinct request ID.
+- **Automated contaminated-context recovery:** the immediately previous round is `ARCHIVED`,
 its final outcome is `DECISION_NOT_FORMED` or `BLOCKED`, it read exactly zero
 repository paths, and acknowledged provider-context contamination is traced to a
 named prompt defect. Before reset admission, archive those actual facts in
 `archive.provider_context_reset_facts`; compare every caller field to that persisted
-record and refuse missing or mismatched facts without mutation. Do not accept a
-pending request, a caller replacement ID, or an ordinary bad answer as a reset. Before page actions, call
-`scripts/bind_conversation.py:prepare_context_reset` to atomically quarantine the
+record and refuse missing or mismatched facts without mutation. A pending request
+or an ordinary bad answer does not qualify for this automated route.
+
+For either reason, the caller must not invent a replacement provider ID. Before page
+actions, call `scripts/bind_conversation.py:prepare_context_reset` to retire the
 old provider ID and leave the binding with no active provider conversation. The old
 ID is permanently unavailable to every binding. Then create no provider conversation
 by inference: only after a successful send produces a newly observed webpage
@@ -130,7 +151,9 @@ by inference: only after a successful send produces a newly observed webpage
 evidence are routing metadata; never put them in the body, reference manifest, or
 provider-visible companion text. That replacement is persisted directly as
 `SEND_CONFIRMED` with one send click and durable send evidence; it may proceed only
-to generation waiting, never to another Send action.
+to generation waiting, never to another Send action. Repeating preparation with the
+same request and evidence is idempotent. The legacy `quarantined_conversations`
+storage name includes owner-retired conversations; it does not label their science.
 
 ## Browser and model preflight
 
@@ -142,14 +165,30 @@ load delay. After every navigation, reload, click, or upload, take a fresh DOM s
 check before the next action. The tab handle is a lease, not the conversation
 identity; persist `conversation_id` and `provider_url` before handing off to a wake.
 
-Identify the model from the page, never from the account plan. Require visible
-`Pro`, then open the selector and require the `Pro, 5 of 5.` indicator and the
-checked underlying model shown by the page (currently `GPT-5.6 Sol`). The closed
-control is labelled `Pro`; while open it may be labelled `Thinking effort`, so use
-state-based fallback locators rather than one hard-coded accessible name. If the
-required Pro state cannot be verified, stop before typing or sending. If a switch is
-needed, select Pro, wait for the resulting page update, and re-check the composer
-and exact input.
+Identify the model from the page, never from the account plan or the closed `Pro`
+label alone. Read the provider selection in `.codex/hmasd-transport.toml` separately
+from the Codex executor model: the owner's 2026-09-04 requirement is **GPT-6 Astra
+in Pro mode (6 Pro)**. Verify the configured tuple with
+`scripts/transport_contract.py:verify_provider_selection`. The successfully observed
+UI has the closed label **`6 Pro`**, checked model **`Latest`**, and effort
+**`Pro, 5 of 5.`**. `Latest` is accepted only together with the configured `6 Pro`
+label; it is not a model identity by itself. An explicit checked `GPT-6 Astra` is
+also valid with Pro mode. Record the exact labels, not an inferred model name.
+The UI may label the open control `Thinking
+effort`, so use current state-based locators rather than a single hard-coded name.
+If the required 6 Pro state cannot be verified, stop before typing or sending and
+report the exact available state; do not substitute GPT-5.6 Sol or a non-Pro mode.
+If a switch is needed on an idle conversation, select the required model and Pro
+mode, wait for the page update, and re-check the composer and exact input.
+
+An owner model change after a confirmed Send does not change the model of that
+accepted request. Preserve its original model and one-send evidence; do not switch
+an active generation or resend its request ID. A newly authorized review under the
+new model uses a distinct caller-supplied handoff. Normally it reuses the binding
+after the prior archive; an explicit owner request for a new conversation uses the
+owner-directed replacement above. Never keep retrying an old conversation that
+does not expose the requested model. Record the prior
+answer as superseded for the owner's model requirement, not as a scientific negative.
 
 ## Exact input and one-send rule
 
@@ -187,6 +226,8 @@ split back out for upload.
 After the verified packet is ready, click Send once. Record `SEND_ATTEMPTED`, then re-observe:
 
 - `/c/<uuid>` plus a visible exact user-message node is `SEND_CONFIRMED`;
+- a transient `/c/WEB:<uuid>` is a client URL awaiting the concrete provider UUID;
+  keep observing the same tab without another Send;
 - a URL change without the user node is `SEND_UNCERTAIN`;
 - an unchanged URL, unchanged composer, enabled Send control, and no user node are
   the only positive evidence that a pre-send click failed and may permit one retry
@@ -197,6 +238,9 @@ file group and its recorded hash to be associated with the bound conversation; t
 provider-visible filename need not equal the local basename. Never retry an uncertain
 or mismatched send, never open a second conversation, and never silently alter
 whitespace, file selection, reference order, or prompt text.
+Persist the exact user-message ID or another unique DOM identity when available,
+alongside its text and attachment association. A file chip proves page association;
+its byte identity comes from the pre-upload local hash, not from its display name.
 
 ### Locator hit-point mismatch recovery
 
@@ -207,9 +251,9 @@ observed failure mode is an exact Send prompt locator with `matchCount=1`,
 as a locator coordinate offset, not as `SEND_FAILED_PRE_SEND` and not as evidence
 that a submission occurred.
 
-Before making any classification, take fresh DOM state and call
-`dom_cua.get_visible_dom()`. Select the exact visible Send prompt `node_id` from that
-fresh DOM; do not guess coordinates or reuse a stale node. A single DOM-node click is
+Before making any classification, take fresh DOM state using the current browser
+API. Select the exact visible Send prompt node from that fresh DOM; do not guess
+coordinates or reuse a stale node. A single DOM-node click is
 permitted only when all of the following are true: the URL is unchanged from the
 pre-send observation, no visible user-message node exists for the exact prompt, and
 fresh locator diagnostics still prove that this exact Send control is enabled and
@@ -248,7 +292,10 @@ open unless the user has separately authorized its closure.
 
 Natural completion requires an explicit completed status, no active generation
 control, and a complete assistant message in the same conversation. Capture the
-assistant node exactly; partial streamed text is not an archive.
+assistant node paired with this request's recorded user message, not the first or
+last unscoped assistant/copy control in a long conversation. `Worked for ...` with
+response actions and no active generation is a completed status. Partial streamed
+text is not an archive.
 
 ## Archive and tab lifecycle
 
@@ -256,6 +303,16 @@ Write one canonical packet manifest plus exact UTF-8 prompt, reference-file, and
 response artifacts and a transport-fact file containing workflow node, binding
 key, direction scope, conversation, tab, model, source mode/path, timestamps,
 hashes, reference hashes, send evidence, wait status, and archive status.
+Record the paired user and assistant message identities. Use that response's Copy
+control and the browser clipboard API to preserve Markdown when available. For
+new Prompt Author packets, compare the response's request ID and pinned reference
+with `validate_response_identity` before accepting it as this request's archive.
+A mismatch means inspect the same conversation for the correct paired answer;
+preserve the mismatched capture as evidence and never submit a correction or repeat
+the packet automatically. Missing echoed fields require manual pairing inspection,
+not a new scientific verdict or another Send. A legacy response is identified by
+its recorded user/assistant pair and exact question, not retroactively required to
+echo fields its prompt never requested.
 Deduplicate by `(conversation_binding_key, request_id, conversation_id,
 response_sha256)`; an identical existing archive is
 idempotent, while a different response for the same key is a conflict and must not
@@ -268,6 +325,10 @@ sufficient reason to close it; closure occurs only after natural completion and
 archive verification.
 
 ### Completion receipt to the parent session
+
+For owner-directed `CALLER_DIRECT` execution with caller equal to parent, record
+local completion/intake and zero message attempts; do not stage or send a self-receipt.
+All other routes retain the following completion procedure.
 
 After a response is durably archived and hash-verified, call
 `scripts/transport_contract.py:stage_receipt` to stage exactly one structured
@@ -305,6 +366,11 @@ handoffs may be queued or active concurrently in other provider conversations, b
 their tabs, heartbeat IDs, facts, archives, receipts, and idempotency keys remain
 strictly request-scoped. Never reuse one request's heartbeat for another or leave a
 retired request heartbeat active merely because the singleton remains alive.
+Never multiplex a later owner-authored follow-up into the already archived request.
+Record its exact user-message identity separately and watch its paired response
+without sending anything. If the owner starts participating in an agent-created
+conversation, keep its tab open for that continuing use; finish only the earlier
+request's archive and wake cleanup. Apply the owner's new scope before intake.
 
 When a later wake needs a lost or stale page, create at most one recovery tab in the
 same in-app browser and navigate to the persisted exact `provider_url`. Verify the
@@ -324,6 +390,12 @@ lease handle. A tab ID without an exact URL/conversation observation is not moni
 evidence; it must produce `MONITOR_IDENTITY_MISMATCH` and stop recovery.
 
 ## Stop conditions
+
+An owner stop or takeover cancels the old operator's future actions for that
+request. Persist whether a provider Send was accepted (including uncertainty),
+retire only that operator's superseded wake, and return one factual handover. Do
+not resume browser actions, correct the prompt, or dispatch another operator after
+the stop. Root can adopt a proven accepted request without another Send.
 
 Stop and report the exact state on unknown direction, missing prompt, failed Pro
 verification, incomplete upload, uncertain/mismatched submission, stale/ambiguous

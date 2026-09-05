@@ -349,7 +349,7 @@ def prepare_context_reset(
     reset_invalid_provider_context: bool,
     provider_context_reset_evidence: object,
 ) -> dict:
-    """Quarantine one evidenced bad provider context before any replacement send.
+    """Retire an owner-selected or evidenced bad context before a replacement send.
 
     This is deliberately separate from `bind`: after this function returns the
     binding has no active provider conversation, and only a post-send webpage
@@ -361,30 +361,47 @@ def prepare_context_reset(
     if not isinstance(replacement_request_id, str) or not replacement_request_id.strip():
         raise ValueError("replacement_request_id must be non-empty")
     evidence = validate_provider_context_reset_evidence(provider_context_reset_evidence)
+    owner_direct = evidence.get("reset_authority") == "OWNER_DIRECT"
+    if replacement_request_id == evidence["previous_request_id"]:
+        raise ValueError("replacement requires a distinct request_id; an accepted request is never resent")
     resolved_path = registry_path.resolve()
     with registry_lock(resolved_path):
         registry = _load(resolved_path)
         record = registry["bindings"].get(conversation_binding_key)
         if not isinstance(record, dict):
             raise ValueError("CONTEXT_RESET_UNAVAILABLE: binding does not exist")
-        if record.get("state") != "ARCHIVED":
+        if record.get("state") == "CONTEXT_RESET_PENDING":
+            pending = record.get("pending_context_reset") or {}
+            if pending.get("replacement_request_id") == replacement_request_id and pending.get("evidence") == evidence:
+                return record
+            raise ValueError("CONTEXT_RESET_UNAVAILABLE: a different replacement is already pending")
+        if record.get("state") != "ARCHIVED" and not owner_direct:
             raise ValueError("CONTEXT_RESET_UNAVAILABLE: binding has an active or non-archived request")
         if record.get("request_id") != evidence["previous_request_id"]:
             raise ValueError("CONTEXT_RESET_UNAVAILABLE: evidence does not name the immediately previous request")
-        try:
-            archived_facts = archived_provider_context_reset_facts(record)
-        except ValueError as exc:
-            raise ValueError(f"CONTEXT_RESET_UNAVAILABLE: {exc}") from exc
-        if archived_facts["request_id"] != record["request_id"]:
-            raise ValueError("CONTEXT_RESET_UNAVAILABLE: archived facts do not name the immediately previous request")
-        for field in (
-            "decision_outcome",
-            "repository_paths_read",
-            "provider_context_contamination_acknowledged",
-            "acknowledged_prompt_defect",
-        ):
-            if archived_facts[field] != evidence[field]:
-                raise ValueError(f"CONTEXT_RESET_UNAVAILABLE: caller evidence disagrees with archived {field}")
+        if owner_direct:
+            # Retirement preserves the complete old state, including an unfinished
+            # generation; it does not relabel an answer or stop the provider.
+            archived_facts = {
+                "request_id": record["request_id"],
+                "state": record.get("state"),
+                "prior_record": json.loads(json.dumps(record)),
+            }
+        else:
+            try:
+                archived_facts = archived_provider_context_reset_facts(record)
+            except ValueError as exc:
+                raise ValueError(f"CONTEXT_RESET_UNAVAILABLE: {exc}") from exc
+            if archived_facts["request_id"] != record["request_id"]:
+                raise ValueError("CONTEXT_RESET_UNAVAILABLE: archived facts do not name the immediately previous request")
+            for field in (
+                "decision_outcome",
+                "repository_paths_read",
+                "provider_context_contamination_acknowledged",
+                "acknowledged_prompt_defect",
+            ):
+                if archived_facts[field] != evidence[field]:
+                    raise ValueError(f"CONTEXT_RESET_UNAVAILABLE: caller evidence disagrees with archived {field}")
         old_conversation_id = record.get("conversation_id")
         old_provider_url = record.get("provider_url")
         if not isinstance(old_conversation_id, str) or not UUID_RE.fullmatch(old_conversation_id):
@@ -396,7 +413,7 @@ def prepare_context_reset(
             "conversation_id": old_conversation_id,
             "provider_url": old_provider_url,
             "conversation_binding_key": conversation_binding_key,
-            "reason": "acknowledged_provider_context_contamination_from_prompt_defect",
+            "reason": "owner_requested_new_conversation" if owner_direct else "acknowledged_provider_context_contamination_from_prompt_defect",
             "archived_facts": archived_facts,
             "requested_evidence": evidence,
         }
@@ -696,6 +713,16 @@ def bind(args: argparse.Namespace) -> int:
             )
         if old is not None:
             if reset_invalid_provider_context:
+                completed_reset = old.get("last_provider_context_reset") or {}
+                if (
+                    completed_reset.get("replacement_request_id") == args.request_id
+                    and completed_reset.get("evidence") == reset_evidence
+                    and all(old.get(field) == getattr(args, field, None) for field in (
+                        "request_id", "conversation_id", "provider_url", "prompt_sha256",
+                        "source_thread_id", "parent_thread_id", "operator_thread_id",
+                    ))
+                ):
+                    return _result({"bound": True, "idempotent": True, "state": "BOUND", "record": old})
                 return _result(
                     {
                         "bound": False,

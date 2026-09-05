@@ -107,6 +107,14 @@ whose corrections are incorporated. No experiment was run and no scientific obje
   first-class object, invest only where a MARL structure binds, fewer directions on the production
   host, three readings written before the run), six actions with tiers, a proposed ACTIVE/PARK
   disposition for all 22 directions, and the [DECIDE]/[ASK] items.
+- `RESEARCH_STATUS_AND_ADVICE_20260904.md` — read-only status check at the owner-directed pause
+  (`origin/main` `e4c0c93c7`, 2026-09-05T02:00Z): loop state and zero live compute verified on
+  both nodes, the day's throughput counts, the nine routes' latest results and boundaries, the
+  assessment (every learner comparison inside its MEI from one-seed objects; three of six invested
+  entries held by the 30% orchestration rule; VNFC census 129× over its cap; 208 inbox items with
+  2 answered; serial CPU-only compute), and ten advice items with [DECIDE]/[ASK] markers plus a
+  proposed resume order (finish E3 concurrently, amend the rule, park or recast VNFC, no more
+  one-seed rungs, E2b on the UAV host next).
 - `CODEBASE_LAYOUT_STANDARD_20260903.md` — alignment draft for the directory standard: nine
   principles-to-application sections (target layout, candidate directories, tests, scripts,
   scratch/worktrees/branches/git hygiene, `.gitignore` rewrite, layered `AGENTS.md` with one-line

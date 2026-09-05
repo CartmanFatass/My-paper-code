@@ -1,0 +1,21 @@
+1 :: MULTI-AGENT   | REINFORCEMENT   | LEARNING | FOUNDATIONS AND   | MODERN APPROACHES | Stefano V. Albrecht   | Filippos Christianos  | Lukas Schäfer | 1 | 
+16 :: Summary of Notation | Sets are denoted with capital letters. | Elements of sets are denoted with lower-case letters. | Time index t (or τ) is shown in super
+20 :: List of Figures | 1.1 | Schematic of a multi-agent system. | 2 | 1.2 | A level-based foraging task. | 4 | 1.3 | Schematic of multi-agent reinforcement learning. | 6 | 1.4
+26 :: Preface | Multi-agent reinforcement learning (MARL) is a varied and highly active field | of research. With the introduction of deep learning to MARL in t
+30 :: 1 | Introduction | Imagine a scenario in which a collective of autonomous agents, each capable | of making its own decisions, must interact in a shared envi
+46 :: I | FOUNDATIONS OF MULTI-AGENT REINFORCEMENT | LEARNING | Part I of this book covers the foundations of multi-agent reinforcement learning. | The chapters in 
+48 :: 2 | Reinforcement Learning | Multi-agent reinforcement learning (MARL) is, in essence, reinforcement learn- | ing (RL) applied to multi-agent game models to
+72 :: 3 | Games: Models of Multi-Agent Interaction | Chapter 1 introduced the general idea of agents that interact in a shared envi- | ronment to achieve specifie
+90 :: 4 | Solution Concepts for Games | What does it mean for agents to interact optimally in a multi-agent system? | In other words, what is a solution to a game
+118 :: 5 | Multi-Agent Reinforcement Learning in Games: | First Steps and Challenges | The preceding chapters introduced game models as a formalism of multi-agent | 
+144 :: 6 | Multi-Agent Reinforcement Learning: | Foundational Algorithms | In Chapter 5, we took some first steps toward applying RL to compute solu- | tions in game
+188 :: II | MULTI-AGENT DEEP REINFORCEMENT LEARNING: | ALGORITHMS AND PRACTICE | Part II of this book will build on the foundations introduced in Part I and presen
+190 :: 7 | Deep Learning | In this chapter, we provide a concise introduction to deep learning, a learning | framework for function approximation. The chapter begi
+212 :: 8 | Deep Reinforcement Learning | In Part I, we represented value functions with tables. After encountering a | particular state, only its corresponding val
+248 :: 9 | Multi-Agent Deep Reinforcement Learning | In Chapter 8, we saw that tabular MARL algorithms, introduced in Part I, | are limited because their value fun
+334 :: 10 | Multi-Agent Deep Reinforcement Learning in | Practice | In this chapter, we will dive into the implementation of MARL algorithms. The | book comes with a
+348 :: 11 | Multi-Agent Environments | Chapter 3 introduced a hierarchy of game models to formalize interaction | processes in multi-agent systems, including norma
+366 :: A | Surveys on Multi-Agent Reinforcement Learning | At the time of writing this book, MARL is a highly active and fast-moving | field of research, which is 
+370 :: References | Albrecht, Stefano V., Jacob W. Crandall, and Subramanian Ramamoorthy. 2015. “An | empirical study on the practical impact of prior beliefs ov
+392 :: Index | ϵ-Nash equilibrium, 70 | ϵ-greedy, 34, 187, 195 | N-step returns, 203, 205 | absorbing states, 26 | action, 2, 20, 22 | action-value functions, 27 | activat
+395 :: 366 | Index | target network, 188 | targeted optimality and safety, 112 | temporal credit assignment, 106 | temporal-difference learning, 32 | theory of mind, 273

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from copy import deepcopy
 from dataclasses import dataclass
 from typing import Any, Mapping, Sequence
 
@@ -22,6 +23,7 @@ from .constants import (
     PARAMETER_DISTANCE_LAYOUT_SCHEMA, PARAMETER_DISTANCE_BETA_FLAT_START,
     PARAMETER_DISTANCE_BETA_FLAT_END, PARAMETER_DISTANCE_BETA_BYTE_START,
     PARAMETER_DISTANCE_BETA_BYTE_END,
+    CHECKPOINTS,
 )
 from .contract import B01ContractError
 from .contract import canonical_json_bytes
@@ -430,6 +432,10 @@ class PairedB01Trainer:
         self.maximum_tight_overshoot = 0.0
         self.cumulative_tight_displacement = 0.0
         self.wide_boundary_contact = False
+        self._continuation_seed_label: str | None = None
+        self._continuation_update = 0
+        self._continuation_work: Mapping[str, Any] | None = None
+        self._continuation_frontier: Mapping[str, Any] | None = None
 
     def _state_equal(self) -> bool:
         left, right = LEARNED_ARMS
@@ -510,14 +516,254 @@ class PairedB01Trainer:
         self.wide_boundary_contact = proposed_wide
         return receipts
 
+    def update_with_direct_rows(
+        self, batches: Mapping[str, B01ArmBatch], *,
+        collection_audits: Mapping[str, Any], update: int,
+        expected_seed_label: str,
+        expected_root: bytes,
+    ) -> dict[str, Any]:
+        """Atomically update, validate direct rows, and advance continuation state.
+
+        This is the B01 induction transaction.  Model/Adam, projection audit,
+        cumulative work, and the publication frontier either all advance from
+        ``update-1`` to ``update`` or all return to their direct prestates.
+        """
+
+        from .training_shards import (
+            actual_direct_training_row, validate_actual_direct_row_chain_step,
+            validate_actual_paired_direct_rows,
+        )
+
+        if set(batches) != set(LEARNED_ARMS) or set(collection_audits) != set(LEARNED_ARMS):
+            raise B01ContractError("paired direct transaction inventory differs")
+        if self._continuation_update != update - 1:
+            raise B01ContractError("paired direct transaction continuation frontier differs")
+        prior_continuation = self.checkpoint_continuation_state()
+        prior_audit = self.projection_audit()
+        prior_states = {
+            arm: (
+                self.models[arm].parameter_bytes(),
+                encode_optimizer_state(self.models[arm], self.trainers[arm].optimizer),
+            )
+            for arm in LEARNED_ARMS
+        }
+        try:
+            receipts = self.update(batches, update=update)
+            rows = {
+                arm: actual_direct_training_row(
+                    receipt=receipts[arm], batch=batches[arm],
+                    collection_audit=collection_audits[arm],
+                )
+                for arm in LEARNED_ARMS
+            }
+            paired = validate_actual_paired_direct_rows(
+                rows, expected_update=update,
+                expected_seed_label=expected_seed_label,
+                expected_root=expected_root,
+            )
+            chains = {
+                arm: validate_actual_direct_row_chain_step(
+                    rows[arm], expected_update=update,
+                    previous_model_post_projection=prior_states[arm][0],
+                    previous_optimizer_post_projection=prior_states[arm][1],
+                )
+                for arm in LEARNED_ARMS
+            }
+            work = deepcopy(prior_continuation["work"])
+            for arm in LEARNED_ARMS:
+                ledgers = batches[arm].collection_ledgers
+                reset = sum(item.native_reset_calls for item in ledgers)
+                observe = sum(item.native_observe_calls for item in ledgers)
+                step = sum(item.native_step_calls for item in ledgers)
+                row = work[arm]
+                ledger = row["native_batch_ledger"]
+                row.update({
+                    "training_update": update,
+                    "episodes": row["episodes"] + 64,
+                    "environment_slots": row["environment_slots"] + 4_928,
+                    "backward_calls": row["backward_calls"] + 1,
+                    "adam_steps": row["adam_steps"] + 1,
+                    "native_batch_calls": row["native_batch_calls"] + reset + observe + step,
+                })
+                ledger.update({
+                    "reset_calls": ledger["reset_calls"] + reset,
+                    "observe_calls": ledger["observe_calls"] + observe,
+                    "step_calls": ledger["step_calls"] + step,
+                    "environment_slots": ledger["environment_slots"] + 4_928,
+                })
+            if work[LEARNED_ARMS[0]] != work[LEARNED_ARMS[1]]:
+                raise B01ContractError("paired direct transaction cumulative work differs")
+            completed = list(prior_continuation["frontier"]["completed_checkpoints"])
+            if update in CHECKPOINTS and update not in completed:
+                completed.append(update)
+            self._continuation_update = update
+            self._continuation_work = work
+            self._continuation_frontier = {
+                "training_update": update,
+                "training_episode_cursor": update * 64,
+                "evaluation_checkpoint_cursor": prior_continuation["frontier"][
+                    "evaluation_checkpoint_cursor"
+                ],
+                "completed_checkpoints": completed,
+            }
+            continuation = self.checkpoint_continuation_state()
+            if continuation["update"] != update or continuation["work"] != work:
+                raise B01ContractError("paired direct transaction continuation readback differs")
+            return {
+                "schema": "FRRIE_B01_COMMITTED_DIRECT_UPDATE_V1",
+                "receipts": receipts, "rows": rows, "paired": paired,
+                "chains": chains, "continuation": continuation,
+            }
+        except Exception as exc:
+            for arm in LEARNED_ARMS:
+                model_bytes, optimizer_bytes = prior_states[arm]
+                load_actor_and_optimizer_state(
+                    self.models[arm], self.trainers[arm].optimizer,
+                    model_bytes, optimizer_bytes, expected_update=update - 1,
+                )
+            self.first_tight_contact_update = prior_continuation[
+                "first_tight_contact_update"
+            ]
+            self.precontact_full_state_equal = prior_continuation[
+                "precontact_full_state_equal"
+            ]
+            self.changed_coordinates = set(
+                prior_continuation["tight_projection_changed_indices"]
+            )
+            self.wide_boundary_contact = prior_continuation["wide_boundary_contact"]
+            self.maximum_tight_overshoot = prior_continuation[
+                "maximum_tight_overshoot"
+            ]
+            self.cumulative_tight_displacement = prior_continuation[
+                "cumulative_tight_displacement"
+            ]
+            self._continuation_seed_label = prior_continuation["seed_label"]
+            self._continuation_update = prior_continuation["update"]
+            self._continuation_work = deepcopy(prior_continuation["work"])
+            self._continuation_frontier = deepcopy(prior_continuation["frontier"])
+            if (
+                self.projection_audit() != prior_audit
+                or self.checkpoint_continuation_state() != prior_continuation
+                or any(
+                    self.models[arm].parameter_bytes() != prior_states[arm][0]
+                    or encode_optimizer_state(
+                        self.models[arm], self.trainers[arm].optimizer,
+                    ) != prior_states[arm][1]
+                    for arm in LEARNED_ARMS
+                )
+            ):
+                raise RuntimeError("B01 direct transaction rollback failed") from exc
+            raise B01ContractError(
+                "B01 direct transaction failed; state/work/frontier rolled back"
+            ) from exc
+
     def projection_audit(self) -> dict[str, Any]:
         return {
             "first_tight_contact_update": self.first_tight_contact_update,
             "precontact_full_state_equal": self.precontact_full_state_equal,
             "tight_projection_changed_coordinates": len(self.changed_coordinates),
+            "tight_projection_changed_indices": sorted(self.changed_coordinates),
             "wide_boundary_contact": self.wide_boundary_contact,
             "maximum_tight_overshoot": self.maximum_tight_overshoot,
             "cumulative_tight_displacement": self.cumulative_tight_displacement,
+        }
+
+    def restore_checkpoint_continuation_state(self, state: Mapping[str, Any]) -> None:
+        """Explicitly restore every non-model field used by continued training."""
+
+        fields = {
+            "schema", "seed_label", "update", "first_tight_contact_update",
+            "precontact_full_state_equal", "tight_projection_changed_indices",
+            "wide_boundary_contact", "maximum_tight_overshoot",
+            "cumulative_tight_displacement", "work", "frontier",
+        }
+        if not isinstance(state, Mapping) or set(state) != fields or state.get(
+            "schema"
+        ) != "FRRIE_B01_TRAINER_CONTINUATION_STATE_V1":
+            raise B01ContractError("trainer continuation state fields differ")
+        update = state["update"]
+        contact = state["first_tight_contact_update"]
+        indices = state["tight_projection_changed_indices"]
+        if (
+            update not in CHECKPOINTS
+            or (contact is not None and (type(contact) is not int or not 1 <= contact <= update))
+            or not isinstance(indices, list)
+            or indices != sorted(set(indices))
+            or any(type(item) is not int or not 0 <= item < 18 for item in indices)
+            or type(state["precontact_full_state_equal"]) is not bool
+            or type(state["wide_boundary_contact"]) is not bool
+            or state["precontact_full_state_equal"] is not True
+        ):
+            raise B01ContractError("trainer continuation audit values differ")
+        for field in ("maximum_tight_overshoot", "cumulative_tight_displacement"):
+            value = state[field]
+            if isinstance(value, bool) or not isinstance(value, (int, float)) or value < 0:
+                raise B01ContractError("trainer continuation movement values differ")
+        if contact is None and (
+            indices or state["maximum_tight_overshoot"] != 0
+            or state["cumulative_tight_displacement"] != 0
+        ):
+            raise B01ContractError("trainer no-contact continuation audit differs")
+        if contact is not None and (
+            not indices or state["maximum_tight_overshoot"] <= 0
+            or state["cumulative_tight_displacement"] <= 0
+        ):
+            raise B01ContractError("trainer contact continuation audit differs")
+        frontier = state["frontier"]
+        if not isinstance(frontier, Mapping) or frontier.get("training_update") != update:
+            raise B01ContractError("trainer continuation frontier differs")
+        if not isinstance(state["work"], Mapping) or set(state["work"]) != set(LEARNED_ARMS):
+            raise B01ContractError("trainer continuation work inventory differs")
+        self.first_tight_contact_update = contact
+        self.precontact_full_state_equal = state["precontact_full_state_equal"]
+        self.changed_coordinates = set(indices)
+        self.wide_boundary_contact = state["wide_boundary_contact"]
+        self.maximum_tight_overshoot = float(state["maximum_tight_overshoot"])
+        self.cumulative_tight_displacement = float(state["cumulative_tight_displacement"])
+        self._continuation_seed_label = state["seed_label"]
+        self._continuation_update = update
+        self._continuation_work = deepcopy(state["work"])
+        self._continuation_frontier = deepcopy(state["frontier"])
+
+    def checkpoint_continuation_state(self) -> dict[str, Any]:
+        """Read back the exact audit/work/frontier continuation state."""
+
+        return {
+            "schema": "FRRIE_B01_TRAINER_CONTINUATION_STATE_V1",
+            "seed_label": self._continuation_seed_label,
+            "update": self._continuation_update,
+            "first_tight_contact_update": self.first_tight_contact_update,
+            "precontact_full_state_equal": self.precontact_full_state_equal,
+            "tight_projection_changed_indices": sorted(self.changed_coordinates),
+            "wide_boundary_contact": self.wide_boundary_contact,
+            "maximum_tight_overshoot": self.maximum_tight_overshoot,
+            "cumulative_tight_displacement": self.cumulative_tight_displacement,
+            "work": deepcopy(self._continuation_work),
+            "frontier": deepcopy(self._continuation_frontier),
+        }
+
+    def checkpoint_boundary_state_inventory(self) -> dict[str, Any]:
+        """Prove this trainer retains no live rollout/native/RNG iterator state."""
+
+        expected = {
+            "models", "trainers", "first_tight_contact_update",
+            "precontact_full_state_equal", "changed_coordinates",
+            "maximum_tight_overshoot", "cumulative_tight_displacement",
+            "wide_boundary_contact", "_continuation_seed_label",
+            "_continuation_update", "_continuation_work", "_continuation_frontier",
+        }
+        if set(vars(self)) != expected or any(
+            set(vars(self.trainers[arm])) != {"model", "optimizer"}
+            for arm in LEARNED_ARMS
+        ):
+            raise B01ContractError("trainer checkpoint boundary owns unexpected live state")
+        return {
+            "schema": "FRRIE_B01_TRAINER_CHECKPOINT_BOUNDARY_STATE_V1",
+            "owned_fields": sorted(expected),
+            "no_live_episode_state": True, "no_live_native_state": True,
+            "no_live_iterator_state": True, "no_mutable_rng_cursor_state": True,
+            "addressed_rng_is_stateless_external_input": True,
+            "complete": True,
         }
 
 

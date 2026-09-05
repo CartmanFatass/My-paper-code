@@ -10,6 +10,15 @@ description: Use when Root is comparing or changing HMASD direction priority, li
 Choose the smallest investment that can change a direction decision without confusing scientific
 value with execution convenience or strength of claim with strength of ceremony.
 
+Keep classification, management grouping, investment, and execution capacity separate. The owner's
+two-line framework (`flexible agents` and `flexible skill duration`) classifies research; it does
+not imply one retained route per line or a two-route budget. Offer complementary routes when they
+share useful learners, controls, interventions or diagnostics. Similar families can share one
+agenda with named subdirections without claiming their scientific objects or results are equivalent.
+Explain each proposed PARK by its marginal decision value, cost and concrete re-entry condition,
+not by a target direction count. An owner follow-up that changes scope reopens that question;
+preserve the prior answer and wait for the revised proposal before applying its dispositions.
+
 Read `docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md` before comparing evidence or changing a
 direction. Apply its A, B, C-BENCH, C-TRANSFER, and C-FORMAL burdens. General mathematical proof is
 not the default admission condition for empirical MARL: structural motivation plus bounded toy or
@@ -44,6 +53,21 @@ must occur before question-relevant output, and requires a fresh admission on th
 The target parallelism is five direction-level DM chains. Count neither Root nor Transport,
 CM/implementer/reviewer/critic/verifier/operator children, nor detached result processes as extra
 direction slots.
+
+The owner-requested shared `hmasd-experiment-tracker` (Luna/xhigh) is a root-level sibling of the
+DMs and also consumes no direction slot. Publish its canonical name and tracking-document branch
+in Portfolio; restore it through the existing Root heartbeat. DMs hand accepted handles to it and
+receive reminders directly, with no Root relay. It is the single writer of
+`docs/research/portfolio/EXPERIMENT_TRACKING.md`; integrate meaningful updates while the DMs retain
+science and CM retains technical acceptance. Reconcile the same handles before restoring a lost
+tracker. Do not create a registry, separate scheduler, per-run heartbeat, or an admission gate.
+Spawn the installed custom role by its file's name, `hmasd-experiment-tracker`; its model and effort
+are fixed in that file. Use docs/project/SIBLING_COMMUNICATION.md for verified native addressing.
+If this runtime has not exposed the new role, record that exact discovery failure; a default agent
+with copied instructions is a temporary substitute, not a validated custom-role instance. Publish
+observed send/receive capability separately from configuration. Missing outbound tools in one
+agent do not disprove sibling support; restore direct delivery at a supported configuration load
+while retaining necessary process observation and DM wakeups.
 
 - Refill an open slot at a clean boundary with the most promising runnable `ACTIVE` direction.
   Compare decision relevance, the smallest sufficient evidence class, honest claim ceiling,
@@ -147,16 +171,21 @@ and includes the current Portfolio snapshot, this evidence specification, the se
 class and claim ceiling, plus the exact direction/evidence paths needed for the decision. The
 project-shared registry creates or binds the provider conversation on first use under the stable
 conversation binding key and reuses that exact provider conversation for later Portfolio rounds.
-Each handoff reuses the one project Transport task declared in `.codex/hmasd-transport.toml` and
+Each default handoff reuses the one project Transport task declared in `.codex/hmasd-transport.toml` and
 sends exactly one completion or terminal-blocker receipt back to the handoff author's declared
 `parent_thread_id`. Dispatch passes `model=gpt-5.6-luna` and `thinking=xhigh` explicitly; it never
 calls `create_thread` or selects a replacement task. The singleton task ID is an execution endpoint,
 never a provider-conversation binding or receipt destination.
+The configured provider model is separate from that executor. Honor an explicit owner request
+for a new provider conversation or caller-direct execution using the Prompt Author/Transport
+exceptions; do not send through both routes or repeat an accepted provider request.
 
 A complete archived Pro response that decides the posed question at its declared evidence class is
 the Portfolio proposal. Root records it with its evidence and bounded rationale in a decision record
-for the owner to ratify. No Portfolio action takes effect before owner ratification, including a
-reversible action, and `PORTFOLIO.md` is updated only with the ratified disposition. Root does not
+for the owner to ratify. Existing explicit owner authorization applies within its stated scope;
+record it as `OWNER_DIRECT` rather than asking the owner to authorize the same action again.
+Discretionary dispositions not covered by that instruction still need owner ratification, and
+`PORTFOLIO.md` is updated only with the authorized disposition. Root does not
 replace or override the proposal with a local-model judgment. If Pro reports missing connector
 access or insufficient evidence, Transport has not archived a complete response, or the answer
 rejects bounded empirical work solely for lacking an unrequested stronger class, no class-correct
