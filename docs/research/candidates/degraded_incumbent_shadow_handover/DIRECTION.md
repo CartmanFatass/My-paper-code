@@ -261,25 +261,26 @@ exactly-once FSM axis. VSP-05 asks whether a proposed handoff should be accepted
 contrast asks which state source should be transferred. Evidence for either axis cannot substitute
 for the other, and no legacy polarity transfers.
 
-## Accepted B01 partial observations — 2026-09-04
+## Accepted complete B01 observation — 2026-09-04
 
-**Conclusion and bounded claim.** Two real B01 seeds (11 and 29) each completed 64 updates and the
-complete sixteen-row first-valid-trigger panel, with zero triggered rows across 19,200 prefix
-ticks per seed. These are valid fixed-budget trigger-support observations. The three-seed aggregate is incomplete;
-no `FTS-*` result or COPY/SHADOW contrast is identified, and B has no consumption state.
+**Conclusion and bounded claim.** All three original B01 seeds (11, 29, 47) completed 64 updates
+and the full sixteen-row panel: zero first-valid triggers over 57,600 total prefix ticks. The
+unchanged ordered rule selects **FTS-B0 — TRIGGER_SUPPORT_INSUFFICIENT**, with zero usable seeds.
+No COPY/SHADOW effect is identified; B has no consumption state.
 
 **Strongest support and limitation.** The exact declared panel completed, model/optimizer state
-was finite, and total relative parameter displacement was 0.42465718774783356 and 0.419585027483137.
-No source branch
-was exposed, so empty-support reducer zeros are not source equality and their nonharm Boolean is
-not observed nonharm. Only two seeds have run; trigger competence, physical opportunity and
+was finite, and total relative parameter displacement was 0.42465718774783356,
+0.419585027483137 and 0.4196544358013136. No source branch was exposed, so empty-support reducer
+zeros are not source equality and their nonharm Boolean is not observed nonharm. Trigger
+competence, preparation/delivery, application eligibility, terminal/live opportunity and
 seed/budget/panel dependence remain unresolved. No R02 or FOLR polarity transfers.
 
 **Surviving alternative and next discriminator.** Useful shadow preparation may remain hidden
 behind a policy that rarely proposes an application-valid handover at this exposure. Conversely,
-COPY or deadline-bound replay may absorb its value if an opportunity is reached. Continue the
-unchanged queued seed 47 before reading the original three-seed rule. No tuned B01
-headroom is available, and no lifecycle or family disposition is made from this seed.
+COPY or deadline-bound replay may absorb its value if an opportunity is reached. Replay the
+retained seed-11 checkpoint's original sixteen rows in A/RECON to measure where the exposure
+chain stops, without training or forcing a handover. No tuned B01 headroom is available;
+the five-tick MEI cannot be estimated. No lifecycle or family disposition follows.
 
 Evidence: `N3_DISH_B01_C04_SEED11_RESULT_EVIDENCE_20260904.md`,
 `N3_DISH_B01_C04_SEED11_SUMMARY_20260904.json`, `N3_DISH_B01_C04_SEED11_INTAKE_20260904.md`,
@@ -287,3 +288,8 @@ and `N3_DISH_B01_C04_SEED11_COLLECTION_20260904.md`.
 Seed 29 evidence: `N3_DISH_B01_C04_SEED29_RESULT_EVIDENCE_20260904.md`,
 `N3_DISH_B01_C04_SEED29_SUMMARY_20260904.json`, `N3_DISH_B01_C04_SEED29_INTAKE_20260904.md`,
 and `N3_DISH_B01_C04_SEED29_COLLECTION_20260904.md`.
+Complete evidence: `N3_DISH_B01_C04_RESULT_EVIDENCE_20260904.md`,
+`N3_DISH_B01_C04_SEED47_SUMMARY_20260904.json`,
+`N3_DISH_B01_C04_SEED47_COLLECTION_20260904.md`,
+`N3_DISH_B01_C04_COMPLETE_INTAKE_20260904.md`,
+`DISH_PREFIX_TRIGGER_FUNNEL_A01_SCIENCE_CARD_20260904.md`.
