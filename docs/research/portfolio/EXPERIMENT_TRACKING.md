@@ -84,6 +84,8 @@ FSD large D2 seed2 terminal: `fsd_e3_large_d2_seed2_20260905_01` finished exit `
 
 FSD large D0 seed3 adoption: `(wsl_4070, fsd_e3_large_d0_seed3_20260905_01)`, SHA `96ca5fbf815f142008d6622759014a98bd915d6f`, cwd `/home/wu/hmasd-worktrees/fsd_e3_large_d0_seed3_20260905_01`, output `temp/directions/flexible_skill_duration/exp/E3_20260904/large_d0_seed3`, receipt sibling `preflight.json`, and log `/home/wu/.agent-tasks/fsd_e3_large_d0_seed3_20260905_01/task.log`. Same-handle check: `running`, exit `null`, PID `1670783`, tmux active; fresh physical/effective admission `15420182528` bytes passed. Projection `1.68h`, cap `8h`; terminal/failure/loss/cap wakes FSD DM and CM directly, with no restart, repair, successor, or scientific inference.
 
+FSD large D0 seed3 terminal: the same handle finished exit `0`, wrapper PID `1670783`, tmux inactive; supervisor duration `2649s` (observer uptime `2693s`) with a completed 20-rollout/`128000`-transition summary. FSD DM ACKed direct delivery and resumed the original CM for collection/conformance before intake. This historical handle is closed to routine observation; no successor follows from its exit.
+
 ## Accepted work and terminal handoffs
 
 | DM / run record | Node and accepted handle | Launch SHA | Remote cwd | Output / receipt | Latest authoritative observation | Next owner step / notification |
