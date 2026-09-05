@@ -1,0 +1,37 @@
+{
+  "id": "20260904-crto-023",
+  "created": "2026-09-04T17:13:49-07:00",
+  "direction": "commitment_residual_triggered_options",
+  "tier": "object",
+  "kind": "decision",
+  "title": "CRTO B02：不采用平均读出作为比较器",
+  "context": "平均读出的动作在三个相位相同，但重规划侧均只有 5/8 正确，平均 regret 0.00523；没有达到原定胜任阈值。仅撤下这个局部读出候选，保留 RAW 与残差的原问题。",
+  "options": [
+    {
+      "key": "a",
+      "label": "不采用这个平均读出候选",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "原样重复单种子平均读出",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "选择已暴露好终点或重开残差比较",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "目标在全部结束点失败，原样重复和已暴露选择都不能补足比较器胜任。",
+  "evidence": [
+    "docs/research/candidates/commitment_residual_triggered_options/CRTO_RAW_CYCLE_READOUT_B02_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#crto-b02-full-cycle-readout-result",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": null
+}
