@@ -11,21 +11,22 @@ scientific intake. Terminal rows stay here until the owning DM has the evidence 
 ## Current direct-handoff routes
 
 New accepted work is sent directly to this tracker, then terminal, lost-observation, bound, or
-specified-reminder facts are delivered directly to the responsible current DM. Current canonical
-recipients are FSD `/root/dm_amx_fsd_continue`, FRRIE `/root/dm_amx_frrie_continue`, N3
-`/root/dm_amx_n3_continue`, CRTO `/root/dm_amx_crto_continue`, CBSC `/root/dm_amx_cbsc_continue`,
-and ACVC `/root/dm_amx_acvc_reentry`; N5, UCOPE, and VNFC remain direct routes with no live handle.
-All listed current routes have ACKed direct delivery. These paths apply only to new handles and do
-not revive historical DM routes recorded below.
+specified-reminder facts are delivered directly to the responsible current DM and CM. The current
+successor routes are FSD DM `/root/dm_amx_fsd_e4_census` with CM
+`/root/dm_amx_fsd_e4_census/cm_am_fsd_e4_census`, and FRRIE DM
+`/root/dm_amx_frrie_a01_resume` with CM
+`/root/dm_amx_frrie_a01_resume/cm_am_frrie_a01_diagnostic`. Both DMs ACKed direct delivery;
+the FRRIE CM also ACKed tracker adoption. These paths apply only to new handles and do not revive
+historical DM routes recorded below.
 
 ## Current observation snapshot
 
-At `2026-09-05T13:44:xxZ`, there are **zero** tracker-owned accepted live handles. Final FSD
-cell `fsd_e3_large_d2_seed3_20260905_01` is historical terminal evidence: it finished exit `0`,
-its DM ACKed direct terminal delivery, and CM collection/conformance then DM cell18 intake are the
-remaining owner steps. Its earlier running PID/tmux and the resolved SSH-unknown episode are
-historical facts only; neither authorizes a poll, restart, replacement, or successor. All other
-rows are historical terminal records or prospective work awaiting a separately accepted handle.
+Current snapshot: there are **zero** tracker-owned accepted live handles. FRRIE A01 and
+the FSD E4 technical-test, three calibration, and three formal-census handles are terminal and
+closed to repeat reminders. FSD's DM ACKed all three formal census terminal facts after CM
+technical acceptance; FRRIE's DM ACKed A01, and its CM has collected the original evidence.
+FRRIE may hand over one separately accepted A02 handle. All other rows below are historical
+terminal records or prospective work awaiting a separately accepted handle.
 
 ## Active accepted work
 
@@ -47,6 +48,20 @@ observation at `2026-09-05T16:23Z` found `finished`, exit `0`, PID `1683892`,
 This is a terminal process fact only, not a learner-success or scientific-validity claim.
 Terminal notice has been sent directly to the named CM and DM for CM collection and DM intake;
 there is no relaunch, repair, or replacement handle.
+
+FSD E4 closed-handle handoff: CM `/root/dm_amx_fsd_e4_census/cm_am_fsd_e4_census` supplied
+the technical test `fsd_e4_test_bc3eaeecf_01` (exit `1` at pytest setup before tests) and its
+same-SHA setup-repaired replacement `fsd_e4_test_bc3eaeecf_02` (exit `0`, `13 passed`), then
+three sequential calibration handles `fsd_e4_cal_{deterministic,geometric,lognormal}_bc3eaeecf_01`
+and three formal handles `fsd_e4_census_{deterministic,geometric,lognormal}_bc3eaeecf_01`.
+All used `wsl_4070` via `hmasd-wsl-node`, SHA
+`bc3eaeecf5f97e630a886028db0053ba2d08d56f`, cwd
+`/home/wu/hmasd-worktrees/fsd-e4-census-bc3eaeecf`, and their named paths under
+`temp/directions/flexible_skill_duration/exp/e4_census_20260905/`; standard supervisor logs
+are `/home/wu/.agent-tasks/<handle>/task.log`. The three formal handles each finished exit `0`
+with `96` candidates; CM collected the task status/log evidence and DM ACKed terminal delivery.
+These are process and collection facts only. No further FSD invocation, restart, or replacement
+has been selected.
 
 | DM / run record | Node and accepted handle | Launch SHA | Remote cwd | Output / receipt | Latest authoritative observation | Next owner step / notification |
 | --- | --- | --- | --- | --- | --- | --- |
