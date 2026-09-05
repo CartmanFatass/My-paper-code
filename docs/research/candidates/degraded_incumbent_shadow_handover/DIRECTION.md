@@ -428,3 +428,32 @@ Evidence: `DISH_ORIGIN_CERTIFICATE_A04_RESULT_EVIDENCE_20260905.md`,
 `DISH_ORIGIN_CERTIFICATE_A04_SUMMARY_20260905.json`,
 `DISH_ORIGIN_CERTIFICATE_A04_COLLECTION_20260905.md`,
 `DISH_ORIGIN_CERTIFICATE_A04_INTAKE_20260905.md`.
+
+## Accepted synthetic prediction-head A05 — 2026-09-05
+
+**Conclusion and bounded claim.** The complete original A/RECON call selects
+**A05-SYNTHETIC-BOUNDARY-REPRODUCED**. Both role cases exactly pass raw service logits
+to the native row, separated from their sigmoid references by about 0.575. The actual
+training-head API connects 16 parameter tensors under its declared synthetic scalar,
+with Cholesky weight/bias absent; a genuine full-head positive control connects both
+with finite nonzero gradients. The unchanged native helper gives equal raw/clip q95
+for all three fixed vectors, with linked contrasts 0.3 and 0.25 in two cases and an
+unchanged zero readout in the negative-input case. Parameter displacement is zero.
+
+**Strongest support and contradiction.** Genuine role outputs, the graph positive
+control and real-helper contrast reproduce the previously static interface explanation.
+This does not measure B01 learner masks/full loss gradients or prediction calibration,
+and changing the shared hidden representation can still alter covariance indirectly.
+The strongest contrary fact remains no legal handover in A03/A04; all 299 A03 service
+ticks belong to the incumbent. Synthetic interface facts establish no repair efficacy,
+SHADOW advantage or generic transfer effect. No tuned source-effect headroom is added.
+
+**Surviving alternative and next discriminator.** Actual training support, finite exposure,
+calibration, joint certificate feasibility and checkpoint/state co-adaptation remain.
+Any subsequent object must separately define how to distinguish training/forecast
+support from a controller correction and then its native consequence. This intake ends
+only the approved original A05 investment; it selects no successor or production change.
+Existing PRO_FINAL CONTINUE, prior valid evidence, closed R02 and constituent identities
+remain. Evidence: `DISH_A05_APPROVED_RESULT_EVIDENCE_20260905.md`,
+`a05_approved_20260905/formal-summary.json`, `DISH_A05_APPROVED_CM_TECHNICAL_RECORD_20260905.md`
+and `DISH_A05_APPROVED_INTAKE_20260905.md`.
