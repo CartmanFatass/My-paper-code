@@ -13,11 +13,14 @@ scientific intake. Terminal rows stay here until the owning DM has the evidence 
 New accepted work is sent directly to this tracker, then terminal, lost-observation, bound, or
 specified-reminder facts are delivered directly to the responsible current DM and CM. The current
 successor routes are FSD DM `/root/dm_amx_fsd_e4_census` with CM
-`/root/dm_amx_fsd_e4_census/cm_am_fsd_e4_census`, and FRRIE DM
+`/root/dm_amx_fsd_e4_census/cm_am_fsd_e4_census` (E4 complete and no next
+object), FRRIE DM
 `/root/dm_amx_frrie_a01_resume` with CM
-`/root/dm_amx_frrie_a01_resume/cm_am_frrie_a01_diagnostic`. Both DMs ACKed direct delivery;
-the FRRIE CM also ACKed tracker adoption. These paths apply only to new handles and do not revive
-historical DM routes recorded below.
+`/root/dm_amx_frrie_a01_resume/cm_am_frrie_a01_diagnostic`, N3 DM
+`/root/dm_amx_n3_approved` with CM `/root/dm_amx_n3_approved/cm_am_n3_a05_approved`,
+and CBSC DM `/root/dm_amx_cbsc_approved` (its CM is supplied only with an actual handoff).
+FSD, FRRIE, and N3 ACKed direct delivery; the FRRIE and N3 CMs also ACKed tracker adoption.
+These paths apply only to new handles and do not revive historical DM routes recorded below.
 
 ## Current observation snapshot
 
@@ -25,8 +28,12 @@ Current snapshot: there are **zero** tracker-owned accepted live handles. FRRIE 
 the FSD E4 technical-test, three calibration, and three formal-census handles are terminal and
 closed to repeat reminders. FSD's DM ACKed all three formal census terminal facts after CM
 technical acceptance; FRRIE's DM ACKed A01, and its CM has collected the original evidence.
-FRRIE may hand over one separately accepted A02 handle. All other rows below are historical
-terminal records or prospective work awaiting a separately accepted handle.
+N3 smoke `n3_a05_approved_smoke_20260905` is also terminal and acknowledged by its DM: exit
+`0`, PID `1690059`, inactive tmux, passed fresh admission with physical/effective availability
+`15412580352` bytes, and completed `4` tests in `4s` (one warning). CM was directly woken for
+collection. FRRIE may hand over one separately accepted A02 handle; N3 formal work and CBSC work
+also require separately accepted handles. All other rows below are historical terminal records or
+prospective work awaiting a separately accepted handle.
 
 ## Active accepted work
 
