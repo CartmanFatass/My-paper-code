@@ -73,6 +73,10 @@ zero learner exposure; complete DM intake integrated08ea837a0. Deterministic mar
 geometric/rounded-lognormal margins0.0970995/0.0982251362, both fully matched by publicgreedy.
 No learned advantage or successor selected. Formal wall2.35s,calibration+formal3.09s;
 13 focused tests passed. Items20260905-fsd-008/009 trace the full intake.
+New request2026-09-05-fsd-post-e4-convergence-01 was dispatched once to the existing singleton
+after packet1a625ba0d was pushed. Evidence pind99057547,21 allowed references, same direction
+Convergence binding. Root adopted the DM-authored question unchanged; complete provider result
+is pending, no next scientific object selected. See the request-scoped DISPATCH.json.
 FRRIE existing A01 completed its sole invocation in19s; tracker terminal handoff is integrated
 as582ae4e1f. Supervisor0 is not validity; a different original Python failure was observed and
 DM technical intake integrated8102dc264: VALID_A_RECON/A01_DIFFERENT_ORIGINAL_FAILURE.

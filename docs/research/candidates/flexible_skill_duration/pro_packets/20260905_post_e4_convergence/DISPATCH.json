@@ -1,0 +1,27 @@
+{
+  "request_id": "2026-09-05-fsd-post-e4-convergence-01",
+  "state": "DISPATCH_ACCEPTED",
+  "recorded_at_utc": "2026-09-05 17:49:52 UTC",
+  "source_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "operator_thread_id": "01a06f0e-5eab-7431-8491-e7c2c62705b6",
+  "operator_model": "gpt-5.6-luna",
+  "operator_thinking": "xhigh",
+  "packet_commit": "1a625ba0d",
+  "evidence_pin": "d990575470126c896ffb36db64cd1aab0dff08a2",
+  "workflow_node": "em_convergence",
+  "conversation_binding_key": "em:flexible_skill_duration:convergence",
+  "dispatch_count": 1,
+  "provider_send_state": "UNOBSERVED_BY_AUTHOR",
+  "decision_state": "PENDING",
+  "tool_result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"threadId\":\"01a06f0e-5eab-7431-8491-e7c2c62705b6\"}"
+      }
+    ],
+    "isError": false
+  },
+  "note": "Root adopted DM-authored REQUEST unchanged, validated21/21 referenced paths at pin, rendered on local main, committed/pushed before one singleton dispatch. Native DM preparation stopped after completed request authoring; no DM dispatch occurred. Tool acceptance is not evidence of provider Send or final decision."
+}
