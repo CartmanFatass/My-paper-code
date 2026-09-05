@@ -59,6 +59,30 @@ admission. Portable execution remains remote-first. No new learner, trigger inte
 source arm, policy update, additional seed or family action is selected. Tracker alone
 observes any accepted long-running handle; CM collects and DM interprets.
 
+### 3. Accepted-source dependency assembly — object tier, technical
+
+Before A01 edits, CM found that the new worktree created from DM's docs-only commit
+`b5d95d8e27fe5f5c0d5f93532f665f7e3a3a81c7` lacks the accepted B01 implementation. This is
+the intentional split between the DM documentation branch and CM implementation branch;
+it is not a newly reproduced production defect. Source `e0541d0c` was already accepted and
+executed for all three B01 seeds. Root integrates those separate branches into the primary
+target; the A01 checkout still needs their combined dependencies.
+
+Options: (a) merge accepted CM tip `4320f13a9cbde49109410f3677eb8ec21ddec4c9` (containing
+`e15c1794` / `e0541d0c` and collection records) into the clean A01 branch based on DM docs;
+(b) restore selected source files ad hoc; (c) wait for an unrelated primary integration.
+Recommend/select **(a)**: preserve both accepted lineages and assemble the already named
+dependency without rewriting production logic or expanding A01 ownership. Commit/push the
+assembly immediately, confirm the carded existing production/source surface still equals
+`e0541d0c`, and record that combined SHA as the baseline before diagnostic edits. Any merge
+conflict is resolved by preserving accepted source and latest DM science, never by inventing
+a new scientific meaning. Root retains primary integration ownership. Existing accepted
+code is a dependency, not new A01 machinery; report new A01 scope against the assembled
+baseline. No scientific run or diagnostic edit occurred before this decision.
+
+Owner-delegated decision (unattended, 2026-09-03 instruction): (a).
+Provenance `OWNER_DELEGATED`; reversible; owner flag `none`.
+
 ## Owner boundary and practical limits
 
 Owner reviews in this and current integration worktree returned `[]`; today's review has
@@ -86,3 +110,4 @@ Root owns the ledger; append under `n3-dish-b01-complete-intake`. Items were ins
 | 2026-09-04T18:41:22-07:00 | degraded_incumbent_shadow_handover | object | selection | (a) one retained-prefix A diagnostic; (b) increase training; (c) force trigger; (d) all three checkpoints | (a) fixed seed-11 checkpoint, original sixteen rows, no learning | yes | OWNER_DELEGATED — Owner-delegated decision (unattended, 2026-09-03 instruction): (a) | docs/research/portfolio/owner/inbox/2026-09-04/20260904-dish-020.json | none | |
 | 2026-09-04T18:41:22-07:00 | degraded_incumbent_shadow_handover | object | technical | reading-agreed; reading-disputed | complete-result Chinese brief published; no owner reading auto-applied | yes | DM_INTAKE | docs/research/portfolio/owner/inbox/2026-09-04/20260904-dish-021.json | none | |
 | 2026-09-04T18:41:22-07:00 | degraded_incumbent_shadow_handover | object | selection | accept; reject; revise | A01 card frozen; recommendation accept, asynchronous owner surface | yes | DM_CARD | docs/research/portfolio/owner/inbox/2026-09-04/20260904-dish-022.json | none | |
+| 2026-09-04T18:45:23-07:00 | degraded_incumbent_shadow_handover | object | technical | (a) merge accepted CM dependency; (b) ad hoc restore; (c) await other integration | (a) assemble accepted source and DM docs in A01 branch, no production redesign | yes | OWNER_DELEGATED — Owner-delegated decision (unattended, 2026-09-03 instruction): (a) | docs/research/portfolio/owner/inbox/2026-09-04/20260904-dish-023.json | none | |
