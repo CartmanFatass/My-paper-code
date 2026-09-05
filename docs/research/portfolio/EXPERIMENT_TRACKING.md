@@ -24,7 +24,13 @@ These paths apply only to new handles and do not revive historical DM routes rec
 
 ## Current observation snapshot
 
-Current snapshot: there are **zero** tracker-owned accepted live handles. CBSC formal-only
+Current snapshot: one tracker-owned accepted live handle is running: VNFC formal B01
+`vnfc_b01_formal_33e08f440_20260905_01` on `wsl_4070`, SHA
+`33e08f440c2117dcfd9457d825f42fef7b38ccd7`, PID `1702670`, and cwd
+`/home/wu/hmasd-worktrees/vnfc_b01_formal_33e08f440_01`. Same-handle observation found
+`running`, exit `null`, active tmux, and bounded log progress through round `10` of the accepted
+formal run. Its cap is `2700s`; terminal, lost-observation, or bound facts go directly to VNFC
+CM `/root/cm_am_vnfc_e01`, DM `/root/dm_am_vnfc_direct_b`, and Root. CBSC formal-only
 `cbsc-approved-profile-8003b96bd-02` on `wsl_4070`, SHA
 `8003b96bd79910864e9372ad6f1ea81f1c80520c`, PID `1692419`, and cwd
 `/home/wu/hmasd-worktrees/cbsc-approved-repair-8003b96bd-20260905` failed exit `139` after
