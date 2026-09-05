@@ -2,6 +2,10 @@
 
 Status: `OWNER_PAUSED / ZERO_LIVE_PROCESSES / R06_NOT_LAUNCHED / CANDIDATE_UNACCEPTED`.
 
+Historical boundary: the owner's 2026-09-05 **“继续自动推进任务”** instruction supersedes the
+execution pause recorded here. Current authority is
+`FRRIE_R06_OWNER_DIRECT_RESUME_INTAKE_20260905.md`; retain all evidence and former decisions below.
+
 ## Current authority and action
 
 The owner instructed **“这轮完毕后暂停即可”**, relayed by Root to this DM on 2026-09-04.
