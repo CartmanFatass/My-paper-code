@@ -1,7 +1,7 @@
 import json
 import time
 
-from experiments.candidates.degraded_incumbent_shadow_handover import head_contract_a05 as probe
+from scripts import run_dish_prediction_head_contract_a05 as probe
 from scripts import run_dish_prediction_head_contract_a05 as runner
 
 
