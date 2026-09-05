@@ -1,10 +1,15 @@
 # FSD E3 heterogeneous-hazard detached run state
 
-Snapshot: `2026-09-05T00:53:00Z`
+Snapshot: `2026-09-05T01:54:46Z`
 
 This is an operational recoverability snapshot for the frozen B/EXPLORE object
 `FSD-E3-HET-R01`. It records runtime facts only. It is not a result, an intake, a scientific
 polarity, a queue implementation, or authority to bypass a fresh resource admission.
+
+**Current OWNER_DIRECT boundary:** finish the current round and pause. `large_d0_seed1` is now
+valid and fully taken in; E3 is **13/18 valid, zero running, five never launched**. Stop before
+`large_d2_seed1`. No successor, retry, admission or Pro is created. This latest drain supersedes
+earlier automatic continuation below; it changes no lifecycle, priority, card or science.
 
 ## Frozen and accepted boundary
 
@@ -23,7 +28,7 @@ polarity, a queue implementation, or authority to bypass a fresh resource admiss
 - Pre-launch focused suite on the launch SHA: `12 passed in 10.83s`
 - Study root:
   `temp/directions/flexible_skill_duration/exp/E3_20260904`
-- The twelve accepted local cell roots are in
+- The thirteen accepted local cell roots are in
   `C:/Projects/HMASD/.claude/worktrees/agent-a88287f2315bb99a0/temp/directions/flexible_skill_duration/exp/E3_20260904`.
   The completed medium D0 seed-3 cell also remains in its original remote worktree and a distinct
   verified local staging root named in its CM receipt. Older evidence roots were preserved.
@@ -32,11 +37,11 @@ polarity, a queue implementation, or authority to bypass a fresh resource admiss
 - Frozen projections per invocation: D0 small `1.16 h`; D0 medium/large `1.68 h`; D2 conservative
   mechanical maximum `4.63 h`; all are below the `8 h` per-arm cap.
 - Current counts at this snapshot: card-accepted invocation cells `18`; result-bearing attempts
-  independently admitted/launched `14`; running `1`; valid complete cells `12`; quarantined
-  attempts `1`; unfulfilled cells `6`, comprising one running and five never launched. The earlier local refusal
+  independently admitted/launched `14`; running `0`; valid complete cells `13`; quarantined
+  attempts `1`; unfulfilled cells `5`, all never launched. The earlier local refusal
   is preserved as evidence but was not itself an admission or launch.
 
-## Accepted running large D0 seed-1 cell
+## Accepted terminal large D0 seed-1 cell and owner-directed drain
 
 The medium-D2-seed-3 intake accepted cell 12 and selected the next unchanged matrix entry,
 `large_d0_seed1`, with CLI owner items `20260904-fsd-006/007/008`. Result, intake, brief and
@@ -46,7 +51,7 @@ the complete prospective assignment were committed/pushed at
 
 | invocation | execution node and handle | receipt assessed UTC | physical/effective available bytes | launch boundary | observed state |
 | --- | --- | --- | ---: | --- | --- |
-| `large_d0_seed1` attempt 01 | `wsl_4070`; `agent-task` `fsd_e3_large_d0_seed1_20260904_01`; wrapper PID `802417`, learner PID `802469` | `2026-09-05T00:52:33.793656Z` | `15042007040 / 15042007040` | pushed SHA `f42dcb7a76f6341d3552a27134ca674674b29718` | `running` at uptime 20 s, exit null, tmux active; exact learner argv observed |
+| `large_d0_seed1` attempt 01 | `wsl_4070`; `agent-task` `fsd_e3_large_d0_seed1_20260904_01`; wrapper PID `802417`, learner PID `802469` | `2026-09-05T00:52:33.793656Z` | `15042007040 / 15042007040` | pushed SHA `f42dcb7a76f6341d3552a27134ca674674b29718` | `finished`, exit 0 at `2026-09-05T01:41:53Z`, tmux inactive; CM accepted and DM intake complete |
 
 Detached cwd: `/home/wu/hmasd-worktrees/fsd_e3_large_d0_seed1_20260904_01`.
 Root under it: `temp/directions/flexible_skill_duration/exp/E3_20260904/large_d0_seed1`;
@@ -68,10 +73,28 @@ Responsible DM `/root/dm_amx_fsd_continue` directly handed the exact handle/SHA/
 ACK. Tracker owns the sole observer and directly wakes DM on terminal/failure/loss/cap concern;
 DM acknowledges and resumes this same CM for collection. No Root relay or launch gate is added.
 
+Tracker directly notified terminal completion; DM ACKed and CM collected only the existing cell.
+The latest owner instruction to finish this round then pause was explicitly cascaded to and
+ACKed by CM. Its complete terminal receipt is pushed at
+`5c70f068d023f54a20f8d264a52163694280a411`:
+`docs/Claude_docs/experiments/FSD_E3_LARGE_D0_SEED1_REMOTE_RUN_20260904.md`.
+It verifies all 20 learner/path records, 128,000 transitions, 320 training episodes, 148,500
+actual optimizer steps, 3,584 evaluations, first/final exposure, checkpoint and E3 publication.
+All ten original/staged/canonical hashes match. Runner wall is `2837.5571884999954 s`, retained
+supervisor duration 2960 s; resource peaks remain `resources_unmeasured`.
+
+Canonical cell is in the existing study parent above. Unique staging is
+`C:/Projects/HMASD-worktrees/cm-fsd-medium-d2-seed3-20260904/temp/directions/flexible_skill_duration/exp/E3_20260904/remote_fetch_large_d0_seed1_terminal_01/large_d0_seed1`.
+`FSD_E3_LARGE_D0_SEED1_RESULT_EVIDENCE_20260904.md` and
+`FSD_E3_LARGE_D0_SEED1_INTAKE_20260904.md` record DM arithmetic/validity and the current stop.
+This D0 seed meets the descriptive competence line; no paired or aggregate rule is read.
+No successor was created. CM has no active child or shell session; tracker retains this terminal
+handle historically and ends routine observation/reminders after DM ACK.
+
 ## Accepted terminal D2 seed-3 cell and dedicated tracker
 
-The owner's current explicit resume from the final tracker-restart handoff supersedes every
-historical drain/PAUSED instruction below. Root persisted that instruction and ACTIVE heartbeat
+At this earlier launch, the owner's explicit resume from the final tracker-restart handoff
+superseded the previous drain/PAUSED instruction. Root persisted that instruction and ACTIVE heartbeat
 at `af99c1ce5`. The object-tier continuation intake and CLI owner item `20260904-fsd-005` were
 committed/pushed before launch at `31bfecd79fc0f708546786ee26dfd8faa9e85dfb`:
 `FSD_E3_MEDIUM_D2_SEED3_CONTINUATION_INTAKE_20260904.md`. No scientific card or source changed.
@@ -284,6 +307,7 @@ before all 18 invocations complete.
 | `medium_d2_seed2` | 20 rollouts, 128000 transitions, 320 train episodes, eval `512/512/512/2048`, 20 two-region path rows, checkpoint, rollout-1/final five-network exposure | `2405.3374142149987 s` | `resources_unmeasured` | attempt 01 valid complete; exact remote/local hashes; CM accepted |
 | `medium_d0_seed3` | 20 rollouts, 128000 transitions, 320 train episodes, eval `512/512/512/2048`, 20 two-region path rows, checkpoint, rollout-1/final five-network exposure | `2687.7446834669972 s` | `resources_unmeasured` | attempt 01 valid complete; ten remote/staging/canonical hashes match; CM accepted and DM intake complete |
 | `medium_d2_seed3` | 20 rollouts, 128000 transitions, 320 train episodes, eval `512/512/512/2048`, 20 two-region path rows, checkpoint, rollout-1/final five-network exposure | `2525.5407063739985 s` | `resources_unmeasured` | attempt 01 valid complete; ten remote/staging/canonical hashes match; CM accepted and DM intake complete |
+| `large_d0_seed1` | 20 rollouts, 128000 transitions, 320 train episodes, eval `512/512/512/2048`, 20 two-region path rows, checkpoint, rollout-1/final five-network exposure | `2837.5571884999954 s` | `resources_unmeasured` | attempt 01 valid complete; ten remote/staging/canonical hashes match; CM accepted and DM intake complete; owner drain before next cell |
 
 Missing peak RSS leaves these invocations valid under the repository telemetry rule. Their wall
 times remain below the per-invocation 8 h cap. The first three small cells launched while the code
@@ -311,8 +335,8 @@ pushed SHA, a detached remote worktree, and one `agent-task` payload whose remot
 its own `admit-memory` immediately before the exact runner. The local refused receipt did not admit
 the remote attempt. Attempt 01 is terminal and quarantined after reproduced publication failure;
 the repaired outcome-blind attempt 02 subsequently fulfilled that invocation cell. Five
-never-launched large-row invocations stay `REMOTE_FIRST_HOLD`; large D0 seed 1 is running and
-medium D0/D2 seed 3 are valid complete under the owner's explicit resume. Local fallback additionally requires
+never-launched large-row invocations stay `REMOTE_FIRST_HOLD`; large D0 seed 1 and medium D0/D2
+seed 3 are valid complete. The latest owner drain holds all five cells. Local fallback additionally requires
 definitive evidence of no remote process, prospective portability, and a fresh local admission.
 
 ## Full 18-invocation matrix
@@ -336,7 +360,7 @@ output has been created for that invocation.
 | medium | D2 | 2 | `k_max=40`, `k_Z=400`, `c=0.25` | `VALID_COMPLETE`; attempt 01 task `fsd_e3_medium_d2_seed2_20260904_01` |
 | medium | D0 | 3 | `k=5`, `c=inf` | `VALID_COMPLETE`; attempt 01 task `fsd_e3_medium_d0_seed3_20260904_01`; intake complete |
 | medium | D2 | 3 | `k_max=40`, `k_Z=400`, `c=0.25` | `VALID_COMPLETE`; attempt 01 task `fsd_e3_medium_d2_seed3_20260904_01`; CM acceptance and DM intake complete |
-| large | D0 | 1 | `k=5`, `c=inf` | `RUNNING`; attempt 01 task `fsd_e3_large_d0_seed1_20260904_01`; fresh admission/learner observed and tracker directly adopted |
+| large | D0 | 1 | `k=5`, `c=inf` | `VALID_COMPLETE`; attempt 01 task `fsd_e3_large_d0_seed1_20260904_01`; CM acceptance and DM intake complete |
 | large | D2 | 1 | `k_max=40`, `k_Z=400`, `c=0.25` | `REMOTE_FIRST_HOLD` |
 | large | D0 | 2 | `k=5`, `c=inf` | `REMOTE_FIRST_HOLD` |
 | large | D2 | 2 | `k_max=40`, `k_Z=400`, `c=0.25` | `REMOTE_FIRST_HOLD` |
@@ -351,21 +375,19 @@ return comparison or E3 aggregate branch is applied. The earlier pause after `me
 was superseded by the explicit resume that launched exactly `medium_d0_seed3`. That cell has now
 finished and passed both CM technical acceptance and DM intake.
 
-**Current owner-direct boundary:** automatic research resumed after the Root/config restart.
-`medium_d2_seed3` has completed technical acceptance and DM intake, making all six medium cells
-valid. `large_d0_seed1` is the sole FSD running task. The dedicated shared tracker holds its
-accepted process identity directly and reminds the DM for CM collection and intake before
-subsequent cells. Lifecycle, priority, card, claim
-ceiling and accepted mechanism science stay unchanged. All prior terminal handles remain
-historical evidence and are not polled or relaunched.
+**Current owner-direct boundary:** finish this round then pause. `medium_d2_seed3` and
+`large_d0_seed1` have completed technical acceptance and DM intake; all FSD tasks are terminal.
+Stop before `large_d2_seed1`; no new launch, retry or Pro. The dedicated tracker has received
+the direct terminal ACK and retains the handles historically. Lifecycle, priority, card, claim
+ceiling and accepted mechanism science stay unchanged. No historical handle is polled or relaunched.
 
-The current running task remains recoverable with
+The latest completed task remains recoverable with
 `ssh hmasd-wsl-node '/usr/local/bin/agent-task status fsd_e3_large_d0_seed1_20260904_01'`.
-Do not duplicate this accepted task or resume completed checkpoints. The running table above
-contains exact SHA, handle, receipt, process and output witnesses; terminal collection is pending.
-The medium treatment result and all artifact-root locators remain in its receipt and E0 result.
+Do not duplicate this completed task or resume checkpoints. The terminal table above contains
+exact SHA, handle, receipt, process and output witnesses; collection and intake are complete.
+All accepted result and artifact-root locators remain in their receipts and E0 result documents.
 
-After current-cell intake, the next never-launched cell is `large_d2_seed1`, followed by
+After a later explicit owner resume, the next never-launched cell is `large_d2_seed1`, followed by
 `large_d0_seed2`, `large_d2_seed2`, `large_d0_seed3`, `large_d2_seed3`.
 Each invocation still requires the exact pushed SHA and its own fresh 4 GiB remote preflight
 immediately before its exact runner.

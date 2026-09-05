@@ -1,0 +1,32 @@
+{
+  "id": "20260904-fsd-010",
+  "created": "2026-09-04T18:54:45-07:00",
+  "direction": "flexible_skill_duration",
+  "tier": "object",
+  "kind": "brief",
+  "title": "E3 大差异固定时钟第一种子收尾简报",
+  "context": "第十三个单元有效，第一大差异比较器种子达到原卡胜任线；原研究未完成。本轮按最新指令停在后继之前，五格保留未启动。",
+  "options": [
+    {
+      "key": "reading-agreed",
+      "label": "the reading stands",
+      "consequence": "the reading stands"
+    },
+    {
+      "key": "reading-disputed",
+      "label": "re-read per the comment",
+      "consequence": "re-read per the comment"
+    }
+  ],
+  "recommended": "reading-agreed",
+  "auto_applied": null,
+  "dm_reason": "简报限于本种子比较器有效性和当前暂停边界，不提前解读中断策略。",
+  "evidence": [
+    "docs/research/candidates/flexible_skill_duration/FSD_E3_LARGE_D0_SEED1_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#fsd-e3-large-d0-seed1-terminal-20260904",
+  "brief": "docs/research/portfolio/owner/briefs/flexible_skill_duration/2026-09-04_E3_large_d0_seed1.md",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}
