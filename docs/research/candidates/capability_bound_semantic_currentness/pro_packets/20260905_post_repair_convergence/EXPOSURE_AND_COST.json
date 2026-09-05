@@ -1,0 +1,136 @@
+{
+  "evidence_role": "DOCUMENTARY_DERIVATION_NOT_NEW_EXPERIMENT",
+  "derivation": "Python standard-library Decimal arithmetic over the cited historical machine exposure/cost reports and terminal process windows; no project import, checkpoint load, experiment or new timing.",
+  "sources": [
+    {
+      "path": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_OMRC_B01_R06_LAUNCH_READINESS_INTAKE_20260904.md",
+      "sha256": "4a1f16a727a364ca0e8555dfde55db30d9aa09bfc054ea34700d550624c69b6a"
+    },
+    {
+      "path": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_OMRC_B01_APPROVED_REPAIR_INTAKE_20260905.md",
+      "sha256": "8335c140b1aba69cb461111c76db50745037ff05fa18f8f6400c281ccd7b08f1"
+    }
+  ],
+  "historical_b0_exposure": {
+    "seed": 21001,
+    "parameters": 121349,
+    "optimizer_steps_per_arm": 16,
+    "initial_l2": "29.89684618357759",
+    "initial_rms": "0.08582370837903153",
+    "parameter_displacement_l2_min": "0.4576527919924285",
+    "parameter_displacement_l2_max": "0.47487743607923133",
+    "displacement_percent_of_initial_l2_min": "1.530772808550683472388162125",
+    "displacement_percent_of_initial_l2_max": "1.588386390869825779459123537",
+    "changed_parameter_entries_lower_bound": 115876,
+    "meaning": "Existing B0 machine measurement reported in R06 intake; documentary arithmetic only, not remeasurement."
+  },
+  "preserved_b1_work": {
+    "arms": [
+      "STRUCT-CURRENTNESS-GRU",
+      "RAW-GRU",
+      "PI-GRU",
+      "DERANGED-CURRENTNESS-GRU"
+    ],
+    "seeds": [
+      21101,
+      21121,
+      21143
+    ],
+    "arm_seeds": 12,
+    "per_arm_seed": {
+      "train_episodes": 384,
+      "train_transitions": 58368,
+      "train_decisions": 9216,
+      "rollout_updates": 48,
+      "adam_steps": 768,
+      "checkpoints": [
+        0,
+        12,
+        24,
+        48
+      ],
+      "heldout_episodes_per_checkpoint": 64
+    },
+    "study_totals": {
+      "train_episodes": 4608,
+      "train_transitions": 700416,
+      "train_decisions": 110592,
+      "rollout_updates": 576,
+      "adam_steps": 9216,
+      "eval_episodes": 3072,
+      "eval_transitions": 466944,
+      "eval_opportunities": 73728
+    },
+    "actual_new_learner_steps_in_packet_or_diagnostic": 0,
+    "new_parameter_displacement": null,
+    "exposure_line": "No new learner, optimizer steps or displacement measurement. Original B1 retains 768 Adam steps per arm-seed; historical B0 movement relative to initialization is reported above."
+  },
+  "historical_partial_per_arm_cost": {
+    "law": "sum(three training-slice wall windows) + matching replay wall",
+    "arm_seed_wall_range_seconds": [
+      "197.446350000042",
+      "323.7225416000001"
+    ],
+    "componentwise_training_max_seconds": "296.92813109999406",
+    "componentwise_replay_max_seconds": "36.342732699995395",
+    "componentwise_envelope_seconds": "333.270863799989455",
+    "serial_twelve_envelope_seconds": "3999.250365599873460",
+    "serial_twelve_envelope_minutes": "66.654172759997891",
+    "complete_shared_publication_seconds": null,
+    "full_logical_invocation_forecast_seconds": null,
+    "warning": "Historical process-window projection omits unmeasured complete publication. It is not new wall timing, a fully covered invocation forecast, valid-result cost, or a speedup claim."
+  },
+  "ended_repair_cost_seconds": {
+    "focused_windows": [
+      "10.64",
+      "50.83",
+      "6.57"
+    ],
+    "current_focused_sum": "68.04",
+    "prior_focused": "56.45",
+    "cumulative_focused": "124.49",
+    "old_directory_limit": "300",
+    "unused_not_new_authority": "175.51",
+    "separate_smoke": "13.84",
+    "this_repair_measured_process_sum": "81.88",
+    "git_ssh_preparation_input_copy_agent_and_pre_admission_wrapper": null,
+    "aggregate_cpu": null,
+    "valid_complete_result_denominator": 0
+  },
+  "candidate_options_not_selected": {
+    "A": "One bounded complete source-to-measurement repair objective; concrete new diff and applicable engineering plan not yet established. Historical root-cause diagnosis is not a universal prerequisite.",
+    "B": {
+      "class": "A/RECON",
+      "whole_invocations": 1,
+      "proposed_wall_cap_including_kill_grace_seconds": 120,
+      "measured_cost_forecast": null,
+      "learner_steps": 0,
+      "sweep": false,
+      "node": "wsl_4070",
+      "interpreter": "/home/wu/.venvs/hmasd/bin/python",
+      "host_portability": "pinned for failure observation; no alternate host/interpreter",
+      "followup_authority": "none automatic"
+    },
+    "C": "Pause only execution branch; no new compute selected."
+  },
+  "runtime_investigation_thresholds_seconds": {
+    "toy_complete_logical_invocation": 2700,
+    "uav_complete_logical_invocation": 43200,
+    "meaning": "Investigation thresholds; no new cap or compute allocation."
+  },
+  "headroom": {
+    "existing_class": "HC-M / CANDIDATE_ASSETS_MISMATCHED",
+    "same_host_upper": null,
+    "tuned_same_information_generic": null,
+    "gap": null
+  },
+  "minimum_effect_of_interest": {
+    "original_open_b1": "No new threshold retrofitted",
+    "candidate_B_diagnostic": "One attributable finite failure-context observation; no native-return effect estimate."
+  },
+  "predictions": {
+    "original_dm": "STRUCT usable around updates 12-24 and preliminary advantage by update 48; unscored",
+    "owner": "not taken (unattended)",
+    "diagnostic": "No success probability or causal prediction measured."
+  }
+}
