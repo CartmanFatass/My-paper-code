@@ -87,6 +87,20 @@ separate contributions unless the intended estimand explicitly accepts that pack
 Native consequence observation is feasible in existing code, but success is not
 demonstrated; forced transfer or borrowed passive-label clone is not a substitute.
 
+Targeted service-Q feedback check: the two live consumers found are native
+readiness_wire:181 and native_origin_certificate:358. Readiness serializes q95,
+but account_wire:175 changes only protocol hash/message/byte accounting; message
+length is fixed. Pending-readiness creation:479 and acceptance:417 retain action
+candidate, timing and margins, not q95. actor_row:290–309 exposes neither q95 nor
+wire hash, and recurrent preparation consumes snapshot payload, not readiness q95.
+Thus no direct pre-transfer observation/recurrent/action feedback path was found
+for a strictly output-only service sigmoid. Wire bytes/hash may differ, so full
+trace/state bit identity would be false. A changed certificate can affect later
+application/state; no new counterfactual or all-future-trace equivalence is measured
+here. The concrete fixed-input implication remains that all four original calls
+still fail their unchanged Mahalanobis conjunct. Joint covariance/mean changes
+also touch snapshot feedback and cannot borrow this narrower service-only finding.
+
 ## Alternative (b): observe actual loss/mask support before correction
 
 Native masks and fragments are explicit reusable inputs if the exact needed data
