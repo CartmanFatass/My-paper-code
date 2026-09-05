@@ -133,3 +133,37 @@ selection; SCDMP shows an argmax/census precursor; RCLE has a historical large
 multi-claim design. Conversely MGTAP's cheap B03 and FSD's competent public-greedy
 comparison provide scientific reasons for their narrow stops. Full cited critic
 returns remain pending, so no blanket reclassification is made here.
+
+### Cross-direction origin evidence returned by independent critics
+
+ACVC: at contemporaneous pin7154944edd, evidence-spec §4/§11 already rejects
+exact-census prerequisites for ordinary B. Critic A traced DM R01 intake
+lines91–104 introducing headroom before any learner and calling it least costly.
+Prompt commit34e7e9d8 retains that recommendation while offering a learner-competence
+alternative; its cost field says not applicable because no experiment is launched
+by the packet. Pro then selects complete reachable horizon12 support under120s,
+with cost law excused as not a sweep. Frozen card5f666d815 forbids sampling;
+engineering evidence later finds h4=38.5775s, h5 incomplete at115s. Reopened prompt
+ed10f84a3 narrows choices and expressly forbids learner before material headroom.
+This supports author-introduced prerequisite followed by Pro concretization and
+subsequent restriction persistence. Later accepted R03 certificate remains valid.
+Exact path/line table is being finalized by critic A; these are attributed findings,
+not a claim that Root independently reread every cited artifact yet.
+
+SCDMP: critic B compared spec at d39757b, first prompt7a2d0ae25 in
+`docs/research/candidates/semigroup_consistent_duration_model_policy/external/2026-09-04-scdmp-d6-recast-convergence-01/PROMPT_BODY.md`,
+and its paired Pro response. Prompt excluded theorem/C burden but did not demand
+two-way argmax or the1152-case census. Pro response first introduced the
+pre-learner census with positive k7/k13 margins; the card implemented it. After
+CM dissent, reopen prompt3047d84f1 offered a non-gating census/full-B alternative,
+but Pro selected split-A-then-reopen-B while retaining the stronger rationale.
+This is Pro-originated precursor and persistence through evidence-class splitting,
+not evidence that DM alone invented it. Final full-path review return is pending.
+
+Candidate process causes supported across these chains: conflating finite/exact
+or zero-learner work with cheap work; author or Pro elevating a diagnostic to an
+eligibility condition; checking cost only after scientific selection; preserving
+overspecified meaning through successive rounds without reconsidering its value;
+and engineering review testing fidelity rather than sufficiency of the design.
+These are observable decision mechanisms. A model-competence or psychological
+explanation is not established. Changing a model alone is not an evidenced repair.
