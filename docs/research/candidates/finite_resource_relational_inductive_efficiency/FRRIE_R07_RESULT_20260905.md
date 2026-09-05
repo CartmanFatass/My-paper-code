@@ -115,3 +115,13 @@ exoneration or repaired-cause claim follows. This is one further author-fixed
 literal path, not a random-root population result, stable superiority claim or
 C benchmark. Current integration owner reviews were[] at collection.
 
+
+## Existing trained-state retention
+
+Read-only remote file inventory at collection found only summary.json in each
+R06/R07 scientific output root (122511/123996 bytes respectively). Their eight
+checkpoint_state entries contain model/optimizer digests and moment summaries,
+not reloadable trained model or optimizer bytes. The executed publisher writes
+only summary.json; no existing reloadable trained checkpoint is retained in
+these output artifacts. No replay, evaluation, regeneration or artifact change
+was performed to answer this inventory question.
