@@ -194,9 +194,14 @@ tree, compatibility shim or repeated smoke machinery. Existing remote supervisor
 CM owns only `experiments/candidates/finite_resource_relational_inductive_efficiency/b01_contact_r02/semantics.py`,
 the adjacent `experiment.py`, a new `scripts/run_frrie_b01_contact_r06.py`, the focused mirrored
 `tests/experiments/candidates/finite_resource_relational_inductive_efficiency/b01_contact_r06/test_experiment.py`
-and direction-local technical records. Use explicit keyword defaults for LR, object ID
-and branch prefix, preserving original R02 defaults. The small literal R06 entry point supplies
-this card's ID, LR 0.003 and R06 labels. Do not monkeypatch globals or copy the complete runner.
+and direction-local technical records. The 2026-09-05 prospective layout adjustment is recorded
+in `FRRIE_R06_MODULE_ENTRY_LAYOUT_INTAKE_20260905.md`: use a module-only R06 entry point that
+calls the original `main(argv)` with the fixed `--lr003` flag, restore that original signature,
+and use one argparse `store_true` option to select LR 0.003 versus the original default 0.0003.
+Forward only the selected LR to `execute`; publish this card's fixed R06 ID and branch prefix
+for its LR, preserving original R02 identity/default behavior otherwise. Restore the existing
+public initializer export binding. Remove manual sys.path bootstrap and redundant ID/prefix
+forwarding. Do not monkeypatch globals, add a configuration layer or copy the complete runner.
 Keep original native branch predicates and 0.005 threshold; implement the declared actual-LR
 exposure checks. Publish actual LR, distinct object identity and the complete original summary.
 
@@ -207,8 +212,9 @@ reaches actual optimizers, original defaults remain, and the toy end-to-end path
 real publisher. Do not repeat unrelated suites. Formal-sized publication test coverage remains
 an open engineering item on the return and does not hold this B launch.
 
-CM's read-only estimate is 45–70 new production lines / 80–110 changed production lines, with
-18–24 lines of launch/parameter forwarding; report actual counts including tests. Hard §5 caps
+The accepted prospective plan has a conservative reviewer estimate of 79 changed production
+lines, including 23 orchestration lines (29.11%), and a nine-line module entry point. This is
+an estimate, not acceptance of unobserved bytes; report actual counts including tests. Hard §5 caps
 remain <2,000 new lines per attempt, <600 per runner and orchestration <30% of the diff. Return
 unrequested machinery or a budget breach instead of accepting it as the cost of a result.
 
@@ -217,3 +223,12 @@ accepted exact bytes, commits/pushes before heavy verification/launch and owns t
 acceptance. Hand the one accepted process handle directly to `/root/tracker_tl_experiments`
 with node/SHA/cwd/output/receipt/bound and this DM's canonical name. Tracker observes; CM
 collects; DM applies the result rule. Test success or process exit does not establish scientific value.
+
+The prospective R06 invocation uses module mode from the exact-SHA repository cwd:
+`python -m pdb -c continue -m scripts.run_frrie_b01_contact_r06` with the original output-root,
+admission-receipt and seed arguments, existing fixed pdb input and the already declared timeout.
+Fresh actual-node admission still immediately precedes it in the same detached command. The
+ordinary focused toy path likewise uses `python -m scripts.run_frrie_b01_contact_r06`.
+Module loading removes the manual bootstrap; it changes no RNG/model/learner semantics or
+exception-observation requirement. CPython 3.10 pdb uses the same run loop for module targets;
+the relevant inner traceback frame steps remain the existing ones.
