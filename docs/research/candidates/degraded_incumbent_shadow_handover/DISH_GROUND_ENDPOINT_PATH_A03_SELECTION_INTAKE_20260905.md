@@ -97,6 +97,25 @@ accepts technical completeness within engineering budgets, and launches remote-f
 exact pushed bytes. The sole tracker receives an accepted handle directly. After terminal
 collection DM applies the A03 rule; no following B run is authorized by this intake.
 
+## Pre-result card precision — relay provenance
+
+Read-only inspection of the ordinary native order (`process_pending_arrivals`, followed
+by application, relay reservation and service evaluation) shows that a service tick at
+the CAS boundary may still use an in-flight packet sent by the old owner. No A03 native
+output or test exists at this amendment, and the card's host/controller/budget is unchanged.
+
+Object-tier options: **(a), recommended**, count a qualified consequence only when the
+actual adopted base packet was relayed by the promoted physical owner at or after its
+legal application; (b) count any service temporally at/after CAS as the consequence;
+(c) add a new counterfactual service intervention. Select **(a)**. It is the smallest
+reading refinement that links the observed action to its ordinary message path. Copy
+pending relay sender/tick into the trace and carry them through actual base adoption;
+no protocol/ABI mutation or new experiment is added. All service remains reported.
+
+Owner-delegated decision (unattended, 2026-09-03 instruction): **(a)**. This is a
+prospective card-wording/observable clarification, not an outcome-informed redefinition
+of a result. Current integration owner reviews again return no unapplied instruction.
+
 ## Append-ready audit rows for Root
 
 Anchor: `n3-ground-endpoint-a03-selection`. Root owns the shared audit file.
@@ -105,3 +124,4 @@ Anchor: `n3-ground-endpoint-a03-selection`. Root owns the shared audit file.
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | 2026-09-05T03:56:32-07:00 | degraded_incumbent_shadow_handover (N3) | object | selection | a one declared ground-terminal law and paired ordinary trace; b literal repeat/new learning; c sweep/manufactured controller; d local family change | a | yes | OWNER_DELEGATED, 2026-09-03 instruction | docs/research/portfolio/owner/inbox/2026-09-05/20260905-dish-011.json | none | |
 | 2026-09-05T03:56:50-07:00 | degraded_incumbent_shadow_handover (N3) | object | selection | accept; reject; revise | A03 card frozen; recommendation accept, no result yet | yes | DM_CARD | docs/research/portfolio/owner/inbox/2026-09-05/20260905-dish-012.json | none | |
+| 2026-09-05T04:00:40-07:00 | degraded_incumbent_shadow_handover (N3) | object | technical | a actual promoted-owner relay consequence; b any service after CAS; c counterfactual intervention | a | yes | OWNER_DELEGATED, 2026-09-03 instruction | docs/research/portfolio/owner/inbox/2026-09-05/20260905-dish-013.json | none | |
