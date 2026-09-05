@@ -138,6 +138,14 @@
       "record": "docs/research/portfolio/decisions/2026-09-05-scientific-tools-adoption.md",
       "state": "applied",
       "summary": "Owner-approved scientific tool batches 1 and 2 connected to Root, seven roles and Pro authoring; executable run summary and plot checked; optional frameworks remain task-scoped."
+    },
+    {
+      "at": "2026-09-05T23:03:43+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/project/GITHUB_RESEARCH_COLLABORATION.md",
+      "record": "docs/research/portfolio/pro_packets/20260905_github_collaboration_pilot/DISPATCH.json",
+      "state": "applied",
+      "summary": "GitHub Issue1 and evidence comment created; scoped discussion URLs supported; Pro capability/tool pilot dispatched once, discussion access pending; no experiment gate."
     }
   ],
   "approval_correction": "Current explicit owner implementation request; no invented Pro decision, no duplicate requests, no additional approval layer."
