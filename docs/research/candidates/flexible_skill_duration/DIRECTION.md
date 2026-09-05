@@ -58,10 +58,19 @@ Untying the duration `k` is this direction. Untying the agent count `N` is a sep
   rounded-lognormal renewal/reference same-information native-action opportunity census,
   fixed members,K2,mean20,shape1,Delta.4,H400 and k={1,2,5,20,40}. Public greedy is the strongest
   legal null; a structural gap does not establish D2/D8 learning value. No E4 learning matrix,
-  E3 rerun,c retune or D3 recast is selected. The census has not run; actual-node per-law cost/
-  cap and a later invocation card remain unfilled. Decision provenance PRO_FINAL /
+  E3 rerun,c retune or D3 recast is selected. The selected census is now complete3/3 laws,
+  with288 full open-loop candidate values and zero learner exposure. Decision provenance PRO_FINAL /
   OWNER_DELEGATED; no Portfolio change. Complete archive/intake:
   `FSD_E3_COMPLETE_CONVERGENCE_INTAKE_20260905.md`. E3 result and bounded H0 remain unchanged.
+- E4 no-training A/RECON: deterministic D20 from age0 has best clock k20 and m_dur=0;
+  geometric/rounded-lognormal have best clock k5 and m_dur=.097099500000/.098225136232.
+  Public greedy equals switching for every law, so these finite structural gaps need no
+  learned policy gap. Using k20 alone would add .045344868963/.045614655901 of clock-grid
+  shortfall on the two random laws. Complete candidate coverage and law moments/hazards are
+  preserved in `FSD_E4_CENSUS_RESULT_EVIDENCE_20260905.md`; numeric mass rounding is not
+  infinite-support exactness and the law comparison changes more than variance. The current
+  discriminator is answered; no successor or learner is selected by
+  `FSD_E4_CENSUS_INTAKE_20260905.md`. Tuned generic renewal-host headroom remains absent.
 
 ## Objects and their state (2026-09-05)
 
@@ -73,7 +82,7 @@ Untying the duration `k` is this direction. Untying the agent count `N` is a sep
 | E1 — age input at fixed `k` | complete; owner prediction stands unrefuted; age not carried forward | `docs/Claude_docs/experiments/E1_AGE_INPUT_RESULT_20260902.md` |
 | E2 — D2 cost sweep on homogeneous corridor | complete; 15 valid runs; frozen verdict `NEITHER`; accepted B intake | `FSD_E2_INTERRUPTION_COST_SWEEP_RESULT_EVIDENCE_20260904.md`; `FSD_E2_INTERRUPTION_COST_SWEEP_INTAKE_20260904.md` |
 | E3 — heterogeneous hazard | complete18/18 valid; original bounded E3-H0-NO-ADVANTAGE retained by complete Convergence | `FSD_E3_HETEROGENEOUS_HAZARD_SCIENCE_CARD_20260904.md`; `FSD_E3_HETEROGENEOUS_HAZARD_INTAKE_20260905.md` |
-| Post-E3 renewal/reference census | sole next A/RECON selected by PRO_FINAL CONTINUE; no training, call card not frozen, census unrun | `FSD_E3_COMPLETE_CONVERGENCE_INTAKE_20260905.md` and its exact archive |
+| Post-E3 renewal/reference census | complete3/3 A/RECON,288 candidates, zero learner; public greedy explains switching opportunity; no successor selected | `FSD_E4_CENSUS_SCIENCE_CARD_20260905.md`; `FSD_E4_CENSUS_RESULT_EVIDENCE_20260905.md`; `FSD_E4_CENSUS_INTAKE_20260905.md` |
 | Advancement plan | E1 → E2 → E2b/E3 → E4 → C-gate; E2b is not selected at this boundary | `docs/Claude_docs/plans/RESEARCH_ADVANCEMENT_PLAN_20260902.md` |
 
 ## Code
@@ -82,7 +91,7 @@ Untying the duration `k` is this direction. Untying the agent count `N` is a sep
 | --- | --- |
 | D2 on the base route | `config_1.py` (`policy_interruption_mode`, `interruption_cost_c`, `interruption_cost_c_Z`, `skill_cap_k_max`, `team_cap_k_Z`, `age_feature`), `hmasd/agent.py` (`_batched_assign_skills_d2`, `_d2_store_transition`, `update_coordinator_d2`), `hmasd/networks.py` (`evaluate_held_batch`, `assign_partial_batch`, `evaluate_training_batch_ordered`), `hmasd/utils.py` (D2 tables, `_compute_d2_high_level_advantages`, `get_d2_coordinator_sampler`) |
 | Corridor host | `envs/relay_corridor/` (`host.py`, `references.py`, `adapter.py`, `hmasd_driver.py`) |
-| Runners | `scripts/run_flexible_skill_duration_e0.py` (E0; E1 imports its loop), `scripts/run_flexible_skill_duration_e2.py` and its study aggregator; `scripts/run_flexible_skill_duration_e3.py` (accepted recorder/paired helpers) |
+| Runners | `scripts/run_flexible_skill_duration_e0.py` (E0; E1 imports its loop), `scripts/run_flexible_skill_duration_e2.py` and its study aggregator; `scripts/run_flexible_skill_duration_e3.py` (accepted recorder/paired helpers); `scripts/run_flexible_skill_duration_e4_census.py` (no-training renewal references) |
 | Tests | `tests/flexible_skill_duration_d2_test.py`, `tests/flexible_skill_duration_e2_test.py`, `tests/relay_corridor_host_test.py`, `tests/relay_corridor_hmasd_test.py`, `tests/uav_env_channel_equivalence_test.py` (throughput refactor) |
 | Fixtures | `tests/fixtures/flexible_skill_duration_d2/fingerprint_off.json` (the `off` byte-identity guard) |
 | Local evidence | `temp/directions/flexible_skill_duration/exp/`, `temp/directions/flexible_skill_duration/probes/` (gitignored; content digests recorded in the result documents) |

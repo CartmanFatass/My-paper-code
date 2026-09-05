@@ -1,0 +1,19 @@
+=== Task 'fsd_e4_census_lognormal_bc3eaeecf_01' started at 2026-09-06T00:43:03+08:00 ===
+{
+  "assessed_at": "2026-09-05T16:43:03.165980Z",
+  "available_physical_bytes": 15424434176,
+  "captured_at": "2026-09-05T16:43:03.165721Z",
+  "cgroup_headroom_bytes": null,
+  "cgroup_memory_current_bytes": null,
+  "cgroup_memory_max_bytes": null,
+  "effective_available_bytes": 15424434176,
+  "effective_floor_pass": true,
+  "failure_reasons": [],
+  "measurement_source": "/proc/meminfo",
+  "minimum_available_bytes": 4294967296,
+  "passed": true,
+  "physical_floor_pass": true,
+  "schema_version": 1
+}
+{"output_seconds": 0.0006723050028085709, "module_wall_seconds_through_output": 1.4455572189908708}
+=== Task 'fsd_e4_census_lognormal_bc3eaeecf_01' exited with code 0 at 2026-09-06T00:43:04+08:00 (Duration: 1s) ===
