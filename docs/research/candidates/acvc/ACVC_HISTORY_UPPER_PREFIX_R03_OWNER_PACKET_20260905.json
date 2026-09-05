@@ -1,0 +1,38 @@
+{
+  "question": "是否认可这张已按继续指令冻结的真实上界卡：先检查实际系数表示和完整成本，再执行一次四步信息前缀上界？",
+  "changes_if_approved": [
+    {
+      "target": "ACVC 已登记的更紧精确上界入口",
+      "from": "只有通用合成计算器的成本通过，真实上界尚未计算",
+      "to": "固定 R02 精确系数和 harm dual，检查真实输入、测完整成本，再最多计算一次真实上界"
+    }
+  ],
+  "if_refused": "在下一个干净边界按意见处理尚未接受的调用，保留既有 HC-D、全部结果、原阈值与 learner 禁令。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/acvc/ACVC_HC_D_COMMON_DENOMINATOR_COST_INTAKE_20260905.md",
+      "quote": "The prescribed common-denominator generic kernel cost is accepted: one complete invocation took `29.25962231500307` seconds and `17,858,560` bytes peak RSS.",
+      "why": "完整历史前缀计算已有可行的工程锚点，可推进单独的真实输入与成本检查。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/acvc/ACVC_HC_D_COMMON_DENOMINATOR_COST_INTAKE_20260905.md",
+      "quote": "real ACVC host-coefficient construction and a real B4 value have not been measured.",
+      "why": "合成通过既不能准入真实系数，也不能判定历史机会是否达到四分之一。"
+    }
+  ],
+  "uncertainty": [
+    "实际分数能否落在本卡的单分数 64 位、共同分母 512 位范围，需要输入检查确认。",
+    "同分母结构的合成成本不宣称最坏情况；真实计算仍受原硬上限约束。",
+    "真实上界若低于四分之一，只支持按原规则停止该固定宿主的 learner 投资；否则 HC-D 继续未决。"
+  ],
+  "cost": {
+    "compute": "一次远端完整成本评估，40 秒或 0.75 GiB 停止；通过三倍时间和双倍内存投影后，一次真实计算，上限 120 秒和 1.5 GiB。每次均重新检查实际节点可用内存。",
+    "owner_time": "可异步阅览，无需现在回复。",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing；执行已有对象权限，意见在干净边界应用。"
+  },
+  "verdict_text": "Recommendation(a) is the smallest concrete registered re-entry discriminator after the generic engineering dependency was resolved.",
+  "source": "docs/research/candidates/acvc/ACVC_HISTORY_UPPER_PREFIX_R03_SCIENCE_CARD_20260905.md"
+}
