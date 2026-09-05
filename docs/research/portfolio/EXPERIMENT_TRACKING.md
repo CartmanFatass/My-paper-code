@@ -82,6 +82,8 @@ FSD large D0 seed3 terminal: the same handle finished exit `0`, wrapper PID `167
 
 FSD large D2 seed3 terminal: `fsd_e3_large_d2_seed3_20260905_01` finished exit `0`, wrapper PID `1674545`, tmux inactive; supervisor duration `2575s` (observer uptime `2629s`) with a completed 20-rollout/`128000`-transition summary. A bounded SSH observation-loss interval was resolved against the same PID/task before terminal. FSD DM ACKed delivery; CM collection/conformance and DM cell18 intake remain the owner steps. This historical handle is closed to tracker observation and creates no successor.
 
+FRRIE R09 terminal: `frrie_b01_contact_r09_43eec21e`, SHA `43eec21e9584c83e5e8d940402d7e4570b454e59`, failed exit `139`, PID `1678071`, tmux inactive. The supervisor log recorded a monitored-command core dump and segmentation fault in the existing python+pdb runner after `16s`; admission had passed. Terminal delivery was ACKed by FRRIE DM and CM collected the same evidence. Cause remains unclassified pending reproduction; tracker performed no retry, replacement, or scientific inference.
+
 ## Accepted work and terminal handoffs
 
 | DM / run record | Node and accepted handle | Launch SHA | Remote cwd | Output / receipt | Latest authoritative observation | Next owner step / notification |
