@@ -1,0 +1,48 @@
+{
+  "question": "是否接受这张只比较两个地面端点定义、沿普通原生链观察的 A03 诊断卡？",
+  "changes_if_approved": [
+    {
+      "target": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_GROUND_ENDPOINT_PATH_A03_SCIENCE_CARD_20260905.md",
+      "from": "没有具体的新宿主或后继实验",
+      "to": "一个两米地面终端定义，与字面宿主各执行至多一集；保留同一策略，零训练"
+    }
+  ],
+  "if_refused": "在下一干净边界按你的具体修改意见调整尚未执行的工作；保留全部已有证据和 CONTINUE，不自动改家族或重复旧学习。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_A02_HOST_CONVERGENCE_PRO_INTAKE_20260905.md",
+      "quote": "PRO_FINAL CONTINUE",
+      "why": "Convergence 只允许在既有来源选择家族内先定义一个不同宿主，再用普通轨迹检查完整路径。"
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_GROUND_ENDPOINT_PATH_A03_SCIENCE_CARD_20260905.md",
+      "quote": "Continue after any application-valid boundary",
+      "why": "跨过合法应用边界继续看原生动作和服务，避免再做一个只看射线或准备阶段的诊断。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_GROUND_SOURCE_POINT_A02_RESULT_EVIDENCE_20260905.md",
+      "quote": "A02-ENDPOINT-CLEARANCE-WITNESS",
+      "why": "旧结果证明的是原定义的端点阻碍，未证明新宿主有效。"
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_GROUND_ENDPOINT_PATH_A03_SCIENCE_CARD_20260905.md",
+      "quote": "A single pair gives no population estimate.",
+      "why": "一个旧策略和一个坐标即使成功，也不能证明来源效应或普遍能力。"
+    }
+  ],
+  "uncertainty": [
+    "真实信息到达后，准备、就绪和合法交接仍可能停在下游。",
+    "两米高度与线性净空是明确的宿主解释，尚无物理真实性或最优性的证据。",
+    "视觉遮挡棱柱使用新目标高度，边界与采样不变，相交结果可自然改变。"
+  ],
+  "cost": {
+    "compute": "每宿主预计 88.48 秒、上限 300 秒；两宿主预计 176.96 秒、总上限 600 秒。零训练，远端新鲜内存准入。",
+    "owner_time": "约两分钟",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing；自动循环不等待批改"
+  },
+  "verdict_text": "建议采用一个明确的两米地面终端与线性净空定义，在原坐标用同一保留策略各跑至多一集，记录真实到达、协议、动作和服务；不强制触发，也不推断来源价值。",
+  "source": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_GROUND_ENDPOINT_PATH_A03_SCIENCE_CARD_20260905.md"
+}
