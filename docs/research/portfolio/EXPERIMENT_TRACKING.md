@@ -20,9 +20,11 @@ object), FRRIE DM
 `/root/dm_amx_n3_approved` with CM `/root/dm_amx_n3_approved/cm_am_n3_a05_approved`,
 and CBSC DM `/root/dm_amx_cbsc_approved` (its CM is supplied only with an actual handoff).
 Current VSP03 routing is DM `/root/dm_amx_k1_vsp03_design` with CM
-`/root/dm_amx_k1_vsp03_design/cm_am_vsp03_b01`. FSD, FRRIE, N3, and VSP03 ACKed direct
-delivery; the FRRIE, N3, and VSP03 CMs also ACKed tracker adoption. These paths apply only to
-new handles and do not revive historical DM routes recorded below.
+`/root/dm_amx_k1_vsp03_design/cm_am_vsp03_b01`; VSPC1 routing is DM
+`/root/dm_amx_k4_vspc1_design` with CM `/root/dm_amx_k4_vspc1_design/cm_am_vspc1_b01`.
+FSD, FRRIE, N3, VSP03, and VSPC1 ACKed direct delivery; the FRRIE, N3, VSP03, and VSPC1 CMs
+also ACKed tracker adoption. These paths apply only to new handles and do not revive historical
+DM routes recorded below.
 
 ## Current observation snapshot
 
@@ -51,7 +53,13 @@ collection/verification: exit `0`, PID `1704022`, inactive tmux, fresh effective
 `15388168192` bytes, supervisor duration `3s`, runner whole wall `2.364870157005498s`, and
 peak RSS `484868096` bytes. The supervisor records `complete` and `within_cap`; this remains
 a process observation only and does not itself provide scientific interpretation or authorize a
-restart. FRRIE A01 and
+restart. VSPC1 B01 serial FACTOR `vspc1_b01_factor_s0_e7e574b44_01` and GENERIC
+`vspc1_b01_generic_s0_e7e574b44_01` are terminal and passed to their CM/DM: both exit `0` with
+inactive tmux; FACTOR PID `1704221`, fresh physical/effective memory `15404367872` bytes,
+supervisor duration `2s`, runner wall `1.479294378994382s`; GENERIC PID `1704797`, fresh
+physical/effective memory `15411888128` bytes, supervisor duration `4s`, runner wall
+`3.1904162949940655s`. These are process facts only and imply no restart or scientific
+interpretation. FRRIE A01 and
 the FSD E4 technical-test, three calibration, and three formal-census handles are terminal and
 closed to repeat reminders. FSD's DM ACKed all three formal census terminal facts after CM
 technical acceptance; FRRIE's DM ACKed A01, and its CM has collected the original evidence.
