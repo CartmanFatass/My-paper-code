@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "repository": "marlbenchmark/on-policy",
+  "source_root": "C:/Projects/ref-lib/on-policy",
+  "fixed_sha": "de66d7a4b23fac2513f56f96f73b3f5cb96695ac",
+  "official_repository_url": "https://github.com/marlbenchmark/on-policy",
+  "fixed_commit_url": "https://github.com/marlbenchmark/on-policy/commit/de66d7a4b23fac2513f56f96f73b3f5cb96695ac",
+  "license": {
+    "name": "MIT",
+    "path": "LICENSE",
+    "copyright": "Copyright (c) 2021 MAPPO contributors",
+    "url": "https://github.com/marlbenchmark/on-policy/blob/de66d7a4b23fac2513f56f96f73b3f5cb96695ac/LICENSE"
+  },
+  "reports": [
+    "CORE_EVIDENCE.md",
+    "ROOT_RETURN.md",
+    "AGENTS_INDEX.json"
+  ],
+  "overlay_policy": {
+    "source_files_read_only": true,
+    "upstream_agents_preserved": true,
+    "upstream_agents_status_at_fixed_sha": "absent_at_all_listed_paths",
+    "backup_root": "agents-overlays",
+    "backup_note": "Each backup record preserves the pre-overlay absence of an upstream AGENTS.md at the same relative path."
+  },
+  "navigation_files": [
+    {
+      "source_relative_path": "AGENTS.md",
+      "scope": "repository overview and fixed-snapshot survey boundary",
+      "upstream_status": "absent",
+      "backup_relative_path": "agents-overlays/AGENTS.md"
+    },
+    {
+      "source_relative_path": "onpolicy/AGENTS.md",
+      "scope": "package-level navigation",
+      "upstream_status": "absent",
+      "backup_relative_path": "agents-overlays/onpolicy/AGENTS.md"
+    },
+    {
+      "source_relative_path": "onpolicy/runner/AGENTS.md",
+      "scope": "shared versus separated runner split",
+      "upstream_status": "absent",
+      "backup_relative_path": "agents-overlays/onpolicy/runner/AGENTS.md"
+    },
+    {
+      "source_relative_path": "onpolicy/runner/shared/AGENTS.md",
+      "scope": "shared rollout, policy, trainer, and buffer handoff",
+      "upstream_status": "absent",
+      "backup_relative_path": "agents-overlays/onpolicy/runner/shared/AGENTS.md"
+    },
+    {
+      "source_relative_path": "onpolicy/runner/separated/AGENTS.md",
+      "scope": "per-agent rollout, update, and separated buffer path",
+      "upstream_status": "absent",
+      "backup_relative_path": "agents-overlays/onpolicy/runner/separated/AGENTS.md"
+    },
+    {
+      "source_relative_path": "onpolicy/envs/AGENTS.md",
+      "scope": "dummy, subprocess, shared, and choose vector wrappers",
+      "upstream_status": "absent",
+      "backup_relative_path": "agents-overlays/onpolicy/envs/AGENTS.md"
+    },
+    {
+      "source_relative_path": "onpolicy/envs/starcraft2/AGENTS.md",
+      "scope": "SMAC and SMAC v2 adapters",
+      "upstream_status": "absent",
+      "backup_relative_path": "agents-overlays/onpolicy/envs/starcraft2/AGENTS.md"
+    },
+    {
+      "source_relative_path": "onpolicy/envs/starcraft2/StarCraft2v2/AGENTS.md",
+      "scope": "SMAC v2 capability wrapper and controller lifecycle",
+      "upstream_status": "absent",
+      "backup_relative_path": "agents-overlays/onpolicy/envs/starcraft2/StarCraft2v2/AGENTS.md"
+    },
+    {
+      "source_relative_path": "onpolicy/envs/mpe/AGENTS.md",
+      "scope": "MPE scenario and multi-agent Gym contract",
+      "upstream_status": "absent",
+      "backup_relative_path": "agents-overlays/onpolicy/envs/mpe/AGENTS.md"
+    },
+    {
+      "source_relative_path": "onpolicy/envs/football/AGENTS.md",
+      "scope": "Google Research Football adapter",
+      "upstream_status": "absent",
+      "backup_relative_path": "agents-overlays/onpolicy/envs/football/AGENTS.md"
+    },
+    {
+      "source_relative_path": "onpolicy/envs/hanabi/AGENTS.md",
+      "scope": "turn-based Hanabi adapter and choose reset contract",
+      "upstream_status": "absent",
+      "backup_relative_path": "agents-overlays/onpolicy/envs/hanabi/AGENTS.md"
+    },
+    {
+      "source_relative_path": "onpolicy/algorithms/AGENTS.md",
+      "scope": "algorithm family map and MAPPO focus",
+      "upstream_status": "absent",
+      "backup_relative_path": "agents-overlays/onpolicy/algorithms/AGENTS.md"
+    },
+    {
+      "source_relative_path": "onpolicy/algorithms/r_mappo/AGENTS.md",
+      "scope": "R_MAPPO trainer and policy boundary",
+      "upstream_status": "absent",
+      "backup_relative_path": "agents-overlays/onpolicy/algorithms/r_mappo/AGENTS.md"
+    },
+    {
+      "source_relative_path": "onpolicy/algorithms/r_mappo/algorithm/AGENTS.md",
+      "scope": "R_MAPPO policy facade and actor/critic",
+      "upstream_status": "absent",
+      "backup_relative_path": "agents-overlays/onpolicy/algorithms/r_mappo/algorithm/AGENTS.md"
+    },
+    {
+      "source_relative_path": "onpolicy/algorithms/utils/AGENTS.md",
+      "scope": "NumPy-to-Torch conversion, feature layers, GRU, and action heads",
+      "upstream_status": "absent",
+      "backup_relative_path": "agents-overlays/onpolicy/algorithms/utils/AGENTS.md"
+    },
+    {
+      "source_relative_path": "onpolicy/utils/AGENTS.md",
+      "scope": "shared and separated NumPy replay buffers and generators",
+      "upstream_status": "absent",
+      "backup_relative_path": "agents-overlays/onpolicy/utils/AGENTS.md"
+    },
+    {
+      "source_relative_path": "onpolicy/scripts/AGENTS.md",
+      "scope": "training shell and Python entry-point map",
+      "upstream_status": "absent",
+      "backup_relative_path": "agents-overlays/onpolicy/scripts/AGENTS.md"
+    },
+    {
+      "source_relative_path": "onpolicy/scripts/train/AGENTS.md",
+      "scope": "environment entry points, config, seeds, and runner selection",
+      "upstream_status": "absent",
+      "backup_relative_path": "agents-overlays/onpolicy/scripts/train/AGENTS.md"
+    }
+  ]
+}
