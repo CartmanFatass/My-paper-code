@@ -361,8 +361,37 @@ accepted state, readiness or ownership is allowed; no new learner or source-effe
 is authorized. The locally selected A03 card now declares a terrain-referenced two-metre
 ground terminal, linear ground-linked clearance, the same retained causal policy and
 one ordinary episode per host at the original coordinate. Its literal comparator and
-all failed/partial stages are retained; no A03 outcome exists at this boundary. See
+all failed/partial stages are retained. Its now-complete A03 intake below observes
+restored access and incumbent service with a remaining legal-application gap. See
 `DISH_GROUND_ENDPOINT_PATH_A03_SCIENCE_CARD_20260905.md` and
 `DISH_GROUND_ENDPOINT_PATH_A03_SELECTION_INTAKE_20260905.md`. Decision evidence:
 `DISH_A02_HOST_CONVERGENCE_PRO_INTAKE_20260905.md` and the exact response under
 `external/2026-09-05-dish-a02-host-convergence-01/`.
+
+## Accepted ground-endpoint path A03 — 2026-09-05
+
+**Conclusion and bounded claim.** One complete paired A/RECON trajectory reaches
+**A03-DOWNSTREAM-STAGE-GAP** on the prospectively distinct ground-terminal host.
+Each host has 1,200 live completed ticks. The new host has actual SOURCE adoptions
+287/287, snapshot/readiness deliveries 331/634 and 299 native service ticks, while
+the literal host has none. Both remain with their initial physical owner. Four
+new-host intents carry certificate 0; no application-valid boundary or legal transfer
+occurs. The 299 service ticks all precede any transfer and are not source-selection value.
+
+**Strongest support and contradiction.** The declared endpoint law restores real
+information and ordinary incumbent service without parameter updates or forced signals.
+The absent legal application and four rejected intents prevent full path qualification.
+The complete data agree with the DM's predicted input-restoration/downstream-gap branch;
+test conformance and service under the original owner cannot establish shadow advantage.
+
+**Surviving alternative and next discriminator.** The fixed retained policy's certificate
+inputs and ordinary action/timing predicates remain unresolved. Select a separately carded,
+data-only reconstruction of all four recorded origin-certificate calls at the exact
+post-projection/pre-motion boundary. No new trace, learner, threshold override, source
+intervention, RECAST or Portfolio action is selected. No tuned headroom exists; the B01
+source-effect MEI remains unestimated. Existing RCLE/FOLR/VSP-02 meanings stay separate.
+
+Evidence: `DISH_GROUND_ENDPOINT_PATH_A03_RESULT_EVIDENCE_20260905.md`,
+`DISH_GROUND_ENDPOINT_PATH_A03_SUMMARY_20260905.json`,
+`DISH_GROUND_ENDPOINT_PATH_A03_COLLECTION_20260905.md`,
+`DISH_GROUND_ENDPOINT_PATH_A03_INTAKE_20260905.md`.

@@ -1,0 +1,42 @@
+{
+  "question": "是否接受只用已保存四次意图输入、复算原证书条件的 A04 卡？",
+  "changes_if_approved": [
+    {
+      "target": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_ORIGIN_CERTIFICATE_A04_SCIENCE_CARD_20260905.md",
+      "from": "知道四次原生证书为零，但未分解谓词",
+      "to": "在固定四处原调用边界逐条复算现有条件；无新轨迹、策略或阈值变化"
+    }
+  ],
+  "if_refused": "在下一干净边界按你的具体修改意见调整尚未运行的诊断；保留 A03 下游缺口读法和所有原始证据。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_GROUND_ENDPOINT_PATH_A03_INTAKE_20260905.md",
+      "quote": "Four emitted intents (origins 340/364/388/596) all carry certificate 0",
+      "why": "缺口已落在四个具体可定位的普通调用，无需再造暴露。"
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_GROUND_ENDPOINT_PATH_A03_COLLECTION_20260905.md",
+      "quote": "All required inputs for a data-only reconstruction of the four emitted-origin certificate calls are already in the original trace.",
+      "why": "已有数据可支持复算，静态映射已区分投影后命令与运动前位置。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_ORIGIN_CERTIFICATE_A04_SCIENCE_CARD_20260905.md",
+      "quote": "Multiple predicates can fail; do not force one cause.",
+      "why": "指出失败条件不代表改变它会提高服务，也不能反推普遍协议失败。"
+    }
+  ],
+  "uncertainty": [
+    "预测／服务置信度还是动作／状态条件占主导，尚未计算。",
+    "若数值紧贴阈值或与原生布尔值不一致，必须保留差异，不能放宽合法条件。"
+  ],
+  "cost": {
+    "compute": "预计19.5秒，上限60秒；远端读取一个已保存文件，四处计算，零模型与原生轨迹。",
+    "owner_time": "约一分钟",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing；循环不等待批改"
+  },
+  "verdict_text": "建议只读四次真实意图的既有输入，在原调用边界复算每条原证书条件；保留全部失败条件和数值边界，不重跑、不训练、不改阈值。",
+  "source": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_ORIGIN_CERTIFICATE_A04_SCIENCE_CARD_20260905.md"
+}
