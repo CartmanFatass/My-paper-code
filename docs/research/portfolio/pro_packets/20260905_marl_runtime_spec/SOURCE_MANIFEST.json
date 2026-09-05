@@ -19,7 +19,14 @@
       "license_path": "LICENSE",
       "license": "Apache-2.0",
       "upstream_agents": [],
-      "local_overlay_paths": [],
+      "local_overlay_paths": [
+        "AGENTS.md",
+        "src/components/AGENTS.md",
+        "src/controllers/AGENTS.md",
+        "src/envs/AGENTS.md",
+        "src/learners/AGENTS.md",
+        "src/runners/AGENTS.md"
+      ],
       "worker_artifacts": [],
       "source_focus": [
         "src/runners/parallel_runner.py",

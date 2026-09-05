@@ -9,7 +9,7 @@ executed.
 
 | Name | Clone directory | Fixed commit | License | Worker overlay status |
 | --- | --- | --- | --- | --- |
-| EPyMARL | `C:/Projects/ref-lib/epymarl` | `cbc38c09588064eab978501d0f12c2cf58fa7fc2` | Apache-2.0 | pending library worker |
+| EPyMARL | `C:/Projects/ref-lib/epymarl` | `cbc38c09588064eab978501d0f12c2cf58fa7fc2` | Apache-2.0 | overlay captured; evidence pending |
 | MAPPO on-policy | `C:/Projects/ref-lib/on-policy` | `de66d7a4b23fac2513f56f96f73b3f5cb96695ac` | MIT | pending library worker |
 | BenchMARL | `C:/Projects/ref-lib/BenchMARL` | `65d649d80e0bdcbdbe2c5d6a3f02dbfed8f0bec1` | MIT | pending library worker |
 | MARLlib | `C:/Projects/ref-lib/MARLlib` | `80e9973a430271a93c781d7422133acb1198f84b` | MIT | pending library worker |
