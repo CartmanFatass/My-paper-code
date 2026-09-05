@@ -59,7 +59,7 @@ and diff whitespace. No scientific invocation or six-library benchmark belongs t
 Directed check result: PASS. Four TOMLs parsed, every non-instruction role setting matched the
 pre-change version, full Pro general clauses/appendix were preserved, the response digest matched,
 all31 evidence paths and E01 task existed; `git diff --check` passed. No scientific invocation.
-The
-commit containing this record is the initial application commit (`git log --follow -- <path>`).
+Initial complete application commit: `aaaad1212`, pushed to main. Active engineering
+handoff: [CM assignment](../handoffs/2026-09-05-vnfc-e01-cm.md).
 Existing starred P1 `20260905-root-005` and P2 `20260905-vnfc-001` receive CLI application traces
 with this exact source and file list, retaining real owner replies. No P3/P4 backfill.
