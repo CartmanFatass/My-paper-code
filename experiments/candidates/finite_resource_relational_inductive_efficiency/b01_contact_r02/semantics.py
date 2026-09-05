@@ -69,10 +69,10 @@ def exposure_record(
 
 
 def cost_config(
-    updates: int, checkpoints: Sequence[int], episodes: int,
+    updates: int, checkpoints: Sequence[int], episodes: int, *, role_column_cut: bool = False,
 ) -> dict[str, Any]:
     training = 4_928 * updates
-    evaluation = len(checkpoints) * len(ROSTERS) * episodes * HORIZON
+    evaluation = (len(checkpoints) + role_column_cut) * len(ROSTERS) * episodes * HORIZON
     uniform = len(ROSTERS) * episodes * HORIZON
     return {
         "updates": updates,
@@ -84,10 +84,10 @@ def cost_config(
         "shared_uniform": uniform,
         "invocation": 2 * (training + evaluation) + uniform,
         "optimizer_steps_per_arm": updates,
-        "cells": len(ROSTERS) + 2 * len(checkpoints) * len(ROSTERS),
+        "cells": len(ROSTERS) + 2 * (len(checkpoints) + role_column_cut) * len(ROSTERS),
         "evaluation_episodes_total": (
             len(ROSTERS) * episodes
-            + 2 * len(checkpoints) * len(ROSTERS) * episodes
+            + 2 * (len(checkpoints) + role_column_cut) * len(ROSTERS) * episodes
         ),
         "factual_learner_transitions_per_arm": 64 * updates * HORIZON,
         "factual_learner_transitions_total": 128 * updates * HORIZON,
@@ -128,7 +128,9 @@ def classify_r02(
         ("r07_binding", "initial_projection_conformant", "contact_history_truthful")
         if branch_prefix == "R07" else ("initial_tight_clip_changed_exactly_five",)
     )
-    if branch_prefix in ("R06", "R07") and any(
+    if branch_prefix == "R08":
+        required_true += ("r08_binding", "initial_projection_conformant", "cut_panel_complete")
+    if branch_prefix in ("R06", "R07", "R08") and any(
         rule_inputs.get(name) != {public: [0.003] for public in PUBLIC_ARM.values()}
         for name in ("initial_optimizer_group_lr", "final_optimizer_group_lr")
     ):
@@ -148,6 +150,24 @@ def classify_r02(
         or descriptors is None
     ):
         return f"{branch_prefix}_INVALID_INCOMPLETE"
+    if branch_prefix == "R08":
+        rows = rule_inputs.get("cut_contrasts", [])
+        if len(rows) != 2 or {row["roster"] for row in rows} != set(ROSTERS) or any(
+            not math.isfinite(row[name]) for row in rows for name in ("d_I", "d_C", "a", "e_I", "e_C")
+        ):
+            return "R08_INVALID_INCOMPLETE"
+        primary = next(row for row in rows if row["roster"] == 15)
+        if primary["e_I"] < 0:
+            return "R08_INTACT_EDGE_BELOW_UNIFORM"
+        if primary["d_I"] < MEI:
+            return "R08_NO_MATERIAL_POSITIVE_ANCHOR"
+        if primary["e_C"] < 0:
+            return "R08_ROTATED_EDGE_BELOW_UNIFORM"
+        if primary["a"] >= MEI:
+            return "R08_MATERIAL_ATTENUATION"
+        if primary["a"] <= -MEI:
+            return "R08_MATERIAL_AMPLIFICATION"
+        return "R08_INTERACTION_WITHIN_MEI"
     if branch_prefix == "R07":
         if rule_inputs["first_tight_contact_update"] is None:
             return "R07_NO_OBSERVED_CONTACT"
@@ -166,6 +186,33 @@ def classify_r02(
     if any(d_value <= -MEI for d_value, _ in descriptors.values()):
         return f"{branch_prefix}_ADVERSE_OR_MIXED"
     return f"{branch_prefix}_SMALL_OR_ROSTER_MIXED"
+
+
+def cut_contrasts(cells: Sequence[Mapping[str, Any]], checkpoints: Sequence[int], episodes: int) -> tuple[list[dict[str, Any]], bool]:
+    rotated = "SEMANTIC_COLUMN_ROTATE"
+    expected = {(arm, checkpoint, n, "INTACT") for arm in PUBLIC_ARM.values()
+                for checkpoint in checkpoints for n in ROSTERS}
+    expected.update(("UNIFORM_LEGAL", None, n, "INTACT") for n in ROSTERS)
+    expected.update((arm, checkpoints[-1], n, rotated) for arm in PUBLIC_ARM.values() for n in ROSTERS)
+    observed = {(row["arm"], row["checkpoint"], row["roster"], row["intervention"]): row for row in cells}
+    complete = len(cells) == len(expected) and set(observed) == expected and all(
+        row["episodes"] == episodes and row["transitions"] == episodes * HORIZON
+        and row["model_bytes_preserved"] for row in cells
+    )
+    if not complete:
+        return [], False
+    contrasts = []
+    for n in ROSTERS:
+        phy_i, edge_i = (observed[(arm, checkpoints[-1], n, "INTACT")]["J"] for arm in PUBLIC_ARM.values())
+        phy_c, edge_c = (observed[(arm, checkpoints[-1], n, rotated)]["J"] for arm in PUBLIC_ARM.values())
+        uniform = observed[("UNIFORM_LEGAL", None, n, "INTACT")]["J"]
+        d_i, d_c = phy_i - edge_i, phy_c - edge_c
+        contrasts.append({
+            "roster": n, "d_I": d_i, "d_C": d_c, "a": d_i - d_c,
+            "e_I": edge_i - uniform, "e_C": edge_c - uniform,
+            "PHY_INTACT_minus_ROTATE": phy_i - phy_c, "EDGE_INTACT_minus_ROTATE": edge_i - edge_c,
+        })
+    return contrasts, True
 
 
 def contact_integrity(initial: Mapping[str, Any], curves: Mapping[str, Any], first: int | None) -> dict[str, bool]:
