@@ -20,14 +20,14 @@ not revive historical DM routes recorded below.
 
 ## Current observation snapshot
 
-At `2026-09-05T11:31:15Z`, live tracker-owned processes are FSD
+At `2026-09-05T11:54:xxZ`, there is no live tracker-owned process. The prior FSD
 `(wsl_4070, fsd_e3_large_d2_seed2_20260905_01)`: `running`, exit `null`, PID `1663230`,
 `tmux_active=true`, SHA `6d64a95a1189523e39abb184ef284a574050b748`, cwd
 `/home/wu/hmasd-worktrees/fsd_e3_large_d2_seed2_20260905_01`, output
 `temp/directions/flexible_skill_duration/exp/E3_20260904/large_d2_seed2`, receipt sibling
 `preflight.json`, and log `/home/wu/.agent-tasks/fsd_e3_large_d2_seed2_20260905_01/task.log`.
-Fresh physical/effective admission was `15425314816` bytes. The expected projection is `4.63h`
-and hard cap `8h`; terminal/failure/loss/cap wakes FSD DM and CM directly. FRRIE R08
+Fresh physical/effective admission was `15425314816` bytes. Its terminal is acknowledged by FSD
+DM for CM collection/conformance; no successor is implied. FRRIE R08
 `frrie_b01_contact_r08_58710424` is terminal/ACKed and awaits CM same-evidence collection; its
 fixed pdb context means exit `0` never established learner success. Every other current record is
 terminal or awaiting a separately handed accepted handle. The `2026-09-04T23:39:35Z`
@@ -77,6 +77,8 @@ FSD large D2 seed2 adoption: `(wsl_4070, fsd_e3_large_d2_seed2_20260905_01)`, SH
 N3/ACVC terminal handoffs: N3 A03 focused verification `dish_endpoint_a03_verify_818b2566_01` and its unique result pair `dish_ground_endpoint_a03_seed11_pair_a1` each finished exit `0` and were ACKed by N3 DM for CM collection/verification. ACVC profile-cost `acvc_upper_r03_cost_c4c46e50_01` and unique actual result `acvc_upper_r03_actual_c4c46e50_01` each finished exit `0` and were ACKed by ACVC DM for CM collection. These supervisor facts carry no tracker scientific classification or authorization for an additional invocation.
 
 FRRIE R08 terminal: `frrie_b01_contact_r08_58710424` finished exit `0`, PID `1666370`, tmux inactive; supervisor duration was `874s` (observer uptime `935s`). The bounded log records `sys.exit()` and fixed-pdb interaction; the DM ACKed terminal delivery and CM was woken to collect the original outcome. No learner-success inference, retry, or successor follows from this tracker record.
+
+FSD large D2 seed2 terminal: `fsd_e3_large_d2_seed2_20260905_01` finished exit `0`, wrapper PID `1663230`, tmux inactive; supervisor duration `2841s` (observer uptime `2902s`) and a completed 20-rollout/`128000`-transition summary were retained. FSD DM directly ACKed delivery and resumed the original CM for collection/conformance before intake. This is not a tracker validity classification and authorizes no successor; there are zero live tracker-owned handles.
 
 ## Accepted work and terminal handoffs
 
