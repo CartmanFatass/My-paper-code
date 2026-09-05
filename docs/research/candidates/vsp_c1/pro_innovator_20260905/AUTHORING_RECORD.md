@@ -90,3 +90,8 @@ and the same reusable singleton. Dispatch into Transport uses Luna/xhigh. All Tr
 to Root omit both model and thinking, preserving Root's own settings; those dispatch settings
 must never be copied onto a parent receipt. This is an internal transport instruction, not
 provider-visible science.
+
+The single execution-message dispatch was then accepted: `DISPATCH_ACCEPTED.json` retains the
+fresh unsent observation, exact call and returned tool acknowledgement. This is actual transport
+dispatch, not a ready-only boundary. Provider Send and a Pro decision remain unobserved by the
+author at this boundary; the executor owns them. Do not send this request again.
