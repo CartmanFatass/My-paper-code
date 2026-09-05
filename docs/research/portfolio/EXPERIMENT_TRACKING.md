@@ -53,6 +53,8 @@ Paused drain boundary, `2026-09-05T01:46Z`–`01:47Z`: authoritative `agent-task
 
 Resume snapshot, `2026-09-05` OWNER_DIRECT: the prior pause is superseded. This resumed default tracker remains `/root/tracker_tl_experiments` on `hmasd-experiment-tracker` Terra/low. Root's authoritative remote supervisor check found zero live handles and no pending owner review. FSD, FRRIE, N3, CRTO, and CBSC are the initial advancing chains; VNFC remains queued after its cost block and the N5 allocation family remains parked. Historical rows above remain terminal; no historical handle is restarted. The tracker is ready to accept only new direct DM handoffs and will notify their current DMs/CMs directly.
 
+FSD resume adoption: `(wsl_4070, fsd_e3_large_d2_seed1_20260905_01)`, SHA `e6d049849f717b2aca98ab1bb77092e000cd06d9`, cwd `/home/wu/hmasd-worktrees/fsd_e3_large_d2_seed1_20260905_01`, output `temp/directions/flexible_skill_duration/exp/E3_20260904/large_d2_seed1`, receipt sibling `preflight.json`, log `/home/wu/.agent-tasks/fsd_e3_large_d2_seed1_20260905_01/task.log`. At `2026-09-05T09:07:17Z`: `running`, exit `null`, PID `1609006`, `tmux_active=true`; fresh physical/effective admission `15434289152` bytes passed. Notify FSD DM/CM on terminal, failure/loss, or `4.63h` / `8h` cap; no relaunch.
+
 ## Accepted work and terminal handoffs
 
 | DM / run record | Node and accepted handle | Launch SHA | Remote cwd | Output / receipt | Latest authoritative observation | Next owner step / notification |
