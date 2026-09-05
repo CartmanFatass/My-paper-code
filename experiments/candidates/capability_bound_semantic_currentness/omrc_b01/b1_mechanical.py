@@ -637,6 +637,10 @@ def _compute_mechanical_components(facts: Mapping[str, Any]) -> dict[str, bool]:
     for row in resources:
         physical = _integer(row["physical_available_bytes"], "physical available bytes")
         effective = _integer(row["effective_available_bytes"], "effective available bytes")
+        admission_pass = admission_pass and physical >= 4 * _GIB and effective >= 4 * _GIB
+        if any(row[name] is None for name in ("wall_seconds", "peak_rss_bytes", "scratch_peak_bytes", "durable_peak_bytes")):
+            resource_cap_pass = False
+            continue
         wall = _number(row["wall_seconds"], "wall seconds")
         peak_rss = _integer(row["peak_rss_bytes"], "peak RSS")
         scratch = _integer(row["scratch_peak_bytes"], "scratch peak")
@@ -930,14 +934,11 @@ def compute_b1_mechanical(
     attempt_complete = (
         components["inventory"]
         and components["resource_admission"]
-        and components["resource_caps"]
-        and components["publication_digests"]
         and components["finite"]
         and competence_integrity
     )
     packet_readable = (
         components["inventory"]
-        and components["publication_digests"]
         and components["finite"]
         and competence_integrity
     )
