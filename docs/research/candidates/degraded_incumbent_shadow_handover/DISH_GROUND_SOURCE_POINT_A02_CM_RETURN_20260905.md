@@ -47,3 +47,9 @@ child. Original seed11 panel0, block0/TARGET_VISUAL_MASK/K8/speed4/slot0/owner0,
 original addressed RNG/float64. One prepare, zero completedticks/model/learning. Native
 point and publication wall are checked against60s; no live interruption/retry machinery.
 Tracker observes accepted handle; CM collects existing evidence. No successor authorized.
+
+## Accepted point invocation
+
+Task `dish_ground_source_a02_seed11_a1` accepted once at source dd0e01bbc4aa0efd3c22b475585511232c1de4fc and exact command/cwd above. Before dispatch task not_found, output and receipt absent. PID1653258, start epoch1788602013 (2026-09-05T09:53:33Z). Log `/home/wu/.agent-tasks/dish_ground_source_a02_seed11_a1/task.log`. Receipt assessed2026-09-05T09:53:33.113076Z; physical/effective each12932448256bytes, minimum4294967296, passed/floor flags true, source /proc/meminfo. Tracker `/root/tracker_tl_experiments` directly handed expected15/cap60seconds and DM/CM collector addresses. No additional point or successor.
+
+Timing precision: runner wall is sampled after point/readout/Git/RSS and before JSON publication; supervisor wall also includes process startup/publication/admission. Collection must retain both, rather than describe runner wall as complete process wall.
