@@ -1,6 +1,7 @@
 # FRRIE r04 reconstruction A01 CM record — 2026-09-04
 
-Status: `ACCEPTED / RUNNING / TRACKER_ADOPTED`. No terminal or scientific result is claimed.
+Status: `TERMINAL_COLLECTED / NORMAL_COMPLETION / A_RECON_ONLY`. The running snapshots below
+are historical. The recorded r04 fault was not reproduced; its cause remains unresolved.
 
 Authority: `FRRIE_R04_RECONSTRUCTION_A01_SCIENCE_CARD_20260904.md`, frozen and pushed in
 `43a67cb1be0b06c02859e6dcf024d9f4495fc602`. This is one A/RECON diagnostic, not scientific
@@ -106,3 +107,43 @@ It succeeded: original task running, exit null, PID 111201, tmux active, uptime 
 CM sent this restoration directly to tracker and DM. Original launch source, supervisor,
 deadline and artifacts are unchanged; no retry, repair or duplicate polling loop was created.
 This transient loss of observation is not an experiment outcome or a diagnosed transport cause.
+
+## Terminal collection and technical acceptance
+
+Tracker notified CM and DM that the existing task was terminal. CM collected that same
+supervisor's six files, admission and production summary; no new invocation or repair occurred.
+Direct terminal status: `finished`, exit 0, PID 111201, tmux inactive. The preserved log records
+start 2026-09-05T00:05:30Z and end **00:20:57Z**, **927 supervisor seconds**. Later status uptime
+1951 seconds is time since start, not runtime. The original program explicitly exited via
+`sys.exit()` with status 0, independently of the debugger/supervisor's exit 0.
+
+No original uncaught exception or r04 signature appears. Fixed inspection commands execute at
+the post-completion debugger stop before the runner's first statement and report absent locals,
+as in the verified normal branch; these are not learner exceptions. Address/field exception
+capture is not applicable because no original exception occurred. No second script computation
+occurred, and the deadline did not fire.
+
+The original output contains one **118,881-byte** `production/summary.json`; only execution
+identity, configuration, completion/counts/exposure and resource metadata were inspected. Its
+embedded B class/branch and return values are not used: the prospective object remains A/RECON.
+Observed paired updates are 128. Each arm records 128 backward calls, 128 Adam steps,
+8,192 factual episodes, 98,304 factual learner transitions and 630,784 training native slots.
+Evaluation totals 4,608 episodes. All 22 completion checks are true. Runner wall is
+902.2496755629982 seconds and measured peak RSS is 615,354,368 bytes. Per-arm attributed wall:
+PHY 160.52530051894428 seconds; EDGE 160.3020884220823 seconds. These exclude shared work;
+they must not be summed to replace total wall. Final source diff against launch SHA is empty.
+
+Raw copies are retained under this CM worktree's
+`temp/directions/finite_resource_relational_inductive_efficiency/technical/a01-collection/`:
+`frrie_r04_reconstruction_a01_b41a6ba7/` (six supervisor files), `a01_admission.json` (504 bytes),
+and `production-summary.json` (118,881 bytes). Supervisor byte lengths: `task.log` 1,958,
+`runner.sh` 1,929, `status` 9, `exit_code` 2, `pid` 7, `start_time` 11. Remote originals remain
+in their accepted locations. The local directory also retains the separate boundary-check logs
+and supervisor files. No original native library or failed-r04 artifact was loaded or changed.
+
+Technical acceptance: the one unchanged full-chain diagnostic completed within its bound and
+its required conditional observation is available. It does not reconstruct r04's missing
+process state, establish a cause, exonerate the host/native/interpreter, fix r04, resolve
+attempt02, or establish an algorithm effect. No passing test was repeated. The real publication
+path completed in this diagnostic, while formal-sized end-to-end *test* coverage remains
+unrecorded. DM receives the result evidence and determines any next object separately.
