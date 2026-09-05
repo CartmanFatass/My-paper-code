@@ -19,8 +19,10 @@ object), FRRIE DM
 `/root/dm_amx_frrie_a01_resume/cm_am_frrie_a01_diagnostic`, N3 DM
 `/root/dm_amx_n3_approved` with CM `/root/dm_amx_n3_approved/cm_am_n3_a05_approved`,
 and CBSC DM `/root/dm_amx_cbsc_approved` (its CM is supplied only with an actual handoff).
-FSD, FRRIE, and N3 ACKed direct delivery; the FRRIE and N3 CMs also ACKed tracker adoption.
-These paths apply only to new handles and do not revive historical DM routes recorded below.
+Current VSP03 routing is DM `/root/dm_amx_k1_vsp03_design` with CM
+`/root/dm_amx_k1_vsp03_design/cm_am_vsp03_b01`. FSD, FRRIE, N3, and VSP03 ACKed direct
+delivery; the FRRIE, N3, and VSP03 CMs also ACKed tracker adoption. These paths apply only to
+new handles and do not revive historical DM routes recorded below.
 
 ## Current observation snapshot
 
@@ -44,6 +46,12 @@ same-step reproduction `cbsc-approved-repro-8003b96bd-03` is also terminal: exit
 pytest with the bounded log recording a `TypeError` at `token.py:251`. The reviewer, CBSC CM,
 and CBSC DM were directly notified; raw collection remains with CM. This too is a process fact
 only and creates no restart or fourth formal run. FRRIE A01 and
+VSP03 B01 seed1 `vsp03-b01-seed1-r01-20260905` are terminal and passed to their CM/DM for
+collection/verification: exit `0`, PID `1704022`, inactive tmux, fresh effective memory
+`15388168192` bytes, supervisor duration `3s`, runner whole wall `2.364870157005498s`, and
+peak RSS `484868096` bytes. The supervisor records `complete` and `within_cap`; this remains
+a process observation only and does not itself provide scientific interpretation or authorize a
+restart. FRRIE A01 and
 the FSD E4 technical-test, three calibration, and three formal-census handles are terminal and
 closed to repeat reminders. FSD's DM ACKed all three formal census terminal facts after CM
 technical acceptance; FRRIE's DM ACKed A01, and its CM has collected the original evidence.
