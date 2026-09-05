@@ -1,6 +1,11 @@
 # FRRIE R07 technical acceptance and running handoff — 2026-09-05
 
-Status: `ACCEPTED_RUNNING / TECHNICALLY_CONFORMANT / TRACKER_ADOPTED / RESULT_PENDING`.
+Status: `TERMINAL_COLLECTED / VALID_B_EXPLORE / INTAKE_COMPLETE`.
+
+Current boundary: the exact handle ended naturally at 2026-09-05T10:45:16Z. The tracker event
+is acknowledged and `FRRIE_R07_RESULT_INTAKE_20260905.md` records the original N15 within-MEI
+branch, full N9 qualifier, matched conditional prediction and distinct R08 selection. The
+launch-time observations below retain their historical meanings.
 
 ## What DM checked
 
