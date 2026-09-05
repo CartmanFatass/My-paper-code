@@ -1,0 +1,28 @@
+{
+  "id": "20260905-acvc-010",
+  "created": "2026-09-05T04:24:29-07:00",
+  "direction": "acvc",
+  "tier": "object",
+  "kind": "brief",
+  "title": "ACVC：历史收益上界低于原门槛",
+  "context": "在原十二次决策与风险限制下，所有合法历史策略的收益增量不超过 0.21394；此前小幅历史收益 0.02220 仍成立。按原规则结束该宿主的学习器投资，没有新实验或待批准操作。",
+  "options": [
+    {
+      "key": "acknowledge",
+      "label": "已阅",
+      "consequence": "记录已阅，保留原始证据与已执行的固定宿主边界。"
+    }
+  ],
+  "recommended": "acknowledge",
+  "auto_applied": null,
+  "dm_reason": "简报区分小幅历史价值与无法达到预设幅度，不将有限宿主结论推广为历史普遍无用。",
+  "evidence": [
+    "docs/research/candidates/acvc/ACVC_HISTORY_UPPER_PREFIX_R03_INTAKE_20260905.md",
+    "docs/research/candidates/acvc/ACVC_HISTORY_UPPER_PREFIX_R03_RESULT_EVIDENCE_20260905.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-05.md#acvc-actual-upper-r03-brief-20260905",
+  "brief": "docs/research/portfolio/owner/briefs/acvc/2026-09-05_actual_upper_r03.md",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

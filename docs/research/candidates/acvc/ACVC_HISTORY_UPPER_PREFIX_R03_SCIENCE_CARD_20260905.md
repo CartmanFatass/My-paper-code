@@ -262,3 +262,11 @@ ledger. Anchors: `acvc-actual-upper-r03-selection-20260905` and
 - `external/2026-09-04-acvc-headroom-engineering-dissent-convergence-02/RESPONSE.md`
 - `ACVC_HC_D_EXACT_UPPER_REENTRY_ASSESSMENT_20260905.md`
 - `ACVC_HC_D_COMMON_DENOMINATOR_COST_INTAKE_20260905.md`
+
+## Completion note — 2026-09-05
+
+The single actual invocation completed at source `c4c46e50af614c8f3c12c7ec3a7290befc7c6dd8`
+after its own actual-input inspection and full profile-cost. No frozen text above was retuned.
+Accepted intake: `ACVC_HISTORY_UPPER_PREFIX_R03_INTAKE_20260905.md`; exact upper gap
+`101807318141829913/475875000000000000 <1/4`, branch HC-C. The existing finite-host
+learner-investment closure/clean direction boundary is executed. No next invocation is assigned.
