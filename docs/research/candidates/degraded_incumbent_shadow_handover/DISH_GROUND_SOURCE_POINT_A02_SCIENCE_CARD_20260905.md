@@ -103,6 +103,10 @@ existing `agent-task`. No input checkpoint or uncommitted source staging is need
 Preserve all original address/precision and world semantics. Before creating the reset
 master/native state or output, execute actual-node memory admission and the exact runner
 joined by `&&`; physical and effective available memory must each be at least 4 GiB.
+The prospective command uses `python -m scripts.run_dish_ground_source_point_a02`
+from the exact source checkout with `run --seed 11`. The external adjacent preflight is
+the single admission; the summary records its receipt path without a second in-run
+receipt validator. This implementation wording is fixed before any native observation.
 
 One seed, one coordinate, one prepared point, zero completed native ticks. Runner's
 `project-cost` emits `1.5 * (5 seconds native build/load allowance + 5 seconds process,
@@ -134,3 +138,7 @@ receipt, wall/RSS and supervisor witnesses. Commit/push before verification/resu
 CM accepts technical completeness and hands any accepted handle directly to
 `/root/tracker_tl_experiments`; CM collects, DM reads the rule and chooses the next step.
 No successor is preauthorized and no Pro round is a launch gate for this A object.
+
+Prelaunch scope reduction is recorded in
+`DISH_GROUND_SOURCE_POINT_A02_IMPLEMENTATION_INTAKE_20260905.md`; it changes only imports,
+module entry and duplicate admission plumbing, not the point or reading rule.
