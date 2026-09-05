@@ -1,0 +1,56 @@
+{
+  "object": "VNFC-R03-EXACT-BATCH-FEASIBILITY-E01",
+  "direct": {
+    "epochs": [0, 1, 2, 3, 4, 5],
+    "failed_zone": 1,
+    "agents": [
+      [1, 1, 1, 2, 0, -1, -1, 0, 0, -1, 0, 0, 800],
+      [2, 2, 0, 1, 0, -1, -1, 0, 0, -1, 0, 0, 800],
+      [3, 3, 1, 2, 0, -1, -1, 0, 0, -1, 0, 0, 800],
+      [4, 4, 0, 1, 0, -1, -1, 0, 0, -1, 0, 0, 800],
+      [5, 5, 1, 2, 0, -1, -1, 0, 0, -1, 0, 0, 800],
+      [6, 6, 0, 1, 0, -1, -1, 0, 0, -1, 0, 0, 800],
+      [7, 7, 1, 2, 0, -1, -1, 0, 0, -1, 0, 0, 800]
+    ],
+    "clearance": [0, 0, 0, 0],
+    "accrued_fail_delivered": 200,
+    "accrued_fail_demand": 240,
+    "accrued_total_delivered": 400,
+    "accrued_total_demand": 480,
+    "demand_1": 2,
+    "demand_2": 2,
+    "blocked_1": 1,
+    "blocked_2": 1,
+    "full_batch_energies": [800, 795, 800, 795, 800, 795, 800, 795],
+    "tail_energies": [800],
+    "tail_demand_1": 1
+  },
+  "trajectory": {
+    "failed_zone": 1,
+    "eighth_agent": [8, 8, 0, 1, 0, -1, -1, 0, 0, -1, 0, 0, 800],
+    "demand_1": [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+    "demand_2": [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+    "blocked_1": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    "blocked_2": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    "presentation": [1, 2, 3, 4, 5, 6, 7, 8],
+    "paths": [
+      {"name": "baseline", "deviation_epoch": -1},
+      {"name": "one_deviation", "deviation_epoch": 1, "canonical_legal_index": 0}
+    ]
+  },
+  "selection": {
+    "epochs": [0, 1, 2],
+    "class_count": 16,
+    "action_count": 1961,
+    "denominator": 1200,
+    "zone_assignment": "class_index modulo 2",
+    "nonbaseline_numerator": "(action_index modulo 5) times epoch_zone_multiplier",
+    "epoch_zone_multipliers": [[3, 1], [1, 3], [2, 2]],
+    "baseline_index": 1960,
+    "command_suffix": [255, 255, 255],
+    "tie_case": [
+      {"key": "zone0", "zone": 0, "options": [[9, "0", true], [2, "1/7", false], [1, "1/7", false]]},
+      {"key": "zone1", "zone": 1, "options": [[9, "0", true], [1, "1/7", false]]}
+    ]
+  }
+}
