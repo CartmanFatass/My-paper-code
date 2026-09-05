@@ -63,7 +63,6 @@
     "UNCERTAINTY_AND_LIMITS, including grid-edge and same-panel selection.",
     "DIRECTION_EFFECTS and PORTFOLIO_EFFECTS separately; no cross-direction ratification is requested."
   ],
-  "commit_or_ref": null,
+  "commit_or_ref": "0c579bf06745bfb7c0a8cd717c6bd88006f9efd5",
   "_pending_note": "Draft input only. Root integration must supply one pushed full SHA containing all six listed references before render_packet.py validation/rendering. No singleton dispatch or provider Send has occurred. Source UUID is the DM's actual CODEX_THREAD_ID; receipt UUID is Root's supplied task UUID."
 }
-
