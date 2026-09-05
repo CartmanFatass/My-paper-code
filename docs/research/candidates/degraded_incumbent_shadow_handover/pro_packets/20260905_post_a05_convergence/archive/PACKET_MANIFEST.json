@@ -1,0 +1,36 @@
+{
+  "schema_version": 4,
+  "packet_id": "2026-09-05-dish-post-a05-convergence-01--degraded_incumbent_shadow_handover",
+  "attempt": 1,
+  "canonical_form": "logical_packet_manifest",
+  "request_id": "2026-09-05-dish-post-a05-convergence-01",
+  "direction_id": "degraded_incumbent_shadow_handover",
+  "direction_ids": [
+    "degraded_incumbent_shadow_handover"
+  ],
+  "workflow_node": "em_convergence",
+  "conversation_binding_key": "em:degraded_incumbent_shadow_handover:convergence",
+  "decision_authority": "pro_final",
+  "source_mode": "single_body_attachment",
+  "body": {
+    "role": "prompt",
+    "source_path": "C:\\Projects\\HMASD-worktrees\\dm-n3-post-a05-20260905\\docs\\research\\candidates\\degraded_incumbent_shadow_handover\\pro_packets\\20260905_post_a05_convergence\\PROMPT_BODY.md",
+    "canonical_filename": "2026-09-05-dish-post-a05-convergence-01--degraded_incumbent_shadow_handover__00_PROMPT.md",
+    "bytes": 21997,
+    "sha256": "52c67d247693bb2002aa0dc9883092e2174c60e0d95eb0867f954debb8828512",
+    "materialized_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-05-dish-post-a05-convergence-01\\2026-09-05-dish-post-a05-convergence-01--degraded_incumbent_shadow_handover__00_PROMPT.md"
+  },
+  "references": [],
+  "reference_order_is_authoritative": true,
+  "provider_filename_policy": "record_observed_name_only",
+  "companion_prompt_is_transport_ui_only": true,
+  "manifest_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-05-dish-post-a05-convergence-01\\2026-09-05-dish-post-a05-convergence-01--degraded_incumbent_shadow_handover__PACKET_MANIFEST.json",
+  "materialized_artifacts": {
+    "body": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-05-dish-post-a05-convergence-01\\2026-09-05-dish-post-a05-convergence-01--degraded_incumbent_shadow_handover__00_PROMPT.md",
+    "references": []
+  },
+  "materialized_hashes": {
+    "body": "52c67d247693bb2002aa0dc9883092e2174c60e0d95eb0867f954debb8828512",
+    "references": []
+  }
+}
