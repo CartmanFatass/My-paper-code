@@ -72,3 +72,64 @@ specifically the original R03 science card, E01 technical intake, and
 `evidence/e01_20260905_01/summary.json`. The separately dispatched VNFC request
 asks whether direct bounded B can replace this costly diagnostic as a new object;
 it preserves historical learner negatives and demands new discriminating value.
+
+## Origin tracing added by explicit owner instruction
+
+Reviewing output cost alone is insufficient. Trace the contemporaneous norm,
+actual author prompt, formed Pro answer, frozen card and implementation for each
+strong example. Distinguish written policy, author-added constraints, Pro-selected
+estimand, and implementation-added burden. Do not infer model capability or human
+motivation from timestamps or model identity. Test whether an author constrains
+Pro to an expensive diagnostic family and later mistakes compliance with that
+constrained answer for independent justification of the family.
+
+### VNFC traced chain: preliminary finding
+
+1. `docs/Claude_docs/reviews/FIRST_WAVE_SECTION11_COMPLIANCE_20260902.md`,
+   Part F reviewer reading and F.6 (lines1515–1538), described controller headroom
+   as the cheap discriminator after three-seed64-update MAPR losses. It offered
+   an explicit alternative budget ladder of256/1024 updates with one seed.
+   The recorded owner choice was headroom reconnaissance using an oracle/upper
+   if available, otherwise best-of-many search. That choice was not a demand for
+   the later exact causal policy census. The cheapness claim was a reviewer
+   judgment in this passage, not an accompanying measured cost comparison.
+2. Initial controller-headroom R01 card selected a bounded privileged search and
+   physical upper bracket. K1024 later repaired a pruning loss but not the
+   headroom lower bound. These are real bounded observations and legitimate
+   reasons to consider other explanations; they do not prove a new learner wins.
+3. The exact Convergence-02 prompt in
+   `docs/research/candidates/variable_n_fleet_churn/external/2026-09-04-vnfc-controller-headroom-convergence-02/PROMPT_BODY.md`
+   pins61880d446 and restricts its question to controller-headroom-family recast,
+   park or close, disallowing another K, fresh seeds and local MAPR. It DOES allow
+   a class-correct B successor and says A1 is not a launch prerequisite. Therefore
+   it did not explicitly demand census, but its options and retained restrictions
+   narrowed the space around diagnostic continuation.
+4. The paired archived Pro response selects exact same-information one-deviation
+   R03. Its alternatives table argues continuation partly from being concrete,
+   finite and requiring no learner/fresh seed. Its own budget table already has
+   94128 continuations and184930144 scored rows; full timing is deferred to a
+   calibration. Finiteness and zero learner exposure do not establish cheapness.
+5. Commit f2978ce63 freezes R03 from that answer; later complete terminal accounting
+   enlarges the recorded work bound. The current full counts belong to the later
+   card/E01, not the initial Pro table. The subsequent cost-return prompt explicitly
+   focuses on preserving all exact requirements while evaluating batch/native
+   implementation. That makes engineering conformance a narrower question than
+   whether this exact estimand is worth pursuing.
+6. The contemporaneous evidence spec at f2978ce63 already says an exact census is
+   preferred only when it is the cheapest decision-relevant discriminator and must
+   not become a ritual B prerequisite. Thus no universal MARL exact-census mandate
+   explains this chain. Direction-level choice and its continued framing matter.
+
+Supported inference: an unpriced cheap-diagnostic recommendation was followed by
+family-constrained questioning, escalation to an exact estimand and cost discovery
+only after that choice. This is a candidate recurring process mechanism, not proof
+that every direction or every precise diagnostic shares it. Existing negative
+learner evidence justified seeking a new discriminator; the unresolved issue is
+whether this expensive one was proportionate and compared with alternatives.
+
+Initial cross-direction evidence from independent critics also separates cases:
+UCOPE shows reconstruction/numerical-localization dependencies before learner
+selection; SCDMP shows an argmax/census precursor; RCLE has a historical large
+multi-claim design. Conversely MGTAP's cheap B03 and FSD's competent public-greedy
+comparison provide scientific reasons for their narrow stops. Full cited critic
+returns remain pending, so no blanket reclassification is made here.
