@@ -86,6 +86,14 @@
       "record": "docs/research/candidates/flexible_skill_duration/FSD_E3_COMPLETE_CONVERGENCE_INTAKE_20260905.md",
       "state": "applied",
       "summary": "完整6 Pro裁决已整合为8c82f6cd1：仅选择无训练A/RECON参考枚举；E3有界H0保留，枚举尚未运行。"
+    },
+    {
+      "at": "2026-09-05T16:08:42+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/decisions/2026-09-05-local-main-successor-takeover.md",
+      "record": "docs/research/candidates/flexible_skill_duration/FSD_E4_CENSUS_PREPARATION_20260905.md",
+      "state": "applied",
+      "summary": "已完成既定无训练census的源码与调用准备：36DP/96候选每law；明确CLI、完整序列化及逐law实测成本/上限缺口。尚未冻结调用卡、未运行census，未扩大到学习实验。"
     }
   ],
   "starred": true

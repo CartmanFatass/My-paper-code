@@ -80,6 +80,14 @@
       "record": "docs/research/portfolio/decisions/2026-09-05-pro6-delegation-and-starred-trace.md",
       "state": "applied",
       "summary": "所有者明确说明先前同意就是全面批准，且明确授权研究工作流调整；按其原意执行，Root负责综合投入判断并减少局部审核负担。"
+    },
+    {
+      "at": "2026-09-05T16:08:42+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/decisions/2026-09-05-local-main-successor-takeover.md",
+      "record": "docs/research/portfolio/decisions/2026-09-05-local-main-successor-takeover.md",
+      "state": "applied",
+      "summary": "本地main接管：056b796f7已合并推送，保留本地Astra配置及本轮提供的AGENTS；同一heartbeat和Dashboard已转移。后续采用本轮AGENTS边界，历史授权与纠正记录保留；无新Portfolio裁决或实验。"
     }
   ]
 }

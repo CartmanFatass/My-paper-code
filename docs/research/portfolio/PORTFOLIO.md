@@ -6,7 +6,7 @@ Current important-change authority: OWNER_DIRECT instruction in `decisions/2026-
 Owner review maintenance: P1/P2 only (`OWNER_DIRECT`, 2026-09-05); P3/P4 creation, backfill and reminders retired. Preserve scientific evidence, audit and existing owner replies; see `decisions/2026-09-05-owner-review-p2-cutoff.md`.
 Lifecycle admission: 15 ACTIVE source IDs: the existing nine route agendas plus ACVC restored to the queue by the September5 owner review;7 PARKED reserves. Source IDs within a route do not create independent DM chains.
 Direction execution parallelism: target 5 concurrently advancing top-level DM chains (`OWNER_DIRECT`, 2026-09-04); off-roster `ACTIVE` directions are queued without lifecycle effect
-Loop state: `ACTIVE / OWNER_DIRECT`; explicit2026-09-05 resume supersedes the completed pause. Latest owner confirmation approves policy B, associated changes, subsequent delegation and research-direction changes; see the appended confirmation in the starred authority record. FSD is the currently running native DM; other listed agents are recovery identities, not evidence of live work. Retained30-minute heartbeat.
+Loop state: `ACTIVE / OWNER_DIRECT`; local-main successor takeover is recorded in `decisions/2026-09-05-local-main-successor-takeover.md`. Current supplied AGENTS instructions govern future actions. FSD source/document preparation is complete, with no frozen census invocation or experiment. Historical DM identities below are recovery records, not live agents. Existing30-minute heartbeat now targets the current Root.
 Nested execution capacity: no repository-level fixed limit on implementer sessions or result-bearing runs inside the working set (runtime availability and per-invocation resource admission still apply; `AGENTS.md` §5 and §7)
 Execution routing: `REMOTE_FIRST / ACTIVE` for prospectively portable result-bearing invocations via `.codex/hmasd-compute.toml`; local Windows remains control plane and constrained fallback
 Result-run memory floor: `4 GiB physical and effective available memory, freshly measured per invocation`
@@ -142,10 +142,17 @@ FSD final original task and all18 valid cells are terminal. Subsequent FRRIE tas
 terminal once and DM acknowledged. Latest tracker7c60e5831 is integrated; zero live handles.
 The tracker is currently absent from the native runtime, with zero live handles. Restore the dedicated tracker role when a new handle is accepted; do not claim monitoring before restoration or poll old tasks. Owner retained existing WSL settings: about15.43GiB RAM,20 logical CPUs,4GiB swap on a32GB i9-13900H host; no memory/config change or restart performed.
 
-Root task remains `01a06ec7-fd64-7281-9bc1-fc42ed53a2ca`; integration checkout is
-`C:/Projects/HMASD-worktrees/root-integration-02-20260904`, upstream `origin/main`.
-The existing `hmasd-research-loop` heartbeat is ACTIVE every30minutes. Owner console
-`http://127.0.0.1:8765/` serves this checkout directly; preserve concurrent owner-review commits.
+Root task is `01a07249-b095-7821-8ce2-e9c32ba85267`; owner-requested local checkout is
+`C:/Projects/HMASD`, branch `main`, upstream `origin/main`. Merge056b796f7 preserved local
+work and all remote research history and was pushed. The existing `hmasd-research-loop` is
+ACTIVE every30minutes and targets this Root. Owner console `http://127.0.0.1:8765/` now serves
+local main after both owner-review surfaces were reconciled; preserve concurrent review commits.
+Read-only remote inventory at this takeover found zero active task handles.
+FSD preparation found the existing36-DP/96-candidate-per-law API, missing CLI/full serializer
+and missing actual-node per-law wall projection/cap. See
+`../candidates/flexible_skill_duration/FSD_E4_CENSUS_PREPARATION_20260905.md`. No census launched.
+Root cross-direction rationale and exact takeover facts are in
+`decisions/2026-09-05-local-main-successor-takeover.md`; no lifecycle or priority changed.
 The three September5 reviews were applied in `decisions/2026-09-05-apply-owner-console-reviews.md`;
 no additional unapplied review was found at this boundary.
 
