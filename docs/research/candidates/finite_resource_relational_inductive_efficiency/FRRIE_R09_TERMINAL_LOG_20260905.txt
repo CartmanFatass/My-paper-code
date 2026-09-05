@@ -1,0 +1,20 @@
+=== Task 'frrie_b01_contact_r09_43eec21e' started at 2026-09-05T22:32:33+08:00 ===
+{
+  "assessed_at": "2026-09-05T14:32:33.130162Z",
+  "available_physical_bytes": 15421177856,
+  "captured_at": "2026-09-05T14:32:33.129920Z",
+  "cgroup_headroom_bytes": null,
+  "cgroup_memory_current_bytes": null,
+  "cgroup_memory_max_bytes": null,
+  "effective_available_bytes": 15421177856,
+  "effective_floor_pass": true,
+  "failure_reasons": [],
+  "measurement_source": "/proc/meminfo",
+  "minimum_available_bytes": 4294967296,
+  "passed": true,
+  "physical_floor_pass": true,
+  "schema_version": 1
+}
+timeout: the monitored command dumped core
+/home/wu/.agent-tasks/frrie_b01_contact_r09_43eec21e/runner.sh: line 8: 1678076 Segmentation fault      timeout --signal=TERM --kill-after=5s 28795s /home/wu/.venvs/hmasd/bin/python -m pdb -c continue -m scripts.run_frrie_b01_contact_r09 --output-root /home/wu/hmasd-worktrees/frrie-contact-r09-43eec21e/temp/directions/finite_resource_relational_inductive_efficiency/exp/frrie_b01_contact_r09 --admission-receipt /home/wu/hmasd-worktrees/frrie-contact-r09-43eec21e/temp/directions/finite_resource_relational_inductive_efficiency/technical/frrie_b01_contact_r09_admission.json --seed 3 < docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R04_RECONSTRUCTION_A01_PDB_COMMANDS_20260904.txt
+=== Task 'frrie_b01_contact_r09_43eec21e' exited with code 139 at 2026-09-05T22:32:49+08:00 (Duration: 16s) ===
