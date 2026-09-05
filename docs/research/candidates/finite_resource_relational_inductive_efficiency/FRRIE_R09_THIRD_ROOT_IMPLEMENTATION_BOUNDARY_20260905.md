@@ -1,8 +1,14 @@
 # FRRIE prospective third-root implementation boundary — 2026-09-05
 
-Status: `READ_ONLY_FEASIBILITY_COMPLETE / ENGINEERING_SCOPE_BLOCKED`.
-No R09 card is frozen, no source is edited, and no focused check or result run is selected.
-This is a recoverable engineering boundary, not a scientific result or direction disposition.
+Historical status at this read-only return: `READ_ONLY_FEASIBILITY_COMPLETE / ENGINEERING_SCOPE_BLOCKED`.
+No R09 card was frozen, no source was edited, and no focused check or result run was selected.
+This was a recoverable engineering boundary, not a scientific result or direction disposition.
+
+Later authority: owner ratification `0ffca930b9e43b0c6402fce65493cdf6ae24f66f` supersedes
+the ratio-only obstruction under its bounded reuse exception. The new R09 card and
+`FRRIE_R09_OWNER_RATIFIED_RESUME_SELECTION_20260905.md` govern prospective continuation;
+no estimate below becomes an accepted source diff. The label-surface path in the table is
+corrected to b01_contact_r02/tapes.py after direct source inspection; no code changed here.
 
 ## Grounding and bounded question
 
@@ -50,7 +56,7 @@ concrete prospective net layout:
 | surface | necessary change | estimated physical changed lines |
 | --- | --- | --- |
 | `b01_contact_r02/experiment.py` | pre-state seed3 root/label binding, independent binding predicate, object identity/prefix, CLI seed range | 12 |
-| `b01/tapes.py` | add the one prospective label to the accepted literal set | 2 |
+| `b01_contact_r02/tapes.py` | add the one prospective label to the accepted literal set | 2 |
 | `b01_contact_r02/semantics.py` | reuse R07 six-branch science, route applicable identity/binding/LR/contact conditions, replace five fixed return labels with prefix expressions | 20 |
 | total | no new module, trainer, evaluator or copied science | about 34 |
 
