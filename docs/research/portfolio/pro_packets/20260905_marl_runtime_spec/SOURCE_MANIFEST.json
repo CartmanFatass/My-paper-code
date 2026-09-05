@@ -1,0 +1,162 @@
+{
+  "schema_version": 1,
+  "packet": "20260905_marl_runtime_spec",
+  "status": "draft_reference_collection",
+  "captured_at": "2026-09-05",
+  "collection_root": "C:/Projects/ref-lib",
+  "hmasd_packet_root": "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec",
+  "source_policy": "shallow public clones; source bytes unchanged; local AGENTS.md navigation overlays only",
+  "references": [
+    {
+      "name": "EPyMARL",
+      "local_dir": "C:/Projects/ref-lib/epymarl",
+      "upstream_url": "https://github.com/uoe-agents/epymarl.git",
+      "web_url": "https://github.com/uoe-agents/epymarl",
+      "branch_at_clone": "main",
+      "clone_depth": 1,
+      "commit": "cbc38c09588064eab978501d0f12c2cf58fa7fc2",
+      "commit_date": "2024-09-24T09:38:39+01:00",
+      "license_path": "LICENSE",
+      "license": "Apache-2.0",
+      "upstream_agents": [],
+      "local_overlay_paths": [],
+      "worker_artifacts": [],
+      "source_focus": [
+        "src/runners/parallel_runner.py",
+        "src/components/episode_buffer.py",
+        "src/learners/q_learner.py",
+        "src/config/default.yaml"
+      ]
+    },
+    {
+      "name": "MAPPO on-policy",
+      "local_dir": "C:/Projects/ref-lib/on-policy",
+      "upstream_url": "https://github.com/marlbenchmark/on-policy.git",
+      "web_url": "https://github.com/marlbenchmark/on-policy",
+      "branch_at_clone": "main",
+      "clone_depth": 1,
+      "commit": "de66d7a4b23fac2513f56f96f73b3f5cb96695ac",
+      "commit_date": "2024-07-18T18:00:36+08:00",
+      "license_path": "LICENSE",
+      "license": "MIT",
+      "upstream_agents": [],
+      "local_overlay_paths": [],
+      "worker_artifacts": [],
+      "source_focus": [
+        "onpolicy/envs/env_wrappers.py",
+        "onpolicy/runner/shared/base_runner.py",
+        "onpolicy/runner/shared/smac_runner.py",
+        "onpolicy/utils/shared_buffer.py",
+        "onpolicy/algorithms/r_mappo/r_mappo.py",
+        "onpolicy/config.py"
+      ]
+    },
+    {
+      "name": "BenchMARL",
+      "local_dir": "C:/Projects/ref-lib/BenchMARL",
+      "upstream_url": "https://github.com/facebookresearch/BenchMARL.git",
+      "web_url": "https://github.com/facebookresearch/BenchMARL",
+      "branch_at_clone": "main",
+      "clone_depth": 1,
+      "commit": "65d649d80e0bdcbdbe2c5d6a3f02dbfed8f0bec1",
+      "commit_date": "2026-02-07T15:54:54Z",
+      "license_path": "LICENSE",
+      "license": "MIT",
+      "upstream_agents": [],
+      "local_overlay_paths": [],
+      "worker_artifacts": [],
+      "source_focus": [
+        "benchmarl/run.py",
+        "benchmarl/experiment/experiment.py",
+        "benchmarl/benchmark/benchmark.py",
+        "benchmarl/algorithms/mappo.py",
+        "benchmarl/environments/common.py",
+        "benchmarl/conf/experiment/base_experiment.yaml"
+      ]
+    },
+    {
+      "name": "MARLlib",
+      "local_dir": "C:/Projects/ref-lib/MARLlib",
+      "upstream_url": "https://github.com/Replicable-MARL/MARLlib.git",
+      "web_url": "https://github.com/Replicable-MARL/MARLlib",
+      "branch_at_clone": "master",
+      "clone_depth": 1,
+      "commit": "80e9973a430271a93c781d7422133acb1198f84b",
+      "commit_date": "2024-11-28T17:34:07+10:30",
+      "license_path": "LICENSE",
+      "license": "MIT",
+      "upstream_agents": [],
+      "local_overlay_paths": [],
+      "worker_artifacts": [],
+      "source_focus": [
+        "marllib/marl/algos/run_cc.py",
+        "marllib/marl/algos/scripts/mappo.py",
+        "marllib/marl/algos/core/CC/mappo.py",
+        "marllib/marl/algos/utils/episode_execution_plan.py",
+        "marllib/patch/rllib/execution/train_ops.py",
+        "marllib/marl/ray/ray.yaml"
+      ]
+    },
+    {
+      "name": "Mava",
+      "local_dir": "C:/Projects/ref-lib/Mava",
+      "upstream_url": "https://github.com/instadeepai/Mava.git",
+      "web_url": "https://github.com/instadeepai/Mava",
+      "branch_at_clone": "develop",
+      "clone_depth": 1,
+      "commit": "83f7f0d19d6fdbe07264bb226a64baf8a0b17514",
+      "commit_date": "2026-09-04T11:05:11+02:00",
+      "license_path": "LICENSE",
+      "license": "Apache-2.0",
+      "upstream_agents": [],
+      "local_overlay_paths": [],
+      "worker_artifacts": [],
+      "source_focus": [
+        "mava/systems/ppo/anakin/ff_mappo.py",
+        "mava/systems/ppo/sebulba/ff_mappo.py",
+        "mava/utils/sebulba/pipelines.py",
+        "mava/utils/jax_utils.py",
+        "mava/configs/arch/anakin.yaml",
+        "mava/configs/arch/sebulba.yaml"
+      ]
+    },
+    {
+      "name": "JaxMARL",
+      "local_dir": "C:/Projects/ref-lib/JaxMARL",
+      "upstream_url": "https://github.com/FLAIROx/JaxMARL.git",
+      "canonical_web_url": "https://github.com/bold-lab-ai/JaxMARL",
+      "web_url": "https://github.com/FLAIROx/JaxMARL",
+      "branch_at_clone": "main",
+      "clone_depth": 1,
+      "commit": "b0c4d77b2cc06711031aec846a55ed0c8cf0f6e9",
+      "commit_date": "2026-09-04T20:03:50+01:00",
+      "license_path": "LICENSE",
+      "license": "Apache-2.0",
+      "upstream_agents": [],
+      "local_overlay_paths": [],
+      "worker_artifacts": [],
+      "source_focus": [
+        "baselines/QLearning/vdn_ff.py",
+        "baselines/IPPO/ippo_rnn_smax.py",
+        "jaxmarl/environments/mpe/simple_spread.py",
+        "jaxmarl/environments/smax/speed.py",
+        "baselines/QLearning/config/config.yaml"
+      ]
+    }
+  ],
+  "overlay_policy": {
+    "root_overlay_required": true,
+    "hierarchical_overlays": "only actual relevant module directories selected by each worker",
+    "preserve_upstream_agents": true,
+    "source_bytes_may_change": false,
+    "overlay_backup_root": "agents-overlays/",
+    "collection_overlays": [
+      {
+        "external_path": "C:/Projects/ref-lib/AGENTS.md",
+        "packet_copy": "agents-overlays/ref-lib/AGENTS.md",
+        "kind": "collection_root_navigation",
+        "status": "captured"
+      }
+    ]
+  }
+}
