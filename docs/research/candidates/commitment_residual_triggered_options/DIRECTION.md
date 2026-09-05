@@ -493,3 +493,33 @@ no residual polarity. No successor is frozen or launched in this intake.
 References: `CRTO_PAIRED_ORDER_B03_SCIENCE_CARD_20260904.md`,
 `CRTO_PAIRED_ORDER_B03_RESULT_EVIDENCE_20260904.md`,
 `CRTO_PAIRED_ORDER_B03_RESULT_20260904.json`, `CRTO_PAIRED_ORDER_B03_INTAKE_20260904.md`.
+
+## Residual complete-cycle endpoints B04 — 2026-09-04
+
+The same-seed RAW/TRUE_RESIDUAL/CALIBRATED_DERANGEMENT comparison at prospectively fixed33/258
+is valid **BR-D — NO_TRUE_GAIN**. Canonical RAW-LONG is competent, KEEP6/8 and REPLAN6/8,
+R=.0037814300857039115. TRUE has R=.018114012084314506 atSHORT and.010915533713999911 atLONG,
+versus RAW.006581880989529963/.0037814300857039115. Both d_RT values,
+-.011532131094784542 and-.007134103628296, are adverse beyond MEI.0025.
+
+DERANGED R=.009491068185733439/.00965134486557058 does not improve RAW either. TRUE loses
+to DERANGED beyond MEI atSHORT; their LONG difference is inside MEI. All96 action decisions,
+48/16 donor maps,22/172 recipient/donor exposures and nonzero counts independently recompute.
+
+The bounded conclusion is no aligned or generic-preprocessing benefit in this exact
+seed0/33-and258 intervention; retain RAW and drop only that unchanged residual intervention.
+Strongest support is material TRUE cost against competent RAW-LONG. The counterpoint is TRUE's
+own SHORT-to-LONG learning improvement of.007198478370314595, which limits any general failure
+claim. The one coupled seed, exposed selected panel and adaptive endpoint choice remain limits.
+No tuned headroom, stable/independent, information, policy/MARL or general residual polarity follows.
+
+B01's comparator-weak32/256 result, B02/B03's specific negatives, A01's unresolved crash and
+the closed natural-support family retain their meanings. The next discriminator is a separately
+declared fixed-seed expansion at the same endpoints. Existing seed law jointly changes predictor,
+gate and derangement, so it does not isolate gate initialization. No successor is frozen or
+launched here; no direction or Portfolio action is taken.
+
+References: `CRTO_RESIDUAL_CYCLE_ENDPOINTS_B04_SCIENCE_CARD_20260904.md`,
+`CRTO_RESIDUAL_CYCLE_ENDPOINTS_B04_RESULT_EVIDENCE_20260904.md`,
+`CRTO_RESIDUAL_CYCLE_ENDPOINTS_B04_RESULT_20260904.json`,
+`CRTO_RESIDUAL_CYCLE_ENDPOINTS_B04_INTAKE_20260904.md`.

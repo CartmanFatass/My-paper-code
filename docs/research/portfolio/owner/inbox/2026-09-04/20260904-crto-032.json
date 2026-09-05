@@ -1,0 +1,32 @@
+{
+  "id": "20260904-crto-032",
+  "created": "2026-09-04T18:47:09-07:00",
+  "direction": "commitment_residual_triggered_options",
+  "tier": "object",
+  "kind": "decision",
+  "title": "CRTO B04：接受无真实残差收益结果",
+  "context": "全部96个合法动作评分、两组donor双射、22/172次暴露、预测器和校准计数独立核对通过。原始信息长终点胜任，真实残差短长终点均有超过MEI的损失。",
+  "options": [
+    {
+      "key": "a",
+      "label": "接受完整的有限负结果",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "等更多种子后再读此结果",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "新增种子改变适用范围，不改变这次完整结果的分支。",
+  "evidence": [
+    "docs/research/candidates/commitment_residual_triggered_options/CRTO_RESIDUAL_CYCLE_ENDPOINTS_B04_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#crto-b04-complete-cycle-residual-result",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}
