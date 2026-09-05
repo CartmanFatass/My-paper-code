@@ -1,0 +1,37 @@
+{
+  "id": "20260905-acvc-001",
+  "created": "2026-09-05T02:24:35-07:00",
+  "direction": "acvc",
+  "tier": "object",
+  "kind": "decision",
+  "title": "ACVC：只评估四机会精确上界的实现与成本",
+  "context": "你已选择让 ACVC 在最低顺序继续。已接受的精确下界为 0.0222，上界为 0.2991，仍跨越原阈值 0.25；这次只检查一个更紧上界的推导和合成成本，不计算真实新结果。前四次机会只向分析用 oracle 提供过去的完整观测，后八次才透露隐藏 regime；它仍包含每个合法策略。旧 HC-D、伤害限制、阈值及禁止 learner 均保留。",
+  "options": [
+    {
+      "key": "a",
+      "label": "评估固定四机会上界推导与一次合成成本",
+      "consequence": "只投入有明确工作量的工程评估，真实上界需后续科学卡。"
+    },
+    {
+      "key": "b",
+      "label": "另造更强合法下界策略",
+      "consequence": "目前没有可具体交付且预期跨阈值的兼容策略。"
+    },
+    {
+      "key": "c",
+      "label": "本次不评估并返回依赖边界",
+      "consequence": "保持现有未决区间，暂不核验已找到的有限上界方案。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "固定上界有明确的信息包含推导和有限计算量，直接对应已允许的精确重入条件。",
+  "evidence": [
+    "docs/research/candidates/acvc/ACVC_HC_D_EXACT_UPPER_REENTRY_ASSESSMENT_20260905.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-05.md#acvc-hcd-reentry-assessment-20260905",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": null
+}
