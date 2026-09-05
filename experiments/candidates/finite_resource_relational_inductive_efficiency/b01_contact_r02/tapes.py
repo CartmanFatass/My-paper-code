@@ -26,7 +26,7 @@ from ..tapes import (
 from .semantics import SEED_LABEL, TEST_SEED_LABEL
 
 ROSTERS = (9, 15)
-SEED_LABELS = (SEED_LABEL, TEST_SEED_LABEL)
+SEED_LABELS = (SEED_LABEL, TEST_SEED_LABEL, "FRRIE-B07-CONTACT-BLOCK-002")
 KINDS = {
     "event_time", "detection_uniform", "uplink_uniform", "base_uniform", "action_uniform",
 }
