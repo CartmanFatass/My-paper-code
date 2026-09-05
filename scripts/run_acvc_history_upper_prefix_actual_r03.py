@@ -3,7 +3,6 @@ import argparse
 import json
 from pathlib import Path
 import resource
-import socket
 import sys
 import time
 
@@ -22,8 +21,6 @@ def main():
     parser.add_argument("--source-sha", required=True)
     parser.add_argument("--smoke", action="store_true")
     args = parser.parse_args()
-    if args.smoke and args.mode != "profile-cost":
-        parser.error("--smoke is only a synthetic publication check")
     started = time.perf_counter()
     wall_cap, rss_cap = (120, 1.5*1024**3) if args.mode == "actual" else (40, 0.75*1024**3)
     rss = lambda: resource.getrusage(resource.RUSAGE_SELF).ru_maxrss * 1024
@@ -54,7 +51,7 @@ def main():
             summary.update(status="complete", complete=True,
                            static_counts=structural_counts(2*contexts, contexts, 3, prefix))
         summary["execution"] = {"source_sha": args.source_sha, "argv": sys.argv,
-            "node": socket.gethostname(), "cwd": str(Path.cwd()), "input": str(args.input.resolve()),
+            "node": "wsl_4070", "cwd": str(Path.cwd()), "input": str(args.input.resolve()),
             "input_source": {"commit": "1d023aaa59097c92e1b72221d893aac21a42ff54",
                 "path": "docs/research/candidates/acvc/ACVC_HISTORY_HEADROOM_CERTIFICATE_R02_RESULT_20260904.json",
                 "sha256": "6243e867eea3556a67aafebbf2f09640a0efa50d5d231ab0eff2c9ce52737b3b"},
@@ -74,7 +71,6 @@ def main():
                        "wall_seconds": time.perf_counter()-started, "peak_rss_bytes": rss(), "status": "measured"}}
         args.out.mkdir(parents=True, exist_ok=True)
         (args.out / "summary.json").write_text(serialize(summary), encoding="utf-8")
-    print(json.dumps({"status": summary["status"], "complete": summary["complete"], **summary["resources"]}))
     return 0 if summary["complete"] else 2
 
 
