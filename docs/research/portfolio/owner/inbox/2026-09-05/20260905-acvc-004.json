@@ -1,0 +1,73 @@
+{
+  "id": "20260905-acvc-004",
+  "created": "2026-09-05T03:27:19-07:00",
+  "direction": "acvc",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "ACVC：共同分母 512 位合成成本修复卡",
+  "context": "主张：固定共同分母的完整计算器可在原成本限额内完成。绑定结构：systems / information flow；这里只测接收者历史问题所需的解析计算成本，不建立学习效果。已获继续修复指令，本卡供异步查看。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "继续已派发的一次输入核验和成本评估，真实上界不自动启动。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "在干净边界停止尚未接受的成本调用，保留所有旧证据。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "按具体意见修改尚未执行部分；不追改已完成测量。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": null,
+  "dm_reason": "共同分母直接消除已复现的超位宽来源，并保留完整计算工作量。",
+  "evidence": [
+    "docs/research/candidates/acvc/ACVC_HC_D_COMMON_DENOMINATOR_COST_CARD_20260905.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-05.md#acvc-common-denominator-cost-card-20260905",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": {
+    "question": "是否同意这张已按继续指令冻结的工程修复卡：仅修正合成输入表示并做一次成本评估？",
+    "changes_if_approved": [
+      {
+        "target": "ACVC 合成成本评估输入",
+        "from": "512 位原始分数归一化后扩大到约 12,000 位",
+        "to": "共同分母 2^511；归一化原子保持 512 位分母，计算器所有输入不超过 512 位"
+      }
+    ],
+    "if_refused": "在下一个干净边界停止尚未接受的成本调用并按修改意见处理；既有 HC-D、真实阈值、伤害限制及 learner 禁令不变。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/acvc/ACVC_HC_D_EXACT_UPPER_REENTRY_INTAKE_20260905.md",
+        "quote": "The nearest repair is to specify normalized synthetic atom probabilities with a common denominator and an explicit maximum 512-bit representation before arithmetic, then assess the same full fixed prefix envelope at fresh committed bytes.",
+        "why": "已有输入缺陷对应一个具体可逆修复，不需要改变科学问题。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/acvc/ACVC_HC_D_EXACT_UPPER_REENTRY_INTAKE_20260905.md",
+        "quote": "The actual scientific missing fact remains a prospectively admitted exact B4 value.",
+        "why": "即使成本通过，也没有真实新上界，不能据此启动 learner。"
+      }
+    ],
+    "uncertainty": [
+      "规定的完整 512 位输入计算能否在原成本限额内完成尚待本次测量。",
+      "本次只测通用计算器，不测真实 ACVC 系数构建；真实计算仍需单独科学卡。"
+    ],
+    "cost": {
+      "compute": "一次远端完整合成成本；40 秒或 0.75 GiB 停止，保留三倍时间与双倍内存投影。",
+      "owner_time": "可异步阅览，无需现在回复。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing；继续修复已有明确指令，意见在干净边界执行。"
+    },
+    "verdict_text": "Recommendation: (a), the only concrete outcome-blind repair of the named discrepancy.",
+    "source": "docs/research/candidates/acvc/ACVC_HC_D_COMMON_DENOMINATOR_COST_CARD_20260905.md"
+  }
+}
