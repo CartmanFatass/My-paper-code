@@ -3,8 +3,14 @@ Binding structure: `systems / information flow` — role-to-role weights aggrega
 
 # FRRIE R09 third-root science card — 2026-09-05
 
-Status: `FROZEN / B_EXPLORE / IMPLEMENTATION_REQUIRED / NO_LAUNCH_SHA`.
+Status: `FROZEN / INCOMPLETE_ATTEMPT / CAUSE_UNREPRODUCED / A_RECON_NEXT`.
 Object ID: `FRRIE-B01-CONTACT-R128-LR003-R09-THIRD-ROOT-20260905`.
+
+Current boundary: accepted source43eec21e and sole task frrie_b01_contact_r09_43eec21e
+ended after16 seconds with exit139 and no published scientific witness. The exact attempt
+is intaken in `FRRIE_R09_INCOMPLETE_INTAKE_20260905.md`; its cause is not classified.
+The original question and rule below are unchanged. A separate bounded A/RECON is selected;
+no full scientific restart or R10 is authorized by the incomplete observation.
 
 ## Class, authority, question and ceiling
 
