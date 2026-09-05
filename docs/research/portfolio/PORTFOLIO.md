@@ -1,12 +1,12 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-05T15:41:56Z
+Updated at: 2026-09-05T16:14:55Z
 Owner: Root
-Current important-change authority: OWNER_DIRECT instruction in `decisions/2026-09-05-pro6-delegation-and-starred-trace.md` delegates execution of complete verified 6 Pro final decisions at the correct node, with permanent Dashboard stars and actual execution records. No fabricated owner votes; prior policy-B approval attribution is corrected, with explicit approval effective from that new record.
+Current important-change authority: current owner-supplied AGENTS and latest explicit instructions govern; historical approval and its correction remain in `decisions/2026-09-05-pro6-delegation-and-starred-trace.md`. Latest unattended/platform-confirmed continuation is recorded in `decisions/2026-09-05-unattended-confirmed-resume.md`; no fabricated owner votes.
 Owner review maintenance: P1/P2 only (`OWNER_DIRECT`, 2026-09-05); P3/P4 creation, backfill and reminders retired. Preserve scientific evidence, audit and existing owner replies; see `decisions/2026-09-05-owner-review-p2-cutoff.md`.
 Lifecycle admission: 15 ACTIVE source IDs: the existing nine route agendas plus ACVC restored to the queue by the September5 owner review;7 PARKED reserves. Source IDs within a route do not create independent DM chains.
 Direction execution parallelism: target 5 concurrently advancing top-level DM chains (`OWNER_DIRECT`, 2026-09-04); off-roster `ACTIVE` directions are queued without lifecycle effect
-Loop state: `ACTIVE / OWNER_DIRECT`; local-main successor takeover is recorded in `decisions/2026-09-05-local-main-successor-takeover.md`. Current supplied AGENTS instructions govern future actions. FSD source/document preparation is complete, with no frozen census invocation or experiment. Historical DM identities below are recovery records, not live agents. Existing30-minute heartbeat now targets the current Root.
+Loop state: `ACTIVE / OWNER_DIRECT`; owner confirms platform-side approval and explicitly resumes unfinished tasks. Current DMs `/root/dm_amx_fsd_e4_census` and `/root/dm_amx_frrie_a01_resume` advance the existing census and A01 diagnostic respectively. Shared native tracker `/root/tracker_tl_experiments` is restored for accepted handles. Historical refusals are retained without imposing a blanket hold. Existing30-minute heartbeat targets current Root.
 Nested execution capacity: no repository-level fixed limit on implementer sessions or result-bearing runs inside the working set (runtime availability and per-invocation resource admission still apply; `AGENTS.md` §5 and §7)
 Execution routing: `REMOTE_FIRST / ACTIVE` for prospectively portable result-bearing invocations via `.codex/hmasd-compute.toml`; local Windows remains control plane and constrained fallback
 Result-run memory floor: `4 GiB physical and effective available memory, freshly measured per invocation`
@@ -65,6 +65,17 @@ provenance, but result polarity never transfers into an accepting direction.
 | vsp_02 | ACTIVE | LOW | ROOT | 2026-09-01T09:55:33Z | Route N3 (状态保留、重建与迁移); coordinated as this route agenda. B/EXPLORE competence-first Adam CARRY/RESET trajectories across lifecycle ages, with OEER as optimizer-history control. Equal exact success sets do not establish transient equivalence. |
 | vsp_03 | ACTIVE | LOW | ROOT | 2026-09-01T09:55:33Z | Route K1 (中断时机); coordinated as this route agenda. B/EXPLORE event-aware termination in a persistent-target semi-Markov toy against one-hit, dwell, debounce, hysteresis, and same-information generic controls. |
 | vsp_c1 | ACTIVE | MEDIUM | ROOT | 2026-09-01T09:55:33Z | Route K4 (跨时长共享、组合与负迁移); coordinated as this route agenda. B/EXPLORE `2x2x2` identity-by-period toy with a held-out fourth corner and partners. No-production-host evidence cannot decide bounded compositional learning. |
+
+## Current unattended working set — 2026-09-05 successor
+
+Two advancing direction chains: FSD census and FRRIE existing A01. Tracker is a shared sibling,
+not a third direction. Each DM uses its assigned isolated local worktree; Root integrates local main.
+Tracker workspace is `C:/Projects/HMASD-worktrees/tracker-successor-20260905`, branch
+`codex/tracker-successor-20260905`. Historical tracker/DM identities later in this file are
+recovery evidence, not current assignments. CBSC/N3 full engineering returns now enter the
+owner-requested existing Portfolio6Pro node for next-investment consideration. This schedules
+no CBSC/N3 experiment and changes no lifecycle or priority. Current authorization and assignments:
+`decisions/2026-09-05-unattended-confirmed-resume.md`.
 
 ## Current route organization — owner adopted 2026-09-04
 

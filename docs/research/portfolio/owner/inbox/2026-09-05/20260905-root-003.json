@@ -88,6 +88,14 @@
       "record": "docs/research/portfolio/decisions/2026-09-05-local-main-successor-takeover.md",
       "state": "applied",
       "summary": "本地main接管：056b796f7已合并推送，保留本地Astra配置及本轮提供的AGENTS；同一heartbeat和Dashboard已转移。后续采用本轮AGENTS边界，历史授权与纠正记录保留；无新Portfolio裁决或实验。"
+    },
+    {
+      "at": "2026-09-05T16:20:03+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/decisions/2026-09-05-unattended-confirmed-resume.md",
+      "record": "docs/research/portfolio/decisions/2026-09-05-unattended-confirmed-resume.md",
+      "state": "applied",
+      "summary": "所有者明确确认平台侧也已授权：继续旧任务未完成步骤。已派发FSD census与FRRIE既有A01，恢复Terra tracker并刷新同一heartbeat；历史拒绝不再作为持续全面阻塞。CBSC/N3按本轮要求进入Portfolio6Pro。"
     }
   ]
 }
