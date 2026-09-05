@@ -1,14 +1,14 @@
 # FSD E3 heterogeneous-hazard detached run state
 
-Snapshot: `2026-09-05T10:03:18Z`
+Snapshot: `2026-09-05T10:11:17Z`
 
 This is an operational recoverability snapshot for the frozen B/EXPLORE object
 `FSD-E3-HET-R01`. It records runtime facts only. It is not a result, an intake, a scientific
 polarity, a queue implementation, or authority to bypass a fresh resource admission.
 
 **Current OWNER_DIRECT boundary:** automatic work resumed on 2026-09-05. The previous pause is
-superseded; E3 is **14/18 valid, zero running, four never launched**. `large_d2_seed1` is
-valid complete; next is `large_d0_seed2`, with the original full-matrix rule unchanged. Historical
+superseded; E3 is **14/18 valid, one running, three never launched**. `large_d2_seed1` is
+valid complete; `large_d0_seed2` is running, with the original full-matrix rule unchanged. Historical
 drains below remain provenance; lifecycle, priority, card and science are unchanged.
 
 ## Frozen and accepted boundary
@@ -37,9 +37,47 @@ drains below remain provenance; lifecycle, priority, card and science are unchan
 - Frozen projections per invocation: D0 small `1.16 h`; D0 medium/large `1.68 h`; D2 conservative
   mechanical maximum `4.63 h`; all are below the `8 h` per-arm cap.
 - Current counts at this snapshot: card-accepted invocation cells `18`; result-bearing attempts
-  independently admitted/launched `15`; running `0`; valid complete cells `14`; quarantined
-  attempts `1`; unfulfilled cells `4`, all four never launched. The earlier local refusal
+  independently admitted/launched `16`; running `1`; valid complete cells `14`; quarantined
+  attempts `1`; unfulfilled cells `4`, one running and three never launched. The earlier local refusal
   is preserved as evidence but was not itself an admission or launch.
+
+## Accepted running large D0 seed-2 cell
+
+Cell-14 intake and the unchanged next assignment were pushed before launch at
+`ac4db77371659c25d4ac39e1a20990fe098bc42d`, including CLI selection item `20260905-fsd-003`.
+Binding assignment: `FSD_E3_LARGE_D2_SEED1_INTAKE_20260905.md`. Current integrated compute
+config remains `remote_first` on `wsl_4070`; no source/card/comparator/budget change occurred.
+
+| invocation | execution node and handle | receipt assessed UTC | physical/effective available bytes | launch boundary | observed state |
+| --- | --- | --- | ---: | --- | --- |
+| `large_d0_seed2` attempt 01 | `wsl_4070`; `agent-task` `fsd_e3_large_d0_seed2_20260905_01`; wrapper PID `1656091`, learner PID `1656107` | `2026-09-05T10:09:55.213783Z` | `15430356992 / 15430356992` | pushed SHA `ac4db77371659c25d4ac39e1a20990fe098bc42d` | `running` at 22 s, exit null, tmux active; exact learner argv observed |
+
+Detached cwd: `/home/wu/hmasd-worktrees/fsd_e3_large_d0_seed2_20260905_01`.
+Cell root beneath it: `temp/directions/flexible_skill_duration/exp/E3_20260904/large_d0_seed2`;
+receipt `<root>/preflight.json`; supervisor log
+`/home/wu/.agent-tasks/fsd_e3_large_d0_seed2_20260905_01/task.log`.
+Same-task `agent-task status` is the exit witness. CM confirmed matching task/root absent,
+clean exact source, and accepted one detached launch. Actual-node admission immediately preceded
+the runner through `&&`; both 4 GiB floors/all pass fields were satisfied. No peak RSS is inferred.
+
+Original large D0 seed 2 uses best `k=5`, infinite costs, both caps 5, age off, hazards
+`(0.02,0.20)`, `Delta=1`, CPU/four-thread, 20/16/400 budget, eval 512/512/512/2048, and
+unchanged numerical/RNG/checkpoint/normalizer semantics. Projection 6034.786 s (1.68 h),
+per-cell cap 8 h; stop 20 rollouts/first nonfinite/first completed rollout after 8 h.
+Source unchanged; no repeated suite or new machinery. The earlier git auto-gc preparation
+warning recurred without preventing exact checkout; no maintenance or history repair followed.
+
+DM directly woke the idle `/root/tracker_tl_experiments` with this accepted node/task/SHA,
+paths and bound, and separately received its explicit adoption ACK. The ACK was returned to
+CM `/root/dm_amx_fsd_continue/cm_am_fsd_continue`, which released routine polling. Tracker
+alone observes and directly wakes DM `/root/dm_amx_fsd_continue` on terminal/failure/loss/cap
+concern; the same CM retains terminal collection. This adds no launch or science gate.
+Full CM command/receipt record:
+`docs/Claude_docs/experiments/FSD_E3_LARGE_D0_SEED2_REMOTE_RUN_20260905.md`.
+CM launch-record commit: `fa15c725d3273ea744e9e801e9bff52cbe1fb317`. DM checked its exact
+argv/admission/source/observer facts against the prospective assignment. Owner reviews remain
+without a pending FSD instruction at this clean boundary.
+Initial running acceptance establishes no cell validity or scientific polarity.
 
 ## Accepted terminal large D2 seed-1 cell — 2026-09-05 resume
 
@@ -377,9 +415,9 @@ duplication and have now terminated validly. Current main `.codex/hmasd-compute.
 pushed SHA, a detached remote worktree, and one `agent-task` payload whose remote command performed
 its own `admit-memory` immediately before the exact runner. The local refused receipt did not admit
 the remote attempt. Attempt 01 is terminal and quarantined after reproduced publication failure;
-the repaired outcome-blind attempt 02 subsequently fulfilled that invocation cell. Four
+the repaired outcome-blind attempt 02 subsequently fulfilled that invocation cell. Three
 never-launched large-row invocations stay `REMOTE_FIRST_HOLD`; large D0 seed 1 and medium D0/D2
-seed 3 and large D2 seed 1 are valid complete. No FSD cell is currently running. Local fallback additionally requires
+seed 3 and large D2 seed 1 are valid complete. Large D0 seed 2 is running. Local fallback additionally requires
 definitive evidence of no remote process, prospective portability, and a fresh local admission.
 
 ## Full 18-invocation matrix
@@ -405,7 +443,7 @@ output has been created for that invocation.
 | medium | D2 | 3 | `k_max=40`, `k_Z=400`, `c=0.25` | `VALID_COMPLETE`; attempt 01 task `fsd_e3_medium_d2_seed3_20260904_01`; CM acceptance and DM intake complete |
 | large | D0 | 1 | `k=5`, `c=inf` | `VALID_COMPLETE`; attempt 01 task `fsd_e3_large_d0_seed1_20260904_01`; CM acceptance and DM intake complete |
 | large | D2 | 1 | `k_max=40`, `k_Z=400`, `c=0.25` | `VALID_COMPLETE`; attempt 01 task `fsd_e3_large_d2_seed1_20260905_01`; CM acceptance and DM intake complete |
-| large | D0 | 2 | `k=5`, `c=inf` | `REMOTE_FIRST_HOLD` |
+| large | D0 | 2 | `k=5`, `c=inf` | `RUNNING`; attempt 01 task `fsd_e3_large_d0_seed2_20260905_01`; fresh admission/learner observed, tracker directly adopted |
 | large | D2 | 2 | `k_max=40`, `k_Z=400`, `c=0.25` | `REMOTE_FIRST_HOLD` |
 | large | D0 | 3 | `k=5`, `c=inf` | `REMOTE_FIRST_HOLD` |
 | large | D2 | 3 | `k_max=40`, `k_Z=400`, `c=0.25` | `REMOTE_FIRST_HOLD` |
@@ -419,19 +457,19 @@ was superseded by the explicit resume that launched exactly `medium_d0_seed3`. T
 finished and passed both CM technical acceptance and DM intake.
 
 **Current owner-direct boundary:** continue automatic work from 14 valid cells. The original
-`large_d2_seed1` task is terminal and its intake complete. `large_d0_seed2` is the next
-unchanged cell; no successor is launched by this snapshot. Lifecycle, priority, claim ceiling
+`large_d2_seed1` task is terminal and its intake complete. `large_d0_seed2` is the sole
+running cell; three successors remain unlaunched. Lifecycle, priority, claim ceiling
 and accepted mechanism science stay unchanged.
 No historical handle is polled or relaunched, and no aggregate is read before 18 valid cells.
 
-The latest terminal task remains recoverable with
-`ssh hmasd-wsl-node '/usr/local/bin/agent-task status fsd_e3_large_d2_seed1_20260905_01'`.
-Do not duplicate it or resume completed checkpoints. The terminal table above contains exact
-SHA, handle, receipt, process and output witnesses; collection and intake are complete.
+The current running task remains recoverable with
+`ssh hmasd-wsl-node '/usr/local/bin/agent-task status fsd_e3_large_d0_seed2_20260905_01'`.
+Do not duplicate it or resume completed checkpoints. The running table above contains exact
+SHA, handle, receipt, process and output witnesses; terminal collection is pending.
 Earlier accepted result/artifact locators remain in their receipts and E0 result documents.
 
-After current-cell intake, the remaining never-launched order is `large_d0_seed2`,
-`large_d2_seed2`, `large_d0_seed3`, `large_d2_seed3`.
+After current-cell intake, the remaining never-launched order is `large_d2_seed2`,
+`large_d0_seed3`, `large_d2_seed3`.
 Each invocation still requires the exact pushed SHA and its own fresh 4 GiB remote preflight
 immediately before its exact runner.
 A refused admission creates no learner state; the historical quarantine creates no scientific
