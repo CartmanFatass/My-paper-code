@@ -66,7 +66,28 @@ provenance, but result polarity never transfers into an accepting direction.
 | vsp_03 | ACTIVE | LOW | ROOT | 2026-09-01T09:55:33Z | Route K1 (中断时机); coordinated as this route agenda. B/EXPLORE event-aware termination in a persistent-target semi-Markov toy against one-hit, dwell, debounce, hysteresis, and same-information generic controls. |
 | vsp_c1 | ACTIVE | MEDIUM | ROOT | 2026-09-01T09:55:33Z | Route K4 (跨时长共享、组合与负迁移); coordinated as this route agenda. B/EXPLORE `2x2x2` identity-by-period toy with a held-out fourth corner and partners. No-production-host evidence cannot decide bounded compositional learning. |
 
-## Current working set after completed intakes
+## Current working set — owner-directed five-chain refill
+
+Owner instruction on September 5 explicitly requests continued research after observing only
+one advancing direction. Root restored four decision-preparation chains alongside VNFC.
+An absent runnable experiment does not prevent source-backed preparation of the next proper
+Pro question. This is scheduling under the existing five-chain policy, not successor acceptance.
+
+| Route | Active responsible chain | Concrete current work |
+| --- | --- | --- |
+| N2 / VNFC | Root with `/root/cm_am_vnfc_e01` | Complete bounded E01 implementation and independent engineering review |
+| N3 / DISH | `/root/dm_amx_n3_approved` | Prepare post-A05 Direction Pro question; preserve synthetic-only conclusion |
+| N4 / CBSC | `/root/dm_amx_cbsc_approved` | Prepare post-repair Direction Pro question from incomplete publication and unresolved causes |
+| K1 / VSP-03 | `/root/dm_amx_k1_vsp03_design` | Prepare prospective native-return host/reference design for proper Innovator decision |
+| K4 / VSP-C1 | `/root/dm_amx_k4_vspc1_design` | Prepare prospective identity-period-partner host/reference design for proper Innovator decision |
+
+Four packet-preparation assignments are active; no new Pro send or scientific invocation is
+claimed by this refill. Root integrates their pushed evidence and dispatches ready packets through
+the existing singleton. Prior PARK decisions, investment endpoints, science and lifecycle remain
+explicit inputs. N3/CBSC do not repeat completed invocations. K1/K4 do not revive FSD/D6 families.
+Recovery details: `handoffs/2026-09-05-five-chain-refill.md`.
+
+## Completed intake boundary before five-chain refill
 
 Root owns the applied runtime specification and acts as VNFC direction caller. Active CM
 /root/cm_am_vnfc_e01 implements the unique E01 in its isolated worktree, baseaaaad1212.
