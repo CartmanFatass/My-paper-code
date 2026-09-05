@@ -1,0 +1,32 @@
+{
+  "id": "20260905-crto-013",
+  "created": "2026-09-05T03:46:10-07:00",
+  "direction": "commitment_residual_triggered_options",
+  "tier": "object",
+  "kind": "decision",
+  "title": "CRTO B07：接受两种子比较器受限结果",
+  "context": "两个种子的中心化 RAW 在 REPLAN 都仍为 5/8。种子 1 的一得一失几乎抵消，种子 2 无变化，均未达诊断 MEI；有利预测失败不影响完整结果的有效性。",
+  "options": [
+    {
+      "key": "a",
+      "label": "接受完整结果与合并读法",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "因有利预测失败而延后",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "独立逐行重算符合冻结规则，两枚均为 STILL-WEAK，合并 COMPARATOR-LIMITED。",
+  "evidence": [
+    "docs/research/candidates/commitment_residual_triggered_options/CRTO_RAW_CENTERED_LOSS_B07_INTAKE_20260905.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-05.md#crto-b07-centered-loss-result",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}
