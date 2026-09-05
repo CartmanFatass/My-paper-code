@@ -204,10 +204,13 @@ telemetry system. The thin direct measurement export is not a compatibility shim
 replacement API. Reuse the existing supervisor and admission; no new execution/control
 plane, provenance gates, cache framework or abstract layer is built.
 
-Owned surfaces: an A05 probe module and thin C++ translation unit in
-`experiments/candidates/degraded_incumbent_shadow_handover/`,
-`scripts/run_dish_prediction_head_contract_a05.py`, matching focused tests, and result
-documents. Preserve all old source. Aim for 150–250 non-test lines; hard limits are
+Owned surfaces: the A05 probe may live directly in
+`scripts/run_dish_prediction_head_contract_a05.py` or in its small direction module;
+the thin C++ translation unit remains in
+`experiments/candidates/degraded_incumbent_shadow_handover/`, with matching focused
+tests and result documents. This layout clarification preserves every quantity and
+call above; see `DISH_PREDICTION_HEAD_CONTRACT_A05_SCOPE_INTAKE_20260905.md`.
+Preserve all old source. Aim for 150–250 non-test lines; hard limits are
 2,000 new non-test, runner 600 and orchestration <30%, tests excluded. Return excess
 with named lines; do not pad the denominator or replace real calls with duplicated logic.
 
