@@ -1,0 +1,84 @@
+{
+  "id": "20260905-root-005",
+  "created": "2026-09-05T11:54:57-07:00",
+  "direction": "portfolio",
+  "tier": "portfolio",
+  "kind": "portfolio",
+  "title": "已生效：Pro规范修改持续委托与批改台高亮追溯",
+  "context": "所有者本轮明确批准当前CBSC/N3方案，并取消同类规范修改的无人流程排除：按正确节点完整Pro方案修改Portfolio、AGENTS等，保持可追溯和高亮。",
+  "options": [
+    {
+      "key": "ratify",
+      "label": "ratify the proposal",
+      "consequence": "授权立即生效，规范按明确Pro方案执行，每次应用高亮P1/P2及原始来源。"
+    },
+    {
+      "key": "refuse",
+      "label": "refuse",
+      "consequence": "只有所有者实际撤销才停止后续委托；保留已发生应用历史。"
+    },
+    {
+      "key": "amend",
+      "label": "amend per the comment",
+      "consequence": "按所有者具体修订更新委托范围，不编造默认变更。"
+    }
+  ],
+  "recommended": "ratify",
+  "auto_applied": "ratify",
+  "dm_reason": "",
+  "evidence": [
+    "docs/research/portfolio/decisions/2026-09-05-pro-directed-spec-delegation.md"
+  ],
+  "ledger_row": "",
+  "brief": "",
+  "ledger_kind": "",
+  "status": "open",
+  "packet": {
+    "question": "本次已批准CBSC/N3规范方案，并持续委托今后同类规范按完整Pro方案执行，批改台是否准确呈现这一已生效授权？",
+    "changes_if_approved": [
+      {
+        "target": "AGENTS §2/4/8、ENGINEERING_SCOPE_SPEC §5、Portfolio及两个技能边界",
+        "from": "新规范方案逐项等待owner批准；CBSC/N3上限未应用",
+        "to": "本次B/B已批准应用；后续同类规范与方案明确附带Portfolio更新按正确节点完整Pro方案执行，无重复投票，P1/P2高亮追溯"
+      }
+    ],
+    "if_refused": "按所有者实际撤销或修订指令处理，保留原批准、Pro原文和每次应用历史；不编造已撤销状态。",
+    "evidence_for": [
+      {
+        "path": "docs/research/portfolio/decisions/2026-09-05-pro-directed-spec-delegation.md",
+        "quote": "我将此次行为批准 准许更新portfoportfolio 和agents等spec 后续此类规范修改只要发起pro并按照pro给出方案修改即可 不再排除在无人流程之外 保证批改台可追溯且高亮即可",
+        "why": "本轮直接授权明确覆盖当前应用和后续同类规范委托。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/portfolio/decisions/2026-09-05-cbsc-n3-pro-intake.md",
+        "quote": "No historical candidate is accepted by the rule.",
+        "why": "规范委托不等于代码正确、实验验收或扩展科学要求；这些仍须实际完成。"
+      }
+    ],
+    "uncertainty": [
+      "仅在完整已归档Pro方案及正确节点范围内执行；方案外或未形成结论不自动授权。",
+      "不推断与此类规范无关的不可逆操作或其他处置。"
+    ],
+    "cost": {
+      "compute": "规范应用本身不增加实验；两对象原时间/科学预算保留。",
+      "owner_time": "无需以后逐项批准；P1/P2高亮供异步审查或覆盖。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing；当前批准已生效。"
+    },
+    "verdict_text": "> 我将此次行为批准 准许更新portfoportfolio 和agents等spec 后续此类规范修改只要发起pro并按照pro给出方案修改即可 不再排除在无人流程之外 保证批改台可追溯且高亮即可",
+    "source": "docs/research/portfolio/decisions/2026-09-05-pro-directed-spec-delegation.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-05T18:55:24+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/decisions/2026-09-05-pro-directed-spec-delegation.md",
+      "record": "docs/research/portfolio/decisions/2026-09-05-pro-directed-spec-delegation.md",
+      "state": "applied",
+      "summary": "本轮直接授权已写入AGENTS §4.7及Portfolio/owner技能；后续同类规范及Pro方案明确附带的Portfolio更新按正确节点完整裁决执行，无再次逐项批准。每次仍须原文、文件及实际状态高亮追溯。"
+    }
+  ]
+}

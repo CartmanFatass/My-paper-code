@@ -34,7 +34,7 @@ where it is recorded, and its provenance label.
 | --- | --- | --- | --- |
 | Object | next rung of a ladder, card wording, treatment and comparator inside an accepted mechanism, dropping an arm, budget deviation inside the cap, quarantine of an attempt after reproduction | the DM, locally, under §4 when the owner is absent | intake section: options, recommendation, selection, `OWNER_DIRECT` or `OWNER_DELEGATED` |
 | Direction | open or close an object family, park, recast, the next object after a consumed C, promotion to C-BENCH | `em:<direction>:convergence` (or `:innovator` before a C freeze); the owner directly when present | decision record, `PRO_FINAL` or `OWNER_DIRECT` |
-| Portfolio | priority, capacity, lifecycle, fusion, separation, registration, investment | `portfolio:cross_direction` proposes; the owner ratifies from the record | `docs/research/portfolio/decisions/<date>-<slug>.md`, `PRO_FINAL / ROOT_INTEGRATED` or `OWNER_DIRECT` |
+| Portfolio | priority, capacity, lifecycle, fusion, separation, registration, investment | `portfolio:cross_direction` proposes; the owner ratifies from the record, or the explicit standing delegation in §4.7 applies | `docs/research/portfolio/decisions/<date>-<slug>.md`, `PRO_FINAL / ROOT_INTEGRATED` or `OWNER_DIRECT` |
 
 A complete archived Pro response that decides the posed question at its declared evidence class is
 final for its node. Root and the DM execute and record it; they do not override it locally. A Pro
@@ -43,7 +43,7 @@ machine-generated exposure line and, for a sweep, the per-arm cost projection (�
 attach an engineering dissent (`*_ENGINEERING_DISSENT_<date>.md`) naming a missing fact; the
 node is re-opened with that document rather than a new round.
 
-Only the owner takes Portfolio-tier decisions in the owner's absence; see §4.
+Portfolio-tier decisions require the owner or the explicit standing delegation in §4.7.
 
 **Investment fields** (owner decision 2026-09-04 as revised the same day, evidence spec §11.7).
 Headroom, the gap between a stated upper reference and a tuned same-information baseline on the
@@ -87,9 +87,10 @@ When the owner is absent the loop keeps running under a standing delegation (own
 1. At every object-tier decision the DM lists the options and the recommendation, selects the
    recommended option, and records `Owner-delegated decision (unattended, <date> instruction): (x)`.
 2. Predict-then-verify continues; the owner's prediction slot is marked `not taken (unattended)`.
-3. Excluded from delegation: Portfolio-tier decisions; changes to frozen scientific meaning;
+3. Excluded from ordinary object-tier delegation: Portfolio-tier decisions not covered by §4.7; changes to frozen scientific meaning;
    history rewrites, deletion of evidence roots, or any other irreversible action outside the
-   ordinary research loop; edits to this file, `.codex/`, `.agents/`, or `CLAUDE.md`.
+   ordinary research loop. Governance/specification edits, including this file, `.codex/`,
+   `.agents/`, and `CLAUDE.md`, follow the explicit delegation in §4.7 rather than a blanket exclusion.
 4. **Audit ledger.** Every automatic decision is appended to
    `docs/research/portfolio/audit/<YYYY-MM-DD>.md` as one row: time, direction, tier, kind,
    options, chosen option, reversible (yes/no), provenance label, evidence path, owner flag, and
@@ -122,6 +123,20 @@ When the owner is absent the loop keeps running under a standing delegation (own
      valid result, written at intake beside the English intake document and referenced from a
      `brief` item.
 6. The delegation lasts until the owner revokes it.
+
+7. **Pro-directed specification changes (OWNER_DIRECT, 2026-09-05).** The owner approved the
+   archived CBSC/N3 object-specific exceptions and their Portfolio, AGENTS and specification
+   updates, and delegated future changes of this kind to the proper Pro node. After initiating
+   the appropriate Pro request, read and archive its complete formed decision, then implement
+   the exact specification plan and the Portfolio updates explicitly included in that plan
+   without another per-item owner approval. This covers engineering/governance specifications
+   and their implementing instruction files; it does not authorize unrelated dispositions,
+   an incomplete or out-of-scope Pro proposal, evidence deletion or history rewrites. Scientific
+   requirements and the node's scope remain explicit; a rule change does not itself accept code
+   or launch an experiment. At application, use the owner's console to highlight the existing
+   P1/P2 item and trace the actual owner delegation, exact Pro source, affected files and actual
+   application state. Preserve contrary evidence and asynchronous owner overrides; never invent
+   an owner reply. Record: `docs/research/portfolio/decisions/2026-09-05-pro-directed-spec-delegation.md`.
 
 ## 5. Capacity and resume
 
@@ -218,6 +233,15 @@ schema validators, registries, telemetry beyond wall time and peak RSS, compatib
 repeated smoke tests), and budgets (2,000 new lines per attempt, 600 per runner, orchestration
 under 30% of a diff, the four §11.4 launch conditions and no other gate). A guard is a bug until
 a card asks for it.
+
+The object-specific appendix in ENGINEERING_SCOPE_SPEC §5 applies only to complete DISH A05
+from d543146cc (A<=250,D=0) and the declared CBSC B1 execution/publication repair from0ffca930b
+(A<=200,D<=500,A+D<=700). Existing candidate changes count toward these totals. Within the
+named source paths, report A,D,O/(A+D); the ratio alone does not refuse an eligible change.
+Preserve the appendix's complete science, independent review, verification, resource and stop
+boundaries. No old patch or invocation is accepted by this clause. The general100-line exception
+and decision authority are unchanged; the exception ends at A05 result intake / CBSC technical
+intake and does not transfer to a successor or learner.
 
 Do not silently change scientific meaning, numerical precision, RNG behavior, checkpoint format,
 bit identity, declared comparison, or external side effects. State material assumptions and

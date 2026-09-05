@@ -1,0 +1,37 @@
+{
+  "question": "本次已批准CBSC/N3规范方案，并持续委托今后同类规范按完整Pro方案执行，批改台是否准确呈现这一已生效授权？",
+  "changes_if_approved": [
+    {
+      "target": "AGENTS §2/4/8、ENGINEERING_SCOPE_SPEC §5、Portfolio及两个技能边界",
+      "from": "新规范方案逐项等待owner批准；CBSC/N3上限未应用",
+      "to": "本次B/B已批准应用；后续同类规范与方案明确附带Portfolio更新按正确节点完整Pro方案执行，无重复投票，P1/P2高亮追溯"
+    }
+  ],
+  "if_refused": "按所有者实际撤销或修订指令处理，保留原批准、Pro原文和每次应用历史；不编造已撤销状态。",
+  "evidence_for": [
+    {
+      "path": "docs/research/portfolio/decisions/2026-09-05-pro-directed-spec-delegation.md",
+      "quote": "我将此次行为批准 准许更新portfoportfolio 和agents等spec 后续此类规范修改只要发起pro并按照pro给出方案修改即可 不再排除在无人流程之外 保证批改台可追溯且高亮即可",
+      "why": "本轮直接授权明确覆盖当前应用和后续同类规范委托。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/portfolio/decisions/2026-09-05-cbsc-n3-pro-intake.md",
+      "quote": "No historical candidate is accepted by the rule.",
+      "why": "规范委托不等于代码正确、实验验收或扩展科学要求；这些仍须实际完成。"
+    }
+  ],
+  "uncertainty": [
+    "仅在完整已归档Pro方案及正确节点范围内执行；方案外或未形成结论不自动授权。",
+    "不推断与此类规范无关的不可逆操作或其他处置。"
+  ],
+  "cost": {
+    "compute": "规范应用本身不增加实验；两对象原时间/科学预算保留。",
+    "owner_time": "无需以后逐项批准；P1/P2高亮供异步审查或覆盖。",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing；当前批准已生效。"
+  },
+  "verdict_text": "> 我将此次行为批准 准许更新portfoportfolio 和agents等spec 后续此类规范修改只要发起pro并按照pro给出方案修改即可 不再排除在无人流程之外 保证批改台可追溯且高亮即可",
+  "source": "docs/research/portfolio/decisions/2026-09-05-pro-directed-spec-delegation.md"
+}

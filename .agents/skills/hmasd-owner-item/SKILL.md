@@ -5,16 +5,17 @@ description: Use whenever a DM or Root makes something the owner should see (a d
 
 # HMASD owner items
 
-## Current owner boundary — 2026-09-05
+## Current owner boundary — 2026-09-05 explicit renewal
 
-The owner explicitly approved policy B and delegated important HMASD changes to complete,
-verified 6 Pro final decisions at the correct node. This overrides the older per-item owner
-ratification requirements below, only within the response's explicit scope. See
-`docs/research/portfolio/decisions/2026-09-05-pro6-delegation-and-starred-trace.md` and AGENTS §4.
-Root records PRO_FINAL / OWNER_DELEGATED, never invents an owner reply or approval time.
-At execution, star the existing P1/P2 item via `item.py trace` with source, application record,
-actual status and applied option. Missing/ambiguous/out-of-scope decisions retain the existing
-blocker boundary; platform safety limits remain. P3/P4 creation/reminders stay retired.
+The owner's latest instruction approved the complete CBSC/N3 Pro specification plan and
+explicitly delegated future changes of this kind, including their specified Portfolio and
+AGENTS updates, to complete final decisions at the proper Pro node. Apply AGENTS §4.7 and
+`docs/research/portfolio/decisions/2026-09-05-pro-directed-spec-delegation.md`.
+No additional per-item approval is required inside that explicit scope. Read/archive the full
+Pro decision, implement its exact plan, and highlight/trace the existing P1/P2 item through
+item.py with owner delegation, exact Pro source, affected files and actual status. Do not
+fabricate replies, accept code solely from a rule change or broaden unrelated dispositions.
+Missing/ambiguous/out-of-scope decisions retain their actual boundary; P3/P4 remain retired.
 
 
 The owner intervenes softly through `tools/owner_console/`. The loop never waits for the owner and

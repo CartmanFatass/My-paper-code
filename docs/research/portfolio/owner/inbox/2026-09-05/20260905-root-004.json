@@ -24,7 +24,7 @@
     }
   ],
   "recommended": "ratify",
-  "auto_applied": null,
+  "auto_applied": "ratify",
   "dm_reason": "",
   "evidence": [
     "docs/research/portfolio/pro_packets/20260905_cbsc_n3_followup/archive/RESPONSE.md",
@@ -73,5 +73,15 @@
     "verdict_text": "**批准本请求的综合推荐：N3选择B，仅对原DISH A05适用整项A≤250、D=0的对象例外，保留全部原卡测量和验证；CBSC选择B，仅对原B1完整执行到发布修复适用整项A≤200、D≤500、A+D≤700的对象例外，先解决真实缺失状态、原始receipt定位和十五表／summary离线发布，止于技术intake，不直接放行learner。上述额度包含现有候选全部变更，不重置基线；通用100行政策、科学与数值要求、源码接受、运行准入及其他预算保持。仅同步本文明确列出的工程规范／记录，不修改决策权限。若选择A，则仅接受真正符合现行规则的完整方案，现有候选继续未接受；若选择C，则暂缓相应当前投入并保留本文再入条件。任何选择均不暂停FSD／FRRIE，不改其他方向、生命周期、Priority、家族边界、recast或五链目标。**",
     "source": "docs/research/portfolio/pro_packets/20260905_cbsc_n3_followup/archive/RESPONSE.md"
   },
-  "starred": true
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-05T18:54:57+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/decisions/2026-09-05-pro-directed-spec-delegation.md",
+      "record": "docs/research/portfolio/decisions/2026-09-05-cbsc-n3-pro-intake.md",
+      "state": "applied",
+      "summary": "所有者本轮明确批准；已应用完整Pro方案：N3 A05累计A250/D0，CBSC完整修复A200/D500，保留完整科学/验证/停止边界。同步AGENTS、工程规范与Portfolio；旧候选未自动验收。今后同类规范按正确节点完整Pro方案执行，高亮追溯，无逐项重复批准。"
+    }
+  ]
 }

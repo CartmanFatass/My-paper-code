@@ -1,7 +1,10 @@
 # CBSC / N3 Portfolio6Pro follow-up — complete proposal intake
 
-Status: **PRO_FINAL / ROOT_INTEGRATED / OWNER_RATIFICATION_PENDING** for the two new
-object-specific exceptions only. No rule, candidate-source acceptance or invocation changed.
+Status: **PRO_FINAL / ROOT_INTEGRATED / OWNER_DIRECT_APPROVED_APPLIED** for the two
+object-specific exceptions. Owner explicitly approved the prepared plan and future same-kind
+Pro-directed specification changes; see `2026-09-05-pro-directed-spec-delegation.md`. Rules and
+addenda are applied; no candidate-source acceptance or invocation is inferred. The initial
+pending-approval account below remains historical, superseded by this actual owner instruction.
 Request2026-09-05-portfolio-cbsc-n3-evidence-followup-01, evidence pin
 `aa20ae77f4f6a21782a08fecea7e1340538043e8`, node `portfolio:cross_direction`.
 
@@ -87,3 +90,12 @@ Neither CBSC nor N3 has matched tuned-generic headroom. A04.292995485s is not A0
 A05's forecast25.5s/cap60s and CBSC's cumulative remainingfocused243.55s(excluding original
 smoke) are unchanged. No new result/sweep exposure occurred in this consultation. Full
 historical/agent costs remain unmeasured; no efficiency ranking or savings is inferred.
+
+## Current owner approval supersedes initial pending boundary
+
+The latest explicit owner message approves both B options and delegates future same-kind
+specification changes to complete appropriate-node Pro plans, with highlighted console traces.
+The exact prepared patch is applied, followed by the owner-directed AGENTS §4.7/skill alignment.
+Root004 is traced OWNER_DIRECT/ratify with actual source and application record. No old candidate
+is accepted; full engineering review and original stop boundaries remain. No further approval
+is needed for these current exceptions or future same-kind plans within the new delegation.
