@@ -93,7 +93,7 @@ and new training exposures and other implementation differences are not a contro
 | Tier | Options considered | Selection and provenance |
 | --- | --- | --- |
 | Direction | Continue exact R03/E01 engineering; repeat old cross-N learning; new N7 same-distribution direct B | Select only the new direct B and its necessary bounded preparation, `PRO_FINAL` |
-| Object | Preserve the existing four PPO epochs / minibatch24 on the selected new schedule; alter optimizer exposure; add a separate exact feasibility A | Preserve the existing optimizer schedule with 192 transitions per new round, hence32steps/round and2048steps/arm; `OWNER_DELEGATED` |
+| Object | Preserve four PPO epochs / minibatch 24 on the selected new schedule; alter optimizer exposure; add a separate exact feasibility A | Preserve the schedule with 192 transitions per new round, hence 32 steps/round and 2,048 steps/arm; `OWNER_DELEGATED` |
 | Technical | Preserve and reconcile inconsistent Transport metadata; resend an already answered question | Preserve original bytes and ask Root/Transport to correct the factual subrecord; no duplicate Send |
 
 The object implementation choices and current gaps are to be recorded in the science card's
@@ -102,17 +102,23 @@ selection after performance is observed. No run is claimed in this intake. All w
 the Pro response's budget table remain planned until measured by the actual runner.
 
 Owner-delegated decision (unattended, 2026-09-03 instruction): retain the actual four-epoch,
-24-transition-minibatch optimizer arrangement, adapt the selected N7 collection to32complete
-episodes per round balanced16/16 across failed zones, and use the new card namespace. This keeps
+24-transition-minibatch optimizer arrangement, adapt the selected N7 collection to 32 complete
+episodes per round balanced 16/16 across failed zones, and use the new card namespace. This keeps
 the paired arms' optimization arrangements and source distribution balanced while implementing
 the exact new Pro budget; it is not a change selected from newly observed performance.
 
 CM source review also resolved a historical arithmetic discrepancy without changing an old
-result: R02 uses16optimizer steps per round, so64rounds imply1024steps per arm and2048for the
+result: R02 uses 16 optimizer steps per round, so 64 rounds imply 1,024 steps per arm and 2,048 for the
 pair. The result evidence's §22.5 total and §22.6 per-round rows support those counts; the later
-phrase “2,048 steps each per seed” is a documentation error. The new card's2048steps per arm
-follow from its doubled32episode schedule, not from that mistaken phrase. Historical documents
+phrase “2,048 steps each per seed” is a documentation error. The new card's 2,048 steps per arm
+follow from its doubled 32-episode schedule, not from that mistaken phrase. Historical documents
 remain unchanged and the correction is recorded here.
+
+CM's completed read-only source mapping and the bounded implementation objective are recorded in
+`VNFC_N7_DIRECT_RETURN_B01_CM_HANDOFF_20260905.md`. The reusable corrected R02 models, native
+interactive environment and actual PPO functions exist. The specific remaining work is a fresh
+N7 runner and scoped Linux loader, with a focused check of the changed path and complete cost.
+No new experiment, build, test or source acceptance occurred during this mapping.
 
 ## Owner-facing application and next discriminator
 

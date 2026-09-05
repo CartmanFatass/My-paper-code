@@ -134,6 +134,10 @@ Keep independently trustworthy partial facts at their proper ceiling.
 
 ## Implementation and proportionate verification assignment
 
+Completed source mapping, exact optimizer settings, owned paths and the bounded implementation
+objective are in `VNFC_N7_DIRECT_RETURN_B01_CM_HANDOFF_20260905.md`. The mapping performed no
+experiment; it confirms reusable computation and the need for a fresh N7 runner/Linux adapter.
+
 CM maps the current corrected R02 policy/trainer/native host into one minimal fresh runner and
 records all material configuration, numerical, RNG or checkpoint differences. Preserve framework
 autograd, native rewards and physical actions; no reconstruction of the old scalar exact-adjoint
