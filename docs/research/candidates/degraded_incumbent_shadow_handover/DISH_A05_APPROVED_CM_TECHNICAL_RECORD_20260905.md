@@ -1,0 +1,84 @@
+# Original A05 approved implementation — CM technical record
+
+Authority is the owner's 2026-09-05 approval, applied in 64364dfe0, and the complete
+Portfolio Pro follow-up recorded in `2026-09-05-cbsc-n3-pro-intake.md`. This resumes
+the unchanged original A05. Historical ea05e9308 is a candidate, not accepted source.
+CM starts from d3710ffdd in its isolated worktree; Root owns main integration.
+
+## Fixed contract and acceptance
+
+The observable is the original card sections 2–7: real policy mapping, actual
+training-head graph with Cholesky positive control, and the actual native helper.
+Only the A05 runner, thin normally included C++ export and original focused tests
+are source-owned. Cumulative source A<=250,D=0 from d543146cc. Section 4 additions:
+none. No framework, provenance gate, extra telemetry system or optimizer is added.
+
+Protected four R06 production files remain byte-identical to 818b2566. Use one
+genuine seed 50511 model, CPU Torch FP32 with one thread, NumPy/native binary64,
+existing no-fast-math flags, fixed original tensors and role mapping. Preserve
+all raw values, alternate branches, per-parameter and hidden connection facts,
+two backwards, nine helper calls, nested heads/Q/Cholesky counts 2/4/2 and zero
+parameter displacement. No native state, environment, learner, checkpoint, source
+repair or successor. Complete alternate output is valid reconnaissance too.
+
+## Fresh source assessment
+
+The 190-line candidate directly calls step_rows on the two-lane batch, then reads
+the extra raw service-Q tensor. Its selected FP64 vectors and FP32 sigmoid contrast
+feed both per-owner mapping rules and the joint rule. Actual training_heads outputs
+feed a synthetic scalar backward; all named parameter gradients and hidden gradients
+are retained. Cleared gradients precede the actual full-head Cholesky control.
+The thin C++ export calls the included production predictive_q95 helper. All three
+vectors and q95 outputs per case feed the native rule. All component alternatives
+are retained in summary and stdout; there is no favorable-result filter.
+
+Initial independent review found a concrete resource reporting overclaim:
+resources_unmeasured=false was derived from Python self RSS and elapsed wall only.
+Compiler process RSS and scratch were not measured. Correction must preserve actual
+measured values while marking missing coverage; missing optional resources do not
+make the science invalid. Original stdout completion wall plus one summary write
+is the accepted publication profile, not a reason for a second publication pass.
+No model/compile/runtime observation has occurred in this resumed slice yet.
+
+## Cost, execution and verification boundaries
+
+The original 25.5s=1.5*(10+5+2) is an allowance-based forecast, not a measured pilot.
+There is one invocation, no sweep. Its actual policy model batches two lanes and
+four copies; the helper is compiled C++ using original flags. One thread and nine
+scalar helper calls are frozen here. Additional worker-equivalence or throughput
+work would change this observation's scope. No speedup or measured fit is claimed
+before runtime.
+
+The original non-card smoke uses seed50512 and helper levels -1/.5/1, plus existing
+rule tests. Smoke and original each have a separate 60s bound. No repeated formal
+result is used as verification and each invocation compiles into its own output.
+Portable heavy work uses wsl_4070, committed/pushed exact bytes in a detached
+worktree, configured agent-task, and immediately adjacent actual-node admit-memory
+receipt with both available values >=4GiB. Formal execution follows Root integration.
+Accepted handles are handed to the shared tracker; collection stops at full A05
+technical result and DM intake. The runtime record below will distinguish source
+acceptance, test evidence, actual process acceptance and terminal facts.
+
+## Source conformity accepted for original verification
+
+CM committed the isolated implementer's inspected source as 197e777a6 and pushed;
+CM integration is 6d2500cb6, pushed. Independent reviewer returned no remaining
+material source finding on runner blob 876efd82afac89c7f9c89790f4d2432a792279f3.
+This establishes source conformity for the original verification, not runtime fit.
+Resource coverage now remains explicitly incomplete; missing scratch/compiler RSS
+does not reject otherwise complete synthetic science. The CLI timer starts before
+ordinary module imports except time; final stdout serialization/interpreter startup
+are excluded and the external process observation retains that wider scope.
+
+| Source | A | D | Retained orchestration ranges |
+| --- | ---: | ---: | --- |
+| scripts/run_dish_prediction_head_contract_a05.py | 193 | 0 | 1–17; 52–62; 117–125; 164–193 |
+| experiments/candidates/degraded_incumbent_shadow_handover/head_contract_a05.cpp | 5 | 0 | 1–5 |
+
+Cumulative A198,D0,O72, O/(A+D)=36.36%; original focused tests60 lines separately.
+Ranges retain the previous conservative classifications. Imports, direct compile/load,
+native export and publication glue connect existing real computations to their raw
+consumers. No denominator padding, scientific omission or old-source modification.
+AST parsing and diff checks pass. Independent review traces actual nested 2/4/2 calls,
+all parameter and hidden outputs, all native vectors and q95 branches to publication.
+Four protected R06 surfaces compare unchanged against 818b2566 at CM source.
