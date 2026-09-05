@@ -171,6 +171,20 @@
         "worker-reports/MARLlib/ROOT_RETURN.md",
         "worker-reports/MARLlib/AGENTS_INDEX.json"
       ],
+      "worker_report_summary": {
+        "fixed_sha_permalink_count": 53,
+        "overlay_count": 32,
+        "incremental_topics": [
+          "preprocessor flattening and nested-space boundary",
+          "single-group policy mapping and shared-policy batch slicing boundary",
+          "num_cpus_per_worker visibility in the runner configuration"
+        ]
+      },
+      "worker_artifact_sha256": {
+        "worker-reports/MARLlib/CORE_EVIDENCE.md": "634f2d9ca9d5ea731a4935c59660303d1f4b029d21184d3bddaf31b7ee5dcbaf",
+        "worker-reports/MARLlib/ROOT_RETURN.md": "c249d9460ae0dce09645a50116e618f1b38a7828fac45bf9fce6d75e14afacb",
+        "worker-reports/MARLlib/AGENTS_INDEX.json": "c6342b00e3468932d92d95aa5e284b93064dab395b1b1f458b564855e757f44d"
+      },
       "source_focus": [
         "marllib/marl/algos/run_cc.py",
         "marllib/marl/algos/scripts/mappo.py",

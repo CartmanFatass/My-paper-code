@@ -548,7 +548,7 @@
     "upstream_agents_search_at_fixed_commit": "none",
     "source_code_edits": false,
     "training_or_dependency_execution": false,
-    "key_paths_checked": "pending final static check"
+    "key_paths_checked": "all indexed paths exist; all AGENTS backups SHA256-equal"
   },
   "license_note": "MARLlib LICENSE is MIT; navigation/report files retain notices and do not reproduce large source fragments."
 }
