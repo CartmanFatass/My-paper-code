@@ -50,4 +50,3 @@ Root owns shared Portfolio/audit/P1/P2 traces and integration. On the complete a
 response, the DM reads the entire decision, applies its actual class and scope,
 records the Direction intake and prepares any selected next object. No empirical
 outcome or scientific polarity is assigned by preparing or transporting this packet.
-
