@@ -1,21 +1,21 @@
 {
   "packet_version": 4,
-  "request_id": "2026-09-05-vnfc-r03-cost-convergence-01",
+  "request_id": "2026-09-05-ucope-post-interface-convergence-01",
   "source_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
   "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
   "caller_role": "em",
   "source_role": "em",
   "workflow_node": "em_convergence",
-  "direction_id": "variable_n_fleet_churn",
+  "direction_id": "ucope",
   "direction_ids": [
-    "variable_n_fleet_churn"
+    "ucope"
   ],
-  "conversation_binding_key": "em:variable_n_fleet_churn:convergence",
+  "conversation_binding_key": "em:ucope:convergence",
   "requested_conversation_id": null,
   "conversation_reuse_required": true,
   "reset_invalid_provider_context": true,
   "provider_context_reset_evidence": {
-    "previous_request_id": "2026-09-04-vnfc-controller-headroom-convergence-02",
+    "previous_request_id": "ucope-em-convergence-20260904-02",
     "reset_authority": "OWNER_DIRECT",
     "owner_instruction": "然后不要再使用旧的conversation id 这些没有兼容到6 pro"
   },
@@ -44,13 +44,13 @@
   "operator_thread_id": "01a06f0e-5eab-7431-8491-e7c2c62705b6",
   "operator_thread_url": "codex://threads/01a06f0e-5eab-7431-8491-e7c2c62705b6",
   "return_receipt_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
-  "dispatch_handoff_path": "C:\\Projects\\HMASD\\docs\\research\\candidates\\variable_n_fleet_churn\\pro_packets\\20260905_r03_cost_convergence\\HANDOFF.json",
-  "dispatch_prompt": "Execute the handoff packet at C:\\Projects\\HMASD\\docs\\research\\candidates\\variable_n_fleet_churn\\pro_packets\\20260905_r03_cost_convergence\\HANDOFF.json exactly once.",
-  "dispatch_instruction": "Do not call create_thread. Call send_message_to_thread exactly once on the configured project Transport singleton threadId=01a06f0e-5eab-7431-8491-e7c2c62705b6 with model=gpt-5.6-luna, thinking=xhigh, and prompt=Execute the handoff packet at C:\\Projects\\HMASD\\docs\\research\\candidates\\variable_n_fleet_churn\\pro_packets\\20260905_r03_cost_convergence\\HANDOFF.json exactly once.. If the singleton is unavailable, preserve the packet and report SINGLETON_TRANSPORT_UNAVAILABLE; do not create a replacement task.",
+  "dispatch_handoff_path": "C:\\Projects\\HMASD\\docs\\research\\candidates\\ucope\\pro_packets\\20260905_post_interface_convergence\\HANDOFF.json",
+  "dispatch_prompt": "Execute the handoff packet at C:\\Projects\\HMASD\\docs\\research\\candidates\\ucope\\pro_packets\\20260905_post_interface_convergence\\HANDOFF.json exactly once.",
+  "dispatch_instruction": "Do not call create_thread. Call send_message_to_thread exactly once on the configured project Transport singleton threadId=01a06f0e-5eab-7431-8491-e7c2c62705b6 with model=gpt-5.6-luna, thinking=xhigh, and prompt=Execute the handoff packet at C:\\Projects\\HMASD\\docs\\research\\candidates\\ucope\\pro_packets\\20260905_post_interface_convergence\\HANDOFF.json exactly once.. If the singleton is unavailable, preserve the packet and report SINGLETON_TRANSPORT_UNAVAILABLE; do not create a replacement task.",
   "pro_send_from_caller": false,
   "prompt_body_file": "PROMPT_BODY.md",
   "transport_request": {
-    "request_id": "2026-09-05-vnfc-r03-cost-convergence-01",
+    "request_id": "2026-09-05-ucope-post-interface-convergence-01",
     "source_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
     "creator_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
     "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
@@ -67,18 +67,18 @@
     },
     "return_route": "PARENT_SESSION",
     "return_receipt_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
-    "direction_id": "variable_n_fleet_churn",
+    "direction_id": "ucope",
     "direction_ids": [
-      "variable_n_fleet_churn"
+      "ucope"
     ],
     "caller_role": "em",
     "workflow_node": "em_convergence",
-    "conversation_binding_key": "em:variable_n_fleet_churn:convergence",
+    "conversation_binding_key": "em:ucope:convergence",
     "requested_conversation_id": null,
     "conversation_reuse_required": true,
     "reset_invalid_provider_context": true,
     "provider_context_reset_evidence": {
-      "previous_request_id": "2026-09-04-vnfc-controller-headroom-convergence-02",
+      "previous_request_id": "ucope-em-convergence-20260904-02",
       "reset_authority": "OWNER_DIRECT",
       "owner_instruction": "然后不要再使用旧的conversation id 这些没有兼容到6 pro"
     },

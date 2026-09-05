@@ -7,7 +7,7 @@
   "direction_id": "ucope",
   "repository": "CartmanFatass/My-paper-code",
   "repository_url": "https://github.com/CartmanFatass/My-paper-code",
-  "commit_or_ref": "1dc36ddf9487009a7484b74712f2256efd91d776",
+  "commit_or_ref": "3d0171e0d53f53b602092e9791f45ea00e803568",
   "execution_mode": "REUSE_SINGLETON",
   "reset_invalid_provider_context": true,
   "provider_context_reset_evidence": {
@@ -123,6 +123,11 @@
       "path": "docs/research/portfolio/pro_packets/20260905_next_investment/archive/RESPONSE.md",
       "purpose": "Complete latest Portfolio proposal, especially Research Agenda4 UCOPE: full separated interface needed, no generic architecture iteration selected.",
       "provenance": "Historical proposal and cross-direction assessment at its original pin; current ratified rule is in Engineering Scope, and this is not a later UCOPE Convergence decision."
+    },
+    {
+      "path": "docs/research/portfolio/decisions/2026-09-05-pro-directed-spec-delegation.md",
+      "purpose": "Latest explicit owner approval and standing delegation for same-kind specification changes after proper-node complete Pro plan; no repeat owner vote, highlighted trace required.",
+      "provenance": "Actual owner instruction, applied64364dfe0; does not change this node science or grant code acceptance."
     }
   ],
   "constraints": [
@@ -138,7 +143,8 @@
     "Current tuned-baseline headroom is absent; the A1 census cannot manufacture a competent learned/tuned baseline from an exact solve or a passing subset. This limits the named headroom inventory, not general A/B admission or evidence polarity. If selecting new training/tuning it is a B object with real nonzero counts and its own source-backed exposure/cost; never label it a zero-work A audit. No repository-wide MEI is introduced and no old result rule is rewritten.",
     "Section11 controls. Historical consumption/no-rerun/competence prose is provenance, not an additional generic A/B gate; technical attempts carry no scientific retry budget or polarity. This request nevertheless selects no blind parent rerun, tolerance relaxation, passing-row salvage, fresh draw, learner, architecture iteration or different evidence root. Any new scientific object must be explicit and prospective, with the old frozen object and evidence preserved.",
     "Provider reasoning is read-only over the listed pinned paths. Rejected raw draft bytes and runtime summary arrays not listed here are not accessible evidence for this request; do not claim to have reviewed, computed or verified them. If a decision requires their exact contents, name that missing fact rather than invent it. Source evidence may assess an interface premise but this node is not a CM code-review or implementation task.",
-    "Portable future work follows configured remote-first execution from committed/pushed bytes with immediate per-invocation actual-node4GiB physical/effective admission; the existing diagnostic intentionally pins Windows andwsl_4070 because cross-node numerics is its technical estimand. No fallback, third invocation, driver/tolerance sweep or automatic parent attempt is implicit. Current ACTIVE/HIGH and queued status are unchanged; lifecycle, investment, priority, capacity and new engineering exceptions remain outside this direction node."
+    "Portable future work follows configured remote-first execution from committed/pushed bytes with immediate per-invocation actual-node4GiB physical/effective admission; the existing diagnostic intentionally pins Windows andwsl_4070 because cross-node numerics is its technical estimand. No fallback, third invocation, driver/tolerance sweep or automatic parent attempt is implicit. Current ACTIVE/HIGH and queued status are unchanged; lifecycle, investment, priority, capacity and new engineering exceptions remain outside this direction node.",
+    "Latest owner explicitly approved CBSC/N3 scoped specification plans and delegated future same-kind engineering/governance specification changes and their explicitly included Portfolio updates to complete Pro plans at the proper node, without repeated individual owner approval, with highlighted trace. Read the listed current authority record and updatedspec. This direction node remains scientific Convergence: if its selected solution needs new Portfolio-level engineering allowance, explicitly identify that separate proper-node plan; do not claim currentotherdirectionexceptionsapply or that freshownerapprovalisautomaticallyrequired."
   ],
   "response_schema": [
     "REQUEST_ID and PINNED_REFERENCE",
