@@ -1,0 +1,48 @@
+{
+  "check": "archive source bytes, parent/node/request binding and complete response receipt",
+  "source_directory": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_03\\2026-09-05-vsp03-k1-host-innovator-01",
+  "evidence_pin": "b96ee986c47ccede71637bbd4904d6b4b83affca",
+  "accepted_packet_commit": "6cb64af717f37baf47bdf919e827f5ff550b48f6",
+  "files": {
+    "PROMPT_BODY.md": {
+      "original_filename": "2026-09-05-vsp03-k1-host-innovator-01--vsp_03__00_PROMPT.md",
+      "bytes": 20716,
+      "sha256": "147338b059319a90f175668247b044a6f02e8439e03585c093969b3bffd81a6f",
+      "copied_bytes_equal": true
+    },
+    "RESPONSE.md": {
+      "original_filename": "2026-09-05-vsp03-k1-host-innovator-01--vsp_03--attempt-01__02_RESPONSE.md",
+      "bytes": 28491,
+      "sha256": "068a9b6e123183ca9fda857a3874b35b91daed3e213e47eb61c7a97992b542f6",
+      "copied_bytes_equal": true
+    },
+    "TRANSPORT_FACTS.json": {
+      "original_filename": "2026-09-05-vsp03-k1-host-innovator-01--vsp_03--attempt-01__03_TRANSPORT_FACTS.json",
+      "bytes": 6379,
+      "sha256": "d535fa59234d5d3b2b77f2db364f7dbefc7bca37b45c023cc6aa2e19d15998ed",
+      "copied_bytes_equal": true
+    },
+    "PACKET_MANIFEST.json": {
+      "original_filename": "2026-09-05-vsp03-k1-host-innovator-01--vsp_03__PACKET_MANIFEST.json",
+      "bytes": 1801,
+      "sha256": "b957a644d8991bb40041c27eb6f5e95d30f3e5addb0a70baff5e3f458138896c",
+      "copied_bytes_equal": true
+    }
+  },
+  "prompt_equals_accepted_git_blob": true,
+  "request_parent_node_match": true,
+  "transport_reported_send_count": 1,
+  "transport_reported_completion": "NATURAL_COMPLETION",
+  "direct_browser_reverification_by_dm": false,
+  "new_experiment_activity": 0,
+  "author_dispatch_record": "2026-09-05 22:15:01 UTC",
+  "transport_timestamps_preserved": {
+    "received_at": "2026-09-05T22:00:00Z",
+    "sent_at": "2026-09-05T22:00:00Z",
+    "generation_started_at": "2026-09-05T22:00:00Z",
+    "completed_at": "2026-09-05T23:11:58Z",
+    "captured_at": "2026-09-05T23:14:02Z",
+    "archived_at": "2026-09-05T23:21:45Z",
+    "tab_closed_at": "2026-09-05T23:23:26Z"
+  }
+}
