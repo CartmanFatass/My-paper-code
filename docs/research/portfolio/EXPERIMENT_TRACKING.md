@@ -14,9 +14,10 @@ New accepted work is sent directly to this tracker, then terminal, lost-observat
 specified-reminder facts are delivered directly to the responsible current DM. The active recipient
 paths are FSD `/root/dm_amx_fsd_continue`, FRRIE `/root/dm_amx_frrie_continue`, N5
 `/root/dm_amx_n5_continue`, CRTO `/root/dm_amx_crto_continue`, and N3
-`/root/dm_amx_n3_continue`. FSD, FRRIE, N5, and CRTO have completed direct-route acknowledgement;
-Root instructed all five routes to hand off future accepted handles. These paths apply only to new
-handles and do not revive the historical DM routes recorded below.
+`/root/dm_amx_n3_continue`; UCOPE `/root/dm_amx_ucope_continue` joined on the N5 slot release.
+FSD, FRRIE, N5, CRTO, N3, and UCOPE have completed direct-route acknowledgement; UCOPE has no
+accepted process. These paths apply only to new handles and do not revive the historical DM routes
+recorded below.
 
 Observation snapshot: `2026-09-04T23:39:35Z`, using the configured `hmasd-wsl-node` supervisor.
 Authoritative `agent-task list` contains no live task: every listed task is `finished`, `failed`,
