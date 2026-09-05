@@ -1,0 +1,37 @@
+{
+  "id": "20260905-frrie-002",
+  "created": "2026-09-05T02:14:19-07:00",
+  "direction": "finite_resource_relational_inductive_efficiency",
+  "tier": "object",
+  "kind": "decision",
+  "title": "按保存字节接受 R06 导入缺陷诊断",
+  "context": "远端在精确候选字节上只导入包，立即复现缺失 initialize_contact_pair 的 ImportError，未进入 learner。该结论只属于此候选，旧 r04 与 attempt02 原因仍各自未解。",
+  "options": [
+    {
+      "key": "a",
+      "label": "接受本候选的具体导入缺陷",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "推广为旧故障共同原因",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "仍只记为静态预测",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "失败步骤已在记录字节上被直接观察，满足复现后分类要求。",
+  "evidence": [
+    "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R06_MODULE_ENTRY_LAYOUT_INTAKE_20260905.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-05.md#frrie-r06-module-layout",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}
