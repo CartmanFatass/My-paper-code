@@ -204,3 +204,38 @@ initial admission and start metadata after acceptance, then released polling. DM
 No terminal result is claimed here. Seeds **29 and 47 remain queued**, contingent only on
 seed 11 technical completeness, with no efficacy/trigger-support screening or changed seed law.
 The recorded learner/publication coverage limitation remains open pending collection.
+
+## Accepted seed 29 launch — 2026-09-05 00:47:14 UTC
+
+DM accepted complete seed 11 and selected only unchanged seed 29 in
+`N3_DISH_B01_C04_SEED11_INTAKE_20260904.md`, pushed commit `0554e85b1`.
+Before dispatch, `dish_b01_c04_seed29_e0541d0c_a1` returned `not_found`; output
+`seed29_a1` and receipt `seed29_a1_admission.json` were absent. The existing remote worktree
+was clean at source `e0541d0cb3e9e63731c72f4dacb10b44d268fd39`. No tests or source changes occurred.
+
+Accepted once as one `/usr/local/bin/agent-task run` command string on `wsl_4070`:
+
+```sh
+cd /home/wu/hmasd-worktrees/dish-b01-c04-e0541d0c && /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/degraded_incumbent_shadow_handover/exp/n3_b01_c04_20260904/seed29_a1_admission.json && /home/wu/.venvs/hmasd/bin/python scripts/run_dish_first_trigger_source_scout_b01.py run --seed 29 --admission temp/directions/degraded_incumbent_shadow_handover/exp/n3_b01_c04_20260904/seed29_a1_admission.json --out temp/directions/degraded_incumbent_shadow_handover/exp/n3_b01_c04_20260904/seed29_a1
+```
+
+- Task `dish_b01_c04_seed29_e0541d0c_a1`; tmux `agent_dish_b01_c04_seed29_e0541d0c_a1`.
+- Supervisor start epoch `1788569234` (2026-09-05 00:47:14 UTC / September 4 17:47:14 PDT), PID `607075`.
+- Cwd `/home/wu/hmasd-worktrees/dish-b01-c04-e0541d0c`.
+- Log `/home/wu/.agent-tasks/dish_b01_c04_seed29_e0541d0c_a1/task.log`; status, eventual exit_code,
+  start_time, pid and runner.sh beside it.
+- Receipt and output are the exact cwd-relative paths in the command; receipt is outside output.
+
+Fresh receipt capture `2026-09-05T00:47:14.317386Z`, assessment
+`2026-09-05T00:47:14.317661Z`: physical available and effective available each
+**15,432,970,240 bytes**, minimum **4,294,967,296 bytes**, both floor flags and `passed` true,
+failure reasons empty, source `/proc/meminfo`. This is admission, not runtime resource telemetry.
+Expected cost remains **1474.544745605439 seconds per fully charged source arm**, cap **1800**
+at declared boundaries, with CPU one Torch thread, FP32 learner and float64 native unchanged.
+
+Tracker `/root/tracker_tl_experiments` ACKed adoption and alone observes/reminds at terminal,
+observation loss or cap. DM `/root/dm_amx_n3_continue`; CM collector
+`/root/dm_amx_n3_continue/cm_am_n3_dish_c04`. CM read initial receipt/start metadata only and
+released polling. Seed **47 remains queued**. Seed 11's empty-support default differences are
+not effects and did not change seed selection. No seed 29 completion or scientific result is
+claimed at this accepted detached boundary.
