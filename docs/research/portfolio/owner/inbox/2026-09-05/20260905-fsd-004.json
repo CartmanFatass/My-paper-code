@@ -1,0 +1,33 @@
+{
+  "id": "20260905-fsd-004",
+  "created": "2026-09-05T03:07:38-07:00",
+  "direction": "flexible_skill_duration",
+  "tier": "object",
+  "kind": "brief",
+  "title": "E3 大差异提前续约种子一有效结果简报",
+  "context": "本格有效完成，末次平均回报约 0.47675；E3 14/18，未进行配对或总体判读。",
+  "options": [
+    {
+      "key": "reading-agreed",
+      "label": "the reading stands",
+      "consequence": "the reading stands"
+    },
+    {
+      "key": "reading-disputed",
+      "label": "re-read per the comment",
+      "consequence": "re-read per the comment"
+    }
+  ],
+  "recommended": "reading-agreed",
+  "auto_applied": null,
+  "dm_reason": "如实报告有效单格和未完成的总体问题，原卡继续。",
+  "evidence": [
+    "docs/research/candidates/flexible_skill_duration/FSD_E3_LARGE_D2_SEED1_INTAKE_20260905.md",
+    "docs/research/candidates/flexible_skill_duration/FSD_E3_LARGE_D2_SEED1_RESULT_EVIDENCE_20260905.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-05.md#fsd-e3-large-d2-seed1-terminal-20260905",
+  "brief": "docs/research/portfolio/owner/briefs/flexible_skill_duration/2026-09-05_E3_large_d2_seed1.md",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}
