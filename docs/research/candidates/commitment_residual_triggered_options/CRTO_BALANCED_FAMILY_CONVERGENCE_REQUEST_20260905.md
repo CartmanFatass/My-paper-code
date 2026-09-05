@@ -120,6 +120,21 @@ handoff SHA256 is 0b0e5864e67b01db6b617d11eca60f482e515be599614bbebe1472327054fa
 Dispatch has not yet occurred at this record boundary; acceptance will be recorded only after
 the one task-message tool result. Generated packet bytes remain unchanged after dispatch.
 
+**Dispatch acceptance, recorded 2026-09-05T11:08:33Z:** DISPATCH_ACCEPTED. The single
+send_message_to_thread call used the emitted dispatch_prompt verbatim, configured singleton
+01a06f0e-5eab-7431-8491-e7c2c62705b6, model gpt-5.6-luna and thinking xhigh. The tool returned
+the same threadId with isError=false. No other author dispatch or provider Send occurred in this
+DM. This is a Codex task acceptance fact, not proof of provider Send, retrieval, generation or
+a scientific verdict. Transport owns those observations and the sole receipt to Root.
+
+The accepted request stays PRO_PENDING; all packet bytes and historical request evidence are
+preserved. No duplicate dispatch, successor experiment or local family decision is queued.
+Input/pre-dispatch record commit is df705f671874600c2e0e3fe6649b0028a155ef46; owner/question
+commit is 8db17f3ff32d29671e7c12d603ee9ea04ba17441. Both are pushed. Root may integrate these
+after B07 source 5a4b5c20, original E0 992fd69ae and intake fffd9ca06; 4d1572b92 only duplicates
+the accepted E0 to supply the immutable reference pin and need not be cherry-picked again.
+DM and CM remain at the zero-live operational boundary pending the node's archived answer.
+
 Owner reviews at the clean boundary returned no unapplied instructions; no CRTO audit override.
 Root owns the shared audit and current Portfolio. A connector/evidence/transport blocker leaves
 this question undecided at a recoverable operational boundary; it creates no scientific polarity.
