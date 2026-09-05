@@ -1,7 +1,18 @@
 # FRRIE R07 CM record — 2026-09-05
 
-Status: ACCEPTED_RUNNING / TECHNICALLY_CONFORMANT / TRACKER_ADOPTED.
-One scientific invocation; no result yet. DM owns scientific intake.
+Status: TERMINAL_COLLECTED / TECHNICALLY_CONFORMANT / R07_N15_WITHIN_MEI.
+One scientific invocation; running observations below are historical. DM owns intake.
+
+Original runner SystemExit(0), complete publication and separate supervisor exit0
+observed at2026-09-05T10:45:16Z. Start10:30:13Z gives903supervisor seconds,
+not later906s observer uptime. Fixed debugger re-entry stopped at scriptline1
+before a second computation. Runner844.9199158800038s; PHY150.0812525627989s,
+EDGE149.90698258804332s; peak RSS614817792bytes. All22 completion checks pass,
+128 paired updates/18cells/256curve rows/8checkpoint states complete.
+Actual initial clip count3 at[3,5,14]; separately firstcontact0.
+Technical branch R07_N15_WITHIN_MEI, N9within-MEI. Full evidence and limits are
+in FRRIE_R07_RESULT_20260905.md and unchanged RESULT_EVIDENCE JSON.
+No new code/test/invocation at collection; DM next selection remains pending.
 
 ## Frozen contract and exact source
 
@@ -27,8 +38,9 @@ is added to the existing direction-local acceptance tuple. Shared trainer,
 codec,RNG,collector,evaluator,checkpoint/native dynamics are untouched.
 No previous native build/tape/model/checkpoint/result is reused.
 
-Initial clip count and first contact are observed honestly:0 when initial
-indices nonempty, otherwise first changed post-Adam update or null. Existing
+Initial clip count is the actual inventory size. Separately, first contact is
+0 when initial indices are nonempty, otherwise first changed post-Adam update
+or null. Existing
 trainer supplies later contact; independent initial inventory/update indices
 reconstruct first-contact truth. Completion compares direct-clip/contact
 predicates, never observed count echoed as expected. Zero activation never
@@ -114,4 +126,3 @@ released routine polling. DM /root/dm_amx_frrie_continue has handle/SHA/cwd/
 output/receipt/bound. CM collects/accepts at terminal; DM interprets and selects.
 Loss of observation never authorizes duplicate execution. Historicalr04/
 attempt02 causes remain unresolved. No R08 or further repair selected.
-
