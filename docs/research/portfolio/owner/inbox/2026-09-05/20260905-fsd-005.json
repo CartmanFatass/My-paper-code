@@ -1,0 +1,33 @@
+{
+  "id": "20260905-fsd-005",
+  "created": "2026-09-05T04:04:54-07:00",
+  "direction": "flexible_skill_duration",
+  "tier": "object",
+  "kind": "decision",
+  "title": "接受 E3 大差异固定时钟种子二为第十五个有效单元",
+  "context": "完整训练、评估、区域路径和参数变化记录通过验收；十个产物三处哈希一致。E3 15/18，不触发总体规则。",
+  "options": [
+    {
+      "key": "a",
+      "label": "接受完整比较器单元，保留全矩阵判读规则",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "等待全矩阵再确认单格有效性",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "原卡必需观察和技术符合性齐全，比较器本种子达到能力线；不据此推断治疗价值。",
+  "evidence": [
+    "docs/research/candidates/flexible_skill_duration/FSD_E3_LARGE_D0_SEED2_INTAKE_20260905.md",
+    "docs/research/candidates/flexible_skill_duration/FSD_E3_LARGE_D0_SEED2_RESULT_EVIDENCE_20260905.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-05.md#fsd-e3-large-d0-seed2-terminal-20260905",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}
