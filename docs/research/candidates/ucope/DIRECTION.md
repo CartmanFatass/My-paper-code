@@ -10,9 +10,10 @@ Current lifecycle and sequencing are held only in `docs/research/portfolio/PORTF
 older lifecycle/execution statements below are historical. Existing cards, technical quarantines,
 second-recast counts and stopped object-family boundaries remain unchanged.
 
-This is the durable direction-science authority for UCOPE. It records the
-accepted interpretation and provenance of consumed UCOPE objects, the current
-selected B discriminator, and the bounded Pro conclusions that govern them.
+This is the durable direction-science authority for UCOPE. It records accepted
+interpretations, historical objects and the latest bounded Pro family disposition.
+A and B objects have no C-class consumption state; older workflow wording below
+remains dated provenance under the controlling evidence specification section 11.
 
 ## Authority
 
@@ -22,13 +23,15 @@ selected B discriminator, and the bounded Pro conclusions that govern them.
   `UCOPE-NEXT-VARIABLE-K-PAID-PROBE-CONTAINMENT-R01-SCIENCE-20260823-03`
 - Latest consumed science object:
   `UCOPE-CPA-SAME-DATA-BELLMAN-STRUCTURAL-COMPETENCE-R01`
-- Current selected B discriminator:
+- Historical selected B discriminator:
   `UCOPE-B-EXPLORE-FT-XF-BC-INVERTIBLE-CONDITIONING-DISCRIMINATOR-R01`
 - Latest direction-local decision:
-  `CONTINUE` through that one discriminator; acquisition and COUNT/RAW remain locked.
-- Science-card current-byte SHA-256:
+  **2026-09-05 PRO_FINAL / PARK** of the current same-draw retained-policy
+  root-residual localization family, including its numerical-locus dependency;
+  no successor selected. See the dated current position below.
+- Historical discriminator science-card current-byte SHA-256:
   `e08744fa18d708c9ad570bdce8b71296407991a4f5f79d502d37330913435fd8`
-- Science-card canonical-LF object digest:
+- Historical discriminator science-card canonical-LF object digest:
   `94fa0ddb4ef4c686a60a1d9386f8b1b6184184f75df6c51a6fb61cedd8185e1c`
 
 ## Scientific question
@@ -45,7 +48,48 @@ without a distinct count-state architecture because RAW contains the sufficient
 count. The direct-service alternative remains separated by the frozen
 `Gamma=I+D` decomposition and analytic `D≈-0.02` boundary.
 
-## Current position
+## Current scientific position — 2026-09-05
+
+The complete verified 6 Pro response for `2026-09-05-ucope-post-interface-convergence-01`
+decides **PARK / REVERSIBLE_SCIENTIFIC_FAMILY_PAUSE**, with **NONE_NOW** as the next object.
+The exact scope is the offset-2,000,000, six-policy retained `THREE-WITNESS` versus
+`DOSE-MATCHED-SINGLE` root-residual localization branch headed by
+`UCOPE-A-RECON-THREE-WITNESS-ROOT-TARGET-VS-ROOT-FIT-AUDIT-R01`, including the frozen
+seed-00/fold-0 two-node numerical-locus dependency. It does not close UCOPE, paid-information
+research generally, the complete oracle-signed intervention family or COUNT/RAW research generally.
+No recast, new learner, parent attempt, implementation iteration or engineering allowance was
+selected. Portfolio lifecycle/priority remain separately ACTIVE/HIGH.
+
+The smallest accepted scientific position remains finite-host B/EXPLORE support for paid
+acquisition (PA-B, treatment 5/6 versus reference 6/6) and tail-direction coverage beyond equal
+dose (TW-B, 6/6 versus 4/6). The strongest native contradiction remains unchanged full competence
+3/6 in both arms and two treatment-induced false-positive root probes, each losing 0.028562899.
+The target/exact-projection versus finite-fit cause is unresolved. Quarantined attempt02's eight
+above-tolerance reconstruction checks supply no mechanism branch; the numerical-locus diagnostic
+has no output or technical label.
+
+The previous continuation assumed an executable lower-cost discriminator. The later source-interface
+return and absence of a complete qualifying candidate no longer establish that premise. This is
+not a scientific negative, implementation-impossibility proof or measured engineering-cost overrun.
+General100 alone does not accept the historical 127/219 orchestration draft. Positive science,
+the meaningful parent fork and the fixed diagnostic are the strongest reasons this pause is narrow
+and reversible. Missing tuned-baseline headroom is not the reason for the pause or an A/B gate.
+
+The next discriminating re-entry fact is a concrete complete plan-preserving diagnostic interface
+with actual current-rule eligibility and independent affected-path review. All four arrays per
+node, FP32 computation with float64 solver storage, `lstsq(rcond=None)`, absolute 1e-12 tolerance,
+six technical branches, two pinned nodes and their 61.827-second caps, and complete/partial
+publication remain required. A technical label cannot validate attempt02, produce the all-six-policy
+parent mechanism branch or select a learner. No new implementation round is commissioned by this
+re-entry condition.
+
+The exact response, SHA-256
+`a1ed4517f38bf82b33eae027d3f6f6f120d383737945ad3193a67bc7fac06148`, is preserved in
+`pro_packets/20260905_post_interface_convergence/archive/RESPONSE.md`.
+`UCOPE_POST_INTERFACE_CONVERGENCE_INTAKE_20260905.md` records the full intake, contrary evidence,
+unchanged counts/caps, owner-delegated execution and the separate Transport metadata correction.
+
+## Historical current position — 2026-09-01
 
 The complete persistent `em:ucope:innovator` round
 `ucope-em-innovator-20260901-03` selected the competence-first B1 object that produced the current
