@@ -1,6 +1,6 @@
 # FRRIE r04 diagnosis selection intake — 2026-09-04
 
-Status: `OWNER_RESUME_APPLIED / A01_FROZEN / NO_NEW_PROCESS_ACCEPTED`.
+Status: `OWNER_RESUME_APPLIED / A01_ACCEPTED / RESULT_PENDING`.
 
 ## What DM checked
 
@@ -105,3 +105,55 @@ No DIRECTION science update is warranted. The headroom record remains absent; ol
 on different hosts do not fill it. The strongest scientific support remains complete no-contact
 paired traces; their lack of activation is the strongest contradiction to any package-value
 reading. Formal-sized publication coverage remains open without becoming a new B launch gate.
+
+## Accepted diagnostic and detached recovery boundary
+
+The earlier no-process paragraphs are selection-time observations. The single authorized A01 was
+subsequently accepted with the frozen card and no production-source change. DM read the complete
+CM record `FRRIE_R04_RECONSTRUCTION_A01_CM_RECORD_20260904.md` at committed/pushed
+`42d7ab1862613f6ddc66a1d95cb679a7e22f71cd`, including the literal detached command, source,
+receipt, verification and tracker adoption, against the card. DM inspected exact
+commit `b41a6ba779e514937e35c9b0c1dbc69a50ec68d5`: nine fixed pdb input lines and six stdlib
+fixture lines. The fixture filename is not collected by pytest. No new wrapper, framework,
+serialization implementation, RNG call, learner patch or repeated scientific invocation was added.
+
+CM's one lifecycle-check task `frrie_a01_pdb_check_b41a6ba7` ended after one supervisor second.
+Both exception and normal logs had exactly one standalone `BODY_ENTERED` and `TRACE None`;
+the original RuntimeError versus SystemExit were preserved, and q/EOF prevented another script
+statement after debugger re-entry. Expected absent-r04-local messages in the toy did not denote a
+production failure. Its physical/effective admission was 11,846,438,912 bytes. This verifies the
+concrete debugger side-effect boundary only; it does not reproduce r04 or establish mechanism value.
+
+CM directly observed initial A01 acceptance as follows:
+
+| quantity | accepted observation |
+| --- | --- |
+| node and device | `wsl_4070`, SSH `hmasd-wsl-node`, CPU FP32 |
+| launch SHA | `b41a6ba779e514937e35c9b0c1dbc69a50ec68d5` |
+| task | `frrie_r04_reconstruction_a01_b41a6ba7` |
+| cwd | `/home/wu/hmasd-worktrees/frrie-r04-a01-b41a6ba7` |
+| acceptance | `2026-09-05T00:05:30Z`, supervisor PID `111201` |
+| admission | `2026-09-05T00:05:30.402022Z`, physical/effective each `12,857,679,872` bytes |
+| initial status only | at eight seconds: running, exit null, tmux active |
+| diagnostic deadline | 1,800 seconds plus at most five seconds grace; outer planned boundary `2026-09-05T00:35:35Z` (17:35:35 PDT on September 4) |
+
+Output under cwd:
+`temp/directions/finite_resource_relational_inductive_efficiency/exp/frrie_r04_reconstruction_a01/production`.
+Receipt under cwd:
+`temp/directions/finite_resource_relational_inductive_efficiency/technical/a01_admission.json`.
+Supervisor log and exit witnesses:
+`/home/wu/.agent-tasks/frrie_r04_reconstruction_a01_b41a6ba7/`.
+
+Both CM and DM handed this same accepted handle directly to `/root/tracker_tl_experiments`; the
+second message updates one tracking identity and does not create another run. The tracker observes
+and directly notifies this DM and CM, using a follow-up turn if either is idle. CM retains terminal
+collection and technical acceptance. DM will then write the result intake and apply A01's rule.
+CM's durable record confirms tracker adoption; routine CM/DM process polling is released. Owner
+reviews still returned `[]` at this boundary. Recovery requires the same accepted handle, not a
+new launch, even if the responsible agent turn has ended.
+
+The accepted-running snapshot is not a learner counter or a scientific result. In particular, pdb
+can return process exit 0 after an original exception, so the original traceback, debugger state
+and summary existence must be read independently of the supervisor's exit. No duplicate polling,
+new attempt05, second diagnostic, repair, source adaptation or scientific polarity is authorized
+by this handoff. The selected card, original predictions, source semantics and old evidence remain.
