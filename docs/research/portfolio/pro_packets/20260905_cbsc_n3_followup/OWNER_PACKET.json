@@ -1,0 +1,38 @@
+{
+  "question": "是否批准6Pro新提出的两个对象限定例外：N3 A05整项新增≤250/D0；CBSC完整修复新增≤200/删除≤500，止于离线技术intake？",
+  "changes_if_approved": [
+    {
+      "target": "ENGINEERING_SCOPE_SPEC§5与AGENTS§8；两项技术附记",
+      "from": "两候选不满足通用100新增行例外，原科学要求保持",
+      "to": "仅原DISH A05允许A≤250,D0；仅原CBSC完整修复允许A≤200,D≤500,A+D≤700；累计计入既有候选，不更改通用100行规则或权限"
+    }
+  ],
+  "if_refused": "两候选继续未接受且不放行，不产生方向PARK或科学负面；FSD/FRRIE正常推进。可分别改选两方向，需写明选择。",
+  "evidence_for": [
+    {
+      "path": "docs/research/portfolio/pro_packets/20260905_cbsc_n3_followup/archive/RESPONSE.md",
+      "quote": "PRO_FINAL：两方向均选择本轮选项B——对象限定的前瞻例外，但投入终点不同。",
+      "why": "完整18路径裁决建议保留有限科学判别，终点分别为原A05读数和完整离线修复验证。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/portfolio/pro_packets/20260905_cbsc_n3_followup/archive/RESPONSE.md",
+      "quote": "最重要的不确定性不是比例，而是实施后的完整性。",
+      "why": "N3未运行验证；CBSC具体数据流、历史receipt定位和完整发布仍需实际证明，增加上限不等于正确性。"
+    }
+  ],
+  "uncertainty": [
+    "两上限不保证足够，也不是全局最小实现；超范围如实返回，不自动增额。",
+    "新例外依本轮提供的AGENTS§2/4及Pro明确边界ratification；既有100行政策和研究继续无需重新批准。",
+    "不接受任何旧补丁，不直接放行learner；不改生命周期、Priority、recast或五链目标。"
+  ],
+  "cost": {
+    "compute": "N3原预测25.5s/cap60s；CBSC剩余focused243.55s累计（原smoke<60s另计）；本提案未运行新实验。",
+    "owner_time": "一项综合P1，可整体批准或逐方向改选。",
+    "reversibility": "reversible",
+    "waits_on_this": "仅两个新增命名例外及相应新增实施投入；FSD/FRRIE不等待。"
+  },
+  "verdict_text": "**批准本请求的综合推荐：N3选择B，仅对原DISH A05适用整项A≤250、D=0的对象例外，保留全部原卡测量和验证；CBSC选择B，仅对原B1完整执行到发布修复适用整项A≤200、D≤500、A+D≤700的对象例外，先解决真实缺失状态、原始receipt定位和十五表／summary离线发布，止于技术intake，不直接放行learner。上述额度包含现有候选全部变更，不重置基线；通用100行政策、科学与数值要求、源码接受、运行准入及其他预算保持。仅同步本文明确列出的工程规范／记录，不修改决策权限。若选择A，则仅接受真正符合现行规则的完整方案，现有候选继续未接受；若选择C，则暂缓相应当前投入并保留本文再入条件。任何选择均不暂停FSD／FRRIE，不改其他方向、生命周期、Priority、家族边界、recast或五链目标。**",
+  "source": "docs/research/portfolio/pro_packets/20260905_cbsc_n3_followup/archive/RESPONSE.md"
+}

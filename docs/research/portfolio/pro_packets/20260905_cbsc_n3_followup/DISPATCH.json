@@ -1,6 +1,6 @@
 {
   "request_id": "2026-09-05-portfolio-cbsc-n3-evidence-followup-01",
-  "state": "DISPATCH_ACCEPTED",
+  "state": "ARCHIVED_INTAKEN",
   "recorded_at": "2026-09-05T16:27:22.797477+00:00",
   "operator_thread_id": "01a06f0e-5eab-7431-8491-e7c2c62705b6",
   "source_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
@@ -8,6 +8,8 @@
   "model": "gpt-5.6-luna",
   "thinking": "xhigh",
   "dispatch_count": 1,
-  "provider_send_status": "not observed by author; Transport owns provider verification and Send",
-  "intake_status": "pending complete response"
+  "provider_send_status": "one Send recorded by Transport; complete archive verified",
+  "intake_status": "PRO_FINAL proposal, two new object exceptions await current owner ratification",
+  "response_sha256": "58bd8d5e34517ccdccdabd9dc3ef39450a7664b3f97277282d2d84b31ab266ae",
+  "owner_item": "20260905-root-004"
 }

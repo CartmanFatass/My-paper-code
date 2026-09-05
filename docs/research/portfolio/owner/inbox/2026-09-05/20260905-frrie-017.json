@@ -24,7 +24,7 @@
     }
   ],
   "recommended": "accept",
-  "auto_applied": null,
+  "auto_applied": "accept",
   "dm_reason": "原始日志没有Python堆栈，已检查的core库存为空；先补失败位置，避免改源码后再猜原因。",
   "evidence": [
     "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R09_SEGFAULT_A01_SCIENCE_CARD_20260905.md",
@@ -71,5 +71,16 @@
     },
     "verdict_text": "推荐一次同字节原链有界诊断，保留pdb并启用现成faulthandler；只观察失败是否重现及其位置，不修改源码或解释为科学结果。",
     "source": "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R09_SEGFAULT_A01_SCIENCE_CARD_20260905.md"
-  }
+  },
+  "execution_history": [
+    {
+      "at": "2026-09-05T16:54:21+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/decisions/2026-09-05-unattended-confirmed-resume.md",
+      "record": "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R09_SEGFAULT_A01_INTAKE_20260905.md",
+      "state": "applied",
+      "summary": "原卡A01已运行19秒并intake为VALID_A_RECON/A01_DIFFERENT_ORIGINAL_FAILURE，整合8102dc264；评估地址序列化AttributeError，未复现SIGSEGV，无B学习结果或修复。"
+    }
+  ],
+  "starred": true
 }
