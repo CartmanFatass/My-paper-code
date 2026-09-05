@@ -42,7 +42,7 @@ provenance, but result polarity never transfers into an accepting direction.
 | Direction | Lifecycle | Priority | Direction owner | Updated at | Reason/condition |
 | --- | --- | --- | --- | --- | --- |
 | active_post_churn_population_flow_identification | PARKED | LOW | ROOT | 2026-09-01T09:55:33Z | Current CCF collapses to a two-event XOR/DFA, but a scientifically independent non-reducible censored-flow question remains. Reactivate only after prospective acceptance of a non-XOR/non-DFA construction that matches low-order marginals yet requires opposite native actions or returns against a competent low-order controller. |
-| acvc | ACTIVE | MEDIUM | ROOT | 2026-09-05T10:21:03Z | OWNER_DIRECT restored ACTIVE/MEDIUM; second-recast lowest sequencing. HC-D remains unresolved. Four-opportunity upper derivation checked; sole synthetic cost stopped at40.2326s with normalized denominators12221–12252 bits, so prescribed512-bit cost is unmeasured. Original CM now assesses common-denominator repair before any separately carded actual upper; no learner. See ACVC_HC_D_EXACT_UPPER_REENTRY_INTAKE_20260905.md. |
+| acvc | ACTIVE | MEDIUM | ROOT | 2026-09-05T10:21:03Z | OWNER_DIRECT restored ACTIVE/MEDIUM; second-recast lowest sequencing. HC-D remains unresolved. Four-opportunity upper derivation checked. Repaired common-denominator cost valid:29.259622315s,17858560B;3x87.778866945s below120s. Prior oversized-input failure remains separate. Actual upper not calculated; DM now specifies its distinct actual-coefficient card, no learner. See ACVC_HC_D_COMMON_DENOMINATOR_COST_INTAKE_20260905.md. |
 | capability_bound_semantic_currentness | ACTIVE | HIGH | ROOT | 2026-09-05T10:21:03Z | Route N4. Existing publisher cut remains unaccepted:64/94=68.09% orchestration, downstream dependencies unresolved,37 protected files unchanged. Zero tests/experiments, no r08. Bounded slice returned; queued pending concrete conforming implementation, no scientific negative. See CBSC_OMRC_B01_EXISTING_PATH_RETURN_INTAKE_20260905.md. |
 | commitment_residual_triggered_options | ACTIVE | MEDIUM | ROOT | 2026-09-05T10:21:03Z | Route K2. B05 seeds1/2 valid COMPARATOR-LIMITED; B06 RAW258/516 also COMPARATOR-LIMITED, REPLAN5/8 for both. Seed1 gain0, seed2 gain0.000927888 above diagnostic MEI0.000625 from one KEEP correction. Doubling did not restore competence; no extension of B04 residual BR-D. B07 same-information centered-loss seeds1/2 at5a4b5c20 are terminal; CM/DM final intake pending. See CRTO_RAW_EXPOSURE_B06_INTAKE_20260905.md. |
 | degraded_incumbent_shadow_handover | ACTIVE | MEDIUM | ROOT | 2026-09-05T10:21:03Z | Route N3. B01 valid FTS-B0, no source-effect estimate. A01 valid:19200 prepared inputs, zero source/snapshot/service. A02 valid endpoint-clearance witness: both cameras0 and margins below6dB; implementation agrees with inherited host. Fresh6Pro final CONTINUE received for the existing source-selection family: specify a distinct endpoint host law and bounded paired native-path A qualification; no RECAST, source-effect result or new learner. See DISH_GROUND_SOURCE_POINT_A02_INTAKE_20260905.md. |
@@ -91,7 +91,7 @@ historical evidence can be reused without restarting their independent chains. A
 
 The September5 owner resume remains active. Five chains advance: FSD, FRRIE, CRTO, N3 and ACVC. N3 resumes from its complete Pro CONTINUE archive.
 N3 prepares the bounded prospective host-path qualification selected by Convergence;
-ACVC uses the slot released by CBSC for the concrete input-envelope repair. ACVC remains at
+ACVC uses the slot released by CBSC for the exact-upper re-entry work after its completed input-envelope repair. ACVC remains at
 second-recast lowest sequencing and yields to higher-sequenced runnable work if compute is contended.
 UCOPE and VNFC remain queued at their documented interface and measured-cost blockers. N5 and
 K4 retain their final object-family boundaries; no lifecycle, priority or fusion decision is implied.
@@ -102,7 +102,7 @@ K4 retain their final object-family boundaries; no lifecycle, priority or fusion
 | N1 / FRRIE | `/root/dm_amx_frrie_continue` | Valid R06; unique R07 literal-root2 running with direct tracker |
 | K2 / CRTO | `/root/dm_amx_crto_continue` | Valid comparator-limited B05/B06; B07 fixed seeds1/2 terminal; final intake pending |
 | N3 / state recovery | `/root/dm_amx_n3_continue` | Valid A01/A02; final CONTINUE, specify one prospective host law and bounded native-path A qualification |
-| ACVC | `/root/dm_amx_acvc_reentry` | Common-denominator <=512-bit synthetic input repair and prospective cost; actual upper not yet admitted |
+| ACVC | `/root/dm_amx_acvc_reentry` | Common-denominator cost accepted; define separate actual-upper card and actual-coefficient cost boundary |
 
 Default observer `/root/tracker_tl_experiments` is the native `hmasd-experiment-tracker` on
 Terra/low, branch `codex/experiment-tracker-resumed-20260904`, worktree
@@ -110,7 +110,7 @@ Terra/low, branch `codex/experiment-tracker-resumed-20260904`, worktree
 `EXPERIMENT_TRACKING.md`; accepted handles and terminal notifications go directly to DMs/CMs.
 Root restored it after its prior final response while the accepted FSD handle remained live.
 Current FSD handle is `fsd_e3_large_d0_seed2_20260905_01`, launch `ac4db7737`, on `wsl_4070`;
-older FSD, FRRIE R06, CRTO B05/B06 and N3 A01/A02 handles are terminal and collected. FRRIE R07 remains live. Both CRTO B07 seeds and the repaired ACVC cost task are now terminal with direct DM/CM notification; final intakes are pending. See tracker for exact locators.
+older FSD, FRRIE R06, CRTO B05/B06 and N3 A01/A02 handles are terminal and collected. FRRIE R07 remains live. Both CRTO B07 seeds and the repaired ACVC cost task are now terminal with direct DM/CM notification; CRTO final intake is pending and ACVC cost intake is accepted. See tracker for exact locators.
 
 Root task remains `01a06ec7-fd64-7281-9bc1-fc42ed53a2ca`; integration checkout is
 `C:/Projects/HMASD-worktrees/root-integration-02-20260904`, upstream `origin/main`.
@@ -204,7 +204,7 @@ a competent fixed configuration or untuned oracle gap does not establish tuned h
 | ucope | No competent tuned generic current-host pair | Paid-acquisition B01 61.827 s wall / 61.516 s CPU, local Windows CPU, one thread | unmeasured across conditioning/hinge/audit history |
 | vsp_c1 | Executable common host and both terms missing | No learner result; reachability/census only | undefined for proposed learner |
 | capability_bound_semantic_currentness | Dynamic upper/RAW-GRU tuned result absent; old exact/LR01 host mismatch | Old exact factorial about 96 s, node/device unspecified by its intake; no current online B1 result | undefined for online B1; history unmeasured |
-| acvc | History certificate versus fixed DET-CF is not tuned-generic A1 pair | R02 valid:2.288506334s, wsl_4070 CPU. New synthetic cost40.232610792s/RSS18841600B is engineering evidence, not an ACVC result. | Normalized512-bit cost remains unmeasured after one oversized-input failed projection; do not divide by a nonexistent new scientific result. Full historical accepted-attempt total unmeasured. |
+| acvc | History certificate versus fixed DET-CF is not tuned-generic A1 pair | Latest valid generic-kernel A cost:29.259622315s,17858560B,wsl_4070 CPU; actual ACVC upper not calculated. R02 scientific observation2.288506334s remains separate. | Two accepted synthetic-cost attempts (40.232610792+29.259622315)/1 valid prescribed-input measurement=69.492233107s wall; scoped engineering window only. Tests and direction-wide history unaggregated. |
 | eociv_lite | Matched upper and tuned generic absent | B10 own compute unmeasured here | unmeasured |
 | recct_lite | Both terms absent | Old finite intervention/census cost unmeasured here | unmeasured |
 | ec4g_r1 | Both terms absent; B1 invalid aggregation cannot fill either | Current valid census had zero new learner work; historical B1 cost unmeasured here | unmeasured |
@@ -268,4 +268,4 @@ ceiling. All 19 lifecycle-`ACTIVE` directions remain admitted for a later explic
 
 Latest owner-console review application: `decisions/2026-09-05-apply-owner-console-reviews.md`. N3 routing ratification is applied to its current handover-source diagnostic, not a repeat. ACVC and VNFC retain second-recast lowest sequencing; only ACVC lifecycle changes from the previous snapshot.
 
-Current runtime recovery note (2026-09-05): CRTO DM reached two consecutive model-capacity errors while finishing B07 intake. Results remain intact and no run is repeated. Root will resume the same DM after backoff or through the existing heartbeat; this is runtime availability, not scientific polarity or a family decision.
+Current runtime recovery note (2026-09-05): CRTO DM reached two consecutive model-capacity errors while finishing B07 intake. Results remain intact and no run is repeated. Root resumed the same DM successfully after backoff; it is finishing B07 intake. This was runtime availability, not scientific polarity or a family decision.
