@@ -1,7 +1,17 @@
 # FRRIE R06 CM record — 2026-09-05
 
-Status: ACCEPTED_RUNNING / TECHNICALLY_CONFORMANT / TRACKER_ADOPTED.
-This is the single fresh R06 invocation. No scientific outcome is yet observed.
+Status: TERMINAL_COLLECTED / TECHNICALLY_CONFORMANT / R06_SMALL_OR_ROSTER_MIXED.
+This is the single fresh R06 invocation. Running observations below are historical.
+
+Terminal collection: original SystemExit(0), separately supervisor exit0 at
+2026-09-05T09:34:42Z;895 seconds since09:19:47Z, not later938s uptime.
+Fixed debugger re-entry stopped at line1 before a second script computation.
+All22 completion checks pass; full128 paired updates and18 cells published.
+Runner wall843.355730929994s, PHY148.04153741498885s, EDGE147.02805976910167s,
+peak RSS614965248bytes. Full E0 result and unchanged122511-byte publisher JSON
+are in FRRIE_B01_CONTACT_ACTIVE_R128_LR003_R06_RESULT_20260905.md and its
+RESULT_EVIDENCE_20260905.json companion. No new source, test or invocation ran
+during collection. Tracker terminal acknowledged; DM retains next selection.
 
 ## Source and acceptance
 
@@ -96,4 +106,3 @@ exact task/SHA; routine polling released. DM /root/dm_amx_frrie_continue has
 all identities, paths and bounds. CM retains terminal collection/engineering
 acceptance; DM science intake. Loss of observation never authorizes relaunch.
 No R07 or further repair is selected. Owner reviews were[] at current boundary.
-
