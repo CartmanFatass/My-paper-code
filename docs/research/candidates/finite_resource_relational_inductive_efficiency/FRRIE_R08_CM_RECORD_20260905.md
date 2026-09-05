@@ -1,7 +1,15 @@
 # FRRIE R08 CM record — 2026-09-05
 
-Status: ACCEPTED_RUNNING / TECHNICALLY_CONFORMANT / TRACKER_ADOPTED.
-One conditional B/EXPLORE invocation, no scientific outcome yet.
+Status: TERMINAL_COLLECTED / TECHNICALLY_CONFORMANT / R08_INTERACTION_WITHIN_MEI.
+One conditional B/EXPLORE invocation; running observations below are historical.
+Original SystemExit(0) and full publication are observed separately from pdb/
+supervisor exit0. End2026-09-05T11:45:08Z minus start11:30:34Z=874seconds,
+not later935s observer uptime. Debugger re-entry stops at line1 before another
+script computation. All22 completion checks,22cells/256rows/8states and both
+cut contrasts complete. Runner813.7514705510112s;PHY144.4043835529883s,
+EDGE144.22931573199457s;peakRSS615481344bytes. N15 a=1.0174093767995052e-05,
+insideMEI; fulltechnicalreading/evidence in FRRIE_R08_RESULT_20260905.md and
+unchanged RESULT_EVIDENCE JSON. No newtest/source/invocation at collection.
 Authority: FRRIE_R08_ROLE_COLUMN_CUT_SCIENCE_CARD_20260905.md at DM72177cda,
 integrated/pushed CM aaf6c402a after historical R07 running intake a978e9ea1.
 Owner reviews[] and current configured wsl_4070 remote-first route read.
@@ -115,4 +123,3 @@ polling and retains collection/technical acceptance. DM /root/dm_amx_frrie_conti
 has handle/SHA/cwd/output/receipt/bound and owns science intake. Observation loss
 never authorizes relaunch. Historicalr04/attempt02 causes remain unresolved.
 No R09 or automatic retry/successor selected.
-
