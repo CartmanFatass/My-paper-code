@@ -44,7 +44,7 @@ provenance, but result polarity never transfers into an accepting direction.
 | active_post_churn_population_flow_identification | PARKED | LOW | ROOT | 2026-09-01T09:55:33Z | Current CCF collapses to a two-event XOR/DFA, but a scientifically independent non-reducible censored-flow question remains. Reactivate only after prospective acceptance of a non-XOR/non-DFA construction that matches low-order marginals yet requires opposite native actions or returns against a competent low-order controller. |
 | acvc | ACTIVE | MEDIUM | ROOT | 2026-09-05T10:21:03Z | OWNER_DIRECT restored ACTIVE/MEDIUM; second-recast lowest sequencing. HC-D remains unresolved. Four-opportunity upper derivation checked; sole synthetic cost stopped at40.2326s with normalized denominators12221–12252 bits, so prescribed512-bit cost is unmeasured. Original CM now assesses common-denominator repair before any separately carded actual upper; no learner. See ACVC_HC_D_EXACT_UPPER_REENTRY_INTAKE_20260905.md. |
 | capability_bound_semantic_currentness | ACTIVE | HIGH | ROOT | 2026-09-05T10:21:03Z | Route N4. Existing publisher cut remains unaccepted:64/94=68.09% orchestration, downstream dependencies unresolved,37 protected files unchanged. Zero tests/experiments, no r08. Bounded slice returned; queued pending concrete conforming implementation, no scientific negative. See CBSC_OMRC_B01_EXISTING_PATH_RETURN_INTAKE_20260905.md. |
-| commitment_residual_triggered_options | ACTIVE | MEDIUM | ROOT | 2026-09-05T10:21:03Z | Route K2. B05 seeds1/2 valid COMPARATOR-LIMITED; B06 RAW258/516 also COMPARATOR-LIMITED, REPLAN5/8 for both. Seed1 gain0, seed2 gain0.000927888 above diagnostic MEI0.000625 from one KEEP correction. Doubling did not restore competence; no extension of B04 residual BR-D. DM preparing same-information centered-loss next discriminator. See CRTO_RAW_EXPOSURE_B06_INTAKE_20260905.md. |
+| commitment_residual_triggered_options | ACTIVE | MEDIUM | ROOT | 2026-09-05T10:21:03Z | Route K2. B05 seeds1/2 valid COMPARATOR-LIMITED; B06 RAW258/516 also COMPARATOR-LIMITED, REPLAN5/8 for both. Seed1 gain0, seed2 gain0.000927888 above diagnostic MEI0.000625 from one KEEP correction. Doubling did not restore competence; no extension of B04 residual BR-D. B07 same-information centered-loss card frozen; CM implementation underway. See CRTO_RAW_EXPOSURE_B06_INTAKE_20260905.md. |
 | degraded_incumbent_shadow_handover | ACTIVE | MEDIUM | ROOT | 2026-09-05T10:21:03Z | Route N3. B01 valid FTS-B0, no source-effect estimate. A01 valid:19200 prepared inputs, zero source/snapshot/service. A02 valid endpoint-clearance witness: both cameras0 and margins below6dB; implementation agrees with inherited host. Direction host/family question dispatched once to fresh6Pro via current Transport, no local host edit/recast/new learning. See DISH_GROUND_SOURCE_POINT_A02_INTAKE_20260905.md. |
 | ec4g_r1 | PARKED | LOW | ROOT | 2026-09-04T21:36:45Z | OWNER_DIRECT reserve; no independent research chain. Re-entry and preserved contrary evidence: `decisions/2026-09-04-adopt-nine-routes-and-resume.md`. Previous boundary: Repair B1 activity aggregation and continue adaptive dynamic receipt-content learning against Direct-tau, RAW, shuffled, and blinded controls. Prior B diagnostics remain adverse evidence, not terminal polarity. |
 | eociv_lite | PARKED | MEDIUM | ROOT | 2026-09-04T21:36:45Z | OWNER_DIRECT reserve; no independent research chain. Re-entry and preserved contrary evidence: `decisions/2026-09-04-adopt-nine-routes-and-resume.md`. Previous boundary: The Convergence-admitted B10 fixed-score exposure curve is valid `B10_FIXED_SCORE_EXPOSURE_RESCUE_NOT_SUPPORTED`: relative `J` rises with exposure while absolute receiver performance becomes more negative. The receiver-addressed family is direction-locally parked pending genuinely new evidence; Portfolio lifecycle remains `ACTIVE`, and A1 headroom is not identified because the matched upper/tuned-generic pair is absent. |
@@ -72,13 +72,13 @@ two exploratory agendas (N3/N5), and one prospective agenda (K4) remain. The nin
 
 | 路线 | 分类 | 机制族 | 研究问题 / 来源 | 当前入口 |
 | --- | --- | --- | --- | --- |
-| N1 | 灵活 agent 数量 | 集合与关系表示 | 关系归纳与学习效率：`finite_resource_relational_inductive_efficiency` | R05结果保留；R06最小修复已恢复，尚无新运行 |
+| N1 | 灵活 agent 数量 | 集合与关系表示 | 关系归纳与学习效率：`finite_resource_relational_inductive_efficiency` | R06有效，仅N15超过MEI；R07第二字面根实现中 |
 | N2 | 灵活 agent 数量 | 成员变化后的恢复 | 恢复动作：`variable_n_fleet_churn` | 校准成本超限保留；ACTIVE排队，未启动完整枚举 |
-| N3 | 灵活 agent 数量 | 成员变化后的恢复 | 状态保留、重建与迁移：`roster_consistent_latent_exploration`, `vap_folr_core`, `degraded_incumbent_shadow_handover`, `vsp_02` | B01完整FTS-B0保留；原保留前缀A01实现已恢复 |
-| N4 | 灵活 agent 数量 | 成员变化后的恢复 | 旧信息有效性：`capability_bound_semantic_currentness` | 恢复一段既有执行/发布路径排障；旧候选未接受，无r08 |
+| N3 | 灵活 agent 数量 | 成员变化后的恢复 | 状态保留、重建与迁移：`roster_consistent_latent_exploration`, `vap_folr_core`, `degraded_incumbent_shadow_handover`, `vsp_02` | B01/A01/A02有效诊断；宿主/家族问题已派送一次Convergence，等待归档 |
+| N4 | 灵活 agent 数量 | 成员变化后的恢复 | 旧信息有效性：`capability_bound_semantic_currentness` | 原位发布路径删减仍超编排预算；该段返回，无r08 |
 | N5 | 灵活 agent 数量 | 资源配置与几何 | 配置结构与 FREE：`metric_ground_transport_allocation` | 全新6 Pro裁决暂存当前配置坐标家族，无后继实验；正式 intake 已整合，方向生命周期未变 |
-| K1 | 灵活 skill duration | 中断与续约 | 中断时机：`flexible_skill_duration`, `vsp_03` | E3为13/18；large_d2_seed1运行，四格未启动 |
-| K2 | 灵活 skill duration | 中断与续约 | 动作边界学习：`commitment_residual_triggered_options` | B04负面结果保留；DM选择后续同家族判别对象 |
+| K1 | 灵活 skill duration | 中断与续约 | 中断时机：`flexible_skill_duration`, `vsp_03` | E3为14/18；large_d0_seed2运行，三格未启动 |
+| K2 | 灵活 skill duration | 中断与续约 | 动作边界学习：`commitment_residual_triggered_options` | B05/B06比较器仍不足；B07同信息中心化损失卡已冻结，CM实现中 |
 | K3 | 灵活 skill duration | 信息获取与续约 | 付费获取：`ucope` | 有界接口检查结束；未建立合规实现，数值诊断未启动 |
 | K4 | 灵活 skill duration | duration 表示与价值共享 | 跨时长共享、组合与负迁移：`semigroup_consistent_duration_model_policy`, `vsp_c1` | 前瞻议程；无新冻结对象，旧 D6 家族 PARK 保留 |
 
@@ -89,8 +89,8 @@ historical evidence can be reused without restarting their independent chains. A
 
 ### Current direction working set — automatic research continues
 
-The September5 owner resume remains active. Working set: FSD, FRRIE, CRTO, N3 and ACVC.
-N3 is at a recoverable direction-tier dependency while its single Convergence request is processed;
+The September5 owner resume remains active. Four chains advance: FSD, FRRIE, CRTO and ACVC; N3 has returned a clean pending-Pro boundary.
+N3 awaits its single Convergence request. No other queued route has a newly established runnable dependency, so the fifth execution slot is temporarily unfilled;
 ACVC uses the slot released by CBSC for the concrete input-envelope repair. ACVC remains at
 second-recast lowest sequencing and yields to higher-sequenced runnable work if compute is contended.
 UCOPE and VNFC remain queued at their documented interface and measured-cost blockers. N5 and
@@ -100,7 +100,7 @@ K4 retain their final object-family boundaries; no lifecycle, priority or fusion
 | --- | --- | --- |
 | K1 / FSD | `/root/dm_amx_fsd_continue` | 14/18 valid; original large_d0_seed2 running, then per-cell intake before next original cell |
 | N1 / FRRIE | `/root/dm_amx_frrie_continue` | Valid R06; implement frozen R07 literal-root2 check, not another LR search |
-| K2 / CRTO | `/root/dm_amx_crto_continue` | Valid comparator-limited B05/B06; choose bounded same-information loss discriminator |
+| K2 / CRTO | `/root/dm_amx_crto_continue` | Valid comparator-limited B05/B06; implement frozen B07 same-information centered-loss discriminator |
 | N3 / state recovery | `/root/dm_amx_n3_continue` | Valid A01/A02; one host/family Convergence dispatch, no local host change or learner |
 | ACVC | `/root/dm_amx_acvc_reentry` | Common-denominator <=512-bit synthetic input repair and prospective cost; actual upper not yet admitted |
 
