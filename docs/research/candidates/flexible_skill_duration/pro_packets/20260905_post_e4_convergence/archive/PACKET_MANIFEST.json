@@ -1,0 +1,36 @@
+{
+  "schema_version": 4,
+  "packet_id": "2026-09-05-fsd-post-e4-convergence-01--flexible_skill_duration",
+  "attempt": 1,
+  "canonical_form": "logical_packet_manifest",
+  "request_id": "2026-09-05-fsd-post-e4-convergence-01",
+  "direction_id": "flexible_skill_duration",
+  "direction_ids": [
+    "flexible_skill_duration"
+  ],
+  "workflow_node": "em_convergence",
+  "conversation_binding_key": "em:flexible_skill_duration:convergence",
+  "decision_authority": "pro_final",
+  "source_mode": "single_body_attachment",
+  "body": {
+    "role": "prompt",
+    "source_path": "C:\\Projects\\HMASD\\docs\\research\\candidates\\flexible_skill_duration\\pro_packets\\20260905_post_e4_convergence\\PROMPT_BODY.md",
+    "canonical_filename": "2026-09-05-fsd-post-e4-convergence-01--flexible_skill_duration__00_PROMPT.md",
+    "bytes": 19707,
+    "sha256": "7c0c2a4d53f3379284283f3e22a6a958ebf1ea10dd89b6f68a573bbb1b2b4097",
+    "materialized_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-05-fsd-post-e4-convergence-01\\2026-09-05-fsd-post-e4-convergence-01--flexible_skill_duration__00_PROMPT.md"
+  },
+  "references": [],
+  "reference_order_is_authoritative": true,
+  "provider_filename_policy": "record_observed_name_only",
+  "companion_prompt_is_transport_ui_only": true,
+  "manifest_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-05-fsd-post-e4-convergence-01\\2026-09-05-fsd-post-e4-convergence-01--flexible_skill_duration__PACKET_MANIFEST.json",
+  "materialized_artifacts": {
+    "body": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-05-fsd-post-e4-convergence-01\\2026-09-05-fsd-post-e4-convergence-01--flexible_skill_duration__00_PROMPT.md",
+    "references": []
+  },
+  "materialized_hashes": {
+    "body": "7c0c2a4d53f3379284283f3e22a6a958ebf1ea10dd89b6f68a573bbb1b2b4097",
+    "references": []
+  }
+}

@@ -1,6 +1,6 @@
 {
   "request_id": "2026-09-05-fsd-post-e4-convergence-01",
-  "state": "DISPATCH_ACCEPTED",
+  "state": "ARCHIVED_INTAKEN",
   "recorded_at_utc": "2026-09-05 17:49:52 UTC",
   "source_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
   "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
@@ -12,8 +12,8 @@
   "workflow_node": "em_convergence",
   "conversation_binding_key": "em:flexible_skill_duration:convergence",
   "dispatch_count": 1,
-  "provider_send_state": "UNOBSERVED_BY_AUTHOR",
-  "decision_state": "PENDING",
+  "provider_send_state": "ONE_SEND_RECORDED_BY_TRANSPORT",
+  "decision_state": "PRO_FINAL_PARK_CURRENT_FIXED_K2_POLICY_GAP_LEARNING_BRANCH",
   "tool_result": {
     "content": [
       {
@@ -23,5 +23,8 @@
     ],
     "isError": false
   },
-  "note": "Root adopted DM-authored REQUEST unchanged, validated21/21 referenced paths at pin, rendered on local main, committed/pushed before one singleton dispatch. Native DM preparation stopped after completed request authoring; no DM dispatch occurred. Tool acceptance is not evidence of provider Send or final decision."
+  "note": "Root adopted DM-authored REQUEST unchanged, validated21/21 referenced paths at pin, rendered on local main, committed/pushed before one singleton dispatch. Native DM preparation stopped after completed request authoring; no DM dispatch occurred. Tool acceptance is not evidence of provider Send or final decision.",
+  "response_sha256": "e80988b26029754488a2112640bc3aea0714d67a6754f8d473d4fe4c0bbbfc9b",
+  "transport_facts_sha256": "23adb95811dd2e018468bdd30d8dfd3454777db8f5bab061412bdfbd4525a783",
+  "intake_path": "docs/research/candidates/flexible_skill_duration/FSD_POST_E4_CONVERGENCE_INTAKE_20260905.md"
 }

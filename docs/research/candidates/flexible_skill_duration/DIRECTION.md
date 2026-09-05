@@ -72,6 +72,18 @@ Untying the duration `k` is this direction. Untying the agent count `N` is a sep
   discriminator is answered; no successor or learner is selected by
   `FSD_E4_CENSUS_INTAKE_20260905.md`. Tuned generic renewal-host headroom remains absent.
 
+## Post-E4 Convergence boundary (2026-09-05)
+
+**PRO_FINAL=PARK_CURRENT_FIXED_K2_POLICY_GAP_LEARNING_BRANCH**. The complete post-E4
+Convergence parks only the current fixed N6/K2/Z4 public flag/cue corridor branch through
+existing HMASD skill/actor implementation; no successor, training, retune or recast selected.
+E4 remains valid complete A, E3 original bounded H0 and smallseed2 competent positive remain.
+This is reversible family selection, not another empirical negative or whole-direction closure.
+Re-entry requires one source/execution-supported native-action/learning-path discriminator
+with distinct informative outcomes, strongest legal null and honest exposure/cost/stop rules;
+no prior positive result, publicgreedy superiority or new C-time gate. Full exact archive and
+applied intake: `FSD_POST_E4_CONVERGENCE_INTAKE_20260905.md`. ACTIVE/HIGH unchanged.
+
 ## Objects and their state (2026-09-05)
 
 | Object | State | Record |
