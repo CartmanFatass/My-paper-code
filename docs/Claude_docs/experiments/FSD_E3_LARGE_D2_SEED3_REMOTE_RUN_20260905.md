@@ -88,3 +88,69 @@ ssh hmasd-wsl-node '/usr/local/bin/agent-task logs fsd_e3_large_d2_seed3_2026090
 
 This is the final original cell. Terminal collection only;DM must accept18/18 before study
 reading. No successor training/newobject/ordinaryP3P4inbox authorized by this assignment.
+
+## Final-cell terminal technical acceptance
+
+**Technically accept original large_d2_seed3 complete.** Tracker woke CM;DM confirmed same-cell
+collection. Earlier ConnectTimeout10 SSH observationunknown recovered as samePID1674545 running
+at1231s;no replacement/restart/duplicate. Original task later finishedexit0,wrapper1674545,
+tmuxinactive. Remote clean at0f31b04f245aa9d5273b9131835ef1be59955759.
+Log terminal2026-09-05T13:42:28Z,duration2575s;statusuptime2659s is not runtime.
+Runnerwall2458.311039228007s,meanrollout76.80026440864894s;below4.63hprojection/8hcap.
+No new learner/admission/evaluation/replay/test/repair/source/successor or ordinaryP3P4inbox.
+
+JSON/NumPy arithmetic and CPU Torch reads verified:
+- completedtrue,20requested/completed,timing_onlyfalse,instabilitynull,no quarantine;
+  20x6400=128000transitions,20x16=320episodes.
+- metrics/path/interruptions/gaps20ordered IDs1–20each;400steps/16lanes/6agents;
+  bothregions19200agentsteps perrollout. Updates3600/9000/9000/300/1200,positiveeachrollout,
+  sumsagree for coordinator/actor/critic/team/individual respectively.
+- Evaluations(5,512),(10,512),(15,512),(20,2048),total3584;orderedIDs0..n-1,master770003,
+  deterministic,chunk512. Means/sampleSE matchwithin1e-15;JSONL equals summary/returninputs.
+- Frozenlarge(.02,.20),Delta1,N6/K2/Z4/H400,rho0,noprobe/coupling,seed3,c=cZ.25,caps40/400,
+  ageoff,CPU4. E3/exactSHA/nonreducedpublication correct;reference/cumulative/finalpath fields
+  present,lastpath equals finalregionalpath. Allrecordedlosses/returns/exposures finite.
+- Checkpoint64782527bytes;network89/29/24/29tensors allfloat32;allnestedtensorsfinite;
+  fiveoptimizerstates87/15/14/24/29;config/coordinator/discoverernormalizers present.
+  RNG hmasd_rollout_sampler_rng_v1 streams;traininginterface40/400/400. No newresume-equivalence
+  or cross-host bitidentity claim.
+
+Rawsinglecellmean0.46133524576822926,SE0.0007510871923772096. No pairedG/Q,rowaggregate/fullbranch.
+Float64helper first/finalratios exactlymatch rollout1/20learnerrecords:
+
+| Network | Rollout1 | Rollout20 |
+| --- | ---: | ---: |
+|coordinator|0.025179706737418674|0.13864645932967595|
+|discoverer_actor|0.0728453581757497|0.4446025936148938|
+|discoverer_critic|0.1189182078155352|0.41722821973838314|
+|team_discriminator|0.013737861433554053|0.059342237707121305|
+|individual_discriminator|0.016462173687793083|0.08297996012953901|
+
+Passedreceipt retains physical/effective15424135168bytes. Resources_unmeasured,peakRSSnull,
+peak scratchunmeasured;payload67515966bytes. Accepted13/13publicationcoverage applies;
+fullpublication succeeded,no newdefect. Admission doesnot establish runtimepeak conformance.
+
+Originalremote root is launchroot above. Uniqueignored staging:
+`C:/Projects/HMASD-worktrees/cm-fsd-medium-d2-seed3-20260904/temp/directions/flexible_skill_duration/exp/E3_20260904/remote_fetch_large_d2_seed3_terminal_01/large_d2_seed3`.
+Canonical,createdonlyafterabsencecheck:
+`C:/Projects/HMASD/.claude/worktrees/agent-a88287f2315bb99a0/temp/directions/flexible_skill_duration/exp/E3_20260904/large_d2_seed3`.
+scp copiedoriginal;remote find/sha256sum10files matchedstaging;Copy-Item to absentcanonical,
+all10hashes matchedagain. Priorcells/quarantines preserved.
+
+| File | SHA256 identical remote/staged/canonical |
+| --- | --- |
+|checkpoint_final.pt|c05865a78eb90ec11cdc33c0236137f51185174e7b27dc628345400dd6c39fa7|
+|eval.jsonl|8d8b9c4d7a3ad26995f3b5f5affc7242c4c93e9e266c773e8360ace868a0b151|
+|gaps.jsonl|03a2c16660981fb3a5afb9cea7599ce19e0912fd2eb1705d8f828dcff2b05062|
+|interruptions.jsonl|0bf66c395a4d581579b52e00b0b553e30868f5a995eed87d12b2e7e8cc006375|
+|manifest.json|d8795d26696ca01de426ef63febc11b9b442264f9a82b2c44e51347eb1a9cf4d|
+|metrics.jsonl|f9beeb95af705cb2961f514d50b6fe6291431526d98aaaa550d43bccc0497c36|
+|path.jsonl|d15ad42ab55d1227234431d3c87bc23dc5a6fcceb5e30a156f843a1034fb791c|
+|preflight.json|c2016f4769344e5670476dba3bd17b30e805967edaf1e87fe8a588fd675024d5|
+|rollout1_match.npz|731ee6c074f69ef6f7e30d1ce789233fe1905d2502d998f7dceec7ed66660e00|
+|summary.json|6846cc1267b2e773b7d09cf99717b9700b98388ce3051d49ef8115391851fec6|
+
+Finalcell technicalacceptance complete;DM must acceptcell18 before fullstudy reading.
+Scope none. Originalprocess and allcollection sessions terminal;no CMchildren or successor.
+Allassigned continuation cells have technical records and preserved evidence. This receipt
+establishes conformance only,not an E3 scientific branch or direction decision.
