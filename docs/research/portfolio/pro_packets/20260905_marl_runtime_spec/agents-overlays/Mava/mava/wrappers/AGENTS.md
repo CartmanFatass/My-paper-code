@@ -14,4 +14,3 @@ The canonical observation starts with agent axis `N`; vector adapters add enviro
 Masks, rewards, discounts, done/terminal distinction, auto-reset behavior, and metric extras are
 semantic boundaries. Do not infer interchangeable JAX/CPU environment behavior from matching
 array shapes alone.
-

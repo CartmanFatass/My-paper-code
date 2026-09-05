@@ -17,5 +17,3 @@ device axes. PPO Sebulba keeps Gym interaction on actor threads, transfers obser
 between CPU and actor devices, and pmean-reduces gradients across `learner_devices`. The two
 paths have different timing and staleness boundaries; do not compare their SPS as if they were
 the same execution path.
-
-

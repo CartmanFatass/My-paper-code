@@ -15,5 +15,3 @@ update-batch `vmap`, and nested `scan`.
 `num_envs`, `sample_sequence_length`, `sample_batch_size`, terminal alignment, and PRNG stream
 are part of the IQL object. `unreplicate_batch_dim` is only for evaluation/checkpoint views; it
 does not mean the training state is single-copy.
-
-

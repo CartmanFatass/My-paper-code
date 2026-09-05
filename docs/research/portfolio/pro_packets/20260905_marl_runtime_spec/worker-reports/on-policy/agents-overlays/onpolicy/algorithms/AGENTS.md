@@ -1,6 +1,6 @@
-# Upstream file snapshot
+# Local HMASD navigation overlay
 
-source_relative_path: `onpolicy/algorithms/AGENTS.md`
-fixed_commit: `de66d7a4b23fac2513f56f96f73b3f5cb96695ac`
-upstream_status: `absent`
-upstream_text: none; this record preserves the pre-overlay state.
+`r_mappo/` contains the recurrent/non-recurrent MAPPO policy and trainer used by the standard
+shared and separated runners. `algorithms/utils/` contains tensor conversion, MLP/CNN, GRU, and
+action-distribution layers. HAPPO/HATRPO/MAT are neighboring variants and are outside the core
+MAPPO path summarized here. Source is read-only; this is local additive navigation.

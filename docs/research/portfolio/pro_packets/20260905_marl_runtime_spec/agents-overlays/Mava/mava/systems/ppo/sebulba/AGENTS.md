@@ -17,4 +17,3 @@ pipeline's data partition. Queue blocking is an intentional freshness/backpressu
 and actor parameter publication is asynchronous between learner updates. CPU environment steps,
 device transfers, JIT compilation, learner synchronization, and evaluation time must remain
 separate in a performance specification.
-

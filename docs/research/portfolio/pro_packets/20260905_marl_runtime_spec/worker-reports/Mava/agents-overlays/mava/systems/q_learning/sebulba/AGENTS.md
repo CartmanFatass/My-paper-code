@@ -16,5 +16,3 @@ Actor count, buffer-per-actor ownership, minimum sequence length, replay ratio, 
 tolerance, CPU/device transfers, and latest-parameter publication are runtime semantics. A
 throughput specification must preserve the limiter and report queue/learner wait time rather than
 folding it into environment compute.
-
-

@@ -15,5 +15,3 @@ intentional. `real_next_obs` is retained because auto-reset replaces the visible
 observation. The terminal/term-or-trunc distinction, target-network update, replay sequence
 length, and sampling ratio are semantic choices. Device sharding or CPU replay placement may be
 optimized only while preserving those choices.
-
-

@@ -9,4 +9,3 @@ The learner creates a one-dimensional `Mesh` named `learner_devices`, uses `Name
 `PartitionSpec`, and wraps the learner in `jax.jit(shard_map(...))`. Rollouts are stacked and
 partitioned through `Pipeline`; learner state/parameters are published after readiness. Preserve
 agent chunking, hidden-state initialization, and data axis conversion when comparing runtimes.
-

@@ -19,6 +19,3 @@ each graph, and optionally builds radius edges and Cartesian/distance features
 BenchMARL C++ implementation. C++ or CUDA code in an external dependency is not evidence that
 the end-to-end MARL runner is efficient; measure the complete collection, transfer, model and
 logging path.
-
-
-

@@ -1,6 +1,6 @@
-# Upstream file snapshot
+# Local HMASD navigation overlay
 
-source_relative_path: `onpolicy/envs/starcraft2/StarCraft2v2/AGENTS.md`
-fixed_commit: `de66d7a4b23fac2513f56f96f73b3f5cb96695ac`
-upstream_status: `absent`
-upstream_text: none; this record preserves the pre-overlay state.
+`wrapper.py` exposes the capability environment, while `starcraft2.py` owns the StarCraft II
+controller lifecycle, reset/restart behavior, action stepping, and observation/state production.
+The wrapper is reached through `SMACv2_modified.py` or `SMACv2.py`. This additive file documents
+the fixed snapshot only; upstream source is read-only and no prior navigation file existed.

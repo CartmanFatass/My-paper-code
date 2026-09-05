@@ -34,6 +34,3 @@ CUDA scalar with the host. No async overlap or measured throughput claim is impl
 Python loop; a batched test env performs one rollout and unbinds it. Rendering, JSON/logger writes,
 video conversion and periodic `torch.save` checkpoints are part of wall time unless explicitly
 excluded by the experiment configuration. `close()` also removes disk-buffer scratch directories.
-
-
-

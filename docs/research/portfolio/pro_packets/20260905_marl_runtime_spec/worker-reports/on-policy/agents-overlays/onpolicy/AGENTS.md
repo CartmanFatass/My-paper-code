@@ -1,6 +1,6 @@
-# Upstream file snapshot
+# Local HMASD navigation overlay
 
-source_relative_path: `onpolicy/AGENTS.md`
-fixed_commit: `de66d7a4b23fac2513f56f96f73b3f5cb96695ac`
-upstream_status: `absent`
-upstream_text: none; this record preserves the pre-overlay state.
+Scope: the package implementation under this fixed upstream snapshot. The runner, environment,
+algorithm, utility, and training-script subdirectories each have a more specific navigation file.
+Read those files together with the source when tracing a call path. Source code remains read-only;
+this file is local additive context and no upstream file was replaced.

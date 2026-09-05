@@ -9,5 +9,3 @@ time/epoch/minibatch `scan`. Recurrent Sable carries hidden states; feed-forward
 temporal positional encoding and may chunk agents. Preserve network memory configuration, agent
 axis ordering, reward/done handling, and RNG behavior. Transform placement is a layout fact, not
 evidence of a measured speedup.
-
-
