@@ -24,7 +24,7 @@
   "dispatch_mode": "REUSE_SINGLETON",
   "dispatch_required": true,
   "dispatch_once": true,
-  "dispatch_state": "READY_TO_DISPATCH",
+  "dispatch_state": "DISPATCH_ACCEPTED",
   "operator_reuse_required": true,
   "operator_config_path": ".codex/hmasd-transport.toml",
   "operator_project_id": "177ab8d8-53ae-448c-9a9e-aaa2fecd2498",
