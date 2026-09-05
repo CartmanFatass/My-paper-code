@@ -75,6 +75,21 @@ with `96` candidates; CM collected the task status/log evidence and DM ACKed ter
 These are process and collection facts only. No further FSD invocation, restart, or replacement
 has been selected.
 
+CBSC approved-repair closed-handle handoff: CM
+`/root/dm_amx_cbsc_approved/cm_am_cbsc_approved_repair` supplied three accepted handles on
+`wsl_4070`, all at SHA `8003b96bd79910864e9372ad6f1ea81f1c80520c` and cwd
+`/home/wu/hmasd-worktrees/cbsc-approved-repair-8003b96bd-20260905`.
+`cbsc-approved-smoke-8003b96bd-01` failed exit `2`, PID `1691156`, before preflight or test
+body because its outer command resolved the preflight script path incorrectly. The replacement
+`cbsc-approved-smoke-8003b96bd-02` finished exit `0`, PID `1691362`, with `1 passed` in
+`13.46s` pytest / `14s` supervisor. `cbsc-approved-profile-8003b96bd-01` failed exit `1`, PID
+`1691518`, with `19` passed and one formal failure after `9.92s` pytest / `10s` supervisor; the
+bounded log names a confined-direction-root artifact-path error. All three had inactive tmux;
+their logs are `/home/wu/.agent-tasks/<handle>/task.log`, and receipt/timing paths are under
+`temp/directions/capability_bound_semantic_currentness/test/approved-repair/`. CBSC DM ACKed
+each terminal fact and CM retains collection/input-path repair. No restart, classification, or
+new handle is implied by these rows.
+
 | DM / run record | Node and accepted handle | Launch SHA | Remote cwd | Output / receipt | Latest authoritative observation | Next owner step / notification |
 | --- | --- | --- | --- | --- | --- | --- |
 | `flexible_skill_duration` — DM `/root/dm_amx_fsd_continue`; [prospective continuation intake](../../candidates/flexible_skill_duration/FSD_E3_MEDIUM_D2_SEED3_CONTINUATION_INTAKE_20260904.md) | `wsl_4070` via `hmasd-wsl-node`; `fsd_e3_medium_d2_seed3_20260904_01` | `31bfecd79fc0f708546786ee26dfd8faa9e85dfb` | `/home/wu/hmasd-worktrees/fsd_e3_medium_d2_seed3_20260904_01` | `/home/wu/hmasd-worktrees/fsd_e3_medium_d2_seed3_20260904_01/temp/directions/flexible_skill_duration/exp/E3_20260904/medium_d2_seed3`; receipt `/home/wu/hmasd-worktrees/fsd_e3_medium_d2_seed3_20260904_01/temp/directions/flexible_skill_duration/exp/E3_20260904/medium_d2_seed3/preflight.json`; log `/home/wu/.agent-tasks/fsd_e3_medium_d2_seed3_20260904_01/task.log` | Adoption check `2026-09-04T23:47:19Z`: `running`, exit `null`, wrapper PID `106154`, learner PID `106170` (parent `106154`), uptime `49s`, `tmux_active=true`. Bounded log tail contains the fresh admission receipt: assessed `2026-09-04T23:46:29Z`, physical/effective available `15432294400` bytes, both floor checks passed. DM confirmed the direct adoption receipt; existing supervisor witnesses are `runner.sh`, `status`, `pid`, `start_time`, and `task.log`. | Observe same handle; notify DM on terminal, failed/refused, lost observation, or approaching/exceeding conservative `4.63h` / cap `8h`. At terminal CM `/root/dm_amx_fsd_continue/cm_am_fsd_continue` collects and verifies; no relaunch. |
