@@ -6,6 +6,8 @@ Binding structure proposed: temporal abstraction or termination; partner actions
 utility, but fixed partner programs alone do not establish co-adaptation or strategic MARL value.
 
 Date: 2026-09-05. Status: proposal for Innovator selection, not a frozen card or launch assignment.
+Updated under the operative evidence-spec §11.8 before the first dispatch: the direct B's primary
+comparison is required; exhaustive forced-action tables and exact references are optional.
 The inherited census establishes no executable native-return host and no numerical headroom.
 The current SCDMP D6 family remains stopped; this is not a new duration-sign/source-state search.
 
@@ -64,7 +66,8 @@ an unmeasured MARL label or demand a large production host.
 The complete crossed table has `2 identities x 2 periods x 2 partner strata = 8` cells. Within
 each cell, the two mirrored contexts have weight `1/2`; each cell has weight `1/8` in the reported
 uniform cell summary. Publish the 16 context-level conditional returns as well as all eight
-cell means. Identity is an action intervention, so averaging forced identities is a diagnostic
+cell means if that diagnostic is selected. This complete table is optional for the first B and
+does not hold its learner comparison. Identity is an action intervention, so averaging forced identities is a diagnostic
 summary, not the achievable performance of a free identity selector.
 
 For an actual selector return, weight the exogenous `(p,partner,c)` contexts uniformly (`1/8`
@@ -92,8 +95,9 @@ it cannot produce the tuned generic-learner headroom required for a learning cla
 ### Concrete direct-B option for selection
 
 Train on both periods, both partner strata and both mirrored contexts. No corner or partner is
-held out in this first exploration. The complete 2x2x2 forced-first-action table is a final
-diagnostic; the primary measurement is each learned selector's free-choice native return.
+held out in this first exploration. The primary measurement is each learned selector's free-choice
+native return. The complete 2x2x2 forced-first-action table is a possible later diagnostic, not
+part of this minimum first B.
 This asks about finite-budget sharing and negative transfer on seen support, not held-out
 composition. A later named run may select a withheld corner or partner if it changes the question.
 
@@ -123,10 +127,12 @@ strata; 128 cycles of six-tick rollouts followed by one full-batch optimizer upd
 4,096 complete training episodes, 24,576 joint primitive steps, 8,192 renewal transitions and
 128 optimizer updates per arm. Evaluate the free-choice policy at initialization and every 16
 updates on all eight exogenous contexts: nine evaluations, 432 additional joint steps per arm.
-At the final checkpoint, evaluate the 16 forced-first-action context cells once (96 steps).
-Thus the proposed complete two-arm first B costs 25,104 joint steps per arm, 50,208 in total,
+Thus the proposed complete two-arm first B costs 25,008 joint steps per arm, 50,016 in total,
 before a separately disclosed smoke check; no tuning sweep, future seed or exact census is hidden
 in those counts. The same complete evaluator supplies baseline and treatment results.
+There is no repeated smoke at dispatch/launch boundaries without changed behavior. A focused
+check protects the new host reward, action-hold semantics and primary output; no cross-platform
+solve, all-history replay, intermediate-array dump or exhaustive support proof is proposed.
 
 Record the native-return learning curves, final paired difference, nonzero learner counts and
 real parameter displacement. A real positive difference or useful learning-curve improvement
@@ -187,7 +193,7 @@ measurement or actual runtime failure is not a negative mechanism result.
 
 For the concrete proposed B above, batch 32, six primitive ticks and 128 rollout/update
 cycles give 24,576 training joint transitions per arm and seed. Including all proposed evaluation
-work gives 25,104. These are proposed counts, not an admitted budget or a measured projection.
+work gives 25,008. These are proposed counts, not an admitted budget or a measured projection.
 At fixed period `p`, renewal
 rows are `M=32*6/p` per cycle: 96 at period 2 and 32 at period 6. If the design instead conditions
 on three training cells or batches variable periods, count those rows explicitly; do not credit
@@ -206,7 +212,9 @@ Implementation, if selected, belongs in `experiments/candidates/vsp_c1/<new_atte
 mirrored tests, and one thin `scripts/run_vspc1_<new_attempt>.py`. Reuse ordinary array operations
 and a compact finite evaluator; no dependency installation, core package edits, new registry,
 clone machinery, resume service, generic worker pool, added gate or telemetry framework is
-needed. Keep the normal 2000-line attempt/600-line runner budgets. A future CM owns the exact
+needed. Keep the normal 2000-line attempt/600-line runner budgets. Under §11.8, orchestration
+proportion is a review signal, not an automatic refusal; no extra quantitative audit is required.
+A future CM owns the exact
 source/fixture/command and independent review. Exact accepted bytes must be committed and
 pushed before execution on the configured remote-first node with immediate node-local admission.
 The pure discrete host is prospectively portable; a future learner's dtype/RNG/device choice
