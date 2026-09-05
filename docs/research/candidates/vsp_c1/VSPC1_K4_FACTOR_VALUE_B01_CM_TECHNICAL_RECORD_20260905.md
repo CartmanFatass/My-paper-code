@@ -34,4 +34,159 @@ Scientific-tools skill and only its relevant adapters reference were read. The s
 
 ## Implementation, review and execution
 
-Pending; no result is asserted by the prospective contract above.
+The initial prospective boundary had no result; completed evidence follows.
+
+## Completed implementation and direct technical acceptance
+
+Source commit `e7e574b4496875f45e1d1b9b41c02cd35cf3684e` was committed and immediately pushed before remote preparation. It adds 248 experiment lines, 25 model-free reporting lines and a 66-line runner (339 non-test lines), plus 38 test lines. The implementation child's four pure tests passed in 0.09 seconds: declared arithmetic, Python parsing, fixed AUC including adverse values, and primary JSON readback. They import no experiment module and construct no model, RNG, environment or optimizer. No second smoke was run. CM inspected the integrated source; independent reviewer `/root/dm_amx_k4_vspc1_design/cm_am_vspc1_b01/rev_ah_vspc1_b01` inspected the same fixed commit and found no material defect before formal execution. Some runtime formula checks share expressions with generation; their zero counters are not independent proof by themselves. Source inspection and direct primary-output checks provide the separate evidence.
+
+Actual source map: `Value` owns network parameters and two-action scoring; `state_at` supplies the common four features; `rollout` executes six batched joint ticks and gathers renewal rows; `evaluate` executes eight budgeted episodes; `run` owns one optimizer, 128 cycles and all nine checkpoints. `reporting.py` performs the fixed aggregate and JSON write/read. The thin runner sets BLAS threads before heavy imports and Torch intra/inter-op to one inside the run. There is no core import change, reference search, checkpoint recovery, extra seed or third arm.
+
+Named NumPy streams are SeedSequence `[0,101]` for context permutation and `[0,102]` for exploration; each cycle draws a fixed `(32,6,2)` array. Torch FACTOR dense/embedding seeds are 201/202; GENERIC dense seed is 301. Evaluation is greedy/deterministic and takes no random draws. These are actual recorded streams, not a claim that different model shapes share parameter bytes. CPU FP32, Python 3.10.21, NumPy 1.26.3, Torch 2.7.0+cu118 (CPU tensors) were used.
+
+## Exact formal execution and observations
+
+Node: configured `wsl_4070`, SSH `hmasd-wsl-node`. Both invocations used detached cwd `/home/wu/hmasd-worktrees/vspc1-b01-e7e574b44` at the source SHA above. The ordinary non-login network fetch stalled; that preparation was interrupted and the configured `zsh -lic` fetch succeeded. Remote Git printed an existing background-gc/repack warning and shell prompt warnings, but fetch and exact detached checkout completed with exit zero. No scientific invocation had started during that preparation; no source bytes were copied uncommitted. Git/SSH/preparation wall is unmeasured and separate from experiment wall.
+
+The existing supervisor accepted exactly these two task names, serially: `vspc1_b01_factor_s0_e7e574b44_01` and `vspc1_b01_generic_s0_e7e574b44_01`. Each command is recorded verbatim in the copied `runner.sh`. The logical command, substituting each selected arm and its distinct root, was:
+
+```bash
+cd /home/wu/hmasd-worktrees/vspc1-b01-e7e574b44 && /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out <root>/admission.json && /usr/bin/time -v -o <root>/invocation.time timeout --signal=TERM 2700s /home/wu/.venvs/hmasd/bin/python scripts/run_vspc1_k4_factor_value_b01.py --arm <FACTOR|GENERIC> --seed 0 --out <root>
+```
+
+The complete command runs inside `/usr/local/bin/agent-task run <task> <command>`. Required publication/readback stays inside timeout. No automatic continuation or repeat exists. `<root>` is cwd plus `temp/directions/vsp_c1/exp/k4_b01_factor_seed0_e7e574b44_01` or `k4_b01_generic_seed0_e7e574b44_01` respectively.
+
+| Observation | FACTOR | GENERIC |
+| --- | ---: | ---: |
+| Actual-node admission UTC | 2026-09-05 23:55:03.974447 | 2026-09-05 23:55:59.793693 |
+| Physical/effective available bytes (both pass) | 15404367872 | 15411888128 |
+| Supervisor PID | 1704221 | 1704797 |
+| Terminal UTC | 2026-09-05 23:55:05 | 2026-09-05 23:56:03 |
+| Supervisor exit | 0 | 0 |
+| Complete external invocation wall seconds | 1.76 | 3.95 |
+| External user + system CPU seconds | 1.52 + 0.19 | 1.58 + 0.18 |
+| External maximum RSS KiB | 510076 | 510008 |
+| Runner through final readback seconds | 1.479294379 | 3.190416295 |
+
+Fresh `/proc/meminfo` receipts passed both 4-GiB floors; cgroup limits/headroom were unavailable in these receipts, not asserted as measured unlimited capacity. External GNU time covers process startup, imports, initialization, training, evaluation, checks, all writes/readbacks, stdout and process shutdown, including its waited descendants. Its maximum RSS is a process/descendant high-water observation, not a sum of simultaneous process peaks. Runner-internal RSS/CPU timestamps precede final metadata/stdout/shutdown and are not substituted for complete external accounting. Extra standard GNU time fields were not used to make additional telemetry claims.
+
+Summed complete invocation wall is **5.71 seconds**, aggregate CPU **3.47 seconds** at GNU time precision. Supervisor timestamps bound study elapsed from first task start to last terminal at approximately **60 seconds**, including the serial handoff/observation gap; it is not 60 seconds of scientific compute. Neither invocation approaches the 2700-second cap. No profiler, device/worker sweep or new calibration was run. Actual contention/wait attribution is unmeasured; the longer GENERIC wall is not attributed to a specific cause or presented as an algorithm speed comparison.
+
+The shared tracker `/root/tracker_tl_experiments` ACKed both exact handles and independently returned terminal exit-zero facts to CM and DM. CM did not relaunch either handle after handoff. All scientific processes for this assignment are terminal.
+
+## Actual primary measurements
+
+Both arms completed 4096 training episodes, 24576 training joint ticks, 8192 training renewals (6144 at p2 and 2048 at p6), exactly 128 Adam steps, 72 evaluation episodes, 432 evaluation ticks and 144 evaluation decisions. Complete totals are 25008 joint ticks and 8336 legal decisions per arm. Every training context received 512 episodes. Each arm checked 4168 actual budgeted episodes; held-action, partner-timing, reward, return, terminal-bootstrap and loss-weight violation counters are all zero. Both readable summaries state `complete`, with no primary dependency defect. Model parameter counts are actually 188/191. These measurements establish the complete selected implementation path, not mechanism truth or stable seed-population performance.
+
+| Quantity | FACTOR | GENERIC |
+| --- | ---: | ---: |
+| theta0_norm | 4.01100826263 | 3.65843296051 |
+| theta128_norm | 4.34473371506 | 3.87522768974 |
+| theta_displacement_norm | 2.0328578949 | 1.59698557854 |
+| displacement_to_initial_norm | 0.506819672708 | 0.436521755565 |
+| initial_return | 0.5 | 0.5 |
+| final_return | 0.625 | 0.666666666667 |
+| learning_gain | 0.125 | 0.166666666667 |
+| normalized_auc | 0.580729166667 | 0.609375 |
+
+Direct arithmetic: FACTOR minus GENERIC final J = -0.04166666666666663 and normalized AUC = -0.02864583333333326. Scientific interpretation and successor selection remain with DM. The same J0 does not imply identical initial policies. The known analytic reference is not an executed arm or measured tuned headroom.
+
+| Update | FACTOR J | GENERIC J |
+| ---: | ---: | ---: |
+| 0 | 0.5 | 0.5 |
+| 16 | 0.541666666667 | 0.5 |
+| 32 | 0.541666666667 | 0.541666666667 |
+| 48 | 0.583333333333 | 0.583333333333 |
+| 64 | 0.541666666667 | 0.666666666667 |
+| 80 | 0.625 | 0.666666666667 |
+| 96 | 0.625 | 0.666666666667 |
+| 112 | 0.625 | 0.666666666667 |
+| 128 | 0.625 | 0.666666666667 |
+
+### FACTOR complete evaluation contexts
+
+Context columns are `(p,tau,c)`; each entry is the native return from one real six-step episode.
+
+| Update | 2,2,0 | 2,2,1 | 2,4,0 | 2,4,1 | 6,2,0 | 6,2,1 | 6,4,0 | 6,4,1 |
+| ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 0 | 0.666666666667 | 0.333333333333 | 0.333333333333 | 0.666666666667 | 0.333333333333 | 0.666666666667 | 0.666666666667 | 0.333333333333 |
+| 16 | 0.666666666667 | 0.333333333333 | 0.666666666667 | 0.333333333333 | 0.666666666667 | 0.333333333333 | 0.666666666667 | 0.666666666667 |
+| 32 | 0.666666666667 | 0.333333333333 | 0.666666666667 | 0.333333333333 | 0.666666666667 | 0.333333333333 | 0.666666666667 | 0.666666666667 |
+| 48 | 0.666666666667 | 0.333333333333 | 0.666666666667 | 0.666666666667 | 0.666666666667 | 0.666666666667 | 0.666666666667 | 0.333333333333 |
+| 64 | 0.666666666667 | 0.666666666667 | 0.666666666667 | 0 | 0.666666666667 | 0.333333333333 | 0.666666666667 | 0.666666666667 |
+| 80 | 0.666666666667 | 0.666666666667 | 0.666666666667 | 0.666666666667 | 0.666666666667 | 0.333333333333 | 0.666666666667 | 0.666666666667 |
+| 96 | 0.666666666667 | 0.666666666667 | 0.666666666667 | 0.666666666667 | 0.666666666667 | 0.333333333333 | 0.666666666667 | 0.666666666667 |
+| 112 | 0.666666666667 | 0.666666666667 | 0.666666666667 | 0.666666666667 | 0.666666666667 | 0.333333333333 | 0.666666666667 | 0.666666666667 |
+| 128 | 0.666666666667 | 0.666666666667 | 0.666666666667 | 0.666666666667 | 0.666666666667 | 0.333333333333 | 0.666666666667 | 0.666666666667 |
+
+### GENERIC complete evaluation contexts
+
+Context columns are `(p,tau,c)`; each entry is the native return from one real six-step episode.
+
+| Update | 2,2,0 | 2,2,1 | 2,4,0 | 2,4,1 | 6,2,0 | 6,2,1 | 6,4,0 | 6,4,1 |
+| ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 0 | 0.333333333333 | 0.666666666667 | 0.666666666667 | 0.333333333333 | 0.333333333333 | 0.666666666667 | 0.666666666667 | 0.333333333333 |
+| 16 | 0.666666666667 | 0.333333333333 | 0.333333333333 | 0.666666666667 | 0.666666666667 | 0.333333333333 | 0.333333333333 | 0.666666666667 |
+| 32 | 0.666666666667 | 0.666666666667 | 0.333333333333 | 0.666666666667 | 0.666666666667 | 0.333333333333 | 0.333333333333 | 0.666666666667 |
+| 48 | 0.666666666667 | 0.666666666667 | 0.666666666667 | 0.666666666667 | 0.333333333333 | 0.666666666667 | 0.666666666667 | 0.333333333333 |
+| 64 | 0.666666666667 | 0.666666666667 | 0.666666666667 | 0.666666666667 | 0.666666666667 | 0.666666666667 | 0.666666666667 | 0.666666666667 |
+| 80 | 0.666666666667 | 0.666666666667 | 0.666666666667 | 0.666666666667 | 0.666666666667 | 0.666666666667 | 0.666666666667 | 0.666666666667 |
+| 96 | 0.666666666667 | 0.666666666667 | 0.666666666667 | 0.666666666667 | 0.666666666667 | 0.666666666667 | 0.666666666667 | 0.666666666667 |
+| 112 | 0.666666666667 | 0.666666666667 | 0.666666666667 | 0.666666666667 | 0.666666666667 | 0.666666666667 | 0.666666666667 | 0.666666666667 |
+| 128 | 0.666666666667 | 0.666666666667 | 0.666666666667 | 0.666666666667 | 0.666666666667 | 0.666666666667 | 0.666666666667 | 0.666666666667 |
+
+### Actual action counts
+
+Counts below retain zero cells and all legal boundary choices; training/evaluation totals are 8192/144 per arm. Evaluation counts aggregate the nine fixed checkpoints and are not independent training samples.
+
+| p | tau | c | tick | action | FACTOR train | GENERIC train | FACTOR eval | GENERIC eval |
+| ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 2 | 2 | 0 | 0 | 0 | 143 | 195 | 0 | 4 |
+| 2 | 2 | 0 | 0 | 1 | 369 | 317 | 9 | 5 |
+| 2 | 2 | 0 | 2 | 0 | 118 | 150 | 0 | 1 |
+| 2 | 2 | 0 | 2 | 1 | 394 | 362 | 9 | 8 |
+| 2 | 2 | 0 | 4 | 0 | 170 | 223 | 0 | 4 |
+| 2 | 2 | 0 | 4 | 1 | 342 | 289 | 9 | 5 |
+| 2 | 2 | 1 | 0 | 0 | 342 | 354 | 6 | 7 |
+| 2 | 2 | 1 | 0 | 1 | 170 | 158 | 3 | 2 |
+| 2 | 2 | 1 | 2 | 0 | 336 | 364 | 6 | 7 |
+| 2 | 2 | 1 | 2 | 1 | 176 | 148 | 3 | 2 |
+| 2 | 2 | 1 | 4 | 0 | 354 | 375 | 5 | 8 |
+| 2 | 2 | 1 | 4 | 1 | 158 | 137 | 4 | 1 |
+| 2 | 4 | 0 | 0 | 0 | 370 | 351 | 8 | 7 |
+| 2 | 4 | 0 | 0 | 1 | 142 | 161 | 1 | 2 |
+| 2 | 4 | 0 | 2 | 0 | 384 | 370 | 8 | 7 |
+| 2 | 4 | 0 | 2 | 1 | 128 | 142 | 1 | 2 |
+| 2 | 4 | 0 | 4 | 0 | 369 | 362 | 8 | 7 |
+| 2 | 4 | 0 | 4 | 1 | 143 | 150 | 1 | 2 |
+| 2 | 4 | 1 | 0 | 0 | 216 | 173 | 3 | 1 |
+| 2 | 4 | 1 | 0 | 1 | 296 | 339 | 6 | 8 |
+| 2 | 4 | 1 | 2 | 0 | 155 | 133 | 1 | 1 |
+| 2 | 4 | 1 | 2 | 1 | 357 | 379 | 8 | 8 |
+| 2 | 4 | 1 | 4 | 0 | 149 | 147 | 0 | 1 |
+| 2 | 4 | 1 | 4 | 1 | 363 | 365 | 9 | 8 |
+| 6 | 2 | 0 | 0 | 0 | 151 | 184 | 1 | 2 |
+| 6 | 2 | 0 | 0 | 1 | 361 | 328 | 8 | 7 |
+| 6 | 2 | 1 | 0 | 0 | 144 | 356 | 2 | 7 |
+| 6 | 2 | 1 | 0 | 1 | 368 | 156 | 7 | 2 |
+| 6 | 4 | 0 | 0 | 0 | 384 | 366 | 9 | 7 |
+| 6 | 4 | 0 | 0 | 1 | 128 | 146 | 0 | 2 |
+| 6 | 4 | 1 | 0 | 0 | 146 | 169 | 2 | 2 |
+| 6 | 4 | 1 | 0 | 1 | 366 | 343 | 7 | 7 |
+
+## Accessible evidence and limitations
+
+Original remote output roots are above. Exact collected local copies are:
+
+- `C:/Projects/HMASD/temp/directions/vsp_c1/exp/k4_b01_factor_seed0_e7e574b44_01/`
+- `C:/Projects/HMASD/temp/directions/vsp_c1/exp/k4_b01_generic_seed0_e7e574b44_01/`
+
+Each holds `summary.json`, `admission.json`, `invocation.time`, `task.log`, `exit_code`, `start_time`, and the supervisor's exact `runner.sh`. These are evidence copies, not new scientific runs. Remote supervisor evidence remains under `/home/wu/.agent-tasks/<task>/`. This tracked record preserves all curve/context/action measurements even though raw runtime roots are ignored.
+
+CM independently read JSON and recomputed all eight-context means, nine-point schedule, action totals and training-context counts from existing data. No extra model or environment was executed. Independent primary-output review follows below. A single paired training seed cannot estimate training-seed uncertainty; fixed public partner, different parameterizations and initialization/optimization remain scientific limitations. No GPU, C++, exact replay, tuned baseline or broader claim was tested.
+
+## Independent output review and CM conclusion
+
+The same independent reviewer read both actual result packages, recomputed all 18 checkpoint populations/means/period/partner strata, and reconciled cumulative evaluation reward from action counts with the curve returns. All training-context counts, action totals (including five FACTOR evaluation zero cells and no GENERIC evaluation zero cells), update/transition/evaluation counts, norms/ratios, adjacent admissions, serial ordering, exit witnesses and complete GNU time boundaries were checked. It reported no material defect or missing primary dependency. It did not replay parameters or sample runtime threads: displacement comes from the actual learner's records and single-thread semantics from inspected configuration, not stronger unperformed verification.
+
+CM accepts the implementation and both complete seed-0 arm observations for the selected B comparison. All assigned scientific processes are terminal; original and local copied outputs remain available. No source repair, scientific rerun or extra assessment was needed. Source `e7e574b44` and initial contract `63132a379` are pushed; this completion record is committed and pushed separately. The next step is the existing DM's scientific intake and successor decision using these exact measurements, preserving the negative endpoint/AUC differences and single-seed scope. No successor seed or extra arm is selected by this technical acceptance.
