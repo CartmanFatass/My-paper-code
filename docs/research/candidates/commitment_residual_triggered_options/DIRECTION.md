@@ -606,3 +606,46 @@ CRTO_RAW_CENTERED_LOSS_B07_RESULT_EVIDENCE_20260905.md,
 CRTO_RAW_CENTERED_LOSS_B07_SEED01_RESULT_20260905.json,
 CRTO_RAW_CENTERED_LOSS_B07_SEED02_RESULT_20260905.json,
 CRTO_RAW_CENTERED_LOSS_B07_INTAKE_20260905.md.
+
+## Balanced-family Convergence disposition — 2026-09-05
+
+The complete class-correct Convergence answer to
+`2026-09-05-crto-balanced-family-convergence-01` is final:
+**PARK_CURRENT_SELECTED_PANEL_BALANCED_RESIDUAL_FAMILY**. This reversible family boundary is
+executed. The standing finite-budget inductive-bias question remains; no further learner, B08,
+unchanged repeat, seed search or budget extension is selected. This is not CLOSE or RECAST;
+recast counts and Portfolio lifecycle/priority/capacity remain unchanged.
+
+Strongest support is B04's one competent seed-0 residual negative beyond MEI .0025, followed by
+comparator-limited seeds 1/2 and two unsuccessful REPLAN competence repairs. Strongest
+contradiction to a broader failure claim is native learning: TRUE improves with exposure, B06
+seed 2 corrects a KEEP choice, and B07 changes two REPLAN choices. Later side-mean regrets pass;
+the exact-count qualifier is not a total ordering of native value. Ordinary finite-budget
+surrogate optimization, joint initialization, calibration, capacity and objective/optimizer
+interactions remain live. CONTINUE_B is a close runner-up, not an excluded possibility.
+
+Re-entry is one specified B discriminator with a falsifiable legal-action/credit change and
+paired native-value prediction, including offsetting losses, which can resolve aligned residual
+value against competent same-information RAW and calibrated derangement at original MEI .0025.
+It is on specification, not prior experimental success. Comparator repair may be inside the B
+experiment; competence is an interpretation qualifier, not a new launch gate. A claim to repair
+the observed two-seed problem retains both joint seed packages; another scope is a new B object.
+No next intervention, seed set, endpoint or budget is selected. Exposure and per-arm cost belong
+to any actual new proposal, with unmeasured preparation/update/evaluation/node costs explicit.
+
+The response adds a fixed-baseline arithmetic limit: native gain is the sum of paired G16
+changes divided by 16, so the original .0025 margin needs net gain>.04; the .000625 diagnostic
+margin needs net gain>.01. Since treatment regret is nonnegative, improvement cannot exceed
+RAW regret. Seed 1's existing LONG RAW regret .0021294544930598857 is below .0025, making a
+LONG improvement beyond that margin unattainable against this baseline, even at zero treatment
+regret. This is not tuned headroom, an accessible oracle, a competence finding or a restriction
+on SHORT-budget value. No independent empirical observation was added by this algebra.
+
+All existing B readings retain the exposed selected-panel ceiling; natural-support closure,
+A01 uncertainty, and the absence of tuned same-information headroom remain intact. No residual
+equivalence, family exhaustion, RAW unlearnability, information/function-class or policy/MARL
+claim follows. The DM and CM return at a recoverable zero-live operational boundary.
+
+References: CRTO_BALANCED_FAMILY_CONVERGENCE_INTAKE_20260905.md and the byte-preserved
+pro/2026-09-05-crto-balanced-family-convergence-01/RESPONSE.md (request/pin and nine reported
+read paths match the authored packet). The other three original archive files are alongside it.

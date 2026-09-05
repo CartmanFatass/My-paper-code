@@ -5,6 +5,12 @@
 `em:commitment_residual_triggered_options:convergence`.
 No new experiment, local family verdict, recast, C promotion or Portfolio mutation.
 
+Final resolution (2026-09-05): the unique response is ARCHIVED and
+**PRO_FINAL=PARK_CURRENT_SELECTED_PANEL_BALANCED_RESIDUAL_FAMILY** has been executed.
+See CRTO_BALANCED_FAMILY_CONVERGENCE_INTAKE_20260905.md and the byte-preserved request archive
+under pro/2026-09-05-crto-balanced-family-convergence-01/. The PRO_PENDING passages below
+record the submitted question and dispatch boundary, not a currently pending request. No retry.
+
 ## Question, options and recommendation
 
 After B01–B07, does this exposed selected-panel balanced residual family merit one specified
