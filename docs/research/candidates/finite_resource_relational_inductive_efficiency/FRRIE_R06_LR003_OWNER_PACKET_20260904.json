@@ -1,0 +1,22 @@
+{
+  "question": "是否接受在同样训练工作下把两臂学习率提高十倍，检验学习暴露不足这一剩余解释？",
+  "changes_if_approved": [
+    {"target": "FRRIE 接触生效学习阶梯的下一格", "from": "学习率 0.0003、128 次更新的有效结果已取得，两种规模差异均小于 0.005", "to": "新 B 对象使用双方共同学习率 0.003，保持同一随机根、128 次更新、信息、比较器和评估工作"}
+  ],
+  "if_refused": "在下一个安全边界应用修改或拒绝；保留全部旧结果和未解故障证据，改选对象层下一判别量，方向生命周期与优先级不变。",
+  "evidence_for": [
+    {"path": "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_B01_CONTACT_ACTIVE_R128_R02_R05_RESULT_EVIDENCE_20260904.md", "quote": "The final arm differences are +0.000467050572 at N=9 and -0.000867790232 at N=15; both absolute values are below the original MEI 0.005. EDGE is slightly above uniform at both final rosters.", "why": "约束已实际反复触发，直接对比却很小；提高共同学习暴露是一个保持信息与工作固定的下一判别量。"}
+  ],
+  "evidence_against": [
+    {"path": "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_B01_CONTACT_ACTIVE_R128_R02_R05_RESULT_INTAKE_20260904.md", "quote": "Surviving alternatives are limited effective learning at 128 low-LR updates, common K0 dominance, generic shrinkage/Adam geometry, one-root variation and roster-dependent effects.", "why": "现有数据不能确定学习暴露就是原因；提高学习率也可能削弱比较器，只能按新卡作探索性读取。"}
+  ],
+  "uncertainty": [
+    "较高名义暴露是否转化为较大实际参数移动，必须由新结果报告。",
+    "宽约束比较器尚未调优；若低于随机参照，新剂量的臂差异不具识别力。",
+    "同一随机根用于剂量对比，不增加独立根证据，也不证明关系特异性。",
+    "原 r04 和 attempt02 原因仍未复现确认；完成的新运行不构成修复证明。"
+  ],
+  "cost": {"compute": "每臂 655,360 个原生时隙，总 1,316,864；同节点本轮总约 15 分钟、每臂直接计时约 160 秒。上限仍是每臂 4 小时、全调用 8 小时，运行前重新检查实际节点内存。", "owner_time": "约一分钟；循环不等待回复。", "reversibility": "reversible", "waits_on_this": "nothing"},
+  "verdict_text": "推荐在同一信息与训练工作下，把双方 Adam 学习率共同提高到 0.003，作为新的 B 类剂量判别；保留旧结果，不推断最优学习率或稳定优势。",
+  "source": "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_B01_CONTACT_ACTIVE_R128_LR003_R06_SCIENCE_CARD_20260904.md"
+}

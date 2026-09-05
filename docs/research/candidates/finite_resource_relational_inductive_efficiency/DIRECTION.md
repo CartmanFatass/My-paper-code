@@ -398,3 +398,30 @@ would require a separately authorized outcome-blind card. The existing A1 local 
 census remains only a read-only boundary, not a frozen successor. See
 `FRRIE_B01_THREE_SEED_AGGREGATE_RESULT_EVIDENCE_20260904.md` and
 `FRRIE_B01_THREE_SEED_AGGREGATE_RESULT_INTAKE_20260904.md`.
+
+## B01 contact-active R128 result — 2026-09-04
+
+The first valid contact-active R128 result is `R02_SMALL_OR_ROSTER_MIXED`, at B/EXPLORE ceiling.
+On one literal root, the tight `[-0.04,0.04]` package changes five coordinates before checkpoint 0
+and contacts in 50 subsequent updates, while the containing `[-1.50,1.50]` comparator does not
+contact. Both arms complete 128 real RSCF/Adam updates with equal information and work.
+
+At update 128, tight minus wide native return is `+0.000467050572` at N=9 and `-0.000867790232`
+at N=15. Both absolute gaps are below the declared 0.005 MEI. Wide minus uniform is only
+`+0.000507024660` and `+0.000484763443`, respectively: it passes this card's minimal competence
+branch without establishing a tuned comparator or a host headroom record.
+
+Strongest support is the complete paired native learner/evaluator trace with actual repeated
+projection contact. Strongest contradiction to a meaningful tight-box advantage at this budget
+is the two sub-MEI, opposite-sign gaps after activation. Nonactivation no longer explains this
+particular result; equivalence, stable superiority and relation specificity remain unestablished.
+Surviving alternatives include limited low-LR learning exposure, common K0 dominance, generic
+shrinkage/Adam geometry, one-root variation and roster dependence. The bounded claim covers
+this root, Linux CPU FP32, INTACT and seen N={9,15}, without held-out or membership-change claims.
+
+The next discriminator is a new B rung with tenfold shared LR at the same 128-update information
+and work budget. This tests dose while retaining the paired tight/wide comparison; it does not
+reinterpret the accepted low-LR result or create a family/lifecycle decision. See
+`FRRIE_B01_CONTACT_ACTIVE_R128_R02_R05_RESULT_EVIDENCE_20260904.md`,
+`FRRIE_B01_CONTACT_ACTIVE_R128_R02_R05_RESULT_INTAKE_20260904.md` and
+`FRRIE_B01_CONTACT_ACTIVE_R128_LR003_R06_SCIENCE_CARD_20260904.md`.
