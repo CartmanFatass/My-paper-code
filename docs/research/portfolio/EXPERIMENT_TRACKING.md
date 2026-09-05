@@ -11,20 +11,21 @@ scientific intake. Terminal rows stay here until the owning DM has the evidence 
 ## Current direct-handoff routes
 
 New accepted work is sent directly to this tracker, then terminal, lost-observation, bound, or
-specified-reminder facts are delivered directly to the responsible current DM. The active recipient
-paths are FSD `/root/dm_amx_fsd_continue`, FRRIE `/root/dm_amx_frrie_continue`, N5
-`/root/dm_amx_n5_continue`, CRTO `/root/dm_amx_crto_continue`, and N3
-`/root/dm_amx_n3_continue`; UCOPE `/root/dm_amx_ucope_continue` joined on the N5 slot release.
-FSD, FRRIE, N5, CRTO, N3, and UCOPE have completed direct-route acknowledgement; UCOPE has no
-accepted process. These paths apply only to new handles and do not revive the historical DM routes
-recorded below.
+specified-reminder facts are delivered directly to the responsible current DM. Current canonical
+recipients are FSD `/root/dm_amx_fsd_continue`, FRRIE `/root/dm_amx_frrie_continue`, N3
+`/root/dm_amx_n3_continue`, CRTO `/root/dm_amx_crto_continue`, CBSC `/root/dm_amx_cbsc_continue`,
+and ACVC `/root/dm_amx_acvc_reentry`; N5, UCOPE, and VNFC remain direct routes with no live handle.
+All listed current routes have ACKed direct delivery. These paths apply only to new handles and do
+not revive historical DM routes recorded below.
 
-Observation snapshot: `2026-09-04T23:39:35Z`, using the configured `hmasd-wsl-node` supervisor.
-Authoritative `agent-task list` contains no live task: every listed task is `finished`, `failed`,
-or the historical stopped environment task, and every `TMUX_ACTIVE` field is `no`. These are
-terminal historical handles, not candidates for restart. The direct FSD tracker/DM ACK roundtrip
-(`tracker-resume-fsd-20260904-01`) completed at recovery: FSD received the tracker adoption
-request and the tracker received and acknowledged FSD's receipt. No new FSD handle was accepted.
+## Current observation snapshot
+
+At `2026-09-05T10:15:xxZ`, the only tracker-owned live process is FSD
+`(wsl_4070, fsd_e3_large_d0_seed2_20260905_01)`: `running`, exit `null`, wrapper PID `1656091`,
+and `tmux_active=true` on the configured `hmasd-wsl-node` supervisor. Its receipt passed at
+`2026-09-05T10:09:55.213783Z`. Terminal/loss/cap wakes FSD DM and CM directly; all other current
+records in this document are terminal or awaiting a separately handed accepted handle. The
+`2026-09-04T23:39:35Z` all-terminal snapshot is historical recovery evidence only.
 
 ## Active accepted work
 
