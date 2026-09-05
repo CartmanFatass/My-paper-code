@@ -334,11 +334,35 @@ The fixed 0/90 heights and nonnegative terrain imply the near-endpoint camera ob
 under changed horizontal motion, while noisy blocked radio is not impossible reception.
 One point neither tests a host remedy nor identifies any RETAIN/COPY/SHADOW effect.
 
-**Next decision/discriminator.** Decide whether to retain the accepted source-selection
-family through a prospectively distinct host qualification or change the family. This is
-being brought to the direction Convergence node; no local family disposition, new host,
-learning or forced trigger follows from A02. Evidence:
+**Decision and next discriminator.** The completed node selected **PRO_FINAL CONTINUE**
+for the existing source-selection family, as recorded in
+`DISH_A02_HOST_CONVERGENCE_PRO_INTAKE_20260905.md`. It authorizes a prospectively distinct,
+bounded host qualification; A02 itself establishes no remedy, learner or source effect.
+Evidence:
 `DISH_GROUND_SOURCE_POINT_A02_RESULT_EVIDENCE_20260905.md`,
 `DISH_GROUND_SOURCE_POINT_A02_SUMMARY_20260905.json`,
 `DISH_GROUND_SOURCE_POINT_A02_COLLECTION_20260905.md`,
 `DISH_GROUND_SOURCE_POINT_A02_INTAKE_20260905.md`.
+
+## Final host-qualification Convergence — 2026-09-05
+
+The complete archived response selects **PRO_FINAL CONTINUE** for the existing
+first-application-valid RETAIN/COPY/SHADOW exploratory family. It identifies a concrete
+host-information obstruction that a bounded native-path comparison can discriminate;
+the rationale is not merely that source value remains untested. B01 FTS-B0 and both A
+observations remain valid, R02 remains closed, and no RECAST or Portfolio change occurs.
+
+The next discriminator first needs one prospectively distinct ground-endpoint access
+definition, then one paired original-coordinate ordinary native trace under a fixed
+causal controller. It must observe real arrivals/common SOURCE, snapshot/readiness,
+legal actions and native service as well as camera/filter inputs. Partial restoration
+and failed proposals remain informative. No ray-point-only qualification, forced margin,
+accepted state, readiness or ownership is allowed; no new learner or source-effect study
+is authorized. The locally selected A03 card now declares a terrain-referenced two-metre
+ground terminal, linear ground-linked clearance, the same retained causal policy and
+one ordinary episode per host at the original coordinate. Its literal comparator and
+all failed/partial stages are retained; no A03 outcome exists at this boundary. See
+`DISH_GROUND_ENDPOINT_PATH_A03_SCIENCE_CARD_20260905.md` and
+`DISH_GROUND_ENDPOINT_PATH_A03_SELECTION_INTAKE_20260905.md`. Decision evidence:
+`DISH_A02_HOST_CONVERGENCE_PRO_INTAKE_20260905.md` and the exact response under
+`external/2026-09-05-dish-a02-host-convergence-01/`.
