@@ -20,15 +20,12 @@ not revive historical DM routes recorded below.
 
 ## Current observation snapshot
 
-At `2026-09-05T13:00:22Z`, the sole tracker-owned accepted live handle is FSD
-`(wsl_4070, fsd_e3_large_d2_seed3_20260905_01)`: `running`, exit `null`, PID `1674545`, tmux
-active, SHA `0f31b04f245aa9d5273b9131835ef1be59955759`, cwd
-`/home/wu/hmasd-worktrees/fsd_e3_large_d2_seed3_20260905_01`, output
-`temp/directions/flexible_skill_duration/exp/E3_20260904/large_d2_seed3`, receipt sibling
-`preflight.json`, and log `/home/wu/.agent-tasks/fsd_e3_large_d2_seed3_20260905_01/task.log`.
-Fresh physical/effective admission `15424135168` bytes passed. Projection is `4.63h`, cap `8h`;
-terminal/failure/loss/cap wakes FSD DM and CM directly. All other rows are historical terminal
-records or prospective work awaiting a separately accepted handle.
+At `2026-09-05T13:44:xxZ`, there are **zero** tracker-owned accepted live handles. Final FSD
+cell `fsd_e3_large_d2_seed3_20260905_01` is historical terminal evidence: it finished exit `0`,
+its DM ACKed direct terminal delivery, and CM collection/conformance then DM cell18 intake are the
+remaining owner steps. Its earlier running PID/tmux and the resolved SSH-unknown episode are
+historical facts only; neither authorizes a poll, restart, replacement, or successor. All other
+rows are historical terminal records or prospective work awaiting a separately accepted handle.
 
 ## Active accepted work
 
@@ -82,6 +79,8 @@ FSD large D2 seed2 terminal: `fsd_e3_large_d2_seed2_20260905_01` finished exit `
 FSD large D0 seed3 adoption: `(wsl_4070, fsd_e3_large_d0_seed3_20260905_01)`, SHA `96ca5fbf815f142008d6622759014a98bd915d6f`, cwd `/home/wu/hmasd-worktrees/fsd_e3_large_d0_seed3_20260905_01`, output `temp/directions/flexible_skill_duration/exp/E3_20260904/large_d0_seed3`, receipt sibling `preflight.json`, and log `/home/wu/.agent-tasks/fsd_e3_large_d0_seed3_20260905_01/task.log`. Same-handle check: `running`, exit `null`, PID `1670783`, tmux active; fresh physical/effective admission `15420182528` bytes passed. Projection `1.68h`, cap `8h`; terminal/failure/loss/cap wakes FSD DM and CM directly, with no restart, repair, successor, or scientific inference.
 
 FSD large D0 seed3 terminal: the same handle finished exit `0`, wrapper PID `1670783`, tmux inactive; supervisor duration `2649s` (observer uptime `2693s`) with a completed 20-rollout/`128000`-transition summary. FSD DM ACKed direct delivery and resumed the original CM for collection/conformance before intake. This historical handle is closed to routine observation; no successor follows from its exit.
+
+FSD large D2 seed3 terminal: `fsd_e3_large_d2_seed3_20260905_01` finished exit `0`, wrapper PID `1674545`, tmux inactive; supervisor duration `2575s` (observer uptime `2629s`) with a completed 20-rollout/`128000`-transition summary. A bounded SSH observation-loss interval was resolved against the same PID/task before terminal. FSD DM ACKed delivery; CM collection/conformance and DM cell18 intake remain the owner steps. This historical handle is closed to tracker observation and creates no successor.
 
 ## Accepted work and terminal handoffs
 
