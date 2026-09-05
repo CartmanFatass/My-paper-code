@@ -27,7 +27,11 @@
         "src/learners/AGENTS.md",
         "src/runners/AGENTS.md"
       ],
-      "worker_artifacts": [],
+      "worker_artifacts": [
+        "worker-reports/epymarl/CORE_EVIDENCE.md",
+        "worker-reports/epymarl/ROOT_RETURN.md",
+        "worker-reports/epymarl/AGENTS_INDEX.json"
+      ],
       "source_focus": [
         "src/runners/parallel_runner.py",
         "src/components/episode_buffer.py",
@@ -70,8 +74,20 @@
       "license_path": "LICENSE",
       "license": "MIT",
       "upstream_agents": [],
-      "local_overlay_paths": [],
-      "worker_artifacts": [],
+      "local_overlay_paths": [
+        "AGENTS.md",
+        "benchmarl/AGENTS.md",
+        "benchmarl/algorithms/AGENTS.md",
+        "benchmarl/benchmark/AGENTS.md",
+        "benchmarl/environments/AGENTS.md",
+        "benchmarl/experiment/AGENTS.md",
+        "benchmarl/models/AGENTS.md"
+      ],
+      "worker_artifacts": [
+        "worker-reports/BenchMARL/CORE_EVIDENCE.md",
+        "worker-reports/BenchMARL/ROOT_RETURN.md",
+        "worker-reports/BenchMARL/AGENTS_INDEX.json"
+      ],
       "source_focus": [
         "benchmarl/run.py",
         "benchmarl/experiment/experiment.py",
