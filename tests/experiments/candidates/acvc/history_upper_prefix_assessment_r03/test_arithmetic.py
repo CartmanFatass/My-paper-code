@@ -45,9 +45,22 @@ def test_prior_horizon_and_context_factors():
 
 
 def test_synthetic_normalization_and_static_envelope():
-    atoms, contexts, *_ = synthetic_inputs(contexts=1)
-    assert all(sum(row) == 1 for row in atoms)
-    assert all(sum(row) == 1 for row in contexts)
+    atoms, contexts, scores, multipliers, budgets = synthetic_inputs()
+    assert len(atoms) == len(contexts) == len(scores) == 2
+    assert all(len(row) == 24 for row in atoms)
+    assert all(len(row) == 12 for row in contexts)
+    assert all(len(row) == 12 and all(len(cell) == 3 for cell in row) for row in scores)
+    assert len(multipliers) == len(budgets) == 2
+    assert all(sum(row) == 1 and all(x > 0 for x in row) for row in atoms + contexts)
+    assert all(x > 0 for x in multipliers + budgets)
+    assert all(contexts[r][c] == atoms[r][2*c] + atoms[r][2*c+1]
+               for r in range(2) for c in range(12))
+    exact_width = [x for row in atoms for x in row] + [x for row in scores for cell in row for x in cell]
+    exact_width += list(multipliers + budgets)
+    all_inputs = exact_width + [x for row in contexts for x in row] + [F(1, 2), F(1, 2)]
+    assert all(abs(x.numerator).bit_length() <= 512 and x.denominator.bit_length() <= 512
+               for x in all_inputs)
+    assert all(x.denominator.bit_length() == 512 for x in exact_width)
     assert rational("a") == rational("a") != rational("b")
     assert structural_counts() == {"histories": 14425, "action_scores": 519300,
                                    "terms_per_score": 2, "tail_scores": 72,

@@ -3,21 +3,30 @@ from fractions import Fraction as F
 from hashlib import sha512
 
 
+DENOMINATOR = 2**511
+
+
+def integer(label):
+    return int.from_bytes(sha512(f"synthetic-prefix-common512/{label}".encode("utf-8")).digest(), "big")
+
+
 def rational(label):
-    """Independent deterministic 512-bit numerator/denominator before reduction."""
-    numbers = [int.from_bytes(sha512(f"synthetic-prefix/{label}/{part}".encode()).digest(), "big")
-               | (1 << 511) | 1 for part in ("numerator", "denominator")]
-    return F(*numbers)
+    """Positive dyadic fraction with a canonical 512-bit denominator."""
+    return F(2 * (integer(label) % (DENOMINATOR // 2)) + 1, DENOMINATOR)
 
 
 def synthetic_inputs(contexts=12, actions=3, check=lambda: None):
     # Two atoms per context, normalized within each regime. No scientific table.
     atoms = []
     check()
+    k = 2 * contexts
+    b = 2 * (DENOMINATOR // (2 * k)) + 1
+    radius = b // (8 * k)
     for regime in range(2):
-        weights = [rational(f"atom/{regime}/{atom}") for atom in range(2 * contexts)]
-        normalizer = sum(weights, F(0))
-        atoms.append(tuple(weight / normalizer for weight in weights))
+        numerators = [b + 2 * (integer(f"atom/{regime}/{j}") % (2 * radius + 1) - radius)
+                      for j in range(k - 1)]
+        numerators.append(DENOMINATOR - sum(numerators))
+        atoms.append(tuple(F(numerator, DENOMINATOR) for numerator in numerators))
         check()
     contexts_given_regime = tuple(tuple(row[2*c] + row[2*c+1] for c in range(contexts))
                                   for row in atoms)
@@ -27,9 +36,8 @@ def synthetic_inputs(contexts=12, actions=3, check=lambda: None):
     for r in range(2):
         row = []
         for c in range(contexts):
-            row.append(tuple(rational(f"reward/{r}/{c}/{a}")
-                       - sum((multipliers[i] * rational(f"penalty/{i}/{r}/{c}/{a}")
-                              for i in range(2)), F(0)) for a in range(actions)))
+            row.append(tuple((1 if integer(f"score/{r}/{c}/{a}/sign") % 2 == 0 else -1)
+                             * rational(f"score/{r}/{c}/{a}") for a in range(actions)))
             check()
         scores.append(tuple(row))
     return tuple(atoms), contexts_given_regime, tuple(scores), multipliers, budgets
