@@ -79,6 +79,14 @@
       "record": "docs/research/portfolio/decisions/2026-09-05-pro-directed-spec-delegation.md",
       "state": "applied",
       "summary": "本轮直接授权已写入AGENTS §4.7及Portfolio/owner技能；后续同类规范及Pro方案明确附带的Portfolio更新按正确节点完整裁决执行，无再次逐项批准。每次仍须原文、文件及实际状态高亮追溯。"
+    },
+    {
+      "at": "2026-09-05T19:25:46+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/decisions/2026-09-05-pro-natural-language-presentation.md",
+      "record": "docs/research/portfolio/decisions/2026-09-05-pro-natural-language-presentation.md",
+      "state": "applied",
+      "summary": "按本轮明确指令，d7dd21845 已推main：Pro正文/回复采用自然语言，去除请求ID与envelope回显；内部配对归档保留，93项测试通过。六个Luna/max正并行查证MARL源码并生成各级AGENTS，Root负责规范起草。"
     }
   ]
 }

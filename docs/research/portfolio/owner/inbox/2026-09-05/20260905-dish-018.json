@@ -24,7 +24,7 @@
     }
   ],
   "recommended": "accept",
-  "auto_applied": null,
+  "auto_applied": "accept",
   "dm_reason": "先复现概率语义与计算图连接，可把接口问题与尚未测量的控制器能力分开。",
   "evidence": [
     "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_PREDICTION_HEAD_CONTRACT_A05_SCIENCE_CARD_20260905.md",
@@ -76,5 +76,16 @@
     },
     "verdict_text": "建议接受 A05：先用真实函数完成合成接口复现，保持旧生产代码、参数和环境不变，再根据记录选择是否需要单独修复或新的科学判别。",
     "source": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_PREDICTION_HEAD_CONTRACT_A05_SCIENCE_CARD_20260905.md"
-  }
+  },
+  "execution_history": [
+    {
+      "at": "2026-09-05T19:31:41+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/decisions/2026-09-05-pro-directed-spec-delegation.md",
+      "record": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_A05_APPROVED_INTAKE_20260905.md",
+      "state": "applied",
+      "summary": "原完整A05已执行并接受，main91170747e已推送。4项测试通过，正式进程2.40秒、runner2.233秒；全部原读数保留，零参数位移/learner/环境曝光。仅支持合成接口事实，本项止于intake，无生产修复或后继。"
+    }
+  ],
+  "starred": true
 }
