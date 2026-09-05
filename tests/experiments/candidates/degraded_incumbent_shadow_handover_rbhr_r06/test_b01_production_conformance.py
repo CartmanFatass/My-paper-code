@@ -112,7 +112,19 @@ def test_live_fragment_replay_has_one_exact_fp32_behavior_law() -> None:
     assert torch.equal(normalized_actor, policy.state.actor_welford.normalized(actor_raw))
     assert post_promotion is not None and not torch.equal(post_promotion, live_states[20])
     motion, prepare, commit = _role_policy_heads(replay_heads, owner)
-    expected_action = 3.0 * torch.tanh(motion)
+    # Match the live head GEMM shape; batching ticks can round FP32 motion differently.
+    step_motion = torch.stack([
+        _role_policy_heads(
+            model.heads(replay_states[:, tick].contiguous()), owner[:, tick],
+        )[0]
+        for tick in range(64)
+    ], dim=1)
+    # One dtype epsilon at unit scale bounds this sentinel's batched head rounding.
+    motion_bound = torch.finfo(torch.float32).eps * torch.maximum(
+        torch.ones_like(step_motion), step_motion.abs(),
+    )
+    assert torch.all((motion - step_motion).abs() <= motion_bound)
+    expected_action = 3.0 * torch.tanh(step_motion)
     for lane in range(2):
         for tick in range(64):
             if not renew[lane, tick]:
