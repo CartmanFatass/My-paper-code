@@ -20,18 +20,14 @@ not revive historical DM routes recorded below.
 
 ## Current observation snapshot
 
-At `2026-09-05T12:05:51Z`, the sole live tracker-owned process is FSD
-`(wsl_4070, fsd_e3_large_d0_seed3_20260905_01)`: `running`, exit `null`, PID `1670783`,
-`tmux_active=true`, SHA `96ca5fbf815f142008d6622759014a98bd915d6f`, cwd
-`/home/wu/hmasd-worktrees/fsd_e3_large_d0_seed3_20260905_01`, output
-`temp/directions/flexible_skill_duration/exp/E3_20260904/large_d0_seed3`, receipt sibling
-`preflight.json`, and log `/home/wu/.agent-tasks/fsd_e3_large_d0_seed3_20260905_01/task.log`.
-Fresh physical/effective admission was `15420182528` bytes; terminal/failure/loss/cap wakes FSD
-DM and CM directly. FRRIE R08
-`frrie_b01_contact_r08_58710424` is terminal/ACKed and awaits CM same-evidence collection; its
-fixed pdb context means exit `0` never established learner success. Every other current record is
-terminal or awaiting a separately handed accepted handle. The `2026-09-04T23:39:35Z`
-all-terminal snapshot is historical recovery evidence only.
+At `2026-09-05T12:50:xxZ`, there are **zero** tracker-owned accepted live handles. FSD
+`fsd_e3_large_d0_seed3_20260905_01` is historical terminal evidence: it finished exit `0`, its
+DM ACKed the direct terminal delivery, and CM collection/conformance then DM scientific intake are
+the remaining owner steps. Its earlier `running` PID/tmux observation is historical only and is
+not a recovery instruction to poll, restart, or replace the task. The next FSD handle has not yet
+been accepted or handed to this tracker. FRRIE R08 and N3 A04 are fully handed off/intaken;
+all other rows below are historical terminal records or prospective work awaiting a separately
+accepted handle. The `2026-09-04T23:39:35Z` all-terminal snapshot is historical recovery evidence.
 
 ## Active accepted work
 
