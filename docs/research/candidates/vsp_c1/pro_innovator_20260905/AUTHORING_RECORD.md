@@ -1,6 +1,7 @@
 # VSP-C1 K4 Innovator packet preparation
 
-Date: 2026-09-05. State: ready for Root's one singleton dispatch; not dispatched.
+Date: 2026-09-05. Original preparation state: ready for Root; the resumed dispatch section below
+supersedes that waiting boundary. Actual acceptance is recorded separately after the tool returns.
 
 Root assigned this bounded prospective K4/VSP-C1 design task while refilling the five advancing
 direction chains. Root subsequently relayed the owner's exploration-scale clarification before
@@ -55,3 +56,37 @@ class-correct next action. An access gap is not a scientific decision; the prese
 and contrary evidence remain unchanged. Do not re-dispatch an accepted request.
 
 Scope additions: none.
+
+## Resumed direct dispatch under operative §11.8
+
+Root instructed this DM to continue unattended and perform the actual singleton dispatch, instead
+of returning another ready-only handoff. Before editing the unsent packet, the project registry
+contained neither this request nor `em:vsp_c1:innovator`, no request-specific file existed in the
+Transport archive, and the configured singleton was observed idle on the local HMASD project.
+No accepted send is being revised or repeated.
+
+Main `df3baf8171d189c0d73cb062cd70ad3196bbd823` contains the complete audited §11.8 calibration
+and the Transport parent-receipt model fix, but did not contain the earlier VSP-C1 proposal files.
+To preserve all existing work, the prior branch remains intact; the same worktree now uses
+`codex/dm-k4-vspc1-resume-20260905` from that main commit. The three earlier document commits were
+carried over and pushed as `ca65b9d92`, `b3d27e495`, and `d2a372965`.
+
+The minimum proposed direct B now requires only its real learner comparison and complete primary
+evaluation. The forced-action table and exact 40-mission reference are optional, with no prelaunch
+audit or invented speedup. Revised prospective totals are 25,008 joint steps per arm and 50,016
+for the seed-0 pair. Actual new scientific exposure remains zero. The necessary update is pushed
+as `f87ceedc42dde8f49d178b79f3a5e860948f4bc9`, which is the new exact evidence pin.
+
+The regenerated request has 26 valid fixed-pin references and explicitly applies §11.8 over
+conflicting historical defaults. One credible signal may support one or two independent training
+seeds; adverse and failed outcomes remain visible. Neither a positive signal nor full mechanism
+attribution is a universal follow-up gate. Old D6 remains stopped and no successor is selected
+before intake of the complete Pro response.
+
+Final provider body SHA-256:
+`9e14fde70cfd15fff130afddf2843697dc3af7e48d507e7595992ac508f19aad`.
+The input retains the actual source task and Root receipt destination, the VSP-C1 Innovator node,
+and the same reusable singleton. Dispatch into Transport uses Luna/xhigh. All Transport receipts
+to Root omit both model and thinking, preserving Root's own settings; those dispatch settings
+must never be copied onto a parent receipt. This is an internal transport instruction, not
+provider-visible science.
