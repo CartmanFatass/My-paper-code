@@ -155,3 +155,19 @@ reversible, owner flag none; no new result or lifecycle/priority action. Portfol
 step can read: post-A05 final answer selects a one-seed paired native package B on the A03
 host, sixteen updates/four episodes per arm, under the full 1,800-second arm ceilings;
 implementation is next, source and native performance not yet accepted.
+
+## Actual engineering continuation
+
+By 2026-09-05 23:48 UTC, card/archive commit `322faf27ece280e3db0524b7bfc844909e4a2baa`
+was pushed on `codex/dm-n3-b02-intake-20260905`, and the existing CM
+`/root/dm_amx_n3_approved/cm_am_n3_a05_approved` received a native continuation task for
+implementation, independent review and the selected bounded remote pair. Its assignment
+requires a fresh isolated worktree from that current-spec card commit, preserves unrelated
+sources and names this DM as the return/intake recipient. It can reuse its existing semantic
+implementer and reviewer. Root received the integration commit and shared-record material.
+
+This is an actual engineering handoff, not an experiment launch or source acceptance.
+No live experiment handle exists at this boundary. The CM will publish exact accepted
+commits, invocation scope and any process handle; the shared tracker receives a handle only
+after acceptance. The owner review CLI returned no unapplied instruction; the direction scan
+of today's/yesterday's surfaces found no new override. Worktree is otherwise clean.
