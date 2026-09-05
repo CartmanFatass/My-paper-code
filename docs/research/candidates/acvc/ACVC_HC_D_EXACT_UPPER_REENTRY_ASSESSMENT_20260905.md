@@ -4,6 +4,11 @@ Recorded: 2026-09-05T09:23:00Z. Evidence class: A/RECON engineering assessment.
 This document selects a finite implementation and cost assessment; it is not a frozen scientific
 result card and does not authorize an ACVC value calculation or a learner.
 
+Final boundary, 2026-09-05: the one full synthetic cost reached its time cap with reproduced
+12,221-12,252-bit normalized denominators. The prescribed normalized 512-bit input cost remains
+unmeasured. See `ACVC_HC_D_EXACT_UPPER_REENTRY_INTAKE_20260905.md`; no actual ACVC calculation
+or second full cost was launched in this assignment.
+
 ## Authority and reviewed evidence
 
 The owner's September 5 reply to `20260904-acvc-009` chose `continue-low-priority`.
