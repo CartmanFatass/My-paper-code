@@ -142,6 +142,7 @@ def _training_curve_row(receipt: Any) -> dict[str, Any]:
 
 def execute(
     *, output_root: Path, admission_receipt: Path, test_only: bool = False,
+    adam_lr: float = 0.0003, object_id: str = OBJECT_ID, branch_prefix: str = "R02",
 ) -> dict[str, Any]:
     if not output_root.is_absolute() or not admission_receipt.is_absolute():
         raise B01ContractError("output and admission paths must be absolute")
@@ -191,7 +192,7 @@ def execute(
     torch.set_num_threads(1)
     torch_threads = torch.get_num_threads()
     initializer = initialize_test_contact_pair if test_only else initialize_contact_pair
-    models, optimizers, initial_audit, raw_initial = initializer()
+    models, optimizers, initial_audit, raw_initial = initializer(adam_lr=adam_lr)
     if not test_only and initial_audit["tight_changed_coordinates"] != 5:
         raise B01ContractError("initial tight clip did not change exactly five coordinates")
     if initial_audit["tight_changed_coordinates"] <= 0:
@@ -376,7 +377,13 @@ def execute(
             "observed": observed,
         }
 
+    final_group_lr = {
+        PUBLIC_ARM[arm]: [group["lr"] for group in optimizers[arm].param_groups]
+        for arm in LEARNED_ARMS
+    }
     rule_inputs = {
+        "initial_optimizer_group_lr": initial_audit["initial_optimizer_group_lr"],
+        "final_optimizer_group_lr": final_group_lr,
         "complete": complete,
         "admission_valid": True,
         "exposure_present": True,
@@ -405,10 +412,10 @@ def execute(
     wall = time.perf_counter() - started
     peak = _peak_rss_bytes()
     summary = {
-        "object_id": OBJECT_ID,
+        "object_id": object_id,
         "evidence_class": "B/EXPLORE",
         "test_only": test_only,
-        "branch": classify_r02(rule_inputs, test_only=test_only),
+        "branch": classify_r02(rule_inputs, test_only=test_only, branch_prefix=branch_prefix),
         "seed": SEED,
         "seed_label": seed_label,
         "seed_root_hex": root_hex,
@@ -418,7 +425,10 @@ def execute(
             "validated": True,
             "facts": admission,
         },
-        "exposure": exposure_record(updates, initial_audit["tight_changed_coordinates"]),
+        "exposure": exposure_record(
+            updates, initial_audit["tight_changed_coordinates"],
+            adam_lr=initial_audit["initial_optimizer_group_lr"]["PHY_TRUST_004"][0],
+        ),
         "deterministic_rule_inputs": rule_inputs,
         "runtime_configuration": {
             "device": "CPU",
@@ -498,7 +508,10 @@ def parser() -> argparse.ArgumentParser:
     return value
 
 
-def main(argv: Sequence[str] | None = None) -> int:
+def main(
+    argv: Sequence[str] | None = None, *, adam_lr: float = 0.0003,
+    object_id: str = OBJECT_ID, branch_prefix: str = "R02",
+) -> int:
     args = parser().parse_args(argv)
     if args.seed != SEED:
         raise B01ContractError("R02 seed is fixed to literal seed 1")
@@ -506,5 +519,6 @@ def main(argv: Sequence[str] | None = None) -> int:
         output_root=args.output_root,
         admission_receipt=args.admission_receipt,
         test_only=args.test_only,
+        adam_lr=adam_lr, object_id=object_id, branch_prefix=branch_prefix,
     )
     return 0
