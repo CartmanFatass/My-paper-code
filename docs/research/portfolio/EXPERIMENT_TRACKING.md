@@ -72,6 +72,8 @@ Current terminal handoffs: N3 focused verification `dish_prefix_a01_verify_bfe49
 
 Latest terminal/recovery record: ACVC synthetic cost `acvc_upper_prefix_cost_782f6965_01` ended `cost_cap_reached` (exit `2`, 40.23s, peak RSS `18841600`) and was acknowledged for CM assessment only; no ACVC scientific branch was inferred. FRRIE R06 ended under the same pdb warning context and was collected/intaken as a distinct completed object. N3 A02 synthetic verification and its one prepared-point seed11 handle both completed and were acknowledged; no N3 successor is adopted. CRTO B06 seed1 and seed2 completed (97s and 92s) and DM intake is complete. FSD large D2 seed1 completed and was accepted as valid cell 14; its historical handle is closed. Current FSD seed2 facts and direct terminal/loss/bound routing remain as recorded above; no historical FSD task is revived.
 
+Subsequent terminal handoffs: CRTO B07 seed1 `crto_raw_centered_b07_s1_5a4b5c20_01` and seed2 `crto_raw_centered_b07_s2_5a4b5c20_01` each finished exit `0`; authoritative supervisor durations are `124s` and `126s` (not observer age), both were delivered once and CM collection is complete. ACVC repaired synthetic attempt `acvc_upper_prefix_cost_b18a098d_02` finished exit `0`, supervisor wall `29.25962231500307s`, peak RSS `17858560`, fresh admission passed; DM ACKed terminal delivery for CM collection. These are tracker observations only: no scientific classification, retry, or new handle is implied.
+
 ## Accepted work and terminal handoffs
 
 | DM / run record | Node and accepted handle | Launch SHA | Remote cwd | Output / receipt | Latest authoritative observation | Next owner step / notification |
