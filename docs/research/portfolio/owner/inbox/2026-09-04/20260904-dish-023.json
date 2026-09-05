@@ -1,0 +1,37 @@
+{
+  "id": "20260904-dish-023",
+  "created": "2026-09-04T18:45:23-07:00",
+  "direction": "degraded_incumbent_shadow_handover",
+  "tier": "object",
+  "kind": "decision",
+  "title": "DISH A01 依赖组装：合并已接受源码与科学文档",
+  "context": "新A01工作树基于DM的文档分支，缺少此前已接受并运行的B01源码。合并已有CM分支，保留原实现字节与最新卡片，不重写生产逻辑。",
+  "options": [
+    {
+      "key": "a",
+      "label": "合并已接受的CM分支",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "逐文件临时恢复",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "等待其他主线集成",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "两条已接受分支的依赖组装即可满足卡片；不需要新增科学或生产变更。",
+  "evidence": [
+    "docs/research/candidates/degraded_incumbent_shadow_handover/N3_DISH_B01_C04_COMPLETE_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#n3-dish-b01-complete-intake",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

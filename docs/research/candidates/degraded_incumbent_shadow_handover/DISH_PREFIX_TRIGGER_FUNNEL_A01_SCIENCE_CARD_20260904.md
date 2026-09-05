@@ -92,8 +92,26 @@ Use existing public observations or read-only copies of existing typed prepared/
 snapshots. Counts and compact first-occurrence snapshots suffice; no full-tick trace archive,
 new native ABI, generic observer framework or changed production source is requested.
 
+**Prospective boundary convention (DM refinement before implementation).** The prepared
+boundary is primitive tick `t` after arrivals; completion advances native tick to `t+1`,
+but emissions and first-occurrence labels are attributed to action/origin tick `t`.
+Publish separate live prepared and live completion latch counts. Latch presence for the
+row rule means observed at **either** boundary, so a latch created on the last live
+completion before terminal is not erased. Version-ready values are read before intent
+emission at action tick `t`; coincidence with the commit gate uses that relation and
+the completion latch, since native can latch before emitting an intent on the same tick.
+This is a measurement convention, not a rewritten native gate. Snapshot delivery counts
+actual delivery events. A live completion has a nonterminal prepared input, even if its
+result first becomes terminal. Terminal-prepared ticks remain in the original policy/
+native padding loop but not live/proposal denominators. Read cumulative invalid-commit
+deltas from copied native state, because terminal outputs may be zero-filled. Report
+inspected prepared boundaries separately from completed ticks if an unexpected valid
+boundary ends a row before completion. The maximum sixteen-by-1,200 inspection budget
+and original no-trigger reference are unchanged.
+
 For each no-trigger row label the first absent observed stage in this order:
-`NO_LIVE_RENEWAL`, `NO_PREPARE_PROPOSAL`, `PREPARATION_SUPPORT_GAP` (latch, then snapshot
+`NO_LIVE_RENEWAL`, `NO_PREPARE_PROPOSAL`, `PREPARATION_SUPPORT_GAP` (latch at either live
+boundary, then snapshot
 delivery, then version-ready, with the missing stage named), `NO_COMMIT_PROPOSAL`,
 `NO_EMITTED_INTENT`, else `PENDING_INTENT_NOT_APPLICATION_VALID`. Publish the underlying
 counts as well: a first-absent label is not a claim that later gates would pass.
