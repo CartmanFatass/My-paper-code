@@ -1,0 +1,32 @@
+{
+  "id": "20260904-crto-030",
+  "created": "2026-09-04T18:20:10-07:00",
+  "direction": "commitment_residual_triggered_options",
+  "tier": "object",
+  "kind": "decision",
+  "title": "CRTO B04：选择完整周期残差比较",
+  "context": "B03原顺序RAW在252/255/258均胜任，配对顺序不胜任；B01原32/256比较器弱保持原义。现在以明确暴露的同种子面板比较三种表示的33/258终点。",
+  "options": [
+    {
+      "key": "a",
+      "label": "同种子三臂在33/258比较",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "先测另一RAW初始化",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "已重现本种子长终点胜任，先回答已打开的残差比较，再考虑扩大种子。",
+  "evidence": [
+    "docs/research/candidates/commitment_residual_triggered_options/CRTO_RESIDUAL_CYCLE_ENDPOINTS_B04_SELECTION_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#crto-b04-complete-cycle-residual",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": null
+}
