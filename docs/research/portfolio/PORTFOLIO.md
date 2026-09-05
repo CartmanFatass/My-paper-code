@@ -1,6 +1,6 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-05T14:09:30Z
+Updated at: 2026-09-05T14:45:48Z
 Owner: Root
 Owner review maintenance: P1/P2 only (`OWNER_DIRECT`, 2026-09-05); P3/P4 creation, backfill and reminders retired. Preserve scientific evidence, audit and existing owner replies; see `decisions/2026-09-05-owner-review-p2-cutoff.md`.
 Lifecycle admission: 15 ACTIVE source IDs: the existing nine route agendas plus ACVC restored to the queue by the September5 owner review;7 PARKED reserves. Source IDs within a route do not create independent DM chains.
@@ -44,14 +44,14 @@ provenance, but result polarity never transfers into an accepting direction.
 | --- | --- | --- | --- | --- | --- |
 | active_post_churn_population_flow_identification | PARKED | LOW | ROOT | 2026-09-01T09:55:33Z | Current CCF collapses to a two-event XOR/DFA, but a scientifically independent non-reducible censored-flow question remains. Reactivate only after prospective acceptance of a non-XOR/non-DFA construction that matches low-order marginals yet requires opposite native actions or returns against a competent low-order controller. |
 | acvc | ACTIVE | MEDIUM | ROOT | 2026-09-05T11:35:03Z | ACTIVE/MEDIUM unchanged; recasts2/lowest sequencing retained. Actual R03 valid HC-C: exact compatible gain interval[0.0221975111,0.2139371014], upper below original1/4. Execute existing Pro finite-host learner-investment closure; no further calculation/learner selected. No whole-direction or general-history negative. Re-entry needs independently motivated host and proper direction authority. See ACVC_HISTORY_UPPER_PREFIX_R03_INTAKE_20260905.md. |
-| capability_bound_semantic_currentness | ACTIVE | HIGH | ROOT | 2026-09-05T10:21:03Z | Route N4. Existing publisher cut remains unaccepted:64/94=68.09% orchestration, downstream dependencies unresolved,37 protected files unchanged. Zero tests/experiments, no r08. Bounded slice returned; queued pending concrete conforming implementation, no scientific negative. See CBSC_OMRC_B01_EXISTING_PATH_RETURN_INTAKE_20260905.md. |
+| capability_bound_semantic_currentness | ACTIVE | HIGH | ROOT | 2026-09-05T14:45:48Z | Route N4. Complete policy-B candidate unaccepted A165/D426/O536 (90.69%), exceeding100 additions by65. Static missingness flag loss in mechanical resource projection plus unresolved absolute replay-receipt portability; no tests/remote/r08. Accepted source unchanged. Report-only CM result integrated; final DM intake pending. See CBSC_OMRC_B01_POLICY_B_REPAIR_CM_RESULT_20260905.md. |
 | commitment_residual_triggered_options | ACTIVE | MEDIUM | ROOT | 2026-09-05T11:28:54Z | Route K2. B07 valid COMPARATOR-LIMITED: REPLAN5/8 both, gains0.000001614431/0 inside diagnostic MEI. Fresh6Pro PRO_FINAL PARK_CURRENT_SELECTED_PANEL_BALANCED_RESIDUAL_FAMILY; retain B04 competent seed0 negative and later comparator limits/action sensitivity. No B08, recast or whole-direction lifecycle change. Re-entry needs a concrete native-value discriminator, not prior success. Exact archive and final intake integrated; see CRTO_BALANCED_FAMILY_CONVERGENCE_INTAKE_20260905.md. |
-| degraded_incumbent_shadow_handover | ACTIVE | MEDIUM | ROOT | 2026-09-05T13:21:39Z | Route N3. A04 valid reconstructed rejection. A05 final unaccepted190-source-line draft65/190=34.21%; sole layout consolidation exhausted, no verification/result/handle. Full card retained, clean engineering return, no scientific negative or family change. Whole new implementation exceeds proposed100-added-line exception; no automatic waiver. See DISH_PREDICTION_HEAD_CONTRACT_A05_SCOPE_INTAKE_20260905.md. |
+| degraded_incumbent_shadow_handover | ACTIVE | MEDIUM | ROOT | 2026-09-05T13:21:39Z | Route N3. A04 valid reconstructed rejection. A05 final unaccepted190-source-line draft65/190=34.21%; sole layout consolidation exhausted, no verification/result/handle. Full card retained, clean engineering return, no scientific negative or family change. Whole new implementation exceeds ratified100-added-line exception; no automatic waiver. See DISH_PREDICTION_HEAD_CONTRACT_A05_SCOPE_INTAKE_20260905.md. |
 | ec4g_r1 | PARKED | LOW | ROOT | 2026-09-04T21:36:45Z | OWNER_DIRECT reserve; no independent research chain. Re-entry and preserved contrary evidence: `decisions/2026-09-04-adopt-nine-routes-and-resume.md`. Previous boundary: Repair B1 activity aggregation and continue adaptive dynamic receipt-content learning against Direct-tau, RAW, shuffled, and blinded controls. Prior B diagnostics remain adverse evidence, not terminal polarity. |
 | eociv_lite | PARKED | MEDIUM | ROOT | 2026-09-04T21:36:45Z | OWNER_DIRECT reserve; no independent research chain. Re-entry and preserved contrary evidence: `decisions/2026-09-04-adopt-nine-routes-and-resume.md`. Previous boundary: The Convergence-admitted B10 fixed-score exposure curve is valid `B10_FIXED_SCORE_EXPOSURE_RESCUE_NOT_SUPPORTED`: relative `J` rises with exposure while absolute receiver performance becomes more negative. The receiver-addressed family is direction-locally parked pending genuinely new evidence; Portfolio lifecycle remains `ACTIVE`, and A1 headroom is not identified because the matched upper/tuned-generic pair is absent. |
 | expressibility_gated_renewal_credit_relay | PARKED | MEDIUM | ROOT | 2026-09-04T12:10:53Z | Convergence returned `PRO_FINAL=PARK_CURRENT_FACTORIZATION`: the generic critic wins every direct estimation diagnostic, while the factorized arm's 0.0120448 exact-utility edge is scale/calibration ambiguity rather than identified value. Unchanged replication, direction-local scale-controlled B02, and telemetry rerun are rejected. Re-entry requires a separately authorized prospective scale-invariant native advantage under common calibration/trust and a competent same-information comparator. |
-| finite_resource_relational_inductive_efficiency | ACTIVE | HIGH | ROOT | 2026-09-05T12:29:09Z | Route N1. R08 valid B/EXPLORE R08_INTERACTION_WITHIN_MEI: N15 attenuation0.000010174094 below0.005, no delivery change; conditional prediction matched. Selected root1 repeat is not independent support; R07 contradictory path preserved. Third-root minimal layout lower bound24/34=70.59% orchestration; no R09 card/source/run. Returned engineering boundary, not scientific negative or family disposition. See FRRIE_R08_RESULT_INTAKE_20260905.md and FRRIE_R09_THIRD_ROOT_IMPLEMENTATION_BOUNDARY_20260905.md. |
-| flexible_skill_duration | ACTIVE | HIGH | ROOT | 2026-09-05T14:09:30Z | Route K1. E3 18/18 valid,0 running,0 unstarted; final D2seed3 return0.46133524576822926, runner2458.311039228007s. DM complete-matrix reading reports E3-H0-NO-ADVANTAGE: all3 large comparators competent, paired gains negative. Full result write-up/Convergence in progress; no successor launch. See FSD_E3_LARGE_D2_SEED3_INTAKE_20260905.md and current run-state. |
+| finite_resource_relational_inductive_efficiency | ACTIVE | HIGH | ROOT | 2026-09-05T14:45:48Z | Route N1. R09 third-root source accepted under ratified reuse exception A28/D15/O43; one focused test passed11.34s. Sole formal task at43eec21e exited139 after16s with no scientific publication. Cause unreproduced; same-byte diagnostic is next, no blind retry/R10 or scientific polarity. R08 within-MEI and R07 contrary path retained. See FRRIE_R09_CM_RECORD_20260905.md and FRRIE_R09_RESULT_20260905.md. |
+| flexible_skill_duration | ACTIVE | HIGH | ROOT | 2026-09-05T14:45:48Z | Route K1. E3 18/18 valid,0 running; full original H0-NO-ADVANTAGE. All3 large D0 competent; G=-.071387329/-.108895874/-.086455282. Close only c=.25 on declared large row/budget; competent small seed2 positive and unequal update exposure retained. Full intake integrated. Convergence request2026-09-05-fsd-e3-complete-convergence-01 dispatched once, provider decision pending; no E4. See FSD_E3_HETEROGENEOUS_HAZARD_INTAKE_20260905.md. |
 | metric_ground_transport_allocation | ACTIVE | MEDIUM | ROOT | 2026-09-05T01:24:10Z | Route N5. B03 valid SELECTED_INSIDE_MEI (+0.000655478 vs0.01). Fresh verified6Pro request02 archived with one Send. PRO_FINAL=PARK_CURRENT_ALLOCATION_COORDINATE_FAMILY, no successor or recast selected; DM intake and exact archive integrated; see MGTAP_B03_CONVERGENCE_INTAKE_20260904.md. Family boundary only; Portfolio lifecycle ACTIVE/MEDIUM unchanged. B02/B03 and historical C meanings preserved. |
 | orbit_shadow_read | PARKED | LOW | ROOT | 2026-09-01T09:55:33Z | Kernel actionability exists, but no return population, learner, or evaluator is defined. Reactivate when an owner-by-role host changes the competent optimal action under matched owner-role/owner-blind/validity-only comparisons. |
 | recct_lite | PARKED | MEDIUM | ROOT | 2026-09-04T21:36:45Z | OWNER_DIRECT reserve; no independent research chain. Re-entry and preserved contrary evidence: `decisions/2026-09-04-adopt-nine-routes-and-resume.md`. Previous boundary: B/EXPLORE consequence-distinct LR/RL/no-update target intervention with proximal measurement and downstream return. The one-port equal-intervention result closes only that host. |
@@ -73,12 +73,12 @@ two exploratory agendas (N3/N5), and one prospective agenda (K4) remain. The nin
 
 | 路线 | 分类 | 机制族 | 研究问题 / 来源 | 当前入口 |
 | --- | --- | --- | --- | --- |
-| N1 | 灵活 agent 数量 | 集合与关系表示 | 关系归纳与学习效率：`finite_resource_relational_inductive_efficiency` | R08有效且交互低于MEI；第三根最小实现仍超编排预算，无R09 |
+| N1 | 灵活 agent 数量 | 集合与关系表示 | 关系归纳与学习效率：`finite_resource_relational_inductive_efficiency` | R09源码合规、定向测试通过；正式调用16秒段错误，原因待复现，无有效结果 |
 | N2 | 灵活 agent 数量 | 成员变化后的恢复 | 恢复动作：`variable_n_fleet_churn` | 校准成本超限保留；ACTIVE排队，未启动完整枚举 |
 | N3 | 灵活 agent 数量 | 成员变化后的恢复 | 状态保留、重建与迁移：`roster_consistent_latent_exploration`, `vap_folr_core`, `degraded_incumbent_shadow_handover`, `vsp_02` | Convergence已CONTINUE；A04有效；A05唯一精简后仍超预算，未运行，工程返回 |
-| N4 | 灵活 agent 数量 | 成员变化后的恢复 | 旧信息有效性：`capability_bound_semantic_currentness` | 原位发布路径删减仍超编排预算；该段返回，无r08 |
+| N4 | 灵活 agent 数量 | 成员变化后的恢复 | 旧信息有效性：`capability_bound_semantic_currentness` | 完整修复新增165行超例外上限，仍有资源标记及发布依赖；未接受、无r08 |
 | N5 | 灵活 agent 数量 | 资源配置与几何 | 配置结构与 FREE：`metric_ground_transport_allocation` | 全新6 Pro裁决暂存当前配置坐标家族，无后继实验；正式 intake 已整合，方向生命周期未变 |
-| K1 | 灵活 skill duration | 中断与续约 | 中断时机：`flexible_skill_duration`, `vsp_03` | E3为18/18有效、0运行；DM完整读数为H0无优势，正在完成记录与后续家族评议 |
+| K1 | 灵活 skill duration | 中断与续约 | 中断时机：`flexible_skill_duration`, `vsp_03` | E3为18/18有效、H0无优势；完整intake已整合，Convergence已单次分派 |
 | K2 | 灵活 skill duration | 中断与续约 | 动作边界学习：`commitment_residual_triggered_options` | B07有效但比较器仍不足；Convergence可逆暂存当前已选面板家族，无B08 |
 | K3 | 灵活 skill duration | 信息获取与续约 | 付费获取：`ucope` | 有界接口检查结束；未建立合规实现，数值诊断未启动 |
 | K4 | 灵活 skill duration | duration 表示与价值共享 | 跨时长共享、组合与负迁移：`semigroup_consistent_duration_model_policy`, `vsp_c1` | 前瞻议程；无新冻结对象，旧 D6 家族 PARK 保留 |
@@ -114,19 +114,21 @@ facts distinct from the immutable Pro pin. Lifecycle, priority and target capaci
 
 ### Current direction working set — automatic research continues
 
-The September5 owner resume remains active. FSD completed all18 original valid cells;
-its DM is finishing the complete-study intake and appropriate Direction-node escalation.
-Owner-ratified policy B now permits a bounded FRRIE third-path implementation assessment;
-Root resumed that existing DM and CBSC's full publication-dependency repair assessment.
-N3 remains at its190-line A05 scope boundary. ACVC/CRTO/N5/K4 retain bounded family
-outcomes; UCOPE/VNFC retain interface or measured-cost blockers. No result process is
-currently running. Five remains a direction-chain target, not a reason to invent work.
+The September5 owner resume remains active. FSD completed full scientific intake and awaits
+its already-dispatched Direction-node response; no E4 is selected. FRRIE's actual A28 reuse
+implementation qualified and passed its focused check, but the sole formal invocation failed
+with exit139 before scientific publication. Its next work is bounded failure reproduction,
+not another full attempt. CBSC returned an A165 unaccepted complete candidate with a static
+resource-projection defect and portability dependency; no additional source iteration is selected.
+N3 remains at190-line A05 scope boundary. ACVC/CRTO/N5/K4 retain bounded family outcomes;
+UCOPE/VNFC retain interface or measured-cost blockers. Zero accepted live experiment handles
+at the latest tracker closure; five remains a target, not a reason to bypass these boundaries.
 
 | Route | Native DM | Current bounded work |
 | --- | --- | --- |
-| K1 / FSD | `/root/dm_amx_fsd_continue` | 18/18 valid; full H0 readout and next-family Convergence in progress |
-| N1 / FRRIE (resumed) | `/root/dm_amx_frrie_continue` | Valid R08 within-MEI; preferred third-path implementation resumed under ratified bounded exception, no new run yet |
-| N4 / CBSC (resumed) | `/root/dm_amx_cbsc_continue` | Complete logical-change and downstream publication repair assessment; old patch not accepted |
+| K1 / FSD | `/root/dm_amx_fsd_continue` | 18/18 valid; full H0 intake integrated, accepted Convergence dispatch awaits archive |
+| N1 / FRRIE (resumed) | `/root/dm_amx_frrie_continue` | R09 sole formal attempt exit139/16s; cause unreproduced, bounded same-byte diagnosis next |
+| N4 / CBSC (returning) | `/root/dm_amx_cbsc_continue` | A165 whole repair rejected, static missingness issue and offline portability remain; final DM intake |
 | N3 / state recovery (returned) | `/root/dm_amx_n3_continue` | A04 valid; A05 final190-line new implementation34.21% orchestration, unaccepted/unrun; no more layout compression |
 | ACVC (returned) | `/root/dm_amx_acvc_reentry` | HC-C accepted; existing finite-host learner-investment closure executed |
 | K2 / CRTO (returned) | `/root/dm_amx_crto_continue` | Final family PARK archive/intake; no B08 or new learner selected |
@@ -135,10 +137,10 @@ Default observer `/root/tracker_tl_experiments` is the native `hmasd-experiment-
 Terra/low, branch `codex/experiment-tracker-resumed-20260904`, worktree
 `C:/Projects/HMASD-worktrees/experiment-tracker-resumed-20260904`. It alone writes
 `EXPERIMENT_TRACKING.md`; accepted handles and terminal notifications go directly to DMs/CMs.
-Final original task `fsd_e3_large_d2_seed3_20260905_01` terminated at13:42:28Z,
-exit0, supervisor2575s, followed by CM conformance checks and DM valid-cell acceptance.
-All18 cells are valid and zero handles remain live. Tracker terminal record is integrated;
-reuse the same dedicated tracker on the next accepted handle rather than polling terminal runs.
+FSD final original task and all18 valid cells are terminal. Subsequent FRRIE task
+`frrie_b01_contact_r09_43eec21e` exited139 at14:32:49Z after16s; tracker delivered
+terminal once and DM acknowledged. Latest tracker7c60e5831 is integrated; zero live handles.
+Restore this same tracker when a new diagnostic handle is accepted; do not poll old tasks.
 
 Root task remains `01a06ec7-fd64-7281-9bc1-fc42ed53a2ca`; integration checkout is
 `C:/Projects/HMASD-worktrees/root-integration-02-20260904`, upstream `origin/main`.
@@ -229,7 +231,7 @@ a competent fixed configuration or untuned oracle gap does not establish tuned h
 
 | Source direction | Current-host headroom record | Valid result's own compute available here | Accepted-attempt compute / valid results available here |
 | --- | --- | --- | --- |
-| flexible_skill_duration | Tuned same-information generic pair absent; E2 fixed-clock sweep is not that pair | Latest valid E3 large_d2_seed3:2458.311039228007s runner/2575s supervisor,wsl_4070 CPU/four threads; RSS resources_unmeasured. Study18/18. | DM reports66087.000432s valid-cell runner sum,18.3575h; total including quarantined attempts remains separately unaggregated pending full intake. Distinct local/remote windows preserved. |
+| flexible_skill_duration | Tuned same-information generic pair absent; E2 fixed-clock sweep is not that pair | Latest valid E3 large_d2_seed3:2458.311039228007s runner/2575s supervisor,wsl_4070 CPU/four threads; RSS resources_unmeasured. Study18/18. | Full intake:66087.00043219907s valid-cell runner sum,18.357500120h for18cells (6local/12remote); quarantine cost separately unaggregated, not zero. No cross-host speed comparison. |
 | finite_resource_relational_inductive_efficiency | Upper and tuned generic absent; uniform is not tuned baseline | Latest R08:813.751470551s runner/874s supervisor,RSS615481344B,wsl_4070 CPU/FP32. | R05–R08 four-valid-B window3400.678750729s runner/3609s supervisor (850.169687682/902.25s per result); not four independent roots; failures/test history unaggregated. Historical Windows four-valid window21222.544508/4=5305.636127s remains separate. |
 | variable_n_fleet_churn | K search and physical upper do not form tuned-generic pair | R03 result-blind calibration:4.096142978 s wall, RSS122736640 B, wsl_4070 CPU; technical cost evidence only, no census result. K1024 R02:18.210753208 s runner. | Full accepted-attempt history unmeasured. R03 calibration1 invocation/1 technical observation; projected347623.1843 s is not consumed compute and no census denominator exists. |
 | roster_consistent_latent_exploration | Both terms absent on current TBCFV | no current-host result; historic other-host compute unmeasured here | unmeasured |
