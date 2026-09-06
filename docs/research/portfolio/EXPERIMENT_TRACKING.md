@@ -29,13 +29,17 @@ DM routes recorded below.
 
 ## Current observation snapshot
 
-Current snapshot: one tracker-owned accepted live handle is running: CBSC B02 RAW formal
+Current snapshot: there are **zero** tracker-owned accepted live handles. CBSC B02 RAW formal
 `cbsc-direct-b02-2c9254f70-raw` on `wsl_4070`, SHA
 `2c9254f70c3a8ef9d95ac6dc3f6585382304be41`, PID `1706097`, and cwd
-`/home/wu/hmasd-worktrees/cbsc-direct-return-b02-2c9254f70-20260905`. Same-handle observation
-found `running`, exit `null`, active tmux, and passed fresh admission with physical/effective
-availability `15678758912` bytes. The bound is `600s`; terminal, loss, or bound facts go
-directly to CBSC CM and current DM. VNFC formal B01
+`/home/wu/hmasd-worktrees/cbsc-direct-return-b02-2c9254f70-20260905` finished exit `0`, with
+inactive tmux and supervisor duration `80s`. Fresh admission passed; bounded evidence records
+48 rollout updates, 768 Adam steps, primary-readback wall `78.70194382900081s`, and peak RSS
+`587796480` bytes. Direct terminal notices went to CBSC CM/current DM for collection and intake.
+N3 B02 focused `n3_b02_focused_20260905` also finished exit `0`, PID `1706554`, with inactive
+tmux, fresh effective memory `15305568256` bytes, supervisor duration `7s`, and `5` tests passed
+in `6.00s`; its CM/current DM received the direct terminal notice. These are process facts only;
+neither result authorizes a restart or scientific interpretation. VNFC formal B01
 `vnfc_b01_formal_33e08f440_20260905_01` on `wsl_4070`, SHA
 `33e08f440c2117dcfd9457d825f42fef7b38ccd7`, PID `1702670`, and cwd
 `/home/wu/hmasd-worktrees/vnfc_b01_formal_33e08f440_01` failed exit `139` after `88s`, with
