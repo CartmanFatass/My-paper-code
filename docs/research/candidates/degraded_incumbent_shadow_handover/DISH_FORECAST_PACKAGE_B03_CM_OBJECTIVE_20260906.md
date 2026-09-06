@@ -76,8 +76,11 @@ existing tests, cards, intakes, governance files.
 ## Frozen node commands (write them into the CM record verbatim, substituting the sha)
 
 Worktree on the node: `/home/wu/hmasd-worktrees/n3-b03-20260906` at the launch sha;
-interpreter `/home/wu/.venvs/hmasd/bin/python`; `OMP_NUM_THREADS=1 MKL_NUM_THREADS=1
-OPENBLAS_NUM_THREADS=1`; output root
+interpreter `/home/wu/.venvs/hmasd/bin/python`; `PYTHONPATH=/home/wu/hmasd-worktrees/n3-b03-20260906`
+(as B02's frozen commands; omitted in the first version of this objective, which made the first
+CONTROL attempt fail with `ModuleNotFoundError: experiments` before any learner work, 2026-09-06
+17:14Z; attempt 3 uses output root `forecast_package_b03_20260906_r3/`); `OMP_NUM_THREADS=1
+MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1`; output root
 `temp/directions/degraded_incumbent_shadow_handover/exp/forecast_package_b03_20260906/`.
 
 Shared preparation `C` (timed, one command, task `n3_b03_focused_20260906`):
