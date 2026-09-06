@@ -54,10 +54,20 @@ public fixed plan makes this a small fully observed control task, both models sh
 and two period columns with four embedding coordinates do not impose a restrictive rank
 bottleneck. Initialization, optimization difficulty and segment credit remain live explanations.
 
-The next discriminator is the actual fixed-128-update return and nine-point learning curves for
-FACTOR versus GENERIC. A positive result would support a bounded independent-seed follow-up, not
-stable superiority or general MARL mechanism attribution. Source implementation and execution
-remain pending at card freeze; passing an engineering check would not establish mechanism value.
+The [complete seed-0 B01 result](VSPC1_K4_FACTOR_VALUE_B01_RESULT_EVIDENCE_20260905.md) gives
+FACTOR return0.625 versus GENERIC0.666666667 and normalized AUC0.580729167 versus0.609375.
+Both started at mean0.5 and completed128 optimizer steps; the endpoint loss is one mirrored
+long-period/conflicting-plan context. The earlier update16 FACTOR lead is retained but does not
+replace the adverse endpoint/full-AUC reading. This is local contrary evidence, not a stable
+population effect or a causal negative-transfer claim. Both short-period populations remain
+below the analytic reference, so finite-budget optimization remains a live limitation.
+
+The [DM intake](VSPC1_K4_FACTOR_VALUE_B01_INTAKE_20260905.md) selects the unchanged comparison
+on [independent seeds1 and2](VSPC1_K4_FACTOR_VALUE_B01_SEED12_SCIENCE_CARD_20260905.md).
+The next discriminator is whether the signed endpoint/AUC and context-level loss persist across
+those actual training instances. No new arm, held-out support, tuning or exact-reference
+prerequisite is selected. This bounded follow-up follows the small measured cost and one-seed
+uncertainty; it does not require a favorable result or rewrite the completed seed0.
 
 The [complete A01 intake](VSPC1_IDENTITY_PERIOD_HEADROOM_A01_INTAKE_20260904.md) remains
 `A01-GAP-UNAVAILABLE-HOST`; its missing reference and generic terms are not zero. B01's analytic
