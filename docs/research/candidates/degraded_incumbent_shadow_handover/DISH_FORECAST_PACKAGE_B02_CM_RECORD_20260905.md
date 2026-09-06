@@ -75,3 +75,48 @@ old B01×16/64 nor24N nor CPU count is a matched wall projection. No unit-time p
 is purchased. Formal command/launchSHA/output/receipt are recorded before acceptance;
 accepted handles go directly to DM and shared tracker. Stop at complete pair or
 the card's bounded incomplete outcome; scientific reading belongs to DM.
+
+## Accepted source, verification and frozen original pair
+
+Source impl deed4f563 integrated as committed/pushed CM47f81c15c536c2b4c4ee463eaa7a35f720ec08c7. Independent reviewer read the full seven-file candidate: no material finding. A447/D20, runner113, tests172 separately. Conservative orchestration ceiling245/467=52.46% includes computational hooks; all serve explicit variant propagation, finite loss and native/exposure/publication consumers, no section4 machinery. Ratio is a review signal, not refusal. Default class-level library=None was already present and disproved a proposed restored-batch AttributeError; no repair was required.
+
+Five prescribed focused tests passed in6.00s at the exact source, agent-task n3_b02_focused_20260905 exit0. Whole timed preflight+profile6.83s, user6.25/system0.46s, maximum RSS581340KiB; physical/effective admission15305568256bytes. This exercised actual NLL/backward/masks/rawBCE, policy link/reload, ground ordinary/passive binding, default restoration, terminal/paired publication and nonfinite partial JSON. No formal seed61 was used and no repeated smoke is added. Raw command/log/receipt/time retained in local temp/b02_transport and remote task/output locations.
+
+DM confirms H=null with actualN/E and H<=20E, optional dependent-cost gap under11.8/11.9, no new gate. Both arms charge3.415s shared preparation; each own cap1796.585s includes adjacent fresh admission and complete runner. External timeout sends ALRM for the runner partial-output handler; any cap/exception remains incomplete. External time/CPU/exit supplements prepublication runner samples. Full changed-host time remains unknown; focused-test time is not a formal completion projection.
+
+Fixed CONTROL then FORECAST_PACKAGE, same accepted source SHA above; all env OMP_NUM_THREADS=MKL_NUM_THREADS=OPENBLAS_NUM_THREADS=1 and PYTHONPATH=cwd. Exact commands frozen before original formal execution:
+
+```json
+{
+  "task": "n3_b02_control_20260905",
+  "node": "wsl_4070",
+  "sha": "47f81c15c536c2b4c4ee463eaa7a35f720ec08c7",
+  "cwd": "/home/wu/hmasd-worktrees/n3-b02-20260905",
+  "argv": "/home/wu/.venvs/hmasd/bin/python scripts/run_dish_forecast_package_b02.py run --arm CONTROL --seed 61 --shared-preparation-seconds 6.83 --admission /home/wu/hmasd-worktrees/n3-b02-20260905/temp/directions/degraded_incumbent_shadow_handover/exp/b02_control.memory.json --out /home/wu/hmasd-worktrees/n3-b02-20260905/temp/directions/degraded_incumbent_shadow_handover/exp/forecast_package_b02_20260905/control",
+  "command": "cd /home/wu/hmasd-worktrees/n3-b02-20260905 && export PYTHONPATH=/home/wu/hmasd-worktrees/n3-b02-20260905 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 && /usr/bin/time -v -o /home/wu/hmasd-worktrees/n3-b02-20260905/temp/directions/degraded_incumbent_shadow_handover/exp/b02_control.time.txt /usr/bin/timeout --signal=ALRM 1796.585s bash -lc '/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/hmasd-worktrees/n3-b02-20260905/temp/directions/degraded_incumbent_shadow_handover/exp/b02_control.memory.json && /home/wu/.venvs/hmasd/bin/python scripts/run_dish_forecast_package_b02.py run --arm CONTROL --seed 61 --shared-preparation-seconds 6.83 --admission /home/wu/hmasd-worktrees/n3-b02-20260905/temp/directions/degraded_incumbent_shadow_handover/exp/b02_control.memory.json --out /home/wu/hmasd-worktrees/n3-b02-20260905/temp/directions/degraded_incumbent_shadow_handover/exp/forecast_package_b02_20260905/control'",
+  "supervisor_command": "/usr/local/bin/agent-task run n3_b02_control_20260905 'bash -lc '\"'\"'cd /home/wu/hmasd-worktrees/n3-b02-20260905 && export PYTHONPATH=/home/wu/hmasd-worktrees/n3-b02-20260905 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 && /usr/bin/time -v -o /home/wu/hmasd-worktrees/n3-b02-20260905/temp/directions/degraded_incumbent_shadow_handover/exp/b02_control.time.txt /usr/bin/timeout --signal=ALRM 1796.585s bash -lc '\"'\"'\"'\"'\"'\"'\"'\"'/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/hmasd-worktrees/n3-b02-20260905/temp/directions/degraded_incumbent_shadow_handover/exp/b02_control.memory.json && /home/wu/.venvs/hmasd/bin/python scripts/run_dish_forecast_package_b02.py run --arm CONTROL --seed 61 --shared-preparation-seconds 6.83 --admission /home/wu/hmasd-worktrees/n3-b02-20260905/temp/directions/degraded_incumbent_shadow_handover/exp/b02_control.memory.json --out /home/wu/hmasd-worktrees/n3-b02-20260905/temp/directions/degraded_incumbent_shadow_handover/exp/forecast_package_b02_20260905/control'\"'\"'\"'\"'\"'\"'\"'\"''\"'\"''",
+  "whole_own_cap_seconds": 1796.585,
+  "shared_charge_seconds": 3.415,
+  "receipt": "/home/wu/hmasd-worktrees/n3-b02-20260905/temp/directions/degraded_incumbent_shadow_handover/exp/b02_control.memory.json",
+  "output": "/home/wu/hmasd-worktrees/n3-b02-20260905/temp/directions/degraded_incumbent_shadow_handover/exp/forecast_package_b02_20260905/control",
+  "time": "/home/wu/hmasd-worktrees/n3-b02-20260905/temp/directions/degraded_incumbent_shadow_handover/exp/b02_control.time.txt"
+}
+```
+
+```json
+{
+  "task": "n3_b02_forecast_package_20260905",
+  "node": "wsl_4070",
+  "sha": "47f81c15c536c2b4c4ee463eaa7a35f720ec08c7",
+  "cwd": "/home/wu/hmasd-worktrees/n3-b02-20260905",
+  "argv": "/home/wu/.venvs/hmasd/bin/python scripts/run_dish_forecast_package_b02.py run --arm FORECAST_PACKAGE --seed 61 --shared-preparation-seconds 6.83 --admission /home/wu/hmasd-worktrees/n3-b02-20260905/temp/directions/degraded_incumbent_shadow_handover/exp/b02_forecast_package.memory.json --out /home/wu/hmasd-worktrees/n3-b02-20260905/temp/directions/degraded_incumbent_shadow_handover/exp/forecast_package_b02_20260905/forecast_package --control-summary /home/wu/hmasd-worktrees/n3-b02-20260905/temp/directions/degraded_incumbent_shadow_handover/exp/forecast_package_b02_20260905/control/summary.json",
+  "command": "cd /home/wu/hmasd-worktrees/n3-b02-20260905 && export PYTHONPATH=/home/wu/hmasd-worktrees/n3-b02-20260905 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 && /usr/bin/time -v -o /home/wu/hmasd-worktrees/n3-b02-20260905/temp/directions/degraded_incumbent_shadow_handover/exp/b02_forecast_package.time.txt /usr/bin/timeout --signal=ALRM 1796.585s bash -lc '/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/hmasd-worktrees/n3-b02-20260905/temp/directions/degraded_incumbent_shadow_handover/exp/b02_forecast_package.memory.json && /home/wu/.venvs/hmasd/bin/python scripts/run_dish_forecast_package_b02.py run --arm FORECAST_PACKAGE --seed 61 --shared-preparation-seconds 6.83 --admission /home/wu/hmasd-worktrees/n3-b02-20260905/temp/directions/degraded_incumbent_shadow_handover/exp/b02_forecast_package.memory.json --out /home/wu/hmasd-worktrees/n3-b02-20260905/temp/directions/degraded_incumbent_shadow_handover/exp/forecast_package_b02_20260905/forecast_package --control-summary /home/wu/hmasd-worktrees/n3-b02-20260905/temp/directions/degraded_incumbent_shadow_handover/exp/forecast_package_b02_20260905/control/summary.json'",
+  "supervisor_command": "/usr/local/bin/agent-task run n3_b02_forecast_package_20260905 'bash -lc '\"'\"'cd /home/wu/hmasd-worktrees/n3-b02-20260905 && export PYTHONPATH=/home/wu/hmasd-worktrees/n3-b02-20260905 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 && /usr/bin/time -v -o /home/wu/hmasd-worktrees/n3-b02-20260905/temp/directions/degraded_incumbent_shadow_handover/exp/b02_forecast_package.time.txt /usr/bin/timeout --signal=ALRM 1796.585s bash -lc '\"'\"'\"'\"'\"'\"'\"'\"'/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/hmasd-worktrees/n3-b02-20260905/temp/directions/degraded_incumbent_shadow_handover/exp/b02_forecast_package.memory.json && /home/wu/.venvs/hmasd/bin/python scripts/run_dish_forecast_package_b02.py run --arm FORECAST_PACKAGE --seed 61 --shared-preparation-seconds 6.83 --admission /home/wu/hmasd-worktrees/n3-b02-20260905/temp/directions/degraded_incumbent_shadow_handover/exp/b02_forecast_package.memory.json --out /home/wu/hmasd-worktrees/n3-b02-20260905/temp/directions/degraded_incumbent_shadow_handover/exp/forecast_package_b02_20260905/forecast_package --control-summary /home/wu/hmasd-worktrees/n3-b02-20260905/temp/directions/degraded_incumbent_shadow_handover/exp/forecast_package_b02_20260905/control/summary.json'\"'\"'\"'\"'\"'\"'\"'\"''\"'\"''",
+  "whole_own_cap_seconds": 1796.585,
+  "shared_charge_seconds": 3.415,
+  "receipt": "/home/wu/hmasd-worktrees/n3-b02-20260905/temp/directions/degraded_incumbent_shadow_handover/exp/b02_forecast_package.memory.json",
+  "output": "/home/wu/hmasd-worktrees/n3-b02-20260905/temp/directions/degraded_incumbent_shadow_handover/exp/forecast_package_b02_20260905/forecast_package",
+  "time": "/home/wu/hmasd-worktrees/n3-b02-20260905/temp/directions/degraded_incumbent_shadow_handover/exp/b02_forecast_package.time.txt"
+}
+```
+
