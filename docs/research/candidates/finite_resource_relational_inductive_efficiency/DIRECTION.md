@@ -520,3 +520,24 @@ defect; the R09 B stays frozen and unexecuted, its native-return prediction unsc
 three arms (no torch and no tracer; torch imported; torch under pdb), 300 s each, zero learner,
 whose branches decide between a host/interpreter question, a torch-load suspect, and an
 outcome-blind plain R09 attempt without pdb. Mechanism-level evidence in this record is unchanged.
+
+## A03 result: corruption without torch; host/interpreter question to the owner — 2026-09-06
+
+The A03 tape-isolation probe (`50283c9cf`, Grok Build implementation, hub-reviewed; three arms
+on `wsl_4070`, 300 s each, fresh admissions) failed in every arm within 31 s of tape work: T0
+(torch never imported, no tracer) raised `AttributeError: 'tuple_iterator' object has no
+attribute 'name'` from `dataclasses.fields` inside `generate_episode_tape` after two successful
+64-tape updates; T1 (torch imported first) raised `SystemError: error return without exception
+set` in the evaluation-tape address constructor after 512 + 128 successful tapes; T2 (T1 under
+pdb) died with SIGSEGV in `rng.py validate`. Every completed phase's digest agrees across arms
+and with the local Windows run. First matching branch `A03_CORRUPTION_WITHOUT_TORCH`
+(`FRRIE_R09_SEGFAULT_A03_TAPE_ISOLATION_INTAKE_20260906.md`): the corruption needs neither the
+torch extension nor a tracer; the node's interpreter build (uv CPython 3.10.21, Clang 22.1.3,
+PGO+LTO), the numpy 1.26.3 wheel, or the WSL2 host is implicated, agent unidentified; the DM's
+prediction (only-with-torch or only-under-pdb) was wrong. Card consequence applied: a
+host/interpreter question is put to the owner (owner item 2026-09-06) and no R09 launch happens
+on this substrate until it is answered. Node inventory (operator, read-only): the only other
+interpreter is system CPython 3.12.3 (GCC) without numpy; an A04 second-interpreter probe would
+need a task-isolated venv, so it waits for the owner. The R09 B stays frozen and unexecuted;
+mechanism evidence R06–R08 unchanged; FRRIE parks at this boundary and leaves the Claude working
+set.

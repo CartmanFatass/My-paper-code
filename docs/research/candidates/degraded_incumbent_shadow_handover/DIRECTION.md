@@ -552,3 +552,25 @@ Evidence: `DISH_RENEWAL_BOUNDARY_A01_SCIENCE_CARD_20260905.md`,
 `DISH_RENEWAL_BOUNDARY_A01_CM_RECORD_20260905.md`,
 `DISH_RENEWAL_BOUNDARY_A01_RESULT_INTAKE_20260905.md`, `a01_renewal_boundary_20260905/`,
 `DISH_POST_B02_CONVERGENCE_INTAKE_20260905.md`.
+
+## A02 ordinary-renewal correction accepted; B01/B02 qualified reinterpretation — 2026-09-06
+
+`DISH-RENEWAL-BOUNDARY-A02-CORRECTION` (A/RECON, card
+`DISH_RENEWAL_BOUNDARY_A02_CORRECTION_SCIENCE_CARD_20260906.md`; Grok Build implementation
+reviewed by `hmasd-reviewer` and the hub, integrated at `3f4d447f6`) ran on `wsl_4070` (check
+then formal, 120 s bound, runner wall 0.064 s / 0.092 s, peak RSS 363 MB, zero training exposure,
+checkpoint `504329d6…` verified). Result, formal: on the two A01 windows the policy's consumed
+permission equals native admission on all 64 ticks (0 disagreements of either kind), 12 matched
+renewals (t = 4, 12, 20, 28 and t = 2, 6, …, 30) and 52 matched non-renewals; at all 12
+admissions the emitted command is nonzero, differs from the held vector, and the held vector
+after the step equals native's float64 projection of it; 0 held changes outside admissions; no
+early terminal, no hard event, CAS 0; service 60/64 (as A01), energy sum 9220.97 (A01 8563.59).
+Card row 1 first applicable: the local correction is accepted on the observed windows
+(`DISH_RENEWAL_BOUNDARY_A02_RESULT_INTAKE_20260906.md`); Pro's expected counts matched, the DM's
+service sub-prediction was wrong. The qualified reinterpretation
+(`DISH_B01_B02_QUALIFIED_REINTERPRETATION_INTAKE_20260906.md`) keeps B02's 572/447/433/428 and
+its inside-MEI reading as outcomes of the executed interface, in which learned fresh motion
+commands were never incorporated at admission; the training-side lag is source-supported
+inference, unmeasured; B01 and A03–A05 are not invalidated; no quarantine, no "timing explains
+the null". The corrected boundary is the ordinary path from here. The next object (a learning
+comparison on the corrected interface or otherwise) goes to `em:dish:convergence`.

@@ -119,3 +119,37 @@ Cost 2.66 s and 2.17 s outer wall against 2,700 s caps. The next K4 object (end 
 host with room above the reference, a comparator question, or recast) is put to
 `em:vsp_c1:convergence` (request `2026-09-06-vspc1-post-b02-convergence-01`); the direction parks
 at this clean boundary and leaves the Claude working set until the decision is taken in.
+
+## Post-B02 Convergence decision: the public-plan toy family ends — 2026-09-06
+
+`em:vsp_c1:convergence` (request `2026-09-06-vspc1-post-b02-convergence-01`, delivered at
+`0b04b166d`, `PRO_FINAL`, taken in by `VSPC1_POST_B02_CONVERGENCE_INTAKE_20260906.md`) ends, at
+this boundary, the value-parameterization toy family on the public fixed-partner plan, six-step,
+two-exogenous-period, all-eight-context host: no more budget, seeds, optimizer variants or
+comparator arms for this same question. K4's cross-period value-sharing question stays open; no
+new host B is selected this round; nothing Portfolio-tier changes; no further observation is
+needed before ending. The ended family is defined by content (fixed public switching partner, one
+learner, six scoring steps, eight equal-weight contexts, legal held actions, the `sum 1[a_t=b_t]/6`
+return, and any continuation of the parameterization-ranking question by changing
+parameterization, comparator, initialization, budget or seed). Everything measured is retained:
+the three B01 seeds, all 33 B02 points and three AUC windows, the reference-equality fact, old
+A01's missing headroom, old D6's boundary. The decision is a judgement about the value of further
+observation, not a proof of equivalence or negative transfer; FACTOR's positive curve facts in the
+new instance (lower start, MEI-sized lead at 128, positive full and late AUC, earlier first
+arrival) stand. Two DM formulations are recorded as rejected by the node and do not enter the
+record's reasoning: "the only clean native reading is time to reference" (too absolute), and "a
+stronger tabular comparator can only shrink an already-zero advantage" as a complete reason to
+exclude that option (the reference bounds the endpoint, not the short-budget or sample-efficiency
+questions). Cost accounting corrected by the node: the family sums to 349,824 joint steps, 1,792
+updates and 21.83 s of invocation wall; B02's CPU seconds stop at the primary readback and are not
+B01's outer quantity; the card's 7.04–15.8 s per-arm scenario is not replaced by the intake's
+"about 30 s"; new-host cost is unknown. Reopening needs a question this material does not answer
+whose result would change a concrete choice (a real training-sample cap; a concrete defect
+threatening reward, information, updates or the primary measurement); another positive seed, a
+comparator to save the advantage, or precision without a use do not reopen. A future host card
+must state the concrete event → role → available information → legal action or credit → real
+update → complete native consequence chain with each role's nature, the strongest reasonable
+same-information control, the full-episode native return, independent instances, complete counts,
+whole-invocation budget and stop boundary, and what each outcome changes; 5/6 is neither threshold
+nor baseline elsewhere. VSP-C1 has no next object, stays `ACTIVE` at its priority, parks at this
+clean boundary and leaves the Claude working set.

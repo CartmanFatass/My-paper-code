@@ -1,0 +1,95 @@
+{
+  "id": "20260906-vspc1-002",
+  "created": "2026-09-06T08:46:42-07:00",
+  "direction": "vsp_c1",
+  "tier": "direction",
+  "kind": "decision",
+  "title": "VSPC1 post-B02 Convergence 决定（PRO_FINAL）：结束公开固定伙伴计划玩具族；K4 保留；本轮不选新宿主",
+  "context": "Pro 在当前边界结束「公开固定伙伴计划、六步、两个外生周期、全八 context」的价值参数化玩具族：不再为同一问题追加预算、种子、优化器变体或比较臂；K4 跨周期价值共享问题保留、未关闭；不选新宿主，不改 Portfolio；结束前不需要额外观测。理由是决策价值：有限种子显示实例敏感性，512 预算使早期领先归零且两臂到达参考值 5/6；继续同一组合不会给终点更高刻度。这是停止投入的方向判断，不是等价或负迁移证明；FACTOR 在新实例的正曲线事实全部保留。Pro 剔除了 DM 的两条表述（「唯一干净读法是到达参考值时间」；「更强表格比较臂只能缩小已为零的优势」），并更正了成本口径（家族累计 349,824 联合步、1,792 更新、21.83 s wall；B02 CPU 秒与 B01 不同口径）。重开需要一个本材料未回答、且会改变具体选择的问题；未来宿主卡须写清事件→角色→信息→行动/credit→更新→本征后果链，5/6 不是阈值或 baseline。已执行：VSP-C1 无下一对象，ACTIVE/优先级不变，停车并退出 Claude 工作集。",
+  "options": [
+    {
+      "key": "a",
+      "label": "接受（已执行）",
+      "consequence": "VSP-C1 停车；K4 的下一宿主在满足重开条件时再写卡。"
+    },
+    {
+      "key": "b",
+      "label": "提出满足重开条件的具体问题或指定新宿主",
+      "consequence": "DM 在下一个干净边界写卡并回到同一 Convergence 节点。"
+    },
+    {
+      "key": "c",
+      "label": "Portfolio 层处置（如 PARK 或优先级调整）",
+      "consequence": "属于 Portfolio 层；Root 记录后按指示处理。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "完整归档的 PRO_FINAL 方向层决定，无规范冲突。",
+  "evidence": [
+    "docs/research/candidates/vsp_c1/VSPC1_POST_B02_CONVERGENCE_INTAKE_20260906.md",
+    "docs/research/candidates/vsp_c1/pro_packets/20260906_post_b02_convergence/archive/RESPONSE.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-06.md#L30",
+  "brief": "docs/research/portfolio/owner/briefs/vsp_c1/2026-09-06_post-B02-convergence.md",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "Pro 已决定结束 VSP-C1 的公开固定伙伴计划玩具族（不追加预算、种子、优化器变体或比较臂；K4 保留、未选新宿主、不改 Portfolio）；是否对这一限定范围作异步改动？",
+    "changes_if_approved": [
+      {
+        "target": "docs/research/candidates/vsp_c1/DIRECTION.md 与 PORTFOLIO 行",
+        "from": "B02 后待 Convergence 决定",
+        "to": "玩具族结束（按科学内容界定）；K4 问题保留；重开条件与未来宿主写卡要求已记录"
+      },
+      {
+        "target": "Claude 枢纽工作集",
+        "from": "VSP-C1 停车等待决定",
+        "to": "VSP-C1 退出工作集，回到队列；生命周期 ACTIVE、优先级不变"
+      },
+      {
+        "target": "记录",
+        "from": "DM 两条表述、intake 的约 30 s/臂概括",
+        "to": "两条表述标记为被 Pro 剔除；成本口径按 Pro 更正"
+      }
+    ],
+    "if_refused": "所有者若在条目里提出满足重开条件的具体问题或指示新宿主，DM 在下一个干净边界写卡并回到同一 Convergence 节点；否则按 Pro 决定执行。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/vsp_c1/pro_packets/20260906_post_b02_convergence/archive/RESPONSE.md",
+        "quote": "决定：在当前边界结束“公开固定伙伴计划、六步、两个外生周期、全八 context”的价值参数化玩具族，不再为这个相同科学问题追加预算、种子、优化器变体或比较臂。",
+        "why": "本节点完整、已归档的 PRO_FINAL 方向层决定。"
+      },
+      {
+        "path": "docs/research/candidates/vsp_c1/VSPC1_K4_FACTOR_VALUE_B02_BUDGET512_RESULT_INTAKE_20260906.md",
+        "quote": "128 point favourable, 512 shrinks to zero or negative, or GENERIC improves more late: yes on both clauses",
+        "why": "卡片第 4 行首先适用；两臂都到达参考值 5/6。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/vsp_c1/pro_packets/20260906_post_b02_convergence/archive/RESPONSE.md",
+        "quote": "FACTOR 在新实例中并非毫无收益……这些真实曲线事实不能被最终相等抹去。",
+        "why": "正曲线事实保留；结束是投入判断，不是无价值证明。"
+      },
+      {
+        "path": "docs/research/candidates/vsp_c1/pro_packets/20260906_post_b02_convergence/archive/RESPONSE.md",
+        "quote": "也不接受“换更强表格比较器只能缩小已为零的优势”作为排除该选项的完整科学理由。",
+        "why": "Pro 剔除了 DM 的一条理由；表格比较臂未被科学否定，只是当前无用途。"
+      }
+    ],
+    "uncertainty": [
+      "训练总体的预算交互、旧三种子在 512 的表现、表示/初始化/credit 的相对贡献均未知。",
+      "K4 下一宿主未选定，其成本未知。"
+    ],
+    "cost": {
+      "compute": "零；本轮无新调用",
+      "owner_time": "阅读本条目约 3 分钟",
+      "reversibility": "reversible",
+      "waits_on_this": "不等待；已按 PRO_FINAL 执行；所有者的不同指示在下一个干净边界应用"
+    },
+    "verdict_text": "PRO_FINAL / END the toy family；K4 open；no new host；no Portfolio change。",
+    "source": "docs/research/candidates/vsp_c1/VSPC1_POST_B02_CONVERGENCE_INTAKE_20260906.md"
+  },
+  "starred": true
+}
