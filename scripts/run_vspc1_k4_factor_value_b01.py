@@ -23,7 +23,7 @@ sys.path.insert(0, str(ROOT))
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--arm", choices=("FACTOR", "GENERIC"), required=True)
-    parser.add_argument("--seed", type=int, choices=(0,), required=True)
+    parser.add_argument("--seed", type=int, choices=(0, 1, 2), required=True)
     parser.add_argument("--out", type=Path, required=True)
     args = parser.parse_args()
     from experiments.candidates.vsp_c1.k4_factor_value_b01.experiment import run
