@@ -1,0 +1,23 @@
+	Command being timed: "/usr/bin/timeout --signal=ALRM 1796.585s bash -lc /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/hmasd-worktrees/n3-b02-20260905/temp/directions/degraded_incumbent_shadow_handover/exp/b02_control.memory.json && /home/wu/.venvs/hmasd/bin/python scripts/run_dish_forecast_package_b02.py run --arm CONTROL --seed 61 --shared-preparation-seconds 6.83 --admission /home/wu/hmasd-worktrees/n3-b02-20260905/temp/directions/degraded_incumbent_shadow_handover/exp/b02_control.memory.json --out /home/wu/hmasd-worktrees/n3-b02-20260905/temp/directions/degraded_incumbent_shadow_handover/exp/forecast_package_b02_20260905/control"
+	User time (seconds): 289.24
+	System time (seconds): 63.55
+	Percent of CPU this job got: 104%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 5:37.23
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 612084
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 6
+	Minor (reclaiming a frame) page faults: 10480412
+	Voluntary context switches: 403845
+	Involuntary context switches: 10563
+	Swaps: 0
+	File system inputs: 872
+	File system outputs: 4712
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
