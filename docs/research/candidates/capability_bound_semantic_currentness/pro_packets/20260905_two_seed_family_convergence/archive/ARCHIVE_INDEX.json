@@ -1,0 +1,63 @@
+{
+  "read_at_utc": "2026-09-06T01:43:47.377276+00:00",
+  "input_sha": "09664be0bb9d8ff843ce70389764c10e779e4b64",
+  "task_sha": "861ab4fca3146b8f18d3a25eedad0adeb9e55f18",
+  "github_response_commit": "e4cacaccf3e03a6944c9653abeb5e645e46109ec",
+  "github_response_parent": "09664be0bb9d8ff843ce70389764c10e779e4b64",
+  "response_scope_checked_by": "Root API readback reported exactly the single allowed archive/RESPONSE.md change; DM direct-read its full raw bytes and actual delivery comment.",
+  "files": [
+    {
+      "file": "RESPONSE.md",
+      "bytes": 26602,
+      "sha256": "02a0ea92dc60ddfafecbc3ff2fca0cc3680717eb7d75b278dcb1c8f4ab684ed5",
+      "source": "GitHub contents API at e4cacaccf3e03a6944c9653abeb5e645e46109ec; blob0afbc3902919d5789ef29da8829d946b1b28f539"
+    },
+    {
+      "file": "TRANSPORT_PROMPT.md",
+      "bytes": 588,
+      "sha256": "283f6a3e9439698d51c20c93357c2b50ebe5817985d2f9da59998b2b8080696c",
+      "source": "\\\\?\\C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\capability_bound_semantic_currentness\\2026-09-05-cbsc-two-seed-family-convergence-01\\2026-09-05-cbsc-two-seed-family-convergence-01--capability_bound_semantic_currentness__00_PROMPT.md"
+    },
+    {
+      "file": "TRANSPORT_RECEIPT.md",
+      "bytes": 457,
+      "sha256": "02ab45c776eb00934a7c8305db312ed2b80a27ece9d31dab98469410b74e24dd",
+      "source": "\\\\?\\C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\capability_bound_semantic_currentness\\2026-09-05-cbsc-two-seed-family-convergence-01\\2026-09-05-cbsc-two-seed-family-convergence-01--capability_bound_semantic_currentness--attempt-01__02_RESPONSE.md"
+    },
+    {
+      "file": "TRANSPORT_FACTS.json",
+      "bytes": 12726,
+      "sha256": "46efcebaa0ff9c8dcfcf543281051588057d001eeb3bfb63a23b2f4ad46611d3",
+      "source": "\\\\?\\C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\capability_bound_semantic_currentness\\2026-09-05-cbsc-two-seed-family-convergence-01\\2026-09-05-cbsc-two-seed-family-convergence-01--capability_bound_semantic_currentness--attempt-01__03_TRANSPORT_FACTS.json"
+    },
+    {
+      "file": "PACKET_MANIFEST.json",
+      "bytes": 2548,
+      "sha256": "c26c0ee696152945ba2fb88c9b11e471748068e3cebe8d23597e21e26b77457f",
+      "source": "\\\\?\\C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\capability_bound_semantic_currentness\\2026-09-05-cbsc-two-seed-family-convergence-01\\2026-09-05-cbsc-two-seed-family-convergence-01--capability_bound_semantic_currentness__PACKET_MANIFEST.json"
+    }
+  ],
+  "delivery_comment_url": "https://github.com/CartmanFatass/My-paper-code/issues/7#issuecomment-5556115060",
+  "interpretation": "Full GitHub RESPONSE.md is the formed scientific response. TRANSPORT_RECEIPT.md is the short link receipt, with a distinct byte count and hash; it is not the full response.",
+  "metadata_discrepancy": {
+    "compared_fields": {
+      "user_message_id": {
+        "previous_archive_top_level": null,
+        "current_top_level": "90eabbe2-dbd0-41c7-8a4c-93b22bebb0af",
+        "current_nested_send_evidence": "01252997-1cbb-45e2-a725-3b696ec82542"
+      },
+      "assistant_message_id": {
+        "previous_archive_top_level": "request-WEB:841fc311-b095-44e3-a755-2c113210493b-0",
+        "current_top_level": "request-WEB:841fc311-b095-44e3-a755-2c113210493b-0",
+        "current_nested_send_evidence": "066153ff-8865-42a1-9e9c-1a94f85a8f8f"
+      },
+      "provider_filename": {
+        "previous_archive_top_level": null,
+        "current_top_level": "PROMPT_BODY(20260905-125229).md",
+        "current_nested_send_evidence": null
+      }
+    },
+    "interpretation": "Current top-level message IDs differ from current nested send_evidence. Only the assistant ID can be matched to the preceding raw archive; that archive has no top-level user ID or provider filename. Preserve all fields without assigning an unverified origin. The current nested evidence names the actual TASK and one observed Send; full GitHub response and comment match the question."
+  },
+  "transport_prompt_matches_bound_handoff": true
+}

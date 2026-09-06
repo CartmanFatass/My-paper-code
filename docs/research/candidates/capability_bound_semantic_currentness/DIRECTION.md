@@ -1,6 +1,6 @@
 # Direction capability_bound_semantic_currentness: capability-bound semantic currentness
 
-## Current learning evidence and next object — 2026-09-05
+## Current learning evidence and scoped family decision — 2026-09-05
 
 The Pro-selected **CBSC-DIRECT-RETURN-B02** is complete and valid at its local
 B/EXPLORE ceiling. Seed 21203 gave RAW = STRUCT = 10.7125 at update 48;
@@ -25,10 +25,16 @@ procedural evaluation together; they do not isolate a unique cause. B03's
 sampled training included other actions but concentrated on REFRESH by the
 last batch. Its native pair completed in 118.20 s, with no new simulation smoke.
 
-No third pair, old replay or exact-headroom prerequisite is selected. Whether
-to retain this direct-learning family with a specifically discriminating new B
-or park its current comparison family is returned to Convergence. No local
-family PARK, recast or Portfolio change is applied. See both
+Convergence has parked only the unchanged dynamic-host, RAW/STRUCT-adapter,
+recurrent-PPO, 48-update greedy comparison family. No third pair, 192-update
+extension or other new experiment is selected. The reason is the limited added
+information from more of this comparison, not compute refusal, mechanism failure
+or statistical equivalence. This is not a mechanism recast or a Portfolio
+lifecycle/priority change; it does not prohibit a later properly selected distinct
+learning question. No old replay, exact-headroom or unique-cause prerequisite
+is created. The complete formed decision and scope are in
+CBSC_DIRECT_RETURN_FAMILY_CONVERGENCE_INTAKE_20260905.md and its raw Pro archive.
+See both
 CBSC_DIRECT_RETURN_B02_RESULT_EVIDENCE_20260905.md and
 CBSC_DIRECT_RETURN_B03_RESULT_EVIDENCE_20260905.md, their DM intakes and
 CBSC_DIRECT_RETURN_TWO_SEED_SUMMARY_20260905.json. Earlier B1 requirements
