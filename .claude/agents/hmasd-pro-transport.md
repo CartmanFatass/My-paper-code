@@ -46,13 +46,15 @@ Read from the handoff: `request_id`, `direction_id`, `workflow_node`,
    `https://chatgpt.com/` for a first binding), and `agentify_ensure_ready`. If login or a
    challenge is pending, `agentify_show` it and stop; the owner completes it.
 6. Model preflight on that tab: `agentify_review_preflight` with `reasoningEffort` `Pro` and
-   `productModel` `GPT-6 Astra` first; if the picker does not expose that exact label, repeat once
-   with `Latest` (the checked label the Codex transport observed under the closed `6 Pro`
-   control). Both are the labels Agentify accepts for the current owner selection
-   (`CHATGPT_REVIEW_PRODUCT_MODELS` in `state.mjs`, updated 2026-09-05). Use the label that
-   matched for the Send and record the exact matched labels. If neither matches, stop before any
-   Send and report the exact error and the labels actually visible. Never substitute another
-   model or mode, and never send with `GPT-5.6 Sol`.
+   `productModel` `GPT-6 Astra` first; if it returns
+   `chatgpt_product_model_unavailable_or_unselected`, repeat once with `Latest`. In the smoke of
+   2026-09-05 the picker exposed no `GPT-6 Astra` item and `Latest` was the checked one under the
+   closed `6Pro` control, so `Latest` is the expected match. Both are the labels Agentify accepts
+   (`CHATGPT_REVIEW_PRODUCT_MODELS` in `state.mjs`). Use the label that matched for the Send and
+   record the exact matched labels and the effort evidence (slider owner `Power`, value 4 of 4).
+   If neither matches, or the error is `chatgpt_target_menu_unavailable`, stop before any Send
+   and report the exact error and the labels actually visible. Never substitute another model or
+   mode, and never send with `GPT-5.6 Sol`.
 
 ## The one Send
 
@@ -73,7 +75,13 @@ Write the exact prompt bytes to
 Interpret the receipt literally. `SENT_WAITING` means the user turn is confirmed and generation
 continues: call the same tool again with the same `idempotencyKey` and `verifyExisting=true`
 until `COMPLETE` or the hub's total observation bound; each call observes, none sends. A timeout
-is not terminal and never authorizes another Send. A different payload, a new idempotency key,
+is not terminal and never authorizes another Send. A tool error after the call (for example a
+filesystem error) is handled the same way: first inspect the persisted operation in
+`C:/Users/fires/.agentify-desktop/review-transport.json` under `operations.<idempotencyKey>`;
+if `sendAttempted` is `true`, the only permitted next call is the identical request with
+`verifyExisting=true`, which observes and archives without sending. If `sendAttempted` is
+`false` and no user turn is visible in the conversation, report `NOT_SENT` with the error and
+stop; do not retry on your own. A different payload, a new idempotency key,
 a second conversation, Retry, Continue, Stop, or Answer now are forbidden. If the receipt reports
 an uncertain or mismatched send, record it as terminal `SENT_UNCERTAIN` and stop.
 

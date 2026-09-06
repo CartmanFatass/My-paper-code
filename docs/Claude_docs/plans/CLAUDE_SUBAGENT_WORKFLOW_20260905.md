@@ -90,18 +90,20 @@ Facts verified on 2026-09-05 evening:
   item can only be observed live; the transport agent preflights `GPT-6 Astra` first, then
   `Latest`, and sends with whichever matched.
 
-Owner actions before the smoke, in order:
+**Smoke run 2026-09-05 21:06-21:21 PDT: PASSED.** Record:
+`docs/Claude_docs/experiments/TRANSPORT_SMOKE_AGENTIFY_20260905.md`. One Send into a fresh
+conversation (`6a9ce941-e63c-83e8-8873-dee7dcfe378e`), matched labels `Latest` / `Pro`, response
+`READY` archived with sha256 `c2e3ac47…0526`, receipt `COMPLETE`, registry untouched. Two more
+Agentify defects surfaced and were patched in the owner's working tree during the run: the
+picker-trigger regex accepted only `High`/`Pro` while the live control reads `6Pro`
+(`chatgpt-controller.mjs`, one GUI restart), and the archive commit fsynced the parent directory,
+which Windows rejects with `EPERM` after the file was already in place (`review-transport.mjs`;
+the receipt was recovered with `verifyExisting=true`, no second Send). `GPT-6 Astra` is not a
+picker label; `Latest` is the one that sends.
 
-1. Start the Agentify GUI (`npm run start` in the checkout) and sign in to ChatGPT in its Chrome
-   CDP profile.
-2. Restart the Claude Code session so the `mcp__agentify-desktop__*` tools load.
-3. Ask the hub to run the smoke described in `.claude/skills/hmasd-pro-transport/SKILL.md`. It uses
-   a fresh conversation and a plain prompt; it never touches a bound node and does not count as a
-   Pro request under the pause.
-
-After a passing smoke, the first scientific dispatch from Claude waits for the owner to lift the
-`OWNER_PAUSED` state on Pro requests; the recorded direction handoffs of 2026-09-05 name what each
-direction would send next.
+With the smoke recorded, `hmasd-pro-transport` may run scientific dispatches unattended. The first
+one still waits for the owner to lift the `OWNER_PAUSED` state on Pro requests; the recorded
+direction handoffs of 2026-09-05 name what each direction would send next.
 
 ## 5. What was deliberately not built
 

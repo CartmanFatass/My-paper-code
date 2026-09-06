@@ -52,7 +52,12 @@ conversation for a bound key.
 
 ## The first run is a smoke, not a request
 
-Before any scientific dispatch from Claude, run one non-scientific transport check:
+**Status: the smoke passed on 2026-09-05** (record
+`docs/Claude_docs/experiments/TRANSPORT_SMOKE_AGENTIFY_20260905.md`; matched labels `Latest` /
+`Pro`; one Send; `COMPLETE`). Scientific dispatch through `hmasd-pro-transport` is enabled on the
+transport side; the research-side pause on Pro requests is a separate gate. Re-run a smoke only
+after an Agentify code change, a ChatGPT UI change, or a provider-selection change in
+`.codex/hmasd-transport.toml`. The procedure that was followed:
 
 - Preconditions the owner controls: Agentify Desktop GUI running and signed in to ChatGPT in
   its Chrome CDP profile; the Agentify MCP server registered for Claude Code

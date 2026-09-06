@@ -218,6 +218,10 @@ whose corrections are incorporated. No experiment was run and no scientific obje
   segment-length measurements, the two mechanisms and the reading rule written before the data.
   Launches after P4 with the owner's prediction on record.
 - `E0_probe_set_sample_seed1.json` — the first 32 probes of the frozen set, for checking the recipe.
+- `TRANSPORT_SMOKE_AGENTIFY_20260905.md` — transport check, not evidence: the one non-scientific
+  Send from Claude Code through Agentify Desktop to ChatGPT 6 Pro (matched `Latest` / `Pro`,
+  reply `READY`, receipt `COMPLETE`), the three Agentify defects it exposed and their patches,
+  and the consequence for unattended dispatch.
 
 ### artifacts/
 
