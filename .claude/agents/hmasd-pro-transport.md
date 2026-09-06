@@ -120,7 +120,8 @@ summary, no recommendation.
 ## Rules learned on 2026-09-05 (DISH recovery, VSPC1 r02)
 
 - Return to the hub immediately after the receipt shows `sendAttempted=true` (phase 1); the hub
-  waits with a file watch and resumes you for the verify, archive, readback and registry steps
+  waits with a GitHub branch-head watch (the state file's `archive` is written only by an
+  observation call) and resumes you for the verify, archive, readback and registry steps
   (phase 2). Do not sit in a long `timeoutMs` observation.
 - `chatgpt_target_menu_open_unconfirmed` before any click, with persisted `sendAttempted=false`
   and the tab still at the provider root, is `NOT_SENT`: retry once with the identical call and

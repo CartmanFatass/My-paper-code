@@ -68,9 +68,12 @@ conversation for a bound key.
      call with `verifyExisting=true` retries it (the transport replaces the composer content, so
      a restored draft cannot double the prompt). `sendAttempted=true` allows only the identical
      `verifyExisting=true` observation call. An uncertain send is terminal for that request id.
-   - **Wait (hub):** one background `until` loop on the archive directory and the Agentify state
-     file `C:/Users/fires/.agentify-desktop/review-transport.json`
-     (`operations.<request_id>.archive` or `.error` non-null); no polling in the hub's context.
+   - **Wait (hub):** one background `until` loop on a **GitHub readback**, not on the Agentify
+     state file: `gh api repos/<repo>/branches/<output branch> --jq .commit.sha` until it differs
+     from the base sha (Pro's connector commit is the completion signal), with a 45 min cap; no
+     polling in the hub's context. Lesson 2026-09-06: `operations.<id>.archive` is only written by
+     an observation call, so with phase 1 returning early a state-file watch never fires and the
+     owner had to point out the reply was done and the tab still open.
    - **Phase 2 (resume the same agent with `SendMessage`):** the identical
      `agentify_review_query` with `verifyExisting=true` for the `COMPLETE` receipt; wait two to
      three minutes and read GitHub back before calling a write gap (below); archive sha256,
