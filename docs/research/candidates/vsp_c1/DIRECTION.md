@@ -49,8 +49,8 @@ partner-transfer claim and no prerequisite exact-reference audit.
 The scientific question is whether the factorized parameterization helps or harms native-return
 learning at matched information, interaction and update budgets. Its strongest design support is
 that period changes the optimal legal first action in the conflicting partner stratum. Its
-strongest contradiction and limit is that no real learner effect is yet observed: the partner's
-public fixed plan makes this a small fully observed control task, both models share features,
+strongest current contradiction is the opposite signed seed-0 endpoint and AUC described below.
+The partner's public fixed plan makes this a small fully observed control task, both models share features,
 and two period columns with four embedding coordinates do not impose a restrictive rank
 bottleneck. Initialization, optimization difficulty and segment credit remain live explanations.
 
@@ -62,12 +62,19 @@ replace the adverse endpoint/full-AUC reading. This is local contrary evidence, 
 population effect or a causal negative-transfer claim. Both short-period populations remain
 below the analytic reference, so finite-budget optimization remains a live limitation.
 
-The [DM intake](VSPC1_K4_FACTOR_VALUE_B01_INTAKE_20260905.md) selects the unchanged comparison
-on [independent seeds1 and2](VSPC1_K4_FACTOR_VALUE_B01_SEED12_SCIENCE_CARD_20260905.md).
-The next discriminator is whether the signed endpoint/AUC and context-level loss persist across
-those actual training instances. No new arm, held-out support, tuning or exact-reference
-prerequisite is selected. This bounded follow-up follows the small measured cost and one-seed
-uncertainty; it does not require a favorable result or rewrite the completed seed0.
+The [selected independent seeds1 and2](VSPC1_K4_FACTOR_VALUE_B01_SEED12_SCIENCE_CARD_20260905.md)
+are now complete. Their [valid B results](VSPC1_K4_FACTOR_VALUE_B01_SEED12_RESULT_EVIDENCE_20260905.md)
+both favor FACTOR by1/12 at the endpoint and by0.033854167/0.0234375 full AUC, despite lower
+initial mean returns. Across all three seeds the means are+0.041666667 endpoint and+0.009548611
+AUC; the original negative remains. This is a small, training-instance-sensitive parameterization
+signal with observed positive and negative native consequences, not stable superiority or a
+unique sharing mechanism. Context-level losses move between seeds and models.
+
+The [complete extension intake](VSPC1_K4_FACTOR_VALUE_B01_SEED12_INTAKE_20260905.md) escalates
+the present toy family's next decision to Convergence: select one decision-relevant real B if
+worthwhile, or park/recast this narrow family. No additional seed, new arm, held-out support,
+tuning, exact-reference prerequisite or Portfolio disposition is selected locally. The next
+discriminator must improve on repeating an easy public-plan diagnostic merely because it is cheap.
 
 The [complete A01 intake](VSPC1_IDENTITY_PERIOD_HEADROOM_A01_INTAKE_20260904.md) remains
 `A01-GAP-UNAVAILABLE-HOST`; its missing reference and generic terms are not zero. B01's analytic

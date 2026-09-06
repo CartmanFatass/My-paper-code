@@ -1,0 +1,55 @@
+{
+  "unit": "caller-declared independent training run",
+  "inference": "descriptive only; no confidence interval or success classification",
+  "groups": [
+    {
+      "task": "VSPC1-K4-FACTOR-VALUE-B01",
+      "arm": "FACTOR",
+      "n": 3,
+      "mean": 0.5998263888888888,
+      "sample_sd": 0.022752330593890913,
+      "min": 0.5807291666666666,
+      "max": 0.625,
+      "runs": {
+        "0": 0.5807291666666666,
+        "1": 0.625,
+        "2": 0.59375
+      }
+    },
+    {
+      "task": "VSPC1-K4-FACTOR-VALUE-B01",
+      "arm": "GENERIC",
+      "n": 3,
+      "mean": 0.5902777777777777,
+      "sample_sd": 0.0195457122381904,
+      "min": 0.5703125,
+      "max": 0.6093749999999999,
+      "runs": {
+        "0": 0.6093749999999999,
+        "1": 0.5911458333333333,
+        "2": 0.5703125
+      }
+    }
+  ],
+  "paired_differences": [
+    {
+      "task": "VSPC1-K4-FACTOR-VALUE-B01",
+      "arm": "FACTOR",
+      "baseline": "GENERIC",
+      "summary": {
+        "n": 3,
+        "mean": 0.00954861111111116,
+        "sample_sd": 0.03348489847566997,
+        "min": -0.02864583333333326,
+        "max": 0.03385416666666674
+      },
+      "differences": {
+        "0": -0.02864583333333326,
+        "1": 0.03385416666666674,
+        "2": 0.0234375
+      },
+      "unmatched_arm_seeds": [],
+      "unmatched_baseline_seeds": []
+    }
+  ]
+}
