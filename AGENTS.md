@@ -25,6 +25,21 @@ evidence. The evidence standard is `docs/research/specs/MARL_EMPIRICAL_EVIDENCE_
 §11 controls every B and C-BENCH object and prevails over any direction document that asks for
 more. `docs/project/ALGORITHM_PRINCIPLES.md` is historical background, not a required reading.
 
+## Workflow calibration (OWNER_DIRECT, 2026-09-06)
+
+CM implements its bounded engineering objective directly by default. Implementer children are
+optional for independent parallel work or substantial context isolation; scientific/semantic risk
+sets review needs, not a mandatory implementation handoff. Preserve independent review for the
+high-risk changes named by the CM role. Models and reasoning efforts remain as configured.
+
+Existing authorization and unattended object-tier delegation persist until the owner changes them.
+An owner question or status request alone is not a takeover of each pending object decision.
+Recover missing routine facts from context and choose reversible implementation details locally.
+Pause dependent work for an actual scope, scientific-meaning, authorization or uncertain-effect
+conflict; continue independent authorized work. Ordinary code/check repairs continue to acceptance
+or a concrete blocker. This creates no new result-bearing invocation, retry budget or relaxation
+of a frozen card. Required checks stay proportional; repeated checks need a new reason.
+
 ## Scientific tool use (OWNER_DIRECT, 2026-09-05)
 
 The owner approved adoption batches 1 and 2 from
@@ -223,7 +238,7 @@ launch sha, execution node, run root, queue state).
 
 Several sessions commit to the primary target concurrently. Rules for all of them:
 
-- Each implementer works in its own worktree and branch; Root integrates.
+- Each editing CM or implementer works in its own worktree and branch; Root integrates.
 - Stage by explicit path and commit by pathspec (`git add -- <paths>`; `git commit -- <paths>`).
   `git add -A`, `git stash`, `git reset`, and any history rewrite are forbidden in agent
   instructions unless the owner asks for them by name.
@@ -386,13 +401,15 @@ appendix and completed historical tasks remain unchanged.
   output roots. A node is execution capacity, never a DM/CM authority, Transport endpoint, or
   provider-conversation binding.
 - Task names: `<agent-alias>_<model><effort>_<direction>_<task>` with aliases `dm`, `cm`, and the
-  shortest unambiguous alias for specialists; model codes `l/t/s` (Luna/Terra/Sol), effort codes
+  shortest unambiguous alias for specialists; model codes `a/l/t/s` (Astra/Luna/Terra/Sol), effort codes
   `l/m/h/xh/mx`; lowercase letters, digits, and underscores only.
 - `$hmasd-workflow-outsource` is used only when the owner names it or explicitly asks for a
   control-plane task to be delegated; otherwise the current agent makes workflow changes directly.
-- On this Windows host every Git push runs outside the default process sandbox with
-  `sandbox_permissions=require_escalated`; the sandboxed Git for Windows HTTPS helper can crash
-  without a diagnostic. Do not probe or retry a sandboxed push.
+- Run Git push with the current runtime's supported permissions. With Full Access and
+  escalation disabled, push directly and omit `sandbox_permissions`. When a sandbox is active
+  and the runtime supports escalation, use its supported outside-sandbox route: the sandboxed
+  Windows HTTPS helper has failed on this host. Never pass a forbidden permission parameter;
+  report an actual runtime restriction without inventing a repository approval requirement.
 
 ## Appendix B — Claude Code specifics
 

@@ -76,7 +76,7 @@ The target parallelism is five direction-level DM chains. Count neither Root nor
 CM/implementer/reviewer/critic/verifier/operator children, nor detached result processes as extra
 direction slots.
 
-The owner-requested shared `hmasd-experiment-tracker` (Luna/xhigh) is a root-level sibling of the
+The owner-requested shared `hmasd-experiment-tracker` (model/effort from its role TOML) is a root-level sibling of the
 DMs and also consumes no direction slot. Publish its canonical name and tracking-document branch
 in Portfolio; restore it through the existing Root heartbeat. DMs hand accepted handles to it and
 receive reminders directly, with no Root relay. It is the single writer of

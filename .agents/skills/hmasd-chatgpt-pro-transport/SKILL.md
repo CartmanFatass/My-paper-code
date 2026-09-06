@@ -69,38 +69,11 @@ this same transport lifecycle. When caller and parent are the same task, archive
 intake locally without sending a message to itself; otherwise return the usual parent
 receipt. This exception changes the executor, not the provider model or decision node.
 
-An optional `reference_paths` list contains one or more absolute reference files
-for bounded noncanonical/legacy transport. Validate and hash every
-reference before transport. There is no strict filename or orthogonality requirement:
-the provider may normalize/display attachment names, and references may be attached
-or otherwise supplied in the page-supported form. Record the provider-visible names
-and preserve the byte hashes and intended order where the page permits. The
-one-to-one binding-key/conversation rule still applies to the body and all
-references together.
-
-For already accepted or explicit fallback attachment-mode Author handoffs only,
-`PROMPT_BODY.md` is the sole scientific
-attachment: its `GITHUB_EVIDENCE_MANIFEST` already contains the read-only reference
-metadata. Such a handoff must not declare, upload, or synthesize `reference_paths`.
-`scripts/validate_request.py` recognizes `source_mode=single_body_attachment`,
-requires the sole `PROMPT_BODY.md` upload, and rejects any reference attachment
-declaration in that mode.
-Use the body bytes verbatim and retain any generic legacy reference support only for
-non-Author transport requests.
-
-Reject every canonical request that lacks a valid `source_thread_id` or
-`parent_thread_id`. Reject legacy
-fallback routing fields even when false or null. A legacy request may omit its source
-or parent and still execute transport, but without a valid parent it is ineligible for an automatic receipt; mark
-its receipt substate `RETURN_RECEIPT_BLOCKED`, do not guess a destination, and do not
-send any receipt.
-
-When loading legacy outbox state, normalize only a provably unsent `PENDING` or
-`BLOCKED` receipt. Check both the primary and old fallback route: any attempt count,
-delivery status, sent timestamp, or terminal delivery state preserves the complete
-old receipt as historical evidence and forbids a new send. A valid parent permits
-only the zero-attempt migration to `PARENT_SESSION`; no parent records
-`required=false` and remains ineligible for return.
+For explicit attachment fallback, noncanonical uploads or legacy request/outbox recovery,
+read [attachment-compatibility.md](references/attachment-compatibility.md) before acting.
+Normal GitHub delivery uses the exact short prompt and canonical routing above. A missing
+canonical source/parent ID or forbidden legacy fallback routing field is rejected; never
+infer a receipt destination.
 
 The allowed decision-node bindings are exact:
 
@@ -114,14 +87,7 @@ Otherwise the first concrete provider conversation observed for the binding key 
 persisted. When one is supplied, navigate to its exact `/c/<uuid>` URL and refuse
 any different observed conversation. One provider conversation ID may back only
 one decision binding key; Innovator, Convergence, and Portfolio must never share a
-conversation. The preferred input is a canonical packet produced by
-`scripts/materialize_packet.py`. The packet is one logical object identified by
-`packet_id` and a `PACKET_MANIFEST.json`; the body and references may be separate
-physical files only because the page upload interface requires it. The manifest is
-the authority for order, source path, byte count, and hash. Companion text is
-transport UI text and is never a second scientific packet. Legacy `prompt_path` /
-`reference_paths` input remains accepted, but the operator must materialize and
-record the canonical manifest before page actions.
+conversation. For attachment materialization follow the compatibility reference above.
 
 Reject missing/ambiguous content, unknown direction IDs, relative upload paths, and
 missing/duplicate reference files. Validate the single `direction_id` against both
@@ -142,39 +108,11 @@ only after a concrete `/c/<uuid>` URL is observed.
 Use `scripts/bind_conversation.py` for the first binding and every idempotent retry;
 it refuses a different conversation ID for an already-bound key.
 
-Normal operation reuses the same bound conversation serially. A provider-context
-replacement requires the handoff to explicitly set
-`reset_invalid_provider_context=true` with complete
-`provider_context_reset_evidence`. There are two supported reasons:
-
-- **Owner-directed new conversation:** `reset_authority=OWNER_DIRECT`, the exact
-  `owner_instruction`, and `previous_request_id`. This covers an explicit request
-  to use a new conversation for a new model. Preserve the entire prior record and
-  all accepted-send facts, even if its generation is unfinished. Do not claim that
-  its answer was contaminated, blocked, or scientifically negative. Stop the old
-  operator's future actions and retire its superseded wake before taking over; an
-  accepted provider generation need not be stopped. Use a distinct request ID.
-- **Automated contaminated-context recovery:** the immediately previous round is `ARCHIVED`,
-its final outcome is `DECISION_NOT_FORMED` or `BLOCKED`, it read exactly zero
-repository paths, and acknowledged provider-context contamination is traced to a
-named prompt defect. Before reset admission, archive those actual facts in
-`archive.provider_context_reset_facts`; compare every caller field to that persisted
-record and refuse missing or mismatched facts without mutation. A pending request
-or an ordinary bad answer does not qualify for this automated route.
-
-For either reason, the caller must not invent a replacement provider ID. Before page
-actions, call `scripts/bind_conversation.py:prepare_context_reset` to retire the
-old provider ID and leave the binding with no active provider conversation. The old
-ID is permanently unavailable to every binding. Then create no provider conversation
-by inference: only after a successful send produces a newly observed webpage
-`/c/<uuid>` URL may Transport call `bind` with
-`observed_after_successful_send=true` to bind that replacement. A reset flag and its
-evidence are routing metadata; never put them in the body, reference manifest, or
-provider-visible companion text. That replacement is persisted directly as
-`SEND_CONFIRMED` with one send click and durable send evidence; it may proceed only
-to generation waiting, never to another Send action. Repeating preparation with the
-same request and evidence is idempotent. The legacy `quarantined_conversations`
-storage name includes owner-retired conversations; it does not label their science.
+Normal operation reuses the same bound conversation serially. Only an explicitly
+authorized owner replacement or the existing narrowly defined contaminated-context
+recovery may reset a binding. Read [provider-context-replacement.md](references/provider-context-replacement.md)
+before either path; preserve accepted-send facts and never invent a provider ID.
+An ordinary bad answer, model mismatch, timeout or uncertain Send does not authorize reset.
 
 ## Browser and model preflight
 
@@ -218,31 +156,9 @@ and use the platform paste key. Verify the composer text before sending. Do not 
 `locator.fill()` for transport: the live test produced a duplicated/malformed user
 message node even though a response was returned.
 
-For upload mode, start `waitForEvent("filechooser")` before opening the visible
-upload control, set the absolute file path, and wait for the explicit file group and
-upload completion state. Record file size/hash before upload. Acceptance of a
-validated handoff authorizes uploading exactly its validated `prompt_path` and any
-validated `reference_paths` to `chatgpt.com` for that request. Do not request
-action-time confirmation before upload or immediately before Send. This authorization
-does not extend to any other local file, destination, replacement packet, or second
-send. An exact retry remains covered only when authoritative state proves the prior
-operation was rejected before acceptance and produced no external effect.
-If `reference_paths` are present, upload them before Send (in one chooser when
-`isMultiple()` is true, or in separate chooser cycles otherwise) and verify every
-expected file by its recorded size/hash and conversation association. A provider
-filename suffix or other display normalization is informational, not a blocker. If
-the upload is still pending, do not send. Do not invent companion text when
-file-only Send is disabled; stop and request the exact companion text from the
-calling session.
-
-For a canonical packet, preserve the exact body bytes and every supplied reference
-hash. Upload the manifest-selected physical files in the recorded order when the
-page requires attachments. A provider filename suffix or normalization is an
-observation to record, not a reason to rewrite the packet or fail the send.
-
-For a canonical Prompt Author single-body packet, upload only `PROMPT_BODY.md`.
-The in-body `GITHUB_EVIDENCE_MANIFEST` is not a second attachment and must not be
-split back out for upload.
+For upload mode, read [attachment-send.md](references/attachment-send.md) before
+uploading. Preserve exact body/reference bytes, verify every expected upload before
+Send, and retain canonical manifest order. A pending upload cannot be sent.
 
 After the verified packet is ready, click Send once. Record `SEND_ATTEMPTED`, then re-observe:
 
@@ -263,32 +179,9 @@ Persist the exact user-message ID or another unique DOM identity when available,
 alongside its text and attachment association. A file chip proves page association;
 its byte identity comes from the pre-upload local hash, not from its display name.
 
-### Locator hit-point mismatch recovery
-
-A locator result is not, by itself, proof that its rendered hit point is clickable. The
-observed failure mode is an exact Send prompt locator with `matchCount=1`,
-`visibleCount=1`, and `disabled=false`, followed by a force-click error such as
-`No element found at point … waiting on click for selector`. Treat that combination
-as a locator coordinate offset, not as `SEND_FAILED_PRE_SEND` and not as evidence
-that a submission occurred.
-
-Before making any classification, take fresh DOM state using the current browser
-API. Select the exact visible Send prompt node from that fresh DOM; do not guess
-coordinates or reuse a stale node. A single DOM-node click is
-permitted only when all of the following are true: the URL is unchanged from the
-pre-send observation, no visible user-message node exists for the exact prompt, and
-fresh locator diagnostics still prove that this exact Send control is enabled and
-visible. This DOM-node click replaces the failed locator click; it is the one Send
-attempt and is recorded as `SEND_ATTEMPTED`.
-
-Immediately after the DOM-node click, re-verify the concrete `/c/<uuid>` URL (and the
-bound conversation when one already exists), the exact visible user-message node and
-its exact prompt text, and every expected attachment/file group and recorded hash. If
-that evidence is complete, record `SEND_CONFIRMED`. If the URL or user-node evidence
-is ambiguous at any point, record terminal `SEND_UNCERTAIN`; do not retry. If the
-post-click snapshot is unambiguously unchanged with no user node, record
-`SEND_FAILED_PRE_SEND` and stop. Never perform blind coordinate retries, a second
-DOM-node click, or any retry after `SEND_UNCERTAIN`.
+If a locator reports a hit-point/coordinate failure, read
+[send-hit-point-recovery.md](references/send-hit-point-recovery.md) before any replacement
+click. The error alone proves neither submission nor a safe retry; uncertain Send stops.
 
 ## Long generation and asynchronous wake-up
 

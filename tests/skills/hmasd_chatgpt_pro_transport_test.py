@@ -782,6 +782,8 @@ def test_same_request_bind_is_idempotent_after_initial_admission(tmp_path: Path)
 
 def test_skill_contracts_encode_execution_owner_async_and_tab_boundaries() -> None:
     transport_text = TRANSPORT_SKILL.read_text(encoding="utf-8")
+    for reference in ("attachment-compatibility.md", "attachment-send.md"):
+        transport_text += (TRANSPORT_SKILL.parent / "references" / reference).read_text(encoding="utf-8")
     outsource_text = OUTSOURCE_SKILL.read_text(encoding="utf-8")
 
     for phrase in (
@@ -816,7 +818,7 @@ def test_skill_contracts_encode_execution_owner_async_and_tab_boundaries() -> No
 
 
 def test_skill_contracts_bound_locator_coordinate_offset_recovery() -> None:
-    transport_text = TRANSPORT_SKILL.read_text(encoding="utf-8")
+    transport_text = (TRANSPORT_SKILL.parent / "references" / "send-hit-point-recovery.md").read_text(encoding="utf-8")
 
     for phrase in (
         "Locator hit-point mismatch recovery",
@@ -841,7 +843,10 @@ def test_skill_contracts_bound_locator_coordinate_offset_recovery() -> None:
 
 
 def test_transport_contracts_require_one_attachment_for_prompt_author_packets() -> None:
-    transport_text = TRANSPORT_SKILL.read_text(encoding="utf-8")
+    transport_text = "\n".join(
+        (TRANSPORT_SKILL.parent / "references" / reference).read_text(encoding="utf-8")
+        for reference in ("attachment-compatibility.md", "attachment-send.md")
+    )
 
     assert "`PROMPT_BODY.md` is the sole scientific\nattachment" in transport_text
     assert "must not declare, upload, or synthesize `reference_paths`" in transport_text

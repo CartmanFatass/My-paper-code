@@ -21,8 +21,9 @@ duplicate a launch. Run the smallest useful non-result-bearing probe, retain the
 through observation, and preserve raw artifacts under the proof root.
 
 Verification burden follows the named question: use deterministic replay only for a code path,
-regression, diagnostic, or exact semantic object that needs it; use independent training outcomes
-and limited uncertainty for learning-performance claims. Do not add cross-platform bit equality,
+regression, diagnostic, or exact semantic object that needs it. Learning-performance claims use
+existing independent training outcomes and limited uncertainty; any new training is returned to
+DM/CM for its own selected result-bearing assignment. Do not add cross-platform bit equality,
 extreme tolerances, full historical replay, complete intermediate-array publication, or exhaustive
 support/mechanism census unless the current card makes that semantics part of the claim. A focused
 check of the changed behavior and primary output is sufficient when no such exact claim is present.

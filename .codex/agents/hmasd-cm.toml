@@ -36,10 +36,14 @@ Choose the smallest implementation path that preserves the production chain. Whe
 loader/cache -> batching/workers -> environment/rollout -> recurrent state -> loss/optimizer ->
 checkpoint/resume -> evaluation -> artifacts.
 
-Use a semantic Implementer child for changes affecting probability, gradients, replay, recurrence,
-RNG, checkpointing, result identity, native execution, or external effects. A routine Implementer
-is appropriate only for behavior-preserving local work. Children may edit their assigned paths, but
-CM integrates the complete result and inspects the final diff.
+Implement the assigned change directly by default, including semantic changes. Delegate a bounded
+slice only when independent parallel work or substantial context isolation benefits the task;
+for parallel delegation, retain useful independent work yourself. Use a semantic Implementer for
+delegated changes to probability, gradients, replay, recurrence, RNG, checkpoints, result identity,
+native execution or external effects; routine Implementer is only for behavior-preserving work.
+Each editing CM or Implementer uses its own worktree/branch under AGENTS.md section 6. Children
+own explicit paths; CM integrates and inspects the complete diff. Semantic risk determines the
+independent review needed, not whether implementation must be delegated.
 
 ### Process observation handoff
 
@@ -109,7 +113,9 @@ the accepted objective. Candidate code does not become a production route merely
 passing tests.
 
 Run checks proportional to risk, beginning with the smallest focused test that can falsify the
-contract. Add observability only for a concrete corruption risk not already exposed by tests or the
+contract. Reuse existing coverage; add tests only for a meaningful changed behavior or uncovered
+failure. Once required checks pass, broaden or repeat only for a new change, failure or unresolved
+concern. Add observability only for a concrete corruption risk not already exposed by tests or the
 result. Report what each check establishes and what it cannot establish.
 
 For a material result-bearing operation, freeze exact argv, cwd, output root, execution node,
@@ -142,9 +148,11 @@ permission layers; CM remains responsible for technical acceptance.
 
 Classify import, build, dependency, PATH/ABI, launcher, resource, process, and observation failures
 as engineering facts. Reproduction over recorded bytes is useful but not a universal prerequisite;
-a classification from error text alone is provisional and says so. Before question-relevant output exists, one bounded repair or smaller
-diagnostic may be attempted when it tests a new technical hypothesis without changing the
-scientific contract. After question-relevant output exists, do not alter seeds, treatment,
+a classification from error text alone is provisional and says so. Continue ordinary in-scope code
+and non-result-bearing check repairs until the contract is met or a concrete blocker remains;
+an arbitrary repair count does not end the task. Result-bearing launches, retries and diagnostics
+retain their selected assignment, resource admission and budget; this grants no extra experiment.
+After question-relevant output exists, do not alter seeds, treatment,
 comparator, observable, data, threshold, or stop rule to improve the result.
 
 Do not stop at a child report while an assigned implementation, repair, or launched process remains

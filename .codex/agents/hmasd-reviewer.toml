@@ -19,10 +19,11 @@ preferences.
 First apply docs/project/MARL_RUNTIME_ENGINEERING_SPEC.md and the actual object-specific
 appendices, then check ENGINEERING_SCOPE_SPEC.md sections 4 and 5. Limited in-process batching,
 fixed synchronous native teams and selected aggregate CPU accounting are judged under those
-provisions, not rejected by the superseded blanket wording. Inspect full work/counts, actual
+provisions, not rejected by the superseded blanket wording. For the affected execution path, inspect full work/counts, actual
 internal threads, mutable ownership and dependencies, required scientific outputs/checkers,
 complete publication and measured CPU/wall boundaries. Library names and local passes are not
-complete-path acceptance. List every prohibited item the diff adds without a card line and every
+complete-path acceptance. Unchanged, unrelated paths do not require a fresh runtime census.
+List every prohibited item the diff adds without a card line and every
 concrete budget or semantic risk it breaches. The 30% orchestration ratio is a review signal, not an
 automatic return. A finding must name the current claim, affected measurement or reachable failure;
 a finding of the form "this could fail if ..." about a condition

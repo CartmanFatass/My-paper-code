@@ -49,48 +49,27 @@ archive alone is not science acceptance. No new approval or experiment gate is a
 
 ### Scientific question and burden
 
-Apply evidence-spec §11.8 while authoring, not only as a citation. Include the current
-evidence spec and applicable authority among the caller-selected pinned references.
-Start from the decision the next observation should inform. Do not silently replace a
-performance question with proof of an exact maximum, full support or complete cause.
-When proposing such a diagnostic, compare its decision value and known work with a
-direct bounded B or finite measurement. Finite, deterministic and zero-learner do not
-mean cheap. A packet that selects future work must discuss that work's cost even though
-the consultation itself runs no experiment; unknown cost is not zero or evidence of
-cheapness. Use existing facts, not a mandatory new cost-measurement experiment.
+Apply `docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md` §11.8 to the question
+itself and include that specification among the pinned references. In the existing
+question, state the decision, smallest sufficient evidence class, claim ceiling,
+strongest alternative and why the proposed observation discriminates between them.
+Ordinary performance exploration uses real training and sampled returns; exact maxima,
+full support, exhaustive cause or a search-before-learning prerequisite need their
+own scientific purpose. Making a search bounded or calling a prerequisite A does not
+supply that purpose. Normal action selection and learning optimization are unaffected.
 
-Expose inherited restrictions that exclude a simpler experiment and their actual
-owner/specification basis. Permit Pro to question author assumptions; do not constrain
-an overbudget return to exact implementation, higher budget or PARK alone. Asking for
-an exact claim does not establish that the claim is worth pursuing. Ordinary B need
-not resolve the full policy-class maximum or mechanism before learning. Preserve real
-correctness dependencies and historical results. Renaming a forbidden B prerequisite
-as an A object does not remove the prerequisite. This reasoning belongs in the existing
-question and intake, not a separate checklist, proof or launch gate.
+For proposed future work, give known dominant work factors (arms/seeds/steps/evaluation
+and nested candidate/trajectory/solver calls), separating algorithm work from added
+validation. Compare costly diagnostics with a direct bounded B or finite measurement;
+unknown cost stays unknown. No extra cost experiment, complexity proof or validator is
+required. Expose inherited restrictions and their actual authority, and let Pro question
+author assumptions. Native execution, parallelism or a higher cap alone does not justify
+an unnecessary question. Preserve correctness dependencies and historical evidence.
 
-On receipt, Root/DM tests the selected question's necessity as well as implementation
-fidelity. If Pro adds a conflicting prerequisite, cite the exact source and conflict
-and reopen that node for correction; archive the answer unchanged. A requested explicit
-specification exception follows existing scope/authority, never implicit precedence.
-Already accepted packets are not regenerated or resent to adopt new wording.
-
-Replacing exhaustive search with beam search, best-of-many or another bounded policy
-search does not repair an unnecessary search-before-learning dependency. Ordinary MARL
-performance exploration defaults to real training and sampled return comparison, not
-an oracle/headroom search. Search needs its own scientific purpose (for example, an
-explicit planning algorithm or separately chosen diagnostic); a smaller search budget
-alone supplies no such purpose. Normal action selection and training optimization are
-not a pre-learning search over policies or future trajectories.
-
-Before selecting prospective work, describe its dominant multiplicative factors in the
-existing question: arms, seeds, environment steps, evaluation points/episodes, and nested
-candidate/trajectory/solver calls. Separate algorithm-required work from added validation.
-Joint-action, horizon, subset and cross-product explosions require reconsidering the
-question; native code and parallelism do not justify them. Prefer an adequate sampled
-comparison or fewer unnecessary dimensions, preserving the stated comparison. No universal
-overhead ratio, complexity proof, cost experiment or new validator is required. Unknown
-counts/costs stay explicit, not zero; do not claim measured inflation without a baseline.
-
+At intake, check the selected question and requirements against current owner/spec
+constraints. Archive a conflicting response unchanged and return the concrete conflict
+to the same node; continue conforming independent work. Explicit exceptions follow
+existing authority. Accepted requests are never regenerated or resent for wording changes.
 
 ## Recovery and fallback
 

@@ -49,11 +49,14 @@ extreme tolerances, full intermediate publication or cross-platform comparison u
 object requires it. Report the scope line
 (`scope: none` or `scope: <item> per <card line>`) to CM with the diff.
 
-Add or update focused tests inside owned paths. Run only non-result-bearing checks within the
+Reuse focused tests and add or update them when changed behavior needs meaningful coverage inside
+owned paths. Run only non-result-bearing checks within the
 assignment and record direct failures without changing the contract. You may use a CM Scout for one
 static relation or a Verifier for one non-result-bearing runtime fact that can change the
-implementation. If a check fails, make one local repair tied to the frozen contract. If repair
-would change the contract, shared core, or an unowned path, stop and return the conflict.
+implementation. Repair ordinary in-scope failures until the contract is met or a concrete blocker
+remains. Shared core explicitly assigned by the contract is an owned surface. Return a conflict
+when a repair would change protected semantics, the contract, or an unowned path. Passing required
+checks ends verification unless a new change, failure or unresolved concern justifies more.
 
 If satisfying the cost contract would require a scientific-semantic change or an unowned path,
 stop and return the exact gap. Do not weaken the contract, change the

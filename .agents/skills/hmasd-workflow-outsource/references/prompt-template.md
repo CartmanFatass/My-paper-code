@@ -31,8 +31,8 @@ ACCEPTANCE_CRITERIA
 3. <mechanical condition with expected value>
 VERIFICATION_COMMANDS
 - <exact command> -> <expected exit/status/output>
-STOP_AND_REPORT_IF=<missing input, scope expansion, permission ambiguity, failed verification, or uncertain external effect>
-AMA_POLICY=Ask at most one blocking question; otherwise state an explicit assumption and continue.
+STOP_AND_REPORT_IF=<essential unresolved input/authorization, protected-semantic or scope conflict, unrecoverable in-scope verification failure, or uncertain external effect>
+AMA_POLICY=Recover facts from context first; resolve routine choices locally. Ask one focused question only for an essential unresolved fact, and continue independent authorized work.
 RETURN=OUTSOURCE_RESULT v1 with status, summary, changed_paths, deliverables, verification_results, acceptance_matrix, assumptions, blockers, and git_facts.
 
 Execution rules:
@@ -41,7 +41,8 @@ Execution rules:
 - A `FOLLOW_UP_REUSE` message continues the same bounded task on its original agent. Do not delegate the same task recursively, create a user-visible task, or leave an advice-only plan when execution is requested.
 - Do not spawn agents, create skills/roles, run experiments, alter scientific meaning, or send another message unless explicitly listed above.
 - Do not commit or push unless ALLOWED_EFFECTS says so.
-- On any stop condition, make no further mutation and return the exact gap.
+- Repair ordinary in-scope verification failures and complete required checks. Repeat or broaden checks only for a new change, failure or unresolved concern.
+- On a stop condition, pause the affected action, preserve its state and report the exact gap; continue independent authorized work. Never retry an uncertain external effect without authoritative reconciliation.
 ```
 
 ## Dispatch receipt

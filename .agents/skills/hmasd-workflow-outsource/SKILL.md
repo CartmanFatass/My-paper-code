@@ -40,8 +40,11 @@ when the contract explicitly authorizes that subtask.
    owned paths, allowed effects, deliverables, acceptance checks, verification
    commands, and stop conditions. Preserve user wording and do not add scientific,
    portfolio, experiment, or external transport work.
-2. If a required contract slot is absent, or the request contains multiple independent
-   objectives, ask one blocking AMA question or return `BLOCKED_INPUT`; do not guess.
+2. Fill contract facts from the request, existing authorization and repository state.
+   Resolve routine implementation choices locally and state material assumptions. If
+   an essential scope, scientific meaning, destination or external-effect authorization
+   remains unknown, ask one focused question and pause only the dependent work.
+   Multiple requested changes may form one bounded objective; do not add unrelated work.
 3. Read [references/prompt-template.md](references/prompt-template.md), fill every
    field, and classify the dispatch as `INITIAL`, `FOLLOW_UP_REUSE`, or
    `REPLACEMENT`.
@@ -75,8 +78,10 @@ Use one of: `DISPATCHED`, `WAITING`, `COMPLETED`, `BLOCKED_INPUT`,
 exact commands and outputs, an acceptance matrix, assumptions, blockers, and Git
 facts. Missing evidence is incomplete, not success.
 
-AMA is one bounded question for a fact that blocks the contract, not an open-ended
-design interview.
+AMA is one bounded question for an essential fact that cannot be recovered from context.
+Ordinary in-scope verification failures are repaired by the assigned agent until the
+contract is met or a concrete blocker remains. They do not automatically end the task.
+Existing experiment budgets and uncertain external-effect boundaries still apply.
 
 ## Red flags
 

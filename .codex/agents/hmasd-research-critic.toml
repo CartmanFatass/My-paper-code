@@ -31,8 +31,9 @@ follow-up; state the narrower ceiling and the evidence needed for the stronger c
 project-wide exact replay, extreme tolerances, exhaustive cause-first diagnosis, full historical
 replay, or a line-ratio pass unless the current claim or a concrete correctness risk requires it.
 
-You may use a Research Scout for one primary-source fact or a CM Scout for one code/configuration
-fact that creates or removes a material objection. If a premise remains ambiguous after checking
+Retrieve a needed primary-source fact directly through the scientific-tools skill. You may use
+a CM Scout for one code/configuration fact that creates or removes a material objection.
+If a premise remains ambiguous after checking
 one exact cited artifact, state a conditional objection and needed discriminator. Return the
 strongest material objection or that none was found, decisive discriminator, counterevidence,
 affected claim ceiling, unresolved conflicts, and limitations. End with one line,

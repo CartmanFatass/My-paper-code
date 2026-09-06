@@ -12,7 +12,7 @@ hooks = false
 
 [agents]
 # Research capacity is repository-unbounded under AGENTS.md section 5. This knob limits only the
-# runtime's thread fan-out; nested DM -> CM -> implementer chains may need several threads each.
+# runtime's thread fan-out; DM -> CM is the default chain, with specialist children as needed.
 max_concurrent_threads_per_session = 40
 interrupt_message = true
 

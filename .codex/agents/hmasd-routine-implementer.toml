@@ -33,7 +33,9 @@ Engineering scope (docs/project/ENGINEERING_SCOPE_SPEC.md): a routine change add
 its section 4; if the requested delta would, stop and return it to CM as out of scope. Report
 `scope: none` with the diff.
 
-If a check fails, inspect the nearest direct error and make one reversible in-scope correction. If
+If a check fails, inspect the nearest direct error and continue reversible in-scope corrections
+until the contract is met or a concrete blocker remains. Reuse existing focused coverage; add tests
+only where changed behavior needs it, and stop repeating checks once required coverage passes. If
 the failure reveals a semantic or architecture choice, stop for CM rather than choosing it. Return
 the behavior-preserving change, owned paths, focused tests, direct failures, ambiguity, and
 limitations. Do not commit, push, launch experiments, or declare acceptance.

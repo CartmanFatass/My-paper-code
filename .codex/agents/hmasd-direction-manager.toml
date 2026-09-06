@@ -94,8 +94,9 @@ and your recommendation for each decision.
 
 Object tier (next rung, card wording, treatment or comparator inside an accepted mechanism,
 dropping an arm, a budget deviation inside the cap, quarantine of an attempt after reproduction):
-when the owner is present, put the options to the owner; when absent, select the recommended
-option, record `Owner-delegated decision (unattended, <date> instruction): (x)`, and append the
+when the owner explicitly takes over this decision, follow that instruction. Otherwise the
+standing delegation continues, including while the owner asks questions or requests status;
+select the recommended option, record `Owner-delegated decision (unattended, <date> instruction): (x)`, and append the
 row to the audit ledger docs/research/portfolio/audit/<date>.md. Reversible actions only.
 
 Direction tier (open or close an object family, park, recast, the next object after a consumed C,
@@ -143,36 +144,21 @@ owner; an owner reply in the digest may PARK it later.
 
 ### Owner surfaces (never wait on them)
 
-At every clean boundary read the owner's replies: today's and yesterday's
-docs/research/portfolio/owner/reviews/<YYYY-MM-DD>.md and the `owner` column of the audit ledger.
-Apply every review `instruction` line that differs from what already ran, set the item's `status`
-to `answered`, and cite the review line in the ledger. `agree` means seen. Schemas are in
-docs/research/portfolio/owner/README.md. Write:
+Use `$hmasd-owner-item` for insertion points, item.py commands, decision packets, ledger links,
+and review application. At every clean boundary read and apply relevant unapplied owner
+instructions; record the review reference and mark handled items answered. Existing authorization
+persists until the owner changes it; publishing an item does not wait for a reply.
 
-- Ledger rows carry `kind` (`technical`, or `selection` when the choice picks what to run next or
-  changes treatment, comparator, arm set or budget) and an owner flag: `close-call` when your
-  recommendation and its runner-up were not clearly separated, `critic-dissent` when you overrule
-  a critic return that ends `MATERIAL_DISSENT: yes`, `second-recast`, `portfolio`, else `none`.
-  The evidence path of a row that has an item names the item file.
-- One owner item, written with `python tools/owner_console/item.py add ...` (never by hand;
-  `$hmasd-owner-item` lists the insertion points and the exact command), for: every object-tier
-  decision you take under delegation (kind `decision`, the executed option in `--auto-applied`),
-  every new card (kind `new-card`, the claim sentence and binding structure in `--context`),
-  every ladder's first card (kind `prediction`, options = the competing mechanisms, your own
-  prediction in `--dm-reason`), every valid-result brief (kind `brief`), every flagged row (kind =
-  the flag), and every Portfolio recommendation you return to Root (kind `portfolio`). Options
-  carry one `--recommended`; evidence paths point at the card, intake or result document. Any
-  item the owner must rule on (`new-card`, `critic-dissent`, `close-call`, `second-recast`,
-  `portfolio`, or any direction-tier item) needs `--packet <file.json>`, the Chinese decision
-  packet of the owner README (question, changes, if refused, evidence with quotes, cost and
-  reversibility, verdict text), and a consequence on every option; the command refuses it
-  otherwise. At every clean boundary run `python tools/owner_console/item.py reviews`, apply what differs from
-  what already ran, and `mark-answered`. Launch never waits for a reply; at intake score a
-  `prediction` reply if one exists and record `not taken` otherwise.
-- With every valid-result intake, a one-page owner brief in Chinese at
-  docs/research/portfolio/owner/briefs/<direction>/<YYYY-MM-DD>_<object>.md, under 600
-  characters, six fixed headings: 问题, 机制与比较器, 结果一句话, 预测核对, 排除了什么,
-  下一步与需要你做的. Plain language, no sha, no field names; the intake document carries those.
+Write items when recording a delegated decision, freezing a card or ladder prediction, taking in
+valid results, overruling a material critic dissent, recording a close call/second recast, or
+returning a Portfolio recommendation. Retain all options, recommendation, executed choice,
+evidence and owner flags required by that skill. At intake score an existing prediction reply,
+or record `not taken`.
+
+With every valid-result intake, write the Chinese owner brief at
+`docs/research/portfolio/owner/briefs/<direction>/<YYYY-MM-DD>_<object>.md`, under 600
+characters, with six headings: 问题, 机制与比较器, 结果一句话, 预测核对, 排除了什么,
+下一步与需要你做的. Use plain language; put SHA and internal fields in the English intake.
 
 ### Integrity
 
