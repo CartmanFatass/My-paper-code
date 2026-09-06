@@ -24,13 +24,18 @@ conversation for a bound key.
    and `EXPOSURE_AND_COST.json` in the packet folder, and a read-back `ISSUE_SNAPSHOT.json`.
    Follow the authoring rules in `.agents/skills/hmasd-pro-research-prompt-author/SKILL.md`
    (section 11.8 proportional burden, dominant work factors, natural-language answer).
-3. **Create the delivery surface**: a dedicated branch `claude/pro-<direction>-<round>-<date>` at
-   the full base sha, pushed; reuse the direction's substantive Issue or open one.
+3. **Create the delivery surface**: a dedicated output branch at the full base sha, pushed
+   (`git push origin <base_sha>:refs/heads/codex/pro-<direction>-<round>-<date>`; the renderer
+   requires the `codex/pro-` prefix for every Pro output branch, whichever loop authors it);
+   reuse the direction's substantive Issue or open one.
 4. **Render** with the Codex renderer in caller-direct mode, so no Codex singleton is implied:
 
    ```
-   C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe .agents/skills/hmasd-pro-research-prompt-author/scripts/render_packet.py REQUEST.json --out-dir <packet folder>
+   python .agents/skills/hmasd-pro-research-prompt-author/scripts/render_packet.py REQUEST.json --out-dir <packet folder>
    ```
+
+   (`python` on PATH is 3.11; the renderer imports `tomllib`, which the 3.10 main environment
+   lacks.) Rendering writes `TASK.md` and an unbound `HANDOFF.json` (`TASK_NOT_PUBLISHED`).
 
    `REQUEST.json` carries `execution_mode: "CALLER_DIRECT"`, `owner_execution_instruction` quoting
    the owner's instruction that Claude may operate transport, `delivery_mode: "github_delivery"`,
@@ -39,12 +44,35 @@ conversation for a bound key.
    `source_thread_id` and `parent_thread_id`: use one UUID5 derived from this Claude session URL
    for both (`uuid.uuid5(uuid.NAMESPACE_URL, "<session url>")`), and record that derivation in the
    packet's `DISPATCH_RECORD.json`. They are routing metadata, never prose.
-5. **Commit and push `TASK.md`** by explicit pathspec, resolve its full sha, then
-   `render_packet.py --bind-task-sha <sha> --handoff-path <HANDOFF.json>`; commit and push the
-   bound handoff. `dispatch_state` must read `READY_TO_DISPATCH`.
-6. **Dispatch** `hmasd-pro-transport` once with the handoff path and `mode: scientific`, an
-   observation window, and nothing else. Read its return as transport facts. An uncertain send is
-   terminal for that request id; a new request id is a new decision, not a retry.
+5. **Commit and push `TASK.md`** by explicit pathspec, resolve its full sha, then bind with
+   **only** `render_packet.py --bind-task-sha <sha> --handoff-path <HANDOFF.json>` (no request
+   file, no `--out-dir`; the binder refuses rendering arguments); commit and push the bound
+   handoff. In caller-direct mode `dispatch_state` reads `CALLER_READY` (the singleton form reads
+   `READY_TO_DISPATCH`).
+6. **Send and wait, hub-direct** (owner suggestion 2026-09-05 21:46 PDT: no Sonnet subagent is
+   needed for transport; a file watch is enough for the wait):
+   - preconditions in the hub's own calls: registry record for the key (`active_request_id`
+     null, conversation equal to `requested_conversation_id`, or absent for a first binding),
+     fresh `gh api` readback of the output branch head, response path and Issue comments, the
+     TASK commit on the remote, `agentify_status`, one agent tab navigated to the exact
+     conversation URL (or `https://chatgpt.com/` for a first binding), `agentify_ensure_ready`,
+     `agentify_review_preflight` with `Pro` and `GPT-6 Astra` then `Latest`;
+   - write the exact prompt bytes to the archive `__00_PROMPT.md` and hash them;
+   - one `agentify_review_query` with `timeoutMs` about 60000 so the call returns `SENT_WAITING`
+     quickly; a `COMPLETE` receipt on the first call is also fine;
+   - wait with the `Monitor` tool on the archive directory until the response file exists and
+     the Agentify state file `C:/Users/fires/.agentify-desktop/review-transport.json` shows
+     `operations.<request_id>.archive` non-null (or `error` non-null); no polling by the hub;
+   - after the wake-up, one identical `agentify_review_query` with `verifyExisting=true` returns
+     the `COMPLETE` receipt without sending; then archive sha256, `bind_conversation.py`, the
+     transport facts JSON, `GITHUB_RESPONSE.md` and `DELIVERY_COMMENT.json` by `gh api`, and the
+     tab close, exactly as the `hmasd-pro-transport` agent definition lists them.
+   An error from the query call is handled by reading the persisted operation first:
+   `sendAttempted=true` allows only the identical `verifyExisting=true` call; `sendAttempted=false`
+   with no new user turn visible is `NOT_SENT`. An uncertain send is terminal for that request id;
+   a new request id is a new decision, not a retry. The `hmasd-pro-transport` subagent remains
+   available when the hub wants the whole checklist run outside its own context (it was used for
+   the N3 recovery Send on 2026-09-05).
 7. **Intake**: read the full response from the archive's `GITHUB_RESPONSE.md` (verified against the
    immutable commit), not the short chat receipt. Check the formed decision against current owner
    instructions and specifications; a complete answer does not authorize a silent exception. Write
