@@ -1,0 +1,119 @@
+=== Task 'frrie_r09_segfault_a02_43eec21e_20260906' started at 2026-09-06T22:39:24+08:00 ===
+{
+  "assessed_at": "2026-09-06T14:39:24.544787Z",
+  "available_physical_bytes": 15673655296,
+  "captured_at": "2026-09-06T14:39:24.544526Z",
+  "cgroup_headroom_bytes": null,
+  "cgroup_memory_current_bytes": null,
+  "cgroup_memory_max_bytes": null,
+  "effective_available_bytes": 15673655296,
+  "effective_floor_pass": true,
+  "failure_reasons": [],
+  "measurement_source": "/proc/meminfo",
+  "minimum_available_bytes": 4294967296,
+  "passed": true,
+  "physical_floor_pass": true,
+  "schema_version": 1
+}
+Traceback (most recent call last):
+  File "/home/wu/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/pdb.py", line 1721, in main
+    pdb._runmodule(mainpyfile)
+  File "/home/wu/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/pdb.py", line 1557, in _runmodule
+    self.run(code)
+  File "/home/wu/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/bdb.py", line 598, in run
+    exec(cmd, globals, locals)
+  File "/home/wu/hmasd-worktrees/frrie-r09-segfault-a02-43eec21e-20260906/scripts/run_frrie_b01_contact_r09.py", line 9, in <module>
+    raise SystemExit(main([*sys.argv[1:], "--seed", "3"]))
+  File "/home/wu/hmasd-worktrees/frrie-r09-segfault-a02-43eec21e-20260906/experiments/candidates/finite_resource_relational_inductive_efficiency/b01_contact_r02/experiment.py", line 560, in main
+    execute(
+  File "/home/wu/hmasd-worktrees/frrie-r09-segfault-a02-43eec21e-20260906/experiments/candidates/finite_resource_relational_inductive_efficiency/b01_contact_r02/experiment.py", line 242, in execute
+    tapes, origins = production_training_inputs(root, seed_label, number)
+  File "/home/wu/hmasd-worktrees/frrie-r09-segfault-a02-43eec21e-20260906/experiments/candidates/finite_resource_relational_inductive_efficiency/b01_contact_r02/tapes.py", line 246, in production_training_inputs
+    tapes = tuple(
+  File "/home/wu/hmasd-worktrees/frrie-r09-segfault-a02-43eec21e-20260906/experiments/candidates/finite_resource_relational_inductive_efficiency/b01_contact_r02/tapes.py", line 247, in <genexpr>
+    generate_episode_tape(
+  File "/home/wu/hmasd-worktrees/frrie-r09-segfault-a02-43eec21e-20260906/experiments/candidates/finite_resource_relational_inductive_efficiency/tapes.py", line 373, in generate_episode_tape
+    uplink_uniform[slot, sender, receiver] = rng.uniform_float32(
+  File "/home/wu/hmasd-worktrees/frrie-r09-segfault-a02-43eec21e-20260906/experiments/candidates/finite_resource_relational_inductive_efficiency/rng.py", line 273, in uniform_float32
+    numerator = int.from_bytes(self.block(address)[:3], "big", signed=False)
+  File "/home/wu/hmasd-worktrees/frrie-r09-segfault-a02-43eec21e-20260906/experiments/candidates/finite_resource_relational_inductive_efficiency/rng.py", line 251, in block
+    payload = schema + self._root + address.canonical_bytes() + block_index.to_bytes(4, "big")
+  File "/home/wu/hmasd-worktrees/frrie-r09-segfault-a02-43eec21e-20260906/experiments/candidates/finite_resource_relational_inductive_efficiency/rng.py", line 204, in canonical_bytes
+    self.validate()
+  File "/home/wu/hmasd-worktrees/frrie-r09-segfault-a02-43eec21e-20260906/experiments/candidates/finite_resource_relational_inductive_efficiency/rng.py", line 171, in validate
+    raise ContractError(f"semantic RNG {field} must be absent or in [0,{upper - 1}]")
+experiments.candidates.finite_resource_relational_inductive_efficiency.contracts.core.ContractError: semantic RNG basin must be absent or in [0,1]
+Uncaught exception. Entering post mortem debugging
+Running 'cont' or 'step' will restart the program
+> /home/wu/hmasd-worktrees/frrie-r09-segfault-a02-43eec21e-20260906/experiments/candidates/finite_resource_relational_inductive_efficiency/rng.py(171)validate()
+-> raise ContractError(f"semantic RNG {field} must be absent or in [0,{upper - 1}]")
+(Pdb)   /home/wu/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/pdb.py(1721)main()
+-> pdb._runmodule(mainpyfile)
+  /home/wu/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/pdb.py(1557)_runmodule()
+-> self.run(code)
+  /home/wu/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/bdb.py(598)run()
+-> exec(cmd, globals, locals)
+  /home/wu/hmasd-worktrees/frrie-r09-segfault-a02-43eec21e-20260906/scripts/run_frrie_b01_contact_r09.py(9)<module>()
+-> raise SystemExit(main([*sys.argv[1:], "--seed", "3"]))
+  /home/wu/hmasd-worktrees/frrie-r09-segfault-a02-43eec21e-20260906/experiments/candidates/finite_resource_relational_inductive_efficiency/b01_contact_r02/experiment.py(560)main()
+-> execute(
+  /home/wu/hmasd-worktrees/frrie-r09-segfault-a02-43eec21e-20260906/experiments/candidates/finite_resource_relational_inductive_efficiency/b01_contact_r02/experiment.py(242)execute()
+-> tapes, origins = production_training_inputs(root, seed_label, number)
+  /home/wu/hmasd-worktrees/frrie-r09-segfault-a02-43eec21e-20260906/experiments/candidates/finite_resource_relational_inductive_efficiency/b01_contact_r02/tapes.py(246)production_training_inputs()
+-> tapes = tuple(
+  /home/wu/hmasd-worktrees/frrie-r09-segfault-a02-43eec21e-20260906/experiments/candidates/finite_resource_relational_inductive_efficiency/b01_contact_r02/tapes.py(247)<genexpr>()
+-> generate_episode_tape(
+  /home/wu/hmasd-worktrees/frrie-r09-segfault-a02-43eec21e-20260906/experiments/candidates/finite_resource_relational_inductive_efficiency/tapes.py(373)generate_episode_tape()
+-> uplink_uniform[slot, sender, receiver] = rng.uniform_float32(
+  /home/wu/hmasd-worktrees/frrie-r09-segfault-a02-43eec21e-20260906/experiments/candidates/finite_resource_relational_inductive_efficiency/rng.py(273)uniform_float32()
+-> numerator = int.from_bytes(self.block(address)[:3], "big", signed=False)
+  /home/wu/hmasd-worktrees/frrie-r09-segfault-a02-43eec21e-20260906/experiments/candidates/finite_resource_relational_inductive_efficiency/rng.py(251)block()
+-> payload = schema + self._root + address.canonical_bytes() + block_index.to_bytes(4, "big")
+  /home/wu/hmasd-worktrees/frrie-r09-segfault-a02-43eec21e-20260906/experiments/candidates/finite_resource_relational_inductive_efficiency/rng.py(204)canonical_bytes()
+-> self.validate()
+> /home/wu/hmasd-worktrees/frrie-r09-segfault-a02-43eec21e-20260906/experiments/candidates/finite_resource_relational_inductive_efficiency/rng.py(171)validate()
+-> raise ContractError(f"semantic RNG {field} must be absent or in [0,{upper - 1}]")
+(Pdb) ('PY', '3.10.21 (main, Sep  1 2026, 14:16:49) [Clang 22.1.3 ]', sys.flags(debug=0, inspect=0, interactive=0, optimize=0, dont_write_bytecode=0, no_user_site=0, no_site=0, ignore_environment=0, verbose=0, bytes_warning=0, quiet=0, hash_randomization=1, isolated=0, dev_mode=False, utf8_mode=0, warn_default_encoding=0, int_max_str_digits=-1))
+(Pdb) *** NameError: name 'obj' is not defined
+(Pdb) *** NameError: name 'f' is not defined
+(Pdb) *** NameError: name 'fields' is not defined
+(Pdb) *** NameError: name 'result' is not defined
+(Pdb) *** NameError: name 'fields' is not defined
+(Pdb) *** NameError: name 'obj' is not defined
+(Pdb) *** NameError: name 'obj' is not defined
+(Pdb) *** NameError: name 'obj' is not defined
+(Pdb) *** NameError: name 'obj' is not defined
+(Pdb) > /home/wu/hmasd-worktrees/frrie-r09-segfault-a02-43eec21e-20260906/experiments/candidates/finite_resource_relational_inductive_efficiency/b01_contact_r02/tapes.py(247)<genexpr>()
+-> generate_episode_tape(
+(Pdb) *** NameError: name 'episode' is not defined
+(Pdb)   /home/wu/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/pdb.py(1721)main()
+-> pdb._runmodule(mainpyfile)
+  /home/wu/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/pdb.py(1557)_runmodule()
+-> self.run(code)
+  /home/wu/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/bdb.py(598)run()
+-> exec(cmd, globals, locals)
+  /home/wu/hmasd-worktrees/frrie-r09-segfault-a02-43eec21e-20260906/scripts/run_frrie_b01_contact_r09.py(9)<module>()
+-> raise SystemExit(main([*sys.argv[1:], "--seed", "3"]))
+  /home/wu/hmasd-worktrees/frrie-r09-segfault-a02-43eec21e-20260906/experiments/candidates/finite_resource_relational_inductive_efficiency/b01_contact_r02/experiment.py(560)main()
+-> execute(
+  /home/wu/hmasd-worktrees/frrie-r09-segfault-a02-43eec21e-20260906/experiments/candidates/finite_resource_relational_inductive_efficiency/b01_contact_r02/experiment.py(242)execute()
+-> tapes, origins = production_training_inputs(root, seed_label, number)
+  /home/wu/hmasd-worktrees/frrie-r09-segfault-a02-43eec21e-20260906/experiments/candidates/finite_resource_relational_inductive_efficiency/b01_contact_r02/tapes.py(246)production_training_inputs()
+-> tapes = tuple(
+> /home/wu/hmasd-worktrees/frrie-r09-segfault-a02-43eec21e-20260906/experiments/candidates/finite_resource_relational_inductive_efficiency/b01_contact_r02/tapes.py(247)<genexpr>()
+-> generate_episode_tape(
+  /home/wu/hmasd-worktrees/frrie-r09-segfault-a02-43eec21e-20260906/experiments/candidates/finite_resource_relational_inductive_efficiency/tapes.py(373)generate_episode_tape()
+-> uplink_uniform[slot, sender, receiver] = rng.uniform_float32(
+  /home/wu/hmasd-worktrees/frrie-r09-segfault-a02-43eec21e-20260906/experiments/candidates/finite_resource_relational_inductive_efficiency/rng.py(273)uniform_float32()
+-> numerator = int.from_bytes(self.block(address)[:3], "big", signed=False)
+  /home/wu/hmasd-worktrees/frrie-r09-segfault-a02-43eec21e-20260906/experiments/candidates/finite_resource_relational_inductive_efficiency/rng.py(251)block()
+-> payload = schema + self._root + address.canonical_bytes() + block_index.to_bytes(4, "big")
+  /home/wu/hmasd-worktrees/frrie-r09-segfault-a02-43eec21e-20260906/experiments/candidates/finite_resource_relational_inductive_efficiency/rng.py(204)canonical_bytes()
+-> self.validate()
+  /home/wu/hmasd-worktrees/frrie-r09-segfault-a02-43eec21e-20260906/experiments/candidates/finite_resource_relational_inductive_efficiency/rng.py(171)validate()
+-> raise ContractError(f"semantic RNG {field} must be absent or in [0,{upper - 1}]")
+(Pdb) Post mortem debugger finished. The scripts.run_frrie_b01_contact_r09 will be restarted
+> /home/wu/hmasd-worktrees/frrie-r09-segfault-a02-43eec21e-20260906/scripts/run_frrie_b01_contact_r09.py(1)<module>()
+-> """Module entry point for the frozen FRRIE R09 third-root object."""
+(Pdb) 
+=== Task 'frrie_r09_segfault_a02_43eec21e_20260906' exited with code 0 at 2026-09-06T22:39:57+08:00 (Duration: 33s) ===

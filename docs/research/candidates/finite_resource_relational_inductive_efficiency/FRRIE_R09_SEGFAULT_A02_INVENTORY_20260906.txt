@@ -1,0 +1,4 @@
+/home/wu/hmasd-worktrees/frrie-r09-segfault-a02-43eec21e-20260906/temp/directions/finite_resource_relational_inductive_efficiency/exp/r09_segfault_a02:
+total 8
+drwxrwxr-x 2 wu wu 4096 Sep  6 22:39 .
+drwxrwxr-x 3 wu wu 4096 Sep  6 22:39 ..
