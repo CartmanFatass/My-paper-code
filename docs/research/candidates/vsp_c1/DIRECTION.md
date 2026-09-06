@@ -100,3 +100,22 @@ DM adds |ΔJ_512| ≤ 1/12 and D opposite in sign to ΔJ_128). Implementation is
 Build under hub review ([objective](VSPC1_K4_FACTOR_VALUE_B02_BUDGET512_CM_OBJECTIVE_20260906.md)).
 Seeds 0–2, the A01 gap, the D6 boundary and the Portfolio row are unchanged; "four seeds"
 promotes nothing to C.
+
+## B02 budget dependence at 512 updates — 2026-09-06
+
+The Convergence-selected [B02](VSPC1_K4_FACTOR_VALUE_B02_BUDGET512_SCIENCE_CARD_20260906.md)
+completed on one fresh seed (3) for both arms at 90c730a09 on wsl_4070
+([intake](VSPC1_K4_FACTOR_VALUE_B02_BUDGET512_RESULT_INTAKE_20260906.md); evidence under
+`results/k4_b02_budget512_seed3_20260906/`). ΔJ_128 = +1/12, ΔJ_512 = 0, D = −1/12; L_F = +1/12,
+L_G = +1/6; AUC(0:128) +0.0026, AUC(0:512) +0.0449, AUC(128:512) +0.0590 (FACTOR − GENERIC). Both
+arms end at the analytic reference 5/6 with the same final context profile; FACTOR reaches and holds
+it earlier (u = 208 / 400 versus u = 432 / 464). Reading-rule row 4 is first applicable: the case
+for extending the early advantage is limited, neither equivalence nor negative transfer is shown,
+and the automatic-extension path for this combination ends (no 1,024/2,048, no fourth B01 seed, no
+repeat). Row 6's ceiling fact and row 7's guard are recorded; no winner is declared from the AUC.
+The Pro working prediction (gap shrinks) matched; the DM's late-AUC sub-prediction was wrong. The
+seed-3 128 prefix is listed beside seeds 0–2 (−1/24, +1/12, +1/12, +1/12) without a pooled mean.
+Cost 2.66 s and 2.17 s outer wall against 2,700 s caps. The next K4 object (end the toy family, a
+host with room above the reference, a comparator question, or recast) is put to
+`em:vsp_c1:convergence` (request `2026-09-06-vspc1-post-b02-convergence-01`); the direction parks
+at this clean boundary and leaves the Claude working set until the decision is taken in.

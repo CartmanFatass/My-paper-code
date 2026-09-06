@@ -500,3 +500,23 @@ same LR/work, without selecting it for its outcome. It remains an unexecuted pro
 `FRRIE_R09_THIRD_ROOT_IMPLEMENTATION_BOUNDARY_20260905.md` records current representation
 feasibility rather than a new card or scientific disposition. See
 `FRRIE_R08_RESULT_20260905.md` and `FRRIE_R08_RESULT_INTAKE_20260905.md`.
+
+## R09 failure diagnosis: A01, A02 and the A03 probe — 2026-09-06
+
+The R09 third-root attempt at 43eec21e (exit 139 at 16 s, no traceback) has now been re-run twice
+under `-X faulthandler` and module-mode pdb on wsl_4070: [A01](FRRIE_R09_SEGFAULT_A01_INTAKE_20260905.md)
+observed a different original failure at 19 s (`AttributeError: 'tuple_iterator' object has no
+attribute 'name'` inside `dataclasses._asdict_inner` during the evaluation tapes), and
+[A02](FRRIE_R09_SEGFAULT_A02_INTAKE_20260906.md), with corrected postmortem capture commands,
+observed a third at 33 s (`ContractError: semantic RNG basin must be absent or in [0,1]` in the
+training tapes, after the evaluation tapes and the output-root creation had succeeded); nothing
+was captured because the postmortem frame differed. A read-only engineering map
+([FRRIE_R09_FAILURE_CHAIN_MAP_20260906.md](FRRIE_R09_FAILURE_CHAIN_MAP_20260906.md)) found a
+single `asdict` call site, no shadowing, byte-identical R09 sources on `main`, and only the
+import-time libtorch and numpy loads before the tapes. Reading: runtime corruption of Python
+objects on this node/interpreter under this chain, agent unidentified; not a deterministic source
+defect; the R09 B stays frozen and unexecuted, its native-return prediction unscored. Selected next
+(object tier): [A03 tape-isolation probe](FRRIE_R09_SEGFAULT_A03_TAPE_ISOLATION_SCIENCE_CARD_20260906.md),
+three arms (no torch and no tracer; torch imported; torch under pdb), 300 s each, zero learner,
+whose branches decide between a host/interpreter question, a torch-load suspect, and an
+outcome-blind plain R09 attempt without pdb. Mechanism-level evidence in this record is unchanged.

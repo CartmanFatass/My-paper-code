@@ -1,0 +1,97 @@
+{
+  "id": "20260906-frrie-001",
+  "created": "2026-09-06T07:58:06-07:00",
+  "direction": "finite_resource_relational_inductive_efficiency",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "FRRIE R09：A02 第三种失败后冻结 A03 tape 隔离探针（无 torch / 有 torch / pdb 三臂）",
+  "context": "R09 链（43eec21e，wsl_4070，pdb + faulthandler，seed 3）三次运行三种失败：16 s SIGSEGV；19 s 评估 tape 中 tuple_iterator 字段对象（A01）；33 s 训练 tape 中 basin 越界/类型错（A02，评估 tape 已成功建完，输出目录已建）。两次 Python 层失败都是对象槽里出现源码不可能产生的值；只读地图排除了静态源码解释。读法：该节点/解释器在这条链上的运行时对象损坏，原因未定位。A03：在 main 的新 sha 上只做同样的生产 tape 构造（零学习器），三臂分别启动：T0 不导入 torch 且无跟踪器；T1 先导入 torch；T2 = T1 在 pdb 下；每臂 3 次重复、300 s 上限；记录各阶段 wall、tape 计数与内容摘要、traceback。分支决定：无 torch 也损坏 → 主机/解释器问题交给你；只有 torch 才损坏 → 检查安装的 torch wheel；只在 pdb 下损坏或都不损坏 → 不带 pdb 的完整 R09 盲重试。DM 预测：only-with-torch 或 only-under-pdb（低置信）。实现路由 Grok Build（新文件，不改任何 R09 路径），枢纽审阅。",
+  "options": [
+    {
+      "key": "a",
+      "label": "冻结 A03 并交 Grok 实现、operator 启动（推荐）",
+      "consequence": "三臂各 ≤300 s；分支结果决定下一步。"
+    },
+    {
+      "key": "b",
+      "label": "跳过探针，直接不带 pdb 盲重试完整 R09",
+      "consequence": "更快但若损坏与 pdb 无关会再浪费一次 2,700 s 级调用，且仍不知道原因。"
+    },
+    {
+      "key": "c",
+      "label": "停止第三根家族 / 先检查节点内存与解释器",
+      "consequence": "由你决定；DM 会按指示在下一个干净边界执行。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "最便宜的能把解释器/扩展/跟踪三个假设分开的观测；不改 R09 源码；零学习器。",
+  "evidence": [
+    "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R09_SEGFAULT_A03_TAPE_ISOLATION_SCIENCE_CARD_20260906.md",
+    "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R09_SEGFAULT_A02_INTAKE_20260906.md",
+    "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R09_FAILURE_CHAIN_MAP_20260906.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-06.md#L28",
+  "brief": "docs/research/portfolio/owner/briefs/finite_resource_relational_inductive_efficiency/2026-09-06_R09-A02-capture.md",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否冻结 FRRIE 后继诊断对象「FRRIE-R09-SEGFAULT-A02-CAPTURE」：在同一记录链（源码 43eec21e、wsl_4070、CPython 3.10.21、faulthandler、模块模式 pdb、seed 3、60 秒上限）上再跑一次，只把事后 pdb 命令文件换成能打印实际评估地址与字段迭代状态的只读命令，以便把 A01 观察到的 tuple_iterator 序列化失败变成可分类的事实？",
+    "changes_if_approved": [
+      {
+        "target": "wsl_4070 上一次 ≤65 秒的诊断调用",
+        "from": "无",
+        "to": "一次 agent-task 调用；无源码改动；新命令文件作为冻结输入按 sha256 f644c1e5… 暂存"
+      },
+      {
+        "target": "docs/research/candidates/finite_resource_relational_inductive_efficiency/",
+        "from": "A01 有效但未捕获状态；第三根 B 冻结未执行",
+        "to": "新增 A02 卡、选择 intake、只读工程地图与命令文件；第三根 B 卡不变"
+      },
+      {
+        "target": "方向生命周期 / 优先级 / R09 科学含义",
+        "from": "ACTIVE，HIGH；R09 INCOMPLETE",
+        "to": "不变"
+      }
+    ],
+    "if_refused": "不做 A02；R09 第三根 B 仍被未分类的失败阻塞；下一步只能是盲目重试完整 R09（DM 不推荐）或停车。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R09_SEGFAULT_A01_INTAKE_20260905.md",
+        "quote": "The next proposed engineering discriminator is capture of the actual evaluation address and the local field-iteration state at this observed serialization failure",
+        "why": "A01 intake 本身提出了这一判别器；A01 的固定 pdb 命令用了错误的地址形状。"
+      },
+      {
+        "path": "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R09_FAILURE_CHAIN_MAP_20260906.md",
+        "quote": "No static explanation exists in these bytes for a tuple_iterator field object. The single call site is L96; it does not pass an iterator.",
+        "why": "只读地图排除了源码级静态解释，只有运行时捕获能推进分类。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R09_SEGFAULT_A01_SCIENCE_CARD_20260905.md",
+        "quote": "DM predicts A01_FATAL_SIGNAL_WITH_FRAME, low confidence",
+        "why": "A01 的预测已被不同失败否证；失败可能是间歇性的，A02 也可能在 60 秒内不复现。"
+      },
+      {
+        "path": "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R09_FAILURE_CHAIN_MAP_20260906.md",
+        "quote": "Whether pdb -c continue / -X faulthandler changed allocation enough to turn a signal into AttributeError.",
+        "why": "诊断链本身可能改变失败形态；捕获到的状态未必等同原始 SIGSEGV 的原因。"
+      }
+    ],
+    "uncertainty": [
+      "失败是否在 60 秒内复现（两次中两次出现，但形态不同）。",
+      "捕获状态能否区分 Python 层对象损坏与 C 层堆损坏；卡片只承诺记录，不承诺分类。",
+      "DM 预测：A02_SERIALIZATION_FAILURE_CAPTURED（低到中等置信）；所有者预测槽：待填。"
+    ],
+    "cost": {
+      "compute": "wsl_4070 单进程，≤60 秒加 5 秒宽限；预计约 20 秒",
+      "owner_time": "阅读本条目约 2 分钟",
+      "reversibility": "reversible",
+      "waits_on_this": "不等待；无人值守委托下已按推荐项执行（卡已冻结、operator 已派发）；所有者不同指示在下一个干净边界应用"
+    },
+    "verdict_text": "对象层 OWNER_DELEGATED：选项 1（A02 捕获重建）。备选：运行时隔离探针；盲目完整 R09 重试；停车。",
+    "source": "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R09_SEGFAULT_A02_SELECTION_INTAKE_20260906.md"
+  },
+  "starred": false
+}

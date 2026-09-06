@@ -41,10 +41,14 @@ Read from the handoff: `request_id`, `direction_id`, `workflow_node`,
 4. Agentify Desktop is running: `agentify_status` succeeds. If it fails, report that the GUI
    (`npm run start` in `C:/Projects/agentify-desktop`) must be started by the owner; do not start
    it yourself and do not fall back to another browser tool.
-5. A ChatGPT tab is ready: reuse the tab whose URL is the bound conversation when one is open,
-   otherwise create one agent tab, navigate once to the exact `https://chatgpt.com/c/<id>` (or
-   `https://chatgpt.com/` for a first binding), and `agentify_ensure_ready`. If login or a
-   challenge is pending, `agentify_show` it and stop; the owner completes it.
+5. Tab discipline (owner 2026-09-06): `agentify_review_query` creates and keys its own tab by
+   the `stableKey`; do not pre-create a tab for the send and never pass `existingTabId` (it
+   causes `tab_key_mismatch`). The only tab you may create yourself is one agent tab for the
+   preflight when no tab shows the bound conversation, navigated once to the exact
+   `https://chatgpt.com/c/<id>` (or `https://chatgpt.com/` for a first binding), then
+   `agentify_ensure_ready`; record its id, because you must close it in phase 2 together with
+   every tab the tool created under the request's `stableKey`. If login or a challenge is
+   pending, `agentify_show` it and stop; the owner completes it.
 6. Model preflight on that tab: `agentify_review_preflight` with `reasoningEffort` `Pro` and
    `productModel` `GPT-6 Astra` first; if it returns
    `chatgpt_product_model_unavailable_or_unselected`, repeat once with `Latest`. In the smoke of
@@ -107,7 +111,15 @@ an uncertain or mismatched send, record it as terminal `SENT_UNCERTAIN` and stop
    to `GITHUB_RESPONSE.md` in the same archive directory with their sha256, and save the Issue
    comment as `DELIVERY_COMMENT.json`. If the links are missing or the file is absent, read the
    branch and Issue directly, report exactly what exists, and do not send anything.
-5. Close the agent-created tab only after the archive is verified. Never close a user tab.
+5. Close every tab this request created, only after the archive and readback are verified: the
+   preflight tab you created (if any) and each tab `agentify_review_query` created under the
+   request's `stableKey` (list them with `agentify_tabs`; a stale one that lost its CDP session
+   is closed the same way). Confirm with `agentify_tabs` that only the owner's protected
+   `default` tab remains and report `tab_lifecycle: CLOSED` with every id. Never close a user
+   tab. The hub verifies this line and closes leftovers itself if a close fails.
+6. Registry note: `bind_conversation.py` leaves the record at `DIRECTION_VERIFIED`; a later
+   request on the same key is refused with `BINDING_BUSY`. Report the refusal verbatim and stop;
+   it is bookkeeping, not a send or delivery blocker, and the hub reconciles it.
 
 ## Return
 
