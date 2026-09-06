@@ -58,7 +58,7 @@ Delegated, with the model the owner chose:
 | One bounded runtime or equivalence probe | `hmasd-verifier` | Sonnet |
 | Launch one frozen result-bearing command with preflight, detached | `hmasd-experiment-operator` | Sonnet |
 | Observe handles, collect terminal outputs, keep `EXPERIMENT_TRACKING.md` | `hmasd-experiment-tracker` | Sonnet |
-| Ledger rows, owner items via `item.py`, brief filing, cherry-pick integration, named checks, commits the hub dictates | `hmasd-clerk` | Sonnet |
+| Ledger rows, owner items via `item.py`, brief filing, evidence copies, packet aux files, DIRECTION/PORTFOLIO/tracking splices of hub-written text, render/bind, named checks (owner 2026-09-06: offload every mechanical task) | Grok Build clerk mode (`hmasd-grok-cm` skill); `hmasd-clerk` Sonnet only as fallback | grok-4.5 medium |
 | Repository, literature and inventory facts; count arithmetic | `hmasd-research-scout` | Sonnet |
 | One Pro request through Agentify Desktop and GitHub delivery (after the smoke passes) | `hmasd-pro-transport` | Sonnet |
 | One direction's CM implementation when two directions advance (owner 2026-09-05; `hmasd-grok-cm` skill) | Grok Build headless, hub reviews and commits | grok-4.6 high |

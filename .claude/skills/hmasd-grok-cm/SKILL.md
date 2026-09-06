@@ -19,6 +19,29 @@ the objective, reviews the diff, runs the focused tests itself, and commits by p
   that touches probability, gradients, replay, recurrence, RNG streams of an existing object,
   checkpoint format, bit identity or the native ABI. The other advancing direction keeps Opus.
 - Never: `hmasd-experiment-operator` launches, Pro transport, any scientific judgment.
+- **Clerk tasks also go to Grok** (owner 2026-09-06 06:48 PDT: "尽量卸载给grok"; model
+  `grok-4.5`, owner 06:49 PDT): every mechanical control-plane task whose content the hub has
+  already fixed, i.e. what `hmasd-clerk` used to do. Examples: appending ledger rows the hub
+  dictates verbatim, `tools/owner_console/item.py add` calls with hub-supplied arguments and
+  packet JSON, copying evidence from a remote output root into the direction's evidence folder
+  (exact `scp`/`ssh cat` commands supplied), writing `EXPOSURE_AND_COST.json` and
+  `ISSUE_SNAPSHOT.json` from hub-supplied numbers and `gh api` readbacks, splicing hub-written
+  addenda into `DIRECTION.md` / `PORTFOLIO.md` rows / `EXPERIMENT_TRACKING.md` at a named anchor,
+  rendering and binding a Pro packet from a finished `REQUEST.json`, running a named test command.
+  The hub writes the scientific words; Grok executes, verifies (re-reads the file, runs the
+  check) and reports paths and sha256. Sonnet `hmasd-clerk` remains the fallback when Grok is
+  unavailable.
+
+## Clerk mode invocation
+
+Same fences as CM mode but with `-m grok-4.5`, `--effort medium`, `--max-turns 80`, a TASK.md
+that lists the exact operations in order with the exact content (prefer "write this file with
+these bytes" and "run this command" over descriptions), and the same deny rules on governance
+paths. For clerk tasks Grok MAY edit `docs/research/portfolio/audit/*.md`,
+`docs/research/portfolio/owner/inbox/**` (only through `item.py`), `PORTFOLIO.md`,
+`EXPERIMENT_TRACKING.md`, `DIRECTION.md` and packet folders **when the task names the file and
+supplies the text**; it never composes a row, an option or a sentence of science itself. The hub
+diffs the result and commits by pathspec with `Implemented-By: grok-build (grok-4.5, clerk)`.
 
 ## Procedure
 

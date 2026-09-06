@@ -430,7 +430,9 @@ appendix and completed historical tasks remain unchanged.
 - Grok Build (xAI CLI, `grok-4.6` at effort `high`) is a third agent runtime under section 1
   (owner decisions 2026-09-05 22:40 and 22:57 PDT). It receives working methods only: one
   direction's CM implementation when two directions advance in a Claude session, read-only code
-  maps, and second independent reviews. It never launches result-bearing runs, never operates Pro
+  maps, second independent reviews, and (owner 2026-09-06, `grok-4.5`) every mechanical
+  control-plane task whose content the hub has fixed in advance (ledger rows, owner items through
+  `item.py`, evidence copies, packet auxiliary files, splices of hub-written text, render/bind). It never launches result-bearing runs, never operates Pro
   transport, and never makes a scientific judgment.
 - Invocation is headless and fenced (`.claude/skills/hmasd-grok-cm/SKILL.md`): its own git
   worktree, an explicit tool allowlist, no subagents, no web, deny rules on every shared or
