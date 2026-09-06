@@ -131,3 +131,29 @@ recovery time, and integrated unserved demand.
 partner-memory branch, with its generic compiler retained as the containing null. No expression or
 information-necessity polarity transfers; only finite-budget learning and recovery effects remain
 eligible.
+
+## First empirical object on TBCFV selected: B01 persist-vs-flex — 2026-09-06
+
+The first Innovator response for this direction (`pro_packets/20260906_tbcfv_first_b_innovator_r02/archive/RESPONSE.md`,
+commit `35e3b7b14`, Issue 8 comment 5560789984; intake
+`RCLE_TBCFV_FIRST_B_INNOVATOR_INTAKE_20260906.md`, `PRO_FINAL`) opens the first bounded
+B/EXPLORE pair on the frozen TBCFV host, `RCLE-TBCFV-B01-PERSIST-VS-FLEX`
+(`RCLE_TBCFV_B01_PERSIST_VS_FLEX_SCIENCE_CARD_20260906.md`): `C1P1-COMMON-PERSISTENT` versus
+`FLEX-REKEY`, one paired training seed (17), 200 updates × 64 training episodes per arm under the
+definition card's unchanged training law (fixed 0.0005 plain-SGD step, stopped per-cell
+baselines, no optimizer state), update-200 parameters only, 256 evaluation episodes per held-out
+cell. Primary: τ on the two ACTIVE_CONTINUATION held-out paths 8→12 and 12→8 (equal weight,
+FLEX − treatment, positive favours the treatment); companion U and 40U, all-cell τ/U/Y, the
+eight-cell mean as secondary; MEI τ 4 ticks and U 0.05; one INDEPENDENT-NEAREST zero-learner
+reference row on the same 2,048 held-out scenarios. Ceiling 2,700 s per arm and 5,400 s for the
+whole first pair including the first native build, a ≤ 300 s zero-learner executability
+measurement (≤ 64 episodes on separate preparation scenarios), checks, the reference row and
+publication. The node corrected three DM formulations (binding structure is agent-count change
+and coordination recovery, not partial observability; "optimizer/normalization state" means only
+the baselines; the reference row's cost is unmeasured). The "three-to-five seeds" of the
+2026-09-01 recast are not an entry requirement; the definition card stays definition-only and
+its five-arm twenty-block program is not authorized. Engineering fact found at card freeze: the
+TBCFV native backend builds only through an MSVC pipeline; the CM objective
+(`RCLE_TBCFV_B01_CM_OBJECTIVE_20260906.md`) adds a reviewed POSIX build branch and a thin two-arm
+entry that bypasses the twenty-block authority chain. Predecessor B1/B2/CPC polarity does not
+transfer; H_A1 stays unidentified.

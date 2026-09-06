@@ -1,0 +1,96 @@
+{
+  "id": "20260906-rcle-001",
+  "created": "2026-09-06T10:30:56-07:00",
+  "direction": "roster_consistent_latent_exploration",
+  "tier": "direction",
+  "kind": "decision",
+  "title": "RCLE 首个 Innovator 决定（PRO_FINAL）：在 TBCFV 上开启 B01 = C1P1-COMMON-PERSISTENT 对 FLEX-REKEY，种子 17，200 次更新，τ MEI 4 / U 0.05",
+  "context": "Pro 在本方向的首次 Pro 会话中开启第一个有界 B/EXPLORE 配对：冻结的 TBCFV 旋转周界宿主（120 扇区、6 信标、H=64、t_c=24），两臂只有 C1P1-COMMON-PERSISTENT（处理：主动成员变化时保持公共计划 z）与 FLEX-REKEY（含括比较器：可用公共与个体更新头），一个配对训练种子（17），每臂 200 次更新 × 64 训练 episode，训练律不变（固定 0.0005 步长 plain SGD、stopped per-cell baseline，无优化器状态），只用第 200 次更新的参数，held-out 8 格各 256 episode。主测量：两条 ACTIVE_CONTINUATION 路径 8→12 与 12→8 上的恢复时间 τ（等权，FLEX 减处理，正值有利处理臂）；伴随 U 与 40U、全部八格 τ/U/Y；MEI τ 4 tick、U 0.05（解释尺度，不是显著性门槛）；附一行 INDEPENDENT-NEAREST 零学习器参考。上限每臂 2,700 s、整对 5,400 s（含首次 native 构建、≤300 s 零学习器可执行性测量、检查、参考行、发布）。Pro 更正了 DM 三条表述（绑定结构是成员数变化后的协调恢复而非部分可观测；「优化器/归一化状态」只指 baseline；参考行「秒级成本」无依据）。写卡时发现的工程事实：TBCFV native 后端只有 MSVC 构建流水线，远程首次构建需要新增 POSIX 分支（Grok 实现、Opus 独立审阅）；构建失败即技术停止，不是科学极性。已执行：B01 卡与 CM 目标冻结，Grok Build 实现中；RCLE 与 DISH 一起进入 Claude 工作集。所有者预测槽位未取用。",
+  "options": [
+    {
+      "key": "a",
+      "label": "接受（已执行）",
+      "consequence": "B01 按卡实现；operator 在 wsl_4070 先构建、做一致性检查与可执行性测量，再依次启动两臂与参考行；结果 intake 后回到同一节点。"
+    },
+    {
+      "key": "b",
+      "label": "先建上参考/通用基线，或改变预算/种子数",
+      "consequence": "DM 在下一个干净边界把该要求作为具体问题返回同一 Innovator 节点；B01 准备暂停。"
+    },
+    {
+      "key": "c",
+      "label": "Portfolio 层处置（暂停 RCLE 投入或改优先级）",
+      "consequence": "属于 Portfolio 层；Root 记录后按指示处理；已实现的薄入口保留为代码，不启动。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "完整归档的 PRO_FINAL 方向层决定，无规范冲突；native 构建可移植性是待验证的工程事实，已写入卡片第 6 节。",
+  "evidence": [
+    "docs/research/candidates/roster_consistent_latent_exploration/RCLE_TBCFV_FIRST_B_INNOVATOR_INTAKE_20260906.md",
+    "docs/research/candidates/roster_consistent_latent_exploration/RCLE_TBCFV_B01_PERSIST_VS_FLEX_SCIENCE_CARD_20260906.md",
+    "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260906_tbcfv_first_b_innovator_r02/archive/RESPONSE.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-06.md#L44",
+  "brief": "docs/research/portfolio/owner/briefs/roster_consistent_latent_exploration/2026-09-06_TBCFV-first-B-innovator.md",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "Pro（PRO_FINAL，本节点首次绑定）已决定在冻结的 TBCFV 宿主上开启第一个有界 B/EXPLORE 配对 RCLE-TBCFV-B01-PERSIST-VS-FLEX（C1P1-COMMON-PERSISTENT 对 FLEX-REKEY，一个配对种子，每臂 200 次更新，held-out 每格 256 个 episode，τ MEI 4 tick / U 0.05，每臂 2,700 s、整对 5,400 s）。是否对这一决定作异步改动？",
+    "changes_if_approved": [
+      {
+        "target": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_TBCFV_B01_PERSIST_VS_FLEX_SCIENCE_CARD_20260906.md",
+        "from": "TBCFV 只有定义卡，从未执行",
+        "to": "B01 卡冻结（种子 17、两臂、200 更新、256 episode/格、主测量为两条主动延续路径上的 τ、六行读法、2,700 s/臂）"
+      },
+      {
+        "target": "实现与启动",
+        "from": "无薄入口；native 后端只有 MSVC 构建",
+        "to": "Grok Build 实现薄两臂入口与 POSIX 构建分支（Opus 独立审阅）；operator 在 wsl_4070 先做首次构建、oracle 一致性检查、≤300 s 可执行性测量，再依次启动两臂与参考行"
+      },
+      {
+        "target": "DIRECTION.md 与 PORTFOLIO 行",
+        "from": "2026-09-01 recast 后待首个对象",
+        "to": "B01 已选定并写卡；RCLE 进入 Claude 工作集"
+      }
+    ],
+    "if_refused": "所有者若指示先建上参考/通用基线、改变预算或停车，DM 在下一个干净边界停止 B01 准备并回到同一 Innovator 节点；已实现的薄入口保留为代码，不启动。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260906_tbcfv_first_b_innovator_r02/archive/RESPONSE.md",
+        "quote": "选择 RCLE-TBCFV-B01-PERSIST-VS-FLEX，一个 B/EXPLORE 首对……本次只纳入一个配对训练种子，每臂 200 次更新、每次 64 个训练 episode",
+        "why": "本节点完整、已归档的 PRO_FINAL 方向层决定（提交 35e3b7b1）。"
+      },
+      {
+        "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_TARGET_BOUND_COMMITMENT_FRAGMENTATION_VALUE_SCIENCE_CARD.md",
+        "quote": "Setting both update heads' final weights and biases to exactly zero reproduces every treatment policy",
+        "why": "含括关系成立，比较不是靠剥夺比较器信息制造的。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260906_tbcfv_first_b_innovator_r02/archive/RESPONSE.md",
+        "quote": "最强反对意见不是旧结果的负号，而是新比较也可能几乎没有学习……200 次更新的路径长度上界仅为 0.1",
+        "why": "两臂可能都学不到东西；inside-MEI 是节点自己预期的严肃结果。"
+      },
+      {
+        "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_TBCFV_B01_CM_OBJECTIVE_20260906.md",
+        "quote": "native_backend.py compiles native/tbcfv_backend.cpp through vswhere/vcvars64.bat/MSVC",
+        "why": "远程首次构建需要新增 POSIX 分支，是 Pro 未读到的工程缺口；构建失败即技术停止。"
+      }
+    ],
+    "uncertainty": [
+      "TBCFV 上没有任何已测成本；每臂 wall 未知，5,400 s 总预算是否可行要看构建、可执行性测量和第一个训练 block。",
+      "Linux 构建与 MSVC 构建的一致性只由 host_oracle 一致性测试建立，不主张跨平台 bit 一致。"
+    ],
+    "cost": {
+      "compute": "wsl_4070 单线程 CPU：每臂上限 2,700 s，整对含构建/测量/参考/发布 5,400 s",
+      "owner_time": "阅读本条目约 3 分钟；可选填写 B01 预测",
+      "reversibility": "reversible",
+      "waits_on_this": "不等待；已按 PRO_FINAL 执行；所有者的不同指示在下一个干净边界应用"
+    },
+    "verdict_text": "PRO_FINAL / OPEN B01：C1P1-COMMON-PERSISTENT 对 FLEX-REKEY，种子 17，200 更新，256 episode/格，τ MEI 4 / U 0.05，2,700 s/臂。",
+    "source": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_TBCFV_FIRST_B_INNOVATOR_INTAKE_20260906.md"
+  },
+  "starred": true
+}
