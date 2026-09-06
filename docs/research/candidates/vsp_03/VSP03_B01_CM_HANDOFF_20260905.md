@@ -6,6 +6,14 @@ response. The card fixes meaning; the ledger is a count aid, not a new configura
 Technical success cannot establish superiority, generic competence, learning necessity or MARL
 value. DM performs the scientific intake. No later seed or successor is selected here.
 
+Engineering handoff recorded 2026-09-05: CM
+`/root/dm_amx_k1_vsp03_design/cm_am_vsp03_b01` accepted this assignment and reported worktree
+`C:/Projects/HMASD-worktrees/cm-vsp03-b01-20260905`, branch
+`codex/cm-vsp03-b01-20260905`, from pushed card commit
+`24dad2b63aea7f825dcc4ac3002a5d955f153eec`. At this boundary CM was preparing the bounded source
+and independent review; no experiment process had been reported accepted. Reuse this CM rather
+than start a duplicate. If the DM is idle, use a native follow-up for a material return.
+
 ## Ownership and baseline
 
 You are not alone. Use your own worktree and branch from the DM's committed/pushed handoff SHA,

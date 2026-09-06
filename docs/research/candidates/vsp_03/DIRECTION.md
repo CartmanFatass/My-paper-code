@@ -38,6 +38,13 @@ The next discriminator is B01's actual native-return comparison after 128 update
 rule reference distinguishing initialization benefit from improvement beyond the rule. No new
 training observation exists at selection.
 
+Seed 1 subsequently completed the selected B: primary T=G=F=0.3755859375 and all 1,024 sampled
+main native records match. The generic learner caught up to fixed-rule behavior on this sample;
+there is no primary initialization gain or observed learning gain beyond that rule. Earlier
+T-G differences are retained, but G's early greedy policy never submitted. This is one training
+pair, not population equivalence. The next bounded discriminator is the unchanged comparison
+on two new independent training pairs, seeds 2/3; no upper or diagnostic search precedes them.
+
 The strongest surviving alternative is that public dwell age already suffices and the generic
 MLP matches the prior, or that all advantage is the fixed rule rather than learning. Waiting price,
 event frequency, deadline behavior and different actual decision-row exposure remain visible.
@@ -54,6 +61,9 @@ The evidence set includes historical observations and the separately labelled pr
 - [Current decision intake](VSP03_INNOVATOR_INTAKE_20260905.md)
 - [Selected B01 card](VSP03_B01_SCIENCE_CARD_20260905.md)
 - [Prospective counts](VSP03_B01_COUNTS_20260905.json)
+- [Seed 1 result evidence](VSP03_B01_SEED1_RESULT_EVIDENCE_20260905.md)
+- [Seed 1 scientific intake](VSP03_B01_SEED1_INTAKE_20260905.md)
+- [Finite seed 2/3 follow-up](VSP03_B01_SEEDS23_FOLLOWUP_20260905.md)
 ## Provenance boundary
 
 The historical map and candidate source documents remain provenance. This file does not rewrite historical source files or claim results that they do not state.
