@@ -309,6 +309,17 @@ def _decode_step_outputs(outputs: object, width: int) -> Mapping[str, np.ndarray
     }
 
 
+def _ordinary_decision_observation(
+    decoded: Mapping[str, np.ndarray], countdown: np.ndarray,
+) -> dict[str, np.ndarray]:
+    """Operational renew is [countdown==0]; raw completed-transition flag is renew_completed."""
+    raw = np.asarray(decoded["renew"])
+    observation = dict(decoded)
+    observation["renew_completed"] = np.array(raw, copy=True)
+    observation["renew"] = np.asarray(np.asarray(countdown) == 0, dtype=raw.dtype)
+    return observation
+
+
 def _sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
@@ -547,7 +558,11 @@ class NativeBatch:
 
     def observe(self) -> Mapping[str, np.ndarray]:
         """Copy the current reset/step boundary without advancing native state."""
-        return _decode_step_outputs(self._outputs, self.width)
+        decoded = _decode_step_outputs(self._outputs, self.width)
+        countdown = np.frombuffer(
+            self._states, dtype=np.dtype(_State), count=self.width,
+        )["countdown"]
+        return _ordinary_decision_observation(decoded, countdown)
 
     def reset_selected(self, mask: np.ndarray, rows: tuple[Mapping[str, object], ...]) -> Mapping[str, np.ndarray]:
         selected = np.asarray(mask, dtype=np.int32)
@@ -707,41 +722,7 @@ class NativeBatch:
         code = (self.library or require_cpp_batched_production_backend()).dish_rbhr_r06_prod_step_batch(self._states, pointer, self.width, self._outputs)
         if code:
             raise ProductionBackendError(f"native step rejected batch ({code})")
-        raw = np.frombuffer(self._outputs, dtype=np.dtype(_StepOutput), count=self.width)
-        return {
-            "actor": raw["actor"].reshape(self.width, 4, 54).copy(),
-            "critic": raw["critic"].reshape(self.width, 58).copy(),
-            "service": raw["service"].copy(),
-            "renew": raw["renew"].copy(),
-            "terminal": raw["terminal"].copy(),
-            "owner": raw["owner"].copy(),
-            "service_epoch": raw["service_epoch"].copy(),
-            "next_payload_sequence": raw["next_payload_sequence"].copy(),
-            "handover_used": raw["handover_used"].copy(),
-            "invalid_commit": raw["invalid_commit"].copy(),
-            "token_gap": raw["token_gap"].copy(),
-            "dual_owner": raw["dual_owner"].copy(),
-            "dual_payload": raw["dual_payload"].copy(),
-            "buffer_clear": raw["buffer_clear"].copy(),
-            "command_slew_breach": raw["command_slew_breach"].copy(),
-            "separation_breach": raw["separation_breach"].copy(),
-            "tick": raw["tick"].copy(),
-            "protocol_bytes": raw["protocol_bytes"].copy(),
-            "total_energy": raw["total_energy"].copy(),
-            "min_separation": raw["min_separation"].copy(),
-            "snapshot_accepted": raw["snapshot_accepted"].copy(),
-            "readiness_accepted": raw["readiness_accepted"].copy(),
-            "application_reason": raw["application_reason"].copy(),
-            "cas_applied": raw["cas_applied"].copy(),
-            "actuator_owner": raw["actuator_owner"].copy(),
-            "protocol_wire_hash": raw["protocol_wire_hash"].copy(),
-            "protocol_wire_messages": raw["protocol_wire_messages"].copy(),
-            "snapshot_payload": raw["snapshot_payload"].copy(),
-            "readiness_candidate": raw["readiness_candidate"].copy(),
-            "snapshot_delivery_mask": raw["snapshot_delivery_mask"].copy(),
-            "readiness_delivery_mask": raw["readiness_delivery_mask"].copy(),
-            "version_match": raw["version_match"].copy(),
-        }
+        return self.observe()
 
     def rollout(self, rows: np.ndarray) -> Mapping[str, np.ndarray]:
         expected = np.dtype(_StepInput)
@@ -757,7 +738,7 @@ class NativeBatch:
         if code:
             raise ProductionBackendError(f"native rollout rejected batch ({code})")
         raw = np.frombuffer(outputs, dtype=np.dtype(_StepOutput), count=steps * self.width).reshape(steps, self.width)
-        return {
+        decoded = {
             "actor": raw["actor"].reshape(steps, self.width, 4, 54).copy(),
             "critic": raw["critic"].reshape(steps, self.width, 58).copy(),
             "service": raw["service"].copy(),
@@ -791,6 +772,8 @@ class NativeBatch:
             "readiness_delivery_mask": raw["readiness_delivery_mask"].copy(),
             "version_match": raw["version_match"].copy(),
         }
+        # Per-tick current countdown is actor feature 42; `_states` holds only the final lane.
+        return _ordinary_decision_observation(decoded, decoded["actor"][:, :, 0, 42])
 
     def passive_labels(self, rows: np.ndarray) -> Mapping[str, np.ndarray]:
         values = np.ascontiguousarray(rows, dtype=np.dtype(_StepInput))
