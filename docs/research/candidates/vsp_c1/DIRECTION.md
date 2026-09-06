@@ -80,3 +80,23 @@ The [complete A01 intake](VSPC1_IDENTITY_PERIOD_HEADROOM_A01_INTAKE_20260904.md)
 `A01-GAP-UNAVAILABLE-HOST`; its missing reference and generic terms are not zero. B01's analytic
 reference is not backfilled into A01. The old SCDMP D6 PARK boundary, existing adverse observations
 and Portfolio lifecycle/priority remain separate and unchanged.
+
+## Convergence r02 decision and selected budget-dependence B02 — 2026-09-06
+
+The [complete r02 Convergence decision](pro_packets/20260905_three_seed_convergence_r02/archive/RESPONSE.md)
+(`PRO_FINAL`, one Send into the first-bound `em:vsp_c1:convergence` conversation, archive
+sha256 `5839aa00…`, taken in by the
+[r02 intake](VSPC1_K4_THREE_SEED_CONVERGENCE_R02_INTAKE_20260906.md)) continues the family
+with exactly one B: FACTOR and the same-information GENERIC each train one fresh seed 3
+continuously to 512 updates on the unchanged host, keeping the update-128 read-out inside
+the same instance; no extra original-budget seed, no third arm, no exact reference, policy
+search or mechanism audit first, no new host. The earlier misrouted answer stays preserved as
+untrusted evidence. The [B02-BUDGET512 card](VSPC1_K4_FACTOR_VALUE_B02_BUDGET512_SCIENCE_CARD_20260906.md)
+freezes the schedule (cycles 1–128 as B01, then ε = 0.1), the 33 evaluation states, the three
+AUC windows (divisors 8, 32, 24), D = ΔJ_512 − ΔJ_128, the exposure (16,384 training episodes
+and 512 updates per arm), the 2,700 s cap per complete arm invocation, the seven result
+branches and the Pro and DM predictions (a 128-point gap more likely shrinks than widens; the
+DM adds |ΔJ_512| ≤ 1/12 and D opposite in sign to ΔJ_128). Implementation is routed to Grok
+Build under hub review ([objective](VSPC1_K4_FACTOR_VALUE_B02_BUDGET512_CM_OBJECTIVE_20260906.md)).
+Seeds 0–2, the A01 gap, the D6 boundary and the Portfolio row are unchanged; "four seeds"
+promotes nothing to C.
