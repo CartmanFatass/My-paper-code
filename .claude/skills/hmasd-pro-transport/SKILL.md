@@ -76,7 +76,9 @@ conversation for a bound key.
      three minutes and read GitHub back before calling a write gap (below); archive sha256,
      `GITHUB_RESPONSE.md` and `DELIVERY_COMMENT.json` by `gh api` at the immutable commit,
      `bind_conversation.py` under `PYTHONUTF8=1` with the creator ids from the handoff and the
-     session's UUID5 as `--operator-thread-id`, the transport facts JSON, the tab close.
+     session's UUID5 as `--operator-thread-id`, the transport facts JSON, and the tab close
+     (mandatory; owner 2026-09-06: open agent tabs accumulate and consume memory; the hub
+     checks `tab_lifecycle: CLOSED` in the facts and closes a leftover tab itself if needed).
    The hub-direct variant (hub calls Agentify itself) remains in Git history as a fallback when
    no Sonnet agent can be spawned; it is not the standard route.
    **The chat receipt is not the delivery.** In both scientific runs so far (DISH recovery,

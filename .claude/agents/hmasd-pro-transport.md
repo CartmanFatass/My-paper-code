@@ -138,3 +138,7 @@ summary, no recommendation.
   a failed write leaves the file intact). Archive paths exceed Windows `MAX_PATH`: read them with
   bash `cat` piped into Python, not `open()`.
 - Remote GitHub readbacks use `gh api` from this machine; never from the compute node.
+- **Close the agent tab in phase 2, every time** (owner instruction 2026-09-06 06:35 PDT: tabs
+  left open accumulate and eat memory). After the archive and readback are verified, call
+  `agentify_tab_close` on the tab you created and report `tab_lifecycle: CLOSED`; if the close
+  fails, report the tab id so the hub can close it. Never close a tab you did not create.
