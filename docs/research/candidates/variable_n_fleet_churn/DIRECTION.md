@@ -27,6 +27,39 @@ comparisons remain historical evidence; this new B does not identify their uniqu
 
 ## Current scientific disposition
 
+### Deployment-mode evaluation closed and next direction question — 2026-09-06
+
+The sole next observation selected by the two-seed Convergence decision is complete:
+`VNFC-N7-B01-DEPLOYMENT-MODE-EVAL` (card and CM record of 2026-09-05, integrated at
+`6fc574561`, run on `wsl_4070`). The four saved final policies (formal_02 and seed02, MAPR and
+DIRECT, round 64, zero parameter displacement) were executed on one new shared 64-world panel in
+both modes, with fixed BCRH on the same panel; zero training, 512 evaluation episodes, 64 BCRH
+episodes, 138,240 native ticks, complete wall 44.47 s under the 180 s cap. The GREEDY path
+reproduced the B01 evaluation record row for row (64/64) before the formal run.
+
+Paired `SAMPLE − GREEDY` on `R_fail_60` is −0.0065, −0.0036, −0.0056 and +0.0169 (mean ± SE
+at most 0.018), all inside (−.10, +.10) with mixed signs; SAMPLE lowers `U_total` and `J_ext`
+in all four policies. By the card's reading rule this is branch 3: no useful deployment-mode
+signal at this exposure, and the execution-mode question closes without escalation to
+temperature, more draws, panels or checkpoints. Every learner cell remains below BCRH on
+`R_fail_60` by 0.055 to 0.074 in both modes and both zones; same-mode MAPR−DIRECT differences
+are inside noise. The B01 two-seed result is unchanged; no learner sample was added.
+
+Accepted `OWNER_DELEGATED` (ledger 2026-09-06 rows 9–10). The next VNFC object belongs to the
+same Convergence node: the post-evaluation packet
+(`pro_packets/20260906_post_depmode_convergence/`, request
+`2026-09-06-vnfc-post-depmode-convergence-01`) states the direction's headroom record (none: the
+K search and physical upper do not form a tuned same-information pair; BCRH is a native
+reference) and its second-recast standing, and carries the DM recommendation to pause the N7
+direct-return exploratory family at its smallest supported unit, offered for challenge against a
+named new B, an existing-record analysis or a third recast. Lifecycle, priority and recast count
+are Portfolio-held and unchanged (recasts two). Cumulative B01 formal investment is 827.76 s of
+2,700 s. The direction parks at this clean boundary after the Send. See
+`VNFC_N7_B01_DEPLOYMENT_MODE_EVAL_SCIENCE_CARD_20260905.md`,
+`VNFC_N7_B01_DEPLOYMENT_MODE_EVAL_CM_RECORD_20260905.md`,
+`VNFC_N7_B01_DEPLOYMENT_MODE_EVAL_RESULT_INTAKE_20260905.md` and
+`evidence/b01_depmode_formal_20260905_01/`.
+
 ### Two direct learning seeds and next direction question — 2026-09-05
 
 The complete validation-method Convergence decision ended further R03 exact-headroom census

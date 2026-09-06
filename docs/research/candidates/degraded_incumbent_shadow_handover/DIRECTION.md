@@ -512,3 +512,43 @@ no exact cause/census/upper/replay prerequisite is added. Complete charged pair 
 Evidence: `DISH_FORECAST_PACKAGE_B02_RESULT_EVIDENCE_20260905.md`,
 `DISH_FORECAST_PACKAGE_B02_INTAKE_20260905.md`,
 `DISH_FORECAST_PACKAGE_B02_DM_COMPUTED_20260905.json`, `b02_20260905/`.
+
+## Accepted renewal-boundary A01 measurement — 2026-09-06
+
+**Conclusion and bounded claim.** The post-B02 Convergence decision (PRO_FINAL, archived at
+`bc0808401`) selected one A/RECON observation of the policy-to-native renewal boundary on the
+unmodified B02 ordinary evaluation path. It is complete and reads branch 1 on both windows:
+with the retained seed-61 FORECAST_PACKAGE checkpoint (update 16, zero parameter movement) and
+two initial 32-tick windows (K8, K4), the `renew` flag the policy consumes at tick n is the native
+flag of the transition that ended at tick n−1. At every native admission tick the policy read
+`renew = 0`, copied the held command and emitted zeros, which native incorporated; at every
+following tick it read `renew = 1` and emitted a nonzero fresh command, which native did not
+incorporate. Counts over 64 live ticks: 12 native admissions with policy renew false, 12 policy
+renewals with native admission false, 0 matched renewals, 40 matched non-renewals, 0 held-command
+changes (per window 4/4/0/24 and 8/8/0/16; DM predicted 4 and 8). This is a measured interface
+discrepancy at that scope, not a service, learning or equivalence result.
+
+**Support and contradiction.** Tick-0 flags are correct (countdown 4 and 2), so the reset
+boundary contributes nothing; the eval path consumes no random draws; the checkpoint digest
+matches the card and B02. Prepare and commit proposals were likewise emitted only on
+non-admission ticks and the CAS gate never fired, so whether they suffer the same lag at their
+own native gate is unresolved. Reading the source, the training collection stacks the same
+pass-through flag as `renew`, `prepare_mask` and `commit_mask`, so the B01/B02 learners very
+likely trained under the same lag and never had a fresh motion command incorporated in ordinary
+rollouts; this is an inference the A did not measure. B02's identical 470-tick service in both
+arms is consistent with it and not thereby explained.
+
+**Disposition.** Accepted `OWNER_DELEGATED` (ledger 2026-09-06 rows 7–8). No local correction,
+retraining, repeat or widening: the card's branch-1 rule and the Pro decision reserve the
+timing/interface correction, and any B01/B02 reinterpretation, to a separately selected object
+under the same Convergence node. The post-A01 Convergence packet
+(`pro_packets/20260906_post_a01_convergence/`, request `2026-09-06-dish-post-a01-convergence-01`)
+carries the DM recommendation of one bounded wrapper-boundary correction with the same two
+windows as its acceptance check; the direction parks at this clean boundary after the Send.
+Implementation was by Grok Build under hub review (integrated at `ffa23bf8d`); runner wall
+under 0.1 s per profile on `wsl_4070`, peak RSS 363 MB, the 120 s bound closed.
+
+Evidence: `DISH_RENEWAL_BOUNDARY_A01_SCIENCE_CARD_20260905.md`,
+`DISH_RENEWAL_BOUNDARY_A01_CM_RECORD_20260905.md`,
+`DISH_RENEWAL_BOUNDARY_A01_RESULT_INTAKE_20260905.md`, `a01_renewal_boundary_20260905/`,
+`DISH_POST_B02_CONVERGENCE_INTAKE_20260905.md`.
