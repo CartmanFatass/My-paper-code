@@ -121,3 +121,15 @@ sampled outcome would reinforce the observed fixed-policy pattern, not prove
 representation equivalence; a nonzero gap would show seed sensitivity, not erase
 this zero result. Full publication or a concrete primary/cap failure ends that
 new card, without an automatic third pair.
+
+## Accepted B03 preparation handoff
+
+After commit 755971522 was pushed, native followup_task accepted the distinct
+B03 assignment to the reused CM
+/root/dm_amx_cbsc_approved/cm_am_cbsc_approved_repair. The current scientific
+parent is /root/dm_amx_cbsc_post_repair. The assignment requires a fresh isolated
+B03 worktree, minimal explicit seed/outer-object binding, preservation of B02
+behavior and all old source semantics, and no new simulation smoke. Exact
+source/command integration precedes the two individually admitted detached calls.
+This is an accepted engineering handoff, not a B03 source acceptance or launch.
+Root received the intake/card commit and the P2 packet; no owner response is awaited.
