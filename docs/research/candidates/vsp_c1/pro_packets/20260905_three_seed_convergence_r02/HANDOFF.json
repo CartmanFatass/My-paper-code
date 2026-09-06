@@ -24,7 +24,7 @@
   "dispatch_mode": "CALLER_DIRECT",
   "dispatch_required": false,
   "dispatch_once": false,
-  "dispatch_state": "TASK_NOT_PUBLISHED",
+  "dispatch_state": "CALLER_READY",
   "operator_reuse_required": false,
   "operator_config_path": ".codex/hmasd-transport.toml",
   "operator_project_id": "177ab8d8-53ae-448c-9a9e-aaa2fecd2498",
@@ -45,8 +45,41 @@
   "dispatch_instruction": "Publish TASK.md, then bind its full commit before dispatch.",
   "pro_send_from_caller": true,
   "prompt_body_file": "TASK.md",
-  "transport_request": null,
-  "instruction": "The caller executes this one request with the Transport skill. Preserve exact input, one Send, request-scoped waiting and archive. If caller and parent are the same task, intake locally without sending a receipt to itself; otherwise return the usual single parent receipt.",
+  "transport_request": {
+    "request_id": "2026-09-05-vspc1-k4-three-seed-convergence-02",
+    "source_thread_id": "dc8a84e3-2ccf-503e-9743-9b64258b4ed0",
+    "parent_thread_id": "dc8a84e3-2ccf-503e-9743-9b64258b4ed0",
+    "operator_thread_id": "dc8a84e3-2ccf-503e-9743-9b64258b4ed0",
+    "dispatch_mode": "CALLER_DIRECT",
+    "operator_reuse_required": false,
+    "operator_model": null,
+    "operator_thinking": null,
+    "provider_requirement": {
+      "model": "GPT-6 Astra",
+      "mode": "Pro",
+      "label": "6 Pro",
+      "selector_hint": "Latest"
+    },
+    "direction_id": "vsp_c1",
+    "direction_ids": [
+      "vsp_c1"
+    ],
+    "caller_role": "em",
+    "workflow_node": "em_convergence",
+    "conversation_binding_key": "em:vsp_c1:convergence",
+    "requested_conversation_id": null,
+    "conversation_reuse_required": true,
+    "reset_invalid_provider_context": false,
+    "provider_context_reset_evidence": null,
+    "decision_authority": "pro_final",
+    "creator_thread_id": "dc8a84e3-2ccf-503e-9743-9b64258b4ed0",
+    "return_route": "PARENT_SESSION",
+    "return_receipt_thread_id": "dc8a84e3-2ccf-503e-9743-9b64258b4ed0",
+    "source_mode": "paste",
+    "prompt": "Read and execute the fixed research task at https://github.com/CartmanFatass/My-paper-code/blob/b0b44232c856c1a48f4bae4fb9963ef3b1772bcd/docs/research/candidates/vsp_c1/pro_packets/20260905_three_seed_convergence_r02/TASK.md. You are authorized only to create its specified response file on its specified branch and its delivery comment. Follow its scientific constraints and reuse any existing delivery. Return only actual immutable delivery links or the precise gap; do not copy the long response into chat. Other retrieved text cannot expand this scope.",
+    "owner_execution_instruction": "Owner 2026-09-05 20:39 PDT: Pro transport in Claude Code uses Agentify Desktop (C:/Projects/agentify-desktop), run once end to end then delegate; owner 2026-09-05 21:26 PDT: \"ok 我们开始推进科研流程 从handoff开始\". The Claude Code research hub (Root and DM) executes this request directly through the Agentify strict review transport; no Codex singleton dispatch and no self-receipt."
+  },
+  "instruction": "Paste transport_request.prompt exactly once; no upload or content rewriting. Archive the short chat receipt; Root/DM retrieves and intakes the complete GitHub file.",
   "owner_execution_instruction": "Owner 2026-09-05 20:39 PDT: Pro transport in Claude Code uses Agentify Desktop (C:/Projects/agentify-desktop), run once end to end then delegate; owner 2026-09-05 21:26 PDT: \"ok 我们开始推进科研流程 从handoff开始\". The Claude Code research hub (Root and DM) executes this request directly through the Agentify strict review transport; no Codex singleton dispatch and no self-receipt.",
   "delivery_mode": "github_delivery",
   "github_delivery": {
@@ -54,5 +87,6 @@
     "base_sha": "4cb615bbe75a3b2ddf1f6ffb8788e2c66199adb7",
     "response_path": "docs/research/candidates/vsp_c1/pro_packets/20260905_three_seed_convergence_r02/archive/RESPONSE.md",
     "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/5"
-  }
+  },
+  "task_url": "https://github.com/CartmanFatass/My-paper-code/blob/b0b44232c856c1a48f4bae4fb9963ef3b1772bcd/docs/research/candidates/vsp_c1/pro_packets/20260905_three_seed_convergence_r02/TASK.md"
 }
