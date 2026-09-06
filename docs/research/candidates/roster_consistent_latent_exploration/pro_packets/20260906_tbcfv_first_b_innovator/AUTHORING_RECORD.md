@@ -12,7 +12,7 @@
 - Evidence base `4715e912cb926368db050f5440e5cc4957ebb90f` (EVIDENCE_AND_OPTIONS.md,
   EXPOSURE_AND_COST.json, ISSUE_SNAPSHOT.json); output branch `codex/pro-rcle-tbcfv-first-b-20260906`
   pushed at that base; TASK.md at `bef40d734bb088b1aee34520594528bcb9bd7e3b`, bound `CALLER_READY`.
-- Wording: delivery through the Codex connector (renderer wording of 2026-09-06).
+- Wording: re-rendered 2026-09-06 09:45 PDT with the shared renderer restored to its Codex-era bytes (4d9310800); the request no longer names any connector.
 - Hub wait: GitHub branch-head readback until the head differs from the base, 45 min cap; then
   transport phase 2 (verify, archive, readback, first-binding registry bind with
   `--observed-after-successful-send`, walk to ARCHIVED, close every tab).
