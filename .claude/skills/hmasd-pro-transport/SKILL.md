@@ -73,6 +73,15 @@ conversation for a bound key.
    a new request id is a new decision, not a retry. The `hmasd-pro-transport` subagent remains
    available when the hub wants the whole checklist run outside its own context (it was used for
    the N3 recovery Send on 2026-09-05).
+   **The chat receipt is not the delivery.** In both scientific runs so far (DISH recovery,
+   VSPC1 r02, 2026-09-05) the short chat reply said "delivery is blocked by missing GitHub
+   write capability", yet the response file and the Issue comment landed on the declared branch
+   two to three minutes after the reply, authored by the owner's GitHub account through the
+   ChatGPT connector with a `Co-Authored-By: OpenAI ChatGPT` trailer. After `COMPLETE`, wait a
+   few minutes and do a fresh `gh api` readback of the branch head, the response path and the
+   Issue comments before concluding a gap; only a readback that still shows base sha, 404 and
+   no new comment is a write gap. The connector needs no per-conversation enabling; it is the
+   account-level GitHub app, and it works in a first-binding conversation as well.
 7. **Intake**: read the full response from the archive's `GITHUB_RESPONSE.md` (verified against the
    immutable commit), not the short chat receipt. Check the formed decision against current owner
    instructions and specifications; a complete answer does not authorize a silent exception. Write
