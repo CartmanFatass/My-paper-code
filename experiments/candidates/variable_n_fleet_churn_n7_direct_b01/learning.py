@@ -98,7 +98,10 @@ def terminal_metrics(row):
     return result
 
 
-def rollout(library, fixtures, model, arm, namespace, action_source, round_index, training, check_presentation=False):
+def rollout(library, fixtures, model, arm, namespace, action_source, round_index, training, check_presentation=False,
+            evaluation_uniforms=None):
+    """`evaluation_uniforms` is an optional per-epoch uniform supplier used only when
+    `training` is false; absent (the default) every existing call keeps its behavior."""
     started = perf_counter()
     count = len(fixtures)
     episodes = [[] for _ in fixtures]
@@ -116,6 +119,10 @@ def rollout(library, fixtures, model, arm, namespace, action_source, round_index
             if stacked[0].shape[1] != 7:
                 raise AssertionError("expected seven surviving entity rows")
             uniforms = None
+            if not training and evaluation_uniforms is not None:
+                uniforms = evaluation_uniforms(epoch)
+                if tuple(uniforms.shape) != (count, 4) or uniforms.dtype != torch.float64:
+                    raise AssertionError("evaluation uniform block shape/dtype differs")
             if training:
                 uniforms = torch.tensor([[(action_source.word(coordinate(namespace, "training/action", arm,
                     round_index, index, fixture.failed_zone, 20 * epoch, token), now=None) + .5) / float(1 << 64)
