@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "deny": [
+      "Edit(AGENTS.md)",
+      "Write(AGENTS.md)",
+      "Edit(.agents/**)",
+      "Write(.agents/**)",
+      "Edit(.codex/**)",
+      "Write(.codex/**)"
+    ]
+  }
+}

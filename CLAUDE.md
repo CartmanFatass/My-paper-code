@@ -1,7 +1,8 @@
 # CLAUDE.md
 
 Guidance for Claude Code in this repository. The collaboration and authority rules are in
-`AGENTS.md` (runtime-neutral; Appendix B is the Claude Code part) and are imported here:
+`AGENTS.md` (the Codex control plane, imported read-only; the Claude Code part is the section
+"Claude control plane and the Codex control plane" below):
 
 @AGENTS.md
 
@@ -77,3 +78,63 @@ standard-library local page that reads and writes only the owner surfaces under
   when the owner names it.
 - `CONCEPT_MAP.md` and `LEARNING_LOG.md` (now under `docs/personal/`) are the owner's learning
   notes, not project authorities.
+
+## Claude control plane and the Codex control plane (owner, 2026-09-06 09:56 PDT)
+
+`AGENTS.md`, `.agents/skills/**` (including the scripts inside them such as `render_packet.py`
+and `bind_conversation.py`) and `.codex/**` are the Codex control plane: they shape Codex's
+behaviour and Pro's prompts. Claude sessions read and execute them but **never edit them**;
+any change needs the owner's explicit approval, named per file. Claude's own rules live only in
+this file and under `.claude/`. Downstream mechanical state (the shared transport registry and
+archive under `temp/sessions/hmasd-chatgpt-pro-transport/`, `scripts/hmasd_*.py`) may be shared
+by both loops, and is likewise modified only with the owner's approval. The sections below were
+moved here from `AGENTS.md` Appendices B and C on 2026-09-06 (the appendices were restored to
+their Codex-era text); their content is unchanged.
+
+### Claude Code session rules (formerly AGENTS.md Appendix B)
+
+- `CLAUDE.md` at the repository root carries the environment, commands, architecture, and
+  repo-specific working rules; it is tracked.
+- Deliverables of a Claude session (reviews, plans, experiment designs and results outside the
+  research authority tree) live under `docs/Claude_docs/<category>/`, indexed by its README.
+- The Fable session is the **research hub**: Root and Direction Manager at once for the directions
+  it drives (owner, 2026-09-05). Its procedure is `.claude/skills/hmasd-research-hub/SKILL.md`. It
+  keeps every scientific judgment (cards, objectives, intake, decisions, owner items, briefs,
+  `DIRECTION.md`, Portfolio, integration) and delegates everything else to the subagents defined in
+  `.claude/agents/`, ported from `.codex/agents/*.toml`: Opus for code and independent judgment
+  (`hmasd-cm`, `hmasd-reviewer`, `hmasd-research-critic`), Sonnet for scouting and mechanical work
+  (`hmasd-cm-scout`, `hmasd-routine-implementer`, `hmasd-verifier`, `hmasd-experiment-operator`,
+  `hmasd-experiment-tracker`, `hmasd-clerk`, `hmasd-research-scout`, `hmasd-pro-transport`).
+  Subagents cannot spawn subagents, so the hub dispatches every specialist itself; there is no
+  sibling messaging, so the tracker is a bounded observer the hub invokes, not a standing agent.
+- Capacity in a Claude session is **two concurrently advancing directions** (owner, 2026-09-03,
+  reaffirmed 2026-09-05; the Claude quota is separate from Codex's). The five-chain working set in
+  §2 and §5 is the Codex loop's target and does not apply here. Lifecycle and priority are
+  unchanged by which loop drives a direction.
+- Implementer subagents run in worktrees under `.claude/worktrees/` (`isolation: worktree`); the
+  hub integrates into `main` by cherry-pick. Commits end with the `Co-Authored-By` and
+  `Claude-Session` trailers the runtime supplies.
+- Pro transport in Claude Code goes through Agentify Desktop (`C:/Projects/agentify-desktop`) and
+  the same scoped GitHub delivery, packet renderer, registry and conversation bindings the Codex
+  Transport uses; procedure in `.claude/skills/hmasd-pro-transport/SKILL.md`. It is enabled for
+  unattended scientific dispatch only after one recorded non-scientific smoke has passed. Until
+  then, and whenever transport is unavailable, direction- and Portfolio-tier questions are put to
+  the owner through the owner surfaces; in the owner's absence the direction parks (§3) and
+  object-tier decisions follow §4.
+
+### Grok Build route (formerly AGENTS.md Appendix C)
+
+- Grok Build (xAI CLI, `grok-4.6` at effort `high`) is a third agent runtime under section 1
+  (owner decisions 2026-09-05 22:40 and 22:57 PDT). It receives working methods only: one
+  direction's CM implementation when two directions advance in a Claude session, read-only code
+  maps, second independent reviews, and (owner 2026-09-06, `grok-4.5`) every mechanical
+  control-plane task whose content the hub has fixed in advance (ledger rows, owner items through
+  `item.py`, evidence copies, packet auxiliary files, splices of hub-written text, render/bind). It never launches result-bearing runs, never operates Pro
+  transport, and never makes a scientific judgment.
+- Invocation is headless and fenced (`.claude/skills/hmasd-grok-cm/SKILL.md`): its own git
+  worktree, an explicit tool allowlist, no subagents, no web, deny rules on every shared or
+  governance path, no git commands. Its output is a diff for the hub to review, test and commit
+  by pathspec with an `Implemented-By: grok-build` trailer; a diff touching a protected surface
+  also goes to `hmasd-reviewer`. Accepted Grok work is recorded as a `technical` ledger row.
+- Grok reads `AGENTS.md`, `CLAUDE.md`, `.claude/agents/` and `.claude/skills/` itself; those
+  files bind it as they bind every runtime. No Grok-specific authority, label or gate exists.
