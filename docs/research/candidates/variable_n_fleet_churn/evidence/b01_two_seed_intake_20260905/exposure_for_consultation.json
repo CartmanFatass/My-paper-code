@@ -1,0 +1,77 @@
+{
+  "consultation_new_exposure": {
+    "training_instances": 0,
+    "joint_transitions": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0
+  },
+  "valid_training_seed_pairs": [
+    2026090501,
+    2026090503
+  ],
+  "evaluation_masters": [
+    2026090502,
+    2026090504
+  ],
+  "valid_per_arm": {
+    "MAPR": {
+      "training_instances": 2,
+      "rounds": 128,
+      "training_episodes": 4096,
+      "joint_transitions": 24576,
+      "optimizer_steps": 4096,
+      "backward_calls": 4096,
+      "evaluation_episodes": 384,
+      "parameter_count": 89090,
+      "per_seed_relative_displacement": {
+        "2026090501": 0.29212423694331174,
+        "2026090503": 0.3045346767518269
+      }
+    },
+    "DIRECT": {
+      "training_instances": 2,
+      "rounds": 128,
+      "training_episodes": 4096,
+      "joint_transitions": 24576,
+      "optimizer_steps": 4096,
+      "backward_calls": 4096,
+      "evaluation_episodes": 384,
+      "parameter_count": 148739,
+      "per_seed_relative_displacement": {
+        "2026090501": 0.2563089227437188,
+        "2026090503": 0.2701411555606266
+      }
+    }
+  },
+  "valid_total_episodes": 9088,
+  "valid_total_native_ticks": 2181120,
+  "fixed_bcrh": {
+    "training_instances": 0,
+    "evaluation_episodes": 128,
+    "complete_controller_calls": 768
+  },
+  "formal01_incomplete_separate": {
+    "seed": 2026090501,
+    "logged_training_episodes_per_arm_lower_bound": 320,
+    "logged_transitions_per_arm": 1920,
+    "logged_optimizer_steps_per_arm": 320,
+    "primary_output_available": false
+  },
+  "cost_seconds": {
+    "valid_complete_wall": [
+      388.75,
+      306.68
+    ],
+    "valid_complete_cpu": [
+      388.53,
+      305.83
+    ],
+    "formal_including_incomplete_wall": 783.29,
+    "formal_including_incomplete_cpu": 774.61,
+    "measured_checks_plus_formal_wall": 808.9,
+    "measured_checks_plus_formal_cpu": 800.4,
+    "original_formal_cap": 2700,
+    "unallocated_remainder": 1916.71
+  },
+  "cost_limit": "Earlier diagnostics retain incomplete measurements; no remaining budget automatically selects new work."
+}
