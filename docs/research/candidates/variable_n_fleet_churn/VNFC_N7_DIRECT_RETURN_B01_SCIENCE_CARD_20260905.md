@@ -167,7 +167,9 @@ The engineering check reaches actual changed behavior and primary output:
 - Read the main summary, episode-level primary outcomes and declared checkpoints. Retain all
   observed outcomes; missing optional resource telemetry limits the resource account only.
 
-Engineering Scope Spec §4 additions: none. Reuse the project supervisor and learner checkpoints;
+Engineering Scope Spec §4 additions at initial freeze: none. The formal02 execution supplement
+below selects only one event-triggered fault-stack observation after an actual incomplete attempt.
+Reuse the project supervisor and learner checkpoints;
 no new worker service, provenance/refusal framework, retry machinery, full intermediate-record
 publication or recurrent smoke is needed. The ordinary 2,000 new-source-line and 600-runner-line
 budgets apply to this distinct B implementation. Existing checks can be reused; one launch
@@ -201,3 +203,17 @@ seed cannot estimate training-seed population uncertainty. No stable-superiority
 exact maximum, complete causal explanation, cross-N transfer, repeated-churn, real-UAV, safety,
 flight or deployment claim follows. E01/R03 and all historical quarantines and bounded negative
 comparisons retain their original meaning.
+
+## Execution supplement after formal01 (2026-09-05)
+
+`VNFC_N7_DIRECT_RETURN_B01_FORMAL01_INTAKE_20260905.md` preserves the incomplete formal01
+SIGSEGV attempt and selects one same-source, same-seed fresh attempt; no scientific comparison,
+training exposure, metric, numerical/RNG or checkpoint semantics change. The cumulative formal
+total remains 2700 wall seconds: 87.86 already spent, 2612.14 remaining. Formal02 has an external
+2612-second timeout covering its complete initialization, computation and publication.
+
+Engineering Scope Spec §4 selected need: event-triggered fault-stack observation beyond ordinary
+wall/RSS reporting, solely the available Python thread frames at a fatal fault in formal02.
+Use the interpreter's existing `-X faulthandler` option, no added research code or periodic
+sampling/profiler. This addresses the specific interrupted training/publication dependency;
+it does not require a unique root cause, alter computation or authorize another automatic attempt.
