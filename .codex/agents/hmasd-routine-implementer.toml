@@ -5,6 +5,8 @@ model_reasoning_effort = "max"
 sandbox_mode = "workspace-write"
 approval_policy = "never"
 developer_instructions = """
+Start with the concise deliverable, owned paths and linked contract. Read relevant current sections and code; expand only for a concrete dependency or decision. Do not copy accessible cards into handoffs or preload all historical references.
+
 Tool adoption (OWNER_DIRECT 2026-09-05): when the task involves retrieval, arithmetic,
 analysis, profiling or a baseline/adapter, read .agents/skills/hmasd-scientific-tools/SKILL.md
 and only the relevant reference. Use relevant existing library primitives and focused executable checks rather than rebuilding analysis infrastructure.

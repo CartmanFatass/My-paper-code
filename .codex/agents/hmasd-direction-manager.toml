@@ -18,7 +18,7 @@ This is a working method, not a separate identity, approval, or routing system.
 Read the assignment, root AGENTS.md (the decision ladder in section 2, the blocker rule in
 section 3, unattended operation in section 4, capacity in section 5), the evidence spec
 docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md with section 11 controlling, the current
-Portfolio row, the direction's DIRECTION.md and cited evidence, and the actual Git state of the
+Portfolio row, the direction's current DIRECTION.md section and decision-relevant cited evidence, and the actual Git state of the
 checkout or native worktree attached to the task. Preserve unrelated work.
 
 ### The card
@@ -48,7 +48,7 @@ specific C claim; held-out transfer splits and oracle-retuned comparators are no
 requirements and never hold an A or B launch (section 11.4). Only the section 4 integrity items, nonzero learner counts, the resource
 admission and the exposure line may hold a B launch.
 
-Send CM a meaning-complete objective: the class, the card, protected scientific/numerical/RNG/
+Send CM a concise deliverable-based objective, linking accessible card sections rather than copying them. Include missing or changed facts: the class, the card, protected scientific/numerical/RNG/
 checkpoint/side-effect semantics, baseline/configuration/data, owned paths, resource bound, stop
 rule, result branches, prospective host/device portability or pinning, non-goals, and what
 technical success cannot establish scientifically. Portable result-bearing work follows the
@@ -66,24 +66,17 @@ with the quantity that needs it, or says in one line that it needs none. A resul
 implementation breached a section 5 budget records the breach. Return a diff that adds
 unrequested machinery; do not accept it as the price of a result.
 
-### Experiment tracking sibling
+### Independent experiment monitor
 
-The owner requested one shared root-level `hmasd-experiment-tracker` (Terra/low), a sibling of
-the DMs. Read its canonical name in PORTFOLIO.md and hand accepted long-running process handles
-directly to it using collaboration.send_message (running) or collaboration.followup_task (idle).
-Include or cite the accepted task/session, node, launch SHA, cwd, outputs/receipt, expected bound,
-reminder condition and your canonical DM name. It records, tracks and reminds you directly; Root
-does not relay routine observations. CM retains launch/repair/technical-acceptance ownership and
-you retain intake and all scientific decisions. On its terminal reminder, resume CM collection or
-your intake; acknowledge handoff so it stops repeating that event. Reuse its one observer rather
-than keep a CM/DM polling the same run. Tracker absence or missing metadata is not a launch gate;
-leave a durable handle and ask Root to restore the tracker without duplicating the experiment.
-Call native collaboration tools at the top level using the tracker's canonical path; they are not
-functions.exec tools.* methods or app task-message tools. See docs/project/SIBLING_COMMUNICATION.md.
-For local work include the launcher-owned session or detached PID/start-time identity and existing
-log/exit witnesses; for remote work include the node's accepted agent-task name and remote paths.
-If the observer reports a real missing outbound capability, retain observation coverage through
-Root's temporary recovery handoff; do not mistake absent ACKs for a science or admission failure.
+DM or CM directly sends accepted handles to the independent Luna/low task declared in
+`.codex/hmasd-monitor.toml`, using the app `send_message_to_thread` tool. Read
+`docs/project/EXPERIMENT_MONITOR.md` for the bounded handoff. The monitor returns adoption
+ACKs and material events to the configured research Root; Root forwards to the responsible
+native DM/CM and wakes idle children. There is no native tracker sibling or Root polling
+heartbeat. Retain one observation owner until adoption ACK, then release routine polling.
+CM retains collection/technical acceptance; DM retains science. Never relaunch to transfer
+observation. Link existing run facts instead of repeating the card; missing metadata is no
+new launch gate. Historical native communication records do not prohibit direct app dispatch.
 
 ### Intake and the decision ladder
 

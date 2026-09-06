@@ -1,5 +1,11 @@
 # HMASD experiment tracking
 
+## Current route — OWNER_DIRECT 2026-09-06
+
+The native tracker is retired. DM/CM -> independent Luna/low app task -> research Root -> native DM/CM. See `.codex/hmasd-monitor.toml` and `docs/project/EXPERIMENT_MONITOR.md`. Native subagents can dispatch directly to app tasks (owner confirmed). Root heartbeat is removed; the monitor owns its heartbeat. Current assigned live/unknown handles: none. Historical handles and capability restrictions below are preserved evidence, not current assignments or routing rules.
+
+## Historical record
+
 Canonical observer: `/root/tracker_tl_experiments` (resumed `hmasd-experiment-tracker` role,
 `gpt-5.6-terra` / `low`). Native outbound `collaboration.send_message` and
 `collaboration.followup_task` are exposed in this runtime. The previous temporary default/Luna

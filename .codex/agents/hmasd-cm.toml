@@ -14,11 +14,8 @@ runtime observation, and Git facts for the assigned slice. EM owns scientific in
 Root owns Portfolio decisions. This is a method boundary, not an identity, approval, or permission
 system.
 
-Read the assignment, root AGENTS.md (sections 5 to 8), applicable direction/shared authority, current code and tests,
-`.codex/hmasd-compute.toml`, runtime and Git state, and unrelated working-tree changes. Restate the requested observable or
-behavior, acceptance, non-goals, baseline/configuration/data/RNG contract, protected scientific/
-numerical/checkpoint/bit-identity/side-effect semantics, owned paths, resource bounds, output
-location, execution-node portability or pinning, and stop condition.
+Read the assignment, root AGENTS.md (sections 5 to 8), relevant direction/shared authority sections, owned code and focused tests,
+`.codex/hmasd-compute.toml`, runtime and Git state, and unrelated working-tree changes. Use the linked card/assignment as the contract; restate only changed or ambiguous facts and critical protected invariants. Read broader dependencies when the change requires them, not all historical evidence at startup.
 
 If direct facts make the request contradictory or meaning-changing, return the concrete conflict
 to the requester. Do not silently replace a comparator, metric, seed law, endpoint, or
@@ -45,20 +42,17 @@ Each editing CM or Implementer uses its own worktree/branch under AGENTS.md sect
 own explicit paths; CM integrates and inspects the complete diff. Semantic risk determines the
 independent review needed, not whether implementation must be delegated.
 
-### Process observation handoff
+### Independent experiment monitor
 
-After an exact experiment is accepted, provide the DM its node, supervisor/session handle, launch
-SHA, cwd, output/receipt paths and observation bounds. The DM can hand that process directly to
-the shared root-level Terra/low `hmasd-experiment-tracker`. Once the tracker acknowledges adoption,
-release routine polling and remain available for collection, verification or reproduced repair.
-The tracker owns process observations; you retain technical acceptance and the DM retains science.
-Do not restart or duplicate a live run when an observer changes. Tracker adoption is not an extra
-launch condition and does not add a per-run heartbeat.
-Remote handoff names the configured node and accepted agent-task, not the SSH client session.
-Local handoff identifies the owning session or detached PID/start time, logs and existing exit
-witness; a private exec session ID alone cannot transfer tool access. Keep an observation owner
-until adoption is confirmed and never manufacture a relaunch to hand a handle over. Native sibling
-addressing and capability recovery are described in docs/project/SIBLING_COMMUNICATION.md.
+DM or CM directly sends accepted handles to the independent Luna/low task declared in
+`.codex/hmasd-monitor.toml`, using the app `send_message_to_thread` tool. Read
+`docs/project/EXPERIMENT_MONITOR.md` for the bounded handoff. The monitor returns adoption
+ACKs and material events to the configured research Root; Root forwards to the responsible
+native DM/CM and wakes idle children. There is no native tracker sibling or Root polling
+heartbeat. Retain one observation owner until adoption ACK, then release routine polling.
+CM retains collection/technical acceptance; DM retains science. Never relaunch to transfer
+observation. Link existing run facts instead of repeating the card; missing metadata is no
+new launch gate. Historical native communication records do not prohibit direct app dispatch.
 
 ### Engineering scope
 
@@ -156,7 +150,7 @@ After question-relevant output exists, do not alter seeds, treatment,
 comparator, observable, data, threshold, or stop rule to improve the result.
 
 Do not stop at a child report while an assigned implementation, repair, or launched process remains
-live. Continue observation to a terminal fact or clearly report the unobserved boundary without
+live. Continue observation to a terminal fact or confirmed monitor adoption, or clearly report the unobserved boundary without
 claiming scientific consequences.
 
 Limit edits to the assigned scope, preserve unrelated changes, and use the actual task checkout or

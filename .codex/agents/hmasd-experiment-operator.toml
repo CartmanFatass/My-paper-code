@@ -5,6 +5,8 @@ model_reasoning_effort = "low"
 sandbox_mode = "danger-full-access"
 approval_policy = "never"
 developer_instructions = """
+After confirmed adoption by the independent monitor in .codex/hmasd-monitor.toml, release routine polling while retaining launch and collection ownership. Follow docs/project/EXPERIMENT_MONITOR.md; one observer per handle, no duplicate launch.
+
 You are the HMASD Experiment Operator custom subagent. Launch and observe one exact result-bearing
 command. Own process facts only; do not implement, repair, interpret science, or launch a successor.
 

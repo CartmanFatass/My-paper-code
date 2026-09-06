@@ -230,8 +230,8 @@ or launch gates, and never override a stricter original cap.
 
 Resume model: commit and push before every launch; launch every result-bearing run detached from
 the agent's process; on the remote route use a detached worktree at the exact launch sha and the
-configured `agent-task` supervisor; keep a recurring heartbeat that resumes agents killed by a
-usage limit; keep every agent's state recoverable from the repository alone (card, predictions,
+configured `agent-task` supervisor; use the independent experiment monitor and its own heartbeat for accepted-handle observation;
+Root has no research heartbeat (OWNER_DIRECT 2026-09-06); keep every agent's state recoverable from the repository alone (card, predictions,
 launch sha, execution node, run root, queue state).
 
 ## 6. Workspace and Git under concurrent sessions
@@ -362,14 +362,16 @@ appendix and completed historical tasks remain unchanged.
 - Native custom subagents are defined in `.codex/agents/*.toml` and registered in
   `.codex/config.toml`: `hmasd-direction-manager`, `hmasd-cm`, `hmasd-implementer`,
   `hmasd-routine-implementer`, `hmasd-cm-scout`, `hmasd-reviewer`, `hmasd-research-critic`,
-  `hmasd-verifier`, `hmasd-experiment-operator`, `hmasd-experiment-tracker`. Retired definitions stay in Git history and are
+  `hmasd-verifier`, `hmasd-experiment-operator`. Retired definitions stay in Git history and are
   re-added only when a wave shows a check nobody else performs.
-- The owner requested a shared root-level Experiment Tracker on `gpt-5.6-terra` / `low`
-  (2026-09-04). It is a sibling of the DMs: they hand accepted process handles to it on demand,
-  and it records, tracks, and reminds the responsible DM directly. Root publishes its canonical
-  name in Portfolio and restores it through the existing research heartbeat. It counts as no
-  direction slot. CM/Operator retains launch and engineering ownership; the tracker does not
-  restart, repair, stop, or interpret experiments. Tracking handoff adds no launch gate.
+- OWNER_DIRECT 2026-09-06: the native tracker is retired. One independent Luna/low
+  task with its own heartbeat observes accepted experiments. DM/CM sends assignments
+  directly to that task; it returns ACKs and events to research Root, which wakes the
+  corresponding native DM/CM. Root's research heartbeat is removed. Configuration is
+  `.codex/hmasd-monitor.toml`; procedure is `docs/project/EXPERIMENT_MONITOR.md`.
+  Keep one routine observer per handle; CM retains engineering and DM retains science.
+  Pre-read relevant current sections; use concise deliverable-based handoffs with links
+  instead of repeating accessible cards or preloading historical evidence.
 - The DM is the `em` caller of `$hmasd-pro-research-prompt-author` for the two direction
   conversations; Root is the `portfolio` caller. By default, handoffs reuse the one active Transport task
   declared in `.codex/hmasd-transport.toml`; Prompt Author must not call `create_thread` or select a

@@ -1,5 +1,11 @@
 # Codex 原生 sibling 通信
 
+## Current route — OWNER_DIRECT 2026-09-06
+
+The native tracker is retired. DM/CM -> independent Luna/low app task -> research Root -> native DM/CM. See `.codex/hmasd-monitor.toml` and `docs/project/EXPERIMENT_MONITOR.md`. Native subagents can dispatch directly to app tasks (owner confirmed). Root heartbeat is removed; the monitor owns its heartbeat. Current assigned live/unknown handles: none. Historical handles and capability restrictions below are preserved evidence, not current assignments or routing rules.
+
+## Historical record
+
 验证日期：2026-09-04。适用范围：本项目当前 Codex Desktop 原生 multi-agent 任务树。
 
 ## 23:41Z 恢复后的实际能力

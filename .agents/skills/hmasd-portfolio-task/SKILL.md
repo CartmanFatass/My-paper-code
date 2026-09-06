@@ -76,20 +76,12 @@ The target parallelism is five direction-level DM chains. Count neither Root nor
 CM/implementer/reviewer/critic/verifier/operator children, nor detached result processes as extra
 direction slots.
 
-The owner-requested shared `hmasd-experiment-tracker` (model/effort from its role TOML) is a root-level sibling of the
-DMs and also consumes no direction slot. Publish its canonical name and tracking-document branch
-in Portfolio; restore it through the existing Root heartbeat. DMs hand accepted handles to it and
-receive reminders directly, with no Root relay. It is the single writer of
-`docs/research/portfolio/EXPERIMENT_TRACKING.md`; integrate meaningful updates while the DMs retain
-science and CM retains technical acceptance. Reconcile the same handles before restoring a lost
-tracker. Do not create a registry, separate scheduler, per-run heartbeat, or an admission gate.
-Spawn the installed custom role by its file's name, `hmasd-experiment-tracker`; its model and effort
-are fixed in that file. Use docs/project/SIBLING_COMMUNICATION.md for verified native addressing.
-If this runtime has not exposed the new role, record that exact discovery failure; a default agent
-with copied instructions is a temporary substitute, not a validated custom-role instance. Publish
-observed send/receive capability separately from configuration. Missing outbound tools in one
-agent do not disprove sibling support; restore direct delivery at a supported configuration load
-while retaining necessary process observation and DM wakeups.
+The independent Luna/low experiment monitor is declared in `.codex/hmasd-monitor.toml`.
+Follow `docs/project/EXPERIMENT_MONITOR.md`: DM/CM dispatch directly to its app task;
+monitor sends ACKs/events to Root, which forwards/wakes the current native DM/CM.
+Its own heartbeat replaces the removed Root research heartbeat. It consumes no direction
+slot. Integrate meaningful tracking commits; do not poll the same accepted handle in Root.
+Preserve owner pause and resolve current child identities before forwarding.
 
 - Refill an open slot at a clean boundary with the most promising runnable `ACTIVE` direction.
   Compare decision relevance, the smallest sufficient evidence class, honest claim ceiling,

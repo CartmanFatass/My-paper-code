@@ -1,0 +1,11 @@
+# OWNER_DIRECT 2026-09-06. Reusable standalone task, not a native agent role.
+thread_id = "01a0791b-0d2d-7b43-85b6-cd5632e0b007"
+root_thread_id = "01a07249-b095-7821-8ce2-e9c32ba85267"
+model = "gpt-5.6-luna"
+thinking = "low"
+heartbeat_id = "hmasd-experiment-monitor"
+interval_minutes = 5
+primary_checkout = 'C:\Projects\HMASD'
+monitor_checkout = 'C:\Users\fires\.codex\worktrees\8096\HMASD'
+tracking_path = "docs/research/portfolio/EXPERIMENT_TRACKING.md"
+instructions_path = "docs/project/EXPERIMENT_MONITOR.md"
