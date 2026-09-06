@@ -1,0 +1,23 @@
+	Command being timed: "python scripts/run_dish_forecast_package_b03.py run --arm CONTROL --seed 73 --shared-preparation-seconds 4.94 --admission temp/directions/degraded_incumbent_shadow_handover/exp/forecast_package_b03_20260906_r3/admission_control.json --out temp/directions/degraded_incumbent_shadow_handover/exp/forecast_package_b03_20260906_r3/control"
+	User time (seconds): 190.49
+	System time (seconds): 24.19
+	Percent of CPU this job got: 101%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 3:31.04
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 654804
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 3537
+	Minor (reclaiming a frame) page faults: 10163234
+	Voluntary context switches: 381316
+	Involuntary context switches: 7046
+	Swaps: 0
+	File system inputs: 736744
+	File system outputs: 4704
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
