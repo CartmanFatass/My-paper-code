@@ -1,0 +1,29 @@
+{
+  "read_at": "2026-09-06T22:44:25Z",
+  "issue": {
+    "body": "RCLE（roster_consistent_latent_exploration，路线 N3）在 2026-09-01 的 Portfolio 经验标准 recast 后处于 ACTIVE/MEDIUM，题目是有限预算下的包比较：在冻结的 TBCFV 旋转周界宿主（120 扇区、6 个服务信标、H=64、t_c=24 成员边界；训练 roster {6,10} 含 episode 内事件，held-out {8,12}）上，持久公共计划包 `C1P1-COMMON-PERSISTENT` 对严格含括它的 `FLEX-REKEY` 包在成员变动后的服务恢复（恢复时间 τ、未服务份额 U、学习曲线）。\n\n当前状态：宿主定义卡为 definition_only（empirical_authorization=false），代码树 `experiments/candidates/roster_consistent_latent_exploration_tbcfv/` 有 23 个文件但从未有过结果性调用；A1 headroom 普查（2026-09-04）结论 `RCLE-HC-D / UPPER_REFERENCE_AND_GENERIC_BASELINE_MISSING`，H_A1 未识别。\n\n本 Issue 用于该方向的 Innovator 决定：是否在 TBCFV 上开启第一个有界 B/EXPLORE 配对（DM 建议：两臂、一个配对种子、每臂 200 次更新、held-out 每格 256 个 episode、每臂 2,700 s 上限，CM 在启动前先做首次 native 构建与 ≤300 s 的零学习器可执行性/成本测量），以及预算、种子数、MEI、主测量与停止边界。固定证据与包在仓库 `docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260906_tbcfv_first_b_innovator/`。\n\nPro 的完整回复通过 Codex connector 写入指定分支的 RESPONSE.md 并在此 Issue 留一条链接评论；Root/DM 从固定提交读回并做 intake。此 Issue 不是审批队列，不改变生命周期。\n",
+    "html_url": "https://github.com/CartmanFatass/My-paper-code/issues/8",
+    "number": 8,
+    "state": "open",
+    "title": "N3 RCLE：TBCFV 宿主上的首个有界 B（持久公共计划 对 含括 FLEX）—— Innovator 决定",
+    "updated_at": "2026-09-06T21:41:23Z"
+  },
+  "comments": [
+    {
+      "body": "RCLE TBCFV first-B Innovator r02 完整答复已写入指定分支并按固定提交读回。本次仅交付答复文档，未执行实验或修改科学源码。\n\n[完整 RESPONSE.md](https://github.com/CartmanFatass/My-paper-code/blob/35e3b7b1470f372e09bc61b7e3a36f780040d327/docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260906_tbcfv_first_b_innovator_r02/archive/RESPONSE.md)\n\n[交付提交 35e3b7b1470f372e09bc61b7e3a36f780040d327](https://github.com/CartmanFatass/My-paper-code/commit/35e3b7b1470f372e09bc61b7e3a36f780040d327)",
+      "created_at": "2026-09-06T17:06:00Z",
+      "html_url": "https://github.com/CartmanFatass/My-paper-code/issues/8#issuecomment-5560789984",
+      "id": 5560789984,
+      "performed_via_github_app": "ChatGPT Codex Connector",
+      "user": "CartmanFatass"
+    },
+    {
+      "body": "RCLE post-B01 Innovator 完整答复已交付到指定分支，并按固定提交读回。交付提交相对指定基准仅新增本轮 RESPONSE.md；未修改科学源码或运行实验。\n\n[完整 RESPONSE.md（固定提交）](https://github.com/CartmanFatass/My-paper-code/blob/b871d7a0d2880af8a2943d98a590739036cd2035/docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260906_post_b01_innovator/archive/RESPONSE.md)\n\n[交付提交 b871d7a0d2880af8a2943d98a590739036cd2035](https://github.com/CartmanFatass/My-paper-code/commit/b871d7a0d2880af8a2943d98a590739036cd2035)",
+      "created_at": "2026-09-06T21:41:23Z",
+      "html_url": "https://github.com/CartmanFatass/My-paper-code/issues/8#issuecomment-5562367990",
+      "id": 5562367990,
+      "performed_via_github_app": "ChatGPT Codex Connector",
+      "user": "CartmanFatass"
+    }
+  ]
+}

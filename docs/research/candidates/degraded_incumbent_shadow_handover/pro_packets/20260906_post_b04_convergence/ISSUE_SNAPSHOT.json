@@ -1,0 +1,53 @@
+{
+  "read_at": "2026-09-06T22:44:22Z",
+  "issue": {
+    "body": "N3 Direction Manager 的研究结果与下一问题。已完成的联合改动比较没有建立原生服务增益；现在需要判断同一状态来源研究族是否还有具体、值得投入的下一项真实学习比较。此问题不要求改变其他 N3 子方向、Portfolio 生命周期或优先级。\r\n\r\nB02 使用 A03 地面终端环境，比较原学习器与“sigmoid 服务接口＋四维高斯联合预测损失”组。同一个新种子配对，每组完成 16 次更新、65,536 条普通训练转移、512 次优化器更新，并只评估最终检查点的四个情境。两组平均原生服务均为 470 tick，四行均为 572 / 447 / 433 / 428，差值全为零，预设有用效果尺度是 +24。八个情境全部完成 1,200 tick；没有合法接力或硬事件。\r\n\r\n这是真实学习结果：两组参数有非零且不同的移动，训练服务和标签支持也有差异。改动组保留了很大的有限损失与梯度峰值。不同损失函数的数值不能直接解释成预测准确率提升；本次也没有获得匹配的校准测量。单种子零差异不能证明算法等价，不能替代 RETAIN/COPY/SHADOW 的来源比较。\r\n\r\n完整外部计算约 642.66 秒，包含唯一的 6.83 秒共享针对性检查；两组分别计费 340.645 / 302.015 秒，均在原 1,800 秒上限内。未追加试验、替换种子或调整结论规则。克隆后果步数没有接口读数，保留未测量及基于实际标签数的上界，未为此扩建原生接口。\r\n\r\n当前本地决定是接收这一有界零增益结果，不自动扩大同方案训练。下一方向裁决需说明：更有价值的实际学习问题是什么，为什么它可能改变原生表现；如果没有具体根据，应把暂停或缩小范围限定到证据支持的最小单位。无需先买精确上界、全支持统计、历史重放或完整机制解释，也不把再跑一个种子当成固定手续。\r\n\r\n固定证据：\r\n- [完整技术结果与八行情境](https://github.com/CartmanFatass/My-paper-code/blob/f1886e4aef198b0bc6e1a76261fe80d973105a25/docs/research/candidates/degraded_incumbent_shadow_handover/DISH_FORECAST_PACKAGE_B02_RESULT_EVIDENCE_20260905.md)\r\n- [原始双臂证据](https://github.com/CartmanFatass/My-paper-code/tree/f1886e4aef198b0bc6e1a76261fe80d973105a25/docs/research/candidates/degraded_incumbent_shadow_handover/b02_20260905)\r\n- [DM 科学 intake 与工具复算说明](https://github.com/CartmanFatass/My-paper-code/blob/095bc060739d3502179d2446f957db0f14452ee7/docs/research/candidates/degraded_incumbent_shadow_handover/DISH_FORECAST_PACKAGE_B02_INTAKE_20260905.md)\r\n\r\n后续 Pro 使用固定 TASK 链接及专用分支、单一回复文件交付。DM 会读取完整原文并按现行规范 intake；此 issue 不是额外审批队列，评论不自动代表 owner 批准。\r\n",
+    "html_url": "https://github.com/CartmanFatass/My-paper-code/issues/4",
+    "number": 4,
+    "state": "open",
+    "title": "N3 B02：真实学习零增益后的下一方向判别",
+    "updated_at": "2026-09-06T21:28:28Z"
+  },
+  "comments": [
+    {
+      "body": "ChatGPT-authored post-B02 Direction decision delivered through the connected account.\n\nComplete response, read back at its immutable commit:\nhttps://github.com/CartmanFatass/My-paper-code/blob/bc0808401af81c367b560cd553497707b8c682dd/docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260905_post_b02_convergence/archive/RESPONSE.md\n\nEvidence analyzed: `46d9071378a4272e9e1e8ec64d0c0d5abdb9088f`. The decision continues the family only through one bounded ordinary-renewal/command-incorporation A/RECON observation; it does not scale B02 unchanged. The timing concern is explicitly conditional, not a demonstrated runtime cause. B02's zero-gain observation, earlier evidence and closed R02 remain preserved. No implementation, experiment or Portfolio change was performed.\n\nDelivery commit: `bc0808401af81c367b560cd553497707b8c682dd` (only the specified response file added).",
+      "created_at": "2026-09-06T05:06:00Z",
+      "html_url": "https://github.com/CartmanFatass/My-paper-code/issues/4#issuecomment-5557093321",
+      "id": 5557093321,
+      "performed_via_github_app": "ChatGPT Codex Connector",
+      "user": "CartmanFatass"
+    },
+    {
+      "body": "ChatGPT-authored post-renewal-boundary Direction decision delivered through the connected GitHub account.\n\nComplete response, read back at its immutable commit:\nhttps://github.com/CartmanFatass/My-paper-code/blob/ed4363a2e4c0b578eac64ca19da6ef5e27b64a17/docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260906_post_a01_convergence/archive/RESPONSE.md\n\nEvidence analyzed: `04db4a5a74e69e0c76f5b9aa21eb1ba4aad5f111`.\n\nThe decision continues the existing family through one bounded A/RECON ordinary-renewal interface correction and native acceptance observation, not retraining or unchanged B02 scaling. It distinguishes current decision permission from completed-transition history, includes consistent policy-side prepare/commit and mask timing while preserving native legality, and limits historical reinterpretation to demonstrated dependencies. No additional result-bearing training-collection measurement is required for that bounded qualification; historical training consequences remain inference.\n\nVerified delivery commit: `ed4363a2e4c0b578eac64ca19da6ef5e27b64a17`, one commit above the specified base with only the authorized response file added. No implementation, experiment or Portfolio change was performed.",
+      "created_at": "2026-09-06T10:51:39Z",
+      "html_url": "https://github.com/CartmanFatass/My-paper-code/issues/4#issuecomment-5558729980",
+      "id": 5558729980,
+      "performed_via_github_app": "ChatGPT Codex Connector",
+      "user": "CartmanFatass"
+    },
+    {
+      "body": "ChatGPT 撰写的 post-A02 Direction 完整裁决已交付，并已按不可变提交读回：\n\nhttps://github.com/CartmanFatass/My-paper-code/blob/d7710921fd140f9778d473b3f732e0d65813d619/docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260906_post_a02_convergence/archive/RESPONSE.md\n\n分析证据版本：`a0be9f02aced95928519f61d5cd9143a68897843`。\n\n裁决继续现有家族，仅选择修正普通接口上的一个新 B03 配对学习比较：新种子 73、CONTROL 与 FORECAST_PACKAGE、每臂十六更新；不添加 held-only 行或旧检查点先行观察。保留 A02 的服务不变/能量上升、B02 的原始零差异、历史训练侧推断边界及闭合 R02；旧计时不是修正路径完成成本保证。完整限定、检查复用与缺口、工作及支出边界见原文。\n\n已验证提交 `d7710921fd140f9778d473b3f732e0d65813d619` 比指定基底恰多一个提交，且只新增所授权的 RESPONSE.md。未执行实现、测试、实验或 Portfolio 修改。",
+      "created_at": "2026-09-06T16:15:16Z",
+      "html_url": "https://github.com/CartmanFatass/My-paper-code/issues/4#issuecomment-5560502547",
+      "id": 5560502547,
+      "performed_via_github_app": "ChatGPT Codex Connector",
+      "user": "CartmanFatass"
+    },
+    {
+      "body": "ChatGPT 撰写的 post-B03 Direction 完整裁决已交付，并已按不可变提交完整读回：\n\nhttps://github.com/CartmanFatass/My-paper-code/blob/f85016d765727eecaca8e93d1f253b938a45d1fc/docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260906_post_b03_convergence/archive/RESPONSE.md\n\n分析证据版本：`3f71098dc008868d03444a136708106e63b96d41`。\n\n裁决继续现有 RETAIN/COPY/SHADOW 议程，但结束当前联合预测包支线的扩展投入；仅选择一个匹配接口的零更新控制器 A/RECON 见证：新评估 seed 73 初始化的 CONTROL / FORECAST_PACKAGE 两个接口视图，各四行，复用已接受的最终八行，不重跑最终检查点。整项新支出上限 120 秒，不是已测完成投影。未选择新的学习器训练、held-only 或 B02 旁测。\n\n完整答复保留 −272 原生包差分、评估硬事件、CONTROL 的一次训练合法换主与巨大有限梯度；区分阶段性训练曲线与尚未测量的完整初始化回报，限定历史推断和成本范围。所有后继条件、输入缺口和解释边界以完整文件为准。\n\n已验证提交 `f85016d765727eecaca8e93d1f253b938a45d1fc` 比指定基底恰多一个提交，且只新增授权的 RESPONSE.md（191 行、无删除）。未执行源码修改、测试、模型或实验，也未修改 Portfolio 或既有科学记录。",
+      "created_at": "2026-09-06T17:59:55Z",
+      "html_url": "https://github.com/CartmanFatass/My-paper-code/issues/4#issuecomment-5561089362",
+      "id": 5561089362,
+      "performed_via_github_app": "ChatGPT Codex Connector",
+      "user": "CartmanFatass"
+    },
+    {
+      "body": "ChatGPT 撰写的 post-witness Direction 完整裁决已交付，并已在不可变提交上逐段完整读回：\n\nhttps://github.com/CartmanFatass/My-paper-code/blob/27730bf7547bc749c63930036837050120cffba0/docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260906_post_witness_convergence/archive/RESPONSE.md\n\n分析证据版本：`98d9defd8bbad23f20d6d949db0c40d35e343399`。\n\n裁决继续现有来源选择议程，联合预测包支线保持结束；仅选择一个新的 CONTROL 学习率 B/EXPLORE：3e-4 对 3e-5，新配对种子 89，每臂十六更新；同一 B 内包含该新种子的四行 raw-interface 零更新参考。保留正常 Welford、原目标与修正边界，不冻结归一化、不改变 epoch、不重开预测包。完整文件区分增量改善与绝对初始化损失，保留既有不利结果和未定位原因，并给出完整工作、每臂 1,800 秒/合计 3,600 秒及停止边界；旧计时不构成新对象完成保证。\n\n已核对提交 `27730bf7547bc749c63930036837050120cffba0` 比指定基底恰多一个提交，且仅新增授权 RESPONSE.md（207 行、无删除）；指定分支指向该提交。未执行项目代码、模型、测试、实验或 Portfolio 修改。",
+      "created_at": "2026-09-06T21:28:28Z",
+      "html_url": "https://github.com/CartmanFatass/My-paper-code/issues/4#issuecomment-5562295763",
+      "id": 5562295763,
+      "performed_via_github_app": "ChatGPT Codex Connector",
+      "user": "CartmanFatass"
+    }
+  ]
+}
