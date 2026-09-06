@@ -1,0 +1,106 @@
+{
+  "checkpoint": "/home/wu/hmasd-worktrees/n3-b02-20260905/temp/directions/degraded_incumbent_shadow_handover/exp/forecast_package_b02_20260905/forecast_package/checkpoint_update16.pt",
+  "checkpoint_bytes": 2368467,
+  "checkpoint_sha256": "504329d6ee0c001f827be67bf101d3850d2787a3011a7fb43137d3d3f162dc66",
+  "configuration": {
+    "arm": "STRUCTURED",
+    "b02_master_hex": "ef9ec35ce27cf52e4c1d82292b22cfbe4926183ec1f29b19657280f6234814b1",
+    "b02_object": "DISH-FORECAST-PACKAGE-B02",
+    "forecast_package": true,
+    "host": "GROUND-TERMINAL-LINEAR-CLEARANCE-A03",
+    "native_dtype": "float64",
+    "torch_threads": 1,
+    "training_dtype": "float32"
+  },
+  "expected_checkpoint_sha256": "504329d6ee0c001f827be67bf101d3850d2787a3011a7fb43137d3d3f162dc66",
+  "exposure": {
+    "consultation_exposure": 0,
+    "new_models_trained": 0,
+    "optimizer_steps": 0,
+    "training_transitions": 0
+  },
+  "launch_sha": "ffa23bf8d551add61fba33e3170b106ae57a2be7",
+  "live_tick_count": 4,
+  "object": "DISH-RENEWAL-BOUNDARY-A01",
+  "peak_rss_bytes": 361648128,
+  "planned_cost": {
+    "C": 1,
+    "W": 4,
+    "cap_seconds": 120,
+    "law": "1 A03 native build + C checkpoint loads + C resets + W native steps + W recurrent forwards + reduction/publication",
+    "profile": "check",
+    "projection_status": "composed from B02 measured terms in the CM record; runner does not invent a unit time"
+  },
+  "profile": "check",
+  "projection_source": "python reconstruction of rbhr_r06_production_backend.cpp:261-263; native ABI not called",
+  "reduction": {
+    "overall": {
+      "admission_command_pairs": [],
+      "both_false": 4,
+      "both_true": 0,
+      "held_changed_ticks": 0,
+      "live_ticks": 4,
+      "native_true_policy_false": 0,
+      "policy_true_native_false": 0
+    },
+    "per_window": {
+      "1": {
+        "admission_command_pairs": [],
+        "both_false": 4,
+        "both_true": 0,
+        "held_changed_ticks": 0,
+        "live_ticks": 4,
+        "native_true_policy_false": 0,
+        "policy_true_native_false": 0
+      }
+    }
+  },
+  "resources_unmeasured": false,
+  "scratch_unmeasured": true,
+  "status": "COMPLETE",
+  "wall_seconds": 0.06489110400434583,
+  "windows": [
+    {
+      "coordinate": "DISH/RBHR/R06/EVALUATION_COORDINATE/0/CLAIM/TARGET_VISUAL_MASK/K8/0",
+      "early_terminal": null,
+      "expected_reset_phase": 4,
+      "horizon": 4,
+      "live_ticks": 4,
+      "parameter_norm_after": 39.149200792042365,
+      "parameter_norm_before": 39.149200792042365,
+      "phase": 4,
+      "phase_matches_expected": true,
+      "reset": {
+        "arm_substream": 0,
+        "block": 0,
+        "cycle": -1,
+        "degradation_flag": 0,
+        "episode": -1,
+        "evaluation_slot": 0,
+        "fixture_key": 17445697348322239232,
+        "fork_branch": 0,
+        "initial_owner": 0,
+        "initial_ux": 80,
+        "initial_uy": -120,
+        "k_initial": 8,
+        "k_new": 8,
+        "lane": -1,
+        "mask_enabled": 1,
+        "master": "ef9ec35ce27cf52e4c1d82292b22cfbe4926183ec1f29b19657280f6234814b1",
+        "package": 0,
+        "phase": 4,
+        "qa_owner": 0,
+        "reflection": 1,
+        "route_speed": 4,
+        "schedule": 1,
+        "split": 1,
+        "switch_tick": 1199,
+        "tau_d_tick": 420,
+        "test_mode": 0,
+        "turn_magnitude_deg": 35,
+        "turn_sign": 1
+      },
+      "window": 1
+    }
+  ]
+}
