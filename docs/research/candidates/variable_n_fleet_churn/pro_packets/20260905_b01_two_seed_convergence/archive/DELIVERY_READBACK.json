@@ -1,0 +1,34 @@
+{
+  "read_at_utc": "2026-09-06T01:48:00.144444+00:00",
+  "response_commit": "25b73b91a25e3b11835de81cd690ac6232d94044",
+  "parent_commit": "fda5174f6277fa8eadce950f9f6b2cb232ee12a4",
+  "changed_paths": [
+    "docs/research/candidates/variable_n_fleet_churn/pro_packets/20260905_b01_two_seed_convergence/archive/RESPONSE.md"
+  ],
+  "full_response": {
+    "bytes": 30208,
+    "sha256": "76ad3a5704677182556a1b985a4ac8903f73449537dc136bf2eeab991f787c62"
+  },
+  "artifacts": {
+    "TRANSPORT_PROMPT.md": {
+      "bytes": 570,
+      "sha256": "c613db113821d669a61b03a58af05803ffd921c698291daefdcd824ec1746768"
+    },
+    "TRANSPORT_PACKET_MANIFEST.json": {
+      "bytes": 2347,
+      "sha256": "7610eb8e6dafc3e476e12869853be3df193a76dedd1e5d0724fda2fa5da83c4a"
+    },
+    "CHAT_RECEIPT.md": {
+      "bytes": 435,
+      "sha256": "a342f8479f5c028fd17af7c605b1f2260db03a906d18d42c18775809c5fe24f6"
+    },
+    "TRANSPORT_FACTS.json": {
+      "bytes": 57979,
+      "sha256": "7e763b1237cdcc77c9d549e49e3a5abc204974954677c021ebc96c205d18264b"
+    }
+  },
+  "issue_comment_url": "https://github.com/CartmanFatass/My-paper-code/issues/1#issuecomment-5556114589",
+  "bound_task_commit": "7e9b4ed0610aef3678abf92353e47330e2c5b398",
+  "input_commit": "fda5174f6277fa8eadce950f9f6b2cb232ee12a4",
+  "full_read": "All 237 lines read directly from the fixed Git blob; short chat receipt is separate."
+}
