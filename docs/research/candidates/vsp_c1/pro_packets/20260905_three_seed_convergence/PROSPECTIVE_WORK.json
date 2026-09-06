@@ -1,0 +1,168 @@
+{
+  "status": "UNSELECTED PROSPECTIVE ALTERNATIVES; arithmetic only, no new scientific execution",
+  "generated_at_utc": "2026-09-06T00:40:03.553813+00:00",
+  "code_cost_law": "One cycle executes32*6 joint steps,48+16 renewal rows and one64-row Adam step. Every16 updates,8*6 evaluation joint steps. Existing Value.both scores2 legal actions; no trajectory or policy search.",
+  "observed_128_update_runs": [
+    {
+      "seed": 0,
+      "arm": "FACTOR",
+      "source": "docs/research/candidates/vsp_c1/results/k4_factor_value_b01_seed0_20260905/factor/summary.json",
+      "complete_wall_seconds": 1.76,
+      "theta0_norm": 4.011008262634277,
+      "theta_displacement_norm": 2.032857894897461,
+      "displacement_to_initial_norm": 0.5068196727080182,
+      "observed_128_cycle_phase_seconds": {
+        "rollout_wall_seconds": 0.11517931697017048,
+        "update_wall_seconds": 0.146568756113993,
+        "evaluation_wall_seconds": 0.010838588001206517
+      },
+      "conditional_512_update_training_phase_seconds": 1.046992292336654,
+      "conditional_33_checkpoint_evaluation_phase_seconds": 0.03974148933775723,
+      "whole_invocation_linear_work_scenario_seconds": 7.04
+    },
+    {
+      "seed": 0,
+      "arm": "GENERIC",
+      "source": "docs/research/candidates/vsp_c1/results/k4_factor_value_b01_seed0_20260905/generic/summary.json",
+      "complete_wall_seconds": 3.95,
+      "theta0_norm": 3.658432960510254,
+      "theta_displacement_norm": 1.5969855785369873,
+      "displacement_to_initial_norm": 0.4365217555645055,
+      "observed_128_cycle_phase_seconds": {
+        "rollout_wall_seconds": 0.12118149596790317,
+        "update_wall_seconds": 1.8099389449635055,
+        "evaluation_wall_seconds": 0.008489382002153434
+      },
+      "conditional_512_update_training_phase_seconds": 7.724481763725635,
+      "conditional_33_checkpoint_evaluation_phase_seconds": 0.031127734007895924,
+      "whole_invocation_linear_work_scenario_seconds": 15.8
+    },
+    {
+      "seed": 1,
+      "arm": "FACTOR",
+      "source": "docs/research/candidates/vsp_c1/results/k4_factor_value_b01_seed12_20260905/factor_seed1/summary.json",
+      "complete_wall_seconds": 2.77,
+      "theta0_norm": 4.019371032714844,
+      "theta_displacement_norm": 1.8417279720306396,
+      "displacement_to_initial_norm": 0.4582129783591198,
+      "observed_128_cycle_phase_seconds": {
+        "rollout_wall_seconds": 0.1853448459878564,
+        "update_wall_seconds": 0.2023051518772263,
+        "evaluation_wall_seconds": 0.01386804401408881
+      },
+      "conditional_512_update_training_phase_seconds": 1.5505999914603308,
+      "conditional_33_checkpoint_evaluation_phase_seconds": 0.05084949471832563,
+      "whole_invocation_linear_work_scenario_seconds": 11.08
+    },
+    {
+      "seed": 1,
+      "arm": "GENERIC",
+      "source": "docs/research/candidates/vsp_c1/results/k4_factor_value_b01_seed12_20260905/generic_seed1/summary.json",
+      "complete_wall_seconds": 2.76,
+      "theta0_norm": 3.5799248218536377,
+      "theta_displacement_norm": 1.6607450246810913,
+      "displacement_to_initial_norm": 0.46390500005561,
+      "observed_128_cycle_phase_seconds": {
+        "rollout_wall_seconds": 0.17602744011674076,
+        "update_wall_seconds": 0.20276835796539672,
+        "evaluation_wall_seconds": 0.013360757002374157
+      },
+      "conditional_512_update_training_phase_seconds": 1.51518319232855,
+      "conditional_33_checkpoint_evaluation_phase_seconds": 0.04898944234203857,
+      "whole_invocation_linear_work_scenario_seconds": 11.04
+    },
+    {
+      "seed": 2,
+      "arm": "FACTOR",
+      "source": "docs/research/candidates/vsp_c1/results/k4_factor_value_b01_seed12_20260905/factor_seed2/summary.json",
+      "complete_wall_seconds": 2.9,
+      "theta0_norm": 3.883702516555786,
+      "theta_displacement_norm": 2.191782236099243,
+      "displacement_to_initial_norm": 0.5643537904244526,
+      "observed_128_cycle_phase_seconds": {
+        "rollout_wall_seconds": 0.1792830059712287,
+        "update_wall_seconds": 0.2104326440312434,
+        "evaluation_wall_seconds": 0.01751235796837136
+      },
+      "conditional_512_update_training_phase_seconds": 1.5588626000098884,
+      "conditional_33_checkpoint_evaluation_phase_seconds": 0.06421197921736166,
+      "whole_invocation_linear_work_scenario_seconds": 11.6
+    },
+    {
+      "seed": 2,
+      "arm": "GENERIC",
+      "source": "docs/research/candidates/vsp_c1/results/k4_factor_value_b01_seed12_20260905/generic_seed2/summary.json",
+      "complete_wall_seconds": 2.86,
+      "theta0_norm": 3.4865901470184326,
+      "theta_displacement_norm": 1.6531380414962769,
+      "displacement_to_initial_norm": 0.47414177514095324,
+      "observed_128_cycle_phase_seconds": {
+        "rollout_wall_seconds": 0.1890779239620315,
+        "update_wall_seconds": 0.21442487301828805,
+        "evaluation_wall_seconds": 0.013013529998715967
+      },
+      "conditional_512_update_training_phase_seconds": 1.6140111879212782,
+      "conditional_33_checkpoint_evaluation_phase_seconds": 0.047716276661958545,
+      "whole_invocation_linear_work_scenario_seconds": 11.44
+    }
+  ],
+  "alternatives": [
+    {
+      "proposed_updates": 128,
+      "arms": 2,
+      "fresh_training_seed_pairs": 1,
+      "proposed_seed": 3,
+      "per_arm": {
+        "training_episodes": 4096,
+        "training_joint_steps": 24576,
+        "training_renewals": 8192,
+        "optimizer_steps": 128,
+        "evaluation_checkpoints": 9,
+        "evaluation_episodes": 72,
+        "evaluation_joint_steps": 432,
+        "complete_joint_steps": 25008
+      },
+      "pair_total_joint_steps": 50016,
+      "pair_total_optimizer_steps": 256,
+      "cap_seconds_per_complete_arm_invocation": 2700,
+      "nominal_sum_learning_rates_per_arm": 1.28,
+      "parameter_initialization": "Unchanged CPU FP32 Xavier gain1/zero biases; FACTOR period embedding normal std0.5; models188/191.",
+      "actual_future_parameter_displacement": "unmeasured, not zero",
+      "nested_policy_candidate_trajectory_or_solver_search_calls": 0,
+      "ordinary_action_values_per_legal_decision": 2
+    },
+    {
+      "proposed_updates": 512,
+      "arms": 2,
+      "fresh_training_seed_pairs": 1,
+      "proposed_seed": 3,
+      "per_arm": {
+        "training_episodes": 16384,
+        "training_joint_steps": 98304,
+        "training_renewals": 32768,
+        "optimizer_steps": 512,
+        "evaluation_checkpoints": 33,
+        "evaluation_episodes": 264,
+        "evaluation_joint_steps": 1584,
+        "complete_joint_steps": 99888
+      },
+      "pair_total_joint_steps": 199776,
+      "pair_total_optimizer_steps": 1024,
+      "cap_seconds_per_complete_arm_invocation": 2700,
+      "nominal_sum_learning_rates_per_arm": 5.12,
+      "parameter_initialization": "Unchanged CPU FP32 Xavier gain1/zero biases; FACTOR period embedding normal std0.5; models188/191.",
+      "actual_future_parameter_displacement": "unmeasured, not zero",
+      "nested_policy_candidate_trajectory_or_solver_search_calls": 0,
+      "ordinary_action_values_per_legal_decision": 2
+    }
+  ],
+  "interpretation": "512 update option retains the first128-cycle epsilon schedule and then holds epsilon0.1. It is a new outcome-informed B proposal, not a rewrite/resume of old B01. All33 checkpoints support new512 endpoint/full curve; update128 can be read within the same new training instance and is not another independent seed.",
+  "projection_limits": "The phase extrapolation uses the runner own measured per-cycle/per-checkpoint law at fixedH6,batch32,model shape and two action scores. Initialization, publication, shutdown and contention remain included in the cap but their new seconds are unknown. Four-times complete observed wall is only a linear total-work scenario, not a speedup, inflation ratio, measured prediction or upper bound. Exact new wall needs the actually selected invocation, not a prerequisite profiling experiment.",
+  "consultation_new_exposure": {
+    "models": 0,
+    "joint_steps": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0
+  },
+  "recast_host_cost": "Unknown until a concrete host/algorithm/population is selected; no affordability inferred from toy timings."
+}
