@@ -1,0 +1,313 @@
+{
+  "evidence_role": "DOCUMENTARY_DERIVATION_NOT_NEW_EXPERIMENT",
+  "written_at": "2026-09-06T21:18:00+00:00",
+  "derivation": "Counts and timings copied from the two arm summaries, the reference summary, the executability summary, the /usr/bin/time records and the task logs; no project import, model load, experiment or new timing. Consultation exposure is zero.",
+  "sources": [
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_TBCFV_B01_RESULT_INTAKE_20260906.md",
+      "sha256_prefix": "54d66ee936df8b16"
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/b01_tbcfv_20260906/c1p1/summary.json",
+      "sha256_prefix": "95b4934c8c19889d"
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/b01_tbcfv_20260906/flex/summary.json",
+      "sha256_prefix": "ce753dbac4ae4f50"
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/b01_tbcfv_20260906/reference/summary.json",
+      "sha256_prefix": "d044dea53d7f09ca"
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/b01_tbcfv_20260906/executability/summary.json",
+      "sha256_prefix": "edffd91c7dfdac5f"
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_TBCFV_B01_PERSIST_VS_FLEX_SCIENCE_CARD_20260906.md",
+      "sha256_prefix": "217696b9d574132e"
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_TBCFV_B01_CM_RECORD_20260906.md",
+      "sha256_prefix": "844f04d5616b2f12"
+    }
+  ],
+  "exposure_line": "RCLE-TBCFV-B01-PERSIST-VS-FLEX: per arm 200 complete updates x 64 episodes = 12,800 training episodes (819,200 ticks), 200 backward/update calls, 2,048 held-out evaluation episodes (131,072 ticks); reference 2,048 scripted episodes; executability 64 scripted episodes (4,096 ticks); seed 17, block digest a67b0144...; all COMPLETE at 4d40621e0 on wsl_4070. Consultation: zero new models, native states, transitions, backwards, optimizer steps, tests or experiments.",
+  "measured": {
+    "preparation": {
+      "build_wall_s": 5.09,
+      "pytest_wall_s": 3.84,
+      "pytest": "23 passed",
+      "executability_wall_s": 0.0565,
+      "executability_episodes": 64,
+      "chain_wall_s": 11
+    },
+    "c1p1": {
+      "status": "COMPLETE",
+      "wall_s": 61.99896926697693,
+      "cpu_s": 61.875015999999995,
+      "peak_rss_bytes": 581726208,
+      "counts": {
+        "completed_updates": 200,
+        "heldout_scenarios": 2048,
+        "nonzero_update_count": 200,
+        "zero_update_incidence": 0
+      },
+      "initial_parameter_norm": 21.186038495201018,
+      "final_displacement": 0.005124953442186519,
+      "cells": {
+        "12_to_12.ACTIVE_CONTINUATION": {
+          "tau_mean": 40.0,
+          "tau40_fraction": 1.0,
+          "U_mean": 0.6916259765625,
+          "F_mean": 0.25172526041666665,
+          "Y_mean": 0.3095957438151042
+        },
+        "12_to_12.NEW_EPOCH": {
+          "tau_mean": 40.0,
+          "tau40_fraction": 1.0,
+          "U_mean": 0.6918619791666667,
+          "F_mean": 0.25009765625,
+          "Y_mean": 0.3088531494140625
+        },
+        "12_to_8.ACTIVE_CONTINUATION": {
+          "tau_mean": 40.0,
+          "tau40_fraction": 1.0,
+          "U_mean": 0.71807861328125,
+          "F_mean": 0.329736328125,
+          "Y_mean": 0.29128774007161456
+        },
+        "12_to_8.NEW_EPOCH": {
+          "tau_mean": 40.0,
+          "tau40_fraction": 1.0,
+          "U_mean": 0.71846923828125,
+          "F_mean": 0.328466796875,
+          "Y_mean": 0.29177093505859375
+        },
+        "8_to_12.ACTIVE_CONTINUATION": {
+          "tau_mean": 40.0,
+          "tau40_fraction": 1.0,
+          "U_mean": 0.6929280598958333,
+          "F_mean": 0.249609375,
+          "Y_mean": 0.29922739664713544
+        },
+        "8_to_12.NEW_EPOCH": {
+          "tau_mean": 40.0,
+          "tau40_fraction": 1.0,
+          "U_mean": 0.6915608723958333,
+          "F_mean": 0.24723307291666666,
+          "Y_mean": 0.30023447672526044
+        },
+        "8_to_8.ACTIVE_CONTINUATION": {
+          "tau_mean": 40.0,
+          "tau40_fraction": 1.0,
+          "U_mean": 0.718310546875,
+          "F_mean": 0.334912109375,
+          "Y_mean": 0.285736083984375
+        },
+        "8_to_8.NEW_EPOCH": {
+          "tau_mean": 40.0,
+          "tau40_fraction": 1.0,
+          "U_mean": 0.72188720703125,
+          "F_mean": 0.331787109375,
+          "Y_mean": 0.2813720703125
+        }
+      }
+    },
+    "flex": {
+      "status": "COMPLETE",
+      "wall_s": 69.7874243230035,
+      "cpu_s": 69.71061599999999,
+      "peak_rss_bytes": 584536064,
+      "counts": {
+        "completed_updates": 200,
+        "heldout_scenarios": 2048,
+        "nonzero_update_count": 200,
+        "zero_update_incidence": 0
+      },
+      "initial_parameter_norm": 21.186038495201018,
+      "final_displacement": 0.005124967677931276,
+      "cells": {
+        "12_to_12.ACTIVE_CONTINUATION": {
+          "tau_mean": 40.0,
+          "tau40_fraction": 1.0,
+          "U_mean": 0.6916259765625,
+          "F_mean": 0.25172526041666665,
+          "Y_mean": 0.3095957438151042
+        },
+        "12_to_12.NEW_EPOCH": {
+          "tau_mean": 40.0,
+          "tau40_fraction": 1.0,
+          "U_mean": 0.6918619791666667,
+          "F_mean": 0.25009765625,
+          "Y_mean": 0.3088531494140625
+        },
+        "12_to_8.ACTIVE_CONTINUATION": {
+          "tau_mean": 40.0,
+          "tau40_fraction": 1.0,
+          "U_mean": 0.71807861328125,
+          "F_mean": 0.329736328125,
+          "Y_mean": 0.29128774007161456
+        },
+        "12_to_8.NEW_EPOCH": {
+          "tau_mean": 40.0,
+          "tau40_fraction": 1.0,
+          "U_mean": 0.71846923828125,
+          "F_mean": 0.328466796875,
+          "Y_mean": 0.29177093505859375
+        },
+        "8_to_12.ACTIVE_CONTINUATION": {
+          "tau_mean": 40.0,
+          "tau40_fraction": 1.0,
+          "U_mean": 0.6929280598958333,
+          "F_mean": 0.249609375,
+          "Y_mean": 0.29922739664713544
+        },
+        "8_to_12.NEW_EPOCH": {
+          "tau_mean": 40.0,
+          "tau40_fraction": 1.0,
+          "U_mean": 0.6915608723958333,
+          "F_mean": 0.24723307291666666,
+          "Y_mean": 0.30023447672526044
+        },
+        "8_to_8.ACTIVE_CONTINUATION": {
+          "tau_mean": 40.0,
+          "tau40_fraction": 1.0,
+          "U_mean": 0.718310546875,
+          "F_mean": 0.334912109375,
+          "Y_mean": 0.285736083984375
+        },
+        "8_to_8.NEW_EPOCH": {
+          "tau_mean": 40.0,
+          "tau40_fraction": 1.0,
+          "U_mean": 0.72188720703125,
+          "F_mean": 0.331787109375,
+          "Y_mean": 0.2813720703125
+        }
+      },
+      "paired_primary_active_paths": [
+        {
+          "c1p1_40U_mean": 27.717122395833332,
+          "c1p1_U_mean": 0.6929280598958333,
+          "c1p1_tau40_fraction": 1.0,
+          "c1p1_tau_mean": 40.0,
+          "cell": "8_to_12.ACTIVE_CONTINUATION",
+          "difference_U_flex_minus_c1p1": 0.0,
+          "difference_flex_minus_c1p1": 0.0,
+          "flex_40U_mean": 27.717122395833332,
+          "flex_U_mean": 0.6929280598958333,
+          "flex_tau40_fraction": 1.0,
+          "flex_tau_mean": 40.0,
+          "n": 256,
+          "paired_U_se": 0.0,
+          "paired_tau_se": 0.0,
+          "path": "8_to_12"
+        },
+        {
+          "c1p1_40U_mean": 28.72314453125,
+          "c1p1_U_mean": 0.71807861328125,
+          "c1p1_tau40_fraction": 1.0,
+          "c1p1_tau_mean": 40.0,
+          "cell": "12_to_8.ACTIVE_CONTINUATION",
+          "difference_U_flex_minus_c1p1": 0.0,
+          "difference_flex_minus_c1p1": 0.0,
+          "flex_40U_mean": 28.72314453125,
+          "flex_U_mean": 0.71807861328125,
+          "flex_tau40_fraction": 1.0,
+          "flex_tau_mean": 40.0,
+          "n": 256,
+          "paired_U_se": 0.0,
+          "paired_tau_se": 0.0,
+          "path": "12_to_8"
+        }
+      ]
+    },
+    "reference": {
+      "status": "COMPLETE",
+      "wall_s": 1.4919034829945303,
+      "cells": {
+        "12_to_12.ACTIVE_CONTINUATION": {
+          "tau_mean": 40.0,
+          "tau40_fraction": 1.0,
+          "U_mean": 0.23339843750000006,
+          "F_mean": 0.2333984375,
+          "Y_mean": null
+        },
+        "12_to_12.NEW_EPOCH": {
+          "tau_mean": 40.0,
+          "tau40_fraction": 1.0,
+          "U_mean": 0.2617838541666667,
+          "F_mean": 0.244140625,
+          "Y_mean": null
+        },
+        "12_to_8.ACTIVE_CONTINUATION": {
+          "tau_mean": 39.21875,
+          "tau40_fraction": 0.96484375,
+          "U_mean": 0.30224609375,
+          "F_mean": 0.30224609375,
+          "Y_mean": null
+        },
+        "12_to_8.NEW_EPOCH": {
+          "tau_mean": 38.7890625,
+          "tau40_fraction": 0.953125,
+          "U_mean": 0.33626708984375,
+          "F_mean": 0.31923828125,
+          "Y_mean": null
+        },
+        "8_to_12.ACTIVE_CONTINUATION": {
+          "tau_mean": 39.69921875,
+          "tau40_fraction": 0.9921875,
+          "U_mean": 0.2437906901041667,
+          "F_mean": 0.24153645833333334,
+          "Y_mean": null
+        },
+        "8_to_12.NEW_EPOCH": {
+          "tau_mean": 40.0,
+          "tau40_fraction": 1.0,
+          "U_mean": 0.25064290364583336,
+          "F_mean": 0.23697916666666669,
+          "Y_mean": null
+        },
+        "8_to_8.ACTIVE_CONTINUATION": {
+          "tau_mean": 38.875,
+          "tau40_fraction": 0.95703125,
+          "U_mean": 0.3099609375,
+          "F_mean": 0.3099609375,
+          "Y_mean": null
+        },
+        "8_to_8.NEW_EPOCH": {
+          "tau_mean": 39.50390625,
+          "tau40_fraction": 0.9765625,
+          "U_mean": 0.332421875,
+          "F_mean": 0.316015625,
+          "Y_mean": null
+        }
+      }
+    },
+    "pair_charge_s": 144.3,
+    "budget_s": 5400,
+    "node": "wsl_4070",
+    "launch_sha": "4d40621e0a9abd26e783e8c8aeeaf2653e49cf6a",
+    "arms_identical": true,
+    "trajectory_difference_final_displacement": 1.4235744756618818e-08
+  },
+  "prospective_option_1_learning_amount_ladder": {
+    "design": "C1P1 only, seed 17, fixed-norm learner, checkpoints at 1,000 and 4,000 updates (or 800), each evaluated on the 2,048 held-out scenarios with the reference row",
+    "reference_cost": "62 s per 200 updates measured (0.31 s per update) -> ~310 s and ~1,240 s training plus ~10 s evaluation per checkpoint; not measured at those counts",
+    "training": "up to 256,000 episodes"
+  },
+  "prospective_option_2_learner_law_pair": {
+    "design": "C1P1 vs FLEX at 200 updates with a named step-law change (plain LR 0.01 without direction normalization, or fixed-norm magnitude 0.02)",
+    "reference_cost": "~150 s per pair from measured walls",
+    "training": "2 x 12,800 episodes"
+  },
+  "prospective_option_3_larger_budget_pair": {
+    "design": "C1P1 vs FLEX at 4,000 fixed-norm updates",
+    "reference_cost": "~1,300 s per arm from measured walls",
+    "training": "2 x 256,000 episodes"
+  },
+  "budget_state": {
+    "b01_pair_charge_s": 144.3,
+    "direction_cumulative_tbcfv_training_episodes": 25600
+  }
+}
