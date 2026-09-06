@@ -1,6 +1,6 @@
 # CBSC direct-return B02: CM result
 
-Date: 2026-09-05. Status: complete source candidate independently reviewed; no invocation accepted.
+Date: 2026-09-05. Status: source independently reviewed; the unique engineering check passed; formal calls pending.
 
 ## Frozen engineering contract
 
@@ -94,3 +94,47 @@ wall/RSS are in-process samples and do not establish complete-invocation timing.
 The separately frozen outer time/timeout and terminal witness will cover admission,
 startup and final writes. The shared host's actual execution and the two full-arm
 costs remain unverified. Static acceptance is not a scientific result.
+
+## Remote preparation facts
+
+Launch source 2c9254f70c3a8ef9d95ac6dc3f6585382304be41 was committed and pushed;
+exact commands were committed/pushed at abb9931bc. The independent reviewer
+confirmed the final three file SHA256 values and no material static finding.
+The configured node now has a clean detached worktree at that exact source.
+
+An initial worktree creation invoked a promisor fetch under the default remote
+shell and stalled. CM identified only its own git-remote-https child (PID 1702620),
+ended that preparatory child, and observed exit 128 with no result task accepted.
+Git had left neither the target path nor a registered target worktree. Repeating
+the same worktree creation through the configured zsh -lic network shell completed
+in 3.92 seconds. Existing shell/gitstatus and remote GC warnings were retained;
+no other process, shared Git configuration or evidence root was modified.
+This preparation is not a scientific or test result and consumes no test exposure.
+
+## Unique engineering check accepted and complete
+
+Root integrated and pushed source and commands at main 09c63825a; DM independently
+verified their byte-identical presence at pushed main d0eb023dc before launch.
+The only selected check, cbsc-direct-b02-2c9254f70-check, ran once on wsl_4070
+at the exact detached launch source. Tracker adopted it and observed exit 0,
+PID 1705664, inactive tmux, and 7-second supervisor duration. Raw log records
+1 passed, 2 warnings in 6.18 seconds. The warnings concern an existing pytest
+cache_dir option and a test-only public-column tensor construction; no failure
+or extra call follows them.
+
+External complete process wall was **6.97 seconds**, peak RSS **533020 KiB**.
+Fresh admission at 2026-09-06 00:02:19.409547 UTC measured physical/effective
+available memory both **15676522496 bytes** and passed. Actual engineering
+exposure is **32 Adam steps and 3040 training/evaluation transitions** across
+both arms, with checkpoint/state/movement, native delayed reward and pair readback
+checks passed. Collected JSON summaries and raw log/receipt/time are retained
+under direct_return_b02_20260905/. These are engineering observations at seed
+21201, not an independent scientific sample or a formal return claim.
+
+Cumulative directory test charge is now **124.49 + 6.97 = 131.46 / 300 seconds**,
+with **168.54 seconds unused**; no additional test is selected. Measured update
+components were 1.133396 s RAW and 0.937066 s STRUCT for one eight-episode update.
+Multiplying only these components by 48 gives about 54.40/44.98 seconds; this is
+not a complete arm forecast, since formal host construction, eval32, checkpoint
+I/O and second-arm pairing differ in size. The source-backed complete cost law
+and 600-second full-call caps remain authoritative. No speedup is claimed.
