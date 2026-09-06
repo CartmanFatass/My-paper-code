@@ -1,0 +1,43 @@
+{
+  "raw": {
+    "all_training_action_counts": {
+      "SERVE": 243,
+      "SAFE_FALLBACK": 458,
+      "REFRESH": 8515
+    },
+    "first_update_actions": {
+      "SERVE": 73,
+      "SAFE_FALLBACK": 65,
+      "REFRESH": 54
+    },
+    "last_update_actions": {
+      "REFRESH": 191,
+      "SAFE_FALLBACK": 1
+    },
+    "endpoint_action_counts": {
+      "SERVE": 0,
+      "REFRESH": 768,
+      "SAFE_FALLBACK": 0
+    }
+  },
+  "struct": {
+    "all_training_action_counts": {
+      "SERVE": 237,
+      "SAFE_FALLBACK": 410,
+      "REFRESH": 8569
+    },
+    "first_update_actions": {
+      "SERVE": 73,
+      "SAFE_FALLBACK": 65,
+      "REFRESH": 54
+    },
+    "last_update_actions": {
+      "REFRESH": 192
+    },
+    "endpoint_action_counts": {
+      "SERVE": 0,
+      "REFRESH": 768,
+      "SAFE_FALLBACK": 0
+    }
+  }
+}

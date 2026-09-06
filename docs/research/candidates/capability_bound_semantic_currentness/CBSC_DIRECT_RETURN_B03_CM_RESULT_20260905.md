@@ -1,6 +1,11 @@
 # CBSC direct-return B03: CM result
 
-Date: 2026-09-05. Complete source independently reviewed; RAW complete; STRUCT pending.
+Date: 2026-09-05 (invocation timestamps below are UTC).
+**Complete B03 pair technically accepted.** Both selected calls completed with
+correct B03/21209 binding and all required direct measurements. All32 endpoint
+differences are zero; both endpoint means are10.5875 with all-REFRESH greedy
+actions. No further invocation is selected. This is a second recorded paired
+run alongside B02, not population equivalence or a unique causal explanation.
 
 ## Contract, scope and predictions on record
 
@@ -92,3 +97,106 @@ Parameter displacementL2=6.07807636, relative0.20327055. This is single-arm outp
 not a paired effect. The fixed STRUCT call follows because the primary path
 completed, with no performance-value gate. Raw evidence is retained beside this
 report under direct_return_b03_20260905/.
+
+## Final complete pair and independent readback
+
+RAW evidence617cbae92 was committed and pushed before the selected STRUCT call.
+Current main owner reviews returned[] at that boundary. STRUCT task
+cbsc-direct-b03-65bf24865-struct completed exit0, PID1933614, inactive tmux,
+59-second supervisor duration. Its full external wall is58.67seconds and peak
+RSS578280KiB; fresh physical/effective memory15367352320bytes passed at
+2026-09-06T00:44:23.905739Z. The arm wrote and read the complete paired summary
+inside this same invocation. Tracker had ended a turn with a running snapshot;
+CM woke the same observer to obtain the already-existing terminal witness.
+There was no new process, restart or extra exposure during that recovery.
+
+| Actual quantity | RAW | STRUCT |
+| --- | ---: | ---: |
+| Training episodes | 384 | 384 |
+| Training transitions | 58368 | 58368 |
+| Training decisions | 9216 | 9216 |
+| Rollout updates | 48 | 48 |
+| Actual Adam steps / finite loss rows | 768 | 768 |
+| Evaluation executions | 128 | 128 |
+| Evaluation transitions | 19456 | 19456 |
+| Initial parameter L2 | 29.90141106 | 29.90141106 |
+| Parameter displacement L2 | 6.07807636 | 5.58644104 |
+| Relative displacement | 0.20327055 | 0.18682868 |
+| Complete external seconds | 59.53 | 58.67 |
+| External peak RSS KiB | 576120 | 578280 |
+
+All48 per-arm update rows contain sequential TRAIN episodeIDs0..383,16 actual
+loss records each, sampled actions and reward rows. Four complete original
+checkpoint payloads per arm at0/12/24/48 were saved/read, preserving full model,
+optimizer and actual counters. All128 evaluation rows per arm retain24 legal
+actions and native decision-plus-settlement rewards. Recorded execution is
+CPU FP32, one Torch thread. Pair source/configuration/initialization/training
+and evaluation tape identities agree; B03 appears in both arm and pair metadata,
+while RNG/checkpoint substrate identity remains unchanged.
+
+| Checkpoint update | RAW mean | STRUCT mean |
+| --- | ---: | ---: |
+| 0 | 2.415625 | 2.415625 |
+| 12 | 10.5875 | 10.5875 |
+| 24 | 10.5875 | 10.5875 |
+| 48 primary | 10.5875 | 10.5875 |
+
+The32 endpoint paired differences are all exactly0 and their mean is0. Every
+trained greedy checkpoint chooses REFRESH on all768 opportunities per arm.
+The same32tape context means are ALWAYS_REFRESH10.5875 and ALWAYS_SAFE4.0375.
+No checkpoint, episode, seed or action outcome was excluded or selected by sign.
+
+| Actual sampled training decisions | RAW | STRUCT |
+| --- | ---: | ---: |
+| SERVE | 243 | 237 |
+| REFRESH | 8515 | 8569 |
+| SAFE_FALLBACK | 458 | 410 |
+| Total | 9216 | 9216 |
+
+These counts were read directly from existing update artifacts, separately
+from greedy evaluation. Both first updates have73SERVE/54REFRESH/65SAFE;
+last updates have RAW191REFRESH/1SAFE and STRUCT192REFRESH. No additional rollout
+was performed to obtain these counts. training-action-readback.json retains
+the calculation results beside all original update rows.
+
+Independent native reviewer checked both complete artifacts and recomputed all
+native component sums, four curves and32 paired differences, actual sequential
+work/finite losses, action counts, pairing identities, state/checkpoint counters,
+admissions and full external times. It found no material inconsistency and
+performed no new model/test/experiment. Passing metadata and source checks alone
+were not used as evidence of the result; the actual complete outputs exist.
+
+Both selected complete calls sum to118.20seconds, each below600seconds. They
+are below the qualified B02 references79.69/90.78seconds, but no matched timing
+study or acceleration attribution follows. No simulation check was added for
+B03; the conservatively charged pure-binding check leaves the inherited directory
+account at132.15/300seconds. Optional resource flags are measured in both outputs;
+external wall/RSS and node receipts exist. No aggregate CPU time or throughput
+claim is made. Preparation, Git, observer delay and collection are not scientific
+machine time or extra learning exposure.
+
+B03 provides one fresh paired seed21209; together with completed B02/21203 there
+are two recorded independent run seeds, whose initialization, training and
+procedural evaluation worlds all vary. Both observed zero comparisons remain
+visible, with their differing absolute context returns. This does not isolate
+initialization, prove optimality/equivalence, or establish a mechanism-specific
+cause. Scientific reading and any later family decision belong to DM intake.
+No third pair, training extension, old B1 repair or historical evidence change
+is selected or performed by this technical return.
+
+## Artifacts and Git boundary
+
+Actual source65bf2486594fc29b4813df2d1d79dec82f5756af, exact commandsb35d1ee78,
+Root-integrated/pushed main323d5e3439af2d7db07455942fbc4b34ad9cf104 before execution.
+The final source changes remain only+23/-10 in the two named files; existing
+omrc_b01 and B02 evidence are unchanged. All96 update rows, both complete
+summaries,32-row paired summary, action count readback, raw logs/wrappers/exits,
+receipts and external times are tracked in direct_return_b03_20260905/.
+
+All eight full checkpoints and complete arm outputs remain under remote root:
+`/home/wu/hmasd-worktrees/cbsc-direct-return-b03-65bf24865-20260905/temp/directions/capability_bound_semantic_currentness/exp/cbsc_direct_return_b03_seed21209_65bf24865/`
+and were copied locally to:
+`C:/Projects/HMASD/temp/directions/capability_bound_semantic_currentness/exp/cbsc_direct_return_b03_seed21209_65bf24865/`
+with RAW/STRUCT subdirectories. No historical root was deleted. Both selected
+tasks are terminal; CM returns this complete observation to
+/root/dm_amx_cbsc_post_repair and Root for intake/integration.
