@@ -57,8 +57,11 @@ Before any scientific dispatch from Claude, run one non-scientific transport che
 - Preconditions the owner controls: Agentify Desktop GUI running and signed in to ChatGPT in
   its Chrome CDP profile; the Agentify MCP server registered for Claude Code
   (`claude mcp add -s user --transport stdio agentify-desktop -- node C:\Projects\agentify-desktop\bin\agentify-desktop.mjs mcp`)
-  and the session restarted so the `mcp__agentify-desktop__*` tools exist; the strict transport's
-  compiled model label accepting the current provider selection in `.codex/hmasd-transport.toml`.
+  and the session restarted so the `mcp__agentify-desktop__*` tools exist. The strict transport's
+  model gate was updated on 2026-09-05 (owner instruction) to the current selection in
+  `.codex/hmasd-transport.toml`: `state.mjs` exports `CHATGPT_REVIEW_PRODUCT_MODELS`
+  (`GPT-6 Astra`, `Latest`) and effort `Pro`; `GPT-5.6 Sol` loads from history but cannot be
+  sent. That change lives in the owner's uncommitted Agentify working tree.
 - The hub writes a plain prompt such as "Reply with the single word READY." into a minimal
   handoff-shaped JSON with `mode: smoke`, stable key `claude--transport--smoke`, no binding key
   from the registry, `firstBinding` on `https://chatgpt.com/`.

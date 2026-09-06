@@ -45,11 +45,14 @@ Read from the handoff: `request_id`, `direction_id`, `workflow_node`,
    otherwise create one agent tab, navigate once to the exact `https://chatgpt.com/c/<id>` (or
    `https://chatgpt.com/` for a first binding), and `agentify_ensure_ready`. If login or a
    challenge is pending, `agentify_show` it and stop; the owner completes it.
-6. Model preflight on that tab: `agentify_review_preflight` with `productModel` and
-   `reasoningEffort` taken from the provider selection. Record the exact matched labels. If it
-   does not match, or Agentify rejects the label (its strict path currently accepts only the
-   label compiled into `review-transport.mjs`), stop before any Send and report the exact error
-   and the labels actually visible. Never substitute another model or mode.
+6. Model preflight on that tab: `agentify_review_preflight` with `reasoningEffort` `Pro` and
+   `productModel` `GPT-6 Astra` first; if the picker does not expose that exact label, repeat once
+   with `Latest` (the checked label the Codex transport observed under the closed `6 Pro`
+   control). Both are the labels Agentify accepts for the current owner selection
+   (`CHATGPT_REVIEW_PRODUCT_MODELS` in `state.mjs`, updated 2026-09-05). Use the label that
+   matched for the Send and record the exact matched labels. If neither matches, stop before any
+   Send and report the exact error and the labels actually visible. Never substitute another
+   model or mode, and never send with `GPT-5.6 Sol`.
 
 ## The one Send
 
@@ -57,7 +60,7 @@ Write the exact prompt bytes to
 `temp/sessions/hmasd-chatgpt-pro-transport/archive/<direction_id>/<request_id>/<request_id>--<direction_id>__00_PROMPT.md`
 (UTF-8, no edits) and record its sha256. Then call `agentify_review_query` once with:
 
-- `stableKey`: the binding key with `:` replaced by `--` (smoke: `claude--transport--smoke`);
+- `stableKey`: the binding key verbatim, colons included (smoke: `claude--transport--smoke`);
 - `provider`: `chatgpt`; `productModel` and `reasoningEffort` as verified;
 - `conversationUrl` and `conversationId`: the bound conversation, or `https://chatgpt.com/` and
   `__new__` with `firstBinding=true` when the key has no binding;

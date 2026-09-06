@@ -68,24 +68,34 @@ Facts verified on 2026-09-05 evening:
 - Claude Code had no Agentify MCP registration. The session registered it at user scope with
   `claude mcp add -s user --transport stdio agentify-desktop -- node C:\Projects\agentify-desktop\bin\agentify-desktop.mjs mcp`;
   the tools appear after the Claude session restarts.
-- The strict transport hard-codes the provider model label `GPT-5.6 Sol` with effort `Pro` in
+- The strict transport hard-coded the provider model label `GPT-5.6 Sol` with effort `Pro` in
   three gates: `review-transport.mjs` line 159, `http-api.mjs` line 824, `state.mjs` line 89. The
   owner's provider requirement since 2026-09-04 (`.codex/hmasd-transport.toml`) is GPT-6 Astra in
-  Pro mode, visible label `6 Pro`, selector `Latest`. With the compiled gate, a `6 Pro` request is
+  Pro mode, visible label `6 Pro`, selector `Latest`. With the old gate, a `6 Pro` request was
   rejected before any Send.
+- **Gate updated 2026-09-05 20:54 PDT on the owner's instruction** ("更新到6Pro"), in the owner's
+  Agentify working tree (still uncommitted there, on top of the owner's own diff): `state.mjs` now
+  exports `CHATGPT_REVIEW_PRODUCT_MODELS = ['GPT-6 Astra', 'Latest']`,
+  `CHATGPT_REVIEW_LEGACY_PRODUCT_MODELS = ['GPT-5.6 Sol']` and `CHATGPT_REVIEW_REASONING_EFFORT =
+  'Pro'`; `review-transport.mjs` and `http-api.mjs` gate new requests on the first list;
+  `validateTargetAxes` also accepts the legacy label so the persisted `review-transport.json`
+  with its one historical operation still loads; the MCP tool description names the new target.
+  Checked directly: the persisted state loads; `GPT-5.6 Sol` and `GPT-5.6 Pro` are rejected with
+  `review_invalid_request {field: productModel}`; `GPT-6 Astra` and `Latest` pass the gate. The
+  Agentify test suite could not confirm this: at baseline all four affected test files already
+  fail at import (`inspectReviewAdmission` no longer exported by the owner's rewrite), unrelated
+  to this change.
 - The model-menu reader matches the requested label exactly against the open picker's
-  `menuitemradio` entries. Whether the current ChatGPT picker exposes a label that equals the
-  configured selection can only be observed live.
+  `menuitemradio` entries. Whether the live picker shows `GPT-6 Astra` or `Latest` as the checked
+  item can only be observed live; the transport agent preflights `GPT-6 Astra` first, then
+  `Latest`, and sends with whichever matched.
 
 Owner actions before the smoke, in order:
 
-1. Decide how the three model gates in Agentify should accept the current selection (the label
-   that the live picker shows for GPT-6 Astra Pro). This is a change in the owner's separate,
-   uncommitted Agentify tree; the session did not edit it.
-2. Start the Agentify GUI (`npm run start` in the checkout) and sign in to ChatGPT in its Chrome
+1. Start the Agentify GUI (`npm run start` in the checkout) and sign in to ChatGPT in its Chrome
    CDP profile.
-3. Restart the Claude Code session so the `mcp__agentify-desktop__*` tools load.
-4. Ask the hub to run the smoke described in `.claude/skills/hmasd-pro-transport/SKILL.md`. It uses
+2. Restart the Claude Code session so the `mcp__agentify-desktop__*` tools load.
+3. Ask the hub to run the smoke described in `.claude/skills/hmasd-pro-transport/SKILL.md`. It uses
    a fresh conversation and a plain prompt; it never touches a bound node and does not count as a
    Pro request under the pause.
 
