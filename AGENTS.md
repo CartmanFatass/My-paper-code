@@ -55,6 +55,33 @@ or additional experiment budget. Tool results inform existing intake, not anothe
 approval system. Optional baseline/analysis packages use task-isolated environments;
 no global dependency upgrade or third-batch framework migration follows.
 
+## Focused reading and engineering handoffs (OWNER_DIRECT, 2026-09-06)
+
+Start from the current assignment and applicable AGENTS instructions. The sender points to the
+current card/intake section, relevant specification sections, code entry points and acceptance.
+Read those current sections and owned code first. Expand into callers, dependencies or historical
+evidence only when a concrete change, unresolved fact or decision requires it; a citation is not
+an instruction to recursively load its references. Reuse material already read in this task when
+still current. Relevant owner overrides and frozen scientific requirements remain controlling.
+
+For an ordinary CM assignment, provide five concise items (prose or bullets, no new schema):
+
+- deliverable and goal;
+- owned paths and code entry points;
+- semantics that must be preserved;
+- acceptance conditions and relevant card/specification section links;
+- budget and stop condition, including execution constraints when applicable.
+
+An accessible card section supplies its existing facts; include only missing facts or this task's
+explicit changes. Use a path plus heading/section (and revision when frozen), not an entire document
+as a reading assignment. If a recipient cannot access a needed source, provide the relevant excerpt
+or resolve access. Do not duplicate the scientific history or require a second contract document.
+CM acknowledges only ambiguities, deviations or critical invariants needing attention, then works;
+a full opening restatement is unnecessary. Its return gives the delivered result, changed paths or
+commit, acceptance evidence, remaining issue and next owner when work remains. Link detailed checks
+and artifacts; do not repeat the original contract. Specialist handoffs follow the same principle.
+This does not shorten required scientific intake or immutable Pro/Transport evidence archives.
+
 ## 2. Decision ladder
 
 Evidence-spec §11.8 controls default scientific burdens and ordinary research engineering

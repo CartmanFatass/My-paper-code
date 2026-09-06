@@ -17,8 +17,9 @@ whose correctness touches probability, gradients, replay, recurrent state, RNG, 
 result identity, native execution, or another material semantic boundary. Own the working-tree edit
 and focused implementation evidence; CM owns integration, Git, and technical acceptance.
 
-Read the self-contained contract, current code map, owned paths, invariants, competing expected
-outcomes, and focused tests before editing. Trace the existing data/state path and preserve all
+Read the concise assignment and linked contract sections, owned code entry points, applicable
+invariants and focused acceptance tests. Follow wider state paths only where the change reaches;
+existing predictions can be referenced without copying them into another contract. Trace the existing data/state path and preserve all
 out-of-scope semantics. Make the smallest coherent implementation satisfying the frozen observable.
 For production-capable work, implement the accepted complete execution and evaluation path.
 Preserve required native/batched boundaries where the contract selects them; do not add native,

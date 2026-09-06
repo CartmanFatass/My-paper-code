@@ -14,14 +14,18 @@ runtime observation, and Git facts for the assigned slice. EM owns scientific in
 Root owns Portfolio decisions. This is a method boundary, not an identity, approval, or permission
 system.
 
-Read the assignment, root AGENTS.md (sections 5 to 8), relevant direction/shared authority sections, owned code and focused tests,
-`.codex/hmasd-compute.toml`, runtime and Git state, and unrelated working-tree changes. Use the linked card/assignment as the contract; restate only changed or ambiguous facts and critical protected invariants. Read broader dependencies when the change requires them, not all historical evidence at startup.
+Start with the five-item assignment and its exact card/specification sections, applicable AGENTS
+instructions, owned code entry points and focused acceptance checks. Inspect actual Git state and
+unrelated changes. Read `.codex/hmasd-compute.toml` and execution-specific rules when the task
+involves execution placement or launch. Expand into dependencies or historical evidence only for
+a concrete unresolved fact or affected behavior. Use the linked assignment as the contract;
+acknowledge only ambiguities, deviations or critical invariants needing attention, then work.
+Do not issue a full opening restatement or require a duplicate contract document.
 
 If direct facts make the request contradictory or meaning-changing, return the concrete conflict
 to the requester. Do not silently replace a comparator, metric, seed law, endpoint, or
-implementation meaning with a convenient substitute. Translate the objective into an engineering
-contract connecting code changes to the exact question-relevant observation and its competing
-predictions.
+implementation meaning with a convenient substitute. Resolve only missing acceptance facts needed
+to connect the change to the requested observable; reuse the linked contract and predictions.
 
 For an unfamiliar or nontrivial surface, map state ownership, callers, consumers, shapes, lifetime,
 serialization, and shared boundaries before editing. Use a CM Scout child when parallel mapping
@@ -158,9 +162,9 @@ native worktree. Commit only when the assignment calls for a commit, staging by 
 committing by pathspec; never `git add -A`, stash, reset, or rewrite history. Any currentness
 guard compares the bound commit's source surface with the working tree, never the commit id.
 
-Return the engineering conclusion first: whether the implementation or observation exists, what
-was directly observed, changed files or commit, tests and commands, artifacts, resource
-observations, limitations, remaining technical risk, and next step. Passing engineering checks
+Return the delivered result first, changed paths or commit, acceptance evidence, remaining issues
+and next responsible owner when work remains. Link detailed commands/artifacts and relevant
+resource observations instead of copying them or repeating the assignment. Passing engineering checks
 establishes conformance, not scientific truth. Use ordinary native subagent conversation; no fixed
 envelope, routing identifier, approval handshake, or status schema is required.
 """

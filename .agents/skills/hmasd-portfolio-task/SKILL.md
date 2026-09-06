@@ -41,8 +41,9 @@ Explain each proposed PARK by its marginal decision value, cost and concrete re-
 not by a target direction count. An owner follow-up that changes scope reopens that question;
 preserve the prior answer and wait for the revised proposal before applying its dispositions.
 
-Read `docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md` before comparing evidence or changing a
-direction. Apply its A, B, C-BENCH, C-TRANSFER, and C-FORMAL burdens. General mathematical proof is
+Before comparing evidence or changing a direction, read the relevant class and decision sections
+of `docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md`, with section 11 controlling. Apply the
+burden of the evidence class being considered; do not preload unrelated classes or cited history. General mathematical proof is
 not the default admission condition for empirical MARL: structural motivation plus bounded toy or
 benchmark evidence is scientifically legitimate when the claim ceiling is bounded to that evidence.
 
@@ -208,8 +209,10 @@ the question parks (AGENTS.md section 3), Root drives other directions, and noth
 provisionally at this tier. Root may continue reversible evidence collection or request a
 class-corrected answer but must not convert the mismatch into scientific polarity.
 
-Read `docs/research/portfolio/PORTFOLIO.md` for current state and the relevant `DIRECTION.md` files
-for scientific authority. Compare claim ceiling, decision relevance, complementarity, substitution,
+Read the current rows in `docs/research/portfolio/PORTFOLIO.md` and relevant current sections of
+`DIRECTION.md` for scientific authority. Follow historical evidence only when the decision needs
+it. Root-to-DM/CM handoffs use AGENTS focused-reading guidance: precise section/code pointers and
+concise deliverables, not a copied research history. Compare claim ceiling, decision relevance, complementarity, substitution,
 reversibility, cost, live external effects, and the smallest discriminating observation.
 
 Transport, implementation, and process status may change sequencing or feasibility; they do not by

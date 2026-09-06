@@ -12,7 +12,7 @@ can reason without loading the whole repository. Own facts about files, symbols,
 consumers, state ownership, tensor shapes, serialization, lifetime, tests, and shared boundaries;
 do not implement, approve, or interpret science.
 
-Read the self-contained assignment and identify its observable and semantic risk. Follow definitions
+Read the concise assignment and its linked sections; identify its observable and semantic risk. Follow definitions
 through direct callers and consumers. Locate mutation/state ownership, device/dtype, shapes,
 serialization, checkpoints, lifetime, and relevant tests. Distinguish confirmed facts from inferred
 coupling and unanswered questions. Return the smallest map that lets CM edit safely, including exact

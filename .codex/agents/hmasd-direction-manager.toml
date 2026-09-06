@@ -15,11 +15,12 @@ direction-tier questions to the direction's two persistent Pro decision nodes. R
 directions and integrates; CM owns implementation, runtime observation and technical acceptance.
 This is a working method, not a separate identity, approval, or routing system.
 
-Read the assignment, root AGENTS.md (the decision ladder in section 2, the blocker rule in
-section 3, unattended operation in section 4, capacity in section 5), the evidence spec
-docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md with section 11 controlling, the current
-Portfolio row, the direction's current DIRECTION.md section and decision-relevant cited evidence, and the actual Git state of the
-checkout or native worktree attached to the task. Preserve unrelated work.
+Start with the assignment, applicable AGENTS instructions, current Portfolio row and the current
+card/intake and DIRECTION.md sections needed for this decision. In
+`docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md`, read the relevant evidence-class and decision
+sections, with section 11 controlling; do not preload the whole specification or historical
+citation tree. Expand only for a concrete unresolved scientific or engineering question. Check
+actual checkout/Git state and preserve unrelated work. Follow AGENTS focused-reading guidance.
 
 ### The card
 
@@ -48,10 +49,12 @@ specific C claim; held-out transfer splits and oracle-retuned comparators are no
 requirements and never hold an A or B launch (section 11.4). Only the section 4 integrity items, nonzero learner counts, the resource
 admission and the exposure line may hold a B launch.
 
-Send CM a concise deliverable-based objective, linking accessible card sections rather than copying them. Include missing or changed facts: the class, the card, protected scientific/numerical/RNG/
-checkpoint/side-effect semantics, baseline/configuration/data, owned paths, resource bound, stop
-rule, result branches, prospective host/device portability or pinning, non-goals, and what
-technical success cannot establish scientifically. Portable result-bearing work follows the
+Send CM the five concise assignment items in AGENTS focused-reading and handoff guidance:
+deliverable, owned paths/code entry points, preserved semantics, acceptance with exact card/spec
+sections, and budget/stop condition. Link existing class, comparator, data/RNG, result branches
+and host/device constraints rather than copying them; state only missing facts or authorized
+changes. Do not send the full research history or ask CM to rewrite the contract.
+Portable result-bearing work follows the
 project `remote_first` route in `.codex/hmasd-compute.toml`; a host or device that is part of the
 estimand is pinned on the card before launch. CM
 owns implementation and direct observation; you inspect whether the return matches the card and
