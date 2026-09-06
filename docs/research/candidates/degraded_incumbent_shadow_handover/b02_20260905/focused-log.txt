@@ -1,0 +1,20 @@
+=== Task 'n3_b02_focused_20260905' started at 2026-09-06T08:05:42+08:00 ===
+{
+  "assessed_at": "2026-09-06T00:05:42.930994Z",
+  "available_physical_bytes": 15305568256,
+  "captured_at": "2026-09-06T00:05:42.930347Z",
+  "cgroup_headroom_bytes": null,
+  "cgroup_memory_current_bytes": null,
+  "cgroup_memory_max_bytes": null,
+  "effective_available_bytes": 15305568256,
+  "effective_floor_pass": true,
+  "failure_reasons": [],
+  "measurement_source": "/proc/meminfo",
+  "minimum_available_bytes": 4294967296,
+  "passed": true,
+  "physical_floor_pass": true,
+  "schema_version": 1
+}
+.....                                                                    [100%]
+5 passed in 6.00s
+=== Task 'n3_b02_focused_20260905' exited with code 0 at 2026-09-06T08:05:49+08:00 (Duration: 7s) ===
