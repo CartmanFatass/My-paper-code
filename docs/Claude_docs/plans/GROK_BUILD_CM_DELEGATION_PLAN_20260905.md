@@ -157,3 +157,14 @@ B/C 层（可写）追加：
   测试由枢纽跑。推荐允许但用 `--allow "Bash(<解释器> -m pytest*)"` 收窄。
 - [ASK-1] 账号是哪一档订阅（SuperGrok / Heavy / X Premium+），以便估每周可承受的调用数。
 - [ASK-2] 是否希望做薄转发子代理（§3 备选），还是维持枢纽直接调用。
+
+## 8. 补记（2026-09-05 22:57 PDT，所有者决定）
+
+- 所有者指示：把一个方向的 CM 代码任务分流到 Grok（`grok-4.6`，effort high），与 Sonnet 传输加
+  Monitor 的组合一起设为稳定工作流的一部分。[DECIDE-1]、[DECIDE-2]、[DECIDE-3] 按此处理：附录 C
+  已写入 `AGENTS.md`；C 层立即启用（枢纽审阅、自跑测试、按路径提交）；允许 Grok 本机跑 pytest。
+- 第一次运行：DISH-RENEWAL-BOUNDARY-A01。23 轮，收据计 2.4M token，12 分钟；四个文件全部落在
+  白名单路径，未触碰任何已跟踪文件；聚焦测试 5 项通过（枢纽复跑一致）；本机 check 剖面 5.16 秒。
+  程序写在 `.claude/skills/hmasd-grok-cm/SKILL.md`。
+- 传输：保持 Sonnet 子代理做 Agentify 调用（MCP 返回体很大，不进枢纽上下文），枢纽用文件监视
+  等待；两次运行学到的规则写入 `.claude/agents/hmasd-pro-transport.md` 与传输技能第 6 步。

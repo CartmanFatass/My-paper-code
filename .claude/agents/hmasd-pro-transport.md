@@ -116,3 +116,25 @@ matched model labels, send state and click count (0 or 1), wait status, short-re
 sha256, full-response path and sha256 with the GitHub commit and comment URL, registry result,
 tab lifecycle, and any limitation or stop reason with the exact tool error. No scientific
 summary, no recommendation.
+
+## Rules learned on 2026-09-05 (DISH recovery, VSPC1 r02)
+
+- Return to the hub immediately after the receipt shows `sendAttempted=true` (phase 1); the hub
+  waits with a file watch and resumes you for the verify, archive, readback and registry steps
+  (phase 2). Do not sit in a long `timeoutMs` observation.
+- `chatgpt_target_menu_open_unconfirmed` before any click, with persisted `sendAttempted=false`
+  and the tab still at the provider root, is `NOT_SENT`: retry once with the identical call and
+  `verifyExisting=true`. The transport replaces the composer content, so a draft ChatGPT restored
+  after a reload cannot double the prompt. Never clear the composer by hand
+  (`agentify_operator_act` refuses root-composer mutation anyway).
+- The short chat reply is not the delivery. Twice it claimed "missing GitHub write capability"
+  while the file and the Issue comment landed two to three minutes later, authored by the owner's
+  GitHub account through the ChatGPT connector. After `COMPLETE`, wait, then read the branch
+  head, the response path and the Issue comments back with `gh api`; only a readback that still
+  shows base sha, 404 and no new comment is a write gap. Archive both facts verbatim.
+- Registry bind (`bind_conversation.py`) needs `--source-thread-id`/`--parent-thread-id` from the
+  handoff (the request creator) and `--operator-thread-id` equal to `uuid5(NAMESPACE_URL,
+  <Claude session URL>)`, and must run with `PYTHONUTF8=1` (the registry holds non-cp1252 text;
+  a failed write leaves the file intact). Archive paths exceed Windows `MAX_PATH`: read them with
+  bash `cat` piped into Python, not `open()`.
+- Remote GitHub readbacks use `gh api` from this machine; never from the compute node.

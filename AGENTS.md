@@ -424,3 +424,18 @@ appendix and completed historical tasks remain unchanged.
   then, and whenever transport is unavailable, direction- and Portfolio-tier questions are put to
   the owner through the owner surfaces; in the owner's absence the direction parks (§3) and
   object-tier decisions follow §4.
+
+## Appendix C — Grok Build specifics
+
+- Grok Build (xAI CLI, `grok-4.6` at effort `high`) is a third agent runtime under section 1
+  (owner decisions 2026-09-05 22:40 and 22:57 PDT). It receives working methods only: one
+  direction's CM implementation when two directions advance in a Claude session, read-only code
+  maps, and second independent reviews. It never launches result-bearing runs, never operates Pro
+  transport, and never makes a scientific judgment.
+- Invocation is headless and fenced (`.claude/skills/hmasd-grok-cm/SKILL.md`): its own git
+  worktree, an explicit tool allowlist, no subagents, no web, deny rules on every shared or
+  governance path, no git commands. Its output is a diff for the hub to review, test and commit
+  by pathspec with an `Implemented-By: grok-build` trailer; a diff touching a protected surface
+  also goes to `hmasd-reviewer`. Accepted Grok work is recorded as a `technical` ledger row.
+- Grok reads `AGENTS.md`, `CLAUDE.md`, `.claude/agents/` and `.claude/skills/` itself; those
+  files bind it as they bind every runtime. No Grok-specific authority, label or gate exists.

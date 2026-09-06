@@ -49,30 +49,33 @@ conversation for a bound key.
    file, no `--out-dir`; the binder refuses rendering arguments); commit and push the bound
    handoff. In caller-direct mode `dispatch_state` reads `CALLER_READY` (the singleton form reads
    `READY_TO_DISPATCH`).
-6. **Send and wait, hub-direct** (owner suggestion 2026-09-05 21:46 PDT: no Sonnet subagent is
-   needed for transport; a file watch is enough for the wait):
-   - preconditions in the hub's own calls: registry record for the key (`active_request_id`
-     null, conversation equal to `requested_conversation_id`, or absent for a first binding),
-     fresh `gh api` readback of the output branch head, response path and Issue comments, the
-     TASK commit on the remote, `agentify_status`, one agent tab navigated to the exact
-     conversation URL (or `https://chatgpt.com/` for a first binding), `agentify_ensure_ready`,
-     `agentify_review_preflight` with `Pro` and `GPT-6 Astra` then `Latest`;
-   - write the exact prompt bytes to the archive `__00_PROMPT.md` and hash them;
-   - one `agentify_review_query` with `timeoutMs` about 60000 so the call returns `SENT_WAITING`
-     quickly; a `COMPLETE` receipt on the first call is also fine;
-   - wait with the `Monitor` tool on the archive directory until the response file exists and
-     the Agentify state file `C:/Users/fires/.agentify-desktop/review-transport.json` shows
-     `operations.<request_id>.archive` non-null (or `error` non-null); no polling by the hub;
-   - after the wake-up, one identical `agentify_review_query` with `verifyExisting=true` returns
-     the `COMPLETE` receipt without sending; then archive sha256, `bind_conversation.py`, the
-     transport facts JSON, `GITHUB_RESPONSE.md` and `DELIVERY_COMMENT.json` by `gh api`, and the
-     tab close, exactly as the `hmasd-pro-transport` agent definition lists them.
-   An error from the query call is handled by reading the persisted operation first:
-   `sendAttempted=true` allows only the identical `verifyExisting=true` call; `sendAttempted=false`
-   with no new user turn visible is `NOT_SENT`. An uncertain send is terminal for that request id;
-   a new request id is a new decision, not a retry. The `hmasd-pro-transport` subagent remains
-   available when the hub wants the whole checklist run outside its own context (it was used for
-   the N3 recovery Send on 2026-09-05).
+6. **Send and wait: Sonnet transport plus Monitor** (owner decision 2026-09-05 22:57 PDT,
+   superseding the hub-direct experiment of the same evening). The Agentify MCP calls are
+   token-heavy (one `agentify_operator_observe` alone returns about 15 k tokens), so the hub
+   never calls them itself; the Sonnet `hmasd-pro-transport` agent does, in two short phases:
+   - **Phase 1 (dispatch the agent):** preconditions (registry, fresh `gh api` readback of the
+     output branch head, response path and Issue comments, TASK commit on the remote,
+     `agentify_status`, one agent tab at the exact conversation URL or `https://chatgpt.com/`
+     for a first binding, `agentify_ensure_ready`, `agentify_review_preflight` with `Pro` and
+     `GPT-6 Astra` then `Latest`), the exact prompt bytes to `__00_PROMPT.md` with sha256, then
+     one `agentify_review_query` with `timeoutMs` about 60000 and **return as soon as the
+     receipt shows `sendAttempted=true`** with the observed conversation id and operation id.
+     `chatgpt_target_menu_open_unconfirmed` (or any error) with persisted `sendAttempted=false`,
+     the tab still at the provider root and no user turn visible is `NOT_SENT`; one identical
+     call with `verifyExisting=true` retries it (the transport replaces the composer content, so
+     a restored draft cannot double the prompt). `sendAttempted=true` allows only the identical
+     `verifyExisting=true` observation call. An uncertain send is terminal for that request id.
+   - **Wait (hub):** one background `until` loop on the archive directory and the Agentify state
+     file `C:/Users/fires/.agentify-desktop/review-transport.json`
+     (`operations.<request_id>.archive` or `.error` non-null); no polling in the hub's context.
+   - **Phase 2 (resume the same agent with `SendMessage`):** the identical
+     `agentify_review_query` with `verifyExisting=true` for the `COMPLETE` receipt; wait two to
+     three minutes and read GitHub back before calling a write gap (below); archive sha256,
+     `GITHUB_RESPONSE.md` and `DELIVERY_COMMENT.json` by `gh api` at the immutable commit,
+     `bind_conversation.py` under `PYTHONUTF8=1` with the creator ids from the handoff and the
+     session's UUID5 as `--operator-thread-id`, the transport facts JSON, the tab close.
+   The hub-direct variant (hub calls Agentify itself) remains in Git history as a fallback when
+   no Sonnet agent can be spawned; it is not the standard route.
    **The chat receipt is not the delivery.** In both scientific runs so far (DISH recovery,
    VSPC1 r02, 2026-09-05) the short chat reply said "delivery is blocked by missing GitHub
    write capability", yet the response file and the Issue comment landed on the declared branch

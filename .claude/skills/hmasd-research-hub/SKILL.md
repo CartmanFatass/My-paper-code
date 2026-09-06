@@ -61,6 +61,7 @@ Delegated, with the model the owner chose:
 | Ledger rows, owner items via `item.py`, brief filing, cherry-pick integration, named checks, commits the hub dictates | `hmasd-clerk` | Sonnet |
 | Repository, literature and inventory facts; count arithmetic | `hmasd-research-scout` | Sonnet |
 | One Pro request through Agentify Desktop and GitHub delivery (after the smoke passes) | `hmasd-pro-transport` | Sonnet |
+| One direction's CM implementation when two directions advance (owner 2026-09-05; `hmasd-grok-cm` skill) | Grok Build headless, hub reviews and commits | grok-4.6 high |
 
 Subagents cannot spawn subagents, so the hub dispatches every specialist itself, including the
 ones a Codex CM would have spawned. When `hmasd-cm` asks for a scout, reviewer or verifier in its
