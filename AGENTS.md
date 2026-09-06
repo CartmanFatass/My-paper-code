@@ -334,6 +334,16 @@ appendix and completed historical tasks remain unchanged.
 
 ## Appendix A — Codex specifics
 
+- OWNER_DIRECT 2026-09-05: scoped GitHub Pro delivery is described in
+  `docs/project/GITHUB_RESEARCH_COLLABORATION.md`. The owner waived Pro review for
+  this workflow change. New requests may explicitly use committed task links and
+  a named branch response/comment; Transport archives short links and Root/DM reads
+  the complete fixed file for intake. Existing requests and the default attachment
+  mode remain unchanged. No duplicate Send, scientific launch gate, main write or
+  Pro code/PR merge authority is implied. Overall migration follows the recorded
+  recovery checks and next real intake, without another owner approval.
+
+
 - Native custom subagents are defined in `.codex/agents/*.toml` and registered in
   `.codex/config.toml`: `hmasd-direction-manager`, `hmasd-cm`, `hmasd-implementer`,
   `hmasd-routine-implementer`, `hmasd-cm-scout`, `hmasd-reviewer`, `hmasd-research-critic`,

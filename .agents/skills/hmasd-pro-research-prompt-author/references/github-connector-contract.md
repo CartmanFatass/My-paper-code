@@ -1,3 +1,12 @@
+# Mode scope update — OWNER_DIRECT 2026-09-05
+
+The current provider has now demonstrated fixed-file/diff reads, scoped file writes
+and Issue comments. Evidence: docs/research/portfolio/pro_packets/20260905_github_write_probe/roundtrip_readback.
+The read-only contract below applies to archive_attachment only. Explicit
+[github_delivery](github-delivery.md) allows exactly its named output and delivery
+comment; it does not imply code/PR/main permissions. Historical capability-unknown
+statements below record the pilot starting state, not current observation.
+
 # GitHub connector contract
 
 2026-09-05 owner-approved pilot extends the explicit evidence list with optional

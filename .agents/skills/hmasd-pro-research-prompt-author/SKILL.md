@@ -1,6 +1,6 @@
 ---
 name: hmasd-pro-research-prompt-author
-description: "Use when Portfolio or an HMASD EM must turn a direction or multi-direction evidence packet into one of the persistent ChatGPT Pro innovator, convergence, or portfolio-decision conversations while preserving the read-only GitHub body/reference split."
+description: "Use when Portfolio or an HMASD EM must turn a direction or multi-direction evidence packet into one of the persistent ChatGPT Pro innovator, convergence, or portfolio-decision conversations using scoped GitHub delivery or the existing read-only attachment mode."
 ---
 
 # HMASD Pro Research Prompt Author
@@ -36,6 +36,17 @@ For quantitative or literature-supported proposals, apply the relevant mode of
 and primary-source findings already relevant to the decision. Pro must distinguish
 those observations from proposed/unexecuted checks; do not require every packet to
 run tools or resend accepted packets merely to add this guidance.
+
+## Owner-authorized GitHub delivery (2026-09-05)
+
+The owner explicitly waived Pro review for this workflow change. Use
+[github-delivery.md](references/github-delivery.md) when a caller selects
+`delivery_mode=github_delivery`. That mode supersedes the attachment-only/read-only
+wording below solely for its exact output file and Issue delivery comment. Scientific
+constraints, node bindings, singleton dispatch and parent receipt remain unchanged.
+`archive_attachment` is the default and retains all existing read-only rules. Do not
+convert or resend an accepted request. Migration is gradual after recovery checks
+and one real intake, never a scientific launch gate.
 
 ## Caller contract
 

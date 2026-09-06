@@ -30,3 +30,21 @@ should routine Pro discussion-based collaboration be claimed operational.
 Scientific execution proceeds independently. This pilot does not reopen VNFC's
 selected B, alter2700s, add profiling requirements, or repeat E01. Subsequent turns
 send a concise new question with relevant evidence delta, not all past discussion.
+
+## Owner-authorized file delivery mode
+
+OWNER_DIRECT 2026-09-05: owner approved designing and completing this workflow and
+explicitly waived Pro review for this change. The operational design is
+[GITHUB_PRO_COLLABORATION_WORKFLOW_DRAFT.md](GITHUB_PRO_COLLABORATION_WORKFLOW_DRAFT.md).
+Its historical filename does not indicate an outstanding Pro approval. Normal
+link/file/comment/readback transport was verified; migration remains staged until
+recovery cases and the next real scientific intake have been checked. Do not invent
+another scientific request solely to test migration.
+
+Existing requests keep their original mode. New requests may explicitly select
+`github_delivery`: committed TASK, one scoped branch response, immutable comment
+link, short Transport receipt, Root/DM direct full-file intake. Default
+`archive_attachment` stays read-only. No duplicate Send to migrate accepted work.
+Current Pro can write the tested scope; this observation is not a universal app
+permission claim. Preserve partial successes, inspect before retries and reuse
+existing files/comments; never interpret a receipt as a scientific decision.
