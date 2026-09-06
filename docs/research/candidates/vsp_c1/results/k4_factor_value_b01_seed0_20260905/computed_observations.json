@@ -1,0 +1,445 @@
+{
+  "status": "derived read-only analysis of CM-accepted complete seed-0 observations",
+  "independent_training_seed_pairs": 1,
+  "delta_final": -0.04166666666666663,
+  "delta_auc": -0.02864583333333326,
+  "delta_initial": 0.0,
+  "delta_learning_gain": -0.04166666666666663,
+  "curve": [
+    {
+      "update": 0,
+      "FACTOR": 0.5,
+      "GENERIC": 0.5,
+      "difference": 0.0,
+      "factor_by_period": {
+        "2": 0.5,
+        "6": 0.49999999999999994
+      },
+      "generic_by_period": {
+        "2": 0.49999999999999994,
+        "6": 0.49999999999999994
+      },
+      "factor_by_partner": {
+        "2": 0.5,
+        "4": 0.49999999999999994
+      },
+      "generic_by_partner": {
+        "2": 0.5,
+        "4": 0.49999999999999994
+      }
+    },
+    {
+      "update": 16,
+      "FACTOR": 0.5416666666666666,
+      "GENERIC": 0.5,
+      "difference": 0.04166666666666663,
+      "factor_by_period": {
+        "2": 0.49999999999999994,
+        "6": 0.5833333333333333
+      },
+      "generic_by_period": {
+        "2": 0.5,
+        "6": 0.5
+      },
+      "factor_by_partner": {
+        "2": 0.49999999999999994,
+        "4": 0.5833333333333333
+      },
+      "generic_by_partner": {
+        "2": 0.49999999999999994,
+        "4": 0.5
+      }
+    },
+    {
+      "update": 32,
+      "FACTOR": 0.5416666666666666,
+      "GENERIC": 0.5416666666666666,
+      "difference": 0.0,
+      "factor_by_period": {
+        "2": 0.49999999999999994,
+        "6": 0.5833333333333333
+      },
+      "generic_by_period": {
+        "2": 0.5833333333333333,
+        "6": 0.5
+      },
+      "factor_by_partner": {
+        "2": 0.49999999999999994,
+        "4": 0.5833333333333333
+      },
+      "generic_by_partner": {
+        "2": 0.5833333333333334,
+        "4": 0.5
+      }
+    },
+    {
+      "update": 48,
+      "FACTOR": 0.5833333333333333,
+      "GENERIC": 0.5833333333333333,
+      "difference": 0.0,
+      "factor_by_period": {
+        "2": 0.5833333333333333,
+        "6": 0.5833333333333334
+      },
+      "generic_by_period": {
+        "2": 0.6666666666666666,
+        "6": 0.49999999999999994
+      },
+      "factor_by_partner": {
+        "2": 0.5833333333333333,
+        "4": 0.5833333333333334
+      },
+      "generic_by_partner": {
+        "2": 0.5833333333333333,
+        "4": 0.5833333333333334
+      }
+    },
+    {
+      "update": 64,
+      "FACTOR": 0.5416666666666666,
+      "GENERIC": 0.6666666666666666,
+      "difference": -0.125,
+      "factor_by_period": {
+        "2": 0.5,
+        "6": 0.5833333333333333
+      },
+      "generic_by_period": {
+        "2": 0.6666666666666666,
+        "6": 0.6666666666666666
+      },
+      "factor_by_partner": {
+        "2": 0.5833333333333334,
+        "4": 0.5
+      },
+      "generic_by_partner": {
+        "2": 0.6666666666666666,
+        "4": 0.6666666666666666
+      }
+    },
+    {
+      "update": 80,
+      "FACTOR": 0.625,
+      "GENERIC": 0.6666666666666666,
+      "difference": -0.04166666666666663,
+      "factor_by_period": {
+        "2": 0.6666666666666666,
+        "6": 0.5833333333333333
+      },
+      "generic_by_period": {
+        "2": 0.6666666666666666,
+        "6": 0.6666666666666666
+      },
+      "factor_by_partner": {
+        "2": 0.5833333333333334,
+        "4": 0.6666666666666666
+      },
+      "generic_by_partner": {
+        "2": 0.6666666666666666,
+        "4": 0.6666666666666666
+      }
+    },
+    {
+      "update": 96,
+      "FACTOR": 0.625,
+      "GENERIC": 0.6666666666666666,
+      "difference": -0.04166666666666663,
+      "factor_by_period": {
+        "2": 0.6666666666666666,
+        "6": 0.5833333333333333
+      },
+      "generic_by_period": {
+        "2": 0.6666666666666666,
+        "6": 0.6666666666666666
+      },
+      "factor_by_partner": {
+        "2": 0.5833333333333334,
+        "4": 0.6666666666666666
+      },
+      "generic_by_partner": {
+        "2": 0.6666666666666666,
+        "4": 0.6666666666666666
+      }
+    },
+    {
+      "update": 112,
+      "FACTOR": 0.625,
+      "GENERIC": 0.6666666666666666,
+      "difference": -0.04166666666666663,
+      "factor_by_period": {
+        "2": 0.6666666666666666,
+        "6": 0.5833333333333333
+      },
+      "generic_by_period": {
+        "2": 0.6666666666666666,
+        "6": 0.6666666666666666
+      },
+      "factor_by_partner": {
+        "2": 0.5833333333333334,
+        "4": 0.6666666666666666
+      },
+      "generic_by_partner": {
+        "2": 0.6666666666666666,
+        "4": 0.6666666666666666
+      }
+    },
+    {
+      "update": 128,
+      "FACTOR": 0.625,
+      "GENERIC": 0.6666666666666666,
+      "difference": -0.04166666666666663,
+      "factor_by_period": {
+        "2": 0.6666666666666666,
+        "6": 0.5833333333333333
+      },
+      "generic_by_period": {
+        "2": 0.6666666666666666,
+        "6": 0.6666666666666666
+      },
+      "factor_by_partner": {
+        "2": 0.5833333333333334,
+        "4": 0.6666666666666666
+      },
+      "generic_by_partner": {
+        "2": 0.6666666666666666,
+        "4": 0.6666666666666666
+      }
+    }
+  ],
+  "arms": {
+    "FACTOR": {
+      "status": "complete",
+      "launch": {
+        "sha": "e7e574b4496875f45e1d1b9b41c02cd35cf3684e",
+        "hostname": "LAPTOP-U9TDKC8A",
+        "cwd": "/home/wu/hmasd-worktrees/vspc1-b01-e7e574b44",
+        "python": "/home/wu/.venvs/hmasd/bin/python",
+        "argv": [
+          "scripts/run_vspc1_k4_factor_value_b01.py",
+          "--arm",
+          "FACTOR",
+          "--seed",
+          "0",
+          "--out",
+          "/home/wu/hmasd-worktrees/vspc1-b01-e7e574b44/temp/directions/vsp_c1/exp/k4_b01_factor_seed0_e7e574b44_01"
+        ],
+        "numpy": "1.26.3",
+        "torch": "2.7.0+cu118"
+      },
+      "parameter_count": 188,
+      "theta0_norm": 4.011008262634277,
+      "theta128_norm": 4.344733715057373,
+      "theta_displacement_norm": 2.032857894897461,
+      "displacement_to_initial_norm": 0.5068196727080182,
+      "optimizer_steps": 128,
+      "training_counts": {
+        "legal_decisions": 8192,
+        "joint_steps": 24576,
+        "renewals_p2": 6144,
+        "renewals": 8192,
+        "renewals_p6": 2048,
+        "episodes": 4096
+      },
+      "evaluation_counts": {
+        "legal_decisions": 144,
+        "joint_steps": 432,
+        "renewals_p2": 108,
+        "renewals": 144,
+        "renewals_p6": 36,
+        "episodes": 72
+      },
+      "metrics": {
+        "initial_return": 0.5,
+        "final_return": 0.625,
+        "learning_gain": 0.125,
+        "normalized_auc": 0.5807291666666666
+      },
+      "resources": {
+        "wall_seconds_through_primary_readback": 1.4784817170002498,
+        "peak_rss_bytes": 479449088,
+        "rss_scope": "main process lifetime high-water",
+        "aggregate_cpu_seconds_through_primary_readback": 1.4427720000000002,
+        "cpu_scope": "process cumulative plus exited child cumulative; threads not counted twice",
+        "status": "measured",
+        "timing_note": "Includes heavy imports, initialization, training, nine evaluations and primary publication/readback; final metadata write/read and stdout are covered by external invocation timing."
+      },
+      "checks": {
+        "held_action_violations": 0,
+        "partner_timing_violations": 0,
+        "reward_violations": 0,
+        "return_violations": 0,
+        "terminal_bootstrap_violations": 0,
+        "loss_weight_violations": 0,
+        "episodes_checked": 4168
+      },
+      "primary_dependency_defects": [],
+      "training_context_counts": [
+        {
+          "p": 2,
+          "tau": 2,
+          "c": 0,
+          "episodes": 512
+        },
+        {
+          "p": 2,
+          "tau": 2,
+          "c": 1,
+          "episodes": 512
+        },
+        {
+          "p": 2,
+          "tau": 4,
+          "c": 0,
+          "episodes": 512
+        },
+        {
+          "p": 2,
+          "tau": 4,
+          "c": 1,
+          "episodes": 512
+        },
+        {
+          "p": 6,
+          "tau": 2,
+          "c": 0,
+          "episodes": 512
+        },
+        {
+          "p": 6,
+          "tau": 2,
+          "c": 1,
+          "episodes": 512
+        },
+        {
+          "p": 6,
+          "tau": 4,
+          "c": 0,
+          "episodes": 512
+        },
+        {
+          "p": 6,
+          "tau": 4,
+          "c": 1,
+          "episodes": 512
+        }
+      ]
+    },
+    "GENERIC": {
+      "status": "complete",
+      "launch": {
+        "sha": "e7e574b4496875f45e1d1b9b41c02cd35cf3684e",
+        "hostname": "LAPTOP-U9TDKC8A",
+        "cwd": "/home/wu/hmasd-worktrees/vspc1-b01-e7e574b44",
+        "python": "/home/wu/.venvs/hmasd/bin/python",
+        "argv": [
+          "scripts/run_vspc1_k4_factor_value_b01.py",
+          "--arm",
+          "GENERIC",
+          "--seed",
+          "0",
+          "--out",
+          "/home/wu/hmasd-worktrees/vspc1-b01-e7e574b44/temp/directions/vsp_c1/exp/k4_b01_generic_seed0_e7e574b44_01"
+        ],
+        "numpy": "1.26.3",
+        "torch": "2.7.0+cu118"
+      },
+      "parameter_count": 191,
+      "theta0_norm": 3.658432960510254,
+      "theta128_norm": 3.875227689743042,
+      "theta_displacement_norm": 1.5969855785369873,
+      "displacement_to_initial_norm": 0.4365217555645055,
+      "optimizer_steps": 128,
+      "training_counts": {
+        "legal_decisions": 8192,
+        "joint_steps": 24576,
+        "renewals_p2": 6144,
+        "renewals": 8192,
+        "renewals_p6": 2048,
+        "episodes": 4096
+      },
+      "evaluation_counts": {
+        "legal_decisions": 144,
+        "joint_steps": 432,
+        "renewals_p2": 108,
+        "renewals": 144,
+        "renewals_p6": 36,
+        "episodes": 72
+      },
+      "metrics": {
+        "initial_return": 0.5,
+        "final_return": 0.6666666666666666,
+        "learning_gain": 0.16666666666666663,
+        "normalized_auc": 0.6093749999999999
+      },
+      "resources": {
+        "wall_seconds_through_primary_readback": 3.189425044998643,
+        "peak_rss_bytes": 479391744,
+        "rss_scope": "main process lifetime high-water",
+        "aggregate_cpu_seconds_through_primary_readback": 1.488761,
+        "cpu_scope": "process cumulative plus exited child cumulative; threads not counted twice",
+        "status": "measured",
+        "timing_note": "Includes heavy imports, initialization, training, nine evaluations and primary publication/readback; final metadata write/read and stdout are covered by external invocation timing."
+      },
+      "checks": {
+        "held_action_violations": 0,
+        "partner_timing_violations": 0,
+        "reward_violations": 0,
+        "return_violations": 0,
+        "terminal_bootstrap_violations": 0,
+        "loss_weight_violations": 0,
+        "episodes_checked": 4168
+      },
+      "primary_dependency_defects": [],
+      "training_context_counts": [
+        {
+          "p": 2,
+          "tau": 2,
+          "c": 0,
+          "episodes": 512
+        },
+        {
+          "p": 2,
+          "tau": 2,
+          "c": 1,
+          "episodes": 512
+        },
+        {
+          "p": 2,
+          "tau": 4,
+          "c": 0,
+          "episodes": 512
+        },
+        {
+          "p": 2,
+          "tau": 4,
+          "c": 1,
+          "episodes": 512
+        },
+        {
+          "p": 6,
+          "tau": 2,
+          "c": 0,
+          "episodes": 512
+        },
+        {
+          "p": 6,
+          "tau": 2,
+          "c": 1,
+          "episodes": 512
+        },
+        {
+          "p": 6,
+          "tau": 4,
+          "c": 0,
+          "episodes": 512
+        },
+        {
+          "p": 6,
+          "tau": 4,
+          "c": 1,
+          "episodes": 512
+        }
+      ]
+    }
+  },
+  "technical_acceptance": "931e4ba7efd68bc765d9a00b80cedb731cfac268:docs/research/candidates/vsp_c1/VSPC1_K4_FACTOR_VALUE_B01_CM_TECHNICAL_RECORD_20260905.md"
+}

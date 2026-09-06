@@ -1,0 +1,114 @@
+{
+  "rung": "VSPC1-K4-FACTOR-VALUE-B01-SEED12",
+  "kind": "prospective arithmetic, no new scientific execution",
+  "base_source": "e7e574b4496875f45e1d1b9b41c02cd35cf3684e",
+  "seeds": [
+    1,
+    2
+  ],
+  "ordered_invocations": [
+    [
+      "FACTOR",
+      1
+    ],
+    [
+      "GENERIC",
+      1
+    ],
+    [
+      "FACTOR",
+      2
+    ],
+    [
+      "GENERIC",
+      2
+    ]
+  ],
+  "per_arm_seed": {
+    "training_episodes": 4096,
+    "training_joint_primitive_steps": 24576,
+    "training_renewal_transitions": 8192,
+    "optimizer_steps": 128,
+    "evaluation_episodes": 72,
+    "evaluation_joint_primitive_steps": 432,
+    "evaluation_legal_action_choices": 144,
+    "complete_joint_primitive_steps": 25008,
+    "complete_legal_action_choices": 8336
+  },
+  "new_four_invocation_total": {
+    "training_episodes": 16384,
+    "training_joint_primitive_steps": 98304,
+    "training_renewal_transitions": 32768,
+    "optimizer_steps": 512,
+    "evaluation_episodes": 288,
+    "evaluation_joint_primitive_steps": 1728,
+    "evaluation_legal_action_choices": 576,
+    "complete_joint_primitive_steps": 100032,
+    "complete_legal_action_choices": 33344
+  },
+  "prospective_exposure": {
+    "trainable_parameters": {
+      "FACTOR": 188,
+      "GENERIC": 191
+    },
+    "reward_bearing_transitions_per_arm": 8192,
+    "adam_updates_per_arm": 128,
+    "learning_rate": 0.01,
+    "nominal_sum_of_learning_rates": 1.28,
+    "initialization_expected_squared_norm": {
+      "FACTOR": 17.127272727272725,
+      "GENERIC": 13.15925925925926
+    },
+    "initialization_sqrt_expected_squared_norm": {
+      "FACTOR": 4.138510931152982,
+      "GENERIC": 3.62756933210921
+    },
+    "actual_initial_norm": null,
+    "actual_displacement_norm": null,
+    "actual_displacement_over_initial_norm": null,
+    "interpretation": "Positive unfrozen Adam update budget with a named initialization scale; sum of learning rates is nominal schedule exposure, neither a realized displacement nor an Adam displacement bound. Actual per-arm norms and counts must come from the real invocation; no minimum ratio gate."
+  },
+  "new_streams": {
+    "1": {
+      "context": [
+        1,
+        101
+      ],
+      "exploration": [
+        1,
+        102
+      ],
+      "FACTOR_dense": 1201,
+      "FACTOR_embedding": 1202,
+      "GENERIC_dense": 1301
+    },
+    "2": {
+      "context": [
+        2,
+        101
+      ],
+      "exploration": [
+        2,
+        102
+      ],
+      "FACTOR_dense": 2201,
+      "FACTOR_embedding": 2202,
+      "GENERIC_dense": 2301
+    }
+  },
+  "measured_seed0_complete_wall_seconds": {
+    "FACTOR": 1.76,
+    "GENERIC": 3.95
+  },
+  "conditional_complete_wall_projection_per_new_invocation_seconds": {
+    "FACTOR": 1.76,
+    "GENERIC": 3.95
+  },
+  "conditional_four_invocation_sum_seconds": 11.42,
+  "projection_scope": "Same source algorithm/model shapes/batch/horizon. Empirical unit-cost reuse only; excludes unmeasured Git/SSH and serial handoff gaps, does not guarantee runtime or require another calibration.",
+  "cap_seconds_per_arm_seed": 2700,
+  "four_invocation_cap_sum_seconds": 10800,
+  "actual_new_joint_steps": 0,
+  "actual_new_optimizer_steps": 0,
+  "actual_new_returns": 0
+}

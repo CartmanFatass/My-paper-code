@@ -1,0 +1,43 @@
+{
+  "question": "已按对象层无人委托选择同一B01比较的两个独立训练种子，用于检查首个负向结果的训练随机性；是否需要异步修订本次有限复测？流程不等待重复批准。",
+  "changes_if_approved": [
+    {
+      "target": "VSPC1_K4_FACTOR_VALUE_B01_SEED12_SCIENCE_CARD_20260905.md",
+      "from": "seed0已完成且终点与全程AUC均较差，只有一个训练实例",
+      "to": "保持原模型、数据、评价与每臂预算，只增加seed1、2的四个串行调用；全部结果保留"
+    }
+  ],
+  "if_refused": "在下一干净边界应用异步修订，保留所有已经完成的原始观察；不回写seed0，也不把停止后续投入当机制负面。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/vsp_c1/VSPC1_K4_FACTOR_VALUE_B01_RESULT_EVIDENCE_20260905.md",
+      "quote": "This one mirrored conflicting-plan context accounts for the endpoint difference. It identifies the location of the observed loss, not its unique cause.",
+      "why": "单一训练实例中的局部动作不对称需要独立训练来了解其敏感性，不能仅凭一个种子推断稳定结论。"
+    },
+    {
+      "path": "docs/research/candidates/vsp_c1/VSPC1_K4_FACTOR_VALUE_B01_RESULT_EVIDENCE_20260905.md",
+      "quote": "Total invocation wall was 5.71 seconds and aggregate CPU 3.47 seconds.",
+      "why": "已有完整调用的实测成本支持这次固定数量的小额复测，无需新的成本审计。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/vsp_c1/VSPC1_K4_FACTOR_VALUE_B01_RESULT_EVIDENCE_20260905.md",
+      "quote": "Primary `Delta J = -0.04166666666666663`; normalized full-curve `Delta AUC = -0.02864583333333326`. Both favor GENERIC.",
+      "why": "首轮对因子化的两个预定指标均不利；复测不能以筛出正种子为目的。"
+    }
+  ],
+  "uncertainty": [
+    "三个训练种子仍不保证总体结论或论文级不确定性充分。",
+    "固定且公开的伙伴、模型参数化和初始化差异仍限制机制归因。",
+    "新种子实际耗时未知；基于已测同形状调用的估计不是承诺。"
+  ],
+  "cost": {
+    "compute": "新增四次调用，共100,032联合原生步、512次更新。原每臂每种子完整调用上限2700秒；同形状实测成本条件投影合计11.42秒，实际逐次测量。",
+    "owner_time": "无需实时批准，可异步批改。",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing"
+  },
+  "verdict_text": "同一比较只追加seed1和seed2；保持模型、学习预算和评价指标不变，保留全部正负、失败与曲线，不继续抽样直到出现正结果。",
+  "source": "docs/research/candidates/vsp_c1/VSPC1_K4_FACTOR_VALUE_B01_INTAKE_20260905.md"
+}
