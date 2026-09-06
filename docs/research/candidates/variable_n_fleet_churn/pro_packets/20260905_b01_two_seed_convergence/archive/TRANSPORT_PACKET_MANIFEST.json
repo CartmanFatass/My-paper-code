@@ -1,0 +1,43 @@
+{
+  "schema_version": 4,
+  "packet_id": "2026-09-05-vnfc-b01-two-seed-convergence-01--variable_n_fleet_churn",
+  "attempt": 1,
+  "canonical_form": "logical_packet_manifest",
+  "request_id": "2026-09-05-vnfc-b01-two-seed-convergence-01",
+  "direction_id": "variable_n_fleet_churn",
+  "direction_ids": [
+    "variable_n_fleet_churn"
+  ],
+  "workflow_node": "em_convergence",
+  "conversation_binding_key": "em:variable_n_fleet_churn:convergence",
+  "decision_authority": "pro_final",
+  "source_mode": "paste",
+  "body": {
+    "role": "prompt",
+    "source_path": "<paste>",
+    "canonical_filename": "2026-09-05-vnfc-b01-two-seed-convergence-01--variable_n_fleet_churn__00_PROMPT.md",
+    "bytes": 570,
+    "sha256": "c613db113821d669a61b03a58af05803ffd921c698291daefdcd824ec1746768",
+    "materialized_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\variable_n_fleet_churn\\2026-09-05-vnfc-b01-two-seed-convergence-01\\2026-09-05-vnfc-b01-two-seed-convergence-01--variable_n_fleet_churn__00_PROMPT.md"
+  },
+  "references": [],
+  "reference_order_is_authoritative": true,
+  "provider_filename_policy": "record_observed_name_only",
+  "companion_prompt_is_transport_ui_only": true,
+  "manifest_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\variable_n_fleet_churn\\2026-09-05-vnfc-b01-two-seed-convergence-01\\2026-09-05-vnfc-b01-two-seed-convergence-01--variable_n_fleet_churn__PACKET_MANIFEST.json",
+  "materialized_artifacts": {
+    "body": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\variable_n_fleet_churn\\2026-09-05-vnfc-b01-two-seed-convergence-01\\2026-09-05-vnfc-b01-two-seed-convergence-01--variable_n_fleet_churn__00_PROMPT.md",
+    "references": []
+  },
+  "materialized_hashes": {
+    "body": "c613db113821d669a61b03a58af05803ffd921c698291daefdcd824ec1746768",
+    "references": []
+  },
+  "delivery_mode": "github_delivery",
+  "github_delivery": {
+    "branch": "codex/pro-vnfc-b01-two-seed-convergence-20260905",
+    "base_sha": "fda5174f6277fa8eadce950f9f6b2cb232ee12a4",
+    "response_path": "docs/research/candidates/variable_n_fleet_churn/pro_packets/20260905_b01_two_seed_convergence/archive/RESPONSE.md",
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/1"
+  }
+}

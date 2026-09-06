@@ -1,0 +1,37 @@
+{
+  "question": "如何保存 VNFC 已形成的下一科学选择，并落实当前执行暂停？",
+  "changes_if_approved": [
+    {
+      "target": "VNFC 方向当前记录",
+      "from": "两个种子已完成，Convergence 等待",
+      "to": "接受固定终点策略采样/贪心评价的有限科学选择；按所有者最新指示标记 OWNER_PAUSED，未实现或执行"
+    }
+  ],
+  "if_refused": "应用所有者后续明确指示；原始回复、已有结果及故障全部保留。在恢复指示出现前不自动推进。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/variable_n_fleet_churn/pro_packets/20260905_b01_two_seed_convergence/archive/RESPONSE.md",
+      "quote": "这是本次推论，不是已有结果。",
+      "why": "执行方式具有具体源码区别，但性能后果尚未测量；应保留为待执行选择而非结果。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/variable_n_fleet_churn/pro_packets/20260905_b01_two_seed_convergence/archive/RESPONSE.md",
+      "quote": "训练分布可能仍保留低价值探索概率，单次采样可能降低四个最终策略的表现；即使改善，也可能是两个学习器共有的执行效果，而非MAPR结构收益。",
+      "why": "下一评价未承诺采样优势，不应抹去旧负面或增加温度、种子、检查点直到转正。"
+    }
+  ],
+  "uncertainty": [
+    "新评价入口、四份参数装载及整项费用尚未完成验证。",
+    "BCRH的信息等价、旧异常根因及总体训练变异仍未知。"
+  ],
+  "cost": {
+    "compute": "本次 intake 新增实验为零。Pro选定后继最多180秒、576完整episode，计入原2700秒；当前正式实耗仍783.29秒。执行暂停，未支付新评价费用。",
+    "owner_time": "当前无批准请求；仅等待所有者明确恢复指示。",
+    "reversibility": "reversible",
+    "waits_on_this": "该方向执行暂停；不把暂停改成科学否定或生命周期PARK。"
+  },
+  "verdict_text": "保存并接受已形成的固定策略执行方式比较；按照所有者最新指示暂停执行，不启动后继，不自动恢复。",
+  "source": "docs/research/candidates/variable_n_fleet_churn/VNFC_B01_TWO_SEED_CONVERGENCE_INTAKE_20260905.md"
+}
