@@ -1,0 +1,111 @@
+{
+  "admission": {
+    "assessed_at": "2026-09-06T15:21:18.253892Z",
+    "available_physical_bytes": 15675031552,
+    "captured_at": "2026-09-06T15:21:18.253601Z",
+    "cgroup_headroom_bytes": null,
+    "cgroup_memory_current_bytes": null,
+    "cgroup_memory_max_bytes": null,
+    "effective_available_bytes": 15675031552,
+    "effective_floor_pass": true,
+    "failure_reasons": [],
+    "measurement_source": "/proc/meminfo",
+    "minimum_available_bytes": 4294967296,
+    "passed": true,
+    "physical_floor_pass": true,
+    "schema_version": 1
+  },
+  "admission_receipt": "/home/wu/hmasd-worktrees/frrie-a03-50283c9cf/temp/directions/finite_resource_relational_inductive_efficiency/technical/r09_tape_isolation_a03_t1_admission.json",
+  "argv": [
+    "/home/wu/hmasd-worktrees/frrie-a03-50283c9cf/scripts/run_frrie_r09_tape_isolation_a03.py",
+    "--arm",
+    "T1",
+    "--repeat",
+    "3",
+    "--updates",
+    "2",
+    "--eval-episodes",
+    "256",
+    "--out",
+    "/home/wu/hmasd-worktrees/frrie-a03-50283c9cf/temp/directions/finite_resource_relational_inductive_efficiency/exp/r09_tape_isolation_a03_t1",
+    "--launch-sha",
+    "50283c9cfffeaba913572fe43f5a8dbf311abe7e",
+    "--admission-receipt",
+    "/home/wu/hmasd-worktrees/frrie-a03-50283c9cf/temp/directions/finite_resource_relational_inductive_efficiency/technical/r09_tape_isolation_a03_t1_admission.json"
+  ],
+  "arm": "T1",
+  "cost_law": {
+    "evaluation_tapes": 1536,
+    "law": "wall scales with 64 training tapes per update, plus 2*eval_episodes evaluation tapes on T1, times repetitions",
+    "training_tapes": 384,
+    "unit": "tape"
+  },
+  "eval_episodes": 256,
+  "exception": "Traceback (most recent call last):\n  File \"/home/wu/hmasd-worktrees/frrie-a03-50283c9cf/experiments/candidates/finite_resource_relational_inductive_efficiency/tape_isolation_a03.py\", line 196, in run_arm\n    tapes = evaluation_tapes(root, seed_label, episodes=eval_episodes)\n  File \"/home/wu/hmasd-worktrees/frrie-a03-50283c9cf/experiments/candidates/finite_resource_relational_inductive_efficiency/tape_isolation_a03.py\", line 55, in evaluation_tapes\n    return tuple(\n  File \"/home/wu/hmasd-worktrees/frrie-a03-50283c9cf/experiments/candidates/finite_resource_relational_inductive_efficiency/tape_isolation_a03.py\", line 56, in <genexpr>\n    evaluation_tape(root, seed_label=seed_label, roster=roster, episode=episode)\n  File \"/home/wu/hmasd-worktrees/frrie-a03-50283c9cf/experiments/candidates/finite_resource_relational_inductive_efficiency/b01_contact_r02/tapes.py\", line 217, in evaluation_tape\n    _address(**common, receiver=receiver, kind=\"uplink_uniform\")\n  File \"/home/wu/hmasd-worktrees/frrie-a03-50283c9cf/experiments/candidates/finite_resource_relational_inductive_efficiency/b01_contact_r02/tapes.py\", line 181, in _address\n    return R02EvaluationAddress(seed_label, roster, episode, kind, **fields).validate()\n  File \"<string>\", line 13, in __init__\nSystemError: error return without exception set\n",
+  "launch_sha": "50283c9cfffeaba913572fe43f5a8dbf311abe7e",
+  "numpy_in_sys_modules": true,
+  "numpy_version": "1.26.3",
+  "object": "FRRIE-R09-SEGFAULT-A03-TAPE-ISOLATION-20260906",
+  "peak_rss_bytes": 348868608,
+  "repeat": 3,
+  "repetitions": [
+    {
+      "index": 0,
+      "phases": [
+        {
+          "digest": "7aa8c52746d03074ee4ec34fbe6cde695ccae08b4d12f1476c267071c93f0c81",
+          "nbytes": 4571136,
+          "phase": "evaluation",
+          "tape_count": 512,
+          "wall_seconds": 18.61650351600838
+        },
+        {
+          "digest": "0f0fb392c59dcfdbaa475ae8becca03323751d0a849ee6f39c9a8c9d68057b5f",
+          "nbytes": 571392,
+          "phase": "training_update_1",
+          "tape_count": 64,
+          "wall_seconds": 3.0056173560151365
+        },
+        {
+          "digest": "7e155dc5452d9303688d0a807b190ab0050db723078a7f890e1ee6b5f71a4f16",
+          "nbytes": 571392,
+          "phase": "training_update_2",
+          "tape_count": 64,
+          "wall_seconds": 3.014956996019464
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "phases": []
+    }
+  ],
+  "root_hex": "0000000000000000000000000000000000000000000000000000000000000003",
+  "seed_label": "FRRIE-B09-CONTACT-BLOCK-003",
+  "sys_executable": "/home/wu/.venvs/hmasd/bin/python",
+  "sys_flags": {
+    "bytes_warning": 0,
+    "debug": 0,
+    "dev_mode": false,
+    "dont_write_bytecode": 0,
+    "hash_randomization": 1,
+    "ignore_environment": 0,
+    "inspect": 0,
+    "int_max_str_digits": -1,
+    "interactive": 0,
+    "isolated": 0,
+    "no_site": 0,
+    "no_user_site": 0,
+    "optimize": 0,
+    "quiet": 0,
+    "utf8_mode": 0,
+    "verbose": 0,
+    "warn_default_encoding": 0
+  },
+  "sys_version": "3.10.21 (main, Sep  1 2026, 14:16:49) [Clang 22.1.3 ]",
+  "torch_in_sys_modules": true,
+  "torch_present_at_work_start": true,
+  "torch_version": "2.7.0+cu118",
+  "trace_active": false,
+  "updates": 2
+}
