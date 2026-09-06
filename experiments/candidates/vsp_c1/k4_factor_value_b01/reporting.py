@@ -23,3 +23,20 @@ def write_read(path, summary):
     if readback != summary:
         raise ValueError("Primary result write/read mismatch")
     return readback
+
+
+def budget512_metrics(curve):
+    """Thirty-three fixed checkpoints; three AUC windows; no best-checkpoint selection."""
+    values = [row["mean_return"] for row in curve]
+    prefix = values[:9]
+    late = values[8:]
+    return {
+        "initial_return": values[0],
+        "return_128": values[8],
+        "return_512": values[-1],
+        "learning_gain_0_512": values[-1] - values[0],
+        "learning_gain_128_512": values[-1] - values[8],
+        "auc_0_128": (0.5 * prefix[0] + sum(prefix[1:-1]) + 0.5 * prefix[-1]) / 8,
+        "auc_0_512": (0.5 * values[0] + sum(values[1:-1]) + 0.5 * values[-1]) / 32,
+        "auc_128_512": (0.5 * late[0] + sum(late[1:-1]) + 0.5 * late[-1]) / 24,
+    }
