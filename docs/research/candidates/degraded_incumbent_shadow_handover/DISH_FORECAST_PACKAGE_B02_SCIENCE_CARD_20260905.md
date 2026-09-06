@@ -161,6 +161,13 @@ consequence-step sum. The retained training work is
 Recurrent/critic forwards, replay/backward, physics readouts, initialization, compilation
 and publication are additional work. This bound is not a measured wall multiplier.
 
+Pre-launch observability clarification (DM, 2026-09-05 PDT): H denotes the actual
+consequence work in this cost law, but the inherited passive-label interface does not
+expose its count after early clone termination. Report H as unmeasured/null and report
+the bound `H<=20E` using observed E; do not substitute that upper for an actual count.
+Keep the full clone computation, actual N, updates, optimizer and mask counts. No native
+ABI extension is needed for this optional cost component or the native-service claim.
+
 The spending ceiling is **1,800 seconds per complete arm**, **3,600 seconds in summed
 pair allowance**, including charged preparation, required checking, learning, evaluation
 and publication. Account genuinely shared preparation once: allocate half its measured

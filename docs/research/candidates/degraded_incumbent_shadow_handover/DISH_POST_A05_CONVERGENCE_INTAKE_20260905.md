@@ -155,3 +155,42 @@ reversible, owner flag none; no new result or lifecycle/priority action. Portfol
 step can read: post-A05 final answer selects a one-seed paired native package B on the A03
 host, sixteen updates/four episodes per arm, under the full 1,800-second arm ceilings;
 implementation is next, source and native performance not yet accepted.
+
+## Actual engineering continuation
+
+By 2026-09-05 23:48 UTC, card/archive commit `322faf27ece280e3db0524b7bfc844909e4a2baa`
+was pushed on `codex/dm-n3-b02-intake-20260905`, and the existing CM
+`/root/dm_amx_n3_approved/cm_am_n3_a05_approved` received a native continuation task for
+implementation, independent review and the selected bounded remote pair. Its assignment
+requires a fresh isolated worktree from that current-spec card commit, preserves unrelated
+sources and names this DM as the return/intake recipient. It can reuse its existing semantic
+implementer and reviewer. Root received the integration commit and shared-record material.
+
+This is an actual engineering handoff, not an experiment launch or source acceptance.
+No live experiment handle exists at this boundary. The CM will publish exact accepted
+commits, invocation scope and any process handle; the shared tracker receives a handle only
+after acceptance. The owner review CLI returned no unapplied instruction; the direction scan
+of today's/yesterday's surfaces found no new override. Worktree is otherwise clean.
+
+## Pre-launch cost observability disposition — 2026-09-05 PDT
+
+The CM and independent reviewer found a concrete interface limitation: passive-label
+outputs expose labels/masks and eligible count E, but not native consequence-step count H.
+Clones can terminate before their twenty-step horizon, so zero labels do not reconstruct
+H and `20E` is only its upper. CM contract `7d37a5c5b` records the direct source finding;
+the implementation at `47f81c15c536c2b4c4ee463eaa7a35f720ec08c7` leaves native code unchanged.
+
+Options are explicit unmeasured H with observed N/E and its bound, or additional native ABI
+instrumentation. Recommend and select the first. Owner-delegated decision (unattended,
+2026-09-05 instruction): **report H unmeasured and its `H<=20E` bound; preserve all clone
+computation and required learner/mask counts**. This is a technical observability
+clarification under sections 11.8/11.9, not a scientific reduction, positive result or new
+launch gate. No exact-cost attribution to H will be claimed. Card section 6 now says this
+explicitly. Provenance `OWNER_DELEGATED`, reversible, owner flag none; Root owns the audit
+row and no retired P3/P4 item is requested.
+
+By 2026-09-06 00:07 UTC the shared tracker reported the unique focused process exit 0 and
+five tests passed; CM is collecting its actual command timing and technical evidence.
+Supervisor duration is not the charged compute witness. That conformance observation is
+not a formal arm or native performance result; the actual paired invocation remains the
+next experimental discriminator. The owner review CLI again returned no unapplied review.
