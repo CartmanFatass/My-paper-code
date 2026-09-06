@@ -651,3 +651,25 @@ the saved zero-update snapshot if one exists, otherwise reconstruct it once from
 master and the existing B03 initializer and label it reconstructed; if neither yields a
 determinate input, return that gap. Not selected: learner-stability B, held-only rows, B02
 checkpoints, PARK, RECAST. No Portfolio change.
+
+## Zero-update controller witness A01: both trained controllers below their initialization — 2026-09-06
+
+`DISH-INIT-WITNESS-A01` (A/RECON, card `DISH_INIT_WITNESS_A01_SCIENCE_CARD_20260906.md`; thin entry
+by Grok Build, integrated at `3c0ed5c87`) ran on `wsl_4070` as attempt r2 (`COMPLETE` 8/8, whole-item
+charge 16.23 s of 120 s; r1 stopped in the focused check because the node worktree's sparse
+checkout lacked the `docs/` evidence input, no exposure). The seed-73 zero-update initialization
+(reconstructed once from the recorded master, norm 38.24996300787587, Welford counts 0) serves
+467 / 478 / 942 / 938 ticks on the four B03 conditions (mean 706.25) with zero hard events and zero
+transfers, identically in the CONTROL (raw-logit) and FORECAST_PACKAGE (sigmoid) interface views.
+Against the recorded update-16 rows: `D_C = −245.75` (452/458/449/483) and `D_P = −517.75`
+(92/222/129/311); card row 1 with the package also dropping, read as a **shared conditional
+before/after loss** on this seed and panel (`DISH_INIT_WITNESS_A01_RESULT_INTAKE_20260906.md`). "Sixteen
+updates degraded whole-episode evaluation service in both arms" is now an observation conditional on
+this seed, initialization and panel; it attributes the loss to no component and is not a general
+learning-harm claim. CONTROL's loss sits in the two TERRAIN rows (−493, −455); its TARGET rows are
+inside the band. The identical views are an observation; the DM's inference (the service-probability
+input acts only around prepare/commit/transfer, none of which the initialization triggered) is
+labelled as such. The DM's predictions (row 2; materially different views) were wrong on both
+counts. B03's package-adverse reading, B02's qualified reading, B01 and A01–A05 are unchanged. The
+successor (a named learner-stability B, a second-seed witness, a B02-checkpoint witness, or park) is
+put to `em:dish:convergence` (`pro_packets/20260906_post_witness_convergence/`).
