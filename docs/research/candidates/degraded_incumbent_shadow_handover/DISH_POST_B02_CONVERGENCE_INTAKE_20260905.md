@@ -29,9 +29,13 @@ the Claude research hub on the owner's resume (`OWNER_DIRECT`, 2026-09-05 21:26 
 - Registry: the transport agent's bind was refused (`SOURCE_THREAD_UNVERIFIED`) because it
   supplied no creator thread id. The hub re-ran the binder with the request creator's ids from
   `HANDOFF_RECOVERY_01.json` (source `01a07397-…bdf7`, parent `01a07249-…5267`, equal to the
-  record's existing creator), `--observed-after-successful-send`; result recorded in
-  `pro_packets/20260905_post_b02_convergence/archive/TRANSPORT_FACTS_RECOVERY_01_CLAUDE.json`
-  and the direction handoff.
+  record's existing creator), `--observed-after-successful-send`, and the Claude session's UUID5
+  (`uuid5(NAMESPACE_URL, session URL)` = `dc8a84e3-2ccf-503e-9743-9b64258b4ed0`) as operator
+  thread id, under `PYTHONUTF8=1` (the binder's UTF-8-unaware first attempt returned
+  `REGISTRY_ERROR` without writing). Result: bound, state `DIRECTION_VERIFIED`, `request_id`
+  equal to this request, `active_request_id` null, prompt sha256 recorded. The transport
+  agent's facts file is preserved at
+  `pro_packets/20260905_post_b02_convergence/archive/TRANSPORT_FACTS_RECOVERY_01_CLAUDE.json`.
 
 **Resolution of the receipt/delivery discrepancy (inference, stated as such).** The short reply
 is the chat-visible text captured at completion; the file commit and the Issue comment are
