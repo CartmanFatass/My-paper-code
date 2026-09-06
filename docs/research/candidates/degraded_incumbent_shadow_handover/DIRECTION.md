@@ -617,3 +617,37 @@ prospective judgement held. B02's inside-MEI reading on the lagged path stands; 
 not two replicates. The family's next decision (end the package family; a zero-training witness
 of the initial and update-16 policies on the corrected boundary; a learner-stability B; or park)
 is put to `em:dish:convergence` (`pro_packets/20260906_post_b03_convergence/`).
+
+## Post-B03 Convergence: the forecast-package branch ends; one zero-update controller witness — 2026-09-06
+
+The complete post-B03 Convergence response (`pro_packets/20260906_post_b03_convergence/archive/RESPONSE.md`
+at commit `f85016d76`, evidence base `3f71098dc`, intake
+`DISH_POST_B03_CONVERGENCE_INTAKE_20260906.md`, `PRO_FINAL`) continues the first-legal-application
+RETAIN/COPY/SHADOW agenda but **ends the expansion investment in the current joint forecast-package
+branch**: no further seeds, longer training or coefficient variants of the four-dimensional-NLL
+(0.025) plus sigmoid-interface package on this host and budget. B02 (lagged interface, inside MEI)
+and B03 (corrected interface, `Delta_B03 = −272`) stay as the branch's evidence and are not two
+replicates; ending the branch is a bounded next-step choice, not a family-null theorem; reopening
+needs a new, independently reasoned scientific change through the existing decision process.
+
+The response narrows three DM statements: "sixteen updates made both arms worse than
+initialization" is not yet an observation (the initial controller was never evaluated on the
+1,200-tick panel; the training curves are staged, not monotone: CONTROL update 11 = 4,093 > update
+1 = 4,016); "update 1 identical" holds only for training service and support counts, not
+loss/gradient; the B03 card §5 rationale misquoted B02 as 447 vs 572 (both arm means were 470).
+"No legal transfer" is limited to the eight evaluation episodes; CONTROL recorded one training
+legal transfer.
+
+**Sole next object `DISH-INIT-WITNESS-A01` (A/RECON,
+`DISH_INIT_WITNESS_A01_SCIENCE_CARD_20260906.md`)**: on B03's four development conditions with the
+recorded `evaluation_rows[].reset` reused verbatim, evaluate the seed-73 zero-update initialization
+in two interface views (CONTROL raw logits; FORECAST_PACKAGE sigmoid on the same parameters, no new
+weight draw), zero-update normalization state, fresh recurrent state per episode, 1,200-tick fixed
+range; the two update-16 controllers are read-only reuse of the accepted B03 rows. Primary
+`D_a = (1/4) Σ_r (J_a,16,r − J_a,0,r)` per arm, 24 mean service ticks as a symmetric descriptive
+scale, five-row reading table, no outcome buys a learner B or restores the package. Whole-item
+cap 120 s on `wsl_4070`, at most 9,600 actual evaluation ticks, zero training. Input rule: read
+the saved zero-update snapshot if one exists, otherwise reconstruct it once from the recorded
+master and the existing B03 initializer and label it reconstructed; if neither yields a
+determinate input, return that gap. Not selected: learner-stability B, held-only rows, B02
+checkpoints, PARK, RECAST. No Portfolio change.

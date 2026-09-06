@@ -1,0 +1,76 @@
+{
+  "mode": "scientific",
+  "request_id": "2026-09-06-dish-post-b03-convergence-01",
+  "conversation_binding_key": "em:degraded_incumbent_shadow_handover:convergence",
+  "workflow_node": "em_convergence",
+  "direction_id": "degraded_incumbent_shadow_handover",
+  "decision_authority": "pro_final",
+  "conversation_id": "6a9bec54-df00-83e8-9840-46440458f316",
+  "conversation_url": "https://chatgpt.com/c/6a9bec54-df00-83e8-9840-46440458f316",
+  "phase1_send_facts": {
+    "send_confirmed_at": "2026-09-06T10:45 PDT (as reported)",
+    "provider_user_message_id": "eac099d8-831f-4962-a335-e459a94c374f",
+    "operation_id": "0001f57d-aae3-4425-b6a7-7aa656d37945",
+    "preflight_tab_id": "54cb2b48-49cc-4104-93a5-89c7c2d90797",
+    "prompt_path": "C:/Projects/HMASD/temp/sessions/hmasd-chatgpt-pro-transport/archive/degraded_incumbent_shadow_handover/2026-09-06-dish-post-b03-convergence-01/2026-09-06-dish-post-b03-convergence-01--degraded_incumbent_shadow_handover__00_PROMPT.md",
+    "prompt_sha256": "52969d4565651c6e53ac211aa6851fd81313dc69fceae47546267cfa132e658b"
+  },
+  "short_chat_receipt": {
+    "archived": true,
+    "path": "C:/Projects/HMASD/temp/sessions/hmasd-chatgpt-pro-transport/archive/degraded_incumbent_shadow_handover/2026-09-06-dish-post-b03-convergence-01/2026-09-06-dish-post-b03-convergence-01--degraded_incumbent_shadow_handover__01_SHORT_RECEIPT.md",
+    "sha256": "a569ca24545b5e0ff727f2aa675e622f8e909ca2b83591d7a8615c85cd7a520e",
+    "content_summary": "Assistant reported a precise gap: no callable GitHub-write action or Codex connector tool visible in this session; response path returned 404 at capture time; branch remained at base sha; Issue 4 latest delivery was the preceding post-A02 round, not B03. Reported no repository changes or delivery comment made, and no current-round decision formed. This is the literal chat wording captured verbatim, not an interpreted transport conclusion (see owner note on the Codex-connector write route: chat capability reports are unreliable)."
+  },
+  "github_delivery_readback": {
+    "branch": "codex/pro-dish-b03-convergence-20260906",
+    "head_sha": "f85016d765727eecaca8e93d1f253b938a45d1fc",
+    "head_commit_time": "2026-09-06T17:57:56Z",
+    "head_commit_message": "docs: deliver DISH post-B03 convergence decision",
+    "response_path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260906_post_b03_convergence/archive/RESPONSE.md",
+    "response_path_note": "Coordinator correction mid-task: the delivered file is under the archive subfolder; the path without archive returns 404.",
+    "response_size_bytes": 31980,
+    "response_sha256": "52e5ac077196cc9365aff70761a7fd7f4529ebf8baa19954adc44cbae82d8d36",
+    "github_blob_sha": "f70e2003f349f2d3902494b3ec3ae58f00fdad73",
+    "response_archive_path": "C:/Projects/HMASD/temp/sessions/hmasd-chatgpt-pro-transport/archive/degraded_incumbent_shadow_handover/2026-09-06-dish-post-b03-convergence-01/2026-09-06-dish-post-b03-convergence-01--degraded_incumbent_shadow_handover__02_GITHUB_RESPONSE.md",
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/4",
+    "issue_comment_id": 5561089362,
+    "issue_comment_url": "https://github.com/CartmanFatass/My-paper-code/issues/4#issuecomment-5561089362",
+    "issue_comment_created_at": "2026-09-06T17:59:55Z",
+    "performed_via_github_app_name": "ChatGPT Codex Connector",
+    "delivery_comment_archive_path": "C:/Projects/HMASD/temp/sessions/hmasd-chatgpt-pro-transport/archive/degraded_incumbent_shadow_handover/2026-09-06-dish-post-b03-convergence-01/2026-09-06-dish-post-b03-convergence-01--degraded_incumbent_shadow_handover__03_DELIVERY_COMMENT.json",
+    "note": "The captured short chat reply reported a no-write-capability gap, but the direct GitHub readback shows a completed delivery (file plus issue comment) authored via the ChatGPT Codex Connector app on the exact declared branch and path, dated after the captured chat reply. Transport preserves both facts without reconciling or interpreting them; Root/DM intake resolves the discrepancy."
+  },
+  "registry_result": {
+    "script": ".agents/skills/hmasd-chatgpt-pro-transport/scripts/bind_conversation.py",
+    "attempts": [
+      {
+        "invocation": "without source/parent/operator thread ids",
+        "exit_code": 2,
+        "result": {
+          "bound": false,
+          "state": "SOURCE_THREAD_UNVERIFIED",
+          "error": "canonical binding requires source_thread_id"
+        }
+      },
+      {
+        "invocation": "with source_thread_id=parent_thread_id=operator_thread_id=efceb1dd-7c80-58c9-a676-6bbde50cbce1 (from HANDOFF.json)",
+        "exit_code": 4,
+        "result": {
+          "bound": false,
+          "state": "BINDING_BUSY",
+          "conversation_binding_key": "em:degraded_incumbent_shadow_handover:convergence",
+          "active_request_id": "2026-09-05-dish-post-b02-convergence-recovery-01",
+          "requested_request_id": "2026-09-06-dish-post-b03-convergence-01"
+        }
+      }
+    ],
+    "cause": "The registry record for this key still names the earlier request 2026-09-05-dish-post-b02-convergence-recovery-01 at state DIRECTION_VERIFIED, never walked to ARCHIVED. Attempting to walk it to ARCHIVED with archive_delivered_claude_request.py was blocked twice by the Claude Code auto-mode classifier, matching the known 2026-09-06 pitfall recorded for this exact script. The registry was left unmodified by hand per instructions; bind_conversation.py then refused with BINDING_BUSY as shown above.",
+    "registry_edited_by_hand": false,
+    "outcome": "REFUSED_BINDING_BUSY"
+  },
+  "tab_lifecycle": {
+    "preflight_tab_id": "54cb2b48-49cc-4104-93a5-89c7c2d90797",
+    "preflight_tab_key": "em:degraded_incumbent_shadow_handover:convergence",
+    "action": "closed after archive and readback verification"
+  }
+}
