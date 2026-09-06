@@ -1,0 +1,39 @@
+{
+  "question": "是否接受已按委托选择的一次独立训练种子跟进，用相同完整比较检验七机恢复学习读数？",
+  "changes_if_approved": [
+    {
+      "target": "VNFC B01 独立种子跟进卡",
+      "from": "一个有效完整训练种子结果；未选择更多训练",
+      "to": "只增加一个独立训练种子对与新评价面板，保持两学习臂、固定控制器、完整曝光及终点；单次900秒并计入原累计预算"
+    }
+  ],
+  "if_refused": "在下个干净边界应用所有者纠正，不再启动未接受的跟进；已经产生的正负结果、故障和原科学解释均保留，不擅自关闭方向。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/variable_n_fleet_churn/VNFC_N7_DIRECT_RETURN_B01_RESULT_INTAKE_20260905.md",
+      "quote": "MAPR gained .204128 and DIRECT .188659 in aggregate R_fail_60, each above the card's descriptive .10 MEI.",
+      "why": "已有一次真实学习与完整原生测量，适合以小规模独立训练跟进观察变化，不必先做精确上界或机制证明。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/variable_n_fleet_churn/VNFC_N7_DIRECT_RETURN_B01_RESULT_INTAKE_20260905.md",
+      "quote": "MAPR's final advantage over DIRECT was only .015469; both learners remained below fixed BCRH on recovery and the other native service metrics.",
+      "why": "不能把共同学习收益宣传为MAPR特有优势；新种子可能反向，固定控制器仍是强反证。"
+    }
+  ],
+  "uncertainty": [
+    "一个有效训练种子不能估计训练随机性总体的不确定性；新增一个种子后仍是探索。",
+    "新评价面板也有抽样变化，两种变化不能仅由两个结果唯一分解。",
+    "旧HMAC和段错误根因仍未知；本轮成功不证明以后不会复发。",
+    "已实际完成388.75秒，完整最大实测单元投影431.17秒仍不是保证上界。"
+  ],
+  "cost": {
+    "compute": "仅一次完整跟进，最多900 wall秒；原正式累计已用476.61秒，最坏累计1376.61秒，仍在原2700秒内。无新诊断、调参或烟雾检查。",
+    "owner_time": "无需逐项批准；可异步接受、拒绝或修改，循环依据现有委托继续。",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing；仅正常提交推送、同节点即时资源准入与既有CM执行。"
+  },
+  "verdict_text": "保持现有完整比较，只追加一个独立训练种子对；单次900秒，并计入原2700秒累计预算，保留全部正负结果。",
+  "source": "docs/research/candidates/variable_n_fleet_churn/VNFC_N7_DIRECT_RETURN_B01_RESULT_INTAKE_20260905.md"
+}
