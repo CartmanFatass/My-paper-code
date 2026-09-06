@@ -29,7 +29,21 @@ DM routes recorded below.
 
 ## Current observation snapshot
 
-Current snapshot: two tracker-owned accepted live handles are running. N3 B02 CONTROL
+### Owner-paused handoff — 2026-09-06
+
+Root requested a safe-boundary pause. One read-only reconciliation found **zero live or unknown
+tracker-owned accepted handles**. The latest accepted handles below are terminal, with their
+durable supervisor references retained for later audit: CBSC B03 STRUCT
+`cbsc-direct-b03-65bf24865-struct` exit `0` / PID `1933614`; VNFC seed02
+`vnfc_b01_seed02_33e08f440_20260905_01` exit `0` / PID `1933183`; N3 B02 forecast package
+`n3_b02_forecast_package_20260905` exit `0` / PID `1819511`; VSP03 B01 seed3
+`vsp03-b01-seed3-r01-20260905` exit `0` / PID `1932339`; and VSPC1 B01 seed2 GENERIC
+`vspc1_b01_generic_s2_e2f00991f_01` exit `0` / PID `1841480`. All reported inactive tmux.
+Their logs remain at `/home/wu/.agent-tasks/<accepted-handle>/task.log`; detailed receipts and
+outputs remain at the previously recorded remote paths. No process is relaunched, retried, or
+scheduled by this tracker. Owner-directed resume requires a new accepted-handle handoff.
+
+Historical snapshot before the owner pause: N3 B02 CONTROL
 `n3_b02_control_20260905` on `wsl_4070`, SHA
 `47f81c15c536c2b4c4ee463eaa7a35f720ec08c7`, PID `1707289`, and cwd
 `/home/wu/hmasd-worktrees/n3-b02-20260905`; it has active tmux and passed fresh admission with
