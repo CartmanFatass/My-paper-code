@@ -1,0 +1,4 @@
+/TASK.md text eol=lf
+/archive/* -text
+/ISSUE_SNAPSHOT.json -text
+/PROSPECTIVE_WORK.json -text
