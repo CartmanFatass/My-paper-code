@@ -1,6 +1,6 @@
 # CBSC direct-return B02: CM result
 
-Date: 2026-09-05. Status: source independently reviewed; the unique engineering check passed; formal calls pending.
+Date: 2026-09-05. Status: source independently reviewed; the unique engineering check passed; RAW complete; STRUCT pending.
 
 ## Frozen engineering contract
 
@@ -138,3 +138,22 @@ Multiplying only these components by 48 gives about 54.40/44.98 seconds; this is
 not a complete arm forecast, since formal host construction, eval32, checkpoint
 I/O and second-arm pairing differ in size. The source-backed complete cost law
 and 600-second full-call caps remain authoritative. No speedup is claimed.
+
+## RAW complete-call observation
+
+After check evidence was committed/pushed at 352ead180, the fixed RAW command
+was accepted as cbsc-direct-b02-2c9254f70-raw on the same exact detached source.
+Tracker observed exit 0, PID 1706097, inactive tmux and 80-second supervisor duration.
+External complete wall is **79.69 s**, peak RSS **575780 KiB**, within 600 s.
+Fresh physical/effective admission was **15678758912 bytes** at
+2026-09-06 00:04:29.065407 UTC. In-process wall through primary readback is
+78.701943829 s; it is separate from the complete external measurement.
+
+CM read the raw summary and all 48 update JSONL records: actual 384 sequential
+training episodes 0..383, 58368 transitions, 9216 decisions, 48 updates and
+768 loss/Adam records; 128 evaluation executions/19456 transitions, all 32
+24-action records at each of 0/12/24/48. CPU FP32 and one Torch thread are recorded.
+Parameter movement L2 is 5.8794484, relative 0.19646985. RAW mean returns at the
+four fixed checkpoints are 0.6875, 10.7125, 10.7125, 10.7125. All values are retained;
+this single arm is not a paired STRUCT effect. The fixed second arm proceeds
+because RAW's primary path completed, independent of the score magnitude.
