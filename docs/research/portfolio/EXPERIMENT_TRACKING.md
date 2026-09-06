@@ -29,7 +29,13 @@ DM routes recorded below.
 
 ## Current observation snapshot
 
-Current snapshot: there are **zero** tracker-owned accepted live handles. VNFC formal B01
+Current snapshot: one tracker-owned accepted live handle is running: CBSC B02 RAW formal
+`cbsc-direct-b02-2c9254f70-raw` on `wsl_4070`, SHA
+`2c9254f70c3a8ef9d95ac6dc3f6585382304be41`, PID `1706097`, and cwd
+`/home/wu/hmasd-worktrees/cbsc-direct-return-b02-2c9254f70-20260905`. Same-handle observation
+found `running`, exit `null`, active tmux, and passed fresh admission with physical/effective
+availability `15678758912` bytes. The bound is `600s`; terminal, loss, or bound facts go
+directly to CBSC CM and current DM. VNFC formal B01
 `vnfc_b01_formal_33e08f440_20260905_01` on `wsl_4070`, SHA
 `33e08f440c2117dcfd9457d825f42fef7b38ccd7`, PID `1702670`, and cwd
 `/home/wu/hmasd-worktrees/vnfc_b01_formal_33e08f440_01` failed exit `139` after `88s`, with
