@@ -18,7 +18,8 @@ object), FRRIE DM
 `/root/dm_amx_frrie_a01_resume` with CM
 `/root/dm_amx_frrie_a01_resume/cm_am_frrie_a01_diagnostic`, N3 DM
 `/root/dm_amx_n3_approved` with CM `/root/dm_amx_n3_approved/cm_am_n3_a05_approved`,
-and CBSC DM `/root/dm_amx_cbsc_approved` (its CM is supplied only with an actual handoff).
+and CBSC post-repair DM `/root/dm_amx_cbsc_post_repair` with CM
+`/root/dm_amx_cbsc_approved/cm_am_cbsc_approved_repair`.
 Current VSP03 routing is DM `/root/dm_amx_k1_vsp03_design` with CM
 `/root/dm_amx_k1_vsp03_design/cm_am_vsp03_b01`; VSPC1 routing is DM
 `/root/dm_amx_k4_vspc1_design` with CM `/root/dm_amx_k4_vspc1_design/cm_am_vspc1_b01`.
@@ -48,6 +49,10 @@ same-step reproduction `cbsc-approved-repro-8003b96bd-03` is also terminal: exit
 pytest with the bounded log recording a `TypeError` at `token.py:251`. The reviewer, CBSC CM,
 and CBSC DM were directly notified; raw collection remains with CM. This too is a process fact
 only and creates no restart or fourth formal run. FRRIE A01 and
+CBSC B02 check `cbsc-direct-b02-2c9254f70-check` is terminal and passed to its current CM/DM:
+exit `0`, PID `1705664`, inactive tmux, supervisor duration `7s`, and fresh-admission focused
+pytest `1 passed` in `6.18s` (two warnings). This is a process fact only, and it neither
+interprets a result nor authorizes a restart. FRRIE A01 and
 VSP03 B01 seed1 `vsp03-b01-seed1-r01-20260905` are terminal and passed to their CM/DM for
 collection/verification: exit `0`, PID `1704022`, inactive tmux, fresh effective memory
 `15388168192` bytes, supervisor duration `3s`, runner whole wall `2.364870157005498s`, and
