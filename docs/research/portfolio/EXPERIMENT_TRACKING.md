@@ -18,13 +18,65 @@ object), FRRIE DM
 `/root/dm_amx_frrie_a01_resume` with CM
 `/root/dm_amx_frrie_a01_resume/cm_am_frrie_a01_diagnostic`, N3 DM
 `/root/dm_amx_n3_approved` with CM `/root/dm_amx_n3_approved/cm_am_n3_a05_approved`,
-and CBSC DM `/root/dm_amx_cbsc_approved` (its CM is supplied only with an actual handoff).
-FSD, FRRIE, and N3 ACKed direct delivery; the FRRIE and N3 CMs also ACKed tracker adoption.
-These paths apply only to new handles and do not revive historical DM routes recorded below.
+and CBSC post-repair DM `/root/dm_amx_cbsc_post_repair` with CM
+`/root/dm_amx_cbsc_approved/cm_am_cbsc_approved_repair`.
+Current VSP03 routing is DM `/root/dm_amx_k1_vsp03_design` with CM
+`/root/dm_amx_k1_vsp03_design/cm_am_vsp03_b01`; VSPC1 routing is DM
+`/root/dm_amx_k4_vspc1_design` with CM `/root/dm_amx_k4_vspc1_design/cm_am_vspc1_b01`.
+FSD, FRRIE, N3, VSP03, and VSPC1 ACKed direct delivery; the FRRIE, N3, VSP03, and VSPC1 CMs
+also ACKed tracker adoption. These paths apply only to new handles and do not revive historical
+DM routes recorded below.
 
 ## Current observation snapshot
 
-Current snapshot: there are **zero** tracker-owned accepted live handles. CBSC formal-only
+### Owner-paused handoff — 2026-09-06
+
+Root requested a safe-boundary pause. One read-only reconciliation found **zero live or unknown
+tracker-owned accepted handles**. The latest accepted handles below are terminal, with their
+durable supervisor references retained for later audit: CBSC B03 STRUCT
+`cbsc-direct-b03-65bf24865-struct` exit `0` / PID `1933614`; VNFC seed02
+`vnfc_b01_seed02_33e08f440_20260905_01` exit `0` / PID `1933183`; N3 B02 forecast package
+`n3_b02_forecast_package_20260905` exit `0` / PID `1819511`; VSP03 B01 seed3
+`vsp03-b01-seed3-r01-20260905` exit `0` / PID `1932339`; and VSPC1 B01 seed2 GENERIC
+`vspc1_b01_generic_s2_e2f00991f_01` exit `0` / PID `1841480`. All reported inactive tmux.
+Their logs remain at `/home/wu/.agent-tasks/<accepted-handle>/task.log`; detailed receipts and
+outputs remain at the previously recorded remote paths. No process is relaunched, retried, or
+scheduled by this tracker. Owner-directed resume requires a new accepted-handle handoff.
+
+Historical snapshot before the owner pause: N3 B02 CONTROL
+`n3_b02_control_20260905` on `wsl_4070`, SHA
+`47f81c15c536c2b4c4ee463eaa7a35f720ec08c7`, PID `1707289`, and cwd
+`/home/wu/hmasd-worktrees/n3-b02-20260905`; it has active tmux and passed fresh admission with
+physical/effective availability `15308656640` bytes. VNFC B01 formal-02
+`vnfc_b01_formal_33e08f440_20260905_02` is on `wsl_4070`, SHA
+`33e08f440c2117dcfd9457d825f42fef7b38ccd7`, PID `1784006`, and cwd
+`/home/wu/hmasd-worktrees/vnfc_b01_formal_33e08f440_02`; it has active tmux and passed fresh
+admission with physical/effective availability `15294115840` bytes. Its cap is `2612s` and
+terminal, loss, or bound facts go to VNFC CM, DM, and Root. CBSC B02 STRUCT formal
+`cbsc-direct-b02-2c9254f70-struct` is on `wsl_4070`, SHA
+`2c9254f70c3a8ef9d95ac6dc3f6585382304be41`, PID `1707212`, and cwd
+`/home/wu/hmasd-worktrees/cbsc-direct-return-b02-2c9254f70-20260905` finished exit `0`, with
+inactive tmux and supervisor duration `91s`. Fresh admission passed; bounded evidence records
+48 rollout updates, 768 Adam steps, primary-readback wall `89.94678430000204s`, and peak RSS
+`591798272` bytes. CBSC CM/current DM received the direct terminal facts for collection and
+intake. All observations remain process facts only. CBSC B02 RAW formal
+`cbsc-direct-b02-2c9254f70-raw` on `wsl_4070`, SHA
+`2c9254f70c3a8ef9d95ac6dc3f6585382304be41`, PID `1706097`, and cwd
+`/home/wu/hmasd-worktrees/cbsc-direct-return-b02-2c9254f70-20260905` finished exit `0`, with
+inactive tmux and supervisor duration `80s`. Fresh admission passed; bounded evidence records
+48 rollout updates, 768 Adam steps, primary-readback wall `78.70194382900081s`, and peak RSS
+`587796480` bytes. Direct terminal notices went to CBSC CM/current DM for collection and intake.
+N3 B02 focused `n3_b02_focused_20260905` also finished exit `0`, PID `1706554`, with inactive
+tmux, fresh effective memory `15305568256` bytes, supervisor duration `7s`, and `5` tests passed
+in `6.00s`; its CM/current DM received the direct terminal notice. These are process facts only;
+neither result authorizes a restart or scientific interpretation. VNFC formal B01
+`vnfc_b01_formal_33e08f440_20260905_01` on `wsl_4070`, SHA
+`33e08f440c2117dcfd9457d825f42fef7b38ccd7`, PID `1702670`, and cwd
+`/home/wu/hmasd-worktrees/vnfc_b01_formal_33e08f440_01` failed exit `139` after `88s`, with
+inactive tmux and a bounded supervisor log ending in a monitored-command core dump after progress
+through round `10`. Direct terminal notices went to VNFC CM `/root/cm_am_vnfc_e01`, DM
+`/root/dm_am_vnfc_direct_b`, and Root for collection/reproduction. This is a process fact only,
+and no retry or scientific inference follows. CBSC formal-only
 `cbsc-approved-profile-8003b96bd-02` on `wsl_4070`, SHA
 `8003b96bd79910864e9372ad6f1ea81f1c80520c`, PID `1692419`, and cwd
 `/home/wu/hmasd-worktrees/cbsc-approved-repair-8003b96bd-20260905` failed exit `139` after
@@ -37,6 +89,22 @@ same-step reproduction `cbsc-approved-repro-8003b96bd-03` is also terminal: exit
 pytest with the bounded log recording a `TypeError` at `token.py:251`. The reviewer, CBSC CM,
 and CBSC DM were directly notified; raw collection remains with CM. This too is a process fact
 only and creates no restart or fourth formal run. FRRIE A01 and
+CBSC B02 check `cbsc-direct-b02-2c9254f70-check` is terminal and passed to its current CM/DM:
+exit `0`, PID `1705664`, inactive tmux, supervisor duration `7s`, and fresh-admission focused
+pytest `1 passed` in `6.18s` (two warnings). This is a process fact only, and it neither
+interprets a result nor authorizes a restart. FRRIE A01 and
+VSP03 B01 seed1 `vsp03-b01-seed1-r01-20260905` are terminal and passed to their CM/DM for
+collection/verification: exit `0`, PID `1704022`, inactive tmux, fresh effective memory
+`15388168192` bytes, supervisor duration `3s`, runner whole wall `2.364870157005498s`, and
+peak RSS `484868096` bytes. The supervisor records `complete` and `within_cap`; this remains
+a process observation only and does not itself provide scientific interpretation or authorize a
+restart. VSPC1 B01 serial FACTOR `vspc1_b01_factor_s0_e7e574b44_01` and GENERIC
+`vspc1_b01_generic_s0_e7e574b44_01` are terminal and passed to their CM/DM: both exit `0` with
+inactive tmux; FACTOR PID `1704221`, fresh physical/effective memory `15404367872` bytes,
+supervisor duration `2s`, runner wall `1.479294378994382s`; GENERIC PID `1704797`, fresh
+physical/effective memory `15411888128` bytes, supervisor duration `4s`, runner wall
+`3.1904162949940655s`. These are process facts only and imply no restart or scientific
+interpretation. FRRIE A01 and
 the FSD E4 technical-test, three calibration, and three formal-census handles are terminal and
 closed to repeat reminders. FSD's DM ACKed all three formal census terminal facts after CM
 technical acceptance; FRRIE's DM ACKed A01, and its CM has collected the original evidence.
