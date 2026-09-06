@@ -1,0 +1,67 @@
+{
+  "observed_at": "2026-09-06T01:46:03.681386+00:00",
+  "registry_sha256": "bd9bfd89ac96cefaa46223963b6add6824da5b9a83b0d8e10af33bba9f386f0a",
+  "binding": {
+    "conversation_binding_key": "em:degraded_incumbent_shadow_handover:convergence",
+    "conversation_id": "6a9bec54-df00-83e8-9840-46440458f316",
+    "provider_url": "https://chatgpt.com/c/6a9bec54-df00-83e8-9840-46440458f316",
+    "request_id": "2026-09-05-dish-post-a05-convergence-01",
+    "state": "ARCHIVED",
+    "send_click_count": 1
+  },
+  "failed_request": {
+    "request_id": "2026-09-05-dish-post-b02-convergence-01",
+    "conversation_id": "6a9cbbcd-4da8-83e8-a802-8b670b436462",
+    "state": "SENT_INPUT_MISMATCH",
+    "send_click_count": 1,
+    "archive_status": "ARCHIVED_MISMATCH",
+    "response_sha256": "4177e84dfdf5c112f38598c8cbbef3030c80e95dad7798613e256d203754d8ee",
+    "github_roundtrip_report": {
+      "branch": "codex/pro-dish-b02-convergence-20260905",
+      "base_sha": "46d9071378a4272e9e1e8ec64d0c0d5abdb9088f",
+      "response_file_created": false,
+      "issue_comment_created": false,
+      "delivery_tool_blocker": true,
+      "reported_gap": "No write-capable GitHub operation; response path 404 and Issue #4 has no comments.",
+      "scientific_decision_formed": false
+    }
+  },
+  "new_recovery_key_found_in_registry": false,
+  "github": {
+    "issue_comments": {
+      "argv": [
+        "gh",
+        "api",
+        "repos/CartmanFatass/My-paper-code/issues/4/comments"
+      ],
+      "exit_code": 0,
+      "stdout": "[]",
+      "stderr": ""
+    },
+    "output_branch": {
+      "argv": [
+        "gh",
+        "api",
+        "repos/CartmanFatass/My-paper-code/git/ref/heads/codex/pro-dish-b02-convergence-20260905"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"ref\":\"refs/heads/codex/pro-dish-b02-convergence-20260905\",\"node_id\":\"REF_kwDOO8trO9oAMnJlZnMvaGVhZHMvY29kZXgvcHJvLWRpc2gtYjAyLWNvbnZlcmdlbmNlLTIwMjYwOTA1\",\"url\":\"https://api.github.com/repos/CartmanFatass/My-paper-code/git/refs/heads/codex/pro-dish-b02-convergence-20260905\",\"object\":{\"sha\":\"46d9071378a4272e9e1e8ec64d0c0d5abdb9088f\",\"type\":\"commit\",\"url\":\"https://api.github.com/repos/CartmanFatass/My-paper-code/git/commits/46d9071378a4272e9e1e8ec64d0c0d5abdb9088f\"}}",
+      "stderr": ""
+    },
+    "response_target": {
+      "argv": [
+        "gh",
+        "api",
+        "repos/CartmanFatass/My-paper-code/contents/docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260905_post_b02_convergence/archive/RESPONSE.md?ref=codex%2Fpro-dish-b02-convergence-20260905"
+      ],
+      "exit_code": 1,
+      "stdout": "{\"message\":\"Not Found\",\"documentation_url\":\"https://docs.github.com/rest/repos/contents#get-repository-content\",\"status\":\"404\"}",
+      "stderr": "gh: Not Found (HTTP 404)\n"
+    }
+  },
+  "task_sha": "d41c8a8c560a6768750f479e9efbfcc68e139a39",
+  "task_sha256": "1be6c595fafae636d543f3da55e47fce566904bb8778820f303bb7d229c0d42b",
+  "provider_prompt_sha256": "4c729a1bd2b7e387f84ac7f3e5b747031a3d125554fff28353d95a369c27ffff",
+  "provider_prompt_equals_original": true,
+  "limitations": "Local readback precedes dispatch. Transport must freshly inspect the actual registry, tab URL, delivery and per-request send state before its single provider Send."
+}
