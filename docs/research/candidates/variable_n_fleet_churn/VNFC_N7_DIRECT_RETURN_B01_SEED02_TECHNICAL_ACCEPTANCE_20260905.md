@@ -76,3 +76,5 @@ claim. Previous HMAC failure, SIGSEGV and recovered core remain preserved and un
 success does not retrospectively resolve or erase them.
 
 CM read-only arithmetic over every saved episode reconstructed all three service endpoints and J_ext, counted1,090,560 ticks and zero native flags, and reconciled every round's32 optimizer steps. No discrepancy was found; computed_readback.json records this narrow check. It is not a model replay or universal numerical-equivalence claim.
+
+Independent saved-output reviewer reconciled all episode endpoint/reward arithmetic, pairing, five contrasts and aggregate/zone statistics, balanced exposure, six checkpoint records, source/seeds and full time/log; no discrepancies. The reviewer ran no experiment, test or replay. Checkpoint metadata was checked; remote checkpoint bytes were not independently reopened.
