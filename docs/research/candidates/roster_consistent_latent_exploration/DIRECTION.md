@@ -157,3 +157,27 @@ TBCFV native backend builds only through an MSVC pipeline; the CM objective
 (`RCLE_TBCFV_B01_CM_OBJECTIVE_20260906.md`) adds a reviewed POSIX build branch and a thin two-arm
 entry that bypasses the twenty-block authority chain. Predecessor B1/B2/CPC polarity does not
 transfer; H_A1 stays unidentified.
+
+## First TBCFV B: persist versus rekey identical at 200 fixed-norm updates — 2026-09-06
+
+`RCLE-TBCFV-B01-PERSIST-VS-FLEX` (B/EXPLORE, card `RCLE_TBCFV_B01_PERSIST_VS_FLEX_SCIENCE_CARD_20260906.md`;
+thin entry, POSIX native build branch and executability mode by Grok Build under hub and reviewer
+review, integrated at `4d40621e0`) ran end to end on `wsl_4070`: first Linux build of the TBCFV
+backend (`g++-13`, `/fp:strict`-equivalent flags, Linux oracle 23 passed), executability 64 scripted
+episodes in 0.057 s, C1P1 62.0 s, FLEX 69.8 s, INDEPENDENT-NEAREST reference 1.5 s, all `COMPLETE`;
+pair charge 144 s of 5,400 s. Result: **`Δτ_B01 = 0.0`** (SE 0.0); τ = 40 (censored) in every one of
+the 2,048 held-out episodes of both arms; U 0.6929 / 0.7181 on the active paths in both arms; every
+per-cell mean, every paired scenario and every training-curve entry identical across arms; the
+reference row leaves far less unserved demand (U 0.233–0.336, τ=40 fractions 0.95–1.0). Read under
+card rows 3 and 4 at their extreme (inside MEI; τ almost all 40: mixed/undecided)
+(`RCLE_TBCFV_B01_RESULT_INTAKE_20260906.md`). A read-only code check explains the identity by
+construction: the treatment executed (trajectories differ at 1.4e-8) but the registered
+fixed-norm 0.0005 step bounds 200 updates to 0.1 displacement from norm 21.19, FLEX's
+zero-initialized heads receive gradient only through the ACTIVE_CONTINUATION cells, and discrete
+claims are drawn by inverse-CDF sampling against arm-independent uniforms, so no claim differed.
+The DM's primary prediction (inside-MEI, τ=40 fractions above 0.5) held at its extreme; the
+competing prediction failed; the node's "both arms may barely learn" held. Not inferred:
+equivalence, zero effect, closing RCLE, "persistent state has no value". The card's default second
+seed was not bought (it would reproduce the identity). The successor (a single-arm learning-amount
+ladder, a learner-law B, a larger-budget B01, warm-started FLEX heads, or park) is put to
+`em:roster_consistent_latent_exploration:innovator` (`pro_packets/20260906_post_b01_innovator/`).
