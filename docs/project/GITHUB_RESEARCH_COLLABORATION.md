@@ -31,20 +31,24 @@ Scientific execution proceeds independently. This pilot does not reopen VNFC's
 selected B, alter2700s, add profiling requirements, or repeat E01. Subsequent turns
 send a concise new question with relevant evidence delta, not all past discussion.
 
-## Owner-authorized file delivery mode
+## Overall cutover — OWNER_DIRECT 2026-09-05
 
-OWNER_DIRECT 2026-09-05: owner approved designing and completing this workflow and
-explicitly waived Pro review for this change. The operational design is
-[GITHUB_PRO_COLLABORATION_WORKFLOW_DRAFT.md](GITHUB_PRO_COLLABORATION_WORKFLOW_DRAFT.md).
-Its historical filename does not indicate an outstanding Pro approval. Normal
-link/file/comment/readback transport was verified; migration remains staged until
-recovery cases and the next real scientific intake have been checked. Do not invent
-another scientific request solely to test migration.
+The owner explicitly requested overall migration after successful normal delivery,
+existing-delivery reuse and conflicting-target preservation checks. All newly
+authored requests now use scoped GitHub delivery across Portfolio and every DM.
+No additional VNFC pilot or Pro review is required. Existing accepted requests finish
+in their original mode; archived history remains unchanged, and no Send is repeated.
 
-Existing requests keep their original mode. New requests may explicitly select
-`github_delivery`: committed TASK, one scoped branch response, immutable comment
-link, short Transport receipt, Root/DM direct full-file intake. Default
-`archive_attachment` stays read-only. No duplicate Send to migrate accepted work.
-Current Pro can write the tested scope; this observation is not a universal app
-permission claim. Preserve partial successes, inspect before retries and reuse
-existing files/comments; never interpret a receipt as a scientific decision.
+The operational design is [GITHUB_PRO_COLLABORATION_WORKFLOW_DRAFT.md](GITHUB_PRO_COLLABORATION_WORKFLOW_DRAFT.md),
+with this cutover superseding its former staged rollout. Root/DM authors and commits
+TASK.md with fixed source refs and a dedicated output branch/path, binds its full SHA,
+and sends the short link through Transport. Pro writes the full response and one Issue
+link comment. Transport archives short receipt links; Root/DM directly reads and
+intakes the complete response. Comments have no independently verified automatic
+wakeup; the existing singleton and heartbeat handle observation and wakeup.
+
+The renderer defaults to github_delivery. archive_attachment is only a per-request
+explicit capability fallback with fallback_reason, not the normal authoring path.
+No new permission, experiment gate, webhook, service or Pro main/code/PR merge
+privilege follows. Existing-file and conflict tests validate those observed cases;
+they do not promise atomic multi-service transactions or race-free writes.

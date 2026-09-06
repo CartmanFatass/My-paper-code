@@ -25,6 +25,9 @@ browser methods; an unavailable export or locator API is not permission to resen
 
 ## Scoped GitHub delivery — OWNER_DIRECT 2026-09-05
 
+All newly authored requests now use GitHub delivery (owner overall cutover).
+No additional VNFC trial or Pro design review is required. Keep accepted in-flight
+requests on their original route, without another Send.
 An Author handoff with `delivery_mode=github_delivery` uses the already supported
 paste transport request. Send its short fixed task link verbatim, no attachment,
 read-only preamble or copied evidence. Dispatch only a bound READY_TO_DISPATCH task;
@@ -75,7 +78,8 @@ and preserve the byte hashes and intended order where the page permits. The
 one-to-one binding-key/conversation rule still applies to the body and all
 references together.
 
-For canonical Prompt Author handoffs, `PROMPT_BODY.md` is the sole scientific
+For already accepted or explicit fallback attachment-mode Author handoffs only,
+`PROMPT_BODY.md` is the sole scientific
 attachment: its `GITHUB_EVIDENCE_MANIFEST` already contains the read-only reference
 metadata. Such a handoff must not declare, upload, or synthesize `reference_paths`.
 `scripts/validate_request.py` recognizes `source_mode=single_body_attachment`,

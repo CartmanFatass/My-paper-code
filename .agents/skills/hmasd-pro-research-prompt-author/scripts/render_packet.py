@@ -1005,10 +1005,11 @@ def main() -> int:
         data = json.loads(args.request_json.read_text(encoding="utf-8"))
         if not isinstance(data, dict):
             return fail("request JSON must be an object")
-        mode = data.get("delivery_mode", "archive_attachment")
+        mode = data.get("delivery_mode", "github_delivery")
         if mode == "github_delivery":
             result = prepare_github_delivery(data, args.project_root.resolve(), args.out_dir.resolve())
         elif mode == "archive_attachment" and "github_delivery" not in data:
+            _text(data.get("fallback_reason"), "fallback_reason")
             result = render(validate(data, args.project_root.resolve()), args.out_dir.resolve())
         else:
             raise PacketInputError("delivery mode and github_delivery fields are inconsistent")

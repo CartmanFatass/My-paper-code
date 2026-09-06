@@ -34,6 +34,7 @@ Repeated notifications reuse existing request/commit/path intake and do not run
 science again. Comments do not automatically wake Codex/Pro; existing Transport
 and heartbeat perform observation and wakeup. No webhook or service is added.
 
-Default archive_attachment remains supported and read-only. Unsent requests may
-explicitly fall back to it; accepted requests require actual-state reconciliation
+All new requests default to github_delivery. archive_attachment is a read-only
+capability fallback requiring explicit delivery_mode and nonempty fallback_reason;
+unsent requests may explicitly fall back to it; accepted requests require actual-state reconciliation
 before any new prompt. Do not regenerate a previous request to change its mode.
