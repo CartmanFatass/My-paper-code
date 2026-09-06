@@ -1,0 +1,5 @@
+Precise gap: the requested ChatGPT Codex Connector is not exposed as a callable tool in this conversation. Discovery under both Codex and ChatGPT Codex Connector returned “No tool was defined under the given paths”; plugin-directory searches exposed no matching connector action. No Codex write request could be submitted, so there is no pending operation, actual write-refusal result, commit, or comment to report. This is distinct from the read-only GitHub connector’s GET limitation.
+
+The specified target 20260906_post_a02_convergence/archive/RESPONSE.md returned 404. Branch codex/pro-dish-a02-convergence-20260906 remains at the required base a0be9f02aced95928519f61d5cd9143a68897843. Issue #4 contains only the earlier post-B02 and post-A01 deliveries, neither of which matches this round.
+
+No repository changes were made, and no current-round scientific decision was formed.

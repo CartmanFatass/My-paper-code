@@ -574,3 +574,24 @@ commands were never incorporated at admission; the training-side lag is source-s
 inference, unmeasured; B01 and A03–A05 are not invalidated; no quarantine, no "timing explains
 the null". The corrected boundary is the ordinary path from here. The next object (a learning
 comparison on the corrected interface or otherwise) goes to `em:dish:convergence`.
+
+## Post-A02 Convergence: B03 selected on the corrected boundary — 2026-09-06
+
+The complete archived post-A02 Convergence response (`pro_packets/20260906_post_a02_convergence/archive/RESPONSE.md`,
+commit `d7710921`, Issue 4 comment 5560502547; intake
+`DISH_POST_A02_CONVERGENCE_INTAKE_20260906.md`, `PRO_FINAL`) continues the first-application
+RETAIN/COPY/SHADOW exploratory family with exactly one next investment: `DISH-FORECAST-PACKAGE-B03`
+(B/EXPLORE), the B02 two-arm comparison CONTROL versus FORECAST_PACKAGE re-asked as a new object on
+the corrected ordinary renewal boundary (`3f4d447f6`, both arms), with one new paired seed 73
+(master = SHA256 of `DISH-FORECAST-PACKAGE-B03/seed/73`, hex `b938a93e…`), sixteen updates per arm,
+four final-checkpoint evaluation conditions, MEI +24 mean service ticks unchanged, B02's six-row
+reading rule, and a 1,800 s per-arm / 3,600 s summed ceiling with one shared preparation cost
+split between the arms. Not a recast; no zero-training witness of the seed-61 checkpoints; no
+held-only reference row; B02 is not "rerun as repaired" and its inside-MEI observation persists
+whatever B03 shows. The node rejected two DM formulations ("no partner co-adaptation";
+"fresh motion was never incorporated" as more than source-supported inference) and corrected the
+cost framing (B02's 337 s / 299 s are planning references, not per-arm projections). Launch
+preparation is one focused check on `wsl_4070` that also closes the Windows `test_package.py`
+collection gap; no new A. Card `DISH_FORECAST_PACKAGE_B03_SCIENCE_CARD_20260906.md`; CM objective
+`DISH_FORECAST_PACKAGE_B03_CM_OBJECTIVE_20260906.md` (Grok Build thin entry, hub review).
+R02 stays closed; B01, A01–A05 and B02's qualified readings stand; no Portfolio change.
