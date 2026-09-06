@@ -88,6 +88,13 @@ whose corrections are incorporated. No experiment was run and no scientific obje
 
 ### plans/
 
+- `CLAUDE_SUBAGENT_WORKFLOW_20260905.md` — build record of the Claude Code research workflow: the
+  Fable session as research hub (Root plus DM, two directions at a time), eleven subagents under
+  `.claude/agents/` ported from the Codex roles with Opus for code and judgment and Sonnet for
+  scouting, launch, observation and clerking, the two skills that carry the hub and transport
+  procedures, the stated deviations from the Codex topology, and the Agentify Desktop transport
+  facts with the owner actions that precede the first smoke (model-gate labels, GUI, session
+  restart).
 - `OWNER_CONSOLE_DESIGN_20260904.md` — design and build record of the owner console
   (`tools/owner_console/`): Codex writes one JSON item per thing needing the owner's eye, the
   local page renders them as grading cards (options with ★ recommended and ✓ executed, free
