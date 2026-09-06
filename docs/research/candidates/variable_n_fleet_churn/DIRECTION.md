@@ -27,6 +27,28 @@ comparisons remain historical evidence; this new B does not identify their uniqu
 
 ## Current scientific disposition
 
+### Convergence pause of the B01 comparison family — 2026-09-06
+
+The [post-deployment-mode Convergence decision](pro_packets/20260906_post_depmode_convergence/archive/RESPONSE.md)
+(`PRO_FINAL`, one Send, archive sha256 `956965fe…`, taken in by
+[this intake](VNFC_POST_DEPMODE_CONVERGENCE_INTAKE_20260906.md)) pauses the current B01
+N7 direct-return comparison family: the pursuit of a comparative advantage among MAPR-4 and
+DIRECT-SET-AR on the fixed two-zone single-loss host with public actor inputs, unshaped
+`J_ext`, endpoint GAE/PPO and the 64-round configuration, and any same-configuration
+repetition meant only to rescue the small observed separation. No new training, no
+existing-record analysis and no third recast is selected; the deployment-mode sub-question is
+closed at branch 3. The accepted ground is the absence of a discriminating signal that would
+justify more of the same work; the rejected grounds are the missing headroom record and the
+lowest sequencing position, which are diagnostic and scheduling facts, not scientific
+negatives. The pause is reversible and narrow: it does not close N7 learning, shared-policy
+recovery after membership loss, or the direction; B has no consumption state; every B01,
+deployment-mode and historical result stands. Reopening needs a new learning proposal with one
+named information, representation, credit or optimization intervention, its full chain and a
+real-training comparator, or a concrete fact threatening reward, information, training or the
+primary measurement. Cost record: B01's 2,700 s is the object's cumulative total, not per
+arm; cumulative 827.76 s at the runner boundary and 828.98 s at the outer boundary. Lifecycle,
+priority and the two recasts are unchanged; VNFC leaves the hub's working set.
+
 ### Deployment-mode evaluation closed and next direction question — 2026-09-06
 
 The sole next observation selected by the two-seed Convergence decision is complete:

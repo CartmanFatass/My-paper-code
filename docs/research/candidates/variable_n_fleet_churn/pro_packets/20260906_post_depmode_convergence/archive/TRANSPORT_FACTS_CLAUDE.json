@@ -1,0 +1,78 @@
+{
+  "workflow_node": "em_convergence",
+  "conversation_binding_key": "em:variable_n_fleet_churn:convergence",
+  "direction_id": "variable_n_fleet_churn",
+  "request_id": "2026-09-06-vnfc-post-depmode-convergence-01",
+  "mode": "scientific",
+  "conversation_id": "6a9c674e-6eb8-83e8-b19f-06cb6f3ebe08",
+  "conversation_url": "https://chatgpt.com/c/6a9c674e-6eb8-83e8-b19f-06cb6f3ebe08",
+  "tab_id": "c141303d-0b20-4e4d-8477-3a6b1038878a",
+  "tab_key": "hmasd-vnfc-convergence",
+  "tab_origin": "agent",
+  "matched_product_model": "Latest",
+  "matched_reasoning_effort": "Pro",
+  "reasoning_effort_evidence": {
+    "slider_owner": "Power",
+    "value": 4,
+    "max": 4,
+    "selection_method": "already_selected_exact_reasoning_effort"
+  },
+  "product_model_evidence": {
+    "matched_label": "Latest",
+    "selection_method": "selected_product_menuitemradio_observed",
+    "gpt6_astra_probe_result": "chatgpt_product_model_unavailable_or_unselected"
+  },
+  "prompt_file": "temp/sessions/hmasd-chatgpt-pro-transport/archive/variable_n_fleet_churn/2026-09-06-vnfc-post-depmode-convergence-01/2026-09-06-vnfc-post-depmode-convergence-01--variable_n_fleet_churn__00_PROMPT.md",
+  "prompt_sha256": "1d05cba2690e3fb29465f6cd1964a23b82ff4108efb35dbce93fb21a0b2ff93e",
+  "prompt_bytes": 638,
+  "send_evidence": {
+    "operation_id": "b6a94d68-7702-4ad4-91da-ca01d8746f28",
+    "idempotency_key": "2026-09-06-vnfc-post-depmode-convergence-01",
+    "send_attempted": true,
+    "send_attempted_at_epoch_ms": 1788701355624,
+    "first_send_call_error": "review_user_message_content_mismatch",
+    "first_send_call_error_note": "transient; not a second send; resolved on immediate verifyExisting=true observation",
+    "provider_user_message_id": "09582773-8628-4fd6-b0cc-d963309d7eec",
+    "provider_assistant_message_id": "e65cd0c3-5ed8-4de6-a90a-39ed92a3e34f",
+    "send_click_count": 1,
+    "observed_conversation_id": "6a9c674e-6eb8-83e8-b19f-06cb6f3ebe08",
+    "observed_conversation_url": "https://chatgpt.com/c/6a9c674e-6eb8-83e8-b19f-06cb6f3ebe08"
+  },
+  "wait_status": "COMPLETE",
+  "short_receipt": {
+    "path": "temp/sessions/hmasd-chatgpt-pro-transport/archive/variable_n_fleet_churn/2026-09-06-vnfc-post-depmode-convergence-01/2026-09-06-vnfc-post-depmode-convergence-01--variable_n_fleet_churn--attempt-01__02_RESPONSE.md",
+    "sha256": "5ce945a5b13766e2597615bdc0a85e6cd293b8ad1ed8e01887ddb5f0c540ec5e",
+    "size_bytes": 45,
+    "projection": "exact"
+  },
+  "github_delivery": {
+    "branch": "codex/pro-vnfc-depmode-convergence-20260906",
+    "base_sha": "04db4a5a74e69e0c76f5b9aa21eb1ba4aad5f111",
+    "commit_sha": "7c53449e0753432aabd15742ece9257af0403442",
+    "committed_at": "2026-09-06T13:42:46Z",
+    "response_path": "docs/research/candidates/variable_n_fleet_churn/pro_packets/20260906_post_depmode_convergence/archive/RESPONSE.md",
+    "response_git_blob_sha": "69936577fff4a793b265fe2ff66ce0717772cd53",
+    "response_bytes": 30056,
+    "full_response_archive_path": "temp/sessions/hmasd-chatgpt-pro-transport/archive/variable_n_fleet_churn/2026-09-06-vnfc-post-depmode-convergence-01/GITHUB_RESPONSE.md",
+    "full_response_sha256": "956965fe9e37109f3b1f1c33619ff65a6a09fce34b95b4c5841e541568dd6c5a",
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/1",
+    "issue_comment_count_before_readback_preconditions": 3,
+    "issue_comment_count_after_delivery": 4,
+    "delivery_comment_id": 5559622759,
+    "delivery_comment_html_url": "https://github.com/CartmanFatass/My-paper-code/issues/1#issuecomment-5559622759",
+    "delivery_comment_created_at": "2026-09-06T13:44:16Z",
+    "delivery_comment_author": "CartmanFatass",
+    "delivery_comment_archive_path": "temp/sessions/hmasd-chatgpt-pro-transport/archive/variable_n_fleet_churn/2026-09-06-vnfc-post-depmode-convergence-01/DELIVERY_COMMENT.json"
+  },
+  "registry_bind": {
+    "result": "bound",
+    "idempotent": false,
+    "new_round": true,
+    "state_after_bind": "DIRECTION_VERIFIED"
+  },
+  "tab_lifecycle": "CLOSED_PENDING_STEP_6",
+  "timestamps": {
+    "preflight_completed_at_epoch_ms_approx": 1788701200000,
+    "send_verify_observed_at_epoch_ms": 1788702943358
+  }
+}

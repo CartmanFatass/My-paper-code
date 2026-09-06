@@ -1,0 +1,107 @@
+{
+  "id": "20260906-dish-001",
+  "created": "2026-09-06T07:18:20-07:00",
+  "direction": "degraded_incumbent_shadow_handover",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "DISH A02 更新时机修正卡冻结（Python 边界，当前倒计时作为 renew，同两窗口验收）",
+  "context": "Pro Convergence（PRO_FINAL，2026-09-06）选定的后继：在普通 NativeBatch 观察构造中把策略消费的 renew 改为「当前 lane 倒计时==0」，原始已完成转移标志另存；不改原生 ABI、奖励、信息、学习器；用同一 seed-61 检查点在 A01 的两个 32 tick 窗口做验收：期望 12 次匹配更新、52 次匹配非更新、0 次错位，且每次采纳的持有指令等于原生对该 tick 发出指令的投影。120 秒总上限，零训练。DM 预测第一分支；欢迎填写你的预测。实现路由 Grok Build，Opus 审阅。",
+  "options": [
+    {
+      "key": "a",
+      "label": "冻结此卡并交 CM 实现（推荐）",
+      "consequence": "修正普通决策边界并跑两窗口验收；验收后写 B01/B02 限定性重新解读 intake；不重训、不改 B02。"
+    },
+    {
+      "key": "b",
+      "label": "不修正，只按源码推断重新解读 B01/B02",
+      "consequence": "更便宜，但测得的动作交付缺陷仍在，后续任何学习器仍跑在晚一拍的路径上。"
+    },
+    {
+      "key": "c",
+      "label": "修正与新 B 一起买",
+      "consequence": "把未验收的接口行为与新学习投入混在一起；Pro 上一轮已要求先经原生行为验证修正。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "Pro 已作出该方向层决定；修正是对 A01 直接测得缺陷的有界干预，验收在同一窗口、零训练、120 秒内完成。",
+  "evidence": [
+    "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_RENEWAL_BOUNDARY_A02_CORRECTION_SCIENCE_CARD_20260906.md",
+    "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_POST_A01_CONVERGENCE_INTAKE_20260906.md",
+    "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260906_post_a01_convergence/archive/RESPONSE.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-06.md#L17",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否冻结 DISH 后继对象「DISH-RENEWAL-BOUNDARY-A02-CORRECTION」：在 Python 普通决策边界把策略消费的 renew 标志改为「当前原生倒计时为 0」，保留原始已完成转移标志为独立字段，不改原生 ABI、奖励、信息与学习器；用同一检查点在 A01 的两个 32 tick 窗口做一次原生采纳验收观察（零训练，120 秒总上限），并交 CM（Grok Build + Opus 审阅）实现？",
+    "changes_if_approved": [
+      {
+        "target": "experiments/candidates/degraded_incumbent_shadow_handover_rbhr_r06/production_backend.py 普通 NativeBatch 观察构造",
+        "from": "observation['renew'] = 上一转移的原生标志（晚一拍）",
+        "to": "observation['renew'] = 当前 lane 倒计时==0；原始标志另存 renew_completed；prepared/B01/clone 路径不变"
+      },
+      {
+        "target": "docs/research/candidates/degraded_incumbent_shadow_handover/ 新科学卡、CM 目标与后续重新解读 intake",
+        "from": "Pro 已选定但未冻结的修正对象",
+        "to": "冻结的 A/RECON 修正对象；验收后写 B01/B02 限定性重新解读 intake（不改写原始结果）"
+      },
+      {
+        "target": "DISH 新增预算",
+        "from": "无",
+        "to": "最多 120 秒完整调用（含构建、聚焦回归测试、两窗口、发布）"
+      },
+      {
+        "target": "方向生命周期 / 优先级 / B02 结果 / N3 其他成员",
+        "from": "ACTIVE，CONTINUE",
+        "to": "不变"
+      }
+    ],
+    "if_refused": "对象保持为 Pro 已选定但未执行的记录；不做本地修正、不重训、不重复 A01；方向在干净边界停车，下一步仍需通过同一 Convergence 节点。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260906_post_a01_convergence/archive/RESPONSE.md",
+        "quote": "Continue the existing first-application-valid RETAIN/COPY/SHADOW exploratory family through one bounded A/RECON ordinary-renewal interface correction and native acceptance observation. Do not retrain, scale B02, change its forecast objective, or reopen its result rule.",
+        "why": "这是本节点完整、已归档、符合规范的 PRO_FINAL 决定；卡只是把它冻结为可执行对象。"
+      },
+      {
+        "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_RENEWAL_BOUNDARY_A01_RESULT_INTAKE_20260905.md",
+        "quote": "At every native admission tick the policy consumed renew = 0, copied the held command and emitted [0, 0, 0, 0]",
+        "why": "A01 直接测得错位与指令未被采纳；修正是对已测接口缺陷的干预，不以性能改善为前提。"
+      },
+      {
+        "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_POST_A01_CONVERGENCE_INTAKE_20260906.md",
+        "quote": "No conflict found; nothing returned to the node.",
+        "why": "对照 AGENTS.md §2、证据规范 §11.4/§11.8 与工程范围规范核查，未发现需要例外的规则。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260906_post_a01_convergence/archive/RESPONSE.md",
+        "quote": "The strongest contradiction to a performance interpretation is that the retained learner may have learned poor commands: none of the measured fresh motion was applied, so no native benefit from applying it was observed.",
+        "why": "修正后被采纳的指令可能很差；正确交付可能降低服务或增加能耗。"
+      },
+      {
+        "path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260906_post_a01_convergence/archive/RESPONSE.md",
+        "quote": "Preservation is preservation of these laws and information access, not equality of realized trajectories.",
+        "why": "这是明确的行为改变；后续随机运行会在不同 tick 消耗随机数，B02 结果不因此被「修复」。"
+      }
+    ],
+    "uncertainty": [
+      "训练侧是否同样晚一拍仍是源码推断；Pro 决定不要求先测量训练收集路径，只要求聚焦回归证明修正后的标志会传到 collector 的 fragment 字段。",
+      "prepare/commit 的原生门（latch、intent、CAS）与 motion 不同；A01 中 CAS 为 0 不代表修正后 commit 会合法；本对象只记录，不强迫任何提议。",
+      "DM 预测：第一分支（12/52/0，每次采纳都写入非零投影指令）；Pro 只给出期望计数；所有者预测槽：待填。"
+    ],
+    "cost": {
+      "compute": "wsl_4070 单线程，完整调用 ≤120 秒（新额度，不动用 A01/A05/B02 余额）",
+      "owner_time": "阅读本条目约 3 分钟；可选填写「修正后指令是否被采纳」的预测",
+      "reversibility": "reversible",
+      "waits_on_this": "不等待；无人值守委托下已按推荐项执行（卡已冻结、Grok CM 已派发、Opus 审阅在提交前）；所有者的不同指示在下一个干净边界应用"
+    },
+    "verdict_text": "PRO_FINAL / CONTINUE, not RECAST：one bounded A/RECON ordinary-renewal interface correction and native acceptance observation。DM 推荐：冻结此卡并交 CM 实现。",
+    "source": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_POST_A01_CONVERGENCE_INTAKE_20260906.md"
+  },
+  "starred": false
+}

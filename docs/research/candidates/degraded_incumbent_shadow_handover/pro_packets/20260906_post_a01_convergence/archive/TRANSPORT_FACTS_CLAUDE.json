@@ -1,0 +1,76 @@
+{
+  "mode": "scientific",
+  "handoff_kind": "CLAUDE_CALLER_DIRECT_HUB_SEND",
+  "request_id": "2026-09-06-dish-post-a01-convergence-01",
+  "direction_id": "degraded_incumbent_shadow_handover",
+  "workflow_node": "em_convergence",
+  "conversation_binding_key": "em:degraded_incumbent_shadow_handover:convergence",
+  "decision_authority": "pro_final",
+  "first_binding": false,
+  "conversation_id": "6a9bec54-df00-83e8-9840-46440458f316",
+  "conversation_url": "https://chatgpt.com/c/6a9bec54-df00-83e8-9840-46440458f316",
+  "tab_id_send": "b729b9d9-e6e3-4fe7-9131-056051dfd1ec",
+  "tab_id_auto_observe": "2dbaf66c-c5f4-424d-80fa-9394edbc7086",
+  "tab_lifecycle": "both agent-created; auto-observe tab (2dbaf66c) lost its CDP session mid-wait (SESSION_WITH_GIVEN_ID_NOT_FOUND), was closed and the retry succeeded via a fresh session under the same stableKey; both tabs closed after archive and readback",
+  "model_preflight": {
+    "requested_first": "GPT-6 Astra",
+    "requested_first_result": "chatgpt_product_model_unavailable_or_unselected",
+    "matched_product_model": "Latest",
+    "matched_reasoning_effort": "Pro",
+    "slider": "owner Power, min 0 max 4 value 4 target 4, already_selected_exact_reasoning_effort"
+  },
+  "prompt": {
+    "path": "temp/sessions/hmasd-chatgpt-pro-transport/archive/degraded_incumbent_shadow_handover/2026-09-06-dish-post-a01-convergence-01/2026-09-06-dish-post-a01-convergence-01--degraded_incumbent_shadow_handover__00_PROMPT.md",
+    "sha256": "19df0c70f80c1f3a3b5e1b7b27e1492e3df5aa1c0e015a1d74ae30422c461e58",
+    "size_bytes": 646,
+    "source_mode": "paste"
+  },
+  "send_evidence": {
+    "idempotency_key": "2026-09-06-dish-post-a01-convergence-01",
+    "operation_id": "21b7cb59-3baf-49cd-91e8-dcca63b6de71",
+    "first_call": "error tab_key_mismatch (caused by passing existingTabId); persisted sendAttempted=false, no user turn visible",
+    "retry": "identical call minus existingTabId succeeded",
+    "send_attempted": true,
+    "send_attempted_at_epoch_ms": 1788691005362,
+    "send_attempted_at": "2026-09-06T10:36:45.362Z",
+    "send_click_count": 1,
+    "provider_user_message_id": "347a2a3b-56a1-439b-9ea1-66f86c0e5b15",
+    "provider_assistant_message_id": "511a4f50-cfd5-469d-8e1f-ac038aa6f5e0",
+    "wait_status": "COMPLETE",
+    "observe_note": "phase-2 verifyExisting call errored twice with 'Session with given id not found' (stale auto-observe tab 2dbaf66c); closing that tab and re-issuing the identical verifyExisting call reconnected and returned COMPLETE",
+    "completed_at": "2026-09-06T14:07:46.497Z"
+  },
+  "short_chat_response": {
+    "path": "temp/sessions/hmasd-chatgpt-pro-transport/archive/degraded_incumbent_shadow_handover/2026-09-06-dish-post-a01-convergence-01/2026-09-06-dish-post-a01-convergence-01--degraded_incumbent_shadow_handover--attempt-01__02_RESPONSE.md",
+    "sha256": "344f68bcd31c28e29b7c7193c7e7394cdfc49a28e8592017189f291285c3441f",
+    "size_bytes": 776,
+    "content_summary": "claims the connector exposed no callable write action; branch at base, path 404, sole issue comment is the prior round -- a false negative superseded by the confirmed GitHub delivery below"
+  },
+  "github_delivery_actual_state_on_direct_readback": {
+    "branch": "codex/pro-dish-a01-convergence-20260906",
+    "base_sha": "04db4a5a74e69e0c76f5b9aa21eb1ba4aad5f111",
+    "branch_head_sha_after_send": "ed4363a2e4c0b578eac64ca19da6ef5e27b64a17",
+    "commit_parent_sha": "04db4a5a74e69e0c76f5b9aa21eb1ba4aad5f111",
+    "commit_time": "2026-09-06T10:50:18Z",
+    "response_path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260906_post_a01_convergence/archive/RESPONSE.md",
+    "response_blob_sha": "7e846853420c7b7da0d5cb42c18a190982c835d5",
+    "response_size_bytes": 39132,
+    "github_response_archive_path": "temp/sessions/hmasd-chatgpt-pro-transport/archive/degraded_incumbent_shadow_handover/2026-09-06-dish-post-a01-convergence-01/GITHUB_RESPONSE.md",
+    "github_response_sha256": "866736a28d6a95a7022220f7b567bc961e1b91dd7ae2c3c874ab32f3851b9e1a",
+    "github_response_size_bytes": 39132,
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/4",
+    "issue_comment_count_before_send": 1,
+    "issue_comment_count_after_send": 2,
+    "issue_comment_id": 5558729980,
+    "issue_comment_created_at": "2026-09-06T10:51:39Z",
+    "delivery_comment_archive_path": "temp/sessions/hmasd-chatgpt-pro-transport/archive/degraded_incumbent_shadow_handover/2026-09-06-dish-post-a01-convergence-01/DELIVERY_COMMENT.json",
+    "note": "The chat reply says no write capability; the delivery landed on the declared branch/path/issue about 1 minute before that reply was archived. The immutable file is the decision, not the chat reply."
+  },
+  "registry_result": {
+    "attempted": true,
+    "bound": false,
+    "refusal_verbatim": "{\"bound\": false, \"state\": \"BINDING_BUSY\", \"conversation_binding_key\": \"em:degraded_incumbent_shadow_handover:convergence\", \"active_request_id\": \"2026-09-05-dish-post-b02-convergence-recovery-01\", \"requested_request_id\": \"2026-09-06-dish-post-a01-convergence-01\"}",
+    "exit_code": 4,
+    "note": "bind_conversation.py refused: the registry still shows request 2026-09-05-dish-post-b02-convergence-recovery-01 as the active occupant of this binding key. Not overridden per instruction; reported for the hub to resolve (e.g. closing/archiving the prior request's registry state) before a bind retry."
+  }
+}
