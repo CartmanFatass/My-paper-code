@@ -103,3 +103,11 @@ No invocation remains live. CM returns complete output, actual exposure/cost and
 to Root for integration and DM for scientific intake. No formal03, new seed or additional
 investment is selected by completion. Existing source review and completed changed-path check
 remain evidence; no extra smoke, pytest or generic historical replay was introduced.
+
+Independent saved-output reviewer subsequently reconciled all episode endpoints/reward,
+five paired contrasts and aggregate/zone statistics, balanced shapes, paired demand denominators,
+recovery observations, curve means and six checkpoint metadata records; no material discrepancy.
+The reviewer read the full final log and external time, and performed no runtime test or replay.
+Remote checkpoint bytes were not independently reopened; their readback is the runner's recorded
+observation. This independent evidence supports the technical acceptance above without adding
+a new scientific inference or launch requirement.
