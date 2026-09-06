@@ -18,12 +18,21 @@ from .omrc_b01.model import CommonRecurrentActorCritic
 from .omrc_b01.ppo import PPOConfig, RecurrentPPOTrainer
 
 OBJECT = "CBSC-DIRECT-RETURN-B02"
+B03_OBJECT = "CBSC-DIRECT-RETURN-B03"
 ARMS = ("RAW-GRU", "STRUCT-CURRENTNESS-GRU")
 COST_LAW = (
     "startup + host_generation + sum_updates(project8 + rollout8 + PPO4x4) "
     "+ sum_checkpoints(eval_panel + checkpoint_io) + context_RAW "
     "+ publication_readback + pairing_STRUCT + process_finish"
 )
+
+
+def expected_seed(object_id=OBJECT, engineering=False):
+    if object_id == OBJECT:
+        return 21201 if engineering else 21203
+    if object_id == B03_OBJECT and not engineering:
+        return 21209
+    raise ValueError("unknown direct-return object or engineering profile")
 
 
 def fraction(value):
@@ -74,23 +83,23 @@ def pair_results(raw, structured):
         differences.append({"identity": left["identity"], "raw_return": left["native_return"],
                             "struct_return": right["native_return"], "difference": fraction_record(difference)})
     mean = sum((fraction(row["difference"]) for row in differences), Fraction()) / len(differences)
-    return {"object": OBJECT, "seed": raw["seed"], "profile": raw["profile"],
+    return {"object": raw["object"], "seed": raw["seed"], "profile": raw["profile"],
             "independent_training_seeds": 1, "endpoint_update": raw["updates"],
             "differences": differences, "mean_difference": fraction_record(mean),
             "curves": {arm["arm"]: arm["curve"] for arm in (raw, structured)},
             "context": raw["context"], "launch_shas": [raw["launch_sha"], structured["launch_sha"]]}
 
 
-def run_arm(*, arm, seed, output, launch_sha, raw_result=None, engineering=False, started=None):
+def run_arm(*, arm, seed, output, launch_sha, raw_result=None, engineering=False, started=None,
+            object_id=OBJECT):
     started = time.perf_counter() if started is None else started
     output = Path(output)
     output.mkdir(parents=True, exist_ok=False)
     torch.set_num_threads(1)
     updates, eval_episodes = (1, 1) if engineering else (48, 32)
     checkpoints = (0, 1) if engineering else (0, 12, 24, 48)
-    expected_seed = 21201 if engineering else 21203
-    if seed != expected_seed or arm not in ARMS:
-        raise ValueError("arm or seed differs from the frozen B02 profile")
+    if seed != expected_seed(object_id, engineering) or arm not in ARMS:
+        raise ValueError("arm or seed differs from the selected direct-return profile")
     if (arm == ARMS[1]) != (raw_result is not None):
         raise ValueError("STRUCT requires the completed RAW result")
     host_start = time.perf_counter()
@@ -163,7 +172,7 @@ def run_arm(*, arm, seed, output, launch_sha, raw_result=None, engineering=False
         peak_rss = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss * 1024
     except ImportError:
         peak_rss = None
-    result = {"object": OBJECT, "arm": arm, "seed": seed, "rng_namespace": B1_RUN_NAME,
+    result = {"object": object_id, "arm": arm, "seed": seed, "rng_namespace": B1_RUN_NAME,
               "profile": "ENGINEERING_ONLY" if engineering else "B/EXPLORE", "launch_sha": launch_sha,
               "configuration": asdict(PPOConfig()), "updates": updates, "eval_episodes": eval_episodes,
               "initialization_digest": model.initialization_digest, "training_tape_digest": training_digest,
