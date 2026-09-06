@@ -18,8 +18,12 @@ Existing live local work stays local.
 
 ## Remote route (`wsl_4070`)
 
-Require the pushed launch sha. Over the configured SSH alias, prepare a detached worktree at that
-exact sha under the configured worktree root, adding any committed execution or input paths the
+Require the pushed launch sha. Over the configured SSH alias, run every network-touching remote
+command (`git fetch`, `worktree add` on the partial clone, anything reaching GitHub) inside the
+node's declared `network_shell` (`zsh -lic '<command>'`: the login shell exports the proxy the
+node needs; a plain `ssh host 'git fetch'` times out), and other remote commands inside its
+`run_shell` (`bash -lc`). Prepare a detached worktree at that exact sha under the configured
+worktree root, adding any committed execution or input paths the
 assignment names to its sparse surface. If a frozen input artifact is not Git-tracked, copy only
 that artifact into a request-specific directory under the input staging root and verify the
 sha256 the assignment already declares; never stage uncommitted source. Use the configured Python
