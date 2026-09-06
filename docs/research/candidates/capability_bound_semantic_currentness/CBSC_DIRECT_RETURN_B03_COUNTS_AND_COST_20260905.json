@@ -1,0 +1,52 @@
+{
+  "object": "CBSC-DIRECT-RETURN-B03",
+  "seed": 21209,
+  "class": "B/EXPLORE",
+  "source_configuration": "same PPO/host work shape as actual B02 source2c9254f70 and B03 card; seed/object-only proposed change",
+  "calculation": {
+    "arms": 2,
+    "independent_paired_training_seeds": 1,
+    "updates_per_arm": 48,
+    "episodes_per_update": 8,
+    "transitions_per_episode": 152,
+    "decisions_per_episode": 24,
+    "ppo_epochs": 4,
+    "episodes_per_minibatch": 2,
+    "evaluation_checkpoints": 4,
+    "evaluation_episodes_per_checkpoint": 32
+  },
+  "per_arm": {
+    "train_episodes": 384,
+    "train_transitions": 58368,
+    "train_decisions": 9216,
+    "adam_steps": 768,
+    "evaluation_executions": 128,
+    "evaluation_transitions": 19456,
+    "train_plus_evaluation_transitions": 77824
+  },
+  "pair": {
+    "train_episodes": 768,
+    "train_transitions": 116736,
+    "adam_steps": 1536,
+    "evaluation_executions": 256,
+    "train_plus_evaluation_transitions": 155648
+  },
+  "context": {
+    "ledger_scoring_passes": 64,
+    "opportunity_scores": 1536,
+    "new_training_or_world_samples": 0
+  },
+  "additional_search_or_census_calls": 0,
+  "new_exposure_at_freeze": 0,
+  "projection": {
+    "law": "startup + host generation + sum48(rollout8 + PPO4x4) + sum4(eval32 + checkpoint) + publication/readback + STRUCT pairing + finish",
+    "actual_reference": "B02 complete external calls at source2c9254f70, seed21203",
+    "RAW_seconds": 79.69,
+    "STRUCT_seconds": 90.78,
+    "pair_invocation_wall_sum_seconds": 170.47,
+    "complete_cap_seconds_per_arm": 600,
+    "maximum_selected_arm_invocations": 2,
+    "uncertainty": "same work shape, new seed; a measured reference is not a guaranteed upper or acceleration estimate",
+    "new_focused_simulation_calls": 0
+  }
+}
