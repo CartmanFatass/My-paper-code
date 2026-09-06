@@ -177,6 +177,9 @@ whose corrections are incorporated. No experiment was run and no scientific obje
   what was built and where, how each invariant is met, enumeration results next to the table
   values, throughput and machine identity, twelve reading choices, and what could not be
   verified (no learner ran; the adapter is not yet wired into the base route).
+- `GROK_BUILD_CM_DELEGATION_PLAN_20260905.md` — 方案：把一部分 CM 工作交给 Grok Build（本机
+  CLI 1.0.5 已验证无头模式；分 A 只读侦察与第二评审、B 机械修改、C 低风险语义实现三层，
+  启动、传输和科学判断不交；调用形状、围栏、附录 C 提案、三次试点与五个待决项）。
 
 ### environment_design/
 
