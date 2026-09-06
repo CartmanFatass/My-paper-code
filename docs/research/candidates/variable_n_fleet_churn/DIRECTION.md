@@ -27,32 +27,43 @@ comparisons remain historical evidence; this new B does not identify their uniqu
 
 ## Current scientific disposition
 
-### Current direct learning comparison — 2026-09-05
+### Two direct learning seeds and next direction question — 2026-09-05
 
-The complete validation-method Convergence decision ends further R03 exact-headroom census
-investment and selects only `VNFC-N7-DIRECT-RETURN-B01` plus its necessary bounded implementation
-preparation. MAPR-4 and DIRECT-SET-AR each actually train on fresh post-loss N7 episodes; fixed
-BCRH-PERSIST is evaluated as a native-return reference. One fresh paired training instance has
-64 rounds × 32 complete episodes per arm, with 64 disjoint evaluation episodes at initialization,
-round32 and round64. The selected cumulative complete first-round wall cap is2700s across both
-learners, BCRH and required publication. Real trainer exposure and complete cost must be reported;
-the archived decision alone does not establish runtime readiness.
+The complete validation-method Convergence decision ended further R03 exact-headroom census
+investment and selected `VNFC-N7-DIRECT-RETURN-B01`. Two independent training seeds now have
+valid complete B results: each real learner trained64 rounds ×32 complete N7 episodes per seed,
+with2048 optimizer steps and64 fresh evaluation episodes at initialization/32/64. Fixed BCRH
+was evaluated on each seed's panel. MAPR final-minus-initial R_fail_60 is+.204128/+.199453 and
+DIRECT+.188659/+.195521; both zones also improved in both draws. This supports bounded repeated
+same-distribution recovery learning, not a cause for historical cross-N failure or stable value.
 
-The primary discriminator is each learner's final-minus-initial `R_fail_60`, final MAPR–DIRECT
-and each learner–BCRH on paired new evaluation episodes, with zone-specific and other native
-service tradeoffs retained. The descriptive MEI remains0.10. Existing R02 MAPR–BCRH negatives,
-mixed MAPR–DIRECT results and the limited privileged7/60 witness oppose assuming broad easy
-headroom. The surviving alternative is useful finite-budget N7 learning without cross-N
-extrapolation. One new training seed would support at most a bounded B signal, not stable
-superiority, generalization, an exact maximum or a historical cause diagnosis.
+The strongest contradiction to MAPR-specific value is that DIRECT also learned, MAPR's final
+advantages are only+.015469/+.003932 (inside the descriptive.10 MEI), and both learners remain
+below BCRH on all four native metrics in both zones. Their two-seed average recovery gaps to
+BCRH are-.051367/-.061068. MAPR–DIRECT zone1 changes from+.028073 to-.029323, with service
+tradeoffs retained. Generic shared-policy learning remains a live explanation; two seeds do
+not prove equivalence, stable superiority, exact headroom or a unique mechanism. Historical
+R02 negative/mixed comparisons and the limited privileged7/60 witness keep their original scope.
+
+The selected one-seed follow-up is complete; no further seed is automatically selected. The next
+direction-level question is what this current MAPR comparison should decide next: a specifically
+useful discriminator, ending the smallest supported unit, or a justified successor. It returns
+to the existing Convergence node; this document makes no local family/lifecycle disposition.
+Cumulative formal investment is783.29s of the original2700s; remaining budget does not select
+work. Priority/lifecycle/recasts remain unchanged, with recasts two. The headroom record remains
+incomplete and does not become a prerequisite for future exploration.
 
 No exact or bounded policy search, all-history replay or old law/DEBUG publication ladder is a
 prerequisite for this new performance comparison. Necessary checks address its actual reward,
 information, physical actions, real training and primary output under evidence-spec §11.8–11.9.
-This is a new B, not a shortened R03 or a relabelled old result. Existing recasts remain two;
-Portfolio lifecycle, priority and sequencing are unchanged. See
+This is a new learning B, not a shortened R03 or a relabelled old result. The incomplete first
+formal attempt and its unresolved failure remain engineering provenance, not another independent
+seed. See
 `VNFC_N7_DIRECT_RETURN_CONVERGENCE_INTAKE_20260905.md` and
-`VNFC_N7_DIRECT_RETURN_B01_SCIENCE_CARD_20260905.md`.
+`VNFC_N7_DIRECT_RETURN_B01_SCIENCE_CARD_20260905.md`,
+`VNFC_N7_DIRECT_RETURN_B01_RESULT_INTAKE_20260905.md`,
+`VNFC_N7_DIRECT_RETURN_B01_SEED02_CARD_20260905.md`, and
+`VNFC_N7_DIRECT_RETURN_B01_TWO_SEED_RESULT_INTAKE_20260905.md`.
 
 ### Completed E01 engineering continuation — 2026-09-05
 
@@ -308,6 +319,9 @@ its finite claim ceiling.
 
 - `docs/research/candidates/variable_n_fleet_churn/VNFC_N7_DIRECT_RETURN_CONVERGENCE_INTAKE_20260905.md`
 - `docs/research/candidates/variable_n_fleet_churn/VNFC_N7_DIRECT_RETURN_B01_SCIENCE_CARD_20260905.md`
+- `docs/research/candidates/variable_n_fleet_churn/VNFC_N7_DIRECT_RETURN_B01_RESULT_INTAKE_20260905.md`
+- `docs/research/candidates/variable_n_fleet_churn/VNFC_N7_DIRECT_RETURN_B01_SEED02_CARD_20260905.md`
+- `docs/research/candidates/variable_n_fleet_churn/VNFC_N7_DIRECT_RETURN_B01_TWO_SEED_RESULT_INTAKE_20260905.md`
 - `docs/research/candidates/variable_n_fleet_churn/pro_packets/20260905_validation_method_convergence/archive/RESPONSE.md`
 - `docs/research/candidates/variable_n_fleet_churn/VNFC_BPCR_BEXP_PRESENTATION_SAFE_RETURN_R01_INNOVATOR_INTAKE_20260901.md`
 - `docs/research/candidates/variable_n_fleet_churn/VNFC_BPCR_BEXP_R01_ENGINEERING_MILESTONE_20260901.md`
