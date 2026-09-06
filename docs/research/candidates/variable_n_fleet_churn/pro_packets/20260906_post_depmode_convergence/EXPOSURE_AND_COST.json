@@ -1,0 +1,55 @@
+{
+  "evidence_role": "DOCUMENTARY_DERIVATION_NOT_NEW_EXPERIMENT",
+  "written_at": "2026-09-06T10:24:38+00:00",
+  "derivation": "Counts and timings copied from the deployment-mode formal/check summaries, the result intake and the two-seed result intake; no project import, checkpoint load, experiment or new timing. Consultation exposure is zero.",
+  "sources": [
+    {
+      "path": "docs/research/candidates/variable_n_fleet_churn/VNFC_N7_B01_DEPLOYMENT_MODE_EVAL_RESULT_INTAKE_20260905.md",
+      "sha256": "65a20bc279bd6ccf4f1996438f2d53ddda07aa9461a193d44e186ef237c6457e"
+    },
+    {
+      "path": "docs/research/candidates/variable_n_fleet_churn/evidence/b01_depmode_formal_20260905_01/summary.json",
+      "sha256": "e7ecb2f1ec7051d65acc2b6a6b92b0fdc01854bc53273f1463fa47fcff082cf3"
+    },
+    {
+      "path": "docs/research/candidates/variable_n_fleet_churn/evidence/b01_depmode_check_20260905_01/summary.json",
+      "sha256": "dd2ca9b160edc767898be4f9689dd829c44ba53e3845523a11aa012480241d47"
+    },
+    {
+      "path": "docs/research/candidates/variable_n_fleet_churn/VNFC_N7_DIRECT_RETURN_B01_TWO_SEED_RESULT_INTAKE_20260905.md",
+      "sha256": "ba636bcce10c00ad3da7502aff649469a47799a64cbee7fbcfb0ffe9d936aa9a"
+    }
+  ],
+  "exposure_line": "VNFC-N7-B01-DEPLOYMENT-MODE-EVAL: training instances 0, rounds 0, optimizer steps 0, backward calls 0, parameter updates 0; policy cells 8 (4 checkpoints x 2 modes), evaluation episodes 512, BCRH episodes 64, policy joint decisions 3,072, evaluation action draws 6,144 (SAMPLE only), BCRH complete calls 384, native ticks 138,240; training seeds counted 2 (existing B01 records, none new). Consultation: zero new models, environment steps, updates or evaluations.",
+  "measured": {
+    "formal_complete_wall_s": 44.47,
+    "formal_time_wall_s": 45.69,
+    "check_wall_s": 5.5,
+    "peak_rss_mb": 415,
+    "node": "wsl_4070",
+    "cap_s": 180,
+    "b01_cumulative_formal_wall_s": 827.76,
+    "b01_cap_s": 2700,
+    "b01_two_valid_runs_mean_complete_wall_s": 347.715
+  },
+  "prospective_options": {
+    "option_1_pause_family": {
+      "training": "none",
+      "cost": "zero compute; documents only"
+    },
+    "option_2_named_new_b": {
+      "reference_cost": "B01: mean complete wall 347.715 s per two-arm one-seed invocation (306.68 s and 388.75 s observed), under the 2700 s complete-invocation cap; a changed learner is a new object whose cost is not established by linear projection",
+      "training": "prospective; two arms x one seed pair per the default follow-up rule; not requested by this consultation"
+    },
+    "option_3_existing_record_analysis": {
+      "training": "none",
+      "cost": "read-only arithmetic over evaluation_episodes.json (512 rows) and bcrh_episodes.json (64 rows); seconds"
+    },
+    "option_4_recast": {
+      "training": "none until a card exists",
+      "flag": "would be the third recast; Portfolio second-recast rule already applied"
+    }
+  },
+  "headroom_record": "none: the 2026-09-04 controller headroom A/RECON found the K search and physical upper do not form a tuned same-information pair; BCRH is a native reference, not an upper bound",
+  "recast_count": 2
+}
