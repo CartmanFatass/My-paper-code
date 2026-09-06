@@ -41,14 +41,3 @@ Operational consequences for this skill:
 - If GitHub is unavailable in the selected Pro surface, return
   `BLOCKED_CONNECTOR_ACCESS`. Do not fallback to code review, AMA, web search,
   local-clone inspection, or pasted full-file content.
-
-# Write route observed — owner correction 2026-09-06 08:09 PDT
-
-Every scoped delivery to date (Issues 1, 3, 4, 5, 6, 7; Codex-loop and Claude-loop rounds)
-was performed by the GitHub app `ChatGPT Codex Connector` (`performed_via_github_app.name`
-on each delivery comment; app permissions `contents: write`, `issues: write`). The plain
-GitHub connector Pro reads evidence with exposes GET-only search/fetch actions, which is what
-the "no write action" chat receipts describe. The renderer's delivery paragraph and short
-prompt now name the Codex connector as the write route and ask Pro to wait for its commit and
-comment before answering. Evidence: `gh api repos/<repo>/issues/<n>/comments`
-(`performed_via_github_app`), 2026-09-06.

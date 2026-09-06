@@ -22,14 +22,18 @@ conversation for a bound key.
    the `reference_files` list with purpose and provenance (include the current evidence spec and
    applicable authorities), `constraints`, optional `discussion_urls`, an `EVIDENCE_AND_OPTIONS.md`
    and `EXPOSURE_AND_COST.json` in the packet folder, and a read-back `ISSUE_SNAPSHOT.json`.
-   Never word the delivery as a CLI or token task: Pro has no shell and no `gh`. **The write
-   route is the Codex connector** (GitHub app `ChatGPT Codex Connector`, `contents: write` and
-   `issues: write`); every delivery comment on Issues 1, 3, 4, 5, 6 and 7 carries
-   `performed_via_github_app.name = "ChatGPT Codex Connector"`, Codex-loop and Claude-loop
-   alike. The plain GitHub connector Pro reads with is GET-only, which is what its "no write
-   action" chat replies describe (owner corrections 2026-09-05 23:05 and 2026-09-06 08:09 PDT;
-   the renderer's delivery paragraph and short prompt now name the Codex connector and tell Pro
-   to wait for its commit and comment before answering).
+   **Do not edit the shared renderer or its wording** (owner, 2026-09-06 09:38 PDT). The Claude
+   loop uses `.agents/skills/hmasd-pro-research-prompt-author/scripts/render_packet.py` exactly
+   as the Codex loop does; its delivery paragraph and short prompt are the Codex-era text
+   (restored to the bytes of `52bd6a206` on 2026-09-06). Two Claude-side edits that named a
+   connector and prescribed how Pro should call it (`f787d8fcb`, `f7560adb1`) were made without
+   knowledge of the connector's mechanics and made Pro search for a tool of that name and report
+   a gap; they are reverted. What is known: every delivery comment carries
+   `performed_via_github_app.name = "ChatGPT Codex Connector"`, the chat receipt in a
+   Claude-created conversation has said "no write capability" while the file and comment still
+   landed minutes later, and receipts in conversations the Codex transport created carried
+   links. The cause of that difference is not established; do not encode a guess about it in
+   any prompt, skill or agent file.
    Follow the authoring rules in `.agents/skills/hmasd-pro-research-prompt-author/SKILL.md`
    (section 11.8 proportional burden, dominant work factors, natural-language answer).
 3. **Create the delivery surface**: a dedicated output branch at the full base sha, pushed

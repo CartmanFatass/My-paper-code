@@ -129,16 +129,16 @@ sha256, full-response path and sha256 with the GitHub commit and comment URL, re
 tab lifecycle, and any limitation or stop reason with the exact tool error. No scientific
 summary, no recommendation.
 
-## Write route fact (owner correction 2026-09-06 08:09 PDT)
+## Write route (owner correction 2026-09-06 09:38 PDT)
 
-Every delivery so far, Codex-loop or Claude-loop, was written by the GitHub app **`ChatGPT
-Codex Connector`** (`performed_via_github_app.name` on every delivery comment on Issues 1, 3,
-4, 5, 6, 7; the app holds `contents: write` and `issues: write`). The plain GitHub connector
-Pro reads evidence with is GET-only, which is exactly what the "no write action" chat replies
-describe. The renderer's short prompt and delivery paragraph now name the Codex connector as
-the write route. In phase 2, record `performed_via_github_app.name` from the delivery comment
-in the facts file, and read the chat reply as a capability report only when the readback
-still shows base sha, 404 and no new comment after the wait.
+The prompt you send is rendered by the shared Codex renderer with its original wording; it
+names no connector and prescribes no calling convention, and you never alter it. Observed
+facts only: every delivery comment carries `performed_via_github_app.name = "ChatGPT Codex
+Connector"`; in Claude-created conversations the chat receipt has said "no write capability"
+while the file and comment still landed minutes later. In phase 2, record
+`performed_via_github_app.name` from the delivery comment in the facts file, and read the chat
+reply as a capability report only when the readback still shows base sha, 404 and no new
+comment after the wait. Do not infer or document how Pro reaches the write route.
 
 ## Registry lifecycle (mapped from the Codex transport skill)
 
