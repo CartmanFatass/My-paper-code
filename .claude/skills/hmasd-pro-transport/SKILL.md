@@ -22,9 +22,14 @@ conversation for a bound key.
    the `reference_files` list with purpose and provenance (include the current evidence spec and
    applicable authorities), `constraints`, optional `discussion_urls`, an `EVIDENCE_AND_OPTIONS.md`
    and `EXPOSURE_AND_COST.json` in the packet folder, and a read-back `ISSUE_SNAPSHOT.json`.
-   Never word the delivery as a CLI or token task: Pro has no shell and no `gh`; it writes
-   through the ChatGPT GitHub connector (owner correction 2026-09-05 23:05 PDT; the renderer's
-   delivery paragraph and short prompt now say so).
+   Never word the delivery as a CLI or token task: Pro has no shell and no `gh`. **The write
+   route is the Codex connector** (GitHub app `ChatGPT Codex Connector`, `contents: write` and
+   `issues: write`); every delivery comment on Issues 1, 3, 4, 5, 6 and 7 carries
+   `performed_via_github_app.name = "ChatGPT Codex Connector"`, Codex-loop and Claude-loop
+   alike. The plain GitHub connector Pro reads with is GET-only, which is what its "no write
+   action" chat replies describe (owner corrections 2026-09-05 23:05 and 2026-09-06 08:09 PDT;
+   the renderer's delivery paragraph and short prompt now name the Codex connector and tell Pro
+   to wait for its commit and comment before answering).
    Follow the authoring rules in `.agents/skills/hmasd-pro-research-prompt-author/SKILL.md`
    (section 11.8 proportional burden, dominant work factors, natural-language answer).
 3. **Create the delivery surface**: a dedicated output branch at the full base sha, pushed
@@ -93,6 +98,15 @@ conversation for a bound key.
    Issue comments before concluding a gap; only a readback that still shows base sha, 404 and
    no new comment is a write gap. The connector needs no per-conversation enabling; it is the
    account-level GitHub app, and it works in a first-binding conversation as well.
+   **Registry (mapped from the Codex skill 2026-09-06):** the Codex transport archives a
+   request (`ARCHIVED`) before the next turn on the same key; the Claude agent's
+   `bind_conversation.py` call alone leaves `DIRECTION_VERIFIED` and the next request on that
+   key is refused `BINDING_BUSY` for both loops. Phase 2 therefore ends by walking the record to
+   `ARCHIVED` with `temp/sessions/hmasd-chatgpt-pro-transport/archive_delivered_claude_request.py`
+   (the contract's own validated transitions; no rebinding), as described in the agent file.
+   Codex-skill items with no Claude counterpart: `validate_request.py` (singleton routing),
+   heartbeat automations (replaced by the GitHub head watch), parent-thread receipts
+   (`stage_receipt`; the hub reads the agent's return), `materialize_packet.py` (no attachments).
 7. **Intake**: read the full response from the archive's `GITHUB_RESPONSE.md` (verified against the
    immutable commit), not the short chat receipt. Check the formed decision against current owner
    instructions and specifications; a complete answer does not authorize a silent exception. Write

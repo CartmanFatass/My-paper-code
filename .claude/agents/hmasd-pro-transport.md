@@ -129,6 +129,36 @@ sha256, full-response path and sha256 with the GitHub commit and comment URL, re
 tab lifecycle, and any limitation or stop reason with the exact tool error. No scientific
 summary, no recommendation.
 
+## Write route fact (owner correction 2026-09-06 08:09 PDT)
+
+Every delivery so far, Codex-loop or Claude-loop, was written by the GitHub app **`ChatGPT
+Codex Connector`** (`performed_via_github_app.name` on every delivery comment on Issues 1, 3,
+4, 5, 6, 7; the app holds `contents: write` and `issues: write`). The plain GitHub connector
+Pro reads evidence with is GET-only, which is exactly what the "no write action" chat replies
+describe. The renderer's short prompt and delivery paragraph now name the Codex connector as
+the write route. In phase 2, record `performed_via_github_app.name` from the delivery comment
+in the facts file, and read the chat reply as a capability report only when the readback
+still shows base sha, 404 and no new comment after the wait.
+
+## Registry lifecycle (mapped from the Codex transport skill)
+
+The Codex skill archives a request before the next turn on the same key; `bind_conversation.py`
+alone stops at `DIRECTION_VERIFIED`, and the next request is then refused with `BINDING_BUSY`
+for both loops. After the archive and readback are verified and the tabs are closed, walk the
+record to `ARCHIVED` with the contract's own validated transitions:
+
+```
+PYTHONUTF8=1 python temp/sessions/hmasd-chatgpt-pro-transport/archive_delivered_claude_request.py --registry temp/sessions/hmasd-chatgpt-pro-transport/registry.json --binding-key <key> --request-id <request id recorded on the key> --user-message-id <providerUserMessageId> --assistant-message-id <providerAssistantMessageId> --prompt-file <__00_PROMPT.md> --short-receipt <__02_RESPONSE.md> --transport-facts <__03_TRANSPORT_FACTS.json> --github-response <GITHUB_RESPONSE.md> --github-commit <sha> --send-attempted-at <epoch ms> --completed-at <epoch ms> --note "<one line>"
+```
+
+It changes no conversation id and rebinds nothing. When the key's record still names an
+earlier request (a previous bind was refused), archive that earlier request with its own
+archive files first, then bind the current one and archive it. Report the before and after
+`state` of the record. Items of the Codex skill that have no Claude counterpart and are not
+required: `validate_request.py` (singleton routing fields), heartbeat automations (the hub's
+GitHub head watch replaces them), `stage_receipt` to a parent thread (the hub reads your
+return directly), `materialize_packet.py` (github delivery has no attachments).
+
 ## Rules learned on 2026-09-05 (DISH recovery, VSPC1 r02)
 
 - Return to the hub immediately after the receipt shows `sendAttempted=true` (phase 1); the hub
