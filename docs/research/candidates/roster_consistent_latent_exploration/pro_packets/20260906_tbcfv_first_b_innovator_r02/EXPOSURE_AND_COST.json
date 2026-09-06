@@ -1,0 +1,33 @@
+{
+  "evidence_role": "DOCUMENTARY_DERIVATION_NOT_NEW_EXPERIMENT",
+  "written_at": "2026-09-06T16:15:00+00:00",
+  "derivation": "Facts copied from the TBCFV definition card, the A1 headroom-census result and intake, the 2026-09-01 recast section of DIRECTION.md and the predecessor B1/B2/CPC intakes; no project import, build, experiment or timing. Consultation exposure is zero.",
+  "sources": [
+    {"path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_TARGET_BOUND_COMMITMENT_FRAGMENTATION_VALUE_SCIENCE_CARD.md", "role": "frozen host, arms, endpoints, prospective full-program counts (definition-only, empirical_authorization=false)"},
+    {"path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_GUIDANCE_A1_HEADROOM_CENSUS_RESULT_EVIDENCE_20260904.md", "role": "H_A1 NOT_IDENTIFIED; tracked current-host result JSON = 0"},
+    {"path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_GUIDANCE_A1_HEADROOM_CENSUS_INTAKE_20260904.md", "role": "accepted census; next discriminator sentence"},
+    {"path": "docs/research/candidates/roster_consistent_latent_exploration/DIRECTION.md", "role": "2026-09-01 recast: the B/EXPLORE package question"}
+  ],
+  "exposure_line": "RCLE current host TBCFV: training instances 0, optimizer steps 0, backward calls 0, parameter updates 0, evaluations 0, native builds 0 on any node; no result-bearing invocation has ever run. A1 census: NO_LEARNER, parameter_count 0, new_transitions 0. Consultation: zero new models, native states, transitions, backwards, optimizer steps, tests or experiments.",
+  "measured": {
+    "tbcfv_cost_law": "unmeasured (never executed); native backend never built on wsl_4070",
+    "a1_census": "declared cap 15 wall minutes on one local control-plane process; measured wall not recorded",
+    "predecessor_declared_budgets": "B1, B2: one CPU worker, at most 2 GiB peak memory, 45 wall minutes per object (declared, different hosts); CPC: 16 seeds x 1,000 blocks x 64 episodes (cost line not located)"
+  },
+  "prospective_option_1_first_pair": {
+    "design": "2 arms (C1P1-COMMON-PERSISTENT, FLEX-REKEY), one paired seed, 200 updates x 64 episodes per arm = 12,800 training episodes per arm = 819,200 environment ticks per arm; held-out 8 cells x 256 episodes = 2,048 evaluation episodes per arm = 131,072 environment ticks per arm; learning curve every 25 updates",
+    "card_full_program_for_scale": "5 arms x 20 blocks x 800 updates x 64 episodes = 5,120,000 training episodes; the proposed pair is 25,600 training episodes, 0.5% of it",
+    "ceiling": "2,700 s complete logical invocation per arm (runtime spec toy threshold), 5,400 s summed; not a target",
+    "projection": "none yet; the CM composes the per-arm projection from a bounded scripted-package executability and cost run (<= 300 s, zero learner) after the first native build on wsl_4070; launch only if the projection is inside the ceiling, otherwise the DM reduces the budget before launch and records it",
+    "unknown": "per-episode wall of the native host, per-update learner wall, native build time, peak RSS; whether the packages train at 200 updates"
+  },
+  "prospective_scripted_reference_row": {
+    "design": "no-plan scripted package evaluated on the 8 held-out cells x 256 episodes (2,048 episodes), evaluation only, zero learner",
+    "projection": "seconds to low minutes if the host runs; unmeasured"
+  },
+  "budget_state": {
+    "rcle_cumulative_result_bearing_wall_on_tbcfv_s": 0,
+    "a1_bound_min": 15,
+    "a1_closed": true
+  }
+}
