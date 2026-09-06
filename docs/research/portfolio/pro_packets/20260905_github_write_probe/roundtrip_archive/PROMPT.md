@@ -1,0 +1,1 @@
+所有者授权的第二次隔离协作验证。请通过GitHub连接器读取并执行这份固定任务中的确切读写范围：https://github.com/CartmanFatass/My-paper-code/blob/af73a953e6d8d484bc040d311e731e382d9da703/docs/research/portfolio/pro_packets/20260905_github_write_probe/ROUNDTRIP_TASK.md 。授权仅为该任务指定的测试分支新增一个review文件并在Issue3新增对应链接评论，不涉及其他文件、main或权限设置。你应先读取任务；若无法读取则说明缺口，不猜内容。遵循任务中的重复检查，使用你自己的实际工具完成，最后聊天仅回实际文件/commit/评论链接或缺口；不要搬运长文或让Transport代写。
