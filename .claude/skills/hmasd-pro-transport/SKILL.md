@@ -22,6 +22,9 @@ conversation for a bound key.
    the `reference_files` list with purpose and provenance (include the current evidence spec and
    applicable authorities), `constraints`, optional `discussion_urls`, an `EVIDENCE_AND_OPTIONS.md`
    and `EXPOSURE_AND_COST.json` in the packet folder, and a read-back `ISSUE_SNAPSHOT.json`.
+   Never word the delivery as a CLI or token task: Pro has no shell and no `gh`; it writes
+   through the ChatGPT GitHub connector (owner correction 2026-09-05 23:05 PDT; the renderer's
+   delivery paragraph and short prompt now say so).
    Follow the authoring rules in `.agents/skills/hmasd-pro-research-prompt-author/SKILL.md`
    (section 11.8 proportional burden, dominant work factors, natural-language answer).
 3. **Create the delivery surface**: a dedicated output branch at the full base sha, pushed
