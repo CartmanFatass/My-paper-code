@@ -1,0 +1,12 @@
+{
+  "task": "n3_b02_focused_20260905",
+  "node": "wsl_4070",
+  "sha": "47f81c15c536c2b4c4ee463eaa7a35f720ec08c7",
+  "cwd": "/home/wu/hmasd-worktrees/n3-b02-20260905",
+  "command": "cd /home/wu/hmasd-worktrees/n3-b02-20260905 && export PYTHONPATH=/home/wu/hmasd-worktrees/n3-b02-20260905 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 && /usr/bin/time -v -o /home/wu/hmasd-worktrees/n3-b02-20260905/temp/directions/degraded_incumbent_shadow_handover/exp/b02_focused.time.txt /usr/bin/timeout 300s bash -lc '/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/hmasd-worktrees/n3-b02-20260905/temp/directions/degraded_incumbent_shadow_handover/exp/b02_focused.memory.json && /home/wu/.venvs/hmasd/bin/python -m pytest tests/experiments/candidates/degraded_incumbent_shadow_handover/forecast_package_b02 -q'",
+  "supervisor_command": "/usr/local/bin/agent-task run n3_b02_focused_20260905 'bash -lc '\"'\"'cd /home/wu/hmasd-worktrees/n3-b02-20260905 && export PYTHONPATH=/home/wu/hmasd-worktrees/n3-b02-20260905 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 && /usr/bin/time -v -o /home/wu/hmasd-worktrees/n3-b02-20260905/temp/directions/degraded_incumbent_shadow_handover/exp/b02_focused.time.txt /usr/bin/timeout 300s bash -lc '\"'\"'\"'\"'\"'\"'\"'\"'/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/hmasd-worktrees/n3-b02-20260905/temp/directions/degraded_incumbent_shadow_handover/exp/b02_focused.memory.json && /home/wu/.venvs/hmasd/bin/python -m pytest tests/experiments/candidates/degraded_incumbent_shadow_handover/forecast_package_b02 -q'\"'\"'\"'\"'\"'\"'\"'\"''\"'\"''",
+  "cap_seconds": 300,
+  "cost_scope": "shared complete command wall including admission; half charged to each arm",
+  "receipt": "/home/wu/hmasd-worktrees/n3-b02-20260905/temp/directions/degraded_incumbent_shadow_handover/exp/b02_focused.memory.json",
+  "time": "/home/wu/hmasd-worktrees/n3-b02-20260905/temp/directions/degraded_incumbent_shadow_handover/exp/b02_focused.time.txt"
+}
