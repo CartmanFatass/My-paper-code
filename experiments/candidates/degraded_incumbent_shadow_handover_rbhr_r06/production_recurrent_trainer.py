@@ -246,11 +246,13 @@ def _promotion(hidden: torch.Tensor, cas_applied: np.ndarray, owner_before: np.n
 class BatchedRecurrentPolicy:
     """One batched policy forward per primitive tick; no Python env loop."""
 
-    def __init__(self, *, arm: str, checkpoint_bytes: bytes | None, state: RecurrentRolloutState) -> None:
+    def __init__(self, *, arm: str, checkpoint_bytes: bytes | None, state: RecurrentRolloutState,
+                 forecast_package: bool = False) -> None:
         state.validate()
         if arm != state.arm:
             raise RecurrentTrainerError("policy/state arm binding differs")
         self.arm = arm; self.model = _load_policy(checkpoint_bytes); self.state = state
+        self.forecast_package = forecast_package
         self.last_behavior_log_prob = torch.empty(state.hidden.shape[0], dtype=torch.float32)
         if checkpoint_bytes is not None:
             retained = torch.load(io.BytesIO(bytes(checkpoint_bytes)), map_location="cpu", weights_only=False)
@@ -342,7 +344,8 @@ class BatchedRecurrentPolicy:
                 rows["commit"][lane, owner[lane]] = int(gate)
         prediction = heads["prediction_mean"].detach().cpu().numpy()
         cholesky = heads["prediction_cholesky"].detach().cpu().numpy()
-        q_values = heads["service_q"].detach().cpu().numpy()
+        service_q = torch.sigmoid(heads["service_q"]) if self.forecast_package else heads["service_q"]
+        q_values = service_q.detach().cpu().numpy()
         for lane in range(width):
             incumbent = 2 * int(owner[lane]); standby_shadow = 2 * (1 - int(owner[lane])) + 1
             rows["prediction_mean"][lane, :4] = prediction[lane, incumbent]
@@ -388,6 +391,8 @@ class NativePersistentTrainingFlow:
         self, *, native: NativeBatch, arm: str, master: bytes, block: int,
         checkpoint_bytes: bytes | None = None,
         state: RecurrentRolloutState | None = None,
+        forecast_package: bool = False, progress: dict | None = None,
+        deadline: float | None = None,
     ) -> None:
         if native.width != TRAIN_LANES:
             raise RecurrentTrainerError("TRAIN native width must be 32")
@@ -395,13 +400,16 @@ class NativePersistentTrainingFlow:
             raise RecurrentTrainerError("master-addressed initial training state is required")
         self.state = RecurrentRolloutState.fresh(arm) if state is None else state
         self.native = native
+        self.forecast_package = forecast_package
         self.sampler = MasterAddressedPolicySampler(
             master=master, block=block, arm=arm,
             episode_wave=self.state.lane_episode_wave, episode_tick=self.state.lane_episode_tick,
         )
         self.reset_factory = MasterAddressedTrainResetFactory(master=master, block=block, arm=arm)
-        self.trainer = PersistentTrainer(arm=arm, checkpoint_bytes=checkpoint_bytes)
-        self.policy = BatchedRecurrentPolicy(arm=arm, checkpoint_bytes=checkpoint_bytes, state=self.state)
+        self.trainer = PersistentTrainer(arm=arm, checkpoint_bytes=checkpoint_bytes,
+                                         forecast_package=forecast_package, progress=progress, deadline=deadline)
+        self.policy = BatchedRecurrentPolicy(arm=arm, checkpoint_bytes=checkpoint_bytes, state=self.state,
+                                             forecast_package=forecast_package)
 
     def collect_update(self, initial_observation: Mapping[str, np.ndarray]) -> Mapping[str, torch.Tensor]:
         """Collect exactly 32x128 native transitions for one PPO update."""
@@ -529,6 +537,7 @@ class NativePersistentTrainingFlow:
         self.state.critic_welford = retained["welford"]["critic"]
         self.policy = BatchedRecurrentPolicy(
             arm=self.state.arm, checkpoint_bytes=self.trainer.checkpoint_bytes, state=self.state,
+            forecast_package=self.forecast_package,
         )
         return receipt
 
