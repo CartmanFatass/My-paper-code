@@ -120,3 +120,19 @@ of the node focused check.
 - Numeric fill-in of `<C>` and `<1800 - C/2 - 3.4>` after `C` is measured.
 
 scope: none
+
+## Execution addendum (hub, 2026-09-06 10:35 PDT)
+
+Launch sha `ad01757c43cb3a3df6549b024367b5f9307246b8` (main; the Grok branch commit 78f07a0de was
+cherry-picked as ad01757c4). The frozen commands above omitted `PYTHONPATH=<worktree>`, which
+B02's commands set; the first CONTROL attempt therefore failed at 2.48 s with
+`ModuleNotFoundError: experiments` before any RNG/model/learner work (record preserved under
+`forecast_package_b03_20260906/` on the node), after an earlier attempt that died in the
+operator's SSH quoting layer (0 s). Attempt 3 ran from launch scripts with `PYTHONPATH`
+exported and output root `forecast_package_b03_20260906_r3/`: shared preparation
+`n3_b03_focused_20260906` 21 passed in 4.37 s (includes `test_package.py` and
+`test_runner_publish_under_resource`), `C = 4.94 s`; CONTROL `n3_b03_control_20260906_r3`
+exit 0, wall 211.04 s; FORECAST_PACKAGE `n3_b03_forecast_package_20260906_r3` exit 0, wall
+196.18 s; both `COMPLETE`, paired primary `COMPLETE`. Evidence copied to
+`b03_forecast_package_20260906/`; result intake
+`DISH_FORECAST_PACKAGE_B03_RESULT_INTAKE_20260906.md`.
