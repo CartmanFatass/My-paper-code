@@ -1,0 +1,12 @@
+{
+  "request_id": "2026-09-05-github-existing-conflict-recovery-01",
+  "dispatch_state": "DISPATCH_ACCEPTED",
+  "recorded_at": "2026-09-06T00:22:32.043205+00:00",
+  "operator_thread_id": "01a06f0e-5eab-7431-8491-e7c2c62705b6",
+  "dispatch_count": 1,
+  "provider_send_state": "not yet independently observed by Root",
+  "status": "awaiting provider execution and archive; not passed",
+  "owner_instruction": "User explicitly authorized remote existing-delivery and conflicting-target verification; no workflow design review",
+  "root_fixture_commit": "27e588ded4c6305e3cef6b97c16658b856bc715d",
+  "next": "Compare both branch heads, raw target bytes and Issue3 comments against BEFORE.json after receipt; archive full original response. No duplicate Send. Overall migration remains unstarted."
+}
