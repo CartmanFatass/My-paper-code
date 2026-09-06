@@ -58,8 +58,13 @@ def run_full_4096_test_update(
 class PersistentTrainer:
     """Private model/optimizer state carried through exactly 1,024 updates."""
 
-    def __init__(self, *, arm: str, checkpoint_bytes: bytes | None = None) -> None:
+    def __init__(self, *, arm: str, checkpoint_bytes: bytes | None = None,
+                 forecast_package: bool = False, progress: dict | None = None,
+                 deadline: float | None = None) -> None:
         self.arm = arm
+        self.forecast_package = forecast_package
+        self.progress = progress
+        self.deadline = deadline
         self.checkpoint_bytes = checkpoint_bytes
         self.update = 0
 
@@ -69,6 +74,7 @@ class PersistentTrainer:
         result = _retained_full_update(
             arm=self.arm, fragments=fragments, source_label=source_label,
             resume_checkpoint_bytes=self.checkpoint_bytes,
+            forecast_package=self.forecast_package, progress=self.progress, deadline=self.deadline,
         )
         self.checkpoint_bytes = bytes(result.pop("private_checkpoint_bytes"))
         self.update = int(result["update"])
