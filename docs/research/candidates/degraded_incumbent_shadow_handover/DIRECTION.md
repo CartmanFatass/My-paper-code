@@ -595,3 +595,25 @@ preparation is one focused check on `wsl_4070` that also closes the Windows `tes
 collection gap; no new A. Card `DISH_FORECAST_PACKAGE_B03_SCIENCE_CARD_20260906.md`; CM objective
 `DISH_FORECAST_PACKAGE_B03_CM_OBJECTIVE_20260906.md` (Grok Build thin entry, hub review).
 R02 stays closed; B01, A01–A05 and B02's qualified readings stand; no Portfolio change.
+
+## Adverse forecast-package B03 on the corrected boundary — 2026-09-06
+
+`DISH-FORECAST-PACKAGE-B03` (B/EXPLORE, card `DISH_FORECAST_PACKAGE_B03_SCIENCE_CARD_20260906.md`;
+thin entry by Grok Build reusing the B02 study, integrated at `ad01757c4`) completed both arms
+on `wsl_4070` (shared focused check 21 passed including `test_package.py`, C = 4.94 s; CONTROL
+211.04 s, FORECAST_PACKAGE 196.18 s; pair charge 412.16 s of 3,600 s; two earlier CONTROL
+attempts failed in the launch wrapper before any learner work and carry no exposure). Result:
+`Delta_B03 = −272.0` mean service ticks against MEI +24 (CONTROL 460.5, package 188.5; rows
+452/92, 458/222, 449/129, 483/311); the pair's only hard events (`separation_breach` 1,
+`invalid_commit` 17) are in the package arm; no legal transfer; package energy 4–7 % lower.
+Card row 3 applied: **adverse** for the joint forecast package at this exposure
+(`DISH_FORECAST_PACKAGE_B03_RESULT_INTAKE_20260906.md`); no further seeds or variants of the
+unchanged package. Independent fact recorded at its own ceiling: from an identical, near-saturated
+update 1 (98 % of training lane-ticks served) both arms' training service collapses by update 16
+(CONTROL 435, package 1,340 of 4,096) and the final checkpoints serve 38–40 % (CONTROL) and
+8–26 % (package) of the 1,200-tick horizon; the package's loss and gradient norm explode
+(finite) at updates 2 and 10–13. The DM's inside-margin prediction was wrong; the node's
+prospective judgement held. B02's inside-MEI reading on the lagged path stands; B02 and B03 are
+not two replicates. The family's next decision (end the package family; a zero-training witness
+of the initial and update-16 policies on the corrected boundary; a learner-stability B; or park)
+is put to `em:dish:convergence` (`pro_packets/20260906_post_b03_convergence/`).
