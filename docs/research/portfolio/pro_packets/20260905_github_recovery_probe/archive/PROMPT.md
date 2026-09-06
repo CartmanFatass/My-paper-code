@@ -1,0 +1,1 @@
+所有者授权的隔离恢复验证，并非科研或规范审阅。请读取并执行固定任务中的两项条件处理：https://github.com/CartmanFatass/My-paper-code/blob/2fd1cf09a482a7a95adff27b97256a7162a86d29/docs/research/portfolio/pro_packets/20260905_github_recovery_probe/TASK.md 。只允许该任务精确声明的条件写入范围；实际查验既有交付和目标内容后复用或报告冲突。最后简短自然语言返回两项结果和实际链接，不搬运正文或路由字段。

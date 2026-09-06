@@ -23,6 +23,21 @@ Use the available `mcp__cua_repl` browser API. Initialize it using the tool's do
 entry point, then read the returned documentation before acting. Use only available
 browser methods; an unavailable export or locator API is not permission to resend.
 
+## Scoped GitHub delivery — OWNER_DIRECT 2026-09-05
+
+All newly authored requests now use GitHub delivery (owner overall cutover).
+No additional VNFC trial or Pro design review is required. Keep accepted in-flight
+requests on their original route, without another Send.
+An Author handoff with `delivery_mode=github_delivery` uses the already supported
+paste transport request. Send its short fixed task link verbatim, no attachment,
+read-only preamble or copied evidence. Dispatch only a bound READY_TO_DISPATCH task;
+TASK_NOT_PUBLISHED has no provider payload. This mode authorizes Pro's named file
+and comment; Transport does not write them. Archive the complete short chat reply
+and actual URLs unchanged. Root/DM retrieves the full file for scientific intake;
+a delivery receipt alone is not a formed Pro decision. Repeated/uncertain receipt
+handling observes existing state, never repeats Send. Keep request-scoped existing
+waiting and cleanup, singleton/provider binding and parent model unchanged.
+
 ## Input contract and authority
 
 Accept a request object containing `request_id`, `direction_id`, `direction_ids`,
@@ -63,7 +78,8 @@ and preserve the byte hashes and intended order where the page permits. The
 one-to-one binding-key/conversation rule still applies to the body and all
 references together.
 
-For canonical Prompt Author handoffs, `PROMPT_BODY.md` is the sole scientific
+For already accepted or explicit fallback attachment-mode Author handoffs only,
+`PROMPT_BODY.md` is the sole scientific
 attachment: its `GITHUB_EVIDENCE_MANIFEST` already contains the read-only reference
 metadata. Such a handoff must not declare, upload, or synthesize `reference_paths`.
 `scripts/validate_request.py` recognizes `source_mode=single_body_attachment`,

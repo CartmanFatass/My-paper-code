@@ -1,0 +1,38 @@
+=== Task 'vnfc_b01_check_33e08f440_20260905_01' started at 2026-09-06T07:09:59+08:00 ===
+{
+  "assessed_at": "2026-09-05T23:09:59.308684Z",
+  "available_physical_bytes": 15423397888,
+  "captured_at": "2026-09-05T23:09:59.308407Z",
+  "cgroup_headroom_bytes": null,
+  "cgroup_memory_current_bytes": null,
+  "cgroup_memory_max_bytes": null,
+  "effective_available_bytes": 15423397888,
+  "effective_floor_pass": true,
+  "failure_reasons": [],
+  "measurement_source": "/proc/meminfo",
+  "minimum_available_bytes": 4294967296,
+  "passed": true,
+  "physical_floor_pass": true,
+  "schema_version": 1
+}
+Traceback (most recent call last):
+  File "/home/wu/hmasd-worktrees/vnfc_b01_check_33e08f440/scripts/run_vnfc_n7_direct_b01.py", line 37, in <module>
+    raise SystemExit(main())
+  File "/home/wu/hmasd-worktrees/vnfc_b01_check_33e08f440/scripts/run_vnfc_n7_direct_b01.py", line 32, in main
+    final = run(config, args.out, args.launch_sha, STARTED)
+  File "/home/wu/hmasd-worktrees/vnfc_b01_check_33e08f440/experiments/candidates/variable_n_fleet_churn_n7_direct_b01/experiment.py", line 127, in run
+    models, optimizers = learning.initialize(config["seed"], config["namespace"])
+  File "/home/wu/hmasd-worktrees/vnfc_b01_check_33e08f440/experiments/candidates/variable_n_fleet_churn_n7_direct_b01/learning.py", line 59, in initialize
+    target[name] = (domain, source.normal_array(_normal_source_shape(shape), builder, now=None))
+  File "/home/wu/hmasd-worktrees/vnfc_b01_check_33e08f440/scripts/run_vnfc_bpcr_b_explore.py", line 284, in normal_array
+    u2 = (self.word(builder(2 * pair + 1), now=now) + .5) / scale  # type: ignore[operator]
+  File "/home/wu/hmasd-worktrees/vnfc_b01_check_33e08f440/scripts/run_vnfc_bpcr_b_explore.py", line 278, in word
+    return int.from_bytes(hmac.new(self.master, coordinate.encode(), hashlib.sha256).digest()[:8], "big")  # type: ignore[attr-defined]
+  File "/home/wu/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/hmac.py", line 184, in new
+    return HMAC(key, msg, digestmod)
+  File "/home/wu/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/hmac.py", line 60, in __init__
+    self._init_hmac(key, msg, digestmod)
+  File "/home/wu/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/hmac.py", line 68, in _init_hmac
+    self.digest_size = self._hmac.digest_size
+AttributeError: 'HMAC' object has no attribute 'digest_size'
+=== Task 'vnfc_b01_check_33e08f440_20260905_01' exited with code 1 at 2026-09-06T07:10:03+08:00 (Duration: 4s) ===

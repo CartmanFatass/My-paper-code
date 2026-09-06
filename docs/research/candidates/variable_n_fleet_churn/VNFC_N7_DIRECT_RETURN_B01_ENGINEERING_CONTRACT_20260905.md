@@ -70,3 +70,30 @@ are selected. CM returns implementation, independent review, focused-check facts
 cost projection with uncertainty and the exact formal command to Root/DM before formal execution.
 An unowned dependency, missing primary correctness or over-cap plan returns as that concrete
 engineering gap without dropping an arm or reinterpreting scientific feasibility.
+
+## Committed check invocation and independent review
+
+Accepted source for the one check: `33e08f440c2117dcfd9457d825f42fef7b38ccd7`.
+Independent reviewer inspected all five files and the final same-batch presentation check;
+no unresolved material finding. Its cost omission finding was repaired before this commit.
+Production additions538 lines (runner37), tests45; existing dependency files are unchanged.
+Local syntax parsing only has run. Draft engineering PR: https://github.com/CartmanFatass/My-paper-code/pull/2 .
+
+Execution node `wsl_4070`; remote detached worktree and cwd:
+`/home/wu/hmasd-worktrees/vnfc_b01_check_33e08f440`.
+Supervisor task: `vnfc_b01_check_33e08f440_20260905_01`.
+Relative receipt `temp/directions/variable_n_fleet_churn/b01_check_20260905_01/memory.json`;
+output root `temp/directions/variable_n_fleet_churn/b01_check_20260905_01/output`.
+Freeze this complete supervised command (line breaks are presentation only):
+
+```sh
+cd /home/wu/hmasd-worktrees/vnfc_b01_check_33e08f440 && /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/variable_n_fleet_churn/b01_check_20260905_01/memory.json && /usr/bin/time -v -o temp/directions/variable_n_fleet_churn/b01_check_20260905_01/whole_time.txt timeout 300s bash -lc '/home/wu/.venvs/hmasd/bin/python scripts/run_vnfc_n7_direct_b01.py --profile engineering-check --seed 2026090591 --eval-seed 2026090592 --launch-sha 33e08f440c2117dcfd9457d825f42fef7b38ccd7 --out temp/directions/variable_n_fleet_churn/b01_check_20260905_01/output && VNFC_B01_CHECK_ROOT=temp/directions/variable_n_fleet_churn/b01_check_20260905_01/output /home/wu/.venvs/hmasd/bin/python -m pytest -q tests/experiments/candidates/variable_n_fleet_churn_n7_direct_b01/test_output.py'
+```
+
+The300s external bound includes the real runner plus its existing-output check, all imports,
+native build and publication. `/usr/bin/time` observes the complete sequential chain and actual
+children; no extra scientific process runs concurrently. Final stdout `complete_projection`
+includes the final summary replacement write/readback; retain it with the main summary.
+Summary alone explicitly excludes that last replacement from its intermediate projection.
+Memory admission is outside the timed scientific/check chain and immediately precedes it.
+No formal B01 invocation is selected by this check command.

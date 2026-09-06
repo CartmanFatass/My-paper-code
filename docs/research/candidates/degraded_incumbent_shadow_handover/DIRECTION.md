@@ -457,3 +457,29 @@ Existing PRO_FINAL CONTINUE, prior valid evidence, closed R02 and constituent id
 remain. Evidence: `DISH_A05_APPROVED_RESULT_EVIDENCE_20260905.md`,
 `a05_approved_20260905/formal-summary.json`, `DISH_A05_APPROVED_CM_TECHNICAL_RECORD_20260905.md`
 and `DISH_A05_APPROVED_INTAKE_20260905.md`.
+
+## Post-A05 Convergence and selected package B02 — 2026-09-05
+
+The complete formed response selects **PRO_FINAL CONTINUE, not RECAST**, through one
+new real learner/package B on the A03 ground-terminal host. It compares the inherited
+controller with a joint sigmoid service-interface and mean/Cholesky likelihood package,
+using one paired training seed, sixteen updates and four ordinary final-checkpoint
+episodes per arm. The primary quantity is whole-episode native service, with a +24-tick
+useful-effect scale. A native gain could be incumbent-only and would not establish
+calibration, source value or stable superiority.
+
+The concrete support is restored ordinary information/service plus the bounded A04/A05
+interface explanation. The strongest contradiction remains no observed legal handover
+or repair benefit; changed covariance can affect snapshots or certificate permissiveness.
+Component attribution, co-adaptation and COPY/RETAIN/replay alternatives remain unresolved.
+Current evidence-spec §§11.8–11.9 permit this performance comparison without prior exact
+reconstruction, support census or complete mechanism localization. No such additional
+diagnostic is selected, and no B02 result or code acceptance is asserted.
+
+The next discriminator is the selected bounded B02 pair under 1,800 seconds per complete
+arm invocation, with all ordinary and passive-label learning work charged. Source-derived
+work counts are explicit; matching whole-run wall/CPU remain unmeasured. Historical B01,
+A01–A05 and the closed R02 retain their meanings, with no change to other N3 constituents.
+Evidence: `DISH_POST_A05_CONVERGENCE_INTAKE_20260905.md`,
+`DISH_FORECAST_PACKAGE_B02_SCIENCE_CARD_20260905.md`, and the exact response under
+`pro_packets/20260905_post_a05_convergence/archive/`.

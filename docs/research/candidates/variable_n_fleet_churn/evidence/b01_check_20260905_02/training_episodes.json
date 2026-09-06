@@ -1,0 +1,7426 @@
+[
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.07058823529411765,
+    "U_intact": 0.13333333333333333,
+    "J_ext": 0.03529411764705882,
+    "fail_endpoint": [
+      0,
+      100
+    ],
+    "total_endpoint": [
+      24,
+      340
+    ],
+    "intact_endpoint": [
+      24,
+      180
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 40,
+    "integrated_ticks": 240,
+    "zone": 1,
+    "world": 0,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "MAPR",
+    "round": 1
+  },
+  {
+    "R_fail_60": 0.06666666666666667,
+    "U_total": 0.23846153846153847,
+    "U_intact": 0.3142857142857143,
+    "J_ext": 0.15256410256410258,
+    "fail_endpoint": [
+      4,
+      60
+    ],
+    "total_endpoint": [
+      62,
+      260
+    ],
+    "intact_endpoint": [
+      44,
+      140
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 39,
+    "integrated_ticks": 240,
+    "zone": 1,
+    "world": 1,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      }
+    ],
+    "arm": "MAPR",
+    "round": 1
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.05263157894736842,
+    "U_intact": 0.1,
+    "J_ext": 0.02631578947368421,
+    "fail_endpoint": [
+      0,
+      100
+    ],
+    "total_endpoint": [
+      20,
+      380
+    ],
+    "intact_endpoint": [
+      20,
+      200
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 40,
+    "integrated_ticks": 240,
+    "zone": 1,
+    "world": 2,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "MAPR",
+    "round": 1
+  },
+  {
+    "R_fail_60": 0.14,
+    "U_total": 0.10625,
+    "U_intact": 0.0,
+    "J_ext": 0.12312500000000001,
+    "fail_endpoint": [
+      14,
+      100
+    ],
+    "total_endpoint": [
+      34,
+      320
+    ],
+    "intact_endpoint": [
+      0,
+      160
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 32,
+    "integrated_ticks": 240,
+    "zone": 1,
+    "world": 3,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      }
+    ],
+    "arm": "MAPR",
+    "round": 1
+  },
+  {
+    "R_fail_60": 0.06666666666666667,
+    "U_total": 0.12222222222222222,
+    "U_intact": 0.2222222222222222,
+    "J_ext": 0.09444444444444444,
+    "fail_endpoint": [
+      4,
+      60
+    ],
+    "total_endpoint": [
+      44,
+      360
+    ],
+    "intact_endpoint": [
+      40,
+      180
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 36,
+    "integrated_ticks": 240,
+    "zone": 1,
+    "world": 4,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 2
+      }
+    ],
+    "arm": "MAPR",
+    "round": 1
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.0125,
+    "U_intact": 0.0,
+    "J_ext": 0.00625,
+    "fail_endpoint": [
+      0,
+      60
+    ],
+    "total_endpoint": [
+      4,
+      320
+    ],
+    "intact_endpoint": [
+      0,
+      180
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 39,
+    "integrated_ticks": 240,
+    "zone": 1,
+    "world": 5,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "MAPR",
+    "round": 1
+  },
+  {
+    "R_fail_60": 0.05,
+    "U_total": 0.03076923076923077,
+    "U_intact": 0.03333333333333333,
+    "J_ext": 0.04038461538461539,
+    "fail_endpoint": [
+      4,
+      80
+    ],
+    "total_endpoint": [
+      8,
+      260
+    ],
+    "intact_endpoint": [
+      4,
+      120
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 39,
+    "integrated_ticks": 240,
+    "zone": 1,
+    "world": 6,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "MAPR",
+    "round": 1
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.04666666666666667,
+    "U_intact": 0.07777777777777778,
+    "J_ext": 0.023333333333333334,
+    "fail_endpoint": [
+      0,
+      60
+    ],
+    "total_endpoint": [
+      14,
+      300
+    ],
+    "intact_endpoint": [
+      14,
+      180
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 40,
+    "integrated_ticks": 240,
+    "zone": 1,
+    "world": 7,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "MAPR",
+    "round": 1
+  },
+  {
+    "R_fail_60": 0.06666666666666667,
+    "U_total": 0.21785714285714286,
+    "U_intact": 0.26875,
+    "J_ext": 0.14226190476190476,
+    "fail_endpoint": [
+      4,
+      60
+    ],
+    "total_endpoint": [
+      61,
+      280
+    ],
+    "intact_endpoint": [
+      43,
+      160
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 39,
+    "integrated_ticks": 240,
+    "zone": 1,
+    "world": 8,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "MAPR",
+    "round": 1
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.07058823529411765,
+    "U_intact": 0.2,
+    "J_ext": 0.03529411764705882,
+    "fail_endpoint": [
+      0,
+      120
+    ],
+    "total_endpoint": [
+      24,
+      340
+    ],
+    "intact_endpoint": [
+      24,
+      120
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 39,
+    "integrated_ticks": 240,
+    "zone": 1,
+    "world": 9,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "MAPR",
+    "round": 1
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.009523809523809525,
+    "U_intact": 0.02,
+    "J_ext": 0.004761904761904762,
+    "fail_endpoint": [
+      0,
+      100
+    ],
+    "total_endpoint": [
+      4,
+      420
+    ],
+    "intact_endpoint": [
+      4,
+      200
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 35,
+    "integrated_ticks": 240,
+    "zone": 1,
+    "world": 10,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      }
+    ],
+    "arm": "MAPR",
+    "round": 1
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.07647058823529412,
+    "U_intact": 0.1375,
+    "J_ext": 0.03823529411764706,
+    "fail_endpoint": [
+      0,
+      80
+    ],
+    "total_endpoint": [
+      26,
+      340
+    ],
+    "intact_endpoint": [
+      22,
+      160
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 43,
+    "integrated_ticks": 240,
+    "zone": 1,
+    "world": 11,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      }
+    ],
+    "arm": "MAPR",
+    "round": 1
+  },
+  {
+    "R_fail_60": 0.06666666666666667,
+    "U_total": 0.025,
+    "U_intact": 0.02,
+    "J_ext": 0.04583333333333334,
+    "fail_endpoint": [
+      4,
+      60
+    ],
+    "total_endpoint": [
+      8,
+      320
+    ],
+    "intact_endpoint": [
+      4,
+      200
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 40,
+    "integrated_ticks": 240,
+    "zone": 1,
+    "world": 12,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "MAPR",
+    "round": 1
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.06666666666666667,
+    "U_intact": 0.16666666666666666,
+    "J_ext": 0.03333333333333333,
+    "fail_endpoint": [
+      0,
+      80
+    ],
+    "total_endpoint": [
+      20,
+      300
+    ],
+    "intact_endpoint": [
+      20,
+      120
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 38,
+    "integrated_ticks": 240,
+    "zone": 1,
+    "world": 13,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "MAPR",
+    "round": 1
+  },
+  {
+    "R_fail_60": 0.3,
+    "U_total": 0.4,
+    "U_intact": 0.16666666666666666,
+    "J_ext": 0.35,
+    "fail_endpoint": [
+      24,
+      80
+    ],
+    "total_endpoint": [
+      104,
+      260
+    ],
+    "intact_endpoint": [
+      20,
+      120
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 30,
+    "integrated_ticks": 240,
+    "zone": 1,
+    "world": 14,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      }
+    ],
+    "arm": "MAPR",
+    "round": 1
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.023076923076923078,
+    "U_intact": 0.04285714285714286,
+    "J_ext": 0.011538461538461539,
+    "fail_endpoint": [
+      0,
+      60
+    ],
+    "total_endpoint": [
+      6,
+      260
+    ],
+    "intact_endpoint": [
+      6,
+      140
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 41,
+    "integrated_ticks": 240,
+    "zone": 1,
+    "world": 15,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "MAPR",
+    "round": 1
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.01818181818181818,
+    "U_intact": 0.02,
+    "J_ext": 0.00909090909090909,
+    "fail_endpoint": [
+      0,
+      120
+    ],
+    "total_endpoint": [
+      8,
+      440
+    ],
+    "intact_endpoint": [
+      4,
+      200
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 35,
+    "integrated_ticks": 240,
+    "zone": 2,
+    "world": 16,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      }
+    ],
+    "arm": "MAPR",
+    "round": 1
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.04375,
+    "U_intact": 0.1,
+    "J_ext": 0.021875,
+    "fail_endpoint": [
+      0,
+      120
+    ],
+    "total_endpoint": [
+      14,
+      320
+    ],
+    "intact_endpoint": [
+      14,
+      140
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 37,
+    "integrated_ticks": 240,
+    "zone": 2,
+    "world": 17,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "MAPR",
+    "round": 1
+  },
+  {
+    "R_fail_60": 0.03333333333333333,
+    "U_total": 0.11818181818181818,
+    "U_intact": 0.24,
+    "J_ext": 0.07575757575757576,
+    "fail_endpoint": [
+      4,
+      120
+    ],
+    "total_endpoint": [
+      52,
+      440
+    ],
+    "intact_endpoint": [
+      48,
+      200
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 40,
+    "integrated_ticks": 240,
+    "zone": 2,
+    "world": 18,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "MAPR",
+    "round": 1
+  },
+  {
+    "R_fail_60": 0.04,
+    "U_total": 0.02631578947368421,
+    "U_intact": 0.0,
+    "J_ext": 0.03315789473684211,
+    "fail_endpoint": [
+      4,
+      100
+    ],
+    "total_endpoint": [
+      10,
+      380
+    ],
+    "intact_endpoint": [
+      0,
+      160
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 42,
+    "integrated_ticks": 240,
+    "zone": 2,
+    "world": 19,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "MAPR",
+    "round": 1
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.09473684210526316,
+    "U_intact": 0.12727272727272726,
+    "J_ext": 0.04736842105263158,
+    "fail_endpoint": [
+      0,
+      80
+    ],
+    "total_endpoint": [
+      36,
+      380
+    ],
+    "intact_endpoint": [
+      28,
+      220
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 44,
+    "integrated_ticks": 240,
+    "zone": 2,
+    "world": 20,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "MAPR",
+    "round": 1
+  },
+  {
+    "R_fail_60": 0.06666666666666667,
+    "U_total": 0.15,
+    "U_intact": 0.22,
+    "J_ext": 0.10833333333333334,
+    "fail_endpoint": [
+      4,
+      60
+    ],
+    "total_endpoint": [
+      48,
+      320
+    ],
+    "intact_endpoint": [
+      44,
+      200
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 38,
+    "integrated_ticks": 240,
+    "zone": 2,
+    "world": 21,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      }
+    ],
+    "arm": "MAPR",
+    "round": 1
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.11666666666666667,
+    "U_intact": 0.045,
+    "J_ext": 0.058333333333333334,
+    "fail_endpoint": [
+      0,
+      120
+    ],
+    "total_endpoint": [
+      49,
+      420
+    ],
+    "intact_endpoint": [
+      9,
+      200
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 39,
+    "integrated_ticks": 240,
+    "zone": 2,
+    "world": 22,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 2.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "MAPR",
+    "round": 1
+  },
+  {
+    "R_fail_60": 0.04,
+    "U_total": 0.022222222222222223,
+    "U_intact": 0.02857142857142857,
+    "J_ext": 0.03111111111111111,
+    "fail_endpoint": [
+      4,
+      100
+    ],
+    "total_endpoint": [
+      8,
+      360
+    ],
+    "intact_endpoint": [
+      4,
+      140
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 44,
+    "integrated_ticks": 240,
+    "zone": 2,
+    "world": 23,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "MAPR",
+    "round": 1
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.23076923076923078,
+    "U_intact": 0.16666666666666666,
+    "J_ext": 0.11538461538461539,
+    "fail_endpoint": [
+      0,
+      80
+    ],
+    "total_endpoint": [
+      60,
+      260
+    ],
+    "intact_endpoint": [
+      20,
+      120
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 39,
+    "integrated_ticks": 240,
+    "zone": 2,
+    "world": 24,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      }
+    ],
+    "arm": "MAPR",
+    "round": 1
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.011764705882352941,
+    "U_intact": 0.0,
+    "J_ext": 0.0058823529411764705,
+    "fail_endpoint": [
+      0,
+      120
+    ],
+    "total_endpoint": [
+      4,
+      340
+    ],
+    "intact_endpoint": [
+      0,
+      160
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 34,
+    "integrated_ticks": 240,
+    "zone": 2,
+    "world": 25,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "MAPR",
+    "round": 1
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.13333333333333333,
+    "U_intact": 0.15,
+    "J_ext": 0.06666666666666667,
+    "fail_endpoint": [
+      0,
+      60
+    ],
+    "total_endpoint": [
+      32,
+      240
+    ],
+    "intact_endpoint": [
+      18,
+      120
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 38,
+    "integrated_ticks": 240,
+    "zone": 2,
+    "world": 26,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      }
+    ],
+    "arm": "MAPR",
+    "round": 1
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.02,
+    "U_intact": 0.022222222222222223,
+    "J_ext": 0.01,
+    "fail_endpoint": [
+      0,
+      120
+    ],
+    "total_endpoint": [
+      8,
+      400
+    ],
+    "intact_endpoint": [
+      4,
+      180
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 40,
+    "integrated_ticks": 240,
+    "zone": 2,
+    "world": 27,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      }
+    ],
+    "arm": "MAPR",
+    "round": 1
+  },
+  {
+    "R_fail_60": 0.04,
+    "U_total": 0.0380952380952381,
+    "U_intact": 0.02,
+    "J_ext": 0.03904761904761905,
+    "fail_endpoint": [
+      4,
+      100
+    ],
+    "total_endpoint": [
+      16,
+      420
+    ],
+    "intact_endpoint": [
+      4,
+      200
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 42,
+    "integrated_ticks": 240,
+    "zone": 2,
+    "world": 28,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "MAPR",
+    "round": 1
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.1368421052631579,
+    "U_intact": 0.275,
+    "J_ext": 0.06842105263157895,
+    "fail_endpoint": [
+      0,
+      100
+    ],
+    "total_endpoint": [
+      52,
+      380
+    ],
+    "intact_endpoint": [
+      44,
+      160
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 34,
+    "integrated_ticks": 240,
+    "zone": 2,
+    "world": 29,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "MAPR",
+    "round": 1
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.07058823529411765,
+    "U_intact": 0.03333333333333333,
+    "J_ext": 0.03529411764705882,
+    "fail_endpoint": [
+      0,
+      120
+    ],
+    "total_endpoint": [
+      24,
+      340
+    ],
+    "intact_endpoint": [
+      4,
+      120
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 44,
+    "integrated_ticks": 240,
+    "zone": 2,
+    "world": 30,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 2
+      }
+    ],
+    "arm": "MAPR",
+    "round": 1
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.05,
+    "U_intact": 0.0,
+    "J_ext": 0.025,
+    "fail_endpoint": [
+      0,
+      60
+    ],
+    "total_endpoint": [
+      14,
+      280
+    ],
+    "intact_endpoint": [
+      0,
+      160
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 38,
+    "integrated_ticks": 240,
+    "zone": 2,
+    "world": 31,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      }
+    ],
+    "arm": "MAPR",
+    "round": 1
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.1411764705882353,
+    "U_intact": 0.26666666666666666,
+    "J_ext": 0.07058823529411765,
+    "fail_endpoint": [
+      0,
+      100
+    ],
+    "total_endpoint": [
+      48,
+      340
+    ],
+    "intact_endpoint": [
+      48,
+      180
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 36,
+    "integrated_ticks": 240,
+    "zone": 1,
+    "world": 0,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "DIRECT",
+    "round": 1
+  },
+  {
+    "R_fail_60": 0.06666666666666667,
+    "U_total": 0.2,
+    "U_intact": 0.1,
+    "J_ext": 0.13333333333333333,
+    "fail_endpoint": [
+      4,
+      60
+    ],
+    "total_endpoint": [
+      52,
+      260
+    ],
+    "intact_endpoint": [
+      14,
+      140
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 41,
+    "integrated_ticks": 240,
+    "zone": 1,
+    "world": 1,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      }
+    ],
+    "arm": "DIRECT",
+    "round": 1
+  },
+  {
+    "R_fail_60": 0.04,
+    "U_total": 0.021052631578947368,
+    "U_intact": 0.0,
+    "J_ext": 0.030526315789473686,
+    "fail_endpoint": [
+      4,
+      100
+    ],
+    "total_endpoint": [
+      8,
+      380
+    ],
+    "intact_endpoint": [
+      0,
+      200
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 41,
+    "integrated_ticks": 240,
+    "zone": 1,
+    "world": 2,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "DIRECT",
+    "round": 1
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.04375,
+    "U_intact": 0.0,
+    "J_ext": 0.021875,
+    "fail_endpoint": [
+      0,
+      100
+    ],
+    "total_endpoint": [
+      14,
+      320
+    ],
+    "intact_endpoint": [
+      0,
+      160
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 33,
+    "integrated_ticks": 240,
+    "zone": 1,
+    "world": 3,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "DIRECT",
+    "round": 1
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.0,
+    "U_intact": 0.0,
+    "J_ext": 0.0,
+    "fail_endpoint": [
+      0,
+      60
+    ],
+    "total_endpoint": [
+      0,
+      360
+    ],
+    "intact_endpoint": [
+      0,
+      180
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 40,
+    "integrated_ticks": 240,
+    "zone": 1,
+    "world": 4,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "DIRECT",
+    "round": 1
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.0,
+    "U_intact": 0.0,
+    "J_ext": 0.0,
+    "fail_endpoint": [
+      0,
+      60
+    ],
+    "total_endpoint": [
+      0,
+      320
+    ],
+    "intact_endpoint": [
+      0,
+      180
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 38,
+    "integrated_ticks": 240,
+    "zone": 1,
+    "world": 5,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "DIRECT",
+    "round": 1
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.22692307692307692,
+    "U_intact": 0.2916666666666667,
+    "J_ext": 0.11346153846153846,
+    "fail_endpoint": [
+      0,
+      80
+    ],
+    "total_endpoint": [
+      59,
+      260
+    ],
+    "intact_endpoint": [
+      35,
+      120
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 40,
+    "integrated_ticks": 240,
+    "zone": 1,
+    "world": 6,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      }
+    ],
+    "arm": "DIRECT",
+    "round": 1
+  },
+  {
+    "R_fail_60": 0.23333333333333334,
+    "U_total": 0.2,
+    "U_intact": 0.12222222222222222,
+    "J_ext": 0.21666666666666667,
+    "fail_endpoint": [
+      14,
+      60
+    ],
+    "total_endpoint": [
+      60,
+      300
+    ],
+    "intact_endpoint": [
+      22,
+      180
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 44,
+    "integrated_ticks": 240,
+    "zone": 1,
+    "world": 7,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "DIRECT",
+    "round": 1
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.014285714285714285,
+    "U_intact": 0.025,
+    "J_ext": 0.007142857142857143,
+    "fail_endpoint": [
+      0,
+      60
+    ],
+    "total_endpoint": [
+      4,
+      280
+    ],
+    "intact_endpoint": [
+      4,
+      160
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 38,
+    "integrated_ticks": 240,
+    "zone": 1,
+    "world": 8,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "DIRECT",
+    "round": 1
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.014705882352941176,
+    "U_intact": 0.03333333333333333,
+    "J_ext": 0.007352941176470588,
+    "fail_endpoint": [
+      0,
+      120
+    ],
+    "total_endpoint": [
+      5,
+      340
+    ],
+    "intact_endpoint": [
+      4,
+      120
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 42,
+    "integrated_ticks": 240,
+    "zone": 1,
+    "world": 9,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      }
+    ],
+    "arm": "DIRECT",
+    "round": 1
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.002380952380952381,
+    "U_intact": 0.0,
+    "J_ext": 0.0011904761904761906,
+    "fail_endpoint": [
+      0,
+      100
+    ],
+    "total_endpoint": [
+      1,
+      420
+    ],
+    "intact_endpoint": [
+      0,
+      200
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 34,
+    "integrated_ticks": 240,
+    "zone": 1,
+    "world": 10,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "DIRECT",
+    "round": 1
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.12941176470588237,
+    "U_intact": 0.275,
+    "J_ext": 0.06470588235294118,
+    "fail_endpoint": [
+      0,
+      80
+    ],
+    "total_endpoint": [
+      44,
+      340
+    ],
+    "intact_endpoint": [
+      44,
+      160
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 38,
+    "integrated_ticks": 240,
+    "zone": 1,
+    "world": 11,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "DIRECT",
+    "round": 1
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.015625,
+    "U_intact": 0.02,
+    "J_ext": 0.0078125,
+    "fail_endpoint": [
+      0,
+      60
+    ],
+    "total_endpoint": [
+      5,
+      320
+    ],
+    "intact_endpoint": [
+      4,
+      200
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 39,
+    "integrated_ticks": 240,
+    "zone": 1,
+    "world": 12,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "DIRECT",
+    "round": 1
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.0,
+    "U_intact": 0.0,
+    "J_ext": 0.0,
+    "fail_endpoint": [
+      0,
+      80
+    ],
+    "total_endpoint": [
+      0,
+      300
+    ],
+    "intact_endpoint": [
+      0,
+      120
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 40,
+    "integrated_ticks": 240,
+    "zone": 1,
+    "world": 13,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "DIRECT",
+    "round": 1
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.05384615384615385,
+    "U_intact": 0.11666666666666667,
+    "J_ext": 0.026923076923076925,
+    "fail_endpoint": [
+      0,
+      80
+    ],
+    "total_endpoint": [
+      14,
+      260
+    ],
+    "intact_endpoint": [
+      14,
+      120
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 33,
+    "integrated_ticks": 240,
+    "zone": 1,
+    "world": 14,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "DIRECT",
+    "round": 1
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.0,
+    "U_intact": 0.0,
+    "J_ext": 0.0,
+    "fail_endpoint": [
+      0,
+      60
+    ],
+    "total_endpoint": [
+      0,
+      260
+    ],
+    "intact_endpoint": [
+      0,
+      140
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 38,
+    "integrated_ticks": 240,
+    "zone": 1,
+    "world": 15,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "DIRECT",
+    "round": 1
+  },
+  {
+    "R_fail_60": 0.03333333333333333,
+    "U_total": 0.03636363636363636,
+    "U_intact": 0.02,
+    "J_ext": 0.03484848484848485,
+    "fail_endpoint": [
+      4,
+      120
+    ],
+    "total_endpoint": [
+      16,
+      440
+    ],
+    "intact_endpoint": [
+      4,
+      200
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 42,
+    "integrated_ticks": 240,
+    "zone": 2,
+    "world": 16,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "DIRECT",
+    "round": 1
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.028125,
+    "U_intact": 0.06428571428571428,
+    "J_ext": 0.0140625,
+    "fail_endpoint": [
+      0,
+      120
+    ],
+    "total_endpoint": [
+      9,
+      320
+    ],
+    "intact_endpoint": [
+      9,
+      140
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 43,
+    "integrated_ticks": 240,
+    "zone": 2,
+    "world": 17,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 2
+      }
+    ],
+    "arm": "DIRECT",
+    "round": 1
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.06363636363636363,
+    "U_intact": 0.04,
+    "J_ext": 0.031818181818181815,
+    "fail_endpoint": [
+      0,
+      120
+    ],
+    "total_endpoint": [
+      28,
+      440
+    ],
+    "intact_endpoint": [
+      8,
+      200
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 42,
+    "integrated_ticks": 240,
+    "zone": 2,
+    "world": 18,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "DIRECT",
+    "round": 1
+  },
+  {
+    "R_fail_60": 0.08,
+    "U_total": 0.06578947368421052,
+    "U_intact": 0.00625,
+    "J_ext": 0.07289473684210526,
+    "fail_endpoint": [
+      8,
+      100
+    ],
+    "total_endpoint": [
+      25,
+      380
+    ],
+    "intact_endpoint": [
+      1,
+      160
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 44,
+    "integrated_ticks": 240,
+    "zone": 2,
+    "world": 19,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 2.0,
+        "failed_executor_state": 2
+      }
+    ],
+    "arm": "DIRECT",
+    "round": 1
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.021052631578947368,
+    "U_intact": 0.03636363636363636,
+    "J_ext": 0.010526315789473684,
+    "fail_endpoint": [
+      0,
+      80
+    ],
+    "total_endpoint": [
+      8,
+      380
+    ],
+    "intact_endpoint": [
+      8,
+      220
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 39,
+    "integrated_ticks": 240,
+    "zone": 2,
+    "world": 20,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      }
+    ],
+    "arm": "DIRECT",
+    "round": 1
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.15,
+    "U_intact": 0.22,
+    "J_ext": 0.075,
+    "fail_endpoint": [
+      0,
+      60
+    ],
+    "total_endpoint": [
+      48,
+      320
+    ],
+    "intact_endpoint": [
+      44,
+      200
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 43,
+    "integrated_ticks": 240,
+    "zone": 2,
+    "world": 21,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      }
+    ],
+    "arm": "DIRECT",
+    "round": 1
+  },
+  {
+    "R_fail_60": 0.03333333333333333,
+    "U_total": 0.06666666666666667,
+    "U_intact": 0.12,
+    "J_ext": 0.05,
+    "fail_endpoint": [
+      4,
+      120
+    ],
+    "total_endpoint": [
+      28,
+      420
+    ],
+    "intact_endpoint": [
+      24,
+      200
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 32,
+    "integrated_ticks": 240,
+    "zone": 2,
+    "world": 22,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "DIRECT",
+    "round": 1
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.0,
+    "U_intact": 0.0,
+    "J_ext": 0.0,
+    "fail_endpoint": [
+      0,
+      100
+    ],
+    "total_endpoint": [
+      0,
+      360
+    ],
+    "intact_endpoint": [
+      0,
+      140
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 40,
+    "integrated_ticks": 240,
+    "zone": 2,
+    "world": 23,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      }
+    ],
+    "arm": "DIRECT",
+    "round": 1
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.015384615384615385,
+    "U_intact": 0.0,
+    "J_ext": 0.007692307692307693,
+    "fail_endpoint": [
+      0,
+      80
+    ],
+    "total_endpoint": [
+      4,
+      260
+    ],
+    "intact_endpoint": [
+      0,
+      120
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 43,
+    "integrated_ticks": 240,
+    "zone": 2,
+    "world": 24,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "DIRECT",
+    "round": 1
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.04411764705882353,
+    "U_intact": 0.00625,
+    "J_ext": 0.022058823529411766,
+    "fail_endpoint": [
+      0,
+      120
+    ],
+    "total_endpoint": [
+      15,
+      340
+    ],
+    "intact_endpoint": [
+      1,
+      160
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 40,
+    "integrated_ticks": 240,
+    "zone": 2,
+    "world": 25,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 2
+      }
+    ],
+    "arm": "DIRECT",
+    "round": 1
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.08333333333333333,
+    "U_intact": 0.0,
+    "J_ext": 0.041666666666666664,
+    "fail_endpoint": [
+      0,
+      60
+    ],
+    "total_endpoint": [
+      20,
+      240
+    ],
+    "intact_endpoint": [
+      0,
+      120
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 36,
+    "integrated_ticks": 240,
+    "zone": 2,
+    "world": 26,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      }
+    ],
+    "arm": "DIRECT",
+    "round": 1
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.01,
+    "U_intact": 0.022222222222222223,
+    "J_ext": 0.005,
+    "fail_endpoint": [
+      0,
+      120
+    ],
+    "total_endpoint": [
+      4,
+      400
+    ],
+    "intact_endpoint": [
+      4,
+      180
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 43,
+    "integrated_ticks": 240,
+    "zone": 2,
+    "world": 27,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "DIRECT",
+    "round": 1
+  },
+  {
+    "R_fail_60": 0.04,
+    "U_total": 0.01904761904761905,
+    "U_intact": 0.02,
+    "J_ext": 0.029523809523809525,
+    "fail_endpoint": [
+      4,
+      100
+    ],
+    "total_endpoint": [
+      8,
+      420
+    ],
+    "intact_endpoint": [
+      4,
+      200
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 41,
+    "integrated_ticks": 240,
+    "zone": 2,
+    "world": 28,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "DIRECT",
+    "round": 1
+  },
+  {
+    "R_fail_60": 0.04,
+    "U_total": 0.08421052631578947,
+    "U_intact": 0.05,
+    "J_ext": 0.06210526315789473,
+    "fail_endpoint": [
+      4,
+      100
+    ],
+    "total_endpoint": [
+      32,
+      380
+    ],
+    "intact_endpoint": [
+      8,
+      160
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 35,
+    "integrated_ticks": 240,
+    "zone": 2,
+    "world": 29,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      }
+    ],
+    "arm": "DIRECT",
+    "round": 1
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.0,
+    "U_intact": 0.0,
+    "J_ext": 0.0,
+    "fail_endpoint": [
+      0,
+      120
+    ],
+    "total_endpoint": [
+      0,
+      340
+    ],
+    "intact_endpoint": [
+      0,
+      120
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 39,
+    "integrated_ticks": 240,
+    "zone": 2,
+    "world": 30,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "DIRECT",
+    "round": 1
+  },
+  {
+    "R_fail_60": 0.06666666666666667,
+    "U_total": 0.08571428571428572,
+    "U_intact": 0.125,
+    "J_ext": 0.0761904761904762,
+    "fail_endpoint": [
+      4,
+      60
+    ],
+    "total_endpoint": [
+      24,
+      280
+    ],
+    "intact_endpoint": [
+      20,
+      160
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 36,
+    "integrated_ticks": 240,
+    "zone": 2,
+    "world": 31,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "DIRECT",
+    "round": 1
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.12857142857142856,
+    "U_intact": 0.24545454545454545,
+    "J_ext": 0.06428571428571428,
+    "fail_endpoint": [
+      0,
+      120
+    ],
+    "total_endpoint": [
+      54,
+      420
+    ],
+    "intact_endpoint": [
+      54,
+      220
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 39,
+    "integrated_ticks": 240,
+    "zone": 1,
+    "world": 0,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "MAPR",
+    "round": 2
+  },
+  {
+    "R_fail_60": 0.06666666666666667,
+    "U_total": 0.04285714285714286,
+    "U_intact": 0.02857142857142857,
+    "J_ext": 0.05476190476190476,
+    "fail_endpoint": [
+      4,
+      60
+    ],
+    "total_endpoint": [
+      12,
+      280
+    ],
+    "intact_endpoint": [
+      4,
+      140
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 43,
+    "integrated_ticks": 240,
+    "zone": 1,
+    "world": 1,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "MAPR",
+    "round": 2
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.02666666666666667,
+    "U_intact": 0.02857142857142857,
+    "J_ext": 0.013333333333333334,
+    "fail_endpoint": [
+      0,
+      100
+    ],
+    "total_endpoint": [
+      8,
+      300
+    ],
+    "intact_endpoint": [
+      4,
+      140
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 39,
+    "integrated_ticks": 240,
+    "zone": 1,
+    "world": 2,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      }
+    ],
+    "arm": "MAPR",
+    "round": 2
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.175,
+    "U_intact": 0.4083333333333333,
+    "J_ext": 0.0875,
+    "fail_endpoint": [
+      0,
+      100
+    ],
+    "total_endpoint": [
+      49,
+      280
+    ],
+    "intact_endpoint": [
+      49,
+      120
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 41,
+    "integrated_ticks": 240,
+    "zone": 1,
+    "world": 3,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "MAPR",
+    "round": 2
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.025,
+    "U_intact": 0.04,
+    "J_ext": 0.0125,
+    "fail_endpoint": [
+      0,
+      60
+    ],
+    "total_endpoint": [
+      8,
+      320
+    ],
+    "intact_endpoint": [
+      8,
+      200
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 44,
+    "integrated_ticks": 240,
+    "zone": 1,
+    "world": 4,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      }
+    ],
+    "arm": "MAPR",
+    "round": 2
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.02,
+    "U_intact": 0.022222222222222223,
+    "J_ext": 0.01,
+    "fail_endpoint": [
+      0,
+      100
+    ],
+    "total_endpoint": [
+      8,
+      400
+    ],
+    "intact_endpoint": [
+      4,
+      180
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 36,
+    "integrated_ticks": 240,
+    "zone": 1,
+    "world": 5,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      }
+    ],
+    "arm": "MAPR",
+    "round": 2
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.15384615384615385,
+    "U_intact": 0.3333333333333333,
+    "J_ext": 0.07692307692307693,
+    "fail_endpoint": [
+      0,
+      60
+    ],
+    "total_endpoint": [
+      40,
+      260
+    ],
+    "intact_endpoint": [
+      40,
+      120
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 33,
+    "integrated_ticks": 240,
+    "zone": 1,
+    "world": 6,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "MAPR",
+    "round": 2
+  },
+  {
+    "R_fail_60": 0.04,
+    "U_total": 0.05263157894736842,
+    "U_intact": 0.025,
+    "J_ext": 0.04631578947368421,
+    "fail_endpoint": [
+      4,
+      100
+    ],
+    "total_endpoint": [
+      20,
+      380
+    ],
+    "intact_endpoint": [
+      4,
+      160
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 44,
+    "integrated_ticks": 240,
+    "zone": 1,
+    "world": 7,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "MAPR",
+    "round": 2
+  },
+  {
+    "R_fail_60": 0.14,
+    "U_total": 0.14,
+    "U_intact": 0.03333333333333333,
+    "J_ext": 0.14,
+    "fail_endpoint": [
+      14,
+      100
+    ],
+    "total_endpoint": [
+      42,
+      300
+    ],
+    "intact_endpoint": [
+      4,
+      120
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 36,
+    "integrated_ticks": 240,
+    "zone": 1,
+    "world": 8,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      }
+    ],
+    "arm": "MAPR",
+    "round": 2
+  },
+  {
+    "R_fail_60": 0.2,
+    "U_total": 0.07,
+    "U_intact": 0.0,
+    "J_ext": 0.135,
+    "fail_endpoint": [
+      24,
+      120
+    ],
+    "total_endpoint": [
+      28,
+      400
+    ],
+    "intact_endpoint": [
+      0,
+      160
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 42,
+    "integrated_ticks": 240,
+    "zone": 1,
+    "world": 9,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "MAPR",
+    "round": 2
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.18823529411764706,
+    "U_intact": 0.42857142857142855,
+    "J_ext": 0.09411764705882353,
+    "fail_endpoint": [
+      0,
+      120
+    ],
+    "total_endpoint": [
+      64,
+      340
+    ],
+    "intact_endpoint": [
+      60,
+      140
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 40,
+    "integrated_ticks": 240,
+    "zone": 1,
+    "world": 10,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      }
+    ],
+    "arm": "MAPR",
+    "round": 2
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.0475,
+    "U_intact": 0.08636363636363636,
+    "J_ext": 0.02375,
+    "fail_endpoint": [
+      0,
+      80
+    ],
+    "total_endpoint": [
+      19,
+      400
+    ],
+    "intact_endpoint": [
+      19,
+      220
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 34,
+    "integrated_ticks": 240,
+    "zone": 1,
+    "world": 11,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "MAPR",
+    "round": 2
+  },
+  {
+    "R_fail_60": 0.05,
+    "U_total": 0.021052631578947368,
+    "U_intact": 0.0,
+    "J_ext": 0.035526315789473684,
+    "fail_endpoint": [
+      4,
+      80
+    ],
+    "total_endpoint": [
+      8,
+      380
+    ],
+    "intact_endpoint": [
+      0,
+      180
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 41,
+    "integrated_ticks": 240,
+    "zone": 1,
+    "world": 12,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      }
+    ],
+    "arm": "MAPR",
+    "round": 2
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.12666666666666668,
+    "U_intact": 0.24285714285714285,
+    "J_ext": 0.06333333333333334,
+    "fail_endpoint": [
+      0,
+      60
+    ],
+    "total_endpoint": [
+      38,
+      300
+    ],
+    "intact_endpoint": [
+      34,
+      140
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 42,
+    "integrated_ticks": 240,
+    "zone": 1,
+    "world": 13,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "MAPR",
+    "round": 2
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.09411764705882353,
+    "U_intact": 0.1125,
+    "J_ext": 0.047058823529411764,
+    "fail_endpoint": [
+      0,
+      80
+    ],
+    "total_endpoint": [
+      32,
+      340
+    ],
+    "intact_endpoint": [
+      18,
+      160
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 41,
+    "integrated_ticks": 240,
+    "zone": 1,
+    "world": 14,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      }
+    ],
+    "arm": "MAPR",
+    "round": 2
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.07777777777777778,
+    "U_intact": 0.0,
+    "J_ext": 0.03888888888888889,
+    "fail_endpoint": [
+      0,
+      120
+    ],
+    "total_endpoint": [
+      28,
+      360
+    ],
+    "intact_endpoint": [
+      0,
+      160
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 43,
+    "integrated_ticks": 240,
+    "zone": 1,
+    "world": 15,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "MAPR",
+    "round": 2
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.16,
+    "U_intact": 0.24444444444444444,
+    "J_ext": 0.08,
+    "fail_endpoint": [
+      0,
+      60
+    ],
+    "total_endpoint": [
+      48,
+      300
+    ],
+    "intact_endpoint": [
+      44,
+      180
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 35,
+    "integrated_ticks": 240,
+    "zone": 2,
+    "world": 16,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "MAPR",
+    "round": 2
+  },
+  {
+    "R_fail_60": 0.03333333333333333,
+    "U_total": 0.042105263157894736,
+    "U_intact": 0.075,
+    "J_ext": 0.037719298245614034,
+    "fail_endpoint": [
+      4,
+      120
+    ],
+    "total_endpoint": [
+      16,
+      380
+    ],
+    "intact_endpoint": [
+      12,
+      160
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 43,
+    "integrated_ticks": 240,
+    "zone": 2,
+    "world": 17,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "MAPR",
+    "round": 2
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.06944444444444445,
+    "U_intact": 0.105,
+    "J_ext": 0.034722222222222224,
+    "fail_endpoint": [
+      0,
+      100
+    ],
+    "total_endpoint": [
+      25,
+      360
+    ],
+    "intact_endpoint": [
+      21,
+      200
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 33,
+    "integrated_ticks": 240,
+    "zone": 2,
+    "world": 18,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      }
+    ],
+    "arm": "MAPR",
+    "round": 2
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.03888888888888889,
+    "U_intact": 0.0,
+    "J_ext": 0.019444444444444445,
+    "fail_endpoint": [
+      0,
+      120
+    ],
+    "total_endpoint": [
+      14,
+      360
+    ],
+    "intact_endpoint": [
+      0,
+      180
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 40,
+    "integrated_ticks": 240,
+    "zone": 2,
+    "world": 19,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "MAPR",
+    "round": 2
+  },
+  {
+    "R_fail_60": 0.06666666666666667,
+    "U_total": 0.09583333333333334,
+    "U_intact": 0.0,
+    "J_ext": 0.08125,
+    "fail_endpoint": [
+      4,
+      60
+    ],
+    "total_endpoint": [
+      23,
+      240
+    ],
+    "intact_endpoint": [
+      0,
+      120
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 45,
+    "integrated_ticks": 240,
+    "zone": 2,
+    "world": 20,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      }
+    ],
+    "arm": "MAPR",
+    "round": 2
+  },
+  {
+    "R_fail_60": 0.06666666666666667,
+    "U_total": 0.06875,
+    "U_intact": 0.09,
+    "J_ext": 0.06770833333333334,
+    "fail_endpoint": [
+      4,
+      60
+    ],
+    "total_endpoint": [
+      22,
+      320
+    ],
+    "intact_endpoint": [
+      18,
+      200
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 43,
+    "integrated_ticks": 240,
+    "zone": 2,
+    "world": 21,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "MAPR",
+    "round": 2
+  },
+  {
+    "R_fail_60": 0.05,
+    "U_total": 0.014285714285714285,
+    "U_intact": 0.0,
+    "J_ext": 0.03214285714285715,
+    "fail_endpoint": [
+      4,
+      80
+    ],
+    "total_endpoint": [
+      4,
+      280
+    ],
+    "intact_endpoint": [
+      0,
+      140
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 39,
+    "integrated_ticks": 240,
+    "zone": 2,
+    "world": 22,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "MAPR",
+    "round": 2
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.022222222222222223,
+    "U_intact": 0.01818181818181818,
+    "J_ext": 0.011111111111111112,
+    "fail_endpoint": [
+      0,
+      80
+    ],
+    "total_endpoint": [
+      8,
+      360
+    ],
+    "intact_endpoint": [
+      4,
+      220
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 46,
+    "integrated_ticks": 240,
+    "zone": 2,
+    "world": 23,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "MAPR",
+    "round": 2
+  },
+  {
+    "R_fail_60": 0.23333333333333334,
+    "U_total": 0.13333333333333333,
+    "U_intact": 0.14166666666666666,
+    "J_ext": 0.18333333333333335,
+    "fail_endpoint": [
+      14,
+      60
+    ],
+    "total_endpoint": [
+      48,
+      360
+    ],
+    "intact_endpoint": [
+      34,
+      240
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 40,
+    "integrated_ticks": 240,
+    "zone": 2,
+    "world": 24,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      }
+    ],
+    "arm": "MAPR",
+    "round": 2
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.013333333333333334,
+    "U_intact": 0.025,
+    "J_ext": 0.006666666666666667,
+    "fail_endpoint": [
+      0,
+      60
+    ],
+    "total_endpoint": [
+      4,
+      300
+    ],
+    "intact_endpoint": [
+      4,
+      160
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 43,
+    "integrated_ticks": 240,
+    "zone": 2,
+    "world": 25,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      }
+    ],
+    "arm": "MAPR",
+    "round": 2
+  },
+  {
+    "R_fail_60": 0.05,
+    "U_total": 0.09333333333333334,
+    "U_intact": 0.14285714285714285,
+    "J_ext": 0.07166666666666667,
+    "fail_endpoint": [
+      4,
+      80
+    ],
+    "total_endpoint": [
+      28,
+      300
+    ],
+    "intact_endpoint": [
+      20,
+      140
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 43,
+    "integrated_ticks": 240,
+    "zone": 2,
+    "world": 26,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "MAPR",
+    "round": 2
+  },
+  {
+    "R_fail_60": 0.08,
+    "U_total": 0.043478260869565216,
+    "U_intact": 0.05,
+    "J_ext": 0.06173913043478261,
+    "fail_endpoint": [
+      8,
+      100
+    ],
+    "total_endpoint": [
+      20,
+      460
+    ],
+    "intact_endpoint": [
+      12,
+      240
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 41,
+    "integrated_ticks": 240,
+    "zone": 2,
+    "world": 27,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 2.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "MAPR",
+    "round": 2
+  },
+  {
+    "R_fail_60": 0.1,
+    "U_total": 0.0675,
+    "U_intact": 0.0,
+    "J_ext": 0.08375,
+    "fail_endpoint": [
+      8,
+      80
+    ],
+    "total_endpoint": [
+      27,
+      400
+    ],
+    "intact_endpoint": [
+      0,
+      200
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 43,
+    "integrated_ticks": 240,
+    "zone": 2,
+    "world": 28,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "MAPR",
+    "round": 2
+  },
+  {
+    "R_fail_60": 0.04,
+    "U_total": 0.1,
+    "U_intact": 0.17,
+    "J_ext": 0.07,
+    "fail_endpoint": [
+      4,
+      100
+    ],
+    "total_endpoint": [
+      38,
+      380
+    ],
+    "intact_endpoint": [
+      34,
+      200
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 44,
+    "integrated_ticks": 240,
+    "zone": 2,
+    "world": 29,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      }
+    ],
+    "arm": "MAPR",
+    "round": 2
+  },
+  {
+    "R_fail_60": 0.05,
+    "U_total": 0.11666666666666667,
+    "U_intact": 0.0,
+    "J_ext": 0.08333333333333334,
+    "fail_endpoint": [
+      4,
+      80
+    ],
+    "total_endpoint": [
+      35,
+      300
+    ],
+    "intact_endpoint": [
+      0,
+      160
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 35,
+    "integrated_ticks": 240,
+    "zone": 2,
+    "world": 30,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      }
+    ],
+    "arm": "MAPR",
+    "round": 2
+  },
+  {
+    "R_fail_60": 0.175,
+    "U_total": 0.12142857142857143,
+    "U_intact": 0.0,
+    "J_ext": 0.14821428571428572,
+    "fail_endpoint": [
+      14,
+      80
+    ],
+    "total_endpoint": [
+      34,
+      280
+    ],
+    "intact_endpoint": [
+      0,
+      120
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 33,
+    "integrated_ticks": 240,
+    "zone": 2,
+    "world": 31,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "MAPR",
+    "round": 2
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.10476190476190476,
+    "U_intact": 0.2,
+    "J_ext": 0.05238095238095238,
+    "fail_endpoint": [
+      0,
+      120
+    ],
+    "total_endpoint": [
+      44,
+      420
+    ],
+    "intact_endpoint": [
+      44,
+      220
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 41,
+    "integrated_ticks": 240,
+    "zone": 1,
+    "world": 0,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "DIRECT",
+    "round": 2
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.125,
+    "U_intact": 0.25,
+    "J_ext": 0.0625,
+    "fail_endpoint": [
+      0,
+      60
+    ],
+    "total_endpoint": [
+      35,
+      280
+    ],
+    "intact_endpoint": [
+      35,
+      140
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 41,
+    "integrated_ticks": 240,
+    "zone": 1,
+    "world": 1,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "DIRECT",
+    "round": 2
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.02666666666666667,
+    "U_intact": 0.02857142857142857,
+    "J_ext": 0.013333333333333334,
+    "fail_endpoint": [
+      0,
+      100
+    ],
+    "total_endpoint": [
+      8,
+      300
+    ],
+    "intact_endpoint": [
+      4,
+      140
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 38,
+    "integrated_ticks": 240,
+    "zone": 1,
+    "world": 2,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "DIRECT",
+    "round": 2
+  },
+  {
+    "R_fail_60": 0.04,
+    "U_total": 0.06428571428571428,
+    "U_intact": 0.11666666666666667,
+    "J_ext": 0.052142857142857144,
+    "fail_endpoint": [
+      4,
+      100
+    ],
+    "total_endpoint": [
+      18,
+      280
+    ],
+    "intact_endpoint": [
+      14,
+      120
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 41,
+    "integrated_ticks": 240,
+    "zone": 1,
+    "world": 3,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      }
+    ],
+    "arm": "DIRECT",
+    "round": 2
+  },
+  {
+    "R_fail_60": 0.06666666666666667,
+    "U_total": 0.025,
+    "U_intact": 0.02,
+    "J_ext": 0.04583333333333334,
+    "fail_endpoint": [
+      4,
+      60
+    ],
+    "total_endpoint": [
+      8,
+      320
+    ],
+    "intact_endpoint": [
+      4,
+      200
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 40,
+    "integrated_ticks": 240,
+    "zone": 1,
+    "world": 4,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "DIRECT",
+    "round": 2
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.01,
+    "U_intact": 0.022222222222222223,
+    "J_ext": 0.005,
+    "fail_endpoint": [
+      0,
+      100
+    ],
+    "total_endpoint": [
+      4,
+      400
+    ],
+    "intact_endpoint": [
+      4,
+      180
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 36,
+    "integrated_ticks": 240,
+    "zone": 1,
+    "world": 5,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "DIRECT",
+    "round": 2
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.0,
+    "U_intact": 0.0,
+    "J_ext": 0.0,
+    "fail_endpoint": [
+      0,
+      60
+    ],
+    "total_endpoint": [
+      0,
+      260
+    ],
+    "intact_endpoint": [
+      0,
+      120
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 26,
+    "integrated_ticks": 240,
+    "zone": 1,
+    "world": 6,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "DIRECT",
+    "round": 2
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.21578947368421053,
+    "U_intact": 0.0875,
+    "J_ext": 0.10789473684210527,
+    "fail_endpoint": [
+      0,
+      100
+    ],
+    "total_endpoint": [
+      82,
+      380
+    ],
+    "intact_endpoint": [
+      14,
+      160
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 39,
+    "integrated_ticks": 240,
+    "zone": 1,
+    "world": 7,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 2.0,
+        "failed_executor_state": 2
+      }
+    ],
+    "arm": "DIRECT",
+    "round": 2
+  },
+  {
+    "R_fail_60": 0.04,
+    "U_total": 0.013333333333333334,
+    "U_intact": 0.0,
+    "J_ext": 0.02666666666666667,
+    "fail_endpoint": [
+      4,
+      100
+    ],
+    "total_endpoint": [
+      4,
+      300
+    ],
+    "intact_endpoint": [
+      0,
+      120
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 34,
+    "integrated_ticks": 240,
+    "zone": 1,
+    "world": 8,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "DIRECT",
+    "round": 2
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.1325,
+    "U_intact": 0.30625,
+    "J_ext": 0.06625,
+    "fail_endpoint": [
+      0,
+      120
+    ],
+    "total_endpoint": [
+      53,
+      400
+    ],
+    "intact_endpoint": [
+      49,
+      160
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 40,
+    "integrated_ticks": 240,
+    "zone": 1,
+    "world": 9,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "DIRECT",
+    "round": 2
+  },
+  {
+    "R_fail_60": 0.11666666666666667,
+    "U_total": 0.06470588235294118,
+    "U_intact": 0.02857142857142857,
+    "J_ext": 0.09068627450980393,
+    "fail_endpoint": [
+      14,
+      120
+    ],
+    "total_endpoint": [
+      22,
+      340
+    ],
+    "intact_endpoint": [
+      4,
+      140
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 41,
+    "integrated_ticks": 240,
+    "zone": 1,
+    "world": 10,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "DIRECT",
+    "round": 2
+  },
+  {
+    "R_fail_60": 0.35,
+    "U_total": 0.12,
+    "U_intact": 0.09090909090909091,
+    "J_ext": 0.235,
+    "fail_endpoint": [
+      28,
+      80
+    ],
+    "total_endpoint": [
+      48,
+      400
+    ],
+    "intact_endpoint": [
+      20,
+      220
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 36,
+    "integrated_ticks": 240,
+    "zone": 1,
+    "world": 11,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "DIRECT",
+    "round": 2
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.0,
+    "U_intact": 0.0,
+    "J_ext": 0.0,
+    "fail_endpoint": [
+      0,
+      80
+    ],
+    "total_endpoint": [
+      0,
+      380
+    ],
+    "intact_endpoint": [
+      0,
+      180
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 39,
+    "integrated_ticks": 240,
+    "zone": 1,
+    "world": 12,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "DIRECT",
+    "round": 2
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.06,
+    "U_intact": 0.02857142857142857,
+    "J_ext": 0.03,
+    "fail_endpoint": [
+      0,
+      60
+    ],
+    "total_endpoint": [
+      18,
+      300
+    ],
+    "intact_endpoint": [
+      4,
+      140
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 40,
+    "integrated_ticks": 240,
+    "zone": 1,
+    "world": 13,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "DIRECT",
+    "round": 2
+  },
+  {
+    "R_fail_60": 0.175,
+    "U_total": 0.06470588235294118,
+    "U_intact": 0.025,
+    "J_ext": 0.11985294117647058,
+    "fail_endpoint": [
+      14,
+      80
+    ],
+    "total_endpoint": [
+      22,
+      340
+    ],
+    "intact_endpoint": [
+      4,
+      160
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 38,
+    "integrated_ticks": 240,
+    "zone": 1,
+    "world": 14,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "DIRECT",
+    "round": 2
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.011111111111111112,
+    "U_intact": 0.025,
+    "J_ext": 0.005555555555555556,
+    "fail_endpoint": [
+      0,
+      120
+    ],
+    "total_endpoint": [
+      4,
+      360
+    ],
+    "intact_endpoint": [
+      4,
+      160
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 36,
+    "integrated_ticks": 240,
+    "zone": 1,
+    "world": 15,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      }
+    ],
+    "arm": "DIRECT",
+    "round": 2
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.04,
+    "U_intact": 0.044444444444444446,
+    "J_ext": 0.02,
+    "fail_endpoint": [
+      0,
+      60
+    ],
+    "total_endpoint": [
+      12,
+      300
+    ],
+    "intact_endpoint": [
+      8,
+      180
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 43,
+    "integrated_ticks": 240,
+    "zone": 2,
+    "world": 16,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "DIRECT",
+    "round": 2
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.060526315789473685,
+    "U_intact": 0.0875,
+    "J_ext": 0.030263157894736843,
+    "fail_endpoint": [
+      0,
+      120
+    ],
+    "total_endpoint": [
+      23,
+      380
+    ],
+    "intact_endpoint": [
+      14,
+      160
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 39,
+    "integrated_ticks": 240,
+    "zone": 2,
+    "world": 17,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "DIRECT",
+    "round": 2
+  },
+  {
+    "R_fail_60": 0.04,
+    "U_total": 0.13055555555555556,
+    "U_intact": 0.17,
+    "J_ext": 0.08527777777777779,
+    "fail_endpoint": [
+      4,
+      100
+    ],
+    "total_endpoint": [
+      47,
+      360
+    ],
+    "intact_endpoint": [
+      34,
+      200
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 33,
+    "integrated_ticks": 240,
+    "zone": 2,
+    "world": 18,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "DIRECT",
+    "round": 2
+  },
+  {
+    "R_fail_60": 0.06666666666666667,
+    "U_total": 0.022222222222222223,
+    "U_intact": 0.0,
+    "J_ext": 0.044444444444444446,
+    "fail_endpoint": [
+      8,
+      120
+    ],
+    "total_endpoint": [
+      8,
+      360
+    ],
+    "intact_endpoint": [
+      0,
+      180
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 44,
+    "integrated_ticks": 240,
+    "zone": 2,
+    "world": 19,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "DIRECT",
+    "round": 2
+  },
+  {
+    "R_fail_60": 0.06666666666666667,
+    "U_total": 0.05,
+    "U_intact": 0.03333333333333333,
+    "J_ext": 0.058333333333333334,
+    "fail_endpoint": [
+      4,
+      60
+    ],
+    "total_endpoint": [
+      12,
+      240
+    ],
+    "intact_endpoint": [
+      4,
+      120
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 42,
+    "integrated_ticks": 240,
+    "zone": 2,
+    "world": 20,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "DIRECT",
+    "round": 2
+  },
+  {
+    "R_fail_60": 0.06666666666666667,
+    "U_total": 0.15625,
+    "U_intact": 0.06,
+    "J_ext": 0.11145833333333333,
+    "fail_endpoint": [
+      4,
+      60
+    ],
+    "total_endpoint": [
+      50,
+      320
+    ],
+    "intact_endpoint": [
+      12,
+      200
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 43,
+    "integrated_ticks": 240,
+    "zone": 2,
+    "world": 21,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "DIRECT",
+    "round": 2
+  },
+  {
+    "R_fail_60": 0.05,
+    "U_total": 0.017857142857142856,
+    "U_intact": 0.007142857142857143,
+    "J_ext": 0.03392857142857143,
+    "fail_endpoint": [
+      4,
+      80
+    ],
+    "total_endpoint": [
+      5,
+      280
+    ],
+    "intact_endpoint": [
+      1,
+      140
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 30,
+    "integrated_ticks": 240,
+    "zone": 2,
+    "world": 22,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "DIRECT",
+    "round": 2
+  },
+  {
+    "R_fail_60": 0.05,
+    "U_total": 0.06666666666666667,
+    "U_intact": 0.0,
+    "J_ext": 0.058333333333333334,
+    "fail_endpoint": [
+      4,
+      80
+    ],
+    "total_endpoint": [
+      24,
+      360
+    ],
+    "intact_endpoint": [
+      0,
+      220
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 44,
+    "integrated_ticks": 240,
+    "zone": 2,
+    "world": 23,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      }
+    ],
+    "arm": "DIRECT",
+    "round": 2
+  },
+  {
+    "R_fail_60": 0.06666666666666667,
+    "U_total": 0.03333333333333333,
+    "U_intact": 0.03333333333333333,
+    "J_ext": 0.05,
+    "fail_endpoint": [
+      4,
+      60
+    ],
+    "total_endpoint": [
+      12,
+      360
+    ],
+    "intact_endpoint": [
+      8,
+      240
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 41,
+    "integrated_ticks": 240,
+    "zone": 2,
+    "world": 24,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "DIRECT",
+    "round": 2
+  },
+  {
+    "R_fail_60": 0.23333333333333334,
+    "U_total": 0.12,
+    "U_intact": 0.1125,
+    "J_ext": 0.17666666666666667,
+    "fail_endpoint": [
+      14,
+      60
+    ],
+    "total_endpoint": [
+      36,
+      300
+    ],
+    "intact_endpoint": [
+      18,
+      160
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 40,
+    "integrated_ticks": 240,
+    "zone": 2,
+    "world": 25,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "DIRECT",
+    "round": 2
+  },
+  {
+    "R_fail_60": 0.05,
+    "U_total": 0.04,
+    "U_intact": 0.02857142857142857,
+    "J_ext": 0.045,
+    "fail_endpoint": [
+      4,
+      80
+    ],
+    "total_endpoint": [
+      12,
+      300
+    ],
+    "intact_endpoint": [
+      4,
+      140
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 44,
+    "integrated_ticks": 240,
+    "zone": 2,
+    "world": 26,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "DIRECT",
+    "round": 2
+  },
+  {
+    "R_fail_60": 0.08,
+    "U_total": 0.06956521739130435,
+    "U_intact": 0.1,
+    "J_ext": 0.07478260869565218,
+    "fail_endpoint": [
+      8,
+      100
+    ],
+    "total_endpoint": [
+      32,
+      460
+    ],
+    "intact_endpoint": [
+      24,
+      240
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 43,
+    "integrated_ticks": 240,
+    "zone": 2,
+    "world": 27,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 2.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "DIRECT",
+    "round": 2
+  },
+  {
+    "R_fail_60": 0.05,
+    "U_total": 0.0125,
+    "U_intact": 0.005,
+    "J_ext": 0.03125,
+    "fail_endpoint": [
+      4,
+      80
+    ],
+    "total_endpoint": [
+      5,
+      400
+    ],
+    "intact_endpoint": [
+      1,
+      200
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 38,
+    "integrated_ticks": 240,
+    "zone": 2,
+    "world": 28,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "DIRECT",
+    "round": 2
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.021052631578947368,
+    "U_intact": 0.02,
+    "J_ext": 0.010526315789473684,
+    "fail_endpoint": [
+      0,
+      100
+    ],
+    "total_endpoint": [
+      8,
+      380
+    ],
+    "intact_endpoint": [
+      4,
+      200
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 40,
+    "integrated_ticks": 240,
+    "zone": 2,
+    "world": 29,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 1.0,
+        "failed_executor_state": 2
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      }
+    ],
+    "arm": "DIRECT",
+    "round": 2
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.06,
+    "U_intact": 0.0875,
+    "J_ext": 0.03,
+    "fail_endpoint": [
+      0,
+      80
+    ],
+    "total_endpoint": [
+      18,
+      300
+    ],
+    "intact_endpoint": [
+      14,
+      160
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 43,
+    "integrated_ticks": 240,
+    "zone": 2,
+    "world": 30,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "DIRECT",
+    "round": 2
+  },
+  {
+    "R_fail_60": 0.0,
+    "U_total": 0.07857142857142857,
+    "U_intact": 0.15,
+    "J_ext": 0.039285714285714285,
+    "fail_endpoint": [
+      0,
+      80
+    ],
+    "total_endpoint": [
+      22,
+      280
+    ],
+    "intact_endpoint": [
+      18,
+      120
+    ],
+    "safety_violation": false,
+    "exclusivity_violation": false,
+    "event_count": 41,
+    "integrated_ticks": 240,
+    "zone": 2,
+    "world": 31,
+    "recovery_observations_20s": [
+      {
+        "time": 0,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 20,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 40,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 60,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 0
+      },
+      {
+        "time": 80,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      },
+      {
+        "time": 100,
+        "failed_zone_delivery_observed": 0.0,
+        "failed_executor_state": 1
+      }
+    ],
+    "arm": "DIRECT",
+    "round": 2
+  }
+]

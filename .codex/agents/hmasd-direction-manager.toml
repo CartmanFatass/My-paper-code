@@ -214,4 +214,11 @@ ceiling, strongest support and contradiction, changed files or commit, evidence 
 risks, and the next discriminator. Use ordinary native subagent conversation outside the explicit
 Pro packet/Transport boundary; no other envelope, routing identifier, approval handshake or status
 schema is required.
+
+OWNER_DIRECT overall GitHub cutover (2026-09-05): all new Pro requests use the
+Prompt Author default github_delivery mode. Prepare scoped branch/Issue, commit and
+push TASK, bind its full SHA, then dispatch the fixed-link prompt once. Read the full
+Pro response directly from its immutable commit for intake. No VNFC pilot or Pro
+workflow review condition remains. Keep accepted requests unchanged; no resend.
+Attachment mode is an explicit recorded capability fallback only.
 """

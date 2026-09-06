@@ -1,0 +1,116 @@
+{
+  "schema_version": 4,
+  "request_id": "2026-09-05-dish-post-a05-convergence-01",
+  "workflow_node": "em_convergence",
+  "conversation_binding_key": "em:degraded_incumbent_shadow_handover:convergence",
+  "direction_id": "degraded_incumbent_shadow_handover",
+  "direction_ids": [
+    "degraded_incumbent_shadow_handover"
+  ],
+  "decision_authority": "pro_final",
+  "source_thread_id": "01a07397-6097-7542-bf35-fda9910ebdf7",
+  "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "operator_thread_id": "01a06f0e-5eab-7431-8491-e7c2c62705b6",
+  "creator_thread_id": "01a07397-6097-7542-bf35-fda9910ebdf7",
+  "return_route": "PARENT_SESSION",
+  "repository": "CartmanFatass/My-paper-code",
+  "conversation_id": "6a9bec54-df00-83e8-9840-46440458f316",
+  "provider_url": "https://chatgpt.com/c/6a9bec54-df00-83e8-9840-46440458f316",
+  "tab_id": null,
+  "tab_lifecycle": "CLOSED",
+  "visible_model": "6 Pro",
+  "underlying_model": "Latest",
+  "thinking_effort": "Pro, 5 of 5.",
+  "source_mode": "upload",
+  "prompt_sha256": "52c67d247693bb2002aa0dc9883092e2174c60e0d95eb0867f954debb8828512",
+  "prompt_bytes": 21997,
+  "manifest_sha256": "fe711bfb00883d69eca479ca8851369ea653feb915c5f4e6ccd2488e5bc73d4d",
+  "manifest_bytes": 2074,
+  "response_sha256": "f66d3adee34eedf554df62a04aab46274527d1e85093106e56e44e6dc5b20262",
+  "response_bytes": 33067,
+  "response_characters": 33004,
+  "send_evidence": {
+    "send_click_count": 1,
+    "url_observed": true,
+    "user_node_observed": true,
+    "user_node_exact": true,
+    "user_message_id": "e6be1b97-9cae-4387-845d-1a8e2fa2437c",
+    "attachment_observed": true,
+    "companion_prompt_exact": true
+  },
+  "upload_evidence": {
+    "expected_file": "PROMPT_BODY.md",
+    "provider_filename": "PROMPT_BODY(20260905-162933).md",
+    "attachment_observed": true,
+    "bytes": 21997,
+    "sha256": "52c67d247693bb2002aa0dc9883092e2174c60e0d95eb0867f954debb8828512"
+  },
+  "assistant_message_id": "request-6a9bec54-df00-83e8-9840-46440458f316-0",
+  "wait_status": "NATURAL_COMPLETION",
+  "observed_page_state": "complete newest assistant response; Copy response present; no active generation control",
+  "capture_method": "Newest assistant Copy response control via browser CUA locator nth(1) click and CUA clipboard.readText; raw UTF-8 response preserved",
+  "archive_paths": {
+    "manifest_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\degraded_incumbent_shadow_handover\\2026-09-05-dish-post-a05-convergence-01\\2026-09-05-dish-post-a05-convergence-01--degraded_incumbent_shadow_handover__PACKET_MANIFEST.json",
+    "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\degraded_incumbent_shadow_handover\\2026-09-05-dish-post-a05-convergence-01\\2026-09-05-dish-post-a05-convergence-01--degraded_incumbent_shadow_handover__00_PROMPT.md",
+    "reference_files": [],
+    "response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\degraded_incumbent_shadow_handover\\2026-09-05-dish-post-a05-convergence-01\\2026-09-05-dish-post-a05-convergence-01--degraded_incumbent_shadow_handover--attempt-01__02_RESPONSE.md",
+    "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\degraded_incumbent_shadow_handover\\2026-09-05-dish-post-a05-convergence-01\\2026-09-05-dish-post-a05-convergence-01--degraded_incumbent_shadow_handover--attempt-01__03_TRANSPORT_FACTS.json",
+    "response_sha256": "f66d3adee34eedf554df62a04aab46274527d1e85093106e56e44e6dc5b20262"
+  },
+  "timestamps": {
+    "received_at": "2026-09-05T23:02:36Z",
+    "sent_at": "2026-09-05T23:02:36Z",
+    "generation_started_at": "2026-09-05T23:02:36Z",
+    "completed_at": "2026-09-05T23:23:35Z",
+    "captured_at": "2026-09-05T23:27:37Z",
+    "archived_at": "2026-09-05T23:28:49Z",
+    "tab_closed_at": "2026-09-05T23:29:25Z"
+  },
+  "heartbeat": {
+    "automation_id": null,
+    "status": "PENDING",
+    "next_wake_at": null,
+    "retired_at": null,
+    "retirement_verified": false
+  },
+  "return_receipt": {
+    "required": true,
+    "source_thread_id": "01a07397-6097-7542-bf35-fda9910ebdf7",
+    "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+    "destination_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+    "status": "SENT",
+    "attempt_count": 1,
+    "message_key": "2026-09-05-dish-post-a05-convergence-01|degraded_incumbent_shadow_handover|6a9bec54-df00-83e8-9840-46440458f316|f66d3adee34eedf554df62a04aab46274527d1e85093106e56e44e6dc5b20262",
+    "retry_allowed": false,
+    "routing_mode": "PARENT_SESSION",
+    "fallback_enabled": false,
+    "delivery_mode": "bounded_single_attempt",
+    "return_control_after_attempt": true,
+    "archive_paths": {
+      "manifest_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\degraded_incumbent_shadow_handover\\2026-09-05-dish-post-a05-convergence-01\\2026-09-05-dish-post-a05-convergence-01--degraded_incumbent_shadow_handover__PACKET_MANIFEST.json",
+      "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\degraded_incumbent_shadow_handover\\2026-09-05-dish-post-a05-convergence-01\\2026-09-05-dish-post-a05-convergence-01--degraded_incumbent_shadow_handover__00_PROMPT.md",
+      "reference_files": [],
+      "response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\degraded_incumbent_shadow_handover\\2026-09-05-dish-post-a05-convergence-01\\2026-09-05-dish-post-a05-convergence-01--degraded_incumbent_shadow_handover--attempt-01__02_RESPONSE.md",
+      "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\degraded_incumbent_shadow_handover\\2026-09-05-dish-post-a05-convergence-01\\2026-09-05-dish-post-a05-convergence-01--degraded_incumbent_shadow_handover--attempt-01__03_TRANSPORT_FACTS.json",
+      "response_sha256": "f66d3adee34eedf554df62a04aab46274527d1e85093106e56e44e6dc5b20262"
+    },
+    "response_sha256": "f66d3adee34eedf554df62a04aab46274527d1e85093106e56e44e6dc5b20262",
+    "staged_at": "2026-09-05T23:29:11Z",
+    "delivery_status": "accepted",
+    "updated_at": "2026-09-05T23:29:11Z",
+    "sent_at": "2026-09-05T23:29:11Z"
+  },
+  "archive_status": "ARCHIVED",
+  "response_identity": "PASS",
+  "identity_binding": {
+    "conversation_id": "6a9bec54-df00-83e8-9840-46440458f316",
+    "user_message_id": "e6be1b97-9cae-4387-845d-1a8e2fa2437c",
+    "assistant_message_id": "request-6a9bec54-df00-83e8-9840-46440458f316-0"
+  },
+  "notes": [
+    "Exactly one provider Send confirmed on a reused binding.",
+    "Newest response disambiguated from prior archived response by user and assistant IDs.",
+    "No second Send was attempted."
+  ],
+  "updated_at": "2026-09-05T23:29:25Z"
+}
