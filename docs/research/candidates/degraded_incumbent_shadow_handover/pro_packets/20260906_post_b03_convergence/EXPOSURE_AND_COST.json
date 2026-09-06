@@ -1,0 +1,178 @@
+{
+  "evidence_role": "DOCUMENTARY_DERIVATION_NOT_NEW_EXPERIMENT",
+  "written_at": "2026-09-06T17:37:00+00:00",
+  "derivation": "Counts and timings copied from the two B03 arm summaries, the /usr/bin/time records and the B03 result intake; B02 figures from its result evidence; no project import, checkpoint load, experiment or new timing. Consultation exposure is zero.",
+  "sources": [
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_FORECAST_PACKAGE_B03_RESULT_INTAKE_20260906.md",
+      "sha256_prefix": "616ef51c4f7149a6"
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/b03_forecast_package_20260906/control/summary.json",
+      "sha256_prefix": "ccbe5664f90c0d4b"
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/b03_forecast_package_20260906/forecast_package/summary.json",
+      "sha256_prefix": "7078d998f8bd024e"
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_FORECAST_PACKAGE_B03_SCIENCE_CARD_20260906.md",
+      "sha256_prefix": "9ae24c5eb4a33963"
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_FORECAST_PACKAGE_B03_CM_RECORD_20260906.md",
+      "sha256_prefix": "8fe0f17715000d89"
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_FORECAST_PACKAGE_B02_RESULT_EVIDENCE_20260905.md",
+      "sha256_prefix": "dc7a0c74acc78f2d"
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_B01_B02_QUALIFIED_REINTERPRETATION_INTAKE_20260906.md",
+      "sha256_prefix": "debc24836c66bab8"
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_POST_A02_CONVERGENCE_INTAKE_20260906.md",
+      "sha256_prefix": "357169f4cf0a3973"
+    }
+  ],
+  "exposure_line": "DISH-FORECAST-PACKAGE-B03: per arm 65,536 ordinary training transitions, 16 complete updates, 512 optimizer steps, 65,504 next-mask rows, service-label eligible 18,775 (CONTROL) / 7,972 (FORECAST_PACKAGE), 4,800 ordinary evaluation ticks; one paired training replicate, seed 73 master b938a93e...; both arms COMPLETE at ad01757c4 on wsl_4070; consequence steps H unmeasured (upper 20E). Consultation: zero new models, native states, transitions, backwards, optimizer steps, tests or experiments.",
+  "measured": {
+    "control": {
+      "time_wall_s": 211.04,
+      "prepublication_wall_s": 196.83,
+      "cpu_s": 214.38,
+      "peak_rss_mb": 625.9,
+      "mean_service_ticks": 460.5,
+      "rows": [
+        452,
+        458,
+        449,
+        483
+      ],
+      "energy": [
+        271451.68,
+        276468.2,
+        270979.28,
+        274347.34
+      ],
+      "hard_events": 0,
+      "legal_transfers": 0,
+      "training_service_curve": [
+        4016,
+        3392,
+        2034,
+        1891,
+        1435,
+        1017,
+        1011,
+        1044,
+        850,
+        2764,
+        4093,
+        3812,
+        2208,
+        883,
+        483,
+        435
+      ],
+      "final_norm": 39.1802,
+      "l2_displacement": 8.605
+    },
+    "forecast_package": {
+      "time_wall_s": 196.18,
+      "prepublication_wall_s": 185.55,
+      "cpu_s": 203.98,
+      "peak_rss_mb": 628.3,
+      "mean_service_ticks": 188.5,
+      "rows": [
+        92,
+        222,
+        129,
+        311
+      ],
+      "energy": [
+        257479.8,
+        258068.76,
+        259524.08,
+        262414.77
+      ],
+      "hard_events": {
+        "invalid_commit": 17,
+        "separation_breach": 1,
+        "row": "TERRAIN_RELAY_MASK/K4_TO_K12"
+      },
+      "legal_transfers": 0,
+      "training_service_curve": [
+        4016,
+        3417,
+        2297,
+        2037,
+        1635,
+        781,
+        238,
+        251,
+        571,
+        2684,
+        3800,
+        1833,
+        457,
+        376,
+        958,
+        1340
+      ],
+      "peak_mean_loss": 6541776.38,
+      "peak_mean_gradient_norm": 1755882.88,
+      "final_norm": 38.9526,
+      "l2_displacement": 7.514
+    },
+    "paired": {
+      "delta_b03": -272.0,
+      "differences": [
+        -360,
+        -236,
+        -320,
+        -172
+      ],
+      "MEI": 24
+    },
+    "shared_preparation_s": 4.94,
+    "pair_charge_s": 412.16,
+    "ceiling_s": {
+      "per_arm": 1800,
+      "summed": 3600
+    },
+    "node": "wsl_4070",
+    "launch_sha": "ad01757c43cb3a3df6549b024367b5f9307246b8",
+    "b02_reference": {
+      "rows_control_and_package": [
+        572,
+        447,
+        433,
+        428
+      ],
+      "delta": 0,
+      "arm_walls_s": [
+        337.23,
+        298.6
+      ],
+      "pair_wall_s": 642.66
+    }
+  },
+  "prospective_option_a_zero_training_witness": {
+    "design": "evaluate the common initial parameters (master-addressed STRUCTURED initializer, block 0, seed 73) and the two update-16 checkpoints on the corrected boundary over the four B03 conditions (1,200-tick fixed horizon, paired exogenous randomness); zero training; 3 policies x 4 episodes = 14,400 ticks",
+    "reference_cost": "B03 evaluation of 4 episodes per arm ran inside a 196-211 s arm whose collection took ~11 s per 4,096 lane-ticks; A02 formal 0.092 s for 64 ticks; projected runner wall well under 60 s plus native build; not measured",
+    "training": "none",
+    "what_it_decides": "whether the initialization already serves the horizon at the level of CONTROL's final checkpoint or higher, i.e. whether sixteen updates degraded evaluation service as they degraded training service, before any learner change is proposed"
+  },
+  "prospective_option_b_learner_stability_pair": {
+    "design": "outcome-informed B on the corrected boundary: the inherited CONTROL learner versus one named stabilizing change (learning rate 3e-5, or 1 epoch x 8 minibatches, or the trainer's existing gradient clipping) at the same 16-update exposure, one paired seed, same four conditions, MEI +24",
+    "reference_cost": "B03 arms 211 s / 196 s per 16 updates; a pair projects to ~410 s plus ~5 s shared preparation; ceiling 1,800 s per arm as B02/B03",
+    "unknown": "which change; no tuning search is proposed; any choice is a new object"
+  },
+  "budget_state": {
+    "b03_pair_charge_s": 412.16,
+    "b02_pair_wall_s": 642.66,
+    "family_cumulative_training_transitions": 262144
+  }
+}
