@@ -1,0 +1,96 @@
+{
+  "id": "20260906-rcle-002",
+  "created": "2026-09-06T15:07:33-07:00",
+  "direction": "roster_consistent_latent_exploration",
+  "tier": "direction",
+  "kind": "decision",
+  "title": "RCLE B01 后 Innovator 决定（PRO_FINAL）：不接受单臂“先学会”阶梯；下一对象 = RCLE-TBCFV-B02-NORM-0p02（定范数步长 0.0005→0.02，seed 18，U 差主量，600 s/臂）",
+  "context": "Pro 选择选项 2 的明确版本：开启结果知情的 B/EXPLORE RCLE-TBCFV-B02-NORM-0p02。宿主、公共信息、两个包（C1P1 持久共同计划、FLEX 重键）、初始化、回报、baseline 全同 B01；唯一学习法则改动：对完整参数向量，g≠0 时 θ ← θ − 0.02·g/‖g‖₂，g=0 不更新，每 64-episode block 一次 backward 一次联合更新，两臂同法则。新配对种子 18（主键 sha256(\"RCLE-TBCFV-B02-NORM-0p02/seed/18\")，block digest 82593ad7…）；每臂 200 次更新 × 64 episode；最终八个留出格各 256 episode；加一次共享 update-0 评估（C1P1 初始化策略，八格各 256，作为两臂共同起点）与一次同面板 INDEPENDENT-NEAREST 参考。主量 ΔU = 两条 ACTIVE_CONTINUATION 路径 (U_FLEX − U_C1P1) 均值（正值利于 C1P1），伴随 G_U = 两路径 (U_init − U_final) 均值；MEI U 0.05、τ 伴随 4 tick；τ、τ=40 比例、40U、Y 保留；六行读法。Pro 更正 DM：“τ 离开 40”不是有用学习的资格线；1.4e-8 是位移范数之差不是轨迹距离；共享抽样不保证换种子仍相同；parameter_delta_norm 是常数 0.0005 不是实测位移。最强反对：0.02 可能主要放大梯度噪声。未选：普通 0.01 学习率、非零 FLEX 头初始化、0.0005 下第二种子、停车、五臂方案。上限：每臂完整逻辑调用 ≤ 600 s，整对象 ≤ 1,500 s。CM 只做最小适配：自带参数化步长函数（记录规定与实测位移范数），不调用注册的 0.0005 函数，不改常数，tbcfv/B01 代码不动。已执行：卡与 CM 目标冻结（1002ead1c），Grok Build 实现中，枢纽审阅后提交并由 operator 在 wsl_4070 启动。DM 预测：至少一臂 G_U ≥ +0.05 且 ΔU 带内、τ 仍几乎全 40（表第 3 行）；竞争预测：FLEX 低于 C1P1 ≥ 0.05（第 2 行）。所有者预测槽位未取用，可在本条目填写。",
+  "options": [
+    {
+      "key": "a",
+      "label": "接受（已执行）",
+      "consequence": "B02 按卡实现并在 wsl_4070 启动；结果 intake 后回到同一 Innovator 节点。"
+    },
+    {
+      "key": "b",
+      "label": "改选：单臂学习量阶梯、普通学习率、热启动 FLEX 头或 0.0005 下第二种子",
+      "consequence": "DM 在下一个干净边界把该要求作为具体问题返回同一 Innovator 节点；B02 准备暂停。"
+    },
+    {
+      "key": "c",
+      "label": "暂停 RCLE 投入（Portfolio 层）",
+      "consequence": "属于 Portfolio 层；Root 记录后按指示处理；已实现的薄入口保留为代码，不启动。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "完整归档的 PRO_FINAL 方向层决定，无规范冲突。",
+  "evidence": [
+    "docs/research/candidates/roster_consistent_latent_exploration/RCLE_TBCFV_POST_B01_INNOVATOR_INTAKE_20260906.md",
+    "docs/research/candidates/roster_consistent_latent_exploration/RCLE_TBCFV_B02_NORM_0P02_SCIENCE_CARD_20260906.md",
+    "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260906_post_b01_innovator/archive/RESPONSE.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-06.md#L68",
+  "brief": "docs/research/portfolio/owner/briefs/roster_consistent_latent_exploration/2026-09-06_post-B01-innovator.md",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "Pro（PRO_FINAL）已作出 RCLE B01 后的方向层决定：不接受 DM 的单臂“先学会”阶梯，开一个结果知情的配对 B——RCLE-TBCFV-B02-NORM-0p02：两臂都把每次非零联合更新的全参数欧氏步长从 0.0005 改为 0.02，新配对种子 18，每臂 200 次更新 × 64 episode，最终八格各 256 episode，主量改为两条成员变化路径的 U 差，加一次共享初始化评估与一次同面板最近信标参考；每臂 ≤ 600 s，整对象 ≤ 1,500 s。不停车，不冻结 C，不改定义卡，不动 Portfolio。是否对这一决定作异步改动？",
+    "changes_if_approved": [
+      {
+        "target": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_TBCFV_B02_NORM_0P02_SCIENCE_CARD_20260906.md",
+        "from": "无 B02 卡",
+        "to": "B/EXPLORE 卡冻结（1002ead1c）：唯一学习法则改动 θ ← θ − 0.02·g/‖g‖₂（g=0 不更新），两臂同法则；seed 18 主键 sha256(\"RCLE-TBCFV-B02-NORM-0p02/seed/18\")，block digest 82593ad7…；共享 update-0 面板；主量 ΔU（正值利于 C1P1）、伴随 G_U；MEI U 0.05、τ 4 tick；六行读法"
+      },
+      {
+        "target": "实现与启动",
+        "from": "无 B02 入口",
+        "to": "Grok Build 实现薄入口（新 _tbcfv_b02 study、runner、tests；自带参数化定范数步长函数，记录规定与实测位移范数；不调用注册的 0.0005 步长函数，不改常数；tbcfv 与 B01 代码不动），枢纽审阅后提交；operator 在 wsl_4070 依次启动聚焦检查、C1P1（含初始化面板）、FLEX、参考"
+      },
+      {
+        "target": "DIRECTION.md 与 PORTFOLIO 行",
+        "from": "B01 混合/未决结果待 Innovator 决定",
+        "to": "B02 已选并写卡；RCLE 留在 Claude 工作集，生命周期与优先级不变"
+      }
+    ],
+    "if_refused": "所有者若指示改选（例如单臂学习量阶梯、普通学习率、热启动 FLEX 头、0.0005 下的第二个种子或停车），DM 在下一个干净边界停止 B02 准备并把该要求作为具体问题返回同一 Innovator 节点；已实现的薄入口保留为代码，不启动。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260906_post_b01_innovator/archive/RESPONSE.md",
+        "quote": "选择选项 2 的一个明确版本，开启新的、结果知情的 B/EXPLORE：RCLE-TBCFV-B02-NORM-0p02",
+        "why": "本节点完整、已归档的 PRO_FINAL 方向层决定（提交 b871d7a0d）。"
+      },
+      {
+        "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_TBCFV_B01_RESULT_INTAKE_20260906.md",
+        "quote": "Δτ_B01 = 0.0",
+        "why": "B01 真实完整但几乎未改善的学习观察，足以支持一次具名学习器改动。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260906_post_b01_innovator/archive/RESPONSE.md",
+        "quote": "对本选择的最强反对意见是 0.02 可能主要放大梯度噪声、使策略更差，甚至仍未带来有意义的函数变化",
+        "why": "没有量级扫描或功效证据证明 0.02 恰好合适；这是有限成本的尝试，不是已找到合适学习率。"
+      },
+      {
+        "path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260906_post_b01_innovator/EVIDENCE_AND_OPTIONS.md",
+        "quote": "The DM recommends option 1",
+        "why": "DM 曾建议先做单臂学习量阶梯；Pro 以“不必要的资格条件、十倍训练量”为由不选。"
+      }
+    ],
+    "uncertainty": [
+      "注册步长函数无范数参数且读模块常数；B02 入口自带参数化副本，由聚焦检查钉住实际位移范数为 0.02；尚未在真实训练链上观察。",
+      "600 s/臂与 1,500 s 是保守上限，不是投影；新步长与初始化面板的实际墙钟未测（B01 两臂 62/69.8 s 只是同规模量级参考）。"
+    ],
+    "cost": {
+      "compute": "wsl_4070 单线程 CPU：每臂 ≤ 600 s，整对象 ≤ 1,500 s；33,792 episode / 2,162,688 tick 的设计计数；至多 400 次 backward/联合更新",
+      "owner_time": "阅读本条目约 3 分钟；可选填写 B02 预测",
+      "reversibility": "reversible",
+      "waits_on_this": "不等待；已按 PRO_FINAL 执行；所有者的不同指示在下一个干净边界应用"
+    },
+    "verdict_text": "PRO_FINAL / CONTINUE：下一对象 = RCLE-TBCFV-B02-NORM-0p02（B/EXPLORE），定范数步长 0.02，seed 18，200 次更新，U 差主量，共享初始化面板，600 s/臂。",
+    "source": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_TBCFV_POST_B01_INNOVATOR_INTAKE_20260906.md"
+  },
+  "starred": true
+}

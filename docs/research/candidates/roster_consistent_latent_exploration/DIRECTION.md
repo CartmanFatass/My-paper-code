@@ -181,3 +181,33 @@ equivalence, zero effect, closing RCLE, "persistent state has no value". The car
 seed was not bought (it would reproduce the identity). The successor (a single-arm learning-amount
 ladder, a learner-law B, a larger-budget B01, warm-started FLEX heads, or park) is put to
 `em:roster_consistent_latent_exploration:innovator` (`pro_packets/20260906_post_b01_innovator/`).
+
+## Post-B01 Innovator: a paired B at fixed-norm step 0.02 (B02) — 2026-09-06
+
+The post-B01 Innovator response (`pro_packets/20260906_post_b01_innovator/archive/RESPONSE.md`,
+delivered at `b871d7a0d`, **PRO_FINAL**, intake `RCLE_TBCFV_POST_B01_INNOVATOR_INTAKE_20260906.md`)
+rejects the DM's single-arm learning-amount ladder (a "can it learn" observation is B/EXPLORE, and
+"C1P1 must first reach a capability" is an unnecessary qualification; 4,000 single-arm updates would
+be ten times this object's training episodes) and opens **`RCLE-TBCFV-B02-NORM-0p02`**: the B01
+comparison unchanged in host, arms, initialization, loss, baselines and exposure, with the sole
+learning-law change that every nonzero joint update moves the full parameter vector by
+`0.02 · g/‖g‖₂` (forty times B01's 0.0005) in both arms; one new paired seed 18 (root key sha256 of
+`RCLE-TBCFV-B02-NORM-0p02/seed/18`, block digest `82593ad7…`); 200 updates × 64 episodes per arm;
+final eight held-out cells × 256 episodes; one shared update-0 evaluation of the C1P1 initialization
+on the same panel; INDEPENDENT-NEAREST on the same panel. Primary **`ΔU`** = mean over the
+ACTIVE_CONTINUATION paths `8→12`, `12→8` of `(U_FLEX − U_C1P1)` (positive favours C1P1); companion
+`G_U` per arm against the initialization; MEI U 0.05, τ companion 4 ticks; τ, τ=40 fraction, 40U and
+Y kept; six-row reading. Pro narrowed three of the DM's causal statements: 1.4e-8 is a difference
+of two displacement norms, not a trajectory distance; shared sampling does not guarantee identity
+on another seed; `parameter_delta_norm` is the constant 0.0005, not a measured displacement, and
+0.1 is a path bound. "τ leaving 40" is not a qualification line for useful learning (the reference
+leaves far less demand while rarely completing four served ticks). Strongest objection recorded:
+0.02 may mainly amplify gradient noise. Not chosen: un-normalised SGD at 0.01 (≈ 0.000439 at the
+recorded gradient norm), non-zero FLEX head initialization, a second seed at 0.0005, park, the
+five-arm program. Caps: 600 s per arm, 1,500 s for the object. Card
+`RCLE_TBCFV_B02_NORM_0P02_SCIENCE_CARD_20260906.md` and objective
+`RCLE_TBCFV_B02_NORM_0P02_CM_OBJECTIVE_20260906.md` frozen at `1002ead1c` after a read-only map: the
+registered step function reads module constants and has no norm argument, so the B02 entry carries
+its own parameterised step (prescribed and measured delta norms recorded) and never calls the
+registered one. Implementation by Grok Build (`grok/rcle-tbcfv-b02-20260906`). B01 stays valid,
+unconsumed and mixed/undecided; its seed uncertainty stays unresolved.

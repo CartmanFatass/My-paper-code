@@ -673,3 +673,31 @@ labelled as such. The DM's predictions (row 2; materially different views) were 
 counts. B03's package-adverse reading, B02's qualified reading, B01 and A01–A05 are unchanged. The
 successor (a named learner-stability B, a second-seed witness, a B02-checkpoint witness, or park) is
 put to `em:dish:convergence` (`pro_packets/20260906_post_witness_convergence/`).
+
+## Post-witness Convergence: one low-learning-rate CONTROL B (B04) — 2026-09-06
+
+The post-witness Convergence response (`pro_packets/20260906_post_witness_convergence/archive/RESPONSE.md`,
+delivered at `27730bf75`, **PRO_FINAL**, intake `DISH_POST_WITNESS_CONVERGENCE_INTAKE_20260906.md`)
+continues the first-legal-application RETAIN/COPY/SHADOW agenda, keeps the forecast-package branch
+ended, and selects exactly one new B/EXPLORE: **`DISH-CONTROL-LOW-LR-B04`**, the inherited CONTROL
+learner (raw-logit interface, mean-MSE, PPO, normal Welford updates) with AdamW learning rate 3e-4
+(`CONTROL`) versus 3e-5 on every original parameter group (`LOW_LR`), one new paired seed 89
+(master = sha256 of `DISH-CONTROL-LOW-LR-B04/seed/89`), sixteen updates per arm, plus a four-row
+zero-update reference of the same initialization on the raw interface and the four seed-89 resets
+derived by the inherited coordinate law. Primary `Delta_LR = mean_r (J_LOW_LR,16,r − J_CONTROL,16,r)`;
+ancillary `D_CONTROL,new`, `D_LOW_LR,new` against the seed-89 initial rows; scale +24 mean ticks;
+seven-row reading; cap 1,800 s per arm and 3,600 s for both, the shared item (initialization,
+reference rows, focused check, publication) charged once. The witness fact motivates the change
+but does not diagnose an over-large learning rate: the object is a performance hypothesis, not a
+localized repair. Pro withdrew the DM's frozen-Welford preference (a component intervention that
+does not identify the cause) and the one-epoch variant (it cuts optimizer steps 512 → 128); a
+standalone second CONTROL seed is not bought first because the new CONTROL arm plus its own
+reference already reports whether the before/after loss repeats. The identical-views explanation
+stays an inference. Card `DISH_CONTROL_LOW_LR_B04_SCIENCE_CARD_20260906.md` and objective
+`DISH_CONTROL_LOW_LR_B04_CM_OBJECTIVE_20260906.md` frozen at `171924cb6` after a read-only code map:
+the engine rebuilds AdamW with `lr=3e-4` at every update and then restores the previous
+checkpoint's optimizer state, so the rate in effect is the one carried by the initializer payload;
+the thin entry rewrites both parameter groups' `lr` in that payload before training and records the
+rate read back from the trainer's checkpoint after every update. Implementation by Grok Build
+(`grok/dish-control-low-lr-b04-20260906`); no outcome authorizes another learning rate, a frozen
+normalization, reopening the package or a Portfolio change.
