@@ -1,24 +1,32 @@
 # Direction capability_bound_semantic_currentness: capability-bound semantic currentness
 
-## Current selected learning object — 2026-09-05
+## Current learning evidence and next object — 2026-09-05
 
-Complete Convergence selects **CBSC-DIRECT-RETURN-B02**, a same-mechanism
-B/EXPLORE continuation, not a mechanism recast. Seed21203 trains STRUCT and
-same-information RAW with the existing recurrent PPO; the primary observable
-is their mean paired native return difference over32fixed stochastic episodes
-at update48. Four checkpoint curves remain visible. The one-seed ceiling
-does not establish stable superiority or semantic specificity.
+The Pro-selected **CBSC-DIRECT-RETURN-B02** is complete and valid at its local
+B/EXPLORE ceiling. Seed 21203 gave RAW = STRUCT = 10.7125 at update 48;
+all 32 paired native-return differences are zero. Both curves are
+0.6875/10.7125/10.7125/10.7125 at updates 0/12/24/48, and both trained
+evaluation policies choose REFRESH throughout, matching the fixed-refresh
+context. Real learner movement and complete direct publication are observed;
+neither supplies a structured-representation advantage.
 
-The next discriminator is that real direct-return comparison, with primary
-measurement generated during evaluation. It does not inherit the old
-fifteen-table/historical-reconstruction path. Shared host/token/addressing
-correctness still requires the selected focused primary-path check.
-No new performance result is present. Exact RAW equality and mixed LR01
-remain the strongest contrary evidence; no old B1/r05 result is rehabilitated.
-See CBSC_DIRECT_RETURN_B02_PRO_INTAKE_20260905.md and
-CBSC_DIRECT_RETURN_B02_SCIENCE_CARD_20260905.md. Earlier B1 execution and
-publication requirements below are historical definitions of that separate
-object, not the default requirements of this newly selected B.
+The strongest contrary evidence now includes this local zero result, older
+exact RAW equality and mixed LR01. A seed-dependent fixed-policy learning
+pattern remains possible; neither its cause nor a matched tuned optimum is
+established. One paired training seed cannot show general equivalence or
+mechanism failure. Old B1/r05 quarantine and unresolved historical host errors
+remain unchanged despite success of this new direct path.
+
+At object tier the DM selected **CBSC-DIRECT-RETURN-B03**, one new independent
+paired run at seed 21209 with the same 48-update comparison, to test whether
+the sampled fixed-policy/zero-gap pattern recurs. This is a close-call under
+unattended delegation, not a Pro-selected extra B02 call, recast or Portfolio
+change. The next discriminator is its fixed update-48 native return and
+recorded action pattern. No third pair, old replay or exact-headroom prerequisite
+is selected. See CBSC_DIRECT_RETURN_B02_RESULT_EVIDENCE_20260905.md,
+CBSC_DIRECT_RETURN_B02_INTAKE_20260905.md and
+CBSC_DIRECT_RETURN_B03_SCIENCE_CARD_20260905.md. Earlier B1 requirements below
+remain historical definitions of that separate object.
 
 ## Research organization — 2026-09-04
 
