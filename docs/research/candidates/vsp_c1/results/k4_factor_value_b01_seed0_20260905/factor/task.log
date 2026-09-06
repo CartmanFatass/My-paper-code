@@ -1,0 +1,19 @@
+=== Task 'vspc1_b01_factor_s0_e7e574b44_01' started at 2026-09-06T07:55:03+08:00 ===
+{
+  "assessed_at": "2026-09-05T23:55:03.974447Z",
+  "available_physical_bytes": 15404367872,
+  "captured_at": "2026-09-05T23:55:03.974178Z",
+  "cgroup_headroom_bytes": null,
+  "cgroup_memory_current_bytes": null,
+  "cgroup_memory_max_bytes": null,
+  "effective_available_bytes": 15404367872,
+  "effective_floor_pass": true,
+  "failure_reasons": [],
+  "measurement_source": "/proc/meminfo",
+  "minimum_available_bytes": 4294967296,
+  "passed": true,
+  "physical_floor_pass": true,
+  "schema_version": 1
+}
+{"arm": "FACTOR", "status": "complete", "wall_seconds_through_final_readback": 1.479294378994382, "process_cpu_seconds": 1.434542312, "cost_law": {"work": "init + rollout(24576 joint ticks,8192 renewals) + 128 updates(64 rows) + eval(432 joint ticks) + checks/publication", "measured_rollout_seconds_per_cycle": 0.0008998384138294568, "measured_update_seconds_per_step": 0.0011450684071405703, "measured_evaluation_seconds_per_checkpoint": 0.001204287555689613, "scope": "actual fixed batch32/H6; not an extrapolation to other shapes; rollout includes trajectory checks"}}
+=== Task 'vspc1_b01_factor_s0_e7e574b44_01' exited with code 0 at 2026-09-06T07:55:05+08:00 (Duration: 2s) ===
