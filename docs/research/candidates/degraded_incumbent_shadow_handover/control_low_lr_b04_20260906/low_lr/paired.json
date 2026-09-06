@@ -1,0 +1,62 @@
+{
+  "control_mean": 154.0,
+  "d_control_new": -239.75,
+  "d_low_lr_new": -57.0,
+  "delta_lr": 182.75,
+  "low_lr_mean": 336.75,
+  "object": "DISH-CONTROL-LOW-LR-B04",
+  "reference_mean": 393.75,
+  "rows": [
+    {
+      "control_minus_reference": -525,
+      "control_service": 92,
+      "control_source": "new:CONTROL:update16",
+      "coordinate": "DISH/RBHR/R06/EVALUATION_COORDINATE/0/CLAIM/TARGET_VISUAL_MASK/K8/0",
+      "low_lr_minus_control": 668,
+      "low_lr_minus_reference": 143,
+      "low_lr_service": 760,
+      "low_lr_source": "new:LOW_LR:update16",
+      "reference_service": 617,
+      "reference_source": "new:zero_update:raw"
+    },
+    {
+      "control_minus_reference": -161,
+      "control_service": 151,
+      "control_source": "new:CONTROL:update16",
+      "coordinate": "DISH/RBHR/R06/EVALUATION_COORDINATE/0/CLAIM/TARGET_VISUAL_MASK/K4_TO_K12/0",
+      "low_lr_minus_control": -1,
+      "low_lr_minus_reference": -162,
+      "low_lr_service": 150,
+      "low_lr_source": "new:LOW_LR:update16",
+      "reference_service": 312,
+      "reference_source": "new:zero_update:raw"
+    },
+    {
+      "control_minus_reference": -131,
+      "control_service": 148,
+      "control_source": "new:CONTROL:update16",
+      "coordinate": "DISH/RBHR/R06/EVALUATION_COORDINATE/0/CLAIM/TERRAIN_RELAY_MASK/K8/0",
+      "low_lr_minus_control": 127,
+      "low_lr_minus_reference": -4,
+      "low_lr_service": 275,
+      "low_lr_source": "new:LOW_LR:update16",
+      "reference_service": 279,
+      "reference_source": "new:zero_update:raw"
+    },
+    {
+      "control_minus_reference": -142,
+      "control_service": 225,
+      "control_source": "new:CONTROL:update16",
+      "coordinate": "DISH/RBHR/R06/EVALUATION_COORDINATE/0/CLAIM/TERRAIN_RELAY_MASK/K4_TO_K12/0",
+      "low_lr_minus_control": -63,
+      "low_lr_minus_reference": -205,
+      "low_lr_service": 162,
+      "low_lr_source": "new:LOW_LR:update16",
+      "reference_service": 367,
+      "reference_source": "new:zero_update:raw"
+    }
+  ],
+  "scale_ticks": 24,
+  "seed": 89,
+  "status": "COMPLETE"
+}

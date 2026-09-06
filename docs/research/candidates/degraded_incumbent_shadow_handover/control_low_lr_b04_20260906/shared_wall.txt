@@ -1,0 +1,2 @@
+shared_exit=0 shared_wall_seconds=15.84
+arm_timeout_seconds=1788.68
