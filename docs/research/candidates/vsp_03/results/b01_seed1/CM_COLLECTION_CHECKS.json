@@ -1,0 +1,24 @@
+{
+  "main_T_G_F_row_equality_count": 1024,
+  "state_readback": {
+    "T": {
+      "parameters": 1571,
+      "tensors": 11,
+      "direct_b": 2.25728178024292
+    },
+    "G": {
+      "parameters": 1571,
+      "tensors": 11,
+      "direct_b": 0.08863969892263412
+    }
+  },
+  "rss_mib": 462.40625,
+  "first_curve_returns": {
+    "T": 0.24343750000000008,
+    "G": 0.24093750000000005
+  },
+  "last_curve_returns": {
+    "T": 0.379453125,
+    "G": 0.32523437499999996
+  }
+}
