@@ -1,0 +1,49 @@
+{
+  "unit": "caller-declared independent training run",
+  "inference": "descriptive only; no confidence interval or success classification",
+  "groups": [
+    {
+      "task": "DISH-FORECAST-PACKAGE-B02",
+      "arm": "CONTROL",
+      "n": 1,
+      "mean": 470.0,
+      "sample_sd": null,
+      "min": 470.0,
+      "max": 470.0,
+      "runs": {
+        "61": 470.0
+      }
+    },
+    {
+      "task": "DISH-FORECAST-PACKAGE-B02",
+      "arm": "FORECAST_PACKAGE",
+      "n": 1,
+      "mean": 470.0,
+      "sample_sd": null,
+      "min": 470.0,
+      "max": 470.0,
+      "runs": {
+        "61": 470.0
+      }
+    }
+  ],
+  "paired_differences": [
+    {
+      "task": "DISH-FORECAST-PACKAGE-B02",
+      "arm": "FORECAST_PACKAGE",
+      "baseline": "CONTROL",
+      "summary": {
+        "n": 1,
+        "mean": 0.0,
+        "sample_sd": null,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "differences": {
+        "61": 0.0
+      },
+      "unmatched_arm_seeds": [],
+      "unmatched_baseline_seeds": []
+    }
+  ]
+}

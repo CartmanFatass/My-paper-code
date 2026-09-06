@@ -483,3 +483,32 @@ A01–A05 and the closed R02 retain their meanings, with no change to other N3 c
 Evidence: `DISH_POST_A05_CONVERGENCE_INTAKE_20260905.md`,
 `DISH_FORECAST_PACKAGE_B02_SCIENCE_CARD_20260905.md`, and the exact response under
 `pro_packets/20260905_post_a05_convergence/archive/`.
+
+## Accepted real forecast-package B02 pair — 2026-09-05
+
+**Conclusion and bounded claim.** Both original real learners complete sixteen updates
+and four ordinary final-checkpoint evaluations on the A03 host. CONTROL and package mean
+service are each470 ticks, with four paired differences0 versus the +24-tick MEI. This is
+a valid inside-MEI B observation: no native package gain established at this exposure,
+not equivalence or stable superiority. All eight episodes reach1200 ticks, with matching
+row energy, zero hard events and zero legal transfer. Source contrasts remain unestimated.
+
+**Support and contradiction.** Each arm has65536 ordinary transitions,512 actual optimizer
+steps and nonzero, different parameter movement. No failed/negative row or old checkpoint
+is substituted. Very large finite package loss/gradient spikes remain contrary optimization
+evidence, without post-result repair. Target-MSE and likelihood losses are not comparable
+accuracy scores; training BCE does not replace held-out or native performance. One paired
+seed and four development conditions do not establish population uncertainty or tuned headroom.
+
+**Surviving alternative and next discriminator.** Finite competence, objective scale,
+ordinary action selection and shared-state/co-adaptation remain possible explanations;
+none is diagnosed by endpoint equality. The DM ends the selected pair's spending without
+automatically scaling the unchanged package, and returns the direction question to the
+same Convergence node: select a concretely justified next real B or the smallest supported
+pause/scope disposition. No new object, recast or Portfolio change is selected locally, and
+no exact cause/census/upper/replay prerequisite is added. Complete charged pair compute is
+642.66s wall and669.61CPU-s, below the original per-arm ceilings. H/scratch remain unmeasured.
+
+Evidence: `DISH_FORECAST_PACKAGE_B02_RESULT_EVIDENCE_20260905.md`,
+`DISH_FORECAST_PACKAGE_B02_INTAKE_20260905.md`,
+`DISH_FORECAST_PACKAGE_B02_DM_COMPUTED_20260905.json`, `b02_20260905/`.
