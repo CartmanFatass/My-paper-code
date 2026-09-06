@@ -1,0 +1,193 @@
+{
+  "object": "CBSC-DIRECT-RETURN-B02",
+  "seed": 21201,
+  "profile": "ENGINEERING_ONLY",
+  "independent_training_seeds": 1,
+  "endpoint_update": 1,
+  "differences": [
+    {
+      "identity": {
+        "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+        "seed": 21201,
+        "split": "EVAL_STOCHASTIC",
+        "episode_id": 0
+      },
+      "raw_return": {
+        "numerator": 23,
+        "denominator": 5,
+        "float": 4.6
+      },
+      "struct_return": {
+        "numerator": 21,
+        "denominator": 5,
+        "float": 4.2
+      },
+      "difference": {
+        "numerator": -2,
+        "denominator": 5,
+        "float": -0.4
+      }
+    }
+  ],
+  "mean_difference": {
+    "numerator": -2,
+    "denominator": 5,
+    "float": -0.4
+  },
+  "curves": {
+    "RAW-GRU": [
+      {
+        "update": 0,
+        "mean_native_return": {
+          "numerator": 21,
+          "denominator": 5,
+          "float": 4.2
+        }
+      },
+      {
+        "update": 1,
+        "mean_native_return": {
+          "numerator": 23,
+          "denominator": 5,
+          "float": 4.6
+        }
+      }
+    ],
+    "STRUCT-CURRENTNESS-GRU": [
+      {
+        "update": 0,
+        "mean_native_return": {
+          "numerator": 21,
+          "denominator": 5,
+          "float": 4.2
+        }
+      },
+      {
+        "update": 1,
+        "mean_native_return": {
+          "numerator": 21,
+          "denominator": 5,
+          "float": 4.2
+        }
+      }
+    ]
+  },
+  "context": {
+    "ALWAYS_REFRESH": [
+      {
+        "identity": {
+          "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+          "seed": 21201,
+          "split": "EVAL_STOCHASTIC",
+          "episode_id": 0
+        },
+        "actions": [
+          "REFRESH",
+          "REFRESH",
+          "REFRESH",
+          "REFRESH",
+          "REFRESH",
+          "REFRESH",
+          "REFRESH",
+          "REFRESH",
+          "REFRESH",
+          "REFRESH",
+          "REFRESH",
+          "REFRESH",
+          "REFRESH",
+          "REFRESH",
+          "REFRESH",
+          "REFRESH",
+          "REFRESH",
+          "REFRESH",
+          "REFRESH",
+          "REFRESH",
+          "REFRESH",
+          "REFRESH",
+          "REFRESH",
+          "REFRESH"
+        ],
+        "native_return": {
+          "numerator": 57,
+          "denominator": 5,
+          "float": 11.4
+        },
+        "decision_sum": {
+          "numerator": -48,
+          "denominator": 5,
+          "float": -9.6
+        },
+        "settlement_sum": {
+          "numerator": 21,
+          "denominator": 1,
+          "float": 21.0
+        },
+        "action_counts": {
+          "SERVE": 0,
+          "REFRESH": 24,
+          "SAFE_FALLBACK": 0
+        }
+      }
+    ],
+    "ALWAYS_SAFE": [
+      {
+        "identity": {
+          "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+          "seed": 21201,
+          "split": "EVAL_STOCHASTIC",
+          "episode_id": 0
+        },
+        "actions": [
+          "SAFE_FALLBACK",
+          "SAFE_FALLBACK",
+          "SAFE_FALLBACK",
+          "SAFE_FALLBACK",
+          "SAFE_FALLBACK",
+          "SAFE_FALLBACK",
+          "SAFE_FALLBACK",
+          "SAFE_FALLBACK",
+          "SAFE_FALLBACK",
+          "SAFE_FALLBACK",
+          "SAFE_FALLBACK",
+          "SAFE_FALLBACK",
+          "SAFE_FALLBACK",
+          "SAFE_FALLBACK",
+          "SAFE_FALLBACK",
+          "SAFE_FALLBACK",
+          "SAFE_FALLBACK",
+          "SAFE_FALLBACK",
+          "SAFE_FALLBACK",
+          "SAFE_FALLBACK",
+          "SAFE_FALLBACK",
+          "SAFE_FALLBACK",
+          "SAFE_FALLBACK",
+          "SAFE_FALLBACK"
+        ],
+        "native_return": {
+          "numerator": 21,
+          "denominator": 5,
+          "float": 4.2
+        },
+        "decision_sum": {
+          "numerator": 21,
+          "denominator": 5,
+          "float": 4.2
+        },
+        "settlement_sum": {
+          "numerator": 0,
+          "denominator": 1,
+          "float": 0.0
+        },
+        "action_counts": {
+          "SERVE": 0,
+          "REFRESH": 0,
+          "SAFE_FALLBACK": 24
+        }
+      }
+    ]
+  },
+  "launch_shas": [
+    "2c9254f70c3a8ef9d95ac6dc3f6585382304be41",
+    "2c9254f70c3a8ef9d95ac6dc3f6585382304be41"
+  ]
+}

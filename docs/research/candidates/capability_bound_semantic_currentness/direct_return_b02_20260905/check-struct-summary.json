@@ -1,0 +1,267 @@
+{
+  "object": "CBSC-DIRECT-RETURN-B02",
+  "arm": "STRUCT-CURRENTNESS-GRU",
+  "seed": 21201,
+  "rng_namespace": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+  "profile": "ENGINEERING_ONLY",
+  "launch_sha": "2c9254f70c3a8ef9d95ac6dc3f6585382304be41",
+  "configuration": {
+    "gamma": 1.0,
+    "gae_lambda": 0.95,
+    "clip": 0.2,
+    "value_coefficient": 0.5,
+    "entropy_coefficient": 0.01,
+    "learning_rate": 0.0003,
+    "adam_betas": [
+      0.9,
+      0.999
+    ],
+    "adam_epsilon": 1e-08,
+    "weight_decay": 0.0,
+    "gradient_norm_cap": 0.5,
+    "advantage_epsilon": 1e-08,
+    "epochs": 4,
+    "episodes_per_minibatch": 2
+  },
+  "updates": 1,
+  "eval_episodes": 1,
+  "initialization_digest": "ba0034aa1a471592f93944270e18ed8922b5b5966fe1e175bb6e554c05314a20",
+  "training_tape_digest": "d2e7b4b2b084d31af3fa3f321da543cd9e0b8e36b19958056a47e0ef0c653864",
+  "evaluation_tape_digest": "bb6aeacf8827b2e1c5a2ef88f9b25accbc13dc31d0a2d353ae530978b4e29022",
+  "execution": {
+    "torch_threads": 1,
+    "dtype": "torch.float32",
+    "device": "cpu"
+  },
+  "parameter_count": 121349,
+  "initial_parameter_l2": 29.91761016845703,
+  "parameter_movement_l2": 0.44365552067756653,
+  "relative_parameter_movement": 0.014829243317881215,
+  "changed_parameters": 112115,
+  "counters": {
+    "rollout_updates": 1,
+    "adam_steps": 16,
+    "train_episodes": 8,
+    "train_transitions": 1216,
+    "train_decisions": 192
+  },
+  "evaluation_executions": 2,
+  "evaluation_transitions": 304,
+  "eval_adapter_work": {
+    "byte_reads": 608,
+    "byte_writes": 16,
+    "uint8_xors": 48,
+    "appended_bytes": 0,
+    "age_increments": 0
+  },
+  "evaluations": [
+    {
+      "update": 0,
+      "episodes": [
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21201,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 0
+          },
+          "actions": [
+            "SAFE_FALLBACK",
+            "SAFE_FALLBACK",
+            "SAFE_FALLBACK",
+            "SAFE_FALLBACK",
+            "SAFE_FALLBACK",
+            "SAFE_FALLBACK",
+            "SAFE_FALLBACK",
+            "SAFE_FALLBACK",
+            "SAFE_FALLBACK",
+            "SAFE_FALLBACK",
+            "SAFE_FALLBACK",
+            "SAFE_FALLBACK",
+            "SAFE_FALLBACK",
+            "SAFE_FALLBACK",
+            "SAFE_FALLBACK",
+            "SAFE_FALLBACK",
+            "SAFE_FALLBACK",
+            "SAFE_FALLBACK",
+            "SAFE_FALLBACK",
+            "SAFE_FALLBACK",
+            "SAFE_FALLBACK",
+            "SAFE_FALLBACK",
+            "SAFE_FALLBACK",
+            "SAFE_FALLBACK"
+          ],
+          "native_return": {
+            "numerator": 21,
+            "denominator": 5,
+            "float": 4.2
+          },
+          "decision_sum": {
+            "numerator": 21,
+            "denominator": 5,
+            "float": 4.2
+          },
+          "settlement_sum": {
+            "numerator": 0,
+            "denominator": 1,
+            "float": 0.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 0,
+            "SAFE_FALLBACK": 24
+          }
+        }
+      ],
+      "state": {
+        "model_digest_before": "ba0034aa1a471592f93944270e18ed8922b5b5966fe1e175bb6e554c05314a20",
+        "model_digest_after": "ba0034aa1a471592f93944270e18ed8922b5b5966fe1e175bb6e554c05314a20",
+        "training_mode_before": true,
+        "training_mode_after": true,
+        "consumed_uniform_rows": []
+      },
+      "optimizer_before": "070369cb41336332a54469f987b0b9ea5f38104966e41d71e032be321c40d996",
+      "optimizer_after": "070369cb41336332a54469f987b0b9ea5f38104966e41d71e032be321c40d996",
+      "action_counts": {
+        "SERVE": 0,
+        "REFRESH": 0,
+        "SAFE_FALLBACK": 24
+      },
+      "wall_seconds": 0.01727934599330183
+    },
+    {
+      "update": 1,
+      "episodes": [
+        {
+          "identity": {
+            "run_name": "CBSC-OMRC-B1-THREE-SEED-SCOUT",
+            "seed": 21201,
+            "split": "EVAL_STOCHASTIC",
+            "episode_id": 0
+          },
+          "actions": [
+            "SAFE_FALLBACK",
+            "SAFE_FALLBACK",
+            "SAFE_FALLBACK",
+            "SAFE_FALLBACK",
+            "SAFE_FALLBACK",
+            "SAFE_FALLBACK",
+            "SAFE_FALLBACK",
+            "SAFE_FALLBACK",
+            "SAFE_FALLBACK",
+            "SAFE_FALLBACK",
+            "SAFE_FALLBACK",
+            "SAFE_FALLBACK",
+            "SAFE_FALLBACK",
+            "SAFE_FALLBACK",
+            "SAFE_FALLBACK",
+            "SAFE_FALLBACK",
+            "SAFE_FALLBACK",
+            "SAFE_FALLBACK",
+            "SAFE_FALLBACK",
+            "SAFE_FALLBACK",
+            "SAFE_FALLBACK",
+            "SAFE_FALLBACK",
+            "SAFE_FALLBACK",
+            "SAFE_FALLBACK"
+          ],
+          "native_return": {
+            "numerator": 21,
+            "denominator": 5,
+            "float": 4.2
+          },
+          "decision_sum": {
+            "numerator": 21,
+            "denominator": 5,
+            "float": 4.2
+          },
+          "settlement_sum": {
+            "numerator": 0,
+            "denominator": 1,
+            "float": 0.0
+          },
+          "action_counts": {
+            "SERVE": 0,
+            "REFRESH": 0,
+            "SAFE_FALLBACK": 24
+          }
+        }
+      ],
+      "state": {
+        "model_digest_before": "10c1923935be6594044f8e185741c946d7378eab30a282dc9ee740296e0e5c6e",
+        "model_digest_after": "10c1923935be6594044f8e185741c946d7378eab30a282dc9ee740296e0e5c6e",
+        "training_mode_before": true,
+        "training_mode_after": true,
+        "consumed_uniform_rows": []
+      },
+      "optimizer_before": "e76325296dc1288f1d18de02a7fc38af7acab4541c1416fe7f78a34ae66da08b",
+      "optimizer_after": "e76325296dc1288f1d18de02a7fc38af7acab4541c1416fe7f78a34ae66da08b",
+      "action_counts": {
+        "SERVE": 0,
+        "REFRESH": 0,
+        "SAFE_FALLBACK": 24
+      },
+      "wall_seconds": 0.019591693999245763
+    }
+  ],
+  "curve": [
+    {
+      "update": 0,
+      "mean_native_return": {
+        "numerator": 21,
+        "denominator": 5,
+        "float": 4.2
+      }
+    },
+    {
+      "update": 1,
+      "mean_native_return": {
+        "numerator": 21,
+        "denominator": 5,
+        "float": 4.2
+      }
+    }
+  ],
+  "checkpoints": [
+    {
+      "update": 0,
+      "path": "update-0.pt",
+      "counters": {
+        "rollout_updates": 0,
+        "adam_steps": 0,
+        "train_episodes": 0,
+        "train_transitions": 0,
+        "train_decisions": 0
+      },
+      "wall_seconds": 0.011722380993887782
+    },
+    {
+      "update": 1,
+      "path": "update-1.pt",
+      "counters": {
+        "rollout_updates": 1,
+        "adam_steps": 16,
+        "train_episodes": 8,
+        "train_transitions": 1216,
+        "train_decisions": 192
+      },
+      "wall_seconds": 0.013021992999711074
+    }
+  ],
+  "context": {},
+  "cost": {
+    "law": "startup + host_generation + sum_updates(project8 + rollout8 + PPO4x4) + sum_checkpoints(eval_panel + checkpoint_io) + context_RAW + publication_readback + pairing_STRUCT + process_finish",
+    "host_seconds": 0.14224145100160968,
+    "eval_projection_seconds": 0.007678127003600821,
+    "updates": [
+      {
+        "update": 0,
+        "wall_seconds": 0.9370662919973256
+      }
+    ],
+    "measured_seconds_per_update": 0.9370662919973256,
+    "peak_rss_bytes": 506511360,
+    "resources_unmeasured": false,
+    "wall_seconds_through_primary_readback": 1.6787481659994228
+  }
+}
