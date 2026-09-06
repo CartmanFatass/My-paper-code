@@ -19,7 +19,7 @@ from experiments.candidates.vsp_03.vsp03_b01.b01 import run
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--seed", type=int, choices=[1], default=1)
+    parser.add_argument("--seed", type=int, choices=[1, 2, 3], default=1)
     parser.add_argument("--out", type=Path, required=True)
     args = parser.parse_args()
     sha = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
