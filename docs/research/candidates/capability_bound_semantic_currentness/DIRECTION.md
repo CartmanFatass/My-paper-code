@@ -17,16 +17,22 @@ established. One paired training seed cannot show general equivalence or
 mechanism failure. Old B1/r05 quarantine and unresolved historical host errors
 remain unchanged despite success of this new direct path.
 
-At object tier the DM selected **CBSC-DIRECT-RETURN-B03**, one new independent
-paired run at seed 21209 with the same 48-update comparison, to test whether
-the sampled fixed-policy/zero-gap pattern recurs. This is a close-call under
-unattended delegation, not a Pro-selected extra B02 call, recast or Portfolio
-change. The next discriminator is its fixed update-48 native return and
-recorded action pattern. No third pair, old replay or exact-headroom prerequisite
-is selected. See CBSC_DIRECT_RETURN_B02_RESULT_EVIDENCE_20260905.md,
-CBSC_DIRECT_RETURN_B02_INTAKE_20260905.md and
-CBSC_DIRECT_RETURN_B03_SCIENCE_CARD_20260905.md. Earlier B1 requirements below
-remain historical definitions of that separate object.
+The separately delegated **CBSC-DIRECT-RETURN-B03** is also complete and valid:
+seed 21209 gave RAW = STRUCT = 10.5875, all 32 differences zero, with both
+curves 2.415625/10.5875/10.5875/10.5875 and trained greedy actions all REFRESH.
+The two recorded independent run seeds vary initialization, training and
+procedural evaluation together; they do not isolate a unique cause. B03's
+sampled training included other actions but concentrated on REFRESH by the
+last batch. Its native pair completed in 118.20 s, with no new simulation smoke.
+
+No third pair, old replay or exact-headroom prerequisite is selected. Whether
+to retain this direct-learning family with a specifically discriminating new B
+or park its current comparison family is returned to Convergence. No local
+family PARK, recast or Portfolio change is applied. See both
+CBSC_DIRECT_RETURN_B02_RESULT_EVIDENCE_20260905.md and
+CBSC_DIRECT_RETURN_B03_RESULT_EVIDENCE_20260905.md, their DM intakes and
+CBSC_DIRECT_RETURN_TWO_SEED_SUMMARY_20260905.json. Earlier B1 requirements
+below remain historical definitions of that separate object.
 
 ## Research organization — 2026-09-04
 

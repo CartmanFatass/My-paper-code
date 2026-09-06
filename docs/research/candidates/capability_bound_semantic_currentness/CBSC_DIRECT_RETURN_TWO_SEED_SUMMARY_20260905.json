@@ -1,0 +1,52 @@
+{
+  "unit": "caller-declared independent training run",
+  "inference": "descriptive only; no confidence interval or success classification",
+  "groups": [
+    {
+      "task": "CBSC-DYNAMIC-CACHE-2R-1C-v1",
+      "arm": "RAW-GRU",
+      "n": 2,
+      "mean": 10.65,
+      "sample_sd": 0.08838834764831845,
+      "min": 10.5875,
+      "max": 10.7125,
+      "runs": {
+        "21203": 10.7125,
+        "21209": 10.5875
+      }
+    },
+    {
+      "task": "CBSC-DYNAMIC-CACHE-2R-1C-v1",
+      "arm": "STRUCT-CURRENTNESS-GRU",
+      "n": 2,
+      "mean": 10.65,
+      "sample_sd": 0.08838834764831845,
+      "min": 10.5875,
+      "max": 10.7125,
+      "runs": {
+        "21203": 10.7125,
+        "21209": 10.5875
+      }
+    }
+  ],
+  "paired_differences": [
+    {
+      "task": "CBSC-DYNAMIC-CACHE-2R-1C-v1",
+      "arm": "STRUCT-CURRENTNESS-GRU",
+      "baseline": "RAW-GRU",
+      "summary": {
+        "n": 2,
+        "mean": 0.0,
+        "sample_sd": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "differences": {
+        "21203": 0.0,
+        "21209": 0.0
+      },
+      "unmatched_arm_seeds": [],
+      "unmatched_baseline_seeds": []
+    }
+  ]
+}
