@@ -26,9 +26,10 @@ greedy threshold behavior and policy-dependent decision exposure remain live exp
 
 ## Exact repeat and source
 
-Reuse accepted source surfaces from launch `2c7d7ae08f978aa63d58468f3de1adb372f1339a` and CM
-collection `7ae597324a696c15721dca2c8d227892b011c225`; doc-only integration does not change their
-bytes. Use `--seed 2` then `--seed 3` in separate fresh processes and output roots. The existing
+Reuse the accepted learner/environment source from launch
+`2c7d7ae08f978aa63d58468f3de1adb372f1339a` and CM collection
+`7ae597324a696c15721dca2c8d227892b011c225`, with only the CLI extension recorded below.
+Use `--seed 2` then `--seed 3` in separate fresh processes and output roots. The existing
 seed-addressed initializer, action generators and environment train/eval streams now create
 independent training pairs while preserving within-pair T/G pairing and final F pairing.
 These are new training starts, not re-evaluations of seed 1 states.
@@ -45,6 +46,22 @@ it remains separately counted with zero check optimizer steps. Do not add anothe
 smoke, source-review cycle, profiling invocation or historical replay for unchanged source.
 This preserves an existing complete executable without building a new skip/verification path.
 Required primary output and final-state publication/read-back remain part of each actual run.
+
+### Pre-launch interface correction
+
+After this supplement was pushed, CM found that `scripts/run_vsp03_b01.py` restricts the
+argument to `choices=[1]`. DM confirmed that source line at the accepted commit; no new
+admission or scientific process was launched. The original instruction to reuse an entirely
+unchanged executable cannot express the selected seeds. This is a concrete interface constraint,
+not a scientific result or a failed learner attempt.
+
+Options are to extend only that list to `[1, 2, 3]`, bypass the accepted CLI, or abandon the
+selected replication. The smallest explicit extension is recommended. **Owner-delegated
+decision (unattended, 2026-09-03 instruction): CM may change that one choices list**, commit
+and push the new source, confirm argument handling without invoking the learner, then execute
+the two already selected runs. Preserve every other source line and use the new source SHA.
+This object-tier technical correction supersedes only the no-source-edit portion of the first
+handoff. It adds no scientific quantity, new test programme or engineering-scope machinery.
 
 ## Cost, resource and stopping
 
