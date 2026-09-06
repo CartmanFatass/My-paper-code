@@ -1,0 +1,138 @@
+{
+  "schema_version": 4,
+  "request_id": "2026-09-05-github-existing-conflict-recovery-01",
+  "workflow_node": "portfolio_decision",
+  "conversation_binding_key": "portfolio:cross_direction",
+  "direction_id": "portfolio",
+  "direction_ids": [
+    "variable_n_fleet_churn"
+  ],
+  "decision_authority": "pro_final",
+  "source_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "creator_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "operator_thread_id": "01a06f0e-5eab-7431-8491-e7c2c62705b6",
+  "return_route": "PARENT_SESSION",
+  "repository": "CartmanFatass/My-paper-code",
+  "conversation_id": "6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+  "provider_url": "https://chatgpt.com/c/6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+  "tab_id": "28",
+  "tab_lifecycle": "CLOSED",
+  "visible_model": "6 Pro",
+  "underlying_model": "Latest",
+  "thinking_effort": "Pro, 5 of 5.",
+  "source_mode": "paste",
+  "prompt_sha256": "f7d82a85f164598e610be1b26b552c13a633582448688fe83e4b2e9c0769a1bb",
+  "prompt_bytes": 510,
+  "manifest_sha256": "4576286365d904837b12a5bcd187c89bfb706762245cb4a9caa6abe1c9846d0b",
+  "manifest_bytes": 1774,
+  "response_sha256": "f035d49046c3df9960264eaffb78627d7e928d437cca6f0193b2ea96c5550731",
+  "response_bytes": 633,
+  "response_characters": 481,
+  "send_evidence": {
+    "send_click_count": 1,
+    "url_observed": true,
+    "user_node_observed": true,
+    "user_node_exact": true,
+    "user_message_id": "5109ecc5-0ff7-43af-b687-a3c6a8dc949c",
+    "assistant_message_id": "request-6a9c109e-b264-83e8-a78b-f9ea1b767b7b-0",
+    "paste_mode": true,
+    "prompt_link_resource_pill_observed": true,
+    "prompt_link": "https://github.com/CartmanFatass/My-paper-code/blob/2fd1cf09a482a7a95adff27b97256a7162a86d29/docs/research/portfolio/pro_packets/20260905_github_recovery_probe/TASK.md"
+  },
+  "assistant_message_id": "request-6a9c109e-b264-83e8-a78b-f9ea1b767b7b-0",
+  "user_message_id": "5109ecc5-0ff7-43af-b687-a3c6a8dc949c",
+  "wait_status": "NATURAL_COMPLETION",
+  "observed_page_state": "complete assistant response; Copy response present; no active generation control",
+  "capture_method": "Newest assistant Copy response control via browser CUA Playwright click and CUA clipboard.readText; raw UTF-8 response preserved",
+  "github_recovery_report": {
+    "owner_authorized": true,
+    "task_link": "https://github.com/CartmanFatass/My-paper-code/blob/2fd1cf09a482a7a95adff27b97256a7162a86d29/docs/research/portfolio/pro_packets/20260905_github_recovery_probe/TASK.md",
+    "condition_1": {
+      "result": "MATCH_REUSED",
+      "existing_file_url": "https://github.com/CartmanFatass/My-paper-code/blob/2f8a08af920a8881832d89357b06065b87facf53/docs/research/portfolio/collaboration_probe/ROUNDTRIP_REVIEW.md",
+      "existing_comment_url": "https://github.com/CartmanFatass/My-paper-code/issues/3#issuecomment-5555654195",
+      "new_commit": false,
+      "new_comment": false
+    },
+    "condition_2": {
+      "result": "CONFLICT_RETAINED",
+      "conflict_file_url": "https://github.com/CartmanFatass/My-paper-code/blob/27e588ded4c6305e3cef6b97c16658b856bc715d/docs/research/portfolio/collaboration_probe/CONFLICT_TARGET.md",
+      "content_mismatch": true,
+      "overwritten": false,
+      "deleted": false,
+      "replacement_created": false,
+      "new_comment": false,
+      "new_commit": false
+    },
+    "missing_capabilities": [],
+    "pro_writes_this_round": false,
+    "direct_readback": "NOT_PERFORMED_BY_TRANSPORT",
+    "root_readback": "PENDING",
+    "transport_scope": "links-only outcome archive; task/review/conflict content not read or written by Transport"
+  },
+  "archive_paths": {
+    "manifest_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-05-github-existing-conflict-recovery-01\\2026-09-05-github-existing-conflict-recovery-01--portfolio__PACKET_MANIFEST.json",
+    "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-05-github-existing-conflict-recovery-01\\2026-09-05-github-existing-conflict-recovery-01--portfolio__00_PROMPT.md",
+    "reference_files": [],
+    "response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-05-github-existing-conflict-recovery-01\\2026-09-05-github-existing-conflict-recovery-01--portfolio--attempt-01__02_RESPONSE.md",
+    "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-05-github-existing-conflict-recovery-01\\2026-09-05-github-existing-conflict-recovery-01--portfolio--attempt-01__03_TRANSPORT_FACTS.json",
+    "response_sha256": "f035d49046c3df9960264eaffb78627d7e928d437cca6f0193b2ea96c5550731"
+  },
+  "timestamps": {
+    "received_at": "2026-09-06T00:15:00Z",
+    "sent_at": "2026-09-06T00:23:04Z",
+    "generation_started_at": "2026-09-06T00:23:04Z",
+    "completed_at": "2026-09-06T00:25:00Z",
+    "captured_at": "2026-09-06T00:25:10Z",
+    "archived_at": "2026-09-06T00:26:23Z"
+  },
+  "heartbeat": {
+    "automation_id": null,
+    "status": "NOT_CREATED",
+    "retired_at": null,
+    "retirement_verified": true
+  },
+  "return_receipt": {
+    "required": true,
+    "source_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+    "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+    "destination_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+    "status": "SENT",
+    "attempt_count": 1,
+    "message_key": "2026-09-05-github-existing-conflict-recovery-01|portfolio|6a9c109e-b264-83e8-a78b-f9ea1b767b7b|f035d49046c3df9960264eaffb78627d7e928d437cca6f0193b2ea96c5550731",
+    "retry_allowed": false,
+    "routing_mode": "PARENT_SESSION",
+    "delivery_mode": "bounded_single_attempt",
+    "return_control_after_attempt": true,
+    "archive_paths": {
+      "manifest_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-05-github-existing-conflict-recovery-01\\2026-09-05-github-existing-conflict-recovery-01--portfolio__PACKET_MANIFEST.json",
+      "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-05-github-existing-conflict-recovery-01\\2026-09-05-github-existing-conflict-recovery-01--portfolio__00_PROMPT.md",
+      "reference_files": [],
+      "response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-05-github-existing-conflict-recovery-01\\2026-09-05-github-existing-conflict-recovery-01--portfolio--attempt-01__02_RESPONSE.md",
+      "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-05-github-existing-conflict-recovery-01\\2026-09-05-github-existing-conflict-recovery-01--portfolio--attempt-01__03_TRANSPORT_FACTS.json",
+      "response_sha256": "f035d49046c3df9960264eaffb78627d7e928d437cca6f0193b2ea96c5550731"
+    },
+    "response_sha256": "f035d49046c3df9960264eaffb78627d7e928d437cca6f0193b2ea96c5550731",
+    "staged_at": "2026-09-06T00:26:32Z",
+    "fallback_enabled": false,
+    "delivery_status": "accepted",
+    "updated_at": "2026-09-06T00:26:55Z",
+    "sent_at": "2026-09-06T00:26:55Z"
+  },
+  "archive_status": "ARCHIVED",
+  "response_identity": "PASS",
+  "identity_binding": {
+    "conversation_id": "6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+    "user_message_id": "5109ecc5-0ff7-43af-b687-a3c6a8dc949c",
+    "assistant_message_id": "request-6a9c109e-b264-83e8-a78b-f9ea1b767b7b-0"
+  },
+  "notes": [
+    "Exactly one provider Send confirmed on reused portfolio6Pro/Latest binding.",
+    "Paste-only task link; no attachment or blanket read-only preamble.",
+    "Pro reported matching reuse and conflict retention with no writes in this round.",
+    "Transport did not read or write task/review/conflict content; Root owns direct GitHub fixture comparison.",
+    "No second Send or duplicate write was attempted."
+  ],
+  "tab_closed_at": "2026-09-06T00:27:12Z"
+}
