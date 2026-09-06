@@ -1,0 +1,7 @@
+SENT_PROMPT.md -text
+CHAT_CAPABILITY_REPLY.md -text
+TRANSPORT_FACTS.json -text
+PACKET_MANIFEST.json -text
+ISSUE_READBACK.json -text
+BRANCH_READBACK.json -text
+TARGET_READBACK.json -text
