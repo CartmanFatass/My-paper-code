@@ -528,7 +528,10 @@ class B01PreparedBatch:
 class NativeBatch:
     """Persistent native state with NumPy-backed batch inputs and no scalar loop."""
 
-    def __init__(self, resets: tuple[_ResetInput, ...]) -> None:
+    library = None
+
+    def __init__(self, resets: tuple[_ResetInput, ...], *, library=None) -> None:
+        self.library = library
         width = len(resets)
         if width <= 0:
             raise ProductionBackendError("width must be positive")
@@ -538,7 +541,7 @@ class NativeBatch:
         reset_array = (_ResetInput * width)()
         for index, reset in enumerate(resets):
             reset_array[index] = reset
-        code = require_cpp_batched_production_backend().dish_rbhr_r06_prod_reset_batch(reset_array, width, self._states, self._outputs)
+        code = (self.library or require_cpp_batched_production_backend()).dish_rbhr_r06_prod_reset_batch(reset_array, width, self._states, self._outputs)
         if code:
             raise ProductionBackendError(f"native reset rejected batch ({code})")
 
@@ -559,7 +562,7 @@ class NativeBatch:
             if len(master) != 32 or values[1] != 0:
                 raise ProductionBackendError("selected reset row differs")
             reset_array[index] = _ResetInput(values[0], (ctypes.c_uint8 * 32).from_buffer_copy(master), *values[1:])
-        code = require_cpp_batched_production_backend().dish_rbhr_r06_prod_reset_selected_batch(
+        code = (self.library or require_cpp_batched_production_backend()).dish_rbhr_r06_prod_reset_selected_batch(
             reset_array, selected.ctypes.data_as(ctypes.POINTER(ctypes.c_int32)),
             self.width, self._states, self._outputs,
         )
@@ -601,7 +604,7 @@ class NativeBatch:
 
     def prepare_b01_tick(self) -> B01PreparedBatch:
         prepared = (_B01PreparedTick * self.width)()
-        code = require_cpp_batched_production_backend().dish_rbhr_r06_prod_b01_prepare_batch(
+        code = (self.library or require_cpp_batched_production_backend()).dish_rbhr_r06_prod_b01_prepare_batch(
             self._states, self.width, prepared,
         )
         if code:
@@ -616,7 +619,7 @@ class NativeBatch:
         values = np.ascontiguousarray(rows, dtype=np.dtype(_StepInput))
         if values.shape != (self.width,):
             raise ProductionBackendError("B01 completion rows differ")
-        code = require_cpp_batched_production_backend().dish_rbhr_r06_prod_b01_complete_batch(
+        code = (self.library or require_cpp_batched_production_backend()).dish_rbhr_r06_prod_b01_complete_batch(
             prepared._values, values.ctypes.data_as(ctypes.POINTER(_StepInput)), self.width,
             self._states, self._outputs,
         )
@@ -701,7 +704,7 @@ class NativeBatch:
         if values.shape != (self.width,):
             raise ProductionBackendError("step rows must be one structured row per lane")
         pointer = values.ctypes.data_as(ctypes.POINTER(_StepInput))
-        code = require_cpp_batched_production_backend().dish_rbhr_r06_prod_step_batch(self._states, pointer, self.width, self._outputs)
+        code = (self.library or require_cpp_batched_production_backend()).dish_rbhr_r06_prod_step_batch(self._states, pointer, self.width, self._outputs)
         if code:
             raise ProductionBackendError(f"native step rejected batch ({code})")
         raw = np.frombuffer(self._outputs, dtype=np.dtype(_StepOutput), count=self.width)
@@ -748,7 +751,7 @@ class NativeBatch:
         steps = values.shape[0]
         outputs = (_StepOutput * (steps * self.width))()
         pointer = values.ctypes.data_as(ctypes.POINTER(_StepInput))
-        code = require_cpp_batched_production_backend().dish_rbhr_r06_prod_rollout_batch(
+        code = (self.library or require_cpp_batched_production_backend()).dish_rbhr_r06_prod_rollout_batch(
             self._states, pointer, steps, self.width, outputs
         )
         if code:
@@ -794,7 +797,7 @@ class NativeBatch:
         if values.shape != (self.width,):
             raise ProductionBackendError("passive-label step rows differ")
         outputs = (_PassiveLabelOutput * self.width)()
-        code = require_cpp_batched_production_backend().dish_rbhr_r06_prod_passive_labels_batch(
+        code = (self.library or require_cpp_batched_production_backend()).dish_rbhr_r06_prod_passive_labels_batch(
             self._states, values.ctypes.data_as(ctypes.POINTER(_StepInput)), self.width, outputs,
         )
         if code:
@@ -1288,7 +1291,7 @@ def rng_words_test_native(addresses: tuple[str, ...], authority: TestAuthority) 
     return rng_words_native(TEST_MASTER, addresses)
 
 
-def native_batch_from_rows(rows: tuple[Mapping[str, object], ...]) -> NativeBatch:
+def native_batch_from_rows(rows: tuple[Mapping[str, object], ...], *, library=None) -> NativeBatch:
     if not rows:
         raise R06ContractError("native production reset rows are empty")
     scalar_names = [name for name, _ in _ResetInput._fields_ if name != "master"]
@@ -1303,7 +1306,7 @@ def native_batch_from_rows(rows: tuple[Mapping[str, object], ...]) -> NativeBatc
         if len(master) != 32 or values[1] != 0:
             raise R06ContractError("native reset row is not production mode")
         resets.append(_ResetInput(values[0], (ctypes.c_uint8 * 32).from_buffer_copy(master), *values[1:]))
-    return NativeBatch(tuple(resets))
+    return NativeBatch(tuple(resets), library=library)
 
 
 def open_production_batch(*, authority: object | None, width: int) -> NativeBatch:

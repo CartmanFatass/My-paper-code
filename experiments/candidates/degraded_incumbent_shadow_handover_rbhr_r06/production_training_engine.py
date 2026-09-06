@@ -63,7 +63,7 @@ class ExactPolicyGraph(nn.Module):
             "flex_beta": torch.tanh(self.flex_beta(hidden)),
         }
 
-    def training_heads(self, hidden: torch.Tensor) -> dict[str, torch.Tensor]:
+    def training_heads(self, hidden: torch.Tensor, forecast_package: bool = False) -> dict[str, torch.Tensor]:
         """Materialize exactly the heads consumed by the frozen PPO update.
 
         The omitted cholesky/FLEX tensors have no consumer in the update loss,
@@ -72,12 +72,15 @@ class ExactPolicyGraph(nn.Module):
         :meth:`heads` and therefore retains the complete policy ABI.
         """
 
-        return {
+        result = {
             "motion": self.motion(hidden), "prepare": self.prepare(hidden), "commit": self.commit(hidden),
             "prediction_mean": self.prediction_mean(hidden), "service_q": self.service_q(hidden),
             "link_mean": self.link_mean(hidden),
             "link_sigma": F.softplus(self.link_sigma(hidden)) + 1e-3, "missing": self.missing(hidden),
         }
+        if forecast_package:
+            result["prediction_cholesky"] = self.prediction_cholesky(hidden)
+        return result
 
     def critic(self, value: torch.Tensor) -> torch.Tensor:
         return self.critic_out(torch.tanh(self.critic2(torch.tanh(self.critic1(value))))).squeeze(-1)
@@ -120,6 +123,7 @@ class ExactPolicyGraph(nn.Module):
         promotion_mask: torch.Tensor | None = None,
         promotion_alpha: torch.Tensor | None = None,
         training_heads_only: bool = False,
+        forecast_package: bool = False,
     ) -> tuple[torch.Tensor, dict[str, torch.Tensor]]:
         if observation.ndim != 4 or observation.shape[1:] != (64, 4, 54):
             raise TrainingBoundaryError("replay observation must be [fragments,64,4,54]")
@@ -157,7 +161,7 @@ class ExactPolicyGraph(nn.Module):
                 edited[lane, old_s] = torch.where(promote[:, None], hidden[lane, old_i], hidden[lane, old_s])
                 hidden = edited
         states = torch.stack(histories, dim=1)
-        return states, self.training_heads(states) if training_heads_only else self.heads(states)
+        return states, self.training_heads(states, forecast_package=forecast_package) if training_heads_only else self.heads(states)
 
 
 @dataclass
@@ -472,12 +476,32 @@ def arm_mask_inventory() -> dict[str, dict[str, int]]:
     }
 
 
+def forecast_target_terms(mean: torch.Tensor, raw_cholesky: torch.Tensor,
+                          target: torch.Tensor) -> torch.Tensor:
+    """Joint 4D Gaussian NLL per row, averaged over the four recurrent copies."""
+    indices = torch.tril_indices(4, 4, device=mean.device)
+    lower = mean.new_zeros((*mean.shape[:-1], 4, 4))
+    lower[..., indices[0], indices[1]] = raw_cholesky
+    diagonal = torch.arange(4, device=mean.device)
+    lower[..., diagonal, diagonal] = F.softplus(raw_cholesky[..., [0, 2, 5, 9]]) + 1e-3
+    covariance = lower @ lower.transpose(-1, -2) + 1e-4 * torch.eye(4, device=mean.device, dtype=mean.dtype)
+    factor = torch.linalg.cholesky(covariance)
+    residual = (target[:, None] - mean).unsqueeze(-1)
+    whitened = torch.linalg.solve_triangular(factor, residual, upper=False)
+    mahalanobis = whitened.square().sum(dim=(-1, -2))
+    logdet = 2 * torch.log(factor.diagonal(dim1=-2, dim2=-1)).sum(-1)
+    return (0.5 * (mahalanobis + logdet + 4 * math.log(2 * math.pi))).mean(dim=1)
+
+
 def run_full_4096_dry_update(
     *,
     arm: str = "STRUCTURED",
     fragments: Mapping[str, torch.Tensor] | None = None,
     source_label: str = "SYNTHETIC_TEST_FIXTURE",
     resume_checkpoint_bytes: bytes | None = None,
+    forecast_package: bool = False,
+    progress: dict | None = None,
+    deadline: float | None = None,
 ) -> dict[str, object]:
     """Execute one complete result-blind frozen update without publishing state."""
 
@@ -534,13 +558,15 @@ def run_full_4096_dry_update(
             scores = torch.sin(torch.arange(64, dtype=torch.float64) * 0.619 + epoch * 0.37)
             order = torch.argsort(scores, stable=True)
             for minibatch in range(8):
+                if deadline is not None and time.perf_counter() >= deadline:
+                    raise TimeoutError("B02 wall allowance reached before minibatch")
                 selected = order[minibatch * 8:(minibatch + 1) * 8]
                 states, heads = model.replay(
                     data["observation"][selected], initial_hidden[selected], data["snapshot"][selected],
                     data["snapshot_mask"][selected], data["reset_mask"][selected],
                     data["owner"][selected], data["promotion_mask"][selected],
                     data["promotion_alpha"][selected],
-                    training_heads_only=True,
+                    training_heads_only=True, forecast_package=forecast_package,
                 )
                 motion, prepare_logit, commit_logit = _role_policy_heads(heads, data["owner"][selected])
                 ell = torch.clamp(model.log_std, -5.0, 1.0)
@@ -577,7 +603,9 @@ def run_full_4096_dry_update(
                 prediction_mean = heads["prediction_mean"].reshape(512, 4, 4)
                 target_label = data["target"][flat_indices]
                 next_eligible = data["next_mask"][flat_indices].bool()
-                target_terms = (prediction_mean - target_label[:, None]).square().mean(dim=(1, 2))
+                target_terms = (forecast_target_terms(
+                    prediction_mean, heads["prediction_cholesky"].reshape(512, 4, 10), target_label,
+                ) if forecast_package else (prediction_mean - target_label[:, None]).square().mean(dim=(1, 2)))
                 target_loss = target_terms[next_eligible].mean() if bool(next_eligible.any()) else target_terms.sum() * 0.0
                 link_mean = heads["link_mean"].reshape(512, 4, 2)
                 link_sigma = heads["link_sigma"].reshape(512, 4, 2)
@@ -599,6 +627,12 @@ def run_full_4096_dry_update(
                 optimizer.zero_grad(set_to_none=True); loss.backward()
                 norm = torch.nn.utils.clip_grad_norm_(model.parameters(), 0.5); optimizer.step()
                 losses.append(float(loss.detach())); gradient_norms.append(float(norm)); optimizer_steps += 1
+                if progress is not None:
+                    progress["optimizer_steps"] += 1
+                    progress["last_loss"] = losses[-1]
+                    progress["last_gradient_norm"] = gradient_norms[-1]
+                    progress["last_target_loss"] = float(target_loss.detach())
+                    progress["last_service_bce"] = float(q_loss.detach())
         actor_welford = restored_input["welford"]["actor"] if restored_input is not None else WelfordState.empty(54); actor_welford.update(data["actor_raw"])
         snapshot_welford = restored_input["welford"]["snapshot"] if restored_input is not None else WelfordState.empty(18); snapshot_welford.update(data["snapshot"], data["snapshot_mask"])
         critic_welford = restored_input["welford"]["critic"] if restored_input is not None else WelfordState.empty(58); critic_welford.update(data["critic"])
@@ -625,6 +659,8 @@ def run_full_4096_dry_update(
             "model_state_sha256": hashlib.sha256(b"MODEL\0" + bytes.fromhex(checkpoint_sha256)).hexdigest(),
             "optimizer_state_sha256": hashlib.sha256(b"OPTIMIZER\0" + bytes.fromhex(checkpoint_sha256)).hexdigest(),
             "welford_counts": {"actor": actor_welford.count, "snapshot": snapshot_welford.count, "critic": critic_welford.count},
+            "mean_loss": sum(losses) / len(losses),
+            "mean_gradient_norm": sum(gradient_norms) / len(gradient_norms),
             "wall_seconds": time.perf_counter() - started,
             "private_checkpoint_bytes": checkpoint_bytes,
             "update": previous_update + 1,
