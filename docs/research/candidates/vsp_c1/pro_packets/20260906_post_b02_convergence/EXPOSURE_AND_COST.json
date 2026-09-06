@@ -1,0 +1,34 @@
+{
+  "evidence_role": "DOCUMENTARY_DERIVATION_NOT_NEW_EXPERIMENT",
+  "written_at": "2026-09-06T14:40:00+00:00",
+  "derivation": "Counts, metrics and timings copied from the two B02 summary.json files, the B02 result intake and the r02 request's cost facts; no project import, run or new timing. Consultation exposure is zero.",
+  "sources": [
+    {"path": "docs/research/candidates/vsp_c1/VSPC1_K4_FACTOR_VALUE_B02_BUDGET512_RESULT_INTAKE_20260906.md", "sha256": "034a9913602547c5fcd4098e50ffb49c7b73fd6267568fd0778b432610c81b3e"},
+    {"path": "docs/research/candidates/vsp_c1/results/k4_b02_budget512_seed3_20260906/factor/summary.json", "sha256": "352c0df4b498e2194d0ea6e8a6b41991984c1b8adcb27049804aa2ce45226d6f"},
+    {"path": "docs/research/candidates/vsp_c1/results/k4_b02_budget512_seed3_20260906/generic/summary.json", "sha256": "0389c0441db39659d351a78000d25888e22280fac02923667490b39f280f8271"},
+    {"path": "docs/research/candidates/vsp_c1/VSPC1_K4_FACTOR_VALUE_B02_BUDGET512_CM_RECORD_20260906.md", "sha256": "6341fe7d4a18c17044dabe75891cd1bdc96e26593aea0c6d99d4f280cc24527a"},
+    {"path": "docs/research/candidates/vsp_c1/VSPC1_K4_FACTOR_VALUE_B02_BUDGET512_SCIENCE_CARD_20260906.md", "sha256": "df74699075dea1f54538bccfab9366adc384a6f1181c9faeb34b2d5aa336477d"}
+  ],
+  "exposure_line": "VSPC1-K4-FACTOR-VALUE-B02-BUDGET512: 2 arms x 1 training seed (3); per arm 512 optimizer steps, 16,384 training episodes, 98,304 joint steps, 32,768 legal decisions, 32,768 renewals; 33 greedy evaluations x 8 episodes (264 episodes, 1,584 joint steps) per arm; parameters 188 (FACTOR) / 191 (GENERIC); parameter displacement from initialization 3.557 (FACTOR) / 2.531 (GENERIC) at 512, 2.364 / 1.935 at 128. K4 toy family cumulative real learning: B01 3 seeds x 2 arms x 128 steps (six invocations) plus B02 2 arms x 512 steps. Consultation: zero new models, environment steps, updates, evaluations, tests or experiments.",
+  "measured": {
+    "factor": {"outer_wall_s": 2.66, "inner_wall_s": 2.382, "cpu_s": 2.236, "peak_rss_mb_outer": 508, "J0": 0.458333, "J128": 0.75, "J512": 0.833333, "auc_0_128": 0.643229, "auc_0_512": 0.763672, "auc_128_512": 0.803819},
+    "generic": {"outer_wall_s": 2.17, "inner_wall_s": 1.920, "cpu_s": 2.099, "peak_rss_mb_outer": 510, "J0": 0.5, "J128": 0.666667, "J512": 0.833333, "auc_0_128": 0.640625, "auc_0_512": 0.71875, "auc_128_512": 0.744792},
+    "differences": {"dJ128": 0.083333, "dJ512": 0.0, "D": -0.083333, "L_F": 0.083333, "L_G": 0.166667, "dAUC_0_128": 0.002604, "dAUC_0_512": 0.044922, "dAUC_128_512": 0.059028},
+    "analytic_reference": 0.833333,
+    "node": "wsl_4070",
+    "launch_sha": "90c730a098d1c39d4265684c40afdf881909fa43",
+    "cap_per_arm_s": 2700
+  },
+  "family_cost_record": {
+    "b01_six_invocations_wall_s": 17.00,
+    "b01_six_invocations_cpu_s": 14.47,
+    "b02_two_invocations_outer_wall_s": 4.83,
+    "note": "All K4 toy invocations together stay under five seconds of learner wall per invocation; the toy's cost is not the limiting factor for any option."
+  },
+  "prospective_options": {
+    "option_1_end_toy_family": {"compute": "zero", "engineering": "none"},
+    "option_2_tabular_comparator_on_same_toy": {"compute": "seconds per arm by the B01 cost law (no torch in a tabular arm)", "engineering": "one new comparator arm inside the existing runner budget", "unknown": "none material"},
+    "option_3_new_host_with_room": {"compute": "unknown; not projected from the toy", "engineering": "new host and chain; not designed", "unknown": "cost, chain, native consequence"},
+    "option_4_recast": {"compute": "zero this round"}
+  }
+}

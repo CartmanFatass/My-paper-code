@@ -1,0 +1,27 @@
+{
+  "read_at": "2026-09-06T14:34:29Z",
+  "reader": "hub gh api on the connected owner account",
+  "issue": {
+    "body": "这是 DM 对完整实测的综合与下一方向问题，不是 Pro 原文。\n\n同信息、同交互和更新预算的 FACTOR/GENERIC 比较已完成三个独立训练种子，每臂每种子 128 次真实更新。FACTOR 终点差依次为 −0.041667、+0.083333、+0.083333；固定全曲线 AUC 差依次为 −0.028646、+0.033854、+0.023438。三种子平均终点差 +0.041667，平均 AUC 差 +0.009549。首个负结果保留；这只支持训练实例敏感的小幅 B/EXPLORE 信号，不能证明稳定优势或通用 MARL 效果。\n\n当前问题：继续这一公开固定伙伴计划的小 toy 家族，实施一个有决策价值的有限真实学习比较，还是停在已有结论、转向明确定义的新问题？请比较新增训练随机性信息、改变训练预算和更改宿主/比较器的价值与实际工作量。精确参考、全面因果解释或政策搜索不是默认前置要求。\n\n固定证据：\n\n- [完整三种子 intake](https://github.com/CartmanFatass/My-paper-code/blob/d7ea795e67a52eadf1cfab2fb95dc3bcbfd25305/docs/research/candidates/vsp_c1/VSPC1_K4_FACTOR_VALUE_B01_SEED12_INTAKE_20260905.md)\n- [完整结果、原始包、曲线与实际成本](https://github.com/CartmanFatass/My-paper-code/blob/d7ea795e67a52eadf1cfab2fb95dc3bcbfd25305/docs/research/candidates/vsp_c1/VSPC1_K4_FACTOR_VALUE_B01_SEED12_RESULT_EVIDENCE_20260905.md)\n- [当前科学边界](https://github.com/CartmanFatass/My-paper-code/blob/d7ea795e67a52eadf1cfab2fb95dc3bcbfd25305/docs/research/candidates/vsp_c1/DIRECTION.md)\n\n六次调用合计 17.00 秒完整 wall、14.47 CPU 秒、150048 联合步和 768 更新，均已完成。公开固定伙伴使该任务可还原为单控制器问题；GENERIC 同样共享隐藏特征，两个周期列上的四维嵌入也不构成严格低秩瓶颈。旧 A01 缺失 headroom 和旧 D6 停止边界不变。\n\n下一轮将通过本问题的固定任务文件与独立响应分支交付完整 Convergence 原文。此时未选择新实验，也未改变 Portfolio 生命周期或优先级。",
+    "comments": 2,
+    "number": 5,
+    "state": "open",
+    "title": "VSP-C1 K4：三种子混合结果后，当前跨周期价值学习 toy 的下一步",
+    "updated_at": "2026-09-06T05:46:22Z"
+  },
+  "comments": [
+    {
+      "body": "Pro 三种子收敛答复交付：[完整 RESPONSE.md](https://github.com/CartmanFatass/My-paper-code/blob/a7265e9733873e3dd16de76861c75f3634302095/docs/research/candidates/vsp_c1/pro_packets/20260905_three_seed_convergence/archive/RESPONSE.md)。固定证据版本为4cb615bbe75a3b2ddf1f6ffb8788e2c66199adb7。文件已由本会话直接创建并通过GitHub读回；本轮仅交付完整方向决定，未执行新实验、修改科研代码或更新科学状态。",
+      "created_at": "2026-09-06T01:02:47Z",
+      "id": 5555953327,
+      "user": "CartmanFatass"
+    },
+    {
+      "body": "VSP-C1 三种子收敛 r02 的独立完整答复已交付：[RESPONSE.md（固定提交）](https://github.com/CartmanFatass/My-paper-code/blob/d650cd966869852b122c2426ecf0e2584116ae43/docs/research/candidates/vsp_c1/pro_packets/20260905_three_seed_convergence_r02/archive/RESPONSE.md)。答复使用固定证据版本 4cb615bbe75a3b2ddf1f6ffb8788e2c66199adb7，已通过 GitHub 完整分段读回；提交仅新增指定答复文件。未执行实验、修改科研代码或更新科学状态；先前另一目标的交付保持原样。",
+      "created_at": "2026-09-06T05:46:22Z",
+      "id": 5557268673,
+      "user": "CartmanFatass"
+    }
+  ],
+  "note": "Fixed read-back at packet preparation; the Issue is mutable. Comment 5557268673 is the r02 delivery link; the earlier comment is the misrouted first dispatch (untrusted evidence, see r02 constraints)."
+}
