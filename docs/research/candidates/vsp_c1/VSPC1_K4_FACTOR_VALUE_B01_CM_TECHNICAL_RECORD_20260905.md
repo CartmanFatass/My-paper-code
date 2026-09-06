@@ -198,3 +198,46 @@ DM selected the same comparison on independent seeds 1 and 2 in the committed fo
 Exactly four new invocations run serially: FACTOR1, GENERIC1, FACTOR2, GENERIC2. Each remains CPU FP32, single process/compute thread, batch32, 128 updates, 8192 renewals and 25008 joint steps. Fresh seed-keyed model/Adam and streams retain within-seed exogenous pairing and between-seed independence. Each complete invocation retains 2700 seconds and its own fresh actual-node memory admission immediately before runner. Existing exact-shape costs project 1.76 seconds per FACTOR and 3.95 per GENERIC, 11.42 summed seconds conditionally, not a guarantee. Four nominal caps sum to 10800 seconds; new exposure totals 100032 joint steps and 512 updates. No replacement seed, changed comparator, tuning, early metric window or continuation is authorized.
 
 Ownership, remote-first node, detached exact-SHA source, output structure and tracker handoff remain the original CM contract. Independent review checks the one-line seed-choice diff and new actual seed/output records. All four complete measurements will be returned to DM separately; scientific aggregation and next decisions remain DM-owned.
+
+## Seed 1/2 completed technical observations
+
+Launch source is committed/pushed `e2f00991f4d6ccd169e531ef411ebc1547f2d371`. Independent reviewer confirmed the sole source change is seed CLI admission; accepted scientific dependencies remain unchanged. Existing pure tests and source review were reused, with zero extra model/environment/learner smoke. All four actual scientific invocations were accepted once and completed serially in selected order. No seed0 run, extra arm, tuning, repeat or repair occurred.
+
+Exact detached remote cwd is `/home/wu/hmasd-worktrees/vspc1-b01-e2f00991f` on configured `wsl_4070`. Each used the original logical command above, substituting this cwd, its actual `--seed 1` or `--seed 2`, selected arm, and unique root. Each command is verbatim in its package's `runner.sh`: fresh configured-Python `admit-memory --out <root>/admission.json && /usr/bin/time -v -o <root>/invocation.time timeout --signal=TERM 2700s` followed by configured Python, unchanged B01 runner, arm/seed/out. All write/read and final shutdown remain within complete external time. Git/SSH/checkout and handoff overhead are separate, not attributed to algorithm cost. Existing remote prompt/background-gc warnings did not prevent successful fetch and exact checkout.
+
+| Invocation | Task suffix after `vspc1_b01_` | Supervisor PID | Admission UTC (2026-09-06) | Physical/effective available bytes, both | Terminal UTC | Exit |
+| --- | --- | ---: | --- | ---: | --- | ---: |
+| FACTOR1 | factor_s1_e2f00991f_01 | 1818915 | 00:14:01.498168 | 15364902912 | 00:14:04 | 0 |
+| GENERIC1 | generic_s1_e2f00991f_01 | 1819313 | 00:14:33.170286 | 15365132288 | 00:14:35 | 0 |
+| FACTOR2 | factor_s2_e2f00991f_01 | 1826693 | 00:15:08.606978 | 15049617408 | 00:15:11 | 0 |
+| GENERIC2 | generic_s2_e2f00991f_01 | 1841480 | 00:15:47.627755 | 14968045568 | 00:15:50 | 0 |
+
+Every fresh actual-node receipt passes both 4-GiB floors. Tracker `/root/tracker_tl_experiments` ACKed and independently confirmed all four terminal handles, notifying this CM and DM. No process remains live.
+
+| Invocation | Params | Train episodes / renewals / updates | Eval episodes / joint steps | Complete joint steps | J0 | J128 | Full normalized AUC |
+| --- | ---: | --- | --- | ---: | ---: | ---: | ---: |
+| FACTOR1 | 188 | 4096 / 8192 / 128 | 72 / 432 | 25008 | 0.458333333333 | 0.708333333333 | 0.625 |
+| GENERIC1 | 191 | 4096 / 8192 / 128 | 72 / 432 | 25008 | 0.5 | 0.625 | 0.591145833333 |
+| FACTOR2 | 188 | 4096 / 8192 / 128 | 72 / 432 | 25008 | 0.458333333333 | 0.708333333333 | 0.59375 |
+| GENERIC2 | 191 | 4096 / 8192 / 128 | 72 / 432 | 25008 | 0.5 | 0.625 | 0.5703125 |
+
+Actual new totals: 16384 training episodes, 32768 renewals, 512 updates, 288 evaluation episodes, 100032 complete joint steps. Each invocation has 512 episodes per training context, 6144/2048 training renewals by period, 8192 training action choices and 144 evaluation choices. All nine fixed evaluation checkpoints and all context/action cells, including zeros and adverse values, remain in each raw summary. Actual violation counters are zero and all four primary dependency lists empty. Source/actual counters establish the selected complete execution, not stronger scientific claims.
+
+| Invocation | Initial norm | Displacement norm | Displacement / initial | Complete wall seconds | User + system CPU seconds | External max RSS KiB |
+| --- | ---: | ---: | ---: | ---: | --- | ---: |
+| FACTOR1 | 4.01937103271 | 1.84172797203 | 0.458212978359 | 2.77 | 2.37 + 0.31 | 510160 |
+| GENERIC1 | 3.57992482185 | 1.66074502468 | 0.463905000056 | 2.76 | 2.43 + 0.28 | 509652 |
+| FACTOR2 | 3.88370251656 | 2.19178223610 | 0.564353790424 | 2.90 | 2.54 + 0.27 | 509960 |
+| GENERIC2 | 3.48659014702 | 1.65313804150 | 0.474141775141 | 2.86 | 2.52 + 0.28 | 509892 |
+
+Complete invocation wall sums to **11.29 seconds**, aggregate CPU **11.00 seconds**, at GNU time precision. The conditional 11.42-second planning projection was not a cap or performance guarantee. All four invocations are under their unchanged 2700-second cap. Supervisor timestamps give approximately **109 seconds** study elapsed including serial handoff/observation gaps. External RSS and full-wall/CPU scope remain as defined for seed0; no runtime contention cause, multi-host equivalence or parameter replay is inferred. No profiler or extra measurement was launched.
+
+Actual NumPy streams are `[1,101]/[1,102]` and `[2,101]/[2,102]`; paired arms share these within each seed. FACTOR dense/embedding streams are 1201/1202 and 2201/2202; GENERIC dense streams 1301 and 2301. Evaluation consumes no training randomness. Fresh parameter norms and displacements are observed for every learner, not copied from seed0.
+
+The four complete original packages are retained remotely at cwd plus `temp/directions/vsp_c1/exp/k4_b01_<factor|generic>_seed<1|2>_e2f00991f_01/`. Local copies are at `C:/Projects/HMASD/temp/directions/vsp_c1/exp/` with those same four directory names. Each contains `summary.json`, `admission.json`, `invocation.time`, `task.log`, `exit_code`, `start_time`, and exact supervisor `runner.sh`. Supervisor originals remain `/home/wu/.agent-tasks/<task>/`. DM received the readable paths for raw evidence archiving and complete scientific intake; the table above does not replace their full context/action/curve values.
+
+CM's direct JSON count/readback review verifies actual seeds, stream addresses, full exposure, action totals and context support. Independent output review is recorded below. Seed0's adverse result is preserved; new seeds are not interpreted as reversing a population claim. DM owns separate new-seed and explicitly historical-inclusive three-seed summaries and all further decisions. No further invocation is selected by this return.
+
+Independent reviewer completed read-only analysis of all four packages and found no material defect or missing primary dependency. It independently recalculated all endpoint/AUC/context/period/partner means, counts, seed stream assignments, parameter movement ratios, admissions, serial order and full timing. It retained the one FACTOR seed1 zero evaluation-action cell; no training action cell was missing. It reported endpoint differences +0.083333333333 for each new seed, AUC differences +0.033854166667 and +0.0234375, without discarding the contrary seed0. No new experiment, parameter replay or thread sampling occurred during review.
+
+CM technically accepts all four selected SEED12 observations with the stated limitations. All handles are terminal and no work remains live in this assignment. The seed-permission source commit `e2f00991f` is pushed; this completion evidence is separately committed and immediately pushed. Return to the existing DM for scientific intake; no further seed or arm is authorized here.
