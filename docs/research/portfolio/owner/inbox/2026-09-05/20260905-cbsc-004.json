@@ -1,0 +1,87 @@
+{
+  "id": "20260905-cbsc-004",
+  "created": "2026-09-05T17:39:52-07:00",
+  "direction": "capability_bound_semantic_currentness",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "CBSC B03：仅一个新独立训练配对",
+  "context": "B02 已完成，32个评价差均为零，只有一个独立训练配对。DM 按无人委托另选 seed21209、48更新、每臂600秒；不自动追加第三组。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "保留已选B03",
+      "consequence": "执行这一组独立训练并保留所有结果，不追加第三组。"
+    },
+    {
+      "key": "reject",
+      "label": "停止尚未接受的新调用",
+      "consequence": "停止尚未接受的调用，保留B02及已产生证据。"
+    },
+    {
+      "key": "revise",
+      "label": "按具体意见调整后续",
+      "consequence": "在下一干净边界应用明确意见，不改写已有结果。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "用少量实际训练检验首次固定刷新是否随训练seed变化；预期信息有限，故标close-call。",
+  "evidence": [
+    "docs/research/candidates/capability_bound_semantic_currentness/CBSC_DIRECT_RETURN_B03_SCIENCE_CARD_20260905.md",
+    "docs/research/candidates/capability_bound_semantic_currentness/CBSC_DIRECT_RETURN_B02_INTAKE_20260905.md"
+  ],
+  "ledger_row": "",
+  "brief": "",
+  "ledger_kind": "",
+  "status": "open",
+  "packet": {
+    "question": "请复核已按无人值守委托选择的一组新独立训练：第一次两臂都学成固定刷新且差异为零后，是否保留这次有限重复？",
+    "changes_if_approved": [
+      {
+        "target": "CBSC 当前对象",
+        "from": "直接回报 B02 完整结束；一组训练的比较差为零",
+        "to": "另立直接回报 B03，只增加一个独立训练 seed 的 RAW/STRUCT 配对；不追加第三组"
+      }
+    ],
+    "if_refused": "停止尚未接受的 B03 调用；保留已产生的所有证据及 B02 零结果，CBSC 的 ACTIVE/HIGH 不变。若运行已被接受，按原上限完成并保留后续异步指令。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_DIRECT_RETURN_B02_RESULT_EVIDENCE_20260905.md",
+        "quote": "Both formal calls sum to 170.47 s; adding the unique check gives 177.44 s.",
+        "why": "真实完整路径已经可运行且成本小，能直接增加一组独立训练，而不建立历史重放或额外诊断。"
+      },
+      {
+        "path": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_DIRECT_RETURN_B02_RESULT_EVIDENCE_20260905.md",
+        "quote": "There is one independent paired training seed, not\n32 or 128 independent training samples.",
+        "why": "首次结果尚不能说明固定策略和零差异是否随训练过程的随机性而变化。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_DIRECT_RETURN_B02_RESULT_EVIDENCE_20260905.md",
+        "quote": "All 32 endpoint differences are zero; none are positive or negative.",
+        "why": "没有结构化机制的正向信号；不追加计算是合理的次选方案。"
+      },
+      {
+        "path": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_DIRECT_RETURN_B02_INTAKE_20260905.md",
+        "quote": "the expected information from another seed is modest.",
+        "why": "不能假定重复一定有价值，更不能反复训练直到转正。"
+      }
+    ],
+    "uncertainty": [
+      "新 seed 同时改变初始化、训练随机性及配对评价世界；这是独立运行差异，不能只归因于初始化。",
+      "匹配的调优基线 headroom 仍未测得；固定刷新不等于最优策略。",
+      "旧 SIGSEGV 与 TypeError 的根因仍未确定，当前直接路径成功不恢复旧结果。",
+      "两个独立训练仍不足以独立支持稳定优越或总体等效。"
+    ],
+    "cost": {
+      "compute": "一组两臂；每臂 48 rollout 更新、768 Adam 步、600 秒完整上限。按已完成相同工作量参考约 79.69/90.78 秒，不是保证。无新增仿真 smoke。",
+      "owner_time": "仅需决定保留、撤销或改变这一次有限投入；无需重新批准已结束的 B02。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing; 源码/命令按既有工程路径整合后推进，不等批改"
+    },
+    "verdict_text": "推荐一个新的独立训练 seed，保留相同两臂比较、48 次更新和每臂 600 秒完整上限，以检验固定刷新与零差异是否只是首次运行的现象。此选择为 close-call；不追加计算是合理次选，不自动增加第三组。",
+    "source": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_DIRECT_RETURN_B02_INTAKE_20260905.md"
+  },
+  "starred": false
+}
