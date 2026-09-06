@@ -1,0 +1,55 @@
+{
+  "unit": "caller-declared independent training run",
+  "inference": "descriptive only; no confidence interval or success classification",
+  "groups": [
+    {
+      "task": "VSP03_B01",
+      "arm": "G",
+      "n": 3,
+      "mean": 0.37509765625,
+      "sample_sd": 0.011082289242623918,
+      "min": 0.363779296875,
+      "max": 0.385927734375,
+      "runs": {
+        "1": 0.3755859375,
+        "2": 0.363779296875,
+        "3": 0.385927734375
+      }
+    },
+    {
+      "task": "VSP03_B01",
+      "arm": "T",
+      "n": 3,
+      "mean": 0.37509765625,
+      "sample_sd": 0.011082289242623918,
+      "min": 0.363779296875,
+      "max": 0.385927734375,
+      "runs": {
+        "1": 0.3755859375,
+        "2": 0.363779296875,
+        "3": 0.385927734375
+      }
+    }
+  ],
+  "paired_differences": [
+    {
+      "task": "VSP03_B01",
+      "arm": "T",
+      "baseline": "G",
+      "summary": {
+        "n": 3,
+        "mean": 0.0,
+        "sample_sd": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "differences": {
+        "1": 0.0,
+        "2": 0.0,
+        "3": 0.0
+      },
+      "unmatched_arm_seeds": [],
+      "unmatched_baseline_seeds": []
+    }
+  ]
+}

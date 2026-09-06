@@ -1,0 +1,27 @@
+=== Task 'vsp03-b01-seed2-r01-20260905' started at 2026-09-06T08:21:40+08:00 ===
+{
+  "assessed_at": "2026-09-06T00:21:40.095988Z",
+  "available_physical_bytes": 15677493248,
+  "captured_at": "2026-09-06T00:21:40.095571Z",
+  "cgroup_headroom_bytes": null,
+  "cgroup_memory_current_bytes": null,
+  "cgroup_memory_max_bytes": null,
+  "effective_available_bytes": 15677493248,
+  "effective_floor_pass": true,
+  "failure_reasons": [],
+  "measurement_source": "/proc/meminfo",
+  "minimum_available_bytes": 4294967296,
+  "passed": true,
+  "physical_floor_pass": true,
+  "schema_version": 1
+}
+{"arm": "T", "update": 1, "C_128_40_s": 0.012994902004720643, "E_128_40_s": null, "measured_partial_cost_projection_s": 2.847182727608015, "unmeasured_terms": ["evaluation", "publication"]}
+{"arm": "T", "update": 32, "C_128_40_s": 0.009767386218754837, "E_128_40_s": 0.006026121991453692, "measured_partial_cost_projection_s": 2.4943219269189285, "unmeasured_terms": ["publication"]}
+{"arm": "T", "update": 64, "C_128_40_s": 0.009429283657482301, "E_128_40_s": 0.0077774304954800755, "measured_partial_cost_projection_s": 2.468557884116308, "unmeasured_terms": ["publication"]}
+{"arm": "T", "update": 128, "C_128_40_s": 0.010118434008518307, "E_128_40_s": 0.006336037101573311, "measured_partial_cost_projection_s": 2.542355195109849, "unmeasured_terms": ["publication"]}
+{"arm": "G", "update": 1, "C_128_40_s": 0.0068386320053832605, "E_128_40_s": null, "measured_partial_cost_projection_s": 0.8811828606849303, "unmeasured_terms": ["evaluation", "publication"]}
+{"arm": "G", "update": 32, "C_128_40_s": 0.006732398501753778, "E_128_40_s": 0.00831763599126134, "measured_partial_cost_projection_s": 0.95076133213297, "unmeasured_terms": ["publication"]}
+{"arm": "G", "update": 64, "C_128_40_s": 0.008535203376368372, "E_128_40_s": 0.008543074494809844, "measured_partial_cost_projection_s": 1.183774741119123, "unmeasured_terms": ["publication"]}
+{"arm": "G", "update": 128, "C_128_40_s": 0.010852711531924797, "E_128_40_s": 0.018902671898831613, "measured_partial_cost_projection_s": 1.5840117590705631, "unmeasured_terms": ["publication"]}
+{"whole_wall_s": 5.905074234993663, "cap_seconds": 1800, "within_cap": true, "status": "complete", "peak_rss_bytes": 485208064}
+=== Task 'vsp03-b01-seed2-r01-20260905' exited with code 0 at 2026-09-06T08:21:46+08:00 (Duration: 6s) ===

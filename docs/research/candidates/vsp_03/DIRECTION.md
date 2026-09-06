@@ -38,12 +38,17 @@ The next discriminator is B01's actual native-return comparison after 128 update
 rule reference distinguishing initialization benefit from improvement beyond the rule. No new
 training observation exists at selection.
 
-Seed 1 subsequently completed the selected B: primary T=G=F=0.3755859375 and all 1,024 sampled
-main native records match. The generic learner caught up to fixed-rule behavior on this sample;
-there is no primary initialization gain or observed learning gain beyond that rule. Earlier
-T-G differences are retained, but G's early greedy policy never submitted. This is one training
-pair, not population equivalence. The next bounded discriminator is the unchanged comparison
-on two new independent training pairs, seeds 2/3; no upper or diagnostic search precedes them.
+The selected B and its finite independent-seed extension are complete. At the update-128
+primary endpoint, T=G=F for all three training pairs (returns 0.3755859375, 0.363779296875,
+0.385927734375); all 1,024 sampled native records match within each pair. There is no primary
+initialization gain or observed gain beyond the fixed rule in these runs. At update 32 T-G is
+positive in all three, while G's greedy evaluator never submits; by update 64 only seed 3 has
+caught up. These earlier local differences survive, without a strong early generic or early
+beyond-F claim. Three observed primary zeros do not prove population equivalence.
+
+The next question is whether a specifically justified new B can use the early learning signal,
+or the current N1 comparison should pause. That family-level disposition is for Convergence;
+no seed 4, larger budget, new family or Portfolio disposition has been selected locally.
 
 The strongest surviving alternative is that public dwell age already suffices and the generic
 MLP matches the prior, or that all advantage is the fixed rule rather than learning. Waiting price,
@@ -64,6 +69,8 @@ The evidence set includes historical observations and the separately labelled pr
 - [Seed 1 result evidence](VSP03_B01_SEED1_RESULT_EVIDENCE_20260905.md)
 - [Seed 1 scientific intake](VSP03_B01_SEED1_INTAKE_20260905.md)
 - [Finite seed 2/3 follow-up](VSP03_B01_SEEDS23_FOLLOWUP_20260905.md)
+- [Complete three-pair result](VSP03_B01_SEEDS123_RESULT_EVIDENCE_20260905.md)
+- [Combined scientific intake](VSP03_B01_SEEDS123_INTAKE_20260905.md)
 ## Provenance boundary
 
 The historical map and candidate source documents remain provenance. This file does not rewrite historical source files or claim results that they do not state.
