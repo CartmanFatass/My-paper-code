@@ -1,6 +1,6 @@
 # CBSC direct-return B03: CM result
 
-Date: 2026-09-05. Complete source independently reviewed; no B03 invocation accepted.
+Date: 2026-09-05. Complete source independently reviewed; RAW complete; STRUCT pending.
 
 ## Contract, scope and predictions on record
 
@@ -67,3 +67,28 @@ is selected, and no source behavior outside the named binding is claimed changed
 Independent native reviewer confirmed both final file hashes, the complete +23/-10
 diff and preserved scientific path; no material finding. No runtime was invoked
 by the reviewer. Static acceptance does not establish the B03 outcome or cost.
+
+## Launch integration and exact execution
+
+Source65bf2486594fc29b4813df2d1d79dec82f5756af and commandsb35d1ee78 were
+committed/pushed before remote preparation. Configured zsh-lic fetched and
+created the clean detached source worktree in7.60seconds; existing remote
+shell/gitstatus/GC warnings were not modified. No result process was accepted
+during preparation. Root confirmed pushed main323d5e3439af2d7db07455942fbc4b34ad9cf104
+with the selected card/source/commands before launch; DM separately checked the
+exact blobs. The first selected RAW agent-task was then accepted, and Tracker
+adopted its actual handle. All execution parameters are in the command JSON.
+
+## RAW complete observation
+
+Task cbsc-direct-b03-65bf24865-raw completed exit0, PID1932995, inactive tmux;
+Tracker observed60seconds supervisor duration. External complete time59.53seconds,
+peakRSS576120KiB, below600seconds; fresh physical/effective available memory
+15679438848bytes passed at2026-09-06T00:39:30.885363Z. Source/outerobjectB03/seed21209
+readback matches the selected command. All48update rows contain768loss records,
+sequential384episodes,58368transitions and9216decisions. Four32episode evaluations
+at0/12/24/48 are published; means2.415625/10.5875/10.5875/10.5875.
+Parameter displacementL2=6.07807636, relative0.20327055. This is single-arm output,
+not a paired effect. The fixed STRUCT call follows because the primary path
+completed, with no performance-value gate. Raw evidence is retained beside this
+report under direct_return_b03_20260905/.
