@@ -1,0 +1,39 @@
+{
+  "question": "两个独立种子已完整结束后，VNFC 这项 MAPR 比较下一步最值得验证什么？",
+  "changes_if_approved": [
+    {
+      "target": "VNFC 当前直接学习比较的下一方向问题",
+      "from": "两种子已完成；尚未选择更多实验",
+      "to": "把完整正负结果和实际成本交既有 Convergence，判断继续哪个具体问题、结束最小对象单元或选择有依据的后继；不自动追加种子"
+    }
+  ],
+  "if_refused": "按所有者异步指示在干净边界更改后续选择，已得到的学习收益、对照损失、所有故障和历史证据保持不变；没有第三种子或新实验因此自动启动。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/variable_n_fleet_churn/VNFC_N7_DIRECT_RETURN_B01_TWO_SEED_RESULT_INTAKE_20260905.md",
+      "quote": "Strongest support: real N7 same-distribution shared-policy learning recurred in both arms with matched exposure and native gains.",
+      "why": "两次都有真实学习，适合判断其科学含义和下一具体问题，而非用旧精确穷举替代实验。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/variable_n_fleet_churn/VNFC_N7_DIRECT_RETURN_B01_TWO_SEED_RESULT_INTAKE_20260905.md",
+      "quote": "The small MAPR–DIRECT aggregate differences are +.015469 and +.003932, with zone-1 sign reversal.",
+      "why": "共同学习收益尚未支持 MAPR 特有优势，两臂还都低于固定控制器；不能只为获得有利符号而延长同一比较。"
+    }
+  ],
+  "uncertainty": [
+    "两个训练种子仍是探索；不能证明稳定优势、等价或完全没有潜在效应。",
+    "BCRH 与两学习器的逐字段信息等价尚未核实，限制其严格因果归因。",
+    "新评价面板与训练随机性同时变化，不能凭两个结果唯一分解方差来源。",
+    "旧 HMAC 和段错误保留为未解释工程事件；没有新增完整定位或精确上界前置。"
+  ],
+  "cost": {
+    "compute": "本次只读咨询，新增训练及评价曝光均为零。两次有效完整运行分别388.75和306.68秒；含不完整失败的正式累计783.29秒，原2700秒余额不构成新实验授权。",
+    "owner_time": "无需逐项批准，可异步指出希望保留或改变的问题。",
+    "reversibility": "reversible",
+    "waits_on_this": "只影响该方向下一方向层选择；其他方向与独立符合规范的工作继续。"
+  },
+  "verdict_text": "把两种子的完整证据交既有方向 Convergence 选择下一有价值的科学问题；当前不追加第三种子、不更改生命周期或优先级。",
+  "source": "docs/research/candidates/variable_n_fleet_churn/VNFC_N7_DIRECT_RETURN_B01_TWO_SEED_RESULT_INTAKE_20260905.md"
+}
