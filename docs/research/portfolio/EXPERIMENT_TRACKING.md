@@ -29,16 +29,18 @@ DM routes recorded below.
 
 ## Current observation snapshot
 
-Current snapshot: two tracker-owned accepted live handles are running. CBSC B02 STRUCT formal
+Current snapshot: one tracker-owned accepted live handle is running: N3 B02 CONTROL
+`n3_b02_control_20260905` on `wsl_4070`, SHA
+`47f81c15c536c2b4c4ee463eaa7a35f720ec08c7`, PID `1707289`, and cwd
+`/home/wu/hmasd-worktrees/n3-b02-20260905`; it has active tmux and passed fresh admission with
+physical/effective availability `15308656640` bytes. CBSC B02 STRUCT formal
 `cbsc-direct-b02-2c9254f70-struct` is on `wsl_4070`, SHA
 `2c9254f70c3a8ef9d95ac6dc3f6585382304be41`, PID `1707212`, and cwd
-`/home/wu/hmasd-worktrees/cbsc-direct-return-b02-2c9254f70-20260905`; it has active tmux,
-passed fresh admission with physical/effective availability `15673430016` bytes, and a `600s`
-bound. N3 B02 CONTROL `n3_b02_control_20260905` is on `wsl_4070`, SHA
-`47f81c15c536c2b4c4ee463eaa7a35f720ec08c7`, PID `1707289`, and cwd
-`/home/wu/hmasd-worktrees/n3-b02-20260905`; it has active tmux, passed fresh admission with
-physical/effective availability `15308656640` bytes, and its supplied full cap. Terminal, loss,
-or bound facts go directly to each handle's CM and current DM. CBSC B02 RAW formal
+`/home/wu/hmasd-worktrees/cbsc-direct-return-b02-2c9254f70-20260905` finished exit `0`, with
+inactive tmux and supervisor duration `91s`. Fresh admission passed; bounded evidence records
+48 rollout updates, 768 Adam steps, primary-readback wall `89.94678430000204s`, and peak RSS
+`591798272` bytes. CBSC CM/current DM received the direct terminal facts for collection and
+intake. All observations remain process facts only. CBSC B02 RAW formal
 `cbsc-direct-b02-2c9254f70-raw` on `wsl_4070`, SHA
 `2c9254f70c3a8ef9d95ac6dc3f6585382304be41`, PID `1706097`, and cwd
 `/home/wu/hmasd-worktrees/cbsc-direct-return-b02-2c9254f70-20260905` finished exit `0`, with
