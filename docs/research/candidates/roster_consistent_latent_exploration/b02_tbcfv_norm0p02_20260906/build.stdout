@@ -1,0 +1,12 @@
+{
+  "artifact_sha256": "5b918da7e23d7b65251fb20efcb6678e4a17e62538f6ebdedbda1d9e96221983",
+  "build_key": "9ecd6e281d65adfc0a33f6774a7a258e2cb91214c8e82d4df0d860b4a608c2ea",
+  "default_root": {
+    "artifact_sha256": "5b918da7e23d7b65251fb20efcb6678e4a17e62538f6ebdedbda1d9e96221983",
+    "build_key": "a70147fa7b390c5d12fd6e16060105bf2ea530a09f21cb8487d51d6fcfc24fdb",
+    "path": "/tmp/hmasd_rcle_tbcfv_native/a70147fa7b390c5d12fd6e16060105bf2ea530a09f21cb8487d51d6fcfc24fdb/tbcfv_backend.so",
+    "source_sha256": "18d45b95a29c1ca8d17b4d192a9328ddc9c56a821a2690f118de44dbf0054819"
+  },
+  "path": "/home/wu/hmasd-worktrees/rcle-b02-8ad01cb/temp/directions/roster_consistent_latent_exploration/exp/tbcfv_b02_20260906/build/9ecd6e281d65adfc0a33f6774a7a258e2cb91214c8e82d4df0d860b4a608c2ea/tbcfv_backend.so",
+  "source_sha256": "18d45b95a29c1ca8d17b4d192a9328ddc9c56a821a2690f118de44dbf0054819"
+}

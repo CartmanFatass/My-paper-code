@@ -1,0 +1,23 @@
+	Command being timed: "/home/wu/.venvs/hmasd/bin/python scripts/run_rcle_tbcfv_b02.py arm --arm FLEX --out /home/wu/hmasd-worktrees/rcle-b02-8ad01cb/temp/directions/roster_consistent_latent_exploration/exp/tbcfv_b02_20260906/flex --wall-cap 580 --admission-receipt /home/wu/hmasd-worktrees/rcle-b02-8ad01cb/temp/directions/roster_consistent_latent_exploration/exp/tbcfv_b02_20260906/receipts/flex.json --control-summary /home/wu/hmasd-worktrees/rcle-b02-8ad01cb/temp/directions/roster_consistent_latent_exploration/exp/tbcfv_b02_20260906/c1p1/summary.json --launch-sha 8ad01cb9ea69b77a2e907947bef59bf716a8b45a --updates 200 --eval-episodes 256"
+	User time (seconds): 70.39
+	System time (seconds): 0.74
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:11.23
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 580532
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 116
+	Minor (reclaiming a frame) page faults: 536750
+	Voluntary context switches: 331
+	Involuntary context switches: 164
+	Swaps: 0
+	File system inputs: 12432
+	File system outputs: 8144
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
