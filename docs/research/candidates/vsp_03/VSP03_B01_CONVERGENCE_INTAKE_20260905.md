@@ -159,4 +159,3 @@ current comparison. It must not mark the whole VSP-03 lifecycle PARKED, invent o
 or create routine P3/P4 items. All selected processes are terminal and no new CM assignment is
 needed. The committed source, results, archives and decision form the clean recovery boundary;
 Root can advance other admitted directions without waiting on this delivery.
-
