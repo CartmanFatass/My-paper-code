@@ -76,7 +76,11 @@ P07-UCOPE-PREP-01 to `/root/dm_ucope_question_prep` for an independent post-NR-B
 P07-DISH-EXEC-01 separately dispatched the existing DISH CM for the one selected B06 invocation.
 These are the current five advancing native chains (DISH CM, VSPC1, CBSC, VSP03 and UCOPE);
 RCLE is closed at its transport boundary. No task adds a retry budget, new scientific conclusion
-or unrecorded result-bearing invocation.
+or unrecorded result-bearing invocation. DISH CM later reported the exact remote
+`git fetch && worktree add` staging command exited `1` with an SSL connection timeout to the
+GitHub remote; no worktree, admission, supervisor run or scientific exposure was created. A
+partial-clone lazy fetch remained pending while SSH itself responded; no repair or fallback was
+selected.
 
 ## Current Pro handover queue — 2026-09-06
 
