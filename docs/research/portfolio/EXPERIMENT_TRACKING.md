@@ -14,9 +14,10 @@ handed directly to CM collection. `vspc1-reactive-b01-factor-run02` and
 `vspc1-reactive-b01-generic-run02` are terminal, technically accepted and fully intaken by the
 DM. The single Root heartbeat also covers the
 explicit pending Pro rows below; experiment completion alone does not pause it.
-The shared Root heartbeat remains ACTIVE only while this return is delivered to Portfolio;
-no accepted experiment handle remains live. Historical handles and old routing sections below
-are retained evidence, not current assignments.
+The shared Root heartbeat remains ACTIVE while this return and the preparation-only
+P07-VSPC1-COMPLETION-REQUEST-01 are delivered and reconciled; no accepted experiment handle
+remains live. Historical handles and old routing sections below are retained evidence, not
+current assignments.
 
 VSPC1 service-allocation B01 seed402 was adopted on `wsl_4070` from source
 `faf786e135b3f55e535c898e17e646dcc341bdec` and cwd
