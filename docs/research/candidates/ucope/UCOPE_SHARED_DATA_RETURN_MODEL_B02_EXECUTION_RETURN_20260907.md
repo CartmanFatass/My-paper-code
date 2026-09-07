@@ -66,3 +66,59 @@ technical return for the failed action, not a B02 result. Root returns these fac
 for any separately supplied next command; CM selects no repair or retry in this action.
 
 Changed path: this execution-return document only. ENGINEERING_SCOPE_SPEC §4 additions: none.
+
+## P07-UCOPE-STAGE-REPAIR-02 continuation and exact launch record
+
+Root relayed Portfolio's new command superseding only the ended P07-UCOPE-EXEC-01 staging
+stop, while preserving the zero-exposure record above (integrated as `688f4f70e`). Reversible
+local named-ref bundle/SCP/import repairs are authorized; the original sole seed, scientific
+source, device and complete 600 s budget are unchanged. No remote HTTPS probe was used in
+this continuation. The runner seed argument below is the separate argv `--seed 6401`.
+
+Reconciliation found the original supervisor handle `not_found`, the intended worktree absent,
+and the new transfer path absent. CM created local named ref
+`refs/hmasd/ucope-b02-stage-repair-02-source-20260907` at `bcd55750b29014e21dd855df5ac320296256b62e`.
+Full-history bundle creation and local verification succeeded:
+
+```text
+git bundle create temp/directions/ucope/staging/stage-repair-02/source.bundle refs/hmasd/ucope-b02-stage-repair-02-source-20260907
+git bundle verify temp/directions/ucope/staging/stage-repair-02/source.bundle
+```
+
+The bundle is 94,127,192 bytes and advertises the exact assigned SHA. SCP placed it at the
+previously absent `/home/wu/hmasd-inputs/ucope-b02-stage-repair-02-bcd55750b.bundle`. Remote
+`git bundle verify` succeeded; `git fetch` from that local bundle imported the named ref;
+`git worktree add --detach` created the originally assigned cwd. Its `rev-parse HEAD` is
+`bcd55750b29014e21dd855df5ac320296256b62e` and `git status --short` is empty.
+No uncommitted code or source change was staged. The prior failed bundle/path was not reused.
+
+### Exact sole invocation, frozen before dispatch
+
+The following exact SSH remote command supplies one command-string argument to the existing
+`agent-task` supervisor. Its noninteractive, no-profile Bash process includes admission inside
+the external timeout and whole-process timing. Fresh same-node memory admission requires both
+physical/effective availability >=4 GiB and is adjacent via `&&` to the runner. No result root,
+admission, scientific process or accepted handle exists at this record freeze.
+
+```sh
+/usr/local/bin/agent-task run ucope-shared-return-b02-seed6401-20260907 '/usr/bin/time -f '"'"'whole_wall_seconds=%e peak_rss_kib=%M'"'"' /usr/bin/timeout --signal=KILL 600s /bin/bash --noprofile --norc -c '"'"'cd /home/wu/hmasd-worktrees/ucope-shared-return-b02-seed6401-20260907 && /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/ucope/exp/shared-data-return-b02-seed6401/resource_admission.json && /home/wu/.venvs/hmasd/bin/python scripts/run_ucope_shared_data_return_model_b02.py --seed 6401 --out temp/directions/ucope/exp/shared-data-return-b02-seed6401'"'"''
+```
+
+`--signal=KILL 600s` enforces the complete cap without extra scientific allowance. The supervisor
+retains complete stdout/stderr, exit and start/end witnesses. GNU time's final line records whole
+wall and peak RSS in that same log, covering admission, Python startup/import, streamed fit, all
+three final evaluations, both summary writes and exit. Existing partial files and logs stay in
+place on failure; no scientific retry or resume is authorized. No local fallback or extra seed,
+pilot, smoke, provider Send or new machinery is selected.
+
+The card's cost law remains `T_init + 1024*T_batch256_shared_fit +
+32768*T_three_policy_eval + T_publish`; real-host coefficients remain unmeasured. No B01 or
+synthetic timing is substituted, and no new measurement prerequisite is imposed. Required
+publication coverage is the accepted B02 synthetic complete/partial check and affected-path
+review; they are not repeated at launch. Actual whole wall, counts, learned exposure and primary
+outputs will be collected from this one handle. Aggregate CPU remains unmeasured by this command.
+
+This continuation/command record is committed and pushed before dispatch. CM sends the accepted
+handle and exact node/source/cwd/log/result/receipt paths to Root immediately, observing until
+adoption ACK or terminal fact. Root owns adopted observation; CM owns terminal collection and
+technical acceptance; the original DM owns scientific intake, and Portfolio receives the return.
