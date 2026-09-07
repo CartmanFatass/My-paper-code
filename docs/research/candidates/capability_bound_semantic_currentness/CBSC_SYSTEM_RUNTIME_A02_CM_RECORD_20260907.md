@@ -1,5 +1,9 @@
 # CBSC-SYSTEM-RUNTIME-A02 CM command and result record
 
+**Delivered outcome: PATH_INCOMPLETE.** The sole installation failed during a
+binary dependency download. Whole measured wall 104.11s met the 600s cap; no
+metadata import ran. No restart, B04 retry or scientific call followed.
+
 ## Selected work and inspected route
 
 P07-CBSC-A02-EXEC-01 selects the sole preparation invocation in the
@@ -109,3 +113,48 @@ running, PID 2741680, tmux active. Fresh admission passed and the log recorded
 CPython 3.12.3 venv creation; install was active. Accepted-handle adoption was
 requested directly from Root; CM retains observation pending ACK and collection.
 No runtime outcome is inferred from this intermediate state.
+
+
+## Terminal evidence and acceptance
+
+The same accepted handle terminated with exit 1 and tmux inactive. Supervisor
+start `2026-09-08T00:02:56+08:00`, end `2026-09-08T00:04:40+08:00`, duration
+104s. Outer GNU time measured **104.11s**, peak RSS **68016 KiB**; whole wall is
+inside 600s and the 540s kill deadline did not fire. These are whole-payload
+process measurements, not a package-install performance comparison. Scratch and
+aggregate CPU were not measured and are not claims.
+
+Admission at `2026-09-07T16:02:56.608261Z` measured physical and effective available
+memory **15670603776 bytes**, above both 4294967296-byte floors. The installer
+recorded CPython 3.12.3 from `/usr/bin/python3`; retained `pyvenv.cfg` independently
+states home `/usr/bin`, CPython, version_info 3.12.3 and system-site-packages false.
+That is venv setup evidence, not the requested import/build/library-origin result.
+
+The single uv install resolved/downloaded binaries using the declared official
+indexes. Its terminal chain names `nvidia-cusolver-cu11==11.4.1.48`, then failure
+to write the distribution cache, response-body decoding/reading failure, and
+`peer closed connection without sending TLS close_notify`. This directly records
+a download failure; root-cause attribution to the network, proxy, server or cache
+is not established. uv logged its own internal transient transfer handling; CM
+issued no second installation or result-bearing invocation.
+
+The candidate directory remains. A read-only filesystem check found only
+`admission.json` and `install.log` in the output root, and no `summary.json`.
+The && chain stopped at install; zero candidate metadata imports, host tapes,
+model/RNG calls, optimizers, training or policy evaluations ran. No package
+version/origin, stability, numerical equivalence or B04 consequence is claimed.
+The completed command exercised startup, route and admission but did not reach
+metadata publication; PATH_PREPARED is therefore not established despite cap
+conformance. Partial state and all A01/B04 evidence remain intact.
+
+Original artifacts remain at the remote output root above and
+`/home/wu/.agent-tasks/cbsc-system-runtime-a02-20260907/` (task log, wrapper,
+start_time, exit_code, status and process-time.txt). Collection copied both
+roots under local
+`C:/Projects/HMASD-worktrees/cm-cbsc-runtime-a02-20260907/temp/directions/capability_bound_semantic_currentness/exp/system_runtime_a02_20260907/`,
+with supervisor files under `supervisor/`. No library was imported for collection.
+
+Root received terminal notification, replacing the pending adoption request;
+no observation/restart remains for this terminal handle. DM owns A02 intake and
+any next selection, followed by Root integration and Portfolio routing. This
+return authorizes no installation retry or scientific work.
