@@ -223,3 +223,50 @@ Independent reviewer `review_ah_reactive_queues` inspected the exact transport p
 preserved run01 facts and syntax/argv evidence and found no material concern. It performed
 no launch, admission, learner probe, test rerun or edit. CM accepts this bounded transport
 correction; it does not establish actual run02 admission or scientific completion.
+
+## FACTOR run02 terminal technical acceptance — 2026-09-07 UTC
+
+**FACTOR is technically accepted.** Root dispatched the corrected payload once; CM collected
+the actual remote `summary.json`, `resource_admission.json`, `invocation.time`, supervisor
+status/log and accepted runner from handle `vspc1-reactive-b01-factor-run02`, node wsl_4070.
+Source readback in the summary is `47674883572bbe078ede037cbb8f99b8cd54c159`, cwd
+`/home/wu/hmasd-worktrees/vspc1-reactive-queues-b01-476748835`, NumPy1.26.3/Torch2.7.0+cu118,
+configured Python `/home/wu/.venvs/hmasd/bin/python`, CPU float32/one compute thread/batch16.
+The observed argv is the frozen FACTOR/seed401 call at run02/FACTOR, without fixture flags.
+
+The log starts `2026-09-07T14:09:30+08:00` and ends `14:09:35+08:00`, exit0, duration5s;
+supervisor status is finished, tmux inactive. Node-local receipt assessed at
+`2026-09-07T06:09:30.788337Z` passes physical/effective admission, both 15,668,547,584 bytes
+against the 4,294,967,296-byte floor. Receipt precedes runner initialization in the accepted
+command. Whole invocation `time` reports real4.84s/user3.73s/sys0.39s (CPU sum4.12s), below
+the complete-arm 2700s cap. Main-process peak RSS is 478,375,936 bytes; summary wall through
+primary readback4.422588917019311s and stdout through final readback4.425325764023s.
+Whole invocation includes publication and exit; the log's rounded duration includes admission.
+
+CM read/checks on the collected JSON passed: status complete, 300 online parameters, seed401,
+256 completed updates, observed counts equal prospective counts; 4096 training episodes /
+196608 joint ticks / 65536 renewal rows / 61440 nonterminal rows / 256 optimizer steps;
+2304 evaluation episodes / 110592 ticks / 36864 decisions; 454656 scalar Q predictions;
+17 target copies at [0,16,...,256], zero model selection. All nine fixed curve points,
+256 per-update per-period finite nonnegative TD-loss records, and 128 indexed endpoint
+episodes per period exist. Endpoint means recompute from those arrays; return bounds,
+unused-service identity and backlog/overflow bounds hold. Initial parameter norm is
+4.527723789215088 and final displacement1.4559444189071655. This inspection added no rollout,
+learning, evaluation or replay exposure and did not rerun source tests.
+
+All curves/adverse facts are retained in the exact summary. FACTOR initial/endpoint equal-period
+means are 0.7252197265625 / 0.7248942057291665; endpoint d2=0.7266438802083333 and
+d6=0.7231445312499999. These are direct arm measurements, not a comparison or scientific
+selection. GENERIC remains required under the frozen two-arm object irrespective of FACTOR's
+score/sign. No paired conclusion exists yet; DM owns scientific interpretation.
+
+Collected local root:
+`C:/Projects/HMASD-worktrees/cm-vspc1-reactive-transport-repair-20260906/temp/directions/vsp_c1/exp/k4_reactive_queues_b01_run02/FACTOR/`.
+It contains exact copied primary/admission/timing artifacts, supervisor status/log/runner, and
+`collection_check.json.txt` with the read-only checks and full curve means. Remote originals
+remain in the same relative output path beneath the bound cwd. Prior failed run01 is unchanged.
+
+FACTOR technical acceptance satisfies the preceding-arm dependency for preparing the original
+GENERIC handoff. Root must accept and dispatch its exact corrected command; CM has not dispatched
+GENERIC. The proposed `vspc1-reactive-b01-generic-run02` handle and run02/GENERIC root were absent
+at read-only preparation. Root observation/adoption, CM technical collection and DM science remain.
