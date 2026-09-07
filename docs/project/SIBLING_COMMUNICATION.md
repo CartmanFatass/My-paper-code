@@ -46,10 +46,14 @@ validity. Observation follows the configured shared heartbeat, not an extra agen
 
 Portfolio and Root share one main checkout and index. Before either stages, commits or
 cherry-picks there, notify the other of the paths and wait for its acknowledgment that its
-current index operation has finished and it will not start another until release. Keep this
-handoff limited to the short Git operation; native research, read-only work and other worktrees
-continue. Commit by explicit path and push immediately, then release the index to the peer.
-An in-progress cherry-pick/conflict must finish before the other session stages any path.
-If unrelated authorized edits were already included, inspect and attribute them accurately;
-preserve history rather than reset, stash or silently rewrite it. No lockfile, lease or scheduler
-is introduced by this communication rule.
+current index operation has finished and it will not start another until release. An already
+running index operation finishes first. For simultaneous requests, Root proceeds first;
+Portfolio acknowledges and defers its request until Root releases. Keep the handoff limited
+to the short Git operation; native research, reads and other worktrees continue. Commit by
+explicit path and push immediately, then release the index after that push attempt. A failed
+push retains the commit and its retry obligation, not exclusive use of a clean index.
+An in-progress cherry-pick/conflict must be resolved by its initiating session, or its explicitly
+assigned resolution owner, before the other session stages any path. If unrelated authorized
+edits may already be included, inspect the resulting commit and remaining diff, attribute
+included paths and commit only outstanding changes. Preserve history; do not blindly repeat
+the operation, reset, stash or silently rewrite it. No lockfile, lease or scheduler is introduced.
