@@ -206,6 +206,38 @@ def test_receipt_outbox_is_deterministic_and_uncertain_is_not_retryable() -> Non
 
 
 @pytest.mark.parametrize("blocker", [False, True])
+def test_confirmed_rejected_receipt_retries_same_identity(blocker: bool) -> None:
+    record = _record()
+    record["state"] = "BLOCKED" if blocker else "ARCHIVED"
+    if blocker:
+        contract.stage_blocker_receipt(record, "BLOCKED", "missing source")
+    else:
+        contract.stage_receipt(record, {"response_file": "response.md"}, "b" * 64)
+    original = dict(record["return_receipt"])
+    contract.record_receipt_result(record, "FAILED", error="tool rejected before acceptance")
+    with pytest.raises(ValueError, match="direct evidence"):
+        contract.retry_rejected_receipt(record, not_accepted_evidence="")
+    contract.retry_rejected_receipt(record, not_accepted_evidence="tool receipt: accepted=false, no message created")
+    receipt = record["return_receipt"]
+    for key in ("message_key", "parent_thread_id", "destination_thread_id", "archive_paths", "response_sha256"):
+        assert receipt.get(key) == original.get(key)
+    assert receipt["attempt_count"] == 1
+    assert receipt["rejected_attempts"][0]["error"] == "tool rejected before acceptance"
+    contract.record_receipt_result(record, "SENT", delivery_status="accepted")
+    assert record["return_receipt"]["attempt_count"] == 2
+
+
+@pytest.mark.parametrize("status", ["SENT", "UNCERTAIN"])
+def test_accepted_or_uncertain_receipt_cannot_be_reopened(status: str) -> None:
+    record = _record()
+    record["state"] = "ARCHIVED"
+    contract.stage_receipt(record, {"response_file": "response.md"}, "b" * 64)
+    contract.record_receipt_result(record, status)
+    with pytest.raises(ValueError, match="rejected receipt"):
+        contract.retry_rejected_receipt(record, not_accepted_evidence="unsupported assertion")
+
+
+@pytest.mark.parametrize("blocker", [False, True])
 @pytest.mark.parametrize("adopted", [False, True])
 def test_integrated_root_receipt_is_local_and_cannot_be_sent(blocker: bool, adopted: bool) -> None:
     record = _record()
@@ -846,7 +878,7 @@ def test_skill_contracts_encode_execution_owner_async_and_tab_boundaries() -> No
         "rejected before acceptance and produced no external effect",
         "`parent_thread_id` is the sole completion",
         "`fallback_enabled=false`",
-        "a rejection must not cause a second send",
+        "call `retry_rejected_receipt` with the direct `not_accepted_evidence`",
         "`RETURN_RECEIPT_BLOCKED`",
         "Never multiplex a later",
         "stage_blocker_receipt",

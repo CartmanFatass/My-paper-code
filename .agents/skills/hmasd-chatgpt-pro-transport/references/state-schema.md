@@ -331,8 +331,13 @@ parent destination, timestamp, attempt count, delivery status, and error.
 `destination_thread_id` must equal the validated `parent_thread_id`,
 `routing_mode` is `PARENT_SESSION`, and `fallback_enabled` is false.
 
-An uncertain delivery or rejection is terminal for that outbox entry and is never
-retried, rerouted, or duplicated. Terminal blockers without an archive use
+An uncertain delivery is not retried, rerouted, or duplicated. A confirmed rejection
+before acceptance with no external effect may be retried after resolving its blocker:
+call `retry_rejected_receipt(record, not_accepted_evidence=<direct tool evidence>)`.
+It preserves the key, parent, payload metadata and attempt count, records the rejected
+attempt in `rejected_attempts`, and restores `PENDING` for the same payload. A generic
+failure or timeout is insufficient; never use this to migrate a legacy fallback route.
+Terminal blockers without an archive use
 `stage_blocker_receipt` with the same parent-session rule. If no valid parent is
 available, no outbox message is staged: the receipt records
 `required=false`, `receipt_state=RETURN_RECEIPT_BLOCKED`,
