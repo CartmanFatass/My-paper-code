@@ -813,7 +813,7 @@ not change the task class or silently fallback.
         "dispatch_prompt": dispatch_prompt,
         "dispatch_instruction": (
             "Do not call create_thread. Call send_message_to_thread exactly once on the configured "
-            f"project Transport singleton threadId={packet['operator_thread_id']} with "
+            f"integrated Root threadId={packet['operator_thread_id']} with "
             f"model={packet['operator_model']}, thinking={packet['operator_thinking']}, and "
             f"prompt={dispatch_prompt}. If the singleton is unavailable, preserve the packet and "
             "report SINGLETON_TRANSPORT_UNAVAILABLE; do not create a replacement task."
@@ -847,7 +847,7 @@ not change the task class or silently fallback.
             "companion_prompt": packet["companion_prompt"],
             "source_mode": "single_body_attachment",
         },
-        "instruction": "Upload PROMPT_BODY.md verbatim as the sole scientific packet; it contains the read-only evidence manifest. Preserve workflow node, direction scope, binding key, ref, claim ceiling, and bytes. Create and bind the requested persistent provider conversation on first use, then reuse that exact conversation ID. The project Transport singleton exclusively owns Pro/browser send, model/connector checks, conversation binding, request-scoped wait, archive, cleanup, and Transport evidence, and sends exactly one receipt to this handoff's parent_thread_id before returning to idle for later requests.",
+        "instruction": "Upload PROMPT_BODY.md verbatim as the sole scientific packet; it contains the read-only evidence manifest. Preserve workflow node, direction scope, binding key, ref, claim ceiling, and bytes. Bind the requested provider conversation on first use, then reuse that exact conversation ID. Root executes transport, observation, archive and cleanup locally. Record completion locally when executor and parent are the same task; otherwise send one receipt to parent_thread_id. Scientific intake belongs to DM/Portfolio.",
     }
     if packet["execution_mode"] == "CALLER_DIRECT":
         handoff.update({
@@ -857,7 +857,7 @@ not change the task class or silently fallback.
             "dispatch_prompt": None,
             "owner_execution_instruction": packet["owner_execution_instruction"],
             "dispatch_instruction": "Do not dispatch this handoff. The owner requested direct execution by its caller.",
-            "instruction": "The caller executes this one request with the Transport skill. Preserve exact input, one Send, request-scoped waiting and archive. If caller and parent are the same task, intake locally without sending a receipt to itself; otherwise return the usual single parent receipt.",
+            "instruction": "The caller executes this one request with the Transport skill. Preserve exact input, one Send, request-scoped waiting and archive. If caller and parent are the same task, record local completion without a self-message; otherwise return the usual single parent receipt. Scientific intake belongs to DM/Portfolio.",
         })
         handoff["transport_request"].update({
             "dispatch_mode": "CALLER_DIRECT", "operator_reuse_required": False,

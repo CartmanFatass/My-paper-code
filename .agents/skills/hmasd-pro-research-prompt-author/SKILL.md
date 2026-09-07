@@ -82,5 +82,5 @@ matching file/comment, preserve conflicts, read actual state before uncertain re
 Repeated receipt means read the existing intake, not repeat science or writes.
 Only an explicit `delivery_mode=archive_attachment` with a nonempty `fallback_reason`
 may render a new attachment packet when scoped delivery is unavailable. Read
-[attachment-legacy.md](references/attachment-legacy.md) only for attachment delivery.
+[attachment-delivery.md](references/attachment-delivery.md) only for attachment delivery.
 Record the fallback per request. Do not re-render accepted requests.

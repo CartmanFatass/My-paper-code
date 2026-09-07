@@ -114,7 +114,7 @@ CM retains useful parallel delegation and required high-impact independent revie
 
 Reuse the same available executor for corrections and closely related follow-ups on the same
 deliverable/module, returning the precise gap instead of rebuilding context in a new agent.
-Unrelated work need not share a growing session. Root reuses the existing monitoring and Transport records after their owner-approved merger;
+Unrelated work need not share a growing session. Root reuses the existing monitoring and Transport records;
 do not add roles, standing tasks or schedulers for this policy.
 Use the five-item handoff above and targeted references; do not copy the full parent history by
 default. Existing model and reasoning-effort settings remain unchanged.
@@ -220,10 +220,11 @@ When the owner is absent the loop keeps running under a standing delegation (own
    waits for the owner. It writes structured items under `docs/research/portfolio/owner/`
    (schemas in that directory's `README.md`) and reads the owner's reviews there and the ledger
    `owner` column at every clean boundary:
-   - `inbox/<YYYY-MM-DD>/<id>.json`: one item per thing that needs the owner's eye, written when
-     the decision is made or the card is frozen: a delegated decision (with the executed option
-     marked `auto_applied`), a new card, a prediction request (one per ladder, not per
-     invocation), a brief, a critic dissent, a close call, a second recast, a Portfolio proposal.
+   - `inbox/<YYYY-MM-DD>/<id>.json`: maintain P1/P2 items for new cards, direction decisions,
+     material critic dissent, close calls, second recasts and Portfolio proposals. Record
+     actual executed options as `auto_applied`. Ordinary object decisions, predictions,
+     technical facts and briefs remain in card/intake/audit records without separate items.
+     If `item.py add` returns `skipped`, it created no file or ID; cite the card/intake directly.
      Each item carries its options with one `recommended`, its evidence paths, and its ledger row.
      Items are written only through `tools/owner_console/item.py`; an item the owner must rule on
      (Portfolio proposal, second recast, critic dissent, close call, new card, any direction- or
@@ -235,13 +236,11 @@ When the owner is absent the loop keeps running under a standing delegation (own
      ledger. `agree` means seen. At intake the DM scores a `prediction` reply if one exists and
      records `not taken` otherwise.
    - `briefs/<direction>/<YYYY-MM-DD>_<object>.md`: a one-page owner brief in Chinese for every
-     valid result, written at intake beside the English intake document and referenced from a
-     `brief` item.
+     valid result, written at intake beside and linked from the English intake document.
 6. The delegation lasts until the owner revokes it.
 
-7. **Pro-directed specification changes (OWNER_DIRECT, 2026-09-05).** The owner approved the
-   archived CBSC/N3 object-specific exceptions and their Portfolio, AGENTS and specification
-   updates, and delegated future changes of this kind to the proper Pro node. After initiating
+7. **Pro-directed specification changes.** The owner delegates specification plans within
+   the proper Pro node's scope under the recorded standing delegation. After initiating
    the appropriate Pro request, read and archive its complete formed decision, then implement
    the exact specification plan and the Portfolio updates explicitly included in that plan
    without another per-item owner approval. This covers engineering/governance specifications
@@ -303,7 +302,7 @@ or launch gates, and never override a stricter original cap.
 Resume model: commit and push before every launch; launch every result-bearing run detached from
 the agent's process; on the remote route use a detached worktree at the exact launch sha and the
 configured `agent-task` supervisor; Root observes accepted handles and pending Pro work through one shared heartbeat
-(OWNER_DIRECT 2026-09-06 merger; `docs/project/ROOT_OPERATIONS.md`); keep every agent's state recoverable from the repository alone (card, predictions,
+(`docs/project/ROOT_OPERATIONS.md`); keep every agent's state recoverable from the repository alone (card, predictions,
 launch sha, execution node, run root, queue state).
 
 ## 6. Workspace and Git under concurrent sessions
@@ -421,14 +420,12 @@ appendix and completed historical tasks remain unchanged.
 
 ## Appendix A — Codex specifics
 
-- OWNER_DIRECT 2026-09-05: scoped GitHub Pro delivery is described in
-  `docs/project/GITHUB_RESEARCH_COLLABORATION.md`. The owner waived Pro review for
-  this workflow change. All new requests use committed task links and
+- Scoped GitHub Pro delivery is described in
+  `docs/project/GITHUB_RESEARCH_COLLABORATION.md`. New requests use committed task links and
   a named branch response/comment; Root performs Transport archival and Portfolio/DM reads
   the complete fixed file for intake. Accepted requests remain on their original route; attachment mode is only an explicit
   recorded capability fallback. No duplicate Send, scientific launch gate, main write or
-  Pro code/PR merge authority is implied. The owner authorized overall cutover after the recovery checks passed; no additional
-  VNFC pilot or Pro review is required.
+  Pro code/PR merge authority is implied.
 
 
 - Native custom subagents are defined in `.codex/agents/*.toml` and registered in
@@ -436,8 +433,8 @@ appendix and completed historical tasks remain unchanged.
   `hmasd-routine-implementer`, `hmasd-cm-scout`, `hmasd-reviewer`, `hmasd-research-critic`,
   `hmasd-verifier`, `hmasd-experiment-operator`. Retired definitions stay in Git history and are
   re-added only when a wave shows a check nobody else performs.
-- OWNER_DIRECT 2026-09-06 merger: existing Root uses Luna/xhigh and absorbs experiment
-  Monitor and Pro Transport. The independent Portfolio task uses Astra/max directly on main.
+- Root uses Luna/xhigh and executes experiment observation and Pro Transport.
+  The independent Portfolio task uses Astra/max directly on main.
   Configurations: `.codex/hmasd-monitor.toml`, `.codex/hmasd-transport.toml`, and
   `.codex/hmasd-portfolio.toml`; procedure: `docs/project/ROOT_OPERATIONS.md`.
   DM/CM sends accepted handles directly to Root, which observes and wakes native children;
@@ -453,16 +450,12 @@ appendix and completed historical tasks remain unchanged.
   current native DM. A shared heartbeat does not merge request identity, tabs, archives or
   Send evidence. Preserve 6 Pro provider verification separately from the Codex model.
   Owner-directed conversation replacement and CALLER_DIRECT remain available under the existing
-  exact-input rules. A documented migration transfers executor ownership only, never re-Sends
-  an accepted request or overwrites immutable handoffs. Old tasks relinquish actions before
-  Root adopts their unresolved work; uncertainty requires reconciliation, not another Send.
-- Owner-directed 6 Pro cutover (2026-09-04): new Transport singleton is declared in
-  `.codex/hmasd-transport.toml`; all pre-cutover provider conversation IDs are retired for use.
-  Never navigate, prebind or Send to an old ID. Preserve prior request/Send evidence; use the
-  documented OWNER_DIRECT new-conversation path for each formerly bound node, with its actual
-  previous request ID. Unbound nodes create fresh verified 6 Pro conversations without invented
-  prior IDs. Only post-cutover verified conversations may then be reused for their own node.
-  Record and observed retired-ID inventory: `docs/research/portfolio/decisions/2026-09-04-new-transport-fresh-6pro-conversations.md`.
+  exact-input rules. Preserve immutable accepted handoffs and Send evidence; uncertainty
+  requires reconciliation before continuation.
+- Reuse each node's current verified 6 Pro conversation. Apply the provider-exclusion policy
+  recorded by `.codex/hmasd-transport.toml`; the observed-ID inventory is not exhaustive.
+  Never navigate, prebind or Send to an excluded conversation. An unbound node creates and records a verified conversation without inventing
+  a prior request. Replacing an existing binding follows the Transport skill's explicit rules.
 - `.codex/hmasd-compute.toml` is the project-owned execution-node declaration. New portable
   result-bearing and compute-intensive work uses its `remote_first` route; credentials remain
   outside Git behind the configured SSH alias. Long remote commands use the node's existing
@@ -472,8 +465,9 @@ appendix and completed historical tasks remain unchanged.
 - Task names: `<agent-alias>_<model><effort>_<direction>_<task>` with aliases `dm`, `cm`, and the
   shortest unambiguous alias for specialists; model codes `a/l/t/s` (Astra/Luna/Terra/Sol), effort codes
   `l/m/h/xh/mx`; lowercase letters, digits, and underscores only.
-- `$hmasd-workflow-outsource` is used only when the owner names it or explicitly asks for a
-  control-plane task to be delegated; otherwise the current agent makes workflow changes directly.
+- `$hmasd-workflow-outsource` is used when the owner names it or asks to outsource implementation
+  of a control-plane change. An independently requested review follows its specified model and
+  scope. Otherwise the current agent makes workflow changes directly.
 - Run Git push with the current runtime's supported permissions. With Full Access and
   escalation disabled, push directly and omit `sandbox_permissions`. When a sandbox is active
   and the runtime supports escalation, use its supported outside-sandbox route: the sandboxed
@@ -489,5 +483,5 @@ appendix and completed historical tasks remain unchanged.
 - Implementer subagents run in worktrees under `.claude/worktrees/`; the reviewer session is Root
   for integration. Commits end with the `Co-Authored-By` and `Claude-Session` trailers the runtime
   supplies.
-- Claude Code has no Pro transport. Direction- and Portfolio-tier questions are put to the owner;
-  in the owner's absence the direction parks (§3) and object-tier decisions follow §4.
+- Claude's current control-plane roles, capacity and Pro transport are defined in `CLAUDE.md`
+  and its referenced `.claude/` instructions.

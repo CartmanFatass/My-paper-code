@@ -929,11 +929,11 @@ def main() -> int:
     parser.add_argument("--direction-ids-json", default=None)
     parser.add_argument(
         "--workflow-node",
-        choices=("em_innovator", "em_convergence", "portfolio_decision", "legacy"),
-        default="legacy",
+        choices=("em_innovator", "em_convergence", "portfolio_decision"),
+        required=True,
     )
-    parser.add_argument("--conversation-binding-key", default=None)
-    parser.add_argument("--decision-authority", choices=("pro_final", "legacy"), default="legacy")
+    parser.add_argument("--conversation-binding-key", required=True)
+    parser.add_argument("--decision-authority", choices=("pro_final",), required=True)
     parser.add_argument("--conversation-id", required=True)
     parser.add_argument("--provider-url", required=True)
     parser.add_argument("--tab-id", default=None)
@@ -944,9 +944,9 @@ def main() -> int:
     parser.add_argument("--source-mode", choices=("paste", "upload"), required=True)
     parser.add_argument("--prompt-sha256", required=True)
     parser.add_argument("--reference-files-json", default="[]")
-    parser.add_argument("--source-thread-id", default=None)
-    parser.add_argument("--parent-thread-id", default=None)
-    parser.add_argument("--operator-thread-id", default=None)
+    parser.add_argument("--source-thread-id", required=True)
+    parser.add_argument("--parent-thread-id", required=True)
+    parser.add_argument("--operator-thread-id", required=True)
     parser.add_argument("--reset-invalid-provider-context", action="store_true")
     parser.add_argument("--provider-context-reset-evidence-json", default=None)
     parser.add_argument("--observed-after-successful-send", action="store_true")
@@ -956,8 +956,6 @@ def main() -> int:
     args = parser.parse_args()
     if args.direction_ids_json is None:
         args.direction_ids_json = json.dumps([args.direction_id])
-    if args.conversation_binding_key is None:
-        args.conversation_binding_key = f"legacy:{args.direction_id}"
     if args.provider_context_reset_evidence_json is not None:
         try:
             args.provider_context_reset_evidence = json.loads(args.provider_context_reset_evidence_json)

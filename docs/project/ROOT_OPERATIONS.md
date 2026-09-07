@@ -33,8 +33,9 @@ replace `portfolio:cross_direction` Pro or expand the owner's standing delegatio
 | Complex implementation, runtime or browser-tool defect | Preserve facts and commission bounded engineering | CM; Portfolio judges new cross-direction investment |
 
 Use native collaboration for Root's existing children: `send_message` when running,
-`followup_task` when idle. A separate app task sends to the exact Root task ID without
-model/effort overrides. Root never sends an app message to itself for dispatch, adoption
+`followup_task` when idle. Routine evidence, adoption and receipts from a separate app task
+use the exact Root ID without model/effort overrides. New Pro handoff dispatch uses the
+configured model/effort in the rendered Author handoff. Root never sends an app message to itself for dispatch, adoption
 or completion. An intentional owner-directed model migration is separate from receipts.
 Portfolio receives its own Pro receipts via the declared parent ID. A DM using a native
 child ID as source still declares Root as app parent; Root forwards the local receipt.
@@ -117,18 +118,15 @@ experiment permission, new scheduler, mandatory diagnostic or Portfolio approval
 
 ## One shared fallback wake
 
-Owner cadence correction: use a thirty-minute recovery heartbeat because the integrated
-Root has a larger workload. While actively handling a turn, finish available bounded work
+Use a thirty-minute recovery heartbeat. While actively handling a turn, finish available bounded work
 and react to actual messages; do not wait for the timer to do ready work. Without another
 message, terminal discovery may be delayed until the next fallback pass. A known bound does
 not cause one-minute polling or a new per-run automation. No goal is created by this workflow:
 use goals only for an explicitly requested finite objective, not to keep sampling while an
 external request is generating.
 
-Reuse automation `hmasd-experiment-monitor`, retargeted to Root and named HMASD Root
-pending work. Its thirty-minute schedule now covers experiments and Pro observation.
-The old id is retained to avoid a duplicate automation; it no longer denotes another
-task. `.codex/hmasd-monitor.toml` declares the current endpoint and schedule.
+Use automation `hmasd-experiment-monitor`, named HMASD Root pending work, for experiment
+and Pro observation. `.codex/hmasd-monitor.toml` declares its endpoint and schedule.
 
 The heartbeat is ACTIVE while any currently assigned experiment needs observation or
 terminal notification, or any explicitly current Pro request needs reconciliation,

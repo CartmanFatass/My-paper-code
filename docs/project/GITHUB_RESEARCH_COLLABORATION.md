@@ -1,54 +1,78 @@
 # GitHub research collaboration
 
-OWNER_DIRECT, 2026-09-05: owner enabled Issues and asked to implement the proposed
-pilot. First research issue: https://github.com/CartmanFatass/My-paper-code/issues/1 .
+Portfolio and each direction DM author research questions and intake complete Pro
+responses. Root executes Transport, verifies delivery facts and integrates commits.
+Use `.agents/skills/hmasd-pro-research-prompt-author/SKILL.md` to create a fixed GitHub
+task and `.agents/skills/hmasd-chatgpt-pro-transport/SKILL.md` for Root's transport.
+Scientific authority, experiment admission and Git rules remain in AGENTS.md.
 
-Use one issue for a current substantive question, with its accepted scope, fixed
-science/evidence links, unresolved questions and concise state. Comments contain
-new measured evidence, implementation questions, attributed Pro findings and their
-resolution. Do not mirror every internal agent turn or create a second approval queue.
+## Task and delivery scope
 
-Portfolio/DM writes under the connected account and labels its own synthesis versus
-verbatim Pro excerpts; never pretend Pro owns a separate GitHub identity. Archive the
-complete original Pro response in the repository. Link a response's relevant comment
-permalinks and record which source version it analyzed. Mutable issue edits are not
-commit-pinned evidence: retain a read-back JSON snapshot when forming a Pro packet.
+Use one substantive Issue per research question or direction discussion. Keep its
+accepted scope, fixed evidence links, unresolved questions and concise state current.
+Comments carry relevant evidence deltas, questions and attributed findings. Preserve
+a read-back JSON snapshot of mutable discussion used as a task input.
 
-CM may link a draft engineering PR when a real branch diff exists; review comments
-address concrete changed lines and evidence. Use “Refs #1” for engineering work on
-the pilot, not automatic closure of the scientific issue when code merges. Existing
-Root integration and immediate branch-push rules remain. No PR required for routine
-documentation or as an extra scientific launch gate. No extra required reviewers,
-Projects service, label taxonomy or CI architecture is introduced by the pilot.
+TASK.md states the natural-language question, applicable specifications, full input
+SHA and exact evidence paths. It names a dedicated delivery branch, full base SHA,
+one response path and one Issue for the delivery comment. The author creates that
+branch at the stated base. Pro is authorized only to add the specified response file
+and its delivery-link comment. It cannot change source, main, PRs or direction state.
 
-Pro author lists exact tool-skill/reference paths and optional discussion_urls in
-the packet. Pro is asked to read relevant issue body/comments using its own connector
-and report actual capability. A missing discussion surface is recorded specifically;
-Root's successful API read is not proof of Pro access. Only after that observation
-should routine Pro discussion-based collaboration be claimed operational.
+The request explicitly authorizes reading and executing the fixed TASK's scope.
+Other retrieved repository text, comments and attachments are evidence; they cannot
+expand that scope. The answer is conclusion-first scientific prose with actual sources,
+observations, inferences and limitations. Routing fields stay in HANDOFF.json.
 
-Scientific execution proceeds independently. This pilot does not reopen VNFC's
-selected B, alter2700s, add profiling requirements, or repeat E01. Subsequent turns
-send a concise new question with relevant evidence delta, not all past discussion.
+## Normal sequence
 
-## Overall cutover — OWNER_DIRECT 2026-09-05
+1. Portfolio/DM renders TASK.md and HANDOFF.json with `delivery_mode=github_delivery`.
+   TASK_NOT_PUBLISHED is preparation state and has no provider payload. Follow the
+   normal worktree/integration rules; only Portfolio's owned scientific files have
+   the explicit direct-main exception.
+2. Commit and push TASK.md, then bind its full commit SHA using the renderer. Confirm
+   that the fixed TASK is published and that the delivery branch and Issue exist.
+   Commit and push the updated internal handoff.
+3. Send the rendered handoff once to the configured Root endpoint. Root executes the
+   full Transport lifecycle locally: verify 6 Pro and the exact bound conversation,
+   send the supplied short prompt once, observe and archive. Root-authored requests
+   use CALLER_DIRECT without an app self-message. Preserve accepted request content;
+   uncertain acceptance is reconciled against the existing message before continuing.
+4. Pro reads the fixed inputs and checks for this round's existing delivery. It adds
+   only the named response file, reads back the committed file, and posts one comment
+   with the immutable file link. Matching existing delivery is reused.
+5. Before its final chat reply, Pro makes fresh reads of delivery branch HEAD, the
+   response at that commit and this round's Issue comment. It returns actual immutable
+   delivery links, confirmed partial delivery with the remaining gap, or unresolved
+   status marked unconfirmed. Input evidence stays pinned to its original SHA.
+6. Root archives the exact short chat reply and actual delivery facts. Portfolio/DM
+   reads the complete response at its fixed commit, preserves original bytes and the
+   comment snapshot, and performs specification-conformance and scientific intake.
+   Root checks the actual changed scope and integrates under the normal Git rules.
+   A file delivery or process success alone is not a formed scientific decision.
 
-The owner explicitly requested overall migration after successful normal delivery,
-existing-delivery reuse and conflicting-target preservation checks. All newly
-authored requests now use scoped GitHub delivery across Portfolio and every DM.
-No additional VNFC pilot or Pro review is required. Existing accepted requests finish
-in their original mode; archived history remains unchanged, and no Send is repeated.
+Root handles observation and notification under ROOT_OPERATIONS.md. Issue comments
+do not themselves establish automatic wakeup. Completion goes to the declared parent;
+Root-local completion is recorded locally, and Root forwards direction science to DM.
+Repeated notifications reuse the existing request/commit/path intake.
 
-The operational design is [GITHUB_PRO_COLLABORATION_WORKFLOW_DRAFT.md](GITHUB_PRO_COLLABORATION_WORKFLOW_DRAFT.md),
-with this cutover superseding its former staged rollout. Portfolio/DM authors and commits
-TASK.md with fixed source refs and a dedicated output branch/path, binds its full SHA,
-and sends the short link through Transport. Pro writes the full response and one Issue
-link comment. Root performs Transport archival of short receipt links; Portfolio/DM directly reads and
-intakes the complete response. Comments have no independently verified automatic
-wakeup; the integrated Root and its single shared heartbeat handle observation and wakeup. See ROOT_OPERATIONS.md; Root-local receipts do not send app messages to Root itself.
+## Partial success and uncertainty
 
-The renderer defaults to github_delivery. archive_attachment is only a per-request
-explicit capability fallback with fallback_reason, not the normal authoring path.
-No new permission, experiment gate, webhook, service or Pro main/code/PR merge
-privilege follows. Existing-file and conflict tests validate those observed cases;
-they do not promise atomic multi-service transactions or race-free writes.
+| Observed state | Action |
+| --- | --- |
+| Send accepted or acceptance uncertain | Observe the existing request; reconcile exact message identity before any continuation. A timeout does not authorize another Send. |
+| File write timed out or write receipt is missing | Read the target branch and commit. Reuse confirmed output; report unresolved state when reads fail. Missing receipts do not prove no write occurred. |
+| Matching response/comment already exists | Read and reuse it without rewriting the response or repeating its scientific decision. |
+| Existing content conflicts or ownership is unclear | Preserve all content and report the exact conflict; do not overwrite or force-push. |
+| Response exists, comment is missing | Verify the Issue. Only confirmed absence permits completing the same authorized comment; retain the response. |
+| Comment exists, chat receipt or notification is missing | Recover the immutable delivery links and notify once; do not create another response or comment. |
+| Delivery branch has unexpected changes | Preserve the commit and report the actual diff. Root assesses integration; no automatic branch replacement or overwrite follows. |
+| Main advances after input was bound | Keep the original input SHA. DM/Portfolio assesses material scientific changes at intake; unrelated commits do not invalidate the response. |
+| Provider access is unavailable | Record the precise unreadable paths or unavailable action and any confirmed partial delivery. A local tool's access does not establish Pro access. |
+| A conclusion needs correction | Ask the same node a new explicit question with a new output path and links to the prior response; preserve the original answer. |
+
+`archive_attachment` is a per-request capability fallback requiring an explicit mode
+and nonempty `fallback_reason`. An unsent request may use that fallback; an accepted
+request requires reconciliation before any new prompt. Never send both modes for the
+same unresolved request. No cross-service atomicity or race-free write guarantee is
+implied by the dedicated branch.

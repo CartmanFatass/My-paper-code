@@ -100,6 +100,43 @@ def test_root_author_executes_locally_without_self_dispatch(project_root: Path, 
     assert handoff["operator_thread_id"] == SINGLETON_THREAD_ID
 
 
+@pytest.mark.parametrize("root_direct", [False, True])
+def test_github_binding_preserves_current_executor_and_exact_task(
+    project_root: Path, monkeypatch: pytest.MonkeyPatch, root_direct: bool
+) -> None:
+    renderer = _renderer()
+    request = _request()
+    request["repository"] = "example/repo"
+    if root_direct:
+        request["source_thread_id"] = SINGLETON_THREAD_ID
+        request["parent_thread_id"] = SINGLETON_THREAD_ID
+    request["github_delivery"] = {
+        "branch": "codex/pro-routing-test",
+        "base_sha": "a" * 40,
+        "response_path": "docs/research/candidates/demo_direction/pro_packets/round/archive/RESPONSE.md",
+        "issue_url": "https://github.com/example/repo/issues/1",
+    }
+    out = project_root / "packet"
+    renderer.prepare_github_delivery(request, project_root, out)
+    before = (out / "TASK.md").read_bytes()
+    monkeypatch.setattr(renderer.subprocess, "check_output", lambda *args, **kwargs: before)
+    renderer.bind_github_task(out / "HANDOFF.json", "b" * 40, project_root)
+    handoff = json.loads((out / "HANDOFF.json").read_text())
+    transport = handoff["transport_request"]
+    assert (out / "TASK.md").read_bytes() == before
+    assert transport["operator_thread_id"] == SINGLETON_THREAD_ID
+    assert handoff["dispatch_required"] is (not root_direct)
+    assert renderer.GITHUB_DELIVERY_READBACK in transport["prompt"]
+    assert renderer.GITHUB_DELIVERY_READBACK in before.decode()
+    assert "prompt_path" not in transport
+    if root_direct:
+        assert handoff["dispatch_mode"] == "CALLER_DIRECT"
+        assert handoff["dispatch_prompt"] is None
+    else:
+        assert handoff["dispatch_mode"] == "REUSE_SINGLETON"
+        assert f"threadId={SINGLETON_THREAD_ID}" in handoff["dispatch_instruction"]
+
+
 @pytest.mark.parametrize("direct", [False, True])
 def test_provider_requirement_and_direct_executor_survive_author_transport_handoff(
     project_root: Path, tmp_path: Path, direct: bool

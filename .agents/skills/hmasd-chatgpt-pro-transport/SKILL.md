@@ -287,8 +287,7 @@ remains pending during `WAITING_GENERATION`, `WAITING_HEARTBEAT`, `ARCHIVE_PENDI
 reconciliation or recoverable `WAITING_TIMEOUT`, and until its required notification is handled.
 After durable archival or an explicit terminal blocker without scheduled recovery, close only
 that request's observation. Do not delete/disable the shared automation unless no experiment
-or Pro request remains pending. Root itself remains available for later work. The old standalone
-Transport may be archived only after it relinquishes every current request and superseded wake.
+or Pro request remains pending. Root itself remains available for later work.
 Use `automation_update` to update the existing automation, preserving its full prompt, interval
 and Root target; no per-request replacement. Request tabs, facts, archives, receipts and
 idempotency keys remain distinct even though their heartbeat id is shared.
@@ -308,8 +307,7 @@ has authorized closing that tab.
 
 ### Monitor identity and observations
 
-The monitor is keyed by `request_id|conversation_binding_key|conversation_id|provider_url`
-(using `legacy:<direction_id>` only for legacy requests).
+The monitor is keyed by `request_id|conversation_binding_key|conversation_id|provider_url`.
 Every wake must record the observed URL, page state, completion controls, and an
 optional monitor cursor. `tab_id`/`tab_handle` may be stored only as the current
 lease handle. A tab ID without an exact URL/conversation observation is not monitor
@@ -317,11 +315,11 @@ evidence; it must produce `MONITOR_IDENTITY_MISMATCH` and stop recovery.
 
 ## Stop conditions
 
-An owner stop or takeover cancels the old operator's future actions for that
-request. Persist whether a provider Send was accepted (including uncertainty),
-retire only that operator's superseded wake, and return one factual handover. Do
-not resume browser actions, correct the prompt, or dispatch another operator after
-the stop. Root can adopt a proven accepted request without another Send.
+Apply an owner stop or takeover to the affected request. Preserve accepted or uncertain
+Send state and return its factual handover. Close or transfer only that request's
+observation as instructed; preserve the shared wake while other work needs it.
+Do not resume stopped browser actions or change the prompt. Recovery of a proven
+accepted request observes the same request without another Send.
 
 Stop and report the exact state on unknown direction, missing prompt, failed Pro
 verification, incomplete upload, uncertain/mismatched submission, stale/ambiguous

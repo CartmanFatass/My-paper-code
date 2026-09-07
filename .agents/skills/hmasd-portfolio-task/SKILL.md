@@ -11,18 +11,14 @@ scheduling, integration, monitoring and Pro transport. See docs/project/ROOT_OPE
 Portfolio writes its scientific files on main and pushes immediately; coordinate overlapping
 Root integrations. Existing Pro/owner authority is unchanged. Portfolio is not a launch gate.
 
-## Current owner boundary — 2026-09-05 explicit renewal
+## Delegated specification changes
 
-The owner's latest instruction approved the complete CBSC/N3 Pro specification plan and
-explicitly delegated future changes of this kind, including their specified Portfolio and
-AGENTS updates, to complete final decisions at the proper Pro node. Apply AGENTS §4.7 and
-`docs/research/portfolio/decisions/2026-09-05-pro-directed-spec-delegation.md`.
-No additional per-item approval is required inside that explicit scope. Read/archive the full
-Pro decision, implement its exact plan, and highlight/trace the existing P1/P2 item through
-item.py with owner delegation, exact Pro source, affected files and actual status. Do not
-fabricate replies, accept code solely from a rule change or broaden unrelated dispositions.
-Missing/ambiguous/out-of-scope decisions retain their actual boundary; P3/P4 remain retired.
-
+Apply AGENTS §4.7 to complete Pro-directed specification plans within delegated scope.
+Read/archive the full decision, implement its exact authorized plan, and trace the relevant
+P1/P2 item through item.py with actual authority, source, affected files and application state.
+No additional per-item approval is needed within that delegation. Do not fabricate owner
+replies, accept code solely from a rule change or broaden unrelated dispositions.
+Use `$hmasd-owner-item` for the maintained item classes and review procedure.
 
 ## Core principle
 
