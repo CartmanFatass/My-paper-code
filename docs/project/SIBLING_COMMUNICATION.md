@@ -26,8 +26,13 @@ the recipient's ACK are distinct facts. Reconcile uncertain delivery before retr
 
 ## App tasks and experiment observation
 
-Separate app tasks send to the configured Root without model/effort overrides for
-routine evidence or adoption. Root handles its own dispatch and completion locally.
+All routine `send_message_to_thread` calls, including Root's reports to Portfolio and
+Portfolio's commands to Root, omit both `model` and `thinking`. These optional fields
+change the recipient task's settings; they do not describe the sender or the cost of
+the message. Never copy the sender's model/effort into a recipient's message. Omission
+preserves the recipient's current settings. An explicit owner-requested model change
+or repair may set them once; subsequent routine messages omit them again.
+Root handles its own dispatch and completion locally.
 Portfolio receives scientific updates at its configured task. Pro handoff routing
 follows Prompt Author's rendered fields and the Transport skill.
 
