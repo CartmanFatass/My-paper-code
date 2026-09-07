@@ -885,3 +885,45 @@ Support: `DISH_SAMPLED_EXECUTION_B06_RESULT_INTAKE_20260907.md` §§1–7;
 `DISH_SAMPLED_EXECUTION_B06_RESULT_EVIDENCE_20260907.md` (integrated33db0d860);
 `sampled_execution_b06_20260907_run01/DM_READBACK.json`; frozen card §§4–7;
 `pro_packets/20260907_post_b06_convergence/EXPOSURE_AND_COST.json`.
+
+## Accepted post-B06 boundary: stop the tested joint-rule extension — 2026-09-07
+
+Complete Convergence at immutable `f7b58f1b88d7282f98ca6be531e9b4c27f85b690` is a conforming
+**PRO_FINAL** direction decision: stop current extension of the tested joint Gaussian-motion /
+Bernoulli-intent rule on the corrected A03 host with the existing LOW_LR learner and ordinary
+renewal boundaries; retain modal execution as this instance's development default. No new A,
+B or scientific invocation is selected. The first-ordinary-legal-application RETAIN/COPY/SHADOW
+agenda remains open; no whole-direction PARK, CLOSE, RECAST or Portfolio action follows.
+
+The bounded reason is B06's complete -77.5 sampled-minus-modal mean and four adverse condition
+means (-92.5/-41/-94/-82.5), with invalid-commit and energy means increasing in every condition.
+The adverse and zero-transfer card branches apply; the low-confidence <=-24 prediction hits
+its sign/threshold. All 16 evaluation episodes complete 1200 ticks, so early evaluation stopping
+or a missing primary does not explain this finite loss. Complete charged wall remains 226.02 s;
+this decision buys no new exposure.
+
+Strongest contradiction: only one trained controller and two samples per condition were tested;
+two sampled episodes win (+14/+3), modal improves 292.5 over initialization, and sampled improves
+215 overall while retaining TERRAIN/K8 -57. That last contrast combines learning and execution.
+Another learner or component-only rule could change sign. Joint motion/intent sampling changes
+future observations and recurrent state, so event increases do not isolate a noise component.
+These limits prevent a population negative or causal diagnosis without forcing another seed
+before this finite development stop.
+
+All reference/final rows and the B06 learner have zero legal transfers. Source-origin eligibility
+and COPY−RETAIN/SHADOW−COPY value remain unestimated, not zero; private label clones are not
+ordinary source applications. Native training costs (1030 invalid commits, 3 separation breaches,
+35 terminal events), prior B04/B05 LR gains and their adverse conditions remain separate facts.
+B06 is not a third LR pair. No safety, stable superiority or transfer-impossibility claim is made.
+
+The next scientific discriminator, if separately selected for a concrete decision, could be a
+new independent controller's native sampled-minus-modal contrast; component-only performance
+remains another unestimated question. Neither is selected now. The finite measured comparison
+already answers B06's chosen question; no exact search, forced transfer or full causal diagnosis
+is required. No tuned-baseline/upper headroom record exists, and this absence does not negate B06.
+Portfolio receives the clean return through Root and owns the next bounded task assignment.
+
+References: `DISH_POST_B06_CONVERGENCE_INTAKE_20260907.md` §§1–7;
+`pro_packets/20260907_post_b06_delivery_correction/archive/RESPONSE.md` §§1–7;
+`DISH_SAMPLED_EXECUTION_B06_RESULT_INTAKE_20260907.md` §§2–7. Prior delivery blockers and
+prepared-only statements remain historical provenance; this section records the accepted answer.
