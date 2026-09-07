@@ -1,0 +1,23 @@
+	Command being timed: "/usr/bin/timeout --signal=ALRM 3567.78s bash -lc /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/degraded_incumbent_shadow_handover/exp/control_low_lr_b05_20260906/shared.memory.json && /home/wu/.venvs/hmasd/bin/python scripts/run_dish_control_low_lr_b05.py shared --seed 101 --out temp/directions/degraded_incumbent_shadow_handover/exp/control_low_lr_b05_20260906/shared --admission temp/directions/degraded_incumbent_shadow_handover/exp/control_low_lr_b05_20260906/shared.memory.json"
+	User time (seconds): 6.90
+	System time (seconds): 0.22
+	Percent of CPU this job got: 100%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:07.11
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 501008
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 717
+	Minor (reclaiming a frame) page faults: 82043
+	Voluntary context switches: 1962
+	Involuntary context switches: 25
+	Swaps: 0
+	File system inputs: 176824
+	File system outputs: 1736
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

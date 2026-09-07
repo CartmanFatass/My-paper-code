@@ -1,0 +1,42 @@
+{
+  "assessed_at": "2026-09-07T03:37:49.884769Z",
+  "available_physical_bytes": 15657062400,
+  "captured_at": "2026-09-07T03:37:49.884398Z",
+  "cgroup_headroom_bytes": null,
+  "cgroup_memory_current_bytes": null,
+  "cgroup_memory_max_bytes": null,
+  "effective_available_bytes": 15657062400,
+  "effective_floor_pass": true,
+  "failure_reasons": [],
+  "measurement_source": "/proc/meminfo",
+  "minimum_available_bytes": 4294967296,
+  "passed": true,
+  "physical_floor_pass": true,
+  "schema_version": 1
+}
+E                                                                        [100%]
+==================================== ERRORS ====================================
+_____ ERROR at setup of test_seed101_reaches_shared_train_eval_and_primary _____
+
+self = PosixPath('/home/wu/hmasd-worktrees/dish-b05-seed101-20260906/temp/directions/degraded_incumbent_shadow_handover/test/b05-seed101')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           self._accessor.mkdir(self, mode)
+E           FileNotFoundError: [Errno 2] No such file or directory: '/home/wu/hmasd-worktrees/dish-b05-seed101-20260906/temp/directions/degraded_incumbent_shadow_handover/test/b05-seed101'
+
+../../.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/pathlib.py:1175: FileNotFoundError
+=============================== warnings summary ===============================
+../../.venvs/hmasd/lib/python3.10/site-packages/_pytest/config/__init__.py:1249
+  /home/wu/.venvs/hmasd/lib/python3.10/site-packages/_pytest/config/__init__.py:1249: PytestConfigWarning: Unknown config option: cache_dir
+  
+    self._warn_or_fail_if_strict(f"Unknown config option: {key}\n")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+ERROR tests/experiments/candidates/degraded_incumbent_shadow_handover/control_low_lr_b05/test_seed_binding.py::test_seed101_reaches_shared_train_eval_and_primary
+1 warning, 1 error in 0.84s
