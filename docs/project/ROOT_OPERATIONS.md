@@ -40,6 +40,16 @@ or completion. An intentional owner-directed model migration is separate from re
 Portfolio receives its own Pro receipts via the declared parent ID. A DM using a native
 child ID as source still declares Root as app parent; Root forwards the local receipt.
 
+When recovering an adopted Pro request, execute Transport in this Root task. A historical
+HANDOFF naming the retired standalone Transport is not a dispatch instruction. Preserve
+its original bytes, record this Root as `execution_thread_id`, reconcile existing Send
+evidence, and continue locally. Ask the retired session only for facts already recorded;
+do not give it browser, Send, observation or archive work. Two app dispatch attempts are
+not evidence of two provider Sends; establish each accepted effect before continuing.
+An accepted request also retains its original prompt across renderer updates. New
+requests use the current renderer; changing an accepted prompt requires explicit scope
+resolution and never supplies permission to resend.
+
 ## Continuing work across Root and Portfolio boundaries
 
 OWNER_DIRECT 2026-09-06: separating Portfolio does not pause the research loop. A status
