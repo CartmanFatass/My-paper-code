@@ -1,8 +1,14 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-07 (P11 refill and selected executions prepared; five-UAV-entry goal)
+Updated at: 2026-09-07 (P12 prepared FRRIE execution and VSP02 request preparation; five-UAV-entry goal)
 
-Current commands: [P11 refill and execution](handoffs/2026-09-07-p11-refill-and-selected-execution.md).
+Current commands: [P12 prepared path and Convergence](handoffs/2026-09-07-p12-prepared-path-and-convergence.md).
+P12 retains P11's CBSC/UCOPE bounded repairs and VSP03 prospective continuation, allocates one
+prepared FRRIE A04 complete setup/T0 chain, and prepares the VSP02 Convergence question without
+a Pro Send. Actual acceptance remains Root's log fact. No model-comparison batch has been created
+by these unchanged-code executions, existing corrections or scientific question preparation.
+
+Previous commands: [P11 refill and execution](handoffs/2026-09-07-p11-refill-and-selected-execution.md).
 Retain VSP03 collection/intake, allocate the selected CBSC single acquisition/metadata route
 and UCOPE B05 two-dataset route, and replace yielded RCLE/VSPC1 slots with bounded FRRIE A04
 preparation and VSP02 next-question preparation. Root records actual acceptance; a prepared
