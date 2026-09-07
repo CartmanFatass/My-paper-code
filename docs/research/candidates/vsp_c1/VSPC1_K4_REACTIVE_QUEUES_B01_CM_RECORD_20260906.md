@@ -171,3 +171,55 @@ current ready route, send accepted handles with the paths/node/SHA/bound, and re
 until adoption is confirmed. Do not create another monitoring task or heartbeat. This source
 assignment stops here and creates no monitoring handoff. Root owns integration and routing;
 DM owns subsequent launch assignment and scientific intake; CM retains technical collection.
+
+## Command-transport repair after accepted run01 no-op — 2026-09-06
+
+Root accepted FACTOR handle `vspc1-reactive-b01-factor-run01` at remote time
+`2026-09-07T13:57:52+08:00`. Independent read-only collection confirmed status finished,
+exit0, tmux inactive, and start/end at that same timestamp with duration0s. The log contains
+only the two supervisor lines. Its stored runner's execution statement is exactly
+`eval 'bash -lc  cd '`. Thus the accepted supervisor command ran only cd, not admission or
+the scientific runner. The intended run01 output root does not exist. No GENERIC dispatch
+is reported. These facts support zero experiment exposure from the accepted FACTOR handle,
+not a scientific result. The upstream PowerShell interpolation mechanism is not uniquely
+reconstructed from retained remote evidence; command truncation itself is directly verified.
+
+The installed supervisor sets `COMMAND="$*"` and writes an eval command, losing argument
+grouping unless the complete command is supplied correctly. The repaired
+[launch assignment §4](VSPC1_K4_REACTIVE_QUEUES_B01_LAUNCH_ASSIGNMENT_20260906.md)
+uses a literal single-quoted PowerShell here-string piped to remote Python stdin. Python
+passes a single complete command-string argument to the existing agent-task. There is no
+nested bash-c layer or shell-variable expansion in the scientific command. This is a
+documentation/transport correction, not a new launcher or framework.
+
+Readback confirmed the existing remote cwd
+`/home/wu/hmasd-worktrees/vspc1-reactive-queues-b01-476748835` at frozen source
+`47674883572bbe078ede037cbb8f99b8cd54c159`. New planned handle is
+`vspc1-reactive-b01-factor-run02`; new output root is
+`temp/directions/vsp_c1/exp/k4_reactive_queues_b01_run02/FACTOR/` beneath that cwd.
+New handle and run02 root were absent. Old run01 handle/log/runner files remain untouched.
+
+Bounded non-result transport check used the exact proposed command through PowerShell → SSH
+stdin → remote Python. Bash syntax check exited0; assertions confirmed every token of
+the cd/admission/timed-runner segments. Prospective agent-task argv was printed, not executed.
+The chain includes fresh node-local memory admission immediately before the 2700s complete
+FACTOR invocation, retaining seed401/256 updates/CPUfloat32/one thread/batch16. No admission,
+model/RNG, experiment, source test, or new supervisor task ran during this repair.
+
+Raw local evidence: `C:/Projects/HMASD-worktrees/cm-vspc1-reactive-transport-repair-20260906/temp/directions/vsp_c1/transport_repair_20260906/`,
+files `accepted_runner.txt`, `status.json`, `task.log`, `paths.json`, `argv_check.json`.
+Durable decision-relevant excerpts are above and in the corrected assignment. The repair
+branch starts at main `956be39abc870dc2bd034fb51b7f450fc21b3b29`; unrelated Root changes
+and prior evidence are preserved. Only the launch assignment and this record change.
+
+DM selected this command-delivery correction and Root requested the exact bounded
+FACTOR-only retry preparation. The original object/budget remain selected; no scientific
+retry allowance or polarity is inferred from technical failure. Root must accept and dispatch
+the exact payload once; CM does not launch. GENERIC remains undispatched pending its later
+original-arm handoff. Integrated Root adoption/ACTIVE readback routing is unchanged, with
+CM technical collection and DM science retained. Actual run02 acceptance/output remain unobserved.
+
+Independent reviewer `review_ah_reactive_queues` inspected the exact transport payload,
+preserved run01 facts and syntax/argv evidence and found no material concern. It performed
+no launch, admission, learner probe, test rerun or edit. CM accepts this bounded transport
+correction; it does not establish actual run02 admission or scientific completion.
