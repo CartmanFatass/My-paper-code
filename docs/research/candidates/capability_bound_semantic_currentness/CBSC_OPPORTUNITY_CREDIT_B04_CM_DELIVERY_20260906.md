@@ -33,7 +33,7 @@ accepts only public tokens. Publication retains each action and local contributi
 returns, targets/old values/advantages, losses/action counts and endpoint pairs.
 STRUCT uses RAW's fixed-rule records and checks matched source/random identities.
 
-Engineering-scope Â§4 additions: **none**, as selected by the card's Single selected
+Engineering-scope Ã‚Â§4 additions: **none**, as selected by the card's Single selected
 engineering check and scope. No old B1 exception is used. Ordinary source/runner
 budgets apply; mandatory publication/readback serves the primary measurement.
 Independent scientific review is complete (below); runtime evidence remains pending.
@@ -143,3 +143,40 @@ Current monitor procedure from c0951c555 applies on the local control plane:
 use the same global monitor for all handles, with its existing heartbeat ACTIVE
 and read back before adoption ACK. This workflow update changes no launch source
 or scientific execution. No additional check is selected.
+
+## Engineering terminal acceptance
+
+Accepted handle `cbsc-b04-engineering-20260906`, supervisor PID2529595,
+2026-09-07T04:19:08Z start; terminal exit0 at04:19:14Z. Outer measured complete
+wall5.86s, peakRSS530040KiB (542760960bytes), within60s. Admission at
+04:19:08.406466Z passed physical/effective15277744128bytes each (floor4294967296).
+The source remained exactly a3c2a49bf7002639d43a94f460b688d50c6c42dd.
+
+Constructed checks passed, both arms16 Adam/8 training episodes/1216 training
+transitions/192 decisions, two one-episode evaluations/304 transitions each:
+combined32 Adam and3040 transitions. Both report CPU FP32/Torch1/121349parameters.
+Initial L2=29.92646598815918; RAW final29.927379608154297, displacement0.4233545958995819;
+STRUCT final29.927444458007812, displacement0.425073504447937. Actual sampled
+training counts per arm: SAFE_FALLBACK60,SERVE66,REFRESH66. All four snapshots
+were written/read back with real counters/model/Adam; all credit records,
+per-episode24 actions/contributions, native returns, context and pair JSON were
+published/read back. CM additionally checked retained contribution sums and pair
+arithmetic from copied outputs without another model/host execution.
+
+Artifacts on the execution node use E/engineering and T as frozen above. Copied
+intact to this CM worktree under the identical `temp/directions/.../exp/` and
+`test/` suffixes. Exact shell command and SSH acceptance are retained under
+`temp/directions/capability_bound_semantic_currentness/test/opportunity_credit_b04_control_20260906/`.
+The global monitor received the accepted handle directly; CM observed terminal
+exit and collected before adoption ACK. This short complete check passes the
+required changed publication path; it is not a performance result.
+
+Focused account after engineering:178.4997762/300s before subsecond JSON collection
+arithmetic, conservatively179.50/300s including it. No retry or extra check.
+Formal RAW then STRUCT remain selected at their original600s caps, unchanged
+planning projections159.38/181.56s; the check is not used to tune either arm.
+
+Preparation fact: bare remote Git networking hung before scientific launch.
+Only the identified B04 preparation process trees were stopped; using the declared
+`zsh -lic` network shell fetched source and prepared the exact detached worktree.
+This consumed no host/model/admission invocation. No local fallback was used.
