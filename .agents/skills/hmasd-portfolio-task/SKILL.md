@@ -68,7 +68,7 @@ ordering, replacement and the next action from the current evidence. This schedu
 change lifecycle, priority, scientific meaning or experiment budgets. A queued direction is not
 `PARKED`. OWNER_DIRECT 2026-09-07 counts active native work, running experiments and accepted
 Pro generation together, once per direction. Unresolved waits and completed returns yield a
-slot; accepted Pro generation remains counted. The goal targets two formally entered UAV
+slot; accepted Pro generation remains counted. The goal targets five formally entered UAV
 validation directions under concrete decision/card references, not a new universal launch gate.
 
 Execution remains remote-first under `.codex/hmasd-compute.toml` within the frozen host/device
