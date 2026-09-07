@@ -1,0 +1,76 @@
+{
+  "id": "20260907-ucope-006",
+  "created": "2026-09-07T12:31:36-07:00",
+  "direction": "ucope",
+  "tier": "object",
+  "kind": "close-call",
+  "title": "B04 刚过门槛且一组亏损：是否建议同预算再观察",
+  "context": "B04 两个新数据集均值 0.001038，刚过 0.001；一组整体为负且多买了一处信息，另一组为正。记录的自动选择仅是返回同预算两组新数据的准备建议，本轮不新增运行。",
+  "options": [
+    {
+      "key": "a",
+      "label": "返回同预算两组准备建议",
+      "consequence": "Root 收到准备两个独立 512 批次数据集的建议；保留所有结果，本轮不选择新种子、卡、预算或运行。"
+    },
+    {
+      "key": "b",
+      "label": "返回暂不追加的建议",
+      "consequence": "Root 收到暂不追加 512 批次跟进的建议；B04 冻结读法及所有既有证据不变。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "两组同处有实际增益，但额外有害购买和很小的均值余量使继续与暂缓接近取舍；应先观察同预算波动。",
+  "evidence": [
+    "docs/research/candidates/ucope/UCOPE_SHARED_DATA_RETURN_MODEL_B04_INTAKE_20260907.md",
+    "docs/research/candidates/ucope/UCOPE_SHARED_DATA_RETURN_MODEL_B04_SCIENCE_CARD_20260907.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-07.md#L51",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否向 Root 建议准备两个同为 512 批次的新独立数据集，继续观察有效获取信息与额外购买亏损的波动？",
+    "changes_if_approved": [
+      {
+        "target": "docs/research/candidates/ucope/UCOPE_SHARED_DATA_RETURN_MODEL_B04_INTAKE_20260907.md §6 Decision 2",
+        "from": "B04 混合结果已记录，后继问题尚未建议。",
+        "to": "返回两个相同预算独立数据集的准备建议；本轮不选择新种子、卡或运行。"
+      }
+    ],
+    "if_refused": "改为返回暂不追加 512 批次跟进的建议，保留两个结果和冻结 RM-A 读法；不改方向生命周期或既有证据。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_SHARED_DATA_RETURN_MODEL_B04_INTAKE_20260907.md",
+        "quote": "The strongest support is positive paid-acquisition value in LINKED-p17_20-c9_100 in both\nnew datasets, together with the above-MEI joint point estimate.",
+        "why": "两组在同一处都有付费后的实际增益，因此另一对独立学习结果仍可能有信息价值。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_SHARED_DATA_RETURN_MODEL_B04_INTAKE_20260907.md",
+        "quote": "The mean's excess over MEI, **0.00003788248697916916**, is much smaller than that conditional\nMC SE and the dataset dispersion.",
+        "why": "两组均值刚过门槛，不确定性远大于余量；还不能确信继续的收益。"
+      },
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_SHARED_DATA_RETURN_MODEL_B04_INTAKE_20260907.md",
+        "quote": "| 6601 / LINKED-p13_20-c9_100 | 4096 | **-0.021816406250000003** | -0.049736328124999993 | [6, 6, 6, 4, 2, 2, 2] |",
+        "why": "第一组额外购买造成局部实际回报亏损，整体亦为负，不能只保留有利的第二组。"
+      }
+    ],
+    "uncertainty": [
+      "仅两个独立数据集，拟合波动和评估噪声尚未分离。",
+      "没有配对的 1024 批次对照，不能归因于减半数据或推断等效。",
+      "后继准备或运行需要 Root 后续命令；本条自动执行的仅是建议记录。"
+    ],
+    "cost": {
+      "compute": "本次结果完整调用合计 9.42 秒。候选后继为两组，各 229376 总回合/196608 标量更新，合计 458752/393216；参考本次 4.71 秒/组，未来时间不保证；600 秒/组、1200 秒总上限尚未分配。",
+      "owner_time": "可异步保留或改变建议，无需即时回复。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "建议向 Root 返回“准备两个新的 512 批次独立数据集”的方案，比较器和最终评估不变，保留所有结果；这次只执行建议记录，不分配新运行。均值刚过门槛且一组有额外购买亏损，因此这是接近取舍，也可选择暂不继续。",
+    "source": "docs/research/candidates/ucope/UCOPE_SHARED_DATA_RETURN_MODEL_B04_INTAKE_20260907.md"
+  },
+  "starred": true
+}
