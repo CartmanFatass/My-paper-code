@@ -1,0 +1,1593 @@
+{
+  "object_id": "UCOPE-SHARED-DATA-RETURN-MODEL-B05",
+  "seed": 6701,
+  "independent_datasets": 1,
+  "status": "COMPLETE",
+  "branch": "RM-A",
+  "training": {
+    "episodes": 131072,
+    "transitions": 655360,
+    "probe_episodes": 65536,
+    "immediate_episodes": 65536,
+    "committed_period_units": 589734,
+    "probe_time_units": 131072,
+    "behavior_uniforms": 131072,
+    "batches_completed": 512
+  },
+  "evaluation": {
+    "contexts": [
+      {
+        "context": "LINKED-p13_20-c9_100",
+        "complete": true,
+        "paired_episodes": 4096,
+        "policies": {
+          "FULL": {
+            "episodes": 4096,
+            "probe_count": 0,
+            "paid_sum": 0.0,
+            "return_sum": 3236.6239999998656,
+            "mean_return": 0.79019140625,
+            "mean_paid_component": 0.0,
+            "probe_frequency": 0.0
+          },
+          "BLIND": {
+            "episodes": 4096,
+            "probe_count": 0,
+            "paid_sum": 0.0,
+            "return_sum": 3236.6239999998656,
+            "mean_return": 0.79019140625,
+            "mean_paid_component": 0.0,
+            "probe_frequency": 0.0
+          },
+          "IMMEDIATE-4": {
+            "episodes": 4096,
+            "probe_count": 0,
+            "paid_sum": 0.0,
+            "return_sum": 3236.6239999998656,
+            "mean_return": 0.79019140625,
+            "mean_paid_component": 0.0,
+            "probe_frequency": 0.0
+          }
+        },
+        "differences": {
+          "delta_native": {
+            "mean": 0.0,
+            "sample_variance": 0.0
+          },
+          "delta_information": {
+            "mean": 0.0,
+            "sample_variance": 0.0
+          },
+          "blind_minus_immediate": {
+            "mean": 0.0,
+            "sample_variance": 0.0
+          }
+        }
+      },
+      {
+        "context": "LINKED-p13_20-c7_50",
+        "complete": true,
+        "paired_episodes": 4096,
+        "policies": {
+          "FULL": {
+            "episodes": 4096,
+            "probe_count": 0,
+            "paid_sum": 0.0,
+            "return_sum": 3256.623999999866,
+            "mean_return": 0.79507421875,
+            "mean_paid_component": 0.0,
+            "probe_frequency": 0.0
+          },
+          "BLIND": {
+            "episodes": 4096,
+            "probe_count": 0,
+            "paid_sum": 0.0,
+            "return_sum": 3256.623999999866,
+            "mean_return": 0.79507421875,
+            "mean_paid_component": 0.0,
+            "probe_frequency": 0.0
+          },
+          "IMMEDIATE-4": {
+            "episodes": 4096,
+            "probe_count": 0,
+            "paid_sum": 0.0,
+            "return_sum": 3256.623999999866,
+            "mean_return": 0.79507421875,
+            "mean_paid_component": 0.0,
+            "probe_frequency": 0.0
+          }
+        },
+        "differences": {
+          "delta_native": {
+            "mean": 0.0,
+            "sample_variance": 0.0
+          },
+          "delta_information": {
+            "mean": 0.0,
+            "sample_variance": 0.0
+          },
+          "blind_minus_immediate": {
+            "mean": 0.0,
+            "sample_variance": 0.0
+          }
+        }
+      },
+      {
+        "context": "LINKED-p17_20-c9_100",
+        "complete": true,
+        "paired_episodes": 4096,
+        "policies": {
+          "FULL": {
+            "episodes": 4096,
+            "probe_count": 4096,
+            "paid_sum": -205.25333333333018,
+            "return_sum": 3327.642666666517,
+            "mean_return": 0.8124127604166667,
+            "mean_paid_component": -0.050110677083333326,
+            "probe_frequency": 1.0
+          },
+          "BLIND": {
+            "episodes": 4096,
+            "probe_count": 0,
+            "paid_sum": 0.0,
+            "return_sum": 3235.623999999867,
+            "mean_return": 0.789947265625,
+            "mean_paid_component": 0.0,
+            "probe_frequency": 0.0
+          },
+          "IMMEDIATE-4": {
+            "episodes": 4096,
+            "probe_count": 0,
+            "paid_sum": 0.0,
+            "return_sum": 3235.623999999867,
+            "mean_return": 0.789947265625,
+            "mean_paid_component": 0.0,
+            "probe_frequency": 0.0
+          }
+        },
+        "differences": {
+          "delta_native": {
+            "mean": 0.022465494791666703,
+            "sample_variance": 0.08206251776175214
+          },
+          "delta_information": {
+            "mean": 0.022465494791666703,
+            "sample_variance": 0.08206251776175214
+          },
+          "blind_minus_immediate": {
+            "mean": 0.0,
+            "sample_variance": 0.0
+          }
+        }
+      },
+      {
+        "context": "LINKED-p17_20-c7_50",
+        "complete": true,
+        "paired_episodes": 4096,
+        "policies": {
+          "FULL": {
+            "episodes": 4096,
+            "probe_count": 0,
+            "paid_sum": 0.0,
+            "return_sum": 3213.623999999866,
+            "mean_return": 0.784576171875,
+            "mean_paid_component": 0.0,
+            "probe_frequency": 0.0
+          },
+          "BLIND": {
+            "episodes": 4096,
+            "probe_count": 0,
+            "paid_sum": 0.0,
+            "return_sum": 3213.623999999866,
+            "mean_return": 0.784576171875,
+            "mean_paid_component": 0.0,
+            "probe_frequency": 0.0
+          },
+          "IMMEDIATE-4": {
+            "episodes": 4096,
+            "probe_count": 0,
+            "paid_sum": 0.0,
+            "return_sum": 3213.623999999866,
+            "mean_return": 0.784576171875,
+            "mean_paid_component": 0.0,
+            "probe_frequency": 0.0
+          }
+        },
+        "differences": {
+          "delta_native": {
+            "mean": 0.0,
+            "sample_variance": 0.0
+          },
+          "delta_information": {
+            "mean": 0.0,
+            "sample_variance": 0.0
+          },
+          "blind_minus_immediate": {
+            "mean": 0.0,
+            "sample_variance": 0.0
+          }
+        }
+      },
+      {
+        "context": "SEVERED-p13_20-c9_100",
+        "complete": true,
+        "paired_episodes": 4096,
+        "policies": {
+          "FULL": {
+            "episodes": 4096,
+            "probe_count": 0,
+            "paid_sum": 0.0,
+            "return_sum": 3256.623999999866,
+            "mean_return": 0.79507421875,
+            "mean_paid_component": 0.0,
+            "probe_frequency": 0.0
+          },
+          "BLIND": {
+            "episodes": 4096,
+            "probe_count": 0,
+            "paid_sum": 0.0,
+            "return_sum": 3256.623999999866,
+            "mean_return": 0.79507421875,
+            "mean_paid_component": 0.0,
+            "probe_frequency": 0.0
+          },
+          "IMMEDIATE-4": {
+            "episodes": 4096,
+            "probe_count": 0,
+            "paid_sum": 0.0,
+            "return_sum": 3256.623999999866,
+            "mean_return": 0.79507421875,
+            "mean_paid_component": 0.0,
+            "probe_frequency": 0.0
+          }
+        },
+        "differences": {
+          "delta_native": {
+            "mean": 0.0,
+            "sample_variance": 0.0
+          },
+          "delta_information": {
+            "mean": 0.0,
+            "sample_variance": 0.0
+          },
+          "blind_minus_immediate": {
+            "mean": 0.0,
+            "sample_variance": 0.0
+          }
+        }
+      },
+      {
+        "context": "SEVERED-p13_20-c7_50",
+        "complete": true,
+        "paired_episodes": 4096,
+        "policies": {
+          "FULL": {
+            "episodes": 4096,
+            "probe_count": 0,
+            "paid_sum": 0.0,
+            "return_sum": 3270.6239999998656,
+            "mean_return": 0.7984921875,
+            "mean_paid_component": 0.0,
+            "probe_frequency": 0.0
+          },
+          "BLIND": {
+            "episodes": 4096,
+            "probe_count": 0,
+            "paid_sum": 0.0,
+            "return_sum": 3270.6239999998656,
+            "mean_return": 0.7984921875,
+            "mean_paid_component": 0.0,
+            "probe_frequency": 0.0
+          },
+          "IMMEDIATE-4": {
+            "episodes": 4096,
+            "probe_count": 0,
+            "paid_sum": 0.0,
+            "return_sum": 3270.6239999998656,
+            "mean_return": 0.7984921875,
+            "mean_paid_component": 0.0,
+            "probe_frequency": 0.0
+          }
+        },
+        "differences": {
+          "delta_native": {
+            "mean": 0.0,
+            "sample_variance": 0.0
+          },
+          "delta_information": {
+            "mean": 0.0,
+            "sample_variance": 0.0
+          },
+          "blind_minus_immediate": {
+            "mean": 0.0,
+            "sample_variance": 0.0
+          }
+        }
+      },
+      {
+        "context": "SEVERED-p17_20-c9_100",
+        "complete": true,
+        "paired_episodes": 4096,
+        "policies": {
+          "FULL": {
+            "episodes": 4096,
+            "probe_count": 0,
+            "paid_sum": 0.0,
+            "return_sum": 3225.6239999998666,
+            "mean_return": 0.787505859375,
+            "mean_paid_component": 0.0,
+            "probe_frequency": 0.0
+          },
+          "BLIND": {
+            "episodes": 4096,
+            "probe_count": 0,
+            "paid_sum": 0.0,
+            "return_sum": 3225.6239999998666,
+            "mean_return": 0.787505859375,
+            "mean_paid_component": 0.0,
+            "probe_frequency": 0.0
+          },
+          "IMMEDIATE-4": {
+            "episodes": 4096,
+            "probe_count": 0,
+            "paid_sum": 0.0,
+            "return_sum": 3225.6239999998666,
+            "mean_return": 0.787505859375,
+            "mean_paid_component": 0.0,
+            "probe_frequency": 0.0
+          }
+        },
+        "differences": {
+          "delta_native": {
+            "mean": 0.0,
+            "sample_variance": 0.0
+          },
+          "delta_information": {
+            "mean": 0.0,
+            "sample_variance": 0.0
+          },
+          "blind_minus_immediate": {
+            "mean": 0.0,
+            "sample_variance": 0.0
+          }
+        }
+      },
+      {
+        "context": "SEVERED-p17_20-c7_50",
+        "complete": true,
+        "paired_episodes": 4096,
+        "policies": {
+          "FULL": {
+            "episodes": 4096,
+            "probe_count": 0,
+            "paid_sum": 0.0,
+            "return_sum": 3209.623999999867,
+            "mean_return": 0.783599609375,
+            "mean_paid_component": 0.0,
+            "probe_frequency": 0.0
+          },
+          "BLIND": {
+            "episodes": 4096,
+            "probe_count": 0,
+            "paid_sum": 0.0,
+            "return_sum": 3209.623999999867,
+            "mean_return": 0.783599609375,
+            "mean_paid_component": 0.0,
+            "probe_frequency": 0.0
+          },
+          "IMMEDIATE-4": {
+            "episodes": 4096,
+            "probe_count": 0,
+            "paid_sum": 0.0,
+            "return_sum": 3209.623999999867,
+            "mean_return": 0.783599609375,
+            "mean_paid_component": 0.0,
+            "probe_frequency": 0.0
+          }
+        },
+        "differences": {
+          "delta_native": {
+            "mean": 0.0,
+            "sample_variance": 0.0
+          },
+          "delta_information": {
+            "mean": 0.0,
+            "sample_variance": 0.0
+          },
+          "blind_minus_immediate": {
+            "mean": 0.0,
+            "sample_variance": 0.0
+          }
+        }
+      }
+    ],
+    "counts": {
+      "FULL": {
+        "episodes": 32768,
+        "transitions": 90112,
+        "probe_episodes": 4096,
+        "immediate_episodes": 28672,
+        "committed_period_units": 132964,
+        "probe_time_units": 8192
+      },
+      "BLIND": {
+        "episodes": 32768,
+        "transitions": 65536,
+        "probe_episodes": 0,
+        "immediate_episodes": 32768,
+        "committed_period_units": 131072,
+        "probe_time_units": 0
+      },
+      "IMMEDIATE-4": {
+        "episodes": 32768,
+        "transitions": 65536,
+        "probe_episodes": 0,
+        "immediate_episodes": 32768,
+        "committed_period_units": 131072,
+        "probe_time_units": 0
+      }
+    },
+    "differences": {
+      "delta_native": {
+        "mean": 0.002808186848958338,
+        "conditional_mc_se": 0.0005595030492464352
+      },
+      "delta_information": {
+        "mean": 0.002808186848958338,
+        "conditional_mc_se": 0.0005595030492464352
+      },
+      "blind_minus_immediate": {
+        "mean": 0.0,
+        "conditional_mc_se": 0.0
+      }
+    },
+    "policies": {
+      "FULL": {
+        "mean_return": 0.7933658040364583,
+        "mean_paid_component": -0.006263834635416666,
+        "probe_frequency": 0.125
+      },
+      "BLIND": {
+        "mean_return": 0.7905576171875,
+        "mean_paid_component": 0.0,
+        "probe_frequency": 0.0
+      },
+      "IMMEDIATE-4": {
+        "mean_return": 0.7905576171875,
+        "mean_paid_component": 0.0,
+        "probe_frequency": 0.0
+      }
+    }
+  },
+  "selected_batches": 512,
+  "selected_eval_episodes_per_context_policy": 4096,
+  "cost_law": "T_init + 512*T_batch256_shared_fit + 32768*T_three_policy_eval + T_publish",
+  "resources_status": "resources_unmeasured",
+  "launch_sha": "71433bfabb70481def4329e622a838fa0cd9eeec",
+  "runtime": {
+    "python": "3.10.21 (main, Sep  1 2026, 14:16:49) [Clang 22.1.3 ]",
+    "float_mantissa_bits": 53,
+    "device": "cpu",
+    "compute_threads": 1
+  },
+  "final_policies": {
+    "FULL": [
+      {
+        "root_action": "IMMEDIATE",
+        "tail_periods": [
+          6,
+          6,
+          6,
+          4,
+          4,
+          2,
+          2
+        ],
+        "estimated_probe_return": 0.7785699906568881
+      },
+      {
+        "root_action": "IMMEDIATE",
+        "tail_periods": [
+          6,
+          6,
+          6,
+          4,
+          2,
+          2,
+          2
+        ],
+        "estimated_probe_return": 0.7287933335930041
+      },
+      {
+        "root_action": "PROBE",
+        "tail_periods": [
+          8,
+          6,
+          6,
+          6,
+          2,
+          2,
+          2
+        ],
+        "estimated_probe_return": 0.8147840611171152
+      },
+      {
+        "root_action": "IMMEDIATE",
+        "tail_periods": [
+          6,
+          8,
+          8,
+          4,
+          2,
+          2,
+          2
+        ],
+        "estimated_probe_return": 0.7610762107577826
+      },
+      {
+        "root_action": "IMMEDIATE",
+        "tail_periods": [
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4
+        ],
+        "estimated_probe_return": 0.7547947119671963
+      },
+      {
+        "root_action": "IMMEDIATE",
+        "tail_periods": [
+          4,
+          4,
+          4,
+          4,
+          4,
+          6,
+          4
+        ],
+        "estimated_probe_return": 0.6781037927395253
+      },
+      {
+        "root_action": "IMMEDIATE",
+        "tail_periods": [
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4
+        ],
+        "estimated_probe_return": 0.7484703569655724
+      },
+      {
+        "root_action": "IMMEDIATE",
+        "tail_periods": [
+          4,
+          4,
+          4,
+          4,
+          6,
+          4,
+          4
+        ],
+        "estimated_probe_return": 0.6969966301666619
+      }
+    ],
+    "BLIND": [
+      {
+        "root_action": "IMMEDIATE",
+        "tail_period": 4,
+        "estimated_probe_return": 0.7562479126525382
+      },
+      {
+        "root_action": "IMMEDIATE",
+        "tail_period": 4,
+        "estimated_probe_return": 0.6940726072607257
+      },
+      {
+        "root_action": "IMMEDIATE",
+        "tail_period": 4,
+        "estimated_probe_return": 0.7397353176508232
+      },
+      {
+        "root_action": "IMMEDIATE",
+        "tail_period": 4,
+        "estimated_probe_return": 0.6974627831715203
+      },
+      {
+        "root_action": "IMMEDIATE",
+        "tail_period": 4,
+        "estimated_probe_return": 0.7545984555984561
+      },
+      {
+        "root_action": "IMMEDIATE",
+        "tail_period": 4,
+        "estimated_probe_return": 0.6753499430060259
+      },
+      {
+        "root_action": "IMMEDIATE",
+        "tail_period": 4,
+        "estimated_probe_return": 0.7485140524415144
+      },
+      {
+        "root_action": "IMMEDIATE",
+        "tail_period": 4,
+        "estimated_probe_return": 0.696741730279898
+      }
+    ],
+    "IMMEDIATE-4": [
+      {
+        "root_action": "IMMEDIATE",
+        "immediate_period": 4
+      },
+      {
+        "root_action": "IMMEDIATE",
+        "immediate_period": 4
+      },
+      {
+        "root_action": "IMMEDIATE",
+        "immediate_period": 4
+      },
+      {
+        "root_action": "IMMEDIATE",
+        "immediate_period": 4
+      },
+      {
+        "root_action": "IMMEDIATE",
+        "immediate_period": 4
+      },
+      {
+        "root_action": "IMMEDIATE",
+        "immediate_period": 4
+      },
+      {
+        "root_action": "IMMEDIATE",
+        "immediate_period": 4
+      },
+      {
+        "root_action": "IMMEDIATE",
+        "immediate_period": 4
+      }
+    ]
+  },
+  "exposure": {
+    "initial_value_l2": 0.0,
+    "first_observation_step_size": 1.0,
+    "histogram_updates": 65536,
+    "occupied_histogram_entries": 56,
+    "shared_immediate": {
+      "value_entries": 8,
+      "scalar_updates": 65536,
+      "occupied_entries": 8,
+      "initial_l2": 0.0,
+      "displacement_l2": 2.2448953298736476,
+      "max_absolute_movement": 0.7988583984374987
+    },
+    "full": {
+      "value_entries": 224,
+      "scalar_updates": 65536,
+      "occupied_entries": 224,
+      "initial_l2": 0.0,
+      "displacement_l2": 9.9462296319907,
+      "max_absolute_movement": 0.9333913043478261
+    },
+    "blind": {
+      "value_entries": 32,
+      "scalar_updates": 65536,
+      "occupied_entries": 32,
+      "initial_l2": 0.0,
+      "displacement_l2": 3.727475152597191,
+      "max_absolute_movement": 0.7562479126525382
+    },
+    "scalar_value_updates": 196608
+  },
+  "learned_values_and_counts": {
+    "q_immediate": [
+      0.7890927734375018,
+      0.7927548828124973,
+      0.7988583984374987,
+      0.792266601562502,
+      0.793121093750001,
+      0.7937314453125018,
+      0.7965390625,
+      0.7931210937500008
+    ],
+    "n_immediate": [
+      8192,
+      8192,
+      8192,
+      8192,
+      8192,
+      8192,
+      8192,
+      8192
+    ],
+    "q_full": [
+      [
+        [
+          0.38600000000000007,
+          0.656469135802469,
+          0.7140000000000002,
+          0.6958245614035087
+        ],
+        [
+          0.5728870523415976,
+          0.6817663230240547,
+          0.7145513784461148,
+          0.6755988934993085
+        ],
+        [
+          0.6119506762132061,
+          0.6980386043058647,
+          0.7238442367601249,
+          0.6178414918414917
+        ],
+        [
+          0.6989166666666674,
+          0.7670158730158726,
+          0.7018701825557807,
+          0.6092454361054778
+        ],
+        [
+          0.8002446043165463,
+          0.8064364723467858,
+          0.7043554661301135,
+          0.4917049714751425
+        ],
+        [
+          0.872080586080586,
+          0.8148272506082723,
+          0.7134311717861205,
+          0.4680457280385078
+        ],
+        [
+          0.9333913043478261,
+          0.8914468085106381,
+          0.6667272727272726,
+          0.419529411764706
+        ]
+      ],
+      [
+        [
+          0.37654054054054054,
+          0.6188148148148148,
+          0.6553043478260869,
+          0.5940487804878049
+        ],
+        [
+          0.4354139194139193,
+          0.612608923884514,
+          0.6706139657444001,
+          0.6644869169510805
+        ],
+        [
+          0.5406712018140595,
+          0.6689354593773724,
+          0.6767426160337553,
+          0.6131212121212121
+        ],
+        [
+          0.6708243992606291,
+          0.698736842105263,
+          0.6693846153846147,
+          0.5250631808278873
+        ],
+        [
+          0.7708499210110582,
+          0.7134818252126834,
+          0.6305201465201468,
+          0.43253499653499644
+        ],
+        [
+          0.8381505376344086,
+          0.7746666666666663,
+          0.6156129032258065,
+          0.397124497991968
+        ],
+        [
+          0.8765263157894737,
+          0.7728888888888887,
+          0.6541265822784809,
+          0.4487777777777776
+        ]
+      ],
+      [
+        [
+          0.4962150537634405,
+          0.6561108179419527,
+          0.7080217391304344,
+          0.7316992084432714
+        ],
+        [
+          0.505460247994165,
+          0.6549876543209873,
+          0.7347407407407406,
+          0.7339872712808276
+        ],
+        [
+          0.5166270627062707,
+          0.6610404984423678,
+          0.7284715447154471,
+          0.7120215053763441
+        ],
+        [
+          0.7080512820512819,
+          0.6991948051948051,
+          0.7257948717948715,
+          0.7048764044943818
+        ],
+        [
+          0.8847878787878783,
+          0.8063232323232323,
+          0.6259540229885059,
+          0.4654871794871797
+        ],
+        [
+          0.9137056277056276,
+          0.8223453237410076,
+          0.6643875968992247,
+          0.41161403508771893
+        ],
+        [
+          0.9079525065963062,
+          0.8373078880407128,
+          0.7060300751879695,
+          0.40124861878453044
+        ]
+      ],
+      [
+        [
+          0.4395805626598467,
+          0.618207650273224,
+          0.6650416666666673,
+          0.6642288828337872
+        ],
+        [
+          0.4427912772585671,
+          0.5943117505995201,
+          0.6848333333333331,
+          0.6854534257120856
+        ],
+        [
+          0.47413163481953297,
+          0.6756666666666669,
+          0.6842836879432626,
+          0.7196781609195402
+        ],
+        [
+          0.5145542168674697,
+          0.6683243243243243,
+          0.6592631578947368,
+          0.5871688311688315
+        ],
+        [
+          0.8488709055876689,
+          0.7716190476190473,
+          0.6459047619047612,
+          0.415047619047619
+        ],
+        [
+          0.8441424936386771,
+          0.7598069381598794,
+          0.6029438943894389,
+          0.3809006622516556
+        ],
+        [
+          0.8418312020460363,
+          0.7959170984455958,
+          0.6252499999999998,
+          0.39702301790281325
+        ]
+      ],
+      [
+        [
+          0.7291578947368419,
+          0.8334999999999998,
+          0.7226178861788618,
+          0.5325000000000001
+        ],
+        [
+          0.6920899653979238,
+          0.7608205128205129,
+          0.7148465608465605,
+          0.5807073791348597
+        ],
+        [
+          0.6979141914191409,
+          0.7563655913978496,
+          0.6676349924585219,
+          0.5773333333333333
+        ],
+        [
+          0.6797741046831954,
+          0.7508092328581129,
+          0.7225674353598885,
+          0.6000682414698169
+        ],
+        [
+          0.6960305810397553,
+          0.7342943340691686,
+          0.6980538400633408,
+          0.596638297872341
+        ],
+        [
+          0.6686517967781911,
+          0.7630547263681587,
+          0.6801375661375664,
+          0.5822298850574713
+        ],
+        [
+          0.7524912280701753,
+          0.7557054263565891,
+          0.6967983539094649,
+          0.6077543859649124
+        ]
+      ],
+      [
+        [
+          0.6419259259259258,
+          0.7076781609195403,
+          0.6622078853046591,
+          0.5461754385964912
+        ],
+        [
+          0.6538300653594773,
+          0.6825858585858587,
+          0.6527793427230039,
+          0.49737115839243534
+        ],
+        [
+          0.6077744610281925,
+          0.6714617737003056,
+          0.6153707165109045,
+          0.48205177993527504
+        ],
+        [
+          0.6504802867383515,
+          0.691264957264957,
+          0.6405157750342934,
+          0.524242894056848
+        ],
+        [
+          0.6606621108580107,
+          0.669028735632184,
+          0.6496795747911918,
+          0.524940809968848
+        ],
+        [
+          0.6397232704402512,
+          0.6452857142857138,
+          0.6599055118110234,
+          0.5380098039215687
+        ],
+        [
+          0.6032592592592592,
+          0.6988917748917747,
+          0.6236825396825396,
+          0.5283809523809524
+        ]
+      ],
+      [
+        [
+          0.7249898989898997,
+          0.7591063829787236,
+          0.7334074074074071,
+          0.5676014897579145
+        ],
+        [
+          0.6854122196442387,
+          0.7467564102564105,
+          0.6910370370370369,
+          0.573702265372168
+        ],
+        [
+          0.730771241830065,
+          0.7446249999999996,
+          0.6925847299813777,
+          0.579261261261261
+        ],
+        [
+          0.6917777777777777,
+          0.7362471910112358,
+          0.6844166666666668,
+          0.5523453815261044
+        ],
+        [
+          0.6792228360957646,
+          0.7165311942959005,
+          0.702233151183971,
+          0.6131910112359549
+        ],
+        [
+          0.6982112211221123,
+          0.7593822629969418,
+          0.7213821138211384,
+          0.6048390501319262
+        ],
+        [
+          0.701839860748477,
+          0.7481139734582359,
+          0.6923246073298425,
+          0.5373655640373203
+        ]
+      ],
+      [
+        [
+          0.6856296296296296,
+          0.7045614035087718,
+          0.6603809523809523,
+          0.5159639639639638
+        ],
+        [
+          0.6419623259623255,
+          0.6893887605850652,
+          0.668622425629291,
+          0.5356455696202529
+        ],
+        [
+          0.6275087719298249,
+          0.6914006116207951,
+          0.6338349834983503,
+          0.5784521072796934
+        ],
+        [
+          0.6439432624113476,
+          0.6938442367601242,
+          0.6219423868312758,
+          0.5371594202898549
+        ],
+        [
+          0.6331821305841926,
+          0.6669885057471262,
+          0.6716923076923077,
+          0.4930723104056435
+        ],
+        [
+          0.6475927750410512,
+          0.6963181049069372,
+          0.6517000000000001,
+          0.5420350877192979
+        ],
+        [
+          0.6367949412827457,
+          0.7147692307692307,
+          0.648956369982548,
+          0.5261602564102567
+        ]
+      ]
+    ],
+    "n_full": [
+      [
+        [
+          86,
+          81,
+          90,
+          57
+        ],
+        [
+          242,
+          291,
+          266,
+          241
+        ],
+        [
+          419,
+          449,
+          428,
+          429
+        ],
+        [
+          480,
+          441,
+          493,
+          493
+        ],
+        [
+          417,
+          446,
+          497,
+          409
+        ],
+        [
+          273,
+          274,
+          293,
+          277
+        ],
+        [
+          92,
+          94,
+          66,
+          68
+        ]
+      ],
+      [
+        [
+          74,
+          81,
+          92,
+          82
+        ],
+        [
+          273,
+          254,
+          253,
+          293
+        ],
+        [
+          441,
+          439,
+          395,
+          440
+        ],
+        [
+          541,
+          475,
+          468,
+          459
+        ],
+        [
+          422,
+          431,
+          455,
+          481
+        ],
+        [
+          248,
+          250,
+          279,
+          249
+        ],
+        [
+          76,
+          90,
+          79,
+          72
+        ]
+      ],
+      [
+        [
+          372,
+          379,
+          368,
+          379
+        ],
+        [
+          457,
+          405,
+          378,
+          419
+        ],
+        [
+          202,
+          214,
+          205,
+          186
+        ],
+        [
+          78,
+          77,
+          78,
+          89
+        ],
+        [
+          165,
+          198,
+          203,
+          195
+        ],
+        [
+          385,
+          417,
+          430,
+          380
+        ],
+        [
+          379,
+          393,
+          399,
+          362
+        ]
+      ],
+      [
+        [
+          391,
+          366,
+          384,
+          367
+        ],
+        [
+          428,
+          417,
+          400,
+          433
+        ],
+        [
+          157,
+          200,
+          188,
+          174
+        ],
+        [
+          83,
+          74,
+          76,
+          77
+        ],
+        [
+          173,
+          175,
+          210,
+          175
+        ],
+        [
+          393,
+          442,
+          404,
+          453
+        ],
+        [
+          391,
+          386,
+          384,
+          391
+        ]
+      ],
+      [
+        [
+          76,
+          80,
+          82,
+          80
+        ],
+        [
+          289,
+          260,
+          252,
+          262
+        ],
+        [
+          404,
+          434,
+          442,
+          440
+        ],
+        [
+          484,
+          491,
+          477,
+          508
+        ],
+        [
+          436,
+          453,
+          421,
+          423
+        ],
+        [
+          269,
+          268,
+          252,
+          290
+        ],
+        [
+          76,
+          86,
+          81,
+          76
+        ]
+      ],
+      [
+        [
+          72,
+          58,
+          93,
+          95
+        ],
+        [
+          255,
+          264,
+          284,
+          282
+        ],
+        [
+          402,
+          436,
+          428,
+          412
+        ],
+        [
+          465,
+          468,
+          486,
+          516
+        ],
+        [
+          439,
+          464,
+          439,
+          428
+        ],
+        [
+          265,
+          280,
+          254,
+          272
+        ],
+        [
+          90,
+          77,
+          84,
+          84
+        ]
+      ],
+      [
+        [
+          396,
+          376,
+          360,
+          358
+        ],
+        [
+          431,
+          416,
+          414,
+          412
+        ],
+        [
+          204,
+          192,
+          179,
+          185
+        ],
+        [
+          90,
+          89,
+          64,
+          83
+        ],
+        [
+          181,
+          187,
+          183,
+          178
+        ],
+        [
+          404,
+          436,
+          410,
+          379
+        ],
+        [
+          383,
+          427,
+          382,
+          393
+        ]
+      ],
+      [
+        [
+          360,
+          380,
+          350,
+          370
+        ],
+        [
+          407,
+          433,
+          437,
+          395
+        ],
+        [
+          190,
+          218,
+          202,
+          174
+        ],
+        [
+          94,
+          107,
+          81,
+          92
+        ],
+        [
+          194,
+          174,
+          208,
+          189
+        ],
+        [
+          406,
+          394,
+          400,
+          380
+        ],
+        [
+          369,
+          390,
+          382,
+          416
+        ]
+      ]
+    ],
+    "q_blind": [
+      [
+        0.7075032354405181,
+        0.7562479126525382,
+        0.7094524144397548,
+        0.5710118203309693
+      ],
+      [
+        0.6495710843373499,
+        0.6940726072607257,
+        0.6535662213425698,
+        0.5267000642260757
+      ],
+      [
+        0.6953163231926713,
+        0.7397353176508232,
+        0.6980562833575945,
+        0.5833134328358207
+      ],
+      [
+        0.6380436507936499,
+        0.6974627831715203,
+        0.6487702834799605,
+        0.5369210950080516
+      ],
+      [
+        0.6917030481809241,
+        0.7545984555984561,
+        0.6979926922438141,
+        0.5873115279781956
+      ],
+      [
+        0.6406411804158284,
+        0.6753499430060259,
+        0.6416144422952925,
+        0.5153936492739738
+      ],
+      [
+        0.7025693314185425,
+        0.7485140524415144,
+        0.7061419009370822,
+        0.5745177733065052
+      ],
+      [
+        0.6478217821782181,
+        0.696741730279898,
+        0.655352750809062,
+        0.5310529100529098
+      ]
+    ],
+    "n_blind": [
+      [
+        2009,
+        2076,
+        2133,
+        1974
+      ],
+      [
+        2075,
+        2020,
+        2021,
+        2076
+      ],
+      [
+        2038,
+        2083,
+        2061,
+        2010
+      ],
+      [
+        2016,
+        2060,
+        2046,
+        2070
+      ],
+      [
+        2034,
+        2072,
+        2007,
+        2079
+      ],
+      [
+        1988,
+        2047,
+        2068,
+        2089
+      ],
+      [
+        2089,
+        2123,
+        1992,
+        1988
+      ],
+      [
+        2020,
+        2096,
+        2060,
+        2016
+      ]
+    ],
+    "histogram": [
+      [
+        314,
+        1040,
+        1725,
+        1907,
+        1769,
+        1117,
+        320
+      ],
+      [
+        329,
+        1073,
+        1715,
+        1943,
+        1789,
+        1026,
+        317
+      ],
+      [
+        1498,
+        1659,
+        807,
+        322,
+        761,
+        1612,
+        1533
+      ],
+      [
+        1508,
+        1678,
+        719,
+        310,
+        733,
+        1692,
+        1552
+      ],
+      [
+        318,
+        1063,
+        1720,
+        1960,
+        1733,
+        1079,
+        319
+      ],
+      [
+        318,
+        1085,
+        1678,
+        1935,
+        1770,
+        1071,
+        335
+      ],
+      [
+        1490,
+        1673,
+        760,
+        326,
+        729,
+        1629,
+        1585
+      ],
+      [
+        1460,
+        1672,
+        784,
+        374,
+        765,
+        1580,
+        1557
+      ]
+    ]
+  },
+  "wall_seconds": 4.61908938997658
+}
