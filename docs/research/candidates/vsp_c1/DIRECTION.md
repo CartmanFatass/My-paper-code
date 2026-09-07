@@ -176,3 +176,33 @@ or loss against the card's absolute MEI 0.025, with initial values and fixed ful
 retained. A useful local gain may justify explicitly selecting one or two independent seeds;
 null/adverse or mixed outcomes retain their narrower meaning and authorize no automatic
 extension or search for a host with a positive sign. Portfolio decisions remain Root's.
+
+## Reactive-queue B01: small opposite endpoint and curve signs — 2026-09-06
+
+The selected pair completed at seed 401 with 256 real updates per arm
+([E0 result](VSPC1_K4_REACTIVE_QUEUES_B01_RESULT_EVIDENCE_20260906.md),
+[intake](VSPC1_K4_REACTIVE_QUEUES_B01_INTAKE_20260906.md)). FACTOR endpoint 0.724894206 versus
+GENERIC 0.725219727 gives −0.000325521: d2 is equal, d6 loses 0.000651042. The retained full
+AUC instead favors FACTOR by +0.000254313, including transient d2 leads. Both effects are
+small relative to the card's 0.025 MEI. The prediction of an inside-MEI outcome with no clear
+two-period gain matches this instance; it is not evidence of forecast calibration.
+
+Both initial means were 0.725219727; GENERIC ends there and FACTOR slightly below. A labelled
+outcome-informed calculation over existing endpoint job sums gives a loose supply upper only
+0.013997396 above this observed GENERIC on those same evaluation tapes. That upper includes
+unservable final arrivals, so it leaves less than MEI of possible endpoint gain on this fixed
+comparison. This is a diagnostic against an untuned observed baseline, not an attainable
+optimum or population/tuned-headroom record. Old A01's missing headroom remains untouched.
+
+The strongest surviving support is a real state-changing held-action path and the small positive
+full-curve signal. The strongest contradiction to practical value on this task is the absence
+of endpoint improvement, actual long-period loss and limited room above already-high initial
+service. Initialization, optimization and the fixed partner's ability to service available
+work remain alternatives; no negative-transfer or sharing-failure cause is established.
+One paired instance supports no stable superiority, equivalence or transfer claim.
+
+DM applies the frozen inside-MEI rule: no extra run, longer budget, checkpoint substitution or
+new host is selected. The reactive family and K4 remain open; no direction or Portfolio
+disposition changes. A next discriminator must answer a separately justified duration-value
+question with native action consequences and a useful performance margin; another endpoint
+precision run has no selected use here. This imposes no exact-reference or search prerequisite.
