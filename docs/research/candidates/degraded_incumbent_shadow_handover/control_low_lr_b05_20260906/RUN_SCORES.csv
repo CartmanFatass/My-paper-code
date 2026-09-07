@@ -1,0 +1,5 @@
+task,seed,arm,score
+A03_four_condition_final16,89,CONTROL,154.0
+A03_four_condition_final16,89,LOW_LR,336.75
+A03_four_condition_final16,101,CONTROL,280.75
+A03_four_condition_final16,101,LOW_LR,517.0

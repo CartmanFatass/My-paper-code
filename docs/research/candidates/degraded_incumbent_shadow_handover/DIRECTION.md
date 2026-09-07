@@ -781,3 +781,36 @@ stable superiority, safety, general learning or RETAIN/COPY/SHADOW value.
 References: complete `pro_packets/20260906_post_b04_convergence/archive/RESPONSE.md` §§一–五
 (immutable delivery `a9718a45e`); `DISH_POST_B04_CONVERGENCE_INTAKE_20260906.md` §2;
 `DISH_CONTROL_LOW_LR_B05_SCIENCE_CARD_20260906.md` §§1–6. No seed-101 outcome is asserted here.
+
+## B05 result: another useful mean LR increment, with native costs and no source estimate — 2026-09-06
+
+The seed101 independent CONTROL/LOW_LR pair completed at `1d87e0219`: reference/CONTROL/LOW_LR
+means 297.25/280.75/517.0, `Delta_101=+236.25`, before/after -16.5/+219.75. Paired rows are
++413/-277/+542/+267; all twelve reference/final rows ran their complete 1200 ticks, with no
+early termination. LOW_LR therefore has a second useful mean comparison, and in this instance
+improves its own initialization rather than merely losing less. Seed89 remains +182.75 with
+LOW_LR -57 versus its own reference; the two-seed +209.5 mean is descriptive, not stability.
+Two paired training instances are not eight independent condition samples.
+
+The new gain does not require an early CONTROL termination, without explaining the old +668
+row. Its strongest contradiction is TARGET/K4_TO_K12 (-277 against CONTROL, -116 against
+reference) and LOW_LR's 108/0/101/0 invalid commits versus CONTROL's four zeros. LOW_LR energy
+is lower than CONTROL in all four equal-duration rows; the other six hard-event classes are
+zero. This supports bounded development interest, not dominance, harmlessness or safety.
+The DM's near-band magnitude and repeated large CONTROL-loss predictions missed; only the
+positive sign/mixed-row component held.
+
+All sixteen LR read-backs, real learner counts and finite records are complete; parameter
+displacement is 8.425/1.956 from common norm38.262. Ordinary training transfers are 3/0,
+while all twelve evaluation rows have zero transfers. The complete service comparison is
+incumbent-only; no matched RETAIN/COPY/SHADOW source effect has been estimated. Smaller LR,
+its coupled AdamW decay, normalization, parameters, recurrence, auxiliaries and data changes
+remain jointly unlocalized. The forecast-package branch stays ended and no earlier evidence
+is reinterpreted as a source result.
+
+Accepted B/EXPLORE intake applies card rows1,3-positive,5-termination and6. Full machine wall
+432.82s, charged215.30/217.52s including all shared work and the retained initial focused setup
+failure; no scope or runtime cap breach. The next discriminator is returned to Convergence
+as a choice among a specific further bounded question and a narrow stop; no automatic third
+seed or new family follows. References: `DISH_CONTROL_LOW_LR_B05_RESULT_INTAKE_20260906.md`,
+`control_low_lr_b05_20260906/TECHNICAL_ACCEPTANCE.json`, `RUN_SUMMARY.json`, and the frozen card.
