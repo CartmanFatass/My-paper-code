@@ -89,6 +89,16 @@ It reads returned evidence and tells Root the current runnable candidate order. 
 result, changed dependency, resource contention, owner instruction or exhausted candidate
 queue triggers a Portfolio update; ordinary object progression does not wait for one.
 
+Apply `docs/project/ROOT_OPERATIONS.md`, "Continuing work across Root and Portfolio
+boundaries". On a Root evidence delta, refresh stale current rows from the named intake
+and return an actionable ordering: what can proceed now, its source and responsible DM,
+and the concrete release condition for blocked alternatives. Send that update to Root
+after committing/pushing; a file-only update does not wake execution. If Root's facts are
+incomplete, ask for only the missing delta while returning the usable part of the order.
+Existing object selections continue without waiting for this refresh. Separate a task's
+completed documentation boundary from a scientific stop; neither an ACTIVE label nor an
+empty experiment list establishes that five direction chains are advancing.
+
 - Give Root an ordered list of runnable `ACTIVE` candidates. Root refills an open slot at a clean boundary from that order without another Portfolio consultation.
   Compare decision relevance, the smallest sufficient evidence class, honest claim ceiling,
   expected information gain, cost/reversibility, current dependency state, and contrary evidence.
