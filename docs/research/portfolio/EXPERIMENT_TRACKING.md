@@ -6,7 +6,7 @@ OWNER_DIRECT merger: existing Luna/xhigh Root directly observes experiments and 
 requests. Standalone Monitor and Transport have relinquished their current work. See
 `.codex/hmasd-monitor.toml`, `.codex/hmasd-transport.toml` and `docs/project/ROOT_OPERATIONS.md`.
 Current assigned live/unknown experiment handles: none; the repaired VSPC1 service-allocation
-pair is terminal and remains in CM collection. DISH
+pair is terminal and fully intaken at main `f22482b03`. DISH
 `dish_b06_seed113_20260907_run01` on `wsl_4070` (source `373d18720`) exited 0 at
 `2026-09-07T12:58:50Z`; its complete technical evidence is integrated at main `33db0d860`
 and the handle is terminal. UCOPE seeds6301/6302 are terminal and
@@ -14,9 +14,9 @@ handed directly to CM collection. `vspc1-reactive-b01-factor-run02` and
 `vspc1-reactive-b01-generic-run02` are terminal, technically accepted and fully intaken by the
 DM. The single Root heartbeat also covers the
 explicit pending Pro rows below; experiment completion alone does not pause it.
-The shared Root heartbeat is ACTIVE while this terminal pair is reconciled and its collection
-route is open. Historical handles and old routing sections below are retained evidence, not
-current assignments.
+The shared Root heartbeat remains ACTIVE only while this return is delivered to Portfolio;
+no accepted experiment handle remains live. Historical handles and old routing sections below
+are retained evidence, not current assignments.
 
 VSPC1 service-allocation B01 seed402 was adopted on `wsl_4070` from source
 `faf786e135b3f55e535c898e17e646dcc341bdec` and cwd
@@ -30,8 +30,8 @@ it passed fresh physical/effective admission (`15667646464` bytes) and terminate
 `2026-09-07T14:51:43Z` after 4.84 s, before rule evaluation, with
 `ValueError('Comparison requires FACTOR/GENERIC with the same fixed budget and seed')` during
 the learner-only comparison publication. No retry or third call is authorized by this return;
-CM is retaining the narrower learner evidence and diagnosing the comparison boundary, while DM
-owns scientific intake. No complete paired result or scientific polarity follows yet.
+CM retained the narrower learner evidence and diagnosed the comparison boundary, and DM scientific
+intake is integrated at `f22482b03`. No complete paired result or scientific polarity follows.
 
 VSPC1 K4 reactive-queues B01 source, technical acceptance and source-intake records are
 integrated at main `476748835`; the selected seed401 FACTOR and GENERIC arms have each completed
