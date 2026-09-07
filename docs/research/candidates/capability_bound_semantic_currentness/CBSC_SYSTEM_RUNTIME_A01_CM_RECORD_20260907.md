@@ -1,5 +1,11 @@
 # CBSC-SYSTEM-RUNTIME-A01 CM command and result record
 
+**Delivered outcome: PATH_INCOMPLETE.** The one preparation invocation timed out
+before any recorded admission, candidate creation, installation or import. The
+candidate and result root are absent. Complete measured wall626.74s exceeded the
+selected600s allocation; no budget-conformance claim is made. No restart occurred.
+
+
 ## Selected work and source
 
 Contract: [A01 card](CBSC_SYSTEM_RUNTIME_A01_SCIENCE_CARD_20260907.md), Question,
@@ -117,3 +123,66 @@ were sent directly to native Root for adoption under the current shared route.
 CM retains observation until ACK. Exact acceptance and command are retained locally
 under `temp/directions/capability_bound_semantic_currentness/exp/system_runtime_a01_control_20260907/`.
 No restart or other candidate is selected.
+
+## Terminal evidence and technical acceptance
+
+Exact accepted source remains `ee8b4b36834f9d15793976b2af0aa23f923e1579`.
+Handle `cbsc-system-runtime-a01-20260907`, PID2738317, terminal status failed,
+exit124, tmux inactive. Supervisor records start2026-09-07T12:59:16Z and
+end2026-09-07T13:09:43Z, duration627s. The complete outer GNU-time file reports:
+
+```
+Command exited with non-zero status 124
+process_wall_seconds=626.74 peak_rss_kib=2880
+```
+
+The committed command specified timeout598s plus2s kill grace, but its actual
+complete wall is626.74s,26.74s over the selected600s cap. The reason for that timing
+difference is not established. No extra diagnostic, clock adjustment, restart,
+version substitution or replacement candidate was performed. Nominal timeout
+arguments do not prove actual runtime cap conformance.
+
+The full task log contains only supervisor start and timeout termination. At162s,
+a scoped process-ownership observation showed the existing invocation chain:
+PID2738317 bash ->2738320 time ->2738332 timeout ->2738333 zsh, with no child of
+that zsh observed. This established the outer cap process was active while the
+command was in login-shell startup at that observation. It does not identify the
+underlying startup stall or timing cause. No strace/stress/tensor/host probe ran.
+
+Terminal filesystem collection found:
+
+- `/home/wu/.venvs/hmasd-cbsc-system312-20260907` absent;
+- the frozen `.../exp/system_runtime_a01_20260907` output root absent;
+- no admission receipt, install.log, import.log or summary.json.
+
+Therefore actual candidate interpreter/build/package origins and versions remain
+unmeasured in A01, and binary availability on system CPython3.12 was not tested.
+The known inventory and frozen pins are inputs, not successful readiness output.
+No candidate exists to use as a lexical invocation path yet. There is no partial
+environment to delete or repair; the exact command and supervisor evidence remain.
+No successful admission is claimed, and no installation/import result is inferred
+from process startup. Host/model/optimizer/training/policy-evaluation work is zero.
+This is a command-startup/complete-cap gap, not a B04 retry result or scientific
+polarity, and does not explain B04's unknown-opcode failure.
+
+Root returned adoption ACK with the existing shared heartbeat ACTIVE and accepted
+the handle/source/cwd/bound. CM released routine observation, then made one terminal
+collection after the bound. Root and DM were notified of exit124, missing candidate,
+and actual over-cap wall. Root owns closing the tracking row; CM collection is done.
+Next owner is DM `/root/dm_amx_cbsc_next` for intake and any separately selected
+response to the concrete startup/cap gap. This record grants no automatic restart.
+
+## Preserved command and terminal artifacts
+
+Remote evidence remains in
+`/home/wu/.agent-tasks/cbsc-system-runtime-a01-20260907/` (task.log, status,
+exit_code, start_time, pid, runner.sh and process-time.txt). Local collection:
+
+- [Exact source-bound command](C:/Projects/HMASD-worktrees/cm-cbsc-runtime-a01-20260907/temp/directions/capability_bound_semantic_currentness/exp/system_runtime_a01_control_20260907/command.json)
+- [SSH acceptance](C:/Projects/HMASD-worktrees/cm-cbsc-runtime-a01-20260907/temp/directions/capability_bound_semantic_currentness/exp/system_runtime_a01_control_20260907/acceptance.txt)
+- [Supervisor terminal status](C:/Projects/HMASD-worktrees/cm-cbsc-runtime-a01-20260907/temp/directions/capability_bound_semantic_currentness/exp/system_runtime_a01_control_20260907/status.txt)
+- [Full task log](C:/Projects/HMASD-worktrees/cm-cbsc-runtime-a01-20260907/temp/directions/capability_bound_semantic_currentness/exp/system_runtime_a01_control_20260907/logs.txt)
+- [Complete process time](C:/Projects/HMASD-worktrees/cm-cbsc-runtime-a01-20260907/temp/directions/capability_bound_semantic_currentness/exp/system_runtime_a01_control_20260907/process-time.txt)
+- [Terminal filesystem state](C:/Projects/HMASD-worktrees/cm-cbsc-runtime-a01-20260907/temp/directions/capability_bound_semantic_currentness/exp/system_runtime_a01_control_20260907/terminal-state.txt)
+
+Only this assigned record changed in Git; all B04 artifacts and shared source/environment paths were preserved.
