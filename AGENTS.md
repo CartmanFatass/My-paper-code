@@ -332,8 +332,10 @@ Several sessions commit to the primary target concurrently. Rules for all of the
   Accepted Pro requests retain their bound delivery branches through response archiving and
   intake. Dedicated Pro delivery remains an explicit transport exception, not an engineering
   task pattern. Retire completed task branches after reconciling unique commits, live writers,
-  open PRs and evidence links; preserve recovery refs before removing branch names. Branch
-  cleanup does not remove worktree contents or evidence.
+  open PRs and evidence links; preserve recovery refs before removing branch names. Existing
+  same-direction authoring checkouts finish accepted work, then Root carries forward one at a
+  clean boundary and retires the others after reconciliation. Branch cleanup does not remove
+  worktree contents or evidence.
 - Stage by explicit path and commit by pathspec (`git add -- <paths>`; `git commit -- <paths>`).
   `git add -A`, `git stash`, `git reset`, and any history rewrite are forbidden in agent
   instructions unless the owner asks for them by name.
