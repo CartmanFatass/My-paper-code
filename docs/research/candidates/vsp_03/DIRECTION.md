@@ -27,7 +27,9 @@ full-budget initialization comparison and selected no successor at that boundary
 The complete 2026-09-07 Convergence decision now selects one outcome-informed B02 recast:
 fixed N=2 controllers whose submissions compete for the same eight-tick service slot.
 It asks whether the final learned scheduler beats fixed rules, and whether initialization adds
-anything beyond ordinary same-information learning. B02 has no empirical result yet.
+anything beyond ordinary same-information learning. The complete B02 seed-4 result
+now shows a small primary gain over R, no sampled greedy T gain beyond its initial
+rule R0, and adverse stochastic execution for both learners.
 
 ## Current position
 
@@ -69,9 +71,10 @@ class, with final update-128 greedy team-return T−R as primary. R is the fixed
 rule; added R0 is T's initial greedy readiness rule without partner yielding. Report T−R0, T−G
 and G−R alongside the primary, retaining stochastic evaluation separately. R0 distinguishes
 learning beyond the initial script from R's possible weakness; it is no oracle or tuned baseline.
-The complete logical invocation has one 120-second cap. P09 freezes the selected B02 card with
-prospective RNG streams and predictions; the selected native comparison remains unmeasured.
-The selection/card is not a new empirical result.
+The complete logical invocation has one 120-second cap. P09 froze the selected B02 card with
+prospective RNG streams and predictions; the P10 shell-delivery repair subsequently completed
+that unchanged comparison in 5.05 seconds. The earlier pre-learner argument failure supplies
+no scientific polarity and remains separate from the valid result.
 
 The supporting task fact is that one controller's t=26 submission removes its pending partner's
 t=28 and t=32 opportunities. This follows from the selected shared-slot law, not an observed
@@ -79,15 +82,33 @@ advantage of waiting. Both targets advance forty transitions, and each action's 
 includes the actual remaining team consequences through t=40. The task is fixed-population and
 fully public; this comparison alone cannot identify a multi-agent-specific causal benefit.
 Tuned N2 headroom is absent. MEI is 0.02 team-return units, an interpretation scale rather than a
-validity threshold. The next discriminator is the selected learned-versus-rule comparison:
-does T beat both R and R0, and does G explain the same improvement? One training pair supports
-only a bounded local observation; either sign may motivate a specifically justified later B.
+validity threshold. On the one complete training pair, final greedy T−R is +0.001083984375,
+T−R0 is zero on all 1024 saved worlds, and T−G is −0.003994140625. G exceeds R and R0
+by +0.005078125 and +0.003994140625; all these greedy margins are inside MEI. This follows
+the selected rule's T>R but T≤R0 branch: initial readiness already explains T's sampled
+greedy result, while G supplies a small local ordinary-learning gain. Nonzero parameter
+displacements establish learner exposure, not an additional return gain.
+
+Both stochastic learners are below R and R0. Stochastic G loses 0.0656298828125 against
+its own greedy execution despite less waiting: it has fewer successes and more failed
+attempts. The saved native accounting supports that tradeoff, without a unique causal
+diagnosis or treating blocked opportunities as counterfactual errors. Conditional paired-world
+SD/SE describes these fixed policies; one training pair cannot estimate training-population
+uncertainty. The low-confidence prediction abs(T−G)<=0.02 matched.
+
+The P10 intake selects no additional invocation. If learning variability is later the named
+question, the next discriminator is one new independent same-budget T/G training pair with
+R/R0 and both existing evaluation modes. It is not allocated or required to accept the present
+observation. No family pause/closure, second recast, C promotion or UAV claim follows locally.
 
 The strongest surviving alternative is that public dwell age already suffices and the generic
 MLP matches the prior, or that all advantage is the fixed rule rather than learning. In the new
 host R0, R or ordinary G may handle scheduling, while the local readiness prior could occupy the
-slot too early and harm its partner. The three N1 final T=G=F observations remain the strongest
-empirical contradiction. Waiting price,
+slot too early and harm its partner. The strongest current support is the shared-slot action
+consequence and G's small greedy gain over both fixed rules. The strongest current contradiction
+to a useful initialization/learned-T gain is T matching R0 across every saved B02 world;
+the stochastic losses and three N1 final T=G=F observations remain contrary evidence with
+their distinct populations and budgets. Waiting price,
 event frequency, deadline behavior and different actual decision-row exposure remain visible.
 FSD's complete fixed-K2 family PARK and all its positive/negative evidence remain unchanged;
 sharing K1 does not pool polarity or reopen that family.
@@ -114,6 +135,8 @@ The evidence set includes historical observations and the separately labelled pr
 - [Selected B02 counts, no execution](VSP03_B02_SELECTED_COUNTS_20260907.json)
 - [Frozen B02 card and predictions](VSP03_B02_SCIENCE_CARD_20260907.md)
 - [Frozen B02 counts/cost](VSP03_B02_COUNTS_20260907.json)
+- [Complete B02 P10 result evidence](VSP03_B02_P10_RESULT_EVIDENCE_20260907.md)
+- [B02 P10 scientific intake and bounded reading](VSP03_B02_P10_INTAKE_20260907.md)
 
 ## Provenance boundary
 

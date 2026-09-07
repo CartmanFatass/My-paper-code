@@ -1,0 +1,265 @@
+{
+  "source": "C:\\Projects\\HMASD\\temp\\directions\\vsp_03\\exp\\b02_seed4_p10_lf_20260907",
+  "launch_sha": "00ebefa5823dbb41e64aed11b90ba26a8ff97020",
+  "independent_training_unit": "one prospectively paired seed-4 T/G training instance",
+  "independent_training_pairs": 1,
+  "conditional_uncertainty": "paired-world SD/SE conditional on these final policies; no training-population uncertainty",
+  "absolute_returns": {
+    "T_greedy": {
+      "n_worlds": 1024,
+      "mean": 0.35067382812500003,
+      "conditional_sample_sd": 0.36393013984120964,
+      "conditional_se": 0.011372816870037801
+    },
+    "G_greedy": {
+      "n_worlds": 1024,
+      "mean": 0.35466796875000006,
+      "conditional_sample_sd": 0.3604896299797641,
+      "conditional_se": 0.011265300936867628
+    },
+    "R": {
+      "n_worlds": 1024,
+      "mean": 0.34958984375,
+      "conditional_sample_sd": 0.3639360391615017,
+      "conditional_se": 0.011373001223796928
+    },
+    "R0": {
+      "n_worlds": 1024,
+      "mean": 0.35067382812500003,
+      "conditional_sample_sd": 0.36393013984120964,
+      "conditional_se": 0.011372816870037801
+    },
+    "T_stochastic": {
+      "n_worlds": 1024,
+      "mean": 0.3388134765625,
+      "conditional_sample_sd": 0.3683056544591357,
+      "conditional_se": 0.011509551701847991
+    },
+    "G_stochastic": {
+      "n_worlds": 1024,
+      "mean": 0.2890380859375,
+      "conditional_sample_sd": 0.34422072233367695,
+      "conditional_se": 0.010756897572927405
+    }
+  },
+  "contrasts": {
+    "T_greedy-R": {
+      "n_worlds": 1024,
+      "mean": 0.0010839843749999999,
+      "conditional_sample_sd": 0.022572718967533434,
+      "conditional_se": 0.0007053974677354198,
+      "positive_worlds": 9,
+      "zero_worlds": 1015,
+      "negative_worlds": 0
+    },
+    "T_greedy-G_greedy": {
+      "n_worlds": 1024,
+      "mean": -0.003994140625000004,
+      "conditional_sample_sd": 0.13732115878442092,
+      "conditional_se": 0.004291286212013154,
+      "positive_worlds": 49,
+      "zero_worlds": 597,
+      "negative_worlds": 378
+    },
+    "G_greedy-R": {
+      "n_worlds": 1024,
+      "mean": 0.0050781250000000045,
+      "conditional_sample_sd": 0.1391688909393137,
+      "conditional_se": 0.004349027841853553,
+      "positive_worlds": 384,
+      "zero_worlds": 591,
+      "negative_worlds": 49
+    },
+    "T_greedy-R0": {
+      "n_worlds": 1024,
+      "mean": 0.0,
+      "conditional_sample_sd": 0.0,
+      "conditional_se": 0.0,
+      "positive_worlds": 0,
+      "zero_worlds": 1024,
+      "negative_worlds": 0
+    },
+    "G_greedy-R0": {
+      "n_worlds": 1024,
+      "mean": 0.003994140625000004,
+      "conditional_sample_sd": 0.13732115878442092,
+      "conditional_se": 0.004291286212013154,
+      "positive_worlds": 378,
+      "zero_worlds": 597,
+      "negative_worlds": 49
+    },
+    "T_stochastic-R": {
+      "n_worlds": 1024,
+      "mean": -0.010776367187500002,
+      "conditional_sample_sd": 0.2516362053669968,
+      "conditional_se": 0.00786363141771865,
+      "positive_worlds": 300,
+      "zero_worlds": 473,
+      "negative_worlds": 251
+    },
+    "T_stochastic-R0": {
+      "n_worlds": 1024,
+      "mean": -0.011860351562500001,
+      "conditional_sample_sd": 0.25148431508427144,
+      "conditional_se": 0.007858884846383482,
+      "positive_worlds": 294,
+      "zero_worlds": 478,
+      "negative_worlds": 252
+    },
+    "T_stochastic-T_greedy": {
+      "n_worlds": 1024,
+      "mean": -0.011860351562500001,
+      "conditional_sample_sd": 0.25148431508427144,
+      "conditional_se": 0.007858884846383482,
+      "positive_worlds": 294,
+      "zero_worlds": 478,
+      "negative_worlds": 252
+    },
+    "G_stochastic-R": {
+      "n_worlds": 1024,
+      "mean": -0.060551757812499996,
+      "conditional_sample_sd": 0.35268937878113155,
+      "conditional_se": 0.01102154308691036,
+      "positive_worlds": 598,
+      "zero_worlds": 83,
+      "negative_worlds": 343
+    },
+    "G_stochastic-R0": {
+      "n_worlds": 1024,
+      "mean": -0.06163574218749999,
+      "conditional_sample_sd": 0.3537717937382875,
+      "conditional_se": 0.011055368554321484,
+      "positive_worlds": 597,
+      "zero_worlds": 83,
+      "negative_worlds": 344
+    },
+    "G_stochastic-G_greedy": {
+      "n_worlds": 1024,
+      "mean": -0.06562988281249998,
+      "conditional_sample_sd": 0.358912047710543,
+      "conditional_se": 0.01121600149095447,
+      "positive_worlds": 548,
+      "zero_worlds": 107,
+      "negative_worlds": 369
+    }
+  },
+  "native_means_per_joint_episode": {
+    "T_greedy": {
+      "success": 0.947265625,
+      "attempt": 1.8193359375,
+      "failed_attempt": 0.8720703125,
+      "non_submission": 0.1806640625,
+      "waiting_ticks": 30.990234375,
+      "fixed_clocks": 17.0,
+      "pending_clocks": 8.830078125,
+      "eligible_decisions": 6.8369140625,
+      "blocked_pending": 1.9931640625,
+      "blocked_final_clocks": 0.0107421875
+    },
+    "G_greedy": {
+      "success": 0.94140625,
+      "attempt": 1.9716796875,
+      "failed_attempt": 1.0302734375,
+      "non_submission": 0.0283203125,
+      "waiting_ticks": 26.697265625,
+      "fixed_clocks": 17.0,
+      "pending_clocks": 8.111328125,
+      "eligible_decisions": 6.1123046875,
+      "blocked_pending": 1.9990234375,
+      "blocked_final_clocks": 0.009765625
+    },
+    "R": {
+      "success": 0.9453125,
+      "attempt": 1.818359375,
+      "failed_attempt": 0.873046875,
+      "non_submission": 0.181640625,
+      "waiting_ticks": 31.04296875,
+      "fixed_clocks": 17.0,
+      "pending_clocks": 8.8408203125,
+      "eligible_decisions": 6.84765625,
+      "blocked_pending": 1.9931640625,
+      "blocked_final_clocks": 0.0107421875
+    },
+    "R0": {
+      "success": 0.947265625,
+      "attempt": 1.8193359375,
+      "failed_attempt": 0.8720703125,
+      "non_submission": 0.1806640625,
+      "waiting_ticks": 30.990234375,
+      "fixed_clocks": 17.0,
+      "pending_clocks": 8.830078125,
+      "eligible_decisions": 6.8369140625,
+      "blocked_pending": 1.9931640625,
+      "blocked_final_clocks": 0.0107421875
+    },
+    "T_stochastic": {
+      "success": 0.91796875,
+      "attempt": 1.9267578125,
+      "failed_attempt": 1.0087890625,
+      "non_submission": 0.0732421875,
+      "waiting_ticks": 28.80078125,
+      "fixed_clocks": 17.0,
+      "pending_clocks": 8.5322265625,
+      "eligible_decisions": 6.5390625,
+      "blocked_pending": 1.9931640625,
+      "blocked_final_clocks": 0.0107421875
+    },
+    "G_stochastic": {
+      "success": 0.767578125,
+      "attempt": 1.9892578125,
+      "failed_attempt": 1.2216796875,
+      "non_submission": 0.0107421875,
+      "waiting_ticks": 18.0078125,
+      "fixed_clocks": 17.0,
+      "pending_clocks": 5.9775390625,
+      "eligible_decisions": 3.9775390625,
+      "blocked_pending": 2.0,
+      "blocked_final_clocks": 0.0
+    }
+  },
+  "native_accounting_decomposition_not_causal_attribution": {
+    "T_greedy-R": {
+      "success": 0.001953125,
+      "attempt": 0.0009765625,
+      "failed_attempt": -0.0009765625,
+      "non_submission": -0.0009765625,
+      "waiting_ticks": -0.052734375,
+      "success_return_component": 0.0009765625,
+      "attempt_return_component": -2.44140625e-05,
+      "wait_return_component": 0.0001318359375,
+      "sum_return_components": 0.0010839843749999999
+    },
+    "G_greedy-R0": {
+      "success": -0.005859375,
+      "attempt": 0.15234375,
+      "failed_attempt": 0.158203125,
+      "non_submission": -0.15234375,
+      "waiting_ticks": -4.29296875,
+      "success_return_component": -0.0029296875,
+      "attempt_return_component": -0.00380859375,
+      "wait_return_component": 0.010732421875,
+      "sum_return_components": 0.003994140625
+    },
+    "G_stochastic-G_greedy": {
+      "success": -0.173828125,
+      "attempt": 0.017578125,
+      "failed_attempt": 0.19140625,
+      "non_submission": -0.017578125,
+      "waiting_ticks": -8.689453125,
+      "success_return_component": -0.0869140625,
+      "attempt_return_component": -0.000439453125,
+      "wait_return_component": 0.0217236328125,
+      "sum_return_components": -0.0656298828125
+    }
+  },
+  "T_greedy_R0_all_recorded_world_records_equal": true,
+  "mei_absolute": 0.02,
+  "prediction_abs_T_minus_G_le_0_02": true,
+  "cost_seconds": {
+    "p09_prelearner_failed_outer": 1.59,
+    "p10_complete_outer": 5.05,
+    "known_accepted_attempt_outer_sum": 6.64
+  },
+  "new_model_environment_optimizer_evaluation_calls": 0,
+  "analysis_numpy_version": "1.26.3"
+}
