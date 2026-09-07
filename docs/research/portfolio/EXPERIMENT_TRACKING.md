@@ -88,6 +88,15 @@ HANDOFF bytes/operator IDs; Root's current execution task is
 | `2026-09-06-rcle-post-b02-innovator-02`; `/root/dm_amx_rcle_a02` | `docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260906_post_b02_innovator/HANDOFF.json`; `6a9d9a3a-fd40-83e8-9e80-ad720582aaee` | Archived and intaken after the owner-approved 2026-09-06 reconciliation: delivery `6c0d1ca55` (Issue 8 comment `5564117795`), registry binding `em:roster_consistent_latent_exploration:innovator` now points to this request in `ARCHIVED`. The post-A02 dispatch is retained as stale history; it did not form a decision. No continuing observation, retry or launch remains. |
 | `2026-09-06-dish-post-b05-convergence-01`; `/root/dm_amx_dish_seed101` | `docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260906_post_b05_convergence/HANDOFF.json`; `6a9bec54-df00-83e8-9840-46440458f316` | One provider Send at 2026-09-06 22:26 PDT. Archived delivery commit `db0bbfd8e1d96b06e8c6e8aa9bfa70787fe9a9cd` (response SHA `cb1cf348…`), Issue 4 comment `5565621457`; local archive preserves the earlier no-tools chat claim and the later immutable GitHub readback. Root routed the complete response to the DM; no duplicate Send. |
 
+P07-RCLE-OBSERVE-01 read-only check on 2026-09-07 reopened the exact bound conversation
+`6a9d9a3a-fd40-83e8-9e80-ad720582aaee` for the original request
+`2026-09-06-rcle-post-a02-innovator-01`. The loaded conversation showed the older post-B01 and
+post-B02 user/assistant pairs, but no matching post-A02 user node, provider Send identity or
+post-A02 response. No separate primary Transport registry/archive entry exists for that request
+key. This leaves provider Send state unresolved; no Send, archive, resend or scientific decision
+was made. Temporary observation tab was closed after the read-only check. Evidence and the
+missing-decision boundary remain in `RECONCILIATION_20260907.md` and `audit/2026-09-07.md`.
+
 ## Historical record
 
 Canonical observer: `/root/tracker_tl_experiments` (resumed `hmasd-experiment-tracker` role,
