@@ -3,7 +3,7 @@
 Implementation base: `18812ba5e62b6e1a877558f735c7bf979386be5b`.
 CM branch `codex/cm-dish-b05-seed101-20260906`, worktree
 `C:/Projects/HMASD-worktrees/cm-dish-b05-seed101-20260906`.
-Contract: [card](DISH_CONTROL_LOW_LR_B05_SCIENCE_CARD_20260906.md) section section 2-4,6-7.
+Contract: [card](DISH_CONTROL_LOW_LR_B05_SCIENCE_CARD_20260906.md) sections 2-4,6-7.
 
 Engineering scope section 4 additions: **none**. Explicit seed/result-name arguments reuse the
 existing path; no new guards, schedulers, diagnostics, retry or compatibility machinery.
@@ -77,3 +77,57 @@ extra seed, checkpoint selection, extra evaluation or resume is authorized. CM r
 observation until independent monitor ACK and then collection/technical acceptance; DM owns science.
 
 scope: none
+
+## Runtime observations (collection in progress)
+
+Root integrated and pushed exact launch SHA `1d87e02194158d6bca0eaa4e7f70a1c1098bb121`.
+The detached remote checkout uses this SHA. Initial fetch through a non-login shell stalled
+in git-remote-https; its exact preparation processes were terminated before checkout/compute,
+then the configured `zsh -lic` network route fetched successfully. This is a Git access fact,
+not an experiment failure or altered execution node. Login-shell gitstatus UI warnings did
+not prevent successful fetch/checkout.
+
+- `dish_b05_seed101_focused_20260906`: exit1 before test body; pytest temporary-directory
+  parent absent. Admission passed. Outer1.15s, retained logs; no scientific model/episode.
+- `dish_b05_seed101_focused2_20260906`: mkdir-parent ordinary launcher repair, fresh admission,
+  one focused pass. Exit0, 1 passed in0.79s; outer1.07s. The cache_dir warning is the inherited
+  pytest configuration with cacheprovider disabled. Total charged focused cost2.22s.
+- `dish_b05_seed101_shared_20260906`: exit0, one initializer and four complete1200-tick rows;
+  empty actor/snapshot/critic Welford. Outer7.11s; cumulative preparation9.33s.
+  Master `cd461a1f466eb5cf40c42dc71d29e103a9dbf00f292d5673a8560069585e01c0`;
+  reset phases2,3,0,1. Reference mean297.25 (rows96,330,323,440), retained independently
+  of the still-unobserved paired learner comparison. No effect-based decision followed.
+- `dish_b05_seed101_control_20260906`: accepted at same source; outer1780.335s ceiling
+  =1800-(9.33+30)/2. Shared input is the new shared directory, not historical checkpoints.
+
+All accepted handles dispatched directly to configured independent monitor. Shared-handle
+adoption ACK received via Root; CM collected its terminal artifacts. CONTROL adoption ACK received from Root (tracking commit4202358fe); its terminal
+notification remains pending. Routine polling released to the monitor. The final evidence will retain exact command strings, terminal supervisor evidence,
+receipts, OS timing, and final stdout containing publication duration P.
+
+### Exact accepted commands
+
+`dish_b05_seed101_focused_20260906`:
+
+```sh
+/usr/local/bin/agent-task run dish_b05_seed101_focused_20260906 'bash -lc '"'"'cd /home/wu/hmasd-worktrees/dish-b05-seed101-20260906 && export PYTHONPATH=/home/wu/hmasd-worktrees/dish-b05-seed101-20260906 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MAX_JOBS=1 && mkdir -p temp/directions/degraded_incumbent_shadow_handover/exp/control_low_lr_b05_20260906 && /usr/bin/time -v -o temp/directions/degraded_incumbent_shadow_handover/exp/control_low_lr_b05_20260906/focused.time.txt /usr/bin/timeout --signal=ALRM 300s bash -lc '"'"'"'"'"'"'"'"'/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/degraded_incumbent_shadow_handover/exp/control_low_lr_b05_20260906/focused.memory.json && /home/wu/.venvs/hmasd/bin/python -m pytest -q -p no:cacheprovider --basetemp temp/directions/degraded_incumbent_shadow_handover/test/b05-seed101 tests/experiments/candidates/degraded_incumbent_shadow_handover/control_low_lr_b05'"'"'"'"'"'"'"'"' > temp/directions/degraded_incumbent_shadow_handover/exp/control_low_lr_b05_20260906/focused.stdout.log 2> temp/directions/degraded_incumbent_shadow_handover/exp/control_low_lr_b05_20260906/focused.stderr.log'"'"''
+```
+
+`dish_b05_seed101_focused2_20260906`:
+
+```sh
+/usr/local/bin/agent-task run dish_b05_seed101_focused2_20260906 'bash -lc '"'"'cd /home/wu/hmasd-worktrees/dish-b05-seed101-20260906 && export PYTHONPATH=/home/wu/hmasd-worktrees/dish-b05-seed101-20260906 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MAX_JOBS=1 && mkdir -p temp/directions/degraded_incumbent_shadow_handover/test && /usr/bin/time -v -o temp/directions/degraded_incumbent_shadow_handover/exp/control_low_lr_b05_20260906/focused2.time.txt /usr/bin/timeout --signal=ALRM 298.85s bash -lc '"'"'"'"'"'"'"'"'/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/degraded_incumbent_shadow_handover/exp/control_low_lr_b05_20260906/focused2.memory.json && /home/wu/.venvs/hmasd/bin/python -m pytest -q -p no:cacheprovider --basetemp temp/directions/degraded_incumbent_shadow_handover/test/b05-seed101 tests/experiments/candidates/degraded_incumbent_shadow_handover/control_low_lr_b05'"'"'"'"'"'"'"'"' > temp/directions/degraded_incumbent_shadow_handover/exp/control_low_lr_b05_20260906/focused2.stdout.log 2> temp/directions/degraded_incumbent_shadow_handover/exp/control_low_lr_b05_20260906/focused2.stderr.log'"'"''
+```
+
+`dish_b05_seed101_shared_20260906`:
+
+```sh
+/usr/local/bin/agent-task run dish_b05_seed101_shared_20260906 'bash -lc '"'"'cd /home/wu/hmasd-worktrees/dish-b05-seed101-20260906 && export PYTHONPATH=/home/wu/hmasd-worktrees/dish-b05-seed101-20260906 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MAX_JOBS=1 && /usr/bin/time -v -o temp/directions/degraded_incumbent_shadow_handover/exp/control_low_lr_b05_20260906/shared.time.txt /usr/bin/timeout --signal=ALRM 3567.78s bash -lc '"'"'"'"'"'"'"'"'/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/degraded_incumbent_shadow_handover/exp/control_low_lr_b05_20260906/shared.memory.json && /home/wu/.venvs/hmasd/bin/python scripts/run_dish_control_low_lr_b05.py shared --seed 101 --out temp/directions/degraded_incumbent_shadow_handover/exp/control_low_lr_b05_20260906/shared --admission temp/directions/degraded_incumbent_shadow_handover/exp/control_low_lr_b05_20260906/shared.memory.json'"'"'"'"'"'"'"'"' > temp/directions/degraded_incumbent_shadow_handover/exp/control_low_lr_b05_20260906/shared.stdout.log 2> temp/directions/degraded_incumbent_shadow_handover/exp/control_low_lr_b05_20260906/shared.stderr.log'"'"''
+```
+
+`dish_b05_seed101_control_20260906`:
+
+```sh
+/usr/local/bin/agent-task run dish_b05_seed101_control_20260906 'bash -lc '"'"'cd /home/wu/hmasd-worktrees/dish-b05-seed101-20260906 && export PYTHONPATH=/home/wu/hmasd-worktrees/dish-b05-seed101-20260906 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MAX_JOBS=1 && /usr/bin/time -v -o temp/directions/degraded_incumbent_shadow_handover/exp/control_low_lr_b05_20260906/control.time.txt /usr/bin/timeout --signal=ALRM 1780.335s bash -lc '"'"'"'"'"'"'"'"'/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/degraded_incumbent_shadow_handover/exp/control_low_lr_b05_20260906/control.memory.json && /home/wu/.venvs/hmasd/bin/python scripts/run_dish_control_low_lr_b05.py run --arm CONTROL --seed 101 --shared temp/directions/degraded_incumbent_shadow_handover/exp/control_low_lr_b05_20260906/shared --shared-preparation-seconds 9.33 --out temp/directions/degraded_incumbent_shadow_handover/exp/control_low_lr_b05_20260906/control --admission temp/directions/degraded_incumbent_shadow_handover/exp/control_low_lr_b05_20260906/control.memory.json'"'"'"'"'"'"'"'"' > temp/directions/degraded_incumbent_shadow_handover/exp/control_low_lr_b05_20260906/control.stdout.log 2> temp/directions/degraded_incumbent_shadow_handover/exp/control_low_lr_b05_20260906/control.stderr.log'"'"''
+```
+
