@@ -1,0 +1,76 @@
+{
+  "id": "20260907-cbsc-004",
+  "created": "2026-09-07T13:41:09-07:00",
+  "direction": "capability_bound_semantic_currentness",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "CBSC 前瞻路径已选：只准备命令，不运行",
+  "context": "同版本CloudFront路径可能在完整600秒内完成候选环境。Binding structure: systems / information flow。P10只允许选择和命令绑定；所有实际下载、安装和候选导入次数仍为零。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "保留已选前瞻卡和精确命令；本轮不启动运行。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "撤回前瞻选择，保留历史证据并返回下载依赖。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "按批注修改前瞻卡，仍不启动本轮未分配的运行。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "已有不同官方端点和完整命令足以做可逆的准备选择；正文保留下载与时限不确定性。",
+  "evidence": [
+    "docs/research/candidates/capability_bound_semantic_currentness/CBSC_POST_A03_ACQUISITION_SCIENCE_CARD_20260907.md",
+    "docs/research/candidates/capability_bound_semantic_currentness/CBSC_POST_A03_ACQUISITION_SELECTION_20260907.md",
+    "docs/research/candidates/capability_bound_semantic_currentness/CBSC_POST_A03_ACQUISITION_PATH_ADDENDUM_20260907.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-07.md#L75",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否保留这个已选择的下载路径和前瞻卡片；本轮只准备，不启动运行？",
+    "changes_if_approved": [
+      {
+        "target": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_POST_A03_ACQUISITION_SCIENCE_CARD_20260907.md",
+        "from": "只有未选择的P09建议",
+        "to": "选定同版本CloudFront路径，绑定真实命令提交与单独的预检提交；执行次数仍为零"
+      }
+    ],
+    "if_refused": "撤回或按批注修改这张前瞻卡，保留A01至A03全部失败证据和旧文件；不自动重试。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_POST_A03_ACQUISITION_PATH_ADDENDUM_20260907.md",
+        "quote": "Both returned exit0, final HTTP/2 200 and final URL unchanged.",
+        "why": "同一版本的两个完整文件有已观察到的不同官方分发端点；已有21个容器可以直接读取。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_POST_A03_ACQUISITION_PATH_ADDENDUM_20260907.md",
+        "quote": "Strongest contrary evidence: A02 also had body failures on `download.pytorch.org` for other wheels, including `nvidia-cusolver-cu11`.",
+        "why": "新端点和相同代理的可靠性未被证明；前三次已用740.50秒仍无可用候选环境。"
+      }
+    ],
+    "uncertainty": [
+      "两份完整文件共1,111,959,613字节，实际下载、安装和导入能否在总时限内完成未知。",
+      "准备成功不代表B04故障修复、算法收益或稳定性。"
+    ],
+    "cost": {
+      "compute": "本轮0次下载、安装、候选导入和实验；以后若另行下达执行，完整单次上限600秒、KILL540秒，无重试。",
+      "owner_time": "可异步批改，无需即时回复。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing；本轮范围本来只含准备，后续执行须另有任务。"
+    },
+    "verdict_text": "Recommendation and selected option: (a).",
+    "source": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_POST_A03_ACQUISITION_SELECTION_20260907.md"
+  },
+  "starred": false
+}
