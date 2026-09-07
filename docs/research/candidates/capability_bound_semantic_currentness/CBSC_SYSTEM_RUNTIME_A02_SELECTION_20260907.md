@@ -56,3 +56,14 @@ After push of `90dbcbd752a48f0fec5371a797dfdf54c84c50aa`, native follow-up to
 that same CM was accepted on 2026-09-07 at approximately 15:58 UTC. Root received
 the selection commit and actual dispatch. No A02 handle had yet been accepted;
 the CM remains responsible for the bounded implementation and collection.
+
+## Terminal intake
+
+The selected handle `cbsc-system-runtime-a02-20260907` ended at exit 1 with
+104.11s outer wall. CM collection is pushed at
+`0ae92498d9e5e88b7bedb8c4cffbf64d8272d566`; launched source was
+`ff4b2cca900e6569d6aa99be8c4c430209b16350`. The
+[DM intake](CBSC_SYSTEM_RUNTIME_A02_INTAKE_20260907.md) applies PATH_INCOMPLETE:
+admission and venv creation succeeded, dependency download failed, and no
+metadata import ran. Partial state is preserved. No additional invocation is
+selected by this record; the exact dependency returns through Root to Portfolio.

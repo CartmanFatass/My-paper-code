@@ -82,6 +82,14 @@
       "record": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_SYSTEM_RUNTIME_A02_SELECTION_20260907.md",
       "state": "planned",
       "summary": "P07-CBSC-A02-EXEC-01 authorizes original-CM literal command preparation plus one candidate installation/import; supersedes preparation-only stop. Unchanged exact non-login route, pins,600s complete/KILL540s and fresh admission. No process yet accepted; no B04/scientific calls or extra run."
+    },
+    {
+      "at": "2026-09-07T16:13:55+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_SYSTEM_RUNTIME_A02_SELECTION_20260907.md",
+      "record": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_SYSTEM_RUNTIME_A02_INTAKE_20260907.md",
+      "state": "applied",
+      "summary": "P07-CBSC-A02-EXEC-01 completed and intaken as PATH_INCOMPLETE: sole command exit1/104.11s within600s; admission andCPython3.12.3 venv creation observed, nvidia-cusolver download failed, zero metadata imports. Partial state preserved; no second install or scientific call; B04 cause unknown."
     }
   ]
 }
