@@ -5,7 +5,8 @@
 OWNER_DIRECT merger: existing Luna/xhigh Root directly observes experiments and transports Pro
 requests. Standalone Monitor and Transport have relinquished their current work. See
 `.codex/hmasd-monitor.toml`, `.codex/hmasd-transport.toml` and `docs/project/ROOT_OPERATIONS.md`.
-Current assigned live/unknown experiment handles: none; the repaired VSPC1 service-allocation
+Current assigned live/unknown experiment handles: none; UCOPE
+`ucope-shared-return-b02-seed6401-20260907` is terminal and remains in CM collection; the repaired VSPC1 service-allocation
 pair is terminal and fully intaken at main `f22482b03`. DISH
 `dish_b06_seed113_20260907_run01` on `wsl_4070` (source `373d18720`) exited 0 at
 `2026-09-07T12:58:50Z`; its complete technical evidence is integrated at main `33db0d860`
@@ -14,10 +15,22 @@ handed directly to CM collection. `vspc1-reactive-b01-factor-run02` and
 `vspc1-reactive-b01-generic-run02` are terminal, technically accepted and fully intaken by the
 DM. The single Root heartbeat also covers the
 explicit pending Pro rows below; experiment completion alone does not pause it.
-The shared Root heartbeat remains ACTIVE while this return and the preparation-only
-P07-VSPC1-COMPLETION-REQUEST-01 are delivered and reconciled; no accepted experiment handle
-remains live. Historical handles and old routing sections below are retained evidence, not
-current assignments.
+The shared Root heartbeat remains ACTIVE while this UCOPE terminal return, the return and the
+preparation-only P07-VSPC1-COMPLETION-REQUEST-01 are delivered and reconciled. Historical
+handles and old routing sections below are retained evidence, not current assignments.
+
+UCOPE B02 seed6401 was accepted once on `wsl_4070` from source
+`bcd55750b29014e21dd855df5ac320296256b62e`, cwd
+`/home/wu/hmasd-worktrees/ucope-shared-return-b02-seed6401-20260907`, with accepted handle
+`ucope-shared-return-b02-seed6401-20260907`. Its detached supervisor terminated exit 0 at
+`2026-09-07T15:39:52Z` (PID 2741107, tmux inactive); its log is
+`/home/wu/.agent-tasks/ucope-shared-return-b02-seed6401-20260907/task.log` and its result root
+is `temp/directions/ucope/exp/shared-data-return-b02-seed6401/` with
+`resource_admission.json` and `summary.json`. The exact command record is `fddc126fd`; the
+complete 600-second bound includes admission, startup, runner, publication and exit. The
+reported external complete wall is 7.73 s (internal 7.6646056 s, peak RSS 21,440 KiB). CM
+reported no pre-existing handle/root at reconciliation; terminal collection/readback is pending,
+and no scientific result or validity inference follows from acceptance.
 
 VSPC1 service-allocation B01 seed402 was adopted on `wsl_4070` from source
 `faf786e135b3f55e535c898e17e646dcc341bdec` and cwd
