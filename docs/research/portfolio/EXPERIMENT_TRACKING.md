@@ -64,16 +64,19 @@ intake is integrated at `99e587f6b`: valid complete B, `NR-B`, `Delta_bar=0`, bo
 and conditional SE `0`, all final modal roots `IMMEDIATE-4`, and no additional invocation.
 No live handle, retry or extra exposure remains.
 
-Owner-resumed refill dispatches on 2026-09-07 now cover four advancing native chains: DISH DM
-`/root/dm_amx_dish_seed101` is preparing the explicit B06 launch assignment from the accepted
+Owner-resumed refill dispatches on 2026-09-07 initially covered four native chains: DISH DM
+`/root/dm_amx_dish_seed101` prepared the explicit B06 launch assignment from the accepted
 technical intake; VSPC1 DM `/root/dm_amx_vspc1_next` is preparing the next independent
-duration-value question from `effad6eb7`; RCLE DM `/root/dm_amx_rcle_a02` is using the A02 intake
-to process the missing post-A02 scientific decision or correct question (the archived response
-selected already-completed A02 and does not authorize a repeat); and CBSC DM
-`/root/dm_amx_cbsc_next` is processing the B04 technical dependency into a bounded CM objective
-or a precise missing decision. These are preparation/intake handoffs only: no new result-bearing
-invocation, retry budget or scientific conclusion has been added. UCOPE remains the fallback
-preparation route if any of these chains returns a concrete blocker.
+duration-value question from `effad6eb7`; RCLE DM `/root/dm_amx_rcle_a02` used the A02 intake to
+process the missing post-A02 scientific decision and returned the unresolved provider-send
+boundary (it no longer occupies a slot); and CBSC DM `/root/dm_amx_cbsc_next` is processing the
+B04 technical dependency into a bounded CM objective or precise missing decision. Portfolio then
+issued P07-VSP03-PREP-01 to `/root/dm_amx_vsp03_next` for question/request preparation and
+P07-UCOPE-PREP-01 to `/root/dm_ucope_question_prep` for an independent post-NR-B proposal.
+P07-DISH-EXEC-01 separately dispatched the existing DISH CM for the one selected B06 invocation.
+These are the current five advancing native chains (DISH CM, VSPC1, CBSC, VSP03 and UCOPE);
+RCLE is closed at its transport boundary. No task adds a retry budget, new scientific conclusion
+or unrecorded result-bearing invocation.
 
 ## Current Pro handover queue — 2026-09-06
 
