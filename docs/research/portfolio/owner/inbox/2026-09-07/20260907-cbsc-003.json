@@ -73,5 +73,15 @@
     "verdict_text": "Owner-delegated decision (unattended, 2026-09-03 instruction): (a) for each decision.",
     "source": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_SYSTEM_RUNTIME_A03_DEPENDENCY_INTAKE_20260907.md"
   },
-  "starred": false
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-07T18:42:44+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/decisions/2026-09-03-unattended-delegation.md",
+      "record": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_SYSTEM_RUNTIME_A03_INTAKE_20260907.md",
+      "state": "applied",
+      "summary": "已按长期委托及P08释放执行唯一A03调用：21个本地容器完成，Torch下载部分传输失败；9.65秒、exit18，未安装或导入，PATH_INCOMPLETE。此状态只表示已执行卡，不表示接受候选就绪；无重试或科学调用。"
+    }
+  ]
 }
