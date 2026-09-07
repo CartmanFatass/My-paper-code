@@ -71,8 +71,10 @@ object-tier delegation: **Owner-delegated decision (unattended, 2026-09-03 instr
 The record concerns technical preparation/publication; the direction verdict remains unformed.
 No successor, benchmark, teammate policy pair, recast, runtime budget or C object is selected.
 
-The existing owner item `20260907-vsp02-001` is reused for the actual preparation application;
+The existing owner item `20260907-vsp02-001` remains linked as the prior routing recommendation;
 its option (a) concerns arranging Convergence preparation, not approval of the scope change.
+This record and the audit record the actual P12 preparation. No owner reply or `PRO_FINAL`
+decision is fabricated, and no second owner item is needed for ordinary technical publication.
 Owner reviews were checked at the clean boundary; no unapplied instruction was returned.
 No new valid-result brief is due because this preparation creates no scientific result.
 
@@ -90,3 +92,24 @@ P12 ends after publication and native return. No browser navigation, Pro Send, T
 provider generation or response archival is performed by this assignment. Convergence owns the
 future direction decision; Portfolio owns any subsequent task allocation. `DIRECTION.md`, accepted
 evidence polarity and lifecycle/priority remain unchanged.
+
+## Published packet and clean return
+
+The input/source commit is `e23f0f480e7d164ae3fd4ecce5ea4331b2edf6cd`, pushed on `codex/vsp02`.
+It contains the declared evidence references, machine-count record and Issue snapshot.
+The TASK publication commit is `1e3477436f2289ce1e81dabc2b98722667e8ce8c`, also pushed.
+Fixed TASK URL:
+`https://github.com/CartmanFatass/My-paper-code/blob/1e3477436f2289ce1e81dabc2b98722667e8ce8c/docs/research/candidates/vsp_02/pro_packets/20260907_teammate_policy_change_convergence/TASK.md`.
+
+The renderer compared TASK bytes against that full commit before binding `HANDOFF.json`.
+The bound state is `CALLER_READY`, `dispatch_required=false`, with no provider UUID. Root
+is the future caller/executor named by the containing task UUID; the native DM has not sent
+anything. The Issue and branch were confirmed published. All ten pinned references exist,
+the scoped response target remains absent, and no accepted provider request or response is
+reported. The HANDOFF and this final return are preserved by their enclosing publication commit.
+
+Technical audit: `docs/research/portfolio/audit/2026-09-07.md#L87` in this authoring revision.
+Root can integrate the new request artifacts and the one audit row while retaining later
+Portfolio/control-plane changes; imported current-main snapshots add no new scientific choice.
+The only remaining Transport inputs are a later explicit continuation and actual eligible
+6 Pro conversation/model verification/binding by Root. Neither is supplied by publication.
