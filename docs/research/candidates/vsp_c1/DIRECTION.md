@@ -237,3 +237,30 @@ One useful signal may justify considering independent instances, not stable supe
 unique sharing causality, transfer, partner co-adaptation or optimality. Two-queue B01 gets
 no additional invocation, its family and K4 remain open, and the public-plan six-step family
 stays ended. The decision adds no recast or Portfolio disposition.
+
+## Service-allocation B01: small learner gain; rule unresolved — 2026-09-07
+
+The two seed402 learners each completed 256 real updates and five fixed evaluations
+([E0 technical evidence](VSPC1_K4_SERVICE_ALLOCATION_B01_EXECUTION_20260907.md),
+[scientific intake](VSPC1_K4_SERVICE_ALLOCATION_B01_INTAKE_20260907.md)). The retained final
+native learner contrast is FACTOR 0.758911133 minus GENERIC 0.752400716 = **+0.006510417**:
++0.001708984 at period2 and +0.011311849 at period6. This is 0.625 additional served jobs
+per 48-tick episode, below the 0.025 MEI. Conditional evaluation SE is 0.002109066 for
+these fixed policies; one paired training instance cannot estimate training-population
+uncertainty. Full-grid AUC favors FACTOR by +0.001363118. Initial-to-final changes are
++0.010457357 and +0.001261393; all points remain retained and final return stays primary.
+
+The strongest surviving support is the small positive native contrast in both periods
+after actual learning. The strongest limitation for practical multiplicative value is
+the below-MEI size and absent rule comparison. GENERIC failed during paired publication
+on a loaded-list/in-memory-tuple budget comparison before LQ-EXCLUDE evaluation; preserved
+learner endpoints support the narrow contrast, while the complete assignment remains
+incomplete. The rule may still do most useful control. Initialization, optimization,
+the stationary non-learning partner and feature sharing in both networks remain alternatives.
+
+The rule prediction is unscoreable. No stable superiority, useful learning-over-rule,
+causal sharing, transfer or optimality claim follows, and new-host headroom remains unknown.
+The next missing discriminator is the declared 256-episode rule endpoint on the same tapes
+and its comparison with the saved learner endpoints, after a separately commissioned
+publication repair. This intake adds no call, new seed, recast or family closure. K4 and
+the reactive family remain open; historical object boundaries and Portfolio authority stand.
