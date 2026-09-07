@@ -53,11 +53,11 @@ def _resources(result, started):
     )
 
 
-def main():
+def main(*, seed=89, object_name="DISH-CONTROL-LOW-LR-B04"):
     parser = argparse.ArgumentParser()
     parser.add_argument("mode", choices=("shared", "run", "project-cost"))
     parser.add_argument("--arm", choices=("CONTROL", "LOW_LR"))
-    parser.add_argument("--seed", type=int, choices=(89,), default=89)
+    parser.add_argument("--seed", type=int, choices=(seed,), default=seed)
     parser.add_argument("--shared", type=Path)
     parser.add_argument("--shared-preparation-seconds", type=float)
     parser.add_argument("--admission", type=Path)
@@ -74,7 +74,7 @@ def main():
     if args.out is None or args.admission is None:
         parser.error("shared and run require out and admission")
     args.out.mkdir(parents=True, exist_ok=True)
-    result = {"object": "DISH-CONTROL-LOW-LR-B04", "status": "INCOMPLETE",
+    result = {"object": object_name, "seed": args.seed, "status": "INCOMPLETE",
               "admission_receipt": str(args.admission),
               "launch_sha": subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip()}
     if args.mode == "shared":
@@ -83,7 +83,7 @@ def main():
                 new_progress, prepare_shared, planned_cost,
             )
             result.update(new_progress())
-            prepare_shared(args.out, float("inf"), result)
+            prepare_shared(args.out, float("inf"), result, seed=args.seed, object_name=object_name)
             result["planned_cost"] = planned_cost()
         except Exception as error:
             result["status"] = "INCOMPLETE"
@@ -117,11 +117,13 @@ def main():
             new_progress, run_arm, paired_result, exposure, planned_cost,
         )
         result.update(new_progress())
-        run_arm(args.arm, args.out, STARTED + allowance, result, args.shared)
+        run_arm(args.arm, args.out, STARTED + allowance, result, args.shared,
+                seed=args.seed, object_name=object_name)
         if args.arm == "LOW_LR":
             control = json.loads(args.control_summary.read_text(encoding="utf8"))
             shared_summary = json.loads((args.shared / "summary.json").read_text(encoding="utf8"))
-            result["paired_primary"] = paired_result(control, result, shared_summary)
+            result["paired_primary"] = paired_result(
+                control, result, shared_summary, seed=args.seed, object_name=object_name)
         result["planned_cost"] = planned_cost()
     except Exception as error:
         result["status"] = "INCOMPLETE"

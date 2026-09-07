@@ -33,8 +33,8 @@ LEARNING_RATE_MECHANISM = (
 )
 
 
-def master():
-    return hashlib.sha256(f"{OBJECT}/seed/{SEED}".encode("ascii")).digest()
+def master(seed=SEED):
+    return hashlib.sha256(f"{OBJECT}/seed/{seed}".encode("ascii")).digest()
 
 
 def model_norm(state_dict):
@@ -71,9 +71,9 @@ def recorded_resets(master_digest):
             for coordinate in coordinates()}
 
 
-def configuration(arm):
+def configuration(arm, *, seed=SEED, object_name=OBJECT):
     return {
-        "seed": SEED, "master_hex": master().hex(), "object": OBJECT, "arm": arm,
+        "seed": seed, "master_hex": master(seed).hex(), "object": object_name, "arm": arm,
         "underlying_arm": "STRUCTURED", "block": 0, "host": HOST, "forecast_package": False,
         "torch_threads": torch.get_num_threads(), "training_dtype": "float32",
         "native_dtype": "float64", "lanes": 32, "ticks_per_update": 128, "updates": 16,
@@ -86,11 +86,12 @@ def configuration(arm):
     }
 
 
-def prepare_shared(output, deadline, progress):
+def prepare_shared(output, deadline, progress, *, seed=SEED, object_name=OBJECT):
+    progress.update(seed=seed, object=object_name, master_hex=master(seed).hex())
     torch.set_num_threads(1)
     library = load_host(HOST)
     check_time(deadline)
-    initial = build_master_addressed_initial_state(master=master(), block=0, arm="STRUCTURED")
+    initial = build_master_addressed_initial_state(master=master(seed), block=0, arm="STRUCTURED")
     (output / "initial_state.pt").write_bytes(initial)
     loaded = torch.load(BytesIO(initial), map_location="cpu", weights_only=False)
     progress["initializer_calls"] = 1
@@ -103,7 +104,7 @@ def prepare_shared(output, deadline, progress):
     if rates != [LEARNING_RATES["CONTROL"], LEARNING_RATES["CONTROL"]]:
         raise RuntimeError("B04 initializer learning rates differ")
     progress["initial_learning_rates"] = rates
-    resets = recorded_resets(master())
+    resets = recorded_resets(master(seed))
     (output / "resets.json").write_text(json.dumps(resets, indent=2) + "\n", encoding="utf8")
     progress["reference_rows"] = []
     for coordinate in coordinates():
@@ -133,8 +134,9 @@ def prepare_shared(output, deadline, progress):
     progress["status"] = "COMPLETE"
 
 
-def run_arm(arm, output, deadline, progress, shared):
-    master_digest = master()
+def run_arm(arm, output, deadline, progress, shared, *, seed=SEED, object_name=OBJECT):
+    master_digest = master(seed)
+    progress.update(seed=seed, object=object_name, master_hex=master_digest.hex())
     torch.set_num_threads(1)
     library = load_host(HOST)
     check_time(deadline)
@@ -147,7 +149,7 @@ def run_arm(arm, output, deadline, progress, shared):
     if arm_norm != shared_norm:
         raise RuntimeError("B04 initial model norm differs from shared initialization")
     progress["initial_model_norm"] = arm_norm
-    progress["configuration"] = configuration(arm)
+    progress["configuration"] = configuration(arm, seed=seed, object_name=object_name)
     reset = MasterAddressedTrainResetFactory(master=master_digest, block=0, arm="STRUCTURED")
     native = backend.native_batch_from_rows(reset.rows(np.zeros(32, dtype=np.int64)), library=library)
     measured = TrainingMeasurements(native, progress, deadline)
@@ -202,7 +204,7 @@ def run_arm(arm, output, deadline, progress, shared):
     progress["status"] = "COMPLETE"
 
 
-def paired_result(control, low_lr, reference):
+def paired_result(control, low_lr, reference, *, seed=SEED, object_name=OBJECT):
     if (control.get("status") != "COMPLETE" or low_lr.get("status") != "COMPLETE"
             or reference.get("status") != "COMPLETE"):
         raise ValueError("B04 paired input is not COMPLETE")
@@ -228,7 +230,7 @@ def paired_result(control, low_lr, reference):
             "low_lr_minus_reference": right["service_ticks"] - zero["service_ticks"],
         })
     return {
-        "object": OBJECT, "seed": SEED, "scale_ticks": SCALE_TICKS, "status": "COMPLETE",
+        "object": object_name, "seed": seed, "scale_ticks": SCALE_TICKS, "status": "COMPLETE",
         "reference_mean": sum(row["reference_service"] for row in rows) / 4,
         "control_mean": sum(row["control_service"] for row in rows) / 4,
         "low_lr_mean": sum(row["low_lr_service"] for row in rows) / 4,
