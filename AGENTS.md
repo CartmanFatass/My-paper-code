@@ -436,7 +436,9 @@ appendix and completed historical tasks remain unchanged.
   directly to that task; it returns ACKs and events to research Root, which wakes the
   corresponding native DM/CM. Root's research heartbeat is removed. Configuration is
   `.codex/hmasd-monitor.toml`; procedure is `docs/project/EXPERIMENT_MONITOR.md`.
-  Keep one routine observer per handle; CM retains engineering and DM retains science.
+  One project-wide monitor observes all assigned experiments on every heartbeat; do not create
+  per-experiment monitors. Keep its heartbeat ACTIVE while any assigned handle needs observation,
+  and confirm activation before adoption ACK. CM retains engineering and DM retains science.
   Pre-read relevant current sections; use concise deliverable-based handoffs with links
   instead of repeating accessible cards or preloading historical evidence.
 - The DM is the `em` caller of `$hmasd-pro-research-prompt-author` for the two direction

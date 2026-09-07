@@ -88,7 +88,9 @@ DM or CM directly sends accepted handles to the independent Luna/low task declar
 `docs/project/EXPERIMENT_MONITOR.md` for the bounded handoff. The monitor returns adoption
 ACKs and material events to the configured research Root; Root forwards to the responsible
 native DM/CM and wakes idle children. There is no native tracker sibling or Root polling
-heartbeat. Retain one observation owner until adoption ACK, then release routine polling.
+heartbeat. The one project-wide monitor handles all assigned experiments each wake, not one
+monitor task per experiment. Its adoption ACK confirms the existing heartbeat is ACTIVE;
+retain observation until that ACK, then release routine polling.
 CM retains collection/technical acceptance; DM retains science. Never relaunch to transfer
 observation. Link existing run facts instead of repeating the card; missing metadata is no
 new launch gate. Historical native communication records do not prohibit direct app dispatch.

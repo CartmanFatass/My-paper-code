@@ -1,8 +1,9 @@
 # Independent experiment monitor
 
 OWNER_DIRECT 2026-09-06 replaces the native tracker with one reusable Codex task,
-Luna/low, declared in `.codex/hmasd-monitor.toml`. Its own five-minute heartbeat
-performs one bounded observation pass and ends the turn. Root's research heartbeat
+Luna/low, declared in `.codex/hmasd-monitor.toml`. This one project-wide monitor observes
+all assigned experiments together; there is no monitor task per experiment. Its own
+five-minute heartbeat checks every current unresolved handle in one bounded pass and ends the turn. Root's research heartbeat
 is removed. This change does not resume OWNER_PAUSED research.
 
 ## Assignment and return
@@ -22,14 +23,19 @@ Do not repeat the card or full scientific history. A private exec session number
 alone does not transfer access; local detached work needs PID/start identity and its
 existing exit witness. Tracking metadata is not an experiment launch condition.
 
-The monitor records adoption and sends Root an ACK naming the assigning DM/CM;
+Before sending an adoption ACK, the monitor uses `automation_update` to set the existing
+`hmasd-experiment-monitor` heartbeat ACTIVE and reads its saved configuration back.
+An accepted message or a completed one-off check does not establish recurring activation.
+The monitor records adoption and sends Root an ACK naming the assigning DM/CM and the
+confirmed heartbeat state;
 Root forwards it. Before ACK the launcher owns observation; after ACK only the
 monitor routinely polls. DM/CM/Operator retains launch, collection, verification and
 science ownership. Repeated assignments update the same (node, accepted handle).
 
 ## One heartbeat pass
 
-Read only the current assigned-handle rows and relevant owner instructions. Never
+Read all current assigned-handle rows and relevant owner instructions. Observe every
+handle still needing a terminal notification, not only the most recent assignment. Never
 adopt historical handles by scanning old tables. Batch independent read-only checks.
 Resolve the configured node via `.codex/hmasd-compute.toml`; on the current node use
 `ssh -o BatchMode=yes -o ConnectTimeout=10 hmasd-wsl-node /usr/local/bin/agent-task status <accepted-name>`
@@ -48,8 +54,11 @@ The monitor alone writes current rows in `docs/research/portfolio/EXPERIMENT_TRA
 in its configured worktree. Preserve historical evidence. Commit/push meaningful
 adoption/terminal changes by explicit path; include commit and absolute record path
 in Root notifications for integration. No new registry, event daemon or cost tracker.
-When there are no handles needing observation, pause the same heartbeat. A direct
-assignment wakes this task and reactivates that heartbeat; never create per-run jobs.
+Keep the same heartbeat ACTIVE while any assigned handle needs observation or terminal
+notification. A healthy unchanged pass, one completed experiment, or a receipt for a new
+assignment does not end monitoring of the other handles. Pause only when all current
+handles are terminal and their handoffs have been notified. A new direct assignment
+reactivates this same global heartbeat before ACK; never create per-run jobs.
 Keep terminal rows until handoff is acknowledged. A lost turn resumes from this table.
 
 ## Reading and handoff economy
