@@ -1,0 +1,73 @@
+{
+  "purpose": "Reuse the accepted B05 exposure and cost for a direction-node question; no new scientific invocation.",
+  "independent_unit": "new training dataset; B05 n=2; prior objects excluded",
+  "saved_source_paths": [
+    "docs/research/candidates/ucope/b05_result_evidence_20260907/seed6701/summary.json",
+    "docs/research/candidates/ucope/b05_result_evidence_20260907/seed6702/summary.json"
+  ],
+  "accepted_b05_exposure": {
+    "datasets": 2,
+    "seeds": [
+      6701,
+      6702
+    ],
+    "batches_per_dataset": 512,
+    "train_episodes": 262144,
+    "scalar_value_updates": 393216,
+    "histogram_updates": 131072,
+    "eval_episodes": 196608,
+    "total_episodes": 458752,
+    "actual_host_events": 1753088,
+    "whole_wall_seconds": 9.51,
+    "new_intake_learner_exposure": 0
+  },
+  "accepted_b05_native_contrast": {
+    "values": [
+      0.002808186848958338,
+      0.0024321289062500004
+    ],
+    "mean": 0.002620157877604169,
+    "sample_sd": 0.0002659131214081277,
+    "conditional_mc_se_of_mean": 0.0003805940070739763,
+    "mei": 0.001
+  },
+  "accepted_b05_information_contrast": {
+    "values": [
+      0.002808186848958338,
+      0.0024321289062500004
+    ],
+    "mean": 0.002620157877604169,
+    "sample_sd": 0.0002659131214081277,
+    "conditional_mc_se_of_mean": 0.0003805940070739763,
+    "mei": 0.001
+  },
+  "accepted_b05_complete_walls_seconds": [
+    4.67,
+    4.84
+  ],
+  "initial_value_l2_per_dataset": 0,
+  "value_entries_per_dataset": 264,
+  "first_observation_step_size": 1,
+  "relative_displacement_to_initial_l2": null,
+  "new_consultation_exposure": {
+    "training_datasets": 0,
+    "environment_episodes": 0,
+    "scalar_value_updates": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0,
+    "result_bearing_invocations": 0
+  },
+  "prospective_uav_work": {
+    "selected_path": null,
+    "selected_learner": null,
+    "selected_counts": null,
+    "dominant_training_factors": "independent training seeds * trained arms * environment steps and learner updates",
+    "dominant_evaluation_factors": "independent training seeds * evaluated policies * selected final evaluation episodes * UAV episode steps",
+    "nested_candidate_or_trajectory_search": "none proposed",
+    "extra_result_bearing_validation_calls": 0,
+    "whole_wall_estimate_seconds": null,
+    "resource_cap_seconds": null,
+    "b05_cap_not_inherited": "600s per complete finite dataset / 1200s pair are historical B05 limits, not a UAV allocation"
+  },
+  "exposure_line": "B05_history: datasets=2; seeds=[6701,6702]; train_episodes=262144; scalar_value_updates=393216; histogram_updates=131072; eval_episodes=196608; total_episodes=458752; actual_host_events=1753088; initial_value_l2_per_dataset=0; first_observation_step_size=1; complete_wall_seconds=9.51; consultation_new_training_datasets=0; consultation_new_environment_episodes=0; consultation_new_updates=0; consultation_new_evaluation_episodes=0; consultation_new_result_bearing_invocations=0"
+}
