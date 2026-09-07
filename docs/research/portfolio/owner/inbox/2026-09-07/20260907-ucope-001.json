@@ -1,0 +1,81 @@
+{
+  "id": "20260907-ucope-001",
+  "created": "2026-09-07T00:09:38-07:00",
+  "direction": "ucope",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "UCOPE B01: learn paid acquisition from native return",
+  "context": "Frozen B/EXPLORE asks whether fresh RETURN-ACTOR earns more than the strongest immediate-commitment reference on the eight-context finite renewal host. Binding structure is systems / information flow; no multi-agent population claim follows. Two new training seeds and a 0.001 absolute mean-return MEI are selected. Source binding preserves the displayed-count-only tail callback and delays actual-mark reward until after the action. The first CM assignment is implementation and checks only.",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "继续已经委托选择的卡与实现；不等待回复才开展已授权工作。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "下一个清晰边界停止此B的未执行部分，保留历史证据和方向状态。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "按具体异议修改未执行对象并重新记录；不改写已有结果。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": null,
+  "dm_reason": "A bounded fresh learner can test native value within the accepted paid-information mechanism without reopening the retained-policy diagnostic.",
+  "evidence": [
+    "docs/research/candidates/ucope/UCOPE_NATIVE_RETURN_ACQUISITION_B01_SCIENCE_CARD_20260907.md",
+    "docs/research/candidates/ucope/UCOPE_NATIVE_RETURN_ACQUISITION_B01_SELECTION_INTAKE_20260907.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-07.md#L6",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": {
+    "question": "是否保留已按无人值守委托选择的 UCOPE B01：直接用真实净回报学习付费探测，并与立即选择周期4比较？",
+    "changes_if_approved": [
+      {
+        "target": "UCOPE_NATIVE_RETURN_ACQUISITION_B01_SCIENCE_CARD_20260907.md",
+        "from": "草案已准备但未选择",
+        "to": "已选择并冻结两个新训练种子的 B/EXPLORE；下一步为 CM 实现和检查"
+      }
+    ],
+    "if_refused": "在下一个清晰边界停止此 B 的未执行部分，保留卡和证据；不改变 UCOPE 生命周期，也不重开已暂停的保留策略诊断。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_NATIVE_RETURN_ACQUISITION_B01_SELECTION_INTAKE_20260907.md",
+        "quote": "The accepted mechanism is paying a native service/time/energy cost to obtain a protected count before committing to a duration.",
+        "why": "机制和宿主不变，只改新学习器；属于现有对象层委托。"
+      },
+      {
+        "path": "experiments/candidates/ucope/conditioning_discriminator_r01/host.py",
+        "quote": "period = tail_selector(displayed)",
+        "why": "现有真实执行接口只向尾部选择器传递显示计数，选择后才返回真实奖励。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_THREE_WITNESS_HINGE_R01_RESULT_EVIDENCE_20260904.md",
+        "quote": "The tail closure did **not** improve the full competence count: `C_even` remained **3 of 6 for both arms**.",
+        "why": "局部尾部收益曾伴随错误付费，必须把所有情境的真实损失计入主要结果。"
+      }
+    ],
+    "uncertainty": [
+      "平均可用增益很小，策略梯度可能过早停止探测。",
+      "真实运行耗时尚未测得；两次训练不支持稳定总体优势。",
+      "实际标记及探测服务奖励不得在尾部行动前泄露，特别是 SEVERED 情境。"
+    ],
+    "cost": {
+      "compute": "已选择两个新种子，每个完整调用上限600秒；当前CM交付仅实现、聚焦检查和独立审查，正式实验曝光为零。",
+      "owner_time": "可异步查看，无需回复才能继续现有委托工作。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "Owner-delegated decision (unattended, 2026-09-03 instruction): (a).",
+    "source": "docs/research/candidates/ucope/UCOPE_NATIVE_RETURN_ACQUISITION_B01_SELECTION_INTAKE_20260907.md"
+  },
+  "starred": false
+}
