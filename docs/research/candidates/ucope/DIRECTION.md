@@ -29,9 +29,10 @@ remains dated provenance under the controlling evidence specification section 11
   **2026-09-05 PRO_FINAL / PARK** of the current same-draw retained-policy
   root-residual localization family, including its numerical-locus dependency;
   no successor selected. See the dated current position below.
-- Latest bounded B observation: **2026-09-07 shared-data return-model B02, RM-A**;
-  one fresh fitted pair gains 0.0030012207031250046 over BLIND and IMMEDIATE-4, conditional
-  MC SE 0.0005533139087041887. B01's two zero-gain endpoints remain accepted evidence.
+- Latest bounded B observation: **2026-09-07 shared-data return-model B03, joint RM-A**;
+  two prospective datasets gain a mean 0.0024423014322916717 over BLIND and IMMEDIATE-4,
+  dataset sample SD 0.0012263883236204184 and conditional mean MC SE 0.0003847990519703138.
+  Prior B02 seed 6401 stays separate; B01's two zero-gain endpoints remain accepted evidence.
   This adds no direction-tier disposition or further invocation.
 - Historical discriminator science-card current-byte SHA-256:
   `e08744fa18d708c9ad570bdce8b71296407991a4f5f79d502d37330913435fd8`
@@ -53,6 +54,37 @@ count. The direct-service alternative remains separated by the frozen
 `Gamma=I+D` decomposition and analytic `D≈-0.02` boundary.
 
 ## Current scientific position — 2026-09-07
+
+The shared-data return-model B03 completed exactly two fresh datasets, 6501 and 6502, and
+receives **joint RM-A** under its prospective rule. Native/information gains are
+0.0033094889322916716 and 0.0015751139322916715; their mean is 0.0024423014322916717,
+above the 0.001 MEI for both comparisons. Dataset sample SD is 0.0012263883236204184;
+conditional evaluation MC SE of the mean is 0.0003847990519703138. Prior B02 seed 6401
+motivated this follow-up and is excluded from its primary average.
+
+The strongest support is repeated useful acquisition after 524,288 real training episodes,
+786,432 scalar updates and 196,608 final evaluation episodes. FULL buys only in
+LINKED-p17_20-c9_100 in both datasets and gains after paid costs; the other fourteen
+seed-context entries have zero native difference. BLIND and IMMEDIATE-4 coincide throughout,
+so the two equal contrast columns do not add independent evidence. Five prediction components
+match. This supports a preliminary repeated finite-host signal, not stable population superiority.
+
+The strongest current limit is the smaller second gain and material variation across two
+datasets. Their purchased-context tail plans differ; policy and evaluation variation are not
+causally separated. Small headroom, fitted-max bias, the fixed eight-context host and B01's
+two nulls/historical false-probe losses still bound the claim. This host does not instantiate
+multi-agent partial observability or non-stationarity, and no generic MARL or architecture/
+precision advantage follows. No tuned-generic headroom record is added.
+
+The next recommended discriminator is whether the same native gain survives half the
+training-data budget in a separately prospective bounded B, retaining all outcomes. This is
+a returned preparation recommendation; no successor card, seed or invocation is selected.
+The retained-policy/root-residual numerical-locus family remains stopped. See the
+[B03 card](UCOPE_SHARED_DATA_RETURN_MODEL_B03_SCIENCE_CARD_20260907.md),
+[complete result evidence](UCOPE_SHARED_DATA_RETURN_MODEL_B03_RESULT_EVIDENCE_20260907.md) and
+[joint scientific intake](UCOPE_SHARED_DATA_RETURN_MODEL_B03_INTAKE_20260907.md).
+
+## Prior shared-data return-model observation — 2026-09-07 B02
 
 The separate shared-data return-model B02 completed its sole fresh dataset, seed 6401, and
 receives **RM-A**. The final count-conditioned policy has mean native/information advantages
