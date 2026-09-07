@@ -105,3 +105,15 @@ print(json.dumps(json.loads(path.read_text(encoding="utf-8")), indent=2))
 
 Not launched at this command-freeze commit. No environment/install/import result
 is yet claimed. Ordinary Git/command preparation has created no new B04 exposure.
+
+## Accepted execution
+
+Accepted once as `cbsc-system-runtime-a01-20260907`, source
+`ee8b4b36834f9d15793976b2af0aa23f923e1579`, detached cwd as frozen above.
+Supervisor PID2738317, start2026-09-07T12:59:16Z; initial status running/exitnull.
+The first bounded observation saw only supervisor startup in the log, so no
+admission/install/import success is yet claimed. The actual handle and full paths
+were sent directly to native Root for adoption under the current shared route.
+CM retains observation until ACK. Exact acceptance and command are retained locally
+under `temp/directions/capability_bound_semantic_currentness/exp/system_runtime_a01_control_20260907/`.
+No restart or other candidate is selected.
