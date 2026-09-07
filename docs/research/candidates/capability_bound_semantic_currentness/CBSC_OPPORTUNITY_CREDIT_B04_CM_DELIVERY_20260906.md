@@ -125,3 +125,9 @@ Conservatively charging its full shell time plus this CM's0.6397762s AST check
 makes the pre-engineering focused account172.6397762/300s. Git/read-only control
 plane operations are not host/model exposure. The selected60s engineering call
 fits the remaining focused account and still runs only once.
+
+DM acceptance correction: removed launch_sha from pair equality gating in run.py;
+retained both launch SHAs as descriptive pair metadata. The frozen launch binds
+actual source bytes externally; no replacement provenance guard was added.
+This follows AGENTS §6 and the card's no-new-§4-machinery boundary. No scientific
+calculation, host/model invocation or test exposure changed.
