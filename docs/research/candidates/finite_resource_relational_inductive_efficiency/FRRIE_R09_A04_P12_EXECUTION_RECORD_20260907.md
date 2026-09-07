@@ -59,4 +59,14 @@ Root ACK, then release this checkout to the CM for collection and technical acce
 Every terminal outcome returns to this DM for card §3, all-outcome intake and Chinese brief.
 No A04 outcome identifies the old cause or authorizes R09.
 
+### Terminal collection update
+
+The prepared sole handle was accepted and completed on 2026-09-07 at 21:38:29Z, exit 0,
+after 16 s complete-chain supervisor wall. CM retained the actual runner, setup log,
+admission and summary, and verified all six phases / 384 constructions with unchanged
+same-update A03 digests. See [A04 result evidence and technical acceptance](FRRIE_R09_A04_RESULT_EVIDENCE_20260907.md)
+and its raw evidence links. The first matching technical branch is `A04_T0_PATH_COMPLETED`.
+No second invocation occurred. The preceding prelaunch paragraph records its historical
+commit state; it does not describe current handle acceptance. DM intake/brief follows.
+
 scope: none
