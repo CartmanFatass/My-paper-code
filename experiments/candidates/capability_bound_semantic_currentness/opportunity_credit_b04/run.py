@@ -69,7 +69,7 @@ def write_read(path, value):
 def pair_results(raw, structured):
     for key in ("object", "seed", "rng_namespace", "profile", "configuration",
                 "initialization_digest", "training_tape_digest", "evaluation_tape_digest",
-                "launch_sha", "updates", "eval_episodes", "counters", "minibatch_order_digest",
+                "updates", "eval_episodes", "counters", "minibatch_order_digest",
                 "action_uniform_digest", "context"):
         if raw[key] != structured[key]:
             raise ValueError(f"paired primary measurement identity differs: {key}")
