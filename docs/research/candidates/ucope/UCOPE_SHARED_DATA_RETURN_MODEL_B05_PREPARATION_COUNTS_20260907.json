@@ -1,0 +1,68 @@
+{
+  "object_id": "UCOPE-SHARED-DATA-RETURN-MODEL-B05",
+  "preparation_only": true,
+  "source_sha": "71433bfabb70481def4329e622a838fa0cd9eeec",
+  "method": "Python standard-library AST reads and arithmetic only; no experiment module import, model construction, RNG draw, environment call or learner update.",
+  "inputs": {
+    "contexts": 8,
+    "rows_per_context_batch": 32,
+    "immediate_rows_per_context_batch": 16,
+    "batches_per_dataset": 512,
+    "policies": [
+      "FULL",
+      "BLIND",
+      "IMMEDIATE-4"
+    ],
+    "eval_episodes_per_context_policy": 4096,
+    "seeds": [
+      6701,
+      6702
+    ],
+    "periods": [
+      2,
+      4,
+      6,
+      8
+    ],
+    "marks": 6
+  },
+  "per_dataset": {
+    "training_episodes": 131072,
+    "paid_training_episodes": 65536,
+    "immediate_training_episodes": 65536,
+    "scalar_value_updates": 196608,
+    "histogram_updates": 65536,
+    "final_evaluation_episodes": 98304,
+    "complete_episodes": 229376,
+    "initial_value_entries": 264,
+    "histogram_entries": 56,
+    "behavior_uniforms": 131072,
+    "optimizer_steps": 0,
+    "final_checkpoints": 1
+  },
+  "both_datasets": {
+    "training_episodes": 262144,
+    "paid_training_episodes": 131072,
+    "scalar_value_updates": 393216,
+    "histogram_updates": 131072,
+    "final_evaluation_episodes": 196608,
+    "complete_episodes": 458752,
+    "behavior_uniforms": 262144
+  },
+  "exposure_line": "datasets=2; seeds=[6701, 6702]; batches_per_dataset=512; train_episodes=262144; scalar_value_updates=393216; histogram_updates=131072; eval_episodes=196608; total_episodes=458752; value_entries_per_dataset=264; initial_l2=0; first_observation_step_size=1; new_preparation_learner_exposure=0",
+  "cost": {
+    "per_dataset_law": "T_init + 512*T_batch256_shared_fit + 32768*T_three_policy_eval + T_publish",
+    "source_evidence": "UCOPE_SHARED_DATA_RETURN_MODEL_B04_RESULT_EVIDENCE_20260907.md#terminal-collection",
+    "observed_b04_whole_seconds": [
+      "4.71",
+      "4.71"
+    ],
+    "planning_seconds_per_dataset": "4.71",
+    "planning_seconds_both": "9.42",
+    "candidate_cap_seconds_per_dataset": 600,
+    "candidate_cap_seconds_both": 1200,
+    "allocated_for_execution": false,
+    "phase_coefficients": "unmeasured",
+    "added_result_bearing_validation_calls": 0
+  }
+}

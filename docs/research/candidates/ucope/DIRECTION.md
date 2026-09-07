@@ -84,9 +84,11 @@ architecture/precision advantage or tuned-generic headroom record is added.
 
 The next recommended discriminator is another two independent datasets at the same
 512-batch budget and comparison, retaining every outcome to observe useful-acquisition
-and harmful-purchase variation before another reduction. This is a **close-call preparation
-recommendation only**; no new card, seed or invocation is selected. No family or Portfolio
-disposition changes. The retained-policy/root-residual numerical-locus family stays stopped.
+and harmful-purchase variation before another reduction. The B04 intake returned this as a
+**close-call preparation recommendation only**. P10 has since prepared the prospective
+[B05 card](UCOPE_SHARED_DATA_RETURN_MODEL_B05_SCIENCE_CARD_20260907.md) for seeds 6701/6702;
+execution remains unallocated and no new result is added. No family or Portfolio disposition
+changes. The retained-policy/root-residual numerical-locus family stays stopped.
 See the [B04 card](UCOPE_SHARED_DATA_RETURN_MODEL_B04_SCIENCE_CARD_20260907.md),
 [complete result evidence](UCOPE_SHARED_DATA_RETURN_MODEL_B04_RESULT_EVIDENCE_20260907.md) and
 [joint scientific intake](UCOPE_SHARED_DATA_RETURN_MODEL_B04_INTAKE_20260907.md).
