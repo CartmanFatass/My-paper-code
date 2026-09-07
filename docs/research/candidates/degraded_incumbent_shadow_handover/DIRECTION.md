@@ -846,3 +846,42 @@ implementation or launch. No recast, C promotion or Portfolio change follows.
 References: `DISH_POST_B05_CONVERGENCE_INTAKE_20260906.md` §§1–5;
 `DISH_SAMPLED_EXECUTION_B06_SCIENCE_CARD_20260906.md` §§1–7;
 `pro_packets/20260906_post_b05_convergence/archive/RESPONSE.md` §§三–七.
+
+## B06 result: joint sampled execution loses service and adds native costs — 2026-09-07
+
+One complete seed113 LOW_LR B/EXPLORE result compares the same update16 controller under
+ordinary modal execution and the frozen joint Gaussian-motion/Bernoulli-intent rule. Initial,
+final modal and final sampled means are369.75/662.25/584.75. Delta_exec=-77.5; all four condition
+means are negative (-92.5/-41/-94/-82.5). The frozen adverse/zero-transfer branches apply and the
+low-confidence Delta_exec<=-24 prediction is a magnitude/sign hit. The current development
+choice is to retain modal in this instance and stop adding runs of this tested joint rule.
+
+Strongest support is the negative complete primary with increased invalid-commit and energy
+means in every condition. Final modal/sample invalid-commit means are3.5/31.875 per episode;
+sample energy mean is4642.6427 higher. All16 rows complete1200 ticks. Training separately has
+1030 invalid commits,3 separation breaches and35 terminal events over65536 ordinary transitions.
+There is no evaluation early termination or missing-primary explanation for the loss.
+
+The limits remain one training instance, two samples per condition and jointly changed action
+components. Two individual samples beat modal; positive overall modal/initial (+292.5) and
+sampled/initial (+215) means retain the latter's TERRAIN/K8 -57 row. The sampled/initial
+comparison mixes learning and execution interfaces. No causal claim identifies motion noise,
+intent noise, normalization or the cause of earlier LR gains. B05's +236.25 support and its
+-277 condition/209 invalid commits remain separate evidence.
+
+All reference/final rows and this learner have zero legal transfers. First-transfer ticks are
+null; source-origin eligibility and COPY–RETAIN/SHADOW–COPY value remain unestimated. This does
+not imply transfer impossibility, SHADOW worthlessness or a direction-level null. No membership,
+role-ownership, information or native reward change is inferred.
+
+The scientific next choice is returned to the existing Convergence node: recommend the narrow
+stop on this joint-execution exploration, or require a specifically justified bounded next
+object inside the existing source agenda. A fresh independent training seed is an unselected
+alternative for learning-seed uncertainty; component variants are unestimated, not automatic
+new arms. The prepared request has not been sent. No broader family closure, PARK, recast,
+C promotion or Portfolio change is applied locally.
+
+Support: `DISH_SAMPLED_EXECUTION_B06_RESULT_INTAKE_20260907.md` §§1–7;
+`DISH_SAMPLED_EXECUTION_B06_RESULT_EVIDENCE_20260907.md` (integrated33db0d860);
+`sampled_execution_b06_20260907_run01/DM_READBACK.json`; frozen card §§4–7;
+`pro_packets/20260907_post_b06_convergence/EXPOSURE_AND_COST.json`.
