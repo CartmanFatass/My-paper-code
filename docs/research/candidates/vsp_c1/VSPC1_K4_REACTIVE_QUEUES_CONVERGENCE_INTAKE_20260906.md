@@ -134,3 +134,58 @@ Owner records: direction decision `20260906-vspc1-003`, new card `20260906-vspc1
 `docs/research/portfolio/audit/2026-09-06.md` rows 92–94 in this worktree at this boundary.
 The [Chinese decision brief](../../portfolio/owner/briefs/vsp_c1/2026-09-06_reactive_queues_convergence.md)
 is 320 characters and explicitly reports zero new empirical exposure.
+
+## 6. CM source return and DM acceptance — 2026-09-06
+
+The same bounded CM returned pushed source/test commit
+`0652103f6d992a8c72ada7a45ca7b2384efdbe64` and technical-record commit
+`103d9679057d10d2af61c7e57d258c7f3f8a9c3e`, branch
+`cm/vspc1-reactive-queues-b01-20260906`, based on this card at `503043dda`.
+Its [technical record and exact launch plan](https://github.com/CartmanFatass/My-paper-code/blob/103d9679057d10d2af61c7e57d258c7f3f8a9c3e/docs/research/candidates/vsp_c1/VSPC1_K4_REACTIVE_QUEUES_B01_CM_RECORD_20260906.md)
+retains the frozen RNG mapping, check commands, failures, technical exposure, independent
+review and operational stop. No selected seed-401 invocation has launched.
+
+DM checked actual changed paths and line counts: only the new attempt's experiment/reporting
+modules (253/58 lines), thin runner (79), mirrored test (164) and CM record. Thus 390 new
+non-test source lines, no old source changes, no engineering §4 addition or §5 breach.
+Read the collection/target/loss/update boundary and paired endpoint/SE/AUC/reading functions:
+the same held action spans real ticks, actual final successors enter the detached target,
+terminal rows are not scored, per-episode loss is averaged equally across the period groups,
+and target copies occur after each multiple of 16. The primary endpoint and raw period
+differences remain visible even when the descriptive branch names a tradeoff.
+
+DM also read the existing repaired fixture summaries directly, without repeating execution:
+both are complete at **technical seed 9401**, 16 updates, 64 training episodes/3,072 ticks,
+1,024 real renewal rows, 960 nonterminal rows, 8 evaluation episodes/384 ticks, curve points
+0/16, two endpoint episodes per period, 16 period-loss entries and copies at 0/16. Windows
+RSS is explicitly `resources_unmeasured`; readable primary data is retained. The passed
+seven semantic/rule checks plus one paired real-path publication fixture, and the independent
+reviewer's no-material-finding disposition, provide focused technical evidence. No test was
+rerun by DM and fixture return values were not used to select settings or interpreted as B01.
+
+The first fixture failed after primary publication at optional Windows `psutil` import;
+the same CM repaired that path without installing a dependency and checked its affected
+publication path. Earlier fixture failure and all exposure remain in the technical record:
+three arm fixtures total 9,216 training ticks, 48 Adam steps and 1,152 evaluation ticks;
+host unit fixtures add 244 ticks and one loss fixture uses a synthetic zero-lr SGD step.
+This is new **engineering test exposure**, separate from the zero-exposure consultation and
+the still-unexecuted selected experiment. It does not supply independent training evidence.
+
+The CM's roughly 916 s/arm projection is explicitly an assumption from the already-required
+fixture wall and largest work ratio, not a measured remote runtime or a demonstrated bound.
+Actual full-arm time/resources remain unknown; the original 2,700 s whole-arm cap controls.
+No extra cost probe, scope machinery, testing or result retry is selected by this acceptance.
+
+**Decision this source intake produces (object, technical):** accept the conforming source
+and send it to Root for integration / return a concrete semantic or acceptance defect.
+Recommendation and selection: **accept for integration**, with no material gap found.
+**Owner-delegated decision (unattended, 2026-09-03 instruction): (accept for integration).**
+Owner flag none; current main review readback again returned `[]`. Ordinary P4 technical
+items remain retired under the P2 cutoff; the audit points directly here. This does not
+accept a scientific result. Next responsible action is Root's integration, then DM's bounded
+execution assignment of the existing card; no invocation is added by this source return.
+
+Latest owner-authorized operational update from Root: Root will absorb Monitor/Transport;
+after its routing-ready notice new accepted-handle handoffs go to Root, not the old Monitor.
+CM recorded this in its launch plan. No result process or observation handoff currently exists.
+The host/device, card and scientific claim are unchanged by that operational migration.
