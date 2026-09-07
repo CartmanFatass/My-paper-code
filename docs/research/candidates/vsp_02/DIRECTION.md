@@ -76,3 +76,44 @@ Evidence:
 - `VSP02_GUIDANCE_A1_HEADROOM_CENSUS_SCIENCE_CARD_20260904.md`
 - `VSP02_GUIDANCE_A1_HEADROOM_CENSUS_RESULT_EVIDENCE_20260904.md`
 - `VSP02_GUIDANCE_A1_HEADROOM_CENSUS_INTAKE_20260904.md`
+
+## Accepted fixed-member teammate-policy-change family — 2026-09-07
+
+Convergence explicitly accepts a new B/EXPLORE family: after one notified policy change by an
+active teammate, compare complete Adam RESET with ordinary CARRY from the same learned policy,
+using actual adaptation-service return on one fixed cooperative handoff task. This is the first
+recorded VSP02 Convergence RECAST (`recasts: 1`); the 2026-09-01 Portfolio empirical-standard
+recast remains historical provenance. The original member-age/recovery question remains unresolved.
+The binding structure is other-agent non-stationarity/partial observability, with fixed N=2,
+entity identity and roles. This scientific scope decision changes no Portfolio lifecycle or route.
+
+The selected, not yet implemented, host has a receiver and a courier on a five-position corridor,
+with sixteen three-step delivery rounds per complete episode. The courier switches once from
+following a public light to following its opposite; both policies actually move and deliver.
+The receiver has the same legal local history in both arms and uses recurrent PPO. One common
+prefix (seed 1103; 4,096 episodes) produces two 1,024-episode descendants. The primary is actual
+adaptation return per episode, Delta = RESET minus CARRY; absolute MEI is 0.5 deliveries per episode.
+No new empirical result, headroom or competent-comparator measurement exists on this host yet.
+
+The strongest support is the concrete state-handling decision under a real change in teammate
+actions and native service consequences, with equal information and learned starting parameters.
+The strongest contradiction to a specifically MARL mechanism claim is that the scripted teammate
+can be absorbed into an ordinary changing environment. Fast recurrent inference, prefix
+incompetence, critic adaptation, Adam step-counter effects and single-run noise remain alternatives.
+The old exact zero terminal headroom and B5R1's nonidentical continuous values both remain intact;
+neither establishes a new-host sign or member-recovery effect.
+
+The next discriminator is the selected complete real-learning CARRY/RESET pair and its full native
+return curves, after its actual card, implementation specification and execution allocation exist.
+The proposed whole-pair 1,800-second CPU/FP32 cap is not a measured affordability claim or released
+invocation. One complete B would support only a local signal or counterexample, not stable
+superiority, a unique optimizer mechanism, roster/identity recovery, transfer or UAV entry.
+Event-specific attribution would need a separately justified no-change comparison; it does not
+hold the first performance B.
+
+References:
+
+- `VSP02_TEAMMATE_POLICY_CHANGE_CONVERGENCE_INTAKE_20260907.md`
+- `pro_packets/20260907_teammate_policy_change_convergence/archive/RESPONSE.md`
+  (immutable response commit `1eb3b21b61747b21f374d252005fa48c32e4838d`)
+- `pro_packets/20260907_teammate_policy_change_convergence/INTAKE_COUNTS.json`
