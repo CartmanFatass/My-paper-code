@@ -9,6 +9,10 @@ Current assigned live/unknown experiment handles: none. The single Root heartbea
 the explicit pending Pro rows below; experiment completion alone does not pause it.
 Historical handles and old routing sections below are retained evidence, not current assignments.
 
+VSPC1 K4 reactive-queues B01 source, technical acceptance and source-intake records are
+integrated at main `476748835`; the selected seed401 run has not started. The direction manager
+is preparing the exact two-arm launch handoff against this integrated source surface.
+
 ## Current Pro handover queue — 2026-09-06
 
 Only these explicitly assigned requests require Root observation/reconciliation; do not replay
