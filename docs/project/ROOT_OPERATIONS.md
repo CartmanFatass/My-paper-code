@@ -75,6 +75,10 @@ itself. A native DM with Root as app parent receives its result through native c
 
 ### Report events
 
+For the next three new CM engineering tasks, apply
+`CM_MODEL_COMPARISON_20260907.md` before implementation starts: identical code spec and source,
+isolated model/client arms, Codex token/time collection. Existing tasks are not replayed.
+
 Apply SIBLING_COMMUNICATION.md's Root-to-Portfolio notification filter. Record routine receipts
 in `docs/research/portfolio/root-log/YYYY-MM-DD.md`; completion of an intermediate step is not
 itself a Portfolio notification. An actionable message gives the needed decision, original

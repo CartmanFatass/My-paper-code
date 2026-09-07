@@ -58,6 +58,15 @@ operational state. Batch log entries into ordinary commits at clean boundaries; 
 commit, notification, new scheduler or periodic digest is required. Portfolio reads relevant
 entries when planning or when asked; it need not ACK each entry or poll the log.
 
+OWNER_DIRECT follow-up: do not forward informational Root returns into the Portfolio task,
+and do not append "actionable" to a routine receipt to bypass this filter. A sent message must
+name an actual Portfolio decision or repair needed. Dispatch-count confirmations, completed
+pushes/index-release notifications and unchanged pending-request reminders belong in the log
+unless Portfolio explicitly requested that specific response. Portfolio does not echo or send
+a user-facing progress/final message solely to acknowledge an informational Root return.
+An initial shared-index coordination request may still ask for the required handoff; after the
+operation, record release in the log for the waiting peer to read instead of repeated messages.
+
 Dispatch ACKs, integration/push receipts, accepted launches, healthy observations, intermediate
 returns and terminal events with an executable named collection/intake/follow-on route are
 log-only. Continue that route and notify its responsible native DM/CM as needed. A completion
