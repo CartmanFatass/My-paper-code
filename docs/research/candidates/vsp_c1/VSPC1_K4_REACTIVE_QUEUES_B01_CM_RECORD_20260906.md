@@ -165,9 +165,14 @@ counts. `agent-task status <name>` is the terminal witness and `agent-task logs 
 its existing log; `agent-task stop <name>` is the manual stop command. Uncertain acceptance is
 resolved from the same name, never by relaunching. No accepted process currently exists.
 
-Observation routing is operationally changing: DM conveyed Root's owner-authorized instruction
-that Root will absorb Monitor/Transport after a routing-ready notice. At actual launch use that
-current ready route, send accepted handles with the paths/node/SHA/bound, and retain observation
-until adoption is confirmed. Do not create another monitoring task or heartbeat. This source
-assignment stops here and creates no monitoring handoff. Root owns integration and routing;
-DM owns subsequent launch assignment and scientific intake; CM retains technical collection.
+Observation routing is ready at main `2a5cadd41`: existing Root task
+`01a07249-b095-7821-8ce2-e9c32ba85267` absorbs Monitor/Transport as Luna/xhigh; its single
+30-minute fallback is ACTIVE and the old tasks are archived. Native accepted-handle handoffs
+go directly to Root through collaboration, with paths/node/SHA/bound; CM retains observation
+until Root's adoption ACK after ACTIVE readback. Do not create another monitoring task or
+heartbeat. Card/intake `503043dda` is integrated as `7b4948f8b`; source `0652103f6`, CM record
+`103d96790` and DM acceptance `64895a181` remain in Root's acceptance/integration queue.
+**No result-bearing launch until Root's exact source-integration handoff.** This assignment
+creates no monitoring handoff. Root owns integration and operational routing; CM retains
+technical collection and DM retains direction science. Independent Portfolio task
+`01a07a3e-29bf-7f52-bc1e-cfa214b8d94a` owns cross-direction science.
