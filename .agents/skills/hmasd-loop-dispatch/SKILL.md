@@ -19,9 +19,10 @@ A committed command, accepted dispatch and running task are different states.
 Before shared-main index mutations, use the peer handoff in
 `docs/project/SIBLING_COMMUNICATION.md`; other work continues while the short Git operation runs.
 
-Count advancing direction chains, not child agents: implementation, collection, intake and
-question preparation count; an external wait, completed child or undispatched intention does
-not. Reuse the latest native inventory until an event changes it. Resolve a missing fact once
+Count each direction once across active native implementation/collection/intake/question work,
+accepted running experiments and accepted Pro generation (OWNER_DIRECT 2026-09-07).
+Unresolved transport waits, completed children and undispatched intentions do not count.
+Reuse the latest native inventory until an event changes it. Resolve a missing fact once
 from its current source instead of reconstructing all direction history.
 
 ## Portfolio: an actionable return triggers a whole-working-set pass

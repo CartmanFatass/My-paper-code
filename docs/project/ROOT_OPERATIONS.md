@@ -54,7 +54,8 @@ procedure for whole-working-set planning, five-item handoffs, actual dispatch co
 and prewritten collection/intake routes. Use
 [hmasd-portfolio-task](../../.agents/skills/hmasd-portfolio-task/SKILL.md) for scientific
 Portfolio judgment and the existing decision ladder. Planning targets five advancing
-direction chains; a completed task or external wait does not count as advancing work.
+direction chains. OWNER_DIRECT 2026-09-07 counts active native work, running experiments and
+accepted Pro generation once per direction; completed tasks and unresolved waits do not count.
 
 ## Root's execution loop
 

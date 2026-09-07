@@ -258,6 +258,11 @@ When the owner is absent the loop keeps running under a standing delegation (own
 
 ## 5. Capacity and resume
 
+OWNER_DIRECT 2026-09-07: the owner's goal maintains five direction tasks until two formally
+enter UAV validation, with actual entry traced to the relevant direction decision and UAV card.
+Active native subagents, running experiments and accepted Pro external reviews count together,
+at most once per direction; completed returns and unresolved transport waits do not count.
+This updates execution counting, not scientific evidence requirements or lifecycle authority.
 Portfolio plans a target of five concurrently advancing top-level direction/DM chains; Root
 executes its concrete commands and reports actual dispatch/return facts. Count only the
 direction-level chains: Root, Transport, CM, specialists and detached processes do not each
