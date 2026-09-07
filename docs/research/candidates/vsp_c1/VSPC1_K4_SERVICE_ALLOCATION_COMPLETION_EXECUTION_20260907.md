@@ -115,3 +115,104 @@ Remote bundle verify/import and detached worktree creation succeeded; HEAD readb
 the exact SHA, and status was clean. No HTTPS availability probe, source change, fixture,
 model or rule call occurred in staging. This entry is committed/pushed before executing the
 unchanged exact command above. Original inputs remain readonly.
+
+
+## E0 technical return: outcome-informed completion succeeded
+
+**The sole amended rule completion and full paired publication are technically accepted.**
+This is outcome-informed completion after the original GENERIC publication failure, not
+retroactive success of that call or another independent training instance. No fourth call,
+retry, model/optimizer initialization, learner evaluation, source edit or fixture occurred.
+
+### Accepted handle and terminal resource facts
+
+Exact handle `vspc1-service-allocation-b01-completion402-20260907` accepted at
+**2026-09-07T18:36:40.585409Z**, PID2743851, initial running/tmux active. Command string,
+source, cwd, input/output/log/receipt paths match the frozen binding above. Full acceptance
+went immediately directly to Root, cc DM. CM's same-handle read found terminal **finished,
+exit0, tmux inactive** before adoption ACK; terminal facts were sent directly to Root.
+Supervisor log started `2026-09-08T02:36:40+08:00` and ended `02:36:41+08:00`
+(**18:36:40–18:36:41Z on September7**). No process remains live or needs renewed observation.
+
+Fresh same-node admission at **18:36:40.629822Z** measured physical/effective available
+**15,639,351,296 bytes**, both above4GiB, passed with no failure reasons. It was joined by
+&& immediately before the rule runner, inside the120s cap. Complete external time:
+**real1.37s, user0.82s, sys0.25s; aggregate CPU1.07s**. Main-process lifetime peak RSS:
+**347,971,584 bytes**. Internal wall through primary readback1.1324877879815176s has the
+narrower runner-declared scope; external complete wall controls the cap. Scratch unmeasured.
+No resource-only claim is made; original GENERIC RSS remains unmeasured.
+
+### Actual work and preserved inputs
+
+Summary/paired status both complete. Launch metadata records exact repaired source
+`ec8866b3968fcb1566976ce405d7c552d4d9a5de`, NumPy1.26.3, configured interpreter/cwd,
+CPUfloat32/one compute thread and the frozen argv. Completion metadata preserves original
+learner sourcefaf786e135b3f55e535c898e17e646dcc341bdec, readonly input paths and original
+GENERIC exit1. It explicitly labels outcome-informed completion.
+
+Observed rule counts equal declared counts: **256 evaluation episodes,12288 joint ticks,
+4096 renewal decisions, zero trained models/trainable parameters/optimizer steps/nested
+search calls**. Unchanged source has one evaluate_rule call, evaluation-only tapes and no
+Q scoring. Source-derived partner choices remain16384 (12288tick responses+4096renewal
+predictions); these are inferred from the fixed loop/counts, not separate instrumentation.
+
+Amended actual totals: **528384 joint ticks,2816 evaluation episodes,512 optimizer steps,
+1138688 scalar learner Q scores, one paired training instance and three result-bearing
+invocations**. Historical two-call wall11.36s/CPU8.58s plus this call yields summed
+invocation wall**12.73s** and CPU**9.65s**. These sums exclude staging/engineering/intake;
+the separated study elapsed is not12.73s. Original failure and its full cost remain counted.
+
+CM compared paired output to the preserved original learner JSON copies: all512 learner
+endpoint rows (including consequences) and both five-point curves are exactly retained.
+Rule has128 ordered endpoint slots in each period; all256 returns are finite in[0,1].
+Original input summaries were only read. Standalone rule summary exists separately from
+paired output, so no dependency was recovered by rerunning.
+
+### Primary publication checks
+
+Saved-array arithmetic independently reproduced all three contrasts, per-period means,
+indexed differences, conditional SEs, E_F-E_G=Delta, five-point trapezoidal AUC/256,
+initial-to-final changes, initial-relative-to-rule means and material period-loss lists.
+No host/model/rule function or scientific RNG was called during collection. Numerical
+agreement was ordinary floating-point closeness; no scientific bit-identity claim follows.
+
+| Contrast | Equal-period mean | Period2 | Period6 | Conditional evaluation SE |
+| --- | ---: | ---: | ---: | ---: |
+| FACTOR-GENERIC | 0.006510416667 | 0.001708984375 | 0.011311848958 | 0.002109066044 |
+| FACTOR-LQ-EXCLUDE | -0.026285807292 | -0.037109375000 | -0.015462239583 | 0.001805490302 |
+| GENERIC-LQ-EXCLUDE | -0.032796223958 | -0.038818359375 | -0.026774088542 | 0.002076850024 |
+
+Rule equal-period J=**0.7851969401041667**, period2=0.7902018229166667,
+period6=0.7801920572916667. Mean overflow/backlog/unused service are respectively
+(0,2.453125,20.140625) for period2 and (0.015625,3.015625,21.1015625) for period6.
+Learner AUC remains FACTOR0.759221394856771, GENERIC0.7578582763671875,
+Delta0.0013631184895833703. Initial-to-final equal-period changes remain
+FACTOR0.010457356770833426 and GENERIC0.0012613932291667407. Added initial-minus-rule
+means are FACTOR-0.03674316406250011 and GENERIC-0.03405761718750011.
+All underlying indexed episodes, period means, native consequences and five checkpoints
+remain in the complete raw paired JSON; none were selected or dropped.
+
+Published material-period-loss lists: none for FACTOR-GENERIC, period2 for FACTOR-rule,
+periods2/6 for GENERIC-rule. Runner emits numerical label `no_practical_continuation_reason`;
+this is recorded output, not CM's direction/Portfolio decision. Conditional SE describes
+these fixed policies' evaluation noise, not independent-training uncertainty. DM retains
+prediction scoring, scientific interpretation and any disposition.
+
+### Evidence locations and return
+
+Remote output: frozen completion cwd plus
+`temp/directions/vsp_c1/exp/k4_service_allocation_b01_completion402_20260907/` contains
+`summary.json`, `paired_summary.json`, `resource_admission.json`. Original supervisor log:
+`/home/wu/.agent-tasks/vspc1-service-allocation-b01-completion402-20260907/task.log`.
+
+Collected untouched copies are in the designated authoring checkout
+`C:/Projects/HMASD-worktrees/dm-vspc1-next-20260906/temp/directions/vsp_c1/exp/k4_service_allocation_b01_completion402_20260907/`,
+with `supervisor.log` and local saved-array `collection_checks.json`. Earlier learner copies
+remain in the prior CM execution worktree documented in the original E0, and originals remain
+under the frozen remote learner cwd. No raw output was overwritten or relocated.
+
+Only this execution record changes in Git. Source acceptance remains unchanged. Return the
+pushed record to Root for integration, then DM scientific intake/Chinese brief and Portfolio.
+The assigned technical completion has no remaining missing primary dependency; no additional
+invocation follows. This technical acceptance does not establish stable superiority,
+optimality or a new independent learning result.
