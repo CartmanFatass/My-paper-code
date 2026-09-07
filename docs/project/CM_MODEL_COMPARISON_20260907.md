@@ -184,7 +184,7 @@ Three real tasks support an observed task-specific comparison, not a general mod
 
 | Batch | New assignment / code spec / source | Baseline + Sol IDs | Other arm roots | State |
 | --- | --- | --- | --- | --- |
-| 01 | not yet captured | — | — | awaiting next new CM engineering assignment |
+| 01 | P14-VSP02-B-CARD-AND-CM-COMPARISON-01 / `a1b8c56f2a36e2027372bf578fc2646dfd57efe9` | `/root/vsp02_cm_baseline_b01`, `/root/vsp02_cm_sol_b01` (native); headless PIDs 11640/29924/22060 | `temp/cm-model-comparison/20260907/batch-01/` | five arms dispatched; awaiting returns |
 | 02 | not yet captured | — | — | awaiting next new CM engineering assignment |
 | 03 | not yet captured | — | — | awaiting next new CM engineering assignment |
 
