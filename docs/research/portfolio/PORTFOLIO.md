@@ -1,6 +1,17 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-07 (P10 five native dispatches accepted; goal targets five UAV entries)
+Updated at: 2026-09-07 (P11 refill and selected executions prepared; five-UAV-entry goal)
+
+Current commands: [P11 refill and execution](handoffs/2026-09-07-p11-refill-and-selected-execution.md).
+Retain VSP03 collection/intake, allocate the selected CBSC single acquisition/metadata route
+and UCOPE B05 two-dataset route, and replace yielded RCLE/VSPC1 slots with bounded FRRIE A04
+preparation and VSP02 next-question preparation. Root records actual acceptance; a prepared
+replacement is not an active slot. These commands change no lifecycle/priority or UAV-entry claim.
+The [three-batch CM comparison](../../project/CM_MODEL_COMPARISON_20260907.md) enrolls only new
+engineering assignments with identical code specs. Shadow arms do not consume direction slots
+or add research invocations; current unchanged-code execution is not an old-task benchmark.
+
+## Previous P10 dispatch snapshot
 
 Current plan: [P10 exact commands](handoffs/2026-09-07-p10-goal-five-directions.md) targets
 VSP03 repair, UCOPE pair preparation, CBSC path selection, RCLE request reconciliation and
