@@ -75,3 +75,14 @@ no root-cause claim. No Pro decision is missing for this bounded setup objective
 CM is the original `/root/dm_amx_cbsc_next/cm_cbsc_opportunity_b04`; it is reused
 for this related dependency. DM retains scientific selection/intake. Root
 integrates and observes; independent Portfolio retains cross-direction ordering.
+
+## Actual dispatch
+
+At 2026-09-07 12:54 UTC, DM sent the five-item handoff to the existing
+`/root/dm_amx_cbsc_next/cm_cbsc_opportunity_b04` using its native follow-up.
+The card and selection were already pushed at
+`56edc4156235ff4121238ea2f083d90aca8787bf` on
+`codex/dm-cbsc-runtime-a01-20260907`. Root received that commit and the actual
+dispatch status. No preparation process had been accepted at this boundary;
+the CM command record and terminal result remain pending. This records an
+executed handoff, not a readiness or scientific result.
