@@ -22,6 +22,14 @@ sections, with section 11 controlling; do not preload the whole specification or
 citation tree. Expand only for a concrete unresolved scientific or engineering question. Check
 actual checkout/Git state and preserve unrelated work. Follow AGENTS focused-reading guidance.
 
+For mechanism design/recast, comparator selection, unexpected-result interpretation or related
+work, use the question-driven local-library route in
+`.agents/skills/hmasd-scientific-tools/references/local-literature.md`: My-lib for mechanism
+overlap/alternatives, Inst-sci for source methods/results. Search indexes before source passages;
+reuse prior relevant retrieval. Record what the verified evidence changes in the existing card
+or intake, and send CM only the implementation-relevant source pointers. Library use is not a
+mandatory search on every task, a novelty verdict or an additional launch condition.
+
 ### The card
 
 Apply evidence-spec §11.8 when selecting the question, not only when implementing a card.

@@ -9,7 +9,12 @@ Owner approved adoption batches 1 and 2 on 2026-09-05. Use tools to retrieve,
 calculate and measure facts instead of repeatedly deriving them in prose. Select
 only the mode needed now; this is not a launch checklist or new review layer.
 
-- **DM/Root literature:** use official paper/code sources or the locally available
+- **DM/Root literature:** for a concrete mechanism, comparator, unexpected-result or
+  related-work question, start with the two local libraries using
+  [local-literature.md](references/local-literature.md). Search indexes first and
+  verify decision-relevant claims in the source. Reuse relevant prior retrieval;
+  routine implementation does not require another literature pass. For a specific
+  coverage gap or current-information need, use official paper/code sources or the locally available
   `C:/Projects/HMASD-scientific-skills/.agents/skills/paper-lookup/SKILL.md` and its
   relevant database reference. Existing web/connector tools remain valid alternatives.
   Retrieve public queries, retain exact relevant excerpts/links, and distinguish
