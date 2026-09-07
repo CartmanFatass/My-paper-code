@@ -331,9 +331,12 @@ Several sessions commit to the primary target concurrently. Rules for all of the
   remains; shared control-plane work reuses its existing checkout. Branch reuse never combines
   scientific objects, budgets, RNG state, outputs or frozen SHAs. Remote execution uses detached
   exact-SHA worktrees, without a new authoring branch.
-  Accepted Pro requests retain their bound delivery branches through response archiving and
-  intake. Dedicated Pro delivery remains an explicit transport exception, not an engineering
-  task pattern. Retire completed task branches after reconciling unique commits, live writers,
+  Pro also uses the corresponding shared direction branch by default; a Pro round does not
+  create another branch. Only a concrete special isolation need warrants a temporary branch.
+  Preserve accepted requests' bindings through archival/intake; new requests use the shared
+  branch. Pro adds only its scoped response on the current descendant HEAD, preserving other
+  paths and fixed input SHAs; local writers reconcile that commit before their next push.
+  Retire completed task branches after reconciling unique commits, live writers,
   open PRs and evidence links; preserve recovery refs before removing branch names. Existing
   same-direction authoring checkouts finish accepted work, then Root carries forward one at a
   clean boundary and retires the others after reconciliation. Branch cleanup does not remove

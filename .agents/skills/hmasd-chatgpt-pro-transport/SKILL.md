@@ -25,6 +25,9 @@ browser methods; an unavailable export or locator API is not permission to resen
 
 Use GitHub delivery for new requests. Preserve accepted request content and reconcile
 its existing Send state before continuing.
+New requests normally deliver on the corresponding shared direction branch. An extra branch
+requires a concrete special isolation need; keep accepted handoffs unchanged. A changed HEAD
+alone is not delivery evidence on a shared branch: verify the exact response path and commit.
 An Author handoff with `delivery_mode=github_delivery` uses the already supported
 paste transport request. Send its short fixed task link verbatim, no attachment,
 read-only preamble or copied evidence. Dispatch only a bound READY_TO_DISPATCH task;

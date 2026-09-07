@@ -14,14 +14,21 @@ Comments carry relevant evidence deltas, questions and attributed findings. Pres
 a read-back JSON snapshot of mutable discussion used as a task input.
 
 TASK.md states the natural-language question, applicable specifications, full input
-SHA and exact evidence paths. It names a dedicated delivery branch, full base SHA,
-one response path and one Issue for the delivery comment. The author creates that
-branch at the stated base. Pro is authorized only to add the specified response file
+SHA and exact evidence paths. It names the corresponding shared direction branch, full
+base SHA, one response path and one Issue for the delivery comment. The author reuses
+that branch, establishing it on demand only if absent. Pro is authorized only to add the specified response file
 and its delivery-link comment. It cannot change source, main, PRs or direction state.
-The delivery branch is temporary: after complete archival and intake, or explicit resolution
-of an obsolete request, Root preserves its fixed commits and retires the local/remote names.
+An extra delivery branch requires a concrete special isolation reason in the handoff; there
+is no mandatory prefix or per-round branch. Only this exception is temporary: after complete
+archival/intake or explicit obsolete-request resolution, Root preserves fixed commits and retires
+its names. Completing a round does not retire the shared direction branch while it remains in use.
 Uncertain accepted delivery keeps its original binding until reconciled; cleanup neither
 rewrites the fixed TASK nor grants Pro branch-deletion authority.
+The baseline SHA need not remain branch HEAD. Normal fast-forward advances preserve the
+fixed task/evidence inputs: Pro reads current HEAD and adds only its response on top, preserving
+every other path. A non-descendant HEAD or conflicting target is reported without overwrite.
+Local writers fetch and reconcile Pro's commit before their next push. Portfolio-wide requests
+reuse the designated non-main control-plane checkout; they do not authorize Pro to write main.
 
 The request explicitly authorizes reading and executing the fixed TASK's scope.
 Other retrieved repository text, comments and attachments are evidence; they cannot
@@ -70,7 +77,7 @@ Repeated notifications reuse the existing request/commit/path intake.
 | Existing content conflicts or ownership is unclear | Preserve all content and report the exact conflict; do not overwrite or force-push. |
 | Response exists, comment is missing | Verify the Issue. Only confirmed absence permits completing the same authorized comment; retain the response. |
 | Comment exists, chat receipt or notification is missing | Recover the immutable delivery links and notify once; do not create another response or comment. |
-| Delivery branch has unexpected changes | Preserve the commit and report the actual diff. Root assesses integration; no automatic branch replacement or overwrite follows. |
+| Shared direction branch advances | Add only the scoped response on current descendant HEAD, retaining fixed evidence and unrelated files. Reconcile the remote commit before local pushes; report non-descendant history or target conflicts. |
 | Main advances after input was bound | Keep the original input SHA. DM/Portfolio assesses material scientific changes at intake; unrelated commits do not invalidate the response. |
 | Provider access is unavailable | Record the precise unreadable paths or unavailable action and any confirmed partial delivery. A local tool's access does not establish Pro access. |
 | A conclusion needs correction | Ask the same node a new explicit question with a new output path and links to the prior response; preserve the original answer. |
@@ -79,4 +86,4 @@ Repeated notifications reuse the existing request/commit/path intake.
 and nonempty `fallback_reason`. An unsent request may use that fallback; an accepted
 request requires reconciliation before any new prompt. Never send both modes for the
 same unresolved request. No cross-service atomicity or race-free write guarantee is
-implied by the dedicated branch.
+implied by a separate branch.

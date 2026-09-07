@@ -18,12 +18,16 @@ Caller supplies role portfolio/em, proper workflow_node, request_id, source_thre
 parent_thread_id, registered direction scope, exact repository URL/full input SHA,
 scientific_question, deliverable, claim_ceiling, reference_files with purpose and
 provenance, optional discussion_urls and natural-language constraints. The delivery
-scope supplies dedicated branch, full base_sha, one response_path and same-repo issue_url.
-Portfolio/DM creates the branch and reuses the substantive Issue under existing authority.
-This branch is temporary. Its retirement event is complete response archival and intake (or
-an explicitly resolved obsolete request); Root reconciles delivery state and preserves the
-fixed commits before retiring its local/remote names. Never rebind an accepted request to
-another branch as cleanup.
+scope supplies the corresponding direction's existing branch, full base_sha, one response_path
+and same-repo issue_url. Reuse that branch and substantive Issue; if the direction has no
+branch, actual Pro authoring work is a reason to establish its one shared direction branch.
+Do not create an extra branch per Pro round. Only a concrete special isolation need uses a
+temporary branch, with its reason and retirement event in the existing handoff. Portfolio-wide
+requests reuse the designated non-main control-plane checkout; main writes remain outside
+Pro's scope. Never rebind an accepted request to another branch as cleanup.
+Read the current delivery HEAD and preserve unrelated changes when adding the response;
+normal advances do not replace fixed input evidence. Synchronize local writers before their
+next push. Completing one Pro round does not retire a shared direction branch still in use.
 
 Follow the current Portfolio command's operation and return route. A preparation-only task
 returns its ready handoff; it does not dispatch Transport. A command may already include

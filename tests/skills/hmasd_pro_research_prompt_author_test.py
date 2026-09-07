@@ -101,8 +101,9 @@ def test_root_author_executes_locally_without_self_dispatch(project_root: Path, 
 
 
 @pytest.mark.parametrize("root_direct", [False, True])
+@pytest.mark.parametrize("branch", ["direction/demo", "codex/pro-routing-test"])
 def test_github_binding_preserves_current_executor_and_exact_task(
-    project_root: Path, monkeypatch: pytest.MonkeyPatch, root_direct: bool
+    project_root: Path, monkeypatch: pytest.MonkeyPatch, root_direct: bool, branch: str
 ) -> None:
     renderer = _renderer()
     request = _request()
@@ -111,7 +112,7 @@ def test_github_binding_preserves_current_executor_and_exact_task(
         request["source_thread_id"] = SINGLETON_THREAD_ID
         request["parent_thread_id"] = SINGLETON_THREAD_ID
     request["github_delivery"] = {
-        "branch": "codex/pro-routing-test",
+        "branch": branch,
         "base_sha": "a" * 40,
         "response_path": "docs/research/candidates/demo_direction/pro_packets/round/archive/RESPONSE.md",
         "issue_url": "https://github.com/example/repo/issues/1",
@@ -119,6 +120,9 @@ def test_github_binding_preserves_current_executor_and_exact_task(
     out = project_root / "packet"
     renderer.prepare_github_delivery(request, project_root, out)
     before = (out / "TASK.md").read_bytes()
+    assert f"`{branch}`".encode() in before
+    assert b"Normal fast-forward advances" in before
+    assert b"only the named response file" in before
     monkeypatch.setattr(renderer.subprocess, "check_output", lambda *args, **kwargs: before)
     renderer.bind_github_task(out / "HANDOFF.json", "b" * 40, project_root)
     handoff = json.loads((out / "HANDOFF.json").read_text())
@@ -135,6 +139,22 @@ def test_github_binding_preserves_current_executor_and_exact_task(
     else:
         assert handoff["dispatch_mode"] == "REUSE_SINGLETON"
         assert f"threadId={SINGLETON_THREAD_ID}" in handoff["dispatch_instruction"]
+
+
+@pytest.mark.parametrize("branch", ["main", "refs/heads/main", "bad branch"])
+def test_github_delivery_rejects_main_and_invalid_refs(project_root: Path, branch: str) -> None:
+    renderer = _renderer()
+    request = _request()
+    request["repository"] = "example/repo"
+    request["github_delivery"] = {
+        "branch": branch,
+        "base_sha": "a" * 40,
+        "response_path": "docs/research/candidates/demo_direction/pro_packets/round/archive/RESPONSE.md",
+        "issue_url": "https://github.com/example/repo/issues/1",
+    }
+    with pytest.raises(renderer.PacketInputError, match="main|invalid delivery branch"):
+        renderer.prepare_github_delivery(request, project_root, project_root / "rejected-packet")
+    assert not (project_root / "rejected-packet" / "TASK.md").exists()
 
 
 @pytest.mark.parametrize("direct", [False, True])

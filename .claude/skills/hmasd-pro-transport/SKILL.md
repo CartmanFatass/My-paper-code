@@ -36,13 +36,13 @@ conversation for a bound key.
    any prompt, skill or agent file.
    Follow the authoring rules in `.agents/skills/hmasd-pro-research-prompt-author/SKILL.md`
    (section 11.8 proportional burden, dominant work factors, natural-language answer).
-3. **Create the delivery surface**: a dedicated output branch at the full base sha, pushed
-   (`git push origin <base_sha>:refs/heads/codex/pro-<direction>-<round>-<date>`; the renderer
-   requires the `codex/pro-` prefix for every Pro output branch, whichever loop authors it);
-   reuse the direction's substantive Issue or open one.
-   This is a temporary delivery exception under AGENTS §6. Root retires its branch after
-   archival/intake or explicit obsolete-request resolution, preserving fixed commits and
-   reconciling uncertain accepted delivery before deletion.
+3. **Reuse the delivery surface**: use the corresponding shared direction branch and record
+   its full base SHA; create that direction branch only if actual work has none. Reuse the
+   substantive Issue or open one. No `codex/pro-` prefix or extra per-round branch is required.
+   An extra branch needs a concrete special isolation reason and retirement event in the handoff.
+   Preserve accepted bindings. Pro adds only its response on current descendant HEAD, keeping
+   other files; local writers reconcile the remote commit before their next push. Completing a
+   round does not retire a shared branch still in use.
 4. **Render** with the Codex renderer in caller-direct mode, so no Codex singleton is implied:
 
    ```
@@ -81,8 +81,9 @@ conversation for a bound key.
      a restored draft cannot double the prompt). `sendAttempted=true` allows only the identical
      `verifyExisting=true` observation call. An uncertain send is terminal for that request id.
    - **Wait (hub):** one background `until` loop on a **GitHub readback**, not on the Agentify
-     state file: `gh api repos/<repo>/branches/<output branch> --jq .commit.sha` until it differs
-     from the base sha (Pro's connector commit is the completion signal), with a 45 min cap; no
+     state file: inspect the exact response path at a freshly read branch HEAD until this round's
+     response exists, with a 45 min cap. Other direction commits can advance HEAD and are not
+     Pro completion; verify the response and its delivery comment. No
      polling in the hub's context. Lesson 2026-09-06: `operations.<id>.archive` is only written by
      an observation call, so with phase 1 returning early a state-file watch never fires and the
      owner had to point out the reply was done and the tab still open.
@@ -102,8 +103,9 @@ conversation for a bound key.
    two to three minutes after the reply, authored by the owner's GitHub account through the
    ChatGPT connector with a `Co-Authored-By: OpenAI ChatGPT` trailer. After `COMPLETE`, wait a
    few minutes and do a fresh `gh api` readback of the branch head, the response path and the
-   Issue comments before concluding a gap; only a readback that still shows base sha, 404 and
-   no new comment is a write gap. The connector needs no per-conversation enabling; it is the
+   Issue comments before concluding a gap; only a fresh read showing the exact response path
+   absent at current HEAD and no delivery comment for this round establishes a write gap,
+   regardless of unrelated branch advances. The connector needs no per-conversation enabling; it is the
    account-level GitHub app, and it works in a first-binding conversation as well.
    **Registry (mapped from the Codex skill 2026-09-06):** the Codex transport archives a
    request (`ARCHIVED`) before the next turn on the same key; the Claude agent's

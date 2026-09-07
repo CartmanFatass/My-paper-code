@@ -21,8 +21,11 @@ records are evidence, not a command queue.
 Use main plus one reusable branch/checkout for each direction with actual authoring work.
 Create that branch on demand from accepted inputs; do not provision idle directions or give
 each DM, CM, stage or child another branch. Record the chosen checkout in the existing command
-handoff. Serialize overlapping writers. Necessary Pro delivery branches remain temporary and
-retain their accepted bindings through archival/intake or explicit obsolete-request resolution.
+handoff. Pro uses the corresponding direction branch too, with a fixed evidence SHA and its
+one scoped response path. Serialize overlapping writers and reconcile remote Pro commits before
+local pushes. Extra delivery branches need a concrete special isolation reason; only these are
+temporary. Existing accepted requests retain their bindings through archival/intake or explicit
+obsolete-request resolution. One completed Pro round does not retire a shared branch still in use.
 At completion Root integrates accepted commits, preserves other unique commits and dirty files,
 reconciles live writers/PRs/delivery dependencies, and retires obsolete local and remote names.
 Historical detached worktrees may retain evidence; retiring a branch does not delete their files.
