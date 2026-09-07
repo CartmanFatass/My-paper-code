@@ -71,5 +71,15 @@
     "verdict_text": "Owner-delegated decision (unattended, 2026-09-03 instruction): (a).",
     "source": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_TBCFV_A02_FROZEN_SCORE_ALLOCATION_SCIENCE_CARD_20260906.md"
   },
-  "starred": false
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-07T03:57:04+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260906_post_b02_innovator/archive/RESPONSE.md",
+      "record": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_TBCFV_A02_RESULT_INTAKE_20260906.md",
+      "state": "applied",
+      "summary": "当前恢复研究与2026-09-03无人值守授权下，执行6c0d1ca55的A02决定；精确启动abcc3766c，完整证据提交2fba6345d。512局、32次求导、零更新，19.72秒；接受有界A结果并结束本次支出。冻结行在启动版本L94，原L92为冻结分支历史定位；本摄取分支审计L96/L97。不选择或启动后继。"
+    }
+  ]
 }
