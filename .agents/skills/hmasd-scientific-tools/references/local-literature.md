@@ -13,14 +13,22 @@ a fresh search. Historical research and every cited paper are not startup readin
 
 ## Existing entry points
 
-- **My-lib — mechanism overlap and alternatives:** `C:/Projects/My-lib/README.md`
+Do not partition questions by library name. Both stores may contain methods, mechanisms
+and empirical evidence. Prefer a verified unified real-corpus entry point when available;
+until integration is verified, use the available source indexes below and state actual
+coverage. Files on disk are not proof of searchable coverage. My-lib's default tracked
+paper registry currently contains synthetic fixtures; exclude these from scientific
+retrieval and do not present them as real mechanism evidence. The owner's unified-library
+integration is assigned; this document does not claim it is already complete.
+
+- **My-lib — existing retrieval interface:** `C:/Projects/My-lib/README.md`
   documents the existing local CLI and mechanism/evidence records. Use its existing
-  index and supported search interface. A CLI search uses the library's Innovation
+  verified real-collection index and supported search interface. A CLI search uses the library's Innovation
   Brief and explicit collection selection; derive these from the current question,
   without asking DM or CM to rewrite the science card. Inspect relevant returned
   source pointers, conditions and differences. No new index, service or acquisition
   pipeline is needed for HMASD integration.
-- **Inst-sci — paper methods and empirical evidence:** the formal library is
+- **Inst-sci — formal source corpus:** the formal library is
   `C:/Projects/Inst-sci/papers/MyLib/`; start with `llm-index/catalog.v2.jsonl`.
   Search title, algorithm, setting, benchmark or mechanism terms with bounded output.
   Read a candidate's full metadata record in `metadata/v2/papers.v2.jsonl` when

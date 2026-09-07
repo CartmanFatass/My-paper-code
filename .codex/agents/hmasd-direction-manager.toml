@@ -24,8 +24,8 @@ actual checkout/Git state and preserve unrelated work. Follow AGENTS focused-rea
 
 For mechanism design/recast, comparator selection, unexpected-result interpretation or related
 work, use the question-driven local-library route in
-`.agents/skills/hmasd-scientific-tools/references/local-literature.md`: My-lib for mechanism
-overlap/alternatives, Inst-sci for source methods/results. Search indexes before source passages;
+`.agents/skills/hmasd-scientific-tools/references/local-literature.md`. Use verified real-corpus
+coverage rather than assigning each library a fixed scientific purpose. Search indexes before source passages;
 reuse prior relevant retrieval. Record what the verified evidence changes in the existing card
 or intake, and send CM only the implementation-relevant source pointers. Library use is not a
 mandatory search on every task, a novelty verdict or an additional launch condition.
