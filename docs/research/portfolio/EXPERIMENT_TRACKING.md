@@ -33,10 +33,17 @@ next runnable recorded object is DISH B06 implementation preparation, which has 
 the existing DISH DM; it is not yet a result-bearing launch. No scientific polarity follows from
 the prior no-op or from an unpaired arm.
 
-DISH B06 implementation is now concretely dispatched: the existing DM accepted CM child
-`/root/dm_amx_dish_seed101/cm_am_dish_seed101` against source `fde638f9c`; the child is running
-the bounded implementation, focused checks and independent review. No B06 experiment launch is
-authorized or reported. Dispatch evidence is recorded in audit row118 and commit `2b09e9209`.
+DISH B06 implementation is now technically delivered and integrated at main `373d18720`: CM
+child `/root/dm_amx_dish_seed101/cm_am_dish_seed101` returned source `a3dac9149`, four focused
+checks and an independent review with no material finding. No B06 experiment launch is
+authorized or reported; DM intake and any separate launch assignment remain pending. Dispatch
+evidence is recorded in audit row118 and commit `2b09e9209`.
+
+UCOPE B01 implementation is integrated at main `245047432` with CM technical acceptance
+`bd7e47a67`: the bounded source, synthetic coverage and one remote technical profile passed
+(`768` episodes, `3156` transitions, two optimizer steps, complete-process wall `2.66 s`).
+Formal seeds `6301/6302` remain unrun; no result-bearing handle or scientific polarity exists.
+The UCOPE DM owns the next launch assignment under the frozen card.
 
 ## Current Pro handover queue — 2026-09-06
 
