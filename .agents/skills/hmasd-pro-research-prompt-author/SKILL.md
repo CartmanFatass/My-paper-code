@@ -28,6 +28,12 @@ Pro's scope. Never rebind an accepted request to another branch as cleanup.
 Read the current delivery HEAD and preserve unrelated changes when adding the response;
 normal advances do not replace fixed input evidence. Synchronize local writers before their
 next push. Completing one Pro round does not retire a shared direction branch still in use.
+After branch cleanup, resolve the branch/checkout from the current command and actual remote
+ref before rendering. A historical HANDOFF is evidence of its own round, not a default branch
+registration. Return the new request ID, full HANDOFF commit and fixed TASK URL together so
+Root can load the authored bytes independently of main's same-path copy. A prepared unsent
+task with changed delivery scope is republished and rebound before dispatch; accepted tasks
+retain their exact content and follow the workflow's explicit delivery-correction route.
 
 Follow the current Portfolio command's operation and return route. A preparation-only task
 returns its ready handoff; it does not dispatch Transport. A command may already include
@@ -60,7 +66,7 @@ The full fixed response, not chat links or a comment summary, is the formed deci
 The DM or independent Portfolio directly reads and preserves the complete bytes and
 provenance, then performs existing scientific intake. Root handles transport and routes
 native DM receipts locally; Portfolio requests name the actual Portfolio task as parent.
-The integrated Root's shared heartbeat observes all current requests without per-request
+The integrated Root observes current requests within the owner's active goal, without scheduled
 automations. Read docs/project/ROOT_OPERATIONS.md for current routing. Contradictions or evidence gaps remain explicit; a complete
 archive alone is not science acceptance. No new approval or experiment gate is added.
 

@@ -44,7 +44,7 @@ Partial success is retained. Existing matching file/comment is reused; conflicti
 content is never overwritten. Uncertain writes are read back before retries.
 Repeated notifications reuse existing request/commit/path intake and do not run
 science again. Comments do not automatically wake Codex/Pro; existing Transport
-and heartbeat perform observation and wakeup. No webhook or service is added.
+performs observation during the owner's active goal. No webhook or scheduler is added.
 
 All new requests default to github_delivery. archive_attachment is a read-only
 capability fallback requiring explicit delivery_mode and nonempty fallback_reason;
