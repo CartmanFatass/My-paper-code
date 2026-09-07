@@ -5,14 +5,15 @@
 OWNER_DIRECT merger: existing Luna/xhigh Root directly observes experiments and transports Pro
 requests. Standalone Monitor and Transport have relinquished their current work. See
 `.codex/hmasd-monitor.toml`, `.codex/hmasd-transport.toml` and `docs/project/ROOT_OPERATIONS.md`.
-Current assigned live/unknown experiment handles: none live; `vspc1-reactive-b01-factor-run02`
-is terminal and technically accepted, with its artifacts collected by CM. The single Root heartbeat also covers the
+Current assigned live/unknown experiment handles: none live; `vspc1-reactive-b01-factor-run02` and
+`vspc1-reactive-b01-generic-run02` are terminal, with FACTOR technically accepted and GENERIC
+awaiting CM collection. The single Root heartbeat also covers the
 explicit pending Pro rows below; experiment completion alone does not pause it.
 Historical handles and old routing sections below are retained evidence, not current assignments.
 
 VSPC1 K4 reactive-queues B01 source, technical acceptance and source-intake records are
-integrated at main `476748835`; the selected seed401 FACTOR arm has now completed once on the
-corrected transport, while GENERIC remains undispatched pending FACTOR technical acceptance.
+integrated at main `476748835`; the selected seed401 FACTOR and GENERIC arms have each completed
+once on the corrected transport, with CM technical collection and DM paired intake pending.
 The first FACTOR supervisor name `vspc1-reactive-b01-factor-run01` was accepted at
 2026-09-07T13:57:52+08 but the Root wrapper passed a literal `$P`, exited 0 in 0 seconds, and
 produced no admission receipt or runner output; no learner/RNG/result exposure occurred. The
@@ -21,8 +22,12 @@ handle and log remain retained as a technical launch failure. Corrected FACTOR
 passed fresh physical/effective memory admission at `15668547584` bytes, and exited 0 after
 complete publication/readback (256 updates, 4096 training episodes, 2304 evaluation episodes,
 17 target copies, 4.4253 s through final readback). CM technical acceptance is recorded in the
-integrated B01 CM record; the exact GENERIC handoff is next and remains undispatched. No
-scientific polarity follows from the prior no-op or from FACTOR alone.
+integrated B01 CM record. GENERIC `vspc1-reactive-b01-generic-run02` passed fresh admission at
+`15669395456` bytes, exited 0 after complete publication/readback (256 updates, 4096 training
+episodes, 2304 evaluation episodes, 17 target copies, 4.2558 s summary wall), and wrote the
+paired summary with provisional FACTOR−GENERIC endpoint delta `-0.00032552083333333304`.
+CM is collecting the complete GENERIC artifacts; DM owns scientific interpretation. No
+scientific polarity follows from the prior no-op or from either arm before paired intake.
 
 ## Current Pro handover queue — 2026-09-06
 
