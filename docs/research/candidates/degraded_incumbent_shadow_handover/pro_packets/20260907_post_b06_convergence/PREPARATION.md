@@ -33,4 +33,3 @@ new experiment selection occurred.
 
 Scientific intake and Chinese brief are in commit `6b45ea47bea500bea11f1215080653a8df19bdd6`.
 Raw E0 evidence at `33db0d86016882d3e6d1c4dc1058dc0d8fe55bf6` remains unchanged.
-
