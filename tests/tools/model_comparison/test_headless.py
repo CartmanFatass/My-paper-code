@@ -1,5 +1,6 @@
 from pathlib import Path
 import importlib.util
+import json
 from unittest.mock import patch
 
 
@@ -80,3 +81,78 @@ def test_failed_timeout_termination_remains_unconfirmed(tmp_path):
         assert result["status"] == "termination_unconfirmed"
         assert result["exit_code"] is None and result["pid"] == 123
         assert result["error"] == "cannot stop PID 123"
+
+
+def test_resume_keeps_session_edits_and_accumulates_time(tmp_path):
+    prompt = tmp_path / "feedback.md"
+    prompt.write_bytes(b"Fix the reported defect under the original spec\n")
+    for arm in module.MODELS:
+        receipt = tmp_path / (arm + "-previous.json")
+        target = str(tmp_path / "saved.jsonl") if arm == "omp" else "original-uuid"
+        receipt.write_text(json.dumps({
+            "arm": arm, "cwd": str(tmp_path), "source_sha": "base",
+            "status": "exited", "exit_code": 0, "resume_target": target,
+            "session_dir": str(tmp_path / "original-sessions"),
+            "elapsed_seconds": 12, "cumulative_elapsed_seconds": 20, "turn_number": 2,
+        }), encoding="utf-8")
+        with patch.object(module.subprocess, "check_output", side_effect=["base\n", " M task.py\n"]), \
+                patch.object(module.shutil, "which", return_value=arm), \
+                patch.object(module.subprocess, "Popen") as popen:
+            popen.return_value.pid = 123
+            popen.return_value.returncode = 0
+            result = module.run(arm, tmp_path, prompt, tmp_path / arm, "base", 60, receipt)
+        argv = result["argv"]
+        assert argv[argv.index("--resume") + 1] == target
+        assert "--session-id" not in argv and "--fork-session" not in argv
+        assert result["turn_number"] == 3 and not result["starting_worktree_clean"]
+        assert result["cumulative_elapsed_seconds"] == 20 + result["elapsed_seconds"]
+        assert result["previous_receipt"] == str(receipt.resolve())
+        if arm == "omp":
+            assert argv[argv.index("--session-dir") + 1] == str(tmp_path / "original-sessions")
+
+
+def test_unknown_prior_execution_cannot_resume(tmp_path):
+    prompt = tmp_path / "feedback.md"
+    prompt.write_bytes(b"fix\n")
+    receipt = tmp_path / "previous.json"
+    receipt.write_text(json.dumps({"arm": "grok", "cwd": str(tmp_path), "source_sha": "base",
+                                   "status": "termination_unconfirmed", "exit_code": None}), encoding="utf-8")
+    with patch.object(module.subprocess, "check_output", side_effect=["base\n", ""]), \
+            patch.object(module.subprocess, "Popen") as popen:
+        import pytest
+        with pytest.raises(ValueError, match="Resolve prior"):
+            module.run("grok", tmp_path, prompt, tmp_path / "out", "base", 60, receipt)
+        popen.assert_not_called()
+
+
+def test_omp_records_exact_created_session_file(tmp_path):
+    prompt = tmp_path / "prompt.md"
+    prompt.write_bytes(b"new task\n")
+    output = tmp_path / "out"
+    saved = output / "sessions" / "original.jsonl"
+
+    def create_session(**kwargs):
+        saved.parent.mkdir()
+        saved.write_text('{"type":"session","id":"original"}\n', encoding="utf-8")
+
+    with patch.object(module.subprocess, "check_output", side_effect=["base\n", "", ""]), \
+            patch.object(module.shutil, "which", return_value="omp"), \
+            patch.object(module.subprocess, "Popen") as popen:
+        popen.return_value.pid = 123
+        popen.return_value.returncode = 0
+        popen.return_value.communicate.side_effect = create_session
+        result = module.run("omp", tmp_path, prompt, output, "base", 60)
+        assert result["resume_target"] == str(saved.resolve())
+
+
+def test_empty_resume_receipt_never_starts_new_session(tmp_path):
+    prompt = tmp_path / "prompt.md"
+    prompt.write_bytes(b"fix\n")
+    receipt = tmp_path / "previous.json"
+    receipt.write_text("{}", encoding="utf-8")
+    with patch.object(module.subprocess, "check_output", side_effect=["base\n", ""]), \
+            patch.object(module.subprocess, "Popen") as popen:
+        import pytest
+        with pytest.raises(ValueError, match="Missing session record"):
+            module.run("grok", tmp_path, prompt, tmp_path / "out", "base", 60, receipt)
+        popen.assert_not_called()

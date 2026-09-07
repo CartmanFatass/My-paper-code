@@ -104,6 +104,29 @@ authoring checkout once under its ordinary review/commit/push procedure; don't m
 
 ## Measurements and assessment
 
+### Preserve the session for revisions
+
+OWNER_DIRECT 2026-09-07: all follow-up modifications for the same batch/arm continue its
+original session and existing worktree. Native Codex uses `followup_task` with the recorded
+agent identity; do not replace the agent or create a new comparison batch for a correction.
+Headless clients use the helper with `--resume-from <previous-turn/process.json>`, the same
+arm/worktree/source SHA, a feedback prompt and a fresh output directory for that turn.
+Claude and Grok use the exact original UUID with `--resume`, without `--session-id` or fork;
+omp resumes the exact saved session file and retains the original session directory.
+Never use most-recent-session selection. Inspect provider session evidence before continuing;
+missing/ambiguous session identity or uncertain prior execution requires reconciliation,
+not a fresh conversation. The initial clean-source check applies to first dispatch only;
+revision turns preserve that arm's edits and record their starting status.
+
+Archive the first-return patch, response, checks and measurements before revisions. Keep each
+feedback prompt and turn's raw logs separately; report first delivery, revision counts and
+cumulative time independently. For Codex retain the original completed-session cost report
+before follow-up, then use the same cost-analysis script for completed turns and the cumulative
+task report; do not add overlapping cumulative reports. Headless receipts retain per-turn and
+cumulative process wall time. Focused defect feedback may differ by arm but must be recorded;
+code-spec amendments remain identical for all arms. Revision authorization and a common revision
+budget are recorded separately; no automatic retry or reset of the initial task limit follows.
+
 Use `codex-task-cost-analysis` and its bundled script with the fixed HMASD interpreter to compute
 Codex measurements from completed native sessions. Use exact baseline/Sol IDs for each batch,
 `compare --cohort-a <baseline-id> --cohort-b <sol-id> --unit task`, and save both its original
