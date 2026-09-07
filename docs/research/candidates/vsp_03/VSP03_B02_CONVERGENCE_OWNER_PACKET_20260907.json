@@ -1,0 +1,49 @@
+{
+  "question": "记录 Pro 对 VSP03 的首次重铸：按其已选范围准备固定双控制器、共享服务槽的 B02。",
+  "changes_if_approved": [
+    {
+      "target": "docs/research/candidates/vsp_03/DIRECTION.md · Scientific question / Current position",
+      "from": "N1 最终预算初始化比较暂停，没有已选后继",
+      "to": "接受首次 RECAST，选择 B02 的一个 seed-4 T/G 配对、R 与新增 R0；N1 暂停保留，尚未冻结新卡或运行"
+    },
+    {
+      "target": "VSP03_B02_CONVERGENCE_INTAKE_20260907.md / VSP03_B02_SELECTED_COUNTS_20260907.json",
+      "from": "原草案只有固定让行规则 R，尚无完整方向决定",
+      "to": "主量仍为最终 greedy T−R；新增初始规则 R0 解释比较；整次 120 秒，算法与评价 38,912 集，另有八集检查"
+    }
+  ],
+  "if_refused": "按所有者明确的新指令处理尚未执行的 B02；N1 暂停、三个主要零差异和全部历史证据保留。不自动提出替代实验或改变方向生命周期。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/vsp_03/pro_packets/20260906_shared_service_convergence/archive/RESPONSE.md",
+      "quote": "本方提交会占据伙伴需要的唯一资源，等待则可能保留伙伴的最后提交机会。",
+      "why": "新动作改变伙伴可行机会，已具备具体原生团队后果，适合一次有限真实学习比较。"
+    },
+    {
+      "path": "docs/research/candidates/vsp_03/pro_packets/20260906_shared_service_convergence/archive/RESPONSE.md",
+      "quote": "R 不是 T 的初始 greedy 策略，单独 T>R 可能只是 R 的让行规则较差，不能据此把收益归于训练。",
+      "why": "R0 有明确解释用途，避免把初始脚本或较弱 R 造成的差异误称为学习收益。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/vsp_03/pro_packets/20260906_shared_service_convergence/archive/RESPONSE.md",
+      "quote": "最强反证仍是：相同公开信息与网络下，普通 G 在三个最终样本都追平 T 和 F，而 T 没有超越不学习规则。",
+      "why": "旧 N1 最终样本没有初始化优势；新 N2 也可能由普通学习或固定规则充分处理。"
+    }
+  ],
+  "uncertainty": [
+    "N2 收益排序、比较器行为和训练种子变化均未测量。",
+    "N2 完整耗时未知；旧 N1 四倍时间仅作条件规划，不保证 120 秒内完成。",
+    "一个训练配对不能估计训练总体不确定性，也不支持稳定优势或多智能体特有因果收益。",
+    "本次受限会话已准备完整材料，尚待正常 Git 集成与 item.py 发布；没有追加实验或 provider 操作。"
+  ],
+  "cost": {
+    "compute": "本次新增模型、episode、更新、评价均为零。未来 B 两 learner 各 128×128 训练集，六种评价各 1,024 集；加八集检查后 38,920 集、3,113,600 target transitions、256 次更新；整次 120 秒上限。",
+    "owner_time": "可异步查看；已有方向 Pro 决定和对象层委托，不等待回复。",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing；P08 未启动实验，后续具体任务由 Portfolio 经 Root 安排。"
+  },
+  "verdict_text": "最终选择是：开一个明确标注结果启发的 N2 共享服务终止学习 B 家族，记为本轮一次方向层 RECAST；只做计划中的一个 seed-4 T/G 配对，保留 R 并增加固定初始规则 R0，固定最终 greedy T−R 为主要量，保留随机评价与全部反证，统一 120 秒完整调用上限。N1 暂停不撤销，新的方向选择不等于本轮已启动实验。",
+  "source": "docs/research/candidates/vsp_03/pro_packets/20260906_shared_service_convergence/archive/RESPONSE.md"
+}
