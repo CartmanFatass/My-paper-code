@@ -24,7 +24,7 @@ question preparation count; an external wait, completed child or undispatched in
 not. Reuse the latest native inventory until an event changes it. Resolve a missing fact once
 from its current source instead of reconstructing all direction history.
 
-## Portfolio: one return triggers a whole-working-set pass
+## Portfolio: an actionable return triggers a whole-working-set pass
 
 1. Read the original return and its affected card/intake sections. Apply owner overrides and
    distinguish technical completion, missing science, failed dispatch and uncertain acceptance.
@@ -36,7 +36,9 @@ from its current source instead of reconstructing all direction history.
    direction and ready work elsewhere. Preserve DM object-tier and Pro decision authority.
    Give a missing scientific choice to its DM/node rather than asking Root to decide it.
 4. Update the current rows, commit/push, then send the usable batch to Root. Check its actual
-   dispatch receipt. An unaccepted command still needs routing; a snapshot update is not delivery.
+   dispatch receipt in the Root daily log or direct response when explicitly requested. Routine
+   log entries do not wake Portfolio or require an ACK. An unaccepted command still needs routing;
+   a snapshot update is not delivery.
 
 Use the existing five-item handoff, in ordinary prose:
 
@@ -58,8 +60,11 @@ Use the existing five-item handoff, in ordinary prose:
   branch/checkout, affected request states and unresolved delivery dependencies. Portfolio
   refreshes current command locations; Root reconciles operational records before reporting
   cleanup complete. Frozen historical handoffs are preserved, not reused as new dispatch input.
-- **Report conditions:** completion, failed/missing dispatch, concrete conflict, uncertain
-  external acceptance or unlisted next action; return them to Portfolio.
+- **Report conditions:** apply SIBLING_COMMUNICATION.md's notification filter. Log ordinary
+  completion and execution receipts; message Portfolio when the assigned route is exhausted,
+  a vacancy needs a command, or a conflict/dependency requires Portfolio action. An unresolved
+  execution/tool/input problem outside the assigned repair path is an immediate repair request
+  to Portfolio even without a scientific or Portfolio-tier decision; never hide it in the log.
 
 Bundle routine collection → technical acceptance → integration → scientific intake when their
 scope is known. A delegated DM/CM decision within that route needs no extra Portfolio vote.
@@ -82,10 +87,12 @@ selecting on the first score. A new scientific choice or unfrozen invocation rem
    Do not dispatch an undefined gap to DM to obtain a replacement task or workflow approval.
    Portfolio resolves planning/applicability or issues a bounded investigation to the appropriate
    DM/CM; it cannot supply owner-only permission or override a real runtime restriction.
-4. Send a concise receipt with **the result, the whole working-set state, and the next event**.
-   For each direction give command, actual recipient/status and any unsent action or dependency.
-   Include the actual advancing-chain count. Changed facts need evidence/commit; unchanged rows
-   can be a compact line. Report a vacancy when it occurs, not when the entire batch finishes.
+4. Record routine receipts in `docs/research/portfolio/root-log/YYYY-MM-DD.md` under
+   SIBLING_COMMUNICATION.md's notification filter. Continue executable named routes without a
+   Portfolio message. When Portfolio action is needed, send the exact decision/gap, original
+   evidence and compact working-set delta; include advancing-chain count for a capacity change.
+   Report an actionable vacancy when it occurs, not when the entire batch finishes. Do not send
+   separate dispatch, push, launch and intake progress messages or an unchanged periodic digest.
 5. While native work is running, wait for its returns and handle authorized observations. When
    only external waits or a requested Portfolio reply remain, return with those exact dependencies
    and the existing observation route. An empty queue requests a new batch; it is not programme
@@ -93,7 +100,7 @@ selecting on the first score. A new scientific choice or unfrozen invocation rem
 
 | Event | Root's next action |
 | --- | --- |
-| Complete native return | Follow its prewritten route; report original evidence and updated working set. |
+| Complete native return | Follow its prewritten route and log original evidence; message Portfolio only when a new command or planning decision is needed. |
 | Failed dispatch, unavailable recipient or yielded direction | Report the precise gap/vacancy now; dispatch unrelated commands. |
 | Reversible technical staging problem inside an assigned repair route | Keep the same CM on that authorized repair; report its concrete unresolved gap, not an invented scientific stop. |
 | Unknown Send or launch acceptance | Reconcile the same identity from authoritative state; hold only the uncertain external action. |

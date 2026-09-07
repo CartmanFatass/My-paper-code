@@ -14,7 +14,7 @@ separate identity, permission, approval, or blocking system.
 
 The session that drives execution is **Root** (Luna/xhigh). Root executes bounded commands,
 observes accepted experiments, executes exact Pro transport and integrates specified results.
-The independent **Portfolio** session (Astra/max) plans tasks, readiness, dependencies, return
+The independent **Portfolio** session (Astra; effort selected by the owner) plans tasks, readiness, dependencies, return
 branches and working-set replacement. Root reports completion, missing input, failure, conflict
 or uncertain external acceptance; Portfolio determines the next command. Portfolio also owns
 cross-direction scientific comparison, investment proposals and the scientific content of
@@ -470,7 +470,7 @@ appendix and completed historical tasks remain unchanged.
   `hmasd-verifier`, `hmasd-experiment-operator`. Retired definitions stay in Git history and are
   re-added only when a wave shows a check nobody else performs.
 - Root uses Luna/xhigh and executes experiment observation and Pro Transport.
-  The independent Portfolio task uses Astra/max directly on main.
+  The independent Portfolio task uses Astra directly on main; its effort is selected by the owner.
   Configurations: `.codex/hmasd-monitor.toml`, `.codex/hmasd-transport.toml`, and
   `.codex/hmasd-portfolio.toml`; procedure: `docs/project/ROOT_OPERATIONS.md`.
   DM/CM sends accepted handles directly to Root, which observes and wakes native children;

@@ -1,6 +1,6 @@
 # Portfolio plans; Root executes
 
-Portfolio (`gpt-6-astra` / `max`) plans the research queue and prepares bounded commands.
+Portfolio (`gpt-6-astra`, effort selected by the owner) plans the research queue and prepares bounded commands.
 Root (`gpt-5.6-luna` / `xhigh`) executes those commands, integrates specified deliveries,
 observes accepted experiments and performs exact Pro transport. The owner directs this
 boundary. DM owns scientific decisions within its existing delegation; CM owns technical
@@ -67,15 +67,18 @@ owns readiness and replacement planning. DM and CM retain their scientific/techn
 
 Tool addressing and native/app message differences live in
 [SIBLING_COMMUNICATION.md](SIBLING_COMMUNICATION.md). Routine app messages preserve the
-recipient's model/effort; new Pro handoffs use Author-rendered settings and Transport's
-identity/acceptance procedure. Root records its own receipts locally rather than app-messaging
+recipient's model/effort; all cross-session messages omit model/thinking overrides. New Pro
+handoffs use Author-rendered provider settings inside the request packet, not as app-message
+overrides, and Transport's identity/acceptance procedure. Root records its own receipts locally rather than app-messaging
 itself. A native DM with Root as app parent receives its result through native collaboration.
 
 ### Report events
 
-The shared skill's Root receipt is the maintained report format: result and original evidence,
-whole current working set with actual recipient/status and advancing-chain count, then the
-next sender/event or gap. Report a yielded/unavailable direction immediately. Known routes
+Apply SIBLING_COMMUNICATION.md's Root-to-Portfolio notification filter. Record routine receipts
+in `docs/research/portfolio/root-log/YYYY-MM-DD.md`; completion of an intermediate step is not
+itself a Portfolio notification. An actionable message gives the needed decision, original
+evidence and working-set delta, including an advancing-chain count when capacity changes.
+Report a yielded/unavailable direction needing a replacement immediately. Known routes
 continue without an extra Portfolio exchange. A changed command's scope replaces only the
 specified earlier boundary; an unrelated preparation-only task does not suspend the batch.
 
@@ -84,6 +87,9 @@ and scheduling gaps route from Root to Portfolio first, with the affected action
 existing authority. Root does not ask DM to invent the missing command or approve the workflow.
 Portfolio handles the planning question and may assign a bounded scientific/technical inquiry;
 DM retains object-tier decisions inside its assigned task and CM ordinary in-scope repair.
+Root also sends a prompt repair request for an unresolved execution, input, access/tool or
+uncertain-state problem outside its assigned repair path. Portfolio arranges the bounded fix
+and returns the next step; routine-message filtering must never suppress this help channel.
 This is not a new approval gate for accepted work, nor authority for Portfolio to bypass a real
 runtime restriction or grant permission reserved to the owner. Unrelated authorized work continues.
 

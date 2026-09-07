@@ -5,7 +5,7 @@ description: Use when the independent Portfolio session plans Root commands, han
 
 # HMASD Portfolio Decisions
 
-OWNER_DIRECT 2026-09-06: this skill belongs to the independent Astra/max Portfolio
+OWNER_DIRECT 2026-09-07: this skill belongs to the independent Astra Portfolio (effort selected by the owner)
 session in `.codex/hmasd-portfolio.toml`, directly on main. Portfolio plans concrete tasks,
 dependencies and return branches; Luna/xhigh Root executes the issued commands, integration,
 monitoring and Pro transport. See docs/project/ROOT_OPERATIONS.md.
@@ -170,7 +170,7 @@ project-shared registry creates or binds the provider conversation on first use 
 conversation binding key and reuses that exact provider conversation for later Portfolio rounds.
 Each default handoff goes to integrated Root, the one Transport execution endpoint declared in `.codex/hmasd-transport.toml` and
 sends exactly one completion or terminal-blocker receipt back to the handoff author's declared
-`parent_thread_id`. Dispatch passes `model=gpt-5.6-luna` and `thinking=xhigh` explicitly; it never
+`parent_thread_id`. App dispatch omits `model` and `thinking`, preserving the recipient settings; it never
 calls `create_thread` or selects a replacement task. The singleton task ID is an execution endpoint,
 never a provider-conversation binding. Set the scientific receipt parent to this Portfolio task; Root records its own receipts locally when it is also parent.
 The configured provider model is separate from that executor. Honor an explicit owner request
