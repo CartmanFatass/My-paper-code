@@ -2,7 +2,7 @@
 
 import math
 
-from .model import CONTEXTS, K_EVAL, ancestry, context_id, count_execution, host, new_counts
+from .model import CONTEXTS, K_EVAL, SEED, ancestry, context_id, count_execution, host, new_counts
 
 POLICIES = ("FULL", "BLIND", "IMMEDIATE-4")
 PAIRS = {"delta_native": ("FULL", "IMMEDIATE-4"),
@@ -25,19 +25,19 @@ def reading_rule(native, information, full_probe_count, complete=True):
     return {"branch": "RM-B" if native >= -.001 else "RM-C"}
 
 
-def execute_policy(name, plan, context, index):
+def execute_policy(name, plan, context, index, seed=SEED):
     probe = plan["root_action"] == "PROBE"
     selector = None
     if probe:
         selector = (lambda n: plan["tail_periods"][n]) if name == "FULL" else (lambda _n: plan["tail_period"])
     return host.execute_episode(
-        context, ancestry=ancestry(context), episode_index=index, evaluation=True,
+        context, ancestry=ancestry(context, seed), episode_index=index, evaluation=True,
         root_action=plan["root_action"], support=K_EVAL,
         immediate_period=None if probe else 4, tail_selector=selector,
     )
 
 
-def evaluate(plans, episodes, output, check_time):
+def evaluate(plans, episodes, output, check_time, seed=SEED):
     output.update(contexts=[], counts={name: new_counts() for name in POLICIES})
     for c, context in enumerate(CONTEXTS):
         row = {"context": context_id(context), "complete": False, "paired_episodes": 0,
@@ -50,7 +50,7 @@ def evaluate(plans, episodes, output, check_time):
         for index in range(episodes):
             check_time()
             for name in POLICIES:
-                result = execute_policy(name, plans[name][c], context, index)
+                result = execute_policy(name, plans[name][c], context, index, seed)
                 count_execution(output["counts"][name], result)
                 returns[name].append(result.external_return)
                 paid[name].append(result.probe_primitive)

@@ -152,7 +152,7 @@ def test_synthetic_changed_path_and_publication(tmp_path, monkeypatch):
         assert len({(row[0], row[2], row[3]) for row in eval_rows[start:start + 3]}) == 1
 
     # Failed synthetic partial dataset still publishes its actual learned state/counts.
-    def interrupted_collect(model, training, check_time, batches):
+    def interrupted_collect(model, training, check_time, batches, seed=m.SEED):
         training.update(m.new_counts())
         observation = completed("IMMEDIATE", None, 4, .25)
         model.observe(0, observation)
