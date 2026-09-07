@@ -1,0 +1,8 @@
+RESPONSE.md -text -whitespace
+CHAT_RECEIPT.md -text -whitespace
+TRANSPORT_FACTS.json -text -whitespace
+PACKET_MANIFEST.json -text -whitespace
+PROMPT.md -text -whitespace
+COMMENT.json -text -whitespace
+COMMIT_SCOPE.json -text -whitespace
+GITHUB_READBACK.json -text -whitespace
