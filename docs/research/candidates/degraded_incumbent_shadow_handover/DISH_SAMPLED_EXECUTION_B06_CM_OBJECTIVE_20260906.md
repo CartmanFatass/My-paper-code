@@ -3,7 +3,10 @@
 Prepared under Root's post-VSP-C1 refill instruction and integrated as
 `fde638f9c85d86fc01fe003254397b18dfdeacc6`. Root subsequently explicitly authorized dispatch;
 DM reactivated the existing CM `/root/dm_amx_dish_seed101/cm_am_dish_seed101` on 2026-09-06
-at 23:44 PDT, and the native child is running. **CM is assigned implementation/checks and a
+at 23:44 PDT. Its implementation return is now integrated and technically accepted at
+`373d187200a91942385e9380770dcf9f8098aada`; see the
+[2026-09-07 technical intake](DISH_SAMPLED_EXECUTION_B06_TECHNICAL_INTAKE_20260907.md).
+**CM was assigned implementation/checks and a
 pushed technical return only. A result-bearing B06 launch remains a separate explicit
 assignment.** The earlier preparation task completed without dispatch, implementation or
 experimental exposure; the current dispatch supersedes that historical preparation status.
@@ -81,5 +84,8 @@ exposure. No new P2 item is needed; the technical preparation is recorded in the
 Dispatch receipt: the existing child accepted `followup_task` and was observed running under
 the identity above. Its task message binds the five items to integrated `fde638f9c`, requires
 an owned CM branch/worktree and independent high-risk review, and explicitly forbids a B06
-result-bearing initializer/training/evaluation invocation. CM technical delivery and DM result
-intake are still pending; no code, check result, source SHA or launch is accepted by this receipt.
+result-bearing initializer/training/evaluation invocation. CM technical delivery is complete;
+the linked technical intake accepts its committed source/static/synthetic evidence. Scientific
+result intake remains pending and no B06 run has occurred. The dispatch receipt itself never
+accepted a code result or authorized a launch; the separate invocation bindings remain in the
+technical intake §4 for Root's next explicit assignment.
