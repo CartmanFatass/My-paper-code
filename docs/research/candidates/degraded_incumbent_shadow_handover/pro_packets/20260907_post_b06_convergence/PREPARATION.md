@@ -16,8 +16,11 @@ do not substitute for Root's fresh provider-state verification before Send.
    `codex/pro-dish-post-b06-20260907` now includes accepted main `70b419a2b` through the
    history-preserving synchronization `1763c96d932bb813777431c07ec3cea0dafe19bd`.
    That full synchronization SHA is the delivery baseline; normal descendant advances are
-   allowed. It is not a replacement scientific input. The refreshed TASK is rendered and
-   awaits publication/binding. The sole response path remains
+   allowed. It is not a replacement scientific input. The refreshed TASK is published and
+   bound at `f3d6a158598e55f843eaff2894d907c288e27f39`:
+   [fixed TASK](https://github.com/CartmanFatass/My-paper-code/blob/f3d6a158598e55f843eaff2894d907c288e27f39/docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260907_post_b06_convergence/TASK.md).
+   HANDOFF's `READY_TO_DISPATCH` remains artifact readiness; provider Send is not recorded.
+   The sole response path remains
    `docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260907_post_b06_convergence/archive/RESPONSE.md`,
    with the delivery comment on existing Issue4.
 3. **Preserved semantics.** The REQUEST differs only in `github_delivery.base_sha`;
@@ -28,8 +31,9 @@ do not substitute for Root's fresh provider-state verification before Send.
    `6a9bec54-df00-83e8-9840-46440458f316`. No B06 retry, new card, source edit, experiment,
    family disposition, C promotion or Portfolio action is selected here.
 4. **Acceptance and return.** The current renderer comes from the accepted shared-branch
-   policy `71f52a8fe`. Publish TASK, bind its full pushed SHA, and publish HANDOFF before
-   dispatch. Root's P08 command already authorizes exactly one provider Send after fresh
+   policy `71f52a8fe`. TASK was pushed before the renderer verified and bound its complete
+   committed bytes. Publish this updated HANDOFF before dispatch. Root's P08 command already
+   authorizes exactly one provider Send after fresh
    NOT_SENT and 6 Pro verification; no further Portfolio exchange is needed. If acceptance
    is established or uncertain, preserve the bound request and reconcile it without another
    Send. Root archives the complete response at its immutable commit, routes it to this DM
