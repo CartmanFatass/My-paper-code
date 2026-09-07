@@ -54,6 +54,10 @@ Use the existing five-item handoff, in ordinary prose:
   State real dependencies, such as technical artifact acceptance before the second frozen arm.
   Root also reconciles finished temporary branches under AGENTS section 6 and retires their
   local/remote names after preserving recovery and resolving any live delivery dependency.
+  Its reclamation return follows ROOT_OPERATIONS.md's branch-routing reconciliation: retained
+  branch/checkout, affected request states and unresolved delivery dependencies. Portfolio
+  refreshes current command locations; Root reconciles operational records before reporting
+  cleanup complete. Frozen historical handoffs are preserved, not reused as new dispatch input.
 - **Report conditions:** completion, failed/missing dispatch, concrete conflict, uncertain
   external acceptance or unlisted next action; return them to Portfolio.
 

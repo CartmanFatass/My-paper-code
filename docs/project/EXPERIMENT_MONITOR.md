@@ -18,7 +18,7 @@ is not a new experiment launch condition. Preserve owner pause and existing laun
 
 Root records adoption in `docs/research/portfolio/EXPERIMENT_TRACKING.md`, activates the
 existing shared automation via `automation_update`, and reads back its ACTIVE state before
-ACK. Preserve the full long-term prompt, thirty-minute schedule and Root target on updates.
+ACK. Preserve the full long-term prompt, fifteen-minute schedule and Root target on updates.
 An accepted message or one-off check does not establish recurring activation. Before ACK,
 the launcher retains observation; after ACK Root owns routine polling. Repeated assignments
 update the same (node, accepted handle). Root ACKs the actual native child or external sender.

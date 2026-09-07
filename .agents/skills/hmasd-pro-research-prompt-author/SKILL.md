@@ -28,6 +28,12 @@ Pro's scope. Never rebind an accepted request to another branch as cleanup.
 Read the current delivery HEAD and preserve unrelated changes when adding the response;
 normal advances do not replace fixed input evidence. Synchronize local writers before their
 next push. Completing one Pro round does not retire a shared direction branch still in use.
+After branch cleanup, resolve the branch/checkout from the current command and actual remote
+ref before rendering. A historical HANDOFF is evidence of its own round, not a default branch
+registration. Return the new request ID, full HANDOFF commit and fixed TASK URL together so
+Root can load the authored bytes independently of main's same-path copy. A prepared unsent
+task with changed delivery scope is republished and rebound before dispatch; accepted tasks
+retain their exact content and follow the workflow's explicit delivery-correction route.
 
 Follow the current Portfolio command's operation and return route. A preparation-only task
 returns its ready handoff; it does not dispatch Transport. A command may already include

@@ -272,8 +272,8 @@ re-inspect a mismatched capture on the same page, never repair it with a new Sen
 
 ## Heartbeat and asynchronous processing
 
-Integrated Root reuses one thirty-minute heartbeat for all current experiments and Pro
-requests. A due Pro check occurs on the thirty-minute fallback wake;
+Integrated Root reuses one fifteen-minute heartbeat for all current experiments and Pro
+requests. A due Pro check occurs on the fifteen-minute fallback wake;
 each due conversation gets one bounded read in serial. `INTERVAL=1` busy polling is invalid.
 A wake observes the existing request, never resends it or changes provider identity. Natural
 completion archives the paired response; timeout retains the same conversation for recovery.

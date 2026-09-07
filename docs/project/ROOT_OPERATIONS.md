@@ -30,6 +30,22 @@ At completion Root integrates accepted commits, preserves other unique commits a
 reconciles live writers/PRs/delivery dependencies, and retires obsolete local and remote names.
 Historical detached worktrees may retain evidence; retiring a branch does not delete their files.
 
+### Reconcile routing when branches are retired
+
+Root's reclamation return includes the retained direction branch/checkout and the affected
+request IDs with their actual Send, delivery and archive states. Use current handoffs,
+Transport's binding/request records and actual remote refs; a response merged to main does
+not by itself close every request that names the branch. Resolve pending or uncertain delivery
+before retiring its target. If an accepted target was already removed, preserve recovery refs
+and report its exact request/base to Portfolio for a bounded restoration or delivery correction.
+
+Portfolio updates current command locations; Root updates current operational/Transport records
+under their existing single-writer coordination. Preserve old branches, bases and receipts in
+the matching request history. Historical TASK/HANDOFF/archive files remain immutable evidence,
+not sources for a new dispatch. A same-path file in an old checkout is not the latest handoff.
+Do not mark cleanup complete while affected live routing remains unresolved; name any retained
+dependency in the existing return. No new registry, scheduler or experiment gate is required.
+
 ## Portfolio prepares the command
 
 Use [hmasd-loop-dispatch](../../.agents/skills/hmasd-loop-dispatch/SKILL.md), Portfolio
@@ -74,7 +90,7 @@ runtime restriction or grant permission reserved to the owner. Unrelated authori
 ## One shared observation wake
 
 Root observes assigned experiment handles and exact current Pro requests through the existing
-`hmasd-experiment-monitor` heartbeat, every thirty minutes. Endpoint and schedule are in
+`hmasd-experiment-monitor` heartbeat, every fifteen minutes. Endpoint and schedule are in
 `.codex/hmasd-monitor.toml`. Use `EXPERIMENT_MONITOR.md` for adoption and the Transport skill
 for exact request identity, model verification, Send state, archiving and receipt delivery.
 The timer observes accepted work; it does not select tasks or refill the research queue.
@@ -83,7 +99,7 @@ Keep the heartbeat ACTIVE while any assigned experiment needs observation/termin
 or any current Pro request needs scheduled reconciliation, generation observation, archival or
 delivery. An explicit terminal blocker with no scheduled recovery is reported to Portfolio and
 needs no repeated wake. Pause when that combined observation set is empty. Preserve the existing
-id, full prompt, thirty-minute schedule and Root target; read back ACTIVE before adoption ACK.
+id, full prompt, fifteen-minute schedule and Root target; read back ACTIVE before adoption ACK.
 A paused observation heartbeat says nothing about completion of native research tasks.
 
 Each wake reads current assigned rows, batches independent supervisor checks, observes due Pro

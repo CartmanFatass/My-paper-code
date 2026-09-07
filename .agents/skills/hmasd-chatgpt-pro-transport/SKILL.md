@@ -28,6 +28,17 @@ its existing Send state before continuing.
 New requests normally deliver on the corresponding shared direction branch. An extra branch
 requires a concrete special isolation need; keep accepted handoffs unchanged. A changed HEAD
 alone is not delivery evidence on a shared branch: verify the exact response path and commit.
+Load the canonical HANDOFF at the full commit returned for this request and compare its
+request ID, fixed TASK URL and branch/base with the assigned command and accepted-send record.
+An older same-path HANDOFF on main or in another checkout must not replace that artifact.
+For an unsent request, verify the remote target exists and satisfies this TASK's delivery
+clause. Normal descendant HEAD advances are allowed by the current renderer; a legacy fixed-
+HEAD clause is not silently relaxed. Return a stale or incompatible task to Portfolio before
+Send. For an accepted request, observe/archive its actual reply and route any delivery-only
+correction under the existing command; changing a local registry does not amend its prompt.
+Keep prior-round delivery/Send/archive fields in their matching request history when staging
+a successor. Reconcile current binding and direction mirror from exact request/message and
+archive evidence; a stale mirror or old branch note cannot establish a current Send or delivery.
 An Author handoff with `delivery_mode=github_delivery` uses the already supported
 paste transport request. Send its short fixed task link verbatim, no attachment,
 read-only preamble or copied evidence. Dispatch only a bound READY_TO_DISPATCH task;
@@ -201,8 +212,8 @@ observations. Never click `Answer now`, Retry, Continue, or Stop. A timeout beco
 
 Use Root's one existing shared heartbeat in `.codex/hmasd-monitor.toml`; never create a
 request-specific automation; never use `INTERVAL=1` busy polling. Activate/read back the shared wake before yielding accepted
-pending work. A thirty-minute Root pass observes experiments and requests due for a Pro check
-(at the thirty-minute fallback wake). Keep all request identities and tab
+pending work. A fifteen-minute Root pass observes experiments and requests due for a Pro check
+(at the fifteen-minute fallback wake). Keep all request identities and tab
 leases separate; each due conversation gets one bounded DOM read, serially. Then persist
 observations and return to other work. A 20–60 minute generation may span several wakes.
 At 60 minutes mark `WAITING_TIMEOUT`; retain the same conversation and recoverable tab.
