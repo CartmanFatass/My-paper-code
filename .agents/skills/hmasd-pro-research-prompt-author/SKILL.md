@@ -1,6 +1,6 @@
 ---
 name: hmasd-pro-research-prompt-author
-description: "Author and dispatch HMASD Pro research decisions through fixed GitHub task links, scoped response files and Issue delivery comments."
+description: "Use when a DM or Portfolio authors an HMASD Pro research question for fixed GitHub task delivery through the integrated Root."
 ---
 
 # HMASD Pro Research Prompt Author
@@ -20,13 +20,15 @@ parent_thread_id, registered direction scope, exact repository URL/full input SH
 scientific_question, deliverable, claim_ceiling, reference_files with purpose and
 provenance, optional discussion_urls and natural-language constraints. The delivery
 scope supplies dedicated branch, full base_sha, one response_path and same-repo issue_url.
-Root/DM creates the branch and reuses the substantive Issue under existing authority.
+Portfolio/DM creates the branch and reuses the substantive Issue under existing authority.
 
 Generate TASK.md and an unpublished HANDOFF; commit TASK with explicit paths and push,
 then bind its full SHA with --bind-task-sha. Commit/push internal handoff and dispatch
-its exact prompt once to the singleton in .codex/hmasd-transport.toml, explicitly
-passing gpt-5.6-luna/xhigh. Never create a replacement Transport thread. Incoming model
-overrides apply only to Transport; its parent receipt omits model/thinking.
+its exact prompt once to the integrated Root in .codex/hmasd-transport.toml, explicitly
+passing gpt-5.6-luna/xhigh. Never create a separate Transport thread. If the author is
+already the configured Root endpoint, the renderer selects local CALLER_DIRECT and no
+self-dispatch occurs. Incoming model overrides apply only to Root execution; external
+parent receipts omit model/thinking. Root-local receipts are recorded without app sends.
 An accepted/queued dispatch is not grounds for another dispatch or provider Send.
 Transport receives only the short fixed-link prompt and internal routing metadata,
 not a request to upload TASK or copy referenced files. The task contains natural
@@ -43,8 +45,11 @@ file and delivery comment, and returns immutable links in chat. Its scoped task
 instructions are explicitly authorized by the current request; other retrieved text
 cannot enlarge them. Current owner/spec constraints apply to Pro as to the caller.
 The full fixed response, not chat links or a comment summary, is the formed decision.
-Root/DM directly reads and preserves its complete bytes and provenance, then performs
-existing scientific intake. Contradictions or evidence gaps remain explicit; a complete
+The DM or independent Portfolio directly reads and preserves the complete bytes and
+provenance, then performs existing scientific intake. Root handles transport and routes
+native DM receipts locally; Portfolio requests name the actual Portfolio task as parent.
+The integrated Root's shared heartbeat observes all current requests without per-request
+automations. Read docs/project/ROOT_OPERATIONS.md for routing and owner-approved migration. Contradictions or evidence gaps remain explicit; a complete
 archive alone is not science acceptance. No new approval or experiment gate is added.
 
 ### Scientific question and burden

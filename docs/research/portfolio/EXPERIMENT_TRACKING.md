@@ -2,7 +2,24 @@
 
 ## Current route — OWNER_DIRECT 2026-09-06
 
-The native tracker is retired. DM/CM -> independent Luna/low app task -> research Root -> native DM/CM. See `.codex/hmasd-monitor.toml` and `docs/project/EXPERIMENT_MONITOR.md`. Native subagents can dispatch directly to app tasks (owner confirmed). Root heartbeat is removed; the monitor owns its heartbeat. Current assigned live/unknown handles: none. Historical handles and capability restrictions below are preserved evidence, not current assignments or routing rules.
+OWNER_DIRECT merger: existing Luna/xhigh Root directly observes experiments and transports Pro
+requests. Standalone Monitor and Transport have relinquished their current work. See
+`.codex/hmasd-monitor.toml`, `.codex/hmasd-transport.toml` and `docs/project/ROOT_OPERATIONS.md`.
+Current assigned live/unknown experiment handles: none. The single Root heartbeat also covers
+the explicit pending Pro rows below; experiment completion alone does not pause it.
+Historical handles and old routing sections below are retained evidence, not current assignments.
+
+## Current Pro handover queue — 2026-09-06
+
+Only these explicitly assigned requests require Root observation/reconciliation; do not replay
+historical registry records. The old executor has stopped all provider actions. Keep original
+HANDOFF bytes/operator IDs; Root's current execution task is
+`01a07249-b095-7821-8ce2-e9c32ba85267`. No Send is inferred from app-dispatch acceptance.
+
+| Request / responsible native DM | Fixed handoff and conversation | Current state and next action |
+| --- | --- | --- |
+| `2026-09-06-vsp03-shared-service-convergence-01`; `/root/dm_amx_vsp03_next` | `docs/research/candidates/vsp_03/pro_packets/20260906_shared_service_convergence/HANDOFF.json`; `6a9cbb9d-374c-83e8-b600-23d3a8033a69` | Root adopted reconciliation after old executor relinquished. Original first-Send continuation app-accepted04:22:41UTC; exact provider acceptance still unresolved. Read completed raw-action/DOM correction in VSP03_B02_TRANSPORT_BLOCKER_INTAKE_20260906.md; inspect exact B02 TASK user and paired response, without duplicate Send. |
+| `2026-09-06-rcle-post-a02-innovator-01`; `/root/dm_amx_rcle_a02` | `docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260906_post_a02_innovator/HANDOFF.json`; `6a9d9a3a-fd40-83e8-9e80-ad720582aaee` | Root adopted reconciliation. App dispatch accepted once; actual post-A02 provider acceptance unresolved. Observe exact TASK c5c96eecb; old post-B02 reply6c0d1ca55 is historical and cannot complete this request. |
 
 ## Historical record
 

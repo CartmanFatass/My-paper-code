@@ -2,10 +2,14 @@ schema_version = 1
 mode = "singleton"
 status = "active"
 
-# Project-owned reusable Transport task. Handoffs reuse this task but retain
+# OWNER_DIRECT 2026-09-06: Transport is executed by existing Luna/xhigh Root.
+# mode=singleton retains the existing one-endpoint wire format, not a separate task.
+# Legacy handoffs retain their original execution/Send evidence; see ROOT_OPERATIONS.md.
+# Handoffs reuse Root but retain
 # request-specific source_thread_id, parent_thread_id, receipt, tab, and heartbeat state.
-thread_id = "01a06f0e-5eab-7431-8491-e7c2c62705b6"
-task_title = "transport_lxh_project_singleton_6pro"
+thread_id = "01a07249-b095-7821-8ce2-e9c32ba85267"
+task_title = "HMASD Root"
+execution_owner = "root"
 project_id = "177ab8d8-53ae-448c-9a9e-aaa2fecd2498"
 environment = "local"
 model = "gpt-5.6-luna"

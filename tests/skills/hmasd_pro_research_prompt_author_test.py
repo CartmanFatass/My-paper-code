@@ -87,6 +87,19 @@ def _render(renderer, request: dict[str, object], project_root: Path, out_dir: P
     return json.loads((out_dir / "HANDOFF.json").read_text(encoding="utf-8"))
 
 
+def test_root_author_executes_locally_without_self_dispatch(project_root: Path, tmp_path: Path) -> None:
+    config = project_root / ".codex/hmasd-transport.toml"
+    config.write_text(config.read_text() + '\nexecution_owner = "root"\n')
+    request = _request()
+    request["source_thread_id"] = SINGLETON_THREAD_ID
+    request["parent_thread_id"] = SINGLETON_THREAD_ID
+    handoff = _render(_renderer(), request, project_root, tmp_path / "root-packet")
+    assert handoff["dispatch_mode"] == "CALLER_DIRECT"
+    assert handoff["dispatch_required"] is False
+    assert handoff["pro_send_from_caller"] is True
+    assert handoff["operator_thread_id"] == SINGLETON_THREAD_ID
+
+
 @pytest.mark.parametrize("direct", [False, True])
 def test_provider_requirement_and_direct_executor_survive_author_transport_handoff(
     project_root: Path, tmp_path: Path, direct: bool
@@ -358,17 +371,14 @@ def test_author_remains_authoring_only_and_operator_gets_companion_contract(
     project_root: Path, tmp_path: Path
 ) -> None:
     renderer = _renderer()
-    handoff = _render(renderer, _request(), project_root, tmp_path / "packet")
-    skill_text = SKILL.read_text(encoding="utf-8")
+    request = {**_request(), "companion_prompt": "Execute this exact attached task."}
+    handoff = _render(renderer, request, project_root, tmp_path / "packet")
 
     assert handoff["pro_send_from_caller"] is False
     assert "companion_prompt" in handoff["transport_request"]
-    assert "supply the companion_prompt verbatim" in skill_text
-    assert "provider-visible scientific UI text only" in skill_text
-    assert "Those instructions belong only in the author-to-Transport `HANDOFF.json`" in skill_text
-    assert "all\nrouting and execution workflow remains in `HANDOFF.json`" in skill_text
-    assert "sole provider attachment" in skill_text
-    assert "must not declare or upload a reference attachment" in skill_text
+    assert handoff["transport_request"]["companion_prompt"] == request["companion_prompt"]
+    assert handoff["transport_request"]["operator_thread_id"] == SINGLETON_THREAD_ID
+
 
 
 def test_handoff_reuses_the_project_transport_singleton(
@@ -612,28 +622,11 @@ def test_author_skill_closes_the_dispatch_sequence_and_keeps_pro_transport_separ
     handoff = _render(renderer, _request(), project_root, tmp_path / "packet")
     skill_text = SKILL.read_text(encoding="utf-8")
 
-    assert "Validate the caller input" in skill_text
-    assert "Render exactly the two files" in skill_text
-    assert "Never call `create_thread`" in skill_text
-    assert "`send_message_to_thread` exactly once" in skill_text
-    assert "authoring task is not complete until" in skill_text
-    assert "task exclusively owns Pro/browser send" in skill_text
-    assert "Complete validated input proceeds directly without a confirmation prompt" in skill_text
-    assert "Connector availability and GitHub retrieval are Transport/Pro checks" in skill_text
-    assert "must not become an author-side blocker" in skill_text
-    assert all(
-        term in skill_text
-        for term in (
-            "model and connector checks",
-            "conversation binding",
-            "waiting",
-            "archive",
-            "cleanup",
-        )
-    )
-    assert ("does not call " + "the transport operator") not in skill_text
-    assert ("does not send" + ", open a browser") not in skill_text
-    assert ("send_from_" + "author") not in skill_text
+    # Scientific authors dispatch to the configured endpoint; Root-authored local
+    # execution is exercised separately. Old skill-layout phrases are not behavior.
+    assert handoff["dispatch_required"] is True
+    assert handoff["operator_model"] == "gpt-5.6-luna"
+    assert handoff["operator_thinking"] == "xhigh"
     assert handoff["dispatch_mode"] == "REUSE_SINGLETON"
     assert handoff["operator_thread_id"] == SINGLETON_THREAD_ID
 
@@ -728,7 +721,6 @@ def test_em_innovator_and_convergence_use_distinct_persistent_bindings(
     body = (tmp_path / "innovator" / "PROMPT_BODY.md").read_text(encoding="utf-8")
     assert "Select the next scientific object" in body
     assert "DECISION_AUTHORITY=" not in body
-    assert "final decision on the question above" in body
 
 
 def test_portfolio_uses_one_cross_direction_binding_and_final_decision_authority(

@@ -559,11 +559,14 @@ def stage_receipt(
     )
     if existing.get("message_key") and existing["message_key"] != message_key:
         raise ValueError("completion receipt message key conflicts with the archived response")
+    if existing.get("status") == "LOCAL" and (record.get("execution_thread_id") or record.get("operator_thread_id")) == parent_thread_id:
+        return record
     if existing.get("status") == "PENDING" and existing.get("message_key"):
         if (
             existing.get("destination_thread_id") == parent_thread_id
             and existing.get("routing_mode") == "PARENT_SESSION"
             and existing.get("fallback_enabled") is False
+            and (record.get("execution_thread_id") or record.get("operator_thread_id")) != parent_thread_id
         ):
             return record
     elif existing.get("status") == "BLOCKED":
@@ -593,6 +596,9 @@ def stage_receipt(
             "fallback_enabled": False,
         }
     )
+    if (record.get("execution_thread_id") or record.get("operator_thread_id")) == parent_thread_id:
+        existing.update(required=False, destination_thread_id=None, status="LOCAL",
+                        routing_mode="LOCAL", attempt_count=0)
     record["creator_thread_id"] = source_thread_id
     record["parent_thread_id"] = parent_thread_id
     record["return_route"] = "PARENT_SESSION"
@@ -669,11 +675,14 @@ def stage_blocker_receipt(
     )
     if existing.get("message_key") and existing["message_key"] != base_key:
         raise ValueError("blocker receipt message key conflicts with the terminal state")
+    if existing.get("status") == "LOCAL" and (record.get("execution_thread_id") or record.get("operator_thread_id")) == parent_thread_id:
+        return record
     if existing.get("status") == "PENDING" and existing.get("message_key"):
         if (
             existing.get("destination_thread_id") == parent_thread_id
             and existing.get("routing_mode") == "PARENT_SESSION"
             and existing.get("fallback_enabled") is False
+            and (record.get("execution_thread_id") or record.get("operator_thread_id")) != parent_thread_id
         ):
             return record
     for key in tuple(existing):
@@ -702,6 +711,9 @@ def stage_blocker_receipt(
             "fallback_enabled": False,
         }
     )
+    if (record.get("execution_thread_id") or record.get("operator_thread_id")) == parent_thread_id:
+        existing.update(required=False, destination_thread_id=None, status="LOCAL",
+                        routing_mode="LOCAL", attempt_count=0)
     record["creator_thread_id"] = source_thread_id
     record["parent_thread_id"] = parent_thread_id
     record["return_route"] = "PARENT_SESSION"

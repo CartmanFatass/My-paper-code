@@ -1,73 +1,51 @@
-# Independent experiment monitor
+# Root experiment observation
 
-OWNER_DIRECT 2026-09-06 replaces the native tracker with one reusable Codex task,
-Luna/low, declared in `.codex/hmasd-monitor.toml`. This one project-wide monitor observes
-all assigned experiments together; there is no monitor task per experiment. Its own
-five-minute heartbeat checks every current unresolved handle in one bounded pass and ends the turn. Root's research heartbeat
-is removed. This change does not resume OWNER_PAUSED research.
+OWNER_DIRECT 2026-09-06: Luna/xhigh Root absorbs the independent Monitor and Transport.
+The original Monitor is retired after clean handover; new accepted handles go directly to
+Root in `.codex/hmasd-monitor.toml`. `ROOT_OPERATIONS.md` defines the single shared heartbeat
+for all current experiments and Pro work. Existing experiment/scientific constraints remain.
 
-## Assignment and return
+## Assignment and adoption
 
-DM or CM sends accepted handles directly through `send_message_to_thread` to the
-configured monitor task, using Luna/low. Native subagents can send to independent
-tasks (owner-confirmed); an independent task cannot address Root's native children.
-The return route is monitor -> configured research Root -> responsible native DM/CM.
-Root uses `collaboration.send_message` for a running child or `followup_task` for an
-idle child, resolving its current canonical identity. Do not guess a retired name.
-Owner pause still controls any subsequent research or launch.
+Root's native DM/CM sends the accepted handle through collaboration. Separate app tasks use
+`send_message_to_thread` to the configured Root, without model/effort overrides. Root handles
+its own assignment locally; it does not send an adoption message to itself.
 
-The assignment states the deliverable and links the existing card/run record. Include
-only missing facts: execution node, accepted supervisor handle, launch SHA, cwd,
-log/result/receipt paths, expected bound/reminder, responsible DM/CM canonical names.
-Do not repeat the card or full scientific history. A private exec session number
-alone does not transfer access; local detached work needs PID/start identity and its
-existing exit witness. Tracking metadata is not an experiment launch condition.
+Link the existing card/run record and supply only missing execution facts: node, accepted
+supervisor handle, launch SHA, cwd, log/result/receipt paths, expected bound/reminder and the
+responsible DM/CM identity. A private exec session number alone cannot transfer access;
+local detached work needs PID/start identity and the existing exit witness. Tracking metadata
+is not a new experiment launch condition. Preserve owner pause and existing launch bounds.
 
-Before sending an adoption ACK, the monitor uses `automation_update` to set the existing
-`hmasd-experiment-monitor` heartbeat ACTIVE and reads its saved configuration back.
-Use `mode=update` and the configured existing id for every status change. Preserve the
-complete long-term prompt, schedule and target task; do not replace the prompt with a
-current-state summary or call create. An accepted message or a completed one-off check
-does not establish recurring activation.
-The monitor records adoption and sends Root an ACK naming the assigning DM/CM and the
-confirmed heartbeat state;
-Root forwards it. Before ACK the launcher owns observation; after ACK only the
-monitor routinely polls. DM/CM/Operator retains launch, collection, verification and
-science ownership. Repeated assignments update the same (node, accepted handle).
+Root records adoption in `docs/research/portfolio/EXPERIMENT_TRACKING.md`, activates the
+existing shared automation via `automation_update`, and reads back its ACTIVE state before
+ACK. Preserve the full long-term prompt, thirty-minute schedule and Root target on updates.
+An accepted message or one-off check does not establish recurring activation. Before ACK,
+the launcher retains observation; after ACK Root owns routine polling. Repeated assignments
+update the same (node, accepted handle). Root ACKs the actual native child or external sender.
+CM retains launch/collection/technical acceptance and DM retains scientific intake.
 
-## One heartbeat pass
+## Bounded observation
 
-Read all current assigned-handle rows and relevant owner instructions. Observe every
-handle still needing a terminal notification, not only the most recent assignment. Never
-adopt historical handles by scanning old tables. Batch independent read-only checks.
-Resolve the configured node via `.codex/hmasd-compute.toml`; on the current node use
+On each shared wake, read all current assigned rows and relevant owner instructions. Check
+every handle needing observation/terminal notification, not only the latest assignment.
+Never adopt historical handles by scanning old tables. Batch independent read-only checks.
+Use `.codex/hmasd-compute.toml`; on the configured node use
 `ssh -o BatchMode=yes -o ConnectTimeout=10 hmasd-wsl-node /usr/local/bin/agent-task status <accepted-name>`
-and, only when useful, `logs <accepted-name> 40`. Quote the supplied name as data.
-Never launch, retry, stop, attach, change experiments, or copy live output trees.
-Use supervisor terminal evidence; SSH failure or PID absence alone is unknown.
+and, only when useful, `logs <accepted-name> 40`. Quote supplied names as data. Do not launch,
+retry, stop, attach, change experiments or copy live output trees merely to monitor them.
+Supervisor evidence controls terminal status; SSH failure/PID absence alone is unknown.
 Exit zero is a process fact, not scientific validity.
 
-Notify Root once on completion, failure, lost observation, or a supplied reminder
-or bound condition, with handle, direct fact, evidence and next responsible DM/CM.
-Record notification state; reconcile uncertain delivery before retrying. Healthy
-unchanged state is silent: no messages, commits, sleep loops or per-poll narratives.
-CM collects results; DM judges validity and performs intake.
+On completion, failure, lost observation or a supplied bound/reminder, record the direct
+fact and evidence and notify the responsible DM/CM. Use `send_message` for a running native
+child and `followup_task` for an idle one. Reconcile uncertain delivery before retrying.
+Healthy unchanged state is silent: no per-poll messages, commits or sleep loops.
 
-The monitor alone writes current rows in `docs/research/portfolio/EXPERIMENT_TRACKING.md`
-in its configured worktree. Preserve historical evidence. Commit/push meaningful
-adoption/terminal changes by explicit path; include commit and absolute record path
-in Root notifications for integration. No new registry, event daemon or cost tracker.
-Keep the same heartbeat ACTIVE while any assigned handle needs observation or terminal
-notification. A healthy unchanged pass, one completed experiment, or a receipt for a new
-assignment does not end monitoring of the other handles. Pause only when all current
-handles are terminal and their handoffs have been notified. A new direct assignment
-reactivates this same global heartbeat before ACK; never create per-run jobs.
-Keep terminal rows until handoff is acknowledged. A lost turn resumes from this table.
-
-## Reading and handoff economy
-
-Start with the assignment, current card/intake section and owned code. Read relevant
-authority sections and dependencies as needed; do not preload every cited historical
-artifact. A handoff gives the required deliverable, owned paths, acceptance and links
-to accessible contracts; restate only changes, ambiguities and critical invariants.
-Read broader evidence when a real scientific or engineering decision depends on it.
+Root writes meaningful adoption/terminal changes in the existing tracking table on main,
+using explicit-path commits and immediate push. Preserve terminal rows and their collection
+handoffs. No new registry, daemon, per-experiment task or monitoring worktree is required.
+The shared heartbeat remains ACTIVE while ANY assigned experiment OR Pro request still
+needs observation, reconciliation, archive or notification. A completed experiment does not
+retire another item's observation. Pause only when that combined pending set is empty;
+a new accepted assignment reactivates the same automation before ACK.

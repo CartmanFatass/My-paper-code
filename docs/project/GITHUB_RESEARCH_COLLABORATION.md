@@ -8,7 +8,7 @@ science/evidence links, unresolved questions and concise state. Comments contain
 new measured evidence, implementation questions, attributed Pro findings and their
 resolution. Do not mirror every internal agent turn or create a second approval queue.
 
-Root/DM writes under the connected account and labels its own synthesis versus
+Portfolio/DM writes under the connected account and labels its own synthesis versus
 verbatim Pro excerpts; never pretend Pro owns a separate GitHub identity. Archive the
 complete original Pro response in the repository. Link a response's relevant comment
 permalinks and record which source version it analyzed. Mutable issue edits are not
@@ -40,12 +40,12 @@ No additional VNFC pilot or Pro review is required. Existing accepted requests f
 in their original mode; archived history remains unchanged, and no Send is repeated.
 
 The operational design is [GITHUB_PRO_COLLABORATION_WORKFLOW_DRAFT.md](GITHUB_PRO_COLLABORATION_WORKFLOW_DRAFT.md),
-with this cutover superseding its former staged rollout. Root/DM authors and commits
+with this cutover superseding its former staged rollout. Portfolio/DM authors and commits
 TASK.md with fixed source refs and a dedicated output branch/path, binds its full SHA,
 and sends the short link through Transport. Pro writes the full response and one Issue
-link comment. Transport archives short receipt links; Root/DM directly reads and
+link comment. Root performs Transport archival of short receipt links; Portfolio/DM directly reads and
 intakes the complete response. Comments have no independently verified automatic
-wakeup; the existing singleton and heartbeat handle observation and wakeup.
+wakeup; the integrated Root and its single shared heartbeat handle observation and wakeup. See ROOT_OPERATIONS.md; Root-local receipts do not send app messages to Root itself.
 
 The renderer defaults to github_delivery. archive_attachment is only a per-request
 explicit capability fallback with fallback_reason, not the normal authoring path.
