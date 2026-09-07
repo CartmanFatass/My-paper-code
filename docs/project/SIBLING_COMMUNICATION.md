@@ -3,7 +3,7 @@
 Use native `collaboration` tools for agents in the current Root's task tree.
 Use `send_message_to_thread` for a separate app task, addressed by its exact task UUID.
 The current Root, Portfolio and observation endpoints are configured in `.codex/`;
-ROOT_OPERATIONS.md defines Portfolio planning, Root command execution/reporting and the shared wake. Portfolio sends concrete targets, actions and return routes; Root logs ordinary execution and sends actionable planning gaps to Portfolio instead of selecting a replacement task.
+ROOT_OPERATIONS.md defines Portfolio planning, Root command execution/reporting and goal-driven observation. Portfolio sends concrete targets, actions and return routes; Root logs ordinary execution and sends actionable planning gaps to Portfolio instead of selecting a replacement task.
 
 ## Native agent messages
 
@@ -45,7 +45,7 @@ DM performs scientific intake. Transferring observation never launches another r
 Private terminal sessions do not become accessible merely by forwarding their IDs.
 Use the recorded detached supervisor, process identity and existing exit witness.
 Supervisor state establishes process termination; it does not establish scientific
-validity. Observation follows the configured shared heartbeat, not an extra agent task.
+validity. Observation runs within the owner's active goal, without a scheduled automation.
 
 ## Root-to-Portfolio notification filter
 
@@ -71,7 +71,7 @@ the supplied route: execution failure, missing input/tool/access, or uncertain s
 a repair request even when no scientific or Portfolio-tier decision is needed. Include the
 failed action, exact error/evidence, repairs already attempted, affected dependency and help
 needed. Send promptly once outside the assigned repair path; do not silently log it, wait for
-the heartbeat, repeatedly retry, or stop all independent work. Portfolio owns arranging the
+the next observation pass, repeatedly retry, or stop all independent work. Portfolio owns arranging the
 bounded repair and returning its next step; Root resumes at that step and reports a changed
 blocker if it persists. Reconcile ordinary technical issues within the assigned route first;
 never conceal a planning gap until the whole batch finishes. Name the decision/action needed,

@@ -23,7 +23,7 @@ runs directly on main; coordinate overlapping file edits with Root and push expl
 Portfolio and Root use `.agents/skills/hmasd-loop-dispatch/SKILL.md` for batch planning,
 dispatch, return handling and working-set vacancies; Portfolio additionally uses
 `hmasd-portfolio-task` for scientific Portfolio decisions. See `docs/project/ROOT_OPERATIONS.md`
-for the integrated routing and shared heartbeat. Each research
+for the integrated routing and goal-driven observation. Each research
 direction is driven by one **Direction Manager (DM)**: it holds the direction's science card,
 predictions on record, intake, and escalation. **Code Manager (CM)** turns one bounded engineering
 objective into an inspectable result. Specialist subagents (scout, implementers, reviewer, critic,
@@ -310,7 +310,7 @@ or launch gates, and never override a stricter original cap.
 
 Resume model: commit and push before every launch; launch every result-bearing run detached from
 the agent's process; on the remote route use a detached worktree at the exact launch sha and the
-configured `agent-task` supervisor; Root observes accepted handles and pending Pro work through one shared heartbeat
+configured `agent-task` supervisor; Root observes accepted handles and pending Pro work within the owner's active goal
 (`docs/project/ROOT_OPERATIONS.md`); keep every agent's state recoverable from the repository alone (card, predictions,
 launch sha, execution node, run root, queue state).
 
@@ -475,15 +475,15 @@ appendix and completed historical tasks remain unchanged.
   `.codex/hmasd-portfolio.toml`; procedure: `docs/project/ROOT_OPERATIONS.md`.
   DM/CM sends accepted handles directly to Root, which observes and wakes native children;
   collection/technical acceptance remains CM's and scientific intake remains DM's.
-  One Root heartbeat covers the union of current experiment and Pro pending work. Confirm
-  ACTIVE before adoption ACK, and do not pause it while another assigned item remains.
-  No independent Monitor/Transport tasks or per-request heartbeats are created.
+  Root's owner-driven goal covers current experiment and Pro pending work. Record adoption
+  and the responsible observer before ACK. Do not create scheduled observation automations
+  or independent Monitor/Transport tasks; the owner removed the previous scheduler.
 - DM is the `em` Prompt Author; independent Portfolio is the `portfolio` caller and full-response
   intake owner. Both dispatch exact fixed-link handoffs to Root's configured Transport endpoint,
   using Luna/xhigh. Root-authored handoffs execute locally without self-dispatch. Root-local
   completion/blocker receipts are recorded without a self-message; other receipts go once to
   the declared parent without model/effort overrides. Root forwards direction receipts to the
-  current native DM. A shared heartbeat does not merge request identity, tabs, archives or
+  current native DM. Goal-driven observation does not merge request identity, tabs, archives or
   Send evidence. Preserve 6 Pro provider verification separately from the Codex model.
   Owner-directed conversation replacement and CALLER_DIRECT remain available under the existing
   exact-input rules. Preserve immutable accepted handoffs and Send evidence; uncertainty

@@ -60,7 +60,7 @@ direction chains; a completed task or external wait does not count as advancing 
 
 Use [hmasd-loop-dispatch](../../.agents/skills/hmasd-loop-dispatch/SKILL.md), Root section,
 when receiving commands, native returns, failed dispatches or vacancies, including after
-an observation wake. Read it directly from the repository if the current session's skill
+an observation pass within the active goal. Read it directly from the repository if the current session's skill
 catalog predates its addition. It supplies the dispatch-before-wait sequence, whole-working-set
 receipt and exact conditions for reporting gaps. Root executes named choices; Portfolio
 owns readiness and replacement planning. DM and CM retain their scientific/technical work.
@@ -93,25 +93,26 @@ and returns the next step; routine-message filtering must never suppress this he
 This is not a new approval gate for accepted work, nor authority for Portfolio to bypass a real
 runtime restriction or grant permission reserved to the owner. Unrelated authorized work continues.
 
-## One shared observation wake
+## Goal-driven observation
 
-Root observes assigned experiment handles and exact current Pro requests through the existing
-`hmasd-experiment-monitor` heartbeat, every fifteen minutes. Endpoint and schedule are in
-`.codex/hmasd-monitor.toml`. Use `EXPERIMENT_MONITOR.md` for adoption and the Transport skill
+OWNER_DIRECT 2026-09-07: the owner uses a goal to drive automatic execution and deleted the
+previous observation automation. Root observes assigned experiment handles and exact current
+Pro requests within that active goal. `.codex/hmasd-monitor.toml` names the endpoint, not a
+schedule. Do not create or reactivate an observation automation. Use `EXPERIMENT_MONITOR.md`
+for adoption and the Transport skill
 for exact request identity, model verification, Send state, archiving and receipt delivery.
-The timer observes accepted work; it does not select tasks or refill the research queue.
+The observation pass checks accepted work; it does not select tasks or refill the research queue.
 
-Keep the heartbeat ACTIVE while any assigned experiment needs observation/terminal notification
-or any current Pro request needs scheduled reconciliation, generation observation, archival or
-delivery. An explicit terminal blocker with no scheduled recovery is reported to Portfolio and
-needs no repeated wake. Pause when that combined observation set is empty. Preserve the existing
-id, full prompt, fifteen-minute schedule and Root target; read back ACTIVE before adoption ACK.
-A paused observation heartbeat says nothing about completion of native research tasks.
+Keep pending experiments and Pro requests recoverable in their existing records and observe
+them during goal execution. An unresolved blocker goes promptly to Portfolio under the help
+rule; unchanged waits need no repeated message. Empty observation state does not mean the
+research goal is complete. Owner pause/end preserves accepted processes and pending request
+evidence with an explicit observation handover, without a replacement scheduler.
 
-Each wake reads current assigned rows, batches independent supervisor checks, observes due Pro
+Each observation pass reads current assigned rows, batches independent supervisor checks, observes due Pro
 requests serially and applies the shared dispatch skill. It executes remaining explicit commands and
 return routes; unlisted actions go to Portfolio. Historical handles and requests are not adopted
-by scanning archives. No new scheduler, polling task, per-request heartbeat or goal is created.
+by scanning archives. Reuse the owner's goal; no new scheduler, polling task or replacement goal is created.
 
 Owner pause changes the affected work first while preserving accepted-process observation and
 unknown-Send evidence. Waiting for one conversation does not hold other issued commands.

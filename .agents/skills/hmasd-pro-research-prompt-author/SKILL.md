@@ -66,7 +66,7 @@ The full fixed response, not chat links or a comment summary, is the formed deci
 The DM or independent Portfolio directly reads and preserves the complete bytes and
 provenance, then performs existing scientific intake. Root handles transport and routes
 native DM receipts locally; Portfolio requests name the actual Portfolio task as parent.
-The integrated Root's shared heartbeat observes all current requests without per-request
+The integrated Root observes current requests within the owner's active goal, without scheduled
 automations. Read docs/project/ROOT_OPERATIONS.md for current routing. Contradictions or evidence gaps remain explicit; a complete
 archive alone is not science acceptance. No new approval or experiment gate is added.
 

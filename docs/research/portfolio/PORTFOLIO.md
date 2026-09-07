@@ -14,11 +14,11 @@ P09 authorizes one explicitly corrected-delivery request on the same shared dire
 RCLE's post-A02 response remains missing. The current command table and linked handoff below
 are the execution plan; earlier P07/P08 snapshots are historical evidence.
 
-Scientific Portfolio owner: Astra/max task `01a07a3e-29bf-7f52-bc1e-cfa214b8d94a`, directly
+Scientific Portfolio owner: Astra task `01a07a3e-29bf-7f52-bc1e-cfa214b8d94a` (effort selected by the owner), directly
 on main. Root is Luna/xhigh task `01a07249-b095-7821-8ce2-e9c32ba85267`: it dispatches bounded
 commands, integrates specified results and maintains actual observation/receipt facts in
-EXPERIMENT_TRACKING.md. DM retains delegated science and CM technical judgment. Root's existing
-shared heartbeat observes accepted experiment/Pro handles; no new automation or observer is added.
+EXPERIMENT_TRACKING.md. DM retains delegated science and CM technical judgment. Root's owner-driven
+goal includes observation of accepted experiment/Pro handles; no scheduled automation is used.
 Five advancing direction chains remain the target, measured by actual dispatch/return state.
 Pro reuses direction branches by default, with fixed input SHAs and scoped response writes.
 

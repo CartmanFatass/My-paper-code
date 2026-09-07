@@ -8,7 +8,7 @@ The registry is JSON at a caller-supplied path (default project-local path:
 has two independent EM conversations and Portfolio has one conversation reused
 across changing multi-direction scopes. Only one request may be active per key;
 archive it before sending the next turn in that same conversation. Browser tab
-handles, heartbeat wakeups, and executor turns remain ephemeral observations. The
+handles, goal-driven observation passes, and executor turns remain ephemeral observations. The
 registry is shared across all requests handled by Root;
 its operator UUID never selects a provider conversation.
 
@@ -110,16 +110,13 @@ its operator UUID never selects a provider conversation.
     "fallback_enabled": false,
     "delivery_status": null,
     "error": null
-  },
-  "heartbeat": {
-    "automation_id": "hmasd-experiment-monitor",
-    "status": "ACTIVE",
-    "next_wake_at": "...Z",
-    "retired_at": null,
-    "retirement_verified": false
   }
 }
 ```
+
+The legacy `heartbeat` field is historical metadata, not a scheduling instruction. Preserve
+existing evidence fields; do not create an automation from them. Root's active goal drives
+observation, and new records require no scheduler identity.
 
 At the registry root, active records live under `bindings`, keyed by the exact
 `conversation_binding_key`. Use the existing binding helpers for persisted-state
@@ -147,7 +144,7 @@ distinct replacement request ID, preserves the complete prior record (including
 unfinished/accepted-send state), and records `reason=owner_requested_new_conversation`.
 It does not require or fabricate a blocked answer, zero retrieved paths, or
 contamination. Close or transfer the affected request's observation under the owner
-instruction; keep the shared wake while other work needs it.
+instruction; preserve other pending records under the active goal.
 The `quarantined_conversations` map stores the excluded provider ID without
 assigning scientific polarity. Repeating the same pending replacement preparation
 is idempotent; a different pending replacement is refused.
@@ -218,7 +215,7 @@ conversation.
 
 `tab_lifecycle` may be `OPEN`, `HANDOFF`, or `CLOSED`, but it is never the
 conversation identity. The tab lease must remain `OPEN` throughout every
-`WAITING_*` state. Ending an executor turn or returning from a heartbeat wake does
+`WAITING_*` state. Ending an executor turn or returning from an observation pass does
 not close the tab. Only after natural completion, exact response capture, durable
 archive verification, and either receipt staging or an explicit blocked-receipt
 record may an agent-created tab be closed by the
@@ -270,12 +267,11 @@ binding against the captured node with `validate_response_identity`; missing DOM
 IDs require documented manual pairing against the exact question. Preserve and
 re-inspect a mismatched capture on the same page, never repair it with a new Send.
 
-## Heartbeat and asynchronous processing
+## Goal-driven asynchronous processing
 
-Integrated Root reuses one fifteen-minute heartbeat for all current experiments and Pro
-requests. A due Pro check occurs on the fifteen-minute fallback wake;
-each due conversation gets one bounded read in serial. `INTERVAL=1` busy polling is invalid.
-A wake observes the existing request, never resends it or changes provider identity. Natural
+Integrated Root observes current experiments and Pro requests within the owner's active goal.
+Each due conversation gets one bounded read in serial; avoid busy polling and do not create
+scheduled automations. A pass observes the existing request, never resends it or changes provider identity. Natural
 completion archives the paired response; timeout retains the same conversation for recovery.
 
 If a page handle is lost, one recovery tab may be opened from the exact persisted
@@ -284,10 +280,9 @@ Never call `tabs.get()` on an old handle and never treat the new tab ID as a new
 identity. The recovered tab remains active while the conversation is pending.
 
 Root may own overlapping provider generations. Tab leases, outbox entries, archives and
-idempotency keys remain request-scoped, but `heartbeat.automation_id` names the same Root
-automation. Request completion clears only that request's pending observation. Pause the shared
-automation only when no current experiment or Pro request needs observation, reconciliation,
-archival or notification. Never retire it merely because one request completes. Preserve
+idempotency keys remain request-scoped. Legacy scheduling metadata grants no authority to
+recreate the removed automation. Request completion clears only that request's pending
+observation; other pending work remains recoverable within the owner's goal. Preserve
 each request's recorded observation facts without rewriting another request's state.
 
 ## Automatic return outbox
