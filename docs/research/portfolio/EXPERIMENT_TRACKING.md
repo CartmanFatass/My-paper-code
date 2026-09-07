@@ -6,7 +6,7 @@ OWNER_DIRECT merger: existing Luna/xhigh Root directly observes experiments and 
 requests. Standalone Monitor and Transport have relinquished their current work. See
 `.codex/hmasd-monitor.toml`, `.codex/hmasd-transport.toml` and `docs/project/ROOT_OPERATIONS.md`.
 Current assigned live/unknown experiment handles: none live; `vspc1-reactive-b01-factor-run02`
-is terminal and awaits CM technical collection. The single Root heartbeat also covers the
+is terminal and technically accepted, with its artifacts collected by CM. The single Root heartbeat also covers the
 explicit pending Pro rows below; experiment completion alone does not pause it.
 Historical handles and old routing sections below are retained evidence, not current assignments.
 
@@ -20,8 +20,9 @@ handle and log remain retained as a technical launch failure. Corrected FACTOR
 `vspc1-reactive-b01-factor-run02` ran from source `476748835` at 2026-09-07T14:09:30+08,
 passed fresh physical/effective memory admission at `15668547584` bytes, and exited 0 after
 complete publication/readback (256 updates, 4096 training episodes, 2304 evaluation episodes,
-17 target copies, 4.4253 s through final readback). CM owns artifact collection and the next
-exact GENERIC handoff; no scientific polarity follows from the prior no-op.
+17 target copies, 4.4253 s through final readback). CM technical acceptance is recorded in the
+integrated B01 CM record; the exact GENERIC handoff is next and remains undispatched. No
+scientific polarity follows from the prior no-op or from FACTOR alone.
 
 ## Current Pro handover queue — 2026-09-06
 
