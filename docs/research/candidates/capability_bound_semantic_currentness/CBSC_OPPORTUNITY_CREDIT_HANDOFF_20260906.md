@@ -1,5 +1,29 @@
 # CBSC next-question clean boundary
 
+## Current state after Convergence intake
+
+The full immutable response at `d3222ccb53f4986320f0015960ea997dccd8e856`
+selects **CBSC-OPPORTUNITY-CREDIT-B04** without a recast. The selected card,
+complete response archive, English decision intake and current owner P2 items
+are committed/pushed at `bd8dff1f590c9f8f9dd630409b3275a18fa66321` on
+`codex/dm-cbsc-b04-selected-20260906`. Use
+`CBSC_OPPORTUNITY_CREDIT_B04_SCIENCE_CARD_20260906.md` and
+`CBSC_OPPORTUNITY_CREDIT_B04_CONVERGENCE_INTAKE_20260906.md` as current authority;
+the preparation/dispatch record below is historical.
+
+DM assigned native CM `/root/dm_amx_cbsc_next/cm_cbsc_opportunity_b04` the
+complete bounded implementation, independent review, single selected check
+and formal RAW/STRUCT pair. CM owns new `opportunity_credit_b04/` source,
+mirrored tests, `scripts/run_cbsc_opportunity_credit_b04.py`, and its delivery/
+launch record in this directory. The frozen card supplies the scientific
+contract and bounds; no second contract or new object is created here.
+Source review and Root integration precede the first selected invocation.
+At this boundary no B04 source implementation, accepted experiment handle or
+new scientific output exists. Old family pause, historical results and
+Portfolio state remain unchanged. Root owns integration and Portfolio.
+
+## Historical preparation and dispatch boundary
+
 Date: 2026-09-06 PDT. The owner resumed preparation through Root's
 `06e3993068d4b5126ccc3cb957f7a582d00234da` record. The old unchanged
 48-update family remains paused. No new experiment or card is selected.
