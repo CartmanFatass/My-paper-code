@@ -270,3 +270,67 @@ FACTOR technical acceptance satisfies the preceding-arm dependency for preparing
 GENERIC handoff. Root must accept and dispatch its exact corrected command; CM has not dispatched
 GENERIC. The proposed `vspc1-reactive-b01-generic-run02` handle and run02/GENERIC root were absent
 at read-only preparation. Root observation/adoption, CM technical collection and DM science remain.
+
+## GENERIC run02 and paired terminal technical acceptance — 2026-09-07 UTC
+
+**GENERIC and the complete paired publication are technically accepted.** Root dispatched
+`vspc1-reactive-b01-generic-run02` once after FACTOR acceptance. CM collected exact remote
+GENERIC summary/admission/timing plus supervisor status/log/accepted runner and the shared
+`paired_summary.json`. Source is unchanged `47674883572bbe078ede037cbb8f99b8cd54c159`, same
+wsl_4070 cwd/interpreter/versions and CPU float32/one-thread/batch16 configuration. Observed
+argv is GENERIC seed401, run02/GENERIC output, without fixture options. The accepted command
+places GENERIC and then paired publication under one 2700s timeout after adjacent admission.
+
+Terminal log: start `2026-09-07T14:17:09+08:00`, end `14:17:14+08:00`, duration5s, exit0;
+status finished and tmux inactive. Admission assessed `2026-09-07T06:17:09.434040Z`, physical
+and effective available bytes both15,669,395,456, passed against4,294,967,296. Whole invocation
+including paired publication/exit: real5.48s/user4.38s/sys0.43s (CPU sum4.81s), below2700s.
+GENERIC main-process peak RSS477,904,896 bytes; wall through primary readback4.253146994014969s,
+through final arm readback4.2558269489964005s. The outer invocation timer also covers the
+subsequent paired-report Python call. Sum of two whole-arm walls is10.32s and reported CPU
+sum8.93s; elapsed study time includes the control/collection gap between the recorded timestamps.
+
+Read-only collection checks passed: GENERIC status complete,309 parameters,seed401,256 updates;
+budget and RNG namespaces match FACTOR; observed counts equal expected counts. Per arm counts
+are4096 training episodes/196608 ticks/65536 renewal rows/61440 nonterminal rows/256 Adam steps;
+2304 evaluation episodes/110592 ticks/36864 decisions;454656 scalar Q predictions;17 target
+copies at[0,16,...,256];zero model-selection steps. All nine fixed curve points,256 per-period
+finite nonnegative TD-loss entries and128 indexed endpoint values per period are present.
+Endpoint means recompute from arrays, and native return/unused-service/backlog/overflow bounds
+are consistent. GENERIC initial norm3.685532808303833, final displacement1.5036020278930664.
+
+CM independently recomputed paired episode differences, their period/equal-weight means,
+sample-variance conditional SE and normalized trapezoidal AUC using Python standard-library
+statistics and the copied arrays/curve points, without importing the implementation's reporting
+functions. All matched the published paired report. No rollout, update, evaluation, replay,
+parameter change, source test or publication rerun was performed during collection.
+
+| Direct paired measurement | Value |
+| --- | ---: |
+| FACTOR endpoint equal-period mean | 0.7248942057291665 |
+| GENERIC endpoint equal-period mean | 0.7252197265625 |
+| Delta FACTOR minus GENERIC | -0.00032552083333333304 |
+| Delta d2 | 0.0 |
+| Delta d6 | -0.0006510416666666661 |
+| Conditional evaluation SE | 0.00011187229762751792 |
+| FACTOR AUC d2 / d6 | 0.722686767578125 / 0.7233683268229166 |
+| GENERIC AUC d2 / d6 | 0.7218017578125 / 0.7237447102864583 |
+| Equal-period AUC Delta | 0.00025431315104168517 |
+
+The published descriptive endpoint and AUC reading fields both say
+`insufficient_practical_gain`; endpoint and AUC signs differ and both are retained.
+Conditional SE concerns only the fixed trained models' paired evaluation episodes. The full
+curve, initial values, all endpoint episode differences, per-period losses and native consequences
+remain in the copied exact summaries. This is one paired training instance, not independent
+training replication or a training-population uncertainty estimate. DM applies the card's
+scientific interpretation; CM introduces no follow-up, arm, retry or direction disposition.
+
+Local collected pair root:
+`C:/Projects/HMASD-worktrees/cm-vspc1-reactive-transport-repair-20260906/temp/directions/vsp_c1/exp/k4_reactive_queues_b01_run02/`.
+Its `GENERIC/` contains exact summary/admission/timing and retained supervisor records;
+`FACTOR/` retains the previously accepted artifacts; root files `paired_summary.json` and
+`paired_collection_check.json` hold published paired data and independent recomputation.
+Remote originals remain at the same relative root below the frozen remote cwd. Prior accepted
+run01 no-op evidence is preserved separately. Both selected arms are terminal; no live process
+or unresolved technical primary-output gap remains. Next owner is DM for scientific intake,
+with Root integrating this technical record. No further execution is selected.
