@@ -54,10 +54,10 @@ Seed `6302` completed on the same source/cwd, exit `0` at `2026-09-07T07:48:55Z`
 admission passed physical/effective `15664181248` bytes at `2026-09-07T07:48:45.967Z`; the
 supervisor log reports `COMPLETE` and runner wall `9.254238544 s` (supervisor duration `10 s`),
 with log `/home/wu/.agent-tasks/ucope-native-return-b01-seed6302/task.log`. CM collected and
-technically accepted both formal outputs at `d234f7648` (integrated `fba696098`): total `655360`
-episodes, `2068172` host-event transitions, `2048` updates, walls `8.80/9.67 s`, peak RSS
-`510200/506720 KiB`, and complete state/log/evaluation readback. Root delivered terminal facts;
-DM now applies the frozen reading rule. No scientific polarity exists.
+technically accepted both formal outputs at `d234f7648` (integrated `fba696098`); DM's scientific
+intake is integrated at `99e587f6b`: valid complete B, `NR-B`, `Delta_bar=0`, both seed deltas
+and conditional SE `0`, all final modal roots `IMMEDIATE-4`, and no additional invocation.
+No live handle, retry or extra exposure remains.
 
 ## Current Pro handover queue — 2026-09-06
 
