@@ -46,3 +46,19 @@ The preparation and final main-worktree owner-review scans returned `[]`. All ne
 zero: models, training seeds, environment episodes, optimizer steps and evaluations. No execution
 handle exists to transfer or monitor. The 120-second cap and 23.620-second conditional planning
 number are proposed future work, not consumed compute or observed N2 runtime.
+
+## Subsequent transport observation and routing correction
+
+The Root receipt identity above was incorrectly inferred from the native author's backing task.
+Actual Root is `01a07249-b095-7821-8ce2-e9c32ba85267`. Root supplied a routing-only correction;
+the singleton's later terminal-blocker receipt used that corrected destination. The accepted
+HANDOFF and fixed TASK are preserved unchanged.
+
+Transport returned `SENT_INPUT_MISMATCH`, but its recorded user/task and message IDs are from
+the old B01 round, while its captured chat text links CBSC. Actual registry and immutable B01
+facts agree on the handoff's `374c` conversation string; no `3748` mismatch was found. This is
+not evidence of a new B02 Send or a formed decision. See
+`../../VSP03_B02_TRANSPORT_BLOCKER_INTAKE_20260906.md` and this packet's
+`archive/blocker_20260906/` for exact preserved artifacts, checked limits and the bounded
+read-only reconciliation requested from the same singleton. No scientific payload, binding,
+provider conversation or experimental selection was changed.
