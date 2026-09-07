@@ -1,0 +1,120 @@
+{
+  "mode": "scientific",
+  "request_id": "2026-09-06-vspc1-reactive-queues-convergence-01",
+  "workflow_node": "em_convergence",
+  "direction_id": "vsp_c1",
+  "conversation_binding_key": "em:vsp_c1:convergence",
+  "decision_authority": "pro_final",
+  "delivery_mode": "github_delivery",
+  "conversation": {
+    "id": "6a9cfac6-4d34-83e8-9f0a-088c03f4fb0c",
+    "url": "https://chatgpt.com/c/6a9cfac6-4d34-83e8-9f0a-088c03f4fb0c",
+    "reuse_required": true,
+    "rebound_or_reset": false
+  },
+  "tab": {
+    "id": null,
+    "key": "em:vsp_c1:convergence",
+    "origin": "agent",
+    "lifecycle": "CLOSED"
+  },
+  "model_preflight": {
+    "requested_product_model_1": "GPT-6 Astra",
+    "requested_product_model_1_result": "not explicitly listed; accepted configured Latest under 6 Pro",
+    "requested_product_model_2": "Latest",
+    "matched_product_model": "Latest",
+    "reasoning_effort_requested": "Pro",
+    "matched_reasoning_effort": "Pro, 5 of 5.",
+    "provider_visible_label": "6 Pro",
+    "provider_model_slug": "gpt-6-pro"
+  },
+  "prompt": {
+    "path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_c1\\2026-09-06-vspc1-reactive-queues-convergence-01\\PROMPT_BODY.md",
+    "sha256": "b99b26dffa5ba8320d82d5b34ae80bf15d9bb1720c633866eab65f87cf42e600",
+    "bytes": 557,
+    "source": "transport_request.prompt (verbatim, HANDOFF.json)"
+  },
+  "send": {
+    "send_click_count": 1,
+    "send_attempted": true,
+    "provider_user_message_id": "a44f15bc-d4f9-4e9f-8346-f8e21dd5e589",
+    "provider_assistant_message_id": "388ae9b6-f234-45f6-9e7d-99ca09feed83",
+    "provider_assistant_turn_id": "request-6a9cfac6-4d34-83e8-9f0a-088c03f4fb0c-0",
+    "observed_conversation_url": "https://chatgpt.com/c/6a9cfac6-4d34-83e8-9f0a-088c03f4fb0c",
+    "observed_conversation_id": "6a9cfac6-4d34-83e8-9f0a-088c03f4fb0c",
+    "observed_task_url": "https://github.com/CartmanFatass/My-paper-code/blob/e6157c3e01bc6b9a8aa1b0fb3035a9157505daa9/docs/research/candidates/vsp_c1/pro_packets/20260906_reactive_queues_convergence/TASK.md",
+    "user_node_exact": true,
+    "user_node_link_attribute_exact": true,
+    "send_time_label": "Today 9:23 PM (provider UI)"
+  },
+  "wait_status": "NATURAL_COMPLETION",
+  "short_receipt": {
+    "path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_c1\\2026-09-06-vspc1-reactive-queues-convergence-01\\RESPONSE.md",
+    "sha256": "d96642d4fcaf500ff44fdaa118d1368c8d8f7842f5bb4e72fc865fed065b4ea5",
+    "bytes": 337,
+    "characters": 335
+  },
+  "github_delivery": {
+    "branch": "codex/pro-vspc1-reactive-queues-20260906",
+    "input_base_sha": "ecf810463a94bd54c3b9bc662e5e03bb1078f8bb",
+    "response_path": "docs/research/candidates/vsp_c1/pro_packets/20260906_reactive_queues_convergence/archive/RESPONSE.md",
+    "response_commit_sha": "67f4d3837c78749cb7f7369083ecbc3ffa4b133d",
+    "response_url": "https://github.com/CartmanFatass/My-paper-code/blob/67f4d3837c78749cb7f7369083ecbc3ffa4b133d/docs/research/candidates/vsp_c1/pro_packets/20260906_reactive_queues_convergence/archive/RESPONSE.md",
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/5",
+    "issue_comment_id": 5565068842,
+    "issue_comment_url": "https://github.com/CartmanFatass/My-paper-code/issues/5#issuecomment-5565068842"
+  },
+  "response_identity": {
+    "expected_binding": "em:vsp_c1:convergence",
+    "observed_binding": "em:vsp_c1:convergence",
+    "binding_match": true,
+    "paired_by_scoped_dom_order": true,
+    "user_message_id": "a44f15bc-d4f9-4e9f-8346-f8e21dd5e589",
+    "assistant_message_id": "388ae9b6-f234-45f6-9e7d-99ca09feed83"
+  },
+  "archive_status": "ARCHIVED",
+  "response_sha256": "d96642d4fcaf500ff44fdaa118d1368c8d8f7842f5bb4e72fc865fed065b4ea5",
+  "archive_paths": {
+    "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_c1\\2026-09-06-vspc1-reactive-queues-convergence-01\\PROMPT_BODY.md",
+    "response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_c1\\2026-09-06-vspc1-reactive-queues-convergence-01\\RESPONSE.md",
+    "packet_manifest": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_c1\\2026-09-06-vspc1-reactive-queues-convergence-01\\PACKET_MANIFEST.json",
+    "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_c1\\2026-09-06-vspc1-reactive-queues-convergence-01\\TRANSPORT_FACTS.json"
+  },
+  "heartbeat": {
+    "automation_id": null,
+    "status": "NOT_CREATED",
+    "retirement_verified": true
+  },
+  "timestamps": {
+    "captured_at": "2026-09-07T04:40:05.763Z",
+    "archived_at": "2026-09-07T04:40:05.763Z",
+    "tab_closed_at": "2026-09-07T04:40:41.117Z",
+    "receipt_staged_at": "2026-09-07T04:40:41.117Z",
+    "receipt_sent_at": "2026-09-07T04:41:16.203Z"
+  },
+  "return_receipt": {
+    "required": true,
+    "source_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+    "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+    "destination_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+    "status": "SENT",
+    "attempt_count": 1,
+    "message_key": "2026-09-06-vspc1-reactive-queues-convergence-01|vsp_c1|6a9cfac6-4d34-83e8-9f0a-088c03f4fb0c|d96642d4fcaf500ff44fdaa118d1368c8d8f7842f5bb4e72fc865fed065b4ea5",
+    "retry_allowed": false,
+    "routing_mode": "PARENT_SESSION",
+    "delivery_mode": "bounded_single_attempt",
+    "return_control_after_attempt": true,
+    "archive_paths": {
+      "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_c1\\2026-09-06-vspc1-reactive-queues-convergence-01\\PROMPT_BODY.md",
+      "response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_c1\\2026-09-06-vspc1-reactive-queues-convergence-01\\RESPONSE.md",
+      "packet_manifest": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_c1\\2026-09-06-vspc1-reactive-queues-convergence-01\\PACKET_MANIFEST.json",
+      "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_c1\\2026-09-06-vspc1-reactive-queues-convergence-01\\TRANSPORT_FACTS.json"
+    },
+    "response_sha256": "d96642d4fcaf500ff44fdaa118d1368c8d8f7842f5bb4e72fc865fed065b4ea5",
+    "staged_at": "2026-09-07T04:40:41.117Z",
+    "fallback_enabled": false,
+    "delivery_status": "accepted",
+    "updated_at": "2026-09-07T04:41:16.203Z",
+    "sent_at": "2026-09-07T04:41:16.203Z"
+  }
+}

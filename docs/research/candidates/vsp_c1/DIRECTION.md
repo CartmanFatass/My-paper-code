@@ -153,3 +153,26 @@ same-information control, the full-episode native return, independent instances,
 whole-invocation budget and stop boundary, and what each outcome changes; 5/6 is neither threshold
 nor baseline elsewhere. VSP-C1 has no next object, stays `ACTIVE` at its priority, parks at this
 clean boundary and leaves the Claude working set.
+
+## Reactive queues: new K4 family and next discriminator — 2026-09-06
+
+The complete [Convergence response](pro_packets/20260906_reactive_queues_convergence/archive/RESPONSE.md)
+at `67f4d3837c78749cb7f7369083ecbc3ffa4b133d`, accepted in the
+[decision intake](VSPC1_K4_REACTIVE_QUEUES_CONVERGENCE_INTAKE_20260906.md), opens a reactive
+two-queue family and selects [B01](VSPC1_K4_REACTIVE_QUEUES_B01_SCIENCE_CARD_20260906.md): one
+paired training instance (seed 401), FACTOR versus same-information GENERIC, 256 real updates,
+48-tick full episodes, exogenous holding periods 2/6 and a known fixed reactive partner.
+The action changes service, successor queue state and the partner's next response. This
+supplies a new finite value-learning question; it is no observation of an algorithm gain.
+The public-plan six-step eight-context family above remains ended and all its results stand.
+
+The strongest support is the explicit state/action-to-native-work consequence chain. The
+strongest contrary consideration is still stationary single-learner control under a known
+non-learning partner; both networks share features and the chosen factor is not a strict
+low-rank bottleneck. Optimization and initialization remain plausible explanations. There
+is no tuned headroom record on the new host, no competence or transfer claim and no recast.
+The next discriminator is the complete update-256 return difference and each period's gain
+or loss against the card's absolute MEI 0.025, with initial values and fixed full curves
+retained. A useful local gain may justify explicitly selecting one or two independent seeds;
+null/adverse or mixed outcomes retain their narrower meaning and authorize no automatic
+extension or search for a host with a positive sign. Portfolio decisions remain Root's.
