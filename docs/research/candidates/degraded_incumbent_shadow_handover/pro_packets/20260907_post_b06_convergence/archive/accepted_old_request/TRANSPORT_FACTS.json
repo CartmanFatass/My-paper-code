@@ -1,0 +1,85 @@
+{
+  "schema_version": 4,
+  "request_id": "2026-09-07-dish-post-b06-convergence-01",
+  "workflow_node": "em_convergence",
+  "conversation_binding_key": "em:degraded_incumbent_shadow_handover:convergence",
+  "direction_id": "degraded_incumbent_shadow_handover",
+  "direction_ids": [
+    "degraded_incumbent_shadow_handover"
+  ],
+  "decision_authority": "pro_final",
+  "source_thread_id": "01a079c8-166d-7aa0-9a5b-4261860a9ae8",
+  "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "operator_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "return_route": "PARENT_SESSION",
+  "repository": "CartmanFatass/My-paper-code",
+  "task_base_sha": "6b45ea47bea500bea11f1215080653a8df19bdd6",
+  "observed_delivery_head": "f3d6a158598e55f843eaff2894d907c288e27f39",
+  "conversation_id": "6a9bec54-df00-83e8-9840-46440458f316",
+  "provider_url": "https://chatgpt.com/c/6a9bec54-df00-83e8-9840-46440458f316",
+  "tab_id": "12",
+  "tab_lifecycle": "CLOSED",
+  "visible_model": "6 Pro",
+  "underlying_model": "Latest",
+  "thinking_effort": "Pro, 5 of 5.",
+  "source_mode": "paste",
+  "prompt_sha256": "ae7802917013c8027891aa4cd82d031799d7189139a7eb47e92fe9ea93f3cd2e",
+  "prompt_bytes": 1266,
+  "response_sha256": "01acb70b05eee14727781c6ac1d698edf5c187c1388763f48d2f74735baf5783",
+  "response_bytes": 872,
+  "response_characters": 466,
+  "send_evidence": {
+    "send_click_count": 1,
+    "url_observed": true,
+    "user_node_observed": true,
+    "user_node_exact": true,
+    "user_message_id": "4be338cd-0616-4a82-831d-71257f656374",
+    "prompt_link_resource_pill_observed": true,
+    "prompt_link": "https://github.com/CartmanFatass/My-paper-code/blob/0502fea77541337fdb7106068d6fbc7a31c0772f/docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260907_post_b06_convergence/TASK.md",
+    "binding_match": true
+  },
+  "assistant_message_id": "a3a3e6f9-7350-4f87-a977-14f1626f0f5e",
+  "wait_status": "NATURAL_COMPLETION",
+  "observed_page_state": "complete assistant response; no active generation control",
+  "capture_method": "provider Copy response control and clipboard.readText via CUA",
+  "archive_paths": {
+    "manifest_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\degraded_incumbent_shadow_handover\\2026-09-07-dish-post-b06-convergence-01\\2026-09-07-dish-post-b06-convergence-01--degraded_incumbent_shadow_handover__PACKET_MANIFEST.json",
+    "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\degraded_incumbent_shadow_handover\\2026-09-07-dish-post-b06-convergence-01\\2026-09-07-dish-post-b06-convergence-01--degraded_incumbent_shadow_handover__00_PROMPT.md",
+    "response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\degraded_incumbent_shadow_handover\\2026-09-07-dish-post-b06-convergence-01\\2026-09-07-dish-post-b06-convergence-01--degraded_incumbent_shadow_handover--attempt-01__02_RESPONSE.md",
+    "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\degraded_incumbent_shadow_handover\\2026-09-07-dish-post-b06-convergence-01\\2026-09-07-dish-post-b06-convergence-01--degraded_incumbent_shadow_handover--attempt-01__03_TRANSPORT_FACTS.json",
+    "response_sha256": "01acb70b05eee14727781c6ac1d698edf5c187c1388763f48d2f74735baf5783"
+  },
+  "timestamps": {
+    "sent_at": null,
+    "completed_at": "2026-09-07T17:44:48Z",
+    "captured_at": "2026-09-07T17:44:48Z",
+    "archived_at": "2026-09-07T17:44:48Z"
+  },
+  "archive_status": "ARCHIVED",
+  "response_identity": "PASS",
+  "identity_binding": {
+    "conversation_id": "6a9bec54-df00-83e8-9840-46440458f316",
+    "user_message_id": "4be338cd-0616-4a82-831d-71257f656374",
+    "assistant_message_id": "a3a3e6f9-7350-4f87-a977-14f1626f0f5e"
+  },
+  "github_roundtrip_report": {
+    "task_base_sha": "6b45ea47bea500bea11f1215080653a8df19bdd6",
+    "observed_head": "f3d6a158598e55f843eaff2894d907c288e27f39",
+    "response_file_confirmed": false,
+    "delivery_comment_confirmed": false,
+    "gap": "branch base changed; no write"
+  },
+  "return_receipt": {
+    "required": false,
+    "status": "LOCAL",
+    "routing_mode": "LOCAL",
+    "attempt_count": 0,
+    "destination_thread_id": null,
+    "delivery_status": "local completion; parent is integrated Root"
+  },
+  "notes": [
+    "Exactly one provider Send was confirmed before generation.",
+    "The completed response is a transport blocker, not a scientific decision.",
+    "No duplicate Send, rebind, or write retry is authorized."
+  ]
+}

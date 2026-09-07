@@ -1,0 +1,19 @@
+{
+  "schema_version": 4,
+  "canonical_form": "logical_packet_manifest",
+  "request_id": "2026-09-07-dish-post-b06-convergence-01",
+  "direction_id": "degraded_incumbent_shadow_handover",
+  "workflow_node": "em_convergence",
+  "conversation_binding_key": "em:degraded_incumbent_shadow_handover:convergence",
+  "conversation_id": "6a9bec54-df00-83e8-9840-46440458f316",
+  "provider_url": "https://chatgpt.com/c/6a9bec54-df00-83e8-9840-46440458f316",
+  "source_mode": "paste",
+  "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\degraded_incumbent_shadow_handover\\2026-09-07-dish-post-b06-convergence-01\\2026-09-07-dish-post-b06-convergence-01--degraded_incumbent_shadow_handover__00_PROMPT.md",
+  "prompt_sha256": "ae7802917013c8027891aa4cd82d031799d7189139a7eb47e92fe9ea93f3cd2e",
+  "prompt_bytes": 1266,
+  "reference_files": [],
+  "response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\degraded_incumbent_shadow_handover\\2026-09-07-dish-post-b06-convergence-01\\2026-09-07-dish-post-b06-convergence-01--degraded_incumbent_shadow_handover--attempt-01__02_RESPONSE.md",
+  "response_sha256": "01acb70b05eee14727781c6ac1d698edf5c187c1388763f48d2f74735baf5783",
+  "response_bytes": 872,
+  "attempt": 1
+}
