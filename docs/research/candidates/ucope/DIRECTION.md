@@ -29,8 +29,9 @@ remains dated provenance under the controlling evidence specification section 11
   **2026-09-05 PRO_FINAL / PARK** of the current same-draw retained-policy
   root-residual localization family, including its numerical-locus dependency;
   no successor selected. See the dated current position below.
-- Latest bounded B observation: **2026-09-07 native-return acquisition B01, NR-B**;
-  both fresh final policies chose IMMEDIATE-4 throughout and had zero native-return advantage.
+- Latest bounded B observation: **2026-09-07 shared-data return-model B02, RM-A**;
+  one fresh fitted pair gains 0.0030012207031250046 over BLIND and IMMEDIATE-4, conditional
+  MC SE 0.0005533139087041887. B01's two zero-gain endpoints remain accepted evidence.
   This adds no direction-tier disposition or further invocation.
 - Historical discriminator science-card current-byte SHA-256:
   `e08744fa18d708c9ad570bdce8b71296407991a4f5f79d502d37330913435fd8`
@@ -53,6 +54,33 @@ count. The direct-service alternative remains separated by the frozen
 
 ## Current scientific position — 2026-09-07
 
+The separate shared-data return-model B02 completed its sole fresh dataset, seed 6401, and
+receives **RM-A**. The final count-conditioned policy has mean native/information advantages
+0.0030012207031250046 over BLIND and IMMEDIATE-4, both conditional MC SE 0.0005533139087041887.
+FULL buys information only in LINKED-p17_20-c9_100: its context advantage is 0.024009765625000037
+after paid cost, and the other seven contexts follow the reference. BLIND is IMMEDIATE-4
+throughout, so the two equal gains are not independent replications.
+
+The strongest support is a complete real comparison after 262,144 shared training episodes,
+393,216 scalar value updates and 98,304 final evaluation episodes. It demonstrates useful paid
+acquisition by this fitted controller, beyond action change or an information proxy. There is
+one independent training-data seed; the conditional SE does not estimate seed-population
+uncertainty, stable superiority or generic MARL effectiveness. No context-level native loss
+occurred in this run, while small headroom, fitted-max bias and sample variation remain limits.
+
+The strongest contradiction to a broader claim remains B01's two native-return nulls and the
+historical false-probe losses/full-competence limits below. B02 changes learner, exploration
+allocation and precision together; it does not locate B01's cause. No tuned-generic headroom
+record or exact-optimum claim is added. The branch and both prospective action predictions
+matched. The next recommended discriminator is one or two independent new-data comparisons
+(this intake recommends preparing two), retaining every sign; no new card or invocation is
+selected by this intake. The retained-policy/numerical-locus family stays stopped.
+See [B02 card](UCOPE_SHARED_DATA_RETURN_MODEL_B02_SCIENCE_CARD_20260907.md),
+[execution/result evidence](UCOPE_SHARED_DATA_RETURN_MODEL_B02_EXECUTION_RETURN_20260907.md) and
+[scientific intake](UCOPE_SHARED_DATA_RETURN_MODEL_B02_INTAKE_20260907.md).
+
+## Prior native-return observation — 2026-09-07 B01
+
 The separate native-return acquisition B01 completed both frozen training seeds 6301/6302 and
 receives **NR-B**, mean native-return difference 0 against IMMEDIATE-4. Every final modal root
 action is immediate in all eight contexts for both seeds; each conditional paired MC SE is 0.
@@ -68,10 +96,10 @@ Credit quality, exposure allocation, finite budget and stochastic-training/modal
 differences remain alternatives. Unused tail outputs supply no native acquisition value.
 
 Historical PA-B acquisition and TW-B tail coverage remain the strongest contradiction to any
-broader negative; their unchanged full-competence and false-probe costs remain below. No tuned
-generic current-host headroom record is added. No further discriminator or invocation is selected:
-a future B needs a specifically justified learning question and a native comparison with this immediate
-null. The retained-policy/numerical-locus family and its re-entry requirements are unchanged.
+broader negative; their unchanged full-competence and false-probe costs remain below. B01 added
+no tuned-generic current-host headroom record. At its intake no further discriminator or invocation
+was selected; B02 above is the subsequent separately selected learning question. The
+retained-policy/numerical-locus family and its re-entry requirements are unchanged.
 See [B01 card](UCOPE_NATIVE_RETURN_ACQUISITION_B01_SCIENCE_CARD_20260907.md),
 [complete result](UCOPE_NATIVE_RETURN_ACQUISITION_B01_RESULT_EVIDENCE_20260907.md) and
 [scientific intake](UCOPE_NATIVE_RETURN_ACQUISITION_B01_INTAKE_20260907.md).
