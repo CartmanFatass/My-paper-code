@@ -78,3 +78,20 @@ question/evidence and next responsible task; it does not silently wait for the o
 
 Read `ROOT_OPERATIONS.md`, “Continuing work across Root and Portfolio boundaries”. No new
 heartbeat, registry, scheduler, experiment budget or scientific authority is introduced.
+
+## UCOPE draft return and next handoff
+
+Root integrated `79a80f630`, `UCOPE_NATIVE_RETURN_ACQUISITION_B01_QUESTION_PREP_20260906.md`.
+Portfolio read the draft, current DIRECTION exploration-calibration section and historical
+PA-B01 arithmetic. The draft proposes fresh return-trained acquisition versus IMMEDIATE-4,
+with two training seeds and all eight contexts; its finite-host claim expressly excludes
+generic MARL superiority and COUNT/RAW representation advantage. Proposed budgets remain
+unallocated; no source interface was inspected by the preparation assignment.
+
+Portfolio sent Root a concrete continuation for the same `/root/dm_ucope_question_prep`:
+inspect the relevant current information/sampler/return path, classify the selection tier,
+and select/revise under existing authority. An object within the accepted paid-acquisition
+mechanism follows DM standing delegation; a genuinely new family uses the direction node.
+A new B alone is not grounds for mandatory Pro or the old numerical-locus prerequisite.
+If selected, the DM freezes a proportionate card and commissions CM; the draft itself is
+not a card or launch. Lifecycle, priority and historical stopped-family scope are unchanged.
