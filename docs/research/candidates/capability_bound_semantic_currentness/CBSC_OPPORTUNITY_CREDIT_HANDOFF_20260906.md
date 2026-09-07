@@ -18,9 +18,25 @@ mirrored tests, `scripts/run_cbsc_opportunity_credit_b04.py`, and its delivery/
 launch record in this directory. The frozen card supplies the scientific
 contract and bounds; no second contract or new object is created here.
 Source review and Root integration precede the first selected invocation.
-At this boundary no B04 source implementation, accepted experiment handle or
-new scientific output exists. Old family pause, historical results and
-Portfolio state remain unchanged. Root owns integration and Portfolio.
+
+Source acceptance is complete: CM pushed `3525f5e827ab69c564b8a05182623d05361ecb0a`
+and its exact correction `730906eed09ef5df1a493e63d794b44ecb7f81f2` on
+`codex/cm-cbsc-b04-20260906`. Independent reviewer `rv_ah_cbsc_b04` found no
+material issue. DM checked the changed targets/value loss, retained rollout
+advantages, public REQUEST_ONLY, snapshot contents and primary-return readback.
+DM required removing commit-identity equality from pairing; the correction
+does that and retains the SHAs as metadata, without a replacement guard.
+Source is 549 non-test lines including a 60-line runner; mirrored tests are
+55 lines. No old source changed. Only static checks have run. Detailed source,
+check accounting and exact three-call launch plan are in the CM branch's
+`CBSC_OPPORTUNITY_CREDIT_B04_CM_DELIVERY_20260906.md`.
+
+Root has both source commits for integration; CM awaits the integrated/pushed
+SHA before remote preparation and the one selected engineering call. At this
+boundary main is `0a09e9e61`, which includes this handoff's earlier selected
+state but not yet B04 source. No accepted experiment handle or new scientific
+output exists. The old family pause and historical results are retained;
+Root owns integration and Portfolio. Source review proves no performance gain.
 
 ## Historical preparation and dispatch boundary
 
