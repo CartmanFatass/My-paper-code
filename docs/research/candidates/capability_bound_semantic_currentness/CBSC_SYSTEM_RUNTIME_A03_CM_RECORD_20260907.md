@@ -77,13 +77,13 @@ Node wsl_4070 / SSH hmasd-wsl-node; existing /usr/local/bin/agent-task.
 Handle `cbsc-system-runtime-a03-20260907`. Detached exact integrated-SHA worktree:
 `/home/wu/hmasd-worktrees/cbsc-system-runtime-a03-20260907`. Output root `/home/wu/hmasd-worktrees/cbsc-system-runtime-a03-20260907/temp/directions/capability_bound_semantic_currentness/exp/system_runtime_a03_20260907`.
 Candidate `/home/wu/.venvs/hmasd-cbsc-system312-a03-20260907`.
-After Root integrates accepted bytes, replace only `ROOT_INTEGRATED_SHA` below
+After Root integrates accepted bytes, replace only `ec8866b3968fcb1566976ce405d7c552d4d9a5de` below
 with its supplied exact commit, stage that committed source in the detached
 worktree, and send this literal command directly to existing agent-task run.
 That SHA is identity metadata, not a source-currentness guard. No launch now.
 
 ```sh
-/usr/bin/time -f 'process_wall_seconds=%e peak_rss_kib=%M' -o /home/wu/.agent-tasks/cbsc-system-runtime-a03-20260907/process-time.txt /usr/bin/timeout --signal=KILL 540s /usr/bin/env -u BASH_ENV -u ENV -u ALL_PROXY -u all_proxy /bin/bash --noprofile --norc /home/wu/hmasd-worktrees/cbsc-system-runtime-a03-20260907/scripts/prepare_cbsc_system_runtime_a03.sh /home/wu/hmasd-worktrees/cbsc-system-runtime-a03-20260907 /home/wu/hmasd-worktrees/cbsc-system-runtime-a03-20260907/temp/directions/capability_bound_semantic_currentness/exp/system_runtime_a03_20260907 /home/wu/.venvs/hmasd-cbsc-system312-a03-20260907 ROOT_INTEGRATED_SHA
+/usr/bin/time -f 'process_wall_seconds=%e peak_rss_kib=%M' -o /home/wu/.agent-tasks/cbsc-system-runtime-a03-20260907/process-time.txt /usr/bin/timeout --signal=KILL 540s /usr/bin/env -u BASH_ENV -u ENV -u ALL_PROXY -u all_proxy /bin/bash --noprofile --norc /home/wu/hmasd-worktrees/cbsc-system-runtime-a03-20260907/scripts/prepare_cbsc_system_runtime_a03.sh /home/wu/hmasd-worktrees/cbsc-system-runtime-a03-20260907 /home/wu/hmasd-worktrees/cbsc-system-runtime-a03-20260907/temp/directions/capability_bound_semantic_currentness/exp/system_runtime_a03_20260907 /home/wu/.venvs/hmasd-cbsc-system312-a03-20260907 ec8866b3968fcb1566976ce405d7c552d4d9a5de
 ```
 
 Retain supervisor start/end and process-time.txt. Actual complete measured wall,
@@ -92,3 +92,14 @@ Root receives accepted handle/cwd/output/source for observation after integratio
 and launch. CM retains technical collection and returns the frozen branch to DM.
 No duplicate launch or unused-budget retry. Writer/index ownership returns to DM
 with the pushed source receipt while Root's integration dependency remains.
+
+
+## Integrated-source release
+
+Root integrated and pushed main at `ec8866b3968fcb1566976ce405d7c552d4d9a5de`.
+DM confirmed accepted script/card blob equality and unchanged applicable execution
+instructions, then released the existing sole invocation. The historical integration
+block above is resolved. Source/argv are unchanged except the bound identity value.
+Shared authoring checkout began clean at `525b5b2c9`; CM has the collection/index
+window. This metadata binding is committed/pushed before source staging and launch.
+No repeated source test or new preparation invocation is selected.
