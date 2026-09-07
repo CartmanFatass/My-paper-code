@@ -25,7 +25,10 @@ existing exit witness. Tracking metadata is not an experiment launch condition.
 
 Before sending an adoption ACK, the monitor uses `automation_update` to set the existing
 `hmasd-experiment-monitor` heartbeat ACTIVE and reads its saved configuration back.
-An accepted message or a completed one-off check does not establish recurring activation.
+Use `mode=update` and the configured existing id for every status change. Preserve the
+complete long-term prompt, schedule and target task; do not replace the prompt with a
+current-state summary or call create. An accepted message or a completed one-off check
+does not establish recurring activation.
 The monitor records adoption and sends Root an ACK naming the assigning DM/CM and the
 confirmed heartbeat state;
 Root forwards it. Before ACK the launcher owns observation; after ACK only the
