@@ -57,3 +57,16 @@ These are application exercises, not five fresh runtime executions or a guarante
 compliance. The subsequent live receipt remains the operational check: exact current recipients,
 advancing count, original evidence and named next events. No scientific experiment or provider
 action was performed for skill validation.
+
+## Live application and shared-index correction
+
+Root integrated the shared skill at d4ea6a7d1, read it and reported three advancing chains,
+correctly excluding VSPC1's completed packet preparation. Portfolio handled that ready packet
+with the separately specified transport command while DISH/CBSC/UCOPE continued.
+
+During the current-row update, Root began a scientific cherry-pick on the same main index.
+Portfolio's partial commit was refused; Root's completed a1e8a6e57 included the two authorized
+Portfolio status rows. Readback found their bytes intact and main clean. Those two rows are
+Portfolio planning, not CBSC DM selection. No history rewrite is performed. The communication
+document now supplies a short peer-acknowledged Git-index handoff before staging/commit or
+cherry-pick; it does not suspend research or add locking machinery, and push remains immediate.
