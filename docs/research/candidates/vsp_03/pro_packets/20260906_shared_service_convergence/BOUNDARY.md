@@ -62,3 +62,24 @@ not evidence of a new B02 Send or a formed decision. See
 `archive/blocker_20260906/` for exact preserved artifacts, checked limits and the bounded
 read-only reconciliation requested from the same singleton. No scientific payload, binding,
 provider conversation or experimental selection was changed.
+
+## Raw-action reconciliation and original first-Send continuation
+
+The completed action/DOM check establishes zero B02 paste or Send in the recorded executor's
+42 CUA actions from the actual app-delivery event through the read-only reconciliation.
+The two `3748` navigations were operator mistakes; the scoped B01 DOM and the CBSC clipboard
+capture disagreed. Full corrections and preserved raw evidence are in the intake's
+**Completed raw-action and DOM reconciliation** section. No provider-context contamination
+or invalidity of the prior complete GitHub B01 decision is inferred.
+
+Root explicitly instructed completion of this same accepted request's original first Send,
+with fresh correct-conversation, model and exact-input checks and the corrected Root receipt.
+`CONTINUATION_HANDOFF.md` was pushed with evidence commit `d75a4d662`. The same singleton
+accepted that follow-up at 2026-09-07 04:22:41 UTC; `CONTINUATION_DISPATCH_RECORD.json`
+preserves the actual app call/result. Provider Send remains unobserved by the DM at this
+boundary. Do not send another continuation or scientific payload because this follow-up is
+accepted; the singleton owns completion or the precise terminal return.
+
+B02 remains an unfrozen direction proposal with zero new experimental exposure. The current
+parent destination is `01a07249-b095-7821-8ce2-e9c32ba85267`. Root may integrate this branch
+and advance other admitted directions while the original request progresses.
