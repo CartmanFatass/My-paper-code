@@ -1,0 +1,121 @@
+{
+  "object_id": "VSP02-TEAMMATE-POLICY-CHANGE-B01",
+  "source": "Accepted Pro design 1eb3b21b61747b21f374d252005fa48c32e4838d plus P14 ordinary specification choices; Python arithmetic only",
+  "scientific_config": {
+    "S": 1,
+    "P": 4096,
+    "Q_per_arm": 1024,
+    "H": 48,
+    "E": 64,
+    "rollout_episodes": 16,
+    "ppo_epochs": 4,
+    "minibatches_per_epoch": 4,
+    "observation_width": 18,
+    "master_seed": 1103,
+    "learning_rate": 0.0003,
+    "whole_pair_cap_seconds": 1800,
+    "trainable_parameter_scalars": 26501,
+    "trainable_parameter_tensors": 10
+  },
+  "scientific_counts": {
+    "training_episodes": 6144,
+    "training_joint_steps": 294912,
+    "rollout_batches": 384,
+    "optimizer_steps": 6144,
+    "evaluation_episodes": 1152,
+    "evaluation_joint_steps": 55296,
+    "joint_steps_total": 350208,
+    "ppo_transition_passes": 1179648,
+    "teammate_training": 0,
+    "model_selection_trials": 0
+  },
+  "nominal_movement_scale": {
+    "basis": "lr times planned per-trajectory optimizer steps divided by default initialization component std; a scale comparison, not an Adam bound, realized displacement or performance prediction",
+    "prefix_optimizer_steps": 4096,
+    "per_descendant_total_optimizer_steps": 5120,
+    "encoder_default_component_std": 0.13608276348795434,
+    "gru_and_heads_default_component_std": 0.07216878364870323,
+    "prefix_lr_steps": 1.2288,
+    "whole_trajectory_lr_steps": 1.5359999999999998,
+    "prefix_scale_over_encoder_std": 9.029798987795907,
+    "prefix_scale_over_gru_std": 17.026752258725086,
+    "required_actual_measurement": "initial parameter RMS; RMS displacement after first completed PPO rollout, prefix end and per-arm endpoint; matched actual step counts, no threshold or pre-run learner probe"
+  },
+  "engineering_fixture": {
+    "seed": 17,
+    "P": 16,
+    "Q_per_arm": 16,
+    "E": 4,
+    "post_update_eval_q": [
+      16
+    ],
+    "training_episodes": 48,
+    "training_joint_steps": 2304,
+    "optimizer_steps": 48,
+    "evaluation_episodes": 16,
+    "evaluation_joint_steps": 768,
+    "joint_steps_total": 3072,
+    "single_run_wall_cap_seconds": 60,
+    "scientific_comparison_complete": false
+  },
+  "comparison_factors": {
+    "arms": 5,
+    "engineering_implementation_cap_seconds_per_arm": 3600,
+    "end_to_end_fixture_runs_per_arm": 1,
+    "planned_fixture_joint_steps_all_arms": 15360,
+    "planned_fixture_optimizer_steps_all_arms": 240,
+    "additional_unit_checks": "finite deterministic transition/gradient/RNG/output fixtures only; at most 8 H=48 environment episodes and 2 synthetic rollout-update batches per arm beyond the single end-to-end fixture",
+    "scientific_runs_allocated": 0,
+    "repeat_rule": "One planned fixture per unchanged implementation; repeat only for a concrete failed check or code correction within the same engineering budget, preserving all outcomes and actual exposure."
+  },
+  "arithmetic_test_oracles": {
+    "gae_rewards": [
+      0,
+      1
+    ],
+    "gae_values": [
+      0.2,
+      0.4
+    ],
+    "gamma": 1.0,
+    "lambda": 0.95,
+    "gae_advantages": [
+      0.77,
+      0.6
+    ],
+    "gae_returns": [
+      0.97,
+      1.0
+    ],
+    "policy_loss_ratios": [
+      1.5,
+      0.5
+    ],
+    "policy_loss_advantages": [
+      1,
+      -1
+    ],
+    "clip": 0.2,
+    "clipped_policy_loss": -0.2
+  },
+  "current_exposure": {
+    "environment_transitions": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0,
+    "model_selection_trials": 0,
+    "result_bearing_invocations": 0
+  },
+  "exposure_line": "environment_transitions=0; optimizer_steps=0; evaluation_episodes=0; model_selection_trials=0; result_bearing_invocations=0",
+  "new_host_headroom": null,
+  "expected_wall_seconds": null,
+  "expected_CPU_seconds": null,
+  "local_metadata": {
+    "python": "3.10.20",
+    "torch_distribution": "2.7.0",
+    "numpy": "1.26.3",
+    "pytest": "9.1.1",
+    "inventory_method": "importlib.metadata only; no workload module import",
+    "matplotlib": "3.10.0"
+  },
+  "engineering_scope_section4": "none required by this B implementation; the existing Root comparison machinery is separately owner-authorized and outside these owned source paths"
+}

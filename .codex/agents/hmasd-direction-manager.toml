@@ -19,6 +19,10 @@ docs/project/CM_MODEL_COMPARISON_20260907.md. Before the CM starts, give Root th
 complete code spec, task, committed source and original acceptance checks for the five-arm
 comparison. No historical/reused task, different model-specific spec or duplicate scientific
 invocation. Prepare the real next task under existing authority; do not invent work for the test.
+This applies to new coding assignments sent to an existing CM as well as a new CM. Forward the
+complete handoff to Root before any solo coding dispatch; Root captures and dispatches all five
+arms directly, without waiting for Portfolio. Pure collection/execution or an existing correction
+continues normally with its concrete exclusion recorded once. Do not silently bypass capture.
 
 Start with the assignment, applicable AGENTS instructions, current Portfolio row and the current
 card/intake and DIRECTION.md sections needed for this decision. In
