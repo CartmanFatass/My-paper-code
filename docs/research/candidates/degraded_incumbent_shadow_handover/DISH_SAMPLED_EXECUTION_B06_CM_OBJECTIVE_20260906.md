@@ -1,9 +1,12 @@
 # DISH B06 bounded CM implementation handoff — 2026-09-06
 
-Prepared under Root's post-VSP-C1 refill instruction. **This DM task only prepares and pushes
-the assignment; it does not dispatch CM, implement code or launch B06.** After Root integrates
-and explicitly dispatches it, CM implements/checks the bounded deliverable below and returns
-pushed source for integration. A result-bearing B06 launch remains a separate explicit assignment.
+Prepared under Root's post-VSP-C1 refill instruction and integrated as
+`fde638f9c85d86fc01fe003254397b18dfdeacc6`. Root subsequently explicitly authorized dispatch;
+DM reactivated the existing CM `/root/dm_amx_dish_seed101/cm_am_dish_seed101` on 2026-09-06
+at 23:44 PDT, and the native child is running. **CM is assigned implementation/checks and a
+pushed technical return only. A result-bearing B06 launch remains a separate explicit
+assignment.** The earlier preparation task completed without dispatch, implementation or
+experimental exposure; the current dispatch supersedes that historical preparation status.
 
 Frozen contract: [B06 card](DISH_SAMPLED_EXECUTION_B06_SCIENCE_CARD_20260906.md) §§2–7,
 integrated in `0eae162f2` from DM commit `43e2f0ad9f05b51c35ca58664164e35c28566f6e`.
@@ -74,3 +77,9 @@ Owner boundary: current primary-checkout `item.py reviews --json` returned `[]`;
 card/intake P2 items `20260906-dish-006` and `20260906-dish-007` remain the owner surfaces.
 This handoff changes no frozen scientific meaning, card, prediction, Portfolio disposition or
 exposure. No new P2 item is needed; the technical preparation is recorded in the audit ledger.
+
+Dispatch receipt: the existing child accepted `followup_task` and was observed running under
+the identity above. Its task message binds the five items to integrated `fde638f9c`, requires
+an owned CM branch/worktree and independent high-risk review, and explicitly forbids a B06
+result-bearing initializer/training/evaluation invocation. CM technical delivery and DM result
+intake are still pending; no code, check result, source SHA or launch is accepted by this receipt.
