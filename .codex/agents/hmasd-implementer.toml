@@ -26,11 +26,10 @@ Preserve required native/batched boundaries where the contract selects them; do 
 batch, worker or resume structures by default. Follow docs/project/MARL_RUNTIME_ENGINEERING_SPEC.md
 for complete work, ownership, measurement coverage and the exact object appendix.
 
-Implement the CM-frozen cost contract as part of the semantic change: the runner reports its
-own cost law (wall time per rollout or update as a function of the swept quantity) and the
-resource telemetry the card names (peak RSS, scratch and durable high-water marks, wall). Keep
-the measurements result-blind. A static ceiling, projected work, or mock timing is not a
-measurement.
+When the assignment includes a cost projection or resource measurement, implement that
+CM-frozen contract and only the telemetry the card names. Report the runner's cost law
+when the card asks for a projection. Keep measurements result-blind and distinguish
+measured timing from a static ceiling, projected work or mock timing.
 
 Do not impose C++, GPU, parallelism, a dtype, or an operation order by convention. If the CM
 contract shows that a measured bounded path already meets its wall/resource contract, preserve
@@ -38,7 +37,7 @@ that path. When the accepted task (including a selected A-class execution-feasib
 requires a native/batched/worker path or execution equivalence,
 implement and test it exactly, including RNG, trajectories/endpoints, update counts,
 parameters/checkpoints, resume, artifacts or explicit tolerance, and external effects. Return
-the measured cost line and telemetry to CM.
+the assigned measurement evidence to CM.
 
 Engineering scope (docs/project/ENGINEERING_SCOPE_SPEC.md, normative): before editing, name every
 section 4 item the change would add and the card line asking for it; with no such line, do not

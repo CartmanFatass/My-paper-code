@@ -6,12 +6,10 @@
 `AGENTS.md` §4.5 和证据规范 §11.7。批改台：`python tools/owner_console/server.py`，然后打开
 `http://127.0.0.1:8765/`。
 
-## 当前维护范围（OWNER_DIRECT，2026-09-05）
+## 当前维护范围
 
-所有者指令：「我们停止维护P2级别以下的问题 P3P4问题太多 我也审核不过来」。
-此项覆盖下文及旧 insertion-point 规则中的 P3/P4 独立条目要求。
-仅维护 P1/P2 批改项；P3 普通委托决定/预测、P4 技术项/简报停止新建、补写、催审，
-历史项退出收件箱及待批计数，保留原文件和回复，不伪记为已审核。
+仅维护 P1/P2 批改项。普通委托决定、预测、技术项和简报保存在科学记录中，
+不另建、补写或催审 P3/P4 批改项。已有文件和回复保留，待批计数只含 P1/P2。
 `item.py add` 对 P3/P4 返回成功并输出 `skipped`，不创建文件、不分配 ID；审计直接引用
 card/intake。`seed-ledger` 停止批量补建旧条目。既有 owner 指令仍须读取并执行。
 科学卡片、预测记录、结果证据、intake、中文结果简报和必要审计照常保留；不再为这些
@@ -35,8 +33,7 @@ python tools/owner_console/item.py trace <id> --authority "PRO_FINAL / OWNER_DEL
 
 ## 所有者每天怎么用（约 15 分钟）
 
-1. 打开批改台的收件箱。只有需要你看的条目会出现：已按委托执行的决定、新卡片、预测请求、简报、
-   批评者异议、二次重铸、等待批准的 Portfolio 提案。
+1. 打开批改台的收件箱，查看新卡片、方向决定、重大异议、close-call、二次重铸和 Portfolio 提案。
 2. 每张卡片：看一眼推荐项（★）和已执行项（✓），同意就按 `g`；不同意就选另一项并写一句原因，
    `Ctrl+Enter` 提交。每次提交都会写入 reply 文件、重生成当天的 `reviews/<日期>.md` 并按 pathspec
    commit。推送由你手动按。
@@ -58,20 +55,18 @@ owner/
 ## How the loop writes items (the stable contract)
 
 Agents never write item JSON by hand. They call `tools/owner_console/item.py`, which validates the
-fields, assigns the id and writes the file; `tests/tools/owner_console/` pins the schema, and the
+fields and writes an ID/file for P1/P2; P3/P4 returns `skipped` with neither. `tests/tools/owner_console/` pins the schema, and the
 skill `.agents/skills/hmasd-owner-item/SKILL.md` names every insertion point with the exact
 command. The DM definition and the Portfolio skill reference that skill.
 
 | Moment in the loop | kind |
 | --- | --- |
-| an object-tier decision is recorded in the audit ledger | `decision` (executed option in `auto_applied`) |
+| a direction- or portfolio-tier decision is recorded | `decision` with explicit tier and packet (executed option in `auto_applied`) |
 | a science card is frozen | `new-card` |
-| a ladder's first card is frozen | `prediction` |
-| a valid result is taken in and its brief written | `brief` |
 | a critic's material dissent is overruled | `critic-dissent` |
 | a recommendation and its runner-up were not clearly separated | `close-call` |
 | Convergence returns a second `RECAST` | `second-recast` |
-| Root records a Portfolio proposal or a DM returns a direction recommendation | `portfolio` |
+| Portfolio records a proposal or a DM returns a direction recommendation | `portfolio` |
 
 ```
 python tools/owner_console/item.py add --direction <id> --kind <kind> --title "…" [--context "…"] \
@@ -86,8 +81,7 @@ One JSON file per item at `inbox/<YYYY-MM-DD>/<id>.json`, written at the moment 
 made or the card is frozen, next to the ledger row. `id` is `<YYYYMMDD>-<script prefix>-<nnn>`
 (prefixes in `docs/research/RESEARCH_MAP.md`; Root uses `root`). The console assigns a grading
 priority from `kind` and `tier`: P1 `portfolio`, `second-recast`; P2 `new-card`,
-`critic-dissent`, `close-call`, direction-tier decisions; P3 delegated decisions and predictions;
-P4 briefs and decisions whose `ledger_kind` is `technical`.
+`critic-dissent`, `close-call`, direction- and portfolio-tier `decision` items.
 
 ```json
 {
@@ -95,7 +89,7 @@ P4 briefs and decisions whose `ledger_kind` is `technical`.
   "created": "2026-09-05T03:12:00Z",
   "direction": "flexible_skill_duration",
   "tier": "object | direction | portfolio",
-  "kind": "decision | new-card | prediction | brief | critic-dissent | close-call | second-recast | portfolio",
+  "kind": "decision | new-card | critic-dissent | close-call | second-recast | portfolio",
   "title": "one line",
   "context": "<= 200 words of markdown: what is being decided, why now, what the DM saw",
   "options": [
@@ -118,15 +112,14 @@ Options per kind:
 
 | kind | options the DM writes | what a reply means |
 | --- | --- | --- |
-| `decision` | the object-tier options, one marked `recommended`; `auto_applied` = the one executed | `agree` or the same key: delegated decision stands; another key: override at the next clean boundary |
+| `decision` | direction/portfolio options, one marked `recommended`; `auto_applied` = the one executed | the owner's selected option applies at the next clean boundary |
 | `new-card` | `accept`, `reject`, `revise` | reject or revise carries the reason in the comment; launch is not blocked meanwhile |
-| `prediction` | the competing mechanisms (two or three) | the owner's prediction; scored at intake; comment carries magnitude or `unclear` |
-| `brief` | `reading-agreed`, `reading-disputed` | dispute with the comment |
 | `critic-dissent`, `close-call` | the DM's options plus the critic's position as one option | as `decision` |
 | `second-recast` | `continue-low-priority`, `park` | park is a Portfolio record; continue keeps lowest sequencing priority |
 | `portfolio` | `ratify`, `refuse`, `amend` | ratification or refusal of a Portfolio proposal; amend with the comment |
 
-Every item is also one ledger row (audit record) whose evidence path names the item file.
+Created items can be cited by their ledger row. Ordinary audit records cite the card/intake;
+a `skipped` result supplies no item path.
 
 ## Decision packet (P1/P2 items)
 
@@ -149,8 +142,7 @@ reply `needs-context` sends it back to be re-filed. Fields:
 | `source` | the Pro response, intake or card the packet was drawn from |
 
 The console renders the packet as sections above the options and opens `source` in the evidence
-pane when a P1/P2 strip is expanded. An object-tier `decision` needs no packet: the owner reviews
-it after the fact, and the context paragraph plus the intake link suffice.
+pane when a P1/P2 strip is expanded. Ordinary object-tier decisions stay in their intake/audit.
 
 ## Review document (the loop reads this)
 
@@ -170,7 +162,7 @@ item file, and cite the review line in the ledger. `agree` means seen; nothing c
 ## Briefs
 
 One page in Chinese, under 600 characters, six fixed headings, written by the DM at every
-valid-result intake beside the English intake document, and referenced from a `brief` item:
+valid-result intake beside and linked from the English intake document:
 
 ```markdown
 # <direction> · <object> · <date>

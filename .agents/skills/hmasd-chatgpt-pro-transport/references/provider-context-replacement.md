@@ -9,9 +9,9 @@ replacement requires the handoff to explicitly set
   `owner_instruction`, and `previous_request_id`. This covers an explicit request
   to use a new conversation for a new model. Preserve the entire prior record and
   all accepted-send facts, even if its generation is unfinished. Do not claim that
-  its answer was contaminated, blocked, or scientifically negative. Stop the old
-  operator's future actions and retire its superseded wake before taking over; an
-  accepted provider generation need not be stopped. Use a distinct request ID.
+  its answer was contaminated, blocked, or scientifically negative. Close or transfer
+  that request's observation as instructed, preserving the shared wake for other work;
+  an accepted provider generation need not be stopped. Use a distinct request ID.
 - **Automated contaminated-context recovery:** the immediately previous round is `ARCHIVED`,
 its final outcome is `DECISION_NOT_FORMED` or `BLOCKED`, it read exactly zero
 repository paths, and acknowledged provider-context contamination is traced to a
@@ -31,5 +31,5 @@ evidence are routing metadata; never put them in the body, reference manifest, o
 provider-visible companion text. That replacement is persisted directly as
 `SEND_CONFIRMED` with one send click and durable send evidence; it may proceed only
 to generation waiting, never to another Send action. Repeating preparation with the
-same request and evidence is idempotent. The legacy `quarantined_conversations`
-storage name includes owner-retired conversations; it does not label their science.
+same request and evidence is idempotent. `quarantined_conversations` records excluded
+provider identities; it does not label their science.

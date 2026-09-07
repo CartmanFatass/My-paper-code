@@ -1,8 +1,7 @@
 # Scoped GitHub delivery
 
-Read docs/project/GITHUB_RESEARCH_COLLABORATION.md and its linked operational design.
-Owner authorization applies; no Pro review or additional owner reply is needed for
-this workflow. Existing science authority and evidence constraints still apply.
+Read docs/project/GITHUB_RESEARCH_COLLABORATION.md for the current sequence and
+partial-success handling. Existing science authority and evidence constraints apply.
 
 Use ordinary Author inputs plus delivery_mode=github_delivery and github_delivery:
 branch (dedicated codex/pro-... branch), base_sha (full SHA), response_path (this

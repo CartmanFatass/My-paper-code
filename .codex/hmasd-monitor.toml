@@ -1,4 +1,4 @@
-# OWNER_DIRECT 2026-09-06: Root absorbs experiment and Pro observation.
+# Root observes accepted experiments and current Pro requests.
 thread_id = "01a07249-b095-7821-8ce2-e9c32ba85267"
 root_thread_id = "01a07249-b095-7821-8ce2-e9c32ba85267"
 model = "gpt-5.6-luna"

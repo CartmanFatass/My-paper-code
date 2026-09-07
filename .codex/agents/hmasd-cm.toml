@@ -61,8 +61,8 @@ Follow `docs/project/EXPERIMENT_MONITOR.md` for accepted-handle handoff and
 `docs/project/ROOT_OPERATIONS.md` for integrated Root routing and the shared heartbeat.
 Root owns routine observation after adoption ACK; CM retains collection/technical
 acceptance and DM retains science. Native children use collaboration; separate tasks
-use the configured Root endpoint without model overrides. Never relaunch to transfer
-observation or dispatch to retired Monitor/Transport tasks.
+use the configured Root endpoint without model overrides. Transferring observation
+never relaunches an experiment.
 
 ### Engineering scope
 

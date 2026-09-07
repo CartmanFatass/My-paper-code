@@ -86,8 +86,8 @@ Follow `docs/project/EXPERIMENT_MONITOR.md` for accepted-handle handoff and
 `docs/project/ROOT_OPERATIONS.md` for integrated Root routing and the shared heartbeat.
 Root owns routine observation after adoption ACK; CM retains collection/technical
 acceptance and DM retains science. Native children use collaboration; separate tasks
-use the configured Root endpoint without model overrides. Never relaunch to transfer
-observation or dispatch to retired Monitor/Transport tasks.
+use the configured Root endpoint without model overrides. Transferring observation
+never relaunches an experiment.
 
 ### Intake and the decision ladder
 
@@ -153,11 +153,11 @@ and review application. At every clean boundary read and apply relevant unapplie
 instructions; record the review reference and mark handled items answered. Existing authorization
 persists until the owner changes it; publishing an item does not wait for a reply.
 
-Write items when recording a delegated decision, freezing a card or ladder prediction, taking in
-valid results, overruling a material critic dissent, recording a close call/second recast, or
-returning a Portfolio recommendation. Retain all options, recommendation, executed choice,
-evidence and owner flags required by that skill. At intake score an existing prediction reply,
-or record `not taken`.
+Write P1/P2 items for new cards, direction decisions, material critic dissent, close calls,
+second recasts and Portfolio recommendations. Keep ordinary object decisions, predictions,
+valid-result briefs and technical facts in their card/intake/audit records without separate
+owner-console items. Retain the required options, recommendation, executed choice, evidence
+and owner flags. At intake score an existing prediction reply, or record `not taken`.
 
 With every valid-result intake, write the Chinese owner brief at
 `docs/research/portfolio/owner/briefs/<direction>/<YYYY-MM-DD>_<object>.md`, under 600

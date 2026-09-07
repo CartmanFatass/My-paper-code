@@ -5,13 +5,10 @@ This is the stable contract between the loop and the owner console: the loop nev
 JSON by hand, it calls this script; the console never reads anything the loop did not write here.
 Standard library only.
 
-    # at the moment a delegated decision is recorded in the ledger
-    python tools/owner_console/item.py add --direction flexible_skill_duration --kind decision \
-        --title "next rung after E3" --context "..." \
-        --option a "E2b: transfer c=0.25 to scenario 1" --option b "E4: random-duration events" \
-        --recommended a --auto-applied a --dm-reason "..." \
-        --evidence docs/research/candidates/flexible_skill_duration/FSD_E3_INTAKE_20260905.md \
-        --ledger-row "docs/research/portfolio/audit/2026-09-05.md#L14" --ledger-kind selection
+    # create a maintained P1/P2 item from the current scientific record
+    python tools/owner_console/item.py add --direction <direction-id> --kind new-card \
+        --title "<card title>" --context "..." --recommended accept \
+        --packet <packet.json> --evidence <card.md> --ledger-row "<ledger.md>#L<n>"
 
     # at every clean boundary: what the owner asked for that is not applied yet
     python tools/owner_console/item.py reviews            # human-readable

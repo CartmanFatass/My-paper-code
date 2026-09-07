@@ -23,10 +23,12 @@ busy.
 ## Trigger and boundary
 
 Trigger only when the user explicitly names `$hmasd-workflow-outsource` or explicitly
-requests outsourcing or delegation of a workflow/control-plane change or audit involving
-`AGENTS.md`, `.agents/skills`, `.agents/roles`, `.codex/agents`, dispatch, session
+requests outsourcing the implementation of a workflow/control-plane change involving
+`AGENTS.md`, `.agents/skills`, `.codex/agents`, dispatch, session
 routing, transport, permissions, or task lifecycle. Otherwise, the current agent
-handles ordinary workflow/control-plane work directly.
+handles ordinary workflow/control-plane work directly. A separately requested independent
+review or audit follows the owner's specified reviewer model and scope; it does not invoke
+this Terra implementation contract or prohibit the caller's independent work.
 
 When explicitly invoked, the caller must not edit workflow files or fan out work
 before delegation. One contract means one agent and one objective. A same-task

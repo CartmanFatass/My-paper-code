@@ -1,8 +1,7 @@
 # Root experiment observation
 
-OWNER_DIRECT 2026-09-06: Luna/xhigh Root absorbs the independent Monitor and Transport.
-The original Monitor is retired after clean handover; new accepted handles go directly to
-Root in `.codex/hmasd-monitor.toml`. `ROOT_OPERATIONS.md` defines the single shared heartbeat
+Accepted experiment handles go directly to the Root configured in
+`.codex/hmasd-monitor.toml`. `ROOT_OPERATIONS.md` defines the single shared heartbeat
 for all current experiments and Pro work. Existing experiment/scientific constraints remain.
 
 ## Assignment and adoption

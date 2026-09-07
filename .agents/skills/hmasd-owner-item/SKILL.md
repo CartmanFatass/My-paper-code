@@ -1,22 +1,22 @@
 ---
 name: hmasd-owner-item
-description: Use whenever a DM or Root makes something the owner should see (a delegated object-tier decision, a frozen card, a ladder's first card, a valid-result brief, an overruled critic, a second recast, a Portfolio recommendation) and at every clean boundary to read and apply the owner's review instructions.
+description: Use when DM, Portfolio or Root records a P1/P2 owner item (new card, direction decision, material dissent, close call, second recast or Portfolio proposal), and at clean boundaries to apply owner reviews.
 ---
 
 # HMASD owner items
 
-## Current owner boundary — 2026-09-05 explicit renewal
+## Maintained items and authority
 
-The owner's latest instruction approved the complete CBSC/N3 Pro specification plan and
-explicitly delegated future changes of this kind, including their specified Portfolio and
-AGENTS updates, to complete final decisions at the proper Pro node. Apply AGENTS §4.7 and
-`docs/research/portfolio/decisions/2026-09-05-pro-directed-spec-delegation.md`.
-No additional per-item approval is required inside that explicit scope. Read/archive the full
-Pro decision, implement its exact plan, and highlight/trace the existing P1/P2 item through
-item.py with owner delegation, exact Pro source, affected files and actual status. Do not
-fabricate replies, accept code solely from a rule change or broaden unrelated dispositions.
-Missing/ambiguous/out-of-scope decisions retain their actual boundary; P3/P4 remain retired.
+Maintain P1/P2 items only. Ordinary delegated object decisions, predictions, technical
+facts and result briefs belong in card/intake/audit records, without separate review items.
+Keep every scientific card, prediction, result, Chinese brief and required audit record.
+`item.py add` returns `skipped` without an ID or file for P3/P4; cite the card/intake
+directly and do not upgrade an ordinary item to manufacture a higher priority.
 
+Apply AGENTS §4.7 for a complete Pro-directed specification plan within delegated scope.
+Read/archive the full decision, implement its exact authorized plan, and use `item.py trace`
+on the relevant P1/P2 item with the actual authority, source, application record and state.
+Do not fabricate owner replies, accept code solely from a rule change or broaden scope.
 
 The owner intervenes softly through `tools/owner_console/`. The loop never waits for the owner and
 never writes item JSON by hand: it calls `tools/owner_console/item.py`, which validates the item
@@ -29,23 +29,22 @@ Rule text: `AGENTS.md` §4.4–4.5. Controlling decision:
 
 | Moment in the loop | kind | options | extra fields |
 | --- | --- | --- | --- |
-| an object-tier decision is recorded in the audit ledger (`AGENTS.md` §4.1, §4.4) | `decision` | the ledger row's options, same keys; `--recommended` and `--auto-applied` = the executed one | `--ledger-row`, `--ledger-kind technical\|selection`, `--evidence` = the intake or card |
+| a direction- or portfolio-tier decision is recorded | `decision` | the recorded options, recommendation and actual executed choice | explicit `--tier`, `--packet`, `--ledger-row`, `--evidence` |
 | a science card is frozen | `new-card` | default `accept / reject / revise` | `--context` = the one-sentence claim and binding structure line; `--evidence` = the card |
-| a ladder's first card is frozen | `prediction` | the competing mechanisms as options | `--dm-reason` = your own prediction; `--evidence` = the card |
-| a valid result is taken in and its Chinese brief written | `brief` | default `reading-agreed / reading-disputed` | `--brief` = the brief path; `--evidence` = the intake |
 | you overrule a critic return ending `MATERIAL_DISSENT: yes` | `critic-dissent` | your options plus the critic's position as one option | `--evidence` = the critic return and the card |
 | your recommendation and its runner-up were not clearly separated | `close-call` | as `decision` | as `decision` |
 | Convergence returns a second `RECAST` for the direction | `second-recast` | default `continue-low-priority / park` | `--tier direction`, `--evidence` = the Pro archive |
-| Root records a Portfolio proposal, or a DM returns a direction recommendation to Root | `portfolio` | default `ratify / refuse / amend` | `--tier portfolio`, `--direction portfolio` for cross-direction items |
+| Portfolio records a proposal, or a DM returns a direction recommendation | `portfolio` | default `ratify / refuse / amend` | `--tier portfolio`, `--direction portfolio` for cross-direction items |
 
-The audit ledger row's evidence path names the item file the command prints.
+For a created P1/P2 item, the audit row can cite the returned item path. A `skipped`
+result has no item path; ordinary audit rows cite the card/intake directly.
 
 ```
-python tools/owner_console/item.py add --direction <direction-id> --kind decision \
+python tools/owner_console/item.py add --direction <direction-id> --kind close-call \
   --title "<one line>" --context "<what is decided, why now, what you saw; <= 200 words>" \
-  --option a "<label>" --option b "<label>" [--consequence a "<one line>"] \
+  --option a "<label>" --option b "<label>" --consequence a "<effect>" --consequence b "<effect>" \
   --recommended a --auto-applied a --dm-reason "<one sentence>" \
-  --evidence <path> [--evidence <path>] --ledger-row "<ledger path>#L<n>" --ledger-kind selection
+  --packet <packet.json> --evidence <path> --ledger-row "<ledger path>#L<n>" --ledger-kind selection
 ```
 
 `--direction` is the direction id from `docs/research/RESEARCH_MAP.md` (or `portfolio`); the id
@@ -81,9 +80,7 @@ conclusions and evidence, the intake, or the card). Pro prose needs no named sec
 ```
 
 Required: `question`, `changes_if_approved` (at least one entry, or one string `"none"`),
-`if_refused`, `evidence_for` (each with `path` and `quote`), `cost.reversibility`. A `decision` of
-object tier needs no packet; its `context` paragraph and the intake link are enough because the
-owner is reviewing, not ruling.
+`if_refused`, `evidence_for` (each with `path` and `quote`), `cost.reversibility`.
 
 ## Read point (every clean boundary)
 
