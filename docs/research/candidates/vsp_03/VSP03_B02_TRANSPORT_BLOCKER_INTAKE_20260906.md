@@ -72,7 +72,7 @@ the unchanged request on the already bound conversation can be reconsidered as a
 absence of an output or the old node alone is insufficient. If an attempt remains uncertain,
 preserve that uncertainty and do not resend. If a new exact user node is found, observe that same
 request and its paired response without another Send. This intake does not yet select one of
-these cases, because the requested action/DOM reconciliation is outstanding.
+these cases at that initial boundary; the completed reconciliation is taken in below.
 
 Automated context replacement is not currently available: the replacement reference requires an
 immediately previous archived non-decision/blocker with exactly zero repository paths read and
@@ -84,3 +84,45 @@ ID, owner reply or reset authority is invented.
 Exposure remains zero: no new models, training seeds, environment episodes, optimizer steps or
 evaluations. The proposed 120-second B budget remains unexecuted. This is documentary evidence
 and request recovery only; it creates no runtime machinery or changed scientific contract.
+
+## Completed raw-action and DOM reconciliation
+
+The singleton returned a new `TRANSPORT_RECONCILIATION.json`, preserved verbatim beside the
+original capture. I checked the necessary raw action/output slice because its summary used
+Send titles as evidence and still claimed the scoped assistant contained CBSC links.
+
+The actual B02 app-delivery event is at `03:15:39.641Z`, earlier than the subsequent
+`03:16:36` DM record timestamp used by that summary. The expanded interval through completion
+of the read-only follow-up contains **42 CUA calls**. There is no B02 prompt paste or Send.
+The sole pasted task is CBSC `14fd73ba...`, followed by its Send at action line 14215.
+VSP03 operations are read-only inspections/copy and cleanup. `ACTION_SLICE_READBACK.json`
+preserves the actual commands and interval; this statement is about the recorded operator,
+not a universal assertion about hypothetical external actions.
+
+Two additional corrections matter:
+
+- Actions 14906 and 15013 really requested the mistyped `3748` URL; its loaded output redirected
+  to the home page. The correct `374c` URL was then opened at action 15043. The registry and
+  its backup never contained the mistyped ID. Thus this was an operator navigation/transcription
+  error, not a conflicting binding to repair. The reconciliation summary's first two navigation
+  URLs were inaccurate; its original bytes remain visible.
+- Scoped assistant output 15074 contains the old two labels **“Response — immutable commit”**
+  and **“Delivery comment”**, with the old nested message ID. It exposes no GitHub href in that
+  returned HTML. The three-link CBSC text appears in clipboard output 15060, not the scoped DOM.
+  `SCOPED_DOM_READBACK.json` and the exact selected `SCOPED_DOM_OUTPUTS.json` preserve this
+  distinction. The reconciliation's claim that CBSC links were directly observed in the paired
+  assistant is unsupported. Clipboard/DOM disagreement is observed; its lower-level cause is
+  not diagnosed and no provider-context contamination is established.
+
+These facts support **B02 not yet provider-sent by the recorded executor**, rather than an
+attempted B02 with wrong input. On the DM's report, Root explicitly instructed continuation of
+the same accepted request's authorized **first Send**, using the unchanged `374c` binding,
+original payload, corrected Root receipt and fresh conversation/composer verification. This
+is ordinary technical recovery of already-authorized work, not a new scientific request,
+resend, binding reset, replacement conversation or direction decision.
+
+The next Transport assignment preserves every old incorrect artifact, uses the existing
+request-scoped evidence path without overwriting them, and must capture the new exact user node.
+Clipboard content cannot be assigned to a response when it disagrees with that response's DOM.
+The complete immutable GitHub response remains the scientific input to the later direction intake.
+No experiment is launched by this recovery and B02 remains unfrozen pending the actual answer.

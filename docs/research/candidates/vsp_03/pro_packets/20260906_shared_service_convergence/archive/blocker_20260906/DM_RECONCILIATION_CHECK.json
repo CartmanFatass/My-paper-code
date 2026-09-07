@@ -1,0 +1,22 @@
+{
+  "checked_at_utc": "2026-09-07T04:18:32.661819+00:00",
+  "transport_reconciliation_bytes": 13378,
+  "transport_reconciliation_sha256": "b19da99185b3325f621e221904f868957c4acea637f96a80d7734c0cdf377da1",
+  "cua_calls_since_actual_dispatch": 42,
+  "b02_paste_or_send_actions": 0,
+  "only_prompt_paste": "CBSC TASK14fd73ba3681b05f1e1ce80ca7c83707b5954acd",
+  "only_provider_send_line": 14215,
+  "wrong_navigation_3748_lines": [
+    14906,
+    15013
+  ],
+  "correct_navigation_374c_line": 15043,
+  "scoped_assistant_dom_output_line": 15074,
+  "scoped_assistant_text": "Worked for 11m 47s\n\nResponse — immutable commit\n\nDelivery comment",
+  "scoped_assistant_github_href_observed": false,
+  "clipboard_cbsc_output_line": 15060,
+  "transport_reconciliation_overstatement": "CBSC links are from clipboard output, not supported by directly scoped assistant DOM; first two navigation URLs were3748, not374c.",
+  "root_authorized_continuation": "Proceed same accepted B02 request authorized first-Send continuation; no reset/new conversation/new scientific request; preserve incorrect captures; actual Root receipt01a07249-b095-7821-8ce2-e9c32ba85267.",
+  "scientific_selection": "none; direction answer remains pending",
+  "new_experiment_exposure": 0
+}
