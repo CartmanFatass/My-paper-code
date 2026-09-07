@@ -6,14 +6,14 @@ OWNER_DIRECT merger: existing Luna/xhigh Root directly observes experiments and 
 requests. Standalone Monitor and Transport have relinquished their current work. See
 `.codex/hmasd-monitor.toml`, `.codex/hmasd-transport.toml` and `docs/project/ROOT_OPERATIONS.md`.
 Current assigned live/unknown experiment handles: none live; `vspc1-reactive-b01-factor-run02` and
-`vspc1-reactive-b01-generic-run02` are terminal, with both arms technically accepted and DM
-scientific intake pending. The single Root heartbeat also covers the
+`vspc1-reactive-b01-generic-run02` are terminal, technically accepted and fully intaken by the
+DM. The single Root heartbeat also covers the
 explicit pending Pro rows below; experiment completion alone does not pause it.
 Historical handles and old routing sections below are retained evidence, not current assignments.
 
 VSPC1 K4 reactive-queues B01 source, technical acceptance and source-intake records are
 integrated at main `476748835`; the selected seed401 FACTOR and GENERIC arms have each completed
-once on the corrected transport, with CM technical collection and DM paired intake pending.
+once on the corrected transport and are fully intaken at `effad6eb7`; no successor was selected.
 The first FACTOR supervisor name `vspc1-reactive-b01-factor-run01` was accepted at
 2026-09-07T13:57:52+08 but the Root wrapper passed a literal `$P`, exited 0 in 0 seconds, and
 produced no admission receipt or runner output; no learner/RNG/result exposure occurred. The
@@ -27,9 +27,11 @@ integrated B01 CM record. GENERIC `vspc1-reactive-b01-generic-run02` passed fres
 episodes, 2304 evaluation episodes, 17 target copies, 4.2558 s summary wall), and wrote the
 paired summary with provisional FACTOR−GENERIC endpoint delta `-0.00032552083333333304`.
 CM has collected and independently recomputed the complete pair; DM owns scientific
-interpretation and intake. The published endpoint and AUC signs differ and are both retained,
-with descriptive status `insufficient_practical_gain` and no follow-up selected by CM. No
-scientific polarity follows from the prior no-op or before DM's paired intake.
+interpretation and has completed intake. The published endpoint and AUC signs differ and are both
+retained, with descriptive status `insufficient_practical_gain`; no follow-up was selected. The
+next runnable recorded object is DISH B06 implementation preparation, which has been routed to
+the existing DISH DM; it is not yet a result-bearing launch. No scientific polarity follows from
+the prior no-op or from an unpaired arm.
 
 ## Current Pro handover queue — 2026-09-06
 
