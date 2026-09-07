@@ -13,7 +13,9 @@ def describe(values):
             "min": min(values), "max": max(values)}
 
 
-def summarize(path, baseline=None):
+def summarize(path, baseline=None, *, paired=False):
+    if paired and not baseline:
+        raise ValueError("Paired differences require a declared baseline")
     groups = {}
     with path.open(encoding="utf-8-sig", newline="") as stream:
         reader = csv.DictReader(stream)
@@ -36,7 +38,7 @@ def summarize(path, baseline=None):
     for (task, arm), runs in sorted(groups.items()):
         output["groups"].append({"task": task, "arm": arm,
                                   **describe(list(runs.values())), "runs": runs})
-        if baseline and arm != baseline:
+        if paired and arm != baseline:
             reference = groups.get((task, baseline), {})
             common = sorted(runs.keys() & reference.keys())
             differences = {seed: runs[seed] - reference[seed] for seed in common}
@@ -54,9 +56,11 @@ def main():
     parser.add_argument("csv", type=Path)
     parser.add_argument("--out", required=True, type=Path)
     parser.add_argument("--baseline")
+    parser.add_argument("--paired", action="store_true",
+                        help="Confirm the study declares matched training runs; equal seed labels alone do not establish pairing")
     parser.add_argument("--plot", type=Path)
     args = parser.parse_args()
-    result = summarize(args.csv, args.baseline)
+    result = summarize(args.csv, args.baseline, paired=args.paired)
     args.out.parent.mkdir(parents=True, exist_ok=True)
     args.out.write_text(json.dumps(result, indent=2, allow_nan=False) + "\n", encoding="utf-8")
     if args.plot:

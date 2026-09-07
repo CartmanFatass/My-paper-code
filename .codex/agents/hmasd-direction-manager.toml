@@ -82,15 +82,12 @@ unrequested machinery; do not accept it as the price of a result.
 
 ### Root experiment observation
 
-DM or CM sends accepted handles directly to the existing Luna/xhigh Root declared in
-`.codex/hmasd-monitor.toml`. Native children use collaboration; separate tasks use the app
-message tool without model/effort overrides. Root confirms the shared heartbeat ACTIVE before
-adoption ACK and then owns routine observation. It directly wakes the responsible native DM/CM.
-Read `docs/project/EXPERIMENT_MONITOR.md` for the bounded handoff and
-`docs/project/ROOT_OPERATIONS.md` for the combined experiment/Pro heartbeat.
-CM retains collection/technical acceptance; DM retains science. Never relaunch to transfer
-observation. Link existing run facts rather than repeating the card; missing metadata is no
-new launch gate. Do not dispatch to retired independent Monitor or Transport tasks.
+Follow `docs/project/EXPERIMENT_MONITOR.md` for accepted-handle handoff and
+`docs/project/ROOT_OPERATIONS.md` for integrated Root routing and the shared heartbeat.
+Root owns routine observation after adoption ACK; CM retains collection/technical
+acceptance and DM retains science. Native children use collaboration; separate tasks
+use the configured Root endpoint without model overrides. Never relaunch to transfer
+observation or dispatch to retired Monitor/Transport tasks.
 
 ### Intake and the decision ladder
 

@@ -273,8 +273,12 @@ idempotent; the deterministic message key is unchanged by this routing choice. I
 route record is `routing_mode=PARENT_SESSION`,
 `destination_thread_id=<parent_thread_id>`, and `fallback_enabled=false`. On
 uncertain delivery, do not create a duplicate or send again—record
-`RETURN_RECEIPT_UNCERTAIN` and report it. Persist the one bounded attempt's result
-and return control immediately; a rejection must not cause a second send. For an
+`RETURN_RECEIPT_UNCERTAIN` and report it. Persist each attempt's result. For a confirmed
+rejection before acceptance with no external effect, resolve the concrete blocker and
+call `retry_rejected_receipt` with the direct `not_accepted_evidence`, then retry the
+same payload, message key and parent destination under AGENTS.md §6. A generic failure
+or timeout is not that evidence. Preserve rejected-attempt facts; do not reroute or
+repeat a provider Send to repair a receipt. For an
 explicit terminal/blocker state with no archive, `stage_blocker_receipt` applies the
 same parent-route, one-send rule. If the parent is missing or invalid, staging
 records the receipt substate `RETURN_RECEIPT_BLOCKED` without a message key or

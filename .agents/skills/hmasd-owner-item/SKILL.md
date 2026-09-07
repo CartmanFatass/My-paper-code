@@ -57,8 +57,8 @@ prefix is derived from it. Kinds with default options need no `--option`.
 `new-card` item, and any direction- or portfolio-tier item, without `--packet <file.json>` and a
 non-empty `consequence` on every option. The owner cannot rule on a one-line context; the console
 shows such an item as "上下文不足" and the owner's reply `needs-context` sends it back. Write the
-packet in Chinese, from the material you already have (the Pro response's PORTFOLIO_EFFECTS,
-RATIFICATION_CHANGES, EVIDENCE and UNCERTAINTY sections; the intake; the card):
+packet in Chinese, from the material you already have (the Pro response's relevant
+conclusions and evidence, the intake, or the card). Pro prose needs no named sections:
 
 ```json
 {
