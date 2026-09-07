@@ -4,7 +4,8 @@ Contract: [frozen card](RCLE_TBCFV_A02_FROZEN_SCORE_ALLOCATION_SCIENCE_CARD_2026
 §§2–6, DM freeze `25d6aff6a`. Source base `4572ab1a7727c8d1098e5c52ac8a9bb7a8a3ff4c`;
 CM branch `codex/cm-rcle-a02-20260906`, worktree
 `C:/Projects/HMASD-worktrees/cm-rcle-a02-20260906`. The primary checkout's unrelated
-Portfolio/handoff changes were preserved. No result invocation has occurred at this revision.
+Portfolio/handoff changes were preserved. At implementation delivery `24c2808fe`, no result
+invocation had occurred; the bound launch and terminal collection are recorded below.
 
 ## Delivered implementation
 
@@ -151,3 +152,40 @@ Monitor handoff goes directly through the app to `01a0791b-0d2d-7b43-85b6-cd5632
 through research Root `01a07249-b095-7821-8ce2-e9c32ba85267` to DM/CM. Scientific intake remains DM's.
 
 scope: none
+
+## Bound launch — Root integration
+
+Root integrated and pushed accepted source/card/audit at
+`abcc3766c2b2d9908c9391b0827d9f2a39f8d641`; the DM supplied that exact SHA and
+explicit single-launch assignment. Owner review list was re-read as empty by DM.
+No new focused check or calibration follows. Frozen supervisor handle is
+`rcle-a02-20260906`; execution cwd is `/home/wu/hmasd-worktrees/rcle-a02-abcc376`.
+The exact command inside the configured supervisor is:
+
+```bash
+cd /home/wu/hmasd-worktrees/rcle-a02-abcc376 && /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/hmasd-worktrees/rcle-a02-abcc376/temp/directions/roster_consistent_latent_exploration/exp/tbcfv_a02_20260906/memory.json && /usr/bin/time -v -o /home/wu/hmasd-worktrees/rcle-a02-abcc376/temp/directions/roster_consistent_latent_exploration/exp/tbcfv_a02_20260906/complete.time /usr/bin/timeout --signal=TERM --kill-after=2s 287s /home/wu/.venvs/hmasd/bin/python scripts/run_rcle_tbcfv_a02.py --out /home/wu/hmasd-worktrees/rcle-a02-abcc376/temp/directions/roster_consistent_latent_exploration/exp/tbcfv_a02_20260906 --state-root /home/wu/hmasd-worktrees/rcle-b02-8ad01cb/temp/directions/roster_consistent_latent_exploration/exp/tbcfv_b02_20260906 --summary-root /home/wu/hmasd-worktrees/rcle-b02-8ad01cb/temp/directions/roster_consistent_latent_exploration/exp/tbcfv_b02_20260906 --launch-sha abcc3766c2b2d9908c9391b0827d9f2a39f8d641 --admission-receipt /home/wu/hmasd-worktrees/rcle-a02-abcc376/temp/directions/roster_consistent_latent_exploration/exp/tbcfv_a02_20260906/memory.json --seed 18 --wall-cap 285
+```
+
+State/input locations, CPU FP64/single-thread boundary, 287 s external / 285 s internal stop,
+12.7002317 s supporting check debit and no-retry/no-switch constraints are unchanged.
+
+## Terminal collection and technical acceptance
+
+The sole accepted handle completed exit0 / `COMPLETE` with all 512 episodes, 32,768 ticks,
+32 attempted and completed derivatives, four models, 256 raw points and 768 vectors; zero
+optimizer/baseline updates. All eight additivity checks passed. Both frozen final hashes matched,
+and rebuilt initial norm matched its recorded reference within the declared local tolerance.
+Both baselines used the documented reconstruction path, without missing-baseline fallback.
+
+Whole-process wall was **7.02 s**, user+system **6.03 CPU-s**, GNU peak RSS **588,848 KiB**.
+Admission measured both physical/effective availability at **14.2097549438 GiB**. Supporting
+focused-check debit plus complete process is **19.7202317 s**, within the 300 s cap. The configured
+Monitor was directly assigned and Root forwarded adoption; CM released polling and completed
+terminal collection/acceptance. No extra result invocation, forward, derivative or trajectory
+was performed during artifact readback/statistical table generation.
+
+See [E0 result evidence](RCLE_TBCFV_A02_RESULT_EVIDENCE_20260906.md),
+[full primary tables](a02_frozen_score_allocation_20260906/PRIMARY_TABLES.md), and
+[raw summary](a02_frozen_score_allocation_20260906/summary.json). The same archive contains the
+admission, terminal log, whole-process timing and hashed raw-library pointers/readback.
+The complete result is technically accepted at A/RECON ceiling; scientific intake remains DM's.
