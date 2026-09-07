@@ -1,11 +1,11 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-06 (owner resumed Codex research from Claude handoff 4572ab1a7; DISH and RCLE selected objects in card/implementation preparation)
-Current execution update: OWNER_RESUMED / OWNER_DIRECT. Five chains active under `decisions/2026-09-06-resume-codex-after-claude-handoff.md`. DISH B05 source integrated/pushed at1d87e0219 and RCLE A02 atabcc3766c; same CMs authorized to perform their exact bounded remote invocations. CBSC new Convergence response delivered and DM intake/card preparation underway. VSP03/VSPC1 new fixed-link requests dispatched once; full decisions pending Root receipt. No historical request replay.
-Current monitoring update (OWNER_DIRECT 2026-09-06): independent Luna/low task `01a0791b-0d2d-7b43-85b6-cd5632e0b007`; configuration `.codex/hmasd-monitor.toml`. DM/CM direct dispatch, monitor events via Root to native DM/CM. Native tracker retired; Root research heartbeat deleted. Monitor heartbeat paused with zero assigned handles. Owner has resumed research; lifecycle/priority remain as recorded. Older tracker/heartbeat statements below are historical.
+Updated at: 2026-09-06 21:37 PDT (Codex five-chain continuation; completed DISH/RCLE evidence and incomplete CBSC pair)
+Current execution update: OWNER_RESUMED / OWNER_DIRECT. DISH B05 seed101 technically complete (Delta +236.25; DM scientific intake pending). RCLE A02 valid and integrated; post-A02 Innovator proposal dispatched, no successor selected. CBSC B04 RAW complete, STRUCT failed before model creation; paired claim incomplete, technical intake pending. VSP03 original first-Send continuation accepted after raw-action reconciliation; VSPC1 current request observed generating. Full new Pro decisions remain pending.
+Current monitoring update (OWNER_DIRECT 2026-09-06): one global independent Luna/low task `01a0791b-0d2d-7b43-85b6-cd5632e0b007`, configuration `.codex/hmasd-monitor.toml`. All accepted handles terminal and delivered; heartbeat paused with zero live handles. It must be ACTIVE before acknowledging the next assignment and inspect every active handle on each wake. Root has no research heartbeat. The earlier paused-monitor delay was corrected; DISH study elapsed retains that delay.
 Owner: Root
-Latest clean boundary: handoff 4572ab1a7 accepted; owner reviews empty; GitHub DISH a9718a45e and RCLE 6c0d1ca55 deliveries confirmed. Current resume record above supersedes older scheduling and pending-response language below; historical evidence remains.
-Current CBSC update: B02/B03 complete; two independent zero comparisons retained. Successor Convergence materials integrated; no third training pair or lifecycle change. This supersedes older CBSC pending-result wording below.
+Latest clean boundary: collected DISH B05 evidence integrated at add78a7b7; RCLE post-A02 packet/dispatch integrated at 4c72348d5; VSP03 corrected transport evidence integrated at e48f46d0d. Owner reviews empty. Current status supersedes older pending-run and Claude scheduling language below without altering historical evidence.
+Current CBSC update: B04 opportunity-credit pair selected by complete Convergence d3222ccb. Engineering passed; RAW endpoint 12.0375 versus REQUEST_ONLY 12.375. STRUCT exited with SystemError: unknown opcode in tape construction before model creation; no paired result, retry or scientific polarity. Exact technical record integrated at d25397621; runtime cause remains unestablished.
 Current important-change authority: latest explicit owner approval applies CBSC/N3 B/B and delegates future same-kind specification changes plus their explicit Portfolio updates to complete appropriate-node Pro plans, with highlighted P1/P2 traces and no repeated owner vote. See `decisions/2026-09-05-pro-directed-spec-delegation.md`; historical authority/corrections remain preserved.
 Owner review maintenance: P1/P2 only (`OWNER_DIRECT`, 2026-09-05); P3/P4 creation, backfill and reminders retired. Preserve scientific evidence, audit and existing owner replies; see `decisions/2026-09-05-owner-review-p2-cutoff.md`.
 Lifecycle admission: 15 ACTIVE source IDs: the existing nine route agendas plus ACVC restored to the queue by the September5 owner review;7 PARKED reserves. Source IDs within a route do not create independent DM chains.
@@ -84,11 +84,11 @@ multiple with a demonstrated cost-inflation ratio against a minimum adequate exp
 
 | Direction | Native DM | Current delivery and next action |
 | --- | --- | --- |
-| DISH | `/root/dm_amx_dish_seed101` | B05 card, thin seed101 source and shared-cost correction integrated/pushed; original CM awakened for admitted focused check and single pair. |
-| RCLE | `/root/dm_amx_rcle_a02` | A02 card, measured-path implementation and independent acceptance integrated/pushed; original CM awakened for sole frozen-state invocation. |
-| CBSC | `/root/dm_amx_cbsc_next` | New opportunity-credit proposal/request integrated; complete Pro response delivered atd3222ccb, DM reading/intake and exact selected B04 card underway. |
-| VSP03 | `/root/dm_amx_vsp03_next` | Shared-service Convergence preparation integrated9d7d7271a; one dispatch accepted. Receipt routing corrected to Root01a07249-b095-7821-8ce2-e9c32ba85267 without resending. |
-| VSPC1 | `/root/dm_amx_vspc1_next` | Reactive-queue Convergence preparation integratedb2073ab48; one dispatch accepted, full response pending. |
+| DISH | `/root/dm_amx_dish_seed101` | B05 seed101 technical evidence integrated; LOW_LR minus CONTROL +236.25 with one negative row; total charged 432.82 s. DM scientific intake and next-question selection. |
+| RCLE | `/root/dm_amx_rcle_a02` | A02 valid: 512 episodes, 32 derivatives, zero updates, 19.7202317 s charged. New actor-score-weighting proposal dispatched to existing Innovator; full response pending. |
+| CBSC | `/root/dm_amx_cbsc_next` | B04 RAW complete; STRUCT failed before model creation. DM takes in the incomplete pair and selects bounded technical next steps; no retry authorized by failure alone. |
+| VSP03 | `/root/dm_amx_vsp03_next` | Original fixed-link request continuation accepted after raw evidence established no B02 Send by recorded executor; same binding/payload preserved. Actual provider response pending. |
+| VSPC1 | `/root/dm_amx_vspc1_next` | Exact current reactive-queue TASK user message and paired active generation observed in correct conversation; full immutable response pending. |
 
 The current handoff and card/CM paths hold the exact bounds. DM/CM retain scientific and
 engineering ownership; Root integrates and forwards monitor/Transport events. The19:50
