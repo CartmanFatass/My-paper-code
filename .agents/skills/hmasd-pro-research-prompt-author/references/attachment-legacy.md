@@ -2,6 +2,10 @@
 
 Retained for accepted in-flight packets and explicitly recorded capability fallback.
 All default/sole-attachment wording below applies only within this legacy mode.
+Legacy delivery mode does not restore the retired executor: every reference below
+to the reusable Transport task means the current integrated Root endpoint. Adopted
+handoffs retain their historical operator ID and prompt as evidence, while Root
+records its actual execution ID and operates locally under ROOT_OPERATIONS.md.
 
 # HMASD Pro Research Prompt Author
 
@@ -9,7 +13,7 @@ This is an authoring-and-dispatch skill for `portfolio` and an HMASD direction
 `em`. By default it validates and renders a packet, then performs exactly one Codex task
 dispatch to `hmasd-chatgpt-pro-transport`. It never performs Pro/browser
 transport or interprets a result in that default authoring role. Every default handoff reuses the one project
-Transport task declared in `.codex/hmasd-transport.toml`; authors never create a
+integrated Root declared in `.codex/hmasd-transport.toml`; authors never create a
 Transport task per handoff. That task UUID is a repository-global execution endpoint,
 not a provider-conversation binding or a receipt destination.
 

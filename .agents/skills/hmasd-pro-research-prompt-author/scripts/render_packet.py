@@ -594,7 +594,12 @@ def bind_github_task(handoff_path: Path, sha: str, project_root: Path) -> dict:
                          "Archive the short chat receipt; Portfolio/DM retrieves and intakes the complete GitHub file.")
     if not h["pro_send_from_caller"]:
         h["dispatch_prompt"] = f"Execute the handoff packet at {handoff_path.resolve()} exactly once."
-        h["dispatch_instruction"] = "Push the bound task commit first; dispatch once to the existing singleton with its explicit configured model/effort."
+        h["dispatch_instruction"] = (
+            "Push the bound task commit first; dispatch once to the integrated Root "
+            f"threadId={h['operator_thread_id']} with its explicit configured model/effort. "
+            "Root executes Transport locally; never forward this handoff to a retired Transport task. "
+            "Do not call create_thread or dispatch to yourself."
+        )
     handoff_path.write_text(json.dumps(h, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return {"task_url": url, "dispatch_state": h["dispatch_state"], "dispatch_required": h["dispatch_required"]}
 
