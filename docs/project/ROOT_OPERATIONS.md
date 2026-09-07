@@ -40,6 +40,37 @@ or completion. An intentional owner-directed model migration is separate from re
 Portfolio receives its own Pro receipts via the declared parent ID. A DM using a native
 child ID as source still declares Root as app parent; Root forwards the local receipt.
 
+## Continuing work across Root and Portfolio boundaries
+
+OWNER_DIRECT 2026-09-06: separating Portfolio does not pause the research loop. A status
+question or completed status summary is not a stop instruction. Before returning from a
+normal work pass, route newly available results/Pro answers, act on ready authorized next
+steps, and check vacancies against the current candidate order. Count actually advancing
+direction chains, not merely registered DM names; a chain waiting only on an external
+decision yields its slot when another admitted candidate has bounded work. Preparation,
+implementation and intake count as work even when no experiment is running.
+
+A completed documentation-only assignment ends that assignment, not the direction's
+standing authorization. When the integrated intake/card already selects the next object,
+Root gives the existing DM the next bounded implementation handoff without another owner
+or Portfolio vote. A scientific stop, changed scope, missing selection or unresolved
+external effect remains a real boundary. A no-additional-invocation result permits only
+already authorized distinct-question preparation, never an automatic repeat or new run.
+
+Root sends Portfolio a concise evidence delta when a result, card, dependency or available
+slot changes the actionable queue; name the source/commit, next responsible agent and
+concrete missing decision. Portfolio updates its snapshot/order and sends the usable action
+back to Root. A committed file alone is not delivery. Root records the actual native
+dispatch or concrete blocker in existing tracking and continues other ready work while
+Portfolio responds. Neither side waits for the other's routine snapshot to progress an
+already selected object. Reuse pending requests; do not create a second dispatch to check one.
+
+If every recorded candidate is blocked, ask Portfolio for the next bounded ordering or
+question-preparation action and record that request's responsible task. If nothing can
+advance after the available scan, return the specific dependencies and next wake/message
+source. Do not invent a fifth experiment, change lifecycle, or add an automation to fill time.
+These are continuation instructions, not new scientific launch conditions or approval steps.
+
 ## One shared fallback wake
 
 Owner cadence correction: use a thirty-minute recovery heartbeat because the integrated
@@ -74,7 +105,8 @@ Each wake performs a bounded pass:
    A normally generating request is due on the next thirty-minute fallback wake; experiment checks use the same fallback cadence.
 3. Persist meaningful status changes, archive complete replies and route material events to
    the responsible DM/CM or Portfolio. Local receipts have zero app-message attempts.
-4. Continue ready authorized local work or return. Keep the shared wake enabled if any work
+4. Apply "Continuing work across Root and Portfolio boundaries": dispatch ready work and
+   refill available slots before returning a status summary. Keep the shared wake enabled if any work
    above remains. Do not busy-poll, sleep through generation, narrate unchanged status, create
    a per-run/per-request automation, or redispatch an already accepted handoff.
 
