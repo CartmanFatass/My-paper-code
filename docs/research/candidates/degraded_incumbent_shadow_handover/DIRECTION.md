@@ -724,3 +724,28 @@ retained on the node); accepted as a valid complete B/EXPLORE result under the u
 the successor question (an evaluation-across-updates B on seed 89, a second seed of the LR pair, both
 combined, the source question, or park) is put to `em:dish:convergence` through
 `pro_packets/20260906_post_b04_convergence/`. No card is frozen and nothing is launched from this record.
+
+## Post-B04 Convergence: a second independent paired seed of the learning-rate comparison (recorded, not executed) — 2026-09-06
+
+The post-B04 Convergence response (`pro_packets/20260906_post_b04_convergence/archive/RESPONSE.md`,
+delivered at `a9718a45e`, **PRO_FINAL**, intake `DISH_POST_B04_CONVERGENCE_INTAKE_20260906.md`) continues
+the RETAIN/COPY/SHADOW agenda, keeps the forecast-package branch ended, and selects only the DM's option 2:
+a **seed-101 independent paired follow-up of the B04 learning-rate comparison** (B/EXPLORE, own card and
+outputs): the same CONTROL 3e-4 versus LOW_LR 3e-5 arms on every original parameter group, master =
+sha256 of `DISH-CONTROL-LOW-LR-B04/seed/101`, one new STRUCTURED initialization and empty Welford state
+shared by both arms and by a four-row zero-update raw-interface reference, four seed-101 resets by the
+inherited coordinate law, sixteen updates, update-16 only, the four development conditions and the
+terminated-row treatment unchanged. Primary `Delta_101 = mean_r (J_LOW_LR,16,101,r − J_CONTROL,16,101,r)`
+with `D_CONTROL,101`, `D_LOW_LR,101`; scale +24; seven-row reading; seed 89's +182.75 listed beside the
+new value (an equal-weight two-seed mean may be appended as description only); caps 1,800 s per arm and
+3,600 s for both, the shared item charged once, no inherited balance; B04's 432.4 s chain is a planning
+reference, not a promise. Not chosen: retraining seed 89 with evaluation across updates (a new training B,
+no independent pair, no cause identification), the combined five-checkpoint variant (44 evaluation
+episodes, no timing basis for "most information per charge"), a source study on the zero-update
+controller (no ordinary legal first-application object exists; the DM's "no legal transfer on the
+corrected path" overstated the record: B03 CONTROL had one training transfer), and park (a real
+treatment's finite signal has a concrete repeatability test). The two CONTROL before/after losses change
+no earlier reading; the source quantity stays unestimated; no Portfolio change. **Under the owner's
+18:11 PDT stop the decision is recorded only: no card, no CM objective, no implementation, no launch.**
+The first request (`-01`) pinned an evidence reference that predated the packet's aux files and was
+returned by Pro with three 404s; corrected and resent as `-02` (hub error, see the intake).

@@ -234,3 +234,34 @@ the successor question (a gradient-decomposition A on the saved state, a baselin
 exposure ladder, one more magnitude rung, or park) is put to `em:roster_consistent_latent_exploration:innovator`
 through `pro_packets/20260906_post_b02_innovator/`. B01 and B02 stay valid and unconsumed; no card is frozen
 and nothing is launched from this record.
+
+## Post-B02 Innovator: a frozen-state gradient-allocation A (recorded, not executed) — 2026-09-06
+
+The post-B02 Innovator response (`pro_packets/20260906_post_b02_innovator/archive/RESPONSE.md`,
+delivered at `6c0d1ca55`, **PRO_FINAL**, intake `RCLE_TBCFV_POST_B02_INNOVATOR_INTAKE_20260906.md`) stops
+buying movement-amount interventions after the 0.02/200 counterexample and selects the narrowed form
+of the DM's option 1 as the only next object: **`RCLE-TBCFV-A02-FROZEN-SCORE-ALLOCATION`** (A/RECON). On
+seed 18's common θ0 and the two update-200 states (four configurations C1P1-init, FLEX-init, C1P1-final,
+FLEX-final), two pre-specified probe blocks (labels 19001/19002, purpose domain `post-b02-frozen-probe`,
+64 episodes each over the eight training cells; 512 episodes, 32,768 ticks of measurement exposure), it
+measures the manager-score and actor-score gradients `g_M`, `g_A` and the joint `g` of the actual loss
+(norms, cosine, cancellation `‖g‖/(‖g_M‖+‖g_A‖)`, residual identity check), their projections on five
+exclusive tensor groups (set encoders, manager, pointer, common update, agent update), per-tensor
+`‖θ200 − θ0‖` and the real `‖θF,200 − θC,200‖`, the original-versus-zero-baseline counterfactual on the
+same graphs (final states use each arm's frozen b200, loaded or rebuilt by the recorded law), and a
+256-point fixed-input library's six-way claim probabilities on the three snapshots (entropy, TV
+distance; 768 vectors); at most 32 derivative evaluations, no `step`, cap 300 s on the complete
+invocation. Descriptive markers, not an MEI: r_A ≤ 0.01 and r_P ≤ 0.01 on both blocks for "very low
+actor/pointer allocation", r_A < 0.5 for "manager-dominant", mean TV ≤ 0.01 for "small conditional
+change"; five branches, each ending the A and returning to object selection. Pro corrected the DM: a
+falling raw gradient norm is not a smaller normalised update; a baseline near the cell mean does not
+erase advantage information (though under `g/‖g‖` the expected direction can differ); manager and actor
+paths share the encoders and are decomposed by loss term, not by name; τ leaving 40 is not a learning
+gate; B01/B02 changed seed and law together; the DM's ≈ 10 s / ≈ 30 s timings were unmeasured. The
+reference-versus-learned gap (U ≈ 0.28 vs ≈ 0.71 on the B02 panel) is a diagnostic headroom record, not
+an identified H_A1. Not chosen: the 1,000-update single-arm ladder (a legitimate B, not a priority),
+another magnitude rung, warm-started heads, a baseline B (only after the measurement), park. No training
+law, frozen meaning or Portfolio state changes. **Under the owner's 18:11 PDT stop the decision is
+recorded only: no card, no CM objective, no implementation, no launch.** The first request (`-01`) was
+returned by Pro for an evidence reference that predated the packet's aux files; corrected and resent as
+`-02` (hub error, see the intake).
