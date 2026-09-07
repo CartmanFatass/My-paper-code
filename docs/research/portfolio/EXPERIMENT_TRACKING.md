@@ -2,7 +2,7 @@
 
 ## Current route — OWNER_DIRECT 2026-09-06
 
-The native tracker is retired. DM/CM -> independent Luna/low app task -> research Root -> native DM/CM. See `.codex/hmasd-monitor.toml` and `docs/project/EXPERIMENT_MONITOR.md`. Native subagents can dispatch directly to app tasks (owner confirmed). Root heartbeat is removed; the monitor owns its heartbeat. Current assigned live/unknown handles: none. Historical handles and capability restrictions below are preserved evidence, not current assignments or routing rules.
+The native tracker is retired. DM/CM -> independent Luna/low app task -> research Root -> native DM/CM. See `.codex/hmasd-monitor.toml` and `docs/project/EXPERIMENT_MONITOR.md`. Native subagents can dispatch directly to app tasks (owner confirmed). Root heartbeat is removed; the monitor owns its heartbeat. Current assigned live/unknown handles: `dish_b05_seed101_focused_20260906` on `wsl_4070`. Historical handles and capability restrictions below are preserved evidence, not current assignments or routing rules.
 
 ## Historical record
 
@@ -127,6 +127,10 @@ accepted handle. All other rows below are historical terminal records or prospec
 a separately accepted handle.
 
 ## Active accepted work
+
+| Direction / run record | Node and accepted handle | Launch SHA | Remote cwd | Output / receipt | Latest authoritative observation | Next owner step / notification |
+| --- | --- | --- | --- | --- | --- | --- |
+| `degraded_incumbent_shadow_handover` — DISH B05 repair-check; CM `/root/dm_amx_dish_seed101/cm_am_dish_seed101`; DM `/root/dm_amx_dish_seed101` | `wsl_4070` via `hmasd-wsl-node`; `dish_b05_seed101_focused2_20260906` | `1d87e02194158d6bca0eaa4e7f70a1c1098bb121` | `/home/wu/hmasd-worktrees/dish-b05-seed101-20260906` | `temp/directions/degraded_incumbent_shadow_handover/exp/control_low_lr_b05_20260906/focused2.{memory.json,time.txt,stdout.log,stderr.log}`; log `/home/wu/.agent-tasks/dish_b05_seed101_focused2_20260906/task.log` | Adopted replacement after prior `dish_b05_seed101_focused_20260906` terminated exit `1` before test body (`FileNotFoundError` for basetemp parent). Only mkdir parent repaired; no scientific run yet. Bound: 298.85s remaining check budget. | Monitor same handle; notify configured Root on terminal, failure, lost observation, or bound condition. CM collects; DM judges validity. |
 
 FRRIE R09 A01 terminal handoff: `(wsl_4070,
 frrie_r09_segfault_a01_43eec21e_20260905)` was adopted at
