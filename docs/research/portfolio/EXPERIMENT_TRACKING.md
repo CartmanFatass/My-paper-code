@@ -38,7 +38,12 @@ DISH B06 implementation is now technically delivered and integrated at main `373
 child `/root/dm_amx_dish_seed101/cm_am_dish_seed101` returned source `a3dac9149`, four focused
 checks and an independent review with no material finding. No B06 experiment launch is
 authorized or reported; DM intake and any separate launch assignment remain pending. Dispatch
-evidence is recorded in audit row118 and commit `2b09e9209`.
+evidence is recorded in audit row118 and commit `2b09e9209`. On owner-resumed continuation
+2026-09-07, Root sent a follow-up to the existing DISH DM `/root/dm_amx_dish_seed101` to
+prepare the complete launch assignment from the accepted intake (source `373d18720`, remote
+admission, remaining `1790s` cap and stdout/JSON collection) without launching or inferring new
+authorization. The bounded DM return is the current dependency; scientific B06 evidence remains
+absent.
 
 UCOPE B01 implementation is integrated at main `245047432` with CM technical acceptance
 `bd7e47a67`: the bounded source, synthetic coverage and one remote technical profile passed
