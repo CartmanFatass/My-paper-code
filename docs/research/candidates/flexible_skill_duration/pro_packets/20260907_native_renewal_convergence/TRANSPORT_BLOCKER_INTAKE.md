@@ -1,5 +1,15 @@
 # FSD native-renewal Convergence — transport blocker intake
 
+**Historical observation, superseded by fresh delivery readback.** The original record below
+preserves Root's reported blocker and the DM's first observation. The actual GitHub response
+at `a19678fb7e0618db0c665dabe3d3cc769dc93ff5` and Issue 10 comment `5576589781` were later
+read and matched to this request. See `CONVERGENCE_INTAKE.md` for the current disposition.
+The separate 592-byte clipboard receipt is preserved as `archive/BLOCKER_CHAT_RECEIPT.md`
+(SHA256 `7629a57a6d5dafa20c61fbaf57994594752da5d78e0551affe31dd41ba20f0b5`), alongside
+`archive/BLOCKER_TRANSPORT_FACTS.json`; neither is the 188-line GitHub scientific response.
+GitHub records the response/comment at 23:16:30/23:17:55Z, so this correction claims later
+observation, not that delivery happened after the blocker or its first intake commit.
+
 2026-09-07. **PRO_BLOCKED: no new direction decision was formed.** Request
 `2026-09-07-fsd-native-renewal-convergence-01`, node
 `em:flexible_skill_duration:convergence`, conversation
