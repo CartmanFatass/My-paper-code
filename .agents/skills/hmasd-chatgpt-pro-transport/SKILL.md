@@ -1,6 +1,6 @@
 ---
 name: hmasd-chatgpt-pro-transport
-description: "Use when Root executes or observes an exact HMASD ChatGPT Pro handoff, including model selection, ambiguous sends, long generation, migration recovery, and exact response archiving."
+description: "Use when Root executes or observes an exact HMASD ChatGPT Pro handoff, including model selection, ambiguous sends, long generation, recovery, and exact response archiving."
 ---
 
 # HMASD ChatGPT Pro Transport
@@ -9,11 +9,8 @@ Use this skill only as a transport operator. The calling session owns the eviden
 scope and exact prompt wording; a complete Pro response owns the final decision for
 its declared node. This skill validates the supplied scope, binds it to the exact
 persistent ChatGPT conversation, and preserves transport/response evidence without
-interpreting or overriding the decision. The transport task is the execution owner:
-after it accepts a handoff it performs the complete transport, wait, archive, and
-return-receipt lifecycle in this task. It is not an advice-only monitor and it does
-not delegate the same handoff recursively. Here, "transport task" means the current
-integrated Root executing this skill, not the retired standalone Transport session.
+interpreting or overriding the decision. Root executes the complete transport,
+wait, archive and return-receipt lifecycle locally in its current task.
 
 Archive completeness is a transport fact, not specification-conformance acceptance.
 The receiving Portfolio/DM checks the formed decision against current owner/spec constraints
@@ -26,9 +23,8 @@ browser methods; an unavailable export or locator API is not permission to resen
 
 ## Scoped GitHub delivery — OWNER_DIRECT 2026-09-05
 
-All newly authored requests now use GitHub delivery (owner overall cutover).
-No additional VNFC trial or Pro design review is required. Keep accepted in-flight
-requests on their original route, without another Send.
+Use GitHub delivery for new requests. Preserve accepted request content and reconcile
+its existing Send state before continuing.
 An Author handoff with `delivery_mode=github_delivery` uses the already supported
 paste transport request. Send its short fixed task link verbatim, no attachment,
 read-only preamble or copied evidence. Dispatch only a bound READY_TO_DISPATCH task;
@@ -51,7 +47,8 @@ exactly one body source:
 
 Every canonical handoff must provide the exact creator Codex `source_thread_id`, its
 exact `parent_thread_id`, and an explicit `operator_thread_id`. The default operator
-is the integrated Luna/xhigh Root declared in `.codex/hmasd-transport.toml`. The retained REUSE_SINGLETON wire value means this one Root endpoint, not another task.
+is the integrated Luna/xhigh Root declared in `.codex/hmasd-transport.toml`.
+`REUSE_SINGLETON` names this Root endpoint.
 Treat all three as routing metadata, never as scientific content;
 do not infer them from the provider conversation URL, a task title, or prose.
 `parent_thread_id` is the sole completion or terminal-blocker receipt destination.
@@ -59,15 +56,16 @@ do not infer them from the provider conversation URL, a task title, or prose.
 `operator_thread_id` is the Codex execution endpoint, never a provider-conversation binding. It may equal the parent when Root receives a native DM handoff; that completion is routed locally without an app self-message. Default canonical handoffs must
 declare `dispatch_mode=REUSE_SINGLETON`, `operator_reuse_required=true`,
 `operator_model=gpt-5.6-luna`, and `operator_thinking=xhigh`; validate all four and
-validate new handoffs against the current project endpoint. Already accepted handoffs are not rerendered after an owner-approved executor transfer: preserve their original operator/prompt, record `execution_thread_id` for the actual adopted executor and its handover evidence, and reconcile their Send state before acting. Historical in-flight
-`CREATE_ON_DEMAND` requests may finish, but they do not authorize another task creation.
+validate new handoffs against the current project endpoint. Root records its actual
+`execution_thread_id` and reconciles accepted requests against their fixed TASK,
+parent, conversation and message identity before continuing locally.
 
 When the author is already the configured Root endpoint, or the owner explicitly asks the caller to operate the browser personally,
 accept `dispatch_mode=CALLER_DIRECT`, `operator_thread_id=source_thread_id`, and the
 exact `owner_execution_instruction`. No singleton dispatch occurs. The caller follows
 this same transport lifecycle. When executor and parent are the same task, archive and record local completion without sending a message to itself; forward direction science to the DM. Otherwise return the usual parent receipt. This exception changes the executor, not the provider model or decision node.
 
-For explicit attachment fallback, noncanonical uploads or legacy request/outbox recovery,
+For explicit attachment fallback,
 read [attachment-compatibility.md](references/attachment-compatibility.md) before acting.
 Normal GitHub delivery uses the exact short prompt and canonical routing above. A missing
 canonical source/parent ID or forbidden legacy fallback routing field is rejected; never
@@ -91,22 +89,9 @@ Reject missing/ambiguous content, unknown direction IDs, relative upload paths, 
 missing/duplicate reference files. Validate the single `direction_id` against both
 Portfolio and `DIRECTION.md` for EM nodes; for Portfolio validate every
 `direction_ids` member. Do not choose a scope or rewrite the supplied prompt. For new handoffs use
-`scripts/validate_request.py` before page actions. Adopted handoffs retain their original
-validation evidence and immutable prompt/routing bytes: check those against the documented
-owner handover, expected fixed TASK, original parent and exact conversation/message identity.
-Do not force a retired operator ID through the current new-endpoint check or rerender an
-accepted request. Missing or contradictory acceptance evidence requires reconciliation
-before Send, not a new prompt or invented validation receipt.
-
-Executor migration and prompt preservation are separate. A retired `operator_thread_id`
-inside an adopted HANDOFF is historical evidence, never a destination for dispatch,
-browser recovery, observation or completion work. Root performs those actions locally
-using the recorded `execution_thread_id`; the original parent remains the receipt
-destination. The retired session may return already recorded facts, but is not resumed
-as the operator. An uncertain app dispatch is reconciled before any second dispatch.
-The current renderer applies to newly authored requests. Preserve an already accepted
-request's original prompt even if it predates a wording update; first-send recovery
-does not authorize silently replacing that prompt or appending the new instructions.
+`scripts/validate_request.py` before page actions. Missing or contradictory acceptance
+evidence requires reconciliation before Send. Use the current renderer for new requests;
+preserve accepted prompts and validation evidence without regenerating them.
 
 Persist the registry described in [references/state-schema.md](references/state-schema.md).
 It is a one-to-one map from `conversation_binding_key` to provider conversation ID.
@@ -258,8 +243,7 @@ archive verification.
 
 When actual executor equals parent, use `stage_receipt` / `stage_blocker_receipt` to record
 `routing_mode=LOCAL`, `status=LOCAL`, `required=false` and zero app-message attempts;
-never send the receipt to Root itself. For an adopted handoff, `execution_thread_id` identifies
-the new executor while original `operator_thread_id` remains historical. Root then forwards
+never send the receipt to Root itself. `execution_thread_id` identifies the actual executor. Root then forwards
 the scientific work to its native DM without redoing the intake. The local record is not a
 claim of remote delivery. Other parent routes retain the procedure below.
 

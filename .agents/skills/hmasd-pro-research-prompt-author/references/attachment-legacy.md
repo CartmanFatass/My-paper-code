@@ -1,11 +1,7 @@
-# Legacy attachment mode only
+# Explicit attachment fallback
 
-Retained for accepted in-flight packets and explicitly recorded capability fallback.
-All default/sole-attachment wording below applies only within this legacy mode.
-Legacy delivery mode does not restore the retired executor: every reference below
-to the reusable Transport task means the current integrated Root endpoint. Adopted
-handoffs retain their historical operator ID and prompt as evidence, while Root
-records its actual execution ID and operates locally under ROOT_OPERATIONS.md.
+Use only for an explicitly recorded attachment fallback. All attachment instructions
+below apply within that mode. Root executes transport under ROOT_OPERATIONS.md.
 
 # HMASD Pro Research Prompt Author
 
@@ -307,7 +303,7 @@ absolute path after handoff); it must not declare or upload a reference attachme
 
 In the default route, the author performs the single Codex task dispatch in the closed sequence but
 does not send to Pro or operate browser, connector, or conversation state. If
-the Transport task reports a blocker, preserve the packet and
+Root reports a transport blocker, preserve the packet and
 report the blocker; do not "repair" it by changing the scientific body or
 falling back to code review/AMA. A caller clarification is a pre-dispatch input
 question, not permission to change the Pro research task into an AMA; once answered,
@@ -320,7 +316,7 @@ an invalid `source_thread_id` or `parent_thread_id`, a
 caller/workflow mismatch, unknown direction scope, unpinned/mismatched repository
 ref, or duplicate/unlisted paths. Missing or genuinely ambiguous
 required fields use the single consolidated caller clarification instead. A
-connector-inaccessible evidence report belongs to the reusable Transport task and
+connector-inaccessible evidence report belongs to Root and
 must not become an author-side blocker. Red flags are:
 
 - inventing or normalizing `direction_id`;
@@ -331,7 +327,7 @@ must not become an author-side blocker. Red flags are:
 - copying full files into the body;
 - turning the task into code review, implementation, debugging, or AMA;
 - sending to Pro directly without an owner-directed `CALLER_DIRECT` handoff, calling `create_thread`, or
-  dispatching to any task other than the configured singleton;
+  dispatching to any task other than the configured Root;
 - dropping claim ceilings, provenance, or the exact requested deliverable.
 - treating an incomplete/blocked Pro response as a final decision or overriding
   a complete Pro decision locally.

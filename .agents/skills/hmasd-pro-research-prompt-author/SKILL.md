@@ -5,10 +5,9 @@ description: "Use when a DM or Portfolio authors an HMASD Pro research question 
 
 # HMASD Pro Research Prompt Author
 
-OWNER_DIRECT 2026-09-05: the owner requests overall migration now. All newly authored
-Portfolio and EM requests use GitHub delivery. No VNFC-first or additional Pro review
-condition remains. Existing accepted requests finish in their original mode; never
-resend a request to migrate it. See docs/project/GITHUB_RESEARCH_COLLABORATION.md.
+Portfolio and EM requests use GitHub delivery. Preserve accepted request content
+and reconcile existing Send state before continuation.
+See docs/project/GITHUB_RESEARCH_COLLABORATION.md.
 
 ## Author and dispatch
 
@@ -49,7 +48,7 @@ The DM or independent Portfolio directly reads and preserves the complete bytes 
 provenance, then performs existing scientific intake. Root handles transport and routes
 native DM receipts locally; Portfolio requests name the actual Portfolio task as parent.
 The integrated Root's shared heartbeat observes all current requests without per-request
-automations. Read docs/project/ROOT_OPERATIONS.md for routing and owner-approved migration. Contradictions or evidence gaps remain explicit; a complete
+automations. Read docs/project/ROOT_OPERATIONS.md for current routing. Contradictions or evidence gaps remain explicit; a complete
 archive alone is not science acceptance. No new approval or experiment gate is added.
 
 ### Scientific question and burden
@@ -83,6 +82,5 @@ matching file/comment, preserve conflicts, read actual state before uncertain re
 Repeated receipt means read the existing intake, not repeat science or writes.
 Only an explicit `delivery_mode=archive_attachment` with a nonempty `fallback_reason`
 may render a new attachment packet when scoped delivery is unavailable. Read
-[attachment-legacy.md](references/attachment-legacy.md) only for that route or an
-already accepted legacy request. Fallback is per request and recorded, not migration
-reversal. Do not re-render accepted requests. Do not demand workflow Pro review.
+[attachment-legacy.md](references/attachment-legacy.md) only for attachment delivery.
+Record the fallback per request. Do not re-render accepted requests.

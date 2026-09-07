@@ -1,10 +1,9 @@
 # Integrated Root and independent Portfolio
 
-OWNER_DIRECT 2026-09-06: Root uses `gpt-5.6-luna` / `xhigh` and absorbs experiment
-Monitor and Pro Transport. Portfolio is a separate `gpt-6-astra` / `max` task,
+Root uses `gpt-5.6-luna` / `xhigh` and executes experiment observation and Pro
+Transport. Portfolio is a separate `gpt-6-astra` / `max` task,
 running directly on main at the owner's explicit request. DM/CM models and the
-scientific decision ladder are unchanged. See the migration record in
-`docs/research/portfolio/decisions/2026-09-06-root-luna-portfolio-separation.md`.
+scientific decision ladder remain as configured.
 
 ## Responsibilities and routing
 
@@ -40,15 +39,10 @@ or completion. An intentional owner-directed model migration is separate from re
 Portfolio receives its own Pro receipts via the declared parent ID. A DM using a native
 child ID as source still declares Root as app parent; Root forwards the local receipt.
 
-When recovering an adopted Pro request, execute Transport in this Root task. A historical
-HANDOFF naming the retired standalone Transport is not a dispatch instruction. Preserve
-its original bytes, record this Root as `execution_thread_id`, reconcile existing Send
-evidence, and continue locally. Ask the retired session only for facts already recorded;
-do not give it browser, Send, observation or archive work. Two app dispatch attempts are
-not evidence of two provider Sends; establish each accepted effect before continuing.
-An accepted request also retains its original prompt across renderer updates. New
-requests use the current renderer; changing an accepted prompt requires explicit scope
-resolution and never supplies permission to resend.
+Execute Pro transport and recovery locally in Root. Record the actual execution ID,
+reconcile existing Send evidence, and preserve accepted request content. New requests
+use the current renderer. Return completion to the declared parent, locally when it
+is Root and by message otherwise.
 
 ## Continuing work across Root and Portfolio boundaries
 
@@ -180,8 +174,3 @@ Skip a temporarily blocked candidate with its actual reason, keeping ACTIVE/life
 If no recorded candidate can run or new evidence can materially change investment, ask
 Portfolio for the next ordering while other admitted work continues. Root does not infer a
 priority/lifecycle disposition from a technical failure or scheduling convenience.
-
-Accepted legacy transport requests retain their original immutable handoff and Send facts.
-A documented ownership transfer changes only the executor/observation route. Preserve the
-old executor ID in original records and record Root's current execution ownership separately;
-do not rerender a historical prompt merely to make it pass the new endpoint config.

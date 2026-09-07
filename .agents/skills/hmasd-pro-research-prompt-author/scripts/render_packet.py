@@ -597,7 +597,7 @@ def bind_github_task(handoff_path: Path, sha: str, project_root: Path) -> dict:
         h["dispatch_instruction"] = (
             "Push the bound task commit first; dispatch once to the integrated Root "
             f"threadId={h['operator_thread_id']} with its explicit configured model/effort. "
-            "Root executes Transport locally; never forward this handoff to a retired Transport task. "
+            "Root executes the complete Transport lifecycle locally. "
             "Do not call create_thread or dispatch to yourself."
         )
     handoff_path.write_text(json.dumps(h, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
