@@ -1,0 +1,79 @@
+{
+  "unit": "caller-declared independent training run",
+  "inference": "descriptive only; no confidence interval or success classification",
+  "caller_interpretation": "One original paired learner training instance (seed402). LQ-EXCLUDE is a fixed reference on its indexed tapes, not an independent training run. The completion creates zero new independent training instances.",
+  "groups": [
+    {
+      "task": "SERVICE-ALLOCATION-B01",
+      "arm": "FACTOR",
+      "n": 1,
+      "mean": 0.7589111328125,
+      "sample_sd": null,
+      "min": 0.7589111328125,
+      "max": 0.7589111328125,
+      "runs": {
+        "402": 0.7589111328125
+      }
+    },
+    {
+      "task": "SERVICE-ALLOCATION-B01",
+      "arm": "GENERIC",
+      "n": 1,
+      "mean": 0.7524007161458333,
+      "sample_sd": null,
+      "min": 0.7524007161458333,
+      "max": 0.7524007161458333,
+      "runs": {
+        "402": 0.7524007161458333
+      }
+    },
+    {
+      "task": "SERVICE-ALLOCATION-B01",
+      "arm": "LQ-EXCLUDE",
+      "n": 1,
+      "mean": 0.7851969401041666,
+      "sample_sd": null,
+      "min": 0.7851969401041666,
+      "max": 0.7851969401041666,
+      "runs": {
+        "402": 0.7851969401041666
+      }
+    }
+  ],
+  "paired_differences": [
+    {
+      "task": "SERVICE-ALLOCATION-B01",
+      "arm": "FACTOR",
+      "baseline": "LQ-EXCLUDE",
+      "summary": {
+        "n": 1,
+        "mean": -0.02628580729166663,
+        "sample_sd": null,
+        "min": -0.02628580729166663,
+        "max": -0.02628580729166663
+      },
+      "differences": {
+        "402": -0.02628580729166663
+      },
+      "unmatched_arm_seeds": [],
+      "unmatched_baseline_seeds": []
+    },
+    {
+      "task": "SERVICE-ALLOCATION-B01",
+      "arm": "GENERIC",
+      "baseline": "LQ-EXCLUDE",
+      "summary": {
+        "n": 1,
+        "mean": -0.03279622395833337,
+        "sample_sd": null,
+        "min": -0.03279622395833337,
+        "max": -0.03279622395833337
+      },
+      "differences": {
+        "402": -0.03279622395833337
+      },
+      "unmatched_arm_seeds": [],
+      "unmatched_baseline_seeds": []
+    }
+  ]
+}

@@ -281,3 +281,30 @@ MEI-sized. The stationary known-partner host, limited fixed rule, initialization
 optimization alternatives remain. This is outcome-informed completion, not independent
 confirmation or stable superiority. K4 and the reactive family remain open; historical
 stopped/ended objects, recast count and Portfolio dispositions are unchanged.
+
+## Service-allocation B01: rule leads; object boundary reached — 2026-09-07
+
+The authorized outcome-informed completion now supplies the fixed-rule comparison
+([complete intake](VSPC1_K4_SERVICE_ALLOCATION_COMPLETION_INTAKE_20260907.md)). LQ-EXCLUDE
+J is 0.785196940, above FACTOR 0.758911133 and GENERIC 0.752400716 in both period means.
+FACTOR minus GENERIC stays +0.006510417, below the declared 0.025 MEI. FACTOR minus rule
+is −0.026285807 and GENERIC minus rule −0.032796224, corresponding to 2.5234375 and
+3.1484375 fewer completed jobs per episode. The rule also has less overflow and backlog.
+FACTOR's mean loss only narrowly crosses MEI; its conditional evaluation SE 0.001805490
+does not establish a resolved MEI-sized rule advantage. All curves and period outcomes stay.
+
+The small learner gain is the strongest surviving support for multiplicative conditioning.
+Both learners losing native service to the legal same-information rule is the strongest
+contradiction to practical usefulness here. The exclusion/longest-queue rule is the stronger
+observed comparator on this stationary known-partner host. Initialization,
+finite optimization and feature sharing in both networks remain causal alternatives.
+The recorded rule prediction is matched; this is still one paired training instance,
+with no new independent learner evidence, stable superiority, transfer or optimality claim.
+Tuned baseline/upper-reference headroom remains absent; the rule is an attained reference.
+
+The missing discriminator is resolved: neither saved learner improves on the fixed rule.
+Apply the card's no-practical-continuation row and stop this B01 at its object boundary;
+no additional evaluation, seed or similar-host search is selected. The original GENERIC
+publication failure and narrower intake remain historical facts. K4 and the reactive family
+remain open, older stopped/ended boundaries stand, and there is no B consumption, recast
+or Portfolio disposition. No next measurement is selected; Portfolio owns the next assignment.
