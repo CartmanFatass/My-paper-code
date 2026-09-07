@@ -5,9 +5,10 @@
 OWNER_DIRECT merger: existing Luna/xhigh Root directly observes experiments and transports Pro
 requests. Standalone Monitor and Transport have relinquished their current work. See
 `.codex/hmasd-monitor.toml`, `.codex/hmasd-transport.toml` and `docs/project/ROOT_OPERATIONS.md`.
-Current assigned live/unknown experiment handles: DISH
-`dish_b06_seed113_20260907_run01` on `wsl_4070` (source `373d18720`, supervisor running;
-admission passed and Root adoption ACK sent). UCOPE seeds6301/6302 are terminal and
+Current assigned live/unknown experiment handles: none. DISH
+`dish_b06_seed113_20260907_run01` on `wsl_4070` (source `373d18720`) exited 0 at
+`2026-09-07T12:58:50Z`; its complete technical evidence is integrated at main `33db0d860`
+and the handle is terminal. UCOPE seeds6301/6302 are terminal and
 handed directly to CM collection. `vspc1-reactive-b01-factor-run02` and
 `vspc1-reactive-b01-generic-run02` are terminal, technically accepted and fully intaken by the
 DM. The single Root heartbeat also covers the
@@ -36,16 +37,19 @@ next runnable recorded object is DISH B06 implementation preparation, which has 
 the existing DISH DM; it is not yet a result-bearing launch. No scientific polarity follows from
 the prior no-op or from an unpaired arm.
 
-DISH B06 implementation is now technically delivered and integrated at main `373d18720`: CM
-child `/root/dm_amx_dish_seed101/cm_am_dish_seed101` returned source `a3dac9149`, four focused
-checks and an independent review with no material finding. No B06 experiment launch is
-authorized or reported; DM scientific intake remains pending. Dispatch evidence is recorded in
-audit row118 and commit `2b09e9209`. On owner-resumed continuation 2026-09-07, Root sent a
-follow-up to the existing DISH DM `/root/dm_amx_dish_seed101`; it returned explicit launch
-assignment commit `63978a5e`, integrated at main `4219639ae`, binding source `373d18720`, remote
-admission, the remaining `1790s` cap and stdout/JSON collection. The assignment is prepared but
-not dispatched: no remote staging, admission or scientific invocation occurred, and B06 evidence
-remains absent.
+DISH B06 implementation is technically delivered from source `373d18720`; the sole selected
+invocation `dish_b06_seed113_20260907_run01` was staged on `wsl_4070`, passed admission, and
+completed with exit 0. CM evidence commit `cee3f222a6f7827449a245c237191ac66a0886fd` is
+integrated at main `33db0d860`: 16/16 primary rows, 16 finite updates, 65,536 transitions,
+512 steps, conservative complete chain 226.02 s within the 1,800 s cap, chain CPU 221.09 s,
+and scratch unmeasured. The observed `delta_exec=-77.5` and zero legal transfers in all 16
+evaluation rows remain technical facts for the DM's frozen-card scientific intake. No retry,
+second invocation or new scientific selection follows.
+
+CBSC SYSTEM-RUNTIME-A01 was accepted once as `cbsc-system-runtime-a01-20260907` and is now
+terminal PATH_INCOMPLETE: exit 124 after 626.74 s (the 598 s timeout plus 2 s grace did not
+meet the 600 s allocation), with no admission/install/import/summary/output artifact. CM
+record `e828f74ed` is integrated at main `bdf50af6a`; the DM owns the original technical intake.
 
 UCOPE B01 implementation is integrated at main `245047432` with CM technical acceptance
 `bd7e47a67`: the bounded source, synthetic coverage and one remote technical profile passed
@@ -76,7 +80,7 @@ B04 technical dependency into a bounded CM objective or precise missing decision
 issued P07-VSP03-PREP-01 to `/root/dm_amx_vsp03_next` for question/request preparation and
 P07-UCOPE-PREP-01 to `/root/dm_ucope_question_prep` for an independent post-NR-B proposal.
 P07-DISH-EXEC-01 separately dispatched the existing DISH CM for the one selected B06 invocation.
-These are the current five advancing native chains (DISH CM, VSPC1, CBSC, VSP03 and UCOPE);
+These were the five advancing native chains (DISH CM, VSPC1, CBSC, VSP03 and UCOPE);
 RCLE is closed at its transport boundary. No task adds a retry budget, new scientific conclusion
 or unrecorded result-bearing invocation. DISH CM first reported the exact remote
 `git fetch && worktree add` staging command exited `1` with an SSL connection timeout. The
@@ -84,7 +88,10 @@ Portfolio-directed VCS repair then staged bundle digest
 `d07f58612918c1684731232e3fb89ad74a025c19923b8248de17286dd73ee9da`, created the detached
 worktree at `/home/wu/hmasd-worktrees/dish-b06-seed113-20260907-run01`, and accepted handle
 `dish_b06_seed113_20260907_run01`. Same-node admission passed physical/effective
-`15665545216` bytes; the unique B06 invocation is running under the shared heartbeat.
+`15665545216` bytes; the unique B06 invocation then completed exit 0 and was collected at
+`33db0d860`. The CBSC runtime handle likewise reached its terminal PATH_INCOMPLETE record at
+`bdf50af6a`. No experiment handle remains live; the shared heartbeat remains active for the
+pending VSPC1 Pro observation and any other explicitly assigned work.
 
 ## Current Pro handover queue — 2026-09-06
 
@@ -98,6 +105,7 @@ HANDOFF bytes/operator IDs; Root's current execution task is
 | `2026-09-06-vsp03-shared-service-convergence-01`; `/root/dm_amx_vsp03_next` | `docs/research/candidates/vsp_03/pro_packets/20260906_shared_service_convergence/HANDOFF.json`; `6a9cbb9d-374c-83e8-b600-23d3a8033a69` | Terminal mismatch reconciliation complete. The bound conversation contains the prior B01 user/assistant pair; the scoped action log records no B02 provider Send, and the captured reply concerns DISH post-B05 (Issue #4), not VSP03 (Issue #6). Archived as `ARCHIVED_MISMATCH` with the read-only reconciliation; no Pro decision, resend, repair prompt or continuing observation remains. See `archive/continuation_20260907/` and `archive/blocker_20260906/`. |
 | `2026-09-06-rcle-post-b02-innovator-02`; `/root/dm_amx_rcle_a02` | `docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260906_post_b02_innovator/HANDOFF.json`; `6a9d9a3a-fd40-83e8-9e80-ad720582aaee` | Archived and intaken after the owner-approved 2026-09-06 reconciliation: delivery `6c0d1ca55` (Issue 8 comment `5564117795`), registry binding `em:roster_consistent_latent_exploration:innovator` now points to this request in `ARCHIVED`. The post-A02 dispatch is retained as stale history; it did not form a decision. No continuing observation, retry or launch remains. |
 | `2026-09-06-dish-post-b05-convergence-01`; `/root/dm_amx_dish_seed101` | `docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260906_post_b05_convergence/HANDOFF.json`; `6a9bec54-df00-83e8-9840-46440458f316` | One provider Send at 2026-09-06 22:26 PDT. Archived delivery commit `db0bbfd8e1d96b06e8c6e8aa9bfa70787fe9a9cd` (response SHA `cb1cf348…`), Issue 4 comment `5565621457`; local archive preserves the earlier no-tools chat claim and the later immutable GitHub readback. Root routed the complete response to the DM; no duplicate Send. |
+| `2026-09-07-vspc1-service-allocation-convergence-01`; `/root/dm_amx_vspc1_next` | `docs/research/candidates/vsp_c1/pro_packets/20260907_service_allocation_convergence/HANDOFF.json`; `6a9cfac6-4d34-83e8-9f0a-088c03f4fb0c` | Root-local CALLER_DIRECT sent the exact fixed task once at 2026-09-07 06:07 PDT after verifying the visible `6 Pro`, `Latest`, and `Pro, 5 of 5.` state. The task user node is visible in the bound conversation and the assistant is still in `Pro thinking`; no response or delivery archive is available yet. Observe the same conversation and never resend. |
 
 P07-VSP03-PREP-01 returned a reusable original-question disposition from
 `/root/dm_amx_vsp03_next`, integrated at `7bf95402e` (source `26cc80091`). The original coupled
