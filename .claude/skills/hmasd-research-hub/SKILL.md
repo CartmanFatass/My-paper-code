@@ -67,9 +67,10 @@ Subagents cannot spawn subagents, so the hub dispatches every specialist itself,
 ones a Codex CM would have spawned. When `hmasd-cm` asks for a scout, reviewer or verifier in its
 return, dispatch it and feed the result back with a follow-up message to the same CM agent.
 
-Implementer-class agents get `isolation: "worktree"` (a worktree under `.claude/worktrees/` on
-its own branch). Give each agent the exact worktree path, branch, owned paths, the commit rule
-(explicit pathspecs, runtime trailers, `scope:` line) and whether to push. The hub integrates by
+Implementer-class agents reuse the direction's designated branch/worktree under AGENTS section 6;
+do not request automatic per-agent worktree isolation. Give each agent that existing checkout,
+owned paths and the commit rule (explicit pathspecs, runtime trailers, `scope:` line, immediate
+push). Serialize overlapping edits and shared index operations. The hub integrates by
 cherry-pick into `main` (delegate the mechanical sequence to `hmasd-clerk`), then pushes.
 
 ## Decision ladder without Pro transport

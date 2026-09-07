@@ -42,8 +42,9 @@ slice only when independent parallel work or substantial context isolation benef
 for parallel delegation, retain useful independent work yourself. Use a semantic Implementer for
 delegated changes to probability, gradients, replay, recurrence, RNG, checkpoints, result identity,
 native execution or external effects; routine Implementer is only for behavior-preserving work.
-Each editing CM or Implementer uses its own worktree/branch under AGENTS.md section 6. Children
-own explicit paths; CM integrates and inspects the complete diff. Semantic risk determines the
+Reuse the direction's designated branch/worktree under AGENTS.md section 6. New assignments
+and children do not create branches. Name the existing checkout and owned paths; serialize
+overlapping edits and shared index operations. CM inspects the complete diff. Semantic risk determines the
 independent review needed, not whether implementation must be delegated.
 
 Apply AGENTS delegation-cost guidance: keep short commands/small clear edits local; give Luna a
