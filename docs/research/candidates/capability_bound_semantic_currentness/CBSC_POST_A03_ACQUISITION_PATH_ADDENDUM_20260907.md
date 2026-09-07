@@ -79,9 +79,10 @@ probe or integrity proof is imposed as an A/B launch gate.
 Proposed handle `cbsc-post-a03-acquisition-proposal-20260907`, node wsl_4070,
 existing agent-task direct-command route. Proposed detached source worktree
 `/home/wu/hmasd-worktrees/cbsc-post-a03-acquisition-proposal-20260907` uses already integrated `ec8866b3968fcb1566976ce405d7c552d4d9a5de`
-for the unchanged resource preflight; that SHA is emitted as launch source metadata.
-The literal payload below is carried by this addendum and would be frozen with
-any future selection. Proposed paths name no allocated object, and none was created.
+for the unchanged resource preflight; that SHA is emitted only as `preflight_source_sha`.
+The literal payload below is new in this addendum. Any future selection must
+separately bind this exact committed addendum/payload as its command source; the
+preflight SHA does not identify that command source. Proposed paths name no allocated object, and none was created.
 A later selection must explicitly commission this command and the existing Root
 integration/admission/observation route. No launch follows this push.
 
@@ -142,7 +143,7 @@ expected = {'"'"'filelock'"'"': '"'"'3.32.5'"'"',
  '"'"'typing-extensions'"'"': '"'"'4.16.0'"'"'}
 versions = {name: md.version(name) for name in expected}
 result = {
-    "object": "CBSC-POST-A03-ACQUISITION-PROPOSAL", "launch_sha": sys.argv[2],
+    "object": "CBSC-POST-A03-ACQUISITION-PROPOSAL", "preflight_source_sha": sys.argv[2],
     "executable": sys.executable, "resolved_executable": str(Path(sys.executable).resolve()),
     "base_executable": sys._base_executable, "prefix": sys.prefix,
     "base_prefix": sys.base_prefix, "version": sys.version,
@@ -173,8 +174,9 @@ PY_META
 ```
 
 The metadata code preserves the accepted A03 checks for systemCPython3.12.3,
-all23versions, NumPy/Torch paths and CUDA11.8, changing only the descriptive
-proposal object label. metadata_matches is never a substitute for actual complete
+all23versions, NumPy/Torch paths and CUDA11.8, changing the descriptive
+proposal object label and naming the unchanged preflight revision
+`preflight_source_sha`, rather than claiming it identifies the new command. metadata_matches is never a substitute for actual complete
 wall and publication. No tensor, device test, host, model, scientific RNG,
 optimizer, learner or evaluator call is present. Body failure ends the command;
 there is no follow-on acquisition or install after a failed sequential step.
