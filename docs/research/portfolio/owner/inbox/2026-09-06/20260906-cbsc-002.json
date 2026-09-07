@@ -83,5 +83,15 @@
     "verdict_text": "选择打开一个不同的、有限的真实学习问题：开展 CBSC-OPPORTUNITY-CREDIT-B04，用新 seed 21217 的一组 RAW/STRUCT 配对训练，统一采用“本次所选动作的决策加结算实得回报”及对应的 decision-only value 监督。",
     "source": "docs/research/candidates/capability_bound_semantic_currentness/pro_packets/20260906_opportunity_credit_convergence/archive/RESPONSE.md"
   },
-  "starred": false
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-07T04:42:23+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/capability_bound_semantic_currentness/pro_packets/20260906_opportunity_credit_convergence/archive/RESPONSE.md",
+      "record": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_OPPORTUNITY_CREDIT_B04_INTAKE_20260906.md",
+      "state": "applied",
+      "summary": "The selected check and both formal calls were executed. RAW completed at12.0375 versus public REQUEST_ONLY12.375; STRUCT stopped before model creation, so the formal pair is incomplete. All handles terminal; no retry or new diagnosis selected. Applied records execution of the accepted card, not acceptance of a paired result."
+    }
+  ]
 }
