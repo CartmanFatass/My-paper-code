@@ -822,11 +822,12 @@ class SemanticRNG:
         "draw_index",
     )
 
-    def __init__(self, authority: ProductionAuthority, block_index: int, *, now: datetime):
+    def __init__(self, authority: ProductionAuthority, block_index: int, *, now: datetime, arm_only_domain: str | None = None):
         authority.require_active(now=now)
         self._authority = authority
         self.synthetic_test_only = False
         self.block_index = block_index
+        self.arm_only_domain = arm_only_domain
         self._key = bytes.fromhex(authority.block_root_digest(block_index))
         self._native_binding = bind_native_backend()
         frozen_native = authority.certificate.get("native")
@@ -856,6 +857,8 @@ class SemanticRNG:
         """Evaluate a nonempty exact address batch through the C++ hot path."""
 
         rows = tuple(addresses)
+        if self.arm_only_domain is not None:
+            rows = tuple({**row, "arm_only_variable": self.arm_only_domain if row["arm_only_variable"] else ""} for row in rows)
         for address in rows:
             if set(address) != set(self._FIELDS):
                 raise EmpiricalRunnerError("semantic RNG address inventory differs")
@@ -961,6 +964,7 @@ class SyntheticTestRNG(SemanticRNG):
             raise EmpiricalRunnerError("unknown synthetic runner fixture identity")
         self._authority = None
         self.synthetic_test_only = True
+        self.arm_only_domain = None
         self.block_index = 0
         self._key = hashlib.sha256(label.encode("ascii")).digest()
         self._native_binding = bind_native_backend()
@@ -1841,6 +1845,7 @@ def execute_learned_batch(
     coordinates: Sequence[EpisodeCoordinate],
     *,
     training: bool,
+    claim_observer=None,
 ) -> tuple[LearnedEpisodeResult, ...]:
     """Execute one exact native B8 cell batch with masked batched model calls."""
 
@@ -1873,6 +1878,8 @@ def execute_learned_batch(
             if any(claim_lanes):
                 if not all(claim_lanes):
                     raise EmpiricalRunnerError("native claim lifecycle diverged across B8 lanes")
+                if claim_observer is not None:
+                    claim_observer(coords, snapshots, lane_plans)
                 actions = _draw_claims_batch(
                     model, arm, rng, coords, snapshots, lane_plans
                 )
