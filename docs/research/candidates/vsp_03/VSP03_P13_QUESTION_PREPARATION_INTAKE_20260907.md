@@ -165,7 +165,7 @@ separate cost experiment or diagnostic chain is added to answer this disposition
 
 ## 5. Owner and engineering boundary
 
-At the preparation boundary, `python tools/owner_console/item.py reviews --json`
+At the preparation and publication boundaries, `python tools/owner_console/item.py reviews --json`
 returned `[]`; the current VSP03 audit owner columns were empty. There was no
 new owner prediction reply to score; the existing low-confidence
 `abs(final greedy T−G)<=0.02` prediction remains matched, and the owner slot
@@ -192,11 +192,19 @@ delivery context. No comment or Issue body is a new scientific source.
 The Prompt Author artifacts are [REQUEST.json](pro_packets/20260907_b02_post_result_convergence/REQUEST.json),
 [TASK.md](pro_packets/20260907_b02_post_result_convergence/TASK.md) and
 [HANDOFF.json](pro_packets/20260907_b02_post_result_convergence/HANDOFF.json).
-TASK is committed/pushed before its full SHA is bound; the resulting exact task
-URL and handoff commit are returned to Root. The generator's technical readiness
-field does not override P13's preparation-only scope.
+TASK was committed and pushed at
+`71cde28c2bfba0c367be0e0451d0855399ca538d` before the renderer bound its full SHA.
+The [fixed TASK](https://github.com/CartmanFatass/My-paper-code/blob/71cde28c2bfba0c367be0e0451d0855399ca538d/docs/research/candidates/vsp_03/pro_packets/20260907_b02_post_result_convergence/TASK.md)
+was then read back through GitHub: 22789 bytes, blob
+`ff1b5781424ee4d1826e2f6b1acc7478daa1efb1`, matching the committed object.
+All 14 declared reference paths exist at the pinned input, and the prior accepted
+response blob at that input matches its immutable original. JSON/render checks
+and the scoped whitespace check passed; no research suite was needed or run.
+The bound handoff commit is returned to Root. The generator's
+`READY_TO_DISPATCH` field reports technical readiness only and does not override
+P13's preparation-only scope: **no Send has been requested or performed**.
 
-Root explicitly supplied source/creator as the current native DM task
+As Root instructed, source/creator uses the current native DM runtime ID
 `01a07de2-16c3-75d0-a050-7c1211323188` and parent/receipt destination as
 `01a07249-b095-7821-8ce2-e9c32ba85267`; future scientific intake returns to this
 DM through native Root collaboration. The historical provider conversation is
