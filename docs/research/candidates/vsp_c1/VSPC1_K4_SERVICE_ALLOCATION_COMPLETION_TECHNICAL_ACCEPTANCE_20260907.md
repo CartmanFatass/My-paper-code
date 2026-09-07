@@ -115,3 +115,16 @@ Accepted source/test commit: **0cd770070675b2be291c8eb37aa57e1f092f5fe2**, immed
 pushed to origin/codex/direction-vsp_c1. Git reports83 additions/4 deletions including tests;
 non-test totals remain74 additions/1 deletion. The technical record is committed separately
 on its descendant. No source changes followed independent review or the final ordering read.
+
+## DM acceptance and pending Root integration
+
+DM read the actual source/fixture diff and this technical record, accepted conformance to
+the scoped amendment, and returned source0cd770070675b2be291c8eb37aa57e1f092f5fe2 and
+technical82daf1b2ebcc78c6ad0581bbda5dfb6239468051 for Root integration. No checks were rerun.
+Root then reported that its cherry-pick failed before mutation because Git could not create
+`C:/Projects/HMASD/.git/index.lock`: `Permission denied`; main remained70b419a2b.
+This is an attributed repository-operation fact, not an independently established root cause
+or scientific result. Both accepted commits are preserved on the direction branch.
+P08's sole rule completion remains unissued pending the named integration dependency;
+no rule/model/host/RNG execution, new admission or extra fixture followed. Root routes the
+repository blocker to Portfolio; the original incomplete scientific history is unchanged.
