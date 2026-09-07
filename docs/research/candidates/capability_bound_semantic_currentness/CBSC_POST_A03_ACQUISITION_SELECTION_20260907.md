@@ -98,3 +98,41 @@ DM will inspect the actual returned handoff and binding, retaining scientific
 acceptance here. Root integrates the named accepted paths and records the chain
 boundary. The next discriminator remains the complete-body/install/import outcome
 of this exact selected path **if separately released**; current exposure is zero.
+
+## Actual CM return, DM acceptance and clean boundary
+
+The same CM completed the bounded follow-up on this shared checkout and pushed
+only [the Root handoff](CBSC_POST_A03_ACQUISITION_ROOT_HANDOFF_20260907.md) at
+**b66ccb34475228e1779f68a775fa7c71fc992dbe**, returning tracked-clean editing/index
+ownership. DM read that entire actual artifact and its sole-path commit against
+the card and P10 rule. It retains the exact7226-byte LF command, separate full
+payload/preflight SHAs, fixed remote paths and existing supervisor submission.
+The delivery recipe obtains the committed Git blob as bytes and uses one quoted
+remote command argument, preserving the literal across the Windows control plane.
+
+CM reports local Git Bash syntax exit0, zero CR bytes, identity of the copied
+fence to the source fence and a successful remote-argv quoting round-trip. The
+earlier embedded Python parse was reused. DM inspected the affected extraction,
+quoting and source bindings without repeating CM's checks. No network, remote
+source staging, admission, venv creation, acquisition, installation, import or
+result invocation occurred. No source or runner was added; the handoff contains
+the existing literal and a delivery recipe. No section4 machinery or section5
+budget breach was observed in this preparation.
+
+**Technical object decision:** (a) accept the exact command handoff at preparation
+ceiling and return it; (b) return a concrete delivery/binding defect for correction.
+Recommend/select **(a)**: no such gap is present in the inspected artifact.
+Owner-delegated decision (unattended, 2026-09-03 instruction): (a).
+The technical row is appended to today's audit; owner flag:none. Final current
+owner reviews again returned `[]`, with no relevant audit owner override.
+
+The P10 deliverable is complete. No candidate readiness result, scientific
+polarity, new valid-result brief, successor run, pending Pro request or lifecycle
+change follows. A02's canonical-host failure and all old partial state remain the
+strongest practical cautions; the complete runtime is still unknown. Root receives
+the card/selection/P2/audit commit0c09af0de, the handoff commit above and this final
+acceptance change. Input-sync9f67ae752 contains only already-main source documents
+and need not be integrated. Root records completion and the resulting chain
+vacancy; any actual candidate invocation requires a separate explicit execution
+assignment. This is the next authorization dependency, not an unresolved scientific
+choice for Root to make.
