@@ -102,4 +102,3 @@ Owner reviews at freeze returned []; owner prediction remains not taken.
 At this assignment freeze the new handle is **not yet accepted**; no new admission,
 model, rule, host, RNG, test or evaluation has occurred. CM appends actual acceptance and
 E0 technical return below; they replace prospective counts only when directly observed.
-
