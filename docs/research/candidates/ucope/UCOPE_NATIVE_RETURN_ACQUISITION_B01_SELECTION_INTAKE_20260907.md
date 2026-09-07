@@ -94,3 +94,20 @@ The console created P2 new-card item `20260907-ucope-001`; the `decision` and `p
 commands explicitly returned `skipped P3: owner maintains P1/P2 only`. Their selection and
 forecast therefore remain in the card/intake and audit rows, without inventing inbox items or
 owner replies. Audit: `docs/research/portfolio/audit/2026-09-07.md`, rows 5–7.
+
+## 6. Actual CM dispatch
+
+At `2026-09-07T00:16:02-07:00`, dispatch was confirmed: the native collaboration tool had accepted task
+`/root/dm_ucope_question_prep/cm_am_ucope_native_return_b01` (`hmasd-cm`); the subsequent agent
+snapshot reports it **running**. It received card/source commit
+`3520ccd2ce90e8aca3c7bec8e838e403d00068db`, already pushed on
+`codex/dm-ucope-native-return-b01-20260907`, and the five concise assignment items from card §6.
+The task owns only the new attempt/runner/tests and its technical acceptance note, in CM's own
+worktree. Implementation, focused engineering checks and independent affected-path review are
+dispatched. Technical acceptance is pending; no formal B handle, learner result, runtime claim
+or extra invocation is inferred from native task acceptance.
+
+Root has been sent the frozen-card commit for integration. DM receives CM's technical return
+and routes the actual evidence/remaining dependency back to Root; the selected formal seed
+batch is not part of this first CM task. The scientific decision is object-tier selection (a),
+not a direction-tier or Portfolio decision. No Pro request was sent.
