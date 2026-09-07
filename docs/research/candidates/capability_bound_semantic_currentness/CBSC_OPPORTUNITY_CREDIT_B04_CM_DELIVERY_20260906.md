@@ -33,7 +33,7 @@ accepts only public tokens. Publication retains each action and local contributi
 returns, targets/old values/advantages, losses/action counts and endpoint pairs.
 STRUCT uses RAW's fixed-rule records and checks matched source/random identities.
 
-Engineering-scope Ã‚Â§4 additions: **none**, as selected by the card's Single selected
+Engineering-scope Ãƒâ€šÃ‚Â§4 additions: **none**, as selected by the card's Single selected
 engineering check and scope. No old B1 exception is used. Ordinary source/runner
 budgets apply; mandatory publication/readback serves the primary measurement.
 Independent scientific review is complete (below); runtime evidence remains pending.
@@ -180,3 +180,15 @@ Preparation fact: bare remote Git networking hung before scientific launch.
 Only the identified B04 preparation process trees were stopped; using the declared
 `zsh -lic` network shell fetched source and prepared the exact detached worktree.
 This consumed no host/model/admission invocation. No local fallback was used.
+
+## Formal RAW accepted
+
+Handle `cbsc-b04-raw-20260906` accepted at2026-09-07T04:21:51Z,
+supervisor PID2616329, initial observed state running. Same integrated source,
+exact RAW argv/cwd and complete598s+2s grace plan above. Actual-node admission
+04:21:51.139416Z passed with15271149568bytes physical/effective available.
+The accepted handle was sent directly to the same global monitor. Engineering
+adoption ACK was received through Root with confirmed ACTIVE heartbeat;
+engineering terminal collection is already complete. RAW adoption is pending
+at this record boundary; CM still owns observation. No scientific RAW result
+is claimed before complete native publication/terminal collection.
