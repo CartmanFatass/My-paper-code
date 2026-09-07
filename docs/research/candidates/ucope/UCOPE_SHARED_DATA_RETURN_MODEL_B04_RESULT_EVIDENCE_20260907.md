@@ -24,7 +24,8 @@ This covers the affected post-learner publication path without a real-host smoke
 review by the reused `review_ah_ucope_b01` reviewer found no material finding against base `414cd77e5`.
 The reviewer inspected B04 synthetic training/update/evaluation artifacts and historical defaults/partial
 publication without rerunning tests or science. New test: 62 lines; source total 28 additions/4 deletions.
-No result-bearing invocation has been dispatched. Real-host performance and timing remain unmeasured.
+At source acceptance, no result-bearing invocation had been dispatched; real-host performance and
+timing were then unmeasured. The later terminal observations are recorded below.
 
 ## Cost and execution boundary
 
@@ -38,7 +39,7 @@ Each selected dataset has 131072 training and 98304 final evaluation episodes (2
 
 Remote-only `wsl_4070` / `hmasd-wsl-node`, CPU Python binary64, one scientific process/thread,
 `/home/wu/.venvs/hmasd/bin/python`; `.codex/hmasd-compute.toml` controls exact execution facts.
-Source will be integrated and pushed by Root before its integration acknowledgment and exact prelaunch
+The prospective plan required source integration and push by Root before its acknowledgment and exact prelaunch
 binding. Then exactly seed 6601 followed by 6602 after terminal reconciliation, irrespective of first
 valid score, with distinct handles/roots and fresh same-node admission. No local fallback, extra pilot,
 replay, retry or third seed. Root receives accepted handles; CM observes to adoption ACK or terminal
@@ -78,4 +79,125 @@ Exact remote supervisor command strings, recorded before either output:
 
 ## Terminal collection
 
-Pending; neither B04 invocation has been dispatched at this binding commit.
+Exactly seeds 6601 then 6602 were dispatched once each, after Root source integration acknowledgment.
+Both finished with exit code 0. Seed 6601 was terminal and its saved required outputs reconciled before
+seed 6602 started; the smaller first score did not change the selected second invocation. No pilot,
+replay, retry, extra evaluation or third seed occurred. Both summaries identify the bound source
+`71433bfabb70481def4329e622a838fa0cd9eeec`. CM sent Root accepted handles and followed both to terminal;
+no process remains live and no observation transfer/relaunch was needed.
+
+The two external complete-command walls are **4.71 s each, 9.42 s summed**, below each 600 s and the
+1200 s summed cap. First admission to second exit is about 70 s including intermediate control/collection;
+earlier integration/staging intervals are separate. Aggregate CPU and scratch peak are unmeasured.
+Raw runner summaries retain `resources_unmeasured`; the external whole wall/RSS measurements below
+supply those two quantities only. No optional resource gap changes this non-resource primary.
+
+### Seed 6601: COMPLETE, recorded branch RM-B
+
+Fresh admission `2026-09-07T19:07:43.844963Z`: physical/effective available **15653625856 / 15653625856 bytes**, both pass 4 GiB.
+External `whole_wall_seconds=4.71 peak_rss_kib=21088`; runner wall 4.6556750729796477 s.
+
+| Paired endpoint | Mean | Conditional MC SE |
+| --- | ---: | ---: |
+| delta_native | -0.00087353515624999552 | 0.00074464571821423466 |
+| delta_information | -0.00087353515624999552 | 0.00074464571821423466 |
+| blind_minus_immediate | 0 | 0 |
+
+| Phase/policy | Episodes | Transitions | Probe episodes | Committed period units | Probe time units |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| training | 131072 | 655360 | 65536 | 590774 | 131072 |
+| FULL | 32768 | 114688 | 8192 | 131984 | 16384 |
+| BLIND | 32768 | 65536 | 0 | 131072 | 0 |
+| IMMEDIATE-4 | 32768 | 65536 | 0 | 131072 | 0 |
+
+| Fitted component | Entries / occupied | Updates | Displacement L2 | Maximum movement |
+| --- | --- | ---: | ---: | ---: |
+| shared_immediate | 8 / 8 | 65536 | 2.2351955672363504 | 0.7954404296875015 |
+| full | 224 / 224 | 65536 | 9.9276804476287488 | 0.90412297734627833 |
+| blind | 32 / 32 | 65536 | 3.7207442767464158 | 0.75643365047571487 |
+
+Initial L2 is zero, first observation step is 1; histogram increments 65536, occupied bins 56. No finite relative movement ratio to zero is reported.
+
+| Policy | Mean return | Mean paid component | Probe frequency |
+| --- | ---: | ---: | ---: |
+| FULL | 0.79423120117187496 | -0.012384033203124999 | 0.25 |
+| BLIND | 0.79510473632812495 | 0 | 0 |
+| IMMEDIATE-4 | 0.79510473632812495 | 0 | 0 |
+
+All context outcomes, including losses, and final plans follow. BLIND and IMMEDIATE-4 coincide throughout, with no acquisition or paid component; their difference is zero, and native/information contrasts coincide. IMMEDIATE-4 always chooses period 4. FULL tails correspond to displayed counts 0 through 6; unexecuted tail plans remain plans only.
+
+| Context | FULL return | BLIND / IMMEDIATE-4 return | Native / information difference | FULL paid mean | FULL root / tails | BLIND root / tail |
+| --- | ---: | ---: | ---: | ---: | --- | --- |
+| LINKED-p13_20-c9_100 | 0.77618749999999992 | 0.79800390624999995 | -0.021816406250000003 | -0.049736328124999993 | PROBE / [6, 6, 6, 4, 2, 2, 2] | IMMEDIATE / 4 |
+| LINKED-p13_20-c7_50 | 0.79751562499999995 | 0.79751562499999995 | 0 | 0 | IMMEDIATE / [4, 6, 4, 4, 4, 2, 2] | IMMEDIATE / 4 |
+| LINKED-p17_20-c9_100 | 0.81380859375000003 | 0.79898046874999995 | 0.014828125000000039 | -0.049335937499999996 | PROBE / [6, 8, 6, 2, 2, 2, 2] | IMMEDIATE / 4 |
+| LINKED-p17_20-c7_50 | 0.79360937499999995 | 0.79360937499999995 | 0 | 0 | IMMEDIATE / [6, 8, 6, 4, 2, 2, 2] | IMMEDIATE / 4 |
+| SEVERED-p13_20-c9_100 | 0.79409765624999995 | 0.79409765624999995 | 0 | 0 | IMMEDIATE / [6, 4, 4, 2, 4, 4, 6] | IMMEDIATE / 4 |
+| SEVERED-p13_20-c7_50 | 0.79067968749999995 | 0.79067968749999995 | 0 | 0 | IMMEDIATE / [4, 4, 4, 4, 6, 4, 6] | IMMEDIATE / 4 |
+| SEVERED-p17_20-c9_100 | 0.79507421874999995 | 0.79507421874999995 | 0 | 0 | IMMEDIATE / [4, 4, 4, 4, 6, 4, 6] | IMMEDIATE / 4 |
+| SEVERED-p17_20-c7_50 | 0.79287695312499995 | 0.79287695312499995 | 0 | 0 | IMMEDIATE / [4, 4, 4, 6, 4, 4, 4] | IMMEDIATE / 4 |
+
+### Seed 6602: COMPLETE, recorded branch RM-A
+
+Fresh admission `2026-09-07T19:08:49.160077Z`: physical/effective available **15668584448 / 15668584448 bytes**, both pass 4 GiB.
+External `whole_wall_seconds=4.71 peak_rss_kib=20856`; runner wall 4.6286776349879801 s.
+
+| Paired endpoint | Mean | Conditional MC SE |
+| --- | ---: | ---: |
+| delta_native | 0.0029493001302083339 | 0.00056417739281877741 |
+| delta_information | 0.0029493001302083339 | 0.00056417739281877741 |
+| blind_minus_immediate | 0 | 0 |
+
+| Phase/policy | Episodes | Transitions | Probe episodes | Committed period units | Probe time units |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| training | 131072 | 655360 | 65536 | 589958 | 131072 |
+| FULL | 32768 | 90112 | 4096 | 130932 | 8192 |
+| BLIND | 32768 | 65536 | 0 | 131072 | 0 |
+| IMMEDIATE-4 | 32768 | 65536 | 0 | 131072 | 0 |
+
+| Fitted component | Entries / occupied | Updates | Displacement L2 | Maximum movement |
+| --- | --- | ---: | ---: | ---: |
+| shared_immediate | 8 / 8 | 65536 | 2.2529880157051223 | 0.80606054687500328 |
+| full | 224 / 224 | 65536 | 9.9367973315066429 | 0.92528753180661605 |
+| blind | 32 / 32 | 65536 | 3.7145716417218666 | 0.75817934871543036 |
+
+Initial L2 is zero, first observation step is 1; histogram increments 65536, occupied bins 56. No finite relative movement ratio to zero is reported.
+
+| Policy | Mean return | Mean paid component | Probe frequency |
+| --- | ---: | ---: | ---: |
+| FULL | 0.79677229817708328 | -0.006362711588541666 | 0.125 |
+| BLIND | 0.79382299804687495 | 0 | 0 |
+| IMMEDIATE-4 | 0.79382299804687495 | 0 | 0 |
+
+All context outcomes, including losses, and final plans follow. BLIND and IMMEDIATE-4 coincide throughout, with no acquisition or paid component; their difference is zero, and native/information contrasts coincide. IMMEDIATE-4 always chooses period 4. FULL tails correspond to displayed counts 0 through 6; unexecuted tail plans remain plans only.
+
+| Context | FULL return | BLIND / IMMEDIATE-4 return | Native / information difference | FULL paid mean | FULL root / tails | BLIND root / tail |
+| --- | ---: | ---: | ---: | ---: | --- | --- |
+| LINKED-p13_20-c9_100 | 0.79556249999999995 | 0.79556249999999995 | 0 | 0 | IMMEDIATE / [6, 6, 6, 4, 2, 2, 2] | IMMEDIATE / 4 |
+| LINKED-p13_20-c7_50 | 0.79531835937499995 | 0.79531835937499995 | 0 | 0 | IMMEDIATE / [6, 8, 6, 4, 4, 2, 2] | IMMEDIATE / 4 |
+| LINKED-p17_20-c9_100 | 0.80304361979166661 | 0.77944921874999995 | 0.023594401041666671 | -0.050901692708333328 | PROBE / [6, 6, 6, 2, 2, 2, 2] | IMMEDIATE / 4 |
+| LINKED-p17_20-c7_50 | 0.79434179687499995 | 0.79434179687499995 | 0 | 0 | IMMEDIATE / [6, 8, 8, 4, 2, 2, 2] | IMMEDIATE / 4 |
+| SEVERED-p13_20-c9_100 | 0.79678320312499995 | 0.79678320312499995 | 0 | 0 | IMMEDIATE / [6, 4, 4, 4, 4, 4, 4] | IMMEDIATE / 4 |
+| SEVERED-p13_20-c7_50 | 0.79824804687499995 | 0.79824804687499995 | 0 | 0 | IMMEDIATE / [4, 4, 4, 4, 4, 4, 4] | IMMEDIATE / 4 |
+| SEVERED-p17_20-c9_100 | 0.79287695312499995 | 0.79287695312499995 | 0 | 0 | IMMEDIATE / [2, 4, 4, 4, 4, 4, 4] | IMMEDIATE / 4 |
+| SEVERED-p17_20-c7_50 | 0.79800390624999995 | 0.79800390624999995 | 0 | 0 | IMMEDIATE / [4, 4, 4, 2, 4, 4, 4] | IMMEDIATE / 4 |
+
+## Technical acceptance and next owner
+
+CM parsed existing JSON only: exact seed/object/source, terminal exit, fresh admission, selected batch/cost
+and evaluation counts, full row/update/histogram totals, finite 264-value inventory, complete eight-context
+three-policy endpoint coverage, and paired aggregate means/SE from saved context moments agree. Each dataset
+has 229376 total episodes and 196608 scalar updates; no source or endpoint was changed after output.
+Both required datasets are technically complete. These checks establish conformance, not a scientific
+explanation or stable superiority. DM owns the two-seed average, sample SD, conditional MC SE, branch,
+prediction scoring and comparison with retained prior evidence; B02/B03 are excluded from this primary.
+
+Original outputs remain under `/home/wu/hmasd-worktrees/ucope-shared-return-b04-20260907/temp/directions/ucope/exp/shared-data-return-b04-seed<seed>/`.
+Local collection is `C:/Projects/HMASD-worktrees/dm-ucope-native-return-prep-20260906/temp/directions/ucope/exp/shared-data-return-b04-seed<seed>/`.
+Each root retains `summary.json`, `resource_admission.json`, full combined `supervisor.log`, authoritative
+`status.json` and verbatim `whole_time.txt`. Summaries preserve complete fitted values/counts, plans,
+context moments and costs. Original supervisor records remain in `/home/wu/.agent-tasks/<handle>/`.
+
+No live process or technical dependency remains. Root integrates the prospective binding and collection
+before original DM joint scientific intake/Chinese brief. CM returns shared checkout writer ownership
+to DM at delivery. No additional invocation is authorized by this evidence.
