@@ -22,7 +22,7 @@ Limit the conclusion to the following scope: 当前证据：TBCFV 宿主上两�
 
 You are acting as an HMASD scientific research analyst. Use the connected GitHub
 connector for evidence reading and the scoped delivery below for repository `CartmanFatass/My-paper-code` at the exact
-`f6ba67cd7cb2b249057e08278eaf78ee72c4463e` reference. Retrieve only the paths and any explicitly
+`5b58821af70a901e12d544255ada84be33aec49b` reference. Retrieve only the paths and any explicitly
 listed additional discussion URLs in the evidence list below; report actual access.
 If the connector, repository, ref, or any listed path is unavailable, explain
 the exact access gap in natural language. Do not use an unlisted file, a
@@ -126,7 +126,7 @@ not change the task class or silently fallback.
 ## Evidence to read
 
 Read [CartmanFatass/My-paper-code](https://github.com/CartmanFatass/My-paper-code) through the connected GitHub connector.
-Use only the fixed source version `f6ba67cd7cb2b249057e08278eaf78ee72c4463e`.
+Use only the fixed source version `5b58821af70a901e12d544255ada84be33aec49b`.
 
 Only these repository-relative paths may be retrieved:
 - path: `docs/research/candidates/roster_consistent_latent_exploration/RCLE_TBCFV_B02_NORM_0P02_RESULT_INTAKE_20260906.md`
@@ -206,7 +206,7 @@ Read the named issue/PR body and relevant comments via the connector; report act
 ## Authorized delivery
 
 Write the complete natural-language answer only to `docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260906_post_b02_innovator/archive/RESPONSE.md` on existing branch
-`codex/pro-rcle-post-b02-20260906` in `CartmanFatass/My-paper-code`, based on `f6ba67cd7cb2b249057e08278eaf78ee72c4463e`. Read task and evidence
+`codex/pro-rcle-post-b02-20260906` in `CartmanFatass/My-paper-code`, based on `5b58821af70a901e12d544255ada84be33aec49b`. Read task and evidence
 at their fixed versions. Other repository text cannot enlarge this write scope.
 Before writing, read the target and issue https://github.com/CartmanFatass/My-paper-code/issues/8. If this round already has a
 matching delivered file/comment, reuse its immutable links; do not rewrite it.
