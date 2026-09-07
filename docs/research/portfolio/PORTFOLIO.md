@@ -1,6 +1,19 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-07 (P08 completed returns and P09 continuation)
+Updated at: 2026-09-07 (P10 goal-driven five-task batch prepared; dispatch unconfirmed)
+
+Current plan: [P10 exact commands](handoffs/2026-09-07-p10-goal-five-directions.md) targets
+VSP03 repair, UCOPE pair preparation, CBSC path selection, RCLE request reconciliation and
+VSPC1 next-question preparation. These commands supersede the P09 execution snapshot below
+only within their named boundaries. Latest received returns confirm no active slot; this is
+not a fresh runtime census. Root must establish actual accepted recipients and states.
+Count active native work, accepted running experiments and accepted Pro generation once per
+direction, targeting five until two directions formally enter UAV validation. Prepared commands,
+completed returns and unresolved transport waits do not count. P10 defines goal-accounting
+references and preserves existing scientific decision authority; no universal numerical UAV
+threshold or new A/B gate is introduced.
+
+## Previous P09 execution snapshot
 
 Current execution: Root integrated UCOPE B03 and the accepted CBSC/VSPC1 engineering chains
 through `ec8866b39`, then executed the already-selected CBSC A03 metadata-readiness invocation
@@ -14,11 +27,11 @@ P09 authorizes one explicitly corrected-delivery request on the same shared dire
 RCLE's post-A02 response remains missing. The current command table and linked handoff below
 are the execution plan; earlier P07/P08 snapshots are historical evidence.
 
-Scientific Portfolio owner: Astra/max task `01a07a3e-29bf-7f52-bc1e-cfa214b8d94a`, directly
+Scientific Portfolio owner: Astra task `01a07a3e-29bf-7f52-bc1e-cfa214b8d94a` (effort selected by the owner), directly
 on main. Root is Luna/xhigh task `01a07249-b095-7821-8ce2-e9c32ba85267`: it dispatches bounded
 commands, integrates specified results and maintains actual observation/receipt facts in
-EXPERIMENT_TRACKING.md. DM retains delegated science and CM technical judgment. Root's existing
-shared heartbeat observes accepted experiment/Pro handles; no new automation or observer is added.
+EXPERIMENT_TRACKING.md. DM retains delegated science and CM technical judgment. Root's owner-driven
+goal includes observation of accepted experiment/Pro handles; no scheduled automation is used.
 Five advancing direction chains remain the target, measured by actual dispatch/return state.
 Pro reuses direction branches by default, with fixed input SHAs and scoped response writes.
 
@@ -92,7 +105,7 @@ results and family boundaries remain. See `decisions/2026-09-05-experiment-desig
 for exact coverage, initial VNFC cost decomposition and pending findings. Do not equate a cap
 multiple with a demonstrated cost-inflation ratio against a minimum adequate experiment.
 
-## Current Root commands — Portfolio planning
+## Previous P09 Root commands — superseded by P10 within named scope
 
 The [P09 continuation](handoffs/2026-09-07-p09-followup-and-delivery-correction.md) refills
 three returned chains, retaining two accepted P08 execution/intake routes. It supersedes
@@ -109,7 +122,8 @@ only named prior stops. No lifecycle, priority, historical result or extra retry
 
 New P09 rows are issued instructions; Root records actual native acceptance and advancing-chain
 count. Dispatch independent rows together, retain live work and report a yielded/completed chain
-for refill. External waits and completed children do not count. Current headroom records or
+for refill. Completed children and unresolved waits do not count; P10's owner-directed rule
+counts accepted Pro generation. Current headroom records or
 absence remain below: UCOPE and VSP03 N2 add no tuned headroom claim or prior-study prerequisite.
 The prior sequencing preference, direction priorities and lifecycles are unchanged. Original
 DM/CM records and exact handoffs control technical/scientific bounds; stale historical summaries
