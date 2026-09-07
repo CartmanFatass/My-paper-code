@@ -1,13 +1,14 @@
 ---
 name: hmasd-portfolio-task
-description: Use when the independent Portfolio session is comparing or changing HMASD direction priority, lifecycle, capacity, fusion, separation, or the next research investment.
+description: Use when the independent Portfolio session plans Root commands, handles execution returns, or compares HMASD direction priority, lifecycle, capacity, fusion, separation, or research investment.
 ---
 
 # HMASD Portfolio Decisions
 
 OWNER_DIRECT 2026-09-06: this skill belongs to the independent Astra/max Portfolio
-session in `.codex/hmasd-portfolio.toml`, directly on main. Luna/xhigh Root executes
-scheduling, integration, monitoring and Pro transport. See docs/project/ROOT_OPERATIONS.md.
+session in `.codex/hmasd-portfolio.toml`, directly on main. Portfolio plans concrete tasks,
+dependencies and return branches; Luna/xhigh Root executes the issued commands, integration,
+monitoring and Pro transport. See docs/project/ROOT_OPERATIONS.md.
 Portfolio writes its scientific files on main and pushes immediately; coordinate overlapping
 Root integrations. Existing Pro/owner authority is unchanged. Portfolio is not a launch gate.
 
@@ -60,57 +61,65 @@ Before investing or making a material lifecycle recommendation, Portfolio identi
   live choices; and
 - the contrary observation that would change the recommendation.
 
-Every `ACTIVE` direction remains admitted to the research queue. Root ordinarily schedules that
-queue through a target working set of five concurrently advancing top-level DM chains; choosing
-which admitted direction occupies a slot is sequencing, not a new lifecycle decision. Runtime
-availability and dependency ownership may change launch order, but Root must not silently turn
-scheduling into a priority, lifecycle, exclusion, fusion, separation, or investment decision. A
-queued `ACTIVE` direction is not `PARKED`.
+Every `ACTIVE` direction remains admitted to the research queue. Portfolio plans the target
+working set of five concurrently advancing direction/DM chains and names the tasks Root will
+dispatch. Root reports actual recipients, status and external facts. Portfolio decides readiness,
+ordering, replacement and the next action from the current evidence. This scheduling does not
+change lifecycle, priority, scientific meaning or experiment budgets. A queued direction is not
+`PARKED`; a waiting-only chain can yield its slot when Portfolio names other useful work.
 
-Execution placement is remote-first under `.codex/hmasd-compute.toml`. Route new portable
-result-bearing invocations to the enabled remote node while the local machine retains the control
-plane and acts as a prospectively authorized fallback. This is capacity routing, not evidence or a
-direction-priority signal. A node change must preserve the card's declared host/device semantics,
-must occur before question-relevant output, and requires a fresh admission on the destination.
+Execution remains remote-first under `.codex/hmasd-compute.toml` within the frozen host/device
+boundary. CM owns technical feasibility and exact execution bindings. Root does not invent an
+execution alternative or select another direction after a failed admission.
 
-## Direction execution working set
+## Plan before dispatch
 
-The target parallelism is five direction-level DM chains. Count neither Root nor Transport,
-CM/implementer/reviewer/critic/verifier/operator children, nor detached result processes as extra
-direction slots.
+Use `docs/project/ROOT_OPERATIONS.md`, "Portfolio prepares the command". For each proposed task,
+resolve the scientific/technical boundary with the current DM/CM evidence, select the exact
+recipient and deliverable, and state inputs, scope/budget/stop, return route and report conditions.
+Use the existing AGENTS five-item handoff and current card sections rather than duplicating them.
+Send an imperative command with concrete actions. Do not send Root an options list, an ambiguous
+"if useful" task, or an instruction to judge readiness or choose a substitute.
 
-Root directly observes accepted experiments and transports Pro requests through one shared
-heartbeat. Portfolio has no polling heartbeat and does not duplicate those observations.
-It reads returned evidence and tells Root the current runnable candidate order. A meaningful
-result, changed dependency, resource contention, owner instruction or exhausted candidate
-queue triggers a Portfolio update; ordinary object progression does not wait for one.
+A task needing judgment can itself be assigned to the proper DM/CM, with the question and desired
+return fixed. Portfolio owns the scheduling choice; DM retains object-tier decisions and proper
+Pro escalation, and CM retains engineering judgment. Portfolio does not replace their expertise
+or add a per-object approval round. Prewrite routine collection, intake and integration routes
+when known, so Root can execute them without another planning message.
 
-Apply `docs/project/ROOT_OPERATIONS.md`, "Continuing work across Root and Portfolio
-boundaries". On a Root evidence delta, refresh stale current rows from the named intake
-and return an actionable ordering: what can proceed now, its source and responsible DM,
-and the concrete release condition for blocked alternatives. Send that update to Root
-after committing/pushing; a file-only update does not wake execution. If Root's facts are
-incomplete, ask for only the missing delta while returning the usable part of the order.
-Existing object selections continue without waiting for this refresh. Separate a task's
-completed documentation boundary from a scientific stop; neither an ACTIVE label nor an
-empty experiment list establishes that five direction chains are advancing.
+Prepare the independent commands in a batch before sending them. Root dispatches all independent
+commands before waiting. State real dependencies explicitly and keep a preparation-only limit on
+its own task. When an already selected object has a complete launch assignment, issue that
+execution command under existing authorization; do not leave Root to infer whether preparation
+has become execution. A completed object's no-additional-invocation branch does not prohibit
+selecting a distinct useful question under the existing decision ladder.
 
-- Give Root an ordered list of runnable `ACTIVE` candidates. Root refills an open slot at a clean boundary from that order without another Portfolio consultation.
-  Compare decision relevance, the smallest sufficient evidence class, honest claim ceiling,
-  expected information gain, cost/reversibility, current dependency state, and contrary evidence.
-- Prefer real algorithm implementation and decision-relevant evidence over ceremony when the
-  claim does not require a stronger class. A direction waiting on a Direction- or Portfolio-tier
-  dependency yields its slot when another admitted direction can advance.
-- Do not interrupt live work to correct temporary overlap above five. Let chains reach clean
-  boundaries and do not refill until the working set returns to five.
-- Queue membership has no lifecycle or priority effect. Five is not a target count for `ACTIVE`
-  directions and does not authorize batch `PARK`, closure, fusion, or absorption.
-- Refilling a slot under this recorded owner policy is ordinary sequencing and does not itself
-  require a Portfolio Pro round. Any proposed priority, investment, lifecycle, fusion, separation,
-  or registration change still uses the Portfolio decision path.
-- Consider fusion only on demand, through the Portfolio decision path, after showing that question,
-  comparator, estimand, and next object are materially the same. Similar vocabulary, host, or
-  reusable baselines is insufficient.
+On each Root completion or exception report:
+
+- Read the original DM/CM return and only the relevant current evidence. Distinguish a missing
+  scientific decision, technical gap, unknown external acceptance and ordinary completed task.
+- Update the current Portfolio task/status rows and determine the next bounded command. Preserve
+  the actual request, experiment and scientific identity; a terminal old response may not answer
+  the current question.
+- Send the explicit continuation, replacement or named wait dependency to Root. Do not ask the
+  owner again for already delegated work. A pending external decision does not hold independent
+  commands that are already authorized.
+- Check actual advancing direction chains against five. Commission useful preparation,
+  implementation or intake where justified; count neither listed DM names nor subordinate roles
+  as additional advancing directions. Do not invent a task merely to fill a slot.
+
+Root reports to Portfolio after batch dispatch, task completion, a missing input/failure/conflict,
+uncertain external effect, an out-of-scope request or exhaustion of executable commands. Root
+holds only the affected action and continues other commands. Portfolio must handle these returns
+with a next action or exact dependency; a snapshot-only update is not a completed planning turn.
+If a needed decision belongs to Pro, prepare the proper request while other issued work continues.
+
+Root observes accepted experiments and current Pro requests through one shared heartbeat.
+Portfolio has no polling heartbeat and does not duplicate observation. A paused observation timer
+is independent of native research work. Keep current commands beside the working set in
+`PORTFOLIO.md`, with actual execution/receipt facts in existing tracking; no additional registry,
+scheduler or response schema is introduced. Send the usable command after committing/pushing;
+a committed file alone is not delivery.
 
 Compare directions at their honest claim ceilings. Do not reward a direction merely for producing
 more formal artifacts, and do not penalize a bounded empirical direction for lacking a theorem,
@@ -143,7 +152,7 @@ work and never parks a direction by itself.
   by absolute edge alone. The declared MEI never rewrites a card's result branches.
 - **Recast budget one.** A direction at its second Convergence `RECAST` continues (the Pro
   decision is final for its node) but takes the lowest sequencing priority among ACTIVE
-  directions: Root admits every other ACTIVE direction's work first. It appears in the owner
+  directions: Portfolio sequences other ACTIVE directions first and sends Root the selected commands. It appears in the owner
   digest as `second-recast`; Root does not mutate the lifecycle field, and an owner reply may PARK
   it. Nothing waits for that reply.
 - **Usage per valid result, two measures.** `PORTFOLIO.md` carries two columns per direction:
@@ -216,7 +225,7 @@ replace or override the proposal with a local-model judgment. If Pro reports mis
 access or insufficient evidence, Transport has not archived a complete response, or the answer
 rejects bounded empirical work solely for lacking an unrequested stronger class, no class-correct
 Portfolio decision exists:
-the question parks (AGENTS.md section 3), Root drives other directions, and nothing is decided
+the question parks (AGENTS.md section 3), Portfolio commands independent work through Root, and nothing is decided
 provisionally at this tier. Portfolio may commission reversible evidence collection through Root or request a
 class-corrected answer but must not convert the mismatch into scientific polarity.
 

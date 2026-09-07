@@ -21,6 +21,11 @@ provenance, optional discussion_urls and natural-language constraints. The deliv
 scope supplies dedicated branch, full base_sha, one response_path and same-repo issue_url.
 Portfolio/DM creates the branch and reuses the substantive Issue under existing authority.
 
+Follow the current Portfolio command's operation and return route. A preparation-only task
+returns its ready handoff; it does not dispatch Transport. A command may already include
+transport of the completed DM-authored request, so no extra owner or Portfolio vote is needed.
+For a command that includes dispatch, use the following sequence.
+
 Generate TASK.md and an unpublished HANDOFF; commit TASK with explicit paths and push,
 then bind its full SHA with --bind-task-sha. Commit/push internal handoff and dispatch
 its exact prompt once to the integrated Root in .codex/hmasd-transport.toml, explicitly

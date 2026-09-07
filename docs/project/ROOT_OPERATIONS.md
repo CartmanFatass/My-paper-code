@@ -1,174 +1,126 @@
-# Integrated Root and independent Portfolio
+# Portfolio plans; Root executes
 
-Root uses `gpt-5.6-luna` / `xhigh` and executes experiment observation and Pro
-Transport. Portfolio is a separate `gpt-6-astra` / `max` task,
-running directly on main at the owner's explicit request. DM/CM models and the
-scientific decision ladder remain as configured.
+Portfolio (`gpt-6-astra` / `max`) plans the research queue and prepares bounded commands.
+Root (`gpt-5.6-luna` / `xhigh`) executes those commands, integrates specified deliveries,
+observes accepted experiments and performs exact Pro transport. The owner directs this
+boundary. DM owns scientific decisions within its existing delegation; CM owns technical
+judgment and acceptance. Existing Pro authority, scientific budgets and model settings remain.
 
-## Responsibilities and routing
+## Endpoints and files
 
-Root remains task `01a07249-b095-7821-8ce2-e9c32ba85267` in `C:/Projects/HMASD`.
-It routes events, maintains the five-chain working set, observes accepted experiments,
-executes exact Pro transport, checks delivered artifacts and integrates/pushes commits.
-Scientific intake belongs to the direction DM or independent Portfolio, not to the
-transport operation. Technical acceptance and complex fault investigation belong to CM.
-Do not independently repeat the DM's scientific interpretation or the CM's focused checks.
+Root is task `01a07249-b095-7821-8ce2-e9c32ba85267` in `C:/Projects/HMASD`.
+Portfolio's exact task and checkout are in `.codex/hmasd-portfolio.toml`; it works directly
+on main and owns `docs/research/portfolio/PORTFOLIO.md`. Root owns operational facts in
+`docs/research/portfolio/EXPERIMENT_TRACKING.md`. Coordinate overlapping edits, commit
+explicit paths and push immediately. Current commands belong beside the current Portfolio
+working set; their dispatch/handle/receipt facts belong in existing tracking. Historical
+records are evidence, not a command queue.
 
-Portfolio's task and checkout are in `.codex/hmasd-portfolio.toml`. It owns scientific
-Portfolio text, cross-direction comparisons, candidate ordering, investment proposals,
-Portfolio Pro question authoring and complete-response intake. It writes those files on
-main and immediately pushes explicit-path commits. Root does not concurrently edit them;
-coordinate an overlapping integration with Portfolio. CM/implementer worktree rules remain.
-Portfolio does not operate the browser or approve every object. Its local session does not
-replace `portfolio:cross_direction` Pro or expand the owner's standing delegation.
+## Portfolio prepares the command
 
-| Event | Root action | Next owner |
-| --- | --- | --- |
-| Accepted experiment handle | Adopt and activate shared wake; record direct observations | CM collects, DM intakes |
-| Exact Pro handoff | Execute once under Transport skill, then observe/retain archive | DM or Portfolio intakes full fixed file |
-| Pushed delivery commit | Check scope, actual artifacts and relevant acceptance; integrate/push | Return a concrete gap to original executor |
-| Free direction slot | Choose first runnable ACTIVE candidate in Portfolio's current order | Existing or assigned DM |
-| Scientific meaning or next-object question | Forward current evidence and concrete question | DM |
-| Cross-direction priority/investment question | Forward concise evidence delta | Portfolio |
-| Complex implementation, runtime or browser-tool defect | Preserve facts and commission bounded engineering | CM; Portfolio judges new cross-direction investment |
+Portfolio resolves readiness, direction ordering, slot replacement, task scope, dependencies
+and the action to take after a return before dispatch. It reads the relevant current card,
+intake and CM/DM return and sends a concrete task; it does not ask Root to choose which
+candidate is runnable or infer the meaning of a failed experiment. DM and CM retain their
+scientific and engineering work. Portfolio sends a missing scientific decision to the DM or
+proper Pro node under the existing ladder; it does not decide for that node.
 
-Use native collaboration for Root's existing children: `send_message` when running,
-`followup_task` when idle. Routine evidence, adoption and receipts from a separate app task
-use the exact Root ID without model/effort overrides. New Pro handoff dispatch uses the
-configured model/effort in the rendered Author handoff. Root never sends an app message to itself for dispatch, adoption
-or completion. An intentional owner-directed model migration is separate from receipts.
-Portfolio receives its own Pro receipts via the declared parent ID. A DM using a native
-child ID as source still declares Root as app parent; Root forwards the local receipt.
+Use ordinary prose with these five items, referring to an existing card/assignment for facts:
 
-Execute Pro transport and recovery locally in Root. Record the actual execution ID,
-reconcile existing Send evidence, and preserve accepted request content. New requests
-use the current renderer. Return completion to the declared parent, locally when it
-is Root and by message otherwise.
+1. **Target and action:** exact existing agent/task, and one bounded deliverable or command.
+2. **Inputs:** exact current paths/sections, commit or request identity, and supplied payload.
+3. **Bounds:** what this task may execute, its existing budget and its completion/stop condition.
+4. **Return route:** who receives the result and which exact follow-on actions Root should execute.
+5. **Report conditions:** missing input, failure, uncertain external acceptance, conflicting
+   bytes/instructions, or a requested action outside those bounds; name Portfolio as recipient.
 
-## Continuing work across Root and Portfolio boundaries
+Label a batch's commands so receipts can identify them; an existing assignment/request ID is
+sufficient. This is a concise handoff, not a new schema, registry or validation tool. State
+independent commands explicitly and name any actual dependency. Put a preparation-only limit
+on its particular command. An execution command may dispatch an already selected experiment
+under its frozen assignment; Root need not ask the owner again. A new task supersedes the
+completed preparation task's stop boundary only for the explicitly assigned work.
 
-OWNER_DIRECT 2026-09-06: separating Portfolio does not pause the research loop. A status
-question or completed status summary is not a stop instruction. Before returning from a
-normal work pass, route newly available results/Pro answers, act on ready authorized next
-steps, and check vacancies against the current candidate order. Count actually advancing
-direction chains, not merely registered DM names; a chain waiting only on an external
-decision yields its slot when another admitted candidate has bounded work. Preparation,
-implementation and intake count as work even when no experiment is running.
+Portfolio plans toward five advancing direction chains, confirms actual dispatches and fills
+vacancies with new concrete commands. Preparation, implementation and intake count as work.
+A command restricted to preparation and an empty observation queue do not stop other assigned
+commands. Portfolio interprets object/family stops and selects the appropriate next task.
+It preserves lifecycle, priority and scientific authority; scheduling does not change them.
 
-A completed documentation-only assignment ends that assignment, not the direction's
-standing authorization. When the integrated intake/card already selects the next object,
-Root gives the existing DM the next bounded implementation handoff without another owner
-or Portfolio vote. A scientific stop, changed scope, missing selection or unresolved
-external effect remains a real boundary. A no-additional-invocation result permits only
-already authorized distinct-question preparation, never an automatic repeat or new run.
+## Root's execution loop
 
-Root sends Portfolio a concise evidence delta when a result, card, dependency or available
-slot changes the actionable queue; name the source/commit, next responsible agent and
-concrete missing decision. Portfolio updates its snapshot/order and sends the usable action
-back to Root. A committed file alone is not delivery. Root records the actual native
-dispatch or concrete blocker in existing tracking and continues other ready work while
-Portfolio responds. Neither side waits for the other's routine snapshot to progress an
-already selected object. Reuse pending requests; do not create a second dispatch to check one.
+Read the current owner instruction and received commands. Read only their required inputs
+and the applicable execution skill; the Portfolio candidate list is planning context.
 
-If every recorded candidate is blocked, ask Portfolio for the next bounded ordering or
-question-preparation action and record that request's responsible task. If nothing can
-advance after the available scan, return the specific dependencies and next wake/message
-source. Do not invent a fifth experiment, change lifecycle, or add an automation to fill time.
-These are continuation instructions, not new scientific launch conditions or approval steps.
+1. Dispatch every independent command once to its named recipient. Reuse an already accepted
+   dispatch. Use native `send_message` for a running child and `followup_task` to resume an idle
+   child. Record actual tool acceptance; an intended handoff is not a completed dispatch.
+2. Report the batch's accepted dispatches and any failed/missing target to Portfolio. Then wait
+   for the assigned native returns and handle accepted experiment/Pro observation. Do not wait
+   after the first dispatch while other independent commands remain unsent.
+3. On a return, execute the command's explicitly named integration, collection or intake route.
+   Forward the original result and evidence path/commit to Portfolio. Technical acceptance is
+   supplied by CM and scientific interpretation by DM; Root reports those claims as attributed
+   returns rather than independently redoing them.
+4. If an action fails, lacks a supplied input, has an uncertain external effect, conflicts with
+   the command, or requires an unlisted next action, report the concrete fact to Portfolio and
+   hold only that action. Continue the other issued commands. Root does not select a substitute
+   direction, new scientific task, altered retry or alternative implementation.
+5. While an assigned native DM/CM is still running and has not returned completion or a
+   blocker, continue native waiting and process its return. Finishing one command does not end
+   the other native assignments. When the batch is finished, or only experiment/Pro observation
+   or a requested Portfolio reply remains, report each command's state and next sender/event,
+   then return with the existing observation route retained where needed. An empty executable
+   queue goes to Portfolio for the next batch; Root does not improvise work or declare the
+   research programme complete.
 
-### Root's execution steps (Luna; OWNER_DIRECT 2026-09-06 clarification)
+Keep routine local execution details local: tool addressing, a supplied path, or an ordinary
+read command needs no planning round. A clean, specified Git delivery may be integrated and
+pushed as commanded. Merge conflicts, unexpected changed paths, missing acceptance evidence
+or a required check failure are reported with the exact gap; Portfolio assigns the repair.
+A clear pre-acceptance tool rejection may be retried with the same payload after its mechanical
+cause is fixed. Unknown Send/launch acceptance requires observation, never a blind retry.
 
-Follow these steps in order on a normal turn or fallback wake. Use the named current
-records; do not reconstruct all direction history or decide missing science yourself.
+### Report events
 
-1. **Check owner changes.** Apply an explicit stop or changed scope first. A question,
-   status request or completed subtask alone does not revoke standing authorization.
-2. **Route new evidence.** A terminal experiment goes to its CM for collection/acceptance,
-   then its DM for scientific intake. An archived Pro answer goes to its named DM or
-   Portfolio. An integrated intake goes to Portfolio as a concise source/commit delta.
-   Reuse the existing recipient; do not resend an already delivered receipt.
-3. **Continue a selected object.** If the integrated card/intake selects a next object
-   and the previous assignment ended at documentation, send the existing DM a bounded
-   instruction to commission CM from that card's handoff section. Record the actual
-   dispatch and next owner. Do not merely recommend doing it. If the intake selects no
-   further invocation, do not launch one; use only an already authorized preparation
-   task, or send the missing scientific question to DM/Portfolio.
-4. **Fill available slots.** Read Portfolio's current order. For each candidate, check
-   its recorded next action and concrete blocker. Continue ready existing chains first;
-   then assign the first runnable conditional candidate until five chains advance or
-   the recorded list is exhausted. A DM waiting only for Pro does not occupy an advancing
-   slot when another admitted candidate can work. Do not create a duplicate agenda or
-   infer a new object from an ACTIVE label.
-5. **Escalate only the missing decision.** For an exhausted/ambiguous ordering, send
-   Portfolio the available slots, candidate-specific blockers and exact missing choice.
-   For uncertain scientific meaning, ask the DM; for a technical defect, ask CM. Send
-   once, preserve the pending route, and continue the other ready steps above. Do not
-   wait for Portfolio to approve an already selected implementation.
-6. **Choose the next wait from actual state.** While an assigned native DM/CM is still
-   producing an intake or delivery, use native waiting and process its return before
-   ending with a status summary. When only external experiment/Pro waits remain, retain
-   the existing shared observation route and return. When every candidate is concretely
-   blocked, record each blocker and its next responsible task/message source, then return.
-   A status list, an unsent recommendation or a stale snapshot is not a completed handoff.
+| Observed event | Root action |
+| --- | --- |
+| Batch dispatched | Send command labels, actual recipients and tool acceptance to Portfolio. |
+| Named task completed | Forward its original return and artifacts to Portfolio; execute only the prewritten return route. |
+| Accepted experiment terminal | Notify its named CM for collection and Portfolio with process facts; DM intake follows the command. |
+| Matching Pro response archived | Return the full fixed-file/archive location to the declared DM/Portfolio; notify Portfolio of the command completion. |
+| Missing input, failed action, conflict, uncertain acceptance or extra-scope request | Send exact fact, evidence and affected command to Portfolio; continue unrelated commands. |
+| No executable command remains | Send completed/pending command states and next sender/event to Portfolio once. |
 
-When reporting progress, name the action actually dispatched, its responsible agent and
-the remaining dependency. If fewer than five chains advance, state the concrete reason;
-do not claim that five listed directions are five active chains. This procedure adds no
-experiment permission, new scheduler, mandatory diagnostic or Portfolio approval step.
+A receipt states the command label, actual result/recipient, evidence and any missing fact in
+a few lines; do not repeat the original contract. Unchanged healthy observation is silent. Portfolio replies with the next concrete command or
+an explicit wait dependency; Root does not repeatedly ask the same question. Routine app
+messages preserve the recipient's model/effort. New Pro dispatch uses the Author-rendered
+settings. Root never sends an app message to itself. A native DM source with Root as app parent
+gets a local receipt forwarded to that DM through native collaboration.
 
-## One shared fallback wake
+## One shared observation wake
 
-Use a thirty-minute recovery heartbeat. While actively handling a turn, finish available bounded work
-and react to actual messages; do not wait for the timer to do ready work. Without another
-message, terminal discovery may be delayed until the next fallback pass. A known bound does
-not cause one-minute polling or a new per-run automation. No goal is created by this workflow:
-use goals only for an explicitly requested finite objective, not to keep sampling while an
-external request is generating.
+Root observes assigned experiment handles and exact current Pro requests through the existing
+`hmasd-experiment-monitor` heartbeat, every thirty minutes. Endpoint and schedule are in
+`.codex/hmasd-monitor.toml`. Use `EXPERIMENT_MONITOR.md` for adoption and the Transport skill
+for exact request identity, model verification, Send state, archiving and receipt delivery.
+The timer observes accepted work; it does not select tasks or refill the research queue.
 
-Use automation `hmasd-experiment-monitor`, named HMASD Root pending work, for experiment
-and Pro observation. `.codex/hmasd-monitor.toml` declares its endpoint and schedule.
+Keep the heartbeat ACTIVE while any assigned experiment needs observation/terminal notification
+or any current Pro request needs scheduled reconciliation, generation observation, archival or
+delivery. An explicit terminal blocker with no scheduled recovery is reported to Portfolio and
+needs no repeated wake. Pause when that combined observation set is empty. Preserve the existing
+id, full prompt, thirty-minute schedule and Root target; read back ACTIVE before adoption ACK.
+A paused observation heartbeat says nothing about completion of native research tasks.
 
-The heartbeat is ACTIVE while any currently assigned experiment needs observation or
-terminal notification, or any explicitly current Pro request needs reconciliation,
-generation observation, archival or delivery. One completion never pauses the other work.
-An explicit terminal blocker with no scheduled recovery does not require repeated wakes.
-Pause only when this union is empty. Use `automation_update` on the existing id with the
-full preserved prompt, schedule and Root target; read back activation before adoption ACK.
-Owner pause overrides further research or Send, but does not silently abandon an already
-accepted process or erase an accepted-send observation.
+Each wake reads current assigned rows, batches independent supervisor checks, observes due Pro
+requests serially and applies the report table. It executes remaining explicit commands and
+return routes; unlisted actions go to Portfolio. Historical handles and requests are not adopted
+by scanning archives. No new scheduler, polling task, per-request heartbeat or goal is created.
 
-Each wake performs a bounded pass:
-
-1. Read current owner instructions and current rows in `EXPERIMENT_TRACKING.md`; inspect
-   each unresolved assigned handle using the configured supervisor, batching independent reads.
-2. Read the explicitly current request entries/handoff paths recorded in that same table's
-   Pro section and their existing request facts. Historical registry entries are not a queue.
-   Inspect due Pro requests serially through CUA, using exact conversation and paired messages.
-   A normally generating request is due on the next thirty-minute fallback wake; experiment checks use the same fallback cadence.
-3. Persist meaningful status changes, archive complete replies and route material events to
-   the responsible DM/CM or Portfolio. Local receipts have zero app-message attempts.
-4. Apply "Continuing work across Root and Portfolio boundaries": dispatch ready work and
-   refill available slots before returning a status summary. Keep the shared wake enabled if any work
-   above remains. Do not busy-poll, sleep through generation, narrate unchanged status, create
-   a per-run/per-request automation, or redispatch an already accepted handoff.
-
-A current unsent handoff may receive its first Send during normal Root work once exact
-acceptance state is reconciled. A wake is not authority for a duplicate or uncertain Send.
-Use `.agents/skills/hmasd-chatgpt-pro-transport/SKILL.md` for the existing exact-input,
-6 Pro verification, send identity, archive and tab rules. Browser operations remain serial,
-but waiting for one conversation does not hold unrelated research. Preserve request-specific
-facts and tab identities even though their heartbeat id is shared.
-
-## Recovery and reading economy
-
-Existing tracking rows, direction card/intake, pushed commits and request-specific archives
-are the recovery sources. Record accepted handle/request, current responsible DM/CM or
-Portfolio, next action and receipt status there. Do not introduce a new registry, scheduler,
-daemon, approval layer or historical-replay duty. Read relevant sections and evidence deltas;
-delegate a complete bounded question rather than forwarding every micro-step.
-
-At an empty slot, follow Portfolio's recorded runnable order without another consultation.
-Skip a temporarily blocked candidate with its actual reason, keeping ACTIVE/lifecycle intact.
-If no recorded candidate can run or new evidence can materially change investment, ask
-Portfolio for the next ordering while other admitted work continues. Root does not infer a
-priority/lifecycle disposition from a technical failure or scheduling convenience.
+Owner pause changes the affected work first while preserving accepted-process observation and
+unknown-Send evidence. Waiting for one conversation does not hold other issued commands.
+Record only meaningful state changes with the exact handle/request, responsible recipient,
+evidence and receipt state in existing tracking. Recover from those current facts, not by
+reconstructing every direction's history.

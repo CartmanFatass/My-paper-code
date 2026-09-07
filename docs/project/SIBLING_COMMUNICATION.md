@@ -3,7 +3,7 @@
 Use native `collaboration` tools for agents in the current Root's task tree.
 Use `send_message_to_thread` for a separate app task, addressed by its exact task UUID.
 The current Root, Portfolio and observation endpoints are configured in `.codex/`;
-ROOT_OPERATIONS.md defines responsibilities and the shared wake.
+ROOT_OPERATIONS.md defines Portfolio planning, Root command execution/reporting and the shared wake. Portfolio sends concrete targets, actions and return routes; Root forwards completed or blocked returns to Portfolio instead of selecting a replacement task.
 
 ## Native agent messages
 
