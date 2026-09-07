@@ -70,3 +70,5 @@ Portfolio status rows. Readback found their bytes intact and main clean. Those t
 Portfolio planning, not CBSC DM selection. No history rewrite is performed. The communication
 document now supplies a short peer-acknowledged Git-index handoff before staging/commit or
 cherry-pick; it does not suspend research or add locking machinery, and push remains immediate.
+
+Focused independent application found that simultaneous peer requests lacked a tie-breaker. The correction gives an already-running operation precedence, otherwise Root goes first; release follows the immediate push attempt, so a network failure does not retain a clean index indefinitely. An unresolved cherry-pick retains its explicit resolution owner. This correction addresses the observed shared-index race without a scientific approval step.
