@@ -1,0 +1,55 @@
+{
+  "basis": "P11 nonbinding proposal; P12 preparation only; arithmetic without simulation",
+  "current_exposure": {
+    "environment_transitions": 0,
+    "learner_calls": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0,
+    "model_selection_trials": 0,
+    "result_bearing_invocations": 0,
+    "pro_sends": 0,
+    "transport_dispatches": 0
+  },
+  "exposure_line": "environment_transitions=0; optimizer_steps=0; evaluation_episodes=0; model_selection_trials=0; result_bearing_invocations=0",
+  "future_design_status": "UNSELECTED_PROPOSAL",
+  "proposed_factors": {
+    "independent_common_prefixes": 2,
+    "optimizer_arms": 2,
+    "policy_change_conditions": 1,
+    "post_change_descendants": 4,
+    "training_episodes_formula": "2*P + 4*Q",
+    "evaluation_episodes_formula": "4*K*E",
+    "stationary_control_descendants": 8,
+    "stationary_control_training_formula": "2*P + 8*Q",
+    "stationary_control_evaluation_formula": "8*K*E"
+  },
+  "symbols": {
+    "P": "prefix training episodes per independent learner",
+    "Q": "post-change training episodes per descendant",
+    "K": "evaluation checkpoints per descendant",
+    "E": "evaluation episodes per checkpoint"
+  },
+  "not_selected": [
+    "task",
+    "teammate_policy_pair",
+    "learner",
+    "P",
+    "Q",
+    "K",
+    "E",
+    "episode_length",
+    "optimizer_updates_per_episode",
+    "MEI",
+    "runtime_cap",
+    "dtype",
+    "device"
+  ],
+  "intrinsic_search_candidates": 0,
+  "added_validation_invocations": 0,
+  "additional_teammate_training": "unknown until policy pair is selected; count all actual training",
+  "future_headroom": "absent; old finite-host matched terminal greedy headroom remains zero",
+  "future_wall_seconds": null,
+  "future_cpu_seconds": null,
+  "learner_movement_exposure": "not measured on an unselected host; current zero exposure is not a future can-move certificate",
+  "engineering_scope_section4": "none needed for preparation"
+}
