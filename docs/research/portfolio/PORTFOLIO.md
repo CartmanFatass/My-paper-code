@@ -1,8 +1,16 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-07 (P13 runtime restoration, intake and next questions; five-UAV-entry goal)
+Updated at: 2026-09-07 (P14 selected VSP02 implementation/comparison and direction continuations; five-UAV-entry goal)
 
-Current commands: [P13 runtime restoration and next questions](handoffs/2026-09-07-p13-runtime-restore-and-next-questions.md).
+Current commands: [P14 VSP02 implementation and direction continuations](handoffs/2026-09-07-p14-vsp02-code-and-direction-continuations.md).
+The accepted VSP02 first recast now proceeds to its actual B card/full code spec and directly
+authorized Root five-arm CM comparison before coding, with no additional Portfolio wait at that
+return. FRRIE prepares the original-source learner route; UCOPE/FSD author scoped Convergence
+requests with exact Transport/intake return routes; VSP03's already-prepared request is released
+for Transport. No new experiment or UAV entry is allocated. Actual comparison activation requires
+five participant receipts, including the measured default CM baseline.
+
+Previous commands: [P13 runtime restoration and next questions](handoffs/2026-09-07-p13-runtime-restore-and-next-questions.md).
 Root reports no live native directions after restart. P13 restores FRRIE A04 and UCOPE B05
 scientific intake, releases the exact prepared VSP02 Convergence transport, prepares VSP03's
 post-B02 direction question and commissions bounded FSD source-based re-entry preparation.
