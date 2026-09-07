@@ -1,0 +1,76 @@
+{
+  "id": "20260907-ucope-005",
+  "created": "2026-09-07T11:48:40-07:00",
+  "direction": "ucope",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "B04: two fresh half-training-data datasets",
+  "context": "Claim: the shared-data count-conditioned return learner produces useful mean native acquisition gain over BLIND and IMMEDIATE-4 with 512 batches on two fresh datasets. Binding structure: systems / information flow; the finite host does not instantiate multi-agent partial observability or non-stationarity.",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "保留P09选定的B04卡及两次完整远程运行；先完成同一CM实施检查和Root源代码整合，再联合读入所有结果。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "按回复停止尚未执行的B04步骤，保留全部历史和已产生结果，不重放或替换种子。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "在受影响的后续步骤前应用明确修订；保留已经冻结或产生的证据，不静默改写科学含义。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "B03重复出现有用收益后，半数据问题能直接衡量更低学习暴露下的实用性，且保留完整终评和所有符号。",
+  "evidence": [
+    "docs/research/candidates/ucope/UCOPE_SHARED_DATA_RETURN_MODEL_B04_SCIENCE_CARD_20260907.md",
+    "docs/research/candidates/ucope/UCOPE_SHARED_DATA_RETURN_MODEL_B04_SELECTION_INTAKE_20260907.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-07.md#L49",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否保留已经按P09委托选定的B04：用两份新数据、各一半训练量检验付费信息仍有用？",
+    "changes_if_approved": [
+      {
+        "target": "docs/research/candidates/ucope/UCOPE_SHARED_DATA_RETURN_MODEL_B04_SCIENCE_CARD_20260907.md",
+        "from": "B03两份新数据已完成；半数据问题只有建议",
+        "to": "冻结B04种子6601/6602、各512批、完整终评和读取规则，进入同一CM与Root的实施/两次远程运行/联合读入链"
+      }
+    ],
+    "if_refused": "按你的回复调整尚未执行的后续步骤，保留所有已产生证据；不重写B02/B03、不替换结果或自行增加种子。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_SHARED_DATA_RETURN_MODEL_B03_INTAKE_20260907.md",
+        "quote": "Both primary means exceed their 0.001 absolute MEI by 0.0014423014322916716.",
+        "why": "两份前瞻新数据都显示有成本后的本地收益，支持继续问较低训练量是否仍有用。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_SHARED_DATA_RETURN_MODEL_B03_INTAKE_20260907.md",
+        "quote": "**Strongest contradiction and limit:** the second gain is smaller and its margin above MEI\nis only 0.0005751139322916715; two-dataset variation is material.",
+        "why": "第二份收益较小，样本间差异明显；减少数据可能丢失收益或出现错误购买，必须保留这些结果。"
+      }
+    ],
+    "uncertainty": [
+      "只有有限主机的初步信号，不支持稳定优势或多智能体泛化。",
+      "B03不是配对的全数据对照；B04不估计减半数据的因果效应、等价性或必要最小数据量。",
+      "具体分阶段耗时未测；既有8.00/10.46秒完整调用只能作为规划事实，不作保证。"
+    ],
+    "cost": {
+      "compute": "两份数据各229376环境回合、196608标量更新，合计458752回合/393216更新；每份完整调用上限600秒、合计1200秒。现有最大调用作规划点为每份10.46秒。无真实数据试跑、旧种子重放或第三次调用。",
+      "owner_time": "可异步阅读，无需当前确认。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing；发布事项不等待回复。"
+    },
+    "verdict_text": "建议冻结B04的6601、6602两份新数据，各训练512批并保留完整终评，经原CM实现检查和Root整合后依次执行，再共同读入全部结果。",
+    "source": "docs/research/candidates/ucope/UCOPE_SHARED_DATA_RETURN_MODEL_B04_SELECTION_INTAKE_20260907.md"
+  },
+  "starred": false
+}
