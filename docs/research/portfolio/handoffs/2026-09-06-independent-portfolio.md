@@ -1,0 +1,62 @@
+# Independent Portfolio handover — 2026-09-06
+
+## Task and migration boundary
+
+- Portfolio task: `01a07a37-7aca-7022-8c13-4324dddd5f9d`; model/effort: Astra/max under the latest owner clarification relayed by Root.
+- Root task: `01a07249-b095-7821-8ce2-e9c32ba85267`.
+- Preparation checkout: `C:/Users/fires/.codex/worktrees/4b9d/HMASD`, branch `codex/portfolio-amx-20260906`, starting at `daed52c9f5256da355cd75de54db4053853f7e74`.
+- Owner-directed destination: the same Portfolio task works directly in `C:/Projects/HMASD` on `main`. Root performs the same-task handoff after this document is committed/pushed and Portfolio stops editing. No replacement task or further worktree is needed.
+- Portfolio owns cross-direction scientific comparison, priority/investment proposals, Portfolio Pro packet authoring and complete-response intake, and scientific Portfolio files. On main it commits explicit paths and pushes immediately. Root integrates other paths and coordinates any overlapping Portfolio edit.
+- Root maintains and executes the admitted ACTIVE candidate queue toward five advancing DM chains. Direction science stays with DMs; technical diagnosis/acceptance stays with CM. Existing Pro/owner authority and object-tier delegation continue; ordinary object work has no Portfolio approval step.
+
+Root is separately preparing the migration documents/configuration and absorbing Monitor/Transport. The preparation checkout still declares the old singleton endpoints. Await Root's concrete ready-state notice and read the resulting current configuration before any new Pro dispatch. Preserve accepted requests, bindings and send evidence. During this handoff Portfolio performs no browser operation, Pro send or experiment launch and creates no heartbeat.
+
+## Evidence and integration boundary
+
+Read `PORTFOLIO.md` current header, direction table, current September 6 working set and headroom/cost table; applicable `AGENTS.md` and `docs/AGENTS.md`; the Portfolio skill; evidence specification §§3, 8.1 and 11. The snapshot at `daed52c9f` predates the three delivered intakes below. Their exact committed current sections were read without duplicating the DM intake or importing their branches.
+
+| Delivery | Exact scientific source within `docs/research/candidates/` | State at preparation |
+| --- | --- | --- |
+| `f44e08ae9` | `degraded_incumbent_shadow_handover/DISH_CONTROL_LOW_LR_B05_RESULT_INTAKE_20260906.md` §6 and latest `DIRECTION.md` section | Complete DISH B05 scientific intake delivered; Root integration pending at the starting snapshot. |
+| `d4dfdb8ac` | `capability_bound_semantic_currentness/CBSC_OPPORTUNITY_CREDIT_B04_INTAKE_20260906.md`, “Decisions this intake produces” | Narrow RAW evidence and terminal incomplete pair intaken; Root integration pending at the starting snapshot. |
+| `503043dda` | `vsp_c1/VSPC1_K4_REACTIVE_QUEUES_CONVERGENCE_INTAKE_20260906.md` §§3–5 and `VSPC1_K4_REACTIVE_QUEUES_B01_SCIENCE_CARD_20260906.md` | Complete response `67f4d3837c78749cb7f7369083ecbc3ffa4b133d` accepted; card frozen; Root integration pending at the starting snapshot. CM implementation is underway and stops before launch. |
+
+RCLE A02 and its post-A02 dispatch are already integrated in the starting snapshot. The latest `roster_consistent_latent_exploration/DIRECTION.md` section and `RCLE_TBCFV_A02_RESULT_INTAKE_20260906.md` hold the valid A reading. VSP03's current original request remains in its accepted Transport lifecycle; the snapshot's current working-set row supersedes the older family-only direction summary. Its older `VSP03_B01_CONVERGENCE_INTAKE_20260905.md` still controls the closed comparison boundary.
+
+Integration is a recoverability fact, not evidence acceptance by Portfolio. Root should retain each DM's complete scientific reading, card and owner trace. The main Portfolio header, scientific rows and older headroom/cost digest need a coordinated refresh after these commits are integrated; this handoff does not edit that shared file during migration.
+
+## Actionable candidate order at this boundary
+
+This is a readiness scan for Root's existing five-chain working set. All five chains remain current and may advance concurrently. Lifecycle and recorded priority remain unchanged. A chain awaiting a Direction/Portfolio decision yields its slot when another admitted ACTIVE chain has a concrete scoped deliverable; the target of five does not create a scientific object or invocation allowance.
+
+| Scan order | Candidate and current DM in the Root task | Concrete next work and release condition | Evidence ceiling and contrary observation |
+| --- | --- | --- | --- |
+| 1 | VSPC1 — `/root/dm_amx_vspc1_next` | Complete the existing CM implementation, independent semantic review and focused acceptance for selected reactive two-queue B01. Root integrates the accepted card/source; DM/CM retain the exact one-pair seed401/256-update bounds and the current stop before launch until released. | Prospective B/EXPLORE, no result yet. Endpoint and per-period returns against MEI 0.025 can support a bounded next investment. Known non-learning partner, shared features and optimization effects limit the MARL/factorization interpretation. |
+| 2 | DISH — `/root/dm_amx_dish_seed101` | Integrate `f44e08ae9`; the DM returns the complete two-pair/native trade-off record to the same Convergence node for the next specific question or narrow stop. Preserve any packet/send already in progress; no automatic third seed, rate change or extension. | B05 seed101 reference/CONTROL/LOW_LR = 297.25/280.75/517.0; paired mean +236.25, with a -277 condition and invalid commits. Seed89's +182.75 is retained. Both positive means support bounded development interest, not stable superiority. Evaluation transfers are zero, so source benefit is unestimated. |
+| 3 | RCLE — `/root/dm_amx_rcle_a02` | Receive the complete pending post-A02 Innovator answer through the existing request and let the DM perform intake. A named score-allocation learner comparison is a proposal; no successor is selected locally. | Valid A/RECON found sampled actor/pointer shares below 1% and small mean fixed-input policy change. It establishes neither a unique cause nor a beneficial reweighting law. Native-return performance in a selected B, rather than another blind movement increase, is the proposed discriminator. |
+| 4 | VSP03 — `/root/dm_amx_vsp03_next` | Continue observation/archive of the original accepted request through the operator identified by the completed migration. DM reads its full formed answer. No replacement request or duplicate Send follows from waiting. | No new result or successor is inferred from dispatch. Prior update128 parity and earlier local positive differences remain; the old fixed full-budget comparison stays paused. A changed native-consequence or justified early-use question needs its own selection. |
+| 5 | CBSC — `/root/dm_amx_cbsc_next` | Integrate `d4dfdb8ac` and route the concrete shared-runtime dependency to Root/CM. The selected batch ended; no automatic STRUCT retry or diagnostic is authorized. A separately selected credible path may resolve the missing comparison without exhaustive historical cause-finding. | RAW 12.0375 is below REQUEST_ONLY 12.375; STRUCT failed in tape construction before model creation. Zero complete pairs, no representation-effect polarity. FRRIE's related failures make a common runtime dependency worth assessing, but do not establish CBSC's root cause. |
+
+At a free slot, the first off-roster candidate for bounded **question preparation** is UCOPE: the already applied §11.8 Portfolio calibration explicitly permits a new minimal B proposal while preserving the parked retained-policy/numerical-locus branch. Its DM must state the distinct question, trustworthy path and native comparison; this handoff selects no learner or reopened family. See `PORTFOLIO.md`, “Exploration and publication burden calibration — 2026-09-05”.
+
+FRRIE is a conditional candidate when CM identifies a prospectively credible bounded execution path; the unresolved substrate does not erase its earlier valid B evidence. FSD, CRTO and MGTAP remain admitted for a concrete new-question proposal when one is available, with their current-family stops preserved. VAP-FOLR/VSP02 stay within the existing N3 agenda and SCDMP within K4, without duplicate agenda reservations. ACVC and VNFC retain their existing second-recast lowest sequencing and have no selected successor here. The seven PARKED reserves retain their recorded re-entry conditions. If none has a concrete scoped deliverable, report the available set rather than invent a fifth invocation.
+
+## Comparison inputs and next Portfolio question
+
+Use the DM's computed tables and timings as recorded; no new run analysis or cost experiment was performed for this handover. The older Portfolio cost digest has stale current-host entries and must not be read as evidence that RCLE/DISH/CBSC have no recent execution.
+
+| Current chain | Headroom / MEI input | Measured compute window and denominator |
+| --- | --- | --- |
+| DISH | Own zero-update reference is not an upper-minus-tuned-generic pair. B05 comparison scale +24; negative condition and invalid commits remain decision inputs. | `wsl_4070`; B05 CPU execution: 432.82 s complete charged OS wall including shared work and the retained focused setup failure; one valid pair. Aggregate CPU 444.01 s; study elapsed 2663 s includes control-plane/monitor gaps. Full-history accepted-attempt cost per valid result remains unmeasured here. |
+| RCLE | Reference U≈0.28 versus learned≈0.71 is a diagnostic record, not identified tuned headroom. A02's 1% markers are diagnostic, not a B MEI. | A02 19.7202317 s charged for one valid A with 512 probe episodes, 32 derivatives and zero updates, per current snapshot; device/full-history cost not established in this handover. |
+| VSPC1 | New-host tuned headroom absent; selected B01 absolute MEI 0.025. | No selected-host result yet; runtime unknown. Whole-arm caps 2700 s are bounds, not forecasts or spent compute. |
+| VSP03 | Tuned headroom absent in the current digest; future card owns its MEI. | Current request produces no measured learner result. Historical B01 cost is not refreshed here; no accepted-attempt efficiency estimate is inferred. |
+| CBSC | Current-host upper/tuned RAW pair absent; RAW versus REQUEST_ONLY is a narrow direct comparison. Missing STRUCT cannot be assigned zero. | `wsl_4070`; formal wall 59.84 s, all selected calls 65.70 s; one completed RAW training instance, zero complete pairs. Cost per successful formal pair is undefined. |
+
+Possible future Portfolio question: does a shared credible runtime path have greater marginal decision value than the next bounded learning comparison, given the independent CBSC/FRRIE failures and current runnable work? This is an unselected question, not a repair investment or causal diagnosis. Obtain the concrete CM dependency/path and bounded work estimate first; compare against a minimal B using existing measurements. Lowest initial evidence class is A for execution-path facts; only a selected B can establish performance on its declared host. Contrary evidence would be a credible independent path that advances one direction without shared repair, or a repair proposal whose cost exceeds its decision value. No common-runtime cause, machine-wide upgrade or new diagnostic programme is asserted.
+
+## Clean boundary and resume
+
+The owner-item review command returned `[]` during preparation. P3/P4 remain retired; this scheduling/migration handover creates no new Portfolio ratification proposal, card or owner reply. Material missing facts are Root's migration-ready notice/current routing configuration and final integration state of the three delivered commits. Root already owns the current DM identities and accepted-request lifecycle details.
+
+After pushing this document, Portfolio stops editing and reports its commit and clean status to Root for same-task handoff. After the move, verify the actual checkout is `C:/Projects/HMASD` on `main`, read the concrete migration notice/current applicable instructions and owner reviews, coordinate scientific Portfolio path ownership, then resume within the existing authority. Read the Prompt Author skill before the first new Portfolio packet/dispatch; reuse the persistent `portfolio:cross_direction` binding and preserve all accepted-send evidence. No heartbeat is required for Portfolio.
