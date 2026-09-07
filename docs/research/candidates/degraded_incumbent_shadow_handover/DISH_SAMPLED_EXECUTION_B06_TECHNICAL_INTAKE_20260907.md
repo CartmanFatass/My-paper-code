@@ -6,6 +6,13 @@
 No B06 scientific initializer, learner or native evaluation has run. This acceptance creates
 no service result, sampled-execution benefit, source estimate or permission to launch.
 
+**Later preparation boundary, 2026-09-07 05:40 PDT:** Root requested the concrete next handoff.
+The [explicit launch assignment](DISH_SAMPLED_EXECUTION_B06_LAUNCH_ASSIGNMENT_20260907.md)
+now binds source, detached cwd, prospective handle, admission/argv, the shared1790s remainder
+and collection/observation. It is prepared and not dispatched; no remote staging, admission or
+B06 invocation occurred. This supersedes only the earlier "assignment pending" readiness below.
+The original technical acceptance, scientific prediction and frozen B06 semantics are unchanged.
+
 ## 1. Evidence checked and rule applied
 
 Contract: [frozen B06 card](DISH_SAMPLED_EXECUTION_B06_SCIENCE_CARD_20260906.md) §§2–7,
