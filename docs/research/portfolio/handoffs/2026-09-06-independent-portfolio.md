@@ -11,52 +11,67 @@
 
 Migration is ready. Current `docs/project/ROOT_OPERATIONS.md` and the updated Portfolio skill were read at release. Root owns migration-decision/`EXPERIMENT_TRACKING.md` edits and operational integration, and has absorbed the archived Monitor and Transport tasks. Its one shared ACTIVE fallback heartbeat covers pending experiments and Pro work every 30 minutes. Portfolio has no heartbeat or browser operations. New Portfolio Pro handoffs go to Root from current transport config, with this destination Portfolio task as scientific receipt parent. Accepted legacy requests keep their original handoff bytes, bindings and Send facts; only execution/observation ownership moves.
 
-## Evidence and integration boundary
+## Evidence and integration boundary — 23:38 PDT refresh
 
-Current sources are `PORTFOLIO.md`'s header, direction table, September 6 working set and headroom/cost table, and the cited DM intakes under evidence specification §11. The preparation snapshot at `daed52c9f` has been superseded by the following integrated intakes. Their current decision sections inform this Portfolio summary; scientific intake remains with each DM.
+Root confirmed no live experiment handles. The owner identified an idle gap after the status
+summary; this refresh corrects stale readiness, without changing lifecycle, priority or budget.
+Scientific intake remains with each DM. Root owns actual native dispatch and process facts.
 
-| Main integration (original delivery) | Exact scientific source within `docs/research/candidates/` | Current state |
+| Integrated evidence | Current reading | Next responsible action |
 | --- | --- | --- |
-| `c0edc3aae` (`f44e08ae9`) | `degraded_incumbent_shadow_handover/DISH_CONTROL_LOW_LR_B05_RESULT_INTAKE_20260906.md` §6 and latest `DIRECTION.md` section | Complete valid B05 scientific intake integrated. Post-B05 packet/handoff integrated through `0e93ad827`; Root sent once at 22:26 PDT, with the response still pending and no successor selected. |
-| `7dbc08c0d` (`d4dfdb8ac`) | `capability_bound_semantic_currentness/CBSC_OPPORTUNITY_CREDIT_B04_INTAKE_20260906.md`, “Decisions this intake produces” | Narrow RAW evidence and terminal incomplete-pair intake integrated. Selected calls ended; concrete runtime dependency returned to Root/CM. |
-| `7b4948f8b` (`503043dda`) | `vsp_c1/VSPC1_K4_REACTIVE_QUEUES_CONVERGENCE_INTAKE_20260906.md` §§3–5 and `VSPC1_K4_REACTIVE_QUEUES_B01_SCIENCE_CARD_20260906.md` | Complete response `67f4d3837c78749cb7f7369083ecbc3ffa4b133d` accepted and card frozen/integrated. Learner/CM acceptance/source intake are now integrated as `92d918485`, `5338fafd9`, `476748835` (original `0652103f6`, `103d96790`, `64895a181`). Launch handoff is in preparation; no run started. |
+| DISH `0eae162f2`, `DISH_POST_B05_CONVERGENCE_INTAKE_20260906.md` §5 and B06 card §7 | Complete Pro `db0bbfd8e` selects B06: one LOW_LR seed113 learner, 16 updates, modal/sampled execution comparison, whole-object cap1800 s. Card frozen; no B06 result. | Root continues existing DISH DM into the bounded CM implementation assignment. The previous documentation-only assignment ended, not standing research authorization. No further owner vote or Pro round for this handoff. |
+| VSPC1 `effad6eb7`, `VSPC1_K4_REACTIVE_QUEUES_B01_INTAKE_20260906.md` | Valid seed401 pair: endpoint −0.000325521, AUC +0.000254313; no additional invocation selected. Family remains open. | DM may prepare a separately justified duration-value question under existing authority. Do not repeat B01 or select a new host/learner merely to occupy a slot. |
+| CBSC `7dbc08c0d`, `CBSC_OPPORTUNITY_CREDIT_B04_INTAKE_20260906.md` | RAW12.0375 below REQUEST_ONLY12.375; STRUCT failed before model creation; zero complete pairs. | Root/CM owns the concrete runtime dependency. No automatic STRUCT retry, causal diagnosis or new diagnostic programme is selected. |
+| RCLE A02 intake and original post-A02 dispatch `4c72348d5` | Valid frozen-state A; no formed post-A02 decision yet per Root. | Root reconciles/observes the original request and returns the full fixed response to DM. Old post-B02 output cannot complete post-A02. |
+| VSP03 correction `e48f46d0d` and original shared-service request | Exact provider acceptance/full response remains unresolved per Root; old fixed comparison stays paused. | Root reconciles the same request, without duplicate Send; DM intakes its formed answer. |
 
-RCLE A02 and post-A02 dispatch are integrated. `RCLE_TBCFV_A02_RESULT_INTAKE_20260906.md` holds the valid A reading. Current tracking assigns Root the original `2026-09-06-rcle-post-a02-innovator-01` and `2026-09-06-vsp03-shared-service-convergence-01` requests: app dispatch is accepted, but exact provider acceptance/full response remains unresolved. Dispatch acceptance is not evidence of a provider Send. The old RCLE post-B02 reply cannot complete post-A02. VSP03's `VSP03_B01_CONVERGENCE_INTAKE_20260905.md` still controls its paused fixed-comparison boundary.
-
-`PORTFOLIO.md` carries the integrated scientific readings, current ownership and measured cost windows. The underlying DM intakes, cards and owner traces remain the detailed evidence. Root completed VSPC1 source integration and retains operational tracking. The third pending Pro request is `2026-09-06-dish-post-b05-convergence-01`: Root reports a single in-flight provider Send and response branch still at base; the packet's `DISPATCH.md` preserves the original native handoff, and current Root tracking records provider execution separately.
+DISH's B05 positive means, adverse condition/invalid commits and absent final legal transfers
+remain contrary evidence. B06 has its own frozen prediction and result branches. VSPC1's small
+positive AUC does not override the negative primary endpoint. Its outcome-informed supply upper
+is a recorded-tape diagnostic, not tuned population headroom or a new launch prerequisite.
 
 ## Actionable candidate order at this boundary
 
-This is a readiness scan for Root's existing five-chain working set. All five chains remain current and may advance concurrently. Lifecycle and recorded priority remain unchanged. A chain awaiting a Direction/Portfolio decision yields its slot when another admitted ACTIVE chain has a concrete scoped deliverable; the target of five does not create a scientific object or invocation allowance.
+The recorded scan order remains VSPC1 → DISH → RCLE → VSP03 → CBSC, skipping the named blocked
+next action. DISH implementation is currently ready. VSPC1 has no selected additional invocation;
+RCLE/VSP03 await external decisions. A waiting-only name is not an advancing DM chain.
 
-| Scan order | Candidate and current DM in the Root task | Concrete next work and release condition | Evidence ceiling and contrary observation |
-| --- | --- | --- | --- |
-| 1 | VSPC1 — `/root/dm_amx_vspc1_next` | Prepare the launch handoff against the source integrated through `476748835`, retaining the selected one-pair seed401/256-update bounds. No run started at this boundary; actual launch/admission/handle facts belong to the existing DM/CM/Root route. | Prospective B/EXPLORE, no result yet. Endpoint and per-period returns against MEI 0.025 can support a bounded next investment. Known non-learning partner, shared features and optimization effects limit the MARL/factorization interpretation. |
-| 2 | DISH — `/root/dm_amx_dish_seed101` | Root observes the single in-flight post-B05 Pro request and returns the full fixed response for DM intake. Packet integrated through `0e93ad827`; response branch still at base per Root's update. No automatic third seed, rate change or extension. | B05 seed101 reference/CONTROL/LOW_LR = 297.25/280.75/517.0; paired mean +236.25, with a -277 condition and 209 LOW_LR evaluation invalid commits versus CONTROL zero. Seed89's +182.75 is retained. Both positive means support bounded development interest, not stable superiority. Evaluation transfers are zero, so source benefit is unestimated. |
-| 3 | RCLE — `/root/dm_amx_rcle_a02` | Receive the complete pending post-A02 Innovator answer through the existing request and let the DM perform intake. A named score-allocation learner comparison is a proposal; no successor is selected locally. | Valid A/RECON found sampled actor/pointer shares below 1% and small mean fixed-input policy change. It establishes neither a unique cause nor a beneficial reweighting law. Native-return performance in a selected B, rather than another blind movement increase, is the proposed discriminator. |
-| 4 | VSP03 — `/root/dm_amx_vsp03_next` | Root reconciles and observes/archives the original request. DM reads its full formed answer when returned. No replacement request or duplicate Send follows from app acceptance or waiting. | No new result or successor is inferred from dispatch. Prior update128 parity and earlier local positive differences remain; the old fixed full-budget comparison stays paused. A changed native-consequence or justified early-use question needs its own selection. |
-| 5 | CBSC — `/root/dm_amx_cbsc_next` | Integrated `7dbc08c0d` returns the concrete runtime dependency to Root/CM. The selected batch ended; no automatic STRUCT retry or diagnostic is selected. A separately selected credible path may resolve the missing comparison without exhaustive historical cause-finding. | RAW 12.0375 is below REQUEST_ONLY 12.375; STRUCT failed in tape construction before model creation. Zero complete pairs, no representation-effect polarity. FRRIE's related failures make a common runtime dependency worth assessing, but do not establish CBSC's root cause. |
+At a free slot, UCOPE remains the first off-roster candidate for bounded **question preparation**
+under the already applied §11.8 calibration. Root should assign its existing/recoverable DM a
+concrete source-backed proposal: distinct question, trustworthy execution path, native comparison
+and the minimum evidence required. Its stopped retained-policy/numerical-locus branch stays
+stopped; preparation selects no experiment or reopened family. This is an existing conditional
+candidate, not a new Portfolio investment disposition.
 
-At a free slot, the first off-roster candidate for bounded **question preparation** is UCOPE: the already applied §11.8 Portfolio calibration explicitly permits a new minimal B proposal while preserving the parked retained-policy/numerical-locus branch. Its DM must state the distinct question, trustworthy path and native comparison; this handoff selects no learner or reopened family. See `PORTFOLIO.md`, “Exploration and publication burden calibration — 2026-09-05”.
+FRRIE remains conditional on a credible bounded CM path. FSD/CRTO/MGTAP are admitted when a
+concrete new-question proposal exists, with their current-family stops preserved. VAP-FOLR/VSP02
+share N3 and SCDMP shares K4 without duplicate agenda reservations. ACVC/VNFC retain second-recast
+lowest sequencing. PARKED reserves retain their re-entry conditions. Do not invent a fifth run.
 
-FRRIE is a conditional candidate when CM identifies a prospectively credible bounded execution path; the unresolved substrate does not erase its earlier valid B evidence. FSD, CRTO and MGTAP remain admitted for a concrete new-question proposal when one is available, with their current-family stops preserved. VAP-FOLR/VSP02 stay within the existing N3 agenda and SCDMP within K4, without duplicate agenda reservations. ACVC and VNFC retain their existing second-recast lowest sequencing and have no selected successor here. The seven PARKED reserves retain their recorded re-entry conditions. If none has a concrete scoped deliverable, report the available set rather than invent a fifth invocation.
+Root has been sent the DISH implementation and existing UCOPE preparation handoffs. The current
+native executor/accepted-dispatch facts must be recorded by Root; this document does not assert
+that a proposed action has already started. Root returns only actual blockers or missing ordering
+choices to Portfolio while continuing the usable part of the queue.
 
-## Comparison inputs and next Portfolio question
+## Comparison inputs
 
-Use the DM's computed tables and timings as recorded; no new run analysis or cost experiment was performed for this handover. The September 6 Portfolio digest now carries the current RCLE/DISH/CBSC windows and the existing VSP03 B01 measurements, with full-history gaps explicit.
+Use the current `PORTFOLIO.md` headroom/cost table and the named DM intakes; no new computation,
+training or evaluation was performed for this update. DISH B05 remains432.82 s charged wall for
+one valid pair (444.01 CPU-s,2663 s study elapsed separately); B06 is unrun. VSPC1's valid pair
+uses10.32 s whole invocation wall (4.84/5.48),8.93 CPU-s,464 s study elapsed. Its technical no-op
+has zero selected exposure; checks/preparation and full-history totals remain unaggregated.
+RCLE A02 remains19.7202317 s charged for one valid A; CBSC has zero complete pairs; prior VSP03
+B01 cost retains its original scope. Hardware and uncertainty limits remain in the Portfolio table.
 
-| Current chain | Headroom / MEI input | Measured compute window and denominator |
-| --- | --- | --- |
-| DISH | Own zero-update reference is not an upper-minus-tuned-generic pair. B05 comparison scale +24; negative condition and invalid commits remain decision inputs. | `wsl_4070`; B05 CPU execution: 432.82 s complete charged OS wall including shared work and the retained focused setup failure; one valid pair. Aggregate CPU 444.01 s; study elapsed 2663 s includes control-plane/monitor gaps. Full-history accepted-attempt cost per valid result remains unmeasured here. |
-| RCLE | Reference U≈0.28 versus learned≈0.71 is a diagnostic record, not identified tuned headroom. A02's 1% markers are diagnostic, not a B MEI. | `wsl_4070` CPU FP64/one thread; A02 7.02 s whole-process wall, 6.03 CPU-s, RSS 602980352 B. With supporting-check debit, 19.7202317 s charged for one valid A with 512 probe episodes, 32 derivatives and zero updates. Full-history cost unmeasured. |
-| VSPC1 | New-host tuned headroom absent; selected B01 absolute MEI 0.025. | No selected-host result yet; runtime unknown. Whole-arm caps 2700 s are bounds, not forecasts or spent compute. |
-| VSP03 | Tuned headroom absent in the current digest; future card owns its MEI. | Existing B01 three-pair runner sum 12.293334101 s per complete Convergence intake; node/device not restated in this digest, full-history accepted-attempt efficiency unmeasured. Current shared-service request produces no measured learner result. |
-| CBSC | Current-host upper/tuned RAW pair absent; RAW versus REQUEST_ONLY is a narrow direct comparison. Missing STRUCT cannot be assigned zero. | `wsl_4070`; formal wall 59.84 s, all selected calls 65.70 s; one completed RAW training instance, zero complete pairs. Cost per successful formal pair is undefined. |
+## Clean boundary and communication
 
-Possible future Portfolio question: does a shared credible runtime path have greater marginal decision value than the next bounded learning comparison, given the independent CBSC/FRRIE failures and current runnable work? This is an unselected question, not a repair investment or causal diagnosis. Obtain the concrete CM dependency/path and bounded work estimate first; compare against a minimal B using existing measurements. Lowest initial evidence class is A for execution-path facts; only a selected B can establish performance on its declared host. Contrary evidence would be a credible independent path that advances one direction without shared repair, or a repair proposal whose cost exceeds its decision value. No common-runtime cause, machine-wide upgrade or new diagnostic programme is asserted.
+Owner reviews returned `[]`. This factual refresh and existing conditional ordering create no new
+Portfolio ratification proposal, card or owner reply. Portfolio commits/pushes these current
+surfaces and sends the update directly to Root; a file alone is not an execution handoff.
+Root routes newly available intake/Pro evidence, dispatches ready authorized work, and checks
+vacancies before ending with a status summary. A selected next object does not wait for a
+routine Portfolio refresh. If all recorded actions are blocked, Root sends the specific missing
+question/evidence and next responsible task; it does not silently wait for the owner.
 
-## Clean boundary and resume
-
-At the 22:32 PDT update, the owner-item review command returned `[]` and the current audit owner column was empty. P3/P4 remain retired; this factual update and unchanged candidate order create no new Portfolio ratification proposal, card or owner reply. Migration, scientific intake integration and VSPC1 source integration are resolved. Pending work is the VSPC1 launch handoff, DISH/RCLE/VSP03's three current Pro requests, and the concrete CBSC/FRRIE execution-path facts needed for any later comparison. No new result-bearing invocation or scientific result is reported by this update.
-
-Portfolio pushes this handover and `PORTFOLIO.md` directly on main, then returns the update commit to Root. Root may execute the recorded runnable candidate order without another consultation. A meaningful result, dependency change, contention, owner instruction or exhausted candidate queue returns to Portfolio. Read the Prompt Author skill before the first new Portfolio packet/dispatch, reuse `portfolio:cross_direction`, set receipt parent to `01a07a3e-29bf-7f52-bc1e-cfa214b8d94a`, and preserve all accepted-send evidence. No Portfolio heartbeat is created.
+Read `ROOT_OPERATIONS.md`, “Continuing work across Root and Portfolio boundaries”. No new
+heartbeat, registry, scheduler, experiment budget or scientific authority is introduced.
