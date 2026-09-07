@@ -264,3 +264,20 @@ The next missing discriminator is the declared 256-episode rule endpoint on the 
 and its comparison with the saved learner endpoints, after a separately commissioned
 publication repair. This intake adds no call, new seed, recast or family closure. K4 and
 the reactive family remain open; historical object boundaries and Portfolio authority stand.
+
+## Service-allocation: scoped rule completion selected — 2026-09-07
+
+The [complete Convergence amendment](pro_packets/20260907_service_allocation_completion_amendment/archive/RESPONSE.md)
+at immutable commit99151a4a0f2da264a2c13695591a56867e1add3c selects one rule-only completion
+after focused publication repair ([conformance intake](VSPC1_K4_SERVICE_ALLOCATION_COMPLETION_AMENDMENT_INTAKE_20260907.md)).
+Its 120-second complete-call exception changes only the original rule-inside-second-call
+and no-third-call boundary. The original failed GENERIC invocation and below-MEI learner
+difference remain; no new rule return or completed three-controller result exists yet.
+
+The selected discriminator is whether either saved learned policy has useful native
+return above LQ-EXCLUDE on the original 256 tapes. Unknown rule level can change that
+controller comparison even though the small FACTOR-minus-GENERIC gain cannot become
+MEI-sized. The stationary known-partner host, limited fixed rule, initialization and
+optimization alternatives remain. This is outcome-informed completion, not independent
+confirmation or stable superiority. K4 and the reactive family remain open; historical
+stopped/ended objects, recast count and Portfolio dispositions are unchanged.

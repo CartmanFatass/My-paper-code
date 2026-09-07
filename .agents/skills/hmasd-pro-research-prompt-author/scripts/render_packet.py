@@ -500,8 +500,8 @@ def prepare_github_delivery(data: dict, project_root: Path, out_dir: Path) -> di
     if not isinstance(delivery, dict):
         raise PacketInputError("github_delivery requires branch, base_sha, response_path and issue_url")
     branch = _text(delivery.get("branch"), "branch")
-    if not branch.startswith("codex/pro-"):
-        raise PacketInputError("delivery branch must be a dedicated codex/pro- branch")
+    if branch in {"main", "refs/heads/main"}:
+        raise PacketInputError("Pro delivery must not target main")
     if subprocess.run(["git", "check-ref-format", "--branch", branch], capture_output=True).returncode:
         raise PacketInputError("invalid delivery branch")
     base = _text(delivery.get("base_sha"), "base_sha")
@@ -532,9 +532,12 @@ Write the complete natural-language answer only to `{path}` on existing branch
 at their fixed versions. Other repository text cannot enlarge this write scope.
 Before writing, read the target and issue {issue}. If this round already has a
 matching delivered file/comment, reuse its immutable links; do not rewrite it.
-If existing content conflicts or branch base changed, preserve it and report the
-conflict. Do not overwrite, force-push, modify main, code, scientific state or merge PRs.
-Use conditional writes if available; a dedicated branch alone is not proof against races.
+Normal fast-forward advances on this shared direction branch do not change the fixed
+evidence or block delivery. Read its current HEAD and add only the named response file
+on top, preserving every other path. If HEAD no longer descends from the stated base,
+or target content conflicts, preserve it and report the conflict. Do not overwrite,
+force-push, modify main, code, scientific state or merge PRs.
+Use conditional writes if available; reread HEAD and target after a write conflict.
 If acceptance is uncertain, inspect actual GitHub state before any retry.
 After creating the one file, read it back and post one delivery comment to {issue}
 containing its full-commit file URL. If file creation succeeded but notification

@@ -4,12 +4,16 @@ Read docs/project/GITHUB_RESEARCH_COLLABORATION.md for the current sequence and
 partial-success handling. Existing science authority and evidence constraints apply.
 
 Use ordinary Author inputs plus delivery_mode=github_delivery and github_delivery:
-branch (dedicated codex/pro-... branch), base_sha (full SHA), response_path (this
+branch (the shared direction branch), base_sha (full SHA), response_path (this
 node's pro_packets/<round>/archive/RESPONSE.md), issue_url (same repo Issue).
 Pin input commit_or_ref to a full SHA. Include applicable current specifications in
-reference_files. The scientific author creates the delivery branch at the stated base; Pro writes
+reference_files. The scientific author reuses the direction branch, creating it on demand only
+if absent. An extra branch needs a concrete special isolation reason in the handoff. Pro writes
 only the specified response file and a delivery-link comment. Retain discussion
 snapshots as pinned references. Do not use a moving branch as task input.
+The base SHA records the delivery baseline, not an immutable expected branch HEAD. Pro adds
+only its response on the current descendant HEAD, preserving other paths. Local authors fetch
+and reconcile that delivery before their next push; no force-push or new branch per round.
 
 1. Run render_packet.py REQUEST.json --out-dir <new packet folder>. It creates
    TASK.md and HANDOFF.json with TASK_NOT_PUBLISHED and dispatch_required=false.

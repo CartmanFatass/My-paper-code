@@ -66,7 +66,7 @@ standard-library local page that reads and writes only the owner surfaces under
 
 - Scientific integrity, quarantine of incomplete attempts, the telemetry rule, diagnosis by
   reproduction and the post-learner rule: `AGENTS.md` §8.
-- Git under concurrent sessions (worktree per implementer, stage by path, commit by pathspec,
+- Git under concurrent sessions (reuse the direction checkout, stage by path, commit by pathspec,
   never `git add -A` / stash / reset): `AGENTS.md` §6. Commits end with the trailers the runtime
   supplies plus `scope: none` or `scope: <item> per <card line>` (scope spec §7).
 - Scratch belongs under `temp/directions/<direction-id>/{exp,test}/`; nothing at the repository
@@ -111,8 +111,10 @@ their Codex-era text); their content is unchanged.
   reaffirmed 2026-09-05; the Claude quota is separate from Codex's). The five-chain working set in
   §2 and §5 is the Codex loop's target and does not apply here. Lifecycle and priority are
   unchanged by which loop drives a direction.
-- Implementer subagents run in worktrees under `.claude/worktrees/` (`isolation: worktree`); the
-  hub integrates into `main` by cherry-pick. Commits end with the `Co-Authored-By` and
+- Implementer subagents reuse the direction's designated checkout under `AGENTS.md` §6;
+  create a direction branch only when actual work needs it, without automatic per-agent isolation.
+  The hub integrates accepted commits into `main` and retires finished temporary branches.
+  Commits end with the `Co-Authored-By` and
   `Claude-Session` trailers the runtime supplies.
 - Pro transport in Claude Code goes through Agentify Desktop (`C:/Projects/agentify-desktop`) and
   the same scoped GitHub delivery, packet renderer, registry and conversation bindings the Codex

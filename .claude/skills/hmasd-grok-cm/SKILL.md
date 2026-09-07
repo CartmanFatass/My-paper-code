@@ -47,7 +47,11 @@ diffs the result and commits by pathspec with `Implemented-By: grok-build (grok-
 
 1. **Objective first.** Write the CM objective and card exactly as for Opus (class, protected
    semantics, owned paths, bound, stop rule, deliverables) and commit them to `main`.
-2. **Worktree.** `git worktree add -b grok/<direction>-<object>-<date> .claude/worktrees/grok-<slug> <main sha>`.
+2. **Worktree.** Reuse the direction's designated branch/worktree under AGENTS section 6. Name
+   its exact path and branch; a new object or Grok assignment does not create a branch. Keep the
+   editing owner through checks and the hub's commit before reuse. Bring the required committed
+   inputs into the checkout at a clean boundary, preserving existing work, and record the
+   resulting revision and starting changes before dispatch.
 3. **Task file** at `temp/directions/<direction>/exp/grok/<task-id>/TASK.md`: the body of
    `.claude/agents/hmasd-cm.md` (frontmatter stripped) verbatim; then the objective and card
    paths to read first; the frozen-input local paths and digests; then the Grok-specific rules:
@@ -70,8 +74,8 @@ diffs the result and commits by pathspec with `Implemented-By: grok-build (grok-
 5. **Wait** with one background `until` loop on the Windows PID (`ps -W`, fourth column), not by
    polling in the hub. The JSON receipt carries `stopReason`, `num_turns`, `usage.total_tokens`,
    `total_cost_usd` and the final report text; keep it beside the task file.
-6. **Review and take in** (hub, never skipped): `git status` in the worktree must show only the
-   owned paths; read the diff; run the focused tests yourself; check the CM record's frozen
+6. **Review and take in** (hub, never skipped): compare `git status` with the recorded starting
+   changes; read the assigned diff, preserve unrelated edits and investigate unexpected changes; run the focused tests yourself; check the CM record's frozen
    commands and projection; then `git add -- <paths>` and commit by pathspec on the worktree
    branch with the runtime trailers, `Implemented-By: grok-build <version> (grok-4.6-build)` and
    `scope:`; push; cherry-pick into `main`. Dispatch `hmasd-reviewer` (Opus) only when the diff

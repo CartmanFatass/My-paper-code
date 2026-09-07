@@ -74,52 +74,14 @@ execution alternative or select another direction after a failed admission.
 
 ## Plan before dispatch
 
-Use `docs/project/ROOT_OPERATIONS.md`, "Portfolio prepares the command". For each proposed task,
-resolve the scientific/technical boundary with the current DM/CM evidence, select the exact
-recipient and deliverable, and state inputs, scope/budget/stop, return route and report conditions.
-Use the existing AGENTS five-item handoff and current card sections rather than duplicating them.
-Send an imperative command with concrete actions. Do not send Root an options list, an ambiguous
-"if useful" task, or an instruction to judge readiness or choose a substitute.
-
-A task needing judgment can itself be assigned to the proper DM/CM, with the question and desired
-return fixed. Portfolio owns the scheduling choice; DM retains object-tier decisions and proper
-Pro escalation, and CM retains engineering judgment. Portfolio does not replace their expertise
-or add a per-object approval round. Prewrite routine collection, intake and integration routes
-when known, so Root can execute them without another planning message.
-
-Prepare the independent commands in a batch before sending them. Root dispatches all independent
-commands before waiting. State real dependencies explicitly and keep a preparation-only limit on
-its own task. When an already selected object has a complete launch assignment, issue that
-execution command under existing authorization; do not leave Root to infer whether preparation
-has become execution. A completed object's no-additional-invocation branch does not prohibit
-selecting a distinct useful question under the existing decision ladder.
-
-On each Root completion or exception report:
-
-- Read the original DM/CM return and only the relevant current evidence. Distinguish a missing
-  scientific decision, technical gap, unknown external acceptance and ordinary completed task.
-- Update the current Portfolio task/status rows and determine the next bounded command. Preserve
-  the actual request, experiment and scientific identity; a terminal old response may not answer
-  the current question.
-- Send the explicit continuation, replacement or named wait dependency to Root. Do not ask the
-  owner again for already delegated work. A pending external decision does not hold independent
-  commands that are already authorized.
-- Check actual advancing direction chains against five. Commission useful preparation,
-  implementation or intake where justified; count neither listed DM names nor subordinate roles
-  as additional advancing directions. Do not invent a task merely to fill a slot.
-
-Root reports to Portfolio after batch dispatch, task completion, a missing input/failure/conflict,
-uncertain external effect, an out-of-scope request or exhaustion of executable commands. Root
-holds only the affected action and continues other commands. Portfolio must handle these returns
-with a next action or exact dependency; a snapshot-only update is not a completed planning turn.
-If a needed decision belongs to Pro, prepare the proper request while other issued work continues.
-
-Root observes accepted experiments and current Pro requests through one shared heartbeat.
-Portfolio has no polling heartbeat and does not duplicate observation. A paused observation timer
-is independent of native research work. Keep current commands beside the working set in
-`PORTFOLIO.md`, with actual execution/receipt facts in existing tracking; no additional registry,
-scheduler or response schema is introduced. Send the usable command after committing/pushing;
-a committed file alone is not delivery.
+Use `$hmasd-loop-dispatch` at `.agents/skills/hmasd-loop-dispatch/SKILL.md` for every
+Root command, completion/exception return and working-set refill. Its Portfolio section
+is the single dispatch procedure: process the whole working set, send all justified
+independent commands together and confirm actual native acceptance. This skill retains
+scientific comparison, investment, lifecycle and proper-node judgment; Root receives
+concrete tasks rather than those judgments to make. Known collection/intake and selected
+execution routes continue without an extra Portfolio vote. New scientific choices retain
+the existing DM/Pro decision ladder.
 
 Compare directions at their honest claim ceilings. Do not reward a direction merely for producing
 more formal artifacts, and do not penalize a bounded empirical direction for lacking a theorem,

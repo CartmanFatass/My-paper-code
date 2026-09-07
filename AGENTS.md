@@ -20,7 +20,10 @@ or uncertain external acceptance; Portfolio determines the next command. Portfol
 cross-direction scientific comparison, investment proposals and the scientific content of
 `docs/research/portfolio/PORTFOLIO.md`. By the owner's explicit 2026-09-06 instruction Portfolio
 runs directly on main; coordinate overlapping file edits with Root and push explicit-path commits.
-See `docs/project/ROOT_OPERATIONS.md` for the integrated routing and shared heartbeat. Each research
+Portfolio and Root use `.agents/skills/hmasd-loop-dispatch/SKILL.md` for batch planning,
+dispatch, return handling and working-set vacancies; Portfolio additionally uses
+`hmasd-portfolio-task` for scientific Portfolio decisions. See `docs/project/ROOT_OPERATIONS.md`
+for the integrated routing and shared heartbeat. Each research
 direction is driven by one **Direction Manager (DM)**: it holds the direction's science card,
 predictions on record, intake, and escalation. **Code Manager (CM)** turns one bounded engineering
 objective into an inspectable result. Specialist subagents (scout, implementers, reviewer, critic,
@@ -315,7 +318,34 @@ launch sha, execution node, run root, queue state).
 
 Several sessions commit to the primary target concurrently. Rules for all of them:
 
-- Each editing CM or implementer works in its own worktree and branch; Root integrates.
+- OWNER_DIRECT 2026-09-07: reuse one designated authoring branch and local worktree per
+  research direction across DM, CM and implementer assignments. Create it on demand only when
+  that direction has actual authoring work; inactive directions get no placeholder branch.
+  Main and these needed direction branches are the ordinary maintained branches. A new task, object, stage or
+  agent does not create a new branch. Name the existing checkout and owned paths in each handoff.
+  At a clean boundary, bring required committed inputs into that checkout before dispatch,
+  preserving existing work; record the resulting revision and any starting changes.
+  Keep one editing owner through edit/check/commit for overlapping work; serialize shared index
+  operations and preserve unrelated work. Independent review remains independent. Root integrates
+  named accepted commits, checking what is already integrated. Portfolio's direct-main exception
+  remains; shared control-plane work reuses its existing checkout. Branch reuse never combines
+  scientific objects, budgets, RNG state, outputs or frozen SHAs. Remote execution uses detached
+  exact-SHA worktrees, without a new authoring branch.
+  Pro also uses the corresponding shared direction branch by default; a Pro round does not
+  create another branch. Only a concrete special isolation need warrants a temporary branch.
+  Preserve accepted requests' bindings through archival/intake; new requests use the shared
+  branch. Pro adds only its scoped response on the current descendant HEAD, preserving other
+  paths and fixed input SHAs; local writers reconcile that commit before their next push.
+  Retire completed task branches after reconciling unique commits, live writers,
+  open PRs and evidence links; preserve recovery refs before removing branch names. Existing
+  same-direction authoring checkouts finish accepted work, then Root carries forward one at a
+  clean boundary and retires the others after reconciliation. Branch cleanup does not remove
+  worktree contents or evidence.
+  Root owns reclamation at completion: integrate accepted work, preserve other unique commits
+  and dirty contents with a recovery reference/backup, reconcile PRs and pending delivery, then
+  retire obsolete local and remote branch names. Unaccepted historical work is archived, not
+  merged merely to delete a branch. A necessary temporary branch names its concrete purpose
+  and retirement event in the existing handoff; it is not retained for an already-finished role.
 - Stage by explicit path and commit by pathspec (`git add -- <paths>`; `git commit -- <paths>`).
   `git add -A`, `git stash`, `git reset`, and any history rewrite are forbidden in agent
   instructions unless the owner asks for them by name.
@@ -486,8 +516,8 @@ appendix and completed historical tasks remain unchanged.
   repo-specific working rules; it is tracked.
 - Deliverables of a Claude session (reviews, plans, experiment designs and results outside the
   research authority tree) live under `docs/Claude_docs/<category>/`, indexed by its README.
-- Implementer subagents run in worktrees under `.claude/worktrees/`; the reviewer session is Root
-  for integration. Commits end with the `Co-Authored-By` and `Claude-Session` trailers the runtime
+- Implementer subagents reuse the direction checkout under section 6; do not request automatic
+  per-agent worktree/branch isolation. The reviewer session is Root for integration. Commits end with the `Co-Authored-By` and `Claude-Session` trailers the runtime
   supplies.
 - Claude's current control-plane roles, capacity and Pro transport are defined in `CLAUDE.md`
   and its referenced `.claude/` instructions.
