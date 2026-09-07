@@ -244,6 +244,13 @@ P2 direction decision, option (a) recommended and auto-applied. The two
 `2026-09-07T23:10:39Z`, vsp_03, object/technical and direction/selection;
 their authoring-checkout lines are 82 and 83. Timestamp, direction and tier
 identify them when Root reconciles intervening main rows. All owner columns are empty.
+The science, archive receipts, owner item/brief and two rows were committed and
+pushed together at `0fada0d57bef289a96c38078208be0cb77bef0ef`.
+[That immutable audit row](https://github.com/CartmanFatass/My-paper-code/blob/0fada0d57bef289a96c38078208be0cb77bef0ef/docs/research/portfolio/audit/2026-09-07.md#L83)
+fixes the direction choice independently of later main line offsets. The owner
+item's CLI execution trace records PRO_FINAL / OWNER_DELEGATED, applied option (a),
+the original response and this application record; its status remains open for
+asynchronous owner intervention. No owner approval is fabricated.
 
 This work needs **none** of ENGINEERING_SCOPE_SPEC §4's optional machinery.
 There is no new CM engineering objective; the existing pure-preparation/intake
