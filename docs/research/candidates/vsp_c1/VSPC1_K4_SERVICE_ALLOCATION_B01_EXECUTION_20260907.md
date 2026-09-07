@@ -28,7 +28,7 @@ Post-learner coverage: accepted technical record reports nine focused tests, inc
 
 ## Execution facts
 
-Pending: remote committed-object staging and first launch. No selected exposure at record freeze. Root receives accepted handles immediately; CM retains observation until Root adoption ACK, and always retains terminal collection/technical acceptance.
+At record freeze, remote committed-object staging and first launch were pending. No selected exposure existed then. The completed E0 observation and subsequent repair authority are recorded below. Root receives accepted handles immediately; CM retains observation until Root adoption ACK, and always retains terminal collection/technical acceptance.
 
 
 ## E0 technical return: staging stopped, no selected exposure
@@ -72,3 +72,19 @@ polarity follows. Prior source/card conformance remains unchanged. No experiment
 awaiting monitor adoption. Portfolio owns the next bounded staging/execution command through
 Root; DM retains science. This return does not authorize a retry or change the fixed two-call
 scientific object.
+
+
+## P07-VSPC1-STAGE-REPAIR-01 continuation
+
+Root relayed Portfolio's correction: the prior tightened stop is superseded; the original
+execution command's reversible committed-Git staging repair authorization remains active.
+The E0 observations above remain history, not a scientific invocation or result. No later
+source-availability probe is commissioned. This continuation uses a task-scoped local named
+Git ref at exact `faf786e135b3f55e535c898e17e646dcc341bdec`, a native Git bundle of committed
+objects, SCP and remote import into the existing repository, followed by the specified detached
+worktree. Ordinary reversible corrections within that route are authorized. Existing paths and
+handles must not be overwritten; source, device, budgets and the two frozen calls remain unchanged.
+After staging succeeds, execute FACTOR once and conditionally GENERIC once under the frozen
+commands above; no scientific retry, pilot or extra call. The final required summary controls
+technical continuation irrespective of magnitude. This entry corrects the pending status and
+records the next action before launch while preserving every previous launch/absence fact.
