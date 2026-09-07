@@ -4,7 +4,7 @@ status = "active"
 
 # Root executes Transport. mode=singleton names this one execution endpoint.
 # Requests retain distinct source, parent, provider, tab, receipt and Send evidence.
-# Observation uses the shared heartbeat in hmasd-monitor.toml.
+# Observation runs within Root's owner-driven goal; hmasd-monitor.toml names its endpoint.
 thread_id = "01a07249-b095-7821-8ce2-e9c32ba85267"
 task_title = "HMASD Root"
 execution_owner = "root"

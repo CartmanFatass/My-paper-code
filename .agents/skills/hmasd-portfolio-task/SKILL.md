@@ -5,7 +5,7 @@ description: Use when the independent Portfolio session plans Root commands, han
 
 # HMASD Portfolio Decisions
 
-OWNER_DIRECT 2026-09-06: this skill belongs to the independent Astra/max Portfolio
+OWNER_DIRECT 2026-09-07: this skill belongs to the independent Astra Portfolio (effort selected by the owner)
 session in `.codex/hmasd-portfolio.toml`, directly on main. Portfolio plans concrete tasks,
 dependencies and return branches; Luna/xhigh Root executes the issued commands, integration,
 monitoring and Pro transport. See docs/project/ROOT_OPERATIONS.md.
@@ -66,7 +66,10 @@ working set of five concurrently advancing direction/DM chains and names the tas
 dispatch. Root reports actual recipients, status and external facts. Portfolio decides readiness,
 ordering, replacement and the next action from the current evidence. This scheduling does not
 change lifecycle, priority, scientific meaning or experiment budgets. A queued direction is not
-`PARKED`; a waiting-only chain can yield its slot when Portfolio names other useful work.
+`PARKED`. OWNER_DIRECT 2026-09-07 counts active native work, running experiments and accepted
+Pro generation together, once per direction. Unresolved waits and completed returns yield a
+slot; accepted Pro generation remains counted. The goal targets two formally entered UAV
+validation directions under concrete decision/card references, not a new universal launch gate.
 
 Execution remains remote-first under `.codex/hmasd-compute.toml` within the frozen host/device
 boundary. CM owns technical feasibility and exact execution bindings. Root does not invent an
@@ -170,7 +173,7 @@ project-shared registry creates or binds the provider conversation on first use 
 conversation binding key and reuses that exact provider conversation for later Portfolio rounds.
 Each default handoff goes to integrated Root, the one Transport execution endpoint declared in `.codex/hmasd-transport.toml` and
 sends exactly one completion or terminal-blocker receipt back to the handoff author's declared
-`parent_thread_id`. Dispatch passes `model=gpt-5.6-luna` and `thinking=xhigh` explicitly; it never
+`parent_thread_id`. App dispatch omits `model` and `thinking`, preserving the recipient settings; it never
 calls `create_thread` or selects a replacement task. The singleton task ID is an execution endpoint,
 never a provider-conversation binding. Set the scientific receipt parent to this Portfolio task; Root records its own receipts locally when it is also parent.
 The configured provider model is separate from that executor. Honor an explicit owner request

@@ -1,0 +1,11 @@
+{
+  "question": "是否按已查明的缓存路径，执行一次完整不超过600秒的A03候选准备？",
+  "changes_if_approved": [{"target": "CBSC_SYSTEM_RUNTIME_A03_SCIENCE_CARD_20260907.md", "from": "只有缓存及包头记录，没有可导入候选", "to": "选择一次新调用：复用21个同版本缓存、下载2个指定包、离线安装并查询元数据；Root先集成命令"}],
+  "if_refused": "保留缓存记录和全部历史失败，返回具体修改意见，不追加安装或训练，也不改变方向状态。",
+  "evidence_for": [{"path": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_SYSTEM_RUNTIME_A03_DEPENDENCY_RECEIPT_20260907.md", "quote": "The two bodies total **1,111,959,613 bytes**.", "why": "明确可复用的本地输入和剩余下载量，已不是盲目重复上次在线安装。"}],
+  "evidence_against": [{"path": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_SYSTEM_RUNTIME_A03_DEPENDENCY_RECEIPT_20260907.md", "quote": "Successful throughput, disk materialization and import times remain unknown; A02's TLS failure is still relevant risk.", "why": "仍有约1.112GB下载和3.254GB本地打包；600秒内完成没有保证。"}],
+  "uncertainty": ["缓存结构完整不等于已导入或二进制完全相同；六个同版本cu11平台包在新卡中明确选择。", "两次完整下载仍可能失败，不另做速度探针，也无自动重试。", "Root当前主分支索引写入受阻，必须先完成命令集成；这不是科学负结果。", "即便导入成功，也不能说明B04故障已修复或算法有收益。"],
+  "cost": {"compute": "一次新候选，完整600秒上限，540秒KILL；21次本地轮包打包、2次下载、1次离线安装和1次元数据进程；零模型、环境、训练或评估。", "owner_time": "无需等待再次确认；可异步修改已委托选择。", "reversibility": "reversible", "waits_on_this": "nothing"},
+  "verdict_text": "Owner-delegated decision (unattended, 2026-09-03 instruction): (a) for each decision.",
+  "source": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_SYSTEM_RUNTIME_A03_DEPENDENCY_INTAKE_20260907.md"
+}

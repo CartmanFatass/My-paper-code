@@ -1,0 +1,81 @@
+{
+  "id": "20260907-ucope-004",
+  "created": "2026-09-07T10:34:40-07:00",
+  "direction": "ucope",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "UCOPE B03: two fresh shared-data acquisition datasets",
+  "context": "Claim: the shared-data count-conditioned return learner retains useful mean native acquisition gain over BLIND and IMMEDIATE-4 on two fresh datasets. Binding: systems / information flow; no multi-agent partial observability or non-stationarity in this finite host. P08 selects6501 then6502, with the same algorithm and complete600s each/1200s sum.",
+  "options": [
+    {
+      "key": "accept",
+      "label": "Execute the two datasets as carded",
+      "consequence": "Keep the delegated selection and commission the original CM for minimal seed binding, checks and both sequential remote calls, retaining every score."
+    },
+    {
+      "key": "reject",
+      "label": "Stop unexecuted B03 work",
+      "consequence": "Stop the unexecuted portion at a clean boundary and preserve all accepted calls, outcomes and historical science."
+    },
+    {
+      "key": "revise",
+      "label": "Revise the unexecuted card",
+      "consequence": "Apply the specific revision before dependent execution and preserve the original record; no automatic extra seed or replay."
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "Two independent new datasets directly address the current single-seed uncertainty while preserving the native comparisons and every outcome.",
+  "evidence": [
+    "docs/research/candidates/ucope/UCOPE_SHARED_DATA_RETURN_MODEL_B03_SCIENCE_CARD_20260907.md",
+    "docs/research/candidates/ucope/UCOPE_SHARED_DATA_RETURN_MODEL_B03_SELECTION_INTAKE_20260907.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-07.md#L46",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否保留P08已委托的B03卡片，使用6501、6502两个全新数据种子检查B02付费信息收益的延续性？",
+    "changes_if_approved": [
+      {
+        "target": "UCOPE B03 selected object and original CM assignment",
+        "from": "B02只有一个数据种子的有效RM-A信号；两种子后续仅为建议",
+        "to": "前瞻冻结6501和6502，原CM最小种子绑定修订后顺序执行两次；第二次不依第一得分决定，两个新种子单独组成联合主指标"
+      }
+    ],
+    "if_refused": "在下一清晰边界停止尚未执行部分，保留已接受调用及全部结果，不改写B02，不擅自增加替代种子或改变方向状态。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_SHARED_DATA_RETURN_MODEL_B02_INTAKE_20260907.md",
+        "quote": "Both means are above 0.001 and FULL actually probes in 4,096 evaluation episodes.",
+        "why": "已有真实付费后的净收益，足以支持两个独立训练数据样本的有界后续，不能直接宣布稳定优越。"
+      },
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_SHARED_DATA_RETURN_MODEL_B03_SCIENCE_CARD_20260907.md",
+        "quote": "A negative first score does not cancel or alter seed 6502.",
+        "why": "预先固定全部执行与主指标，保留负结果，避免只留下成功种子。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_SHARED_DATA_RETURN_MODEL_B02_INTAKE_20260907.md",
+        "quote": "BLIND deploys IMMEDIATE-4 everywhere; the two equal positive comparisons share the same effective reference and are not independent confirmation.",
+        "why": "B02仍只是一个拟合样本，计数估计的最大值偏差和跨种子变化尚未检验。"
+      }
+    ],
+    "uncertainty": [
+      "两个新种子也不足以证明稳定总体优越性，必须同时报告种子差异和条件评估噪声。",
+      "可能出现负收益或信息增量不足；所有分数保留，不安排第三次。",
+      "沿用相同算法的7.73秒历史耗时只是规划点，不能代替每次完整计时与新鲜资源准入。"
+    ],
+    "cost": {
+      "compute": "已选两数据集共720896回合、786432次标量更新；每次完整上限600秒，两次合计1200秒。规划点约15.46秒，不含暂存开销且不作保证。冻结时新增暴露为零。",
+      "owner_time": "异步审阅种子、比较器和边界；授权范围内继续，不等待回复。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "Recommendation/selection: (a).",
+    "source": "docs/research/candidates/ucope/UCOPE_SHARED_DATA_RETURN_MODEL_B03_SELECTION_INTAKE_20260907.md"
+  },
+  "starred": false
+}

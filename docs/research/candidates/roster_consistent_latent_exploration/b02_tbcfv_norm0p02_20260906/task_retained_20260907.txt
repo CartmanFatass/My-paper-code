@@ -1,0 +1,95 @@
+=== Task 'rcle_b02_chain_20260906' started at 2026-09-07T06:23:39+08:00 ===
+=== step (1) build ===
+{
+  "assessed_at": "2026-09-06T22:23:39.106299Z",
+  "available_physical_bytes": 15258902528,
+  "captured_at": "2026-09-06T22:23:39.105940Z",
+  "cgroup_headroom_bytes": null,
+  "cgroup_memory_current_bytes": null,
+  "cgroup_memory_max_bytes": null,
+  "effective_available_bytes": 15258902528,
+  "effective_floor_pass": true,
+  "failure_reasons": [],
+  "measurement_source": "/proc/meminfo",
+  "minimum_available_bytes": 4294967296,
+  "passed": true,
+  "physical_floor_pass": true,
+  "schema_version": 1
+}
+STEP1_EXIT=0
+=== step (2) focused check ===
+{
+  "assessed_at": "2026-09-06T22:23:42.186267Z",
+  "available_physical_bytes": 15254589440,
+  "captured_at": "2026-09-06T22:23:42.185994Z",
+  "cgroup_headroom_bytes": null,
+  "cgroup_memory_current_bytes": null,
+  "cgroup_memory_max_bytes": null,
+  "effective_available_bytes": 15254589440,
+  "effective_floor_pass": true,
+  "failure_reasons": [],
+  "measurement_source": "/proc/meminfo",
+  "minimum_available_bytes": 4294967296,
+  "passed": true,
+  "physical_floor_pass": true,
+  "schema_version": 1
+}
+STEP2_EXIT=0
+prep_wall_seconds=7.173
+=== step (3) arm C1P1 ===
+{
+  "assessed_at": "2026-09-06T22:23:46.287653Z",
+  "available_physical_bytes": 15256367104,
+  "captured_at": "2026-09-06T22:23:46.287365Z",
+  "cgroup_headroom_bytes": null,
+  "cgroup_memory_current_bytes": null,
+  "cgroup_memory_max_bytes": null,
+  "effective_available_bytes": 15256367104,
+  "effective_floor_pass": true,
+  "failure_reasons": [],
+  "measurement_source": "/proc/meminfo",
+  "minimum_available_bytes": 4294967296,
+  "passed": true,
+  "physical_floor_pass": true,
+  "schema_version": 1
+}
+STEP3_EXIT=0
+=== step (4) arm FLEX ===
+{
+  "assessed_at": "2026-09-06T22:24:57.801814Z",
+  "available_physical_bytes": 15678771200,
+  "captured_at": "2026-09-06T22:24:57.801537Z",
+  "cgroup_headroom_bytes": null,
+  "cgroup_memory_current_bytes": null,
+  "cgroup_memory_max_bytes": null,
+  "effective_available_bytes": 15678771200,
+  "effective_floor_pass": true,
+  "failure_reasons": [],
+  "measurement_source": "/proc/meminfo",
+  "minimum_available_bytes": 4294967296,
+  "passed": true,
+  "physical_floor_pass": true,
+  "schema_version": 1
+}
+STEP4_EXIT=0
+=== step (5) reference ===
+{
+  "assessed_at": "2026-09-06T22:26:09.069565Z",
+  "available_physical_bytes": 15675715584,
+  "captured_at": "2026-09-06T22:26:09.069298Z",
+  "cgroup_headroom_bytes": null,
+  "cgroup_memory_current_bytes": null,
+  "cgroup_memory_max_bytes": null,
+  "effective_available_bytes": 15675715584,
+  "effective_floor_pass": true,
+  "failure_reasons": [],
+  "measurement_source": "/proc/meminfo",
+  "minimum_available_bytes": 4294967296,
+  "passed": true,
+  "physical_floor_pass": true,
+  "schema_version": 1
+}
+STEP5_EXIT=0
+chain_wall_seconds=152.622
+=== chain done ===
+=== Task 'rcle_b02_chain_20260906' exited with code 0 at 2026-09-07T06:26:11+08:00 (Duration: 152s) ===

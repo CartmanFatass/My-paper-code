@@ -40,7 +40,7 @@ The companion is provider text; internal dispatch and routing fields stay in HAN
 Follow the Transport skill for 6 Pro verification, the exact bound conversation,
 one Send, paired-message capture, full response archive and tab cleanup.
 
-Root's shared heartbeat observes pending requests under ROOT_OPERATIONS.md.
+Root observes pending requests within the owner's active goal under ROOT_OPERATIONS.md.
 Each request retains its source, parent, provider identity, archive and Send facts.
 A single request's completion does not pause observation needed by another.
 

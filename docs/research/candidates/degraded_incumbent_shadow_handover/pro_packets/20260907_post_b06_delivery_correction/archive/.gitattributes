@@ -1,0 +1,6 @@
+# Preserve these exact transport captures; the existing Pro response is unchanged.
+PROMPT_BODY.md -text -whitespace
+PACKET_MANIFEST.json -text -whitespace
+TRANSPORT_FACTS.json -text -whitespace
+CHAT_RECEIPT.md -text -whitespace
+GITHUB_COMMENT_SNAPSHOT.json -text -whitespace

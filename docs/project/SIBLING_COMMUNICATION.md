@@ -3,7 +3,7 @@
 Use native `collaboration` tools for agents in the current Root's task tree.
 Use `send_message_to_thread` for a separate app task, addressed by its exact task UUID.
 The current Root, Portfolio and observation endpoints are configured in `.codex/`;
-ROOT_OPERATIONS.md defines Portfolio planning, Root command execution/reporting and the shared wake. Portfolio sends concrete targets, actions and return routes; Root forwards completed or blocked returns to Portfolio instead of selecting a replacement task.
+ROOT_OPERATIONS.md defines Portfolio planning, Root command execution/reporting and goal-driven observation. Portfolio sends concrete targets, actions and return routes; Root logs ordinary execution and sends actionable planning gaps to Portfolio instead of selecting a replacement task.
 
 ## Native agent messages
 
@@ -26,8 +26,13 @@ the recipient's ACK are distinct facts. Reconcile uncertain delivery before retr
 
 ## App tasks and experiment observation
 
-Separate app tasks send to the configured Root without model/effort overrides for
-routine evidence or adoption. Root handles its own dispatch and completion locally.
+All cross-session `send_message_to_thread` calls, including Root's reports to Portfolio and
+Portfolio's commands to Root, omit both `model` and `thinking`. These optional fields
+change the recipient task's settings; they do not describe the sender or the cost of
+the message. Never copy the sender's model/effort into a recipient's message. Omission
+preserves the recipient's current settings. Portfolio effort is selected by the owner
+in the app; do not set or restore a fixed effort through task messages.
+Root handles its own dispatch and completion locally.
 Portfolio receives scientific updates at its configured task. Pro handoff routing
 follows Prompt Author's rendered fields and the Transport skill.
 
@@ -40,7 +45,40 @@ DM performs scientific intake. Transferring observation never launches another r
 Private terminal sessions do not become accessible merely by forwarding their IDs.
 Use the recorded detached supervisor, process identity and existing exit witness.
 Supervisor state establishes process termination; it does not establish scientific
-validity. Observation follows the configured shared heartbeat, not an extra agent task.
+validity. Observation runs within the owner's active goal, without a scheduled automation.
+
+## Root-to-Portfolio notification filter
+
+OWNER_DIRECT 2026-09-07: ordinary execution receipts belong in
+`docs/research/portfolio/root-log/YYYY-MM-DD.md`, using the local date. Root owns this
+append-only daily log. Each meaningful entry gives time with timezone, direction/command,
+what changed, evidence/commit or accepted handle, and the already-assigned next action.
+Link original evidence rather than copying it; maintain EXPERIMENT_TRACKING.md as the current
+operational state. Batch log entries into ordinary commits at clean boundaries; no per-entry
+commit, notification, new scheduler or periodic digest is required. Portfolio reads relevant
+entries when planning or when asked; it need not ACK each entry or poll the log.
+
+Dispatch ACKs, integration/push receipts, accepted launches, healthy observations, intermediate
+returns and terminal events with an executable named collection/intake/follow-on route are
+log-only. Continue that route and notify its responsible native DM/CM as needed. A completion
+requires a Portfolio message only when the assigned route is exhausted and creates an
+actionable vacancy or requires a new command. Routine evidence stays available in the log.
+
+Send Portfolio a new command/replacement or working-set decision needed, an unresolved
+scope/authority/scientific conflict, or a changed dependency/uncertain external effect that
+requires Portfolio action. Root also reliably escalates any problem it cannot resolve within
+the supplied route: execution failure, missing input/tool/access, or uncertain state. This is
+a repair request even when no scientific or Portfolio-tier decision is needed. Include the
+failed action, exact error/evidence, repairs already attempted, affected dependency and help
+needed. Send promptly once outside the assigned repair path; do not silently log it, wait for
+the next observation pass, repeatedly retry, or stop all independent work. Portfolio owns arranging the
+bounded repair and returning its next step; Root resumes at that step and reports a changed
+blocker if it persists. Reconcile ordinary technical issues within the assigned route first;
+never conceal a planning gap until the whole batch finishes. Name the decision/action needed,
+the affected directions and relevant log/evidence, with a compact working-set delta. Coalesce
+related facts and do not repeat an unchanged request. Required shared-index handoffs and direct
+replies to an explicit Portfolio/owner request remain allowed; keep them concise. All these
+messages preserve the recipient's model settings as specified above.
 
 ## Shared main checkout: Git index handoff
 

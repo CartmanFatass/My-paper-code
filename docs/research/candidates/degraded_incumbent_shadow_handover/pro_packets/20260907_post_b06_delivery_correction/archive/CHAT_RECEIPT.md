@@ -1,0 +1,1 @@
+[完整裁决（固定提交）](https://github.com/CartmanFatass/My-paper-code/blob/f7b58f1b88d7282f98ca6be531e9b4c27f85b690/docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260907_post_b06_delivery_correction/archive/RESPONSE.md) · [交付评论](https://github.com/CartmanFatass/My-paper-code/issues/4#issuecomment-5574756410)

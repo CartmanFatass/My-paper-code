@@ -22,8 +22,12 @@ This authority preserves the direction's source-grounded scientific question, ev
 B01 tested whether a trainable event-rule initialization improves finite-budget native return
 over a same-information, same-network generic learner on the new persistent-target N1 task.
 This is single-controller termination exploration; it establishes no multi-agent-specific
-mechanism. The complete 2026-09-05 Convergence decision now pauses this particular update-128
-full-budget initialization comparison and selects no successor experiment.
+mechanism. The complete 2026-09-05 Convergence decision pauses this particular update-128
+full-budget initialization comparison and selected no successor at that boundary.
+The complete 2026-09-07 Convergence decision now selects one outcome-informed B02 recast:
+fixed N=2 controllers whose submissions compete for the same eight-tick service slot.
+It asks whether the final learned scheduler beats fixed rules, and whether initialization adds
+anything beyond ordinary same-information learning. B02 has no empirical result yet.
 
 ## Current position
 
@@ -37,7 +41,7 @@ N1 native-return host; this new simulated departure/re-entry law does not authen
 source. Tuned headroom remains uncomputed, not zero. The fixed rule F is a reference, not an
 upper bound or a certificate of generic optimality.
 
-The selected B and its finite independent-seed extension are complete. At the update-128
+B01 and its finite independent-seed extension are complete. At the update-128
 primary endpoint, T=G=F for all three training pairs (returns 0.3755859375, 0.363779296875,
 0.385927734375); all 1,024 sampled native records match within each pair. There is no primary
 initialization gain or observed gain beyond the fixed rule in these runs. At update 32 T-G is
@@ -45,22 +49,45 @@ positive in all three, while G's greedy evaluator never submits; by update 64 on
 caught up. These earlier local differences survive, without a strong early generic or early
 beyond-F claim. Three observed primary zeros do not prove population equivalence.
 
-**PRO_FINAL: pause only the current fixed N1 full-budget initialization comparison.** The complete
-Convergence response preserves the early positive signal and chooses no new B, diagnostic,
+**PRO_FINAL, retained N1 boundary: pause only the current fixed N1 full-budget initialization comparison.** The prior complete
+Convergence response preserved the early positive signal and chose no new B, diagnostic,
 additional seed, longer training, host or multi-agent recast. This family boundary does not
 change Portfolio lifecycle or priority, close event-aware termination learning, or give B a
-C consumption state. No recast is added.
+C consumption state. That decision added no recast.
 
-A useful re-entry would specify a changed decision purpose, such as a justified early-use
+The prior decision allowed re-entry through a changed decision purpose, such as a justified early-use
 budget with a competent same-information comparison, or an actual task consequence that makes
 a changed termination learner valuable. It cannot merely relabel an observed positive checkpoint
-as the original primary result. A future coupled task must connect an agent's continuation or
-submission to its partners' feasible actions or native consequences. These are prospective
-question criteria, not selected work or demands for a new diagnostic chain, exact upper,
+as the original primary result. A coupled task must connect an agent's continuation or
+submission to its partners' feasible actions or native consequences. Those were prospective
+question criteria, without demands for a new diagnostic chain, exact upper,
 positive headroom, all-positive seeds or a complete causal explanation.
 
+**PRO_FINAL, 2026-09-07: first RECAST to the specified shared-service B02 family; recasts: 1.**
+The selected one seed-4 T/G training pair uses the same public information and trainable policy
+class, with final update-128 greedy team-return T−R as primary. R is the fixed readiness-and-yield
+rule; added R0 is T's initial greedy readiness rule without partner yielding. Report T−R0, T−G
+and G−R alongside the primary, retaining stochastic evaluation separately. R0 distinguishes
+learning beyond the initial script from R's possible weakness; it is no oracle or tuned baseline.
+The complete logical invocation has one 120-second cap. P09 freezes the selected B02 card with
+prospective RNG streams and predictions; the selected native comparison remains unmeasured.
+The selection/card is not a new empirical result.
+
+The supporting task fact is that one controller's t=26 submission removes its pending partner's
+t=28 and t=32 opportunities. This follows from the selected shared-slot law, not an observed
+advantage of waiting. Both targets advance forty transitions, and each action's learning return
+includes the actual remaining team consequences through t=40. The task is fixed-population and
+fully public; this comparison alone cannot identify a multi-agent-specific causal benefit.
+Tuned N2 headroom is absent. MEI is 0.02 team-return units, an interpretation scale rather than a
+validity threshold. The next discriminator is the selected learned-versus-rule comparison:
+does T beat both R and R0, and does G explain the same improvement? One training pair supports
+only a bounded local observation; either sign may motivate a specifically justified later B.
+
 The strongest surviving alternative is that public dwell age already suffices and the generic
-MLP matches the prior, or that all advantage is the fixed rule rather than learning. Waiting price,
+MLP matches the prior, or that all advantage is the fixed rule rather than learning. In the new
+host R0, R or ordinary G may handle scheduling, while the local readiness prior could occupy the
+slot too early and harm its partner. The three N1 final T=G=F observations remain the strongest
+empirical contradiction. Waiting price,
 event frequency, deadline behavior and different actual decision-row exposure remain visible.
 FSD's complete fixed-K2 family PARK and all its positive/negative evidence remain unchanged;
 sharing K1 does not pool polarity or reopen that family.
@@ -82,6 +109,11 @@ The evidence set includes historical observations and the separately labelled pr
 - [Combined scientific intake](VSP03_B01_SEEDS123_INTAKE_20260905.md)
 - [Complete three-pair Convergence response](pro_packets/20260905_b01_three_seed_convergence/archive/RESPONSE.md)
 - [Convergence intake and applied boundary](VSP03_B01_CONVERGENCE_INTAKE_20260905.md)
+- [Complete shared-service Convergence response](pro_packets/20260906_shared_service_convergence/archive/RESPONSE.md)
+- [Shared-service Convergence intake](VSP03_B02_CONVERGENCE_INTAKE_20260907.md)
+- [Selected B02 counts, no execution](VSP03_B02_SELECTED_COUNTS_20260907.json)
+- [Frozen B02 card and predictions](VSP03_B02_SCIENCE_CARD_20260907.md)
+- [Frozen B02 counts/cost](VSP03_B02_COUNTS_20260907.json)
 
 ## Provenance boundary
 

@@ -28,6 +28,17 @@ its existing Send state before continuing.
 New requests normally deliver on the corresponding shared direction branch. An extra branch
 requires a concrete special isolation need; keep accepted handoffs unchanged. A changed HEAD
 alone is not delivery evidence on a shared branch: verify the exact response path and commit.
+Load the canonical HANDOFF at the full commit returned for this request and compare its
+request ID, fixed TASK URL and branch/base with the assigned command and accepted-send record.
+An older same-path HANDOFF on main or in another checkout must not replace that artifact.
+For an unsent request, verify the remote target exists and satisfies this TASK's delivery
+clause. Normal descendant HEAD advances are allowed by the current renderer; a legacy fixed-
+HEAD clause is not silently relaxed. Return a stale or incompatible task to Portfolio before
+Send. For an accepted request, observe/archive its actual reply and route any delivery-only
+correction under the existing command; changing a local registry does not amend its prompt.
+Keep prior-round delivery/Send/archive fields in their matching request history when staging
+a successor. Reconcile current binding and direction mirror from exact request/message and
+archive evidence; a stale mirror or old branch note cannot establish a current Send or delivery.
 An Author handoff with `delivery_mode=github_delivery` uses the already supported
 paste transport request. Send its short fixed task link verbatim, no attachment,
 read-only preamble or copied evidence. Dispatch only a bound READY_TO_DISPATCH task;
@@ -199,18 +210,17 @@ the tab lease remains active while generation is pending. During Pro generation,
 observations. Never click `Answer now`, Retry, Continue, or Stop. A timeout becomes
 `WAITING_UNKNOWN`, not a send failure.
 
-Use Root's one existing shared heartbeat in `.codex/hmasd-monitor.toml`; never create a
-request-specific automation; never use `INTERVAL=1` busy polling. Activate/read back the shared wake before yielding accepted
-pending work. A thirty-minute Root pass observes experiments and requests due for a Pro check
-(at the thirty-minute fallback wake). Keep all request identities and tab
-leases separate; each due conversation gets one bounded DOM read, serially. Then persist
-observations and return to other work. A 20–60 minute generation may span several wakes.
+Observe pending work within Root's owner-driven goal; `.codex/hmasd-monitor.toml` identifies
+the endpoint only. Do not create or reactivate scheduled automations. Keep request identities
+and tab leases separate; each due conversation gets one bounded DOM read, serially. Persist
+observations and return to independent work or a bounded wait, without busy polling.
+A 20–60 minute generation may span several observation passes.
 At 60 minutes mark `WAITING_TIMEOUT`; retain the same conversation and recoverable tab.
 A timeout never creates a replacement conversation, scientific polarity, or another Send.
 If a page handle is lost, reclaim at most one tab by the exact persisted provider URL and
 update the lease; the tab ID is not identity. User-owned or explicitly mentioned tabs remain
-open without separate closure authorization. Completing this request must not pause the
-shared heartbeat while another experiment, request, archive or notification remains pending.
+open without separate closure authorization. Completing this request does not end observation
+of another experiment, request, archive or notification that remains pending within the goal.
 
 Natural completion requires an explicit completed status, no active generation
 control, and a complete assistant message in the same conversation. Capture the
@@ -241,10 +251,10 @@ do not edit archives or resend accepted requests to change their presentation.
 Deduplicate by `(conversation_binding_key, request_id, conversation_id,
 response_sha256)`; an identical existing archive is
 idempotent, while a different response for the same key is a conflict and must not
-overwrite anything. Mark this request no longer pending only after durable archive verification; pause the shared heartbeat only when the union of all current experiment and Pro pending work is empty. After a complete response is captured, hash-verified, and durably
+overwrite anything. Mark this request no longer pending only after durable archive verification. After a complete response is captured, hash-verified, and durably
 archived, close the agent-created tab and set its ephemeral `tab_id` to null (or
 `tab_lifecycle=CLOSED`) while retaining the conversation URL/ID and archive paths.
-The executor turn ending, a heartbeat wake returning, or a timeout is never
+The executor turn ending, an observation pass returning, or a timeout is never
 sufficient reason to close it; closure occurs only after natural completion and
 archive verification.
 
@@ -262,14 +272,14 @@ completion receipt in the persisted outbox, then send it once to the exact valid
 `parent_thread_id` using
 `mcp__codex_app__send_message_to_thread`. Omit `model` and `thinking` on every
 parent receipt, including blocker receipts, so the receiving parent retains its
-own settings. `operator_model` and `operator_thinking` apply only to dispatch INTO
-the Root execution endpoint; copying them onto a receipt changes the parent model.
+own settings. `operator_model` and `operator_thinking` describe the execution endpoint;
+do not copy them into any cross-session app message, including dispatch to Root.
 Use `send_message_to_thread({threadId: parent_thread_id, prompt: receipt_text})`.
 Do not send an extra receipt to repair a prior model override.
 The receipt must contain at least
 `request_id`, `workflow_node`, `conversation_binding_key`, `direction_id`,
 `direction_ids`, `state=ARCHIVED`, `conversation_id`, `provider_url`, response
-SHA-256, archive paths, and heartbeat retirement status; it must report
+SHA-256, archive paths, and request observation status; it must report
 transport facts only and must not add scientific interpretation. Record the receipt
 timestamp, destination thread ID, deterministic message key, attempt count, and
 delivery status in the registry or transport-fact file. Treat the logical receipt as
@@ -289,22 +299,20 @@ records the receipt substate `RETURN_RECEIPT_BLOCKED` without a message key or
 destination and performs no send. Never use the source/creator task, the operator task itself, an old receipt
 task, or any repository UUID as a fallback.
 
-### Shared heartbeat and request completion
+### Goal-driven observation and request completion
 
-Persist the shared heartbeat id and each request's own pending/completed state. A request
-remains pending during `WAITING_GENERATION`, `WAITING_HEARTBEAT`, `ARCHIVE_PENDING`,
+Persist each request's own pending/completed state. A request
+remains pending during `WAITING_GENERATION`, legacy `WAITING_HEARTBEAT`, `ARCHIVE_PENDING`,
 reconciliation or recoverable `WAITING_TIMEOUT`, and until its required notification is handled.
-After durable archival or an explicit terminal blocker without scheduled recovery, close only
-that request's observation. Do not delete/disable the shared automation unless no experiment
-or Pro request remains pending. Root itself remains available for later work.
-Use `automation_update` to update the existing automation, preserving its full prompt, interval
-and Root target; no per-request replacement. Request tabs, facts, archives, receipts and
-idempotency keys remain distinct even though their heartbeat id is shared.
+After durable archival or an explicit terminal blocker without a recovery route, close only
+that request's observation. Root remains available under the owner's goal. The owner removed
+the scheduler; do not recreate it or infer one from legacy state fields. Request tabs, facts,
+archives, receipts and idempotency keys remain distinct during goal-driven observation.
 Never multiplex a later owner-authored follow-up into the already archived request.
 Record its exact user-message identity separately and watch its paired response
 without sending anything. If the owner starts participating in an agent-created
 conversation, keep its tab open for that continuing use; finish only the earlier
-request's archive and wake cleanup. Apply the owner's new scope before intake.
+request's archive and observation cleanup. Apply the owner's new scope before intake.
 
 When a later wake needs a lost or stale page, create at most one recovery tab in the
 same in-app browser and navigate to the persisted exact `provider_url`. Verify the
@@ -326,12 +334,12 @@ evidence; it must produce `MONITOR_IDENTITY_MISMATCH` and stop recovery.
 
 Apply an owner stop or takeover to the affected request. Preserve accepted or uncertain
 Send state and return its factual handover. Close or transfer only that request's
-observation as instructed; preserve the shared wake while other work needs it.
+observation as instructed; preserve other pending records and follow the owner's goal scope.
 Do not resume stopped browser actions or change the prompt. Recovery of a proven
 accepted request observes the same request without another Send.
 
 Stop and report the exact state on unknown direction, missing prompt, failed Pro
 verification, incomplete upload, uncertain/mismatched submission, stale/ambiguous
-conversation identity, partial response, archive conflict, heartbeat overlap, or a
+conversation identity, partial response, archive conflict, observation conflict, or a
 recovery URL that no longer resolves to the bound conversation.
 Transport facts never imply scientific conclusions.

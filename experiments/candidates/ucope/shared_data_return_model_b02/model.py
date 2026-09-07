@@ -12,8 +12,8 @@ BATCHES = 1024
 EVAL_EPISODES = 4096
 
 
-def ancestry(context):
-    return (OBJECT_ID, f"seed-{SEED}", context_id(context))
+def ancestry(context, seed=SEED):
+    return (OBJECT_ID, f"seed-{seed}", context_id(context))
 
 
 def increment(value, count, reward):
@@ -103,8 +103,8 @@ def count_execution(counts, execution):
     counts["probe_time_units"] += 2 * int(probe)
 
 
-def collect(model, training, check_time, batches=BATCHES):
-    behavior = random.Random(SEED + 2_000_000)
+def collect(model, training, check_time, batches=BATCHES, seed=SEED):
+    behavior = random.Random(seed + 2_000_000)
     training.update(new_counts(), behavior_uniforms=0, batches_completed=0)
     for u in range(batches):
         check_time()
@@ -115,7 +115,7 @@ def collect(model, training, check_time, batches=BATCHES):
                 period = K_EVAL[int(4 * uniform)]
                 probe = j >= 16
                 execution = host.execute_episode(
-                    context, ancestry=ancestry(context), episode_index=32 * u + j, evaluation=False,
+                    context, ancestry=ancestry(context, seed), episode_index=32 * u + j, evaluation=False,
                     root_action="PROBE" if probe else "IMMEDIATE", support=K_EVAL,
                     immediate_period=None if probe else 4,
                     tail_selector=(lambda _count: period) if probe else None,
