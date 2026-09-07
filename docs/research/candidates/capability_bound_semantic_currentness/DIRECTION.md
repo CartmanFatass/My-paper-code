@@ -1,5 +1,29 @@
 # Direction capability_bound_semantic_currentness: capability-bound semantic currentness
 
+## Accepted next discriminator — 2026-09-06
+
+Convergence selects CBSC-OPPORTUNITY-CREDIT-B04: one new paired RAW/STRUCT
+run with sampled decision-plus-settlement targets and matching decision-only
+value supervision,48rollouts/768Adam per arm and fixed0/48evaluation.
+Actions leave later public history and host state unchanged, so a local target
+is a concrete learning alternative to extending the old training package.
+This motivates the comparison; it does not establish a GAE defect or a gain.
+
+The full-public-history RAW learner remains the containing null. A new cheap
+REQUEST_ONLY reference uses only public request activity. Old measured context
+means and the ledger imply that rule scores12.1875/12.1125 on the old panels,
+1.475/1.525 above the old all-REFRESH policies. This outcome-informed arithmetic
+is neither new execution nor tuned headroom. Future gains must be read against
+that simple alternative; exceeding it still does not establish semantic specificity.
+
+The strongest contrary evidence remains two zero representation gaps. The
+selected discriminator is fixed-endpoint native return inside the changed
+credit package, not a causal effect of replacing GAE or general MARL value.
+The old unchanged48-update family remains paused; no recast is counted.
+See CBSC_OPPORTUNITY_CREDIT_B04_CONVERGENCE_INTAKE_20260906.md,
+CBSC_OPPORTUNITY_CREDIT_B04_SCIENCE_CARD_20260906.md and the complete Pro
+decision in pro_packets/20260906_opportunity_credit_convergence/archive/RESPONSE.md.
+
 ## Current learning evidence and scoped family decision — 2026-09-05
 
 The Pro-selected **CBSC-DIRECT-RETURN-B02** is complete and valid at its local

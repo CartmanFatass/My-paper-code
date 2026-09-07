@@ -1,0 +1,43 @@
+{
+  "full_response_commit": "d3222ccb53f4986320f0015960ea997dccd8e856",
+  "input_and_delivery_base": "5c46871cdcde1dbe1332a5bc22a6c13c45de4ba5",
+  "task_commit": "14fd73ba3681b05f1e1ce80ca7c83707b5954acd",
+  "delivery_comment": "https://github.com/CartmanFatass/My-paper-code/issues/7#issuecomment-5564611403",
+  "files": {
+    "DELIVERY_COMMENT.json": {
+      "bytes": 3894,
+      "sha256": "e42e0c00b11523044403a3e6417cd72002f7e5adbaa1055fe4245d93c4de428b",
+      "source": "GitHub API immutable commit/comment readback"
+    },
+    "GITHUB_COMMIT.json": {
+      "bytes": 36243,
+      "sha256": "eb827bd98a61c5c7ad0bea2b2cd287b71a556b90dd931a33a2238896cc2af1ce",
+      "source": "GitHub API immutable commit/comment readback"
+    },
+    "PACKET_MANIFEST.json": {
+      "bytes": 1998,
+      "sha256": "48808fa4ebe139bffa07f722254e6f9e38a8b9d56a15a868f2d56e59d51fc694",
+      "source": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\cbsc_opportunity_20260906\\2026-09-06-cbsc-opportunity-credit-convergence-01--capability_bound_semantic_currentness__PACKET_MANIFEST.json"
+    },
+    "PROMPT.md": {
+      "bytes": 591,
+      "sha256": "fc9ae24b9cc1539d2120c5e32983818bb02590face7bcccf653b1d23ca663c84",
+      "source": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\cbsc_opportunity_20260906\\2026-09-06-cbsc-opportunity-credit-convergence-01--capability_bound_semantic_currentness__00_PROMPT.md"
+    },
+    "RESPONSE.md": {
+      "bytes": 31173,
+      "sha256": "864da3895570961c413c0292b10bd027968b0489002e2d0b95c9d0976025a893",
+      "source": "GitHub API immutable commit/comment readback"
+    },
+    "SHORT_RECEIPT.md": {
+      "bytes": 459,
+      "sha256": "024fa5ac254905b968cad09c3393bd5e1da1e09aeb453c3365da31ce94898fdd",
+      "source": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\cbsc_opportunity_20260906\\2026-09-06-cbsc-opportunity-credit-convergence-01--capability_bound_semantic_currentness--attempt-01__02_RESPONSE.md"
+    },
+    "TRANSPORT_FACTS.json": {
+      "bytes": 5208,
+      "sha256": "ded9d012a185d3e5d1bb30b57a20e334206a0c6f2af3e7f60c2d1aff0187294b",
+      "source": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\cbsc_opportunity_20260906\\2026-09-06-cbsc-opportunity-credit-convergence-01--capability_bound_semantic_currentness--attempt-01__03_TRANSPORT_FACTS.json"
+    }
+  }
+}
