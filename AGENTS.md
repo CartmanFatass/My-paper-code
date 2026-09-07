@@ -20,7 +20,10 @@ or uncertain external acceptance; Portfolio determines the next command. Portfol
 cross-direction scientific comparison, investment proposals and the scientific content of
 `docs/research/portfolio/PORTFOLIO.md`. By the owner's explicit 2026-09-06 instruction Portfolio
 runs directly on main; coordinate overlapping file edits with Root and push explicit-path commits.
-See `docs/project/ROOT_OPERATIONS.md` for the integrated routing and shared heartbeat. Each research
+Portfolio and Root use `.agents/skills/hmasd-loop-dispatch/SKILL.md` for batch planning,
+dispatch, return handling and working-set vacancies; Portfolio additionally uses
+`hmasd-portfolio-task` for scientific Portfolio decisions. See `docs/project/ROOT_OPERATIONS.md`
+for the integrated routing and shared heartbeat. Each research
 direction is driven by one **Direction Manager (DM)**: it holds the direction's science card,
 predictions on record, intake, and escalation. **Code Manager (CM)** turns one bounded engineering
 objective into an inspectable result. Specialist subagents (scout, implementers, reviewer, critic,
