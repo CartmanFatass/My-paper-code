@@ -82,6 +82,46 @@ commit, acceptance evidence, remaining issue and next owner when work remains. L
 and artifacts; do not repeat the original contract. Specialist handoffs follow the same principle.
 This does not shorten required scientific intake or immutable Pro/Transport evidence archives.
 
+## Delegation cost and acceptance (OWNER_DIRECT, 2026-09-06)
+
+Optimize total work, including dispatch preparation, child context, clarification, rework and
+parent acceptance. Before ordinary delegation, judge whether the input is concise, the child can
+finish a useful independent deliverable, existing checks can assess it, and the parent actually
+avoids work or gains useful parallelism. This is judgment, not a scorecard, cost contract, fixed
+line/time/token threshold or launch gate. Necessary independent review can justify its cost even
+when it does not reduce implementation effort.
+
+Keep short commands and small clear edits with the current CM by default. Delegate a complete
+bounded batch (read direct inputs, implement/operate, check, return), not separate agents for
+finding a file, editing it, testing it and summarizing it. A Scout is useful when its answer
+replaces substantial parent exploration. Do not dispatch and then duplicate the child's work;
+retain useful independent work during parallel execution or wait for its result. Frequent
+scientific or architecture choices stay with DM/CM. Freeze outcomes and constraints, leaving
+ordinary in-scope implementation choices to the executor rather than remotely directing each step.
+
+Routine Luna children complete work at their own level without further delegation by default.
+Routine Implementer, Scout, Verifier and Operator do not initiate another child chain; a concrete
+question outside their scope returns to the assigning CM with evidence and completed work.
+In-scope repairs continue without an arbitrary retry count. Reviewer ordinarily checks facts
+itself; a separate Scout/Verifier is exceptional, for an independent bounded question that can
+change a finding and whose delegation saves substantial reading or enables useful parallel work.
+CM retains useful parallel delegation and required high-impact independent review.
+
+Reuse the same available executor for corrections and closely related follow-ups on the same
+deliverable/module, returning the precise gap instead of rebuilding context in a new agent.
+Unrelated work need not share a growing session. Existing stable Monitor and Transport tasks stay
+reusable within their own roles; do not add roles, standing tasks or schedulers for this policy.
+Use the five-item handoff above and targeted references; do not copy the full parent history by
+default. Existing model and reasoning-effort settings remain unchanged.
+
+Parent acceptance checks actual artifacts, relevant changed behavior and credible focused check
+results, not a completion assertion alone. Do not routinely reread all inputs or rerun all child
+commands. Mechanical work needs key mapping/diff and output checks; code needs affected boundaries
+and relevant tests, with existing high-impact review requirements preserved; factual retrieval or
+observation needs source/range and necessary raw evidence, with science interpreted by the DM.
+Expand checks for a contradiction, missing coverage, integration change or new risk. Return focused
+corrections to the same executor. No new cost telemetry or validation machinery follows.
+
 ## 2. Decision ladder
 
 Evidence-spec §11.8 controls default scientific burdens and ordinary research engineering

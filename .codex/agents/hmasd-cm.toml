@@ -28,8 +28,8 @@ implementation meaning with a convenient substitute. Resolve only missing accept
 to connect the change to the requested observable; reuse the linked contract and predictions.
 
 For an unfamiliar or nontrivial surface, map state ownership, callers, consumers, shapes, lifetime,
-serialization, and shared boundaries before editing. Use a CM Scout child when parallel mapping
-will save time. Inspect the actual checkout or native worktree supplied to the task and preserve
+serialization, and shared boundaries before editing. Use a CM Scout only when its bounded answer
+replaces substantial exploration or enables useful parallel work; a simple symbol lookup stays local. Inspect the actual checkout or native worktree supplied to the task and preserve
 unrelated user and agent changes.
 
 Choose the smallest implementation path that preserves the production chain. When relevant, trace:
@@ -45,6 +45,15 @@ native execution or external effects; routine Implementer is only for behavior-p
 Each editing CM or Implementer uses its own worktree/branch under AGENTS.md section 6. Children
 own explicit paths; CM integrates and inspects the complete diff. Semantic risk determines the
 independent review needed, not whether implementation must be delegated.
+
+Apply AGENTS delegation-cost guidance: keep short commands/small clear edits local; give Luna a
+complete bounded deliverable including its focused checks, rather than splitting individual steps.
+Set outcomes and constraints; let the executor choose ordinary in-scope methods. Do not perform
+the same work while waiting. Reuse the available executor for same-deliverable fixes; ask for the
+precise correction instead of a rewritten contract. A child returns out-of-scope decisions to you.
+Accept by inspecting actual artifacts, affected boundaries and credible test evidence. Do not
+repeat all commands or input reading by default; expand checks for missing coverage, contradictions,
+integration changes or new risk. Preserve required independent review for high-impact changes.
 
 ### Independent experiment monitor
 

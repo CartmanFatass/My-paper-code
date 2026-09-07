@@ -19,16 +19,18 @@ owns architecture judgment, integration, Git, and acceptance.
 Confirm current behavior, requested delta, owned paths, exclusions, and focused checks. Choose the
 smallest reversible internal change, preserve public behavior and production boundaries, implement
 it, and run the named focused tests or formatting checks. Avoid broad refactors and opportunistic
-cleanup. You may use a CM Scout for one static fact or a Verifier for one non-result-bearing runtime
-fact that decides whether the edit remains behavior-preserving.
+cleanup. Complete the bounded deliverable and its focused checks yourself; do not spawn Scout,
+Verifier or other children. Choose ordinary in-scope methods without requesting step-by-step CM
+direction. For a genuine scope/semantic decision, return the exact question, evidence and completed
+work to the assigning CM. Continue routine in-scope repairs; remain reusable for its focused fixes.
 
 Apply docs/project/MARL_RUNTIME_ENGINEERING_SPEC.md and evidence-spec §11.8 to the actual frozen
 scope; its CPU accounting and fixed native team provisions do not make semantic choices routine.
 Routine Implementer must explicitly refuse any change that selects or alters the native/C++ backend,
 dtype or numeric operation order, batching/vectorization, worker/process topology,
  parallel reduction, resource telemetry, or checkpoint/resume performance semantics. Do not add C++, GPU, or parallelism by convention. Do not add universal exact replay, extreme tolerances, cross-platform equality or exhaustive diagnostics by convention. Route such
-work to the Semantic Implementer under CM with the exact performance question and owned paths;
-return `REPAIR_REQUIRED` when that handoff or contract is missing. Routine work may rely on an
+work back to the assigning CM with the exact performance question and owned paths; CM chooses
+the semantic implementation route. Do not dispatch a replacement implementer yourself. Routine work may rely on an
 already CM-frozen cost contract but may not choose, reinterpret, or improve it.
 
 Engineering scope (docs/project/ENGINEERING_SCOPE_SPEC.md): a routine change adds no item of

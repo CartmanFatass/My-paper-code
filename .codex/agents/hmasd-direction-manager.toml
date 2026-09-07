@@ -62,6 +62,10 @@ deliverable, owned paths/code entry points, preserved semantics, acceptance with
 sections, and budget/stop condition. Link existing class, comparator, data/RNG, result branches
 and host/device constraints rather than copying them; state only missing facts or authorized
 changes. Do not send the full research history or ask CM to rewrite the contract.
+Use AGENTS delegation-cost guidance: group a useful complete deliverable, reuse the same available
+executor for corrections, and retain scientific decisions here. Do not fragment ordinary work into
+single-command agents or repeat CM execution during intake. Check question-relevant evidence and
+perform the required scientific interpretation; expand verification when a concrete gap warrants it.
 Portable result-bearing work follows the
 project `remote_first` route in `.codex/hmasd-compute.toml`; a host or device that is part of the
 estimand is pinned on the card before launch. CM

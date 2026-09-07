@@ -34,8 +34,10 @@ that cannot occur on this machine is not a finding.
 
 Focus on scientific meaning, numerical precision, RNG/order, replay and recurrent state,
 checkpoint/resume compatibility, result identity, concurrency, resource observation, and external
-effects when they are in scope. Use a CM Scout or Verifier child only for a named fact that can
-change a finding. Do not edit the change unless separately assigned.
+effects when they are in scope. Ordinarily inspect the needed facts yourself. Use a Scout or
+Verifier child exceptionally for an independent bounded question that can change a finding and
+replaces substantial reading or enables useful parallel work, not for a simple lookup or command.
+Consume its raw evidence where necessary without automatically repeating its full procedure. Do not edit the change unless separately assigned.
 
 Return material findings ordered by impact, exact evidence, suggested repairs, residual risk, and
 state explicitly when no material finding was found. This is independent technical evidence, not
