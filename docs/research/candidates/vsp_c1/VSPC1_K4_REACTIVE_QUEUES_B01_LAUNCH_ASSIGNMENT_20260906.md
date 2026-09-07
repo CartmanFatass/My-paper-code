@@ -1,6 +1,6 @@
 # VSPC1-K4-REACTIVE-QUEUES-B01 — exact launch assignment, 2026-09-06
 
-**Corrected FACTOR-only transport prepared for Root acceptance; run01 was an accepted no-op, and no scientific runner has launched.**
+**FACTOR run02 is technically accepted; the corrected GENERIC handoff in §6 awaits Root acceptance and dispatch.**
 Source binding is the integrated, pushed main commit
 `47674883572bbe078ede037cbb8f99b8cd54c159`. Root explicitly requested this assignment
 and retained the stop until the exact handoff is accepted and source bytes are bound.
@@ -84,7 +84,10 @@ facts and return that specific issue to DM rather than silently modifying or ret
 The same holds for a refused GENERIC admission or concrete failure. Stop after the prescribed
 endpoint/publication/exit, whole-arm cap or concrete failure. Preserve partial output in place.
 
-## 4. Corrected FACTOR-only transport assignment — not executed
+## 4. Corrected FACTOR-only transport assignment — preserved after run02 execution
+
+The following repair assignment was accepted and executed by Root as run02; its terminal
+technical acceptance is recorded in the CM record and §6. Original preparation facts follow.
 
 Root's first accepted handle `vspc1-reactive-b01-factor-run01` is terminal with exit 0,
 start/end `2026-09-07T13:57:52+08:00`, duration 0 s, and only supervisor start/end log lines.
@@ -188,3 +191,67 @@ pending Root acceptance. Owner reviews on current main returned `[]` at preparat
 object-tier record selects preparing this already-chosen bounded execution assignment, not
 new scientific scope. No new P1/P2 owner decision is introduced; ordinary technical records
 follow the existing P2 cutoff. Independent Portfolio retains cross-direction science.
+
+## 6. GENERIC exact handoff after FACTOR acceptance — not dispatched
+
+FACTOR run02 was technically accepted in CM commit
+`02caf76d514f1dfc2d807964141e3e980336caa1` after actual artifact collection:
+exit0, complete primary/counts, adjacent memory admission and whole-arm wall4.84s.
+That acceptance, not FACTOR's return/sign, satisfies the prerequisite for the original
+GENERIC arm. Root requested this corrected handoff; Root must accept and dispatch it once.
+No GENERIC, admission or experiment was executed while preparing this handoff.
+
+Bound source remains `47674883572bbe078ede037cbb8f99b8cd54c159`, node wsl_4070,
+same existing detached cwd/interpreter as §4. New planned handle:
+`vspc1-reactive-b01-generic-run02`; new output: same run02 root's `GENERIC/`.
+Both were absent at preparation. Pair publication uses the accepted run02/FACTOR summary
+and new run02/GENERIC summary and writes `run02/paired_summary.json`.
+All scientific parameters and counts remain those in §§2–3 and the frozen card.
+
+**Exact Windows PowerShell payload for Root after acceptance:**
+
+```powershell
+$vspGenericLaunch = @'
+import shlex, subprocess
+w = "/home/wu/hmasd-worktrees/vspc1-reactive-queues-b01-476748835"
+p = "/home/wu/.venvs/hmasd/bin/python"
+o = w + "/temp/directions/vsp_c1/exp/k4_reactive_queues_b01_run02"
+generic = [p, "scripts/run_vspc1_k4_reactive_queues_b01.py", "--arm", "GENERIC", "--seed", "401", "--out", o + "/GENERIC"]
+paired = [p, "scripts/run_vspc1_k4_reactive_queues_b01.py", "--compare", o + "/FACTOR/summary.json", o + "/GENERIC/summary.json", "--out", o + "/paired_summary.json"]
+both = "import subprocess; subprocess.run(" + repr(generic) + ", check=True); subprocess.run(" + repr(paired) + ", check=True)"
+admission = [p, "scripts/hmasd_resource_preflight.py", "admit-memory", "--out", o + "/GENERIC/resource_admission.json"]
+timed = ["/usr/bin/time", "-p", "-o", o + "/GENERIC/invocation.time", "timeout", "--signal=KILL", "2700s", p, "-c", both]
+command = "cd " + shlex.quote(w) + " && " + shlex.join(admission) + " && " + shlex.join(timed)
+argv = ["/usr/local/bin/agent-task", "run", "vspc1-reactive-b01-generic-run02", command]
+subprocess.run(argv, check=True)
+'@
+$vspGenericLaunch | ssh -T -o BatchMode=yes -o ConnectTimeout=10 hmasd-wsl-node /home/wu/.venvs/hmasd/bin/python -
+if ($LASTEXITCODE -ne 0) { throw 'GENERIC dispatch returned nonzero; inspect run02 status before any further action' }
+```
+
+The same literal stdin transport is used. Python's standard `shlex.join` serializes
+explicit argument lists for the supervisor's existing single command-string boundary.
+The small fixed `python -c` sequence places both the GENERIC arm and offline paired
+publication beneath one 2700s timeout; it adds no research source or generic launcher.
+The second call runs only after the first exits zero. Fresh node-local `admit-memory`
+with its own receipt is immediately adjacent before this capped command. Entire
+initialization/256 updates/nine evaluations/primary readback/paired report/exit stay inside
+the cap. No separate GENERIC probe, source change, test rerun or configuration selection.
+
+Non-result transport verification passed through PowerShell → SSH stdin → remote Python:
+bash syntax exit0, exact admission/timed argv roundtrip, and AST inspection that the two
+embedded calls are precisely the GENERIC and paired-publication arrays shown above.
+Only syntax/parsing occurred; prospective agent-task argv was printed, not dispatched.
+Raw check: `temp/directions/vsp_c1/transport_repair_20260906/generic_argv_check.json`
+in the CM repair worktree. Same Root adoption/ACTIVE readback and CM/DM ownership as §5.
+
+After actual acceptance, inspect `agent-task status vspc1-reactive-b01-generic-run02`
+and `agent-task logs vspc1-reactive-b01-generic-run02 40`; manual stop uses
+`agent-task stop vspc1-reactive-b01-generic-run02`. An uncertain send must use this
+same handle for reconciliation. Technical completion requires GENERIC summary/counts,
+fresh receipt, complete timing/exit and paired summary. No new seed, retry allowance,
+budget extension or scientific disposition is introduced.
+
+Independent reviewer `review_ah_reactive_queues` found no material concern in this GENERIC
+handoff. It checked the supervisor's actual `eval ${COMMAND@Q}` serialization, shlex argv,
+shared timeout and paired-publication dependency. No launch/admission/test was performed.
