@@ -51,3 +51,8 @@ DM retains result classification and the scientific ceiling.
 At this selection commit, the handoff is ready for immediate native dispatch
 after push; no A02 process has yet been accepted. CM's own command/result record
 will carry the accepted handle or precise no-invocation gap.
+
+After push of `90dbcbd752a48f0fec5371a797dfdf54c84c50aa`, native follow-up to
+that same CM was accepted on 2026-09-07 at approximately 15:58 UTC. Root received
+the selection commit and actual dispatch. No A02 handle had yet been accepted;
+the CM remains responsible for the bounded implementation and collection.
