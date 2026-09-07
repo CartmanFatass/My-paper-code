@@ -110,6 +110,26 @@ invented here. Owner reviews were empty at this clean boundary.
 
 ## Whole working set
 
+### P09-CBSC-NEXT-PATH-02 — after integrated A03 intake
+
+1. **Target/goal:** `/root/dm_amx_cbsc_next` reuses `cm_cbsc_opportunity_b04` to propose
+   one concretely changed acquisition path after A03, or recommend yielding this dependency.
+2. **Inputs/ownership:** terminal intake integrated at `e4612f518`, A03 E0 and its retained
+   21 containers, partial Torch file and original acquisition command. Use `codex/cbsc` and
+   its designated checkout. Inspect only the failed transfer boundary and candidate alternative.
+3. **Preserve/bounds:** same selected package versions/tags and metadata goal; no presumed
+   B04 cause. Reuse recorded cache inventory and headers rather than repeating their census.
+   Existing logs/configuration and bounded metadata reads may support the changed route;
+   headers alone do not prove complete-body acquisition. No full-body download, install,
+   import, host/model call, throughput study or resumed A03 invocation in this preparation.
+4. **Acceptance/return:** one exact prospective command accounting for retained partial state,
+   both missing bodies, install/import/publication and a complete <=600s cap; explain what
+   materially differs from the failed route, its evidence and remaining uncertainty. If no
+   credible route is available, return that finding and a yield recommendation. Same DM
+   assesses the engineering proposal and returns it through Root to Portfolio for selection.
+5. **Stop:** prepared proposal/explicit gap and pushed record. No new A04 allocation or
+   experiment follows this command; no generic retry machinery or global dependency upgrade.
+
 Retain CBSC A03 and VSPC1's already-selected completion through their existing DM intake routes.
 UCOPE half-data, DISH corrected delivery and VSP03 selected B02 refill the returned chains;
 Root reports actual acceptance, not just this issued table. RCLE's missing post-A02 response
