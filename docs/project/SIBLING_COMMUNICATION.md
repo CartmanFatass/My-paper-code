@@ -41,3 +41,15 @@ Private terminal sessions do not become accessible merely by forwarding their ID
 Use the recorded detached supervisor, process identity and existing exit witness.
 Supervisor state establishes process termination; it does not establish scientific
 validity. Observation follows the configured shared heartbeat, not an extra agent task.
+
+## Shared main checkout: Git index handoff
+
+Portfolio and Root share one main checkout and index. Before either stages, commits or
+cherry-picks there, notify the other of the paths and wait for its acknowledgment that its
+current index operation has finished and it will not start another until release. Keep this
+handoff limited to the short Git operation; native research, read-only work and other worktrees
+continue. Commit by explicit path and push immediately, then release the index to the peer.
+An in-progress cherry-pick/conflict must finish before the other session stages any path.
+If unrelated authorized edits were already included, inspect and attribute them accurately;
+preserve history rather than reset, stash or silently rewrite it. No lockfile, lease or scheduler
+is introduced by this communication rule.

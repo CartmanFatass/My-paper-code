@@ -16,6 +16,8 @@ Use current commands in `docs/research/portfolio/PORTFOLIO.md`, actual native di
 receipts and current `EXPERIMENT_TRACKING.md` facts. The original delivery artifact establishes
 what completed; an old native summary does not replace a later experiment or scientific intake.
 A committed command, accepted dispatch and running task are different states.
+Before shared-main index mutations, use the peer handoff in
+`docs/project/SIBLING_COMMUNICATION.md`; other work continues while the short Git operation runs.
 
 Count advancing direction chains, not child agents: implementation, collection, intake and
 question preparation count; an external wait, completed child or undispatched intention does
