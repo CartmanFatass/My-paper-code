@@ -102,3 +102,16 @@ Owner reviews at freeze returned []; owner prediction remains not taken.
 At this assignment freeze the new handle is **not yet accepted**; no new admission,
 model, rule, host, RNG, test or evaluation has occurred. CM appends actual acceptance and
 E0 technical return below; they replace prospective counts only when directly observed.
+
+
+## Actual staging before sole launch
+
+CM began clean at a031db953284c928f7955fef12fe2e075e1aee30. The completion worktree and
+handle were absent. Native Git bundle from named ref
+`refs/hmasd/vspc1-service-allocation-completion402-source-20260907` advertised exact
+`ec8866b3968fcb1566976ce405d7c552d4d9a5de`; bundle size94,499,016bytes, complete history.
+Transferred to new `/home/wu/hmasd-inputs/vspc1-service-allocation-completion402-20260907/source.bundle`.
+Remote bundle verify/import and detached worktree creation succeeded; HEAD readback matched
+the exact SHA, and status was clean. No HTTPS availability probe, source change, fixture,
+model or rule call occurred in staging. This entry is committed/pushed before executing the
+unchanged exact command above. Original inputs remain readonly.
