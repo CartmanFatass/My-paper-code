@@ -6,8 +6,8 @@ OWNER_DIRECT merger: existing Luna/xhigh Root directly observes experiments and 
 requests. Standalone Monitor and Transport have relinquished their current work. See
 `.codex/hmasd-monitor.toml`, `.codex/hmasd-transport.toml` and `docs/project/ROOT_OPERATIONS.md`.
 Current assigned live/unknown experiment handles: none live; `vspc1-reactive-b01-factor-run02` and
-`vspc1-reactive-b01-generic-run02` are terminal, with FACTOR technically accepted and GENERIC
-awaiting CM collection. The single Root heartbeat also covers the
+`vspc1-reactive-b01-generic-run02` are terminal, with both arms technically accepted and DM
+scientific intake pending. The single Root heartbeat also covers the
 explicit pending Pro rows below; experiment completion alone does not pause it.
 Historical handles and old routing sections below are retained evidence, not current assignments.
 
@@ -26,8 +26,10 @@ integrated B01 CM record. GENERIC `vspc1-reactive-b01-generic-run02` passed fres
 `15669395456` bytes, exited 0 after complete publication/readback (256 updates, 4096 training
 episodes, 2304 evaluation episodes, 17 target copies, 4.2558 s summary wall), and wrote the
 paired summary with provisional FACTOR−GENERIC endpoint delta `-0.00032552083333333304`.
-CM is collecting the complete GENERIC artifacts; DM owns scientific interpretation. No
-scientific polarity follows from the prior no-op or from either arm before paired intake.
+CM has collected and independently recomputed the complete pair; DM owns scientific
+interpretation and intake. The published endpoint and AUC signs differ and are both retained,
+with descriptive status `insufficient_practical_gain` and no follow-up selected by CM. No
+scientific polarity follows from the prior no-op or before DM's paired intake.
 
 ## Current Pro handover queue — 2026-09-06
 
