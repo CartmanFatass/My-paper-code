@@ -101,4 +101,11 @@ print(json.dumps(json.loads(path.read_text(encoding="utf-8")), indent=2))
 
 ## Execution facts
 
-Pending the sole invocation; static inspection establishes no runtime success.
+The sole invocation was accepted by agent-task (launch transport exit 0) at
+source `ff4b2cca900e6569d6aa99be8c4c430209b16350`.
+The source was pushed before Git-bundle staging and detached-worktree creation.
+Non-executing bash syntax check returned 0. First same-handle status showed
+running, PID 2741680, tmux active. Fresh admission passed and the log recorded
+CPython 3.12.3 venv creation; install was active. Accepted-handle adoption was
+requested directly from Root; CM retains observation pending ACK and collection.
+No runtime outcome is inferred from this intermediate state.
