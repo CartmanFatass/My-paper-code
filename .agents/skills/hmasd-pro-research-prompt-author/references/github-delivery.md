@@ -24,6 +24,14 @@ snapshots as pinned references. Do not use a moving branch as task input.
    use the rendered local CALLER_DIRECT path without self-dispatch. Intake belongs to DM/Portfolio.
    New mode uses existing paste request support; do not upload TASK or prepend
    attachment-only/read-only instructions. No request/routing fields enter prose.
+   OWNER_DIRECT 2026-09-06: the short prompt and TASK delivery section share the same
+   final readback instruction. Before replying, Pro makes fresh GitHub reads of the
+   delivery branch HEAD, the response at that commit and this round's Issue comment.
+   The input-evidence SHA stays fixed; delivery is checked at the delivery commit.
+   The final receipt follows those reads: confirmed delivery links, confirmed partial
+   delivery with its remaining gap, or only the unresolved status marked unconfirmed.
+   Missing write receipts or failed reads do not establish that no write occurred;
+   inspect actual state before retrying, retaining all confirmed results.
 5. On delivery, read full response by exact commit. Check target and changed scope,
    retain raw bytes and comment snapshot in the existing archive, then perform the
    existing scientific intake. Full original response belongs in RESPONSE.md;
