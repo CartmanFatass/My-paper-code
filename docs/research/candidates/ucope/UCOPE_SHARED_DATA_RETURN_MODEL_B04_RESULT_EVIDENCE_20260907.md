@@ -46,4 +46,36 @@ and collects. A dependent defect/admission gap returns completed/partial facts w
 
 ## Launch binding and collection
 
-Pending Root source integration acknowledgment and prospective exact command record.
+Root integrated and pushed the card/accepted source at main `98ee9ec0f` (integration commits
+`942a3ec86`, `98ee9ec0f`) and acknowledged execution, relayed by DM before this binding.
+The exact accepted launch source is `71433bfabb70481def4329e622a838fa0cd9eeec` on `codex/ucope`;
+Git surface comparison with integrated main shows no differences in the B02/B03/B04 runners
+or UCOPE experiment tree. Both authoring checkout and bound source surface are clean.
+
+Node `wsl_4070`, detached cwd `/home/wu/hmasd-worktrees/ucope-shared-return-b04-20260907`;
+full-history named-reference Git bundle/SCP stages the committed source, using
+`/home/wu/hmasd-inputs/ucope-b04-source-20260907.bundle`. Handles are
+`ucope-shared-return-b04-seed6601-20260907` and `ucope-shared-return-b04-seed6602-20260907`.
+Both handles were confirmed absent and proposed remote source/bundle locations unused before binding.
+Each supervisor log is `/home/wu/.agent-tasks/<handle>/task.log`. Each output root is
+`temp/directions/ucope/exp/shared-data-return-b04-seed<seed>/` beneath the bound cwd, containing
+`summary.json` and adjacent `resource_admission.json`. The outer timeout includes admission and
+all runner work; admission failure prevents the adjacent runner. Same selected host, no fallback.
+
+Exact remote supervisor command strings, recorded before either output:
+
+### Seed 6601
+
+```sh
+/usr/local/bin/agent-task run ucope-shared-return-b04-seed6601-20260907 '/usr/bin/time -f '"'"'whole_wall_seconds=%e peak_rss_kib=%M'"'"' /usr/bin/timeout --signal=KILL 600s /bin/bash --noprofile --norc -c '"'"'cd /home/wu/hmasd-worktrees/ucope-shared-return-b04-20260907 && /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/ucope/exp/shared-data-return-b04-seed6601/resource_admission.json && /home/wu/.venvs/hmasd/bin/python scripts/run_ucope_shared_data_return_model_b04.py --seed 6601 --out temp/directions/ucope/exp/shared-data-return-b04-seed6601'"'"''
+```
+
+### Seed 6602
+
+```sh
+/usr/local/bin/agent-task run ucope-shared-return-b04-seed6602-20260907 '/usr/bin/time -f '"'"'whole_wall_seconds=%e peak_rss_kib=%M'"'"' /usr/bin/timeout --signal=KILL 600s /bin/bash --noprofile --norc -c '"'"'cd /home/wu/hmasd-worktrees/ucope-shared-return-b04-20260907 && /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/ucope/exp/shared-data-return-b04-seed6602/resource_admission.json && /home/wu/.venvs/hmasd/bin/python scripts/run_ucope_shared_data_return_model_b04.py --seed 6602 --out temp/directions/ucope/exp/shared-data-return-b04-seed6602'"'"''
+```
+
+## Terminal collection
+
+Pending; neither B04 invocation has been dispatched at this binding commit.
