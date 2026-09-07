@@ -92,3 +92,24 @@ scope: none
   VSPC1 7b4948f8b; concurrent audit rows preserved. VSPC1 implementation delivery
   0652103f6/103d96790/64895a181 and DISH post-B05 preparation199bc19c1 remain for
   normal Root acceptance after the migration. No launch was added by this record.
+
+### Runtime cutover completed
+
+Migration source27f637b10 was integrated and pushed on main as2a5cadd41.
+The existing automation `hmasd-experiment-monitor` was updated to `HMASD Root pending work`,
+target Root01a07249, ACTIVE with a30-minute interval; saved configuration readback confirmed
+all three fields and preserved the full combined long-term prompt. The two current Pro
+reconciliation rows keep it active despite no live experiments.
+
+The old Monitor01a0791b and Transport01a06f0e were archived only after explicit clean
+handover/relinquishment. Portfolio received the routing-ready release at its actual destination
+01a07a3e on main/Astra-max. DISH and VSPC1 native DMs received the new direct routing and
+kept their existing scientific/launch bounds. Other pending DMs remain reachable in the same
+Root native tree; their exact request routes are in the current tracking table.
+
+Root's task model setting was explicitly submitted through the app as
+`model=gpt-5.6-luna`, `thinking=xhigh` for subsequent work; the app accepted the update on
+the existing Root task. This one administrative model-setting message is not a Transport
+receipt and is not to be repeated. No global default or DM/CM model was changed.
+No experiment or provider Send occurred as a migration test. Actual provider acceptance
+reconciliation and new research are follow-on operational work, not claimed completed here.
