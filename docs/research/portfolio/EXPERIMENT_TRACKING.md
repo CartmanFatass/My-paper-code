@@ -5,7 +5,9 @@
 OWNER_DIRECT merger: existing Luna/xhigh Root directly observes experiments and transports Pro
 requests. Standalone Monitor and Transport have relinquished their current work. See
 `.codex/hmasd-monitor.toml`, `.codex/hmasd-transport.toml` and `docs/project/ROOT_OPERATIONS.md`.
-Current assigned live/unknown experiment handles: none; UCOPE seeds6301/6302 are terminal and
+Current assigned live/unknown experiment handles: DISH
+`dish_b06_seed113_20260907_run01` on `wsl_4070` (source `373d18720`, supervisor running;
+admission passed and Root adoption ACK sent). UCOPE seeds6301/6302 are terminal and
 handed directly to CM collection. `vspc1-reactive-b01-factor-run02` and
 `vspc1-reactive-b01-generic-run02` are terminal, technically accepted and fully intaken by the
 DM. The single Root heartbeat also covers the
@@ -76,11 +78,13 @@ P07-UCOPE-PREP-01 to `/root/dm_ucope_question_prep` for an independent post-NR-B
 P07-DISH-EXEC-01 separately dispatched the existing DISH CM for the one selected B06 invocation.
 These are the current five advancing native chains (DISH CM, VSPC1, CBSC, VSP03 and UCOPE);
 RCLE is closed at its transport boundary. No task adds a retry budget, new scientific conclusion
-or unrecorded result-bearing invocation. DISH CM later reported the exact remote
-`git fetch && worktree add` staging command exited `1` with an SSL connection timeout to the
-GitHub remote; no worktree, admission, supervisor run or scientific exposure was created. A
-partial-clone lazy fetch remained pending while SSH itself responded; no repair or fallback was
-selected.
+or unrecorded result-bearing invocation. DISH CM first reported the exact remote
+`git fetch && worktree add` staging command exited `1` with an SSL connection timeout. The
+Portfolio-directed VCS repair then staged bundle digest
+`d07f58612918c1684731232e3fb89ad74a025c19923b8248de17286dd73ee9da`, created the detached
+worktree at `/home/wu/hmasd-worktrees/dish-b06-seed113-20260907-run01`, and accepted handle
+`dish_b06_seed113_20260907_run01`. Same-node admission passed physical/effective
+`15665545216` bytes; the unique B06 invocation is running under the shared heartbeat.
 
 ## Current Pro handover queue — 2026-09-06
 
