@@ -71,6 +71,46 @@ advance after the available scan, return the specific dependencies and next wake
 source. Do not invent a fifth experiment, change lifecycle, or add an automation to fill time.
 These are continuation instructions, not new scientific launch conditions or approval steps.
 
+### Root's execution steps (Luna; OWNER_DIRECT 2026-09-06 clarification)
+
+Follow these steps in order on a normal turn or fallback wake. Use the named current
+records; do not reconstruct all direction history or decide missing science yourself.
+
+1. **Check owner changes.** Apply an explicit stop or changed scope first. A question,
+   status request or completed subtask alone does not revoke standing authorization.
+2. **Route new evidence.** A terminal experiment goes to its CM for collection/acceptance,
+   then its DM for scientific intake. An archived Pro answer goes to its named DM or
+   Portfolio. An integrated intake goes to Portfolio as a concise source/commit delta.
+   Reuse the existing recipient; do not resend an already delivered receipt.
+3. **Continue a selected object.** If the integrated card/intake selects a next object
+   and the previous assignment ended at documentation, send the existing DM a bounded
+   instruction to commission CM from that card's handoff section. Record the actual
+   dispatch and next owner. Do not merely recommend doing it. If the intake selects no
+   further invocation, do not launch one; use only an already authorized preparation
+   task, or send the missing scientific question to DM/Portfolio.
+4. **Fill available slots.** Read Portfolio's current order. For each candidate, check
+   its recorded next action and concrete blocker. Continue ready existing chains first;
+   then assign the first runnable conditional candidate until five chains advance or
+   the recorded list is exhausted. A DM waiting only for Pro does not occupy an advancing
+   slot when another admitted candidate can work. Do not create a duplicate agenda or
+   infer a new object from an ACTIVE label.
+5. **Escalate only the missing decision.** For an exhausted/ambiguous ordering, send
+   Portfolio the available slots, candidate-specific blockers and exact missing choice.
+   For uncertain scientific meaning, ask the DM; for a technical defect, ask CM. Send
+   once, preserve the pending route, and continue the other ready steps above. Do not
+   wait for Portfolio to approve an already selected implementation.
+6. **Choose the next wait from actual state.** While an assigned native DM/CM is still
+   producing an intake or delivery, use native waiting and process its return before
+   ending with a status summary. When only external experiment/Pro waits remain, retain
+   the existing shared observation route and return. When every candidate is concretely
+   blocked, record each blocker and its next responsible task/message source, then return.
+   A status list, an unsent recommendation or a stale snapshot is not a completed handoff.
+
+When reporting progress, name the action actually dispatched, its responsible agent and
+the remaining dependency. If fewer than five chains advance, state the concrete reason;
+do not claim that five listed directions are five active chains. This procedure adds no
+experiment permission, new scheduler, mandatory diagnostic or Portfolio approval step.
+
 ## One shared fallback wake
 
 Owner cadence correction: use a thirty-minute recovery heartbeat because the integrated
