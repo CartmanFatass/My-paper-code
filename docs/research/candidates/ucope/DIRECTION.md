@@ -25,10 +25,13 @@ remains dated provenance under the controlling evidence specification section 11
   `UCOPE-CPA-SAME-DATA-BELLMAN-STRUCTURAL-COMPETENCE-R01`
 - Historical selected B discriminator:
   `UCOPE-B-EXPLORE-FT-XF-BC-INVERTIBLE-CONDITIONING-DISCRIMINATOR-R01`
-- Latest direction-local decision:
+- Latest direction-tier decision:
   **2026-09-05 PRO_FINAL / PARK** of the current same-draw retained-policy
   root-residual localization family, including its numerical-locus dependency;
   no successor selected. See the dated current position below.
+- Latest bounded B observation: **2026-09-07 native-return acquisition B01, NR-B**;
+  both fresh final policies chose IMMEDIATE-4 throughout and had zero native-return advantage.
+  This adds no direction-tier disposition or further invocation.
 - Historical discriminator science-card current-byte SHA-256:
   `e08744fa18d708c9ad570bdce8b71296407991a4f5f79d502d37330913435fd8`
 - Historical discriminator science-card canonical-LF object digest:
@@ -48,7 +51,32 @@ without a distinct count-state architecture because RAW contains the sufficient
 count. The direct-service alternative remains separated by the frozen
 `Gamma=I+D` decomposition and analytic `D≈-0.02` boundary.
 
-## Current scientific position — 2026-09-05
+## Current scientific position — 2026-09-07
+
+The separate native-return acquisition B01 completed both frozen training seeds 6301/6302 and
+receives **NR-B**, mean native-return difference 0 against IMMEDIATE-4. Every final modal root
+action is immediate in all eight contexts for both seeds; each conditional paired MC SE is 0.
+This is absence of acquisition benefit for this learner, budget and endpoint on two runs,
+not stable equivalence or a rejection of paid information. Zero paired SE describes the identical
+final paths and does not establish zero environment or training-population uncertainty.
+
+The strongest support is the complete native comparison after 524,288 training episodes and
+2,048 joint updates; training included 126,242 probes and every batch was tail-active. Thus
+literal absence of learner/probe exposure cannot explain the result. The prospective NR-B and
+at-least-one-all-immediate prediction matched; its causal explanation remains unverified.
+Credit quality, exposure allocation, finite budget and stochastic-training/modal-evaluation
+differences remain alternatives. Unused tail outputs supply no native acquisition value.
+
+Historical PA-B acquisition and TW-B tail coverage remain the strongest contradiction to any
+broader negative; their unchanged full-competence and false-probe costs remain below. No tuned
+generic current-host headroom record is added. No further discriminator or invocation is selected:
+a future B needs a specifically justified learning question and a native comparison with this immediate
+null. The retained-policy/numerical-locus family and its re-entry requirements are unchanged.
+See [B01 card](UCOPE_NATIVE_RETURN_ACQUISITION_B01_SCIENCE_CARD_20260907.md),
+[complete result](UCOPE_NATIVE_RETURN_ACQUISITION_B01_RESULT_EVIDENCE_20260907.md) and
+[scientific intake](UCOPE_NATIVE_RETURN_ACQUISITION_B01_INTAKE_20260907.md).
+
+## Retained-policy family disposition — 2026-09-05
 
 The complete verified 6 Pro response for `2026-09-05-ucope-post-interface-convergence-01`
 decides **PARK / REVERSIBLE_SCIENTIFIC_FAMILY_PAUSE**, with **NONE_NOW** as the next object.
