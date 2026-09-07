@@ -53,9 +53,11 @@ peak RSS `510200 KiB`; log `/home/wu/.agent-tasks/ucope-native-return-b01-seed63
 Seed `6302` completed on the same source/cwd, exit `0` at `2026-09-07T07:48:55Z`, after fresh
 admission passed physical/effective `15664181248` bytes at `2026-09-07T07:48:45.967Z`; the
 supervisor log reports `COMPLETE` and runner wall `9.254238544 s` (supervisor duration `10 s`),
-with log `/home/wu/.agent-tasks/ucope-native-return-b01-seed6302/task.log`. Root's terminal
-fact was delivered to DM and CM; full output collection and paired technical acceptance remain
-with CM, then DM applies the frozen reading rule. No scientific polarity exists.
+with log `/home/wu/.agent-tasks/ucope-native-return-b01-seed6302/task.log`. CM collected and
+technically accepted both formal outputs at `d234f7648` (integrated `fba696098`): total `655360`
+episodes, `2068172` host-event transitions, `2048` updates, walls `8.80/9.67 s`, peak RSS
+`510200/506720 KiB`, and complete state/log/evaluation readback. Root delivered terminal facts;
+DM now applies the frozen reading rule. No scientific polarity exists.
 
 ## Current Pro handover queue — 2026-09-06
 
