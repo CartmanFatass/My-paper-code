@@ -10,7 +10,7 @@ Current assigned live/unknown experiment handles: none; VSP03
 `00ebefa5823dbb41e64aed11b90ba26a8ff97020` in detached cwd
 `/home/wu/hmasd-worktrees/vsp03-b02-p09-00ebefa5823dbb41e64aed11b90ba26a8ff97020`; its supervisor
 log is `/home/wu/.agent-tasks/vsp03-b02-p09-20260907/task.log`, and the selected output root is
-`/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b02_seed4_p09_20260907`. The single frozen
+`/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b02_seed4_p09_20260907` (historical P09). The selected P10 output root is`n`/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b02_seed4_p10_lf_20260907`; its fresh admission sibling is`n`/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b02_seed4_p10_lf_20260907_admission.json`, and its supervisor log is`n`/home/wu/.agent-tasks/vsp03-b02-p10-lf-20260907/task.log. The single frozen
 120-second invocation passed fresh admission (`15662940160` physical/effective bytes) but exited
 2 in argument parsing because the PowerShell stdin transport added a trailing CR to `--node`
 (`wsl_4070\r`); no learner/model/trajectory/result exposure occurred. Portfolio must issue the
@@ -24,7 +24,7 @@ handed directly to CM collection. `vspc1-reactive-b01-factor-run02` and
 `vspc1-reactive-b01-generic-run02` are terminal, technically accepted and fully intaken by the
 DM. The single Root heartbeat also covers the
 explicit pending Pro rows below; experiment completion alone does not pause it.
-The shared Root heartbeat remains ACTIVE while VSP03 is observed and these terminal returns and
+The shared Root heartbeat remains ACTIVE while VSP03 P10 is observed and these terminal returns and
 pending Pro rows are delivered and reconciled. Historical
 handles and old routing sections below are retained evidence, not current assignments.
 
