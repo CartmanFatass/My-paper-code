@@ -1,14 +1,15 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-07 (P10 goal-driven five-task batch prepared; dispatch unconfirmed)
+Updated at: 2026-09-07 (P10 five native dispatches accepted; goal targets five UAV entries)
 
 Current plan: [P10 exact commands](handoffs/2026-09-07-p10-goal-five-directions.md) targets
 VSP03 repair, UCOPE pair preparation, CBSC path selection, RCLE request reconciliation and
 VSPC1 next-question preparation. These commands supersede the P09 execution snapshot below
-only within their named boundaries. Latest received returns confirm no active slot; this is
-not a fresh runtime census. Root must establish actual accepted recipients and states.
+only within their named boundaries. Root's receipt `4c5734e58` confirms all five native
+dispatches accepted and active at that observation. Subsequent completions and unresolved
+returns change the count; this receipt is not a standing assertion that all five remain active.
 Count active native work, accepted running experiments and accepted Pro generation once per
-direction, targeting five until two directions formally enter UAV validation. Prepared commands,
+direction, targeting five until five directions formally enter UAV validation. Prepared commands,
 completed returns and unresolved transport waits do not count. P10 defines goal-accounting
 references and preserves existing scientific decision authority; no universal numerical UAV
 threshold or new A/B gate is introduced.

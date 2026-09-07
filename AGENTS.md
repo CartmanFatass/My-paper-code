@@ -258,7 +258,7 @@ When the owner is absent the loop keeps running under a standing delegation (own
 
 ## 5. Capacity and resume
 
-OWNER_DIRECT 2026-09-07: the owner's goal maintains five direction tasks until two formally
+OWNER_DIRECT 2026-09-07 (latest revision): the owner's goal maintains five direction tasks until five formally
 enter UAV validation, with actual entry traced to the relevant direction decision and UAV card.
 Active native subagents, running experiments and accepted Pro external reviews count together,
 at most once per direction; completed returns and unresolved transport waits do not count.
