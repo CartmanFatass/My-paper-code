@@ -29,3 +29,46 @@ Post-learner coverage: accepted technical record reports nine focused tests, inc
 ## Execution facts
 
 Pending: remote committed-object staging and first launch. No selected exposure at record freeze. Root receives accepted handles immediately; CM retains observation until Root adoption ACK, and always retains terminal collection/technical acceptance.
+
+
+## E0 technical return: staging stopped, no selected exposure
+
+Execution freeze was committed and pushed as `b3c7290fc`. Before staging, Root tightened
+this command through DM: “If staging/admission fails, preserve exact failure and stop the
+affected action without retry.” This superseded the earlier ordinary staging-repair allowance.
+
+The remote availability read was `git -C /home/wu/projects/HMASD cat-file -t
+faf786e135b3f55e535c898e17e646dcc341bdec`. The partial clone automatically spawned
+`git -c fetch.negotiationAlgorithm=noop fetch origin --no-tags --no-write-fetch-head
+--recurse-submodules=no --filter=blob:none --stdin`, then `git-remote-https` to the configured
+GitHub origin. A process read observed the chain at 80 seconds elapsed; subsequent observation
+still had no output after several minutes. CM terminated only the owned transport PID 2740217
+after checking its command line. The enclosing read script then exited. This was an aborted
+source-availability operation, not an accepted experiment. Root and DM were notified directly.
+
+Observation limitation: that initial read script captured subprocess stdout only; Git's return
+code and stderr were not printed or retained. Therefore no network/authentication root cause is
+asserted. The observed facts are the automatic fetch, sustained pending state, explicit transport
+termination, and failure to establish the exact source object's availability. Some Git objects may
+have been transferred; no worktree or selected task was created. No retry, alternate bundle import,
+model probe, admission or learner invocation followed the tightened stop.
+
+Authoritative remote readback at **2026-09-07T14:45:09.457921+00:00**:
+
+```json
+{
+  "worktree_exists": false,
+  "handles": {
+    "vspc1-service-allocation-b01-factor402-20260907": "not_found",
+    "vspc1-service-allocation-b01-generic402-20260907": "not_found"
+  }
+}
+```
+
+Technical acceptance is limited to the frozen invocation record and confirmed absence of
+selected execution. No resource receipt, run root, selected model, optimizer, checkpoint or
+primary measurement exists from this assignment. Actual selected counts remain zero; no result
+polarity follows. Prior source/card conformance remains unchanged. No experiment is live or
+awaiting monitor adoption. Portfolio owns the next bounded staging/execution command through
+Root; DM retains science. This return does not authorize a retry or change the fixed two-call
+scientific object.
