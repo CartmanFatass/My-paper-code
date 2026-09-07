@@ -5,7 +5,9 @@
 OWNER_DIRECT merger: existing Luna/xhigh Root directly observes experiments and transports Pro
 requests. Standalone Monitor and Transport have relinquished their current work. See
 `.codex/hmasd-monitor.toml`, `.codex/hmasd-transport.toml` and `docs/project/ROOT_OPERATIONS.md`.
-Current assigned live/unknown experiment handles: none live; `vspc1-reactive-b01-factor-run02` and
+Current assigned live/unknown experiment handles: UCOPE
+`ucope-native-return-b01-seed6301` is live under the formal B01 assignment; seed6302 remains
+sequentially unlaunched pending seed6301 technical collection. `vspc1-reactive-b01-factor-run02` and
 `vspc1-reactive-b01-generic-run02` are terminal, technically accepted and fully intaken by the
 DM. The single Root heartbeat also covers the
 explicit pending Pro rows below; experiment completion alone does not pause it.
@@ -42,8 +44,13 @@ evidence is recorded in audit row118 and commit `2b09e9209`.
 UCOPE B01 implementation is integrated at main `245047432` with CM technical acceptance
 `bd7e47a67`: the bounded source, synthetic coverage and one remote technical profile passed
 (`768` episodes, `3156` transitions, two optimizer steps, complete-process wall `2.66 s`).
-Formal seeds `6301/6302` remain unrun; no result-bearing handle or scientific polarity exists.
-The UCOPE DM owns the next launch assignment under the frozen card.
+The DM's formal assignment is recorded in
+`UCOPE_NATIVE_RETURN_ACQUISITION_B01_TECHNICAL_INTAKE_20260907.md` §6. Seed `6301` is accepted
+on `wsl_4070` from source `a0b00f561159ddeedf66b65711cf3f7d2ec93b04`, cwd
+`/home/wu/hmasd-worktrees/cm-ucope-native-return-b01-20260907`, with fresh admission,
+`600 s` complete-process cap and log `/home/wu/.agent-tasks/ucope-native-return-b01-seed6301/task.log`;
+the CM retains observation until Root adoption. Seed `6302` remains unlaunched until seed6301
+reaches terminal technical collection. No scientific polarity exists.
 
 ## Current Pro handover queue — 2026-09-06
 
