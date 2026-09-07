@@ -6,12 +6,14 @@ Binding structure: `systems / information flow`.
 This substrate question does not arise from multi-agent partial observability or non-stationarity;
 it concerns the addressed input path used by the paired MARL learner.
 
-Status: **PROSPECTIVE / PREPARATION_SELECTED / EXECUTION_UNALLOCATED**.
+Status: **FROZEN / A_RECON / P12_ALLOCATED_SINGLE_CHAIN**.
 Object: `FRRIE-R09-A04-ALTERNATIVE-STACK-20260907`.
 Authority: P11-FRRIE-A04-PREP-01; A03 intake §4 and standing object-tier delegation.
-No installation, A04 invocation or R09 invocation is authorized by this preparation.
+P11 authorized preparation only. P12-FRRIE-A04-EXECUTE-01 now allocates exactly one unchanged
+complete setup/T0 chain; [execution record](FRRIE_R09_A04_P12_EXECUTION_RECORD_20260907.md).
+The P11 zero-allocation statements below are historical; P12 changes no result rule or R09 stop.
 Owner item: `docs/research/portfolio/owner/inbox/2026-09-07/20260907-frrie-001.json`
-(accept = retain the prepared card; execution remains unallocated).
+(accept originally retained the prepared card; P12 supplies the later explicit allocation).
 
 ## 1. Question, evidence and interpretation ceiling
 
