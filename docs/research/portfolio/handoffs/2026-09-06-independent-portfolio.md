@@ -50,7 +50,8 @@ lowest sequencing. PARKED reserves retain their re-entry conditions. Do not inve
 
 Root subsequently confirmed actual continuation: existing `/root/dm_amx_dish_seed101` is
 running after followup to commission CM from B06 card §7 and integrated objective `fde638f9c`.
-A named CM child/result remains pending. `/root/dm_ucope_question_prep` has started bounded
+Root confirmed CM `/root/dm_amx_dish_seed101/cm_am_dish_seed101` is running against that
+objective for implementation, focused checks and independent review only; no result-bearing launch. `/root/dm_ucope_question_prep` has started bounded
 source-backed question preparation, with no experiment or Pro Send. These are two advancing
 preparation chains; other named current DMs are not thereby counted as active work. Root
 continues and returns concrete executor/result facts or blockers to Portfolio.
