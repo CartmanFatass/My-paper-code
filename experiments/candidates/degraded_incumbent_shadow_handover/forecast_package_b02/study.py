@@ -121,19 +121,23 @@ def terminal_facts(native, completed_ticks):
             "owner": int(state["owner"]), "actuator_owner": int(state["actuator_owner"])}
 
 
-def evaluate_episode(native, policy, deadline, progress, record, horizon=1200):
+def evaluate_episode(native, policy, deadline, progress, record, horizon=1200, *,
+                     sampler=None, deterministic=True, record_first_transfer=False):
     """Ordinary stepping only; unstepped terminal remainder contributes zero service."""
     observation = native.observe()
     record.update(service_ticks=0, completed_ticks=0, legal_transfers=0,
                   service_before_transfer=0, service_at_or_after_transfer=0,
                   energy=0.0, hard_events=dict.fromkeys(HARD_EVENTS, 0))
     transferred = False
+    if record_first_transfer:
+        record["first_legal_transfer_tick"] = None
     for tick in range(horizon):
         check_time(deadline)
         if bool(observation["terminal"][0]):
             break
         owner_before = np.asarray(observation["owner"], dtype=np.int64)
-        rows = policy.step_rows(observation, sampler=None, global_tick=tick, deterministic=True)
+        rows = policy.step_rows(observation, sampler=sampler, global_tick=tick,
+                                deterministic=deterministic)
         observation = native.step(rows)
         progress["evaluation_ticks"] += 1
         record["completed_ticks"] += 1
@@ -145,6 +149,8 @@ def evaluate_episode(native, policy, deadline, progress, record, horizon=1200):
         record["service_ticks"] += service
         record["service_at_or_after_transfer" if transferred else "service_before_transfer"] += service
         state = native_state(native)[0]
+        if record_first_transfer and transfers and record["first_legal_transfer_tick"] is None:
+            record["first_legal_transfer_tick"] = int(state["tick"])
         record["energy"] = float(state["total_energy"])
         record["hard_events"] = {name: int(state[name]) for name in HARD_EVENTS}
         record["terminal"] = terminal_facts(native, record["completed_ticks"])

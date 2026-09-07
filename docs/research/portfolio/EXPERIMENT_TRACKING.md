@@ -2,7 +2,161 @@
 
 ## Current route — OWNER_DIRECT 2026-09-06
 
-The native tracker is retired. DM/CM -> independent Luna/low app task -> research Root -> native DM/CM. See `.codex/hmasd-monitor.toml` and `docs/project/EXPERIMENT_MONITOR.md`. Native subagents can dispatch directly to app tasks (owner confirmed). Root heartbeat is removed; the monitor owns its heartbeat. Current assigned live/unknown handles: none. Historical handles and capability restrictions below are preserved evidence, not current assignments or routing rules.
+OWNER_DIRECT merger: existing Luna/xhigh Root directly observes experiments and transports Pro
+requests. Standalone Monitor and Transport have relinquished their current work. See
+`.codex/hmasd-monitor.toml`, `.codex/hmasd-transport.toml` and `docs/project/ROOT_OPERATIONS.md`.
+Current assigned live/unknown experiment handles: none; UCOPE
+`ucope-shared-return-b02-seed6401-20260907` is terminal and remains in CM collection; the repaired VSPC1 service-allocation
+pair is terminal and fully intaken at main `f22482b03`. DISH
+`dish_b06_seed113_20260907_run01` on `wsl_4070` (source `373d18720`) exited 0 at
+`2026-09-07T12:58:50Z`; its complete technical evidence is integrated at main `33db0d860`
+and the handle is terminal. UCOPE seeds6301/6302 are terminal and
+handed directly to CM collection. `vspc1-reactive-b01-factor-run02` and
+`vspc1-reactive-b01-generic-run02` are terminal, technically accepted and fully intaken by the
+DM. The single Root heartbeat also covers the
+explicit pending Pro rows below; experiment completion alone does not pause it.
+The shared Root heartbeat remains ACTIVE while this UCOPE terminal return, the return and the
+preparation-only P07-VSPC1-COMPLETION-REQUEST-01 are delivered and reconciled. Historical
+handles and old routing sections below are retained evidence, not current assignments.
+
+UCOPE B02 seed6401 was accepted once on `wsl_4070` from source
+`bcd55750b29014e21dd855df5ac320296256b62e`, cwd
+`/home/wu/hmasd-worktrees/ucope-shared-return-b02-seed6401-20260907`, with accepted handle
+`ucope-shared-return-b02-seed6401-20260907`. Its detached supervisor terminated exit 0 at
+`2026-09-07T15:39:52Z` (PID 2741107, tmux inactive); its log is
+`/home/wu/.agent-tasks/ucope-shared-return-b02-seed6401-20260907/task.log` and its result root
+is `temp/directions/ucope/exp/shared-data-return-b02-seed6401/` with
+`resource_admission.json` and `summary.json`. The exact command record is `fddc126fd`; the
+complete 600-second bound includes admission, startup, runner, publication and exit. The
+reported external complete wall is 7.73 s (internal 7.6646056 s, peak RSS 21,440 KiB). CM
+reported no pre-existing handle/root at reconciliation; terminal collection/readback is pending,
+and no scientific result or validity inference follows from acceptance.
+
+VSPC1 service-allocation B01 seed402 was adopted on `wsl_4070` from source
+`faf786e135b3f55e535c898e17e646dcc341bdec` and cwd
+`/home/wu/hmasd-worktrees/vspc1-service-allocation-b01-seed402-20260907`. FACTOR
+`vspc1-service-allocation-b01-factor402-20260907` passed fresh physical/effective admission
+(`15665508352` bytes), completed exit 0 at `2026-09-07T14:49:31Z`, and is retained under
+`temp/directions/vsp_c1/exp/k4_service_allocation_b01_seed402_20260907/FACTOR` with receipt
+`resource_admission.json` and its supervisor log. GENERIC
+`vspc1-service-allocation-b01-generic402-20260907` was the single conditional second arm;
+it passed fresh physical/effective admission (`15667646464` bytes) and terminated exit 1 at
+`2026-09-07T14:51:43Z` after 4.84 s, before rule evaluation, with
+`ValueError('Comparison requires FACTOR/GENERIC with the same fixed budget and seed')` during
+the learner-only comparison publication. No retry or third call is authorized by this return;
+CM retained the narrower learner evidence and diagnosed the comparison boundary, and DM scientific
+intake is integrated at `f22482b03`. No complete paired result or scientific polarity follows.
+
+VSPC1 K4 reactive-queues B01 source, technical acceptance and source-intake records are
+integrated at main `476748835`; the selected seed401 FACTOR and GENERIC arms have each completed
+once on the corrected transport and are fully intaken at `effad6eb7`; no successor was selected.
+The first FACTOR supervisor name `vspc1-reactive-b01-factor-run01` was accepted at
+2026-09-07T13:57:52+08 but the Root wrapper passed a literal `$P`, exited 0 in 0 seconds, and
+produced no admission receipt or runner output; no learner/RNG/result exposure occurred. The
+handle and log remain retained as a technical launch failure. Corrected FACTOR
+`vspc1-reactive-b01-factor-run02` ran from source `476748835` at 2026-09-07T14:09:30+08,
+passed fresh physical/effective memory admission at `15668547584` bytes, and exited 0 after
+complete publication/readback (256 updates, 4096 training episodes, 2304 evaluation episodes,
+17 target copies, 4.4253 s through final readback). CM technical acceptance is recorded in the
+integrated B01 CM record. GENERIC `vspc1-reactive-b01-generic-run02` passed fresh admission at
+`15669395456` bytes, exited 0 after complete publication/readback (256 updates, 4096 training
+episodes, 2304 evaluation episodes, 17 target copies, 4.2558 s summary wall), and wrote the
+paired summary with provisional FACTOR−GENERIC endpoint delta `-0.00032552083333333304`.
+CM has collected and independently recomputed the complete pair; DM owns scientific
+interpretation and has completed intake. The published endpoint and AUC signs differ and are both
+retained, with descriptive status `insufficient_practical_gain`; no follow-up was selected. The
+next runnable recorded object is DISH B06 implementation preparation, which has been routed to
+the existing DISH DM; it is not yet a result-bearing launch. No scientific polarity follows from
+the prior no-op or from an unpaired arm.
+
+DISH B06 implementation is technically delivered from source `373d18720`; the sole selected
+invocation `dish_b06_seed113_20260907_run01` was staged on `wsl_4070`, passed admission, and
+completed with exit 0. CM evidence commit `cee3f222a6f7827449a245c237191ac66a0886fd` is
+integrated at main `33db0d860`: 16/16 primary rows, 16 finite updates, 65,536 transitions,
+512 steps, conservative complete chain 226.02 s within the 1,800 s cap, chain CPU 221.09 s,
+and scratch unmeasured. The observed `delta_exec=-77.5` and zero legal transfers in all 16
+evaluation rows remain technical facts for the DM's frozen-card scientific intake. No retry,
+second invocation or new scientific selection follows.
+
+CBSC SYSTEM-RUNTIME-A01 was accepted once as `cbsc-system-runtime-a01-20260907` and is now
+terminal PATH_INCOMPLETE: exit 124 after 626.74 s (the 598 s timeout plus 2 s grace did not
+meet the 600 s allocation), with no admission/install/import/summary/output artifact. CM
+record `e828f74ed` is integrated at main `bdf50af6a`; the DM owns the original technical intake.
+
+UCOPE B01 implementation is integrated at main `245047432` with CM technical acceptance
+`bd7e47a67`: the bounded source, synthetic coverage and one remote technical profile passed
+(`768` episodes, `3156` transitions, two optimizer steps, complete-process wall `2.66 s`).
+The DM's formal assignment is recorded in
+`UCOPE_NATIVE_RETURN_ACQUISITION_B01_TECHNICAL_INTAKE_20260907.md` §6. Seed `6301` completed on
+`wsl_4070` from source `a0b00f561159ddeedf66b65711cf3f7d2ec93b04`, cwd
+`/home/wu/hmasd-worktrees/cm-ucope-native-return-b01-20260907`, exit `0` at
+`2026-09-07T07:47:56Z`, with `1024` joint updates, `262144` training episodes, `32768`
+evaluation episodes per policy, `8` contexts, `1024` JSONL rows, external wall `8.80 s` and
+peak RSS `510200 KiB`; log `/home/wu/.agent-tasks/ucope-native-return-b01-seed6301/task.log`.
+Seed `6302` completed on the same source/cwd, exit `0` at `2026-09-07T07:48:55Z`, after fresh
+admission passed physical/effective `15664181248` bytes at `2026-09-07T07:48:45.967Z`; the
+supervisor log reports `COMPLETE` and runner wall `9.254238544 s` (supervisor duration `10 s`),
+with log `/home/wu/.agent-tasks/ucope-native-return-b01-seed6302/task.log`. CM collected and
+technically accepted both formal outputs at `d234f7648` (integrated `fba696098`); DM's scientific
+intake is integrated at `99e587f6b`: valid complete B, `NR-B`, `Delta_bar=0`, both seed deltas
+and conditional SE `0`, all final modal roots `IMMEDIATE-4`, and no additional invocation.
+No live handle, retry or extra exposure remains.
+
+Owner-resumed refill dispatches on 2026-09-07 initially covered four native chains: DISH DM
+`/root/dm_amx_dish_seed101` prepared the explicit B06 launch assignment from the accepted
+technical intake; VSPC1 DM `/root/dm_amx_vspc1_next` is preparing the next independent
+duration-value question from `effad6eb7`; RCLE DM `/root/dm_amx_rcle_a02` used the A02 intake to
+process the missing post-A02 scientific decision and returned the unresolved provider-send
+boundary (it no longer occupies a slot); and CBSC DM `/root/dm_amx_cbsc_next` is processing the
+B04 technical dependency into a bounded CM objective or precise missing decision. Portfolio then
+issued P07-VSP03-PREP-01 to `/root/dm_amx_vsp03_next` for question/request preparation and
+P07-UCOPE-PREP-01 to `/root/dm_ucope_question_prep` for an independent post-NR-B proposal.
+P07-DISH-EXEC-01 separately dispatched the existing DISH CM for the one selected B06 invocation.
+These were the five advancing native chains (DISH CM, VSPC1, CBSC, VSP03 and UCOPE);
+RCLE is closed at its transport boundary. No task adds a retry budget, new scientific conclusion
+or unrecorded result-bearing invocation. DISH CM first reported the exact remote
+`git fetch && worktree add` staging command exited `1` with an SSL connection timeout. The
+Portfolio-directed VCS repair then staged bundle digest
+`d07f58612918c1684731232e3fb89ad74a025c19923b8248de17286dd73ee9da`, created the detached
+worktree at `/home/wu/hmasd-worktrees/dish-b06-seed113-20260907-run01`, and accepted handle
+`dish_b06_seed113_20260907_run01`. Same-node admission passed physical/effective
+`15665545216` bytes; the unique B06 invocation then completed exit 0 and was collected at
+`33db0d860`. The CBSC runtime handle likewise reached its terminal PATH_INCOMPLETE record at
+`bdf50af6a`. No experiment handle remains live. VSPC1's service-allocation Pro request is now
+archived with its complete GitHub readback, so the shared heartbeat was paused after verifying
+that no experiment or Pro observation remains pending.
+
+## Current Pro handover queue — 2026-09-06
+
+Only these explicitly assigned requests require Root observation/reconciliation; do not replay
+historical registry records. The old executor has stopped all provider actions. Keep original
+HANDOFF bytes/operator IDs; Root's current execution task is
+`01a07249-b095-7821-8ce2-e9c32ba85267`. No Send is inferred from app-dispatch acceptance.
+
+| Request / responsible native DM | Fixed handoff and conversation | Current state and next action |
+| --- | --- | --- |
+| `2026-09-06-vsp03-shared-service-convergence-01`; `/root/dm_amx_vsp03_next` | `docs/research/candidates/vsp_03/pro_packets/20260906_shared_service_convergence/HANDOFF.json`; `6a9cbb9d-374c-83e8-b600-23d3a8033a69` | Terminal mismatch reconciliation complete. The bound conversation contains the prior B01 user/assistant pair; the scoped action log records no B02 provider Send, and the captured reply concerns DISH post-B05 (Issue #4), not VSP03 (Issue #6). Archived as `ARCHIVED_MISMATCH` with the read-only reconciliation; no Pro decision, resend, repair prompt or continuing observation remains. See `archive/continuation_20260907/` and `archive/blocker_20260906/`. |
+| `2026-09-06-rcle-post-b02-innovator-02`; `/root/dm_amx_rcle_a02` | `docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260906_post_b02_innovator/HANDOFF.json`; `6a9d9a3a-fd40-83e8-9e80-ad720582aaee` | Archived and intaken after the owner-approved 2026-09-06 reconciliation: delivery `6c0d1ca55` (Issue 8 comment `5564117795`), registry binding `em:roster_consistent_latent_exploration:innovator` now points to this request in `ARCHIVED`. The post-A02 dispatch is retained as stale history; it did not form a decision. No continuing observation, retry or launch remains. |
+| `2026-09-06-dish-post-b05-convergence-01`; `/root/dm_amx_dish_seed101` | `docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260906_post_b05_convergence/HANDOFF.json`; `6a9bec54-df00-83e8-9840-46440458f316` | One provider Send at 2026-09-06 22:26 PDT. Archived delivery commit `db0bbfd8e1d96b06e8c6e8aa9bfa70787fe9a9cd` (response SHA `cb1cf348…`), Issue 4 comment `5565621457`; local archive preserves the earlier no-tools chat claim and the later immutable GitHub readback. Root routed the complete response to the DM; no duplicate Send. |
+| `2026-09-07-vspc1-service-allocation-convergence-01`; `/root/dm_amx_vspc1_next` | `docs/research/candidates/vsp_c1/pro_packets/20260907_service_allocation_convergence/HANDOFF.json`; `6a9cfac6-4d34-83e8-9f0a-088c03f4fb0c` | Root-local CALLER_DIRECT sent the exact fixed task once at 2026-09-07 06:07 PDT after verifying the visible `6 Pro`, `Latest`, and `Pro, 5 of 5.` state. User `f20db0a5-c750-4e4c-a982-2e86639a3780` and assistant `a66165eb-d78d-4d6b-ab8d-7513292cd2d5` were paired by scoped DOM identity; the response completed after 8m51s. GitHub delivery commit `2347dbf2fea870cdcd02aa2eb8b3cbaff147ec34` and Issue 5 comment `5571198932` were read back, archived under `pro_packets/20260907_service_allocation_convergence/archive/`, and routed to `/root/dm_amx_vspc1_next`; no resend. |
+
+P07-VSP03-PREP-01 returned a reusable original-question disposition from
+`/root/dm_amx_vsp03_next`, integrated at `7bf95402e` (source `26cc80091`). The original coupled
+B02 question remains admissible and unanswered; no provider operation, run, RECAST or Portfolio
+disposition was made. The DM preserved a material Send-history discrepancy: the original
+no-B02-Send interval ends `04:10:20.999Z`, while continuation evidence reports a confirmed B02
+user/assistant node (`f2209038-4d39-48c2-b3b5-2d71745a5293` /
+`cc4e8e86-66c8-4c1c-a3e8-8c9f3fbea129`). Existing row facts summarize no B02 Send; both accounts
+remain retained without a Root conclusion or duplicate action.
+
+P07-RCLE-OBSERVE-01 read-only check on 2026-09-07 reopened the exact bound conversation
+`6a9d9a3a-fd40-83e8-9e80-ad720582aaee` for the original request
+`2026-09-06-rcle-post-a02-innovator-01`. The loaded conversation showed the older post-B01 and
+post-B02 user/assistant pairs, but no matching post-A02 user node, provider Send identity or
+post-A02 response. No separate primary Transport registry/archive entry exists for that request
+key. This leaves provider Send state unresolved; no Send, archive, resend or scientific decision
+was made. Temporary observation tab was closed after the read-only check. Evidence and the
+missing-decision boundary remain in `RECONCILIATION_20260907.md` and `audit/2026-09-07.md`.
 
 ## Historical record
 
@@ -127,6 +281,15 @@ accepted handle. All other rows below are historical terminal records or prospec
 a separately accepted handle.
 
 ## Active accepted work
+
+| Direction / run record | Node and accepted handle | Launch SHA | Remote cwd | Output / receipt | Latest authoritative observation | Next owner step / notification |
+| --- | --- | --- | --- | --- | --- | --- |
+| `degraded_incumbent_shadow_handover` — DISH B05 CONTROL; CM `/root/dm_amx_dish_seed101/cm_am_dish_seed101`; DM `/root/dm_amx_dish_seed101` | `wsl_4070` via `hmasd-wsl-node`; `dish_b05_seed101_control_20260906` | `1d87e02194158d6bca0eaa4e7f70a1c1098bb121` | `/home/wu/hmasd-worktrees/dish-b05-seed101-20260906` | `temp/directions/degraded_incumbent_shadow_handover/exp/control_low_lr_b05_20260906/control.{memory.json,time.txt,stdout.log,stderr.log}` and `control/summary.json`; log `/home/wu/.agent-tasks/dish_b05_seed101_control_20260906/task.log` | Terminal exit `0`; supervisor ended `2026-09-07T11:43:56+08:00`, duration `211s`, `tmux_active=false`. | Terminal fact delivered to Root; CM collects/accepts, DM judges validity. No retry or continuing observation. |
+| `degraded_incumbent_shadow_handover` — DISH B05 LOW_LR; CM `/root/dm_amx_dish_seed101/cm_am_dish_seed101`; DM `/root/dm_amx_dish_seed101` | `wsl_4070` via `hmasd-wsl-node`; `dish_b05_seed101_low_lr_20260906` | `1d87e02194158d6bca0eaa4e7f70a1c1098bb121` | `/home/wu/hmasd-worktrees/dish-b05-seed101-20260906` | `temp/directions/degraded_incumbent_shadow_handover/exp/control_low_lr_b05_20260906/low_lr.{memory.json,time.txt,stdout.log,stderr.log}` and `low_lr/{summary.json,paired.json}`; log `/home/wu/.agent-tasks/dish_b05_seed101_low_lr_20260906/task.log` | Terminal exit `0`; supervisor ended `2026-09-07T12:22:12+08:00`, duration `213s`, `tmux_active=false`. CM collected/technically accepted all B05 artifacts; final E0 `4d50bc9cf`, record `DISH_CONTROL_LOW_LR_B05_CM_RECORD_20260906.md`, compact evidence `control_low_lr_b05_20260906/TECHNICAL_ACCEPTANCE.json`. | Closed; no retry or continuing observation. DM performs scientific intake. |
+| `capability_bound_semantic_currentness` — CBSC B04 engineering; CM `/root/dm_amx_cbsc_next/cm_cbsc_opportunity_b04`; DM `/root/dm_amx_cbsc_next` | `wsl_4070` via `hmasd-wsl-node`; `cbsc-b04-engineering-20260906` | `a3c2a49bf7002639d43a94f460b688d50c6c42dd` | `/home/wu/hmasd-worktrees/cbsc-opportunity-credit-b04-20260906` | `temp/directions/capability_bound_semantic_currentness/exp/opportunity_credit_b04_20260906/engineering/summary.json`; receipt `temp/directions/capability_bound_semantic_currentness/test/opportunity_credit_b04_20260906/cbsc-b04-engineering-20260906-admission.json`; time `...-time.txt`; log `/home/wu/.agent-tasks/cbsc-b04-engineering-20260906/task.log` | Terminal exit `0`, PID `2529595`, completed `2026-09-07T04:19:14Z`, outer `5.86s`; 32 Adam / 3040 transitions and primary/snapshot readback accepted. | Terminal/collection delivered; no continuing observation or retry. |
+| `capability_bound_semantic_currentness` — CBSC B04 RAW; CM `/root/dm_amx_cbsc_next/cm_cbsc_opportunity_b04`; DM `/root/dm_amx_cbsc_next` | `wsl_4070` via `hmasd-wsl-node`; `cbsc-b04-raw-20260906` | `a3c2a49bf7002639d43a94f460b688d50c6c42dd` | `/home/wu/hmasd-worktrees/cbsc-opportunity-credit-b04-20260906` | `temp/directions/capability_bound_semantic_currentness/exp/opportunity_credit_b04_20260906/raw/summary.json`; receipt `temp/directions/capability_bound_semantic_currentness/test/opportunity_credit_b04_20260906/cbsc-b04-raw-20260906-admission.json`; time `...-time.txt`; log `/home/wu/.agent-tasks/cbsc-b04-raw-20260906/task.log` | Terminal exit `0`, PID `2616329`, outer `53.46s`; required 48 rollouts / 768 Adam / 64 eval executions and native contributions complete; technical collection accepted. | Terminal/collection delivered; no continuing observation or retry. |
+| `capability_bound_semantic_currentness` — CBSC B04 STRUCT; CM `/root/dm_amx_cbsc_next/cm_cbsc_opportunity_b04`; DM `/root/dm_amx_cbsc_next` | `wsl_4070` via `hmasd-wsl-node`; `cbsc-b04-struct-20260906` | `a3c2a49bf7002639d43a94f460b688d50c6c42dd` | `/home/wu/hmasd-worktrees/cbsc-opportunity-credit-b04-20260906` | `temp/directions/capability_bound_semantic_currentness/exp/opportunity_credit_b04_20260906/struct/{summary.json,paired_summary.json}`; receipt `temp/directions/capability_bound_semantic_currentness/test/opportunity_credit_b04_20260906/cbsc-b04-struct-20260906-admission.json`; time `...-time.txt`; log `/home/wu/.agent-tasks/cbsc-b04-struct-20260906/task.log` | Terminal failed exit `1`, PID `2623556`, `2026-09-07T04:24:31Z`; `SystemError: unknown opcode` in `omrc_b01/addressing.py:285` during eval-tape construction before model/trainer creation. No result/checkpoint/pair; no retry authorized. | Terminal fact delivered; CM preserves logs and valid RAW narrower output; DM handles intake. |
+| `roster_consistent_latent_exploration` — RCLE A02; CM `/root/dm_amx_rcle_a02/cm_am_rcle_a02`; DM `/root/dm_amx_rcle_a02` | `wsl_4070` via `hmasd-wsl-node`; `rcle-a02-20260906` | `abcc3766c2b2d9908c9391b0827d9f2a39f8d641` | `/home/wu/hmasd-worktrees/rcle-a02-abcc376` | `temp/directions/roster_consistent_latent_exploration/exp/tbcfv_a02_20260906`; summary `root/summary.json`; receipt `root/memory.json`; timing `root/complete.time`; log `/home/wu/.agent-tasks/rcle-a02-20260906/task.log` | Terminal exit `0`, COMPLETE; terminal `2026-09-07T03:41:43Z`, GNU time `7.02s`, all 512 episodes/32 derivatives/256 points/768 vectors present. CM technically accepted full outputs; result commit `2fba6345d`. | No continuing observation or retry. DM performs scientific intake. |
 
 FRRIE R09 A01 terminal handoff: `(wsl_4070,
 frrie_r09_segfault_a01_43eec21e_20260905)` was adopted at

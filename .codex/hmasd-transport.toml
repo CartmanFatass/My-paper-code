@@ -2,10 +2,12 @@ schema_version = 1
 mode = "singleton"
 status = "active"
 
-# Project-owned reusable Transport task. Handoffs reuse this task but retain
-# request-specific source_thread_id, parent_thread_id, receipt, tab, and heartbeat state.
-thread_id = "01a06f0e-5eab-7431-8491-e7c2c62705b6"
-task_title = "transport_lxh_project_singleton_6pro"
+# Root executes Transport. mode=singleton names this one execution endpoint.
+# Requests retain distinct source, parent, provider, tab, receipt and Send evidence.
+# Observation uses the shared heartbeat in hmasd-monitor.toml.
+thread_id = "01a07249-b095-7821-8ce2-e9c32ba85267"
+task_title = "HMASD Root"
+execution_owner = "root"
 project_id = "177ab8d8-53ae-448c-9a9e-aaa2fecd2498"
 environment = "local"
 model = "gpt-5.6-luna"
@@ -19,10 +21,8 @@ mode = "Pro"
 label = "6 Pro"
 selector_hint = "Latest"
 
-# Owner-directed cutover: old provider IDs are history only.
+# Reuse each node's current verified binding. Apply the exclusion policy in
+# retired_ids_record; its observed-ID inventory is not exhaustive.
 [conversation_policy]
-mode = "fresh_after_owner_cutover"
-cutover_at = "2026-09-05T00:56:02Z"
-owner_instruction = "然后不要再使用旧的conversation id 这些没有兼容到6 pro"
+mode = "serial_reuse"
 retired_ids_record = "docs/research/portfolio/decisions/2026-09-04-retired-provider-conversations.json"
-decision_record = "docs/research/portfolio/decisions/2026-09-04-new-transport-fresh-6pro-conversations.md"

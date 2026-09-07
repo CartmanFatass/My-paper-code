@@ -749,3 +749,139 @@ no earlier reading; the source quantity stays unestimated; no Portfolio change. 
 18:11 PDT stop the decision is recorded only: no card, no CM objective, no implementation, no launch.**
 The first request (`-01`) pinned an evidence reference that predated the packet's aux files and was
 returned by Pro with three 404s; corrected and resent as `-02` (hub error, see the intake).
+
+## Accepted post-B04 reading and seed-101 discriminator — 2026-09-06 resume
+
+The current owner resume lifts the historical execution stop. The accepted node decision is now
+made concrete by `DISH_CONTROL_LOW_LR_B05_SCIENCE_CARD_20260906.md`: one independent seed-101
+CONTROL/LOW_LR pair, its own raw zero-update reference, sixteen updates and final-only evaluation.
+It asks whether the same LR comparison still has development value on another random instance;
+the source quantity remains unestimated. No additional family, source intervention or Portfolio
+disposition is implied.
+
+The full post-B04 response also corrects three overstatements in the prior B04 narrative above.
+The +182.75 mean remains a real complete-panel comparison despite mixed rows; the old row-4
+application stays historical and is not carried forward as an all-rows-positive requirement.
+LOW_LR had native costs (invalid commits and higher energy, including both K4_TO_K12 rows), so
+"no adverse LOW_LR companion" does not mean harmlessness. Tick-684 separation was an early native
+termination; it was not the first terminal flag in the family. B04's dominant +668 row contributes
+167 ticks of its mean but the existing evidence does not identify how much of that difference was
+caused by termination rather than preceding motion/control-state differences. The prediction's
+mixed-sign component held; its magnitude prediction did not predict +182.75.
+
+Strongest support: a real LR intervention with all sixteen parameter-group read-backs, nonzero
+learning and complete native outcomes gave a useful seed-89 mean increment. Strongest
+contradiction: concentration, two non-positive rows, LOW_LR's -57 before/after loss and no legal
+evaluation transfer. Surviving alternatives include seed/condition-specific motion and termination,
+joint normalization/parameter/recurrent/auxiliary changes, and an incumbent-only benefit unrelated
+to source selection. The next discriminator is seed101's complete pair and reference, preserving
+all native bad outcomes and reporting seed89 separately. Two observed pairs still cannot establish
+stable superiority, safety, general learning or RETAIN/COPY/SHADOW value.
+
+References: complete `pro_packets/20260906_post_b04_convergence/archive/RESPONSE.md` §§一–五
+(immutable delivery `a9718a45e`); `DISH_POST_B04_CONVERGENCE_INTAKE_20260906.md` §2;
+`DISH_CONTROL_LOW_LR_B05_SCIENCE_CARD_20260906.md` §§1–6. No seed-101 outcome is asserted here.
+
+## B05 result: another useful mean LR increment, with native costs and no source estimate — 2026-09-06
+
+The seed101 independent CONTROL/LOW_LR pair completed at `1d87e0219`: reference/CONTROL/LOW_LR
+means 297.25/280.75/517.0, `Delta_101=+236.25`, before/after -16.5/+219.75. Paired rows are
++413/-277/+542/+267; all twelve reference/final rows ran their complete 1200 ticks, with no
+early termination. LOW_LR therefore has a second useful mean comparison, and in this instance
+improves its own initialization rather than merely losing less. Seed89 remains +182.75 with
+LOW_LR -57 versus its own reference; the two-seed +209.5 mean is descriptive, not stability.
+Two paired training instances are not eight independent condition samples.
+
+The new gain does not require an early CONTROL termination, without explaining the old +668
+row. Its strongest contradiction is TARGET/K4_TO_K12 (-277 against CONTROL, -116 against
+reference) and LOW_LR's 108/0/101/0 invalid commits versus CONTROL's four zeros. LOW_LR energy
+is lower than CONTROL in all four equal-duration rows; the other six hard-event classes are
+zero. This supports bounded development interest, not dominance, harmlessness or safety.
+The DM's near-band magnitude and repeated large CONTROL-loss predictions missed; only the
+positive sign/mixed-row component held.
+
+All sixteen LR read-backs, real learner counts and finite records are complete; parameter
+displacement is 8.425/1.956 from common norm38.262. Ordinary training transfers are 3/0,
+while all twelve evaluation rows have zero transfers. The complete service comparison is
+incumbent-only; no matched RETAIN/COPY/SHADOW source effect has been estimated. Smaller LR,
+its coupled AdamW decay, normalization, parameters, recurrence, auxiliaries and data changes
+remain jointly unlocalized. The forecast-package branch stays ended and no earlier evidence
+is reinterpreted as a source result.
+
+Accepted B/EXPLORE intake applies card rows1,3-positive,5-termination and6. Full machine wall
+432.82s, charged215.30/217.52s including all shared work and the retained initial focused setup
+failure; no scope or runtime cap breach. The next discriminator is returned to Convergence
+as a choice among a specific further bounded question and a narrow stop; no automatic third
+seed or new family follows. References: `DISH_CONTROL_LOW_LR_B05_RESULT_INTAKE_20260906.md`,
+`control_low_lr_b05_20260906/TECHNICAL_ACCEPTANCE.json`, `RUN_SUMMARY.json`, and the frozen card.
+
+## Accepted post-B05 discriminator: ordinary execution law — 2026-09-06
+
+Complete Convergence at immutable `db0bbfd8e1d96b06e8c6e8aa9bfa70787fe9a9cd` continues the
+existing first-ordinary-legal-application RETAIN/COPY/SHADOW agenda and selects only
+**DISH-SAMPLED-EXECUTION-B06, B/EXPLORE**. One new seed113 LOW_LR learner at 3e-5 runs sixteen
+updates; its single final checkpoint supplies four modal and eight fixed sampled episodes,
+with four own-initial raw modal references inside the same B. The primary is each condition's
+two-sample mean minus modal service, averaged across four conditions; MEI +24, complete native
+outcomes retained. The whole object, including necessary checks and publication, has one new
+1800s cap. No preceding path A, third LR pair, intermediate selection or source fork is selected.
+
+The bounded reason is now precise: two finite positive mean LR comparisons retain LOW_LR as
+a development candidate, while code distinguishes sampled training actions from modal final
+execution. Comparing those execution laws at one final state directly tests native performance.
+It does not diagnose modal execution as the cause of zero evaluation transfers or retrospectively
+explain the LR gains. B05's -277 condition and 209 invalid commits, B04's initial-relative loss
+and early termination, and all zero-transfer final panels remain contradictions. The source
+quantity stays unestimated; a legal event would establish only an observed path, not an eligible
+source cut or COPY−RETAIN/SHADOW−COPY value.
+
+Surviving alternatives include useful exploration of motion/proposal combinations, noise costs,
+seed/condition effects and the unchanged recurrent/normalization/auxiliary couplings. The next
+discriminator is the complete sampled-versus-modal primary with events, energy and terminal
+exposure; the prospective low-confidence prediction is Delta_exec<=-24. No B06 outcome exists.
+The response conforms to current B burdens; the card freezes an object-local width1 RNG address
+under the existing backend namespace. This boundary records the decision/card only, with no CM
+implementation or launch. No recast, C promotion or Portfolio change follows.
+
+References: `DISH_POST_B05_CONVERGENCE_INTAKE_20260906.md` §§1–5;
+`DISH_SAMPLED_EXECUTION_B06_SCIENCE_CARD_20260906.md` §§1–7;
+`pro_packets/20260906_post_b05_convergence/archive/RESPONSE.md` §§三–七.
+
+## B06 result: joint sampled execution loses service and adds native costs — 2026-09-07
+
+One complete seed113 LOW_LR B/EXPLORE result compares the same update16 controller under
+ordinary modal execution and the frozen joint Gaussian-motion/Bernoulli-intent rule. Initial,
+final modal and final sampled means are369.75/662.25/584.75. Delta_exec=-77.5; all four condition
+means are negative (-92.5/-41/-94/-82.5). The frozen adverse/zero-transfer branches apply and the
+low-confidence Delta_exec<=-24 prediction is a magnitude/sign hit. The current development
+choice is to retain modal in this instance and stop adding runs of this tested joint rule.
+
+Strongest support is the negative complete primary with increased invalid-commit and energy
+means in every condition. Final modal/sample invalid-commit means are3.5/31.875 per episode;
+sample energy mean is4642.6427 higher. All16 rows complete1200 ticks. Training separately has
+1030 invalid commits,3 separation breaches and35 terminal events over65536 ordinary transitions.
+There is no evaluation early termination or missing-primary explanation for the loss.
+
+The limits remain one training instance, two samples per condition and jointly changed action
+components. Two individual samples beat modal; positive overall modal/initial (+292.5) and
+sampled/initial (+215) means retain the latter's TERRAIN/K8 -57 row. The sampled/initial
+comparison mixes learning and execution interfaces. No causal claim identifies motion noise,
+intent noise, normalization or the cause of earlier LR gains. B05's +236.25 support and its
+-277 condition/209 invalid commits remain separate evidence.
+
+All reference/final rows and this learner have zero legal transfers. First-transfer ticks are
+null; source-origin eligibility and COPY–RETAIN/SHADOW–COPY value remain unestimated. This does
+not imply transfer impossibility, SHADOW worthlessness or a direction-level null. No membership,
+role-ownership, information or native reward change is inferred.
+
+The scientific next choice is returned to the existing Convergence node: recommend the narrow
+stop on this joint-execution exploration, or require a specifically justified bounded next
+object inside the existing source agenda. A fresh independent training seed is an unselected
+alternative for learning-seed uncertainty; component variants are unestimated, not automatic
+new arms. The prepared request has not been sent. No broader family closure, PARK, recast,
+C promotion or Portfolio change is applied locally.
+
+Support: `DISH_SAMPLED_EXECUTION_B06_RESULT_INTAKE_20260907.md` §§1–7;
+`DISH_SAMPLED_EXECUTION_B06_RESULT_EVIDENCE_20260907.md` (integrated33db0d860);
+`sampled_execution_b06_20260907_run01/DM_READBACK.json`; frozen card §§4–7;
+`pro_packets/20260907_post_b06_convergence/EXPOSURE_AND_COST.json`.

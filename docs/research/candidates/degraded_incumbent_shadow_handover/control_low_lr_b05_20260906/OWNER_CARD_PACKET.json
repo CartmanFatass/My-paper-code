@@ -1,0 +1,37 @@
+{
+  "question": "执行已归档裁决：以新种子101比较原学习率与十倍较小学习率，完整保留好坏结果。",
+  "changes_if_approved": [
+    {
+      "target": "DISH_CONTROL_LOW_LR_B05_SCIENCE_CARD_20260906.md",
+      "from": "post-B04决定已记录但未执行",
+      "to": "冻结seed101单个配对B；集成验收后执行"
+    }
+  ],
+  "if_refused": "在下一干净边界应用所有者指令；不改写B04结果，不自动扩大实验。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260906_post_b04_convergence/archive/RESPONSE.md",
+      "quote": "本轮只选择选项 2——同一 CONTROL／LOW_LR 比较的第二个独立配对训练种子 101，仍为 B/EXPLORE。",
+      "why": "完整Pro决定已选定这一有限跟进，当前所有者已恢复研究。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260906_post_b04_convergence/archive/RESPONSE.md",
+      "quote": "LOW_LR 仍低于自身初始化 **57 tick**",
+      "why": "旧平均增量集中且存在绝对损失，不能预设新种子受益。"
+    }
+  ],
+  "uncertainty": [
+    "新种子的差分、初始水平、终止与实际成本未观测。",
+    "两个训练实例仍不能支持稳定优势；来源差分仍未估计。"
+  ],
+  "cost": {
+    "compute": "两臂各65536普通转移、512优化步；12评估/参考行；每臂含共享费用1800秒，总3600秒。",
+    "owner_time": "可异步查看，无需回复才继续。",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing"
+  },
+  "verdict_text": "Owner-delegated decision (unattended, 2026-09-03 instruction): (a).",
+  "source": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_CONTROL_LOW_LR_B05_SCIENCE_CARD_20260906.md"
+}

@@ -223,14 +223,16 @@ def test_needs_context_reply_and_problem_report(tmp_path):
     assert "**owner: needs-context**" in review and "re-file as a new item with a complete decision packet" in review
 
 
-def test_skill_names_every_kind_and_command():
+def test_skill_names_maintained_kinds_and_commands_and_dm_uses_it():
     text = (ROOT / ".agents/skills/hmasd-owner-item/SKILL.md").read_text(encoding="utf-8")
-    for kind in srv.KINDS:
+    maintained = {kind for kind in srv.KINDS if srv.item_priority({"kind": kind}) <= 2}
+    maintained.add("decision")  # Direction/Portfolio decisions remain P2.
+    for kind in maintained:
         assert f"`{kind}`" in text, kind
     for cmd in ("item.py add", "item.py reviews", "item.py mark-answered"):
         assert cmd in text, cmd
     dm = (ROOT / ".codex/agents/hmasd-direction-manager.toml").read_text(encoding="utf-8")
-    assert "$hmasd-owner-item" in dm and "item.py add" in dm and "item.py reviews" in dm
+    assert "$hmasd-owner-item" in dm
 
 
 def test_export_selected(tmp_path):

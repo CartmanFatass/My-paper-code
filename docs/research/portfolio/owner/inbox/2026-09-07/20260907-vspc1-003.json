@@ -1,0 +1,70 @@
+{
+  "id": "20260907-vspc1-003",
+  "created": "2026-09-07T09:16:51-07:00",
+  "direction": "vsp_c1",
+  "tier": "direction",
+  "kind": "decision",
+  "title": "服务分配：应用一次规则补测例外",
+  "context": "同一Convergence已选择A。完整回复已核对：仅允许聚焦修复被接受后单独安排一次120秒规则补测；保留原失败及低于MEI的学习器差值。本次只应用科学选择和记录intake，尚未CM派工、测试或启动。",
+  "options": [
+    {
+      "key": "a",
+      "label": "应用单次补测例外",
+      "consequence": "记录Pro的对象限定修订；后续修复和启动分别等待Portfolio命令，原卡与失败历史保持。"
+    },
+    {
+      "key": "b",
+      "label": "保留不完整，不补测",
+      "consequence": "不新增调用，保留有效学习器差值，规则相对用途继续未知。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "完整Pro选择在当前规范内，缺失的固定规则值仍能决定本实例中学习政策是否有实用价值。",
+  "evidence": [
+    "docs/research/candidates/vsp_c1/VSPC1_K4_SERVICE_ALLOCATION_COMPLETION_AMENDMENT_INTAKE_20260907.md",
+    "docs/research/candidates/vsp_c1/pro_packets/20260907_service_allocation_completion_amendment/archive/RESPONSE.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-07.md#L41",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否应用同一 Convergence 已选择的单次规则补测例外，并按独立后续指令推进修复？",
+    "changes_if_approved": [
+      {
+        "target": "SERVICE-ALLOCATION-B01 原答复第五、六节及原卡5–7的对象限定调用边界",
+        "from": "规则必须置于已失败的第二调用，不能补第三调用",
+        "to": "并列保留原文，允许修复被接受后另行安排一次完整120秒规则补测；当前尚未派工或启动"
+      }
+    ],
+    "if_refused": "保留原两学习器的低于MEI差值和不完整三控制器结果，不追加规则调用；原失败、数据和预测不改写。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/vsp_c1/pro_packets/20260907_service_allocation_completion_amendment/archive/RESPONSE.md",
+        "quote": "最强理由是尚缺的量仍会改变一个具体控制器选择，而不是给已经很小的 FACTOR 差值增加精度。已知 Δ=J_F−J_G，却不知道 J_R，因此不知道两学习器是否值得相对无需训练的规则继续投入。",
+        "why": "规则绝对水平仍未知，能区分学习政策有用与仅有两学习器之间的小差值。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/vsp_c1/pro_packets/20260907_service_allocation_completion_amendment/archive/RESPONSE.md",
+        "quote": "**B 是真正合理的备选。** 0.00651042 的学习器差不到 MEI，即使补测也不会产生 MEI 量级的表示优势；修复、检查、导入和发布都有成本，固定规则也不是最优控制器。",
+        "why": "补测不能把现有差值变成MEI级别；修复和评价有成本，保留不完整结果是合理备选。"
+      }
+    ],
+    "uncertainty": [
+      "补测与修复尚未执行，新运行时间未知。",
+      "只有一对训练实例，规则比较也不证明稳定优势或因果机制。"
+    ],
+    "cost": {
+      "compute": "若实施：1规则×2周期×128情节×48步=12288步，零学习更新；完整调用最多120秒。另有一次最多300秒、至多3例的纯发布fixture及只读独立审阅。当前新增科学曝光为零。",
+      "owner_time": "可异步纠正已应用的方向选择，无需等待回复。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing；后续实际工作由Portfolio另行下达命令。"
+    },
+    "verdict_text": "决定：选择 A。在方向层对已形成的三队列服务分配决定作一次明确、仅限本对象的修订：允许聚焦发布修复被技术接受后，另行安排一个且仅一个完整的 LQ-EXCLUDE 补测调用，上限 120 秒，读取原有两个学习器的终点，在原定全部 256 条评价 tapes 上补齐固定规则及三项配对比较。",
+    "source": "docs/research/candidates/vsp_c1/pro_packets/20260907_service_allocation_completion_amendment/archive/RESPONSE.md"
+  },
+  "starred": true
+}

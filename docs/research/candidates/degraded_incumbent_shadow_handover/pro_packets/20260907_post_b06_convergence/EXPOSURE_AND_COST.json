@@ -1,0 +1,62 @@
+{
+  "direction": "degraded_incumbent_shadow_handover",
+  "question": "Stop the tested joint-sampling extension now or select one specifically justified bounded follow-up; no run selected by this preparation",
+  "observed_B06": {
+    "evidence_commit": "33db0d86016882d3e6d1c4dc1058dc0d8fe55bf6",
+    "source_sha": "373d187200a91942385e9380770dcf9f8098aada",
+    "independent_training_instances": 1,
+    "ordinary_transitions": 65536,
+    "optimizer_steps": 512,
+    "evaluation_episodes": 16,
+    "evaluation_ticks": 19200,
+    "delta_exec": -77.5,
+    "parameter_relative_L2_movement": 0.04474046045735298,
+    "charged_complete_wall_seconds": 226.02,
+    "scope": "One complete finite B result; OS chain215.02 plus prior10 and conservative collection1, no training-population uncertainty"
+  },
+  "recommended_next_work": {
+    "new_scientific_invocations": 0,
+    "new_models": 0,
+    "new_training_transitions": 0,
+    "new_optimizer_steps": 0,
+    "new_evaluation_episodes": 0,
+    "meaning": "Object-local stop on extending this exact joint law; family-level direction choice only proposed to Convergence"
+  },
+  "unselected_one_seed_B_alternative": {
+    "evidence_class": "B/EXPLORE",
+    "independent_training_instances": 1,
+    "training_arms": 1,
+    "learner": "Existing LOW_LR AdamW3e-5, raw-Q STRUCTURED, corrected A03 native host",
+    "updates": 16,
+    "lanes": 32,
+    "ticks_per_update": 128,
+    "ordinary_transitions": 65536,
+    "optimizer_steps": 512,
+    "initial_modal_episodes": 4,
+    "final_modal_episodes": 4,
+    "final_sampled_episodes": 8,
+    "evaluation_episodes": 16,
+    "evaluation_tick_upper": 19200,
+    "native_training_call_law": "2N+2E+H; 0<=E<=N; 0<=H<=20E",
+    "native_training_calls_lower": 131072,
+    "native_training_calls_upper": 1572864,
+    "policy_uniform_draw_upper": 96000,
+    "new_E_H_R": "unknown",
+    "selected_final_update": 16,
+    "search_candidates": 0,
+    "source_forks": 0,
+    "proposed_complete_cap_seconds": 1800,
+    "cap_scope": "All necessary changed-input checks, build/cache/model loads, initialization, training/private labels, all16 evaluations, reduction/publication; not an inherited balance",
+    "added_validation": "Only changed-input/primary coverage if required, reusing credible existing sampler/state/source review; no repeated smoke or cause-first work",
+    "wall_projection": "B06 complete226.02s is a same-scale planning anchor; new E/H/R/cache load and seed cost unknown, not a promised completion time",
+    "status": "Unselected comparator to assess value of additional training-seed information; no seed or card frozen"
+  },
+  "engineering_scope_section4": "none",
+  "new_consultation_exposure": {
+    "initializers": 0,
+    "ordinary_transitions": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0
+  },
+  "exposure_line": "Observed B06:1 trained controller,65536 ordinary transitions,512 optimizer steps,16 complete episodes/19200 ticks, relative L2 movement0.04474046046, complete charged wall226.02s. This intake/consultation adds0 initializers/transitions/optimizer steps/episodes. Recommended new scientific work:0 invocations. Unselected one-seed B alternative:1 learner x16x32x128=65536 transitions;16x4x8=512 optimizer steps;4 initial+4 modal+8 sampled=16 episodes<=19200 ticks; native2N+2E+H in[131072,1572864], uniforms<=96000; one fresh complete1800s cap only if separately selected."
+}

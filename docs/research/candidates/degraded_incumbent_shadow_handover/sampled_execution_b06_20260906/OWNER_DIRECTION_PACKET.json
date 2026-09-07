@@ -1,0 +1,38 @@
+{
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260906_post_b05_convergence/archive/RESPONSE.md",
+      "quote": "B04/B05 已提供两个有限的正平均学习率比较，足以把 LOW_LR 留作开发候选，但没有回答它应如何执行。",
+      "why": "真实的有限平均收益支持继续测量执行方式；无需重复训练两个相同控制器。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260906_post_b05_convergence/archive/RESPONSE.md",
+      "quote": "原生代价不能省略。按上表行序，LOW_LR 的 invalid_commit 是 **108／0／101／0，共 209**，CONTROL 四行均为零；参考为 **0／26／31／0**。",
+      "why": "服务负行与无效提交限制开发用途；不能把随机换主或正均值直接当作来源价值或安全性。"
+    }
+  ],
+  "uncertainty": [
+    "B06 尚无运行；新种子的模态服务、抽样收益和 native 代价未知。",
+    "来源可用切点与匹配来源增量均未被本对象测量。",
+    "新增抽样评价和具体检查的 wall 未测，受整个 1800 秒上限约束。"
+  ],
+  "cost": {
+    "compute": "本次仅文档、零新增实验曝光；拟议整项 B06 上限 1800 秒，含检查与全部十六次评价。",
+    "owner_time": "可异步查看约两分钟；当前工作不等待回复。",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing; 本轮止于卡片，后续须 Root 集成和明确 CM 派工。"
+  },
+  "verdict_text": "**方向层决定：继续现有首次普通合法应用时的 RETAIN/COPY/SHADOW 探索议程；本轮只选择一个新的 DISH-SAMPLED-EXECUTION-B06（B/EXPLORE）。** 用新种子 113 训练一次既有 LOW_LR（AdamW 3e-5）学习器，完成十六次更新后，以同一个最终检查点比较普通模态执行与普通随机抽样执行。每个开发条件保留一个模态 episode 和两个事前编号的抽样 episode；同一对象内另有四行零更新 raw 接口的模态参考。整项新支出上限为 **1,800 秒**，不是每个执行模式各 1,800 秒。不先购买路径 A，不购买第三个学习率配对，不重开联合预测包，也不作整个 DISH 的 PARK、CLOSE 或 RECAST。",
+  "source": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260906_post_b05_convergence/archive/RESPONSE.md",
+  "question": "是否保留已按完整 Pro 裁决记录的唯一下一对象：同一新控制器的抽样与模态执行比较？",
+  "changes_if_approved": [
+    {
+      "target": "DIRECTION.md · post-B05 discriminator",
+      "from": "B05 已接收，下一问题待 Convergence",
+      "to": "已选择 B06，卡片已冻结；无实现或运行，不改变 ACTIVE/MEDIUM 或来源结论"
+    }
+  ],
+  "if_refused": "按所有者明确改判处理受影响的下一对象，保留 B04/B05 全部证据，不自动替换成另一实验。"
+}

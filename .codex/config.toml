@@ -1,7 +1,7 @@
 #:schema https://developers.openai.com/codex/config-schema.json
 
 # Every local task created in this trusted HMASD project starts with Full Access.
-# Keep these explicit here so the project Transport singleton and research tasks do
+# Keep these explicit here so Root and research tasks do
 # not inherit the desktop client's Workspace/on-request defaults.
 approval_policy = "never"
 sandbox_mode = "danger-full-access"

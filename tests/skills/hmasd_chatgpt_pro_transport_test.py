@@ -71,6 +71,13 @@ def upload_request(tmp_path: Path) -> dict[str, object]:
     return {
         "request_id": "req-transport-01",
         "direction_id": "demo_direction",
+        "workflow_node": "em_innovator",
+        "decision_authority": "pro_final",
+        "operator_thread_id": SINGLETON_THREAD_ID,
+        "dispatch_mode": "REUSE_SINGLETON",
+        "operator_reuse_required": True,
+        "operator_model": "gpt-5.6-luna",
+        "operator_thinking": "xhigh",
         "prompt_path": str(prompt.resolve()),
         "reference_paths": [str(reference.resolve())],
         "source_thread_id": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
@@ -203,6 +210,83 @@ def test_receipt_outbox_is_deterministic_and_uncertain_is_not_retryable() -> Non
     assert record["return_receipt"]["status"] == "UNCERTAIN"
     assert record["return_receipt"]["retry_allowed"] is False
     assert record["return_receipt"]["attempt_count"] == 1
+
+
+@pytest.mark.parametrize("blocker", [False, True])
+def test_confirmed_rejected_receipt_retries_same_identity(blocker: bool) -> None:
+    record = _record()
+    record["state"] = "BLOCKED" if blocker else "ARCHIVED"
+    if blocker:
+        contract.stage_blocker_receipt(record, "BLOCKED", "missing source")
+    else:
+        contract.stage_receipt(record, {"response_file": "response.md"}, "b" * 64)
+    original = dict(record["return_receipt"])
+    contract.record_receipt_result(record, "FAILED", error="tool rejected before acceptance")
+    with pytest.raises(ValueError, match="direct evidence"):
+        contract.retry_rejected_receipt(record, not_accepted_evidence="")
+    contract.retry_rejected_receipt(record, not_accepted_evidence="tool receipt: accepted=false, no message created")
+    receipt = record["return_receipt"]
+    for key in ("message_key", "parent_thread_id", "destination_thread_id", "archive_paths", "response_sha256"):
+        assert receipt.get(key) == original.get(key)
+    assert receipt["attempt_count"] == 1
+    assert receipt["rejected_attempts"][0]["error"] == "tool rejected before acceptance"
+    contract.record_receipt_result(record, "SENT", delivery_status="accepted")
+    assert record["return_receipt"]["attempt_count"] == 2
+
+
+@pytest.mark.parametrize("status", ["SENT", "UNCERTAIN"])
+def test_accepted_or_uncertain_receipt_cannot_be_reopened(status: str) -> None:
+    record = _record()
+    record["state"] = "ARCHIVED"
+    contract.stage_receipt(record, {"response_file": "response.md"}, "b" * 64)
+    contract.record_receipt_result(record, status)
+    with pytest.raises(ValueError, match="rejected receipt"):
+        contract.retry_rejected_receipt(record, not_accepted_evidence="unsupported assertion")
+
+
+@pytest.mark.parametrize("blocker", [False, True])
+@pytest.mark.parametrize("adopted", [False, True])
+def test_integrated_root_receipt_is_local_and_cannot_be_sent(blocker: bool, adopted: bool) -> None:
+    record = _record()
+    record["operator_thread_id"] = "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb" if adopted else record["parent_thread_id"]
+    if adopted:
+        record["execution_thread_id"] = record["parent_thread_id"]
+    record["state"] = "SEND_UNCERTAIN" if blocker else "ARCHIVED"
+    if blocker:
+        contract.stage_blocker_receipt(record, "SEND_UNCERTAIN", "acceptance unknown")
+    else:
+        contract.stage_receipt(record, {"response_file": "response.md"}, "b" * 64)
+    receipt = dict(record["return_receipt"])
+    assert receipt["status"] == "LOCAL"
+    assert receipt["routing_mode"] == "LOCAL"
+    assert receipt["required"] is False
+    assert receipt["destination_thread_id"] is None
+    assert receipt["attempt_count"] == 0
+    with pytest.raises(ValueError, match="pending"):
+        contract.record_receipt_result(record, "SENT")
+    if not blocker:
+        contract.stage_receipt(record, {"response_file": "response.md"}, "b" * 64)
+        assert record["return_receipt"] == receipt
+        contract.close_tab_lease(record, reason="archive complete; locally routed")
+
+
+@pytest.mark.parametrize("blocker", [False, True])
+def test_adopted_unsent_parent_outbox_becomes_local(blocker: bool) -> None:
+    record = _record()
+    record["operator_thread_id"] = "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"
+    record["state"] = "SEND_UNCERTAIN" if blocker else "ARCHIVED"
+    def stage():
+        if blocker:
+            contract.stage_blocker_receipt(record, "SEND_UNCERTAIN", "unknown")
+        else:
+            contract.stage_receipt(record, {"response_file": "response.md"}, "a" * 64)
+    stage()
+    assert record["return_receipt"]["status"] == "PENDING"
+    record["execution_thread_id"] = record["parent_thread_id"]
+    stage()
+    assert record["return_receipt"]["status"] == "LOCAL"
+    assert record["return_receipt"]["attempt_count"] == 0
+    assert record["return_receipt"]["destination_thread_id"] is None
 
 
 def test_missing_parent_blocks_completion_receipt_without_a_destination() -> None:
@@ -417,6 +501,15 @@ def test_validate_request_exposes_packet_plan_and_return_readiness(
     assert "fallback_thread_id" not in result
 
 
+def test_root_parent_reports_local_receipt_for_reused_executor(
+    project_root: Path, upload_request: dict[str, object]
+) -> None:
+    request = {**upload_request, "parent_thread_id": SINGLETON_THREAD_ID}
+    result = TRANSPORT_VALIDATE.validate(request, project_root)
+    assert result["dispatch_mode"] == "REUSE_SINGLETON"
+    assert result["return_receipt_ready"] is False
+
+
 def test_validate_request_requires_operator_for_every_canonical_workflow(
     project_root: Path, upload_request: dict[str, object]
 ) -> None:
@@ -431,6 +524,7 @@ def test_validate_request_requires_operator_for_every_canonical_workflow(
         "operator_model": "gpt-5.6-luna",
         "operator_thinking": "xhigh",
     }
+    canonical.pop("operator_thread_id")
     with pytest.raises(ValueError, match="requires the configured Transport singleton operator_thread_id"):
         TRANSPORT_VALIDATE.validate(canonical, project_root)
 
@@ -457,17 +551,17 @@ def test_validate_request_requires_operator_for_every_canonical_workflow(
         )
 
 
-def test_validate_request_allows_legacy_transport_without_a_receipt_parent(
-    project_root: Path, upload_request: dict[str, object]
+@pytest.mark.parametrize("workflow_node", [None, "legacy"])
+def test_validate_new_request_cannot_fall_back_to_unrouted_legacy_mode(
+    project_root: Path, upload_request: dict[str, object], workflow_node
 ) -> None:
-    legacy = dict(upload_request)
-    legacy.pop("parent_thread_id")
-    accepted = TRANSPORT_VALIDATE.validate(legacy, project_root)
-    assert accepted["workflow_node"] == "legacy"
-    assert accepted["source_thread_id"] == upload_request["source_thread_id"]
-    assert accepted["parent_thread_id"] is None
-    assert accepted["return_receipt_ready"] is False
-    assert accepted["return_receipt_thread_id"] is None
+    request = dict(upload_request)
+    for field in ("workflow_node", "source_thread_id", "parent_thread_id", "operator_thread_id"):
+        request.pop(field, None)
+    if workflow_node is not None:
+        request["workflow_node"] = workflow_node
+    with pytest.raises(ValueError, match="workflow_node must be"):
+        TRANSPORT_VALIDATE.validate(request, project_root)
 
 
 @pytest.mark.parametrize(
@@ -666,6 +760,25 @@ def _em_bind_args(tmp_path: Path, request_id: str) -> Namespace:
     )
 
 
+@pytest.mark.parametrize("node", [None, "legacy"])
+def test_binding_cli_requires_current_explicit_node_before_registry_mutation(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, node
+) -> None:
+    args = _em_bind_args(tmp_path, "new-request")
+    argv = ["bind_conversation.py"]
+    for name, value in vars(args).items():
+        if value is None or name == "workflow_node":
+            continue
+        argv.extend(["--" + name.replace("_", "-"), str(value)])
+    if node is not None:
+        argv.extend(["--workflow-node", node])
+    monkeypatch.setattr(sys, "argv", argv)
+    with pytest.raises(SystemExit) as exc:
+        BIND.main()
+    assert exc.value.code == 2
+    assert not args.registry.exists()
+
+
 def test_bind_rejects_canonical_request_without_runtime_operator(tmp_path: Path) -> None:
     request = _em_bind_args(tmp_path, "req-no-operator")
     request.operator_thread_id = None
@@ -787,7 +900,7 @@ def test_skill_contracts_encode_execution_owner_async_and_tab_boundaries() -> No
     outsource_text = OUTSOURCE_SKILL.read_text(encoding="utf-8")
 
     for phrase in (
-        "The transport task is the execution owner",
+        "Root executes the complete transport",
         "scripts/materialize_packet.py",
         "never use `INTERVAL=1` busy polling",
         "the tab lease remains active while generation is pending",
@@ -801,7 +914,7 @@ def test_skill_contracts_encode_execution_owner_async_and_tab_boundaries() -> No
         "rejected before acceptance and produced no external effect",
         "`parent_thread_id` is the sole completion",
         "`fallback_enabled=false`",
-        "a rejection must not cause a second send",
+        "call `retry_rejected_receipt` with the direct `not_accepted_evidence`",
         "`RETURN_RECEIPT_BLOCKED`",
         "Never multiplex a later",
         "stage_blocker_receipt",

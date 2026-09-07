@@ -25,10 +25,17 @@ remains dated provenance under the controlling evidence specification section 11
   `UCOPE-CPA-SAME-DATA-BELLMAN-STRUCTURAL-COMPETENCE-R01`
 - Historical selected B discriminator:
   `UCOPE-B-EXPLORE-FT-XF-BC-INVERTIBLE-CONDITIONING-DISCRIMINATOR-R01`
-- Latest direction-local decision:
+- Latest direction-tier decision:
   **2026-09-05 PRO_FINAL / PARK** of the current same-draw retained-policy
   root-residual localization family, including its numerical-locus dependency;
   no successor selected. See the dated current position below.
+- Latest bounded B observation: **2026-09-07 shared-data return-model B04, joint RM-A**;
+  two prospective 512-batch datasets gain a mean 0.0010378824869791692 over BLIND and
+  IMMEDIATE-4, only 0.00003788248697916916 above MEI. Dataset sample SD is
+  0.0027031527544139028; conditional mean MC SE is 0.0004671170560530268.
+  One dataset is adverse inside MEI and one is positive; an extra harmful acquisition is
+  retained. B02/B03 positives, B01 nulls and older adverse evidence remain separate.
+  This adds no direction-tier disposition or further invocation.
 - Historical discriminator science-card current-byte SHA-256:
   `e08744fa18d708c9ad570bdce8b71296407991a4f5f79d502d37330913435fd8`
 - Historical discriminator science-card canonical-LF object digest:
@@ -48,7 +55,126 @@ without a distinct count-state architecture because RAW contains the sufficient
 count. The direct-service alternative remains separated by the frozen
 `Gamma=I+D` decomposition and analytic `D≈-0.02` boundary.
 
-## Current scientific position — 2026-09-05
+## Current scientific position — 2026-09-07
+
+The shared-data return-model B04 completed the prospective datasets 6601 and 6602 at
+512 training batches each with the full final evaluation. It receives **joint RM-A**:
+native/information gains are -0.0008735351562499955 (RM-B) and 0.002949300130208334 (RM-A),
+mean 0.0010378824869791692. The mean is only 0.00003788248697916916 above the 0.001 MEI;
+dataset sample SD 0.0027031527544139028 and conditional mean MC SE 0.0004671170560530268
+make its limited precision visible. The frozen point rule is retained without a new
+significance or all-positive-seed gate. B02/B03 are excluded from this primary.
+
+The strongest support is useful paid acquisition in LINKED-p17_20-c9_100 in both datasets,
+after 262,144 real training episodes, 393,216 scalar updates and 196,608 final evaluation
+episodes. The strongest current contradiction to repeatable usefulness is seed 6601's
+extra acquisition in LINKED-p13_20-c9_100: it loses 0.021816406250000003 in native return
+after paying and outweighs that seed's useful context gain. The other thirteen seed-context
+entries have zero difference. BLIND and IMMEDIATE-4 coincide, so equal contrast columns
+are not independent evidence. Four of five predictions match; the extra acquisition was missed.
+
+The accepted claim is preliminary useful acquisition by the joint point estimate at this
+budget, with mixed independent outcomes. Fitted-value variation and evaluation noise remain
+unseparated; no cause of the extra purchase is established. B03 is not a paired full-data
+arm, so this result does not establish a causal budget effect, equivalent performance,
+percentage of gain retained or a minimum sufficient data budget. B01's two nulls, older
+false-probe losses and small host headroom still limit broader claims. This host does not
+instantiate multi-agent partial observability or non-stationarity; no generic MARL or
+architecture/precision advantage or tuned-generic headroom record is added.
+
+The next recommended discriminator is another two independent datasets at the same
+512-batch budget and comparison, retaining every outcome to observe useful-acquisition
+and harmful-purchase variation before another reduction. This is a **close-call preparation
+recommendation only**; no new card, seed or invocation is selected. No family or Portfolio
+disposition changes. The retained-policy/root-residual numerical-locus family stays stopped.
+See the [B04 card](UCOPE_SHARED_DATA_RETURN_MODEL_B04_SCIENCE_CARD_20260907.md),
+[complete result evidence](UCOPE_SHARED_DATA_RETURN_MODEL_B04_RESULT_EVIDENCE_20260907.md) and
+[joint scientific intake](UCOPE_SHARED_DATA_RETURN_MODEL_B04_INTAKE_20260907.md).
+
+## Prior shared-data return-model observation — 2026-09-07 B03
+
+The shared-data return-model B03 completed exactly two fresh datasets, 6501 and 6502, and
+receives **joint RM-A** under its prospective rule. Native/information gains are
+0.0033094889322916716 and 0.0015751139322916715; their mean is 0.0024423014322916717,
+above the 0.001 MEI for both comparisons. Dataset sample SD is 0.0012263883236204184;
+conditional evaluation MC SE of the mean is 0.0003847990519703138. Prior B02 seed 6401
+motivated this follow-up and is excluded from its primary average.
+
+The strongest support is repeated useful acquisition after 524,288 real training episodes,
+786,432 scalar updates and 196,608 final evaluation episodes. FULL buys only in
+LINKED-p17_20-c9_100 in both datasets and gains after paid costs; the other fourteen
+seed-context entries have zero native difference. BLIND and IMMEDIATE-4 coincide throughout,
+so the two equal contrast columns do not add independent evidence. Five prediction components
+match. This supports a preliminary repeated finite-host signal, not stable population superiority.
+
+The strongest current limit is the smaller second gain and material variation across two
+datasets. Their purchased-context tail plans differ; policy and evaluation variation are not
+causally separated. Small headroom, fitted-max bias, the fixed eight-context host and B01's
+two nulls/historical false-probe losses still bound the claim. This host does not instantiate
+multi-agent partial observability or non-stationarity, and no generic MARL or architecture/
+precision advantage follows. No tuned-generic headroom record is added.
+
+The next recommended discriminator is whether the same native gain survives half the
+training-data budget in a separately prospective bounded B, retaining all outcomes. This is
+a returned preparation recommendation; no successor card, seed or invocation is selected.
+The retained-policy/root-residual numerical-locus family remains stopped. See the
+[B03 card](UCOPE_SHARED_DATA_RETURN_MODEL_B03_SCIENCE_CARD_20260907.md),
+[complete result evidence](UCOPE_SHARED_DATA_RETURN_MODEL_B03_RESULT_EVIDENCE_20260907.md) and
+[joint scientific intake](UCOPE_SHARED_DATA_RETURN_MODEL_B03_INTAKE_20260907.md).
+
+## Prior shared-data return-model observation — 2026-09-07 B02
+
+The separate shared-data return-model B02 completed its sole fresh dataset, seed 6401, and
+receives **RM-A**. The final count-conditioned policy has mean native/information advantages
+0.0030012207031250046 over BLIND and IMMEDIATE-4, both conditional MC SE 0.0005533139087041887.
+FULL buys information only in LINKED-p17_20-c9_100: its context advantage is 0.024009765625000037
+after paid cost, and the other seven contexts follow the reference. BLIND is IMMEDIATE-4
+throughout, so the two equal gains are not independent replications.
+
+The strongest support is a complete real comparison after 262,144 shared training episodes,
+393,216 scalar value updates and 98,304 final evaluation episodes. It demonstrates useful paid
+acquisition by this fitted controller, beyond action change or an information proxy. There is
+one independent training-data seed; the conditional SE does not estimate seed-population
+uncertainty, stable superiority or generic MARL effectiveness. No context-level native loss
+occurred in this run, while small headroom, fitted-max bias and sample variation remain limits.
+
+The strongest contradiction to a broader claim remains B01's two native-return nulls and the
+historical false-probe losses/full-competence limits below. B02 changes learner, exploration
+allocation and precision together; it does not locate B01's cause. No tuned-generic headroom
+record or exact-optimum claim is added. The branch and both prospective action predictions
+matched. The next recommended discriminator is one or two independent new-data comparisons
+(this intake recommends preparing two), retaining every sign; no new card or invocation is
+selected by this intake. The retained-policy/numerical-locus family stays stopped.
+See [B02 card](UCOPE_SHARED_DATA_RETURN_MODEL_B02_SCIENCE_CARD_20260907.md),
+[execution/result evidence](UCOPE_SHARED_DATA_RETURN_MODEL_B02_EXECUTION_RETURN_20260907.md) and
+[scientific intake](UCOPE_SHARED_DATA_RETURN_MODEL_B02_INTAKE_20260907.md).
+
+## Prior native-return observation — 2026-09-07 B01
+
+The separate native-return acquisition B01 completed both frozen training seeds 6301/6302 and
+receives **NR-B**, mean native-return difference 0 against IMMEDIATE-4. Every final modal root
+action is immediate in all eight contexts for both seeds; each conditional paired MC SE is 0.
+This is absence of acquisition benefit for this learner, budget and endpoint on two runs,
+not stable equivalence or a rejection of paid information. Zero paired SE describes the identical
+final paths and does not establish zero environment or training-population uncertainty.
+
+The strongest support is the complete native comparison after 524,288 training episodes and
+2,048 joint updates; training included 126,242 probes and every batch was tail-active. Thus
+literal absence of learner/probe exposure cannot explain the result. The prospective NR-B and
+at-least-one-all-immediate prediction matched; its causal explanation remains unverified.
+Credit quality, exposure allocation, finite budget and stochastic-training/modal-evaluation
+differences remain alternatives. Unused tail outputs supply no native acquisition value.
+
+Historical PA-B acquisition and TW-B tail coverage remain the strongest contradiction to any
+broader negative; their unchanged full-competence and false-probe costs remain below. B01 added
+no tuned-generic current-host headroom record. At its intake no further discriminator or invocation
+was selected; B02 above is the subsequent separately selected learning question. The
+retained-policy/numerical-locus family and its re-entry requirements are unchanged.
+See [B01 card](UCOPE_NATIVE_RETURN_ACQUISITION_B01_SCIENCE_CARD_20260907.md),
+[complete result](UCOPE_NATIVE_RETURN_ACQUISITION_B01_RESULT_EVIDENCE_20260907.md) and
+[scientific intake](UCOPE_NATIVE_RETURN_ACQUISITION_B01_INTAKE_20260907.md).
+
+## Retained-policy family disposition — 2026-09-05
 
 The complete verified 6 Pro response for `2026-09-05-ucope-post-interface-convergence-01`
 decides **PARK / REVERSIBLE_SCIENTIFIC_FAMILY_PAUSE**, with **NONE_NOW** as the next object.

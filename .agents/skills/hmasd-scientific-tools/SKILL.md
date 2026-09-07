@@ -26,7 +26,9 @@ only the mode needed now; this is not a launch checklist or new review layer.
   count a known loop. Unknown unit time remains unknown.
 - **Intake analysis:** use `scripts/summarize_runs.py` on selected endpoint scores
   already aggregated once per independent training run, task and arm. It emits
-  descriptive summaries, complete paired differences and an optional point plot.
+  descriptive summaries and an optional point plot. Add `--paired --baseline <arm>`
+  only when the study declares matched training runs, to emit paired differences.
+  Without `--paired`, equal seed labels do not trigger pairing.
   Do not pass episode rows or repeated checkpoints as independent training seeds.
   For curves or different estimands use a short task-specific Pandas/SciPy/Matplotlib
   script instead. A tool's output does not choose the estimand or establish validity.
@@ -54,7 +56,7 @@ exactness or all-seeds-positive prerequisites. One seed remains a local observat
 Example (from repository root, using the chosen analysis interpreter):
 
 ```text
-python .agents/skills/hmasd-scientific-tools/scripts/summarize_runs.py scores.csv --out temp/analysis/summary.json --baseline DIRECT --plot temp/analysis/runs.png
+python .agents/skills/hmasd-scientific-tools/scripts/summarize_runs.py scores.csv --out temp/analysis/summary.json --plot temp/analysis/runs.png
 ```
 
 CSV columns: `task,seed,arm,score`. `score` is a finite, explicitly selected endpoint;

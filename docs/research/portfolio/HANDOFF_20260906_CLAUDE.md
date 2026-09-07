@@ -111,14 +111,24 @@ carry later user turns in Chinese that no transport session issued; recorded as 
 in the archived `TRANSPORT_FACTS_CLAUDE.json` files, not interpreted. The owner has not yet said
 whether they typed them.
 
-## 5. Open items for the owner
+## 5. Owner rulings on the open items (19:50 PDT)
 
-- Registry reconciliation: both keys are `BINDING_BUSY` naming older requests
-  (`2026-09-05-dish-post-b02-convergence-recovery-01`, `2026-09-06-rcle-tbcfv-first-b-innovator-02`);
-  the registry is a shared mechanical file and needs owner approval to edit.
-- The two Chinese user turns in each conversation that no transport issued (post-witness DISH round,
-  post-B01 RCLE round): confirm whether the owner typed them.
-- The Codex loop committed six control-plane changes this afternoon (see §1); not reviewed by the hub.
+- **Registry reconciliation: approved and done.** Backup
+  `temp/sessions/hmasd-chatgpt-pro-transport/registry.backup-20260906T1955-pre-reconciliation.json`.
+  Both keys now sit at their last delivered request in state `ARCHIVED`, walked there by the
+  contract's own `archive_delivered_claude_request.py` after the hub moved the live fields and wrote
+  every intermediate Claude round into `request_history` from the archived transport facts:
+  `em:degraded_incumbent_shadow_handover:convergence` → `2026-09-06-dish-post-b04-convergence-02`
+  (history: the 2026-09-05 recovery round, post-A01, post-A02, post-B03, post-witness, and the
+  superseded `-01`); `em:roster_consistent_latent_exploration:innovator` →
+  `2026-09-06-rcle-post-b02-innovator-02` (history: first-B r02, post-B01, the superseded `-01`).
+  Conversation ids unchanged. The next request on either key binds normally.
+- **The extra Chinese user turns** in both conversations were the owner's own input; not an anomaly.
+  The archived `TRANSPORT_FACTS_CLAUDE.json` notes that call them unattributed stay as written at
+  the time; this ruling supersedes them.
+- **The owner console's P4 skip** of result-brief items is by the owner's request; briefs stay in
+  `owner/briefs/` and are cited from the ledger.
+- **The six Codex-loop control-plane commits** this afternoon were made by the owner.
 - Earlier open owner items (FRRIE R09 node problem, VSPC1, VNFC) are unchanged.
 
 ## 6. Resume procedure (only when the owner asks)

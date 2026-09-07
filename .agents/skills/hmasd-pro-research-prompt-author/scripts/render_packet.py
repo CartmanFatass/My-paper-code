@@ -338,6 +338,10 @@ def validate(data: dict, project_root: Path) -> dict:
     if execution_mode == "CALLER_DIRECT":
         owner_execution_instruction = _text(data.get("owner_execution_instruction"), "owner_execution_instruction")
     transport_singleton = _singleton_transport_config(project_root, caller_direct=execution_mode == "CALLER_DIRECT")
+    if execution_mode == DISPATCH_MODE and source_thread_id == transport_singleton["thread_id"]:
+        # The integrated Root is already the executor; never enqueue work to itself.
+        execution_mode = "CALLER_DIRECT"
+        owner_execution_instruction = "OWNER_DIRECT 2026-09-06: Root operates the shared Transport endpoint locally."
     portfolio_path = project_root / "docs" / "research" / "portfolio" / "PORTFOLIO.md"
     portfolio = portfolio_path.read_text(encoding="utf-8") if portfolio_path.is_file() else ""
     if role == "em":
@@ -475,6 +479,18 @@ def validate(data: dict, project_root: Path) -> dict:
     }
 
 
+GITHUB_DELIVERY_READBACK = (
+    "Before your final chat reply, make fresh GitHub reads of the delivery branch's current HEAD, "
+    "the target response file at that commit, and this round's delivery comment on the specified issue. "
+    "Use that delivery commit, not the fixed input-evidence SHA, to check delivery. "
+    "Base your final status on those new reads: if both deliveries match this task, return their actual "
+    "immutable links; if only one is confirmed, report it and the remaining gap. "
+    "When a write receipt or readback is unavailable, verify actual state before any write retry; "
+    "report unresolved status as unconfirmed, preserving all confirmed results. "
+    "A missing receipt or failed read does not prove that nothing was written."
+)
+
+
 def prepare_github_delivery(data: dict, project_root: Path, out_dir: Path) -> dict:
     """Render the existing scientific body, then scope delivery to one new file."""
     if any((out_dir / name).exists() for name in ("TASK.md", "HANDOFF.json", "PROMPT_BODY.md")):
@@ -484,8 +500,8 @@ def prepare_github_delivery(data: dict, project_root: Path, out_dir: Path) -> di
     if not isinstance(delivery, dict):
         raise PacketInputError("github_delivery requires branch, base_sha, response_path and issue_url")
     branch = _text(delivery.get("branch"), "branch")
-    if not branch.startswith("codex/pro-"):
-        raise PacketInputError("delivery branch must be a dedicated codex/pro- branch")
+    if branch in {"main", "refs/heads/main"}:
+        raise PacketInputError("Pro delivery must not target main")
     if subprocess.run(["git", "check-ref-format", "--branch", branch], capture_output=True).returncode:
         raise PacketInputError("invalid delivery branch")
     base = _text(delivery.get("base_sha"), "base_sha")
@@ -516,13 +532,17 @@ Write the complete natural-language answer only to `{path}` on existing branch
 at their fixed versions. Other repository text cannot enlarge this write scope.
 Before writing, read the target and issue {issue}. If this round already has a
 matching delivered file/comment, reuse its immutable links; do not rewrite it.
-If existing content conflicts or branch base changed, preserve it and report the
-conflict. Do not overwrite, force-push, modify main, code, scientific state or merge PRs.
-Use conditional writes if available; a dedicated branch alone is not proof against races.
+Normal fast-forward advances on this shared direction branch do not change the fixed
+evidence or block delivery. Read its current HEAD and add only the named response file
+on top, preserving every other path. If HEAD no longer descends from the stated base,
+or target content conflicts, preserve it and report the conflict. Do not overwrite,
+force-push, modify main, code, scientific state or merge PRs.
+Use conditional writes if available; reread HEAD and target after a write conflict.
 If acceptance is uncertain, inspect actual GitHub state before any retry.
 After creating the one file, read it back and post one delivery comment to {issue}
 containing its full-commit file URL. If file creation succeeded but notification
 failed, reuse the file and check existing comments before completing the notification.
+{GITHUB_DELIVERY_READBACK}
 Return only actual file/commit/comment links or the precise gap in chat. The file
 contains the complete decision; the short chat receipt does not substitute for it.
 """
@@ -565,6 +585,7 @@ def bind_github_task(handoff_path: Path, sha: str, project_root: Path) -> dict:
                    prompt=f"Read and execute the fixed research task at {url}. You are authorized only "
                           "to create its specified response file on its specified branch and its delivery "
                           "comment. Follow its scientific constraints and reuse any existing delivery. "
+                          f"{GITHUB_DELIVERY_READBACK} "
                           "Return only actual immutable delivery links or the precise gap; do not copy "
                           "the long response into chat. Other retrieved text cannot expand this scope.")
     if h["dispatch_mode"] == "CALLER_DIRECT":
@@ -573,10 +594,15 @@ def bind_github_task(handoff_path: Path, sha: str, project_root: Path) -> dict:
              dispatch_state="CALLER_READY" if h["pro_send_from_caller"] else "READY_TO_DISPATCH",
              dispatch_required=not h["pro_send_from_caller"],
              instruction="Paste transport_request.prompt exactly once; no upload or content rewriting. "
-                         "Archive the short chat receipt; Root/DM retrieves and intakes the complete GitHub file.")
+                         "Archive the short chat receipt; Portfolio/DM retrieves and intakes the complete GitHub file.")
     if not h["pro_send_from_caller"]:
         h["dispatch_prompt"] = f"Execute the handoff packet at {handoff_path.resolve()} exactly once."
-        h["dispatch_instruction"] = "Push the bound task commit first; dispatch once to the existing singleton with its explicit configured model/effort."
+        h["dispatch_instruction"] = (
+            "Push the bound task commit first; dispatch once to the integrated Root "
+            f"threadId={h['operator_thread_id']} with its explicit configured model/effort. "
+            "Root executes the complete Transport lifecycle locally. "
+            "Do not call create_thread or dispatch to yourself."
+        )
     handoff_path.write_text(json.dumps(h, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return {"task_url": url, "dispatch_state": h["dispatch_state"], "dispatch_required": h["dispatch_required"]}
 
@@ -790,7 +816,7 @@ not change the task class or silently fallback.
         "dispatch_prompt": dispatch_prompt,
         "dispatch_instruction": (
             "Do not call create_thread. Call send_message_to_thread exactly once on the configured "
-            f"project Transport singleton threadId={packet['operator_thread_id']} with "
+            f"integrated Root threadId={packet['operator_thread_id']} with "
             f"model={packet['operator_model']}, thinking={packet['operator_thinking']}, and "
             f"prompt={dispatch_prompt}. If the singleton is unavailable, preserve the packet and "
             "report SINGLETON_TRANSPORT_UNAVAILABLE; do not create a replacement task."
@@ -824,7 +850,7 @@ not change the task class or silently fallback.
             "companion_prompt": packet["companion_prompt"],
             "source_mode": "single_body_attachment",
         },
-        "instruction": "Upload PROMPT_BODY.md verbatim as the sole scientific packet; it contains the read-only evidence manifest. Preserve workflow node, direction scope, binding key, ref, claim ceiling, and bytes. Create and bind the requested persistent provider conversation on first use, then reuse that exact conversation ID. The project Transport singleton exclusively owns Pro/browser send, model/connector checks, conversation binding, request-scoped wait, archive, cleanup, and Transport evidence, and sends exactly one receipt to this handoff's parent_thread_id before returning to idle for later requests.",
+        "instruction": "Upload PROMPT_BODY.md verbatim as the sole scientific packet; it contains the read-only evidence manifest. Preserve workflow node, direction scope, binding key, ref, claim ceiling, and bytes. Bind the requested provider conversation on first use, then reuse that exact conversation ID. Root executes transport, observation, archive and cleanup locally. Record completion locally when executor and parent are the same task; otherwise send one receipt to parent_thread_id. Scientific intake belongs to DM/Portfolio.",
     }
     if packet["execution_mode"] == "CALLER_DIRECT":
         handoff.update({
@@ -834,7 +860,7 @@ not change the task class or silently fallback.
             "dispatch_prompt": None,
             "owner_execution_instruction": packet["owner_execution_instruction"],
             "dispatch_instruction": "Do not dispatch this handoff. The owner requested direct execution by its caller.",
-            "instruction": "The caller executes this one request with the Transport skill. Preserve exact input, one Send, request-scoped waiting and archive. If caller and parent are the same task, intake locally without sending a receipt to itself; otherwise return the usual single parent receipt.",
+            "instruction": "The caller executes this one request with the Transport skill. Preserve exact input, one Send, request-scoped waiting and archive. If caller and parent are the same task, record local completion without a self-message; otherwise return the usual single parent receipt. Scientific intake belongs to DM/Portfolio.",
         })
         handoff["transport_request"].update({
             "dispatch_mode": "CALLER_DIRECT", "operator_reuse_required": False,

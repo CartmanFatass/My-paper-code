@@ -1,0 +1,78 @@
+{
+  "object": "DISH-SAMPLED-EXECUTION-B06",
+  "evidence_class": "B/EXPLORE",
+  "status": "card_frozen_only; no implementation or launch in this assignment",
+  "authority_response_sha": "db0bbfd8e1d96b06e8c6e8aa9bfa70787fe9a9cd",
+  "training_seed": 113,
+  "independent_training_instances": 1,
+  "training_arm": "LOW_LR",
+  "adamw_lr_all_original_groups": 3e-05,
+  "execution_modes": [
+    "MODAL",
+    "SAMPLED"
+  ],
+  "policy_samples_per_condition": [
+    0,
+    1
+  ],
+  "training_environment_master_law": "SHA256(ASCII('DISH-SAMPLED-EXECUTION-B06/seed/113'))",
+  "evaluation_policy_master_law": "SHA256(ASCII('DISH-SAMPLED-EXECUTION-B06/EVAL_POLICY/seed/113'))",
+  "rng_masters_generated_by_this_documentation": false,
+  "planned": {
+    "updates": 16,
+    "lanes": 32,
+    "ticks_per_update": 128,
+    "ordinary_transitions": 65536,
+    "epochs_per_update": 4,
+    "minibatches_per_epoch": 8,
+    "optimizer_steps": 512,
+    "selected_checkpoint_update": 16,
+    "evaluation_episodes": {
+      "initial_modal": 4,
+      "final_modal": 4,
+      "final_sampled": 8
+    },
+    "evaluation_episodes_total": 16,
+    "evaluation_tick_upper_by_panel": {
+      "initial_modal": 4800,
+      "final_modal": 4800,
+      "final_sampled": 9600
+    },
+    "evaluation_ticks_upper_total": 19200,
+    "native_training_call_law": "2N+2E+H; 0<=E<=N; 0<=H<=20E",
+    "native_training_call_lower": 131072,
+    "native_training_call_upper": 1572864,
+    "sampled_evaluation_renewals_upper": 9600,
+    "sampled_evaluation_draw_law": "4R normal, 2R Bernoulli, 10R uniform; excludes original training sampler",
+    "sampled_evaluation_normal_draws_upper": 38400,
+    "sampled_evaluation_bernoulli_draws_upper": 19200,
+    "sampled_evaluation_uniform_draws_upper": 96000,
+    "search_candidates": 0,
+    "source_forks": 0,
+    "intermediate_selected_checkpoints": 0
+  },
+  "new_actual_exposure_at_freeze": {
+    "initializers": 0,
+    "learner_updates": 0,
+    "ordinary_transitions": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0
+  },
+  "parameter_movement_new_seed": "unobserved; no learner executed",
+  "cap_seconds": {
+    "complete_B06": 1800,
+    "scope": "All necessary focused checks, build/cache/model loads, initialization and four references, real training/private labels, final modal/sampled evaluation, reduction and publication; no reset across stages/modes"
+  },
+  "known_B05_planning_anchors_seconds": {
+    "source": "docs/research/candidates/degraded_incumbent_shadow_handover/control_low_lr_b05_20260906/TECHNICAL_ACCEPTANCE.json",
+    "low_lr_complete_outer": 212.86,
+    "shared_initializer_four_references": 7.11,
+    "historical_full_machine_wall": 432.82000000000005,
+    "historical_aggregate_cpu": 444.01,
+    "historical_study_elapsed": 2663.0
+  },
+  "projection": "Same-scale prior LOW_LR plus four references anchors a hundreds-of-seconds work type, not a promised new total or a sampled-episode price. Added eight sampled evaluations/adapter checks and new E,H,R/cache/load have unknown duration; one whole 1800s cap. No separate timing or preceding A invocation is selected.",
+  "validation_work": "One focused changed-master/sampler/state/primary/first-transfer check; existing credible LR/renewal/terminal coverage reused, within whole cap. No such execution performed in this card task.",
+  "engineering_scope_section4": "none",
+  "exposure_line": "Proposed seed113: 1 LOW_LR learner x 16 updates x 32 lanes x 128 ticks = 65536 ordinary transitions; 16 x 4 x 8 = 512 optimizer steps; 4 initial MODAL + 4 final MODAL + 8 final SAMPLED = 16 episodes <= 19200 ticks. Native training 2N+2E+H in [131072,1572864]; sampled-evaluation uniforms <= 96000. This consultation/card freeze has zero new initialization, learning and evaluation exposure."
+}

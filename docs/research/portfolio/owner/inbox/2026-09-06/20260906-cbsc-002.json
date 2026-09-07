@@ -1,0 +1,97 @@
+{
+  "id": "20260906-cbsc-002",
+  "created": "2026-09-06T20:44:00-07:00",
+  "direction": "capability_bound_semantic_currentness",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "CBSC B04：局部采样回报与同信息RAW比较",
+  "context": "单控制器面对两接收实体的systems/information-flow研究。两臂都改为本次所选动作decision+settlement目标及decision-only value，固定seed21217/48rollout/0与48评价。科学卡已冻结，代码和运行尚未接受。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "按完整Pro决定推进这张卡，保留所有正零负结果及请求规则参照。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "异步停止此卡执行，保留旧两个零和家族暂停。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "按具体异步指令处理；科学含义冲突返回原节点。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "主量仍是同信息表示比较；公开请求参照限制容易的活动判别解释。",
+  "evidence": [
+    "docs/research/candidates/capability_bound_semantic_currentness/CBSC_OPPORTUNITY_CREDIT_B04_SCIENCE_CARD_20260906.md",
+    "docs/research/candidates/capability_bound_semantic_currentness/pro_packets/20260906_opportunity_credit_convergence/archive/RESPONSE.md"
+  ],
+  "ledger_row": "",
+  "brief": "",
+  "ledger_kind": "",
+  "status": "open",
+  "packet": {
+    "question": "执行已形成的CBSC B04方向决定并冻结卡片：一组新配对训练使用本次动作完整回报；当前仅科学选择和卡片已应用，源码、检查和正式实验尚未接受。",
+    "changes_if_approved": [
+      {
+        "target": "CBSC B04科学卡及下一判别",
+        "from": "只有未选择的提案；旧不变家族暂停",
+        "to": "PRO_FINAL已选择机会回报B04；卡片冻结，准备具名实现与唯一检查。旧暂停/零结果/Portfolio不变"
+      }
+    ],
+    "if_refused": "保留已完成的两组零差异和原家族暂停；不自动买第三组、不增加训练预算，也不把这当成整个当前性机制无效。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/capability_bound_semantic_currentness/pro_packets/20260906_opportunity_credit_convergence/archive/RESPONSE.md",
+        "quote": "选择打开一个不同的、有限的真实学习问题：开展 CBSC-OPPORTUNITY-CREDIT-B04，用新 seed 21217 的一组 RAW/STRUCT 配对训练，统一采用“本次所选动作的决策加结算实得回报”及对应的 decision-only value 监督。",
+        "why": "既有Convergence已完整形成明确对象选择，不是再等待审批或把提案当结果。"
+      },
+      {
+        "path": "experiments/candidates/capability_bound_semantic_currentness/omrc_b01/ledger.py",
+        "quote": "return state, native_ledger(state, decision, action)",
+        "why": "各动作不改变后面的状态；因此可以直接尝试只给该动作自己的完整回报分配学习信用。"
+      },
+      {
+        "path": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_OPPORTUNITY_CREDIT_B04_DESIGN_INTAKE_20260906.md",
+        "quote": "The resulting hypothesis is that an unnecessary return-prediction horizon and its shared critic loss may make local context-sensitive choices harder to learn at this budget.",
+        "why": "这是从当前源码得到的具体学习假设，不只是再换一个seed或延长预算，也没有宣称已经找到了旧结果的唯一原因。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_DIRECT_RETURN_B03_RESULT_EVIDENCE_20260905.md",
+        "quote": "All32 endpoint differences are zero.",
+        "why": "旧两组结果都未显示表示增益；即使新方法回报提高，也可能只是学会了公开的请求是否活跃。"
+      }
+    ],
+    "uncertainty": [
+      "当前只提出一个新目标估计器，未测得新的原生回报、梯度方差或参数变化。",
+      "按公开请求标记决定刷新或安全动作，在旧面板上的代数推导回报比全刷新高1.475和1.525；这不是新训练结果，也不是调优后headroom。",
+      "一组新配对只能评价新学习包内的表示差异，不能独立证明换掉GAE的因果收益。",
+      "此宿主只有一个学习控制器，不支持一般多智能体协作或成员变化结论。"
+    ],
+    "cost": {
+      "compute": "当前新增训练/评价为零。若方向节点选择提案：1个配对seed、2臂，各48次rollout/768次Adam，两臂136192次训练加评价转移；完整上限每臂600秒。另拟唯一工程检查不超过60秒，继续计入已有132.15/300秒测试账。",
+      "owner_time": "可异步了解或改写选择；当前授权的问题提交不等待回复。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing；既有授权持续。源码接受、一次60秒检查、每臂600秒完整执行仍须按卡完成。"
+    },
+    "verdict_text": "选择打开一个不同的、有限的真实学习问题：开展 CBSC-OPPORTUNITY-CREDIT-B04，用新 seed 21217 的一组 RAW/STRUCT 配对训练，统一采用“本次所选动作的决策加结算实得回报”及对应的 decision-only value 监督。",
+    "source": "docs/research/candidates/capability_bound_semantic_currentness/pro_packets/20260906_opportunity_credit_convergence/archive/RESPONSE.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-07T04:42:23+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/capability_bound_semantic_currentness/pro_packets/20260906_opportunity_credit_convergence/archive/RESPONSE.md",
+      "record": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_OPPORTUNITY_CREDIT_B04_INTAKE_20260906.md",
+      "state": "applied",
+      "summary": "The selected check and both formal calls were executed. RAW completed at12.0375 versus public REQUEST_ONLY12.375; STRUCT stopped before model creation, so the formal pair is incomplete. All handles terminal; no retry or new diagnosis selected. Applied records execution of the accepted card, not acceptance of a paired result."
+    }
+  ]
+}

@@ -559,11 +559,14 @@ def stage_receipt(
     )
     if existing.get("message_key") and existing["message_key"] != message_key:
         raise ValueError("completion receipt message key conflicts with the archived response")
+    if existing.get("status") == "LOCAL" and (record.get("execution_thread_id") or record.get("operator_thread_id")) == parent_thread_id:
+        return record
     if existing.get("status") == "PENDING" and existing.get("message_key"):
         if (
             existing.get("destination_thread_id") == parent_thread_id
             and existing.get("routing_mode") == "PARENT_SESSION"
             and existing.get("fallback_enabled") is False
+            and (record.get("execution_thread_id") or record.get("operator_thread_id")) != parent_thread_id
         ):
             return record
     elif existing.get("status") == "BLOCKED":
@@ -593,6 +596,9 @@ def stage_receipt(
             "fallback_enabled": False,
         }
     )
+    if (record.get("execution_thread_id") or record.get("operator_thread_id")) == parent_thread_id:
+        existing.update(required=False, destination_thread_id=None, status="LOCAL",
+                        routing_mode="LOCAL", attempt_count=0)
     record["creator_thread_id"] = source_thread_id
     record["parent_thread_id"] = parent_thread_id
     record["return_route"] = "PARENT_SESSION"
@@ -669,11 +675,14 @@ def stage_blocker_receipt(
     )
     if existing.get("message_key") and existing["message_key"] != base_key:
         raise ValueError("blocker receipt message key conflicts with the terminal state")
+    if existing.get("status") == "LOCAL" and (record.get("execution_thread_id") or record.get("operator_thread_id")) == parent_thread_id:
+        return record
     if existing.get("status") == "PENDING" and existing.get("message_key"):
         if (
             existing.get("destination_thread_id") == parent_thread_id
             and existing.get("routing_mode") == "PARENT_SESSION"
             and existing.get("fallback_enabled") is False
+            and (record.get("execution_thread_id") or record.get("operator_thread_id")) != parent_thread_id
         ):
             return record
     for key in tuple(existing):
@@ -702,10 +711,44 @@ def stage_blocker_receipt(
             "fallback_enabled": False,
         }
     )
+    if (record.get("execution_thread_id") or record.get("operator_thread_id")) == parent_thread_id:
+        existing.update(required=False, destination_thread_id=None, status="LOCAL",
+                        routing_mode="LOCAL", attempt_count=0)
     record["creator_thread_id"] = source_thread_id
     record["parent_thread_id"] = parent_thread_id
     record["return_route"] = "PARENT_SESSION"
     record["return_receipt"] = existing
+    return record
+
+
+def retry_rejected_receipt(
+    record: MutableMapping[str, Any], *, not_accepted_evidence: str,
+    now: str | None = None,
+) -> MutableMapping[str, Any]:
+    """Reopen the same receipt only with direct evidence of rejection before acceptance."""
+    receipt = dict(record.get("return_receipt") or {})
+    if receipt.get("status") not in {"FAILED", "BLOCKED"} or not receipt.get("attempt_count"):
+        raise ValueError("retry requires an attempted, rejected receipt")
+    if not isinstance(not_accepted_evidence, str) or not not_accepted_evidence.strip():
+        raise ValueError("direct evidence of no acceptance and no external effect is required")
+    if (receipt.get("routing_mode") != "PARENT_SESSION"
+            or receipt.get("fallback_enabled") is not False
+            or receipt.get("sent_at")
+            or any(receipt.get(k) for k in ("fallback_status", "fallback_attempt_count",
+                                           "fallback_sent_at", "fallback_delivery_status"))):
+        raise ValueError("retry cannot replace a delivered or legacy fallback route")
+    parent = validate_parent_thread_id(record.get("parent_thread_id"))
+    if receipt.get("destination_thread_id") != parent or receipt.get("parent_thread_id") != parent:
+        raise ValueError("retry must preserve the original parent destination")
+    if not receipt.get("message_key"):
+        raise ValueError("retry requires the original message key")
+    receipt.setdefault("rejected_attempts", []).append({
+        "attempt_count": receipt["attempt_count"], "status": receipt["status"],
+        "delivery_status": receipt.get("delivery_status"), "error": receipt.get("error"),
+        "not_accepted_evidence": not_accepted_evidence,
+    })
+    receipt.update(status="PENDING", retry_allowed=False, updated_at=now or utc_now())
+    record["return_receipt"] = receipt
     return record
 
 
@@ -717,7 +760,7 @@ def record_receipt_result(
     error: str | None = None,
     now: str | None = None,
 ) -> MutableMapping[str, Any]:
-    """Persist the single receipt outcome; uncertain delivery is never retryable here."""
+    """Persist one receipt attempt; uncertain delivery is never retryable here."""
 
     if status not in {"SENT", "UNCERTAIN", "BLOCKED", "FAILED"}:
         raise ValueError("receipt status must be SENT, UNCERTAIN, BLOCKED, or FAILED")

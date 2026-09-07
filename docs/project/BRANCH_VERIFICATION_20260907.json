@@ -1,0 +1,1513 @@
+{
+  "date": "2026-09-07",
+  "scope": "Owner-requested read-only verification by five Luna Scouts and parent remote/current-state checks; no second cleanup performed.",
+  "baseline_main": "abf09c6bf0124b71d6a471b2327c5a0cf77a5561",
+  "newer_main_used_for_current_intakes": "13d25608b41c1126821ba13b16477f53540646e4",
+  "clean_branches": [
+    {
+      "branch": "cm/n3-dish-funnel-a01-20260904",
+      "observed_tip": "d24022f1c2e2d868ea714a0308ddb04760551fba",
+      "current_tip": "d24022f1c2e2d868ea714a0308ddb04760551fba",
+      "group": "unique_1",
+      "coverage": "Unresolved: partial integration lead or differing code/doc paths; not proven fully covered.",
+      "full_coverage_confirmed": false,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "codex/cm-acvc-upper-cost-20260905",
+      "observed_tip": "eea3b7dd25a89c19f28da8b415664be90f7992ac",
+      "current_tip": "eea3b7dd25a89c19f28da8b415664be90f7992ac",
+      "group": "unique_1",
+      "coverage": "Unresolved: partial integration lead or differing code/doc paths; not proven fully covered.",
+      "full_coverage_confirmed": false,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "codex/cm-cbsc-policy-b-20260905",
+      "observed_tip": "63a6f0a543098118797a6938189493f8a73ca6e6",
+      "current_tip": "63a6f0a543098118797a6938189493f8a73ca6e6",
+      "group": "unique_1",
+      "coverage": "Unresolved: partial integration lead or differing code/doc paths; not proven fully covered.",
+      "full_coverage_confirmed": false,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "codex/cm-dish-b05-seed101-20260906",
+      "observed_tip": "4d50bc9cf5f2f7ec2498a9ad45bd53247a7d063b",
+      "current_tip": "4d50bc9cf5f2f7ec2498a9ad45bd53247a7d063b",
+      "group": "unique_1",
+      "coverage": "stable patch-id: 18812ba5 = main cd317810",
+      "full_coverage_confirmed": true,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "codex/cm-n3-a05-approved-20260905",
+      "observed_tip": "fc2dabf898c8e9952f6a945281bb4c02ef0d3bf0",
+      "current_tip": "fc2dabf898c8e9952f6a945281bb4c02ef0d3bf0",
+      "group": "unique_1",
+      "coverage": "Unresolved: partial integration lead or differing code/doc paths; not proven fully covered.",
+      "full_coverage_confirmed": false,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "codex/cm-vsp03-b01-20260905",
+      "observed_tip": "a8c34d769751e7b299e0265724b705d2e3bb6b60",
+      "current_tip": "a8c34d769751e7b299e0265724b705d2e3bb6b60",
+      "group": "unique_1",
+      "coverage": "stable patch-id: 66a4fced = main 312ea1ed",
+      "full_coverage_confirmed": true,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "codex/control-plane-free-20260824",
+      "observed_tip": "07b3046e00710553f0796d7006cd071f7bced8b7",
+      "current_tip": "07b3046e00710553f0796d7006cd071f7bced8b7",
+      "group": "unique_1",
+      "coverage": "Unresolved: partial integration lead or differing code/doc paths; not proven fully covered.",
+      "full_coverage_confirmed": false,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "codex/dm-cbsc-a01-intake-nextpath-20260907",
+      "observed_tip": "f766092a1aac50e72e8fbd794a2434092238b4ed",
+      "current_tip": "f766092a1aac50e72e8fbd794a2434092238b4ed",
+      "group": "unique_1",
+      "coverage": "stable patch-id: f766092a = main a1e8a6e5",
+      "full_coverage_confirmed": true,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "codex/dm-cbsc-runtime-a01-20260907",
+      "observed_tip": "b70738f2393e998eccef10dbb2ea30993795fbf2",
+      "current_tip": "b70738f2393e998eccef10dbb2ea30993795fbf2",
+      "group": "unique_1",
+      "coverage": "stable patch-id: 56edc415 = main 48254b90",
+      "full_coverage_confirmed": true,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "codex/dm-dish-b06-scientific-intake-20260907",
+      "observed_tip": "f0964b3835f018a3f36b49d7c7a2f0e52490ca62",
+      "current_tip": "f0964b3835f018a3f36b49d7c7a2f0e52490ca62",
+      "group": "unique_1",
+      "coverage": "stable patch-id: 6b45ea47 = main 513b7e8c; retain designated DISH checkout",
+      "full_coverage_confirmed": true,
+      "retain_designated_checkout": true
+    },
+    {
+      "branch": "codex/dm-frrie-resume-20260904",
+      "observed_tip": "33766289e2e95c5dada6e679b5f46ca518e78b01",
+      "current_tip": "33766289e2e95c5dada6e679b5f46ca518e78b01",
+      "group": "unique_1",
+      "coverage": "all 5 positive stable patch IDs matched baseline main",
+      "full_coverage_confirmed": true,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "codex/dm-k1-vsp03-design-20260905",
+      "observed_tip": "24e847f92f038ec7fdafe02e95f733956372472a",
+      "current_tip": "24e847f92f038ec7fdafe02e95f733956372472a",
+      "group": "unique_1",
+      "coverage": "Unresolved: partial integration lead or differing code/doc paths; not proven fully covered.",
+      "full_coverage_confirmed": false,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "codex/dm-n3-post-b02-author-20260905",
+      "observed_tip": "a9e45d5ac8a988b905d1b9d0856478720c21211f",
+      "current_tip": "a9e45d5ac8a988b905d1b9d0856478720c21211f",
+      "group": "unique_1",
+      "coverage": "Unresolved: partial integration lead or differing code/doc paths; not proven fully covered.",
+      "full_coverage_confirmed": false,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "codex/dm-rcle-a02-20260906",
+      "observed_tip": "458543c1516da5abc44a2dad6854713e50e2d1c6",
+      "current_tip": "458543c1516da5abc44a2dad6854713e50e2d1c6",
+      "group": "unique_1",
+      "coverage": "both positive stable patch IDs matched baseline main",
+      "full_coverage_confirmed": true,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "codex/dm-ucope-resume-20260904",
+      "observed_tip": "34177bee6ca502b4318f772a6bf6dde58d29f005",
+      "current_tip": "34177bee6ca502b4318f772a6bf6dde58d29f005",
+      "group": "unique_1",
+      "coverage": "stable patch-id: 1635f391 = main 051c2d1e",
+      "full_coverage_confirmed": true,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "codex/dm-vspc1-next-question-20260907",
+      "observed_tip": "fefd857232fb7817f095dea7ea8c0f690678a242",
+      "current_tip": "fefd857232fb7817f095dea7ea8c0f690678a242",
+      "group": "unique_1",
+      "coverage": "Unresolved: partial integration lead or differing code/doc paths; not proven fully covered.",
+      "full_coverage_confirmed": false,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "codex/egrcr/frcs-b01-engineering-20260904",
+      "observed_tip": "b8b337df76a961f977c88b3a2ed53a98b4c4e544",
+      "current_tip": "b8b337df76a961f977c88b3a2ed53a98b4c4e544",
+      "group": "unique_1",
+      "coverage": "Unresolved: partial integration lead or differing code/doc paths; not proven fully covered.",
+      "full_coverage_confirmed": false,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "codex/impl-n3-dish-certificate-a04-20260905",
+      "observed_tip": "d543146cc11ccf880da1245bfb6884356772dd38",
+      "current_tip": "d543146cc11ccf880da1245bfb6884356772dd38",
+      "group": "unique_1",
+      "coverage": "Unresolved: partial integration lead or differing code/doc paths; not proven fully covered.",
+      "full_coverage_confirmed": false,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "codex/impl-n3-dish-ground-a02-20260905",
+      "observed_tip": "dd0e01bbc4aa0efd3c22b475585511232c1de4fc",
+      "current_tip": "dd0e01bbc4aa0efd3c22b475585511232c1de4fc",
+      "group": "unique_1",
+      "coverage": "Unresolved: partial integration lead or differing code/doc paths; not proven fully covered.",
+      "full_coverage_confirmed": false,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "codex/impl-n5-b02-20260904",
+      "observed_tip": "da42b17303c5b363ea6c31a8273286100ff8802e",
+      "current_tip": "da42b17303c5b363ea6c31a8273286100ff8802e",
+      "group": "unique_1",
+      "coverage": "Unresolved: partial integration lead or differing code/doc paths; not proven fully covered.",
+      "full_coverage_confirmed": false,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "codex/impl/dish-b01-conformance-c03-20260904",
+      "observed_tip": "b0c63b69cabd1cdaceac4ea6370def6d97a93c15",
+      "current_tip": "b0c63b69cabd1cdaceac4ea6370def6d97a93c15",
+      "group": "unique_1",
+      "coverage": "Unresolved: partial integration lead or differing code/doc paths; not proven fully covered.",
+      "full_coverage_confirmed": false,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "codex/work-direction-portfolio-objective-start",
+      "observed_tip": "4c175ee8edaa523002b5aa2acea8ef2e85e02810",
+      "current_tip": "4c175ee8edaa523002b5aa2acea8ef2e85e02810",
+      "group": "unique_1",
+      "coverage": "Unresolved: partial integration lead or differing code/doc paths; not proven fully covered.",
+      "full_coverage_confirmed": false,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "impl-cbsc-policy-b-map-20260905",
+      "observed_tip": "cfbe91367fd56f9d4bd4ace3cbe5c8123fddd4af",
+      "current_tip": "cfbe91367fd56f9d4bd4ace3cbe5c8123fddd4af",
+      "group": "unique_1",
+      "coverage": "Unresolved: partial integration lead or differing code/doc paths; not proven fully covered.",
+      "full_coverage_confirmed": false,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "omp/finite_semantic_boundary_support/engineering/bc2db89b-8d64-4f7e-abac-5f1b0a58b4c9",
+      "observed_tip": "35e658f550843aaa336d4b40bc64b8c58871c129",
+      "current_tip": "35e658f550843aaa336d4b40bc64b8c58871c129",
+      "group": "unique_1",
+      "coverage": "Unresolved: partial integration lead or differing code/doc paths; not proven fully covered.",
+      "full_coverage_confirmed": false,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "omp/ucope/engineering/f49bbbc8-a821-486c-8578-690186ce333c",
+      "observed_tip": "346b2536e0860aa970748559991fe3c3d9c024e0",
+      "current_tip": "346b2536e0860aa970748559991fe3c3d9c024e0",
+      "group": "unique_1",
+      "coverage": "Unresolved: partial integration lead or differing code/doc paths; not proven fully covered.",
+      "full_coverage_confirmed": false,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "cm/vspc1-reactive-queues-b01-20260906",
+      "observed_tip": "08fe52f3883d71631ac9a87e77943bb9b2562dce",
+      "current_tip": "08fe52f3883d71631ac9a87e77943bb9b2562dce",
+      "group": "unique_2",
+      "coverage": "Unresolved: partial integration lead or differing code/doc paths; not proven fully covered.",
+      "full_coverage_confirmed": false,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "codex/cm-cbsc-direct-20260904",
+      "observed_tip": "7b6cbe90ad1daa2d4e9e42f209ff9e90c8dc61fc",
+      "current_tip": "7b6cbe90ad1daa2d4e9e42f209ff9e90c8dc61fc",
+      "group": "unique_2",
+      "coverage": "Unresolved: partial integration lead or differing code/doc paths; not proven fully covered.",
+      "full_coverage_confirmed": false,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "codex/cm-cbsc-r07-launch-20260904",
+      "observed_tip": "93d6ba1414fd4d6652dc2fb31c6d6cbade149673",
+      "current_tip": "93d6ba1414fd4d6652dc2fb31c6d6cbade149673",
+      "group": "unique_2",
+      "coverage": "Unresolved: partial integration lead or differing code/doc paths; not proven fully covered.",
+      "full_coverage_confirmed": false,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "codex/cm-frrie-r04-diagnosis-20260904",
+      "observed_tip": "65648e643891efa37f3c0a081342f43b09fd922f",
+      "current_tip": "65648e643891efa37f3c0a081342f43b09fd922f",
+      "group": "unique_2",
+      "coverage": "Unresolved: partial integration lead or differing code/doc paths; not proven fully covered.",
+      "full_coverage_confirmed": false,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "codex/cm-n3-folr-b04-20260904",
+      "observed_tip": "6f9e3716f1b8f0c3219320e57c68eafb92b31d0c",
+      "current_tip": "6f9e3716f1b8f0c3219320e57c68eafb92b31d0c",
+      "group": "unique_2",
+      "coverage": "Unresolved: partial integration lead or differing code/doc paths; not proven fully covered.",
+      "full_coverage_confirmed": false,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "codex/cm/acvc-history-headroom-certificate-r02-20260904",
+      "observed_tip": "3831a66da19788f549e39faeb8a898221186252a",
+      "current_tip": "3831a66da19788f549e39faeb8a898221186252a",
+      "group": "unique_2",
+      "coverage": "Unresolved: partial integration lead or differing code/doc paths; not proven fully covered.",
+      "full_coverage_confirmed": false,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "codex/crto/balanced-b01-r1-cm-20260904",
+      "observed_tip": "f3ed2a771c384e21ea0cac707fe7b580ac12a56b",
+      "current_tip": "f3ed2a771c384e21ea0cac707fe7b580ac12a56b",
+      "group": "unique_2",
+      "coverage": "Unresolved: partial integration lead or differing code/doc paths; not proven fully covered.",
+      "full_coverage_confirmed": false,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "codex/dm-cbsc-a02-selected-20260907",
+      "observed_tip": "b95f8e65fcd99a0e8be636335e67829598beb7fd",
+      "current_tip": "b95f8e65fcd99a0e8be636335e67829598beb7fd",
+      "group": "unique_2",
+      "coverage": "zero positive patches at bound and fresh main",
+      "full_coverage_confirmed": true,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "codex/dm-crto-resume-20260904",
+      "observed_tip": "62db9de4e86e742ff70ff2f2d4e11503acc8df54",
+      "current_tip": "62db9de4e86e742ff70ff2f2d4e11503acc8df54",
+      "group": "unique_2",
+      "coverage": "Unresolved: partial integration lead or differing code/doc paths; not proven fully covered.",
+      "full_coverage_confirmed": false,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "codex/dm-dish-b06-technical-intake-20260907",
+      "observed_tip": "e29bbec1dc374a4f19565b0360057f6eea0cdd88",
+      "current_tip": "e29bbec1dc374a4f19565b0360057f6eea0cdd88",
+      "group": "unique_2",
+      "coverage": "Unresolved: partial integration lead or differing code/doc paths; not proven fully covered.",
+      "full_coverage_confirmed": false,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "codex/dm-fsd-resume-20260904",
+      "observed_tip": "463e7da857281a128bd275a9dc52e64c39f82456",
+      "current_tip": "463e7da857281a128bd275a9dc52e64c39f82456",
+      "group": "unique_2",
+      "coverage": "Unresolved: partial integration lead or differing code/doc paths; not proven fully covered.",
+      "full_coverage_confirmed": false,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "codex/dm-n3-approved-20260905",
+      "observed_tip": "0d15a22f842e5388189e90b24b4c9a724b56359e",
+      "current_tip": "0d15a22f842e5388189e90b24b4c9a724b56359e",
+      "group": "unique_2",
+      "coverage": "Unresolved: partial integration lead or differing code/doc paths; not proven fully covered.",
+      "full_coverage_confirmed": false,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "codex/dm-n3-state-recovery-20260904",
+      "observed_tip": "94892274c3865a1ea6f6abf02fa40138c94f0fd9",
+      "current_tip": "94892274c3865a1ea6f6abf02fa40138c94f0fd9",
+      "group": "unique_2",
+      "coverage": "Unresolved: partial integration lead or differing code/doc paths; not proven fully covered.",
+      "full_coverage_confirmed": false,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "codex/dm-rcle-a02-intake-20260906",
+      "observed_tip": "02e3019202855da1da163b10377046f957194600",
+      "current_tip": "02e3019202855da1da163b10377046f957194600",
+      "group": "unique_2",
+      "coverage": "Unresolved: partial integration lead or differing code/doc paths; not proven fully covered.",
+      "full_coverage_confirmed": false,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "codex/dm-vnfc-b01-two-seed-pro-20260905",
+      "observed_tip": "a2e98fa8211cf4c1a7d31db40cbcd604de3936bd",
+      "current_tip": "a2e98fa8211cf4c1a7d31db40cbcd604de3936bd",
+      "group": "unique_2",
+      "coverage": "Unresolved: partial integration lead or differing code/doc paths; not proven fully covered.",
+      "full_coverage_confirmed": false,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "codex/dm-vspc1-service-allocation-b01-20260907",
+      "observed_tip": "95ec6620b925a8bc5d03071bde15de19c15be77c",
+      "current_tip": "95ec6620b925a8bc5d03071bde15de19c15be77c",
+      "group": "unique_2",
+      "coverage": "Unresolved: partial integration lead or differing code/doc paths; not proven fully covered.",
+      "full_coverage_confirmed": false,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "codex/egrcr/next-object-20260904",
+      "observed_tip": "e6599f9abb0270ee5b03183822a6fcb6f101e791",
+      "current_tip": "e6599f9abb0270ee5b03183822a6fcb6f101e791",
+      "group": "unique_2",
+      "coverage": "Unresolved: partial integration lead or differing code/doc paths; not proven fully covered.",
+      "full_coverage_confirmed": false,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "codex/impl-n3-dish-endpoint-a03-20260905",
+      "observed_tip": "818b2566d1bac7cafcc71ed0bbb90b8abd1c6b65",
+      "current_tip": "818b2566d1bac7cafcc71ed0bbb90b8abd1c6b65",
+      "group": "unique_2",
+      "coverage": "Unresolved: partial integration lead or differing code/doc paths; not proven fully covered.",
+      "full_coverage_confirmed": false,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "codex/impl-n3-dish-head-a05-20260905",
+      "observed_tip": "ea05e9308e9e417d610e5cd41c66a4df91883c23",
+      "current_tip": "ea05e9308e9e417d610e5cd41c66a4df91883c23",
+      "group": "unique_2",
+      "coverage": "Unresolved: partial integration lead or differing code/doc paths; not proven fully covered.",
+      "full_coverage_confirmed": false,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "codex/impl/acvc-history-headroom-certificate-r02-20260904",
+      "observed_tip": "3831a66da19788f549e39faeb8a898221186252a",
+      "current_tip": "3831a66da19788f549e39faeb8a898221186252a",
+      "group": "unique_2",
+      "coverage": "Unresolved: partial integration lead or differing code/doc paths; not proven fully covered.",
+      "full_coverage_confirmed": false,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "codex/legacy-control-plane-20260824",
+      "observed_tip": "832d68dc37c7c675ec4ad6dc676ae1447c4ccecc",
+      "current_tip": "832d68dc37c7c675ec4ad6dc676ae1447c4ccecc",
+      "group": "unique_2",
+      "coverage": "Unresolved: partial integration lead or differing code/doc paths; not proven fully covered.",
+      "full_coverage_confirmed": false,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "impl-cbsc-direct-20260904",
+      "observed_tip": "7832e78b84c1907369834c18c8dcb9f569b607f5",
+      "current_tip": "7832e78b84c1907369834c18c8dcb9f569b607f5",
+      "group": "unique_2",
+      "coverage": "Unresolved: partial integration lead or differing code/doc paths; not proven fully covered.",
+      "full_coverage_confirmed": false,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "impl/frrie-r06-lr-20260904",
+      "observed_tip": "8a62505c6edbb13de6024636e75d4c2bdf1dc5d6",
+      "current_tip": "8a62505c6edbb13de6024636e75d4c2bdf1dc5d6",
+      "group": "unique_2",
+      "coverage": "Unresolved: partial integration lead or differing code/doc paths; not proven fully covered.",
+      "full_coverage_confirmed": false,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "omp/finite_semantic_boundary_support/engineering/c520049b-identity-v3",
+      "observed_tip": "27adce9afdef8d0d107aca19f2d26e8714f30808",
+      "current_tip": "27adce9afdef8d0d107aca19f2d26e8714f30808",
+      "group": "unique_2",
+      "coverage": "Unresolved: partial integration lead or differing code/doc paths; not proven fully covered.",
+      "full_coverage_confirmed": false,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "omp/ucope/root/ucope-r03-complete-20260827-01-prep",
+      "observed_tip": "50052d1e41c045dece13b09db622d3dd06f499b3",
+      "current_tip": "50052d1e41c045dece13b09db622d3dd06f499b3",
+      "group": "unique_2",
+      "coverage": "Unresolved: partial integration lead or differing code/doc paths; not proven fully covered.",
+      "full_coverage_confirmed": false,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "cm/vspc1-service-allocation-exec402-20260907",
+      "observed_tip": "c3c31a83bf1c3ca0949b3b5aaa990b01da22ffb4",
+      "current_tip": "c3c31a83bf1c3ca0949b3b5aaa990b01da22ffb4",
+      "group": "unique_3",
+      "coverage": "1/1 positive-commit paths byte-identical to main",
+      "full_coverage_confirmed": true,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "codex/cm-cbsc-gate-removal-20260905",
+      "observed_tip": "91a2a76d0ee490938eab57b2fba8b1b4242b26c9",
+      "current_tip": "91a2a76d0ee490938eab57b2fba8b1b4242b26c9",
+      "group": "unique_3",
+      "coverage": "Unresolved: partial integration lead or differing code/doc paths; not proven fully covered.",
+      "full_coverage_confirmed": false,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "codex/cm-cbsc-runtime-a01-20260907",
+      "observed_tip": "e828f74eda229a968fb386bb77ea22a91ce81362",
+      "current_tip": "e828f74eda229a968fb386bb77ea22a91ce81362",
+      "group": "unique_3",
+      "coverage": "Unresolved: partial integration lead or differing code/doc paths; not proven fully covered.",
+      "full_coverage_confirmed": false,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "codex/cm-fsd-seed3-resume-20260904",
+      "observed_tip": "570670403f48ba0f2a3d64e6f47799a8354128d2",
+      "current_tip": "570670403f48ba0f2a3d64e6f47799a8354128d2",
+      "group": "unique_3",
+      "coverage": "1/1 positive-commit paths byte-identical to main",
+      "full_coverage_confirmed": true,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "codex/cm-n5-b02-20260904",
+      "observed_tip": "c8d6cb61847287954687b1cccb23f36a9874f5b9",
+      "current_tip": "c8d6cb61847287954687b1cccb23f36a9874f5b9",
+      "group": "unique_3",
+      "coverage": "Unresolved: partial integration lead or differing code/doc paths; not proven fully covered.",
+      "full_coverage_confirmed": false,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "codex/cm/dish-b01-conformance-c03-20260904",
+      "observed_tip": "b0c63b69cabd1cdaceac4ea6370def6d97a93c15",
+      "current_tip": "b0c63b69cabd1cdaceac4ea6370def6d97a93c15",
+      "group": "unique_3",
+      "coverage": "Unresolved: partial integration lead or differing code/doc paths; not proven fully covered.",
+      "full_coverage_confirmed": false,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "codex/crto/next-object-20260904",
+      "observed_tip": "f8e1d65a05ae196ca104eea5fe6efb6a1048044f",
+      "current_tip": "f8e1d65a05ae196ca104eea5fe6efb6a1048044f",
+      "group": "unique_3",
+      "coverage": "Unresolved: partial integration lead or differing code/doc paths; not proven fully covered.",
+      "full_coverage_confirmed": false,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "codex/dm-cbsc-approved-20260905",
+      "observed_tip": "39b8fd51ee77dd34fb21914b0d79c221fcfc847b",
+      "current_tip": "39b8fd51ee77dd34fb21914b0d79c221fcfc847b",
+      "group": "unique_3",
+      "coverage": "Unresolved: partial integration lead or differing code/doc paths; not proven fully covered.",
+      "full_coverage_confirmed": false,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "codex/dm-dish-b05-intake-20260906",
+      "observed_tip": "c2f897547de0020382afe8f55e1d479c7560274d",
+      "current_tip": "c2f897547de0020382afe8f55e1d479c7560274d",
+      "group": "unique_3",
+      "coverage": "Unresolved: partial integration lead or differing code/doc paths; not proven fully covered.",
+      "full_coverage_confirmed": false,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "codex/dm-dish-seed101-20260906",
+      "observed_tip": "18812ba5e62b6e1a877558f735c7bf979386be5b",
+      "current_tip": "18812ba5e62b6e1a877558f735c7bf979386be5b",
+      "group": "unique_3",
+      "coverage": "Unresolved: partial integration lead or differing code/doc paths; not proven fully covered.",
+      "full_coverage_confirmed": false,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "codex/dm-k1-vsp03-b01-results-20260905",
+      "observed_tip": "bf11a6a9be972e1346531139bf7be904ea351eb1",
+      "current_tip": "bf11a6a9be972e1346531139bf7be904ea351eb1",
+      "group": "unique_3",
+      "coverage": "14/14 positive-commit paths byte-identical to main",
+      "full_coverage_confirmed": true,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "codex/dm-n3-continue-20260904",
+      "observed_tip": "e97215277c47045f05e2bd361c390282732b89eb",
+      "current_tip": "e97215277c47045f05e2bd361c390282732b89eb",
+      "group": "unique_3",
+      "coverage": "5/5 positive-commit paths byte-identical to main",
+      "full_coverage_confirmed": true,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "codex/dm-n5-allocation-20260904",
+      "observed_tip": "db326070b266c1dcd534e2d62d411253e464c86a",
+      "current_tip": "db326070b266c1dcd534e2d62d411253e464c86a",
+      "group": "unique_3",
+      "coverage": "Unresolved: partial integration lead or differing code/doc paths; not proven fully covered.",
+      "full_coverage_confirmed": false,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "codex/dm-rcle-post-a02-boundary-20260907",
+      "observed_tip": "0990864338846f2a41ebaa49b54326a01dcf56f0",
+      "current_tip": "0990864338846f2a41ebaa49b54326a01dcf56f0",
+      "group": "unique_3",
+      "coverage": "Unresolved: partial integration lead or differing code/doc paths; not proven fully covered.",
+      "full_coverage_confirmed": false,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "codex/dm-vspc1-next-20260906",
+      "observed_tip": "b9e95fecd3ff8974e752d14a23b3dacd4a9b72fb",
+      "current_tip": "883acd72d085204041887765be5aa01fa6648436",
+      "group": "unique_3",
+      "coverage": "Unresolved: partial integration lead or differing code/doc paths; not proven fully covered.",
+      "full_coverage_confirmed": false,
+      "retain_designated_checkout": true
+    },
+    {
+      "branch": "codex/egrcr-2026-08-28-7-pilot",
+      "observed_tip": "a8131192045cc2978d1370d6b01cc79fc3d3fb53",
+      "current_tip": "a8131192045cc2978d1370d6b01cc79fc3d3fb53",
+      "group": "unique_3",
+      "coverage": "Unresolved: partial integration lead or differing code/doc paths; not proven fully covered.",
+      "full_coverage_confirmed": false,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "codex/impl-cbsc-resource-downgrade-20260904",
+      "observed_tip": "ce94f5afd1ea91b2b212ea219467ef5dc9dd27f8",
+      "current_tip": "ce94f5afd1ea91b2b212ea219467ef5dc9dd27f8",
+      "group": "unique_3",
+      "coverage": "Unresolved: partial integration lead or differing code/doc paths; not proven fully covered.",
+      "full_coverage_confirmed": false,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "codex/impl-n3-dish-funnel-a01-20260905",
+      "observed_tip": "bfe4952beeff9cff237d5b16325c02e5c0c08664",
+      "current_tip": "bfe4952beeff9cff237d5b16325c02e5c0c08664",
+      "group": "unique_3",
+      "coverage": "5/5 positive-commit paths byte-identical to main; same positives as DM N3 continue",
+      "full_coverage_confirmed": true,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "codex/impl-n3-folr-b04-20260904",
+      "observed_tip": "927366eaab9fe2911657d0adf43f10fb9a8b18ce",
+      "current_tip": "927366eaab9fe2911657d0adf43f10fb9a8b18ce",
+      "group": "unique_3",
+      "coverage": "Unresolved: partial integration lead or differing code/doc paths; not proven fully covered.",
+      "full_coverage_confirmed": false,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "codex/impl/acvc-history-headroom-r01-20260904",
+      "observed_tip": "5e0fdbfd68af381ede7f212364d94457faa4a2f1",
+      "current_tip": "5e0fdbfd68af381ede7f212364d94457faa4a2f1",
+      "group": "unique_3",
+      "coverage": "Unresolved: partial integration lead or differing code/doc paths; not proven fully covered.",
+      "full_coverage_confirmed": false,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "codex/tracker-successor-20260905",
+      "observed_tip": "64d27c7b589b610f835d9a929ffc4c2cbb201b08",
+      "current_tip": "64d27c7b589b610f835d9a929ffc4c2cbb201b08",
+      "group": "unique_3",
+      "coverage": "Unresolved: partial integration lead or differing code/doc paths; not proven fully covered.",
+      "full_coverage_confirmed": false,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "impl-cbsc-gate-map-20260905",
+      "observed_tip": "97d62f204f2ce001baf3210ea5228ded7e619685",
+      "current_tip": "97d62f204f2ce001baf3210ea5228ded7e619685",
+      "group": "unique_3",
+      "coverage": "Unresolved: partial integration lead or differing code/doc paths; not proven fully covered.",
+      "full_coverage_confirmed": false,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "omp/finite_semantic_boundary_support/engineering/a394938d-runtime-v2",
+      "observed_tip": "180e37e038552357b8622aeb92bc480dffdfec7e",
+      "current_tip": "180e37e038552357b8622aeb92bc480dffdfec7e",
+      "group": "unique_3",
+      "coverage": "Unresolved: partial integration lead or differing code/doc paths; not proven fully covered.",
+      "full_coverage_confirmed": false,
+      "retain_designated_checkout": false
+    },
+    {
+      "branch": "omp/metric_ground_transport_allocation/git/b92ac060-97a5-4d8c-adff-7f633b97b721",
+      "observed_tip": "3a373cf2144bf6b5a8f6fc48e467b5903b09d417",
+      "current_tip": "3a373cf2144bf6b5a8f6fc48e467b5903b09d417",
+      "group": "unique_3",
+      "coverage": "Unresolved: partial integration lead or differing code/doc paths; not proven fully covered.",
+      "full_coverage_confirmed": false,
+      "retain_designated_checkout": false
+    }
+  ],
+  "dirty_worktrees": [
+    {
+      "name": "codex-app-server-availability-first-v1",
+      "sha": "5d71dc40e42c60130bf1420d77a7cab1d87c87b5",
+      "worktree": "C:/Projects/HMASD-app-server-availability-runtime",
+      "assessment": "692 status entries: M50 D339 A299 ??4. Broad staged legacy control-plane/code/test changes; only category/path coverage, not a complete content comparison."
+    },
+    {
+      "name": "codex/dm-fsd-e4-census-20260905",
+      "sha": "56b6faddf6235099afaba3e108c9750868550203",
+      "worktree": "C:/Projects/HMASD-worktrees/dm-fsd-e4-census-20260905",
+      "assessment": "DRAFT_STATUS.md is distinct; REQUEST.json equals baseline. Both are packet documents."
+    },
+    {
+      "name": "codex/impl-cbsc-direct-return-20260905",
+      "sha": "923be288e396befda0e28a7236e1055d8c23136e",
+      "worktree": "C:/Projects/HMASD-worktrees/impl-cbsc-direct-return-20260905",
+      "assessment": "Distinct direct_return_b02.py and run_cbsc_direct_return_b02.py; test equals baseline."
+    },
+    {
+      "name": "codex/impl-cbsc-direct-return-b03-20260905",
+      "sha": "755971522c243a10a2a9a2c89f79e7570a9af4e9",
+      "worktree": "C:/Projects/HMASD-worktrees/impl-cbsc-direct-return-b03-20260905",
+      "assessment": "All examined status-expanded source files equal baseline main; preserve worktree pending explicit reconciliation. Ignored output is outside this comparison."
+    },
+    {
+      "name": "codex/impl-n5-b03-20260904",
+      "sha": "da765da0ac607ebac7d6b6e330a2ba7648e0f69f",
+      "worktree": "C:/Projects/HMASD-worktrees/impl-n5-b03-20260904",
+      "assessment": "All examined status-expanded source files equal baseline main; preserve worktree pending explicit reconciliation. Ignored output is outside this comparison."
+    },
+    {
+      "name": "codex/impl-vnfc-causal-native-20260904",
+      "sha": "1b671d1afd527b4ae24ed8e594bb9324fc52aa9e",
+      "worktree": "C:/Projects/HMASD-worktrees/impl-vnfc-causal-native-20260904",
+      "assessment": "All examined status-expanded source files equal baseline main; preserve worktree pending explicit reconciliation. Ignored output is outside this comparison."
+    },
+    {
+      "name": "codex/impl-vnfc-causal-solver-20260904",
+      "sha": "1b671d1afd527b4ae24ed8e594bb9324fc52aa9e",
+      "worktree": "C:/Projects/HMASD-worktrees/impl-vnfc-causal-solver-20260904",
+      "assessment": "Distinct solver.py; test_solver.py equals baseline. Ignored pycache is separate generated output."
+    },
+    {
+      "name": "codex/impl-vnfc-e01-20260905",
+      "sha": "aaaad1212b953254a80c28d8bd35c1431362d500",
+      "worktree": "C:/Projects/HMASD-worktrees/impl-vnfc-e01-20260905",
+      "assessment": "All examined status-expanded source files equal baseline main; preserve worktree pending explicit reconciliation. Ignored output is outside this comparison."
+    },
+    {
+      "name": "codex/impl-vsp03-b01-20260905",
+      "sha": "24dad2b63aea7f825dcc4ac3002a5d955f153eec",
+      "worktree": "C:/Projects/HMASD-worktrees/impl-vsp03-b01-20260905",
+      "assessment": "Distinct run_vsp03_b01.py; experiment and test files equal baseline."
+    },
+    {
+      "name": "codex/impl-vspc1-b01-20260905",
+      "sha": "582a2e4de0e67e47c33bd1b5a8cabb496450a7bf",
+      "worktree": "C:/Projects/HMASD-worktrees/impl-vspc1-b01-20260905",
+      "assessment": "Distinct reporting.py and run_vspc1_k4_factor_value_b01.py; experiment/test equal baseline."
+    },
+    {
+      "name": "codex/impl/dish-b01-conformance-20260904",
+      "sha": "38429fb7e18781b874a079ddc023bfde7995f3cc",
+      "worktree": "C:/Projects/HMASD-worktrees/impl-dish-b01-conformance-20260904",
+      "assessment": "Modified production/native files and distinct study, runner and conformance tests. Fresh status has no deletions; a preliminary comparison label was corrected."
+    },
+    {
+      "name": "grok/dish-b03-thin-entry-20260906",
+      "sha": "78f07a0de21e84eef95d181a024d4cce917f4bb0",
+      "worktree": "C:/Projects/HMASD/.claude/worktrees/grok-dish-b03",
+      "assessment": "Two B03 forecast/CM/science-card documents: one equals baseline, one distinct. No scientific acceptance inferred."
+    },
+    {
+      "name": "impl-crto-b02-20260904",
+      "sha": "dc5f52117e5e6a548fea76be6c44ddc3b54013ab",
+      "worktree": "C:/Projects/HMASD-worktrees/impl-crto-b02-20260904",
+      "assessment": "All examined status-expanded source files equal baseline main; preserve worktree pending explicit reconciliation. Ignored output is outside this comparison."
+    },
+    {
+      "name": "impl-crto-b03-20260904",
+      "sha": "6e78463262146369dd16f90e743597d6943aa7bb",
+      "worktree": "C:/Projects/HMASD-worktrees/impl-crto-b03-20260904",
+      "assessment": "All examined status-expanded source files equal baseline main; preserve worktree pending explicit reconciliation. Ignored output is outside this comparison."
+    },
+    {
+      "name": "impl-crto-b04-20260904",
+      "sha": "4d5ccabf6fdbe616adb3e035051b951c7232dd7f",
+      "worktree": "C:/Projects/HMASD-worktrees/impl-crto-b04-20260904",
+      "assessment": "All examined status-expanded source files equal baseline main; preserve worktree pending explicit reconciliation. Ignored output is outside this comparison."
+    },
+    {
+      "name": "impl-crto-b06-20260905",
+      "sha": "3789c9fac902186f386948257f4eaa089c65a045",
+      "worktree": "C:/Projects/HMASD-worktrees/impl-crto-b06-20260905",
+      "assessment": "All examined status-expanded source files equal baseline main; preserve worktree pending explicit reconciliation. Ignored output is outside this comparison."
+    },
+    {
+      "name": "impl-crto-b07-20260905",
+      "sha": "8c4c29cc9a9fd7c8faf838e3790920e1453a4137",
+      "worktree": "C:/Projects/HMASD-worktrees/impl-crto-b07-20260905",
+      "assessment": "All examined status-expanded source files equal baseline main; preserve worktree pending explicit reconciliation. Ignored output is outside this comparison."
+    },
+    {
+      "name": "omp/controlplane/engineering/native-chain-smoke-20260826-a",
+      "sha": "ee06a078c3c5ff904e00c727475c467a25ada1ff",
+      "worktree": "C:/Projects/HMASD-worktrees/controlplane-engineering-native-chain-smoke-20260826-a",
+      "assessment": "12 modified instruction/runtime/schema files differ; 4 untracked workflow/interface files are new."
+    }
+  ],
+  "pro_delivery_branches": [
+    {
+      "branch": "codex/pro-cbsc-opportunity-credit-20260906",
+      "remote_tip": "d3222ccb53f4986320f0015960ea997dccd8e856",
+      "local_tip": "5c46871cdcde1dbe1332a5bc22a6c13c45de4ba5",
+      "current_remote_tip": "d3222ccb53f4986320f0015960ea997dccd8e856",
+      "retirement_candidate": true,
+      "evidence": "Response Git object equals main and matching round intake was found."
+    },
+    {
+      "branch": "codex/pro-cbsc-two-seed-family-20260905",
+      "remote_tip": "e4cacaccf3e03a6944c9653abeb5e645e46109ec",
+      "local_tip": null,
+      "current_remote_tip": "e4cacaccf3e03a6944c9653abeb5e645e46109ec",
+      "retirement_candidate": true,
+      "evidence": "Response Git object equals main and matching round intake was found."
+    },
+    {
+      "branch": "codex/pro-dish-a01-convergence-20260906",
+      "remote_tip": "ed4363a2e4c0b578eac64ca19da6ef5e27b64a17",
+      "local_tip": null,
+      "current_remote_tip": "ed4363a2e4c0b578eac64ca19da6ef5e27b64a17",
+      "retirement_candidate": true,
+      "evidence": "Response Git object equals main and matching round intake was found."
+    },
+    {
+      "branch": "codex/pro-dish-a02-convergence-20260906",
+      "remote_tip": "d7710921fd140f9778d473b3f732e0d65813d619",
+      "local_tip": null,
+      "current_remote_tip": "d7710921fd140f9778d473b3f732e0d65813d619",
+      "retirement_candidate": true,
+      "evidence": "Response Git object equals main and matching round intake was found."
+    },
+    {
+      "branch": "codex/pro-dish-b02-convergence-20260905",
+      "remote_tip": "bc0808401af81c367b560cd553497707b8c682dd",
+      "local_tip": null,
+      "current_remote_tip": "bc0808401af81c367b560cd553497707b8c682dd",
+      "retirement_candidate": true,
+      "evidence": "Response Git object equals main and matching round intake was found."
+    },
+    {
+      "branch": "codex/pro-dish-b03-convergence-20260906",
+      "remote_tip": "f85016d765727eecaca8e93d1f253b938a45d1fc",
+      "local_tip": null,
+      "current_remote_tip": "f85016d765727eecaca8e93d1f253b938a45d1fc",
+      "retirement_candidate": true,
+      "evidence": "Response Git object equals main and matching round intake was found."
+    },
+    {
+      "branch": "codex/pro-dish-b04-convergence-20260906",
+      "remote_tip": "a9718a45e0e3c1149513e0ae4289eaec1dd28a46",
+      "local_tip": null,
+      "current_remote_tip": "a9718a45e0e3c1149513e0ae4289eaec1dd28a46",
+      "retirement_candidate": true,
+      "evidence": "Response Git object equals main and matching round intake was found."
+    },
+    {
+      "branch": "codex/pro-dish-post-b05-20260906",
+      "remote_tip": "db0bbfd8e1d96b06e8c6e8aa9bfa70787fe9a9cd",
+      "local_tip": "8d7be753b8f609d555e8cc1dd24d5d1c9a2e3002",
+      "current_remote_tip": "db0bbfd8e1d96b06e8c6e8aa9bfa70787fe9a9cd",
+      "retirement_candidate": true,
+      "evidence": "Response Git object equals main and matching round intake was found."
+    },
+    {
+      "branch": "codex/pro-dish-post-b06-20260907",
+      "remote_tip": "6b45ea47bea500bea11f1215080653a8df19bdd6",
+      "local_tip": "6b45ea47bea500bea11f1215080653a8df19bdd6",
+      "current_remote_tip": "6b45ea47bea500bea11f1215080653a8df19bdd6",
+      "retirement_candidate": false,
+      "evidence": "Prepared/unsent; no formed response or Pro intake found."
+    },
+    {
+      "branch": "codex/pro-dish-witness-convergence-20260906",
+      "remote_tip": "27730bf7547bc749c63930036837050120cffba0",
+      "local_tip": null,
+      "current_remote_tip": "27730bf7547bc749c63930036837050120cffba0",
+      "retirement_candidate": true,
+      "evidence": "Response Git object equals main and matching round intake was found."
+    },
+    {
+      "branch": "codex/pro-github-recovery-probe-20260905",
+      "remote_tip": "27e588ded4c6305e3cef6b97c16658b856bc715d",
+      "local_tip": null,
+      "current_remote_tip": "27e588ded4c6305e3cef6b97c16658b856bc715d",
+      "retirement_candidate": true,
+      "evidence": "Engineering-complete: TASK target collaboration_probe/CONFLICT_TARGET.md (101 bytes) confirmed by AFTER.json and INTAKE.md; scientific intake is inapplicable."
+    },
+    {
+      "branch": "codex/pro-github-write-probe-20260905",
+      "remote_tip": "2f8a08af920a8881832d89357b06065b87facf53",
+      "local_tip": null,
+      "current_remote_tip": "2f8a08af920a8881832d89357b06065b87facf53",
+      "retirement_candidate": true,
+      "evidence": "Engineering-complete: TASK target collaboration_probe/ROUNDTRIP_REVIEW.md (2427 bytes), ROOT_READBACK.json and roundtrip_archive/INTAKE.md confirm acceptance."
+    },
+    {
+      "branch": "codex/pro-rcle-post-a02-20260906",
+      "remote_tip": "5a335eaff0f2242c515f6867e22d04bdd8d832ef",
+      "local_tip": "5a335eaff0f2242c515f6867e22d04bdd8d832ef",
+      "current_remote_tip": "5a335eaff0f2242c515f6867e22d04bdd8d832ef",
+      "retirement_candidate": false,
+      "evidence": "No formed response or round intake found; unresolved current boundary."
+    },
+    {
+      "branch": "codex/pro-rcle-post-b01-20260906",
+      "remote_tip": "b871d7a0d2880af8a2943d98a590739036cd2035",
+      "local_tip": null,
+      "current_remote_tip": "b871d7a0d2880af8a2943d98a590739036cd2035",
+      "retirement_candidate": true,
+      "evidence": "Response Git object equals main and matching round intake was found."
+    },
+    {
+      "branch": "codex/pro-rcle-post-b02-20260906",
+      "remote_tip": "6c0d1ca55c86df838bb8096453d00ebfe84e0766",
+      "local_tip": null,
+      "current_remote_tip": "6c0d1ca55c86df838bb8096453d00ebfe84e0766",
+      "retirement_candidate": true,
+      "evidence": "Response Git object equals main and matching round intake was found."
+    },
+    {
+      "branch": "codex/pro-rcle-tbcfv-first-b-20260906",
+      "remote_tip": "4715e912cb926368db050f5440e5cc4957ebb90f",
+      "local_tip": null,
+      "current_remote_tip": "4715e912cb926368db050f5440e5cc4957ebb90f",
+      "retirement_candidate": false,
+      "evidence": "Original round lacks response; r02 is a different binding."
+    },
+    {
+      "branch": "codex/pro-rcle-tbcfv-first-b-r02-20260906",
+      "remote_tip": "35e3b7b1470f372e09bc61b7e3a36f780040d327",
+      "local_tip": null,
+      "current_remote_tip": "35e3b7b1470f372e09bc61b7e3a36f780040d327",
+      "retirement_candidate": true,
+      "evidence": "Response Git object equals main and matching round intake was found."
+    },
+    {
+      "branch": "codex/pro-vnfc-b01-two-seed-convergence-20260905",
+      "remote_tip": "25b73b91a25e3b11835de81cd690ac6232d94044",
+      "local_tip": null,
+      "current_remote_tip": "25b73b91a25e3b11835de81cd690ac6232d94044",
+      "retirement_candidate": false,
+      "evidence": "Response bytes match main, but no matching current-round intake was located."
+    },
+    {
+      "branch": "codex/pro-vnfc-depmode-convergence-20260906",
+      "remote_tip": "7c53449e0753432aabd15742ece9257af0403442",
+      "local_tip": null,
+      "current_remote_tip": "7c53449e0753432aabd15742ece9257af0403442",
+      "retirement_candidate": true,
+      "evidence": "Response Git object equals main and matching round intake was found."
+    },
+    {
+      "branch": "codex/pro-vsp03-b01-three-seed-convergence-20260905",
+      "remote_tip": "8a02f09d2ed5693e9f150ba5d0243bdc0e6eee98",
+      "local_tip": null,
+      "current_remote_tip": "8a02f09d2ed5693e9f150ba5d0243bdc0e6eee98",
+      "retirement_candidate": true,
+      "evidence": "Response Git object equals main and matching round intake was found."
+    },
+    {
+      "branch": "codex/pro-vsp03-shared-service-convergence-20260906",
+      "remote_tip": "a62defbbe843149c836c132d6a8f6bb5540506a2",
+      "local_tip": "585fe948cdbde4fdb3c2fcf658cd02d848ba5c5f",
+      "current_remote_tip": "a62defbbe843149c836c132d6a8f6bb5540506a2",
+      "retirement_candidate": false,
+      "evidence": "Continuation receipt is not the requested response; transport-blocker intake exists."
+    },
+    {
+      "branch": "codex/pro-vspc1-b02-convergence-20260906",
+      "remote_tip": "0b04b166d449ea17d470dfe1c68254d190d0bfa2",
+      "local_tip": null,
+      "current_remote_tip": "0b04b166d449ea17d470dfe1c68254d190d0bfa2",
+      "retirement_candidate": true,
+      "evidence": "Response Git object equals main and matching round intake was found."
+    },
+    {
+      "branch": "codex/pro-vspc1-completion-amendment-20260907",
+      "remote_tip": "99151a4a0f2da264a2c13695591a56867e1add3c",
+      "local_tip": "5bf466820a2d17c07388a8499913aa265383d838",
+      "current_remote_tip": "99151a4a0f2da264a2c13695591a56867e1add3c",
+      "retirement_candidate": true,
+      "evidence": "Response blob2f782ae1,24516 raw bytes; new main13d25608b has identical response and COMPLETION_AMENDMENT_INTAKE_20260907."
+    },
+    {
+      "branch": "codex/pro-vspc1-k4-three-seed-20260905",
+      "remote_tip": "a7265e9733873e3dd16de76861c75f3634302095",
+      "local_tip": null,
+      "current_remote_tip": "a7265e9733873e3dd16de76861c75f3634302095",
+      "retirement_candidate": false,
+      "evidence": "Misrouted Portfolio response; r02 is a different binding. Preserve misroute."
+    },
+    {
+      "branch": "codex/pro-vspc1-k4-three-seed-r02-20260905",
+      "remote_tip": "d650cd966869852b122c2426ecf0e2584116ae43",
+      "local_tip": null,
+      "current_remote_tip": "d650cd966869852b122c2426ecf0e2584116ae43",
+      "retirement_candidate": true,
+      "evidence": "Response Git object equals main and matching round intake was found."
+    },
+    {
+      "branch": "codex/pro-vspc1-reactive-queues-20260906",
+      "remote_tip": "67f4d3837c78749cb7f7369083ecbc3ffa4b133d",
+      "local_tip": "ecf810463a94bd54c3b9bc662e5e03bb1078f8bb",
+      "current_remote_tip": "67f4d3837c78749cb7f7369083ecbc3ffa4b133d",
+      "retirement_candidate": true,
+      "evidence": "Raw Git blobf653985b equals main:29215 bytes.29373-byte working copy difference is line-ending conversion, not response mismatch; intake found."
+    },
+    {
+      "branch": "codex/pro-vspc1-service-allocation-20260907",
+      "remote_tip": "2347dbf2fea870cdcd02aa2eb8b3cbaff147ec34",
+      "local_tip": "b043e05d3b3af2b60ebfef3255e7f060aca4683c",
+      "current_remote_tip": "2347dbf2fea870cdcd02aa2eb8b3cbaff147ec34",
+      "retirement_candidate": true,
+      "evidence": "Delivery2347dbf2 and archive/integration5d3027ebe both resolve to blobce28248f,28786 bytes; intake correctly names archive commit; no provenance conflict."
+    }
+  ],
+  "remote_only_non_pro": [
+    {
+      "branch": "CPTest",
+      "tip": "042df67038ee2e36d9e164ba82265f22822f1ad1",
+      "positive_patches": 0,
+      "latest_subject": "fix: validate Windows semantic hook delivery",
+      "recent_positive_commits": [],
+      "preserved_in_archive": true,
+      "classification": "patch-equivalent retirement candidate; live-use check remains",
+      "tip_changed_path_count": 6,
+      "tip_changed_path_examples": [
+        ".codex/config.toml",
+        "docs/research/workflow-runs/2026-08-15_codex-semantic-mvp/ACCEPTANCE_REPORT.md",
+        "scripts/codex-semantic-mvp-enable.ps1",
+        "scripts/codex-semantic-mvp-test.ps1",
+        "tests/codex_semantic_mvp/test_activation_assets.py"
+      ]
+    },
+    {
+      "branch": "Claude",
+      "tip": "551ff900d9db3f15c558943ece61f4599bad7869",
+      "positive_patches": 45,
+      "latest_subject": "Complete algorithm iteration 1",
+      "recent_positive_commits": [
+        "e9f932f8a Stage S5 result review",
+        "cfa3ff71b Simplify HMASD research workflow",
+        "551ff900d Complete algorithm iteration 1"
+      ],
+      "preserved_in_archive": true,
+      "classification": "historical differences need targeted reconciliation; no current-science conclusion",
+      "tip_changed_path_count": 6,
+      "tip_changed_path_examples": [
+        "docs/project/CURRENT_WORK.md",
+        "docs/report/ALGORITHM_ITERATION_1.md",
+        "docs/research/cdc/CONJECTURES.md",
+        "docs/research/cdc/EVIDENCE_NOTES/20260724_BEHAVIOR_PHASE_ARCHITECTURE_NONIDENTIFIABILITY_I1.md",
+        "docs/research/cdc/IDEA_PORTFOLIO.md"
+      ]
+    },
+    {
+      "branch": "aggressive",
+      "tip": "ae61835d72a90101913d4e6230e39a8f0767e593",
+      "positive_patches": 22,
+      "latest_subject": "merge: close HMASD context foundation",
+      "recent_positive_commits": [
+        "2806a9a6c docs: refresh context foundation health after Pro review",
+        "84c44c7fe test: cover incident CLI validation boundary",
+        "05561aaaf docs: accept context foundation closure"
+      ],
+      "preserved_in_archive": true,
+      "classification": "historical differences need targeted reconciliation; no current-science conclusion",
+      "tip_changed_path_count": 0,
+      "tip_changed_path_examples": []
+    },
+    {
+      "branch": "claude/hmasd-full-takeover-20260805",
+      "tip": "a2c01528e7eed315d304a03c842619e159275069",
+      "positive_patches": 2,
+      "latest_subject": "EOCIV loop 9: Stage 0 package (licensed no-update preflight)",
+      "recent_positive_commits": [
+        "4324460fd EOCIV loop 8: gate v2.1 discharging Pro's three bounded corrections",
+        "a2c01528e EOCIV loop 9: Stage 0 package (licensed no-update preflight)"
+      ],
+      "preserved_in_archive": true,
+      "classification": "historical differences need targeted reconciliation; no current-science conclusion",
+      "tip_changed_path_count": 6,
+      "tip_changed_path_examples": [
+        "experiments/candidates/eociv_lite/actuation_runtime.py",
+        "experiments/candidates/eociv_lite/outcome_harness.py",
+        "experiments/candidates/eociv_lite/stage0_preflight.py",
+        "experiments/candidates/eociv_lite/stage0_registration.py",
+        "experiments/candidates/eociv_lite/trainable_policy.py"
+      ]
+    },
+    {
+      "branch": "codex-app-server-live-runtime-v1",
+      "tip": "6262f0c0d344a844ffdea181b1623704c25d4604",
+      "positive_patches": 37,
+      "latest_subject": "fix: close authority kernel review boundaries",
+      "recent_positive_commits": [
+        "3b827857d fix: prove exact app server effect ownership",
+        "938e49742 refactor: centralize app server effect authority",
+        "6262f0c0d fix: close authority kernel review boundaries"
+      ],
+      "preserved_in_archive": true,
+      "classification": "historical differences need targeted reconciliation; no current-science conclusion",
+      "tip_changed_path_count": 27,
+      "tip_changed_path_examples": [
+        "tests/codex_supervisor/conftest.py",
+        "tests/codex_supervisor/durability/test_authority_kernel_v11.py",
+        "tests/codex_supervisor/durability/test_kernel_closures.py",
+        "tests/codex_supervisor/durability/test_prepared_requests.py",
+        "tests/codex_supervisor/durability/test_static_guards.py"
+      ]
+    },
+    {
+      "branch": "codex-context-foundation-closure-v1",
+      "tip": "05561aaafbf87c4f9baa35cfc6e3e286b9cef062",
+      "positive_patches": 22,
+      "latest_subject": "docs: accept context foundation closure",
+      "recent_positive_commits": [
+        "2806a9a6c docs: refresh context foundation health after Pro review",
+        "84c44c7fe test: cover incident CLI validation boundary",
+        "05561aaaf docs: accept context foundation closure"
+      ],
+      "preserved_in_archive": true,
+      "classification": "historical differences need targeted reconciliation; no current-science conclusion",
+      "tip_changed_path_count": 2,
+      "tip_changed_path_examples": [
+        "docs/project/current-work/common/control_plane_runtime.md",
+        "docs/research/workflow-runs/2026-08-22_context-foundation-closure/STAGE1_ACCEPTANCE.md"
+      ]
+    },
+    {
+      "branch": "codex-supervisor-durability-kernel-v1",
+      "tip": "a9c5f5a40f6b075b654685e46b850cda8124c370",
+      "positive_patches": 0,
+      "latest_subject": "docs: record durability kernel merge readiness for 9ec92377",
+      "recent_positive_commits": [],
+      "preserved_in_archive": true,
+      "classification": "patch-equivalent retirement candidate; live-use check remains",
+      "tip_changed_path_count": 1,
+      "tip_changed_path_examples": [
+        "docs/research/workflow-runs/2026-08-19_codex-supervisor-durability-kernel/MERGE_READINESS_20260820.md"
+      ]
+    },
+    {
+      "branch": "codex/control-plane-review-20260822",
+      "tip": "6ae018d7ec32ba3826cfcd6ee9b26e8d9ed14a4f",
+      "positive_patches": 2,
+      "latest_subject": "docs: add control-plane review prompt",
+      "recent_positive_commits": [
+        "1102e23ef docs: publish current control-plane reconciliation state",
+        "6ae018d7e docs: add control-plane review prompt"
+      ],
+      "preserved_in_archive": true,
+      "classification": "historical differences need targeted reconciliation; no current-science conclusion",
+      "tip_changed_path_count": 1,
+      "tip_changed_path_examples": [
+        "docs/research/workflow-runs/2026-08-22_low-intrusion-control-plane/CONTROL_PLANE_REVIEW_PROMPT_20260822.md"
+      ]
+    },
+    {
+      "branch": "codex/expressibility_gated_renewal_credit_relay",
+      "tip": "ea65e5186d2125699cc6eff59b3b2deadec5707b",
+      "positive_patches": 0,
+      "latest_subject": "fix: use custom permissions for HMASD tasks",
+      "recent_positive_commits": [],
+      "preserved_in_archive": true,
+      "classification": "patch-equivalent retirement candidate; live-use check remains",
+      "tip_changed_path_count": 13,
+      "tip_changed_path_examples": [
+        ".agents/skills/hmasd-cm-task/SKILL.md",
+        ".agents/skills/hmasd-em-task/SKILL.md",
+        ".agents/skills/hmasd-portfolio-task/SKILL.md",
+        ".agents/skills/hmasd-root-task/SKILL.md",
+        ".codex/agents/hmasd-cpm-agentify-transport.toml"
+      ]
+    },
+    {
+      "branch": "codex/hmasd-science-tools",
+      "tip": "3d1865b8a587fbf78ef0aa3d53d8bdaf365d4591",
+      "positive_patches": 0,
+      "latest_subject": "Add isolated HMASD science tools environment",
+      "recent_positive_commits": [],
+      "preserved_in_archive": true,
+      "classification": "patch-equivalent retirement candidate; live-use check remains",
+      "tip_changed_path_count": 4,
+      "tip_changed_path_examples": [
+        "environments/hmasd-science-tools/conda-win-64.lock.txt",
+        "environments/hmasd-science-tools/environment.yml",
+        "environments/hmasd-science-tools/manifest.json",
+        "tests/hmasd_science_environment_test.py"
+      ]
+    },
+    {
+      "branch": "codex/opportunity_normalized_lease_gated_rebinding",
+      "tip": "ea65e5186d2125699cc6eff59b3b2deadec5707b",
+      "positive_patches": 0,
+      "latest_subject": "fix: use custom permissions for HMASD tasks",
+      "recent_positive_commits": [],
+      "preserved_in_archive": true,
+      "classification": "patch-equivalent retirement candidate; live-use check remains",
+      "tip_changed_path_count": 13,
+      "tip_changed_path_examples": [
+        ".agents/skills/hmasd-cm-task/SKILL.md",
+        ".agents/skills/hmasd-em-task/SKILL.md",
+        ".agents/skills/hmasd-portfolio-task/SKILL.md",
+        ".agents/skills/hmasd-root-task/SKILL.md",
+        ".codex/agents/hmasd-cpm-agentify-transport.toml"
+      ]
+    },
+    {
+      "branch": "codex/rs_c2_vsp02_sequence09_acceptance_20260809_28d9758",
+      "tip": "77d6f4ab2b0983454931f3b922721efdabf3316a",
+      "positive_patches": 0,
+      "latest_subject": "Accept VSP-02 sequence 09 oracle package",
+      "recent_positive_commits": [],
+      "preserved_in_archive": true,
+      "classification": "patch-equivalent retirement candidate; live-use check remains",
+      "tip_changed_path_count": 1,
+      "tip_changed_path_examples": [
+        "docs/research/candidates/vsp_02/RS_C2_SEQUENCE09_TECHNICAL_ACCEPTANCE.md"
+      ]
+    },
+    {
+      "branch": "codex/rs_c2_vsp06_d0_reconciliation_20260809_28d9758",
+      "tip": "7efe4a78c497d5b36485bd554531b18381132edd",
+      "positive_patches": 1,
+      "latest_subject": "Reconcile VSP-06 exact-revision evidence",
+      "recent_positive_commits": [
+        "7efe4a78c Reconcile VSP-06 exact-revision evidence"
+      ],
+      "preserved_in_archive": true,
+      "classification": "historical differences need targeted reconciliation; no current-science conclusion",
+      "tip_changed_path_count": 3,
+      "tip_changed_path_examples": [
+        "docs/research/candidates/vsp_06_mssr/CODE_SCIENCE_INDEX.md",
+        "docs/research/candidates/vsp_06_mssr/REVISION_RECONCILIATION.md",
+        "tests/experiments/candidates/vsp_06_mssr/test_preaction_closure_certificate.py"
+      ]
+    },
+    {
+      "branch": "new-test",
+      "tip": "4866eb4e34c2ee2bebcc3e2aec5a1944cd1e10bd",
+      "positive_patches": 162,
+      "latest_subject": "docs: register R27 cloud capacity audit",
+      "recent_positive_commits": [
+        "b61ae8ebe fix: harden R27 cloud artifact evidence",
+        "679ed0bf8 fix: enforce R27 exact identity and IPC cleanup",
+        "4866eb4e3 docs: register R27 cloud capacity audit"
+      ],
+      "preserved_in_archive": true,
+      "classification": "historical differences need targeted reconciliation; no current-science conclusion",
+      "tip_changed_path_count": 2,
+      "tip_changed_path_examples": [
+        "memory/CURRENT_WORK.md",
+        "memory/IMPLEMENTATION_PLAN.md"
+      ]
+    },
+    {
+      "branch": "omp/finite_semantic_boundary_support/engineering/955c8f11-operator-terminal",
+      "tip": "56458117291a37839a224de6773d859b638349c2",
+      "positive_patches": 1,
+      "latest_subject": "chore(fsbs): record operator preactivity failure",
+      "recent_positive_commits": [
+        "564581172 chore(fsbs): record operator preactivity failure"
+      ],
+      "preserved_in_archive": true,
+      "classification": "historical differences need targeted reconciliation; no current-science conclusion",
+      "tip_changed_path_count": 1,
+      "tip_changed_path_examples": [
+        "docs/research/candidates/finite_semantic_boundary_support/workflow/engineering/state.json"
+      ]
+    },
+    {
+      "branch": "omp/finite_semantic_boundary_support/engineering/a394938d-runtime-v2-state",
+      "tip": "7888566e11a83b767bdc251e9b7830f0803aeafa",
+      "positive_patches": 7,
+      "latest_subject": "chore(fsbs): record v3 terminal success",
+      "recent_positive_commits": [
+        "40fecc756 chore(fsbs): record v3 memory wait",
+        "7deb94831 chore(fsbs): record v3 prepared",
+        "7888566e1 chore(fsbs): record v3 terminal success"
+      ],
+      "preserved_in_archive": true,
+      "classification": "historical differences need targeted reconciliation; no current-science conclusion",
+      "tip_changed_path_count": 1,
+      "tip_changed_path_examples": [
+        "docs/research/candidates/finite_semantic_boundary_support/workflow/engineering/state.json"
+      ]
+    },
+    {
+      "branch": "omp/semigroup_consistent_duration_model_policy/engineering/0c36e2c0-da50-4bb5-883f-088f1d3c80d9",
+      "tip": "1447bf480b897d627ea33b8f0d4dcde5685a75c0",
+      "positive_patches": 2,
+      "latest_subject": "scdmp: close foundation runtime dependencies",
+      "recent_positive_commits": [
+        "0eec437c1 scdmp: bind S4 foundation prelaunch",
+        "1447bf480 scdmp: close foundation runtime dependencies"
+      ],
+      "preserved_in_archive": true,
+      "classification": "historical differences need targeted reconciliation; no current-science conclusion",
+      "tip_changed_path_count": 5,
+      "tip_changed_path_examples": [
+        "experiments/candidates/scdmp_variable_k/native_fusion_r01/barriers.py",
+        "experiments/candidates/scdmp_variable_k/native_fusion_r01/foundation_activity_contract.py",
+        "experiments/candidates/scdmp_variable_k/native_fusion_r01/foundation_contract.py",
+        "experiments/candidates/scdmp_variable_k/native_fusion_r01/foundation_network.py",
+        "experiments/candidates/scdmp_variable_k/native_fusion_r01/foundation_optimizer.py"
+      ]
+    },
+    {
+      "branch": "omp/semigroup_consistent_duration_model_policy/engineering/1c6c15c9-2781-49f1-993c-202b2295b9f9",
+      "tip": "db3de3fa1882993b1ba32c7545c860e1569964c3",
+      "positive_patches": 4,
+      "latest_subject": "Record SCDMP foundation activity completion",
+      "recent_positive_commits": [
+        "1447bf480 scdmp: close foundation runtime dependencies",
+        "bdd5e1f35 Implement SCDMP foundation activity executor",
+        "db3de3fa1 Record SCDMP foundation activity completion"
+      ],
+      "preserved_in_archive": true,
+      "classification": "historical differences need targeted reconciliation; no current-science conclusion",
+      "tip_changed_path_count": 1,
+      "tip_changed_path_examples": [
+        "docs/research/candidates/semigroup_consistent_duration_model_policy/workflow/engineering/state.json"
+      ]
+    },
+    {
+      "branch": "omp/semigroup_consistent_duration_model_policy/engineering/72aeb686-ca19-4926-b342-959e79453d7b",
+      "tip": "0eec437c166ee1e5ffd94218765e4b00b3b8fa00",
+      "positive_patches": 1,
+      "latest_subject": "scdmp: bind S4 foundation prelaunch",
+      "recent_positive_commits": [
+        "0eec437c1 scdmp: bind S4 foundation prelaunch"
+      ],
+      "preserved_in_archive": true,
+      "classification": "historical differences need targeted reconciliation; no current-science conclusion",
+      "tip_changed_path_count": 6,
+      "tip_changed_path_examples": [
+        "docs/research/candidates/semigroup_consistent_duration_model_policy/workflow/engineering/state.json",
+        "experiments/candidates/scdmp_variable_k/native_fusion_r01/foundation_activity_production.py",
+        "experiments/candidates/scdmp_variable_k/native_fusion_r01/foundation_activity_resource_estimate.py",
+        "experiments/candidates/scdmp_variable_k/native_fusion_r01/foundation_activity_validation.py",
+        "experiments/candidates/scdmp_variable_k/native_fusion_r01/foundation_run_manifest.py"
+      ]
+    },
+    {
+      "branch": "omp/semigroup_consistent_duration_model_policy/research/6b856c57-5bb5-49e2-b040-6a0e8efc8270",
+      "tip": "103e7dce0fb056bebc849ae3fa91b2eb8ab8e600",
+      "positive_patches": 1,
+      "latest_subject": "research(scdmp): intake foundation technical completion",
+      "recent_positive_commits": [
+        "103e7dce0 research(scdmp): intake foundation technical completion"
+      ],
+      "preserved_in_archive": true,
+      "classification": "historical differences need targeted reconciliation; no current-science conclusion",
+      "tip_changed_path_count": 3,
+      "tip_changed_path_examples": [
+        "docs/research/candidates/semigroup_consistent_duration_model_policy/DIRECTION.md",
+        "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_NATIVE_FUSION_SCIENCE_AUTHORITY_R01_20260827.md",
+        "docs/research/candidates/semigroup_consistent_duration_model_policy/workflow/research/state.json"
+      ]
+    },
+    {
+      "branch": "omp/ucope/engineering/4b52642b-c413-4123-8a1f-7fd19355adfe",
+      "tip": "ceab4ae03b1d1c49c9c3dc78dba2e336c43797c7",
+      "positive_patches": 3,
+      "latest_subject": "chore(ucope): record executor acceptance",
+      "recent_positive_commits": [
+        "50052d1e4 feat(ucope): freeze R03 production candidate",
+        "7582b9f6a feat(ucope): implement complete R03 executor",
+        "ceab4ae03 chore(ucope): record executor acceptance"
+      ],
+      "preserved_in_archive": true,
+      "classification": "historical differences need targeted reconciliation; no current-science conclusion",
+      "tip_changed_path_count": 1,
+      "tip_changed_path_examples": [
+        "docs/research/candidates/ucope/workflow/engineering/state.json"
+      ]
+    },
+    {
+      "branch": "omp/workflow",
+      "tip": "92c2901c7c3b489b122dd9c9e6e7451ae54aa8aa",
+      "positive_patches": 62,
+      "latest_subject": "Replace transport state machine with linear receipt",
+      "recent_positive_commits": [
+        "fe72a91bd Integrate ONLGR Pro Innovator request",
+        "46b67473b Integrate SCDMP terminal-gap disposition",
+        "92c2901c7 Replace transport state machine with linear receipt"
+      ],
+      "preserved_in_archive": true,
+      "classification": "historical differences need targeted reconciliation; no current-science conclusion",
+      "tip_changed_path_count": 31,
+      "tip_changed_path_examples": [
+        ".omp/AGENTS.md",
+        ".omp/RULES.md",
+        ".omp/agents/hmasd-browser-transport.md",
+        ".omp/skills/hmasd-browser-transport/SKILL.md",
+        ".omp/skills/hmasd-em-direction-cycle/SKILL.md"
+      ]
+    },
+    {
+      "branch": "untied-k",
+      "tip": "0cb2bd0e63e23a2318f8f112ffe82126868df8fc",
+      "positive_patches": 591,
+      "latest_subject": "Add the 2026-08-02 session handoff; point CURRENT_WORK at it",
+      "recent_positive_commits": [
+        "dd131d546 Implement the V-K0D stack per the converged ledger (W-A/W-B/W-C/W-D)",
+        "1d91ab200 Add the A-VD-7 reference digest report producer",
+        "0cb2bd0e6 Add the 2026-08-02 session handoff; point CURRENT_WORK at it"
+      ],
+      "preserved_in_archive": true,
+      "classification": "historical differences need targeted reconciliation; no current-science conclusion",
+      "tip_changed_path_count": 2,
+      "tip_changed_path_examples": [
+        "docs/project/CURRENT_WORK.md",
+        "docs/project/HANDOFF_20260802.md"
+      ]
+    },
+    {
+      "branch": "wip/formal-path-coverage",
+      "tip": "4090bb8d8615b0b8f53a68a91a5ebf586febf497",
+      "positive_patches": 579,
+      "latest_subject": "WIP: parameterize the formal train and evaluate loop bounds",
+      "recent_positive_commits": [
+        "f9d49251e handoff: training running after the aborted first launch",
+        "8d1372729 ask whether a flat per-component replay tolerance is executable in float32",
+        "4090bb8d8 WIP: parameterize the formal train and evaluate loop bounds"
+      ],
+      "preserved_in_archive": true,
+      "classification": "historical differences need targeted reconciliation; no current-science conclusion",
+      "tip_changed_path_count": 1,
+      "tip_changed_path_examples": [
+        "scripts/run_noncalendar_commitment_benchmark_g0.py"
+      ]
+    },
+    {
+      "branch": "worktree-agent-a5ae2957862d225cd",
+      "tip": "e205d29f7cead5d375ecf464d104792e8daa78f0",
+      "positive_patches": 0,
+      "latest_subject": "Run E0 seed 2 for both arms and close deviation D2",
+      "recent_positive_commits": [],
+      "preserved_in_archive": true,
+      "classification": "patch-equivalent retirement candidate; live-use check remains",
+      "tip_changed_path_count": 1,
+      "tip_changed_path_examples": [
+        "docs/Claude_docs/experiments/E0_EXPOSURE_PROBE_SET_RESULT_20260902.md"
+      ]
+    },
+    {
+      "branch": "worktree-agent-aeda939d06a5b4fea",
+      "tip": "e26063d8193c63c1aaa0ba54d2efdd957dd313b7",
+      "positive_patches": 0,
+      "latest_subject": "Add relay corridor host implementation report",
+      "recent_positive_commits": [],
+      "preserved_in_archive": true,
+      "classification": "patch-equivalent retirement candidate; live-use check remains",
+      "tip_changed_path_count": 1,
+      "tip_changed_path_examples": [
+        "docs/Claude_docs/plans/RELAY_CORRIDOR_HOST_REPORT_20260902.md"
+      ]
+    }
+  ],
+  "current_protected": [
+    {
+      "branch": "codex/cm-cbsc-b04-20260906",
+      "tip": "c925e524dc0765822a45ee123814345cb151975b",
+      "positive_patches": 0,
+      "disposition": "retain main/control checkout/open PR or freshly completed task pending direction checkout handoff"
+    },
+    {
+      "branch": "codex/cm-cbsc-runtime-a02-20260907",
+      "tip": "0ae92498d9e5e88b7bedb8c4cffbf64d8272d566",
+      "positive_patches": 2,
+      "disposition": "retain main/control checkout/open PR or freshly completed task pending direction checkout handoff"
+    },
+    {
+      "branch": "codex/cm-vnfc-n7-b01-20260905",
+      "tip": "c4f1f7e318b6834fe29ecc59cf8348e8fb8c4a1e",
+      "positive_patches": 0,
+      "disposition": "retain main/control checkout/open PR or freshly completed task pending direction checkout handoff"
+    },
+    {
+      "branch": "codex/dm-cbsc-a02-intake-20260907",
+      "tip": "811df267764bdf94d197bfac576d96452ad850b4",
+      "positive_patches": 1,
+      "disposition": "retain main/control checkout/open PR or freshly completed task pending direction checkout handoff"
+    },
+    {
+      "branch": "codex/dm-ucope-b02-result-intake-20260907",
+      "tip": "1ac7f370558ec4a88548880a775c5e489e841ab3",
+      "positive_patches": 0,
+      "disposition": "retain main/control checkout/open PR or freshly completed task pending direction checkout handoff"
+    },
+    {
+      "branch": "codex/dm-ucope-shared-return-b02-card-20260907",
+      "tip": "c040e0e3efd5bd0b5ca5e89987ace0ed74aa1c22",
+      "positive_patches": 0,
+      "disposition": "retain main/control checkout/open PR or freshly completed task pending direction checkout handoff"
+    },
+    {
+      "branch": "codex/experiment-monitor",
+      "tip": "4b2ee7f470d295cea27f8bfe37e4bb9ebf04dfd9",
+      "positive_patches": 0,
+      "disposition": "retain main/control checkout/open PR or freshly completed task pending direction checkout handoff"
+    },
+    {
+      "branch": "codex/hmasd-dispatch-skill-20260907",
+      "tip": "e7597904e8bda81ca4aa7e504a37d67f41f84028",
+      "positive_patches": 3,
+      "disposition": "retain main/control checkout/open PR or freshly completed task pending direction checkout handoff"
+    },
+    {
+      "branch": "main",
+      "tip": "13d25608b41c1126821ba13b16477f53540646e4",
+      "positive_patches": 0,
+      "disposition": "retain main/control checkout/open PR or freshly completed task pending direction checkout handoff"
+    }
+  ],
+  "candidate_count": 42,
+  "notes": [
+    "13 clean local retirement candidates:14 content/patch-covered minus designated DISH checkout.",
+    "21 Pro candidates:19 completed scientific delivery/intake records plus2 completed engineering probes.",
+    "8 remote-only non-Pro branches have zero positive patches.",
+    "Candidate categories are disjoint branch names, not counts of local+remote copies.",
+    "Root reports no native/CM editor active. Retain designated CBSC,DISH,RCLE,UCOPE,VSPC1 checkouts and open PR2.",
+    "The previous recovery archive covers committed tips, not uncommitted worktree bytes.",
+    "Before any later retirement, recheck exact tips/current writers/PR bindings and preserve newer tips that postdate the archive."
+  ]
+}

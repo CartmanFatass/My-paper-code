@@ -153,3 +153,158 @@ same-information control, the full-episode native return, independent instances,
 whole-invocation budget and stop boundary, and what each outcome changes; 5/6 is neither threshold
 nor baseline elsewhere. VSP-C1 has no next object, stays `ACTIVE` at its priority, parks at this
 clean boundary and leaves the Claude working set.
+
+## Reactive queues: new K4 family and next discriminator — 2026-09-06
+
+The complete [Convergence response](pro_packets/20260906_reactive_queues_convergence/archive/RESPONSE.md)
+at `67f4d3837c78749cb7f7369083ecbc3ffa4b133d`, accepted in the
+[decision intake](VSPC1_K4_REACTIVE_QUEUES_CONVERGENCE_INTAKE_20260906.md), opens a reactive
+two-queue family and selects [B01](VSPC1_K4_REACTIVE_QUEUES_B01_SCIENCE_CARD_20260906.md): one
+paired training instance (seed 401), FACTOR versus same-information GENERIC, 256 real updates,
+48-tick full episodes, exogenous holding periods 2/6 and a known fixed reactive partner.
+The action changes service, successor queue state and the partner's next response. This
+supplies a new finite value-learning question; it is no observation of an algorithm gain.
+The public-plan six-step eight-context family above remains ended and all its results stand.
+
+The strongest support is the explicit state/action-to-native-work consequence chain. The
+strongest contrary consideration is still stationary single-learner control under a known
+non-learning partner; both networks share features and the chosen factor is not a strict
+low-rank bottleneck. Optimization and initialization remain plausible explanations. There
+is no tuned headroom record on the new host, no competence or transfer claim and no recast.
+The next discriminator is the complete update-256 return difference and each period's gain
+or loss against the card's absolute MEI 0.025, with initial values and fixed full curves
+retained. A useful local gain may justify explicitly selecting one or two independent seeds;
+null/adverse or mixed outcomes retain their narrower meaning and authorize no automatic
+extension or search for a host with a positive sign. Portfolio decisions remain Root's.
+
+## Reactive-queue B01: small opposite endpoint and curve signs — 2026-09-06
+
+The selected pair completed at seed 401 with 256 real updates per arm
+([E0 result](VSPC1_K4_REACTIVE_QUEUES_B01_RESULT_EVIDENCE_20260906.md),
+[intake](VSPC1_K4_REACTIVE_QUEUES_B01_INTAKE_20260906.md)). FACTOR endpoint 0.724894206 versus
+GENERIC 0.725219727 gives −0.000325521: d2 is equal, d6 loses 0.000651042. The retained full
+AUC instead favors FACTOR by +0.000254313, including transient d2 leads. Both effects are
+small relative to the card's 0.025 MEI. The prediction of an inside-MEI outcome with no clear
+two-period gain matches this instance; it is not evidence of forecast calibration.
+
+Both initial means were 0.725219727; GENERIC ends there and FACTOR slightly below. A labelled
+outcome-informed calculation over existing endpoint job sums gives a loose supply upper only
+0.013997396 above this observed GENERIC on those same evaluation tapes. That upper includes
+unservable final arrivals, so it leaves less than MEI of possible endpoint gain on this fixed
+comparison. This is a diagnostic against an untuned observed baseline, not an attainable
+optimum or population/tuned-headroom record. Old A01's missing headroom remains untouched.
+
+The strongest surviving support is a real state-changing held-action path and the small positive
+full-curve signal. The strongest contradiction to practical value on this task is the absence
+of endpoint improvement, actual long-period loss and limited room above already-high initial
+service. Initialization, optimization and the fixed partner's ability to service available
+work remain alternatives; no negative-transfer or sharing-failure cause is established.
+One paired instance supports no stable superiority, equivalence or transfer claim.
+
+DM applies the frozen inside-MEI rule: no extra run, longer budget, checkpoint substitution or
+new host is selected. The reactive family and K4 remain open; no direction or Portfolio
+disposition changes. A next discriminator must answer a separately justified duration-value
+question with native action consequences and a useful performance margin; another endpoint
+precision run has no selected use here. This imposes no exact-reference or search prerequisite.
+
+## Three-queue service allocation: selected controller comparison — 2026-09-07
+
+The complete [Convergence decision](pro_packets/20260907_service_allocation_convergence/archive/RESPONSE.md),
+delivered at `2347dbf2fea870cdcd02aa2eb8b3cbaff147ec34` and accepted in the
+[decision intake](VSPC1_K4_SERVICE_ALLOCATION_CONVERGENCE_INTAKE_20260907.md), selects one
+[SERVICE-ALLOCATION-B01](VSPC1_K4_SERVICE_ALLOCATION_B01_SCIENCE_CARD_20260907.md): three
+queues, two persistent workers, held focal allocations and a known reactive partner;
+one paired training instance compares FACTOR with fully conditioned GENERIC and an
+evaluated fixed same-information LQ-EXCLUDE rule. No new performance result is available.
+
+The strongest reason to measure this instance is a concrete controller choice: does value
+learning improve on avoiding the partner's immediate allocation and serving the longest
+remaining queue, and if so does multiplicative duration conditioning add useful native
+service? Holding an allocation while queues and the partner respond makes this possible
+without establishing that a gain exists. The fixed rule distinguishes useful learning
+from a relative win between two weaker learners and is measured in the same result.
+
+The strongest contrary consideration remains the tiny, fully observed stationary control
+task with a known non-learning partner; the greedy rule may already do most useful work.
+Both networks share features and the factor has no strict low-rank bottleneck. Initialization,
+common training and finite optimization remain alternatives. No tuned headroom or new-host
+competence is established; old two-queue supply bounds are not transplanted. Multiple host
+and budget details changed after B01, so any cross-host difference remains exploratory.
+
+The next discriminator is the complete update256 native contrast with both periods,
+each learner's relation to the rule, initial values and five fixed curve points retained.
+One useful signal may justify considering independent instances, not stable superiority,
+unique sharing causality, transfer, partner co-adaptation or optimality. Two-queue B01 gets
+no additional invocation, its family and K4 remain open, and the public-plan six-step family
+stays ended. The decision adds no recast or Portfolio disposition.
+
+## Service-allocation B01: small learner gain; rule unresolved — 2026-09-07
+
+The two seed402 learners each completed 256 real updates and five fixed evaluations
+([E0 technical evidence](VSPC1_K4_SERVICE_ALLOCATION_B01_EXECUTION_20260907.md),
+[scientific intake](VSPC1_K4_SERVICE_ALLOCATION_B01_INTAKE_20260907.md)). The retained final
+native learner contrast is FACTOR 0.758911133 minus GENERIC 0.752400716 = **+0.006510417**:
++0.001708984 at period2 and +0.011311849 at period6. This is 0.625 additional served jobs
+per 48-tick episode, below the 0.025 MEI. Conditional evaluation SE is 0.002109066 for
+these fixed policies; one paired training instance cannot estimate training-population
+uncertainty. Full-grid AUC favors FACTOR by +0.001363118. Initial-to-final changes are
++0.010457357 and +0.001261393; all points remain retained and final return stays primary.
+
+The strongest surviving support is the small positive native contrast in both periods
+after actual learning. The strongest limitation for practical multiplicative value is
+the below-MEI size and absent rule comparison. GENERIC failed during paired publication
+on a loaded-list/in-memory-tuple budget comparison before LQ-EXCLUDE evaluation; preserved
+learner endpoints support the narrow contrast, while the complete assignment remains
+incomplete. The rule may still do most useful control. Initialization, optimization,
+the stationary non-learning partner and feature sharing in both networks remain alternatives.
+
+The rule prediction is unscoreable. No stable superiority, useful learning-over-rule,
+causal sharing, transfer or optimality claim follows, and new-host headroom remains unknown.
+The next missing discriminator is the declared 256-episode rule endpoint on the same tapes
+and its comparison with the saved learner endpoints, after a separately commissioned
+publication repair. This intake adds no call, new seed, recast or family closure. K4 and
+the reactive family remain open; historical object boundaries and Portfolio authority stand.
+
+## Service-allocation: scoped rule completion selected — 2026-09-07
+
+The [complete Convergence amendment](pro_packets/20260907_service_allocation_completion_amendment/archive/RESPONSE.md)
+at immutable commit99151a4a0f2da264a2c13695591a56867e1add3c selects one rule-only completion
+after focused publication repair ([conformance intake](VSPC1_K4_SERVICE_ALLOCATION_COMPLETION_AMENDMENT_INTAKE_20260907.md)).
+Its 120-second complete-call exception changes only the original rule-inside-second-call
+and no-third-call boundary. The original failed GENERIC invocation and below-MEI learner
+difference remain; no new rule return or completed three-controller result exists yet.
+
+The selected discriminator is whether either saved learned policy has useful native
+return above LQ-EXCLUDE on the original 256 tapes. Unknown rule level can change that
+controller comparison even though the small FACTOR-minus-GENERIC gain cannot become
+MEI-sized. The stationary known-partner host, limited fixed rule, initialization and
+optimization alternatives remain. This is outcome-informed completion, not independent
+confirmation or stable superiority. K4 and the reactive family remain open; historical
+stopped/ended objects, recast count and Portfolio dispositions are unchanged.
+
+## Service-allocation B01: rule leads; object boundary reached — 2026-09-07
+
+The authorized outcome-informed completion now supplies the fixed-rule comparison
+([complete intake](VSPC1_K4_SERVICE_ALLOCATION_COMPLETION_INTAKE_20260907.md)). LQ-EXCLUDE
+J is 0.785196940, above FACTOR 0.758911133 and GENERIC 0.752400716 in both period means.
+FACTOR minus GENERIC stays +0.006510417, below the declared 0.025 MEI. FACTOR minus rule
+is −0.026285807 and GENERIC minus rule −0.032796224, corresponding to 2.5234375 and
+3.1484375 fewer completed jobs per episode. The rule also has less overflow and backlog.
+FACTOR's mean loss only narrowly crosses MEI; its conditional evaluation SE 0.001805490
+does not establish a resolved MEI-sized rule advantage. All curves and period outcomes stay.
+
+The small learner gain is the strongest surviving support for multiplicative conditioning.
+Both learners losing native service to the legal same-information rule is the strongest
+contradiction to practical usefulness here. The exclusion/longest-queue rule is the stronger
+observed comparator on this stationary known-partner host. Initialization,
+finite optimization and feature sharing in both networks remain causal alternatives.
+The recorded rule prediction is matched; this is still one paired training instance,
+with no new independent learner evidence, stable superiority, transfer or optimality claim.
+Tuned baseline/upper-reference headroom remains absent; the rule is an attained reference.
+
+The missing discriminator is resolved: neither saved learner improves on the fixed rule.
+Apply the card's no-practical-continuation row and stop this B01 at its object boundary;
+no additional evaluation, seed or similar-host search is selected. The original GENERIC
+publication failure and narrower intake remain historical facts. K4 and the reactive family
+remain open, older stopped/ended boundaries stand, and there is no B consumption, recast
+or Portfolio disposition. No next measurement is selected; Portfolio owns the next assignment.

@@ -9,7 +9,7 @@ has two independent EM conversations and Portfolio has one conversation reused
 across changing multi-direction scopes. Only one request may be active per key;
 archive it before sending the next turn in that same conversation. Browser tab
 handles, heartbeat wakeups, and executor turns remain ephemeral observations. The
-registry is shared across all requests handled by the project Transport singleton;
+registry is shared across all requests handled by Root;
 its operator UUID never selects a provider conversation.
 
 ```json
@@ -37,7 +37,7 @@ its operator UUID never selects a provider conversation.
     "canonical_form": "logical_packet_manifest",
     "manifest_path": ".../PACKET_MANIFEST.json",
     "body_path": ".../00_PROMPT.md",
-    "reference_paths": [".../01_REF_001_DIRECTION.md"]
+    "reference_paths": []
   },
   "tab_id": "7",
   "tab_lifecycle": "OPEN",
@@ -61,19 +61,9 @@ its operator UUID never selects a provider conversation.
   "underlying_model": "Latest",
   "thinking_effort": "Pro, 5 of 5.",
   "provider_requirement": {"model": "GPT-6 Astra", "mode": "Pro", "label": "6 Pro", "selector_hint": "Latest"},
-  "source_mode": "upload",
+  "source_mode": "paste",
   "prompt_sha256": "...",
-  "reference_files": [
-    {
-      "path": ".../DIRECTION.md",
-      "filename": "DIRECTION.md",
-      "canonical_filename": "...__01_REF_001_DIRECTION.md",
-      "bytes": 1234,
-      "sha256": "...",
-      "uploaded": true,
-      "provider_filename": "DIRECTION(2).md"
-    }
-  ],
+  "reference_files": [],
   "response_sha256": null,
   "send_evidence": {
     "send_click_count": 1,
@@ -81,7 +71,7 @@ its operator UUID never selects a provider conversation.
     "user_node_observed": true,
     "user_node_exact": true,
     "user_message_id": "<observed DOM message ID>",
-    "attachment_observed": true
+    "attachment_observed": false
   },
   "timestamps": {
     "received_at": "...Z",
@@ -122,7 +112,7 @@ its operator UUID never selects a provider conversation.
     "error": null
   },
   "heartbeat": {
-    "automation_id": "hmasd-transport-wake",
+    "automation_id": "hmasd-experiment-monitor",
     "status": "ACTIVE",
     "next_wake_at": "...Z",
     "retired_at": null,
@@ -132,14 +122,9 @@ its operator UUID never selects a provider conversation.
 ```
 
 At the registry root, active records live under `bindings`, keyed by the exact
-`conversation_binding_key`. A legacy `directions` object may remain as historical
-transport evidence and is not normally consulted for the three decision-node
-bindings. The one repair exception is an atomically locked serial admission: when
-the binding is stale but its direction mirror is `ARCHIVED`, has a non-empty
-`timestamps.archived_at` plus an archive object, and exactly agrees on binding key,
-direction, request, conversation ID, and provider URL, the archived mirror repairs
-the binding before admission. Any missing or disagreeing fact remains
-`BINDING_BUSY`; this reconciliation never contacts the provider or creates a send.
+`conversation_binding_key`. Use the existing binding helpers for persisted-state
+reconciliation; do not turn archived records into current assignments or edit routing
+by hand. Reconciliation never contacts the provider or creates a Send.
 When a new `request_id` arrives for an existing binding, the previous request must
 already be `ARCHIVED`. Move its request/packet/archive/receipt facts into
 `request_history`, reset only request-local state, and continue with the same
@@ -148,16 +133,10 @@ is `BINDING_BUSY`, not permission to create another conversation.
 
 Each `request_history` entry preserves that round's `source_thread_id`,
 `creator_thread_id`, `parent_thread_id`, `operator_thread_id`, and `return_route` alongside its archive
-and receipt. A singleton-era round reuses the configured operator but may use a
-different creator while retaining the binding's exact provider conversation;
-historical entries may preserve old per-handoff operator IDs. Completed old fixed-route receipts remain
-historical evidence and are not rewritten or resent. An old `PENDING` or `BLOCKED`
-receipt may migrate to `PARENT_SESSION` only when `attempt_count=0`, no send is
-recorded on either its primary or fallback route, and that same round has a valid
-`parent_thread_id`; its deterministic message key is preserved. Any primary/fallback
-attempt count, delivery status, sent timestamp, or terminal delivery state freezes
-the old receipt as historical evidence. A record without a parent task is marked
-ineligible for an automatic receipt and is never sent to an old destination.
+and receipt. The actual `execution_thread_id` identifies the executor; preserved
+request metadata never independently dispatches work. Completion is local when executor
+and parent coincide. Otherwise it uses the validated parent and existing outbox state.
+Preserve delivered or uncertain receipts; never infer permission to resend from recovery.
 
 ## Explicit provider-conversation replacement
 
@@ -167,8 +146,9 @@ with `provider_context_reset_evidence={previous_request_id, reset_authority:
 distinct replacement request ID, preserves the complete prior record (including
 unfinished/accepted-send state), and records `reason=owner_requested_new_conversation`.
 It does not require or fabricate a blocked answer, zero retrieved paths, or
-contamination. Stop the superseded operator's future actions and wake before takeover.
-The legacy `quarantined_conversations` map stores the retired provider ID without
+contamination. Close or transfer the affected request's observation under the owner
+instruction; keep the shared wake while other work needs it.
+The `quarantined_conversations` map stores the excluded provider ID without
 assigning scientific polarity. Repeating the same pending replacement preparation
 is idempotent; a different pending replacement is refused.
 
@@ -248,8 +228,7 @@ closed without authorization.
 
 The monitor identity is exactly:
 
-`request_id|conversation_binding_key|conversation_id|provider_url`
-(use `legacy:<direction_id>` only for legacy requests).
+`request_id|conversation_binding_key|conversation_id|provider_url`.
 
 Every wake must verify the loaded URL against the persisted `provider_url` before
 reading the page, then persist the observed URL, page state, completion controls,
@@ -293,35 +272,35 @@ re-inspect a mismatched capture on the same page, never repair it with a new Sen
 
 ## Heartbeat and asynchronous processing
 
-The heartbeat performs one bounded read per wake under a per-conversation lock. The
-normal cadence is `FREQ=MINUTELY;INTERVAL=15`; `INTERVAL=1` busy polling is invalid.
-The wake may reuse the active tab lease. It may not send, retry, switch direction,
-create a replacement conversation, or click `Answer now`. On natural completion it
-captures/archives once and then applies the completion close policy. On timeout it
-keeps the same conversation and active tab in `WAITING_TIMEOUT` for a later wake.
+Integrated Root reuses one fifteen-minute heartbeat for all current experiments and Pro
+requests. A due Pro check occurs on the fifteen-minute fallback wake;
+each due conversation gets one bounded read in serial. `INTERVAL=1` busy polling is invalid.
+A wake observes the existing request, never resends it or changes provider identity. Natural
+completion archives the paired response; timeout retains the same conversation for recovery.
 
 If a page handle is lost, one recovery tab may be opened from the exact persisted
 provider URL; the loaded URL and direction must be re-verified before observation.
 Never call `tabs.get()` on an old handle and never treat the new tab ID as a new
 identity. The recovered tab remains active while the conversation is pending.
 
-The singleton may own several request records, including provider generations that
-overlap in time, but every tab lease, heartbeat, outbox entry, archive and
-idempotency key remains request-scoped. Retain a request's heartbeat while that
-record requires a wake or recoverable timeout. After the record is durably archived, or is an
-explicit terminal/blocker state with no scheduled recovery, update the existing
-automation to `PAUSED` exactly once, verify the disabled status, and persist
-`retired_at` plus `retirement_verified=true`. Heartbeat retirement and tab closure
-are separate facts. Never archive the singleton task as part of request cleanup.
+Root may own overlapping provider generations. Tab leases, outbox entries, archives and
+idempotency keys remain request-scoped, but `heartbeat.automation_id` names the same Root
+automation. Request completion clears only that request's pending observation. Pause the shared
+automation only when no current experiment or Pro request needs observation, reconciliation,
+archival or notification. Never retire it merely because one request completes. Preserve
+each request's recorded observation facts without rewriting another request's state.
 
 ## Automatic return outbox
 
-Default execution remains `REUSE_SINGLETON`. An explicitly owner-directed
-`CALLER_DIRECT` request identifies the exact source caller as operator, includes
-`owner_execution_instruction`, and has no dispatch. When source equals parent,
-record `return_receipt.required=false`, `status=LOCAL_INTAKE`, and
-`attempt_count=0`; archive/intake in the same task without staging a self-message.
-Otherwise the existing parent outbox procedure applies.
+`REUSE_SINGLETON` identifies the configured Root endpoint. If the author is that endpoint,
+the renderer selects `CALLER_DIRECT` with the owner instruction and no app self-dispatch.
+New records name Root in `operator_thread_id`. `execution_thread_id` records actual
+execution ownership separately from immutable request metadata.
+When actual executor equals parent, `stage_receipt` or `stage_blocker_receipt` creates
+`required=false`, `status=LOCAL`, `routing_mode=LOCAL`, `destination_thread_id=null` and zero
+message attempts. Root forwards the scientific work to the DM. No app self-receipt is sent.
+Existing attempted/uncertain delivery evidence is never restaged during recovery.
+The following external-parent procedure applies only when executor differs from parent.
 
 After `ARCHIVED`, call `stage_receipt` from `scripts/transport_contract.py` before
 using `send_message_to_thread` exactly once on the validated parent task. The deterministic `message_key` remains
@@ -331,10 +310,15 @@ parent destination, timestamp, attempt count, delivery status, and error.
 `destination_thread_id` must equal the validated `parent_thread_id`,
 `routing_mode` is `PARENT_SESSION`, and `fallback_enabled` is false.
 
-An uncertain delivery or rejection is terminal for that outbox entry and is never
-retried, rerouted, or duplicated. Terminal blockers without an archive use
+An uncertain delivery is not retried, rerouted, or duplicated. A confirmed rejection
+before acceptance with no external effect may be retried after resolving its blocker:
+call `retry_rejected_receipt(record, not_accepted_evidence=<direct tool evidence>)`.
+It preserves the key, parent, payload metadata and attempt count, records the rejected
+attempt in `rejected_attempts`, and restores `PENDING` for the same payload. A generic
+failure or timeout is insufficient; the same parent route is preserved.
+Terminal blockers without an archive use
 `stage_blocker_receipt` with the same parent-session rule. If no valid parent is
 available, no outbox message is staged: the receipt records
 `required=false`, `receipt_state=RETURN_RECEIPT_BLOCKED`,
-`destination_thread_id=null`, and no message key. Legacy transport may still
-complete, but it cannot send a receipt.
+`destination_thread_id=null`, and no message key. Preserve the evidence and report the
+missing parent; do not invent a destination or another Send.
