@@ -67,6 +67,15 @@ no global dependency upgrade or third-batch framework migration follows.
 
 ## Focused reading and engineering handoffs (OWNER_DIRECT, 2026-09-06)
 
+OWNER_DIRECT 2026-09-07 temporary comparison: the next three genuinely new CM engineering
+assignments use `docs/project/CM_MODEL_COMPARISON_20260907.md` before implementation begins.
+Every arm receives the same complete code spec, task and starting code. Do not replay historical
+or already-started assignments. Native baseline/Sol and the three headless clients implement in
+isolated copies; comparison arms add no scientific invocation or research-direction slot.
+After three batches this enrollment ends. Ordinary Root execution/count/push notices remain
+in its dedicated log; only actual repair/decision needs go to Portfolio, without informational
+echoes. The owner's new goal and existing scientific boundaries continue independently.
+
 Start from the current assignment and applicable AGENTS instructions. The sender points to the
 current card/intake section, relevant specification sections, code entry points and acceptance.
 Read those current sections and owned code first. Expand into callers, dependencies or historical
@@ -258,7 +267,7 @@ When the owner is absent the loop keeps running under a standing delegation (own
 
 ## 5. Capacity and resume
 
-OWNER_DIRECT 2026-09-07: the owner's goal maintains five direction tasks until two formally
+OWNER_DIRECT 2026-09-07 (latest revision): the owner's goal maintains five direction tasks until five formally
 enter UAV validation, with actual entry traced to the relevant direction decision and UAV card.
 Active native subagents, running experiments and accepted Pro external reviews count together,
 at most once per direction; completed returns and unresolved transport waits do not count.

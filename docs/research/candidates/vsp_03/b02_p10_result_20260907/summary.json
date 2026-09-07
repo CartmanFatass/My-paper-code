@@ -1,0 +1,639 @@
+{
+  "object": "VSP03_B02",
+  "seed": 4,
+  "launch_sha": "00ebefa5823dbb41e64aed11b90ba26a8ff97020",
+  "node": "wsl_4070",
+  "command": "VSP03_B02_STARTED=$(/home/wu/.venvs/hmasd/bin/python -c \"import time; print(time.perf_counter())\")\n/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b02_seed4_p10_lf_20260907_admission.json && exec /home/wu/.venvs/hmasd/bin/python scripts/run_vsp03_b02.py --seed 4 --out /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b02_seed4_p10_lf_20260907 --started-monotonic \"$VSP03_B02_STARTED\" --node wsl_4070",
+  "status": "complete",
+  "arms": {
+    "T": {
+      "initial": {
+        "actor": {
+          "parameters": 1570,
+          "initial_l2": 5.308313369750977,
+          "initial_rms": 0.1339697539806366,
+          "current_l2": 5.308313369750977,
+          "displacement_l2": 0.0,
+          "displacement_over_initial_l2": 0.0
+        },
+        "critic": {
+          "parameters": 513,
+          "initial_l2": 3.5270094871520996,
+          "initial_rms": 0.1557212769985199,
+          "current_l2": 3.5270094871520996,
+          "displacement_l2": 0.0,
+          "displacement_over_initial_l2": 0.0
+        },
+        "total": {
+          "parameters": 2083,
+          "initial_l2": 6.37322473526001,
+          "initial_rms": 0.13964152336120605,
+          "current_l2": 6.37322473526001,
+          "displacement_l2": 0.0,
+          "displacement_over_initial_l2": 0.0
+        }
+      },
+      "training_episodes": 16384,
+      "training_team_ticks": 655360,
+      "training_target_transitions": 1310720,
+      "training_valid_rows": 90504,
+      "gradient_rows": 90504,
+      "optimizer_steps": 128,
+      "backward_calls": 128,
+      "evaluation_episodes": 2048,
+      "first": {
+        "actor": {
+          "parameters": 1570,
+          "initial_l2": 5.308313369750977,
+          "initial_rms": 0.1339697539806366,
+          "current_l2": 5.308937072753906,
+          "displacement_l2": 0.00583092775195837,
+          "displacement_over_initial_l2": 0.001098452059214415
+        },
+        "critic": {
+          "parameters": 513,
+          "initial_l2": 3.5270094871520996,
+          "initial_rms": 0.1557212769985199,
+          "current_l2": 3.5258350372314453,
+          "displacement_l2": 0.02264946885406971,
+          "displacement_over_initial_l2": 0.00642172042252093
+        },
+        "total": {
+          "parameters": 2083,
+          "initial_l2": 6.37322473526001,
+          "initial_rms": 0.13964152336120605,
+          "current_l2": 6.373094081878662,
+          "displacement_l2": 0.02338799647986889,
+          "displacement_over_initial_l2": 0.003669727249766397
+        }
+      },
+      "final": {
+        "actor": {
+          "parameters": 1570,
+          "initial_l2": 5.308313369750977,
+          "initial_rms": 0.1339697539806366,
+          "current_l2": 6.399951457977295,
+          "displacement_l2": 3.1157970428466797,
+          "displacement_over_initial_l2": 0.5869655436323361
+        },
+        "critic": {
+          "parameters": 513,
+          "initial_l2": 3.5270094871520996,
+          "initial_rms": 0.1557212769985199,
+          "current_l2": 3.5353143215179443,
+          "displacement_l2": 0.5686554312705994,
+          "displacement_over_initial_l2": 0.16122877847140776
+        },
+        "total": {
+          "parameters": 2083,
+          "initial_l2": 6.37322473526001,
+          "initial_rms": 0.13964152336120605,
+          "current_l2": 7.31148624420166,
+          "displacement_l2": 3.1672637462615967,
+          "displacement_over_initial_l2": 0.49696407671592663
+        }
+      },
+      "weights_readback": true,
+      "arm_wall_s": 2.427001019997988
+    },
+    "G": {
+      "initial": {
+        "actor": {
+          "parameters": 1570,
+          "initial_l2": 4.705682277679443,
+          "initial_rms": 0.11876070499420166,
+          "current_l2": 4.705682277679443,
+          "displacement_l2": 0.0,
+          "displacement_over_initial_l2": 0.0
+        },
+        "critic": {
+          "parameters": 513,
+          "initial_l2": 3.5270094871520996,
+          "initial_rms": 0.1557212769985199,
+          "current_l2": 3.5270094871520996,
+          "displacement_l2": 0.0,
+          "displacement_over_initial_l2": 0.0
+        },
+        "total": {
+          "parameters": 2083,
+          "initial_l2": 5.880751609802246,
+          "initial_rms": 0.12885113060474396,
+          "current_l2": 5.880751609802246,
+          "displacement_l2": 0.0,
+          "displacement_over_initial_l2": 0.0
+        }
+      },
+      "training_episodes": 16384,
+      "training_team_ticks": 655360,
+      "training_target_transitions": 1310720,
+      "training_valid_rows": 58610,
+      "gradient_rows": 58610,
+      "optimizer_steps": 128,
+      "backward_calls": 128,
+      "evaluation_episodes": 2048,
+      "first": {
+        "actor": {
+          "parameters": 1570,
+          "initial_l2": 4.705682277679443,
+          "initial_rms": 0.11876070499420166,
+          "current_l2": 4.705685615539551,
+          "displacement_l2": 0.005830924492329359,
+          "displacement_over_initial_l2": 0.0012391241372132792
+        },
+        "critic": {
+          "parameters": 513,
+          "initial_l2": 3.5270094871520996,
+          "initial_rms": 0.1557212769985199,
+          "current_l2": 3.525960922241211,
+          "displacement_l2": 0.022649461403489113,
+          "displacement_over_initial_l2": 0.006421718310085275
+        },
+        "total": {
+          "parameters": 2083,
+          "initial_l2": 5.880751609802246,
+          "initial_rms": 0.12885113060474396,
+          "current_l2": 5.880125999450684,
+          "displacement_l2": 0.023387985303997993,
+          "displacement_over_initial_l2": 0.00397704015674018
+        }
+      },
+      "final": {
+        "actor": {
+          "parameters": 1570,
+          "initial_l2": 4.705682277679443,
+          "initial_rms": 0.11876070499420166,
+          "current_l2": 5.3886260986328125,
+          "displacement_l2": 2.152395486831665,
+          "displacement_over_initial_l2": 0.4574034879152733
+        },
+        "critic": {
+          "parameters": 513,
+          "initial_l2": 3.5270094871520996,
+          "initial_rms": 0.1557212769985199,
+          "current_l2": 3.5327155590057373,
+          "displacement_l2": 0.5433399081230164,
+          "displacement_over_initial_l2": 0.15405116150162065
+        },
+        "total": {
+          "parameters": 2083,
+          "initial_l2": 5.880751609802246,
+          "initial_rms": 0.12885113060474396,
+          "current_l2": 6.443397045135498,
+          "displacement_l2": 2.2199153900146484,
+          "displacement_over_initial_l2": 0.37748837857977446
+        }
+      },
+      "weights_readback": true,
+      "arm_wall_s": 1.4709916989668272
+    }
+  },
+  "actual_rollouts": {
+    "episodes_started": 38920,
+    "episodes_completed": 38920,
+    "team_ticks": 1556800,
+    "target_transitions": 3113600,
+    "decision_rows": 187200,
+    "rollout_policy_forwards": 4295
+  },
+  "model_constructions": 2,
+  "optimizer_steps": 256,
+  "device": "cpu",
+  "dtype": "float32",
+  "compute_threads": 1,
+  "rng": {
+    "worlds": "PCG64 SeedSequence([302,seed,split,episode,target]);40 uniforms",
+    "phase": "[302,seed,split,episode,2];one integers(0,2)",
+    "actions": "[303,seed,split,mode,arm,episode];17 calendar-position uniforms",
+    "splits": "train100/evaluation200",
+    "modes": "train0/stochastic-final1",
+    "arms": "T0/G1",
+    "initialization": 40004
+  },
+  "cost_law": "admission+imports+2*(init+128*batch128x40x2+2*eval1024x40x2+weights)+2*rule1024x40x2+check8x40x2+publication/readback/exit",
+  "aggregate_cpu_s": null,
+  "focused_check": {
+    "episodes": 8,
+    "team_ticks": 320,
+    "target_transitions": 640,
+    "valid_rows": 44,
+    "gradient_rows": 44,
+    "backward_calls": 1,
+    "optimizer_steps": 0,
+    "rule_checks": {
+      "tie_submits": true,
+      "R": false,
+      "R0": true
+    },
+    "loss": {
+      "actor_loss": 3.2992372512817383,
+      "critic_loss": 0.42340153455734253,
+      "entropy_per_episode": 3.0928432941436768,
+      "entropy_coefficient": 0.01
+    },
+    "rows": [
+      {
+        "world": 0,
+        "phase_zero_identity": 0,
+        "return": 0.905,
+        "jobs": [
+          {
+            "units": 186,
+            "success": 1,
+            "attempt": 1,
+            "failed_attempt": 0,
+            "non_submission": 0,
+            "waiting_ticks": 4,
+            "submission_time": 4
+          },
+          {
+            "units": 176,
+            "success": 1,
+            "attempt": 1,
+            "failed_attempt": 0,
+            "non_submission": 0,
+            "waiting_ticks": 14,
+            "submission_time": 14
+          }
+        ],
+        "fixed_clocks": 17,
+        "pending_clocks": 6,
+        "eligible_decisions": 4,
+        "blocked_pending": 2,
+        "blocked_final_clocks": 0
+      },
+      {
+        "world": 1,
+        "phase_zero_identity": 1,
+        "return": 0.925,
+        "jobs": [
+          {
+            "units": 180,
+            "success": 1,
+            "attempt": 1,
+            "failed_attempt": 0,
+            "non_submission": 0,
+            "waiting_ticks": 10,
+            "submission_time": 10
+          },
+          {
+            "units": 190,
+            "success": 1,
+            "attempt": 1,
+            "failed_attempt": 0,
+            "non_submission": 0,
+            "waiting_ticks": 0,
+            "submission_time": 0
+          }
+        ],
+        "fixed_clocks": 17,
+        "pending_clocks": 4,
+        "eligible_decisions": 2,
+        "blocked_pending": 2,
+        "blocked_final_clocks": 0
+      },
+      {
+        "world": 2,
+        "phase_zero_identity": 0,
+        "return": 0.405,
+        "jobs": [
+          {
+            "units": -14,
+            "success": 0,
+            "attempt": 1,
+            "failed_attempt": 1,
+            "non_submission": 0,
+            "waiting_ticks": 4,
+            "submission_time": 4
+          },
+          {
+            "units": 176,
+            "success": 1,
+            "attempt": 1,
+            "failed_attempt": 0,
+            "non_submission": 0,
+            "waiting_ticks": 14,
+            "submission_time": 14
+          }
+        ],
+        "fixed_clocks": 17,
+        "pending_clocks": 6,
+        "eligible_decisions": 4,
+        "blocked_pending": 2,
+        "blocked_final_clocks": 0
+      },
+      {
+        "world": 3,
+        "phase_zero_identity": 0,
+        "return": 0.405,
+        "jobs": [
+          {
+            "units": -14,
+            "success": 0,
+            "attempt": 1,
+            "failed_attempt": 1,
+            "non_submission": 0,
+            "waiting_ticks": 4,
+            "submission_time": 4
+          },
+          {
+            "units": 176,
+            "success": 1,
+            "attempt": 1,
+            "failed_attempt": 0,
+            "non_submission": 0,
+            "waiting_ticks": 14,
+            "submission_time": 14
+          }
+        ],
+        "fixed_clocks": 17,
+        "pending_clocks": 6,
+        "eligible_decisions": 4,
+        "blocked_pending": 2,
+        "blocked_final_clocks": 0
+      },
+      {
+        "world": 4,
+        "phase_zero_identity": 0,
+        "return": 0.31,
+        "jobs": [
+          {
+            "units": -40,
+            "success": 0,
+            "attempt": 0,
+            "failed_attempt": 0,
+            "non_submission": 1,
+            "waiting_ticks": 40,
+            "submission_time": -1
+          },
+          {
+            "units": 164,
+            "success": 1,
+            "attempt": 1,
+            "failed_attempt": 0,
+            "non_submission": 0,
+            "waiting_ticks": 26,
+            "submission_time": 26
+          }
+        ],
+        "fixed_clocks": 17,
+        "pending_clocks": 16,
+        "eligible_decisions": 14,
+        "blocked_pending": 2,
+        "blocked_final_clocks": 1
+      },
+      {
+        "world": 5,
+        "phase_zero_identity": 0,
+        "return": 0.915,
+        "jobs": [
+          {
+            "units": 178,
+            "success": 1,
+            "attempt": 1,
+            "failed_attempt": 0,
+            "non_submission": 0,
+            "waiting_ticks": 12,
+            "submission_time": 12
+          },
+          {
+            "units": 188,
+            "success": 1,
+            "attempt": 1,
+            "failed_attempt": 0,
+            "non_submission": 0,
+            "waiting_ticks": 2,
+            "submission_time": 2
+          }
+        ],
+        "fixed_clocks": 17,
+        "pending_clocks": 5,
+        "eligible_decisions": 3,
+        "blocked_pending": 2,
+        "blocked_final_clocks": 0
+      },
+      {
+        "world": 6,
+        "phase_zero_identity": 0,
+        "return": 0.875,
+        "jobs": [
+          {
+            "units": 170,
+            "success": 1,
+            "attempt": 1,
+            "failed_attempt": 0,
+            "non_submission": 0,
+            "waiting_ticks": 20,
+            "submission_time": 20
+          },
+          {
+            "units": 180,
+            "success": 1,
+            "attempt": 1,
+            "failed_attempt": 0,
+            "non_submission": 0,
+            "waiting_ticks": 10,
+            "submission_time": 10
+          }
+        ],
+        "fixed_clocks": 17,
+        "pending_clocks": 9,
+        "eligible_decisions": 7,
+        "blocked_pending": 2,
+        "blocked_final_clocks": 0
+      },
+      {
+        "world": 7,
+        "phase_zero_identity": 0,
+        "return": 0.885,
+        "jobs": [
+          {
+            "units": 182,
+            "success": 1,
+            "attempt": 1,
+            "failed_attempt": 0,
+            "non_submission": 0,
+            "waiting_ticks": 8,
+            "submission_time": 8
+          },
+          {
+            "units": 172,
+            "success": 1,
+            "attempt": 1,
+            "failed_attempt": 0,
+            "non_submission": 0,
+            "waiting_ticks": 18,
+            "submission_time": 18
+          }
+        ],
+        "fixed_clocks": 17,
+        "pending_clocks": 8,
+        "eligible_decisions": 6,
+        "blocked_pending": 2,
+        "blocked_final_clocks": 0
+      }
+    ]
+  },
+  "absolute": {
+    "T_greedy": {
+      "episodes": 1024,
+      "return": 0.35067382812500003,
+      "fixed_clocks": 17.0,
+      "pending_clocks": 8.830078125,
+      "eligible_decisions": 6.8369140625,
+      "blocked_pending": 1.9931640625,
+      "blocked_final_clocks": 0.0107421875,
+      "success_per_team": 0.947265625,
+      "attempt_per_team": 1.8193359375,
+      "failed_attempt_per_team": 0.8720703125,
+      "non_submission_per_team": 0.1806640625,
+      "waiting_ticks_per_team": 30.990234375
+    },
+    "T_stochastic": {
+      "episodes": 1024,
+      "return": 0.3388134765625,
+      "fixed_clocks": 17.0,
+      "pending_clocks": 8.5322265625,
+      "eligible_decisions": 6.5390625,
+      "blocked_pending": 1.9931640625,
+      "blocked_final_clocks": 0.0107421875,
+      "success_per_team": 0.91796875,
+      "attempt_per_team": 1.9267578125,
+      "failed_attempt_per_team": 1.0087890625,
+      "non_submission_per_team": 0.0732421875,
+      "waiting_ticks_per_team": 28.80078125
+    },
+    "G_greedy": {
+      "episodes": 1024,
+      "return": 0.35466796875000006,
+      "fixed_clocks": 17.0,
+      "pending_clocks": 8.111328125,
+      "eligible_decisions": 6.1123046875,
+      "blocked_pending": 1.9990234375,
+      "blocked_final_clocks": 0.009765625,
+      "success_per_team": 0.94140625,
+      "attempt_per_team": 1.9716796875,
+      "failed_attempt_per_team": 1.0302734375,
+      "non_submission_per_team": 0.0283203125,
+      "waiting_ticks_per_team": 26.697265625
+    },
+    "G_stochastic": {
+      "episodes": 1024,
+      "return": 0.2890380859375,
+      "fixed_clocks": 17.0,
+      "pending_clocks": 5.9775390625,
+      "eligible_decisions": 3.9775390625,
+      "blocked_pending": 2.0,
+      "blocked_final_clocks": 0.0,
+      "success_per_team": 0.767578125,
+      "attempt_per_team": 1.9892578125,
+      "failed_attempt_per_team": 1.2216796875,
+      "non_submission_per_team": 0.0107421875,
+      "waiting_ticks_per_team": 18.0078125
+    },
+    "R": {
+      "episodes": 1024,
+      "return": 0.34958984375,
+      "fixed_clocks": 17.0,
+      "pending_clocks": 8.8408203125,
+      "eligible_decisions": 6.84765625,
+      "blocked_pending": 1.9931640625,
+      "blocked_final_clocks": 0.0107421875,
+      "success_per_team": 0.9453125,
+      "attempt_per_team": 1.818359375,
+      "failed_attempt_per_team": 0.873046875,
+      "non_submission_per_team": 0.181640625,
+      "waiting_ticks_per_team": 31.04296875
+    },
+    "R0": {
+      "episodes": 1024,
+      "return": 0.35067382812500003,
+      "fixed_clocks": 17.0,
+      "pending_clocks": 8.830078125,
+      "eligible_decisions": 6.8369140625,
+      "blocked_pending": 1.9931640625,
+      "blocked_final_clocks": 0.0107421875,
+      "success_per_team": 0.947265625,
+      "attempt_per_team": 1.8193359375,
+      "failed_attempt_per_team": 0.8720703125,
+      "non_submission_per_team": 0.1806640625,
+      "waiting_ticks_per_team": 30.990234375
+    }
+  },
+  "comparisons": {
+    "T_greedy-R": {
+      "mean": 0.0010839843749999999,
+      "conditional_world_sd": 0.022572718967533434,
+      "conditional_world_se": 0.0007053974677354198,
+      "worlds": 1024
+    },
+    "T_greedy-G_greedy": {
+      "mean": -0.003994140625000004,
+      "conditional_world_sd": 0.13732115878442092,
+      "conditional_world_se": 0.004291286212013154,
+      "worlds": 1024
+    },
+    "G_greedy-R": {
+      "mean": 0.0050781250000000045,
+      "conditional_world_sd": 0.1391688909393137,
+      "conditional_world_se": 0.004349027841853553,
+      "worlds": 1024
+    },
+    "T_greedy-R0": {
+      "mean": 0.0,
+      "conditional_world_sd": 0.0,
+      "conditional_world_se": 0.0,
+      "worlds": 1024
+    },
+    "G_greedy-R0": {
+      "mean": 0.003994140625000004,
+      "conditional_world_sd": 0.13732115878442092,
+      "conditional_world_se": 0.004291286212013154,
+      "worlds": 1024
+    },
+    "T_stochastic-R": {
+      "mean": -0.010776367187500002,
+      "conditional_world_sd": 0.2516362053669968,
+      "conditional_world_se": 0.00786363141771865,
+      "worlds": 1024
+    },
+    "T_stochastic-R0": {
+      "mean": -0.011860351562500001,
+      "conditional_world_sd": 0.25148431508427144,
+      "conditional_world_se": 0.007858884846383482,
+      "worlds": 1024
+    },
+    "T_stochastic-T_greedy": {
+      "mean": -0.011860351562500001,
+      "conditional_world_sd": 0.25148431508427144,
+      "conditional_world_se": 0.007858884846383482,
+      "worlds": 1024
+    },
+    "G_stochastic-R": {
+      "mean": -0.060551757812499996,
+      "conditional_world_sd": 0.35268937878113155,
+      "conditional_world_se": 0.01102154308691036,
+      "worlds": 1024
+    },
+    "G_stochastic-R0": {
+      "mean": -0.06163574218749999,
+      "conditional_world_sd": 0.3537717937382875,
+      "conditional_world_se": 0.011055368554321484,
+      "worlds": 1024
+    },
+    "G_stochastic-G_greedy": {
+      "mean": -0.06562988281249998,
+      "conditional_world_sd": 0.358912047710543,
+      "conditional_world_se": 0.01121600149095447,
+      "worlds": 1024
+    }
+  },
+  "primary": {
+    "mean": 0.0010839843749999999,
+    "conditional_world_sd": 0.022572718967533434,
+    "conditional_world_se": 0.0007053974677354198,
+    "worlds": 1024
+  },
+  "independent_training_pairs": 1,
+  "elapsed_through_output_start_s": 4.757669020036701,
+  "peak_rss_bytes": 495247360
+}

@@ -10,6 +10,11 @@ Use the section for the current role. AGENTS and the current owner instruction r
 authority; this procedure changes no scientific decision tier, model, budget or permission.
 Endpoints and observation rules are in `docs/project/ROOT_OPERATIONS.md`.
 
+OWNER_DIRECT 2026-09-07: capture the next three NEW CM engineering assignments under
+`docs/project/CM_MODEL_COMPARISON_20260907.md` before implementation begins. Dispatch the same
+frozen code spec/task/source to all comparison arms using that temporary protocol. Do not use
+historical tasks or count comparison arms as additional research directions.
+
 ## Shared state: actual work, not remembered task names
 
 Use current commands in `docs/research/portfolio/PORTFOLIO.md`, actual native dispatch/return

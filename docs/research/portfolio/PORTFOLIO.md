@@ -1,14 +1,32 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-07 (P10 goal-driven five-task batch prepared; dispatch unconfirmed)
+Updated at: 2026-09-07 (P12 prepared FRRIE execution and VSP02 request preparation; five-UAV-entry goal)
+
+Current commands: [P12 prepared path and Convergence](handoffs/2026-09-07-p12-prepared-path-and-convergence.md).
+P12 retains P11's CBSC/UCOPE bounded repairs and VSP03 prospective continuation, allocates one
+prepared FRRIE A04 complete setup/T0 chain, and prepares the VSP02 Convergence question without
+a Pro Send. Actual acceptance remains Root's log fact. No model-comparison batch has been created
+by these unchanged-code executions, existing corrections or scientific question preparation.
+
+Previous commands: [P11 refill and execution](handoffs/2026-09-07-p11-refill-and-selected-execution.md).
+Retain VSP03 collection/intake, allocate the selected CBSC single acquisition/metadata route
+and UCOPE B05 two-dataset route, and replace yielded RCLE/VSPC1 slots with bounded FRRIE A04
+preparation and VSP02 next-question preparation. Root records actual acceptance; a prepared
+replacement is not an active slot. These commands change no lifecycle/priority or UAV-entry claim.
+The [three-batch CM comparison](../../project/CM_MODEL_COMPARISON_20260907.md) enrolls only new
+engineering assignments with identical code specs. Shadow arms do not consume direction slots
+or add research invocations; current unchanged-code execution is not an old-task benchmark.
+
+## Previous P10 dispatch snapshot
 
 Current plan: [P10 exact commands](handoffs/2026-09-07-p10-goal-five-directions.md) targets
 VSP03 repair, UCOPE pair preparation, CBSC path selection, RCLE request reconciliation and
 VSPC1 next-question preparation. These commands supersede the P09 execution snapshot below
-only within their named boundaries. Latest received returns confirm no active slot; this is
-not a fresh runtime census. Root must establish actual accepted recipients and states.
+only within their named boundaries. Root's receipt `4c5734e58` confirms all five native
+dispatches accepted and active at that observation. Subsequent completions and unresolved
+returns change the count; this receipt is not a standing assertion that all five remain active.
 Count active native work, accepted running experiments and accepted Pro generation once per
-direction, targeting five until two directions formally enter UAV validation. Prepared commands,
+direction, targeting five until five directions formally enter UAV validation. Prepared commands,
 completed returns and unresolved transport waits do not count. P10 defines goal-accounting
 references and preserves existing scientific decision authority; no universal numerical UAV
 threshold or new A/B gate is introduced.

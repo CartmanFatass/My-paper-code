@@ -1,0 +1,154 @@
+{
+  "observed_utc": "2026-09-07T21:07:12.169379+00:00",
+  "host": "LAPTOP-U9TDKC8A",
+  "uname": [
+    "Linux",
+    "LAPTOP-U9TDKC8A",
+    "6.6.87.2-microsoft-standard-WSL2",
+    "#1 SMP PREEMPT_DYNAMIC Thu Jun  5 18:30:46 UTC 2025",
+    "x86_64"
+  ],
+  "os_release": "PRETTY_NAME=\"Ubuntu 24.04.3 LTS\"\nNAME=\"Ubuntu\"\nVERSION_ID=\"24.04\"\nVERSION=\"24.04.3 LTS (Noble Numbat)\"\nVERSION_CODENAME=noble\nID=ubuntu\nID_LIKE=debian\nHOME_URL=\"https://www.ubuntu.com/\"\nSUPPORT_URL=\"https://help.ubuntu.com/\"\nBUG_REPORT_URL=\"https://bugs.launchpad.net/ubuntu/\"\nPRIVACY_POLICY_URL=\"https://www.ubuntu.com/legal/terms-and-policies/privacy-policy\"\nUBUNTU_CODENAME=noble\nLOGO=ubuntu-logo\n",
+  "interpreters": [
+    {
+      "path": "/usr/bin/python3",
+      "resolved": "/usr/bin/python3.12",
+      "exit": 0,
+      "stdout": "{\"executable\": \"/usr/bin/python3\", \"version\": \"3.12.3 (main, Jul 15 2026, 23:46:41) [GCC 13.3.0]\", \"implementation\": \"cpython\", \"prefix\": \"/usr\", \"base_prefix\": \"/usr\", \"soabi\": \"cpython-312-x86_64-linux-gnu\", \"config_args\": \"'--enable-shared' '--prefix=/usr' '--libdir=/usr/lib/x86_64-linux-gnu' '--enable-ipv6' '--enable-loadable-sqlite-extensions' '--with-dbmliborder=bdb:gdbm' '--with-computed-gotos' '--without-ensurepip' '--with-system-expat' '--with-dtrace' '--with-ssl-default-suites=openssl' '--with-wheel-pkg-dir=/usr/share/python-wheels/' 'MKDIR_P=/bin/mkdir -p' 'CC=x86_64-linux-gnu-gcc'\"}",
+      "stderr": ""
+    },
+    {
+      "path": "/usr/bin/python3.12",
+      "resolved": "/usr/bin/python3.12",
+      "exit": 0,
+      "stdout": "{\"executable\": \"/usr/bin/python3.12\", \"version\": \"3.12.3 (main, Jul 15 2026, 23:46:41) [GCC 13.3.0]\", \"implementation\": \"cpython\", \"prefix\": \"/usr\", \"base_prefix\": \"/usr\", \"soabi\": \"cpython-312-x86_64-linux-gnu\", \"config_args\": \"'--enable-shared' '--prefix=/usr' '--libdir=/usr/lib/x86_64-linux-gnu' '--enable-ipv6' '--enable-loadable-sqlite-extensions' '--with-dbmliborder=bdb:gdbm' '--with-computed-gotos' '--without-ensurepip' '--with-system-expat' '--with-dtrace' '--with-ssl-default-suites=openssl' '--with-wheel-pkg-dir=/usr/share/python-wheels/' 'MKDIR_P=/bin/mkdir -p' 'CC=x86_64-linux-gnu-gcc'\"}",
+      "stderr": ""
+    },
+    {
+      "path": "/home/wu/.venvs/hmasd/bin/python",
+      "resolved": "/home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu/bin/python3.10",
+      "exit": 0,
+      "stdout": "{\"executable\": \"/home/wu/.venvs/hmasd/bin/python\", \"version\": \"3.10.21 (main, Sep  1 2026, 14:16:49) [Clang 22.1.3 ]\", \"implementation\": \"cpython\", \"prefix\": \"/home/wu/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu\", \"base_prefix\": \"/home/wu/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu\", \"soabi\": \"cpython-310-x86_64-linux-gnu\", \"config_args\": \"'--build=x86_64-unknown-linux-gnu' '--host=x86_64-unknown-linux-gnu' '--prefix=/install' '--with-openssl=/tools/deps' '--with-system-expat' '--with-system-libmpdec' '--without-ensurepip' '--with-readline=editline' '--enable-static-libpython-for-interpreter' '--enable-shared' '--enable-optimizations' '--with-lto' '--with-dbmliborder=bdb' 'build_alias=x86_64-unknown-linux-gnu' 'host_alias=x86_64-unknown-linux-gnu' 'CC=clang' 'CFLAGS= -O3 -fstack-protector -fstack-clash-protection -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fPIC ' 'LDFLAGS=-Wl,-z,noexecstack -Wl,-z,relro -Wl,-z,now -Wl,--build-id=sha1 -Wl,--exclude-libs,ALL' 'CPPFLAGS= -O3 -fstack-protector -fstack-clash-protection -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fPIC ' 'PROFILE_TASK=-m test --pgo -j 4' 'PKG_CONFIG=pkg-config --static' 'PKG_CONFIG_PATH=/tools/deps/share/pkgconfig:/tools/deps/lib/pkgconfig'\"}",
+      "stderr": ""
+    },
+    {
+      "path": "/home/wu/.venvs/hmasd-cbsc-system312-a02-20260907/bin/python",
+      "resolved": "/usr/bin/python3.12",
+      "exit": 0,
+      "stdout": "{\"executable\": \"/home/wu/.venvs/hmasd-cbsc-system312-a02-20260907/bin/python\", \"version\": \"3.12.3 (main, Jul 15 2026, 23:46:41) [GCC 13.3.0]\", \"implementation\": \"cpython\", \"prefix\": \"/usr\", \"base_prefix\": \"/usr\", \"soabi\": \"cpython-312-x86_64-linux-gnu\", \"config_args\": \"'--enable-shared' '--prefix=/usr' '--libdir=/usr/lib/x86_64-linux-gnu' '--enable-ipv6' '--enable-loadable-sqlite-extensions' '--with-dbmliborder=bdb:gdbm' '--with-computed-gotos' '--without-ensurepip' '--with-system-expat' '--with-dtrace' '--with-ssl-default-suites=openssl' '--with-wheel-pkg-dir=/usr/share/python-wheels/' 'MKDIR_P=/bin/mkdir -p' 'CC=x86_64-linux-gnu-gcc'\"}",
+      "stderr": ""
+    },
+    {
+      "path": "/home/wu/.venvs/hmasd-cbsc-system312-a03-20260907/bin/python",
+      "resolved": "/usr/bin/python3.12",
+      "exit": 0,
+      "stdout": "{\"executable\": \"/home/wu/.venvs/hmasd-cbsc-system312-a03-20260907/bin/python\", \"version\": \"3.12.3 (main, Jul 15 2026, 23:46:41) [GCC 13.3.0]\", \"implementation\": \"cpython\", \"prefix\": \"/usr\", \"base_prefix\": \"/usr\", \"soabi\": \"cpython-312-x86_64-linux-gnu\", \"config_args\": \"'--enable-shared' '--prefix=/usr' '--libdir=/usr/lib/x86_64-linux-gnu' '--enable-ipv6' '--enable-loadable-sqlite-extensions' '--with-dbmliborder=bdb:gdbm' '--with-computed-gotos' '--without-ensurepip' '--with-system-expat' '--with-dtrace' '--with-ssl-default-suites=openssl' '--with-wheel-pkg-dir=/usr/share/python-wheels/' 'MKDIR_P=/bin/mkdir -p' 'CC=x86_64-linux-gnu-gcc'\"}",
+      "stderr": ""
+    },
+    {
+      "path": "/home/wu/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/bin/python3.10",
+      "resolved": "/home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu/bin/python3.10",
+      "exit": 0,
+      "stdout": "{\"executable\": \"/home/wu/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/bin/python3.10\", \"version\": \"3.10.21 (main, Sep  1 2026, 14:16:49) [Clang 22.1.3 ]\", \"implementation\": \"cpython\", \"prefix\": \"/home/wu/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu\", \"base_prefix\": \"/home/wu/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu\", \"soabi\": \"cpython-310-x86_64-linux-gnu\", \"config_args\": \"'--build=x86_64-unknown-linux-gnu' '--host=x86_64-unknown-linux-gnu' '--prefix=/install' '--with-openssl=/tools/deps' '--with-system-expat' '--with-system-libmpdec' '--without-ensurepip' '--with-readline=editline' '--enable-static-libpython-for-interpreter' '--enable-shared' '--enable-optimizations' '--with-lto' '--with-dbmliborder=bdb' 'build_alias=x86_64-unknown-linux-gnu' 'host_alias=x86_64-unknown-linux-gnu' 'CC=clang' 'CFLAGS= -O3 -fstack-protector -fstack-clash-protection -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fPIC ' 'LDFLAGS=-Wl,-z,noexecstack -Wl,-z,relro -Wl,-z,now -Wl,--build-id=sha1 -Wl,--exclude-libs,ALL' 'CPPFLAGS= -O3 -fstack-protector -fstack-clash-protection -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fPIC ' 'PROFILE_TASK=-m test --pgo -j 4' 'PKG_CONFIG=pkg-config --static' 'PKG_CONFIG_PATH=/tools/deps/share/pkgconfig:/tools/deps/lib/pkgconfig'\"}",
+      "stderr": ""
+    },
+    {
+      "path": "/home/wu/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/bin/python3",
+      "resolved": "/home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu/bin/python3.10",
+      "exit": 0,
+      "stdout": "{\"executable\": \"/home/wu/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/bin/python3\", \"version\": \"3.10.21 (main, Sep  1 2026, 14:16:49) [Clang 22.1.3 ]\", \"implementation\": \"cpython\", \"prefix\": \"/home/wu/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu\", \"base_prefix\": \"/home/wu/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu\", \"soabi\": \"cpython-310-x86_64-linux-gnu\", \"config_args\": \"'--build=x86_64-unknown-linux-gnu' '--host=x86_64-unknown-linux-gnu' '--prefix=/install' '--with-openssl=/tools/deps' '--with-system-expat' '--with-system-libmpdec' '--without-ensurepip' '--with-readline=editline' '--enable-static-libpython-for-interpreter' '--enable-shared' '--enable-optimizations' '--with-lto' '--with-dbmliborder=bdb' 'build_alias=x86_64-unknown-linux-gnu' 'host_alias=x86_64-unknown-linux-gnu' 'CC=clang' 'CFLAGS= -O3 -fstack-protector -fstack-clash-protection -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fPIC ' 'LDFLAGS=-Wl,-z,noexecstack -Wl,-z,relro -Wl,-z,now -Wl,--build-id=sha1 -Wl,--exclude-libs,ALL' 'CPPFLAGS= -O3 -fstack-protector -fstack-clash-protection -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fPIC ' 'PROFILE_TASK=-m test --pgo -j 4' 'PKG_CONFIG=pkg-config --static' 'PKG_CONFIG_PATH=/tools/deps/share/pkgconfig:/tools/deps/lib/pkgconfig'\"}",
+      "stderr": ""
+    },
+    {
+      "path": "/home/wu/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/bin/python3.10-config",
+      "resolved": "/home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu/bin/python3.10-config",
+      "exit": 1,
+      "stdout": "Usage: /home/wu/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/bin/python3.10-config --prefix|--exec-prefix|--includes|--libs|--cflags|--ldflags|--extension-suffix|--help|--abiflags|--configdir|--embed",
+      "stderr": ""
+    },
+    {
+      "path": "/home/wu/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/bin/python3-config",
+      "resolved": "/home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu/bin/python3.10-config",
+      "exit": 1,
+      "stdout": "Usage: /home/wu/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/bin/python3-config --prefix|--exec-prefix|--includes|--libs|--cflags|--ldflags|--extension-suffix|--help|--abiflags|--configdir|--embed",
+      "stderr": ""
+    },
+    {
+      "path": "/home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu/bin/python3.10",
+      "resolved": "/home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu/bin/python3.10",
+      "exit": 0,
+      "stdout": "{\"executable\": \"/home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu/bin/python3.10\", \"version\": \"3.10.21 (main, Sep  1 2026, 14:16:49) [Clang 22.1.3 ]\", \"implementation\": \"cpython\", \"prefix\": \"/home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu\", \"base_prefix\": \"/home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu\", \"soabi\": \"cpython-310-x86_64-linux-gnu\", \"config_args\": \"'--build=x86_64-unknown-linux-gnu' '--host=x86_64-unknown-linux-gnu' '--prefix=/install' '--with-openssl=/tools/deps' '--with-system-expat' '--with-system-libmpdec' '--without-ensurepip' '--with-readline=editline' '--enable-static-libpython-for-interpreter' '--enable-shared' '--enable-optimizations' '--with-lto' '--with-dbmliborder=bdb' 'build_alias=x86_64-unknown-linux-gnu' 'host_alias=x86_64-unknown-linux-gnu' 'CC=clang' 'CFLAGS= -O3 -fstack-protector -fstack-clash-protection -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fPIC ' 'LDFLAGS=-Wl,-z,noexecstack -Wl,-z,relro -Wl,-z,now -Wl,--build-id=sha1 -Wl,--exclude-libs,ALL' 'CPPFLAGS= -O3 -fstack-protector -fstack-clash-protection -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fPIC ' 'PROFILE_TASK=-m test --pgo -j 4' 'PKG_CONFIG=pkg-config --static' 'PKG_CONFIG_PATH=/tools/deps/share/pkgconfig:/tools/deps/lib/pkgconfig'\"}",
+      "stderr": ""
+    },
+    {
+      "path": "/home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu/bin/python3",
+      "resolved": "/home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu/bin/python3.10",
+      "exit": 0,
+      "stdout": "{\"executable\": \"/home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu/bin/python3\", \"version\": \"3.10.21 (main, Sep  1 2026, 14:16:49) [Clang 22.1.3 ]\", \"implementation\": \"cpython\", \"prefix\": \"/home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu\", \"base_prefix\": \"/home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu\", \"soabi\": \"cpython-310-x86_64-linux-gnu\", \"config_args\": \"'--build=x86_64-unknown-linux-gnu' '--host=x86_64-unknown-linux-gnu' '--prefix=/install' '--with-openssl=/tools/deps' '--with-system-expat' '--with-system-libmpdec' '--without-ensurepip' '--with-readline=editline' '--enable-static-libpython-for-interpreter' '--enable-shared' '--enable-optimizations' '--with-lto' '--with-dbmliborder=bdb' 'build_alias=x86_64-unknown-linux-gnu' 'host_alias=x86_64-unknown-linux-gnu' 'CC=clang' 'CFLAGS= -O3 -fstack-protector -fstack-clash-protection -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fPIC ' 'LDFLAGS=-Wl,-z,noexecstack -Wl,-z,relro -Wl,-z,now -Wl,--build-id=sha1 -Wl,--exclude-libs,ALL' 'CPPFLAGS= -O3 -fstack-protector -fstack-clash-protection -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -fPIC ' 'PROFILE_TASK=-m test --pgo -j 4' 'PKG_CONFIG=pkg-config --static' 'PKG_CONFIG_PATH=/tools/deps/share/pkgconfig:/tools/deps/lib/pkgconfig'\"}",
+      "stderr": ""
+    },
+    {
+      "path": "/home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu/bin/python3.10-config",
+      "resolved": "/home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu/bin/python3.10-config",
+      "exit": 1,
+      "stdout": "Usage: /home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu/bin/python3.10-config --prefix|--exec-prefix|--includes|--libs|--cflags|--ldflags|--extension-suffix|--help|--abiflags|--configdir|--embed",
+      "stderr": ""
+    },
+    {
+      "path": "/home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu/bin/python3-config",
+      "resolved": "/home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu/bin/python3.10-config",
+      "exit": 1,
+      "stdout": "Usage: /home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu/bin/python3-config --prefix|--exec-prefix|--includes|--libs|--cflags|--ldflags|--extension-suffix|--help|--abiflags|--configdir|--embed",
+      "stderr": ""
+    }
+  ],
+  "package_search_roots": [
+    "/usr/lib/python3/dist-packages",
+    "/usr/local/lib/python3.12/dist-packages",
+    "/home/wu/.venvs/hmasd/lib/python3.10/site-packages",
+    "/home/wu/.venvs/hmasd-cbsc-system312-a02-20260907/lib/python3.12/site-packages",
+    "/home/wu/.venvs/hmasd-cbsc-system312-a03-20260907/lib/python3.12/site-packages"
+  ],
+  "packages": [
+    {
+      "metadata_path": "/home/wu/.venvs/hmasd/lib/python3.10/site-packages/numpy-1.26.3.dist-info",
+      "fields": [
+        "Name: numpy",
+        "Version: 1.26.3",
+        "Requires-Python: >=3.9"
+      ],
+      "wheel": [
+        "Generator: meson",
+        "Tag: cp310-cp310-manylinux_2_17_x86_64",
+        "Tag: cp310-cp310-manylinux2014_x86_64"
+      ]
+    },
+    {
+      "metadata_path": "/home/wu/.venvs/hmasd/lib/python3.10/site-packages/torch-2.7.0+cu118.dist-info",
+      "fields": [
+        "Name: torch",
+        "Version: 2.7.0+cu118",
+        "Requires-Python: >=3.9.0"
+      ],
+      "wheel": [
+        "Generator: setuptools (75.8.2)",
+        "Tag: cp310-cp310-manylinux_2_28_x86_64"
+      ]
+    }
+  ],
+  "venv_configs": [
+    {
+      "path": "/home/wu/.venvs/hmasd/pyvenv.cfg",
+      "contents": "home = /home/wu/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/bin\nimplementation = CPython\nuv = 0.12.9\nversion_info = 3.10\ninclude-system-site-packages = false\n"
+    },
+    {
+      "path": "/home/wu/.venvs/hmasd-cbsc-system312-a02-20260907/pyvenv.cfg",
+      "contents": "home = /usr/bin\nimplementation = CPython\nuv = 0.12.9\nversion_info = 3.12.3\ninclude-system-site-packages = false\n"
+    },
+    {
+      "path": "/home/wu/.venvs/hmasd-cbsc-system312-a03-20260907/pyvenv.cfg",
+      "contents": "home = /usr/bin\nimplementation = CPython\nuv = 0.12.9\nversion_info = 3.12.3\ninclude-system-site-packages = false\n"
+    }
+  ],
+  "imports": "stdlib inventory only; no FRRIE, numpy or torch import; no environment changes"
+}

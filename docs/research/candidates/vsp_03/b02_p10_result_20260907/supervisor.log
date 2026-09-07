@@ -1,0 +1,29 @@
+=== Task 'vsp03-b02-p10-lf-20260907' started at 2026-09-08T04:48:14+08:00 ===
+{
+  "assessed_at": "2026-09-07T20:48:14.626844Z",
+  "available_physical_bytes": 15664111616,
+  "captured_at": "2026-09-07T20:48:14.626522Z",
+  "cgroup_headroom_bytes": null,
+  "cgroup_memory_current_bytes": null,
+  "cgroup_memory_max_bytes": null,
+  "effective_available_bytes": 15664111616,
+  "effective_floor_pass": true,
+  "failure_reasons": [],
+  "measurement_source": "/proc/meminfo",
+  "minimum_available_bytes": 4294967296,
+  "passed": true,
+  "physical_floor_pass": true,
+  "schema_version": 1
+}
+{"arm": "T", "update": 1, "elapsed_s": 1.7214558200212196, "actual_rollouts": {"episodes_started": 136, "episodes_completed": 136, "team_ticks": 5440, "target_transitions": 10880, "decision_rows": 692, "rollout_policy_forwards": 17}, "optimizer_steps": 1}
+{"arm": "T", "update": 32, "elapsed_s": 2.0567257379880175, "actual_rollouts": {"episodes_started": 4104, "episodes_completed": 4104, "team_ticks": 164160, "target_transitions": 328320, "decision_rows": 20929, "rollout_policy_forwards": 543}, "optimizer_steps": 32}
+{"arm": "T", "update": 64, "elapsed_s": 2.40473974699853, "actual_rollouts": {"episodes_started": 8200, "episodes_completed": 8200, "team_ticks": 328000, "target_transitions": 656000, "decision_rows": 41709, "rollout_policy_forwards": 1087}, "optimizer_steps": 64}
+{"arm": "T", "update": 128, "elapsed_s": 3.0986953729880042, "actual_rollouts": {"episodes_started": 16392, "episodes_completed": 16392, "team_ticks": 655680, "target_transitions": 1311360, "decision_rows": 90548, "rollout_policy_forwards": 2175}, "optimizer_steps": 128}
+{"arm": "G", "update": 1, "elapsed_s": 3.2277253190404736, "actual_rollouts": {"episodes_started": 18568, "episodes_completed": 18568, "team_ticks": 742720, "target_transitions": 1485440, "decision_rows": 104745, "rollout_policy_forwards": 2225}, "optimizer_steps": 129}
+{"arm": "G", "update": 32, "elapsed_s": 3.5765132660162635, "actual_rollouts": {"episodes_started": 22536, "episodes_completed": 22536, "team_ticks": 901440, "target_transitions": 1802880, "decision_rows": 119858, "rollout_policy_forwards": 2745}, "optimizer_steps": 160}
+{"arm": "G", "update": 64, "elapsed_s": 3.9253612190368585, "actual_rollouts": {"episodes_started": 26632, "episodes_completed": 26632, "team_ticks": 1065280, "target_transitions": 2130560, "decision_rows": 134554, "rollout_policy_forwards": 3266}, "optimizer_steps": 192}
+{"arm": "G", "update": 128, "elapsed_s": 4.616421251033898, "actual_rollouts": {"episodes_started": 34824, "episodes_completed": 34824, "team_ticks": 1392960, "target_transitions": 2785920, "decision_rows": 162855, "rollout_policy_forwards": 4261}, "optimizer_steps": 256}
+{"status": "complete", "counts": {"episodes_started": 38920, "episodes_completed": 38920, "team_ticks": 1556800, "target_transitions": 3113600, "decision_rows": 187200, "rollout_policy_forwards": 4295}, "elapsed_through_readback_s": 4.758440430043265}
+runner_exit_ready elapsed_s=4.759825935994741
+whole_wall_seconds=5.05 peak_rss_kib=514736
+=== Task 'vsp03-b02-p10-lf-20260907' exited with code 0 at 2026-09-08T04:48:19+08:00 (Duration: 5s) ===

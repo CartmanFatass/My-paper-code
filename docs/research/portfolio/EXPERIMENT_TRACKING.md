@@ -5,16 +5,17 @@
 OWNER_DIRECT merger: existing Luna/xhigh Root directly observes experiments and transports Pro
 requests. Standalone Monitor and Transport have relinquished their current work. See
 `.codex/hmasd-monitor.toml`, `.codex/hmasd-transport.toml` and `docs/project/ROOT_OPERATIONS.md`.
-Current assigned live/unknown experiment handles: none; VSP03
-`vsp03-b02-p09-20260907` terminated on `wsl_4070` from exact source
+Current assigned live/unknown experiment handles: none; VSP03 P10 is terminal and in CM collection.
+`vsp03-b02-p10-lf-20260907` on `wsl_4070` from exact source
 `00ebefa5823dbb41e64aed11b90ba26a8ff97020` in detached cwd
-`/home/wu/hmasd-worktrees/vsp03-b02-p09-00ebefa5823dbb41e64aed11b90ba26a8ff97020`; its supervisor
-log is `/home/wu/.agent-tasks/vsp03-b02-p09-20260907/task.log`, and the selected output root is
-`/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b02_seed4_p09_20260907`. The single frozen
-120-second invocation passed fresh admission (`15662940160` physical/effective bytes) but exited
-2 in argument parsing because the PowerShell stdin transport added a trailing CR to `--node`
-(`wsl_4070\r`); no learner/model/trajectory/result exposure occurred. Portfolio must issue the
-bounded repair before re-dispatch. UCOPE
+`/home/wu/hmasd-worktrees/vsp03-b02-p09-00ebefa5823dbb41e64aed11b90ba26a8ff97020` finished exit 0
+(PID 2745786, tmux inactive). Its supervisor log is `/home/wu/.agent-tasks/vsp03-b02-p10-lf-20260907/task.log`;
+output root is `/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b02_seed4_p10_lf_20260907`,
+with admission sibling `/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b02_seed4_p10_lf_20260907_admission.json`.
+Fresh physical/effective admission was 15664111616 bytes; complete output reports 38920 episodes,
+1556800 team ticks, 3113600 target transitions and 256 optimizer steps, whole wall 5.05 s and
+peak RSS 514736 KiB. CM collection and technical acceptance are pending; no scientific intake yet.
+The prior P09 attempt `vsp03-b02-p09-20260907` remains preserved separately as exit-2/no-exposure evidence.
 `ucope-shared-return-b02-seed6401-20260907` is terminal and remains in CM collection; the repaired VSPC1 service-allocation
 pair is terminal and fully intaken at main `f22482b03`. DISH
 `dish_b06_seed113_20260907_run01` on `wsl_4070` (source `373d18720`) exited 0 at
@@ -24,7 +25,7 @@ handed directly to CM collection. `vspc1-reactive-b01-factor-run02` and
 `vspc1-reactive-b01-generic-run02` are terminal, technically accepted and fully intaken by the
 DM. The single Root heartbeat also covers the
 explicit pending Pro rows below; experiment completion alone does not pause it.
-The shared Root heartbeat remains ACTIVE while VSP03 is observed and these terminal returns and
+The shared Root heartbeat remains ACTIVE while VSP03 P10 is observed and these terminal returns and
 pending Pro rows are delivered and reconciled. Historical
 handles and old routing sections below are retained evidence, not current assignments.
 
