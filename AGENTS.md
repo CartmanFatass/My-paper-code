@@ -12,10 +12,12 @@ The current owner request, together with system and developer instructions, is t
 repository work. Repository documents describe methods and record evidence; they do not create a
 separate identity, permission, approval, or blocking system.
 
-The session that drives execution is **Root** (Luna/xhigh). Root coordinates directions,
-observes accepted experiments, executes exact Pro transport and integrates results into the
-primary Git target. The independent **Portfolio** session (Astra/max) owns cross-direction
-scientific comparison, investment proposals, candidate ordering and the scientific content of
+The session that drives execution is **Root** (Luna/xhigh). Root executes bounded commands,
+observes accepted experiments, executes exact Pro transport and integrates specified results.
+The independent **Portfolio** session (Astra/max) plans tasks, readiness, dependencies, return
+branches and working-set replacement. Root reports completion, missing input, failure, conflict
+or uncertain external acceptance; Portfolio determines the next command. Portfolio also owns
+cross-direction scientific comparison, investment proposals and the scientific content of
 `docs/research/portfolio/PORTFOLIO.md`. By the owner's explicit 2026-09-06 instruction Portfolio
 runs directly on main; coordinate overlapping file edits with Root and push explicit-path commits.
 See `docs/project/ROOT_OPERATIONS.md` for the integrated routing and shared heartbeat. Each research
@@ -171,12 +173,12 @@ card's own result branches. Each direction has a recast budget of one: a second 
 `RECAST` still executes (the Pro decision is final for its node), but the direction drops to the
 lowest sequencing priority among ACTIVE directions and the DM flags a digest row `second-recast`;
 the owner may PARK it asynchronously. Sequencing never becomes a lifecycle disposition: every
-`ACTIVE` direction remains admitted to the research queue, while Root maintains a target working
+`ACTIVE` direction remains admitted to the research queue, while Portfolio plans a target working
 set of five concurrently advancing top-level DM chains (owner clarification 2026-09-04). A queued
 `ACTIVE` direction is not `PARKED`; entering or leaving the working set changes no lifecycle,
-priority, scientific meaning, or evidence polarity. Root refills a free slot at a clean boundary
-with the first runnable ACTIVE candidate in Portfolio's recorded order, and drains temporary overlap without interrupting live
-work. Five is an execution-parallelism target, not a direction-count or fusion target. Directions
+priority, scientific meaning, or evidence polarity. At a free slot, Portfolio supplies a
+concrete command for the selected candidate and Root executes it. Portfolio drains temporary
+overlap without interrupting live work. Five is an execution-parallelism target, not a direction-count or fusion target. Directions
 share assets without fusing; fusion is proposed on demand only when their question, comparator,
 estimand, and next object are materially the same. Nothing in this paragraph waits for the owner,
 none of it is a §11.4 launch condition, and ladders already open continue.
@@ -191,8 +193,7 @@ final authority to a local model, and it must not stall the loop:
   and lists the item first in the audit ledger. The archived Pro decision, when it arrives,
   supersedes the provisional one at the next clean boundary.
 - **Direction and Portfolio tiers**: the direction parks at a clean boundary (everything
-  committed, runs detached, state recoverable from the repository) and Root drives another
-  direction. Nothing is decided provisionally at these tiers.
+  committed, runs detached, state recoverable from the repository) and Portfolio commands independent work through Root. Nothing is decided provisionally at these tiers.
 
 ## 4. Unattended operation
 
@@ -254,18 +255,23 @@ When the owner is absent the loop keeps running under a standing delegation (own
 
 ## 5. Capacity and resume
 
-Root maintains a target of five concurrently advancing top-level direction/DM chains (owner,
-2026-09-04 clarification). Count only the direction-level chains: Root, Transport, CM,
-implementer, reviewer, critic, verifier, operator, and detached experiment processes do not each
-consume another direction slot. When fewer than five chains can advance, Root uses Portfolio's current ordered
-runnable `ACTIVE` candidates; if none can run, Portfolio supplies the next ordering; when more than five overlap, it does not interrupt live
-work and stops refilling until the excess reaches clean boundaries. This working set is scheduling
-state only and never changes lifecycle.
+Portfolio plans a target of five concurrently advancing top-level direction/DM chains; Root
+executes its concrete commands and reports actual dispatch/return facts. Count only the
+direction-level chains: Root, Transport, CM, specialists and detached processes do not each
+consume another slot. Portfolio determines readiness, dependencies and replacements before
+sending commands. Root dispatches all independent commands, executes named return routes and
+reports exceptions or an empty executable queue; it does not select another direction or infer
+a new task. Portfolio handles those reports with the next command or a named wait dependency.
+Temporary overlap drains at clean boundaries without interrupting live work. The working set
+changes no lifecycle, scientific decision authority or budget. Ordinary in-scope DM/CM work and
+prewritten return routes continue without another owner approval. See docs/project/ROOT_OPERATIONS.md for
+the five-item command and report events.
 
 Within the direction working set, the repository imposes no fixed limit on concurrent implementer
-sessions or concurrent result-bearing runs (owner, 2026-09-04). Root and the DMs admit work
-according to actual runtime availability, dependency ownership, and the fresh per-invocation
-resource check in section 7. Runtime thread limits are implementation constraints, not
+sessions or concurrent result-bearing runs (owner, 2026-09-04). Portfolio plans assignments
+from actual runtime availability and dependencies; DM/CM apply the fresh per-invocation
+resource check in section 7 and report technical admission facts. Root executes the supplied
+command and reports an unavailable target or failed admission. Runtime thread limits are implementation constraints, not
 research-capacity policy: a nested DM -> CM -> implementer chain may need several threads per
 direction.
 

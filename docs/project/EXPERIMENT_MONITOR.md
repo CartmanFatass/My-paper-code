@@ -37,7 +37,7 @@ Supervisor evidence controls terminal status; SSH failure/PID absence alone is u
 Exit zero is a process fact, not scientific validity.
 
 On completion, failure, lost observation or a supplied bound/reminder, record the direct
-fact and evidence and notify the responsible DM/CM. Use `send_message` for a running native
+fact and evidence and notify the responsible DM/CM and Portfolio. Root follows the command's named collection/intake route; Portfolio handles any unlisted next task. Use `send_message` for a running native
 child and `followup_task` for an idle one. Reconcile uncertain delivery before retrying.
 Healthy unchanged state is silent: no per-poll messages, commits or sleep loops.
 

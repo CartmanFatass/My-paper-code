@@ -37,6 +37,12 @@ waiting and cleanup, provider binding and parent model unchanged. Root is the sh
 
 ## Input contract and authority
 
+Execute the operation named in the current command: authoring readiness is not a Send command,
+and a read-only reconciliation command does not include Send. A prewritten transport return
+route needs no additional planning vote. Accepted requests retain their observation/archive
+obligations; completion of another command does not cancel them. Report a missing operation or
+uncertain external acceptance to Portfolio while continuing other explicitly assigned work.
+
 Accept a request object containing `request_id`, `direction_id`, `direction_ids`,
 `workflow_node`, `conversation_binding_key`, `decision_authority=pro_final`, and
 exactly one body source:
