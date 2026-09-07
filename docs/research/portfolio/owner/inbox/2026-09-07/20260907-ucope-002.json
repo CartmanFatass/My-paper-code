@@ -24,7 +24,7 @@
     }
   ],
   "recommended": "a",
-  "auto_applied": null,
+  "auto_applied": "a",
   "dm_reason": "Matched exploratory data and two native references can distinguish usable information value from a weak comparison without diagnosing the historical null first.",
   "evidence": [
     "docs/research/candidates/ucope/UCOPE_POST_B01_RETURN_MODEL_QUESTION_PROPOSAL_20260907.md",
@@ -86,6 +86,14 @@
       "record": "docs/research/portfolio/PORTFOLIO.md",
       "state": "planned",
       "summary": "Portfolio issued P07-UCOPE-CARD-01 under the owner-directed planning role and existing object-tier delegation: prepare the proposed card and CM handoff. This is current-task sequencing, not owner ratification of a new investment, a new scientific budget, or an experiment dispatch; owner review remains asynchronous."
+    },
+    {
+      "at": "2026-09-07T13:32:53+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/decisions/2026-09-07-portfolio-plans-root-commands.md",
+      "record": "docs/research/candidates/ucope/UCOPE_SHARED_DATA_RETURN_MODEL_B02_SELECTION_INTAKE_20260907.md",
+      "state": "applied",
+      "summary": "P07-UCOPE-CARD-01 completed: the DM made the delegated object-tier selection and prepared the source-bound B02 card plus five-item CM implementation handoff. This applies the requested preparation only; no CM implementation, experiment or provider Send occurred, and no owner investment ratification is invented."
     }
   ]
 }
