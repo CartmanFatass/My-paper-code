@@ -5,9 +5,8 @@
 OWNER_DIRECT merger: existing Luna/xhigh Root directly observes experiments and transports Pro
 requests. Standalone Monitor and Transport have relinquished their current work. See
 `.codex/hmasd-monitor.toml`, `.codex/hmasd-transport.toml` and `docs/project/ROOT_OPERATIONS.md`.
-Current assigned live/unknown experiment handles: UCOPE
-`ucope-native-return-b01-seed6302` is live under the formal B01 assignment; seed6301 has completed
-and was handed directly to CM collection. `vspc1-reactive-b01-factor-run02` and
+Current assigned live/unknown experiment handles: none; UCOPE seeds6301/6302 are terminal and
+handed directly to CM collection. `vspc1-reactive-b01-factor-run02` and
 `vspc1-reactive-b01-generic-run02` are terminal, technically accepted and fully intaken by the
 DM. The single Root heartbeat also covers the
 explicit pending Pro rows below; experiment completion alone does not pause it.
@@ -51,9 +50,12 @@ The DM's formal assignment is recorded in
 `2026-09-07T07:47:56Z`, with `1024` joint updates, `262144` training episodes, `32768`
 evaluation episodes per policy, `8` contexts, `1024` JSONL rows, external wall `8.80 s` and
 peak RSS `510200 KiB`; log `/home/wu/.agent-tasks/ucope-native-return-b01-seed6301/task.log`.
-Seed `6302` is now accepted on the same source/cwd with fresh admission, `600 s`
-complete-process cap and log `/home/wu/.agent-tasks/ucope-native-return-b01-seed6302/task.log`;
-Root adopted its observation under the active shared heartbeat. No scientific polarity exists.
+Seed `6302` completed on the same source/cwd, exit `0` at `2026-09-07T07:48:55Z`, after fresh
+admission passed physical/effective `15664181248` bytes at `2026-09-07T07:48:45.967Z`; the
+supervisor log reports `COMPLETE` and runner wall `9.254238544 s` (supervisor duration `10 s`),
+with log `/home/wu/.agent-tasks/ucope-native-return-b01-seed6302/task.log`. Root's terminal
+fact was delivered to DM and CM; full output collection and paired technical acceptance remain
+with CM, then DM applies the frozen reading rule. No scientific polarity exists.
 
 ## Current Pro handover queue — 2026-09-06
 
