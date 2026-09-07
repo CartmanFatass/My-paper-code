@@ -64,6 +64,17 @@ intake is integrated at `99e587f6b`: valid complete B, `NR-B`, `Delta_bar=0`, bo
 and conditional SE `0`, all final modal roots `IMMEDIATE-4`, and no additional invocation.
 No live handle, retry or extra exposure remains.
 
+Owner-resumed refill dispatches on 2026-09-07 now cover four advancing native chains: DISH DM
+`/root/dm_amx_dish_seed101` is preparing the explicit B06 launch assignment from the accepted
+technical intake; VSPC1 DM `/root/dm_amx_vspc1_next` is preparing the next independent
+duration-value question from `effad6eb7`; RCLE DM `/root/dm_amx_rcle_a02` is using the A02 intake
+to process the missing post-A02 scientific decision or correct question (the archived response
+selected already-completed A02 and does not authorize a repeat); and CBSC DM
+`/root/dm_amx_cbsc_next` is processing the B04 technical dependency into a bounded CM objective
+or a precise missing decision. These are preparation/intake handoffs only: no new result-bearing
+invocation, retry budget or scientific conclusion has been added. UCOPE remains the fallback
+preparation route if any of these chains returns a concrete blocker.
+
 ## Current Pro handover queue — 2026-09-06
 
 Only these explicitly assigned requests require Root observation/reconciliation; do not replay
