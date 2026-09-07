@@ -1,6 +1,26 @@
 # CBSC next-question clean boundary
 
-## Current state after Convergence intake
+## Current state after the selected batch
+
+All three selected calls at integrated source
+`a3c2a49bf7002639d43a94f460b688d50c6c42dd` are terminal. Engineering passed5.86s;
+RAW completed53.46s with endpoint12.0375 versus REQUEST_ONLY12.375. STRUCT failed
+in host tape construction before model creation in6.38s; no formal pair exists.
+CM delivered/pushed the full technical record at
+`c925e524dc0765822a45ee123814345cb151975b`; artifacts and monitor closures are
+retained. The same CM is available for a separately selected bounded follow-up.
+
+The E0 result and scientific intake are
+`CBSC_OPPORTUNITY_CREDIT_B04_RESULT_EVIDENCE_20260906.md` and
+`CBSC_OPPORTUNITY_CREDIT_B04_INTAKE_20260906.md`. RAW's narrow measurements are
+accepted, including its deficit to the simple rule. STRUCT-minus-RAW and that
+prediction are unobserved; no zero or mechanism polarity is imputed. Current
+selected spend ends without retry, new diagnostic or successor. Root coordinates
+the concrete shared-runtime dependency; no direction PARK, recast, lifecycle or
+priority change is made by this handoff. The earlier checkpoints below remain
+historical and do not authorize another invocation.
+
+## Previous state after Convergence intake
 
 The full immutable response at `d3222ccb53f4986320f0015960ea997dccd8e856`
 selects **CBSC-OPPORTUNITY-CREDIT-B04** without a recast. The selected card,

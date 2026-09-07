@@ -1,5 +1,26 @@
 # Direction capability_bound_semantic_currentness: capability-bound semantic currentness
 
+## Accepted B04 partial observation — 2026-09-06
+
+B04's one completed RAW learner reaches12.0375 at update48, above its initial
+-1.68125 and the same-tape ALWAYS_REFRESH11.025, but below public REQUEST_ONLY
+12.375. On the32 recorded evaluation tapes it refreshes all660 active requests
+and serves all108 inactive requests. The latter actions each cost0.1 against
+the rule's fallback, accounting exactly for the0.3375 mean deficit. This supports
+a narrow observation of learned public-request sensitivity; a simple public-only
+rule still explains the relevant opportunity and performs better. It does not
+identify an effect of replacing GAE or a currentness-specific advantage.
+
+STRUCT has no formal policy measurement, so the selected B04 representation
+comparison remains unanswered. The two earlier zero representation gaps remain
+contrary evidence, without adding a fabricated third zero or pooling different
+learning packages. The surviving alternative is ordinary public-activity
+conditioning, not demonstrated semantic currentness. The next scientific
+discriminator remains a complete paired native-return observation on a
+prospectively bound credible execution path; no successor or recast is selected.
+See CBSC_OPPORTUNITY_CREDIT_B04_RESULT_EVIDENCE_20260906.md and
+CBSC_OPPORTUNITY_CREDIT_B04_INTAKE_20260906.md.
+
 ## Accepted next discriminator — 2026-09-06
 
 Convergence selects CBSC-OPPORTUNITY-CREDIT-B04: one new paired RAW/STRUCT
