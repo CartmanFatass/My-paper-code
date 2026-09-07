@@ -47,6 +47,15 @@ A command restricted to preparation and an empty observation queue do not stop o
 commands. Portfolio interprets object/family stops and selects the appropriate next task.
 It preserves lifecycle, priority and scientific authority; scheduling does not change them.
 
+At every completion or exception, Portfolio handles the entire current working set before
+returning: retain active assignments, resolve returned dependencies, and send all justified
+independent continuations/refills as one batch. A next command for the reporting direction
+alone is insufficient when other commands have ended or never reached their recipient.
+Name any unfilled slot's concrete dependency; do not create redundant work to reach five.
+Keep collection, intake and already-selected implementation/execution in one prewritten route
+where their boundaries are known. Routine technical returns on that route do not each require
+another Portfolio message. New scientific choices still belong to DM or the proper Pro node.
+
 ## Root's execution loop
 
 Read the current owner instruction and received commands. Read only their required inputs
@@ -58,6 +67,11 @@ and the applicable execution skill; the Portfolio candidate list is planning con
 2. Report the batch's accepted dispatches and any failed/missing target to Portfolio. Then wait
    for the assigned native returns and handle accepted experiment/Pro observation. Do not wait
    after the first dispatch while other independent commands remain unsent.
+   The report includes the whole current working set, not just the last command: actual native
+   recipient, running/returned/unavailable status, current task and unsent commands. Reuse a
+   fresh inventory until a native event changes it. If an old recipient is absent, try its
+   resumable identity; an unavailable identity is a dispatch gap, not a scientific blocker.
+   Apply an explicitly supplied replacement route or report that exact gap immediately.
 3. On a return, execute the command's explicitly named integration, collection or intake route.
    Forward the original result and evidence path/commit to Portfolio. Technical acceptance is
    supplied by CM and scientific interpretation by DM; Root reports those claims as attributed
@@ -86,10 +100,11 @@ cause is fixed. Unknown Send/launch acceptance requires observation, never a bli
 | Observed event | Root action |
 | --- | --- |
 | Batch dispatched | Send command labels, actual recipients and tool acceptance to Portfolio. |
-| Named task completed | Forward its original return and artifacts to Portfolio; execute only the prewritten return route. |
+| Named task completed | Forward its original return and artifacts; execute the prewritten return route and include the updated whole working-set state and any vacancy for Portfolio. |
 | Accepted experiment terminal | Notify its named CM for collection and Portfolio with process facts; DM intake follows the command. |
 | Matching Pro response archived | Return the full fixed-file/archive location to the declared DM/Portfolio; notify Portfolio of the command completion. |
 | Missing input, failed action, conflict, uncertain acceptance or extra-scope request | Send exact fact, evidence and affected command to Portfolio; continue unrelated commands. |
+| Assigned direction yields or becomes unavailable | Report its actual native state and remaining dependency immediately, without waiting for the other directions or the whole batch to finish. |
 | No executable command remains | Send completed/pending command states and next sender/event to Portfolio once. |
 
 A receipt states the command label, actual result/recipient, evidence and any missing fact in
@@ -98,6 +113,13 @@ an explicit wait dependency; Root does not repeatedly ask the same question. Rou
 messages preserve the recipient's model/effort. New Pro dispatch uses the Author-rendered
 settings. Root never sends an app message to itself. A native DM source with Root as app parent
 gets a local receipt forwarded to that DM through native collaboration.
+
+Current artifacts and exact return commits outrank an old native task summary. For example,
+a completed experiment's E0 return must not be replaced by its earlier implementation intake
+when identifying the next owner. A committed command, an intended dispatch and a currently
+running native assignment are three different facts; record the actual one. An implementation
+or execution stop applies only to its named command. A later explicit continuation supersedes
+that boundary within its stated scope, including authorized reversible staging repairs.
 
 ## One shared observation wake
 
