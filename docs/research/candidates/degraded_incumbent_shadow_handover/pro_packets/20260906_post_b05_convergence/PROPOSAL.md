@@ -15,9 +15,10 @@ a terminated CONTROL row. The two-pair +209.5 is descriptive only. The full inta
 all twelve new rows, adverse outcomes, costs and prediction failures.
 
 This supports keeping LOW_LR as a development candidate, not another LR seed by default.
-The next observation should decide whether an existing trained controller reaches an
-ordinary legal application under its **sampled action law**, with the resulting native
-consequences retained. It should not first explain every LR/Welford interaction. The
+The next observation should decide whether deploying a newly trained LOW_LR controller
+under its **sampled action law** improves complete native service over its modal action
+rule, retaining ordinary legal applications and their costs as companions. It should not
+first explain every LR/Welford interaction or qualify transfer support. The
 RETAIN/COPY/SHADOW quantities remain unestimated and the forecast-package branch stays ended.
 
 ## Concrete grounding and strongest alternative
@@ -40,11 +41,12 @@ complete the ordinary certificate/arrival/application chain, or sampling opens o
 only with unacceptable service/events. Large invalid-commit counts already make the latter
 credible. One observed transfer is a path fact, not beneficial transfer or shadow-source value.
 
-## Option A — recommended finite path measurement
+## Option A — finite path-measurement alternative
 
 Proposed `DISH-ORDINARY-SAMPLED-PATH-A06`, A/RECON. Use **both retained seed101 update16
-checkpoints**, CONTROL and LOW_LR, not a selected best checkpoint. No model initialization,
-optimization, label clones, new training seed, source fork, forced intent, longer horizon,
+checkpoints**, CONTROL and LOW_LR, not a selected best checkpoint. Load those models; create no
+new independently initialized controller, optimization, label clones, training seed, source fork,
+forced intent, longer horizon,
 condition search, best-of-many selection or early stopping at the first favourable trajectory.
 
 Use the same four recorded seed101 resets: TARGET/TERRAIN x K8/K4_TO_K12, speed4/slot0/block0.
@@ -76,33 +78,54 @@ this16-episode observation failed to reach a transfer. An event with service los
 events remains a path plus its cost. No event is automatically a usable source origin:
 the precise source-fork eligibility/time boundary has not been measured here.
 
-The next decision after A would concern the observed deployment path or a concrete source
-comparison, not automatic scaling or a mandatory B qualification. A is recommended because
-the immediate question is a saved-policy path fact. If the node instead wants comparative
-performance, select a real B directly and **drop A**, rather than treating A as its prerequisite.
+The next decision after A would concern the observed deployment path, not automatic scaling
+or a mandatory B qualification. This finite count leaves the native performance decision
+and source contrasts unresolved. DM therefore does not recommend buying it before the
+direct B below. It remains available if the node identifies a concrete path decision that
+would change with this observation; a presumed cheap or exact diagnostic is insufficient.
 
-## Option B — direct real learning alternative
+## Option B — recommended direct real learning comparison
 
-One new LOW_LR(3e-5) training instance, suggested seed113 under an explicitly new object RNG
-family, same corrected host and inherited16 updates. From its single final checkpoint,
+Proposed `DISH-SAMPLED-EXECUTION-B06`: one new LOW_LR(3e-5) training instance, suggested
+seed113 under an explicitly new object RNG family, same corrected host and inherited16
+updates. From its single final checkpoint,
 compare four deterministic rows with two sampled episodes per same four resets; include
 its own four zero-update raw deterministic reference rows inside that B. Thus one real
 learner,16updates,65536 ordinary transitions,512 optimizer steps and16evaluation episodes.
 The new comparator is the same learned checkpoint's modal action rule; this is **not a
 third CONTROL/LOW_LR pair**. No claim that sampling caused historical training transfers.
 
-Primary can be complete-panel sampled-minus-modal native service, averaged over the two
-declared samples within each condition, with24mean ticks as a proposed useful-change scale;
+Primary is complete-panel sampled-minus-modal native service, averaged over the two
+declared samples within each condition, with24mean ticks as the proposed useful-change scale;
 legal application, invalid commits, other events, energy and termination remain companions.
-The independent training unit is one new learned controller. This directly asks whether the
-sampled execution law is worth developing on a new trained instance, with source value
-still unestimated even if transfers occur. A new source intervention would need its own
-explicitly selected comparison; none is silently included here.
+The independent training unit is one new learned controller. Both execution policies use
+the same learned weights and frozen normalization; retraining a duplicate modal arm adds
+no comparator for this action-law question. Repeating a deterministic episode for every
+policy sample adds no stochastic information. The primary averages the complete two-sample
+mean minus that condition's modal return, then weights the four conditions equally. Keep
+individual samples, condition differences and all reference rows; no selected best sample
+or condition, survival-time normalization, new threshold or mode chosen after outcomes.
 
-This B pays real learning to answer a broader performance question. It gains a fresh
-training instance but does not resolve causal components of the LR effect. Choose it
-instead of A if that performance decision has greater value now. No initial-reference
-level or path count holds its launch.
+Both execution modes use the same new-seed resets, full1200tick range, native termination
+and zero-service remainder. Sampled episodes use the ordinary learned Gaussian/Bernoulli
+law at renewals, with a separate prospectively named policy RNG stream indexed by condition,
+sample, physical tick and semantic field. Weights/Welford are fixed for evaluation; fresh
+native/recurrent state starts each episode. No forced prepare/commit, private information,
+source fork or stopped-at-first-transfer evaluation. All other learning/native laws remain.
+
+This directly asks whether the sampled execution law is worth developing on a new trained
+instance. A useful mean with acceptable native costs would justify its bounded follow-up;
+an opposite sign supports retaining the modal default for this instance; a near-band or
+mixed result bounds the development claim. None supplies source value even if a transfer
+occurs, identifies which sampled action component matters, or buys another seed automatically.
+The initialization companion reports absolute learning performance without qualifying B.
+A source intervention would need its own explicitly selected comparison; none is hidden here.
+
+This B pays real learning to answer the actual performance decision and gains a fresh
+training instance. Its native return can change the candidate execution rule against the
+same-information modal null; A's path count alone cannot. It does not resolve causal
+components of the LR effect. DM recommends it directly, with **no preceding A**. No
+initial-reference level or path count holds its launch. The node can question this choice.
 
 ## Work, cost, scope and stop
 
@@ -147,11 +170,14 @@ comparison and reference. Neither comparator is claimed tuned or optimal.
 
 ## Prediction, limits and requested node choice
 
-DM prediction for A: neither saved checkpoint produces a legal transfer in its eight
-sampled episodes; service/event outcomes vary. The competing observation is a normal
-legal transfer from at least one saved controller, with all its costs retained. The
-finite prediction is deliberately modest; it is not a population probability forecast.
-Owner prediction is not taken; no new ladder prediction is frozen by this proposal.
+DM prediction for the recommended B: sampled-minus-modal service is <=-24mean ticks,
+because stochastic motion can lose the incumbent service achieved by the low-rate policy;
+this is a performance conjecture, not a proved noise effect. The competing observation is
+>=+24 with a native trade-off worth developing. A near-band or adverse result is retained.
+Ordinary transfer counts are uncertain and have no predicted minimum; no zero-event-rate
+or safety prediction is made. If the node instead selects A, DM's finite prediction is
+zero legal transfers in its16episodes. Owner prediction is not taken; no new ladder/card
+prediction is frozen by this proposal.
 
 Trace: degradation/renewal -> local observations and delivered messages of the physical
 UAVs -> role-owned active/shadow states -> sampled allowed motion/prepare/commit -> native
