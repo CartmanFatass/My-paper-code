@@ -701,3 +701,26 @@ the thin entry rewrites both parameter groups' `lr` in that payload before train
 rate read back from the trainer's checkpoint after every update. Implementation by Grok Build
 (`grok/dish-control-low-lr-b04-20260906`); no outcome authorizes another learning rate, a frozen
 normalization, reopening the package or a Portfolio change.
+
+## B04 result: a tenfold smaller AdamW rate loses less, the before/after loss repeats on seed 89 — 2026-09-06
+
+`DISH-CONTROL-LOW-LR-B04` ran complete on `wsl_4070` at `ef23d9270` (chain 432 s of 3,600 s; shared
+item 15.84 s, CONTROL 210 s, LOW_LR 206 s; 512 optimizer steps and 65,536 transitions per arm; the
+rate read back from the trainer checkpoint after every update was `[3e-4, 3e-4]` and `[3e-5, 3e-5]`
+at all sixteen updates). Rows (zero-update raw reference / CONTROL / LOW_LR): TARGET/K8 617 / 92 / 760,
+TARGET/K4_TO_K12 312 / 151 / 150, TERRAIN/K8 279 / 148 / 275, TERRAIN/K4_TO_K12 367 / 225 / 162; means
+393.75 / 154.0 / 336.75. **`Delta_LR = +182.75`** (rows +668, −1, +127, −63); **`D_CONTROL,new = −239.75`**;
+**`D_LOW_LR,new = −57.0`**; scale 24. CONTROL's TARGET/K8 row terminated natively at tick 684
+(`separation_below_15`), the first evaluation-row termination in the family; no legal transfer in any of
+the twelve evaluation episodes or in either arm's training; parameter displacement 8.62 (CONTROL) versus
+1.91 (LOW_LR). Card rows 2, 4 and 6 apply together: a relative signal with no adverse LOW_LR companion,
+but LOW_LR still below its initialization by more than the scale, mixed row signs with the mean dominated
+by the terminated condition, incumbent-only. Across seeds the CONTROL learner ends far below its own
+zero-update controller on both training instances (seed 73: −245.75; seed 89: −239.75) at different
+absolute levels (706.25 versus 393.75). The DM's primary prediction held in its mixed-rows form; the
+competing prediction (LOW_LR recovers the initialization) failed. Intake
+`DISH_CONTROL_LOW_LR_B04_RESULT_INTAKE_20260906.md` (evidence `control_low_lr_b04_20260906/`, checkpoints
+retained on the node); accepted as a valid complete B/EXPLORE result under the unattended delegation;
+the successor question (an evaluation-across-updates B on seed 89, a second seed of the LR pair, both
+combined, the source question, or park) is put to `em:dish:convergence` through
+`pro_packets/20260906_post_b04_convergence/`. No card is frozen and nothing is launched from this record.

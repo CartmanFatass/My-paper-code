@@ -211,3 +211,26 @@ registered step function reads module constants and has no norm argument, so the
 its own parameterised step (prescribed and measured delta norms recorded) and never calls the
 registered one. Implementation by Grok Build (`grok/rcle-tbcfv-b02-20260906`). B01 stays valid,
 unconsumed and mixed/undecided; its seed uncertainty stays unresolved.
+
+## B02 result: forty times the step moves the parameters and not the service — 2026-09-06
+
+`RCLE-TBCFV-B02-NORM-0p02` ran complete on `wsl_4070` at `8ad01cb9e` (chain 152.6 s of 1,500 s; C1P1
+71.5 s with the 2,048-episode initialization panel, FLEX 71.2 s, reference 1.5 s; every one of the 400
+updates records the prescribed 0.02 and a measured delta norm of 0.02; final displacement 0.473 in both
+arms against B01's 0.0051). **`ΔU_B02 = −0.000002` (SE 0.000025)**: U 0.6953 / 0.6953 on 8→12 and
+0.7187 / 0.7187 on 12→8 (C1P1 / FLEX); **`G_U` +0.0014 and +0.0025 per path for both arms** against the
+initialization (0.6967 / 0.7212); **τ = 40 in all 2,048 held-out episodes** of the initialization panel
+and of each arm (`Δτ_B02 = 0`). Eight-cell U 0.7072 (initialization), 0.7058 (C1P1), 0.7057 (FLEX);
+reference 0.2456 / 0.3187 on the same panel. The arms are no longer bit-identical (14 of 2,048 paired
+scenarios differ, by at most a few 10⁻³) and the raw gradient norm fell twenty-fold (0.68 → 0.03) under
+the constant-norm step while the per-update training service stayed flat (0.2869 → 0.2871). Card row 4:
+this 0.02 / 200 movement attempt gave no useful learning signal; end this spend; no automatic longer run,
+step sweep or warm-started heads; not a proof that normalisation is wrong or the host unlearnable. Pro's
+working prediction (one package down by ≈ 0.05) did not happen; its competing prediction (both arms barely
+improve) held; the DM's `G_U ≥ 0.05` prediction failed. Intake
+`RCLE_TBCFV_B02_NORM_0P02_RESULT_INTAKE_20260906.md` (evidence `b02_tbcfv_norm0p02_20260906/`, both
+parameter files retained); accepted as a valid complete B/EXPLORE result under the unattended delegation;
+the successor question (a gradient-decomposition A on the saved state, a baseline-law B, a single-arm
+exposure ladder, one more magnitude rung, or park) is put to `em:roster_consistent_latent_exploration:innovator`
+through `pro_packets/20260906_post_b02_innovator/`. B01 and B02 stay valid and unconsumed; no card is frozen
+and nothing is launched from this record.
