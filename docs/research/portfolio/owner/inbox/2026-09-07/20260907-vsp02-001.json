@@ -1,0 +1,81 @@
+{
+  "id": "20260907-vsp02-001",
+  "created": "2026-09-07T14:14:34-07:00",
+  "direction": "vsp_02",
+  "tier": "portfolio",
+  "kind": "portfolio",
+  "title": "VSP02下一问准备：固定队友策略变化后的Adam适应",
+  "context": "P11只完成下一问准备。现有终端贪心净余量为0，旧实验没有成员变化语义。建议另行安排一次Convergence请求准备，评估是否明确转向固定成员下的队友策略变化。当前未选择后继、重铸、实验或Pro发送。",
+  "options": [
+    {
+      "key": "a",
+      "label": "另行安排Convergence问题准备",
+      "consequence": "方向节点决定是否明确改变研究范围，仍需选定具体任务和预算；本项不授权实验。"
+    },
+    {
+      "key": "b",
+      "label": "交回任务位置且暂不设后继",
+      "consequence": "保留ACTIVE/LOW及原成员年龄问题，不重跑旧五根研究。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": null,
+  "dm_reason": "有限预算的原生团队回报是可判定的下一问，方向范围变化须显式裁决。",
+  "evidence": [
+    "docs/research/candidates/vsp_02/VSP02_P11_NEXT_QUESTION_PREPARATION_INTAKE_20260907.md",
+    "docs/research/candidates/vsp_02/VSP02_GUIDANCE_A1_HEADROOM_CENSUS_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-07.md#L81",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": {
+    "question": "是否把VSP02的这一有限下一问交给Convergence：固定成员时，队友改变策略后清空Adam状态是否改善有限训练预算内的团队回报？",
+    "changes_if_approved": [
+      {
+        "target": "VSP02后续任务",
+        "from": "P11仅完成下一问准备，无后继对象",
+        "to": "另行安排一次Convergence请求准备，由方向节点决定是否明确改变研究范围；不直接授权实验"
+      }
+    ],
+    "if_refused": "交回空闲任务位置，不开后继、不重跑旧研究；ACTIVE/LOW和原成员年龄问题保持现状。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/vsp_02/VSP02_GUIDANCE_A1_HEADROOM_CENSUS_INTAKE_20260904.md",
+        "quote": "The surviving alternative is transient optimization-path value on a host where terminal mapping is already easy.",
+        "why": "终点已饱和并不排除学习过程中的优化器差异，下一问可直接测有限预算回报。"
+      },
+      {
+        "path": "docs/research/candidates/vsp_02/VSP02_P11_NEXT_QUESTION_PREPARATION_INTAKE_20260907.md",
+        "quote": "After one predeclared policy change by an action-owning teammate, does resetting the continuing learner's complete Adam state improve or worsen sampled native team return over a fixed adaptation budget, compared with ordinary Adam-state carry from the same learned policy?",
+        "why": "把优化目标变化系于一个实际行动的队友，并明确比较清空与保留Adam。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/vsp_02/VSP02_GUIDANCE_A1_HEADROOM_CENSUS_INTAKE_20260904.md",
+        "quote": "The current host does not instantiate the proposed roster-age question.",
+        "why": "旧结果没有真实加入、退出、重入或身份保持语义，不能作为成员恢复证据。"
+      },
+      {
+        "path": "docs/research/candidates/vsp_02/VSP02_P11_NEXT_QUESTION_PREPARATION_INTAKE_20260907.md",
+        "quote": "The strongest surviving explanation is a generic optimizer warm-start/reset transient, unrelated to any special multi-agent benefit.",
+        "why": "即使新的局部回报改善，也未必说明多智能体特有机制或算法创新。"
+      }
+    ],
+    "uncertainty": [
+      "尚未选择具体任务、旧新队友策略、可复用学习器和预算，不能交给CM实现或运行。",
+      "未来问题只研究固定成员下的队友策略变化，是否值得改变方向范围须由Convergence裁决。",
+      "终端贪心净余量仍为0；连续轨迹差异的方向不稳定，不能预言新实验胜负。"
+    ],
+    "cost": {
+      "compute": "当前新增环境、优化、评估和实验调用均为0。候选为2个独立训练前缀×2个优化器分支；具体训练量和墙钟成本未测。",
+      "owner_time": "可异步审阅，无需等待回复",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "If Portfolio allocates a continuation, commission one preparation-only Convergence request on em:vsp_02:convergence asking whether this explicit scope change is worthwhile and, if accepted, fixing one population/teammate-policy pair and smallest B question.",
+    "source": "docs/research/candidates/vsp_02/VSP02_P11_NEXT_QUESTION_PREPARATION_INTAKE_20260907.md"
+  },
+  "starred": true
+}
