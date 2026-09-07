@@ -73,3 +73,34 @@ Ordinary dispatch, integration and progress remain log-only. Report a real repai
 an exhausted route or a ready dependency requiring the next command. Apply the three-batch
 comparison only when a genuinely new engineering code spec is later assigned; same-arm
 corrections reuse the original native/headless session and worktree.
+
+## P12-UCOPE-B05-CORRECTED-PAIR-01 (accepted correction continuation)
+
+Correction986515323, integrated690a597a2, establishes original6701 shell parsing failed before
+admission/runner work, absent both output roots, unchanged source, and syntax/argument identity.
+P12 now supersedes P11's repair-preparation stop for the original B05 pair only. Reuse collector
+`/root/cm_ucope_p11_b05_collect`, DM `/root/dm_ucope_p10_pair_prep` and original UCOPE checkout.
+Read `UCOPE_SHARED_DATA_RETURN_MODEL_B05_TRANSPORT_CORRECTION_20260907.md` Smallest correction /
+Acceptance and unchanged boundaries alongside the original B05 card§§2–5 and handoff§2.
+
+Root stages the committed687-byte LF `b05_transport_correction_20260907/seed6701-command.sh`
+at the record's proposed `/home/wu/hmasd-inputs/ucope-b05-seed6701-command-20260907.sh`, preserving
+SHA25624ab424d7868d229b0a9c3375b9feb1560140387dbdb1f0e46817eb23de1f78e. Use distinct handle
+`ucope-shared-return-b05-seed6701-p12-lf-20260907`, whose command is `/bin/bash` followed by
+that staged path. Reconcile no prior acceptance, preserve the failed original handle, and let
+the exact payload perform its adjacent fresh node admission and original runner. No source or
+scientific argument changes:71433bfabb70481def4329e622a838fa0cd9eeec,512batches, complete three
+policies, binary64 scalar/RNG order, all frozen metrics and signs, original remote cwd.
+
+The original B05 second dataset6702 follows technical reconciliation of6701 irrespective of
+scientific sign, under P11's original dependency. Before its dispatch, the same CM prepares the
+corresponding exact frozen6702 decoded command as an LF artifact and performs the same local
+syntax/argument check; this existing correction needs no new model-comparison enrollment.
+Root stages its committed exact bytes and uses distinct handle
+`ucope-shared-return-b05-seed6702-p12-lf-20260907` with the same file-delivery route. If the
+decoded frozen bytes or semantics cannot be matched, return the precise gap instead of launching.
+No extra pilot, third dataset, hidden retries or changed cap. Preserve600s per complete dataset
+and1200s pair total, including setup through exit; the failed original parsing attempt remains
+reported separately as zero scientific exposure. A new failure/admission refusal/uncertain effect
+holds the affected route and returns exact facts. CM collects both outcomes; DM produces full
+pair intake/brief. This is the same object after a demonstrated delivery defect, not a new B.
