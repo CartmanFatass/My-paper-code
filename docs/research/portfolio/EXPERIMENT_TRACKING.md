@@ -2,7 +2,7 @@
 
 ## Current route — OWNER_DIRECT 2026-09-06
 
-The native tracker is retired. DM/CM -> independent Luna/low app task -> research Root -> native DM/CM. See `.codex/hmasd-monitor.toml` and `docs/project/EXPERIMENT_MONITOR.md`. Native subagents can dispatch directly to app tasks (owner confirmed). Root heartbeat is removed; the monitor owns its heartbeat. Current assigned live/unknown handles: `dish_b05_seed101_focused_20260906` on `wsl_4070`. Historical handles and capability restrictions below are preserved evidence, not current assignments or routing rules.
+The native tracker is retired. DM/CM -> independent Luna/low app task -> research Root -> native DM/CM. See `.codex/hmasd-monitor.toml` and `docs/project/EXPERIMENT_MONITOR.md`. Native subagents can dispatch directly to app tasks (owner confirmed). Root heartbeat is removed; the monitor owns its heartbeat. Current assigned live/unknown handle: `dish_b05_seed101_control_20260906` on `wsl_4070`. Historical handles and capability restrictions below are preserved evidence, not current assignments or routing rules.
 
 ## Historical record
 
