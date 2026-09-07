@@ -3,6 +3,19 @@ Binding structure: systems / information flow.
 
 # CBSC-SYSTEM-RUNTIME-A02 — prepared engineering path
 
+**Current status — execution selected, 2026-09-07:** Portfolio command
+`P07-CBSC-A02-EXEC-01`, delivered by Root, supersedes the earlier preparation-only
+stop. The same CM is assigned literal command preparation plus the sole candidate
+invocation within this card's unchanged path, one-install/one-import and 600/540s
+bounds. If the supervisor cannot express the selected route, return that exact
+gap without an invocation. No B04 retry or scientific call is selected. The
+[execution selection](CBSC_SYSTEM_RUNTIME_A02_SELECTION_20260907.md) records
+delegation, dispatch and return responsibilities. References below to unspent,
+unauthorized or preparation-only work describe the prior preparation command;
+this paragraph changes only that execution state, not the preserved bounds.
+
+## Earlier preparation boundary
+
 **Status: preparation only under P07-CBSC-INTAKE-REFILL-01.** This card and the
 handoff below recommend one next path; no installation, import, process or new
 runtime allocation is selected for execution by the current command. Portfolio
