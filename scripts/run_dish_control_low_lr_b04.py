@@ -112,6 +112,7 @@ def main(*, seed=89, object_name="DISH-CONTROL-LOW-LR-B04"):
 
     previous = signal.signal(signal.SIGALRM, timeout)
     signal.setitimer(signal.ITIMER_REAL, max(0.001, STARTED + allowance - time.perf_counter()))
+    shared_publication_seconds = 0.0
     try:
         from experiments.candidates.degraded_incumbent_shadow_handover.control_low_lr_b04.study import (
             new_progress, run_arm, paired_result, exposure, planned_cost,
@@ -120,10 +121,12 @@ def main(*, seed=89, object_name="DISH-CONTROL-LOW-LR-B04"):
         run_arm(args.arm, args.out, STARTED + allowance, result, args.shared,
                 seed=args.seed, object_name=object_name)
         if args.arm == "LOW_LR":
+            shared_publication_started = time.perf_counter()
             control = json.loads(args.control_summary.read_text(encoding="utf8"))
             shared_summary = json.loads((args.shared / "summary.json").read_text(encoding="utf8"))
             result["paired_primary"] = paired_result(
                 control, result, shared_summary, seed=args.seed, object_name=object_name)
+            shared_publication_seconds += time.perf_counter() - shared_publication_started
         result["planned_cost"] = planned_cost()
     except Exception as error:
         result["status"] = "INCOMPLETE"
@@ -141,7 +144,11 @@ def main(*, seed=89, object_name="DISH-CONTROL-LOW-LR-B04"):
             result["status"] = "INCOMPLETE"
             if "paired_primary" in result:
                 result["paired_primary"]["status"] = "INCOMPLETE_PAIR"
+        publication_started = time.perf_counter()
         publish(args.out, result)
+        if args.arm == "LOW_LR":
+            shared_publication_seconds += time.perf_counter() - publication_started
+    result["shared_reduction_publication_seconds"] = shared_publication_seconds
     result["completed_wall_seconds"] = time.perf_counter() - STARTED
     result["charged_wall_seconds"] = result["completed_wall_seconds"] + args.shared_preparation_seconds / 2
     if result["charged_wall_seconds"] >= 1800:

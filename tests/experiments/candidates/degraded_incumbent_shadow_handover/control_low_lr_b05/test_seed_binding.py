@@ -12,7 +12,7 @@ from experiments.candidates.degraded_incumbent_shadow_handover.control_low_lr_b0
 from experiments.candidates.degraded_incumbent_shadow_handover.control_low_lr_b05 import study
 
 
-def test_seed101_reaches_shared_train_eval_and_primary(monkeypatch, tmp_path):
+def test_seed101_reaches_shared_train_eval_and_primary(monkeypatch, tmp_path, capsys):
     from scripts.run_dish_control_low_lr_b04 import main
 
     expected = hashlib.sha256(b"DISH-CONTROL-LOW-LR-B04/seed/101").digest()
@@ -89,6 +89,10 @@ def test_seed101_reaches_shared_train_eval_and_primary(monkeypatch, tmp_path):
             argv += ["--control-summary", str(tmp_path / "CONTROL" / "summary.json")]
         monkeypatch.setattr(sys, "argv", argv)
         assert main(seed=study.SEED, object_name=study.OBJECT) == 0
+        stdout = json.loads(capsys.readouterr().out.splitlines()[-1])
+        if arm:
+            assert stdout["shared_reduction_publication_seconds"] >= 0
+            assert (stdout["shared_reduction_publication_seconds"] > 0) == (arm == "LOW_LR")
         saved = json.loads((output / "summary.json").read_text())
         assert (saved["seed"], saved["object"], saved["master_hex"]) == (101, study.OBJECT, expected.hex())
         if arm:
