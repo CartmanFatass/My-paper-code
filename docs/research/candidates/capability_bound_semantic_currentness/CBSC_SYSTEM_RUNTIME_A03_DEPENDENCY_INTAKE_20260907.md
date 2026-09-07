@@ -114,3 +114,47 @@ running and VSPC1 completed awaiting integration. Issued work and observed live
 chains are separate; Root owns reconciliation and any working-set replacement.
 
 Chinese brief: [dependency observation](../../portfolio/owner/briefs/capability_bound_semantic_currentness/2026-09-07_SYSTEM-RUNTIME-A03-DEPENDENCY.md).
+
+## Actual dispatch, source acceptance and clean-boundary return
+
+The original CM received the five-item source assignment by native follow-up after
+selection commit `eb2f6aaf5707b802ef304d243eb0c448b026fbba` was pushed. It returned
+the shared edit/index window and source commit
+`8c654a625c1659d5abaf733ead0a5fda36091a94`, pushed and tracked-clean. No new
+authoring branch/worktree or specialist was created for this small command.
+
+DM inspected the actual 131-line `scripts/prepare_cbsc_system_runtime_a03.sh`
+and complete [CM record](CBSC_SYSTEM_RUNTIME_A03_CM_RECORD_20260907.md). The source
+uses all 21 selected archives and 23 pins; two sequential no-retry body requests;
+one offline, binary-only, full-dependency uv installation; and one candidate
+metadata process/publication. The existing proxy-setup HEAD is inside the same
+timed call, not a wheel-body request. Fresh preflight precedes candidate creation,
+original archives are read-only, and package cache/TMP output is task-local.
+Metadata explicitly reports actual interpreter/build/package/path fields and
+keeps its match reading separate from complete-cap conformance.
+
+CM's exact-LF `bash -n` and parsing of both embedded Python blocks passed without
+executing the payload. Its initial Windows text-mode pipe caused a CRLF syntax
+error; the exact source-byte check resolved that check-input defect. DM did not
+repeat those checks. No tensor/device probe, scientific call, hash/currentness
+guard, retry framework or other unrequested section 4 machinery was found.
+
+**Object / technical decision:** (a) accept source conformance and return its
+integrable command; (b) return a material source gap. Recommend/select (a).
+Owner-delegated decision (unattended, 2026-09-03 instruction): (a).
+This accepts preparation source only; no A03 admission, packaging, acquisition,
+venv, installation, import, accepted handle or readiness result exists.
+
+Root received the source acceptance and exact CM-record pointer. Its reported
+main `.git/index.lock` creation failure (`Permission denied`) still prevents the
+P08-required integration. The only unbound execution argument is the integrated
+launch SHA; Root can supply it after integrating the named accepted commits.
+The same CM then retains the sole admitted invocation and collection assignment.
+No further owner confirmation, new budget, extra smoke or launch is inferred.
+
+At this final native snapshot, UCOPE and this returning CBSC DM were running;
+CBSC CM, VSPC1, DISH, VSP03 and RCLE were completed. Their reported boundaries
+were respectively accepted-source integration, accepted-repair integration,
+prepared Pro transport, publication permissions, and missing post-A02 response.
+This is an observed task-status snapshot, not a five-live-chain claim or a
+Portfolio lifecycle/capacity decision. Root owns whole-working-set routing.
