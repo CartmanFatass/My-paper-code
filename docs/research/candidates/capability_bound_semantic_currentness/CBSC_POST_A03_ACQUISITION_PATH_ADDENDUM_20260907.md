@@ -199,3 +199,73 @@ for future selection. It has concrete alternative endpoint support and preserved
 complete work accounting, with delivery/timing uncertainty explicit. This does not
 recommend an automatic A03 retry or infer scientific polarity. Writer/index
 ownership returns to DM; Root integrates only this named addendum.
+
+## DM assessment and recommendation — P09 preparation only
+
+The original CM accepted the native P09 follow-up in the same shared checkout
+and returned the proposal at `72e8bda2cad6e6b981b2a8625f878aa8e35e40ac`.
+DM read the complete proposed command and its retained `alternative_headers.json`
+against the P09 handoff's acceptance, plus the earlier `availability.json`.
+One metadata-accuracy correction was returned to the same CM and completed at
+`93520a182cbe7324d415457d3c2d5a19bd01daf3`: the old preflight revision is now
+named `preflight_source_sha`, not falsely presented as the new inline payload's
+source revision. No behavior, endpoint, package or bound changed in that correction.
+DM inspected that exact diff without repeating CM checks or network requests.
+
+Applied the preparation rule: one exact prospective command must account for
+retained partial state, both missing bodies, installation/import/publication and
+a complete <=600s cap, and explain its material difference, evidence and uncertainty.
+This addendum meets that preparation requirement. It is not runtime acceptance.
+
+The actual metadata evidence has two successful HEAD reads with final URLs still
+on `download.pytorch.org`, AmazonS3/CloudFront headers, and exact selected lengths.
+The retained R2 headers identify Cloudflare. This is concrete support for a
+different delivery endpoint; no inference about successful complete bodies or
+unique physical infrastructure is required. The two transfer lengths sum to
+1,111,959,613 bytes by stdlib/Decimal calculation. The body-only 540-second
+rate would be1.96379134MiB/s with zero other work, not a measured rate or cost proof.
+
+Strongest contrary evidence: A02 also had body failures on `download.pytorch.org`
+for other wheels, including `nvidia-cusolver-cu11`. The retained A02 install log
+names its request at lines851–852 and terminal decoding/TLS failure at889–897:
+`C:/Projects/HMASD-worktrees/cm-cbsc-runtime-a02-20260907/temp/directions/capability_bound_semantic_currentness/exp/system_runtime_a02_20260907/install.log`.
+That different online uv/client/artifact attempt does not invalidate the present
+curl/Torch/Triton candidate, but it prevents presenting CloudFront or the unchanged
+proxy as known reliable. Another incomplete body remains a credible outcome.
+Changing the delivery endpoint is not evidence that R2 caused A03 or that this
+proposal repairs B04.
+
+The prospective command reuses exactly21 named containers, excludes the retained
+partial Torch file and allocates both complete bodies inside its one envelope.
+It retains all23pins, full offline resolution, adjacent actual-node admission,
+one metadata publication/readback and the600/540s complete-stop semantics. It
+introduces no runtime source guard, retry or acquisition phase outside the cap.
+None of the proposed paths, links, environment, bodies or metadata was created
+during this preparation. Actual work was two bounded HEAD reads and static
+preparation; body/installation/import/scientific counts remain zero.
+
+**Options for later selection:** (a) use this one changed-endpoint command as the
+next bounded candidate; (b) yield the acquisition dependency without another call.
+**DM recommendation: (a).** A real endpoint alternative and the already materialized
+inputs make this a sufficiently concrete candidate to return for consideration.
+The proposal does not require a speed probe or identical-wheel proof before that
+decision. Its complete runtime remains unknown, and yielding remains a Portfolio
+allocation option. Known A01–A03 command work is740.50s with no ready candidate;
+this preparation is not presumed cheaper than B04's53.46s RAW learning run.
+The current-host tuned headroom record remains absent. Those facts limit the
+investment case; they do not turn an untested delivery route into a scientific
+negative or impose it as a prerequisite on unrelated learning.
+
+**Executed choice: preparation only under P09-CBSC-NEXT-PATH-02.** Neither later
+option is selected for execution by this return. No A04 card, invocation budget,
+scientific prediction/result, direction disposition or Portfolio change is created.
+The existing A03 intake, Chinese brief and owner-item outcome remain authoritative.
+Current owner reviews were empty; no intervention or new owner reply is inferred.
+Any later object selection must prospectively bind this committed command and its
+inputs under the existing DM/Portfolio route, before an actual admitted call.
+
+Root receives this single named addendum for integration and forwards the concrete
+proposal/recommendation to Portfolio. The preparation task is complete; CM has
+returned the editing/index window, and no live process or pending acquisition
+remains. The next discriminator, if later selected, is the complete-body plus
+installation/import outcome itself, with every failure retained.
