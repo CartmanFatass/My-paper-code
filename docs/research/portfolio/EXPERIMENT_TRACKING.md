@@ -5,7 +5,14 @@
 OWNER_DIRECT merger: existing Luna/xhigh Root directly observes experiments and transports Pro
 requests. Standalone Monitor and Transport have relinquished their current work. See
 `.codex/hmasd-monitor.toml`, `.codex/hmasd-transport.toml` and `docs/project/ROOT_OPERATIONS.md`.
-Current assigned live/unknown experiment handles: none; UCOPE
+Current assigned live/unknown experiment handles: VSP03
+`vsp03-b02-p09-20260907` is running on `wsl_4070` from exact source
+`00ebefa5823dbb41e64aed11b90ba26a8ff97020` in detached cwd
+`/home/wu/hmasd-worktrees/vsp03-b02-p09-00ebefa5823dbb41e64aed11b90ba26a8ff97020`; its supervisor
+log is `/home/wu/.agent-tasks/vsp03-b02-p09-20260907/task.log`, and the selected output root is
+`/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b02_seed4_p09_20260907`. The single frozen
+120-second invocation was accepted after bounded source staging; fresh admission and terminal
+facts are pending. UCOPE
 `ucope-shared-return-b02-seed6401-20260907` is terminal and remains in CM collection; the repaired VSPC1 service-allocation
 pair is terminal and fully intaken at main `f22482b03`. DISH
 `dish_b06_seed113_20260907_run01` on `wsl_4070` (source `373d18720`) exited 0 at
@@ -15,8 +22,8 @@ handed directly to CM collection. `vspc1-reactive-b01-factor-run02` and
 `vspc1-reactive-b01-generic-run02` are terminal, technically accepted and fully intaken by the
 DM. The single Root heartbeat also covers the
 explicit pending Pro rows below; experiment completion alone does not pause it.
-The shared Root heartbeat remains ACTIVE while this UCOPE terminal return, the return and the
-preparation-only P07-VSPC1-COMPLETION-REQUEST-01 are delivered and reconciled. Historical
+The shared Root heartbeat remains ACTIVE while VSP03 is observed and these terminal returns and
+pending Pro rows are delivered and reconciled. Historical
 handles and old routing sections below are retained evidence, not current assignments.
 
 UCOPE B02 seed6401 was accepted once on `wsl_4070` from source
