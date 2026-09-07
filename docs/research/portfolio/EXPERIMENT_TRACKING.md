@@ -33,6 +33,11 @@ next runnable recorded object is DISH B06 implementation preparation, which has 
 the existing DISH DM; it is not yet a result-bearing launch. No scientific polarity follows from
 the prior no-op or from an unpaired arm.
 
+DISH B06 implementation is now concretely dispatched: the existing DM accepted CM child
+`/root/dm_amx_dish_seed101/cm_am_dish_seed101` against source `fde638f9c`; the child is running
+the bounded implementation, focused checks and independent review. No B06 experiment launch is
+authorized or reported. Dispatch evidence is recorded in audit row118 and commit `2b09e9209`.
+
 ## Current Pro handover queue — 2026-09-06
 
 Only these explicitly assigned requests require Root observation/reconciliation; do not replay
