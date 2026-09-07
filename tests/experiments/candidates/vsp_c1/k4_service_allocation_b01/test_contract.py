@@ -229,7 +229,8 @@ def synthetic_summary(arm, endpoint, points=None):
     summary = {"status": "complete", "arm": arm, "seed": 9402,
                "endpoint_episodes": ex.endpoint_episodes(consequences), **ex.evaluation_result(consequences)}
     if points is not None:
-        summary["budget"] = {"seed": 9402, "updates": 256}
+        summary["budget"] = {"seed": 9402, "updates": 256, "train_per_period": 8,
+                             "eval_per_period": 128, "checkpoints": (0, 64, 128, 192, 256)}
         summary["curve"] = [{"update": u, "period_means": {"2": p[0], "6": p[1]}, "mean_J": sum(p)/2}
                             for u, p in zip((0, 64, 128, 192, 256), points)]
     return summary
@@ -241,7 +242,9 @@ def test_primary_publication_three_contrasts_auc_initial_and_missing_rule(tmp_pa
     generic = synthetic_summary("GENERIC", {"2": [0.7, 0.4], "6": [0.5, 0.45]},
                                 [(0.5, 0.4), (0.58, 0.5), (0.7, 0.55), (0.6, 0.51), (0.55, 0.475)])
     rule = synthetic_summary("LQ-EXCLUDE", {"2": [0.6, 0.55], "6": [0.55, 0.3]})
-    factor, generic, rule = [rep.write_read(tmp_path / (s["arm"] + ".json"), s) for s in (factor, generic, rule)]
+    factor = rep.write_read(tmp_path / "FACTOR.json", factor)
+    assert isinstance(factor["budget"]["checkpoints"], list)
+    assert isinstance(generic["budget"]["checkpoints"], tuple)
     partial = rep.publish_comparison(tmp_path / "pair_without_rule.json", factor, generic)
     full = rep.publish_comparison(tmp_path / "pair.json", factor, generic, rule)
     assert partial["status"] == "learner_contrast_only" and full["status"] == "complete"
@@ -263,7 +266,10 @@ def test_primary_publication_three_contrasts_auc_initial_and_missing_rule(tmp_pa
     assert full["initial_to_final"]["FACTOR"]["mean"] == pytest.approx(-0.04)
     assert full["initial_relative_to_rule"]["FACTOR"]["mean"] > 0
     assert set(full["endpoint_episodes"]) == {"FACTOR", "GENERIC", "LQ-EXCLUDE"}
-    assert rep.compare(factor, {"status": "running"})["status"] == "incomplete"
+    different = deepcopy(generic)
+    different["budget"]["checkpoints"] = (0, 64, 192, 128, 256)
+    with pytest.raises(ValueError, match="same fixed budget and seed"):
+        rep.compare(factor, different)
 
 
 def c(mean, d2=None, d6=None):
