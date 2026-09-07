@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "request_id": "2026-09-06-vsp03-shared-service-convergence-01",
+  "direction_id": "vsp_03",
+  "conversation_binding_key": "em:vsp_03:convergence",
+  "conversation_id": "6a9cbb9d-374c-83e8-b600-23d3a8033a69",
+  "provider_url": "https://chatgpt.com/c/6a9cbb9d-374c-83e8-b600-23d3a8033a69",
+  "prompt_sha256": "5b074be4732f30d5a3e4b00c23bd66534c4c71f2bee09f90e4f4a47e02067dfa",
+  "response_sha256": "1f5703b56f4fb967281be57b847f955a9ea39c958dbeb733784822b517b3bb91",
+  "prompt_bytes": 556,
+  "response_bytes": 864,
+  "user_turn_id": "f2209038-4d39-48c2-b3b5-2d71745a5293",
+  "assistant_turn_id": "cc4e8e86-66c8-4c1c-a3e8-8c9f3fbea129",
+  "response_identity": "MISMATCH",
+  "send_state": "CONFIRMED_FOR_B02_USER_NODE",
+  "archive_status": "ARCHIVED_MISMATCH",
+  "scientific_decision_formed": false,
+  "heartbeat": "shared Root heartbeat remains active for RCLE and any other pending Pro work",
+  "no_duplicate_send": true,
+  "captured_at_utc": "2026-09-07T07:19:44.430415Z",
+  "recorded_at_utc": "2026-09-07T07:19:44.430415Z"
+}
