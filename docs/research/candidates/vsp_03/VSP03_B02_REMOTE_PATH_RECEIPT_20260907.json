@@ -1,0 +1,22 @@
+{
+  "operation": "read-only configured remote supervisor help discovery",
+  "observer": "CM /root/dm_amx_vsp03_next/cm_vsp03_b02",
+  "cwd": "C:/Projects/HMASD",
+  "command": "ssh -o BatchMode=yes -o ConnectTimeout=10 hmasd-wsl-node '/usr/local/bin/agent-task --help'",
+  "raw_tool_result": {
+    "chunk_id": "fc457d",
+    "wall_time_seconds": 2.914331,
+    "exit_code": 1,
+    "original_token_count": 19,
+    "output": "ssh: Could not resolve hostname hmasd-wsl-node: No such host is known. \r\n"
+  },
+  "remote_connection_established": false,
+  "remote_staging_attempted": false,
+  "admission_attempted": false,
+  "supervisor_launch_attempted": false,
+  "accepted_handle": null,
+  "scientific_invocations": 0,
+  "proposed_handle": "vsp03-b02-p09-20260907",
+  "published_source_sha": "00ebefa5823dbb41e64aed11b90ba26a8ff97020",
+  "disposition": "PATH_UNAVAILABLE; no retry until external route state changes per Root/DM stop"
+}

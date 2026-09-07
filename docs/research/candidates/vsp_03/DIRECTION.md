@@ -27,7 +27,7 @@ full-budget initialization comparison and selected no successor at that boundary
 The complete 2026-09-07 Convergence decision now selects one outcome-informed B02 recast:
 fixed N=2 controllers whose submissions compete for the same eight-tick service slot.
 It asks whether the final learned scheduler beats fixed rules, and whether initialization adds
-anything beyond ordinary same-information learning. B02 has not yet been implemented or run.
+anything beyond ordinary same-information learning. B02 has no empirical result yet.
 
 ## Current position
 
@@ -70,7 +70,7 @@ rule; added R0 is T's initial greedy readiness rule without partner yielding. Re
 and G−R alongside the primary, retaining stochastic evaluation separately. R0 distinguishes
 learning beyond the initial script from R's possible weakness; it is no oracle or tuned baseline.
 The complete logical invocation has one 120-second cap. P09 freezes the selected B02 card with
-prospective RNG streams and predictions; source acceptance and the sole invocation remain pending.
+prospective RNG streams and predictions; the selected native comparison remains unmeasured.
 The selection/card is not a new empirical result.
 
 The supporting task fact is that one controller's t=26 submission removes its pending partner's
