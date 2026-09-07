@@ -73,5 +73,15 @@
     "verdict_text": "Owner-delegated decision (unattended, 2026-09-03 instruction): (a).",
     "source": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_SYSTEM_RUNTIME_A01_INTAKE_20260907.md"
   },
-  "starred": false
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-07T15:57:01+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_SYSTEM_RUNTIME_A02_SELECTION_20260907.md",
+      "record": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_SYSTEM_RUNTIME_A02_SELECTION_20260907.md",
+      "state": "planned",
+      "summary": "P07-CBSC-A02-EXEC-01 authorizes original-CM literal command preparation plus one candidate installation/import; supersedes preparation-only stop. Unchanged exact non-login route, pins,600s complete/KILL540s and fresh admission. No process yet accepted; no B04/scientific calls or extra run."
+    }
+  ]
 }
