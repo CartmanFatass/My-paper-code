@@ -29,10 +29,12 @@ remains dated provenance under the controlling evidence specification section 11
   **2026-09-05 PRO_FINAL / PARK** of the current same-draw retained-policy
   root-residual localization family, including its numerical-locus dependency;
   no successor selected. See the dated current position below.
-- Latest bounded B observation: **2026-09-07 shared-data return-model B03, joint RM-A**;
-  two prospective datasets gain a mean 0.0024423014322916717 over BLIND and IMMEDIATE-4,
-  dataset sample SD 0.0012263883236204184 and conditional mean MC SE 0.0003847990519703138.
-  Prior B02 seed 6401 stays separate; B01's two zero-gain endpoints remain accepted evidence.
+- Latest bounded B observation: **2026-09-07 shared-data return-model B04, joint RM-A**;
+  two prospective 512-batch datasets gain a mean 0.0010378824869791692 over BLIND and
+  IMMEDIATE-4, only 0.00003788248697916916 above MEI. Dataset sample SD is
+  0.0027031527544139028; conditional mean MC SE is 0.0004671170560530268.
+  One dataset is adverse inside MEI and one is positive; an extra harmful acquisition is
+  retained. B02/B03 positives, B01 nulls and older adverse evidence remain separate.
   This adds no direction-tier disposition or further invocation.
 - Historical discriminator science-card current-byte SHA-256:
   `e08744fa18d708c9ad570bdce8b71296407991a4f5f79d502d37330913435fd8`
@@ -54,6 +56,42 @@ count. The direct-service alternative remains separated by the frozen
 `Gamma=I+D` decomposition and analytic `D≈-0.02` boundary.
 
 ## Current scientific position — 2026-09-07
+
+The shared-data return-model B04 completed the prospective datasets 6601 and 6602 at
+512 training batches each with the full final evaluation. It receives **joint RM-A**:
+native/information gains are -0.0008735351562499955 (RM-B) and 0.002949300130208334 (RM-A),
+mean 0.0010378824869791692. The mean is only 0.00003788248697916916 above the 0.001 MEI;
+dataset sample SD 0.0027031527544139028 and conditional mean MC SE 0.0004671170560530268
+make its limited precision visible. The frozen point rule is retained without a new
+significance or all-positive-seed gate. B02/B03 are excluded from this primary.
+
+The strongest support is useful paid acquisition in LINKED-p17_20-c9_100 in both datasets,
+after 262,144 real training episodes, 393,216 scalar updates and 196,608 final evaluation
+episodes. The strongest current contradiction to repeatable usefulness is seed 6601's
+extra acquisition in LINKED-p13_20-c9_100: it loses 0.021816406250000003 in native return
+after paying and outweighs that seed's useful context gain. The other thirteen seed-context
+entries have zero difference. BLIND and IMMEDIATE-4 coincide, so equal contrast columns
+are not independent evidence. Four of five predictions match; the extra acquisition was missed.
+
+The accepted claim is preliminary useful acquisition by the joint point estimate at this
+budget, with mixed independent outcomes. Fitted-value variation and evaluation noise remain
+unseparated; no cause of the extra purchase is established. B03 is not a paired full-data
+arm, so this result does not establish a causal budget effect, equivalent performance,
+percentage of gain retained or a minimum sufficient data budget. B01's two nulls, older
+false-probe losses and small host headroom still limit broader claims. This host does not
+instantiate multi-agent partial observability or non-stationarity; no generic MARL or
+architecture/precision advantage or tuned-generic headroom record is added.
+
+The next recommended discriminator is another two independent datasets at the same
+512-batch budget and comparison, retaining every outcome to observe useful-acquisition
+and harmful-purchase variation before another reduction. This is a **close-call preparation
+recommendation only**; no new card, seed or invocation is selected. No family or Portfolio
+disposition changes. The retained-policy/root-residual numerical-locus family stays stopped.
+See the [B04 card](UCOPE_SHARED_DATA_RETURN_MODEL_B04_SCIENCE_CARD_20260907.md),
+[complete result evidence](UCOPE_SHARED_DATA_RETURN_MODEL_B04_RESULT_EVIDENCE_20260907.md) and
+[joint scientific intake](UCOPE_SHARED_DATA_RETURN_MODEL_B04_INTAKE_20260907.md).
+
+## Prior shared-data return-model observation — 2026-09-07 B03
 
 The shared-data return-model B03 completed exactly two fresh datasets, 6501 and 6502, and
 receives **joint RM-A** under its prospective rule. Native/information gains are
