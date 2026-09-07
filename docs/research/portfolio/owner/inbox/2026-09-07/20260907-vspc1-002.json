@@ -1,0 +1,76 @@
+{
+  "id": "20260907-vspc1-002",
+  "created": "2026-09-07T06:48:37-07:00",
+  "direction": "vsp_c1",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "SERVICE-ALLOCATION-B01：三队列服务的学习器与合法固定规则",
+  "context": "Claim: One paired training instance tests whether multiplicative duration-conditioned action values improve three-queue service over a fully conditioned learner, and whether either learner adds value over a fixed legal queue rule. Binding MARL structure: (b) temporal abstraction — a held allocation constrains service while queue state and a known partner response continue to change.",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "保留已冻结的种子402、256更新、五点评价、完整回报和停止边界；本阶段仅卡与移交，没有实现或运行。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "下一干净边界停止这张新卡，保留全部历史证据；不自行补实验。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "按实际所有者指示修订具体科学范围，并明确记录变更后再由现有命令推进。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "按完整 Pro 决定逐项固定宿主、RNG、真实段更新、规则合法信息和两次调用成本；没有新增科学前置或更强证据负担。",
+  "evidence": [
+    "docs/research/candidates/vsp_c1/VSPC1_K4_SERVICE_ALLOCATION_B01_SCIENCE_CARD_20260907.md",
+    "docs/research/candidates/vsp_c1/VSPC1_K4_SERVICE_ALLOCATION_CONVERGENCE_INTAKE_20260907.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-07.md#L29",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否接受已经按委托冻结的 SERVICE-ALLOCATION-B01 科学卡及其中明确的预算、合法信息、三项原生比较和停止边界？",
+    "changes_if_approved": [
+      {
+        "target": "docs/research/candidates/vsp_c1/VSPC1_K4_SERVICE_ALLOCATION_B01_SCIENCE_CARD_20260907.md",
+        "from": "完整Pro科学选择已形成，但未落成可实施卡",
+        "to": "冻结三队列 B 卡与五项 CM 移交；当前没有实现派发、源码接受或实验调用"
+      }
+    ],
+    "if_refused": "在下一干净边界按实际所有者回复调整这项新对象；旧双队列 B01 不追加，六步公开计划家族不重开，全部历史证据保留。不会为了求正结果自行改负载、种子或比较器。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/vsp_c1/pro_packets/20260907_service_allocation_convergence/archive/RESPONSE.md",
+        "quote": "在方向层选择一次“三队列、两工人、固定持有分配”的有限 B/EXPLORE。",
+        "why": "完整回答明确选择一个有限的真实学习比较；固定规则让结果能回答是否有实际调度用途。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/vsp_c1/pro_packets/20260907_service_allocation_convergence/archive/RESPONSE.md",
+        "quote": "已知响应伙伴、充分可见的续约状态和同质到达仍可能让简单规则完成绝大部分工作；额外队列并不保证有值得学习的长期分配差异，更不保证 FACTOR 有优势。",
+        "why": "新增队列不等于已证明学习空间；本次仍是微型平稳单学习者问题。"
+      }
+    ],
+    "uncertainty": [
+      "新宿主的实际收益、运行时间与调优基线余量均未知。",
+      "一个配对训练实例只提供局部信号，不能确认稳定优势、等价或唯一因果机制。",
+      "模型输入、到达率、初始工作、种子和评价网格均在旧结果之后改变；不把跨宿主符号变化单归因于覆盖稀缺。"
+    ],
+    "cost": {
+      "compute": "选定科学范围为两次完整调用，各最多2700秒；合计528384联合tick、512次Adam更新、2816评价情节。规则和配对发布在第二次内；本次编卡新增模型/环境/更新/评价/测试均0，实际新宿主耗时未知。",
+      "owner_time": "可异步阅读这份两选项决定和科学卡；无需即时回复。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing；本阶段已完成编卡和工程移交，下一步由现有Portfolio/Root命令安排，不等待所有者回复。"
+    },
+    "verdict_text": "**决定：在方向层选择一次“三队列、两工人、固定持有分配”的有限 B/EXPLORE。采用提案的 FACTOR、完整时长条件 GENERIC，以及只评价一次的合法固定策略 LQ-EXCLUDE；新训练根种子仅 402，每个学习臂 256 次更新，评价点固定为 0、64、128、192、256。除此不增加臂、种子、配置或调用。反应式双队列 B01 的“不增加调用”保持原样，已经结束的公开计划六步家族不重开。** 这是一个新对象的科学选择及可写卡范围，不是源码接受、进程启动、规范修订、C 冻结或 Portfolio 生命周期与优先级决定。",
+    "source": "docs/research/candidates/vsp_c1/pro_packets/20260907_service_allocation_convergence/archive/RESPONSE.md"
+  },
+  "starred": false
+}
