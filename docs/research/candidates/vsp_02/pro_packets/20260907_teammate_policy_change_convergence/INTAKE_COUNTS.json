@@ -1,0 +1,60 @@
+{
+  "basis": "Pro response at 1eb3b21b61747b21f374d252005fa48c32e4838d; Python arithmetic only, no simulation or learner import",
+  "response_sha256": "11dbb61ebb85ddba6869620bdd03bf5ede389e4dfd11b28fa13ba6cea8314113",
+  "response_bytes": 29133,
+  "inputs": {
+    "independent_common_prefixes": 1,
+    "optimizer_arms": 2,
+    "prefix_episodes": 4096,
+    "adaptation_episodes_per_arm": 1024,
+    "joint_steps_per_episode": 48,
+    "evaluation_episodes_per_checkpoint": 64,
+    "post_update_evaluation_checkpoints": [
+      16,
+      32,
+      64,
+      128,
+      256,
+      512,
+      768,
+      1024
+    ],
+    "rollout_episodes": 16,
+    "PPO_epochs": 4,
+    "minibatches_per_epoch": 4,
+    "training_master_seed": 1103
+  },
+  "selected_prospective_counts": {
+    "post_change_descendants": 2,
+    "training_episodes": 6144,
+    "training_joint_environment_steps": 294912,
+    "rollout_batches": 384,
+    "adam_optimizer_steps": 6144,
+    "prefix_adam_optimizer_steps": 4096,
+    "adaptation_adam_optimizer_steps_per_arm": 1024,
+    "evaluation_episodes": 1152,
+    "evaluation_joint_environment_steps": 55296,
+    "total_joint_environment_steps": 350208,
+    "PPO_transition_passes": 1179648,
+    "MEI_deliveries_per_adaptation_episode": 0.5,
+    "MEI_total_deliveries_over_Q": 512.0,
+    "proposed_whole_pair_wall_cap_seconds": 1800,
+    "teammate_training_episodes": 0,
+    "host_or_policy_search_trials": 0,
+    "additional_stationary_descendants": 0
+  },
+  "current_scientific_exposure": {
+    "environment_transitions": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0,
+    "model_selection_trials": 0,
+    "result_bearing_invocations": 0
+  },
+  "exposure_line": "environment_transitions=0; optimizer_steps=0; evaluation_episodes=0; model_selection_trials=0; result_bearing_invocations=0",
+  "future_wall_seconds": null,
+  "future_CPU_seconds": null,
+  "future_peak_RSS": null,
+  "new_host_headroom": "absent",
+  "cost_note": "Counts are prospective workload, not measured execution cost or a learner-can-move certificate. The cap is proposed; P13 allocates no invocation.",
+  "engineering_scope_section4": "none; document intake and arithmetic only"
+}
