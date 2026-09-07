@@ -206,3 +206,34 @@ new host is selected. The reactive family and K4 remain open; no direction or Po
 disposition changes. A next discriminator must answer a separately justified duration-value
 question with native action consequences and a useful performance margin; another endpoint
 precision run has no selected use here. This imposes no exact-reference or search prerequisite.
+
+## Three-queue service allocation: selected controller comparison — 2026-09-07
+
+The complete [Convergence decision](pro_packets/20260907_service_allocation_convergence/archive/RESPONSE.md),
+delivered at `2347dbf2fea870cdcd02aa2eb8b3cbaff147ec34` and accepted in the
+[decision intake](VSPC1_K4_SERVICE_ALLOCATION_CONVERGENCE_INTAKE_20260907.md), selects one
+[SERVICE-ALLOCATION-B01](VSPC1_K4_SERVICE_ALLOCATION_B01_SCIENCE_CARD_20260907.md): three
+queues, two persistent workers, held focal allocations and a known reactive partner;
+one paired training instance compares FACTOR with fully conditioned GENERIC and an
+evaluated fixed same-information LQ-EXCLUDE rule. No new performance result is available.
+
+The strongest reason to measure this instance is a concrete controller choice: does value
+learning improve on avoiding the partner's immediate allocation and serving the longest
+remaining queue, and if so does multiplicative duration conditioning add useful native
+service? Holding an allocation while queues and the partner respond makes this possible
+without establishing that a gain exists. The fixed rule distinguishes useful learning
+from a relative win between two weaker learners and is measured in the same result.
+
+The strongest contrary consideration remains the tiny, fully observed stationary control
+task with a known non-learning partner; the greedy rule may already do most useful work.
+Both networks share features and the factor has no strict low-rank bottleneck. Initialization,
+common training and finite optimization remain alternatives. No tuned headroom or new-host
+competence is established; old two-queue supply bounds are not transplanted. Multiple host
+and budget details changed after B01, so any cross-host difference remains exploratory.
+
+The next discriminator is the complete update256 native contrast with both periods,
+each learner's relation to the rule, initial values and five fixed curve points retained.
+One useful signal may justify considering independent instances, not stable superiority,
+unique sharing causality, transfer, partner co-adaptation or optimality. Two-queue B01 gets
+no additional invocation, its family and K4 remain open, and the public-plan six-step family
+stays ended. The decision adds no recast or Portfolio disposition.
