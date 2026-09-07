@@ -75,3 +75,11 @@ If evidence/transport is blocked, no direction decision exists. While that exter
 is pending, the direction yields the active execution slot at a committed clean boundary;
 lifecycle and priority remain unchanged. No live experiment or uncommitted research source
 needs observation or recovery from this preparation.
+
+## Native handoff recorded
+
+After publishing the bound handoff at `d3d6b8f4c`, DM sent one native message to the existing
+Root requesting exact local execution and return of the immutable answer to this DM. The
+native tool accepted the message. This is a queued Root handoff, not evidence of a provider
+Send or a formed decision. No app self-message or second Transport operator was created;
+Root's actual Send/observation/receipt state belongs in its existing tracking/archive.
