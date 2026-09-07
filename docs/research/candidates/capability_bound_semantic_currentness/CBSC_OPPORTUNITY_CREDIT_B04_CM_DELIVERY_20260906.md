@@ -33,7 +33,7 @@ accepts only public tokens. Publication retains each action and local contributi
 returns, targets/old values/advantages, losses/action counts and endpoint pairs.
 STRUCT uses RAW's fixed-rule records and checks matched source/random identities.
 
-Engineering-scope ยง4 additions: **none**, as selected by the card's Single selected
+Engineering-scope รยง4 additions: **none**, as selected by the card's Single selected
 engineering check and scope. No old B1 exception is used. Ordinary source/runner
 budgets apply; mandatory publication/readback serves the primary measurement.
 Independent scientific review is complete (below); runtime evidence remains pending.
@@ -129,5 +129,17 @@ fits the remaining focused account and still runs only once.
 DM acceptance correction: removed launch_sha from pair equality gating in run.py;
 retained both launch SHAs as descriptive pair metadata. The frozen launch binds
 actual source bytes externally; no replacement provenance guard was added.
-This follows AGENTS ง6 and the card's no-new-ง4-machinery boundary. No scientific
+This follows AGENTS section6 and the card no-new-section4-machinery boundary. No scientific
 calculation, host/model invocation or test exposure changed.
+
+## Integrated launch binding
+
+Root integrated/pushed the accepted source as
+`a3c2a49bf7002639d43a94f460b688d50c6c42dd` (implementation833c28540,
+commit-equality removal a3c2a49bf). This exact SHA is bound for all three selected
+calls at the cwd and argv above. Root returned the launch handoff directly to CM.
+
+Current monitor procedure from c0951c555 applies on the local control plane:
+use the same global monitor for all handles, with its existing heartbeat ACTIVE
+and read back before adoption ACK. This workflow update changes no launch source
+or scientific execution. No additional check is selected.
