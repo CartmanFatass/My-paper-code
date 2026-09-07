@@ -8,7 +8,7 @@ Use ordinary Author inputs plus delivery_mode=github_delivery and github_deliver
 branch (dedicated codex/pro-... branch), base_sha (full SHA), response_path (this
 node's pro_packets/<round>/archive/RESPONSE.md), issue_url (same repo Issue).
 Pin input commit_or_ref to a full SHA. Include applicable current specifications in
-reference_files. Root creates the delivery branch at the stated base; Pro writes
+reference_files. The scientific author creates the delivery branch at the stated base; Pro writes
 only the specified response file and a delivery-link comment. Retain discussion
 snapshots as pinned references. Do not use a moving branch as task input.
 
@@ -20,7 +20,8 @@ snapshots as pinned references. Do not use a moving branch as task input.
    confirms the commit is actually pushed, and branch/Issue exist, before dispatch.
    No generated file can include the hash of its own not-yet-created commit.
 4. Commit/push updated internal handoff. Dispatch its exact dispatch_prompt once
-   using the configured singleton model/effort. CALLER_DIRECT retains its exception.
+   to Root using the configured Luna/xhigh model/effort. When Root is the author/executor,
+   use the rendered local CALLER_DIRECT path without self-dispatch. Intake belongs to DM/Portfolio.
    New mode uses existing paste request support; do not upload TASK or prepend
    attachment-only/read-only instructions. No request/routing fields enter prose.
 5. On delivery, read full response by exact commit. Check target and changed scope,

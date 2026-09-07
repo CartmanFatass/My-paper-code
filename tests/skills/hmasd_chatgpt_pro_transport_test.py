@@ -205,6 +205,51 @@ def test_receipt_outbox_is_deterministic_and_uncertain_is_not_retryable() -> Non
     assert record["return_receipt"]["attempt_count"] == 1
 
 
+@pytest.mark.parametrize("blocker", [False, True])
+@pytest.mark.parametrize("adopted", [False, True])
+def test_integrated_root_receipt_is_local_and_cannot_be_sent(blocker: bool, adopted: bool) -> None:
+    record = _record()
+    record["operator_thread_id"] = "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb" if adopted else record["parent_thread_id"]
+    if adopted:
+        record["execution_thread_id"] = record["parent_thread_id"]
+    record["state"] = "SEND_UNCERTAIN" if blocker else "ARCHIVED"
+    if blocker:
+        contract.stage_blocker_receipt(record, "SEND_UNCERTAIN", "acceptance unknown")
+    else:
+        contract.stage_receipt(record, {"response_file": "response.md"}, "b" * 64)
+    receipt = dict(record["return_receipt"])
+    assert receipt["status"] == "LOCAL"
+    assert receipt["routing_mode"] == "LOCAL"
+    assert receipt["required"] is False
+    assert receipt["destination_thread_id"] is None
+    assert receipt["attempt_count"] == 0
+    with pytest.raises(ValueError, match="pending"):
+        contract.record_receipt_result(record, "SENT")
+    if not blocker:
+        contract.stage_receipt(record, {"response_file": "response.md"}, "b" * 64)
+        assert record["return_receipt"] == receipt
+        contract.close_tab_lease(record, reason="archive complete; locally routed")
+
+
+@pytest.mark.parametrize("blocker", [False, True])
+def test_adopted_unsent_parent_outbox_becomes_local(blocker: bool) -> None:
+    record = _record()
+    record["operator_thread_id"] = "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"
+    record["state"] = "SEND_UNCERTAIN" if blocker else "ARCHIVED"
+    def stage():
+        if blocker:
+            contract.stage_blocker_receipt(record, "SEND_UNCERTAIN", "unknown")
+        else:
+            contract.stage_receipt(record, {"response_file": "response.md"}, "a" * 64)
+    stage()
+    assert record["return_receipt"]["status"] == "PENDING"
+    record["execution_thread_id"] = record["parent_thread_id"]
+    stage()
+    assert record["return_receipt"]["status"] == "LOCAL"
+    assert record["return_receipt"]["attempt_count"] == 0
+    assert record["return_receipt"]["destination_thread_id"] is None
+
+
 def test_missing_parent_blocks_completion_receipt_without_a_destination() -> None:
     record = _record()
     record["state"] = "ARCHIVED"

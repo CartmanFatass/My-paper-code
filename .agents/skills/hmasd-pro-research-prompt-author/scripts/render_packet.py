@@ -338,6 +338,10 @@ def validate(data: dict, project_root: Path) -> dict:
     if execution_mode == "CALLER_DIRECT":
         owner_execution_instruction = _text(data.get("owner_execution_instruction"), "owner_execution_instruction")
     transport_singleton = _singleton_transport_config(project_root, caller_direct=execution_mode == "CALLER_DIRECT")
+    if execution_mode == DISPATCH_MODE and source_thread_id == transport_singleton["thread_id"]:
+        # The integrated Root is already the executor; never enqueue work to itself.
+        execution_mode = "CALLER_DIRECT"
+        owner_execution_instruction = "OWNER_DIRECT 2026-09-06: Root operates the shared Transport endpoint locally."
     portfolio_path = project_root / "docs" / "research" / "portfolio" / "PORTFOLIO.md"
     portfolio = portfolio_path.read_text(encoding="utf-8") if portfolio_path.is_file() else ""
     if role == "em":
@@ -573,7 +577,7 @@ def bind_github_task(handoff_path: Path, sha: str, project_root: Path) -> dict:
              dispatch_state="CALLER_READY" if h["pro_send_from_caller"] else "READY_TO_DISPATCH",
              dispatch_required=not h["pro_send_from_caller"],
              instruction="Paste transport_request.prompt exactly once; no upload or content rewriting. "
-                         "Archive the short chat receipt; Root/DM retrieves and intakes the complete GitHub file.")
+                         "Archive the short chat receipt; Portfolio/DM retrieves and intakes the complete GitHub file.")
     if not h["pro_send_from_caller"]:
         h["dispatch_prompt"] = f"Execute the handoff packet at {handoff_path.resolve()} exactly once."
         h["dispatch_instruction"] = "Push the bound task commit first; dispatch once to the existing singleton with its explicit configured model/effort."

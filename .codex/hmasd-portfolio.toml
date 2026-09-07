@@ -1,0 +1,10 @@
+# OWNER_DIRECT 2026-09-06: independent Portfolio, explicitly on main.
+thread_id = "01a07a3e-29bf-7f52-bc1e-cfa214b8d94a"
+root_thread_id = "01a07249-b095-7821-8ce2-e9c32ba85267"
+model = "gpt-6-astra"
+thinking = "max"
+environment = "local"
+checkout = 'C:\Projects\HMASD'
+branch = "main"
+instructions_path = "docs/project/ROOT_OPERATIONS.md"
+portfolio_path = "docs/research/portfolio/PORTFOLIO.md"

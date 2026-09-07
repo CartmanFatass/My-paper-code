@@ -122,7 +122,7 @@ its operator UUID never selects a provider conversation.
     "error": null
   },
   "heartbeat": {
-    "automation_id": "hmasd-transport-wake",
+    "automation_id": "hmasd-experiment-monitor",
     "status": "ACTIVE",
     "next_wake_at": "...Z",
     "retired_at": null,
@@ -293,35 +293,35 @@ re-inspect a mismatched capture on the same page, never repair it with a new Sen
 
 ## Heartbeat and asynchronous processing
 
-The heartbeat performs one bounded read per wake under a per-conversation lock. The
-normal cadence is `FREQ=MINUTELY;INTERVAL=15`; `INTERVAL=1` busy polling is invalid.
-The wake may reuse the active tab lease. It may not send, retry, switch direction,
-create a replacement conversation, or click `Answer now`. On natural completion it
-captures/archives once and then applies the completion close policy. On timeout it
-keeps the same conversation and active tab in `WAITING_TIMEOUT` for a later wake.
+Integrated Root reuses one thirty-minute heartbeat for all current experiments and Pro
+requests. A due Pro check occurs on the thirty-minute fallback wake;
+each due conversation gets one bounded read in serial. `INTERVAL=1` busy polling is invalid.
+A wake observes the existing request, never resends it or changes provider identity. Natural
+completion archives the paired response; timeout retains the same conversation for recovery.
 
 If a page handle is lost, one recovery tab may be opened from the exact persisted
 provider URL; the loaded URL and direction must be re-verified before observation.
 Never call `tabs.get()` on an old handle and never treat the new tab ID as a new
 identity. The recovered tab remains active while the conversation is pending.
 
-The singleton may own several request records, including provider generations that
-overlap in time, but every tab lease, heartbeat, outbox entry, archive and
-idempotency key remains request-scoped. Retain a request's heartbeat while that
-record requires a wake or recoverable timeout. After the record is durably archived, or is an
-explicit terminal/blocker state with no scheduled recovery, update the existing
-automation to `PAUSED` exactly once, verify the disabled status, and persist
-`retired_at` plus `retirement_verified=true`. Heartbeat retirement and tab closure
-are separate facts. Never archive the singleton task as part of request cleanup.
+Root may own overlapping provider generations. Tab leases, outbox entries, archives and
+idempotency keys remain request-scoped, but `heartbeat.automation_id` names the same Root
+automation. Request completion clears only that request's pending observation. Pause the shared
+automation only when no current experiment or Pro request needs observation, reconciliation,
+archival or notification. Never retire it merely because one request completes. Preserve
+historical per-request heartbeat records; superseded old-executor wakes are disabled at handover.
 
 ## Automatic return outbox
 
-Default execution remains `REUSE_SINGLETON`. An explicitly owner-directed
-`CALLER_DIRECT` request identifies the exact source caller as operator, includes
-`owner_execution_instruction`, and has no dispatch. When source equals parent,
-record `return_receipt.required=false`, `status=LOCAL_INTAKE`, and
-`attempt_count=0`; archive/intake in the same task without staging a self-message.
-Otherwise the existing parent outbox procedure applies.
+`REUSE_SINGLETON` identifies the configured Root endpoint. If the author is that endpoint,
+the renderer selects `CALLER_DIRECT` with the owner instruction and no app self-dispatch.
+New records name Root in `operator_thread_id`. An adopted legacy record retains that original
+field and records the actual executor in `execution_thread_id` with handover evidence.
+When actual executor equals parent, `stage_receipt` or `stage_blocker_receipt` creates
+`required=false`, `status=LOCAL`, `routing_mode=LOCAL`, `destination_thread_id=null` and zero
+message attempts. Root forwards the scientific work to the DM. No app self-receipt is sent.
+Existing attempted/uncertain delivery evidence is never restaged during migration.
+The following external-parent procedure applies only when executor differs from parent.
 
 After `ARCHIVED`, call `stage_receipt` from `scripts/transport_contract.py` before
 using `send_message_to_thread` exactly once on the validated parent task. The deterministic `message_key` remains
