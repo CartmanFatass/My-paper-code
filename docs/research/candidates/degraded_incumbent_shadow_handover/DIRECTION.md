@@ -749,3 +749,35 @@ no earlier reading; the source quantity stays unestimated; no Portfolio change. 
 18:11 PDT stop the decision is recorded only: no card, no CM objective, no implementation, no launch.**
 The first request (`-01`) pinned an evidence reference that predated the packet's aux files and was
 returned by Pro with three 404s; corrected and resent as `-02` (hub error, see the intake).
+
+## Accepted post-B04 reading and seed-101 discriminator — 2026-09-06 resume
+
+The current owner resume lifts the historical execution stop. The accepted node decision is now
+made concrete by `DISH_CONTROL_LOW_LR_B05_SCIENCE_CARD_20260906.md`: one independent seed-101
+CONTROL/LOW_LR pair, its own raw zero-update reference, sixteen updates and final-only evaluation.
+It asks whether the same LR comparison still has development value on another random instance;
+the source quantity remains unestimated. No additional family, source intervention or Portfolio
+disposition is implied.
+
+The full post-B04 response also corrects three overstatements in the prior B04 narrative above.
+The +182.75 mean remains a real complete-panel comparison despite mixed rows; the old row-4
+application stays historical and is not carried forward as an all-rows-positive requirement.
+LOW_LR had native costs (invalid commits and higher energy, including both K4_TO_K12 rows), so
+"no adverse LOW_LR companion" does not mean harmlessness. Tick-684 separation was an early native
+termination; it was not the first terminal flag in the family. B04's dominant +668 row contributes
+167 ticks of its mean but the existing evidence does not identify how much of that difference was
+caused by termination rather than preceding motion/control-state differences. The prediction's
+mixed-sign component held; its magnitude prediction did not predict +182.75.
+
+Strongest support: a real LR intervention with all sixteen parameter-group read-backs, nonzero
+learning and complete native outcomes gave a useful seed-89 mean increment. Strongest
+contradiction: concentration, two non-positive rows, LOW_LR's -57 before/after loss and no legal
+evaluation transfer. Surviving alternatives include seed/condition-specific motion and termination,
+joint normalization/parameter/recurrent/auxiliary changes, and an incumbent-only benefit unrelated
+to source selection. The next discriminator is seed101's complete pair and reference, preserving
+all native bad outcomes and reporting seed89 separately. Two observed pairs still cannot establish
+stable superiority, safety, general learning or RETAIN/COPY/SHADOW value.
+
+References: complete `pro_packets/20260906_post_b04_convergence/archive/RESPONSE.md` §§一–五
+(immutable delivery `a9718a45e`); `DISH_POST_B04_CONVERGENCE_INTAKE_20260906.md` §2;
+`DISH_CONTROL_LOW_LR_B05_SCIENCE_CARD_20260906.md` §§1–6. No seed-101 outcome is asserted here.
