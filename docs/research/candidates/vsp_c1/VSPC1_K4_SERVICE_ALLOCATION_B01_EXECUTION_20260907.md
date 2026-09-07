@@ -88,3 +88,18 @@ After staging succeeds, execute FACTOR once and conditionally GENERIC once under
 commands above; no scientific retry, pilot or extra call. The final required summary controls
 technical continuation irrespective of magnitude. This entry corrects the pending status and
 records the next action before launch while preserving every previous launch/absence fact.
+
+
+### Committed-object staging completed
+
+Created local named ref `refs/hmasd/vspc1-service-allocation-seed402-source-20260907`
+at the exact source SHA and native Git bundle `temp/directions/vsp_c1/staging/
+service_allocation_seed402_20260907/source.bundle` (94,182,352 bytes, complete history).
+SCP transferred it into a newly created, previously absent `/home/wu/hmasd-inputs/
+vspc1-service-allocation-seed402-20260907/source.bundle`. Remote `git bundle verify`
+passed, bundle import advertised the exact SHA, and `git worktree add --detach` completed
+at the frozen cwd. Remote `rev-parse HEAD` returned the complete accepted SHA and
+`git status --short` was empty. No HTTPS source-availability probe or source edit occurred.
+Both exact handles were `not_found` before staging; the target worktree was absent.
+This entry is committed/pushed before the first FACTOR invocation. Execution uses the
+unchanged frozen command above, with admission inside its cap.
