@@ -69,8 +69,9 @@ class, with final update-128 greedy team-return T−R as primary. R is the fixed
 rule; added R0 is T's initial greedy readiness rule without partner yielding. Report T−R0, T−G
 and G−R alongside the primary, retaining stochastic evaluation separately. R0 distinguishes
 learning beyond the initial script from R's possible weakness; it is no oracle or tuned baseline.
-The complete logical invocation has one 120-second cap. The card and code remain to be prepared;
-this accepted question is not a new empirical result or an execution in the intake task.
+The complete logical invocation has one 120-second cap. P09 freezes the selected B02 card with
+prospective RNG streams and predictions; source acceptance and the sole invocation remain pending.
+The selection/card is not a new empirical result.
 
 The supporting task fact is that one controller's t=26 submission removes its pending partner's
 t=28 and t=32 opportunities. This follows from the selected shared-slot law, not an observed
@@ -111,6 +112,8 @@ The evidence set includes historical observations and the separately labelled pr
 - [Complete shared-service Convergence response](pro_packets/20260906_shared_service_convergence/archive/RESPONSE.md)
 - [Shared-service Convergence intake](VSP03_B02_CONVERGENCE_INTAKE_20260907.md)
 - [Selected B02 counts, no execution](VSP03_B02_SELECTED_COUNTS_20260907.json)
+- [Frozen B02 card and predictions](VSP03_B02_SCIENCE_CARD_20260907.md)
+- [Frozen B02 counts/cost](VSP03_B02_COUNTS_20260907.json)
 
 ## Provenance boundary
 

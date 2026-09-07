@@ -1,0 +1,49 @@
+{
+  "question": "记录已选 B02 科学卡冻结：按一个训练配对和整次120秒上限推进实现、独立检查与唯一运行。",
+  "changes_if_approved": [
+    {
+      "target": "docs/research/candidates/vsp_03/VSP03_B02_SCIENCE_CARD_20260907.md",
+      "from": "完整 Pro 已选择共享服务 B02，尚未冻结执行定义",
+      "to": "冻结环境、共享策略、R/R0、团队信用、最终主量、随机流、预测、输出和完整停止边界"
+    },
+    {
+      "target": "docs/research/candidates/vsp_03/DIRECTION.md",
+      "from": "新家族已选，卡与实现待准备",
+      "to": "科学卡已冻结；实现接受与唯一实验仍待完成，recasts仍为1"
+    }
+  ],
+  "if_refused": "在下一执行边界按所有者明确的新指令暂停或修订未执行部分；旧 N1 暂停、完整 Pro 回复及既有证据保留。不会据此换种子、换主量或增加重铸。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/vsp_03/pro_packets/20260906_shared_service_convergence/archive/RESPONSE.md",
+      "quote": "本方提交会占据伙伴需要的唯一资源，等待则可能保留伙伴的最后提交机会。",
+      "why": "新问题有真实的伙伴机会后果，可直接用原生团队回报作有限比较。"
+    },
+    {
+      "path": "docs/research/candidates/vsp_03/VSP03_B02_SCIENCE_CARD_20260907.md",
+      "quote": "Primary: final update-128 greedy T−R. The other comparisons explain it; no outcome selects a new primary or a different evaluator.",
+      "why": "保留原主量，同时用 R0 和 G 限制解释，避免事后挑较弱规则或更有利模式。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/vsp_03/pro_packets/20260906_shared_service_convergence/archive/RESPONSE.md",
+      "quote": "最强反证仍是：相同公开信息与网络下，普通 G 在三个最终样本都追平 T 和 F，而 T 没有超越不学习规则。",
+      "why": "初始化没有已有最终优势；新的共享资源也可能由公开驻留年龄、普通 G 或固定规则充分处理。"
+    }
+  ],
+  "uncertainty": [
+    "团队奖励前缀、服务释放时序及强制等待行需要独立代码检查和唯一运行内的八集定向检查。",
+    "新 N2 的实际耗时、收益排序和比较器胜任程度尚未测量。",
+    "一个训练配对不能支持训练总体不确定性、稳定优势或多智能体特有的因果结论。",
+    "DM预期最终绝对T−G不超过0.02，置信较低；不预告T−R或T−R0的符号。"
+  ],
+  "cost": {
+    "compute": "本次卡准备新增模型、episode、更新均为0。唯一未来调用含38920个joint episodes、3113600个target transitions、256次更新；整次120秒涵盖准入、初始化、训练、六种评价、八集检查、输出读回与退出。无额外pilot、规则调用或重跑。",
+    "owner_time": "可异步查看，不等待回复；已有P09执行指令和对象层委托。",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing；正常源代码接受和精确提交发布完成后，按已有P09指令进行唯一运行。"
+  },
+  "verdict_text": "Options: (a) freeze the conforming selected design with the explicit RNG realization and commission bounded CM work under P09; (b) return a concrete unresolved semantic conflict before affected work. Recommendation and selection: (a); no such conflict is present.",
+  "source": "docs/research/candidates/vsp_03/VSP03_B02_SCIENCE_CARD_20260907.md"
+}
