@@ -29,12 +29,12 @@ remains dated provenance under the controlling evidence specification section 11
   **2026-09-05 PRO_FINAL / PARK** of the current same-draw retained-policy
   root-residual localization family, including its numerical-locus dependency;
   no successor selected. See the dated current position below.
-- Latest bounded B observation: **2026-09-07 shared-data return-model B04, joint RM-A**;
-  two prospective 512-batch datasets gain a mean 0.0010378824869791692 over BLIND and
-  IMMEDIATE-4, only 0.00003788248697916916 above MEI. Dataset sample SD is
-  0.0027031527544139028; conditional mean MC SE is 0.0004671170560530268.
-  One dataset is adverse inside MEI and one is positive; an extra harmful acquisition is
-  retained. B02/B03 positives, B01 nulls and older adverse evidence remain separate.
+- Latest bounded B observation: **2026-09-07 shared-data return-model B05, joint RM-A**;
+  two prospective 512-batch datasets gain a mean 0.002620157877604169 over BLIND and
+  IMMEDIATE-4. Dataset sample SD is 0.0002659131214081277; conditional mean MC SE is
+  0.0003805940070739763. Both acquire only at LINKED-p17_20-c9_100, with no additional
+  harmful purchase in this pair. B04's harmful acquisition/mixed outcomes, B02/B03
+  positives, B01 nulls and older adverse evidence remain separate.
   This adds no direction-tier disposition or further invocation.
 - Historical discriminator science-card current-byte SHA-256:
   `e08744fa18d708c9ad570bdce8b71296407991a4f5f79d502d37330913435fd8`
@@ -56,6 +56,42 @@ count. The direct-service alternative remains separated by the frozen
 `Gamma=I+D` decomposition and analytic `D≈-0.02` boundary.
 
 ## Current scientific position — 2026-09-07
+
+The shared-data return-model B05 completed the prospective datasets 6701 and 6702 at
+512 training batches each with the original full final evaluation. It receives **joint RM-A**:
+native/information gains 0.002808186848958338 and 0.0024321289062500004, mean
+0.002620157877604169, above the original 0.001 MEI. The sample SD of the two dataset
+endpoints is 0.0002659131214081277; conditional evaluation MC SE of their mean is
+0.0003805940070739763. These quantities describe different uncertainty, and two fitted
+datasets do not identify training-population variance or stable repeatability.
+
+The strongest support is repeated useful net acquisition in LINKED-p17_20-c9_100 in
+both new datasets. FULL acquires there only; all other context contrasts are zero,
+and BLIND/IMMEDIATE-4 coincide throughout. Their equal contrast columns are not extra
+independent evidence. The pair contains 262144 real training episodes, 393216 scalar
+updates and 196608 final evaluation episodes; complete invocation wall sums to 9.51 s.
+Four of six prospective predictions match; the RM-B and extra-purchase predictions miss.
+
+The strongest contradiction to broad robust usefulness remains B04's harmful p13/c9
+purchase and adverse first dataset, along with B01's two nulls and the older false-probe /
+unchanged-competence limits. B05 observes no additional harmful acquisition but does not
+estimate its future probability or erase the earlier loss. Fitted-max bias, dataset
+variation and evaluation noise remain surviving alternatives. No prior result is pooled
+into B05; no causal training-budget, architecture or precision effect follows.
+
+This is preliminary **finite-host** paid-information value. The binding structure remains
+systems / information flow; no multi-agent partial observability or non-stationarity is
+instantiated. There is no new tuned generic headroom record and no real UAV validation.
+The next discriminator is whether a source-defined UAV paid observation can change competent
+native control and improve team return after its actual cost, while the no-purchase
+controller retains its free information. The inspected UAV base supplies velocity actions
+and automatically returned local observations, not an established B05 paid-count operation;
+that path and any new family decision remain unresolved. The retained-policy/root-residual
+numerical-locus family remains stopped. See the [B05 intake §§5–7](UCOPE_SHARED_DATA_RETURN_MODEL_B05_INTAKE_20260907.md#5-what-b05-adds-and-what-remains-contrary),
+[original card](UCOPE_SHARED_DATA_RETURN_MODEL_B05_SCIENCE_CARD_20260907.md) and
+[complete result evidence](UCOPE_SHARED_DATA_RETURN_MODEL_B05_RESULT_EVIDENCE_20260907.md).
+
+## Prior shared-data return-model observation — 2026-09-07 B04
 
 The shared-data return-model B04 completed the prospective datasets 6601 and 6602 at
 512 training batches each with the full final evaluation. It receives **joint RM-A**:
@@ -82,13 +118,14 @@ false-probe losses and small host headroom still limit broader claims. This host
 instantiate multi-agent partial observability or non-stationarity; no generic MARL or
 architecture/precision advantage or tuned-generic headroom record is added.
 
-The next recommended discriminator is another two independent datasets at the same
+The B04 intake's next recommended discriminator was another two independent datasets at the same
 512-batch budget and comparison, retaining every outcome to observe useful-acquisition
 and harmful-purchase variation before another reduction. The B04 intake returned this as a
-**close-call preparation recommendation only**. P10 has since prepared the prospective
+**close-call preparation recommendation only**. P10 subsequently prepared the prospective
 [B05 card](UCOPE_SHARED_DATA_RETURN_MODEL_B05_SCIENCE_CARD_20260907.md) for seeds 6701/6702;
-execution remains unallocated and no new result is added. No family or Portfolio disposition
-changes. The retained-policy/root-residual numerical-locus family stays stopped.
+its separately allocated complete result is recorded above. The B04 observation itself made
+no family or Portfolio disposition change. The retained-policy/root-residual numerical-locus
+family stays stopped.
 See the [B04 card](UCOPE_SHARED_DATA_RETURN_MODEL_B04_SCIENCE_CARD_20260907.md),
 [complete result evidence](UCOPE_SHARED_DATA_RETURN_MODEL_B04_RESULT_EVIDENCE_20260907.md) and
 [joint scientific intake](UCOPE_SHARED_DATA_RETURN_MODEL_B04_INTAKE_20260907.md).
