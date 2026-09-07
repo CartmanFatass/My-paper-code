@@ -265,3 +265,46 @@ law, frozen meaning or Portfolio state changes. **Under the owner's 18:11 PDT st
 recorded only: no card, no CM objective, no implementation, no launch.** The first request (`-01`) was
 returned by Pro for an evidence reference that predated the packet's aux files; corrected and resent as
 `-02` (hub error, see the intake).
+
+## A02: low sampled score allocation with small conditional policy change — 2026-09-06
+
+After the owner's research resume, the already selected
+`RCLE-TBCFV-A02-FROZEN-SCORE-ALLOCATION` completed as **valid A/RECON** at launch SHA
+`abcc3766c2b2d9908c9391b0827d9f2a39f8d641` (card
+`RCLE_TBCFV_A02_FROZEN_SCORE_ALLOCATION_SCIENCE_CARD_20260906.md`; result
+`RCLE_TBCFV_A02_RESULT_EVIDENCE_20260906.md`; interpretation and full limits
+`RCLE_TBCFV_A02_RESULT_INTAKE_20260906.md`). It measures seed 18's four logical configurations
+over two fixed blocks, with no new learner. All eight graphs satisfy both registered markers:
+actor-score norm share `r_A` about 0.00641–0.00935 and pointer joint-gradient share `r_P` about
+0.00642–0.00942, each below 0.01. Both final-versus-init fixed-input block mean TVs are about
+0.00534–0.00545, below the prechosen 0.01 small-average-change scale; maxima reach 0.01064.
+This supports prioritising a named gradient-allocation learner question over another blind global
+step increase. It does not establish a unique cause of flat service or a useful reweighting law.
+
+The same-final-graph zero-baseline counterfactual changes direction as well as scale: the
+original/zero joint norm ratio is about 0.099 on block 19001 and 0.045–0.046 on block 19002;
+direction cosine is about +0.812 and −0.189/−0.244 respectively. **Actor/pointer relative shares
+remain below 1% with zero baseline.** This supports a separate finite-sample baseline-direction
+question, not the claim that removing the baseline repairs allocation or improves training.
+The original baselines were reconstructed from retained per-cell means, with the declared
+`math.fsum/len` versus learner `torch.mean` FP64 reduction-order limitation. Centering preserves
+within-cell return SD; lower raw norm does not show that reward variation disappeared.
+
+Strongest support is the low-allocation reading on both blocks for every configuration together
+with small mean conditional TV. Strongest contradiction to a stronger "actor did not move" account:
+pointer/encoder weights and probabilities did move, some point TVs exceed 0.01, and FLEX's
+initially zero-valued final event heads receive nonzero actor gradients. Direct final-to-final
+parameter distance is **0.00234143919**, measured from tensors, not the difference of displacement
+norms. Manager and actor paths both reach shared encoders; their aggregate cosine is near zero
+and cancellation ratio near 0.99, which does not rule out internal noise or coordination problems.
+The conditional library fixes z and external inputs; manager/head-mediated latent changes,
+final visitation and causal service consequences are outside it.
+
+Pro's manager-dominant/small-change forecast is supported; the retained DM forecast of actor share
+0.1–0.5 and at least one block mean TV above 0.01 is refuted. No training-seed uncertainty is resolved,
+and the historical B02 native service result is unchanged. The next discriminator proposed for
+selection is a bounded real learner comparison of a named score-allocation change against the
+unchanged same-information law, judged by native service return; baseline-law change is a distinct
+candidate, not an already demonstrated remedy. This A ends without a successor selection, new
+prerequisite, family closure, recast or Portfolio change. Detailed source-grounded limits on
+gradient-conflict and baseline language are retained in the intake §3.
