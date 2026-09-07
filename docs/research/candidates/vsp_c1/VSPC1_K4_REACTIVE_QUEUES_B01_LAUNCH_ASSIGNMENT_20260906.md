@@ -1,6 +1,6 @@
 # VSPC1-K4-REACTIVE-QUEUES-B01 — exact launch assignment, 2026-09-06
 
-**Prepared for Root's exact handoff acceptance; no result invocation has launched.**
+**Corrected FACTOR-only transport prepared for Root acceptance; run01 was an accepted no-op, and no scientific runner has launched.**
 Source binding is the integrated, pushed main commit
 `47674883572bbe078ede037cbb8f99b8cd54c159`. Root explicitly requested this assignment
 and retained the stop until the exact handoff is accepted and source bytes are bound.
@@ -9,7 +9,7 @@ The existing B card, two arms and budget are unchanged.
 ## 1. Deliverable and ownership
 
 CM `/root/dm_amx_vspc1_next/cm_reactive_queues_b01` technically collects one FACTOR arm
-followed by one GENERIC arm, seed 401; CM or Root may dispatch this exact reviewed command list under
+followed by one GENERIC arm, seed 401; Root dispatches only the currently accepted exact arm handoff under
 [card §§2–7](VSPC1_K4_REACTIVE_QUEUES_B01_SCIENCE_CARD_20260906.md).
 After accepted execution, return both summaries, the paired summary, resource receipts,
 whole-invocation timing/exit facts and actual counts; DM intakes their scientific meaning.
@@ -84,47 +84,85 @@ facts and return that specific issue to DM rather than silently modifying or ret
 The same holds for a refused GENERIC admission or concrete failure. Stop after the prescribed
 endpoint/publication/exit, whole-arm cap or concrete failure. Preserve partial output in place.
 
-## 4. Exact remote preparation and command list — not executed
+## 4. Corrected FACTOR-only transport assignment — not executed
 
-Configured execution node is `wsl_4070`, reached through `ssh hmasd-wsl-node`;
-node repository `/home/wu/projects/HMASD`, interpreter `/home/wu/.venvs/hmasd/bin/python`.
-The card's CPU boundary is prospectively portable; retain the configured remote-first route.
-No local fallback, accepted process or resource receipt is created by this assignment.
-
-After Root accepts this exact handoff, CM prepares the exact committed remote checkout:
+Root's first accepted handle `vspc1-reactive-b01-factor-run01` is terminal with exit 0,
+start/end `2026-09-07T13:57:52+08:00`, duration 0 s, and only supervisor start/end log lines.
+The actual preserved remote `runner.sh` contains exactly:
 
 ```bash
-cd /home/wu/projects/HMASD
-git fetch origin main
-git worktree add --detach /home/wu/hmasd-worktrees/vspc1-reactive-queues-b01-476748835 47674883572bbe078ede037cbb8f99b8cd54c159
+eval 'bash -lc  cd '
 ```
 
-If preparation or task-name acceptance is uncertain, inspect the existing exact path/handle
-before any further action. Do not delete a worktree/output, replace an accepted task or create
-another name to bypass uncertainty. No new source is copied from an uncommitted checkout.
-The two task names below are planned names, not accepted handles as of this assignment.
+That command runs only `cd`; the stored command contains neither memory admission nor a
+runner invocation. Read-only inspection confirmed the old run01 output root is absent.
+This supports zero experiment exposure from this accepted handle. The exact upstream
+PowerShell transformation is not retained in these remote records; its attribution to
+PowerShell interpolation is plausible but not independently reconstructed. Independently
+verified: the accepted command was truncated, and the supervisor joins supplied arguments
+with `COMMAND="$*"` then evaluates that string. Nested-shell argument quoting was unsuitable.
+Preserve the failed handle and all its files under
+`/home/wu/.agent-tasks/vspc1-reactive-b01-factor-run01/`; do not replay its command.
 
-Run these as two sequential CM dispatches with the intervening FACTOR collection described
-above, using the reviewed `agent-task` command structure. Each fresh node-local admission
-is immediately adjacent to its own invocation in the same command; both physical and effective
-available memory must be at least 4 GiB before model/RNG/learner initialization. Do not use a
-preparation-time or other-arm receipt. Admission creates only its existing receipt path.
+**Authorization:** DM assigned correction of this command-delivery failure, and Root explicitly
+requested the bounded corrected FACTOR-only retry preparation on unchanged source. The existing
+FACTOR object and its original scientific budget remain selected; this repair adds no seed,
+arm, extension or automatic scientific retry budget. The prior accepted handle executed no
+admission/learner. Root will accept the exact corrected payload below before dispatching once.
+CM must not launch it independently. GENERIC remains undispatched and requires its later
+original-arm handoff; the earlier GENERIC command is superseded for operational use.
 
-```bash
-W=/home/wu/hmasd-worktrees/vspc1-reactive-queues-b01-476748835
-P=/home/wu/.venvs/hmasd/bin/python
-O=$W/temp/directions/vsp_c1/exp/k4_reactive_queues_b01_run01
-/usr/local/bin/agent-task run vspc1-reactive-b01-factor-run01 bash -lc "cd $W && $P scripts/hmasd_resource_preflight.py admit-memory --out $O/FACTOR/resource_admission.json && /usr/bin/time -p -o $O/FACTOR/invocation.time timeout --signal=KILL 2700s $P scripts/run_vspc1_k4_reactive_queues_b01.py --arm FACTOR --seed 401 --out $O/FACTOR"
-/usr/local/bin/agent-task run vspc1-reactive-b01-generic-run01 bash -lc "cd $W && $P scripts/hmasd_resource_preflight.py admit-memory --out $O/GENERIC/resource_admission.json && /usr/bin/time -p -o $O/GENERIC/invocation.time timeout --signal=KILL 2700s bash -c '$P scripts/run_vspc1_k4_reactive_queues_b01.py --arm GENERIC --seed 401 --out $O/GENERIC && $P scripts/run_vspc1_k4_reactive_queues_b01.py --compare $O/FACTOR/summary.json $O/GENERIC/summary.json --out $O/paired_summary.json'"
+The existing remote worktree was read back at exact SHA
+`47674883572bbe078ede037cbb8f99b8cd54c159`:
+
+- node: `wsl_4070`, SSH target `hmasd-wsl-node`;
+- cwd: `/home/wu/hmasd-worktrees/vspc1-reactive-queues-b01-476748835`;
+- interpreter: `/home/wu/.venvs/hmasd/bin/python`;
+- new planned handle: `vspc1-reactive-b01-factor-run02`;
+- new output: `/home/wu/hmasd-worktrees/vspc1-reactive-queues-b01-476748835/temp/directions/vsp_c1/exp/k4_reactive_queues_b01_run02/FACTOR/`.
+
+Both the new task directory and run02 output root were absent at the repair observation.
+No checkout creation or source transfer is needed. Preserve the existing checkout and old
+failed evidence. A later uncertain send must be reconciled using this same run02 handle.
+
+**Exact Windows PowerShell payload for Root, once after acceptance:**
+
+```powershell
+$vspFactorLaunch = @'
+import subprocess
+command = "cd /home/wu/hmasd-worktrees/vspc1-reactive-queues-b01-476748835 && /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/hmasd-worktrees/vspc1-reactive-queues-b01-476748835/temp/directions/vsp_c1/exp/k4_reactive_queues_b01_run02/FACTOR/resource_admission.json && /usr/bin/time -p -o /home/wu/hmasd-worktrees/vspc1-reactive-queues-b01-476748835/temp/directions/vsp_c1/exp/k4_reactive_queues_b01_run02/FACTOR/invocation.time timeout --signal=KILL 2700s /home/wu/.venvs/hmasd/bin/python scripts/run_vspc1_k4_reactive_queues_b01.py --arm FACTOR --seed 401 --out /home/wu/hmasd-worktrees/vspc1-reactive-queues-b01-476748835/temp/directions/vsp_c1/exp/k4_reactive_queues_b01_run02/FACTOR"
+subprocess.run(['/usr/local/bin/agent-task', 'run', 'vspc1-reactive-b01-factor-run02', command], check=True)
+'@
+$vspFactorLaunch | ssh -T -o BatchMode=yes -o ConnectTimeout=10 hmasd-wsl-node /home/wu/.venvs/hmasd/bin/python -
+if ($LASTEXITCODE -ne 0) { throw 'FACTOR dispatch returned nonzero; inspect run02 status before any further action' }
 ```
 
-Each runner records launch SHA from this detached checkout. `O/FACTOR/summary.json`,
-`O/GENERIC/summary.json` and `O/paired_summary.json` are the primary output paths;
-`resource_admission.json` and `invocation.time` are per-arm. Supervisor logs/exit records
-remain under the existing `agent-task` facility: `agent-task status <accepted-name>` is the
-terminal witness, `agent-task logs <accepted-name> 40` reads its log and `agent-task stop
-<accepted-name>` is the explicit manual stop command if the selected stop condition requires it.
-A lost SSH connection is not terminal evidence or authorization to relaunch.
+The single-quoted PowerShell here-string preserves literal Python text over SSH stdin.
+Python supplies `agent-task` one complete command-string argument; the string contains no
+shell variables or nested `bash -c` layer. The supervisor's join/eval therefore receives the
+intended `cd && admission && timed runner` chain. No PowerShell variable is embedded in that chain.
+
+**Bounded transport acceptance:** the same literal command crossed this PowerShell → SSH stdin
+→ remote Python boundary in a non-result check. `bash -n` returned 0. Parsed tokens were
+asserted against the exact three expected command segments, including cwd, interpreter,
+admission/receipt, timeout 2700s, FACTOR, seed401 and output. The prospective `agent-task`
+argv was printed without calling it. No supervisor test task, preflight, model/RNG, runner,
+source test or experiment was executed. Raw observations are under the CM repair checkout's
+`temp/directions/vsp_c1/transport_repair_20260906/` (`accepted_runner.txt`, `status.json`,
+`task.log`, `paths.json`, `argv_check.json`).
+
+Fresh node-local `admit-memory` is adjacent through `&&` before the actual timed runner;
+both physical/effective available memory must reach 4 GiB. The entire unchanged FACTOR arm,
+including imports, 256 updates, nine evaluations, publication and exit, retains the 2700s cap.
+CPU float32, one compute thread and batch16 remain source-defined. Outputs are
+`resource_admission.json`, `invocation.time` and `summary.json` in the new FACTOR root.
+
+Root observes acceptance with `agent-task status vspc1-reactive-b01-factor-run02` and
+`agent-task logs vspc1-reactive-b01-factor-run02 40`; retained supervisor files are under
+`/home/wu/.agent-tasks/vspc1-reactive-b01-factor-run02/` after acceptance.
+Manual stop is `agent-task stop vspc1-reactive-b01-factor-run02`.
+Exit 0 alone is not technical completion: collect primary output and actual counts.
+CM owns technical collection; DM owns science. No scientific polarity follows from run01.
 
 ## 5. Current Root routing and observation ownership
 
