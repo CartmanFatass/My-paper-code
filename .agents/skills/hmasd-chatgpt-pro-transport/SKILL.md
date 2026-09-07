@@ -12,7 +12,8 @@ persistent ChatGPT conversation, and preserves transport/response evidence witho
 interpreting or overriding the decision. The transport task is the execution owner:
 after it accepts a handoff it performs the complete transport, wait, archive, and
 return-receipt lifecycle in this task. It is not an advice-only monitor and it does
-not delegate the same handoff recursively.
+not delegate the same handoff recursively. Here, "transport task" means the current
+integrated Root executing this skill, not the retired standalone Transport session.
 
 Archive completeness is a transport fact, not specification-conformance acceptance.
 The receiving Portfolio/DM checks the formed decision against current owner/spec constraints
@@ -96,6 +97,16 @@ owner handover, expected fixed TASK, original parent and exact conversation/mess
 Do not force a retired operator ID through the current new-endpoint check or rerender an
 accepted request. Missing or contradictory acceptance evidence requires reconciliation
 before Send, not a new prompt or invented validation receipt.
+
+Executor migration and prompt preservation are separate. A retired `operator_thread_id`
+inside an adopted HANDOFF is historical evidence, never a destination for dispatch,
+browser recovery, observation or completion work. Root performs those actions locally
+using the recorded `execution_thread_id`; the original parent remains the receipt
+destination. The retired session may return already recorded facts, but is not resumed
+as the operator. An uncertain app dispatch is reconciled before any second dispatch.
+The current renderer applies to newly authored requests. Preserve an already accepted
+request's original prompt even if it predates a wording update; first-send recovery
+does not authorize silently replacing that prompt or appending the new instructions.
 
 Persist the registry described in [references/state-schema.md](references/state-schema.md).
 It is a one-to-one map from `conversation_binding_key` to provider conversation ID.
