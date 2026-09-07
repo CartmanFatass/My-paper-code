@@ -72,6 +72,12 @@ selecting on the first score. A new scientific choice or unfrozen invocation rem
 3. Execute each supplied return route as its dependency arrives; integrate/push specified clean
    deliveries and route actual artifacts to their named CM/DM. Keep technical interpretation
    with CM and science with DM. Do not replace an E0 result with an earlier implementation record.
+   OWNER_DIRECT 2026-09-07: a precise gap in task scope, next-command selection, authorization,
+   skill applicability, transport/tool permissions or cross-direction scheduling goes to
+   Portfolio first. Include the affected action, original evidence/rule and existing authority.
+   Do not dispatch an undefined gap to DM to obtain a replacement task or workflow approval.
+   Portfolio resolves planning/applicability or issues a bounded investigation to the appropriate
+   DM/CM; it cannot supply owner-only permission or override a real runtime restriction.
 4. Send a concise receipt with **the result, the whole working-set state, and the next event**.
    For each direction give command, actual recipient/status and any unsent action or dependency.
    Include the actual advancing-chain count. Changed facts need evidence/commit; unchanged rows
@@ -87,7 +93,8 @@ selecting on the first score. A new scientific choice or unfrozen invocation rem
 | Failed dispatch, unavailable recipient or yielded direction | Report the precise gap/vacancy now; dispatch unrelated commands. |
 | Reversible technical staging problem inside an assigned repair route | Keep the same CM on that authorized repair; report its concrete unresolved gap, not an invented scientific stop. |
 | Unknown Send or launch acceptance | Reconcile the same identity from authoritative state; hold only the uncertain external action. |
-| New scientific choice, extra invocation or unlisted task | Send the question to Portfolio/the named decision owner; continue independent assigned work. |
+| Object-tier science choice within an assigned DM task | Keep it with that DM under existing delegation; no additional Portfolio vote. |
+| Missing task scope, extra/unlisted invocation, replacement task or workflow/authorization applicability gap | Send the exact gap to Portfolio first; continue independent assigned work. Portfolio supplies the next bounded command or identifies the actual required owner decision. |
 
 A later explicit continuation supersedes an earlier command's stop only within its stated scope.
 Successful staging after zero accepted invocations is not a scientific retry. This does not

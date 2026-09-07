@@ -63,6 +63,14 @@ next sender/event or gap. Report a yielded/unavailable direction immediately. Kn
 continue without an extra Portfolio exchange. A changed command's scope replaces only the
 specified earlier boundary; an unrelated preparation-only task does not suspend the batch.
 
+Missing scope, next-task choices, authorization/skill applicability, transport/tool permissions
+and scheduling gaps route from Root to Portfolio first, with the affected action, evidence and
+existing authority. Root does not ask DM to invent the missing command or approve the workflow.
+Portfolio handles the planning question and may assign a bounded scientific/technical inquiry;
+DM retains object-tier decisions inside its assigned task and CM ordinary in-scope repair.
+This is not a new approval gate for accepted work, nor authority for Portfolio to bypass a real
+runtime restriction or grant permission reserved to the owner. Unrelated authorized work continues.
+
 ## One shared observation wake
 
 Root observes assigned experiment handles and exact current Pro requests through the existing
