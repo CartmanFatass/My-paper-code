@@ -214,6 +214,10 @@ Observe pending work within Root's owner-driven goal; `.codex/hmasd-monitor.toml
 the endpoint only. Do not create or reactivate scheduled automations. Keep request identities
 and tab leases separate; each due conversation gets one bounded DOM read, serially. Persist
 observations and return to independent work or a bounded wait, without busy polling.
+The lease protects this request's tab, not Root's whole execution loop. After persisting an
+accepted Send or pending observation, service ready native returns and dispatch their named
+follow-ons before waiting again. Serialize browser actions, not whole Pro lifecycles; never
+wait for one response to finish before handling another direction's ready work.
 A 20–60 minute generation may span several observation passes.
 At 60 minutes mark `WAITING_TIMEOUT`; retain the same conversation and recoverable tab.
 A timeout never creates a replacement conversation, scientific polarity, or another Send.

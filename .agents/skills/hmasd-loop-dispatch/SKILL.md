@@ -5,7 +5,7 @@ description: Use when HMASD Portfolio plans or refills direction work, or Root r
 
 # HMASD Portfolio and Root dispatch
 
-Portfolio plans the whole working set; Root executes supplied batches and return routes.
+Portfolio maintains the whole working set; Root executes ready commands and per-direction return routes.
 Use the section for the current role. AGENTS and the current owner instruction retain
 authority; this procedure changes no scientific decision tier, model, budget or permission.
 Endpoints and observation rules are in `docs/project/ROOT_OPERATIONS.md`.
@@ -30,19 +30,21 @@ Unresolved transport waits, completed children and undispatched intentions do no
 Reuse the latest native inventory until an event changes it. Resolve a missing fact once
 from its current source instead of reconstructing all direction history.
 
-## Portfolio: an actionable return triggers a whole-working-set pass
+## Portfolio: refill each actionable vacancy immediately
 
 1. Read the original return and its affected card/intake sections. Apply owner overrides and
    distinguish technical completion, missing science, failed dispatch and uncertain acceptance.
-2. Account for every current chain: retain running work; identify completed, undelivered and
-   waiting work; choose the next useful bounded task for each actionable vacancy. Plan toward
+2. Update the affected chain against the latest working-set facts: retain running work;
+   identify completed, undelivered and waiting work; choose the next useful bounded task for
+   each actionable vacancy. Plan toward
    five advancing chains. If fewer are justified, name the actual dependencies; do not fill a
    slot with duplicate preparation or invented experiments.
-3. Prepare **one batch of all independent commands**, including follow-ons to the reporting
-   direction and ready work elsewhere. Preserve DM object-tier and Pro decision authority.
+3. Prepare the ready follow-on or replacement without waiting for other returns or a complete
+   working-set refresh. Bundle independent commands already ready at the same time; a batch
+   is packaging, never a completion barrier. Preserve DM object-tier and Pro decision authority.
    Give a missing scientific choice to its DM/node rather than asking Root to decide it.
-4. Update the current rows, commit/push, then send the usable batch to Root. Check its actual
-   dispatch receipt in the Root daily log or direct response when explicitly requested. Routine
+4. Update the affected current rows, commit/push, then immediately send the usable command(s)
+   to Root. Check the actual dispatch receipt in the Root daily log or direct response when explicitly requested. Routine
    log entries do not wake Portfolio or require an ACK. An unaccepted command still needs routing;
    a snapshot update is not delivery.
 
@@ -77,7 +79,7 @@ scope is known. A delegated DM/CM decision within that route needs no extra Port
 For example, a first arm's conforming summary may admit the already-selected second arm without
 selecting on the first score. A new scientific choice or unfrozen invocation remains separate.
 
-## Root: dispatch the batch, execute its routes, report the working set
+## Root: process each return and keep independent directions moving
 
 1. Dispatch every independent command before waiting. Reuse accepted assignments. Use native
    `send_message` for running agents and `followup_task` to resume idle ones; follow the exact
@@ -87,6 +89,10 @@ selecting on the first score. A new scientific choice or unfrozen invocation rem
 3. Execute each supplied return route as its dependency arrives; integrate/push specified clean
    deliveries and route actual artifacts to their named CM/DM. Keep technical interpretation
    with CM and science with DM. Do not replace an E0 result with an earlier implementation record.
+   Dispatch that direction's ready follow-on before waiting for unrelated returns. A slow Pro
+   request, experiment or comparison arm holds only actions depending on its result. During
+   lengthy local work, reach a recoverable boundary and service other ready returns; do not
+   finish one direction's entire collection-to-Pro lifecycle before servicing another.
    OWNER_DIRECT 2026-09-07: a precise gap in task scope, next-command selection, authorization,
    skill applicability, transport/tool permissions or cross-direction scheduling goes to
    Portfolio first. Include the affected action, original evidence/rule and existing authority.
@@ -99,9 +105,15 @@ selecting on the first score. A new scientific choice or unfrozen invocation rem
    evidence and compact working-set delta; include advancing-chain count for a capacity change.
    Report an actionable vacancy when it occurs, not when the entire batch finishes. Do not send
    separate dispatch, push, launch and intake progress messages or an unchanged periodic digest.
-5. While native work is running, wait for its returns and handle authorized observations. When
-   only external waits or a requested Portfolio reply remain, return with those exact dependencies
-   and the existing observation route. An empty queue requests a new batch; it is not programme
+5. Before any blocking wait, service available returns and dispatch ready named actions. Wait
+   for the first completion/message, with a bounded wait of at most 60 seconds; never join all
+   direction tasks or poll one task until terminal. Batch short independent status reads only.
+   On wake, handle new actionable events before another observation/wait. While native work
+   is running, interleave its returns with authorized external observations. When
+   only external waits or a requested Portfolio reply remain, yield the current pass with those
+   exact dependencies while retaining observation within the active goal; do not mark it complete.
+   An exhausted route requests its next command immediately; other live directions need not
+   finish. An empty queue is not programme
    completion. Unchanged healthy observation needs no repeated report or inventory polling.
 
 | Event | Root's next action |
@@ -118,6 +130,16 @@ Successful staging after zero accepted invocations is not a scientific retry. Th
 authorize a retry of an accepted experiment, a different source/device/budget or duplicate Send.
 Root follows supplied choices; it does not select a replacement direction or technical alternative.
 Routine tool addressing, reads and authorized pre-acceptance mechanical corrections stay local.
+
+Serialize only short shared-index operations and exact browser identity/Send/read actions.
+After accepted Pro Send, persist the binding and resume the event loop; its tab lease is not
+a global work lock. Start all independent authorized comparison arms before observing them;
+the final comparison needs its required arms, but unrelated science routes do not.
+
+Example: A returns with a named DM intake while B is generating in Pro, C is running an
+experiment, D is implementing, and E exhausts its route. Root starts A's intake and asks
+Portfolio once for E's replacement now, retaining B/C/D. Portfolio sends E's ready command
+without waiting for A/B/C/D. A later return starts its own route immediately.
 
 ## Example: one hot direction and three silent queues
 

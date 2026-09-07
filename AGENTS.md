@@ -277,6 +277,14 @@ When the owner is absent the loop keeps running under a standing delegation (own
 
 ## 5. Capacity and resume
 
+OWNER_DIRECT 2026-09-07 rolling parallelism correction: a batch packages ready commands; it
+is never a completion barrier. Root handles each direction's return and dispatches its supplied
+next action as soon as its own dependencies are satisfied, without waiting for unrelated
+directions, Pro generation or CM comparison arms. When that route is exhausted, request its
+replacement immediately; Portfolio supplies an incremental command from current evidence
+without waiting for a full-batch report. Retain other advancing chains. Use the event sequence
+in `hmasd-loop-dispatch`; short shared-index and browser actions do not serialize whole tasks.
+
 OWNER_DIRECT 2026-09-07 (latest revision): the owner's goal maintains five direction tasks until five formally
 enter UAV validation, with actual entry traced to the relevant direction decision and UAV card.
 Active native subagents, running experiments and accepted Pro external reviews count together,

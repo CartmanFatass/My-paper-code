@@ -79,8 +79,10 @@ execution alternative or select another direction after a failed admission.
 
 Use `$hmasd-loop-dispatch` at `.agents/skills/hmasd-loop-dispatch/SKILL.md` for every
 Root command, completion/exception return and working-set refill. Its Portfolio section
-is the single dispatch procedure: process the whole working set, send all justified
-independent commands together and confirm actual native acceptance. This skill retains
+is the single dispatch procedure: maintain working-set context while issuing each ready
+follow-on or replacement immediately. Bundle only commands already ready together; never
+wait for all directions to return before refilling one slot. Confirm actual native acceptance
+from the existing receipt. This skill retains
 scientific comparison, investment, lifecycle and proper-node judgment; Root receives
 concrete tasks rather than those judgments to make. Known collection/intake and selected
 execution routes continue without an extra Portfolio vote. New scientific choices retain

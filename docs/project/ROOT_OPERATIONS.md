@@ -59,6 +59,16 @@ accepted Pro generation once per direction; completed tasks and unresolved waits
 
 ## Root's execution loop
 
+OWNER_DIRECT 2026-09-07 rolling parallelism: each direction advances when its own dependency
+arrives. A command batch is packaging and creates no completion barrier. Before each blocking
+wait, service available returns, integrate the needed bounded delivery and dispatch its named
+follow-on; request an exhausted slot's replacement immediately. Portfolio supplies incremental
+commands without waiting for all directions. Keep unrelated native work, experiments and
+accepted Pro generation advancing. Wait for the first event for at most 60 seconds, then
+service new events before another observation pass. Long integration/transport/comparison work
+yields at recoverable boundaries; short index/browser actions never lock the entire lifecycle.
+The final CM comparison may require all arms; other direction routes do not depend on it.
+
 OWNER_DIRECT 2026-09-07 correction: do not send a progress report simply because a native return
 arrived or a goal turn completed. Apply the notification filter before the app-message tool call.
 Ask what new action Portfolio must take now beyond the existing command; if none, write only
@@ -77,8 +87,8 @@ five-arm batch once with actual identities; until then the correct state is no b
 Use [hmasd-loop-dispatch](../../.agents/skills/hmasd-loop-dispatch/SKILL.md), Root section,
 when receiving commands, native returns, failed dispatches or vacancies, including after
 an observation pass within the active goal. Read it directly from the repository if the current session's skill
-catalog predates its addition. It supplies the dispatch-before-wait sequence, whole-working-set
-receipt and exact conditions for reporting gaps. Root executes named choices; Portfolio
+catalog predates its addition. It supplies the dispatch-before-wait sequence, per-event dispatch
+receipts and exact conditions for reporting gaps. Root executes named choices; Portfolio
 owns readiness and replacement planning. DM and CM retain their scientific/technical work.
 
 Tool addressing and native/app message differences live in
@@ -130,7 +140,9 @@ research goal is complete. Owner pause/end preserves accepted processes and pend
 evidence with an explicit observation handover, without a replacement scheduler.
 
 Each observation pass reads current assigned rows, batches independent supervisor checks, observes due Pro
-requests serially and applies the shared dispatch skill. It executes remaining explicit commands and
+requests through short serial browser reads and applies the shared dispatch skill. Service ready
+returns between observations; do not wait for a request to finish before observing the next or
+dispatching another direction. It executes remaining explicit commands and
 return routes; unlisted actions go to Portfolio. Historical handles and requests are not adopted
 by scanning archives. Reuse the owner's goal; no new scheduler, polling task or replacement goal is created.
 
