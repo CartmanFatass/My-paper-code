@@ -59,6 +59,21 @@ accepted Pro generation once per direction; completed tasks and unresolved waits
 
 ## Root's execution loop
 
+OWNER_DIRECT 2026-09-07 correction: do not send a progress report simply because a native return
+arrived or a goal turn completed. Apply the notification filter before the app-message tool call.
+Ask what new action Portfolio must take now beyond the existing command; if none, write only
+the Root log and continue. Logging plus sending is still a violation. Authorized integration,
+first-to-second dataset continuation and acknowledgement of an applied command need no message
+or Portfolio ACK. Real unresolved repairs and exhausted-slot replacement requests remain prompt,
+coalesced and internal; do not repeat an unchanged request on subsequent goal turns.
+
+During the three CM comparison batches, apply CM_MODEL_COMPARISON_20260907.md at every new CM
+assignment, including those forwarded by active DMs and those using an existing CM. Root directly
+captures and dispatches eligible work before coding; it does not wait for Portfolio to notice a
+new agent. Record batch assignment or a concrete exclusion once in the existing log. A helper
+being installed is not proof that this dispatch trigger ran. Report the requested first accepted
+five-arm batch once with actual identities; until then the correct state is no batch started.
+
 Use [hmasd-loop-dispatch](../../.agents/skills/hmasd-loop-dispatch/SKILL.md), Root section,
 when receiving commands, native returns, failed dispatches or vacancies, including after
 an observation pass within the active goal. Read it directly from the repository if the current session's skill

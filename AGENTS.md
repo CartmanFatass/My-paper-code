@@ -15,8 +15,9 @@ separate identity, permission, approval, or blocking system.
 The session that drives execution is **Root** (Luna/xhigh). Root executes bounded commands,
 observes accepted experiments, executes exact Pro transport and integrates specified results.
 The independent **Portfolio** session (Astra; effort selected by the owner) plans tasks, readiness, dependencies, return
-branches and working-set replacement. Root reports completion, missing input, failure, conflict
-or uncertain external acceptance; Portfolio determines the next command. Portfolio also owns
+branches and working-set replacement. Root logs completion and execution facts locally. It messages
+Portfolio only for a concrete new command, unresolved repair/conflict, or uncertain external
+acceptance requiring Portfolio action; Portfolio determines the next command. Portfolio also owns
 cross-direction scientific comparison, investment proposals and the scientific content of
 `docs/research/portfolio/PORTFOLIO.md`. By the owner's explicit 2026-09-06 instruction Portfolio
 runs directly on main; coordinate overlapping file edits with Root and push explicit-path commits.
@@ -36,6 +37,15 @@ evidence. The evidence standard is `docs/research/specs/MARL_EMPIRICAL_EVIDENCE_
 more. `docs/project/ALGORITHM_PRINCIPLES.md` is historical background, not a required reading.
 
 ## Workflow calibration (OWNER_DIRECT, 2026-09-06)
+
+OWNER_DIRECT clarification 2026-09-07: writing a receipt in the Root log does not authorize also
+sending it to Portfolio. Before `send_message_to_thread`, identify the action Portfolio must take
+now that the existing command does not already supply. If there is none, do not call the tool.
+Integrating an authorized commit, starting/finishing a run, continuing the already-authorized
+second dataset, resuming a named CM/DM, and saying a prior command was applied are log-only.
+Do not request an ACK or reconfirmation for those actions. A real exhausted-slot replacement
+request or unresolved blocker remains prompt and internal; Portfolio does not automatically
+turn that coordination into a user-facing report. Unchanged pending requests are not resent.
 
 CM implements its bounded engineering objective directly by default. Implementer children are
 optional for independent parallel work or substantial context isolation; scientific/semantic risk

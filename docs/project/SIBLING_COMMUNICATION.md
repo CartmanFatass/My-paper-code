@@ -49,6 +49,25 @@ validity. Observation runs within the owner's active goal, without a scheduled a
 
 ## Root-to-Portfolio notification filter
 
+Owner correction, 2026-09-07: the observed violation was **logging and also sending the same
+routine receipt**, not missing log coverage. Apply this filter at the tool call itself:
+before calling `send_message_to_thread`, state the concrete action Portfolio must take now
+that the existing command does not already provide. If no such action exists, omit the call.
+This is a reading/behavior rule, not a new script, schema or permission gate.
+
+Recent examples: "6701 is COMPLETE; I will integrate and execute the authorized6702" is log-only;
+"I resumed the requested repair" is log-only; "I will integrate these already-authorized
+commits after your ACK" adds an unauthorized waiting step and must not be sent. An actual
+shared-index conflict uses the short index handoff below, without bundling scientific progress.
+"Three advancing chains remain and two exhausted slots need replacement commands" is an
+internal Portfolio planning request, sent once per changed need. An outstanding request has
+no periodic reminder; new goal turns do not reset this rule. Reports name the missing action
+first and link evidence, omitting unrelated completion history and already-known status.
+
+Portfolio handles internal requests through commands or repairs without an automatic
+user-facing response. Notify the owner for an actual owner decision, the requested aggregate
+deliverable, or a direct status question; do not narrate every internal coordination event.
+
 OWNER_DIRECT 2026-09-07: ordinary execution receipts belong in
 `docs/research/portfolio/root-log/YYYY-MM-DD.md`, using the local date. Root owns this
 append-only daily log. Each meaningful entry gives time with timezone, direction/command,

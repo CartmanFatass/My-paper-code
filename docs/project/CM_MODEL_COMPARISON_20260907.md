@@ -12,6 +12,37 @@ No general scheduler, retry system, research admission gate or standing telemetr
 
 ## Capture the next three new assignments
 
+### Actual trigger and visibility (owner clarification, 2026-09-07)
+
+The trigger is a new coding assignment, including a new assignment to a reused CM; it is not
+the creation of a CM session. Root performs capture and five-arm dispatch at that assignment
+boundary, without waiting for a Portfolio notification/approval. There is currently no automatic
+CM-created event subscription or executable interception hook in this setup. The headless helper
+runs an assigned arm; it does not discover CM tasks. Do not describe these written dispatch
+instructions as a verified automatic trigger until an actual accepted five-arm batch exists.
+
+For these three batches, Root records each newly assigned CM task once in its existing daily
+log: exact recipient, original assignment/code-spec reference, whether coding has started, and
+either the captured batch or the concrete exclusion reason. New/reused agent identity alone
+cannot justify inclusion/exclusion. Include tasks forwarded by every active DM, not only CM
+sessions created directly by Root. DMs send new coding handoffs to Root before assigning work;
+do not start an ordinary solo CM and enroll it after it has solved the task. A CM receiving new
+coding work without batch facts returns that precise handoff to Root before solving.
+
+For eligible work Root immediately freezes the complete same code spec/task/source and dispatches
+all five arms through the existing protocol. If a requested provider is unavailable, record the
+specific failed arm and tell Portfolio the repair needed; do not silently run only production
+CM or keep reporting that the next task has not arrived. Start means actual native IDs and
+accepted headless process/session receipts, not a document, directory or intended dispatch.
+Routine exclusions are log-only; the requested first-batch activation evidence is reported once.
+If a coding task was missed and has already started, record the miss explicitly rather than
+relabeling it as collection or retrospectively counting a replay. Enroll the next fresh task.
+
+The baseline is the default configured CM at dispatch time, with its actual resolved model and
+effort recorded. It receives the same code spec and is measured in full, including original
+delivery, corrections, token use, completion time and acceptance. A default-setting change does
+not silently retain the earlier illustrative Astra/medium label or alter another arm.
+
 Root owns dispatch and records; the assigning DM owns the real code spec. At the next three
 new CM engineering assignments after this instruction, before any participant begins solving,
 capture the task verbatim, the complete code spec, applicable CM role instructions, required

@@ -1,0 +1,76 @@
+{
+  "id": "20260907-vsp02-002",
+  "created": "2026-09-07T15:30:46-07:00",
+  "direction": "vsp_02",
+  "tier": "direction",
+  "kind": "decision",
+  "title": "VSP02首次Convergence重铸：队友策略变化后的Adam状态选择",
+  "context": "Pro已接受一个固定双机器人交接宿主上的单前缀CARRY/RESET探索设计。此次只记录方向决定，没有新性能结果、源码接受或实验分配；原成员年龄/恢复问题保持未解决。",
+  "options": [
+    {
+      "key": "a",
+      "label": "接受已选择的固定成员重铸",
+      "consequence": "保留已执行的PRO_FINAL方向记录，下一步准备真实B卡和完整实现规格；不自动运行。"
+    },
+    {
+      "key": "b",
+      "label": "拒绝此范围变化",
+      "consequence": "停止该新家族的后续准备，保留旧问题和证据，不把它记成算法失败。"
+    },
+    {
+      "key": "c",
+      "label": "改为准备真实成员变化问题",
+      "consequence": "另行提出成员加入/退出等真实事件的群体，当前固定成员设计不承担该结论。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "完整回答符合最小B证据负担，真实队友行动和同信息状态比较有局部决策价值；通用优化器瞬态仍未排除。",
+  "evidence": [
+    "docs/research/candidates/vsp_02/VSP02_TEAMMATE_POLICY_CHANGE_CONVERGENCE_INTAKE_20260907.md",
+    "docs/research/candidates/vsp_02/pro_packets/20260907_teammate_policy_change_convergence/archive/RESPONSE.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-07.md#L88",
+  "brief": "docs/research/portfolio/owner/briefs/vsp_02/2026-09-07_VSP02_TEAMMATE_POLICY_CHANGE_CONVERGENCE.md",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否保留已按Pro最终决定执行的首次Convergence重铸，准备固定队友策略变化后的Adam状态比较？",
+    "changes_if_approved": [
+      {
+        "target": "vsp_02/DIRECTION.md",
+        "from": "成员年龄问题未实现；固定队友变化只是未选择提案",
+        "to": "接受首次Convergence重铸：一个固定双机器人交接宿主、一个共同前缀的CARRY/RESET B设计；原成员恢复问题仍未解决"
+      }
+    ],
+    "if_refused": "在下一干净边界执行所有者改写，暂停此新家族后续准备并保留原问题与全部证据；不把拒绝变成已运行的算法负向。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/vsp_02/pro_packets/20260907_teammate_policy_change_convergence/archive/RESPONSE.md",
+        "quote": "我接受这一次范围变化，将它明确作为一个新的、固定成员的探索家族，而不是把原成员年龄对象改几个字段后继续。",
+        "why": "方向节点已明确选择范围和最小B，比较真实服务回报，双方拥有相同合法历史和训练预算。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/vsp_02/pro_packets/20260907_teammate_policy_change_convergence/archive/RESPONSE.md",
+        "quote": "最强反对——它可能完全是普通目标变化下的优化器瞬态——仍然成立；接受的是一次有边界的性能比较，不是排除这个反对后的机制结论。",
+        "why": "固定脚本队友可视为环境的一部分；此试验不能支持多智能体特有机制、成员恢复或UAV价值。"
+      }
+    ],
+    "uncertainty": [
+      "新宿主、循环PPO与状态分叉尚无实现接受或运行结果。",
+      "新宿主胜任性、headroom和墙钟/CPU成本未知；旧宿主匹配终端余量仍为0。",
+      "一个前缀只能给局部信号；完整RESET同时改变矩和步计数，不能定位唯一机制。"
+    ],
+    "cost": {
+      "compute": "本轮新科学曝光为0；未来拟议6144训练情节、1152评价情节，整对逻辑调用上限1800秒，尚未分配执行。",
+      "owner_time": "异步检查此范围决定；无需回复才能记录已形成的决定。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing；后续实际B卡、完整实现规格与执行任务仍需准备和分配。"
+    },
+    "verdict_text": "我接受这一次范围变化，将它明确作为一个新的、固定成员的探索家族，而不是把原成员年龄对象改几个字段后继续。",
+    "source": "docs/research/candidates/vsp_02/pro_packets/20260907_teammate_policy_change_convergence/archive/RESPONSE.md"
+  },
+  "starred": true
+}

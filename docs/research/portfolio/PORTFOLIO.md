@@ -1,8 +1,23 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-07 (P12 prepared FRRIE execution and VSP02 request preparation; five-UAV-entry goal)
+Updated at: 2026-09-07 (P14 selected VSP02 implementation/comparison and direction continuations; five-UAV-entry goal)
 
-Current commands: [P12 prepared path and Convergence](handoffs/2026-09-07-p12-prepared-path-and-convergence.md).
+Current commands: [P14 VSP02 implementation and direction continuations](handoffs/2026-09-07-p14-vsp02-code-and-direction-continuations.md).
+The accepted VSP02 first recast now proceeds to its actual B card/full code spec and directly
+authorized Root five-arm CM comparison before coding, with no additional Portfolio wait at that
+return. FRRIE prepares the original-source learner route; UCOPE/FSD author scoped Convergence
+requests with exact Transport/intake return routes; VSP03's already-prepared request is released
+for Transport. No new experiment or UAV entry is allocated. Actual comparison activation requires
+five participant receipts, including the measured default CM baseline.
+
+Previous commands: [P13 runtime restoration and next questions](handoffs/2026-09-07-p13-runtime-restore-and-next-questions.md).
+Root reports no live native directions after restart. P13 restores FRRIE A04 and UCOPE B05
+scientific intake, releases the exact prepared VSP02 Convergence transport, prepares VSP03's
+post-B02 direction question and commissions bounded FSD source-based re-entry preparation.
+Five assignments are a target, not five accepted active chains or UAV entries. No new experiment
+is allocated; new engineering specs go through actual five-arm CM comparison capture before coding.
+
+Previous commands: [P12 prepared path and Convergence](handoffs/2026-09-07-p12-prepared-path-and-convergence.md).
 P12 retains P11's CBSC/UCOPE bounded repairs and VSP03 prospective continuation, allocates one
 prepared FRRIE A04 complete setup/T0 chain, and prepares the VSP02 Convergence question without
 a Pro Send. Actual acceptance remains Root's log fact. No model-comparison batch has been created
