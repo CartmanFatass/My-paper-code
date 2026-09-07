@@ -47,7 +47,9 @@ diffs the result and commits by pathspec with `Implemented-By: grok-build (grok-
 
 1. **Objective first.** Write the CM objective and card exactly as for Opus (class, protected
    semantics, owned paths, bound, stop rule, deliverables) and commit them to `main`.
-2. **Worktree.** `git worktree add -b grok/<direction>-<object>-<date> .claude/worktrees/grok-<slug> <main sha>`.
+2. **Worktree.** Reuse the direction's designated branch/worktree under AGENTS section 6. Name
+   its exact path and branch; a new object or Grok assignment does not create a branch. Keep the
+   editing owner through checks and the hub's commit before reuse.
 3. **Task file** at `temp/directions/<direction>/exp/grok/<task-id>/TASK.md`: the body of
    `.claude/agents/hmasd-cm.md` (frontmatter stripped) verbatim; then the objective and card
    paths to read first; the frozen-input local paths and digests; then the Grok-specific rules:

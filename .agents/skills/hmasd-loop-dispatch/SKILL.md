@@ -42,7 +42,9 @@ Use the existing five-item handoff, in ordinary prose:
 
 - **Target/action:** exact existing recipient and bounded deliverable. If the recipient may be
   unavailable, supply a concrete replacement route with the same role and assignment.
-- **Inputs:** current path/section and bound revision or request identity; avoid history dumps.
+- **Inputs:** current path/section and bound revision or request identity; name the direction's
+  existing authoring branch/worktree and owned paths. Reuse it across assignments under AGENTS
+  section 6, with one writer for overlapping work; a new task does not create a branch.
 - **Bounds:** allowed work, scientific/execution budget, stop and the specific earlier boundary
   this continuation supersedes. Keep preparation-only limits on their own task.
 - **Return route:** name collection, integration, intake and already-selected follow-on actions.

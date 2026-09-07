@@ -197,7 +197,9 @@ Keep durable science in the direction directory (card, result evidence in the E0
 runtime artifacts in temp/directions/<direction>/exp, code and tests in their mapped surfaces.
 Update DIRECTION.md only with accepted mechanism-level science: conclusion, bounded claim,
 strongest support and contradiction, surviving alternative, next discriminator, references. Commit
-by explicit pathspec in your own worktree; Root integrates.
+by explicit pathspec in the direction's designated branch/worktree; Root integrates. Reuse this
+checkout across DM, CM and implementer assignments under AGENTS.md section 6; name it in each
+handoff and serialize overlapping edits. A new object or stage does not create a branch.
 
 Return: the decision taken or escalated and its tier, the result and its bounded reading, claim
 ceiling, strongest support and contradiction, changed files or commit, evidence paths, unresolved
