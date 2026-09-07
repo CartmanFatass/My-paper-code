@@ -90,12 +90,15 @@ complete120-second repaired attempt and no retry, fallback, extra seed or cap ex
 
 ## Collection and technical acceptance
 
-Root observes the accepted handle and returns terminal status/exit, complete stdout/stderr,
-outer wall/RSS and admission receipt. After terminal status, collect the output directory
-to `C:/Projects/HMASD/temp/directions/vsp_03/exp/b02_seed4_p10_lf_20260907`, with receipt
-and supervisor evidence beside it. Send the actual local collection paths to the same
-CM `/root/dm_amx_vsp03_next/cm_vsp03_b02`, which retains technical acceptance; DM then
-performs the all-outcome scientific intake and Chinese brief.
+Root launches and observes the accepted handle, then returns authoritative terminal
+status/exit and supervisor evidence locations to the same CM
+`/root/dm_amx_vsp03_next/cm_vsp03_b02`. After terminal status, CM physically copies the
+output directory to `C:/Projects/HMASD/temp/directions/vsp_03/exp/b02_seed4_p10_lf_20260907`,
+with the admission receipt and supervisor evidence beside it, including complete
+stdout/stderr and outer wall/RSS. CM performs technical acceptance and writes a new
+`VSP03_B02_P10_RESULT_EVIDENCE_20260907.md`; the earlier PATH_UNAVAILABLE record
+`VSP03_B02_RESULT_EVIDENCE_20260907.md` remains unchanged. DM then performs the
+all-outcome scientific intake and Chinese brief.
 
 Full conditions remain [Root handoff, Acceptance and collection](VSP03_B02_ROOT_HANDOFF_20260907.md#acceptance-and-collection-for-return):
 fresh physical/effective memory at least4GiB, terminal exit0 and complete wall within120s,
