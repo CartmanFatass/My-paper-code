@@ -26,9 +26,12 @@ remains dated provenance under the controlling evidence specification section 11
 - Historical selected B discriminator:
   `UCOPE-B-EXPLORE-FT-XF-BC-INVERTIBLE-CONDITIONING-DISCRIMINATOR-R01`
 - Latest direction-tier decision:
-  **2026-09-05 PRO_FINAL / PARK** of the current same-draw retained-policy
-  root-residual localization family, including its numerical-locus dependency;
-  no successor selected. See the dated current position below.
+  **2026-09-07 PRO_FINAL / OPEN** one fixed-five-UAV movement-mediated
+  observation/control B family: optional opening velocity commitment versus
+  same-information stepwise recurrent PPO. This selects a question, not a UAV result.
+  The **2026-09-05 PRO_FINAL / PARK** of the same-draw retained-policy root-residual
+  localization family and its numerical-locus dependency remains unchanged.
+  See the [Convergence intake](UCOPE_UAV_INTERFACE_CONVERGENCE_INTAKE_20260907.md).
 - Latest bounded B observation: **2026-09-07 shared-data return-model B05, joint RM-A**;
   two prospective 512-batch datasets gain a mean 0.002620157877604169 over BLIND and
   IMMEDIATE-4. Dataset sample SD is 0.0002659131214081277; conditional mean MC SE is
@@ -42,6 +45,22 @@ remains dated provenance under the controlling evidence specification section 11
   `94fa0ddb4ef4c686a60a1d9386f8b1b6184184f75df6c51a6fb61cedd8185e1c`
 
 ## Scientific question
+
+On the selected fixed-five-UAV, 256-step task, can a learned optional opening
+velocity commitment of one or four primitive steps improve complete time-average
+team native service return over a recurrent PPO controller with the same free local
+observations and every legal velocity action available at every step? Movement can
+change subsequent local information and service opportunities. The strongest null
+is competent ordinary feedback control doing the useful movement and information
+use itself. A positive two-arm comparison would support only the package: direct
+geometry, temporal smoothing and optimization remain unseparated explanations.
+
+The selected prospective MARL structure is partial observability in a fixed moving
+team. Actual service opportunity consequences replace no existing sensor bill:
+there is no asserted positive sensing fee or B05 count interface on this host.
+No UAV effect, tuned headroom, transfer or deployment claim has been observed.
+
+### Historical finite-renewal question
 
 In the frozen finite renewal host, can a fixed-budget FP32 learner pay a real
 service/time/energy cost for a diagnostic probe, exploit a protected
@@ -86,10 +105,37 @@ The next discriminator is whether a source-defined UAV paid observation can chan
 native control and improve team return after its actual cost, while the no-purchase
 controller retains its free information. The inspected UAV base supplies velocity actions
 and automatically returned local observations, not an established B05 paid-count operation;
-that path and any new family decision remain unresolved. The retained-policy/root-residual
-numerical-locus family remains stopped. See the [B05 intake §§5–7](UCOPE_SHARED_DATA_RETURN_MODEL_B05_INTAKE_20260907.md#5-what-b05-adds-and-what-remains-contrary),
+the subsequent Convergence selects the narrower movement-mediated comparison above.
+Its actual observation use and native performance remain unmeasured. The retained-policy/
+root-residual numerical-locus family remains stopped. See the [B05 intake §§5–7](UCOPE_SHARED_DATA_RETURN_MODEL_B05_INTAKE_20260907.md#5-what-b05-adds-and-what-remains-contrary),
 [original card](UCOPE_SHARED_DATA_RETURN_MODEL_B05_SCIENCE_CARD_20260907.md) and
 [complete result evidence](UCOPE_SHARED_DATA_RETURN_MODEL_B05_RESULT_EVIDENCE_20260907.md).
+
+## Accepted UAV family question — 2026-09-07 Convergence
+
+The selected first B compares a single optional opening velocity commitment with
+stepwise recurrent PPO on the same fixed task and information boundary. Both process
+all primitive observations; the treatment holds its sampled velocity until expiry,
+then returns to feedback. The comparator may move, hover or repeat a velocity itself.
+The primary is full-episode time-average native team reward, recovered from the sum
+of base per-agent rewards rather than the adapter's additional averaging. The new
+MEI is 0.01 on that reward scale; the old finite-host 0.001 rules are unchanged.
+
+The strongest support is the accepted finite-host net-acquisition evidence together
+with the actual velocity/position/channel/local-observation/service chain. The strongest
+contradictions remain harmful extra acquisition, null learning outcomes and the absence
+of measured UAV information value or generic-controller competence. More information,
+duration activation or a changed action is not a native benefit. Even a future positive
+comparison cannot isolate pure information value from direct motion, time structure
+or learner exposure. Above-MEI results with weak comparator or information evidence
+retain their numerical performance meaning with the corresponding interpretation limited.
+
+The next discriminator uses two independent training pairs and final sampled returns,
+with a fixed hover competence reference inside the same B. There is no separate
+headroom, exact-policy or cause-localization prerequisite. Its cost and implementation
+remain unmeasured, and no UAV experiment or formal validation entry follows from the
+decision alone. See the [immutable decision](pro_packets/20260907_uav_interface_convergence/archive/RESPONSE.md)
+and [conformity/intake](UCOPE_UAV_INTERFACE_CONVERGENCE_INTAKE_20260907.md).
 
 ## Prior shared-data return-model observation — 2026-09-07 B04
 

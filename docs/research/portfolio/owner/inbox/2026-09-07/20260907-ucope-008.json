@@ -1,0 +1,86 @@
+{
+  "id": "20260907-ucope-008",
+  "created": "2026-09-07T16:48:52-07:00",
+  "direction": "ucope",
+  "tier": "direction",
+  "kind": "decision",
+  "title": "UCOPE：开启固定五机移动观测/控制B家族，尚未运行",
+  "context": "完整GitHub答复选择一个窄的真实UAV学习比较。处理臂开局可保持速度1或4步，generic每步可反馈，二者保留全部合法免费局部信息。净服务回报是主要量；信息、位置、时间与优化原因尚未分离。旧负值、零值及家族暂停保留，本轮零实验。",
+  "options": [
+    {
+      "key": "a",
+      "label": "执行Pro选择，开启窄B家族",
+      "consequence": "只记录所选科学问题；后续卡、规格和完整预算另由实际任务推进。"
+    },
+    {
+      "key": "b",
+      "label": "暂不开放，返回明确的接口/范围异议",
+      "consequence": "保留全部证据，按明确异议回到同一节点；不以传输问题充当负结果。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "完整答复在B证据层级内选择了源支持的控制路径和有全部免费信息/合法动作的generic，未要求更强机制归因先行。",
+  "evidence": [
+    "docs/research/candidates/ucope/UCOPE_UAV_INTERFACE_CONVERGENCE_INTAKE_20260907.md",
+    "docs/research/candidates/ucope/pro_packets/20260907_uav_interface_convergence/archive/RESPONSE.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-07.md#ucope-uav-interface-convergence--2026-09-07",
+  "brief": "docs/research/portfolio/owner/briefs/ucope/2026-09-07_uav-interface-convergence.md",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否执行Convergence的选择，开启固定五机、单次移动承诺与普通反馈控制比较的窄B家族？",
+    "changes_if_approved": [
+      {
+        "target": "docs/research/candidates/ucope/DIRECTION.md · Latest direction-tier decision / Scientific question",
+        "from": "真实UAV信息/控制路径与新家族问题未决",
+        "to": "PRO_FINAL开启一个运动介导观测与服务机会成本的B家族；尚无UAV实证、实现或运行分配"
+      }
+    ],
+    "if_refused": "按所有者明确覆盖处理新家族选择；保留原Pro答复、全部历史结果和旧numerical-locus家族暂停，不执行新实验。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/ucope/pro_packets/20260907_uav_interface_convergence/archive/RESPONSE.md",
+        "quote": "**最终选择（a）：继续，并在方向科学层面开启一个窄的“固定多 UAV、运动介导观测、原生服务机会成本”B/EXPLORE 家族。第一问题是：在同一有限预算下，学习一个可选的短移动承诺前缀、随后利用实际新观测控制，是否比始终可以逐步反馈的同信息 recurrent PPO 控制器获得更高的完整团队原生回报。**",
+        "why": "完整节点答复选择了实际速度、免费局部观测与原生服务后果构成的有限学习问题，没有虚构传感收费。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/ucope/pro_packets/20260907_uav_interface_convergence/archive/RESPONSE.md",
+        "quote": "| B04 seed6601 在 `LINKED-p13_20-c9_100` 额外购买，context 损失 **0.021816406250000003**；整体增益 **-0.0008735351562499955** | 是实际原生损失，不是 proxy 下降；原规则为 MEI 内的 RM-B，不改称 RM-C。 |",
+        "why": "有害购买与B01零收益说明学会探测不保证净收益；它们不被新家族选择抹除。"
+      },
+      {
+        "path": "docs/research/candidates/ucope/pro_packets/20260907_uav_interface_convergence/archive/RESPONSE.md",
+        "quote": "（b）的最强理由仍然成立一半：源没有证明这里存在独立正的“信息购买费用”，也没有证明改变观测是回报差的唯一因果来源。因此本答复**不打开独立收费传感器或纯信息价值识别问题**。若要作那种更强比较，真正缺的是具名的新信息通道、对 actor 的增量权限及同一次操作的原生成本接口；不能用本答复的移动 package 充当它。当前选择接受这个限制，直接检验有机会成本的实际控制方案，不将尚未识别的组件效果设为启动前提。",
+        "why": "移动可直接改变服务，新比较不识别纯信息价值或独立正收费。"
+      }
+    ],
+    "uncertainty": [
+      "真实UAV效果、generic能力、headroom与完整wall/CPU成本尚未测量。",
+      "聊天未交付说法与已确认的GitHub答复/评论矛盾，原因未定位；两份证据均保留，Root继续记录传输事实。",
+      "具体兼容运行时、未使用的新seed及完整调用预算待下一份卡/spec绑定；当前不进入编码或UAV验证。"
+    ],
+    "cost": {
+      "compute": "本轮零训练/评价。所选未来规模为4个fit、524288训练团队步、192评价episodes/49152团队步；秒数/cap未分配。",
+      "owner_time": "异步审阅，无需回复等待。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing；新编码/运行还需后续实际任务，不由本条发布释放。"
+    },
+    "verdict_text": "**最终选择（a）：继续，并在方向科学层面开启一个窄的“固定多 UAV、运动介导观测、原生服务机会成本”B/EXPLORE 家族。第一问题是：在同一有限预算下，学习一个可选的短移动承诺前缀、随后利用实际新观测控制，是否比始终可以逐步反馈的同信息 recurrent PPO 控制器获得更高的完整团队原生回报。**",
+    "source": "docs/research/candidates/ucope/pro_packets/20260907_uav_interface_convergence/archive/RESPONSE.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-07T23:50:07+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/ucope/pro_packets/20260907_uav_interface_convergence/archive/RESPONSE.md",
+      "record": "docs/research/candidates/ucope/UCOPE_UAV_INTERFACE_CONVERGENCE_INTAKE_20260907.md",
+      "state": "applied",
+      "summary": "已记录窄UAV家族与当前科学边界；无编码、训练、评价或UAV正式入场。既有委托执行，不冒充owner回复。"
+    }
+  ]
+}
