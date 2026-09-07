@@ -1,0 +1,78 @@
+{
+  "request_id": "2026-09-07-fsd-native-renewal-convergence-01",
+  "evidence_input_sha": "13b4677e44265a2aa62fe4c7ebecb6c9056d493e",
+  "basis": "P13 source preparation sections 3-5; existing accepted large_d2_seed2 artifacts. This arithmetic is not an experiment.",
+  "new_exposure": {
+    "learner_initializations": 0,
+    "training_starts": 0,
+    "training_transitions": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0,
+    "result_bearing_invocations": 0,
+    "provider_sends_by_author": 0
+  },
+  "selection": {
+    "training_checkpoints": 1,
+    "checkpoint": "large_d2_seed2/checkpoint_final.pt",
+    "outcome_informed": true,
+    "independent_new_training_seeds": 0
+  },
+  "historical_training": {
+    "transitions": 128000,
+    "optimizer_steps": {
+      "coordinator": 4350,
+      "actor": 9000,
+      "critic": 9000,
+      "team": 300,
+      "individual": 1200
+    }
+  },
+  "prospective_not_allocated": {
+    "policies": [
+      "C",
+      "H",
+      "G"
+    ],
+    "episodes_per_policy": 32,
+    "horizon": 400,
+    "entities": 6,
+    "episodes_total": 96,
+    "env_steps_total": 38400,
+    "env_steps_per_policy": 12800,
+    "agent_steps_total": 230400,
+    "learned_controller_env_steps_C_H": 25600,
+    "batch_size": 32,
+    "agent_step_batch_calls_C_H": 800,
+    "max_coordinator_batch_calls_C_H": 1598,
+    "fixed_agent_decodes_per_pass": 6,
+    "scripted_reference_calls": 400,
+    "policy_loads": 2,
+    "new_optimizer_steps": 0,
+    "complete_policy_cap_seconds": 180,
+    "summed_complete_invocation_cap_seconds": 540
+  },
+  "existing_cost_anchors": {
+    "historical_final_eval_seconds": 563.1800008620048,
+    "historical_final_eval_episodes": 2048,
+    "historical_eval_batch": 512,
+    "linear_32_episode_eval_seconds": 8.799687513468825,
+    "old_runner_046_second_law_for_32_episodes": 14.72,
+    "unknown": [
+      "batch32 cost",
+      "standalone checkpoint/model initialization and load",
+      "standalone G invocation",
+      "complete publication overhead"
+    ],
+    "not_a_measured_or_admitted_projection": true
+  },
+  "minimal_real_B_example": {
+    "arms": 2,
+    "independent_training_seed_pairs": 1,
+    "rollouts_per_arm": 1,
+    "lanes": 16,
+    "horizon": 400,
+    "training_transitions_before_eval": 12800,
+    "optimizer_and_evaluation_work": "nonzero, not allocated or priced here"
+  },
+  "reset_reward_scale": 0.0025
+}
