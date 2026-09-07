@@ -9,7 +9,8 @@ This is workflow implementation, not a scientific or Portfolio disposition.
 
 - CM implements directly by default. Parallel or substantial context-isolation work
   may use implementers; independent review still follows the existing high-risk rule.
-  Editing CMs and implementers use separate worktrees/branches.
+  The later OWNER_DIRECT 2026-09-07 branch rule supersedes the original separate-checkout
+  convention: reuse one checkout per direction, created only for actual work (AGENTS §6).
 - Routine missing facts are recovered from context; ordinary in-scope code/check
   failures may be repaired to acceptance. Actual scope, protected semantics,
   authorization and uncertain external effects retain their dependent-work stop.

@@ -45,10 +45,15 @@ Use the existing five-item handoff, in ordinary prose:
 - **Inputs:** current path/section and bound revision or request identity; name the direction's
   existing authoring branch/worktree and owned paths. Reuse it across assignments under AGENTS
   section 6, with one writer for overlapping work; a new task does not create a branch.
+  If actual selected work has no direction checkout, establish one on demand from accepted
+  inputs; do not precreate branches for inactive directions. A temporary exception names its
+  purpose and retirement event in this handoff.
 - **Bounds:** allowed work, scientific/execution budget, stop and the specific earlier boundary
   this continuation supersedes. Keep preparation-only limits on their own task.
 - **Return route:** name collection, integration, intake and already-selected follow-on actions.
   State real dependencies, such as technical artifact acceptance before the second frozen arm.
+  Root also reconciles finished temporary branches under AGENTS section 6 and retires their
+  local/remote names after preserving recovery and resolving any live delivery dependency.
 - **Report conditions:** completion, failed/missing dispatch, concrete conflict, uncertain
   external acceptance or unlisted next action; return them to Portfolio.
 

@@ -20,6 +20,10 @@ scientific_question, deliverable, claim_ceiling, reference_files with purpose an
 provenance, optional discussion_urls and natural-language constraints. The delivery
 scope supplies dedicated branch, full base_sha, one response_path and same-repo issue_url.
 Portfolio/DM creates the branch and reuses the substantive Issue under existing authority.
+This branch is temporary. Its retirement event is complete response archival and intake (or
+an explicitly resolved obsolete request); Root reconciles delivery state and preserves the
+fixed commits before retiring its local/remote names. Never rebind an accepted request to
+another branch as cleanup.
 
 Follow the current Portfolio command's operation and return route. A preparation-only task
 returns its ready handoff; it does not dispatch Transport. A command may already include

@@ -319,7 +319,9 @@ launch sha, execution node, run root, queue state).
 Several sessions commit to the primary target concurrently. Rules for all of them:
 
 - OWNER_DIRECT 2026-09-07: reuse one designated authoring branch and local worktree per
-  research direction across DM, CM and implementer assignments. A new task, object, stage or
+  research direction across DM, CM and implementer assignments. Create it on demand only when
+  that direction has actual authoring work; inactive directions get no placeholder branch.
+  Main and these needed direction branches are the ordinary maintained branches. A new task, object, stage or
   agent does not create a new branch. Name the existing checkout and owned paths in each handoff.
   At a clean boundary, bring required committed inputs into that checkout before dispatch,
   preserving existing work; record the resulting revision and any starting changes.
@@ -336,6 +338,11 @@ Several sessions commit to the primary target concurrently. Rules for all of the
   same-direction authoring checkouts finish accepted work, then Root carries forward one at a
   clean boundary and retires the others after reconciliation. Branch cleanup does not remove
   worktree contents or evidence.
+  Root owns reclamation at completion: integrate accepted work, preserve other unique commits
+  and dirty contents with a recovery reference/backup, reconcile PRs and pending delivery, then
+  retire obsolete local and remote branch names. Unaccepted historical work is archived, not
+  merged merely to delete a branch. A necessary temporary branch names its concrete purpose
+  and retirement event in the existing handoff; it is not retained for an already-finished role.
 - Stage by explicit path and commit by pathspec (`git add -- <paths>`; `git commit -- <paths>`).
   `git add -A`, `git stash`, `git reset`, and any history rewrite are forbidden in agent
   instructions unless the owner asks for them by name.

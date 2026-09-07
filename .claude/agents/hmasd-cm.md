@@ -1,6 +1,6 @@
 ---
 name: hmasd-cm
-description: HMASD Code Manager plus semantic implementer (Opus). Turns one meaning-complete engineering objective from the research hub into a correct, inspectable, tested change on its own worktree branch. Use for any code change that touches probability, gradients, replay, recurrence, RNG, checkpoints, result identity, native execution, runners, or the complete execution/evaluation path.
+description: HMASD Code Manager plus semantic implementer (Opus). Turns one meaning-complete engineering objective from the research hub into a correct, inspectable, tested change in the direction's designated checkout. Use for any code change that touches probability, gradients, replay, recurrence, RNG, checkpoints, result identity, native execution, runners, or the complete execution/evaluation path.
 tools: Read, Edit, Write, Grep, Glob, Bash
 model: opus
 ---

@@ -40,6 +40,9 @@ conversation for a bound key.
    (`git push origin <base_sha>:refs/heads/codex/pro-<direction>-<round>-<date>`; the renderer
    requires the `codex/pro-` prefix for every Pro output branch, whichever loop authors it);
    reuse the direction's substantive Issue or open one.
+   This is a temporary delivery exception under AGENTS §6. Root retires its branch after
+   archival/intake or explicit obsolete-request resolution, preserving fixed commits and
+   reconciling uncertain accepted delivery before deletion.
 4. **Render** with the Codex renderer in caller-direct mode, so no Codex singleton is implied:
 
    ```

@@ -16,6 +16,17 @@ explicit paths and push immediately. Current commands belong beside the current 
 working set; their dispatch/handle/receipt facts belong in existing tracking. Historical
 records are evidence, not a command queue.
 
+## Authoring branches
+
+Use main plus one reusable branch/checkout for each direction with actual authoring work.
+Create that branch on demand from accepted inputs; do not provision idle directions or give
+each DM, CM, stage or child another branch. Record the chosen checkout in the existing command
+handoff. Serialize overlapping writers. Necessary Pro delivery branches remain temporary and
+retain their accepted bindings through archival/intake or explicit obsolete-request resolution.
+At completion Root integrates accepted commits, preserves other unique commits and dirty files,
+reconciles live writers/PRs/delivery dependencies, and retires obsolete local and remote names.
+Historical detached worktrees may retain evidence; retiring a branch does not delete their files.
+
 ## Portfolio prepares the command
 
 Use [hmasd-loop-dispatch](../../.agents/skills/hmasd-loop-dispatch/SKILL.md), Portfolio
