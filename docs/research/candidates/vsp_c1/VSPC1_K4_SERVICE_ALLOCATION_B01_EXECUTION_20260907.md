@@ -103,3 +103,30 @@ at the frozen cwd. Remote `rev-parse HEAD` returned the complete accepted SHA an
 Both exact handles were `not_found` before staging; the target worktree was absent.
 This entry is committed/pushed before the first FACTOR invocation. Execution uses the
 unchanged frozen command above, with admission inside its cap.
+
+
+### FACTOR terminal collection; conditional GENERIC frozen
+
+Sole FACTOR accepted at 2026-09-07T14:49:25.313567Z, PID 2740531, initial status running,
+tmux active. Full handle metadata went immediately to Root and DM. It finished before adoption
+ACK, exit 0 at 14:49:31Z; same-handle terminal read confirmed tmux inactive. Complete external
+wall **6.52 s**, user **3.83 s**, sys **0.47 s** (aggregate CPU **4.30 s**), below 2700 s.
+Fresh receipt at 14:49:25.361128Z passed physical/effective **15,665,508,352 bytes**.
+Main-process lifetime peak RSS **478,146,560 bytes**; scratch telemetry unmeasured.
+
+Collected remote `FACTOR/summary.json`, `resource_admission.json` and supervisor `task.log`
+(the latter saved locally as `FACTOR/supervisor.log`) under the declared runtime root.
+Local `FACTOR/collection_checks.json` records technical collection. Checks passed: exact SHA,
+arm/seed/372 parameters/CPU float32/one thread/batch16; 256 completed optimizer steps;
+actual counts equal all declared counts (4096 training episodes, 1280 evaluation episodes,
+258048 ticks, 569344 scalar Q predictions, 17 target copies, zero selection steps);
+checkpoints exactly 0/64/128/192/256, 256 finite loss rows and 128 finite legally indexed
+endpoint rows per period with saved means reproduced. Initial parameter norm 4.740192413330078;
+final displacement 2.103224039077759. Required summary accepted independently of magnitude.
+No scientific interpretation or extra execution followed this check.
+
+The sole GENERIC command remains exactly as frozen above, now technically eligible. Its unit
+time is still unmeasured; FACTOR's complete 6.52 s is adjacent same-host evidence for the common
+counts, not a new numerical GENERIC guarantee. No extra performance assessment is selected.
+Before GENERIC, this FACTOR collection entry is committed/pushed. Its adjacent fresh memory
+admission and complete 2700 s cap remain mandatory; it alone runs the rule and paired publication.
