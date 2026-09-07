@@ -12,6 +12,11 @@ Historical handles and old routing sections below are retained evidence, not cur
 VSPC1 K4 reactive-queues B01 source, technical acceptance and source-intake records are
 integrated at main `476748835`; the selected seed401 run has not started. The direction manager
 is preparing the exact two-arm launch handoff against this integrated source surface.
+The first FACTOR supervisor name `vspc1-reactive-b01-factor-run01` was accepted at
+2026-09-07T13:57:52+08 but the Root wrapper passed a literal `$P`, exited 0 in 0 seconds, and
+produced no admission receipt or runner output; no learner/RNG/result exposure occurred. The
+handle and log are retained as a technical launch failure; DM/CM must issue the corrected
+command before FACTOR is retried.
 
 ## Current Pro handover queue — 2026-09-06
 
