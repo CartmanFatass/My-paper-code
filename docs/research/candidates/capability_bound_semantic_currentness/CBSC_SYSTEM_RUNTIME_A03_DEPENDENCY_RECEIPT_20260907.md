@@ -71,8 +71,8 @@ The complete cache-key paths and WHEEL/Requires-Dist text are in `archives.json`
 Torch 2.7.0+cu118 and Triton 3.3.0 have completed **cp310** archive entries,
 whereas this path requires **cp312**. They are excluded. Six NVIDIA packages
 have cached manylinux2014 builds but A02 selected manylinux1 builds; those
-alternatives are likewise excluded, preserving the no-build-substitution
-boundary. No claim of their binary equivalence is made. Matching NumPy is
+alternatives were excluded only from the initial exact-A02-filename accounting.
+The corrected prospective route below includes all six under DM clarification. No claim of their binary equivalence is made. Matching NumPy is
 cp312/cp312 manylinux_2_17+manylinux2014; matching MarkupSafe is cp312/cp312
 manylinux_2_17+manylinux2014+manylinux_2_28. Pure-Python and matching NVIDIA tags
 are retained as read from WHEEL.
