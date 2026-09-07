@@ -15,7 +15,9 @@ sent by this DM. Root verifies that state on the provider before the one authori
    branch `codex/pro-dish-post-b06-20260907`. Its actual full delivery baseline is
    `dba5cfc8a58eba9a0c1b2cefb9e954f3c92a7e71`, already pushed with the preserved old archive
    and `DISH_POST_B06_DELIVERY_BLOCKER_INTAKE_20260907.md`. Scientific input remains
-   `6b45ea47bea500bea11f1215080653a8df19bdd6`. New TASK publication/binding is pending.
+   `6b45ea47bea500bea11f1215080653a8df19bdd6`. The new TASK is published and bound at
+   `25c93b776b8d8a8d706ef1259601775d15210594`:
+   [fixed corrected TASK](https://github.com/CartmanFatass/My-paper-code/blob/25c93b776b8d8a8d706ef1259601775d15210594/docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260907_post_b06_delivery_correction/TASK.md).
    Only this distinct response path is writable:
    `docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260907_post_b06_delivery_correction/archive/RESPONSE.md`.
    The delivery comment remains on Issue4.
@@ -26,8 +28,10 @@ sent by this DM. Root verifies that state on the provider before the one authori
    request identity and delivery baseline/path differ in REQUEST; the TASK's scientific
    body before `Authorized delivery` remains identical. Existing old and refreshed packets
    are preserved. No source, B06 invocation, new scientific object or branch is commissioned.
-4. **Acceptance and return.** Publish TASK, bind its complete pushed SHA with the current
-   renderer, then publish HANDOFF. Root must use this returned new packet and exact fixed
+4. **Acceptance and return.** TASK was pushed before the current renderer compared its
+   complete committed bytes and bound the full SHA. This updated HANDOFF is published with
+   the binding record; `READY_TO_DISPATCH` means ready, not provider acceptance.
+   Root must use this returned new packet and exact fixed
    link, not an older same-path copy on main or the old archived prompt. Under the existing
    P09 command, verify the node/model, terminal old request and new request's unsent state,
    then Send this new prompt exactly once. If already accepted, observe it. Preserve any
