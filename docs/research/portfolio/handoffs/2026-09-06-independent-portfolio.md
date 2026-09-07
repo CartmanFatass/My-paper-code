@@ -48,10 +48,12 @@ concrete new-question proposal exists, with their current-family stops preserved
 share N3 and SCDMP shares K4 without duplicate agenda reservations. ACVC/VNFC retain second-recast
 lowest sequencing. PARKED reserves retain their re-entry conditions. Do not invent a fifth run.
 
-Root has been sent the DISH implementation and existing UCOPE preparation handoffs. The current
-native executor/accepted-dispatch facts must be recorded by Root; this document does not assert
-that a proposed action has already started. Root returns only actual blockers or missing ordering
-choices to Portfolio while continuing the usable part of the queue.
+Root subsequently confirmed actual continuation: existing `/root/dm_amx_dish_seed101` is
+running after followup to commission CM from B06 card §7 and integrated objective `fde638f9c`.
+A named CM child/result remains pending. `/root/dm_ucope_question_prep` has started bounded
+source-backed question preparation, with no experiment or Pro Send. These are two advancing
+preparation chains; other named current DMs are not thereby counted as active work. Root
+continues and returns concrete executor/result facts or blockers to Portfolio.
 
 ## Comparison inputs
 
