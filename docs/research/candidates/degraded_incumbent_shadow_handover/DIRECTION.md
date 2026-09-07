@@ -814,3 +814,35 @@ failure; no scope or runtime cap breach. The next discriminator is returned to C
 as a choice among a specific further bounded question and a narrow stop; no automatic third
 seed or new family follows. References: `DISH_CONTROL_LOW_LR_B05_RESULT_INTAKE_20260906.md`,
 `control_low_lr_b05_20260906/TECHNICAL_ACCEPTANCE.json`, `RUN_SUMMARY.json`, and the frozen card.
+
+## Accepted post-B05 discriminator: ordinary execution law — 2026-09-06
+
+Complete Convergence at immutable `db0bbfd8e1d96b06e8c6e8aa9bfa70787fe9a9cd` continues the
+existing first-ordinary-legal-application RETAIN/COPY/SHADOW agenda and selects only
+**DISH-SAMPLED-EXECUTION-B06, B/EXPLORE**. One new seed113 LOW_LR learner at 3e-5 runs sixteen
+updates; its single final checkpoint supplies four modal and eight fixed sampled episodes,
+with four own-initial raw modal references inside the same B. The primary is each condition's
+two-sample mean minus modal service, averaged across four conditions; MEI +24, complete native
+outcomes retained. The whole object, including necessary checks and publication, has one new
+1800s cap. No preceding path A, third LR pair, intermediate selection or source fork is selected.
+
+The bounded reason is now precise: two finite positive mean LR comparisons retain LOW_LR as
+a development candidate, while code distinguishes sampled training actions from modal final
+execution. Comparing those execution laws at one final state directly tests native performance.
+It does not diagnose modal execution as the cause of zero evaluation transfers or retrospectively
+explain the LR gains. B05's -277 condition and 209 invalid commits, B04's initial-relative loss
+and early termination, and all zero-transfer final panels remain contradictions. The source
+quantity stays unestimated; a legal event would establish only an observed path, not an eligible
+source cut or COPY−RETAIN/SHADOW−COPY value.
+
+Surviving alternatives include useful exploration of motion/proposal combinations, noise costs,
+seed/condition effects and the unchanged recurrent/normalization/auxiliary couplings. The next
+discriminator is the complete sampled-versus-modal primary with events, energy and terminal
+exposure; the prospective low-confidence prediction is Delta_exec<=-24. No B06 outcome exists.
+The response conforms to current B burdens; the card freezes an object-local width1 RNG address
+under the existing backend namespace. This boundary records the decision/card only, with no CM
+implementation or launch. No recast, C promotion or Portfolio change follows.
+
+References: `DISH_POST_B05_CONVERGENCE_INTAKE_20260906.md` §§1–5;
+`DISH_SAMPLED_EXECUTION_B06_SCIENCE_CARD_20260906.md` §§1–7;
+`pro_packets/20260906_post_b05_convergence/archive/RESPONSE.md` §§三–七.
