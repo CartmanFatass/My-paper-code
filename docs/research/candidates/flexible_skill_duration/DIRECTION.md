@@ -214,19 +214,48 @@ retention estimate. The surviving alternative is that the given actuator rule
 supplies most useful behavior while the current initialization and own training
 path happen to make roles competent; this comparison does not isolate those causes.
 
-The next useful discriminator is one new independent trained pair at the same
-comparison and five-rollout budget, preserving every sign/failure. This is the
+The B01 intake selected one new independent trained pair at the same
+comparison and five-rollout budget, preserving every sign/failure. This was the
 DM's object-tier advice for a separately issued preparation/allocation, not an
 automatic successor, family reopening, recast, Portfolio change or UAV entry.
 Scientific intake and decisions: `FSD_NATIVE_RENEWAL_LEARNING_B01_INTAKE_20260908.md`.
 
-P40 now records that same next discriminator prospectively as B02, with new
+P40 recorded that same next discriminator prospectively as B02, with new
 training/evaluation masters770303/770304, the same comparison/budget and separate
 per-training-pair reporting. The card fixes recurrence, small/opposite and
 incomplete branches; no new empirical result or stronger claim follows from
 preparation. `FSD_NATIVE_RENEWAL_LEARNING_B02_SCIENCE_CARD_20260908.md` and its
 CM spec/preparation intake supply the exact seed/input implementation need.
 No B02 code or scientific execution is allocated by this preparation.
+
+## Accepted independent-pair recurrence (B02/P43, 2026-09-08)
+
+B02 is valid complete B above .01 MEI at training/evaluation770303/770304, with
+the same comparison and five-rollout budget. Full H−C is+.5203906250000002
+(conditional episode SE.007576080882164499); post is+.5216948621553887. Native
+means are C.3605989583333332,H.8809895833333335,G.8918359375. Report this row
+beside B01's+.49738281249999894, without pooling episodes or estimating a combined
+effect. The native package gain now occurs in two observed independent training
+pairs; it is not confined to the first training key. Two pairs still do not
+establish stable seed-population superiority.
+
+The strongest new support is recurrence after real own-trajectory learning, with
+post-reset gain intact. The strongest contradiction remains public G's native
+advantage: B02 G−H=.01084635416666652 full/.008367272347535353 post. C is still
+an internal-package comparator rather than a tuned fixed-clock baseline; E3's
+competent-control losses and E4's public-null interpretation are not displaced.
+Tuned generic headroom remains absent. More own eligible KEEP opportunities and
+fewer wrong native outcomes account for the observed reward difference, but do
+not isolate supplied-rule, data, optimization or actor causes. The public rule
+does not become learned termination because its package gain recurs.
+
+All three invocations,64000 training transitions,10740 optimizer calls and96
+endpoint episodes completed inside60/900/900s; measured complete wall totals
+665.01s. B01 and B02 costs/outcomes remain separate evidence records. P43 answers
+the selected fresh-pair discriminator at its B ceiling and completes its allocated
+panel. No further discriminator, successor, family disposition or UAV entry is
+selected. Evidence and decisions: `FSD_NATIVE_RENEWAL_LEARNING_B02_RESULT_EVIDENCE_20260908.md`
+and `FSD_NATIVE_RENEWAL_LEARNING_B02_INTAKE_20260908.md`.
 
 ## Objects and their state (2026-09-08)
 
@@ -240,8 +269,8 @@ No B02 code or scientific execution is allocated by this preparation.
 | E3 — heterogeneous hazard | complete18/18 valid; original bounded E3-H0-NO-ADVANTAGE retained by complete Convergence | `FSD_E3_HETEROGENEOUS_HAZARD_SCIENCE_CARD_20260904.md`; `FSD_E3_HETEROGENEOUS_HAZARD_INTAKE_20260905.md` |
 | Post-E3 renewal/reference census | complete3/3 A/RECON,288 candidates, zero learner; public greedy explains switching opportunity; no successor selected | `FSD_E4_CENSUS_SCIENCE_CARD_20260905.md`; `FSD_E4_CENSUS_RESULT_EVIDENCE_20260905.md`; `FSD_E4_CENSUS_INTAKE_20260905.md` |
 | Native-renewal control A01 / P21 | complete3/3 conditional A/RECON; H−C +.26935 with post G−H .16403; branch2, zero training, no successor | `FSD_NATIVE_RENEWAL_CONTROL_A01_SCIENCE_CARD_20260907.md`; `FSD_NATIVE_RENEWAL_CONTROL_A01_RESULT_EVIDENCE_20260907.md`; `FSD_NATIVE_RENEWAL_CONTROL_A01_INTAKE_20260907.md` |
-| Native-renewal learning B01 / P30–P38 | complete valid B, one trained pair; H−C+.49738 above .01 MEI, G−H+.02118 full; all3 arms/708.25s retained; no successor launched | `FSD_NATIVE_RENEWAL_LEARNING_B01_SCIENCE_CARD_20260908.md`; `FSD_NATIVE_RENEWAL_LEARNING_B01_RESULT_EVIDENCE_20260908.md`; `FSD_NATIVE_RENEWAL_LEARNING_B01_INTAKE_20260908.md` |
-| Native-renewal learning B02 / P40 | prospective independent-pair card and bounded seed/input spec complete;770303/770304; no code/runtime/result | `FSD_NATIVE_RENEWAL_LEARNING_B02_SCIENCE_CARD_20260908.md`; `FSD_NATIVE_RENEWAL_LEARNING_B02_CM_SPEC_20260908.md`; `FSD_NATIVE_RENEWAL_LEARNING_B02_PREPARATION_INTAKE_20260908.md` |
+| Native-renewal learning B01 / P30–P38 | complete valid B, one trained pair; H−C+.49738 above .01 MEI, G−H+.02118 full; all3 arms/708.25s retained; read separately from B02 | `FSD_NATIVE_RENEWAL_LEARNING_B01_SCIENCE_CARD_20260908.md`; `FSD_NATIVE_RENEWAL_LEARNING_B01_RESULT_EVIDENCE_20260908.md`; `FSD_NATIVE_RENEWAL_LEARNING_B01_INTAKE_20260908.md` |
+| Native-renewal learning B02 / P40–P43 | complete valid B, new770303/770304 pair; H−C+.52039 above .01, G−H+.01085 full; all3 arms/665.01s retained; separate from B01, no successor | `FSD_NATIVE_RENEWAL_LEARNING_B02_SCIENCE_CARD_20260908.md`; `FSD_NATIVE_RENEWAL_LEARNING_B02_RESULT_EVIDENCE_20260908.md`; `FSD_NATIVE_RENEWAL_LEARNING_B02_INTAKE_20260908.md` |
 | Advancement plan | E1 → E2 → E2b/E3 → E4 → C-gate; E2b is not selected at this boundary | `docs/Claude_docs/plans/RESEARCH_ADVANCEMENT_PLAN_20260902.md` |
 
 ## Code
