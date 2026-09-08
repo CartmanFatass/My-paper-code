@@ -1,8 +1,10 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-07 (P27 FRRIE first-exception diagnostic; other routes retained)
+Updated at: 2026-09-07 (P28 CBSC B05 pair allocation; other routes retained)
 
-Current incremental command: [P27 FRRIE first-exception capture](handoffs/2026-09-07-p27-frrie-first-exception-capture.md). P23 found no supported source correction; prepare an explicit bounded diagnostic input and run at most one120s original-schedule chain after acceptance. Nonreproduction does not clear P22. No new learning comparison or retry is allocated.
+Current incremental command: [P28 CBSC B05 fresh RAW/STRUCT pair](handoffs/2026-09-07-p28-cbsc-b05-pair-execution.md). Accepted source/card/handoff are ready; allocate the exact21223 pair at600s complete per arm/1200s summed, with no extra readiness probe. Actual launches and outcomes remain Root execution facts.
+
+Retained incremental command: [P27 FRRIE first-exception capture](handoffs/2026-09-07-p27-frrie-first-exception-capture.md). P23 found no supported source correction; prepare an explicit bounded diagnostic input and run at most one120s original-schedule chain after acceptance. Nonreproduction does not clear P22. No new learning comparison or retry is allocated.
 
 Retained incremental command: [P26 UCOPE fresh-pair seed/aggregation correction](handoffs/2026-09-07-p26-ucope-fresh-pair-plumbing.md). Frozen source only accepts6801/6802; the same CM corrects bounded seed and pair metadata plumbing, then resumes the existing P24 allocation after accepted source/card bindings. No additional scientific budget or entry count is added.
 
