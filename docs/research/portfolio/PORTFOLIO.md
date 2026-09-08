@@ -1,6 +1,8 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-08 (P57 UCOPE post-B02 selection)
+Updated at: 2026-09-08 (P58 SCDMP retired-context recovery)
+
+Current delivery repair: [P58 SCDMP provider-context recovery](handoffs/2026-09-08-p58-scdmp-retired-context-recovery.md) applies the existing owner-directed exclusion and fresh-6-Pro-context policy after P56's confirmed retired-conversation conflict. Preserve its complete response and blocked application; the same DM authors one distinct corrective request with explicit owner-directed reset evidence, and the existing Transport performs the supported context replacement. A complete conforming new decision returns through the original DM and P56's full selected-object route. No blocked RECAST is applied by this command and no scientific invocation is allocated during repair. Root reports UCOPE, DISH, VSPC1 and FRRIE advancing independently; SCDMP counts only during actual work, not its unresolved wait. Earlier snapshots below remain historical.
 
 Current UCOPE replacement: [P57 post-B02 selection](handoffs/2026-09-08-p57-ucope-post-b02-selection.md) resumes the same DM after the fully intaken two-pair DOWN result (`81bd8b678`). Select a specifically justified within-family change or the precise proper-node scope question, retaining both adverse T−G endpoints and mixed G−H. Preparation allocates zero scientific invocation; an actually selected in-family B has at most one fresh matched pair under the explicit P57 exposure and complete-clock limits, with the same DM/CM owning implementation through intake. No unchanged B02 continuation, presumed clipping cause or additional UAV-entry claim follows. Root reports four other advancing chains: VSPC1 P55, DISH B07, VSP03 P54 and SCDMP P56. Preserve their routes; count P57 only while its accepted work advances. Earlier dispatch snapshots below are historical and do not assert those tasks remain active.
 
