@@ -3,6 +3,11 @@ Binding MARL structure: systems / information flow. Role-owned recurrent state a
 
 # DISH post-B07 direction-question intake — 2026-09-08
 
+**Completed P62 intake:** Convergence at `0086cfd7e8f7326fbadf879f844b757f661e8809`
+selects option(a): retain both narrow stops and DIRECT, with no successor. Section8 records
+the full-response intake and application. Sections1–7 retain the pre-response assessment;
+their pending language is historical. The broader ordinary-source agenda remains unresolved.
+
 Recommend **leave the tested extension without a successor**, retain DIRECT, and keep the
 ordinary-source-application question unresolved. No new treatment survives this bounded
 assessment strongly enough for me to nominate it. This is a direction-local recommendation,
@@ -212,3 +217,132 @@ science task. A broader conforming node decision is intaken at its actual scope.
 science/spec conflict returns to the same node before the affected requirement, without a local
 replacement. A connector/transport blocker forms no direction decision. No selected prospective
 card, CM coding, new source comparison or UAV-entry claim exists now.
+
+## 8. Completed P62 Convergence intake and application — 2026-09-08
+
+### 8.1 Full response, fixed inputs and receipt reconciliation
+
+I read all158 lines of the full response directly from immutable Git commit
+`0086cfd7e8f7326fbadf879f844b757f661e8809`, including its conclusion, actual-read scope and
+references. Its sole change is the addition of this packet's `archive/RESPONSE.md`;
+parent `fee6323351193a64ff791d79a57147c26391fb75` is the accepted repaired handoff head.
+The clean designated checkout fast-forwarded to that commit before these intake edits.
+The Git blob is27061 UTF-8 bytes, SHA256
+`2351fdda3c924746197785279ff4463de649d8090c1e6c97aff0db6c0b015d80`.
+
+The independently fetched Issue4 delivery comment5592890707, created/updated
+`2026-09-08T22:43:15Z`, binds that exact response to TASK
+`1b0ac54fb61485da73ac9290387f3f6cf30dc65c` and scientific source
+`c201e9eb5a71a4b0785a9104156d1dca6df2fbf9`. The response reports reading all16 allowed
+scientific paths at their specified ranges; I attribute that access account to Pro, not to
+a new DM source audit. The question, class, comparator, exposure and adverse evidence match
+this intake §§1–7 and the accepted B07 E0/intake. No scientific execution was repeated.
+
+The short Transport chat receipt is **not the P62 scientific answer**: its348 raw bytes,
+SHA256 `c9f88329d4c558a280110e0b9c041786c38bec03bb0f9bcea6aa1b098c186b2c`, link to the earlier
+P53 response/comment. The archived Transport facts already disclose those earlier links.
+The prior cached GitHub roundtrip entry also concerns earlier work. I preserve the exact chat,
+Transport facts, prompt and manifest, rather than replacing their contents with the new answer.
+Root returned Transport's completed read-only reconciliation: current P62 is ARCHIVED in
+conversation `6a9bec54-df00-83e8-9840-46440458f316`, one confirmed Send, receipt SENT, and
+the canonical P62 delivery is the immutable GitHub response above. This is routed Transport
+observation; I did not inspect the provider UI or diagnose why its short reply used old links.
+The complete correctly bound GitHub response forms the decision; the old links are neither a
+new scientific negative nor authority for this intake. No new Send, rebind or replacement prompt
+is needed. `archive/DELIVERY_INTAKE_RECEIPT.json` and the byte-preserved sources record both.
+
+### 8.2 Rule and exact decision
+
+Evidence-spec §11.9 states, verbatim:
+
+> Pro decisions are final within current owner instructions and applicable specifications.
+
+The response's opening decision, verbatim:
+
+> **保留窄停止，当前不选择任何后继。** 选择所列方案(a)：保留 DIRECT，维持 B07 固定 OWN_COMMAND_MEAN 和 B06 联合抽样执行规则的两项已接受窄停止；不把停止扩大为保留宿主上整个普通来源应用家族的关闭或重构。首次普通合法应用时的 RETAIN/COPY/SHADOW 议程仍未解决，但本轮不为它配置新的实验、诊断、种子、卡片或继续评估任务。
+
+Apply **PRO_FINAL option(a)** at direction tier. This resolves the pending scope choice to
+no successor; the B07 and B06 object stops were already applied. It selects no new card,
+seed, coefficient/loss variant, source fork, diagnostic or continuing assessment activity.
+DIRECT remains the retained development default. There is no whole-family closure/recast,
+C consumption/promotion, UAV-validation entry or Portfolio lifecycle/priority action.
+
+### 8.3 Current-instruction and evidence-class conformance
+
+P62 explicitly allowed the no-candidate branch quoted in §1. The answer resolves that exact
+question at its bounded A/source-and-B-result scope; it does not reject B07 for lacking a C
+claim or demand stronger evidence before a future justified B. Evidence-spec §11.8.2 says:
+
+> Absence of improvement may also motivate a specifically justified new B change. A positive result
+> is neither a universal prerequisite for follow-up nor an entitlement to unlimited further compute.
+
+The response follows this distinction: no specifically supported intervention was advanced in
+this assessment, so none is purchased; it does not assert that a negative B prohibits future
+learning. Under §§11.4,11.7–11.9, it imposes no headroom, exact upper, causal diagnosis, gate
+census, source-value proof or additional RECON prerequisite. It compares no successor with
+the illustrative minimum real B scale in §5 without assigning a phantom treatment or budget.
+No concrete conflict with current owner instructions or applicable specifications is found.
+No specification exception, engineering dissent or corrective Pro question is required.
+
+### 8.4 Bounded scientific reading, contrary evidence and cost
+
+The strongest support for no successor remains B07's−135.25 final service difference and
+higher energy in all four conditions, B06's separate−77.5 joint-sampling result, and the
+absence of a nominated differentiated intervention. The two results have different treatments
+and estimands; they are not pooled replications against the ordinary-source family. The
+independent B07 unit is one matched seed127 pair, not sixteen independent learner samples.
+Both arms have real16-update/65536-transition/512-step learners; the16 initial/final rows
+complete19200 native ticks. The response preserves these counts and the actual train events.
+
+Strongest contrary evidence to expanding the stop is B07's+74 condition and lower final
+invalid count32 versus119, both moved learners and positive own-initial means, earlier
+B04/B05 LOW_LR gains with their adverse conditions, and B05 CONTROL's three ordinary
+training transfers. Initial-relative changes do not replace B07's final primary or identify
+a learning-speed cause. Auxiliary-loss coupling and persistence remain possible explanations,
+not measured defects or selected replacements. Verified literature is reused at the source
+scope in §4; neither its bounded retrieval nor Pro's reading establishes a novelty verdict.
+
+All current B07 TRAIN/EVAL ordinary transfers remain zero. The ordinary/incumbent service
+comparison is valid, while origin eligibility and COPY−RETAIN/SHADOW−COPY value remain
+unestimated. The accepted A03 information ceiling remains. There is no stable inferiority,
+family impossibility, source-state benefit or uniquely MARL-benefit claim.
+
+New scientific exposure is zero: no model, transition, optimizer step, episode, native call,
+replay, profiling or result-bearing invocation. Historical B07 accounted time remains
+463.83358418601877 seconds plus unmeasured syntax-check cost; it is not exact complete wall
+or proof of complete-cap compliance. H and resource gaps limit their dependent quantities.
+The two-arm/one-pair/131072-transition/1024-step/at-most9600-final-tick example remains an
+unallocated scale comparison, not an approved experiment. Engineering scope §4 needs none;
+there is no new implementation or §5 breach. The historical scratch-cleanup restriction is
+preserved without retry and without becoming a scientific condition.
+
+### 8.5 Decisions this intake produces
+
+1. **Object-tier intake/conformance.** Options: (a) accept the complete correctly bound GitHub
+   answer, preserve the older-link chat receipt and apply its conforming decision; (b) return
+   a concrete incomplete-binding/spec conflict; (c) substitute an old answer or local direction
+   choice. Recommend/select(a), supported by the full immutable response, delivery comment
+   and Root's read-only reconciliation.
+   **Owner-delegated decision (unattended, 2026-09-03 instruction): (a).**
+2. **Direction-tier scope.** Options from §6 remain (a) no successor and narrow stops, ordinary
+   source agenda unresolved; (b) broader retained-host ordinary-source-family closure. Recommend
+   and execute(a), exactly the formed **PRO_FINAL** decision at `0086cfd7e8f7326fbadf879f844b757f661e8809`.
+   This is application of Convergence, not a new delegated substitute or a Portfolio disposition.
+
+Append one technical and one direction-selection audit row. Trace existing P2 item
+`20260908-dish-003` to the full response and this section with option(a) applied; its preparation
+packet remains historical. Main and the designated checkout returned no unapplied owner reviews;
+the checked dated DISH audit rows have no owner override. No owner reply is invented or awaited.
+Prediction check: B07's earlier low-confidence positive-sign forecast missed; owner prediction
+was not taken. P62 adds no empirical prediction to score. The existing six-heading Chinese
+P62 brief is updated; B07's empirical brief and frozen card remain unchanged.
+
+### 8.6 Clean return and next discriminator
+
+The P62 no-successor route is **exhausted after this intake**. There is no selected next
+experiment or further source assessment for DM/CM to execute. Return the formed decision,
+immutable response and committed application to Root under P62's supplied route; any new
+direction assignment or working-set replacement is for Portfolio to specify through Root.
+The ordinary-source question remains unresolved without an instruction to keep assessing it.
+No empirical next discriminator is selected, no result-bearing process is launched, and no
+source of a future benefit is inferred from the absence of one here.

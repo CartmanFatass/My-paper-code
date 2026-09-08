@@ -89,3 +89,25 @@ Only REQUEST and this repair's documentation change. Root uses the final repair
 commit's existing HANDOFF path and unchanged dispatch prompt for the authorized
 first provider Send. No scientific invocation, new conversation or cleanup retry
 occurred. The small fresh-render outputs are retained as validation evidence.
+
+## Completed delivery and intake — 2026-09-08
+
+The preceding ready/unsent statements describe preparation, not current state. Root
+returned the accepted one-Send completion and then Transport's read-only reconciliation.
+The P62 binding is ARCHIVED with receipt SENT. Its raw short chat response contains old
+P53 links; preserve it and its Transport facts exactly. The scientific answer is the
+new full GitHub response at `0086cfd7e8f7326fbadf879f844b757f661e8809`, bound by Issue4
+comment5592890707 to this fixed TASK and source. No new Send or rebind occurs.
+
+The DM read all158 immutable response lines, verified the one-file addition and parent,
+preserved the raw delivery materials in `archive/`, and fast-forwarded this checkout
+before application. See `archive/DELIVERY_INTAKE_RECEIPT.json` for the observed digests,
+fixed inputs and receipt boundary. The accepted TASK, REQUEST, HANDOFF and scientific
+source stay unchanged. Pro's full response is preserved at its original Git bytes.
+
+`DISH_POST_B07_DIRECTION_QUESTION_INTAKE_20260908.md` §8 records the conforming PRO_FINAL
+option(a): retain DIRECT and both narrow stops, no successor selected, ordinary-source
+agenda unresolved. The decision allocates no card, new scientific work or further
+assessment. Existing P2 item20260908-dish-003 is traced as option(a) applied; the dated
+audit and Chinese brief record the completed boundary. This named P62 route is exhausted
+after committed intake and returns to Root for its supplied Portfolio route.

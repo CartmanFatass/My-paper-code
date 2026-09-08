@@ -1033,3 +1033,35 @@ unchanged. This is the existing card's narrow stop, not closure of the source ag
 References: `DISH_OWN_COMMAND_MEAN_B07_RESULT_EVIDENCE_20260908.md` §§1–5;
 `DISH_OWN_COMMAND_MEAN_B07_RESULT_INTAKE_20260908.md` §§2–6;
 frozen card §§3–5 and `own_command_mean_b07_20260908_run01/` evidence.
+
+## P62 accepted scope: narrow stops and no successor — 2026-09-08
+
+Complete Convergence at immutable `0086cfd7e8f7326fbadf879f844b757f661e8809` is a
+conforming **PRO_FINAL** decision selecting no successor. Retain DIRECT and the already
+applied stops of B07's fixed own-command mean and B06's joint sampled-execution rule.
+The bounded post-B07 assessment advanced no distinct intervention with a supported
+native-value rationale. This does not close or recast the retained-host ordinary-source
+family; its RETAIN/COPY/SHADOW agenda remains unresolved without a continuing assessment
+or experiment selected in this round.
+
+Strongest support is B07's−135.25 native-service mean and energy increase in all four
+conditions, B06's separate−77.5 loss, and no nominated successor. The two treatments and
+estimands are different and cannot be pooled as source-family replication. Strongest
+contrary evidence to a broader stop remains B07's+74 condition and fewer final invalid
+commits, both moved learners and positive own-initial means, prior LOW_LR gains with
+adverse conditions, and B05 CONTROL's three ordinary training transfers.
+
+Neither this bounded screening nor the negative means identify a persistence or auxiliary
+gradient cause. Other legal parameterizations remain possible. Current zero transfers
+leave origin eligibility and COPY−RETAIN/SHADOW−COPY value unestimated; the A03 information
+ceiling remains. DIRECT is a development default, with no optimality, safety or stable
+superiority claim. There is no tuned-baseline/upper headroom record, and none is required
+to justify a future specifically chosen B.
+
+No next empirical discriminator is selected. The no-successor scope question is answered;
+this round allocates no new card, seed, diagnostic or scientific exposure. It makes no
+recast, C or Portfolio lifecycle/priority decision and no UAV-validation entry.
+
+References: `DISH_POST_B07_DIRECTION_QUESTION_INTAKE_20260908.md` §8;
+`pro_packets/20260908_p62_post_b07_scope/archive/RESPONSE.md` §§一–七, immutable commit above;
+B07 E0/intake and the previous B06/LR evidence retained in the preceding sections.

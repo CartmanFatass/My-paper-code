@@ -1,1 +1,6 @@
 ISSUE_SNAPSHOT.json -text
+archive/CHAT_RECEIPT.md -text
+archive/TRANSPORT_FACTS.json -text
+archive/PROVIDER_PROMPT.md -text
+archive/PACKET_MANIFEST.json -text
+archive/GITHUB_DELIVERY_COMMENT.json -text
