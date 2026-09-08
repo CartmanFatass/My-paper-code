@@ -48,6 +48,18 @@ primary and direction checkouts; relevant audit owner cells remained empty.
 No new P1/P2 item is due for this ordinary object decision. No fourth comparison,
 retry, extra arm/seed/evaluation, cap increase, Pro Send or UAV change follows.
 
+P38 result/intake update (2026-09-08): all three allocated arms completed within
+their admission-inclusive caps. The [E0 result](FSD_NATIVE_RENEWAL_LEARNING_B01_RESULT_EVIDENCE_20260908.md)
+and [scientific intake](FSD_NATIVE_RENEWAL_LEARNING_B01_INTAKE_20260908.md) accept
+one valid B/EXPLORE pair in the above-MEI branch: full H−C+.49738281249999894,
+conditional episode SE.00864640484198601; post+.49862938596491124. Full/post
+G−H remain.021184895833334313/.0187317251461998. The claim is a native control-
+package difference after fresh learning on this pair; the public rule was given,
+and no stable training-seed, learned-renewal, D0 or UAV conclusion follows.
+P38 is complete; B has no consumption state. The recorded next discriminator
+advice is one independently trained pair under a separately issued preparation/
+allocation, with all signs retained. No successor is frozen or launched here.
+
 Question: does a fixed public applied-renewal rule retain a useful native return
 difference after repeated real, from-scratch learning under that rule, against the
 same internally defined D2 learner which applies its own sampled mask? The public
@@ -212,12 +224,26 @@ on a selected artifact. Contradictions are its .16403 G−H gap, H's higher wron
 loss/rate on its own altered opportunities, and six competent E3 learning losses.
 No empirical prediction is scored yet; owner prediction: not taken (unattended).
 
+P38 prediction score: the two prospective low-confidence directional predictions
+agree with this pair (H−C>.01 and G−H>0). This is not a quantitative forecast hit
+or independent confirmation. No owner prediction reply was present; the owner's
+slot remains not taken (unattended). The pre-run prediction above is preserved.
+
 ## 6. Exposure, costs, resource route and stops
 
 The machine-computed [exposure/cost record](FSD_NATIVE_RENEWAL_LEARNING_B01_EXPOSURE_AND_COST_20260908.json)
 is the count source. Current preparation exposure is scientific invocations=0,
 model constructions=0, checkpoint loads=0, training starts/transitions=0,
 optimizer calls=0, evaluation episodes=0 and Pro Sends=0.
+
+P38 actual exposure, separate from that preparation:3 scientific invocations,
+2 training starts/4 total agent constructions,64000 stored training transitions,
+160 training episodes,10 update stages,10860 network optimizer calls,96 endpoint
+episodes/38400 scoring steps,102400 combined host steps and614400 agent
+observations;0 loads/evaluator optimizer calls/new Pro Sends. Complete process
+walls G2.47s,C371.89s,H333.89s sum708.25s; all caps/admissions passed. First/final
+per-network displacement, raw32-entry primary vectors and receipts are linked
+from the result;32 evaluation episodes do not change the one-training-pair unit.
 
 | Prospective work | Quantity |
 | --- | ---: |
