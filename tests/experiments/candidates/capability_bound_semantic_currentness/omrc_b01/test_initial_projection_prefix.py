@@ -5,6 +5,7 @@ This intentionally invokes the original run_arm only with a stop at its first
 _project_panel. It is not a scientific run or a pytest-collected learner test.
 """
 
+import argparse
 import json
 from pathlib import Path
 import sys
@@ -20,7 +21,7 @@ class PrefixComplete(Exception):
     """End the test before run_arm reaches rule scores or its learner loop."""
 
 
-def main(output):
+def main(output, minimal_reference=None):
     original_panel = run.engine._project_panel
     original_observations = run.engine.build_observations
     calls = 0
@@ -38,14 +39,24 @@ def main(output):
         assert len(tapes) == 32 and factory is run.engine._ADAPTERS["RAW-GRU"]
         # Retain the exact public input, ordered tape-major, then token-major.
         # Each token occupies17 bytes and each tape152 tokens. No evaluator view.
-        (output / "TEST_ONLY_initial_public_tokens.bin").write_bytes(
-            b"".join(token.packed for tape in tapes for token in tape.learner_tokens()))
-        print("TEST_ONLY INITIAL_PANEL", len(tapes), "tapes; public bytes retained", flush=True)
+        if minimal_reference is None:
+            (output / "TEST_ONLY_initial_public_tokens.bin").write_bytes(
+                b"".join(token.packed for tape in tapes for token in tape.learner_tokens()))
+            print("TEST_ONLY INITIAL_PANEL", len(tapes), "tapes; public bytes retained", flush=True)
         observations, work = original_panel(tapes, factory)
-        assert calls == 64 and tuple(observations.shape) == (32, 152, 168)
+        assert tuple(observations.shape) == (32, 152, 168)
+        if minimal_reference is None:
+            assert calls == 64
+        else:
+            # Perform the reference read/copy only AFTER projection has returned.
+            actual = b"".join(token.packed for tape in tapes for token in tape.learner_tokens())
+            assert actual == minimal_reference.read_bytes()
+            print("TEST_ONLY POST_PROJECTION input bytes equal saved reference", flush=True)
         (output / "TEST_ONLY_prefix_result.json").write_text(json.dumps({
             "test_only": True, "initial_projection_complete": True,
-            "projection_calls": calls, "shape": list(observations.shape),
+            "variant": "indexed" if minimal_reference is None else "minimal",
+            "logged_projection_calls": calls, "shape": list(observations.shape),
+            "saved_input_equal": None if minimal_reference is None else True,
             "dtype": str(observations.dtype), "adapter_work": run.asdict(work),
             "evaluation_tape_digest": run.engine._tape_primitive_digest(tapes),
             "learning_updates": 0, "score_evaluations": 0,
@@ -55,7 +66,8 @@ def main(output):
         raise PrefixComplete
 
     run.engine._project_panel = initial_panel
-    run.engine.build_observations = indexed_observations
+    if minimal_reference is None:
+        run.engine.build_observations = indexed_observations
     try:
         print("TEST_ONLY P32 faithful setup seed21223 START", flush=True)
         run.run_arm(arm="RAW-GRU", seed=21223, output=output,
@@ -69,4 +81,9 @@ def main(output):
 
 
 if __name__ == "__main__":
-    main(Path(sys.argv[1]))
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("output", type=Path)
+    parser.add_argument("--minimal-reference", type=Path,
+                        help="omit pre-projection export/logging; compare these saved bytes after projection")
+    args = parser.parse_args()
+    main(args.output, args.minimal_reference)
