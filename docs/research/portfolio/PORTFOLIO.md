@@ -1,8 +1,10 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-07 (P16 incremental CBSC engineering continuation)
+Updated at: 2026-09-07 (P17 CBSC execution and VSP02 fresh-prefix pair)
 
-Current incremental command: [P16 CBSC acquisition-command engineering](handoffs/2026-09-07-p16-cbsc-acquisition-command.md). CBSC P15 yielded at a concrete cross-node deadline/termination gap; P16 commissions bounded command engineering with zero actual acquisition or experiment allocation. Other P15 routes continue independently. No lifecycle or priority change.
+Current incremental command: [P17 exact CBSC invocation and VSP02 master1117 pair](handoffs/2026-09-07-p17-cbsc-execution-vsp02-fresh-prefix.md). Accepted P16 engineering and VSP02 seed1103 intake now support the two named allocations; actual launches remain Root log facts. Other advancing routes continue independently. No lifecycle, priority or UAV-entry change.
+
+Previous incremental command: [P16 CBSC acquisition-command engineering](handoffs/2026-09-07-p16-cbsc-acquisition-command.md). CBSC P15 yielded at a concrete cross-node deadline/termination gap; P16 commissions bounded command engineering with zero actual acquisition or experiment allocation. Other P15 routes continue independently. No lifecycle or priority change.
 
 Retained commands: [P15 rolling refill](handoffs/2026-09-07-p15-rolling-refill-after-transport-split.md).
 Root reports all P14 chains returned/idle; comparison batch01 is complete and the accepted VSP02
