@@ -1,0 +1,82 @@
+{
+  "id": "20260908-scdmp-002",
+  "created": "2026-09-08T13:46:42-07:00",
+  "direction": "semigroup_consistent_duration_model_policy",
+  "tier": "direction",
+  "kind": "decision",
+  "title": "P56：完整科学选择遇到已确认的弃用对话冲突",
+  "context": "答复完整且科学要求一致：一组残差MC对完整MLP-MC，并分类为新RECAST。但Transport和Root确认实际发送命中所有者弃用对话。保留归档及冲突，无新卡、运行或recast应用；这不是机制负号或新的B准入条件。",
+  "options": [
+    {
+      "key": "a",
+      "label": "保留边界并由Root处理冲突",
+      "consequence": "完整答复与一次发送事实保留，当前不应用新家族；由现有Root路径解决已确认政策冲突。"
+    },
+    {
+      "key": "b",
+      "label": "按明确覆盖指令处置",
+      "consequence": "只有实际明确的所有者或相应授权指令可改变边界；不能把缺少回复解释为豁免、补发或改绑。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "完整回答不自动豁免所有者禁止的对话ID；保留科学选择与冲突，避免把传输缺陷变成科学结论。",
+  "evidence": [
+    "docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260908_held_residual_convergence/CONVERGENCE_INTAKE.md",
+    "docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260908_held_residual_convergence/archive/RESPONSE.md",
+    "docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260908_held_residual_convergence/archive/RECONCILIATION_FACTS.json"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-08.md#L86",
+  "brief": "docs/research/portfolio/owner/briefs/semigroup_consistent_duration_model_policy/2026-09-08_P56-held-residual-convergence.md",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": {
+    "question": "是否保持已确认的传输政策冲突边界，由Root沿现有路径处理，同时完整保留科学答复与原定单组B候选？",
+    "changes_if_approved": [
+      {
+        "target": "P56 Convergence应用状态",
+        "from": "完整科学答复已到达，但实际对话ID命中所有者弃用记录",
+        "to": "保留答复，记录BLOCKED_RECONCILIATION；未冻结卡、未实施新RECAST，交Root处理具体冲突"
+      }
+    ],
+    "if_refused": "不能把拒绝此记录解释成已获豁免或允许再次发送；按所有者明确写出的替代指令执行，原始请求和证据持续保留。",
+    "evidence_for": [
+      {
+        "path": "docs/research/portfolio/decisions/2026-09-04-retired-provider-conversations.json",
+        "quote": "Never navigate, prebind, append or Send to any pre-cutover provider conversation ID; listed IDs are observed inventory, not a permission to reuse unlisted old IDs.",
+        "why": "本次实际对话6a961753-0424-83e8-848c-dbe2cfe3369c明确在名单内；当前模型标签不构成所有者豁免。"
+      },
+      {
+        "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260908_held_residual_convergence/archive/RECONCILIATION_FACTS.json",
+        "quote": "The accepted provider conversation is listed in the retired-provider record and excluded by the active transport policy; the HANDOFF supplied no conversation ID, so no compliant replacement can be inferred from existing evidence.",
+        "why": "Transport与Root已确认冲突，保持一次发送和完整归档，没有补发或改绑。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260908_held_residual_convergence/archive/RESPONSE.md",
+        "quote": "选择一次 SCDMP-NATIVE-HOLD-RESIDUAL-B01：保留完整 MLP、完整 Monte Carlo（MC）锚点和原有时长 actor，只增加真实保持段的双端残差惩罚，与完整 MLP-MC 做一个新的配对训练比较。",
+        "why": "完整科学内容与B级问题一致；记录冲突不能制造机制负号或改选科学问题。"
+      },
+      {
+        "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260908_held_residual_convergence/archive/RESPONSE.md",
+        "quote": "这次选择是一次新的、实质性的机制 RECAST。",
+        "why": "若获适用的决策路径，这一新转向须承接RECAST_D6之后的second-recast后果，不能伪装成普通改卡。"
+      }
+    ],
+    "uncertainty": [
+      "当前确认的是违反弃用对话规则，不是答复缺失或机制无效。",
+      "目前未实施新增recast或最低排序；后续应用必须同时记录其真正的recast后果。",
+      "未来B仍只有一组新训练对，且两学习臂可能都低于H；不能承诺稳定优势。"
+    ],
+    "cost": {
+      "compute": "当前新增科学调用0。答复选择的候选仍为286720原生步、2048 Adam、96最终评价，1800秒/臂、3600秒/整对；未执行。",
+      "owner_time": "无需立即回复；Root负责现有冲突路径，可异步提供明确覆盖指令。",
+      "reversibility": "reversible",
+      "waits_on_this": "新方向家族的执行授权依赖已确认传输政策冲突的解决；不新增实验准入层。"
+    },
+    "verdict_text": "Application is blocked by a confirmed owner transport-policy conflict.",
+    "source": "docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260908_held_residual_convergence/CONVERGENCE_INTAKE.md"
+  },
+  "starred": true
+}
