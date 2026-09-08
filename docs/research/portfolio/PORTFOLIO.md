@@ -1,8 +1,10 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-08 (P42 FSD B02 implementation)
+Updated at: 2026-09-08 (P43 FSD B02 panel allocation)
 
-Current incremental command: [P42 FSD B02 seed/input implementation](handoffs/2026-09-08-p42-fsd-b02-seed-implementation.md). Accepted P40 card/spec binds770303/770304; same CM implements the four-function seed/identity change and thin entry point with focused synthetic checks and independent RNG/identity review. No production invocation or launch binding is allocated.
+Current incremental command: [P43 FSD B02 independent-pair panel](handoffs/2026-09-08-p43-fsd-b02-panel-execution.md). Accepted readiness atcc6365fff supplies the same-source770303/770304 G/C/H route. Bind and allocate one panel with complete60/900/900s caps and fresh per-invocation admission; CM collects and DM reads every outcome separately from B01. No automatic retry or successor.
+
+Completed incremental command: [P42 FSD B02 seed/input implementation](handoffs/2026-09-08-p42-fsd-b02-seed-implementation.md). Implementation and independent RNG/identity review are accepted;24 synthetic cases passed. P43 separately allocates runtime and launch binding.
 
 Current dependency: [P41 FRRIE static complete-deadline method](handoffs/2026-09-08-p41-frrie-static-namespace-method.md) returned incomplete at87dddec67 after a cybersecurity-risk tool interruption. Retained metadata does not establish source/race/deadline/proc or permission acceptance. FRRIE is not advancing; no replacement executor, bypass retry or live A08 allocation is issued. Preserve the exact [intake dependency](../candidates/finite_resource_relational_inductive_efficiency/FRRIE_R09_NATIVE_FATAL_A08_P41_PREPARATION_INTAKE_20260908.md#4-decisions-this-intake-produces) pending an authorized resolution of the tool interruption, without scientific or lifecycle polarity. Independent routes continue.
 
