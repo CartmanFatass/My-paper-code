@@ -19,7 +19,7 @@
     }
   ],
   "recommended": "a",
-  "auto_applied": null,
+  "auto_applied": "a",
   "dm_reason": "已有本机信息到动作再到原生服务的完整路径，可用一组真实学习配对检验；无需特权掩码或先做全量诊断。",
   "evidence": [
     "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_P53_NATIVE_PROPOSAL_SOURCE_INTAKE_20260908.md"
@@ -87,6 +87,14 @@
       "state": "planned",
       "summary": "P53只准备一次方向问题，尚未选择或启动B。正确账本引用为2026-09-08.md第69行；来源事实接受在第68行。",
       "correction": "创建条目时ledger_row误填为L30；本追踪明确改正为L69，L30不是此建议的依据。保留原始字段作为未提交前的录入差错记录，不伪造所有者或Pro答复。"
+    },
+    {
+      "at": "2026-09-08T19:14:41+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260908_p53_own_command_mean/archive/RESPONSE.md",
+      "record": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_P53_NATIVE_PROPOSAL_SOURCE_INTAKE_20260908.md#9-completed-convergence-intake--2026-09-08",
+      "state": "applied",
+      "summary": "完整读取不可变答复ddb4c9ff并确认范围与证据等级相符，执行选项a的科学选择：B07种子127一组配对、最终原生服务差、每臂1800秒。尚未实现或运行；后续卡片与完整CM规范沿原路线。实际选择账本为2026-09-08.md第71行，完整响应哈希与聊天收据哈希分开保存。"
     }
   ]
 }

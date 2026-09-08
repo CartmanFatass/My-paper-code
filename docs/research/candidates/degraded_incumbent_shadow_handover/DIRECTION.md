@@ -948,3 +948,49 @@ Portfolio disposition is applied. The accepted post-B06 narrow stop remains unch
 
 Reference: `DISH_P53_NATIVE_PROPOSAL_SOURCE_INTAKE_20260908.md` §§1–8, particularly the
 source/information map, ordinary mean comparison, contrary outcome and zero-execution boundary.
+
+## Accepted P53 discriminator: own applied command in the mean — 2026-09-08
+
+Complete Convergence at immutable `ddb4c9ff20167837c99d146b2177c3e784066411` is a
+conforming **PRO_FINAL** direction decision selecting only **DISH-OWN-COMMAND-MEAN-B07,
+B/EXPLORE**. One new matched seed127 pair compares `3*tanh(m+a_prev/3)` with the newly
+trained direct mean `3*tanh(m)`. The fixed input is each physical vehicle's pre-decision
+raw actor acceleration8:10 from its incumbent/shadow copy. It changes how already
+available own information reaches the motion proposal under the existing partially
+observed multi-agent host. Prepare remains incumbent-owned; commit remains standby-shadow
+owned and serialized in the native owner's slot. No certificate or privileged mask is added.
+
+Both arms retain STRUCTURED initialization, LOW_LR3e-5, common exogenous streams, raw
+Gaussian likelihood/noise, modal final execution and all native projection, information,
+reward and timing semantics. Each arm receives sixteen updates/65536 transitions/512
+optimizer steps, four own-initial modal rows and four final modal rows. The primary is
+the mean of four final OWN-minus-DIRECT native-service differences at update16; MEI+24
+ticks (2% of1200), opposite scale−24. Complete cap is1800s/arm and3600s/pair, including
+shared work counted once. Initial-relative changes and costs remain companion facts.
+
+Strongest support is the inspected own-input path in both live behavior and stored replay,
+making a competent same-information learner comparison possible without a diagnostic
+prerequisite. Strongest contradiction is redundancy with the existing network input and
+native slew projection, or harmful persistence of a bad acceleration. Other certificate
+conditions can still block transfer. The input path gives no legal-transfer guarantee,
+causal account of B06, stable superiority or uniquely MARL benefit. Native partner/summary
+features keep the accepted A03 information ceiling; a strict fresh-message decentralized
+claim is unavailable.
+
+B06's−77.5 joint-sampling loss, all adverse condition means, increased invalid commits and
+energy, two positive sampled exceptions and zero transfers remain unchanged. Earlier LR
+means and adverse conditions stay separate. COPY−RETAIN/SHADOW−COPY value remains
+unestimated; the existing joint-rule stop is not reopened. No tuned-baseline/upper
+headroom record exists. A future one-pair B result can support only a finite native-service
+signal; transfer observations and source value are separate quantities.
+
+The low-confidence positive-sign prediction is pending and MEI crossing uncertain. The
+next discriminator is the selected pair's complete native final-service contrast, with
+adverse conditions, actual terminal exposure, energy and hard events preserved separately.
+This intake records selection only: no new implementation, RNG master, learner or run.
+The existing route continues through a prospective card and full CM specification; no
+second Send, recast, C promotion, UAV-validation entry or Portfolio disposition follows.
+
+References: `DISH_P53_NATIVE_PROPOSAL_SOURCE_INTAKE_20260908.md` §9;
+`pro_packets/20260908_p53_own_command_mean/archive/RESPONSE.md` §§一–七;
+the adjacent exact chat receipt, Transport facts and Issue4 comment snapshot.
