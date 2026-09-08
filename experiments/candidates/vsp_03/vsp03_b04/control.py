@@ -60,6 +60,9 @@ def run(args):
     killed, reaped, remaining = clean_children(cleanup_until)
     payload = json.loads(payload_record.read_text()) if payload_record.exists() else None
     code = payload["task_exit_code"] if payload else 125
+    if supervisor_code is not None and supervisor_code != code:
+        # Publication precedes process exit: the actual later nonzero exit wins.
+        code = supervisor_code if supervisor_code != 0 else 125
     if error or remaining:
         code = 125
     record = {"object": "VSP03_B04", "unit": args.unit,
