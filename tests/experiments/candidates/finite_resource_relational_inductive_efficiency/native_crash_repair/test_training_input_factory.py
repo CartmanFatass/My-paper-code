@@ -12,9 +12,8 @@ import time
 def main():
     from experiments.candidates.finite_resource_relational_inductive_efficiency.b01_contact_r02 import experiment
     from experiments.candidates.finite_resource_relational_inductive_efficiency.b01_contact_r02.semantics import TEST_ROOT_HEX, TEST_SEED_LABEL
-    from experiments.candidates.finite_resource_relational_inductive_efficiency.policy import require_torch
+    import torch
 
-    torch = require_torch()
     torch.set_num_threads(1)
     root = bytes.fromhex(TEST_ROOT_HEX)
     started = time.perf_counter()

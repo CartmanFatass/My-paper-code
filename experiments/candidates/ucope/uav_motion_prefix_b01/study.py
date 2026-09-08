@@ -11,6 +11,8 @@ import time
 CARD = "docs/research/candidates/ucope/UCOPE_UAV_MOTION_PREFIX_B01_SCIENCE_CARD_20260907.md"
 B02_CARD = "docs/research/candidates/ucope/UCOPE_UAV_MOTION_PREFIX_B02_SCIENCE_CARD_20260908.md"
 B02_OBJECT = "UCOPE-UAV-MOTION-PREFIX-B02"
+B03_CARD = "docs/research/candidates/ucope/UCOPE_UAV_MOTION_PREFIX_B03_SCIENCE_CARD_20260908.md"
+B03_OBJECT = "UCOPE-UAV-MOTION-PREFIX-B03"
 
 
 def declared_masters(pair):
@@ -20,7 +22,9 @@ def declared_masters(pair):
         return (6901, 6902)
     if pair == "b02":
         return (7001, 7002)
-    raise ValueError("pair must be p21, p24 or b02")
+    if pair == "b03":
+        return (7101,)
+    raise ValueError("pair must be p21, p24, b02 or b03")
 
 
 @dataclass
@@ -35,9 +39,11 @@ class Config:
     pair_cap: float = 3600
     pair: str = "p21"
     ratio_grouping: str = field(init=False)
+    entropy_coef: float = field(init=False)
 
     def __post_init__(self):
-        self.ratio_grouping = "agent_compound" if self.pair == "b02" else "joint"
+        self.ratio_grouping = "agent_compound" if self.pair in ("b02", "b03") else "joint"
+        self.entropy_coef = 0.0 if self.pair == "b03" else 0.01
 
     @classmethod
     def engineering(cls, seed=9001, pair="p21"):
@@ -92,6 +98,8 @@ def primary_from_rows(rows, expected):
 
 
 def aggregate(summaries, pair="p21"):
+    if pair == "b03":
+        raise ValueError("B03 has one training pair and no multi-pair aggregate")
     declared = declared_masters(pair)
     if len(summaries) != 2:
         raise ValueError("aggregation takes exactly two pair summaries")
@@ -202,10 +210,18 @@ def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=wri
                          "train_duration": b + 22, "train_reset_start": b + 1000,
                          "eval_reset_start": b + 2000, "eval_velocity_start": b + 3000,
                          "eval_duration_start": b + 4000}}
-    if config.pair == "b02":
-        summary.update(object=B02_OBJECT, card=B02_CARD, ratio_grouping=config.ratio_grouping,
+    if config.pair in ("b02", "b03"):
+        summary.update(object=B03_OBJECT if config.pair == "b03" else B02_OBJECT,
+                       card=B03_CARD if config.pair == "b03" else B02_CARD,
+                       ratio_grouping=config.ratio_grouping,
                        card_section="CODE_SPEC §8" if config.fixture else 5)
-    credit_options = {"ratio_grouping": config.ratio_grouping} if config.pair == "b02" else {}
+    credit_options = {"ratio_grouping": config.ratio_grouping} if config.pair in ("b02", "b03") else {}
+    update_options = dict(credit_options)
+    if config.pair == "b03":
+        summary["entropy_coef"] = config.entropy_coef
+        if config.fixture:
+            summary["card_section"] = "CODE_SPEC §4"
+        update_options["entropy_coef"] = config.entropy_coef
     files = {name: (out / f"{name}.jsonl").open("w", encoding="utf-8")
              for name in ("episodes", "rollouts", "diagnostics")}
 
@@ -226,7 +242,8 @@ def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=wri
             arm_start = start if arm == "T" else g_start
             counts = new_counts()
             arm_info = {"counts": counts, "complete": False, "fit_complete": False,
-                        "learning_rate": 3e-4, "elapsed_wall": None}
+                        "learning_rate": 3e-4, "entropy_coef": config.entropy_coef,
+                        "elapsed_wall": None}
             arms[arm] = arm_info
             actor = critic = initial = None
             deadline.check()
@@ -255,7 +272,7 @@ def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=wri
                 episodes = [episode("train", 2 * rollout_index + i, actor, critic,
                                     velocity_rng, duration_rng, arm) for i in range(2)]
                 records = update(actor, critic, optimizer, episodes, config.chunk, deadline.check, counts,
-                                 **credit_options)
+                                 **update_options)
                 counts["rollouts"] += 1
                 emit("rollouts", {"pair_master": config.seed, "arm": arm, "rollout": rollout_index,
                                    "steps": 2 * config.horizon, "episodes": 2, "epochs": records,

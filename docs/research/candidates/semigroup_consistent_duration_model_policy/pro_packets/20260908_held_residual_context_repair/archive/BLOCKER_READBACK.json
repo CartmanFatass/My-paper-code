@@ -1,0 +1,33 @@
+{
+  "recorded_utc": "2026-09-08T21:32:14.471020+00:00",
+  "request_id": "2026-09-08-scdmp-p58-held-residual-context-repair-01",
+  "blocker_code": "SEND_CONTROL_NO_EFFECT",
+  "evidence_commit_before_intake": "121f53f69cda534e07a13e09026dc320b8ac1a67",
+  "scope": "Transport blocker intake; no empirical result or direction selection",
+  "latest_attempt_source": "archive/BLOCKED_REQUEST_SNAPSHOT.json:attempt_history[-1]",
+  "latest_attempted_at": "2026-09-08T21:26:09Z",
+  "send_control_clicks": 2,
+  "confirmed_provider_submissions": 0,
+  "new_conversations_bound": 0,
+  "new_complete_pro_answers": 0,
+  "new_scientific_decisions": 0,
+  "new_scientific_invocations": 0,
+  "old_p56_response_sha256": "cc6cc8a0fdd6e4c2e93e731d17d896bcfd1d1aff105bd8112843682b44a64ec3",
+  "new_response_exists_at_observed_remote_head": false,
+  "prompt_sha256": "d0918a42d9754bddba00943aa1b500bdc1a7c9841fe3bb2cc91fdce0a9445a1f",
+  "blocked_snapshot_sha256": "d3770af81b9b7a94da9960dde727822e693a431805a185446e95007fc962c12c",
+  "reset_excerpt_sha256": "1f4ad02bb9516ddacaf3b56cf5086540d39fcf91ba9b64686656b2300ac8ef85",
+  "registry_projection_caveat": "Mixed earlier validation and later UI-attempt fields preserved; latest attempt carries current click/state facts. No registry mutation.",
+  "root_reported_tab11_closed": true,
+  "dm_independent_browser_observation": false,
+  "route_exhausted": true,
+  "non_send_scientific_recovery_identified": false,
+  "optional_non_send_bookkeeping": "Reconcile latest aggregate validation/click/monitor fields without overwriting the original validation receipt or any attempt history; no effect on missing decision or no-Send boundary.",
+  "owner_reviews": {
+    "direction_checkout": [],
+    "main": []
+  },
+  "owner_prediction": "not taken (unattended); no empirical outcome to score",
+  "scope_section4": "none",
+  "scope_section5_breach": false
+}

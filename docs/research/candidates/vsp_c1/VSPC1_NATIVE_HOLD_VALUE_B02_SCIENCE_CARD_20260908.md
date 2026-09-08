@@ -21,7 +21,7 @@ remain included. H is untuned, and the MLP's shortfall to H is a material qualif
 Added640-parameter capacity, joint clipping, FP32 and seed-specific optimization
 remain alternatives to specialized hold-credit improvement; the full MLP already
 shares nonlinear features. Reuse the verified literature interpretation in
-[B01 intake §4](VSPC1_NATIVE_HOLD_VALUE_B01_INTAKE_20260908.md); no mechanism,
+[B01 intake §3](VSPC1_NATIVE_HOLD_VALUE_B01_INTAKE_20260908.md); no mechanism,
 comparator or related-work claim changes and no new retrieval is needed for this binding.
 
 The ceiling is two separately reported local finite-budget training observations
@@ -175,3 +175,68 @@ will be linked here before Root's one submission. Root observes the adopted hand
 the same CM collects and DM intakes all outcomes. No owner reply is awaited.
 
 The owner-console CLI recorded asynchronous P2 [new card20260908-vspc1-004](../../portfolio/owner/inbox/2026-09-08/20260908-vspc1-004.json), auto-applied accept under the same delegation.
+
+## 7. Accepted source and single Root execution handoff
+
+CM accepted and pushed scientific source **0ec208899f5e8b4c190ab7bd9806be2cc30b6fda**.
+Final command/review documentation is `806a23d888fde3cbb12240f4d55f0716c9669fa4`;
+its only changes are the two technical documents. The DM inspected the actual
+identity-only production diff, focused evidence and full independent review.
+See [technical acceptance and literal command](VSPC1_NATIVE_HOLD_VALUE_B02_TECHNICAL_ACCEPTANCE_20260908.md#exact-root-launch-artifact-not-submitted)
+and [independent review](VSPC1_NATIVE_HOLD_VALUE_B02_PRODUCTION_REVIEW_20260908.md).
+
+Six focused cases passed in2.07s, observed command wall3.0432563s. Full-schedule
+stub counters are metadata checks, not scientific exposure. Invocation-owned
+scratch was removed. The production diff adds42/removes6 lines, including a35-line
+runner; protected B01 runner/critic/UCOPE/native sources remain unchanged. No scope
+§4 item or §5 breach was added. No B02 real model, fixture or native call occurred.
+
+The reviewer identified an unsubmitted pre-admission hard-KILL timeout that could
+preempt partial publication. CM removed it and rechecked only the shell artifact.
+The source's continuous1800s/arm and3600s/pair deadlines, enclosing terminal wall
+and partial-evidence rules remain unchanged. An overrun remains a breach, never
+additional budget. No material finding remains in this engineering delivery.
+
+| Exact execution field | Bound value |
+| --- | --- |
+| Node / interpreter | `hmasd-wsl-node` / `/home/wu/.venvs/hmasd/bin/python` |
+| Detached cwd at the source SHA above | `/home/wu/hmasd-worktrees/vspc1-native-hold-value-b02-8102-0ec208899f5e` |
+| Already staged literal-LF script | `/home/wu/hmasd-inputs/vspc1_hold_value_b02_8102_0ec208899f5e.sh` |
+| Requested supervisor handle | `vspc1_hold_value_b02_8102_0ec208899f5e` |
+| Scientific output | `/home/wu/projects/HMASD/temp/directions/vsp_c1/exp/native_hold_value_b02_8102_0ec208899f5e` |
+| Fresh admission receipt | Output path plus `_admission.json`, a sibling file |
+| Fixed scientific argv | `scripts/run_vspc1_native_hold_value_b02.py --seed 8102 --out <exact output above>` |
+
+The655-byte eight-line script is staged and syntax-checked with exact remote
+readback. It performs cwd selection, fresh actual-node `admit-memory`, and the
+fixed runner in order, joined by `&&`, within existing `/usr/bin/time` observation.
+Physical and effective available memory must each meet4GiB before scientific
+state. Root still supplies ordinary exact-source integration/detached checkout
+staging and compares actual cwd/source before this one submission:
+
+```powershell
+ssh -o BatchMode=yes -o ConnectTimeout=10 hmasd-wsl-node /usr/local/bin/agent-task run vspc1_hold_value_b02_8102_0ec208899f5e /bin/bash /home/wu/hmasd-inputs/vspc1_hold_value_b02_8102_0ec208899f5e.sh
+```
+
+Owner-delegated decision (unattended,2026-09-03 instruction): select the accepted
+source and this single unchanged P55 invocation; do not add a fixture or calibration.
+Current main owner reviews and relevant audit owner cells were empty at this
+clean boundary. Supervisor acceptance, admission, native counts/performance and
+complete runtime conformance are **not yet observed**. Root adopts/observes the
+accepted handle, then resumes this same CM for collection and this DM for all-outcome
+intake. The exposure remains zero for B02 until that actual invocation.
+
+## 8. Completed observation
+
+The single P55 invocation completed at master8102/source0ec208899 with a valid
+complete **UP**: GATED−MLP+.1157271305, conditional evaluation SE .0094720558;
+GATED−H+.0265020852 and MLP−H−.0892250453. UP(.55) hit. This is the second
+separately reported local training pair, with a markedly weak MLP/H comparison;
+no stable-superiority or unique-mechanism claim follows.
+All286720 native steps,2048 Adam calls and96 evaluations are accounted for.
+Complete conservative arm/whole bounds158.206214s/146.874405s/304.52s conform.
+See [E0 evidence](VSPC1_NATIVE_HOLD_VALUE_B02_RESULT_EVIDENCE_20260908.md),
+[CM collection](VSPC1_NATIVE_HOLD_VALUE_B02_COLLECTION_20260908.md) and
+[all-outcome DM intake](VSPC1_NATIVE_HOLD_VALUE_B02_INTAKE_20260908.md).
+The frozen rule and prediction above are unchanged. P55's allocation ends here;
+the intake's later-comparison recommendation allocates no call, key or code.

@@ -176,7 +176,8 @@ def optimizer_for(actor, critic):
                             foreach=False, fused=False)
 
 
-def update(actor, critic, optimizer, episodes, chunk, check, counts, ratio_grouping="joint"):
+def update(actor, critic, optimizer, episodes, chunk, check, counts, ratio_grouping="joint",
+           entropy_coef=0.01):
     rollout = {key: torch.stack([ep[key] for ep in episodes]) for key in episodes[0]}
     targets = returns_to_go(rollout["reward"])
     raw = targets - rollout["value"]
@@ -191,7 +192,7 @@ def update(actor, critic, optimizer, episodes, chunk, check, counts, ratio_group
         policy_loss = clipped_policy_loss(logp, rollout["logp"], advantages,
                                           rollout["velocity_mask"] if ratio_grouping == "agent_compound" else None)
         value_loss = (critic(rollout["critic"]) - targets).square().mean()
-        loss = policy_loss + .5 * value_loss - .01 * entropy.mean()
+        loss = policy_loss + .5 * value_loss - entropy_coef * entropy.mean()
         if not torch.isfinite(loss):
             raise FloatingPointError("nonfinite PPO loss")
         optimizer.zero_grad()
