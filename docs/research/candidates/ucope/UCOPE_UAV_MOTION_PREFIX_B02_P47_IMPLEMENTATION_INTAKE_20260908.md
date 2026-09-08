@@ -2,6 +2,8 @@
 
 **The delivered B02 code is accepted under P48 for the already selected 7001→7002 route. The sole smoke exceeded its engineering bound: 80.578s versus 60s, and that breach is retained.** P48 accepts the completed functional/review/publication evidence without another smoke; §6 applies the exact disposition. No speculative fix or second smoke ran, and masters 7001/7002 remain prospective at this binding.
 
+**Current execution dependency:** Root's exact remote staging is blocked by GitHub HTTPS/SSL fetch failure; §7 records the executor receipts. No detached worktree, admission or accepted scientific handle has resulted. P48 acceptance and the selected source/route are unchanged.
+
 ## 1. Authority, checkout and what was checked
 
 OWNER_DIRECT [P47](../../portfolio/handoffs/2026-09-08-p47-research-resume-and-recovery.md), immutable commit `6dd7570e9e8045fb3818c553953a92c9caa587cb`, supplies fresh native recipients and implementation plus the exact selected two-pair allocation. The card was frozen at `1d46ddc2b142a2c2b98922a8f46e2d2609bda859`, with source `b5607f46fea91379582af8bf87e60b61bc4a269b` matching accepted code surface `9c541a8047b8c33e90f09aa65e326180343a23a0`. The designated checkout began clean at the card commit. CM retained exclusive editing/index ownership through its delivery; DM performed read-only scientific work in parallel and now owns this documentation.
@@ -60,3 +62,21 @@ This accepts source `6374063408208ba67b8cb7c69ebc0babb0f00259` for the selected 
 **Object / technical application options:** (a) apply P48 exactly, retain the breach, bind accepted source/card and return the ready 7001→7002 route; (b) continue treating another 60s fixture as a prerequisite; (c) repeat or speculatively optimize it. Recommendation and selected **(a)** under P48's OWNER_DIRECT named disposition. **Owner-delegated decision (unattended, 2026-09-03 instruction): (a).** The technical audit records actual application; P48 expressly requires no new owner approval or P1/P2 proposal. It leaves no unresolved timing-acceptance decision for this task.
 
 The [Root handoff](UCOPE_UAV_MOTION_PREFIX_B02_P47_ROOT_HANDOFF_20260908.md) now supplies the accepted execution SHA, fresh exact-source remote cwd, named supervisor/output roots, LF-safe staging/launch literals and existing collection/intake route. Code/card surface checks are read-only; no original engineering execution is repeated at this boundary. Root launches and observes; CM collects each pair and technical acceptance releases 7002 irrespective of valid sign. DM's per-pair and all-outcome scientific intake follows without another Portfolio command. No accepted handle or real exposure is asserted until Root's actual receipt arrives.
+
+## 7. External exact-staging blocker — 2026-09-08
+
+Root reported two attempts of the named P47 remote staging command. The second ran for 300s and failed before worktree creation with:
+
+```text
+fatal: unable to access 'https://github.com/CartmanFatass/My-paper-code.git/': SSL connection timeout
+```
+
+Root subsequently rechecked the exact staging prerequisites and reported that commit `6374063408208ba67b8cb7c69ebc0babb0f00259` is present on `hmasd-wsl-node`, while the target detached cwd and both prospective supervisor handles are absent. The same fetch/worktree route was retried and remained blocked/hung under the reported SSL/network condition. No worktree was created and no admission or scientific launch was accepted. The accepted source object's presence is an execution fact, not authorization to bypass the prescribed fetch or change the executor.
+
+These are **Root's execution observations relayed to this DM**, not a DM reproduction or a diagnosis of the network's underlying cause. The raw error establishes the observed fetch failure; the later hang does not establish a more specific cause. A total staging elapsed time or exact aggregate attempt count is not reconstructed from partial receipts. The original source, card, seeds, result roots and launch literals remain unchanged. Git staging produced no environment transitions, learner updates or evaluation episodes, and no B02 endpoint or scientific polarity exists.
+
+Root's current instruction is to hold the 7001→7002 dependency pending this external staging blocker, preserving P48 and the exact route. **Object / technical options:** (a) record the blocker and preserve the authorized same-command continuation for restored connectivity; (b) bypass fetch using the already present object or another source/executor; (c) treat this as a failed scientific pair or repeat an engineering fixture. Recommendation and selected **(a)**. **Owner-delegated decision (unattended, 2026-09-03 instruction): (a).** Root's explicit hold is applied; no alternate staging route, source, executor, speculative fix or additional invocation is proposed.
+
+The conforming continuation is Root's existing exact staging command after the external fetch path can complete, with authoritative reconciliation of any uncertain prior staging/handle state before a repeat. Successful staging is followed by fresh actual-node >=4GiB admission and the already bound detached 7001 invocation. It does not consume or add a scientific retry; neither master has launched. Then the original first-pair technical acceptance, second-pair execution and all-outcome intake route applies. No independent polling/retry loop or new service is created here.
+
+P48's functional acceptance and the recorded 80.578s/60s smoke breach both remain. The absence of actual B02 learning/evaluation is the current observation limit; it changes no direction lifecycle, priority, family, recast, historical result or UAV-entry record. No valid-result brief or prediction score is due. At this clean boundary live-main owner reviews were empty, with no new owner instruction to apply. The ordinary technical hold is appended to the audit; it requires no new P1/P2 item or owner approval.
