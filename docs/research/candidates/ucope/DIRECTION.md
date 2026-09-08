@@ -130,7 +130,8 @@ followed prospectively by two fresh training pairs and complete sampled
 native return. This is a common learning amendment, not evidence that the
 old joint ratio caused the variation. See [P29 selection](UCOPE_UAV_MOTION_PREFIX_B01_P24_INTAKE_20260907.md#8-p29-prospective-question-selection--2026-09-08)
 and [prospective card §12](UCOPE_UAV_MOTION_PREFIX_B01_SCIENCE_CARD_20260907.md#12-prospective-p29-learning-amendment--2026-09-08).
-No amended learner, new result or invocation is yet supplied. Ordinary
+P33 fixes its [B02 card and implementation specification](UCOPE_UAV_MOTION_PREFIX_B02_SCIENCE_CARD_20260908.md)
+for fresh 7001/7002; no amended learner, new result or invocation is yet supplied. Ordinary
 feedback could gain equally or more; no complete causal diagnosis, exact
 upper or competence-only prerequisite is needed to test that bounded B.
 This updates the direction's next discriminator, not its accepted empirical
