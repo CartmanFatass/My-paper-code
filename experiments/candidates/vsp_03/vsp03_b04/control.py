@@ -30,6 +30,7 @@ def run(args):
     socket_root.mkdir(mode=0o700)
     os.environ.pop("TMUX", None)
     os.environ["TMUX_TMPDIR"] = str(socket_root)
+    os.environ["VSP03_B04_COMMAND"] = shlex.join(args.command)
     payload_record = args.record.with_suffix(".payload.json")
     command = shlex.join([
         args.python, str(Path(__file__).with_name("deadline.py")),
