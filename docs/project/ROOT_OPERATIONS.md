@@ -9,6 +9,15 @@ judgment and acceptance. Existing Pro authority, scientific budgets and model se
 
 ## Endpoints and files
 
+OWNER_DIRECT 2026-09-08: before messaging Portfolio, apply
+`SIBLING_COMMUNICATION.md` **Send/no-send conditions**. Send only a specific requested
+reply or a new unresolved command/conflict/repair need; execute supplied return routes
+without reporting them. Do not repeat an unchanged pending request. Root owns the main
+index by default and does not request idle confirmation or notify release for routine
+commits/integrations. Only Portfolio initiates an actual temporary index transfer under
+that document's exact steps. Batch ready routine receipts at clean boundaries, push every
+commit immediately, and do not delay independent dispatch for logging.
+
 Root is task `01a07249-b095-7821-8ce2-e9c32ba85267` in `C:/Projects/HMASD`.
 Portfolio's exact task and checkout are in `.codex/hmasd-portfolio.toml`; it works directly
 on main and owns `docs/research/portfolio/PORTFOLIO.md`. Root owns operational facts in
