@@ -1,0 +1,80 @@
+{
+  "id": "20260907-frrie-002",
+  "created": "2026-09-07T22:37:52-07:00",
+  "direction": "finite_resource_relational_inductive_efficiency",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "FRRIE A05：120秒单次首次异常取证",
+  "context": "A05记录首次异常时的地址、字段表、迭代器和已有训练计数；systems / information flow，保持原科学源码与训练顺序。准备精确输入并验收后，P27分配至多一个120秒诊断链；不据此判断算法收益或故障写入者。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "按已分配P27继续",
+      "consequence": "冻结独立诊断卡；精确输入与终止检查通过后执行至多一次，不改原R09或重试。"
+    },
+    {
+      "key": "reject",
+      "label": "停止本诊断路线",
+      "consequence": "保留P22及旧源码，停止本诊断后续动作并返回具体下一任务需求。"
+    },
+    {
+      "key": "revise",
+      "label": "修改尚未执行的诊断",
+      "consequence": "应用明确修改，重新固定受影响输入或预算；不擅自扩大执行范围。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "静态评估没有支持具体修复，现有错误帧缺少关键状态；保留原训练顺序可覆盖可能在后续更新发生的故障。",
+  "evidence": [
+    "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R09_FIRST_EXCEPTION_A05_SCIENCE_CARD_20260907.md",
+    "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R09_TRAINING_INPUT_P23_ASSESSMENT_20260907.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-07.md",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "按P27继续A05：单次首次异常取证，保留原训练顺序，在总计120秒内捕获地址、字段表、迭代器与已有训练计数，是否有需要异步覆盖的地方？",
+    "changes_if_approved": [
+      {
+        "target": "FRRIE A05诊断卡及新pdb输入",
+        "from": "P23只有静态评估和待定取证方案，原调试命令未获取关键状态",
+        "to": "单独冻结诊断问题与120秒总上限，准备精确输入并检查；验收后按P27运行至多一次，旧528字节输入与科学源码不变"
+      }
+    ],
+    "if_refused": "在下一个安全边界应用回复，保留P22未完成证据与全部旧结果，返回具体修改需求；不擅自换算法、运行环境或重试。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R09_TRAINING_INPUT_P23_ASSESSMENT_20260907.md",
+        "quote": "No source correction is justified by the retained evidence.",
+        "why": "现有源码无法支持改掉序列化；缺失异常时状态是具体障碍。"
+      },
+      {
+        "path": "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R09_OFFLINE_P22_RESULT_EVIDENCE_20260907.md",
+        "quote": "TypeError: 'Field' object is not iterable",
+        "why": "保留了真实首个异常，后来的调试器NameError不是原始原因。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R09_TRAINING_INPUT_P23_ASSESSMENT_20260907.md",
+        "quote": "No retained value identifies which call failed in P22.",
+        "why": "故障可能在后续训练才出现，120秒内未复现不能宣告可靠或定位原因。"
+      }
+    ],
+    "uncertainty": [
+      "取到异常状态也未必知道谁改坏了它；正常字段表不能排除瞬时、原生内存或运行时问题。",
+      "实际学习次数仍未知，诊断可能含非零训练；不会把零学习前缀变成新的前置要求。"
+    ],
+    "cost": {
+      "compute": "至多一个诊断链，总上限120秒（TERM115秒加最多5秒宽限）；原2臂×128更新上限保留，实际取决于首个终止点。另有最多25秒的纯惰性调试器检查，零科学调用。",
+      "owner_time": "可异步审阅；当前P27已有授权，不等待回复。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing；精确输入与终止行为的工程验收仍须完成。"
+    },
+    "verdict_text": "Owner-delegated decision (unattended, 2026-09-03 instruction): (a). Separate diagnostic input/cap under P27; no R09 rewrite or automatic retry.",
+    "source": "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R09_FIRST_EXCEPTION_A05_SCIENCE_CARD_20260907.md"
+  },
+  "starred": false
+}
