@@ -1,8 +1,10 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-07 (P18 CBSC fresh paired B preparation)
+Updated at: 2026-09-07 (P19 VSP02 family Convergence; CBSC P18 retained)
 
-Current incremental command: [P18 CBSC fresh paired B preparation](handoffs/2026-09-07-p18-cbsc-fresh-pair-preparation.md). P17 established the declared acquisition/install/metadata path in 174.561 s with no learner exposure; prepare both new RAW/STRUCT arms on that explicit runtime. No learning invocation is allocated by P18. Other direction routes continue independently.
+Current incremental command: [P19 VSP02 family Convergence](handoffs/2026-09-07-p19-vsp02-family-convergence.md). Both accepted B01 prefixes remain within MEI; one direction-level consultation is authorized with complete archival/intake, zero new scientific execution and no presumed family disposition.
+
+Retained incremental command: [P18 CBSC fresh paired B preparation](handoffs/2026-09-07-p18-cbsc-fresh-pair-preparation.md). P17 established the declared acquisition/install/metadata path in 174.561 s with no learner exposure; prepare both new RAW/STRUCT arms on that explicit runtime. No learning invocation is allocated by P18. Other direction routes continue independently.
 
 Retained/previous incremental command: [P17 exact CBSC invocation and VSP02 master1117 pair](handoffs/2026-09-07-p17-cbsc-execution-vsp02-fresh-prefix.md). Accepted P16 engineering and VSP02 seed1103 intake now support the two named allocations; actual launches remain Root log facts. Other advancing routes continue independently. No lifecycle, priority or UAV-entry change.
 
