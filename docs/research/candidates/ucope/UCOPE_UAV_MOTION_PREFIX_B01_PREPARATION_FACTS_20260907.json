@@ -1,0 +1,114 @@
+{
+  "object": "UCOPE-UAV-MOTION-PREFIX-B01",
+  "prepared_at": "2026-09-07T17:44:34.948015-07:00",
+  "source_sha": "521da9b267b623d7368ff1ed46807ff413dc095b",
+  "fixed_pro_response_commit": "426513b18b38b477dd255b3e8524424d8deb8a19",
+  "existing_uav_source_unchanged_from_pro_input": true,
+  "source_paths": [
+    "envs/pettingzoo/uav_env.py",
+    "envs/pettingzoo/env_adapter.py",
+    "envs/pettingzoo/__init__.py",
+    "envs/pettingzoo/scenario1.py",
+    "envs/pettingzoo/scenario2.py",
+    "experiments/candidates/vsp_02/teammate_policy_change_b01/learner.py",
+    "scripts/hmasd_resource_preflight.py"
+  ],
+  "runtime_inventory": {
+    "observed_date": "2026-09-07",
+    "method": "stdlib importlib.metadata, no workload/package imports",
+    "local": {
+      "python": "C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe",
+      "python_version": "3.10.20",
+      "numpy": "1.26.3",
+      "torch_distribution": "2.7.0",
+      "gymnasium": "1.0.0",
+      "pettingzoo": "1.24.3",
+      "pytest": "9.1.1",
+      "matplotlib": "3.10.0"
+    },
+    "remote": {
+      "host": "hmasd-wsl-node",
+      "python": "/home/wu/.venvs/hmasd/bin/python",
+      "python_version": "3.10.21",
+      "numpy": "1.26.3",
+      "torch_distribution": "2.7.0+cu118",
+      "gymnasium": "1.0.0",
+      "pettingzoo": "1.24.3",
+      "pytest": "7.0.1",
+      "matplotlib": "3.10.0"
+    },
+    "uav_calls": 0,
+    "binary_import_or_training_acceptance_claimed": false
+  },
+  "configuration_arithmetic": {
+    "team_agents": 5,
+    "base_obs_dim": 104,
+    "actor_input_dim": 108,
+    "base_state_dim": 116,
+    "critic_input_dim": 136,
+    "actor_common_parameters": 32134,
+    "critic_parameters": 34177,
+    "generic_parameters": 66311,
+    "treatment_parameters": 66441,
+    "added_duration_parameters": 130,
+    "training_steps_per_arm_seed": 131072,
+    "training_episodes_per_arm_seed": 512,
+    "rollouts_per_arm_seed": 256,
+    "optimizer_steps_per_arm_seed": 1024,
+    "training_steps_total": 524288,
+    "training_episodes_total": 2048,
+    "optimizer_steps_total": 4096,
+    "main_evaluation_episodes": 128,
+    "main_evaluation_steps": 32768,
+    "hover_evaluation_episodes": 64,
+    "hover_evaluation_steps": 16384,
+    "all_evaluation_episodes": 192,
+    "all_evaluation_steps": 49152,
+    "total_team_steps": 573440,
+    "total_sampled_episodes": 2240,
+    "constructor_resets_outside_sampled_episode_counts": 4,
+    "evaluation_diagnostic_agent_frames": 3200,
+    "extra_local_index_method_calls": 6400,
+    "nested_candidate_trajectory_search": 0
+  },
+  "seed_plan": {
+    "independent_pair_masters": [
+      6801,
+      6802
+    ],
+    "base_formula": "b=100000*s",
+    "common_initialization": "b+11",
+    "training_velocity": "b+21, separate identical-initial-state T/G generators",
+    "training_duration_T": "b+22",
+    "training_reset_episode_e_0_to_511": "b+1000+e",
+    "evaluation_reset_e_0_to_31": "b+2000+e, common T/G/H",
+    "evaluation_velocity_e": "b+3000+e, private T/G streams with same initial seed",
+    "evaluation_duration_T_e": "b+4000+e",
+    "engineering_fixture_master": 9001,
+    "freshness_check": "No exact 6801/6802 match found in current UCOPE scientific/code records by bounded rg; no universal historical namespace claim."
+  },
+  "prospective_complete_wall_caps_seconds": {
+    "arm_seed": 1800,
+    "pair": 3600,
+    "two_pair_sum": 7200,
+    "hover_allocation": "inside G arm cap, not an extra allowance",
+    "scientific_invocations_allocated_in_P15": 0
+  },
+  "unknown_cost": "per-step, per-update, initialization, evaluation and publication unit times are unmeasured; caps are stop allocations, not runtime predictions",
+  "exposure_planning": {
+    "trainable_parameters_G": 66311,
+    "trainable_parameters_T": 66441,
+    "adam_steps_per_fit": 1024,
+    "learning_rate": 0.0003,
+    "gradient_clip": 0.5,
+    "first_and_final_parameter_norms": "to be reported by each real fit; no parameter initialization was executed during preparation"
+  },
+  "actual_new_scientific_exposure": {
+    "environment_constructions": 0,
+    "environment_steps": 0,
+    "learner_initializations": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0,
+    "result_bearing_invocations": 0
+  }
+}
