@@ -1,6 +1,8 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-08 (P50 staging repair, P51 MGTAP refill and P52 FSD decision)
+Updated at: 2026-09-08 (P50 repair and rolling P51/P52/P53 direction commands)
+
+Current fifth-direction command: [P53 DISH ordinary-proposal question](handoffs/2026-09-08-p53-dish-native-proposal-question.md) reuses the existing DISH checkout for one concrete source question after the completed B06 decision. It asks whether causal local information supports a fair ordinary-proposal/learning intervention under unchanged native commit/application rules; invalid commits or zero transfers do not prove a cause, and privileged masks or forced source events are excluded. A surviving case goes once to the proper DISH Convergence node and full intake/preparation; otherwise it yields. No model, native invocation, implementation, lifecycle change or new local worktree is selected. Together with FSD P52, UCOPE P50, MGTAP P51 and VSPC1 P49 this supplies five direction routes, counted only while actually advancing. FRRIE/CBSC and RCLE retain their named unresolved recovery/acceptance dependencies.
 
 Current FSD return route: [P52 post-fixed-clock decision](handoffs/2026-09-08-p52-fsd-post-fixed-clock-decision.md) resumes the same DM after accepted complete B03 intake (`9392aafb3`). H−D0 +0.3928645833 supports a local package advantage while G−H +0.1152864583, weak actual D0 and unequal internal optimization exposure bound its meaning. The selected panel is answered. One proper-node next-object question and complete intake/preparation route are authorized with zero new scientific invocation; no repeated pair, cap change or UAV-entry claim follows. Reuse `codex-fsd` throughout.
 
