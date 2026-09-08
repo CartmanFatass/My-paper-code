@@ -1,6 +1,8 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-08 (P60 VSPC1 common value-normalization comparison)
+Updated at: 2026-09-08 (P60 VSPC1 comparison; P61 UCOPE and P62 DISH decisions)
+
+Current remaining refills: [P61 UCOPE post-B03 direction choice](handoffs/2026-09-08-p61-ucope-post-b03-direction-choice.md) and [P62 DISH post-B07 direction choice](handoffs/2026-09-08-p62-dish-post-b07-direction-choice.md) resume their original DMs for one proper-node decision each after their complete negative object readings. Each asks whether a concrete new intervention is worth its minimal real comparison or the tested family/extension should retain no successor; neither allocates an unchanged pair, forces a positive outcome or makes exact diagnosis a gate. The same DM closes each conforming selected-object route through card, CM and bounded execution/intake. Preparation has zero scientific invocation. Dispatch these independently alongside P60 and retain FRRIE P59/SCDMP P58 only while their actual work advances; issued commands and unresolved provider waits are not active chains.
 
 Current first refill: [P60 VSPC1 normalized-value comparison](handoffs/2026-09-08-p60-vspc1-normalized-value-comparison.md) selects the DM's specific symmetric value-target normalization recommendation after P55's second UP and continued MLP/H weakness. One new matched pair has the explicit original exposure and1800s/arm,3600s/complete-pair limits; the same DM/CM owns prospective normalization semantics through implementation, review, execution and intake. It is a changed regime, not a third old pair or normalization-causal proof. Root reports FRRIE P59 and SCDMP P58 advancing while UCOPE, DISH and VSPC1 completed their prior routes; P60 counts only on actual advancing work. Remaining vacancies receive independent commands without a batch barrier.
 
