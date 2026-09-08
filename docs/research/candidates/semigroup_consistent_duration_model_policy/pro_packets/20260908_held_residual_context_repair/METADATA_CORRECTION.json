@@ -1,0 +1,50 @@
+{
+  "recorded_utc": "2026-09-08T21:14:40.521034+00:00",
+  "request_id": "2026-09-08-scdmp-p58-held-residual-context-repair-01",
+  "root_reported_blocker": {
+    "code": "HANDOFF_REQUEST_INVALID",
+    "state": "BLOCKED",
+    "conversation": "UNBOUND",
+    "send_click_count": 0,
+    "message_key": "2026-09-08-scdmp-p58-held-residual-context-repair-01|em:semigroup_consistent_duration_model_policy:convergence|UNBOUND|BLOCKER|BLOCKED|1cf172b0c1739132",
+    "reading": "Root-forwarded direct Transport receipt; no reset, page action, Send or scientific decision reported"
+  },
+  "correction": "Complete the canonical REQUEST with the already-bound transport_request metadata from HANDOFF. HANDOFF itself already contains the required pro_final authority and correct fixed-link payload; its bytes are preserved.",
+  "added_existing_transport_fields": [
+    "conversation_binding_key",
+    "conversation_reuse_required",
+    "creator_thread_id",
+    "decision_authority",
+    "direction_ids",
+    "dispatch_mode",
+    "operator_model",
+    "operator_reuse_required",
+    "operator_thinking",
+    "operator_thread_id",
+    "prompt",
+    "provider_requirement",
+    "requested_conversation_id",
+    "return_receipt_thread_id",
+    "return_route",
+    "source_mode"
+  ],
+  "validator": ".agents/skills/hmasd-chatgpt-pro-transport/scripts/validate_request.py:validate",
+  "canonical_request_valid": true,
+  "nested_handoff_request_valid": true,
+  "matching_authority": "pro_final",
+  "matching_owner_directed_reset_evidence": {
+    "previous_request_id": "2026-09-08-scdmp-p56-held-residual-convergence-01",
+    "reset_authority": "OWNER_DIRECT",
+    "owner_instruction": "然后不要再使用旧的conversation id 这些没有兼容到6 pro"
+  },
+  "matching_requested_conversation_id": null,
+  "matching_prompt_sha256": "d0918a42d9754bddba00943aa1b500bdc1a7c9841fe3bb2cc91fdce0a9445a1f",
+  "fixed_task_commit": "362ccdae4b26ea25730df45c550c8a7efdfa5371",
+  "handoff_commit_with_unchanged_bytes": "bf0772092b985d4307bc7a7e698265529e8386c4",
+  "scientific_and_delivery_fields_preserved": true,
+  "new_provider_send": 0,
+  "new_context_reset": 0,
+  "new_scientific_invocations": 0,
+  "scope_section4": "none",
+  "scope_section5_breach": false
+}
