@@ -3,6 +3,7 @@ import copy
 import importlib.util
 import json
 import random
+import sys
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -26,6 +27,7 @@ class Corridor:
 
 class Adapter:
     n_agents, obs_dim, state_dim = 2, 1, 1
+    constructed = []
 
     def __init__(self, config=None, *, num_envs=2, master_seed=0, episode_ids=None, **kw):
         self.config = config or Corridor()
@@ -34,6 +36,7 @@ class Adapter:
         self.resets, self.applied, self.actions, self.events = 0, [], [], []
         self.applied_refs = []
         self.host = SimpleNamespace(change_flag=np.zeros((num_envs, 2), dtype=int), region_of_agent=np.arange(2))
+        self.constructed.append(self)
 
     def episode_ids(self):
         return tuple(self.ids)
@@ -184,6 +187,7 @@ def no_scientific_construction(monkeypatch):
     monkeypatch.setattr(r, "TRAIN_LANES", 2)
     monkeypatch.setattr(r, "EVAL_LANES", 2)
     Agent.constructed = []
+    Adapter.constructed = []
 
 
 def setup_training(tmp_path, policy="H"):
@@ -262,7 +266,8 @@ def assert_rng_equal(a, b):
     assert torch.equal(a[2], b[2])
 
 
-def test_actual_e2_constructor_sync_reset_and_rng_isolation(monkeypatch, tmp_path):
+@pytest.mark.parametrize("inputs", [{}, {"training_seed": 770303, "evaluation_master": 770304}])
+def test_actual_e2_constructor_sync_reset_and_rng_isolation(monkeypatch, tmp_path, inputs):
     import run_flexible_skill_duration_e2 as e2
     monkeypatch.setattr(e2, "RelayCorridorAdapter", Adapter)
     monkeypatch.setattr(e2, "HMASDAgent", Agent)
@@ -271,9 +276,10 @@ def test_actual_e2_constructor_sync_reset_and_rng_isolation(monkeypatch, tmp_pat
     learner.value_norm_coordinator.mean[:] = 44.
     learner.value_norm_discoverer.var[:] = 55.
     original = copy.deepcopy(learner.__dict__)
-    summary = r.base_summary("H", Corridor(), "source")
+    summary = r.base_summary("H", Corridor(), "source", **inputs)
     before = rng_state()
-    r.final_evaluation("H", Corridor(), learner, r.arm_parameters("large", "d2", horizon=3), summary, tmp_path, r.time.perf_counter())
+    r.final_evaluation("H", Corridor(), learner, r.arm_parameters("large", "d2", horizon=3),
+                       summary, tmp_path, r.time.perf_counter(), **inputs)
     assert_rng_equal(before, rng_state())
     evaluator = Agent.constructed[-1]
     assert evaluator is not learner and not evaluator.training
@@ -295,6 +301,9 @@ def test_actual_e2_constructor_sync_reset_and_rng_isolation(monkeypatch, tmp_pat
     assert summary["counts"]["evaluation_episodes"] == 2
     assert summary["evaluation"]["status"] == "complete"
     assert all(getattr(evaluator, name + "_optimizer").calls == 0 for name in r.NETWORKS)
+    assert evaluator.config.seed == inputs.get("training_seed", 770203)
+    assert Adapter.constructed[-1].master_seed == inputs.get("evaluation_master", 770204)
+    assert Adapter.constructed[-1].episode_ids() == tuple(range(r.EVAL_LANES))
 
 
 def test_evaluation_measures_native_arrays_and_conditional_counts(tmp_path):
@@ -531,3 +540,104 @@ def test_interrupted_or_nonfinite_write_keeps_previous_completed_summary(monkeyp
     with pytest.raises(OSError):
         r.write_summary(tmp_path, {"transitions": 10})
     assert json.loads((tmp_path / "summary.json").read_text()) == {"transitions": 6}
+
+
+def b02_entry(monkeypatch):
+    # Bind the actual thin entry point to this suite's already patched shared module.
+    monkeypatch.setitem(sys.modules, "run_fsd_native_renewal_learning_b01", r)
+    spec = importlib.util.spec_from_file_location("fsd_b02", ROOT / "scripts/run_fsd_native_renewal_learning_b02.py")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def test_b02_training_seed_reaches_all_actual_consumers(monkeypatch, tmp_path):
+    monkeypatch.setattr(r, "RelayCorridorAdapter", Adapter)
+    monkeypatch.setattr(r, "HMASDAgent", Agent)
+    calls = []
+    for label, module, name in (("python", r.random, "seed"), ("numpy", r.np.random, "seed"),
+                                 ("torch", r.torch, "manual_seed")):
+        original = getattr(module, name)
+        def recorded(seed, *, label=label, original=original):
+            calls.append((label, seed))
+            return original(seed)
+        monkeypatch.setattr(module, name, recorded)
+    wrapper = b02_entry(monkeypatch)
+    corridor = r.proposal_config("large")
+    summary = r.base_summary("C", corridor, "source", training_seed=770303,
+                             evaluation_master=770304, object_id=wrapper.OBJECT_ID, card=wrapper.CARD)
+    adapter, agent, overrides, theta0, counters = r.build_learner(
+        corridor, tmp_path, summary, r.time.perf_counter(), training_seed=770303)
+    assert calls == [("python", 770303), ("numpy", 770303), ("torch", 770303)]
+    assert adapter.master_seed == agent.config.seed == summary["seed"] == summary["training_master"] == 770303
+    assert summary["evaluation_master"] == 770304 and summary["object_id"] == wrapper.OBJECT_ID
+    assert summary["card"] == wrapper.CARD and agent.threads == 4
+    assert agent.config.policy_interruption_mode == "d2" and agent.config.skill_cap_k_max == 40
+    assert agent.config.team_cap_k_Z == 400 and agent.config.use_valuenorm
+    assert not agent.config.use_obsnorm and not agent.config.use_statenorm
+    assert all(counter.count == 0 for counter in counters.values())
+
+
+def test_b02_thin_entry_complete_fake_panel_and_later_b01_defaults(monkeypatch, tmp_path):
+    patch_main(monkeypatch)
+    wrapper = b02_entry(monkeypatch)
+    original_globals = (r.SEED, r.EVAL_MASTER, r.OBJECT_ID, r.CARD)
+    for policy in ("G", "C", "H"):
+        extra = [] if policy != "H" else ["--c-summary", tmp_path / "C/summary.json", "--g-summary", tmp_path / "G/summary.json"]
+        argv = invocation(policy, tmp_path / policy, *extra)
+        argv[argv.index("--seed") + 1] = "770303"
+        assert wrapper.main(argv) == 0
+        summary = json.loads((tmp_path / policy / "summary.json").read_text())
+        assert summary["object_id"] == "FSD_NATIVE_RENEWAL_LEARNING_B02" and summary["card"] == wrapper.CARD
+        assert summary["training_master"] == 770303 and summary["evaluation_master"] == 770304
+        assert summary["seed"] == (None if policy == "G" else 770303)
+        assert summary["status"] == "complete"
+        assert Adapter.constructed[-1].master_seed == 770304
+        if policy == "G":
+            assert not Agent.constructed and summary["counts"]["model_constructions"] == 0
+        else:
+            assert Agent.constructed[-1].config.seed == 770303
+            assert not any(summary["evaluation_optimizer_calls"].values())
+    assert summary["panel"]["status"] == summary["panel"]["reference_status"] == "complete"
+    assert (r.SEED, r.EVAL_MASTER, r.OBJECT_ID, r.CARD) == original_globals
+    assert r.main(invocation("G", tmp_path / "later_b01")) == 0
+    old = json.loads((tmp_path / "later_b01/summary.json").read_text())
+    assert old["object_id"] == r.OBJECT_ID == "FSD_NATIVE_RENEWAL_LEARNING_B01"
+    assert old["card"] == r.CARD and old["training_master"] == 770203 and old["evaluation_master"] == 770204
+    assert Adapter.constructed[-1].master_seed == 770204
+    default_summary = r.base_summary("C", Corridor(), "source")
+    assert default_summary["seed"] == default_summary["training_master"] == 770203
+    assert default_summary["object_id"] == r.OBJECT_ID and default_summary["card"] == r.CARD
+
+
+@pytest.mark.parametrize("entry,wrong_seed", [("B01", "770303"), ("B02", "770203")])
+def test_entry_rejects_wrong_fixed_seed_before_output_or_construction(monkeypatch, tmp_path, entry, wrong_seed):
+    wrapper = b02_entry(monkeypatch)
+    output = tmp_path / "never_created"
+    argv = invocation("G", output)
+    argv[argv.index("--seed") + 1] = wrong_seed
+    with pytest.raises(SystemExit) as error:
+        (r.main if entry == "B01" else wrapper.main)(argv)
+    assert error.value.code == 2
+    assert not output.exists() and not Agent.constructed and not Adapter.constructed
+
+
+def test_b02_pair_identity_rejects_old_comparator_and_limits_bad_reference(monkeypatch):
+    wrapper = b02_entry(monkeypatch)
+    def fresh(policy):
+        summary = arm(policy)
+        summary.update(object_id=wrapper.OBJECT_ID, card=wrapper.CARD,
+                       seed=None if policy == "G" else 770303,
+                       training_master=770303, evaluation_master=770304)
+        return summary
+    h, c, g = fresh("H"), fresh("C"), fresh("G")
+    assert r.summarize_panel(h, c, g)["reference_status"] == "complete"
+    with pytest.raises(ValueError, match="learned pair mismatch"):
+        r.summarize_panel(h, arm("C"), g)
+    assert h["status"] == h["evaluation"]["status"] == "complete"
+    for bad_g in (arm("G"), {**g, "evaluation_master": 770204}):
+        result = r.summarize_panel(h, c, bad_g)
+        assert result["status"] == "complete" and result["reference_status"] == "incomplete"
+        assert "reference mismatch" in result["reference_failure"]
+        assert result["paired"]["h_minus_c_full"]["mean"] == 0.
+        assert not any(key.startswith("g_minus") for key in result["paired"])
