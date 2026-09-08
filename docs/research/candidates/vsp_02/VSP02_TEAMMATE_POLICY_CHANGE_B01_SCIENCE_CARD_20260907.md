@@ -6,6 +6,8 @@ Binding MARL structure: (d) other-agent non-stationarity or partial observabilit
 **VSP02-TEAMMATE-POLICY-CHANGE-B01 / B/EXPLORE.** This is a prospective object card, not a C freeze;
 A/B have no consumption state. P14-VSP02-B-CARD-AND-CM-COMPARISON-01 authorizes this card/spec and
 Root's five-arm engineering comparison, with **zero scientific invocations allocated**.
+That was the P14 preparation boundary. **P15 now allocates one scientific pair under §8 below**;
+all scientific definitions and the complete 1800-second cap remain unchanged.
 Reuse `C:/Projects/HMASD-worktrees/dm-vsp02`, `codex/vsp02`. Root binds the committed preparation
 return as the common engineering source; the future B uses its later accepted exact launch SHA.
 
@@ -156,3 +158,32 @@ Companions: `VSP02_TEAMMATE_POLICY_CHANGE_B01_CODE_SPEC_20260907.md`,
 `VSP02_TEAMMATE_POLICY_CHANGE_B01_CM_TASK_20260907.md`,
 `VSP02_TEAMMATE_POLICY_CHANGE_B01_PREPARATION_COUNTS_20260907.json`, and
 `VSP02_TEAMMATE_POLICY_CHANGE_B01_PREPARATION_INTAKE_20260907.md`.
+
+## 8. Current P15 execution allocation — 2026-09-07
+
+P15's VSP02 section at main `25b1a88b162ae137b5071ca2d9acb87007fb3ea9` supersedes only the
+P14 zero-invocation boundary. It allocates **one complete same-prefix scientific pair**: seed1103,
+P4096, Q1024 per arm and all existing evaluations, with one1800-second whole-chain cap. No extra
+seed/comparator, retry, resume or cap increase is allocated. A/B consumption rules are unchanged.
+
+The accepted baseline implementation is `b0c957d9b9a23506dbd0ba8a1b8c729ea50d8cad`, with the
+evidence-path clarification at `ef39e40706cb9656a81dfa1dd640bac419cd89a8`. DM's P15 readiness
+record verifies its correspondence with this card/code spec and the retained original acceptance
+artifacts. Source remains unchanged; no new CM comparison or duplicated fixture is needed.
+
+Root uses the exact committed/pushed preparation revision supplied with
+`VSP02_TEAMMATE_POLICY_CHANGE_B01_P15_READINESS_20260907.md`, whose implementation surface matches
+the accepted baseline. The planned detached worktree is
+`/home/wu/hmasd-worktrees/vsp02-tpc-b01-p15-s1103-a1`, node `wsl_4070`, CPU FP32 with one compute
+thread. On-node metadata reports CPython3.10.21, torch2.7.0+cu118, NumPy1.26.3 and Matplotlib3.10.0;
+the CUDA-enabled distribution still executes this explicit CPU policy. No cross-platform bitwise
+claim is made. Fresh memory admission remains adjacent to the actual runner invocation.
+
+The existing seed17 engineering artifact shows first16-step parameter RMS displacement
+0.0021576136350631714 from initial parameter RMS0.07669830322265625, a ratio0.028131178193076693.
+This establishes a nonzero update path at fixture scale, not scientific performance or a runtime
+projection. The machine-generated P15 facts retain these readings and the planned counts.
+
+Root launches/observes the single accepted handle; existing CM `/root/vsp02_cm_baseline_b01`
+collects and technically accepts it in the designated authoring checkout; this DM performs the
+result intake, audit and Chinese brief. Current scientific exposure remains zero until that launch.

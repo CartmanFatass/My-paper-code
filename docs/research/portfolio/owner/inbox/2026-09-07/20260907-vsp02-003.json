@@ -74,7 +74,7 @@
     "source": "docs/research/candidates/vsp_02/VSP02_TEAMMATE_POLICY_CHANGE_B01_PREPARATION_INTAKE_20260907.md"
   },
   "starred": true,
-  "approval_correction": "默认 new-card 选项标签 launch as carded 不扩展本项逐项后果：accept 仅接受卡和统一规格以及 P14 工程续接，不分配科学运行。",
+  "approval_correction": "P14 的零科学调用限制仅对 P15 明确分配的这一次科学配对被取代；不新增种子、比较器、重试或时间。已有准入和观察规则保持。",
   "execution_history": [
     {
       "at": "2026-09-07T23:22:41+00:00",
@@ -84,6 +84,15 @@
       "state": "applied",
       "summary": "P14 已授权卡/统一规格完成后的五臂工程派发。本项已应用的范围是准备和工程交接；科学调用仍为零，未来运行必须另获明确分配。",
       "correction": "默认 new-card 选项标签 launch as carded 不扩展本项逐项后果：accept 仅接受卡和统一规格以及 P14 工程续接，不分配科学运行。"
+    },
+    {
+      "at": "2026-09-08T00:34:26+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/handoffs/2026-09-07-p15-rolling-refill-after-transport-split.md",
+      "record": "docs/research/candidates/vsp_02/VSP02_TEAMMATE_POLICY_CHANGE_B01_P15_READINESS_20260907.md",
+      "state": "applied",
+      "summary": "P15（25b1a88b162ae137b5071ca2d9acb87007fb3ea9）已明确分配一次固定1103同前缀 B01 双分支、整条链1800秒；已写入卡第8节并完成代码/记录就绪核对。Root 下一步执行相邻内存准入及这一次运行，CM 收集，DM 入账。当前科学调用仍为零，未启动或重试。",
+      "correction": "P14 的零科学调用限制仅对 P15 明确分配的这一次科学配对被取代；不新增种子、比较器、重试或时间。已有准入和观察规则保持。"
     }
   ]
 }
