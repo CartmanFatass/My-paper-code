@@ -55,4 +55,49 @@ These observations establish implementation conformance, not UAV performance, B0
 
 **Post-learner path coverage:** unchanged checkpoint/summary/primary/publication code is exercised through existing focused checks, with B04 saved effective Config and T/G head metadata traced through fake workloads. No new standalone smoke or historical replay obligation follows. Real7201 exposure, fitted-checkpoint tensors, native counts and primary remain for terminal collection.
 
-DM next binds this accepted source and hands off to Root's existing P61 route: one fresh admitted remote7201 T/G/H invocation,286720 team steps,2048 Adam calls,96 final episodes and full publication/exit caps. Root owns staging/launch/observation and integration; CM retains terminal collection/technical acceptance; DM interprets every outcome. No retry, second pair, extra H completion/evaluation or tuning is implied. Root owns removal of this now-terminal remote test checkout after integrating/archiving the accepted delivery; it is not an authoring checkout or scientific execution dependency. The shared local direction checkout remains in use by DM/CM.
+DM next binds this accepted source and hands off to Root's existing P61 route: one fresh admitted remote7201 T/G/H invocation,286720 team steps,2048 Adam calls,96 final episodes and full publication/exit caps. Root owns staging/launch/observation and integration; CM retains terminal collection/technical acceptance; DM interprets every outcome. No retry, second pair, extra H completion/evaluation or tuning is implied. The later command handoff below gives this same remote checkout the imminent7201 execution dependency. Root owns removal only after7201 reaches terminal state and its artifacts, CM collection and DM intake are archived. The shared local direction checkout remains in use by DM/CM.
+
+
+## Literal7201 command handoff — completion of the existing B04 task
+
+DM accepted the source/review and requested this mechanical command completion under main `ROOT_OPERATIONS.md`, “Execute the supplied launch command”. This is excluded from new coding enrollment. Research source remains **7693b7af6b7d89cdaa028659d606a37dee9eb68e**; no code, test, scientific allocation or accepted-source SHA changed. CM ran no admission or science and no test rerun.
+
+Read-only reconciliation confirmed the existing staged checkout is clean at that exact source, the proposed supervisor reports `not_found`, and the proposed scientific output is absent. This is an observed preparation fact, not future admission or permission to duplicate an accepted handle. Root uses the same checkout with no additional source transfer, worktree or test; reconcile any intervening acceptance before submitting once.
+
+- Node: `hmasd-wsl-node` (configured `wsl_4070`); CPU FP32, runner's fixed one Torch thread.
+- Exact cwd: `/home/wu/hmasd-worktrees/ucope-uav-motion-prefix-b04-p61-check-20260908`.
+- Supervisor: `ucope-uav-motion-prefix-b04-7201-p61-20260908`.
+- Output relative to that cwd: `temp/directions/ucope/exp/uav-motion-prefix-b04-7201-p61-20260908`.
+- Interpreter: `/home/wu/.venvs/hmasd/bin/python`; pair `b04`, seed `7201`, source defaults1800s/arm and3600s pair.
+- Whole detached command uses existing `/usr/bin/time` and3600s external timeout, including fresh admission, initialization, learner, evaluation, publication and exit.
+
+Root executes this **existing local file**, without rebuilding or replacing strings:
+
+```powershell
+& 'C:/Projects/HMASD-worktrees/dm-ucope-native-return-prep-20260906/temp/directions/ucope/launch/b04_7201_p61_20260908/submit.ps1'
+```
+
+Its exact332 UTF-8/LF bytes (including final newline), SHA-256 **44da62269da8e8d10683189284db1884d6260daaff8943746de24c09d01c8f2d**, are:
+
+```powershell
+& ssh -o BatchMode=yes -o ConnectTimeout=10 hmasd-wsl-node "/usr/local/bin/agent-task run ucope-uav-motion-prefix-b04-7201-p61-20260908 '/usr/bin/time -f whole_wall_seconds=%e,peak_rss_kib=%M /usr/bin/timeout --signal=KILL 3600s /bin/bash --noprofile --norc /home/wu/hmasd-inputs/ucope-b04-7201-p61-20260908.sh'"
+exit $LASTEXITCODE
+```
+
+The payload wrapper already staged at **`/home/wu/hmasd-inputs/ucope-b04-7201-p61-20260908.sh`** is the local `temp/directions/ucope/launch/b04_7201_p61_20260908/wrapper.sh` in the authoring checkout. Its exact729 UTF-8/LF bytes (including final newline), SHA-256 **262ce2d711e1ded155abdf375aeb0e5a763f745e385772cfa2234e9506db796f**, are:
+
+```bash
+#!/usr/bin/env bash
+set -euo pipefail
+cd /home/wu/hmasd-worktrees/ucope-uav-motion-prefix-b04-p61-check-20260908
+/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/.agent-tasks/ucope-uav-motion-prefix-b04-7201-p61-20260908/resource_admission.json
+mkdir -p temp/directions/ucope/exp/uav-motion-prefix-b04-7201-p61-20260908
+cp /home/wu/.agent-tasks/ucope-uav-motion-prefix-b04-7201-p61-20260908/resource_admission.json temp/directions/ucope/exp/uav-motion-prefix-b04-7201-p61-20260908/resource_admission.json
+exec /home/wu/.venvs/hmasd/bin/python scripts/run_ucope_uav_motion_prefix_b01.py --pair b04 --seed 7201 --out temp/directions/ucope/exp/uav-motion-prefix-b04-7201-p61-20260908
+```
+
+The existing `admit-memory` implementation captures fresh actual-node physical/effective memory, requires both≥4GiB and exits6 on failed admission. `set -e` therefore stops before scientific output/model creation on failure. Its first receipt lives inside the accepted supervisor directory; only successful admission creates the scientific output directory and copies that same receipt there. Root preserves the supervisor receipt even if admission fails. The learner retains original counts/caps and the external timeout bounds the full logical chain; there is no retry in either file.
+
+**Nonexecuting check evidence:** the actual staged LF wrapper passed `/bin/bash -n /home/wu/hmasd-inputs/ucope-b04-7201-p61-20260908.sh`, exit0, and remote `sha256sum` matched the local wrapper digest above. PowerShell `Language.Parser.ParseFile` accepted the actual local `submit.ps1` with zero syntax errors; it was not executed. Raw Bash check and byte facts are retained under [command facts](../../../../temp/directions/ucope/launch/b04_7201_p61_20260908/command-facts.json) and adjacent `wrapper-syntax.stdout.txt`. Subsequent read-only reconciliation again found the7201 handle/output absent and exact staged source unchanged. No nested payload was rebuilt from a prior scientific runner, and no post-check string replacement occurred.
+
+Cleanup recommendation is amended: this staged checkout now has the actual imminent7201 dependency. Root removes it and the staged command wrapper **after terminal7201 artifacts, CM collection and DM intake are archived**, while preserving the accepted output/receipts. Earlier test/setup/launcher failure receipts remain unchanged. This command handoff is ready for DM source binding and Root's single authorized submission; it is not an admission or launch receipt.
