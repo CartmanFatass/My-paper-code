@@ -189,3 +189,43 @@ The next discriminator is the actual new seed5 frozen G controller's native retu
 against R0, with R and stochastic execution limiting its interpretation. Root resumes
 this same DM for scientific intake after CM collection; the direction does not stop
 at selected-card publication or route ordinary implementation back to Portfolio.
+
+## 7. DM source acceptance and sole execution continuation
+
+At `2026-09-08T20:29:26Z`, the DM inspected the delivered B03 driver and runner at
+**`4eb8a36b9184633f5e28eff999a99f2dbc948040`**, the independent
+[source review](VSP03_B03_SOURCE_REVIEW_20260908.md), the CM's
+[technical record](VSP03_B03_TECHNICAL_ACCEPTANCE_20260908.md), and the exact
+[launch boundary](VSP03_B03_LAUNCH_BOUNDARY_20260908.md). This is acceptance of the
+changed scientific connections against card sections 3, 4, 6 and 7, not a runtime
+result. B01/B02 sources remain unchanged. One G is constructed with arm identity 1;
+128 real Adam updates precede the four shared-world final executions. The primary
+is G greedy minus R0, all five contrasts and one independent training instance are
+retained, and neither T nor the old fixture is called. Publication reads endpoints,
+weights, primary and counts back in the normal invocation. The literal work matches
+20480 joint episodes / 1638400 target transitions / 128 Adam steps.
+
+The independent reviewer found no material issue. The recorded three focused tests
+passed in 1.79s after the documented temporary-directory setup correction; remote
+`bash -n` also passed. Those checks were not rerun during intake. They constructed
+no scientific model, world or trajectory. The outer 120s timeout encloses adjacent
+admission, imports, construction, training, final evaluation, publication/readback
+and exit, without stage resets or grace. Actual endpoint existence, runtime counts,
+admission and whole wall remain facts for CM collection, not established here.
+
+**Decisions this source intake produces — object tier.** Options (a) accept the
+source comparison and continue the one selected source-bound invocation with the
+same CM; (b) return a concrete changed-meaning or coverage defect. Recommend and
+select (a): no such defect was found. **Owner-delegated decision (unattended,
+2026-09-03 instruction): (a).** The exact launch source remains `4eb8a36b9` after
+this documentation commit; no new seed, evaluation, retry or host is added.
+This ordinary technical decision is recorded in the audit, with no separate item.
+The fresh main owner-review query returned `[]`, with no VSP03 audit owner override.
+
+The same CM retains collection and the documented scratch cleanup responsibility.
+Automatic approval review rejected its verified-path scratch removal as "blocked
+by policy"; the retained path and rejected action are in the technical record.
+No tool-policy workaround, scientific polarity or additional experiment follows.
+The documentation's garbled contrast glyph is cosmetic and can be corrected to
+plain "G minus R0" in the CM's next record edit. Root adopts the actual accepted
+handle under EXPERIMENT_MONITOR; observation does not launch another invocation.
