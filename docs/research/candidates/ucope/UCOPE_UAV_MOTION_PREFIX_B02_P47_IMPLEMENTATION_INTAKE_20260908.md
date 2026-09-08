@@ -1,0 +1,62 @@
+# UCOPE B02 — P47 implementation intake and P48 disposition
+
+**The delivered B02 code is accepted under P48 for the already selected 7001→7002 route. The sole smoke exceeded its engineering bound: 80.578s versus 60s, and that breach is retained.** P48 accepts the completed functional/review/publication evidence without another smoke; §6 applies the exact disposition. No speculative fix or second smoke ran, and masters 7001/7002 remain prospective at this binding.
+
+## 1. Authority, checkout and what was checked
+
+OWNER_DIRECT [P47](../../portfolio/handoffs/2026-09-08-p47-research-resume-and-recovery.md), immutable commit `6dd7570e9e8045fb3818c553953a92c9caa587cb`, supplies fresh native recipients and implementation plus the exact selected two-pair allocation. The card was frozen at `1d46ddc2b142a2c2b98922a8f46e2d2609bda859`, with source `b5607f46fea91379582af8bf87e60b61bc4a269b` matching accepted code surface `9c541a8047b8c33e90f09aa65e326180343a23a0`. The designated checkout began clean at the card commit. CM retained exclusive editing/index ownership through its delivery; DM performed read-only scientific work in parallel and now owns this documentation.
+
+The fresh configured CM `/root/dm_ucope_p47_resume/cm_am_ucope_b02_p47` implemented and pushed **`6374063408208ba67b8cb7c69ebc0babb0f00259`** on `codex/ucope`; its checkout was clean on return. The independent configured reviewer was its child `rv_ah_ucope_b02_credit`. P47 and the completed comparison progress record exclude a fourth comparison; the complete original task/spec/source/acceptance handoff was forwarded to Root before this ordinary CM began. The stopped historical CM was not resumed.
+
+DM read the complete production diff in policy/learner/study/runner, the CM's [technical record](UCOPE_UAV_MOTION_PREFIX_B02_TECHNICAL_ACCEPTANCE_20260908.md), original fixture summary and episode/rollout/diagnostic counts, and the current card §§2–7. This is affected-boundary acceptance, not a repeat of the CM's tests or learner invocation. Applicable AGENTS, current P47/Portfolio row, preparation intake, DIRECTION question/current position, evidence-spec B/EXPLORE and §11.4/11.7/11.8.1–3/6–8, and engineering-scope §4–5 were read. The existing P29 primary-source clipping rationale and contrary joint-objective evidence were reused; routine implementation introduced no new mechanism or comparator question requiring another library search.
+
+The verification rule applied verbatim, evidence-spec §11.8.6:
+
+> Use existing trustworthy paths and checks where applicable. Add one focused verification for changed behavior and primary output; do not repeat smoke merely because a launch boundary occurred.
+
+The integrity-dependent interpretation rule, §11.8.7, also remains applicable:
+
+> Repair or check a defect that threatens reward, information access, comparison, training or the primary measurement.
+
+## 2. Observed source correspondence and original checks
+
+The actual collector selects agent-compound grouping for B02, keeps old log densities detached at [H,5], checks vector finiteness and preserves masks/stored pre-tanh actions. Reconstruction and update pass that same grouping through both T/G. The surrogate uses an explicit inactive mask, sums agent terms and then averages primitive rows. Duration remains inside its owning agent's t0 ratio. Scalar advantages, all-held denominator, critic timing/targets, entropy, recurrent chunks, joint Adam and FP32/RNG remain unchanged. Historical joint density reduction and default P21/P24 routes remain. `b02`/`agent_compound`, masters 7001/7002, card section 5 and checkpoint/aggregate identity are wired through the actual study/CLI path. No environment or information/reward edit is present.
+
+The original focused directory suite returned **53 passed in 107.46s**, within 300s. Its detailed deterministic cases and actual command are in the technical record; the original console output remains in the CM transcript, with no invented separate stdout file. The independent reviewer inspected the actual changed credit path and original evidence and found no material credit defect or new §4 machinery.
+
+DM's arithmetic-only readback of the original fixture confirmed `ENGINEERING_FIXTURE`, seed 9001, B02 object/algorithm/card, configuration pair `b02`, complete primary/hover and empty limits. Counts are **32 training +48 evaluation =80 synthetic team steps, eight Adam calls, two rollouts, ten complete episodes, 100 diagnostic frames and zero UAV calls**. Stored totals include 293 actual velocity decisions, 20 duration decisions, nine d4 samples and zero partial steps. Synthetic scores and unit-test updates are engineering evidence, not UAV performance or new independent training pairs.
+
+The [computed binding facts](UCOPE_UAV_MOTION_PREFIX_B02_P47_BINDING_FACTS_20260908.json) preserve actual synthetic parameter exposure separately from prospective science: each arm made four lr=3e-4 Adam calls; total relative movement T=0.018104414/G=0.018726143. The real budget is still four fits, 573,440 team steps, 4,096 Adam calls and 192 final evaluation episodes. Added dense density work is pointwise within the same network/environment calls; its real incremental wall cost is unmeasured. No timing experiment, profiling probe, tuned-headroom run or scientific import was made during DM readback.
+
+## 3. Engineering breach and its precise limit
+
+The sole original smoke's recorded complete runner wall is **80.57799999997951s**, exceeding its 60s budget by **20.57799999997951s**. T is 78.89099999994505s and includes startup/common initialization; G is 1.687000000034459s including H/publication. `WHOLE_START` is before imports and CLI work. The summary's `cap_breach=false` refers to the separate 1,800/3,600s scientific clock configuration; it does not certify a 60s engineering smoke. No separate complete external process wall, peak RSS or aggregate CPU is available.
+
+The CM's bounded read of existing clocks/source/file timestamps locates most elapsed before G, but does not distinguish import, first optimizer/library work or host/filesystem delay. **No unique cause or evidence-supported source correction follows.** Independent review accepts functional credit/publication conformance while retaining this one material timing-acceptance gap. DM preserves that finding; neither test success nor the overrun creates scientific polarity.
+
+Scope §4 additions: **none**. The source diff is +60/−21 non-test lines and the runner is 52 lines. Line budgets are met; the single-smoke engineering time budget was breached. No rerun, new diagnostics, changed clock, larger cap or hidden exception has been executed. This does not forecast a real UAV cap breach or establish a conforming future runtime.
+
+## 4. P47 intake decisions before the P48 disposition
+
+1. **Object / implementation intake:** options (a) accept the checked functional source correspondence and retain the timing gap exactly; (b) infer unconditional technical acceptance from exit zero; (c) return a credit defect unsupported by the diff/evidence. Recommendation and selected **(a)**. **Owner-delegated decision (unattended, 2026-09-03 instruction): (a).** CM's withheld unconditional time acceptance remains visible.
+2. **Object / next action within P47:** options (a) prepare the exact source/card/remote binding, recommend proceeding with the functional source and retained historical engineering breach under unchanged scientific caps, and return the literal P47 timing-conformance question through Root; (b) repeat smoke without a concrete correction; (c) commission a timing/causal diagnosis before the selected B. Recommendation and selected **(a)**. **Owner-delegated decision (unattended, 2026-09-03 instruction): (a).** The selected immediate action is a prepared binding and exact gap return, not an unrecorded exception or scientific launch. The recommendation uses §11.4's limited scientific launch conditions and the absence of an identified dependent defect; it does not claim the original smoke met 60s or request another smoke.
+
+The [audit](../../portfolio/audit/2026-09-08.md#ucope-p47-implementation-intake--2026-09-08) records these ordinary object decisions. No new card definition, material research-critic dissent, close-call scientific selection, recast or Portfolio disposition is introduced, so no separate owner-console item is created. Owner flags for the existing record are the engineering overrun, unmeasured real runtime and unchanged generic/headroom/attribution limits. Live-main unapplied owner reviews and relevant UCOPE audit owner columns were empty at the clean boundary; there is nothing to mark answered. Predictions are unscored, owner slot not taken. Zero scientific result means no valid-result Chinese brief is due yet.
+
+## 5. Exact P47 gap return and next discriminator
+
+Root receives the concrete source `6374063408208ba67b8cb7c69ebc0babb0f00259`, this intake, card §9, generated exposure/work facts and the [complete prospective route](UCOPE_UAV_MOTION_PREFIX_B02_P47_ROOT_HANDOFF_20260908.md). The exact unresolved acceptance fact is the original 60s smoke requirement; all other delivered functional checks and independent credit review pass. Root routes its needed conformance disposition if the supplied P47 route cannot apply the recommendation. There is no request for Root to select science or reinterpret a native result.
+
+Once that disposition is recorded, P47's selected discriminator is unchanged: 7001 then 7002, each serial T/G/H with fresh admission/detached exact source, second pair after first technical acceptance irrespective of valid sign. CM collects, DM takes every result in, and the equal mean of the two pair endpoints is read under the original 0.01 MEI. All historical joint-mode signs, including 6902 harm and 6901 weak G−H, remain separate. Claim ceiling remains preliminary package performance on this fixed five-UAV task/budget; no clipping-causal, pure-information, stable-superiority, transfer, closure, promotion or new UAV-entry claim follows from implementation.
+
+## 6. P48 disposition applied — 2026-09-08
+
+Root supplied [P48](../../portfolio/handoffs/2026-09-08-p48-ucope-functional-acceptance.md) at immutable commit **`209804f8bb8120394c0dc14bf346133aa525d512`**, after integrating the source as `d911f83463946ffd99924f2536de1d7d23767ab9`. DM read the complete formed named-task disposition directly. Its relevant instruction is applied verbatim:
+
+> P48 prospectively removes the demand for another <=60s fixture as an acceptance prerequisite for this delivered source. It accepts the existing functional and publication evidence as sufficient.
+
+This accepts source `6374063408208ba67b8cb7c69ebc0babb0f00259` for the selected real B02 route. It does not rewrite the observed 80.578s overrun, call the old 60s requirement passed, establish real UAV feasibility or grant another fixture. CM/reviewer evidence and their originally withheld unconditional acceptance remain historical facts in the unchanged technical record. No scientific definition, source, environment, count, stop, RNG domain or 1,800/3,600/7,200s cap changes.
+
+**Object / technical application options:** (a) apply P48 exactly, retain the breach, bind accepted source/card and return the ready 7001→7002 route; (b) continue treating another 60s fixture as a prerequisite; (c) repeat or speculatively optimize it. Recommendation and selected **(a)** under P48's OWNER_DIRECT named disposition. **Owner-delegated decision (unattended, 2026-09-03 instruction): (a).** The technical audit records actual application; P48 expressly requires no new owner approval or P1/P2 proposal. It leaves no unresolved timing-acceptance decision for this task.
+
+The [Root handoff](UCOPE_UAV_MOTION_PREFIX_B02_P47_ROOT_HANDOFF_20260908.md) now supplies the accepted execution SHA, fresh exact-source remote cwd, named supervisor/output roots, LF-safe staging/launch literals and existing collection/intake route. Code/card surface checks are read-only; no original engineering execution is repeated at this boundary. Root launches and observes; CM collects each pair and technical acceptance releases 7002 irrespective of valid sign. DM's per-pair and all-outcome scientific intake follows without another Portfolio command. No accepted handle or real exposure is asserted until Root's actual receipt arrives.
