@@ -1,8 +1,8 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-08 (P41 FRRIE static namespace method)
+Updated at: 2026-09-08 (P41 tooling dependency; P40 preparation returned)
 
-Current incremental command: [P41 FRRIE static complete-deadline method](handoffs/2026-09-08-p41-frrie-static-namespace-method.md). A08 preparation found no accepted complete-deadline command and launched nothing. Evaluate one existing util-linux namespace/parent-death recipe from installed-version, permission and termination evidence; no namespace/test/target execution or new utility is allocated.
+Current dependency: [P41 FRRIE static complete-deadline method](handoffs/2026-09-08-p41-frrie-static-namespace-method.md) returned incomplete at87dddec67 after a cybersecurity-risk tool interruption. Retained metadata does not establish source/race/deadline/proc or permission acceptance. FRRIE is not advancing; no replacement executor, bypass retry or live A08 allocation is issued. Preserve the exact [intake dependency](../candidates/finite_resource_relational_inductive_efficiency/FRRIE_R09_NATIVE_FATAL_A08_P41_PREPARATION_INTAKE_20260908.md#4-decisions-this-intake-produces) pending an authorized resolution of the tool interruption, without scientific or lifecycle polarity. Independent routes continue.
 
 Retained incremental command: [P40 FSD independent trained pair](handoffs/2026-09-08-p40-fsd-independent-pair-preparation.md). B01's valid one-pair H−C+0.497383 supports preparation of one fresh independent pair at the same comparison/budget. Freeze unused training/evaluation masters and the minimal seed/input implementation spec; no runtime or code implementation is yet allocated.
 
