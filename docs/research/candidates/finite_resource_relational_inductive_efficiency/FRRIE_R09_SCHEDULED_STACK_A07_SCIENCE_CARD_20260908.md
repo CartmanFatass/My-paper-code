@@ -6,9 +6,9 @@ it concerns the execution path carrying event-addressed randomness into the
 same-information multi-agent learner and its native consequence.
 
 Object: `FRRIE-R09-SCHEDULED-STACK-A07-P35-20260908`. Class: **A/RECON**.
-Status: `P37_CORRECTED_TRANSPORT_READY / SCIENTIFIC_INVOCATIONS_0`.
-Section7 records one failed preflight-free wrapper and the corrected dispatch binding.
-The original single P35 scientific allocation remains unstarted under P37.
+Status: `ATTEMPT_ENDED / A07_FATAL_CALLPATH_CAPTURED`.
+Section8 records two supervisor attempts and one actual scientific invocation.
+The P35/P37 allocation has ended; no retry, rearm or further sample follows.
 A has no consumption state; A05/P22/A06 outcomes and budgets remain separate.
 
 ## 1. Question, authority and observation amendment
@@ -329,5 +329,45 @@ has been made by this correction.
 ```text
 | 2026-09-08T08:29:26Z | finite_resource_relational_inductive_efficiency | object | technical | (a) accept zero-exposure P37 script correction; (b) reconcile concrete conflict | (a):P35 wrapper exit127 before preflight/science,0 exposure;exact1287B payload staged;new handle frrie-a07-scheduled-stack-p37-43eec21e releases only original one120s scientific allocation | yes | OWNER_DELEGATED (unattended,2026-09-03 instruction); P37 | docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R09_SCHEDULED_STACK_A07_SCIENCE_CARD_20260908.md#7-p37-correction-after-a-wrapper-failure | none | |
 ```
+
+## 8. Terminal intake — P35/P37
+
+DM applied section2 to the complete
+[E0](FRRIE_R09_SCHEDULED_STACK_A07_RESULT_EVIDENCE_20260908.md) and
+[JSON](FRRIE_R09_SCHEDULED_STACK_A07_RESULT_EVIDENCE_20260908.json)
+at1d2bdbe02251f06f8bef132bb818d1cac1d98ecd. The
+[scientific intake](FRRIE_R09_SCHEDULED_STACK_A07_SCIENTIFIC_INTAKE_20260908.md)
+contains the verbatim rule, raw checks, all outcomes, prediction interpretation,
+counts, receipts, decisions and audit rows; it links the Chinese owner brief.
+
+The corrected P37 handle ended exit139 after62.86s GNU time /63s supervisor,
+with `Fatal Python error: Segmentation fault`. Its16 current-thread frames reach
+original training-input generation through RNG `canonical_bytes` into
+`validate:133`, a definition boundary. There is no scheduled `Timeout (...)!`
+header. The separate no-Python-frame thread has no established role. No original
+exception capture, summary or learner files were retained; actual completed work,
+native instruction and cause remain unknown. The exact source/input bindings and
+fresh4GiB admission hold, and both recorded durations are within120s.
+
+Apply **`A07_FATAL_CALLPATH_CAPTURED`**, the first matching narrower path row.
+**Scheduled MEI not met.** The scheduled-report prediction was not borne out;
+the original-program locus appears only in the fatal fallback. The “earlier
+fatal” timing qualifier is unscored because the actual arming/emission times are
+unknown. Elapsed proximity to60s supplies no timer or causal evidence. Owner
+prediction: not taken; no unapplied relevant main review was present at intake.
+
+The P35 wrapper's prior zero-preflight/zero-science facts remain as section7
+records. P37 supplied the sole actual scientific invocation; no second exposure,
+cap reset or overwritten failed identity occurred. Earlier preparation counts
+in sections6–7 describe their recorded prelaunch boundaries. A07 has no
+consumption state. A05/A06/P22 and historical quarantine stay unchanged.
+
+Object-tier decision: accept the fatal-path fallback and end the allocated task,
+rather than infer a scheduled sample/cause/count or repeat it. Recommend/select
+(a), acceptance and stop. **Owner-delegated decision (unattended,2026-09-03 instruction): (a).**
+No engineering-scope §5 breach is evidenced. The intake returns a separately
+scoped native-fault-context task recommendation through Root to Portfolio;
+it releases no new card/code/command, source repair, sample or budget.
+No mechanism, C, lifecycle, priority or UAV-entry change follows.
 
 scope: one bounded watchdog thread and scheduled stack report per section4
