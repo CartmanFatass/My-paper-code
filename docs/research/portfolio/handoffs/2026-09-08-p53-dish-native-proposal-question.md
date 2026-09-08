@@ -51,15 +51,19 @@ scientific negatives or permission to replay their restricted operations elsewhe
   object or retain no successor. Root dispatches the committed exact handoff
   through the existing Transport and returns the complete matching receipt to
   this DM. Complete conforming decision -> DM intake -> any selected prospective
-  card/full CM specification -> Root's concrete implementation/budget need.
+  card/full CM specification -> the same DM organizes CM implementation/review,
+  accepted-source binding, the selected card's bounded execution and scientific
+  intake. Root owns integration and execution closure.
   No new per-stage approval or local replacement of the Pro decision is introduced.
-- **Budget/stop/report:** zero model construction, native/synthetic simulation,
-  training, evaluation, profiling, replay or scientific invocation; no implementation
-  CM in this preparation task. At most one source-supported Pro question. Reuse
+- **Budget/stop/report:** source-question preparation has zero model construction,
+  native/synthetic simulation, training, evaluation, profiling, replay or scientific
+  invocation, with at most one source-supported Pro question. A selected object
+  continues only from its conforming decision, complete card/budget, accepted
+  implementation and fresh admission under DM authority. Reuse
   existing scientific/literature evidence, with retrieval only for a specific
   missing fact. A source-supported yield returns the slot immediately; do not
   replace it with another abstract assessment. Log ordinary dispatch/receipt facts;
-  send Portfolio only an exhausted route or concrete new unresolved dependency.
+  send Portfolio only an exhausted direction or conflict beyond DM/CM authority.
 
 Five is a target of actually advancing directions, not a standing count supplied
 by this document. Each completed native return or idle external wait yields its

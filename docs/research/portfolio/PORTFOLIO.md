@@ -83,7 +83,7 @@ Previous incremental command: [P16 CBSC acquisition-command engineering](handoff
 Retained commands: [P15 rolling refill](handoffs/2026-09-07-p15-rolling-refill-after-transport-split.md).
 Root reports all P14 chains returned/idle; comparison batch01 is complete and the accepted VSP02
 baseline is integrated on main. P15 dispatches VSP02 B01 readiness/exact one-pair continuation,
-UCOPE and FSD selected card/full-spec preparation with immediate next comparison capture, and
+UCOPE and FSD selected card/full-spec preparation, and
 FRRIE/CBSC distinct bounded acquisition-metadata inquiries. VSP03's paused family has no selected
 successor and yields its working-set slot to CBSC without a lifecycle/priority change. Issued
 commands are not actual advancing counts; Root's per-direction acceptance/return log records those.
@@ -100,22 +100,18 @@ Root reports no live native directions after restart. P13 restores FRRIE A04 and
 scientific intake, releases the exact prepared VSP02 Convergence transport, prepares VSP03's
 post-B02 direction question and commissions bounded FSD source-based re-entry preparation.
 Five assignments are a target, not five accepted active chains or UAV entries. No new experiment
-is allocated; new engineering specs go through actual five-arm CM comparison capture before coding.
+is allocated by that historical preparation command.
 
 Previous commands: [P12 prepared path and Convergence](handoffs/2026-09-07-p12-prepared-path-and-convergence.md).
 P12 retains P11's CBSC/UCOPE bounded repairs and VSP03 prospective continuation, allocates one
 prepared FRRIE A04 complete setup/T0 chain, and prepares the VSP02 Convergence question without
-a Pro Send. Actual acceptance remains Root's log fact. No model-comparison batch has been created
-by these unchanged-code executions, existing corrections or scientific question preparation.
+a Pro Send. Actual acceptance remains Root's log fact.
 
 Previous commands: [P11 refill and execution](handoffs/2026-09-07-p11-refill-and-selected-execution.md).
 Retain VSP03 collection/intake, allocate the selected CBSC single acquisition/metadata route
 and UCOPE B05 two-dataset route, and replace yielded RCLE/VSPC1 slots with bounded FRRIE A04
 preparation and VSP02 next-question preparation. Root records actual acceptance; a prepared
 replacement is not an active slot. These commands change no lifecycle/priority or UAV-entry claim.
-The [three-batch CM comparison](../../project/CM_MODEL_COMPARISON_20260907.md) enrolls only new
-engineering assignments with identical code specs. Shadow arms do not consume direction slots
-or add research invocations; current unchanged-code execution is not an old-task benchmark.
 
 ## Previous P10 dispatch snapshot
 

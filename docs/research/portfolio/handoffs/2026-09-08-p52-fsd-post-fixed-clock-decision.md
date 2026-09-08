@@ -34,16 +34,21 @@ successor. Keep UCOPE P50, MGTAP P51 and VSPC1 P49's supplied routes independent
   strongest contrary outcome and machine-generated zero-new-exposure line.
   Root forwards the committed exact handoff through the existing Transport and
   returns its complete matching receipt to this DM. Complete conforming decision
-  -> DM intake -> any selected prospective card and full CM specification ->
-  Root's concrete next implementation/budget need to Portfolio. The existing
+  -> DM intake -> any selected prospective card and full CM specification -> the
+  same DM organizes CM implementation/review, accepted-source binding, execution
+  within that selected card and scientific intake. Root owns integration and
+  execution closure. The existing
   decision ladder applies without a second per-stage approval or a local
   substitute for the node's decision.
-- **Budget/stop/report:** zero new models, simulation, training, evaluation,
-  profiling, replay or scientific invocation. No third C/H pair, second H/D0 pair,
-  changed comparator, cap or UAV launch is allocated here. Preserve prior source
+- **Budget/stop/report:** decision preparation has zero new models, simulation,
+  training, evaluation, profiling, replay or scientific invocation. Further work
+  requires the actual conforming selection, prospective card/budget, accepted code
+  and fresh admission under DM authority. No repeated completed panel or changed
+  frozen comparator/cap is inferred from preparing a question. Preserve prior source
   and result bytes. Ordinary publication/dispatch/receipt facts remain in Root's
-  log; a source/spec conflict, uncertain external acceptance or exhausted route
-  is the next actionable Portfolio return. An idle transport wait counts zero.
+  log; an exhausted direction or conflict beyond its DM/CM authority is the next
+  actionable Portfolio return. Reconcile uncertain external acceptance before any
+  dependent action. An idle transport wait counts zero.
 
 This is a direction-decision preparation route within the owner's continuing
 research instruction. Lifecycle, priority, historical evidence and formal UAV
