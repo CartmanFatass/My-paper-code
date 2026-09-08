@@ -1,0 +1,38 @@
+{
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/vsp_c1/pro_packets/20260908_native_hold_value_convergence/archive/RESPONSE.md",
+      "quote": "源码给出了基线到优势、联合梯度裁剪、演员更新和原生回报的具体路径；这使所选观察有用途，但并不预先证明门控有益。",
+      "why": "同一真实学习器内有可比较的价值到动作后果路径，值得一次有上限的B。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/vsp_c1/pro_packets/20260908_native_hold_value_convergence/archive/RESPONSE.md",
+      "quote": "每回合至多三个原始行有非零剩余持有量；完整 MLP 本来就能利用这些输入。",
+      "why": "直接门曝光稀疏，且原生收益仍可能只是容量、优化或裁剪变化。"
+    }
+  ],
+  "uncertainty": [
+    "尚无新门的实测回报；单对不估计训练群体不确定性。",
+    "旧UCOPE有明显原生损害和弱基线，H参照必须保留。",
+    "main所查版本缺少两个已存在于固定源码提交的依赖；未来派工前Root提供完整输入。"
+  ],
+  "cost": {
+    "compute": "拟两真实训练臂各131072步/1024次Adam，加三臂各32回合；总286720团队步，1800秒每臂、3600秒每对。当前新执行为零。",
+    "owner_time": "可异步复核；不等待回复完成准备。",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing; 后续工程/实验仍需具体Root任务和完整已提交源码。"
+  },
+  "verdict_text": "**决定：在方向层开放“原生开局持有条件下的中央价值参数化”这一窄家族，选择一个 VSPC1-NATIVE-HOLD-VALUE-B01，证据类别仅为 B/EXPLORE。只比较 GATED-V 与完整 MLP-V，两臂保留完全相同的时长可选演员和逐智能体复合 PPO；新配对训练种子仅 8101，每臂 512 个完整训练回合、1,024 次 Adam，最终各 32 个采样评价回合，另在同 32 个布局上评价一次零速度 H。完整上限为 1,800 秒/臂、3,600 秒/对，不增加其他臂、种子、检查点或科学调用。** 这是新对象的科学选择与可写卡范围，不是代码接受、实验启动、正式 UAV 进入认定、C 冻结或 Portfolio 动作。服务分配对象的停止和更早家族边界保持不变。[候选，§§2–4][proposal]；[当前授权，Five-item assignment][assignment]",
+  "source": "docs/research/candidates/vsp_c1/pro_packets/20260908_native_hold_value_convergence/archive/RESPONSE.md",
+  "question": "是否沿已形成的Convergence决定，开放这一个窄原生持有价值家族并保留单对B选择？",
+  "changes_if_approved": [
+    {
+      "target": "vsp_c1/DIRECTION.md · native opening-hold value family",
+      "from": "P10后未选后继对象",
+      "to": "选定GATED-V对完整MLP-V的单对B；不改变演员、任务、奖励或Portfolio状态"
+    }
+  ],
+  "if_refused": "保留完整Pro原文和所有既有证据，在下一清洁边界按所有者覆盖停止或修订未运行的对象；不隐去已形成的方向决定。"
+}
