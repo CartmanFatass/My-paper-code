@@ -319,6 +319,43 @@ boundary. FSD lifecycle/priority and ordinary-family pause are unchanged.
 Evidence: `FSD_NATIVE_RENEWAL_LEARNING_B03_RESULT_EVIDENCE_20260908.md`,
 `FSD_NATIVE_RENEWAL_LEARNING_B03_INTAKE_20260908.md`, and the original B03 card.
 
+## Post-B03 limited-extension boundary (P52, 2026-09-08)
+
+Complete Convergence selects A: end the tested N6/K2 large Bernoulli corridor
+supplied-public-mask early-learning extension, retain the ordinary fixed-K2
+policy-gap family pause, and select no successor object. This is a reversible
+direction-local conclusion about the next observation's value. It adds no
+empirical negative, recast, whole-direction closure, Portfolio disposition or
+formal UAV entry. Existing B01/B02/B03 cards and all outcomes remain valid at
+their recorded scope; B objects have no consumption state.
+
+The strongest support remains B03's own-trajectory H−D0+.3928645833333336
+against authentic newly trained D0. The strongest current contradiction is
+G−H+.1152864583333331, including H's8662/68220 eligible wrong-role choices;
+prior competent E3 losses and E4's public-null explanation remain. D0 is weak
+but valid; its different optimizer work and internal credit/data clocks prevent
+a pure timing or matched-compute interpretation. B01/B02 are separate H/C
+pairs, not extra independent H/D0 observations. Tuned generic headroom remains
+absent, without creating a new prerequisite.
+
+The surviving alternative is that the supplied rule and its resulting
+data/control/credit path help at this early budget while learned native role
+control remains below G. Another matched pair could add a positive, small or
+opposite observation, but Convergence accepts the remaining variation
+uncertainty and does not purchase that repeat. Its decision neither requires
+stable superiority or beating G from B, nor denies the usefulness of a later
+different concrete question. No new internal-skill/UAV action comparison is
+selected; the corridor applied mask is not an established UAV intervention.
+
+The next discriminator is explicitly **none for this concluded extension**.
+No fresh pair, longer budget, tuning, endpoint expansion, causal census or
+successor preparation follows automatically. Complete source and conformity
+intake: `pro_packets/20260908_post_b03_convergence/archive/RESPONSE.md` at
+`fda33aabbd7579b3bc9183a5e684493d55fea07d`, and the adjacent
+`CONVERGENCE_INTAKE.md`. The full answer's A decision is applied as
+PRO_FINAL / OWNER_DELEGATED; current Portfolio lifecycle and priority remain
+unchanged.
+
 ## Objects and their state (2026-09-08)
 
 | Object | State | Record |
@@ -334,6 +371,7 @@ Evidence: `FSD_NATIVE_RENEWAL_LEARNING_B03_RESULT_EVIDENCE_20260908.md`,
 | Native-renewal learning B01 / P30–P38 | complete valid B, one trained pair; H−C+.49738 above .01 MEI, G−H+.02118 full; all3 arms/708.25s retained; read separately from B02 | `FSD_NATIVE_RENEWAL_LEARNING_B01_SCIENCE_CARD_20260908.md`; `FSD_NATIVE_RENEWAL_LEARNING_B01_RESULT_EVIDENCE_20260908.md`; `FSD_NATIVE_RENEWAL_LEARNING_B01_INTAKE_20260908.md` |
 | Native-renewal learning B02 / P40–P43 | complete valid B, new770303/770304 pair; H−C+.52039 above .01, G−H+.01085 full; all3 arms/665.01s retained; separate from B01, no successor | `FSD_NATIVE_RENEWAL_LEARNING_B02_SCIENCE_CARD_20260908.md`; `FSD_NATIVE_RENEWAL_LEARNING_B02_RESULT_EVIDENCE_20260908.md`; `FSD_NATIVE_RENEWAL_LEARNING_B02_INTAKE_20260908.md` |
 | Native-renewal learning B03 / P46–P47 | complete valid B, one new770403/770404 H/D0 pair; H−D0+.39286 above .01, G−H+.11529 full; all3 arms/898.61s retained; weak actual D0 remains valid, no successor | `FSD_NATIVE_RENEWAL_LEARNING_B03_SCIENCE_CARD_20260908.md`; `FSD_NATIVE_RENEWAL_LEARNING_B03_RESULT_EVIDENCE_20260908.md`; `FSD_NATIVE_RENEWAL_LEARNING_B03_INTAKE_20260908.md` |
+| Post-B03 Convergence / P52 | complete PRO_FINAL A; tested supplied-public-mask learning extension ended, ordinary family pause retained, no successor/recast/UAV entry; all B results preserved | `pro_packets/20260908_post_b03_convergence/archive/RESPONSE.md`; `pro_packets/20260908_post_b03_convergence/CONVERGENCE_INTAKE.md` |
 | Advancement plan | E1 → E2 → E2b/E3 → E4 → C-gate; E2b is not selected at this boundary | `docs/Claude_docs/plans/RESEARCH_ADVANCEMENT_PLAN_20260902.md` |
 
 ## Code
