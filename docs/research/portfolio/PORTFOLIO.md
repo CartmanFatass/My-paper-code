@@ -1,8 +1,10 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-08 (P32 CBSC first-fault observation; four routes, one vacancy)
+Updated at: 2026-09-08 (P33 UCOPE per-agent clipping card/spec)
 
-Current incremental command: [P32 CBSC RAW first-fault context](handoffs/2026-09-08-p32-cbsc-first-fault-context.md). P28 ended with incomplete RAW and no paired result; prepare explicit fatal-stack observation and at most one120s RAW diagnostic on unchanged source/runtime. Retain FRRIE P31,FSD P30,UCOPE P29; four routes depend on actual acceptance and the fifth remains an explicit unchanged vacancy.
+Current incremental command: [P33 UCOPE agent-clipping successor card/spec](handoffs/2026-09-08-p33-ucope-agent-clipping-spec.md). P29 selects common per-agent clipping in both T/G within the opening-duration family; prospectively bind the two fresh masters and full code task before implementation. No scientific execution or additional UAV entry is allocated.
+
+Retained incremental command: [P32 CBSC RAW first-fault context](handoffs/2026-09-08-p32-cbsc-first-fault-context.md). P28 ended with incomplete RAW and no paired result; prepare explicit fatal-stack observation and at most one120s RAW diagnostic on unchanged source/runtime. Retain FRRIE P31,FSD P30,UCOPE P29; four routes depend on actual acceptance and the fifth remains an explicit unchanged vacancy.
 
 Retained incremental command: [P31 FRRIE fatal-callpath observation](handoffs/2026-09-08-p31-frrie-fatal-callpath.md). A05 ended inconclusive after signal11 with no captured state. Use retained readable evidence if sufficient; otherwise prepare startup fatal reporting and at most one120s original-schedule observation, with no source repair or inferred clearance.
 
