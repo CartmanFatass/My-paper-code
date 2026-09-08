@@ -1,6 +1,8 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-08 (P55 one independent VSPC1 pair; P54 rolling refill)
+Updated at: 2026-09-08 (P56 SCDMP source question; P55 VSPC1 independent pair)
+
+Current remaining-slot refill: [P56 SCDMP native return-composition question](handoffs/2026-09-08-p56-scdmp-native-return-composition-question.md) uses the newer committed UCOPE/VSPC1 held-command trajectory and learner source to assess one distinct value-learning consistency intervention. The old D6 source/countdown-search family remains parked; no simulation or scientific invocation is allocated during source-question work. A surviving case goes to the existing proper node and then through the complete same-DM selected-object route. This is actual authoring work for an ACTIVE/HIGH direction, with one reusable checkout created only if no designated checkout exists. Retain UCOPE, DISH, VSP03 and VSPC1 P55 while advancing; FSD and MGTAP have no selected successor. No lifecycle, priority or recast change is applied by this command.
 
 Current VSPC1 follow-on: [P55 independent hold-value pair](handoffs/2026-09-08-p55-vspc1-independent-hold-value-pair.md) assigns exactly one prospective fresh matched GATED-V/MLP-V/H instance after valid B01 UP (+0.0293656586 primary) at one training pair. The same DM/CM owns the complete bounded route; original master8101 and P49 remain complete. Preserve weak-MLP/H and mechanism qualifications, all outcomes,1800s/arm and3600s/pair caps; no third pair or tuning is selected. FSD P52 has now ended its tested hybrid extension with no successor. Actual reported advancing routes before this dispatch are UCOPE intake, DISH B07 preparation and VSP03 P54 source question; P55 counts only while its actual work advances.
 
