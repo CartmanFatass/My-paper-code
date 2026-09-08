@@ -20,8 +20,8 @@ def same_state(left, right):
         assert left == right
 
 
-def snapshot_readback(path, trainer, **metadata):
-    payload = {"object": OBJECT, "seed": trainer.seed, "rng_namespace": trainer.run_name,
+def snapshot_readback(path, trainer, *, object_name=OBJECT, **metadata):
+    payload = {"object": object_name, "seed": trainer.seed, "rng_namespace": trainer.run_name,
                "configuration": asdict(trainer.config), "metadata": metadata,
                "model": trainer.model.state_dict(), "optimizer": trainer.optimizer.state_dict(),
                "counters": asdict(trainer.counters),
