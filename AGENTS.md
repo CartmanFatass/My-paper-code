@@ -41,14 +41,14 @@ more. `docs/project/ALGORITHM_PRINCIPLES.md` is historical background, not a req
 
 ## Workflow calibration (OWNER_DIRECT, 2026-09-06)
 
-OWNER_DIRECT clarification 2026-09-07: writing a receipt in the Root log does not authorize also
-sending it to Portfolio. Before `send_message_to_thread`, identify the action Portfolio must take
-now that the existing command does not already supply. If there is none, do not call the tool.
-Integrating an authorized commit, starting/finishing a run, continuing the already-authorized
-second dataset, resuming a named CM/DM, and saying a prior command was applied are log-only.
-Do not request an ACK or reconfirmation for those actions. A real exhausted-slot replacement
-request or unresolved blocker remains prompt and internal; Portfolio does not automatically
-turn that coordination into a user-facing report. Unchanged pending requests are not resent.
+OWNER_DIRECT 2026-09-08 notification boundary: Root sends Portfolio only a specifically
+requested reply, a new missing-command/replacement need, or an unresolved conflict/repair/
+uncertain-acceptance need outside the supplied route. Existing collection/integration/next-arm/
+intake routes execute and log without notification. Unchanged pending needs are not resent.
+Root is the default main-index operator: no per-commit idle query, ACK or release message.
+Portfolio supplies ready owned paths with its command; only Portfolio's actual need for its
+own index operation initiates a temporary transfer. Exact send/no-send conditions and transfer
+steps are maintained only in `docs/project/SIBLING_COMMUNICATION.md`. Scientific decisions, budgets, explicit-path commits and immediate pushes are unchanged.
 
 CM implements its bounded engineering objective directly by default. Implementer children are
 optional for independent parallel work or substantial context isolation; scientific/semantic risk
