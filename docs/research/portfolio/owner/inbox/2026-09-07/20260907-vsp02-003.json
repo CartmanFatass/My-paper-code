@@ -1,0 +1,98 @@
+{
+  "id": "20260907-vsp02-003",
+  "created": "2026-09-07T16:20:00-07:00",
+  "direction": "vsp_02",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "VSP02 B01：固定队友策略变化的前瞻卡及统一代码规格",
+  "context": "Claim: Full Adam RESET may change native adaptation-service return relative to CARRY after one active teammate-policy change on the selected fixed-member handoff task. Binding MARL structure: (d) other-agent non-stationarity or partial observability; N=2, entity identities and roles remain fixed.",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "接受统一卡和完整规格，由 Root 立即进行五臂工程派发；不启动科学运行。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "暂停此卡，保留已接受方向设计和全部证据，返回具体准备依赖。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "按明确缺口统一修改规格，保持五臂相同输入，不改变科学含义。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "已核对完整 Pro 设计并补齐普通实现细节，没有发现需要新方向决定的冲突。",
+  "evidence": [
+    "docs/research/candidates/vsp_02/VSP02_TEAMMATE_POLICY_CHANGE_B01_SCIENCE_CARD_20260907.md",
+    "docs/research/candidates/vsp_02/VSP02_TEAMMATE_POLICY_CHANGE_B01_CODE_SPEC_20260907.md",
+    "docs/research/candidates/vsp_02/VSP02_TEAMMATE_POLICY_CHANGE_B01_PREPARATION_INTAKE_20260907.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-07.md#L90",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否接受已获 Convergence 选择的固定成员队友策略变化 B01 卡和统一实现规格，并按 P14 继续五臂工程比较？",
+    "changes_if_approved": [
+      {
+        "target": "VSP02 B01 前瞻卡及 P14 工程交接",
+        "from": "已接受固定成员策略变化方向设计，尚无实际卡和完整代码规格",
+        "to": "接受统一 B 卡、完整代码规格和四条原始检查命令；Root 按相同源码向五个实现臂派发"
+      }
+    ],
+    "if_refused": "保留已接受的方向设计及 recasts: 1，暂停使用此卡，并向 Root 返回具体修改依赖；不删除旧证据，不启动科学实验。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/vsp_02/VSP02_TEAMMATE_POLICY_CHANGE_B01_PREPARATION_INTAKE_20260907.md",
+        "quote": "The selected design is implementable as specified; no concrete missing scientific fact requires another node or a different task.",
+        "why": "P14 指定的环境、信息、真实 PPO、同前缀 Adam 分叉、RNG、主读数和验收均已具体化，五个模型可以获得同一个完整任务。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/vsp_02/VSP02_TEAMMATE_POLICY_CHANGE_B01_SCIENCE_CARD_20260907.md",
+        "quote": "Generic optimizer transience is the strongest alternative: the scripted teammate can be absorbed into a changing environment.",
+        "why": "单个前缀比较不能证明事件特有机制；新宿主的基线能力、实际耗时和效应仍未知。"
+      }
+    ],
+    "uncertainty": [
+      "初始策略在新宿主的能力与适应效果尚未测量。",
+      "旧宿主零贪心余量及旧 CARRY 优势不能推断新任务的符号。",
+      "工程检查通过后仍需独立风险审查和明确的科学运行分配。"
+    ],
+    "cost": {
+      "compute": "本次科学曝光为零。每实现臂工程上限 3600 秒；一条 60 秒小夹具计划 3072 联合步，五臂共 15360 步；另有有界单元检查。未来一整个真实 B 前缀及双分支为 350208 联合步、1800 秒上限，尚未分配。",
+      "owner_time": "可异步查看，无需当前回复。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "建议接受这张前瞻 B 卡和统一代码规格，按 P14 由 Root 派发五个相同输入的工程实现；本次不分配科学运行，也不声称 RESET 获益。",
+    "source": "docs/research/candidates/vsp_02/VSP02_TEAMMATE_POLICY_CHANGE_B01_PREPARATION_INTAKE_20260907.md"
+  },
+  "starred": true,
+  "approval_correction": "P14 的零科学调用限制仅对 P15 明确分配的这一次科学配对被取代；不新增种子、比较器、重试或时间。已有准入和观察规则保持。",
+  "execution_history": [
+    {
+      "at": "2026-09-07T23:22:41+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/handoffs/2026-09-07-p14-vsp02-code-and-direction-continuations.md",
+      "record": "docs/research/candidates/vsp_02/VSP02_TEAMMATE_POLICY_CHANGE_B01_PREPARATION_INTAKE_20260907.md",
+      "state": "applied",
+      "summary": "P14 已授权卡/统一规格完成后的五臂工程派发。本项已应用的范围是准备和工程交接；科学调用仍为零，未来运行必须另获明确分配。",
+      "correction": "默认 new-card 选项标签 launch as carded 不扩展本项逐项后果：accept 仅接受卡和统一规格以及 P14 工程续接，不分配科学运行。"
+    },
+    {
+      "at": "2026-09-08T00:34:26+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/handoffs/2026-09-07-p15-rolling-refill-after-transport-split.md",
+      "record": "docs/research/candidates/vsp_02/VSP02_TEAMMATE_POLICY_CHANGE_B01_P15_READINESS_20260907.md",
+      "state": "applied",
+      "summary": "P15（25b1a88b162ae137b5071ca2d9acb87007fb3ea9）已明确分配一次固定1103同前缀 B01 双分支、整条链1800秒；已写入卡第8节并完成代码/记录就绪核对。Root 下一步执行相邻内存准入及这一次运行，CM 收集，DM 入账。当前科学调用仍为零，未启动或重试。",
+      "correction": "P14 的零科学调用限制仅对 P15 明确分配的这一次科学配对被取代；不新增种子、比较器、重试或时间。已有准入和观察规则保持。"
+    }
+  ]
+}
