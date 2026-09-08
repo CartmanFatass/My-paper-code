@@ -2,7 +2,7 @@
 
 **The delivered B02 code is accepted under P48 for the already selected 7001→7002 route. The sole smoke exceeded its engineering bound: 80.578s versus 60s, and that breach is retained.** P48 accepts the completed functional/review/publication evidence without another smoke; §6 applies the exact disposition. No speculative fix or second smoke ran, and masters 7001/7002 remain prospective at this binding.
 
-**Current execution state:** P50 staging remains accepted. The first accepted supervisor command failed before admission because dispatch omitted `-p47-` from its cwd; §9 preserves that failure and the corrected command. No scientific execution has occurred. Root receives the same 7001 operation under a fresh `-cwd02` supervisor identity, followed by the original technical-acceptance→7002 route.
+**Current execution state:** both allocated scientific pairs and the joint aggregate are complete and accepted. [Scientific intake](UCOPE_UAV_MOTION_PREFIX_B02_P47_INTAKE_20260908.md) records the fixed DOWN result and exhausted P47 route. Sections7–9 preserve staging and pre-admission history; the original wrong-cwd supervisor has zero scientific exposure. There is no further launch or collection in this allocation.
 
 ## 1. Authority, checkout and what was checked
 

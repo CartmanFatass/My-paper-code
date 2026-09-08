@@ -1,6 +1,8 @@
 # UCOPE B02 — P47 source binding and exact Root route
 
-## Current boundary and binding
+**Completed route, 2026-09-08:** both7001/7002 scientific invocations, CM collection and the authorized joint aggregate are complete. [DM intake](UCOPE_UAV_MOTION_PREFIX_B02_P47_INTAKE_20260908.md) accepts the original DOWN reading. No launch, retry, third pair or aggregate remains pending. The commands and earlier states below are retained execution provenance, not a new dispatch instruction.
+
+## Historical boundary and binding
 
 P47 at `6dd7570e9e8045fb3818c553953a92c9caa587cb` allocates implementation and the two already selected pairs. The original scientific card is [B02 §§2–7](UCOPE_UAV_MOTION_PREFIX_B02_SCIENCE_CARD_20260908.md), frozen at `1d46ddc2b142a2c2b98922a8f46e2d2609bda859`. Its masters, credit rule, comparison, counts, primary and caps remain unchanged. No new UAV-entry, family, recast or Portfolio decision follows.
 
