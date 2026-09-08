@@ -641,3 +641,275 @@ def test_b02_pair_identity_rejects_old_comparator_and_limits_bad_reference(monke
         assert "reference mismatch" in result["reference_failure"]
         assert result["paired"]["h_minus_c_full"]["mean"] == 0.
         assert not any(key.startswith("g_minus") for key in result["paired"])
+
+
+def b03_entry(monkeypatch):
+    monkeypatch.setitem(sys.modules, "run_fsd_native_renewal_learning_b01", r)
+    spec = importlib.util.spec_from_file_location("fsd_b03", ROOT / "scripts/run_fsd_native_renewal_learning_b03.py")
+    wrapper = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(wrapper)
+    return wrapper
+
+
+class B03Corridor(Corridor):
+    horizon = 10
+
+
+class B03Agent(Agent):
+    def update(self, **kw):
+        assert kw["steps_in_buffer"] == 10
+        # Reuse every original reset/optimizer assertion; only fixture horizon differs.
+        return super().update(**{**kw, "steps_in_buffer": 3})
+
+
+def patch_b03(monkeypatch):
+    patch_main(monkeypatch)
+    import run_flexible_skill_duration_e2 as e2
+    from run_flexible_skill_duration_e3 import arm_parameters
+    monkeypatch.setattr(r, "proposal_config", lambda row: B03Corridor())
+    monkeypatch.setattr(r, "arm_parameters", lambda row, arm: arm_parameters(row, arm, horizon=10))
+    monkeypatch.setattr(r, "HMASDAgent", B03Agent)
+    monkeypatch.setattr(e2, "HMASDAgent", B03Agent)
+    return b03_entry(monkeypatch)
+
+
+def b03_argv(policy, out, *extra):
+    argv = invocation(policy, out, *extra)
+    argv[argv.index("--seed") + 1] = "770403"
+    return argv
+
+
+@pytest.mark.parametrize("policy,k,team,train_buffer,eval_buffer", [
+    ("D0", 5, 5, 1280, 2560), ("H", 40, 400, 160, 320)])
+def test_b03_real_config_numeric_costs_seed_and_evaluator(monkeypatch, tmp_path, policy, k, team, train_buffer, eval_buffer):
+    import run_flexible_skill_duration_e2 as e2
+    monkeypatch.setattr(r, "TRAIN_LANES", 16)
+    monkeypatch.setattr(r, "EVAL_LANES", 32)
+    for module in (r, e2):
+        monkeypatch.setattr(module, "HMASDAgent", Agent)
+        monkeypatch.setattr(module, "RelayCorridorAdapter", Adapter)
+    calls = []
+    for module, name, label in ((random, "seed", "python"), (np.random, "seed", "numpy"), (torch, "manual_seed", "torch")):
+        original = getattr(module, name)
+        def recorded(seed, *, label=label, original=original):
+            calls.append((label, seed))
+            return original(seed)
+        monkeypatch.setattr(module, name, recorded)
+    corridor = r.proposal_config("large")
+    summary = r.base_summary(policy, corridor, "source", training_seed=770403,
+                             evaluation_master=770404, control_policy="D0")
+    adapter, learner, overrides, _, _ = r.build_learner(corridor, tmp_path, summary,
+        r.time.perf_counter(), training_seed=770403, control_policy="D0")
+    assert calls == [("python", 770403), ("numpy", 770403), ("torch", 770403)]
+    assert adapter.master_seed == learner.config.seed == 770403
+    assert learner.threads == 4 and learner.config.age_feature == "off"
+    assert learner.config.policy_interruption_mode == "d2"
+    assert (learner.config.k, learner.config.skill_cap_k_max, learner.config.team_cap_k_Z) == (k, k, team)
+    assert learner.config.high_level_buffer_size == train_buffer
+    assert learner.config.high_level_batch_size == 128
+    assert learner.config.ppo_epochs == 15 and learner.config.num_mini_batch == 4
+    assert learner.config.use_valuenorm and not learner.config.use_obsnorm and not learner.config.use_statenorm
+    for key in ("interruption_cost_c", "interruption_cost_c_Z"):
+        assert getattr(learner.config, key) == overrides[key] == (float("inf") if policy == "D0" else .25)
+        assert summary["learner_config"][key] == ("Infinity" if policy == "D0" else .25)
+    r.write_summary(tmp_path, summary)
+    assert json.loads((tmp_path / "summary.json").read_text())["learner_config"] == summary["learner_config"]
+    learner.skill_coordinator.values[0].add_(20)
+    learner.value_norm_coordinator.mean[:] = 44
+    learner.value_norm_discoverer.var[:] = 55
+    before = rng_state()
+    # Actual E2 constructor/sync/reset, but a ten-step fake host for scoring.
+    original_evaluate = r.evaluate
+    def short_evaluate(policy, adapter, *args):
+        adapter.config = B03Corridor()
+        return original_evaluate(policy, adapter, *args)
+    monkeypatch.setattr(r, "evaluate", short_evaluate)
+    r.final_evaluation(policy, corridor, learner, overrides, summary, tmp_path,
+                       r.time.perf_counter(), training_seed=770403, evaluation_master=770404)
+    assert_rng_equal(before, rng_state())
+    evaluator = Agent.constructed[-1]
+    assert evaluator is not learner and evaluator.config.seed == 770403
+    assert evaluator.config.k == k and evaluator.config.high_level_buffer_size == eval_buffer
+    assert evaluator.config.high_level_batch_size == 128
+    assert evaluator.config.interruption_cost_c == evaluator.config.interruption_cost_c_Z == overrides["interruption_cost_c"]
+    assert Adapter.constructed[-1].master_seed == 770404
+    assert Adapter.constructed[-1].episode_ids() == tuple(range(32))
+    assert evaluator.reset_calls == list(range(32)) and evaluator.events[0] == "clear"
+    for name in ("skill_coordinator", "skill_discoverer", "team_discriminator", "individual_discriminator"):
+        for a, b in zip(getattr(learner, name).parameters(), getattr(evaluator, name).parameters()):
+            assert torch.equal(a, b) and a.data_ptr() != b.data_ptr()
+    for name in ("obs_norm", "state_norm", "value_norm_coordinator", "value_norm_discoverer"):
+        a, b = getattr(learner, name), getattr(evaluator, name)
+        assert a is not b and not np.shares_memory(a.mean, b.mean)
+        np.testing.assert_array_equal(a.mean, b.mean)
+    assert evaluator.value_norm_discoverer.var[0] == 55
+    assert not any(summary["evaluation_optimizer_calls"].values())
+    assert not learner.inputs and not learner.reset_calls and not learner.updates
+
+
+def test_b03_fixed_entry_native_storage_panel_and_legacy_defaults(monkeypatch, tmp_path):
+    wrapper = patch_b03(monkeypatch)
+    for policy in ("G", "D0", "H"):
+        extra = [] if policy != "H" else ["--d0-summary", tmp_path / "D0/summary.json", "--g-summary", tmp_path / "G/summary.json"]
+        assert wrapper.main(b03_argv(policy, tmp_path / policy, *extra)) == 0
+        summary = json.loads((tmp_path / policy / "summary.json").read_text())
+        assert summary["object_id"] == wrapper.OBJECT_ID and summary["card"] == wrapper.CARD
+        assert summary["training_master"] == 770403 and summary["evaluation_master"] == 770404
+        assert summary["seed"] == (None if policy == "G" else 770403)
+        assert summary["cap_seconds"] == {"G": 60, "D0": 1200, "H": 900}[policy]
+        assert summary["summed_panel_cap_seconds"] == 2160
+        if policy == "G":
+            assert not Agent.constructed and summary["counts"]["model_constructions"] == 0
+        else:
+            learner, evaluator = Agent.constructed[-2:]
+            assert learner.config.seed == evaluator.config.seed == 770403
+            assert not any(summary["evaluation_optimizer_calls"].values())
+            if policy == "D0":
+                adapter = Adapter.constructed[-2]
+                for i, stored in enumerate(learner.stored):
+                    t = i % 10
+                    np.testing.assert_array_equal(adapter.applied[i], learner.data[i]["d2_sampled_mask"])
+                    assert adapter.actions[i] is learner.actions[i]
+                    np.testing.assert_array_equal(stored["actions"], adapter.actions[i])
+                    np.testing.assert_array_equal(stored["rewards"], adapter.applied[i][:, 0] * .25 + adapter.applied[i][:, 1] * .5 + t * .125)
+                    assert (stored["next_states"] == 901 + t).all()
+                    assert (stored["next_observations"] == 801 + t).all()
+                    assert stored["dones"].all() == (t == 9)
+                # Actual sampled mask is different from public FT at t1 and periodic all-false at t1.
+                np.testing.assert_array_equal(adapter.applied[1], [[True, False]] * 2)
+                assert adapter.resets == 6 and learner.reset_calls == [0, 1] * 5
+                for rollout in range(5):
+                    state, obs, steps, dones, updated = learner.inputs[rollout * 10]
+                    assert (state == 101 + rollout).all() and (obs == 11 + rollout).all()
+                    assert not steps.any() and updated == rollout
+                evaluation_adapter = Adapter.constructed[-1]
+                for i, mask in enumerate(evaluation_adapter.applied):
+                    np.testing.assert_array_equal(mask, evaluator.data[i]["d2_sampled_mask"])
+                    assert evaluation_adapter.actions[i] is evaluator.actions[i]
+    assert summary["panel"]["card_status"] == "complete"
+    assert set(summary["comparison_inputs"]) == {"D0", "G"}
+    assert set(summary["panel"]["paired"]) == {a + b for a in ("h_minus_d0_", "g_minus_h_", "g_minus_d0_") for b in ("full", "post")}
+    patch_main(monkeypatch)
+    for entry, seed, master, name in ((r, 770203, 770204, "B01"), (b02_entry(monkeypatch), 770303, 770304, "B02")):
+        argv = invocation("G", tmp_path / name)
+        argv[argv.index("--seed") + 1] = str(seed)
+        assert entry.main(argv) == 0
+        old = json.loads((tmp_path / name / "summary.json").read_text())
+        assert old["training_master"] == seed and old["evaluation_master"] == master
+        assert old["summed_panel_cap_seconds"] == 1860
+
+
+def b03_arm(policy, values=(.2, .4), post=(.3, .5)):
+    result = arm(policy, values, post)
+    result.update(object_id="FSD_NATIVE_RENEWAL_LEARNING_B03", seed=None if policy == "G" else 770403,
+                  training_master=770403, evaluation_master=770404)
+    if policy != "G":
+        corridor = r.proposal_config("large")
+        result["host"] = corridor.parameter_record()
+        result["counts"]["training_transitions"] = 5 * r.TRAIN_LANES * corridor.horizon
+        result["evaluation"]["valid_reward_steps_per_lane"] = corridor.horizon
+        overrides = r.arm_parameters("large", "d0" if policy == "D0" else "d2")
+        config = r.build_corridor_learner_config(corridor, Adapter(corridor), mode="d2",
+                 num_envs=r.TRAIN_LANES, k=overrides["skill_cap_k_max"], seed=770403, overrides=overrides)
+        result["learner_config"] = {key: r.e0._jsonable(getattr(config, key)) for key in r.e0.CONFIG_DUMP_FIELDS if hasattr(config, key)}
+    return result
+
+
+def test_b03_primary_math_config_differences_and_dependency_failures():
+    h, d0 = b03_arm("H", (.5, .9), (.7, .8)), b03_arm("D0")
+    g = b03_arm("G", (.8, 1.), (.9, 1.))
+    g["host"] = h["host"]
+    g["evaluation"]["valid_reward_steps_per_lane"] = h["host"]["H"]
+    result = r.summarize_panel(h, d0, g, control_policy="D0")
+    p = result["paired"]["h_minus_d0_full"]
+    np.testing.assert_allclose(p["differences"], [.3, .5])
+    assert p["mean"] == pytest.approx(.4) and p["sample_sd"] == pytest.approx(np.sqrt(.02))
+    assert p["stderr"] == pytest.approx(.1)
+    for suffix in ("full", "post"):
+        for key, a, b in (("h_minus_d0", h, d0), ("g_minus_h", g, h), ("g_minus_d0", g, d0)):
+            expected = np.array(a["evaluation"]["return_" + suffix]) - b["evaluation"]["return_" + suffix]
+            np.testing.assert_allclose(result["paired"][key + "_" + suffix]["differences"], expected)
+    assert result["g_minus_h_less_h_role_loss_full"]["mean"] == pytest.approx(.05)
+    assert result["paired"]["g_minus_d0_full"]["mean"] != np.mean(d0["evaluation"]["role_loss_full"])
+    for delta, reading in ((.02, "above_mei"), (.01, "small_or_resolution_limited"), (-.01, "small_or_resolution_limited"), (-.02, "opposite_sign")):
+        a, b = copy.deepcopy(h), copy.deepcopy(d0)
+        a["evaluation"]["return_full"] = [delta] * 2
+        b["evaluation"]["return_full"] = [0.] * 2
+        assert r.summarize_panel(a, b, control_policy="D0")["card_reading"] == reading
+    for key, value in (("gamma", .5), ("interruption_cost_c", .25), ("k", 6), ("high_level_buffer_size", 42), ("high_level_batch_size", 42)):
+        bad = copy.deepcopy(d0)
+        bad["learner_config"][key] = value
+        with pytest.raises(ValueError, match="mismatch"):
+            r.summarize_panel(h, bad, control_policy="D0")
+    for key, value in (("policy", "C"), ("object_id", r.OBJECT_ID), ("evaluation_master", 770204)):
+        with pytest.raises(ValueError):
+            r.summarize_panel(h, {**d0, key: value}, control_policy="D0")
+    bad = copy.deepcopy(d0)
+    bad["evaluation"]["status"] = "incomplete"
+    with pytest.raises(ValueError, match="endpoint"):
+        r.summarize_panel(h, bad, control_policy="D0")
+    for bad_g in (None, {**g, "evaluation_master": 770204}):
+        result = r.summarize_panel(h, d0, bad_g, control_policy="D0")
+        assert result["status"] == "complete" and result["card_status"] == result["reference_status"] == "incomplete"
+        assert result["reference_failure"] and result["paired"]["h_minus_d0_full"] == p
+
+
+@pytest.mark.parametrize("entry,policy,seed,extra", [
+    ("B03", "C", 770403, []), ("B03", "G", 770203, []),
+    ("B01", "D0", 770203, []), ("B02", "D0", 770303, []),
+    ("B03", "D0", 770403, ["--d0-summary", "no.json"]),
+    ("B03", "G", 770403, ["--c-summary", "no.json"])])
+def test_b03_cli_rejects_before_output(monkeypatch, tmp_path, entry, policy, seed, extra):
+    entries = {"B01": r, "B02": b02_entry(monkeypatch), "B03": b03_entry(monkeypatch)}
+    argv = invocation(policy, tmp_path / "absent", *extra)
+    argv[argv.index("--seed") + 1] = str(seed)
+    with pytest.raises(SystemExit) as exc:
+        entries[entry].main(argv)
+    assert exc.value.code == 2
+    assert not (tmp_path / "absent").exists() and not Agent.constructed and not Adapter.constructed
+
+
+@pytest.mark.parametrize("policy,cap", [("D0", 1200), ("H", 900), ("G", 60)])
+def test_b03_complete_cap_boundaries(monkeypatch, tmp_path, policy, cap):
+    clock = SimpleNamespace(now=cap - .1)
+    monkeypatch.setattr(r.time, "perf_counter", lambda: clock.now)
+    summary = r.base_summary(policy, B03Corridor(), "source", control_policy="D0")
+    assert summary["cap_seconds"] == cap and summary["summed_panel_cap_seconds"] == 2160
+    r.check_deadline(0, policy, "collection")
+    clock.now = cap
+    for stage in ("setup", "collection", "update", "evaluation", "final:publication"):
+        with pytest.raises(TimeoutError):
+            r.check_deadline(0, policy, stage)
+    clock.now = cap - .1
+    monkeypatch.setattr(r, "write_summary", lambda *args: setattr(clock, "now", cap))
+    with pytest.raises(TimeoutError, match="published"):
+        r.publish(tmp_path, summary, 0, "final")
+
+
+@pytest.mark.parametrize("damage", ["missing_d0", "bad_g", "runtime_inf"])
+def test_b03_failure_publication_keeps_independent_facts(monkeypatch, tmp_path, damage):
+    wrapper = patch_b03(monkeypatch)
+    if damage == "runtime_inf":
+        original = B03Agent.step
+        def step(self, *args, **kwargs):
+            result = original(self, *args, **kwargs)
+            result[2]["credit_metadata"][0] = float("inf")
+            return result
+        monkeypatch.setattr(B03Agent, "step", step)
+        assert wrapper.main(b03_argv("D0", tmp_path)) == 1
+        result = json.loads((tmp_path / "summary.json").read_text())
+        assert result["status"] == "incomplete" and "nonfinite sampled step data" in result["failure"]
+        assert result["counts"]["training_transitions"] == 0
+        assert result["learner_config"]["interruption_cost_c"] == "Infinity"
+    else:
+        if damage == "bad_g":
+            assert wrapper.main(b03_argv("D0", tmp_path / "D0")) == 0
+        (tmp_path / "bad.json").write_text("broken json")
+        assert wrapper.main(b03_argv("H", tmp_path / "H", "--d0-summary", tmp_path / "D0/summary.json", "--g-summary", tmp_path / "bad.json")) == 1
+        result = json.loads((tmp_path / "H/summary.json").read_text())
+        assert result["status"] == result["evaluation"]["status"] == "complete"
+        if damage == "missing_d0":
+            assert result["panel"]["status"] == "incomplete" and "card_reading" not in result["panel"]
+        else:
+            assert result["panel"]["status"] == "complete" and result["panel"]["card_status"] == "incomplete"
+            assert "Expecting value" in result["panel"]["reference_failure"]
