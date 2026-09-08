@@ -70,5 +70,15 @@
     "verdict_text": "If no supported change is found, yield without a new execution command/budget.",
     "source": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_LOCAL_ACQUISITION_P15_SCIENCE_CARD_20260907.md"
   },
-  "starred": false
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-08T00:54:01+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/decisions/2026-09-03-unattended-delegation.md",
+      "record": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_LOCAL_ACQUISITION_P15_INTAKE_20260907.md",
+      "state": "applied",
+      "summary": "P15 metadata inquiry completed: four bounded HEAD requests support local direct and proxy access, with zero wheel-body bytes or candidate runtime. Exact acquisition proposal yielded because the inspected facilities supply no complete local acquisition, transfer and remote setup envelope. No extra requests, command or budget; card execution is recorded, not body readiness or an owner reply."
+    }
+  ]
 }
