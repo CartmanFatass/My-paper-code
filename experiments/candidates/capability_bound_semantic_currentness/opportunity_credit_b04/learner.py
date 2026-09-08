@@ -15,6 +15,7 @@ from ..omrc_b01.ppo import (
 )
 
 OBJECT = "CBSC-OPPORTUNITY-CREDIT-B04"
+B05_OBJECT = "CBSC-OPPORTUNITY-CREDIT-B05"
 
 @dataclass(frozen=True)
 class OpportunityConfig:

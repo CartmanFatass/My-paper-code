@@ -5,6 +5,7 @@ from fractions import Fraction
 import json
 from pathlib import Path
 import time
+import sys
 
 import torch
 
@@ -15,7 +16,7 @@ from ..omrc_b01.contract import Action
 from ..omrc_b01.evaluator import evaluate_episode
 from ..omrc_b01.host import DynamicHost
 from ..omrc_b01.model import CommonRecurrentActorCritic
-from .learner import OBJECT, OpportunityTrainer
+from .learner import OBJECT, B05_OBJECT, OpportunityTrainer
 
 ARMS = ("RAW-GRU", "STRUCT-CURRENTNESS-GRU")
 COST_LAW = (
@@ -25,7 +26,11 @@ COST_LAW = (
 )
 
 
-def expected_seed(engineering=False):
+def expected_seed(engineering=False, *, b05=False):
+    if b05:
+        if engineering:
+            raise ValueError("B05 has no engineering profile")
+        return 21223
     return 21211 if engineering else 21217
 
 
@@ -98,17 +103,20 @@ def pair_results(raw, structured):
             "context": raw["context"], "launch_shas": [raw["launch_sha"], structured["launch_sha"]]}
 
 
-def run_arm(*, arm, seed, output, launch_sha, raw_result=None, engineering=False, started=None):
+def run_arm(*, arm, seed, output, launch_sha, raw_result=None, engineering=False, started=None, b05=False):
     started = time.perf_counter() if started is None else started
     output = Path(output)
     output.mkdir(parents=True, exist_ok=False)
     torch.set_num_threads(1)
     updates, eval_episodes = (1, 1) if engineering else (48, 32)
     checkpoints = (0, 1) if engineering else (0, 48)
-    if seed != expected_seed(engineering) or arm not in ARMS:
+    if seed != expected_seed(engineering, b05=b05) or arm not in ARMS:
         raise ValueError("arm or seed differs from the selected direct-return profile")
     if (arm == ARMS[1]) != (raw_result is not None):
         raise ValueError("STRUCT requires the completed RAW result")
+    object_name = B05_OBJECT if b05 else OBJECT
+    runtime = ({"python_executable": sys.executable, "python_version": sys.version,
+                "torch_version": str(torch.__version__)} if b05 else {})
     host_start = time.perf_counter()
     host = DynamicHost(B1_RUN_NAME, seed)
     train_tapes = tuple(host.build_stochastic(addressing.TRAIN, e) for e in range(updates * 8))
@@ -151,7 +159,9 @@ def run_arm(*, arm, seed, output, launch_sha, raw_result=None, engineering=False
             curve.append({"update": update, "mean_native_return": fraction_record(mean)})
             checkpoint_start = time.perf_counter()
             path = output / f"update-{update}.pt"
-            reread = snapshot_readback(path, trainer, arm=arm, launch_sha=launch_sha,
+            reread = snapshot_readback(path, trainer, object_name=object_name,
+                                       **({"runtime": runtime} if b05 else {}),
+                                       arm=arm, launch_sha=launch_sha,
                                        training_tape_digest=training_digest,
                                        action_uniform_digest=action_digest)
             checkpoint_records.append({"update": update, "path": path.name,
@@ -184,13 +194,13 @@ def run_arm(*, arm, seed, output, launch_sha, raw_result=None, engineering=False
         peak_rss = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss * 1024
     except ImportError:
         peak_rss = None
-    result = {"object": OBJECT, "arm": arm, "seed": seed, "rng_namespace": B1_RUN_NAME,
+    result = {"object": object_name, "arm": arm, "seed": seed, "rng_namespace": B1_RUN_NAME,
               "profile": "ENGINEERING_ONLY" if engineering else "B/EXPLORE", "launch_sha": launch_sha,
               "configuration": asdict(trainer.config), "updates": updates, "eval_episodes": eval_episodes,
               "initialization_digest": model.initialization_digest, "training_tape_digest": training_digest,
               "evaluation_tape_digest": engine._tape_primitive_digest(eval_tapes),
               "execution": {"torch_threads": torch.get_num_threads(), "dtype": str(initial.dtype),
-                            "device": str(initial.device)},
+                            "device": str(initial.device), **runtime},
               "parameter_count": model.active_parameter_count, "initial_parameter_l2": initial_norm,
               "final_parameter_l2": float(torch.linalg.vector_norm(final)),
               "parameter_movement_l2": movement, "relative_parameter_movement": movement / initial_norm,
