@@ -74,6 +74,8 @@ def field_record(value):
 
 
 def field_table(value):
+    if value is MISSING:
+        return {"status": "absent_attribute"}, False
     result = identity(value)
     if type(value) is not dict:
         result["status"] = "unexpected_container_not_iterated"

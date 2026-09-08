@@ -17,11 +17,17 @@ HELPER = REPO / "experiments/candidates" / DIRECTION / "r09_first_exception_a05/
 INPUT = REPO / "docs/research/candidates" / DIRECTION / "FRRIE_R09_FIRST_EXCEPTION_A05_PDB_COMMANDS_20260907.txt"
 
 
+def check_absent_field_table(helper):
+    record, ordinary = helper.field_table(helper.MISSING)
+    assert record == {"status": "absent_attribute"} and ordinary is False
+
+
 def main():
     started = time.monotonic()
     spec = importlib.util.spec_from_file_location("a05_inert_capture", HELPER)
     helper = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(helper)
+    check_absent_field_table(helper)
     calls = []
 
     class Untouchable:
