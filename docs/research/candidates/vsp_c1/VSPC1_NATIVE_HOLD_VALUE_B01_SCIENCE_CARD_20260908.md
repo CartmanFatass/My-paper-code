@@ -10,8 +10,11 @@ Selected by the complete `em:vsp_c1:convergence` response at
 `2026-09-08-vspc1-native-hold-value-convergence-01`, **PRO_FINAL**
 ([immutable response](pro_packets/20260908_native_hold_value_convergence/archive/RESPONSE.md),
 [DM intake](VSPC1_NATIVE_HOLD_VALUE_CONVERGENCE_INTAKE_20260908.md)).
-P49 authorizes this selected card and complete CM specification preparation. No code
-acceptance, scientific launch or formal UAV-validation entry has occurred.
+The OWNER_DIRECT P49 continuation at `dff0694dc` authorizes implementation,
+independent review, accepted-source binding, this single pair, collection and intake
+([current handoff](../../portfolio/handoffs/2026-09-08-p49-vspc1-native-value-question.md)).
+At continuation entry, no code acceptance, scientific launch or formal
+UAV-validation entry has occurred.
 
 This one matched training pair can produce a local finite-budget native-return
 signal or counterexample for the gated critic package. It cannot establish stable
@@ -183,8 +186,9 @@ checkpoints and initial/final norms/displacement. Report the zero-initialized ga
 **absolute** norm/displacement; its relative displacement is undefined, not a ratio
 to a fabricated epsilon. Existing common/total norms support their defined ratios.
 The machine exposure line cites old UCOPE total relative displacement.518345–.598358
-as historical can-move evidence only. Current new-model/training/evaluation exposure
-is zero. An actual run must supply its own counts and movement, with no arbitrary
+as historical can-move evidence only. P49 preparation had zero new-model/training/
+evaluation exposure; the later synthetic engineering exposure is separated in §7.
+An actual native run must supply its own counts and movement, with no arbitrary
 minimum gate displacement or long-hold fraction required.
 
 Cost law per learned arm: initialization +131072*c_env_actor +1024*c_update
@@ -210,7 +214,84 @@ telemetry gaps are `resources_unmeasured`, not retroactive primary invalidation.
 Only evidence §11.4's four requirements hold a B launch.
 
 Engineering scope §4: **none**. Source≤2,000 new non-test lines, runner≤600,
-focused tests≤300s; at most one≤60s synthetic runner smoke under the later engineering
-assignment. No code/test/scientific execution in P49 preparation. The full CM
-specification and original acceptance commands return to Root before any coding
-dispatch; engineering comparison copies add no scientific arms or calls.
+focused tests≤300s; at most one≤60s synthetic runner smoke under the engineering
+assignment. The earlier preparation had zero code/test/scientific execution.
+The full specification and original acceptance commands were supplied to Root.
+The three-batch CM comparison is complete (`a6dbacb36`); this continuation uses the
+normal CM route, with no fourth comparison or added scientific arms or calls.
+
+## 7. Accepted source and the exact selected invocation
+
+Engineering was accepted at **65c89368ab0fc7402fb0e24254447629e829a12d** after
+implementation `b66225cdf08b12ca17d4e4d7c3c943d4d4c80107` and a documentation-only
+line-ending correction. The [technical acceptance](VSPC1_NATIVE_HOLD_VALUE_B01_TECHNICAL_ACCEPTANCE_20260908.md)
+and [independent review](VSPC1_NATIVE_HOLD_VALUE_B01_PRODUCTION_REVIEW_20260908.md)
+record 21 passing original tests, two focused reporting/clock checks (15.74s total
+pytest), the sole3.991s synthetic fixture, and no remaining material finding.
+The329-line source adds no scope§4 machinery. DM checked the actual delivered
+critic, collection/update calls, primary construction, acceptance/review and
+fixture readback; the reused UCOPE/core source remains equal to637406340.
+No native performance observation exists at binding.
+
+Machine-generated **engineering-only exposure** from the sole seed9001 fixture:
+two synthetic fits,32 training steps,8 Adam calls,48 evaluation steps,6 final
+evaluation episodes,0 UAV calls; total relative displacement GATED-V
+.018123950387828148 and MLP-V .018104413782737905. Gate absolute displacement
+.013002723455429077, initial norm0, relative displacement null/undefined.
+These values show movement in the accepted learning path; they are not native
+performance or a forecast of the seed8101 displacement. The inherited duration
+diagnostic's epsilon-based relative number is not a defined zero-norm ratio;
+retain its raw value as provenance and use absolute duration displacement.
+
+The OWNER_DIRECT P49 continuation supplies execution authority. Object decision:
+(a) bind this accepted source and execute the already selected pair, or (b) add
+another fixture/calibration before it. Recommendation and selection: **(a)**.
+Owner-delegated decision (unattended, 2026-09-03 instruction): (a).
+No scientific meaning, comparator, count, MEI, seed or cap changes. Main owner
+reviews and relevant audit owner cells were empty at this clean boundary.
+
+Root integrates the accepted delivery and the exact missing original UCOPE
+dependencies, then executes these fixed facts through the configured existing
+supervisor. This binding is not an accepted-handle or admission receipt.
+
+| Fact | Exact value |
+| --- | --- |
+| Execution node | `wsl_4070`, SSH alias `hmasd-wsl-node`, host `LAPTOP-U9TDKC8A` |
+| Source | `65c89368ab0fc7402fb0e24254447629e829a12d`, detached exact-SHA worktree |
+| Cwd | `/home/wu/hmasd-worktrees/vspc1-native-hold-value-b01-8101-65c89368ab0f` |
+| Requested supervisor name | `vspc1_hold_value_b01_8101_65c89368ab0f` |
+| Output root | `/home/wu/projects/HMASD/temp/directions/vsp_c1/exp/native_hold_value_b01_8101_65c89368ab0f` |
+| Admission receipt | `/home/wu/projects/HMASD/temp/directions/vsp_c1/exp/native_hold_value_b01_8101_65c89368ab0f_admission.json` |
+| Interpreter/device | `/home/wu/.venvs/hmasd/bin/python`, CPU FP32, one process and one numerical thread |
+| Return route | Root observes the accepted handle; the same CM collects and technically accepts; this DM intakes every result under §5 |
+
+From that exact cwd, immediately before the scientific command:
+
+```text
+/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/projects/HMASD/temp/directions/vsp_c1/exp/native_hold_value_b01_8101_65c89368ab0f_admission.json
+```
+
+Require both physical and effective available memory≥4GiB before constructing the
+scientific output/model/environment/RNG state. Then the sole scientific argv is:
+
+```text
+/home/wu/.venvs/hmasd/bin/python scripts/run_vspc1_native_hold_value_b01.py --seed 8101 --out /home/wu/projects/HMASD/temp/directions/vsp_c1/exp/native_hold_value_b01_8101_65c89368ab0f
+```
+
+Root records the accepted supervisor handle, actual cwd/SHA and receipts in the
+existing experiment tracking route. Unknown acceptance is reconciled on that same
+handle; no duplicate start, extra pair, H completion or retry is allocated.
+The dominant work and unchanged1800s/arm/3600s complete caps are §6. Reused-loop
+planning references remain context, with native incremental gate wall unmeasured;
+no extra timing experiment is needed. The original fixture covers the affected
+publication path and is not repeated at this boundary.
+
+The existing external whole-process wall observation must cover Python startup
+through exit; an enclosing interval including admission is only a conservative
+bound. Internal `cap_breach=false` alone is not complete-process proof. Preserve
+the measured MLP transition and internal pair wall. If startup/exit residual cannot
+be split, add the entire nonnegative external-minus-internal residual to each
+measured arm interval as a conservative cap upper bound, while reporting the
+external whole interval once. Startup still belongs to GATED; H/publication/exit
+belong to MLP. No new instrumentation or experiment is selected. Optional telemetry
+gaps limit resource reporting and do not erase independently trustworthy returns.
