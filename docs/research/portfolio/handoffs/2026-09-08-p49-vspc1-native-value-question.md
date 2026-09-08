@@ -76,3 +76,25 @@ Root publishes this ready command, dispatches it while the other four chains
 continue, and records the accepted identity in its existing log. Ordinary
 receipts remain log-only; an exhausted route returns one concrete next-command
 need to Portfolio.
+
+## OWNER_DIRECT continuation correction, 2026-09-08
+
+The owner identified unnecessary Root-to-Portfolio routing after this preparation.
+The preparation-only stop above is complete; resume the original VSPC1 DM to carry
+the selected B01 through CM implementation, independent review and acceptance in
+`C:/Projects/HMASD-worktrees/dm-vspc1-next-20260906`, `codex/direction-vsp_c1`.
+Use `VSPC1_NATIVE_HOLD_VALUE_B01_CM_SPEC_20260908.md` §§1–6 and its selected card,
+integrated at `26a95b59b`, with complete source
+`6374063408208ba67b8cb7c69ebc0babb0f00259`. Root supplies its exact committed
+UCOPE dependencies in their original paths through ordinary integration; DM/CM
+does not invent a replacement environment. Reuse this checkout with one writer.
+
+The three CM comparison batches have finished; this is normal CM work, with the
+existing original focused checks and independent review, no fourth comparison.
+After engineering acceptance, the same DM binds accepted source and directs the
+one selected seed8101 GATED-V/MLP-V pair plus its H reference under the card and
+standing object-tier delegation, with fresh admission and detached remote execution.
+The complete1800s/arm and3600s/pair caps remain; no extra arm, seed or retry follows.
+Collect, technically accept and scientifically intake the actual result. This
+continuation does not itself claim UAV entry. Root owns this route to completion;
+routine implementation, source integration and DM resumption need no Portfolio reply.

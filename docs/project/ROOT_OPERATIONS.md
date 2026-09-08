@@ -190,7 +190,8 @@ evidence with an explicit observation handover, without a replacement scheduler.
 Each Root observation pass reads current assigned experiment rows, batches independent
 supervisor checks, services received Transport/native events, and applies the dispatch skill.
 Transport performs its own due Pro reads. Root executes remaining explicit commands and return
-routes; unlisted actions go to Portfolio. Historical handles/requests are not adopted by scanning
+routes; direction-local continuation returns to its DM, while choices beyond that authority go
+to Portfolio. Historical handles/requests are not adopted by scanning
 archives. Reuse the owner's goal; no new scheduler, polling task or replacement goal is created.
 
 Owner pause changes the affected work first while preserving accepted-process observation and
