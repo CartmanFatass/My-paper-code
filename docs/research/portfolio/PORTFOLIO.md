@@ -1,8 +1,10 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-07 (P20 CBSC B05 source correction; other routes retained)
+Updated at: 2026-09-07 (P21 three-route refill; CBSC/VSP02 retained)
 
-Current incremental command: [P20 CBSC B05 source correction](handoffs/2026-09-07-p20-cbsc-b05-source-correction.md). P18 selected seed21223 but retained code accepts only B04 seeds; correct bounded seed/object plumbing while preserving numerical and historical behavior. No learner invocation is allocated.
+Current incremental command: [P21 FSD/UCOPE execution continuations and FRRIE offline preparation](handoffs/2026-09-07-p21-fsd-ucope-frrie-continuations.md). Root reports two advancing chains and three exhausted returns. P21 restores three bounded native routes, with the named FSD panel and UCOPE two-pair allocations after ordinary code/card readiness; FRRIE prepares the offline original-source chain. Actual dispatch, launch and UAV entry require their recorded events.
+
+Retained incremental command: [P20 CBSC B05 source correction](handoffs/2026-09-07-p20-cbsc-b05-source-correction.md). P18 selected seed21223 but retained code accepts only B04 seeds; correct bounded seed/object plumbing while preserving numerical and historical behavior. No learner invocation is allocated.
 
 Retained incremental command: [P19 VSP02 family Convergence](handoffs/2026-09-07-p19-vsp02-family-convergence.md). Both accepted B01 prefixes remain within MEI; one direction-level consultation is authorized with complete archival/intake, zero new scientific execution and no presumed family disposition.
 
