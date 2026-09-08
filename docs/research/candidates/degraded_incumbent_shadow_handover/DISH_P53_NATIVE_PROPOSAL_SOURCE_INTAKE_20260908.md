@@ -496,3 +496,171 @@ Remaining uncertainties are exactly the future implementation and pair: correct 
 input/likelihood propagation, completion of the fixed learning exposure, and its native
 service/cost consequences. The next discriminator is still the paired final service contrast;
 there is no need for a replacement Portfolio selection or another abstract Pro assessment.
+
+## 11. B07 implementation acceptance and exact Root route — 2026-09-08
+
+Root accepted the card/spec commit `fc52d630de39429383cb12ad7ec8e7b2877f67b6` and assigned
+the existing DM the selected CM implementation/review route, then explicitly requested this
+acceptance and exact submission command. CM used this same designated checkout/branch;
+no other DISH CM was available to reuse at the new assignment, and the same CM and reviewer
+handled all corrections. The prior three comparison batches were already completed as
+recorded in §10; the timing repair is an existing-delivery correction, not a new assignment.
+
+CM delivered and immediately pushed `0f6fa80fe76a2227792ce824abbcd95eb38b3a7e`, followed
+by timing-source correction **`a4612a020921d24269a19a3471cc03fa62c082c8`**, then the literal
+payload/record binding **`ae5cdea0f292d632c59eb79e655f6d4861a81224`**. At intake, local HEAD
+and upstream both equal the last commit and the checkout is clean. These commits are already
+present in the shared direction checkout; no source copying or merge is needed here. The
+scientific execution binding is a4612a0; ae5cdea changes only the CM record. Root integrates
+the named accepted changes while preserving concurrent work and checks what is already present.
+
+### Checked artifacts, rule and bounded acceptance
+
+The CM spec §4 rule applied is:
+
+> Accept implementation by the actual changed paths, synthetic outputs and existing
+> independent review, under card §§2–6 and evidence-spec §§4,5.2,11.4,11.8.6–11.8.7.
+
+I read the actual shared-path diff, B07 study/runner, affected focused checks, retained final
+test logs and complete CM record. The raw actor and normalized encoder input remain separate;
+owner0/1 select physical copies `[owner,3-owner]`, preserving vehicle0 xy then vehicle1 xy.
+The same differentiable `3*tanh(m+a_prev/3)` reaches live generation, behavior/replay density
+and the engine's repeated motion term. DIRECT defaults, all mode propagation including
+post-update policy reconstruction, raw Gaussian density and motion gradients are preserved.
+Common initialization executes no shared modal episodes; each arm owns its four initial
+and four final rows. The final four-condition contrast is retained separately from incomplete
+initial-reference claims. The same LOW_LR STRUCTURED learners, master family/seed127,
+65536 transitions and512 optimizer steps per arm, native boundaries and seven card branches
+remain fixed. No change to B06 evidence or source-value interpretation follows.
+
+The independent CM reviewer found and CM repaired missing native-work bounds and an ambiguous
+publication charge. DM then returned a concrete timing defect: the original time-only wrapper
+and disabled publication alarm could not enforce the complete cap. The same CM/reviewer repaired
+it without another scientific invocation. Final publication retains the tighter pair/arm alarm;
+the exact wrapper bounds admission, startup, execution and accounting externally. Timeout or
+failed readback takes precedence over an earlier COMPLETE summary. Final independent disposition
+is **no material finding remains**, recorded in
+`DISH_OWN_COMMAND_MEAN_B07_CM_RECORD_20260908.md` (ae5cdea). No OS timeout experiment was added.
+
+The original focused module ended **12 passed**,1 existing disabled-cache configuration warning,
+in1.98s pytest time. Four process-wall charges, including the first absent-parent setup failure,
+are3.3619347+2.8518697+2.6727375+2.8946026 = **11.7811445s**. I checked the retained cm03/cm04
+logs and test coverage instead of rerunning the suite. Logs and precise commands are in the CM
+record; these are small synthetic/intercepted engineering checks, not scientific learners or
+native episodes. Source additions across the two source commits are301 gross non-test lines,
+23 deletions; including the43-line staged payload gives344. The final runner is102 lines,
+145 including that payload. Engineering-scope §4 needs **none newly**; no §5 source/test
+budget breach occurred. Synthetic check success establishes the changed boundary,
+not native-service value, training success or complete runtime conformance.
+
+One technical limitation remains: automatic approval review rejected invocation-owned scratch
+cleanup before execution, stating only **“blocked by policy.”** The ignored cm02/cm03/cm04
+directories under `temp/directions/degraded_incumbent_shadow_handover/test/` remain, with needed
+logs outside them and exact paths in the CM record. No alternate shell/agent bypass was used.
+This is an explicit cleanup limitation; it neither changes the scientific comparison nor creates
+an empirical failure. Required cleanup is not reported as completed.
+
+### Decisions this intake produces
+
+1. **Object-tier technical acceptance.** Options: (a) accept the corrected implementation
+   and return its exact bounded launch route; (b) return a remaining correctness/scope conflict;
+   (c) add a native smoke, historical replay or stronger-class prerequisite. Recommend/select(a):
+   actual artifacts, focused evidence and repaired independent review support the frozen B07
+   contract. **Owner-delegated decision (unattended, 2026-09-03 instruction): (a).**
+2. **Existing execution route.** Root stages and submits the single previously selected pair
+   with the binding below, adopts its accepted handle, and returns terminal evidence to this
+   same CM and DM. This is continuation of PRO_FINAL B07, not a new direction/Portfolio choice,
+   a second Send, a scientific retry, a new seed or formal UAV-validation entry. This DM intake
+   performs no staging, admission, experiment or supervisor submission.
+
+Owner reviews in main and this checkout returned[] at2026-09-08T20:08:21Z; the relevant recent
+audit owner columns contain no override. No prediction reply exists; the prediction remains
+unscored/not taken. The technical row is appended to the existing audit. No new P1/P2 item is
+created for this ordinary engineering acceptance; the existing card/decision items remain.
+The existing Chinese source/decision brief is updated only with implementation status. DIRECTION
+is unchanged because this delivery supplies no new accepted mechanism-level science.
+
+### Exact Root staging and one submission
+
+Use the configured `wsl_4070` node via SSH `hmasd-wsl-node`, CPU native float64/policyFP32,
+one Torch/BLAS thread. Staging facts are:
+
+| Field | Exact binding |
+| --- | --- |
+| Scientific source SHA | `a4612a020921d24269a19a3471cc03fa62c082c8` |
+| Payload document SHA | `ae5cdea0f292d632c59eb79e655f6d4861a81224` |
+| Detached cwd | `/home/wu/hmasd-worktrees/dish-b07-seed127-20260908-run01` |
+| Supervisor handle | `dish_b07_seed127_20260908_run01` |
+| Relative envelope | `temp/directions/degraded_incumbent_shadow_handover/exp/own_command_mean_b07_seed127_20260908_run01` |
+| Staged wrapper | envelope `/launch.sh` under that exact cwd |
+| Scientific output | envelope `/run/` under that exact cwd |
+| Admission | envelope `/admission.json`, produced inside the wrapper immediately before the runner |
+| Logs/accounting | envelope `/runner.log`, `/supervised.time`, `/whole_chain.json` |
+
+Extract only the bash fence between `B07_BOUNDED_PAYLOAD_BEGIN` and `B07_BOUNDED_PAYLOAD_END`
+from the immutable ae5cdea CM record. Write UTF-8 LF with one terminal newline to the staged
+wrapper; do not retype it, use the superseded 0f6fa80 time-only command, or substitute the
+old8.8865419 check charge. Read-only extraction here produced **2432 bytes,43 lines**,
+SHA256 **`2fb1d2bd447b0bb84594869cd50610de94518ac85a10c69ed400eaac382ceedd`**, no CR bytes.
+The fixed source SHA is already literal in the payload. The run child is created only after
+fresh same-node physical/effective memory admission>=4GiB; the envelope exists for staging/logs.
+
+Root compares actual staged cwd/source with these existing bindings and syntax-checks the
+actual staged LF wrapper without executing it, as current ROOT_OPERATIONS requires. The exact
+PowerShell-to-configured-node syntax command is:
+
+```powershell
+ssh hmasd-wsl-node '/usr/bin/time -f "syntax_check_wall_seconds=%e\nsyntax_check_exit=%x" -o /home/wu/hmasd-worktrees/dish-b07-seed127-20260908-run01/temp/directions/degraded_incumbent_shadow_handover/exp/own_command_mean_b07_seed127_20260908_run01/wrapper_syntax.time bash -n /home/wu/hmasd-worktrees/dish-b07-seed127-20260908-run01/temp/directions/degraded_incumbent_shadow_handover/exp/own_command_mean_b07_seed127_20260908_run01/launch.sh'
+```
+
+After a successful exact staging check and reconciled not-yet-accepted handle, the **one exact
+Root submission command** is:
+
+```powershell
+ssh hmasd-wsl-node 'PATH="/home/wu/.local/bin:/usr/lib/wsl/lib:$PATH" /usr/local/bin/agent-task run dish_b07_seed127_20260908_run01 "bash /home/wu/hmasd-worktrees/dish-b07-seed127-20260908-run01/temp/directions/degraded_incumbent_shadow_handover/exp/own_command_mean_b07_seed127_20260908_run01/launch.sh"'
+```
+
+The outer PowerShell single quotes preserve the literal remote PATH expansion and the job's
+single command argument. The job executes the CM's exact checked wrapper; this command does not
+reconstruct its nested payload. No admission or accepted handle exists at this intake. If the
+handle unexpectedly exists or acceptance is uncertain, reconcile its actual supervisor state;
+do not submit a duplicate. A pre-admission transport defect returns to this same CM's repair
+route. It is not scientific polarity or permission for another result-bearing attempt.
+
+### Cost, collection and next discriminator
+
+Decimal arithmetic over the retained charges gives S_check/2=5.89057225s, remaining
+**1794.10942775s/arm and3588.2188555s/pair** before startup/closure. The fixed outer3587.21s
+timeout leaves1.0088555s within the pair cap for outside-wrapper timing/closure; subsequent
+required syntax-check attempts are retained as additional shared charge, never new allowance.
+Measured startup is rounded upward at0.01s with a0.02s handoff allowance and enters the runner's
+prior charge once. Its10s shared planning reserve and2s final closure margin are bounds, not
+claimed measured cost. Later collection counts **checks + whole-chain elapsed + separately
+measured required tail** once; it does not add the startup argv charge a second time. Shared S
+is that total minus exclusive arm wall, allocated S/2. Preserve timer resolution, actual exit,
+kernel termination latency and the final accounting-write boundary; neither timers nor a
+COMPLETE marker prove complete-cost conformance. An observed cap crossing remains recorded.
+
+The card's dominant work is unchanged: two arms×one paired seed×16×32×128 =131072 transitions,
+1024 optimizer steps,16 initial/final modal episodes<=19200 ticks, native training
+262144–3145728 calls plus evaluation. The updated same-scale B06 anchor plus checks is
+231.91057225s/arm (463.8211445s pair), an estimate with unknown B07 trajectories/E/H, not a
+new timing observation or launch guarantee. No cost pilot is added.
+
+Root uses current EXPERIMENT_MONITOR/ROOT_OPERATIONS goal-driven observation: record the exact
+accepted handle, node/source/cwd, admission/log/result paths and this native DM/CM identity,
+then own routine observation. No scheduler or new automation is requested. At terminal state,
+resume `cm_am_dish_b07` under `/root/dm_dish_p53_native_proposal_question` for collection and
+technical acceptance, then this same DM for science. CM preserves all partial/full rows,
+counts, per-condition service/native costs, own-initial deltas, first-transfer/null evidence,
+terminal zero remainder, exit/timeout and whole-chain receipts in the card's result evidence.
+Missing/truncated output limits its dependent claim; trustworthy facts remain reportable.
+There is no extra invocation or seed on failure and no effect-based replacement.
+
+The claim ceiling remains **unmeasured finite B/EXPLORE**: correct implementation is not a
+native gain. Strongest support is the available own input plus coherent tested live/replay
+path; strongest contradiction remains input already available to the network, native projection
+possibly making the new path redundant, or persistence worsening acceleration. B06's service
+loss and zero evaluation transfers remain contrary evidence, and source-copy value remains
+unestimated. The next discriminator is exactly seed127's final modal OWN-minus-DIRECT service
+contrast with all native companions, interpreted by the unchanged seven card §5 branches.
