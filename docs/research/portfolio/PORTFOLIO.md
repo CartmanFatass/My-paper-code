@@ -1,6 +1,8 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-08 (P60 VSPC1 comparison; P61 UCOPE and P62 DISH decisions)
+Updated at: 2026-09-08 (P63 FRRIE grouped-factory fault repair)
+
+Current FRRIE repair: [P63 grouped-factory fault repair](handoffs/2026-09-08-p63-frrie-factory-fault-repair.md) resumes the same CM after P59's actual five-group TEST-factory SIGSEGV. Use retained current fault evidence first; at most one120s missing-context diagnostic and, only for a supported correction, one120s affected verification complete the bounded engineering route. No speculative interpreter replacement, tool-restriction bypass, learner retry or production-clearance inference follows. Root reports P60 VSPC1, P61 UCOPE and P62 DISH advancing; SCDMP P58 is an exhausted Send-control blocker and counts zero. P63 counts only during actual accepted work; another suitable fifth-slot command is considered independently.
 
 Current remaining refills: [P61 UCOPE post-B03 direction choice](handoffs/2026-09-08-p61-ucope-post-b03-direction-choice.md) and [P62 DISH post-B07 direction choice](handoffs/2026-09-08-p62-dish-post-b07-direction-choice.md) resume their original DMs for one proper-node decision each after their complete negative object readings. Each asks whether a concrete new intervention is worth its minimal real comparison or the tested family/extension should retain no successor; neither allocates an unchanged pair, forces a positive outcome or makes exact diagnosis a gate. The same DM closes each conforming selected-object route through card, CM and bounded execution/intake. Preparation has zero scientific invocation. Dispatch these independently alongside P60 and retain FRRIE P59/SCDMP P58 only while their actual work advances; issued commands and unresolved provider waits are not active chains.
 
