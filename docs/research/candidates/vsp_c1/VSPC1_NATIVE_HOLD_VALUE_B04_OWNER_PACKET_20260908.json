@@ -1,0 +1,49 @@
+{
+  "question": "是否接受P66已分配的新卡：只做一对新的独立训练，检查同样归一化规则下的局部门控收益能否重复？",
+  "changes_if_approved": [
+    {
+      "target": "VSPC1-NATIVE-HOLD-VALUE-B04科学卡及P66单对任务",
+      "from": "归一化规则只有B03/8201一对完整结果；其intake结束，尚无8202模型或调用",
+      "to": "固定新主键8202和UP概率0.60，保持B03方法、GATED/完整MLP/H比较与原生回报，执行一次有界独立训练对及完整intake；任何结果都结束P66"
+    }
+  ],
+  "if_refused": "在正常边界应用明确的异步改选，保留B03及全部旧结果，不把不接受新卡变成负面机制证据，也不自行换种子或扩大任务。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B03_INTAKE_20260908.md",
+      "quote": "| GATED−MLP | +.03980171530455754 | .006008657101475142 | 4/32 |",
+      "why": "一个可信的真实训练结果保留了超过0.01门槛的原生信号，支持一次有限独立重复性检查。"
+    },
+    {
+      "path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B04_SCIENCE_CARD_20260908.md",
+      "quote": "The independent unit is one newly matched training pair;\n32 evaluation differences condition on those trained policies.",
+      "why": "新观测增加独立训练实例，不把已有策略的32回合评价当成32次训练。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B03_INTAKE_20260908.md",
+      "quote": "| MLP−H | −.004588917828898052 | .012026063667580491 | 19/32 |",
+      "why": "MLP平均仍略低于悬停，不能据此宣称比较器已修复；门控也有不利回合。"
+    },
+    {
+      "path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B04_SCIENCE_CARD_20260908.md",
+      "quote": "Full MLP feature sharing, extra gate capacity, joint clipping/value\nunits, FP32 and on-policy co-adaptation remain alternative explanations.",
+      "why": "完整MLP已经共享特征，额外容量、共同裁剪和价值量纲仍是替代解释，下一对不直接证明专门的持续动作机制。"
+    }
+  ],
+  "uncertainty": [
+    "新一对可以落在门槛内或为负，必须保留；不运行到全为正为止。",
+    "调好的同信息headroom仍没有，悬停只是已达到的未调优参考，不是上界。",
+    "与旧未归一化两对分开；两次归一化训练也不能自动建立稳定优势或归一化因果作用。",
+    "P66授权的是这一对及intake，不是第三个归一化训练对、调参或额外评价。"
+  ],
+  "cost": {
+    "compute": "2×512×256训练步加3×32×256评价步，共286720原生团队步、2048次Adam、96次最终评价；512次合并各512个目标，共262144标量行，四轮价值损失1048576目标行项。无搜索或额外模型调用；绑定检查仅用纯数据/桩并与科学工作分列。完整上限1800秒/臂、3600秒/对，先前310.79秒仅作参考。",
+    "owner_time": "异步浏览；现有P66授权继续，无需等待你的回复。",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing; 依据P66及既有委托继续，只有实际的新覆盖指令才改变路线"
+  },
+  "verdict_text": "Options: (a) bind P66's one new independent normalized pair; (b) repeat8201;\n(c) change/tune the method or require diagnosis first. Recommend/select (a).",
+  "source": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B04_SCIENCE_CARD_20260908.md"
+}
