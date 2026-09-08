@@ -104,3 +104,27 @@ accounting. There is no routine Portfolio implementation approval. The shared
 checkout remains for this named correction/intake dependency; Root owns reclamation
 when no continuation, writer or accepted delivery requires it. Other directions
 advance independently.
+
+## Pre-Send canonical metadata correction
+
+Root returned `HANDOFF_REQUEST_INVALID`: canonical REQUEST lacked explicit
+`decision_authority=pro_final`. It reported BLOCKED/UNBOUND with zero Send clicks,
+no reset or page action, and no scientific decision. This is a packet conformance
+failure, not a new provider attempt or scientific result.
+
+The existing Transport validator also requires the prompt and configured singleton
+metadata. Those fields already existed in HANDOFF's bound `transport_request`, so
+this correction copies them unchanged into canonical REQUEST, retaining all its
+authoring/scientific fields. HANDOFF itself already declares `pro_final` and remains
+byte-identical. Both canonical REQUEST and nested HANDOFF payload now pass the same
+read-only Transport validator, with matching exact OWNER_DIRECT reset evidence,
+prior request, null conversation ID, author/parent/operator and fixed-link prompt.
+The fixed TASK commit and all P56 files remain unchanged. Details and the forwarded
+blocker receipt key are in [METADATA_CORRECTION.json](METADATA_CORRECTION.json).
+
+Options: (a) complete existing canonical metadata and return the corrected commit;
+(b) return after adding only authority despite the next missing required fields;
+(c) change TASK, provider scope or Send locally. Recommend (a).
+Owner-delegated decision (unattended, 2026-09-03 instruction): (a), under Root's
+explicit corrective assignment. No reset, Send or scientific call occurs here.
+Root resumes the same corrected P58 handoff through the existing Transport route.
