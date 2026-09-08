@@ -5,6 +5,11 @@ The authentic-D0 implementation is technically accepted at
 G→D0→H panel. This intake accepts the implementation and binds that selected
 route; it reports no new learning result or scientific polarity.
 
+Root integrated the implementation on main as
+`c8f4449b1885663b79bb1bd8c73eee0b0bf4c0c3`. Direct committed-path comparison
+finds no source/test/technical-record difference from the accepted CM commit;
+the detached scientific source remains the full `f09aa00ba` SHA above.
+
 ## 1. Assignment and actual checkout
 
 [P47's FSD section](../../portfolio/handoffs/2026-09-08-p47-research-resume-and-recovery.md#fsd-b03-implementation-through-the-already-selected-comparison),
