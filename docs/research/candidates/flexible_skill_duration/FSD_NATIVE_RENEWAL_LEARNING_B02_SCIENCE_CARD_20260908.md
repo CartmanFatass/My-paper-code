@@ -33,6 +33,17 @@ LF scripts, detached cwd, argv and proposed handles before Root launches; Root
 executes/observes, CM collects all terminal outcomes and DM intakes every branch.
 No result, admission or accepted experimental handle is inferred from allocation.
 
+**P43 result, 2026-09-08:** the allocated panel is valid and complete. The fresh
+full H−C mean is+.5203906250000002, conditional episode SE.007576080882164499;
+post-reset is+.5216948621553887. The unchanged§5 branch reads above_mei.
+G still leads H by.01084635416666652 full/.008367272347535353 post. B01/B02 are
+reported as separate training-pair rows; no pooled uncertainty or stable claim
+is added. [Result evidence](FSD_NATIVE_RENEWAL_LEARNING_B02_RESULT_EVIDENCE_20260908.md)
+and [intake](FSD_NATIVE_RENEWAL_LEARNING_B02_INTAKE_20260908.md) link every received
+artifact and the applied decisions. The prospective prediction below is retained;
+both directional forecasts agree with this pair, owner prediction not taken.
+No new pair, evaluation, Pro request or successor is selected.
+
 Question: does the above-.01 native H−C difference observed for B01 recur under
 one new independent initialization/training seed at the same five-rollout budget?
 This tests training-seed dependence with fresh evaluation keys. It does not ask
@@ -49,8 +60,8 @@ known when this B02 definition is recorded. B01's32 evaluation episodes are not
 
 Use the shared authoring checkout `C:/Projects/HMASD-worktrees/codex-fsd`, branch
 `codex/fsd`. Complete starting revision is `ab6426ef6ca0267d7b5ca7c833401d6348ab07fb`,
-which reconciles P40 and the accepted B01 intake. The shared runner/test source
-is unchanged from reviewed `b3f86bb28879db239b07291c39d93a1c494abe50`.
+which reconciles P40 and the accepted B01 intake. At that starting revision the
+shared runner/test source matched reviewed `b3f86bb28879db239b07291c39d93a1c494abe50`.
 The [CM specification](FSD_NATIVE_RENEWAL_LEARNING_B02_CM_SPEC_20260908.md) selects only explicit seed/metadata threading
 and a thin B02 entry point; P42 supplied that separately named implementation.
 
@@ -186,9 +197,17 @@ The [machine record](FSD_NATIVE_RENEWAL_LEARNING_B02_EXPOSURE_AND_COST_20260908.
 has0 source-code changes, CM dispatches, scientific invocations, model constructions,
 loads, training starts/transitions/optimizer calls, evaluation episodes, diagnostic
 fixtures and Pro Sends. It grants no runtime allocation. P42 subsequently completed
-the specified code and synthetic checks; every production/scientific count remains
-zero. Readiness recomputed the known work from the unchanged runner constants and
+the specified code and synthetic checks; at that pre-launch boundary every
+production/scientific count remained zero. Readiness recomputed the known work from the unchanged runner constants and
 this record, without importing the learner or host.
+
+P43 now records3 complete invocations,2 training starts,4 agent constructions,
+64000 training transitions/160 episodes/10 stages,10740 actual optimizer calls
+and96 endpoint episodes/38400 scoring steps. It matches the prospective host-step,
+agent-observation and controller-batch counts below. Loads/evaluator optimizer
+calls are zero; all first/final displacements and segment work are recorded in
+the result. Complete measured G/C/H walls2.56/338.46/323.99s sum665.01s; all fresh
+on-node admissions pass and all supervisor/external exits are0.
 
 | Prospective quantity | Work |
 | --- | ---: |
@@ -202,15 +221,15 @@ this record, without importing the learner or host.
 | Proposed complete caps G/C/H / sum | 60/900/900s /1860s |
 
 The dominant work is collection/evaluation and segment-dependent optimizer work,
-not a nested search. Actual optimizer calls and effective cost-law M remain unknown
-until execution. B01's measured complete G/C/H2.47/371.89/333.89s (sum708.25s) are
+not a nested search. Actual optimizer calls were unknown at freeze and are now
+reported; effective cost-law M remains unmeasured. B01's measured complete G/C/H2.47/371.89/333.89s (sum708.25s) are
 anchors, not guarantees. The historical law1.15*[5*(64.6+.769*M_arm)+.46*32]
 does not make decision rows, segment counts or buffer sizes interchangeable with M.
 No separate calibration, profile, exact census or cost experiment is requested.
 
 The unchanged real update schedule and B01's recorded nonzero first/final network
 movement show that this finite learner path can move; actual B02 counts/displacement
-will be measured. Five stages are not five optimizer.step calls. Added validation
+have now been measured. Five stages are not five optimizer.step calls. Added validation
 in the future coding assignment is limited to the changed seed/input boundary and
 independent source review; it adds no scientific sample or production-model probe.
 
@@ -254,5 +273,5 @@ unchanged P34 semantics and P42 changed-input evidence are reused without anothe
 Evidence-spec§3–4,5.2,11.4,11.7–11.9 control, especially§11.8. One new independent
 pair is the next useful observation; no exact maximum, full diagnosis, stronger
 class or additional Pro round is a B launch gate. Current authority covers the
-object-tier card, completed implementation/readiness and P43's single allocated
+object-tier card, completed implementation/readiness and P43's completed single
 panel. No additional run or lifecycle/priority/UAV disposition follows.
