@@ -9,8 +9,8 @@ ROOT_OPERATIONS.md defines Portfolio planning, Root command execution/reporting 
 
 | Tool | Use |
 | --- | --- |
-| `collaboration.send_message` | Send evidence, an ACK or steering to an existing agent. It does not start a new turn for an idle agent. |
-| `collaboration.followup_task` | Assign continued work to an existing non-Root agent; it wakes an idle recipient. |
+| `collaboration.send_message` | Notify an existing agent when no new work is requested. It does not start a turn and is not an execution handoff. |
+| `collaboration.followup_task` | Assign work or deliver a result requiring collection, intake, repair or continuation to the same non-Root agent. It wakes an idle recipient and delivers to a running recipient. |
 | `collaboration.list_agents` | Resolve current canonical names and status when needed. |
 | `collaboration.wait_agent` | Wait for agent messages or completion; this does not supervise an experiment process. |
 
@@ -20,9 +20,19 @@ the full canonical name. Do not substitute an app task UUID, display nickname, P
 remote supervisor name. Use only tools exposed to the current task; report an actual
 tool-access gap without inventing another route or creating a replacement task.
 
-Reuse the existing recipient for related work. Send evidence to a running DM/CM with
-`send_message`; use `followup_task` when idle work must resume. Tool acceptance and
-the recipient's ACK are distinct facts. Reconcile uncertain delivery before retrying.
+Choose the tool by the action requested, not a remembered running/idle status. Use
+`followup_task` for every native work handoff, including terminal experiment facts or a
+Pro response that requires the recipient to act. Reuse the same recipient and assignment;
+do not send the same work through both tools. `send_message` is only a notification with
+no new execution obligation. An agent may finish between a status read and a message.
+
+A written return route or successful `send_message` is not dispatched work. After a work
+handoff, retain its actual tool outcome; at the next event boundary check a current turn
+or a new return before counting that direction as advancing. A fast completed return is
+handled immediately. If earlier work was only notified to a now-idle recipient and has
+no accepted continuation or result, resume the same assignment once with `followup_task`.
+Do not require an ACK before other ready work, repeat a live assignment, or revive a
+restricted operation. Reconcile uncertain delivery from the same recipient's state.
 
 ## App tasks and experiment observation
 
@@ -41,7 +51,7 @@ authorized child direct-send uses the same route fields: source=actual child aut
 parent=Root app UUID, operator=Transport app UUID. Child app UUIDs are not native tool addresses.
 Transport returns once to parent=Root, never to source as a fallback or extra copy. Root matches
 the request to its existing assignment and forwards the unchanged evidence to the original
-native recipient (`send_message` if running, `followup_task` if idle). Portfolio-authored
+native recipient with `followup_task` when intake or continuation is required. Portfolio-authored
 requests retain their explicit Portfolio parent. Missing native recipients follow the supplied
 recovery route or a concrete Portfolio repair request; they do not cause another Pro Send.
 Root's receipt of a return is a dispatch-skill trigger, independent of other directions.
@@ -63,7 +73,10 @@ validity. Observation runs within the owner's active goal, without a scheduled a
 
 Root records operational facts in `docs/research/portfolio/root-log/YYYY-MM-DD.md`
 (local date) and maintains `EXPERIMENT_TRACKING.md`. Each entry names time, direction,
-evidence/handle and the already-assigned next action. Portfolio reads these records when
+evidence/handle and the already-assigned next action. Distinguish pending work, an accepted
+work handoff and actual running/returned work; do not label a narrative next step active.
+Use the observed event timestamp when available and the actual recording time otherwise;
+do not invent or backdate event times. Portfolio reads these records when
 planning; writing an entry never creates permission to send a message.
 
 Portfolio handles internal requests without an automatic owner-facing report. Notify the

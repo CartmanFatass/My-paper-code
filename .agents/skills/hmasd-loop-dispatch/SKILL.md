@@ -104,12 +104,13 @@ short actions.
 | Available event/fact | Next action now |
 | --- | --- |
 | Ready issued command or ready named follow-on | Dispatch it; issue all other independently ready work before a long local step. |
-| Native delivery or Transport completion/blocker receipt | Match request/command and original recipient; do the necessary bounded acceptance/integration or forward the original receipt to its named native DM/CM, then dispatch the ready follow-on. |
+| Native delivery or Transport completion/blocker receipt | Match request/command and original recipient; do bounded acceptance/integration and use `followup_task` for the named native collection/intake/continuation, then dispatch other ready work. |
 | Required short index operation is busy | Retain that exact dependency and service another ready event; do not hold the whole return queue. |
-| Direction-local step returned and the direction remains assigned | Resume its original DM for acceptance and the next in-scope step, including organizing CM work; record the actual continuation. |
+| Direction-local step returned and the direction remains assigned | Use `followup_task` to resume its original DM for acceptance and the next in-scope step, including CM work; record the actual dispatch outcome. |
 | Direction route exhausted beyond DM authority, or target unrecoverable | Send one exact replacement/conflict need to Portfolio with the actual count delta; continue the other chains. |
 | Accepted experiment needs observation | Read its supervisor state and route a terminal result; do not turn process completion into science acceptance. |
 | Pending Pro request whose Transport task became idle/failed | Send the same Transport an observation/recovery-only continuation from persisted facts; no browser takeover or another Send. |
+| A recorded next step has no accepted continuation, or its recipient is idle after only a notification | Dispatch that same authorized work with `followup_task`; a written return route or `send_message` is not an active chain. |
 | No executable action after the above | Wait for the first event for at most 60 seconds; keep the named dependencies recoverable. |
 
 Transport app acceptance means its task received the handoff; it is not provider Send
@@ -118,9 +119,12 @@ is actually advancing. An unresolved idle Transport dependency cannot fill a slo
 receipts are actionable Root inputs even when every other direction is still running. Root
 never waits for Transport's whole request queue. Routine observations stay in the existing log.
 
-1. Dispatch every independent command before waiting. Reuse accepted assignments. Use native
-   `send_message` for running agents and `followup_task` to resume idle ones; follow the exact
-   addressing rules in `docs/project/SIBLING_COMMUNICATION.md`.
+1. Dispatch every independent command before waiting. Reuse accepted assignments. Every native
+   handoff requiring work uses `followup_task`, including collection/intake after a returned
+   result; `send_message` is only a notification requiring no new work. Follow
+   `docs/project/SIBLING_COMMUNICATION.md` for addressing and dispatch evidence. At the next
+   event boundary reconcile the actual turn or return; do not wait for an ACK or repeatedly
+   dispatch an already-active assignment.
 2. If an old recipient is absent, try its resumable identity. If unavailable, use the explicitly
    supplied replacement route or report the missing target immediately. Continue other commands.
 3. Execute each supplied return route as its dependency arrives; integrate/push specified clean
@@ -142,7 +146,10 @@ never waits for Transport's whole request queue. Routine observations stay in th
    evidence and compact working-set delta; include advancing-chain count for a capacity change.
    Report an actionable vacancy when it occurs, not when the entire batch finishes. Do not send
    separate dispatch, push, launch and intake progress messages or an unchanged periodic digest.
-5. Before any blocking wait, service available returns and dispatch ready named actions. Wait
+5. Before any blocking wait, service available returns and dispatch ready named actions.
+   Compare pending next steps with accepted continuations, not old agent names: if a required
+   intake/collection has only been notified to an idle agent, dispatch it now. Refresh only
+   affected recipients when completion or uncertainty makes the previous snapshot stale. Wait
    for the first completion/message, with a bounded wait of at most 60 seconds; never join all
    direction tasks or poll one task until terminal. Batch short independent status reads only.
    On wake, handle new actionable events before another observation/wait. While native work
@@ -152,16 +159,6 @@ never waits for Transport's whole request queue. Routine observations stay in th
    An exhausted route requests its next command immediately; other live directions need not
    finish. An empty queue is not programme
    completion. Unchanged healthy observation needs no repeated report or inventory polling.
-
-| Event | Root's next action |
-| --- | --- |
-| Complete native return | Follow its prewritten route and log original evidence; message Portfolio only when a new command or planning decision is needed. |
-| Failed dispatch, unavailable recipient or yielded direction | Report the precise gap/vacancy now; dispatch unrelated commands. |
-| Reversible technical staging problem inside an assigned repair route | Keep the same CM on that authorized repair; report its concrete unresolved gap, not an invented scientific stop. |
-| Unknown Send or launch acceptance | Reconcile the same identity from authoritative state; hold only the uncertain external action. |
-| Object-tier science choice within an assigned DM task | Keep it with that DM under existing delegation; no additional Portfolio vote. |
-| Selected card/specification or ordinary source/engineering gap in an assigned direction | Resume the original DM to organize its CM and finish the delegated work; Root integrates and continues the authorized route. |
-| New direction/replacement, extra invocation outside DM authority, or unresolved cross-direction/scope conflict | Send the exact Portfolio action needed once; continue independent assigned work. |
 
 A later explicit continuation supersedes an earlier command's stop only within its stated scope.
 Successful staging after zero accepted invocations is not a scientific retry. This does not

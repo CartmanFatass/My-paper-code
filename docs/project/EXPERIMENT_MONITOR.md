@@ -39,11 +39,15 @@ On completion, failure, lost observation or a supplied bound/reminder, record th
 fact and evidence and notify the responsible DM/CM. Log the routine receipt in
 `docs/research/portfolio/root-log/YYYY-MM-DD.md`; notify Portfolio only under
 SIBLING_COMMUNICATION.md's actionable-message filter. Root follows the command's named
-collection/intake route; Portfolio handles any unlisted next task. Use `send_message` for a running native
-child and `followup_task` for an idle one. Reconcile uncertain delivery before retrying.
+collection/intake route with `followup_task` to the same native CM/DM whenever work is required,
+regardless of its last observed running/idle state. Direction-local continuation stays with its
+assigned DM/CM; only a replacement or conflict beyond that route needs Portfolio. Reconcile
+uncertain delivery before retrying, and distinguish recorded follow-on work from an accepted
+continuation. The current tracking row records that handoff and its next observed turn/return.
 Healthy unchanged state is silent: no per-poll messages, commits or sleep loops.
 
-Root writes meaningful adoption/terminal changes in the existing tracking table on main,
+Root updates the same current row for meaningful adoption/terminal/continuation changes in
+the existing tracking table on main, with detailed evidence linked from the daily log,
 using explicit-path commits and immediate push. Preserve terminal rows and their collection
 handoffs. No new registry, daemon, per-experiment task or monitoring worktree is required.
 Continue observing assigned experiments and Pro requests that need reconciliation, archive

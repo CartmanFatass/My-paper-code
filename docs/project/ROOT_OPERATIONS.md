@@ -46,7 +46,8 @@ retain Portfolio as parent. All app messages omit model/thinking overrides.
 Transport persists acceptance and handles each pending request independently. It sends one
 completion or terminal-blocker receipt to the exact parent, using the existing outbox and
 message key. Root matches request/command/recipient and forwards the original evidence with
-native `send_message` for a running recipient or `followup_task` for an idle one. A source UUID
+native `followup_task` for the required intake/continuation, following the intent-based tool
+rule in SIBLING_COMMUNICATION.md. A source UUID
 is not a native tool address. If the recipient is unavailable, Root uses the supplied recovery
 route or asks Portfolio for the concrete missing route, preserving the receipt. A received
 receipt cannot cause another Pro Send or duplicate intake. Routine receipt handling stays in
@@ -58,7 +59,11 @@ of at most 60 seconds. Root remains free for other directions. If Transport beco
 fails while a named request remains pending, Root consults its existing persisted state and
 sends an observation/recovery-only continuation to the same task; this is not a new Send.
 Use compact task snapshots on a meaningful event or pending-task recovery, not continuous
-app polling. Neither a task restart nor migration creates a new goal, scheduler or conversation.
+app polling. An app tool response alone does not show that this particular request entered
+Transport's queue or reached provider Send. At the next event boundary reconcile an otherwise
+unrepresented request against Transport's existing request state and current task; recover only
+that same pending route when idle, preserving unknown Send state. Neither a task restart nor
+migration creates a new goal, scheduler or conversation.
 
 For migration, Root first persists and releases its browser/request writer at a recoverable
 boundary; Transport verifies the named inventory before adopting it. Preserve accepted TASK,
@@ -142,6 +147,22 @@ handoffs use Author-rendered provider settings inside the request packet, not as
 overrides, and Transport's identity/acceptance procedure. Root records its own receipts locally rather than app-messaging
 itself. A native DM with Root as app parent receives its result through native collaboration.
 
+### Execute the supplied launch command
+
+Use the current CM's committed command/script and its exact node, source, cwd, output and
+handle fields. Do not rebuild paths from a similar previous run or retype nested shell payloads.
+Before submitting that command, compare its cwd with the actual staged checkout and its bound
+source using the existing staging facts. A disagreement goes to the same CM for a mechanical
+correction. When transporting shell text from Windows to Linux, preserve literal variables and
+LF bytes; syntax-check the actual staged wrapper without executing the scientific payload.
+Reuse that checked wrapper for the authorized submission. These are short transport checks,
+not an extra experiment, new launcher framework or Portfolio approval.
+
+Supervisor acceptance, admission and scientific execution are separate facts. If a command
+fails before admission, retain its exact failed identity and evidence; continue only the
+already-authorized correction after acceptance is reconciled. Never infer a scientific retry,
+changed source or extra allocation from a wrapper failure.
+
 ### Report events
 
 Use the single **Send/no-send conditions** section in SIBLING_COMMUNICATION.md.
@@ -174,7 +195,11 @@ model verification, Send state, archiving and receipt delivery. Root does not ad
 as a way to monitor Transport. Observation does not select tasks or refill the research queue.
 
 Keep pending experiments and Transport request references recoverable in their existing records.
-Root observes experiments; Transport observes Pro requests and supplies receipts. An unresolved blocker goes promptly to Portfolio under the help
+Root observes experiments; Transport observes Pro requests and supplies receipts. The current
+tracking table is a compact set of accepted handles, outstanding returns, responsible recipients
+and their actual dispatch states. Update a row on adoption, terminal observation or accepted
+continuation; link detailed daily-log/evidence records instead of appending competing current
+snapshots. Retired routing procedures belong outside this live table. An unresolved blocker goes promptly to Portfolio under the help
 rule; unchanged waits need no repeated message. Empty observation state does not mean the
 research goal is complete. Owner pause/end preserves accepted processes and pending request
 evidence with an explicit observation handover, without a replacement scheduler.
