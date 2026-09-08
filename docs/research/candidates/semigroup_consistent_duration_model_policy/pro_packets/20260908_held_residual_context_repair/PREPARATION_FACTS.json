@@ -1,0 +1,86 @@
+{
+  "recorded_utc": "2026-09-08T21:04:07.615423+00:00",
+  "authoring_checkout": "C:\\Projects\\HMASD-worktrees\\codex-scdmp",
+  "authoring_branch": "codex/scdmp",
+  "starting_sha": "7ba73a1be84be571f436d0499f3dbd5111802678",
+  "starting_changes": [],
+  "p58_assignment_sha": "661f38801ba3aa10282f199bfada167a591f03c4",
+  "assignment_source_path": "docs/research/portfolio/handoffs/2026-09-08-p58-scdmp-retired-context-recovery.md",
+  "assignment_sha256": "376c192890fd07e3efd05d93337ac2830520fa4fad17b2e2dba43cf7f1aaf60b",
+  "original_scientific_sha": "21a801279bd449c09907f5cf040efa693ae345a3",
+  "fixed_reading_bundle_sha": "7ba73a1be84be571f436d0499f3dbd5111802678",
+  "original_scientific_files": [
+    {
+      "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_NATIVE_RETURN_COMPOSITION_P56_SOURCE_INTAKE_20260908.md",
+      "original_and_bundle_sha256": "53b1d27c7e0ffd2d5c3af8091fa8beca2628e4c224d51a3c77ecfc8b55f6f955"
+    },
+    {
+      "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_NATIVE_RETURN_COMPOSITION_P56_SOURCE_FACTS_20260908.json",
+      "original_and_bundle_sha256": "34934ebd16da156f7572821012c413bb36330fb72fe5aa024a1851ac96b6efae"
+    },
+    {
+      "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_D6_A02_POPULATION_CONVERGENCE_INTAKE_20260904.md",
+      "original_and_bundle_sha256": "f34fae244874fb2918deb3d13ef32c7daf5703f6802d6d317ca999444a8d13b0"
+    },
+    {
+      "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/DIRECTION.md",
+      "original_and_bundle_sha256": "76d9970747469d389c8c73c78412225980f50ca04dab6842d9d92c4074d15d2f"
+    },
+    {
+      "path": "experiments/candidates/ucope/uav_motion_prefix_b01/learner.py",
+      "original_and_bundle_sha256": "a838e1d1d1ad06ca6aeb658512c9b2035b2e4df861ee0e245eb74a0874bbf06d"
+    },
+    {
+      "path": "experiments/candidates/ucope/uav_motion_prefix_b01/policy.py",
+      "original_and_bundle_sha256": "888638cb762e6449bc3f9d200e7f483cf52a21c342ea485d96c8fc580c6615f0"
+    },
+    {
+      "path": "experiments/candidates/vsp_c1/native_hold_value_b01/critic.py",
+      "original_and_bundle_sha256": "2a275ad7e18b41a09cb0c334c6a61fa8f466e129df4cea152a829d7487f3fc93"
+    },
+    {
+      "path": "experiments/candidates/vsp_c1/native_hold_value_b01/study.py",
+      "original_and_bundle_sha256": "55bddcc382f913bc2a45a5a402cbe7f1fced4b457ad58828a876811664c7f21d"
+    },
+    {
+      "path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B01_INTAKE_20260908.md",
+      "original_and_bundle_sha256": "227074ea8e4b13d5f1618cee16ee562356a03316ccebd2ee968f2c2678e7658d"
+    },
+    {
+      "path": "docs/research/candidates/ucope/UCOPE_UAV_MOTION_PREFIX_B02_P47_7002_AND_JOINT_TECHNICAL_ACCEPTANCE_20260908.md",
+      "original_and_bundle_sha256": "4b6fd4aacd062247dbbfa1b135c5000693af6033ff34f2178decb3e85755c5cc"
+    },
+    {
+      "path": "docs/research/portfolio/handoffs/2026-09-08-p56-scdmp-native-return-composition-question.md",
+      "original_and_bundle_sha256": "0fa845578544594be1912683c6ff7df7ca93d357ab934d3d1b7447642a65ba85"
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "original_and_bundle_sha256": "23bf6599178a66abd5b76af4d9427c8d125e227e9904b5800c8f048d7e98b461"
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "original_and_bundle_sha256": "db182762f5da60ac850013f4350c70da13a2de41652eb08b6bae2572d7154f8c"
+    }
+  ],
+  "original_scientific_files_changed": 0,
+  "added_prior_material_paths": [
+    "docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260908_held_residual_convergence/archive/RESPONSE.md",
+    "docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260908_held_residual_convergence/CONVERGENCE_INTAKE.md",
+    "docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260908_held_residual_convergence/archive/RECONCILIATION_FACTS.json"
+  ],
+  "prior_full_response_commit": "a38ac96da86cdb758259c715520bb041b211bbe5",
+  "prior_full_response_sha256": "cc6cc8a0fdd6e4c2e93e731d17d896bcfd1d1aff105bd8112843682b44a64ec3",
+  "prior_integrated_intake_commit": "b3bcc3b4aaef15903512f6739958bb0038a2b985",
+  "new_provider_send_during_preparation": 0,
+  "new_scientific_invocations": 0,
+  "exposure_line": "P58_CONTEXT_REPAIR_PREPARATION: models=0; envs=0; native_steps=0; synthetic_steps=0; train_episodes=0; eval_episodes=0; optimizer_steps=0; replay=0; profiling=0; new_result_invocations=0; parameter_displacement=not_applicable(no learner)",
+  "engineering_scope_section4": "none",
+  "engineering_scope_section5_breach": false,
+  "existing_retired_context_preserved": true,
+  "selected_b_applied": false,
+  "recast_applied": false,
+  "remote_branch_observed": "7ba73a1be84be571f436d0499f3dbd5111802678",
+  "existing_issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/12",
+  "issue_snapshot_is_scientific_input": false
+}
