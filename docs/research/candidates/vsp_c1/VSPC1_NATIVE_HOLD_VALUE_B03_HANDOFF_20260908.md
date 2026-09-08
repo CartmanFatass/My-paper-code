@@ -71,3 +71,14 @@ The DM accepted the source boundary and exact single8201 command in
 Root's current action is exact-source checkout staging, then that staged command's
 fresh admission and sole submission. No native process has been accepted at this
 binding. Retain the same CM collection and DM intake route; do not repeat engineering.
+
+## Pre-admission correction ready
+
+The original supervisor shell failed at its missing cwd before admission or
+scientific execution. CM correction `698b8aeff26f2b9ae21d4cb8d1bf8a255b161d38`
+now stages that exact cwd clean at the unchanged accepted source. Use the ready
+submission in [card §9](VSPC1_NATIVE_HOLD_VALUE_B03_SCIENCE_CARD_20260908.md#9-pre-admission-failure-and-corrected-supervisor-identity)
+and [DM intake](VSPC1_NATIVE_HOLD_VALUE_B03_INTAKE_20260908.md): the new supervisor
+name ends `_cwd1`, while the original script/source/master/output/caps are intact.
+This preserves the failed task metadata and executes the still-unrun scientific
+pair only once after fresh admission. No source staging action remains pending.
