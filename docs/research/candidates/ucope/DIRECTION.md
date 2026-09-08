@@ -122,15 +122,20 @@ inputs into demonstrated information value. Geometry, motion persistence,
 memory, action-sample exposure, optimization and partner co-adaptation remain
 unseparated alternatives. One of three new P24 predictions matches.
 
-The current allocation is complete, with actual real UAV learning/native
-evaluation and the P21 entry chain preserved. The next useful decision is
-to reassess this single-opening prefix relative to ordinary feedback before
-expanding it: identify one specifically justified bounded B amendment, or
-return the exact family-scope question to Convergence. No such amendment or
-new invocation is selected here. A complete causal diagnosis, exact upper
-or separate competence-only prerequisite is unnecessary. This updates
-direction-local science, not Portfolio investment/lifecycle or the prior
-open-family decision; the retained-policy numerical-locus family remains stopped.
+The P24 allocation is complete, with actual real UAV learning/native
+evaluation and the P21 entry chain preserved. The subsequent zero-exposure
+P29 selection names the next discriminator: per-agent PPO clipping in both
+the unchanged opening-prefix treatment and ordinary-feedback comparator,
+followed prospectively by two fresh training pairs and complete sampled
+native return. This is a common learning amendment, not evidence that the
+old joint ratio caused the variation. See [P29 selection](UCOPE_UAV_MOTION_PREFIX_B01_P24_INTAKE_20260907.md#8-p29-prospective-question-selection--2026-09-08)
+and [prospective card §12](UCOPE_UAV_MOTION_PREFIX_B01_SCIENCE_CARD_20260907.md#12-prospective-p29-learning-amendment--2026-09-08).
+No amended learner, new result or invocation is yet supplied. Ordinary
+feedback could gain equally or more; no complete causal diagnosis, exact
+upper or competence-only prerequisite is needed to test that bounded B.
+This updates the direction's next discriminator, not its accepted empirical
+claim, Portfolio investment/lifecycle or the prior open-family decision;
+the retained-policy numerical-locus family remains stopped.
 
 ## Prior shared-data return-model observation — 2026-09-07 B05
 

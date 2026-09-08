@@ -1,0 +1,75 @@
+{
+  "id": "20260908-frrie-001",
+  "created": "2026-09-08T00:15:54-07:00",
+  "direction": "finite_resource_relational_inductive_efficiency",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "FRRIE A06：120秒单次致命故障路径观察",
+  "context": "A06记录原R09在固定system312环境中的致命故障Python调用路径；systems / information flow，不测试部分可观测性效应。保留原root3及完整顺序，复用A05输入，只增加启动时致命栈。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "按P31继续",
+      "consequence": "完成静态验收并固定命令后执行至多一次，总计120秒，随后按预定规则归档。"
+    },
+    {
+      "key": "reject",
+      "label": "停止本观察",
+      "consequence": "保留旧证据，在安全边界停止并返回下一任务需求。"
+    },
+    {
+      "key": "revise",
+      "label": "修改尚未执行的观察",
+      "consequence": "应用明确修改并重新固定受影响命令，不擅自扩大预算或修改原源码。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "具名保留日志没有调用路径；改变观察通道可以决定下一项具体检查，且不需要新fixture或源码修复。",
+  "evidence": [
+    "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R09_FATAL_CALLPATH_A06_SCIENCE_CARD_20260908.md",
+    "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R09_FIRST_EXCEPTION_A05_SCIENTIFIC_INTAKE_20260907.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-08.md",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "按P31准备并执行至多一次A06致命故障调用路径观察，是否有需要异步覆盖的地方？",
+    "changes_if_approved": [
+      {
+        "target": "FRRIE A06独立A/RECON卡及命令",
+        "from": "A05只有段错误终止事实，缺少Python调用路径",
+        "to": "复用已验收的异常取证输入，只增加启动时致命栈输出；保持原源码、环境、root3和完整训练顺序，验收后运行至多一次，总计120秒"
+      }
+    ],
+    "if_refused": "在下一个安全边界应用回复，保留A05/P22及全部旧证据，返回具体修改需求；不擅自修复、切换环境或重试。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R09_FIRST_EXCEPTION_A05_SCIENTIFIC_INTAKE_20260907.md",
+        "quote": "The next observation should locate the active Python call path at a fatal failure, including whether it lies in original execution, traceback handling or capture.",
+        "why": "现有具名日志与清单已读，无法提供路径；改观察通道能支持下一项具体检查。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R09_FIRST_EXCEPTION_A05_SCIENTIFIC_INTAKE_20260907.md",
+        "quote": "It is not a test of this pinned runtime and does not promise that this failure will leave a readable trace.",
+        "why": "开启致命栈不保证故障复现或成功保留路径，栈也不能证明谁写坏了状态。"
+      }
+    ],
+    "uncertainty": [
+      "120秒内实际完成的训练工作仍取决于终止点，缺失输出不等于零学习。",
+      "故障可能落在原程序、调试器或取证路径，也可能变为普通异常、正常退出或没有可读栈。"
+    ],
+    "cost": {
+      "compute": "至多1条链，总计120秒（TERM115秒加最多5秒宽限），包含准入、导入、原生构建、原初始化/评估/训练及报告终止；原2臂×128更新只是上限。只做静态命令检查，零新fixture、smoke或成本试跑。",
+      "owner_time": "异步审阅，P31已有明确分配。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing；精确命令的DM/CM验收尚待完成。"
+    },
+    "verdict_text": "Owner-delegated decision (unattended,2026-09-03 instruction): (a).",
+    "source": "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R09_FATAL_CALLPATH_A06_SCIENCE_CARD_20260908.md"
+  },
+  "starred": false
+}

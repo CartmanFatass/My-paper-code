@@ -307,3 +307,84 @@ single-opening prefix before expansion and selects no new scientific
 invocation, amendment, family disposition, promotion or Portfolio change.
 P21's actual UAV entry in §9 remains established; two additional training
 pairs do not create another direction entry. B objects remain unconsumed.
+## 12. Prospective P29 learning amendment — 2026-09-08
+
+**Selected question for preparation, not a frozen successor card or execution
+allocation:** with per-agent PPO clipping in both learned arms, does the same
+optional opening commitment improve complete native return over ordinary
+same-information feedback? Binding MARL structure remains **(d) partial
+observability / other-agent non-stationarity**, with the amendment acting on
+the common team-advantage credit path of five co-adapting actors. The original
+B01/P21/P24 algorithms, predictions and result rules above remain unchanged.
+[P29](../../portfolio/handoffs/2026-09-07-p29-ucope-opening-prefix-reassessment.md)
+authorizes only this zero-exposure selection; the rationale and delegated
+decision are in [P24 intake §8](UCOPE_UAV_MOTION_PREFIX_B01_P24_INTAKE_20260907.md#8-p29-prospective-question-selection--2026-09-08).
+
+**One common change.** T retains its single t0 velocity/duration {1,4}
+decision and exact hold/feedback behavior; G retains primitive-step feedback.
+Replace the team product ratio's clipping with a separate ratio for each
+agent's owned action. For agent i, let ell_i be the summed three-coordinate
+tanh-Gaussian log probability, plus its duration log probability only at t0
+in T. Let m_i mark a real velocity decision and r_i=exp(ell_i,new−ell_i,old).
+The actor loss becomes
+`-mean_primitive_rows(sum_i m_i * min(r_i*A, clip(r_i,.8,1.2)*A))`,
+using the same actual team advantage A for every eligible agent. Duration
+and velocity stay grouped within their owner; no coordinate clipping,
+separate duration weighting or individual reward is introduced. Held agents
+have no fresh likelihood contribution. Sum over agents before the existing
+primitive-row mean: at the collected policy this preserves the old
+unclipped policy-gradient scale, without claiming identical gradients after
+the policy changes. Entropy remains summed over eligible agents then averaged
+over primitive rows. Value loss, recurrence, critic information, reward-to-go,
+Adam, coefficients and gradient clipping remain as in §§2–3.
+
+The proposed comparison is **amended T versus amended G**, with the same H
+reference. It does not compare the amended learner causally with historical
+B01. Retain the unchanged host, free local observations, action space,
+gamma=1, final-checkpoint sampling and RNG domain separation. The common
+change can help G as much as T; it may also permit larger joint updates and
+harm either fit. No existing failure is reclassified as a clipping defect.
+
+**Smallest proposed learning design:** two fresh matched T/G training pairs,
+four real fits, each 131,072 team steps / 1,024 Adam calls, and 32 final sampled
+episodes for each T/G/H per pair. Two pairs are chosen to expose another
+possible sign reversal, not to estimate stable training-population effects.
+No seed IDs, amended source SHA or invocation are assigned. All new outcomes
+would be reported separately from the four historical endpoints. The proposed
+primary is the equal-weight mean of the two new pair means of complete J_T−J_G;
+retain pair endpoints, their sample SD and conditional episode-level SEs as in
+§4. MEI stays absolute **0.01**, for the same native-scale reason in §4.
+There is still no tuned same-information headroom record; H is not an upper
+reference or a prerequisite to learning.
+
+Above +0.01 would motivate a bounded continuation of this amended package,
+with G−H and both signs visible. Inside ±0.01 would motivate reassessing this
+specific learning/prefix combination before spending more on unchanged seeds;
+it would not establish equivalence. Below −0.01 would favor dropping this
+amendment from the next object decision while retaining the native loss.
+None alone establishes pure information value, clipping causality, stable
+superiority, transfer or family closure. Proposed reading branches remain
+`UP: Delta>.01`, `WITHIN: -.01<=Delta<=.01`, `DOWN: Delta<-.01`.
+Prospective predictions: new mean WITHIN (.60); both new G−H means positive
+(.60). Owner prediction: **not taken (unattended)**. These add no observation.
+
+[Computed preparation facts](UCOPE_UAV_MOTION_PREFIX_P29_PREPARATION_FACTS_20260908.json)
+give 524,288 training +49,152 evaluation = **573,440 team steps**, 4,096 Adam
+calls and 192 final evaluation episodes. Dense ratio/clip work rises from
+524,288 team terms to 2,621,440 agent terms per fit; this is not a fivefold
+wall-time forecast. No new controller forward calls or nested search are
+added. The per-arm planning law is the same-loop historical reference plus
+2,097,152 extra pointwise terms and the added log-probability storage/reduction
+work; its incremental unit time is unmeasured. P21 references are 148.27 s for
+T and 141.37 s for G including H/publication; P24's complete sum was 564.93 s.
+Those are historical context, not a timing guarantee or an extra cost pilot.
+
+Proposed complete caps remain 1,800 s per arm /3,600 s per pair /7,200 s summed;
+CPU FP32, one scientific process/thread and the existing remote-first route
+remain applicable. If later allocated, finish both pairs irrespective of the
+first valid sign; stop at their counts/caps, nonfinite learning or a concrete
+reward/information/training/primary-integrity failure and preserve all facts.
+No extra seed, best-checkpoint choice, diagnostic series or automatic cap
+increase is proposed. Engineering scope §4: **none**; existing §5 line/check
+budgets remain. **P29 itself uses zero training, evaluation, target-runtime
+probe, source test, code change, Pro Send or CM dispatch.**

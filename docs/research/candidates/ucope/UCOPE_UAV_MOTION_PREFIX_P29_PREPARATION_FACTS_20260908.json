@@ -1,0 +1,88 @@
+{
+  "prepared_at": "2026-09-08T00:09:07-07:00",
+  "assignment": "P29 zero-exposure scientific question selection",
+  "bound_source_sha": "9c541a8047b8c33e90f09aa65e326180343a23a0",
+  "status": "prospective only; seeds, amended code and launch unbound",
+  "current_exposure": {
+    "new_training_steps": 0,
+    "new_optimizer_steps": 0,
+    "new_evaluation_episodes": 0,
+    "target_runtime_probes": 0,
+    "source_tests": 0
+  },
+  "historical_endpoints_unpooled": [
+    {
+      "allocation": "P21",
+      "master": 6801,
+      "T_minus_G": 0.006714032239188856,
+      "G_minus_H": 0.04243773060842434
+    },
+    {
+      "allocation": "P21",
+      "master": 6802,
+      "T_minus_G": 0.023720809005454126,
+      "G_minus_H": 0.009301378962311667
+    },
+    {
+      "allocation": "P24",
+      "master": 6901,
+      "T_minus_G": 0.043351866492163174,
+      "G_minus_H": -0.02820381644235824
+    },
+    {
+      "allocation": "P24",
+      "master": 6902,
+      "T_minus_G": -0.050365422532689566,
+      "G_minus_H": 0.017100937953799134
+    }
+  ],
+  "proposed": {
+    "training_pairs": 2,
+    "learner_fits": 4,
+    "agents_per_team": 5,
+    "train_team_steps_per_fit": 131072,
+    "train_episodes_per_fit": 512,
+    "optimizer_steps_per_fit": 1024,
+    "final_evaluation_episodes_per_arm_pair": 32,
+    "train_team_steps": 524288,
+    "evaluation_team_steps": 49152,
+    "total_team_steps": 573440,
+    "total_optimizer_steps": 4096,
+    "total_train_episodes": 2048,
+    "total_final_evaluation_episodes": 192,
+    "total_episodes": 2240,
+    "old_team_ratio_terms_per_fit": 524288,
+    "proposed_agent_ratio_terms_per_fit": 2621440,
+    "extra_ratio_terms_per_fit": 2097152,
+    "old_team_ratio_terms_total": 2097152,
+    "proposed_agent_ratio_terms_total": 10485760,
+    "extra_ratio_terms_total": 8388608,
+    "ratio_work_basis": "dense pointwise PPO expressions before action masks; not independent samples or a fivefold wall-time prediction",
+    "old_collected_logp_bytes_per_512_step_rollout": 2048,
+    "new_collected_logp_bytes_per_512_step_rollout": 10240,
+    "extra_collected_logp_bytes_per_rollout": 8192,
+    "new_controller_forward_calls_relative_to_same_loop": 0,
+    "nested_search_candidates": 0,
+    "complete_caps_seconds": {
+      "per_arm": 1800,
+      "per_pair": 3600,
+      "sum_two_pairs": 7200
+    }
+  },
+  "cost_projection": {
+    "historical_P21_reference_T_seconds": 148.26706686698833,
+    "historical_P21_reference_G_including_H_publication_seconds": 141.37189204798779,
+    "historical_P24_sum_external_wall_seconds": 564.93,
+    "per_arm_law": "same-loop historical reference + 2097152 * incremental_seconds_per_extra_ratio_term + extra logp storage/mask reduction time",
+    "incremental_unit_time": null,
+    "qualification": "network/environment calls and rollout/update counts unchanged; added elementwise work is unmeasured; reference is not a timing guarantee; no pilot or validation invocation selected"
+  },
+  "illustrative_algebra_not_observed": {
+    "positive_advantage": 1,
+    "each_agent_ratio": 1.05,
+    "agents": 5,
+    "team_ratio": 1.2762815625000004,
+    "team_upper_clip": 1.2
+  },
+  "generation": "local standard-library arithmetic and reading accepted aggregate/cost records; no scientific source import or execution"
+}
