@@ -29,11 +29,12 @@ def runner_module():
 
 @pytest.mark.parametrize("seed,pair,fixture", [(6901, "p24", False), (6902, "p24", False),
                                                (6801, "p21", False), (6802, "p21", False),
-                                               (9001, "p21", True)])
+                                               (9001, "p21", True), (7001, "b02", False),
+                                               (7002, "b02", False), (9001, "b02", True)])
 def test_cli_actual_config_and_rng_propagation(seed, pair, fixture, scratch, monkeypatch):
     # Exercise the actual CLI/Config/run_pair stream expressions; substitute the
     # workload at its existing import boundary, without constructing any model.
-    calls = {"initialization": [], "generator": [], "reset": [], "episodes": [], "saved": []}
+    calls = {"initialization": [], "generator": [], "reset": [], "episodes": [], "saved": [], "credit": [], "update_credit": []}
     torch = ModuleType("torch")
     torch.set_num_threads = torch.set_num_interop_threads = lambda n: None
     torch.save = lambda payload, path: calls["saved"].append(payload["configuration"])
@@ -60,10 +61,11 @@ def test_cli_actual_config_and_rng_propagation(seed, pair, fixture, scratch, mon
     monkeypatch.setitem(sys.modules, prefix + "policy", policy)
     learner = ModuleType(prefix + "learner")
     learner.optimizer_for = lambda *args: None
-    learner.update = lambda *args: []
+    learner.update = lambda *args, **kwargs: calls["update_credit"].append(kwargs) or []
     def collect(env, actor, critic, horizon, reset, velocity, duration, metadata,
                 check, counts, emit, diagnostic, limits, **kwargs):
         calls["episodes"].append((reset, velocity, duration, metadata.copy()))
+        calls["credit"].append(kwargs.get("ratio_grouping", "joint"))
         if metadata["arm"] == "T":
             counts["duration_decisions"] += 5
         emit(dict(metadata, J=0.))
@@ -72,7 +74,7 @@ def test_cli_actual_config_and_rng_propagation(seed, pair, fixture, scratch, mon
     monkeypatch.setitem(sys.modules, prefix + "learner", learner)
     runner = runner_module()
     argv = ["runner", "--seed", str(seed), "--out", str(scratch)]
-    if pair == "p24":
+    if pair != "p21":
         argv += ["--pair", pair]
     if fixture:
         argv += ["--engineering-fixture"]
@@ -84,7 +86,14 @@ def test_cli_actual_config_and_rng_propagation(seed, pair, fixture, scratch, mon
     assert summary["configuration"]["horizon"] == (8 if fixture else 256)
     assert summary["pair"] == ("ENGINEERING_FIXTURE" if fixture else pair)
     assert summary["declared_masters"] == ([seed] if fixture else list(study.declared_masters(pair)))
-    assert summary["card_section"] == ("CODE_SPEC §8" if fixture else 10 if pair == "p24" else 8)
+    assert summary["card_section"] == ("CODE_SPEC §8" if fixture else 5 if pair == "b02" else 10 if pair == "p24" else 8)
+    grouping = "agent_compound" if pair == "b02" else "joint"
+    assert set(calls["credit"]) == {grouping}
+    assert all(c.get("ratio_grouping", "joint") == grouping for c in calls["update_credit"])
+    assert summary["configuration"]["ratio_grouping"] == grouping
+    if pair == "b02":
+        assert summary["object"] == study.B02_OBJECT and summary["card"] == study.B02_CARD
+        assert summary["ratio_grouping"] == grouping
     assert calls["initialization"] == [seed]  # templates retains b+11 internally, unchanged.
     b = 100000 * seed
     assert summary["seeds"]["initialization"] == b + 11
@@ -108,16 +117,18 @@ def summary(seed, differences, pair=None):
               "primary": {"complete": True, "T_minus_G": study.difference_stats(differences)}}
     if pair:
         result.update(pair=pair, declared_masters=list(study.declared_masters(pair)),
-                      card_section=10 if pair == "p24" else 8)
+                      card_section=5 if pair == "b02" else 10 if pair == "p24" else 8)
+    if pair == "b02":
+        result.update(object=study.B02_OBJECT, card=study.B02_CARD, ratio_grouping="agent_compound")
     return result
 
 
-@pytest.mark.parametrize("pair,seeds", [("p21", (6801, 6802)), ("p24", (6901, 6902))])
+@pytest.mark.parametrize("pair,seeds", [("p21", (6801, 6802)), ("p24", (6901, 6902)), ("b02", (7001, 7002))])
 def test_declared_pair_arithmetic(pair, seeds):
     inputs = [summary(seeds[0], [1, 3], pair), summary(seeds[1], [4, 6], pair)]
     result = study.aggregate(inputs, pair)
     assert result["pair"] == pair and result["declared_masters"] == list(seeds)
-    assert result["card"] == study.CARD and result["card_section"] == (10 if pair == "p24" else 8)
+    assert result["card"] == (study.B02_CARD if pair == "b02" else study.CARD) and result["card_section"] == (5 if pair == "b02" else 10 if pair == "p24" else 8)
     assert result["primary"]["mean"] == 3.5
     assert result["primary"]["training_endpoint_sample_sd"] == pytest.approx(math.sqrt(4.5))
     assert result["primary"]["conditional_se"] == pytest.approx(math.sqrt(.5))
@@ -170,3 +181,28 @@ def test_cli_rejects_mismatched_seed_before_workload(args, scratch, monkeypatch)
     monkeypatch.setattr(sys, "argv", ["runner", *args, "--out", str(scratch)])
     with pytest.raises(SystemExit) as error: runner.main()
     assert error.value.code == 2
+
+
+@pytest.mark.parametrize("fault", ["object", "ratio_grouping", "pair", "card", "card_section",
+                                    "declared_masters", "seed", "mode", "missing", "duplicate"])
+def test_b02_rejects_mixed_objectives(fault):
+    inputs = [summary(7001, [1, 3], "b02"), summary(7002, [4, 6], "b02")]
+    if fault == "missing":
+        del inputs[1]["ratio_grouping"]
+    elif fault == "duplicate":
+        inputs[1] = inputs[0]
+    else:
+        inputs[1][fault] = "wrong"
+    with pytest.raises(ValueError):
+        study.aggregate(inputs, "b02")
+
+
+def test_b02_negative_partial_and_fixture_rejection():
+    inputs = [summary(7001, [-1, -3], "b02"), summary(7002, [-4, -6], "b02")]
+    assert study.aggregate(inputs, "b02")["primary"]["reading"] == "DOWN"
+    inputs[0]["primary"]["complete"] = False
+    assert study.aggregate(inputs, "b02")["primary"]["reading"] == "PARTIAL"
+    for item in inputs:
+        item["mode"] = "ENGINEERING_FIXTURE"
+    with pytest.raises(ValueError):
+        study.aggregate(inputs, "b02")

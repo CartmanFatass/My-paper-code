@@ -22,11 +22,11 @@ def main():
     mode.add_argument("--engineering-fixture", action="store_true")
     mode.add_argument("--aggregate", nargs=2, metavar="SUMMARY")
     parser.add_argument("--seed", type=int)
-    parser.add_argument("--pair", choices=("p21", "p24"), default="p21")
+    parser.add_argument("--pair", choices=("p21", "p24", "b02"), default="p21")
     parser.add_argument("--out", type=Path, required=True)
     args = parser.parse_args()
-    if args.engineering_fixture and args.pair != "p21":
-        parser.error("engineering fixture is the legacy 9001 route")
+    if args.engineering_fixture and args.pair == "p24":
+        parser.error("engineering fixture requires p21 or b02 with seed 9001")
     if args.aggregate:
         if args.seed is not None:
             parser.error("aggregation does not take a seed")
@@ -40,7 +40,8 @@ def main():
         import torch
         torch.set_num_threads(1)
         torch.set_num_interop_threads(1)
-        config = Config.engineering(args.seed) if args.engineering_fixture else Config(args.seed, pair=args.pair)
+        config = (Config.engineering(args.seed, args.pair) if args.engineering_fixture
+                  else Config(args.seed, pair=args.pair))
         summary = run_pair(config, args.out, WHOLE_START)
     print(json.dumps({"mode": summary["mode"], "status": summary.get("status"),
                       "primary": summary["primary"], "counts": summary.get("counts")}, allow_nan=False))
