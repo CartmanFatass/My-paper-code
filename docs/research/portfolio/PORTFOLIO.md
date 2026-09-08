@@ -1,8 +1,10 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-07 (P23 FRRIE targeted failure assessment)
+Updated at: 2026-09-07 (P24 UCOPE fresh-pair continuation and return reconciliation)
 
-Current incremental command: [P23 FRRIE training-input failure assessment](handoffs/2026-09-07-p23-frrie-training-input-assessment.md). P22 ended R09_INVALID_INCOMPLETE after61.54s with a dataclasses TypeError; setup passed but no valid comparison was published. P23 examines the retained failure/source for a concrete correction or bounded missing observation, with zero runtime invocation.
+Current incremental command: [P24 UCOPE two fresh UAV pairs](handoffs/2026-09-07-p24-ucope-fresh-uav-pairs.md). UCOPE has one formally entered B UAV direction under its decision/card/accepted invocation; two additional fresh training pairs are allocated after prospective seed/binding publication. FRRIE P23 continues; CBSC P20 actual dispatch is being reconciled, while latest FSD/VSP02 return references are requested. No pending intention is counted as advancing.
+
+Retained incremental command: [P23 FRRIE training-input failure assessment](handoffs/2026-09-07-p23-frrie-training-input-assessment.md). P22 ended R09_INVALID_INCOMPLETE after61.54s with a dataclasses TypeError; setup passed but no valid comparison was published. P23 examines the retained failure/source for a concrete correction or bounded missing observation, with zero runtime invocation.
 
 Previous incremental command: [P22 FRRIE exact offline R09 chain](handoffs/2026-09-07-p22-frrie-offline-r09-execution.md). P21 supplied the complete original-source command with retained wheels; one setup-through-pair invocation is allocated under its original per-arm and complete caps. Actual launch remains a Root execution fact.
 
