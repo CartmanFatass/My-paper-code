@@ -83,5 +83,8 @@
       "bytes": 1006,
       "sha256": "b3afc9d8dc271122ca5844c644ec96c0459fd30f91611cdc21c8d32f6c02cea7"
     }
-  }
+  },
+  "retained_output_directories": [
+    "learner"
+  ]
 }

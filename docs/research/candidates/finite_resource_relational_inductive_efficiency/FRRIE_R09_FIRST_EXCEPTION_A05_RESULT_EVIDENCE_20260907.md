@@ -49,7 +49,7 @@ These checks do not establish runtime scientific-state equivalence.
 | Adjacent admission assessment | 2026-09-08T06:24:06.215770Z; passed |
 | Available physical/effective memory | 15650717696 bytes, above 4294967296-byte floor |
 | Cgroup headroom / aggregate CPU | Not recorded |
-| Output-root file inventory | Only `learner_admission.json`, 504 bytes |
+| Output-root file inventory | Only file: `learner_admission.json`, 504 bytes; empty `learner/` directory exists |
 | Capture summary / learner output | Absent |
 | Completed updates, episodes, agent slots | Unknown from retained A05 evidence |
 
@@ -98,7 +98,10 @@ Raw local copies are retained in the direction checkout at
 `supervisor/`, `output/`, `remote_readback.txt`, and `accepted_command.sh`.
 Remote originals remain in place. Collection inspected the actual terminal log,
 exit/status, time receipt, complete output inventory, staged hashes and source state;
-it reconstructed and checked the exact accepted command. These checks establish
+it reconstructed and checked the exact accepted command. The final recursive-file
+assertion and all ten raw length/hash checks pass. An initial directory-inclusive
+assertion failed because the empty `learner/` directory exists; file absence was
+confirmed and that directory is explicitly recorded in the JSON. These checks establish
 the reported technical boundary, not scientific success. Only this E0 and its JSON
 are authored; the card, source, intake and prior evidence remain with their owners.
 Root integrates this evidence and resumes the existing DM for card §3 intake.
