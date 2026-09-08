@@ -230,3 +230,39 @@ fresh node memory admission, submission and observation. CM collects;
 DM intakes every outcome. No admission or scientific invocation has been
 executed by this binding. No second pair, retry, extra/H-completion evaluation
 or multi-pair aggregate follows.
+
+## 8. Observed P61 completion — 2026-09-08
+
+The prospective definition in §§1–6 and accepted source in §7 are unchanged.
+One complete matched training pair **7201** gives native T−G
+**−0.003948225944122139**, conditional evaluation SE **0.010191826216031805**:
+**WITHIN** under the fixed `-.01<=Delta<=.01` rule. T/G/H means are
+0.18320920071658314 / 0.18715742666070528 / 0.16333870700710337.
+G−H is **+0.0238187196536019**, T−H **+0.019870493709479763**. All 96 final
+returns and all episode signs remain; the primary has 18 positive and 14
+negative differences. This is no demonstrated point gain at the selected
+scale/budget, without stable equivalence, population harm or conditioning
+causality. Independent training n=1 supplies no training-population SD.
+
+Both prospective events occurred: WITHIN (.50) and positive G−H (.60), **2/2**;
+owner prediction **not taken (unattended)**. Real exposure is 286720 team
+steps, 2048 Adam calls, 512 rollouts, 1120 complete episodes/explicit resets,
+2 constructor resets and 96 final evaluations. The conditional head moved
+and made 73 four-step choices among 160 final openings; this shows an exposed
+learning/action path, without establishing useful command selection.
+
+The complete run finished in **277.51s**, peak process RSS **554964 KiB**;
+both learned arms and publication/exit met the 1800s/arm and 3600s/pair caps.
+Actual-node physical/effective memory admission passed. Aggregate CPU and
+system-wide peak memory remain `resources_unmeasured`. No new scope breach,
+scientific retry, additional evaluation or historical reclassification follows.
+
+See [E0 result evidence](UCOPE_UAV_MOTION_PREFIX_B04_P61_RESULT_EVIDENCE_20260908.md),
+[DM all-outcome intake](UCOPE_UAV_MOTION_PREFIX_B04_P61_INTAKE_20260908.md),
+[computed summary](UCOPE_UAV_MOTION_PREFIX_B04_P61_RESULT_SUMMARY_20260908.json)
+and [technical collection](UCOPE_UAV_MOTION_PREFIX_B04_7201_TECHNICAL_ACCEPTANCE_20260908.md).
+The delegated object choice finishes this allocation and prefers no unchanged
+continuation. The existing direction-tier CONTINUE has been executed through
+its selected B04 result; no family closure/recast or Portfolio disposition is
+formed here. P61 is exhausted with no successor selected. The command in the
+Root handoff is historical and must not be executed again.
