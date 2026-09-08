@@ -1,8 +1,10 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-08 (P44 FSD post-B02 question assessment)
+Updated at: 2026-09-08 (P45 FSD scoped Convergence)
 
-Current incremental command: [P44 FSD post-B02 question assessment](handoffs/2026-09-08-p44-fsd-post-b02-question.md). Two observed pairs support a recurring package advantage, with public G still ahead. Same DM identifies one decision-relevant bounded next preparation or proper-node question; no third pair, new card, code or Pro Send is allocated. Completed P43 contributes zero advancing chains; P44 counts only upon actual native acceptance, with other live chains retained by Root's inventory.
+Current incremental command: [P45 FSD post-B02 Convergence](handoffs/2026-09-08-p45-fsd-post-b02-convergence.md). P44 assessmentad13bae30 recommends ending the limited hybrid extension while retaining the ordinary-family pause; one fresh fair-D0/G comparison is the explicit alternative. Send this exact Direction question through the existing DM/Root/Transport route and intake its complete response. No new scientific invocation, unposed UAV family or Portfolio disposition is allocated.
+
+Completed incremental command: [P44 FSD post-B02 question assessment](handoffs/2026-09-08-p44-fsd-post-b02-question.md). The two-pair package question is answered; the inspected UAV movement interface differs from the corridor applied lease mask. The scoped next choice belongs to Convergence; its recommended disposition remains unapplied pending that decision.
 
 Completed incremental command: [P43 FSD B02 independent-pair panel](handoffs/2026-09-08-p43-fsd-b02-panel-execution.md). Intakea8e6d5b31 accepts B02 H−C+.520390625, conditionalSE.007576081 and665.01s summed wall; B01 remains separate. Public G leads by.010846354 full. No stable-superiority, learned-renewal or UAV-entry claim follows; no third pair was selected.
 
