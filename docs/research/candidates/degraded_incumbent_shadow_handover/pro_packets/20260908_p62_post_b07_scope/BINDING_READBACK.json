@@ -1,0 +1,17 @@
+{
+  "conversation_binding_key": "em:degraded_incumbent_shadow_handover:convergence",
+  "conversation_id": "6a9bec54-df00-83e8-9840-46440458f316",
+  "visible_model": "6 Pro",
+  "underlying_model": "Latest",
+  "thinking_effort": "Pro, 5 of 5.",
+  "request_id": "2026-09-08-dish-p53-own-command-mean-convergence-01",
+  "state": "ARCHIVED",
+  "updated_at": "2026-09-08T18:14:41Z",
+  "read_at": "2026-09-08T21:46:02.514120+00:00",
+  "source_registry_sha256": "39e48d6ec0eb2e5fd9494e49f1eb6c036dc1f12f19c73d80c7df073ac8b7eb3a",
+  "provider_send_by_dm": false,
+  "new_request_state": "not_rendered",
+  "operator_thread_id": "01a07e52-f085-76a0-886a-4127f490421f",
+  "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "native_return_target": "/root/dm_dish_p53_native_proposal_question"
+}
