@@ -1,8 +1,10 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-07 (P30 FSD selected learning card/spec)
+Updated at: 2026-09-08 (P31 FRRIE first-fatal-callpath observation)
 
-Current incremental command: [P30 FSD native-renewal learning card/spec](handoffs/2026-09-07-p30-fsd-native-renewal-learning-spec.md). Complete P25 response/application now selects the narrow fresh C_train/H_train/G comparison; preserve the contradictory earlier delivery blocker. Prepare its card and full implementation spec with zero current code or scientific execution allocation.
+Current incremental command: [P31 FRRIE fatal-callpath observation](handoffs/2026-09-08-p31-frrie-fatal-callpath.md). A05 ended inconclusive after signal11 with no captured state. Use retained readable evidence if sufficient; otherwise prepare startup fatal reporting and at most one120s original-schedule observation, with no source repair or inferred clearance.
+
+Retained incremental command: [P30 FSD native-renewal learning card/spec](handoffs/2026-09-07-p30-fsd-native-renewal-learning-spec.md). Complete P25 response/application now selects the narrow fresh C_train/H_train/G comparison; preserve the contradictory earlier delivery blocker. Prepare its card and full implementation spec with zero current code or scientific execution allocation.
 
 Retained incremental command: [P29 UCOPE opening-prefix question selection](handoffs/2026-09-07-p29-ucope-opening-prefix-reassessment.md). Completed P24 is WITHIN with retained6902 harm and generic-reference weakness; the same DM prepares one justified within-family amendment or a precise Convergence scope question. No new science or code is allocated. FSD delivery repair awaits its exact blocker archive; CBSC/FRRIE terminal intakes remain separate dependencies.
 
