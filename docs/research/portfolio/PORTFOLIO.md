@@ -1,6 +1,8 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-08 (P48 UCOPE continuation and P49 rolling fifth-slot refill)
+Updated at: 2026-09-08 (P50 UCOPE exact-source staging repair)
+
+Current repair command: [P50 UCOPE exact-source staging](handoffs/2026-09-08-p50-ucope-exact-source-staging-repair.md) resumes the same DM/CM in the existing direction checkout to resolve repeated GitHub SSL staging failure. Use the accepted committed objects already on the selected node, or transfer missing committed objects over its existing authenticated SSH/SCP route, preserving the exact 637406340 source and all P47/P48 scientific bounds. No local authoring copy, source substitution, security-setting change or new scientific exposure is selected. FSD's complete G/D0/H panel proceeds to scientific intake; actual pending/returned chains count only when advancing. Other actionable vacancies receive incremental commands when their inputs are ready.
 
 Current incremental disposition: [P48 UCOPE functional acceptance](handoffs/2026-09-08-p48-ucope-functional-acceptance.md) accepts the completed, independently reviewed B02 implementation/fixture evidence while retaining its80.578s versus60s engineering overrun. No repeat smoke or speculative optimization is required; P47's7001/7002 scientific route and original caps continue. RCLE exact-request recovery is BLOCKED on unproven provider acceptance and counts zero after its return; the fifth-slot choice remains Portfolio's task, with the other four chains retained.
 
