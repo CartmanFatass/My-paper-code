@@ -114,9 +114,10 @@ neither establishes a new-host sign or member-recovery effect.
 
 The next discriminator recommended by the B01 intake is one fresh independent prefix/pair,
 master1117 with the same P4096/Q1024 comparison, evaluation and whole1800s CPU/FP32 cap, to observe
-whether the within-MEI difference and endpoint agreement persist. It is an unallocated next-task
-recommendation; P15's one scientific invocation is complete and no second run follows from unused
-wall allowance. The observed complete runner wall36.696s (38s admission/runner chain) supports a
+whether the within-MEI difference and endpoint agreement persist. P17 now allocates exactly this
+one fresh pair under card §9, with a separate1800s whole-chain cap; P15's one scientific invocation
+is complete. No1117 result exists at amendment publication. The observed complete runner wall36.696s
+(38s admission/runner chain) supports a
 bounded planning reference, not a future runtime guarantee. This B supports only a local
 observation, not stable superiority, a unique optimizer mechanism, roster/identity recovery,
 transfer or UAV entry.
@@ -133,3 +134,4 @@ References:
 - `VSP02_TEAMMATE_POLICY_CHANGE_B01_RESULT_EVIDENCE_20260907.md`
 - `VSP02_TEAMMATE_POLICY_CHANGE_B01_INTAKE_20260907.md`
 - `VSP02_TEAMMATE_POLICY_CHANGE_B01_INTAKE_ANALYSIS_20260907.json`
+- `VSP02_TEAMMATE_POLICY_CHANGE_B01_P17_AMENDMENT_INTAKE_20260907.md`
