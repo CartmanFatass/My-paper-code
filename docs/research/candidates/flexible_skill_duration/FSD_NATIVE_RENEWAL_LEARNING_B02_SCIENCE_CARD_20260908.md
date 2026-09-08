@@ -23,6 +23,16 @@ learner, evaluation, admission, remote binding or scientific result exists from
 P42/readiness. The [readiness intake§8](FSD_NATIVE_RENEWAL_LEARNING_B02_PREPARATION_INTAKE_20260908.md#8-p42-readiness-and-exact-next-route)
 returns one named B02 runtime-binding/allocation need; it does not allocate it.
 
+**P43 allocation, 2026-09-08:** [the named panel command](../../portfolio/handoffs/2026-09-08-p43-fsd-b02-panel-execution.md)
+at main `354e22d5e` now allocates one G→C→H panel and its concrete binding.
+It supersedes the earlier no-runtime boundary solely for this card's fixed
+770303/770304 population, counts, controls and60/900/900s complete caps.
+Execution source is `d961c58268353f215d3ffddf0d83927e6318541d`, containing the
+accepted B02 implementation. The same CM prepares and publishes exact committed
+LF scripts, detached cwd, argv and proposed handles before Root launches; Root
+executes/observes, CM collects all terminal outcomes and DM intakes every branch.
+No result, admission or accepted experimental handle is inferred from allocation.
+
 Question: does the above-.01 native H−C difference observed for B01 recur under
 one new independent initialization/training seed at the same five-rollout budget?
 This tests training-seed dependence with fresh evaluation keys. It does not ask
@@ -204,7 +214,7 @@ will be measured. Five stages are not five optimizer.step calls. Added validatio
 in the future coding assignment is limited to the changed seed/input boundary and
 independent source review; it adds no scientific sample or production-model probe.
 
-A later explicit runtime allocation uses remote_first wsl_4070, the configured
+The named P43 runtime allocation uses remote_first wsl_4070, the configured
 interpreter, fresh detached exact accepted-SHA cwd and existing agent-task. CPU4
 and precision are pinned; physical host is not the estimand. Existing no-accepted-
 remote-process/fresh-local-admission portability rules remain unchanged. Every
@@ -219,11 +229,12 @@ independent companion. Stop at completion, cap, nonfinite or a concrete integrit
 defect; retain all outputs/counts. No retry, stitched/shortened completion, extra
 seed/arm/endpoint, checkpoint load, cap increase or automatic successor follows.
 
-Prospective unique output parent is
+The allocated P43 unique output parent is
 `temp/directions/flexible_skill_duration/exp/native_renewal_learning_b02_770303`.
 It is not created in preparation. Fresh C/G summary paths belong to this parent;
-no B01 summary is a B02 runtime comparison input. Exact future launch SHA/handles/
-byte scripts are bound only after a named implementation and runtime assignment.
+no B01 summary is a B02 runtime comparison input. P43 supplies the source above;
+CM publishes the exact detached cwd/handles/byte scripts under that named task.
+Proposed handle names are distinct from Root's later observed acceptance receipts.
 
 ## 7. Engineering boundary and controlling sections
 
@@ -243,5 +254,5 @@ unchanged P34 semantics and P42 changed-input evidence are reused without anothe
 Evidence-spec§3–4,5.2,11.4,11.7–11.9 control, especially§11.8. One new independent
 pair is the next useful observation; no exact maximum, full diagnosis, stronger
 class or additional Pro round is a B launch gate. Current authority covers the
-object-tier card, completed implementation and readiness only; production runtime
-still requires its named allocation. No lifecycle/priority/UAV disposition follows.
+object-tier card, completed implementation/readiness and P43's single allocated
+panel. No additional run or lifecycle/priority/UAV disposition follows.
