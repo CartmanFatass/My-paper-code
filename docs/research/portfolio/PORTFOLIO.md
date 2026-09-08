@@ -1,8 +1,10 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-08 (P46 FSD fair-D0 card/spec preparation)
+Updated at: 2026-09-08 (P47 owner-directed research resume and ordinary recovery)
 
-Current incremental command: [P46 FSD fair-D0 comparison preparation](handoffs/2026-09-08-p46-fsd-fair-d0-preparation.md). P45 PRO_FINAL selects one fresh H/authentic fair-D0 k5/G B comparison; same DM prepares its card and complete CM spec with proposed1200/900/60s caps. Zero implementation or scientific execution during preparation; ordinary-family pause remains outside this limited comparison.
+Current command: [P47 research resume and ordinary recovery](handoffs/2026-09-08-p47-research-resume-and-recovery.md). OWNER_DIRECT restores research progression and Root's original five-direction/five-UAV-entry goal. FSD B03 and UCOPE B02 proceed from completed specifications through implementation, review and their selected bounded experiments. FRRIE and CBSC remain in the working set for normal crash repair and affected-path verification; unresolved code problems do not justify bypassing those directions or serializing independent science. RCLE receives exact-request Transport recovery. Use fresh native instances per the owner's instruction, existing direction checkouts, and rolling returns. Actual acceptance/counts belong to Root's log; unresolved idle waits count zero. Lifecycle, priority and historical results remain unchanged.
+
+Completed preparation: [P46 FSD fair-D0 comparison preparation](handoffs/2026-09-08-p46-fsd-fair-d0-preparation.md), integrated at c24a3a78b. The prospective card/full spec bind keys770403/770404 and D0/H/G1200/900/60s. P47 now supplies implementation and the selected one-panel execution route. UCOPE P33 preparation is also complete; P47 supplies its common per-agent-clipping implementation and7001/7002 pair route under the existing B02 card.
 
 Completed incremental command: [P45 FSD post-B02 Convergence](handoffs/2026-09-08-p45-fsd-post-b02-convergence.md). Formed response128f90b3 and intakedf5f8c891 select option B, preserving the DM's earlier preference for A. The selected fixed-clock comparison is not an identical third C/H pair, UAV transfer or Portfolio disposition.
 
@@ -12,7 +14,7 @@ Completed incremental command: [P43 FSD B02 independent-pair panel](handoffs/202
 
 Completed incremental command: [P42 FSD B02 seed/input implementation](handoffs/2026-09-08-p42-fsd-b02-seed-implementation.md). Implementation and independent RNG/identity review are accepted;24 synthetic cases passed. P43 separately allocates runtime and launch binding.
 
-Current dependency: [P41 FRRIE static complete-deadline method](handoffs/2026-09-08-p41-frrie-static-namespace-method.md) returned incomplete at87dddec67 after a cybersecurity-risk tool interruption. Retained metadata does not establish source/race/deadline/proc or permission acceptance. FRRIE is not advancing; no replacement executor, bypass retry or live A08 allocation is issued. Preserve the exact [intake dependency](../candidates/finite_resource_relational_inductive_efficiency/FRRIE_R09_NATIVE_FATAL_A08_P41_PREPARATION_INTAKE_20260908.md#4-decisions-this-intake-produces) pending an authorized resolution of the tool interruption, without scientific or lifecycle polarity. Independent routes continue.
+Historical recovery dependency: [P41 FRRIE static complete-deadline method](handoffs/2026-09-08-p41-frrie-static-namespace-method.md) remains incomplete for its named method. Later direct [core analysis and diagnostic](../candidates/finite_resource_relational_inductive_efficiency/NATIVE_CRASH_FORENSIC_RESULT_20260908.md) preserves nine dumps, reads four and records a passing simplified six-million-call check; no production fix is accepted. P47 resumes ordinary FRRIE/CBSC recovery without turning this particular method or complete historical causal explanation into a general research prerequisite. Real tool restrictions and frozen invocation limits still apply.
 
 Retained incremental command: [P40 FSD independent trained pair](handoffs/2026-09-08-p40-fsd-independent-pair-preparation.md). B01's valid one-pair H−C+0.497383 supports preparation of one fresh independent pair at the same comparison/budget. Freeze unused training/evaluation masters and the minimal seed/input implementation spec; no runtime or code implementation is yet allocated.
 
