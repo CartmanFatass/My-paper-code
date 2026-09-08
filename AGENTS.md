@@ -19,8 +19,10 @@ Send, observation, reconciliation, archival and parent receipts. Native DM/CM re
 to Root, which forwards them to the original native recipient. Transport never selects science.
 The independent **Portfolio** session (Astra; effort selected by the owner) plans tasks, readiness, dependencies, return
 branches and working-set replacement. Root logs completion and execution facts locally. It messages
-Portfolio only for a concrete new command, unresolved repair/conflict, or uncertain external
-acceptance requiring Portfolio action; Portfolio determines the next command. Portfolio also owns
+Portfolio for working-set replacement, cross-direction decisions, or a concrete conflict beyond
+the assigned DM/CM route. Root owns completion of each delegated direction task: resume its DM,
+route technical work to its CM, integrate accepted delivery and continue within existing authority.
+Portfolio also owns
 cross-direction scientific comparison, investment proposals and the scientific content of
 `docs/research/portfolio/PORTFOLIO.md`. By the owner's explicit 2026-09-06 instruction Portfolio
 runs directly on main; coordinate overlapping file edits with Root and push explicit-path commits.
@@ -41,14 +43,19 @@ more. `docs/project/ALGORITHM_PRINCIPLES.md` is historical background, not a req
 
 ## Workflow calibration (OWNER_DIRECT, 2026-09-06)
 
-OWNER_DIRECT clarification 2026-09-07: writing a receipt in the Root log does not authorize also
-sending it to Portfolio. Before `send_message_to_thread`, identify the action Portfolio must take
-now that the existing command does not already supply. If there is none, do not call the tool.
-Integrating an authorized commit, starting/finishing a run, continuing the already-authorized
-second dataset, resuming a named CM/DM, and saying a prior command was applied are log-only.
-Do not request an ACK or reconfirmation for those actions. A real exhausted-slot replacement
-request or unresolved blocker remains prompt and internal; Portfolio does not automatically
-turn that coordination into a user-facing report. Unchanged pending requests are not resent.
+OWNER_DIRECT 2026-09-08 notification boundary: Root sends Portfolio only a specifically
+requested reply, a working-set replacement need, or a conflict beyond the direction's authority.
+OWNER_DIRECT 2026-09-08 delegation correction: a completed DM/CM step returns to Root for
+continuation with the original DM, not for routine replanning by Portfolio. DM organizes CM
+implementation/repair and owns its delegated scientific decisions and proper-node escalation.
+Root closes the delegated task through acceptance and the authorized follow-on; dispatch,
+forwarding and a child's completion alone are not completion. A missing written intermediate
+step is not a new Portfolio decision. Actual scope, budget, scientific and tool restrictions
+remain binding. Unchanged pending needs are not resent.
+Root is the default main-index operator: no per-commit idle query, ACK or release message.
+Portfolio supplies ready owned paths with its command; only Portfolio's actual need for its
+own index operation initiates a temporary transfer. Exact send/no-send conditions and transfer
+steps are maintained only in `docs/project/SIBLING_COMMUNICATION.md`. Scientific decisions, budgets, explicit-path commits and immediate pushes are unchanged.
 
 CM implements its bounded engineering objective directly by default. Implementer children are
 optional for independent parallel work or substantial context isolation; scientific/semantic risk
@@ -79,15 +86,6 @@ approval system. Optional baseline/analysis packages use task-isolated environme
 no global dependency upgrade or third-batch framework migration follows.
 
 ## Focused reading and engineering handoffs (OWNER_DIRECT, 2026-09-06)
-
-OWNER_DIRECT 2026-09-07 temporary comparison: the next three genuinely new CM engineering
-assignments use `docs/project/CM_MODEL_COMPARISON_20260907.md` before implementation begins.
-Every arm receives the same complete code spec, task and starting code. Do not replay historical
-or already-started assignments. Native baseline/Sol and the three headless clients implement in
-isolated copies; comparison arms add no scientific invocation or research-direction slot.
-After three batches this enrollment ends. Ordinary Root execution/count/push notices remain
-in its dedicated log; only actual repair/decision needs go to Portfolio, without informational
-echoes. The owner's new goal and existing scientific boundaries continue independently.
 
 Start from the current assignment and applicable AGENTS instructions. The sender points to the
 current card/intake section, relevant specification sections, code entry points and acceptance.
@@ -289,7 +287,7 @@ event hook; do not add another scheduler or count queued intentions as advancing
 OWNER_DIRECT 2026-09-07 rolling parallelism correction: a batch packages ready commands; it
 is never a completion barrier. Root handles each direction's return and dispatches its supplied
 next action as soon as its own dependencies are satisfied, without waiting for unrelated
-directions, Pro generation or CM comparison arms. When that route is exhausted, request its
+directions or Pro generation. When that route is exhausted, request its
 replacement immediately; Portfolio supplies an incremental command from current evidence
 without waiting for a full-batch report. Retain other advancing chains. Use the event sequence
 in `hmasd-loop-dispatch`; short shared-index and browser actions do not serialize whole tasks.
@@ -304,8 +302,10 @@ executes its concrete commands and reports actual dispatch/return facts. Count o
 direction-level chains: Root, Transport, CM, specialists and detached processes do not each
 consume another slot. Portfolio determines readiness, dependencies and replacements before
 sending commands. Root dispatches all independent commands, executes named return routes and
-reports exceptions or an empty executable queue; it does not select another direction or infer
-a new task. Portfolio handles those reports with the next command or a named wait dependency.
+reports exceptions or an exhausted direction queue; it does not select another direction or
+make the DM's scientific decision. It resumes the existing DM for direction-local continuation
+under the standing delegation. Portfolio supplies replacements and resolves questions beyond
+that direction's authority.
 Temporary overlap drains at clean boundaries without interrupting live work. The working set
 changes no lifecycle, scientific decision authority or budget. Ordinary in-scope DM/CM work and
 prewritten return routes continue without another owner approval. See docs/project/ROOT_OPERATIONS.md for
@@ -360,6 +360,12 @@ launch sha, execution node, run root, queue state).
 
 Several sessions commit to the primary target concurrently. Rules for all of them:
 
+- OWNER_DIRECT 2026-09-08: test scratch is created only under `temp/`, in a directory
+  owned by that test invocation. The creating agent/process removes it when the test
+  completes, including failed tests after retaining the necessary result/diagnostic
+  record. Use the test command and cleanup pattern in `tests/AGENTS.md`. An interrupted
+  creator resumes its own cleanup at the next boundary; Root does not become a routine
+  garbage collector. Never remove another running invocation's scratch or scientific evidence.
 - OWNER_DIRECT 2026-09-07: reuse one designated authoring branch and local worktree per
   research direction across DM, CM and implementer assignments. Create it on demand only when
   that direction has actual authoring work; inactive directions get no placeholder branch.
@@ -381,11 +387,16 @@ Several sessions commit to the primary target concurrently. Rules for all of the
   Retire completed task branches after reconciling unique commits, live writers,
   open PRs and evidence links; preserve recovery refs before removing branch names. Existing
   same-direction authoring checkouts finish accepted work, then Root carries forward one at a
-  clean boundary and retires the others after reconciliation. Branch cleanup does not remove
-  worktree contents or evidence.
+  clean boundary and reclaims the others after reconciliation and verified preservation.
   Root owns reclamation at completion: integrate accepted work, preserve other unique commits
   and dirty contents with a recovery reference/backup, reconcile PRs and pending delivery, then
-  retire obsolete local and remote branch names. Unaccepted historical work is archived, not
+  unregister and remove obsolete worktree directories, then retire obsolete local and remote
+  branch names. Preserve unique commits and noncommitted evidence in a verified recovery archive
+  before removal; do not retain a full detached checkout merely as a backup. Confirm each removed
+  checkout is absent both on disk and from `git worktree list` before declaring cleanup complete.
+  A retained checkout needs an actual live writer, execution or delivery dependency and a named
+  cleanup owner/event in the existing return. Shared direction checkouts remain while in use.
+  Unaccepted historical work is archived, not
   merged merely to delete a branch. A necessary temporary branch names its concrete purpose
   and retirement event in the existing handoff; it is not retained for an already-finished role.
 - Stage by explicit path and commit by pathspec (`git add -- <paths>`; `git commit -- <paths>`).
