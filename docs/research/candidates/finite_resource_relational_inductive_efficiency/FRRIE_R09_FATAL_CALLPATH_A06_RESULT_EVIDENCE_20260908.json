@@ -1,0 +1,97 @@
+{
+  "handle": "frrie-a06-fatal-callpath-p31-43eec21e",
+  "node": "hmasd-wsl-node",
+  "source_sha": "43eec21e9584c83e5e8d940402d7e4570b454e59",
+  "diagnostic_sha": "30643b7359b35c6e9d5751147d0999bc629a966d",
+  "handoff_sha": "fc279590ecd88aa3cc2d5c10348453b7dcd4e9fe",
+  "card_binding_sha": "8131b5fb23e4ab5cb93a19504693fe10a754c407",
+  "technical_reading": "A06_INCONCLUSIVE",
+  "scientific_invocations": 1,
+  "collection_scientific_invocations": 0,
+  "supervisor_pid": 2767037,
+  "exit_code": 124,
+  "status": "failed",
+  "started_utc": "2026-09-08T07:29:47Z",
+  "ended_utc": "2026-09-08T07:31:46Z",
+  "supervisor_duration_seconds": 119,
+  "process_wall_seconds": 118.4,
+  "whole_chain_cap_seconds": 120,
+  "peak_rss_kib": 16160,
+  "peak_rss_bytes": 16547840,
+  "aggregate_cpu_seconds": null,
+  "admission": {
+    "assessed_at": "2026-09-08T07:29:47.830872Z",
+    "available_physical_bytes": 15648595968,
+    "captured_at": "2026-09-08T07:29:47.830380Z",
+    "cgroup_headroom_bytes": null,
+    "cgroup_memory_current_bytes": null,
+    "cgroup_memory_max_bytes": null,
+    "effective_available_bytes": 15648595968,
+    "effective_floor_pass": true,
+    "failure_reasons": [],
+    "measurement_source": "/proc/meminfo",
+    "minimum_available_bytes": 4294967296,
+    "passed": true,
+    "physical_floor_pass": true,
+    "schema_version": 1
+  },
+  "fatal_stack_present": false,
+  "python_traceback_present": false,
+  "capture_summary_present": false,
+  "learner_files_present": false,
+  "learner_directory_present": true,
+  "completed_updates": null,
+  "completed_episodes": null,
+  "completed_agent_slots": null,
+  "original_program_exit_code": null,
+  "first_python_exception": null,
+  "active_callpath": null,
+  "cause": null,
+  "raw_local_root": "temp/directions/finite_resource_relational_inductive_efficiency/exp/a06_collection_p31",
+  "artifacts": {
+    "accepted_command.sh": {
+      "bytes": 1200,
+      "sha256": "67f598644882f596ecbfbced2454003c69c9a04cb153a6f62b23079e00bf72e3"
+    },
+    "libfrrie_ridgegate2z_external.so": {
+      "bytes": 24488,
+      "sha256": "0c1af4bfd791337f4b420010a49cc1f156732a840faa7c69580d3aabcf6044b4"
+    },
+    "output/learner_admission.json": {
+      "bytes": 504,
+      "sha256": "83328bceca61d65d20b530892ccb34a300cbba83de5d84618178058ffb2faf92"
+    },
+    "remote_readback.txt": {
+      "bytes": 1744,
+      "sha256": "ed611972636f8ab8897d5a68decd34957c6eaadda245fd52c2ee7a167d1d1581"
+    },
+    "supervisor/exit_code": {
+      "bytes": 4,
+      "sha256": "ca2ebdf97d7469496b1f4b78958f9dc8447efdcb623953fee7b6996b762f6fff"
+    },
+    "supervisor/pid": {
+      "bytes": 8,
+      "sha256": "12458dff61e1302955513fec5f568ef0eccf4c974d9f2a52db5167d97b2d0cdd"
+    },
+    "supervisor/process-time.txt": {
+      "bytes": 87,
+      "sha256": "36f754a56378310239e464a8749d5724456c78a5ae94bb1195ea29b30cf4a082"
+    },
+    "supervisor/runner.sh": {
+      "bytes": 2257,
+      "sha256": "ebd82d8a1248d407dbc43b26349bc9da441dd1269b127e87fb1738f64a4f9748"
+    },
+    "supervisor/start_time": {
+      "bytes": 11,
+      "sha256": "9aa597fb465777eab678aaa73776c5d2c114d158113b20e5ccc335c9cfe9c144"
+    },
+    "supervisor/status": {
+      "bytes": 7,
+      "sha256": "6da5b18878e110928643ebcc38dbb7552cf3a296eea56493e23edc2b93eecff8"
+    },
+    "supervisor/task.log": {
+      "bytes": 714,
+      "sha256": "5ff5c701c166a027216e5e9d048a98a211b92784f49da30934b50381f90c9fac"
+    }
+  }
+}
