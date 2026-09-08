@@ -277,3 +277,39 @@ Transport without model overrides. Read the eventual full response directly
 from its immutable commit; a chat receipt alone is not the direction decision.
 All preparation work is committed at return, no run is active, and no
 scientific successor has been selected locally.
+
+## 8. Pre-page validation repair — same request
+
+Root forwarded Transport's rejection of this request before any provider page
+action: the author-input`REQUEST.json` omitted`decision_authority=pro_final`.
+Transport reported no conversation opening, paste or Send. This is a transport
+metadata failure, not a formed Pro decision or scientific polarity.
+
+Direct inspection found that the published bound`HANDOFF.json.transport_request`
+already contains the full valid authority/routing/paste payload. Adding only the
+authority field to the author input would leave other required transport fields
+absent. The repair therefore copies those18 existing payload fields into REQUEST,
+including the exact original short prompt. Every pre-existing author-input value
+is preserved; no authority, endpoint, conversation or science is inferred anew.
+
+The required Transport`validate_request.py` was run on the completed REQUEST and
+on the original bound HANDOFF's transport request. Both exit0, return`valid:true`
+and produce identical validation results. Short-prompt SHA-256 is
+`713c6713edf7fd09bf757ab29d79c85c9f5c751cd3e7320765f6d92c912fdb39`.
+A fresh Prompt Author render in owned temporary space produces the exact published
+TASK bytes. The original TASK commit/link and the bound HANDOFF's committed
+canonical bytes remain unchanged; the temporary render is removed after retaining
+its receipt. There is no new TASK publication, binding, conversation or Send.
+The [repair receipt](pro_packets/20260908_post_b03_convergence/archive/VALIDATION_REPAIR_RECEIPT.json)
+retains both validator outputs, the copied fields and byte checks.
+
+**Object / technical decision:** options (a) complete the same request using
+the already bound payload and return the validated unchanged dispatch prompt;
+(b) fix only the first absent field without validating the full request;
+(c) change request identity, scientific prompt or provider conversation.
+Recommendation and selected **(a)**. **Owner-delegated decision (unattended,
+2026-09-03 instruction): (a).** Root's explicit same-request repair supplies the
+return route. The audit records this ordinary correction; the pending direction
+recommendation and owner item remain unchanged. Root may resume this one request
+through existing Transport after loading the repair commit; all pre-page failure
+records remain historical and no duplicate provider Send is authorized.
