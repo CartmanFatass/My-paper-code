@@ -35,6 +35,9 @@ comparison family, preserving every result and selecting no successor at that bo
 The later P54 Convergence decision selects one ordinary-G greedy-use B03 within the
 same shared-service question, while the T-initialization family remains paused.
 It is a bounded re-entry and narrowing, not a second RECAST; recasts remain1.
+That selected B03 seed-5 result is now below both fixed references. Readiness remains
+the current control choice for this sampled comparison; the single-run allocation is
+complete without an additional invocation or a new family disposition.
 
 ## Current position
 
@@ -146,11 +149,33 @@ exists at card selection. This one instance directly tests the proposed frozen
 controller; no automatic extra seed or diagnostic is selected. It has no UAV
 observation/action/resource mapping or UAV card and does not count as UAV entry.
 
+**B03 seed 5, 2026-09-08: greedy G minus R0 is -0.013974609375; retain readiness
+for this run.** Greedy G minus R is -0.014775390625. The primary magnitude is inside
+the 0.02 MEI, without establishing equivalence. Stochastic G loses to R0, R and its
+own greedy execution by -0.0290673828125, -0.0298681640625 and -0.0150927734375.
+The final greedy comparison has equal sampled mean successes to R0, 0.0712890625
+fewer attempts and 6.302734375 more waiting ticks per team. Its attempt-cost benefit
++0.0017822265625 offsets only part of the waiting-cost loss -0.0157568359375.
+This native accounting does not identify a unique cause or equal per-world behavior.
+
+The new prospective single G and the outcome-informed seed-4 discovery have mixed
+greedy signs and retain their separate populations and selection history. Neither
+1024 held-out worlds nor five contrasts of the same G estimate training-population
+uncertainty. The low-confidence absolute-margin prediction matched; it was not a
+positive-sign prediction. Nonzero learning exposure remains real despite the loss.
+The current one-run allocation is finished with no extra invocation, no local family
+pause or close, and no change to recasts1, the older family pauses or UAV status.
+If a later extension is selected, one new independently trained G at the same
+comparison is the direct discriminator of recurring gain versus waiting-cost loss;
+it is unallocated, not a prerequisite or an automatic continuation.
+
 The strongest surviving alternative is that public dwell age already suffices and the generic
 MLP matches the prior, or that all advantage is the fixed rule rather than learning. In the new
 host R0, R or ordinary G may handle scheduling, while the local readiness prior could occupy the
 slot too early and harm its partner. The strongest current support is the shared-slot action
-consequence and G's small greedy gain over both fixed rules. The strongest current contradiction
+consequence and the historical G's small greedy gain over both fixed rules. B03's
+loss to both rules is the strongest contradiction to a repeatable ordinary-G replacement
+gain. The strongest current contradiction
 to a useful initialization/learned-T gain is T matching R0 across every saved B02 world;
 the stochastic losses and three N1 final T=G=F observations remain contrary evidence with
 their distinct populations and budgets. Waiting price,
@@ -161,6 +186,9 @@ sharing K1 does not pool polarity or reopen that family.
 ## Evidence set
 
 The evidence set includes historical observations and the separately labelled prospective selection:
+- `docs/research/candidates/vsp_03/VSP03_B03_INTAKE_20260908.md`
+- `docs/research/candidates/vsp_03/VSP03_B03_RESULT_EVIDENCE_20260908.md`
+- `docs/research/candidates/vsp_03/VSP03_B03_DM_ANALYSIS_20260908.json`
 - `docs/research/candidates/vsp_03/VSP03_P54_GREEDY_USE_CONVERGENCE_INTAKE_20260908.md`
 - `docs/research/candidates/vsp_03/VSP03_B03_SCIENCE_CARD_20260908.md`
 - `docs/research/candidates/vsp_03/pro_packets/20260908_greedy_use_reentry_convergence/archive/RESPONSE.md` at `861c5072160d624970875b7345c2f72e78183e53`
