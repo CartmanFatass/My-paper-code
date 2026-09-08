@@ -201,3 +201,14 @@ unallocated wait; (c) alter the route or add diagnostic calls. Recommend/select
 Owner reviews returned [] and relevant audit owner columns were blank at this
 boundary. Owner flags: none. The allocation is spent only by actual acceptance;
 an unsuccessful accepted invocation supplies no second attempt.
+
+## P17 intake boundary — 2026-09-07
+
+The one allocated execution returned PATH_PREPARED. The [P17 intake](CBSC_LOCAL_ACQUISITION_P17_INTAKE_20260907.md)
+accepts actual complete 174.5612299 s outer wall, both terminal exits zero and
+matching 23-pin primary metadata. The body-acquisition prediction is supported;
+owner prediction was not taken. This is one metadata-path observation with zero
+scientific exposure. The exact input bodies, fresh environment and earlier
+failures remain retained. P17's invocation allowance is finished; no B04 retry or
+further acquisition follows. The intake returns a fresh paired B preparation
+recommendation to Root for the next Portfolio command, without allocating it.

@@ -85,6 +85,14 @@
       "record": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_LOCAL_ACQUISITION_P16_INTAKE_20260907.md",
       "state": "applied",
       "summary": "P16 command preparation accepted: source 5828af584, exact handoff 35a4fcaea, 18 inert cases passed and independent findings resolved under documented clock/scheduling assumptions. Actual Linux behavior, body acquisition and target import remain unobserved. The card now records a request for one complete 600 s / 540 s-work invocation; no allocation or launch follows. This records completed preparation and the prospective request, not an owner reply or runtime readiness."
+    },
+    {
+      "at": "2026-09-08T03:06:43+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/decisions/2026-09-03-unattended-delegation.md",
+      "record": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_LOCAL_ACQUISITION_P17_INTAKE_20260907.md",
+      "state": "applied",
+      "summary": "P17 allocated and completed the single prepared command: PATH_PREPARED, local/remote exit0, all23 pins and primary readback match, complete outer174.5612299s. Both full cp312 bodies retained. Zero learner execution; recommend prospective fresh same-runtime paired B preparation only. Prior failures remain; no new execution allocation or owner reply."
     }
   ]
 }
