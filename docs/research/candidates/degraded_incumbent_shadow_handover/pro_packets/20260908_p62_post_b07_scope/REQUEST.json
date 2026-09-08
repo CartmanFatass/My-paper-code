@@ -1,0 +1,121 @@
+{
+  "caller_role": "em",
+  "workflow_node": "em_convergence",
+  "request_id": "2026-09-08-dish-p62-post-b07-scope-convergence-01",
+  "source_thread_id": "01a0820b-c52a-72d1-945c-a58e4a52fa8a",
+  "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "direction_id": "degraded_incumbent_shadow_handover",
+  "conversation_id": "6a9bec54-df00-83e8-9840-46440458f316",
+  "repository": "CartmanFatass/My-paper-code",
+  "repository_url": "https://github.com/CartmanFatass/My-paper-code",
+  "commit_or_ref": "c201e9eb5a71a4b0785a9104156d1dca6df2fbf9",
+  "delivery_mode": "github_delivery",
+  "github_delivery": {
+    "branch": "codex/pro-dish-post-b06-20260907",
+    "base_sha": "c201e9eb5a71a4b0785a9104156d1dca6df2fbf9",
+    "response_path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260908_p62_post_b07_scope/archive/RESPONSE.md",
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/4"
+  },
+  "scientific_question": "The completed B07 one-pair result has already retained DIRECT and stopped the fixed OWN_COMMAND_MEAN extension. Final candidate-minus-DIRECT mean service is -135.25 ticks, with condition differences -221,+74,-329,-65. Both learners moved; all16 initial/final rows completed1200 ticks. OWN reduced final invalid commits from119 to32, yet used more energy in every final condition. Both training arms and every evaluation row had zero ordinary legal transfers. These are native-service findings, not COPY-RETAIN/SHADOW-COPY evidence.\n\nPortfolio P62 asks for a supported new intervention versus no successor and explicitly permits a no-concrete-candidate report followed by a direction-scope choice. I take that branch. No concrete new intervention survives my bounded assessment strongly enough to nominate. Please decide between (a) leave the tested extension without a successor, retain DIRECT and both accepted narrow stops, and keep the ordinary-source-application agenda unresolved without a broader family closure/recast; or (b) close the retained-host ordinary-source-application family more broadly if its bounded decision value warrants that larger stop. DM recommends(a). Neither option contains a hidden new experiment, treatment, seed, diagnostic or prospective card. This is one scope decision under the explicit P62 no-candidate route.\n\nThe legal learning path still exists: ordinary renewal -> each physical vehicle's selected incumbent/shadow recurrent copy -> causal inputs -> ordinary action -> unchanged native projection, packet/application and service -> PPO exposure. B07 tested one mean, not this whole class. Its loss does not identify persistence, on-policy optimization or partner co-adaptation as the cause. The native origin/application predicate also consumes joint information and source/readiness/version/geometry state unavailable as a local actor certificate. Privileged masks, forced transfers or changed information would answer a different question. Recurrent source-state promotion depends on ordinary legal application for the ordinary-source claim. The shared auxiliary losses have a real gradient path, but a verified value-decomposition gradient-interference paper does not supply a specific repair of this recurrent PPO path. I do not advance arbitrary auxiliary removal/reweighting merely because the code permits it. This is a judgment about the current nomination, not a demand to diagnose causes before a new B or an exhaustive no-alternative claim.\n\nStrongest support for no successor: B07's fixed-mean loss, B06 joint sampling's -77.5 loss, and no newly advanced differentiated native-value hypothesis. Strongest contrary evidence to broader closure: B07's +74 condition and fewer final invalid commits; B04/B05 LOW_LR gains with their adverse conditions; both current learners moving; B05 CONTROL's three ordinary training transfers. Learning and an ordinary transfer path have occurred. Source-state value remains unestimated, and the accepted A03 information ceiling prevents a strict fresh-message decentralized-host claim.\n\nBefore yielding, I compared no successor with a minimal real B scale. A genuinely specified two-arm/one-pair comparison against newly trained same-information DIRECT/LOW_LR could use131072 ordinary transitions,1024 optimizer steps and eight complete final episodes<=9600 ticks, update16 only. Initial references need not gate that final-service question. No treatment, seed, master or new cap is allocated by this illustration. The native law per arm is2N+2E+H, N65536,0<=E<=N,0<=H<=20E:131072..1572864 calls, with private label work retained as algorithm work and no candidate/trajectory search. An actual change needs one focused changed-behavior/primary check, not another scientific invocation. B07's known accounted subtotal463.83358418601877s plus unmeasured syntax-check time is an anchor, not exact whole cost or a guarantee. Its1800s/arm and3600s/pair caps are historical. Cost, missing headroom, complete cause or stable replication are not the reason for yielding.\n\nGive a final scope decision with the strongest support, contradiction and honest limit. Option(b) requires a precise retained-host family scope and bounded investment rationale, not source impossibility, universal inferiority or Portfolio lifecycle action. Do not turn an exact upper, complete gate census, causal diagnosis or stronger evidence class into a B prerequisite. This packet seeks no new assessment campaign. A concrete instruction/spec conflict or access blocker must be named explicitly.",
+  "deliverable": "A conclusion-first final Convergence decision on the scope of no successor: retain the narrow boundary (DM recommendation) or explicitly justify the broader retained-host family stop. State what changes, strongest support and contradiction, and what remains unestimated. No code, run, source fork, further assessment campaign or Portfolio lifecycle/priority action.",
+  "claim_ceiling": "A/RECON source/question assessment over accepted finite B evidence. No new algorithm effect or exhaustive candidate search. A stop is a bounded direction investment decision, not a population inferiority, source-impossibility, safety, C-promotion or UAV-validation claim.",
+  "constraints": [
+    "P62 preparation:0 models,0 episodes,0 new transitions,0 optimizer steps,0 native calls and0 scientific invocations; no evaluation/replay/profiling. No second B07 seed, coefficient sweep, source fork or retry. The illustrative learning scale allocates no treatment or budget.",
+    "Preserve all B07 outcomes, final primary and prior narrow stops. DIRECT own-initial gain164.5 and OWN55.75 do not identify learning speed or replace the final contrast. TRAIN invalid commits4366/4405 and separation1/2 remain separate from EVAL. The prior low-confidence positive-sign forecast missed; owner prediction not taken.",
+    "Zero B07 transfers leaves origin and COPY-RETAIN/SHADOW-COPY unestimated, not disproved. Preserve B05 CONTROL training3 ordinary transfers as a path fact, not matched source-value evidence. No privileged masks, forced events, altered information or matched private futures.",
+    "Evidence-spec11.4,11.7,11.8 and11.9 control question and burden. A justified new B may follow a negative without exact headroom, complete cause, support census, all-positive seeds or a stronger class. Missing tuned baseline/upper headroom is not a stop reason. B07 MEI24 remains its completed scale; no new card is frozen.",
+    "Keep native work, training/evaluation multipliers and added check work distinct. Future runtime/E/H for an unspecified intervention are unknown. resources_unmeasured/H and syntax-cost gaps do not erase independent service facts. Engineering scope4 needs none; no implementation or section5 breach occurs. Recorded blocked scratch cleanup is untouched and never a science prerequisite.",
+    "Use the existing shared direction branch and Issue4, preserving all prior accepted requests and fixed inputs. Old Issue title/comments are historical. Write only the named response and its delivery-link comment on the current descendant branch. No source, main, card, direction-state or other-path modification.",
+    "A connector/evidence/transport blocker forms no direction decision. State concrete scope/spec conflicts rather than inventing an exception or inferring scientific polarity from delivery success."
+  ],
+  "response_schema": [
+    "Lead with the chosen stop scope and whether any successor is selected.",
+    "Explain support, strongest contrary evidence, actual evidence class and source-information/value ceiling.",
+    "State exactly what changes and remains unresolved; separate direction science from Portfolio lifecycle/priority."
+  ],
+  "reference_files": [
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_POST_B07_DIRECTION_QUESTION_INTAKE_20260908.md",
+      "purpose": "Sections1-7: current source assessment, no nominated candidate, options, contrary evidence, minimal real B scale and scope. Start here.",
+      "provenance": "New A/RECON DM intake at fixed input SHA; zero new scientific exposure and no final direction decision."
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_OWN_COMMAND_MEAN_B07_RESULT_INTAKE_20260908.md",
+      "purpose": "Sections2-3,5-6: all-outcome B07 reading, fixed negative branch, source value unestimated and no automatic successor.",
+      "provenance": "Accepted result19a6234b280913e28b8f5330141858cbafbf74d1; sourcea4612a020921d24269a19a3471cc03fa62c082c8."
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_OWN_COMMAND_MEAN_B07_RESULT_EVIDENCE_20260908.md",
+      "purpose": "Sections1-5: E0 primary, counts, movement, receipts and cost/resource limitations; expand receipts only for a concrete discrepancy.",
+      "provenance": "Accepted seed127 matched-pair evidence; no new run or repeat."
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_OWN_COMMAND_MEAN_B07_SCIENCE_CARD_20260908.md",
+      "purpose": "Sections4-5: original primary, own-initial companions, MEI and negative/no-transfer branches.",
+      "provenance": "Frozen before B07, unchanged."
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DIRECTION.md",
+      "purpose": "Latest P53/B07 sections952-1035, especially the accepted narrow stop.",
+      "provenance": "Current accepted mechanism science; preparation does not modify DIRECTION."
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_CONTROL_LOW_LR_B05_RESULT_INTAKE_20260906.md",
+      "purpose": "Table120-123 and interpretation139-175: contrary evidence to broader closure, including CONTROL training transfers3.",
+      "provenance": "Historical accepted B04/B05 evidence with adverse rows; not a source-state contrast."
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_P53_NATIVE_PROPOSAL_SOURCE_INTAKE_20260908.md",
+      "purpose": "Sections2-4 and6: reused source/ownership/information map and verified UTE caution.",
+      "provenance": "Previously verified source map; completed later sections are provenance, not a replay request."
+    },
+    {
+      "path": "experiments/candidates/degraded_incumbent_shadow_handover_rbhr_r06/native/rbhr_r06_production_backend.cpp",
+      "purpose": "Application433-481 and service488-494 only if needed to check a scope claim; active-host variant and limits are in P53section2.",
+      "provenance": "Accepted retained native source; read-only, no helper or simulator execution."
+    },
+    {
+      "path": "experiments/candidates/degraded_incumbent_shadow_handover_rbhr_r06/production_training_engine.py",
+      "purpose": "Shared auxiliary/policy/value update632-641 for the limited learner-path fact.",
+      "provenance": "Accepted sourcea461; a gradient path does not establish benefit or cause."
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260908_p62_post_b07_scope/EXPOSURE_AND_COST.json",
+      "purpose": "Machine-generated zero exposure, historical B07 counts/movement/cost gaps and illustrative real B multipliers.",
+      "provenance": "Arithmetic/readback of accepted run-level analysis; no model import or experiment."
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260908_p62_post_b07_scope/LITERATURE_SCOPE.json",
+      "purpose": "Searched-index snapshot, verified source passages and setting differences; not a novelty or negative verdict.",
+      "provenance": "190 real formal records,12 metadata hits; two My-lib synthetic fixtures excluded. UTE retrieval reused; GPVD page1 checked."
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260908_p62_post_b07_scope/ISSUE_SNAPSHOT.json",
+      "purpose": "Pinned nine-comment historical discussion, which cannot enlarge this task.",
+      "provenance": "Fresh gh read; Issue4 OPEN; no DM issue mutation or Send."
+    },
+    {
+      "path": "docs/research/portfolio/handoffs/2026-09-08-p62-dish-post-b07-direction-choice.md",
+      "purpose": "Actual assignment including explicit no-candidate direction-scope branch and zero-science budget.",
+      "provenance": "Published392f3724777d6b19cd9365e978cb47d521dc6b55; imported unchanged."
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "purpose": "Sections3-5.2 and controlling11.4,11.7-11.9: class, proportional question, claim ceiling and work.",
+      "provenance": "Current applicable scientific authority at fixed input."
+    },
+    {
+      "path": "AGENTS.md",
+      "purpose": "Sections1-2,4-6: tiers, delegation, branch reuse and proper-node routing.",
+      "provenance": "Current owner instructions imported exactly from main8d61d7f73bf5b3fa893840e45b64175c5a1b590b."
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "purpose": "Sections4-5: no new machinery; hypothetical code work requires an actually selected object.",
+      "provenance": "Current engineering authority; no exception requested."
+    }
+  ],
+  "discussion_urls": [
+    "https://github.com/CartmanFatass/My-paper-code/issues/4"
+  ]
+}
