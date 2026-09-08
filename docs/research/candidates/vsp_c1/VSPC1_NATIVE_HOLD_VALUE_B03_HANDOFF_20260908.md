@@ -82,3 +82,10 @@ and [DM intake](VSPC1_NATIVE_HOLD_VALUE_B03_INTAKE_20260908.md): the new supervi
 name ends `_cwd1`, while the original script/source/master/output/caps are intact.
 This preserves the failed task metadata and executes the still-unrun scientific
 pair only once after fresh admission. No source staging action remains pending.
+
+## Current action: collect the accepted corrected handle
+
+CM reports Root has accepted `vspc1_hold_value_b03_8201_7a8ed3aa5d25_cwd1`,
+PID3010237, with fresh admission passed. The existing CM is collecting it.
+**Do not submit the command again.** The prior failure/staging facts remain in
+the intake; the new scientific invocation awaits its own terminal evidence.

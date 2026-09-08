@@ -333,3 +333,14 @@ This supersedes §8's pending staging and original submission identity. The new
 handle is not yet accepted at correction intake. The selected scientific pair
 remains unrun, with fresh admission and the original complete limits in the
 unchanged script; no duplicate scientific execution or extra retry is authorized.
+
+## 10. Corrected execution accepted
+
+Following §9's completed correction, CM reports Root has accepted
+`vspc1_hold_value_b03_8201_7a8ed3aa5d25_cwd1`, PID3010237, with fresh actual-node
+physical/effective available memory15634731008 bytes each. The same CM is
+collecting the existing run. This supersedes the prior pending-submission state;
+do not execute another payload. The original failed shell remains preserved and
+had no scientific exposure. Actual normalized-regime results and terminal
+conformance are pending, with source7a8ed3aa5d25 and every frozen scientific
+field unchanged. See [intake §6](VSPC1_NATIVE_HOLD_VALUE_B03_INTAKE_20260908.md#6-corrected-handle-accepted--collection-in-progress).
