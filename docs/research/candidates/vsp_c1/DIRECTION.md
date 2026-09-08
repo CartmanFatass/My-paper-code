@@ -363,3 +363,42 @@ allocated here; P55 is complete and the recommendation returns through Root for
 a new bounded assignment. A changed training regime would not be pooled as a third
 seed of the current comparison. Stable superiority, unique mechanism, transfer
 and optimality remain outside the supported claim.
+## Normalized native hold-value: one local signal persists — 2026-09-08
+
+P60's [B03](VSPC1_NATIVE_HOLD_VALUE_B03_SCIENCE_CARD_20260908.md) applies the same
+value-target normalization method to GATED and the intact full MLP, with separate
+cumulative training-only FP32 moments and native-value credit conversion. The
+native measurement, actor information/action law and512-episode training budget
+remain fixed. Its sole new pair, master8201, is valid complete UP:
+
+| Normalized pair | GATED−MLP (conditional SE) | GATED−H | MLP−H |
+| --- | ---: | ---: | ---: |
+| B03/8201 | +.039801715 (.006008657) | +.035212797 | −.004588918 |
+
+Strongest support is that the local complete gate-package gain remains above
+MEI .01 under this common training method, with a positive GATED−H mean. Strongest
+qualification is MLP's still-negative H-relative point estimate and4/9/19 adverse
+episode differences for GATED−MLP/GATED−H/MLP−H. The small negative MLP−H mean
+with conditional SE .012026064 establishes neither equivalence to H nor a repaired
+competent comparator. All32 endpoints remain in the [E0 evidence](VSPC1_NATIVE_HOLD_VALUE_B03_RESULT_EVIDENCE_20260908.md)
+and [intake](VSPC1_NATIVE_HOLD_VALUE_B03_INTAKE_20260908.md#8-observation-and-bounded-scientific-interpretation).
+
+This is n=1 normalized training pair, separate from the old regime's n=2.
+Historical mean differences cannot identify normalization's causal effect when
+training/evaluation randomness also changes. The signal does not identify
+specialized hold-credit sharing: extra gate capacity, joint clipping, interactions
+between value units and optimization, FP32 and on-policy co-adaptation remain
+surviving explanations. The intact full MLP already shares nonlinear features.
+The same hold/state → centralized value/optimization → local actor update →
+motion/service → native-return path is exercised; nonzero hold inputs occur in
+about1.133% of training rows at t1–3. Gate movement and exposure are not attribution.
+
+The next useful discriminator is one fresh independent matched training pair
+under this unchanged normalized comparison, preserving native H contrasts and all
+outcomes. This is direction-local advice for a later Portfolio assignment; P60
+ends after its complete intake. A larger evaluation of8201 or an exact policy
+maximum would not answer that training-repeatability question. No new run is
+allocated here. Tuned matching headroom remains absent, H remains attained and
+untuned, and stable superiority, unique mechanism, transfer and optimality remain
+outside the claim. Earlier adverse evidence, family boundaries, recast count,
+lifecycle, priority, C status and formal UAV-entry determination are unchanged.
