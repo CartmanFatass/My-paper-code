@@ -1,6 +1,8 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-08 (owner correction: Root closes direction delegations through their DMs)
+Updated at: 2026-09-08 (P54 rolling refill after MGTAP P51; Root closes direction delegations through their DMs)
+
+Current vacancy refill: [P54 VSP03 defined greedy-use re-entry](handoffs/2026-09-08-p54-vsp03-greedy-use-reentry.md) assigns the specific conditional question retained by the accepted post-B02 decision: whether a defined greedy-execution use justifies ordinary G replacing R0 after dropping event initialization. It preserves the paused T/initialization comparison, small generic gains and adverse stochastic results. Reuse the existing VSP03 checkout and complete any proper-node question/intake and conforming selected-object route through the same DM/CM. MGTAP P51's family pause is fully intaken with no successor and no advancing task; this refill changes no lifecycle, priority or recast count. Root reports four other advancing routes (FSD, UCOPE, VSPC1, DISH); P54 counts only on actual dispatch/work, and FRRIE/CBSC and RCLE retain their unresolved dependencies. No scientific invocation is allocated during source-question preparation.
 
 Current VSPC1 continuation: [P49 B01 execution](handoffs/2026-09-08-p49-vspc1-native-value-question.md) resumes the original DM to organize the selected B01 CM implementation/review, accepted-source binding, one bounded seed8101 pair and intake. Complete source637406340 supplies the missing committed UCOPE dependencies through normal integration in the existing direction checkout. Root owns execution closure; ordinary direction-local continuation stays with the DM. Portfolio retains cross-direction choices and actual conflicts beyond DM/CM authority.
 
