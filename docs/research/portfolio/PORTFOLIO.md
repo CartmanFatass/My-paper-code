@@ -1,6 +1,8 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-08 (P41 tooling dependency; P40 preparation returned)
+Updated at: 2026-09-08 (P42 FSD B02 implementation)
+
+Current incremental command: [P42 FSD B02 seed/input implementation](handoffs/2026-09-08-p42-fsd-b02-seed-implementation.md). Accepted P40 card/spec binds770303/770304; same CM implements the four-function seed/identity change and thin entry point with focused synthetic checks and independent RNG/identity review. No production invocation or launch binding is allocated.
 
 Current dependency: [P41 FRRIE static complete-deadline method](handoffs/2026-09-08-p41-frrie-static-namespace-method.md) returned incomplete at87dddec67 after a cybersecurity-risk tool interruption. Retained metadata does not establish source/race/deadline/proc or permission acceptance. FRRIE is not advancing; no replacement executor, bypass retry or live A08 allocation is issued. Preserve the exact [intake dependency](../candidates/finite_resource_relational_inductive_efficiency/FRRIE_R09_NATIVE_FATAL_A08_P41_PREPARATION_INTAKE_20260908.md#4-decisions-this-intake-produces) pending an authorized resolution of the tool interruption, without scientific or lifecycle polarity. Independent routes continue.
 
