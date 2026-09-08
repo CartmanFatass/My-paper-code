@@ -253,9 +253,44 @@ All three invocations,64000 training transitions,10740 optimizer calls and96
 endpoint episodes completed inside60/900/900s; measured complete wall totals
 665.01s. B01 and B02 costs/outcomes remain separate evidence records. P43 answers
 the selected fresh-pair discriminator at its B ceiling and completes its allocated
-panel. No further discriminator, successor, family disposition or UAV entry is
-selected. Evidence and decisions: `FSD_NATIVE_RENEWAL_LEARNING_B02_RESULT_EVIDENCE_20260908.md`
+panel. At that P43 intake, no further discriminator, successor, family disposition
+or UAV entry was selected. Evidence and decisions: `FSD_NATIVE_RENEWAL_LEARNING_B02_RESULT_EVIDENCE_20260908.md`
 and `FSD_NATIVE_RENEWAL_LEARNING_B02_INTAKE_20260908.md`.
+
+## Post-B02 fixed-clock comparison boundary (P45, 2026-09-08)
+
+**PRO_FINAL selects one fresh H/fair-D0 k5/G B performance comparison.** It
+extends only the supplied-public-mask learning question on the original fixed
+N6/K2 large Bernoulli corridor. The ordinary fixed-K2 policy-gap family remains
+paused outside this comparison. H retains its public applied-renewal rule and
+own finite-cost D2/actor/internal-credit learning path; fair D0 uses the same
+D2 implementation with both costs infinite, both caps5,age off, and actually
+applies its own sampled mask. G remains the same-information operational null.
+
+B01/B02's two separately reported native gains after real own-trajectory
+learning are the strongest support. Their C comparator does not answer the
+same-budget fixed-clock learning comparison. Public G's remaining advantage,
+H's wrong-role losses, six competent E3 losses and E4's public-null explanation
+are the strongest contradictions. The surviving alternative is that the
+supplied rule and its resulting data dominate a weak component control while
+providing little value against a fresh fixed-clock learner. Tuned generic
+headroom remains absent. Pro accepts that one H/D0 observation can distinguish
+these performance possibilities without first diagnosing every cause or
+requiring a positive result to authorize an unrelated future question.
+
+The selected next discriminator is full native H−D0 after five16×400 rollouts
+per new learner and one32-episode endpoint per H/D0/G, with all G gaps,
+wrong-role losses and actual update exposure retained. One new training pair
+has a local B ceiling; neither stable superiority nor a learned renewal rule,
+pure timing effect, best fixed-clock policy or UAV transfer follows. Complete
+D0/H/G caps are1200/900/60s,sum2160s; these are design bounds, not measured new
+cost or allocated execution. MEI.01 reads positive/small/opposite observations
+under the response's limited branches; every outcome ends one intake with no
+automatic successor. No card, numerical keys, new code or invocation is created
+by this decision intake. Source: `pro_packets/20260908_post_b02_convergence/archive/RESPONSE.md`
+at `128f90b3a2c8b037dcd71c1d3e34ca0c26bccba7`, with the adjacent
+`CONVERGENCE_INTAKE.md`. This is not a recast, C promotion, Portfolio disposition
+or formal UAV entry.
 
 ## Objects and their state (2026-09-08)
 
