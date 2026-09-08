@@ -173,10 +173,12 @@ more training or a new host. Exact full response and applied conformity intake:
 `pro_packets/20260907_post_native_control_convergence/archive/RESPONSE.md` at
 `eaff53a10b21383fb682f63bcf58782875599ff0` and the adjacent `CONVERGENCE_INTAKE.md`.
 The contradictory short blocked receipt is preserved separately; the complete matched file
-supplies this decision. New card/spec and implementation/execution allocation needs return
-through Root to Portfolio.
+supplies this decision. P30 now records the prospective
+`FSD_NATIVE_RENEWAL_LEARNING_B01_SCIENCE_CARD_20260908.md` and companion CM specification
+for this same discriminator, with training/evaluation masters770203/770204 and no new
+scientific exposure. Implementation and execution allocation return through Root to Portfolio.
 
-## Objects and their state (2026-09-07)
+## Objects and their state (2026-09-08)
 
 | Object | State | Record |
 | --- | --- | --- |
@@ -188,6 +190,7 @@ through Root to Portfolio.
 | E3 — heterogeneous hazard | complete18/18 valid; original bounded E3-H0-NO-ADVANTAGE retained by complete Convergence | `FSD_E3_HETEROGENEOUS_HAZARD_SCIENCE_CARD_20260904.md`; `FSD_E3_HETEROGENEOUS_HAZARD_INTAKE_20260905.md` |
 | Post-E3 renewal/reference census | complete3/3 A/RECON,288 candidates, zero learner; public greedy explains switching opportunity; no successor selected | `FSD_E4_CENSUS_SCIENCE_CARD_20260905.md`; `FSD_E4_CENSUS_RESULT_EVIDENCE_20260905.md`; `FSD_E4_CENSUS_INTAKE_20260905.md` |
 | Native-renewal control A01 / P21 | complete3/3 conditional A/RECON; H−C +.26935 with post G−H .16403; branch2, zero training, no successor | `FSD_NATIVE_RENEWAL_CONTROL_A01_SCIENCE_CARD_20260907.md`; `FSD_NATIVE_RENEWAL_CONTROL_A01_RESULT_EVIDENCE_20260907.md`; `FSD_NATIVE_RENEWAL_CONTROL_A01_INTAKE_20260907.md` |
+| Native-renewal learning B01 / P30 | prospective selected one-pair C_train/H_train/G card and complete implementation spec; no coding or scientific allocation | `FSD_NATIVE_RENEWAL_LEARNING_B01_SCIENCE_CARD_20260908.md`; `FSD_NATIVE_RENEWAL_LEARNING_B01_CM_SPEC_20260908.md`; `FSD_NATIVE_RENEWAL_LEARNING_B01_PREPARATION_INTAKE_20260908.md` |
 | Advancement plan | E1 → E2 → E2b/E3 → E4 → C-gate; E2b is not selected at this boundary | `docs/Claude_docs/plans/RESEARCH_ADVANCEMENT_PLAN_20260902.md` |
 
 ## Code
