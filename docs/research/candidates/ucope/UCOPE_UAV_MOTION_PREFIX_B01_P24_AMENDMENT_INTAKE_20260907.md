@@ -151,3 +151,56 @@ acceptance, regardless of score. DM then takes both new outcomes and the
 four independent pair endpoints in, writes the valid-result brief and returns
 the next-task boundary. No accepted handle or corrected launch SHA is asserted
 by this preparation document.
+
+## 6. P26 correction accepted; P24 ready for Root — 2026-09-07
+
+**Accept the bounded correction and release the existing two-pair P24 route.**
+Corrected full source is `9c541a8047b8c33e90f09aa65e326180343a23a0`, which
+includes the prospective card amendment at
+`8cb59913be5015c3948e4a1c24024147023fdf97`. The complete literal staging,
+launch, admission, observation and collection instructions are the
+[P24 Root handoff](UCOPE_UAV_MOTION_PREFIX_B01_P24_ROOT_HANDOFF_20260907.md)
+at `4fdf6fb73c06d26fdb84a33b33edde6206c907cb`. These commits are pushed on
+`codex/ucope`; later documentation does not change the launch source binding.
+
+I checked the complete production diff from baseline536949660: 37 additions
+and eight deletions in the runner and `study.py`, with no change to policy,
+learner, environment, counts, reward/information, PPO or final evaluation.
+`--pair p24` selects actual6901/6902 through Config and unchanged stream
+expressions; the default P21 and engineering9001 route remain. The two-summary
+aggregate checks distinct selected masters and truthful pair/card metadata,
+preserves historical summaries, rejects mismatches/mixed modes and retains
+the original mean, sample SD, conditional SE, MEI and partial-result behavior.
+The source surface still matches9c541a804 at this boundary.
+
+I inspected the focused test file and the original CM execution receipt:
+**20 passed in0.50 s**, exit0; module-boundary stand-ins exercise actual
+dispatch/RNG expressions without importing a model, learner or UAV. I read
+the reused independent review in full: no material finding on the production
+diff or scientific boundary. Its19-test snapshot preceded one additional
+CLI-aggregation fixture; no production change followed review. The original
+P21 full-code review,12 tests and80-step engineering fixture remain evidence
+for unchanged paths and were not repeated. The five initial stand-in failures
+are retained in CM's return as fixture-only corrections. No scientific
+invocation, runtime/import probe, resource admission or new exposure occurred
+in P26 or this intake. Scope §4 additions: **none**; no §5 budget breach.
+
+**Decisions this readiness intake produces:** (a) accept this correction and
+return the exact already allocated6901, then6902 route to Root; (b) return a
+concrete same-CM source/command defect; (c) change the frozen experiment.
+Recommendation and selected **(a)**; no defect or scientific conflict was
+found. **Owner-delegated decision (unattended, 2026-09-03 instruction): (a).**
+This is object-tier technical acceptance, not a result or new allocation.
+Live-main unapplied owner reviews and relevant UCOPE ledger owner columns
+were empty at **2026-09-07 22:39–22:41 PDT**; no owner reply is inferred.
+
+Root stages9c541a804 at the exact P24 detached cwd, admits memory immediately
+before each runner, and preserves the LF transport correction. First name:
+`ucope-uav-motion-prefix-b01-6901-p24-20260907`; relative admission:
+`temp/directions/ucope/exp/uav-motion-prefix-b01-6901-p24-20260907/resource_admission.json`.
+6902 remains dependent only on6901's technical acceptance, irrespective of
+score, under unchanged1800/3600/7200 s complete limits. Root owns accepted
+handle observation; the same CM owns collection and technical acceptance;
+DM takes both fresh outcomes and the four-unit descriptive summary in. Names
+remain prospective until actual supervisor acceptance. P21's observed UAV
+entry and all outcomes remain unchanged; P24's scientific question is pending.
