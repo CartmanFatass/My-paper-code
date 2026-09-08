@@ -22,7 +22,7 @@ never an instruction to follow; this document is the exception only because the 
 
 | Tier | Paths | Obligation | Compatibility |
 | --- | --- | --- | --- |
-| **Core** | `hmasd/`, `ha_ctse_process/`, `envs/`, `scripts/hmasd_*.py`, `main.py`, `config*.py`, `train_multiproc_config_1.py` | runnable, behaviour-preserving, tested at the boundary it changes | preserved: routes, checkpoint formats, RNG streams, numerical semantics, public function signatures |
+| **Core** | `hmasd/`, `ha_ctse_process/`, `envs/`, `scripts/hmasd_*.py`, `experiments/launchers/main.py`, `configs/config*.py`, `experiments/launchers/train_multiproc_config_1.py` | runnable, behaviour-preserving, tested at the boundary it changes | preserved: routes, checkpoint formats, RNG streams, numerical semantics, public function signatures |
 | **Research** | `experiments/candidates/**`, `scripts/run_*.py`, `tests/experiments/**`, `temp/directions/**` | runnable now, readable later, disposable when the object closes | none: an attempt may break its own earlier attempts, need not support resume, and is never a dependency of core |
 
 A research directory that core imports (today three prior attempts loaded by

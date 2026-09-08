@@ -360,6 +360,12 @@ launch sha, execution node, run root, queue state).
 
 Several sessions commit to the primary target concurrently. Rules for all of them:
 
+- OWNER_DIRECT 2026-09-08: test scratch is created only under `temp/`, in a directory
+  owned by that test invocation. The creating agent/process removes it when the test
+  completes, including failed tests after retaining the necessary result/diagnostic
+  record. Use the test command and cleanup pattern in `tests/AGENTS.md`. An interrupted
+  creator resumes its own cleanup at the next boundary; Root does not become a routine
+  garbage collector. Never remove another running invocation's scratch or scientific evidence.
 - OWNER_DIRECT 2026-09-07: reuse one designated authoring branch and local worktree per
   research direction across DM, CM and implementer assignments. Create it on demand only when
   that direction has actual authoring work; inactive directions get no placeholder branch.

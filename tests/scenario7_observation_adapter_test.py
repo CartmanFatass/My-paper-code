@@ -14,10 +14,10 @@ from _scenario7_fixtures import (
     rng_states_equal,
     zero_actions,
 )
-from config_1 import Config
+from configs.config_1 import Config
 from envs.pettingzoo.env_adapter import ParallelToArrayAdapter
 from envs.pettingzoo.relay.energy_aware import UAVEnergyAwareRelayEnv
-from train_multiproc_config_1 import validate_scenario7_configuration
+from experiments.launchers.train_multiproc_config_1 import validate_scenario7_configuration
 
 
 class _FixedObservationParallelEnv:
@@ -213,7 +213,7 @@ def test_startup_validation_accepts_parallel_array_adapter():
     config = Config("S7-S3")
     raw_env = UAVEnergyAwareRelayEnv(config=config, seed=43)
     adapter = ParallelToArrayAdapter(raw_env, seed=43)
-    args = SimpleNamespace(scenario="energy", config="config_1")
+    args = SimpleNamespace(scenario="energy", config="configs.config_1")
     try:
         validate_scenario7_configuration(config, args, env=adapter)
     finally:

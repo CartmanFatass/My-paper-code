@@ -26,7 +26,7 @@ EXPERIMENTS = {
     # ]
 }
 
-TRAIN_ENTRYPOINT = Path(__file__).resolve().parents[2] / "train_multiproc_config_1.py"
+TRAIN_ENTRYPOINT = Path(__file__).resolve().parent / "train_multiproc_config_1.py"
 
 
 def build_command(alg_name, alg_args, seed):

@@ -2,7 +2,7 @@ import numpy as np
 import pytest
 import torch
 
-from config_test import Config
+from configs.config_test import Config
 from hmasd.agent import HMASDAgent
 from hmasd.utils import DiscriminatorBuffer
 
