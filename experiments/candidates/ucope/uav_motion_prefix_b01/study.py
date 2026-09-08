@@ -1,5 +1,5 @@
 """Serial T/G/H study and arithmetic-only endpoint aggregation."""
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, field
 import json
 import math
 from pathlib import Path
@@ -9,6 +9,8 @@ import time
 
 
 CARD = "docs/research/candidates/ucope/UCOPE_UAV_MOTION_PREFIX_B01_SCIENCE_CARD_20260907.md"
+B02_CARD = "docs/research/candidates/ucope/UCOPE_UAV_MOTION_PREFIX_B02_SCIENCE_CARD_20260908.md"
+B02_OBJECT = "UCOPE-UAV-MOTION-PREFIX-B02"
 
 
 def declared_masters(pair):
@@ -16,7 +18,9 @@ def declared_masters(pair):
         return (6801, 6802)
     if pair == "p24":
         return (6901, 6902)
-    raise ValueError("pair must be p21 or p24")
+    if pair == "b02":
+        return (7001, 7002)
+    raise ValueError("pair must be p21, p24 or b02")
 
 
 @dataclass
@@ -30,10 +34,14 @@ class Config:
     arm_cap: float = 1800
     pair_cap: float = 3600
     pair: str = "p21"
+    ratio_grouping: str = field(init=False)
+
+    def __post_init__(self):
+        self.ratio_grouping = "agent_compound" if self.pair == "b02" else "joint"
 
     @classmethod
-    def engineering(cls, seed=9001):
-        return cls(seed, True, 8, 2, 2, 8)
+    def engineering(cls, seed=9001, pair="p21"):
+        return cls(seed, True, 8, 2, 2, 8, pair=pair)
 
 
 class Deadline:
@@ -96,6 +104,13 @@ def aggregate(summaries, pair="p21"):
         if {s["seed"] for s in summaries} != set(declared):
             raise ValueError(f"the {pair} UAV joint primary requires masters {declared}")
         for s in summaries:
+            if pair == "b02":
+                if (s.get("object") != B02_OBJECT or s.get("pair") != "b02"
+                        or s.get("declared_masters") != list(declared)
+                        or s.get("card") != B02_CARD or s.get("card_section") != 5
+                        or s.get("ratio_grouping") != "agent_compound"):
+                    raise ValueError("summary B02 objective binding does not match selected pair")
+                continue
             # Original P21 summaries predate allocation metadata and remain usable.
             if s.get("pair", "p21") != pair or tuple(s.get("declared_masters", (6801, 6802))) != declared:
                 raise ValueError("summary declared pair does not match selected pair")
@@ -112,6 +127,9 @@ def aggregate(summaries, pair="p21"):
               "declared_masters": list(declared) if modes == {"UAV_B_EXPLORE"}
                                   else [s["seed"] for s in summaries],
               "card_section": (10 if pair == "p24" else 8) if modes == {"UAV_B_EXPLORE"} else "CODE_SPEC §8"}
+    if pair == "b02":
+        result.update(object=B02_OBJECT, card=B02_CARD, card_section=5,
+                      ratio_grouping="agent_compound")
     if complete:
         endpoints = [s["primary"]["T_minus_G"]["mean"] for s in summaries]
         ses = [s["primary"]["T_minus_G"]["conditional_se"] for s in summaries]
@@ -184,6 +202,10 @@ def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=wri
                          "train_duration": b + 22, "train_reset_start": b + 1000,
                          "eval_reset_start": b + 2000, "eval_velocity_start": b + 3000,
                          "eval_duration_start": b + 4000}}
+    if config.pair == "b02":
+        summary.update(object=B02_OBJECT, card=B02_CARD, ratio_grouping=config.ratio_grouping,
+                       card_section="CODE_SPEC §8" if config.fixture else 5)
+    credit_options = {"ratio_grouping": config.ratio_grouping} if config.pair == "b02" else {}
     files = {name: (out / f"{name}.jsonl").open("w", encoding="utf-8")
              for name in ("episodes", "rollouts", "diagnostics")}
 
@@ -225,13 +247,15 @@ def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=wri
                                                     "phase": phase, "episode": e},
                                        deadline.check, counts, lambda row: emit("episodes", row),
                                        lambda row: emit("diagnostics", row), limits,
-                                       real=not config.fixture, diagnostics=phase == "eval" and label != "H")
+                                       real=not config.fixture, diagnostics=phase == "eval" and label != "H",
+                                       **credit_options)
 
             for rollout_index in range(config.train_episodes // 2):
                 before_counts = counts.copy()
                 episodes = [episode("train", 2 * rollout_index + i, actor, critic,
                                     velocity_rng, duration_rng, arm) for i in range(2)]
-                records = update(actor, critic, optimizer, episodes, config.chunk, deadline.check, counts)
+                records = update(actor, critic, optimizer, episodes, config.chunk, deadline.check, counts,
+                                 **credit_options)
                 counts["rollouts"] += 1
                 emit("rollouts", {"pair_master": config.seed, "arm": arm, "rollout": rollout_index,
                                    "steps": 2 * config.horizon, "episodes": 2, "epochs": records,
