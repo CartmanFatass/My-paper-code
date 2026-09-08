@@ -1,0 +1,74 @@
+{
+  "id": "20260908-cbsc-001",
+  "created": "2026-09-08T00:19:07-07:00",
+  "direction": "capability_bound_semantic_currentness",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "P32：原路径单次故障栈观察",
+  "context": "P28在39.83秒以信号11终止，24轮记录之后没有最终输出。已检查保留日志，没有调用栈。冻结独立A/RECON观察，原源码d275、RAW种子21223、system312/CPU FP32安排不变，仅启动时开启故障栈；至多一次完整120秒。P28仍未完成，CBSC与FRRIE证据分开。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "接受已冻结的单次观察",
+      "consequence": "Root在CM命令接受并提交后执行至多一次120秒诊断；不启动STRUCT。"
+    },
+    {
+      "key": "reject",
+      "label": "停止此诊断",
+      "consequence": "保留原证据并停止P32后续动作，不推断原因。"
+    },
+    {
+      "key": "revise",
+      "label": "修订后续边界",
+      "consequence": "在新的指令范围内调整尚未执行部分，保留所有既有输出。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "已有日志不能定位操作，P32已明确分配这一独立有限观察；不是算法效果检验。",
+  "evidence": [
+    "docs/research/candidates/capability_bound_semantic_currentness/CBSC_B05_FIRST_FAULT_P32_SCIENCE_CARD_20260908.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-08.md#L5",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "已保留的日志只有信号11，是否按P32冻结一次120秒内的原路径故障栈观察？",
+    "changes_if_approved": [
+      {
+        "target": "CBSC P32诊断卡与命令",
+        "from": "原P28日志没有故障调用路径",
+        "to": "同一源码、种子、环境和训练安排，启动时开启一次故障栈报告；最多一次120秒运行"
+      }
+    ],
+    "if_refused": "停止P32相关后续工作，保留P28未完成、零有效配对及已有证据。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_OPPORTUNITY_CREDIT_B05_INTAKE_20260907.md",
+        "quote": "The collected log records signal 11 without a Python/fault stack; the last durable update only bounds progress.",
+        "why": "没有足够证据选择具体修复；当前问题是故障时正在执行什么。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_B05_FIRST_FAULT_P32_SCIENCE_CARD_20260908.md",
+        "quote": "It does not promise a native C backtrace, an offending writer or cause attribution.",
+        "why": "即使出现Python栈，也不能证明历史损坏源；不复现或超时也不能证明问题消失。"
+      }
+    ],
+    "uncertainty": [
+      "是否在120秒内再次出现故障和可读栈未知。",
+      "启用报告可能影响时序；一次运行不能支持稳定性或算法效果。"
+    ],
+    "cost": {
+      "compute": "至多一次完整120秒；保留48轮/768次Adam上限、64次评估及96次规则磁带执行；无额外烟测、导入、源码或包操作。",
+      "owner_time": "异步查看，不等待回复",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "Options: (a) freeze this single P32 observation because the named retained logs lack a call path; (b) stop with the same unresolved signal-only evidence; (c) launch a full pair or speculative repair. Recommend/select (a) within P32.",
+    "source": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_B05_FIRST_FAULT_P32_SCIENCE_CARD_20260908.md"
+  },
+  "starred": false
+}
