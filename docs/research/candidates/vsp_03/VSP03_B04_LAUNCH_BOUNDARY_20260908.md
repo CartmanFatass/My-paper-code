@@ -1,60 +1,79 @@
-# VSP03 B04 launch and exit-publication boundary
+# VSP03 B04 P65 complete task boundary
 
-Binding: [card](VSP03_B04_SCIENCE_CARD_20260908.md) sections2,3,5,6 and
-[assignment](VSP03_B04_CM_ASSIGNMENT_20260908.md). No scientific run has started.
-SOURCE_SHA is resolved to the accepted pushed source after DM acceptance and Root
-integration, then staged into an exact-SHA detached remote execution worktree.
-Same configured wsl_4070 node, SSH hmasd-wsl-node, CPU float32, one thread; no fallback.
+Current binding: [card](VSP03_B04_SCIENCE_CARD_20260908.md) section8 and the P65
+assignment. This replaces the rejected payload-only deadline proposal at1289f0514;
+its evidence and open-review history remain. No B04 scientific invocation has started.
+After source acceptance and Root integration, SOURCE_SHA is the exact pushed revision
+staged in the configured wsl_4070 detached worktree. No local fallback or second run.
 
 ```bash
 VSP03_B04_PAYLOAD=$(cat <<'VSP03_B04_LITERAL'
 (
 cd /home/wu/hmasd-worktrees/vsp03-b04-p64-SOURCE_SHA || exit
 export OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1
-export VSP03_B04_COMMAND='VSP03_B04_STARTED=$(/home/wu/.venvs/hmasd/bin/python -c "import time; print(time.perf_counter())")
-/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b04_seed6_p64_20260908_admission.json && exec /home/wu/.venvs/hmasd/bin/python scripts/run_vsp03_b04.py --seed 6 --out /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b04_seed6_p64_20260908 --started-monotonic "$VSP03_B04_STARTED" --node wsl_4070'
-/usr/bin/time -f 'payload_wall_seconds=%e peak_rss_kib=%M' /usr/bin/timeout --signal=KILL 120s bash -c "$VSP03_B04_COMMAND"
+export HMASD_PYTHON=/home/wu/.venvs/hmasd/bin/python
+export VSP03_B04_COMMAND='/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b04_seed6_p64_20260908_admission.json && exec /home/wu/.venvs/hmasd/bin/python scripts/run_vsp03_b04.py --seed 6 --out /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b04_seed6_p64_20260908 --started-monotonic "$VSP03_B04_STARTED" --node wsl_4070'
+bash experiments/candidates/vsp_03/vsp03_b04/deadline.sh /home/wu/.agent-tasks/vsp03-b04-p64-20260908/start_time 120 10 /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b04_seed6_p64_20260908_terminal.json -- bash -c "$VSP03_B04_COMMAND"
 )
 VSP03_B04_LITERAL
 )
 /usr/local/bin/agent-task run vsp03-b04-p64-20260908 "$VSP03_B04_PAYLOAD"
 ```
 
-The outer subshell returns its actual final command status to the existing agent-task
-wrapper's eval. A cwd failure exits only that subshell; no exec replaces the supervisor.
-The inner exec of the Python runner is confined to the timed child shell. Existing
-supervisor EXIT_CODE/file/status/footer publication remains reachable on success and
-failure. No supervisor source is edited, and no new monitor or retry is introduced.
+## Clock and containment
 
-The timeout covers timestamp helper, adjacent admission, imports, one G initialization,
-128 training batches and four final evaluations, required output/readback and scientific
-process exit. The existing supervisor publishes its real numeric exit afterward.
-The timer's payload_wall_seconds is deliberately narrower than the complete boundary.
+The unmodified supervisor records start_time before detached startup. That existing
+Unix-second timestamp is the one task origin. The B04 shell adapter derives remaining
+seconds as start+120-EPOCHSECONDS-1, rounding elapsed up rather than extending the cap.
+It launches GNU timeout with that remaining duration, not a fresh120s. The timeout
+process group contains /usr/bin/time, the Python adapter, admission, scientific runner,
+ordinary descendants, descendant cleanup, authoritative terminal write/readback and
+the final process timing line. No child creates a new session in the accepted path.
+All required task publications occur inside this enclosing timeout.
 
-For complete elapsed accounting, collect the existing supervisor start_time integer
-Unix timestamp (written before tmux launch) and the nanosecond modification timestamps
-of its exit_code, status and task.log after termination. Use the maximum of those
-required publication timestamps minus start_time as a conservative complete receipt
-span: it includes startup, admission, learner/output/exit and receipt/footer publication;
-the start is rounded down. Report the raw timestamps, span and numeric exit. Use this
-complete span, not the lower-level timer, for the120s conformance statement. A missing
-receipt or span above120s is reported as that concrete gap; no cap expansion or retry.
-The supervisor's subsequent one-second idle sleep is not scientific work or required
-publication. No new timer process, instrumentation framework or resource claim follows.
+Python maps the original wall start once into its monotonic clock (wall sampled after
+monotonic for conservative conversion). The scientific work cutoff is that same
+origin+110s. Ten seconds inside the cap are reserved for shutdown/publication; cleanup
+ends by origin+118s, leaving publication space before the conservatively rounded outer
+limit. No stage resets or additional grace. The runner receives this same mapped start.
+Fresh physical/effective admission each>=4GiB is directly joined to it by &&.
 
-Per-arm cost projection: exactly one seed6 G, inherited admission/import + G init +
-128 C(128,40,2) +4 E(1024,40,2) +output/readback/exit publication. B03's3.50s payload
-wall is the available planning observation, not an upper bound or scaled estimate.
-Complete new wall and aggregate CPU remain unknown. The complete120s cap applies once.
+The Linux subreaper adopts orphaned descendants. On normal nonzero exit or work timeout,
+the adapter captures the real root return code, kills and reaps remaining descendants,
+then publishes terminal.json and reads it back. A timeout is task exit124; internal
+cleanup/setup failure is125; ordinary child exits/signals remain attributable separately.
+If descendants remain, the adapter retains the outer containment until its hard kill
+rather than returning and abandoning them. GNU timeout is the final whole-group kill.
+There is no restart, process pool, supervisor edit or manual supervisor-receipt writing.
 
-Post-learner coverage: reuse B03 scientific/output review and readback. Static checks
-cover B03 default and B04 seed/object/arm bindings. A harmless literal exit7 check of
-the existing wrapper postamble validates the new subshell status return without any
-scientific imports, model, RNG, episode, learner or evaluation. Normal run alone reads
-required primary/count/weight output. Preserve all B03 facts including its null exit.
+## Authoritative evidence and limits
 
-Fresh physical/effective memory admission each>=4GiB is immediately joined to the
-runner by &&. On accepted handle, send node/name/SHA/cwd/log/result/admission/bound to
-Root /root and copy DM /root/dm_vsp03_p54_reentry. CM observes until Root ACK, then
-retains collection/technical acceptance. Stop at the sole output/exit publication,
-120s, or a dependent defect, with no second scientific invocation or local host.
+The sibling b04_seed6_p64_20260908_terminal.json and its readback log line are the
+adapter's authoritative task exit/termination evidence, with original/mapped start,
+cap/reserve, real root return, timeout state, reaped/remaining descendants and elapsed.
+The contained_process_wall_s line is published by /usr/bin/time inside containment
+and is narrower than the origin-to-terminal interval because startup precedes it.
+The outer timeout's actual return is forwarded normally to the unmodified supervisor.
+A hard kill before terminal publication means the terminal evidence is missing; retain
+that failure, not a fabricated complete/exit0 claim. It spends the sole invocation.
+
+Supervisor exit_code/status/footer after payload return remain actual separate
+bookkeeping, outside the authoritative task boundary; they are neither overwritten
+nor required to be inside the new containment. This is the explicit P65 distinction.
+Collect those raw files alongside the task evidence. Missing task evidence, surviving
+descendants or an over-cap observation limits acceptance; no retry follows.
+
+## Cost, coverage and handoff
+
+One G cost law and counts are unchanged. B03's3.50s remains a planning observation,
+not a bound. New adapter overhead is not assigned a scientific timing pilot. The sole
+complete120s budget includes it; aggregate CPU is unmeasured. The existing primary/
+count/weight readback is unchanged and occurs only in the selected normal invocation.
+Reuse passing seed/object/status checks. Independent shortened normal-nonzero and
+forced-timeout fixtures cover the new lifecycle using no scientific model/world/step.
+Card section8 authorizes exactly one task-local deadline/termination adapter for
+complete invocation wall<=120s; no standing framework or unrelated telemetry follows.
+
+After actual handle acceptance, send node/name/SHA/cwd/log/result/admission/terminal
+paths to Root /root and copy DM /root/dm_vsp03_p54_reentry. CM retains observation
+until adoption, then collection/technical acceptance. DM owns all-outcome intake.

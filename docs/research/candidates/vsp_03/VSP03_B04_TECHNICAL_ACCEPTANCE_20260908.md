@@ -56,3 +56,33 @@ propagation conforms; no other material finding. No watchdog, manual receipt-wri
 recursive wrapper or supervisor modification was introduced. Source acceptance of
 the launch boundary remains pending this named contract resolution; no science run.
 See [independent review](VSP03_B04_SOURCE_REVIEW_20260908.md).
+
+## P65 candidate adapter
+
+P65/card section8 at aa2e409f8 now explicitly authorizes one task-local deadline/
+termination adapter for complete invocation wall<=120s. This supplies the scope that
+was missing in the earlier candidate; it does not erase that review or change science.
+The installed supervisor remains unchanged. Its actual start_time precedes detached
+startup, and is the original clock consumed by the new deadline.sh/deadline.py adapter.
+
+The shell derives remaining whole seconds with elapsed rounded up, then GNU timeout
+contains the Python adapter, admission, runner, ordinary descendants, cleanup and all
+authoritative terminal publication/readback plus /usr/bin/time's final line. Its
+remaining duration is not reset to120. The Python worker maps the same original start
+once to monotonic time, stops scientific work by110s, and ends cleanup by118s to reserve
+publication within the outer conservative limit. A subreaper adopts orphaned children;
+remaining descendants are killed and reaped before the task terminal receipt. An
+unresolved survivor keeps containment active until the hard group kill. All selected
+processes stay in the inherited group; no new sessions are created in the frozen route.
+
+The task's own terminal.json is authoritative for task status/termination. No adapter
+writes the supervisor's exit_code/status/footer; those actual later observations remain
+separate bookkeeping as P65 explicitly permits. Missing required task publication or
+an observed failure is retained, never converted into a success or another invocation.
+
+Local compile passed; current candidate changes leave all scientific source, B03 and
+B04 runner bindings unchanged against1289f0514 (scoped git diff exit0). Actual installed
+Linux headers confirm PR_SET_CHILD_SUBREAPER=36; timeout help confirms default child
+containment and the use of uncatchable KILL. The existing seed/object/status checks
+remain reused. Independent shortened non-scientific lifecycle tests and review remain
+pending before acceptance. No B04 scientific run or prior scratch-cleanup retry.
