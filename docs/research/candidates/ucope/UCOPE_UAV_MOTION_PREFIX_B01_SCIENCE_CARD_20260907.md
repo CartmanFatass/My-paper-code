@@ -253,3 +253,15 @@ each detached runner, observes accepted handles and returns original terminal
 facts to the same CM. Nonfinite/cap/integrity stops and dependency-specific
 partial reporting remain §8's rules. No local fallback, pilot, tuning, third
 new pair, retry, cap reset, promotion or automatic successor is allocated.
+
+**P26 source release, before P24 output.** The [readiness intake §6](UCOPE_UAV_MOTION_PREFIX_B01_P24_AMENDMENT_INTAKE_20260907.md#6-p26-correction-accepted-p24-ready-for-root--2026-09-07)
+accepts corrected full source `9c541a8047b8c33e90f09aa65e326180343a23a0`
+(containing this prospective amendment at8cb59913be). The exact
+[P24 handoff](UCOPE_UAV_MOTION_PREFIX_B01_P24_ROOT_HANDOFF_20260907.md) is
+committed at `4fdf6fb73c06d26fdb84a33b33edde6206c907cb`. Focused boundary
+fixtures20 passed in0.50 s and reused independent review found no material
+defect; no UAV/learner/import probe or admission was added. The declared
+6901/6902 route is ready for Root under existing P24/P26 authority and the
+unchanged stops above. Actual new exposure and accepted handles are still
+zero at this source release; all prospective predictions and reading rules
+above remain fixed.
