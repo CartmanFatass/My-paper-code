@@ -97,19 +97,49 @@ Portfolio change is allocated by this direction decision.
 P13's source-supported native-action/state path and accepted large seed 2 checkpoint justify
 this limited question. Small seed 2 / E2 support, all six competent losses and E4's public-null
 explanation remain. Actor/representation quality, altered trajectories, recurrence, team
-interference and prior optimizer exposure remain unseparated. The next discriminator is
+interference and prior optimizer exposure remain unseparated. The selected discriminator was
 paired native H−C return alongside G−H and H's eligible wrong-role service loss, conditional
 on this outcome-informed checkpoint selection. Full/post-reset returns remain distinct.
-The selected design is three policies × 32 episodes × H400, with 180 s per complete policy
-and 540 s summed invocation wall as prospective bounds; load and batch-32 costs are unmeasured.
-No new score, stable superiority or training-seed uncertainty claim follows. Exact response
+The selected design was three policies × 32 episodes × H400, with 180 s per complete policy
+and 540 s summed invocation wall as prospective bounds; load and batch-32 costs were then unmeasured.
+That decision supplied no score, stable superiority or training-seed uncertainty claim. Exact response
 and conformity intake: `pro_packets/20260907_native_renewal_convergence/CONVERGENCE_INTAKE.md`.
 P15 fixes that observation's definition in
 `FSD_NATIVE_RENEWAL_CONTROL_A01_SCIENCE_CARD_20260907.md` as a conditional A/RECON
 measurement, with the common CM spec beside it. No algorithm effect or scientific invocation
 is released by the card/spec preparation.
 
-## Objects and their state (2026-09-05)
+## Accepted native-control measurement (2026-09-07)
+
+P21 completed the three-policy conditional A/RECON panel at the original card's source and
+population. Full H−C is +0.2693489583333334 (paired episode SE 0.007149877611049748);
+post-reset H−C is +0.2700240183792816. H still trails public-state G by 0.16402986633249772
+post-reset, matching H's eligible wrong-role service loss on this panel. All 32 episode
+differences have those signs. The selected branch reports native gain and remaining shortfall
+separately and withdraws a timing-only explanation of complete competence.
+
+This actual native-action measurement is the strongest support for the narrow control path.
+The .16403 residual, H's higher wrong-role loss/rate on its altered opportunity set, and the
+earlier six competent E3 losses/E4 public-null result remain contradictions to a complete
+learning or timing-only explanation. The reset convention does not explain H−C. Actor quality,
+recurrence, changed trajectories, team interference and prior training exposure remain
+unseparated; episode uncertainty conditional on one outcome-selected checkpoint is not
+training-seed uncertainty. No algorithm-effect or UAV claim follows.
+
+Exposure is 96 episodes / 38,400 scoring steps / 230,400 agent observations / two checkpoint
+loads and zero new training updates. Complete process walls G/C/H are .27/20.44/18.19 s,
+38.90 s summed, with every 180 s cap met. This prices this panel, not a minimal real B or
+total direction cost. Tuned same-information generic-baseline headroom remains absent.
+
+The allocated discriminator is answered; no successor is selected. The ordinary fixed-K2
+policy-gap learning family remains paused. A further proposed family re-entry needs its
+direction-level decision; any future learning question needs separately specified real
+learning evidence. The measurement does not create an exact-diagnosis prerequisite.
+Strongest support, contradiction, full observations and decisions:
+`FSD_NATIVE_RENEWAL_CONTROL_A01_RESULT_EVIDENCE_20260907.md` and
+`FSD_NATIVE_RENEWAL_CONTROL_A01_INTAKE_20260907.md`.
+
+## Objects and their state (2026-09-07)
 
 | Object | State | Record |
 | --- | --- | --- |
@@ -120,6 +150,7 @@ is released by the card/spec preparation.
 | E2 — D2 cost sweep on homogeneous corridor | complete; 15 valid runs; frozen verdict `NEITHER`; accepted B intake | `FSD_E2_INTERRUPTION_COST_SWEEP_RESULT_EVIDENCE_20260904.md`; `FSD_E2_INTERRUPTION_COST_SWEEP_INTAKE_20260904.md` |
 | E3 — heterogeneous hazard | complete18/18 valid; original bounded E3-H0-NO-ADVANTAGE retained by complete Convergence | `FSD_E3_HETEROGENEOUS_HAZARD_SCIENCE_CARD_20260904.md`; `FSD_E3_HETEROGENEOUS_HAZARD_INTAKE_20260905.md` |
 | Post-E3 renewal/reference census | complete3/3 A/RECON,288 candidates, zero learner; public greedy explains switching opportunity; no successor selected | `FSD_E4_CENSUS_SCIENCE_CARD_20260905.md`; `FSD_E4_CENSUS_RESULT_EVIDENCE_20260905.md`; `FSD_E4_CENSUS_INTAKE_20260905.md` |
+| Native-renewal control A01 / P21 | complete3/3 conditional A/RECON; H−C +.26935 with post G−H .16403; branch2, zero training, no successor | `FSD_NATIVE_RENEWAL_CONTROL_A01_SCIENCE_CARD_20260907.md`; `FSD_NATIVE_RENEWAL_CONTROL_A01_RESULT_EVIDENCE_20260907.md`; `FSD_NATIVE_RENEWAL_CONTROL_A01_INTAKE_20260907.md` |
 | Advancement plan | E1 → E2 → E2b/E3 → E4 → C-gate; E2b is not selected at this boundary | `docs/Claude_docs/plans/RESEARCH_ADVANCEMENT_PLAN_20260902.md` |
 
 ## Code
