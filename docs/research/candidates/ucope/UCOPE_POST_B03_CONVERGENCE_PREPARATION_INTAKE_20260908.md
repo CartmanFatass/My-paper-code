@@ -246,3 +246,34 @@ conflict returns to the same node before its affected requirement is executed;
 no formed decision or retained successor means return the exhausted route.
 DIRECTION's accepted scientific conclusions and the formal UAV-entry count
 remain unchanged during preparation.
+
+## 7. Fixed publication and clean return boundary
+
+The scientific input is committed/pushed at
+`f3ac3991ff30a603adc111cead2e3bd38f6783ca`. The complete fixed
+[TASK](pro_packets/20260908_post_b03_convergence/TASK.md) is committed/pushed at
+`6307d2fd9f3911ef1dd7d3b7c7c154bfaa766fa8`; its immutable
+[GitHub link](https://github.com/CartmanFatass/My-paper-code/blob/6307d2fd9f3911ef1dd7d3b7c7c154bfaa766fa8/docs/research/candidates/ucope/pro_packets/20260908_post_b03_convergence/TASK.md)
+is bound by the Prompt Author renderer in
+[HANDOFF.json](pro_packets/20260908_post_b03_convergence/HANDOFF.json).
+Request`2026-09-08-ucope-post-b03-convergence-01` is **READY_TO_DISPATCH**;
+DM has made no Transport dispatch or provider Send.
+
+The [publication readback](pro_packets/20260908_post_b03_convergence/archive/PUBLICATION_READBACK.json)
+records a direct GitHub read of the TASK at its full SHA, equality to the
+committed local bytes, and the existing delivery branch/Issue. The TASK
+SHA-256 is`527a813bec83f7a046055b3a54712e8ff2378b96074d006be1b7d27ebbefe72b`.
+The [Issue publication snapshot](pro_packets/20260908_post_b03_convergence/archive/ISSUE_PUBLICATION_READBACK.json)
+retains the current P61 scope and fixed link; the prior body/comment remain in
+the earlier input snapshot. The [binding readback](pro_packets/20260908_post_b03_convergence/archive/BINDING_READBACK.json)
+retains the current non-retired node and the earlier replacement's provenance.
+Fresh browser verification and the one exact Send remain Transport work.
+
+Pro may add only this round's`archive/RESPONSE.md` on the current descendant
+HEAD of`codex/ucope` and its delivery-link comment on Issue11. Root receives
+the complete committed HANDOFF, fixed TASK URL and native return target
+`/root/dm_ucope_p47_resume`, then dispatches via the configured existing
+Transport without model overrides. Read the eventual full response directly
+from its immutable commit; a chat receipt alone is not the direction decision.
+All preparation work is committed at return, no run is active, and no
+scientific successor has been selected locally.
