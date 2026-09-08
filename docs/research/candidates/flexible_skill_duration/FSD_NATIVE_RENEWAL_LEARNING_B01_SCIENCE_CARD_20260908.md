@@ -16,6 +16,16 @@ CM dispatch, scientific invocation or Pro Send is allocated by this preparation.
 The prospective scientific definition is recorded before new results. B has no
 confirmatory consumption state.
 
+P34 implementation/readiness update (2026-09-08): the preparation-only coding
+boundary above was superseded by the named P34 implementation assignment.
+Reviewed source `b3f86bb28879db239b07291c39d93a1c494abe50` is integrated on main as
+`0e731dbbd30ee6ec68f70f0d54e40a0dd3fc2c3f`. The 445-line runner and 18 passing
+synthetic tests have technical acceptance, with both publication findings repaired.
+See [technical acceptance](FSD_NATIVE_RENEWAL_LEARNING_B01_TECHNICAL_ACCEPTANCE_20260908.md)
+and [P34 DM intake and exact next allocation need](FSD_NATIVE_RENEWAL_LEARNING_B01_P34_INTAKE_20260908.md).
+No real model/host/learner/evaluation or Pro invocation has occurred. The scientific
+definition, prediction and caps below are unchanged; runtime is still unallocated.
+
 Question: does a fixed public applied-renewal rule retain a useful native return
 difference after repeated real, from-scratch learning under that rule, against the
 same internally defined D2 learner which applies its own sampled mask? The public

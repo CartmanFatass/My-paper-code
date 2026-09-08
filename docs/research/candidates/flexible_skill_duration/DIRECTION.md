@@ -177,6 +177,9 @@ supplies this decision. P30 now records the prospective
 `FSD_NATIVE_RENEWAL_LEARNING_B01_SCIENCE_CARD_20260908.md` and companion CM specification
 for this same discriminator, with training/evaluation masters770203/770204 and no new
 scientific exposure. Implementation and execution allocation return through Root to Portfolio.
+P34 subsequently accepted the bounded implementation and synthetic/source checks;
+the same learning discriminator remains unobserved. Its readiness and exact runtime
+allocation request are recorded in `FSD_NATIVE_RENEWAL_LEARNING_B01_P34_INTAKE_20260908.md`.
 
 ## Objects and their state (2026-09-08)
 
@@ -190,7 +193,7 @@ scientific exposure. Implementation and execution allocation return through Root
 | E3 — heterogeneous hazard | complete18/18 valid; original bounded E3-H0-NO-ADVANTAGE retained by complete Convergence | `FSD_E3_HETEROGENEOUS_HAZARD_SCIENCE_CARD_20260904.md`; `FSD_E3_HETEROGENEOUS_HAZARD_INTAKE_20260905.md` |
 | Post-E3 renewal/reference census | complete3/3 A/RECON,288 candidates, zero learner; public greedy explains switching opportunity; no successor selected | `FSD_E4_CENSUS_SCIENCE_CARD_20260905.md`; `FSD_E4_CENSUS_RESULT_EVIDENCE_20260905.md`; `FSD_E4_CENSUS_INTAKE_20260905.md` |
 | Native-renewal control A01 / P21 | complete3/3 conditional A/RECON; H−C +.26935 with post G−H .16403; branch2, zero training, no successor | `FSD_NATIVE_RENEWAL_CONTROL_A01_SCIENCE_CARD_20260907.md`; `FSD_NATIVE_RENEWAL_CONTROL_A01_RESULT_EVIDENCE_20260907.md`; `FSD_NATIVE_RENEWAL_CONTROL_A01_INTAKE_20260907.md` |
-| Native-renewal learning B01 / P30 | prospective selected one-pair C_train/H_train/G card and complete implementation spec; no coding or scientific allocation | `FSD_NATIVE_RENEWAL_LEARNING_B01_SCIENCE_CARD_20260908.md`; `FSD_NATIVE_RENEWAL_LEARNING_B01_CM_SPEC_20260908.md`; `FSD_NATIVE_RENEWAL_LEARNING_B01_PREPARATION_INTAKE_20260908.md` |
+| Native-renewal learning B01 / P30–P34 | selected one-pair C_train/H_train/G card; reviewed implementation complete, 18 synthetic tests pass; scientific execution unallocated | `FSD_NATIVE_RENEWAL_LEARNING_B01_SCIENCE_CARD_20260908.md`; `FSD_NATIVE_RENEWAL_LEARNING_B01_CM_SPEC_20260908.md`; `FSD_NATIVE_RENEWAL_LEARNING_B01_P34_INTAKE_20260908.md` |
 | Advancement plan | E1 → E2 → E2b/E3 → E4 → C-gate; E2b is not selected at this boundary | `docs/Claude_docs/plans/RESEARCH_ADVANCEMENT_PLAN_20260902.md` |
 
 ## Code
