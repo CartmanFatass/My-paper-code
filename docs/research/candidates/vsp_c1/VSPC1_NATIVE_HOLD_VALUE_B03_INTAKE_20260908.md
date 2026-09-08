@@ -133,3 +133,19 @@ Root observes the newly accepted handle and returns terminal facts to the same
 CM for collection, then this DM for scientific intake. The next discriminator
 remains the original normalized GATED/full-MLP/H comparison. No additional arm,
 seed, evaluation, H completion, source substitution or scientific retry is selected.
+
+## 6. Corrected handle accepted — collection in progress
+
+After the correction above, CM reported Root has already accepted
+`vspc1_hold_value_b03_8201_7a8ed3aa5d25_cwd1`, running with PID3010237. CM directly
+observed fresh admission with physical/effective available memory both
+15634731008 bytes, above4GiB. The same CM now owns the assigned terminal
+collection work; no additional payload is permitted. This acceptance supersedes
+§5's pending submission action: **do not resubmit the command**.
+
+The earlier zero-exposure facts describe the original failed shell and the
+completed staging correction, not the newly running scientific invocation.
+Source/master/method/output and all original budgets remain unchanged. Native
+counts, returns, moment states and full resource conformance await terminal
+collection; the prediction remains unscored. The accepted-handle/admission facts
+will be linked to the completed collection receipt when it returns.
