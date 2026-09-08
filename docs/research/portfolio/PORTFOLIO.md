@@ -1,10 +1,12 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-08 (P39 FRRIE native fault-context continuation)
+Updated at: 2026-09-08 (P40 FSD independent-pair preparation)
 
-Current incremental command: [P39 FRRIE native fault context](handoffs/2026-09-08-p39-frrie-native-fault-context.md). A07 retained a fatal Python path, missed its scheduled MEI and exhausted P35/P37. Reuse attributable retained crash material first; only if unusable prepare at most one120s native observation with established complete containment. Reuse P36 capability/gap evidence; no setup or Python-only repeat. Actual dispatch remains a Root fact.
+Current incremental command: [P40 FSD independent trained pair](handoffs/2026-09-08-p40-fsd-independent-pair-preparation.md). B01's valid one-pair H−C+0.497383 supports preparation of one fresh independent pair at the same comparison/budget. Freeze unused training/evaluation masters and the minimal seed/input implementation spec; no runtime or code implementation is yet allocated.
 
-Retained incremental command: [P38 FSD native-renewal learning panel](handoffs/2026-09-08-p38-fsd-learning-b01-execution.md). G/C/H have terminal exit0 receipts; same CM collection and DM intake proceed under the issued route. No extra probe,seed or automatic successor. Scientific validity awaits intake.
+Retained incremental command: [P39 FRRIE native fault context](handoffs/2026-09-08-p39-frrie-native-fault-context.md). A07 retained a fatal Python path, missed its scheduled MEI and exhausted P35/P37. Reuse attributable retained crash material first; only if unusable prepare at most one120s native observation with established complete containment. Reuse P36 capability/gap evidence; no setup or Python-only repeat. Actual dispatch remains a Root fact.
+
+Completed incremental command: [P38 FSD native-renewal learning panel](handoffs/2026-09-08-p38-fsd-learning-b01-execution.md). Accepted B01 intake atbdf9d024b reports H0.872604,C0.375221,G0.893789, one trained pair and708.25s total wall. The package advantage is conditional on this pair; stable superiority and learned renewal remain unsupported. P40 is the separately issued follow-up preparation.
 
 Retained incremental command: [P37 FRRIE A07 command transport](handoffs/2026-09-08-p37-frrie-a07-command-transport.md). The accepted supervisor wrapper exited127 before preflight/science; preserve it and transport the same committed LF payload through a staged script under a distinct handle. P35 scientific scope/cap remain unchanged.
 
