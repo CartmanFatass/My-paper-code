@@ -344,3 +344,30 @@ do not execute another payload. The original failed shell remains preserved and
 had no scientific exposure. Actual normalized-regime results and terminal
 conformance are pending, with source7a8ed3aa5d25 and every frozen scientific
 field unchanged. See [intake §6](VSPC1_NATIVE_HOLD_VALUE_B03_INTAKE_20260908.md#6-corrected-handle-accepted--collection-in-progress).
+
+## 11. Completed result and allocation boundary
+
+The sole corrected handle finished exit0/COMPLETE. CM collection
+`df899599d4aa474ba252ce32740ec8e7eceddd79` and the
+[scientific intake §§7–11](VSPC1_NATIVE_HOLD_VALUE_B03_INTAKE_20260908.md#7-completed-pair-what-i-checked)
+establish a valid complete **UP**: GATED−MLP +.03980171530455754, conditional
+SE .006008657101475142; GATED−H +.03521279747565949 and MLP−H
+−.004588917828898052. All32 matched evaluations survive, including4/9/19 adverse
+differences for those respective contrasts. This is one normalized training pair,
+kept separate from the old regime's two pairs. The H qualification and original
+claim ceiling apply; normalization is not established as a repair or causal effect.
+
+All286720 native team steps,2048 Adam calls and96 final evaluations completed.
+Both arms' moments have n131072/256 updates and match checkpoint/summary with
+evaluation/H frozen. Enclosing310.79s and conservative complete arm bounds
+161.333584841s/149.829881700s conform to the original caps; no limit or breach
+is recorded. [E0](VSPC1_NATIVE_HOLD_VALUE_B03_RESULT_EVIDENCE_20260908.md) and
+[analysis](VSPC1_NATIVE_HOLD_VALUE_B03_ANALYSIS_20260908.json) retain resources,
+exposure, every outcome and the original pre-admission failure separately.
+
+WITHIN(.55) missed, Brier .3025; owner prediction was not taken. Sections1–7
+remain frozen as specified before output. **P60 is exhausted after this intake**;
+no further run, evaluation, tuning, source change or fresh key is allocated.
+The recommended later independent normalized pair is unallocated advice through
+Root to Portfolio. B has no consumption state; family, lifecycle, priority,
+recast count, C status and formal UAV-entry determination are unchanged.

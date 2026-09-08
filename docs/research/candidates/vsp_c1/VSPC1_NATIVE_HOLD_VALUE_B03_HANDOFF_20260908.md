@@ -89,3 +89,15 @@ CM reports Root has accepted `vspc1_hold_value_b03_8201_7a8ed3aa5d25_cwd1`,
 PID3010237, with fresh admission passed. The existing CM is collecting it.
 **Do not submit the command again.** The prior failure/staging facts remain in
 the intake; the new scientific invocation awaits its own terminal evidence.
+
+## Current action: integrate completed scientific intake; P60 exhausted
+
+The corrected handle finished exit0, complete310.79s within the original caps.
+CM collection `df899599d4aa474ba252ce32740ec8e7eceddd79` is integrated; the
+[DM intake §§7–11](VSPC1_NATIVE_HOLD_VALUE_B03_INTAKE_20260908.md#7-completed-pair-what-i-checked)
+accepts UP with one normalized pair and separate GATED/H and negative MLP/H
+qualifications. Original failure and all outcomes remain preserved.
+**No command is pending and neither handle may be resubmitted.** Root integrates
+the scientific intake/evidence/brief/audit/owner delivery, preserving parallel
+ledger rows, and logs P60 exhaustion. One later independent normalized pair is
+recommended to Portfolio only; this handoff allocates no next card, source or run.
