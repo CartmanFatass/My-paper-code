@@ -60,9 +60,10 @@ class PersistentTrainer:
 
     def __init__(self, *, arm: str, checkpoint_bytes: bytes | None = None,
                  forecast_package: bool = False, progress: dict | None = None,
-                 deadline: float | None = None) -> None:
+                 deadline: float | None = None, mean_mode: str = "DIRECT_MEAN") -> None:
         self.arm = arm
         self.forecast_package = forecast_package
+        self.mean_mode = mean_mode
         self.progress = progress
         self.deadline = deadline
         self.checkpoint_bytes = checkpoint_bytes
@@ -74,7 +75,7 @@ class PersistentTrainer:
         result = _retained_full_update(
             arm=self.arm, fragments=fragments, source_label=source_label,
             resume_checkpoint_bytes=self.checkpoint_bytes,
-            forecast_package=self.forecast_package, progress=self.progress, deadline=self.deadline,
+            forecast_package=self.forecast_package, mean_mode=self.mean_mode, progress=self.progress, deadline=self.deadline,
         )
         self.checkpoint_bytes = bytes(result.pop("private_checkpoint_bytes"))
         self.update = int(result["update"])

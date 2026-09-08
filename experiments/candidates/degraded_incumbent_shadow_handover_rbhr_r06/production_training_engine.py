@@ -425,6 +425,16 @@ def _arm_policy_terms(
     return log_prob, entropy, active
 
 
+def _motion_mean(motion, *, mean_mode="DIRECT_MEAN", actor_raw=None, owner=None):
+    """Physical vehicle0 xy, vehicle1 xy; own input is pre-decision raw data."""
+    if mean_mode == "OWN_COMMAND_MEAN":
+        copies = torch.stack((owner.long(), 3 - owner.long()), dim=-1)
+        own = torch.gather(actor_raw[..., 8:10], -2,
+                           copies[..., None].expand(*copies.shape, 2)).flatten(-2)
+        motion = motion + own / 3.0
+    return 3.0 * torch.tanh(motion)
+
+
 def _policy_log_prob(
     arm: str,
     motion: torch.Tensor,
@@ -437,10 +447,11 @@ def _policy_log_prob(
     renew: torch.Tensor,
     prepare_mask: torch.Tensor | None = None,
     commit_mask: torch.Tensor | None = None,
+    *, mean_mode: str = "DIRECT_MEAN", actor_raw=None, owner=None,
 ) -> tuple[torch.Tensor, torch.Tensor]:
     """Common FP32 live/replay action mean and behavior likelihood law."""
 
-    mean = 3.0 * torch.tanh(motion)
+    mean = _motion_mean(motion, mean_mode=mean_mode, actor_raw=actor_raw, owner=owner)
     ell = torch.clamp(log_std, -5.0, 1.0)
     motion_log_prob = -0.5 * (
         ((action - mean) / torch.exp(ell)).square()
@@ -500,6 +511,7 @@ def run_full_4096_dry_update(
     source_label: str = "SYNTHETIC_TEST_FIXTURE",
     resume_checkpoint_bytes: bytes | None = None,
     forecast_package: bool = False,
+    mean_mode: str = "DIRECT_MEAN",
     progress: dict | None = None,
     deadline: float | None = None,
 ) -> dict[str, object]:
@@ -570,13 +582,14 @@ def run_full_4096_dry_update(
                 )
                 motion, prepare_logit, commit_logit = _role_policy_heads(heads, data["owner"][selected])
                 ell = torch.clamp(model.log_std, -5.0, 1.0)
-                _, log_prob = _policy_log_prob(
+                mean, log_prob = _policy_log_prob(
                     arm, motion, model.log_std, data["action"][selected],
                     prepare_logit, commit_logit, data["prepare_outcome"][selected],
                     data["commit_outcome"][selected], data["renew"][selected],
                     data["prepare_mask"][selected], data["commit_mask"][selected],
+                    mean_mode=mean_mode, actor_raw=data["actor_raw"][selected],
+                    owner=data["owner"][selected],
                 )
-                mean = 3.0 * torch.tanh(motion)
                 motion_lp = -0.5 * ((((data["action"][selected] - mean) / torch.exp(ell)) ** 2) + 2 * ell + math.log(2 * math.pi)).sum(-1)
                 motion_entropy = torch.ones_like(motion_lp) * (ell + 0.5 * math.log(2 * math.pi * math.e)).sum()
                 prepare_lp = _bernoulli_log_prob(prepare_logit, data["prepare_outcome"][selected])

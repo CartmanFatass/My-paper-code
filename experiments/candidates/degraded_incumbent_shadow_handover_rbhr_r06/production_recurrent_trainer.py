@@ -23,7 +23,7 @@ from .production_population import address
 from .production_train_reset import TrainResetKey, arm_substream, build_train_reset_row
 from .production_training import PersistentTrainer
 from .production_training_engine import (
-    ExactPolicyGraph, WelfordState, _policy_log_prob, _role_policy_heads,
+    ExactPolicyGraph, WelfordState, _policy_log_prob, _motion_mean, _role_policy_heads,
 )
 
 
@@ -247,12 +247,13 @@ class BatchedRecurrentPolicy:
     """One batched policy forward per primitive tick; no Python env loop."""
 
     def __init__(self, *, arm: str, checkpoint_bytes: bytes | None, state: RecurrentRolloutState,
-                 forecast_package: bool = False) -> None:
+                 forecast_package: bool = False, mean_mode: str = "DIRECT_MEAN") -> None:
         state.validate()
         if arm != state.arm:
             raise RecurrentTrainerError("policy/state arm binding differs")
         self.arm = arm; self.model = _load_policy(checkpoint_bytes); self.state = state
         self.forecast_package = forecast_package
+        self.mean_mode = mean_mode
         self.last_behavior_log_prob = torch.empty(state.hidden.shape[0], dtype=torch.float32)
         if checkpoint_bytes is not None:
             retained = torch.load(io.BytesIO(bytes(checkpoint_bytes)), map_location="cpu", weights_only=False)
@@ -304,7 +305,8 @@ class BatchedRecurrentPolicy:
         rows["arm_mode"] = ARMS.index(self.arm)
         owner_tensor = torch.as_tensor(owner, dtype=torch.long)
         motion, prepare_logit, commit_logit = _role_policy_heads(heads, owner_tensor)
-        means = (3.0 * torch.tanh(motion)).detach().cpu().numpy()
+        means = _motion_mean(motion, mean_mode=self.mean_mode, actor_raw=actor,
+                             owner=owner_tensor).detach().cpu().numpy()
         log_std = torch.clamp(
             self.model.log_std.detach(), -5.0, 1.0,
         ).cpu().numpy()
@@ -370,7 +372,7 @@ class BatchedRecurrentPolicy:
         _, self.last_behavior_log_prob = _policy_log_prob(
             self.arm, motion, self.model.log_std.detach(), action,
             prepare_logit, commit_logit, prepare_outcome, commit_outcome,
-            torch.as_tensor(renew),
+            torch.as_tensor(renew), mean_mode=self.mean_mode, actor_raw=actor, owner=owner_tensor,
         )
         return rows
 
@@ -392,7 +394,7 @@ class NativePersistentTrainingFlow:
         checkpoint_bytes: bytes | None = None,
         state: RecurrentRolloutState | None = None,
         forecast_package: bool = False, progress: dict | None = None,
-        deadline: float | None = None,
+        deadline: float | None = None, mean_mode: str = "DIRECT_MEAN",
     ) -> None:
         if native.width != TRAIN_LANES:
             raise RecurrentTrainerError("TRAIN native width must be 32")
@@ -401,15 +403,16 @@ class NativePersistentTrainingFlow:
         self.state = RecurrentRolloutState.fresh(arm) if state is None else state
         self.native = native
         self.forecast_package = forecast_package
+        self.mean_mode = mean_mode
         self.sampler = MasterAddressedPolicySampler(
             master=master, block=block, arm=arm,
             episode_wave=self.state.lane_episode_wave, episode_tick=self.state.lane_episode_tick,
         )
         self.reset_factory = MasterAddressedTrainResetFactory(master=master, block=block, arm=arm)
         self.trainer = PersistentTrainer(arm=arm, checkpoint_bytes=checkpoint_bytes,
-                                         forecast_package=forecast_package, progress=progress, deadline=deadline)
+                                         forecast_package=forecast_package, progress=progress, deadline=deadline, mean_mode=mean_mode)
         self.policy = BatchedRecurrentPolicy(arm=arm, checkpoint_bytes=checkpoint_bytes, state=self.state,
-                                             forecast_package=forecast_package)
+                                             forecast_package=forecast_package, mean_mode=mean_mode)
 
     def collect_update(self, initial_observation: Mapping[str, np.ndarray]) -> Mapping[str, torch.Tensor]:
         """Collect exactly 32x128 native transitions for one PPO update."""
@@ -537,7 +540,7 @@ class NativePersistentTrainingFlow:
         self.state.critic_welford = retained["welford"]["critic"]
         self.policy = BatchedRecurrentPolicy(
             arm=self.state.arm, checkpoint_bytes=self.trainer.checkpoint_bytes, state=self.state,
-            forecast_package=self.forecast_package,
+            forecast_package=self.forecast_package, mean_mode=self.mean_mode,
         )
         return receipt
 

@@ -71,10 +71,10 @@ def recorded_resets(master_digest):
             for coordinate in coordinates()}
 
 
-def configuration(arm, *, seed=SEED, object_name=OBJECT, master_family=OBJECT):
+def configuration(arm, *, seed=SEED, object_name=OBJECT, master_family=OBJECT, mean_mode="DIRECT_MEAN"):
     return {
         "seed": seed, "master_hex": master(seed, family=master_family).hex(), "object": object_name, "arm": arm,
-        "underlying_arm": "STRUCTURED", "block": 0, "host": HOST, "forecast_package": False,
+        "mean_mode": mean_mode, "underlying_arm": "STRUCTURED", "block": 0, "host": HOST, "forecast_package": False,
         "torch_threads": torch.get_num_threads(), "training_dtype": "float32",
         "native_dtype": "float64", "lanes": 32, "ticks_per_update": 128, "updates": 16,
         "epochs": 4, "minibatches_per_epoch": 8, "optimizer": "AdamW",
@@ -87,7 +87,7 @@ def configuration(arm, *, seed=SEED, object_name=OBJECT, master_family=OBJECT):
 
 
 def prepare_shared(output, deadline, progress, *, seed=SEED, object_name=OBJECT,
-                   master_family=OBJECT, episode_evaluator=None):
+                   master_family=OBJECT, episode_evaluator=None, evaluate_initial=True):
     master_digest = master(seed, family=master_family)
     evaluate = evaluate_episode if episode_evaluator is None else episode_evaluator
     progress.update(seed=seed, object=object_name, master_hex=master_digest.hex())
@@ -110,6 +110,9 @@ def prepare_shared(output, deadline, progress, *, seed=SEED, object_name=OBJECT,
     resets = recorded_resets(master_digest)
     (output / "resets.json").write_text(json.dumps(resets, indent=2) + "\n", encoding="utf8")
     progress["reference_rows"] = []
+    if not evaluate_initial:
+        progress["status"] = "COMPLETE"
+        return
     for coordinate in coordinates():
         check_time(deadline)
         row = resets[coordinate.canonical_key()]
@@ -138,7 +141,7 @@ def prepare_shared(output, deadline, progress, *, seed=SEED, object_name=OBJECT,
 
 
 def run_arm(arm, output, deadline, progress, shared, *, seed=SEED, object_name=OBJECT,
-            master_family=OBJECT, episode_evaluator=None):
+            master_family=OBJECT, episode_evaluator=None, mean_mode="DIRECT_MEAN"):
     master_digest = master(seed, family=master_family)
     evaluate = evaluate_episode if episode_evaluator is None else episode_evaluator
     progress.update(seed=seed, object=object_name, master_hex=master_digest.hex())
@@ -155,13 +158,13 @@ def run_arm(arm, output, deadline, progress, shared, *, seed=SEED, object_name=O
         raise RuntimeError("B04 initial model norm differs from shared initialization")
     progress["initial_model_norm"] = arm_norm
     progress["configuration"] = configuration(arm, seed=seed, object_name=object_name,
-                                                master_family=master_family)
+                                                master_family=master_family, mean_mode=mean_mode)
     reset = MasterAddressedTrainResetFactory(master=master_digest, block=0, arm="STRUCTURED")
     native = backend.native_batch_from_rows(reset.rows(np.zeros(32, dtype=np.int64)), library=library)
     measured = TrainingMeasurements(native, progress, deadline)
     flow = NativePersistentTrainingFlow(native=measured, arm="STRUCTURED", master=master_digest,
                                         block=0, checkpoint_bytes=initial, forecast_package=False,
-                                        progress=progress, deadline=deadline)
+                                        progress=progress, deadline=deadline, mean_mode=mean_mode)
     for update in range(1, 17):
         check_time(deadline)
         started = time.perf_counter()
@@ -200,7 +203,7 @@ def run_arm(arm, output, deadline, progress, shared, *, seed=SEED, object_name=O
         evaluation = backend.native_batch_from_rows((row,), library=library)
         state = RecurrentRolloutState.fresh("STRUCTURED", width=1)
         policy = BatchedRecurrentPolicy(arm="STRUCTURED", checkpoint_bytes=final, state=state,
-                                        forecast_package=False)
+                                        forecast_package=False, mean_mode=mean_mode)
         record = {"regime": coordinate.regime, "schedule": coordinate.schedule, "speed": 4,
                   "slot": 0, "block": 0, "coordinate": coordinate.canonical_key(), "reset": row,
                   "source": f"new:{arm}:update16"}
