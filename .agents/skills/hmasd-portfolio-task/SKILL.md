@@ -8,7 +8,7 @@ description: Use when the independent Portfolio session plans Root commands, han
 OWNER_DIRECT 2026-09-07: this skill belongs to the independent Astra Portfolio (effort selected by the owner)
 session in `.codex/hmasd-portfolio.toml`, directly on main. Portfolio plans concrete tasks,
 dependencies and return branches; Luna/xhigh Root executes the issued commands, integration,
-monitoring and Pro transport. See docs/project/ROOT_OPERATIONS.md.
+experiment monitoring and Pro handoff dispatch; independent Luna/high Transport owns Pro browser work. See docs/project/ROOT_OPERATIONS.md.
 Portfolio writes its scientific files on main and pushes immediately; coordinate overlapping
 Root integrations. Existing Pro/owner authority is unchanged. Portfolio is not a launch gate.
 
@@ -173,11 +173,11 @@ and includes the current Portfolio snapshot, this evidence specification, the se
 class and claim ceiling, plus the exact direction/evidence paths needed for the decision. The
 project-shared registry creates or binds the provider conversation on first use under the stable
 conversation binding key and reuses that exact provider conversation for later Portfolio rounds.
-Each default handoff goes to integrated Root, the one Transport execution endpoint declared in `.codex/hmasd-transport.toml` and
+Each default handoff goes to independent Transport, the reusable endpoint declared in `.codex/hmasd-transport.toml` and
 sends exactly one completion or terminal-blocker receipt back to the handoff author's declared
 `parent_thread_id`. App dispatch omits `model` and `thinking`, preserving the recipient settings; it never
 calls `create_thread` or selects a replacement task. The singleton task ID is an execution endpoint,
-never a provider-conversation binding. Set the scientific receipt parent to this Portfolio task; Root records its own receipts locally when it is also parent.
+never a provider-conversation binding. Set the scientific receipt parent to this Portfolio task; native-direction requests instead name Root as parent for native forwarding.
 The configured provider model is separate from that executor. Honor an explicit owner request
 for a new provider conversation or caller-direct execution using the Prompt Author/Transport
 exceptions; do not send through both routes or repeat an accepted provider request.

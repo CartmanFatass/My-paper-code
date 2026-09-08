@@ -1,6 +1,6 @@
 ---
 name: hmasd-loop-dispatch
-description: Use when HMASD Portfolio plans or refills direction work, or Root receives a command, native return, dispatch gap or working-set vacancy. Also use when only one direction advances despite available work. Not for scientific intake or provider transport mechanics themselves.
+description: Use at every HMASD Root goal turn, new command, native return, Transport receipt, failed dispatch and before waiting; also when Portfolio refills a vacancy or parallel directions stop advancing. Determines the next executable action, not science or Pro browser mechanics.
 ---
 
 # HMASD Portfolio and Root dispatch
@@ -81,6 +81,37 @@ selecting on the first score. A new scientific choice or unfrozen invocation rem
 
 ## Root: process each return and keep independent directions moving
 
+### Stable next-action trigger
+
+OWNER_DIRECT 2026-09-07: apply this sequence at every goal-turn entry, incoming command,
+native return or Transport receipt, and before any blocking wait. Read this section once
+when first applicable; reuse it within the turn rather than rereading the repository. This
+is an explicit skill procedure, not an automatic event subscription or a new scheduler.
+
+Use the current command, original return and latest execution facts to choose the first
+applicable action below. After that bounded action, re-enter the sequence with changed facts.
+Do not wait to collect a full batch or reconstruct every direction's history.
+Before a lengthy comparison capture or integration, send any already-known exhausted-slot
+request and dispatch other independent ready commands; a long local step cannot delay those
+short actions. The comparison intercept below applies before any eligible coding dispatch.
+
+| Available event/fact | Next action now |
+| --- | --- |
+| Complete fresh CM code spec, coding not started, comparison enrollment remains | Capture and dispatch the authorized five-arm batch before any solo coding; do not wait for Pro. |
+| Ready issued command or ready named follow-on | Dispatch it; issue all other independently ready work before a long local step. |
+| Native delivery or Transport completion/blocker receipt | Match request/command and original recipient; do the necessary bounded acceptance/integration or forward the original receipt to its named native DM/CM, then dispatch the ready follow-on. |
+| Required short index operation is busy | Retain that exact dependency and service another ready event; do not hold the whole return queue. |
+| Supplied route exhausted or target unavailable without replacement route | Send one exact next-command/repair request to Portfolio now with the actual count delta; continue the other chains. |
+| Accepted experiment needs observation | Read its supervisor state and route a terminal result; do not turn process completion into science acceptance. |
+| Pending Pro request whose Transport task became idle/failed | Send the same Transport an observation/recovery-only continuation from persisted facts; no browser takeover or another Send. |
+| No executable action after the above | Wait for the first event for at most 60 seconds; keep the named dependencies recoverable. |
+
+Transport app acceptance means its task received the handoff; it is not provider Send
+acceptance. Count the direction only while native work, an experiment or accepted Pro generation
+is actually advancing. An unresolved idle Transport dependency cannot fill a slot. Transport
+receipts are actionable Root inputs even when every other direction is still running. Root
+never waits for Transport's whole request queue. Routine observations stay in the existing log.
+
 1. Dispatch every independent command before waiting. Reuse accepted assignments. Use native
    `send_message` for running agents and `followup_task` to resume idle ones; follow the exact
    addressing rules in `docs/project/SIBLING_COMMUNICATION.md`.
@@ -109,7 +140,7 @@ selecting on the first score. A new scientific choice or unfrozen invocation rem
    for the first completion/message, with a bounded wait of at most 60 seconds; never join all
    direction tasks or poll one task until terminal. Batch short independent status reads only.
    On wake, handle new actionable events before another observation/wait. While native work
-   is running, interleave its returns with authorized external observations. When
+   is running, interleave its returns with experiment observations and Transport receipts. When
    only external waits or a requested Portfolio reply remain, yield the current pass with those
    exact dependencies while retaining observation within the active goal; do not mark it complete.
    An exhausted route requests its next command immediately; other live directions need not
@@ -131,9 +162,10 @@ authorize a retry of an accepted experiment, a different source/device/budget or
 Root follows supplied choices; it does not select a replacement direction or technical alternative.
 Routine tool addressing, reads and authorized pre-acceptance mechanical corrections stay local.
 
-Serialize only short shared-index operations and exact browser identity/Send/read actions.
-After accepted Pro Send, persist the binding and resume the event loop; its tab lease is not
-a global work lock. Start all independent authorized comparison arms before observing them;
+Root serializes only short shared-index operations; independent Transport owns exact browser
+identity/Send/read actions. After accepted app dispatch to Transport, Root resumes this event
+loop. Provider Send acceptance comes from Transport's recorded facts, not the app tool ACK.
+Start all independent authorized comparison arms before observing them;
 the final comparison needs its required arms, but unrelated science routes do not.
 
 Example: A returns with a named DM intake while B is generating in Pro, C is running an

@@ -13,7 +13,10 @@ repository work. Repository documents describe methods and record evidence; they
 separate identity, permission, approval, or blocking system.
 
 The session that drives execution is **Root** (Luna/xhigh). Root executes bounded commands,
-observes accepted experiments, executes exact Pro transport and integrates specified results.
+observes accepted experiments, dispatches exact Pro handoffs and integrates specified results.
+The independent **Transport** session (Luna/high, OWNER_DIRECT 2026-09-07) owns Pro browser
+Send, observation, reconciliation, archival and parent receipts. Native DM/CM requests return
+to Root, which forwards them to the original native recipient. Transport never selects science.
 The independent **Portfolio** session (Astra; effort selected by the owner) plans tasks, readiness, dependencies, return
 branches and working-set replacement. Root logs completion and execution facts locally. It messages
 Portfolio only for a concrete new command, unresolved repair/conflict, or uncertain external
@@ -24,7 +27,7 @@ runs directly on main; coordinate overlapping file edits with Root and push expl
 Portfolio and Root use `.agents/skills/hmasd-loop-dispatch/SKILL.md` for batch planning,
 dispatch, return handling and working-set vacancies; Portfolio additionally uses
 `hmasd-portfolio-task` for scientific Portfolio decisions. See `docs/project/ROOT_OPERATIONS.md`
-for the integrated routing and goal-driven observation. Each research
+for cross-session routing and goal-driven observation. Each research
 direction is driven by one **Direction Manager (DM)**: it holds the direction's science card,
 predictions on record, intake, and escalation. **Code Manager (CM)** turns one bounded engineering
 objective into an inspectable result. Specialist subagents (scout, implementers, reviewer, critic,
@@ -277,6 +280,12 @@ When the owner is absent the loop keeps running under a standing delegation (own
 
 ## 5. Capacity and resume
 
+OWNER_DIRECT 2026-09-07 stable dispatch trigger: Root applies the `hmasd-loop-dispatch`
+skill's "Stable next-action trigger" at each goal-turn entry, new command, native return,
+Transport receipt and before blocking waits. Execute the first applicable bounded action,
+then reconsider changed facts. The skill is a maintained procedure, not a claimed runtime
+event hook; do not add another scheduler or count queued intentions as advancing work.
+
 OWNER_DIRECT 2026-09-07 rolling parallelism correction: a batch packages ready commands; it
 is never a completion barrier. Root handles each direction's return and dispatches its supplied
 next action as soon as its own dependencies are satisfied, without waiting for unrelated
@@ -342,7 +351,8 @@ or launch gates, and never override a stricter original cap.
 
 Resume model: commit and push before every launch; launch every result-bearing run detached from
 the agent's process; on the remote route use a detached worktree at the exact launch sha and the
-configured `agent-task` supervisor; Root observes accepted handles and pending Pro work within the owner's active goal
+configured `agent-task` supervisor; Root observes accepted experiment handles within the owner's active goal
+and independent Transport observes accepted Pro requests
 (`docs/project/ROOT_OPERATIONS.md`); keep every agent's state recoverable from the repository alone (card, predictions,
 launch sha, execution node, run root, queue state).
 
@@ -501,20 +511,23 @@ appendix and completed historical tasks remain unchanged.
   `hmasd-routine-implementer`, `hmasd-cm-scout`, `hmasd-reviewer`, `hmasd-research-critic`,
   `hmasd-verifier`, `hmasd-experiment-operator`. Retired definitions stay in Git history and are
   re-added only when a wave shows a check nobody else performs.
-- Root uses Luna/xhigh and executes experiment observation and Pro Transport.
+- Root uses Luna/xhigh and executes direction commands and experiment observation.
+  The independent reusable Transport task uses Luna/high and owns all Pro browser work.
   The independent Portfolio task uses Astra directly on main; its effort is selected by the owner.
   Configurations: `.codex/hmasd-monitor.toml`, `.codex/hmasd-transport.toml`, and
   `.codex/hmasd-portfolio.toml`; procedure: `docs/project/ROOT_OPERATIONS.md`.
   DM/CM sends accepted handles directly to Root, which observes and wakes native children;
   collection/technical acceptance remains CM's and scientific intake remains DM's.
-  Root's owner-driven goal covers current experiment and Pro pending work. Record adoption
-  and the responsible observer before ACK. Do not create scheduled observation automations
-  or independent Monitor/Transport tasks; the owner removed the previous scheduler.
+  Root's owner-driven goal covers experiment work and receipt-driven direction continuation;
+  Transport observes its accepted Pro requests in its own task. Record adoption and the
+  responsible observer before ACK. Do not create scheduled observation automations or an
+  independent Monitor; reuse the owner-created Transport rather than creating one per request.
 - DM is the `em` Prompt Author; independent Portfolio is the `portfolio` caller and full-response
-  intake owner. Both dispatch exact fixed-link handoffs to Root's configured Transport endpoint,
-  using Luna/xhigh. Root-authored handoffs execute locally without self-dispatch. Root-local
-  completion/blocker receipts are recorded without a self-message; other receipts go once to
-  the declared parent without model/effort overrides. Root forwards direction receipts to the
+  intake owner. Both use the independent configured Transport endpoint. Native authors normally
+  send their ready handoff to Root, which dispatches the app message. Source is the actual author,
+  parent is Root for native directions (Portfolio for its own requests), and operator is Transport.
+  All app messages omit model/effort overrides. Completion/blocker receipts go once to the
+  declared parent; only actual executor=parent uses local receipt recording. Root forwards direction receipts to the
   current native DM. Goal-driven observation does not merge request identity, tabs, archives or
   Send evidence. Preserve 6 Pro provider verification separately from the Codex model.
   Owner-directed conversation replacement and CALLER_DIRECT remain available under the existing
