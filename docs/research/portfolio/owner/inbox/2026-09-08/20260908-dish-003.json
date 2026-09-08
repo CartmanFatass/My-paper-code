@@ -19,7 +19,7 @@
     }
   ],
   "recommended": "a",
-  "auto_applied": null,
+  "auto_applied": "a",
   "dm_reason": "没有具体新干预进入建议，有限负结果也不足以自动扩大为整个来源问题的否定。",
   "evidence": [
     "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_POST_B07_DIRECTION_QUESTION_INTAKE_20260908.md"
@@ -71,5 +71,15 @@
     "verdict_text": "DM建议：本轮不安排后继，保留DIRECT及两项已接受的窄停止；普通来源应用仍未估计，不把这次有限负结果扩大为整个来源问题的结论。",
     "source": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_POST_B07_DIRECTION_QUESTION_INTAKE_20260908.md"
   },
-  "starred": true
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-08T22:57:05+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "https://github.com/CartmanFatass/My-paper-code/blob/0086cfd7e8f7326fbadf879f844b757f661e8809/docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260908_p62_post_b07_scope/archive/RESPONSE.md",
+      "record": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_POST_B07_DIRECTION_QUESTION_INTAKE_20260908.md#8-completed-p62-convergence-intake-and-application--2026-09-08",
+      "state": "applied",
+      "summary": "完整P62裁决已核对并执行(a)：保留DIRECT及B07/B06两项窄停止，本轮不安排后继；普通来源问题仍未解决。不新建卡、实验、种子、诊断或继续筛选，不扩大关闭或重构。方向记录、中文简报及审计第78–79行已更新。旧聊天链接原样保存，当前科学依据是固定GitHub全文；零新科学暴露，无第二次发送。依据AGENTS第2节及2026-09-03持续授权执行，未制造所有者回复。"
+    }
+  ]
 }

@@ -1,0 +1,85 @@
+{
+  "recorded_at_utc": "2026-09-08T22:56:46+00:00",
+  "request_id": "2026-09-08-dish-p62-post-b07-scope-convergence-01",
+  "workflow_node": "em_convergence",
+  "conversation_binding_key": "em:degraded_incumbent_shadow_handover:convergence",
+  "task_commit": "1b0ac54fb61485da73ac9290387f3f6cf30dc65c",
+  "scientific_source_commit": "c201e9eb5a71a4b0785a9104156d1dca6df2fbf9",
+  "accepted_handoff_repair_commit": "fee6323351193a64ff791d79a57147c26391fb75",
+  "canonical_full_response": {
+    "commit": "0086cfd7e8f7326fbadf879f844b757f661e8809",
+    "path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260908_p62_post_b07_scope/archive/RESPONSE.md",
+    "git_blob_sha256": "2351fdda3c924746197785279ff4463de649d8090c1e6c97aff0db6c0b015d80",
+    "git_blob_bytes": 27061,
+    "lines": 158,
+    "read_by_dm": "all lines 1-158 directly from immutable git show, including conclusion and read scope",
+    "parent_commit": "fee6323351193a64ff791d79a57147c26391fb75",
+    "commit_delta": "one added RESPONSE.md; no other changed paths",
+    "working_tree_reconciliation": "clean fee632335 fast-forwarded to 0086cfd7e before DM intake edits"
+  },
+  "github_delivery_comment": {
+    "id": 5592890707,
+    "url": "https://github.com/CartmanFatass/My-paper-code/issues/4#issuecomment-5592890707",
+    "created_at": "2026-09-08T22:43:15Z",
+    "updated_at": "2026-09-08T22:43:15Z",
+    "bindings_verified": [
+      "canonical response commit and path",
+      "fixed TASK commit and path",
+      "scientific source commit"
+    ]
+  },
+  "transport_observation_attribution": {
+    "source": "Root-routed accepted Transport receipt and completed read-only reconciliation; no DM provider UI observation",
+    "conversation_id": "6a9bec54-df00-83e8-9840-46440458f316",
+    "user_message_id": "bc54f66a-2dc6-450c-985b-779e5f1397bd",
+    "assistant_message_id": "f8a68290-bef7-4a65-b7b6-6e283eaf7f6a",
+    "visible_model": "6 Pro",
+    "underlying_model": "Latest",
+    "thinking_effort": "Pro 5/5",
+    "confirmed_send_count": 1,
+    "binding_state": "ARCHIVED",
+    "receipt_status": "SENT",
+    "chat_receipt_scope": "raw link-only reply points to prior P53; not used as P62 scientific answer",
+    "reconciliation": "Root confirms canonical P62 is full GitHub response 0086cfd7e; preserve earlier chat links and historical roundtrip metadata; no new Send or rebind",
+    "cause_of_old_chat_links": "not diagnosed"
+  },
+  "byte_preserved_sources": {
+    "CHAT_RECEIPT.md": {
+      "sha256": "c9f88329d4c558a280110e0b9c041786c38bec03bb0f9bcea6aa1b098c186b2c",
+      "bytes": 348
+    },
+    "TRANSPORT_FACTS.json": {
+      "sha256": "09edb3132305feeb14ef04284a58b42c1faba0502f92fb8cff5525ff72d386e3",
+      "bytes": 4618
+    },
+    "PROVIDER_PROMPT.md": {
+      "sha256": "7046fe889abf30bd3de0f1cb27706021a6f8497afa85a88aa7392e4df625a263",
+      "bytes": 1264
+    },
+    "PACKET_MANIFEST.json": {
+      "sha256": "cc1978e87ede2fdbd368835f5e15a0b9c612c61f81ff411994acd134ec7c4fa8",
+      "bytes": 1975
+    },
+    "GITHUB_DELIVERY_COMMENT.json": {
+      "sha256": "ad74bdcba6d26db8d7bea79c2f823d970cee5a028bf05d5b5baac583ec1c14ff",
+      "bytes": 5171
+    }
+  },
+  "scientific_intake": {
+    "authority": "PRO_FINAL",
+    "option": "a",
+    "decision": "retain DIRECT and the two accepted narrow stops; no successor; ordinary-source agenda unresolved",
+    "conformance": "complete class-correct answer; no concrete current-instruction/specification conflict",
+    "new_scientific_exposure": {
+      "models": 0,
+      "transitions": 0,
+      "optimizer_steps": 0,
+      "episodes": 0,
+      "native_calls": 0,
+      "scientific_invocations": 0
+    },
+    "next_selected_discriminator": null,
+    "route": "P62 no-successor route exhausted after committed intake",
+    "intake": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_POST_B07_DIRECTION_QUESTION_INTAKE_20260908.md section 8"
+  }
+}
