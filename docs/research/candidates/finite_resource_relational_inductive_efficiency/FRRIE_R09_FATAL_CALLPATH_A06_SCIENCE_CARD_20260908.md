@@ -5,9 +5,9 @@ This runtime question does not itself test partial observability or non-stationa
 it protects the event-address and learner path used by the same-information multi-agent comparison.
 
 Object: `FRRIE-R09-FATAL-CALLPATH-A06-P31-20260908`.
-Class: **A/RECON**. Status: `EXACT_COMMAND_FROZEN / READY_FOR_ONE_ATTEMPT`.
-Allocation: at most one new complete120s observation; section7 records exact-command acceptance.
-No invocation has started. This A object has no consumption state.
+Class: **A/RECON**. Status: `ATTEMPT_ENDED / A06_INCONCLUSIVE`.
+Allocation: the sole P31 chain ended after118.40s with timeout exit124; remaining allowance is zero.
+Section8 links the frozen-rule intake. This A object has no consumption state.
 
 ## 1. Decision question and retained-evidence check
 
@@ -250,5 +250,30 @@ Root appends the following ordinary technical row alongside §6's selection row:
 ```text
 | 2026-09-08T07:22:28Z | finite_resource_relational_inductive_efficiency | object | technical | (a) accept exact static handoff; (b) return concrete command gap | (a):A06 command1200B SHA256 67f598644882f596ecbfbced2454003c69c9a04cb153a6f62b23079e00bf72e3 accepted;Root one120s dispatch next;scientific invocations0 | yes | OWNER_DELEGATED (unattended,2026-09-03 instruction); P31 | docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R09_FATAL_CALLPATH_A06_SCIENCE_CARD_20260908.md#7-exact-command-acceptance-and-root-release | none | |
 ```
+
+## 8. Terminal observation and intake
+
+The accepted handle `frrie-a06-fatal-callpath-p31-43eec21e` ended with supervisor
+exit124/status failed, tmux inactive. GNU time records118.40s and16160KiB;
+supervisor duration is119s. Fresh memory admission passed. The complete retained
+log has no fatal stack, Python traceback, capture marker or original-program
+completion report. Only the admission receipt exists; `learner/` is empty.
+Actual completed updates/episodes/tapes/native slots and the original program's
+separate terminal code remain unknown. The RSS value has unmeasured descendant
+coverage and does not establish a learner-memory bound or progress.
+
+CM [E0/JSON](FRRIE_R09_FATAL_CALLPATH_A06_RESULT_EVIDENCE_20260908.md) are at
+`468ffe2cc84fb8c30896c8467390665ffe55a235` (main integration1ab7c3a30).
+DM's [scientific intake](FRRIE_R09_FATAL_CALLPATH_A06_SCIENTIFIC_INTAKE_20260908.md)
+applies the unchanged §2 rule: **`A06_INCONCLUSIVE`**, MEI not met, prediction
+unscored for timeout/failed path collection; owner prediction not taken.
+The command/input bindings matched, tracked original source was unchanged and
+no complete-cap breach was observed. These engineering facts do not supply the
+missing primary observation. A05/P22 and the R09 learning record remain unchanged.
+
+P31 is finished. The intake returns a separately scoped scheduled-stack task
+recommendation through Root to Portfolio, with zero new input, card, engineering
+or execution allocation. No retry/extension/repair or additional diagnostic has
+started. The first two lines and prospective §§1–5 are unchanged.
 
 scope: none
