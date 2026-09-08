@@ -250,3 +250,34 @@ The question is justified without an exact policy maximum, support census, paid
 headroom or unique cause diagnosis: none would supply a new independent learned
 controller's native performance, the observation this decision needs. If the node
 finds the defined use unworthy, the source-based pause cleanly releases the slot.
+
+## 8. Ready publication binding
+
+The source intake/facts/owner packet/item/brief and audit were committed and pushed
+at `97dfa000f84fd4775f0c42f8632a0b412e3fb969`, the fixed input and delivery baseline.
+The [TASK](pro_packets/20260908_greedy_use_reentry_convergence/TASK.md) and
+[REQUEST](pro_packets/20260908_greedy_use_reentry_convergence/REQUEST.json) were
+committed and pushed at `701157692b512a95e63f5ac63b2f5c75e29240ee`.
+The renderer bound that exact committed TASK after its successful push:
+
+- Request: `2026-09-08-vsp03-p54-greedy-use-convergence-01`.
+- Fixed TASK: <https://github.com/CartmanFatass/My-paper-code/blob/701157692b512a95e63f5ac63b2f5c75e29240ee/docs/research/candidates/vsp_03/pro_packets/20260908_greedy_use_reentry_convergence/TASK.md>.
+- [HANDOFF](pro_packets/20260908_greedy_use_reentry_convergence/HANDOFF.json),
+  `READY_TO_DISPATCH`; no dispatch acceptance or provider Send exists from this DM.
+- Existing substantive Issue6 is OPEN and reused; delivery response is this round's
+  `pro_packets/20260908_greedy_use_reentry_convergence/archive/RESPONSE.md` only.
+- Reuse accepted `em:vsp_03:convergence` provider conversation
+  `6a9cbb9d-374c-83e8-b600-23d3a8033a69`; Transport retains provider verification.
+- Source native UUID `01a08280-6335-79a2-8055-61bb0596eb1e`; parent Root
+  `01a07249-b095-7821-8ce2-e9c32ba85267`; configured independent Transport
+  `01a07e52-f085-76a0-886a-4127f490421f`. Root uses this authored HANDOFF's exact
+  dispatch prompt once and forwards the matching complete response to this DM.
+
+Mechanical acceptance found all12 references at the fixed input SHA, correct
+source/parent/operator routing, one scoped delivery, consistent arithmetic and zero
+new science exposure. `git diff --check` passed; the six-heading Chinese brief has
+377 characters. The first local JSON/brief check used the Windows default text
+encoding and failed on a Chinese byte; the same data-only check with explicit UTF-8
+passed. It performed no scientific import or test invocation and made no result root.
+The only outstanding action is Root's existing one-request Transport route; no new
+Portfolio implementation request, extra observation scheduler or experiment is created.
