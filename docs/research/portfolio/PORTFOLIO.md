@@ -1,8 +1,10 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-07 (P22 FRRIE offline R09 allocation; other routes retained)
+Updated at: 2026-09-07 (P23 FRRIE targeted failure assessment)
 
-Current incremental command: [P22 FRRIE exact offline R09 chain](handoffs/2026-09-07-p22-frrie-offline-r09-execution.md). P21 supplied the complete original-source command with retained wheels; one setup-through-pair invocation is allocated under its original per-arm and complete caps. Actual launch remains a Root execution fact.
+Current incremental command: [P23 FRRIE training-input failure assessment](handoffs/2026-09-07-p23-frrie-training-input-assessment.md). P22 ended R09_INVALID_INCOMPLETE after61.54s with a dataclasses TypeError; setup passed but no valid comparison was published. P23 examines the retained failure/source for a concrete correction or bounded missing observation, with zero runtime invocation.
+
+Previous incremental command: [P22 FRRIE exact offline R09 chain](handoffs/2026-09-07-p22-frrie-offline-r09-execution.md). P21 supplied the complete original-source command with retained wheels; one setup-through-pair invocation is allocated under its original per-arm and complete caps. Actual launch remains a Root execution fact.
 
 Retained incremental command: [P21 FSD/UCOPE execution continuations and FRRIE offline preparation](handoffs/2026-09-07-p21-fsd-ucope-frrie-continuations.md). Root reports two advancing chains and three exhausted returns. P21 restores three bounded native routes, with the named FSD panel and UCOPE two-pair allocations after ordinary code/card readiness; FRRIE prepares the offline original-source chain. Actual dispatch, launch and UAV entry require their recorded events.
 
