@@ -13,9 +13,15 @@ other-agent non-stationarity, roster changes or partner co-adaptation.
 [P18](../../portfolio/handoffs/2026-09-07-p18-cbsc-fresh-pair-preparation.md) at
 `80dd2af11d204ef6f57dd9aed98dc5558f69c801` selects preparation of this fresh pair.
 The [P17 intake](CBSC_LOCAL_ACQUISITION_P17_INTAKE_20260907.md#concrete-next-task-need-and-discriminator)
-established one actual metadata-ready path. Current allocation is **preparation
-only: zero acquisition, installation, target import/probe or learning invocation**.
-The card requests a future two-arm allocation; it never reuses P17's ended cap.
+established one actual metadata-ready path. P20 at
+`23d0f55983f31e58efe2e5ace5e228451fb2d49b` subsequently authorized the bounded
+seed/object correction and focused inert checks. Current stage is
+**P28_PAIR_ALLOCATED** after source readiness and the exact P28 allocation below.
+Root integrated the source and the
+[source-correction intake](CBSC_OPPORTUNITY_CREDIT_B05_SOURCE_CORRECTION_INTAKE_20260907.md).
+Actual acquisition, installation, target-runtime probe and scientific calls under
+P20 remain zero. P28 now allocates the two fresh arms; it never reuses P17's
+ended cap or treats fixture checks as a learner run.
 
 Question: with both arms on that declared runtime, does STRUCT improve final
 update-48 native return over RAW, and how do both compare with REQUEST_ONLY?
@@ -25,12 +31,13 @@ comparator class, reward, information set or direction recast. B04 RAW remains
 separate evidence; it is not the new pair's control. Its missing STRUCT is not
 filled with a value or relabelled as this fresh observation.
 
-Current source inspection found a concrete incompatibility: the accepted B04
+P18 source inspection found a concrete incompatibility: the accepted B04
 runner and arm function reject any formal seed other than 21217, and object
-identity is hardcoded as B04. The [CM handoff](CBSC_OPPORTUNITY_CREDIT_B05_ROOT_HANDOFF_20260907.md)
-records exact surfaces and the bounded correction need. Therefore **no runnable
-B05 command/source binding is accepted at this preparation boundary**. The seed
-below is not changed to evade that defect. P18 authorizes no source correction.
+identity is hardcoded as B04. P20 corrected that defect with an explicit B05
+profile while preserving B04 behavior. The [CM handoff](CBSC_OPPORTUNITY_CREDIT_B05_ROOT_HANDOFF_20260907.md)
+now binds accepted source `d2753be86c12bfa63c404ac2cac513b914371115` and exact
+future commands. The P18 source-gap intake remains historical evidence; the
+selected seed and all scientific rules below are unchanged.
 
 ## Learner, host and comparison preserved
 
@@ -95,11 +102,12 @@ Requested execution cwd:
 Requested fresh outputs:
 `temp/directions/capability_bound_semantic_currentness/exp/opportunity_credit_b05_20260907/{raw,struct}`.
 Requested handles: `cbsc-b05-raw-20260907`, then `cbsc-b05-struct-20260907`.
-These are prospective identities, not accepted processes or a substitute for the
-missing corrected source binding. The accepted B04 scientific source is
-`a3c2a49bf7002639d43a94f460b688d50c6c42dd`; preflight is separately bound to
-`ec8866b3968fcb1566976ce405d7c552d4d9a5de`. A future correction must state its actual
-full SHA and preserve unchanged scientific surfaces; no uncommitted code is run.
+These are prospective identities, not accepted processes. The corrected source
+is `d2753be86c12bfa63c404ac2cac513b914371115`, preserving the learner, host, RNG
+and pairing from `a3c2a49bf7002639d43a94f460b688d50c6c42dd`; preflight is separately
+bound to `ec8866b3968fcb1566976ce405d7c552d4d9a5de` and present unchanged in that
+source. Exact source staging and command literals are in handoff commit
+`87c1f2f01466e8ce0a558fc939b3f774b02af9f2`; no uncommitted code is run.
 
 Preserve the existing direct evaluation and publication contract: per-episode
 chosen actions, decision/settlement contributions, returns, initial/final
@@ -141,7 +149,7 @@ Proposed allocation: RAW then STRUCT, at most one full invocation per arm,
 inside STRUCT's cap, with no third analysis invocation. Fresh physical/effective
 memory admission at least 4 GiB is adjacent to each actual runner on its node and
 charged to that complete invocation. Source/command preparation is distinct from
-actual admission. P18 has allocated neither formal arm nor a new engineering run.
+actual admission. Neither P18 nor P20 allocates a formal arm or real engineering run.
 
 Machine-generated exposure line: B05 seed 21223 plans two fresh real learner arms,
 each 48 rollouts / 768 Adam steps / 384 training episodes / 64 evaluations;
@@ -208,10 +216,11 @@ quarantines remain unchanged; A/B have no consumption state.
 Engineering-scope section 4 needs: **none**. Reuse ordinary snapshots, existing
 remote supervisor and a list of two ordered commands; no new recovery/retry,
 provenance guard, worker/queue framework, schema registry, telemetry service,
-profiler or repeated smoke. P18 is read-only command preparation; a precise source
-gap returns for a separate bounded correction, not unrequested implementation.
-The ordinary source/runner/check budgets remain; no new test or real engineering
-invocation is selected solely for the runtime or launch boundary.
+profiler or repeated smoke. P18 was read-only command preparation; P20 subsequently
+authorized only the precise seed/object correction and focused inert checks.
+The ordinary source/runner/check budgets remain, with 8.048 seconds of local
+checking charged by P20 and no real engineering or learner invocation selected
+solely for the runtime or launch boundary.
 
 Options: (a) freeze the fresh B05 question/seed/runtime and return its concrete
 source-binding gap; (b) use old seed 21217 or old RAW to bypass it; (c) add an
@@ -228,3 +237,49 @@ SOURCE_REPAIR_NEEDED finding. The prospective seed and scientific rules above
 remain unchanged. No B05 literal or source is launch-ready, and no runtime call
 or implementation was made. The returned task is the bounded seed/identity
 correction followed by exact command binding, without an execution allocation.
+
+## P20 source acceptance and readiness boundary
+
+Accepted source `d2753be86c12bfa63c404ac2cac513b914371115` and handoff
+`87c1f2f01466e8ce0a558fc939b3f774b02af9f2` passed 13 inert boundary cases and
+independent source/test/literal review. Root integrated them as
+`898e78b193b2f83fa2a2fad4e87845928f98fb8d` and
+`2d5cc3887cb140be46078a674339a56ada6f15cf`; the declared source surfaces match.
+The source-correction intake accepts card/code readiness and requests the exact
+fresh two-arm allocation through Root to Portfolio. Source acceptance is technical
+conformance; target-runtime learning, resource admission and all B05 native
+outcomes remain unobserved. Prediction and reading rules above are unchanged.
+
+## P28 exact execution allocation — 2026-09-07
+
+[P28](../../portfolio/handoffs/2026-09-07-p28-cbsc-b05-pair-execution.md), published
+at `8347aab8b9a5f368a5009bd1b8eb44aba95f78cd`, allocates exactly the prepared
+fresh RAW then STRUCT pair. Root's accepted P20 intake is main
+`d24b7b9a27be84ed6e0989327b82777f11e621cb`. This supersedes P20's no-launch
+boundary only for these two calls. Source
+`d2753be86c12bfa63c404ac2cac513b914371115` and the five literal blocks in handoff
+`87c1f2f01466e8ce0a558fc939b3f774b02af9f2` remain unchanged.
+
+Both arms use fresh seed 21223, the named system312 interpreter/cwd/outputs and
+handles on wsl_4070 CPU FP32/one process/one Torch thread. Each complete arm has
+600 seconds, 1200 seconds summed, with fresh physical/effective >=4 GiB admission
+immediately before its runner. The existing 598-second TERM plus 2-second KILL
+envelope includes admission, imports, learning, evaluation and primary publication;
+actual outer wall decides complete-cap conformance. STRUCT's pair/readback remains
+within STRUCT's cap.
+
+The same CM executes the literal route and collects all outcomes. Root receives
+each actual accepted handle for observation. RAW technical acceptance leads to
+the allocated STRUCT regardless of RAW score. Actual integrity, admission or cap
+failure stops dependent work; optional telemetry absence alone does not. No retry,
+extra seed, acquisition/install/import probe, new source/readiness work or smoke
+is allocated. P20 checks and review are reused. This is unchanged-source execution,
+with no new CM comparison assignment. Actual candidate calls at this committed
+allocation record: **0**. The prediction, MEI, counts and scientific reading are
+unchanged.
+
+Options: (a) execute the exact allocated pair; (b) retain the superseded P20
+preparation stop; (c) add a readiness or diagnostic series. Recommend/select **(a)**.
+Owner-delegated decision (unattended, 2026-09-03 instruction): (a). No owner review
+or audit override required a change at this boundary; no new direction or
+Portfolio disposition is made.

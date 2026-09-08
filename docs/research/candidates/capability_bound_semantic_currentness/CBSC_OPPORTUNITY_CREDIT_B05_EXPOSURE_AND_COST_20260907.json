@@ -39,7 +39,26 @@
   "MEI_percent_of_theoretical_24": "1.041666666666666666666666667",
   "exposure_line": "B05 seed 21223 plans two fresh real learner arms, each 48 rollouts / 768 Adam steps / 384 training episodes / 64 evaluations; existing B04 RAW with the same learner and 768 Adam steps moved L2=3.647372245788574 from initial L2=29.883094787597656 (12.2054702557%). This is prior movement evidence, not a B05 gain forecast. Current P18 host/model/optimizer/evaluation exposure=0.",
   "actual_new_exposure": 0,
-  "stage": "prospective preparation only; source repair needed; no actual B05 execution",
+  "stage": "P28 exact pair allocated; zero actual B05 calls at allocation record",
+  "stage_at_P18": "prospective preparation only; source repair needed; no actual B05 execution",
+  "p20_source_binding": {
+    "source_sha": "d2753be86c12bfa63c404ac2cac513b914371115",
+    "handoff_sha": "87c1f2f01466e8ce0a558fc939b3f774b02af9f2",
+    "root_source_integration_sha": "898e78b193b2f83fa2a2fad4e87845928f98fb8d",
+    "root_handoff_integration_sha": "2d5cc3887cb140be46078a674339a56ada6f15cf",
+    "local_inert_cases_passed": 13,
+    "local_check_command_wall_seconds": "8.0478434",
+    "target_runtime_invocations": 0,
+    "scientific_invocations": 0
+  },
+  "p28_allocation": {
+    "authority_sha": "8347aab8b9a5f368a5009bd1b8eb44aba95f78cd",
+    "accepted_intake_on_main": "d24b7b9a27be84ed6e0989327b82777f11e621cb",
+    "handoff_sha": "87c1f2f01466e8ce0a558fc939b3f774b02af9f2",
+    "source_sha": "d2753be86c12bfa63c404ac2cac513b914371115",
+    "actual_candidate_calls_at_selection": 0,
+    "new_readiness_or_probe_calls": 0
+  },
   "source_references": [
     "docs/research/candidates/capability_bound_semantic_currentness/CBSC_OPPORTUNITY_CREDIT_B04_SCIENCE_CARD_20260906.md#exposure-cost-and-execution",
     "docs/research/candidates/capability_bound_semantic_currentness/CBSC_OPPORTUNITY_CREDIT_B04_RESULT_EVIDENCE_20260906.md",
