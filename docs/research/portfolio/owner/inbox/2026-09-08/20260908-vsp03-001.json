@@ -19,7 +19,7 @@
     }
   ],
   "recommended": "a",
-  "auto_applied": null,
+  "auto_applied": "a",
   "dm_reason": "动作和原生效用路径具体，已有小幅真实G信号；小幅且未重复的优势使继续暂停仍接近，需一次原节点选择。",
   "evidence": [
     "docs/research/candidates/vsp_03/VSP03_P54_GREEDY_USE_REENTRY_INTAKE_20260908.md"
@@ -77,5 +77,15 @@
     "verdict_text": "DM recommends the single B03 candidate, narrowly: the controllable mapping is concrete, G has an observed native gain over both fixed references, and one real new training run directly checks the controller to retain. The pause remains a close alternative because the gain is small and uncertain and randomized execution is adverse.",
     "source": "docs/research/candidates/vsp_03/VSP03_P54_GREEDY_USE_REENTRY_INTAKE_20260908.md"
   },
-  "starred": true
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-08T20:16:31+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/vsp_03/pro_packets/20260908_greedy_use_reentry_convergence/archive/RESPONSE.md",
+      "record": "docs/research/candidates/vsp_03/VSP03_P54_GREEDY_USE_CONVERGENCE_INTAKE_20260908.md",
+      "state": "applied",
+      "summary": "依据2026-09-03无人值守委托和P54，应用完整861c5072160d624970875b7345c2f72e78183e53裁决：单G seed5的B03已选，完整120秒；收窄原共享服务问题，不是第二次recast，仍1；旧暂停和全部反向证据保留。仅科学选择/卡片，尚无新实验或源码接受。"
+    }
+  ]
 }
