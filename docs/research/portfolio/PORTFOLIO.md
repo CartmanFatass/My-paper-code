@@ -1,8 +1,10 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-07 (P26 UCOPE seed/plumbing repair; other routes retained)
+Updated at: 2026-09-07 (P27 FRRIE first-exception diagnostic; other routes retained)
 
-Current incremental command: [P26 UCOPE fresh-pair seed/aggregation correction](handoffs/2026-09-07-p26-ucope-fresh-pair-plumbing.md). Frozen source only accepts6801/6802; the same CM corrects bounded seed and pair metadata plumbing, then resumes the existing P24 allocation after accepted source/card bindings. No additional scientific budget or entry count is added.
+Current incremental command: [P27 FRRIE first-exception capture](handoffs/2026-09-07-p27-frrie-first-exception-capture.md). P23 found no supported source correction; prepare an explicit bounded diagnostic input and run at most one120s original-schedule chain after acceptance. Nonreproduction does not clear P22. No new learning comparison or retry is allocated.
+
+Retained incremental command: [P26 UCOPE fresh-pair seed/aggregation correction](handoffs/2026-09-07-p26-ucope-fresh-pair-plumbing.md). Frozen source only accepts6801/6802; the same CM corrects bounded seed and pair metadata plumbing, then resumes the existing P24 allocation after accepted source/card bindings. No additional scientific budget or entry count is added.
 
 Retained incremental command: [P25 FSD native-control Convergence](handoffs/2026-09-07-p25-fsd-native-control-convergence.md). One direction-level question addresses the completed conditional A evidence and paused learning family. Retain UCOPE P24, CBSC P20 and FRRIE P23; actual acceptance can advance four directions. VSP02 P19 ended its instantiated family with no successor; the fifth slot remains an explicit vacancy pending a concrete independent task, without lifecycle/priority change.
 
