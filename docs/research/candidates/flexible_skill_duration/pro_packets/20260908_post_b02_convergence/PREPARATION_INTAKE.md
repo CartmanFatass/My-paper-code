@@ -92,3 +92,18 @@ to native `/root/dm_fsd_p13_reentry`. DM checks conformance and applies only the
 selected Direction decision. A blocker supplies no decision; a concrete scope
 conflict returns unchanged to the same node. New card/implementation/execution
 needs require the later named Portfolio command. No successor is inferred.
+
+### Published binding
+
+The input bundle was committed and pushed at
+`7b773b5a27336d3855fea83c4d6c5fc723ac74bc`. The fixed TASK is committed and
+pushed at `e04604a460b2871ef4e9d6928599085dcd06268b`:
+[immutable TASK](https://github.com/CartmanFatass/My-paper-code/blob/e04604a460b2871ef4e9d6928599085dcd06268b/docs/research/candidates/flexible_skill_duration/pro_packets/20260908_post_b02_convergence/TASK.md).
+The renderer bound that exact full SHA in `HANDOFF.json`, which now records
+`READY_TO_DISPATCH` for request
+`2026-09-08-fsd-post-b02-convergence-01`. The final handoff publication changes
+no TASK bytes, fixed evidence, scientific scope or generated Transport prompt.
+Its internal operator notes preserve the P25 mirror discrepancy and native
+return target; only Root/Transport reconciles the mirror and makes the one P45
+Send. Current new scientific exposure remains zero. This publication completes
+the P45 preparation assignment; the Direction decision is still pending.
