@@ -249,3 +249,16 @@ def test_cost_cap_preserves_incomplete_and_exposure(tmp_path_factory):
     assert study.planned_cost()["per_arm"]["evaluation_ticks_upper"] == 9600
     publish(output,result)
     assert json.loads((output/"summary.json").read_text())["budget_exhausted"]
+
+
+def test_publication_deadline_uses_tightest_arm_and_stays_armed():
+    from scripts import run_dish_own_command_mean_b07 as runner
+    result = {"status":"COMPLETE", "arms": {DIRECT:{"exclusive_wall_seconds":1780},
+                                            OWN:{"exclusive_wall_seconds":100}}}
+    # At wall1890 and prior10, shared20: DIRECT1790, OWN110. Publication may
+    # consume18 shared seconds (20 remaining minus2 closure), not pair slack.
+    assert runner.publication_deadline(study, result, 0, 10, 1890) == 1908
+    assert runner.publication_deadline(None, {}, 0, 10, 20) == 3588
+    source = inspect.getsource(runner.main)
+    assert 'signal.signal(signal.SIGALRM, signal.SIG_DFL)' in source
+    assert 'signal.setitimer(signal.ITIMER_REAL, 0)' not in source

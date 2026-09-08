@@ -26,6 +26,15 @@ def publish(output, result):
         encoding="utf8")
 
 
+def publication_deadline(study, result, started, prior_shared_seconds, now):
+    """All remaining work is shared; preserve two seconds for process closure."""
+    remaining = 3600 - prior_shared_seconds - (now - started)
+    if study is not None:
+        cost = study.allocate_cost(result, started, prior_shared_seconds, now=now)
+        remaining = min(remaining, *(2 * value for value in cost["remaining_arm_seconds"].values()))
+    return now + remaining - 2.0
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--seed", type=int, choices=(127,), default=127)
@@ -49,7 +58,7 @@ def main():
     def set_deadline(deadline):
         signal.setitimer(signal.ITIMER_REAL, max(0.001, deadline - time.perf_counter()))
 
-    previous = signal.signal(signal.SIGALRM, timeout)
+    signal.signal(signal.SIGALRM, timeout)
     set_deadline(STARTED + 3600 - args.prior_shared_seconds - 10.0)
     study = None
     try:
@@ -61,8 +70,11 @@ def main():
         result["exception"] = {"type": type(error).__name__, "message": str(error),
                                "traceback": traceback.format_exc()}
     finally:
-        signal.setitimer(signal.ITIMER_REAL, 0)
-        signal.signal(signal.SIGALRM, previous)
+        # Default disposition terminates even if final I/O is stuck in native code.
+        # Leave this alarm armed through stdout flush and interpreter shutdown.
+        signal.signal(signal.SIGALRM, signal.SIG_DFL)
+        set_deadline(publication_deadline(study, result, STARTED,
+                                          args.prior_shared_seconds, time.perf_counter()))
     if study is not None:
         result["primary"] = study.reduce_pair(result["arms"])
         result["actual_exposure"] = study.exposure(result["arms"])
