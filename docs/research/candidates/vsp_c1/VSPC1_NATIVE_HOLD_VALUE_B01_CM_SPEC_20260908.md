@@ -1,7 +1,10 @@
 # VSPC1 native hold-value B01 — complete CM code specification
 
-This is the selected implementation specification prepared under P49, **not a CM
-dispatch or a scientific launch**. Scientific authority is the complete
+This is the complete selected implementation specification prepared under P49.
+The OWNER_DIRECT continuation at `dff0694dc` assigns implementation and independent
+review, followed by accepted-source binding and the selected single pair through
+Root ([current handoff](../../portfolio/handoffs/2026-09-08-p49-vspc1-native-value-question.md)).
+Scientific authority is the complete
 Convergence response `7ac8ccb01543f82715f38ad33d846c2ec649ecc2`, taken in by
 [intake](VSPC1_NATIVE_HOLD_VALUE_CONVERGENCE_INTAKE_20260908.md).
 The prospective [card §§2–6](VSPC1_NATIVE_HOLD_VALUE_B01_SCIENCE_CARD_20260908.md)
@@ -13,9 +16,11 @@ ordinary implementation choices within it remain CM's.
 
 Designated authoring checkout:
 `C:/Projects/HMASD-worktrees/dm-vspc1-next-20260906`, branch `codex/direction-vsp_c1`.
-The P49 worktree contains documentation/Pro input synchronization and the immutable
-response; it has not copied or modified UCOPE implementation during preparation.
-**Complete committed code input is6374063408208ba67b8cb7c69ebc0babb0f00259.**
+The preparation changed no UCOPE implementation. Continuation input integration
+`73d8abbdb64f20c4bc6e32870ef932f1e1f9a530` supplies all seven named UCOPE module,
+runner and clipping-test files in their original paths, with their staged source
+surface checked equal to **6374063408208ba67b8cb7c69ebc0babb0f00259** before commit.
+The environment/adapter dependencies already match that complete code input.
 
 Read/reuse at that source:
 
@@ -35,14 +40,14 @@ Read/reuse at that source:
 **Concrete source integration fact:** at inspected main
 `fc9f6f6548b778b28acdcd058567e27998ea72b8`, UCOPE `__init__.py` and `environment.py`
 are absent; the named policy/learner/study and core environment/adapter match637406340.
-Both missing files exist in the complete source commit. Root must supply that full
-committed dependency tree before implementation/capture, either the complete named
-source or its normal committed integration with this card/spec. Do not synthesize
+Both missing files exist in the complete source commit. The input integration
+above resolves the designated checkout's complete dependency need under Root's
+continuation route. Do not synthesize
 a substitute environment, vendor those files into VSPC1, recover them from a live
 remote process or pretend current main alone is that source. This is an exact input
 need, not an adverse scientific finding or new research task. Source-surface equality
-matters; later doc-only commits do not invalidate the code input. Root records the
-one resulting full starting SHA supplied equally to all comparison arms.
+matters; later doc-only commits do not invalidate the code input. The CM handoff
+records the complete starting SHA after this documentation-only continuation update.
 
 New owned code only:
 
@@ -210,13 +215,18 @@ it does not multiply scientific calls or repeat checks without a concrete gap.
 
 ## 6. Full five-item handoff for Root's later implementation assignment
 
+This same five-item contract is now active under the P49 continuation. The temporary
+comparison has completed all three batches (`a6dbacb36`); the normal CM assignment
+is excluded from a fourth batch for that concrete reason. No original acceptance
+command, source semantics, count, scientific arm or budget is changed.
+
 1. **Deliverable:** implement this one disposable native critic comparison and its
    faithful final primary/publication; return code/diff plus the original focused
    acceptance evidence. This assignment ends at engineering acceptance, with no
    native execution or new scientific choice.
 2. **Owned paths/entry points:** §1's new VSPC1 module, runner and two test files in
    the existing designated checkout; read-only source637406340 symbols are the reuse
-   base. Supply the two named missing committed dependencies before capture. Do not
+   base. The complete committed dependency input is supplied as recorded in §1. Do not
    copy UCOPE into VSPC1, edit core/UCOPE or alter unrelated work.
 3. **Preserved semantics:** card§§2–5 and this spec§§2–4; same duration-capable
    actors, actual pre-decision information, compound-agent masks/reduction, native
@@ -227,10 +237,9 @@ it does not multiply scientific calls or repeat checks without a concrete gap.
    accepted merely because the Pro response or fixture completes. Return any
    source/meaning gap precisely to this DM through Root; do not rewrite the contract.
 5. **Budget/stop:** ≤2000 new non-test source lines,≤600 runner lines,≤300s focused
-   tests and one≤60s fixture smoke; scope§4 none. Use Root's supplied engineering
-   execution mode, preserving its identical five-arm capture before any eligible
-   new CM coding dispatch. Every arm receives this same complete task/spec/code and
-   original checks; no historical replay, model-specific variant or extra native
-   call. No CM has begun this task during P49. Once selected code is accepted,
+   tests and one≤60s fixture smoke; scope§4 none. Use the normal CM execution mode
+   confirmed by Root after completion of the temporary three-batch comparison.
+   No historical replay, model-specific variant, fourth comparison or extra native
+   call. No CM began this task during the preparation stage. Once code is accepted,
    Root receives its exact source and the still-unexecuted card; any actual
    scientific invocation needs its concrete later route and fresh admission.

@@ -162,3 +162,29 @@ under the current comparison instruction before any solo coding dispatch. After
 engineering acceptance, any scientific execution still requires its concrete route,
 exact committed source, fresh actual-node admission and selected whole-invocation
 caps. No Portfolio permission is needed between P49's named preparation stages.
+
+## 7. OWNER_DIRECT continuation after the preparation boundary
+
+The current P49 handoff at `dff0694dc`, delivered by Root on 2026-09-08,
+supersedes the preparation-only stop in §§4–6. It assigns this same selected B01
+through normal CM implementation, independent review, accepted-source binding,
+one seed8101 GATED-V/MLP-V pair plus H, collection, technical acceptance and DM
+scientific intake. The scientific question, result branches, counts and caps do
+not change. This is execution authority, not a new scientific result or UAV entry.
+
+Root directed ordinary committed integration of the exact native dependencies.
+Input commit `73d8abbdb64f20c4bc6e32870ef932f1e1f9a530` supplies the seven named
+UCOPE files in their original paths, checked equal to source637406340 before
+commit, and synchronizes the current handoff and applicable execution instructions.
+No substitute environment or learning change was introduced. The old two-file
+main gap remains historical provenance; the designated CM checkout now has the
+complete source. The temporary three-batch comparison is complete at `a6dbacb36`;
+this is the concrete exclusion from a fourth capture, recorded once here.
+
+Decision: execute the supplied continuation rather than retain the superseded
+preparation-only stop (**OWNER_DIRECT**, object/technical). Root owns accepted-source
+integration and the exact detached launch route; CM owns implementation, review
+disposition and collection; this DM retains the scientific reading. Current owner
+reviews returned `[]` at this clean boundary. No CM or invocation had started at
+the input integration. The next discriminator remains the final matched native
+return in §6, with no extra seed, arm, retry or diagnostic.

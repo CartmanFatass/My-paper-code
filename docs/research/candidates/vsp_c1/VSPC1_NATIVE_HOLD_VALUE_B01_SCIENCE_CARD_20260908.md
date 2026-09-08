@@ -10,8 +10,11 @@ Selected by the complete `em:vsp_c1:convergence` response at
 `2026-09-08-vspc1-native-hold-value-convergence-01`, **PRO_FINAL**
 ([immutable response](pro_packets/20260908_native_hold_value_convergence/archive/RESPONSE.md),
 [DM intake](VSPC1_NATIVE_HOLD_VALUE_CONVERGENCE_INTAKE_20260908.md)).
-P49 authorizes this selected card and complete CM specification preparation. No code
-acceptance, scientific launch or formal UAV-validation entry has occurred.
+The OWNER_DIRECT P49 continuation at `dff0694dc` authorizes implementation,
+independent review, accepted-source binding, this single pair, collection and intake
+([current handoff](../../portfolio/handoffs/2026-09-08-p49-vspc1-native-value-question.md)).
+At continuation entry, no code acceptance, scientific launch or formal
+UAV-validation entry has occurred.
 
 This one matched training pair can produce a local finite-budget native-return
 signal or counterexample for the gated critic package. It cannot establish stable
@@ -210,7 +213,8 @@ telemetry gaps are `resources_unmeasured`, not retroactive primary invalidation.
 Only evidence §11.4's four requirements hold a B launch.
 
 Engineering scope §4: **none**. Source≤2,000 new non-test lines, runner≤600,
-focused tests≤300s; at most one≤60s synthetic runner smoke under the later engineering
-assignment. No code/test/scientific execution in P49 preparation. The full CM
-specification and original acceptance commands return to Root before any coding
-dispatch; engineering comparison copies add no scientific arms or calls.
+focused tests≤300s; at most one≤60s synthetic runner smoke under the engineering
+assignment. The earlier preparation had zero code/test/scientific execution.
+The full specification and original acceptance commands were supplied to Root.
+The three-batch CM comparison is complete (`a6dbacb36`); this continuation uses the
+normal CM route, with no fourth comparison or added scientific arms or calls.
