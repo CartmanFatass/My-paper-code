@@ -1,8 +1,10 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-08 (P31 FRRIE first-fatal-callpath observation)
+Updated at: 2026-09-08 (P32 CBSC first-fault observation; four routes, one vacancy)
 
-Current incremental command: [P31 FRRIE fatal-callpath observation](handoffs/2026-09-08-p31-frrie-fatal-callpath.md). A05 ended inconclusive after signal11 with no captured state. Use retained readable evidence if sufficient; otherwise prepare startup fatal reporting and at most one120s original-schedule observation, with no source repair or inferred clearance.
+Current incremental command: [P32 CBSC RAW first-fault context](handoffs/2026-09-08-p32-cbsc-first-fault-context.md). P28 ended with incomplete RAW and no paired result; prepare explicit fatal-stack observation and at most one120s RAW diagnostic on unchanged source/runtime. Retain FRRIE P31,FSD P30,UCOPE P29; four routes depend on actual acceptance and the fifth remains an explicit unchanged vacancy.
+
+Retained incremental command: [P31 FRRIE fatal-callpath observation](handoffs/2026-09-08-p31-frrie-fatal-callpath.md). A05 ended inconclusive after signal11 with no captured state. Use retained readable evidence if sufficient; otherwise prepare startup fatal reporting and at most one120s original-schedule observation, with no source repair or inferred clearance.
 
 Retained incremental command: [P30 FSD native-renewal learning card/spec](handoffs/2026-09-07-p30-fsd-native-renewal-learning-spec.md). Complete P25 response/application now selects the narrow fresh C_train/H_train/G comparison; preserve the contradictory earlier delivery blocker. Prepare its card and full implementation spec with zero current code or scientific execution allocation.
 
