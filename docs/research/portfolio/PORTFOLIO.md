@@ -1,6 +1,8 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-08 (P59 FRRIE corrected input-factory check)
+Updated at: 2026-09-08 (P60 VSPC1 common value-normalization comparison)
+
+Current first refill: [P60 VSPC1 normalized-value comparison](handoffs/2026-09-08-p60-vspc1-normalized-value-comparison.md) selects the DM's specific symmetric value-target normalization recommendation after P55's second UP and continued MLP/H weakness. One new matched pair has the explicit original exposure and1800s/arm,3600s/complete-pair limits; the same DM/CM owns prospective normalization semantics through implementation, review, execution and intake. It is a changed regime, not a third old pair or normalization-causal proof. Root reports FRRIE P59 and SCDMP P58 advancing while UCOPE, DISH and VSPC1 completed their prior routes; P60 counts only on actual advancing work. Remaining vacancies receive independent commands without a batch barrier.
 
 Current FRRIE continuation: [P59 corrected input-factory check](handoffs/2026-09-08-p59-frrie-corrected-input-factory.md) allocates one120s complete non-learning invocation of the committed Torch-import correction after P47's factory harness failed before zero completed tapes. The same DM/CM retains the existing checkout, runtime and actual tool restrictions; no alternate executor bypass, production repair acceptance, second diagnostic or learner retry follows. Collection and bounded intake are included. Keep UCOPE, DISH, VSPC1 and SCDMP's current routes independent; P59 counts only during actual advancing work and changes no lifecycle or scientific meaning.
 
