@@ -59,66 +59,16 @@ Use the recorded detached supervisor, process identity and existing exit witness
 Supervisor state establishes process termination; it does not establish scientific
 validity. Observation runs within the owner's active goal, without a scheduled automation.
 
-## Root-to-Portfolio notification filter
+## Root records and owner communication
 
-Owner correction, 2026-09-07: the observed violation was **logging and also sending the same
-routine receipt**, not missing log coverage. Apply this filter at the tool call itself:
-before calling `send_message_to_thread`, state the concrete action Portfolio must take now
-that the existing command does not already provide. If no such action exists, omit the call.
-This is a reading/behavior rule, not a new script, schema or permission gate.
+Root records operational facts in `docs/research/portfolio/root-log/YYYY-MM-DD.md`
+(local date) and maintains `EXPERIMENT_TRACKING.md`. Each entry names time, direction,
+evidence/handle and the already-assigned next action. Portfolio reads these records when
+planning; writing an entry never creates permission to send a message.
 
-Recent examples: "6701 is COMPLETE; I will integrate and execute the authorized6702" is log-only;
-"I resumed the requested repair" is log-only; "I will integrate these already-authorized
-commits after your ACK" adds an unauthorized waiting step and must not be sent. An actual
-shared-index conflict uses the short index handoff below, without bundling scientific progress.
-"Three advancing chains remain and two exhausted slots need replacement commands" is an
-internal Portfolio planning request, sent once per changed need. An outstanding request has
-no periodic reminder; new goal turns do not reset this rule. Reports name the missing action
-first and link evidence, omitting unrelated completion history and already-known status.
-
-Portfolio handles internal requests through commands or repairs without an automatic
-user-facing response. Notify the owner for an actual owner decision, the requested aggregate
-deliverable, or a direct status question; do not narrate every internal coordination event.
-
-OWNER_DIRECT 2026-09-07: ordinary execution receipts belong in
-`docs/research/portfolio/root-log/YYYY-MM-DD.md`, using the local date. Root owns this
-append-only daily log. Each meaningful entry gives time with timezone, direction/command,
-what changed, evidence/commit or accepted handle, and the already-assigned next action.
-Link original evidence rather than copying it; maintain EXPERIMENT_TRACKING.md as the current
-operational state. Batch log entries into ordinary commits at clean boundaries; no per-entry
-commit, notification, new scheduler or periodic digest is required. Portfolio reads relevant
-entries when planning or when asked; it need not ACK each entry or poll the log.
-
-OWNER_DIRECT follow-up: do not forward informational Root returns into the Portfolio task,
-and do not append "actionable" to a routine receipt to bypass this filter. A sent message must
-name an actual Portfolio decision or repair needed. Dispatch-count confirmations, completed
-pushes/index-release notifications and unchanged pending-request reminders belong in the log
-unless Portfolio explicitly requested that specific response. Portfolio does not echo or send
-a user-facing progress/final message solely to acknowledge an informational Root return.
-Root owns the main index by default under the rule below. Ordinary index operations create
-no notification exception. Only Portfolio's explicit temporary-transfer request creates a handoff.
-
-Dispatch ACKs, integration/push receipts, accepted launches, healthy observations, intermediate
-returns and terminal events with an executable named collection/intake/follow-on route are
-log-only. Continue that route and notify its responsible native DM/CM as needed. A completion
-requires a Portfolio message only when the assigned route is exhausted and creates an
-actionable vacancy or requires a new command. Routine evidence stays available in the log.
-
-Send Portfolio a new command/replacement or working-set decision needed, an unresolved
-scope/authority/scientific conflict, or a changed dependency/uncertain external effect that
-requires Portfolio action. Root also reliably escalates any problem it cannot resolve within
-the supplied route: execution failure, missing input/tool/access, or uncertain state. This is
-a repair request even when no scientific or Portfolio-tier decision is needed. Include the
-failed action, exact error/evidence, repairs already attempted, affected dependency and help
-needed. Send promptly once outside the assigned repair path; do not silently log it, wait for
-the next observation pass, repeatedly retry, or stop all independent work. Portfolio owns arranging the
-bounded repair and returning its next step; Root resumes at that step and reports a changed
-blocker if it persists. Reconcile ordinary technical issues within the assigned route first;
-never conceal a planning gap until the whole batch finishes. Name the decision/action needed,
-the affected directions and relevant log/evidence, with a compact working-set delta. Coalesce
-related facts and do not repeat an unchanged request. Explicit temporary-index transfers and direct
-replies to an explicit Portfolio/owner request remain allowed; keep them concise. All these
-messages preserve the recipient's model settings as specified above.
+Portfolio handles internal requests without an automatic owner-facing report. Notify the
+owner for a direct question, requested deliverable or actual owner decision. Preserve
+recipient model settings. The following conditions are the single current notification rule.
 
 ## Send/no-send conditions — OWNER_DIRECT 2026-09-08
 
@@ -168,8 +118,7 @@ messages or turn them into owner-facing status reports.
 
 ## Shared main checkout: default index owner — OWNER_DIRECT 2026-09-08
 
-This replaces the prior per-operation mutual ACK rule. Root is the default main-index
-operator. Root stages, commits and cherry-picks authorized explicit paths WITHOUT asking
+Root is the default main-index operator. Root stages, commits and cherry-picks authorized explicit paths WITHOUT asking
 Portfolio whether it is idle and WITHOUT sending a release notice afterward. Portfolio
 normally edits its owned files and names the exact ready paths in its substantive command;
 Root publishes them before dispatch. Root must not stage unfinished/unrelated Portfolio work.

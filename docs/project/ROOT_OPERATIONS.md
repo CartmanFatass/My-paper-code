@@ -125,14 +125,6 @@ service new events before another observation pass. Long integration/comparison 
 yields at recoverable boundaries; Transport's browser work never locks Root's event loop.
 The final CM comparison may require all arms; other direction routes do not depend on it.
 
-OWNER_DIRECT 2026-09-07 correction: do not send a progress report simply because a native return
-arrived or a goal turn completed. Apply the notification filter before the app-message tool call.
-Ask what new action Portfolio must take now beyond the existing command; if none, write only
-the Root log and continue. Logging plus sending is still a violation. Authorized integration,
-first-to-second dataset continuation and acknowledgement of an applied command need no message
-or Portfolio ACK. Real unresolved repairs and exhausted-slot replacement requests remain prompt,
-coalesced and internal; do not repeat an unchanged request on subsequent goal turns.
-
 During the three CM comparison batches, apply CM_MODEL_COMPARISON_20260907.md at every new CM
 assignment, including those forwarded by active DMs and those using an existing CM. Root directly
 captures and dispatches eligible work before coding; it does not wait for Portfolio to notice a
@@ -160,13 +152,10 @@ For the next three new CM engineering tasks, apply
 `CM_MODEL_COMPARISON_20260907.md` before implementation starts: identical code spec and source,
 isolated model/client arms, Codex token/time collection. Existing tasks are not replayed.
 
-Apply SIBLING_COMMUNICATION.md's Root-to-Portfolio notification filter. Record routine receipts
-in `docs/research/portfolio/root-log/YYYY-MM-DD.md`; completion of an intermediate step is not
-itself a Portfolio notification. An actionable message gives the needed decision, original
-evidence and working-set delta, including an advancing-chain count when capacity changes.
-Report a yielded/unavailable direction needing a replacement immediately. Known routes
-continue without an extra Portfolio exchange. A changed command's scope replaces only the
-specified earlier boundary; an unrelated preparation-only task does not suspend the batch.
+Use the single **Send/no-send conditions** section in SIBLING_COMMUNICATION.md.
+A new task gap includes its evidence and actual working-set delta; routine events and
+unchanged pending requests stay in the log. The routing responsibilities below do not
+create additional notification exceptions.
 
 Missing scope, next-task choices, authorization/skill applicability, transport/tool permissions
 and scheduling gaps route from Root to Portfolio first, with the affected action, evidence and
