@@ -23,8 +23,9 @@ and reconcile that delivery before their next push; no force-push or new branch 
    confirms the commit is actually pushed, and branch/Issue exist, before dispatch.
    No generated file can include the hash of its own not-yet-created commit.
 4. Commit/push updated internal handoff. Dispatch its exact dispatch_prompt once
-   to Root using the configured Luna/xhigh model/effort. When Root is the author/executor,
-   use the rendered local CALLER_DIRECT path without self-dispatch. Intake belongs to DM/Portfolio.
+   to the configured independent Luna/high Transport, omitting app model/thinking overrides.
+   Native authors use Root as parent and normally hand the packet to Root for dispatch;
+   Transport returns to Root for native forwarding. Intake belongs to DM/Portfolio.
    New mode uses existing paste request support; do not upload TASK or prepend
    attachment-only/read-only instructions. No request/routing fields enter prose.
    OWNER_DIRECT 2026-09-06: the short prompt and TASK delivery section share the same
