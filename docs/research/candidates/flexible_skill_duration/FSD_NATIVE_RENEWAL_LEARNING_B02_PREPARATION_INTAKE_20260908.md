@@ -199,3 +199,74 @@ ledger reference agree. B01 evidence, scientific source/tests and governance are
 unchanged; the proposed B02 script and scientific root do not exist. No production
 object or test fixture was constructed. Final reviews in both checkouts and FSD
 audit owner cells were empty. Git whitespace checks passed.
+
+## 8. P42 readiness and exact next route
+
+P42's prewritten post-integration return authorizes this readiness assessment.
+Root integrated the accepted implementation as
+`d961c58268353f215d3ffddf0d83927e6318541d`; its source, tests, card, specification
+and technical record are unchanged from CM delivery
+`eb46e3356582d03d07b58b9480284c867c40c5f2`. The shared FSD checkout reconciled that
+input at clean pushed `bf7dfb08aacc35df48f3e4ed4a53f748b36cc332`. This readiness
+adds only current card/intake/audit status; the frozen question, keys, comparison,
+primary, prediction and result branches remain unchanged.
+
+**Checked evidence and rule.** DM read the committed four-function/wrapper/test
+diff, [technical acceptance](FSD_NATIVE_RENEWAL_LEARNING_B02_TECHNICAL_ACCEPTANCE_20260908.md),
+the raw synthetic-test completion and the reused reviewer's final source finding.
+All24 cases passed, including the18 original cases/assertions; complete process
+wall4.6721191s. Independent RNG/identity review found no material issue. B02's
+770303/770304 inputs reach their actual consumers while B01 defaults and protected
+learning/evaluation/publication behavior remain intact. No scope§4 machinery or
+section5 budget breach was found. Rule applied verbatim from evidence-spec§11.8.6:
+"Use existing trustworthy paths and checks where applicable." Also:
+"do not repeat smoke merely because a launch boundary occurred." No test suite or
+scientific-model check was rerun.
+
+Python/AST read-only arithmetic over the accepted runner constants and existing
+machine record confirms2×5×16×400=64000 training transitions and3×32×400=38400
+scoring steps:102400 host steps,614400 agent observations,160 training episodes,
+96 final episodes and4 agent constructions. The independent unit is one new
+training pair. Actual B02 optimizer/segment work and displacement remain unknown;
+B01's real nonzero updates and movement support that the unchanged learner path
+can move within the retained five-rollout budget. No current B02 learner result
+is inferred from source or fake checks.
+
+**Exact next bounded route.** Portfolio can issue one named B02 runtime-binding
+and G/C/H panel allocation. Reuse CM `/root/fsd_cm_baseline_a01` in this shared
+checkout to prepare the exact accepted-source detached binding and existing
+supervisor payload; the implementation is present in both SHAs above, but no
+launch SHA/remote cwd/script/handle is bound by this readiness. Root then executes
+and observes the sequential G,C,H invocations; the same CM collects every outcome
+and technically accepts the artifacts; this DM applies card§5 and writes the
+all-outcome scientific intake with B01/B02 kept as separate training-pair rows.
+
+The literal future runner arguments are already in technical acceptance's
+"Future CLI and remaining owner" section: B02 entry point, seed770303, fresh parent
+`temp/directions/flexible_skill_duration/exp/native_renewal_learning_b02_770303`,
+and H's fresh C/G companion summaries only. Use configured remote_first wsl_4070,
+`/home/wu/.venvs/hmasd/bin/python` and existing `/usr/local/bin/agent-task`, CPU4,
+float32 learner/float64 host/reward. Each future on-node memory admission must
+measure physical/effective availability>=4GiB and be joined immediately by&& to
+the runner inside the full outer cap. Proposed G/C/H caps remain60/900/900s,
+sum1860s, including admission through closed-file publication. B01's observed
+2.47/371.89/333.89s are per-arm anchors; new effective M and runtime are unknown,
+so no new timing guarantee, calibration or cost probe is asserted.
+
+Preserve the ordered companion/failure rules: a missing C prevents fresh pair
+polarity, a missing G only limits reference claims, and every independent outcome
+is retained. No extra pair/seed/endpoint, automatic retry or cap change follows.
+The same-source learning path has no remaining implementation dependency; the
+outstanding need is this named runtime allocation and its concrete binding.
+
+**Decisions this intake produces — object tier, technical.** Options are(a) return
+the above ready bounded route; (b) return a concrete source/card gap; (c) add a
+prelaunch production probe or start without allocation. Recommend/select(a):
+the accepted implementation matches the selected B question and no material gap
+remains. **Owner-delegated decision (unattended, 2026-09-03 instruction): (a).**
+This recommendation grants no runtime or Portfolio disposition. Primary and FSD
+owner reviews and FSD audit owner cells were empty; no override or prediction
+reply is invented. No new card, direction decision or valid-result brief is due.
+P40's earlier no-code exposure is historical; P42 code/check exposure is recorded
+above. Current production models/hosts/learners, probes, admissions, result roots,
+training/evaluation, accepted handles and Pro Sends remain zero.
