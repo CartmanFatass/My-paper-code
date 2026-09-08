@@ -246,3 +246,68 @@ B03. Root receives the complete committed CM specification and binding request.
 The same CM then implements/reviews; accepted source and exact detached command
 will be bound here before Root submits the sole pair. Collection returns to that
 CM and scientific intake to this DM, without another Portfolio vote.
+
+## 8. Accepted source and sole Root execution binding
+
+At2026-09-08T22:34:39Z, accept the delivered engineering evidence against §§2–6
+without changing the frozen question, master8201, WITHIN(.55), normalization,
+native MEI, counts or stop. Accepted source is
+**`7a8ed3aa5d25ded71164aa338749d09318124dcf`**. Final technical/command review is
+`d945aba70a72d217071f94f45d09c1cf0c4313ca`; Root integrated them as
+`7c80750ea`/`9148acf65`. The launch binds the original accepted source SHA,
+not a later documentation commit.
+
+Read the complete [independent review](VSPC1_NATIVE_HOLD_VALUE_B03_PRODUCTION_REVIEW_20260908.md),
+the [technical acceptance and literal command](VSPC1_NATIVE_HOLD_VALUE_B03_TECHNICAL_ACCEPTANCE_20260908.md#exact-root-command-staged-not-submitted),
+retained focused result and launch binding. Inspected actual moment/collector/
+update/study/runner changes and relevant tensor/plumbing checks. The saved native
+value precedes the single moment merge; detached normalized targets and native
+advantages remain fixed for four epochs; each arm owns its moments; evaluation
+does not fit them. Entropy remains .01, with full MLP, gate, actor/hold/reward,
+RNG and historical-default meaning preserved. No source difference exists between
+the accepted SHA and the current direction checkout on code/test surfaces, or
+the integrated main normalization surfaces.
+
+The original focused command passed17 checks in2.54s pytest/3.5546191s process
+wall. A preceding collection-only module-name collision used3.01197s process wall
+and was repaired by a test-package marker; total6.5665891s is within300s. The
+independent review has no material unresolved finding. Source adds127/removes13
+non-test lines, runner35, with scope §4:none and no budget breach. These facts
+establish engineering conformance only. No native fit, standalone fixture,
+calibration, resource admission or scientific process ran in that acceptance;
+stub counts and tiny no-step gradient checks are not B03 native exposure. The DM
+did not repeat tests or execute models during this binding.
+
+Root now stages exact source `7a8ed3aa5d25ded71164aa338749d09318124dcf` at
+`/home/wu/hmasd-worktrees/vspc1-native-hold-value-b03-8201-7a8ed3aa5d25`
+on configured `hmasd-wsl-node`. CM staged only the script at
+`/home/wu/hmasd-inputs/vspc1_hold_value_b03_8201_7a8ed3aa5d25.sh`;
+source-checkout existence/staging remains Root's action. The655-byte LF script
+and retained remote readback agree; the syntax-only check passed. Its one exact
+submission is:
+
+```text
+ssh -o BatchMode=yes -o ConnectTimeout=10 hmasd-wsl-node /usr/local/bin/agent-task run vspc1_hold_value_b03_8201_7a8ed3aa5d25 /bin/bash /home/wu/hmasd-inputs/vspc1_hold_value_b03_8201_7a8ed3aa5d25.sh
+```
+
+The script joins configured-Python `admit-memory` to the fixed8201 runner in
+that exact cwd. Require both actual-node physical/effective available memory
+≥4GiB before scientific roots/RNG/models. Output is
+`/home/wu/projects/HMASD/temp/directions/vsp_c1/exp/native_hold_value_b03_8201_7a8ed3aa5d25`;
+admission is its sibling `native_hold_value_b03_8201_7a8ed3aa5d25_admission.json`.
+Requested handle is `vspc1_hold_value_b03_8201_7a8ed3aa5d25`; **none is accepted
+at this binding**. Preserve CPU FP32/one process/one numerical thread and the
+continuous1800s/arm,3600s/pair limits. The enclosing time includes admission and
+exit; a positive external-minus-internal residual with unknown split is reported
+and included fully in each conservative arm upper bound. An overrun remains a
+breach; no hard-KILL wrapper, budget reset, extra arm/seed/evaluation or retry.
+
+Options: (a) bind accepted source and this sole P60 command; (b) add a native
+probe or calibration before it. Recommend/select (a). Owner-delegated decision
+(unattended,2026-09-03 instruction): (a), **OWNER_DELEGATED within P60**. Current
+owner reviews and relevant ledger overrides are empty. No new owner item is
+needed for this technical decision. Root owns submission/observation; terminal
+facts return to the same CM for collection and this DM for all-outcome intake.
+Actual native return, movement, moment counts and resource conformance remain
+unmeasured until that sole invocation. The preparation's zero-exposure boundary
+and original reading rules remain historical and unchanged.

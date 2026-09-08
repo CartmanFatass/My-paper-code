@@ -60,3 +60,14 @@ existing P60 handoff and learner bytes; do not duplicate it if already present.
 The P2 new-card item is `20260908-vspc1-006`, auto-applied accept under standing
 delegation. Owner reviews and relevant ledger overrides were empty at preparation.
 This closes preparation only; P60 remains assigned through the sole pair's intake.
+
+## Engineering completed; current execution binding
+
+The CM assignment above is complete. Accepted source is
+`7a8ed3aa5d25ded71164aa338749d09318124dcf`, final command/review
+`d945aba70a72d217071f94f45d09c1cf0c4313ca`; Root has integrated both.
+The DM accepted the source boundary and exact single8201 command in
+[card §8](VSPC1_NATIVE_HOLD_VALUE_B03_SCIENCE_CARD_20260908.md#8-accepted-source-and-sole-root-execution-binding).
+Root's current action is exact-source checkout staging, then that staged command's
+fresh admission and sole submission. No native process has been accepted at this
+binding. Retain the same CM collection and DM intake route; do not repeat engineering.
