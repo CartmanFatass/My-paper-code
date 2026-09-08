@@ -1,8 +1,10 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-08 (P45 FSD scoped Convergence)
+Updated at: 2026-09-08 (P46 FSD fair-D0 card/spec preparation)
 
-Current incremental command: [P45 FSD post-B02 Convergence](handoffs/2026-09-08-p45-fsd-post-b02-convergence.md). P44 assessmentad13bae30 recommends ending the limited hybrid extension while retaining the ordinary-family pause; one fresh fair-D0/G comparison is the explicit alternative. Send this exact Direction question through the existing DM/Root/Transport route and intake its complete response. No new scientific invocation, unposed UAV family or Portfolio disposition is allocated.
+Current incremental command: [P46 FSD fair-D0 comparison preparation](handoffs/2026-09-08-p46-fsd-fair-d0-preparation.md). P45 PRO_FINAL selects one fresh H/authentic fair-D0 k5/G B comparison; same DM prepares its card and complete CM spec with proposed1200/900/60s caps. Zero implementation or scientific execution during preparation; ordinary-family pause remains outside this limited comparison.
+
+Completed incremental command: [P45 FSD post-B02 Convergence](handoffs/2026-09-08-p45-fsd-post-b02-convergence.md). Formed response128f90b3 and intakedf5f8c891 select option B, preserving the DM's earlier preference for A. The selected fixed-clock comparison is not an identical third C/H pair, UAV transfer or Portfolio disposition.
 
 Completed incremental command: [P44 FSD post-B02 question assessment](handoffs/2026-09-08-p44-fsd-post-b02-question.md). The two-pair package question is answered; the inspected UAV movement interface differs from the corridor applied lease mask. The scoped next choice belongs to Convergence; its recommended disposition remains unapplied pending that decision.
 

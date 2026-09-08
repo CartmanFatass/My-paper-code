@@ -95,8 +95,8 @@ name an actual Portfolio decision or repair needed. Dispatch-count confirmations
 pushes/index-release notifications and unchanged pending-request reminders belong in the log
 unless Portfolio explicitly requested that specific response. Portfolio does not echo or send
 a user-facing progress/final message solely to acknowledge an informational Root return.
-An initial shared-index coordination request may still ask for the required handoff; after the
-operation, record release in the log for the waiting peer to read instead of repeated messages.
+Root owns the main index by default under the rule below. Ordinary index operations create
+no notification exception. Only Portfolio's explicit temporary-transfer request creates a handoff.
 
 Dispatch ACKs, integration/push receipts, accepted launches, healthy observations, intermediate
 returns and terminal events with an executable named collection/intake/follow-on route are
@@ -116,20 +116,75 @@ bounded repair and returning its next step; Root resumes at that step and report
 blocker if it persists. Reconcile ordinary technical issues within the assigned route first;
 never conceal a planning gap until the whole batch finishes. Name the decision/action needed,
 the affected directions and relevant log/evidence, with a compact working-set delta. Coalesce
-related facts and do not repeat an unchanged request. Required shared-index handoffs and direct
+related facts and do not repeat an unchanged request. Explicit temporary-index transfers and direct
 replies to an explicit Portfolio/owner request remain allowed; keep them concise. All these
 messages preserve the recipient's model settings as specified above.
 
-## Shared main checkout: Git index handoff
+## Send/no-send conditions — OWNER_DIRECT 2026-09-08
 
-Portfolio and Root share one main checkout and index. Before either stages, commits or
-cherry-picks there, notify the other of the paths and wait for its acknowledgment that its
-current index operation has finished and it will not start another until release. An already
-running index operation finishes first. For simultaneous requests, Root proceeds first;
-Portfolio acknowledges and defers its request until Root releases. Keep the handoff limited
-to the short Git operation; native research, reads and other worktrees continue. Commit by
-explicit path and push immediately, then release the index after that push attempt. A failed
-push retains the commit and its retry obligation, not exclusive use of a clean index.
+Before each Root-to-Portfolio tool call, apply these conditions in order. This is a
+behavior rule, not a new validator, scheduler or required message schema.
+
+1. If Portfolio explicitly requested this specific reply, answer it once. A general
+   instruction to keep working, maintain five directions or record progress is NOT a
+   request for replies. A command receipt is NOT a requested ACK.
+2. Otherwise send only if Portfolio must now (a) supply a missing next command or
+   replacement after the supplied route is exhausted, (b) resolve a scope/science/
+   authorization conflict, or (c) arrange a repair for an execution/input/tool/access
+   problem or uncertain external acceptance outside the supplied repair route.
+   Start with the actual action needed and cite the evidence. If none applies, DO NOT SEND.
+3. If that same need was already sent and its evidence/dependency has not materially
+   changed, DO NOT SEND. Waiting time, a new goal turn, another log commit, or an
+   unanswered request is not a changed need. Retain the pending request and work on
+   independent authorized tasks. A new failure or correction that changes the required
+   action may be sent once with the precise change.
+4. If an existing command already supplies collection, integration, next arm, DM intake,
+   recipient resumption or another next step, perform it and log the fact. Do not request
+   confirmation to execute it and do not copy its native-recipient receipt to Portfolio.
+
+Always log-only: accepted dispatch/launch, healthy observation, terminal result with a
+named return route, code acceptance, cherry-pick, commit/push, readiness resume, counts
+without a new capacity decision, ordinary index operation, and default-index release.
+Do not attach any of these to a message merely to turn them into a notification. Relevant
+evidence may accompany a real new action request; unrelated progress must be omitted.
+Do not send "please confirm index idle", "ACK", "index released", "applied", "pushed",
+"still waiting" or a request to ACK a request, except the explicit transfer replies below.
+The labels "action needed", "handoff" or "coordination" do not create an exception.
+
+| Event | Required Root behavior |
+| --- | --- |
+| G ends; command supplies C next | Log G and launch C; no Portfolio message |
+| CM code arrives; command supplies integration and DM readiness | Integrate/push and resume DM; no Portfolio message |
+| Ready routine receipt edits | Commit explicit ready paths at a clean boundary; no idle query or release notice |
+| DM finishes; no successor command exists | Send one exact next-command need; do not resend while unchanged |
+| Tool fails outside the assigned repair route | Send error/evidence and the concrete repair need once; retain independent work |
+| Portfolio has already received a next-task request | Wait for its answer while doing other authorized work; no reminder |
+
+Batch already-ready related routine log/tracking edits at a clean boundary. Do not create
+one commit merely for every start/terminal/collection/intake notification. Do not delay
+required source/card publication, a ready dispatch or a real blocker to assemble a batch.
+Every created commit still pushes immediately. Portfolio does not ACK unsolicited routine
+messages or turn them into owner-facing status reports.
+
+## Shared main checkout: default index owner — OWNER_DIRECT 2026-09-08
+
+This replaces the prior per-operation mutual ACK rule. Root is the default main-index
+operator. Root stages, commits and cherry-picks authorized explicit paths WITHOUT asking
+Portfolio whether it is idle and WITHOUT sending a release notice afterward. Portfolio
+normally edits its owned files and names the exact ready paths in its substantive command;
+Root publishes them before dispatch. Root must not stage unfinished/unrelated Portfolio work.
+File editing ownership remains separate: a real overlapping edit conflict is coordinated
+once, not presumed for every index operation. Other worktrees are unaffected.
+
+Only if Portfolio actually needs to stage/commit/cherry-pick itself does Portfolio request
+temporary use, naming its paths/operation. Root completes any current index transaction and
+push attempt, replies once granting the transfer, then starts no new main-index operation.
+Portfolio waits for that grant, performs the named operation and push attempt, then sends
+one return-of-index message. Root resumes default ownership without replying to that return.
+While transfer is held, reads/native dispatch/other worktrees continue. A failed push retains
+the commit and retry obligation; a clean index can be returned. No periodic idle check,
+automatic expiry, release ACK, lockfile, lease or scheduler is added.
+
 An in-progress cherry-pick/conflict must be resolved by its initiating session, or its explicitly
 assigned resolution owner, before the other session stages any path. If unrelated authorized
 edits may already be included, inspect the resulting commit and remaining diff, attribute

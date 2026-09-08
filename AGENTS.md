@@ -41,6 +41,16 @@ more. `docs/project/ALGORITHM_PRINCIPLES.md` is historical background, not a req
 
 ## Workflow calibration (OWNER_DIRECT, 2026-09-06)
 
+OWNER_DIRECT 2026-09-08 notification boundary: Root sends Portfolio only a specifically
+requested reply, a new missing-command/replacement need, or an unresolved conflict/repair/
+uncertain-acceptance need outside the supplied route. Existing collection/integration/next-arm/
+intake routes execute and log without notification. Unchanged pending needs are not resent.
+Root is the default main-index operator: no per-commit idle query, ACK or release message.
+Portfolio supplies ready owned paths with its command; only Portfolio's actual need for its
+own index operation initiates a temporary transfer. Exact send/no-send conditions and transfer
+steps are in `docs/project/SIBLING_COMMUNICATION.md`; they supersede older per-operation ACK
+wording. Scientific decisions, budgets, explicit-path commits and immediate pushes are unchanged.
+
 OWNER_DIRECT clarification 2026-09-07: writing a receipt in the Root log does not authorize also
 sending it to Portfolio. Before `send_message_to_thread`, identify the action Portfolio must take
 now that the existing command does not already supply. If there is none, do not call the tool.
