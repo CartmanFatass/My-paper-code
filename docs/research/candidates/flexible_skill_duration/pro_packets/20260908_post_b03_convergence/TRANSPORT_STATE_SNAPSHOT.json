@@ -1,0 +1,24 @@
+{
+  "observed_at_utc": "2026-09-08T17:27:11.465734+00:00",
+  "source": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\registry.json",
+  "registry_updated_at": "2026-09-08T17:02:37Z",
+  "binding": {
+    "conversation_binding_key": "em:flexible_skill_duration:convergence",
+    "request_id": "2026-09-08-fsd-post-b02-convergence-01",
+    "state": "ARCHIVED",
+    "conversation_id": "6a9c2865-14a8-83e8-b556-e7f5836d9236",
+    "provider_url": "https://chatgpt.com/c/6a9c2865-14a8-83e8-b556-e7f5836d9236",
+    "updated_at": "2026-09-08T12:48:15Z",
+    "archive_status": "ARCHIVED",
+    "scientific_decision_formed": false,
+    "blocker_code": "GITHUB_DELIVERY_UNAVAILABLE",
+    "send_click_count": 1,
+    "return_receipt": {
+      "status": "SENT",
+      "delivery_status": "accepted",
+      "sent_at": "2026-09-08T12:47:47Z",
+      "message_key": "2026-09-08-fsd-post-b02-convergence-01|flexible_skill_duration|6a9c2865-14a8-83e8-b556-e7f5836d9236|4435ba04d361c243bcfa6198bf62b05ce60e742eb668d4f01999254b9df411e8"
+    }
+  },
+  "interpretation": "Read-only observation: current P45 request is ARCHIVED with accepted parent receipt. Embedded scientific_decision_formed=false/blocker_code fields are stale P25 provenance, not a new P52 blocker. Complete immutable P45 response 128f90b3a2c8b037dcd71c1d3e34ca0c26bccba7 and its accepted intake control that prior formed decision. No registry write, new dispatch, provider Send or reset occurs here."
+}
