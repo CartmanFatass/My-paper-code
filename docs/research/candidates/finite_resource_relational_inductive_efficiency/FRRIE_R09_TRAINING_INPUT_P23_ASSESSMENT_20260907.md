@@ -68,4 +68,107 @@ Checks: existing-file reads, six retained/bound source comparisons, non-executin
 
 Authoring began clean at `ff33e4e7334b4532ccb720c21ff586d86b7f0661` on shared `codex/frrie`, `C:/Projects/HMASD-worktrees/dm-frrie-a01-resume-20260905`. Own this document only. DM next decides whether the proposed first-exception capture justifies its explicit diagnostic-input/cap amendment and120s allocation request, or returns a different scientific need. No source correction or observation is ready to execute under P23 itself.
 
+## DM intake — assessment and proposal only
+
+**Accept the bounded static finding and recommend the first-exception proposal for
+the next separately scoped assignment.** This is technical preparation at a
+source/measurement-path ceiling. It creates no runtime result, diagnostic card
+freeze, source correction, amended input or invocation allocation.
+
+DM read the complete CM assessment at
+`ff8339f3fcae316f730e43c60584c2a06f4c5be1`, the P23 acceptance, P22's original
+traceback/call-order evidence and R09's current card. The retained address declaration,
+`canonical_bytes` and system `fields` implementation corroborate the central mapping:
+14 declared coordinates, canonical serialization through `asdict(self)`, and a
+generator over the retrieved field table. CM's scoped mutation/native-interface
+reads and six byte comparisons are reused; DM did not repeat that engineering review.
+The actual inspection does not support a serializer rewrite or prove absence of
+all source/native defects.
+
+P23's controlling acceptance, verbatim:
+
+> return the smallest justified correction with owned files and preservation/check requirements if static evidence identifies a defect. If it does not, state the actual missing object/field-container/update fact, the smallest targeted prospective observation, its discriminating outcomes, complete cost/exposure bound and stop.
+
+The second clause is satisfied. The assessment identifies the missing address,
+instance/class field table, `fields()` local, generator iterator and execute counters;
+it gives one capture, its outcomes and a complete bound. It leaves the observation
+unallocated. No stronger claim or silent exception to the R09 card is accepted.
+
+The next observation must distinguish a visibly malformed persistent field state
+from an apparently ordinary state at the same failure boundary, while recording
+where the original schedule had reached. That can change the next repair or
+measurement choice. It need not explain every old failure or prove a runtime culprit.
+The first-input-only cut was considered and rejected: its successful completion
+would not resolve a failure after a later learning update. An unchanged full B could
+again lose this state, as P22 did. One bounded first-exception capture addresses the
+actual missing fact without using a zero-learner prefix as another B prerequisite.
+
+Its strongest support is the existing first traceback plus the source-confirmed
+wrong-frame debugger lookups. Its strongest limitation is that P22's failed update
+is unknown: a later/intermittent failure may not recur in 120 s, and normal captured
+state does not prove that transient or native corruption is absent. A nonreproduction
+must not be converted into learner readiness or trigger automatic extensions.
+
+DM used local AST parsing and integer arithmetic to check the 14 fields and maxima:
+`2 arms ×128 updates ×64 factual episodes`, 256 Adam calls, 1,261,568 training-native
+slots plus 55,296 evaluation slots, and `115+5=120` complete seconds. The receipt is
+`temp/directions/finite_resource_relational_inductive_efficiency/exp/p23_dm_assessment_20260907/intake_checks.json`.
+These are proposed upper bounds, not actual or predicted work. One fresh native
+build, original initialization/evaluation/training and bounded debugger capture
+would all lie inside that ceiling; optional validation adds no separate invocation.
+P23 actual setup/scientific-import/native/model/tape/learner/reproduction counts are all zero.
+No per-update rate or claim that the full schedule fits the cap is inferred from
+P22's 61.54 s. The read-only assessment itself has no new algorithm-effect measurement.
+
+### Decisions this intake produces
+
+Options: (a) accept the scoped no-supported-correction finding and forward the
+first-exception proposal for a future diagnostic-input/cap amendment; (b) propose
+changing `asdict` despite no identified source defect; (c) make first-input completion
+the next prerequisite; (d) retry the unchanged full P22 chain.
+Recommend/select **(a), assessment and proposal only**.
+**Owner-delegated decision (unattended, 2026-09-03 instruction): (a).** This object-tier
+choice prepares the next need; it neither freezes a new diagnostic nor releases it.
+Owner flag: none. The runner-up's first-input cut cannot answer the later-update
+uncertainty, so this is not a close-call disposition.
+
+**Exact next-command need through Root to Portfolio:** prepare one explicit
+diagnostic card/input and exact command for the proposed same-host first-exception
+capture, then allocate at most one 120 s chain if that next task authorizes execution.
+The missing executable input is the bounded, frame-identity-based debugger recipe,
+with its exact bytes, fresh paths/handle and q/EOF behavior; the historical 528-byte
+file stays unchanged. No source repair is ready or justified. This is a concrete
+technical assignment recommendation, not a request for Root to select the science.
+If preparation entails new coding, its complete common task/spec/source/checks go
+to Root before CM implementation under the applicable comparison instructions.
+
+P22 remains `R09_INVALID_INCOMPLETE`, with conditional evaluation lower bounds and
+unknown optimizer counts. R09's native-return prediction remains unscored; owner
+prediction not taken. The question still connects partially observed partner
+information through beta aggregation, native actions and RSCF/Adam exposure to
+return under tight/wide boxes. This assessment measures none of that performance.
+R06's conditional N15 support, R07's contrary recurrence evidence, the R08 qualifier,
+MEI0.005 and absent tuned same-information headroom remain as recorded in P22.
+No stable benefit, cause attribution, transfer, UAV entry, family closure or recast
+is inferred, and DIRECTION needs no new mechanism-level conclusion.
+
+At the clean boundary, main's `item.py reviews --json` returned `[]` and relevant
+FRRIE ledger owner cells were empty. No reply required application or scoring.
+No P1/P2 item is created for this ordinary assessment/proposal: no new card or
+direction/Portfolio disposition is frozen. The
+[Chinese brief](../../portfolio/owner/briefs/finite_resource_relational_inductive_efficiency/2026-09-07_P23-training-input-assessment.md)
+states the zero-execution boundary. Engineering-scope §4 additions and new §5
+source-budget breaches: none. The existing pdb facility is a proposed reuse; its
+new input has not been implemented.
+
+DM appends this intake to the same assessment and adds only that brief in the shared
+`codex/frrie` checkout after CM returned ownership. R09 source/card, P22 evidence,
+DIRECTION and shared control-plane files remain unchanged. Root integrates the CM
+assessment and DM appendix commits if absent, retains P22's supplied audit row,
+and appends this new row; it is not claimed already appended here:
+
+```text
+| 2026-09-07T22:14:12-07:00 | finite_resource_relational_inductive_efficiency | object | selection | (a) retain no-supported-fix finding and prepare first-exception proposal; (b) rewrite asdict; (c) require first-input completion; (d) blind P22 retry | (a):explicit future diagnostic-input/cap preparation recommended,one proposed120s unchanged-schedule chain;no source fix,input amendment,card freeze or runtime allocation in P23 | yes | OWNER_DELEGATED (unattended,2026-09-03 instruction); P23 retained-source assessment | docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R09_TRAINING_INPUT_P23_ASSESSMENT_20260907.md | none | |
+```
+
 scope: none
