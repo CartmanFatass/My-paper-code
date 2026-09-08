@@ -265,3 +265,45 @@ defect; no UAV/learner/import probe or admission was added. The declared
 unchanged stops above. Actual new exposure and accepted handles are still
 zero at this source release; all prospective predictions and reading rules
 above remain fixed.
+
+## 11. Observed P24 completion — 2026-09-07
+
+Both prospectively selected fresh masters **6901 and 6902** completed on
+`hmasd-wsl-node` at exact source
+`9c541a8047b8c33e90f09aa65e326180343a23a0`, with fresh passed admissions,
+terminal exit0 and intact primary/hover/diagnostics. Actual new exposure is
+**573,440 UAV team steps / 4,096 Adam calls / 192 final evaluation episodes**
+across four fits. All 2,240 episodes completed. Original sections and the
+prospective P24 prediction/reading rules remain unchanged.
+
+The [P24 E0](UCOPE_UAV_MOTION_PREFIX_B01_P24_RESULT_EVIDENCE_20260907.md) and
+[scientific intake](UCOPE_UAV_MOTION_PREFIX_B01_P24_INTAKE_20260907.md)
+accept **COMPLETE / WITHIN**: T−G endpoints
+**+0.043351866492163174 / −0.050365422532689566**, mean
+**−0.003506778020263196**, endpoint sample SD0.06626813058389298 and
+conditional evaluation SE0.007033641405302189. This applies §4 to the new
+pair only; a small joint mean coexists with large opposing fitted outcomes.
+It is not stable equivalence. G−hover is−0.02820381644235824 in6901 and
++0.017100937953799134 in6902; both comparator limitations and native harm
+remain in the record.
+
+The §10 four-pair **outcome-informed descriptive** mean is
+**+0.005855321301029148**, sample SD0.040359534081716275 and conditional
+evaluation SE0.005149755379587538. It replaces neither P21's original UP
+primary nor P24's fixed WITHIN rule and gives no prospective n=4 confirmation.
+All four pairs total1,146,880 UAV steps /8,192 Adam calls /384 final
+evaluation episodes. Historical finite-host results remain unpooled.
+
+T retains larger opening displacement and changed local inputs in both new
+pairs, including the loss. The full native outcome therefore remains the
+criterion; no pure-information, stable-superiority or tuned-headroom claim
+follows. One of the three P24 predictions matches; owner prediction is not
+taken (unattended). P24 summed whole invocation wall is564.93 s, within the
+unchanged caps; CPU/scratch remain `resources_unmeasured`. No scope §4 addition
+or §5 budget breach is reported.
+
+The P24 allocation is complete. The intake recommends reassessing this
+single-opening prefix before expansion and selects no new scientific
+invocation, amendment, family disposition, promotion or Portfolio change.
+P21's actual UAV entry in §9 remains established; two additional training
+pairs do not create another direction entry. B objects remain unconsumed.
