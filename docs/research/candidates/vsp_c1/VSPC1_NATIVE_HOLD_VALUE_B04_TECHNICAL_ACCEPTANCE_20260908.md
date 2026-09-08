@@ -57,7 +57,7 @@ Root retains integration responsibility.
 
 ## Exact source staging and Root command
 
-Pending accepted-source commit/push and actual detached remote staging. This CM
+Source accepted and remote staging verified below. This CM
 executes no admission, scientific payload, native smoke or standalone fixture.
 The owner's safe pause allows only current P66 through its sole8202 run and intake,
 then a clean pushed stop; no successor or additional scientific invocation follows.
@@ -67,3 +67,48 @@ duration relative-displacement field when its initial norm is zero. At collectio
 retain the raw field but treat that ratio as undefined and report absolute movement;
 it is not evidence of relative exposure. Gate relative movement is already null.
 This reconciles card §5's reporting requirement without changing the accepted source.
+
+
+Accepted scientific source: `a33a3820fe9d4a46a3231bcf267afc956554b6c5`, pushed immediately.
+Remote node `hmasd-wsl-node` uses the configured interpreter and CPU FP32 route.
+The existing bundle/fetch route created actual detached cwd `/home/wu/hmasd-worktrees/vspc1-native-hold-value-b04-8202-a33a3820fe9d`.
+Direct `rev-parse HEAD` equals the accepted full SHA, `status --porcelain` is empty,
+and `symbolic-ref -q HEAD` exits1 (detached). Twelve required source paths exist
+and their remote SHA256 digests match exact committed blobs, including UCOPE
+`environment.py` and `__init__.py`, learner/policy/study, B01 study/critic,
+normalization module, native environment/adapter and runner/preflight.
+[Staging evidence](VSPC1_NATIVE_HOLD_VALUE_B04_STAGING_EVIDENCE_20260908.json)
+records the actual commands and outputs. No source rewrite or import smoke occurred.
+
+The script is staged at `/home/wu/hmasd-inputs/vspc1_hold_value_b04_8202_a33a3820fe9d.sh`;
+local bytes are retained at `temp/directions/vsp_c1/engineering/native_hold_value_b04/launch_8202_a33a3820fe9d.sh`.
+It has655 UTF-8 bytes,8 LF and zero CR; remote readback is identical. SHA256:
+`a3f46d2ce69d4f2e818dd9008f4ac978a9dddd0c815dbb41d0ec123f5ecb1228`. `bash -n` exits0; staging/syntax/readback command process
+wall was1.521803s. No scientific payload or admission was executed.
+
+```bash
+#!/usr/bin/env bash
+# Accepted source: a33a3820fe9d4a46a3231bcf267afc956554b6c5
+set -euo pipefail
+exec /usr/bin/time -f 'whole_wall_seconds=%e,peak_rss_kib=%M' /bin/bash --noprofile --norc -c '
+cd /home/wu/hmasd-worktrees/vspc1-native-hold-value-b04-8202-a33a3820fe9d &&
+/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/projects/HMASD/temp/directions/vsp_c1/exp/native_hold_value_b04_8202_a33a3820fe9d_admission.json &&
+/home/wu/.venvs/hmasd/bin/python scripts/run_vspc1_native_hold_value_b04.py --seed 8202 --out /home/wu/projects/HMASD/temp/directions/vsp_c1/exp/native_hold_value_b04_8202_a33a3820fe9d
+'
+```
+
+Ready exact Root submission, after DM binding/integration:
+
+```powershell
+ssh -o BatchMode=yes -o ConnectTimeout=10 hmasd-wsl-node /usr/local/bin/agent-task run vspc1_hold_value_b04_8202_a33a3820fe9d /bin/bash /home/wu/hmasd-inputs/vspc1_hold_value_b04_8202_a33a3820fe9d.sh
+```
+
+Requested handle `vspc1_hold_value_b04_8202_a33a3820fe9d` returns `not_found` before submission.
+Output `/home/wu/projects/HMASD/temp/directions/vsp_c1/exp/native_hold_value_b04_8202_a33a3820fe9d` and adjacent admission `/home/wu/projects/HMASD/temp/directions/vsp_c1/exp/native_hold_value_b04_8202_a33a3820fe9d_admission.json`
+are directly absent. Both historical B03 supervisor identities and output remain
+untouched. The existing whole-process timer includes admission and process exit;
+cooperative1800s/arm and3600s/pair checks retain partial-publication behavior.
+At collection report enclosing/internal wall and charge any unpartitioned
+nonnegative residual conservatively to both arm upper bounds. No hard-KILL,
+retry, new budget or clock reset is added. Final runtime conformance remains
+unmeasured until Root's sole accepted handle terminates.
