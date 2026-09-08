@@ -1,0 +1,249 @@
+{
+  "independent_unit": "one matched training pair, seed127; four conditions are within-pair observations",
+  "primary": -135.25,
+  "mei_positive": 24,
+  "opposite_scale": -24,
+  "delta_horizon_percent": -11.270833333333332,
+  "delta_vs_direct_final_percent": -19.516594516594516,
+  "conditions": [
+    {
+      "coordinate": "DISH/RBHR/R06/EVALUATION_COORDINATE/0/CLAIM/TARGET_VISUAL_MASK/K8/0",
+      "regime": "TARGET_VISUAL_MASK",
+      "schedule": "K8",
+      "direct_initial": 604,
+      "direct_final": 770,
+      "own_initial": 473,
+      "own_final": 549,
+      "delta_final": -221,
+      "direct_change": 166,
+      "own_change": 76,
+      "direct_final_invalid": 0,
+      "own_final_invalid": 0,
+      "direct_final_energy": 289057.18465655454,
+      "own_final_energy": 297840.2235710073,
+      "delta_final_energy": 8783.038914452773
+    },
+    {
+      "coordinate": "DISH/RBHR/R06/EVALUATION_COORDINATE/0/CLAIM/TARGET_VISUAL_MASK/K4_TO_K12/0",
+      "regime": "TARGET_VISUAL_MASK",
+      "schedule": "K4_TO_K12",
+      "direct_initial": 446,
+      "direct_final": 400,
+      "own_initial": 495,
+      "own_final": 474,
+      "delta_final": 74,
+      "direct_change": -46,
+      "own_change": -21,
+      "direct_final_invalid": 75,
+      "own_final_invalid": 0,
+      "direct_final_energy": 274505.0280899282,
+      "own_final_energy": 298727.31459338544,
+      "delta_final_energy": 24222.28650345723
+    },
+    {
+      "coordinate": "DISH/RBHR/R06/EVALUATION_COORDINATE/0/CLAIM/TERRAIN_RELAY_MASK/K8/0",
+      "regime": "TERRAIN_RELAY_MASK",
+      "schedule": "K8",
+      "direct_initial": 699,
+      "direct_final": 910,
+      "own_initial": 655,
+      "own_final": 581,
+      "delta_final": -329,
+      "direct_change": 211,
+      "own_change": -74,
+      "direct_final_invalid": 4,
+      "own_final_invalid": 0,
+      "direct_final_energy": 289220.1344356523,
+      "own_final_energy": 298386.3429133974,
+      "delta_final_energy": 9166.208477745124
+    },
+    {
+      "coordinate": "DISH/RBHR/R06/EVALUATION_COORDINATE/0/CLAIM/TERRAIN_RELAY_MASK/K4_TO_K12/0",
+      "regime": "TERRAIN_RELAY_MASK",
+      "schedule": "K4_TO_K12",
+      "direct_initial": 365,
+      "direct_final": 692,
+      "own_initial": 385,
+      "own_final": 627,
+      "delta_final": -65,
+      "direct_change": 327,
+      "own_change": 242,
+      "direct_final_invalid": 40,
+      "own_final_invalid": 32,
+      "direct_final_energy": 282166.09421074874,
+      "own_final_energy": 294856.91973422305,
+      "delta_final_energy": 12690.825523474312
+    }
+  ],
+  "aggregates": {
+    "DIRECT_MEAN": {
+      "initial": {
+        "service": 528.5,
+        "energy": 266703.92642467644,
+        "invalid_sum": 32,
+        "invalid_mean": 8
+      },
+      "final": {
+        "service": 693,
+        "energy": 283737.1103482209,
+        "invalid_sum": 119,
+        "invalid_mean": 29.75
+      }
+    },
+    "OWN_COMMAND_MEAN": {
+      "initial": {
+        "service": 502,
+        "energy": 296285.80622923345,
+        "invalid_sum": 91,
+        "invalid_mean": 22.75
+      },
+      "final": {
+        "service": 557.75,
+        "energy": 297452.7002030033,
+        "invalid_sum": 32,
+        "invalid_mean": 8
+      }
+    }
+  },
+  "training": {
+    "DIRECT_MEAN": {
+      "completed_updates": 16,
+      "ordinary_training_transitions": 65536,
+      "optimizer_steps": 512,
+      "training_service": 29426,
+      "training_energy": 15122722.557419622,
+      "training_hard_events": {
+        "buffer_clear": 0,
+        "command_slew_breach": 0,
+        "dual_owner": 0,
+        "dual_payload": 0,
+        "invalid_commit": 4366,
+        "separation_breach": 1,
+        "token_gap": 0
+      },
+      "training_terminals": 32,
+      "training_legal_transfers": 0,
+      "service_label_eligible": 24846,
+      "next_mask_count": 65504,
+      "parameter_movement": {
+        "absolute_l1_displacement": 614.9910245986653,
+        "final_norm": 38.3376199916145,
+        "initial_norm": 38.29155618292703,
+        "l2_displacement": 1.7959716091876465,
+        "relative_l2_displacement": 0.04690254949701972
+      },
+      "exposure": {
+        "EVAL_denominator_actual_ticks": 9600,
+        "H_measured": false,
+        "TRAIN_denominator_ordinary_transitions": 65536,
+        "completed_updates": 16,
+        "consequence_scope": "unmeasured; zero service does not reveal skipped native calls",
+        "consequence_steps": null,
+        "consequence_steps_upper": 496920,
+        "delay_steps": 49692,
+        "final_evaluation_rows": 4,
+        "initial_evaluation_rows": 4,
+        "native_training_calls_lower": 180764,
+        "native_training_calls_upper": 677684,
+        "next_label_steps": 65536,
+        "next_mask_count": 65504,
+        "optimizer_steps": 512,
+        "ordinary_evaluation_ticks": 9600,
+        "ordinary_training_transitions": 65536,
+        "paired_training_replicates": 1,
+        "service_label_eligible": 24846
+      }
+    },
+    "OWN_COMMAND_MEAN": {
+      "completed_updates": 16,
+      "ordinary_training_transitions": 65536,
+      "optimizer_steps": 512,
+      "training_service": 29548,
+      "training_energy": 15933012.081799326,
+      "training_hard_events": {
+        "buffer_clear": 0,
+        "command_slew_breach": 0,
+        "dual_owner": 0,
+        "dual_payload": 0,
+        "invalid_commit": 4405,
+        "separation_breach": 2,
+        "token_gap": 0
+      },
+      "training_terminals": 32,
+      "training_legal_transfers": 0,
+      "service_label_eligible": 24835,
+      "next_mask_count": 65504,
+      "parameter_movement": {
+        "absolute_l1_displacement": 643.9555178837758,
+        "final_norm": 38.34277501618844,
+        "initial_norm": 38.29155618292703,
+        "l2_displacement": 1.8554359473401871,
+        "relative_l2_displacement": 0.0484554855508188
+      },
+      "exposure": {
+        "EVAL_denominator_actual_ticks": 9600,
+        "H_measured": false,
+        "TRAIN_denominator_ordinary_transitions": 65536,
+        "completed_updates": 16,
+        "consequence_scope": "unmeasured; zero service does not reveal skipped native calls",
+        "consequence_steps": null,
+        "consequence_steps_upper": 496700,
+        "delay_steps": 49670,
+        "final_evaluation_rows": 4,
+        "initial_evaluation_rows": 4,
+        "native_training_calls_lower": 180742,
+        "native_training_calls_upper": 677442,
+        "next_label_steps": 65536,
+        "next_mask_count": 65504,
+        "optimizer_steps": 512,
+        "ordinary_evaluation_ticks": 9600,
+        "ordinary_training_transitions": 65536,
+        "paired_training_replicates": 1,
+        "service_label_eligible": 24835
+      }
+    }
+  },
+  "final_energy_difference": 13715.589854782389,
+  "final_invalid_difference": -87,
+  "all_evaluation_rows": 16,
+  "all_evaluation_ticks": 19200,
+  "all_fixed_horizon": true,
+  "all_transfers_zero": true,
+  "all_other_evaluation_hard_events_zero": true,
+  "all_loss_gradient_flags_finite": true,
+  "all_learning_rates": [
+    3e-05,
+    3e-05
+  ],
+  "native_training_calls_bounds_pair": [
+    361506,
+    1355126
+  ],
+  "H_measured": false,
+  "H_upper_pair": 993620,
+  "prediction": {
+    "DM_and_Pro": "Delta_mean>0, low confidence; MEI crossing uncertain",
+    "sign_score": "miss",
+    "owner": "not taken; no reply"
+  },
+  "selected_card_branches": [
+    "Delta_mean<=-24: retain DIRECT and stop current OWN_COMMAND_MEAN extension",
+    "zero ordinary legal transfers: primary valid; source value unestimated"
+  ],
+  "inference": "descriptive only; no seed population interval or causal diagnosis",
+  "root_syntax_charge": "unmeasured; Root confirms no separate elapsed receipt; additional not inferred",
+  "cost_accounting": {
+    "cm_accounted_pair_seconds": 463.24328708601877,
+    "dm_analysis_command_seconds": [
+      "0.2882093",
+      "0.3020878"
+    ],
+    "dm_analysis_total_seconds": "0.5902971",
+    "accounted_pair_subtotal_seconds": "463.83358418601877",
+    "accounted_arm_subtotal_seconds": {
+      "DIRECT_MEAN": "231.8594618040269",
+      "OWN_COMMAND_MEAN": "231.97412238199187"
+    },
+    "scope": "CM subtotal includes stated0.02s closure and1s final-write allowances; add DM primary/raw-evidence publication and run-summary command wall once; Root syntax-check wall unmeasured/additional. This is not an exact complete-cost measurement. Ordinary control-plane document/Git work is separate."
+  }
+}

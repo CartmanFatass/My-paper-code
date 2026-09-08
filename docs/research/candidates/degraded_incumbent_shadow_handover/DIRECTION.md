@@ -994,3 +994,42 @@ second Send, recast, C promotion, UAV-validation entry or Portfolio disposition 
 References: `DISH_P53_NATIVE_PROPOSAL_SOURCE_INTAKE_20260908.md` §9;
 `pro_packets/20260908_p53_own_command_mean/archive/RESPONSE.md` §§一–七;
 the adjacent exact chat receipt, Transport facts and Issue4 comment snapshot.
+
+## B07 native-service result and narrow stop — 2026-09-08
+
+The sole matched seed127 **B/EXPLORE** pair gives final OWN_COMMAND_MEAN557.75 versus
+DIRECT693 mean service ticks: **−135.25**, below the frozen−24 opposite scale. Condition
+differences are−221,+74,−329,−65. Both real learners completed16 updates/65536 transitions/
+512 optimizer steps; all16 initial/final modal rows completed1200 ticks. The card's negative
+branch is applied at object tier: **retain DIRECT and stop this fixed own-command mean's
+current extension**. No unchanged extra seed, arm, coefficient tuning or diagnostic is selected.
+
+The bounded claim is a native-service loss on this observed pair, not stable inferiority,
+universal rejection of own-command parameterization, mechanism identification or source-value
+evidence. DIRECT improves+164.5 from its own initialization and OWN+55.75, with individual
+initial-relative losses retained. These changes do not rebase the final primary or isolate
+learning speed. The prior low-confidence positive-sign prediction missed.
+
+Strongest remaining support for OWN is the+74 final condition, fewer final invalid commits
+(32 versus119) and positive own-initial mean change. Strongest contradiction is the mean
+loss, three negative conditions and greater native energy in every final condition
+(mean+13715.5899), all at equal1200-tick duration. TRAIN is separate: OWN has4405 versus4366
+invalid commits and2 versus1 separation breaches. No event-count or training proxy rescues
+the final service result. The already recorded persistence caution remains a possible
+explanation, alongside redundant information/projection and changed control/co-adaptation;
+the experiment does not identify the cause.
+
+Zero ordinary legal transfers occur in every evaluation row and both training arms. Native
+service remains valid ordinary/incumbent evidence; origin eligibility and COPY−RETAIN/
+SHADOW−COPY value remain unestimated. The accepted information ceiling, absent tuned/upper
+headroom, earlier B06 negative and LR means/adverse rows remain. H/resource gaps and unmeasured
+syntax-check cost limit their own quantities, not the complete service comparison.
+
+No further B07 discriminator is selected at this intake. A next experiment requires a
+specifically justified new comparison; this result provides no automatic successor or
+source-value answer. Whole-direction lifecycle, priority, recast count and UAV status are
+unchanged. This is the existing card's narrow stop, not closure of the source agenda.
+
+References: `DISH_OWN_COMMAND_MEAN_B07_RESULT_EVIDENCE_20260908.md` §§1–5;
+`DISH_OWN_COMMAND_MEAN_B07_RESULT_INTAKE_20260908.md` §§2–6;
+frozen card §§3–5 and `own_command_mean_b07_20260908_run01/` evidence.
