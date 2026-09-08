@@ -1,8 +1,10 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-08 (P47 owner-directed research resume and ordinary recovery)
+Updated at: 2026-09-08 (P48 UCOPE continuation and P49 rolling fifth-slot refill)
 
 Current incremental disposition: [P48 UCOPE functional acceptance](handoffs/2026-09-08-p48-ucope-functional-acceptance.md) accepts the completed, independently reviewed B02 implementation/fixture evidence while retaining its80.578s versus60s engineering overrun. No repeat smoke or speculative optimization is required; P47's7001/7002 scientific route and original caps continue. RCLE exact-request recovery is BLOCKED on unproven provider acceptance and counts zero after its return; the fifth-slot choice remains Portfolio's task, with the other four chains retained.
+
+Current rolling refill: [P49 VSPC1 native value-sharing question](handoffs/2026-09-08-p49-vspc1-native-value-question.md) assigns the new concrete UCOPE native environment/learner interface as a read-only source for one K4 comparison question, with one conditional Convergence consultation and full intake/preparation route. This is distinct from completed P10 service-allocation preparation; no old rule comparison or scientific run is repeated. VSPC1 replaces RCLE's yielded execution slot only after actual dispatch, retaining FSD/UCOPE/FRRIE/CBSC. No lifecycle/priority or UAV-entry change follows.
 
 Current command: [P47 research resume and ordinary recovery](handoffs/2026-09-08-p47-research-resume-and-recovery.md). OWNER_DIRECT restores research progression and Root's original five-direction/five-UAV-entry goal. FSD B03 and UCOPE B02 proceed from completed specifications through implementation, review and their selected bounded experiments. FRRIE and CBSC remain in the working set for normal crash repair and affected-path verification; unresolved code problems do not justify bypassing those directions or serializing independent science. RCLE receives exact-request Transport recovery. Use fresh native instances per the owner's instruction, existing direction checkouts, and rolling returns. Actual acceptance/counts belong to Root's log; unresolved idle waits count zero. Lifecycle, priority and historical results remain unchanged.
 
