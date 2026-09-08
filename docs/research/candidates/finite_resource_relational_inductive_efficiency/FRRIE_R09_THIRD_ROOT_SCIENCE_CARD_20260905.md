@@ -185,6 +185,18 @@ is prospectively portable across configured Linux/Windows surfaces, not compiler
 pinned. Local fallback requires actual remote refusal, no accepted remote handle and a fresh
 destination admission; do not migrate live work.
 
+Prospective runtime amendment under P21 (2026-09-07): the separately allocated next
+system312 attempt uses original scientific source
+`43eec21e9584c83e5e8d940402d7e4570b454e59`, a dedicated FRRIE CPython 3.12.3 environment
+and the retained CBSC 23-wheel set, with NumPy 1.26.3/Torch 2.7.0+cu118 and all dependency
+pins unchanged. [P21 offline handoff](FRRIE_R09_OFFLINE_RUNTIME_P21_HANDOFF_20260907.md)
+binds the exact source/input/command paths and complete setup-through-R09 accounting.
+CPU FP32, original FP64 reductions, Torch1, four-worker/native32 profile, fixed pdb
+input, root3, comparison, counts, predictions and caps remain unchanged. This amendment
+authorizes preparation only: no setup or learner invocation is released. The old uv
+substrate's A03 stop and every historical failure remain; shared package imports do not
+establish FRRIE native or learner readiness.
+
 ## Meaning-complete engineering assignment and ratified exception
 
 Accepted **whole-logical-change baseline is
