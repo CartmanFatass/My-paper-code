@@ -91,36 +91,36 @@ The implemented host has a receiver and a courier on a five-position corridor,
 with sixteen three-step delivery rounds per complete episode. The courier switches once from
 following a public light to following its opposite; both policies actually move and deliver.
 The receiver has the same legal local history in both arms and uses recurrent PPO. One common
-prefix (seed 1103; 4,096 episodes) produces two 1,024-episode descendants. The primary is actual
+prefix (4,096 episodes) produces two 1,024-episode descendants. The primary is actual
 adaptation return per episode, Delta = RESET minus CARRY; absolute MEI is 0.5 deliveries per episode.
-The first complete B/EXPLORE result is now available; new-host tuned-baseline headroom and
+Two independent-prefix B/EXPLORE results are now available; new-host tuned-baseline headroom and
 competent-comparator qualification remain absent.
 
-The seed1103 pair is VALID_COMPLETE / WITHIN_MEI: native adaptation means are CARRY7.46875 and
-RESET7.4873046875, Delta+0.0185546875 (19 deliveries over1024 episodes, versus512 at the MEI).
-Both terminal sampled means are8.234375; intermediate sampled RESET losses at q64 and q128 are
-retained. One learned prefix and its entire pair are one independent training unit; there is no
-training-seed population interval or equivalence claim.
+Both pairs are VALID_COMPLETE / WITHIN_MEI. Seed1103 has CARRY7.46875 and RESET7.4873046875,
+Delta+0.0185546875 (19 extra deliveries over1024). Seed1117 has CARRY7.8564453125 and
+RESET7.84765625, Delta-0.0087890625 (nine fewer deliveries). The descriptive paired mean is
++0.0048828125 against MEI0.5, with opposite signs. Seed1103's terminal sampled means coincide
+at8.234375; seed1117 ends CARRY7.75 / RESET7.703125. All intermediate losses remain. Each
+learned prefix and its entire pair are one independent training unit; n=2 supports no stable
+population or equivalence claim.
 
 The strongest support is complete real learning with equal information and learned starting
 parameters, the declared Adam-state fork and directly observed native service. The strongest
-contradiction to a useful reset benefit on this pair is its tiny primary difference, matching
-terminal sampled values and intermediate RESET losses. The scripted teammate can also be absorbed
+contradiction to a useful reset benefit on the tested configuration is both tiny primary
+differences, their opposing signs and1117's native/terminal RESET losses. The scripted teammate can also be absorbed
 into an ordinary changing environment, so generic warm-start transience remains the strongest
 alternative to event-specific MARL attribution. Fast recurrent inference, unqualified baseline
 competence, critic adaptation, Adam step-counter effects and single-prefix variability survive.
 The old exact zero terminal headroom and B5R1's nonidentical continuous values both remain intact;
 neither establishes a new-host sign or member-recovery effect.
 
-The next discriminator recommended by the B01 intake is one fresh independent prefix/pair,
-master1117 with the same P4096/Q1024 comparison, evaluation and whole1800s CPU/FP32 cap, to observe
-whether the within-MEI difference and endpoint agreement persist. P17 now allocates exactly this
-one fresh pair under card §9, with a separate1800s whole-chain cap; P15's one scientific invocation
-is complete. No1117 result exists at amendment publication. The observed complete runner wall36.696s
-(38s admission/runner chain) supports a
-bounded planning reference, not a future runtime guarantee. This B supports only a local
-observation, not stable superiority, a unique optimizer mechanism, roster/identity recovery,
-transfer or UAV entry.
+P15 and P17 are complete: sum runner wall72.76788033498451s, admission/runner chains75s for
+two valid pairs; aggregate CPU and per-arm wall remain unmeasured. The intake recommends no
+further unchanged-seed expansion and returns a future Convergence task on the accepted family's
+disposition. No successor measurement, family closure/PARK/RECAST, Pro request or UAV promotion
+is selected here. If the family continues, its next empirical discriminator remains to be named.
+The bounded reading is absence of an MEI-sized reset benefit on these two prefixes, not stable
+equivalence, a unique optimizer mechanism, roster/identity recovery or transfer.
 Event-specific attribution would need a separately justified no-change comparison; it does not
 hold the first performance B.
 
@@ -135,3 +135,6 @@ References:
 - `VSP02_TEAMMATE_POLICY_CHANGE_B01_INTAKE_20260907.md`
 - `VSP02_TEAMMATE_POLICY_CHANGE_B01_INTAKE_ANALYSIS_20260907.json`
 - `VSP02_TEAMMATE_POLICY_CHANGE_B01_P17_AMENDMENT_INTAKE_20260907.md`
+- `VSP02_TEAMMATE_POLICY_CHANGE_B01_P17_RESULT_EVIDENCE_20260907.md`
+- `VSP02_TEAMMATE_POLICY_CHANGE_B01_P17_INTAKE_20260907.md`
+- `VSP02_TEAMMATE_POLICY_CHANGE_B01_P17_INTAKE_ANALYSIS_20260907.json`
