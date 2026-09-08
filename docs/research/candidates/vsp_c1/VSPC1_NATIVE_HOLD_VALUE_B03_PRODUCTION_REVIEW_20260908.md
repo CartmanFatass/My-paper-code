@@ -1,9 +1,8 @@
 # VSPC1 B03 — independent normalization review
 
-No material production finding was found after direct inspection and the focused
-check evidence. The later exact committed launch command remains to be inspected
-below. This is independent technical evidence, not approval, permission, or a
-scientific disposition.
+No material finding was found in the production source or the exact launch command
+after direct inspection and the focused check evidence. This is independent
+technical evidence, not approval, permission, or a scientific disposition.
 
 Contract: [B03 CM specification](VSPC1_NATIVE_HOLD_VALUE_B03_CM_SPEC_20260908.md)
 and [B03 card sections 3–6](VSPC1_NATIVE_HOLD_VALUE_B03_SCIENCE_CARD_20260908.md).
@@ -109,9 +108,39 @@ Incremental native runtime and scientific behavior remain unmeasured.
 
 ## Exact launch command
 
-Pending accepted-source commit/push and the B02-pattern literal-LF artifact.
-Review will inspect fixed8201, object/source/cwd/output/admission/handle bindings,
-the staged syntax/readback evidence and enclosing timing scope. The selected
-1,800 s/arm and 3,600 s/pair checks must retain partial publication and reported
-indivisible overruns; no external pre-publication hard-KILL wrapper is permitted.
-Root owns exact-source checkout staging and the separately authorized submission.
+Accepted source: `7a8ed3aa5d25ded71164aa338749d09318124dcf`, committed/pushed by CM.
+The reviewer inspected the literal script, `launch_binding.json`, and the remote
+readback file beneath `temp/directions/vsp_c1/engineering/native_hold_value_b03/`.
+A read-only byte comparison independently found 655 bytes, eight LF-terminated
+lines, no CR, and identical local/remote-readback content. CM's staged `/bin/bash -n`
+exited 0 in 0.4038779 s; its readback command exited 0 in 0.5733178 s. No scientific
+payload was executed. The full literal command and submission are recorded in
+[technical acceptance](VSPC1_NATIVE_HOLD_VALUE_B03_TECHNICAL_ACCEPTANCE_20260908.md#exact-root-command-staged-not-submitted).
+
+- Local script: `launch_8201_7a8ed3aa5d25.sh` under that engineering directory.
+- Node: `hmasd-wsl-node`; staged script:
+  `/home/wu/hmasd-inputs/vspc1_hold_value_b03_8201_7a8ed3aa5d25.sh`.
+- Bound detached cwd:
+  `/home/wu/hmasd-worktrees/vspc1-native-hold-value-b03-8201-7a8ed3aa5d25`.
+- Output:
+  `/home/wu/projects/HMASD/temp/directions/vsp_c1/exp/native_hold_value_b03_8201_7a8ed3aa5d25`;
+  admission is its sibling `native_hold_value_b03_8201_7a8ed3aa5d25_admission.json`.
+- Requested supervisor handle (not submitted): `vspc1_hold_value_b03_8201_7a8ed3aa5d25`.
+
+The shell changes to the exact bound cwd and joins fresh admission to the fixed8201
+runner using `&&`; the configured interpreter and output match the binding. H,
+normalization and object/card identities come from the reviewed B03 entry point.
+There is no alternate seed, retry, fixture, resume or external hard-KILL wrapper.
+The enclosing `/usr/bin/time` interval includes admission and process exit, so it
+is an upper bound on scientific wall, not exact learner-only time. The source's
+continuous 1,800 s/arm and 3,600 s/pair checks and partial-publication path remain;
+indivisible overruns must still be reported as breaches, without extra budget.
+
+Only command staging and syntax are established here. Root retains exact-source
+checkout staging and the pre-submit cwd/source comparison required by
+ROOT_OPERATIONS.md, followed by the separately authorized single submission and
+terminal observation. Future cap assessment must combine the enclosing interval
+with the internal arm split and report any unpartitioned startup/exit residual
+conservatively. Native performance, normalization overhead, actual moment/Adam
+counts, complete exit-cap conformance and admission remain unmeasured by this
+engineering review. No reviewer execution or additional scientific gate follows.
