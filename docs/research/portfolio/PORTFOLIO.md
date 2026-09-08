@@ -1,6 +1,8 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-08 (P50 UCOPE exact-source staging repair)
+Updated at: 2026-09-08 (P50 staging repair and P51 MGTAP source-question refill)
+
+Current incremental refill: [P51 MGTAP native geometry question](handoffs/2026-09-08-p51-mgtap-native-geometry-question.md) reuses the existing `dm-n5-continue-20260904` checkout for one source-supported geometry/binding question on the accepted UCOPE native learner. The source already exposes relative geometry; no treatment gain, new B or UAV entry is presumed. A surviving question goes once to the proper MGTAP Convergence node, then through complete intake and any selected card/specification. FSD intake, UCOPE P50 and VSPC1 P49 intake continue independently. FRRIE/CBSC production repair and actual tool restrictions, plus RCLE's uncertain acceptance, remain named unresolved dependencies; no duplicated preparation or restricted operation is used to inflate the five-chain count.
 
 Current repair command: [P50 UCOPE exact-source staging](handoffs/2026-09-08-p50-ucope-exact-source-staging-repair.md) resumes the same DM/CM in the existing direction checkout to resolve repeated GitHub SSL staging failure. Use the accepted committed objects already on the selected node, or transfer missing committed objects over its existing authenticated SSH/SCP route, preserving the exact 637406340 source and all P47/P48 scientific bounds. No local authoring copy, source substitution, security-setting change or new scientific exposure is selected. FSD's complete G/D0/H panel proceeds to scientific intake; actual pending/returned chains count only when advancing. Other actionable vacancies receive incremental commands when their inputs are ready.
 
