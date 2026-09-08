@@ -223,4 +223,30 @@ returns one focused static existing-utility outer-timer/namespace proposal via
 Root to Portfolio. It does not dispatch that task or change a scientific budget,
 family, lifecycle, priority or UAV-entry state.
 
+## 7. P41 static review interruption — allowance still unused
+
+[P41](../../portfolio/handoffs/2026-09-08-p41-frrie-static-namespace-method.md)
+at`b1a783f135c5712520bee6bb6eb9515c5735a95b` authorized only one static util-linux
+method evaluation. The [P41 intake](FRRIE_R09_NATIVE_FATAL_A08_P41_PREPARATION_INTAKE_20260908.md)
+retains installed version/package/configuration metadata and their raw receipt
+digests. The CM turn stopped with a runtime cybersecurity-risk flag before a
+complete method/source/deadline/proc acceptance or committed command existed.
+This tool interruption does not establish that the method is unavailable or
+that the scientific mechanism failed.
+
+Installed namespace facilities and configured maxima are observed; syscall
+permission remains unknown because the retained seccomp indicator contains no
+filter policy. No namespace, service, debugger, target or new utility was
+executed. The original source, runtime, schedule, report and sections1–5 remain
+unchanged; native MEI/prediction are untested/unscored and all prior results stay
+as recorded. Status remains **COMMAND_NOT_ACCEPTED / LIVE_INVOCATIONS_0**.
+
+Object-tier choice: retain the narrow facts and return the incomplete named
+review with its tool dependency. Recommend/select(a).
+**Owner-delegated decision (unattended,2026-09-03 instruction): (a).** The intake
+records options, costs, owner status, brief and the append-ready audit row.
+P41 authorizes no automatic continuation or live launch, even if its static
+method is later accepted: exact prospective binding and a named allocation
+remain necessary. The conditional A08 live allowance is still unused.
+
 scope: one bounded native fault-context report and existing-host debugger/inferior containment per section4

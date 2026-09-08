@@ -165,4 +165,12 @@ and Portfolio paths remain Root's integration surface.
 | 2026-09-08T09:39:14Z | finite_resource_relational_inductive_efficiency | object | selection | (a) return focused static outer-timer/namespace method proposal; (b) uncharged startup; (c) Python repeat/patch/full B | (a):direction-local next-task recommendation viaRoot toPortfolio only;installed utility/permission/race/proc facts remain needed;no new engineering dispatch or runtime sample | yes | OWNER_DELEGATED (unattended,2026-09-03 instruction); P39 return | docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R09_NATIVE_FATAL_A08_PREPARATION_INTAKE_20260908.md#4-decisions-this-intake-produces | none | |
 ```
 
+## 6. P41 follow-through
+
+The separately issued P41 static namespace review ended before a complete
+method return because the CM runtime flagged the turn. Its retained installed
+metadata, exact limits, zero live exposure and unresolved review dependency are
+recorded in the [P41 intake](FRRIE_R09_NATIVE_FATAL_A08_P41_PREPARATION_INTAKE_20260908.md).
+That return neither changes this P39 finding nor releases an A08 invocation.
+
 scope: none
