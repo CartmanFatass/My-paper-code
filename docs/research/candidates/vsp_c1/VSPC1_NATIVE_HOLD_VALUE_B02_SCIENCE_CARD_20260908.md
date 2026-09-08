@@ -225,3 +225,18 @@ clean boundary. Supervisor acceptance, admission, native counts/performance and
 complete runtime conformance are **not yet observed**. Root adopts/observes the
 accepted handle, then resumes this same CM for collection and this DM for all-outcome
 intake. The exposure remains zero for B02 until that actual invocation.
+
+## 8. Completed observation
+
+The single P55 invocation completed at master8102/source0ec208899 with a valid
+complete **UP**: GATED−MLP+.1157271305, conditional evaluation SE .0094720558;
+GATED−H+.0265020852 and MLP−H−.0892250453. UP(.55) hit. This is the second
+separately reported local training pair, with a markedly weak MLP/H comparison;
+no stable-superiority or unique-mechanism claim follows.
+All286720 native steps,2048 Adam calls and96 evaluations are accounted for.
+Complete conservative arm/whole bounds158.206214s/146.874405s/304.52s conform.
+See [E0 evidence](VSPC1_NATIVE_HOLD_VALUE_B02_RESULT_EVIDENCE_20260908.md),
+[CM collection](VSPC1_NATIVE_HOLD_VALUE_B02_COLLECTION_20260908.md) and
+[all-outcome DM intake](VSPC1_NATIVE_HOLD_VALUE_B02_INTAKE_20260908.md).
+The frozen rule and prediction above are unchanged. P55's allocation ends here;
+the intake's later-comparison recommendation allocates no call, key or code.
