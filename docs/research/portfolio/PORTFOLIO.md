@@ -1,8 +1,10 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-08 (P40 FSD independent-pair preparation)
+Updated at: 2026-09-08 (P41 FRRIE static namespace method)
 
-Current incremental command: [P40 FSD independent trained pair](handoffs/2026-09-08-p40-fsd-independent-pair-preparation.md). B01's valid one-pair H−C+0.497383 supports preparation of one fresh independent pair at the same comparison/budget. Freeze unused training/evaluation masters and the minimal seed/input implementation spec; no runtime or code implementation is yet allocated.
+Current incremental command: [P41 FRRIE static complete-deadline method](handoffs/2026-09-08-p41-frrie-static-namespace-method.md). A08 preparation found no accepted complete-deadline command and launched nothing. Evaluate one existing util-linux namespace/parent-death recipe from installed-version, permission and termination evidence; no namespace/test/target execution or new utility is allocated.
+
+Retained incremental command: [P40 FSD independent trained pair](handoffs/2026-09-08-p40-fsd-independent-pair-preparation.md). B01's valid one-pair H−C+0.497383 supports preparation of one fresh independent pair at the same comparison/budget. Freeze unused training/evaluation masters and the minimal seed/input implementation spec; no runtime or code implementation is yet allocated.
 
 Retained incremental command: [P39 FRRIE native fault context](handoffs/2026-09-08-p39-frrie-native-fault-context.md). A07 retained a fatal Python path, missed its scheduled MEI and exhausted P35/P37. Reuse attributable retained crash material first; only if unusable prepare at most one120s native observation with established complete containment. Reuse P36 capability/gap evidence; no setup or Python-only repeat. Actual dispatch remains a Root fact.
 
