@@ -1,8 +1,10 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-07 (P17 CBSC execution and VSP02 fresh-prefix pair)
+Updated at: 2026-09-07 (P18 CBSC fresh paired B preparation)
 
-Current incremental command: [P17 exact CBSC invocation and VSP02 master1117 pair](handoffs/2026-09-07-p17-cbsc-execution-vsp02-fresh-prefix.md). Accepted P16 engineering and VSP02 seed1103 intake now support the two named allocations; actual launches remain Root log facts. Other advancing routes continue independently. No lifecycle, priority or UAV-entry change.
+Current incremental command: [P18 CBSC fresh paired B preparation](handoffs/2026-09-07-p18-cbsc-fresh-pair-preparation.md). P17 established the declared acquisition/install/metadata path in 174.561 s with no learner exposure; prepare both new RAW/STRUCT arms on that explicit runtime. No learning invocation is allocated by P18. Other direction routes continue independently.
+
+Retained/previous incremental command: [P17 exact CBSC invocation and VSP02 master1117 pair](handoffs/2026-09-07-p17-cbsc-execution-vsp02-fresh-prefix.md). Accepted P16 engineering and VSP02 seed1103 intake now support the two named allocations; actual launches remain Root log facts. Other advancing routes continue independently. No lifecycle, priority or UAV-entry change.
 
 Previous incremental command: [P16 CBSC acquisition-command engineering](handoffs/2026-09-07-p16-cbsc-acquisition-command.md). CBSC P15 yielded at a concrete cross-node deadline/termination gap; P16 commissions bounded command engineering with zero actual acquisition or experiment allocation. Other P15 routes continue independently. No lifecycle or priority change.
 
