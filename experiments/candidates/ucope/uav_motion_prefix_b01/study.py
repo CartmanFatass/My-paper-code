@@ -11,6 +11,14 @@ import time
 CARD = "docs/research/candidates/ucope/UCOPE_UAV_MOTION_PREFIX_B01_SCIENCE_CARD_20260907.md"
 
 
+def declared_masters(pair):
+    if pair == "p21":
+        return (6801, 6802)
+    if pair == "p24":
+        return (6901, 6902)
+    raise ValueError("pair must be p21 or p24")
+
+
 @dataclass
 class Config:
     seed: int
@@ -21,6 +29,7 @@ class Config:
     chunk: int = 32
     arm_cap: float = 1800
     pair_cap: float = 3600
+    pair: str = "p21"
 
     @classmethod
     def engineering(cls, seed=9001):
@@ -74,7 +83,8 @@ def primary_from_rows(rows, expected):
     return result
 
 
-def aggregate(summaries):
+def aggregate(summaries, pair="p21"):
+    declared = declared_masters(pair)
     if len(summaries) != 2:
         raise ValueError("aggregation takes exactly two pair summaries")
     if len({s["seed"] for s in summaries}) != 2:
@@ -82,13 +92,26 @@ def aggregate(summaries):
     modes = {s["mode"] for s in summaries}
     if len(modes) != 1:
         raise ValueError("cannot combine synthetic and UAV endpoints")
-    if modes == {"UAV_B_EXPLORE"} and {s["seed"] for s in summaries} != {6801, 6802}:
-        raise ValueError("the UAV joint primary requires masters 6801 and 6802")
+    if modes == {"UAV_B_EXPLORE"}:
+        if {s["seed"] for s in summaries} != set(declared):
+            raise ValueError(f"the {pair} UAV joint primary requires masters {declared}")
+        for s in summaries:
+            # Original P21 summaries predate allocation metadata and remain usable.
+            if s.get("pair", "p21") != pair or tuple(s.get("declared_masters", (6801, 6802))) != declared:
+                raise ValueError("summary declared pair does not match selected pair")
+            if s.get("card", CARD) != CARD or s.get("card_section", 8) != (10 if pair == "p24" else 8):
+                raise ValueError("summary card binding does not match selected pair")
+    elif modes != {"ENGINEERING_FIXTURE"} or pair != "p21":
+        raise ValueError("only the legacy fixture route accepts synthetic summaries")
     pairs = [{"seed": s["seed"], "primary": s["primary"], "limits": s.get("limits", [])}
              for s in summaries]
     complete = all(s["primary"]["complete"] for s in summaries)
     result = {"mode": "AGGREGATE", "input_mode": summaries[0]["mode"], "pairs": pairs,
-              "card": CARD, "primary": {"complete": complete}}
+              "card": CARD, "primary": {"complete": complete},
+              "pair": pair if modes == {"UAV_B_EXPLORE"} else "ENGINEERING_FIXTURE",
+              "declared_masters": list(declared) if modes == {"UAV_B_EXPLORE"}
+                                  else [s["seed"] for s in summaries],
+              "card_section": (10 if pair == "p24" else 8) if modes == {"UAV_B_EXPLORE"} else "CODE_SPEC §8"}
     if complete:
         endpoints = [s["primary"]["T_minus_G"]["mean"] for s in summaries]
         ses = [s["primary"]["T_minus_G"]["conditional_se"] for s in summaries]
@@ -151,6 +174,9 @@ def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=wri
         limits.append("launch SHA unavailable")
     summary = {"mode": "ENGINEERING_FIXTURE" if config.fixture else "UAV_B_EXPLORE",
                "seed": config.seed, "configuration": asdict(config), "card": CARD, "launch_sha": sha,
+               "pair": "ENGINEERING_FIXTURE" if config.fixture else config.pair,
+               "declared_masters": [config.seed] if config.fixture else list(declared_masters(config.pair)),
+               "card_section": "CODE_SPEC §8" if config.fixture else (10 if config.pair == "p24" else 8),
                "status": "INCOMPLETE", "arms": arms, "limits": limits,
                "cost_projection": "UAV coefficients unmeasured: init + 131072*c_env_actor + "
                                   "1024*c_update + 8192*c_eval + publication; G adds 8192 H steps",
