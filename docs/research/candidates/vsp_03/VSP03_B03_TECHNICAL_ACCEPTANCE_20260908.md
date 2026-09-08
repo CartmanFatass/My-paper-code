@@ -7,7 +7,7 @@ DM owns scientific intake; this record concerns source conformance and execution
 B03 imports unchanged B02 Model/worlds/action_tapes/rollout/metrics/difference and B01
 objective/vectors/scales/write_json/peak_rss. No B01/B02 byte changed (git diff exit0).
 The driver constructs G once with arm index1, trains128 batches then evaluates G greedy,
-G stochastic, R and R0 once each on identical1024-world inputs. Greedy GÃƒÂ¢Ã‹â€ Ã¢â‚¬â„¢R0 is primary;
+G stochastic, R and R0 once each on identical1024-world inputs. Greedy G minus R0 is primary;
 all five selected contrasts retain sample SD and conditional-world SE. One independent
 training instance is recorded, never a T/G training pair. The old fixture is absent.
 
@@ -45,3 +45,20 @@ The exact launch Bash block passed remote bash -n via stdin (exit0), without exe
 Independent [source review](VSP03_B03_SOURCE_REVIEW_20260908.md) returned no material
 finding. CM accepts this source for the selected contract; DM source intake precedes
 the sole source-bound launch. No run yet.
+
+## Executed source and collection
+
+Accepted source4eb8a36b9184633f5e28eff999a99f2dbc948040 was pushed and DM's changed
+comparison intake was committed at215849916 before launch. Configured zsh -lic
+successfully staged its clean exact-SHA remote worktree. An earlier source-only fetch
+without that network shell hung; its identified Git processes were terminated before
+successful staging. No scientific construction/admission occurred in that repair.
+
+The sole invocation published primary/count/weight outputs; see
+[VSP03_B03_RESULT_EVIDENCE_20260908.md](VSP03_B03_RESULT_EVIDENCE_20260908.md).
+Root recorded the accepted handle and terminal observation, then returned collection
+to this CM. Direct artifact readback is accepted; numeric supervisor exit is unavailable.
+The generated wrapper evaluates the payload containing top-level exec /usr/bin/time,
+which replaces the wrapper before its exit-code/footer publication. This explains the
+missing receipt from inspected source; it does not supply an observed exit0. No source,
+supervisor or payload repair, second invocation or additional evaluation was attempted.

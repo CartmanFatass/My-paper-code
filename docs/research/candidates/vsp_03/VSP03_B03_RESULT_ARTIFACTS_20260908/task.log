@@ -1,0 +1,24 @@
+=== Task 'vsp03-b03-p54-20260908' started at 2026-09-09T04:30:47+08:00 ===
+{
+  "assessed_at": "2026-09-08T20:30:47.940887Z",
+  "available_physical_bytes": 15235641344,
+  "captured_at": "2026-09-08T20:30:47.940583Z",
+  "cgroup_headroom_bytes": null,
+  "cgroup_memory_current_bytes": null,
+  "cgroup_memory_max_bytes": null,
+  "effective_available_bytes": 15235641344,
+  "effective_floor_pass": true,
+  "failure_reasons": [],
+  "measurement_source": "/proc/meminfo",
+  "minimum_available_bytes": 4294967296,
+  "passed": true,
+  "physical_floor_pass": true,
+  "schema_version": 1
+}
+{"arm": "G", "update": 1, "elapsed_s": 1.3962237700470723, "actual_rollouts": {"episodes_started": 128, "episodes_completed": 128, "team_ticks": 5120, "target_transitions": 10240, "decision_rows": 491, "rollout_policy_forwards": 16}, "optimizer_steps": 1}
+{"arm": "G", "update": 32, "elapsed_s": 1.8189985430217348, "actual_rollouts": {"episodes_started": 4096, "episodes_completed": 4096, "team_ticks": 163840, "target_transitions": 327680, "decision_rows": 15720, "rollout_policy_forwards": 530}, "optimizer_steps": 32}
+{"arm": "G", "update": 64, "elapsed_s": 2.2317543150275014, "actual_rollouts": {"episodes_started": 8192, "episodes_completed": 8192, "team_ticks": 327680, "target_transitions": 655360, "decision_rows": 30598, "rollout_policy_forwards": 1047}, "optimizer_steps": 64}
+{"arm": "G", "update": 128, "elapsed_s": 2.9934929800219834, "actual_rollouts": {"episodes_started": 16384, "episodes_completed": 16384, "team_ticks": 655360, "target_transitions": 1310720, "decision_rows": 64912, "rollout_policy_forwards": 2108}, "optimizer_steps": 128}
+{"status": "complete", "counts": {"episodes_started": 20480, "episodes_completed": 20480, "team_ticks": 819200, "target_transitions": 1638400, "decision_rows": 93244, "rollout_policy_forwards": 2142}, "elapsed_through_readback_s": 3.1853303690440953}
+runner_exit_ready elapsed_s=3.1859115520492196
+whole_wall_seconds=3.50 peak_rss_kib=515704
