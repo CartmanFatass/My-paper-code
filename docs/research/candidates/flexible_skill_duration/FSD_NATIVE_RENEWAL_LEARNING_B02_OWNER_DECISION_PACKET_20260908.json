@@ -1,0 +1,38 @@
+{
+  "question": "是否接受B02前瞻卡，用一个新的独立训练配对检验B01的控制方案优势是否再次出现？",
+  "changes_if_approved": [
+    {
+      "target": "FSD_NATIVE_RENEWAL_LEARNING_B02_SCIENCE_CARD_20260908.md",
+      "from": "只有B01的一次训练配对结果",
+      "to": "固定训练770303、评价770304及全部结果分支；两次配对分开报告；只准备最小输入改动规格"
+    }
+  ],
+  "if_refused": "保留B01的原始数据和结论，不实施这张B02卡；将明确的修订或下一任务需求通过Root返回。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_NATIVE_RENEWAL_LEARNING_B01_RESULT_EVIDENCE_20260908.md",
+      "quote": "The selected public-renewal package has a large native advantage over its matched\ninternal-D2 package after five fresh real-learning rollouts on this one training\npair.",
+      "why": "B01在真实从头学习后有很大的本地差距，新的独立训练配对能直接检验是否依赖该种子。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_NATIVE_RENEWAL_LEARNING_B01_RESULT_EVIDENCE_20260908.md",
+      "quote": "The public reference still wins; C is not a tuned\nfixed-clock performance comparator.",
+      "why": "公开贪心仍更好，内部比较器也不是调优过的固定时钟基线；新配对不能保证稳定优势或学到了换约规则。"
+    }
+  ],
+  "uncertainty": [
+    "目前只有一个训练配对；下一次差距可能缩小或反号，所有结果都保留。",
+    "新种子的实际更新和分段工作量未知；708.25秒历史总耗时不是完成保证。",
+    "两次配对分开报告，不合并64回合冒充训练种子不确定性。"
+  ],
+  "cost": {
+    "compute": "本次新增科学调用、模型、训练和评价均为0。未来拟2×5×16×400训练步及3×32×400评分步，G/C/H完整上限60/900/900秒，总1860秒；当前未分配运行。",
+    "owner_time": "异步查看或纠偏即可，循环不等待回复。",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing; 当前仅发布前瞻准备，下一CM实现和运行均需另行命名分配。"
+  },
+  "verdict_text": "建议接受这张前瞻性B02卡：用新的训练和评价种子检验同一控制方案的差距是否再次出现；本次只交付卡和最小实现规格，不修改代码、不运行学习。",
+  "source": "docs/research/candidates/flexible_skill_duration/FSD_NATIVE_RENEWAL_LEARNING_B02_PREPARATION_INTAKE_20260908.md"
+}
