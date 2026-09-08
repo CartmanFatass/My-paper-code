@@ -65,11 +65,12 @@ def applied_mask(policy, internal, host, env_steps):
                     if policy == "H" else internal, dtype=bool, copy=True)
 
 
-def base_summary(policy, corridor, launch_sha):
+def base_summary(policy, corridor, launch_sha, *, training_seed=SEED,
+                 evaluation_master=EVAL_MASTER, object_id=OBJECT_ID, card=CARD):
     return {
-        "object_id": OBJECT_ID, "card": CARD, "policy": policy, "launch_sha": launch_sha,
-        "seed": None if policy == "G" else SEED, "training_master": SEED,
-        "evaluation_master": EVAL_MASTER, "episode_ids": list(range(EVAL_LANES)),
+        "object_id": object_id, "card": card, "policy": policy, "launch_sha": launch_sha,
+        "seed": None if policy == "G" else training_seed, "training_master": training_seed,
+        "evaluation_master": evaluation_master, "episode_ids": list(range(EVAL_LANES)),
         "host": json.loads(json.dumps(corridor.parameter_record())),
         "device": "cpu", "torch_threads": torch.get_num_threads(),
         "learner_precision": None if policy == "G" else "float32",
@@ -102,19 +103,19 @@ def publish(out, summary, start, stage):
     check_deadline(start, summary["policy"], stage + ":published")
 
 
-def build_learner(corridor, out, summary, start):
+def build_learner(corridor, out, summary, start, *, training_seed=SEED):
     policy = summary["policy"]
     check_deadline(start, policy, "setup")
     torch.set_num_threads(4)
-    random.seed(SEED)
-    np.random.seed(SEED)
-    torch.manual_seed(SEED)
-    adapter = RelayCorridorAdapter(corridor, num_envs=TRAIN_LANES, master_seed=SEED,
+    random.seed(training_seed)
+    np.random.seed(training_seed)
+    torch.manual_seed(training_seed)
+    adapter = RelayCorridorAdapter(corridor, num_envs=TRAIN_LANES, master_seed=training_seed,
                                   episode_ids=list(range(TRAIN_LANES)), squeeze_batch=False)
     overrides = arm_parameters("large", "d2")
     config = build_corridor_learner_config(
         corridor, adapter, mode="d2", num_envs=TRAIN_LANES, rollout_length=corridor.horizon,
-        k=overrides["skill_cap_k_max"], seed=SEED, overrides=overrides)
+        k=overrides["skill_cap_k_max"], seed=training_seed, overrides=overrides)
     summary["learner_config"] = {key: getattr(config, key) for key in e0.CONFIG_DUMP_FIELDS
                                  if hasattr(config, key)}
     check_deadline(start, policy, "learner construction")
@@ -298,12 +299,13 @@ def evaluate(policy, adapter, controller, summary, out, start, reset_lanes=None)
             result["pooled_" + suffix] = {"wrong": w, "eligible": e, "wrong_rate": w / e if e else None}
 
 
-def final_evaluation(policy, corridor, learner, overrides, summary, out, start):
+def final_evaluation(policy, corridor, learner, overrides, summary, out, start, *,
+                     training_seed=SEED, evaluation_master=EVAL_MASTER):
     # Construction, synchronization, lane reset AND scoring are all isolated.
     with e0._preserve_rng():
         check_deadline(start, policy, "evaluator construction")
         evaluator = CorridorEvaluator(corridor, overrides, chunk=EVAL_LANES,
-                                      master_seed=EVAL_MASTER, log_dir=out / "evaluation_logs", seed=SEED)
+                                      master_seed=evaluation_master, log_dir=out / "evaluation_logs", seed=training_seed)
         summary["counts"]["model_constructions"] += 1
         check_deadline(start, policy, "evaluator constructed")
         evaluator._sync(learner)
@@ -374,10 +376,11 @@ def summarize_panel(h, c, g=None):
     return result
 
 
-def main(argv=None):
+def main(argv=None, *, training_seed=SEED, evaluation_master=EVAL_MASTER,
+         object_id=OBJECT_ID, card=CARD):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--policy", choices=("G", "C", "H"), required=True)
-    parser.add_argument("--seed", type=int, choices=(SEED,), required=True)
+    parser.add_argument("--seed", type=int, choices=(training_seed,), required=True)
     parser.add_argument("--launch-sha", required=True)
     parser.add_argument("--out", type=Path, required=True)
     parser.add_argument("--c-summary", type=Path)
@@ -389,18 +392,21 @@ def main(argv=None):
     out.mkdir(parents=True, exist_ok=True)
     torch.set_num_threads(4)
     corridor = proposal_config("large")
-    summary = base_summary(args.policy, corridor, args.launch_sha)
+    summary = base_summary(args.policy, corridor, args.launch_sha, training_seed=args.seed,
+                           evaluation_master=evaluation_master, object_id=object_id, card=card)
     try:
         publish(out, summary, PROCESS_START, "setup")
         if args.policy == "G":
-            adapter = RelayCorridorAdapter(corridor, num_envs=EVAL_LANES, master_seed=EVAL_MASTER,
+            adapter = RelayCorridorAdapter(corridor, num_envs=EVAL_LANES, master_seed=evaluation_master,
                                           episode_ids=list(range(EVAL_LANES)), squeeze_batch=False)
             evaluate("G", adapter, GreedyOnPublicState(), summary, out, PROCESS_START)
         else:
-            adapter, learner, overrides, theta0, counters = build_learner(corridor, out, summary, PROCESS_START)
+            adapter, learner, overrides, theta0, counters = build_learner(
+                corridor, out, summary, PROCESS_START, training_seed=args.seed)
             publish(out, summary, PROCESS_START, "learner constructed")
             collect_training(args.policy, adapter, learner, summary, theta0, counters, out, PROCESS_START)
-            final_evaluation(args.policy, corridor, learner, overrides, summary, out, PROCESS_START)
+            final_evaluation(args.policy, corridor, learner, overrides, summary, out, PROCESS_START,
+                             training_seed=args.seed, evaluation_master=evaluation_master)
         summary["status"] = "complete"
         if args.policy == "H":
             g, reference_failure = None, None
