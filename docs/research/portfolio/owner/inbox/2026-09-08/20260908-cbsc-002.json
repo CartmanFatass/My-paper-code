@@ -1,0 +1,74 @@
+{
+  "id": "20260908-cbsc-002",
+  "created": "2026-09-08T09:07:57-07:00",
+  "direction": "capability_bound_semantic_currentness",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "P47：减少投影前扰动的非学习诊断",
+  "context": "初始投影的带日志版本通过一次；简化版本尚未执行。只检查同一输入的投影边界，不产生学习成绩或证明修复。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "按P47执行原范围诊断，保留全部结果。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "下个边界停止或撤回该选择，历史记录保留。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "根据具体指令修改未来诊断，不追改历史含义。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "已有明确扰动假设且保持原运行语义；诊断结果只用于普通修复。",
+  "evidence": [
+    "docs/research/candidates/capability_bound_semantic_currentness/CBSC_P47_PROJECTION_REPAIR_CARD_20260908.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-08.md#L21",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否保留这张P47诊断卡，检查去掉投影前日志和导出后，原始输入是否仍能通过初始投影？",
+    "changes_if_approved": [
+      {
+        "target": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_P47_PROJECTION_REPAIR_CARD_20260908.md",
+        "from": "保留但未执行的简化测试",
+        "to": "在原解释器和120秒完整上限内执行非学习诊断；有证据才修复"
+      }
+    ],
+    "if_refused": "在下个边界应用拒绝或修改；保留现有崩溃和诊断记录，不把失败改写为通过。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_NATIVE_REPAIR_INITIAL_PREFIX_20260908.md",
+        "quote": "Normal completion / historical fatal not reproduced.",
+        "why": "带日志的忠实前缀已通过一次，减少投影前扰动是已有具体假设。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/finite_resource_relational_inductive_efficiency/NATIVE_CRASH_FORENSIC_RESULT_20260908.md",
+        "quote": "Status: diagnosis incomplete; no production repair accepted.",
+        "why": "此前证据没有找到破坏内存的操作，通过一次不能说明故障已修复。"
+      }
+    ],
+    "uncertainty": [
+      "简化前缀仍与历史进程状态不同。",
+      "若通过，只能缩小故障条件；若失败，只报告直接边界事实。"
+    ],
+    "cost": {
+      "compute": "每次完整诊断最多120秒；首项构造416条输入轨迹、9728次适配器调用；学习和评分均为零。",
+      "owner_time": "无需等待回复；可异步修改。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "建议执行已有简化前缀；保留原始主机、数值、随机数、信息和奖励语义，不重复历史学习运行。",
+    "source": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_P47_PROJECTION_REPAIR_CARD_20260908.md"
+  },
+  "starred": false
+}
