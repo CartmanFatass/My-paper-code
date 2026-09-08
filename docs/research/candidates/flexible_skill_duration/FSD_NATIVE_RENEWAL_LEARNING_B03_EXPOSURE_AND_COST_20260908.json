@@ -1,0 +1,163 @@
+{
+  "object_id": "FSD_NATIVE_RENEWAL_LEARNING_B03",
+  "evidence_class": "B/EXPLORE",
+  "assignment": "P46 prospective card and bounded CM specification only",
+  "starting_source_sha": "a74ed196f8c7b7dbabd1492d5aa077366be65f40",
+  "source_equivalent_accepted_B01_B02_sha": "d961c58268353f215d3ffddf0d83927e6318541d",
+  "P45_response_sha": "128f90b3a2c8b037dcd71c1d3e34ca0c26bccba7",
+  "new_scientific_exposure": {
+    "scientific_invocations": 0,
+    "model_constructions": 0,
+    "checkpoint_loads": 0,
+    "training_starts": 0,
+    "training_transitions": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0
+  },
+  "preparation_exposure": {
+    "source_modifications": 0,
+    "test_executions": 0,
+    "model_or_host_constructions": 0,
+    "diagnostic_fixture_or_probe_executions": 0,
+    "admissions_or_launches": 0,
+    "Pro_sends": 0
+  },
+  "prospectively_selected_keys": {
+    "training_master": 770403,
+    "evaluation_master": 770404,
+    "training_episode_ids_consumed": {
+      "first": 0,
+      "last": 79,
+      "count": 80,
+      "per_rollout": 16
+    },
+    "evaluation_episode_ids": {
+      "first": 0,
+      "last": 31,
+      "count_per_policy": 32
+    },
+    "selection_method": "unseen numerical labels chosen before any B03 model,host,fixture,outcome or cost probe; paired initialization and exogenous keys, own endogenous paths",
+    "whole_identifier_lookup": {
+      "argv": [
+        "git",
+        "grep",
+        "-n",
+        "-w",
+        "-E",
+        "770403|770404",
+        "a74ed196f8c7b7dbabd1492d5aa077366be65f40",
+        "--"
+      ],
+      "exit_code": 1,
+      "matches": 0
+    }
+  },
+  "selected_design_not_runtime_allocated": {
+    "question": "H_train versus fresh fair D0 k=5 at the same five-rollout budget, retaining G; no C arm, third identical pair, tuning grid or causal matrix",
+    "independent_unit": "one fresh matched training pair770403; separate evaluation master770404",
+    "learned_arms": 2,
+    "independent_training_pairs": 1,
+    "rollouts_per_arm": 5,
+    "training_lanes": 16,
+    "horizon": 400,
+    "training_transitions_expression": "2 * 1 * 5 * 16 * 400",
+    "training_transitions": 64000,
+    "training_episodes": 160,
+    "update_stages": 10,
+    "evaluation_policies": 3,
+    "endpoint_checkpoints_per_learner": 1,
+    "evaluation_episodes_per_policy": 32,
+    "evaluation_episodes": 96,
+    "scoring_steps_expression": "3 * 1 * 32 * 400",
+    "scoring_steps": 38400,
+    "all_host_steps": 102400,
+    "all_agent_observations": 614400,
+    "learner_constructions": 2,
+    "independent_evaluator_constructions": 2,
+    "old_checkpoint_loads": 0,
+    "learned_policy_batch_calls": 4800,
+    "public_reference_calls": 400,
+    "fixed_clock_lane_boundaries_per_rollout_expression": "16 * 400 / 5",
+    "fixed_clock_lane_boundaries_per_rollout": 1280,
+    "fixed_clock_agent_renewals_all_training": 38400,
+    "actual_optimizer_calls_and_H_segments": "unknown until the separately allocated B03 run; existing algorithm records actual values",
+    "MEI_absolute_mean_native_reward": 0.01,
+    "summed_complete_cap_seconds": 2160,
+    "D0_historical_cost_anchor": {
+      "expression": "1.15 * (5 * (64.6 + 0.769 * 150) + 32 * 0.46)",
+      "seconds": 1051.6405,
+      "coordinator_optimizer_steps_per_rollout_historical": 150,
+      "source": "FSD_E3_LARGE_D0_SEED2_RESULT_EVIDENCE_20260905.md#rule-cost-deviations-and-bounded-reading",
+      "observed_old_complete_runner_seconds": 2603.2776923269994,
+      "observed_old_supervisor_seconds": 2784,
+      "observed_old_rollouts": 20,
+      "observed_old_evaluation_episodes": 3584,
+      "limitation": "Historical cost-law scale using old measured optimizer workload, not measured new D0 cost, a current-source admission projection, a proportional rescaling of whole-run wall, or a guarantee."
+    },
+    "nested_policy_candidates_trajectories_or_solvers": 0,
+    "additional_scientific_validation_panel": 0,
+    "complete_caps_seconds": {
+      "D0": 1200,
+      "H": 900,
+      "G": 60
+    },
+    "future_route": "remote_first wsl_4070, CPU four threads, FP32 learner and FP64 host/reward; exact accepted-source detached invocation and existing fresh admission; not bound or launched by P46"
+  },
+  "authentic_configuration_differences": {
+    "source": "scripts/run_flexible_skill_duration_e3.py#arm_parameters; envs/relay_corridor/hmasd_driver.py#build_corridor_learner_config; config_1.py#calculate_and_set_buffer_sizes",
+    "H": {
+      "k": 40,
+      "interruption_cost_c": 0.25,
+      "interruption_cost_c_Z": 0.25,
+      "skill_cap_k_max": 40,
+      "team_cap_k_Z": 400,
+      "high_level_buffer_size_train": 160,
+      "high_level_batch_size_train": 128,
+      "high_level_buffer_size_evaluation": 320,
+      "high_level_batch_size_evaluation": 128
+    },
+    "D0": {
+      "k": 5,
+      "interruption_cost_c": "Infinity",
+      "interruption_cost_c_Z": "Infinity",
+      "skill_cap_k_max": 5,
+      "team_cap_k_Z": 5,
+      "high_level_buffer_size_train": 1280,
+      "high_level_batch_size_train": 128,
+      "high_level_buffer_size_evaluation": 2560,
+      "high_level_batch_size_evaluation": 128
+    },
+    "Infinity_meaning": "JSON string for the two declared positive-infinity configuration costs only; actual runtime config/overrides retain numeric +inf, and finite action,reward,step-data,metric,update and parameter checks remain strict"
+  },
+  "existing_complete_panels": [
+    {
+      "object": "B01",
+      "training_master": 770203,
+      "full_H_minus_C": 0.49738281249999894,
+      "full_G_minus_H": 0.021184895833334313,
+      "complete_wall_seconds": {
+        "G": 2.47,
+        "C": 371.89,
+        "H": 333.89
+      },
+      "summed_invocation_wall_seconds": 708.25,
+      "source": "FSD_NATIVE_RENEWAL_LEARNING_B01_RESULT_EVIDENCE_20260908.md#complete-cost-admission-and-runtime-receipts"
+    },
+    {
+      "object": "B02",
+      "training_master": 770303,
+      "full_H_minus_C": 0.5203906250000002,
+      "full_G_minus_H": 0.01084635416666652,
+      "complete_wall_seconds": {
+        "G": 2.56,
+        "C": 338.46,
+        "H": 323.99
+      },
+      "summed_invocation_wall_seconds": 665.01,
+      "source": "FSD_NATIVE_RENEWAL_LEARNING_B02_RESULT_EVIDENCE_20260908.md"
+    }
+  ],
+  "learner_can_move_evidence": "Existing B01/B02 result evidence records real optimizer steps and first/final initialization-relative displacement. B03 must report its own actual updates/exposure; no extra readiness motion probe or universal displacement threshold.",
+  "headroom": "Tuned same-information generic baseline/upper-reference pair absent. Prior public G gaps are conditional reference facts, not learned headroom.",
+  "note": "P46 creates no production root, wrapper source, fixture run, admission, script, handle or scientific observation. Counts are Python arithmetic over committed source facts and the accepted P45 design, not a simulation or new timing measurement."
+}
