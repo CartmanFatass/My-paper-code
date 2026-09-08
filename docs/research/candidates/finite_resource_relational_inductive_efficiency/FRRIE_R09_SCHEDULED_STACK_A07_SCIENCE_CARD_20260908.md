@@ -6,8 +6,9 @@ it concerns the execution path carrying event-addressed randomness into the
 same-information multi-agent learner and its native consequence.
 
 Object: `FRRIE-R09-SCHEDULED-STACK-A07-P35-20260908`. Class: **A/RECON**.
-Status: `EXACT_COMMAND_FROZEN / READY_FOR_ONE_ATTEMPT`. Current invocations:0.
-Section6 records acceptance of P35's one complete120s chain and exact inputs.
+Status: `P37_CORRECTED_TRANSPORT_READY / SCIENTIFIC_INVOCATIONS_0`.
+Section7 records one failed preflight-free wrapper and the corrected dispatch binding.
+The original single P35 scientific allocation remains unstarted under P37.
 A has no consumption state; A05/P22/A06 outcomes and budgets remain separate.
 
 ## 1. Question, authority and observation amendment
@@ -243,6 +244,90 @@ E0 and DM applies §2. No timer rearm, second sample or future retry is released
 
 ```text
 | 2026-09-08T08:09:35Z | finite_resource_relational_inductive_efficiency | object | technical | (a) accept exact A07 command/order; (b) return concrete gap | (a):command1287B SHA256 8ed56ed4489b0d211355f74a1e91a07f9ae8ac1efc43cecf77c824a5fc56e51c and single60s arming accepted;Root one120s dispatch next;invocations0 | yes | OWNER_DELEGATED (unattended,2026-09-03 instruction); P35 | docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R09_SCHEDULED_STACK_A07_SCIENCE_CARD_20260908.md#6-exact-binding-and-root-release | none | |
+```
+
+## 7. P37 correction after a wrapper failure
+
+Authority: [P37](../../portfolio/handoffs/2026-09-08-p37-frrie-a07-command-transport.md)
+at `20d03f7fd36af351894ccea51b2bf79512540554`. This explicitly releases
+the still-unstarted single P35 scientific allocation after its malformed
+supervisor wrapper. It changes transport/supervisor identity only; the scientific
+payload, source, arming point/time, runtime, schedule and120s bound stay fixed.
+
+**What DM checked.** Read the complete
+[P37 handoff](FRRIE_R09_SCHEDULED_STACK_A07_P37_TRANSPORT_HANDOFF_20260908.md)
+at **`f9a785b6caf898ca120778812150de53a4991049`**, retained failed log/runner,
+path readback and static receipt. The P35 handle
+`frrie-a07-scheduled-stack-p35-43eec21e` started/ended at08:19:37Z, reported
+duration0s and exit127. Its actual runner execution line evaluates only a
+backslash command; it contains no GNU-time, preflight, Python or diagnostic
+payload. The log reports line10 command-not-found. This source/log control-flow
+evidence establishes zero original preflight/scientific execution, rather than
+inferring zero from absent learner files. The broader transport cause is not
+assigned or required to correct that exact malformed command.
+
+The existing original43ee cwd is tracked-clean. The fixed output root and P35
+`process-time.txt` are absent, and the corrected supervisor identity was unused
+at preparation. There is no current fixed-path overwrite conflict. Preserve the
+failed wrapper's six retained files: log, runner, status, exit_code, pid and
+start_time. The corrected payload will create its previously absent time file
+under that old directory; it belongs to the new execution and cannot be read as
+the failed wrapper's timing. All original scientific work/output paths stay fixed.
+
+Counts now: **1 failed supervisor wrapper,0 original preflights,0 scientific
+invocations,0 arming calls/learner updates/evaluation episodes from that wrapper**;
+the corrected supervisor has not launched. The0s value is the supervisor's
+whole-second duration, not precise wall/CPU telemetry. The failed wrapper did
+not reach the A07 measurement path or test its prediction/MEI. No A07 scientific
+result, causal inference, prior-failure clearance or consumption state follows.
+Its evidence remains part of the eventual P35 all-outcome intake.
+
+**Exact corrected binding, superseding section6's supervisor identity/transport:**
+
+| Quantity | Accepted value |
+| --- | --- |
+| New unused supervisor handle | `frrie-a07-scheduled-stack-p37-43eec21e` on `hmasd-wsl-node` |
+| Staged script | `/home/wu/hmasd-inputs/frrie-a07-scheduled-stack-p37/command.sh` |
+| Script content | Original sole LF payload at66cd6cd6522d1bde426046907c31d5eb488e4b43;1287 bytes, zero CR, no trailing LF |
+| Script SHA256 | `8ed56ed4489b0d211355f74a1e91a07f9ae8ac1efc43cecf77c824a5fc56e51c` |
+| Short supervisor command | `/usr/bin/env -u BASH_ENV -u ENV /bin/bash --noprofile --norc /home/wu/hmasd-inputs/frrie-a07-scheduled-stack-p37/command.sh` |
+| Short command bytes / SHA256 | 123 / `c09c4db7060600a1a07a1bdbaac917de7dff281b84aa9bac7215dba37af30e2b` |
+| Supervisor argv | `/usr/local/bin/agent-task`, `run`, new handle above, short command above as one argument |
+| Current supervisor log | `/home/wu/.agent-tasks/frrie-a07-scheduled-stack-p37-43eec21e/task.log` |
+| Timed payload receipt | `/home/wu/.agent-tasks/frrie-a07-scheduled-stack-p35-43eec21e/process-time.txt`, previously absent |
+| Scientific cwd/output, helper/stdin, arming | Exactly §§1,3 and original payload; P35 paths/43ee/306/78-byte arming argument unchanged |
+
+The payload was extracted as binary Git-blob bytes, staged through scp and read
+back byte-identically; no PowerShell/text roundtrip of its body was used. The
+staged script passed `bash -n` without execution. DM independently matched its
+original Git blob, retained local payload and staged binary readback, plus the
+123-byte short-command digest. CM collection/syntax checks, timer, imports and
+fixtures were not repeated. DM receipt:
+`temp/directions/finite_resource_relational_inductive_efficiency/exp/a07_transport_p37/dm_acceptance_readback.json`.
+
+No new machinery or §5 breach is evidenced. The added transport shell only
+starts the unchanged bounded payload; startup environment files are suppressed
+for it. The original adjacent4GiB admission&&program remains inside TERM115+5.
+Root retains supervisor and timed-payload elapsed; transport overhead is not an
+extra scientific budget. Preparation adds0 scientific/fixture/import invocations.
+
+**Decision produced — object-tier technical.** Options: (a) accept the verified
+zero-exposure reconciliation and exact script transport under P37; (b) return
+a concrete exposure/identity/preservation conflict. Recommend/select **(a)**.
+**Owner-delegated decision (unattended,2026-09-03 instruction): (a).** Main owner
+reviews were empty at acceptance. Owner flags:none; this ordinary correction
+creates no new card or P1/P2 item. The existing A07 prediction stays on record.
+
+After this binding is committed/pushed, Root dispatches the short command once
+under the new identity, with fresh adjacent actual-node admission inside the
+unchanged payload. Observe that accepted identity; no blind resend, extra
+scientific invocation, rearm, sample, cap reset, source repair or fallback.
+CM collects both wrapper provenance and the corrected outcome; DM applies §2
+and writes the all-outcome intake/Chinese brief/audit. No runtime observation
+has been made by this correction.
+
+```text
+| 2026-09-08T08:29:26Z | finite_resource_relational_inductive_efficiency | object | technical | (a) accept zero-exposure P37 script correction; (b) reconcile concrete conflict | (a):P35 wrapper exit127 before preflight/science,0 exposure;exact1287B payload staged;new handle frrie-a07-scheduled-stack-p37-43eec21e releases only original one120s scientific allocation | yes | OWNER_DELEGATED (unattended,2026-09-03 instruction); P37 | docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R09_SCHEDULED_STACK_A07_SCIENCE_CARD_20260908.md#7-p37-correction-after-a-wrapper-failure | none | |
 ```
 
 scope: one bounded watchdog thread and scheduled stack report per section4
