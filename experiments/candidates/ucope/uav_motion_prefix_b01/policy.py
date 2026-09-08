@@ -15,6 +15,7 @@ class Actor(nn.Module):
         self.mean = nn.Linear(64, 3)
         self.log_std = nn.Parameter(torch.zeros(3))
         self.duration = None
+        self.duration_conditioned = False
 
     def forward(self, observations, hidden):
         output, hidden = self.gru(torch.tanh(self.encoder(observations)), hidden)
@@ -39,13 +40,19 @@ def templates(seed):
     return actor, critic
 
 
-def arm_copy(common, treatment):
+def arm_copy(common, treatment, duration_head_seed=None):
     actor, critic = copy.deepcopy(common)
     if treatment:
+        actor.duration_conditioned = duration_head_seed is not None
         with torch.random.fork_rng(devices=[]):
-            actor.duration = nn.Linear(64, 2)
-        nn.init.zeros_(actor.duration.weight)
-        nn.init.zeros_(actor.duration.bias)
+            if actor.duration_conditioned:
+                torch.random.default_generator.manual_seed(duration_head_seed)
+                actor.duration = nn.Sequential(nn.Linear(67, 32), nn.Tanh(), nn.Linear(32, 2))
+            else:
+                actor.duration = nn.Linear(64, 2)
+        final = actor.duration[-1] if actor.duration_conditioned else actor.duration
+        nn.init.zeros_(final.weight)
+        nn.init.zeros_(final.bias)
     return actor, critic
 
 
@@ -71,13 +78,26 @@ def joint_terms(actor, mean, recurrent, u, durations, velocity_mask, duration_ma
                       + .5 * math.log(2 * math.pi * math.e)).sum()
     entropy = velocity_mask.sum(-1) * normal_entropy
     if actor.duration is not None:
-        logits = actor.duration(recurrent)
+        if actor.duration_conditioned:
+            if not duration_mask.any():
+                return logp, entropy
+            inputs = torch.cat((recurrent[duration_mask], u[duration_mask].detach().tanh()), -1)
+            logits = actor.duration(inputs)
+            selected = durations[duration_mask]
+        else:
+            logits = actor.duration(recurrent)
+            selected = durations
         log_probs = logits.log_softmax(-1)
-        chosen = log_probs.gather(-1, durations[..., None]).squeeze(-1)
-        duration_lp = torch.where(duration_mask, chosen, 0)
-        logp = logp + (duration_lp.sum(-1) if ratio_grouping == "joint" else duration_lp)
+        chosen = log_probs.gather(-1, selected[..., None]).squeeze(-1)
         cat_entropy = -(log_probs.exp() * log_probs).sum(-1)
-        entropy = entropy + torch.where(duration_mask, cat_entropy, 0).sum(-1)
+        if actor.duration_conditioned:
+            duration_lp = torch.zeros_like(velocity_lp).masked_scatter(duration_mask, chosen)
+            duration_entropy = torch.zeros_like(velocity_lp).masked_scatter(duration_mask, cat_entropy)
+        else:
+            duration_lp = torch.where(duration_mask, chosen, 0)
+            duration_entropy = torch.where(duration_mask, cat_entropy, 0)
+        logp = logp + (duration_lp.sum(-1) if ratio_grouping == "joint" else duration_lp)
+        entropy = entropy + duration_entropy.sum(-1)
     return logp, entropy
 
 
@@ -89,7 +109,9 @@ def sample(actor, mean, recurrent, active, opening, velocity_rng, duration_rng):
             u[i] = mean[i] + actor.log_std.clamp(-5, 2).exp() * torch.randn(
                 3, generator=velocity_rng)
         if opening and actor.duration is not None:
-            probabilities = actor.duration(recurrent[i]).softmax(-1)
+            inputs = (torch.cat((recurrent[i], u[i].detach().tanh()), -1)
+                      if actor.duration_conditioned else recurrent[i])
+            probabilities = actor.duration(inputs).softmax(-1)
             durations[i] = torch.multinomial(probabilities, 1, generator=duration_rng)[0]
     return u, durations
 
@@ -99,6 +121,9 @@ def parameter_groups(actor, critic):
     groups = {"common_actor": common, "critic": list(critic.parameters())}
     if actor.duration is not None:
         groups["duration"] = list(actor.duration.parameters())
+        if actor.duration_conditioned:
+            groups["duration_hidden"] = list(actor.duration[0].parameters())
+            groups["duration_final"] = list(actor.duration[2].parameters())
     groups["total"] = list(actor.parameters()) + list(critic.parameters())
     return groups
 
@@ -117,5 +142,6 @@ def exposure(initial, actor, critic):
         displacement = float((end - start).norm())
         result[name] = {"parameters": start.numel(), "initial_norm": initial_norm,
                         "final_norm": float(end.norm()), "displacement": displacement,
-                        "relative_displacement": displacement / (initial_norm + 1e-12)}
+                        "relative_displacement": (None if actor.duration_conditioned and initial_norm == 0
+                                                  else displacement / (initial_norm + 1e-12))}
     return result

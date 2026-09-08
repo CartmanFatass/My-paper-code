@@ -8,7 +8,6 @@ import json
 import math
 from pathlib import Path
 import sys
-import tempfile
 import time
 
 import numpy as np
@@ -23,13 +22,6 @@ from experiments.candidates.ucope.uav_motion_prefix_b01 import learner
 from experiments.candidates.ucope.uav_motion_prefix_b01 import study
 from experiments.candidates.ucope.uav_motion_prefix_b01.policy import (
     arm_copy, exposure, generator, joint_terms, sample, snapshot, tanh_log_prob, templates)
-
-
-@pytest.fixture
-def tmp_path():
-    root = Path("temp/directions/ucope/test/uav_motion_prefix_b01_unit")
-    root.mkdir(parents=True, exist_ok=True)
-    return Path(tempfile.mkdtemp(dir=root))
 
 
 def test_lazy_factory_and_information_mapping():

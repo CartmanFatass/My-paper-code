@@ -13,6 +13,8 @@ B02_CARD = "docs/research/candidates/ucope/UCOPE_UAV_MOTION_PREFIX_B02_SCIENCE_C
 B02_OBJECT = "UCOPE-UAV-MOTION-PREFIX-B02"
 B03_CARD = "docs/research/candidates/ucope/UCOPE_UAV_MOTION_PREFIX_B03_SCIENCE_CARD_20260908.md"
 B03_OBJECT = "UCOPE-UAV-MOTION-PREFIX-B03"
+B04_CARD = "docs/research/candidates/ucope/UCOPE_UAV_MOTION_PREFIX_B04_SCIENCE_CARD_20260908.md"
+B04_OBJECT = "UCOPE-UAV-MOTION-PREFIX-B04"
 
 
 def declared_masters(pair):
@@ -24,7 +26,9 @@ def declared_masters(pair):
         return (7001, 7002)
     if pair == "b03":
         return (7101,)
-    raise ValueError("pair must be p21, p24, b02 or b03")
+    if pair == "b04":
+        return (7201,)
+    raise ValueError("pair must be p21, p24, b02, b03 or b04")
 
 
 @dataclass
@@ -40,10 +44,14 @@ class Config:
     pair: str = "p21"
     ratio_grouping: str = field(init=False)
     entropy_coef: float = field(init=False)
+    treatment_duration_mode: str = field(init=False)
+    treatment_duration_head_seed: int | None = field(init=False)
 
     def __post_init__(self):
-        self.ratio_grouping = "agent_compound" if self.pair in ("b02", "b03") else "joint"
-        self.entropy_coef = 0.0 if self.pair == "b03" else 0.01
+        self.ratio_grouping = "agent_compound" if self.pair in ("b02", "b03", "b04") else "joint"
+        self.entropy_coef = 0.0 if self.pair in ("b03", "b04") else 0.01
+        self.treatment_duration_mode = "sampled_command" if self.pair == "b04" else "independent"
+        self.treatment_duration_head_seed = 100000 * self.seed + 12 if self.pair == "b04" else None
 
     @classmethod
     def engineering(cls, seed=9001, pair="p21"):
@@ -98,8 +106,8 @@ def primary_from_rows(rows, expected):
 
 
 def aggregate(summaries, pair="p21"):
-    if pair == "b03":
-        raise ValueError("B03 has one training pair and no multi-pair aggregate")
+    if pair in ("b03", "b04"):
+        raise ValueError(f"{pair.upper()} has one training pair and no multi-pair aggregate")
     declared = declared_masters(pair)
     if len(summaries) != 2:
         raise ValueError("aggregation takes exactly two pair summaries")
@@ -215,9 +223,14 @@ def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=wri
                        card=B03_CARD if config.pair == "b03" else B02_CARD,
                        ratio_grouping=config.ratio_grouping,
                        card_section="CODE_SPEC §8" if config.fixture else 5)
-    credit_options = {"ratio_grouping": config.ratio_grouping} if config.pair in ("b02", "b03") else {}
+    if config.pair == "b04":
+        summary.update(object=B04_OBJECT, card=B04_CARD, card_section="CODE_SPEC §4" if config.fixture else 5,
+                       ratio_grouping=config.ratio_grouping,
+                       treatment_duration_mode=config.treatment_duration_mode,
+                       treatment_duration_head_seed=config.treatment_duration_head_seed)
+    credit_options = {"ratio_grouping": config.ratio_grouping} if config.pair in ("b02", "b03", "b04") else {}
     update_options = dict(credit_options)
-    if config.pair == "b03":
+    if config.pair in ("b03", "b04"):
         summary["entropy_coef"] = config.entropy_coef
         if config.fixture:
             summary["card_section"] = "CODE_SPEC §4"
@@ -247,7 +260,13 @@ def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=wri
             arms[arm] = arm_info
             actor = critic = initial = None
             deadline.check()
-            actor, critic = arm_copy(common, arm == "T")
+            head_options = {}
+            if config.pair == "b04":
+                head_seed = config.treatment_duration_head_seed if arm == "T" else None
+                head_options["duration_head_seed"] = head_seed
+                arm_info.update(duration_mode=config.treatment_duration_mode if arm == "T" else "none",
+                                duration_head_seed=head_seed)
+            actor, critic = arm_copy(common, arm == "T", **head_options)
             initial = snapshot(actor, critic)
             optimizer = optimizer_for(actor, critic)
             velocity_rng, duration_rng = generator(b + 21), generator(b + 22)
