@@ -282,3 +282,142 @@ concrete implementation/budget route. A blocker forms no direction decision. A n
 answer yields without an abstract replacement assessment. The next scientific discriminator,
 if selected, is the new pair's native final-modal service contrast, with native costs and
 source-transfer facts reported separately.
+
+## 9. Completed Convergence intake — 2026-09-08
+
+**Accepted, conforming PRO_FINAL direction decision: select only
+DISH-OWN-COMMAND-MEAN-B07, B/EXPLORE, one matched seed127 pair of OWN_COMMAND_MEAN
+versus newly trained DIRECT_MEAN.** This supersedes the pending-decision statements
+above, which remain the prospective source/question record. This intake implements
+the scientific selection only; it constructs no model or RNG master, dispatches no CM,
+and starts no experiment. Root's present return assignment requests intake and commit,
+not implementation or another Send.
+
+### Full evidence and delivery read
+
+I read all 173 response lines directly from immutable commit
+`ddb4c9ff20167837c99d146b2177c3e784066411`, in complete ranges1–90 and91–173.
+`pro_packets/20260908_p53_own_command_mean/archive/RESPONSE.md` is 33313 bytes,
+SHA256 `9797d7961500ddacfa1f61d6af03c29991190ef57d42beda747a8811adf7445d`.
+Those are immutable Git-blob bytes; the local checkout has only Git's CRLF conversion
+(33486 bytes), whose LF-normalized content matches that blob exactly.
+The received SHA `c9f88329d4c558a280110e0b9c041786c38bec03bb0f9bcea6aa1b098c186b2c`
+identifies the separate short chat receipt containing two delivery links, **not** the
+complete scientific response. The exact chat receipt and Transport facts are retained
+beside the response. A fresh API read of Issue4 comment5589714012 confirms the response,
+fixed TASK `ba699af4e79be7a1c9dd6ef7811dc04c02c9ff14` and scientific input
+`d19bded986f364600cf7769497d1daf3c8fc3ca6`; creation/update is18:11:43Z. That comment
+snapshot is archived separately. Python could not open the long receipt path, but
+PowerShell copied/read it and its hash matches the factual receipt; no access gap remains.
+
+Git confirms one added response file,173 lines and0 deletions, on parent
+`f1bb245c7045f48e0ab31dbd350fb0fec213789e`. The initially clean DISH checkout was
+fast-forwarded to this delivery before editing. Fixed input, TASK, response and handoff
+SHA roles are distinct; no completed packet or binding is rewritten.
+
+Transport records one Send in the verified6 Pro/Latest conversation
+`6a9bec54-df00-83e8-9840-46440458f316`, exact current TASK link pairing, and natural
+completion after14m19s with no active generation control. DOM IDs were unavailable;
+the retained pairing is link-based. These are attributed Transport observations, not
+a DM browser inspection. The full immutable answer, not the receipt or comment summary,
+forms the scientific decision.
+
+### Rule applied verbatim and selected meaning
+
+The response's opening decision, applied verbatim:
+
+> **选择一个新的 DISH-OWN-COMMAND-MEAN-B07（B/EXPLORE）：新配对种子127，OWN_COMMAND_MEAN 对 DIRECT_MEAN，两臂各十六更新，只比较各自 update16 的完整模态原生服务，并保留各臂自己的初始化模态参考。**
+
+The formed response chooses the first option in §7.3 and gives the concrete specification
+in its §§二–七. The own-input formula remains `3*tanh(m+a_prev/3)` versus `3*tanh(m)`.
+For physical vehicle i and decision-input owner o, select copy `2*i + 1[i!=o]` and
+its **pre-decision raw actor** acceleration8:10. Preserve vehicle0x/y,vehicle1x/y order;
+never use post-projection state, normalized features, old snapshot commands or successor
+owner to rearrange an already recorded action. Prepare and commit keep their different
+incumbent/standby-shadow decision origins and existing owner-slot serialization.
+
+Keep every original learning/noise/private-label/native semantic in §§2–3. The selected
+mean must agree in live generation, behavior likelihood, replay likelihood and the
+duplicated training mean, using the recorded own input. Gradients still reach motion;
+no environment gradient, detached entire mean, projected-action density or tanh-squash
+Jacobian is introduced. Pro's §四 checks directly protect this changed training path
+and primary reduction; they are not another scientific object or launch gate.
+
+The selected master law is the literal SHA256 ASCII family in the response §三 for
+seed127; it is recorded, not generated or invoked here. Both arms retain STRUCTURED
+initialization and common exogenous streams, then separate optimizer/recurrent/Welford
+and native evolution. Each arm has16 updates/65536 ordinary transitions/512 optimizer
+steps, four own initial modal rows and four final modal rows, update16 only. Thus one
+training pair has131072 transitions,1024 steps and16 episodes, at most19200 evaluation
+ticks. Two arms and four conditions are not independent training replicates.
+
+Primary: mean over four conditions of final OWN minus final DIRECT native service.
+MEI is+24 ticks; opposite scale−24 and open band(−24,+24). Per-arm initial/final changes
+are companion facts, not a change-of-baseline primary or proof of faster learning.
+Response §五 retains useful-signal, within-band, adverse, own-initial-loss, no-transfer,
+observed-transfer and damaged-primary branches. Preserve actual and zero-filled terminal
+remainder ticks, energy with duration, seven hard-event categories, first CAS time/null
+and ordinary service before/after transfer. Counts without opportunity denominators do
+not become rejection probabilities; post-transfer service is not causal source value.
+
+Selected complete cap:1800s/arm,3600s/pair including checks, common initialization/build,
+labels, training, all evaluations and publication. Shared work counts once, splitS/2.
+Per-arm native training remains2N+2E+H in131072–1572864 calls, plus evaluation and all
+non-native compute; no extra search/fork is selected. Existing B05 pair432.82s/B06 single
+226.02s and B06 relative movement0.04474046045735298 are planning evidence only. New
+time/E/H/effect remains unknown. The committed exposure arithmetic is reused; this
+consultation/intake adds0 learners/transitions/optimizer steps/evaluations/native calls.
+
+### Scientific interpretation and conformance
+
+Strongest support is the inspected own-input path in both live and replay and a real
+same-information/direct-mean learner comparison. Pro selects this as a limited question
+worth one pair, not a proved mechanism. Strongest contradiction remains redundancy with
+the existing input/network/projection or persistent bad acceleration; other certificate
+conditions can remain limiting. B06's−77.5, all adverse condition means, higher invalid
+commits/energy, training events, two positive sample exceptions and zero transfers stay
+separate empirical evidence. B04/B05 LR means and adverse conditions are unchanged.
+
+The claim ceiling is a future finite B native-service signal on the accepted A03
+information/ownership host. No performance result exists yet. Its native summary and
+partner-feature limitations are disclosed; no strict-fresh-message decentralized or
+uniquely MARL benefit is claimed. No source origin or COPY−RETAIN/SHADOW−COPY value is
+estimated. Headroom is still absent. The P53/Pro positive-sign prediction is **pending**,
+low confidence, with MEI crossing uncertain; owner prediction remains **not taken**.
+
+I checked the whole decision against P53, current owner scope and evidence-spec §§4,
+5.2,11.4,11.7–11.9. It selects the exact single proposed B and preserves the native
+and information boundaries. No exact headroom/support/cause prerequisite, forced origin,
+old LR/noise/forecast replay, extra arm, stronger C burden or specification exception
+appears. No conflict requires returning to the node. Source/cost/likelihood checks and
+ordinary independent engineering review serve the changed implementation; no code is
+accepted by this scientific response. Engineering-scope §4 needs none newly; no §5
+budget breach occurred in this documentation-only intake.
+
+Main's current instruction delta at `8d58e5454502a8940b0126ed1dc81ba5a72168fb` was read:
+Root continues the original DM route under existing authority, and current engineering
+instructions govern later work. Pro's temporary-comparison wording is conditional on
+what remains applicable; it imposes no new batch or scientific invocation. No coding
+assignment is dispatched here. The source intake's verified literature record is reused;
+no new mechanism, comparator or unexplained result needs further retrieval.
+
+### Decisions this intake produces
+
+1. Object-tier conformance: (a) accept this complete class-correct answer; (b) return a
+   concrete scope/spec conflict; (c) substitute the short receipt. Recommend/select(a).
+   **Owner-delegated decision (unattended, 2026-09-03 instruction): (a).**
+2. Direction-tier selection: (a) the one specified B07 pair; (b) no successor. Pro selects
+   (a), and DM accepts its finite rationale. **PRO_FINAL**; **Owner-delegated decision
+   (unattended, 2026-09-03 instruction): apply option(a).** This is not PARK/CLOSE/RECAST,
+   C promotion, UAV-validation entry, or Portfolio disposition. Recast count is unchanged.
+3. Current execution boundary: record selection and return to Root for the original DM's
+   prospective card/full CM specification; no additional seed, implementation or run in
+   this intake. No new Portfolio science selection or second Send is required.
+
+The audit records the two applied decisions. The existing P2 item20260908-dish-001 gains
+an actual PRO_FINAL execution trace selecting(a); this is scientific selection only, not
+an owner reply or launched B. Owner flags:none. At this clean boundary owner reviews in
+main and the direction checkout returned[], with no applicable non-empty audit override.
+The existing Chinese brief is updated to the accepted decision. The next discriminator
+is the selected pair's native final service contrast after the later card/implementation
+route; this intake creates no evidence for that contrast.
