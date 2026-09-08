@@ -1,0 +1,88 @@
+{
+  "id": "20260908-ucope-002",
+  "created": "2026-09-08T13:20:47-07:00",
+  "direction": "ucope",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "UCOPE B03：两臂移除显式熵奖励的一对原生比较",
+  "context": "待检验主张：两臂共同移除显式熵奖励后，开局速度承诺能否提高同信息、同预算的完整团队回报。绑定结构：五个局部观测、共同学习的主体；仅改共同探索奖励。固定新主种子7101和原生MEI0.01，保留B02两负差值、两负T−悬停及混合G−悬停。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "接受本卡与完整实现规格",
+      "consequence": "相同CM实现并独立审查，绑定接受源码后Root仅运行7101一对，DM接收全部结果；不等待回复。"
+    },
+    {
+      "key": "reject",
+      "label": "拒绝尚未执行的卡",
+      "consequence": "停止尚未执行的部分，保留原卡与已有证据，返回具体下一问题；不产生科学负结论。"
+    },
+    {
+      "key": "revise",
+      "label": "按具体意见修订",
+      "consequence": "应用具体覆盖并记录修订，不隐改已产生证据的含义或扩大曝光。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "源码界定可对称移除的探索奖励；一对最小原生B可回答该配方是否仍有收益，无需新家族或额外诊断。",
+  "evidence": [
+    "docs/research/candidates/ucope/UCOPE_UAV_MOTION_PREFIX_B03_SCIENCE_CARD_20260908.md",
+    "docs/research/candidates/ucope/UCOPE_UAV_MOTION_PREFIX_B03_CODE_SPEC_20260908.md",
+    "docs/research/candidates/ucope/UCOPE_UAV_MOTION_PREFIX_B03_SELECTION_INTAKE_20260908.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-08.md#L32",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否接受B03卡和完整实现规格：两学习臂共同移除显式熵奖励，以一对新训练比较开局承诺与普通反馈？",
+    "changes_if_approved": [
+      {
+        "target": "UCOPE-UAV-MOTION-PREFIX-B03 science card / CODE_SPEC",
+        "from": "B02两对结果已完整接收且均为负差值，没有未改动的第三对分配",
+        "to": "仅将T和G的共同显式熵系数由0.01设为0，保留随机采样及其余动作、信息、信用路径；固定新主种子7101和一次完整原生比较"
+      }
+    ],
+    "if_refused": "按所有者具体覆盖停止尚未执行的部分或修订卡，保留既有结果和已经发生的工作；不把拒绝当作科学负结果，不自行增加种子或改家族。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_UAV_MOTION_PREFIX_B03_SELECTION_INTAKE_20260908.md",
+        "quote": "This is a source-derived objective term, not measured causality.",
+        "why": "源码明确存在与动作均值无关的熵奖励，提供一个可对两臂对称改变的学习标量；没有把坏结果误当成代码错误。"
+      },
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_UAV_MOTION_PREFIX_B03_SCIENCE_CARD_20260908.md",
+        "quote": "This tests new T against new G; it does not causally compare\nentropy coefficients against B02 or claim that the old objective was defective.",
+        "why": "问题继续是同信息、同预算下的完整原生回报，未加入新期权、价值网络扩容或回报重组。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_UAV_MOTION_PREFIX_B03_SELECTION_INTAKE_20260908.md",
+        "quote": "The observed std increase is small, initial exploration remains\nbroad, and G may benefit at least as much; no success is promised.",
+        "why": "已有熵变化较小，去掉奖励未必改善决策，也可能削弱有用探索；不运行该配方是更省资源的备选。"
+      },
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_UAV_MOTION_PREFIX_B02_P47_INTAKE_20260908.md",
+        "quote": "−0.026701655118179134",
+        "why": "B02平均T−G低于负MEI边界，两对T−悬停均负、G−悬停符号混合；旧P21正值不能抵消这些反证。"
+      }
+    ],
+    "uncertainty": [
+      "一个新训练对只能支持该任务和预算内的初步比较，不能估计训练总体不确定性。",
+      "普通反馈可能获益同样多或更多；零显式奖励仍保留宽随机采样，也可能使探索不足。",
+      "没有调优的同信息余量记录，悬停不是上界；结果不识别熵因果效应或纯信息价值。",
+      "所有相反符号保留；P57在这一对的完整接收后结束，不自动补第二对。"
+    ],
+    "cost": {
+      "compute": "准备零科学调用。实现限一次300秒内相关测试及独立语义审查，不另做合成烟测或诊断。接受源码后最多286720团队步、2048次Adam、96个最终评价回合；1800秒/学习臂，3600秒/完整调用。已有同循环臂用时约138.26和137.54秒，仅作投影。",
+      "owner_time": "异步阅读本卡与建议，无需等待答复。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing；P57已授权相同DM/CM完成实现、审查、源码绑定、Root执行和结果接收。"
+    },
+    "verdict_text": "接受B03前瞻卡和完整实现规格，在两学习臂共同移除显式熵奖励，固定新训练对7101；完成实现与独立审查后只运行这一对，按原生回报接收所有结果，保留B02负值及全部历史限制。",
+    "source": "docs/research/candidates/ucope/UCOPE_UAV_MOTION_PREFIX_B03_SELECTION_INTAKE_20260908.md"
+  },
+  "starred": false
+}

@@ -135,6 +135,19 @@ not prerequisites. See the [B02 card §10](UCOPE_UAV_MOTION_PREFIX_B02_SCIENCE_C
 [E0](UCOPE_UAV_MOTION_PREFIX_B02_P47_RESULT_EVIDENCE_20260908.md) and
 [intake §§2–6](UCOPE_UAV_MOTION_PREFIX_B02_P47_INTAKE_20260908.md).
 
+Under the subsequent [P57 assignment](../../portfolio/handoffs/2026-09-08-p57-ucope-post-b02-selection.md),
+the next bounded discriminator is **B03: common explicit entropy coefficient
+0 in both T/G**, preserving stochastic sampling, native-return credit and
+all other B02 action/learning semantics. Existing source and modest logged
+latent-variance growth identify an incentive worth testing, without
+establishing the cause of B02's losses. One fresh matched pair, master
+7101, compares the amended opening commitment against amended ordinary
+feedback at the same native budget. Removing the bonus may reduce useful
+exploration or favor G more. This is a prospective package comparison,
+with no new result, causal diagnosis, family disposition or second pair.
+See the [B03 card](UCOPE_UAV_MOTION_PREFIX_B03_SCIENCE_CARD_20260908.md) and
+[selection intake](UCOPE_UAV_MOTION_PREFIX_B03_SELECTION_INTAKE_20260908.md).
+
 ## Prior UAV scientific position — 2026-09-07 P24
 
 The fixed-five-UAV motion prefix B01 has completed two fresh P24 training
