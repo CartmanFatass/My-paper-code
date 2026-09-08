@@ -131,6 +131,22 @@ required source/card publication, a ready dispatch or a real blocker to assemble
 Every created commit still pushes immediately. Portfolio does not ACK unsolicited routine
 messages or turn them into owner-facing status reports.
 
+## Portfolio response to a nonconforming Root message — OWNER_DIRECT 2026-09-08
+
+Apply this procedure when a Root message arrives, not on a timer or heartbeat.
+Portfolio first checks the received message against the send/no-send conditions above.
+A genuine new replacement or unresolved conflict receives its normal substantive action.
+For a nonconforming message, inspect the specific original assignment, recipient and
+delivery evidence needed to locate the cause; do not reconstruct every direction.
+Correct the controlling document if it is missing, contradictory or stale. If the rule
+already covers the case, correct the execution and resume the affected authorized route
+through Root instead of adding another rule. Send one concrete repair instruction only
+when Root must act, then verify its actual acceptance or affected result. Preserve other
+advancing work and all scientific, tool and uncertain-acceptance boundaries.
+Do not ACK the invalid notification, create periodic scans, request routine reports or
+add a scheduler. Repeated unchanged messages belong to the same open repair, not repeated
+repair dispatches. This is a response procedure for received events, not a new runtime hook.
+
 ## Shared main checkout: default index owner — OWNER_DIRECT 2026-09-08
 
 Root is the default main-index operator. Root stages, commits and cherry-picks authorized explicit paths WITHOUT asking
