@@ -26,15 +26,18 @@ remains dated provenance under the controlling evidence specification section 11
 - Historical selected B discriminator:
   `UCOPE-B-EXPLORE-FT-XF-BC-INVERTIBLE-CONDITIONING-DISCRIMINATOR-R01`
 - Latest direction-tier decision:
-  **2026-09-05 PRO_FINAL / PARK** of the current same-draw retained-policy
-  root-residual localization family, including its numerical-locus dependency;
-  no successor selected. See the dated current position below.
-- Latest bounded B observation: **2026-09-07 shared-data return-model B04, joint RM-A**;
-  two prospective 512-batch datasets gain a mean 0.0010378824869791692 over BLIND and
-  IMMEDIATE-4, only 0.00003788248697916916 above MEI. Dataset sample SD is
-  0.0027031527544139028; conditional mean MC SE is 0.0004671170560530268.
-  One dataset is adverse inside MEI and one is positive; an extra harmful acquisition is
-  retained. B02/B03 positives, B01 nulls and older adverse evidence remain separate.
+  **2026-09-07 PRO_FINAL / OPEN** one fixed-five-UAV movement-mediated
+  observation/control B family: optional opening velocity commitment versus
+  same-information stepwise recurrent PPO. This selects a question, not a UAV result.
+  The **2026-09-05 PRO_FINAL / PARK** of the same-draw retained-policy root-residual
+  localization family and its numerical-locus dependency remains unchanged.
+  See the [Convergence intake](UCOPE_UAV_INTERFACE_CONVERGENCE_INTAKE_20260907.md).
+- Latest bounded B observation: **2026-09-07 shared-data return-model B05, joint RM-A**;
+  two prospective 512-batch datasets gain a mean 0.002620157877604169 over BLIND and
+  IMMEDIATE-4. Dataset sample SD is 0.0002659131214081277; conditional mean MC SE is
+  0.0003805940070739763. Both acquire only at LINKED-p17_20-c9_100, with no additional
+  harmful purchase in this pair. B04's harmful acquisition/mixed outcomes, B02/B03
+  positives, B01 nulls and older adverse evidence remain separate.
   This adds no direction-tier disposition or further invocation.
 - Historical discriminator science-card current-byte SHA-256:
   `e08744fa18d708c9ad570bdce8b71296407991a4f5f79d502d37330913435fd8`
@@ -42,6 +45,22 @@ remains dated provenance under the controlling evidence specification section 11
   `94fa0ddb4ef4c686a60a1d9386f8b1b6184184f75df6c51a6fb61cedd8185e1c`
 
 ## Scientific question
+
+On the selected fixed-five-UAV, 256-step task, can a learned optional opening
+velocity commitment of one or four primitive steps improve complete time-average
+team native service return over a recurrent PPO controller with the same free local
+observations and every legal velocity action available at every step? Movement can
+change subsequent local information and service opportunities. The strongest null
+is competent ordinary feedback control doing the useful movement and information
+use itself. A positive two-arm comparison would support only the package: direct
+geometry, temporal smoothing and optimization remain unseparated explanations.
+
+The selected prospective MARL structure is partial observability in a fixed moving
+team. Actual service opportunity consequences replace no existing sensor bill:
+there is no asserted positive sensing fee or B05 count interface on this host.
+No UAV effect, tuned headroom, transfer or deployment claim has been observed.
+
+### Historical finite-renewal question
 
 In the frozen finite renewal host, can a fixed-budget FP32 learner pay a real
 service/time/energy cost for a diagnostic probe, exploit a protected
@@ -56,6 +75,69 @@ count. The direct-service alternative remains separated by the frozen
 `Gamma=I+D` decomposition and analytic `D≈-0.02` boundary.
 
 ## Current scientific position — 2026-09-07
+
+The shared-data return-model B05 completed the prospective datasets 6701 and 6702 at
+512 training batches each with the original full final evaluation. It receives **joint RM-A**:
+native/information gains 0.002808186848958338 and 0.0024321289062500004, mean
+0.002620157877604169, above the original 0.001 MEI. The sample SD of the two dataset
+endpoints is 0.0002659131214081277; conditional evaluation MC SE of their mean is
+0.0003805940070739763. These quantities describe different uncertainty, and two fitted
+datasets do not identify training-population variance or stable repeatability.
+
+The strongest support is repeated useful net acquisition in LINKED-p17_20-c9_100 in
+both new datasets. FULL acquires there only; all other context contrasts are zero,
+and BLIND/IMMEDIATE-4 coincide throughout. Their equal contrast columns are not extra
+independent evidence. The pair contains 262144 real training episodes, 393216 scalar
+updates and 196608 final evaluation episodes; complete invocation wall sums to 9.51 s.
+Four of six prospective predictions match; the RM-B and extra-purchase predictions miss.
+
+The strongest contradiction to broad robust usefulness remains B04's harmful p13/c9
+purchase and adverse first dataset, along with B01's two nulls and the older false-probe /
+unchanged-competence limits. B05 observes no additional harmful acquisition but does not
+estimate its future probability or erase the earlier loss. Fitted-max bias, dataset
+variation and evaluation noise remain surviving alternatives. No prior result is pooled
+into B05; no causal training-budget, architecture or precision effect follows.
+
+This is preliminary **finite-host** paid-information value. The binding structure remains
+systems / information flow; no multi-agent partial observability or non-stationarity is
+instantiated. There is no new tuned generic headroom record and no real UAV validation.
+The next discriminator is whether a source-defined UAV paid observation can change competent
+native control and improve team return after its actual cost, while the no-purchase
+controller retains its free information. The inspected UAV base supplies velocity actions
+and automatically returned local observations, not an established B05 paid-count operation;
+the subsequent Convergence selects the narrower movement-mediated comparison above.
+Its actual observation use and native performance remain unmeasured. The retained-policy/
+root-residual numerical-locus family remains stopped. See the [B05 intake §§5–7](UCOPE_SHARED_DATA_RETURN_MODEL_B05_INTAKE_20260907.md#5-what-b05-adds-and-what-remains-contrary),
+[original card](UCOPE_SHARED_DATA_RETURN_MODEL_B05_SCIENCE_CARD_20260907.md) and
+[complete result evidence](UCOPE_SHARED_DATA_RETURN_MODEL_B05_RESULT_EVIDENCE_20260907.md).
+
+## Accepted UAV family question — 2026-09-07 Convergence
+
+The selected first B compares a single optional opening velocity commitment with
+stepwise recurrent PPO on the same fixed task and information boundary. Both process
+all primitive observations; the treatment holds its sampled velocity until expiry,
+then returns to feedback. The comparator may move, hover or repeat a velocity itself.
+The primary is full-episode time-average native team reward, recovered from the sum
+of base per-agent rewards rather than the adapter's additional averaging. The new
+MEI is 0.01 on that reward scale; the old finite-host 0.001 rules are unchanged.
+
+The strongest support is the accepted finite-host net-acquisition evidence together
+with the actual velocity/position/channel/local-observation/service chain. The strongest
+contradictions remain harmful extra acquisition, null learning outcomes and the absence
+of measured UAV information value or generic-controller competence. More information,
+duration activation or a changed action is not a native benefit. Even a future positive
+comparison cannot isolate pure information value from direct motion, time structure
+or learner exposure. Above-MEI results with weak comparator or information evidence
+retain their numerical performance meaning with the corresponding interpretation limited.
+
+The next discriminator uses two independent training pairs and final sampled returns,
+with a fixed hover competence reference inside the same B. There is no separate
+headroom, exact-policy or cause-localization prerequisite. Its cost and implementation
+remain unmeasured, and no UAV experiment or formal validation entry follows from the
+decision alone. See the [immutable decision](pro_packets/20260907_uav_interface_convergence/archive/RESPONSE.md)
+and [conformity/intake](UCOPE_UAV_INTERFACE_CONVERGENCE_INTAKE_20260907.md).
+
+## Prior shared-data return-model observation — 2026-09-07 B04
 
 The shared-data return-model B04 completed the prospective datasets 6601 and 6602 at
 512 training batches each with the full final evaluation. It receives **joint RM-A**:
@@ -82,13 +164,14 @@ false-probe losses and small host headroom still limit broader claims. This host
 instantiate multi-agent partial observability or non-stationarity; no generic MARL or
 architecture/precision advantage or tuned-generic headroom record is added.
 
-The next recommended discriminator is another two independent datasets at the same
+The B04 intake's next recommended discriminator was another two independent datasets at the same
 512-batch budget and comparison, retaining every outcome to observe useful-acquisition
 and harmful-purchase variation before another reduction. The B04 intake returned this as a
-**close-call preparation recommendation only**. P10 has since prepared the prospective
+**close-call preparation recommendation only**. P10 subsequently prepared the prospective
 [B05 card](UCOPE_SHARED_DATA_RETURN_MODEL_B05_SCIENCE_CARD_20260907.md) for seeds 6701/6702;
-execution remains unallocated and no new result is added. No family or Portfolio disposition
-changes. The retained-policy/root-residual numerical-locus family stays stopped.
+its separately allocated complete result is recorded above. The B04 observation itself made
+no family or Portfolio disposition change. The retained-policy/root-residual numerical-locus
+family stays stopped.
 See the [B04 card](UCOPE_SHARED_DATA_RETURN_MODEL_B04_SCIENCE_CARD_20260907.md),
 [complete result evidence](UCOPE_SHARED_DATA_RETURN_MODEL_B04_RESULT_EVIDENCE_20260907.md) and
 [joint scientific intake](UCOPE_SHARED_DATA_RETURN_MODEL_B04_INTAKE_20260907.md).

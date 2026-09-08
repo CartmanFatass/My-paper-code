@@ -1,14 +1,21 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-07 (P14 selected VSP02 implementation/comparison and direction continuations; five-UAV-entry goal)
+Updated at: 2026-09-07 (P15 rolling refill; independent Luna/high Transport)
 
-Current commands: [P14 VSP02 implementation and direction continuations](handoffs/2026-09-07-p14-vsp02-code-and-direction-continuations.md).
-The accepted VSP02 first recast now proceeds to its actual B card/full code spec and directly
-authorized Root five-arm CM comparison before coding, with no additional Portfolio wait at that
-return. FRRIE prepares the original-source learner route; UCOPE/FSD author scoped Convergence
-requests with exact Transport/intake return routes; VSP03's already-prepared request is released
-for Transport. No new experiment or UAV entry is allocated. Actual comparison activation requires
-five participant receipts, including the measured default CM baseline.
+Current commands: [P15 rolling refill](handoffs/2026-09-07-p15-rolling-refill-after-transport-split.md).
+Root reports all P14 chains returned/idle; comparison batch01 is complete and the accepted VSP02
+baseline is integrated on main. P15 dispatches VSP02 B01 readiness/exact one-pair continuation,
+UCOPE and FSD selected card/full-spec preparation with immediate next comparison capture, and
+FRRIE/CBSC distinct bounded acquisition-metadata inquiries. VSP03's paused family has no selected
+successor and yields its working-set slot to CBSC without a lifecycle/priority change. Issued
+commands are not actual advancing counts; Root's per-direction acceptance/return log records those.
+Independent Transport task `01a07e52-f085-76a0-886a-4127f490421f` owns Pro work under
+[the migration record](../../project/TRANSPORT_SESSION_MIGRATION_20260907.md), while Root applies
+the dispatch skill at each return and before waiting. One VSP02 B01 scientific pair is allocated
+under its existing1800s complete cap after named readiness; UCOPE/FSD science remains unallocated.
+No formal UAV entry is inferred from code, a Pro verdict or this dispatch document.
+
+Previous commands: [P14 selected implementation and direction continuations](handoffs/2026-09-07-p14-vsp02-code-and-direction-continuations.md).
 
 Previous commands: [P13 runtime restoration and next questions](handoffs/2026-09-07-p13-runtime-restore-and-next-questions.md).
 Root reports no live native directions after restart. P13 restores FRRIE A04 and UCOPE B05
@@ -64,7 +71,7 @@ Scientific Portfolio owner: Astra task `01a07a3e-29bf-7f52-bc1e-cfa214b8d94a` (e
 on main. Root is Luna/xhigh task `01a07249-b095-7821-8ce2-e9c32ba85267`: it dispatches bounded
 commands, integrates specified results and maintains actual observation/receipt facts in
 EXPERIMENT_TRACKING.md. DM retains delegated science and CM technical judgment. Root's owner-driven
-goal includes observation of accepted experiment/Pro handles; no scheduled automation is used.
+goal includes experiment observation and direction continuation; independent Transport observes Pro requests, without a scheduled automation.
 Five advancing direction chains remain the target, measured by actual dispatch/return state.
 Pro reuses direction branches by default, with fixed input SHAs and scoped response writes.
 
@@ -78,7 +85,7 @@ Audit ledger (delegated decisions): `docs/research/portfolio/audit/<YYYY-MM-DD>.
 Controlling decision:
 `docs/research/portfolio/decisions/2026-09-01-empirical-standard-full-direction-reaudit.md`;
 direction registration 2026-09-02: `docs/research/portfolio/decisions/2026-09-02-register-flexible-skill-duration.md`
-Current execution ownership: `docs/project/ROOT_OPERATIONS.md` and `decisions/2026-09-06-root-luna-portfolio-separation.md`. New exact Pro handoffs go to Root from current config; Portfolio declares this Portfolio task as receipt parent. Accepted legacy handoffs, bindings and Send facts remain immutable. The September 4 fresh-conversation cutover remains provenance, not the current executor endpoint.
+Current execution ownership: `docs/project/ROOT_OPERATIONS.md` and `decisions/2026-09-06-root-luna-portfolio-separation.md`. New exact Pro handoffs go to independent Transport from current config; native requests name Root as parent, while Portfolio declares this Portfolio task as receipt parent. Accepted legacy handoffs, bindings and Send facts remain immutable. The September 4 fresh-conversation cutover remains provenance, not the current executor endpoint.
 Compute execution: `docs/research/portfolio/decisions/2026-09-04-remote-first-compute-routing.md`
 Direction working set: `docs/research/portfolio/decisions/2026-09-04-five-direction-execution-parallelism.md`
 Current organization and resume: `docs/research/portfolio/decisions/2026-09-04-adopt-nine-routes-and-resume.md`
@@ -90,7 +97,7 @@ Previous pause (superseded): `docs/research/portfolio/decisions/2026-09-04-pause
 Current controlling resume: `decisions/2026-09-05-resume-automatic-research.md`. Owner instruction 「继续自动推进任务」 supersedes the completed pause. Prior final handoff `handoffs/2026-09-04-resumed-round-pause.md` remains the recovery evidence; lifecycle and priority fields are unchanged.
 
 Current organization: the owner has adopted the revised two-category, six-family, nine-route
-map. Automatic execution continues through integrated Root and independent Portfolio under the September 6 migration. Five reserve sources initially changed to PARKED; the later September5 ACVC review restores that source to ACTIVE. All historical IDs,
+map. Automatic execution continues through Root, independent Portfolio and the September 7 independent Transport endpoint. Five reserve sources initially changed to PARKED; the later September5 ACVC review restores that source to ACTIVE. All historical IDs,
 cards, results and family boundaries are preserved. The initial two-investment recommendation
 was never applied. See `decisions/2026-09-04-adopt-nine-routes-and-resume.md` and the complete owner-supplied 6 Pro archive.
 

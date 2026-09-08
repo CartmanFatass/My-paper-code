@@ -2,16 +2,16 @@ schema_version = 1
 mode = "singleton"
 status = "active"
 
-# Root executes Transport. mode=singleton names this one execution endpoint.
-# Requests retain distinct source, parent, provider, tab, receipt and Send evidence.
-# Observation runs within Root's owner-driven goal; hmasd-monitor.toml names its endpoint.
-thread_id = "01a07249-b095-7821-8ce2-e9c32ba85267"
-task_title = "HMASD Root"
-execution_owner = "root"
+# OWNER_DIRECT 2026-09-07: one independent reusable Transport task.
+# Root dispatches and receives native-direction receipts; Transport owns Pro observation.
+# No scheduled automation; preserve request-specific bindings, archives and receipt state.
+thread_id = "01a07e52-f085-76a0-886a-4127f490421f"
+task_title = "HMASD Pro Transport"
+execution_owner = "transport"
 project_id = "177ab8d8-53ae-448c-9a9e-aaa2fecd2498"
 environment = "local"
 model = "gpt-5.6-luna"
-reasoning_effort = "xhigh"
+reasoning_effort = "high"
 
 # Owner request 2026-09-04: use 6 Pro for provider research reviews.
 # This is independent of the Codex Transport executor model above.

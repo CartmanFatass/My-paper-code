@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "request_id": "2026-09-07-vsp03-b02-post-result-convergence-01",
+  "workflow_node": "em_convergence",
+  "conversation_binding_key": "em:vsp_03:convergence",
+  "direction_id": "vsp_03",
+  "direction_ids": [
+    "vsp_03"
+  ],
+  "decision_authority": "pro_final",
+  "conversation_id": "6a9cbb9d-374c-83e8-b600-23d3a8033a69",
+  "provider_url": "https://chatgpt.com/c/6a9cbb9d-374c-83e8-b600-23d3a8033a69",
+  "tab_id": "2",
+  "tab_lifecycle": "OPEN",
+  "user_message_id": "unknown-recorded-in-dom",
+  "user_node_accessibility_id": "85",
+  "assistant_message_id": "unknown-recorded-in-dom",
+  "assistant_node_accessibility_id": "101",
+  "assistant_message_identity_observation": "Newest completed assistant response in this bound conversation; provider UUID was unavailable, paired by exact request and AX node 101.",
+  "visible_model": "6 Pro",
+  "underlying_model": "Latest",
+  "thinking_effort": "Pro, 5 of 5.",
+  "source_mode": "paste",
+  "prompt_sha256": "aa418923b64038686e7a8f186eb4cda0f85887903d296c0cac00b47b23f0389e",
+  "response_sha256": "21817dd07bd315145f300f5a73352a97a28d45cb41720ef8c8c9d0b891baa167",
+  "response_bytes": 328,
+  "response_characters": 326,
+  "send_click_count": 1,
+  "send_evidence": {
+    "url_observed": true,
+    "user_node_observed": true,
+    "user_node_exact": true,
+    "user_message_id": "unknown-recorded-in-dom",
+    "user_node_accessibility_id": "85"
+  },
+  "wait_status": "NATURAL_COMPLETION",
+  "observed_page_state": "Worked for 9m 12s; response actions present; no Stop answering control",
+  "capture_method": "Copy response via CUA clipboard.readText",
+  "identity_validation": "PASS_WITH_DOM_ID_UNAVAILABLE",
+  "archive_paths": {
+    "manifest_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_03\\2026-09-07-vsp03-b02-post-result-convergence-01\\2026-09-07-vsp03-b02-post-result-convergence-01--vsp_03__PACKET_MANIFEST.json",
+    "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_03\\2026-09-07-vsp03-b02-post-result-convergence-01\\2026-09-07-vsp03-b02-post-result-convergence-01--vsp_03__00_PROMPT.md",
+    "response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_03\\2026-09-07-vsp03-b02-post-result-convergence-01\\2026-09-07-vsp03-b02-post-result-convergence-01--vsp_03--attempt-01__02_RESPONSE.md",
+    "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_03\\2026-09-07-vsp03-b02-post-result-convergence-01\\2026-09-07-vsp03-b02-post-result-convergence-01--vsp_03--attempt-01__03_TRANSPORT_FACTS.json",
+    "response_sha256": "21817dd07bd315145f300f5a73352a97a28d45cb41720ef8c8c9d0b891baa167"
+  },
+  "captured_at": "2026-09-07T22:58:52Z",
+  "archived_at": "2026-09-07T22:58:52Z",
+  "return_receipt": {
+    "status": "LOCAL",
+    "required": false,
+    "attempt_count": 0,
+    "delivery_status": null,
+    "routing_mode": "LOCAL",
+    "destination_thread_id": null,
+    "message_key": null
+  },
+  "notes": [
+    "Exact natural-language response preserved byte-for-byte from the provider clipboard.",
+    "No second Send was attempted.",
+    "Executor and parent are the Root task; no app self-message is sent."
+  ]
+}

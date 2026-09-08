@@ -9,7 +9,7 @@ has two independent EM conversations and Portfolio has one conversation reused
 across changing multi-direction scopes. Only one request may be active per key;
 archive it before sending the next turn in that same conversation. Browser tab
 handles, goal-driven observation passes, and executor turns remain ephemeral observations. The
-registry is shared across all requests handled by Root;
+registry is shared across all requests handled by independent Transport;
 its operator UUID never selects a provider conversation.
 
 ```json
@@ -28,7 +28,7 @@ its operator UUID never selects a provider conversation.
   "operator_thread_id": "01b...",
   "operator_mode": "PROJECT_SINGLETON",
   "operator_model": "gpt-5.6-luna",
-  "operator_thinking": "xhigh",
+  "operator_thinking": "high",
   "return_route": "PARENT_SESSION",
   "conversation_id": "6a...",
   "provider_url": "https://chatgpt.com/c/6a...",
@@ -115,7 +115,7 @@ its operator UUID never selects a provider conversation.
 ```
 
 The legacy `heartbeat` field is historical metadata, not a scheduling instruction. Preserve
-existing evidence fields; do not create an automation from them. Root's active goal drives
+existing evidence fields; do not create an automation from them. The Transport task drives
 observation, and new records require no scheduler identity.
 
 At the registry root, active records live under `bindings`, keyed by the exact
@@ -269,7 +269,7 @@ re-inspect a mismatched capture on the same page, never repair it with a new Sen
 
 ## Goal-driven asynchronous processing
 
-Integrated Root observes current experiments and Pro requests within the owner's active goal.
+Independent Transport observes current Pro requests while Root continues experiment/direction work.
 Each due conversation gets one bounded read in serial; avoid busy polling and do not create
 scheduled automations. A pass observes the existing request, never resends it or changes provider identity. Natural
 completion archives the paired response; timeout retains the same conversation for recovery.
@@ -279,7 +279,7 @@ provider URL; the loaded URL and direction must be re-verified before observatio
 Never call `tabs.get()` on an old handle and never treat the new tab ID as a new
 identity. The recovered tab remains active while the conversation is pending.
 
-Root may own overlapping provider generations. Tab leases, outbox entries, archives and
+Transport may own overlapping provider generations. Tab leases, outbox entries, archives and
 idempotency keys remain request-scoped. Legacy scheduling metadata grants no authority to
 recreate the removed automation. Request completion clears only that request's pending
 observation; other pending work remains recoverable within the owner's goal. Preserve
@@ -287,9 +287,9 @@ each request's recorded observation facts without rewriting another request's st
 
 ## Automatic return outbox
 
-`REUSE_SINGLETON` identifies the configured Root endpoint. If the author is that endpoint,
+`REUSE_SINGLETON` identifies the configured Transport endpoint. If the author is that endpoint,
 the renderer selects `CALLER_DIRECT` with the owner instruction and no app self-dispatch.
-New records name Root in `operator_thread_id`. `execution_thread_id` records actual
+New records name independent Transport in `operator_thread_id`. `execution_thread_id` records actual
 execution ownership separately from immutable request metadata.
 When actual executor equals parent, `stage_receipt` or `stage_blocker_receipt` creates
 `required=false`, `status=LOCAL`, `routing_mode=LOCAL`, `destination_thread_id=null` and zero

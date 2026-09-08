@@ -14,7 +14,7 @@ from pathlib import Path
 
 DISPATCH_MODE = "REUSE_SINGLETON"
 OPERATOR_MODEL = "gpt-5.6-luna"
-OPERATOR_THINKING = "xhigh"
+OPERATOR_THINKING = "high"
 TRANSPORT_CONFIG_RELATIVE_PATH = Path(".codex") / "hmasd-transport.toml"
 ROLE_SET = {"portfolio", "em"}
 WORKFLOW_NODE_ROLES = {
@@ -339,9 +339,9 @@ def validate(data: dict, project_root: Path) -> dict:
         owner_execution_instruction = _text(data.get("owner_execution_instruction"), "owner_execution_instruction")
     transport_singleton = _singleton_transport_config(project_root, caller_direct=execution_mode == "CALLER_DIRECT")
     if execution_mode == DISPATCH_MODE and source_thread_id == transport_singleton["thread_id"]:
-        # The integrated Root is already the executor; never enqueue work to itself.
+        # The configured operator is already the executor; never enqueue work to itself.
         execution_mode = "CALLER_DIRECT"
-        owner_execution_instruction = "OWNER_DIRECT 2026-09-06: Root operates the shared Transport endpoint locally."
+        owner_execution_instruction = "The configured Transport endpoint executes its own authorized request locally without self-dispatch."
     portfolio_path = project_root / "docs" / "research" / "portfolio" / "PORTFOLIO.md"
     portfolio = portfolio_path.read_text(encoding="utf-8") if portfolio_path.is_file() else ""
     if role == "em":
@@ -598,9 +598,9 @@ def bind_github_task(handoff_path: Path, sha: str, project_root: Path) -> dict:
     if not h["pro_send_from_caller"]:
         h["dispatch_prompt"] = f"Execute the handoff packet at {handoff_path.resolve()} exactly once."
         h["dispatch_instruction"] = (
-            "Push the bound task commit first; dispatch once to the integrated Root "
-            f"threadId={h['operator_thread_id']} with its explicit configured model/effort. "
-            "Root executes the complete Transport lifecycle locally. "
+            "Push the bound task commit first; dispatch once to the independent Transport "
+            f"threadId={h['operator_thread_id']} and omit model/thinking overrides. "
+            "Transport executes the complete Pro lifecycle in its own task. "
             "Do not call create_thread or dispatch to yourself."
         )
     handoff_path.write_text(json.dumps(h, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
@@ -816,8 +816,8 @@ not change the task class or silently fallback.
         "dispatch_prompt": dispatch_prompt,
         "dispatch_instruction": (
             "Do not call create_thread. Call send_message_to_thread exactly once on the configured "
-            f"integrated Root threadId={packet['operator_thread_id']} with "
-            f"model={packet['operator_model']}, thinking={packet['operator_thinking']}, and "
+            f"project Transport singleton threadId={packet['operator_thread_id']} with "
+            "omit model/thinking overrides, and "
             f"prompt={dispatch_prompt}. If the singleton is unavailable, preserve the packet and "
             "report SINGLETON_TRANSPORT_UNAVAILABLE; do not create a replacement task."
         ),
@@ -850,7 +850,7 @@ not change the task class or silently fallback.
             "companion_prompt": packet["companion_prompt"],
             "source_mode": "single_body_attachment",
         },
-        "instruction": "Upload PROMPT_BODY.md verbatim as the sole scientific packet; it contains the read-only evidence manifest. Preserve workflow node, direction scope, binding key, ref, claim ceiling, and bytes. Bind the requested provider conversation on first use, then reuse that exact conversation ID. Root executes transport, observation, archive and cleanup locally. Record completion locally when executor and parent are the same task; otherwise send one receipt to parent_thread_id. Scientific intake belongs to DM/Portfolio.",
+        "instruction": "Upload PROMPT_BODY.md verbatim as the sole scientific packet; it contains the read-only evidence manifest. Preserve workflow node, direction scope, binding key, ref, claim ceiling, and bytes. Bind the requested provider conversation on first use, then reuse that exact conversation ID. Independent Transport executes Pro observation, archive and cleanup in its own task. Record completion locally when executor and parent are the same task; otherwise send one receipt to parent_thread_id. Scientific intake belongs to DM/Portfolio.",
     }
     if packet["execution_mode"] == "CALLER_DIRECT":
         handoff.update({
@@ -897,7 +897,7 @@ not change the task class or silently fallback.
         "dispatch_instruction": (
             "Do not call create_thread. Call send_message_to_thread exactly once on the configured "
             f"project Transport singleton threadId={packet['operator_thread_id']} with "
-            f"model={packet['operator_model']}, thinking={packet['operator_thinking']}, and "
+            "omit model/thinking overrides, and "
             f"prompt={dispatch_prompt}. If the singleton is unavailable, preserve the packet and "
             "report SINGLETON_TRANSPORT_UNAVAILABLE; do not create a replacement task."
         ),

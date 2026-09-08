@@ -33,6 +33,18 @@ the message. Never copy the sender's model/effort into a recipient's message. Om
 preserves the recipient's current settings. Portfolio effort is selected by the owner
 in the app; do not set or restore a fixed effort through task messages.
 Root handles its own dispatch and completion locally.
+
+OWNER_DIRECT 2026-09-07: independent Transport owns Pro Send/observation/archive. Native
+DM/CM authors normally hand their ready packet to Root using native collaboration; Root
+sends its exact committed handoff to the configured Transport with an app message. An explicitly
+authorized child direct-send uses the same route fields: source=actual child author UUID,
+parent=Root app UUID, operator=Transport app UUID. Child app UUIDs are not native tool addresses.
+Transport returns once to parent=Root, never to source as a fallback or extra copy. Root matches
+the request to its existing assignment and forwards the unchanged evidence to the original
+native recipient (`send_message` if running, `followup_task` if idle). Portfolio-authored
+requests retain their explicit Portfolio parent. Missing native recipients follow the supplied
+recovery route or a concrete Portfolio repair request; they do not cause another Pro Send.
+Root's receipt of a return is a dispatch-skill trigger, independent of other directions.
 Portfolio receives scientific updates at its configured task. Pro handoff routing
 follows Prompt Author's rendered fields and the Transport skill.
 
