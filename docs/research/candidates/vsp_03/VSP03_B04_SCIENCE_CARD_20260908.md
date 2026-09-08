@@ -168,3 +168,13 @@ The new-card owner item and audit identify this freeze. Neither waits for a repl
 P2 item: [20260908-vsp03-003](../../portfolio/owner/inbox/2026-09-08/20260908-vsp03-003.json),
 auto-applied accept; [audit](../../portfolio/audit/2026-09-08.md#L144),
 `2026-09-08T22:17:00Z`.
+
+## 7. Candidate source return before scientific exposure
+
+Candidate `1289f051494306daf17d8844ca7c13c2a21d3b13` correctly supplies seed-6/object
+plumbing and the new subshell's actual exit-status return. It is **not launch-accepted**:
+the [prelaunch intake](VSP03_B04_PRELAUNCH_INTAKE_20260908.md) preserves the independent
+finding that a child timeout plus later complete-span measurement does not enforce
+the complete 120s boundary through supervisor publication. The exact missing enclosing
+deadline route returns to Root; the same CM retains correction/collection ownership.
+No scientific run or new cleanup retry occurred, and the frozen science/cap is unchanged.
