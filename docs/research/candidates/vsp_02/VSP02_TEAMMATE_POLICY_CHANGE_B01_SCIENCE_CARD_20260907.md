@@ -6,8 +6,10 @@ Binding MARL structure: (d) other-agent non-stationarity or partial observabilit
 **VSP02-TEAMMATE-POLICY-CHANGE-B01 / B/EXPLORE.** This is a prospective object card, not a C freeze;
 A/B have no consumption state. P14-VSP02-B-CARD-AND-CM-COMPARISON-01 authorizes this card/spec and
 Root's five-arm engineering comparison, with **zero scientific invocations allocated**.
-That was the P14 preparation boundary. **P15 now allocates one scientific pair under §8 below**;
-all scientific definitions and the complete 1800-second cap remain unchanged.
+That was the P14 preparation boundary. P15's seed1103 pair under §8 is complete and retained.
+**P17 now allocates exactly one fresh seed1117 pair under §9 below**; the comparison, primary,
+MEI and complete 1800-second cap remain unchanged. Earlier prospective statements describe their
+named preparation/launch stage; §9 is the current execution boundary.
 Reuse `C:/Projects/HMASD-worktrees/dm-vsp02`, `codex/vsp02`. Root binds the committed preparation
 return as the common engineering source; the future B uses its later accepted exact launch SHA.
 
@@ -187,3 +189,64 @@ projection. The machine-generated P15 facts retain these readings and the planne
 Root launches/observes the single accepted handle; existing CM `/root/vsp02_cm_baseline_b01`
 collects and technically accepts it in the designated authoring checkout; this DM performs the
 result intake, audit and Chinese brief. Current scientific exposure remains zero until that launch.
+
+## 9. P17 prospective fresh-prefix amendment — 2026-09-07
+
+P17 at main `a787ff12cd0212b9fd23d9d861d5d192186028fe`, section “VSP02 — one fresh
+same-comparison prefix at master1117”, supplies one object-tier allocation under the standing
+unattended delegation. It selects exactly **one new complete prefix/pair at master1117**. This
+supersedes the P15 seed1103-only allocation boundary for that single invocation; it changes no
+earlier result, reading rule, mechanism or recast count. B/EXPLORE has no consumption state.
+
+Question: does seed1103's small within-MEI CARRY/RESET difference persist under a fresh learned
+prefix? The accepted implementation remains exact source
+`19be5ee18393913ff92693cdf037213ec1777510`. Root uses that SHA for the detached execution
+checkout and separately binds this pushed card/amendment commit as the prospective contract.
+The existing CLI receives `--seed 1117`; no code edit or engineering-fixture mode is involved.
+
+For this invocation, master1117 replaces master1103 in §3's otherwise unchanged RNG construction.
+P4096, Q1024 per arm, all E64 evaluations, N2/identity/roles, host/information/reward, recurrent
+PPO, CPU FP32 one thread, the full Adam fork and primary native AUC remain as in §§1–7. No P15
+model, checkpoint, RNG state, episode or evaluation is reused. Each prefix and its whole pair
+remain one independent training unit; a complete1117 result would add one to1103 for n=2.
+
+Prospective DM prediction: **Delta1117 in[-0.5,+0.5]**, without a strict sign forecast. This is
+explicitly informed by the observed seed1103 Delta+0.0185546875 and its coincident terminal
+sampled means, not an independent new Pro forecast. It is recorded before any1117 exposure.
+Owner prediction: not taken (unattended); score any actual reply at intake. The absolute MEI
+remains0.5 for the original reason in §6. New-host tuned-baseline headroom remains absent.
+
+Apply §6's unchanged narrative to the1117 primary: above +0.5 is a local RESET signal, inside
+the MEI preserves the actual sign without equivalence, and below -0.5 supports CARRY locally.
+Retain both prefixes' arm values, paired differences, complete curves and adverse outcomes.
+An unweighted mean of the two complete paired differences may be reported descriptively; it
+does not replace either per-prefix primary, establish stable superiority or make episodes into
+independent training samples. Incomplete work follows §5 and evidence-spec §11.8.7; retain the
+trustworthy1103 result and any narrower1117 facts. No outcome authorizes a third seed or tuning.
+
+The unchanged source cost law gives6144 new training episodes /294912 training joint steps /
+384 rollout batches /6144 Adam steps, plus1152 evaluation episodes /55296 evaluation steps:
+350208 combined joint steps and1179648 PPO transition-passes. Dominant factors remain one
+prefix plus two descendants and the existing checkpoints; no search or new validation is added.
+The observed seed1103 runner36.696s / admission-runner38s is an unchanged-count planning
+reference, not a runtime guarantee. One new **1800-second whole-pair cap** covers imports,
+initialization, prefix, both descendants, evaluation and publication, without reset per arm.
+The same-source first16 prefix updates previously moved parameters by RMS0.0023259019944816828,
+0.030337117448270334 of initial parameter RMS; no new learner probe is required or allocated.
+
+Fresh bindings on the existing `wsl_4070` CPU route:
+
+- Exact execution source: `19be5ee18393913ff92693cdf037213ec1777510`.
+- Detached cwd: `/home/wu/hmasd-worktrees/vsp02-tpc-b01-p17-s1117-a1`.
+- Supervisor handle: `vsp02-tpc-b01-p17-s1117-a1`.
+- Output: `temp/directions/vsp_02/exp/teammate_policy_change_b01_p17_s1117_a1`.
+- Admission: `temp/directions/vsp_02/exp/admission/tpc_b01_p17_s1117_a1.json`.
+
+The full adjacent-admission command and machine-generated exposure line are in
+`VSP02_TEAMMATE_POLICY_CHANGE_B01_P17_AMENDMENT_INTAKE_20260907.md` §3 and
+`VSP02_TEAMMATE_POLICY_CHANGE_B01_P17_READINESS_FACTS_20260907.json`. Current P17 exposure is
+zero; the prior1103 scientific invocation and its complete raw evidence remain separate.
+Root launches/observes after publication; the same CM collects to fresh P17 evidence paths;
+DM takes both independent-prefix outcomes at their bounded B ceiling with audit/Chinese brief.
+No repeat1103, extra arm/seed/control, tuning, run-until-positive, retry/resume, Pro Send or UAV
+promotion is allocated. Engineering-scope §4 machinery needed: none.
