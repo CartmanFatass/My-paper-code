@@ -131,13 +131,50 @@ loads and zero new training updates. Complete process walls G/C/H are .27/20.44/
 38.90 s summed, with every 180 s cap met. This prices this panel, not a minimal real B or
 total direction cost. Tuned same-information generic-baseline headroom remains absent.
 
-The allocated discriminator is answered; no successor is selected. The ordinary fixed-K2
-policy-gap learning family remains paused. A further proposed family re-entry needs its
-direction-level decision; any future learning question needs separately specified real
-learning evidence. The measurement does not create an exact-diagnosis prerequisite.
+At the P21 intake, the allocated discriminator was answered and no successor was selected.
+The ordinary fixed-K2 policy-gap learning family remained paused pending a direction-level
+decision. P25 below selects only one bounded real-learning comparison; the A measurement
+itself neither supplies learning evidence nor creates an exact-diagnosis prerequisite.
 Strongest support, contradiction, full observations and decisions:
 `FSD_NATIVE_RENEWAL_CONTROL_A01_RESULT_EVIDENCE_20260907.md` and
 `FSD_NATIVE_RENEWAL_CONTROL_A01_INTAKE_20260907.md`.
+
+## Post-native-control learning boundary (2026-09-07)
+
+**PRO_FINAL selects one early real-learning C_train/H_train comparison.** A fresh paired
+training seed supplies two new HMASD learners on the unchanged N6/K2 large Bernoulli host.
+C applies its internal D2 renewal; H applies the public regional-change rule after reset
+while preserving its own internal D2/actor, sampled metadata and real reward/state/update
+path. G remains the public-information operational reference. This is a hybrid control-package
+comparison; the public rule is not learned, and internal skills/credit are not synchronized
+to physical lease intervals by this decision.
+
+The selected design is five rollouts × 16 lanes × H400 per trained arm, followed by one
+32-episode evaluation for each arm and 32 matching exogenous episodes for G. It has 64,000
+training transitions, 38,400 evaluation scoring steps and 614,400 agent-step observations.
+Prospective complete-invocation caps are 900 s per learned arm, 60 s for G and 1,860 s summed;
+these are finite design bounds, not measured new training costs or a current allocation.
+The direction decision authorizes only this limited release of the ordinary-family pause.
+No card, implementation, scientific invocation, recast or Portfolio/UAV change occurs in its intake.
+
+A01's trustworthy +.26935 conditional native gain supports this bounded question. Its .16403
+remaining G gap, increased wrong-role loss/rate on H's own opportunities, all six competent
+E3 losses and E4's public-null explanation remain the strongest contradictions. A public
+actuator rule rather than a learning mechanism may supply the useful behavior; the new design
+does not separate that direct effect from changed training trajectories, recurrence, team
+interference or optimizer exposure. C is a component control, not a qualified fixed-clock
+performance baseline, and tuned generic headroom remains absent.
+
+The next discriminator is native H_train−C_train after those five real learning rollouts,
+with G gaps, wrong-role losses and actual update exposure retained. It has a preliminary B
+ceiling on one paired training seed; 32 endpoint episodes measure conditional evaluation
+noise, not training-seed uncertainty. No result sign automatically opens another seed, D0,
+more training or a new host. Exact full response and applied conformity intake:
+`pro_packets/20260907_post_native_control_convergence/archive/RESPONSE.md` at
+`eaff53a10b21383fb682f63bcf58782875599ff0` and the adjacent `CONVERGENCE_INTAKE.md`.
+The contradictory short blocked receipt is preserved separately; the complete matched file
+supplies this decision. New card/spec and implementation/execution allocation needs return
+through Root to Portfolio.
 
 ## Objects and their state (2026-09-07)
 

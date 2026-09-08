@@ -1,0 +1,67 @@
+{
+  "recorded_at_utc": "2026-09-08T06:39:42.809519+00:00",
+  "request_id": "2026-09-07-fsd-post-native-control-convergence-01",
+  "immutable_response": {
+    "commit": "eaff53a10b21383fb682f63bcf58782875599ff0",
+    "path": "docs/research/candidates/flexible_skill_duration/pro_packets/20260907_post_native_control_convergence/archive/RESPONSE.md",
+    "bytes": 37269,
+    "lines": 195,
+    "sha256": "a8f44474ba10c2c1c93384872410903edadc9666091bf34a05a72e814ea32f8d",
+    "commit_time_utc": "2026-09-08T06:26:12Z"
+  },
+  "blocked_chat": {
+    "bytes": 917,
+    "sha256": "363e25805b37abc314027e4a0963efc207c65dd96a4128910d848c48882cdd88",
+    "capture_time_utc": "2026-09-08T06:33:25Z",
+    "scientific_decision_formed_as_recorded": false
+  },
+  "blocked_transport_facts": {
+    "source_bytes": 4200,
+    "source_sha256": "d9beb4a69f0bcaf109ccdfb7851a644c2ae374777eac9f9f6006e474a506282f",
+    "lf_bytes": 4130,
+    "lf_sha256": "b24db8b457f471fc50aa91942a924098771846c2812ce299386b26525d9183bf"
+  },
+  "delivery_comment": {
+    "id": 5580329460,
+    "url": "https://github.com/CartmanFatass/My-paper-code/issues/10#issuecomment-5580329460",
+    "created_at_utc": "2026-09-08T06:27:32Z",
+    "updated_at_utc": "2026-09-08T06:27:32Z",
+    "bytes": 4487,
+    "sha256": "a766a2300ebe4d11e89c514d4c47eab5f4ea2d7fb37b0eeb052c15557dbf39c1"
+  },
+  "consultation_new_exposure": {
+    "scientific_invocations": 0,
+    "model_constructions": 0,
+    "checkpoint_loads": 0,
+    "training_starts": 0,
+    "training_transitions": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0
+  },
+  "selected_future_design_not_allocated": {
+    "paired_training_seeds": 1,
+    "trained_arms": 2,
+    "rollouts_per_arm": 5,
+    "training_lanes": 16,
+    "horizon": 400,
+    "agents": 6,
+    "training_transitions_per_arm": 32000,
+    "training_episodes_per_arm": 80,
+    "total_training_transitions": 64000,
+    "total_training_episodes": 160,
+    "evaluation_episodes_per_policy": 32,
+    "evaluation_policies": 3,
+    "total_evaluation_episodes": 96,
+    "total_evaluation_scoring_steps": 38400,
+    "total_environment_steps": 102400,
+    "total_agent_step_observations": 614400,
+    "learned_arm_complete_wall_cap_seconds": 900,
+    "reference_complete_wall_cap_seconds": 60,
+    "summed_complete_invocation_wall_cap_seconds": 1860,
+    "historical_L5_per_arm_anchor_seconds": 505.86596735480975,
+    "actual_new_optimizer_steps": null,
+    "actual_new_model_constructions": null,
+    "actual_new_unit_time_seconds": null,
+    "interpretation": "Design arithmetic only. Optimizer counts and extra evaluator model constructions require the future real run; no invocation allocated or performed here."
+  }
+}
