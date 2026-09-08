@@ -1,0 +1,86 @@
+{
+  "id": "20260907-cbsc-007",
+  "created": "2026-09-07T20:28:51-07:00",
+  "direction": "capability_bound_semantic_currentness",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "B05：新种子、共同新环境的配对比较准备",
+  "context": "Claim: one fresh paired training seed tests whether STRUCT improves fixed-endpoint native return beyond same-information RAW using the prepared CPython 3.12.3 runtime and unchanged sampled-opportunity credit. Binding structure: systems / information flow. P18 freezes seed 21223 and prospective comparison only; existing source rejects this seed and hardcodes B04 identity, so the return is a bounded source-repair need, not an executable launch.",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "记录新种子和共同新环境的比较卡，返回明确源码修正需求；本轮不运行。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "撤回这张前瞻卡，保留P17环境及全部旧结果，不更改旧B04。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "按所有者意见修改尚未执行的比较卡，并保留当前源码缺口和旧证据。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "新比较保留既有科学问题；两组都用新环境和新种子，避免把旧RAW混入新配对。当前仅准备并记录源码缺口。",
+  "evidence": [
+    "docs/research/candidates/capability_bound_semantic_currentness/CBSC_OPPORTUNITY_CREDIT_B05_SCIENCE_CARD_20260907.md",
+    "docs/research/candidates/capability_bound_semantic_currentness/CBSC_OPPORTUNITY_CREDIT_B05_EXPOSURE_AND_COST_20260907.json"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-07.md#L137",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否接受这个先记录、尚未分配执行的B05配对问题：新种子21223，两组都用已备好的Python 3.12.3环境？",
+    "changes_if_approved": [
+      {
+        "target": "B05 science card",
+        "from": "旧B04只有RAW结果，STRUCT缺失；新环境只有安装和导入证据",
+        "to": "冻结新种子、共同运行环境及原比较规则；明确旧源码拒绝新种子，返回小范围修正任务，不执行"
+      }
+    ],
+    "if_refused": "保留P17环境和全部旧结果，记录拒绝或修订意见；本轮仍不运行学习器。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_LOCAL_ACQUISITION_P17_INTAKE_20260907.md",
+        "quote": "Decision: accept PATH_PREPARED at the A/RECON metadata-path ceiling.",
+        "why": "两端实际完成安装、导入和信息核对，为下一次真实比较提供具体运行环境。"
+      },
+      {
+        "path": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_OPPORTUNITY_CREDIT_B05_SCIENCE_CARD_20260907.md",
+        "quote": "Formal seed **21223**, chosen prospectively, with fresh model and Adam states in both arms.",
+        "why": "两组使用新模型、新优化器和同一新运行环境，旧RAW不会被混作新配对控制。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_OPPORTUNITY_CREDIT_B05_SCIENCE_CARD_20260907.md",
+        "quote": "Therefore **no runnable B05 command/source binding is accepted at this preparation boundary**.",
+        "why": "旧程序在两个入口限定种子21217，且对象名写死；需要明确的小范围源码修正。"
+      },
+      {
+        "path": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_OPPORTUNITY_CREDIT_B04_INTAKE_20260906.md",
+        "quote": "No complete B04 pair, stable superiority, equivalence, currentness-specific gain",
+        "why": "旧结果没有回答表示比较，新环境的导入成功也不等于学习可靠性。"
+      }
+    ],
+    "uncertainty": [
+      "新环境下的真实训练速度和稳定性尚未观测。",
+      "预测表示差异仍在正负0.25内，置信度低；所有符号和失败都保留。",
+      "不借本卡批准源码实现、训练或额外诊断。"
+    ],
+    "cost": {
+      "compute": "本轮实际训练等调用为0；未来提议两臂各600秒，合计上限1200秒。计划1536次Adam更新、128次评估、136192步；旧同臂时长推算仅作参考。",
+      "owner_time": "异步阅览，无需即时回复。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "推荐接受前瞻B05卡，保留新种子和共同新环境，返回明确的种子及对象标识修正需求；本轮不运行。",
+    "source": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_OPPORTUNITY_CREDIT_B05_SCIENCE_CARD_20260907.md"
+  },
+  "starred": false
+}
