@@ -96,8 +96,6 @@ B05's finite-host useful paid acquisition motivates this new question. B04's har
 ## 7. Deliverables and present handoff
 
 The [complete code spec](UCOPE_UAV_MOTION_PREFIX_B01_CODE_SPEC_20260907.md) and [five-item CM task](UCOPE_UAV_MOTION_PREFIX_B01_CM_TASK_20260907.md) bind all missing implementation choices, owned paths, exact original checks and current no-UAV boundary. The [preparation intake](UCOPE_UAV_MOTION_PREFIX_B01_PREPARATION_INTAKE_20260907.md) records the object choices, runtime evidence, owner item and Root return. Scientific result files will later follow the ordinary E0/card/intake route. No result or formal UAV entry is claimed by this preparation.
-<<<<<<< HEAD
-=======
 
 ## 8. Current P21 execution allocation — 2026-09-07
 
@@ -144,4 +142,3 @@ complete caps; aggregate CPU/scratch are `resources_unmeasured`. The E0 retains
 valid science. One of three prospective predictions matches; the owner's
 prediction is not taken (unattended). P21's allocation is complete; this result
 appendix grants no rerun, successor, new seed, promotion or Portfolio change.
->>>>>>> 46cc2a1f9 (Record UCOPE UAV B01 UP intake and actual entry)
