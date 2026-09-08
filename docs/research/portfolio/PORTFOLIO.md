@@ -1,8 +1,10 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-07 (P21 three-route refill; CBSC/VSP02 retained)
+Updated at: 2026-09-07 (P22 FRRIE offline R09 allocation; other routes retained)
 
-Current incremental command: [P21 FSD/UCOPE execution continuations and FRRIE offline preparation](handoffs/2026-09-07-p21-fsd-ucope-frrie-continuations.md). Root reports two advancing chains and three exhausted returns. P21 restores three bounded native routes, with the named FSD panel and UCOPE two-pair allocations after ordinary code/card readiness; FRRIE prepares the offline original-source chain. Actual dispatch, launch and UAV entry require their recorded events.
+Current incremental command: [P22 FRRIE exact offline R09 chain](handoffs/2026-09-07-p22-frrie-offline-r09-execution.md). P21 supplied the complete original-source command with retained wheels; one setup-through-pair invocation is allocated under its original per-arm and complete caps. Actual launch remains a Root execution fact.
+
+Retained incremental command: [P21 FSD/UCOPE execution continuations and FRRIE offline preparation](handoffs/2026-09-07-p21-fsd-ucope-frrie-continuations.md). Root reports two advancing chains and three exhausted returns. P21 restores three bounded native routes, with the named FSD panel and UCOPE two-pair allocations after ordinary code/card readiness; FRRIE prepares the offline original-source chain. Actual dispatch, launch and UAV entry require their recorded events.
 
 Retained incremental command: [P20 CBSC B05 source correction](handoffs/2026-09-07-p20-cbsc-b05-source-correction.md). P18 selected seed21223 but retained code accepts only B04 seeds; correct bounded seed/object plumbing while preserving numerical and historical behavior. No learner invocation is allocated.
 
