@@ -3,7 +3,8 @@ Binding MARL structure: (b) temporal abstraction or termination; applied renewal
 
 # FSD_NATIVE_RENEWAL_CONTROL_A01 — science card
 
-2026-09-07. Definition fixed for P15 engineering; **no scientific invocation released**.
+2026-09-07. Definition fixed for P15 engineering; its original state was **no scientific
+invocation released**. The subsequent P21 allocation in section 7 now controls execution.
 Direction authority is the complete Convergence response at
 `a19678fb7e0618db0c665dabe3d3cc769dc93ff5`,
 `pro_packets/20260907_native_renewal_convergence/archive/RESPONSE.md`, sections 3–7;
@@ -210,3 +211,27 @@ accepted observation without selecting another family or changing its reading ru
 Next authorized action is Root's comparison capture of the complete committed task/spec/source,
 then bounded implementation and normal review. This card is not a launch command. The next
 empirical discriminator remains the native C/H/G panel after a separately named release.
+
+## 7. Current execution allocation — P21, 2026-09-07
+
+P21 `docs/research/portfolio/handoffs/2026-09-07-p21-fsd-ucope-frrie-continuations.md`,
+FSD section, at `d3f03ffa42c19c3a3eeba176ec10bd2e19d6ade5`, releases exactly the selected
+**G → C → H** panel after ordinary card/code readiness. This supersedes only P15's
+no-scientific-invocation/next-comparison state above. The baseline was implemented at
+`4c87eecdde0f67eef7e1f9b872d10f13dca68d40`; its existing independent review and focused
+checks are engineering evidence, not checkpoint/runtime or scientific observations.
+
+All sections 1–5 scientific definitions remain fixed: one selected large-seed2 checkpoint,
+declared digest and original CPU/runtime, 32 episodes per policy, H400, master770103,
+180 s per complete policy and540 s summed wall; zero training/optimizer updates. Each
+policy's setup/loading/reset/evaluation/publication belongs to its complete invocation.
+No selected-checkpoint smoke occurs outside that panel. No replacement weight/sample,
+automatic retry, extra diagnostic, reset, slice, parallelization or cap extension is allocated.
+
+The existing baseline CM supplies the exact accepted SHA, detached cwd/output/receipt paths,
+literal commands and technical continuation conditions. Root integrates/stages the named bytes,
+takes fresh adjacent on-node admission and launches/observes G, then C, then H under those
+conditions. Accepted handles are recorded only when the supervisor accepts them. CM performs
+collection and technical acceptance; this DM performs the result intake and original reading
+rule, including any trustworthy partial result and its dependent limits. No automatic learning
+B, successor family or UAV entry follows.
