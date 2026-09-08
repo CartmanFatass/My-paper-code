@@ -220,6 +220,14 @@ DM's object-tier advice for a separately issued preparation/allocation, not an
 automatic successor, family reopening, recast, Portfolio change or UAV entry.
 Scientific intake and decisions: `FSD_NATIVE_RENEWAL_LEARNING_B01_INTAKE_20260908.md`.
 
+P40 now records that same next discriminator prospectively as B02, with new
+training/evaluation masters770303/770304, the same comparison/budget and separate
+per-training-pair reporting. The card fixes recurrence, small/opposite and
+incomplete branches; no new empirical result or stronger claim follows from
+preparation. `FSD_NATIVE_RENEWAL_LEARNING_B02_SCIENCE_CARD_20260908.md` and its
+CM spec/preparation intake supply the exact seed/input implementation need.
+No B02 code or scientific execution is allocated by this preparation.
+
 ## Objects and their state (2026-09-08)
 
 | Object | State | Record |
@@ -233,6 +241,7 @@ Scientific intake and decisions: `FSD_NATIVE_RENEWAL_LEARNING_B01_INTAKE_2026090
 | Post-E3 renewal/reference census | complete3/3 A/RECON,288 candidates, zero learner; public greedy explains switching opportunity; no successor selected | `FSD_E4_CENSUS_SCIENCE_CARD_20260905.md`; `FSD_E4_CENSUS_RESULT_EVIDENCE_20260905.md`; `FSD_E4_CENSUS_INTAKE_20260905.md` |
 | Native-renewal control A01 / P21 | complete3/3 conditional A/RECON; H−C +.26935 with post G−H .16403; branch2, zero training, no successor | `FSD_NATIVE_RENEWAL_CONTROL_A01_SCIENCE_CARD_20260907.md`; `FSD_NATIVE_RENEWAL_CONTROL_A01_RESULT_EVIDENCE_20260907.md`; `FSD_NATIVE_RENEWAL_CONTROL_A01_INTAKE_20260907.md` |
 | Native-renewal learning B01 / P30–P38 | complete valid B, one trained pair; H−C+.49738 above .01 MEI, G−H+.02118 full; all3 arms/708.25s retained; no successor launched | `FSD_NATIVE_RENEWAL_LEARNING_B01_SCIENCE_CARD_20260908.md`; `FSD_NATIVE_RENEWAL_LEARNING_B01_RESULT_EVIDENCE_20260908.md`; `FSD_NATIVE_RENEWAL_LEARNING_B01_INTAKE_20260908.md` |
+| Native-renewal learning B02 / P40 | prospective independent-pair card and bounded seed/input spec complete;770303/770304; no code/runtime/result | `FSD_NATIVE_RENEWAL_LEARNING_B02_SCIENCE_CARD_20260908.md`; `FSD_NATIVE_RENEWAL_LEARNING_B02_CM_SPEC_20260908.md`; `FSD_NATIVE_RENEWAL_LEARNING_B02_PREPARATION_INTAKE_20260908.md` |
 | Advancement plan | E1 → E2 → E2b/E3 → E4 → C-gate; E2b is not selected at this boundary | `docs/Claude_docs/plans/RESEARCH_ADVANCEMENT_PLAN_20260902.md` |
 
 ## Code
