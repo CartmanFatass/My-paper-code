@@ -16,11 +16,12 @@ The [P17 intake](CBSC_LOCAL_ACQUISITION_P17_INTAKE_20260907.md#concrete-next-tas
 established one actual metadata-ready path. P20 at
 `23d0f55983f31e58efe2e5ace5e228451fb2d49b` subsequently authorized the bounded
 seed/object correction and focused inert checks. Current stage is
-**SOURCE_READY_FOR_ALLOCATION** after Root integration and the
+**P28_PAIR_ALLOCATED** after source readiness and the exact P28 allocation below.
+Root integrated the source and the
 [source-correction intake](CBSC_OPPORTUNITY_CREDIT_B05_SOURCE_CORRECTION_INTAKE_20260907.md).
 Actual acquisition, installation, target-runtime probe and scientific calls under
-P20 remain zero. The card requests a future two-arm allocation; it never reuses
-P17's ended cap or treats fixture checks as a learner run.
+P20 remain zero. P28 now allocates the two fresh arms; it never reuses P17's
+ended cap or treats fixture checks as a learner run.
 
 Question: with both arms on that declared runtime, does STRUCT improve final
 update-48 native return over RAW, and how do both compare with REQUEST_ONLY?
@@ -248,3 +249,37 @@ The source-correction intake accepts card/code readiness and requests the exact
 fresh two-arm allocation through Root to Portfolio. Source acceptance is technical
 conformance; target-runtime learning, resource admission and all B05 native
 outcomes remain unobserved. Prediction and reading rules above are unchanged.
+
+## P28 exact execution allocation — 2026-09-07
+
+[P28](../../portfolio/handoffs/2026-09-07-p28-cbsc-b05-pair-execution.md), published
+at `8347aab8b9a5f368a5009bd1b8eb44aba95f78cd`, allocates exactly the prepared
+fresh RAW then STRUCT pair. Root's accepted P20 intake is main
+`d24b7b9a27be84ed6e0989327b82777f11e621cb`. This supersedes P20's no-launch
+boundary only for these two calls. Source
+`d2753be86c12bfa63c404ac2cac513b914371115` and the five literal blocks in handoff
+`87c1f2f01466e8ce0a558fc939b3f774b02af9f2` remain unchanged.
+
+Both arms use fresh seed 21223, the named system312 interpreter/cwd/outputs and
+handles on wsl_4070 CPU FP32/one process/one Torch thread. Each complete arm has
+600 seconds, 1200 seconds summed, with fresh physical/effective >=4 GiB admission
+immediately before its runner. The existing 598-second TERM plus 2-second KILL
+envelope includes admission, imports, learning, evaluation and primary publication;
+actual outer wall decides complete-cap conformance. STRUCT's pair/readback remains
+within STRUCT's cap.
+
+The same CM executes the literal route and collects all outcomes. Root receives
+each actual accepted handle for observation. RAW technical acceptance leads to
+the allocated STRUCT regardless of RAW score. Actual integrity, admission or cap
+failure stops dependent work; optional telemetry absence alone does not. No retry,
+extra seed, acquisition/install/import probe, new source/readiness work or smoke
+is allocated. P20 checks and review are reused. This is unchanged-source execution,
+with no new CM comparison assignment. Actual candidate calls at this committed
+allocation record: **0**. The prediction, MEI, counts and scientific reading are
+unchanged.
+
+Options: (a) execute the exact allocated pair; (b) retain the superseded P20
+preparation stop; (c) add a readiness or diagnostic series. Recommend/select **(a)**.
+Owner-delegated decision (unattended, 2026-09-03 instruction): (a). No owner review
+or audit override required a change at this boundary; no new direction or
+Portfolio disposition is made.
