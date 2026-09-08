@@ -1,0 +1,74 @@
+{
+  "id": "20260907-cbsc-005",
+  "created": "2026-09-07T17:28:00-07:00",
+  "direction": "capability_bound_semantic_currentness",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "CBSC 本地路径只读调查：最多六次元数据",
+  "context": "Claim: local artifact and endpoint metadata may support one changed acquisition route. Binding structure: systems / information flow. P15只读准备；不能执行完整下载、安装、候选导入或学习。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "继续有界元数据调查，返回一个有依据的路径或交回依赖。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "结束调查，保留P11交回和全部失败证据。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "按批注修改本次只读调查范围，仍不运行候选环境。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "限定地检查本地现成输入或不同获取条件；没有发现时直接交回，不猜测修复。",
+  "evidence": [
+    "docs/research/candidates/capability_bound_semantic_currentness/CBSC_LOCAL_ACQUISITION_P15_SCIENCE_CARD_20260907.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-07.md#L79",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否保留这次只读的本地下载路径调查？本轮不下载完整文件或运行候选环境。",
+    "changes_if_approved": [
+      {
+        "target": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_LOCAL_ACQUISITION_P15_SCIENCE_CARD_20260907.md",
+        "from": "P11已交回下载依赖，未安排新调查",
+        "to": "按P15查看本地缓存及最多六次官方元数据，给出有依据的新路径或继续交回"
+      }
+    ],
+    "if_refused": "结束本次新调查，保留全部失败证据，不重复下载或安装。",
+    "evidence_for": [
+      {
+        "path": "docs/research/portfolio/handoffs/2026-09-07-p15-rolling-refill-after-transport-split.md",
+        "quote": "Resolve whether the local control plane supplies a concrete acquisition route absent from the failed remote transfer.",
+        "why": "本地现成文件或不同的实际获取条件尚未被这次限定调查覆盖。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_POST_A03_ACQUISITION_INTAKE_20260907.md",
+        "quote": "The known four command walls total743.35s with no ready candidate",
+        "why": "已有多次失败；成功的文件头不能证明完整下载或修复。"
+      }
+    ],
+    "uncertainty": [
+      "本地缓存可能只有Windows或其他Python版本的包。",
+      "元数据可以确认文件身份和访问，不能证明完整下载、安装或导入。"
+    ],
+    "cost": {
+      "compute": "最多6次元数据请求，每次30秒、2MiB；完整下载/安装/候选导入/学习均为0。",
+      "owner_time": "可异步批改，无需立即回复。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing；调查按现有委托继续。"
+    },
+    "verdict_text": "If no supported change is found, yield without a new execution command/budget.",
+    "source": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_LOCAL_ACQUISITION_P15_SCIENCE_CARD_20260907.md"
+  },
+  "starred": false
+}
