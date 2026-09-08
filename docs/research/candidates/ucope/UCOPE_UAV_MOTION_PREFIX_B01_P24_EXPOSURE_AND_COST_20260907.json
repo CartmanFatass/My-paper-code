@@ -1,0 +1,136 @@
+{
+  "object": "UCOPE-UAV-MOTION-PREFIX-B01",
+  "allocation": "P24",
+  "evidence_class": "B/EXPLORE outcome-informed continuation",
+  "prepared_at": "2026-09-07T22:22:00-07:00",
+  "allocation_sha": "63c3f6a9ae736e56146e62772278d414481e0dbb",
+  "plumbing_authorization_sha": "a8502f9a7af53a7854bbd964e85608f3c7f8ff01",
+  "historical_source_sha": "536949660fee3ab9ac92aba29c2c0455ffe9f6e1",
+  "fresh_masters": [
+    6901,
+    6902
+  ],
+  "prior_masters": [
+    6801,
+    6802
+  ],
+  "seed_search": {
+    "searched": [
+      "docs/research/candidates/ucope",
+      "experiments/candidates/ucope",
+      "scripts/run_ucope*.py"
+    ],
+    "before_card_recording": "no exact-word match in current scientific/code records; bounded search, not a universal namespace assertion"
+  },
+  "rng": {
+    "6901": {
+      "b": 690100000,
+      "initialization": 690100011,
+      "train_velocity": 690100021,
+      "train_duration": 690100022,
+      "train_reset_range": [
+        690101000,
+        690101511
+      ],
+      "eval_reset_range": [
+        690102000,
+        690102031
+      ],
+      "eval_velocity_range": [
+        690103000,
+        690103031
+      ],
+      "eval_duration_range": [
+        690104000,
+        690104031
+      ]
+    },
+    "6902": {
+      "b": 690200000,
+      "initialization": 690200011,
+      "train_velocity": 690200021,
+      "train_duration": 690200022,
+      "train_reset_range": [
+        690201000,
+        690201511
+      ],
+      "eval_reset_range": [
+        690202000,
+        690202031
+      ],
+      "eval_velocity_range": [
+        690203000,
+        690203031
+      ],
+      "eval_duration_range": [
+        690204000,
+        690204031
+      ]
+    }
+  },
+  "per_pair": {
+    "train_team_steps": 262144,
+    "eval_team_steps": 24576,
+    "team_steps": 286720,
+    "optimizer_steps": 2048,
+    "train_episodes": 1024,
+    "eval_episodes": 96,
+    "constructor_resets": 2,
+    "diagnostic_frames": 1600,
+    "local_index_method_calls": 3200
+  },
+  "new_allocation": {
+    "training_pairs": 2,
+    "learner_fits": 4,
+    "train_team_steps": 524288,
+    "eval_team_steps": 49152,
+    "team_steps": 573440,
+    "optimizer_steps": 4096,
+    "episodes": 2240,
+    "constructor_resets": 4,
+    "diagnostic_frames": 3200,
+    "local_index_method_calls": 6400
+  },
+  "combined_if_complete": {
+    "training_pairs": 4,
+    "learner_fits": 8,
+    "team_steps": 1146880,
+    "optimizer_steps": 8192,
+    "episodes": 4480,
+    "eval_episodes": 384
+  },
+  "caps_seconds": {
+    "complete_arm": 1800,
+    "complete_pair": 3600,
+    "new_pair_sum": 7200
+  },
+  "per_arm_cost_projection_seconds": {
+    "T_each": 148.26706686698833,
+    "G_each_including_H_publication": 141.37189204798779,
+    "per_pair": 289.6389589149761,
+    "new_pair_sum": 579.2779178299522,
+    "basis": "same configured loop work; maximum observed P21 arm wall by arm, charging external whole minus runner time to T as common startup; forecast only, no cap relaxation or guarantee"
+  },
+  "historical_whole_wall_seconds": 575.24,
+  "learner_parameters": {
+    "T": 66441,
+    "G": 66311
+  },
+  "prior_total_relative_parameter_displacement_range": [
+    0.5183453849543671,
+    0.5983579115795494
+  ],
+  "current_new_exposure": {
+    "environment_calls": 0,
+    "optimizer_calls": 0,
+    "evaluation_episodes": 0
+  },
+  "source_gap": {
+    "runner_lines": "34-36, real allowed masters only6801/6802",
+    "aggregate_lines": "77-86, exactly two distinct inputs and real set exactly6801/6802",
+    "runtime_rejection_executed": false,
+    "P26_correction_authorized": true
+  },
+  "corrected_execution_sha": null,
+  "actual_accepted_handles": []
+}
