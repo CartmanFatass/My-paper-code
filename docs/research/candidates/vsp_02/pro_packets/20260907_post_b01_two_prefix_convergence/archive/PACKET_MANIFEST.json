@@ -1,0 +1,36 @@
+{
+  "schema_version": 4,
+  "packet_id": "2026-09-07-vsp02-post-b01-two-prefix-convergence-01--vsp_02",
+  "attempt": 1,
+  "canonical_form": "logical_packet_manifest",
+  "request_id": "2026-09-07-vsp02-post-b01-two-prefix-convergence-01",
+  "direction_id": "vsp_02",
+  "direction_ids": [
+    "vsp_02"
+  ],
+  "workflow_node": "em_convergence",
+  "conversation_binding_key": "em:vsp_02:convergence",
+  "decision_authority": "pro_final",
+  "source_mode": "paste",
+  "body": {
+    "role": "prompt",
+    "source_path": "<paste>",
+    "canonical_filename": "2026-09-07-vsp02-post-b01-two-prefix-convergence-01--vsp_02__00_PROMPT.md",
+    "bytes": 1249,
+    "sha256": "05dd15abbcf0ba958f51a8ecd6c4c59829bc0945c3e648151bc2ae6cfa6c6e93",
+    "materialized_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-07-vsp02-post-b01-two-prefix-convergence-01\\2026-09-07-vsp02-post-b01-two-prefix-convergence-01--vsp_02__00_PROMPT.md"
+  },
+  "references": [],
+  "reference_order_is_authoritative": true,
+  "provider_filename_policy": "record_observed_name_only",
+  "companion_prompt_is_transport_ui_only": true,
+  "manifest_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-07-vsp02-post-b01-two-prefix-convergence-01\\2026-09-07-vsp02-post-b01-two-prefix-convergence-01--vsp_02__PACKET_MANIFEST.json",
+  "materialized_artifacts": {
+    "body": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-07-vsp02-post-b01-two-prefix-convergence-01\\2026-09-07-vsp02-post-b01-two-prefix-convergence-01--vsp_02__00_PROMPT.md",
+    "references": []
+  },
+  "materialized_hashes": {
+    "body": "05dd15abbcf0ba958f51a8ecd6c4c59829bc0945c3e648151bc2ae6cfa6c6e93",
+    "references": []
+  }
+}
