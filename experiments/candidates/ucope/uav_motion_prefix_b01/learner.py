@@ -14,15 +14,21 @@ def returns_to_go(rewards):
     return rewards.flip(-1).cumsum(-1).flip(-1)
 
 
-def clipped_policy_loss(new_logp, old_logp, advantage):
+def clipped_policy_loss(new_logp, old_logp, advantage, velocity_mask=None):
+    if velocity_mask is not None:
+        advantage = advantage[..., None]
     ratio = (new_logp - old_logp).exp()
-    return -torch.minimum(ratio * advantage, ratio.clamp(.8, 1.2) * advantage).mean()
+    surrogate = torch.minimum(ratio * advantage, ratio.clamp(.8, 1.2) * advantage)
+    if velocity_mask is not None:
+        # Keep every primitive row, including all-held rows, in the denominator.
+        surrogate = torch.where(velocity_mask, surrogate, 0).sum(-1)
+    return -surrogate.mean()
 
 
 @torch.no_grad()
 def collect_episode(env, actor, critic, horizon, reset_seed, velocity_rng, duration_rng,
                     metadata, check, counts, emit_episode, emit_diagnostic, limits,
-                    real=False, diagnostics=False):
+                    real=False, diagnostics=False, ratio_grouping="joint"):
     """Counts survive an exception; only a complete episode emits a scored row."""
     check()
     obs, info = env.reset(seed=reset_seed)
@@ -50,6 +56,8 @@ def collect_episode(env, actor, critic, horizon, reset_seed, velocity_rng, durat
             sent = np.zeros((5, 3), dtype=np.float32)
             u, duration = torch.zeros(5, 3), torch.zeros(5, dtype=torch.long)
             logp, value = torch.tensor(0.), torch.tensor(0.)
+            if ratio_grouping == "agent_compound":
+                logp = torch.zeros(5)
             active = np.zeros(5, dtype=bool)
         else:
             mean, recurrent, hidden = actor(torch.from_numpy(x)[None], hidden)
@@ -62,8 +70,9 @@ def collect_episode(env, actor, critic, horizon, reset_seed, velocity_rng, durat
             sent, active = hold.decide(t, u.tanh().numpy(),
                                        np.where(duration.numpy() == 1, 4, 1))
             logp, _ = joint_terms(actor, mean, recurrent, u, duration,
-                                  torch.from_numpy(active), torch.from_numpy(duration_mask))
-            if not torch.isfinite(logp):
+                                  torch.from_numpy(active), torch.from_numpy(duration_mask),
+                                  ratio_grouping)
+            if not torch.isfinite(logp).all():
                 raise FloatingPointError("nonfinite sampled density")
         frames = []
         if diagnostics and t <= 4:
@@ -167,7 +176,7 @@ def optimizer_for(actor, critic):
                             foreach=False, fused=False)
 
 
-def update(actor, critic, optimizer, episodes, chunk, check, counts):
+def update(actor, critic, optimizer, episodes, chunk, check, counts, ratio_grouping="joint"):
     rollout = {key: torch.stack([ep[key] for ep in episodes]) for key in episodes[0]}
     targets = returns_to_go(rollout["reward"])
     raw = targets - rollout["value"]
@@ -178,8 +187,9 @@ def update(actor, critic, optimizer, episodes, chunk, check, counts):
         check()
         mean, recurrent = recurrent_outputs(actor, rollout, chunk)
         logp, entropy = joint_terms(actor, mean, recurrent, rollout["u"], rollout["durations"],
-                                    rollout["velocity_mask"], rollout["duration_mask"])
-        policy_loss = clipped_policy_loss(logp, rollout["logp"], advantages)
+                                    rollout["velocity_mask"], rollout["duration_mask"], ratio_grouping)
+        policy_loss = clipped_policy_loss(logp, rollout["logp"], advantages,
+                                          rollout["velocity_mask"] if ratio_grouping == "agent_compound" else None)
         value_loss = (critic(rollout["critic"]) - targets).square().mean()
         loss = policy_loss + .5 * value_loss - .01 * entropy.mean()
         if not torch.isfinite(loss):

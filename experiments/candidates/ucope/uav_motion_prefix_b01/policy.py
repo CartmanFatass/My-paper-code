@@ -61,9 +61,12 @@ def tanh_log_prob(u, mean, log_std):
     return (normal - jacobian).sum(-1)
 
 
-def joint_terms(actor, mean, recurrent, u, durations, velocity_mask, duration_mask):
+def joint_terms(actor, mean, recurrent, u, durations, velocity_mask, duration_mask,
+                ratio_grouping="joint"):
     velocity_lp = tanh_log_prob(u, mean, actor.log_std)
-    logp = torch.where(velocity_mask, velocity_lp, 0).sum(-1)
+    logp = torch.where(velocity_mask, velocity_lp, 0)
+    if ratio_grouping == "joint":
+        logp = logp.sum(-1)
     normal_entropy = (actor.log_std.clamp(-5, 2)
                       + .5 * math.log(2 * math.pi * math.e)).sum()
     entropy = velocity_mask.sum(-1) * normal_entropy
@@ -71,7 +74,8 @@ def joint_terms(actor, mean, recurrent, u, durations, velocity_mask, duration_ma
         logits = actor.duration(recurrent)
         log_probs = logits.log_softmax(-1)
         chosen = log_probs.gather(-1, durations[..., None]).squeeze(-1)
-        logp = logp + torch.where(duration_mask, chosen, 0).sum(-1)
+        duration_lp = torch.where(duration_mask, chosen, 0)
+        logp = logp + (duration_lp.sum(-1) if ratio_grouping == "joint" else duration_lp)
         cat_entropy = -(log_probs.exp() * log_probs).sum(-1)
         entropy = entropy + torch.where(duration_mask, cat_entropy, 0).sum(-1)
     return logp, entropy
