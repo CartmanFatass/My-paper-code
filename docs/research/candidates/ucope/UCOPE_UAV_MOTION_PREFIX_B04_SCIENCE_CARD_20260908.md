@@ -207,3 +207,26 @@ review are selected. No standalone smoke, warm-up, profile, pilot, replay or
 full-array publication. B02's80.578s/60s smoke breach and prior zero-exposure
 command failures remain historical. All three CM comparison batches are complete;
 no fourth enrollment follows. Source is not accepted or launched by this card.
+
+## 7. Accepted source and exact P61 route — 2026-09-08
+
+Sections1–6 were frozen before implementation/output at
+`c54d8d9403d8613550b6b050f3df465d1b0e1424` and remain unchanged. Accepted
+source is **`7693b7af6b7d89cdaa028659d606a37dee9eb68e`**, tree
+`9b3221e69f3251ec030cfb0fb05b0d2a85126fa9`. The
+[CM technical record](UCOPE_UAV_MOTION_PREFIX_B04_TECHNICAL_ACCEPTANCE_20260908.md)
+at `dc7a0c5d929b9c3c5440d4ab4c5e35fc27149e46`, with the exact-command
+append at `3327f1d2e22191d6560e7c73a4b77c6835c08f01`, and
+[DM implementation intake](UCOPE_POST_B03_CONVERGENCE_INTAKE_20260908.md#7-implementation-intake-and-source-binding--2026-09-08)
+record71 focused test passes,5.04s cumulative suite wall and independent
+review with no material finding. Setup/command failures remain recorded;
+neither source acceptance nor wrapper syntax establishes a native result.
+
+The [Root handoff](UCOPE_UAV_MOTION_PREFIX_B04_P61_ROOT_HANDOFF_20260908.md)
+uses the CM's exact committed command and already checked LF wrapper for
+one7201 invocation. It reuses the detached exact-source test checkout for
+this live execution dependency. Root owns actual-state reconciliation,
+fresh node memory admission, submission and observation. CM collects;
+DM intakes every outcome. No admission or scientific invocation has been
+executed by this binding. No second pair, retry, extra/H-completion evaluation
+or multi-pair aggregate follows.
