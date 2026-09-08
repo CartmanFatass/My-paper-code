@@ -1,0 +1,44 @@
+{
+  "question": "是否接受P55已分配的第二个独立训练对的具体卡：固定新主键8102，保持相同比较和预算，并保留全部结果？",
+  "changes_if_approved": [
+    {
+      "target": "VSPC1-NATIVE-HOLD-VALUE-B02",
+      "from": "B01完成，只有一个训练对的门控收益记录",
+      "to": "按P55执行恰好一个新训练对；主键8102、UP概率0.55、原0.01阈值和原完整上限均在运行前固定"
+    }
+  ],
+  "if_refused": "按真实反馈停止或修订尚未执行的B02；保留B01的全部证据，不把拒绝改写为科学负面、方向关闭或优先级变动。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B01_RESULT_EVIDENCE_20260908.md",
+      "quote": "| GATED-V−MLP-V | +.029365658560366156 | .005274225674828064 | 6/32 |",
+      "why": "第一对的原生回报差超过事前0.01阈值，支持一次有限的独立训练检查。"
+    },
+    {
+      "path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B02_SCIENCE_CARD_20260908.md",
+      "quote": "**P55 ends after this one pair and intake regardless of sign**.",
+      "why": "不追加第三对来追求同号；本次只是检验一次局部收益能否再出现。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B01_RESULT_EVIDENCE_20260908.md",
+      "quote": "| MLP-V−H | −.009965109166429027 | .010730982423058314 | 16/32 |",
+      "why": "比较器第一对平均低于悬停，且条件评价标准误不能代表训练种子的变异。"
+    }
+  ],
+  "uncertainty": [
+    "第二个训练对的方向和幅度仍未知；两对也不能证明稳定优势。",
+    "门控额外容量、共同梯度裁剪和优化路径尚未与特定信用机制分开。",
+    "缺少调好的同信息headroom；悬停只是已达到的参考。",
+    "本卡不构成正式UAV进入、C晋级、生命周期或优先级决定。"
+  ],
+  "cost": {
+    "compute": "2×512×256训练团队步加3×32×256最终评价团队步，共286720原生步、2048次Adam、96次评价。完整上限1800秒/学习臂、3600秒/对，含H与发布退出。B01包围耗时308.63秒只作参考。新增工程只做绑定和检查，不重跑原训练或独立烟测。",
+    "owner_time": "异步查看，可随时干预；无须现在回复。",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing; P55已经分配此有界任务，按现有授权继续，不等待虚构的所有者批准"
+  },
+  "verdict_text": "New master8102, UP(.55), counts and rule are frozen here.",
+  "source": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B02_SCIENCE_CARD_20260908.md"
+}
