@@ -1,8 +1,10 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-07 (P29 UCOPE opening-prefix reassessment)
+Updated at: 2026-09-07 (P30 FSD selected learning card/spec)
 
-Current incremental command: [P29 UCOPE opening-prefix question selection](handoffs/2026-09-07-p29-ucope-opening-prefix-reassessment.md). Completed P24 is WITHIN with retained6902 harm and generic-reference weakness; the same DM prepares one justified within-family amendment or a precise Convergence scope question. No new science or code is allocated. FSD delivery repair awaits its exact blocker archive; CBSC/FRRIE terminal intakes remain separate dependencies.
+Current incremental command: [P30 FSD native-renewal learning card/spec](handoffs/2026-09-07-p30-fsd-native-renewal-learning-spec.md). Complete P25 response/application now selects the narrow fresh C_train/H_train/G comparison; preserve the contradictory earlier delivery blocker. Prepare its card and full implementation spec with zero current code or scientific execution allocation.
+
+Retained incremental command: [P29 UCOPE opening-prefix question selection](handoffs/2026-09-07-p29-ucope-opening-prefix-reassessment.md). Completed P24 is WITHIN with retained6902 harm and generic-reference weakness; the same DM prepares one justified within-family amendment or a precise Convergence scope question. No new science or code is allocated. FSD delivery repair awaits its exact blocker archive; CBSC/FRRIE terminal intakes remain separate dependencies.
 
 Previous incremental command: [P28 CBSC B05 fresh RAW/STRUCT pair](handoffs/2026-09-07-p28-cbsc-b05-pair-execution.md). Accepted source/card/handoff are ready; allocate the exact21223 pair at600s complete per arm/1200s summed, with no extra readiness probe. Actual launches and outcomes remain Root execution facts.
 
