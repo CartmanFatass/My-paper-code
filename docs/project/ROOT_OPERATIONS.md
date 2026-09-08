@@ -121,16 +121,8 @@ wait, service available returns, integrate the needed bounded delivery and dispa
 follow-on; request an exhausted slot's replacement immediately. Portfolio supplies incremental
 commands without waiting for all directions. Keep unrelated native work, experiments and
 accepted Pro generation advancing. Wait for the first event for at most 60 seconds, then
-service new events before another observation pass. Long integration/comparison work
+service new events before another observation pass. Long integration work
 yields at recoverable boundaries; Transport's browser work never locks Root's event loop.
-The final CM comparison may require all arms; other direction routes do not depend on it.
-
-During the three CM comparison batches, apply CM_MODEL_COMPARISON_20260907.md at every new CM
-assignment, including those forwarded by active DMs and those using an existing CM. Root directly
-captures and dispatches eligible work before coding; it does not wait for Portfolio to notice a
-new agent. Record batch assignment or a concrete exclusion once in the existing log. A helper
-being installed is not proof that this dispatch trigger ran. Report the requested first accepted
-five-arm batch once with actual identities; until then the correct state is no batch started.
 
 Use [hmasd-loop-dispatch](../../.agents/skills/hmasd-loop-dispatch/SKILL.md), Root section,
 when receiving commands, native returns, failed dispatches or vacancies, including after
@@ -147,10 +139,6 @@ overrides, and Transport's identity/acceptance procedure. Root records its own r
 itself. A native DM with Root as app parent receives its result through native collaboration.
 
 ### Report events
-
-For the next three new CM engineering tasks, apply
-`CM_MODEL_COMPARISON_20260907.md` before implementation starts: identical code spec and source,
-isolated model/client arms, Codex token/time collection. Existing tasks are not replayed.
 
 Use the single **Send/no-send conditions** section in SIBLING_COMMUNICATION.md.
 A new task gap includes its evidence and actual working-set delta; routine events and

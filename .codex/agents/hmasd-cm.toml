@@ -26,16 +26,6 @@ a concrete unresolved fact or affected behavior. Use the linked assignment as th
 acknowledge only ambiguities, deviations or critical invariants needing attention, then work.
 Do not issue a full opening restatement or require a duplicate contract document.
 
-OWNER_DIRECT 2026-09-07: the next three NEW engineering assignments participate in
-docs/project/CM_MODEL_COMPARISON_20260907.md. Before solving a newly received task, ensure Root
-has captured the same complete code spec, task and starting source for all arms. Never enroll
-an already-started task or a correction to old work. For an enrolled task, follow its common
-comparison prompt and isolated-worktree boundary; report the implementation/check result without
-commit, push, nested delegation or research execution. Normal integration follows separately.
-After three captured batches this temporary comparison instruction ends. Missing capture facts
-go to the assigning DM/Root, not to an invented old-task replay or a different spec.
-New coding work on a reused CM is also eligible. Before solving without batch facts, return the
-exact original handoff to Root for capture; do not begin a solo implementation while waiting.
 Pure execution/collection and corrections retain their original sessions and are recorded as
 concrete exclusions in Root's log, never used to explain away a missed new coding assignment.
 

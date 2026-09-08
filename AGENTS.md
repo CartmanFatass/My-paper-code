@@ -87,15 +87,6 @@ no global dependency upgrade or third-batch framework migration follows.
 
 ## Focused reading and engineering handoffs (OWNER_DIRECT, 2026-09-06)
 
-OWNER_DIRECT 2026-09-07 temporary comparison: the next three genuinely new CM engineering
-assignments use `docs/project/CM_MODEL_COMPARISON_20260907.md` before implementation begins.
-Every arm receives the same complete code spec, task and starting code. Do not replay historical
-or already-started assignments. Native baseline/Sol and the three headless clients implement in
-isolated copies; comparison arms add no scientific invocation or research-direction slot.
-After three batches this enrollment ends. Ordinary Root execution/count/push notices remain
-in its dedicated log; only actual repair/decision needs go to Portfolio, without informational
-echoes. The owner's new goal and existing scientific boundaries continue independently.
-
 Start from the current assignment and applicable AGENTS instructions. The sender points to the
 current card/intake section, relevant specification sections, code entry points and acceptance.
 Read those current sections and owned code first. Expand into callers, dependencies or historical
@@ -296,7 +287,7 @@ event hook; do not add another scheduler or count queued intentions as advancing
 OWNER_DIRECT 2026-09-07 rolling parallelism correction: a batch packages ready commands; it
 is never a completion barrier. Root handles each direction's return and dispatches its supplied
 next action as soon as its own dependencies are satisfied, without waiting for unrelated
-directions, Pro generation or CM comparison arms. When that route is exhausted, request its
+directions or Pro generation. When that route is exhausted, request its
 replacement immediately; Portfolio supplies an incremental command from current evidence
 without waiting for a full-batch report. Retain other advancing chains. Use the event sequence
 in `hmasd-loop-dispatch`; short shared-index and browser actions do not serialize whole tasks.

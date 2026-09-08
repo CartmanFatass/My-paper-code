@@ -10,11 +10,6 @@ Use the section for the current role. AGENTS and the current owner instruction r
 authority; this procedure changes no scientific decision tier, model, budget or permission.
 Endpoints and observation rules are in `docs/project/ROOT_OPERATIONS.md`.
 
-OWNER_DIRECT 2026-09-07: capture the next three NEW CM engineering assignments under
-`docs/project/CM_MODEL_COMPARISON_20260907.md` before implementation begins. Dispatch the same
-frozen code spec/task/source to all comparison arms using that temporary protocol. Do not use
-historical tasks or count comparison arms as additional research directions.
-
 ## Shared state: actual work, not remembered task names
 
 Use current commands in `docs/research/portfolio/PORTFOLIO.md`, actual native dispatch/return
@@ -99,13 +94,12 @@ is an explicit skill procedure, not an automatic event subscription or a new sch
 Use the current command, original return and latest execution facts to choose the first
 applicable action below. After that bounded action, re-enter the sequence with changed facts.
 Do not wait to collect a full batch or reconstruct every direction's history.
-Before a lengthy comparison capture or integration, send any already-known exhausted-slot
+Before a lengthy integration, send any already-known exhausted-slot
 request and dispatch other independent ready commands; a long local step cannot delay those
-short actions. The comparison intercept below applies before any eligible coding dispatch.
+short actions.
 
 | Available event/fact | Next action now |
 | --- | --- |
-| Complete fresh CM code spec, coding not started, comparison enrollment remains | Capture and dispatch the authorized five-arm batch before any solo coding; do not wait for Pro. |
 | Ready issued command or ready named follow-on | Dispatch it; issue all other independently ready work before a long local step. |
 | Native delivery or Transport completion/blocker receipt | Match request/command and original recipient; do the necessary bounded acceptance/integration or forward the original receipt to its named native DM/CM, then dispatch the ready follow-on. |
 | Required short index operation is busy | Retain that exact dependency and service another ready event; do not hold the whole return queue. |
@@ -175,8 +169,6 @@ Routine tool addressing, reads and authorized pre-acceptance mechanical correcti
 Root serializes only short shared-index operations; independent Transport owns exact browser
 identity/Send/read actions. After accepted app dispatch to Transport, Root resumes this event
 loop. Provider Send acceptance comes from Transport's recorded facts, not the app tool ACK.
-Start all independent authorized comparison arms before observing them;
-the final comparison needs its required arms, but unrelated science routes do not.
 
 Example: A returns with a named DM intake while B is generating in Pro, C is running an
 experiment, D is implementing, and E exhausts its route. Root starts A's intake and asks

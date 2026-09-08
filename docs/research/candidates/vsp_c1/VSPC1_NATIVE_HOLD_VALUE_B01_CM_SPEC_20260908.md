@@ -36,13 +36,13 @@ Read/reuse at that source:
 `fc9f6f6548b778b28acdcd058567e27998ea72b8`, UCOPE `__init__.py` and `environment.py`
 are absent; the named policy/learner/study and core environment/adapter match637406340.
 Both missing files exist in the complete source commit. Root must supply that full
-committed dependency tree before implementation/capture, either the complete named
+committed dependency tree before implementation, either the complete named
 source or its normal committed integration with this card/spec. Do not synthesize
 a substitute environment, vendor those files into VSPC1, recover them from a live
 remote process or pretend current main alone is that source. This is an exact input
 need, not an adverse scientific finding or new research task. Source-surface equality
 matters; later doc-only commits do not invalidate the code input. Root records the
-one resulting full starting SHA supplied equally to all comparison arms.
+resulting full starting SHA supplied to the CM.
 
 New owned code only:
 
@@ -55,7 +55,7 @@ Own the implementation/acceptance evidence for this bounded module; no UCOPE/cor
 other direction, governance or baseline changes. Follow `experiments/AGENTS.md`,
 `tests/AGENTS.md`, `scripts/AGENTS.md`. You are not alone in the codebase; preserve
 other writers' work and serialize overlapping edits/index actions in the supplied
-checkout. Root remaps the same relative paths into comparison worktrees when applicable.
+checkout.
 
 ## 2. Critic and initialization
 
@@ -216,7 +216,7 @@ it does not multiply scientific calls or repeat checks without a concrete gap.
    native execution or new scientific choice.
 2. **Owned paths/entry points:** §1's new VSPC1 module, runner and two test files in
    the existing designated checkout; read-only source637406340 symbols are the reuse
-   base. Supply the two named missing committed dependencies before capture. Do not
+   base. Supply the two named missing committed dependencies before implementation. Do not
    copy UCOPE into VSPC1, edit core/UCOPE or alter unrelated work.
 3. **Preserved semantics:** card§§2–5 and this spec§§2–4; same duration-capable
    actors, actual pre-decision information, compound-agent masks/reduction, native
@@ -227,10 +227,8 @@ it does not multiply scientific calls or repeat checks without a concrete gap.
    accepted merely because the Pro response or fixture completes. Return any
    source/meaning gap precisely to this DM through Root; do not rewrite the contract.
 5. **Budget/stop:** ≤2000 new non-test source lines,≤600 runner lines,≤300s focused
-   tests and one≤60s fixture smoke; scope§4 none. Use Root's supplied engineering
-   execution mode, preserving its identical five-arm capture before any eligible
-   new CM coding dispatch. Every arm receives this same complete task/spec/code and
-   original checks; no historical replay, model-specific variant or extra native
-   call. No CM has begun this task during P49. Once selected code is accepted,
+   tests and one≤60s fixture smoke; scope§4 none. The assigned CM implements and
+   checks this bounded change in the designated direction checkout, with the
+   independent review required in §5. Once code is accepted,
    Root receives its exact source and the still-unexecuted card; any actual
    scientific invocation needs its concrete later route and fresh admission.
