@@ -7,11 +7,21 @@ Binding MARL structure: (b) temporal abstraction or termination; each agent's in
 
 [P40](../../portfolio/handoffs/2026-09-08-p40-fsd-independent-pair-preparation.md)
 at main `6717784f9` authorizes this card, complete seed/input-change specification
-and preparation/owner records only. This is one object follow-up inside the
+and preparation/owner records only at that historical boundary. This is one object follow-up inside the
 accepted family, not a new family, recast, C freeze or UAV entry. No code
 implementation, model/host/learner/diagnostic fixture, evaluation or scientific
-runtime is allocated. The current preparation exposure is zero as recorded in
+runtime was allocated by P40. Its preparation exposure is zero as recorded in
 the [machine count/cost record](FSD_NATIVE_RENEWAL_LEARNING_B02_EXPOSURE_AND_COST_20260908.json). B has no consumption state.
+
+**P42 readiness, 2026-09-08:** the separately allocated seed/input implementation
+is accepted at `eb46e3356582d03d07b58b9480284c867c40c5f2`, integrated on main as
+`d961c58268353f215d3ffddf0d83927e6318541d`. At readiness entry, the integrated
+source/card/spec matched the reviewed delivery. [Technical acceptance](FSD_NATIVE_RENEWAL_LEARNING_B02_TECHNICAL_ACCEPTANCE_20260908.md)
+records24 passing synthetic cases,4.6721191s complete test-process wall and no
+material independent RNG/identity-review finding. No production model, host,
+learner, evaluation, admission, remote binding or scientific result exists from
+P42/readiness. The [readiness intake§8](FSD_NATIVE_RENEWAL_LEARNING_B02_PREPARATION_INTAKE_20260908.md#8-p42-readiness-and-exact-next-route)
+returns one named B02 runtime-binding/allocation need; it does not allocate it.
 
 Question: does the above-.01 native H−C difference observed for B01 recur under
 one new independent initialization/training seed at the same five-rollout budget?
@@ -32,7 +42,7 @@ Use the shared authoring checkout `C:/Projects/HMASD-worktrees/codex-fsd`, branc
 which reconciles P40 and the accepted B01 intake. The shared runner/test source
 is unchanged from reviewed `b3f86bb28879db239b07291c39d93a1c494abe50`.
 The [CM specification](FSD_NATIVE_RENEWAL_LEARNING_B02_CM_SPEC_20260908.md) selects only explicit seed/metadata threading
-and a thin B02 entry point; its implementation needs a separate named assignment.
+and a thin B02 entry point; P42 supplied that separately named implementation.
 
 ## 2. Preserved population, information, learner and comparison
 
@@ -162,10 +172,13 @@ explanation. Owner prediction: not taken (unattended); no new result is scored y
 
 ## 6. Exposure, cost, route and stops
 
-The [machine record](FSD_NATIVE_RENEWAL_LEARNING_B02_EXPOSURE_AND_COST_20260908.json) computes the known multipliers. Current P40 preparation
+The [machine record](FSD_NATIVE_RENEWAL_LEARNING_B02_EXPOSURE_AND_COST_20260908.json) computes the known multipliers. Historical P40 preparation
 has0 source-code changes, CM dispatches, scientific invocations, model constructions,
 loads, training starts/transitions/optimizer calls, evaluation episodes, diagnostic
-fixtures and Pro Sends. It grants no runtime allocation.
+fixtures and Pro Sends. It grants no runtime allocation. P42 subsequently completed
+the specified code and synthetic checks; every production/scientific count remains
+zero. Readiness recomputed the known work from the unchanged runner constants and
+this record, without importing the learner or host.
 
 | Prospective quantity | Work |
 | --- | ---: |
@@ -221,12 +234,14 @@ selected; no registry, generic configuration layer, new validator/currentness
 guard, checkpoint/retry framework, telemetry system or duplicated learner is needed.
 
 The [CM spec](FSD_NATIVE_RENEWAL_LEARNING_B02_CM_SPEC_20260908.md) owns the three exact code/test paths and changed-boundary
-checks. Existing600-line runner/2000 new non-test-line budgets apply. The future
+checks. Existing600-line runner/2000 new non-test-line budgets apply. The specified
 synthetic suite stays within300s and constructs no real HMASDAgent or corridor
-host; independent review targets changed RNG/identity propagation. P40 executes
-none of those checks or code edits. Unchanged P34 source/review is reused.
+host; independent review targets changed RNG/identity propagation. P40 executed
+none of those checks or code edits; P42 completed them as recorded above. The
+unchanged P34 semantics and P42 changed-input evidence are reused without another run.
 
 Evidence-spec§3–4,5.2,11.4,11.7–11.9 control, especially§11.8. One new independent
 pair is the next useful observation; no exact maximum, full diagnosis, stronger
-class or additional Pro round is a B launch gate. Current authority is object-tier
-preparation only, with no lifecycle/priority/UAV disposition.
+class or additional Pro round is a B launch gate. Current authority covers the
+object-tier card, completed implementation and readiness only; production runtime
+still requires its named allocation. No lifecycle/priority/UAV disposition follows.
