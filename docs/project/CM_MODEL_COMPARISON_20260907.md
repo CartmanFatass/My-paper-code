@@ -185,8 +185,8 @@ Three real tasks support an observed task-specific comparison, not a general mod
 | Batch | New assignment / code spec / source | Baseline + Sol IDs | Other arm roots | State |
 | --- | --- | --- | --- | --- |
 | 01 | P14-VSP02-B-CARD-AND-CM-COMPARISON-01 / `a1b8c56f2a36e2027372bf578fc2646dfd57efe9` | `/root/vsp02_cm_baseline_b01`, `/root/vsp02_cm_sol_b01` (native); headless PIDs 11640/29924/22060; resolved `claude-opus-5` / `grok-4.6-build` / `google-antigravity/gemini-3.8-flash-high` | `temp/cm-model-comparison/20260907/batch-01/` | five arms returned; independently verified; baseline selected for normal VSP02 integration |
-| 02 | not yet captured | — | — | awaiting next new CM engineering assignment |
-| 03 | not yet captured | — | — | awaiting next new CM engineering assignment |
+| 02 | P15-FSD-NATIVE-RENEWAL-CONTROL-A01 / `08d11657a50428d95b7d3d56d6990184f1620c00` | `/root/fsd_cm_baseline_a01`, `/root/fsd_cm_sol_a01` (native); headless PIDs 2132/12988/7312; resolved `claude-opus-5` / `grok-4.6-build` / `gemini-3.8-flash-high` | `temp/cm-model-comparison/20260907/batch-02/` | five arms returned; independently verified; baseline selected; zero scientific invocations |
+| 03 | P15-UCOPE-UAV-MOTION-PREFIX-B01 / `f718134f210889ff14f07deb3846cde853abd7b4` | `/root/ucope_cm_baseline_b01`, `/root/ucope_cm_sol_b01` (native); headless PIDs 21900/24720/28756; resolved `claude-opus-5` / `grok-4.6-build` / `gemini-3.8-flash-high` | `temp/cm-model-comparison/20260907/batch-03/` | five arms returned; independently verified; baseline selected; zero scientific invocations |
 
 ### Batch 01 return (Root factual update)
 
@@ -208,3 +208,41 @@ open until batches 02 and 03 are captured and returned.
 
 Ordinary capture/start/completion progress is log-only. Notify Portfolio for missing task/spec,
 unavailable requested model, a material comparability conflict, or the final three-batch result.
+
+### Batch 02 return (Root factual update)
+
+All five FSD arms returned from the matched source and prompt with zero scientific invocations.
+Independent verification at `temp/cm-model-comparison/20260907/batch-02/independent_verify/results.json`
+passed the same focused checks and fixture readback for baseline (12 tests), Sol (5), Claude (32),
+Grok (6) and omp (5). The Codex cost report at
+`temp/cm-model-comparison/20260907/batch-02/outputs/codex-comparison/report.{md,json}` records
+baseline `gpt-6-astra`/medium at 1,132,443 tokens and 464.810s versus Sol
+`gpt-5.6-sol`/high at 2,831,584 tokens and 1,094.108s (2.500x tokens, 2.354x duration);
+baseline pricing is unavailable and Sol is recorded at $3.488761. Headless process times were
+Claude 1,377.297s, Grok 1,048.344s and omp 377.125s. Claude's 673-line runner exceeded the
+600-line budget; that arm remains preserved evidence and was not selected. The configured
+baseline had the smallest compliant source surface and is retained for normal FSD review.
+
+### Batch 03 return (Root factual update)
+
+All five UCOPE arms returned from the matched source and prompt with zero scientific invocations.
+Independent verification at `temp/cm-model-comparison/20260907/batch-03/independent_verify/results.json`
+passed the same focused checks and fixture readback for baseline (12 tests), Sol (10), Claude (39),
+Grok (17) and omp (21). The Codex cost report at
+`temp/cm-model-comparison/20260907/batch-03/outputs/codex-comparison/report.{md,json}` records
+baseline `gpt-6-astra`/medium at 1,681,831 tokens and 851.035s versus Sol
+`gpt-5.6-sol`/high at 5,117,273 tokens and 1,827.145s (3.043x tokens, 2.147x duration);
+baseline pricing is unavailable and Sol is recorded at $4.686395. Headless process times were
+Claude 1,518.000s, Grok 1,098.313s and omp 418.532s. Every arm stayed within the source and
+runner budgets; larger implementations remain preserved comparison evidence. The configured
+baseline had the smallest compliant source surface and is retained for normal UCOPE review.
+
+### Three-batch completion (Root factual update)
+
+The three newly assigned CM tasks are now captured, returned and independently verified. The
+matched-input evidence, raw provider transcripts, per-arm return artifacts, and Codex measurement
+reports remain under `temp/cm-model-comparison/20260907/batch-01/` through `batch-03/`. Across
+these three task-specific observations, the configured baseline was selected for each normal
+direction route after focused acceptance and independent readback; no comparison arm was
+automatically integrated. The comparison records implementation and checking behavior for these
+assignments only, not a general model ranking. No comparison arm launched a scientific or UAV run.
