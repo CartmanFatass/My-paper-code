@@ -30,7 +30,8 @@ def runner_module():
 @pytest.mark.parametrize("seed,pair,fixture", [(6901, "p24", False), (6902, "p24", False),
                                                (6801, "p21", False), (6802, "p21", False),
                                                (9001, "p21", True), (7001, "b02", False),
-                                               (7002, "b02", False), (9001, "b02", True)])
+                                               (7002, "b02", False), (9001, "b02", True),
+                                               (7101, "b03", False), (9001, "b03", True)])
 def test_cli_actual_config_and_rng_propagation(seed, pair, fixture, scratch, monkeypatch):
     # Exercise the actual CLI/Config/run_pair stream expressions; substitute the
     # workload at its existing import boundary, without constructing any model.
@@ -54,18 +55,19 @@ def test_cli_actual_config_and_rng_propagation(seed, pair, fixture, scratch, mon
         calls["generator"].append(seed)
         return seed
     policy.templates, policy.generator = templates, generator
-    policy.arm_copy = lambda common, treatment: (SimpleNamespace(state_dict=lambda: {}),
+    policy.arm_copy = lambda common, treatment: (SimpleNamespace(state_dict=lambda: {}, arm="T" if treatment else "G"),
                                                 SimpleNamespace(state_dict=lambda: {}))
     policy.snapshot = lambda *args: {}
     policy.exposure = lambda *args: {}
     monkeypatch.setitem(sys.modules, prefix + "policy", policy)
     learner = ModuleType(prefix + "learner")
     learner.optimizer_for = lambda *args: None
-    learner.update = lambda *args, **kwargs: calls["update_credit"].append(kwargs) or []
+    learner.update = lambda *args, **kwargs: calls["update_credit"].append(dict(arm=args[0].arm, **kwargs)) or []
     def collect(env, actor, critic, horizon, reset, velocity, duration, metadata,
                 check, counts, emit, diagnostic, limits, **kwargs):
         calls["episodes"].append((reset, velocity, duration, metadata.copy()))
         calls["credit"].append(kwargs.get("ratio_grouping", "joint"))
+        assert "entropy_coef" not in kwargs
         if metadata["arm"] == "T":
             counts["duration_decisions"] += 5
         emit(dict(metadata, J=0.))
@@ -86,19 +88,30 @@ def test_cli_actual_config_and_rng_propagation(seed, pair, fixture, scratch, mon
     assert summary["configuration"]["horizon"] == (8 if fixture else 256)
     assert summary["pair"] == ("ENGINEERING_FIXTURE" if fixture else pair)
     assert summary["declared_masters"] == ([seed] if fixture else list(study.declared_masters(pair)))
-    assert summary["card_section"] == ("CODE_SPEC §8" if fixture else 5 if pair == "b02" else 10 if pair == "p24" else 8)
-    grouping = "agent_compound" if pair == "b02" else "joint"
+    assert summary["card_section"] == ("CODE_SPEC §4" if fixture and pair == "b03" else "CODE_SPEC §8" if fixture
+                                       else 5 if pair in ("b02", "b03") else 10 if pair == "p24" else 8)
+    grouping = "agent_compound" if pair in ("b02", "b03") else "joint"
+    entropy_coef = 0.0 if pair == "b03" else 0.01
     assert set(calls["credit"]) == {grouping}
     assert all(c.get("ratio_grouping", "joint") == grouping for c in calls["update_credit"])
     assert summary["configuration"]["ratio_grouping"] == grouping
+    assert summary["configuration"]["entropy_coef"] == entropy_coef
+    assert all(c.get("entropy_coef", .01) == entropy_coef for c in calls["update_credit"])
+    assert all(a["entropy_coef"] == entropy_coef for a in summary["arms"].values())
     if pair == "b02":
         assert summary["object"] == study.B02_OBJECT and summary["card"] == study.B02_CARD
         assert summary["ratio_grouping"] == grouping
+    if pair == "b03":
+        assert summary["object"] == study.B03_OBJECT and summary["card"] == study.B03_CARD
+        assert summary["ratio_grouping"] == grouping and summary["entropy_coef"] == 0.0
     assert calls["initialization"] == [seed]  # templates retains b+11 internally, unchanged.
     b = 100000 * seed
     assert summary["seeds"]["initialization"] == b + 11
     assert calls["reset"] == [b + 1000, b + 1000]
     train_n, eval_n = (2, 2) if fixture else (512, 32)
+    assert len(calls["update_credit"]) == train_n
+    for arm in ("T", "G"):
+        assert sum(c["arm"] == arm for c in calls["update_credit"]) == train_n // 2
     for arm in ("T", "G", "H"):
         entries = [c for c in calls["episodes"] if c[3]["arm"] == arm]
         train = [c for c in entries if c[3]["phase"] == "train"]
@@ -206,3 +219,26 @@ def test_b02_negative_partial_and_fixture_rejection():
         item["mode"] = "ENGINEERING_FIXTURE"
     with pytest.raises(ValueError):
         study.aggregate(inputs, "b02")
+
+
+def test_b03_rejects_aggregate_before_input_access(scratch, monkeypatch):
+    with pytest.raises(ValueError, match="one training pair"):
+        study.aggregate(None, "b03")
+    runner = runner_module()
+    monkeypatch.setattr(runner, "run_pair", lambda *a: pytest.fail("workload entered"))
+    monkeypatch.setattr(Path, "read_text", lambda *a, **kw: pytest.fail("aggregate input read"))
+    monkeypatch.setattr(sys, "argv", ["runner", "--pair", "b03", "--aggregate",
+                                     "missing-first.json", "missing-second.json", "--out", str(scratch)])
+    with pytest.raises(SystemExit) as error:
+        runner.main()
+    assert error.value.code == 2
+
+
+@pytest.mark.parametrize("seed", [7001, 7002, 7102, 9001])
+def test_b03_wrong_master_never_enters_workload(seed, scratch, monkeypatch):
+    runner = runner_module()
+    monkeypatch.setattr(runner, "run_pair", lambda *a: pytest.fail("workload entered"))
+    monkeypatch.setattr(sys, "argv", ["runner", "--pair", "b03", "--seed", str(seed), "--out", str(scratch)])
+    with pytest.raises(SystemExit) as error:
+        runner.main()
+    assert error.value.code == 2
