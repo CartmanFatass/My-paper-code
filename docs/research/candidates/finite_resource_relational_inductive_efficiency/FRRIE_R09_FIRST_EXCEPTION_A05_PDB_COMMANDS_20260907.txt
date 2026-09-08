@@ -1,0 +1,2 @@
+!exec(compile(open(__import__('os').environ['FRRIE_A05_HELPER'], 'rb').read(), __import__('os').environ['FRRIE_A05_HELPER'], 'exec'), {'__name__': '__a05_post_mortem__'})
+q
