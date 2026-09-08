@@ -82,3 +82,56 @@ fresh adjacent admission and transport CR/LF stripping. No new source,cap,sample
 H remains responsible for its own independent load/trajectory and paired publication inside
 180 s. Root was notified immediately, without waiting for this documentation commit. No
 H−C result or full-panel acceptance is claimed until H's terminal artifacts are collected.
+
+## H and complete-panel acceptance — 2026-09-07
+
+Accepted handle `fsd_native_a01_p21_H_01770d8dd`, same node/cwd/source. Direct supervisor
+status: finished, exit0, pid2760429, tmux inactive. Fresh admission physical/effective
+available memory15,653,986,304 bytes, passed. Final runner JSON complete/failure null,
+complete_wall_seconds17.1826299969689, cap_breached false. Outer time18.19 s,
+peak RSS802072 KiB, exit0. Supervisor duration18 s is separately recorded.
+
+Collected H admission/time/summary/task.log/exit_code in the same local evidence parent;
+remote originals remain under the exact detached cwd and H supervisor directory. Local H
+`summary.json` holds the primary complete panel and all raw32-episode outcomes. No additional
+model/environment call, checkpoint load or scientific invocation occurred during collection.
+
+Read-only Python/NumPy assertions exited0. H object/mode/SHA/master/IDs/host, selected-path
+identity labels, CPU4/seed2, required four active modules and both ValueNorm stores match C.
+H has32 completed episodes,12,800 scoring steps,76,800 observations,400 agent batches,
+one construction/load and no training starts/transitions/optimizer steps. H's embedded G/C
+summaries equal their collected original dictionaries exactly; embedded H equals its parent
+base summary apart from the later wall-before-publication stamp, and contains no recursive
+panel. All full/post native measurement arrays have32 finite entries. Both role losses and
+conditional wrong rates match their definitions. H applied-renew counts equal G post-renew
+counts per episode, and G full-renew counts plus6 at t0. Internal t0 renewal counts are6.
+These counters accord with the reviewed public-mask intervention and retained internal D2.
+
+All four paired32-entry difference vectors were recomputed from retained episode returns
+and compared exactly; their means and sample standard errors (`ddof=1/sqrt(32)`) agree.
+The panel totals are96 completed episodes,38,400 scoring steps,230,400 agent observations,
+800 controller batches,400 Greedy batches,2 model constructions/loads,zero training starts,
+training transitions and optimizer steps. Complete outer policy walls are G0.27 s,C20.44 s,
+H18.19 s; sum38.90 s, within540 s, and each within180 s. This sum is not the study elapsed
+critical path, which includes inter-policy staging/admission/observation gaps. No aggregate
+CPU measurement is claimed. The publication lies inside H's measured invocation.
+
+Descriptive numerical readback for DM intake, without selecting a scientific branch:
+
+| Paired quantity | Mean | Sample standard error |
+| --- | ---: | ---: |
+| H−C full | 0.2693489583333334 | 0.007149877611049748 |
+| H−C post | 0.2700240183792816 | 0.007167797103809271 |
+| G−H full | 0.16611979166666646 | 0.0030677688051983718 |
+| G−H post | 0.16402986633249772 | 0.0030754574488204237 |
+
+H mean post wrong-role reward loss is0.1640298663324979. Full per-episode values remain in
+the summaries; the table does not replace them or use agent steps as independent units.
+
+**Technical disposition:** complete panel conforms to the frozen native observation contract,
+with G's preserved/documented CR output-path transport deviation and verified byte-identical
+normalization. No unresolved dependent technical gap was found. Artifact staging identity
+still relies on Root's staged-byte record; successful load does not independently hash it.
+CM supplied acceptance to Root and the DM immediately. DM now owns original conditional-A
+reading, uncertainty/ceiling,brief/audit and any permitted next decision. No learning efficacy,
+training-seed generality,UAV entry,automatic successor or extra invocation is inferred here.
