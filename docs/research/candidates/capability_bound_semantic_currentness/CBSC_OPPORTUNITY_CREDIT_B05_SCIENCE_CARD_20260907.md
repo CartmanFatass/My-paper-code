@@ -219,3 +219,12 @@ unallocated cause/import series. Recommend/select **(a)** under P18 and standing
 object-tier delegation. Owner-delegated decision (unattended, 2026-09-03 instruction):
 (a). This is preparation within the accepted mechanism, with no direction-tier
 decision, Portfolio disposition or execution allocation. Owner flags: none.
+
+## P18 preparation boundary
+
+The [preparation intake](CBSC_OPPORTUNITY_CREDIT_B05_PREPARATION_INTAKE_20260907.md)
+accepts CM handoff `2d0f95f091e0f92394bd08535fba62566e9ecb30` as a precise
+SOURCE_REPAIR_NEEDED finding. The prospective seed and scientific rules above
+remain unchanged. No B05 literal or source is launch-ready, and no runtime call
+or implementation was made. The returned task is the bounded seed/identity
+correction followed by exact command binding, without an execution allocation.

@@ -82,5 +82,15 @@
     "verdict_text": "推荐接受前瞻B05卡，保留新种子和共同新环境，返回明确的种子及对象标识修正需求；本轮不运行。",
     "source": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_OPPORTUNITY_CREDIT_B05_SCIENCE_CARD_20260907.md"
   },
-  "starred": false
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-08T03:36:13+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/decisions/2026-09-03-unattended-delegation.md",
+      "record": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_OPPORTUNITY_CREDIT_B05_PREPARATION_INTAKE_20260907.md",
+      "state": "applied",
+      "summary": "P18 preparation completed with SOURCE_REPAIR_NEEDED. Prospective B05 seed 21223, shared observed CPython 3.12.3 runtime, unchanged paired learner/rules and costs are recorded. Accepted source still requires formal 21217 and B04 identity; return a bounded source correction and exact binding need. Zero code edits, target runtime calls or scientific execution; no new allocation or owner reply."
+    }
+  ]
 }
