@@ -1,8 +1,20 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-07 (P15 rolling refill; independent Luna/high Transport)
+Updated at: 2026-09-07 (P21 three-route refill; CBSC/VSP02 retained)
 
-Current commands: [P15 rolling refill](handoffs/2026-09-07-p15-rolling-refill-after-transport-split.md).
+Current incremental command: [P21 FSD/UCOPE execution continuations and FRRIE offline preparation](handoffs/2026-09-07-p21-fsd-ucope-frrie-continuations.md). Root reports two advancing chains and three exhausted returns. P21 restores three bounded native routes, with the named FSD panel and UCOPE two-pair allocations after ordinary code/card readiness; FRRIE prepares the offline original-source chain. Actual dispatch, launch and UAV entry require their recorded events.
+
+Retained incremental command: [P20 CBSC B05 source correction](handoffs/2026-09-07-p20-cbsc-b05-source-correction.md). P18 selected seed21223 but retained code accepts only B04 seeds; correct bounded seed/object plumbing while preserving numerical and historical behavior. No learner invocation is allocated.
+
+Retained incremental command: [P19 VSP02 family Convergence](handoffs/2026-09-07-p19-vsp02-family-convergence.md). Both accepted B01 prefixes remain within MEI; one direction-level consultation is authorized with complete archival/intake, zero new scientific execution and no presumed family disposition.
+
+Retained incremental command: [P18 CBSC fresh paired B preparation](handoffs/2026-09-07-p18-cbsc-fresh-pair-preparation.md). P17 established the declared acquisition/install/metadata path in 174.561 s with no learner exposure; prepare both new RAW/STRUCT arms on that explicit runtime. No learning invocation is allocated by P18. Other direction routes continue independently.
+
+Retained/previous incremental command: [P17 exact CBSC invocation and VSP02 master1117 pair](handoffs/2026-09-07-p17-cbsc-execution-vsp02-fresh-prefix.md). Accepted P16 engineering and VSP02 seed1103 intake now support the two named allocations; actual launches remain Root log facts. Other advancing routes continue independently. No lifecycle, priority or UAV-entry change.
+
+Previous incremental command: [P16 CBSC acquisition-command engineering](handoffs/2026-09-07-p16-cbsc-acquisition-command.md). CBSC P15 yielded at a concrete cross-node deadline/termination gap; P16 commissions bounded command engineering with zero actual acquisition or experiment allocation. Other P15 routes continue independently. No lifecycle or priority change.
+
+Retained commands: [P15 rolling refill](handoffs/2026-09-07-p15-rolling-refill-after-transport-split.md).
 Root reports all P14 chains returned/idle; comparison batch01 is complete and the accepted VSP02
 baseline is integrated on main. P15 dispatches VSP02 B01 readiness/exact one-pair continuation,
 UCOPE and FSD selected card/full-spec preparation with immediate next comparison capture, and

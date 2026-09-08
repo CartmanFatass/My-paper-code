@@ -277,6 +277,11 @@ When actual executor equals parent, use `stage_receipt` / `stage_blocker_receipt
 never send an app self-receipt. `execution_thread_id` identifies the actual executor. This is
 an exceptional same-task route, not the native-DM default: independent Transport sends to
 Root, which forwards to the original native DM. A local record is not remote delivery.
+During migration, an old Root-executed request already consumed by Root/native DM keeps
+this LOCAL route even if its stale outbox says PENDING. Use the existing receipt helper and
+actual historical executor. Native intake evidence does not establish an app Send: never
+invent SENT, a send timestamp or an attempt count merely to close a stale record. Preserve
+the intake/parent confirmation as reconciliation evidence separately from message attempts.
 
 After a response is durably archived and hash-verified, call
 `scripts/transport_contract.py:stage_receipt` to stage exactly one structured

@@ -104,6 +104,10 @@ The selected design is three policies × 32 episodes × H400, with 180 s per com
 and 540 s summed invocation wall as prospective bounds; load and batch-32 costs are unmeasured.
 No new score, stable superiority or training-seed uncertainty claim follows. Exact response
 and conformity intake: `pro_packets/20260907_native_renewal_convergence/CONVERGENCE_INTAKE.md`.
+P15 fixes that observation's definition in
+`FSD_NATIVE_RENEWAL_CONTROL_A01_SCIENCE_CARD_20260907.md` as a conditional A/RECON
+measurement, with the common CM spec beside it. No algorithm effect or scientific invocation
+is released by the card/spec preparation.
 
 ## Objects and their state (2026-09-05)
 

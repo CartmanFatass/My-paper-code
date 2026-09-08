@@ -1,0 +1,48 @@
+{
+  "counts": {
+    "arms": 2,
+    "new_training_seeds": 1,
+    "seed": 21223,
+    "rollouts_per_arm": 48,
+    "episodes_per_rollout": 8,
+    "primitive_steps_per_episode": 152,
+    "opportunities_per_episode": 24,
+    "adam_steps_per_arm": 768,
+    "train_episodes_per_arm": 384,
+    "train_transitions_per_arm": 58368,
+    "train_decisions_per_arm": 9216,
+    "eval_executions_per_arm": 64,
+    "eval_transitions_per_arm": 9728,
+    "complete_transitions_per_arm": 68096,
+    "paired_adam_steps": 1536,
+    "paired_eval_executions": 128,
+    "paired_complete_transitions": 136192,
+    "fixed_rule_tape_passes_once": 96,
+    "fixed_rule_action_scores_once": 2304,
+    "per_arm_cap_seconds": 600,
+    "sum_caps_seconds": 1200
+  },
+  "projection_seconds": {
+    "RAW": "159.38",
+    "STRUCT": "181.56"
+  },
+  "projection_source": "B04 card original twice-largest-completed-same-arm scenario; new-runtime timing unknown",
+  "latest_B04_RAW_outer_seconds": "53.46",
+  "existing_exposure": {
+    "source": "CBSC_OPPORTUNITY_CREDIT_B04_RESULT_EVIDENCE_20260906.md",
+    "initial_L2": "29.883094787597656",
+    "final_L2": "30.112651824951172",
+    "displacement_L2": "3.647372245788574",
+    "relative_displacement": "0.1220547025571909107597504041"
+  },
+  "MEI_absolute": "0.25",
+  "MEI_percent_of_theoretical_24": "1.041666666666666666666666667",
+  "exposure_line": "B05 seed 21223 plans two fresh real learner arms, each 48 rollouts / 768 Adam steps / 384 training episodes / 64 evaluations; existing B04 RAW with the same learner and 768 Adam steps moved L2=3.647372245788574 from initial L2=29.883094787597656 (12.2054702557%). This is prior movement evidence, not a B05 gain forecast. Current P18 host/model/optimizer/evaluation exposure=0.",
+  "actual_new_exposure": 0,
+  "stage": "prospective preparation only; source repair needed; no actual B05 execution",
+  "source_references": [
+    "docs/research/candidates/capability_bound_semantic_currentness/CBSC_OPPORTUNITY_CREDIT_B04_SCIENCE_CARD_20260906.md#exposure-cost-and-execution",
+    "docs/research/candidates/capability_bound_semantic_currentness/CBSC_OPPORTUNITY_CREDIT_B04_RESULT_EVIDENCE_20260906.md",
+    "docs/research/candidates/capability_bound_semantic_currentness/CBSC_LOCAL_ACQUISITION_P17_INTAKE_20260907.md"
+  ]
+}

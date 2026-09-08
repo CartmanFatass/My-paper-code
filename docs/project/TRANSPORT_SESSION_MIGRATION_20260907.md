@@ -66,6 +66,11 @@ preserve attempted delivery evidence. No replacement registry or retry machinery
    resolve uncertain delivery from authoritative state, never from elapsed time. A genuinely
    unfinished request completing under Transport sends to its unchanged parent, including Root
    for native authors, using the existing outbox key and single-attempt procedure.
+   If Root confirms it already consumed a historical Root-executed request with a stale
+   PENDING outbox, use the existing LOCAL receipt semantics: required=false, no destination
+   and zero app attempts. Native-DM intake is not evidence of an app Send; do not manufacture
+   SENT, sent_at or attempt_count. Keep the parent confirmation and intake commits as separate
+   reconciliation evidence. This distinction also applies when no new executor was adopted.
 
 ## Checks and activation
 
