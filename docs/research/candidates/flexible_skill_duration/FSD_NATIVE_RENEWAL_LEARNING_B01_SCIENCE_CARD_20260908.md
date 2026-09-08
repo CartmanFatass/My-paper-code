@@ -26,6 +26,28 @@ and [P34 DM intake and exact next allocation need](FSD_NATIVE_RENEWAL_LEARNING_B
 No real model/host/learner/evaluation or Pro invocation has occurred. The scientific
 definition, prediction and caps below are unchanged; runtime is still unallocated.
 
+P38 allocation/binding update (2026-09-08): [P38](../../portfolio/handoffs/2026-09-08-p38-fsd-learning-b01-execution.md)
+now allocates exactly one G/C/H panel on the unchanged reviewed source and keys.
+The [published Root handoff](FSD_NATIVE_RENEWAL_LEARNING_B01_P38_ROOT_HANDOFF_20260908.md)
+at `fef65041172d2a6e5de4c35c1b09d612b9d1f9ac` binds committed LF scripts, their
+verified remote bytes, the fresh exact-source cwd and once-only handles. Root
+launches/observes; the same CM collects every outcome and the DM completes intake.
+The outer OS caps include admission through closed-file publication: G60s,
+C900s,H900s; sum1860s. Actual acceptance and results follow Root's existing record.
+CM preparation ended with zero new scientific exposure and absent handles/root;
+transport/source checks and the reused P34 tests are not a learning result.
+
+At this object-tier boundary the options are (a) accept the conforming binding
+and execute the named P38 route, (b) return a concrete binding/integrity gap,
+or (c) add another probe or readiness requirement. Recommend/select (a): direct
+inspection of the published script literals and outer command confirms the
+source, keys, argv, complete caps and failed-arm independence; CM supplies the
+remote byte/cwd facts. No concrete gap was found. **Owner-delegated decision
+(unattended, 2026-09-03 instruction): (a).** Owner reviews were empty in the
+primary and direction checkouts; relevant audit owner cells remained empty.
+No new P1/P2 item is due for this ordinary object decision. No fourth comparison,
+retry, extra arm/seed/evaluation, cap increase, Pro Send or UAV change follows.
+
 Question: does a fixed public applied-renewal rule retain a useful native return
 difference after repeated real, from-scratch learning under that rule, against the
 same internally defined D2 learner which applies its own sampled mask? The public
@@ -220,7 +242,8 @@ completion guarantee. Historical G wall is .27 s, also only an anchor. The
 prospective 900/900/60 s limits are the selected willingness-to-spend bounds.
 Keep unknown work visible; do not add a cost probe, profile, A01 repeat or derive
 M from k_max, nominal high-level buffer size or `rows_M` without justification.
-There is no current execution allocation and no additional calibration gate.
+This preparation projection did not allocate execution; P38 now allocates the
+single panel above without changing this cost uncertainty or adding calibration.
 
 Later allocated execution uses `.codex/hmasd-compute.toml` remote_first on the
 enabled `wsl_4070` node, detached exact committed-SHA checkout and existing
@@ -230,7 +253,7 @@ no-accepted-remote-process/fresh-local-admission fallback is allowed. Each actua
 invocation has immediate physical and effective memory >=4 GiB admission on its
 execution node, joined to the runner by `&&`. Commit and push exact source first.
 
-Every invocation cap includes interpreter/import, configuration, all model and
+Every invocation cap includes admission, interpreter/import, configuration, all model and
 optimizer construction, real collection/update, independent endpoint evaluator
 and normalizer synchronization, required comparisons and publication. Nothing is
 moved to an uncharged initialization, follow-on aggregation or validation run.
