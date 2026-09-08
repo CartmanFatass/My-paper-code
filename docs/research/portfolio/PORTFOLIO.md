@@ -1,8 +1,10 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-08 (P43 FSD B02 panel allocation)
+Updated at: 2026-09-08 (P44 FSD post-B02 question assessment)
 
-Current incremental command: [P43 FSD B02 independent-pair panel](handoffs/2026-09-08-p43-fsd-b02-panel-execution.md). Accepted readiness atcc6365fff supplies the same-source770303/770304 G/C/H route. Bind and allocate one panel with complete60/900/900s caps and fresh per-invocation admission; CM collects and DM reads every outcome separately from B01. No automatic retry or successor.
+Current incremental command: [P44 FSD post-B02 question assessment](handoffs/2026-09-08-p44-fsd-post-b02-question.md). Two observed pairs support a recurring package advantage, with public G still ahead. Same DM identifies one decision-relevant bounded next preparation or proper-node question; no third pair, new card, code or Pro Send is allocated. Completed P43 contributes zero advancing chains; P44 counts only upon actual native acceptance, with other live chains retained by Root's inventory.
+
+Completed incremental command: [P43 FSD B02 independent-pair panel](handoffs/2026-09-08-p43-fsd-b02-panel-execution.md). Intakea8e6d5b31 accepts B02 H−C+.520390625, conditionalSE.007576081 and665.01s summed wall; B01 remains separate. Public G leads by.010846354 full. No stable-superiority, learned-renewal or UAV-entry claim follows; no third pair was selected.
 
 Completed incremental command: [P42 FSD B02 seed/input implementation](handoffs/2026-09-08-p42-fsd-b02-seed-implementation.md). Implementation and independent RNG/identity review are accepted;24 synthetic cases passed. P43 separately allocates runtime and launch binding.
 
