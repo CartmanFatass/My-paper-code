@@ -53,7 +53,7 @@ def project_root(tmp_path: Path) -> Path:
                 f'thread_id = "{SINGLETON_THREAD_ID}"',
                 'environment = "local"',
                 'model = "gpt-5.6-luna"',
-                'reasoning_effort = "xhigh"',
+                'reasoning_effort = "high"',
                 "",
             )
         ),
@@ -77,7 +77,7 @@ def upload_request(tmp_path: Path) -> dict[str, object]:
         "dispatch_mode": "REUSE_SINGLETON",
         "operator_reuse_required": True,
         "operator_model": "gpt-5.6-luna",
-        "operator_thinking": "xhigh",
+        "operator_thinking": "high",
         "prompt_path": str(prompt.resolve()),
         "reference_paths": [str(reference.resolve())],
         "source_thread_id": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
@@ -522,7 +522,7 @@ def test_validate_request_requires_operator_for_every_canonical_workflow(
         "dispatch_mode": "REUSE_SINGLETON",
         "operator_reuse_required": True,
         "operator_model": "gpt-5.6-luna",
-        "operator_thinking": "xhigh",
+        "operator_thinking": "high",
     }
     canonical.pop("operator_thread_id")
     with pytest.raises(ValueError, match="requires the configured Transport singleton operator_thread_id"):
@@ -613,7 +613,7 @@ def test_validate_request_enforces_canonical_single_body_attachment(
         "dispatch_mode": "REUSE_SINGLETON",
         "operator_reuse_required": True,
         "operator_model": "gpt-5.6-luna",
-        "operator_thinking": "xhigh",
+        "operator_thinking": "high",
         "operator_thread_id": SINGLETON_THREAD_ID,
     }
     canonical.pop("reference_paths")
@@ -900,11 +900,11 @@ def test_skill_contracts_encode_execution_owner_async_and_tab_boundaries() -> No
     outsource_text = OUTSOURCE_SKILL.read_text(encoding="utf-8")
 
     for phrase in (
-        "Root executes the complete transport",
+        "independent Luna/high Transport task executes",
         "scripts/materialize_packet.py",
-        "never use `INTERVAL=1` busy polling",
+        "without busy polling",
         "the tab lease remains active while generation is pending",
-        "The executor turn ending, a heartbeat wake returning, or a timeout is never",
+        "The executor turn ending, an observation pass returning, or a timeout is never",
         "request_id|conversation_binding_key|conversation_id|provider_url",
         "stage_receipt",
         "provider filename suffix or normalization",
@@ -1012,3 +1012,31 @@ def test_direct_transport_requires_owner_and_exact_caller(project_root, upload_r
     request["operator_thread_id"] = SINGLETON_THREAD_ID
     with pytest.raises(ValueError, match="exact source caller"):
         TRANSPORT_VALIDATE.validate(request, project_root)
+
+
+@pytest.mark.parametrize("blocker", [False, True])
+def test_native_author_receipt_after_transport_migration_returns_to_root(blocker: bool) -> None:
+    record = _record()
+    child = record["source_thread_id"]
+    root = record["parent_thread_id"]
+    record["operator_thread_id"] = root  # Immutable pre-migration handoff.
+    record["execution_thread_id"] = SINGLETON_THREAD_ID
+    assert child != root != SINGLETON_THREAD_ID
+    record["state"] = "SEND_UNCERTAIN" if blocker else "ARCHIVED"
+    if blocker:
+        contract.stage_blocker_receipt(record, "SEND_UNCERTAIN", "acceptance unknown")
+    else:
+        contract.stage_receipt(record, {"response_file": "response.md"}, "d" * 64)
+    receipt = record["return_receipt"]
+    assert receipt["status"] == "PENDING"
+    assert receipt["destination_thread_id"] == root
+    assert receipt["routing_mode"] == "PARENT_SESSION"
+    assert receipt["source_thread_id"] == child
+    assert record["operator_thread_id"] == root
+    contract.record_receipt_result(record, "SENT")
+    saved = dict(record["return_receipt"])
+    if blocker:
+        contract.stage_blocker_receipt(record, "SEND_UNCERTAIN", "same uncertainty")
+    else:
+        contract.stage_receipt(record, {"response_file": "response.md"}, "d" * 64)
+    assert record["return_receipt"] == saved

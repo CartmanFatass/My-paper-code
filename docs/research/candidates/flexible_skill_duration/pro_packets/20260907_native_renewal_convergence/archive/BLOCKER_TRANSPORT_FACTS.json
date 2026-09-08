@@ -1,0 +1,45 @@
+{
+  "schema_version": 4,
+  "request_id": "2026-09-07-fsd-native-renewal-convergence-01",
+  "workflow_node": "em_convergence",
+  "conversation_binding_key": "em:flexible_skill_duration:convergence",
+  "direction_id": "flexible_skill_duration",
+  "decision_authority": "pro_final",
+  "source_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "operator_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "requested_conversation_id": "6a9c2865-14a8-83e8-b556-e7f5836d9236",
+  "provider_url": "https://chatgpt.com/c/6a9c2865-14a8-83e8-b556-e7f5836d9236",
+  "visible_model": "6 Pro",
+  "underlying_model": "Latest",
+  "thinking_effort": "Pro, 5 of 5.",
+  "wait_status": "NATURAL_COMPLETION",
+  "observed_page_state": "complete assistant response; no active generation control",
+  "capture_method": "Copy response control followed by browser CUA clipboard read; raw UTF-8 response preserved",
+  "response_sha256": "7629a57a6d5dafa20c61fbaf57994594752da5d78e0551affe31dd41ba20f0b5",
+  "response_bytes": 592,
+  "assistant_response_kind": "DELIVERY_BLOCKED",
+  "send_evidence": {
+    "send_click_count": 1,
+    "url_observed": true,
+    "user_node_observed": true,
+    "attachment_observed": true,
+    "companion_prompt_exact": true
+  },
+  "delivery": {
+    "status": "BLOCKED",
+    "branch": "codex/fsd",
+    "delivery_commit": "e3cc2340e9a34b0ccf57129b4a2460c2f35e31e6",
+    "response_path": "docs/research/candidates/flexible_skill_duration/pro_packets/20260907_native_renewal_convergence/archive/RESPONSE.md",
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/10",
+    "response_readback": "404 Not Found",
+    "issue_comments": "empty"
+  },
+  "archive_paths": {
+    "prompt_file": "temp/sessions/hmasd-chatgpt-pro-transport/archive/flexible_skill_duration/2026-09-07-fsd-native-renewal-convergence-01/2026-09-07-fsd-native-renewal-convergence-01--flexible_skill_duration__00_PROMPT.md",
+    "manifest_file": "temp/sessions/hmasd-chatgpt-pro-transport/archive/flexible_skill_duration/2026-09-07-fsd-native-renewal-convergence-01/2026-09-07-fsd-native-renewal-convergence-01--flexible_skill_duration__PACKET_MANIFEST.json",
+    "response_file": "temp/sessions/hmasd-chatgpt-pro-transport/archive/flexible_skill_duration/2026-09-07-fsd-native-renewal-convergence-01/2026-09-07-fsd-native-renewal-convergence-01--flexible_skill_duration--attempt-01__02_RESPONSE.md",
+    "transport_fact_file": "temp/sessions/hmasd-chatgpt-pro-transport/archive/flexible_skill_duration/2026-09-07-fsd-native-renewal-convergence-01/2026-09-07-fsd-native-renewal-convergence-01--flexible_skill_duration--attempt-01__03_TRANSPORT_FACTS.json"
+  },
+  "captured_at": "2026-09-07T23:20:01.314471Z",
+  "archive_status": "ARCHIVED_BLOCKER"
+}

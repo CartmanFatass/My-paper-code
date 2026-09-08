@@ -184,9 +184,27 @@ Three real tasks support an observed task-specific comparison, not a general mod
 
 | Batch | New assignment / code spec / source | Baseline + Sol IDs | Other arm roots | State |
 | --- | --- | --- | --- | --- |
-| 01 | not yet captured | — | — | awaiting next new CM engineering assignment |
+| 01 | P14-VSP02-B-CARD-AND-CM-COMPARISON-01 / `a1b8c56f2a36e2027372bf578fc2646dfd57efe9` | `/root/vsp02_cm_baseline_b01`, `/root/vsp02_cm_sol_b01` (native); headless PIDs 11640/29924/22060; resolved `claude-opus-5` / `grok-4.6-build` / `google-antigravity/gemini-3.8-flash-high` | `temp/cm-model-comparison/20260907/batch-01/` | five arms returned; independently verified; baseline selected for normal VSP02 integration |
 | 02 | not yet captured | — | — | awaiting next new CM engineering assignment |
 | 03 | not yet captured | — | — | awaiting next new CM engineering assignment |
+
+### Batch 01 return (Root factual update)
+
+All five arms returned from the common source and prompt with zero scientific invocations. The
+independent verification at `temp/cm-model-comparison/20260907/batch-01/independent_verify/results.json`
+ran the same focused pytest and engineering-fixture/readback checks for every arm: baseline 15
+passed, Sol 11, Claude 40, Grok 18 and omp 14; all exits and readbacks passed. Codex cost
+accounting is preserved at `temp/cm-model-comparison/20260907/batch-01/outputs/codex-comparison/report.{md,json}`:
+baseline `gpt-6-astra`/medium used 1,639,962 tokens and 674.959s; Sol
+`gpt-5.6-sol`/high used 2,934,507 tokens and 1,242.481s (1.789x tokens, 1.841x duration).
+Headless process times were Claude 1,116.25s, Grok 1,187.282s and omp 415.157s. These are
+task-specific observations, not a general model ranking.
+
+Root selected the configured baseline arm for normal VSP02 integration after the independent
+checks. The other returns remain preserved comparison evidence. The omp return has a material
+clock/deadline implementation deviation recorded in the batch review and was not integrated.
+The integrated candidate has no scientific run or UAV entry; the three-batch comparison remains
+open until batches 02 and 03 are captured and returned.
 
 Ordinary capture/start/completion progress is log-only. Notify Portfolio for missing task/spec,
 unavailable requested model, a material comparability conflict, or the final three-batch result.

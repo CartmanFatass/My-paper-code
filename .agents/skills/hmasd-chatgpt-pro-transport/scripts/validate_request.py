@@ -52,10 +52,10 @@ def _singleton_thread_id(project_root: Path) -> str:
         raise ValueError("Transport singleton config must be schema 1, singleton, and active")
     if (
         config.get("model") != "gpt-5.6-luna"
-        or config.get("reasoning_effort") != "xhigh"
+        or config.get("reasoning_effort") != "high"
         or config.get("environment") != "local"
     ):
-        raise ValueError("Transport singleton config must pin gpt-5.6-luna/xhigh in the local project")
+        raise ValueError("Transport singleton config must pin gpt-5.6-luna/high in the local project")
     return validate_source_thread_id(config.get("thread_id"))
 
 
@@ -261,8 +261,8 @@ def validate(request: dict, project_root: Path) -> dict:
     if dispatch_mode == "REUSE_SINGLETON":
         if operator_reuse_required is not True:
             raise ValueError("REUSE_SINGLETON requires operator_reuse_required=true")
-        if operator_model != "gpt-5.6-luna" or operator_thinking != "xhigh":
-            raise ValueError("Transport singleton must use gpt-5.6-luna with xhigh reasoning")
+        if operator_model != "gpt-5.6-luna" or operator_thinking != "high":
+            raise ValueError("Transport singleton must use gpt-5.6-luna with high reasoning")
         if operator_thread_id != _singleton_thread_id(project_root):
             raise ValueError("operator_thread_id does not match the configured project Transport singleton")
 

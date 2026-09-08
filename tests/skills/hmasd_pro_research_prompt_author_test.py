@@ -72,7 +72,7 @@ def project_root(tmp_path: Path) -> Path:
                 'project_id = "77777777-7777-7777-7777-777777777777"',
                 'environment = "local"',
                 'model = "gpt-5.6-luna"',
-                'reasoning_effort = "xhigh"',
+                'reasoning_effort = "high"',
                 "",
             )
         ),
@@ -87,9 +87,9 @@ def _render(renderer, request: dict[str, object], project_root: Path, out_dir: P
     return json.loads((out_dir / "HANDOFF.json").read_text(encoding="utf-8"))
 
 
-def test_root_author_executes_locally_without_self_dispatch(project_root: Path, tmp_path: Path) -> None:
+def test_operator_author_executes_locally_without_self_dispatch(project_root: Path, tmp_path: Path) -> None:
     config = project_root / ".codex/hmasd-transport.toml"
-    config.write_text(config.read_text() + '\nexecution_owner = "root"\n')
+    config.write_text(config.read_text() + '\nexecution_owner = "transport"\n')
     request = _request()
     request["source_thread_id"] = SINGLETON_THREAD_ID
     request["parent_thread_id"] = SINGLETON_THREAD_ID
@@ -456,7 +456,7 @@ def test_handoff_reuses_the_project_transport_singleton(
     assert handoff["operator_thread_url"] == f"codex://threads/{SINGLETON_THREAD_ID}"
     assert handoff["return_receipt_thread_id"] == handoff["parent_thread_id"]
     assert handoff["operator_model"] == "gpt-5.6-luna"
-    assert handoff["operator_thinking"] == "xhigh"
+    assert handoff["operator_thinking"] == "high"
     assert "operator_bootstrap_prompt" not in handoff
     for legacy_field in (
         "transport_operator_thread",
@@ -683,7 +683,7 @@ def test_author_skill_closes_the_dispatch_sequence_and_keeps_pro_transport_separ
     # execution is exercised separately. Old skill-layout phrases are not behavior.
     assert handoff["dispatch_required"] is True
     assert handoff["operator_model"] == "gpt-5.6-luna"
-    assert handoff["operator_thinking"] == "xhigh"
+    assert handoff["operator_thinking"] == "high"
     assert handoff["dispatch_mode"] == "REUSE_SINGLETON"
     assert handoff["operator_thread_id"] == SINGLETON_THREAD_ID
 
@@ -824,3 +824,16 @@ def test_caller_and_workflow_node_must_match(
 
     with pytest.raises(renderer.PacketInputError, match="requires caller_role"):
         renderer.validate(request, project_root)
+
+
+def test_root_dispatches_to_independent_transport_without_model_override(project_root: Path, tmp_path: Path) -> None:
+    request = _request()
+    request["source_thread_id"] = "01a07249-b095-7821-8ce2-e9c32ba85267"
+    request["parent_thread_id"] = request["source_thread_id"]
+    handoff = _render(_renderer(), request, project_root, tmp_path / "separate-transport")
+    assert handoff["dispatch_mode"] == "REUSE_SINGLETON"
+    assert handoff["operator_thread_id"] == SINGLETON_THREAD_ID
+    assert handoff["operator_thread_id"] != handoff["parent_thread_id"]
+    assert handoff["operator_thinking"] == "high"
+    assert handoff["dispatch_required"] is True
+    assert "omit model/thinking" in handoff["dispatch_instruction"]

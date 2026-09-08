@@ -84,6 +84,27 @@ with distinct informative outcomes, strongest legal null and honest exposure/cos
 no prior positive result, publicgreedy superiority or new C-time gate. Full exact archive and
 applied intake: `FSD_POST_E4_CONVERGENCE_INTAKE_20260905.md`. ACTIVE/HIGH unchanged.
 
+## Native-renewal Convergence boundary (2026-09-07)
+
+**PRO_FINAL selects one fixed-checkpoint native-control re-entry.** The ordinary fixed-K2
+policy-gap learning branch above remains paused. The selected question compares intact D2
+(C), the same checkpoint with only applied host renewal replaced by the public flag after
+reset (H), and GreedyOnPublicState (G), on fresh episodes of the original large corridor.
+H retains its own internal skills, recurrence and resulting trajectory; this is not
+synchronized D2 interruption or new learning evidence. No recast, training, invocation or
+Portfolio change is allocated by this direction decision.
+
+P13's source-supported native-action/state path and accepted large seed 2 checkpoint justify
+this limited question. Small seed 2 / E2 support, all six competent losses and E4's public-null
+explanation remain. Actor/representation quality, altered trajectories, recurrence, team
+interference and prior optimizer exposure remain unseparated. The next discriminator is
+paired native H−C return alongside G−H and H's eligible wrong-role service loss, conditional
+on this outcome-informed checkpoint selection. Full/post-reset returns remain distinct.
+The selected design is three policies × 32 episodes × H400, with 180 s per complete policy
+and 540 s summed invocation wall as prospective bounds; load and batch-32 costs are unmeasured.
+No new score, stable superiority or training-seed uncertainty claim follows. Exact response
+and conformity intake: `pro_packets/20260907_native_renewal_convergence/CONVERGENCE_INTAKE.md`.
+
 ## Objects and their state (2026-09-05)
 
 | Object | State | Record |
