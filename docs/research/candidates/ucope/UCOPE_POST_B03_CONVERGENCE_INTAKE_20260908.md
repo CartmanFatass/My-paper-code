@@ -186,3 +186,60 @@ the selected budget, with all T/G/H contrasts, signs and conditional uncertainty
 The claim ceiling is preliminary package performance on one task/fit: no stable
 superiority/harm, conditioning causality, pure-information value, tuned headroom,
 transfer, C promotion or whole-direction disposition.
+
+## 7. Implementation intake and source binding — 2026-09-08
+
+The same CM delivered accepted source
+`7693b7af6b7d89cdaa028659d606a37dee9eb68e` and the
+[technical record](UCOPE_UAV_MOTION_PREFIX_B04_TECHNICAL_ACCEPTANCE_20260908.md)
+at `dc7a0c5d929b9c3c5440d4ab4c5e35fc27149e46`. I inspected all six changed
+production/test paths against the committed card/spec, then read the full
+technical record, actual passing supervisor runner/log/status, staging facts
+and final independent-review conclusion. No source change was needed at DM
+acceptance. I did not repeat the suite, reviewer commands or scientific work.
+
+The delivered code matches actual detached stored-command conditioning,
+opening-mask selection before forward, T-only b+12 initialization, common RNG
+isolation and B04 identity. The existing collector/update tests exercise true
+hold ownership, conditional density/gradient and exact opening-row counts;
+fake workload tests retain final reset/config/primary associations. New-head
+exposure separately identifies hidden/final layers and uses null relative
+displacement at zero initial norm. Learner/native/environment/reward/critic
+code is unchanged. Non-test diff+68/−23, runner54 lines, scope§4 none.
+
+The first suite had40 passes/31 setup errors because pytest's base-temp parent
+was absent (2.90s external); one intervening suffix02 launcher referenced an
+absent cwd and exited before pytest. Correcting the command setup on unchanged
+source produced **71 passes in1.75s pytest/2.14s external**, peak528820KiB,
+exit0, finished/inactive supervisor. Cumulative actual directory wall **5.04s**
+is within300s. Local encoding/LF staging failures, both test/command failures
+and the harmless cache configuration warning remain in CM evidence; none is a
+native negative. Independent review found no material finding or unresolved
+acceptance gap. No standalone smoke, warm-up, pilot, profile or scientific
+invocation occurred. Tests used authorized tensor/synthetic boundaries; they
+do not establish the new head's real7201 learning or performance.
+
+Current main ROOT_OPERATIONS's exact-command section requires the CM-supplied
+committed command. A same-CM mechanical continuation supplied it at
+`3327f1d2e22191d6560e7c73a4b77c6835c08f01`, without code/test/admission/scientific
+execution. Its actual local `submit.ps1` and remote729-byte LF wrapper were
+nonexecutingly syntax-checked, with matching byte digests. I read those files
+and raw command facts. CM twice observed exact source/clean cwd, no prospective
+7201 handle and no scientific output; Root must reconcile intervening state.
+The exact detached test checkout is now retained for the imminent selected
+7201 run. Its cleanup owner/event is Root, after terminal artifacts plus CM
+collection and DM intake are archived. No new transfer/worktree is needed
+when its actual source still matches. The authoring checkout/index was released
+clean at3327f1d2e. Current owner reviews remain empty.
+
+**Decisions this implementation intake produces:** (a) accept the actual
+changed-boundary evidence and use the selected one-pair route; (b) require
+another smoke/pilot or expand the comparison. Recommend(a).
+**Owner-delegated decision (unattended, 2026-09-03 instruction): (a).**
+This is an object-tier technical acceptance/source-binding decision, with
+no new owner-console item or empirical brief. Card§§1–6, predictions and all
+scientific counts/caps remain frozen atc54d8d940. Accepted execution source
+remains7693b7af6, not a later documentation-only commit. The
+[Root handoff](UCOPE_UAV_MOTION_PREFIX_B04_P61_ROOT_HANDOFF_20260908.md) supplies
+the exact command/handle and same-CM collection route. No7201 result is yet
+observed, and every eventual outcome ends this allocation.
