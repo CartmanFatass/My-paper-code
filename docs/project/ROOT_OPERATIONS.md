@@ -121,16 +121,8 @@ wait, service available returns, integrate the needed bounded delivery and dispa
 follow-on; request an exhausted slot's replacement immediately. Portfolio supplies incremental
 commands without waiting for all directions. Keep unrelated native work, experiments and
 accepted Pro generation advancing. Wait for the first event for at most 60 seconds, then
-service new events before another observation pass. Long integration/comparison work
+service new events before another observation pass. Long integration work
 yields at recoverable boundaries; Transport's browser work never locks Root's event loop.
-The final CM comparison may require all arms; other direction routes do not depend on it.
-
-During the three CM comparison batches, apply CM_MODEL_COMPARISON_20260907.md at every new CM
-assignment, including those forwarded by active DMs and those using an existing CM. Root directly
-captures and dispatches eligible work before coding; it does not wait for Portfolio to notice a
-new agent. Record batch assignment or a concrete exclusion once in the existing log. A helper
-being installed is not proof that this dispatch trigger ran. Report the requested first accepted
-five-arm batch once with actual identities; until then the correct state is no batch started.
 
 Use [hmasd-loop-dispatch](../../.agents/skills/hmasd-loop-dispatch/SKILL.md), Root section,
 when receiving commands, native returns, failed dispatches or vacancies, including after
@@ -148,25 +140,24 @@ itself. A native DM with Root as app parent receives its result through native c
 
 ### Report events
 
-For the next three new CM engineering tasks, apply
-`CM_MODEL_COMPARISON_20260907.md` before implementation starts: identical code spec and source,
-isolated model/client arms, Codex token/time collection. Existing tasks are not replayed.
-
 Use the single **Send/no-send conditions** section in SIBLING_COMMUNICATION.md.
 A new task gap includes its evidence and actual working-set delta; routine events and
 unchanged pending requests stay in the log. The routing responsibilities below do not
 create additional notification exceptions.
 
-Missing scope, next-task choices, authorization/skill applicability, transport/tool permissions
-and scheduling gaps route from Root to Portfolio first, with the affected action, evidence and
-existing authority. Root does not ask DM to invent the missing command or approve the workflow.
-Portfolio handles the planning question and may assign a bounded scientific/technical inquiry;
-DM retains object-tier decisions inside its assigned task and CM ordinary in-scope repair.
-Root also sends a prompt repair request for an unresolved execution, input, access/tool or
-uncertain-state problem outside its assigned repair path. Portfolio arranges the bounded fix
-and returns the next step; routine-message filtering must never suppress this help channel.
-This is not a new approval gate for accepted work, nor authority for Portfolio to bypass a real
-runtime restriction or grant permission reserved to the owner. Unrelated authorized work continues.
+OWNER_DIRECT 2026-09-08: Root owns the delegated direction task through acceptance and
+authorized continuation. On a direction-local return, resume the original DM; the DM owns
+object decisions, proper-node questions and CM implementation/repair. Root integrates accepted
+work and handles exact execution/Transport routing. A complete selected card/specification
+continues to CM through its DM; missing committed dependencies are ordinary source integration
+when the exact inputs are known. Child completion or forwarding is not the parent deliverable.
+
+Portfolio is needed for a working-set replacement, cross-direction choice, or concrete scope,
+authority or resource conflict beyond that DM/CM route. An omitted intermediate instruction,
+ordinary technical failure or need to resume the DM does not create that conflict. Root first
+uses the existing responsible DM/CM and sends Portfolio only the unresolved issue that requires
+Portfolio action. Explicit scientific caps, actual tool restrictions, uncertain acceptance and
+owner-only decisions remain binding; no recipient can waive them. Independent work continues.
 
 ## Goal-driven observation
 
@@ -187,7 +178,8 @@ evidence with an explicit observation handover, without a replacement scheduler.
 Each Root observation pass reads current assigned experiment rows, batches independent
 supervisor checks, services received Transport/native events, and applies the dispatch skill.
 Transport performs its own due Pro reads. Root executes remaining explicit commands and return
-routes; unlisted actions go to Portfolio. Historical handles/requests are not adopted by scanning
+routes; direction-local continuation returns to its DM, while choices beyond that authority go
+to Portfolio. Historical handles/requests are not adopted by scanning
 archives. Reuse the owner's goal; no new scheduler, polling task or replacement goal is created.
 
 Owner pause changes the affected work first while preserving accepted-process observation and
