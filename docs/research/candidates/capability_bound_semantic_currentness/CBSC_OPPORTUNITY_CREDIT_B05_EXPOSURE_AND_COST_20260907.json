@@ -38,8 +38,19 @@
   "MEI_absolute": "0.25",
   "MEI_percent_of_theoretical_24": "1.041666666666666666666666667",
   "exposure_line": "B05 seed 21223 plans two fresh real learner arms, each 48 rollouts / 768 Adam steps / 384 training episodes / 64 evaluations; existing B04 RAW with the same learner and 768 Adam steps moved L2=3.647372245788574 from initial L2=29.883094787597656 (12.2054702557%). This is prior movement evidence, not a B05 gain forecast. Current P18 host/model/optimizer/evaluation exposure=0.",
-  "actual_new_exposure": 0,
-  "stage": "P28 exact pair allocated; zero actual B05 calls at allocation record",
+  "actual_new_exposure": {
+    "RAW_candidate_invocations": 1,
+    "STRUCT_candidate_invocations": 0,
+    "complete_paired_observations": 0,
+    "durable_RAW_rollouts": 24,
+    "durable_RAW_adam_steps": 384,
+    "durable_RAW_training_episodes": 192,
+    "durable_RAW_training_transitions": 29184,
+    "durable_RAW_training_decisions": 4608,
+    "work_beyond_durable_prefix": "unknown"
+  },
+  "actual_new_exposure_at_P18": 0,
+  "stage": "P28 incomplete RAW signal11/exit139; STRUCT uninvoked; route exhausted",
   "stage_at_P18": "prospective preparation only; source repair needed; no actual B05 execution",
   "p20_source_binding": {
     "source_sha": "d2753be86c12bfa63c404ac2cac513b914371115",
@@ -58,6 +69,25 @@
     "source_sha": "d2753be86c12bfa63c404ac2cac513b914371115",
     "actual_candidate_calls_at_selection": 0,
     "new_readiness_or_probe_calls": 0
+  },
+  "p28_result": {
+    "evidence_sha": "5de24ff9ae56647f1d91d20b866fa88778536567",
+    "root_evidence_integration_sha": "197ed1c8c6e6c756e805ff78b1481a86397e48e9",
+    "handle": "cbsc-b05-raw-20260907",
+    "signal": 11,
+    "exit_code": 139,
+    "complete_outer_wall_seconds": "39.83",
+    "peak_rss_kib": 849140,
+    "adjacent_admission_passed": true,
+    "physical_available_bytes": 15647051776,
+    "effective_available_bytes": 15647051776,
+    "initial_evaluation_executions_inferred_from_source_order": 32,
+    "initial_evaluation_scores_published": false,
+    "final_RAW_evaluation_completion": "not established",
+    "final_RAW_summary_available": false,
+    "paired_primary_available": false,
+    "cause": "unknown",
+    "new_retry_or_diagnostic_calls": 0
   },
   "source_references": [
     "docs/research/candidates/capability_bound_semantic_currentness/CBSC_OPPORTUNITY_CREDIT_B04_SCIENCE_CARD_20260906.md#exposure-cost-and-execution",

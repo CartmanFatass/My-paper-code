@@ -16,12 +16,13 @@ The [P17 intake](CBSC_LOCAL_ACQUISITION_P17_INTAKE_20260907.md#concrete-next-tas
 established one actual metadata-ready path. P20 at
 `23d0f55983f31e58efe2e5ace5e228451fb2d49b` subsequently authorized the bounded
 seed/object correction and focused inert checks. Current stage is
-**P28_PAIR_ALLOCATED** after source readiness and the exact P28 allocation below.
+**P28_INCOMPLETE_RAW_STRUCT_UNINVOKED** after the exact P28 allocation below.
 Root integrated the source and the
 [source-correction intake](CBSC_OPPORTUNITY_CREDIT_B05_SOURCE_CORRECTION_INTAKE_20260907.md).
 Actual acquisition, installation, target-runtime probe and scientific calls under
-P20 remain zero. P28 now allocates the two fresh arms; it never reuses P17's
-ended cap or treats fixture checks as a learner run.
+P20 remain zero. P28 invoked RAW once and stopped its dependent STRUCT after the
+failed RAW terminal; its result boundary is recorded below. It never reuses
+P17's ended cap or treats fixture checks as a learner run.
 
 Question: with both arms on that declared runtime, does STRUCT improve final
 update-48 native return over RAW, and how do both compare with REQUEST_ONLY?
@@ -283,3 +284,22 @@ preparation stop; (c) add a readiness or diagnostic series. Recommend/select **(
 Owner-delegated decision (unattended, 2026-09-03 instruction): (a). No owner review
 or audit override required a change at this boundary; no new direction or
 Portfolio disposition is made.
+
+## P28 observed result boundary — 2026-09-07
+
+The [E0 evidence](CBSC_OPPORTUNITY_CREDIT_B05_RESULT_EVIDENCE_20260907.md),
+`5de24ff9ae56647f1d91d20b866fa88778536567`, and
+[scientific intake](CBSC_OPPORTUNITY_CREDIT_B05_INTAKE_20260907.md) record one
+RAW invocation at source d2753be86, signal 11 / exit 139, 39.83 seconds and
+849140 KiB peak RSS. Fresh memory admission passed. The initial checkpoint
+records B05/seed21223/the selected runtime; 24 complete update rows preserve
+384 Adam steps, 192 training episodes, 29184 transitions and 4608 decisions.
+These are the durable prefix, with later unrecorded work unknown. The initial
+evaluation is implied by source ordering; its returns are unavailable.
+
+No RAW final summary/checkpoint or paired primary exists. STRUCT was not invoked
+under the existing integrity stop, independently of score. The prediction is
+unscorable, and missing outcomes are not zero effects. P28's route is exhausted;
+no retry, diagnostic, new source work or further allocation follows from this
+record. Cause remains unknown. The original question, MEI, exposure plan and
+reading rules remain preserved; this is no mechanism-negative or UAV result.
