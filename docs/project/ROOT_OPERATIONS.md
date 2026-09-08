@@ -83,8 +83,12 @@ local pushes. Extra delivery branches need a concrete special isolation reason; 
 temporary. Existing accepted requests retain their bindings through archival/intake or explicit
 obsolete-request resolution. One completed Pro round does not retire a shared branch still in use.
 At completion Root integrates accepted commits, preserves other unique commits and dirty files,
-reconciles live writers/PRs/delivery dependencies, and retires obsolete local and remote names.
-Historical detached worktrees may retain evidence; retiring a branch does not delete their files.
+reconciles live writers/PRs/delivery dependencies, verifies recovery archives for unique commits
+and noncommitted evidence, then unregisters and removes obsolete worktree directories and retires
+obsolete local and remote names. A detached full checkout is not a recovery archive. Keep the
+shared direction checkout while in use; an extra retained checkout names its actual live
+dependency and cleanup owner/event in the existing return. Verify removed paths are absent both
+on disk and from `git worktree list` before reporting reclamation complete.
 
 ### Reconcile routing when branches are retired
 

@@ -387,11 +387,16 @@ Several sessions commit to the primary target concurrently. Rules for all of the
   Retire completed task branches after reconciling unique commits, live writers,
   open PRs and evidence links; preserve recovery refs before removing branch names. Existing
   same-direction authoring checkouts finish accepted work, then Root carries forward one at a
-  clean boundary and retires the others after reconciliation. Branch cleanup does not remove
-  worktree contents or evidence.
+  clean boundary and reclaims the others after reconciliation and verified preservation.
   Root owns reclamation at completion: integrate accepted work, preserve other unique commits
   and dirty contents with a recovery reference/backup, reconcile PRs and pending delivery, then
-  retire obsolete local and remote branch names. Unaccepted historical work is archived, not
+  unregister and remove obsolete worktree directories, then retire obsolete local and remote
+  branch names. Preserve unique commits and noncommitted evidence in a verified recovery archive
+  before removal; do not retain a full detached checkout merely as a backup. Confirm each removed
+  checkout is absent both on disk and from `git worktree list` before declaring cleanup complete.
+  A retained checkout needs an actual live writer, execution or delivery dependency and a named
+  cleanup owner/event in the existing return. Shared direction checkouts remain while in use.
+  Unaccepted historical work is archived, not
   merged merely to delete a branch. A necessary temporary branch names its concrete purpose
   and retirement event in the existing handoff; it is not retained for an already-finished role.
 - Stage by explicit path and commit by pathspec (`git add -- <paths>`; `git commit -- <paths>`).

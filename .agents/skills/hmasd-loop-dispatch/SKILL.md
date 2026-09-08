@@ -62,8 +62,11 @@ Use the existing five-item handoff, in ordinary prose:
   this continuation supersedes. Keep preparation-only limits on their own task.
 - **Return route:** name collection, integration, intake and already-selected follow-on actions.
   State real dependencies, such as technical artifact acceptance before the second frozen arm.
-  Root also reconciles finished temporary branches under AGENTS section 6 and retires their
-  local/remote names after preserving recovery and resolving any live delivery dependency.
+  Root also reconciles finished temporary checkouts under AGENTS section 6, verifies recovery
+  archives, unregisters and removes obsolete worktree directories, and retires local/remote
+  branch names after resolving live dependencies. Verify each removed path is absent on disk
+  and from `git worktree list`; any retained extra checkout names its live dependency and cleanup
+  owner/event. Keep the shared direction checkout while in use.
   Its reclamation return follows ROOT_OPERATIONS.md's branch-routing reconciliation: retained
   branch/checkout, affected request states and unresolved delivery dependencies. Portfolio
   refreshes current command locations; Root reconciles operational records before reporting
