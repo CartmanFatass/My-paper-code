@@ -1,6 +1,9 @@
 # CBSC P47 projection repair technical evidence
 
-Status: prospective minimal-prefix diagnostic; no production correction supported.
+**Fatal during TRAIN-tape construction; no production correction supported.** The
+minimal-prefix diagnostic failed before initial projection, model or optimizer
+initialization. The selected instrumentation comparison remains unanswered; a
+new earlier token-packing failure location is directly reportable.
 Authority: [P47 card](CBSC_P47_PROJECTION_REPAIR_CARD_20260908.md), question and preserved-semantics sections.
 
 The retained dirty test was preserved without edits in
@@ -52,7 +55,99 @@ It is the prior indexed diagnostic input, not retained P32 state.
 Cost: one original 416-tape setup and 32 x 2 x 152 = 9,728 adapter calls;
 82,688-byte post-projection comparison. No sweep. Prior complete-path wall7.23s
 is context; normal time remains uncertain, complete cap120s. Aggregate CPU is
-unmeasured; one invocation makes its summed wall equal its critical path.
+unmeasured. The single invocation wall equals its invocation-wall sum; complete
+engineering/study elapsed critical path, including staging/collection, is unmeasured.
 Post-learner publication is outside this zero-learning diagnostic.
-Raw launch/status/admission/log/results will be collected in the preservation
+Raw launch/status/admission/log/results are collected in the preservation
 root above. No historical RAW/STRUCT retry or scientific exposure is allocated.
+
+
+## Terminal observations and acceptance
+
+Executed source `ae9383512f7754813c4fcde8de86154a5b4daef4`, committed and pushed
+before launch. Staging exact source and reference copy/digest all exited0;
+configured interactive zsh printed gitstatus startup warnings but the exact-SHA
+worktree command completed. The scientific command used the non-login inner shell.
+Agent-task accepted one handle, PID2777970. Supervisor start/end were
+2026-09-08T16:11:36Z / 16:11:44Z; terminal failed, exit139, tmux inactive.
+GNU time: **7.37 seconds**, **615928 KiB peak RSS**, below the complete120s cap.
+Invocation-wall sum is7.37s; aggregate CPU and study elapsed are unmeasured.
+Adjacent admission captured16:11:36.758134Z, assessed16:11:36.758380Z,
+physical/effective available15641853952 bytes, floor4294967296, passed.
+
+The fatal stack (most recent first) reports enum.py1292 `value`, enum.py212
+`__get__`, token.py164 generator / `flag_values`, token.py251 `pack`,
+host.py522 generator / `_finish`, host.py595 `build_stochastic`, then
+run.py122 TRAIN-tape generator / `run_arm`. The full stack, 24-module extension
+list, original command and terminal footer remain in the copied supervisor log.
+No native writer attribution follows from the extension list or Python frames.
+
+Direct source ordering establishes that TRAIN construction was unfinished:
+completed TRAIN-tape count and faulting token/index are unknown. EVAL-tape
+construction, model initialization, optimizer initialization, initial projection,
+rule/policy score evaluation, rollout/learning, checkpoints and scientific
+publication had not been reached (counts zero by this source boundary).
+The fresh output directory is empty; its parent contains admission.json only.
+No input-equality, shape, work-total or diagnostic JSON assertion ran. Planned
+416 tapes /9728 adapter calls are not reported as completed work.
+
+Both terminal roots were copied successfully. Local collection assertions checked
+exit139, the measured wall below120, both memory floors, and admission-only output;
+`collection_facts.json` retains the extracted facts and count-inference basis.
+This is acceptance of the readable failure boundary, not completion of the
+projection/input comparison. Independent review is recorded in the
+[review counterpart](CBSC_P47_PROJECTION_REPAIR_REVIEW_20260908.md).
+
+## Concrete gap and handoff
+
+The actual public-byte export and indexed logging calls would run only after
+all tape construction and model/trainer setup. This failure occurred earlier.
+The minimal-reference argument handling and decision not to install the indexed
+wrapper already differ before TRAIN construction, so pre-failure interpreter/heap
+perturbations remain possible; neither export/logging nor its omission is isolated
+as a cause. It also
+shows that executing RAW FIFO projection and model/optimizer initialization is
+not necessary for this observed fatal event. It does not exclude import-time
+native state, interpreter state or other causes, and does not equate FRRIE/CBSC.
+
+Focused expansion into host._finish and its caller found ordinary Python token
+construction and codec packing, with address randomness supplied by the existing
+hashlib-based PRF. The implicated flag_values operation obtains fixed Enum field
+names and returns Python bool values; no concrete application buffer or lifetime
+defect was identified. Replacing Enum access, caching masks, changing the FIFO,
+or changing packages would currently be a speculative workaround rather than an
+evidenced correction. Production remains unchanged.
+
+Remaining gap: a corrupting operation / defect at the interpreter or earlier
+initialized import/tape-construction boundary has not been identified. The failed
+TRAIN token and episode index are not retained by this diagnostic. A next useful
+hypothesis concerns failure during codec/tape construction before the entire
+projection setup, rather than the removed pre-projection I/O. Root has this
+concrete earlier-boundary fact for coordinated shared-runtime investigation with
+FRRIE; CM does not duplicate its runtime work or change the shared environment.
+No identical repetition or additional target launch was made. DM owns intake and
+any follow-on scope/allocation; no P28/P32 clearance, paired result or learner
+retry follows from this record.
+
+## Next bounded offline observation (prospective)
+
+The new P47 crash generated
+`/mnt/c/Users/wu/AppData/Local/Temp/wsl-crashes/wsl-crash-1788883898-2777975-_usr_bin_python3.12-11.dmp`
+(509448192 bytes). Lowest-work next discriminator: inspect only this new saved
+process, recover original native signal frame and available Python codec locals.
+This asks whether the earlier packing failure exposes malformed token/Enum state
+or the previously seen interpreter failure context; it cannot identify a writer
+from a frame alone. None of the four previously examined cores is reexamined.
+
+One offline GDB invocation, no inferior execution/attach, no new tape, model,
+optimizer or target process. Reuse existing matching Python3.12 debug symbols at
+`/home/wu/hmasd-inputs/native-crash-static-20260908/python312-symbols/usr/lib/debug`
+and explicitly source the existing Python3.12 GDB helper. Disable automatic
+script loading and debuginfod. Show registers, bounded native backtrace,
+Python backtrace and available Python locals. No utility build/package operation.
+Use original wsl_4070, existing detached supervisor, exact published source cwd,
+adjacent memory admission and the same GNU-time TERM115/KILL5 envelope.
+Handle `cbsc-p47-offline-core-20260908`; output is its supervisor task.log and
+admission under the original P47 cwd's `test/p47_offline_core_20260908/`.
+Expected work is reading one 486 MiB saved core with bounded printed frames;
+normal cost unknown, capped120s; no sweep or new scientific exposure.
