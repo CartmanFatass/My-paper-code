@@ -1,8 +1,12 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-08 (P34 FSD native-renewal learning implementation)
+Updated at: 2026-09-08 (P36 CBSC native fatal-context observation)
 
-Current incremental command: [P34 FSD selected learning implementation](handoffs/2026-09-08-p34-fsd-learning-implementation.md). P30 supplies the complete accepted card/spec; the existing CM implements its bounded runner and synthetic checks with independent source review. Real model/learner execution remains unallocated.
+Current incremental command: [P36 CBSC native fatal-site context](handoffs/2026-09-08-p36-cbsc-native-fatal-context.md). P32 captured a Python projection callpath without a supported cause; check an already installed debugger, then prepare at most one120s native-context diagnostic. Missing capability yields a no-run dependency; no installation or source fix is allocated.
+
+Retained incremental command: [P35 FRRIE one scheduled stack](handoffs/2026-09-08-p35-frrie-scheduled-stack.md). A06 timed out inconclusively with no captured path; prospectively add one delayed active-stack report within one120s original-schedule diagnostic. Counts remain unknown and prior failures are not cleared. Other issued routes continue independently.
+
+Retained incremental command: [P34 FSD selected learning implementation](handoffs/2026-09-08-p34-fsd-learning-implementation.md). P30 supplies the complete accepted card/spec; the existing CM implements its bounded runner and synthetic checks with independent source review. Real model/learner execution remains unallocated.
 
 Retained incremental command: [P33 UCOPE agent-clipping successor card/spec](handoffs/2026-09-08-p33-ucope-agent-clipping-spec.md). P29 selects common per-agent clipping in both T/G within the opening-duration family; prospectively bind the two fresh masters and full code task before implementation. No scientific execution or additional UAV entry is allocated.
 

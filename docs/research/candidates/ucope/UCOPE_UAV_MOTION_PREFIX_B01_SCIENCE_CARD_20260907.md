@@ -320,6 +320,11 @@ B01/P21/P24 algorithms, predictions and result rules above remain unchanged.
 authorizes only this zero-exposure selection; the rationale and delegated
 decision are in [P24 intake §8](UCOPE_UAV_MOTION_PREFIX_B01_P24_INTAKE_20260907.md#8-p29-prospective-question-selection--2026-09-08).
 
+P33 subsequently fixes this proposal in the separate
+[B02 card](UCOPE_UAV_MOTION_PREFIX_B02_SCIENCE_CARD_20260908.md), with fresh
+masters 7001/7002 and its complete code specification. This dated P29 proposal
+and all B01 result definitions remain unchanged; no execution is allocated.
+
 **One common change.** T retains its single t0 velocity/duration {1,4}
 decision and exact hold/feedback behavior; G retains primitive-step feedback.
 Replace the team product ratio's clipping with a separate ratio for each
