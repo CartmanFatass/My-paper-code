@@ -1,0 +1,77 @@
+{
+  "id": "20260908-fsd-005",
+  "created": "2026-09-08T06:32:35-07:00",
+  "direction": "flexible_skill_duration",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "B03：同预算 H／真实 fair-D0 k5／G 的新训练对",
+  "context": "Claim: On one fresh training pair, the supplied public applied-renewal package may exceed an authentic fixed-clock k5 learner by more than .01 mean native reward after five learning rollouts.\nBinding MARL structure: (b) temporal abstraction or termination; each agent's internal skill/credit clock and physical lease-renewal clock determine its own multi-agent learning trajectory and native service opportunities.",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "当前已前瞻登记卡片与预测，保留全结果分支；后续只按单独任务实现和运行。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "下一个干净边界停止使用该新卡，保留旧证据与 P45 原文，不自动改选后继。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "按明确 owner 修改处理卡片；不回写历史结果或在未处理冲突时启动依赖工作。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "新卡落实已接受 P45 的真实固定时钟比较，代码变化与成本边界明确，当前零科学暴露且不添加更强证据前置条件。",
+  "evidence": [
+    "docs/research/candidates/flexible_skill_duration/FSD_NATIVE_RENEWAL_LEARNING_B03_SCIENCE_CARD_20260908.md",
+    "docs/research/candidates/flexible_skill_duration/FSD_NATIVE_RENEWAL_LEARNING_B03_CM_SPEC_20260908.md",
+    "docs/research/candidates/flexible_skill_duration/FSD_NATIVE_RENEWAL_LEARNING_B03_PREPARATION_INTAKE_20260908.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-08.md#L40",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否保留已按 P45 方向选择登记的 B03 前瞻新卡及同一 CM 的有限实现规格？",
+    "changes_if_approved": [
+      {
+        "target": "FSD_NATIVE_RENEWAL_LEARNING_B03_SCIENCE_CARD_20260908.md",
+        "from": "P45 已选择一次 H/真实 fair-D0/G 比较；尚无该对象卡片和数值 keys。",
+        "to": "登记 B03 训练770403/评价770404、五轮学习和一次终点、.01 MEI及全部结果分支；当前只完成准备，实施与运行须另有明确任务。"
+      }
+    ],
+    "if_refused": "在下一干净边界应用 owner 的 reject/revise 指令，保留 P45 完整裁决、旧结果和新卡历史；当前未运行，不以改 seed 或补试验自行替代。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/flexible_skill_duration/pro_packets/20260908_post_b02_convergence/archive/RESPONSE.md",
+        "quote": "B01/B02 已回答混合控制包相对内部 D2 控制的早期学习与再次出现问题，却仍未回答它相对实际固定时钟学习构造的同期性能问题。",
+        "why": "新卡精确落实已选择的有限比较，真实 D0 与 H 自己采样和学习，未加前置诊断。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/flexible_skill_duration/pro_packets/20260908_post_b02_convergence/archive/RESPONSE.md",
+        "quote": "公开规则已经解释主要原生机会，G 又在两组领先，即使 H 胜 D0，也未必值得把它发展为新的时长学习方法。",
+        "why": "保留 G 短缺和全部反证；一对结果不证明学会续约、稳定优势或 UAV 迁移。"
+      }
+    ],
+    "uncertainty": [
+      "新 D0 的五轮能力、实际 optimizer/segment 次数与完整成本未知。",
+      "新 card 的 H-D0>.01 与 G-H>0 只是低信心前瞻预测，尚无结果可核对。",
+      "内部时钟、公开规则、数据、credit/actor 和优化暴露没有被本比较因果分离。"
+    ],
+    "cost": {
+      "compute": "未来2 learners×5×16×400=64000训练 transitions，H/D0/G各32回合共96终点评价；完整 D0/H/G上限1200/900/60秒，总2160。当前新科学调用、模型/host、fixture、测试和实现均0。",
+      "owner_time": "异步查看；无需 owner 回复即可发布已委托的新卡。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing；后续 CM 实施和运行仍需 Portfolio 分别给出明确任务。"
+    },
+    "verdict_text": "按已接受的 P45 方向裁决，现将一次 H／真实 fair D0 k5／G 比较记为 B03：训练键770403、评价键770404，各 learner 五轮16×400，终点各32回合，完整上限1200／900／60秒。保留 .01 的正向、小差异、反向及不完整读法；只比较实际新训练对，不借旧 D0 成绩或追加试验。此处仅完成卡片、预测与 CM 规格，未实施或运行；普通家族暂停及全部正反证保持。",
+    "source": "docs/research/candidates/flexible_skill_duration/FSD_NATIVE_RENEWAL_LEARNING_B03_PREPARATION_INTAKE_20260908.md"
+  },
+  "starred": false
+}
