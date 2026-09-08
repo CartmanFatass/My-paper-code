@@ -32,13 +32,16 @@ remains dated provenance under the controlling evidence specification section 11
   The **2026-09-05 PRO_FINAL / PARK** of the same-draw retained-policy root-residual
   localization family and its numerical-locus dependency remains unchanged.
   See the [Convergence intake](UCOPE_UAV_INTERFACE_CONVERGENCE_INTAKE_20260907.md).
-- Latest bounded B observation: **2026-09-07 shared-data return-model B05, joint RM-A**;
-  two prospective 512-batch datasets gain a mean 0.002620157877604169 over BLIND and
-  IMMEDIATE-4. Dataset sample SD is 0.0002659131214081277; conditional mean MC SE is
-  0.0003805940070739763. Both acquire only at LINKED-p17_20-c9_100, with no additional
-  harmful purchase in this pair. B04's harmful acquisition/mixed outcomes, B02/B03
-  positives, B01 nulls and older adverse evidence remain separate.
-  This adds no direction-tier disposition or further invocation.
+- Latest bounded B observation: **2026-09-07 UAV motion prefix B01, joint UP**;
+  two prospective training pairs gain native T−G 0.006714032239188856 /
+  0.023720809005454126, mean **0.015217420622321492**, above MEI 0.01.
+  Pair-endpoint sample SD is 0.012025607177551996; joint conditional evaluation
+  SE is 0.007523816216520829. Actual UAV entry is established on its
+  [card §9](UCOPE_UAV_MOTION_PREFIX_B01_SCIENCE_CARD_20260907.md#9-observed-p21-completion-and-uav-entry--2026-09-07).
+  This supports the fixed-task fitted packages only. The first pair is within
+  MEI and 15/32 / 11/32 complete episode contrasts are adverse. No stable or
+  pure-information superiority, direction disposition or successor follows.
+  Historical finite-host B05 RM-A and the prior null/adverse results remain separate.
 - Historical discriminator science-card current-byte SHA-256:
   `e08744fa18d708c9ad570bdce8b71296407991a4f5f79d502d37330913435fd8`
 - Historical discriminator science-card canonical-LF object digest:
@@ -58,7 +61,9 @@ geometry, temporal smoothing and optimization remain unseparated explanations.
 The selected prospective MARL structure is partial observability in a fixed moving
 team. Actual service opportunity consequences replace no existing sensor bill:
 there is no asserted positive sensing fee or B05 count interface on this host.
-No UAV effect, tuned headroom, transfer or deployment claim has been observed.
+The first real UAV comparison now supports a preliminary package advantage at
+the selected task and budget. Tuned headroom, stable superiority, transfer,
+pure information value and deployment remain unestablished.
 
 ### Historical finite-renewal question
 
@@ -75,6 +80,46 @@ count. The direct-service alternative remains separated by the frozen
 `Gamma=I+D` decomposition and analytic `D≈-0.02` boundary.
 
 ## Current scientific position — 2026-09-07
+
+The fixed-five-UAV motion prefix B01 completes its two prospective training
+pairs, **6801 and 6802**, with joint **UP** under the original 0.01 MEI.
+Native T−G is 0.006714032239188856 / 0.023720809005454126, mean
+0.015217420622321492; endpoint sample SD is 0.012025607177551996 and
+conditional evaluation SE of the mean is 0.007523816216520829. The independent
+training unit is the pair, n=2. This is actual B UAV validation, with complete
+real learning and final native evaluation, not a transfer or stable-performance
+finding. See the [card](UCOPE_UAV_MOTION_PREFIX_B01_SCIENCE_CARD_20260907.md),
+[E0 result](UCOPE_UAV_MOTION_PREFIX_B01_RESULT_EVIDENCE_20260907.md) and
+[scientific intake](UCOPE_UAV_MOTION_PREFIX_B01_INTAKE_20260907.md).
+
+The strongest support is T's positive native pair means against the
+same-information stepwise recurrent PPO comparator, whose mean G−hover gains
+are 0.04243773060842434 / 0.009301378962311667. Five fixed local actors actually
+move, receive changing local information during their opening holds, and
+resume primitive feedback; native reward and training credit continue throughout.
+Observed T displacement over the first four steps exceeds G's in both pairs,
+while almost all of the joint return difference lies in the later 252 steps.
+This realizes the selected multi-agent partial-observation path without a
+new sensor bill or hidden information for treatment.
+
+The strongest current limits are a within-MEI first pair, a small uncertain
+generic-over-hover margin in the second, and adverse T−G returns in 15/32 and
+11/32 evaluation episodes. The MEI margin is smaller than conditional
+evaluation SE. T's observed-user count falls from t0 to t4 in the higher-gain
+pair; these opening snapshots alone do not explain both gains. Geometry, motion persistence,
+memory, action-sample exposure and optimization remain alternatives; the
+comparison does not identify information's causal contribution, a tuned
+generic baseline or measured headroom. Only one of three prospective predictions matches.
+
+The next useful discriminator is a bounded future comparison on two
+new independent training pairs with the same information and final evaluation,
+preserving every sign. Its purpose is to assess whether this package remains
+worth pursuing across newly trained policies; a complete causal diagnosis or
+exact policy maximum is not a prerequisite. The completed allocation itself
+supplies no further run. No tuned headroom record or new family decision is
+added, and the retained-policy numerical-locus family remains stopped.
+
+## Prior shared-data return-model observation — 2026-09-07 B05
 
 The shared-data return-model B05 completed the prospective datasets 6701 and 6702 at
 512 training batches each with the original full final evaluation. It receives **joint RM-A**:
@@ -100,13 +145,14 @@ into B05; no causal training-budget, architecture or precision effect follows.
 
 This is preliminary **finite-host** paid-information value. The binding structure remains
 systems / information flow; no multi-agent partial observability or non-stationarity is
-instantiated. There is no new tuned generic headroom record and no real UAV validation.
-The next discriminator is whether a source-defined UAV paid observation can change competent
+instantiated. At that finite-host intake there was no tuned generic headroom record or real
+UAV validation. Its next discriminator was whether a source-defined UAV paid observation could change competent
 native control and improve team return after its actual cost, while the no-purchase
 controller retains its free information. The inspected UAV base supplies velocity actions
 and automatically returned local observations, not an established B05 paid-count operation;
 the subsequent Convergence selects the narrower movement-mediated comparison above.
-Its actual observation use and native performance remain unmeasured. The retained-policy/
+The subsequent motion-prefix B01 above supplies the first actual UAV observation and native
+performance evidence at its separate B ceiling. The retained-policy/
 root-residual numerical-locus family remains stopped. See the [B05 intake §§5–7](UCOPE_SHARED_DATA_RETURN_MODEL_B05_INTAKE_20260907.md#5-what-b05-adds-and-what-remains-contrary),
 [original card](UCOPE_SHARED_DATA_RETURN_MODEL_B05_SCIENCE_CARD_20260907.md) and
 [complete result evidence](UCOPE_SHARED_DATA_RETURN_MODEL_B05_RESULT_EVIDENCE_20260907.md).
@@ -121,20 +167,20 @@ The primary is full-episode time-average native team reward, recovered from the 
 of base per-agent rewards rather than the adapter's additional averaging. The new
 MEI is 0.01 on that reward scale; the old finite-host 0.001 rules are unchanged.
 
-The strongest support is the accepted finite-host net-acquisition evidence together
-with the actual velocity/position/channel/local-observation/service chain. The strongest
-contradictions remain harmful extra acquisition, null learning outcomes and the absence
-of measured UAV information value or generic-controller competence. More information,
+At opening, the strongest support was the accepted finite-host net-acquisition evidence
+together with the actual velocity/position/channel/local-observation/service chain.
+The contradictions included harmful extra acquisition, null learning outcomes and the
+then-absence of measured UAV information value or generic-controller competence. More information,
 duration activation or a changed action is not a native benefit. Even a future positive
 comparison cannot isolate pure information value from direct motion, time structure
 or learner exposure. Above-MEI results with weak comparator or information evidence
 retain their numerical performance meaning with the corresponding interpretation limited.
 
-The next discriminator uses two independent training pairs and final sampled returns,
+The selected discriminator uses two independent training pairs and final sampled returns,
 with a fixed hover competence reference inside the same B. There is no separate
-headroom, exact-policy or cause-localization prerequisite. Its cost and implementation
-remain unmeasured, and no UAV experiment or formal validation entry follows from the
-decision alone. See the [immutable decision](pro_packets/20260907_uav_interface_convergence/archive/RESPONSE.md)
+headroom, exact-policy or cause-localization prerequisite. The decision alone established
+no UAV experiment or entry; the completed B01 and its intake above now supply that evidence,
+while the decision's attribution limits remain. See the [immutable decision](pro_packets/20260907_uav_interface_convergence/archive/RESPONSE.md)
 and [conformity/intake](UCOPE_UAV_INTERFACE_CONVERGENCE_INTAKE_20260907.md).
 
 ## Prior shared-data return-model observation — 2026-09-07 B04

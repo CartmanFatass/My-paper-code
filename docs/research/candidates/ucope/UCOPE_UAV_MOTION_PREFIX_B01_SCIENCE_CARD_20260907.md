@@ -96,3 +96,52 @@ B05's finite-host useful paid acquisition motivates this new question. B04's har
 ## 7. Deliverables and present handoff
 
 The [complete code spec](UCOPE_UAV_MOTION_PREFIX_B01_CODE_SPEC_20260907.md) and [five-item CM task](UCOPE_UAV_MOTION_PREFIX_B01_CM_TASK_20260907.md) bind all missing implementation choices, owned paths, exact original checks and current no-UAV boundary. The [preparation intake](UCOPE_UAV_MOTION_PREFIX_B01_PREPARATION_INTAKE_20260907.md) records the object choices, runtime evidence, owner item and Root return. Scientific result files will later follow the ordinary E0/card/intake route. No result or formal UAV entry is claimed by this preparation.
+<<<<<<< HEAD
+=======
+
+## 8. Current P21 execution allocation — 2026-09-07
+
+[P21's UCOPE continuation](../../portfolio/handoffs/2026-09-07-p21-fsd-ucope-frrie-continuations.md#ucope--accepted-uav-b-implementation-through-two-fixed-pairs), committed at `d3f03ffa4`, supersedes the historical P15 zero-invocation boundary in §§1,5,7 **only for the following two complete scientific pairs**. Scientific meaning, predictions, original reading rule, exposure, settings, information permissions and complete caps remain those in §§2–6 and the frozen CODE_SPEC at `f718134f210889ff14f07deb3846cde853abd7b4`.
+
+Run master **6801**, then after its CM technical acceptance run **6802 irrespective of the first score**. Each is one serial **T → G → H** invocation: 131,072 training team steps and 1,024 actual Adam calls per learned arm, 32 final sampled evaluation episodes for each T/G/H; fixed five UAVs, CPU FP32 learner, one scientific process/compute thread. Complete caps stay **1,800 s per arm, 3,600 s per pair, 7,200 s summed**; startup/common initialization is charged to T, and H plus pair publication to G. The second pair is already allocated, with no all-positive, MEI or competence prerequisite.
+
+The baseline implementation was committed at `78dd2a461e838b9d863b81ed9e2d5946d011f33a`. Its original 12 focused tests, 80-step/eight-update synthetic fixture and independent review provide bounded engineering evidence; no real UAV call or measured cap feasibility follows from them. The same CM supplies exact committed source, remote cwd, output roots, supervisor handle/literals and technical acceptance. Root integrates/pushes the named source, performs each fresh actual-node admission immediately before its runner in the detached supervisor command, launches and observes. A document-only descendant does not change the accepted source surface or scientific seed allocation.
+
+Root does not dispatch the second invocation until the first's technical integrity is accepted. Card-defined nonfinite, cap or scientific-integrity failures stop their dependent route and preserve independently trustworthy completed facts; an unallocated retry or unresolved scientific conflict returns through Root. No extra seed/evaluation, resumed learning, pilot, environment change, local fallback or automatic cap increase is released.
+
+Actual UAV-validation entry will be recorded with the accepted scientific invocation and observed UAV execution, linked to this card and Pro direction decision `426513b18b38b477dd255b3e8524424d8deb8a19`. This allocation and the prepared command alone are not entry. There is no promotion, successor or change to Portfolio lifecycle/priority in this release.
+
+## 9. Observed P21 completion and UAV entry — 2026-09-07
+
+Both allocated masters, **6801 and 6802**, completed at exact source
+`536949660fee3ab9ac92aba29c2c0455ffe9f6e1` on `hmasd-wsl-node`, with passed
+fresh admissions and terminal exit0. Actual total exposure is **573,440 UAV
+team steps, 4,096 Adam calls and 192 final evaluation episodes** across four
+real fits; all 2,240 training/evaluation episodes completed. The original
+counts, final-only selection, information/reward boundaries, MEI, predictions
+and reading rule above remain unchanged.
+
+The [complete E0](UCOPE_UAV_MOTION_PREFIX_B01_RESULT_EVIDENCE_20260907.md) and
+[scientific intake](UCOPE_UAV_MOTION_PREFIX_B01_INTAKE_20260907.md) accept
+**joint UP**: T−G endpoints 0.006714032239188856 / 0.023720809005454126,
+mean **0.015217420622321492**, endpoint sample SD 0.012025607177551996 and
+joint conditional evaluation SE 0.007523816216520829. This is preliminary
+fitted-package evidence at B, with the per-pair and adverse-episode limits in
+the intake; it is not stable superiority or pure-information attribution.
+
+**Actual UAV-validation entry is recorded for this B card.** Its first
+accepted scientific invocation, `ucope-uav-motion-prefix-b01-6801-p21-20260907`,
+began at **2026-09-08 04:15:06 UTC / 2026-09-07 21:15:06 PDT**, and completed
+286,720 observed UAV steps with actual learning/native evaluation by
+04:19:55 UTC. The exact first `env.step` clock is unlogged; supervisor start
+anchors the accepted invocation. This actual-execution evidence, linked to
+the Pro decision in §8, satisfies entry without treating preparation or
+synthetic checks as UAV work. The second allocated pair also completed.
+
+Summed external whole invocation wall is **575.24 s**, within the original
+complete caps; aggregate CPU/scratch are `resources_unmeasured`. The E0 retains
+6801's CR-suffixed remote output-path/collection correction separately from
+valid science. One of three prospective predictions matches; the owner's
+prediction is not taken (unattended). P21's allocation is complete; this result
+appendix grants no rerun, successor, new seed, promotion or Portfolio change.
+>>>>>>> 46cc2a1f9 (Record UCOPE UAV B01 UP intake and actual entry)

@@ -100,6 +100,14 @@
       "record": "docs/research/candidates/ucope/UCOPE_UAV_MOTION_PREFIX_B01_PREPARATION_INTAKE_20260907.md",
       "state": "applied",
       "summary": "Root在本卡提交或编码前告知FSD已占batch02，UCOPE改为batch03；统一科学规格、源码和原始检查不变，尚无UAV调用。"
+    },
+    {
+      "at": "2026-09-08T04:59:16+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/ucope/pro_packets/20260907_uav_interface_convergence/archive/RESPONSE.md",
+      "record": "docs/research/candidates/ucope/UCOPE_UAV_MOTION_PREFIX_B01_INTAKE_20260907.md",
+      "state": "applied",
+      "summary": "P21两对真实UAV训练已完成，按冻结规则接受联合UP：收益差0.0152174，条件评价SE0.0075238，n=2；实际入场由原Pro决策、卡第8节、source536949660及6801真实执行串联，575.24秒完整运行，26个负回合和旧反例保留。仅为有限任务与预算下的控制方案证据，不追加种子或运行；这记录现有委托的实际执行，不是所有者新回复。"
     }
   ]
 }
