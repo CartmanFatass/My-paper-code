@@ -1,8 +1,18 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-07 (P25 FSD Convergence; four supplied routes and one vacancy)
+Updated at: 2026-09-07 (P30 FSD selected learning card/spec)
 
-Current incremental command: [P25 FSD native-control Convergence](handoffs/2026-09-07-p25-fsd-native-control-convergence.md). One direction-level question addresses the completed conditional A evidence and paused learning family. Retain UCOPE P24, CBSC P20 and FRRIE P23; actual acceptance can advance four directions. VSP02 P19 ended its instantiated family with no successor; the fifth slot remains an explicit vacancy pending a concrete independent task, without lifecycle/priority change.
+Current incremental command: [P30 FSD native-renewal learning card/spec](handoffs/2026-09-07-p30-fsd-native-renewal-learning-spec.md). Complete P25 response/application now selects the narrow fresh C_train/H_train/G comparison; preserve the contradictory earlier delivery blocker. Prepare its card and full implementation spec with zero current code or scientific execution allocation.
+
+Retained incremental command: [P29 UCOPE opening-prefix question selection](handoffs/2026-09-07-p29-ucope-opening-prefix-reassessment.md). Completed P24 is WITHIN with retained6902 harm and generic-reference weakness; the same DM prepares one justified within-family amendment or a precise Convergence scope question. No new science or code is allocated. FSD delivery repair awaits its exact blocker archive; CBSC/FRRIE terminal intakes remain separate dependencies.
+
+Previous incremental command: [P28 CBSC B05 fresh RAW/STRUCT pair](handoffs/2026-09-07-p28-cbsc-b05-pair-execution.md). Accepted source/card/handoff are ready; allocate the exact21223 pair at600s complete per arm/1200s summed, with no extra readiness probe. Actual launches and outcomes remain Root execution facts.
+
+Retained incremental command: [P27 FRRIE first-exception capture](handoffs/2026-09-07-p27-frrie-first-exception-capture.md). P23 found no supported source correction; prepare an explicit bounded diagnostic input and run at most one120s original-schedule chain after acceptance. Nonreproduction does not clear P22. No new learning comparison or retry is allocated.
+
+Retained incremental command: [P26 UCOPE fresh-pair seed/aggregation correction](handoffs/2026-09-07-p26-ucope-fresh-pair-plumbing.md). Frozen source only accepts6801/6802; the same CM corrects bounded seed and pair metadata plumbing, then resumes the existing P24 allocation after accepted source/card bindings. No additional scientific budget or entry count is added.
+
+Retained incremental command: [P25 FSD native-control Convergence](handoffs/2026-09-07-p25-fsd-native-control-convergence.md). One direction-level question addresses the completed conditional A evidence and paused learning family. Retain UCOPE P24, CBSC P20 and FRRIE P23; actual acceptance can advance four directions. VSP02 P19 ended its instantiated family with no successor; the fifth slot remains an explicit vacancy pending a concrete independent task, without lifecycle/priority change.
 
 Retained incremental command: [P24 UCOPE two fresh UAV pairs](handoffs/2026-09-07-p24-ucope-fresh-uav-pairs.md). UCOPE has one formally entered B UAV direction under its decision/card/accepted invocation; two additional fresh training pairs are allocated after prospective seed/binding publication. FRRIE P23 continues; CBSC P20 actual dispatch is being reconciled, while latest FSD/VSP02 return references are requested. No pending intention is counted as advancing.
 

@@ -142,3 +142,168 @@ complete caps; aggregate CPU/scratch are `resources_unmeasured`. The E0 retains
 valid science. One of three prospective predictions matches; the owner's
 prediction is not taken (unattended). P21's allocation is complete; this result
 appendix grants no rerun, successor, new seed, promotion or Portfolio change.
+
+## 10. Prospective P24 fresh-pair continuation and P26 plumbing — 2026-09-07
+
+[P24](../../portfolio/handoffs/2026-09-07-p24-ucope-fresh-uav-pairs.md), full
+commit `63c3f6a9ae736e56146e62772278d414481e0dbb`, allocates exactly two
+additional fresh training-pair masters, now fixed as **6901 then 6902**.
+This is **outcome-informed B/EXPLORE continuation** selected after P21's joint
+UP; these fresh predictions and identities are recorded before either new
+output. No exact-word 6901/6902 match was found in the current UCOPE scientific
+and code records before this amendment; this is a bounded freshness check.
+P21's completed result, predictions, all adverse episodes and original UAV-entry
+chain in §9 remain intact. New pairs are additional observations of the same
+direction, not additional UAV entries or a new C object.
+
+The question is whether the optional opening-commitment package retains a
+native-return advantage across two newly trained pairs at the same task and
+budget, with G−H retained as competence context. All §§2–5 numerical, model,
+host, reward, information, history, hold, credit, RNG-domain, duration, endpoint,
+evaluation and MEI semantics remain unchanged except the expressly selected
+master values and the plumbing needed to propagate them. Common initial
+parameters/reset seeds still pair T/G within each master; optimizers, memory
+and on-policy trajectories remain separate. H remains zero velocity.
+
+Each new master keeps T → G → H, **131,072 training team steps / 1,024 actual
+Adam calls per learned arm**, and **32 final sampled evaluation episodes per
+policy**, CPU FP32 / one scientific process and compute thread. Master 6902
+runs only after 6901's CM technical acceptance, irrespective of its native
+sign, MEI branch, G−H or duration observations. Complete caps remain **1,800 s
+per learned arm, 3,600 s per pair, 7,200 s summed for P24**. Common startup is
+charged to T; H and pair publication remain within G. No phase, correction,
+script, checkpoint or evaluation slice resets a complete invocation's cap.
+
+**Prospective reading.** Apply §4's original two-pair mean, conditional SE and
+UP/WITHIN/DOWN/Partial rule to **6901/6902 only**. Preserve the separate P21
+6801/6802 primary and its original reading. Also report the four named
+training-pair endpoints descriptively with equal weight, sample SD (ddof=1),
+and conditional evaluation SE `sqrt(sum_s SE_s^2)/4` when all four are complete.
+That combined mean is a declared outcome-informed descriptive summary, not a
+replacement P21/P24 primary, prospective four-pair confirmation or a stable
+population conclusion. No agents/episodes/steps are added as training units.
+Missing primary values remain missing, with the applicable subset and
+dependent interpretation stated explicitly; no unobserved value becomes zero.
+
+**P24 predictions, before new output:**
+
+1. The new 6901/6902 joint reading is UP (subjective probability .60): the
+   original mean favors T, but its margin and training variation remain uncertain.
+2. Both new G−H pair means are positive (.60): there is prior evidence against
+   hover, with the weaker original margin retained.
+3. Each new T final sampled d4 frequency lies strictly between .1 and .9 (.80):
+   prior mixed use and the unchanged single-opening learner suggest continued
+   mixing, without a claim that mixing is beneficial.
+
+Owner prediction: **not taken (unattended)**. Score all outcomes; a missing
+dependent quantity is unassessable, not a forecast success. The earlier three
+P21 predictions are not changed or rescored against new data.
+
+[Computed exposure/cost](UCOPE_UAV_MOTION_PREFIX_B01_P24_EXPOSURE_AND_COST_20260907.json)
+binds the seed domains and dominant work: **2 pairs × 2 learned arms × 131,072
+training steps + 2 × 3 × 32 × 256 evaluation steps = 573,440 team steps**,
+**4 fits × 256 rollouts × 4 = 4,096 Adam calls**, 2,240 scored episodes, four
+constructor resets, 3,200 selected diagnostic frames / 6,400 source-index
+calls. H adds 64 evaluation episodes / 16,384 steps inside these totals.
+There is no nested policy/candidate/trajectory search or extra validation run.
+If both new pairs complete, P21+P24 describe four training pairs, eight fits,
+**1,146,880 team steps / 8,192 Adam calls / 4,480 scored episodes**.
+
+At the unchanged loop counts, a per-arm projection takes the largest observed
+P21 arm time, charging external-minus-runner time to T as common startup:
+**T 148.267067 s / G including H and publication 141.371892 s**, or
+**579.277918 s** across the two prospective pairs. This is a forecast from
+observed same-scale work, not a guaranteed bound; both arm projections are
+below the existing 1,800 s cap. P21 actual complete wall remains 575.24 s.
+The learner has 66,441 T / 66,311 G parameters and 1,024 positive-lr updates
+per fit; P21 observed total relative displacement 0.5183454–0.5983579 supports
+its ability to move at this budget. New actual exposure here is zero. No
+tuned headroom record exists; CPU/scratch remain unmeasured.
+
+**Source and current engineering boundary.** Historical source
+`536949660fee3ab9ac92aba29c2c0455ffe9f6e1` hardcodes real CLI and two-pair
+aggregation to 6801/6802. The [amendment/source-gap intake](UCOPE_UAV_MOTION_PREFIX_B01_P24_AMENDMENT_INTAKE_20260907.md)
+records that direct source finding and zero executed rejection. [P26](../../portfolio/handoffs/2026-09-07-p26-ucope-fresh-pair-plumbing.md),
+full commit `a8502f9a7af53a7854bbd964e85608f3c7f8ff01`, expressly supersedes
+P24's no-code-change boundary **only for seed/aggregation plumbing**. The same
+CM preserves original 6801/6802 and engineering9001, admits this declared new
+pair with actual Config/RNG propagation, rejects duplicate/mismatched/mixed
+inputs, keeps exactly two summaries and the same uncertainty arithmetic, and
+labels actual pair/card information truthfully. Four-unit descriptive analysis
+stays outside the two-pair runner. No new scientific parameter or learner,
+environment, optimizer, reward, evaluation or deadline change is authorized.
+
+Only focused boundary fixtures and independent scientific-boundary review
+are needed; **zero UAV/learner smoke or runtime/import probe**, and no fourth
+CM comparison. Engineering scope §4: **none**; existing §5 code/runner/test
+budgets remain. The corrected full source SHA and exact commands must be
+accepted, committed/pushed and bound before Root dispatches either pair.
+The amended card alone does not make the original CLI executable for P24.
+
+The intended node/interpreter remain `hmasd-wsl-node` /
+`/home/wu/.venvs/hmasd/bin/python`. Prospective detached cwd:
+`/home/wu/hmasd-worktrees/ucope-uav-motion-prefix-b01-p24-20260907`.
+Prospective handles are `ucope-uav-motion-prefix-b01-6901-p24-20260907` and
+`ucope-uav-motion-prefix-b01-6902-p24-20260907`; relative output roots are
+`temp/directions/ucope/exp/uav-motion-prefix-b01-<master>-p24-20260907`, each
+with `resource_admission.json`. These are bindings to prepare, not accepted
+handles or asserted-absent paths. CM retains P21's LF transport correction.
+Root performs a fresh physical/effective >=4 GiB admission immediately before
+each detached runner, observes accepted handles and returns original terminal
+facts to the same CM. Nonfinite/cap/integrity stops and dependency-specific
+partial reporting remain §8's rules. No local fallback, pilot, tuning, third
+new pair, retry, cap reset, promotion or automatic successor is allocated.
+
+**P26 source release, before P24 output.** The [readiness intake §6](UCOPE_UAV_MOTION_PREFIX_B01_P24_AMENDMENT_INTAKE_20260907.md#6-p26-correction-accepted-p24-ready-for-root--2026-09-07)
+accepts corrected full source `9c541a8047b8c33e90f09aa65e326180343a23a0`
+(containing this prospective amendment at8cb59913be). The exact
+[P24 handoff](UCOPE_UAV_MOTION_PREFIX_B01_P24_ROOT_HANDOFF_20260907.md) is
+committed at `4fdf6fb73c06d26fdb84a33b33edde6206c907cb`. Focused boundary
+fixtures20 passed in0.50 s and reused independent review found no material
+defect; no UAV/learner/import probe or admission was added. The declared
+6901/6902 route is ready for Root under existing P24/P26 authority and the
+unchanged stops above. Actual new exposure and accepted handles are still
+zero at this source release; all prospective predictions and reading rules
+above remain fixed.
+
+## 11. Observed P24 completion — 2026-09-07
+
+Both prospectively selected fresh masters **6901 and 6902** completed on
+`hmasd-wsl-node` at exact source
+`9c541a8047b8c33e90f09aa65e326180343a23a0`, with fresh passed admissions,
+terminal exit0 and intact primary/hover/diagnostics. Actual new exposure is
+**573,440 UAV team steps / 4,096 Adam calls / 192 final evaluation episodes**
+across four fits. All 2,240 episodes completed. Original sections and the
+prospective P24 prediction/reading rules remain unchanged.
+
+The [P24 E0](UCOPE_UAV_MOTION_PREFIX_B01_P24_RESULT_EVIDENCE_20260907.md) and
+[scientific intake](UCOPE_UAV_MOTION_PREFIX_B01_P24_INTAKE_20260907.md)
+accept **COMPLETE / WITHIN**: T−G endpoints
+**+0.043351866492163174 / −0.050365422532689566**, mean
+**−0.003506778020263196**, endpoint sample SD0.06626813058389298 and
+conditional evaluation SE0.007033641405302189. This applies §4 to the new
+pair only; a small joint mean coexists with large opposing fitted outcomes.
+It is not stable equivalence. G−hover is−0.02820381644235824 in6901 and
++0.017100937953799134 in6902; both comparator limitations and native harm
+remain in the record.
+
+The §10 four-pair **outcome-informed descriptive** mean is
+**+0.005855321301029148**, sample SD0.040359534081716275 and conditional
+evaluation SE0.005149755379587538. It replaces neither P21's original UP
+primary nor P24's fixed WITHIN rule and gives no prospective n=4 confirmation.
+All four pairs total1,146,880 UAV steps /8,192 Adam calls /384 final
+evaluation episodes. Historical finite-host results remain unpooled.
+
+T retains larger opening displacement and changed local inputs in both new
+pairs, including the loss. The full native outcome therefore remains the
+criterion; no pure-information, stable-superiority or tuned-headroom claim
+follows. One of the three P24 predictions matches; owner prediction is not
+taken (unattended). P24 summed whole invocation wall is564.93 s, within the
+unchanged caps; CPU/scratch remain `resources_unmeasured`. No scope §4 addition
+or §5 budget breach is reported.
+
+The P24 allocation is complete. The intake recommends reassessing this
+single-opening prefix before expansion and selects no new scientific
+invocation, amendment, family disposition, promotion or Portfolio change.
+P21's actual UAV entry in §9 remains established; two additional training
+pairs do not create another direction entry. B objects remain unconsumed.
