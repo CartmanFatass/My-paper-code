@@ -1,6 +1,8 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-08 (P50 staging repair and P51 MGTAP source-question refill)
+Updated at: 2026-09-08 (P50 staging repair, P51 MGTAP refill and P52 FSD decision)
+
+Current FSD return route: [P52 post-fixed-clock decision](handoffs/2026-09-08-p52-fsd-post-fixed-clock-decision.md) resumes the same DM after accepted complete B03 intake (`9392aafb3`). H−D0 +0.3928645833 supports a local package advantage while G−H +0.1152864583, weak actual D0 and unequal internal optimization exposure bound its meaning. The selected panel is answered. One proper-node next-object question and complete intake/preparation route are authorized with zero new scientific invocation; no repeated pair, cap change or UAV-entry claim follows. Reuse `codex-fsd` throughout.
 
 Current incremental refill: [P51 MGTAP native geometry question](handoffs/2026-09-08-p51-mgtap-native-geometry-question.md) reuses the existing `dm-n5-continue-20260904` checkout for one source-supported geometry/binding question on the accepted UCOPE native learner. The source already exposes relative geometry; no treatment gain, new B or UAV entry is presumed. A surviving question goes once to the proper MGTAP Convergence node, then through complete intake and any selected card/specification. FSD intake, UCOPE P50 and VSPC1 P49 intake continue independently. FRRIE/CBSC production repair and actual tool restrictions, plus RCLE's uncertain acceptance, remain named unresolved dependencies; no duplicated preparation or restricted operation is used to inflate the five-chain count.
 
