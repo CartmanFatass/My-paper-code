@@ -1,8 +1,10 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-07 (P19 VSP02 family Convergence; CBSC P18 retained)
+Updated at: 2026-09-07 (P20 CBSC B05 source correction; other routes retained)
 
-Current incremental command: [P19 VSP02 family Convergence](handoffs/2026-09-07-p19-vsp02-family-convergence.md). Both accepted B01 prefixes remain within MEI; one direction-level consultation is authorized with complete archival/intake, zero new scientific execution and no presumed family disposition.
+Current incremental command: [P20 CBSC B05 source correction](handoffs/2026-09-07-p20-cbsc-b05-source-correction.md). P18 selected seed21223 but retained code accepts only B04 seeds; correct bounded seed/object plumbing while preserving numerical and historical behavior. No learner invocation is allocated.
+
+Retained incremental command: [P19 VSP02 family Convergence](handoffs/2026-09-07-p19-vsp02-family-convergence.md). Both accepted B01 prefixes remain within MEI; one direction-level consultation is authorized with complete archival/intake, zero new scientific execution and no presumed family disposition.
 
 Retained incremental command: [P18 CBSC fresh paired B preparation](handoffs/2026-09-07-p18-cbsc-fresh-pair-preparation.md). P17 established the declared acquisition/install/metadata path in 174.561 s with no learner exposure; prepare both new RAW/STRUCT arms on that explicit runtime. No learning invocation is allocated by P18. Other direction routes continue independently.
 
