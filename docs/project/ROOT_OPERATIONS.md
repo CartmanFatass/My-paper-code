@@ -157,16 +157,19 @@ A new task gap includes its evidence and actual working-set delta; routine event
 unchanged pending requests stay in the log. The routing responsibilities below do not
 create additional notification exceptions.
 
-Missing scope, next-task choices, authorization/skill applicability, transport/tool permissions
-and scheduling gaps route from Root to Portfolio first, with the affected action, evidence and
-existing authority. Root does not ask DM to invent the missing command or approve the workflow.
-Portfolio handles the planning question and may assign a bounded scientific/technical inquiry;
-DM retains object-tier decisions inside its assigned task and CM ordinary in-scope repair.
-Root also sends a prompt repair request for an unresolved execution, input, access/tool or
-uncertain-state problem outside its assigned repair path. Portfolio arranges the bounded fix
-and returns the next step; routine-message filtering must never suppress this help channel.
-This is not a new approval gate for accepted work, nor authority for Portfolio to bypass a real
-runtime restriction or grant permission reserved to the owner. Unrelated authorized work continues.
+OWNER_DIRECT 2026-09-08: Root owns the delegated direction task through acceptance and
+authorized continuation. On a direction-local return, resume the original DM; the DM owns
+object decisions, proper-node questions and CM implementation/repair. Root integrates accepted
+work and handles exact execution/Transport routing. A complete selected card/specification
+continues to CM through its DM; missing committed dependencies are ordinary source integration
+when the exact inputs are known. Child completion or forwarding is not the parent deliverable.
+
+Portfolio is needed for a working-set replacement, cross-direction choice, or concrete scope,
+authority or resource conflict beyond that DM/CM route. An omitted intermediate instruction,
+ordinary technical failure or need to resume the DM does not create that conflict. Root first
+uses the existing responsible DM/CM and sends Portfolio only the unresolved issue that requires
+Portfolio action. Explicit scientific caps, actual tool restrictions, uncertain acceptance and
+owner-only decisions remain binding; no recipient can waive them. Independent work continues.
 
 ## Goal-driven observation
 

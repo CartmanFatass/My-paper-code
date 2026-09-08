@@ -81,6 +81,9 @@ Use the existing five-item handoff, in ordinary prose:
 
 Bundle routine collection → technical acceptance → integration → scientific intake when their
 scope is known. A delegated DM/CM decision within that route needs no extra Portfolio vote.
+State the direction deliverable and its authority boundary; let its DM carry ordinary
+intermediate work through CM acceptance and authorized continuation. Preparing a selected
+card/specification is not an automatic return to Portfolio for another implementation command.
 For example, a first arm's conforming summary may admit the already-selected second arm without
 selecting on the first score. A new scientific choice or unfrozen invocation remains separate.
 
@@ -106,7 +109,8 @@ short actions. The comparison intercept below applies before any eligible coding
 | Ready issued command or ready named follow-on | Dispatch it; issue all other independently ready work before a long local step. |
 | Native delivery or Transport completion/blocker receipt | Match request/command and original recipient; do the necessary bounded acceptance/integration or forward the original receipt to its named native DM/CM, then dispatch the ready follow-on. |
 | Required short index operation is busy | Retain that exact dependency and service another ready event; do not hold the whole return queue. |
-| Supplied route exhausted or target unavailable without replacement route | Send one exact next-command/repair request to Portfolio now with the actual count delta; continue the other chains. |
+| Direction-local step returned and the direction remains assigned | Resume its original DM for acceptance and the next in-scope step, including organizing CM work; record the actual continuation. |
+| Direction route exhausted beyond DM authority, or target unrecoverable | Send one exact replacement/conflict need to Portfolio with the actual count delta; continue the other chains. |
 | Accepted experiment needs observation | Read its supervisor state and route a terminal result; do not turn process completion into science acceptance. |
 | Pending Pro request whose Transport task became idle/failed | Send the same Transport an observation/recovery-only continuation from persisted facts; no browser takeover or another Send. |
 | No executable action after the above | Wait for the first event for at most 60 seconds; keep the named dependencies recoverable. |
@@ -129,12 +133,12 @@ never waits for Transport's whole request queue. Routine observations stay in th
    request, experiment or comparison arm holds only actions depending on its result. During
    lengthy local work, reach a recoverable boundary and service other ready returns; do not
    finish one direction's entire collection-to-Pro lifecycle before servicing another.
-   OWNER_DIRECT 2026-09-07: a precise gap in task scope, next-command selection, authorization,
-   skill applicability, transport/tool permissions or cross-direction scheduling goes to
-   Portfolio first. Include the affected action, original evidence/rule and existing authority.
-   Do not dispatch an undefined gap to DM to obtain a replacement task or workflow approval.
-   Portfolio resolves planning/applicability or issues a bounded investigation to the appropriate
-   DM/CM; it cannot supply owner-only permission or override a real runtime restriction.
+   OWNER_DIRECT 2026-09-08: Root retains responsibility through acceptance and authorized
+   continuation. Resume the original DM for direction-local decisions, implementation and
+   repair; its CM owns technical work. An omitted intermediate instruction is not exhausted
+   authority. Portfolio receives working-set replacements, cross-direction choices and actual
+   conflicts beyond that DM/CM route, with the exact unresolved action and evidence. Preserve
+   scientific caps, actual tool restrictions and uncertain acceptance; routing waives none.
 4. Record routine receipts in `docs/research/portfolio/root-log/YYYY-MM-DD.md` under
    SIBLING_COMMUNICATION.md's notification filter. Continue executable named routes without a
    Portfolio message. When Portfolio action is needed, send the exact decision/gap, original
@@ -159,12 +163,13 @@ never waits for Transport's whole request queue. Routine observations stay in th
 | Reversible technical staging problem inside an assigned repair route | Keep the same CM on that authorized repair; report its concrete unresolved gap, not an invented scientific stop. |
 | Unknown Send or launch acceptance | Reconcile the same identity from authoritative state; hold only the uncertain external action. |
 | Object-tier science choice within an assigned DM task | Keep it with that DM under existing delegation; no additional Portfolio vote. |
-| Missing task scope, extra/unlisted invocation, replacement task or workflow/authorization applicability gap | Send the exact gap to Portfolio first; continue independent assigned work. Portfolio supplies the next bounded command or identifies the actual required owner decision. |
+| Selected card/specification or ordinary source/engineering gap in an assigned direction | Resume the original DM to organize its CM and finish the delegated work; Root integrates and continues the authorized route. |
+| New direction/replacement, extra invocation outside DM authority, or unresolved cross-direction/scope conflict | Send the exact Portfolio action needed once; continue independent assigned work. |
 
 A later explicit continuation supersedes an earlier command's stop only within its stated scope.
 Successful staging after zero accepted invocations is not a scientific retry. This does not
 authorize a retry of an accepted experiment, a different source/device/budget or duplicate Send.
-Root follows supplied choices; it does not select a replacement direction or technical alternative.
+Root retains the assigned direction and delegates its scientific/technical choices to its DM/CM.
 Routine tool addressing, reads and authorized pre-acceptance mechanical corrections stay local.
 
 Root serializes only short shared-index operations; independent Transport owns exact browser
