@@ -1,6 +1,8 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-08 (P63 FRRIE repair; P64 VSP03 independent instance)
+Updated at: 2026-09-08 (P65 VSP03 complete-deadline correction)
+
+Current VSP03 execution repair: [P65 complete-deadline correction](handoffs/2026-09-08-p65-vsp03-complete-deadline-correction.md) supplies the original DM/CM a narrowly scoped task-specific lifecycle wrapper/adapter after B04 prelaunch established that the installed supervisor has no enclosing deadline. Preserve P64's one seed6 invocation and complete120s cap; independently check only the corrected timeout/exit boundary with harmless fixtures, then close the already-selected execution/intake route. No global supervisor change, scientific probe or new invocation is allocated. Latest Root request reports P60, P61, P62 and VSP03 work advancing and P63 FRRIE exhausted on an access gap; P65 is the same VSP03 chain, not another slot. Actual acceptance remains a Root execution fact.
 
 Current fifth-slot command: [P64 independent VSP03 G instance](handoffs/2026-09-08-p64-vsp03-independent-greedy-instance.md) allocates one separately specified fresh training instance after B03's loss to both fixed references, following its recorded direct next-discriminator suggestion. Keep the same comparison and120s complete cap; correct the next payload's known exit-publication defect without rewriting the old missing exit. The same DM/CM closes the full route and preserves seed4's outcome-informed discovery separately. This is an ordinary within-family extension, not reopening the T/initialization family or claiming UAV entry. P60/P61/P62 remain assigned, P63 repairs FRRIE, and SCDMP P58 remains a named terminal Send-control dependency counting zero. Five issued direction routes count only as their actual work advances.
 

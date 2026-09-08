@@ -64,3 +64,28 @@ Return the complete immutable Pro response to the original native DM for intake.
 
 The preparation tooling rejection is resolved. The historical CM scratch cleanup
 block remains a documented technical restriction; no cleanup was retried here.
+
+
+## Pre-page validation repair — 2026-09-08
+
+Root reported a validation refusal before any conversation opened, prompt paste or
+Send: the author-input REQUEST lacked `decision_authority=pro_final`. The bound
+HANDOFF already carried the correct canonical transport request. This correction
+copies its18 canonical fields into REQUEST, including the exact prompt and required
+operator/return/binding metadata; every existing author-input field is unchanged.
+It introduces no decision, request identity, conversation or scientific exposure.
+
+Current main's Transport validator now accepts both REQUEST and
+`HANDOFF.transport_request`, with identical validation results. See
+`VALIDATION_REPAIR_20260908.json` for the command source and receipt. The provider
+prompt remains1264 UTF-8 bytes, SHA256
+`7046fe889abf30bd3de0f1cb27706021a6f8497afa85a88aa7392e4df625a263`.
+
+The renderer correctly refuses to overwrite/rebind an existing bound packet.
+A fresh temporary render for comparison reproduced the original TASK byte for byte
+and matched the same scope/binding metadata. The canonical TASK and bound HANDOFF
+remain unchanged, retaining TASK commit `1b0ac54fb61485da73ac9290387f3f6cf30dc65c`.
+Only REQUEST and this repair's documentation change. Root uses the final repair
+commit's existing HANDOFF path and unchanged dispatch prompt for the authorized
+first provider Send. No scientific invocation, new conversation or cleanup retry
+occurred. The small fresh-render outputs are retained as validation evidence.
