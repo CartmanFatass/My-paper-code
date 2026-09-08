@@ -182,3 +182,21 @@ facts declares the real1024-Adam/lr3e-4 per-fit budget and reuses B02's
 observed nonzero movement; actual7101 exposure must be reported at intake.
 The [complete CM specification](UCOPE_UAV_MOTION_PREFIX_B03_CODE_SPEC_20260908.md)
 owns implementation and its original focused acceptance.
+
+## 7. Accepted source and exact P57 route — 2026-09-08
+
+Sections1–6 were frozen at `f5230ca30537e7baa7db71ee2ba437a17efe807b`
+before implementation or B03 output and remain unchanged. Accepted source:
+**`70900ac7e7aa3a85b4f4ad6a2a8031ccb346fd44`**, tree
+`13634a339b2d6e323238a46feac29f443d022b8e`.
+The [CM technical record](UCOPE_UAV_MOTION_PREFIX_B03_TECHNICAL_ACCEPTANCE_20260908.md)
+and [DM acceptance](UCOPE_UAV_MOTION_PREFIX_B03_SELECTION_INTAKE_20260908.md#6-implementation-intake-and-source-binding--2026-09-08)
+record61 focused test passes, whole check wall2.30s and independent review
+with no material finding. These are engineering facts, not a UAV result.
+
+The [exact Root handoff](UCOPE_UAV_MOTION_PREFIX_B03_P57_ROOT_HANDOFF_20260908.md)
+binds one7101 invocation to the existing exact-SHA detached remote checkout.
+Root retains staging/current-state reconciliation, fresh actual-node memory
+admission, launch and observation. CM retains terminal collection, and DM
+all-outcome intake. No scientific invocation is accepted by this binding;
+there is no second pair, aggregate, retry or additional evaluation route.

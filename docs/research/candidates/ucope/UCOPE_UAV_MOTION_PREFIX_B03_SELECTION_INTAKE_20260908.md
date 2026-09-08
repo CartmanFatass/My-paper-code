@@ -150,3 +150,75 @@ evaluation calls, replay, profiling or diagnostic invocations. Reading
 already logged entropy and calculating configuration work did not create
 a new experiment. P47/P48 smoke and wrong-cwd records, all B02 adverse
 facts and the existing formal UAV-entry chain remain unchanged.
+
+## 6. Implementation intake and source binding — 2026-09-08
+
+**Accept source `70900ac7e7aa3a85b4f4ad6a2a8031ccb346fd44` for the one
+already selected7101 route.** The CM's technical record was committed at
+`14cf36615a42dde57d337201dd78adc6820ad1cf`; documentation-only link repair
+`5025f94af55df477d339d9ce350ae2b7fe8da882` leaves the source unchanged.
+The same authoring checkout is clean at that return, with index ownership
+released to DM. No new authoring branch or scientific launch was created.
+
+### What I checked and the applicable rule
+
+I read the complete committed production/test diff against the frozen
+preparation, the complete [technical record](UCOPE_UAV_MOTION_PREFIX_B03_TECHNICAL_ACCEPTANCE_20260908.md),
+its final independent review, and the actual suite launch, supervisor
+runner/log and staged-source receipts. I did not rerun the CM's suite or
+remote verification. The actual objective adds only `entropy_coef=0.01`
+to `update`, with B03 passing0.0 to both arms. Collector options remain
+grouping-only. B03 metadata binds7101, the new card/section5 and
+agent-compound clipping, while historical routes retain0.01. B03 direct
+and CLI aggregate refusal preserve the declared single-pair unit.
+
+The source implements the code spec's explicit rule:
+`policy_loss + .5*value_loss - entropy_coef*entropy.mean()`.
+The actual-update test compares pre-clip gradients against independently
+formed native policy/value and entropy derivatives, including duration
+credit and log-std. It checks four Adam steps, unchanged update RNG,
+descriptive entropy logs and default/explicit0.01 agreement. Both-arm
+plumbing tests cover final reset association and saved configuration;
+the existing sampler, hold, masking, normalization and native-primary
+tests remain in the focused suite. Production sampling/environment/critic
+paths were not changed. Scientific UP/WITHIN/DOWN is **not applied** to
+these engineering checks;7101 has no observed UAV endpoint yet.
+
+One exact-source remote suite completed **61 passed in1.86s**, full
+process wall **2.30s**, exit0, peak RSS529392KiB, below the300s budget.
+Raw evidence is in
+`temp/directions/ucope/test/b03_p57_check_20260908/`, including
+`suite-launch-receipt.json` and `supervisor/{runner.sh,task.log,status,exit_code}`.
+The raw suite log SHA-256 is
+`cc5068a2e3709e39dad22e5319fc498cfbba4051b7e88173e5bcd7bec2b529ac`.
+The reused independent reviewer reported no material objective, ownership,
+mask/default, single-pair identity or scope issue after reading that receipt.
+I found one relative link error in the technical record; the same CM
+corrected it without a code change, repeated suite or scientific invocation.
+
+Non-test changes are+31/−11 lines and runner54 lines. Engineering scope§4
+remains none; no §5 budget breach is reported for B03. The B02 smoke breach
+and pre-admission wrong-cwd record remain intact. The remote test process
+does not admit a scientific run. The staged source remains a useful exact
+committed checkout, with no need to recreate it merely because its first
+supervisor was a test. Root must reconcile its actual state and use fresh
+physical/effective memory admission for7101.
+
+### Decisions this implementation intake produces
+
+**Object / technical:** options (a) accept the conforming source and bind
+the existing one-pair route; (b) repeat a smoke or suite without a new
+gap; (c) expand the amendment or exposure. Recommendation and selected
+**(a)**. **Owner-delegated decision (unattended, 2026-09-03 instruction):
+(a).** Checks establish affected engineering behavior only; they do not
+establish the mechanism's value or change any frozen reading rule.
+
+This ordinary technical decision is in the audit; existing new-card
+item20260908-ucope-002 remains the owner surface. Main owner reviews
+returned[] at this clean boundary; no applicable override was found.
+The [Root handoff](UCOPE_UAV_MOTION_PREFIX_B03_P57_ROOT_HANDOFF_20260908.md)
+supplies the exact source/cwd/handle/command and collection route. Root
+integrates the named commits, launches at most once under P57, and returns
+terminal facts to the same CM/DM. The completed all-outcome intake exhausts
+P57 regardless of sign. No Pro or additional Portfolio implementation
+request is needed, and no approval is inferred from an absent owner reply.
