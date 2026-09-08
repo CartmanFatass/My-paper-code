@@ -1,6 +1,8 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-08 (P65 VSP03 complete-deadline correction)
+Updated at: 2026-09-08 (P66 independent VSPC1 normalized pair)
+
+Current replacement: [P66 independent normalized VSPC1 pair](handoffs/2026-09-08-p66-vspc1-independent-normalized-pair.md) allocates the DM's specific repeatability follow-up after complete B03/8201 UP: GATED−MLP +.0398017153, GATED−H +.0352127975 and MLP−H −.0045889178. Preserve the exact normalization/comparison, one prospective fresh pair, original1800s/arm and3600s/pair caps, all adverse outcomes and separate old-regime evidence. Same DM/CM closes binding, focused acceptance, execution and intake. Root reports only UCOPE P61 intake and VSP03 P65 deadline repair advancing before this command; P66 counts only after actual dispatch. Remaining slots are unresolved: DISH P62 has no selected successor, FRRIE P63 needs a permitted observation method, SCDMP P58 remains Send-blocked and RCLE acceptance is unresolved. No duplicate preparation or restricted action fills those vacancies; no lifecycle or UAV-entry change follows.
 
 Current VSP03 execution repair: [P65 complete-deadline correction](handoffs/2026-09-08-p65-vsp03-complete-deadline-correction.md) supplies the original DM/CM a narrowly scoped task-specific lifecycle wrapper/adapter after B04 prelaunch established that the installed supervisor has no enclosing deadline. Preserve P64's one seed6 invocation and complete120s cap; independently check only the corrected timeout/exit boundary with harmless fixtures, then close the already-selected execution/intake route. No global supervisor change, scientific probe or new invocation is allocated. Latest Root request reports P60, P61, P62 and VSP03 work advancing and P63 FRRIE exhausted on an access gap; P65 is the same VSP03 chain, not another slot. Actual acceptance remains a Root execution fact.
 
