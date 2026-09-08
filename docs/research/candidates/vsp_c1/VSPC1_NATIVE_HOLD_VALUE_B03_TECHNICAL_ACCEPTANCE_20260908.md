@@ -81,7 +81,59 @@ readback through full stubs, plus partial-state preservation. Existing native pa
 coverage is reused; actual8201 training/evaluation/publication remains the sole
 subsequent Root invocation. CPU FP32 portability is the existing accepted route.
 
-## Exact Root command
+## Exact Root command (staged, not submitted)
 
-Pending source commit binding and staged LF shell verification; no supervisor
-submission or result-bearing payload is executed by this engineering assignment.
+Accepted source commit `7a8ed3aa5d25ded71164aa338749d09318124dcf` was pushed immediately. Later
+command/review documentation does not change the accepted source surface.
+Configured node: `hmasd-wsl-node` (wsl_4070); CPU FP32, one process and numerical
+thread, no device change. Exact detached cwd: `/home/wu/hmasd-worktrees/vspc1-native-hold-value-b03-8201-7a8ed3aa5d25`.
+
+Local script: `temp/directions/vsp_c1/engineering/native_hold_value_b03/launch_8201_7a8ed3aa5d25.sh`.
+Remote script: `/home/wu/hmasd-inputs/vspc1_hold_value_b03_8201_7a8ed3aa5d25.sh`. Exact bytes:655, UTF-8 without BOM,
+8 literal LF and no CR. SHA256: `46a2ac327ddf65350c6af18282a7e87944c5be921c7008a0a5423cc0199e916e`.
+Remote readback matches all bytes. Syntax-only check exited0 in0.4038779s;
+scp readback exited0 in0.5733178s. No payload, resource admission, scientific state
+or supervisor submission was executed. Binding evidence is retained in the same
+local engineering directory's `launch_binding.json` and `remote_readback.sh`.
+
+```bash
+#!/usr/bin/env bash
+# Accepted source: 7a8ed3aa5d25ded71164aa338749d09318124dcf
+set -euo pipefail
+exec /usr/bin/time -f 'whole_wall_seconds=%e,peak_rss_kib=%M' /bin/bash --noprofile --norc -c '
+cd /home/wu/hmasd-worktrees/vspc1-native-hold-value-b03-8201-7a8ed3aa5d25 &&
+/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/projects/HMASD/temp/directions/vsp_c1/exp/native_hold_value_b03_8201_7a8ed3aa5d25_admission.json &&
+/home/wu/.venvs/hmasd/bin/python scripts/run_vspc1_native_hold_value_b03.py --seed 8201 --out /home/wu/projects/HMASD/temp/directions/vsp_c1/exp/native_hold_value_b03_8201_7a8ed3aa5d25
+'
+```
+
+Root submits the already-staged script once after integrating and staging the exact
+accepted source checkout:
+
+```powershell
+ssh -o BatchMode=yes -o ConnectTimeout=10 hmasd-wsl-node /usr/local/bin/agent-task run vspc1_hold_value_b03_8201_7a8ed3aa5d25 /bin/bash /home/wu/hmasd-inputs/vspc1_hold_value_b03_8201_7a8ed3aa5d25.sh
+```
+
+Handle: `vspc1_hold_value_b03_8201_7a8ed3aa5d25`.
+Output root: `/home/wu/projects/HMASD/temp/directions/vsp_c1/exp/native_hold_value_b03_8201_7a8ed3aa5d25`.
+Fresh actual-node admission: `/home/wu/projects/HMASD/temp/directions/vsp_c1/exp/native_hold_value_b03_8201_7a8ed3aa5d25_admission.json`.
+The literal syntax check was:
+
+```powershell
+ssh -o BatchMode=yes -o ConnectTimeout=10 hmasd-wsl-node /bin/bash -n /home/wu/hmasd-inputs/vspc1_hold_value_b03_8201_7a8ed3aa5d25.sh
+```
+
+**Root still owns source checkout staging.** This CM has staged only the shell input,
+not claimed the named detached source cwd exists. Root uses its existing committed
+source staging route and checks the actual cwd/source surface before submitting.
+There is no native invocation or second normalized pair in this assignment.
+
+The enclosing `/usr/bin/time` measures admission plus the scientific process through
+exit, with peak RSS; it does not impose an earlier hard-KILL deadline. Existing
+continuous1800s/arm and3600s/pair checks preserve partial results. At collection,
+charge startup/common initialization to GATED and H/publication/readback/exit to MLP;
+if the external/internal residual split is unknown, report it and use its entire
+nonnegative amount in each conservative arm upper bound. An indivisible overrun
+remains a breach, not a new allowance. Measured resource and wall conformance remain
+pending the sole accepted handle. DM owns all-outcome scientific intake; this same
+CM is available for collection on Root's continuation.
