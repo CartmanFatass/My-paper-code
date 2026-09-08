@@ -1,6 +1,8 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-08 (P54 rolling refill after MGTAP P51; Root closes direction delegations through their DMs)
+Updated at: 2026-09-08 (P55 one independent VSPC1 pair; P54 rolling refill)
+
+Current VSPC1 follow-on: [P55 independent hold-value pair](handoffs/2026-09-08-p55-vspc1-independent-hold-value-pair.md) assigns exactly one prospective fresh matched GATED-V/MLP-V/H instance after valid B01 UP (+0.0293656586 primary) at one training pair. The same DM/CM owns the complete bounded route; original master8101 and P49 remain complete. Preserve weak-MLP/H and mechanism qualifications, all outcomes,1800s/arm and3600s/pair caps; no third pair or tuning is selected. FSD P52 has now ended its tested hybrid extension with no successor. Actual reported advancing routes before this dispatch are UCOPE intake, DISH B07 preparation and VSP03 P54 source question; P55 counts only while its actual work advances.
 
 Current vacancy refill: [P54 VSP03 defined greedy-use re-entry](handoffs/2026-09-08-p54-vsp03-greedy-use-reentry.md) assigns the specific conditional question retained by the accepted post-B02 decision: whether a defined greedy-execution use justifies ordinary G replacing R0 after dropping event initialization. It preserves the paused T/initialization comparison, small generic gains and adverse stochastic results. Reuse the existing VSP03 checkout and complete any proper-node question/intake and conforming selected-object route through the same DM/CM. MGTAP P51's family pause is fully intaken with no successor and no advancing task; this refill changes no lifecycle, priority or recast count. Root reports four other advancing routes (FSD, UCOPE, VSPC1, DISH); P54 counts only on actual dispatch/work, and FRRIE/CBSC and RCLE retain their unresolved dependencies. No scientific invocation is allocated during source-question preparation.
 
