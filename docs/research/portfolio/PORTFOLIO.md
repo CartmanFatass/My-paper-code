@@ -1,6 +1,8 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-08 (P56 SCDMP source question; P55 VSPC1 independent pair)
+Updated at: 2026-09-08 (P57 UCOPE post-B02 selection)
+
+Current UCOPE replacement: [P57 post-B02 selection](handoffs/2026-09-08-p57-ucope-post-b02-selection.md) resumes the same DM after the fully intaken two-pair DOWN result (`81bd8b678`). Select a specifically justified within-family change or the precise proper-node scope question, retaining both adverse T−G endpoints and mixed G−H. Preparation allocates zero scientific invocation; an actually selected in-family B has at most one fresh matched pair under the explicit P57 exposure and complete-clock limits, with the same DM/CM owning implementation through intake. No unchanged B02 continuation, presumed clipping cause or additional UAV-entry claim follows. Root reports four other advancing chains: VSPC1 P55, DISH B07, VSP03 P54 and SCDMP P56. Preserve their routes; count P57 only while its accepted work advances. Earlier dispatch snapshots below are historical and do not assert those tasks remain active.
 
 Current remaining-slot refill: [P56 SCDMP native return-composition question](handoffs/2026-09-08-p56-scdmp-native-return-composition-question.md) uses the newer committed UCOPE/VSPC1 held-command trajectory and learner source to assess one distinct value-learning consistency intervention. The old D6 source/countdown-search family remains parked; no simulation or scientific invocation is allocated during source-question work. A surviving case goes to the existing proper node and then through the complete same-DM selected-object route. This is actual authoring work for an ACTIVE/HIGH direction, with one reusable checkout created only if no designated checkout exists. Retain UCOPE, DISH, VSP03 and VSPC1 P55 while advancing; FSD and MGTAP have no selected successor. No lifecycle, priority or recast change is applied by this command.
 
