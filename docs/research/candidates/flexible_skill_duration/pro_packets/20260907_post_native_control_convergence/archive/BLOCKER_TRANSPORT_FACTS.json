@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "request_id": "2026-09-07-fsd-post-native-control-convergence-01",
+  "workflow_node": "em_convergence",
+  "conversation_binding_key": "em:flexible_skill_duration:convergence",
+  "direction_id": "flexible_skill_duration",
+  "direction_ids": [
+    "flexible_skill_duration"
+  ],
+  "conversation_id": "6a9c2865-14a8-83e8-b556-e7f5836d9236",
+  "provider_url": "https://chatgpt.com/c/6a9c2865-14a8-83e8-b556-e7f5836d9236",
+  "user_message_id": "a32400e7-1520-4a07-9987-8d6b87e66be5",
+  "assistant_message_id": "unknown-recorded-in-dom",
+  "visible_model": "6 Pro",
+  "underlying_model": "Latest",
+  "thinking_effort": "Pro, 5 of 5.",
+  "prompt_sha256": "e9d31792cc8d58405fe3e780dfbc71f15e0598185058ea9a1d9aeaf9f09acaa8",
+  "response_sha256": "363e25805b37abc314027e4a0963efc207c65dd96a4128910d848c48882cdd88",
+  "response_characters": 915,
+  "response_bytes": 917,
+  "send_click_count": 1,
+  "send_evidence": {
+    "send_click_count": 1,
+    "url_observed": true,
+    "user_node_observed": true,
+    "user_node_exact": true,
+    "user_message_id": "a32400e7-1520-4a07-9987-8d6b87e66be5",
+    "assistant_message_id": "unknown-recorded-in-dom",
+    "paste_mode": true,
+    "provider_url_observed": "https://chatgpt.com/c/6a9c2865-14a8-83e8-b556-e7f5836d9236",
+    "prompt_sha256": "e9d31792cc8d58405fe3e780dfbc71f15e0598185058ea9a1d9aeaf9f09acaa8"
+  },
+  "identity_validation": "PASS_MANUAL_PAIRING",
+  "identity_expected": {
+    "conversation_id": "6a9c2865-14a8-83e8-b556-e7f5836d9236",
+    "user_message_id": "a32400e7-1520-4a07-9987-8d6b87e66be5"
+  },
+  "identity_observed": {
+    "conversation_id": "6a9c2865-14a8-83e8-b556-e7f5836d9236",
+    "assistant_message_id": "unknown-recorded-in-dom"
+  },
+  "archive_paths": {
+    "manifest_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\flexible_skill_duration\\2026-09-07-fsd-post-native-control-convergence-01\\2026-09-07-fsd-post-native-control-convergence-01--flexible_skill_duration__PACKET_MANIFEST.json",
+    "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\flexible_skill_duration\\2026-09-07-fsd-post-native-control-convergence-01\\2026-09-07-fsd-post-native-control-convergence-01--flexible_skill_duration__00_PROMPT.md",
+    "reference_files": [],
+    "response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\flexible_skill_duration\\2026-09-07-fsd-post-native-control-convergence-01\\2026-09-07-fsd-post-native-control-convergence-01--flexible_skill_duration--attempt-01__02_RESPONSE.md",
+    "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\flexible_skill_duration\\2026-09-07-fsd-post-native-control-convergence-01\\2026-09-07-fsd-post-native-control-convergence-01--flexible_skill_duration--attempt-01__03_TRANSPORT_FACTS.json",
+    "response_sha256": "363e25805b37abc314027e4a0963efc207c65dd96a4128910d848c48882cdd88"
+  },
+  "wait_status": "NATURAL_COMPLETION",
+  "observed_page_state": "complete assistant response; Copy response present; no active generation control",
+  "capture_method": "Copy response via CUA clipboard.readText",
+  "archive_status": "ARCHIVED_BLOCKER",
+  "blocker_code": "GITHUB_DELIVERY_UNAVAILABLE",
+  "blocker_detail": "Fresh full and targeted GitHub reads found no callable file-creation or issue-comment write action; response path 404 and Issue #10 had only the earlier round comment.",
+  "scientific_decision_formed": false,
+  "captured_at": "2026-09-08T06:33:25Z",
+  "notes": [
+    "Exactly one provider Send occurred; no second Send or repair prompt was attempted.",
+    "The Pro response is a terminal delivery blocker, not a scientific decision."
+  ],
+  "return_receipt": {
+    "status": "SENT",
+    "attempt_count": 1,
+    "delivery_status": "accepted",
+    "message_key": "2026-09-07-fsd-post-native-control-convergence-01|em:flexible_skill_duration:convergence|6a9c2865-14a8-83e8-b556-e7f5836d9236|BLOCKER|BLOCKED|a9b738371b5ccbf4",
+    "sent_at": "2026-09-08T06:34:33Z",
+    "destination_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267"
+  }
+}
