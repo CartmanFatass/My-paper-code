@@ -1,0 +1,297 @@
+{
+  "prepared_at": "2026-09-08T16:36:23.239492+00:00",
+  "evidence": "source inspection and configuration arithmetic only; no new model/environment/learner execution",
+  "source_sha": "6374063408208ba67b8cb7c69ebc0babb0f00259",
+  "input_snapshot_sha": "65883d41d1ba2cb481adfe34d23436803ed5260a",
+  "source_symbols": {
+    "experiments/candidates/ucope/uav_motion_prefix_b01/environment.py": [
+      {
+        "symbol": "make_real",
+        "start_line": 8,
+        "end_line": 24
+      },
+      {
+        "symbol": "actor_features",
+        "start_line": 27,
+        "end_line": 29
+      },
+      {
+        "symbol": "critic_features",
+        "start_line": 32,
+        "end_line": 39
+      },
+      {
+        "symbol": "team_reward",
+        "start_line": 49,
+        "end_line": 50
+      },
+      {
+        "symbol": "HoldState",
+        "start_line": 60,
+        "end_line": 74
+      },
+      {
+        "symbol": "reset",
+        "start_line": 85,
+        "end_line": 91
+      },
+      {
+        "symbol": "step",
+        "start_line": 105,
+        "end_line": 115
+      },
+      {
+        "symbol": "_local_user_entries",
+        "start_line": 117,
+        "end_line": 119
+      },
+      {
+        "symbol": "_local_uav_entries",
+        "start_line": 121,
+        "end_line": 124
+      }
+    ],
+    "experiments/candidates/ucope/uav_motion_prefix_b01/policy.py": [
+      {
+        "symbol": "Actor",
+        "start_line": 10,
+        "end_line": 21
+      },
+      {
+        "symbol": "Critic",
+        "start_line": 24,
+        "end_line": 31
+      },
+      {
+        "symbol": "templates",
+        "start_line": 34,
+        "end_line": 39
+      },
+      {
+        "symbol": "arm_copy",
+        "start_line": 42,
+        "end_line": 49
+      },
+      {
+        "symbol": "joint_terms",
+        "start_line": 64,
+        "end_line": 81
+      },
+      {
+        "symbol": "sample",
+        "start_line": 84,
+        "end_line": 94
+      }
+    ],
+    "experiments/candidates/ucope/uav_motion_prefix_b01/learner.py": [
+      {
+        "symbol": "returns_to_go",
+        "start_line": 12,
+        "end_line": 14
+      },
+      {
+        "symbol": "collect_episode",
+        "start_line": 29,
+        "end_line": 155
+      },
+      {
+        "symbol": "recurrent_outputs",
+        "start_line": 158,
+        "end_line": 170
+      },
+      {
+        "symbol": "optimizer_for",
+        "start_line": 173,
+        "end_line": 176
+      },
+      {
+        "symbol": "update",
+        "start_line": 179,
+        "end_line": 212
+      }
+    ],
+    "experiments/candidates/ucope/uav_motion_prefix_b01/study.py": [
+      {
+        "symbol": "Config",
+        "start_line": 27,
+        "end_line": 44
+      },
+      {
+        "symbol": "run_pair",
+        "start_line": 173,
+        "end_line": 343
+      }
+    ],
+    "envs/pettingzoo/uav_env.py": [
+      {
+        "symbol": "reset",
+        "start_line": 213,
+        "end_line": 263
+      },
+      {
+        "symbol": "step",
+        "start_line": 265,
+        "end_line": 351
+      },
+      {
+        "symbol": "_get_state",
+        "start_line": 353,
+        "end_line": 366
+      },
+      {
+        "symbol": "_get_observation_vectorized",
+        "start_line": 382,
+        "end_line": 433
+      },
+      {
+        "symbol": "_local_user_entries",
+        "start_line": 575,
+        "end_line": 581
+      },
+      {
+        "symbol": "_local_uav_entries",
+        "start_line": 583,
+        "end_line": 589
+      },
+      {
+        "symbol": "_compute_reward",
+        "start_line": 1421,
+        "end_line": 1484
+      }
+    ],
+    "envs/pettingzoo/env_adapter.py": [
+      {
+        "symbol": "reset",
+        "start_line": 172,
+        "end_line": 199
+      },
+      {
+        "symbol": "step",
+        "start_line": 201,
+        "end_line": 317
+      },
+      {
+        "symbol": "_get_state",
+        "start_line": 547,
+        "end_line": 549
+      },
+      {
+        "symbol": "_state_array",
+        "start_line": 551,
+        "end_line": 560
+      }
+    ]
+  },
+  "seed_search": {
+    "command": [
+      "git",
+      "grep",
+      "-n",
+      "-w",
+      "8101",
+      "65883d41d1ba2cb481adfe34d23436803ed5260a",
+      "--",
+      "docs/research/candidates/ucope/*.md",
+      "docs/research/candidates/vsp_c1/*.md",
+      "experiments/candidates/ucope/*.py",
+      "experiments/candidates/vsp_c1/*.py"
+    ],
+    "returncode": 1,
+    "matches": [],
+    "scope": "bounded committed Markdown and candidate Python source, not global namespace"
+  },
+  "proposed_master": 8101,
+  "rng": {
+    "initialization": 810100011,
+    "train_velocity": 810100021,
+    "train_duration": 810100022,
+    "train_reset_range": [
+      810101000,
+      810101511
+    ],
+    "eval_reset_range": [
+      810102000,
+      810102031
+    ],
+    "eval_velocity_range": [
+      810103000,
+      810103031
+    ],
+    "eval_duration_range": [
+      810104000,
+      810104031
+    ]
+  },
+  "proposed_parameters": {
+    "common_duration_actor": 32264,
+    "mlp_critic": 34177,
+    "gated_critic": 34817,
+    "gate": 640,
+    "mlp_total": 66441,
+    "gated_total": 67081,
+    "extra_fraction_of_critic": 0.01872604383064634,
+    "extra_fraction_of_complete_mlp": 0.009632606372571153
+  },
+  "per_fit": {
+    "training_episodes": 512,
+    "training_team_steps": 131072,
+    "rollouts": 256,
+    "epochs_per_rollout": 4,
+    "adam_calls": 1024,
+    "evaluation_episodes": 32,
+    "evaluation_team_steps": 8192,
+    "opening_duration_decisions": 2560,
+    "maximum_nonzero_hold_training_rows": 1536,
+    "maximum_nonzero_hold_row_fraction": 0.01171875,
+    "minimum_training_velocity_decisions": 647680,
+    "maximum_training_velocity_decisions": 655360,
+    "critic_forward_rows_including_collection_final_eval_and_optimization": 663552
+  },
+  "proposed_pair": {
+    "training_pairs": 1,
+    "real_fits": 2,
+    "training_team_steps": 262144,
+    "evaluation_team_steps": 24576,
+    "native_team_steps": 286720,
+    "adam_calls": 2048,
+    "final_evaluation_episodes": 96,
+    "complete_scored_episodes": 1120,
+    "constructors_and_unscored_constructor_resets": 2,
+    "extra_candidate_or_controller_calls": 0,
+    "diagnostic_experiments": 0
+  },
+  "proposed_caps_seconds": {
+    "per_arm": 1800,
+    "complete_pair": 3600
+  },
+  "cost_law": "init +131072*c_env_actor +1024*c_update +8192*c_eval + publication per learned arm; second adds8192 H steps and pair publication. Gate map640 MACs plus128 products per critic forward, no extra forward. Incremental unit wall unknown.",
+  "historical_exposure_source": {
+    "sha": "65883d41d1ba2cb481adfe34d23436803ed5260a",
+    "path": "docs/research/candidates/ucope/UCOPE_UAV_MOTION_PREFIX_B01_P24_EXPOSURE_AND_COST_20260907.json",
+    "meaning": "this prospective P24 record reports the prior observed UCOPE displacement, not a new P49 measurement",
+    "prior_total_relative_displacement_range": [
+      0.5183453849543671,
+      0.5983579115795494
+    ],
+    "P21_per_arm_planning_references_seconds": {
+      "T_each": 148.26706686698833,
+      "G_each_including_H_publication": 141.37189204798779,
+      "per_pair": 289.6389589149761,
+      "new_pair_sum": 579.2779178299522,
+      "basis": "same configured loop work; maximum observed P21 arm wall by arm, charging external whole minus runner time to T as common startup; forecast only, no cap relaxation or guarantee"
+    }
+  },
+  "P24_complete_two_pair_wall_seconds": 564.93,
+  "P24_arithmetic_wall_per_pair_context_only": 282.465,
+  "new_exposure": {
+    "model_constructions": 0,
+    "environment_constructions": 0,
+    "simulations": 0,
+    "profiles": 0,
+    "training_instances": 0,
+    "optimizer_calls": 0,
+    "evaluation_episodes": 0,
+    "scientific_invocations": 0
+  },
+  "engineering_scope_4": "none"
+}
