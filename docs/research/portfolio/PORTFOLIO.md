@@ -1,6 +1,10 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-08 (P66 independent VSPC1 normalized pair)
+Updated at: 2026-09-08 (owner safe-pause handoff)
+
+Safe-pause handoff: [2026-09-08-safe-pause-handoff.md](handoffs/2026-09-08-safe-pause-handoff.md). Existing UCOPE P61, VSP03 P65/P64 and VSPC1 P66 chains may finish only their already-authorized implementation, one execution where selected, collection and intake; after those clean boundaries no replacement, new Pro Send or new scientific exposure is permitted until the owner explicitly resumes.
+
+Prior planning snapshot: P66 independent VSPC1 normalized pair
 
 Current replacement: [P66 independent normalized VSPC1 pair](handoffs/2026-09-08-p66-vspc1-independent-normalized-pair.md) allocates the DM's specific repeatability follow-up after complete B03/8201 UP: GATED−MLP +.0398017153, GATED−H +.0352127975 and MLP−H −.0045889178. Preserve the exact normalization/comparison, one prospective fresh pair, original1800s/arm and3600s/pair caps, all adverse outcomes and separate old-regime evidence. Same DM/CM closes binding, focused acceptance, execution and intake. Root reports only UCOPE P61 intake and VSP03 P65 deadline repair advancing before this command; P66 counts only after actual dispatch. Remaining slots are unresolved: DISH P62 has no selected successor, FRRIE P63 needs a permitted observation method, SCDMP P58 remains Send-blocked and RCLE acceptance is unresolved. No duplicate preparation or restricted action fills those vacancies; no lifecycle or UAV-entry change follows.
 
