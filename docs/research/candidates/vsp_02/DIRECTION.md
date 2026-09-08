@@ -115,14 +115,32 @@ The old exact zero terminal headroom and B5R1's nonidentical continuous values b
 neither establishes a new-host sign or member-recovery effect.
 
 P15 and P17 are complete: sum runner wall72.76788033498451s, admission/runner chains75s for
-two valid pairs; aggregate CPU and per-arm wall remain unmeasured. The intake recommends no
-further unchanged-seed expansion and returns a future Convergence task on the accepted family's
-disposition. No successor measurement, family closure/PARK/RECAST, Pro request or UAV promotion
-is selected here. If the family continues, its next empirical discriminator remains to be named.
-The bounded reading is absence of an MEI-sized reset benefit on these two prefixes, not stable
-equivalence, a unique optimizer mechanism, roster/identity recovery or transfer.
-Event-specific attribution would need a separately justified no-change comparison; it does not
-hold the first performance B.
+two valid pairs; aggregate CPU and per-arm wall remain unmeasured. Post-B01 Convergence now
+ends further exploration of this sole instantiated family/configuration: the selected handoff
+host, fixed N2/identities, following-light to opposite-light switch, current recurrent PPO,
+P4096/Q1024 and complete Adam RESET versus CARRY. Unchanged-configuration seed expansion ends
+at these two complete observations. Ordinary CARRY remains the default without the reset
+intervention; no stable CARRY superiority is established. No successor measurement is selected.
+This is a bounded direction-level family stop, not a new B failure rule or consumption event.
+Recasts remain1; the original member-recovery agenda and Portfolio lifecycle/priority are unchanged.
+
+The strongest opposition to stopping is unqualified learner competence: legal light/history may
+be underused, recurrent inference may mask a state effect, and n2 leaves substantial uncertainty.
+No specific learner defect has been found. Missing tuned headroom, C evidence or unique cause is
+not the reason for the stop; the observed tiny opposing effects and the lack of a specifically
+justified next investment support it. The bounded reading remains no MEI-sized RESET benefit on
+these two prefixes, without equivalence, unique/event-specific optimizer mechanism, member or
+identity recovery, or transfer. No-change and Adam-component controls were not selected as
+prerequisites for that B reading.
+
+Reconsideration would require a concrete new reason: direct evidence of a specific shared-learner
+or comparison problem with a finite common revision and a prediction relevant to state choice,
+or a separately authorized comparable real-learning observation with a useful complete-window
+RESET gain or loss. These are contingent triggers, not newly selected experiments, a positive-only
+gate or a requirement to establish complete competence before another justified B. The hypothetical
+finite light/history-use measurement was considered but not selected; neither its executable model
+availability nor its decision value was established by existing return summaries. No new host,
+learner revision, exact diagnostic, seed, budget or UAV entry follows from this decision.
 
 References:
 
@@ -138,3 +156,7 @@ References:
 - `VSP02_TEAMMATE_POLICY_CHANGE_B01_P17_RESULT_EVIDENCE_20260907.md`
 - `VSP02_TEAMMATE_POLICY_CHANGE_B01_P17_INTAKE_20260907.md`
 - `VSP02_TEAMMATE_POLICY_CHANGE_B01_P17_INTAKE_ANALYSIS_20260907.json`
+- `VSP02_TEAMMATE_POLICY_CHANGE_POST_B01_CONVERGENCE_INTAKE_20260907.md`
+- `pro_packets/20260907_post_b01_two_prefix_convergence/archive/RESPONSE.md`
+  (immutable response commit `84d3042de7fedcc4480a56dd3e274f480f5e4c4b`)
+- `pro_packets/20260907_post_b01_two_prefix_convergence/INTAKE_FACTS.json`

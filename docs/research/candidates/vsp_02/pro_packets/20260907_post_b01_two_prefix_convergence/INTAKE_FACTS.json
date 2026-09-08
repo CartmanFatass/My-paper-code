@@ -1,0 +1,208 @@
+{
+  "checked_at_utc": "2026-09-08T04:06:37.745330+00:00",
+  "assignment": "P19 at 192e680cdaf576ba6a7f66fe594ff056792e7a05; exact completed consultation and intake, no new empirical allocation",
+  "request_id": "2026-09-07-vsp02-post-b01-two-prefix-convergence-01",
+  "fixed_input_sha": "34fb8d742451ddb6869437b37ff75729cf0e10ec",
+  "task_sha": "64a54b2f33354d1ec1e68feb3cfb21cd5dc9399b",
+  "handoff_sha": "169f1bc15fc47237a2ddcce6d95e23aaea3da224",
+  "delivery_sha": "84d3042de7fedcc4480a56dd3e274f480f5e4c4b",
+  "delivery_parents": [
+    "169f1bc15fc47237a2ddcce6d95e23aaea3da224"
+  ],
+  "delivery_changed_paths": [
+    {
+      "path": "docs/research/candidates/vsp_02/pro_packets/20260907_post_b01_two_prefix_convergence/archive/RESPONSE.md",
+      "status": "added",
+      "additions": 107,
+      "deletions": 0
+    }
+  ],
+  "full_response": {
+    "bytes": 27103,
+    "lines": 107,
+    "sha256": "3dff54bbf90e048870c17f1f4fe9666f94e33ce2e9c364765c894b5445473ee7",
+    "read_method": "direct GitHub Contents API at immutable delivery commit; complete 107-line text read; bytes match Git object and retained response"
+  },
+  "chat_receipt": {
+    "bytes": 383,
+    "sha256": "c81a0af0fbb72c4fc8a8b52c7124ad36eb382bcbd0809ce1a218d6e93573d72c",
+    "meaning": "short immutable-link receipt, not the full scientific response"
+  },
+  "delivery_comment": {
+    "url": "https://github.com/CartmanFatass/My-paper-code/issues/9#issuecomment-5578917618",
+    "created_at": "2026-09-08T03:55:13Z",
+    "task_sha_present": true,
+    "response_sha_present": true
+  },
+  "transport": {
+    "conversation_id": "6a9f344c-c6dc-83e8-80e7-e12ced7f445f",
+    "provider_url": "https://chatgpt.com/c/6a9f344c-c6dc-83e8-80e7-e12ced7f445f",
+    "user_message_id": "cf8b7701-7e60-43bc-b72b-a4f1f8282c44",
+    "assistant_message_id": "56848ce5-d7a2-4ab9-b275-1326e1d2a572",
+    "visible_model": "6 Pro",
+    "underlying_model": "Latest",
+    "thinking_effort": "Pro, 5 of 5.",
+    "prompt_sha256": "05dd15abbcf0ba958f51a8ecd6c4c59829bc0945c3e648151bc2ae6cfa6c6e93",
+    "send_click_count": 1,
+    "wait_status": "NATURAL_COMPLETION",
+    "identity_validation": "PASS",
+    "captured_at": "2026-09-08T03:57:34Z",
+    "archived_at": "2026-09-08T03:57:34Z"
+  },
+  "prompt_matches_handoff": true,
+  "transport_metadata_note": "Original archive captures tab_lifecycle OPEN; later Root completion reports tab closed. Parent display path typo resolved to the canonical archived facts filename, whose receipt_note records the typo; no new Send or corrective message.",
+  "source_access": "Pro reports access to all 10 pinned inputs and relevant Issue comments. DM directly checked the full response, its citations and critical observations against accepted card/intakes/analysis; provider retrieval itself is not independently replayed.",
+  "independent_unit": "one learned prefix and its entire matched CARRY/RESET pair",
+  "retained_per_prefix": [
+    {
+      "seed": 1103,
+      "carry_sum": 7648.0,
+      "reset_sum": 7667.0,
+      "carry_mean": 7.46875,
+      "reset_mean": 7.4873046875,
+      "delta_reset_minus_carry": 0.0185546875,
+      "absolute_mei": 0.5,
+      "classification": "VALID_COMPLETE / WITHIN_MEI",
+      "terminal_sampled_delta": 0
+    },
+    {
+      "seed": 1117,
+      "carry_sum": 8045.0,
+      "reset_sum": 8036.0,
+      "carry_mean": 7.8564453125,
+      "reset_mean": 7.84765625,
+      "delta_reset_minus_carry": -0.0087890625,
+      "absolute_mei": 0.5,
+      "classification": "VALID_COMPLETE / WITHIN_MEI",
+      "terminal_sampled_delta": -0.046875
+    }
+  ],
+  "retained_pair_delta_mean": 0.0048828125,
+  "per_prefix_full_window_fraction_checks": [
+    "19/1024",
+    "-9/1024"
+  ],
+  "descriptive_mean_fraction": "5/1024",
+  "all_16_secondary_checkpoint_deltas_match_existing_analysis": true,
+  "secondary_checkpoint_deltas": [
+    {
+      "q": 16,
+      "seed1103_delta": 0.109375,
+      "seed1117_delta": 0.0625
+    },
+    {
+      "q": 32,
+      "seed1103_delta": 0.046875,
+      "seed1117_delta": -0.09375
+    },
+    {
+      "q": 64,
+      "seed1103_delta": -0.09375,
+      "seed1117_delta": -0.140625
+    },
+    {
+      "q": 128,
+      "seed1103_delta": -0.09375,
+      "seed1117_delta": -0.015625
+    },
+    {
+      "q": 256,
+      "seed1103_delta": 0.046875,
+      "seed1117_delta": -0.0625
+    },
+    {
+      "q": 512,
+      "seed1103_delta": 0.078125,
+      "seed1117_delta": 0.0
+    },
+    {
+      "q": 768,
+      "seed1103_delta": 0.0,
+      "seed1117_delta": -0.015625
+    },
+    {
+      "q": 1024,
+      "seed1103_delta": 0.0,
+      "seed1117_delta": -0.046875
+    }
+  ],
+  "retained_native_bin_sign_counts": {
+    "seed1103": {
+      "positive": 18,
+      "negative": 6,
+      "zero": 40
+    },
+    "seed1117": {
+      "positive": 12,
+      "negative": 13,
+      "zero": 39
+    }
+  },
+  "existing_B01_scientific_exposure": {
+    "environment_transitions": 700416,
+    "optimizer_steps": 12288,
+    "evaluation_episodes": 2304,
+    "model_selection_trials": 0,
+    "result_bearing_invocations": 2,
+    "independent_training_pairs": 2
+  },
+  "existing_B01_exposure_line": "environment_transitions=700416; optimizer_steps=12288; evaluation_episodes=2304; model_selection_trials=0; result_bearing_invocations=2; independent_training_pairs=2",
+  "new_consultation_and_intake_exposure": {
+    "environment_transitions": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0,
+    "model_selection_trials": 0,
+    "result_bearing_invocations": 0
+  },
+  "known_original_pair_work": {
+    "P": 4096,
+    "Q_per_arm": 1024,
+    "joint_steps_per_episode": 48,
+    "arms": 2,
+    "PPO_data_passes": 4,
+    "training_episodes": 6144,
+    "training_joint_steps": 294912,
+    "Adam_calls": 6144,
+    "evaluation_episodes": 1152,
+    "evaluation_joint_steps": 55296,
+    "joint_steps_total": 350208,
+    "nested_search": false
+  },
+  "unselected_finite_measurement_arithmetic": {
+    "policies": 1,
+    "conditions": 1,
+    "episodes": 64,
+    "joint_steps_per_episode": 48,
+    "joint_steps": 3072,
+    "optimizer_steps": 0,
+    "selected": false,
+    "qualification": "Only one frozen-policy/condition workload; model acquisition and additional policies/conditions would add work. No executable model availability, actual runtime or new allocation is asserted."
+  },
+  "existing_B01_resources": {
+    "p17_runner_wall_seconds": 36.07172741298564,
+    "p17_supervisor_chain_seconds": 37,
+    "p17_peak_rss_bytes": 518434816,
+    "p17_peak_rss_mib": 494.41796875,
+    "sum_two_runner_wall_seconds": 72.76788033498451,
+    "sum_two_supervisor_chain_seconds": 75,
+    "aggregate_cpu_time": null,
+    "per_arm_wall": null,
+    "sum_two_runner_wall_per_valid_pair_seconds": 36.383940167492256,
+    "calendar_span_first_scientific_start_to_second_completion_seconds": 7693.0,
+    "calendar_span_limit": "includes between-allocation and control-plane gaps; not aggregate CPU time or continuous learner runtime"
+  },
+  "external_model_cost": null,
+  "decision_provenance": "PRO_FINAL at immutable delivery commit; conforming direction-level bounded family/configuration stop",
+  "bounded_decision": "End further exploration of the sole instantiated fixed-member host/current recurrent-PPO/P4096/Q1024 full-Adam RESET versus CARRY family/configuration and unchanged seed expansion; no successor selected.",
+  "original_member_recovery": "unresolved",
+  "recasts": 1,
+  "second_recast": false,
+  "Portfolio_lifecycle_or_priority_change": false,
+  "spec_conflict_found": false,
+  "new_implementation_or_empirical_allocation_selected": false,
+  "engineering_scope_section4": "none",
+  "section5_budget_breach": "none introduced or accepted by document intake",
+  "prediction_scoring": "Both recorded intervals cover their own observed primary; seed1117 forecast was outcome-informed by seed1103, not an independent forecast; no calibration claim",
+  "owner_prediction": "not taken (unattended)",
+  "new_literature_retrieval": "none; unchanged legal-history evidence reused, no novelty or reset-benefit inference added"
+}

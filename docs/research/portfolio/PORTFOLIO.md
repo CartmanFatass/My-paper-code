@@ -1,8 +1,16 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-07 (P21 three-route refill; CBSC/VSP02 retained)
+Updated at: 2026-09-07 (P25 FSD Convergence; four supplied routes and one vacancy)
 
-Current incremental command: [P21 FSD/UCOPE execution continuations and FRRIE offline preparation](handoffs/2026-09-07-p21-fsd-ucope-frrie-continuations.md). Root reports two advancing chains and three exhausted returns. P21 restores three bounded native routes, with the named FSD panel and UCOPE two-pair allocations after ordinary code/card readiness; FRRIE prepares the offline original-source chain. Actual dispatch, launch and UAV entry require their recorded events.
+Current incremental command: [P25 FSD native-control Convergence](handoffs/2026-09-07-p25-fsd-native-control-convergence.md). One direction-level question addresses the completed conditional A evidence and paused learning family. Retain UCOPE P24, CBSC P20 and FRRIE P23; actual acceptance can advance four directions. VSP02 P19 ended its instantiated family with no successor; the fifth slot remains an explicit vacancy pending a concrete independent task, without lifecycle/priority change.
+
+Retained incremental command: [P24 UCOPE two fresh UAV pairs](handoffs/2026-09-07-p24-ucope-fresh-uav-pairs.md). UCOPE has one formally entered B UAV direction under its decision/card/accepted invocation; two additional fresh training pairs are allocated after prospective seed/binding publication. FRRIE P23 continues; CBSC P20 actual dispatch is being reconciled, while latest FSD/VSP02 return references are requested. No pending intention is counted as advancing.
+
+Retained incremental command: [P23 FRRIE training-input failure assessment](handoffs/2026-09-07-p23-frrie-training-input-assessment.md). P22 ended R09_INVALID_INCOMPLETE after61.54s with a dataclasses TypeError; setup passed but no valid comparison was published. P23 examines the retained failure/source for a concrete correction or bounded missing observation, with zero runtime invocation.
+
+Previous incremental command: [P22 FRRIE exact offline R09 chain](handoffs/2026-09-07-p22-frrie-offline-r09-execution.md). P21 supplied the complete original-source command with retained wheels; one setup-through-pair invocation is allocated under its original per-arm and complete caps. Actual launch remains a Root execution fact.
+
+Retained incremental command: [P21 FSD/UCOPE execution continuations and FRRIE offline preparation](handoffs/2026-09-07-p21-fsd-ucope-frrie-continuations.md). Root reports two advancing chains and three exhausted returns. P21 restores three bounded native routes, with the named FSD panel and UCOPE two-pair allocations after ordinary code/card readiness; FRRIE prepares the offline original-source chain. Actual dispatch, launch and UAV entry require their recorded events.
 
 Retained incremental command: [P20 CBSC B05 source correction](handoffs/2026-09-07-p20-cbsc-b05-source-correction.md). P18 selected seed21223 but retained code accepts only B04 seeds; correct bounded seed/object plumbing while preserving numerical and historical behavior. No learner invocation is allocated.
 
