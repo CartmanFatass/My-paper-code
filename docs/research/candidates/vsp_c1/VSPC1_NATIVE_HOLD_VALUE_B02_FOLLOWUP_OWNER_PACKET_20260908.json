@@ -1,0 +1,50 @@
+{
+  "question": "是否把下一条VSPC1任务设为一次新比较：两种价值网络都加入相同的价值目标归一化，再检查门控收益和MLP相对悬停的表现？",
+  "changes_if_approved": [
+    {
+      "target": "P55之后的一个独立有界VSPC1任务",
+      "from": "P55的一个新训练对及intake已完成，当前没有追加调用",
+      "to": "若另行分配，只做一个GATED/完整MLP/H训练比较；两种学习器同时采用价值目标归一化，原生测量、信息和训练量保持一致。新卡事前固定统计量更新与量纲还原，不与旧两对合并为同一比较"
+    }
+  ],
+  "if_refused": "保留两对UP、两对MLP低于悬停及全部不利回合；不运行第三对，不改家族开放状态、生命周期、优先级或证据极性。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B02_INTAKE_20260908.md",
+      "quote": "| B02/8102 | +.1157271305 (.0094720558) | +.0265020852 (.0093884822) | −.0892250453 (.0107656186) |",
+      "why": "门控再次有局部收益，但大部分主差伴随MLP相对悬停的弱表现；应检查一个共同训练改动，而不是把大差值当成稳定优势。"
+    },
+    {
+      "path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B02_INTAKE_20260908.md",
+      "quote": "Both individual primary means exceed .01.",
+      "why": "两次独立训练的局部信号支持提出有限的后续比较，不代表当前已经分配或证明机制。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B02_RESULT_EVIDENCE_20260908.md",
+      "quote": "| GATED-V−H | +.026502085175597434 | .009388482227809858 | 11/32 |",
+      "why": "门控也有11个回合低于悬停，不能宣称控制可靠性。"
+    },
+    {
+      "path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B02_INTAKE_20260908.md",
+      "quote": "This supports a candidate comparison, not a diagnosis or a promised improvement here.",
+      "why": "PPO文献中的归一化证据来自不同游戏及GAE设置，不能断言它能修复本地MLP表现。"
+    }
+  ],
+  "uncertainty": [
+    "只有两个独立训练对；评价回合的条件标准误不是训练种子总体不确定性。",
+    "额外门控容量、共同梯度裁剪、价值量纲和策略优化路径仍未分开。",
+    "没有调好的同信息headroom；悬停只是未调优的已达到参考。",
+    "下一比较不保证MLP超过悬停，也不把基线调优、精确上界或完整归因变成B的额外启动门槛。",
+    "P55不新增代码、主键或调用；后续必须是另行分配的新任务。"
+  ],
+  "cost": {
+    "compute": "若另行分配：2×512×256训练步加3×32×256评价步，共286720原生团队步、2048次Adam、96次最终评价；完整上限1800秒/臂、3600秒/对。两次既有包围耗时308.63和304.52秒只作参考；归一化增量耗时未知，不加时序校准或搜索。",
+    "owner_time": "异步查看，无需现在回复。",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing; P55已经完成，当前没有等待批准的实验或第三对调用"
+  },
+  "verdict_text": "Recommend one later matched GATED-V/full-MLP/H B comparison with symmetric value-target normalization and unchanged native measurement and budgets; do not append another pair to P55.",
+  "source": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B02_INTAKE_20260908.md"
+}
