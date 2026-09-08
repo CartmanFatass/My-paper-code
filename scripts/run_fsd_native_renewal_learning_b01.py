@@ -34,7 +34,7 @@ from run_flexible_skill_duration_e3 import arm_parameters, peak_rss_bytes
 OBJECT_ID = "FSD_NATIVE_RENEWAL_LEARNING_B01"
 CARD = "docs/research/candidates/flexible_skill_duration/" + OBJECT_ID + "_SCIENCE_CARD_20260908.md"
 SEED, EVAL_MASTER, ROLLOUTS, TRAIN_LANES, EVAL_LANES = 770203, 770204, 5, 16, 32
-CAPS = {"C": 900., "H": 900., "G": 60.}
+CAPS = {"C": 900., "D0": 1200., "H": 900., "G": 60.}
 NETWORKS = ("coordinator", "discoverer_actor", "discoverer_critic",
             "team_discriminator", "individual_discriminator")
 
@@ -66,7 +66,7 @@ def applied_mask(policy, internal, host, env_steps):
 
 
 def base_summary(policy, corridor, launch_sha, *, training_seed=SEED,
-                 evaluation_master=EVAL_MASTER, object_id=OBJECT_ID, card=CARD):
+                 evaluation_master=EVAL_MASTER, object_id=OBJECT_ID, card=CARD, control_policy="C"):
     return {
         "object_id": object_id, "card": card, "policy": policy, "launch_sha": launch_sha,
         "seed": None if policy == "G" else training_seed, "training_master": training_seed,
@@ -82,7 +82,7 @@ def base_summary(policy, corridor, launch_sha, *, training_seed=SEED,
                                  "evaluation_episodes", "evaluation_agent_step_batches",
                                  "greedy_act_batches", "agent_observations"), 0),
         "optimizer_calls": dict.fromkeys(NETWORKS, 0), "initial_parameter_norms": {},
-        "cap_seconds": CAPS[policy], "summed_panel_cap_seconds": 1860,
+        "cap_seconds": CAPS[policy], "summed_panel_cap_seconds": CAPS[control_policy] + CAPS["H"] + CAPS["G"],
         "external_complete_command_wall_seconds": None,
     }
 
@@ -103,7 +103,7 @@ def publish(out, summary, start, stage):
     check_deadline(start, summary["policy"], stage + ":published")
 
 
-def build_learner(corridor, out, summary, start, *, training_seed=SEED):
+def build_learner(corridor, out, summary, start, *, training_seed=SEED, control_policy="C"):
     policy = summary["policy"]
     check_deadline(start, policy, "setup")
     torch.set_num_threads(4)
@@ -112,12 +112,16 @@ def build_learner(corridor, out, summary, start, *, training_seed=SEED):
     torch.manual_seed(training_seed)
     adapter = RelayCorridorAdapter(corridor, num_envs=TRAIN_LANES, master_seed=training_seed,
                                   episode_ids=list(range(TRAIN_LANES)), squeeze_batch=False)
-    overrides = arm_parameters("large", "d2")
+    overrides = arm_parameters("large", "d0" if control_policy == policy == "D0" else "d2")
     config = build_corridor_learner_config(
         corridor, adapter, mode="d2", num_envs=TRAIN_LANES, rollout_length=corridor.horizon,
         k=overrides["skill_cap_k_max"], seed=training_seed, overrides=overrides)
     summary["learner_config"] = {key: getattr(config, key) for key in e0.CONFIG_DUMP_FIELDS
                                  if hasattr(config, key)}
+    if control_policy == policy == "D0":
+        for key in ("interruption_cost_c", "interruption_cost_c_Z"):
+            if summary["learner_config"][key] == float("inf"):
+                summary["learner_config"][key] = e0._jsonable(summary["learner_config"][key])
     check_deadline(start, policy, "learner construction")
     agent = HMASDAgent(config, device=torch.device("cpu"), log_dir=str(out / "learner_logs"))
     summary["counts"]["model_constructions"] += 1
@@ -344,16 +348,36 @@ def completed_arm(summary, policy):
             raise ValueError(f"{policy} damaged primary returns")
 
 
-def summarize_panel(h, c, g=None):
-    for name, arm in (("H", h), ("C", c)):
+def summarize_panel(h, c, g=None, *, control_policy="C"):
+    for name, arm in (("H", h), (control_policy, c)):
         completed_arm(arm, name)
     for key in ("object_id", "seed", "training_master", "evaluation_master", "host", "episode_ids",
-                "learner_config", "device", "torch_threads", "learner_precision"):
+                "device", "torch_threads", "learner_precision"):
         if h[key] != c[key]:
             raise ValueError(f"learned pair mismatch: {key}")
-    paired = {"h_minus_c_" + suffix: paired_statistics(h["evaluation"]["return_" + suffix],
+    if control_policy == "C" and h["learner_config"] != c["learner_config"]:
+        raise ValueError("learned pair mismatch: learner_config")
+    h_config, c_config = dict(h["learner_config"] or {}), dict(c["learner_config"] or {})
+    if control_policy == "D0":
+        for name, config in (("H", h_config), ("D0", c_config)):
+            expected = arm_parameters("large", "d0" if name == "D0" else "d2")
+            expected = {key: expected[key] for key in ("interruption_cost_c", "interruption_cost_c_Z",
+                        "skill_cap_k_max", "team_cap_k_Z")}
+            expected["k"] = expected["skill_cap_k_max"]
+            expected["high_level_buffer_size"] = config["num_envs"] * (config["rollout_length"] // expected["k"])
+            expected["high_level_batch_size"] = min(expected["high_level_buffer_size"], 128)
+            for key, value in expected.items():
+                if config.pop(key) != e0._jsonable(value):
+                    raise ValueError(f"learned pair mismatch: {name} {key}")
+    if h_config != c_config:
+        raise ValueError("learned pair mismatch: learner_config")
+    control_name = control_policy.lower()
+    paired = {"h_minus_" + control_name + "_" + suffix: paired_statistics(h["evaluation"]["return_" + suffix],
                                                       c["evaluation"]["return_" + suffix])
               for suffix in ("full", "post")}
+    if control_policy == "D0":
+        primary = paired["h_minus_d0_full"]
+        primary["sample_sd"] = float(np.std(primary["differences"], ddof=1))
     result = {"status": "complete", "independent_training_pairs": 1, "paired": paired,
               "reference_status": "incomplete", "reference_failure": "G unavailable"}
     if g is not None:
@@ -363,7 +387,7 @@ def summarize_panel(h, c, g=None):
                 if h[key] != g[key]:
                     raise ValueError(f"reference mismatch: {key}")
             for suffix in ("full", "post"):
-                for name, arm in (("h", h), ("c", c)):
+                for name, arm in (("h", h), (control_name, c)):
                     paired[f"g_minus_{name}_{suffix}"] = paired_statistics(
                         g["evaluation"]["return_" + suffix], arm["evaluation"]["return_" + suffix])
                 residual = np.asarray(paired["g_minus_h_" + suffix]["differences"]) - np.asarray(h["evaluation"]["role_loss_" + suffix])
@@ -371,29 +395,31 @@ def summarize_panel(h, c, g=None):
             result["reference_status"], result["reference_failure"] = "complete", None
         except (KeyError, TypeError, ValueError) as exc:
             result["reference_failure"] = str(exc)
-    mean = paired["h_minus_c_full"]["mean"]
+    mean = paired["h_minus_" + control_name + "_full"]["mean"]
     result["card_reading"] = "above_mei" if mean > .01 else "opposite_sign" if mean < -.01 else "small_or_resolution_limited"
+    if control_policy == "D0":
+        result["card_status"] = result["reference_status"]
     return result
 
 
 def main(argv=None, *, training_seed=SEED, evaluation_master=EVAL_MASTER,
-         object_id=OBJECT_ID, card=CARD):
+         object_id=OBJECT_ID, card=CARD, control_policy="C"):
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--policy", choices=("G", "C", "H"), required=True)
+    parser.add_argument("--policy", choices=("G", control_policy, "H"), required=True)
     parser.add_argument("--seed", type=int, choices=(training_seed,), required=True)
     parser.add_argument("--launch-sha", required=True)
     parser.add_argument("--out", type=Path, required=True)
-    parser.add_argument("--c-summary", type=Path)
+    parser.add_argument("--" + control_policy.lower() + "-summary", dest="control_summary", type=Path)
     parser.add_argument("--g-summary", type=Path)
     args = parser.parse_args(argv)
-    if args.policy != "H" and (args.c_summary or args.g_summary):
+    if args.policy != "H" and (args.control_summary or args.g_summary):
         parser.error("only H reads existing comparison summaries")
     out = args.out.resolve()
     out.mkdir(parents=True, exist_ok=True)
     torch.set_num_threads(4)
     corridor = proposal_config("large")
     summary = base_summary(args.policy, corridor, args.launch_sha, training_seed=args.seed,
-                           evaluation_master=evaluation_master, object_id=object_id, card=card)
+                           evaluation_master=evaluation_master, object_id=object_id, card=card, control_policy=control_policy)
     try:
         publish(out, summary, PROCESS_START, "setup")
         if args.policy == "G":
@@ -402,7 +428,7 @@ def main(argv=None, *, training_seed=SEED, evaluation_master=EVAL_MASTER,
             evaluate("G", adapter, GreedyOnPublicState(), summary, out, PROCESS_START)
         else:
             adapter, learner, overrides, theta0, counters = build_learner(
-                corridor, out, summary, PROCESS_START, training_seed=args.seed)
+                corridor, out, summary, PROCESS_START, training_seed=args.seed, control_policy=control_policy)
             publish(out, summary, PROCESS_START, "learner constructed")
             collect_training(args.policy, adapter, learner, summary, theta0, counters, out, PROCESS_START)
             final_evaluation(args.policy, corridor, learner, overrides, summary, out, PROCESS_START,
@@ -416,15 +442,15 @@ def main(argv=None, *, training_seed=SEED, evaluation_master=EVAL_MASTER,
             except (OSError, ValueError) as exc:
                 reference_failure = str(exc)
             try:
-                c = json.loads(args.c_summary.read_text(encoding="utf-8")) if args.c_summary else None
+                c = json.loads(args.control_summary.read_text(encoding="utf-8")) if args.control_summary else None
                 if c is None:
-                    raise ValueError("C unavailable")
-                summary["panel"] = summarize_panel(summary, c, g)
+                    raise ValueError(f"{control_policy} unavailable")
+                summary["panel"] = summarize_panel(summary, c, g, control_policy=control_policy)
                 if reference_failure:
                     summary["panel"]["reference_failure"] = reference_failure
             except (OSError, KeyError, TypeError, ValueError) as exc:
                 summary["panel"] = {"status": "incomplete", "failure": str(exc)}
-            summary["comparison_inputs"] = {"C": str(args.c_summary), "G": str(args.g_summary)}
+            summary["comparison_inputs"] = {control_policy: str(args.control_summary), "G": str(args.g_summary)}
         try:
             if sys.platform == "win32":
                 rss = peak_rss_bytes()
@@ -442,6 +468,8 @@ def main(argv=None, *, training_seed=SEED, evaluation_master=EVAL_MASTER,
         summary["wall_seconds_before_publication"] = time.perf_counter() - PROCESS_START
         write_summary(out, summary)
     success = summary["status"] == "complete" and summary.get("panel", {}).get("status", "complete") == "complete"
+    if control_policy == "D0" and args.policy == "H":
+        success = success and summary.get("panel", {}).get("card_status") == "complete"
     print(json.dumps({"status": summary["status"], "failure": summary["failure"],
                       "wall_seconds_after_publication": time.perf_counter() - PROCESS_START}))
     return 0 if success else 1
