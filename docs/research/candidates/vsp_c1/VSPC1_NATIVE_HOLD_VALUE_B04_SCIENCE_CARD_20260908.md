@@ -208,3 +208,77 @@ focused changed-boundary evidence, independent review and an exactly staged
 detached command. DM binds that accepted source before Root's sole submission;
 the same CM collects and this DM takes in the result. No B04 scientific model,
 environment, admission or accepted handle exists at preparation.
+
+## 7. Accepted source, exact execution binding and owner pause
+
+At2026-09-08T23:52:35Z accept the same CM's engineering delivery against §§2–5.
+Scientific source is **`a33a3820fe9d4a46a3231bcf267afc956554b6c5`**; final
+technical/staging/review records are committed at
+`97151526cf409d8eb16a88a353ea6037813cd019`. Both are pushed. The frozen
+card/spec input is `0a60f57514709a0eb390253576dc8df8f7d47c21`; sections1–6,
+master8202, UP(.60), the method, MEI and original counts/caps are unchanged.
+
+I inspected the actual35-line B04 runner, focused binding tests and result,
+complete [independent review](VSPC1_NATIVE_HOLD_VALUE_B04_PRODUCTION_REVIEW_20260908.md),
+[technical acceptance](VSPC1_NATIVE_HOLD_VALUE_B04_TECHNICAL_ACCEPTANCE_20260908.md)
+and raw [staging evidence](VSPC1_NATIVE_HOLD_VALUE_B04_STAGING_EVIDENCE_20260908.json).
+The runner changes only B04/8202 identity and calls the accepted normalized
+method. Core VSPC1/UCOPE/native-environment code and historical runners are
+unchanged against accepted B03 source. Valid/invalid CLI binding, all private
+key domains, full stubbed schedule and B04 checkpoint/publication identities
+are covered. Seven focused checks passed in3.79s pytest/5.3719231s process wall;
+scope §4 additions:none,35 non-test source lines/35-line runner, no §5 breach.
+The independent review has no material unresolved finding. Tests/staging supply
+engineering evidence only, with zero scientific invocation or native exposure;
+DM did not rerun them.
+
+Keep the inherited reporting qualification: duration's raw epsilon-based ratio
+from a zero initial norm is not a defined relative displacement. Retain that raw
+field but interpret the duration/gate relative change as undefined and report
+absolute movement at intake; gate's raw relative field is already null. No
+protected source change or extra experiment is needed for this reporting rule.
+
+Actual detached remote cwd is verified clean at the full accepted source:
+
+`/home/wu/hmasd-worktrees/vspc1-native-hold-value-b04-8202-a33a3820fe9d`
+
+Twelve required remote source digests match committed blobs, including the UCOPE
+environment/package dependencies. The655-byte LF script is staged at
+`/home/wu/hmasd-inputs/vspc1_hold_value_b04_8202_a33a3820fe9d.sh`, with identical
+remote readback and `bash -n` exit0. Its SHA256 is
+`a3f46d2ce69d4f2e818dd9008f4ac978a9dddd0c815dbb41d0ec123f5ecb1228`.
+Requested handle was directly `not_found`; new output/admission roots were absent.
+No admission or payload has executed at this binding. The historical B03 failed
+and corrected handles remain untouched.
+
+Root's sole ready submission is:
+
+```powershell
+ssh -o BatchMode=yes -o ConnectTimeout=10 hmasd-wsl-node /usr/local/bin/agent-task run vspc1_hold_value_b04_8202_a33a3820fe9d /bin/bash /home/wu/hmasd-inputs/vspc1_hold_value_b04_8202_a33a3820fe9d.sh
+```
+
+The script performs fresh actual-node memory admission before scientific state,
+then runs the fixed8202 entry point at accepted source. Output is
+`/home/wu/projects/HMASD/temp/directions/vsp_c1/exp/native_hold_value_b04_8202_a33a3820fe9d`;
+admission is the adjacent `native_hold_value_b04_8202_a33a3820fe9d_admission.json`.
+Retain CPU FP32/one process/one numerical thread,286720 steps/2048 Adam/96 eval,
+1800s per arm and3600s through complete publication/exit. The enclosing timer
+includes admission/exit; retain the internal split and charge any unpartitioned
+nonnegative residual conservatively to each arm's upper bound. Actual admission,
+counts, native return and complete runtime conformance remain execution facts.
+
+Object-tier options: (a) accept this binding and execute P66's selected pair;
+(b) add a native probe or redo unchanged checks first. Recommend/select (a).
+Owner-delegated decision (unattended,2026-09-03 instruction): (a),
+**OWNER_DELEGATED within P66**. Current owner reviews and relevant ledger owner
+cells are empty; Root's explicit new owner instruction below still controls.
+
+**OWNER_DIRECT safe pause, relayed by Root on2026-09-08:** finish only the current
+P66 binding/review, one exact8202 run, terminal collection and all-outcome intake;
+push the records, return them to Root and stop at the clean archived boundary.
+Options are (a) complete that assigned route then stop; (b) select a successor or
+extra scientific work. Execute (a) as directed. This changes no frozen scientific
+rule or lifecycle disposition and does not cancel the assigned8202 run. No
+successor, third normalized pair, tuning, extra H/evaluation or scientific retry
+will be selected. Root observes the sole accepted handle, returns terminal facts
+to the same CM for collection and then this DM for final intake and the safe stop.
