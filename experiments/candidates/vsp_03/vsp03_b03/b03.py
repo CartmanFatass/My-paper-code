@@ -13,7 +13,7 @@ from experiments.candidates.vsp_03.vsp03_b02.b02 import (
 )
 
 
-def run(seed, out, launch_sha, started, node, command):
+def run(seed, out, launch_sha, started, node, command, object_name="VSP03_B03"):
     out = Path(out)
     out.mkdir(parents=True, exist_ok=True)
     deadline = started + 120
@@ -21,7 +21,7 @@ def run(seed, out, launch_sha, started, node, command):
     torch.set_num_interop_threads(1)
     activity = {"episodes_started": 0, "episodes_completed": 0, "team_ticks": 0,
                 "target_transitions": 0, "decision_rows": 0, "rollout_policy_forwards": 0}
-    summary = {"object": "VSP03_B03", "seed": seed, "launch_sha": launch_sha,
+    summary = {"object": object_name, "seed": seed, "launch_sha": launch_sha,
         "node": node, "command": command, "status": "incomplete", "arms": {},
         "actual_rollouts": activity, "model_constructions": 0, "optimizer_steps": 0,
         "device": "cpu", "dtype": "float32", "compute_threads": 1,
