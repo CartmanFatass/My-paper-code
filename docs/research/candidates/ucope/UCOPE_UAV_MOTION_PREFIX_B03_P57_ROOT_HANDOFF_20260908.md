@@ -1,7 +1,12 @@
 # UCOPE B03 — accepted source and exact single-pair Root route
 
-**Ready for Root's one P57 launch; no scientific invocation has yet been
-accepted.** Source **`70900ac7e7aa3a85b4f4ad6a2a8031ccb346fd44`** implements
+**Completed route, 2026-09-08:**7101 finished with a valid just-below-MEI
+DOWN result; CM collection and [DM intake](UCOPE_UAV_MOTION_PREFIX_B03_P57_INTAKE_20260908.md)
+are complete. No launch, retry, second pair, aggregate or evaluation
+remains pending. Commands and prospective states below are historical
+provenance, not a new dispatch instruction.
+
+Source **`70900ac7e7aa3a85b4f4ad6a2a8031ccb346fd44`** implements
 common total explicit entropy coefficient0 in T/G while preserving the
 remaining B02 action/information/credit/native-return paths. This is a new
 package comparison, not a controlled entropy-causal comparison with B02.

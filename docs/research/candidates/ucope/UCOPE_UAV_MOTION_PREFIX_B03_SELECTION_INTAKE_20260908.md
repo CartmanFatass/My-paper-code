@@ -1,5 +1,11 @@
 # UCOPE B03 — P57 next-object selection, 2026-09-08
 
+**Completed P57 route:** the selected7101 pair and all-outcome
+[scientific intake](UCOPE_UAV_MOTION_PREFIX_B03_P57_INTAKE_20260908.md)
+are complete, with a valid just-below-MEI DOWN result. The selection and
+implementation states below retain their prospective provenance; no
+scientific invocation or automatic continuation remains pending.
+
 **Select one new in-family B: common explicit entropy coefficient0 in T/G,
 with all other B02 learner/action semantics retained, on fresh master7101.**
 This is an outcome-informed object-tier choice under P57. It neither treats

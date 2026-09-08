@@ -200,3 +200,23 @@ Root retains staging/current-state reconciliation, fresh actual-node memory
 admission, launch and observation. CM retains terminal collection, and DM
 all-outcome intake. No scientific invocation is accepted by this binding;
 there is no second pair, aggregate, retry or additional evaluation route.
+
+## 8. Observed P57 completion — 2026-09-08
+
+The one allocated7101 pair is **COMPLETE / DOWN** at the accepted source.
+T−G is−0.010093085146628955, conditional evaluation SE0.008506138301283968,
+just0.0000930851466 below−0.01. G−H is+0.04756796231762334 and T−H
++0.03747487717099439. All96 final outcomes are retained; n=1 supplies no
+training-population uncertainty. The frozen§5 rule is unchanged and is
+not rounded into WITHIN or promoted to stable harm/entropy causality.
+
+Actual work is286720 team steps/2048 Adam/96 final episodes,283.51s whole
+wall, within all declared caps, with fresh admission and complete finite
+artifacts. The WITHIN prediction misses and positive G−H prediction hits
+(1/2); owner prediction not taken. See [E0](UCOPE_UAV_MOTION_PREFIX_B03_P57_RESULT_EVIDENCE_20260908.md),
+[computed summary](UCOPE_UAV_MOTION_PREFIX_B03_P57_RESULT_SUMMARY_20260908.json),
+[scientific intake](UCOPE_UAV_MOTION_PREFIX_B03_P57_INTAKE_20260908.md) and
+[Chinese brief](../../portfolio/owner/briefs/ucope/2026-09-08_UCOPE_UAV_MOTION_PREFIX_B03_P57.md).
+The unchanged B03 recipe is not automatically continued; P57 is complete
+and exhausted. No second pair, retry, aggregate, extra evaluation, new
+object, family disposition or formal UAV-entry change follows.
