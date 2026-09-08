@@ -4,9 +4,9 @@ Binding structure: `systems / information flow` — role/sender/receiver coordin
 # FRRIE R09 first-exception A05 card — 2026-09-07
 
 Object: `FRRIE-R09-FIRST-EXCEPTION-A05-P27-20260907`.
-Class: **A/RECON**. Status: `EXACT_BYTES_FROZEN / READY_FOR_ONE_ATTEMPT`.
-Allocation: P27 permits at most one complete diagnostic chain after exact input,
-command and focused acceptance are committed/pushed. No invocation has occurred.
+Class: **A/RECON**. Status: `ATTEMPT_ENDED / A05_INCONCLUSIVE`.
+Allocation: the sole P27 diagnostic chain ran for42.71s and is terminal. Remaining
+P27 allowance is zero; section8 links the frozen-rule intake. A has no consumption state.
 
 ## 1. Question, authority and amendment
 
@@ -231,8 +231,8 @@ clean boundary; no owner response is required to continue the authorized work.
 Item: [20260907-frrie-002](../../portfolio/owner/inbox/2026-09-07/20260907-frrie-002.json).
 Reviews were empty at the preparation boundary; no owner reply was inferred.
 Section7 completes the exact helper/input/command binding and focused acceptance.
-The sole launch/terminal facts will be retained in the linked handoff/E0 before
-intake. The initial74a547f4 freeze fixed the question and budget with bytes pending.
+Section8 links the sole launch/terminal evidence and intake. The initial74a547f4
+freeze fixed the question and budget with bytes pending.
 
 Root appends the supplied preparation decision row at integration; DM edits no
 shared audit. DIRECTION changes only if later accepted mechanism-level science
@@ -309,5 +309,27 @@ Append-ready technical acceptance row for Root integration:
 ```text
 | 2026-09-07T23:17:01-07:00 | finite_resource_relational_inductive_efficiency | object | technical | (a) accept bound A05 capture; (b) return unresolved code/check gap | (a):30643b7 helper/input and137ed1f handoff accepted;2 inert pdb children plus focused repair check,0.093809054s;zero actual scientific invocations,one120s P27 dispatch ready | yes | OWNER_DELEGATED (unattended,2026-09-03 instruction); P27 | docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R09_FIRST_EXCEPTION_A05_SCIENCE_CARD_20260907.md#7-dm-acceptance-and-exact-execution-binding--2026-09-07-2317-pdt | none | |
 ```
+
+## 8. Sole P27 terminal result and intake
+
+Root dispatched handle `frrie-a05-first-exception-p27-43eec21e` once on the pinned
+node/source at2026-09-08T06:24:06Z. It ended at06:24:48Z: the shell reports a
+segmentation fault for Python PID2765962, supervisor exit139; GNU-time wall42.71s,
+peak RSS873284KiB. Fresh admission passed and the accepted command/input bindings
+match. No Python traceback, target exception, capture summary or learner file was
+retained; the `learner/` directory is empty. Actual learning counts remain unknown.
+
+CM's [E0](FRRIE_R09_FIRST_EXCEPTION_A05_RESULT_EVIDENCE_20260907.md), committed
+through `25c04d9a08b23f067f2edf11100204c26347774f`, preserves the artifacts and
+limits. DM's [intake](FRRIE_R09_FIRST_EXCEPTION_A05_SCIENTIFIC_INTAKE_20260907.md)
+applies the unchanged §3 rule as **`A05_INCONCLUSIVE`**. The categorical target-state
+MEI was not met; the low-confidence prediction is unscored because collection
+failed, and the owner prediction was not taken. This is not a malformed/ordinary
+state verdict, a causal diagnosis or an R09 learning result. P22 and the original
+R09 card remain unchanged. The one P27 allowance is finished, with no retry or
+continuation released; the separate next-task recommendation returns through Root
+to Portfolio. The
+[Chinese owner brief](../../portfolio/owner/briefs/finite_resource_relational_inductive_efficiency/2026-09-07_A05-first-exception.md)
+accompanies the intake.
 
 scope: reuse existing optional pdb exception-state observation for the bounded record in section2
