@@ -1,6 +1,8 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-08 (P63 FRRIE grouped-factory fault repair)
+Updated at: 2026-09-08 (P63 FRRIE repair; P64 VSP03 independent instance)
+
+Current fifth-slot command: [P64 independent VSP03 G instance](handoffs/2026-09-08-p64-vsp03-independent-greedy-instance.md) allocates one separately specified fresh training instance after B03's loss to both fixed references, following its recorded direct next-discriminator suggestion. Keep the same comparison and120s complete cap; correct the next payload's known exit-publication defect without rewriting the old missing exit. The same DM/CM closes the full route and preserves seed4's outcome-informed discovery separately. This is an ordinary within-family extension, not reopening the T/initialization family or claiming UAV entry. P60/P61/P62 remain assigned, P63 repairs FRRIE, and SCDMP P58 remains a named terminal Send-control dependency counting zero. Five issued direction routes count only as their actual work advances.
 
 Current FRRIE repair: [P63 grouped-factory fault repair](handoffs/2026-09-08-p63-frrie-factory-fault-repair.md) resumes the same CM after P59's actual five-group TEST-factory SIGSEGV. Use retained current fault evidence first; at most one120s missing-context diagnostic and, only for a supported correction, one120s affected verification complete the bounded engineering route. No speculative interpreter replacement, tool-restriction bypass, learner retry or production-clearance inference follows. Root reports P60 VSPC1, P61 UCOPE and P62 DISH advancing; SCDMP P58 is an exhausted Send-control blocker and counts zero. P63 counts only during actual accepted work; another suitable fifth-slot command is considered independently.
 
