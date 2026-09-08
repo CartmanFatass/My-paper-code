@@ -30,8 +30,11 @@ It asks whether the final learned scheduler beats fixed rules, and whether initi
 anything beyond ordinary same-information learning. The complete B02 seed-4 result
 now shows a small primary gain over R, no sampled greedy T gain beyond its initial
 rule R0, and adverse stochastic execution for both learners.
-The complete post-result Convergence decision now pauses only that tested B02
-comparison family, preserving every result and selecting no successor or second recast.
+The complete post-result Convergence decision paused only that tested B02
+comparison family, preserving every result and selecting no successor at that boundary.
+The later P54 Convergence decision selects one ordinary-G greedy-use B03 within the
+same shared-service question, while the T-initialization family remains paused.
+It is a bounded re-entry and narrowing, not a second RECAST; recasts remain1.
 
 ## Current position
 
@@ -126,6 +129,23 @@ prerequisite now. No exact upper, tuned-headroom measurement, census, unique dia
 all-positive seeds are required to propose a specifically justified future B. A future family
 change must be classified on its actual selection; no second recast is pre-applied.
 
+**PRO_FINAL, 2026-09-08 P54: select one seed-5 ordinary-G B03 for a defined greedy
+shared-service use; recasts:1.** The controller to retain is now explicit: train G
+offline128 updates, freeze it, and submit at each legal clock iff its logit>0,
+otherwise continue. The new prospective primary is greedy G−R0 on1024 new worlds,
+with R and stochastic G retained. T is not trained; no initialization or new T−G
+claim survives. The source-defined use and complete selection justify one new
+training instance under a complete120s cap, not a retrospective change to B02.
+
+The node classifies this as a narrower ordinary-learning subquestion already present
+in B02, without a new host, information structure, resource consequence or learning
+mechanism. The old initialization family and N1 pause remain. G's small greedy
+gain is the strongest support; fixed readiness sufficiency, sampling/training
+variation and stochastic losses remain the strongest alternatives. No seed5 result
+exists at card selection. This one instance directly tests the proposed frozen
+controller; no automatic extra seed or diagnostic is selected. It has no UAV
+observation/action/resource mapping or UAV card and does not count as UAV entry.
+
 The strongest surviving alternative is that public dwell age already suffices and the generic
 MLP matches the prior, or that all advantage is the fixed rule rather than learning. In the new
 host R0, R or ordinary G may handle scheduling, while the local readiness prior could occupy the
@@ -141,6 +161,9 @@ sharing K1 does not pool polarity or reopen that family.
 ## Evidence set
 
 The evidence set includes historical observations and the separately labelled prospective selection:
+- `docs/research/candidates/vsp_03/VSP03_P54_GREEDY_USE_CONVERGENCE_INTAKE_20260908.md`
+- `docs/research/candidates/vsp_03/VSP03_B03_SCIENCE_CARD_20260908.md`
+- `docs/research/candidates/vsp_03/pro_packets/20260908_greedy_use_reentry_convergence/archive/RESPONSE.md` at `861c5072160d624970875b7345c2f72e78183e53`
 - `docs/research/RESEARCH_MAP.md`
 - `docs/research/candidates/vsp_03/CODE_SCIENCE_INDEX.md`
 - [A01 intake](VSP03_HEADROOM_CENSUS_A01_INTAKE_20260904.md)
