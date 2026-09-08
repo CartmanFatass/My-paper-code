@@ -1,11 +1,13 @@
 # FRRIE P47 native-crash repair intake — 2026-09-08
 
-**One valid narrow A/RECON native-boundary nonreproduction; no production repair.**
-The preserved library completed 1,568 calls and 12,288 fixed-input lane transitions
-in 0.33s. A second, distinct input-factory diagnostic was supervisor-accepted
-before the fresh CM runtime stopped with a cybersecurity-risk flag. Its terminal
-collection and final CM acceptance remain unresolved in this intake's initial
-record; acceptance is not a failure, completion, or retry authorization.
+**Current reading: native-boundary nonreproduction plus a diagnostic-harness
+failure; no production repair.** The native check completed1,568 calls and12,288
+fixed-input lane transitions in0.33s. The second check exited1 in1.58s before
+generating any tape because its harness misused `require_torch()`'s return.
+Both handles are terminal and collected. The harness import is corrected in
+source only; no relaunch/retry is authorized. Section7 records the completed
+intake and supersedes the pending collection/recovery status in the initial
+sections1–6, preserved from827a9e93a as historical intake context.
 
 ## 1. Assignment, current authority and evidence checked
 
@@ -212,6 +214,109 @@ rows once to its shared audit; the DM does not edit the concurrent main ledger.
 ```text
 | 2026-09-08T16:21:12Z | finite_resource_relational_inductive_efficiency | object | technical | (a) narrow native pass and retain second accepted/collection interrupted; (b) claim fix/R09 result; (c) infer polarity or bypass | (a):1568 calls/12288 fixed-input transitions,0.33s exit0;second factory handle accepted,CM runtime flagged;no production repair or quarantine change | yes | OWNER_DELEGATED (unattended,2026-09-03 instruction); OWNER_DIRECT P47 | docs/research/candidates/finite_resource_relational_inductive_efficiency/NATIVE_CRASH_P47_REPAIR_INTAKE_20260908.md | none | |
 | 2026-09-08T16:21:12Z | finite_resource_relational_inductive_efficiency | object | technical | (a) existing observation/intake and exact runtime restriction return; (b) replacement executor/third probe; (c) learner cap reset | (a):only accepted factory-handle observation/collection remains;no R09 retry;no executor switch or relaunch | yes | OWNER_DELEGATED (unattended,2026-09-03 instruction); OWNER_DIRECT P47 | docs/research/candidates/finite_resource_relational_inductive_efficiency/NATIVE_CRASH_P47_REPAIR_INTAKE_20260908.md#5-decisions-this-intake-produces | none | |
+```
+
+## 7. Collected harness failure and static correction — 21:00Z update
+
+Root resumed this DM after integrating CM collection/correction
+`5831dafaab0e47d0c13fe1cbefcc94e5a817b1bc`, with an explicit **no relaunch or
+retry** instruction. The same CM completed collection and returned its editing
+turn; the original runtime interruption remains recorded and is not attributed
+to the harness exception. No replacement executor or additional invocation is
+part of this update. Earlier receipt uncertainty is now resolved by retained
+terminal bytes, not by an assumption that an accepted process must finish.
+
+### Evidence checked and bounded reading
+
+DM read the CM E0's complete new “Input-factory terminal evidence and technical
+return” section, the original launch/admission/log/time files under
+`exp/p47_input_factory/`, and the5831dafaa diff. The retained traceback names the
+old diagnostic's `torch.set_num_threads(1)` line18. The original source assigns
+`torch = require_torch()` immediately before that line; `policy.py:52` defines
+`require_torch() -> None` and only raises if Torch is unavailable. Thus the
+failure is a concrete harness API misuse, before root conversion and the first
+`production_training_inputs` call. The corrected test uses `import torch`.
+
+Applied the CM E0 reading verbatim:
+
+> No native crash was observed by this attempt; it also supplies no input-factory success/failure evidence.
+
+This is the narrow result required by evidence-spec11.8.7 and the P47 rule in
+section1. The intended grouped-factory observation was not obtained. A valid
+exit/exception/count fact survives, while the missing factory measurement
+cannot support a production-factory or runtime-cause claim. The native check's
+earlier pass remains independently reportable at its original ceiling.
+
+| Retained quantity | Actual observation |
+| --- | --- |
+| Accepted identity/source | `frrie-p47-input-factory-20260908`; `2fa3b1da8a9a9f05af73e2ae03bf8204a1f2cb52` |
+| Terminal | Supervisor starts16:16:34Z and exits1 at16:16:35Z; process-time1.58s; no second handle |
+| Exception | `AttributeError: 'NoneType' object has no attribute 'set_num_threads'` in the diagnostic harness |
+| Actual exposure | Zero tapes, origin rows/selections, models, learners, optimizer steps, native calls and scientific evaluations; source order plus the traceback establishes zero here, rather than missing output alone |
+| Fresh admission |16:16:34.170221Z; physical/effective15,641,108,480 bytes; pass against4,294,967,296 bytes |
+| Process peak RSS |383,352KiB =392,552,448 bytes |
+| Combined measured diagnostic wall |0.33+1.58 =1.91s; each invocation below its120s bound |
+| Corrected source |5831dafaa; only the test's Torch import changed; runtime executions of the correction:0 |
+
+The1.91s is a sum of process times, excluding control-plane authoring, staging
+and collection. It is not study elapsed wall, aggregate CPU work or learner
+throughput. Unmeasured resource coverage stays as described in section2.
+The prospective512 tapes/1,536 origin selections are planned counts, not
+completed work. The eight-coordinate fixture did not provide even its first
+group, so the proposed failure/nonreproduction hypothesis remains untested.
+Owner prediction remains **not taken (unattended)**; this harness error does
+not score the prospective production-factory hypothesis or R09 return forecast.
+
+DM's stdlib analysis parsed the retained error/terminal/time/admission records,
+computed RSS units and1.91s sum, and parsed the corrected test's AST without
+importing the scientific code. Receipt:
+`temp/directions/finite_resource_relational_inductive_efficiency/exp/p47_dm_intake/dm_terminal_checks.json`.
+CM's AST/diff checks are reused; static parsing establishes syntax only. The
+earlier AST check did not detect this API misuse and was not a passing runtime
+check. Static inspection supports the local import correction, but no corrected
+512-tape check or production repair is accepted. No native/semantic production
+source changed; no high-impact production review was triggered or claimed.
+
+### Decisions this completed intake produces
+
+**Object tier, technical.** Options: (a) accept the collected harness-failure
+facts and static-only test correction, preserve the native pass, and stop under
+Root's explicit no-retry instruction; (b) call the harness exception a reproduced
+production crash; (c) call the corrected test passed or relaunch it from unused
+wall time. Recommend/select **(a)**. **Owner-delegated decision
+(unattended,2026-09-03 instruction): (a).** No historical quarantine, R09 rule,
+claim ceiling or scientific disposition changes. Owner flags:none.
+
+There is **no remaining runnable invocation under this return**. Both accepted
+handles are terminal and collected. The prepared but unexecuted next diagnostic
+is the same512 TEST-fixture tapes/512 origin rows/1,536 selections using the
+corrected script at5831dafaa, a fresh exact-source detached cwd/handle/output,
+the same system312/CPU/thread bindings and fresh admission, within one complete
+120s bound. It requires an explicit subsequent selection/allocation resolving
+the no-retry instruction; this intake supplies none. No learner remainder exists.
+
+That next check would test the grouped factory, not complete causal diagnosis.
+The strongest support for the present technical conclusion is the matching
+traceback and helper contract. The strongest limitation is that the intended
+factory never ran; the existing production crashes and missing cause remain.
+DIRECTION's mechanism evidence and section3's R06–R09 limits are unchanged.
+
+### Clean boundary and incremental audit
+
+The reused authoring checkout was clean at5831dafaa before this DM update.
+Main owner reviews again returned`[]`; no reply needed application or scoring.
+The Chinese brief now contains both terminal outcomes and the corrected-but-
+unexecuted boundary. This return changes only the intake and brief, with no
+scientific import, test invocation, remote execution or source edit by the DM.
+
+Root already integrated5831dafaa; integrate only this new DM update and append
+the following row once. At this check, the two earlier16:21:12Z P47 rows in
+section6 were also absent from main's September8 audit; append them as historical
+rows if still absent, followed by this update. Preserve their original status
+and times; this new row records the resolved collection facts.
+
+```text
+| 2026-09-08T21:00:11Z | finite_resource_relational_inductive_efficiency | object | technical | (a) harness-failure facts/static correction and no retry; (b) production-crash attribution; (c) infer corrected pass or relaunch | (a):factory exit1 before0 tapes/models/learners/native calls,1.58s;native pass retained;sum1.91s;both handles collected;corrected5831dafaa unexecuted;no runnable allocation | yes | OWNER_DELEGATED (unattended,2026-09-03 instruction); P47; Root explicit no-retry collection instruction | docs/research/candidates/finite_resource_relational_inductive_efficiency/NATIVE_CRASH_P47_REPAIR_INTAKE_20260908.md#7-collected-harness-failure-and-static-correction--2100z-update | none | |
 ```
 
 scope: none
