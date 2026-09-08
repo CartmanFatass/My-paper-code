@@ -31,3 +31,33 @@
    observes after adoption; you retain collection. No prior cleanup retry. In-scope
    ordinary code/check repairs continue; a result-bearing failure returns its facts
    without another invocation. Hand the shared index back at source and result returns.
+
+## P65 correction handoff
+
+1. **Deliverable:** close the one complete-deadline finding under B04 card section 8
+   and [P65](../../portfolio/handoffs/2026-09-08-p65-vsp03-complete-deadline-correction.md),
+   then continue P64's one invocation/collection route. Reuse this CM and reviewer;
+   a small committed B04-specific wrapper/adapter is now explicitly allowed.
+2. **Ownership:** same checkout/branch as above, source base `1289f051494306daf17d8844ca7c13c2a21d3b13`.
+   Own only B04 launch integration, a B04-specific adapter under the existing candidate
+   or thin-runner surfaces, focused checks, and B04 execution/review/technical records.
+   Preserve others' work and scientific source/runner bindings; serialize the shared
+   index. DM owns card/scientific intake/owner/audit. No global supervisor/config edit.
+3. **Semantics:** card sections 1–5 remains the seed-6/G1/Torch40006 science. Section 8
+   supplies one complete <=120s clock before startup/admission, with termination and
+   attributable terminal publication inside it. Reserve shutdown/publication within
+   that cap, cover descendants and failure paths, and distinguish authoritative task
+   exit evidence from unmodified supervisor bookkeeping without forging either.
+4. **Acceptance:** card section 8 and prelaunch intake sections 2–3. Independently
+   review only changed lifecycle/exit/deadline boundaries. Shortened harmless normal
+   nonzero-exit and forced-timeout fixtures must check terminal evidence and descendant
+   termination. Reuse passing seed/object/status checks; zero scientific validation.
+   A required publication outside containment remains a gap. Return actual source,
+   review/check evidence and exact command for DM acceptance and Root integration.
+5. **Budget/stop:** one small task-specific adapter within cumulative ordinary B04
+   source/runner/test budgets, no standing framework. Preparation has zero scientific
+   invocation; P64's one complete120s run is the only scientific allocation. After
+   accepted integration, same CM performs fresh admission/one detached exact-SHA launch,
+   Root observes and same CM collects. No timeout retry, extra seed, old cleanup retry,
+   scientific probe or cap expansion. Return only a concrete remaining capability/scope
+   conflict that this bounded correction cannot solve; ordinary corrections continue.

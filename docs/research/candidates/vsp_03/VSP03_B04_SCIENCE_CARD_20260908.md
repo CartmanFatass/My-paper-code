@@ -126,12 +126,14 @@ are unknown. Do not run a timing, profiling, calibration or scientific smoke pro
 Use configured remote-first **wsl_4070, CPU float32, one thread**, with inherited
 float64 exogenous worlds, exact committed/pushed source and a detached worktree.
 Fresh destination admission must measure physical and effective available memory
-each >=4 GiB before scientific construction. Preserve the existing supervisor.
-The new payload must return its real status to that supervisor so the numeric
-exit receipt is published; do not repeat B03's top-level exec that bypassed its
-postamble. Include exit publication in complete elapsed accounting. A lower-level
-timer alone is not proof of the complete boundary. Focused harmless shell/receipt
-checks are allowed; no new supervisor framework or scientific validation execution.
+each >=4 GiB before scientific construction. Preserve the installed supervisor.
+P65's bounded adapter in section 8 now supplies the complete deadline and attributable
+terminal publication. Its exact binding must identify the complete task's authoritative
+exit/deadline evidence separately from unmodified supervisor bookkeeping. Every required
+publication must be inside containment; leaving required supervisor publication outside
+keeps the finding open. Return the real command status, without forging supervisor
+records or inferring success from an outer wrapper. A lower-level timer alone is not
+the complete boundary. No global supervisor framework or scientific validation run.
 
 Stop at the sole complete result/exit, the 120s cap, or a concrete dependent defect.
 Preserve partial facts; no retry, resume, fallback, seed replacement, extra evaluation
@@ -140,7 +142,9 @@ P64 authorizes no cleanup retry. New invocation scratch follows current tests/AG
 
 ## 6. Scope, CM route and prospective decision
 
-This object needs **none** of ENGINEERING_SCOPE_SPEC section 4's optional machinery.
+The initial P64 binding needed none of ENGINEERING_SCOPE_SPEC section 4's optional
+machinery; the explicit P65 correction now needs the one task-local deadline/termination
+adapter named in section 8. It needs no other optional machinery.
 The ordinary 2000 new-source-line, 600 runner-line and five-minute test budgets
 remain; 30% orchestration is a review signal. Reuse existing functions, admission,
 supervisor and simple publication; no monitor, pool, registry, recovery or validator.
@@ -178,3 +182,43 @@ finding that a child timeout plus later complete-span measurement does not enfor
 the complete 120s boundary through supervisor publication. The exact missing enclosing
 deadline route returns to Root; the same CM retains correction/collection ownership.
 No scientific run or new cleanup retry occurred, and the frozen science/cap is unchanged.
+
+## 8. P65 bounded execution-scope correction
+
+[P65](../../portfolio/handoffs/2026-09-08-p65-vsp03-complete-deadline-correction.md),
+at `5ded954073bcada7e60e06d62ab80009dd3aca01`, explicitly allocates the missing
+engineering scope while retaining P64's sole seed-6 scientific invocation. This
+section updates the prospective execution binding, not the scientific comparison,
+seed, RNG, learning exposure, utility or 120s total cap. Prior rejected candidate
+and B03 receipt evidence keep their original meaning.
+
+**Engineering scope section 4 need:** one B04-specific task-local deadline/termination
+wrapper or adapter, for the quantity **complete invocation wall <=120s**, including
+required startup, admission, all learner/output work, attributable terminal publication
+and descendant termination. This is one-shot enforcement with no restart, retry or
+recovery. No global supervisor edit/install, standing service, generic orchestration
+framework, governance change, registry, worker pool or unrelated telemetry is authorized.
+The CM chooses the small implementation from actual installed source and ordinary OS
+tools; this card does not assume a nonexistent supervisor flag.
+
+Start one clock before required startup/admission, reserve shutdown/publication time
+inside it, and derive internal remaining time from that clock. No stage reset or grace
+beyond 120s. Cover normal nonzero exit and forced timeout, including descendants; an
+accepted timeout spends the single invocation and does not permit retry. The final
+binding must name which exit/publication evidence is authoritative and account for
+every required publication inside containment. Unmodified supervisor bookkeeping is
+retained as its actual separate observation, never rewritten by the adapter.
+
+Reuse the passing seed/object/status checks. Independent review covers only the new
+lifecycle/deadline/exit paths, with harmless non-scientific normal nonzero-exit and
+forced-timeout fixtures under a shortened deadline, including terminal evidence and
+descendant termination. No new scientific model, world, learner, timing probe or repeated
+scientific source audit. Ordinary focused corrections remain with the same CM/reviewer. Cumulative B04
+source/runner/test budgets remain, without a new allowance per correction.
+
+The existing [CM assignment](VSP03_B04_CM_ASSIGNMENT_20260908.md#p65-correction-handoff)
+contains the bounded continuation. Commit/push implementation and evidence, then DM
+accepts the actual correction and Root integrates before the existing CM launches
+once through the configured detached agent-task route. No source acceptance or
+scientific result is asserted by this scope update. The prelaunch intake records
+the delegated decision, fresh owner scan and audit; no further Portfolio vote follows.

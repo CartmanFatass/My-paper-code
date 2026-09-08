@@ -93,3 +93,28 @@ audit rows identify `2026-09-08T22:32:53Z`. The seed-6 prediction remains unscor
 owner prediction not taken. No new valid B result or all-outcome scientific intake
 exists yet. P64's allocation, prior seed-5 negative result/null exit, discovery
 seed 4, recasts 1, old family pauses and absence of UAV entry are unchanged.
+
+## 4. P65 supplies the bounded correction
+
+Root returned the committed [P65 handoff](../../portfolio/handoffs/2026-09-08-p65-vsp03-complete-deadline-correction.md)
+at `5ded954073bcada7e60e06d62ab80009dd3aca01`. It expressly permits one small
+B04-specific wrapper/adapter and task-local deadline enforcement covering required
+startup/admission, all work, descendant termination and attributable terminal publication.
+It does not permit a global supervisor/framework change, forged records, a second clock,
+grace beyond 120s, or another scientific invocation. CM chooses from actual installed
+source and OS tools; no unobserved capability or completed acceptance is presumed.
+
+**Object-tier decision:** options (a) apply this exact engineering scope in card
+section 8 and resume the same CM for focused correction/review; (b) retain the old
+unsupported payload-only boundary; (c) alter science, cap or global framework.
+Recommend and select (a). **Owner-delegated decision (unattended, 2026-09-03
+instruction): (a).** This is the newly supplied technical route, not an overruling
+of the prior finding or a new Pro/Portfolio scientific decision. The P64 finding
+stays open until the actual implementation and independent shortened fixtures close it.
+
+Fresh main owner reviews returned `[]`; no owner takeover or VSP03 override was found.
+The shared checkout merged committed P65 inputs at `b6ad47e95`, starting clean. The
+only audit merge conflict was resolved with exact main bytes after verifying all
+prior nonblank direction records were present. P64's one seed-6 allocation remains
+unstarted and its prediction unscored. Existing new-card item 003 points to the
+updated card; the ordinary technical decision is in the audit, without another item.
