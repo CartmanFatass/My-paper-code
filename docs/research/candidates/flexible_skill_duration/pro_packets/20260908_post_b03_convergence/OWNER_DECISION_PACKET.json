@@ -1,0 +1,45 @@
+{
+  "question": "是否保留已按完整 Pro 裁决应用的 A：结束这次公开续约混合控制包的有限学习扩展，保留普通分支暂停，不选择后继对象？",
+  "changes_if_approved": [
+    {
+      "target": "DIRECTION.md · Post-B03 limited-extension boundary (P52)",
+      "from": "B03 已完成，下一方向对象尚未选择，DM 建议 A",
+      "to": "完整 Convergence 已选 A 并按 standing delegation 应用：结束本次已测试扩展，无后继；B01/B02/B03 结果和普通分支暂停保留"
+    }
+  ],
+  "if_refused": "下一个干净边界按所有者明确改令处理；保留完整答复和既有正反证据，不擅自选新机制、补跑或重发已完成请求。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/pro_packets/20260908_post_b03_convergence/archive/RESPONSE.md",
+      "quote": "上次选择 H/D0 的理由，是把“只胜过内部 D2 控制 C”的支持推进到一个此前没有同期读数的实际固定时钟比较；这个区别现在已经被观察。",
+      "why": "原来能推进比较意义的特定问题已答，再一对主要增加同一构造的变异覆盖。"
+    },
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/pro_packets/20260908_post_b03_convergence/archive/RESPONSE.md",
+      "quote": "**最强当前反面量是 G 仍比 H 高出 full 0.1152864583333331，且 H 在 68220 个自身 KEEP/fresh 机会中做错 8662 次原生角色选择。**",
+      "why": "混合控制包的局部优势仍伴随明显的原生角色短缺，不能升级为学会续约或优于公开规则。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/pro_packets/20260908_post_b03_convergence/archive/RESPONSE.md",
+      "quote": "**最强支持必须正面保留：**收益已在真实 own-trajectory 学习后直接超过一个新训练、内部与实际续约时钟均正确配置的 fixed-clock learner，不再只是 H/C 的 component 比较。",
+      "why": "H−D0 +.392865 是有效局部正结果；新配对有非零信息价值，停止不撤回这个支持，也不证明未来不同问题无价值。"
+    }
+  ],
+  "uncertainty": [
+    "仅一个 H/D0 training pair，保留32回合条件 SE .009651，不能估计训练种子总体稳定性。",
+    "D0 弱但有效，actor/critic 各18000步对 H2250步；数据、internal credit clock 和梯度工作差异不能分配因果份额。",
+    "B01/B02 是不同 H/C pairs，当前较大 G 缺口不能归因于更换比较器。",
+    "没有选择一个具体的新原生动作或 UAV B；现有接口可能性不是迁移证据。",
+    "tuned generic headroom 仍缺失，但没有变成补测门槛。"
+  ],
+  "cost": {
+    "compute": "本次咨询与 intake 新科学调用、模型、训练、评价、profiling、replay 全为0。已完成 B03 总完整墙时898.61秒、64000训练转换、96终点回合；未选重复的2160秒上限不是新分配或余额。",
+    "owner_time": "异步查看即可；可明确修改已应用决定。",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing；P52 完整方向裁决按 standing delegation 已应用，不等待回复，也没有选定卡片或实现等待准备。"
+  },
+  "verdict_text": "**选择 A：结束当前 N6/K2 大 Bernoulli corridor 上 supplied-public-mask hybrid 的有限早期学习扩展，保留普通 fixed-K2 policy-gap learning family 的原暂停；本次不选择后继对象。**",
+  "source": "docs/research/candidates/flexible_skill_duration/pro_packets/20260908_post_b03_convergence/archive/RESPONSE.md"
+}

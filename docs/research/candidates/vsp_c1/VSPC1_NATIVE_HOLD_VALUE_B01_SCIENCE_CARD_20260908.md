@@ -295,3 +295,12 @@ measured arm interval as a conservative cap upper bound, while reporting the
 external whole interval once. Startup still belongs to GATED; H/publication/exit
 belong to MLP. No new instrumentation or experiment is selected. Optional telemetry
 gaps limit resource reporting and do not erase independently trustworthy returns.
+
+## 8. Completed observation
+
+The selected seed8101 pair completed at the bound source. The
+[E0 result](VSPC1_NATIVE_HOLD_VALUE_B01_RESULT_EVIDENCE_20260908.md) and
+[scientific intake](VSPC1_NATIVE_HOLD_VALUE_B01_INTAKE_20260908.md) record a valid
+complete UP observation, with GATED-V−MLP-V+.0293656586 and the required H-relative
+limitations. The prospective definition and reading rows above remain unchanged.
+No additional invocation or fresh key is allocated by this result link.

@@ -75,13 +75,14 @@ def primary_from_rows(rows, expected, reset_start):
     return result
 
 
-def checkpoint_identity(config, arm, sha):
-    return dict(object=OBJECT, algorithm=arm, arm=arm, seed=config.seed,
+def checkpoint_identity(config, arm, sha, object_id=OBJECT):
+    return dict(object=object_id, algorithm=arm, arm=arm, seed=config.seed,
                 mode="ENGINEERING_FIXTURE" if config.fixture else "UAV_B_EXPLORE",
                 configuration=asdict(config), ratio_grouping="agent_compound", launch_sha=sha)
 
 
-def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=write_summary):
+def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=write_summary,
+             *, object_id=OBJECT, card=CARD):
     import torch
     from experiments.candidates.ucope.uav_motion_prefix_b01.environment import SyntheticAdapter, make_real
     from experiments.candidates.ucope.uav_motion_prefix_b01.learner import collect_episode, optimizer_for, update
@@ -97,7 +98,7 @@ def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=wri
     b = 100000 * config.seed
     sha = subprocess.check_output(["git", "rev-parse", "HEAD"],
                                   cwd=Path(__file__).resolve().parents[4], text=True).strip()
-    summary = dict(object=OBJECT, card=CARD, seed=config.seed, launch_sha=sha,
+    summary = dict(object=object_id, card=card, seed=config.seed, launch_sha=sha,
                    mode="ENGINEERING_FIXTURE" if config.fixture else "UAV_B_EXPLORE",
                    configuration=asdict(config), ratio_grouping="agent_compound",
                    arms=arms, limits=limits, status="INCOMPLETE",
@@ -171,7 +172,7 @@ def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=wri
             arm_info["training_counts"] = counts.copy()
             arm_info["exposure"] = movement(initial, actor, critic)
             deadline.check()
-            torch.save(dict(checkpoint_identity(config, arm, sha), actor=actor.state_dict(),
+            torch.save(dict(checkpoint_identity(config, arm, sha, object_id), actor=actor.state_dict(),
                             critic=critic.state_dict()), out / f"final_{arm}.pt")
             arm_info["checkpoint"] = f"final_{arm}.pt"
             deadline.check()
@@ -234,7 +235,7 @@ def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=wri
         for arm, info in arms.items():
             if "checkpoint" in info:
                 saved = torch.load(out / info["checkpoint"], map_location="cpu", weights_only=True)
-                if any(saved[k] != v for k, v in checkpoint_identity(config, arm, sha).items()):
+                if any(saved[k] != v for k, v in checkpoint_identity(config, arm, sha, object_id).items()):
                     raise ValueError(f"{arm} checkpoint identity readback mismatch")
         summary["publication_readback"] = "complete"
     except Exception as error:
