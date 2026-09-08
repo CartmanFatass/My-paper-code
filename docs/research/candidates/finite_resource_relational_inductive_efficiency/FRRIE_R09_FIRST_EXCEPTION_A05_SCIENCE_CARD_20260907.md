@@ -4,7 +4,7 @@ Binding structure: `systems / information flow` — role/sender/receiver coordin
 # FRRIE R09 first-exception A05 card — 2026-09-07
 
 Object: `FRRIE-R09-FIRST-EXCEPTION-A05-P27-20260907`.
-Class: **A/RECON**. Status: `QUESTION_FROZEN / DIAGNOSTIC_BYTES_PENDING`.
+Class: **A/RECON**. Status: `EXACT_BYTES_FROZEN / READY_FOR_ONE_ATTEMPT`.
 Allocation: P27 permits at most one complete diagnostic chain after exact input,
 command and focused acceptance are committed/pushed. No invocation has occurred.
 
@@ -230,9 +230,9 @@ Publish the P2 new-card item and read asynchronous owner instructions at each
 clean boundary; no owner response is required to continue the authorized work.
 Item: [20260907-frrie-002](../../portfolio/owner/inbox/2026-09-07/20260907-frrie-002.json).
 Reviews were empty at the preparation boundary; no owner reply was inferred.
-Exact helper/input/command binding, focused acceptance and sole launch/terminal
-facts will be appended here or in the linked handoff/E0 before intake. Until those
-bindings are committed, this card fixes the scientific question and budget only.
+Section7 completes the exact helper/input/command binding and focused acceptance.
+The sole launch/terminal facts will be retained in the linked handoff/E0 before
+intake. The initial74a547f4 freeze fixed the question and budget with bytes pending.
 
 Root appends the supplied preparation decision row at integration; DM edits no
 shared audit. DIRECTION changes only if later accepted mechanism-level science
@@ -242,6 +242,72 @@ Append-ready audit row (actual invocation count remains zero at this freeze):
 
 ```text
 | 2026-09-07T22:35:57-07:00 | finite_resource_relational_inductive_efficiency | object | selection | (a) separate A05 first-exception input/cap; (b) first-input cut; (c) blind R09 retry/asdict rewrite | (a):P27 diagnostic question frozen with exact bytes pending;one prospective120s original-schedule chain after acceptance,zero actual invocations | yes | OWNER_DELEGATED (unattended,2026-09-03 instruction); P27 | docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R09_FIRST_EXCEPTION_A05_SCIENCE_CARD_20260907.md | none | |
+```
+
+## 7. DM acceptance and exact execution binding — 2026-09-07 23:17 PDT
+
+Accept the [CM Root handoff](FRRIE_R09_FIRST_EXCEPTION_A05_ROOT_HANDOFF_20260907.md)
+at **`137ed1fda47662f4eb51fa9d70f41a6a3675d2a2`**. Its sole sh fence, staging paths
+and runtime in §§1–2 are the exact dispatch handoff. The scientific/preflight tree
+is still **`43eec21e9584c83e5e8d940402d7e4570b454e59`**. The separately staged
+diagnostic helper/input use **`30643b7359b35c6e9d5751147d0999bc629a966d`**:
+
+| Bound quantity | Bytes | SHA256 |
+| --- | ---: | --- |
+| Standalone `r09_first_exception_a05/capture.py` | 11464 | `0e75801266db0dc339da63ddd1a1f5a981b5b26bfc4ae243e87f8feb678f87b8` |
+| New A05 pdb stdin | 173 | `361c1df2f98b3291416cb1b7f20195440dd1f01a535586123f8889aab4a643f0` |
+| Handoff's sole command, extracted exactly as its §2 defines | 1187 | `2976134a5690041fea083bef024aff1e28c92225c4d42479ccca38599893976d` |
+
+The two-line input is used with **`-m pdb -c continue -m
+scripts.run_frrie_b01_contact_r09`**. The initial continue enters the original
+program once; the subsequent input performs the bounded read, then q/EOF.
+Normal-entry `no_active_exception_at_entry_prompt` is a separate record from a
+post-mortem capture. Neither an entry prompt nor debugger exit0 establishes
+scientific completion; actual termination still receives card §3 intake.
+
+DM checked the complete helper/input and the narrow final missing-attribute fix,
+the retained original address declaration and execute counter names, the literal
+against the original entry/admission/runtime profile, and the CM's syntax and
+remote source-readback receipts. The helper selects module/function/file identities,
+uses its own namespace, and does not call the original computation or advance its
+iterator. The final two-line helper repair labels an absent field-table attribute
+explicitly, without assigning the helper's sentinel a purported live identity.
+All ordinary/target paths and the pdb input remain byte-identical to66106b3.
+
+DM read the raw inert target/normal stdout, original target stderr, one-line body
+markers, summaries and receipt. Both cases traversed their inert module body once
+and published one summary. The target-like11-frame record contains all14 coordinates,
+the declared counters and no missing component/capture error; its shape checks are
+all true. The normal record has no active exception. The standard pdb restart
+notice is retained separately from these one-body marker observations.
+
+The original two-child fixture at66106b3 took0.073838544s. The isolated absent-
+attribute assertion at final30643b7 took0.019970510s and launched no further pdb
+child. Computed combined inert time is **0.093809054s**, within25s. The existing
+two-child evidence was reused after inspecting that exact narrow diff; neither CM
+nor DM repeated it. These are preparation facts, with **zero actual scientific
+invocations**. They do not demonstrate recurrence, full learner readiness or
+P22 cause. Parent byte/arithmetic/receipt readback is retained in
+`temp/directions/finite_resource_relational_inductive_efficiency/exp/a05_preparation_p27/dm_acceptance_readback.json`.
+
+Object-tier options: (a) accept these bound bytes and release the sole P27
+diagnostic to Root; (b) return an unresolved implementation/acceptance gap.
+Recommend/select **(a)**: the identified missing-attribute gap is repaired and
+focused acceptance is complete. **Owner-delegated decision (unattended,
+2026-09-03 instruction): (a).** Main owner reviews were empty at this clean
+boundary. The original §3 reading rule, prediction, scope, work and120s cap are
+unchanged. No repeat acceptance check or additional scientific allocation follows.
+
+Root now stages the exact diagnostic bytes outside a fresh original43ee detached
+tree and uses the one literal with handle `frrie-a05-first-exception-p27-43eec21e`.
+The original4GiB admission is fresh and adjacent within that same TERM115+5 chain.
+Root observes the accepted handle; the same CM collects its terminal E0, and DM
+applies §3. Any subsequent task returns through Root to Portfolio after intake.
+
+Append-ready technical acceptance row for Root integration:
+
+```text
+| 2026-09-07T23:17:01-07:00 | finite_resource_relational_inductive_efficiency | object | technical | (a) accept bound A05 capture; (b) return unresolved code/check gap | (a):30643b7 helper/input and137ed1f handoff accepted;2 inert pdb children plus focused repair check,0.093809054s;zero actual scientific invocations,one120s P27 dispatch ready | yes | OWNER_DELEGATED (unattended,2026-09-03 instruction); P27 | docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R09_FIRST_EXCEPTION_A05_SCIENCE_CARD_20260907.md#7-dm-acceptance-and-exact-execution-binding--2026-09-07-2317-pdt | none | |
 ```
 
 scope: reuse existing optional pdb exception-state observation for the bounded record in section2
