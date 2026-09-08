@@ -1,0 +1,215 @@
+{
+  "handle": "frrie-a07-scheduled-stack-p37-43eec21e",
+  "failed_transport_handle": "frrie-a07-scheduled-stack-p35-43eec21e",
+  "node": "hmasd-wsl-node",
+  "source_sha": "43eec21e9584c83e5e8d940402d7e4570b454e59",
+  "card_binding_sha": "81b58964e1c266a7a120dbfde851464489342e4e",
+  "payload_sha256": "8ed56ed4489b0d211355f74a1e91a07f9ae8ac1efc43cecf77c824a5fc56e51c",
+  "scientific_invocations": 1,
+  "failed_transport_scientific_invocations": 0,
+  "collection_scientific_invocations": 0,
+  "supervisor_pid": 2768577,
+  "python_pid": 2768586,
+  "exit_code": 139,
+  "status": "failed",
+  "started_utc": "2026-09-08T08:36:02Z",
+  "ended_utc": "2026-09-08T08:37:05Z",
+  "supervisor_duration_seconds": 63,
+  "process_wall_seconds": 62.86,
+  "peak_rss_kib": 874680,
+  "peak_rss_bytes": 895672320,
+  "aggregate_cpu_seconds": null,
+  "admission": {
+    "assessed_at": "2026-09-08T08:36:02.233145Z",
+    "available_physical_bytes": 15636484096,
+    "captured_at": "2026-09-08T08:36:02.232705Z",
+    "cgroup_headroom_bytes": null,
+    "cgroup_memory_current_bytes": null,
+    "cgroup_memory_max_bytes": null,
+    "effective_available_bytes": 15636484096,
+    "effective_floor_pass": true,
+    "failure_reasons": [],
+    "measurement_source": "/proc/meminfo",
+    "minimum_available_bytes": 4294967296,
+    "passed": true,
+    "physical_floor_pass": true,
+    "schema_version": 1
+  },
+  "observed_report_kind": "fatal",
+  "fatal_header": "Fatal Python error: Segmentation fault",
+  "scheduled_report_header_present": false,
+  "scheduled_emission_time": null,
+  "current_thread": "0x0000717491b39080",
+  "current_thread_frames_most_recent_first": [
+    {
+      "file": "experiments/candidates/finite_resource_relational_inductive_efficiency/rng.py",
+      "line": 133,
+      "function": "validate"
+    },
+    {
+      "file": "experiments/candidates/finite_resource_relational_inductive_efficiency/rng.py",
+      "line": 204,
+      "function": "canonical_bytes"
+    },
+    {
+      "file": "experiments/candidates/finite_resource_relational_inductive_efficiency/rng.py",
+      "line": 251,
+      "function": "block"
+    },
+    {
+      "file": "experiments/candidates/finite_resource_relational_inductive_efficiency/rng.py",
+      "line": 273,
+      "function": "uniform_float32"
+    },
+    {
+      "file": "experiments/candidates/finite_resource_relational_inductive_efficiency/tapes.py",
+      "line": 369,
+      "function": "generate_episode_tape"
+    },
+    {
+      "file": "experiments/candidates/finite_resource_relational_inductive_efficiency/b01_contact_r02/tapes.py",
+      "line": 247,
+      "function": "<genexpr>"
+    },
+    {
+      "file": "experiments/candidates/finite_resource_relational_inductive_efficiency/b01_contact_r02/tapes.py",
+      "line": 246,
+      "function": "production_training_inputs"
+    },
+    {
+      "file": "experiments/candidates/finite_resource_relational_inductive_efficiency/b01_contact_r02/experiment.py",
+      "line": 242,
+      "function": "execute"
+    },
+    {
+      "file": "experiments/candidates/finite_resource_relational_inductive_efficiency/b01_contact_r02/experiment.py",
+      "line": 560,
+      "function": "main"
+    },
+    {
+      "file": "scripts/run_frrie_b01_contact_r09.py",
+      "line": 9,
+      "function": "<module>"
+    },
+    {
+      "file": "/usr/lib/python3.12/bdb.py",
+      "line": 600,
+      "function": "run"
+    },
+    {
+      "file": "/usr/lib/python3.12/pdb.py",
+      "line": 1738,
+      "function": "_run"
+    },
+    {
+      "file": "/usr/lib/python3.12/pdb.py",
+      "line": 1944,
+      "function": "main"
+    },
+    {
+      "file": "/usr/lib/python3.12/pdb.py",
+      "line": 1971,
+      "function": "<module>"
+    },
+    {
+      "file": "<frozen runpy>",
+      "line": 88,
+      "function": "_run_code"
+    },
+    {
+      "file": "<frozen runpy>",
+      "line": 198,
+      "function": "_run_module_as_main"
+    }
+  ],
+  "other_threads": [
+    {
+      "id": "0x00007173b9bff6c0",
+      "text": "<no Python frame>"
+    }
+  ],
+  "extension_modules": [
+    "numpy.core._multiarray_umath",
+    "numpy.core._multiarray_tests",
+    "numpy.linalg._umath_linalg",
+    "numpy.fft._pocketfft_internal",
+    "numpy.random._common",
+    "numpy.random.bit_generator",
+    "numpy.random._bounded_integers",
+    "numpy.random._mt19937",
+    "numpy.random.mtrand",
+    "numpy.random._philox",
+    "numpy.random._pcg64",
+    "numpy.random._sfc64",
+    "numpy.random._generator",
+    "torch._C",
+    "torch._C._dynamo.autograd_compiler",
+    "torch._C._dynamo.eval_frame",
+    "torch._C._dynamo.guards",
+    "torch._C._dynamo.utils",
+    "torch._C._fft",
+    "torch._C._linalg",
+    "torch._C._nested",
+    "torch._C._nn",
+    "torch._C._sparse",
+    "torch._C._special"
+  ],
+  "summary_present": false,
+  "learner_files_present": false,
+  "learner_directory_present": true,
+  "actual_completed_updates": null,
+  "actual_completed_episodes": null,
+  "actual_native_slots": null,
+  "cause": null,
+  "raw_local_root": "temp/directions/finite_resource_relational_inductive_efficiency/exp/a07_collection_p37",
+  "artifacts": {
+    "accepted_command.sh": {
+      "bytes": 1287,
+      "sha256": "8ed56ed4489b0d211355f74a1e91a07f9ae8ac1efc43cecf77c824a5fc56e51c"
+    },
+    "b01_contact_r02_experiment.py.excerpt.txt": {
+      "bytes": 1311,
+      "sha256": "6593c5fbc460032fb0b4852983075712eab84a46fce405e380368bb5c94ec4cc"
+    },
+    "output/learner_admission.json": {
+      "bytes": 504,
+      "sha256": "e2f36ead14039e48d7e06725539653682b6a9a4967339808266e535dcbd0aa6d"
+    },
+    "process-time.txt": {
+      "bytes": 87,
+      "sha256": "d743a9b41fc7a921f8a507991550c28dbb0b3bf4063eecda25edd0e6e7fd3e54"
+    },
+    "remote_readback.txt": {
+      "bytes": 1054,
+      "sha256": "a2e708d8a04f27c72739d98e7b239889faecc1e8a9824450dc36a43963bfdd82"
+    },
+    "rng.py.excerpt.txt": {
+      "bytes": 776,
+      "sha256": "763c54dd7d66067bf60ab6bc7071240878383a9415bfbee9c973db0d0adeb1d6"
+    },
+    "supervisor/exit_code": {
+      "bytes": 4,
+      "sha256": "690e07064753123c967bbac0180f32da6a753a5bd8b79a47644cef58e776d9f0"
+    },
+    "supervisor/pid": {
+      "bytes": 8,
+      "sha256": "74af4bfa382ecb82dc1bb9ce323e7dec4585777de5e6f9c74099b617f23821a5"
+    },
+    "supervisor/runner.sh": {
+      "bytes": 1173,
+      "sha256": "1a278249500cac0e98cdca418da717a51a51e66d0e354ed38e3abd2a4cae83e0"
+    },
+    "supervisor/start_time": {
+      "bytes": 11,
+      "sha256": "d8cf6ad9c73e66377518e7d654ad26bca4bbb628193ee27c3dcb2abef0c89458"
+    },
+    "supervisor/status": {
+      "bytes": 7,
+      "sha256": "6da5b18878e110928643ebcc38dbb7552cf3a296eea56493e23edc2b93eecff8"
+    },
+    "supervisor/task.log": {
+      "bytes": 4004,
+      "sha256": "d2c0ce26cbb717029cf1e46734bd4178c402bd20d3c9d055c9a305eac7e761ca"
+    }
+  }
+}
