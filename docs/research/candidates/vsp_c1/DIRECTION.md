@@ -353,13 +353,15 @@ service-allocation and other family boundaries stand. Tuned matching headroom is
 absent; H is attained and untuned. Recast count, lifecycle, priority, C status and
 formal UAV-entry determination remain unchanged.
 
-The recommended next discriminator is a later single matched GATED/full-MLP/H B
-comparison with value-target normalization applied symmetrically to both learners,
-preserving native measurement and budget. This asks whether the gate gain persists
-under that common training change and whether MLP's H-relative behavior improves;
-it is a hypothesis, not a promised repair. The current intake records the source
-rationale and work projection. No new card, key, implementation or invocation is
-allocated here; P55 is complete and the recommendation returns through Root for
-a new bounded assignment. A changed training regime would not be pooled as a third
-seed of the current comparison. Stable superiority, unique mechanism, transfer
-and optimality remain outside the supported claim.
+P60 selects that next discriminator as one matched GATED/full-MLP/H comparison
+with value-target normalization applied symmetrically, preserving native
+measurement and budget. [B03 card](VSPC1_NATIVE_HOLD_VALUE_B03_SCIENCE_CARD_20260908.md)
+fixes cumulative training-only moments, native-value credit conversion, master8201,
+MEI .01 and one complete pair. It asks whether the local gate contrast persists
+and reports MLP/H under the common training change; normalization remains a
+hypothesis, not a promised repair. The source rationale and old pair observations
+remain in B02's intake. B03 has zero scientific exposure at this preparation
+boundary, and its new regime will not be pooled with the old pairs as a third
+identical replication. Historical differences cannot identify normalization's
+causal effect. Stable superiority, unique mechanism, transfer and optimality
+remain outside the supported claim.
