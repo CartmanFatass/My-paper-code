@@ -26,9 +26,14 @@ remains dated provenance under the controlling evidence specification section 11
 - Historical selected B discriminator:
   `UCOPE-B-EXPLORE-FT-XF-BC-INVERTIBLE-CONDITIONING-DISCRIMINATOR-R01`
 - Latest direction-tier decision:
-  **2026-09-07 PRO_FINAL / OPEN** one fixed-five-UAV movement-mediated
-  observation/control B family: optional opening velocity commitment versus
-  same-information stepwise recurrent PPO. This selects a question, not a UAV result.
+  **2026-09-08 PRO_FINAL / CONTINUE** the opening-commitment family through
+  exactly one action-conditioned-duration B04 matched pair, master7201,
+  versus unchanged same-information stepwise recurrent PPO. Duration reads
+  its owner's actual sampled command; native complete return remains primary.
+  This is a selected next discriminator, not an implemented or observed gain.
+  See the [post-B03 Convergence intake](UCOPE_POST_B03_CONVERGENCE_INTAKE_20260908.md)
+  and [B04 card](UCOPE_UAV_MOTION_PREFIX_B04_SCIENCE_CARD_20260908.md).
+  The family was opened by the 2026-09-07 fixed-five-UAV interface decision.
   The **2026-09-05 PRO_FINAL / PARK** of the same-draw retained-policy root-residual
   localization family and its numerical-locus dependency remains unchanged.
   See the [Convergence intake](UCOPE_UAV_INTERFACE_CONVERGENCE_INTAKE_20260907.md).
@@ -42,8 +47,8 @@ remains dated provenance under the controlling evidence specification section 11
   B02 DOWN with both negative T−H and mixed G−H, P24 WITHIN/6902 harm and
   original P21 UP remain separate and unchanged.
   Actual B UAV entry remains [card §9](UCOPE_UAV_MOTION_PREFIX_B01_SCIENCE_CARD_20260907.md#9-observed-p21-completion-and-uav-entry--2026-09-07).
-  No equivalence, stable or pure-information superiority, direction
-  disposition or successor follows. Historical finite-host B05 RM-A and all
+  No equivalence, stable or pure-information superiority, or direction
+  disposition follows from that result. Historical finite-host B05 RM-A and all
   prior null/adverse results remain separate.
 - Historical discriminator science-card current-byte SHA-256:
   `e08744fa18d708c9ad570bdce8b71296407991a4f5f79d502d37330913435fd8`
@@ -74,8 +79,13 @@ The common zero-entropy-bonus B03 then gives one just-below-MEI DOWN pair,
 despite both learned arms beating hover on sampled means. This provides
 no current opening-commitment gain and no reliable training-population
 comparison or causal diagnosis of either learning amendment.
-Tuned headroom, stable superiority or equivalence, transfer, pure information
-value and deployment remain unestablished.
+P61's accepted Convergence next discriminator is one opening policy whose
+duration can depend on the actual sampled owned command. The old source's
+history-only duration head establishes the missing dependency, not a defect
+or cause of past harm. Added capacity, sparse credit, direct service and
+partner co-adaptation remain alternative explanations. Tuned headroom,
+stable superiority or equivalence, transfer, pure information value and
+deployment remain unestablished.
 
 ### Historical finite-renewal question
 
@@ -119,12 +129,16 @@ remain competing explanations. H is untuned; host headroom remains absent.
 P57's one-pair allocation and intake are complete. The object-tier choice
 drops an unchanged B03 continuation from the default next choice, while
 retaining the near-boundary limitation and positive hover contrasts.
-There is no second pair, retry, extra evaluation, new card or family/
-lifecycle/priority disposition. A subsequent discriminator would require
-a specifically justified new within-family native-return comparison or an
-actual Convergence scope decision under a new task; none is selected by
-this result. No exact upper, complete causal diagnosis or extra unchanged
-seed is a prerequisite. See [card §8](UCOPE_UAV_MOTION_PREFIX_B03_SCIENCE_CARD_20260908.md#8-observed-p57-completion--2026-09-08),
+P57 selected no second pair, retry, extra evaluation, new card or family/
+lifecycle/priority disposition. The subsequent P61 Convergence decision now
+selects one specifically changed B04 comparison: conditional duration on
+the owned sampled command, unchanged ordinary feedback comparator, one7201
+pair and the complete native return. No exact upper, complete causal
+diagnosis or extra unchanged seed is a prerequisite. Every B04 outcome
+ends its separate allocation; no conditioning-causal or family-impossibility
+claim follows. See [P61 intake](UCOPE_POST_B03_CONVERGENCE_INTAKE_20260908.md),
+[B04 card](UCOPE_UAV_MOTION_PREFIX_B04_SCIENCE_CARD_20260908.md),
+[B03 card §8](UCOPE_UAV_MOTION_PREFIX_B03_SCIENCE_CARD_20260908.md#8-observed-p57-completion--2026-09-08),
 [E0](UCOPE_UAV_MOTION_PREFIX_B03_P57_RESULT_EVIDENCE_20260908.md) and
 [intake](UCOPE_UAV_MOTION_PREFIX_B03_P57_INTAKE_20260908.md).
 
