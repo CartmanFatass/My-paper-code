@@ -421,3 +421,78 @@ main and the direction checkout returned[], with no applicable non-empty audit o
 The existing Chinese brief is updated to the accepted decision. The next discriminator
 is the selected pair's native final service contrast after the later card/implementation
 route; this intake creates no evidence for that contrast.
+
+## 10. B07 card and complete engineering handoff — 2026-09-08
+
+Root reports integration of §9's `5b9390ba2da7c2002a512505c2a13f3045a57ab1` as
+`221b4ff7b`, preserving concurrent audit rows, then assigns the original DM the selected
+B07 card and full CM specification. This return is **preparation only**: no implementation,
+model, training, native/UAV episode, experimental master, extra seed or Pro Send.
+
+The existing checkout began clean at `5b9390ba2da7c2002a512505c2a13f3045a57ab1`, on
+`codex/pro-dish-post-b06-20260907`. The B02/B03/B04/B06/first-trigger/r06 code surfaces
+still have no content difference from accepted B06 launch `373d187200a91942385e9380770dcf9f8098aada`.
+I read the current assignment, Portfolio's still-lagging B06 row, accepted DIRECTION/P53
+§9 and only the code consumers needed to freeze the implementation. The Portfolio row
+does not supersede the archived decision or Root's named continuation, and is not edited.
+
+The controlling selection is the verbatim rule in §9. The new
+`DISH_OWN_COMMAND_MEAN_B07_SCIENCE_CARD_20260908.md` records that exact single pair:
+raw own applied acceleration and physical-copy mapping, full live/replay Gaussian law,
+new seed127 master consumers, both real LOW_LR learners, 16 total own-initial/final rows,
+the final OWN-minus-DIRECT primary, MEI+24 and complete 1800s/arm/3600s/pair charges.
+Its seven result rows are copied verbatim from immutable response §五. No rule or past
+result was rewritten. Card §1 preserves P52/P53/B06 support, contrary outcomes and the
+same finite B/source-information ceilings; §§4–5 preserve incomplete-result dependency,
+initial-relative limits, native tradeoffs and unestimated source value.
+
+`DISH_OWN_COMMAND_MEAN_B07_CM_SPEC_20260908.md` is the complete five-item handoff with
+starting source, owned entries, preserved semantics, original focused acceptance and
+budget/stop. Source reading identifies **PersistentTrainer.run_update** as a necessary
+third propagation boundary in addition to live policy and update engine. After each
+update, policy reconstruction must retain mode. The current B04 shared helper's four
+DIRECT references cannot substitute for OWN's four or be charged as common episodes.
+The spec makes these concrete gaps explicit without adding a new framework or real test run.
+
+Integer counts were recomputed through Python AST/configuration reads without importing
+the learner/native modules: 65536 transitions,512 optimizer steps,2048 batched policy
+forwards and8 episodes per arm; pair131072/1024/4096 and16 episodes<=19200 ticks. Native
+training is2N+2E+H, per arm131072–1572864 and pair262144–3145728. These match the earlier
+committed proposal arithmetic. Historical B06 relative L2 movement0.04474046045735298
+supplies the existing exposure evidence; new effects, time and E/H remain unmeasured.
+No master hash was generated. Added validation is the single focused synthetic changed-
+behavior/primary check and existing independent engineering review, not another A or B.
+
+Conformance checked against evidence-spec §§4,5.2,11.4,11.7–11.9 and engineering-scope
+§§3–5. Section4 needs none newly and no implementation budget breach exists. Current
+main instruction deltas at `27c0a4ed3efe4f4a3118af922d2260b07273ab0f` retain the original
+DM/CM continuation and invocation-owned test-scratch cleanup. The comparison document
+is absent from this authoring checkout, so its **committed main** copy was read; it records
+all three CM comparison batches completed. Concrete exclusion recorded once: this is
+science/card/spec authoring with no coding dispatch, and it enrolls no new comparison.
+Root nevertheless receives the complete identical task/source/spec/acceptance before CM.
+No current instruction file or unrelated Portfolio record is changed by this delivery.
+
+### Decisions this intake produces
+
+1. **Object-tier card wording/preparation.** Options: (a) freeze the accepted single B07
+   card and complete implementation handoff; (b) return a concrete scientific/spec conflict;
+   (c) add a diagnostic, new arm or stronger-class prerequisite. Recommend/select(a), since
+   the full response conforms and existing source exposes all required paths.
+   **Owner-delegated decision (unattended, 2026-09-03 instruction): (a).**
+2. **Execution boundary.** Return the committed card/spec to Root for the already selected
+   CM implementation route. The current DM assignment performs no coding or invocation;
+   engineering acceptance and the later named launch remain separate from this card freeze.
+
+The object row is appended to `docs/research/portfolio/audit/2026-09-08.md`; owner flags:none.
+The required new-card P2 item `docs/research/portfolio/owner/inbox/2026-09-08/20260908-dish-002.json`
+records the actual frozen choice under the standing delegation,
+not an invented owner response. Owner reviews in main and this checkout returned[] at this
+boundary; the existing prediction remains not taken. The existing source/decision brief
+records that the card/spec are ready. No new valid performance result is claimed and no
+extra result brief or new direction decision is manufactured.
+
+Remaining uncertainties are exactly the future implementation and pair: correct mode/raw
+input/likelihood propagation, completion of the fixed learning exposure, and its native
+service/cost consequences. The next discriminator is still the paired final service contrast;
+there is no need for a replacement Portfolio selection or another abstract Pro assessment.
