@@ -43,7 +43,8 @@ def run(args):
     # clock. Sampling wall after monotonic makes the conversion conservative.
     observed_monotonic = time.perf_counter()
     observed_unix = time.time()
-    started = observed_monotonic - (observed_unix - args.start_wall)
+    started = (args.start_monotonic if args.start_monotonic is not None else
+               observed_monotonic - (observed_unix - args.start_wall))
     deadline = started + args.cap
     work_until = deadline - args.reserve
     cleanup_until = deadline - 2.0
@@ -107,7 +108,8 @@ def run(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--start-wall", type=int, required=True)
+    parser.add_argument("--start-wall", type=int)
+    parser.add_argument("--start-monotonic", type=float)
     parser.add_argument("--cap", type=float, required=True)
     parser.add_argument("--reserve", type=float, required=True)
     parser.add_argument("--record", type=Path, required=True)
@@ -117,4 +119,6 @@ if __name__ == "__main__":
         args.command = args.command[1:]
     if not 2 < args.reserve < args.cap <= 120:
         parser.error("reserve must exceed2s and stay inside the complete cap<=120s")
+    if args.start_wall is None and args.start_monotonic is None:
+        parser.error("one original start clock is required")
     raise SystemExit(run(args))
