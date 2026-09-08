@@ -1,6 +1,8 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-08 (P58 SCDMP retired-context recovery)
+Updated at: 2026-09-08 (P59 FRRIE corrected input-factory check)
+
+Current FRRIE continuation: [P59 corrected input-factory check](handoffs/2026-09-08-p59-frrie-corrected-input-factory.md) allocates one120s complete non-learning invocation of the committed Torch-import correction after P47's factory harness failed before zero completed tapes. The same DM/CM retains the existing checkout, runtime and actual tool restrictions; no alternate executor bypass, production repair acceptance, second diagnostic or learner retry follows. Collection and bounded intake are included. Keep UCOPE, DISH, VSPC1 and SCDMP's current routes independent; P59 counts only during actual advancing work and changes no lifecycle or scientific meaning.
 
 Current delivery repair: [P58 SCDMP provider-context recovery](handoffs/2026-09-08-p58-scdmp-retired-context-recovery.md) applies the existing owner-directed exclusion and fresh-6-Pro-context policy after P56's confirmed retired-conversation conflict. Preserve its complete response and blocked application; the same DM authors one distinct corrective request with explicit owner-directed reset evidence, and the existing Transport performs the supported context replacement. A complete conforming new decision returns through the original DM and P56's full selected-object route. No blocked RECAST is applied by this command and no scientific invocation is allocated during repair. Root reports UCOPE, DISH, VSPC1 and FRRIE advancing independently; SCDMP counts only during actual work, not its unresolved wait. Earlier snapshots below remain historical.
 
