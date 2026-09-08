@@ -5,5 +5,5 @@ older commands using ``--config config`` load the same configuration instead
 of the obsolete standalone Config class.
 """
 
-from config_1 import Config
+from configs.config_1 import Config
 

@@ -927,3 +927,24 @@ References: `DISH_POST_B06_CONVERGENCE_INTAKE_20260907.md` §§1–7;
 `pro_packets/20260907_post_b06_delivery_correction/archive/RESPONSE.md` §§1–7;
 `DISH_SAMPLED_EXECUTION_B06_RESULT_INTAKE_20260907.md` §§2–7. Prior delivery blockers and
 prepared-only statements remain historical provenance; this section records the accepted answer.
+
+## Accepted P53 source boundary — 2026-09-08
+
+Source reconnaissance identifies each physical vehicle's already-observed applied acceleration
+in actor indices8:10 and retained `actor_raw` training fragments. Current motion uses a direct
+`3*tanh(m)` mean. Prepare is selected from the incumbent recurrent copy and commit from the
+standby shadow copy before serialization in the owner's native slot. The actor's repeated
+prepare/warmup fields are not the native readiness/version/origin certificate. Native certification
+uses additional joint source, prediction, geometry and timing state; private future labels and
+their forced promotion remain supervision, not ordinary application evidence.
+
+This supports one source-grounded question about a fixed own-command input inside the motion
+mean, with the accepted direct-mean learner as the same-information comparator. It supplies no
+observed performance gain or B06 cause. Strongest contrary case: the generic network already
+sees the input, projection already handles applied slew, and persistence can worsen tracking.
+The proposed next discriminator is one matched new training pair's native service contrast;
+selection remains with Convergence. No successor, source-value estimate, launch, recast or
+Portfolio disposition is applied. The accepted post-B06 narrow stop remains unchanged.
+
+Reference: `DISH_P53_NATIVE_PROPOSAL_SOURCE_INTAKE_20260908.md` §§1–8, particularly the
+source/information map, ordinary mean comparison, contrary outcome and zero-execution boundary.

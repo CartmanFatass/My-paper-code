@@ -27,8 +27,8 @@ hierarchically; Claude Code reads the one-line `CLAUDE.md` beside each, which im
 ## Routes, in one screen
 
 ```
-main.py → config.py (shim for config_1.Config) → hmasd.agent.HMASDAgent → envs/pettingzoo   original HMASD/UAV route
-train_multiproc_config_1.py                                                                  legacy multiprocess route
+experiments/launchers/main.py → configs/config.py (shim for configs.config_1.Config) → hmasd.agent.HMASDAgent → envs/pettingzoo   original HMASD/UAV route
+experiments/launchers/train_multiproc_config_1.py                                             legacy multiprocess route
 python -m ha_ctse_process.train → standalone_cli / env_factory / collectors → runners → agent  process-core route (own config)
 experiments/candidates/<direction-id>/<attempt>/ + scripts/run_<prefix>_<attempt>.py           research candidates
 gnn_hmasd/, manifold_hmasd/                                                                  dormant lineages

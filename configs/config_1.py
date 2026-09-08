@@ -469,7 +469,7 @@ class Config:
         self.scenario7_comparison_gate_enabled = True
         self.scenario7_comparison_gate_step = 2_400_000
         self.scenario7_baseline_metrics_path = str(
-            Path(__file__).resolve().parent
+            Path(__file__).resolve().parent.parent
             / "baselines"
             / "scenario7_arm_a_2400000_metrics.json"
         )

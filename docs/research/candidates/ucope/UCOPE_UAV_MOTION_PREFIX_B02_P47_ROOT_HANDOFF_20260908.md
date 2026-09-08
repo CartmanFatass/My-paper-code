@@ -8,7 +8,9 @@ P47 at `6dd7570e9e8045fb3818c553953a92c9caa587cb` allocates implementation and t
 
 Fresh CM: `/root/dm_ucope_p47_resume/cm_am_ucope_b02_p47`; DM: `/root/dm_ucope_p47_resume`. Reuse these recipients for collection/corrections. Root integrates the named delivery and owns launches and routine observation. No extra implementation/check fixture, scientific retry or evaluation is part of this handoff.
 
-**Current staging hold, 2026-09-08:** Root reports the exact source object present remotely, but the prescribed GitHub HTTPS fetch remains blocked by SSL timeout/hang; the target worktree and both handles are absent. No admission or scientific invocation occurred. [Intake §7](UCOPE_UAV_MOTION_PREFIX_B02_P47_IMPLEMENTATION_INTAKE_20260908.md#7-external-exact-staging-blocker--2026-09-08) preserves the receipts and exact-route continuation. Do not bypass fetch or substitute source/executor. The literals below remain the authorized route when this external dependency clears, not a new launch or automatic retry instruction.
+**Current corrected first command:** the original `ucope-uav-motion-prefix-b02-7001-p47-20260908` supervisor is preserved as failed before admission. Its actual dispatch omitted `-p47-` from the cwd; the committed handoff already had the correct path. [Intake §9](UCOPE_UAV_MOTION_PREFIX_B02_P47_IMPLEMENTATION_INTAKE_20260908.md#9-pre-admission-cwd-mismatch-reconciled--2026-09-08) records the authoritative payload/exit and zero exposure. The first command below now uses the verified-absent `-cwd02` supervisor identity and the same staged cwd, source, seed, output root and caps. No launch is performed by this correction. Use the complete literal or its [identical command file](../../../../../temp/directions/ucope/exp/uav-motion-prefix-b02-p50-cwd-repair-20260908/corrected-root-command.ps1).
+
+**Retained staging acceptance, P50 / 2026-09-08:** the original remote cwd is detached and clean at the exact accepted source/tree, with every declared source directory materialized. Both original handles were absent at staging; the later correction state is recorded above. [Intake §8](UCOPE_UAV_MOTION_PREFIX_B02_P47_IMPLEMENTATION_INTAKE_20260908.md#8-p50-exact-source-staging-repair-accepted--2026-09-08) records P50 at `08cb2579cc9bb48ecb3793ad848490f47f1be7f3` and the verified committed-object transfer. Earlier SSL failures and the qualified object-presence report remain in §7. P50 removes the repeated-fetch dependency only; no source or executor substitution occurred. After Root integrates this documentation, the corrected launch literals below apply. No admission or scientific invocation has yet occurred.
 
 ## Work, clocks and sequential continuation
 
@@ -18,29 +20,32 @@ The existing remote-first node is `hmasd-wsl-node`, interpreter `/home/wu/.venvs
 
 After CM's technical acceptance of 7001, Root executes 7002 **irrespective of the first valid score**, while DM's first-pair intake can continue independently. A cap/nonfinite or reward/information/training/primary integrity failure stops its dependent route with complete and partial facts retained. Missing optional hover/diagnostics follows its own dependency. There is no third pair, replacement seed, scientific retry, resumed learner, additional evaluation or cap increase. Missing optional resource telemetry is `resources_unmeasured`; each actual invocation still requires fresh physical and effective memory admission of at least 4GiB immediately before its runner.
 
-## Exact detached source and prospective names
+## Accepted detached source and prospective experiment names
 
-Root checks actual path/handle state once before staging; uncertain prior acceptance is reconciled rather than resent. These are prospective bindings, not claims of absence or accepted handles:
+P50 originally observed both handles absent. The later correction readback finds the corrected `-cwd02` and 7002 handles absent, while retaining the original failed supervisor. Root reconciles current target/handle state before launch; uncertain acceptance is reconciled rather than resent. No admitted scientific invocation has occurred:
 
 | Master | Supervisor name | Output relative to detached cwd |
 | --- | --- | --- |
-| 7001 | `ucope-uav-motion-prefix-b02-7001-p47-20260908` | `temp/directions/ucope/exp/uav-motion-prefix-b02-7001-p47-20260908` |
+| 7001 | `ucope-uav-motion-prefix-b02-7001-p47-20260908-cwd02` | `temp/directions/ucope/exp/uav-motion-prefix-b02-7001-p47-20260908` |
 | 7002 | `ucope-uav-motion-prefix-b02-7002-p47-20260908` | `temp/directions/ucope/exp/uav-motion-prefix-b02-7002-p47-20260908` |
 
-Detached cwd: `/home/wu/hmasd-worktrees/ucope-uav-motion-prefix-b02-p47-20260908`. Stage the pushed exact source through the existing route:
+**Already staged; do not run fetch or worktree creation again.** Detached cwd: `/home/wu/hmasd-worktrees/ucope-uav-motion-prefix-b02-p47-20260908`; HEAD `6374063408208ba67b8cb7c69ebc0babb0f00259`; tree `0a603760eeada0b0b29b4ab9f0e141627c989fde`. The [P50 staging receipt](../../../../../temp/directions/ucope/exp/uav-motion-prefix-b02-p50-staging-20260908/staging-result.json) records 2,173 materialized blob/mode matches, all declared source directories present, a clean detached checkout and eight additional local-committed/remote-byte checks. The 6,164 other entries remain existing sparse omissions.
+
+The concrete completed repair, retained for evidence only, used the existing authenticated SCP route to transfer 85 missing committed objects as a 372,299-byte pack, SHA-256 `8aba860f832de14423e16ad2aee9274bdeb91bda6ee36b4e73c61d38b03ca5fa`, to `/home/wu/hmasd-inputs/ucope-b02-p50-637406340-20260908.pack`. The raw LF `stage.sh` in that receipt root checks the carrier digest and absent target/handles, then executes:
 
 ```bash
-set -e
-git -C /home/wu/projects/HMASD fetch origin codex/ucope
+git -C /home/wu/projects/HMASD index-pack --stdin < /home/wu/hmasd-inputs/ucope-b02-p50-637406340-20260908.pack
 git -C /home/wu/projects/HMASD worktree add --detach /home/wu/hmasd-worktrees/ucope-uav-motion-prefix-b02-p47-20260908 6374063408208ba67b8cb7c69ebc0babb0f00259
 git -C /home/wu/hmasd-worktrees/ucope-uav-motion-prefix-b02-p47-20260908 rev-parse HEAD
 ```
+
+Staging and stdlib byte verification exited 0 in 1.015s and 0.609s respectively, below the 300s per-operation repair bound. The original promisor-fetch lookup failure remains recorded; no fixture, scientific import, source/configuration/security change, admission or scientific run occurred. The pack and receipts are retained; no carrier cleanup or additional staging is a launch prerequisite.
 
 Send remote script text with the existing LF-safe transport, retaining the historical CR-path evidence without repeating a transport probe. First launch, 7001 only:
 
 ```powershell
 @'
-/usr/local/bin/agent-task run ucope-uav-motion-prefix-b02-7001-p47-20260908 "/usr/bin/time -f whole_wall_seconds=%e,peak_rss_kib=%M /usr/bin/timeout --signal=KILL 3600s /bin/bash --noprofile --norc -c 'cd /home/wu/hmasd-worktrees/ucope-uav-motion-prefix-b02-p47-20260908 && /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/ucope/exp/uav-motion-prefix-b02-7001-p47-20260908/resource_admission.json && /home/wu/.venvs/hmasd/bin/python scripts/run_ucope_uav_motion_prefix_b01.py --pair b02 --seed 7001 --out temp/directions/ucope/exp/uav-motion-prefix-b02-7001-p47-20260908'"
+/usr/local/bin/agent-task run ucope-uav-motion-prefix-b02-7001-p47-20260908-cwd02 "/usr/bin/time -f whole_wall_seconds=%e,peak_rss_kib=%M /usr/bin/timeout --signal=KILL 3600s /bin/bash --noprofile --norc -c 'cd /home/wu/hmasd-worktrees/ucope-uav-motion-prefix-b02-p47-20260908 && /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/ucope/exp/uav-motion-prefix-b02-7001-p47-20260908/resource_admission.json && /home/wu/.venvs/hmasd/bin/python scripts/run_ucope_uav_motion_prefix_b01.py --pair b02 --seed 7001 --out temp/directions/ucope/exp/uav-motion-prefix-b02-7001-p47-20260908'"
 '@ | ssh -o BatchMode=yes -o ConnectTimeout=10 hmasd-wsl-node "tr -d '\015' | /bin/bash -s"
 ```
 

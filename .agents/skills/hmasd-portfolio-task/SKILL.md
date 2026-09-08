@@ -99,6 +99,12 @@ Distinguish technical success, bounded task competence, comparative algorithm ad
 cross-scenario transfer, safety, and deployment. Evidence for an earlier claim does not silently
 promote a later one.
 
+OWNER_DIRECT 2026-09-08: define a direction deliverable and authority boundary, leaving
+ordinary implementation, repair and intermediate decisions with its DM/CM. Root closes that
+delegation through acceptance and authorized continuation. Do not end an ordinary selected
+card/specification route at another Portfolio implementation request. Portfolio handles an
+actual working-set replacement, cross-direction choice or conflict beyond that direction.
+
 ## Investment fields (owner decision 2026-09-04, revised the same day)
 
 Controlling records: `docs/research/portfolio/decisions/2026-09-04-owner-intervention-surfaces.md`

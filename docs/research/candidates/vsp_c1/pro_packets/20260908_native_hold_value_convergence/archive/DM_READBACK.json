@@ -1,0 +1,31 @@
+{
+  "request_id": "2026-09-08-vspc1-native-hold-value-convergence-01",
+  "checked_at": "2026-09-08T17:09:32.133547+00:00",
+  "full_response_commit": "7ac8ccb01543f82715f38ad33d846c2ec649ecc2",
+  "full_response_bytes": 30759,
+  "full_response_sha256": "39cd50c2f296b91de850adc731e695cefb21fec3ede0e03430de7f2a4c7d65f3",
+  "transport_short_chat_bytes": 339,
+  "transport_short_chat_sha256": "f1a58bcd7b91da47ffce2f87f642c529dafa45fc1e6b599b78a6ea9aa17d561a",
+  "transport_hash_scope": "original TRANSPORT_FACTS response_sha256 identifies the short chat receipt, not full scientific response",
+  "comment_url": "https://github.com/CartmanFatass/My-paper-code/issues/5#issuecomment-5588799828",
+  "comment_contains_full_commit": true,
+  "changed_paths_at_delivery": [
+    "docs/research/candidates/vsp_c1/pro_packets/20260908_native_hold_value_convergence/archive/RESPONSE.md"
+  ],
+  "source_inspection_sha": "6374063408208ba67b8cb7c69ebc0babb0f00259",
+  "main_checked_sha": "fc9f6f6548b778b28acdcd058567e27998ea72b8",
+  "missing_required_main_inputs": [
+    "experiments/candidates/ucope/uav_motion_prefix_b01/__init__.py",
+    "experiments/candidates/ucope/uav_motion_prefix_b01/environment.py"
+  ],
+  "preparation_execution": {
+    "models": 0,
+    "environments": 0,
+    "simulations": 0,
+    "profiling": 0,
+    "training": 0,
+    "evaluation": 0,
+    "scientific_invocations": 0,
+    "tests": 0
+  }
+}

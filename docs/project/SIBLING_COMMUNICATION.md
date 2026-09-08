@@ -78,10 +78,11 @@ behavior rule, not a new validator, scheduler or required message schema.
 1. If Portfolio explicitly requested this specific reply, answer it once. A general
    instruction to keep working, maintain five directions or record progress is NOT a
    request for replies. A command receipt is NOT a requested ACK.
-2. Otherwise send only if Portfolio must now (a) supply a missing next command or
-   replacement after the supplied route is exhausted, (b) resolve a scope/science/
-   authorization conflict, or (c) arrange a repair for an execution/input/tool/access
-   problem or uncertain external acceptance outside the supplied repair route.
+2. Otherwise send only if Portfolio must now supply a working-set replacement,
+   make a cross-direction choice, or resolve a concrete conflict beyond the assigned
+   DM/CM route. First resume the original DM for direction-local acceptance, CM work,
+   source integration and decisions within its standing authority. A completed step,
+   ordinary repair or omitted intermediate instruction is not itself a Portfolio need.
    Start with the actual action needed and cite the evidence. If none applies, DO NOT SEND.
 3. If that same need was already sent and its evidence/dependency has not materially
    changed, DO NOT SEND. Waiting time, a new goal turn, another log commit, or an
@@ -106,7 +107,8 @@ The labels "action needed", "handoff" or "coordination" do not create an excepti
 | G ends; command supplies C next | Log G and launch C; no Portfolio message |
 | CM code arrives; command supplies integration and DM readiness | Integrate/push and resume DM; no Portfolio message |
 | Ready routine receipt edits | Commit explicit ready paths at a clean boundary; no idle query or release notice |
-| DM finishes; no successor command exists | Send one exact next-command need; do not resend while unchanged |
+| DM returns a selected card/specification or an in-scope next step | Resume that DM to organize CM and continue; no Portfolio message |
+| Assigned direction has no continuation within its authority | Send one exact replacement/conflict need; do not resend while unchanged |
 | Tool fails outside the assigned repair route | Send error/evidence and the concrete repair need once; retain independent work |
 | Portfolio has already received a next-task request | Wait for its answer while doing other authorized work; no reminder |
 

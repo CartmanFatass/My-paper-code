@@ -56,17 +56,21 @@ as a new treatment or cutting the generic comparator's information is insufficie
    no-successor boundary remains. Root sends the committed handoff through the
    existing Transport and forwards its complete matching receipt back to this DM.
    Full conforming decision -> DM intake -> any selected prospective card/full CM
-   specification -> Root's concrete implementation/budget need to Portfolio.
-   These preparation/intake stages need no repeated permission. The old family
+   specification -> the same DM organizes CM implementation/review, accepted-source
+   binding, the selected card's bounded execution and scientific intake. Root owns
+   integration and execution closure. The old family
    remains stopped unless a proper formed decision changes the affected scope.
-5. **Budget/stop:** zero model construction, simulation, profiling, training,
-   evaluation or scientific invocation; at most one source-supported Pro question.
+5. **Budget/stop:** source-question preparation has zero model construction,
+   simulation, profiling, training, evaluation or scientific invocation and at most
+   one source-supported Pro question. A subsequent selected object requires its
+   complete conforming decision/card, accepted implementation, frozen invocation
+   budget and fresh admission; DM continues within its standing authority.
    Use existing local literature evidence, with primary-source retrieval only for
-   a specific missing fact. No new CM implementation is selected by this task.
+   a specific missing fact.
    An unsupported/overlapping question yields immediately with its concrete gap;
    do not repeat the stopped toy, fabricate an intervention to occupy a slot, or
    continue an abstract survey. Root logs actual native acceptance and ordinary
-   returns; an exhausted route or new unhandled dependency is the next Portfolio
+   returns; an exhausted direction or conflict beyond DM/CM authority is the next Portfolio
    message. An idle external wait counts zero.
 
 The remaining fifth-slot dependency is explicit while fewer than five chains

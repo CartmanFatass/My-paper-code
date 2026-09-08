@@ -4,7 +4,7 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 
-if [[ ! -f "train_multiproc_config_1.py" ]]; then
+if [[ ! -f "experiments/launchers/train_multiproc_config_1.py" ]]; then
   echo "Run this script from the HMASD repo root or keep scripts/ under the repo root." >&2
   exit 2
 fi
@@ -85,8 +85,8 @@ run_one() {
   local log_dir="$LOG_ROOT/$name"
   local -a cmd=(
     "$PYTHON_BIN"
-    train_multiproc_config_1.py
-    --config config_1
+    experiments/launchers/train_multiproc_config_1.py
+    --config configs.config_1
     --algorithm hmasd_original
     --scenario energy
     --preset S7-S1

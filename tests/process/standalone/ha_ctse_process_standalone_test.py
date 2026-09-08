@@ -61,7 +61,7 @@ def make_process_config(**overrides):
 
 def make_args(**overrides):
     args = SimpleNamespace(
-        config="config_test",
+        config="configs.config_test",
         preset="",
         scenario="base",
         seed=1,

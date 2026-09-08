@@ -1,4 +1,12 @@
 import os
+import sys
+from pathlib import Path
+
+# Direct execution starts with this launcher directory on sys.path; add the
+# repository root before importing project packages.
+_REPO_ROOT = Path(__file__).resolve().parents[2]
+if str(_REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(_REPO_ROOT))
 import time
 import numpy as np
 import torch
@@ -6,7 +14,7 @@ import argparse
 import matplotlib.pyplot as plt
 from datetime import datetime
 
-from config import Config
+from configs.config import Config
 from hmasd.agent import HMASDAgent
 from envs.pettingzoo.scenario1 import UAVBaseStationEnv
 from envs.pettingzoo.scenario2 import UAVCooperativeNetworkEnv

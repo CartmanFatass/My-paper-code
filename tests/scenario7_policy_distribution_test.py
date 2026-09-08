@@ -7,10 +7,10 @@ import pytest
 torch = pytest.importorskip("torch")
 gymnasium = pytest.importorskip("gymnasium")
 
-from config_1 import Config
+from configs.config_1 import Config
 from hmasd.agent import HMASDAgent
 from hmasd.r_mappo_utils import ACTLayer, DiagGaussian, TanhDiagGaussian
-from train_multiproc_config_1 import (
+from experiments.launchers.train_multiproc_config_1 import (
     build_structured_log_dir,
     evaluate_scenario7_comparison_gate,
     save_scenario7_training_plots,
@@ -275,7 +275,7 @@ def test_structured_log_directory_records_skill_interval(tmp_path):
         scenario="energy",
         preset="S7-S3",
         mode="train",
-        config="config_1",
+        config="configs.config_1",
         seed=1,
         collector_backend="sharded",
         training_metrics_level="light",

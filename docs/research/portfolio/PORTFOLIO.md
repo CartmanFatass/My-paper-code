@@ -1,6 +1,10 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-08 (P50 staging repair, P51 MGTAP refill and P52 FSD decision)
+Updated at: 2026-09-08 (owner correction: Root closes direction delegations through their DMs)
+
+Current VSPC1 continuation: [P49 B01 execution](handoffs/2026-09-08-p49-vspc1-native-value-question.md) resumes the original DM to organize the selected B01 CM implementation/review, accepted-source binding, one bounded seed8101 pair and intake. Complete source637406340 supplies the missing committed UCOPE dependencies through normal integration in the existing direction checkout. Root owns execution closure; ordinary direction-local continuation stays with the DM. Portfolio retains cross-direction choices and actual conflicts beyond DM/CM authority.
+
+Current fifth-direction command: [P53 DISH ordinary-proposal question](handoffs/2026-09-08-p53-dish-native-proposal-question.md) reuses the existing DISH checkout for one concrete source question after the completed B06 decision. It asks whether causal local information supports a fair ordinary-proposal/learning intervention under unchanged native commit/application rules; invalid commits or zero transfers do not prove a cause, and privileged masks or forced source events are excluded. A surviving case goes once to the proper DISH Convergence node and full intake/preparation; otherwise it yields. No model, native invocation, implementation, lifecycle change or new local worktree is selected. Together with FSD P52, UCOPE P50, MGTAP P51 and VSPC1 P49 this supplies five direction routes, counted only while actually advancing. FRRIE/CBSC and RCLE retain their named unresolved recovery/acceptance dependencies.
 
 Current FSD return route: [P52 post-fixed-clock decision](handoffs/2026-09-08-p52-fsd-post-fixed-clock-decision.md) resumes the same DM after accepted complete B03 intake (`9392aafb3`). H−D0 +0.3928645833 supports a local package advantage while G−H +0.1152864583, weak actual D0 and unequal internal optimization exposure bound its meaning. The selected panel is answered. One proper-node next-object question and complete intake/preparation route are authorized with zero new scientific invocation; no repeated pair, cap change or UAV-entry claim follows. Reuse `codex-fsd` throughout.
 
@@ -79,7 +83,7 @@ Previous incremental command: [P16 CBSC acquisition-command engineering](handoff
 Retained commands: [P15 rolling refill](handoffs/2026-09-07-p15-rolling-refill-after-transport-split.md).
 Root reports all P14 chains returned/idle; comparison batch01 is complete and the accepted VSP02
 baseline is integrated on main. P15 dispatches VSP02 B01 readiness/exact one-pair continuation,
-UCOPE and FSD selected card/full-spec preparation with immediate next comparison capture, and
+UCOPE and FSD selected card/full-spec preparation, and
 FRRIE/CBSC distinct bounded acquisition-metadata inquiries. VSP03's paused family has no selected
 successor and yields its working-set slot to CBSC without a lifecycle/priority change. Issued
 commands are not actual advancing counts; Root's per-direction acceptance/return log records those.
@@ -96,22 +100,18 @@ Root reports no live native directions after restart. P13 restores FRRIE A04 and
 scientific intake, releases the exact prepared VSP02 Convergence transport, prepares VSP03's
 post-B02 direction question and commissions bounded FSD source-based re-entry preparation.
 Five assignments are a target, not five accepted active chains or UAV entries. No new experiment
-is allocated; new engineering specs go through actual five-arm CM comparison capture before coding.
+is allocated by that historical preparation command.
 
 Previous commands: [P12 prepared path and Convergence](handoffs/2026-09-07-p12-prepared-path-and-convergence.md).
 P12 retains P11's CBSC/UCOPE bounded repairs and VSP03 prospective continuation, allocates one
 prepared FRRIE A04 complete setup/T0 chain, and prepares the VSP02 Convergence question without
-a Pro Send. Actual acceptance remains Root's log fact. No model-comparison batch has been created
-by these unchanged-code executions, existing corrections or scientific question preparation.
+a Pro Send. Actual acceptance remains Root's log fact.
 
 Previous commands: [P11 refill and execution](handoffs/2026-09-07-p11-refill-and-selected-execution.md).
 Retain VSP03 collection/intake, allocate the selected CBSC single acquisition/metadata route
 and UCOPE B05 two-dataset route, and replace yielded RCLE/VSPC1 slots with bounded FRRIE A04
 preparation and VSP02 next-question preparation. Root records actual acceptance; a prepared
 replacement is not an active slot. These commands change no lifecycle/priority or UAV-entry claim.
-The [three-batch CM comparison](../../project/CM_MODEL_COMPARISON_20260907.md) enrolls only new
-engineering assignments with identical code specs. Shadow arms do not consume direction slots
-or add research invocations; current unchanged-code execution is not an old-task benchmark.
 
 ## Previous P10 dispatch snapshot
 

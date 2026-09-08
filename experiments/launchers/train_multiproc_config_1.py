@@ -1,4 +1,12 @@
 import os
+import sys
+from pathlib import Path
+
+# Direct execution starts with this launcher directory on sys.path; add the
+# repository root before importing project packages.
+_REPO_ROOT = Path(__file__).resolve().parents[2]
+if str(_REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(_REPO_ROOT))
 import time
 import numpy as np
 import torch
@@ -292,7 +300,7 @@ def validate_r39_native_toy_contract(config, args):
     expected_args = {
         "algorithm": "hmasd_original",
         "seed": 39041,
-        "config": "config_r39_native_hmasd_toy",
+        "config": "configs.config_r39_native_hmasd_toy",
         "scenario": "two_timescale_role_free_actions",
         "collector_backend": "sharded",
         "num_workers": 4,
@@ -399,7 +407,7 @@ def validate_r39a_contract(config, args):
         "seed": 39039,
         "preset": "S7-S1",
         "scenario": "energy",
-        "config": "config_1",
+        "config": "configs.config_1",
         "collector_backend": "sharded",
         "num_workers": 8,
         "envs_per_worker": 4,
@@ -4169,7 +4177,7 @@ def parse_args():
     # 实验管理参数
     parser.add_argument('--exp_name', type=str, default='hmasd_experiment', help='实验名称，用于组织日志')
     parser.add_argument('--seed', type=int, default=1, help='随机种子')
-    parser.add_argument('--config', type=str, default='config_1', help='要使用的配置文件名 (不带.py后缀)')
+    parser.add_argument('--config', type=str, default='configs.config_1', help='要使用的配置模块名 (支持限定名)')
     parser.add_argument('--algorithm', type=str, default='hmasd', choices=ALGORITHM_CHOICES,
                         help='算法/基线: hmasd=原算法, mappo=平坦MAPPO基线, random=随机动作, greedy_coverage=覆盖优先启发式')
     parser.add_argument('--preset', type=str, default='',

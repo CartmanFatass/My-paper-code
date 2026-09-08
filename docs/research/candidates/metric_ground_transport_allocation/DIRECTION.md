@@ -12,6 +12,46 @@ second-recast counts and stopped object-family boundaries remain unchanged.
 
 This authority preserves the direction's source-grounded scientific question, evidence references, and provenance.
 
+## Native geometry Convergence boundary — 2026-09-08
+
+The complete source-backed Convergence answer for request
+`2026-09-08-mgtap-native-geometry-convergence-01` executes
+`PRO_FINAL=PARK_CURRENT_ALLOCATION_COORDINATE_FAMILY`. This is the same
+reversible family boundary recorded after B03, now with a native five-UAV
+geometry audit: no native successor comparison or recast is selected, and the
+broader direction remains ACTIVE/MEDIUM under Portfolio authority.
+
+The accepted UCOPE host is a partially observed, dynamically coupled
+velocity-control task. Each actor receives current ranked relative user/UAV
+records and recurrent history, samples a three-coordinate velocity, and affects
+native team return through distance-dependent channels, interference, SINR
+eligibility, capacity-limited greedy association and the default reward. It
+does not expose a semantic task token, allocation action, additive service law
+or accepted ground-base service consumer. The base-station coordinate in
+metadata is therefore not a native MGTAP bridge. A rank slot is not a persistent
+task identity, but the current geometry is real and reward-relevant.
+
+The strongest support for parking is that the proposed old allocator transfer
+does not define a source-compatible treatment/comparator pair: a base-distance
+feature, rank-map port, nearest-user assignment or additive service surrogate
+would either rename information, restrict the generic actor, or change the
+native action/reward path. The strongest contradiction is that geometry-aware
+learning remains possible; source inspection cannot rule out a useful local
+geometry inductive bias. Therefore this is not equivalence, impossibility,
+metric-family failure, or direction closure.
+
+Re-entry requires one specified geometry-bound actor operation against a
+competent same-information generic actor, preserving local information,
+velocity action, native reward, five-UAV membership, channel/association law,
+recurrent history and B02 credit. The deciding observation is complete native
+return, with candidate scale `J=(1/256) sum_t sum_i r_i,t` and prospective MEI
+`0.01` only if a later object adopts that scale. No model, run, cost probe,
+learner, implementation task, UAV-validation entry or Portfolio change is
+authorized here. All historical B02/B03 and C meanings remain unchanged.
+
+Evidence: `pro_packets/20260908_native_geometry_convergence/archive/RESPONSE.md`
+and `MGTAP_NATIVE_GEOMETRY_CONVERGENCE_INTAKE_20260908.md`.
+
 ## Convergence family boundary after B03 — 2026-09-04
 
 The complete same-node Convergence answer executes

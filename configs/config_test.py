@@ -1,4 +1,4 @@
-from config_1 import Config as BaseConfig
+from configs.config_1 import Config as BaseConfig
 
 
 class Config(BaseConfig):
