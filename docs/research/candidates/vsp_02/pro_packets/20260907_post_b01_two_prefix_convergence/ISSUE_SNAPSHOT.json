@@ -1,0 +1,28 @@
+{
+  "observed_at_utc": "2026-09-08T03:31:37.299885+00:00",
+  "purpose": "P19 preparation snapshot; prior Issue body and first-response comment are historical, not current authority or this round delivery.",
+  "issue": {
+    "body": "VSP02 has exact matched terminal greedy headroom zero on its accepted finite current host. The historical Adam CARRY/RESET exact-success sets match, while their continuous paths differ. That host has a no-op partner and no membership-change semantics.\n\nThe prepared direction question is whether to explicitly change scope to a fixed-population, partially observed cooperative task: after an active teammate changes policy, does resetting complete Adam state improve fixed-budget native team return relative to carrying it from the same learned policy?\n\nThe Convergence node is asked to accept or decline that scope change, or request a distinct real-membership population proposal. If accepted, it should identify one population/policy pair and the smallest bounded B question. No benchmark, teammate pair, successor, recast or runtime budget has been selected locally.\n\nFixed preparation evidence:\n- [P11 question and boundaries](https://github.com/CartmanFatass/My-paper-code/blob/32bbf1d8b4608ed0a2e311ef381a8a742b22e409/docs/research/candidates/vsp_02/VSP02_P11_NEXT_QUESTION_PREPARATION_INTAKE_20260907.md).\n- [Accepted A1 intake](https://github.com/CartmanFatass/My-paper-code/blob/32bbf1d8b4608ed0a2e311ef381a8a742b22e409/docs/research/candidates/vsp_02/VSP02_GUIDANCE_A1_HEADROOM_CENSUS_INTAKE_20260904.md).\n- [P12 preparation/publication assignment](https://github.com/CartmanFatass/My-paper-code/blob/5eb4fa9e98048607300eb845373a5b47f2e71cbb/docs/research/portfolio/handoffs/2026-09-07-p12-prepared-path-and-convergence.md).\n\nDelivery uses the shared `codex/vsp02` branch and only\n`docs/research/candidates/vsp_02/pro_packets/20260907_teammate_policy_change_convergence/archive/RESPONSE.md`,\nplus one immutable delivery-link comment on this Issue when a later Transport command is authorized.\n\nThis Issue and the scoped request artifacts are preparation/publication only. P12 allocates zero result-bearing calls and no Transport dispatch or Pro Send. No optimizer benefit, roster recovery or UAV entry is claimed. Publication alone does not establish a provider request or scientific decision.\n\nPrepared fixed TASK: https://github.com/CartmanFatass/My-paper-code/blob/1e3477436f2289ce1e81dabc2b98722667e8ce8c/docs/research/candidates/vsp_02/pro_packets/20260907_teammate_policy_change_convergence/TASK.md\r\n",
+    "comments": [
+      {
+        "id": "IC_kwDOO8trO88AAAABTFymWw",
+        "author": {
+          "login": "CartmanFatass"
+        },
+        "authorAssociation": "OWNER",
+        "body": "本轮固定任务的完整中文回应已交付并读回：\n\nhttps://github.com/CartmanFatass/My-paper-code/blob/1eb3b21b61747b21f374d252005fa48c32e4838d/docs/research/candidates/vsp_02/pro_packets/20260907_teammate_policy_change_convergence/archive/RESPONSE.md\n\n仅新增指定响应文件；本轮未执行代码或实验，未修改方向状态、源码或 main。",
+        "createdAt": "2026-09-07T22:12:10Z",
+        "includesCreatedEdit": false,
+        "isMinimized": false,
+        "minimizedReason": "",
+        "reactionGroups": [],
+        "url": "https://github.com/CartmanFatass/My-paper-code/issues/9#issuecomment-5576107611",
+        "viewerDidAuthor": true
+      }
+    ],
+    "number": 9,
+    "state": "OPEN",
+    "title": "VSP02：固定成员下队友策略变化后的Adam状态选择",
+    "url": "https://github.com/CartmanFatass/My-paper-code/issues/9"
+  }
+}
