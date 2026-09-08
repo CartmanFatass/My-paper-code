@@ -1,0 +1,974 @@
+{
+  "candidate_sha": "b5d605bf4f39b5ab18f01c98e04dc07e53764354",
+  "node": "wsl_4070",
+  "scratch": "/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3",
+  "scope": "independent unit startup and copied-supervisor lifecycle checks",
+  "prior_checks": {
+    "candidate_sha": "c436e7babe31a981a0f9ee4062fe6b4405f5b20d",
+    "node": "wsl_4070",
+    "scratch": "/home/wu/projects/HMASD/temp/directions/vsp_03/test/b04_deadline_review_c436e7bab_20260908_r2",
+    "scope": "independent harmless lifecycle checks",
+    "setup_attempts": [
+      {
+        "candidate_sha": "c436e7babe31a981a0f9ee4062fe6b4405f5b20d",
+        "node": "wsl_4070",
+        "scratch": "/home/wu/projects/HMASD/temp/directions/vsp_03/test/b04_deadline_review_c436e7bab_20260908_r1",
+        "scope": "independent harmless lifecycle checks",
+        "error": "CalledProcessError(-15, ['git', 'show', 'c436e7babe31a981a0f9ee4062fe6b4405f5b20d:experiments/candidates/vsp_03/vsp03_b04/deadline.sh'])",
+        "scratch_removed": true
+      }
+    ],
+    "check_process_exit": 0,
+    "check_wall_s": 9.485425007005688,
+    "stderr": "",
+    "evidence": {
+      "checks": [
+        {
+          "name": "normal_nonzero_orphans",
+          "mode": "nonzero",
+          "start_time": 1788909244,
+          "cap_s": 7,
+          "reserve_s": 3,
+          "command": [
+            "bash",
+            "/home/wu/projects/HMASD/temp/directions/vsp_03/test/b04_deadline_review_c436e7bab_20260908_r2/deadline.sh",
+            "/home/wu/projects/HMASD/temp/directions/vsp_03/test/b04_deadline_review_c436e7bab_20260908_r2/normal_nonzero_orphans/start_time",
+            "7",
+            "3",
+            "/home/wu/projects/HMASD/temp/directions/vsp_03/test/b04_deadline_review_c436e7bab_20260908_r2/normal_nonzero_orphans/terminal.json",
+            "--",
+            "/home/wu/.venvs/hmasd/bin/python",
+            "-c",
+            "import json,os,pathlib,signal,subprocess,sys,time\np=subprocess.Popen([sys.executable,'-c',\"import subprocess,sys,time,pathlib; p=subprocess.Popen([sys.executable,'-c','import time; time.sleep(60)']); pathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b04_deadline_review_c436e7bab_20260908_r2/normal_nonzero_orphans/ready').write_text(str(p.pid)); time.sleep(60)\"])\nready=pathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b04_deadline_review_c436e7bab_20260908_r2/normal_nonzero_orphans/ready')\nwhile not ready.exists(): time.sleep(.005)\npathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b04_deadline_review_c436e7bab_20260908_r2/normal_nonzero_orphans/pids.json').write_text(json.dumps({'root':os.getpid(),'child':p.pid,'grandchild':int(ready.read_text()),'adapter':os.getppid()}))\nsys.exit(7)\n"
+          ],
+          "shell_returncode": 7,
+          "stdout": "{\"terminal_published\": \"/home/wu/projects/HMASD/temp/directions/vsp_03/test/b04_deadline_review_c436e7bab_20260908_r2/normal_nonzero_orphans/terminal.json\", \"task_exit_code\": 7, \"all_descendants_terminated\": true, \"elapsed_through_terminal_readback_s\": 0.671448367414996}\n",
+          "stderr": "Command exited with non-zero status 7\ncontained_process_wall_s=0.10 peak_rss_kib=15360\n",
+          "observed_finish_unix": 1788909244.674978,
+          "origin_to_return_s": 0.6749780178070068,
+          "pids": {
+            "root": 3012070,
+            "child": 3012071,
+            "grandchild": 3012072,
+            "adapter": 3012069
+          },
+          "process_states_after_return": {
+            "root": null,
+            "child": null,
+            "grandchild": null,
+            "adapter": null
+          },
+          "terminal": {
+            "object": "VSP03_B04",
+            "command": [
+              "/home/wu/.venvs/hmasd/bin/python",
+              "-c",
+              "import json,os,pathlib,signal,subprocess,sys,time\np=subprocess.Popen([sys.executable,'-c',\"import subprocess,sys,time,pathlib; p=subprocess.Popen([sys.executable,'-c','import time; time.sleep(60)']); pathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b04_deadline_review_c436e7bab_20260908_r2/normal_nonzero_orphans/ready').write_text(str(p.pid)); time.sleep(60)\"])\nready=pathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b04_deadline_review_c436e7bab_20260908_r2/normal_nonzero_orphans/ready')\nwhile not ready.exists(): time.sleep(.005)\npathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b04_deadline_review_c436e7bab_20260908_r2/normal_nonzero_orphans/pids.json').write_text(json.dumps({'root':os.getpid(),'child':p.pid,'grandchild':int(ready.read_text()),'adapter':os.getppid()}))\nsys.exit(7)\n"
+            ],
+            "cwd": "/home/wu",
+            "started_unix_s": 1788909244,
+            "started_monotonic": 372418.46817511256,
+            "observed_unix_s": 1788909244.5907707,
+            "observed_monotonic": 372419.058945834,
+            "deadline_monotonic": 372425.46817511256,
+            "cap_s": 7.0,
+            "shutdown_publication_reserve_s": 3.0,
+            "root_returncode": 7,
+            "task_exit_code": 7,
+            "timed_out": false,
+            "error": null,
+            "descendants_killed": [
+              3012071,
+              3012071,
+              3012072,
+              3012072
+            ],
+            "descendants_reaped": [
+              {
+                "pid": 3012071,
+                "wait_status": 9
+              },
+              {
+                "pid": 3012072,
+                "wait_status": 9
+              }
+            ],
+            "descendants_remaining": [],
+            "all_descendants_terminated": true,
+            "elapsed_before_terminal_publication_s": 0.671239010465797
+          },
+          "terminal_mtime_unix_ns": 1788909244665723111,
+          "passed": true
+        },
+        {
+          "name": "work_timeout_tree",
+          "mode": "timeout",
+          "start_time": 1788909244,
+          "cap_s": 7,
+          "reserve_s": 3,
+          "command": [
+            "bash",
+            "/home/wu/projects/HMASD/temp/directions/vsp_03/test/b04_deadline_review_c436e7bab_20260908_r2/deadline.sh",
+            "/home/wu/projects/HMASD/temp/directions/vsp_03/test/b04_deadline_review_c436e7bab_20260908_r2/work_timeout_tree/start_time",
+            "7",
+            "3",
+            "/home/wu/projects/HMASD/temp/directions/vsp_03/test/b04_deadline_review_c436e7bab_20260908_r2/work_timeout_tree/terminal.json",
+            "--",
+            "/home/wu/.venvs/hmasd/bin/python",
+            "-c",
+            "import json,os,pathlib,signal,subprocess,sys,time\np=subprocess.Popen([sys.executable,'-c',\"import subprocess,sys,time,pathlib; p=subprocess.Popen([sys.executable,'-c','import time; time.sleep(60)']); pathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b04_deadline_review_c436e7bab_20260908_r2/work_timeout_tree/ready').write_text(str(p.pid)); time.sleep(60)\"])\nready=pathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b04_deadline_review_c436e7bab_20260908_r2/work_timeout_tree/ready')\nwhile not ready.exists(): time.sleep(.005)\npathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b04_deadline_review_c436e7bab_20260908_r2/work_timeout_tree/pids.json').write_text(json.dumps({'root':os.getpid(),'child':p.pid,'grandchild':int(ready.read_text()),'adapter':os.getppid()}))\ntime.sleep(60)\n"
+          ],
+          "shell_returncode": 124,
+          "stdout": "{\"terminal_published\": \"/home/wu/projects/HMASD/temp/directions/vsp_03/test/b04_deadline_review_c436e7bab_20260908_r2/work_timeout_tree/terminal.json\", \"task_exit_code\": 124, \"all_descendants_terminated\": true, \"elapsed_through_terminal_readback_s\": 4.017833395279013}\n",
+          "stderr": "Command exited with non-zero status 124\ncontained_process_wall_s=3.34 peak_rss_kib=15520\n",
+          "observed_finish_unix": 1788909248.0233335,
+          "origin_to_return_s": 4.023333549499512,
+          "pids": {
+            "root": 3012077,
+            "child": 3012078,
+            "grandchild": 3012079,
+            "adapter": 3012076
+          },
+          "process_states_after_return": {
+            "root": null,
+            "child": null,
+            "grandchild": null,
+            "adapter": null
+          },
+          "terminal": {
+            "object": "VSP03_B04",
+            "command": [
+              "/home/wu/.venvs/hmasd/bin/python",
+              "-c",
+              "import json,os,pathlib,signal,subprocess,sys,time\np=subprocess.Popen([sys.executable,'-c',\"import subprocess,sys,time,pathlib; p=subprocess.Popen([sys.executable,'-c','import time; time.sleep(60)']); pathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b04_deadline_review_c436e7bab_20260908_r2/work_timeout_tree/ready').write_text(str(p.pid)); time.sleep(60)\"])\nready=pathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b04_deadline_review_c436e7bab_20260908_r2/work_timeout_tree/ready')\nwhile not ready.exists(): time.sleep(.005)\npathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b04_deadline_review_c436e7bab_20260908_r2/work_timeout_tree/pids.json').write_text(json.dumps({'root':os.getpid(),'child':p.pid,'grandchild':int(ready.read_text()),'adapter':os.getppid()}))\ntime.sleep(60)\n"
+            ],
+            "cwd": "/home/wu",
+            "started_unix_s": 1788909244,
+            "started_monotonic": 372418.4681750527,
+            "observed_unix_s": 1788909244.694931,
+            "observed_monotonic": 372419.163106083,
+            "deadline_monotonic": 372425.4681750527,
+            "cap_s": 7.0,
+            "shutdown_publication_reserve_s": 3.0,
+            "root_returncode": -9,
+            "task_exit_code": 124,
+            "timed_out": true,
+            "error": null,
+            "descendants_killed": [
+              3012078,
+              3012078,
+              3012079,
+              3012079
+            ],
+            "descendants_reaped": [
+              {
+                "pid": 3012078,
+                "wait_status": 9
+              },
+              {
+                "pid": 3012079,
+                "wait_status": 9
+              }
+            ],
+            "descendants_remaining": [],
+            "all_descendants_terminated": true,
+            "elapsed_before_terminal_publication_s": 4.017483915260527
+          },
+          "terminal_mtime_unix_ns": 1788909248013723258,
+          "passed": true
+        },
+        {
+          "name": "hard_containment_stopped_adapter",
+          "mode": "hard",
+          "start_time": 1788909248,
+          "cap_s": 7,
+          "reserve_s": 3,
+          "command": [
+            "bash",
+            "/home/wu/projects/HMASD/temp/directions/vsp_03/test/b04_deadline_review_c436e7bab_20260908_r2/deadline.sh",
+            "/home/wu/projects/HMASD/temp/directions/vsp_03/test/b04_deadline_review_c436e7bab_20260908_r2/hard_containment_stopped_adapter/start_time",
+            "7",
+            "3",
+            "/home/wu/projects/HMASD/temp/directions/vsp_03/test/b04_deadline_review_c436e7bab_20260908_r2/hard_containment_stopped_adapter/terminal.json",
+            "--",
+            "/home/wu/.venvs/hmasd/bin/python",
+            "-c",
+            "import json,os,pathlib,signal,subprocess,sys,time\np=subprocess.Popen([sys.executable,'-c',\"import subprocess,sys,time,pathlib; p=subprocess.Popen([sys.executable,'-c','import time; time.sleep(60)']); pathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b04_deadline_review_c436e7bab_20260908_r2/hard_containment_stopped_adapter/ready').write_text(str(p.pid)); time.sleep(60)\"])\nready=pathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b04_deadline_review_c436e7bab_20260908_r2/hard_containment_stopped_adapter/ready')\nwhile not ready.exists(): time.sleep(.005)\npathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b04_deadline_review_c436e7bab_20260908_r2/hard_containment_stopped_adapter/pids.json').write_text(json.dumps({'root':os.getpid(),'child':p.pid,'grandchild':int(ready.read_text()),'adapter':os.getppid()}))\nos.kill(os.getppid(),signal.SIGSTOP)\ntime.sleep(60)\n"
+          ],
+          "shell_returncode": 137,
+          "stdout": "",
+          "stderr": "/home/wu/projects/HMASD/temp/directions/vsp_03/test/b04_deadline_review_c436e7bab_20260908_r2/deadline.sh: line 23: 3012081 Killed                  /usr/bin/timeout --signal=KILL \"${remaining}s\" /usr/bin/time -f 'contained_process_wall_s=%e peak_rss_kib=%M' \"${HMASD_PYTHON:-python}\" \"${BASH_SOURCE[0]%/*}/deadline.py\" --start-wall \"$started\" --cap \"$cap\" --reserve \"$reserve\" --record \"$record\" -- \"$@\"\n",
+          "observed_finish_unix": 1788909254.0292485,
+          "origin_to_return_s": 6.029248476028442,
+          "pids": {
+            "root": 3012084,
+            "child": 3012085,
+            "grandchild": 3012086,
+            "adapter": 3012083
+          },
+          "process_states_after_return": {
+            "root": null,
+            "child": null,
+            "grandchild": null,
+            "adapter": null
+          },
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "scientific_models_episodes_updates": [
+        0,
+        0,
+        0
+      ]
+    },
+    "scratch_removed": true
+  },
+  "check_process_exit": 0,
+  "check_wall_s": 25.511261276958976,
+  "stderr": "",
+  "evidence": {
+    "checks": [
+      {
+        "name": "n",
+        "mode": "nonzero",
+        "unit": "vsp03-b04-review-b4r3-n.service",
+        "cap_s": 10,
+        "reserve_s": 4,
+        "command": [
+          "bash",
+          "/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/src/experiments/candidates/vsp_03/vsp03_b04/launch.sh",
+          "vsp03-b04-review-b4r3-n",
+          "/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/src",
+          "n",
+          "/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/n/t.json",
+          "10",
+          "4",
+          "--",
+          "/home/wu/.venvs/hmasd/bin/python",
+          "-c",
+          "import json,os,pathlib,signal,subprocess,sys,time\np=subprocess.Popen([sys.executable,'-c',\"import subprocess,sys,time,pathlib; p=subprocess.Popen([sys.executable,'-c','import time; time.sleep(60)']); pathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/n/ready').write_text(str(p.pid)); time.sleep(60)\"])\nready=pathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/n/ready')\nwhile not ready.exists(): time.sleep(.005)\npathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/n/pids.json').write_text(json.dumps({'root':os.getpid(),'child':p.pid,'grandchild':int(ready.read_text()),'payload_adapter':os.getppid()}))\npathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/n/environment.json').write_text(json.dumps({k:os.environ.get(k) for k in ('VSP03_B04_COMMAND','VSP03_B04_STARTED','TMUX_TMPDIR')}))\ntime.sleep(.2)\nsys.exit(7)\n"
+        ],
+        "supervisor_source": "#!/usr/bin/env bash\n# ==============================================================================\n# agent-task: Lightweight task supervisor for Remote AI Agents using tmux\n# Solves: process keep-alive, exit-code retention, structured status, and log tailing\n# ==============================================================================\n\nset -euo pipefail\n\nTASK_DIR=\"${HOME}/.agent-tasks\"\nmkdir -p \"${TASK_DIR}\"\n\nusage() {\n    cat <<EOF\nUsage: agent-task <command> [arguments]\n\nCommands:\n  run <name> <cmd...>     Run a command in a persistent tmux session with log tracking\n  status <name>           Get status, PID, and exit code in JSON format\n  logs <name> [lines]     View the last N lines of output (default: 50)\n  attach <name>           Interactively attach to the task tmux session\n  stop <name>             Stop a running task\n  list                    List all agent tasks and their status\nEOF\n    exit 1\n}\n\n[ $# -lt 1 ] && usage\n\nCMD=\"$1\"\nshift\n\ncase \"$CMD\" in\n    run)\n        [ $# -lt 2 ] && { echo \"Error: 'run' requires <name> and <command...>\"; exit 1; }\n        NAME=\"$1\"\n        shift\n        COMMAND=\"$*\"\n\n        DIR=\"${TASK_DIR}/${NAME}\"\n        mkdir -p \"${DIR}\"\n\n        LOG_FILE=\"${DIR}/task.log\"\n        STATUS_FILE=\"${DIR}/status\"\n        PID_FILE=\"${DIR}/pid\"\n        EXIT_FILE=\"${DIR}/exit_code\"\n        START_TIME_FILE=\"${DIR}/start_time\"\n\n        # Check if already running\n        if tmux has-session -t \"agent_${NAME}\" 2>/dev/null; then\n            echo \"Error: Task '${NAME}' is already running in session 'agent_${NAME}'.\"\n            exit 1\n        fi\n\n        rm -f \"${EXIT_FILE}\"\n        echo \"running\" > \"${STATUS_FILE}\"\n        date +%s > \"${START_TIME_FILE}\"\n\n        # Wrapper script executed inside tmux\n        WRAPPER=\"${DIR}/runner.sh\"\n        cat <<EOF > \"${WRAPPER}\"\n#!/usr/bin/env bash\necho \\$\\$ > \"${PID_FILE}\"\nSTART_TS=\\$(date +%s)\necho \"=== Task '${NAME}' started at \\$(date -Iseconds) ===\" >> \"${LOG_FILE}\"\n\n# Execute command capturing output\nset +e\neval ${COMMAND@Q} >> \"${LOG_FILE}\" 2>&1\nEXIT_CODE=\\$?\nset -e\n\nEND_TS=\\$(date +%s)\necho \\$EXIT_CODE > \"${EXIT_FILE}\"\nif [ \\$EXIT_CODE -eq 0 ]; then\n    echo \"finished\" > \"${STATUS_FILE}\"\nelse\n    echo \"failed\" > \"${STATUS_FILE}\"\nfi\necho \"=== Task '${NAME}' exited with code \\$EXIT_CODE at \\$(date -Iseconds) (Duration: \\$((END_TS - START_TS))s) ===\" >> \"${LOG_FILE}\"\n\n# Keep session alive briefly for inspection, then exit\nsleep 1\nEOF\n        chmod +x \"${WRAPPER}\"\n\n        # Spawn detached tmux session\n        tmux new-session -d -s \"agent_${NAME}\" \"bash '${WRAPPER}'\"\n        echo \"Task '${NAME}' started in tmux session 'agent_${NAME}'. Output: ${LOG_FILE}\"\n        ;;\n\n    status)\n        [ $# -lt 1 ] && { echo \"Error: 'status' requires <name>\"; exit 1; }\n        NAME=\"$1\"\n        DIR=\"${TASK_DIR}/${NAME}\"\n        [ ! -d \"${DIR}\" ] && { echo \"{\\\"task\\\": \\\"${NAME}\\\", \\\"status\\\": \\\"not_found\\\"}\"; exit 0; }\n\n        STATUS=\"unknown\"\n        [ -f \"${DIR}/status\" ] && STATUS=$(cat \"${DIR}/status\")\n\n        PID=null\n        [ -f \"${DIR}/pid\" ] && PID=$(cat \"${DIR}/pid\")\n\n        EXIT_CODE=null\n        [ -f \"${DIR}/exit_code\" ] && EXIT_CODE=$(cat \"${DIR}/exit_code\")\n\n        START_TIME=0\n        [ -f \"${DIR}/start_time\" ] && START_TIME=$(cat \"${DIR}/start_time\")\n\n        NOW=$(date +%s)\n        UPTIME=0\n        if [ \"$START_TIME\" -gt 0 ]; then\n            UPTIME=$((NOW - START_TIME))\n        fi\n\n        # Check if tmux session still exists\n        TMUX_ACTIVE=false\n        if tmux has-session -t \"agent_${NAME}\" 2>/dev/null; then\n            TMUX_ACTIVE=true\n        else\n            if [ \"$STATUS\" = \"running\" ]; then\n                STATUS=\"terminated\"\n            fi\n        fi\n\n        printf '{\"task\": \"%s\", \"status\": \"%s\", \"exit_code\": %s, \"pid\": %s, \"uptime_seconds\": %d, \"tmux_active\": %s}\\n' \\\n            \"${NAME}\" \"${STATUS}\" \"${EXIT_CODE}\" \"${PID}\" \"${UPTIME}\" \"${TMUX_ACTIVE}\"\n        ;;\n\n    logs)\n        [ $# -lt 1 ] && { echo \"Error: 'logs' requires <name>\"; exit 1; }\n        NAME=\"$1\"\n        LINES=\"${2:-50}\"\n        LOG_FILE=\"${TASK_DIR}/${NAME}/task.log\"\n\n        if [ ! -f \"${LOG_FILE}\" ]; then\n            echo \"No logs found for task '${NAME}'.\"\n            exit 1\n        fi\n        tail -n \"${LINES}\" \"${LOG_FILE}\"\n        ;;\n\n    attach)\n        [ $# -lt 1 ] && { echo \"Error: 'attach' requires <name>\"; exit 1; }\n        NAME=\"$1\"\n        exec tmux attach-session -t \"agent_${NAME}\"\n        ;;\n\n    stop)\n        [ $# -lt 1 ] && { echo \"Error: 'stop' requires <name>\"; exit 1; }\n        NAME=\"$1\"\n        DIR=\"${TASK_DIR}/${NAME}\"\n        if [ -f \"${DIR}/pid\" ]; then\n            PID=$(cat \"${DIR}/pid\")\n            kill -15 \"${PID}\" 2>/dev/null || true\n            sleep 0.5\n            kill -9 \"${PID}\" 2>/dev/null || true\n        fi\n        tmux kill-session -t \"agent_${NAME}\" 2>/dev/null || true\n        echo \"stopped\" > \"${DIR}/status\" 2>/dev/null || true\n        echo \"Task '${NAME}' stopped.\"\n        ;;\n\n    list)\n        if [ ! -d \"${TASK_DIR}\" ] || [ -z \"$(ls -A \"${TASK_DIR}\" 2>/dev/null)\" ]; then\n            echo \"No agent tasks recorded.\"\n            exit 0\n        fi\n        printf \"%-20s %-12s %-10s %-10s\\n\" \"TASK_NAME\" \"STATUS\" \"EXIT_CODE\" \"TMUX_ACTIVE\"\n        echo \"---------------------------------------------------------\"\n        for d in \"${TASK_DIR}\"/*; do\n            [ -d \"$d\" ] || continue\n            tname=$(basename \"$d\")\n            tstatus=$(cat \"$d/status\" 2>/dev/null || echo \"unknown\")\n            texit=$(cat \"$d/exit_code\" 2>/dev/null || echo \"-\")\n            tmux_act=\"no\"\n            tmux has-session -t \"agent_${tname}\" 2>/dev/null && tmux_act=\"yes\"\n            printf \"%-20s %-12s %-10s %-10s\\n\" \"$tname\" \"$tstatus\" \"$texit\" \"$tmux_act\"\n        done\n        ;;\n\n    *)\n        usage\n        ;;\nesac\n",
+        "supervisor_fixture_change": {
+          "from": "TASK_DIR=\"${HOME}/.agent-tasks\"",
+          "to": "TASK_DIR=\"/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/n/tasks\""
+        },
+        "live_manager_properties": {
+          "Type": "oneshot",
+          "TimeoutStartUSec": "9s",
+          "TimeoutStartFailureMode": "kill",
+          "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/vsp03-b04-review-b4r3-n.service",
+          "KillMode": "control-group",
+          "InactiveExitTimestampMonotonic": "373486756189"
+        },
+        "contained_pids": [
+          3013151,
+          3013163,
+          3013167,
+          3013169,
+          3013170,
+          3013171
+        ],
+        "client_returncode": 1,
+        "stdout": "",
+        "stderr": "Job for vsp03-b04-review-b4r3-n.service failed because the control process exited with error code.\nSee \"systemctl --user status vsp03-b04-review-b4r3-n.service\" and \"journalctl --user -xeu vsp03-b04-review-b4r3-n.service\" for details.\n",
+        "finished_monotonic": 373487.151494573,
+        "pids": {
+          "root": 3013169,
+          "child": 3013170,
+          "grandchild": 3013171,
+          "payload_adapter": 3013167,
+          "controller_or_startup_gate": 3013151,
+          "cgroup_3013151": 3013151,
+          "cgroup_3013163": 3013163,
+          "cgroup_3013167": 3013167,
+          "cgroup_3013169": 3013169,
+          "cgroup_3013170": 3013170,
+          "cgroup_3013171": 3013171
+        },
+        "process_states_after_return": {
+          "root": null,
+          "child": null,
+          "grandchild": null,
+          "payload_adapter": null,
+          "controller_or_startup_gate": null,
+          "cgroup_3013151": null,
+          "cgroup_3013163": null,
+          "cgroup_3013167": null,
+          "cgroup_3013169": null,
+          "cgroup_3013170": null,
+          "cgroup_3013171": null
+        },
+        "cgroup_pids_after_return": [],
+        "final_manager_properties": {
+          "Result": "exit-code",
+          "ExecMainExitTimestampMonotonic": "373487150329",
+          "ExecMainCode": "1",
+          "ExecMainStatus": "7",
+          "ActiveState": "failed",
+          "SubState": "failed",
+          "InactiveExitTimestampMonotonic": "373486756189"
+        },
+        "journal": "[373486.756237] LAPTOP-U9TDKC8A systemd[638]: Starting vsp03-b04-review-b4r3-n.service - /home/wu/.venvs/hmasd/bin/python /home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/n/gate.py /home/wu/.venvs/hmasd/bin/python /home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/src/experiments/candidates/vsp_03/vsp03_b04/control.py --unit=vsp03-b04-review-b4r3-n.service --name=n --record=/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/n/t.json --cap=10 --reserve=4 --supervisor /home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/n/supervisor --task-dir /home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/n/tasks -- /home/wu/.venvs/hmasd/bin/python -c \"import json,os,pathlib,signal,subprocess,sys,time\\np=subprocess.Popen([sys.executable,'-c',\\\"import subprocess,sys,time,pathlib; p=subprocess.Popen([sys.executable,'-c','import time; time.sleep(60)']); pathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/n/ready').write_text(str(p.pid)); time.sleep(60)\\\"])\\nready=pathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/n/ready')\\nwhile not ready.exists(): time.sleep(.005)\\npathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/n/pids.json').write_text(json.dumps({'root':os.getpid(),'child':p.pid,'grandchild':int(ready.read_text()),'payload_adapter':os.getppid()}))\\npathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/n/environment.json').write_text(json.dumps({k:os.environ.get(k) for k in ('VSP03_B04_COMMAND','VSP03_B04_STARTED','TMUX_TMPDIR')}))\\ntime.sleep(.2)\\nsys.exit(7)\\n\"...\n[373486.828737] LAPTOP-U9TDKC8A python[3013153]: Task 'n' started in tmux session 'agent_n'. Output: /home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/n/tasks/n/task.log\n[373487.145972] LAPTOP-U9TDKC8A python[3013151]: {\"terminal_published\": \"/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/n/t.json\", \"task_exit_code\": 7, \"elapsed_through_terminal_readback_s\": 0.38922359602293}\n[373487.150426] LAPTOP-U9TDKC8A systemd[638]: vsp03-b04-review-b4r3-n.service: Main process exited, code=exited, status=7/NOTRUNNING\n[373487.150518] LAPTOP-U9TDKC8A systemd[638]: vsp03-b04-review-b4r3-n.service: Failed with result 'exit-code'.\n[373487.150701] LAPTOP-U9TDKC8A systemd[638]: Failed to start vsp03-b04-review-b4r3-n.service - /home/wu/.venvs/hmasd/bin/python /home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/n/gate.py /home/wu/.venvs/hmasd/bin/python /home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/src/experiments/candidates/vsp_03/vsp03_b04/control.py --unit=vsp03-b04-review-b4r3-n.service --name=n --record=/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/n/t.json --cap=10 --reserve=4 --supervisor /home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/n/supervisor --task-dir /home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/n/tasks -- /home/wu/.venvs/hmasd/bin/python -c \"import json,os,pathlib,signal,subprocess,sys,time\\np=subprocess.Popen([sys.executable,'-c',\\\"import subprocess,sys,time,pathlib; p=subprocess.Popen([sys.executable,'-c','import time; time.sleep(60)']); pathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/n/ready').write_text(str(p.pid)); time.sleep(60)\\\"])\\nready=pathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/n/ready')\\nwhile not ready.exists(): time.sleep(.005)\\npathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/n/pids.json').write_text(json.dumps({'root':os.getpid(),'child':p.pid,'grandchild':int(ready.read_text()),'payload_adapter':os.getppid()}))\\npathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/n/environment.json').write_text(json.dumps({k:os.environ.get(k) for k in ('VSP03_B04_COMMAND','VSP03_B04_STARTED','TMUX_TMPDIR')}))\\ntime.sleep(.2)\\nsys.exit(7)\\n\".\n",
+        "actual_launch_argv": [
+          "--user",
+          "--unit=vsp03-b04-review-b4r3-n",
+          "--service-type=oneshot",
+          "--wait",
+          "--working-directory=/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/src",
+          "--property=TimeoutStartSec=9s",
+          "--property=TimeoutStartFailureMode=kill",
+          "--property=KillMode=control-group",
+          "--property=FinalKillSignal=SIGKILL",
+          "--property=TimeoutStopSec=1s",
+          "--setenv=OMP_NUM_THREADS=1",
+          "--setenv=MKL_NUM_THREADS=1",
+          "--setenv=OPENBLAS_NUM_THREADS=1",
+          "--setenv=NUMEXPR_NUM_THREADS=1",
+          "/home/wu/.venvs/hmasd/bin/python",
+          "/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/src/experiments/candidates/vsp_03/vsp03_b04/control.py",
+          "--unit=vsp03-b04-review-b4r3-n.service",
+          "--name=n",
+          "--record=/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/n/t.json",
+          "--cap=10",
+          "--reserve=4",
+          "--",
+          "/home/wu/.venvs/hmasd/bin/python",
+          "-c",
+          "import json,os,pathlib,signal,subprocess,sys,time\np=subprocess.Popen([sys.executable,'-c',\"import subprocess,sys,time,pathlib; p=subprocess.Popen([sys.executable,'-c','import time; time.sleep(60)']); pathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/n/ready').write_text(str(p.pid)); time.sleep(60)\"])\nready=pathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/n/ready')\nwhile not ready.exists(): time.sleep(.005)\npathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/n/pids.json').write_text(json.dumps({'root':os.getpid(),'child':p.pid,'grandchild':int(ready.read_text()),'payload_adapter':os.getppid()}))\npathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/n/environment.json').write_text(json.dumps({k:os.environ.get(k) for k in ('VSP03_B04_COMMAND','VSP03_B04_STARTED','TMUX_TMPDIR')}))\ntime.sleep(.2)\nsys.exit(7)\n"
+        ],
+        "supervisor_exit_code": "7\n",
+        "supervisor_status": "failed\n",
+        "supervisor_task.log": "=== Task 'n' started at 2026-09-09T07:31:52+08:00 ===\n{\"terminal_published\": \"/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/n/t.payload.json\", \"task_exit_code\": 7, \"all_descendants_terminated\": true, \"elapsed_through_terminal_readback_s\": 0.3631104770465754}\n=== Task 'n' exited with code 7 at 2026-09-09T07:31:52+08:00 (Duration: 0s) ===\n",
+        "supervisor_runner.sh": "#!/usr/bin/env bash\necho $$ > \"/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/n/tasks/n/pid\"\nSTART_TS=$(date +%s)\necho \"=== Task 'n' started at $(date -Iseconds) ===\" >> \"/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/n/tasks/n/task.log\"\n\n# Execute command capturing output\nset +e\neval $'/home/wu/.venvs/hmasd/bin/python /home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/src/experiments/candidates/vsp_03/vsp03_b04/deadline.py --start-monotonic 373486.756189 --cap 10.0 --reserve 4.0 --record /home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/n/t.payload.json -- /home/wu/.venvs/hmasd/bin/python -c \\'import json,os,pathlib,signal,subprocess,sys,time\\np=subprocess.Popen([sys.executable,\\'\"\\'\"\\'-c\\'\"\\'\"\\',\"import subprocess,sys,time,pathlib; p=subprocess.Popen([sys.executable,\\'\"\\'\"\\'-c\\'\"\\'\"\\',\\'\"\\'\"\\'import time; time.sleep(60)\\'\"\\'\"\\']); pathlib.Path(\\'\"\\'\"\\'/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/n/ready\\'\"\\'\"\\').write_text(str(p.pid)); time.sleep(60)\"])\\nready=pathlib.Path(\\'\"\\'\"\\'/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/n/ready\\'\"\\'\"\\')\\nwhile not ready.exists(): time.sleep(.005)\\npathlib.Path(\\'\"\\'\"\\'/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/n/pids.json\\'\"\\'\"\\').write_text(json.dumps({\\'\"\\'\"\\'root\\'\"\\'\"\\':os.getpid(),\\'\"\\'\"\\'child\\'\"\\'\"\\':p.pid,\\'\"\\'\"\\'grandchild\\'\"\\'\"\\':int(ready.read_text()),\\'\"\\'\"\\'payload_adapter\\'\"\\'\"\\':os.getppid()}))\\npathlib.Path(\\'\"\\'\"\\'/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/n/environment.json\\'\"\\'\"\\').write_text(json.dumps({k:os.environ.get(k) for k in (\\'\"\\'\"\\'VSP03_B04_COMMAND\\'\"\\'\"\\',\\'\"\\'\"\\'VSP03_B04_STARTED\\'\"\\'\"\\',\\'\"\\'\"\\'TMUX_TMPDIR\\'\"\\'\"\\')}))\\ntime.sleep(.2)\\nsys.exit(7)\\n\\'' >> \"/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/n/tasks/n/task.log\" 2>&1\nEXIT_CODE=$?\nset -e\n\nEND_TS=$(date +%s)\necho $EXIT_CODE > \"/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/n/tasks/n/exit_code\"\nif [ $EXIT_CODE -eq 0 ]; then\n    echo \"finished\" > \"/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/n/tasks/n/status\"\nelse\n    echo \"failed\" > \"/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/n/tasks/n/status\"\nfi\necho \"=== Task 'n' exited with code $EXIT_CODE at $(date -Iseconds) (Duration: $((END_TS - START_TS))s) ===\" >> \"/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/n/tasks/n/task.log\"\n\n# Keep session alive briefly for inspection, then exit\nsleep 1\n",
+        "terminal": {
+          "object": "VSP03_B04",
+          "unit": "vsp03-b04-review-b4r3-n.service",
+          "manager_properties": {
+            "Type": "oneshot",
+            "TimeoutStartUSec": "9s",
+            "TimeoutStartFailureMode": "kill",
+            "KillMode": "control-group",
+            "InactiveExitTimestampMonotonic": "373486756189"
+          },
+          "started_monotonic": 373486.756189,
+          "cap_s": 10.0,
+          "shutdown_publication_reserve_s": 4.0,
+          "task_exit_code": 7,
+          "supervisor_exit_code": 7,
+          "payload": {
+            "object": "VSP03_B04",
+            "command": [
+              "/home/wu/.venvs/hmasd/bin/python",
+              "-c",
+              "import json,os,pathlib,signal,subprocess,sys,time\np=subprocess.Popen([sys.executable,'-c',\"import subprocess,sys,time,pathlib; p=subprocess.Popen([sys.executable,'-c','import time; time.sleep(60)']); pathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/n/ready').write_text(str(p.pid)); time.sleep(60)\"])\nready=pathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/n/ready')\nwhile not ready.exists(): time.sleep(.005)\npathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/n/pids.json').write_text(json.dumps({'root':os.getpid(),'child':p.pid,'grandchild':int(ready.read_text()),'payload_adapter':os.getppid()}))\npathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/n/environment.json').write_text(json.dumps({k:os.environ.get(k) for k in ('VSP03_B04_COMMAND','VSP03_B04_STARTED','TMUX_TMPDIR')}))\ntime.sleep(.2)\nsys.exit(7)\n"
+            ],
+            "cwd": "/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/src",
+            "started_unix_s": null,
+            "started_monotonic": 373486.756189,
+            "observed_unix_s": 1788910312.3700824,
+            "observed_monotonic": 373486.838257513,
+            "deadline_monotonic": 373496.756189,
+            "cap_s": 10.0,
+            "shutdown_publication_reserve_s": 4.0,
+            "root_returncode": 7,
+            "task_exit_code": 7,
+            "timed_out": false,
+            "error": null,
+            "descendants_killed": [
+              3013170,
+              3013170,
+              3013171,
+              3013171
+            ],
+            "descendants_reaped": [
+              {
+                "pid": 3013170,
+                "wait_status": 9
+              },
+              {
+                "pid": 3013171,
+                "wait_status": 9
+              }
+            ],
+            "descendants_remaining": [],
+            "all_descendants_terminated": true,
+            "elapsed_before_terminal_publication_s": 0.36245483602397144
+          },
+          "error": null,
+          "descendants_killed": [
+            3013163,
+            3013163,
+            3013164,
+            3013175
+          ],
+          "descendants_reaped": [
+            {
+              "pid": 3013163,
+              "wait_status": 9
+            },
+            {
+              "pid": 3013164,
+              "wait_status": 1
+            },
+            {
+              "pid": 3013175,
+              "wait_status": 1
+            }
+          ],
+          "descendants_remaining": [],
+          "all_descendants_terminated": true,
+          "elapsed_before_terminal_publication_s": 0.3889591360348277
+        },
+        "environment": {
+          "VSP03_B04_COMMAND": "/home/wu/.venvs/hmasd/bin/python -c 'import json,os,pathlib,signal,subprocess,sys,time\np=subprocess.Popen([sys.executable,'\"'\"'-c'\"'\"',\"import subprocess,sys,time,pathlib; p=subprocess.Popen([sys.executable,'\"'\"'-c'\"'\"','\"'\"'import time; time.sleep(60)'\"'\"']); pathlib.Path('\"'\"'/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/n/ready'\"'\"').write_text(str(p.pid)); time.sleep(60)\"])\nready=pathlib.Path('\"'\"'/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/n/ready'\"'\"')\nwhile not ready.exists(): time.sleep(.005)\npathlib.Path('\"'\"'/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/n/pids.json'\"'\"').write_text(json.dumps({'\"'\"'root'\"'\"':os.getpid(),'\"'\"'child'\"'\"':p.pid,'\"'\"'grandchild'\"'\"':int(ready.read_text()),'\"'\"'payload_adapter'\"'\"':os.getppid()}))\npathlib.Path('\"'\"'/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/n/environment.json'\"'\"').write_text(json.dumps({k:os.environ.get(k) for k in ('\"'\"'VSP03_B04_COMMAND'\"'\"','\"'\"'VSP03_B04_STARTED'\"'\"','\"'\"'TMUX_TMPDIR'\"'\"')}))\ntime.sleep(.2)\nsys.exit(7)\n'",
+          "VSP03_B04_STARTED": "373486.756189",
+          "TMUX_TMPDIR": "/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/n/t.tmux"
+        },
+        "origin_to_return_s": 0.3953055730089545,
+        "passed": true
+      },
+      {
+        "name": "w",
+        "mode": "timeout",
+        "unit": "vsp03-b04-review-b4r3-w.service",
+        "cap_s": 10,
+        "reserve_s": 4,
+        "command": [
+          "bash",
+          "/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/src/experiments/candidates/vsp_03/vsp03_b04/launch.sh",
+          "vsp03-b04-review-b4r3-w",
+          "/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/src",
+          "w",
+          "/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/w/t.json",
+          "10",
+          "4",
+          "--",
+          "/home/wu/.venvs/hmasd/bin/python",
+          "-c",
+          "import json,os,pathlib,signal,subprocess,sys,time\np=subprocess.Popen([sys.executable,'-c',\"import subprocess,sys,time,pathlib; p=subprocess.Popen([sys.executable,'-c','import time; time.sleep(60)']); pathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/w/ready').write_text(str(p.pid)); time.sleep(60)\"])\nready=pathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/w/ready')\nwhile not ready.exists(): time.sleep(.005)\npathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/w/pids.json').write_text(json.dumps({'root':os.getpid(),'child':p.pid,'grandchild':int(ready.read_text()),'payload_adapter':os.getppid()}))\npathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/w/environment.json').write_text(json.dumps({k:os.environ.get(k) for k in ('VSP03_B04_COMMAND','VSP03_B04_STARTED','TMUX_TMPDIR')}))\ntime.sleep(60)\n"
+        ],
+        "supervisor_source": "#!/usr/bin/env bash\n# ==============================================================================\n# agent-task: Lightweight task supervisor for Remote AI Agents using tmux\n# Solves: process keep-alive, exit-code retention, structured status, and log tailing\n# ==============================================================================\n\nset -euo pipefail\n\nTASK_DIR=\"${HOME}/.agent-tasks\"\nmkdir -p \"${TASK_DIR}\"\n\nusage() {\n    cat <<EOF\nUsage: agent-task <command> [arguments]\n\nCommands:\n  run <name> <cmd...>     Run a command in a persistent tmux session with log tracking\n  status <name>           Get status, PID, and exit code in JSON format\n  logs <name> [lines]     View the last N lines of output (default: 50)\n  attach <name>           Interactively attach to the task tmux session\n  stop <name>             Stop a running task\n  list                    List all agent tasks and their status\nEOF\n    exit 1\n}\n\n[ $# -lt 1 ] && usage\n\nCMD=\"$1\"\nshift\n\ncase \"$CMD\" in\n    run)\n        [ $# -lt 2 ] && { echo \"Error: 'run' requires <name> and <command...>\"; exit 1; }\n        NAME=\"$1\"\n        shift\n        COMMAND=\"$*\"\n\n        DIR=\"${TASK_DIR}/${NAME}\"\n        mkdir -p \"${DIR}\"\n\n        LOG_FILE=\"${DIR}/task.log\"\n        STATUS_FILE=\"${DIR}/status\"\n        PID_FILE=\"${DIR}/pid\"\n        EXIT_FILE=\"${DIR}/exit_code\"\n        START_TIME_FILE=\"${DIR}/start_time\"\n\n        # Check if already running\n        if tmux has-session -t \"agent_${NAME}\" 2>/dev/null; then\n            echo \"Error: Task '${NAME}' is already running in session 'agent_${NAME}'.\"\n            exit 1\n        fi\n\n        rm -f \"${EXIT_FILE}\"\n        echo \"running\" > \"${STATUS_FILE}\"\n        date +%s > \"${START_TIME_FILE}\"\n\n        # Wrapper script executed inside tmux\n        WRAPPER=\"${DIR}/runner.sh\"\n        cat <<EOF > \"${WRAPPER}\"\n#!/usr/bin/env bash\necho \\$\\$ > \"${PID_FILE}\"\nSTART_TS=\\$(date +%s)\necho \"=== Task '${NAME}' started at \\$(date -Iseconds) ===\" >> \"${LOG_FILE}\"\n\n# Execute command capturing output\nset +e\neval ${COMMAND@Q} >> \"${LOG_FILE}\" 2>&1\nEXIT_CODE=\\$?\nset -e\n\nEND_TS=\\$(date +%s)\necho \\$EXIT_CODE > \"${EXIT_FILE}\"\nif [ \\$EXIT_CODE -eq 0 ]; then\n    echo \"finished\" > \"${STATUS_FILE}\"\nelse\n    echo \"failed\" > \"${STATUS_FILE}\"\nfi\necho \"=== Task '${NAME}' exited with code \\$EXIT_CODE at \\$(date -Iseconds) (Duration: \\$((END_TS - START_TS))s) ===\" >> \"${LOG_FILE}\"\n\n# Keep session alive briefly for inspection, then exit\nsleep 1\nEOF\n        chmod +x \"${WRAPPER}\"\n\n        # Spawn detached tmux session\n        tmux new-session -d -s \"agent_${NAME}\" \"bash '${WRAPPER}'\"\n        echo \"Task '${NAME}' started in tmux session 'agent_${NAME}'. Output: ${LOG_FILE}\"\n        ;;\n\n    status)\n        [ $# -lt 1 ] && { echo \"Error: 'status' requires <name>\"; exit 1; }\n        NAME=\"$1\"\n        DIR=\"${TASK_DIR}/${NAME}\"\n        [ ! -d \"${DIR}\" ] && { echo \"{\\\"task\\\": \\\"${NAME}\\\", \\\"status\\\": \\\"not_found\\\"}\"; exit 0; }\n\n        STATUS=\"unknown\"\n        [ -f \"${DIR}/status\" ] && STATUS=$(cat \"${DIR}/status\")\n\n        PID=null\n        [ -f \"${DIR}/pid\" ] && PID=$(cat \"${DIR}/pid\")\n\n        EXIT_CODE=null\n        [ -f \"${DIR}/exit_code\" ] && EXIT_CODE=$(cat \"${DIR}/exit_code\")\n\n        START_TIME=0\n        [ -f \"${DIR}/start_time\" ] && START_TIME=$(cat \"${DIR}/start_time\")\n\n        NOW=$(date +%s)\n        UPTIME=0\n        if [ \"$START_TIME\" -gt 0 ]; then\n            UPTIME=$((NOW - START_TIME))\n        fi\n\n        # Check if tmux session still exists\n        TMUX_ACTIVE=false\n        if tmux has-session -t \"agent_${NAME}\" 2>/dev/null; then\n            TMUX_ACTIVE=true\n        else\n            if [ \"$STATUS\" = \"running\" ]; then\n                STATUS=\"terminated\"\n            fi\n        fi\n\n        printf '{\"task\": \"%s\", \"status\": \"%s\", \"exit_code\": %s, \"pid\": %s, \"uptime_seconds\": %d, \"tmux_active\": %s}\\n' \\\n            \"${NAME}\" \"${STATUS}\" \"${EXIT_CODE}\" \"${PID}\" \"${UPTIME}\" \"${TMUX_ACTIVE}\"\n        ;;\n\n    logs)\n        [ $# -lt 1 ] && { echo \"Error: 'logs' requires <name>\"; exit 1; }\n        NAME=\"$1\"\n        LINES=\"${2:-50}\"\n        LOG_FILE=\"${TASK_DIR}/${NAME}/task.log\"\n\n        if [ ! -f \"${LOG_FILE}\" ]; then\n            echo \"No logs found for task '${NAME}'.\"\n            exit 1\n        fi\n        tail -n \"${LINES}\" \"${LOG_FILE}\"\n        ;;\n\n    attach)\n        [ $# -lt 1 ] && { echo \"Error: 'attach' requires <name>\"; exit 1; }\n        NAME=\"$1\"\n        exec tmux attach-session -t \"agent_${NAME}\"\n        ;;\n\n    stop)\n        [ $# -lt 1 ] && { echo \"Error: 'stop' requires <name>\"; exit 1; }\n        NAME=\"$1\"\n        DIR=\"${TASK_DIR}/${NAME}\"\n        if [ -f \"${DIR}/pid\" ]; then\n            PID=$(cat \"${DIR}/pid\")\n            kill -15 \"${PID}\" 2>/dev/null || true\n            sleep 0.5\n            kill -9 \"${PID}\" 2>/dev/null || true\n        fi\n        tmux kill-session -t \"agent_${NAME}\" 2>/dev/null || true\n        echo \"stopped\" > \"${DIR}/status\" 2>/dev/null || true\n        echo \"Task '${NAME}' stopped.\"\n        ;;\n\n    list)\n        if [ ! -d \"${TASK_DIR}\" ] || [ -z \"$(ls -A \"${TASK_DIR}\" 2>/dev/null)\" ]; then\n            echo \"No agent tasks recorded.\"\n            exit 0\n        fi\n        printf \"%-20s %-12s %-10s %-10s\\n\" \"TASK_NAME\" \"STATUS\" \"EXIT_CODE\" \"TMUX_ACTIVE\"\n        echo \"---------------------------------------------------------\"\n        for d in \"${TASK_DIR}\"/*; do\n            [ -d \"$d\" ] || continue\n            tname=$(basename \"$d\")\n            tstatus=$(cat \"$d/status\" 2>/dev/null || echo \"unknown\")\n            texit=$(cat \"$d/exit_code\" 2>/dev/null || echo \"-\")\n            tmux_act=\"no\"\n            tmux has-session -t \"agent_${tname}\" 2>/dev/null && tmux_act=\"yes\"\n            printf \"%-20s %-12s %-10s %-10s\\n\" \"$tname\" \"$tstatus\" \"$texit\" \"$tmux_act\"\n        done\n        ;;\n\n    *)\n        usage\n        ;;\nesac\n",
+        "supervisor_fixture_change": {
+          "from": "TASK_DIR=\"${HOME}/.agent-tasks\"",
+          "to": "TASK_DIR=\"/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/w/tasks\""
+        },
+        "live_manager_properties": {
+          "Type": "oneshot",
+          "TimeoutStartUSec": "9s",
+          "TimeoutStartFailureMode": "kill",
+          "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/vsp03-b04-review-b4r3-w.service",
+          "KillMode": "control-group",
+          "InactiveExitTimestampMonotonic": "373487312377"
+        },
+        "contained_pids": [
+          3013182,
+          3013194,
+          3013198,
+          3013200,
+          3013201,
+          3013202
+        ],
+        "client_returncode": 1,
+        "stdout": "",
+        "stderr": "Job for vsp03-b04-review-b4r3-w.service failed because the control process exited with error code.\nSee \"systemctl --user status vsp03-b04-review-b4r3-w.service\" and \"journalctl --user -xeu vsp03-b04-review-b4r3-w.service\" for details.\n",
+        "finished_monotonic": 373493.35568445,
+        "pids": {
+          "root": 3013200,
+          "child": 3013201,
+          "grandchild": 3013202,
+          "payload_adapter": 3013198,
+          "controller_or_startup_gate": 3013182,
+          "cgroup_3013182": 3013182,
+          "cgroup_3013194": 3013194,
+          "cgroup_3013198": 3013198,
+          "cgroup_3013200": 3013200,
+          "cgroup_3013201": 3013201,
+          "cgroup_3013202": 3013202
+        },
+        "process_states_after_return": {
+          "root": null,
+          "child": null,
+          "grandchild": null,
+          "payload_adapter": null,
+          "controller_or_startup_gate": null,
+          "cgroup_3013182": null,
+          "cgroup_3013194": null,
+          "cgroup_3013198": null,
+          "cgroup_3013200": null,
+          "cgroup_3013201": null,
+          "cgroup_3013202": null
+        },
+        "cgroup_pids_after_return": [],
+        "final_manager_properties": {
+          "Result": "exit-code",
+          "ExecMainExitTimestampMonotonic": "373493354753",
+          "ExecMainCode": "1",
+          "ExecMainStatus": "124",
+          "ActiveState": "failed",
+          "SubState": "failed",
+          "InactiveExitTimestampMonotonic": "373487312377"
+        },
+        "journal": "[373487.312411] LAPTOP-U9TDKC8A systemd[638]: Starting vsp03-b04-review-b4r3-w.service - /home/wu/.venvs/hmasd/bin/python /home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/w/gate.py /home/wu/.venvs/hmasd/bin/python /home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/src/experiments/candidates/vsp_03/vsp03_b04/control.py --unit=vsp03-b04-review-b4r3-w.service --name=w --record=/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/w/t.json --cap=10 --reserve=4 --supervisor /home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/w/supervisor --task-dir /home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/w/tasks -- /home/wu/.venvs/hmasd/bin/python -c \"import json,os,pathlib,signal,subprocess,sys,time\\np=subprocess.Popen([sys.executable,'-c',\\\"import subprocess,sys,time,pathlib; p=subprocess.Popen([sys.executable,'-c','import time; time.sleep(60)']); pathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/w/ready').write_text(str(p.pid)); time.sleep(60)\\\"])\\nready=pathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/w/ready')\\nwhile not ready.exists(): time.sleep(.005)\\npathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/w/pids.json').write_text(json.dumps({'root':os.getpid(),'child':p.pid,'grandchild':int(ready.read_text()),'payload_adapter':os.getppid()}))\\npathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/w/environment.json').write_text(json.dumps({k:os.environ.get(k) for k in ('VSP03_B04_COMMAND','VSP03_B04_STARTED','TMUX_TMPDIR')}))\\ntime.sleep(60)\\n\"...\n[373487.374900] LAPTOP-U9TDKC8A python[3013184]: Task 'w' started in tmux session 'agent_w'. Output: /home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/w/tasks/w/task.log\n[373493.351259] LAPTOP-U9TDKC8A python[3013182]: {\"terminal_published\": \"/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/w/t.json\", \"task_exit_code\": 124, \"elapsed_through_terminal_readback_s\": 6.038775685010478}\n[373493.354779] LAPTOP-U9TDKC8A systemd[638]: vsp03-b04-review-b4r3-w.service: Main process exited, code=exited, status=124/n/a\n[373493.355010] LAPTOP-U9TDKC8A systemd[638]: vsp03-b04-review-b4r3-w.service: Failed with result 'exit-code'.\n[373493.355055] LAPTOP-U9TDKC8A systemd[638]: Failed to start vsp03-b04-review-b4r3-w.service - /home/wu/.venvs/hmasd/bin/python /home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/w/gate.py /home/wu/.venvs/hmasd/bin/python /home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/src/experiments/candidates/vsp_03/vsp03_b04/control.py --unit=vsp03-b04-review-b4r3-w.service --name=w --record=/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/w/t.json --cap=10 --reserve=4 --supervisor /home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/w/supervisor --task-dir /home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/w/tasks -- /home/wu/.venvs/hmasd/bin/python -c \"import json,os,pathlib,signal,subprocess,sys,time\\np=subprocess.Popen([sys.executable,'-c',\\\"import subprocess,sys,time,pathlib; p=subprocess.Popen([sys.executable,'-c','import time; time.sleep(60)']); pathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/w/ready').write_text(str(p.pid)); time.sleep(60)\\\"])\\nready=pathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/w/ready')\\nwhile not ready.exists(): time.sleep(.005)\\npathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/w/pids.json').write_text(json.dumps({'root':os.getpid(),'child':p.pid,'grandchild':int(ready.read_text()),'payload_adapter':os.getppid()}))\\npathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/w/environment.json').write_text(json.dumps({k:os.environ.get(k) for k in ('VSP03_B04_COMMAND','VSP03_B04_STARTED','TMUX_TMPDIR')}))\\ntime.sleep(60)\\n\".\n",
+        "actual_launch_argv": [
+          "--user",
+          "--unit=vsp03-b04-review-b4r3-w",
+          "--service-type=oneshot",
+          "--wait",
+          "--working-directory=/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/src",
+          "--property=TimeoutStartSec=9s",
+          "--property=TimeoutStartFailureMode=kill",
+          "--property=KillMode=control-group",
+          "--property=FinalKillSignal=SIGKILL",
+          "--property=TimeoutStopSec=1s",
+          "--setenv=OMP_NUM_THREADS=1",
+          "--setenv=MKL_NUM_THREADS=1",
+          "--setenv=OPENBLAS_NUM_THREADS=1",
+          "--setenv=NUMEXPR_NUM_THREADS=1",
+          "/home/wu/.venvs/hmasd/bin/python",
+          "/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/src/experiments/candidates/vsp_03/vsp03_b04/control.py",
+          "--unit=vsp03-b04-review-b4r3-w.service",
+          "--name=w",
+          "--record=/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/w/t.json",
+          "--cap=10",
+          "--reserve=4",
+          "--",
+          "/home/wu/.venvs/hmasd/bin/python",
+          "-c",
+          "import json,os,pathlib,signal,subprocess,sys,time\np=subprocess.Popen([sys.executable,'-c',\"import subprocess,sys,time,pathlib; p=subprocess.Popen([sys.executable,'-c','import time; time.sleep(60)']); pathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/w/ready').write_text(str(p.pid)); time.sleep(60)\"])\nready=pathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/w/ready')\nwhile not ready.exists(): time.sleep(.005)\npathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/w/pids.json').write_text(json.dumps({'root':os.getpid(),'child':p.pid,'grandchild':int(ready.read_text()),'payload_adapter':os.getppid()}))\npathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/w/environment.json').write_text(json.dumps({k:os.environ.get(k) for k in ('VSP03_B04_COMMAND','VSP03_B04_STARTED','TMUX_TMPDIR')}))\ntime.sleep(60)\n"
+        ],
+        "supervisor_exit_code": "124\n",
+        "supervisor_status": "failed\n",
+        "supervisor_task.log": "=== Task 'w' started at 2026-09-09T07:31:52+08:00 ===\n{\"terminal_published\": \"/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/w/t.payload.json\", \"task_exit_code\": 124, \"all_descendants_terminated\": true, \"elapsed_through_terminal_readback_s\": 6.017552945006173}\n=== Task 'w' exited with code 124 at 2026-09-09T07:31:58+08:00 (Duration: 6s) ===\n",
+        "supervisor_runner.sh": "#!/usr/bin/env bash\necho $$ > \"/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/w/tasks/w/pid\"\nSTART_TS=$(date +%s)\necho \"=== Task 'w' started at $(date -Iseconds) ===\" >> \"/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/w/tasks/w/task.log\"\n\n# Execute command capturing output\nset +e\neval $'/home/wu/.venvs/hmasd/bin/python /home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/src/experiments/candidates/vsp_03/vsp03_b04/deadline.py --start-monotonic 373487.312377 --cap 10.0 --reserve 4.0 --record /home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/w/t.payload.json -- /home/wu/.venvs/hmasd/bin/python -c \\'import json,os,pathlib,signal,subprocess,sys,time\\np=subprocess.Popen([sys.executable,\\'\"\\'\"\\'-c\\'\"\\'\"\\',\"import subprocess,sys,time,pathlib; p=subprocess.Popen([sys.executable,\\'\"\\'\"\\'-c\\'\"\\'\"\\',\\'\"\\'\"\\'import time; time.sleep(60)\\'\"\\'\"\\']); pathlib.Path(\\'\"\\'\"\\'/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/w/ready\\'\"\\'\"\\').write_text(str(p.pid)); time.sleep(60)\"])\\nready=pathlib.Path(\\'\"\\'\"\\'/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/w/ready\\'\"\\'\"\\')\\nwhile not ready.exists(): time.sleep(.005)\\npathlib.Path(\\'\"\\'\"\\'/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/w/pids.json\\'\"\\'\"\\').write_text(json.dumps({\\'\"\\'\"\\'root\\'\"\\'\"\\':os.getpid(),\\'\"\\'\"\\'child\\'\"\\'\"\\':p.pid,\\'\"\\'\"\\'grandchild\\'\"\\'\"\\':int(ready.read_text()),\\'\"\\'\"\\'payload_adapter\\'\"\\'\"\\':os.getppid()}))\\npathlib.Path(\\'\"\\'\"\\'/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/w/environment.json\\'\"\\'\"\\').write_text(json.dumps({k:os.environ.get(k) for k in (\\'\"\\'\"\\'VSP03_B04_COMMAND\\'\"\\'\"\\',\\'\"\\'\"\\'VSP03_B04_STARTED\\'\"\\'\"\\',\\'\"\\'\"\\'TMUX_TMPDIR\\'\"\\'\"\\')}))\\ntime.sleep(60)\\n\\'' >> \"/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/w/tasks/w/task.log\" 2>&1\nEXIT_CODE=$?\nset -e\n\nEND_TS=$(date +%s)\necho $EXIT_CODE > \"/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/w/tasks/w/exit_code\"\nif [ $EXIT_CODE -eq 0 ]; then\n    echo \"finished\" > \"/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/w/tasks/w/status\"\nelse\n    echo \"failed\" > \"/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/w/tasks/w/status\"\nfi\necho \"=== Task 'w' exited with code $EXIT_CODE at $(date -Iseconds) (Duration: $((END_TS - START_TS))s) ===\" >> \"/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/w/tasks/w/task.log\"\n\n# Keep session alive briefly for inspection, then exit\nsleep 1\n",
+        "terminal": {
+          "object": "VSP03_B04",
+          "unit": "vsp03-b04-review-b4r3-w.service",
+          "manager_properties": {
+            "Type": "oneshot",
+            "TimeoutStartUSec": "9s",
+            "TimeoutStartFailureMode": "kill",
+            "KillMode": "control-group",
+            "InactiveExitTimestampMonotonic": "373487312377"
+          },
+          "started_monotonic": 373487.312377,
+          "cap_s": 10.0,
+          "shutdown_publication_reserve_s": 4.0,
+          "task_exit_code": 124,
+          "supervisor_exit_code": 124,
+          "payload": {
+            "object": "VSP03_B04",
+            "command": [
+              "/home/wu/.venvs/hmasd/bin/python",
+              "-c",
+              "import json,os,pathlib,signal,subprocess,sys,time\np=subprocess.Popen([sys.executable,'-c',\"import subprocess,sys,time,pathlib; p=subprocess.Popen([sys.executable,'-c','import time; time.sleep(60)']); pathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/w/ready').write_text(str(p.pid)); time.sleep(60)\"])\nready=pathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/w/ready')\nwhile not ready.exists(): time.sleep(.005)\npathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/w/pids.json').write_text(json.dumps({'root':os.getpid(),'child':p.pid,'grandchild':int(ready.read_text()),'payload_adapter':os.getppid()}))\npathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/w/environment.json').write_text(json.dumps({k:os.environ.get(k) for k in ('VSP03_B04_COMMAND','VSP03_B04_STARTED','TMUX_TMPDIR')}))\ntime.sleep(60)\n"
+            ],
+            "cwd": "/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/src",
+            "started_unix_s": null,
+            "started_monotonic": 373487.312377,
+            "observed_unix_s": 1788910312.9162312,
+            "observed_monotonic": 373487.384406446,
+            "deadline_monotonic": 373497.312377,
+            "cap_s": 10.0,
+            "shutdown_publication_reserve_s": 4.0,
+            "root_returncode": -9,
+            "task_exit_code": 124,
+            "timed_out": true,
+            "error": null,
+            "descendants_killed": [
+              3013201,
+              3013201,
+              3013202,
+              3013202
+            ],
+            "descendants_reaped": [
+              {
+                "pid": 3013201,
+                "wait_status": 9
+              },
+              {
+                "pid": 3013202,
+                "wait_status": 9
+              }
+            ],
+            "descendants_remaining": [],
+            "all_descendants_terminated": true,
+            "elapsed_before_terminal_publication_s": 6.017252057034057
+          },
+          "error": null,
+          "descendants_killed": [
+            3013194,
+            3013194,
+            3013195,
+            3013206
+          ],
+          "descendants_reaped": [
+            {
+              "pid": 3013194,
+              "wait_status": 9
+            },
+            {
+              "pid": 3013195,
+              "wait_status": 1
+            },
+            {
+              "pid": 3013206,
+              "wait_status": 1
+            }
+          ],
+          "descendants_remaining": [],
+          "all_descendants_terminated": true,
+          "elapsed_before_terminal_publication_s": 6.038578210980631
+        },
+        "environment": {
+          "VSP03_B04_COMMAND": "/home/wu/.venvs/hmasd/bin/python -c 'import json,os,pathlib,signal,subprocess,sys,time\np=subprocess.Popen([sys.executable,'\"'\"'-c'\"'\"',\"import subprocess,sys,time,pathlib; p=subprocess.Popen([sys.executable,'\"'\"'-c'\"'\"','\"'\"'import time; time.sleep(60)'\"'\"']); pathlib.Path('\"'\"'/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/w/ready'\"'\"').write_text(str(p.pid)); time.sleep(60)\"])\nready=pathlib.Path('\"'\"'/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/w/ready'\"'\"')\nwhile not ready.exists(): time.sleep(.005)\npathlib.Path('\"'\"'/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/w/pids.json'\"'\"').write_text(json.dumps({'\"'\"'root'\"'\"':os.getpid(),'\"'\"'child'\"'\"':p.pid,'\"'\"'grandchild'\"'\"':int(ready.read_text()),'\"'\"'payload_adapter'\"'\"':os.getppid()}))\npathlib.Path('\"'\"'/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/w/environment.json'\"'\"').write_text(json.dumps({k:os.environ.get(k) for k in ('\"'\"'VSP03_B04_COMMAND'\"'\"','\"'\"'VSP03_B04_STARTED'\"'\"','\"'\"'TMUX_TMPDIR'\"'\"')}))\ntime.sleep(60)\n'",
+          "VSP03_B04_STARTED": "373487.312377",
+          "TMUX_TMPDIR": "/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/w/t.tmux"
+        },
+        "origin_to_return_s": 6.043307450017892,
+        "passed": true
+      },
+      {
+        "name": "s",
+        "mode": "startup",
+        "unit": "vsp03-b04-review-b4r3-s.service",
+        "cap_s": 10,
+        "reserve_s": 4,
+        "command": [
+          "bash",
+          "/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/src/experiments/candidates/vsp_03/vsp03_b04/launch.sh",
+          "vsp03-b04-review-b4r3-s",
+          "/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/src",
+          "s",
+          "/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/s/t.json",
+          "10",
+          "4",
+          "--",
+          "/home/wu/.venvs/hmasd/bin/python",
+          "-c",
+          "import json,os,pathlib,signal,subprocess,sys,time\np=subprocess.Popen([sys.executable,'-c',\"import subprocess,sys,time,pathlib; p=subprocess.Popen([sys.executable,'-c','import time; time.sleep(60)']); pathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/s/ready').write_text(str(p.pid)); time.sleep(60)\"])\nready=pathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/s/ready')\nwhile not ready.exists(): time.sleep(.005)\npathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/s/pids.json').write_text(json.dumps({'root':os.getpid(),'child':p.pid,'grandchild':int(ready.read_text()),'payload_adapter':os.getppid()}))\npathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/s/environment.json').write_text(json.dumps({k:os.environ.get(k) for k in ('VSP03_B04_COMMAND','VSP03_B04_STARTED','TMUX_TMPDIR')}))\ntime.sleep(60)\n"
+        ],
+        "supervisor_source": "#!/usr/bin/env bash\n# ==============================================================================\n# agent-task: Lightweight task supervisor for Remote AI Agents using tmux\n# Solves: process keep-alive, exit-code retention, structured status, and log tailing\n# ==============================================================================\n\nset -euo pipefail\n\nTASK_DIR=\"${HOME}/.agent-tasks\"\nmkdir -p \"${TASK_DIR}\"\n\nusage() {\n    cat <<EOF\nUsage: agent-task <command> [arguments]\n\nCommands:\n  run <name> <cmd...>     Run a command in a persistent tmux session with log tracking\n  status <name>           Get status, PID, and exit code in JSON format\n  logs <name> [lines]     View the last N lines of output (default: 50)\n  attach <name>           Interactively attach to the task tmux session\n  stop <name>             Stop a running task\n  list                    List all agent tasks and their status\nEOF\n    exit 1\n}\n\n[ $# -lt 1 ] && usage\n\nCMD=\"$1\"\nshift\n\ncase \"$CMD\" in\n    run)\n        [ $# -lt 2 ] && { echo \"Error: 'run' requires <name> and <command...>\"; exit 1; }\n        NAME=\"$1\"\n        shift\n        COMMAND=\"$*\"\n\n        DIR=\"${TASK_DIR}/${NAME}\"\n        mkdir -p \"${DIR}\"\n\n        LOG_FILE=\"${DIR}/task.log\"\n        STATUS_FILE=\"${DIR}/status\"\n        PID_FILE=\"${DIR}/pid\"\n        EXIT_FILE=\"${DIR}/exit_code\"\n        START_TIME_FILE=\"${DIR}/start_time\"\n\n        # Check if already running\n        if tmux has-session -t \"agent_${NAME}\" 2>/dev/null; then\n            echo \"Error: Task '${NAME}' is already running in session 'agent_${NAME}'.\"\n            exit 1\n        fi\n\n        rm -f \"${EXIT_FILE}\"\n        echo \"running\" > \"${STATUS_FILE}\"\n        date +%s > \"${START_TIME_FILE}\"\n\n        # Wrapper script executed inside tmux\n        WRAPPER=\"${DIR}/runner.sh\"\n        cat <<EOF > \"${WRAPPER}\"\n#!/usr/bin/env bash\necho \\$\\$ > \"${PID_FILE}\"\nSTART_TS=\\$(date +%s)\necho \"=== Task '${NAME}' started at \\$(date -Iseconds) ===\" >> \"${LOG_FILE}\"\n\n# Execute command capturing output\nset +e\neval ${COMMAND@Q} >> \"${LOG_FILE}\" 2>&1\nEXIT_CODE=\\$?\nset -e\n\nEND_TS=\\$(date +%s)\necho \\$EXIT_CODE > \"${EXIT_FILE}\"\nif [ \\$EXIT_CODE -eq 0 ]; then\n    echo \"finished\" > \"${STATUS_FILE}\"\nelse\n    echo \"failed\" > \"${STATUS_FILE}\"\nfi\necho \"=== Task '${NAME}' exited with code \\$EXIT_CODE at \\$(date -Iseconds) (Duration: \\$((END_TS - START_TS))s) ===\" >> \"${LOG_FILE}\"\n\n# Keep session alive briefly for inspection, then exit\nsleep 1\nEOF\n        chmod +x \"${WRAPPER}\"\n\n        # Spawn detached tmux session\n        tmux new-session -d -s \"agent_${NAME}\" \"bash '${WRAPPER}'\"\n        echo \"Task '${NAME}' started in tmux session 'agent_${NAME}'. Output: ${LOG_FILE}\"\n        ;;\n\n    status)\n        [ $# -lt 1 ] && { echo \"Error: 'status' requires <name>\"; exit 1; }\n        NAME=\"$1\"\n        DIR=\"${TASK_DIR}/${NAME}\"\n        [ ! -d \"${DIR}\" ] && { echo \"{\\\"task\\\": \\\"${NAME}\\\", \\\"status\\\": \\\"not_found\\\"}\"; exit 0; }\n\n        STATUS=\"unknown\"\n        [ -f \"${DIR}/status\" ] && STATUS=$(cat \"${DIR}/status\")\n\n        PID=null\n        [ -f \"${DIR}/pid\" ] && PID=$(cat \"${DIR}/pid\")\n\n        EXIT_CODE=null\n        [ -f \"${DIR}/exit_code\" ] && EXIT_CODE=$(cat \"${DIR}/exit_code\")\n\n        START_TIME=0\n        [ -f \"${DIR}/start_time\" ] && START_TIME=$(cat \"${DIR}/start_time\")\n\n        NOW=$(date +%s)\n        UPTIME=0\n        if [ \"$START_TIME\" -gt 0 ]; then\n            UPTIME=$((NOW - START_TIME))\n        fi\n\n        # Check if tmux session still exists\n        TMUX_ACTIVE=false\n        if tmux has-session -t \"agent_${NAME}\" 2>/dev/null; then\n            TMUX_ACTIVE=true\n        else\n            if [ \"$STATUS\" = \"running\" ]; then\n                STATUS=\"terminated\"\n            fi\n        fi\n\n        printf '{\"task\": \"%s\", \"status\": \"%s\", \"exit_code\": %s, \"pid\": %s, \"uptime_seconds\": %d, \"tmux_active\": %s}\\n' \\\n            \"${NAME}\" \"${STATUS}\" \"${EXIT_CODE}\" \"${PID}\" \"${UPTIME}\" \"${TMUX_ACTIVE}\"\n        ;;\n\n    logs)\n        [ $# -lt 1 ] && { echo \"Error: 'logs' requires <name>\"; exit 1; }\n        NAME=\"$1\"\n        LINES=\"${2:-50}\"\n        LOG_FILE=\"${TASK_DIR}/${NAME}/task.log\"\n\n        if [ ! -f \"${LOG_FILE}\" ]; then\n            echo \"No logs found for task '${NAME}'.\"\n            exit 1\n        fi\n        tail -n \"${LINES}\" \"${LOG_FILE}\"\n        ;;\n\n    attach)\n        [ $# -lt 1 ] && { echo \"Error: 'attach' requires <name>\"; exit 1; }\n        NAME=\"$1\"\n        exec tmux attach-session -t \"agent_${NAME}\"\n        ;;\n\n    stop)\n        [ $# -lt 1 ] && { echo \"Error: 'stop' requires <name>\"; exit 1; }\n        NAME=\"$1\"\n        DIR=\"${TASK_DIR}/${NAME}\"\n        if [ -f \"${DIR}/pid\" ]; then\n            PID=$(cat \"${DIR}/pid\")\n            kill -15 \"${PID}\" 2>/dev/null || true\n            sleep 0.5\n            kill -9 \"${PID}\" 2>/dev/null || true\n        fi\n        tmux kill-session -t \"agent_${NAME}\" 2>/dev/null || true\n        echo \"stopped\" > \"${DIR}/status\" 2>/dev/null || true\n        echo \"Task '${NAME}' stopped.\"\n        ;;\n\n    list)\n        if [ ! -d \"${TASK_DIR}\" ] || [ -z \"$(ls -A \"${TASK_DIR}\" 2>/dev/null)\" ]; then\n            echo \"No agent tasks recorded.\"\n            exit 0\n        fi\n        printf \"%-20s %-12s %-10s %-10s\\n\" \"TASK_NAME\" \"STATUS\" \"EXIT_CODE\" \"TMUX_ACTIVE\"\n        echo \"---------------------------------------------------------\"\n        for d in \"${TASK_DIR}\"/*; do\n            [ -d \"$d\" ] || continue\n            tname=$(basename \"$d\")\n            tstatus=$(cat \"$d/status\" 2>/dev/null || echo \"unknown\")\n            texit=$(cat \"$d/exit_code\" 2>/dev/null || echo \"-\")\n            tmux_act=\"no\"\n            tmux has-session -t \"agent_${tname}\" 2>/dev/null && tmux_act=\"yes\"\n            printf \"%-20s %-12s %-10s %-10s\\n\" \"$tname\" \"$tstatus\" \"$texit\" \"$tmux_act\"\n        done\n        ;;\n\n    *)\n        usage\n        ;;\nesac\n",
+        "supervisor_fixture_change": {
+          "from": "TASK_DIR=\"${HOME}/.agent-tasks\"",
+          "to": "TASK_DIR=\"/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/s/tasks\""
+        },
+        "live_manager_properties": {
+          "Type": "oneshot",
+          "TimeoutStartUSec": "9s",
+          "TimeoutStartFailureMode": "kill",
+          "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/vsp03-b04-review-b4r3-s.service",
+          "KillMode": "control-group",
+          "InactiveExitTimestampMonotonic": "373493472252"
+        },
+        "contained_pids": [
+          3013213,
+          3013214
+        ],
+        "client_returncode": 1,
+        "stdout": "",
+        "stderr": "Job for vsp03-b04-review-b4r3-s.service failed because a timeout was exceeded.\nSee \"systemctl --user status vsp03-b04-review-b4r3-s.service\" and \"journalctl --user -xeu vsp03-b04-review-b4r3-s.service\" for details.\n",
+        "finished_monotonic": 373502.496413266,
+        "pids": {
+          "startup_child": 3013214,
+          "controller_or_startup_gate": 3013213,
+          "cgroup_3013213": 3013213,
+          "cgroup_3013214": 3013214
+        },
+        "process_states_after_return": {
+          "startup_child": null,
+          "controller_or_startup_gate": null,
+          "cgroup_3013213": null,
+          "cgroup_3013214": null
+        },
+        "cgroup_pids_after_return": [],
+        "final_manager_properties": {
+          "Result": "timeout",
+          "ExecMainExitTimestampMonotonic": "373502494583",
+          "ExecMainCode": "2",
+          "ExecMainStatus": "9",
+          "ActiveState": "failed",
+          "SubState": "failed",
+          "InactiveExitTimestampMonotonic": "373493472252"
+        },
+        "journal": "[373493.472306] LAPTOP-U9TDKC8A systemd[638]: Starting vsp03-b04-review-b4r3-s.service - /home/wu/.venvs/hmasd/bin/python /home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/s/gate.py /home/wu/.venvs/hmasd/bin/python /home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/src/experiments/candidates/vsp_03/vsp03_b04/control.py --unit=vsp03-b04-review-b4r3-s.service --name=s --record=/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/s/t.json --cap=10 --reserve=4 --supervisor /home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/s/supervisor --task-dir /home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/s/tasks -- /home/wu/.venvs/hmasd/bin/python -c \"import json,os,pathlib,signal,subprocess,sys,time\\np=subprocess.Popen([sys.executable,'-c',\\\"import subprocess,sys,time,pathlib; p=subprocess.Popen([sys.executable,'-c','import time; time.sleep(60)']); pathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/s/ready').write_text(str(p.pid)); time.sleep(60)\\\"])\\nready=pathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/s/ready')\\nwhile not ready.exists(): time.sleep(.005)\\npathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/s/pids.json').write_text(json.dumps({'root':os.getpid(),'child':p.pid,'grandchild':int(ready.read_text()),'payload_adapter':os.getppid()}))\\npathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/s/environment.json').write_text(json.dumps({k:os.environ.get(k) for k in ('VSP03_B04_COMMAND','VSP03_B04_STARTED','TMUX_TMPDIR')}))\\ntime.sleep(60)\\n\"...\n[373502.493720] LAPTOP-U9TDKC8A systemd[638]: vsp03-b04-review-b4r3-s.service: start operation timed out. Killing.\n[373502.494235] LAPTOP-U9TDKC8A systemd[638]: vsp03-b04-review-b4r3-s.service: Killing process 3013213 (python) with signal SIGKILL.\n[373502.494309] LAPTOP-U9TDKC8A systemd[638]: vsp03-b04-review-b4r3-s.service: Killing process 3013214 (python) with signal SIGKILL.\n[373502.494714] LAPTOP-U9TDKC8A systemd[638]: vsp03-b04-review-b4r3-s.service: Main process exited, code=killed, status=9/KILL\n[373502.494969] LAPTOP-U9TDKC8A systemd[638]: vsp03-b04-review-b4r3-s.service: Failed with result 'timeout'.\n[373502.495242] LAPTOP-U9TDKC8A systemd[638]: Failed to start vsp03-b04-review-b4r3-s.service - /home/wu/.venvs/hmasd/bin/python /home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/s/gate.py /home/wu/.venvs/hmasd/bin/python /home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/src/experiments/candidates/vsp_03/vsp03_b04/control.py --unit=vsp03-b04-review-b4r3-s.service --name=s --record=/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/s/t.json --cap=10 --reserve=4 --supervisor /home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/s/supervisor --task-dir /home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/s/tasks -- /home/wu/.venvs/hmasd/bin/python -c \"import json,os,pathlib,signal,subprocess,sys,time\\np=subprocess.Popen([sys.executable,'-c',\\\"import subprocess,sys,time,pathlib; p=subprocess.Popen([sys.executable,'-c','import time; time.sleep(60)']); pathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/s/ready').write_text(str(p.pid)); time.sleep(60)\\\"])\\nready=pathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/s/ready')\\nwhile not ready.exists(): time.sleep(.005)\\npathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/s/pids.json').write_text(json.dumps({'root':os.getpid(),'child':p.pid,'grandchild':int(ready.read_text()),'payload_adapter':os.getppid()}))\\npathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/s/environment.json').write_text(json.dumps({k:os.environ.get(k) for k in ('VSP03_B04_COMMAND','VSP03_B04_STARTED','TMUX_TMPDIR')}))\\ntime.sleep(60)\\n\".\n",
+        "actual_launch_argv": [
+          "--user",
+          "--unit=vsp03-b04-review-b4r3-s",
+          "--service-type=oneshot",
+          "--wait",
+          "--working-directory=/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/src",
+          "--property=TimeoutStartSec=9s",
+          "--property=TimeoutStartFailureMode=kill",
+          "--property=KillMode=control-group",
+          "--property=FinalKillSignal=SIGKILL",
+          "--property=TimeoutStopSec=1s",
+          "--setenv=OMP_NUM_THREADS=1",
+          "--setenv=MKL_NUM_THREADS=1",
+          "--setenv=OPENBLAS_NUM_THREADS=1",
+          "--setenv=NUMEXPR_NUM_THREADS=1",
+          "/home/wu/.venvs/hmasd/bin/python",
+          "/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/src/experiments/candidates/vsp_03/vsp03_b04/control.py",
+          "--unit=vsp03-b04-review-b4r3-s.service",
+          "--name=s",
+          "--record=/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/s/t.json",
+          "--cap=10",
+          "--reserve=4",
+          "--",
+          "/home/wu/.venvs/hmasd/bin/python",
+          "-c",
+          "import json,os,pathlib,signal,subprocess,sys,time\np=subprocess.Popen([sys.executable,'-c',\"import subprocess,sys,time,pathlib; p=subprocess.Popen([sys.executable,'-c','import time; time.sleep(60)']); pathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/s/ready').write_text(str(p.pid)); time.sleep(60)\"])\nready=pathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/s/ready')\nwhile not ready.exists(): time.sleep(.005)\npathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/s/pids.json').write_text(json.dumps({'root':os.getpid(),'child':p.pid,'grandchild':int(ready.read_text()),'payload_adapter':os.getppid()}))\npathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/s/environment.json').write_text(json.dumps({k:os.environ.get(k) for k in ('VSP03_B04_COMMAND','VSP03_B04_STARTED','TMUX_TMPDIR')}))\ntime.sleep(60)\n"
+        ],
+        "origin_to_return_s": 9.024161265988369,
+        "passed": true
+      },
+      {
+        "name": "k",
+        "mode": "stopped",
+        "unit": "vsp03-b04-review-b4r3-k.service",
+        "cap_s": 10,
+        "reserve_s": 4,
+        "command": [
+          "bash",
+          "/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/src/experiments/candidates/vsp_03/vsp03_b04/launch.sh",
+          "vsp03-b04-review-b4r3-k",
+          "/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/src",
+          "k",
+          "/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/k/t.json",
+          "10",
+          "4",
+          "--",
+          "/home/wu/.venvs/hmasd/bin/python",
+          "-c",
+          "import json,os,pathlib,signal,subprocess,sys,time\np=subprocess.Popen([sys.executable,'-c',\"import subprocess,sys,time,pathlib; p=subprocess.Popen([sys.executable,'-c','import time; time.sleep(60)']); pathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/k/ready').write_text(str(p.pid)); time.sleep(60)\"])\nready=pathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/k/ready')\nwhile not ready.exists(): time.sleep(.005)\npathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/k/pids.json').write_text(json.dumps({'root':os.getpid(),'child':p.pid,'grandchild':int(ready.read_text()),'payload_adapter':os.getppid()}))\npathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/k/environment.json').write_text(json.dumps({k:os.environ.get(k) for k in ('VSP03_B04_COMMAND','VSP03_B04_STARTED','TMUX_TMPDIR')}))\nos.kill(int(pathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/k/controller.pid').read_text()),signal.SIGSTOP)\ntime.sleep(60)\n"
+        ],
+        "supervisor_source": "#!/usr/bin/env bash\n# ==============================================================================\n# agent-task: Lightweight task supervisor for Remote AI Agents using tmux\n# Solves: process keep-alive, exit-code retention, structured status, and log tailing\n# ==============================================================================\n\nset -euo pipefail\n\nTASK_DIR=\"${HOME}/.agent-tasks\"\nmkdir -p \"${TASK_DIR}\"\n\nusage() {\n    cat <<EOF\nUsage: agent-task <command> [arguments]\n\nCommands:\n  run <name> <cmd...>     Run a command in a persistent tmux session with log tracking\n  status <name>           Get status, PID, and exit code in JSON format\n  logs <name> [lines]     View the last N lines of output (default: 50)\n  attach <name>           Interactively attach to the task tmux session\n  stop <name>             Stop a running task\n  list                    List all agent tasks and their status\nEOF\n    exit 1\n}\n\n[ $# -lt 1 ] && usage\n\nCMD=\"$1\"\nshift\n\ncase \"$CMD\" in\n    run)\n        [ $# -lt 2 ] && { echo \"Error: 'run' requires <name> and <command...>\"; exit 1; }\n        NAME=\"$1\"\n        shift\n        COMMAND=\"$*\"\n\n        DIR=\"${TASK_DIR}/${NAME}\"\n        mkdir -p \"${DIR}\"\n\n        LOG_FILE=\"${DIR}/task.log\"\n        STATUS_FILE=\"${DIR}/status\"\n        PID_FILE=\"${DIR}/pid\"\n        EXIT_FILE=\"${DIR}/exit_code\"\n        START_TIME_FILE=\"${DIR}/start_time\"\n\n        # Check if already running\n        if tmux has-session -t \"agent_${NAME}\" 2>/dev/null; then\n            echo \"Error: Task '${NAME}' is already running in session 'agent_${NAME}'.\"\n            exit 1\n        fi\n\n        rm -f \"${EXIT_FILE}\"\n        echo \"running\" > \"${STATUS_FILE}\"\n        date +%s > \"${START_TIME_FILE}\"\n\n        # Wrapper script executed inside tmux\n        WRAPPER=\"${DIR}/runner.sh\"\n        cat <<EOF > \"${WRAPPER}\"\n#!/usr/bin/env bash\necho \\$\\$ > \"${PID_FILE}\"\nSTART_TS=\\$(date +%s)\necho \"=== Task '${NAME}' started at \\$(date -Iseconds) ===\" >> \"${LOG_FILE}\"\n\n# Execute command capturing output\nset +e\neval ${COMMAND@Q} >> \"${LOG_FILE}\" 2>&1\nEXIT_CODE=\\$?\nset -e\n\nEND_TS=\\$(date +%s)\necho \\$EXIT_CODE > \"${EXIT_FILE}\"\nif [ \\$EXIT_CODE -eq 0 ]; then\n    echo \"finished\" > \"${STATUS_FILE}\"\nelse\n    echo \"failed\" > \"${STATUS_FILE}\"\nfi\necho \"=== Task '${NAME}' exited with code \\$EXIT_CODE at \\$(date -Iseconds) (Duration: \\$((END_TS - START_TS))s) ===\" >> \"${LOG_FILE}\"\n\n# Keep session alive briefly for inspection, then exit\nsleep 1\nEOF\n        chmod +x \"${WRAPPER}\"\n\n        # Spawn detached tmux session\n        tmux new-session -d -s \"agent_${NAME}\" \"bash '${WRAPPER}'\"\n        echo \"Task '${NAME}' started in tmux session 'agent_${NAME}'. Output: ${LOG_FILE}\"\n        ;;\n\n    status)\n        [ $# -lt 1 ] && { echo \"Error: 'status' requires <name>\"; exit 1; }\n        NAME=\"$1\"\n        DIR=\"${TASK_DIR}/${NAME}\"\n        [ ! -d \"${DIR}\" ] && { echo \"{\\\"task\\\": \\\"${NAME}\\\", \\\"status\\\": \\\"not_found\\\"}\"; exit 0; }\n\n        STATUS=\"unknown\"\n        [ -f \"${DIR}/status\" ] && STATUS=$(cat \"${DIR}/status\")\n\n        PID=null\n        [ -f \"${DIR}/pid\" ] && PID=$(cat \"${DIR}/pid\")\n\n        EXIT_CODE=null\n        [ -f \"${DIR}/exit_code\" ] && EXIT_CODE=$(cat \"${DIR}/exit_code\")\n\n        START_TIME=0\n        [ -f \"${DIR}/start_time\" ] && START_TIME=$(cat \"${DIR}/start_time\")\n\n        NOW=$(date +%s)\n        UPTIME=0\n        if [ \"$START_TIME\" -gt 0 ]; then\n            UPTIME=$((NOW - START_TIME))\n        fi\n\n        # Check if tmux session still exists\n        TMUX_ACTIVE=false\n        if tmux has-session -t \"agent_${NAME}\" 2>/dev/null; then\n            TMUX_ACTIVE=true\n        else\n            if [ \"$STATUS\" = \"running\" ]; then\n                STATUS=\"terminated\"\n            fi\n        fi\n\n        printf '{\"task\": \"%s\", \"status\": \"%s\", \"exit_code\": %s, \"pid\": %s, \"uptime_seconds\": %d, \"tmux_active\": %s}\\n' \\\n            \"${NAME}\" \"${STATUS}\" \"${EXIT_CODE}\" \"${PID}\" \"${UPTIME}\" \"${TMUX_ACTIVE}\"\n        ;;\n\n    logs)\n        [ $# -lt 1 ] && { echo \"Error: 'logs' requires <name>\"; exit 1; }\n        NAME=\"$1\"\n        LINES=\"${2:-50}\"\n        LOG_FILE=\"${TASK_DIR}/${NAME}/task.log\"\n\n        if [ ! -f \"${LOG_FILE}\" ]; then\n            echo \"No logs found for task '${NAME}'.\"\n            exit 1\n        fi\n        tail -n \"${LINES}\" \"${LOG_FILE}\"\n        ;;\n\n    attach)\n        [ $# -lt 1 ] && { echo \"Error: 'attach' requires <name>\"; exit 1; }\n        NAME=\"$1\"\n        exec tmux attach-session -t \"agent_${NAME}\"\n        ;;\n\n    stop)\n        [ $# -lt 1 ] && { echo \"Error: 'stop' requires <name>\"; exit 1; }\n        NAME=\"$1\"\n        DIR=\"${TASK_DIR}/${NAME}\"\n        if [ -f \"${DIR}/pid\" ]; then\n            PID=$(cat \"${DIR}/pid\")\n            kill -15 \"${PID}\" 2>/dev/null || true\n            sleep 0.5\n            kill -9 \"${PID}\" 2>/dev/null || true\n        fi\n        tmux kill-session -t \"agent_${NAME}\" 2>/dev/null || true\n        echo \"stopped\" > \"${DIR}/status\" 2>/dev/null || true\n        echo \"Task '${NAME}' stopped.\"\n        ;;\n\n    list)\n        if [ ! -d \"${TASK_DIR}\" ] || [ -z \"$(ls -A \"${TASK_DIR}\" 2>/dev/null)\" ]; then\n            echo \"No agent tasks recorded.\"\n            exit 0\n        fi\n        printf \"%-20s %-12s %-10s %-10s\\n\" \"TASK_NAME\" \"STATUS\" \"EXIT_CODE\" \"TMUX_ACTIVE\"\n        echo \"---------------------------------------------------------\"\n        for d in \"${TASK_DIR}\"/*; do\n            [ -d \"$d\" ] || continue\n            tname=$(basename \"$d\")\n            tstatus=$(cat \"$d/status\" 2>/dev/null || echo \"unknown\")\n            texit=$(cat \"$d/exit_code\" 2>/dev/null || echo \"-\")\n            tmux_act=\"no\"\n            tmux has-session -t \"agent_${tname}\" 2>/dev/null && tmux_act=\"yes\"\n            printf \"%-20s %-12s %-10s %-10s\\n\" \"$tname\" \"$tstatus\" \"$texit\" \"$tmux_act\"\n        done\n        ;;\n\n    *)\n        usage\n        ;;\nesac\n",
+        "supervisor_fixture_change": {
+          "from": "TASK_DIR=\"${HOME}/.agent-tasks\"",
+          "to": "TASK_DIR=\"/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/k/tasks\""
+        },
+        "live_manager_properties": {
+          "Type": "oneshot",
+          "TimeoutStartUSec": "9s",
+          "TimeoutStartFailureMode": "kill",
+          "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/vsp03-b04-review-b4r3-k.service",
+          "KillMode": "control-group",
+          "InactiveExitTimestampMonotonic": "373502620398"
+        },
+        "contained_pids": [
+          3013222,
+          3013234,
+          3013238,
+          3013240,
+          3013241,
+          3013242
+        ],
+        "client_returncode": 1,
+        "stdout": "",
+        "stderr": "Job for vsp03-b04-review-b4r3-k.service failed because a timeout was exceeded.\nSee \"systemctl --user status vsp03-b04-review-b4r3-k.service\" and \"journalctl --user -xeu vsp03-b04-review-b4r3-k.service\" for details.\n",
+        "finished_monotonic": 373511.746382627,
+        "pids": {
+          "root": 3013240,
+          "child": 3013241,
+          "grandchild": 3013242,
+          "payload_adapter": 3013238,
+          "controller_or_startup_gate": 3013222,
+          "cgroup_3013222": 3013222,
+          "cgroup_3013234": 3013234,
+          "cgroup_3013238": 3013238,
+          "cgroup_3013240": 3013240,
+          "cgroup_3013241": 3013241,
+          "cgroup_3013242": 3013242
+        },
+        "process_states_after_return": {
+          "root": null,
+          "child": null,
+          "grandchild": null,
+          "payload_adapter": null,
+          "controller_or_startup_gate": null,
+          "cgroup_3013222": null,
+          "cgroup_3013234": null,
+          "cgroup_3013238": null,
+          "cgroup_3013240": null,
+          "cgroup_3013241": null,
+          "cgroup_3013242": null
+        },
+        "cgroup_pids_after_return": [],
+        "final_manager_properties": {
+          "Result": "timeout",
+          "ExecMainExitTimestampMonotonic": "373511744794",
+          "ExecMainCode": "2",
+          "ExecMainStatus": "9",
+          "ActiveState": "failed",
+          "SubState": "failed",
+          "InactiveExitTimestampMonotonic": "373502620398"
+        },
+        "journal": "[373502.620459] LAPTOP-U9TDKC8A systemd[638]: Starting vsp03-b04-review-b4r3-k.service - /home/wu/.venvs/hmasd/bin/python /home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/k/gate.py /home/wu/.venvs/hmasd/bin/python /home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/src/experiments/candidates/vsp_03/vsp03_b04/control.py --unit=vsp03-b04-review-b4r3-k.service --name=k --record=/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/k/t.json --cap=10 --reserve=4 --supervisor /home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/k/supervisor --task-dir /home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/k/tasks -- /home/wu/.venvs/hmasd/bin/python -c \"import json,os,pathlib,signal,subprocess,sys,time\\np=subprocess.Popen([sys.executable,'-c',\\\"import subprocess,sys,time,pathlib; p=subprocess.Popen([sys.executable,'-c','import time; time.sleep(60)']); pathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/k/ready').write_text(str(p.pid)); time.sleep(60)\\\"])\\nready=pathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/k/ready')\\nwhile not ready.exists(): time.sleep(.005)\\npathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/k/pids.json').write_text(json.dumps({'root':os.getpid(),'child':p.pid,'grandchild':int(ready.read_text()),'payload_adapter':os.getppid()}))\\npathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/k/environment.json').write_text(json.dumps({k:os.environ.get(k) for k in ('VSP03_B04_COMMAND','VSP03_B04_STARTED','TMUX_TMPDIR')}))\\nos.kill(int(pathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/k/controller.pid').read_text()),signal.SIGSTOP)\\ntime.sleep(60)\\n\"...\n[373502.681995] LAPTOP-U9TDKC8A python[3013224]: Task 'k' started in tmux session 'agent_k'. Output: /home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/k/tasks/k/task.log\n[373511.743542] LAPTOP-U9TDKC8A systemd[638]: vsp03-b04-review-b4r3-k.service: start operation timed out. Killing.\n[373511.743930] LAPTOP-U9TDKC8A systemd[638]: vsp03-b04-review-b4r3-k.service: Killing process 3013222 (python) with signal SIGKILL.\n[373511.744840] LAPTOP-U9TDKC8A systemd[638]: vsp03-b04-review-b4r3-k.service: Main process exited, code=killed, status=9/KILL\n[373511.744973] LAPTOP-U9TDKC8A systemd[638]: vsp03-b04-review-b4r3-k.service: Failed with result 'timeout'.\n[373511.745131] LAPTOP-U9TDKC8A systemd[638]: Failed to start vsp03-b04-review-b4r3-k.service - /home/wu/.venvs/hmasd/bin/python /home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/k/gate.py /home/wu/.venvs/hmasd/bin/python /home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/src/experiments/candidates/vsp_03/vsp03_b04/control.py --unit=vsp03-b04-review-b4r3-k.service --name=k --record=/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/k/t.json --cap=10 --reserve=4 --supervisor /home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/k/supervisor --task-dir /home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/k/tasks -- /home/wu/.venvs/hmasd/bin/python -c \"import json,os,pathlib,signal,subprocess,sys,time\\np=subprocess.Popen([sys.executable,'-c',\\\"import subprocess,sys,time,pathlib; p=subprocess.Popen([sys.executable,'-c','import time; time.sleep(60)']); pathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/k/ready').write_text(str(p.pid)); time.sleep(60)\\\"])\\nready=pathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/k/ready')\\nwhile not ready.exists(): time.sleep(.005)\\npathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/k/pids.json').write_text(json.dumps({'root':os.getpid(),'child':p.pid,'grandchild':int(ready.read_text()),'payload_adapter':os.getppid()}))\\npathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/k/environment.json').write_text(json.dumps({k:os.environ.get(k) for k in ('VSP03_B04_COMMAND','VSP03_B04_STARTED','TMUX_TMPDIR')}))\\nos.kill(int(pathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/k/controller.pid').read_text()),signal.SIGSTOP)\\ntime.sleep(60)\\n\".\n",
+        "actual_launch_argv": [
+          "--user",
+          "--unit=vsp03-b04-review-b4r3-k",
+          "--service-type=oneshot",
+          "--wait",
+          "--working-directory=/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/src",
+          "--property=TimeoutStartSec=9s",
+          "--property=TimeoutStartFailureMode=kill",
+          "--property=KillMode=control-group",
+          "--property=FinalKillSignal=SIGKILL",
+          "--property=TimeoutStopSec=1s",
+          "--setenv=OMP_NUM_THREADS=1",
+          "--setenv=MKL_NUM_THREADS=1",
+          "--setenv=OPENBLAS_NUM_THREADS=1",
+          "--setenv=NUMEXPR_NUM_THREADS=1",
+          "/home/wu/.venvs/hmasd/bin/python",
+          "/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/src/experiments/candidates/vsp_03/vsp03_b04/control.py",
+          "--unit=vsp03-b04-review-b4r3-k.service",
+          "--name=k",
+          "--record=/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/k/t.json",
+          "--cap=10",
+          "--reserve=4",
+          "--",
+          "/home/wu/.venvs/hmasd/bin/python",
+          "-c",
+          "import json,os,pathlib,signal,subprocess,sys,time\np=subprocess.Popen([sys.executable,'-c',\"import subprocess,sys,time,pathlib; p=subprocess.Popen([sys.executable,'-c','import time; time.sleep(60)']); pathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/k/ready').write_text(str(p.pid)); time.sleep(60)\"])\nready=pathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/k/ready')\nwhile not ready.exists(): time.sleep(.005)\npathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/k/pids.json').write_text(json.dumps({'root':os.getpid(),'child':p.pid,'grandchild':int(ready.read_text()),'payload_adapter':os.getppid()}))\npathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/k/environment.json').write_text(json.dumps({k:os.environ.get(k) for k in ('VSP03_B04_COMMAND','VSP03_B04_STARTED','TMUX_TMPDIR')}))\nos.kill(int(pathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/k/controller.pid').read_text()),signal.SIGSTOP)\ntime.sleep(60)\n"
+        ],
+        "supervisor_exit_code": "124\n",
+        "supervisor_status": "failed\n",
+        "supervisor_task.log": "=== Task 'k' started at 2026-09-09T07:32:08+08:00 ===\n{\"terminal_published\": \"/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/k/t.payload.json\", \"task_exit_code\": 124, \"all_descendants_terminated\": true, \"elapsed_through_terminal_readback_s\": 6.017291148018558}\n=== Task 'k' exited with code 124 at 2026-09-09T07:32:14+08:00 (Duration: 6s) ===\n",
+        "supervisor_runner.sh": "#!/usr/bin/env bash\necho $$ > \"/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/k/tasks/k/pid\"\nSTART_TS=$(date +%s)\necho \"=== Task 'k' started at $(date -Iseconds) ===\" >> \"/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/k/tasks/k/task.log\"\n\n# Execute command capturing output\nset +e\neval $'/home/wu/.venvs/hmasd/bin/python /home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/src/experiments/candidates/vsp_03/vsp03_b04/deadline.py --start-monotonic 373502.620398 --cap 10.0 --reserve 4.0 --record /home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/k/t.payload.json -- /home/wu/.venvs/hmasd/bin/python -c \\'import json,os,pathlib,signal,subprocess,sys,time\\np=subprocess.Popen([sys.executable,\\'\"\\'\"\\'-c\\'\"\\'\"\\',\"import subprocess,sys,time,pathlib; p=subprocess.Popen([sys.executable,\\'\"\\'\"\\'-c\\'\"\\'\"\\',\\'\"\\'\"\\'import time; time.sleep(60)\\'\"\\'\"\\']); pathlib.Path(\\'\"\\'\"\\'/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/k/ready\\'\"\\'\"\\').write_text(str(p.pid)); time.sleep(60)\"])\\nready=pathlib.Path(\\'\"\\'\"\\'/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/k/ready\\'\"\\'\"\\')\\nwhile not ready.exists(): time.sleep(.005)\\npathlib.Path(\\'\"\\'\"\\'/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/k/pids.json\\'\"\\'\"\\').write_text(json.dumps({\\'\"\\'\"\\'root\\'\"\\'\"\\':os.getpid(),\\'\"\\'\"\\'child\\'\"\\'\"\\':p.pid,\\'\"\\'\"\\'grandchild\\'\"\\'\"\\':int(ready.read_text()),\\'\"\\'\"\\'payload_adapter\\'\"\\'\"\\':os.getppid()}))\\npathlib.Path(\\'\"\\'\"\\'/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/k/environment.json\\'\"\\'\"\\').write_text(json.dumps({k:os.environ.get(k) for k in (\\'\"\\'\"\\'VSP03_B04_COMMAND\\'\"\\'\"\\',\\'\"\\'\"\\'VSP03_B04_STARTED\\'\"\\'\"\\',\\'\"\\'\"\\'TMUX_TMPDIR\\'\"\\'\"\\')}))\\nos.kill(int(pathlib.Path(\\'\"\\'\"\\'/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/k/controller.pid\\'\"\\'\"\\').read_text()),signal.SIGSTOP)\\ntime.sleep(60)\\n\\'' >> \"/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/k/tasks/k/task.log\" 2>&1\nEXIT_CODE=$?\nset -e\n\nEND_TS=$(date +%s)\necho $EXIT_CODE > \"/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/k/tasks/k/exit_code\"\nif [ $EXIT_CODE -eq 0 ]; then\n    echo \"finished\" > \"/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/k/tasks/k/status\"\nelse\n    echo \"failed\" > \"/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/k/tasks/k/status\"\nfi\necho \"=== Task 'k' exited with code $EXIT_CODE at $(date -Iseconds) (Duration: $((END_TS - START_TS))s) ===\" >> \"/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/k/tasks/k/task.log\"\n\n# Keep session alive briefly for inspection, then exit\nsleep 1\n",
+        "environment": {
+          "VSP03_B04_COMMAND": "/home/wu/.venvs/hmasd/bin/python -c 'import json,os,pathlib,signal,subprocess,sys,time\np=subprocess.Popen([sys.executable,'\"'\"'-c'\"'\"',\"import subprocess,sys,time,pathlib; p=subprocess.Popen([sys.executable,'\"'\"'-c'\"'\"','\"'\"'import time; time.sleep(60)'\"'\"']); pathlib.Path('\"'\"'/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/k/ready'\"'\"').write_text(str(p.pid)); time.sleep(60)\"])\nready=pathlib.Path('\"'\"'/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/k/ready'\"'\"')\nwhile not ready.exists(): time.sleep(.005)\npathlib.Path('\"'\"'/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/k/pids.json'\"'\"').write_text(json.dumps({'\"'\"'root'\"'\"':os.getpid(),'\"'\"'child'\"'\"':p.pid,'\"'\"'grandchild'\"'\"':int(ready.read_text()),'\"'\"'payload_adapter'\"'\"':os.getppid()}))\npathlib.Path('\"'\"'/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/k/environment.json'\"'\"').write_text(json.dumps({k:os.environ.get(k) for k in ('\"'\"'VSP03_B04_COMMAND'\"'\"','\"'\"'VSP03_B04_STARTED'\"'\"','\"'\"'TMUX_TMPDIR'\"'\"')}))\nos.kill(int(pathlib.Path('\"'\"'/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/k/controller.pid'\"'\"').read_text()),signal.SIGSTOP)\ntime.sleep(60)\n'",
+          "VSP03_B04_STARTED": "373502.620398",
+          "TMUX_TMPDIR": "/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/k/t.tmux"
+        },
+        "origin_to_return_s": 9.125984626996797,
+        "passed": true
+      },
+      {
+        "name": "p",
+        "mode": "precedence",
+        "unit": "vsp03-b04-review-b4r3-p.service",
+        "cap_s": 10,
+        "reserve_s": 4,
+        "command": [
+          "bash",
+          "/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/src/experiments/candidates/vsp_03/vsp03_b04/launch.sh",
+          "vsp03-b04-review-b4r3-p",
+          "/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/src",
+          "p",
+          "/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/p/t.json",
+          "10",
+          "4",
+          "--",
+          "/home/wu/.venvs/hmasd/bin/python",
+          "-c",
+          "import json,os,pathlib,signal,subprocess,sys,time\np=subprocess.Popen([sys.executable,'-c',\"import subprocess,sys,time,pathlib; p=subprocess.Popen([sys.executable,'-c','import time; time.sleep(60)']); pathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/p/ready').write_text(str(p.pid)); time.sleep(60)\"])\nready=pathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/p/ready')\nwhile not ready.exists(): time.sleep(.005)\npathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/p/pids.json').write_text(json.dumps({'root':os.getpid(),'child':p.pid,'grandchild':int(ready.read_text()),'payload_adapter':os.getppid()}))\npathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/p/environment.json').write_text(json.dumps({k:os.environ.get(k) for k in ('VSP03_B04_COMMAND','VSP03_B04_STARTED','TMUX_TMPDIR')}))\ntime.sleep(60)\n"
+        ],
+        "supervisor_source": "#!/usr/bin/env bash\n# ==============================================================================\n# agent-task: Lightweight task supervisor for Remote AI Agents using tmux\n# Solves: process keep-alive, exit-code retention, structured status, and log tailing\n# ==============================================================================\n\nset -euo pipefail\n\nTASK_DIR=\"${HOME}/.agent-tasks\"\nmkdir -p \"${TASK_DIR}\"\n\nusage() {\n    cat <<EOF\nUsage: agent-task <command> [arguments]\n\nCommands:\n  run <name> <cmd...>     Run a command in a persistent tmux session with log tracking\n  status <name>           Get status, PID, and exit code in JSON format\n  logs <name> [lines]     View the last N lines of output (default: 50)\n  attach <name>           Interactively attach to the task tmux session\n  stop <name>             Stop a running task\n  list                    List all agent tasks and their status\nEOF\n    exit 1\n}\n\n[ $# -lt 1 ] && usage\n\nCMD=\"$1\"\nshift\n\ncase \"$CMD\" in\n    run)\n        [ $# -lt 2 ] && { echo \"Error: 'run' requires <name> and <command...>\"; exit 1; }\n        NAME=\"$1\"\n        shift\n        COMMAND=\"$*\"\n\n        DIR=\"${TASK_DIR}/${NAME}\"\n        mkdir -p \"${DIR}\"\n\n        LOG_FILE=\"${DIR}/task.log\"\n        STATUS_FILE=\"${DIR}/status\"\n        PID_FILE=\"${DIR}/pid\"\n        EXIT_FILE=\"${DIR}/exit_code\"\n        START_TIME_FILE=\"${DIR}/start_time\"\n\n        # Check if already running\n        if tmux has-session -t \"agent_${NAME}\" 2>/dev/null; then\n            echo \"Error: Task '${NAME}' is already running in session 'agent_${NAME}'.\"\n            exit 1\n        fi\n\n        rm -f \"${EXIT_FILE}\"\n        echo \"running\" > \"${STATUS_FILE}\"\n        date +%s > \"${START_TIME_FILE}\"\n\n        # Wrapper script executed inside tmux\n        WRAPPER=\"${DIR}/runner.sh\"\n        cat <<EOF > \"${WRAPPER}\"\n#!/usr/bin/env bash\necho \\$\\$ > \"${PID_FILE}\"\nSTART_TS=\\$(date +%s)\necho \"=== Task '${NAME}' started at \\$(date -Iseconds) ===\" >> \"${LOG_FILE}\"\n\n# Execute command capturing output\nset +e\neval ${COMMAND@Q} >> \"${LOG_FILE}\" 2>&1\nEXIT_CODE=\\$?\nset -e\n\nEND_TS=\\$(date +%s)\necho \\$EXIT_CODE > \"${EXIT_FILE}\"\nif [ \\$EXIT_CODE -eq 0 ]; then\n    echo \"finished\" > \"${STATUS_FILE}\"\nelse\n    echo \"failed\" > \"${STATUS_FILE}\"\nfi\necho \"=== Task '${NAME}' exited with code \\$EXIT_CODE at \\$(date -Iseconds) (Duration: \\$((END_TS - START_TS))s) ===\" >> \"${LOG_FILE}\"\n\n# Keep session alive briefly for inspection, then exit\nsleep 1\nEOF\n        chmod +x \"${WRAPPER}\"\n\n        # Spawn detached tmux session\n        tmux new-session -d -s \"agent_${NAME}\" \"bash '${WRAPPER}'\"\n        echo \"Task '${NAME}' started in tmux session 'agent_${NAME}'. Output: ${LOG_FILE}\"\n        ;;\n\n    status)\n        [ $# -lt 1 ] && { echo \"Error: 'status' requires <name>\"; exit 1; }\n        NAME=\"$1\"\n        DIR=\"${TASK_DIR}/${NAME}\"\n        [ ! -d \"${DIR}\" ] && { echo \"{\\\"task\\\": \\\"${NAME}\\\", \\\"status\\\": \\\"not_found\\\"}\"; exit 0; }\n\n        STATUS=\"unknown\"\n        [ -f \"${DIR}/status\" ] && STATUS=$(cat \"${DIR}/status\")\n\n        PID=null\n        [ -f \"${DIR}/pid\" ] && PID=$(cat \"${DIR}/pid\")\n\n        EXIT_CODE=null\n        [ -f \"${DIR}/exit_code\" ] && EXIT_CODE=$(cat \"${DIR}/exit_code\")\n\n        START_TIME=0\n        [ -f \"${DIR}/start_time\" ] && START_TIME=$(cat \"${DIR}/start_time\")\n\n        NOW=$(date +%s)\n        UPTIME=0\n        if [ \"$START_TIME\" -gt 0 ]; then\n            UPTIME=$((NOW - START_TIME))\n        fi\n\n        # Check if tmux session still exists\n        TMUX_ACTIVE=false\n        if tmux has-session -t \"agent_${NAME}\" 2>/dev/null; then\n            TMUX_ACTIVE=true\n        else\n            if [ \"$STATUS\" = \"running\" ]; then\n                STATUS=\"terminated\"\n            fi\n        fi\n\n        printf '{\"task\": \"%s\", \"status\": \"%s\", \"exit_code\": %s, \"pid\": %s, \"uptime_seconds\": %d, \"tmux_active\": %s}\\n' \\\n            \"${NAME}\" \"${STATUS}\" \"${EXIT_CODE}\" \"${PID}\" \"${UPTIME}\" \"${TMUX_ACTIVE}\"\n        ;;\n\n    logs)\n        [ $# -lt 1 ] && { echo \"Error: 'logs' requires <name>\"; exit 1; }\n        NAME=\"$1\"\n        LINES=\"${2:-50}\"\n        LOG_FILE=\"${TASK_DIR}/${NAME}/task.log\"\n\n        if [ ! -f \"${LOG_FILE}\" ]; then\n            echo \"No logs found for task '${NAME}'.\"\n            exit 1\n        fi\n        tail -n \"${LINES}\" \"${LOG_FILE}\"\n        ;;\n\n    attach)\n        [ $# -lt 1 ] && { echo \"Error: 'attach' requires <name>\"; exit 1; }\n        NAME=\"$1\"\n        exec tmux attach-session -t \"agent_${NAME}\"\n        ;;\n\n    stop)\n        [ $# -lt 1 ] && { echo \"Error: 'stop' requires <name>\"; exit 1; }\n        NAME=\"$1\"\n        DIR=\"${TASK_DIR}/${NAME}\"\n        if [ -f \"${DIR}/pid\" ]; then\n            PID=$(cat \"${DIR}/pid\")\n            kill -15 \"${PID}\" 2>/dev/null || true\n            sleep 0.5\n            kill -9 \"${PID}\" 2>/dev/null || true\n        fi\n        tmux kill-session -t \"agent_${NAME}\" 2>/dev/null || true\n        echo \"stopped\" > \"${DIR}/status\" 2>/dev/null || true\n        echo \"Task '${NAME}' stopped.\"\n        ;;\n\n    list)\n        if [ ! -d \"${TASK_DIR}\" ] || [ -z \"$(ls -A \"${TASK_DIR}\" 2>/dev/null)\" ]; then\n            echo \"No agent tasks recorded.\"\n            exit 0\n        fi\n        printf \"%-20s %-12s %-10s %-10s\\n\" \"TASK_NAME\" \"STATUS\" \"EXIT_CODE\" \"TMUX_ACTIVE\"\n        echo \"---------------------------------------------------------\"\n        for d in \"${TASK_DIR}\"/*; do\n            [ -d \"$d\" ] || continue\n            tname=$(basename \"$d\")\n            tstatus=$(cat \"$d/status\" 2>/dev/null || echo \"unknown\")\n            texit=$(cat \"$d/exit_code\" 2>/dev/null || echo \"-\")\n            tmux_act=\"no\"\n            tmux has-session -t \"agent_${tname}\" 2>/dev/null && tmux_act=\"yes\"\n            printf \"%-20s %-12s %-10s %-10s\\n\" \"$tname\" \"$tstatus\" \"$texit\" \"$tmux_act\"\n        done\n        ;;\n\n    *)\n        usage\n        ;;\nesac\n",
+        "supervisor_fixture_change": "Literal earlier payload0 and real later shell exit7 stub; no tmux",
+        "supervisor_stub_source": "#!/home/wu/.venvs/hmasd/bin/python\nimport json,os,pathlib,subprocess,time\npathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/p/pids.json').write_text(json.dumps({'supervisor_stub':os.getpid()}))\npathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/p/t.payload.json').write_text(json.dumps({'task_exit_code':0}))\ntime.sleep(.2)\ncode=subprocess.run(['bash','-c','exit 7']).returncode\nout=pathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/p/tasks/p/exit_code'); out.parent.mkdir(parents=True)\nout.write_text(str(code))\n",
+        "live_manager_properties": {
+          "Type": "oneshot",
+          "TimeoutStartUSec": "9s",
+          "TimeoutStartFailureMode": "kill",
+          "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/vsp03-b04-review-b4r3-p.service",
+          "KillMode": "control-group",
+          "InactiveExitTimestampMonotonic": "373511836728"
+        },
+        "contained_pids": [
+          3013254,
+          3013256
+        ],
+        "client_returncode": 1,
+        "stdout": "",
+        "stderr": "Job for vsp03-b04-review-b4r3-p.service failed because the control process exited with error code.\nSee \"systemctl --user status vsp03-b04-review-b4r3-p.service\" and \"journalctl --user -xeu vsp03-b04-review-b4r3-p.service\" for details.\n",
+        "finished_monotonic": 373512.142077455,
+        "pids": {
+          "supervisor_stub": 3013256,
+          "controller_or_startup_gate": 3013254,
+          "cgroup_3013254": 3013254,
+          "cgroup_3013256": 3013256
+        },
+        "process_states_after_return": {
+          "supervisor_stub": null,
+          "controller_or_startup_gate": null,
+          "cgroup_3013254": null,
+          "cgroup_3013256": null
+        },
+        "cgroup_pids_after_return": [],
+        "final_manager_properties": {
+          "Result": "exit-code",
+          "ExecMainExitTimestampMonotonic": "373512141152",
+          "ExecMainCode": "1",
+          "ExecMainStatus": "7",
+          "ActiveState": "failed",
+          "SubState": "failed",
+          "InactiveExitTimestampMonotonic": "373511836728"
+        },
+        "journal": "[373511.836774] LAPTOP-U9TDKC8A systemd[638]: Starting vsp03-b04-review-b4r3-p.service - /home/wu/.venvs/hmasd/bin/python /home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/p/gate.py /home/wu/.venvs/hmasd/bin/python /home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/src/experiments/candidates/vsp_03/vsp03_b04/control.py --unit=vsp03-b04-review-b4r3-p.service --name=p --record=/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/p/t.json --cap=10 --reserve=4 --supervisor /home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/p/supervisor --task-dir /home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/p/tasks -- /home/wu/.venvs/hmasd/bin/python -c \"import json,os,pathlib,signal,subprocess,sys,time\\np=subprocess.Popen([sys.executable,'-c',\\\"import subprocess,sys,time,pathlib; p=subprocess.Popen([sys.executable,'-c','import time; time.sleep(60)']); pathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/p/ready').write_text(str(p.pid)); time.sleep(60)\\\"])\\nready=pathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/p/ready')\\nwhile not ready.exists(): time.sleep(.005)\\npathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/p/pids.json').write_text(json.dumps({'root':os.getpid(),'child':p.pid,'grandchild':int(ready.read_text()),'payload_adapter':os.getppid()}))\\npathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/p/environment.json').write_text(json.dumps({k:os.environ.get(k) for k in ('VSP03_B04_COMMAND','VSP03_B04_STARTED','TMUX_TMPDIR')}))\\ntime.sleep(60)\\n\"...\n[373512.136123] LAPTOP-U9TDKC8A python[3013254]: {\"terminal_published\": \"/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/p/t.json\", \"task_exit_code\": 7, \"elapsed_through_terminal_readback_s\": 0.29922127700410783}\n[373512.141264] LAPTOP-U9TDKC8A systemd[638]: vsp03-b04-review-b4r3-p.service: Main process exited, code=exited, status=7/NOTRUNNING\n[373512.141354] LAPTOP-U9TDKC8A systemd[638]: vsp03-b04-review-b4r3-p.service: Failed with result 'exit-code'.\n[373512.141387] LAPTOP-U9TDKC8A systemd[638]: Failed to start vsp03-b04-review-b4r3-p.service - /home/wu/.venvs/hmasd/bin/python /home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/p/gate.py /home/wu/.venvs/hmasd/bin/python /home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/src/experiments/candidates/vsp_03/vsp03_b04/control.py --unit=vsp03-b04-review-b4r3-p.service --name=p --record=/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/p/t.json --cap=10 --reserve=4 --supervisor /home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/p/supervisor --task-dir /home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/p/tasks -- /home/wu/.venvs/hmasd/bin/python -c \"import json,os,pathlib,signal,subprocess,sys,time\\np=subprocess.Popen([sys.executable,'-c',\\\"import subprocess,sys,time,pathlib; p=subprocess.Popen([sys.executable,'-c','import time; time.sleep(60)']); pathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/p/ready').write_text(str(p.pid)); time.sleep(60)\\\"])\\nready=pathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/p/ready')\\nwhile not ready.exists(): time.sleep(.005)\\npathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/p/pids.json').write_text(json.dumps({'root':os.getpid(),'child':p.pid,'grandchild':int(ready.read_text()),'payload_adapter':os.getppid()}))\\npathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/p/environment.json').write_text(json.dumps({k:os.environ.get(k) for k in ('VSP03_B04_COMMAND','VSP03_B04_STARTED','TMUX_TMPDIR')}))\\ntime.sleep(60)\\n\".\n",
+        "actual_launch_argv": [
+          "--user",
+          "--unit=vsp03-b04-review-b4r3-p",
+          "--service-type=oneshot",
+          "--wait",
+          "--working-directory=/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/src",
+          "--property=TimeoutStartSec=9s",
+          "--property=TimeoutStartFailureMode=kill",
+          "--property=KillMode=control-group",
+          "--property=FinalKillSignal=SIGKILL",
+          "--property=TimeoutStopSec=1s",
+          "--setenv=OMP_NUM_THREADS=1",
+          "--setenv=MKL_NUM_THREADS=1",
+          "--setenv=OPENBLAS_NUM_THREADS=1",
+          "--setenv=NUMEXPR_NUM_THREADS=1",
+          "/home/wu/.venvs/hmasd/bin/python",
+          "/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/src/experiments/candidates/vsp_03/vsp03_b04/control.py",
+          "--unit=vsp03-b04-review-b4r3-p.service",
+          "--name=p",
+          "--record=/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/p/t.json",
+          "--cap=10",
+          "--reserve=4",
+          "--",
+          "/home/wu/.venvs/hmasd/bin/python",
+          "-c",
+          "import json,os,pathlib,signal,subprocess,sys,time\np=subprocess.Popen([sys.executable,'-c',\"import subprocess,sys,time,pathlib; p=subprocess.Popen([sys.executable,'-c','import time; time.sleep(60)']); pathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/p/ready').write_text(str(p.pid)); time.sleep(60)\"])\nready=pathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/p/ready')\nwhile not ready.exists(): time.sleep(.005)\npathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/p/pids.json').write_text(json.dumps({'root':os.getpid(),'child':p.pid,'grandchild':int(ready.read_text()),'payload_adapter':os.getppid()}))\npathlib.Path('/home/wu/projects/HMASD/temp/directions/vsp_03/test/b4r3/p/environment.json').write_text(json.dumps({k:os.environ.get(k) for k in ('VSP03_B04_COMMAND','VSP03_B04_STARTED','TMUX_TMPDIR')}))\ntime.sleep(60)\n"
+        ],
+        "supervisor_exit_code": "7",
+        "terminal": {
+          "object": "VSP03_B04",
+          "unit": "vsp03-b04-review-b4r3-p.service",
+          "manager_properties": {
+            "Type": "oneshot",
+            "TimeoutStartUSec": "9s",
+            "TimeoutStartFailureMode": "kill",
+            "KillMode": "control-group",
+            "InactiveExitTimestampMonotonic": "373511836728"
+          },
+          "started_monotonic": 373511.836728,
+          "cap_s": 10.0,
+          "shutdown_publication_reserve_s": 4.0,
+          "task_exit_code": 7,
+          "supervisor_exit_code": 7,
+          "payload": {
+            "task_exit_code": 0
+          },
+          "error": null,
+          "descendants_killed": [],
+          "descendants_reaped": [],
+          "descendants_remaining": [],
+          "all_descendants_terminated": true,
+          "elapsed_before_terminal_publication_s": 0.2990152330021374
+        },
+        "origin_to_return_s": 0.3053494549822062,
+        "passed": true
+      }
+    ],
+    "passed": true,
+    "scientific_models_episodes_updates": [
+      0,
+      0,
+      0
+    ]
+  },
+  "scratch_removed": true
+}

@@ -86,3 +86,55 @@ Linux headers confirm PR_SET_CHILD_SUBREAPER=36; timeout help confirms default c
 containment and the use of uncatchable KILL. The existing seed/object/status checks
 remain reused. Independent shortened non-scientific lifecycle tests and review remain
 pending before acceptance. No B04 scientific run or prior scratch-cleanup retry.
+
+## Revised P65 startup containment candidate
+
+Candidate28164ecb4 supersedes the preceding GNU-timeout launch boundary. The latter
+charged startup time but did not enforce a stall before timeout arming; the independent
+finding remains recorded. The existing systemd user manager now arms a119s oneshot
+startup timer before ExecStart, with immediate cgroup SIGKILL on expiry and a1s margin
+inside the unchanged120s cap. The manager's pre-start monotonic origin is passed to
+controller, payload, admission and runner. This is one task-specific transient unit,
+not an installed/standing service or global supervisor edit.
+
+The controller launches the unchanged agent-task with a private tmux server inside
+its cgroup. After child exit and real supervisor receipt collection, it kills/reaps
+remaining private control descendants and writes/reads the authoritative whole-task
+terminal receipt. Private TMUX_TMPDIR access and manager journal commands are recorded
+in the revised launch boundary. Missing task publication on a hard kill remains a
+failed observation; manager outcome and actual supervisor files stay distinct.
+
+Local AST parse passed for both Python adapter files. The exact protected scientific
+source and seed6 runner diff against1289f0514 is empty. The production private socket
+path is105 bytes, within Linux's108-byte sockaddr_un field including terminator.
+The reused independent reviewer is checking the startup/unit/private-server and final
+publication paths with harmless shortened fixtures. This paragraph does not accept
+that candidate or launch science; final review/check evidence follows below.
+
+## Final P65 technical acceptance
+
+Accepted source candidate: b5d605bf4f39b5ab18f01c98e04dc07e53764354. The independent
+revised-unit fixtures in VSP03_B04_DEADLINE_CHECK_20260908.json all passed in25.511s
+on wsl_4070 using exact committed launch/control bytes, a TASK_DIR-only copy of the
+installed supervisor, and no scientific model/episode/update exposure. With cap10s
+and reserve4s: actual nonzero exit7 published7 in0.395s; work timeout published124
+in6.043s; pre-controller startup stall terminated by manager SIGKILL in9.024s;
+stopped controller terminated with its cgroup in9.126s; earlier payload0 followed
+by actual shell7 published final7 in0.305s. Known and sampled cgroup PIDs were absent,
+final cgroups empty, and owned scratch removed. Hard-kill cases correctly lacked
+final publication. Single-origin and command metadata propagated through private tmux.
+
+The reviewer-found missing command environment was fixed in2e02bce40. The DM-found
+actual-exit precedence gap was fixed inb5d605bf4 and exercised independently. These
+repairs change task evidence plumbing only; science/seed/object bytes remain at1289.
+The revised independent review dispositions and original rejected boundaries remain
+in VSP03_B04_SOURCE_REVIEW_20260908.md. No unresolved technical finding remains on
+this bounded path. This accepts engineering conformance, not scientific outcome.
+
+One important observation distinction: systemd-run --wait returned1 for each failed
+unit even when ExecMainStatus was7,124 or9. Its numeric client return is not the task
+exit. Collect the actual manager ExecMainCode/ExecMainStatus/Result, journal, controller
+receipt and unchanged supervisor files. Use the explicit private TMUX_TMPDIR for live
+status. Successful unit state can unload; preserve the --wait output/journal and
+receipt. No scientific invocation has started; DM source acceptance and Root integration
+are the remaining prerequisites already specified by this assignment.

@@ -82,3 +82,12 @@ Return accepted source, review and exact command to DM then Root before one laun
 After handle acceptance send unit/name/SHA/cwd/log/result/admission/terminal and the
 private TMUX_TMPDIR access command to Root /root, copying DM. CM observes until
 Root adoption, then retains collection. DM owns scientific intake for every outcome.
+
+## Observed manager/client status distinction
+
+The independent shortened checks establish that systemd-run --wait may return1 for
+failed units whose actual ExecMainStatus is7,124 or9. Do not equate the client numeric
+return to the task exit. Retain ExecMainCode, ExecMainStatus and Result from the manager,
+the --wait output, journal and the authoritative task receipt. Evidence and independent
+review bind the accepted source b5d605bf4f39b5ab18f01c98e04dc07e53764354; later record-only
+commits do not change that source surface. Root integration precedes launch.
