@@ -89,7 +89,7 @@ A mismatch is a staging conflict, not permission to substitute weights.
 
 Under the detached cwd, the output parent is
 `temp/directions/flexible_skill_duration/exp/native_renewal_control_a01_p21_20260907`.
-Create its G, C and H subdirectories before dispatch (directory setup only). Each contains
+Do not create G/C/H scientific result directories before admission. The existing admission writer measures memory first and then creates its receipt parent; the admitted runner creates its output. Each completed policy directory contains
 `admission.json`, `process_time.txt` and the runner's `summary.json`; C/H also use `agent/`.
 G/C summaries are the exact H panel inputs below. Do not reuse a previous result root.
 
@@ -104,26 +104,26 @@ No selected checkpoint is opened by G.
 G:
 
 ```bash
-/usr/local/bin/agent-task run fsd_native_a01_p21_G_01770d8dd 'bash -lc "cd /home/wu/hmasd-worktrees/fsd-native-renewal-a01-p21-01770d8dd && /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/flexible_skill_duration/exp/native_renewal_control_a01_p21_20260907/G/admission.json && /usr/bin/time -v -o temp/directions/flexible_skill_duration/exp/native_renewal_control_a01_p21_20260907/G/process_time.txt /usr/bin/timeout --signal=KILL 180s /home/wu/.venvs/hmasd/bin/python scripts/run_fsd_native_renewal_control_a01.py --policy G --seed 770103 --launch-sha 01770d8dd6bb59460667efa26e3d94677e65ab37 --out temp/directions/flexible_skill_duration/exp/native_renewal_control_a01_p21_20260907/G"'
+/usr/local/bin/agent-task run fsd_native_a01_p21_G_01770d8dd 'bash -lc "cd /home/wu/hmasd-worktrees/fsd-native-renewal-a01-p21-01770d8dd && /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/flexible_skill_duration/exp/native_renewal_control_a01_p21_20260907/G/admission.json && /usr/bin/time -f elapsed_seconds=%e,peak_rss_kib=%M,exit_status=%x -o temp/directions/flexible_skill_duration/exp/native_renewal_control_a01_p21_20260907/G/process_time.txt /usr/bin/timeout --signal=KILL 180s /home/wu/.venvs/hmasd/bin/python scripts/run_fsd_native_renewal_control_a01.py --policy G --seed 770103 --launch-sha 01770d8dd6bb59460667efa26e3d94677e65ab37 --out temp/directions/flexible_skill_duration/exp/native_renewal_control_a01_p21_20260907/G"'
 ```
 
 C:
 
 ```bash
-/usr/local/bin/agent-task run fsd_native_a01_p21_C_01770d8dd 'bash -lc "cd /home/wu/hmasd-worktrees/fsd-native-renewal-a01-p21-01770d8dd && /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/flexible_skill_duration/exp/native_renewal_control_a01_p21_20260907/C/admission.json && /usr/bin/time -v -o temp/directions/flexible_skill_duration/exp/native_renewal_control_a01_p21_20260907/C/process_time.txt /usr/bin/timeout --signal=KILL 180s /home/wu/.venvs/hmasd/bin/python scripts/run_fsd_native_renewal_control_a01.py --policy C --seed 770103 --launch-sha 01770d8dd6bb59460667efa26e3d94677e65ab37 --out temp/directions/flexible_skill_duration/exp/native_renewal_control_a01_p21_20260907/C --checkpoint /home/wu/hmasd-inputs/fsd-native-renewal-a01-p21/large_d2_seed2/checkpoint_final.pt"'
+/usr/local/bin/agent-task run fsd_native_a01_p21_C_01770d8dd 'bash -lc "cd /home/wu/hmasd-worktrees/fsd-native-renewal-a01-p21-01770d8dd && /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/flexible_skill_duration/exp/native_renewal_control_a01_p21_20260907/C/admission.json && /usr/bin/time -f elapsed_seconds=%e,peak_rss_kib=%M,exit_status=%x -o temp/directions/flexible_skill_duration/exp/native_renewal_control_a01_p21_20260907/C/process_time.txt /usr/bin/timeout --signal=KILL 180s /home/wu/.venvs/hmasd/bin/python scripts/run_fsd_native_renewal_control_a01.py --policy C --seed 770103 --launch-sha 01770d8dd6bb59460667efa26e3d94677e65ab37 --out temp/directions/flexible_skill_duration/exp/native_renewal_control_a01_p21_20260907/C --checkpoint /home/wu/hmasd-inputs/fsd-native-renewal-a01-p21/large_d2_seed2/checkpoint_final.pt"'
 ```
 
 H:
 
 ```bash
-/usr/local/bin/agent-task run fsd_native_a01_p21_H_01770d8dd 'bash -lc "cd /home/wu/hmasd-worktrees/fsd-native-renewal-a01-p21-01770d8dd && /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/flexible_skill_duration/exp/native_renewal_control_a01_p21_20260907/H/admission.json && /usr/bin/time -v -o temp/directions/flexible_skill_duration/exp/native_renewal_control_a01_p21_20260907/H/process_time.txt /usr/bin/timeout --signal=KILL 180s /home/wu/.venvs/hmasd/bin/python scripts/run_fsd_native_renewal_control_a01.py --policy H --seed 770103 --launch-sha 01770d8dd6bb59460667efa26e3d94677e65ab37 --out temp/directions/flexible_skill_duration/exp/native_renewal_control_a01_p21_20260907/H --checkpoint /home/wu/hmasd-inputs/fsd-native-renewal-a01-p21/large_d2_seed2/checkpoint_final.pt --panel-inputs temp/directions/flexible_skill_duration/exp/native_renewal_control_a01_p21_20260907/G/summary.json temp/directions/flexible_skill_duration/exp/native_renewal_control_a01_p21_20260907/C/summary.json"'
+/usr/local/bin/agent-task run fsd_native_a01_p21_H_01770d8dd 'bash -lc "cd /home/wu/hmasd-worktrees/fsd-native-renewal-a01-p21-01770d8dd && /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/flexible_skill_duration/exp/native_renewal_control_a01_p21_20260907/H/admission.json && /usr/bin/time -f elapsed_seconds=%e,peak_rss_kib=%M,exit_status=%x -o temp/directions/flexible_skill_duration/exp/native_renewal_control_a01_p21_20260907/H/process_time.txt /usr/bin/timeout --signal=KILL 180s /home/wu/.venvs/hmasd/bin/python scripts/run_fsd_native_renewal_control_a01.py --policy H --seed 770103 --launch-sha 01770d8dd6bb59460667efa26e3d94677e65ab37 --out temp/directions/flexible_skill_duration/exp/native_renewal_control_a01_p21_20260907/H --checkpoint /home/wu/hmasd-inputs/fsd-native-renewal-a01-p21/large_d2_seed2/checkpoint_final.pt --panel-inputs temp/directions/flexible_skill_duration/exp/native_renewal_control_a01_p21_20260907/G/summary.json temp/directions/flexible_skill_duration/exp/native_renewal_control_a01_p21_20260907/C/summary.json"'
 ```
 
 Fresh `admit-memory` is adjacent to the exact bounded runner through `&&` in every supervisor
 command. It requires physical and effective available memory each >=4 GiB; a failed admission
 runs no policy. The existing external timeout has no grace-period cap extension; it covers
 Python startup, imports, load, reset, all scoring and closed-file publication. `/usr/bin/time`
-surrounds that command, retaining complete elapsed/user/system/RSS and exit facts even on
+surrounds that command, retaining only elapsed wall, peak RSS and exit status even on
 termination. Runner deadlines remain unchanged. Supervisor duration also includes admission
 and is not substituted for policy wall. Late numerical files alone never establish success.
 
@@ -147,7 +147,7 @@ Historical learned-arm linear anchors 8.79968751346875 s and 14.72 s exclude sta
 load, batch32 and publication; G complete cost is unknown. No new complete-path cost estimate
 or probe is invented. The originally allocated hard caps remain 180 s each and 540 s summed.
 Study elapsed critical path also includes staging/admission/observation gaps and is reported
-separately from summed policy wall and measured aggregate user+system CPU. This is one
+separately from summed policy wall. No aggregate CPU measurement is required for this unchanged serial route. This is one
 sequential three-process list, not a parallel throughput allocation.
 
 Post-learner/publication path coverage: there is no learner. The original engineering fixture
@@ -155,11 +155,11 @@ exercised the three loops and panel serialization/readback; synthetic tests cove
 and deadline failure, and direct review covered H's nonrecursive attached panel. Actual
 selected-weight load and full batch32 runtime remain unverified and are exercised only inside
 C and H's allocated invocations. Missing optional RSS is `resources_unmeasured`, not a native
-return failure.
+return failure. A missing process_time.txt or RSS measurement alone does not stop an independently trustworthy primary result or its continuation: record resources_unmeasured when the accepted exact timeout command, terminal exit0 and complete runner post-publication facts independently establish completion and cap conformity. Any known >180 s breach still stops the dependent route.
 
 After each terminal policy, Root reads the existing artifacts (no new environment or model
 calls) and requires for continuation: supervisor terminal exit 0; runner's final one-line JSON
-`status=complete`, `cap_breached=false`, complete wall <=180 s; outer process time <=180 s;
+`status=complete`, `cap_breached=false`, complete wall <=180 s; no known outer process-time breach above180 s;
 summary status complete/failure null with the bound policy, launch SHA, master770103,
 ordered IDs0–31, original N6/K2/Z4/H400/Delta1/hazards(.02,.20), and actual counts of
 32 completed episodes,12,800 scoring steps,76,800 agent observations. G must have 400 Greedy
