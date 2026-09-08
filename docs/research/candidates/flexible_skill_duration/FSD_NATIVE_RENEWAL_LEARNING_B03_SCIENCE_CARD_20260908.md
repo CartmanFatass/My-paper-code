@@ -15,6 +15,17 @@ This comparison alone continues the limited hybrid learning extension; the
 ordinary fixed-K2 policy-gap family remains paused outside it. B has no
 consumption state. No recast, C promotion, Portfolio disposition or UAV entry follows.
 
+**P47 allocation, 2026-09-08:** [the owner-directed resume command](../../portfolio/handoffs/2026-09-08-p47-research-resume-and-recovery.md)
+at `6dd7570e9e8045fb3818c553953a92c9caa587cb` supersedes P46's preparation-only
+and later-allocation stops for this selected object. A fresh configured CM under
+the fresh FSD DM implements the complete existing spec, with focused checks and
+independent high-impact review. After accepted source is committed/pushed and
+integrated, DM binds the exact source, detached cwd, scripts and proposed handles;
+Root executes and observes the one G→D0→H panel, CM collects and DM intakes every
+outcome. The original keys, counts, 60/1200/900s complete caps, comparison and all
+result branches remain fixed. No fourth CM comparison, extra pair or automatic
+successor is allocated. Allocation or code acceptance is not a scientific result.
+
 Question: after the same five real learning rollouts, does H show a greater-than-.01
 full native return advantage over a newly trained, authentic fair D0 k5, while
 retaining the public G reference? This changes the comparator rather than asking
@@ -36,8 +47,14 @@ accepted P45 decision. The [CM spec](FSD_NATIVE_RENEWAL_LEARNING_B03_CM_SPEC_202
 names the actual changed boundaries. P46 produces zero implementation, model,
 host, learner, fixture/probe, test, training/evaluation, admission or runtime
 exposure. The [machine record](FSD_NATIVE_RENEWAL_LEARNING_B03_EXPOSURE_AND_COST_20260908.json)
-separates this zero exposure from prospective work. Implementation and execution
-remain later named assignments; the future launch SHA is not yet bound.
+separates this zero exposure from prospective work. P47 now supplies implementation
+and the selected panel allocation; the launch SHA is bound only after acceptance.
+
+**P47 accepted source:** `f09aa00ba0e6f7c709af188b61be6ff8e7e6bc96` contains the
+bounded B03 implementation, 40 passed fake-only checks and independent review with
+no material findings. [DM readiness intake](FSD_NATIVE_RENEWAL_LEARNING_B03_P47_READINESS_INTAKE_20260908.md)
+accepts that technical evidence; [Root handoff](FSD_NATIVE_RENEWAL_LEARNING_B03_P47_ROOT_HANDOFF_20260908.md)
+binds the exact detached source and commands. No empirical result is inferred.
 
 ## 2. Population, information, authentic comparator and learner
 
@@ -219,8 +236,8 @@ automatic successor is allowed.
 
 Prospective root: `temp/directions/flexible_skill_duration/exp/native_renewal_learning_b03_770403`,
 with only its own G,D0,H children/comparison inputs. P46 creates no root, resource
-receipt, detached cwd, handle or launch script. Later source acceptance and a
-named runtime allocation provide those exact bindings.
+receipt, detached cwd, handle or launch script. P47 and later source acceptance
+provide the exact bindings before Root launches.
 
 ## 7. Engineering and scientific control
 
@@ -239,7 +256,7 @@ runner/2000-new-non-test-line limits apply. No fourth CM comparison follows P46.
 
 Evidence-spec§§3–4,5.2,11.4,11.7–11.9 control, with§11.8 prevailing. Only its four
 launch requirements apply; no exact optimum, tuned headroom, causal census,
-stronger class or further Pro round is required for this selected B. Current
-authority ends with card/spec/preparation publication. Root receives the full
-handoff before any later coding dispatch; no implementation or scientific run
-is allocated by this card.
+stronger class or further Pro round is required for this selected B. P46 ended at
+card/spec/preparation publication. P47 supplies the full existing implementation
+assignment and this one panel's execution allocation; its exact binding follows
+accepted implementation and precedes Root's launch.
