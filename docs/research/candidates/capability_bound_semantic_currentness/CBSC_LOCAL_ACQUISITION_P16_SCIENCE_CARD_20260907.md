@@ -117,3 +117,57 @@ without implementing the newly selected repair. Recommend/select (a) under the
 P16 assignment and the 2026-09-03 standing delegation. Owner-delegated decision
 (unattended, 2026-09-03 instruction): (a). Only preparation is selected; future
 execution and any Portfolio action remain unallocated. Owner flags: none.
+
+## Prospective execution request after code intake
+
+The [P16 code intake](CBSC_LOCAL_ACQUISITION_P16_INTAKE_20260907.md) accepts command
+source `5828af584c5f5e6764f5a44c9951473d82bf04ad` under its documented assumptions.
+Its [exact future literal](CBSC_LOCAL_ACQUISITION_P16_ROOT_HANDOFF_20260907.md#prospective-bindings-not-an-execution-allocation)
+is bound at `35a4fcaeabb8f8590ac0ac4a410327414bc4ef63`. This later prospective
+section leaves the original engineering-preparation reading above intact.
+
+Request one invocation of that literal: a complete 600 s bound with the same
+540 s work cutoff, on the named Windows/WSL nodes, candidate and output roots.
+No invocation is currently allocated. Root provisions the exact committed source
+through the existing route and detaches the local controller with hidden windows
+and its normal PID/start/exit/log record. The command creates its own fresh local
+output directory; do not precreate it for redirected logs. Root can place those
+logs in the existing direction exp parent. An accepted remote setup retains the
+same named `agent-task` handle; observation never relaunches it.
+
+Question/MEI for that future observation: does this one complete invocation produce
+one fresh environment whose recorded CPython, all 23 versions and NumPy/Torch/CUDA
+metadata match the fixed input? One such environment is the absolute MEI because
+it supplies the selected metadata path; it does not establish B04 execution.
+The comparator is the retained failed remote acquisition path, with its different
+client/connection condition recorded. This is not a controlled causal comparison.
+
+Prospective reading: `PATH_PREPARED` requires observed successful local terminal
+exit and remote terminal exit, complete primary metadata publication/readback with
+`metadata_matches=true`, and the actual complete invocation within 600 s. A ready
+flag, file, test result or SSH success alone is insufficient. `PATH_INCOMPLETE`
+records failure, timeout, missing/mismatching primary metadata, uncertain terminal
+completion or cap breach, while retaining independently observed narrower facts.
+Record controller-origin wall and independently observed outer command wall with
+their measurement boundaries; do not substitute request or phase times for either.
+
+The implemented timing argument assumes local monotonic time measures the complete
+bound, maximum elapsed-clock rate divided by minimum rate is at most 1.01, and
+ordinary OS timer scheduling. Host/VM suspension and clock-domain restart are
+unsupported. These limits are disclosed; no separate clock-rate, throughput or
+compatibility experiment is required or allocated before the proposed invocation.
+Actual Linux timer/group/supervisor behavior remains source-reviewed only.
+
+The same budget includes two complete GETs, four SSH client calls (clock anchor,
+receiver, supervisor launch, collection), both full-file transfers, local admission,
+remote setup admission, venv/21 links, one full pinned install, one metadata process
+and publication/termination. The one clock sample is command timing work, not an
+additional diagnostic allocation. No extra retry, resume, fallback, old partial
+credit, target probe, scientific call or later attempt follows from unused time.
+
+Above the future MEI, retain one metadata-ready path and return the result for the
+next selected task. If incomplete or opposite to readiness, retain all partials,
+report the exact dependent gap and return a bounded repair proposal or yield.
+Neither outcome changes the B04 partial result, selects a learner retry, consumes
+a C object or changes direction lifecycle. The requested allocation still belongs
+to Portfolio; this card and its intake do not supply it.
