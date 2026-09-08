@@ -187,3 +187,28 @@ Root parent and the configured independent Transport operator. Root sends the ex
 prompt once under P25, then forwards the complete immutable response to this same native DM.
 Normal source/task SHA advances do not authorize rebind or resend of an accepted request.
 End at that recoverable handoff boundary; no new code, model load, episode or training occurs.
+
+## Published fixed task and native return
+
+The scientific input and delivery baseline are both
+`1db0df54cf19b0a9eb300468144fab7eb8abbd29`. All 17 declared reference files were
+verified present at that input. TASK, REQUEST and the unpublished internal handoff were
+committed and immediately pushed at `c3fb335a3af51ae156354209df1c9e3d8718c1c0`.
+The renderer then compared the committed TASK bytes and bound this fixed URL:
+
+<https://github.com/CartmanFatass/My-paper-code/blob/c3fb335a3af51ae156354209df1c9e3d8718c1c0/docs/research/candidates/flexible_skill_duration/pro_packets/20260907_post_native_control_convergence/TASK.md>.
+
+Request `2026-09-07-fsd-post-native-control-convergence-01` is `READY_TO_DISPATCH`.
+Its handoff retains the existing Convergence conversation and Issue 10; the only authorized
+delivery file is this packet's `archive/RESPONSE.md` on shared `codex/fsd`. The actual DM
+author is `01a07de2-35a7-78c0-a8de-eda02204cbdd`, Root parent is
+`01a07249-b095-7821-8ce2-e9c32ba85267`, and configured independent Transport operator is
+`01a07e52-f085-76a0-886a-4127f490421f`. Root dispatches the exact internal handoff once,
+omitting app model/thinking overrides, and returns the complete immutable response to
+native `/root/dm_fsd_p13_reentry` for the P25 conformity and scientific intake.
+
+At this publication boundary, owner reviews were again `[]` in both main and the FSD
+checkout. The audit records only publication under the object-tier choice above. No provider
+Send, registry mutation, accepted external request or direction decision is claimed by DM.
+The ordinary learning family remains paused while this single direction-tier question awaits
+its complete response. All consultation exposure remains zero.
