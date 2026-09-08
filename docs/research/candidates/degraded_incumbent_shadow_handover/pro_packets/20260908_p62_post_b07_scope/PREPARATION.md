@@ -45,3 +45,22 @@ checks cover pinned reference existence, JSON, owner quotations and unchanged co
 
 Keep this one authoring checkout for the pending delivery and same-DM intake.
 No branch retirement, worktree removal or unrelated edit is part of this request.
+
+## Published and bound return
+
+TASK was committed and pushed at
+`1b0ac54fb61485da73ac9290387f3f6cf30dc65c`. The existing renderer then checked its
+committed bytes and bound the adjacent HANDOFF: `READY_TO_DISPATCH`,
+`dispatch_required=true`, `dispatch_once=true`. No dispatch has occurred.
+The fixed TASK URL is
+https://github.com/CartmanFatass/My-paper-code/blob/1b0ac54fb61485da73ac9290387f3f6cf30dc65c/docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260908_p62_post_b07_scope/TASK.md
+
+Root must read the adjacent HANDOFF from the **final return commit**, not the
+earlier TASK commit where that same path still said `TASK_NOT_PUBLISHED`, and not
+the archived P53 HANDOFF. Forward its exact `dispatch_prompt` once through the
+configured Transport with no model/thinking override. This is the current P62
+request, with source fixed at `c201e9eb5a71a4b0785a9104156d1dca6df2fbf9`.
+Return the complete immutable Pro response to the original native DM for intake.
+
+The preparation tooling rejection is resolved. The historical CM scratch cleanup
+block remains a documented technical restriction; no cleanup was retried here.
