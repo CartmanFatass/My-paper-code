@@ -87,27 +87,39 @@ recast remains historical provenance. The original member-age/recovery question 
 The binding structure is other-agent non-stationarity/partial observability, with fixed N=2,
 entity identity and roles. This scientific scope decision changes no Portfolio lifecycle or route.
 
-The selected, not yet implemented, host has a receiver and a courier on a five-position corridor,
+The implemented host has a receiver and a courier on a five-position corridor,
 with sixteen three-step delivery rounds per complete episode. The courier switches once from
 following a public light to following its opposite; both policies actually move and deliver.
 The receiver has the same legal local history in both arms and uses recurrent PPO. One common
 prefix (seed 1103; 4,096 episodes) produces two 1,024-episode descendants. The primary is actual
 adaptation return per episode, Delta = RESET minus CARRY; absolute MEI is 0.5 deliveries per episode.
-No new empirical result, headroom or competent-comparator measurement exists on this host yet.
+The first complete B/EXPLORE result is now available; new-host tuned-baseline headroom and
+competent-comparator qualification remain absent.
 
-The strongest support is the concrete state-handling decision under a real change in teammate
-actions and native service consequences, with equal information and learned starting parameters.
-The strongest contradiction to a specifically MARL mechanism claim is that the scripted teammate
-can be absorbed into an ordinary changing environment. Fast recurrent inference, prefix
-incompetence, critic adaptation, Adam step-counter effects and single-run noise remain alternatives.
+The seed1103 pair is VALID_COMPLETE / WITHIN_MEI: native adaptation means are CARRY7.46875 and
+RESET7.4873046875, Delta+0.0185546875 (19 deliveries over1024 episodes, versus512 at the MEI).
+Both terminal sampled means are8.234375; intermediate sampled RESET losses at q64 and q128 are
+retained. One learned prefix and its entire pair are one independent training unit; there is no
+training-seed population interval or equivalence claim.
+
+The strongest support is complete real learning with equal information and learned starting
+parameters, the declared Adam-state fork and directly observed native service. The strongest
+contradiction to a useful reset benefit on this pair is its tiny primary difference, matching
+terminal sampled values and intermediate RESET losses. The scripted teammate can also be absorbed
+into an ordinary changing environment, so generic warm-start transience remains the strongest
+alternative to event-specific MARL attribution. Fast recurrent inference, unqualified baseline
+competence, critic adaptation, Adam step-counter effects and single-prefix variability survive.
 The old exact zero terminal headroom and B5R1's nonidentical continuous values both remain intact;
 neither establishes a new-host sign or member-recovery effect.
 
-The next discriminator is the selected complete real-learning CARRY/RESET pair and its full native
-return curves, after its actual card, implementation specification and execution allocation exist.
-The proposed whole-pair 1,800-second CPU/FP32 cap is not a measured affordability claim or released
-invocation. One complete B would support only a local signal or counterexample, not stable
-superiority, a unique optimizer mechanism, roster/identity recovery, transfer or UAV entry.
+The next discriminator recommended by the B01 intake is one fresh independent prefix/pair,
+master1117 with the same P4096/Q1024 comparison, evaluation and whole1800s CPU/FP32 cap, to observe
+whether the within-MEI difference and endpoint agreement persist. It is an unallocated next-task
+recommendation; P15's one scientific invocation is complete and no second run follows from unused
+wall allowance. The observed complete runner wall36.696s (38s admission/runner chain) supports a
+bounded planning reference, not a future runtime guarantee. This B supports only a local
+observation, not stable superiority, a unique optimizer mechanism, roster/identity recovery,
+transfer or UAV entry.
 Event-specific attribution would need a separately justified no-change comparison; it does not
 hold the first performance B.
 
@@ -117,3 +129,7 @@ References:
 - `pro_packets/20260907_teammate_policy_change_convergence/archive/RESPONSE.md`
   (immutable response commit `1eb3b21b61747b21f374d252005fa48c32e4838d`)
 - `pro_packets/20260907_teammate_policy_change_convergence/INTAKE_COUNTS.json`
+- `VSP02_TEAMMATE_POLICY_CHANGE_B01_SCIENCE_CARD_20260907.md`
+- `VSP02_TEAMMATE_POLICY_CHANGE_B01_RESULT_EVIDENCE_20260907.md`
+- `VSP02_TEAMMATE_POLICY_CHANGE_B01_INTAKE_20260907.md`
+- `VSP02_TEAMMATE_POLICY_CHANGE_B01_INTAKE_ANALYSIS_20260907.json`
