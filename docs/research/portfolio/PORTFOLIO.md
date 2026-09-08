@@ -1,8 +1,10 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-08 (P38 FSD learning B01 runtime allocation)
+Updated at: 2026-09-08 (P39 FRRIE native fault-context continuation)
 
-Current incremental command: [P38 FSD native-renewal learning panel](handoffs/2026-09-08-p38-fsd-learning-b01-execution.md). Accepted reviewed source/card are ready; allocate one G/C/H panel on masters770203/770204 with complete60/900/900s caps. No extra probe,seed or automatic successor. Actual execution remains a Root fact.
+Current incremental command: [P39 FRRIE native fault context](handoffs/2026-09-08-p39-frrie-native-fault-context.md). A07 retained a fatal Python path, missed its scheduled MEI and exhausted P35/P37. Reuse attributable retained crash material first; only if unusable prepare at most one120s native observation with established complete containment. Reuse P36 capability/gap evidence; no setup or Python-only repeat. Actual dispatch remains a Root fact.
+
+Retained incremental command: [P38 FSD native-renewal learning panel](handoffs/2026-09-08-p38-fsd-learning-b01-execution.md). G/C/H have terminal exit0 receipts; same CM collection and DM intake proceed under the issued route. No extra probe,seed or automatic successor. Scientific validity awaits intake.
 
 Retained incremental command: [P37 FRRIE A07 command transport](handoffs/2026-09-08-p37-frrie-a07-command-transport.md). The accepted supervisor wrapper exited127 before preflight/science; preserve it and transport the same committed LF payload through a staged script under a distinct handle. P35 scientific scope/cap remain unchanged.
 
