@@ -73,3 +73,21 @@ established. A concrete prospective containment method remains necessary before
 any conditional live allocation can be accepted.
 
 scope: none
+
+### Lookup routing reconciliation
+
+Initiating assignment: Root resumed this same CM for P39 technical collection,
+explicitly directing retained context first, prior A07 E0 and P36 capability reuse,
+with no target/setup unless a subsequent DM card/command is accepted. The published
+P39 at bbdafe545 supplies the one30s lookup bound. No additional lookup was selected.
+
+`routing_attempts.json` beside the raw receipt records all three exact remote
+commands/argv and terminal facts. Attempt1's0.7919212s shell wall includes preceding
+local P36 document reads, so it is not remote-only timing. Attempt2 took0.5057596s;
+handler reads failed and zsh rejected the core glob, despite final pipeline exit0.
+Attempt3 succeeded remotely in0.4304952999809757s; its complete local shell call was
+0.8193338s including the later failed console print. The conservative sum of those
+three complete shell-call durations is2.1170146s, within30s. No remote lookup
+remained live or was repeated after attempt3. The earlier below2s figure sums the
+third SSH duration instead of its enclosing local shell duration; both are stated
+for transparency and neither is an offline-debugger or scientific invocation.
