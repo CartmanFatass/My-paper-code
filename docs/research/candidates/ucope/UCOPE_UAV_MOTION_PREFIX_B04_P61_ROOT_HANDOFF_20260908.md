@@ -1,10 +1,30 @@
 # UCOPE B04 — accepted source and exact one-pair Root route
 
-**Ready for one7201 submission; no scientific invocation is represented by
-this document.** [P61](../../portfolio/handoffs/2026-09-08-p61-ucope-post-b03-direction-choice.md)
-and [Convergence intake](UCOPE_POST_B03_CONVERGENCE_INTAKE_20260908.md) provide
-the full selected-object route. Do not repeat the Pro request or obtain a
-second routine Portfolio implementation vote.
+**COMPLETE / WITHIN — the one 7201 submission, terminal collection and DM
+intake are complete. The command below is historical; do not execute it again.**
+[P61](../../portfolio/handoffs/2026-09-08-p61-ucope-post-b03-direction-choice.md)
+and [Convergence intake](UCOPE_POST_B03_CONVERGENCE_INTAKE_20260908.md) supplied
+the selected-object route. [Final scientific intake](UCOPE_UAV_MOTION_PREFIX_B04_P61_INTAKE_20260908.md)
+records T−G −0.003948225944122139, conditional SE 0.010191826216031805,
+positive G−H/T−H, complete counts and the exhausted allocation. No further
+scientific invocation, retry, extra evaluation or successor is selected.
+
+Terminal collection is at `2d8750b46da3cff99f3f632bb8a17b5a70a9ed91`.
+The actual local raw root is in the direction checkout:
+`C:/Projects/HMASD-worktrees/dm-ucope-native-return-prep-20260906/temp/directions/ucope/exp/uav-motion-prefix-b04-7201-p61-20260908/`.
+It replaces only the proposed collection destination in the historical route
+below. Root preserves these ignored bytes before any containing-checkout
+reclamation. Once this intake and collection are archived, the remote
+checkout/wrapper have reached their named cleanup event. Root owns cleanup
+and verifies archival and removal; this document does not claim cleanup done.
+
+The remaining sections preserve the original accepted binding and execution
+route as provenance. P61 needs final integration/archive and a clean return.
+The owner requested a safe pause on 2026-09-08: after this assigned intake,
+stop without selecting or dispatching a successor. No repeat Pro Send or
+scientific launch follows. The shared local checkout remains a delivery/raw-
+archive dependency until Root completes integration and verifies preservation;
+Root owns its subsequent reclamation under the existing checkout policy.
 
 ## Accepted binding and ownership
 
@@ -48,7 +68,8 @@ wrapper with Bash -n and the local submission with the PowerShell parser,
 without executing either. Those are past preparation facts. Root reconciles
 any intervening acceptance/state before submitting once; no blind duplicate.
 
-Execute this **existing CM file**, with no string replacement/rebuilt payload:
+The completed invocation used this **existing CM file**, with no string
+replacement/rebuilt payload (historical command; do not rerun):
 
 ```powershell
 & 'C:/Projects/HMASD-worktrees/dm-ucope-native-return-prep-20260906/temp/directions/ucope/launch/b04_7201_p61_20260908/submit.ps1'
