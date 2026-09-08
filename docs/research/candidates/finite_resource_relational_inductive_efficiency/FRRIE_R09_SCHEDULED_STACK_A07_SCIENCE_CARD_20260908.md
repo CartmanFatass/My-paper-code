@@ -6,8 +6,8 @@ it concerns the execution path carrying event-addressed randomness into the
 same-information multi-agent learner and its native consequence.
 
 Object: `FRRIE-R09-SCHEDULED-STACK-A07-P35-20260908`. Class: **A/RECON**.
-Status: `QUESTION_FROZEN / EXACT_COMMAND_PENDING`. Current invocations:0.
-P35 allocates at most one new complete120s chain after command acceptance.
+Status: `EXACT_COMMAND_FROZEN / READY_FOR_ONE_ATTEMPT`. Current invocations:0.
+Section6 records acceptance of P35's one complete120s chain and exact inputs.
 A has no consumption state; A05/P22/A06 outcomes and budgets remain separate.
 
 ## 1. Question, authority and observation amendment
@@ -199,6 +199,50 @@ Root appends this selection row on integration:
 
 ```text
 | 2026-09-08T07:57:59Z | finite_resource_relational_inductive_efficiency | object | selection | (a) P35 one scheduled stack; (b) stop with A06 missing path; (c) fatal-only retry/unsupported repair | (a):A07 A_RECON,arm once at initial pdb stop,report after60s without exit/repeat,one complete120s after acceptance;invocations0 | yes | OWNER_DELEGATED (unattended,2026-09-03 instruction); P35 | docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R09_SCHEDULED_STACK_A07_SCIENCE_CARD_20260908.md | none | |
+```
+
+## 6. Exact binding and Root release
+
+DM accepts the [A07 Root handoff](FRRIE_R09_SCHEDULED_STACK_A07_ROOT_HANDOFF_20260908.md)
+at **`66cd6cd6522d1bde426046907c31d5eb488e4b43`**, which changes only that
+new document after the frozen card atf361193548f9fb48fb472fa0ef8861af1e97c283.
+No scientific source, test, old input, card rule or prior evidence was changed.
+
+| Binding | Accepted value |
+| --- | --- |
+| Exact command source | The handoff's sole sh fence at66cd6cd6522d1bde426046907c31d5eb488e4b43; remove only its final fence-separator LF |
+| Command length / CR count | 1287 UTF-8 bytes /0 |
+| Command SHA256 | `8ed56ed4489b0d211355f74a1e91a07f9ae8ac1efc43cecf77c824a5fc56e51c` |
+| Section1 arming argument | 78 UTF-8 bytes, no trailing newline; SHA256 `e3dbb75b2d11897a949c8b925d2999dc39922db21a6c566a4e281ca7b09842ca` |
+| Supervisor argv | `/usr/local/bin/agent-task`, `run`, `frrie-a07-scheduled-stack-p35-43eec21e`, entire command as one argument |
+| Other bindings | Original43ee source,306 helper/stdin, pinned runtime and fresh paths exactly section3/handoff §1; one120s cap exactly section4 |
+
+DM read the full handoff, actual `static_acceptance.json`, retained pinned stdlib
+sections and committed literal against §§1–4. Static source shows `rcLines`
+transferred to `cmdqueue` then cleared, with `pop(0)` consuming the arming
+expression before continue. The startup commands are appended once before the
+run/restart loop. The main-file line event precedes target line execution;
+the retained rc-file checks disclose no earlier rc command. This supports the
+selected static arming order, not an observed timer emission or reliable runtime.
+
+CM's reverse-delta, AST/argv, Bash outer/heredoc syntax and old-input identity
+checks passed. DM matched the committed1287-byte literal to the retained checked
+command and the78-byte arming input to section1, with exactly one occurrence.
+CM commands, imports and fixtures were not rerun. Parent receipt:
+`temp/directions/finite_resource_relational_inductive_efficiency/exp/a07_preparation_p35/dm_acceptance_readback.json`.
+Actual preparation counts:0 scientific invocations,0 new fixture/target imports.
+No engineering-scope §5 breach is evidenced; one watchdog/report is the only
+named §4 addition. Real arming, reporting and completed work remain unobserved.
+
+Object-tier technical options: (a) accept this exact handoff and release the
+already allocated observation to Root; (b) return a concrete command/order gap.
+Recommend/select **(a)**. **Owner-delegated decision (unattended,2026-09-03 instruction): (a).**
+Main owner reviews were empty at acceptance. Root integrates, dispatches after
+fresh adjacent admission and observes the same accepted handle; CM then collects
+E0 and DM applies §2. No timer rearm, second sample or future retry is released.
+
+```text
+| 2026-09-08T08:09:35Z | finite_resource_relational_inductive_efficiency | object | technical | (a) accept exact A07 command/order; (b) return concrete gap | (a):command1287B SHA256 8ed56ed4489b0d211355f74a1e91a07f9ae8ac1efc43cecf77c824a5fc56e51c and single60s arming accepted;Root one120s dispatch next;invocations0 | yes | OWNER_DELEGATED (unattended,2026-09-03 instruction); P35 | docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R09_SCHEDULED_STACK_A07_SCIENCE_CARD_20260908.md#6-exact-binding-and-root-release | none | |
 ```
 
 scope: one bounded watchdog thread and scheduled stack report per section4
