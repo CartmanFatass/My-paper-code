@@ -32,14 +32,14 @@ remains dated provenance under the controlling evidence specification section 11
   The **2026-09-05 PRO_FINAL / PARK** of the same-draw retained-policy root-residual
   localization family and its numerical-locus dependency remains unchanged.
   See the [Convergence intake](UCOPE_UAV_INTERFACE_CONVERGENCE_INTAKE_20260907.md).
-- Latest bounded B observation: **2026-09-07 UAV motion prefix B01 P24,
-  COMPLETE / WITHIN**. Fresh6901/6902 T−G is+0.043351866492163174 /
-  −0.050365422532689566, mean **−0.003506778020263196**, endpoint sample
-  SD0.06626813058389298 and conditional evaluation SE0.007033641405302189.
-  The four-pair outcome-informed descriptive mean is+0.005855321301029148,
-  below MEI0.01; original P21+0.015217420622321492 / UP remains unchanged.
-  Large opposing outcomes and6901's negative G−hover limit general usefulness
-  and competent-comparator wording. See [P24 intake](UCOPE_UAV_MOTION_PREFIX_B01_P24_INTAKE_20260907.md).
+- Latest bounded B observation: **2026-09-08 UAV motion prefix B02 P47,
+  COMPLETE / DOWN**. Common per-agent-compound clipping in both T/G yields
+  7001/7002 T−G **−0.04726710442367869 /−0.0061362058126795795**, mean
+  **−0.026701655118179134**, endpoint sample SD0.029083937324133818 and
+  conditional evaluation SE0.006296284224781783. Both T−H means are negative;
+  G−H changes sign. This is adverse evidence for the task/prefix/learner
+  budget, not clipping causality or a family disposition. See [B02 intake](UCOPE_UAV_MOTION_PREFIX_B02_P47_INTAKE_20260908.md).
+  P24 WITHIN and original P21 UP remain separate and unchanged.
   Actual B UAV entry remains [card §9](UCOPE_UAV_MOTION_PREFIX_B01_SCIENCE_CARD_20260907.md#9-observed-p21-completion-and-uav-entry--2026-09-07).
   No equivalence, stable or pure-information superiority, direction
   disposition or successor follows. Historical finite-host B05 RM-A and all
@@ -63,9 +63,12 @@ geometry, temporal smoothing and optimization remain unseparated explanations.
 The tested MARL structure is partial observability in a fixed moving
 team. Actual service opportunity consequences replace no existing sensor bill:
 there is no asserted positive sensing fee or B05 count interface on this host.
-The first two real UAV pairs supported a preliminary package advantage; the
-two fresh P24 pairs now have a within-MEI mean and a substantial native loss.
-The four-pair descriptive record does not maintain an above-MEI point effect.
+The first two real UAV pairs supported a preliminary package advantage;
+P24's two fresh pairs have a within-MEI mean and a substantial native loss. The
+four-pair historical description does not maintain an above-MEI point effect.
+The subsequent common per-agent-clipping B02 yields a DOWN mean on two
+new pairs, with both T−G and both T−hover endpoints negative. Its larger
+opening displacement does not establish useful information or native value.
 Tuned headroom, stable superiority or equivalence, transfer, pure information
 value and deployment remain unestablished.
 
@@ -83,7 +86,56 @@ without a distinct count-state architecture because RAW contains the sufficient
 count. The direct-service alternative remains separated by the frozen
 `Gamma=I+D` decomposition and analytic `D≈-0.02` boundary.
 
-## Current scientific position — 2026-09-07
+## Current scientific position — 2026-09-08 B02
+
+The accepted within-family learning amendment applies one PPO ratio per
+agent-owned velocity/duration compound action in both learned arms. On
+fresh masters7001/7002 its opening-prefix treatment has mean T−G
+**−0.026701655118179134**, below the unchanged−0.01 boundary: **DOWN**.
+The pair endpoints are−0.04726710442367869 and−0.0061362058126795795;
+endpoint sample SD is0.029083937324133818 and conditional evaluation SE
+0.006296284224781783. The independent unit remains a matched training
+pair, n=2. These observations support a bounded adverse package reading,
+not stable population harm, equivalence or a clipping-causal comparison.
+
+The strongest current contradiction is the large7001 T−G loss, together
+with T−hover−0.0224883084 /−0.0243921875 in both pairs. G−hover is
++0.0247787961 then−0.0182559817, so generic competence is not consistently
+established; no tuned same-information headroom record exists. The strongest
+support for the remaining broader question is historical P21 UP and three
+positive joint-objective fitted-pair means, alongside the actual legal
+movement/local-observation/action/native-credit path. P24's WITHIN mean,
+6902's native harm, its mixed generic-reference performance and all finite-host
+results remain separate. No historical outcomes are pooled into B02.
+
+T moves farther over the opening four steps in both pairs:85.01 versus
+60.25m and90.52 versus58.94m per UAV. Opening local-user entries decrease
+relative to G in7001 and increase in7002. The latter's tiny opening reward
+advantage+0.0001319 coexists with a later contribution−0.0062681 to its
+complete contrast. More displacement or changed local observations do not
+demonstrate information used in a better action. All five actors retain
+their local recurrent histories during holds and resume feedback by t4;
+there is no population/lifetime or sensing-fee claim. Direct geometry,
+persistence, optimization, information use and partner co-adaptation remain
+unseparated alternatives. Neither of the two prospective B02 predictions
+matches the joint observation.
+
+The object-tier choice is to retain this adverse reading and drop an
+unchanged B02 continuation from the default next choice. It does not
+reject every per-agent-clipping method or revert the implementation.
+The selected two-pair allocation is complete; no further invocation,
+family closure, recast or lifecycle/priority change follows. A next
+discriminator would require a specifically justified new within-family
+treatment/comparator and complete sampled native return against legal
+feedback, with H retained as an untuned reference. That concrete change
+is not selected by this result. A new question-selection assignment, or
+the same Convergence node for an actual family-scope decision, is needed;
+an exact upper, complete causal diagnosis or extra unchanged seeds are
+not prerequisites. See the [B02 card §10](UCOPE_UAV_MOTION_PREFIX_B02_SCIENCE_CARD_20260908.md#10-observed-p47-completion--2026-09-08),
+[E0](UCOPE_UAV_MOTION_PREFIX_B02_P47_RESULT_EVIDENCE_20260908.md) and
+[intake §§2–6](UCOPE_UAV_MOTION_PREFIX_B02_P47_INTAKE_20260908.md).
+
+## Prior UAV scientific position — 2026-09-07 P24
 
 The fixed-five-UAV motion prefix B01 has completed two fresh P24 training
 pairs, **6901 and6902**, with joint **WITHIN** under the original0.01 MEI.

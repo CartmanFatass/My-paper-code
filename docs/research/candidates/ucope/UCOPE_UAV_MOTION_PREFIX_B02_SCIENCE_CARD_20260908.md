@@ -3,6 +3,10 @@ Binding MARL structure: (d) other-agent non-stationarity or partial observabilit
 
 # UCOPE UAV motion prefix B02 — science card, 2026-09-08
 
+Observed completion: **P47 COMPLETE / DOWN**, both allocated pairs retained.
+The prospective definition and predictions below are unchanged; [§10](#10-observed-p47-completion--2026-09-08)
+records the actual result and exhausted execution route.
+
 ## 1. Authority and present boundary
 
 Object **UCOPE-UAV-MOTION-PREFIX-B02**, **B/EXPLORE**. This is the
@@ -260,3 +264,57 @@ or its runtime. The real per-fit budget remains 1,024 Adam calls on
 66,441/66,311 T/G parameters. Actual real exposure and both native endpoints
 remain unmeasured here; owner predictions remain not taken. The prior UAV
 entry, historical joint objectives/results and no-tuned-headroom limit remain.
+
+## 10. Observed P47 completion — 2026-09-08
+
+Both selected masters completed at source
+`6374063408208ba67b8cb7c69ebc0babb0f00259`, with native final T/G/H measurement
+and actual learner counts intact. [Result evidence](UCOPE_UAV_MOTION_PREFIX_B02_P47_RESULT_EVIDENCE_20260908.md),
+[all-outcome summary](UCOPE_UAV_MOTION_PREFIX_B02_P47_RESULT_SUMMARY_20260908.json)
+and [DM intake](UCOPE_UAV_MOTION_PREFIX_B02_P47_INTAKE_20260908.md) retain all
+endpoints, uncertainty, exposure and receipts. This section reports an
+observation; it does not amend §§2–7's prospective scientific meaning.
+
+| Master | T−G | G−H | T−H |
+| --- | ---: | ---: | ---: |
+| 7001 | −0.04726710442367869 | +0.024778796069575677 | −0.022488308354103006 |
+| 7002 | −0.0061362058126795795 | −0.018255981675033013 | −0.024392187487712595 |
+
+The two-pair primary is **−0.026701655118179134**, endpoint sample SD
+**0.029083937324133818**, combined conditional evaluation SE
+**0.006296284224781783**. The frozen §5 branch is **DOWN**. Both T−G signs
+and both T−H signs are negative. G−H changes sign, limiting competent-generic
+wording. The independent training unit remains the matched pair, n=2;
+conditional episode error is not training-population uncertainty. No tuned
+same-information headroom or stable/clipping-causal claim is established.
+
+Both §6 predictions miss: joint WITHIN(.60) observed DOWN; both G−H
+positive(.60) observed one positive and one negative. Binary Brier scores
+are .36 each. Owner prediction remains not taken (unattended). The
+[Chinese brief](../../portfolio/owner/briefs/ucope/2026-09-08_UCOPE_UAV_MOTION_PREFIX_B02_P47.md)
+reports the result without internal execution fields.
+
+Actual scientific work is **573440 team steps,4096 Adam calls,2240 complete
+episodes,192 final evaluation episodes and3200 diagnostic frames** across
+four learners. All fits use lr=.0003; nonzero total relative parameter
+displacements are T/G .544038820/.529811807 for7001 and
+.352969559/.507274977 for7002. T's larger opening displacement in both
+pairs does not compensate for complete native losses. In7002, increased
+local-user entries and a small positive opening reward contribution
+coexist with its adverse complete return; no information-value claim follows.
+
+External scientific wall sums to **577.94s**; all1800s/arm,3600s/pair and
+7200s summed caps pass. Fresh admission passed on each invocation. The
+historical **80.578s/60s** synthetic-smoke engineering breach remains under
+P48; the first wrong-cwd supervisor remains a zero-scientific-exposure
+failure. No repeated smoke, scientific retry, third pair or extra evaluation ran.
+Engineering scope §4 remains none.
+
+Owner-delegated decision (unattended, 2026-09-03 instruction): accept the
+bounded adverse reading and do not carry this unchanged B02 recipe into an
+automatic continuation. This follows §6's negative interpretation; it
+does not reject all per-agent clipping, revert source or close the family.
+The P47 route is exhausted, and no next concrete treatment/comparator or
+scientific invocation is selected. The prior actual UAV entry and all
+historical P21/P24/finite-host outcomes remain unchanged. A/B has no
+consumption state; no family, recast, Portfolio or C-promotion decision occurs.
