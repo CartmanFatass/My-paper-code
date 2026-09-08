@@ -137,3 +137,54 @@ nonnegative amount in each conservative arm upper bound. An indivisible overrun
 remains a breach, not a new allowance. Measured resource and wall conformance remain
 pending the sole accepted handle. DM owns all-outcome scientific intake; this same
 CM is available for collection on Root's continuation.
+
+## Mechanical cwd correction after failed supervisor acceptance
+
+This section supersedes the pending source-staging statement and original supervisor
+name above. It preserves the original failure; no scientific retry was selected.
+[Direct evidence](VSPC1_NATIVE_HOLD_VALUE_B03_CWD_CORRECTION_EVIDENCE_20260908.json)
+contains terminal status, full log, actual supervisor wrapper, clean detached source
+checks, absent admission/output paths and unchanged script digest.
+
+Original handle `vspc1_hold_value_b03_8201_7a8ed3aa5d25` was accepted and failed with
+exit1, PID3009140, inactive tmux. Its log records start/end
+`2026-09-09T06:40:46+08:00`, missing exact cwd, displayed whole wall0.00s and peak
+RSS3200KiB. This is wrapper-only evidence, not native resource conformance. The
+failed `cd` is the first link in the shell's `&&` chain: neither admission nor the
+scientific runner executed. Both admission and output paths were directly absent.
+The original task directory/log/status/exit/runner files remain untouched remotely;
+full log also retained locally as `failed_task.log` in the B03 engineering directory.
+
+The remote `/usr/local/bin/agent-task` implementation permits reuse after tmux ends,
+but removes/replaces exit/status/start/runner metadata and appends the same log.
+To preserve the failed identity, the corrected submission uses only a new supervisor
+name, `vspc1_hold_value_b03_8201_7a8ed3aa5d25_cwd1` (direct status: `not_found`).
+Scientific source/master/output/admission/script and budgets remain identical.
+
+The existing Git bundle route transferred already committed direction objects from
+local `source_stage.bundle` to
+`/home/wu/hmasd-inputs/vspc1_b03_7a8ed3aa5d25_source.bundle`, fetched into the configured
+remote repository, and created the exact detached worktree:
+
+```text
+git -C /home/wu/projects/HMASD worktree add --detach /home/wu/hmasd-worktrees/vspc1-native-hold-value-b03-8201-7a8ed3aa5d25 7a8ed3aa5d25ded71164aa338749d09318124dcf
+```
+
+Actual HEAD equals the bound full SHA, `git status --porcelain` is empty and
+`symbolic-ref -q HEAD` returns1 (detached). The admission script, fixed runner and
+normalization module are present. No source byte was edited. The staged shell's
+SHA256 remains `46a2ac327ddf65350c6af18282a7e87944c5be921c7008a0a5423cc0199e916e`;
+prior syntax/readback evidence is reused. An initial remote `cat-file` read stalled
+and its local SSH command was interrupted; the bundle route completed normally.
+No tests, profiling, admission, scientific model, learner or evaluation ran during
+this mechanical correction.
+
+Ready exact Root submission (not executed by CM):
+
+```powershell
+ssh -o BatchMode=yes -o ConnectTimeout=10 hmasd-wsl-node /usr/local/bin/agent-task run vspc1_hold_value_b03_8201_7a8ed3aa5d25_cwd1 /bin/bash /home/wu/hmasd-inputs/vspc1_hold_value_b03_8201_7a8ed3aa5d25.sh
+```
+
+Root owns this single scientific submission, fresh admission and terminal observation.
+The source remains `7a8ed3aa5d25ded71164aa338749d09318124dcf`; this is a docs/evidence
+correction only, with no replacement source, seed, script, output or allowance.
