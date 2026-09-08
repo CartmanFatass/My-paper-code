@@ -5,8 +5,8 @@ This runtime question does not itself test partial observability or non-stationa
 it protects the event-address and learner path used by the same-information multi-agent comparison.
 
 Object: `FRRIE-R09-FATAL-CALLPATH-A06-P31-20260908`.
-Class: **A/RECON**. Status: `QUESTION_FROZEN / COMMAND_ACCEPTANCE_PENDING`.
-Allocation: at most one new complete120s observation after exact-command acceptance.
+Class: **A/RECON**. Status: `EXACT_COMMAND_FROZEN / READY_FOR_ONE_ATTEMPT`.
+Allocation: at most one new complete120s observation; section7 records exact-command acceptance.
 No invocation has started. This A object has no consumption state.
 
 ## 1. Decision question and retained-evidence check
@@ -204,6 +204,51 @@ Root appends this row to the shared audit on integration:
 
 ```text
 | 2026-09-08T07:14:48Z | finite_resource_relational_inductive_efficiency | object | selection | (a) P31 separate fatal-stack observation; (b) stop with retained missing path; (c) unchanged retry/unsupported repair | (a):A06 A_RECON,only startup fatal reporting plus fresh paths,one complete120s after acceptance;no invocation yet | yes | OWNER_DELEGATED (unattended,2026-09-03 instruction); P31 | docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R09_FATAL_CALLPATH_A06_SCIENCE_CARD_20260908.md | none | |
+```
+
+## 7. Exact-command acceptance and Root release
+
+DM accepts the [A06 Root handoff](FRRIE_R09_FATAL_CALLPATH_A06_ROOT_HANDOFF_20260908.md)
+at **`fc279590ecd88aa3cc2d5c10348453b7dcd4e9fe`**. That CM commit changes
+only the new handoff document; it descends the frozen card at4ebe6b9ee. No
+scientific source, helper, stdin, test or previous evidence changed.
+
+| Final command binding | Value |
+| --- | --- |
+| Immutable source | The handoff's sole sh fence at fc279590ecd88aa3cc2d5c10348453b7dcd4e9fe |
+| Extraction | Remove only the single LF between final `FRRIE_A05` and the closing fence; retain every other byte |
+| Length / CR count | 1200 UTF-8 bytes /0 |
+| SHA256 | `67f598644882f596ecbfbced2454003c69c9a04cb153a6f62b23079e00bf72e3` |
+| Supervisor argv | `/usr/local/bin/agent-task`, `run`, `frrie-a06-fatal-callpath-p31-43eec21e`, entire literal as one argument |
+| Source/input/runtime/output/cap | Exactly §§3–4 and handoff §§1–2; original43ee, unchanged306 helper/stdin, one120s chain |
+
+DM read the complete handoff, actual `static_acceptance.json` and sole committed
+literal against §§2–5. CM's reverse-delta equality reports exactly two handle/cwd
+substitutions, one output substitution and one startup-flag insertion. Outer and
+heredoc `bash -n` returned0 with empty output; committed helper/stdin bindings are
+unchanged. DM independently read the Git blob's1200-byte command/hash and matched
+the retained checked command. It contains exactly one `-X faulthandler -m pdb -c continue`
+entry; no scientific command, parser check or fixture was reexecuted during intake.
+DM receipt: `temp/directions/finite_resource_relational_inductive_efficiency/exp/a06_preparation_p31/dm_acceptance_readback.json`.
+
+Reused inert evidence supports the bounded A05 capture/termination recipe only;
+it does not check the original learner's complete publication pipeline. Actual
+fatal-stack availability and the scientific chain's terminal behavior remain
+unobserved. Counts during this preparation:0 scientific invocations,0 new
+fixture/import invocations. No engineering-scope §5 breach is evidenced.
+
+Object-tier technical options: (a) accept the conforming static handoff and
+release the already allocated one observation to Root; (b) return a concrete
+command gap for correction. Recommend/select **(a)**.
+**Owner-delegated decision (unattended,2026-09-03 instruction): (a).**
+Main owner reviews were empty at this boundary; no new owner instruction was
+inferred. Root integrates this binding and dispatches/observes the same accepted
+handle under P31. CM then collects E0 and DM applies §2; no terminal result yet.
+
+Root appends the following ordinary technical row alongside §6's selection row:
+
+```text
+| 2026-09-08T07:22:28Z | finite_resource_relational_inductive_efficiency | object | technical | (a) accept exact static handoff; (b) return concrete command gap | (a):A06 command1200B SHA256 67f598644882f596ecbfbced2454003c69c9a04cb153a6f62b23079e00bf72e3 accepted;Root one120s dispatch next;scientific invocations0 | yes | OWNER_DELEGATED (unattended,2026-09-03 instruction); P31 | docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R09_FATAL_CALLPATH_A06_SCIENCE_CARD_20260908.md#7-exact-command-acceptance-and-root-release | none | |
 ```
 
 scope: none
