@@ -186,7 +186,7 @@ Three real tasks support an observed task-specific comparison, not a general mod
 | --- | --- | --- | --- | --- |
 | 01 | P14-VSP02-B-CARD-AND-CM-COMPARISON-01 / `a1b8c56f2a36e2027372bf578fc2646dfd57efe9` | `/root/vsp02_cm_baseline_b01`, `/root/vsp02_cm_sol_b01` (native); headless PIDs 11640/29924/22060; resolved `claude-opus-5` / `grok-4.6-build` / `google-antigravity/gemini-3.8-flash-high` | `temp/cm-model-comparison/20260907/batch-01/` | five arms returned; independently verified; baseline selected for normal VSP02 integration |
 | 02 | P15-FSD-NATIVE-RENEWAL-CONTROL-A01 / `08d11657a50428d95b7d3d56d6990184f1620c00` | `/root/fsd_cm_baseline_a01`, `/root/fsd_cm_sol_a01` (native); headless PIDs 2132/12988/7312; resolved models pending return | `temp/cm-model-comparison/20260907/batch-02/` | five arms dispatched; returns pending; zero scientific invocations |
-| 03 | not yet captured | — | — | awaiting next new CM engineering assignment |
+| 03 | P15-UCOPE-UAV-MOTION-PREFIX-B01 / `f718134f210889ff14f07deb3846cde853abd7b4` | `/root/ucope_cm_baseline_b01`, `/root/ucope_cm_sol_b01` (native); headless PIDs 21900/24720/28756; resolved models pending return | `temp/cm-model-comparison/20260907/batch-03/` | five arms dispatched; returns pending; zero scientific invocations |
 
 ### Batch 01 return (Root factual update)
 
