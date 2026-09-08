@@ -171,3 +171,33 @@ report the exact dependent gap and return a bounded repair proposal or yield.
 Neither outcome changes the B04 partial result, selects a learner retry, consumes
 a C object or changes direction lifecycle. The requested allocation still belongs
 to Portfolio; this card and its intake do not supply it.
+
+## P17 execution allocation — 2026-09-07
+
+[P17, CBSC section](../../portfolio/handoffs/2026-09-07-p17-cbsc-execution-vsp02-fresh-prefix.md#cbsc--one-prepared-complete-acquisitionsetup-invocation)
+at `a787ff12cd0212b9fd23d9d861d5d192186028fe` now allocates exactly one execution
+of source `5828af584c5f5e6764f5a44c9951473d82bf04ad` and the literal at
+`35a4fcaeabb8f8590ac0ac4a410327414bc4ef63`. It supersedes only the earlier
+zero-execution boundary. The prospective reading, 600 s complete / 540 s work
+clock, inputs, nodes, paths, assumptions and stop conditions above are unchanged.
+
+Reconcile committed inputs, provision the detached remote exact-source checkout,
+then execute once with the existing node admissions and hidden detached local
+controller. Same CM collects all outcomes; Root observes accepted identities.
+Uncertain acceptance is reconciled without another invocation. No learner,
+substitute route, retry, resume, extra probe or follow-on allocation is selected.
+This is execution/collection of accepted code, outside the completed three-batch
+CM comparison; it adds no engineering implementation or duplicate arm.
+
+Prelaunch DM prediction: the first local GET will acquire some Torch body bytes,
+given P15's direct-access headers. Whether the full chain reaches PATH_PREPARED
+is uncertain. Score the body-acquisition prediction separately from readiness;
+no throughput or B04-return prediction is made. Owner prediction: not taken
+(unattended). At this selection, actual P17 invocation count is zero.
+
+Options: (a) execute the exact newly allocated invocation; (b) retain the prior
+unallocated wait; (c) alter the route or add diagnostic calls. Recommend/select
+(a) under P17. Owner-delegated decision (unattended, 2026-09-03 instruction): (a).
+Owner reviews returned [] and relevant audit owner columns were blank at this
+boundary. Owner flags: none. The allocation is spent only by actual acceptance;
+an unsuccessful accepted invocation supplies no second attempt.
