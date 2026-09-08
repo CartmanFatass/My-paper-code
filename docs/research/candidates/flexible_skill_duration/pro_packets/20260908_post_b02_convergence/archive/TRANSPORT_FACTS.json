@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "request_id": "2026-09-08-fsd-post-b02-convergence-01",
+  "workflow_node": "em_convergence",
+  "conversation_binding_key": "em:flexible_skill_duration:convergence",
+  "direction_id": "flexible_skill_duration",
+  "direction_ids": [
+    "flexible_skill_duration"
+  ],
+  "conversation_id": "6a9c2865-14a8-83e8-b556-e7f5836d9236",
+  "provider_url": "https://chatgpt.com/c/6a9c2865-14a8-83e8-b556-e7f5836d9236",
+  "user_message_id": "d13a54a8-82df-41d9-bd5f-682a5e77468d",
+  "assistant_message_id": "a56105dc-c710-4e80-acb0-bf3019ffd213",
+  "visible_model": "6 Pro",
+  "underlying_model": "Latest",
+  "thinking_effort": "Pro, 5 of 5.",
+  "state": "ARCHIVED",
+  "tab_id": null,
+  "source_mode": "paste",
+  "source_path": "<paste>",
+  "prompt_sha256": "2cc7da653920937bd1457ea64fd0536c8381828ed035c7357a188279ced15758",
+  "response_sha256": "4435ba04d361c243bcfa6198bf62b05ce60e742eb668d4f01999254b9df411e8",
+  "response_characters": 367,
+  "response_bytes": 371,
+  "send_click_count": 1,
+  "send_evidence": {
+    "send_click_count": 1,
+    "url_observed": true,
+    "user_node_observed": true,
+    "user_node_exact": true,
+    "user_message_id": "d13a54a8-82df-41d9-bd5f-682a5e77468d",
+    "assistant_message_id": "a56105dc-c710-4e80-acb0-bf3019ffd213",
+    "paste_mode": true,
+    "provider_url_observed": "https://chatgpt.com/c/6a9c2865-14a8-83e8-b556-e7f5836d9236",
+    "prompt_sha256": "2cc7da653920937bd1457ea64fd0536c8381828ed035c7357a188279ced15758"
+  },
+  "identity_validation": "PASS_MANUAL_PAIRING",
+  "identity_expected": {
+    "conversation_id": "6a9c2865-14a8-83e8-b556-e7f5836d9236",
+    "user_message_id": "d13a54a8-82df-41d9-bd5f-682a5e77468d"
+  },
+  "identity_observed": {
+    "conversation_id": "6a9c2865-14a8-83e8-b556-e7f5836d9236",
+    "assistant_message_id": "a56105dc-c710-4e80-acb0-bf3019ffd213"
+  },
+  "archive_paths": {
+    "manifest_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\flexible_skill_duration\\2026-09-08-fsd-post-b02-convergence-01\\2026-09-08-fsd-post-b02-convergence-01--flexible_skill_duration__PACKET_MANIFEST.json",
+    "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\flexible_skill_duration\\2026-09-08-fsd-post-b02-convergence-01\\2026-09-08-fsd-post-b02-convergence-01--flexible_skill_duration__00_PROMPT.md",
+    "reference_files": [],
+    "response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\flexible_skill_duration\\2026-09-08-fsd-post-b02-convergence-01\\2026-09-08-fsd-post-b02-convergence-01--flexible_skill_duration--attempt-01__02_RESPONSE.md",
+    "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\flexible_skill_duration\\2026-09-08-fsd-post-b02-convergence-01\\2026-09-08-fsd-post-b02-convergence-01--flexible_skill_duration--attempt-01__03_TRANSPORT_FACTS.json",
+    "response_sha256": "4435ba04d361c243bcfa6198bf62b05ce60e742eb668d4f01999254b9df411e8"
+  },
+  "wait_status": "NATURAL_COMPLETION",
+  "observed_page_state": "complete assistant response; Copy response present; no active generation control",
+  "capture_method": "Copy response via CUA clipboard.readText",
+  "archive_status": "ARCHIVED",
+  "timestamps": {
+    "sent_at": "2026-09-08T12:33:59Z",
+    "completed_at": "2026-09-08T12:47:04Z",
+    "captured_at": "2026-09-08T12:47:04Z",
+    "archived_at": "2026-09-08T12:47:04Z"
+  },
+  "scientific_decision_formed": false,
+  "captured_at": "2026-09-08T12:47:04Z",
+  "notes": [
+    "Exactly one provider Send occurred; no second Send or repair prompt was attempted."
+  ],
+  "return_receipt": {
+    "status": "SENT",
+    "attempt_count": 1,
+    "delivery_status": "accepted",
+    "message_key": "2026-09-08-fsd-post-b02-convergence-01|flexible_skill_duration|6a9c2865-14a8-83e8-b556-e7f5836d9236|4435ba04d361c243bcfa6198bf62b05ce60e742eb668d4f01999254b9df411e8",
+    "sent_at": "2026-09-08T12:47:47Z"
+  }
+}

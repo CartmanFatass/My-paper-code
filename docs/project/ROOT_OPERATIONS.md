@@ -2,11 +2,21 @@
 
 Portfolio (`gpt-6-astra`, effort selected by the owner) plans the research queue and prepares bounded commands.
 Root (`gpt-5.6-luna` / `xhigh`) executes those commands, integrates specified deliveries,
-observes accepted experiments and performs exact Pro transport. The owner directs this
+observes accepted experiments and dispatches exact Pro handoffs. Independent Transport
+(`gpt-5.6-luna` / `high`) handles all Pro browser operations and parent receipts. The owner directs this
 boundary. DM owns scientific decisions within its existing delegation; CM owns technical
 judgment and acceptance. Existing Pro authority, scientific budgets and model settings remain.
 
 ## Endpoints and files
+
+OWNER_DIRECT 2026-09-08: before messaging Portfolio, apply
+`SIBLING_COMMUNICATION.md` **Send/no-send conditions**. Send only a specific requested
+reply or a new unresolved command/conflict/repair need; execute supplied return routes
+without reporting them. Do not repeat an unchanged pending request. Root owns the main
+index by default and does not request idle confirmation or notify release for routine
+commits/integrations. Only Portfolio initiates an actual temporary index transfer under
+that document's exact steps. Batch ready routine receipts at clean boundaries, push every
+commit immediately, and do not delay independent dispatch for logging.
 
 Root is task `01a07249-b095-7821-8ce2-e9c32ba85267` in `C:/Projects/HMASD`.
 Portfolio's exact task and checkout are in `.codex/hmasd-portfolio.toml`; it works directly
@@ -15,6 +25,57 @@ on main and owns `docs/research/portfolio/PORTFOLIO.md`. Root owns operational f
 explicit paths and push immediately. Current commands belong beside the current Portfolio
 working set; their dispatch/handle/receipt facts belong in existing tracking. Historical
 records are evidence, not a command queue.
+
+## Independent Transport and native return routing
+
+OWNER_DIRECT 2026-09-07: reuse Transport task `01a07e52-f085-76a0-886a-4127f490421f`,
+configured in `.codex/hmasd-transport.toml`, in the shared local checkout. Root owns direction
+dispatch, integration, experiment observation and native forwarding. Transport alone owns Pro
+browser actions, request state, tab leases, archives and its outbox. It never selects science,
+refills the working set or launches experiments. Root does not wait in a provider page.
+
+The ordinary route is native DM/CM → Root → Transport → Root → original native DM/CM.
+The author supplies exact request ID, HANDOFF path/full commit, fixed TASK URL and return
+target from the existing command. `source_thread_id` is the actual author UUID;
+`parent_thread_id` is Root's app-task UUID for native directions, and `operator_thread_id` is
+Transport's UUID. Root dispatches the unchanged handoff with `send_message_to_thread` to
+Transport. A native author's direct app dispatch requires an already-authorized command and
+the same Root parent; Transport must never infer parent from source. Portfolio's own requests
+retain Portfolio as parent. All app messages omit model/thinking overrides.
+
+Transport persists acceptance and handles each pending request independently. It sends one
+completion or terminal-blocker receipt to the exact parent, using the existing outbox and
+message key. Root matches request/command/recipient and forwards the original evidence with
+native `followup_task` for the required intake/continuation, following the intent-based tool
+rule in SIBLING_COMMUNICATION.md. A source UUID
+is not a native tool address. If the recipient is unavailable, Root uses the supplied recovery
+route or asks Portfolio for the concrete missing route, preserving the receipt. A received
+receipt cannot cause another Pro Send or duplicate intake. Routine receipt handling stays in
+the Root log; only new command/repair needs wake Portfolio. Transport never sends a second
+receipt to the source or to Portfolio as an informational copy.
+
+While requests remain pending, Transport interleaves due observations and receipts with waits
+of at most 60 seconds. Root remains free for other directions. If Transport becomes idle or
+fails while a named request remains pending, Root consults its existing persisted state and
+sends an observation/recovery-only continuation to the same task; this is not a new Send.
+Use compact task snapshots on a meaningful event or pending-task recovery, not continuous
+app polling. An app tool response alone does not show that this particular request entered
+Transport's queue or reached provider Send. At the next event boundary reconcile an otherwise
+unrepresented request against Transport's existing request state and current task; recover only
+that same pending route when idle, preserving unknown Send state. Neither a task restart nor
+migration creates a new goal, scheduler or conversation.
+
+For migration, Root first persists and releases its browser/request writer at a recoverable
+boundary; Transport verifies the named inventory before adopting it. Preserve accepted TASK,
+HANDOFF, source/parent/operator metadata, provider/message identities, archives and receipt
+attempts. Record the actual new `execution_thread_id` only for adopted unfinished work, with
+the owner handover evidence; do not restage completed LOCAL/SENT receipts. Accepted or uncertain
+requests are reconciled from their original binding, not rejected as new packets or resent to
+fit the new endpoint. Unsent handoffs receive an explicit routing-only dispatch envelope naming
+the new executor/high setting and the unchanged source, parent, TASK and prompt; preserve the
+original and validate the envelope against current config. Only execution metadata changes.
+Completed history is not imported as a pending queue. Current migration evidence is in
+`TRANSPORT_SESSION_MIGRATION_20260907.md`.
 
 ## Authoring branches
 
@@ -27,8 +88,12 @@ local pushes. Extra delivery branches need a concrete special isolation reason; 
 temporary. Existing accepted requests retain their bindings through archival/intake or explicit
 obsolete-request resolution. One completed Pro round does not retire a shared branch still in use.
 At completion Root integrates accepted commits, preserves other unique commits and dirty files,
-reconciles live writers/PRs/delivery dependencies, and retires obsolete local and remote names.
-Historical detached worktrees may retain evidence; retiring a branch does not delete their files.
+reconciles live writers/PRs/delivery dependencies, verifies recovery archives for unique commits
+and noncommitted evidence, then unregisters and removes obsolete worktree directories and retires
+obsolete local and remote names. A detached full checkout is not a recovery archive. Keep the
+shared direction checkout while in use; an extra retained checkout names its actual live
+dependency and cleanup owner/event in the existing return. Verify removed paths are absent both
+on disk and from `git worktree list` before reporting reclamation complete.
 
 ### Reconcile routing when branches are retired
 
@@ -59,11 +124,20 @@ accepted Pro generation once per direction; completed tasks and unresolved waits
 
 ## Root's execution loop
 
+OWNER_DIRECT 2026-09-07 rolling parallelism: each direction advances when its own dependency
+arrives. A command batch is packaging and creates no completion barrier. Before each blocking
+wait, service available returns, integrate the needed bounded delivery and dispatch its named
+follow-on; request an exhausted slot's replacement immediately. Portfolio supplies incremental
+commands without waiting for all directions. Keep unrelated native work, experiments and
+accepted Pro generation advancing. Wait for the first event for at most 60 seconds, then
+service new events before another observation pass. Long integration work
+yields at recoverable boundaries; Transport's browser work never locks Root's event loop.
+
 Use [hmasd-loop-dispatch](../../.agents/skills/hmasd-loop-dispatch/SKILL.md), Root section,
 when receiving commands, native returns, failed dispatches or vacancies, including after
 an observation pass within the active goal. Read it directly from the repository if the current session's skill
-catalog predates its addition. It supplies the dispatch-before-wait sequence, whole-working-set
-receipt and exact conditions for reporting gaps. Root executes named choices; Portfolio
+catalog predates its addition. It supplies the dispatch-before-wait sequence, per-event dispatch
+receipts and exact conditions for reporting gaps. Root executes named choices; Portfolio
 owns readiness and replacement planning. DM and CM retain their scientific/technical work.
 
 Tool addressing and native/app message differences live in
@@ -73,47 +147,69 @@ handoffs use Author-rendered provider settings inside the request packet, not as
 overrides, and Transport's identity/acceptance procedure. Root records its own receipts locally rather than app-messaging
 itself. A native DM with Root as app parent receives its result through native collaboration.
 
+### Execute the supplied launch command
+
+Use the current CM's committed command/script and its exact node, source, cwd, output and
+handle fields. Do not rebuild paths from a similar previous run or retype nested shell payloads.
+Before submitting that command, compare its cwd with the actual staged checkout and its bound
+source using the existing staging facts. A disagreement goes to the same CM for a mechanical
+correction. When transporting shell text from Windows to Linux, preserve literal variables and
+LF bytes; syntax-check the actual staged wrapper without executing the scientific payload.
+Reuse that checked wrapper for the authorized submission. These are short transport checks,
+not an extra experiment, new launcher framework or Portfolio approval.
+
+Supervisor acceptance, admission and scientific execution are separate facts. If a command
+fails before admission, retain its exact failed identity and evidence; continue only the
+already-authorized correction after acceptance is reconciled. Never infer a scientific retry,
+changed source or extra allocation from a wrapper failure.
+
 ### Report events
 
-Apply SIBLING_COMMUNICATION.md's Root-to-Portfolio notification filter. Record routine receipts
-in `docs/research/portfolio/root-log/YYYY-MM-DD.md`; completion of an intermediate step is not
-itself a Portfolio notification. An actionable message gives the needed decision, original
-evidence and working-set delta, including an advancing-chain count when capacity changes.
-Report a yielded/unavailable direction needing a replacement immediately. Known routes
-continue without an extra Portfolio exchange. A changed command's scope replaces only the
-specified earlier boundary; an unrelated preparation-only task does not suspend the batch.
+Use the single **Send/no-send conditions** section in SIBLING_COMMUNICATION.md.
+A new task gap includes its evidence and actual working-set delta; routine events and
+unchanged pending requests stay in the log. The routing responsibilities below do not
+create additional notification exceptions.
 
-Missing scope, next-task choices, authorization/skill applicability, transport/tool permissions
-and scheduling gaps route from Root to Portfolio first, with the affected action, evidence and
-existing authority. Root does not ask DM to invent the missing command or approve the workflow.
-Portfolio handles the planning question and may assign a bounded scientific/technical inquiry;
-DM retains object-tier decisions inside its assigned task and CM ordinary in-scope repair.
-Root also sends a prompt repair request for an unresolved execution, input, access/tool or
-uncertain-state problem outside its assigned repair path. Portfolio arranges the bounded fix
-and returns the next step; routine-message filtering must never suppress this help channel.
-This is not a new approval gate for accepted work, nor authority for Portfolio to bypass a real
-runtime restriction or grant permission reserved to the owner. Unrelated authorized work continues.
+OWNER_DIRECT 2026-09-08: Root owns the delegated direction task through acceptance and
+authorized continuation. On a direction-local return, resume the original DM; the DM owns
+object decisions, proper-node questions and CM implementation/repair. Root integrates accepted
+work and handles exact execution/Transport routing. A complete selected card/specification
+continues to CM through its DM; missing committed dependencies are ordinary source integration
+when the exact inputs are known. Child completion or forwarding is not the parent deliverable.
+
+Portfolio is needed for a working-set replacement, cross-direction choice, or concrete scope,
+authority or resource conflict beyond that DM/CM route. An omitted intermediate instruction,
+ordinary technical failure or need to resume the DM does not create that conflict. Root first
+uses the existing responsible DM/CM and sends Portfolio only the unresolved issue that requires
+Portfolio action. Explicit scientific caps, actual tool restrictions, uncertain acceptance and
+owner-only decisions remain binding; no recipient can waive them. Independent work continues.
 
 ## Goal-driven observation
 
 OWNER_DIRECT 2026-09-07: the owner uses a goal to drive automatic execution and deleted the
-previous observation automation. Root observes assigned experiment handles and exact current
-Pro requests within that active goal. `.codex/hmasd-monitor.toml` names the endpoint, not a
-schedule. Do not create or reactivate an observation automation. Use `EXPERIMENT_MONITOR.md`
-for adoption and the Transport skill
-for exact request identity, model verification, Send state, archiving and receipt delivery.
-The observation pass checks accepted work; it does not select tasks or refill the research queue.
+previous observation automation. Root observes assigned experiment handles within that active
+goal and receives Pro facts from independent Transport. `.codex/hmasd-monitor.toml` names
+Root's experiment endpoint, not a schedule. Do not create an observation automation. Use
+`EXPERIMENT_MONITOR.md` for experiment adoption; Transport uses its skill for request identity,
+model verification, Send state, archiving and receipt delivery. Root does not adopt a Pro browser
+as a way to monitor Transport. Observation does not select tasks or refill the research queue.
 
-Keep pending experiments and Pro requests recoverable in their existing records and observe
-them during goal execution. An unresolved blocker goes promptly to Portfolio under the help
+Keep pending experiments and Transport request references recoverable in their existing records.
+Root observes experiments; Transport observes Pro requests and supplies receipts. The current
+tracking table is a compact set of accepted handles, outstanding returns, responsible recipients
+and their actual dispatch states. Update a row on adoption, terminal observation or accepted
+continuation; link detailed daily-log/evidence records instead of appending competing current
+snapshots. Retired routing procedures belong outside this live table. An unresolved blocker goes promptly to Portfolio under the help
 rule; unchanged waits need no repeated message. Empty observation state does not mean the
 research goal is complete. Owner pause/end preserves accepted processes and pending request
 evidence with an explicit observation handover, without a replacement scheduler.
 
-Each observation pass reads current assigned rows, batches independent supervisor checks, observes due Pro
-requests serially and applies the shared dispatch skill. It executes remaining explicit commands and
-return routes; unlisted actions go to Portfolio. Historical handles and requests are not adopted
-by scanning archives. Reuse the owner's goal; no new scheduler, polling task or replacement goal is created.
+Each Root observation pass reads current assigned experiment rows, batches independent
+supervisor checks, services received Transport/native events, and applies the dispatch skill.
+Transport performs its own due Pro reads. Root executes remaining explicit commands and return
+routes; direction-local continuation returns to its DM, while choices beyond that authority go
+to Portfolio. Historical handles/requests are not adopted by scanning
+archives. Reuse the owner's goal; no new scheduler, polling task or replacement goal is created.
 
 Owner pause changes the affected work first while preserving accepted-process observation and
 unknown-Send evidence. Waiting for one conversation does not hold other issued commands.

@@ -7346,7 +7346,7 @@ class HMASDAgent:
     def load_model(self, path):
         """加载模型"""
         # 导入 Config 类并将其添加到安全列表
-        from config_1 import Config
+        from configs.config_1 import Config
         import numpy.core.multiarray
         torch.serialization.add_safe_globals([Config, numpy.core.multiarray._reconstruct])
         

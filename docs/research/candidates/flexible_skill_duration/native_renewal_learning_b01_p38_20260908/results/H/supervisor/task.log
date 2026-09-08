@@ -1,0 +1,19 @@
+=== Task 'fsd_native_b01_p38_H_b3f86bb28' started at 2026-09-08T16:53:16+08:00 ===
+{
+  "assessed_at": "2026-09-08T08:53:16.220948Z",
+  "available_physical_bytes": 15650050048,
+  "captured_at": "2026-09-08T08:53:16.220661Z",
+  "cgroup_headroom_bytes": null,
+  "cgroup_memory_current_bytes": null,
+  "cgroup_memory_max_bytes": null,
+  "effective_available_bytes": 15650050048,
+  "effective_floor_pass": true,
+  "failure_reasons": [],
+  "measurement_source": "/proc/meminfo",
+  "minimum_available_bytes": 4294967296,
+  "passed": true,
+  "physical_floor_pass": true,
+  "schema_version": 1
+}
+{"status": "complete", "failure": null, "wall_seconds_after_publication": 322.0350280770217}
+=== Task 'fsd_native_b01_p38_H_b3f86bb28' exited with code 0 at 2026-09-08T16:58:50+08:00 (Duration: 334s) ===

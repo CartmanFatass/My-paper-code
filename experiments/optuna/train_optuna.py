@@ -26,8 +26,8 @@ DEFAULT_STORAGE = f"sqlite:///{Path(__file__).with_name('hmasd_optuna.db').as_po
 sys.path.insert(0, str(PROJECT_ROOT))
 
 # 导入训练函数和配置
-from train_multiproc_config_1 import train, get_device, make_env, parse_args as parse_train_args
-from config_1 import Config
+from experiments.launchers.train_multiproc_config_1 import train, get_device, make_env, parse_args as parse_train_args
+from configs.config_1 import Config
 from hmasd.logging import init_multiproc_logging, get_logger, LOG_LEVELS
 
 
@@ -111,7 +111,7 @@ def objective(trial):
     # 基础参数 (非优化参数)
     train_args.exp_name = f"optuna_trial_{trial.number}"
     train_args.seed = 42 + trial.number  # 为每个trial使用不同的种子
-    train_args.config = 'config_1'  # 使用基础配置
+    train_args.config = 'configs.config_1'  # 使用基础配置
     train_args.scenario = 4  # 强制中继模式
     train_args.model_path = f'models/optuna_trial_{trial.number}.pt'
     train_args.log_dir = str(LOG_DIR)

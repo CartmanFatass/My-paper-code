@@ -1,0 +1,200 @@
+{
+  "object_id": "VSP02-TEAMMATE-POLICY-CHANGE-B01",
+  "evidence_class": "B/EXPLORE",
+  "authority": {
+    "kind": "OWNER_DELEGATED P17 object-tier allocation under 2026-09-03 unattended instruction",
+    "commit": "a787ff12cd0212b9fd23d9d861d5d192186028fe",
+    "path": "docs/research/portfolio/handoffs/2026-09-07-p17-cbsc-execution-vsp02-fresh-prefix.md",
+    "section": "VSP02 — one fresh same-comparison prefix at master1117"
+  },
+  "authoring": {
+    "checkout": "C:\\Projects\\HMASD-worktrees\\dm-vsp02",
+    "branch": "codex/vsp02",
+    "starting_sha": "38caa4c94151cf4025a258a75084271083f74a34",
+    "starting_status": "clean",
+    "contract_revision": "the exact pushed commit returned with this prospective amendment; distinct from execution source"
+  },
+  "launch_sha": "19be5ee18393913ff92693cdf037213ec1777510",
+  "config": {
+    "prefix_episodes": 4096,
+    "adaptation_episodes": 1024,
+    "evaluation_episodes": 64,
+    "checkpoints": [
+      16,
+      32,
+      64,
+      128,
+      256,
+      512,
+      768,
+      1024
+    ],
+    "wall_seconds": 1800,
+    "seed": 1117,
+    "engineering_fixture": false,
+    "horizon": 48,
+    "rollout_episodes": 16,
+    "epochs": 4,
+    "minibatches_per_epoch": 4
+  },
+  "planned_counts": {
+    "training_episodes": 6144,
+    "training_joint_steps": 294912,
+    "rollout_batches": 384,
+    "optimizer_steps": 6144,
+    "evaluation_episodes": 1152,
+    "evaluation_joint_steps": 55296,
+    "joint_steps_total": 350208,
+    "ppo_transition_passes": 1179648
+  },
+  "work_by_segment": [
+    {
+      "segment": "shared_prefix_and_q0",
+      "training_episodes": 4096,
+      "training_joint_steps": 196608,
+      "evaluation_episodes": 128,
+      "evaluation_joint_steps": 6144,
+      "optimizer_steps": 4096
+    },
+    {
+      "segment": "CARRY",
+      "training_episodes": 1024,
+      "training_joint_steps": 49152,
+      "evaluation_episodes": 512,
+      "evaluation_joint_steps": 24576,
+      "optimizer_steps": 1024
+    },
+    {
+      "segment": "RESET",
+      "training_episodes": 1024,
+      "training_joint_steps": 49152,
+      "evaluation_episodes": 512,
+      "evaluation_joint_steps": 24576,
+      "optimizer_steps": 1024
+    }
+  ],
+  "algorithm_factors": {
+    "training": "(P + 2*Q)*H, four PPO passes",
+    "evaluation": "(E + E + 2*len(checkpoints)*E)*H",
+    "new_nested_search": 0,
+    "added_validation_invocations": 0
+  },
+  "prior_complete_seed1103": {
+    "exposure": {
+      "environment_transitions": 350208,
+      "optimizer_steps": 6144,
+      "evaluation_episodes": 1152,
+      "model_selection_trials": 0,
+      "result_bearing_invocations": 1,
+      "independent_training_pairs": 1
+    },
+    "primary": {
+      "carry_sum": 7648.0,
+      "reset_sum": 7667.0,
+      "carry_mean": 7.46875,
+      "reset_mean": 7.4873046875,
+      "delta_reset_minus_carry": 0.0185546875,
+      "absolute_mei": 0.5,
+      "total_mei_deliveries": 512,
+      "observed_total_difference": 19,
+      "fraction_of_mei": 0.037109375,
+      "relative_to_carry": 0.0024843096234309623
+    },
+    "runner_wall_seconds": 36.69615292199887,
+    "supervisor_chain_seconds": 38,
+    "movement": {
+      "initial_parameter_rms": 0.07666852325201035,
+      "first_prefix_rollout": {
+        "displacement_rms": 0.0023259019944816828,
+        "global_steps": 16
+      },
+      "prefix_end": {
+        "displacement_rms": 0.06980965286493301,
+        "global_steps": 4096
+      },
+      "prefix_final_observed": {
+        "displacement_rms": 0.06980965286493301,
+        "global_steps": 4096
+      },
+      "CARRY": {
+        "displacement_rms": 0.019422367215156555,
+        "global_steps": 5120,
+        "steps_since_fork": 1024,
+        "adam": {
+          "global_steps": 5120,
+          "state_entries": 10,
+          "step_min": 5120.0,
+          "step_max": 5120.0,
+          "exp_avg_norm": 0.12091189728290806,
+          "exp_avg_sq_norm": 0.03345876013558806
+        }
+      },
+      "RESET": {
+        "displacement_rms": 0.02313823625445366,
+        "global_steps": 5120,
+        "steps_since_fork": 1024,
+        "adam": {
+          "global_steps": 5120,
+          "state_entries": 10,
+          "step_min": 1024.0,
+          "step_max": 1024.0,
+          "exp_avg_norm": 0.12406915671115999,
+          "exp_avg_sq_norm": 0.021598693145882128
+        }
+      }
+    },
+    "resources_unmeasured": false
+  },
+  "p17_current_exposure": {
+    "environment_transitions": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0,
+    "model_selection_trials": 0,
+    "result_bearing_invocations": 0
+  },
+  "cumulative_if_p17_completes": {
+    "training_episodes": 12288,
+    "training_joint_steps": 589824,
+    "rollout_batches": 768,
+    "optimizer_steps": 12288,
+    "evaluation_episodes": 2304,
+    "evaluation_joint_steps": 110592,
+    "joint_steps_total": 700416,
+    "ppo_transition_passes": 2359296
+  },
+  "independent_unit": "one learned prefix and its entire matched CARRY/RESET pair; if complete, seed1117 adds one to seed1103 for n=2, with no episode/checkpoint pseudo-replication",
+  "prediction": {
+    "primary": "Delta RESET minus CARRY native full-window mean",
+    "interval": [
+      -0.5,
+      0.5
+    ],
+    "strict_sign_prediction": null,
+    "provenance": "prospective DM prediction informed by observed seed1103; preserves original MEI and does not rewrite first forecast",
+    "owner_prediction": "not taken (unattended)"
+  },
+  "bindings": {
+    "node": "wsl_4070",
+    "ssh_target": "hmasd-wsl-node",
+    "device": "cpu",
+    "dtype": "float32",
+    "intraop_threads": 1,
+    "interop_threads": 1,
+    "python": "/home/wu/.venvs/hmasd/bin/python",
+    "remote_repository": "/home/wu/projects/HMASD",
+    "remote_cwd": "/home/wu/hmasd-worktrees/vsp02-tpc-b01-p17-s1117-a1",
+    "supervisor_handle": "vsp02-tpc-b01-p17-s1117-a1",
+    "output": "temp/directions/vsp_02/exp/teammate_policy_change_b01_p17_s1117_a1",
+    "admission_receipt": "temp/directions/vsp_02/exp/admission/tpc_b01_p17_s1117_a1.json",
+    "supervisor_log": "/home/wu/.agent-tasks/vsp02-tpc-b01-p17-s1117-a1/task.log",
+    "launch_command_on_node": "/usr/local/bin/agent-task run vsp02-tpc-b01-p17-s1117-a1 \"cd /home/wu/hmasd-worktrees/vsp02-tpc-b01-p17-s1117-a1 && env OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/vsp_02/exp/admission/tpc_b01_p17_s1117_a1.json && env OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 /home/wu/.venvs/hmasd/bin/python -u scripts/run_vsp02_teammate_policy_change_b01.py --seed 1117 --out temp/directions/vsp_02/exp/teammate_policy_change_b01_p17_s1117_a1\"",
+    "status_query": {
+      "observed": "not_found",
+      "by": "DM read-only query before publication; not resource admission or launch"
+    },
+    "admission_status": "not performed; Root runs fresh on-node admission adjacent to runner after publication"
+  },
+  "cm_binding_receipt": "# P17 unchanged-source launch binding (read-only preparation)\n\nAuthoring checkout: C:/Projects/HMASD-worktrees/dm-vsp02, codex/vsp02.\nObserved clean HEAD: 38caa4c94151cf4025a258a75084271083f74a34.\nAll eight accepted package/runner/test files match the Git-normalized blob content of\n19be5ee18393913ff92693cdf037213ec1777510. Read-only git rev-parse plus git hash-object\n--path comparisons passed for each; no source changes or runtime guard were added.\nRunner passes argparse --seed directly to StudyConfig; absence of --engineering-fixture\nselects B_EXPLORE P4096/Q1024/E64/H48, eight post checkpoints, 1800s cap. CPU FP32 and\none intra-op/inter-op thread remain unchanged. No workload import, test, fixture,\nadmission, handle query or launch was performed. The existing DM not_found observation\nis reused. P17 VSP02 allocation was read at a787ff12cd0212b9fd23d9d861d5d192186028fe.\n\nRoot must provision the detached execution worktree at exact launch/source SHA\n19be5ee18393913ff92693cdf037213ec1777510; summary source revision remains that SHA.\nThe forthcoming pushed card/amendment publication SHA is a separately bound contract\nrevision, not the execution checkout SHA. Card section9 is DM-owned.\nThe literal below is for the remote shell on hmasd-wsl-node, not nested PowerShell\nbackslash-escaped quoting. It is supplied only, not executed.\n\n```bash\n/usr/local/bin/agent-task run vsp02-tpc-b01-p17-s1117-a1 \"cd /home/wu/hmasd-worktrees/vsp02-tpc-b01-p17-s1117-a1 && env OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/vsp_02/exp/admission/tpc_b01_p17_s1117_a1.json && env OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 /home/wu/.venvs/hmasd/bin/python -u scripts/run_vsp02_teammate_policy_change_b01.py --seed 1117 --out temp/directions/vsp_02/exp/teammate_policy_change_b01_p17_s1117_a1\"\n```\n\nOnly master1117 and the fresh cwd/handle/output/admission paths differ from P15.\nThe preserved P15 mechanical quoting no-op does not authorize duplicating an uncertain\naccepted command. Root owns dispatch/observation; this CM collects only after its receipt.\nNo commit was created. This is execution preparation, excluded from new coding comparison.\n",
+  "engineering_scope_section4": "none",
+  "exposure_line": "p17_actual_result_bearing_invocations=0; p17_actual_environment_transitions=0; planned_training_joint_steps=294912; planned_optimizer_steps=6144; planned_evaluation_episodes=1152; planned_total_joint_steps=350208; learner_movement_reference=complete_seed1103_same_source; first_16_step_displacement_relative_to_initial_rms=0.030337117448270334"
+}

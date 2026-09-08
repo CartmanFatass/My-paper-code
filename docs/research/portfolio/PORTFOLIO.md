@@ -1,6 +1,121 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-07 (P10 five native dispatches accepted; goal targets five UAV entries)
+Updated at: 2026-09-08 (P54 rolling refill after MGTAP P51; Root closes direction delegations through their DMs)
+
+Current vacancy refill: [P54 VSP03 defined greedy-use re-entry](handoffs/2026-09-08-p54-vsp03-greedy-use-reentry.md) assigns the specific conditional question retained by the accepted post-B02 decision: whether a defined greedy-execution use justifies ordinary G replacing R0 after dropping event initialization. It preserves the paused T/initialization comparison, small generic gains and adverse stochastic results. Reuse the existing VSP03 checkout and complete any proper-node question/intake and conforming selected-object route through the same DM/CM. MGTAP P51's family pause is fully intaken with no successor and no advancing task; this refill changes no lifecycle, priority or recast count. Root reports four other advancing routes (FSD, UCOPE, VSPC1, DISH); P54 counts only on actual dispatch/work, and FRRIE/CBSC and RCLE retain their unresolved dependencies. No scientific invocation is allocated during source-question preparation.
+
+Current VSPC1 continuation: [P49 B01 execution](handoffs/2026-09-08-p49-vspc1-native-value-question.md) resumes the original DM to organize the selected B01 CM implementation/review, accepted-source binding, one bounded seed8101 pair and intake. Complete source637406340 supplies the missing committed UCOPE dependencies through normal integration in the existing direction checkout. Root owns execution closure; ordinary direction-local continuation stays with the DM. Portfolio retains cross-direction choices and actual conflicts beyond DM/CM authority.
+
+Current fifth-direction command: [P53 DISH ordinary-proposal question](handoffs/2026-09-08-p53-dish-native-proposal-question.md) reuses the existing DISH checkout for one concrete source question after the completed B06 decision. It asks whether causal local information supports a fair ordinary-proposal/learning intervention under unchanged native commit/application rules; invalid commits or zero transfers do not prove a cause, and privileged masks or forced source events are excluded. A surviving case goes once to the proper DISH Convergence node and full intake/preparation; otherwise it yields. No model, native invocation, implementation, lifecycle change or new local worktree is selected. Together with FSD P52, UCOPE P50, MGTAP P51 and VSPC1 P49 this supplies five direction routes, counted only while actually advancing. FRRIE/CBSC and RCLE retain their named unresolved recovery/acceptance dependencies.
+
+Current FSD return route: [P52 post-fixed-clock decision](handoffs/2026-09-08-p52-fsd-post-fixed-clock-decision.md) resumes the same DM after accepted complete B03 intake (`9392aafb3`). H−D0 +0.3928645833 supports a local package advantage while G−H +0.1152864583, weak actual D0 and unequal internal optimization exposure bound its meaning. The selected panel is answered. One proper-node next-object question and complete intake/preparation route are authorized with zero new scientific invocation; no repeated pair, cap change or UAV-entry claim follows. Reuse `codex-fsd` throughout.
+
+Current incremental refill: [P51 MGTAP native geometry question](handoffs/2026-09-08-p51-mgtap-native-geometry-question.md) reuses the existing `dm-n5-continue-20260904` checkout for one source-supported geometry/binding question on the accepted UCOPE native learner. The source already exposes relative geometry; no treatment gain, new B or UAV entry is presumed. A surviving question goes once to the proper MGTAP Convergence node, then through complete intake and any selected card/specification. FSD intake, UCOPE P50 and VSPC1 P49 intake continue independently. FRRIE/CBSC production repair and actual tool restrictions, plus RCLE's uncertain acceptance, remain named unresolved dependencies; no duplicated preparation or restricted operation is used to inflate the five-chain count.
+
+Current repair command: [P50 UCOPE exact-source staging](handoffs/2026-09-08-p50-ucope-exact-source-staging-repair.md) resumes the same DM/CM in the existing direction checkout to resolve repeated GitHub SSL staging failure. Use the accepted committed objects already on the selected node, or transfer missing committed objects over its existing authenticated SSH/SCP route, preserving the exact 637406340 source and all P47/P48 scientific bounds. No local authoring copy, source substitution, security-setting change or new scientific exposure is selected. FSD's complete G/D0/H panel proceeds to scientific intake; actual pending/returned chains count only when advancing. Other actionable vacancies receive incremental commands when their inputs are ready.
+
+Current incremental disposition: [P48 UCOPE functional acceptance](handoffs/2026-09-08-p48-ucope-functional-acceptance.md) accepts the completed, independently reviewed B02 implementation/fixture evidence while retaining its80.578s versus60s engineering overrun. No repeat smoke or speculative optimization is required; P47's7001/7002 scientific route and original caps continue. RCLE exact-request recovery is BLOCKED on unproven provider acceptance and counts zero after its return; the fifth-slot choice remains Portfolio's task, with the other four chains retained.
+
+Current rolling refill: [P49 VSPC1 native value-sharing question](handoffs/2026-09-08-p49-vspc1-native-value-question.md) assigns the new concrete UCOPE native environment/learner interface as a read-only source for one K4 comparison question, with one conditional Convergence consultation and full intake/preparation route. This is distinct from completed P10 service-allocation preparation; no old rule comparison or scientific run is repeated. VSPC1 replaces RCLE's yielded execution slot only after actual dispatch, retaining FSD/UCOPE/FRRIE/CBSC. No lifecycle/priority or UAV-entry change follows.
+
+Current command: [P47 research resume and ordinary recovery](handoffs/2026-09-08-p47-research-resume-and-recovery.md). OWNER_DIRECT restores research progression and Root's original five-direction/five-UAV-entry goal. FSD B03 and UCOPE B02 proceed from completed specifications through implementation, review and their selected bounded experiments. FRRIE and CBSC remain in the working set for normal crash repair and affected-path verification; unresolved code problems do not justify bypassing those directions or serializing independent science. RCLE receives exact-request Transport recovery. Use fresh native instances per the owner's instruction, existing direction checkouts, and rolling returns. Actual acceptance/counts belong to Root's log; unresolved idle waits count zero. Lifecycle, priority and historical results remain unchanged.
+
+Completed preparation: [P46 FSD fair-D0 comparison preparation](handoffs/2026-09-08-p46-fsd-fair-d0-preparation.md), integrated at c24a3a78b. The prospective card/full spec bind keys770403/770404 and D0/H/G1200/900/60s. P47 now supplies implementation and the selected one-panel execution route. UCOPE P33 preparation is also complete; P47 supplies its common per-agent-clipping implementation and7001/7002 pair route under the existing B02 card.
+
+Completed incremental command: [P45 FSD post-B02 Convergence](handoffs/2026-09-08-p45-fsd-post-b02-convergence.md). Formed response128f90b3 and intakedf5f8c891 select option B, preserving the DM's earlier preference for A. The selected fixed-clock comparison is not an identical third C/H pair, UAV transfer or Portfolio disposition.
+
+Completed incremental command: [P44 FSD post-B02 question assessment](handoffs/2026-09-08-p44-fsd-post-b02-question.md). The two-pair package question is answered; the inspected UAV movement interface differs from the corridor applied lease mask. The scoped next choice belongs to Convergence; its recommended disposition remains unapplied pending that decision.
+
+Completed incremental command: [P43 FSD B02 independent-pair panel](handoffs/2026-09-08-p43-fsd-b02-panel-execution.md). Intakea8e6d5b31 accepts B02 H−C+.520390625, conditionalSE.007576081 and665.01s summed wall; B01 remains separate. Public G leads by.010846354 full. No stable-superiority, learned-renewal or UAV-entry claim follows; no third pair was selected.
+
+Completed incremental command: [P42 FSD B02 seed/input implementation](handoffs/2026-09-08-p42-fsd-b02-seed-implementation.md). Implementation and independent RNG/identity review are accepted;24 synthetic cases passed. P43 separately allocates runtime and launch binding.
+
+Historical recovery dependency: [P41 FRRIE static complete-deadline method](handoffs/2026-09-08-p41-frrie-static-namespace-method.md) remains incomplete for its named method. Later direct [core analysis and diagnostic](../candidates/finite_resource_relational_inductive_efficiency/NATIVE_CRASH_FORENSIC_RESULT_20260908.md) preserves nine dumps, reads four and records a passing simplified six-million-call check; no production fix is accepted. P47 resumes ordinary FRRIE/CBSC recovery without turning this particular method or complete historical causal explanation into a general research prerequisite. Real tool restrictions and frozen invocation limits still apply.
+
+Retained incremental command: [P40 FSD independent trained pair](handoffs/2026-09-08-p40-fsd-independent-pair-preparation.md). B01's valid one-pair H−C+0.497383 supports preparation of one fresh independent pair at the same comparison/budget. Freeze unused training/evaluation masters and the minimal seed/input implementation spec; no runtime or code implementation is yet allocated.
+
+Retained incremental command: [P39 FRRIE native fault context](handoffs/2026-09-08-p39-frrie-native-fault-context.md). A07 retained a fatal Python path, missed its scheduled MEI and exhausted P35/P37. Reuse attributable retained crash material first; only if unusable prepare at most one120s native observation with established complete containment. Reuse P36 capability/gap evidence; no setup or Python-only repeat. Actual dispatch remains a Root fact.
+
+Completed incremental command: [P38 FSD native-renewal learning panel](handoffs/2026-09-08-p38-fsd-learning-b01-execution.md). Accepted B01 intake atbdf9d024b reports H0.872604,C0.375221,G0.893789, one trained pair and708.25s total wall. The package advantage is conditional on this pair; stable superiority and learned renewal remain unsupported. P40 is the separately issued follow-up preparation.
+
+Retained incremental command: [P37 FRRIE A07 command transport](handoffs/2026-09-08-p37-frrie-a07-command-transport.md). The accepted supervisor wrapper exited127 before preflight/science; preserve it and transport the same committed LF payload through a staged script under a distinct handle. P35 scientific scope/cap remain unchanged.
+
+Retained incremental command: [P36 CBSC native fatal-site context](handoffs/2026-09-08-p36-cbsc-native-fatal-context.md). P32 captured a Python projection callpath without a supported cause; check an already installed debugger, then prepare at most one120s native-context diagnostic. Missing capability yields a no-run dependency; no installation or source fix is allocated.
+
+Retained incremental command: [P35 FRRIE one scheduled stack](handoffs/2026-09-08-p35-frrie-scheduled-stack.md). A06 timed out inconclusively with no captured path; prospectively add one delayed active-stack report within one120s original-schedule diagnostic. Counts remain unknown and prior failures are not cleared. Other issued routes continue independently.
+
+Retained incremental command: [P34 FSD selected learning implementation](handoffs/2026-09-08-p34-fsd-learning-implementation.md). P30 supplies the complete accepted card/spec; the existing CM implements its bounded runner and synthetic checks with independent source review. Real model/learner execution remains unallocated.
+
+Retained incremental command: [P33 UCOPE agent-clipping successor card/spec](handoffs/2026-09-08-p33-ucope-agent-clipping-spec.md). P29 selects common per-agent clipping in both T/G within the opening-duration family; prospectively bind the two fresh masters and full code task before implementation. No scientific execution or additional UAV entry is allocated.
+
+Retained incremental command: [P32 CBSC RAW first-fault context](handoffs/2026-09-08-p32-cbsc-first-fault-context.md). P28 ended with incomplete RAW and no paired result; prepare explicit fatal-stack observation and at most one120s RAW diagnostic on unchanged source/runtime. Retain FRRIE P31,FSD P30,UCOPE P29; four routes depend on actual acceptance and the fifth remains an explicit unchanged vacancy.
+
+Retained incremental command: [P31 FRRIE fatal-callpath observation](handoffs/2026-09-08-p31-frrie-fatal-callpath.md). A05 ended inconclusive after signal11 with no captured state. Use retained readable evidence if sufficient; otherwise prepare startup fatal reporting and at most one120s original-schedule observation, with no source repair or inferred clearance.
+
+Retained incremental command: [P30 FSD native-renewal learning card/spec](handoffs/2026-09-07-p30-fsd-native-renewal-learning-spec.md). Complete P25 response/application now selects the narrow fresh C_train/H_train/G comparison; preserve the contradictory earlier delivery blocker. Prepare its card and full implementation spec with zero current code or scientific execution allocation.
+
+Retained incremental command: [P29 UCOPE opening-prefix question selection](handoffs/2026-09-07-p29-ucope-opening-prefix-reassessment.md). Completed P24 is WITHIN with retained6902 harm and generic-reference weakness; the same DM prepares one justified within-family amendment or a precise Convergence scope question. No new science or code is allocated. FSD delivery repair awaits its exact blocker archive; CBSC/FRRIE terminal intakes remain separate dependencies.
+
+Previous incremental command: [P28 CBSC B05 fresh RAW/STRUCT pair](handoffs/2026-09-07-p28-cbsc-b05-pair-execution.md). Accepted source/card/handoff are ready; allocate the exact21223 pair at600s complete per arm/1200s summed, with no extra readiness probe. Actual launches and outcomes remain Root execution facts.
+
+Retained incremental command: [P27 FRRIE first-exception capture](handoffs/2026-09-07-p27-frrie-first-exception-capture.md). P23 found no supported source correction; prepare an explicit bounded diagnostic input and run at most one120s original-schedule chain after acceptance. Nonreproduction does not clear P22. No new learning comparison or retry is allocated.
+
+Retained incremental command: [P26 UCOPE fresh-pair seed/aggregation correction](handoffs/2026-09-07-p26-ucope-fresh-pair-plumbing.md). Frozen source only accepts6801/6802; the same CM corrects bounded seed and pair metadata plumbing, then resumes the existing P24 allocation after accepted source/card bindings. No additional scientific budget or entry count is added.
+
+Retained incremental command: [P25 FSD native-control Convergence](handoffs/2026-09-07-p25-fsd-native-control-convergence.md). One direction-level question addresses the completed conditional A evidence and paused learning family. Retain UCOPE P24, CBSC P20 and FRRIE P23; actual acceptance can advance four directions. VSP02 P19 ended its instantiated family with no successor; the fifth slot remains an explicit vacancy pending a concrete independent task, without lifecycle/priority change.
+
+Retained incremental command: [P24 UCOPE two fresh UAV pairs](handoffs/2026-09-07-p24-ucope-fresh-uav-pairs.md). UCOPE has one formally entered B UAV direction under its decision/card/accepted invocation; two additional fresh training pairs are allocated after prospective seed/binding publication. FRRIE P23 continues; CBSC P20 actual dispatch is being reconciled, while latest FSD/VSP02 return references are requested. No pending intention is counted as advancing.
+
+Retained incremental command: [P23 FRRIE training-input failure assessment](handoffs/2026-09-07-p23-frrie-training-input-assessment.md). P22 ended R09_INVALID_INCOMPLETE after61.54s with a dataclasses TypeError; setup passed but no valid comparison was published. P23 examines the retained failure/source for a concrete correction or bounded missing observation, with zero runtime invocation.
+
+Previous incremental command: [P22 FRRIE exact offline R09 chain](handoffs/2026-09-07-p22-frrie-offline-r09-execution.md). P21 supplied the complete original-source command with retained wheels; one setup-through-pair invocation is allocated under its original per-arm and complete caps. Actual launch remains a Root execution fact.
+
+Retained incremental command: [P21 FSD/UCOPE execution continuations and FRRIE offline preparation](handoffs/2026-09-07-p21-fsd-ucope-frrie-continuations.md). Root reports two advancing chains and three exhausted returns. P21 restores three bounded native routes, with the named FSD panel and UCOPE two-pair allocations after ordinary code/card readiness; FRRIE prepares the offline original-source chain. Actual dispatch, launch and UAV entry require their recorded events.
+
+Retained incremental command: [P20 CBSC B05 source correction](handoffs/2026-09-07-p20-cbsc-b05-source-correction.md). P18 selected seed21223 but retained code accepts only B04 seeds; correct bounded seed/object plumbing while preserving numerical and historical behavior. No learner invocation is allocated.
+
+Retained incremental command: [P19 VSP02 family Convergence](handoffs/2026-09-07-p19-vsp02-family-convergence.md). Both accepted B01 prefixes remain within MEI; one direction-level consultation is authorized with complete archival/intake, zero new scientific execution and no presumed family disposition.
+
+Retained incremental command: [P18 CBSC fresh paired B preparation](handoffs/2026-09-07-p18-cbsc-fresh-pair-preparation.md). P17 established the declared acquisition/install/metadata path in 174.561 s with no learner exposure; prepare both new RAW/STRUCT arms on that explicit runtime. No learning invocation is allocated by P18. Other direction routes continue independently.
+
+Retained/previous incremental command: [P17 exact CBSC invocation and VSP02 master1117 pair](handoffs/2026-09-07-p17-cbsc-execution-vsp02-fresh-prefix.md). Accepted P16 engineering and VSP02 seed1103 intake now support the two named allocations; actual launches remain Root log facts. Other advancing routes continue independently. No lifecycle, priority or UAV-entry change.
+
+Previous incremental command: [P16 CBSC acquisition-command engineering](handoffs/2026-09-07-p16-cbsc-acquisition-command.md). CBSC P15 yielded at a concrete cross-node deadline/termination gap; P16 commissions bounded command engineering with zero actual acquisition or experiment allocation. Other P15 routes continue independently. No lifecycle or priority change.
+
+Retained commands: [P15 rolling refill](handoffs/2026-09-07-p15-rolling-refill-after-transport-split.md).
+Root reports all P14 chains returned/idle; comparison batch01 is complete and the accepted VSP02
+baseline is integrated on main. P15 dispatches VSP02 B01 readiness/exact one-pair continuation,
+UCOPE and FSD selected card/full-spec preparation, and
+FRRIE/CBSC distinct bounded acquisition-metadata inquiries. VSP03's paused family has no selected
+successor and yields its working-set slot to CBSC without a lifecycle/priority change. Issued
+commands are not actual advancing counts; Root's per-direction acceptance/return log records those.
+Independent Transport task `01a07e52-f085-76a0-886a-4127f490421f` owns Pro work under
+[the migration record](../../project/TRANSPORT_SESSION_MIGRATION_20260907.md), while Root applies
+the dispatch skill at each return and before waiting. One VSP02 B01 scientific pair is allocated
+under its existing1800s complete cap after named readiness; UCOPE/FSD science remains unallocated.
+No formal UAV entry is inferred from code, a Pro verdict or this dispatch document.
+
+Previous commands: [P14 selected implementation and direction continuations](handoffs/2026-09-07-p14-vsp02-code-and-direction-continuations.md).
+
+Previous commands: [P13 runtime restoration and next questions](handoffs/2026-09-07-p13-runtime-restore-and-next-questions.md).
+Root reports no live native directions after restart. P13 restores FRRIE A04 and UCOPE B05
+scientific intake, releases the exact prepared VSP02 Convergence transport, prepares VSP03's
+post-B02 direction question and commissions bounded FSD source-based re-entry preparation.
+Five assignments are a target, not five accepted active chains or UAV entries. No new experiment
+is allocated by that historical preparation command.
+
+Previous commands: [P12 prepared path and Convergence](handoffs/2026-09-07-p12-prepared-path-and-convergence.md).
+P12 retains P11's CBSC/UCOPE bounded repairs and VSP03 prospective continuation, allocates one
+prepared FRRIE A04 complete setup/T0 chain, and prepares the VSP02 Convergence question without
+a Pro Send. Actual acceptance remains Root's log fact.
+
+Previous commands: [P11 refill and execution](handoffs/2026-09-07-p11-refill-and-selected-execution.md).
+Retain VSP03 collection/intake, allocate the selected CBSC single acquisition/metadata route
+and UCOPE B05 two-dataset route, and replace yielded RCLE/VSPC1 slots with bounded FRRIE A04
+preparation and VSP02 next-question preparation. Root records actual acceptance; a prepared
+replacement is not an active slot. These commands change no lifecycle/priority or UAV-entry claim.
+
+## Previous P10 dispatch snapshot
 
 Current plan: [P10 exact commands](handoffs/2026-09-07-p10-goal-five-directions.md) targets
 VSP03 repair, UCOPE pair preparation, CBSC path selection, RCLE request reconciliation and
@@ -32,7 +147,7 @@ Scientific Portfolio owner: Astra task `01a07a3e-29bf-7f52-bc1e-cfa214b8d94a` (e
 on main. Root is Luna/xhigh task `01a07249-b095-7821-8ce2-e9c32ba85267`: it dispatches bounded
 commands, integrates specified results and maintains actual observation/receipt facts in
 EXPERIMENT_TRACKING.md. DM retains delegated science and CM technical judgment. Root's owner-driven
-goal includes observation of accepted experiment/Pro handles; no scheduled automation is used.
+goal includes experiment observation and direction continuation; independent Transport observes Pro requests, without a scheduled automation.
 Five advancing direction chains remain the target, measured by actual dispatch/return state.
 Pro reuses direction branches by default, with fixed input SHAs and scoped response writes.
 
@@ -46,7 +161,7 @@ Audit ledger (delegated decisions): `docs/research/portfolio/audit/<YYYY-MM-DD>.
 Controlling decision:
 `docs/research/portfolio/decisions/2026-09-01-empirical-standard-full-direction-reaudit.md`;
 direction registration 2026-09-02: `docs/research/portfolio/decisions/2026-09-02-register-flexible-skill-duration.md`
-Current execution ownership: `docs/project/ROOT_OPERATIONS.md` and `decisions/2026-09-06-root-luna-portfolio-separation.md`. New exact Pro handoffs go to Root from current config; Portfolio declares this Portfolio task as receipt parent. Accepted legacy handoffs, bindings and Send facts remain immutable. The September 4 fresh-conversation cutover remains provenance, not the current executor endpoint.
+Current execution ownership: `docs/project/ROOT_OPERATIONS.md` and `decisions/2026-09-06-root-luna-portfolio-separation.md`. New exact Pro handoffs go to independent Transport from current config; native requests name Root as parent, while Portfolio declares this Portfolio task as receipt parent. Accepted legacy handoffs, bindings and Send facts remain immutable. The September 4 fresh-conversation cutover remains provenance, not the current executor endpoint.
 Compute execution: `docs/research/portfolio/decisions/2026-09-04-remote-first-compute-routing.md`
 Direction working set: `docs/research/portfolio/decisions/2026-09-04-five-direction-execution-parallelism.md`
 Current organization and resume: `docs/research/portfolio/decisions/2026-09-04-adopt-nine-routes-and-resume.md`
@@ -58,7 +173,7 @@ Previous pause (superseded): `docs/research/portfolio/decisions/2026-09-04-pause
 Current controlling resume: `decisions/2026-09-05-resume-automatic-research.md`. Owner instruction 「继续自动推进任务」 supersedes the completed pause. Prior final handoff `handoffs/2026-09-04-resumed-round-pause.md` remains the recovery evidence; lifecycle and priority fields are unchanged.
 
 Current organization: the owner has adopted the revised two-category, six-family, nine-route
-map. Automatic execution continues through integrated Root and independent Portfolio under the September 6 migration. Five reserve sources initially changed to PARKED; the later September5 ACVC review restores that source to ACTIVE. All historical IDs,
+map. Automatic execution continues through Root, independent Portfolio and the September 7 independent Transport endpoint. Five reserve sources initially changed to PARKED; the later September5 ACVC review restores that source to ACTIVE. All historical IDs,
 cards, results and family boundaries are preserved. The initial two-investment recommendation
 was never applied. See `decisions/2026-09-04-adopt-nine-routes-and-resume.md` and the complete owner-supplied 6 Pro archive.
 

@@ -1,0 +1,78 @@
+{
+  "id": "20260907-ucope-007",
+  "created": "2026-09-07T13:44:53-07:00",
+  "direction": "ucope",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "B05: prepare an independent 512-batch pair; execution unallocated",
+  "context": "Claim: the shared-data count-conditioned return learner produces useful mean native acquisition gain over BLIND and IMMEDIATE-4 at 512 batches on two more fresh datasets. Binding structure: systems / information flow; the finite host does not instantiate multi-agent partial observability or non-stationarity. This item accepts prospective preparation only.",
+  "options": [
+    {
+      "key": "accept",
+      "label": "retain prepared card only",
+      "consequence": "保留B05的6701/6702同预算卡、预测和原运行器命令；执行仍未分配，原CM身份缺口交回Portfolio，不启动实验。"
+    },
+    {
+      "key": "reject",
+      "label": "withdraw unlaunched candidate",
+      "consequence": "按回复撤回尚未运行的候选；保留B04混合结果和全部历史证据，不产生替代运行。"
+    },
+    {
+      "key": "revise",
+      "label": "revise prepared definition",
+      "consequence": "在未来分配之前应用明确修订并重新记录；不静默改变已冻结或已产生的证据。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "两份原数据都有一个有用购买情境，但额外有害购买和极小均值余量限制重复性；P10只授权准备下一对独立数据。",
+  "evidence": [
+    "docs/research/candidates/ucope/UCOPE_SHARED_DATA_RETURN_MODEL_B05_SCIENCE_CARD_20260907.md",
+    "docs/research/candidates/ucope/UCOPE_SHARED_DATA_RETURN_MODEL_B05_SELECTION_INTAKE_20260907.md",
+    "docs/research/candidates/ucope/UCOPE_SHARED_DATA_RETURN_MODEL_B04_INTAKE_20260907.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-07.md#L75",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否保留这份仅作准备的B05卡：两份新数据在相同512批预算下，继续观察有用购买和有害购买的波动？",
+    "changes_if_approved": [
+      {
+        "target": "docs/research/candidates/ucope/UCOPE_SHARED_DATA_RETURN_MODEL_B05_SCIENCE_CARD_20260907.md",
+        "from": "B04已有接近取舍的准备建议，未绑定新种子和命令",
+        "to": "准备B05种子6701/6702、预测及原运行器的完整命令；执行仍未分配，原CM身份缺口交回Portfolio"
+      }
+    ],
+    "if_refused": "依你的明确回复调整尚未分配执行的卡，保留全部已有证据；不重放旧种子、不启动或替换实验。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_SHARED_DATA_RETURN_MODEL_B04_INTAKE_20260907.md",
+        "quote": "The strongest support is positive paid-acquisition value in LINKED-p17_20-c9_100 in both\nnew datasets, together with the above-MEI joint point estimate.",
+        "why": "同一有用购买情境在两份新数据中出现，支持先准备同预算的独立重复，直接观察学习波动。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_SHARED_DATA_RETURN_MODEL_B04_INTAKE_20260907.md",
+        "quote": "The strongest current\ncontradiction to robust usefulness is seed 6601's additional harmful acquisition and adverse\noverall score.",
+        "why": "第一份数据的额外付费购买亏损，均值仅比门槛高0.0000379；收益稳定性和下一对数据的信息价值均未建立。"
+      }
+    ],
+    "uncertainty": [
+      "两份结果只能支持有限主机的初步信号；新旧种子不合并，不支持稳定优势或多智能体泛化。",
+      "预测为低置信度的门槛内结果；所有正负符号和有害购买必须保留。",
+      "请求的原CM在当前原生会话清单中不可见；没有创建替代CM或选择运行。",
+      "4.71秒每份只是B04完整调用的已有规划点，分阶段系数及未来耗时未知。"
+    ],
+    "cost": {
+      "compute": "本次新增学习/环境调用为0。候选两份各229376回合、196608标量更新，合计458752回合、393216更新；候选完整上限600秒每份、1200秒总计，未分配执行；既有耗时规划点合计9.42秒。",
+      "owner_time": "可异步阅读，无需当前确认。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing；本次只准备，未来执行由Portfolio另行分配。"
+    },
+    "verdict_text": "建议保留已准备的B05卡：新种子6701、6702各512批，三种策略与完整终评不变，所有符号分别保留。本次只准备卡、预测和原运行器命令，不分配或启动实验；是否投入执行由Portfolio下一条命令决定。",
+    "source": "docs/research/candidates/ucope/UCOPE_SHARED_DATA_RETURN_MODEL_B05_SELECTION_INTAKE_20260907.md"
+  },
+  "starred": false
+}

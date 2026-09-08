@@ -1,6 +1,6 @@
 import numpy as np
 
-from config_1 import Config
+from configs.config_1 import Config
 from envs.pettingzoo.relay.energy_aware import UAVEnergyAwareRelayEnv
 
 

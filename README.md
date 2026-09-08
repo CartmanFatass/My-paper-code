@@ -33,16 +33,18 @@ HMASD 包含三个主要组件：
 │       ├── uav_env.py      # 基础UAV环境
 │       ├── scenario1.py    # 场景1：独立基站模式
 │       └── scenario2.py    # 场景2：协作组网模式
-├── config.py               # 配置参数
-├── main.py                 # 训练和评估的入口点
-├── requirements_sb3.txt    # SB3 CUDA 环境精确依赖锁
+├── configs/                # 配置参数模块
+│   ├── config.py           # 配置兼容入口
+│   └── config_1.py         # 主配置
+├── experiments/launchers/main.py                 # 训练和评估的入口点
+├── requirements/requirements_sb3.txt    # SB3 CUDA 环境精确依赖锁
 └── README.md               # 项目文档
 ```
 
 ## 安装依赖
 
 ```bash
-pip install -r requirements_sb3.txt
+pip install -r requirements/requirements_sb3.txt
 ```
 
 ## 多无人机基站场景
@@ -68,10 +70,10 @@ pip install -r requirements_sb3.txt
 
 ```bash
 # 场景1：独立基站模式
-python main.py --mode train --scenario 1 --n_uavs 5 --n_users 50 --user_distribution uniform
+python experiments/launchers/main.py --mode train --scenario 1 --n_uavs 5 --n_users 50 --user_distribution uniform
 
 # 场景2：协作组网模式
-python main.py --mode train --scenario 2 --n_uavs 8 --n_users 100 --max_hops 3 --user_distribution hotspot
+python experiments/launchers/main.py --mode train --scenario 2 --n_uavs 8 --n_users 100 --max_hops 3 --user_distribution hotspot
 ```
 
 参数说明：
@@ -88,10 +90,10 @@ python main.py --mode train --scenario 2 --n_uavs 8 --n_users 100 --max_hops 3 -
 
 ```bash
 # 场景1：独立基站模式
-python main.py --mode eval --scenario 1 --model_path models/hmasd_model.pt --render --eval_episodes 5
+python experiments/launchers/main.py --mode eval --scenario 1 --model_path models/hmasd_model.pt --render --eval_episodes 5
 
 # 场景2：协作组网模式
-python main.py --mode eval --scenario 2 --model_path models/hmasd_model.pt --render --eval_episodes 5
+python experiments/launchers/main.py --mode eval --scenario 2 --model_path models/hmasd_model.pt --render --eval_episodes 5
 ```
 
 参数说明：

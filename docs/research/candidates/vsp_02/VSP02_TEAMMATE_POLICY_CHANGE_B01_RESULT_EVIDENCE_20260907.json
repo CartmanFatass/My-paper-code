@@ -1,0 +1,471 @@
+{
+  "technical_acceptance": "PASS",
+  "checks": "Raw row/group counts, ordering, complete episodes, return bounds, primary, all evaluation means, every 16-episode bin, actual update logs, fork/movement numeric summaries, runtime and admission/exit receipts agree.",
+  "raw_training_groups": {
+    "prefix/PREFIX": {
+      "episodes": 4096,
+      "joint_steps": 196608,
+      "return_sum": 28126.0,
+      "mean_return": 6.86669921875,
+      "optimizer_steps": 4096
+    },
+    "adaptation/CARRY": {
+      "episodes": 1024,
+      "joint_steps": 49152,
+      "return_sum": 7648.0,
+      "mean_return": 7.46875,
+      "optimizer_steps": 1024
+    },
+    "adaptation/RESET": {
+      "episodes": 1024,
+      "joint_steps": 49152,
+      "return_sum": 7667.0,
+      "mean_return": 7.4873046875,
+      "optimizer_steps": 1024
+    }
+  },
+  "summary": {
+    "object_id": "VSP02-TEAMMATE-POLICY-CHANGE-B01",
+    "run_kind": "B_EXPLORE",
+    "config": {
+      "seed": 1103,
+      "engineering_fixture": false,
+      "prefix_episodes": 4096,
+      "adaptation_episodes": 1024,
+      "evaluation_episodes": 64,
+      "checkpoints": [
+        16,
+        32,
+        64,
+        128,
+        256,
+        512,
+        768,
+        1024
+      ],
+      "wall_seconds": 1800,
+      "horizon": 48,
+      "rollout_episodes": 16,
+      "epochs": 4,
+      "minibatch_episodes": 4,
+      "gamma": 1,
+      "gae_lambda": 0.95,
+      "ppo_clip": 0.2,
+      "value_coefficient": 0.5,
+      "entropy_coefficient": 0.01,
+      "gradient_clip": 0.5,
+      "learning_rate": 0.0003,
+      "adam_betas": [
+        0.9,
+        0.999
+      ],
+      "adam_epsilon": 1e-08
+    },
+    "source_git_revision": "19be5ee18393913ff92693cdf037213ec1777510",
+    "runtime": {
+      "python": "3.10.21 (main, Sep  1 2026, 14:16:49) [Clang 22.1.3 ]",
+      "torch": "2.7.0+cu118",
+      "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+      "device": "cpu",
+      "dtype": "float32",
+      "compute_threads": 1,
+      "interop_threads": 1
+    },
+    "status": "COMPLETE",
+    "stopping_reason": null,
+    "error": null,
+    "counts": {
+      "by_phase_arm": {
+        "prefix/PREFIX": {
+          "training_episodes": 4096,
+          "training_episodes_started": 4096,
+          "training_joint_steps": 196608,
+          "optimizer_steps": 4096,
+          "evaluation_episodes": 64,
+          "evaluation_episodes_started": 64,
+          "evaluation_joint_steps": 3072
+        },
+        "adaptation/CARRY": {
+          "training_episodes": 1024,
+          "training_episodes_started": 1024,
+          "training_joint_steps": 49152,
+          "optimizer_steps": 1024,
+          "evaluation_episodes": 0,
+          "evaluation_episodes_started": 0,
+          "evaluation_joint_steps": 0
+        },
+        "adaptation/RESET": {
+          "training_episodes": 1024,
+          "training_episodes_started": 1024,
+          "training_joint_steps": 49152,
+          "optimizer_steps": 1024,
+          "evaluation_episodes": 0,
+          "evaluation_episodes_started": 0,
+          "evaluation_joint_steps": 0
+        },
+        "post/SHARED": {
+          "training_episodes": 0,
+          "training_episodes_started": 0,
+          "training_joint_steps": 0,
+          "optimizer_steps": 0,
+          "evaluation_episodes": 64,
+          "evaluation_episodes_started": 64,
+          "evaluation_joint_steps": 3072
+        },
+        "post/CARRY": {
+          "training_episodes": 0,
+          "training_episodes_started": 0,
+          "training_joint_steps": 0,
+          "optimizer_steps": 0,
+          "evaluation_episodes": 512,
+          "evaluation_episodes_started": 512,
+          "evaluation_joint_steps": 24576
+        },
+        "post/RESET": {
+          "training_episodes": 0,
+          "training_episodes_started": 0,
+          "training_joint_steps": 0,
+          "optimizer_steps": 0,
+          "evaluation_episodes": 512,
+          "evaluation_episodes_started": 512,
+          "evaluation_joint_steps": 24576
+        }
+      },
+      "total": {
+        "training_episodes": 6144,
+        "training_episodes_started": 6144,
+        "training_joint_steps": 294912,
+        "optimizer_steps": 6144,
+        "evaluation_episodes": 1152,
+        "evaluation_episodes_started": 1152,
+        "evaluation_joint_steps": 55296
+      }
+    },
+    "model_selection_trials": 0,
+    "independent_prefixes": 1,
+    "primary_window_complete": true,
+    "primary": {
+      "carry_mean": 7.46875,
+      "reset_mean": 7.4873046875,
+      "delta_reset_minus_carry": 0.0185546875
+    },
+    "partial_observations": {
+      "CARRY": {
+        "episodes": 1024,
+        "episodes_started": 1024,
+        "joint_steps": 49152,
+        "observed_mean": 7.46875,
+        "optimizer_steps": 1024
+      },
+      "RESET": {
+        "episodes": 1024,
+        "episodes_started": 1024,
+        "joint_steps": 49152,
+        "observed_mean": 7.4873046875,
+        "optimizer_steps": 1024
+      }
+    },
+    "scientific_comparison_complete": true,
+    "claim_ceiling": "One prefix and one pair; initial local signal only.",
+    "limitation": null,
+    "evaluations": [
+      {
+        "phase": "prefix",
+        "arm": "PREFIX",
+        "checkpoint": 4096,
+        "complete_episodes": 64,
+        "episodes_started": 64,
+        "mean_return": 8.125
+      },
+      {
+        "phase": "post",
+        "arm": "SHARED",
+        "checkpoint": 0,
+        "complete_episodes": 64,
+        "episodes_started": 64,
+        "mean_return": 3.953125
+      },
+      {
+        "phase": "post",
+        "arm": "CARRY",
+        "checkpoint": 16,
+        "complete_episodes": 64,
+        "episodes_started": 64,
+        "mean_return": 4.5625
+      },
+      {
+        "phase": "post",
+        "arm": "RESET",
+        "checkpoint": 16,
+        "complete_episodes": 64,
+        "episodes_started": 64,
+        "mean_return": 4.671875
+      },
+      {
+        "phase": "post",
+        "arm": "CARRY",
+        "checkpoint": 32,
+        "complete_episodes": 64,
+        "episodes_started": 64,
+        "mean_return": 4.6875
+      },
+      {
+        "phase": "post",
+        "arm": "RESET",
+        "checkpoint": 32,
+        "complete_episodes": 64,
+        "episodes_started": 64,
+        "mean_return": 4.734375
+      },
+      {
+        "phase": "post",
+        "arm": "CARRY",
+        "checkpoint": 64,
+        "complete_episodes": 64,
+        "episodes_started": 64,
+        "mean_return": 6.53125
+      },
+      {
+        "phase": "post",
+        "arm": "RESET",
+        "checkpoint": 64,
+        "complete_episodes": 64,
+        "episodes_started": 64,
+        "mean_return": 6.4375
+      },
+      {
+        "phase": "post",
+        "arm": "CARRY",
+        "checkpoint": 128,
+        "complete_episodes": 64,
+        "episodes_started": 64,
+        "mean_return": 7.265625
+      },
+      {
+        "phase": "post",
+        "arm": "RESET",
+        "checkpoint": 128,
+        "complete_episodes": 64,
+        "episodes_started": 64,
+        "mean_return": 7.171875
+      },
+      {
+        "phase": "post",
+        "arm": "CARRY",
+        "checkpoint": 256,
+        "complete_episodes": 64,
+        "episodes_started": 64,
+        "mean_return": 8.1875
+      },
+      {
+        "phase": "post",
+        "arm": "RESET",
+        "checkpoint": 256,
+        "complete_episodes": 64,
+        "episodes_started": 64,
+        "mean_return": 8.234375
+      },
+      {
+        "phase": "post",
+        "arm": "CARRY",
+        "checkpoint": 512,
+        "complete_episodes": 64,
+        "episodes_started": 64,
+        "mean_return": 7.671875
+      },
+      {
+        "phase": "post",
+        "arm": "RESET",
+        "checkpoint": 512,
+        "complete_episodes": 64,
+        "episodes_started": 64,
+        "mean_return": 7.75
+      },
+      {
+        "phase": "post",
+        "arm": "CARRY",
+        "checkpoint": 768,
+        "complete_episodes": 64,
+        "episodes_started": 64,
+        "mean_return": 7.859375
+      },
+      {
+        "phase": "post",
+        "arm": "RESET",
+        "checkpoint": 768,
+        "complete_episodes": 64,
+        "episodes_started": 64,
+        "mean_return": 7.859375
+      },
+      {
+        "phase": "post",
+        "arm": "CARRY",
+        "checkpoint": 1024,
+        "complete_episodes": 64,
+        "episodes_started": 64,
+        "mean_return": 8.234375
+      },
+      {
+        "phase": "post",
+        "arm": "RESET",
+        "checkpoint": 1024,
+        "complete_episodes": 64,
+        "episodes_started": 64,
+        "mean_return": 8.234375
+      }
+    ],
+    "terminal_means": {
+      "PREFIX": 8.125,
+      "SHARED": 3.953125,
+      "CARRY": 8.234375,
+      "RESET": 8.234375
+    },
+    "movement": {
+      "initial_parameter_rms": 0.07666852325201035,
+      "first_prefix_rollout": {
+        "displacement_rms": 0.0023259019944816828,
+        "global_steps": 16
+      },
+      "prefix_end": {
+        "displacement_rms": 0.06980965286493301,
+        "global_steps": 4096
+      },
+      "prefix_final_observed": {
+        "displacement_rms": 0.06980965286493301,
+        "global_steps": 4096
+      },
+      "CARRY": {
+        "displacement_rms": 0.019422367215156555,
+        "global_steps": 5120,
+        "steps_since_fork": 1024,
+        "adam": {
+          "global_steps": 5120,
+          "state_entries": 10,
+          "step_min": 5120.0,
+          "step_max": 5120.0,
+          "exp_avg_norm": 0.12091189728290806,
+          "exp_avg_sq_norm": 0.03345876013558806
+        }
+      },
+      "RESET": {
+        "displacement_rms": 0.02313823625445366,
+        "global_steps": 5120,
+        "steps_since_fork": 1024,
+        "adam": {
+          "global_steps": 5120,
+          "state_entries": 10,
+          "step_min": 1024.0,
+          "step_max": 1024.0,
+          "exp_avg_norm": 0.12406915671115999,
+          "exp_avg_sq_norm": 0.021598693145882128
+        }
+      }
+    },
+    "fork": {
+      "CARRY": {
+        "global_steps": 4096,
+        "state_entries": 10,
+        "step_min": 4096.0,
+        "step_max": 4096.0,
+        "exp_avg_norm": 0.07583404602380395,
+        "exp_avg_sq_norm": 0.0335348453511139,
+        "model_max_absolute_difference": 0.0,
+        "episode_hidden_state": "zero at next episode"
+      },
+      "RESET": {
+        "global_steps": 4096,
+        "state_entries": 0,
+        "step_min": 0,
+        "step_max": 0,
+        "exp_avg_norm": 0.0,
+        "exp_avg_sq_norm": 0.0,
+        "model_max_absolute_difference": 0.0,
+        "episode_hidden_state": "zero at next episode"
+      },
+      "PREFIX": {
+        "global_steps": 4096,
+        "state_entries": 10,
+        "step_min": 4096.0,
+        "step_max": 4096.0,
+        "exp_avg_norm": 0.07583404602380395,
+        "exp_avg_sq_norm": 0.0335348453511139
+      }
+    },
+    "wall_seconds": 36.69615292199887,
+    "peak_rss_bytes": 520306688,
+    "resources_unmeasured": false,
+    "missing_outputs": [],
+    "output_paths": {
+      "training_returns.csv": "temp/directions/vsp_02/exp/teammate_policy_change_b01_p15_s1103_a1/training_returns.csv",
+      "evaluation_returns.csv": "temp/directions/vsp_02/exp/teammate_policy_change_b01_p15_s1103_a1/evaluation_returns.csv",
+      "updates.csv": "temp/directions/vsp_02/exp/teammate_policy_change_b01_p15_s1103_a1/updates.csv",
+      "training_curve.csv": "temp/directions/vsp_02/exp/teammate_policy_change_b01_p15_s1103_a1/training_curve.csv",
+      "curves.png": "temp/directions/vsp_02/exp/teammate_policy_change_b01_p15_s1103_a1/curves.png",
+      "summary.json": "temp/directions/vsp_02/exp/teammate_policy_change_b01_p15_s1103_a1/summary.json"
+    }
+  },
+  "admission": {
+    "assessed_at": "2026-09-08T00:45:27.993526Z",
+    "available_physical_bytes": 15634575360,
+    "captured_at": "2026-09-08T00:45:27.993248Z",
+    "cgroup_headroom_bytes": null,
+    "cgroup_memory_current_bytes": null,
+    "cgroup_memory_max_bytes": null,
+    "effective_available_bytes": 15634575360,
+    "effective_floor_pass": true,
+    "failure_reasons": [],
+    "measurement_source": "/proc/meminfo",
+    "minimum_available_bytes": 4294967296,
+    "passed": true,
+    "physical_floor_pass": true,
+    "schema_version": 1
+  },
+  "supervisor": {
+    "exit_code": "0\n",
+    "pid": "2754886\n",
+    "runner.sh": "#!/usr/bin/env bash\necho $$ > \"/home/wu/.agent-tasks/vsp02-tpc-b01-p15-s1103-a1/pid\"\nSTART_TS=$(date +%s)\necho \"=== Task 'vsp02-tpc-b01-p15-s1103-a1' started at $(date -Iseconds) ===\" >> \"/home/wu/.agent-tasks/vsp02-tpc-b01-p15-s1103-a1/task.log\"\n\n# Execute command capturing output\nset +e\neval 'cd /home/wu/hmasd-worktrees/vsp02-tpc-b01-p15-s1103-a1 && env OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/vsp_02/exp/admission/tpc_b01_p15_s1103_a1.json && env OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 /home/wu/.venvs/hmasd/bin/python -u scripts/run_vsp02_teammate_policy_change_b01.py --seed 1103 --out temp/directions/vsp_02/exp/teammate_policy_change_b01_p15_s1103_a1' >> \"/home/wu/.agent-tasks/vsp02-tpc-b01-p15-s1103-a1/task.log\" 2>&1\nEXIT_CODE=$?\nset -e\n\nEND_TS=$(date +%s)\necho $EXIT_CODE > \"/home/wu/.agent-tasks/vsp02-tpc-b01-p15-s1103-a1/exit_code\"\nif [ $EXIT_CODE -eq 0 ]; then\n    echo \"finished\" > \"/home/wu/.agent-tasks/vsp02-tpc-b01-p15-s1103-a1/status\"\nelse\n    echo \"failed\" > \"/home/wu/.agent-tasks/vsp02-tpc-b01-p15-s1103-a1/status\"\nfi\necho \"=== Task 'vsp02-tpc-b01-p15-s1103-a1' exited with code $EXIT_CODE at $(date -Iseconds) (Duration: $((END_TS - START_TS))s) ===\" >> \"/home/wu/.agent-tasks/vsp02-tpc-b01-p15-s1103-a1/task.log\"\n\n# Keep session alive briefly for inspection, then exit\nsleep 1\n",
+    "start_time": "1788828327\n",
+    "status": "finished\n",
+    "task.log": "=== Task 'vsp02-tpc-b01-p15-s1103-a1' started at 2026-09-08T08:44:43+08:00 ===\n=== Task 'vsp02-tpc-b01-p15-s1103-a1' exited with code 0 at 2026-09-08T08:44:43+08:00 (Duration: 0s) ===\n=== Task 'vsp02-tpc-b01-p15-s1103-a1' started at 2026-09-08T08:45:27+08:00 ===\n{\n  \"assessed_at\": \"2026-09-08T00:45:27.993526Z\",\n  \"available_physical_bytes\": 15634575360,\n  \"captured_at\": \"2026-09-08T00:45:27.993248Z\",\n  \"cgroup_headroom_bytes\": null,\n  \"cgroup_memory_current_bytes\": null,\n  \"cgroup_memory_max_bytes\": null,\n  \"effective_available_bytes\": 15634575360,\n  \"effective_floor_pass\": true,\n  \"failure_reasons\": [],\n  \"measurement_source\": \"/proc/meminfo\",\n  \"minimum_available_bytes\": 4294967296,\n  \"passed\": true,\n  \"physical_floor_pass\": true,\n  \"schema_version\": 1\n}\n{\"run_kind\": \"B_EXPLORE\", \"status\": \"COMPLETE\", \"counts\": {\"by_phase_arm\": {\"prefix/PREFIX\": {\"training_episodes\": 4096, \"training_episodes_started\": 4096, \"training_joint_steps\": 196608, \"optimizer_steps\": 4096, \"evaluation_episodes\": 64, \"evaluation_episodes_started\": 64, \"evaluation_joint_steps\": 3072}, \"adaptation/CARRY\": {\"training_episodes\": 1024, \"training_episodes_started\": 1024, \"training_joint_steps\": 49152, \"optimizer_steps\": 1024, \"evaluation_episodes\": 0, \"evaluation_episodes_started\": 0, \"evaluation_joint_steps\": 0}, \"adaptation/RESET\": {\"training_episodes\": 1024, \"training_episodes_started\": 1024, \"training_joint_steps\": 49152, \"optimizer_steps\": 1024, \"evaluation_episodes\": 0, \"evaluation_episodes_started\": 0, \"evaluation_joint_steps\": 0}, \"post/SHARED\": {\"training_episodes\": 0, \"training_episodes_started\": 0, \"training_joint_steps\": 0, \"optimizer_steps\": 0, \"evaluation_episodes\": 64, \"evaluation_episodes_started\": 64, \"evaluation_joint_steps\": 3072}, \"post/CARRY\": {\"training_episodes\": 0, \"training_episodes_started\": 0, \"training_joint_steps\": 0, \"optimizer_steps\": 0, \"evaluation_episodes\": 512, \"evaluation_episodes_started\": 512, \"evaluation_joint_steps\": 24576}, \"post/RESET\": {\"training_episodes\": 0, \"training_episodes_started\": 0, \"training_joint_steps\": 0, \"optimizer_steps\": 0, \"evaluation_episodes\": 512, \"evaluation_episodes_started\": 512, \"evaluation_joint_steps\": 24576}}, \"total\": {\"training_episodes\": 6144, \"training_episodes_started\": 6144, \"training_joint_steps\": 294912, \"optimizer_steps\": 6144, \"evaluation_episodes\": 1152, \"evaluation_episodes_started\": 1152, \"evaluation_joint_steps\": 55296}}, \"wall_seconds\": 36.69615292199887}\n=== Task 'vsp02-tpc-b01-p15-s1103-a1' exited with code 0 at 2026-09-08T08:46:05+08:00 (Duration: 38s) ===\n"
+  },
+  "output_files": {
+    "curves.png": 90227,
+    "evaluation_returns.csv": 35718,
+    "summary.json": 9981,
+    "training_curve.csv": 11425,
+    "training_returns.csv": 230095,
+    "updates.csv": 43105
+  },
+  "verification_limit": "No replay. Fork/movement are recorded same-run instrumentation, supported by accepted source and prior focused tests; raw files do not reconstruct model tensors or prove cross-platform bit identity.",
+  "new_collection_exposure": {
+    "environment_transitions": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0,
+    "result_bearing_invocations": 0
+  },
+  "remote_output_inventory_bytes": {
+    "summary.json": 9981,
+    "updates.csv": 43105,
+    "curves.png": 90227,
+    "training_curve.csv": 11425,
+    "evaluation_returns.csv": 35718,
+    "training_returns.csv": 230095
+  },
+  "collection_status": {
+    "task": "vsp02-tpc-b01-p15-s1103-a1",
+    "status": "finished",
+    "exit_code": 0,
+    "pid": 2754886,
+    "uptime_seconds": 223,
+    "tmux_active": false
+  },
+  "dispatch_history": {
+    "supervisor_starts": 2,
+    "scientific_invocations": 1,
+    "first_segment": "2026-09-08T08:44:43+08:00; duration 0s; exit 0; no preflight or runner output in preserved task.log.",
+    "root_explanation": "Root confirmed the first accepted wrapper received an empty/truncated command from PowerShell backslash-escaped nested quotes. Local stderr: env: The term env is not recognized. Root observed no output root, admission, model or scientific exposure. Only quoting was repaired; the unchanged chain then ran at 08:45:27 under the same handle.",
+    "attribution_limit": "The no-exposure observation for the first segment is Root-provided; preserved remote log independently confirms the zero-second segment and absence of preflight/runner output there."
+  },
+  "verification_script": "import csv\nimport json\nimport math\nfrom collections import defaultdict\nfrom pathlib import Path\n\nbase = Path('temp/directions/vsp_02/exp')\nrun = base / 'teammate_policy_change_b01_p15_s1103_a1'\ns = json.loads((run / 'summary.json').read_text())\nadmission = json.loads((base / 'admission/tpc_b01_p15_s1103_a1.json').read_text())\nsupervisor = base / 'supervisor/vsp02-tpc-b01-p15-s1103-a1'\nread = lambda name: list(csv.DictReader((run / name).open(newline='')))\ntrain, ev, updates, bins = map(read, ['training_returns.csv', 'evaluation_returns.csv', 'updates.csv', 'training_curve.csv'])\nassert s['source_git_revision'] == '19be5ee18393913ff92693cdf037213ec1777510'\nassert s['run_kind'] == 'B_EXPLORE' and s['status'] == 'COMPLETE'\nassert s['primary_window_complete'] and s['scientific_comparison_complete']\nassert not s['error'] and not s['missing_outputs'] and not s['stopping_reason']\nconfig = s['config']\nassert (config['seed'], config['prefix_episodes'], config['adaptation_episodes'], config['evaluation_episodes'], config['horizon']) == (1103,4096,1024,64,48)\ncheckpoints = [16,32,64,128,256,512,768,1024]\nassert config['checkpoints'] == checkpoints and not config['engineering_fixture']\nassert config['wall_seconds'] == 1800 and 0 < s['wall_seconds'] < 1800\nassert s['runtime']['device'] == 'cpu' and s['runtime']['dtype'] == 'float32'\nassert s['runtime']['compute_threads'] == s['runtime']['interop_threads'] == 1\nassert len(train) == 6144 and len(ev) == 1152 and len(updates) == len(bins) == 384\nfor row in train + ev:\n    assert row['complete_episode'] == 'True' and int(row['joint_steps']) == 48\n    value = float(row['return'])\n    assert math.isfinite(value) and 0 <= value <= 16 and value.is_integer()\ntg, eg, ug = defaultdict(list), defaultdict(list), defaultdict(list)\nfor row in train:\n    tg[row['phase'], row['arm']].append(row)\nfor row in ev:\n    eg[row['phase'], row['arm'], int(row['checkpoint'])].append(row)\nfor row in updates:\n    ug[row['phase'], row['arm']].append(row)\nexpected = {('prefix','PREFIX'):4096, ('adaptation','CARRY'):1024, ('adaptation','RESET'):1024}\nassert set(tg) == set(ug) == set(expected)\nraw_groups = {}\nfor key, n in expected.items():\n    group = tg[key]\n    assert len(group) == n and [int(r['episode']) for r in group] == list(range(1,n+1))\n    offset = 0 if key[0] == 'prefix' else 4096\n    assert [int(r['global_steps_before_collection']) for r in group] == [offset+(i//16)*16 for i in range(n)]\n    u = ug[key]\n    assert len(u) == n//16\n    for i, row in enumerate(u, 1):\n        assert int(row['rollout_index']) == i and int(row['optimizer_steps']) == 16\n        assert int(row['total_global_steps']) == offset+i*16 and row['complete_update'] == 'True'\n        for field in ['mean_policy_loss','mean_value_loss','mean_entropy','max_pre_clip_gradient_norm']:\n            assert math.isfinite(float(row[field]))\n    raw_groups['/'.join(key)] = dict(episodes=n, joint_steps=sum(int(r['joint_steps']) for r in group),\n                                    return_sum=sum(float(r['return']) for r in group),\n                                    mean_return=sum(float(r['return']) for r in group)/n,\n                                    optimizer_steps=sum(int(r['optimizer_steps']) for r in u))\n# Alternation must be real ordered CARRY/RESET batches after the prefix.\nassert [r['arm'] for r in updates] == ['PREFIX']*256 + ['CARRY','RESET']*64\nassert [r['arm'] for r in train] == ['PREFIX']*4096 + [arm for _ in range(64) for arm in ['CARRY']*16+['RESET']*16]\nexpected_ev = {('prefix','PREFIX',4096),('post','SHARED',0)} | {('post', arm, q) for arm in ['CARRY','RESET'] for q in checkpoints}\nassert set(eg) == expected_ev\nfor key, group in eg.items():\n    assert len(group) == 64 and [int(r['episode']) for r in group] == list(range(1,65))\n    item = next(x for x in s['evaluations'] if (x['phase'],x['arm'],x['checkpoint']) == key)\n    assert item['mean_return'] == sum(float(r['return']) for r in group)/64\n    assert item['complete_episodes'] == item['episodes_started'] == 64\nfor row in bins:\n    group = tg[row['phase'],row['arm']]\n    end = int(row['through_episode'])\n    assert end % 16 == 0 and int(row['episodes_in_bin']) == 16\n    assert float(row['mean_return']) == sum(float(r['return']) for r in group[end-16:end])/16\nfor key,n in expected.items():\n    assert [int(r['through_episode']) for r in bins if (r['phase'],r['arm']) == key] == list(range(16,n+1,16))\ncarry = raw_groups['adaptation/CARRY']['mean_return']\nreset = raw_groups['adaptation/RESET']['mean_return']\nassert s['primary'] == dict(carry_mean=carry,reset_mean=reset,delta_reset_minus_carry=reset-carry)\ncounts = s['counts']['total']\nassert counts == dict(training_episodes=6144,training_episodes_started=6144,training_joint_steps=294912,\n                     optimizer_steps=6144,evaluation_episodes=1152,evaluation_episodes_started=1152,evaluation_joint_steps=55296)\nfor label,c in s['counts']['by_phase_arm'].items():\n    phase,arm = label.split('/')\n    tr = [r for r in train if (r['phase'],r['arm']) == (phase,arm)]\n    er = [r for r in ev if (r['phase'],r['arm']) == (phase,arm)]\n    ur = [r for r in updates if (r['phase'],r['arm']) == (phase,arm)]\n    assert c == dict(training_episodes=len(tr),training_episodes_started=len(tr),training_joint_steps=48*len(tr),\n                     optimizer_steps=sum(int(r['optimizer_steps']) for r in ur),evaluation_episodes=len(er),\n                     evaluation_episodes_started=len(er),evaluation_joint_steps=48*len(er))\nf = s['fork']\nassert f['CARRY']['global_steps'] == f['RESET']['global_steps'] == f['PREFIX']['global_steps'] == 4096\nassert f['CARRY']['model_max_absolute_difference'] == f['RESET']['model_max_absolute_difference'] == 0\nassert f['CARRY']['state_entries'] == f['PREFIX']['state_entries'] == 10 and f['RESET']['state_entries'] == 0\nfor field in ['step_min','step_max']:\n    assert f['CARRY'][field] == f['PREFIX'][field] == 4096 and f['RESET'][field] == 0\nfor field in ['exp_avg_norm','exp_avg_sq_norm']:\n    assert f['CARRY'][field] == f['PREFIX'][field] > 0 and f['RESET'][field] == 0\nm = s['movement']\nassert math.isfinite(m['initial_parameter_rms']) and m['initial_parameter_rms'] > 0\nfor name,steps in [('first_prefix_rollout',16),('prefix_end',4096),('CARRY',5120),('RESET',5120)]:\n    assert m[name]['global_steps'] == steps\n    assert math.isfinite(m[name]['displacement_rms']) and m[name]['displacement_rms'] > 0\nfor name,steps in [('CARRY',5120),('RESET',1024)]:\n    assert m[name]['steps_since_fork'] == 1024 and m[name]['adam']['state_entries'] == 10\n    assert m[name]['adam']['step_min'] == m[name]['adam']['step_max'] == steps\nassert admission['passed'] and admission['physical_floor_pass'] and admission['effective_floor_pass']\nassert min(admission['available_physical_bytes'],admission['effective_available_bytes']) >= 4*1024**3\nassert (supervisor/'exit_code').read_text().strip() == '0'\nassert (supervisor/'status').read_text().strip() == 'finished'\nassert (supervisor/'pid').read_text().strip() == '2754886'\nassert (run/'curves.png').read_bytes()[:8] == b'\\x89PNG\\r\\n\\x1a\\n'\nrecord = dict(technical_acceptance='PASS', checks='Raw row/group counts, ordering, complete episodes, return bounds, primary, all evaluation means, every 16-episode bin, actual update logs, fork/movement numeric summaries, runtime and admission/exit receipts agree.',\n              raw_training_groups=raw_groups, summary=s, admission=admission,\n              supervisor={p.name:p.read_text() for p in supervisor.iterdir() if p.is_file()},\n              output_files={p.name:p.stat().st_size for p in run.iterdir() if p.is_file()},\n              verification_limit='No replay. Fork/movement are recorded same-run instrumentation, supported by accepted source and prior focused tests; raw files do not reconstruct model tensors or prove cross-platform bit identity.',\n              new_collection_exposure=dict(environment_transitions=0,optimizer_steps=0,evaluation_episodes=0,result_bearing_invocations=0))\nPath('docs/research/candidates/vsp_02/VSP02_TEAMMATE_POLICY_CHANGE_B01_RESULT_EVIDENCE_20260907.json').write_text(json.dumps(record,indent=2),encoding='utf-8')\nprint(json.dumps({'technical_acceptance':'PASS','groups':raw_groups,'primary':s['primary'],'wall_seconds':s['wall_seconds'],'peak_rss_bytes':s['peak_rss_bytes']},indent=2))\n",
+  "figure_inspection": "PNG read successfully; all prefix/adaptation bins and sampled evaluation checkpoints/endpoints displayed, no selected best curve or confidence band."
+}

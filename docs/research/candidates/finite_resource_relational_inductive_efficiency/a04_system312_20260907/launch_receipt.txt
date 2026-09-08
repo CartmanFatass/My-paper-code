@@ -1,0 +1,2 @@
+Task 'frrie-a04-system312-p11-d6844bb25f6f' started in tmux session 'agent_frrie-a04-system312-p11-d6844bb25f6f'. Output: /home/wu/.agent-tasks/frrie-a04-system312-p11-d6844bb25f6f/task.log
+ssh_exit=0

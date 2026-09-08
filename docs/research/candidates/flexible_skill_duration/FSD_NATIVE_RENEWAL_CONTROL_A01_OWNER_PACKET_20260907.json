@@ -1,0 +1,38 @@
+{
+  "question": "是否保留这张单一旧检查点的 C/H/G 原生续约测量卡及其工程边界？",
+  "changes_if_approved": [
+    {
+      "target": "FSD_NATIVE_RENEWAL_CONTROL_A01_SCIENCE_CARD_20260907.md",
+      "from": "Convergence 已选有限控制观察，尚无具体卡和共同工程规格",
+      "to": "固定权重、32 个配对 episode、C/H/G、每策略 180 秒；先由 Root 捕获同规格工程比较，未释放科学运行"
+    }
+  ],
+  "if_refused": "按实际 owner 指令修改或撤下新卡；保留已归档的方向裁决和历史结果，不自行换权重、扩大样本或恢复学习分支。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/pro_packets/20260907_native_renewal_convergence/archive/RESPONSE.md",
+      "quote": "选择（a）：允许一次严格限于已选检查点的原生续约控制重入；不恢复整个固定 K2 policy-gap 学习收益分支，也不在本轮选择新的训练。",
+      "why": "完整方向裁决已选这一有限问题；新卡只把动作、状态、配对输出与成本边界写成可实施规格。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/pro_packets/20260907_native_renewal_convergence/CONVERGENCE_INTAKE.md",
+      "quote": "No native-return improvement has yet been observed in this successor.",
+      "why": "尚无新收益；旧 E3 六个胜任比较器上的损失和 E4 的公开规则解释仍在，不能把工程准备当作机制成功。"
+    }
+  ],
+  "uncertainty": [
+    "实际检查点加载、fresh reset 和 batch32 完整耗时尚未运行验证。",
+    "H 改变自己的后续轨迹；即使提高回报，也不能唯一归因为内部时长学习，不能代表其他训练种子。",
+    "同信息调优基线的通用 host headroom 仍缺失；这不是本卡新增运行关卡。"
+  ],
+  "cost": {
+    "compute": "本次准备零模型加载、零环境步；未来设计 3×32×400=38,400 评分步，最多 540 秒。工程比较每臂共同上限 3,600 秒，检查仅用假模型及一次 24 步 fixture，不增加科学调用。",
+    "owner_time": "可异步接受、拒绝或修改；不要求当前回复。",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing；Root 可按 P15 继续捕获工程比较，科学运行另需明确执行指令。"
+  },
+  "verdict_text": "Recommended and executed: freeze the selected C/H/G measurement card and common engineering\nspec, preserving the checkpoint, paired native reading and complete caps; return the committed\nhandoff to Root for comparison capture without releasing a scientific invocation.",
+  "source": "docs/research/candidates/flexible_skill_duration/FSD_NATIVE_RENEWAL_CONTROL_A01_PREPARATION_INTAKE_20260907.md"
+}

@@ -308,3 +308,39 @@ no additional evaluation, seed or similar-host search is selected. The original 
 publication failure and narrower intake remain historical facts. K4 and the reactive family
 remain open, older stopped/ended boundaries stand, and there is no B consumption, recast
 or Portfolio disposition. No next measurement is selected; Portfolio owns the next assignment.
+
+## Native opening-hold value family selected — 2026-09-08
+
+P49's complete Convergence response at `7ac8ccb01543f82715f38ad33d846c2ec649ecc2`
+opens the narrow native opening-hold-conditioned central-value family and selects
+[NATIVE-HOLD-VALUE-B01](VSPC1_NATIVE_HOLD_VALUE_B01_SCIENCE_CARD_20260908.md),
+as taken in by the [DM](VSPC1_NATIVE_HOLD_VALUE_CONVERGENCE_INTAKE_20260908.md).
+The existing native UAV actor/learner source at637406340 admits a same-information
+comparison of a640-parameter multiplicative remaining-hold critic gate against its
+full136→128→128→1 MLP, with identical duration-capable recurrent actors and common
+agent-compound PPO. This is an accepted question and B selection, not a measured
+gate effect, source acceptance, actual UAV entry or Portfolio disposition.
+
+The strongest support is the actual prior-hold/state → value baseline and joint
+optimization → actor update → native-return path with an intact generic null.
+The strongest contrary source fact is that nonzero remaining holds occur only at
+t1–3 of256 steps, while the MLP already shares nonlinear features. The value at t0
+cannot see the just-chosen duration. Advantages are detached once per rollout;
+joint gradient clipping can also change actor step scaling. Sparse direct input
+is not a bound on complete-return effects, and added capacity/optimization remain
+alternatives to unique sharing causality.
+
+UCOPE's prior positive and adverse native outcomes remain context, especially6902's
+T−G−.0503654/T−H−.0332645 and6901's weak G−H−.0282038. They used a different actor
+contrast and do not establish this gate's benefit. The completed service-allocation
+rule advantage and its object stop remain unchanged. Tuned matching headroom is
+absent; H is an attained reference rather than an upper. No recast count changes.
+
+The next discriminator is one independent matched training pair, seed8101:
+GATED-V−MLP-V final sampled native return after512 episodes/1024 Adam per fit,
+32 matched endpoint episodes each plus the same-reset zero-velocity H. MEI is.01,
+with all signs and H-relative weakness retained; at most1800s/arm and3600s/pair.
+The selected ceiling is one finite-budget package signal or counterexample, with
+no stable superiority, unique mechanism, transfer or optimality claim. The
+[CM specification](VSPC1_NATIVE_HOLD_VALUE_B01_CM_SPEC_20260908.md) is prepared;
+the exact-source dependency gap is technical and no scientific call has started.

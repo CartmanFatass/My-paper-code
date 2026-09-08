@@ -76,3 +76,87 @@ Evidence:
 - `VSP02_GUIDANCE_A1_HEADROOM_CENSUS_SCIENCE_CARD_20260904.md`
 - `VSP02_GUIDANCE_A1_HEADROOM_CENSUS_RESULT_EVIDENCE_20260904.md`
 - `VSP02_GUIDANCE_A1_HEADROOM_CENSUS_INTAKE_20260904.md`
+
+## Accepted fixed-member teammate-policy-change family — 2026-09-07
+
+Convergence explicitly accepts a new B/EXPLORE family: after one notified policy change by an
+active teammate, compare complete Adam RESET with ordinary CARRY from the same learned policy,
+using actual adaptation-service return on one fixed cooperative handoff task. This is the first
+recorded VSP02 Convergence RECAST (`recasts: 1`); the 2026-09-01 Portfolio empirical-standard
+recast remains historical provenance. The original member-age/recovery question remains unresolved.
+The binding structure is other-agent non-stationarity/partial observability, with fixed N=2,
+entity identity and roles. This scientific scope decision changes no Portfolio lifecycle or route.
+
+The implemented host has a receiver and a courier on a five-position corridor,
+with sixteen three-step delivery rounds per complete episode. The courier switches once from
+following a public light to following its opposite; both policies actually move and deliver.
+The receiver has the same legal local history in both arms and uses recurrent PPO. One common
+prefix (4,096 episodes) produces two 1,024-episode descendants. The primary is actual
+adaptation return per episode, Delta = RESET minus CARRY; absolute MEI is 0.5 deliveries per episode.
+Two independent-prefix B/EXPLORE results are now available; new-host tuned-baseline headroom and
+competent-comparator qualification remain absent.
+
+Both pairs are VALID_COMPLETE / WITHIN_MEI. Seed1103 has CARRY7.46875 and RESET7.4873046875,
+Delta+0.0185546875 (19 extra deliveries over1024). Seed1117 has CARRY7.8564453125 and
+RESET7.84765625, Delta-0.0087890625 (nine fewer deliveries). The descriptive paired mean is
++0.0048828125 against MEI0.5, with opposite signs. Seed1103's terminal sampled means coincide
+at8.234375; seed1117 ends CARRY7.75 / RESET7.703125. All intermediate losses remain. Each
+learned prefix and its entire pair are one independent training unit; n=2 supports no stable
+population or equivalence claim.
+
+The strongest support is complete real learning with equal information and learned starting
+parameters, the declared Adam-state fork and directly observed native service. The strongest
+contradiction to a useful reset benefit on the tested configuration is both tiny primary
+differences, their opposing signs and1117's native/terminal RESET losses. The scripted teammate can also be absorbed
+into an ordinary changing environment, so generic warm-start transience remains the strongest
+alternative to event-specific MARL attribution. Fast recurrent inference, unqualified baseline
+competence, critic adaptation, Adam step-counter effects and single-prefix variability survive.
+The old exact zero terminal headroom and B5R1's nonidentical continuous values both remain intact;
+neither establishes a new-host sign or member-recovery effect.
+
+P15 and P17 are complete: sum runner wall72.76788033498451s, admission/runner chains75s for
+two valid pairs; aggregate CPU and per-arm wall remain unmeasured. Post-B01 Convergence now
+ends further exploration of this sole instantiated family/configuration: the selected handoff
+host, fixed N2/identities, following-light to opposite-light switch, current recurrent PPO,
+P4096/Q1024 and complete Adam RESET versus CARRY. Unchanged-configuration seed expansion ends
+at these two complete observations. Ordinary CARRY remains the default without the reset
+intervention; no stable CARRY superiority is established. No successor measurement is selected.
+This is a bounded direction-level family stop, not a new B failure rule or consumption event.
+Recasts remain1; the original member-recovery agenda and Portfolio lifecycle/priority are unchanged.
+
+The strongest opposition to stopping is unqualified learner competence: legal light/history may
+be underused, recurrent inference may mask a state effect, and n2 leaves substantial uncertainty.
+No specific learner defect has been found. Missing tuned headroom, C evidence or unique cause is
+not the reason for the stop; the observed tiny opposing effects and the lack of a specifically
+justified next investment support it. The bounded reading remains no MEI-sized RESET benefit on
+these two prefixes, without equivalence, unique/event-specific optimizer mechanism, member or
+identity recovery, or transfer. No-change and Adam-component controls were not selected as
+prerequisites for that B reading.
+
+Reconsideration would require a concrete new reason: direct evidence of a specific shared-learner
+or comparison problem with a finite common revision and a prediction relevant to state choice,
+or a separately authorized comparable real-learning observation with a useful complete-window
+RESET gain or loss. These are contingent triggers, not newly selected experiments, a positive-only
+gate or a requirement to establish complete competence before another justified B. The hypothetical
+finite light/history-use measurement was considered but not selected; neither its executable model
+availability nor its decision value was established by existing return summaries. No new host,
+learner revision, exact diagnostic, seed, budget or UAV entry follows from this decision.
+
+References:
+
+- `VSP02_TEAMMATE_POLICY_CHANGE_CONVERGENCE_INTAKE_20260907.md`
+- `pro_packets/20260907_teammate_policy_change_convergence/archive/RESPONSE.md`
+  (immutable response commit `1eb3b21b61747b21f374d252005fa48c32e4838d`)
+- `pro_packets/20260907_teammate_policy_change_convergence/INTAKE_COUNTS.json`
+- `VSP02_TEAMMATE_POLICY_CHANGE_B01_SCIENCE_CARD_20260907.md`
+- `VSP02_TEAMMATE_POLICY_CHANGE_B01_RESULT_EVIDENCE_20260907.md`
+- `VSP02_TEAMMATE_POLICY_CHANGE_B01_INTAKE_20260907.md`
+- `VSP02_TEAMMATE_POLICY_CHANGE_B01_INTAKE_ANALYSIS_20260907.json`
+- `VSP02_TEAMMATE_POLICY_CHANGE_B01_P17_AMENDMENT_INTAKE_20260907.md`
+- `VSP02_TEAMMATE_POLICY_CHANGE_B01_P17_RESULT_EVIDENCE_20260907.md`
+- `VSP02_TEAMMATE_POLICY_CHANGE_B01_P17_INTAKE_20260907.md`
+- `VSP02_TEAMMATE_POLICY_CHANGE_B01_P17_INTAKE_ANALYSIS_20260907.json`
+- `VSP02_TEAMMATE_POLICY_CHANGE_POST_B01_CONVERGENCE_INTAKE_20260907.md`
+- `pro_packets/20260907_post_b01_two_prefix_convergence/archive/RESPONSE.md`
+  (immutable response commit `84d3042de7fedcc4480a56dd3e274f480f5e4c4b`)
+- `pro_packets/20260907_post_b01_two_prefix_convergence/INTAKE_FACTS.json`

@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "request_id": "2026-09-07-vsp02-teammate-policy-change-convergence-01",
+  "workflow_node": "em_convergence",
+  "conversation_binding_key": "em:vsp_02:convergence",
+  "direction_id": "vsp_02",
+  "direction_ids": [
+    "vsp_02"
+  ],
+  "decision_authority": "pro_final",
+  "conversation_id": "6a9f344c-c6dc-83e8-80e7-e12ced7f445f",
+  "provider_url": "https://chatgpt.com/c/6a9f344c-c6dc-83e8-80e7-e12ced7f445f",
+  "tab_id": "1",
+  "tab_lifecycle": "OPEN",
+  "user_message_id": "conversation-turn-1",
+  "assistant_message_id": "unknown-recorded-in-dom",
+  "assistant_message_identity_observation": "AX node 90, the sole completed response paired with conversation-turn-1; provider message UUID was unavailable.",
+  "visible_model": "6 Pro",
+  "underlying_model": "Latest",
+  "thinking_effort": "Pro, 5 of 5.",
+  "source_mode": "paste",
+  "prompt_sha256": "a40108572a73a10725d476ff9385d6f350cafbc7090ac429b9e53e7792d7cf05",
+  "response_sha256": "d040ebdac656f901982627ca981d89917a2a1e11e9a40275df4b94618d7234c9",
+  "response_bytes": 386,
+  "response_characters": 386,
+  "send_click_count": 1,
+  "send_evidence": {
+    "url_observed": true,
+    "user_node_observed": true,
+    "user_node_exact": true,
+    "user_message_id": "conversation-turn-1"
+  },
+  "wait_status": "NATURAL_COMPLETION",
+  "observed_page_state": "Worked for 10m 45s; response actions present; no Stop answering control",
+  "capture_method": "Copy response via CUA clipboard.readText",
+  "identity_validation": "PASS_WITH_DOM_ID_UNAVAILABLE",
+  "archive_paths": {
+    "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_02\\2026-09-07-vsp02-teammate-policy-change-convergence-01\\2026-09-07-vsp02-teammate-policy-change-convergence-01--vsp_02__00_PROMPT.md",
+    "response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_02\\2026-09-07-vsp02-teammate-policy-change-convergence-01\\2026-09-07-vsp02-teammate-policy-change-convergence-01--vsp_02--attempt-01__02_RESPONSE.md",
+    "packet_manifest": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_02\\2026-09-07-vsp02-teammate-policy-change-convergence-01\\2026-09-07-vsp02-teammate-policy-change-convergence-01--vsp_02__PACKET_MANIFEST.json",
+    "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_02\\2026-09-07-vsp02-teammate-policy-change-convergence-01\\2026-09-07-vsp02-teammate-policy-change-convergence-01--vsp_02--attempt-01__03_TRANSPORT_FACTS.json",
+    "response_sha256": "d040ebdac656f901982627ca981d89917a2a1e11e9a40275df4b94618d7234c9"
+  },
+  "captured_at": "2026-09-07T22:20:26Z",
+  "archived_at": "2026-09-07T22:20:26Z",
+  "return_receipt": {
+    "status": "LOCAL",
+    "required": false,
+    "attempt_count": 0,
+    "delivery_status": null,
+    "routing_mode": "LOCAL",
+    "destination_thread_id": null,
+    "message_key": null
+  },
+  "notes": [
+    "Exact natural-language response preserved byte-for-byte from the provider clipboard.",
+    "No second Send was attempted.",
+    "Executor and parent are the Root task; no app self-message is sent."
+  ]
+}

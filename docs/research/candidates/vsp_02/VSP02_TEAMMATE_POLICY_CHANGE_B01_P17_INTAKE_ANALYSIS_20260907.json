@@ -1,0 +1,696 @@
+{
+  "object_id": "VSP02-TEAMMATE-POLICY-CHANGE-B01",
+  "contract_sha": "e69208359cf9914d6a7555e379c95b17f02afed1",
+  "p17_evidence_sha": "02f0a2a2f3610919730006b3e988756e97a348b2",
+  "launch_sha": "19be5ee18393913ff92693cdf037213ec1777510",
+  "independent_unit": "one learned prefix and its entire matched CARRY/RESET pair",
+  "independent_pairs": 2,
+  "prior_seed1103_analysis": "docs/research/candidates/vsp_02/VSP02_TEAMMATE_POLICY_CHANGE_B01_INTAKE_ANALYSIS_20260907.json",
+  "analysis_input_rows": [
+    {
+      "task": "VSP02_B01_adaptation_native_mean",
+      "seed": 1103,
+      "arm": "CARRY",
+      "score": 7.46875
+    },
+    {
+      "task": "VSP02_B01_adaptation_native_mean",
+      "seed": 1103,
+      "arm": "RESET",
+      "score": 7.4873046875
+    },
+    {
+      "task": "VSP02_B01_adaptation_native_mean",
+      "seed": 1117,
+      "arm": "CARRY",
+      "score": 7.8564453125
+    },
+    {
+      "task": "VSP02_B01_adaptation_native_mean",
+      "seed": 1117,
+      "arm": "RESET",
+      "score": 7.84765625
+    }
+  ],
+  "per_prefix": [
+    {
+      "seed": 1103,
+      "carry_sum": 7648.0,
+      "reset_sum": 7667.0,
+      "carry_mean": 7.46875,
+      "reset_mean": 7.4873046875,
+      "delta_reset_minus_carry": 0.0185546875,
+      "absolute_mei": 0.5,
+      "classification": "VALID_COMPLETE / WITHIN_MEI",
+      "terminal_sampled_delta": 0
+    },
+    {
+      "seed": 1117,
+      "carry_sum": 8045.0,
+      "reset_sum": 8036.0,
+      "carry_mean": 7.8564453125,
+      "reset_mean": 7.84765625,
+      "delta_reset_minus_carry": -0.0087890625,
+      "absolute_mei": 0.5,
+      "classification": "VALID_COMPLETE / WITHIN_MEI",
+      "terminal_sampled_delta": -0.046875
+    }
+  ],
+  "pair_delta_mean": 0.0048828125,
+  "pair_delta_sample_sd": 0.01933495104806966,
+  "p17_abs_delta_fraction_of_mei": 0.017578125,
+  "pair_delta_mean_fraction_of_mei": 0.009765625,
+  "cross_prefix_arm_mean_difference": {
+    "CARRY": 0.3876953125,
+    "RESET": 0.3603515625
+  },
+  "p17_native_bins": [
+    {
+      "through_episode": 16,
+      "carry_mean": 5.1875,
+      "reset_mean": 5.1875,
+      "delta_reset_minus_carry": 0.0
+    },
+    {
+      "through_episode": 32,
+      "carry_mean": 5.8125,
+      "reset_mean": 5.875,
+      "delta_reset_minus_carry": 0.0625
+    },
+    {
+      "through_episode": 48,
+      "carry_mean": 7.5,
+      "reset_mean": 7.25,
+      "delta_reset_minus_carry": -0.25
+    },
+    {
+      "through_episode": 64,
+      "carry_mean": 7.875,
+      "reset_mean": 7.75,
+      "delta_reset_minus_carry": -0.125
+    },
+    {
+      "through_episode": 80,
+      "carry_mean": 7.9375,
+      "reset_mean": 7.6875,
+      "delta_reset_minus_carry": -0.25
+    },
+    {
+      "through_episode": 96,
+      "carry_mean": 8.1875,
+      "reset_mean": 8.1875,
+      "delta_reset_minus_carry": 0.0
+    },
+    {
+      "through_episode": 112,
+      "carry_mean": 7.625,
+      "reset_mean": 7.625,
+      "delta_reset_minus_carry": 0.0
+    },
+    {
+      "through_episode": 128,
+      "carry_mean": 7.75,
+      "reset_mean": 7.6875,
+      "delta_reset_minus_carry": -0.0625
+    },
+    {
+      "through_episode": 144,
+      "carry_mean": 7.6875,
+      "reset_mean": 7.6875,
+      "delta_reset_minus_carry": 0.0
+    },
+    {
+      "through_episode": 160,
+      "carry_mean": 8.0,
+      "reset_mean": 7.9375,
+      "delta_reset_minus_carry": -0.0625
+    },
+    {
+      "through_episode": 176,
+      "carry_mean": 7.75,
+      "reset_mean": 7.75,
+      "delta_reset_minus_carry": 0.0
+    },
+    {
+      "through_episode": 192,
+      "carry_mean": 7.25,
+      "reset_mean": 7.25,
+      "delta_reset_minus_carry": 0.0
+    },
+    {
+      "through_episode": 208,
+      "carry_mean": 8.1875,
+      "reset_mean": 8.125,
+      "delta_reset_minus_carry": -0.0625
+    },
+    {
+      "through_episode": 224,
+      "carry_mean": 8.0,
+      "reset_mean": 8.0625,
+      "delta_reset_minus_carry": 0.0625
+    },
+    {
+      "through_episode": 240,
+      "carry_mean": 7.875,
+      "reset_mean": 7.875,
+      "delta_reset_minus_carry": 0.0
+    },
+    {
+      "through_episode": 256,
+      "carry_mean": 8.0625,
+      "reset_mean": 8.0,
+      "delta_reset_minus_carry": -0.0625
+    },
+    {
+      "through_episode": 272,
+      "carry_mean": 7.5625,
+      "reset_mean": 7.4375,
+      "delta_reset_minus_carry": -0.125
+    },
+    {
+      "through_episode": 288,
+      "carry_mean": 8.0625,
+      "reset_mean": 8.0,
+      "delta_reset_minus_carry": -0.0625
+    },
+    {
+      "through_episode": 304,
+      "carry_mean": 7.625,
+      "reset_mean": 7.625,
+      "delta_reset_minus_carry": 0.0
+    },
+    {
+      "through_episode": 320,
+      "carry_mean": 7.375,
+      "reset_mean": 7.4375,
+      "delta_reset_minus_carry": 0.0625
+    },
+    {
+      "through_episode": 336,
+      "carry_mean": 7.9375,
+      "reset_mean": 7.9375,
+      "delta_reset_minus_carry": 0.0
+    },
+    {
+      "through_episode": 352,
+      "carry_mean": 8.4375,
+      "reset_mean": 8.4375,
+      "delta_reset_minus_carry": 0.0
+    },
+    {
+      "through_episode": 368,
+      "carry_mean": 7.8125,
+      "reset_mean": 7.8125,
+      "delta_reset_minus_carry": 0.0
+    },
+    {
+      "through_episode": 384,
+      "carry_mean": 8.25,
+      "reset_mean": 8.25,
+      "delta_reset_minus_carry": 0.0
+    },
+    {
+      "through_episode": 400,
+      "carry_mean": 9.0,
+      "reset_mean": 9.0,
+      "delta_reset_minus_carry": 0.0
+    },
+    {
+      "through_episode": 416,
+      "carry_mean": 7.25,
+      "reset_mean": 7.25,
+      "delta_reset_minus_carry": 0.0
+    },
+    {
+      "through_episode": 432,
+      "carry_mean": 7.5,
+      "reset_mean": 7.5,
+      "delta_reset_minus_carry": 0.0
+    },
+    {
+      "through_episode": 448,
+      "carry_mean": 7.75,
+      "reset_mean": 7.6875,
+      "delta_reset_minus_carry": -0.0625
+    },
+    {
+      "through_episode": 464,
+      "carry_mean": 7.4375,
+      "reset_mean": 7.4375,
+      "delta_reset_minus_carry": 0.0
+    },
+    {
+      "through_episode": 480,
+      "carry_mean": 9.0,
+      "reset_mean": 9.0,
+      "delta_reset_minus_carry": 0.0
+    },
+    {
+      "through_episode": 496,
+      "carry_mean": 7.4375,
+      "reset_mean": 7.4375,
+      "delta_reset_minus_carry": 0.0
+    },
+    {
+      "through_episode": 512,
+      "carry_mean": 8.5,
+      "reset_mean": 8.5625,
+      "delta_reset_minus_carry": 0.0625
+    },
+    {
+      "through_episode": 528,
+      "carry_mean": 7.6875,
+      "reset_mean": 7.8125,
+      "delta_reset_minus_carry": 0.125
+    },
+    {
+      "through_episode": 544,
+      "carry_mean": 7.5625,
+      "reset_mean": 7.5625,
+      "delta_reset_minus_carry": 0.0
+    },
+    {
+      "through_episode": 560,
+      "carry_mean": 7.625,
+      "reset_mean": 7.625,
+      "delta_reset_minus_carry": 0.0
+    },
+    {
+      "through_episode": 576,
+      "carry_mean": 8.375,
+      "reset_mean": 8.375,
+      "delta_reset_minus_carry": 0.0
+    },
+    {
+      "through_episode": 592,
+      "carry_mean": 7.9375,
+      "reset_mean": 8.0,
+      "delta_reset_minus_carry": 0.0625
+    },
+    {
+      "through_episode": 608,
+      "carry_mean": 7.75,
+      "reset_mean": 7.75,
+      "delta_reset_minus_carry": 0.0
+    },
+    {
+      "through_episode": 624,
+      "carry_mean": 8.25,
+      "reset_mean": 8.25,
+      "delta_reset_minus_carry": 0.0
+    },
+    {
+      "through_episode": 640,
+      "carry_mean": 8.75,
+      "reset_mean": 8.8125,
+      "delta_reset_minus_carry": 0.0625
+    },
+    {
+      "through_episode": 656,
+      "carry_mean": 8.3125,
+      "reset_mean": 8.3125,
+      "delta_reset_minus_carry": 0.0
+    },
+    {
+      "through_episode": 672,
+      "carry_mean": 8.0625,
+      "reset_mean": 8.0625,
+      "delta_reset_minus_carry": 0.0
+    },
+    {
+      "through_episode": 688,
+      "carry_mean": 9.0625,
+      "reset_mean": 9.0625,
+      "delta_reset_minus_carry": 0.0
+    },
+    {
+      "through_episode": 704,
+      "carry_mean": 8.125,
+      "reset_mean": 8.125,
+      "delta_reset_minus_carry": 0.0
+    },
+    {
+      "through_episode": 720,
+      "carry_mean": 7.3125,
+      "reset_mean": 7.3125,
+      "delta_reset_minus_carry": 0.0
+    },
+    {
+      "through_episode": 736,
+      "carry_mean": 7.625,
+      "reset_mean": 7.625,
+      "delta_reset_minus_carry": 0.0
+    },
+    {
+      "through_episode": 752,
+      "carry_mean": 8.1875,
+      "reset_mean": 8.1875,
+      "delta_reset_minus_carry": 0.0
+    },
+    {
+      "through_episode": 768,
+      "carry_mean": 8.375,
+      "reset_mean": 8.375,
+      "delta_reset_minus_carry": 0.0
+    },
+    {
+      "through_episode": 784,
+      "carry_mean": 8.875,
+      "reset_mean": 8.9375,
+      "delta_reset_minus_carry": 0.0625
+    },
+    {
+      "through_episode": 800,
+      "carry_mean": 8.0625,
+      "reset_mean": 8.125,
+      "delta_reset_minus_carry": 0.0625
+    },
+    {
+      "through_episode": 816,
+      "carry_mean": 7.125,
+      "reset_mean": 7.1875,
+      "delta_reset_minus_carry": 0.0625
+    },
+    {
+      "through_episode": 832,
+      "carry_mean": 8.0,
+      "reset_mean": 8.0,
+      "delta_reset_minus_carry": 0.0
+    },
+    {
+      "through_episode": 848,
+      "carry_mean": 8.0,
+      "reset_mean": 8.0,
+      "delta_reset_minus_carry": 0.0
+    },
+    {
+      "through_episode": 864,
+      "carry_mean": 7.875,
+      "reset_mean": 7.875,
+      "delta_reset_minus_carry": 0.0
+    },
+    {
+      "through_episode": 880,
+      "carry_mean": 8.5625,
+      "reset_mean": 8.625,
+      "delta_reset_minus_carry": 0.0625
+    },
+    {
+      "through_episode": 896,
+      "carry_mean": 7.75,
+      "reset_mean": 7.75,
+      "delta_reset_minus_carry": 0.0
+    },
+    {
+      "through_episode": 912,
+      "carry_mean": 8.125,
+      "reset_mean": 8.125,
+      "delta_reset_minus_carry": 0.0
+    },
+    {
+      "through_episode": 928,
+      "carry_mean": 7.5625,
+      "reset_mean": 7.5625,
+      "delta_reset_minus_carry": 0.0
+    },
+    {
+      "through_episode": 944,
+      "carry_mean": 7.25,
+      "reset_mean": 7.3125,
+      "delta_reset_minus_carry": 0.0625
+    },
+    {
+      "through_episode": 960,
+      "carry_mean": 7.8125,
+      "reset_mean": 7.8125,
+      "delta_reset_minus_carry": 0.0
+    },
+    {
+      "through_episode": 976,
+      "carry_mean": 7.875,
+      "reset_mean": 7.875,
+      "delta_reset_minus_carry": 0.0
+    },
+    {
+      "through_episode": 992,
+      "carry_mean": 7.625,
+      "reset_mean": 7.5625,
+      "delta_reset_minus_carry": -0.0625
+    },
+    {
+      "through_episode": 1008,
+      "carry_mean": 8.1875,
+      "reset_mean": 8.0625,
+      "delta_reset_minus_carry": -0.125
+    },
+    {
+      "through_episode": 1024,
+      "carry_mean": 7.5,
+      "reset_mean": 7.4375,
+      "delta_reset_minus_carry": -0.0625
+    }
+  ],
+  "p17_bin_sign_counts": {
+    "positive": 12,
+    "negative": 13,
+    "zero": 39
+  },
+  "p17_sampled_checkpoints": [
+    {
+      "q": 16,
+      "carry_eval": 6.109375,
+      "reset_eval": 6.171875,
+      "eval_delta": 0.0625,
+      "native_cumulative_delta": 0.0
+    },
+    {
+      "q": 32,
+      "carry_eval": 7.546875,
+      "reset_eval": 7.453125,
+      "eval_delta": -0.09375,
+      "native_cumulative_delta": 0.03125
+    },
+    {
+      "q": 64,
+      "carry_eval": 7.640625,
+      "reset_eval": 7.5,
+      "eval_delta": -0.140625,
+      "native_cumulative_delta": -0.078125
+    },
+    {
+      "q": 128,
+      "carry_eval": 7.625,
+      "reset_eval": 7.609375,
+      "eval_delta": -0.015625,
+      "native_cumulative_delta": -0.078125
+    },
+    {
+      "q": 256,
+      "carry_eval": 8.125,
+      "reset_eval": 8.0625,
+      "eval_delta": -0.0625,
+      "native_cumulative_delta": -0.046875
+    },
+    {
+      "q": 512,
+      "carry_eval": 7.546875,
+      "reset_eval": 7.546875,
+      "eval_delta": 0.0,
+      "native_cumulative_delta": -0.02734375
+    },
+    {
+      "q": 768,
+      "carry_eval": 7.859375,
+      "reset_eval": 7.84375,
+      "eval_delta": -0.015625,
+      "native_cumulative_delta": -0.013020833333333925
+    },
+    {
+      "q": 1024,
+      "carry_eval": 7.75,
+      "reset_eval": 7.703125,
+      "eval_delta": -0.046875,
+      "native_cumulative_delta": -0.0087890625
+    }
+  ],
+  "p17_prefix": {
+    "native_mean": 6.96923828125,
+    "last_256_native_mean": 7.9609375,
+    "old_sampled_endpoint": 8.375,
+    "shared_post_switch_q0": 4.671875
+  },
+  "p17_descriptive_native_windows": [
+    {
+      "start": 1,
+      "end": 16,
+      "carry_mean": 5.1875,
+      "reset_mean": 5.1875,
+      "delta": 0.0
+    },
+    {
+      "start": 1,
+      "end": 128,
+      "carry_mean": 7.234375,
+      "reset_mean": 7.15625,
+      "delta": -0.078125
+    },
+    {
+      "start": 129,
+      "end": 1024,
+      "carry_mean": 7.9453125,
+      "reset_mean": 7.946428571428571,
+      "delta": 0.0011160714285711748
+    },
+    {
+      "start": 1,
+      "end": 512,
+      "carry_mean": 7.73828125,
+      "reset_mean": 7.7109375,
+      "delta": -0.02734375
+    },
+    {
+      "start": 513,
+      "end": 1024,
+      "carry_mean": 7.974609375,
+      "reset_mean": 7.984375,
+      "delta": 0.009765625
+    }
+  ],
+  "descriptive_window_status": "outcome-informed slices, not extra primaries or independent units",
+  "p17_movement_relative_to_initial_rms": {
+    "first_prefix_rollout": 0.025182702976884443,
+    "prefix_end": 0.9255058271585098,
+    "CARRY": 0.2657191301407185,
+    "RESET": 0.3308227899449678
+  },
+  "p17_actual_counts": {
+    "training_episodes": 6144,
+    "training_episodes_started": 6144,
+    "training_joint_steps": 294912,
+    "optimizer_steps": 6144,
+    "evaluation_episodes": 1152,
+    "evaluation_episodes_started": 1152,
+    "evaluation_joint_steps": 55296
+  },
+  "two_prefix_actual_counts": {
+    "training_episodes": 12288,
+    "training_episodes_started": 12288,
+    "training_joint_steps": 589824,
+    "optimizer_steps": 12288,
+    "evaluation_episodes": 2304,
+    "evaluation_episodes_started": 2304,
+    "evaluation_joint_steps": 110592
+  },
+  "resources": {
+    "p17_runner_wall_seconds": 36.07172741298564,
+    "p17_supervisor_chain_seconds": 37,
+    "p17_peak_rss_bytes": 518434816,
+    "p17_peak_rss_mib": 494.41796875,
+    "sum_two_runner_wall_seconds": 72.76788033498451,
+    "sum_two_supervisor_chain_seconds": 75,
+    "aggregate_cpu_time": null,
+    "per_arm_wall": null,
+    "sum_two_runner_wall_per_valid_pair_seconds": 36.383940167492256,
+    "calendar_span_first_scientific_start_to_second_completion_seconds": 7693.0,
+    "calendar_span_limit": "includes between-allocation and control-plane gaps; not aggregate CPU time or continuous learner runtime"
+  },
+  "predictions": {
+    "seed1103_prior_interval": [
+      -0.5,
+      0.5
+    ],
+    "seed1103_inside_interval": true,
+    "seed1117_prospective_interval": [
+      -0.5,
+      0.5
+    ],
+    "seed1117_inside_interval": true,
+    "seed1117_prediction_provenance": "outcome-informed DM forecast made before1117 exposure",
+    "owner_prediction": "not taken"
+  },
+  "new_intake_exposure": {
+    "environment_transitions": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0,
+    "result_bearing_invocations": 0
+  },
+  "per_run_summary": {
+    "unit": "caller-declared independent training run",
+    "inference": "descriptive only; no confidence interval or success classification",
+    "groups": [
+      {
+        "task": "VSP02_B01_adaptation_native_mean",
+        "arm": "CARRY",
+        "n": 2,
+        "mean": 7.66259765625,
+        "sample_sd": 0.27414198450298766,
+        "min": 7.46875,
+        "max": 7.8564453125,
+        "runs": {
+          "1103": 7.46875,
+          "1117": 7.8564453125
+        }
+      },
+      {
+        "task": "VSP02_B01_adaptation_native_mean",
+        "arm": "RESET",
+        "n": 2,
+        "mean": 7.66748046875,
+        "sample_sd": 0.254807033454918,
+        "min": 7.4873046875,
+        "max": 7.84765625,
+        "runs": {
+          "1103": 7.4873046875,
+          "1117": 7.84765625
+        }
+      }
+    ],
+    "paired_differences": [
+      {
+        "task": "VSP02_B01_adaptation_native_mean",
+        "arm": "RESET",
+        "baseline": "CARRY",
+        "summary": {
+          "n": 2,
+          "mean": 0.0048828125,
+          "sample_sd": 0.01933495104806966,
+          "min": -0.0087890625,
+          "max": 0.0185546875
+        },
+        "differences": {
+          "1103": 0.0185546875,
+          "1117": -0.0087890625
+        },
+        "unmatched_arm_seeds": [],
+        "unmatched_baseline_seeds": []
+      }
+    ]
+  },
+  "p17_scientific_exposure": {
+    "environment_transitions": 350208,
+    "optimizer_steps": 6144,
+    "evaluation_episodes": 1152,
+    "model_selection_trials": 0,
+    "result_bearing_invocations": 1,
+    "independent_training_pairs": 1
+  },
+  "two_prefix_scientific_exposure": {
+    "environment_transitions": 700416,
+    "optimizer_steps": 12288,
+    "evaluation_episodes": 2304,
+    "model_selection_trials": 0,
+    "result_bearing_invocations": 2,
+    "independent_training_pairs": 2
+  },
+  "exposure_line": "environment_transitions=700416; optimizer_steps=12288; evaluation_episodes=2304; model_selection_trials=0; result_bearing_invocations=2; independent_training_pairs=2",
+  "ppo_transition_passes_two_prefixes": 2359296,
+  "prediction_scoring": "Both recorded intervals cover their own observed primary; seed1117 forecast was outcome-informed by seed1103, not an independent forecast; no calibration claim",
+  "analysis_invocation": "python .agents/skills/hmasd-scientific-tools/scripts/summarize_runs.py temp/directions/vsp_02/exp/analysis/tpc_b01_p17_intake/primary_scores.csv --paired --baseline CARRY --out temp/directions/vsp_02/exp/analysis/tpc_b01_p17_intake/run_summary.json",
+  "reading": "Both complete per-prefix results are inside MEI, with opposite signs. Mean is descriptive and does not replace per-prefix primaries or establish equivalence/stable superiority.",
+  "next_task_need": {
+    "recommendation": "No further unchanged-seed B01 expansion; return a bounded future Convergence task on disposition of the accepted fixed-member family, with no family/Portfolio disposition made here.",
+    "state": "recommendation only; P17 creates no Pro request, packet, Send, third seed or new B",
+    "decision_tier_if_family_disposition_is_requested": "direction, em:vsp_02:convergence",
+    "new_scientific_exposure_for_consultation": 0
+  }
+}

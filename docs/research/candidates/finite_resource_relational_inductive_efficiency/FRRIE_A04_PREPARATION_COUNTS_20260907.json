@@ -1,0 +1,21 @@
+{
+  "unique_interpreter_builds": 2,
+  "inspected_executable_paths": 13,
+  "noninterpreter_config_helpers": 4,
+  "checked_package_roots": 5,
+  "prospective_arms": 1,
+  "repetitions": 3,
+  "training_tapes_per_update": 64,
+  "updates_per_repetition": 2,
+  "prospective_tape_constructions": 384,
+  "distinct_tape_inputs": 128,
+  "evaluation_tapes": 0,
+  "learner_updates": 0,
+  "native_transitions": 0,
+  "projection_from_a03_t0_phase_s": 17.73,
+  "projection_from_windows_phase_s": 41.33334780007135,
+  "complete_chain_cap_s": 300,
+  "kill_grace_s": 5,
+  "dominant_uplink_uniform_entries": 705024,
+  "native_transition_or_optimizer_claim": false
+}

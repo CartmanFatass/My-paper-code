@@ -8,7 +8,7 @@ description: Use when the independent Portfolio session plans Root commands, han
 OWNER_DIRECT 2026-09-07: this skill belongs to the independent Astra Portfolio (effort selected by the owner)
 session in `.codex/hmasd-portfolio.toml`, directly on main. Portfolio plans concrete tasks,
 dependencies and return branches; Luna/xhigh Root executes the issued commands, integration,
-monitoring and Pro transport. See docs/project/ROOT_OPERATIONS.md.
+experiment monitoring and Pro handoff dispatch; independent Luna/high Transport owns Pro browser work. See docs/project/ROOT_OPERATIONS.md.
 Portfolio writes its scientific files on main and pushes immediately; coordinate overlapping
 Root integrations. Existing Pro/owner authority is unchanged. Portfolio is not a launch gate.
 
@@ -79,8 +79,10 @@ execution alternative or select another direction after a failed admission.
 
 Use `$hmasd-loop-dispatch` at `.agents/skills/hmasd-loop-dispatch/SKILL.md` for every
 Root command, completion/exception return and working-set refill. Its Portfolio section
-is the single dispatch procedure: process the whole working set, send all justified
-independent commands together and confirm actual native acceptance. This skill retains
+is the single dispatch procedure: maintain working-set context while issuing each ready
+follow-on or replacement immediately. Bundle only commands already ready together; never
+wait for all directions to return before refilling one slot. Confirm actual native acceptance
+from the existing receipt. This skill retains
 scientific comparison, investment, lifecycle and proper-node judgment; Root receives
 concrete tasks rather than those judgments to make. Known collection/intake and selected
 execution routes continue without an extra Portfolio vote. New scientific choices retain
@@ -96,6 +98,12 @@ C-FORMAL work.
 Distinguish technical success, bounded task competence, comparative algorithm advantage,
 cross-scenario transfer, safety, and deployment. Evidence for an earlier claim does not silently
 promote a later one.
+
+OWNER_DIRECT 2026-09-08: define a direction deliverable and authority boundary, leaving
+ordinary implementation, repair and intermediate decisions with its DM/CM. Root closes that
+delegation through acceptance and authorized continuation. Do not end an ordinary selected
+card/specification route at another Portfolio implementation request. Portfolio handles an
+actual working-set replacement, cross-direction choice or conflict beyond that direction.
 
 ## Investment fields (owner decision 2026-09-04, revised the same day)
 
@@ -171,11 +179,11 @@ and includes the current Portfolio snapshot, this evidence specification, the se
 class and claim ceiling, plus the exact direction/evidence paths needed for the decision. The
 project-shared registry creates or binds the provider conversation on first use under the stable
 conversation binding key and reuses that exact provider conversation for later Portfolio rounds.
-Each default handoff goes to integrated Root, the one Transport execution endpoint declared in `.codex/hmasd-transport.toml` and
+Each default handoff goes to independent Transport, the reusable endpoint declared in `.codex/hmasd-transport.toml` and
 sends exactly one completion or terminal-blocker receipt back to the handoff author's declared
 `parent_thread_id`. App dispatch omits `model` and `thinking`, preserving the recipient settings; it never
 calls `create_thread` or selects a replacement task. The singleton task ID is an execution endpoint,
-never a provider-conversation binding. Set the scientific receipt parent to this Portfolio task; Root records its own receipts locally when it is also parent.
+never a provider-conversation binding. Set the scientific receipt parent to this Portfolio task; native-direction requests instead name Root as parent for native forwarding.
 The configured provider model is separate from that executor. Honor an explicit owner request
 for a new provider conversation or caller-direct execution using the Prompt Author/Transport
 exceptions; do not send through both routes or repeat an accepted provider request.

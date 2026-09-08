@@ -1,9 +1,10 @@
 # GitHub research collaboration
 
 Portfolio and each direction DM author research questions and intake complete Pro
-responses. Root executes Transport, verifies delivery facts and integrates commits.
+responses. Independent Luna/high Transport owns Pro browser work and delivery receipts;
+Root dispatches handoffs, forwards native returns and integrates accepted commits.
 Use `.agents/skills/hmasd-pro-research-prompt-author/SKILL.md` to create a fixed GitHub
-task and `.agents/skills/hmasd-chatgpt-pro-transport/SKILL.md` for Root's transport.
+task and `.agents/skills/hmasd-chatgpt-pro-transport/SKILL.md` for Transport operations.
 Scientific authority, experiment admission and Git rules remain in AGENTS.md.
 
 ## Task and delivery scope
@@ -44,10 +45,12 @@ observations, inferences and limitations. Routing fields stay in HANDOFF.json.
 2. Commit and push TASK.md, then bind its full commit SHA using the renderer. Confirm
    that the fixed TASK is published and that the delivery branch and Issue exist.
    Commit and push the updated internal handoff.
-3. Send the rendered handoff once to the configured Root endpoint. Root executes the
-   full Transport lifecycle locally: verify 6 Pro and the exact bound conversation,
-   send the supplied short prompt once, observe and archive. Root-authored requests
-   use CALLER_DIRECT without an app self-message. Preserve accepted request content;
+3. Send the rendered handoff once to the independent configured Transport endpoint,
+   omitting app model/thinking overrides. Native DM/CM authors normally hand it to Root
+   for this dispatch, with source=actual author, parent=Root, operator=Transport.
+   Root-authored requests also dispatch to Transport. Transport verifies 6 Pro and the
+   exact conversation, sends the supplied short prompt once, observes and archives.
+   Preserve accepted request content and migration evidence under ROOT_OPERATIONS.md;
    uncertain acceptance is reconciled against the existing message before continuing.
    Identify that handoff by the author's returned full commit and request ID. Read its
    fixed TASK link and delivery scope from those bytes, even when main or an older checkout
@@ -60,15 +63,15 @@ observations, inferences and limitations. Routing fields stay in HANDOFF.json.
    response at that commit and this round's Issue comment. It returns actual immutable
    delivery links, confirmed partial delivery with the remaining gap, or unresolved
    status marked unconfirmed. Input evidence stays pinned to its original SHA.
-6. Root archives the exact short chat reply and actual delivery facts. Portfolio/DM
+6. Transport archives the exact short chat reply and actual delivery facts. Portfolio/DM
    reads the complete response at its fixed commit, preserves original bytes and the
    comment snapshot, and performs specification-conformance and scientific intake.
    Root checks the actual changed scope and integrates under the normal Git rules.
    A file delivery or process success alone is not a formed scientific decision.
 
-Root handles observation and notification under ROOT_OPERATIONS.md. Issue comments
+Transport handles Pro observation and parent receipts under ROOT_OPERATIONS.md. Issue comments
 do not themselves establish automatic wakeup. Completion goes to the declared parent;
-Root-local completion is recorded locally, and Root forwards direction science to DM.
+Transport returns native-direction receipts to Root, which forwards them to the original DM.
 Repeated notifications reuse the existing request/commit/path intake.
 
 ## Partial success and uncertainty
