@@ -311,3 +311,25 @@ facts return to the same CM for collection and this DM for all-outcome intake.
 Actual native return, movement, moment counts and resource conformance remain
 unmeasured until that sole invocation. The preparation's zero-exposure boundary
 and original reading rules remain historical and unchanged.
+
+## 9. Pre-admission failure and corrected supervisor identity
+
+The original accepted supervisor handle failed at the missing-cwd `cd` before
+admission or scientific execution. The [intake](VSPC1_NATIVE_HOLD_VALUE_B03_INTAKE_20260908.md)
+records the full boundary, zero native exposure and object-tier correction;
+[CM evidence](VSPC1_NATIVE_HOLD_VALUE_B03_CWD_CORRECTION_EVIDENCE_20260908.json),
+commit `698b8aeff26f2b9ae21d4cb8d1bf8a255b161d38`, now establishes the exact
+detached cwd exists clean at accepted source `7a8ed3aa5d25ded71164aa338749d09318124dcf`.
+The original log and supervisor metadata remain preserved. No source, script,
+scientific key, work allowance, prediction or reading rule changes.
+
+Root's corrected submission uses only a fresh supervisor name:
+
+```text
+ssh -o BatchMode=yes -o ConnectTimeout=10 hmasd-wsl-node /usr/local/bin/agent-task run vspc1_hold_value_b03_8201_7a8ed3aa5d25_cwd1 /bin/bash /home/wu/hmasd-inputs/vspc1_hold_value_b03_8201_7a8ed3aa5d25.sh
+```
+
+This supersedes §8's pending staging and original submission identity. The new
+handle is not yet accepted at correction intake. The selected scientific pair
+remains unrun, with fresh admission and the original complete limits in the
+unchanged script; no duplicate scientific execution or extra retry is authorized.
