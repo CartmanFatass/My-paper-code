@@ -200,3 +200,124 @@ The original host._finish packs152 tokens, and EpisodeTape.__post_init__ repacks
 all152 for its existing canonical check (304 codec.pack calls on completion).
 These are original checks, not added repeated validation. Printed token fields
 remain public; evaluator truth is not exported.
+
+## Isolated TRAIN51 result
+
+Source `d843b5f90` was committed/pushed and staged in the fresh exact-SHA cwd
+before one accepted handle `cbsc-p47-train51-20260908`, PID2779219.
+Supervisor start/end16:23:49Z/16:23:51Z, exit0, tmux inactive; outer wall1.55s,
+peak RSS381400KiB. Adjacent admission captured16:23:49.985005Z,
+assessed16:23:49.985286Z, physical/effective15643357184 bytes, passed4GiB.
+Observed Python3.12.3 / Torch2.7.0+cu118; original lexical interpreter retained.
+
+The original TRAIN51 tape completed once, including its original304 codec.pack
+calls and canonical public-byte check. Output contains152 public records and
+2584 bytes, SHA256/primitive digest
+`5b9c4bde5325f4f0ff808a2fb1339b8a76dc834bde707cacc236e4444405797c`.
+There are16 NOOP_SEMANTIC tokens; all exported request_active/request_need fields
+are false. Exact token positions/clock fields are in train51_collection_facts.json,
+and full public fields in TEST_ONLY_episode_result.json. The current output is
+not compared as equal to the partially printed failed-core token or historical
+P32 bytes. The core's active NOOP could be any corresponding token; its exact
+position remains unknown.
+
+Copied supervisor and output/admission roots, then checked identity21223/TRAIN51,
+152 records,2584 bytes, digest agreement,16 no-op flag fields, zero reported
+model/optimizer/projection/score/learning counts and passing memory floors.
+The zeroes also follow directly from this test's source, which never calls those
+routes. No full-prefix runtime or research smoke was repeated for collection.
+This pass establishes nonreproduction on one isolated original episode, not full
+prefix safety, cause isolation or a repair. Actual summed wall of the three
+operations (prefix7.37 + offline2.94 + isolated1.55) is11.86s; each separately met
+its120s cap. Scientific exposure remains zero. Aggregate CPU and study elapsed
+including control-plane work are unmeasured.
+
+## Current engineering boundary
+
+The selected source inspection and two distinct target discriminators have not
+identified a correctable token/adapter defect. Prior-prefix allocation or other
+runtime state remains an open condition; the isolated input law is not inevitably
+fatal in the observed shorter execution. The minimal prefix's primary projection
+comparison remains incomplete. The new saved-core native context is independent
+technical evidence, and does not imply a common FRRIE cause.
+
+A concrete next local discriminator, if continued under P47, is the original
+TRAIN0..51 prefix with all52 returned tapes retained, stopping immediately before
+any evaluation-tape/model/projection work and comparing only the completed51st
+identity's public bytes (episode51, the52nd tape) with the saved isolated bytes.
+This preserves counter-addressed input but reinstates the missing preceding tape
+allocations. It is useful only for distinguishing that prefix from the isolated
+case; identical repeat-to-cap is not useful. It remains zero-learning P47 work,
+not a new scientific allocation, and has not been executed here. Any shared
+allocator/interpreter instrumentation is instead coordinated through Root so it
+does not duplicate FRRIE or silently change this slice's preserved environment.
+A replacement runtime or speculative Enum/FIFO rewrite is unsupported.
+
+CM returns collected conformance evidence and this explicit unresolved boundary;
+DM owns intake and sequencing, Root owns integration and shared-runtime routing.
+No process from this slice remains live. Independent review covers the source,
+raw facts and limits; it is not crash-fix approval or scientific readiness.
+
+## Final selected retained-prefix discriminator (prospective)
+
+DM selected the concrete next route above under P47: one TRAIN0..51 tuple with
+all52 tapes retained, no EVAL/model/projection/scores/learning. The same mapped
+test now accepts --retained-prefix-reference, executes that tuple, selects its
+last tape, then compares the public bytes only after construction completes.
+No prior token/RNG law changes. Original host/tape checks perform52x304=15808
+codec.pack calls on completion for7904 public tokens. Only the final episode's
+2584 bytes/public fields are published. No prefix search or further automatic
+expansion follows this bounded check; return a repair or a coordinated-runtime
+scope need. REQUEST_ACTIVE recovered from the core is the Enum field being
+accessed, not a recovered true Boolean value; isolated false flags are not a
+historical mismatch.
+
+Reference: isolated TRAIN51 TEST_ONLY_public_tokens.bin,2584 bytes,
+SHA256 `5b9c4bde5325f4f0ff808a2fb1339b8a76dc834bde707cacc236e4444405797c`,
+bound here before staging to
+`/home/wu/hmasd-inputs/cbsc-p47-20260908/TEST_ONLY_train51_public_tokens.bin`.
+Handle/cwd tag `cbsc-p47-train-prefix52-20260908`, fresh exact-source worktree.
+Same original interpreter/thread limits, adjacent >=4GiB admission and GNU-time
+TERM115/KILL5 envelope. Output test/p47_prefix52_20260908/TEST_ONLY_episode.
+Complete normal cost unknown; prior fatal prefix7.37s/isolated1.55s supply context,
+not a promise. Each operation capped120s; no sweep/learner exposure. AST/diff
+checks only before this new diagnostic. No new section4 machinery.
+
+## Restricted-turn reconciliation (read-only evidence / documentation)
+
+The assigning DM reported that the preceding turn ended with an automated
+possible-cybersecurity-risk restriction, with no individual command named.
+The follow-up authorizes read-only reconciliation/documentation only; no target,
+debugger, runtime, diagnostic or source action was repeated after that report.
+This records the reported restriction without inferring a classifier trigger.
+
+Last executed preparation command before the restriction edited the mapped test
+for --retained-prefix-reference, appended its prospective record, parsed its AST
+and ran git diff --check; both checks passed. The next communication asked the
+existing reviewer to finish its current file. Its completed return reports no
+material finding for isolated TRAIN51 and static inspection of the proposed
+52-tape variant. No final-prefix commit, staging command, launch command or
+accepted handle was attempted in the visible retained sequence.
+
+Read-only reconciliation finds HEAD `d843b5f903663dcc5a699c0a85fbae4e5252d20f`,
+previously pushed; index empty. CARD, RESULT, REVIEW and
+`test_initial_train_episode.py` are modified; DM's INTAKE is untracked.
+The proposed final52-tape source/card/result remain unpublished working changes.
+No receipt named cbsc-p47-train-prefix52-20260908 exists in the retained control
+root. The only accepted receipts there are launch.stdout (minimal prefix),
+offline_launch.stdout (new-core read) and train51_launch.stdout (isolated51).
+Their copied exit_code files are139,0,0 respectively; all had terminal status
+before this reconciliation. No remote launch/attach/status action was needed.
+
+Prior initial-prefix evidence and the three P47 result/admission/supervisor
+collections remain in place unchanged. The four historical core analyses and
+new-core original are not modified. The final-prefix outcome, byte comparison,
+wall/RSS and admission are missing because no such invocation was accepted.
+The remaining restriction boundary goes to DM/Root; static review is not runtime
+acceptance, and this reconciliation grants no permission to retry or bypass it.
+
+DM publication note: the preceding HEAD/dirty/unpublished description is the
+reconciliation-time snapshot. The retained-prefix source/card, complete evidence
+and static review are now preserved with the DM intake at a clean boundary.
+This publication does not execute or accept the pending prefix, and the missing
+final-prefix observations remain missing.

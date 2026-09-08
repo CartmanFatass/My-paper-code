@@ -141,3 +141,58 @@ history; it cannot be presumed equivalent to the failed process. Its source,
 execution and result are outside this completed review extension. The recovered
 episode informs that next hypothesis without establishing a fix or research
 outcome.
+
+## Extension: isolated TRAIN51 completion
+
+Reviewed `test_initial_train_episode.py` at
+`d843b5f903663dcc5a699c0a85fbae4e5252d20f` against the card's isolated TRAIN51
+continuation. The 35-line mapped test imports the original run module and calls
+only the original host's TRAIN51 construction, public-byte checks and TEST_ONLY
+serialization. No model, optimizer, adapter projection, score, checkpoint or
+learning route is called. It exports public fields, not evaluator truth. No
+production difference or new scope-spec section 4 machinery is introduced.
+
+Inspected the control root's `train51_launch.json`, copied
+`cbsc-p47-train51-20260908/{runner.sh,task.log,exit_code}`, adjacent admission,
+and `p47_train51_20260908/TEST_ONLY_episode` outputs. A read-only PowerShell
+artifact check independently confirms identity seed21223/TRAIN51, 152 public
+records, 2,584 bytes, and SHA256 equal to the JSON primitive digest:
+`5b9c4bde5325f4f0ff808a2fb1339b8a76dc834bde707cacc236e4444405797c`.
+It confirms 16 `NOOP_SEMANTIC` records with both `request_active` and
+`request_need` false for those records. These agree with
+`train51_collection_facts.json`. The five reported zero counters agree with
+the directly inspected call boundary; they are not runtime instrumentation.
+
+`DynamicHost` stores only run_name/seed and creates a fresh `AuditedCounterPRF`
+inside each `build_stochastic` call. Its addresses include seed, split and
+episode_id; `addressing.digest/u64` derives values from SHA256 of the address,
+and the PRF records are local to that call. There is no preceding-episode RNG
+cursor to replay. `host._finish` packs all 152 tokens, then
+`EpisodeTape.__post_init__` repacks them for its original canonical check.
+Successful return therefore supports 304 packing calls by source inference.
+The later public-byte read and digest do not add codec.pack calls.
+
+The raw task exits 0 after its completion marker, with outer wall 1.55 seconds,
+381,400 KiB peak RSS and a coarse 2-second supervisor duration. Admission
+captured `2026-09-08T16:23:49.985005Z` reports physical/effective availability
+15,643,357,184 bytes and passing 4-GiB floors. The recorded original lexical
+interpreter and numeric-library limits are retained; Torch compute threads are
+set to one. Admission, construction, checks and output publication are inside
+the existing timeout/time envelope and below 120 seconds. Artifact arithmetic
+confirms 11.86 seconds for the three recorded operation walls; aggregate CPU
+and broader study/control-plane elapsed remain unmeasured.
+
+**No material finding was found in this test or its isolated-completion claim.**
+The original per-episode input law is retained, but import/wrapper and preceding
+allocation state differ from the failed full setup. The output was not matched
+against a complete failed-core token or historical P32 bytes. Completion of one
+isolated episode neither clears the full prefix nor supplies a production fix.
+The result's limitations preserve that distinction.
+
+At this extension's boundary, the proposed retained TRAIN0..51 continuation is
+still prospective. Its inspected working diff retains a tuple of 52 original
+tapes, reads the reference only after construction returns, compares only the
+last episode's public bytes, then serializes and stops. It adds no model,
+projection or learning call. This static observation supplies no completion
+evidence for that subsequent diagnostic; its eventual terminal evidence requires
+its own narrowly scoped supplement. No runtime was executed by this reviewer.

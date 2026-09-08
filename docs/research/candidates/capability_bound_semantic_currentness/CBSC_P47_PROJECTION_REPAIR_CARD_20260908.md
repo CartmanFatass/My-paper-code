@@ -179,8 +179,9 @@ apply to these independently readable facts; no scientific remainder is revived.
 ## P47 isolated TRAIN51 continuation — prospective diagnostic
 
 The offline check completed in 2.94 seconds and recovered TRAIN episode51 in
-three consistent frames, with an active NOOP_SEMANTIC token / REQUEST_ACTIVE
-flag. The original native frame was in `_PyEval_EvalFrameDefault`; no writer
+three consistent frames, with a NOOP_SEMANTIC token while the REQUEST_ACTIVE
+field was being read. No Boolean value was recovered from that field. The
+original native frame was in `_PyEval_EvalFrameDefault`; no writer
 was identified and other token fields remain truncated. The full first-run
 log still has no completed counter; 51 earlier completed TRAIN tapes follows
 from this new core state plus sequential source ordering only.
@@ -202,3 +203,34 @@ an input-forced failure, with low confidence. A pass supports nonreproduction
 on this shorter setup; a failure gives its own direct boundary context. Neither
 identifies the writer or supports a production patch by itself. Owner prediction
 remains not taken; the existing reading rule and scientific claim ceiling stand.
+
+## P47 TRAIN0..51 continuation — prospective final prefix check
+
+Isolated TRAIN51 completed in1.55s with152 tokens and the original304 pack calls;
+it did not create a model, projection or score. The CM record binds its2,584 public
+bytes. Object / technical selection: (a) construct the original TRAIN0..51 tuple,
+then compare its final tape to those saved bytes; (b) repeat isolated51;
+(c) guess a production workaround. Recommend/select **(a)** within P47, preserving
+all52 tapes until the stop before EVAL/model/projection/learning. Work is52 x152
+=7,904 tokens and52 x304=15,808 pack calls. Complete bound remains<=120s with
+fresh admission and detached exact committed source. No process-state identity
+with the historical run or direct flag-value mismatch is asserted.
+
+Owner-delegated decision (unattended, 2026-09-03 instruction): (a). DM predicts
+completion more likely than an inevitable prefix fault, with low confidence;
+owner prediction remains not taken. Retain a failure's actual boundary or a
+pass's narrow input comparison. After this one prefix, return any supported
+correction or the precise coordinated-runtime scope need; this selection does
+not commission a search over prefix lengths, repeated passes or a new learner.
+
+## Published boundary after the CM turn restriction
+
+The retained TRAIN0..51 source and its static review were prepared but not
+committed/staged/launched before an automated possible-cybersecurity-risk
+restriction ended the CM turn. The same CM then reconciled retained local state
+only: there was no accepted final-prefix handle and no corresponding result,
+admission or runtime measurement. The prepared work is published with the
+[intake](CBSC_P47_PROJECTION_REPAIR_INTAKE_20260908.md) as unexecuted.
+The last prediction remains unscored. Root receives the exact restricted
+continuation need; no alternative executor, target retry or scientific polarity
+is inferred from this boundary.
