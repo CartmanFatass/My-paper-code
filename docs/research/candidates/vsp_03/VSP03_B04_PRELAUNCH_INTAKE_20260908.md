@@ -1,9 +1,10 @@
-# VSP03 B04 P64 — candidate source and unresolved complete-cap boundary
+# VSP03 B04 P64/P65 — prelaunch source intake
 
-**The seed/object and exit-status corrections conform, but the candidate is not
-accepted for scientific launch.** The complete 120s stop boundary is not enforced
-through the existing supervisor's required postamble. P64's one scientific instance
-remains entirely unstarted; this is an execution-contract gap, not a result about G.
+**P65 source b5d605bf4 is accepted at section 5; Root integration precedes the sole
+P64 invocation.** The complete-boundary correction and five independent shortened
+checks resolve the named findings. No B04 scientific run has started. Sections 1–4
+retain the earlier rejected candidates and their original technical meaning; their
+findings were repaired, not overruled or converted into a result about G.
 
 ## 1. Evidence checked and the controlling requirement
 
@@ -118,3 +119,96 @@ only audit merge conflict was resolved with exact main bytes after verifying all
 prior nonblank direction records were present. P64's one seed-6 allocation remains
 unstarted and its prediction unscored. Existing new-card item 003 points to the
 updated card; the ordinary technical decision is in the audit, without another item.
+
+## 5. P65 source acceptance and sole-invocation continuation
+
+The DM accepts source **`b5d605bf4f39b5ab18f01c98e04dc07e53764354`**, with complete
+independent review, check evidence and technical/launch records committed at
+**`c2c092894e0523b88822fb597f481dc810071c24`**. The DM read the changed launch,
+controller and deadline paths, the actual exit-precedence correction, the final
+review/technical record and the raw check JSON's manager, terminal, PID and cgroup
+facts. The existing seed/object/scientific checks are reused. No CM command or
+scientific function was rerun during this intake.
+
+P65's controlling requirement is applied verbatim:
+
+> Start the
+> one clock before required startup/admission and reserve any shutdown/publication
+> time inside it. Cover descendants and failure paths; do not restart the clock,
+> grant grace beyond 120s, forge existing supervisor records, or infer success from
+> an outer wrapper's zero exit.
+
+The first P65 candidate c436e7bab still armed its timer after required startup;
+both DM and reviewer identified that gap. The final path uses the already-running
+user systemd manager's transient oneshot startup timer before ExecStart. Its
+pre-start monotonic origin reaches the controller, unchanged agent-task, private
+tmux, adjacent admission and learner. Work stops at origin+110s, cleanup is reserved
+through origin+118s, and the manager sends a cgroup SIGKILL at origin+119s, inside
+the unchanged 120s cap. The private server prevents unrelated default-server work
+from escaping or entering this task's cgroup. Final publication follows the
+payload/supervisor receipt and control-descendant cleanup.
+
+The reviewer-found missing command environment was repaired in 2e02bce40. DM's
+subsequent actual-exit finding was repaired in b5d605bf4: a later nonzero supervisor
+exit overrides an earlier differing payload receipt; a contradictory actual zero
+becomes task125. Both original observations remain. The installed supervisor and
+its records are unchanged, and its raw files remain separate from the adapter's
+authoritative terminal and the manager's actual code/status/result.
+
+The five independent revised-path checks used cap10s/reserve4s. Normal nonzero
+execution published7 in0.395306s; forced work timeout published124 in6.043307s;
+pre-controller startup stall was killed in9.024161s; a stopped controller and its
+cgroup were killed in9.125985s; an earlier payload0 followed by actual shell7
+published task7 in0.305349s. The last check is a literal interface stub; the normal,
+work-timeout and stopped-controller cases used the installed supervisor copied
+with only its task-directory destination changed. Every recorded/sampled PID was
+absent and every sampled cgroup empty before test cleanup. The two hard-kill cases
+correctly have no final task receipt. All five passed in25.511261s; combined with
+the retained earlier downstream harness, P65 fixture wall is34.996686s. All new
+fixture scratch was removed; the older rejected B03 cleanup remains untouched.
+New scientific model/episode/update exposure is **0/0/0**.
+
+The raw check records manager ExecMainStatus7,124 or9 while the systemd-run client
+returned1. Therefore that client code is not a task exit. The concrete
+[launch/observation binding](VSP03_B04_LAUNCH_BOUNDARY_20260908.md) specifies the
+private TMUX_TMPDIR, unit journal and authoritative terminal paths. A successful
+unit may unload; absence of later unit properties alone is not failure. Actual
+run publication, complete-span/termination and resources remain to be observed.
+The fixtures do not establish performance, scientific runtime, or immunity to
+arbitrary kernel scheduling delay.
+
+Scope section4's one task-local deadline/termination adapter is explicitly named
+by card section8 for complete wall<=120s. The final adapter has270 source lines;
+including the earlier seed/object plumbing gives300 additions, below2000. The
+scientific runner remains28 lines, below600. No source, runner or test budget
+breach is observed. No global supervisor/configuration edit, installed service,
+standing framework, pool, recovery or retry was added. High orchestration share
+serves this named correction and is not a separate acceptance gate.
+
+**Decisions this intake produces — object tier, technical.** Options (a) accept
+the resolved source/boundary and continue P64's already-selected single invocation
+after Root integration; (b) return a concrete remaining source/coverage conflict;
+(c) add scientific validation or another allocation. Recommend and select (a):
+the review has no material finding and the targeted raw evidence matches P65.
+**Owner-delegated decision (unattended, 2026-09-03 instruction): (a).** No dissent
+is overruled; owner flag none. Main's fresh owner review query returned `[]` at
+2026-09-08T23:35:36Z, with no VSP03 override. The existing new-card item003 remains
+the card record; this ordinary technical decision adds an audit row, not a new item.
+
+Root integrates the needed implementation chain c436e7bab,28164ecb4,2e02bce40,
+b5d605bf4 and evidence c2c092894, plus this intake/command binding. These retain
+the rejected intermediate source as provenance; only the final b5d605bf4 surface
+is accepted for the scientific launch. The earlier input-sync b6ad47e95 is not an
+integration deliverable. Root's latest explicit continuation assigns the single
+launch to Root after this accepted binding/integration. Root executes the exact-SHA
+detached wsl_4070 command, including fresh adjacent admission, through the configured
+agent-task route. The same CM has been told not to launch separately and retains
+collection/technical acceptance of Root's actual unit/handle; DM takes every outcome
+in. No timeout retry, extra seed or scientific probe follows.
+
+The original seed6/G1/Torch40006 learner,128 updates,20480 joint episodes,1638400
+target transitions, four final modes and five contrasts remain unchanged. B04's
+primary/prediction is unobserved and unscored. Seed5's negative result/null exit,
+separate discovery seed4, old family pauses, recasts1 and lack of UAV entry remain.
+The next scientific discriminator is the already-selected seed6 outcome; P64 ends
+at its all-outcome intake and creates no automatic successor.

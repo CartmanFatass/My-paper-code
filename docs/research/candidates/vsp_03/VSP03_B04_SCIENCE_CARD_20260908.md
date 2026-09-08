@@ -222,3 +222,23 @@ accepts the actual correction and Root integrates before the existing CM launche
 once through the configured detached agent-task route. No source acceptance or
 scientific result is asserted by this scope update. The prelaunch intake records
 the delegated decision, fresh owner scan and audit; no further Portfolio vote follows.
+
+## 9. Accepted P65 execution binding
+
+The [prelaunch intake section5](VSP03_B04_PRELAUNCH_INTAKE_20260908.md#5-p65-source-acceptance-and-sole-invocation-continuation)
+accepts source `b5d605bf4f39b5ab18f01c98e04dc07e53764354`, with review/check evidence
+at `c2c092894e0523b88822fb597f481dc810071c24`. For section8's same complete-wall
+quantity, the one adapter uses a task-specific transient systemd unit, its controller
+and subreaper. The existing manager arms its timer before required startup; one
+monotonic origin sets work110s, cleanup118s and hard cgroup kill119s inside120s.
+The installed agent-task and its private tmux server are contained and unchanged.
+No installed/standing service or global framework follows.
+
+The [concrete launch binding](VSP03_B04_LAUNCH_BOUNDARY_20260908.md) fixes that source
+SHA and names the authoritative terminal, manager evidence and private-server
+observation command. An outer client return is not the task exit. Five shortened
+independent lifecycle checks passed with zero scientific exposure. This is source
+acceptance, not a seed6 result or a guarantee of completion. Root's latest explicit
+continuation assigns Root the sole invocation, including fresh admission, after
+integration. The same CM retains collection and does not launch separately; no
+additional run is selected.
