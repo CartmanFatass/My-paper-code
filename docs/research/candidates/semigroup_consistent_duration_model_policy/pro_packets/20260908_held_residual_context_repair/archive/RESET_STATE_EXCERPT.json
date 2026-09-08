@@ -1,0 +1,38 @@
+{
+  "source_registry": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\registry.json",
+  "source_registry_sha256": "39e48d6ec0eb2e5fd9494e49f1eb6c036dc1f12f19c73d80c7df073ac8b7eb3a",
+  "observed_utc": "2026-09-08T21:29:55.662950+00:00",
+  "extraction": "Lossless selected blocked_requests object in BLOCKED_REQUEST_SNAPSHOT.json; selected binding/reset/quarantine fields here exclude unrelated and historical nested records. Registry is not mutated.",
+  "binding": {
+    "conversation_binding_key": "em:semigroup_consistent_duration_model_policy:convergence",
+    "state": "CONTEXT_RESET_PENDING",
+    "request_id": null,
+    "conversation_id": null,
+    "provider_url": null,
+    "updated_at": "2026-09-08T20:37:15Z"
+  },
+  "pending_context_reset": {
+    "replacement_request_id": "2026-09-08-scdmp-p58-held-residual-context-repair-01",
+    "evidence": {
+      "previous_request_id": "2026-09-08-scdmp-p56-held-residual-convergence-01",
+      "reset_authority": "OWNER_DIRECT",
+      "owner_instruction": "然后不要再使用旧的conversation id 这些没有兼容到6 pro"
+    },
+    "quarantined_conversation_id": "6a961753-0424-83e8-848c-dbe2cfe3369c"
+  },
+  "prior_request_reset_facts": {
+    "request_id": "2026-09-08-scdmp-p56-held-residual-convergence-01",
+    "state": "ARCHIVED"
+  },
+  "quarantine": {
+    "conversation_id": "6a961753-0424-83e8-848c-dbe2cfe3369c",
+    "provider_url": "https://chatgpt.com/c/6a961753-0424-83e8-848c-dbe2cfe3369c",
+    "conversation_binding_key": "em:semigroup_consistent_duration_model_policy:convergence",
+    "reason": "owner_requested_new_conversation",
+    "requested_evidence": {
+      "previous_request_id": "2026-09-08-scdmp-p56-held-residual-convergence-01",
+      "reset_authority": "OWNER_DIRECT",
+      "owner_instruction": "然后不要再使用旧的conversation id 这些没有兼容到6 pro"
+    }
+  }
+}
