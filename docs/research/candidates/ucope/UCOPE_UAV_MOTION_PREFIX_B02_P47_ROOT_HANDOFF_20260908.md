@@ -8,6 +8,8 @@ P47 at `6dd7570e9e8045fb3818c553953a92c9caa587cb` allocates implementation and t
 
 Fresh CM: `/root/dm_ucope_p47_resume/cm_am_ucope_b02_p47`; DM: `/root/dm_ucope_p47_resume`. Reuse these recipients for collection/corrections. Root integrates the named delivery and owns launches and routine observation. No extra implementation/check fixture, scientific retry or evaluation is part of this handoff.
 
+**Current staging hold, 2026-09-08:** Root reports the exact source object present remotely, but the prescribed GitHub HTTPS fetch remains blocked by SSL timeout/hang; the target worktree and both handles are absent. No admission or scientific invocation occurred. [Intake §7](UCOPE_UAV_MOTION_PREFIX_B02_P47_IMPLEMENTATION_INTAKE_20260908.md#7-external-exact-staging-blocker--2026-09-08) preserves the receipts and exact-route continuation. Do not bypass fetch or substitute source/executor. The literals below remain the authorized route when this external dependency clears, not a new launch or automatic retry instruction.
+
 ## Work, clocks and sequential continuation
 
 Each master is one complete serial T → G → H invocation: two fits of 131,072 training team steps and 1,024 Adam calls each, then 32 final sampled episodes per T/G/H. Each pair totals 286,720 team steps, 2,048 Adam calls and 1,120 complete episodes. Both total 573,440 team steps and 4,096 Adam calls; agents and evaluation episodes do not add independent training units. [Machine-generated exposure/work/cost facts](UCOPE_UAV_MOTION_PREFIX_B02_P47_BINDING_FACTS_20260908.json) preserve the fixed b+domain seeds and nonzero synthetic learner exposure separately from real execution.
