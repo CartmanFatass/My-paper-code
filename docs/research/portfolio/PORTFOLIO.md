@@ -1,8 +1,10 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-07 (P28 CBSC B05 pair allocation; other routes retained)
+Updated at: 2026-09-07 (P29 UCOPE opening-prefix reassessment)
 
-Current incremental command: [P28 CBSC B05 fresh RAW/STRUCT pair](handoffs/2026-09-07-p28-cbsc-b05-pair-execution.md). Accepted source/card/handoff are ready; allocate the exact21223 pair at600s complete per arm/1200s summed, with no extra readiness probe. Actual launches and outcomes remain Root execution facts.
+Current incremental command: [P29 UCOPE opening-prefix question selection](handoffs/2026-09-07-p29-ucope-opening-prefix-reassessment.md). Completed P24 is WITHIN with retained6902 harm and generic-reference weakness; the same DM prepares one justified within-family amendment or a precise Convergence scope question. No new science or code is allocated. FSD delivery repair awaits its exact blocker archive; CBSC/FRRIE terminal intakes remain separate dependencies.
+
+Previous incremental command: [P28 CBSC B05 fresh RAW/STRUCT pair](handoffs/2026-09-07-p28-cbsc-b05-pair-execution.md). Accepted source/card/handoff are ready; allocate the exact21223 pair at600s complete per arm/1200s summed, with no extra readiness probe. Actual launches and outcomes remain Root execution facts.
 
 Retained incremental command: [P27 FRRIE first-exception capture](handoffs/2026-09-07-p27-frrie-first-exception-capture.md). P23 found no supported source correction; prepare an explicit bounded diagnostic input and run at most one120s original-schedule chain after acceptance. Nonreproduction does not clear P22. No new learning comparison or retry is allocated.
 
