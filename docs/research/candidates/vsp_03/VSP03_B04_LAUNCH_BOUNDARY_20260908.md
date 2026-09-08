@@ -1,15 +1,19 @@
 # VSP03 B04 P65 complete task boundary
 
-Prospective revised binding: card section8. Science remains seed6/G1/Torch40006;
+Accepted revised binding: card sections8–9. Science remains seed6/G1/Torch40006;
 no B04 scientific invocation has started. The earlier c436e7bab payload boundary
 is rejected because detached startup preceded timeout arming. This revision places
 that startup inside a task-specific transient systemd unit on the configured node.
-SOURCE_SHA is replaced with the accepted pushed source after Root integration.
+The command fixes accepted source b5d605bf4f39b5ab18f01c98e04dc07e53764354.
+Root integration precedes its sole execution; later record-only commits do not
+change this source surface.
+Root's latest explicit continuation assigns Root this one launch. The existing CM
+retains collection/technical acceptance and must not launch another copy.
 
 ```bash
 bash experiments/candidates/vsp_03/vsp03_b04/launch.sh \
   vsp03-b04-p64-20260908 \
-  /home/wu/hmasd-worktrees/vsp03-b04-p64-SOURCE_SHA \
+  /home/wu/hmasd-worktrees/vsp03-b04-p64-b5d605bf4f39b5ab18f01c98e04dc07e53764354 \
   vsp03-b04-p64-20260908 \
   /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b04_seed6_p64_20260908_terminal.json \
   120 10 -- bash -c '/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b04_seed6_p64_20260908_admission.json && exec /home/wu/.venvs/hmasd/bin/python scripts/run_vsp03_b04.py --seed 6 --out /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b04_seed6_p64_20260908 --started-monotonic "$VSP03_B04_STARTED" --node wsl_4070'
