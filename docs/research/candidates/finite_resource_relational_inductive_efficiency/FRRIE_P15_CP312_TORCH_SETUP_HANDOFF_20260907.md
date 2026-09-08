@@ -3,6 +3,8 @@
 Later evidence: [CBSC P17 shared-runtime intake](FRRIE_P17_SHARED_CP312_RUNTIME_FACTS_INTAKE_20260907.md)
 resolves the missing complete-body input and records matching package imports. This P15
 record and its baseline command remain historical; FRRIE execution remains unallocated.
+P21's [offline successor](FRRIE_R09_OFFLINE_RUNTIME_P21_HANDOFF_20260907.md) supplies the
+prospectively amended command from those retained inputs. The P15 literal below is unchanged.
 
 **The P14 artifact-identification gap is resolved.** Select system CPython3.12.3 with
 NumPy1.26.3 and Torch2.7.0+cu118 as the prospective runtime for original R09 source
