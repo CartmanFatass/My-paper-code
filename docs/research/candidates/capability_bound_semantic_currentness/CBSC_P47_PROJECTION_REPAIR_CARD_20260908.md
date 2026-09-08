@@ -150,3 +150,55 @@ Owner-delegated decision (unattended, 2026-09-03 instruction): (a), under the
 explicit P47 repair allocation. Reversible; owner flag none. All three CM model
 comparison batches are complete; no fourth is opened. Root received the full
 five-item handoff before fresh configured CM dispatch.
+
+## P47 earlier-boundary continuation — prospective offline check
+
+The first minimal-prefix process failed during TRAIN token packing, before
+projection, at 7.37 seconds. Its independent fatal context is retained in the
+[CM result](CBSC_P47_PROJECTION_REPAIR_RESULT_20260908.md); the instrumentation
+comparison was not reached. CM located its new 509,448,192-byte core:
+`/mnt/c/Users/wu/AppData/Local/Temp/wsl-crashes/wsl-crash-1788883898-2777975-_usr_bin_python3.12-11.dmp`.
+
+Object / technical selection: (a) inspect this new core offline for the original
+native signal frame and available token/Enum/episode locals; (b) relaunch the
+target; (c) guess a codec repair. Recommend/select **(a)**. It asks whether this
+event exposes concrete malformed state or only another interpreter failure
+context; neither a writer nor recoverable locals is promised. It reuses existing
+matching Python symbols/helper and reads one roughly 486 MiB core, not the four
+already-inspected dumps. Complete normal time is unknown; the same <=120-second
+bound and fresh resource admission apply. No target process, learner or score
+is created. CM records the exact command before execution; no package operation,
+new debugger framework or section 4 machinery is selected.
+
+Owner-delegated decision (unattended, 2026-09-03 instruction): (a), within P47.
+DM expectation before inspection: a native context is more likely than a uniquely
+identified corrupting writer; unavailable locals remain missing evidence.
+Owner prediction remains not taken. The original reading rule and claim ceiling
+apply to these independently readable facts; no scientific remainder is revived.
+
+## P47 isolated TRAIN51 continuation — prospective diagnostic
+
+The offline check completed in 2.94 seconds and recovered TRAIN episode51 in
+three consistent frames, with an active NOOP_SEMANTIC token / REQUEST_ACTIVE
+flag. The original native frame was in `_PyEval_EvalFrameDefault`; no writer
+was identified and other token fields remain truncated. The full first-run
+log still has no completed counter; 51 earlier completed TRAIN tapes follows
+from this new core state plus sequential source ordering only.
+
+Object / technical selection: (a) construct original TRAIN episode51 alone
+under the original run imports/interpreter; (b) repeat the complete prefix;
+(c) alter Enum/codec behavior. Recommend/select **(a)**. It checks the actual
+implicated episode's construction/codec path while explicitly omitting the
+earlier episodes and their process state. One episode emits 152 x 17 = 2,584
+public bytes; no model, projection, score, learner or full run_arm is called.
+The new test uses original DynamicHost(B1_RUN_NAME,21223) and TRAIN51 semantic
+addresses. No full historical input/process-state equality is asserted.
+Normal wall is unknown; the same complete <=120s/admission/detached exact-source
+requirements apply. CM records the source, actual bound and focused outputs.
+
+Owner-delegated decision (unattended, 2026-09-03 instruction): (a), within P47.
+DM prediction before execution: isolated episode completion is more likely than
+an input-forced failure, with low confidence. A pass supports nonreproduction
+on this shorter setup; a failure gives its own direct boundary context. Neither
+identifies the writer or supports a production patch by itself. Owner prediction
+remains not taken; the existing reading rule and scientific claim ceiling stand.

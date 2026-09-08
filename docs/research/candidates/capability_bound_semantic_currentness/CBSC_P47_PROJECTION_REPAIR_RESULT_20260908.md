@@ -151,3 +151,52 @@ Handle `cbsc-p47-offline-core-20260908`; output is its supervisor task.log and
 admission under the original P47 cwd's `test/p47_offline_core_20260908/`.
 Expected work is reading one 486 MiB saved core with bounded printed frames;
 normal cost unknown, capped120s; no sweep or new scientific exposure.
+
+## Offline result and exact-episode discriminator
+
+Offline handle finished exit0, PID2778829, start/end16:18:52Z/16:18:55Z;
+outer wall2.94s, peak RSS826268KiB. Adjacent admission captured16:18:52.914596Z,
+assessed16:18:52.914853Z, physical/effective15639044096 bytes, passed4GiB.
+One saved core was read, with no inferior execution. Supervisor/admission roots
+and exact offline argv were copied to the same P47 control root.
+
+Native backtrace frame0 is libc pthread_kill/raise, frame2 the signal handler,
+frame3 the original _PyEval_EvalFrameDefault at mapped Python/bytecodes.c3475.
+Registers printed at frame0 describe the re-raise; no original RIP/R14 claim.
+The source mapping alone is not writer attribution. Python locals identify
+FlagField.REQUEST_ACTIVE with value request_active and an active codec token
+EventKind.NOOP_SEMANTIC. Three consistent frames identify TRAIN episode51:
+_finish/build_stochastic episode_id=51 and the sequential generator e=51.
+Thus51 earlier TRAIN tape constructions returned by source-flow inference;
+this refines the earlier log-only unknown count, not a serialized count.
+Full token fields and exact token position were truncated in the debugger output.
+
+Next selected test: `test_initial_train_episode.py` invokes the original imported
+run module, sets Torch1, constructs only DynamicHost(B1_RUN_NAME,21223) TRAIN
+identity51 and stops after checking/retaining its152 public seventeen-byte tokens
+and readable fields. It calls no model/optimizer/projection/scoring/learner route.
+Question: does this core-identified episode's original input/codec fail without
+preceding episodes0..50? This is not the prior fabricated-token or six-million-call
+check, and does not claim original process-state identity or full-prefix safety.
+Master, split, episode, host law, lexical interpreter and CPU FP32 are unchanged;
+shorter preceding allocation history is the explicit discriminator.
+
+One detached `cbsc-p47-train51-20260908` invocation from a fresh exact-SHA cwd,
+original interpreter and numeric-library thread limits, adjacent admission,
+GNU-time TERM115/KILL5 envelope. Expected work: one152-token construction/packing,
+2584 output bytes plus readable public fields. Normal wall unknown; cap120s,
+no sweep. Complete invocation wall/RSS measured; aggregate CPU/study elapsed
+unmeasured. Output `<cwd>/temp/directions/capability_bound_semantic_currentness/test/p47_train51_20260908/TEST_ONLY_episode`.
+No new section4 machinery. AST/diff checks before first execution; no repeated
+learner smoke. A pass establishes only completion for this shortened prefix;
+a fatal retains its exact boundary. No hypothetical production fix follows.
+
+Per-episode address check: DynamicHost owns only run_name/seed; each
+build_stochastic creates a fresh AuditedCounterPRF and local state/pools. Addresses
+include run_name, seed, split and episode_id; values derive from hashlib SHA256.
+No prior-episode RNG state is consumed. Isolating51 therefore preserves its
+specified input law while deliberately changing preceding process allocations.
+The original host._finish packs152 tokens, and EpisodeTape.__post_init__ repacks
+all152 for its existing canonical check (304 codec.pack calls on completion).
+These are original checks, not added repeated validation. Printed token fields
+remain public; evaluator truth is not exported.
