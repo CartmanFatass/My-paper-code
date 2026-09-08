@@ -1,0 +1,75 @@
+{
+  "id": "20260908-frrie-002",
+  "created": "2026-09-08T01:02:59-07:00",
+  "direction": "finite_resource_relational_inductive_efficiency",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "FRRIE A07：60秒后一次调用栈观察",
+  "context": "A07在原R09初始调试停止点设置一次60秒后调用栈；systems / information flow，关注执行路径而不测试部分可观测性效应。原源码、环境、root3与完整顺序固定，总计120秒。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "按P35继续",
+      "consequence": "静态验收并固定命令后执行至多一次，记录单个时点的Python调用者。"
+    },
+    {
+      "key": "reject",
+      "label": "停止本观察",
+      "consequence": "保留所有旧结果，在安全边界停止并返回具体下一任务需求。"
+    },
+    {
+      "key": "revise",
+      "label": "修改尚未执行的观察",
+      "consequence": "应用明确修改并重新固定受影响输入，不擅自加时、修复或重试。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "A06的致命报告不能覆盖没有致命信号的超时，一次定时栈补上这个具体观察缺口而不改变学习端点。",
+  "evidence": [
+    "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R09_SCHEDULED_STACK_A07_SCIENCE_CARD_20260908.md",
+    "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R09_FATAL_CALLPATH_A06_SCIENTIFIC_INTAKE_20260908.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-08.md",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "按P35准备A07：初始调试停止点一次性设定60秒后的调用栈报告，保持原训练顺序与120秒总上限，是否有需要异步覆盖的地方？",
+    "changes_if_approved": [
+      {
+        "target": "FRRIE A07独立A/RECON卡和命令输入",
+        "from": "A06到118.40秒超时仍无调用路径，致命信号报告不保证在超时时输出",
+        "to": "只增加一个60秒后报告一次且不退出程序的watchdog；保留原异常/致命报告、root3、完整顺序、源码及环境，静态验收后运行至多一次"
+      }
+    ],
+    "if_refused": "在下一个安全边界应用回复，保留A06与更早证据，返回具体修改需求；不擅自延长、重试或修复源码。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R09_FATAL_CALLPATH_A06_SCIENTIFIC_INTAKE_20260908.md",
+        "quote": "The fatal-signal handlers enabled in A06 do not include SIGTERM and do not promise a report at the outer timeout.",
+        "why": "固定的一次定时报告可以在没有致命信号时提供当前调用者，改变下一项具体检查。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R09_FATAL_CALLPATH_A06_SCIENTIFIC_INTAKE_20260908.md",
+        "quote": "One snapshot can locate the active Python caller; it cannot distinguish slow progress from a permanent hang, reconstruct locals or identify a causal writer.",
+        "why": "一张栈只表示一个时点，不能据此判断运行速度、卡死或谁写坏了状态。"
+      }
+    ],
+    "uncertainty": [
+      "原程序可能在60秒前正常结束或出现另一种故障；未取得栈不代表环境可靠。",
+      "准入和解释器启动也消耗总上限；启动延迟导致没有报告时，仍停止而不加时。"
+    ],
+    "cost": {
+      "compute": "至多1条完整120秒链，TERM115秒加最多5秒宽限；原2臂×128更新只是最大工作量。新增1个watchdog线程、最多1次定时栈；只有静态命令/源码检查，没有新fixture、smoke或成本试跑。",
+      "owner_time": "异步审阅，P35已有明确分配。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing；精确命令的DM/CM验收尚待完成。"
+    },
+    "verdict_text": "Owner-delegated decision (unattended,2026-09-03 instruction): (a).",
+    "source": "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R09_SCHEDULED_STACK_A07_SCIENCE_CARD_20260908.md"
+  },
+  "starred": false
+}
