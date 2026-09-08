@@ -163,6 +163,30 @@ Record the new-card P2 item and audit row without waiting for an owner reply.
 CM prepares and accepts the exact literal; Root dispatches/adopts/observes once;
 CM collects and technically accepts; DM writes E0 intake, prediction check,
 Chinese brief and audit. Root integrates the named commits and routes the next
-concrete need. Current state: card frozen, command preparation pending, no run.
+concrete need. State at card freeze: command preparation pending, no run.
 New-card item: [20260908-cbsc-001](../../portfolio/owner/inbox/2026-09-08/20260908-cbsc-001.json);
 selection audit: [2026-09-08 row 5](../../portfolio/audit/2026-09-08.md#L5).
+
+## DM command acceptance — 2026-09-08
+
+**READY for Root's one P32 dispatch.** Same CM committed/pushed the exact
+[handoff](CBSC_B05_FIRST_FAULT_P32_ROOT_HANDOFF_20260908.md) at
+`67222c4434e796cdedde44b277d7097959087186` and returned a clean checkout.
+DM read the complete handoff and `syntax_acceptance.json` against this card.
+All four Python literals AST-parse; shlex exposes the exact selected runtime,
+startup option, RAW seed21223 and fresh output/handle. Three local Bash `-n`
+inputs accepted the full supervisor command, time/timeout payload and inner
+admission/runner chain, exit0/empty stderr (CM reports 1.014s check wall).
+These checks were not repeated. Source remains d2753be86, preflight is adjacent,
+and the whole 115+5 envelope/collection/stop matches the frozen card. The only
+added reporting is the named fatal stack; no implementation-budget breach or
+unrequested machinery was observed. Actual target/learner calls remain zero.
+
+Options: (a) accept the exact command and return READY to Root under P32;
+(b) return a specific mismatch; (c) add a runtime/import smoke. Recommend/select
+**(a)**; no concrete mismatch remains and (c) is unallocated.
+Owner-delegated decision (unattended, 2026-09-03 instruction): (a).
+Owner reviews again returned []; no relevant owner override was found.
+Acceptance establishes source/card/command conformance, not runtime success,
+cap conformance or fault capture. Root owns actual admission/dispatch/observation;
+this same CM collects terminal artifacts and DM applies the diagnostic reading.
