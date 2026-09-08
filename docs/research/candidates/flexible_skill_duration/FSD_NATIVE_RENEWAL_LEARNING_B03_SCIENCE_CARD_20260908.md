@@ -260,3 +260,22 @@ stronger class or further Pro round is required for this selected B. P46 ended a
 card/spec/preparation publication. P47 supplies the full existing implementation
 assignment and this one panel's execution allocation; its exact binding follows
 accepted implementation and precedes Root's launch.
+
+## 8. P47 observed result and original-rule intake — 2026-09-08
+
+The one allocated panel is complete and valid B at the original keys, counts,
+source and endpoints. Full native H−D0 is+.3928645833333336, sample
+SD.05459290013017851 and conditional episode SE.009650752471672294. H/D0/G
+returns are.775494791667/.382630208333/.89078125; G still leads H by.115286458333.
+The §5 greater-than+.01 branch applies with the actual weak, valid D0 learner retained.
+These32 differences describe one new trained pair, not training-seed uncertainty.
+
+All64,000 training transitions/96 endpoint episodes were completed; actual complete
+walls G2.47/D0462.10/H434.04s sum898.61s within the original caps. Both directional
+DM predictions are met; owner prediction was not taken. The
+[E0 result](FSD_NATIVE_RENEWAL_LEARNING_B03_RESULT_EVIDENCE_20260908.md) and
+[all-outcome intake](FSD_NATIVE_RENEWAL_LEARNING_B03_INTAKE_20260908.md) preserve
+learning/exposure, reference shortfalls, receipts and interpretation. The original
+question, prediction and result branches above remain intact. P47 ends without
+an automatic successor, new pair, extra evaluation, Direction/Portfolio disposition
+or formal UAV entry. B03 is not assigned a consumption state.

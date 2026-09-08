@@ -292,6 +292,33 @@ at `128f90b3a2c8b037dcd71c1d3e34ca0c26bccba7`, with the adjacent
 `CONVERGENCE_INTAKE.md`. This is not a recast, C promotion, Portfolio disposition
 or formal UAV entry.
 
+## Accepted fresh fixed-clock comparison (B03/P47, 2026-09-08)
+
+One newly trained H/authentic D0 k5 pair at770403/770404 gives full native
+H−D0+.3928645833333336, above the .01 MEI. H/D0/G returns are
+.775494791667/.382630208333/.89078125 with five16×400 learning rollouts per
+learned arm and one32-episode endpoint per policy. Primary sample SD.05459290013017851 and conditional
+SE.009650752471672294 describe this pair's endpoint spread only. The local
+package advantage now has direct support beyond the earlier C comparison.
+B01/B02 remain separate C/H observations rather than extra H/D0 training pairs.
+
+The strongest current contradiction is G's full lead of.115286458333 over H,
+including H's8662/68220 eligible wrong-role choices. D0 is a weak but valid
+five-rollout learner: both arms show actual parameter movement, own trajectories
+and different credit/optimizer exposure (actor18000 D0 versus2250 H steps).
+The result does not isolate applied timing, actor quality, data or internal
+credit as the cause. Prior competent E3 losses and E4's public-null explanation
+remain contrary evidence, and tuned generic headroom remains absent.
+
+The surviving alternative is that the supplied public renewal package helps at
+this limited training budget while learned role control remains substantially
+below the public rule. No stable superiority, learned renewal, optimal fixed
+clock or UAV-transfer claim follows. The selected fixed-clock discriminator is
+answered; no next discriminator or automatic successor is selected at this
+boundary. FSD lifecycle/priority and ordinary-family pause are unchanged.
+Evidence: `FSD_NATIVE_RENEWAL_LEARNING_B03_RESULT_EVIDENCE_20260908.md`,
+`FSD_NATIVE_RENEWAL_LEARNING_B03_INTAKE_20260908.md`, and the original B03 card.
+
 ## Objects and their state (2026-09-08)
 
 | Object | State | Record |
@@ -306,6 +333,7 @@ or formal UAV entry.
 | Native-renewal control A01 / P21 | complete3/3 conditional A/RECON; H−C +.26935 with post G−H .16403; branch2, zero training, no successor | `FSD_NATIVE_RENEWAL_CONTROL_A01_SCIENCE_CARD_20260907.md`; `FSD_NATIVE_RENEWAL_CONTROL_A01_RESULT_EVIDENCE_20260907.md`; `FSD_NATIVE_RENEWAL_CONTROL_A01_INTAKE_20260907.md` |
 | Native-renewal learning B01 / P30–P38 | complete valid B, one trained pair; H−C+.49738 above .01 MEI, G−H+.02118 full; all3 arms/708.25s retained; read separately from B02 | `FSD_NATIVE_RENEWAL_LEARNING_B01_SCIENCE_CARD_20260908.md`; `FSD_NATIVE_RENEWAL_LEARNING_B01_RESULT_EVIDENCE_20260908.md`; `FSD_NATIVE_RENEWAL_LEARNING_B01_INTAKE_20260908.md` |
 | Native-renewal learning B02 / P40–P43 | complete valid B, new770303/770304 pair; H−C+.52039 above .01, G−H+.01085 full; all3 arms/665.01s retained; separate from B01, no successor | `FSD_NATIVE_RENEWAL_LEARNING_B02_SCIENCE_CARD_20260908.md`; `FSD_NATIVE_RENEWAL_LEARNING_B02_RESULT_EVIDENCE_20260908.md`; `FSD_NATIVE_RENEWAL_LEARNING_B02_INTAKE_20260908.md` |
+| Native-renewal learning B03 / P46–P47 | complete valid B, one new770403/770404 H/D0 pair; H−D0+.39286 above .01, G−H+.11529 full; all3 arms/898.61s retained; weak actual D0 remains valid, no successor | `FSD_NATIVE_RENEWAL_LEARNING_B03_SCIENCE_CARD_20260908.md`; `FSD_NATIVE_RENEWAL_LEARNING_B03_RESULT_EVIDENCE_20260908.md`; `FSD_NATIVE_RENEWAL_LEARNING_B03_INTAKE_20260908.md` |
 | Advancement plan | E1 → E2 → E2b/E3 → E4 → C-gate; E2b is not selected at this boundary | `docs/Claude_docs/plans/RESEARCH_ADVANCEMENT_PLAN_20260902.md` |
 
 ## Code
