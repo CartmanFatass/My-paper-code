@@ -1,8 +1,10 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-08 (P36 CBSC native fatal-context observation)
+Updated at: 2026-09-08 (P37 FRRIE A07 shell-transport correction)
 
-Current incremental command: [P36 CBSC native fatal-site context](handoffs/2026-09-08-p36-cbsc-native-fatal-context.md). P32 captured a Python projection callpath without a supported cause; check an already installed debugger, then prepare at most one120s native-context diagnostic. Missing capability yields a no-run dependency; no installation or source fix is allocated.
+Current incremental command: [P37 FRRIE A07 command transport](handoffs/2026-09-08-p37-frrie-a07-command-transport.md). The accepted supervisor wrapper exited127 before preflight/science; preserve it and transport the same committed LF payload through a staged script under a distinct handle. P35 scientific scope/cap remain unchanged.
+
+Retained incremental command: [P36 CBSC native fatal-site context](handoffs/2026-09-08-p36-cbsc-native-fatal-context.md). P32 captured a Python projection callpath without a supported cause; check an already installed debugger, then prepare at most one120s native-context diagnostic. Missing capability yields a no-run dependency; no installation or source fix is allocated.
 
 Retained incremental command: [P35 FRRIE one scheduled stack](handoffs/2026-09-08-p35-frrie-scheduled-stack.md). A06 timed out inconclusively with no captured path; prospectively add one delayed active-stack report within one120s original-schedule diagnostic. Counts remain unknown and prior failures are not cleared. Other issued routes continue independently.
 
