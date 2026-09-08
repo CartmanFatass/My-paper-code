@@ -13,12 +13,13 @@ within the opening-prefix family opened by Pro commit
 commit `75e4c55c98a9d8f50009375f2e2334830a486045`, authorizes this card,
 complete code spec and prospective five-item handoff only.
 
-This card fixes the scientific definition for later engineering. **Current
-allocation: zero source implementation, scientific imports, model/learner or
+This card fixes the scientific definition. **At the original P33 preparation,
+allocation was zero source implementation, scientific imports, model/learner or
 environment/evaluation calls, source tests, CM dispatch, Pro Send and launch.**
 The three CM comparison batches are complete; P33 explicitly excludes a
-fourth. A later named implementation task and execution allocation are still
-needed. B01/P21/P24 definitions and results are not rewritten; A/B objects
+fourth. A later named implementation task and execution allocation were then
+needed. P47/P48's later allocation and observed implementation are recorded in
+§9 below. B01/P21/P24 definitions and results are not rewritten; A/B objects
 have no C-class consumption state. No family, recast, Portfolio or UAV-entry
 decision is made here.
 
@@ -224,3 +225,38 @@ checks with independent credit review. The [five-item CM task](UCOPE_UAV_MOTION_
 is prepared for Root. The [preparation intake](UCOPE_UAV_MOTION_PREFIX_B02_PREPARATION_INTAKE_20260908.md)
 records delegated choices and the owner item. Publication does not dispatch
 CM, accept an implementation or create a new UAV-validation entry.
+
+## 9. P47 allocation and implementation binding — 2026-09-08
+
+OWNER_DIRECT P47 at `6dd7570e9e8045fb3818c553953a92c9caa587cb`
+supersedes P33's preparation-only boundary for this selected object: fresh
+configured CM implementation/review, then masters **7001 followed by 7002**
+under §§2–7's unchanged counts, primary, predictions and 1,800/3,600/7,200s
+complete caps. It authorizes no fourth CM comparison, third pair, replacement
+seed, scientific retry, extra evaluation or automatic successor. The original
+P33 card at `1d46ddc2b142a2c2b98922a8f46e2d2609bda859` remains the prospective
+scientific definition; this section records allocation and actual state.
+
+Implementation source `6374063408208ba67b8cb7c69ebc0babb0f00259` is committed
+and pushed in the existing `codex/ucope` checkout. The [CM technical record](UCOPE_UAV_MOTION_PREFIX_B02_TECHNICAL_ACCEPTANCE_20260908.md)
+reports 53 passing focused tests, a complete 80-step/eight-Adam/zero-UAV
+synthetic fixture, and independent credit review without a material credit
+defect. It also records the **80.578s fixture wall against the 60s engineering
+bound**. The overrun remains a conformance fact; no repeated smoke, unique
+cause, or conforming time is asserted. The [implementation intake](UCOPE_UAV_MOTION_PREFIX_B02_P47_IMPLEMENTATION_INTAKE_20260908.md)
+separates functional source correspondence from that original timing gap.
+**P48 at `209804f8bb8120394c0dc14bf346133aa525d512` accepts the existing
+functional source and publication evidence for this named task**, preserving
+the overrun and removing the demand for another ≤60s fixture. It authorizes
+no repeat, warm-up, profiler or speculative patch. The [exact Root route](UCOPE_UAV_MOTION_PREFIX_B02_P47_ROOT_HANDOFF_20260908.md)
+now proceeds under the unchanged P47 scientific allocation and caps;
+prepared commands still do not assert an actual accepted launch.
+
+[Machine-generated binding facts](UCOPE_UAV_MOTION_PREFIX_B02_P47_BINDING_FACTS_20260908.json)
+retain the original work/RNG/cost law and actual fixture exposure: four Adam
+calls per arm at lr=3e-4, total relative displacement T=0.018104414 and
+G=0.018726143. These establish synthetic learner movement, not UAV performance
+or its runtime. The real per-fit budget remains 1,024 Adam calls on
+66,441/66,311 T/G parameters. Actual real exposure and both native endpoints
+remain unmeasured here; owner predictions remain not taken. The prior UAV
+entry, historical joint objectives/results and no-tuned-headroom limit remain.
