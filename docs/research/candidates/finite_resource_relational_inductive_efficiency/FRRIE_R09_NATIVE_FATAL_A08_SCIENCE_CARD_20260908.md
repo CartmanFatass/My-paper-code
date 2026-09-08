@@ -6,7 +6,7 @@ it inspects the execution path carrying event-addressed randomness into the
 same-information multi-agent learner and its native consequence.
 
 Object: `FRRIE-R09-NATIVE-FATAL-A08-P39-20260908`. Class: **A/RECON**.
-Status: `QUESTION_FROZEN / CONTAINMENT_AND_EXACT_COMMAND_PENDING`.
+Status: `COMMAND_NOT_ACCEPTED / LIVE_INVOCATIONS_0`.
 Live invocations:0. This is a new prospective observation under P39; A07 remains
 ended with its original rule and scheduled MEI miss. A has no consumption state.
 
@@ -187,5 +187,40 @@ reply is needed to perform the assigned preparation.
 ```text
 | 2026-09-08T09:13:46Z | finite_resource_relational_inductive_efficiency | object | selection | (a) prepare P39 one native observation after retained miss; (b) Python-only repeat; (c) unsupported patch/full B | (a):A08 A_RECON question/report/source/profile/cap frozen;existing-facility creation-through-KILL method and exact bytes pending;live invocations0 | yes | OWNER_DELEGATED (unattended,2026-09-03 instruction); P39 | docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R09_NATIVE_FATAL_A08_SCIENCE_CARD_20260908.md | none | |
 ```
+
+## 6. Preparation return — no live command accepted
+
+The [CM handoff](FRRIE_R09_NATIVE_FATAL_A08_ROOT_HANDOFF_20260908.md) at
+`9d94806a598bd461ba84a796d64ab030d0c4b5eb` and
+[DM intake](FRRIE_R09_NATIVE_FATAL_A08_PREPARATION_INTAKE_20260908.md) record
+the supported source/configuration facts, exact remaining method, checks,
+counts, costs, prediction status and next-task proposal. The intake links the
+Chinese brief and supplies audit rows.
+
+The existing user systemd manager/cgroup and versioned sources supply a static
+containment route before GDB target exec, addressing P36's separate-pgrp gap.
+The candidate's115+5s timer starts after frontend/unit-request time, so it does
+not establish this card's complete startup-to-termination bound. Killing only
+the frontend does not cancel an already accepted unit. This is a method gap,
+not an observed escape, overrun or proof that every existing method is impossible.
+
+Five enclosing static host/syntax calls sum6.0143048s; no service, GDB, inferior,
+namespace, target import, fixture, setup or new core lookup occurred. Draft
+input/syntax checks passed, but their receipt explicitly denies launch authority.
+The drafts remain ignored and **must not be staged or dispatched**. The conditional
+one native invocation remains unused; there is no accepted handle or launch input.
+
+Apply section4's **COMMAND_NOT_ACCEPTED / LIVE_INVOCATIONS_0** preparation stop.
+Native-site MEI and prediction are untested/unscored, with owner prediction not
+taken. All prospective scientific fields and section2 runtime rules remain
+unchanged; none is applied as an observed runtime result. No scope §5 breach is
+evidenced. A07 and every earlier outcome/quarantine are preserved.
+
+Object-tier choice: accept the bounded finding and return the exact method gap,
+rather than launch, exempt startup or add a utility/test. Recommend/select(a).
+**Owner-delegated decision (unattended,2026-09-03 instruction): (a).** The intake
+returns one focused static existing-utility outer-timer/namespace proposal via
+Root to Portfolio. It does not dispatch that task or change a scientific budget,
+family, lifecycle, priority or UAV-entry state.
 
 scope: one bounded native fault-context report and existing-host debugger/inferior containment per section4
