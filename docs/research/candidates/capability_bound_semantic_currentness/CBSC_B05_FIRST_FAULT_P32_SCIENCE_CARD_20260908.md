@@ -190,3 +190,23 @@ Owner reviews again returned []; no relevant owner override was found.
 Acceptance establishes source/card/command conformance, not runtime success,
 cap conformance or fault capture. Root owns actual admission/dispatch/observation;
 this same CM collects terminal artifacts and DM applies the diagnostic reading.
+
+## P32 observed result boundary — 2026-09-08
+
+**DIAGNOSTIC_CONTEXT_OBSERVED; allocation ended.** The
+[E0](CBSC_B05_FIRST_FAULT_P32_RESULT_EVIDENCE_20260908.md) at
+`6042c6a44f4e25e4ac8d16ba8dd56c23fdb5ccaa` (Root integration
+`8ff9b0f1be67e6a79e737b06c60f0d8228ee9cca`) records one signal11/exit139
+after 15.25 seconds, 799632 KiB RSS and passed fresh admission. Eight fatal
+Python frames locate RAW adapter processing in the second initial-EVAL
+projection. The raw output directory is empty. Zero training/Adam/policy
+evaluation/rule execution is inferred from that source phase; projection
+progress is unknown. No result or missing pair is reconstructed.
+
+The [intake](CBSC_B05_FIRST_FAULT_P32_INTAKE_20260908.md) applies the frozen
+reading: technical MEI and the stated signal/context prediction are met, with
+no native writer or historical-cause attribution. P28 remains INCOMPLETE_RAW.
+No retry, source repair, STRUCT or probe was added; CBSC/FRRIE remain separate.
+The [owner brief](../../portfolio/owner/briefs/capability_bound_semantic_currentness/2026-09-08_P32.md)
+and audit record this boundary. Any native-operation investigation in the
+intake is a separate, unallocated next-task recommendation.
