@@ -1,0 +1,38 @@
+{
+  "question": "是否按 P72 分配，只增加一个方法不变的新独立 I/D0 训练对，观察上轮原生损失是否重复？",
+  "changes_if_approved": [
+    {
+      "target": "FSD_UAV_INDIVIDUAL_RENEWAL_B02_SCIENCE_CARD_20260908.md",
+      "from": "只有已完成的 P70 训练对",
+      "to": "训练770603、评价780603的一对新 B；阈值、时钟、训练与评价预算不变"
+    }
+  ],
+  "if_refused": "在下个干净边界停止尚未开始的受影响工作，保留 P70 与任何已有真实结果，不重试或扩展预算。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_INDIVIDUAL_RENEWAL_B01_P70_INTAKE_20260908.md",
+      "quote": "I−D0 is−.049670563167111874, below the .01 absolute MEI",
+      "why": "出现了原生损失，另一个独立训练对可以观察它是否重复。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_INDIVIDUAL_RENEWAL_B01_P70_INTAKE_20260908.md",
+      "quote": "At the deterministic endpoint neither policy adds individual gap decisions",
+      "why": "训练时活跃、评价时无额外重选；不能把损失归因于评价时的提前重选。"
+    }
+  ],
+  "uncertainty": [
+    "第二对也不能确立稳定优劣或定位原因。",
+    "覆盖增益与总回报损失都要保留；不能调阈值修复符号。",
+    "同信息调优基线的 headroom 仍缺失，不作为本次前置门槛。"
+  ],
+  "cost": {
+    "compute": "新对80,000训练步+32,000评价步；完整上限D0 3600秒、I 18000秒、合计21600秒。P70实测合计1693.38秒仅供规划。",
+    "owner_time": "无需回复即可按已有委托执行；可异步改卡。",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing"
+  },
+  "verdict_text": "Owner-delegated decision (unattended, 2026-09-03 instruction): (a)",
+  "source": "docs/research/candidates/flexible_skill_duration/FSD_UAV_INDIVIDUAL_RENEWAL_B02_P72_PREPARATION_INTAKE_20260908.md"
+}
