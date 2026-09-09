@@ -1,0 +1,13 @@
+{
+  "packet_id": "2026-09-08-ucope-post-b04-renewal-convergence-01--ucope",
+  "request_id": "2026-09-08-ucope-post-b04-renewal-convergence-01",
+  "direction_id": "ucope",
+  "workflow_node": "em_convergence",
+  "conversation_binding_key": "em:ucope:convergence",
+  "conversation_id": "6a9c6b1c-1c34-83e8-8ebc-dee64b334240",
+  "provider_url": "https://chatgpt.com/c/6a9c6b1c-1c34-83e8-8ebc-dee64b334240",
+  "source_mode": "paste",
+  "prompt_sha256": "b7054d5b3649c6a8c32deb8d6c88b15b257bf5362f633e8b96f858e12134c270",
+  "response_sha256": "ce4c3f21c49f91365ff5b697df5cb87c5108bac8c38e764517a0d8df9d1a15bf",
+  "reference_files": []
+}
