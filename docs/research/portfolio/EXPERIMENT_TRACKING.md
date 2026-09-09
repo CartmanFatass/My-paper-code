@@ -1,5 +1,7 @@
 # HMASD experiment tracking
 
+VSPC1 P77 sole handlevspc1_hold_value_b11_8502_7ed4c3933771 accepted/running on hmasd-wsl-node PID3040577, exactsource7ed4c3933771f85d570b5c952052b9e8c5fbd6e1; actual admission15318642688bytes physical/effective passed. Same CM sole observer/collector, original DM full C/endpoints/H intake. No retry/resume/extra pair or Root polling.
+
 FOLR P77 source intake64db6307b accepted: NO_READY for true-survivor reset under unchanged CAMA observation interface, zero empirical exposure. Original DM actually resumed P78 proper-node question preparation for an explicitly prospective common event/lifetime scope versus no successor; no local scientific scope change, card, run or Send. UCOPE P77 sole handle `ucope-uav-renewal-frozen-head-b01-7601-p77-20260909` now accepted/running on hmasd-wsl-node PID3040009, source002ba4397, actual joined admission15628730368bytes physical/effective; same CM sole observer/collector, original DM scientific intake. No Root polling or extra invocation.
 
 ACVC same unsent request routing corrected atae0faa0a7: actual OWNER_DIRECT cutover/previous request metadata supplied, fixed science unchanged. Root actually resumed original Transport request; first provider Send still unconfirmed. VSP03 post-B05 request2026-09-09-vsp03-post-b05-convergence-01 HANDOFF7b11d9c11/TASK3887b6f5c actually dispatched once to existing bound conversation via Transport, app accepted/provider Send unconfirmed. Both original DMs await complete responses; no scientific successor allocated.
