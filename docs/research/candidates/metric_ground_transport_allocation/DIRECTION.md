@@ -12,6 +12,39 @@ second-recast counts and stopped object-family boundaries remain unchanged.
 
 This authority preserves the direction's source-grounded scientific question, evidence references, and provenance.
 
+## Native ground-geometry B01 P75 result — 2026-09-09
+
+The accepted P75 native execution and scientific intake are now part of the
+direction's current position. The complete intake is
+`MGTAP_NATIVE_GROUND_GEOMETRY_B01_P75_INTAKE_20260909.md`; its machine-readable
+result is `MGTAP_NATIVE_GROUND_GEOMETRY_B01_P75_TECHNICAL_RESULT.json`, with
+per-master collections in
+`MGTAP_NATIVE_GROUND_GEOMETRY_B01_P75_8201_TECHNICAL_COLLECTION.json` and
+`MGTAP_NATIVE_GROUND_GEOMETRY_B01_P75_8202_TECHNICAL_COLLECTION.json`.
+
+Both frozen B01 native pairs completed with exit 0 and passed technical
+collection. The paired REL-minus-DENSE means are `-0.04468252516448091` for
+8201 and `-0.003243683445650989` for 8202. The complete two-master aggregate
+is `Delta=-0.02396310430506595` with combined conditional evaluation SE
+`0.0026485358205291165`; under the frozen `0.01` scale this is
+`REL_ADVERSE`. H remains diagnostic only. The evidence supports a complete
+adverse observation for this REL package, native task and fixed exposure; it
+does not establish metric-specific causality, stable population superiority,
+equivalence, generic competence, convergence, deployment value or warehouse/
+UAV efficacy.
+
+This is an object-end boundary: the B01 allocation is consumed and no unchanged
+REL/DENSE successor, retry, extra seed, tuning, evaluation or UAV-validation
+entry is selected. The previously parked balanced-allocation-coordinate family
+remains parked, and the broader direction's lifecycle and priority remain
+`ACTIVE/MEDIUM` under Portfolio authority. A family-level disposition or a
+materially changed native geometry comparison belongs to
+`em:metric_ground_transport_allocation:convergence`; the original DM's exact
+post-B01 question preparation is recorded separately and makes no local
+direction or Portfolio decision. P75 object decisions retain the standing
+owner delegation recorded on 2026-09-03 and are labelled `OWNER_DELEGATED`;
+this result does not create a new blanket delegation.
+
 ## Native geometry Convergence boundary — 2026-09-08
 
 The complete source-backed Convergence answer for request

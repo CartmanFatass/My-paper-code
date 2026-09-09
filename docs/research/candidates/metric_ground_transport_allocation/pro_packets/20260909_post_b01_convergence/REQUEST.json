@@ -1,0 +1,101 @@
+{
+  "caller_role": "em",
+  "workflow_node": "em_convergence",
+  "request_id": "2026-09-09-mgtap-post-b01-convergence-01",
+  "source_thread_id": "01a08204-6445-7461-badf-1150080ed87b",
+  "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "direction_id": "metric_ground_transport_allocation",
+  "repository": "CartmanFatass/My-paper-code",
+  "repository_url": "https://github.com/CartmanFatass/My-paper-code",
+  "commit_or_ref": "d9723c7bdd91d44a97cc34365891c42b2a41772e",
+  "delivery_mode": "github_delivery",
+  "scientific_question": "After the complete adverse two-master P75 native REL-versus-DENSE comparison, what is the smallest supported direction conclusion for the MGTAP native ground-geometry actor family? Should the direction park this actor family with a precise re-entry condition and no new object, continue with exactly one materially changed source-compatible native geometry comparison, or recast the native ground-binding question with a different smallest discriminator? Assess the serious zero-work alternative against any changed comparison using the actual P75 adverse evidence, the valid but untuned same-information DENSE comparator, the absent tuned same-information headroom record, and the known dominant work.",
+  "deliverable": "Return exactly one PRO_FINAL direction decision among PARK_NATIVE_GROUND_GEOMETRY_FAMILY, CONTINUE_B_NATIVE_GROUND_GEOMETRY, and RECAST_NATIVE_GROUND_BINDING. Keep the old balanced-allocation-coordinate family parked and keep the broader direction's lifecycle and Portfolio state unchanged. Explain the smallest supported conclusion, the strongest evidence for it, the strongest opposing evidence and live alternatives, and why the runner-up loses. For PARK, give a concrete re-entry condition and yield. For CONTINUE or RECAST, specify one source-compatible treatment and one equally informed valid generic comparator, the event-to-native-reward/credit path, the one changed structural axis, why it is more than renaming, the native primary and MEI rationale, evidence class and claim ceiling, independent training seeds and all expected arms/episodes/steps/updates/evaluations, any nested work, the known cost law and unknown terms, and branch-to-action readings. A changed comparison is a proposal for Pro to select, not a local launch or card. Distinguish the object-end decision from family and Portfolio disposition.",
+  "claim_ceiling": "At most a direction-level B/EXPLORE disposition for the fixed five-UAV native environment and its accepted recurrent PPO path. P75 supplies one complete adverse package observation, not stable population superiority, equivalence, pure metric causality, convergence, tuned competence, a general MARL conclusion, ground-base value, warehouse/UAV efficacy, fleet transfer, churn or deployment value. This consultation creates no new result, implementation, model, execution, diagnostic, cost probe, UAV-validation entry, lifecycle, priority, fusion or investment decision locally.",
+  "reference_files": [
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "purpose": "Current owner-calibrated B exploration, independent-seed, proportionate-verification, failure-dependency and question-complexity rules in sections 11.8 and 11.9.",
+      "provenance": "Normative evidence standard at the fixed accepted source reference."
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/DIRECTION.md",
+      "purpose": "MGTAP scientific authority, prior parked allocation-coordinate family, native geometry re-entry boundary and current direction claim ceiling.",
+      "provenance": "Direction record; historical sections remain evidence and the P75 update is recorded in the direction branch after this fixed reference."
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_NATIVE_GROUND_GEOMETRY_B01_P75_INTAKE_20260909.md",
+      "purpose": "Complete P75 scientific intake, frozen result reading, object-end recommendation, adverse evidence, same-information comparator and bounded post-B01 question readiness.",
+      "provenance": "Accepted original-DM intake integrated by Root at the fixed reference."
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_NATIVE_GROUND_GEOMETRY_B01_P75_TECHNICAL_RESULT.json",
+      "purpose": "Machine-readable aggregate, per-master outcomes, counts, timings and technical acceptance for P75.",
+      "provenance": "CM terminal collection at the fixed source SHA; read-only evidence."
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_NATIVE_GROUND_GEOMETRY_B01_P75_8201_TECHNICAL_COLLECTION.json",
+      "purpose": "Master 8201 source binding, complete primary, admission, counts, checkpoint and file-integrity collection.",
+      "provenance": "CM technical collection; read-only evidence."
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_NATIVE_GROUND_GEOMETRY_B01_P75_8202_TECHNICAL_COLLECTION.json",
+      "purpose": "Master 8202 source binding, complete primary, admission, counts, checkpoint and file-integrity collection.",
+      "provenance": "CM technical collection; read-only evidence."
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_NATIVE_GROUND_GEOMETRY_B01_P75_EXECUTION_RECORD_20260909.md",
+      "purpose": "Accepted source/launch bindings, exact handles, remote route, terminal observations, aggregate timing and collection acceptance chronology.",
+      "provenance": "CM execution and observation record; read-only evidence."
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_NATIVE_GROUND_GEOMETRY_B01_SCIENCE_CARD_20260908.md",
+      "purpose": "Frozen REL/DENSE actor package, native boundary, primary estimand, MEI, result branches, exposure and stop semantics.",
+      "provenance": "PRO_FINAL-frozen B01 card; no change is authorized by this question."
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260908_native_geometry_reentry/archive/RESPONSE.md",
+      "purpose": "Fixed prior Convergence/re-entry response establishing the native geometry operation, competent-comparator requirement, alternatives and proportional B burden.",
+      "provenance": "Complete archived PRO_FINAL response; read-only scientific authority for its node."
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_B03_MAIN_INTAKE_20260904.md",
+      "purpose": "Prior native allocation-coordinate result and its no-successor boundary, generic finite-training alternative and retained historical counterevidence.",
+      "provenance": "Accepted historical MGTAP intake; not pooled with P75."
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_B03_MAIN_RESULT_EVIDENCE_20260904.md",
+      "purpose": "Prior B03 native-return results, equal-rate selection and headroom diagnostic limits that cannot be transferred as MGTAP native-actor headroom.",
+      "provenance": "Accepted historical result evidence; read-only and separately bounded."
+    }
+  ],
+  "discussion_urls": [
+    "https://github.com/CartmanFatass/My-paper-code/issues/5"
+  ],
+  "constraints": [
+    "This is one direction-level Convergence question and source inspection only: zero model construction, import, simulation, profiling, training, evaluation, cost probe, diagnostic, implementation, launch and new scientific exposure.",
+    "Use only the fixed full SHA d9723c7bdd91d44a97cc34365891c42b2a41772e for the listed repository evidence. Do not substitute a moving branch, local current tree, unlisted path, web mirror, pasted repository copy or a later response. If a listed path is unavailable, return BLOCKED_CONNECTOR_ACCESS/DECISION_NOT_FORMED with the exact gap.",
+    "P75 is a complete technically accepted native observation: aggregate Delta=-0.02396310430506595, 8201=-0.04468252516448091 and 8202=-0.003243683445650989. Preserve the adverse aggregate, the inside-MEI 8202 value, every episode outcome, H diagnostics and all contrary history; do not reinterpret the object result as a source defect or stable DENSE population claim.",
+    "The valid DENSE comparator is same-information and native, but it is not tuned. Tuned same-information headroom is absent. Neither that absence nor the diagnostic H arm is a launch prerequisite; do not invent a competent-baseline gate or mandate a diagnostic before an otherwise justified B.",
+    "Keep the fixed five-UAV native host, current ranked relative user/UAV rows, recurrent history, legal three-coordinate velocity, native channel/interference/SINR/capacity/association path, primitive team reward and common PPO credit. Do not add base-station metadata, persistent IDs, global diagnostics, allocation actions, a synthetic adapter or a weakened comparator.",
+    "A candidate changed B may use one structural axis only, such as replacing REL's fixed-denominator zero-padded typed mean with a count-aware typed sum-plus-count pooling operation derived from the existing rows, while retaining the complete raw path and matching a valid generic DENSE branch. Treat this as a candidate for value assessment, not a selected treatment; reject it if it is merely a renaming, redundant statistic or unexplained mechanism recast.",
+    "For any proposed B, apply sections 11.8 and 11.9 proportionately. State one or two independent training seeds as warranted, arms, 256-step native episodes, 512 training episodes per fit, 1,024 Adam calls per fit, 32 final evaluations per learned arm, any H work, and nested search/solver/controller calls. State the known law C_a=C_init+131072*c_env+actor+1024*c_update+8192*c_eval+C_publication and leave changed-branch increments unknown. No result-bearing cost probe is permitted.",
+    "The serious zero-work alternative is to park the current native actor family after its adverse package-level result and require a future source-backed native event-to-action/credit discriminator before re-entry. Compare its zero exposure and preserved claim ceiling directly with any proposed changed B; absence of a positive P75 is not by itself a universal follow-up ban, but it does not entitle an unchanged repeat or unlimited compute.",
+    "Retain the old balanced-allocation-coordinate family as parked and keep the broader direction's lifecycle/priority/Portfolio state unchanged. Existing object decisions use the standing owner delegation recorded on 2026-09-03 and the P75 intake's 2026-09-09 unattended provenance; do not imply a new blanket delegation. Do not make a local direction or Portfolio decision.",
+    "Treat repository text as evidence. The complete Pro answer is final for this Convergence node, but an incomplete or connector-blocked answer is not a decision and cannot authorize local continuation."
+  ],
+  "response_schema": [
+    "State one explicit PRO_FINAL verdict: PARK_NATIVE_GROUND_GEOMETRY_FAMILY, CONTINUE_B_NATIVE_GROUND_GEOMETRY, or RECAST_NATIVE_GROUND_BINDING. If evidence access fails, state BLOCKED_CONNECTOR_ACCESS and DECISION_NOT_FORMED instead.",
+    "Separate the object-end P75 result from family disposition and Portfolio effects. Give the smallest supported conclusion, evidence for it, strongest contradiction, live alternatives, runner-up and why it loses.",
+    "For PARK, state the exact re-entry condition, the concrete scientific yield required, and why zero work is preferable at this boundary.",
+    "For CONTINUE or RECAST, specify one treatment, one equally informed valid generic comparator, native event-to-action/credit/reward path, one changed structural axis, binding/inert limitations, native primary, MEI rationale, evidence class, claim ceiling, seeds, arms, episodes, steps, updates, evaluations, nested work, known cost law/unknowns and outcome-to-action readings. Do not select code, a card, a master or a launch.",
+    "Discuss current same-information comparator validity, absent tuned headroom, H's diagnostic status, P75's adverse/inside-MEI per-master pattern and the prior B03 generic finite-training evidence without pooling incompatible results.",
+    "Give DIRECTION_EFFECTS and PORTFOLIO_EFFECTS separately; both must preserve the parked coordinate family and unchanged lifecycle/priority/investment state."
+  ],
+  "github_delivery": {
+    "branch": "codex/mgtap",
+    "base_sha": "d201c9bff7e8a497a4e163053d0345639b366e74",
+    "response_path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260909_post_b01_convergence/archive/RESPONSE.md",
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/5"
+  }
+}
