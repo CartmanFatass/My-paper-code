@@ -356,6 +356,44 @@ intake: `pro_packets/20260908_post_b03_convergence/archive/RESPONSE.md` at
 PRO_FINAL / OWNER_DELEGATED; current Portfolio lifecycle and priority remain
 unchanged.
 
+## Native individual-renewal UAV boundary (P67, 2026-09-08)
+
+Complete Convergence selects only the new scenario1 fixed-team-clock individual
+internal-renewal B family and one I/authentic-D0 early-learning pair. P52's
+supplied-public-mask extension stays ended and the ordinary public-cue corridor
+family stays paused. This existing D2 internal-threshold question is explicitly
+not a recast; no whole-direction lifecycle, priority, capacity or formal UAV-entry
+registration follows. There is no new native UAV performance evidence yet.
+
+The accepted hypothesis is that motion and partner co-adaptation change service
+geometry enough for an additional individual skill decision to help the current
+recurrent actor. Source verifies internal partial assignment → real continuous
+movement → native reward and own subsequent learner data. The strongest null is
+authentic D0's same-information, every-step reactive actor with memory; extra
+policy gaps may instead disturb skills or add optimizer/segment work. Old E3
+competent losses remain the strongest empirical caution, alongside small-seed
+support and E2's duration control. B03's local H−D0 gain and native G shortfall
+remain corridor observations and are not evidence of this new intervention.
+
+The next discriminator is one prospective new I/D0 pair on six fixed UAVs,
+fifty users, uniform/free-space H500, latent 6/6, common team k10 and caps10:
+I individual cost .25/team infinity, D0 both infinity. Each learns for five
+16×500 rollouts and receives one final 32-episode evaluation. Native mean team
+reward is 6×adapter episode return/500; MEI .01. Positive, within-MEI, opposite
+and incomplete readings all end one intake, without automatic expansion.
+This is a package-performance comparison, with arm-local data/credit/optimizer
+work; it cannot isolate timing causality or establish stable superiority.
+Tuned same-information scenario1 headroom remains absent; E0 supplies its
+permitted exposure/integrity and historical cost facts, not a return ranking.
+
+Full per-arm caps are D0 3600/I 18000 seconds, including initialization through
+publication; the tenfold decision-row stress scenario is not a measured wall
+bound. The card and bounded CM specification are prepared; this intake assigns
+no implementation or experiment. Source: `pro_packets/20260908_p67_uav_internal_renewal/archive/RESPONSE.md`
+at `48b000c08d2a82192de733740230545c97b2a7ab`, its `CONVERGENCE_INTAKE.md`, and
+`FSD_UAV_INDIVIDUAL_RENEWAL_B01_SCIENCE_CARD_20260908.md`. Decision provenance:
+PRO_FINAL / OWNER_DELEGATED. P67 increments the recast count by zero.
+
 ## Objects and their state (2026-09-08)
 
 | Object | State | Record |
@@ -372,6 +410,7 @@ unchanged.
 | Native-renewal learning B02 / P40–P43 | complete valid B, new770303/770304 pair; H−C+.52039 above .01, G−H+.01085 full; all3 arms/665.01s retained; separate from B01, no successor | `FSD_NATIVE_RENEWAL_LEARNING_B02_SCIENCE_CARD_20260908.md`; `FSD_NATIVE_RENEWAL_LEARNING_B02_RESULT_EVIDENCE_20260908.md`; `FSD_NATIVE_RENEWAL_LEARNING_B02_INTAKE_20260908.md` |
 | Native-renewal learning B03 / P46–P47 | complete valid B, one new770403/770404 H/D0 pair; H−D0+.39286 above .01, G−H+.11529 full; all3 arms/898.61s retained; weak actual D0 remains valid, no successor | `FSD_NATIVE_RENEWAL_LEARNING_B03_SCIENCE_CARD_20260908.md`; `FSD_NATIVE_RENEWAL_LEARNING_B03_RESULT_EVIDENCE_20260908.md`; `FSD_NATIVE_RENEWAL_LEARNING_B03_INTAKE_20260908.md` |
 | Post-B03 Convergence / P52 | complete PRO_FINAL A; tested supplied-public-mask learning extension ended, ordinary family pause retained, no successor/recast/UAV entry; all B results preserved | `pro_packets/20260908_post_b03_convergence/archive/RESPONSE.md`; `pro_packets/20260908_post_b03_convergence/CONVERGENCE_INTAKE.md` |
+| Native individual-renewal UAV B01 / P67 | conforming PRO_FINAL A; one new fixed-team-clock I/D0 B selected, prospective card/CM spec prepared; zero new performance, no experiment allocation; old corridor stops preserved | `pro_packets/20260908_p67_uav_internal_renewal/CONVERGENCE_INTAKE.md`; `FSD_UAV_INDIVIDUAL_RENEWAL_B01_SCIENCE_CARD_20260908.md` |
 | Advancement plan | E1 → E2 → E2b/E3 → E4 → C-gate; E2b is not selected at this boundary | `docs/Claude_docs/plans/RESEARCH_ADVANCEMENT_PLAN_20260902.md` |
 
 ## Code

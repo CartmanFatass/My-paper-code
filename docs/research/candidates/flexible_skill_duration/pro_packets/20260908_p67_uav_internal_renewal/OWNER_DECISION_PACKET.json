@@ -1,0 +1,38 @@
+{
+  "question": "是否保留已按完整 Pro 裁决执行的新 UAV 个体内部续约问题选择？",
+  "changes_if_approved": [
+    {
+      "target": "docs/research/candidates/flexible_skill_duration/DIRECTION.md · P67 boundary",
+      "from": "P52 结束公开规则扩展；尚无内部续约后继",
+      "to": "仅选择 scenario1 固定团队时钟内个体续约 I/D0 的一个 B；旧停止不变"
+    }
+  ],
+  "if_refused": "在下一干净边界应用实际 owner 覆盖指令，停止受影响的后续分配并保留已归档裁决与所有历史结果；本项当前未启动实现或实验。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/pro_packets/20260908_p67_uav_internal_renewal/archive/RESPONSE.md",
+      "quote": "选择 A：只开放 scenario1 上“固定团队时钟内的个体内部技能续约”这一有界 B/EXPLORE 对象族，并只选择一对新的 I／authentic D0 真实学习比较。",
+      "why": "完整原节点明确选择一个不同的原生控制问题，并限定为一个训练对。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/pro_packets/20260908_p67_uav_internal_renewal/archive/RESPONSE.md",
+      "quote": "反对开放的最强理由是：D0 已经保留逐步观察、连续动作和记忆，新增 gap 可能只是增加离散技能扰动、样本分布变化及更新成本；旧 E3 对 competent fixed clock 的亏损让这种担忧有实质依据。",
+      "why": "D0 已有反应和记忆；旧 competent 负结果使新增 gap 的性能价值仍很不确定。"
+    }
+  ],
+  "uncertainty": [
+    "尚无本问题的新 UAV 性能、处理活动和当前机器耗时。",
+    "一个训练对不能估计训练种子总体不确定性，也不能隔离唯一原因。",
+    "scenario1 的 tuned 同信息 headroom 缺失；E0 的分数不得拿来排名。"
+  ],
+  "cost": {
+    "compute": "本次咨询与准备新增科学调用为零；若后续明确分配，D0/I 完整上限3600/18000秒，合计21600秒，无自动额外调用。",
+    "owner_time": "可异步批改，无需逐阶段确认。",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing；现有委托继续，未来任务分配由 Root 负责。"
+  },
+  "verdict_text": "选择 A：只开放 scenario1 上“固定团队时钟内的个体内部技能续约”这一有界 B/EXPLORE 对象族，并只选择一对新的 I／authentic D0 真实学习比较。",
+  "source": "docs/research/candidates/flexible_skill_duration/pro_packets/20260908_p67_uav_internal_renewal/archive/RESPONSE.md"
+}
