@@ -1,6 +1,6 @@
 # HMASD experiment tracking
 
-**Current owner boundary: PAUSED — 2026-09-09.** See [knowledge/review pause handoff](handoffs/2026-09-09-foundations-review-pause.md). No new science, Pro Send/retry or cleanup starts; preserve already accepted effects and write handoffs only. Historical running/restart descriptions below do not override this instruction.
+**Current owner boundary: RESUMED — 2026-09-09**, OWNER_DIRECT “继续推进科研流程”. Resume from [knowledge/review pause handoff](handoffs/2026-09-09-foundations-review-pause.md). Original assembly CM is completing the ten-direction review index and zero-new-exposure record; original RCLE DM is finishing the failed B03 intake from retained bytes. Root authors and dispatches the pending special Pro validity review through dedicated Transport once its fixed inputs are ready. No fresh experiment/retry allocation is made by this restart; historical running handles remain terminal.
 
 ## Owner-directed Root Pro recovery; FOLR accepted generation
 
