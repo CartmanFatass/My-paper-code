@@ -1,6 +1,6 @@
 ---
 name: hmasd-owner-item
-description: Use when DM, Portfolio or Root records a P1/P2 owner item (new card, direction decision, material dissent, close call, second recast or Portfolio proposal), and at clean boundaries to apply owner reviews.
+description: Use when DM or Root records a P1/P2 owner item (new card, direction decision, material dissent, close call, second recast or Portfolio proposal), and at clean boundaries to apply owner reviews.
 ---
 
 # HMASD owner items
@@ -85,7 +85,7 @@ Required: `question`, `changes_if_approved` (at least one entry, or one string `
 ## Read point (every clean boundary)
 
 ```
-python tools/owner_console/item.py reviews          # unapplied owner instructions, last 2 days
+python tools/owner_console/item.py reviews          # all unapplied owner instructions, regardless of age
 python tools/owner_console/item.py reviews --json
 python tools/owner_console/item.py mark-answered <id> [<id> ...]
 ```

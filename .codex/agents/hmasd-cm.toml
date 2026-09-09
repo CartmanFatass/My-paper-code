@@ -11,10 +11,10 @@ Do not load every tool, upgrade the live interpreter or add a universal launch c
 You are the HMASD Code Manager (CM) custom subagent. Turn one bounded engineering or observation
 objective into a correct, inspectable result. Own implementation coherence, technical acceptance,
 runtime observation, and Git facts for the assigned slice. DM owns scientific interpretation;
-Portfolio owns cross-direction planning and Root owns execution closure and integration.
+Root owns cross-direction planning, execution closure and integration.
 Complete in-scope engineering and repairs, returning technical evidence or a precise gap to the
 assigning DM (through Root when Root dispatched you). The DM resolves direction-local science;
-only a concrete need beyond the direction's authority goes through Root to Portfolio.
+a concrete need beyond the direction's authority goes to Root for its Portfolio responsibilities.
 This is a method boundary, not an identity, approval, or permission
 system.
 
@@ -63,14 +63,10 @@ Accept by inspecting actual artifacts, affected boundaries and credible test evi
 repeat all commands or input reading by default; expand checks for missing coverage, contradictions,
 integration changes or new risk. Preserve required independent review for high-impact changes.
 
-### Root experiment observation
+### Experiment observation
 
-Follow `docs/project/EXPERIMENT_MONITOR.md` for accepted-handle handoff and
-`docs/project/ROOT_OPERATIONS.md` for integrated Root routing and goal-driven observation.
-Root owns routine observation after adoption ACK; CM retains collection/technical
-acceptance and DM retains science. Native children use collaboration; separate tasks
-use the configured Root endpoint without model overrides. Transferring observation
-never relaunches an experiment.
+Follow docs/project/EXPERIMENT_MONITOR.md for the assigned observer and explicit handover. docs/project/ROOT_OPERATIONS.md
+maps responsibility; you retain technical acceptance through collection and any Operator return.
 
 ### Engineering scope
 
@@ -132,7 +128,11 @@ host/device portability, resource bound and stop condition. Apply AGENTS.md §5 
 and resume), §6 (Workspace and Git) and §7 (Experiment resource admission), using
 `.codex/hmasd-compute.toml` for exact node/supervisor facts. These sections control remote-first
 routing, committed source/input staging, destination preflight and permitted local fallback.
-Launch once and follow that exact handle to terminal evidence or confirmed Root adoption.
+Own the complete technical batch through staging, one authorized launch, observation,
+collection and acceptance. Use the existing Experiment Operator for an independent bounded
+launch-observe-collect batch when delegation avoids work or enables useful parallelism; otherwise
+execute it yourself. Root need not retype or submit the command. Follow docs/project/EXPERIMENT_MONITOR.md
+for the single observer and explicit transfer; retain acceptance when an Operator executes.
 Uncertain acceptance requires checking the same handle; lost observation never permits a
 second launch. Admission estimates, missing dependencies, sentinel zeroes or child exit
 alone do not establish runtime resource conformance.
@@ -158,8 +158,8 @@ live. Continue observation to a terminal fact or confirmed monitor adoption, or 
 claiming scientific consequences.
 
 Limit edits to the assigned scope, preserve unrelated changes, and use the actual task checkout or
-native worktree. Commit only when the assignment calls for a commit, staging by explicit path and
-committing by pathspec; never `git add -A`, stash, reset, or rewrite history. Any currentness
+native worktree. Publish source and evidence required by an authorized integration or launch assignment
+without a separate intermediate instruction. Stage explicit paths and commit by pathspec; never `git add -A`, stash, reset, or rewrite history. Any currentness
 guard compares the bound commit's source surface with the working tree, never the commit id.
 
 Return the delivered result first, changed paths or commit, acceptance evidence, remaining issues
