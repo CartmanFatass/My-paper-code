@@ -789,3 +789,47 @@ a three-seed threshold or an added Pro gate for conforming A/B. Any family
 continuation/closure or recast belongs to em:vsp_c1:convergence. P78 is complete
 and permits no Pro Send; no packet or decision exists yet. No family, lifecycle,
 priority, recast, C or formal UAV-entry disposition has been made here.
+
+## One additive-gate comparison on the intact ordinary body — 2026-09-09
+
+The [P79 Convergence intake](VSPC1_NATIVE_HOLD_VALUE_P79_CONVERGENCE_INTAKE_20260909.md)
+accepts the full fixed [Pro response](pro_packets/20260909_native_hold_value_post_b12_convergence/archive/RESPONSE.md)
+at77687230cb1f3898e55c21d23c05ba1840d820ea. The proper node selects one
+same-family B: both critics keep the full136→128→133→1 ordinary body, with
+the existing640-parameter remaining-hold gate added only to treatment. It is
+explicitly **not RECAST**. The previous DM stopping recommendation was never
+executed and is superseded by this conforming node decision. No completed
+experiment is rewritten and no new card, master or invocation is allocated by
+the receipt-intake assignment.
+
+The scientific distinction is additive use on an intact generic body versus the
+previous near-equal-total-parameter allocation of gate and ordinary units.
+35,467 versus34,827 critic parameters leave capacity and optimization confounded;
+the old comparison was valid for its own packages. A new benefit could not show
+that650 ordinary parameters caused the prior late deficit. The same opening
+duration → entity-owned residual hold → centralized value/joint optimization →
+local recurrent actor → native return path is retained, with fixed membership
+and existing information. Earlier measured nonzero-hold training exposure was
+about1.13%; the new pair has no observed exposure yet.
+
+Strongest support for a bounded continuation is the preserved early512 gains
+and a concrete additive use that keeps the strongest attained generic structure.
+Strongest contradiction remains all three relative reductions, no768 UP,
+8503's −.0735897558 late deficit/31 adverse identities and mixed512 signs.
+All native/H losses and older final-only, width128, unnormalized and quarantine
+records remain separate. Tuned matching headroom is still absent; H is untuned.
+Initialization, general capacity, FP32 arithmetic, value moments, joint clipping
+and partner co-adaptation survive as alternatives. Neither sparsity nor gate
+movement isolates a cause.
+
+The selected next discriminator is one fresh matched pair of768-episode fits,
+final768 evaluation only and one new matched H panel, retaining four private
+train/eval environments and frozen evaluation moments. Its primary is final
+Delta_new in mean native J units, MEI .01; it does not measure the old C change.
+Known work is417792 team steps/3072 Adam/96 evaluations, complete1800s/arm and
+3600s/whole; new runtime remains unknown. A fourth unchanged B remains legal
+but is not this node's choice. No exact upper, unique-cause diagnosis, search
+prerequisite or new cost experiment is required. The claim ceiling remains one
+finite-budget native package signal/counterexample, not stable superiority,
+equivalence, unique hold credit, budget causality, C promotion, transfer or
+formal UAV entry. Recast count and Portfolio lifecycle/priority are unchanged.
