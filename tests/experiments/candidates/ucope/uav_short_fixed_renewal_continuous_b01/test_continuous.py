@@ -201,3 +201,36 @@ def test_final_evaluation_failure_preserves_fit_and_primary(tmp_path, monkeypatc
     assert result["primary"]["complete"] == (failure_arm == "H")
     assert result["status"] == ("PRIMARY_COMPLETE_WITH_LIMITS" if failure_arm == "H" else "INCOMPLETE")
     assert not result["all_panels_complete"] and not result["primary"]["hover_complete"]
+
+
+def test_8602_cli_seed_and_card_without_scientific_draws(tmp_path, monkeypatch):
+    spec=importlib.util.spec_from_file_location("continuous_8602_runner","scripts/run_ucope_uav_short_fixed_renewal_continuous_b01.py")
+    runner=importlib.util.module_from_spec(spec);spec.loader.exec_module(runner)
+    monkeypatch.setattr(torch,"set_num_threads",lambda n:None)
+    monkeypatch.setattr(torch,"set_num_interop_threads",lambda n:None)
+    seen=[]
+    # Stop immediately at the first template call, before any model or RNG creation.
+    def no_templates(seed):
+        seen.append(seed)
+        raise RuntimeError("mock boundary before model/RNG")
+    monkeypatch.setattr(policy,"templates",no_templates)
+    for seed,fixture in ((8601,False),(8602,False),(9001,True)):
+        out=tmp_path/str(seed)
+        monkeypatch.setattr(sys,"argv",["runner","--seed",str(seed),"--out",str(out)]+(["--engineering-fixture"] if fixture else []))
+        assert runner.main()==1
+        result=json.loads((out/"summary.json").read_text())
+        assert seen[-1]==seed and result['seed']==seed and result['configuration']['seed']==seed
+        assert result['card']==(study.CARD_8602 if seed==8602 else study.CARD)
+        assert result['card_section']==(6 if fixture else 5)
+        assert result['counts']['scientific_uav_calls']==0
+        b=seed*100000
+        assert result['seeds']==dict(initialization=b+11,duration_head=b+12,train_reset_start=b+10000,eval_reset_start=b+20000,G_train_velocity=b+21,G_train_duration=b+22,F_train_velocity=b+31,F_train_duration=b+32,F_eval_velocity_start=b+30000,F_eval_duration_start=b+40000,G_eval_velocity_start=b+50000,G_eval_duration_start=b+60000,eval_checkpoint_stride=1000)
+    assert seen==[8601,8602,9001] and study.Config().seed==8601
+    def addresses(seed):
+        b=seed*100000
+        return {b+x for x in (11,12,21,22,31,32)} | set(range(b+10000,b+12048)) | set(range(b+20000,b+20064)) | {b+offset+1000*j+e for offset in (30000,40000,50000,60000) for j in range(3) for e in range(64)}
+    assert len(addresses(8602))==2886 and addresses(8601).isdisjoint(addresses(8602))
+    for seed,fixture in ((8603,False),(8602,True),(9001,False)):
+        monkeypatch.setattr(sys,"argv",["runner","--seed",str(seed),"--out",str(tmp_path)]+(["--engineering-fixture"] if fixture else []))
+        with pytest.raises(SystemExit):runner.main()
+    assert seen==[8601,8602,9001]

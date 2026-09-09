@@ -19,8 +19,8 @@ def main():
     parser.add_argument("--engineering-fixture", action="store_true")
     parser.add_argument("--out", type=Path, required=True)
     args = parser.parse_args()
-    if args.seed != (9001 if args.engineering_fixture else 8601):
-        parser.error("requires seed9001 for fixture or seed8601 for real pair")
+    if args.seed not in ((9001,) if args.engineering_fixture else (8601, 8602)):
+        parser.error("requires seed9001 for fixture or seed8601/8602 for real pair")
     import torch
     torch.set_num_threads(1)
     torch.set_num_interop_threads(1)
