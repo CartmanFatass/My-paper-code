@@ -1,5 +1,7 @@
 # FOLR-PUBLIC-LIFECYCLE-B01 technical delivery
 
+**Complete paired technical result accepted:** RETAIN2.104375, RESET4.1065625, difference−2.0021875 (`RESET_ABOVE_MEI`). Both arms completed all frozen training/evaluation counts and publication within their caps. [Full paired summary](FOLR_PUBLIC_LIFECYCLE_B01_RESULT_SUMMARY_20260909.json) preserves all64 final returns and receipts; [execution evidence](FOLR_PUBLIC_LIFECYCLE_B01_RESULT_EVIDENCE_20260909.md) records exact commands, source, node, handles, collection and resource scope. Scientific interpretation belongs to DM; no successor is allocated.
+
 Frozen assignment: [science card §§1–6](FOLR_PUBLIC_LIFECYCLE_B01_SCIENCE_CARD_20260909.md), revision 97eb1683ee2a19d56918b80e2e92ff939328aa7a. CM: `/root/dm_folr_p68_reentry/cm_public_lifecycle_b01`. Authoring checkout `C:/Projects/HMASD-worktrees/codex-vap-folr`, branch `codex/vap-folr`; starting status clean. Main/control-plane files were read-only. DM owns scientific intake.
 
 ## Delivered source and boundaries
