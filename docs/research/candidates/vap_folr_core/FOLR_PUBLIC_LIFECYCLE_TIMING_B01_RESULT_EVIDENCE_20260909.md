@@ -1,6 +1,6 @@
 # FOLR public lifecycle TIMING-B01 technical evidence
 
-Implementation accepted; RETAIN submitted and pending Monitor adoption/terminal collection. EVENT and RANDOM remain unsubmitted. Allocation: card §§2–6 and intake §7 at `8fc84a01eaaf8c89197020a75879ba9dfeea0e33`, Root main `fdede5b8897e412d68d2a341a379efac69feb429`. Original CM owns implementation, execution and terminal collection. The sequence is RETAIN → EVENT → RANDOM, exactly one accepted submission each; failure ends dependent execution. No retry, replacement, top-up, cost probe or successor.
+Implementation accepted; RETAIN running under confirmed Monitor adoption, pending terminal collection. EVENT and RANDOM remain unsubmitted. Allocation: card §§2–6 and intake §7 at `8fc84a01eaaf8c89197020a75879ba9dfeea0e33`, Root main `fdede5b8897e412d68d2a341a379efac69feb429`. Original CM owns implementation, execution and terminal collection. The sequence is RETAIN → EVENT → RANDOM, exactly one accepted submission each; failure ends dependent execution. No retry, replacement, top-up, cost probe or successor.
 
 ## Source and check index
 
@@ -45,3 +45,5 @@ cd /home/wu/hmasd-worktrees/folr-public-lifecycle-timing-b01-74d023d7 && /home/w
 ```
 
 Direct MONITOR_ADD via app tool to the live configured task returned destination threadId and `isError=false`, carrying the exact handle/source/cwd/root/receipt and original CM/DM/Root. **Dispatch accepted, adoption not yet confirmed.** No remote scientific status polling followed. Acceptance of submission does not establish memory admission, resource conformance or scientific result. Root resumes original CM for terminal collection of summary/all128 returns, checkpoint, process.time, receipt and log; only then does the next already allocated arm proceed. Preserve new execution/supervisor roots for later explicit closeout. Technical acceptance of the complete triple remains pending.
+
+Root subsequently confirmed actual Monitor adoption at2026-09-09T22:40:57.9647914Z: running, exit null, tmux true, PID3075634, uptime36s, new active Monitor goal. Observation transfer is complete. Root independently accepted source/review and integrated74d023d7d as main `fd034727b`. Original CM returns pending terminal collection; EVENT and RANDOM remain the already allocated next steps, not submitted early.
