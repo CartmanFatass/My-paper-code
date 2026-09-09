@@ -102,6 +102,44 @@ commit and the blocker intake without rewriting either history; its push succeed
 notified natively of the concurrent delivery. No replacement, resend or scientific intake was
 performed. The response is preserved for Root's separately handled recovery/intake route.
 
+## Read-only delivery reconciliation: confirmed, without accepting the mismatched Send
+
+On 2026-09-09 the Transport recovery performed fresh GitHub reads against the fixed request and
+did not open a provider tab or issue any write. The fixed TASK at
+`d0b1d364c4de28fc449918c351bd999e4276141d` resolves to the declared task path (GitHub content
+SHA `ac50ea8183534bd1a7263f410282b56b2693cfed`). The response delivery commit
+`febfad9778a0a69d3be2618739a31eec86721caa` contains the exact declared response path as its only
+scoped file; its Git blob SHA is `ba54bb35b64b3c0402d32d90a94c1016e539792d`, with 33,855 raw
+UTF-8 bytes and raw-content SHA-256
+`417c346a0e5aeb2c99a2da011f67305c0915cd58c7907046c4197a7bc3af1f1e`.
+
+The `codex/crto` branch now points to `d9ea201521501e0c644fbdb009042f4a7119756d`, whose parent
+chain contains `0a41e0ea34b7457f2fc08e6cce9b9a2305f56343` and therefore retains the same response
+blob. A fresh read at that current HEAD returns the same response blob SHA and raw-content hash.
+The immutable file link is:
+
+[RESPONSE.md at delivery commit](https://github.com/CartmanFatass/My-paper-code/blob/febfad9778a0a69d3be2618739a31eec86721caa/docs/research/candidates/commitment_residual_triggered_options/pro_packets/20260908_native_cost_reentry_convergence/archive/RESPONSE.md).
+
+Fresh Issue #13 comments contain one matching delivery comment, comment ID `5595668035`, created
+`2026-09-09T04:12:37Z`:
+
+[Issue #13 delivery comment](https://github.com/CartmanFatass/My-paper-code/issues/13#issuecomment-5595668035).
+
+Its body names the fixed TASK SHA `d0b1d364c4de28fc449918c351bd999e4276141d`, the specified
+evidence SHA `c9690db8ef340ac8201043183a864454f08c0431`, the immutable response URL above, and
+the delivery commit URL. It states that only the authorized response file was added on
+`codex/crto` and that no card, experiment, allocation or Portfolio-state change was made.
+Thus the response-file and Issue-comment deliveries are confirmed against the request's declared
+path, branch and fixed inputs. This is delivery identity evidence only; it is not a scientific
+reading of the response body or a replacement for DM intake.
+
+These confirmations do **not** amend the transport record. The primary registry still records
+`SENT_INPUT_MISMATCH`, `send_click_count=1`, `user_node_exact=false`,
+`archive_status=NOT_ARCHIVED_INPUT_MISMATCH`, `archive=null`, and `response_sha256=null`, with the
+closed tab and one accepted terminal-blocker receipt. No raw provider response or exact sent-payload
+bytes were recovered. The later GitHub file and comment therefore remain preserved delivery facts,
+not a repair, retry, accepted Pro archive, or scientific decision.
+
 ## Counts, scientific reading and owner flags
 
 This intake adds **0 scientific invocations, 0 environment/model/evaluator/native calls,
