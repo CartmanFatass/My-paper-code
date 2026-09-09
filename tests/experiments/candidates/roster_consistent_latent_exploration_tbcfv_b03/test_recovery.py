@@ -11,7 +11,7 @@ def test_completed_block_survives_exception(monkeypatch, tmp_path):
     torch.set_num_threads(1)
     model = make_conformance_fixture_model()
     authority = SimpleNamespace(root_digest="fixture", certificate={"native": "not invoked"})
-    monkeypatch.setattr(study, "make_rng", lambda: (authority, SimpleNamespace(block_index=0)))
+    monkeypatch.setattr(study, "make_rng", lambda seed=study.SEED: (authority, SimpleNamespace(block_index=0)))
     monkeypatch.setattr(study, "initialize_block_models", lambda rng: {study.FLEX: model})
     calls = []
     def supplied(model, arm, rng, coords, training):
