@@ -10,6 +10,7 @@ import time
 from ..uav_motion_prefix_b01.study import Deadline, clean_json, difference_stats, new_counts, write_summary
 
 CARD = "docs/research/candidates/ucope/UCOPE_UAV_SHORT_FIXED_RENEWAL_CONTINUOUS_B01_SCIENCE_CARD_20260909.md"
+CARD_8602 = "docs/research/candidates/ucope/UCOPE_UAV_SHORT_FIXED_RENEWAL_CONTINUOUS_B01_8602_SCIENCE_CARD_20260909.md"
 OBJECT = "UCOPE-UAV-SHORT-FIXED-RENEWAL-CONTINUOUS-B01"
 SELECTOR = "renewal_short_fixed_continuous_b01"
 COMPARATOR_SOURCE = "52bf50a089d3389d9fada0b531e4f4e56e83f9b8"
@@ -73,7 +74,8 @@ def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=wri
     b = config.seed * 100000
     sha = subprocess.check_output(["git", "rev-parse", "HEAD"],
                                   cwd=Path(__file__).resolve().parents[4], text=True).strip()
-    summary = dict(object=OBJECT, card=CARD, card_section=(6 if config.fixture else 5),
+    summary = dict(object=OBJECT, card=(CARD_8602 if config.seed == 8602 and not config.fixture else CARD),
+        card_section=(6 if config.fixture else 5),
         pair=SELECTOR, mode="ENGINEERING_FIXTURE" if config.fixture else "UAV_B_EXPLORE",
         launch_sha=sha, comparator_source=COMPARATOR_SOURCE, seed=config.seed,
         configuration=asdict(config), status="INCOMPLETE", arms=arms, limits=limits,
