@@ -19,6 +19,20 @@ acceptance, integration, experiment observation and exact Pro handoffs. Root use
 and reasoning effort selected by the owner. Portfolio denotes these responsibilities and the
 Portfolio decision tier, not another session.
 
+OWNER_DIRECT 2026-09-08: the independent Luna/low completion relay wakes Root for actionable
+native handoffs only, under `docs/project/SIBLING_COMMUNICATION.md` and
+`.codex/hmasd-relay.toml`. Ordinary native traffic and nested parent acceptance stay native.
+Cross-session messages omit model and reasoning-effort overrides; configured models persist.
+
+OWNER_DIRECT 2026-09-09: recover unstable Pro delivery under the existing research
+request; do not leave research blocked solely on failed-effect sends. Reconcile actual
+acceptance/delivery before retrying, observe already accepted generations, and preserve
+the original prompt, failed-attempt facts and binding. Root personally completed the
+FOLR/SCDMP recovery and confirmed normal sending. The owner's subsequent instruction
+returns all later Pro Send, observation, reconciliation, archival and receipts to the
+dedicated Transport session. Root dispatches and accepts its returns. Recovery changes
+neither scientific authority, evidence meaning nor experiment budgets.
+
 The independent **Transport** session (Luna/high) owns Pro browser Send, observation,
 reconciliation, archival and parent receipts. Root receives its receipts, performs Portfolio
 intake itself and forwards direction receipts to the original native DM/CM. Transport never
@@ -67,7 +81,8 @@ of a frozen card. Required checks stay proportional; repeated checks need a new 
 The owner approved adoption batches 1 and 2 from
 `docs/project/SCIENTIFIC_TOOL_ADOPTION_REVIEW_20260905.md`. Root, DM/EM, CM and
 specialists use `.agents/skills/hmasd-scientific-tools/SKILL.md` when retrieving
-literature, calculating exposure/cost, analyzing results, resolving a concrete
+literature, designing or interpreting scientific objects, comparing or reviewing claims,
+calculating exposure/cost, analyzing results, resolving a concrete
 performance question or integrating a baseline/environment. Prefer executable facts
 and existing libraries over repeated prose derivation; read only relevant resources.
 A bounded use of existing profiling/benchmark tools inside the named CM assignment
@@ -75,7 +90,9 @@ is permitted, with its purpose, invocation bound and overhead recorded; this doe
 authorize a standing profiler, mandatory profiling step, changed scientific semantics
 or additional experiment budget. Tool results inform existing intake, not another
 approval system. Optional baseline/analysis packages use task-isolated environments;
-no global dependency upgrade or third-batch framework migration follows.
+no global dependency upgrade or third-batch framework migration follows. Scientific judgments
+use its scientific-reading mode after the current assignment/card and relevant spec sections;
+mechanical formatting, Git, receipts and accepted technical collection do not trigger it.
 
 ## Focused reading and engineering handoffs (OWNER_DIRECT, 2026-09-06)
 
