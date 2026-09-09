@@ -35,3 +35,9 @@ was running with tmux active at 33s. Actual-node canonical admission at
 05:23:49.853098Z passed both floors with 14,689,787,904 bytes available.
 The allocation is spent; CM retains sole observation. Source SHA remains the
 accepted fd4c9f4a65c7c4049f9c0e5f18b28534f14abe01. No resubmission is allocated.
+
+Terminal: fixed handle finished exit 0 at 2026-09-09T05:30:37Z. Artifact-only
+checks PASS; enclosing whole wall 407.33s, conservative arm bounds 208.5062s /
+210.4093s, both within 1800s. All native primary/H/adverse outcomes, exposure,
+moments, hashes and measurement limits are retained in [E0 evidence](VSPC1_NATIVE_HOLD_VALUE_B06_RESULT_EVIDENCE_20260908.md).
+CM observation is complete. No second submission occurred.
