@@ -91,3 +91,18 @@ available memory were 15323074560 bytes. Admission is not runtime peak evidence.
 Raw receipts: `temp/directions/vsp_c1/engineering/native_hold_value_b13_p80/`.
 CM `/root/dm_vspc1_p49_value_question/cm_am_vspc1_hold_value_b01` is sole observer
 through terminal collection. One accepted submission spent; zero remain.
+
+## Terminal technical acceptance
+
+Finished 2026-09-09T12:57:52Z, exit 0 and inactive tmux. COMPLETE, no limits or
+cap breach; complete publication readback. Artifact-only checks PASS in 1.960493s,
+six matching remote/local hashes. Actual 417792 steps, 3072 Adam, 96 evaluations,
+four constructors, two final768 checkpoints and correct 35467/34827 critic counts.
+Whole 477.99s; conservative arm bounds 267.959493/231.922549s. Peak RSS
+544.7109375 MiB, aggregate CPU unmeasured. [E0](VSPC1_NATIVE_HOLD_VALUE_B13_RESULT_EVIDENCE_20260909.md)
+retains the DOWN point region, all native/H means and conditional errors, all losses
+and limits. One accepted submission spent; zero remain. Sole observation complete.
+Editing/index returns to DM at the final committed boundary; Root owns remote
+checkout reclamation. Historical P76 scratch blocker remains creator-owned.
+
+Published evidence readback passed: 96 evaluation rows, three 32-row contrasts, six hashes, matching payload and terminal receipt. All 14 bound runtime surfaces remain byte-content equivalent to scientific SHA 23ebb0f5e22286d9ea77a145f980bedacc32d9da; no runtime source edit followed launch.
