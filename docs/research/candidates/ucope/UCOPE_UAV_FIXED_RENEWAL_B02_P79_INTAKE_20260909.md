@@ -80,3 +80,82 @@ audit owner override was found. New-card item/audit record accompany the card,
 with no fabricated owner reply and no waiting for one.
 
 Preparation owner surface at **2026-09-09T04:18:26-07:00**: [new-card item](../../portfolio/owner/inbox/2026-09-09/20260909-ucope-004.json), recommended/auto-applied accept; [audit row](../../portfolio/audit/2026-09-09.md#L16). No owner reply is awaited.
+
+## 4. CM binding acceptance and execution preparation
+
+**Accepted source `5296520116682670a5d48336941ddd16f5d18e38`**, committed/pushed from clean
+`6f796320a60ba6376519a01d0c8f3539c31a96c3` in the designated `codex/ucope` checkout.
+Three owned paths changed 45+/31−: study/runner/new binding tests. Runner remains 54 lines.
+CM inspected the full diff: new selector/master/card identity and membership in accepted
+F/G/H branches only; no algorithm, primary formula, RNG offsets, topology or cap change.
+Policy/learner/environment/base/adapter bytes and VSPC1 hooks remain unchanged. UCOPE leaves
+value moments None. All historical selectors retain their meanings. Scope §4 additions:
+**none**, per card §6. P78's independent semantic acceptance and unaffected coverage are reused.
+
+Meaningful new-selector checks ran once on the exact source: **7 passed, 86 deselected**,
+pytest 0.05s / full wall **0.20s**, peak RSS **29280 KiB**, exit 0. Command selects
+`test_pair_plumbing.py -k renewal_fixed_b02`; it exercises actual CLI/config/run_pair
+binding and publication with workload imports substituted. New real7801/fixture9001
+card sections5/7, initialization/head/private stream/reset addresses, F/G-only fits,
+F/G/H returns, F−G/F−H/G−H primary propagation, saved config and early wrong-master/
+aggregate refusal all passed. No model/learner/native run or unchanged freeze suite occurred.
+The existing cache_dir warning follows disabled cache provider; cumulative checks 0.20s of300s.
+
+Check handle `ucope-uav-fixed-renewal-p79-check-20260909`, PID3047127, finished/inactive tmux,
+start2026-09-09T19:22:23+08:00/end19:22:24. [Raw receipt](../../../../temp/directions/ucope/exp/ucope-uav-fixed-renewal-b02-7801-p79-20260909/checks/supervisor/task.log)
+and [terminal readback](../../../../temp/directions/ucope/exp/ucope-uav-fixed-renewal-b02-7801-p79-20260909/checks/terminal-readback.txt) confirm exact-source
+execution and own scratch removal. Source-pack carriers were removed after staging.
+No new independent review round, native smoke or repeated action-credit suite was selected
+or run, matching card §§6–7. These checks establish binding conformance, not native outcomes.
+
+**Per-arm cost projection.** Card §4's unchanged complete law is initialization +131072
+training steps +1024 updates +8192 final-policy steps +publication per F/G arm; F adds
+head work, G8192 H steps. P78 references F172.7081888440298s/G146.49354537401814s/outer334.19s
+support this unchanged-work plan, without guaranteeing P79 timing. No known term projects
+over1800s complete arm/3600s whole; head-row counts are not wall multipliers. No pilot,
+cost experiment, hidden phase or allowance increase follows. Serial study critical path,
+sum of arm wall and aggregate CPU remain distinct; CPU is unmeasured absent direct evidence.
+
+**Post-learner path coverage.** Reuse P78's accepted actual F/G/H learner/checkpoint/raw-J/
+count publication fixture; new binding checks exercise selected publication metadata and
+primary routing. No launch-boundary repeat is needed. The one native allocation retains
+286720 steps,2048 Adam,512 rollouts,96 final evaluations and no T fit/evaluation.
+
+Configured node `hmasd-wsl-node`, CPU FP32/one Torch thread. New exact-source detached cwd
+`/home/wu/hmasd-worktrees/ucope-uav-fixed-renewal-b02-7801-p79-20260909`, output `temp/directions/ucope/exp/ucope-uav-fixed-renewal-b02-7801-p79-20260909`, handle `ucope-uav-fixed-renewal-b02-7801-p79-20260909`. Preparation saw not_found/no handle
+directory and absent cwd/output. All2176 materialized tracked files match Git blobs;
+explicit input hashes are in [source readback](../../../../temp/directions/ucope/exp/ucope-uav-fixed-renewal-b02-7801-p79-20260909/preparation/source-input-readback.json).
+Canonical preflight SHA256 `cb0525e9247f1c7262c198bf051e542282f5928982137b3023d36d5d69eda4dc`.
+Staged wrapper matches local UTF-8 ASCII/LF bytes; Bash -n and PowerShell Parser pass without
+payload execution. CM retains sole observation through collection. Prior evidence remains intact.
+
+## 5. Literal single-invocation payload
+
+Remote wrapper `/home/wu/hmasd-inputs/ucope-uav-fixed-renewal-b02-7801-p79-20260909.sh`: 749 bytes, SHA256
+`18177ac9ffef6c38c7f6dbc27bb782b59d7906f938d74b6c15356e5fa5bc8977`. Exact contents committed before execution:
+
+```bash
+set -euo pipefail
+cd /home/wu/hmasd-worktrees/ucope-uav-fixed-renewal-b02-7801-p79-20260909
+/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/.agent-tasks/ucope-uav-fixed-renewal-b02-7801-p79-20260909/resource_admission.json &&
+mkdir -p temp/directions/ucope/exp/ucope-uav-fixed-renewal-b02-7801-p79-20260909 &&
+cp /home/wu/.agent-tasks/ucope-uav-fixed-renewal-b02-7801-p79-20260909/resource_admission.json temp/directions/ucope/exp/ucope-uav-fixed-renewal-b02-7801-p79-20260909/resource_admission.json &&
+exec /home/wu/.venvs/hmasd/bin/python scripts/run_ucope_uav_motion_prefix_b01.py --pair renewal_fixed_b02 --seed 7801 --out temp/directions/ucope/exp/ucope-uav-fixed-renewal-b02-7801-p79-20260909
+```
+
+Local `temp/directions/ucope/exp/ucope-uav-fixed-renewal-b02-7801-p79-20260909/preparation/submit.ps1`: 350 bytes, SHA256
+`a4ba7d54dc52773b33417f383ca418ed4cc3e4578be57415e84dac4fbc942c23`. Execute this exact file after commit/push:
+
+```powershell
+& ssh -o BatchMode=yes -o ConnectTimeout=10 hmasd-wsl-node "/usr/local/bin/agent-task run ucope-uav-fixed-renewal-b02-7801-p79-20260909 '/usr/bin/time -f whole_wall_seconds=%e,peak_rss_kib=%M /usr/bin/timeout --signal=KILL 3600s /bin/bash --noprofile --norc /home/wu/hmasd-inputs/ucope-uav-fixed-renewal-b02-7801-p79-20260909.sh'"
+exit $LASTEXITCODE
+```
+
+Actual-node canonical admission and runner form one supervised `&&` chain. Physical and
+effective memory must both meet4GiB before scientific root/RNG/model creation; refusal
+stops the batch in the supervisor root. Outer timeout3600s covers admission through exit;
+runner1800s complete-arm clocks charge startup to F and H/final publication to G. At most
+one accepted submission; uncertain acceptance is reconciled on this same handle. No
+scientific admission/invocation has occurred at this preparation. No retry/resume/extra
+native evaluation is allocated. Root owns later P79 test/scientific checkout and wrapper
+reclamation after preserved terminal intake. DM owns the separate descriptive7701/7801 analysis.
