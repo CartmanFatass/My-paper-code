@@ -83,5 +83,15 @@
     "verdict_text": "Freeze the owner-directed continuous-budget B: one fresh8601 raw F/G pair, final2048 F−G primary, all three fixed evaluation panels and shared H, with disjoint reset domains and isolated evaluation streams.",
     "source": "docs/research/candidates/ucope/UCOPE_UAV_SHORT_FIXED_RENEWAL_CONTINUOUS_B01_8601_INTAKE_20260909.md"
   },
-  "starred": false
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-09T21:39:13+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/decisions/2026-09-09-synthesis-execution.md",
+      "record": "docs/research/portfolio/root-log/2026-09-09.md",
+      "state": "applied",
+      "summary": "Root完整阅读并验收连续训练卡66ddec127，集成为e1c04b980；分支audit45映射main153；源代码与独立评审仍待验收，尚无科学调用。"
+    }
+  ]
 }
