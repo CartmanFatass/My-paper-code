@@ -1,0 +1,517 @@
+{
+  "technical_acceptance": "INCOMPLETE_PAIR",
+  "failure": "W100 signal11; supervisor exit139",
+  "primary": null,
+  "W1_narrow_observation": {
+    "active_paths": [
+      {
+        "cell": "12_to_8.ACTIVE_CONTINUATION",
+        "W1_U": 0.71632080078125,
+        "init_U": 0.71654052734375,
+        "G_U_W1": 0.00021972656249999748,
+        "conditional_SE": 0.0007946098778705737
+      },
+      {
+        "cell": "8_to_12.ACTIVE_CONTINUATION",
+        "W1_U": 0.6923502604166666,
+        "init_U": 0.6924397786458333,
+        "G_U_W1": 8.951822916668456e-05,
+        "conditional_SE": 0.000607156927486597
+      }
+    ],
+    "G_U_W1": 0.00015462239583334102
+  },
+  "W1": {
+    "actor_score_weight": 1.0,
+    "admission_receipt": "/home/wu/hmasd-worktrees/rcle-b03-actor100-20260909/temp/directions/roster_consistent_latent_exploration/exp/b03-actor100-20260909/W1-admission.json",
+    "allocations": {
+      "models": 6,
+      "training_instances": 1,
+      "untrained_helpers": 5
+    },
+    "arm": "W1",
+    "block_digest_hex": "c1a1a91a691a02e2ac2dd3fa052e96045d968137db30e64acd3c6be0228d188e",
+    "cells": {
+      "12_to_12.ACTIVE_CONTINUATION": {
+        "40U_mean": 27.584635416666664,
+        "F_mean": 0.25478515625,
+        "U_mean": 0.6896158854166666,
+        "Y_mean": 0.3090922037760417,
+        "episodes": 256,
+        "tau40_count": 256,
+        "tau40_fraction": 1.0,
+        "tau_mean": 40.0
+      },
+      "12_to_12.NEW_EPOCH": {
+        "40U_mean": 27.615559895833336,
+        "F_mean": 0.24912109375,
+        "U_mean": 0.6903889973958334,
+        "Y_mean": 0.3103281656901042,
+        "episodes": 256,
+        "tau40_count": 256,
+        "tau40_fraction": 1.0,
+        "tau_mean": 40.0
+      },
+      "12_to_8.ACTIVE_CONTINUATION": {
+        "40U_mean": 28.65283203125,
+        "F_mean": 0.330517578125,
+        "U_mean": 0.71632080078125,
+        "Y_mean": 0.29271697998046875,
+        "episodes": 256,
+        "tau40_count": 256,
+        "tau40_fraction": 1.0,
+        "tau_mean": 40.0
+      },
+      "12_to_8.NEW_EPOCH": {
+        "40U_mean": 28.578125,
+        "F_mean": 0.330078125,
+        "U_mean": 0.714453125,
+        "Y_mean": 0.2951100667317708,
+        "episodes": 256,
+        "tau40_count": 256,
+        "tau40_fraction": 1.0,
+        "tau_mean": 40.0
+      },
+      "8_to_12.ACTIVE_CONTINUATION": {
+        "40U_mean": 27.694010416666668,
+        "F_mean": 0.25224609375,
+        "U_mean": 0.6923502604166667,
+        "Y_mean": 0.29983266194661456,
+        "episodes": 256,
+        "tau40_count": 256,
+        "tau40_fraction": 1.0,
+        "tau_mean": 40.0
+      },
+      "8_to_12.NEW_EPOCH": {
+        "40U_mean": 27.534505208333332,
+        "F_mean": 0.24938151041666667,
+        "U_mean": 0.6883626302083333,
+        "Y_mean": 0.3032175699869792,
+        "episodes": 256,
+        "tau40_count": 256,
+        "tau40_fraction": 1.0,
+        "tau_mean": 40.0
+      },
+      "8_to_8.ACTIVE_CONTINUATION": {
+        "40U_mean": 28.77587890625,
+        "F_mean": 0.329931640625,
+        "U_mean": 0.71939697265625,
+        "Y_mean": 0.2839508056640625,
+        "episodes": 256,
+        "tau40_count": 256,
+        "tau40_fraction": 1.0,
+        "tau_mean": 40.0
+      },
+      "8_to_8.NEW_EPOCH": {
+        "40U_mean": 28.634765625,
+        "F_mean": 0.331982421875,
+        "U_mean": 0.715869140625,
+        "Y_mean": 0.28537750244140625,
+        "episodes": 256,
+        "tau40_count": 256,
+        "tau40_fraction": 1.0,
+        "tau_mean": 40.0
+      }
+    },
+    "counts": {
+      "backward_step_calls": 200,
+      "final_episodes": 2048,
+      "init_episodes": 2048,
+      "nonzero_steps": 200,
+      "training_episodes": 12800,
+      "zero_steps": 0
+    },
+    "eight_cell_mean": {
+      "40U_mean": 28.1337890625,
+      "F_mean": 0.2910054524739583,
+      "U_mean": 0.7033447265625,
+      "Y_mean": 0.29745324452718097,
+      "cells": [
+        "8_to_8.ACTIVE_CONTINUATION",
+        "8_to_8.NEW_EPOCH",
+        "12_to_12.ACTIVE_CONTINUATION",
+        "12_to_12.NEW_EPOCH",
+        "8_to_12.ACTIVE_CONTINUATION",
+        "8_to_12.NEW_EPOCH",
+        "12_to_8.ACTIVE_CONTINUATION",
+        "12_to_8.NEW_EPOCH"
+      ],
+      "tau40_fraction": 1.0,
+      "tau_mean": 40.0
+    },
+    "final_baselines": [
+      0.2835102779714208,
+      0.28395134382232645,
+      0.2959581393735735,
+      0.29100854148477034,
+      0.2898951203942347,
+      0.2894292233180747,
+      0.2869282478094233,
+      0.28621573522950666
+    ],
+    "final_displacement": 0.15598634254049473,
+    "initial_parameter_norm": 21.230992499025053,
+    "initialization_summary": {
+      "cells": {
+        "12_to_12.ACTIVE_CONTINUATION": {
+          "40U_mean": 27.588541666666664,
+          "F_mean": 0.25576171875,
+          "U_mean": 0.6897135416666667,
+          "Y_mean": 0.30890401204427087,
+          "episodes": 256,
+          "tau40_count": 256,
+          "tau40_fraction": 1.0,
+          "tau_mean": 40.0
+        },
+        "12_to_12.NEW_EPOCH": {
+          "40U_mean": 27.660807291666668,
+          "F_mean": 0.24811197916666666,
+          "U_mean": 0.6915201822916667,
+          "Y_mean": 0.3095499674479167,
+          "episodes": 256,
+          "tau40_count": 256,
+          "tau40_fraction": 1.0,
+          "tau_mean": 40.0
+        },
+        "12_to_8.ACTIVE_CONTINUATION": {
+          "40U_mean": 28.66162109375,
+          "F_mean": 0.329931640625,
+          "U_mean": 0.71654052734375,
+          "Y_mean": 0.29250335693359375,
+          "episodes": 256,
+          "tau40_count": 256,
+          "tau40_fraction": 1.0,
+          "tau_mean": 40.0
+        },
+        "12_to_8.NEW_EPOCH": {
+          "40U_mean": 28.591796875,
+          "F_mean": 0.3294921875,
+          "U_mean": 0.714794921875,
+          "Y_mean": 0.29449462890625,
+          "episodes": 256,
+          "tau40_count": 256,
+          "tau40_fraction": 1.0,
+          "tau_mean": 40.0
+        },
+        "8_to_12.ACTIVE_CONTINUATION": {
+          "40U_mean": 27.697591145833336,
+          "F_mean": 0.25361328125,
+          "U_mean": 0.6924397786458334,
+          "Y_mean": 0.3000590006510417,
+          "episodes": 256,
+          "tau40_count": 256,
+          "tau40_fraction": 1.0,
+          "tau_mean": 40.0
+        },
+        "8_to_12.NEW_EPOCH": {
+          "40U_mean": 27.582356770833336,
+          "F_mean": 0.2486328125,
+          "U_mean": 0.6895589192708333,
+          "Y_mean": 0.3021036783854167,
+          "episodes": 256,
+          "tau40_count": 256,
+          "tau40_fraction": 1.0,
+          "tau_mean": 40.0
+        },
+        "8_to_8.ACTIVE_CONTINUATION": {
+          "40U_mean": 28.78369140625,
+          "F_mean": 0.330029296875,
+          "U_mean": 0.71959228515625,
+          "Y_mean": 0.28327178955078125,
+          "episodes": 256,
+          "tau40_count": 256,
+          "tau40_fraction": 1.0,
+          "tau_mean": 40.0
+        },
+        "8_to_8.NEW_EPOCH": {
+          "40U_mean": 28.609375,
+          "F_mean": 0.330810546875,
+          "U_mean": 0.715234375,
+          "Y_mean": 0.28548431396484375,
+          "episodes": 256,
+          "tau40_count": 256,
+          "tau40_fraction": 1.0,
+          "tau_mean": 40.0
+        }
+      },
+      "eight_cell_mean": {
+        "40U_mean": 28.14697265625,
+        "F_mean": 0.29079793294270834,
+        "U_mean": 0.70367431640625,
+        "Y_mean": 0.29704634348551434,
+        "cells": [
+          "8_to_8.ACTIVE_CONTINUATION",
+          "8_to_8.NEW_EPOCH",
+          "12_to_12.ACTIVE_CONTINUATION",
+          "12_to_12.NEW_EPOCH",
+          "8_to_12.ACTIVE_CONTINUATION",
+          "8_to_12.NEW_EPOCH",
+          "12_to_8.ACTIVE_CONTINUATION",
+          "12_to_8.NEW_EPOCH"
+        ],
+        "tau40_fraction": 1.0,
+        "tau_mean": 40.0
+      }
+    },
+    "launch_sha": "ad2fdfb854e295d6d9dddb229dd17cde58465919",
+    "native": {
+      "abi": {
+        "abi_version": 2,
+        "event_input_size": 64,
+        "fixture_input_size": 224,
+        "fixture_magic": 5927665395199787847,
+        "snapshot_size": 464,
+        "step_input_size": 64
+      },
+      "artifact_sha256": "5b918da7e23d7b65251fb20efcb6678e4a17e62538f6ebdedbda1d9e96221983",
+      "build_key": "a70147fa7b390c5d12fd6e16060105bf2ea530a09f21cb8487d51d6fcfc24fdb",
+      "load_seconds": 0.005518749007023871,
+      "path": "/tmp/hmasd_rcle_tbcfv_native/a70147fa7b390c5d12fd6e16060105bf2ea530a09f21cb8487d51d6fcfc24fdb/tbcfv_backend.so",
+      "resolved_build_root": "/tmp/hmasd_rcle_tbcfv_native",
+      "runtime_abi": {
+        "byteorder": "little",
+        "cache_tag": "cpython-310",
+        "event_input_size": 64,
+        "fixture_input_size": 224,
+        "implementation": "cpython",
+        "machine": "x86_64",
+        "pointer_bits": 64,
+        "python_version": [
+          3,
+          10,
+          21
+        ],
+        "snapshot_size": 464,
+        "step_input_size": 64
+      },
+      "source_sha256": "18d45b95a29c1ca8d17b4d192a9328ddc9c56a821a2690f118de44dbf0054819",
+      "toolchain": {
+        "compile_flags": [
+          "-std=c++17",
+          "-O2",
+          "-fexceptions",
+          "-shared",
+          "-fPIC",
+          "-fno-fast-math",
+          "-ffp-contract=off",
+          "-fno-unsafe-math-optimizations"
+        ],
+        "compiler_path": "/usr/bin/x86_64-linux-gnu-g++-13",
+        "compiler_sha256": "1353e9bdd29a7295c7226bf6c63abccce056d8cac31f112e5cdbecc3f28c2769"
+      }
+    },
+    "object": "RCLE-TBCFV-B03-ACTOR100",
+    "package": "FLEX-REKEY",
+    "peak_rss_bytes": 584744960,
+    "root_key_hex": "4b17629c25d71afceed93bbe657c0b5799d468d1f5673d90a7ceee644ec474c5",
+    "seed": 19,
+    "status": "COMPLETE",
+    "wall_seconds": 75.43952194601297
+  },
+  "retained_counts": {
+    "training_episodes": 12800,
+    "eval_episodes": 4096,
+    "episodes": 16896,
+    "ticks": 1081344,
+    "backward_step_calls": 200
+  },
+  "W100_actual_training_prefix": "unknown; no summary/curves/checkpoint persisted",
+  "W100_training_bounds": {
+    "episodes": [
+      0,
+      12800
+    ],
+    "backward_calls": [
+      0,
+      200
+    ]
+  },
+  "reference_invocations": 0,
+  "initial_tensors_equal": true,
+  "verified_files": [
+    "W100-admission.json",
+    "W100-time.txt",
+    "W1-time.txt",
+    "W1-admission.json",
+    "chain-time.txt",
+    "W100\\initial_parameters.pt",
+    "W1\\summary.json",
+    "W1\\initial_parameters.pt",
+    "W1\\init_scenarios.json",
+    "W1\\parameters.pt",
+    "supervisor\\runner.sh",
+    "supervisor\\exit_code",
+    "supervisor\\status",
+    "supervisor\\start_time",
+    "supervisor\\pid",
+    "supervisor\\task.log"
+  ],
+  "actual_model_allocations": 12,
+  "actual_training_instances_started": 2,
+  "untrained_helpers": 10,
+  "raw_inventory": {
+    "chain-time.txt": {
+      "bytes": 83,
+      "sha256": "7612bf829c41c6f0e1f66b45c79b2394997b29d77c458816cd04131d2d129607"
+    },
+    "collect_analysis.py": {
+      "bytes": 5408,
+      "sha256": "f6a1e9a27974c19b7d3967c1fb3e052134006750b9ab0c5e52294fe9bb5e51cb"
+    },
+    "fault-address.txt": {
+      "bytes": 1513,
+      "sha256": "7c616053e2677226e94ee5287b11b3872e55e6f878df9282b0a4b09a7916083e"
+    },
+    "kernel-crash.txt": {
+      "bytes": 2140,
+      "sha256": "0fb27d2e739caf70aff02cb26d89e392c5591fd96bceaff581dcb108beac12cf"
+    },
+    "remote-output-sha256.txt": {
+      "bytes": 877,
+      "sha256": "83dd2573b2ae6f982bc17911e2a1fb424b70e458b98f654f0d14dff408460034"
+    },
+    "remote-supervisor-sha256.txt": {
+      "bytes": 465,
+      "sha256": "e1d343cfb3304a1a337b6981dd247f13d98d3f862d295dff50447f2c678f7c20"
+    },
+    "W1-admission.json": {
+      "bytes": 504,
+      "sha256": "194b33a30735355892615cf1e76e676bb449074f6a25ea18278c29c995f6da62"
+    },
+    "W1-time.txt": {
+      "bytes": 40,
+      "sha256": "c576b9044517d3f6c9e14613f866180b8a7b0c4c48d36d2c9fd2490e5211aa97"
+    },
+    "W100-admission.json": {
+      "bytes": 504,
+      "sha256": "12b0d9eb98231f1cd0ca4b8cb373cd7b02b3ca21bbaddfd96b9e29657118051d"
+    },
+    "W100-time.txt": {
+      "bytes": 72,
+      "sha256": "f8e920a815bddd2cbd38d93db1c39c9c34f7c47d9e9707415a5a91f07bdc96b7"
+    },
+    "supervisor\\exit_code": {
+      "bytes": 4,
+      "sha256": "690e07064753123c967bbac0180f32da6a753a5bd8b79a47644cef58e776d9f0"
+    },
+    "supervisor\\pid": {
+      "bytes": 8,
+      "sha256": "762340c24c4c6f3d19c8fb95ca135c6c85c78ffe0e23787290a855f7ace96dc9"
+    },
+    "supervisor\\runner.sh": {
+      "bytes": 1504,
+      "sha256": "d47fbaf452d1605702b660d27c72c4d2d353ee59569cff9d63835e24d16a3b12"
+    },
+    "supervisor\\start_time": {
+      "bytes": 11,
+      "sha256": "2b5b0ae8d4fa16f981aae72e3f0d1dd762999ba7ac703d309c3e5fe033034cd6"
+    },
+    "supervisor\\status": {
+      "bytes": 7,
+      "sha256": "6da5b18878e110928643ebcc38dbb7552cf3a296eea56493e23edc2b93eecff8"
+    },
+    "supervisor\\task.log": {
+      "bytes": 1251,
+      "sha256": "b905ebc9d2fde9d88909a7c5d6ca69460d4bf005f6360b0d1eff195ead81080e"
+    },
+    "W1\\initial_parameters.pt": {
+      "bytes": 219733,
+      "sha256": "9c5ba67eb37dabdb9bdd35913f8664f10cf6b8cf52e1e0d1e772cdf0a7286b53"
+    },
+    "W1\\init_scenarios.json": {
+      "bytes": 417164,
+      "sha256": "623c1c4cd16e5202c2619111c541dfc00e179c3e03fb7585265e4c7afd2d0ebd"
+    },
+    "W1\\parameters.pt": {
+      "bytes": 219445,
+      "sha256": "3d6661b5e968564360ca2ea3ad0aacbe9befce087f984b2f4dde2bc5f843b64a"
+    },
+    "W1\\summary.json": {
+      "bytes": 1367051,
+      "sha256": "a678a5d115a0c4c9d176423ab291f2daa4629bfb13e4f2286e7b68dacfe7acdf"
+    },
+    "W100\\initial_parameters.pt": {
+      "bytes": 219733,
+      "sha256": "9c5ba67eb37dabdb9bdd35913f8664f10cf6b8cf52e1e0d1e772cdf0a7286b53"
+    }
+  },
+  "readback_wall_prefix_seconds": 1.7683716999963508,
+  "receipts": {
+    "chain-time.txt": "Command exited with non-zero status 139\nwall_s=132.54,peak_rss_kib=821028,exit=139\n",
+    "W1-time.txt": "wall_s=79.24 peak_rss_kib=572052 exit=0\n",
+    "W100-time.txt": "Command terminated by signal 11\nwall_s=53.20 peak_rss_kib=821028 exit=0\n"
+  },
+  "admissions": {
+    "W1-admission.json": {
+      "assessed_at": "2026-09-09T17:36:28.002082Z",
+      "available_physical_bytes": 15633690624,
+      "captured_at": "2026-09-09T17:36:28.001820Z",
+      "cgroup_headroom_bytes": null,
+      "cgroup_memory_current_bytes": null,
+      "cgroup_memory_max_bytes": null,
+      "effective_available_bytes": 15633690624,
+      "effective_floor_pass": true,
+      "failure_reasons": [],
+      "measurement_source": "/proc/meminfo",
+      "minimum_available_bytes": 4294967296,
+      "passed": true,
+      "physical_floor_pass": true,
+      "schema_version": 1
+    },
+    "W100-admission.json": {
+      "assessed_at": "2026-09-09T17:37:47.278296Z",
+      "available_physical_bytes": 15638384640,
+      "captured_at": "2026-09-09T17:37:47.278027Z",
+      "cgroup_headroom_bytes": null,
+      "cgroup_memory_current_bytes": null,
+      "cgroup_memory_max_bytes": null,
+      "effective_available_bytes": 15638384640,
+      "effective_floor_pass": true,
+      "failure_reasons": [],
+      "measurement_source": "/proc/meminfo",
+      "minimum_available_bytes": 4294967296,
+      "passed": true,
+      "physical_floor_pass": true,
+      "schema_version": 1
+    }
+  },
+  "terminal_supervisor": {
+    "exit_code": "139\n",
+    "pid": "3064366\n",
+    "runner.sh": "#!/usr/bin/env bash\necho $$ > \"/home/wu/.agent-tasks/rcle-b03-actor100-20260909/pid\"\nSTART_TS=$(date +%s)\necho \"=== Task 'rcle-b03-actor100-20260909' started at $(date -Iseconds) ===\" >> \"/home/wu/.agent-tasks/rcle-b03-actor100-20260909/task.log\"\n\n# Execute command capturing output\nset +e\neval 'cd /home/wu/hmasd-worktrees/rcle-b03-actor100-20260909 && mkdir -p temp/directions/roster_consistent_latent_exploration/exp/b03-actor100-20260909 && HMASD_PYTHON=/home/wu/.venvs/hmasd/bin/python /usr/bin/time -f wall_s=%e,peak_rss_kib=%M,exit=%x -o temp/directions/roster_consistent_latent_exploration/exp/b03-actor100-20260909/chain-time.txt timeout 1450 bash scripts/run_rcle_tbcfv_b03.sh ad2fdfb854e295d6d9dddb229dd17cde58465919 /home/wu/hmasd-worktrees/rcle-b03-actor100-20260909/temp/directions/roster_consistent_latent_exploration/exp/b03-actor100-20260909' >> \"/home/wu/.agent-tasks/rcle-b03-actor100-20260909/task.log\" 2>&1\nEXIT_CODE=$?\nset -e\n\nEND_TS=$(date +%s)\necho $EXIT_CODE > \"/home/wu/.agent-tasks/rcle-b03-actor100-20260909/exit_code\"\nif [ $EXIT_CODE -eq 0 ]; then\n    echo \"finished\" > \"/home/wu/.agent-tasks/rcle-b03-actor100-20260909/status\"\nelse\n    echo \"failed\" > \"/home/wu/.agent-tasks/rcle-b03-actor100-20260909/status\"\nfi\necho \"=== Task 'rcle-b03-actor100-20260909' exited with code $EXIT_CODE at $(date -Iseconds) (Duration: $((END_TS - START_TS))s) ===\" >> \"/home/wu/.agent-tasks/rcle-b03-actor100-20260909/task.log\"\n\n# Keep session alive briefly for inspection, then exit\nsleep 1\n",
+    "start_time": "1788975387\n",
+    "status": "failed\n",
+    "task.log": "=== Task 'rcle-b03-actor100-20260909' started at 2026-09-10T01:36:27+08:00 ===\n{\n  \"assessed_at\": \"2026-09-09T17:36:28.002082Z\",\n  \"available_physical_bytes\": 15633690624,\n  \"captured_at\": \"2026-09-09T17:36:28.001820Z\",\n  \"cgroup_headroom_bytes\": null,\n  \"cgroup_memory_current_bytes\": null,\n  \"cgroup_memory_max_bytes\": null,\n  \"effective_available_bytes\": 15633690624,\n  \"effective_floor_pass\": true,\n  \"failure_reasons\": [],\n  \"measurement_source\": \"/proc/meminfo\",\n  \"minimum_available_bytes\": 4294967296,\n  \"passed\": true,\n  \"physical_floor_pass\": true,\n  \"schema_version\": 1\n}\nCOMPLETE W1\n{\n  \"assessed_at\": \"2026-09-09T17:37:47.278296Z\",\n  \"available_physical_bytes\": 15638384640,\n  \"captured_at\": \"2026-09-09T17:37:47.278027Z\",\n  \"cgroup_headroom_bytes\": null,\n  \"cgroup_memory_current_bytes\": null,\n  \"cgroup_memory_max_bytes\": null,\n  \"effective_available_bytes\": 15638384640,\n  \"effective_floor_pass\": true,\n  \"failure_reasons\": [],\n  \"measurement_source\": \"/proc/meminfo\",\n  \"minimum_available_bytes\": 4294967296,\n  \"passed\": true,\n  \"physical_floor_pass\": true,\n  \"schema_version\": 1\n}\ntimeout: the monitored command dumped core\n=== Task 'rcle-b03-actor100-20260909' exited with code 139 at 2026-09-10T01:38:40+08:00 (Duration: 133s) ===\n"
+  },
+  "diagnostic_records": {
+    "kernel-crash.txt": "[450716.354687] WSL (289) ERROR: CheckConnection: getaddrinfo() failed: -5\n[450734.258439] python[3066619]: segfault at 40 ip 00005e1e2084381a sp 00007ffe0bfa6ad0 error 4 in python3.10[5e1e207b8000+984000] likely on CPU 19 (core 9, socket 0)\n[450734.259973] Code: 49 89 f0 48 8b 47 08 48 8b 80 08 01 00 00 48 85 c0 74 78 48 8d 15 66 85 e7 00 45 31 c9 48 39 50 08 4c 0f 44 c8 4d 85 c0 78 33 <4d> 8b 51 40 4d 39 d0 7d 2a 49 8b 41 30 49 8b 71 60 48 99 49 f7 fa\n[450734.259978] python3.10: python: potentially unexpected fatal signal 11.\n[450734.260000] CPU: 19 PID: 3066619 Comm: python Not tainted 6.6.87.2-microsoft-standard-WSL2 #1\n[450734.260002] RIP: 0033:0x5e1e2084381a\n[450734.260011] Code: 49 89 f0 48 8b 47 08 48 8b 80 08 01 00 00 48 85 c0 74 78 48 8d 15 66 85 e7 00 45 31 c9 48 39 50 08 4c 0f 44 c8 4d 85 c0 78 33 <4d> 8b 51 40 4d 39 d0 7d 2a 49 8b 41 30 49 8b 71 60 48 99 49 f7 fa\n[450734.260012] RSP: 002b:00007ffe0bfa6ad0 EFLAGS: 00010246\n[450734.260013] RAX: 0000000000000000 RBX: 0000706e4f3000d0 RCX: 0000706e4f3000b0\n[450734.260014] RDX: 0000706e4f3000b0 RSI: 0000000000000000 RDI: 0000706d83afbeb0\n[450734.260014] RBP: 00007ffe0bfa6ae0 R08: 0000000000000000 R09: 0000000000000000\n[450734.260015] R10: 0000706e4f304070 R11: 0000000000000000 R12: 0000706d83d12a40\n[450734.260015] R13: 0000706d83d4fba2 R14: 0000706d83afbec0 R15: 0000706e4f3000b0\n[450734.260016] FS:  0000706e4f6d4740 GS:  0000000000000000\n[450734.260885] WSL (3066742 - CaptureCrash): Capturing crash for pid: 3064466, executable: !home!wu!.local!share!uv!python!cpython-3.10.21-linux-x86_64-gnu!bin!python3.10, signal: 11, port: 50005\n[450742.143964] WSL (289) ERROR: CheckConnection: getaddrinfo() failed: -5\n[450742.212770] timeout: timeout: potentially unexpected fatal signal 11.\n[450742.213044] CPU: 9 PID: 3066618 Comm: timeout Not tainted 6.6.87.2-microsoft-standard-WSL2 #1\n[450742.213046] RIP: 0033:0x79933269ec0c\n[450742.213048] Code: 00 f0 ff ff 76 8f 41 89 c6 41 f7 de eb 8a b8 ba 00 00 00 0f 05 89 c3 e8 92 6f 05 00 44 89 e2 89 de 89 c7 b8 ea 00 00 00 0f 05 <41> 89 c6 41 f7 de 3d 00 f0 ff ff b8 00 00 00 00 44 0f 46 f0 e9 7b\n",
+    "fault-address.txt": "Array_ass_item\n??:?\n\n/home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu/bin/python3.10:     file format elf64-x86-64\n\n\nDisassembly of section .text:\n\n00000000001d07ef <Array_ass_item+0xf>:\n  1d07ef:\td1 49 89             \trorl   $1,-0x77(%rcx)\n  1d07f2:\tf0 48 8b 47 08       \tlock mov 0x8(%rdi),%rax\n  1d07f7:\t48 8b 80 08 01 00 00 \tmov    0x108(%rax),%rax\n  1d07fe:\t48 85 c0             \ttest   %rax,%rax\n  1d0801:\t74 78                \tje     1d087b <Array_ass_item+0x9b>\n  1d0803:\t48 8d 15 66 85 e7 00 \tlea    0xe78566(%rip),%rdx        # 1048d70 <PyCStgDict_Type>\n  1d080a:\t45 31 c9             \txor    %r9d,%r9d\n  1d080d:\t48 39 50 08          \tcmp    %rdx,0x8(%rax)\n  1d0811:\t4c 0f 44 c8          \tcmove  %rax,%r9\n  1d0815:\t4d 85 c0             \ttest   %r8,%r8\n  1d0818:\t78 33                \tjs     1d084d <Array_ass_item+0x6d>\n  1d081a:\t4d 8b 51 40          \tmov    0x40(%r9),%r10\n  1d081e:\t4d 39 d0             \tcmp    %r10,%r8\n  1d0821:\t7d 2a                \tjge    1d084d <Array_ass_item+0x6d>\n  1d0823:\t49 8b 41 30          \tmov    0x30(%r9),%rax\n  1d0827:\t49 8b 71 60          \tmov    0x60(%r9),%rsi\n  1d082b:\t48 99                \tcqto\n  1d082d:\t49 f7 fa             \tidiv   %r10\n  1d0830:\t49 89 c2             \tmov    %rax,%r10\n  1d0833:\t4d                   \trex.WRB\n  1d0834:\t0f                   \t.byte 0xf\nca420bd4614ae7757b4cd4938b3c663e98d2b631bda518610071d9a4ca0b509e  /home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu/bin/python3.10\n"
+  },
+  "costs": {
+    "remote_chain_wall_s": 132.54,
+    "logical_invocation_wall_sum_s": 132.44,
+    "W1_complete_wall_s": 79.24,
+    "W100_terminated_wall_s": 53.2,
+    "focused_checks_wall_s": 14.3754106,
+    "retained_readback_wall_s": 2.2644268,
+    "existing_log_diagnosis_wall_s": 4.8913502,
+    "staging_syntax_and_test_parent_wall_s": 1.1689993,
+    "final_arithmetic_wall_s": 0.2081013,
+    "measured_subtotal_s": 155.4482882,
+    "conservative_complete_execution_charge_s": 160,
+    "whole_object_cap_s": 1500,
+    "learned_cap_s": 600,
+    "aggregate_cpu_s": null,
+    "full_check_to_E0_elapsed_s": null,
+    "remote_critical_path_s": 132.54,
+    "control_plane_git_network_agent_work": "separate, unmeasured"
+  },
+  "preservation": {
+    "remote_cwd": "/home/wu/hmasd-worktrees/rcle-b03-actor100-20260909",
+    "remote_supervisor": "/home/wu/.agent-tasks/rcle-b03-actor100-20260909",
+    "local_root": "C:\\Projects\\HMASD-worktrees\\dm-rcle-a02-20260906\\temp\\directions\\roster_consistent_latent_exploration\\exp\\b03-actor100-20260909",
+    "live_scientific_process": false,
+    "closeout": "CM after Root explicit integration trigger; Root accepts cleanup",
+    "native_shared_cache_excluded": true
+  }
+}
