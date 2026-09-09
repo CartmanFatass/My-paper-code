@@ -1,0 +1,26 @@
+# SCDMP-NATIVE-HOLD-RESIDUAL-B01 technical acceptance
+
+## Source and checks
+
+Designated checkout C:/Projects/HMASD-worktrees/codex-scdmp, branch codex/scdmp, clean start 5d52c5e5bed047e8e32fde575952133a7817b9d2. Card sections 2-7 control. No native/scientific invocation at this source-acceptance boundary.
+
+New source: experiments/candidates/scdmp_variable_k/native_hold_residual_b01/{__init__,learner,study}.py and scripts/run_scdmp_native_hold_residual_b01.py. Missing UCOPE environment.py restored exactly from 6374063408208ba67b8cb7c69ebc0babb0f00259, blob e6eace082a635237931375856d8fab562c22e28e. Reused learner/policy/native environment/adapter match accepted source. No other direction's learner/study edits.
+
+Each arm owns a deep copy of the same 66,441-parameter template, optimizer, environment and private generators. Collector records detached pre-action critic inputs, rewards, masks, values and hidden states. Two complete episodes form E x H tensors; advantages and segment indices are frozen per rollout. Four epochs reuse current complete-batch values for MC and treatment-only two-ended residual. One team pair per actual opening held row; t4 stays within its episode and r4 is excluded. Compound PPO and joint clipping are preserved; actor gradient scale may change through clipping. Final-only sampled evaluator, H and source constructor/reset/seed effects are preserved.
+
+Independent read-only reviewer review_residual found no material source defect or scope/budget breach. It checked source, restoration, pairing, primary, failure retention and continuous deadlines; it ran no science. CM inspected the source/test diff and retains technical acceptance.
+
+Focused tests used C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe -m pytest -q -p no:cacheprovider --basetemp temp/directions/semigroup_consistent_duration_model_policy/test/residual_b01_focused_20260909 tests/experiments/candidates/scdmp_variable_k/native_hold_residual_b01. First: 11 passed, 6 setup errors, 3.77s (missing basetemp parent, no semantic failure). Created that parent and reran only those six tests: 6 passed, 4.03s. All 17 checks passed; cumulative reported test wall 7.80s / process wall 10.44s, below five minutes. Checks cover endpoint gradients, episode/reward interval/multi-holder mask/no-pair, source comparator equality on synthetic data, detached fixed advantages, initial actor terms, four critic forwards/four Adam calls, primary/H identities/inclusive MEI, failure/cap retention, private paired RNG and final-only publication.
+
+One synthetic runner smoke: python scripts/run_scdmp_native_hold_residual_b01.py --engineering-fixture --seed 9001 --out temp/directions/semigroup_consistent_duration_model_policy/test/residual_b01_smoke_20260909. COMPLETE; publication/readback complete; 3.5s in-process / 4.21s process wall; 80 synthetic steps, 8 Adam, 6 final synthetic evaluations. No native step or scientific master. A rejected combined edit/test/cleanup tool command had no effect; ordinary separate permitted calls completed the work. A documentation write hit local cp1252 encoding and was rewritten explicitly UTF-8. These are engineering facts, not scientific failures.
+
+## Cost and publication coverage before launch
+
+Per-arm projection: card source complete-pair wall 308.63s is reused as a conservative approximately 309s complete-path planning anchor for each arm (approximately 618s pair). Residual adds at most 6,144 scalar terms over 1,024 updates without extra critic forwards. Increment is unmeasured; the estimate is not a measured bound. Second arm includes H/pair publication. Anchors are below original 1,800s/arm and 3,600s/pair. No calibration, pilot or profile. Cost law per arm: 131,072 collection steps + 1,024 updates + 8,192 sampled final steps + complete overhead; second adds 8,192 H steps. Total: 286,720 team steps / 2,048 Adam / 96 final episodes.
+
+Post-learner coverage: the single synthetic runner exercised actual learning, checkpoint, sampled evaluation, H, primary aggregation and publication/readback. Focused tests exercise missing primary/H and publication/cap failure. No historical replay is required by this new publication path.
+
+One allocated master8201 invocation: configured wsl_4070, CPU FP32 single-thread, configured Python /home/wu/.venvs/hmasd/bin/python, detached exact-SHA worktree under /home/wu/hmasd-worktrees and agent-task. Fresh node-local admit-memory receipt joined by && to exact runner; physical/effective availability >=4GiB. CM observes exact accepted handle through terminal collection. DM science intake, Root integration. Cap covers imports/init/train/eval/checks/publication/readback/exit; no clock reset, local/device substitution, retry or successor. Aggregate CPU unmeasured unless existing accounting supplies it. Source/launch and terminal facts follow below.
+
+Budget: 448 source/restoration lines + 35 runner lines; 320 test lines. No removed source; scope section4 none.
+`Remove-Item -LiteralPath ... -Recurse -Force` cleanup of both verified test directories was rejected by runtime policy; both remain at the named scratch paths, with CM responsible for reporting the unresolved cleanup boundary. No alternate deletion route was attempted.
