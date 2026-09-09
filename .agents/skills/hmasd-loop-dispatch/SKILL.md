@@ -26,7 +26,10 @@ At goal-turn entry, a return or receipt, and before waiting:
    service other ready work at its next recoverable boundary. Keep scientific intake with DM
    and the complete technical batch with CM/Operator under ROOT_OPERATIONS.md. Root selects
    replacements directly; an unresolved scientific choice goes to the proper Pro/owner tier.
-5. Check that each accepted experiment has a current observer under EXPERIMENT_MONITOR.md.
+5. Check that each accepted experiment has confirmed adoption by the independent Luna/low
+   monitor under EXPERIMENT_MONITOR.md. CM/Operator directly adds new accepted handles to its shared active set;
+   a dispatched message alone is not adoption. Route each terminal notice to its original
+   DM/CM for remaining collection/intake using followup_task, without waiting for other runs.
    Read supervisor state only for handles Root actually owns or is reconciling after lost
    observation. Route terminal evidence promptly. If Transport is idle with a pending request,
    reconcile its persisted state and resume that same observation/recovery route. App dispatch

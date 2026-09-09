@@ -89,7 +89,8 @@ perform the required scientific interpretation; expand verification when a concr
 Portable result-bearing work follows the
 project `remote_first` route in `.codex/hmasd-compute.toml`; a host or device that is part of the
 estimand is pinned on the card before launch. CM
-owns implementation and direct observation; you inspect whether the return matches the card and
+owns implementation, launch, confirmed handover to the shared independent Luna/low experiment
+monitor, terminal collection and technical acceptance; you inspect whether the return matches the card and
 interpret it yourself. Test success, certificate production or process exit is not mechanism
 value. One real execution with a trustworthy primary measurement and clear comparison may justify a
 bounded B follow-up; it is not stable superiority. For a learning question, prefer one or two new

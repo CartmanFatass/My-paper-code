@@ -341,8 +341,12 @@ or launch gates, and never override a stricter original cap.
 
 Resume model: commit and push before every launch; launch every result-bearing run detached from
 the agent's process; on the remote route use a detached worktree at the exact launch sha and the
-configured `agent-task` supervisor; the assigned CM/Operator observes accepted experiments within
-the owner's active goal, with explicit handover when needed, and independent Transport observes Pro requests
+configured `agent-task` supervisor; OWNER_DIRECT 2026-09-09 assigns accepted-experiment observation
+to one reusable independent Luna/low task with a goal covering its multiple adopted experiments.
+CM/Operator directly notifies that monitor after launch acceptance; the monitor establishes or
+continues its goal, while CM stops routine polling and retains collection and technical acceptance.
+Record dispatch and actual adoption separately; failed delivery returns for same-handle recovery.
+Independent Transport observes Pro requests
 (`docs/project/ROOT_OPERATIONS.md`); keep every agent's state recoverable from the repository alone (card, predictions,
 launch sha, execution node, run root, queue state).
 
@@ -517,8 +521,9 @@ appendix and completed historical tasks remain unchanged.
   Configurations: `.codex/hmasd-monitor.toml` and `.codex/hmasd-transport.toml`;
   procedure: `docs/project/ROOT_OPERATIONS.md`.
   Experiment execution/observation ownership follows ROOT_OPERATIONS.md and EXPERIMENT_MONITOR.md;
-  CM retains technical acceptance and DM retains scientific intake. Existing agent assignments and
-  the owner's active goal drive work; no scheduled monitor or extra standing task is created.
+  CM retains collection/technical acceptance and DM retains scientific intake. OWNER_DIRECT
+  2026-09-09 uses one independent Luna/low monitor task with a goal over multiple adopted handles,
+  terminal notices directly to Root and no per-experiment task or additional scheduler.
 - DM is the `em` Prompt Author; Root is the `portfolio` caller and full-response
   intake owner. Both use the independent configured Transport endpoint. Native authors normally
   send their ready handoff to Root, which dispatches the app message. Source is the actual author,

@@ -89,6 +89,16 @@ cross-task send to Root with the same envelope and reports the relay failure. If
 is uncertain, reconcile the same event first; do not use fallback to duplicate an uncertain
 send. Root alone accepts evidence and resumes the original native recipient.
 
+## Independent experiment monitor — OWNER_DIRECT 2026-09-09
+
+CM/Operator sends `MONITOR_ADD` directly for explicitly accepted handles to the shared Luna/low app task in
+`.codex/hmasd-monitor.toml`. It uses one goal over multiple experiments and replies directly to
+Root with adoption and individual terminal facts under EXPERIMENT_MONITOR.md. It does not use
+the Relay as a second copy or address native CM/DM names as app task IDs. Root resumes the
+original native owner with `followup_task` when collection/intake remains, deduplicating any
+already completed native work. Cross-task messages omit model/effort overrides. A terminal
+notification's accepted app delivery is distinct from CM technical or DM scientific acceptance.
+
 ## Independent Transport (existing receipt route)
 
 App messages omit `model` and `thinking` to preserve the recipient's settings. Native DM/CM
