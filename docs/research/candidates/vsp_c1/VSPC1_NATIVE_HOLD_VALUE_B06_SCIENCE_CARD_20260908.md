@@ -3,6 +3,9 @@ Binding MARL structure: (b) temporal abstraction or termination, with five co-ad
 
 # VSPC1-NATIVE-HOLD-VALUE-B06 — B/EXPLORE, P71
 
+Current state: valid complete WITHIN for8302; §8 records the terminal result.
+The original definition, prediction and allocation remain in §§1–7.
+
 ## 1. Question, current authority and scope
 
 Does the B05 local signal recur under independent training randomness with the
@@ -251,3 +254,32 @@ Owner-delegated decision (unattended,2026-09-03 instruction): accept this source
 and continue the exact P71 binding, **OWNER_DELEGATED object-tier technical**.
 Main owner reviews were empty at2026-09-09T05:17:18Z. Current B06 staging,
 accepted submissions and scientific exposure remain zero at this record.
+
+## 8. Terminal result and P71 stop
+
+The sole accepted submission completed exit0 at2026-09-09T05:30:37Z, matching
+§7's scientific SHA/cwd/input/handle/output. [E0](VSPC1_NATIVE_HOLD_VALUE_B06_RESULT_EVIDENCE_20260908.md)
+and [intake §6](VSPC1_NATIVE_HOLD_VALUE_B06_INTAKE_20260908.md#6-p71-valid-result-intake-and-decisions)
+retain all outcomes, receipts, the unchanged rule and scientific interpretation.
+GATED−MLP-wide133=−.006634518206640422, conditional SE .006982194296842694:
+**WITHIN**, with negative point sign and only .0033654818 above the lower MEI
+boundary. GATED−H=+.0196776739, MLP−H=+.0263121921; adverse counts18/11/8
+of32. The two width133 primary differences are +.0165919114/−.0066345182,
+descriptive mean .0049786966 and sample SD .0164235659. Selected-scale positive
+separation did not recur in8302; there is no equivalence or stable population
+claim. Both earlier width128 regimes and native H losses remain separate.
+
+Actual counts:2 real fits,286720 native steps,2048 Adam,512 rollouts/merges,
+96 evaluations,1120 scored episodes, two constructors and zero partial steps.
+Admission and actual source/checkpoint/primary publication checks passed.
+Complete wall407.33s and conservative full-arm bounds208.5062/210.4093s fit
+1800/3600s caps. Peak RSS544.921875MiB; aggregate CPU and isolated method
+overheads remain unmeasured, preserving the native resources_unmeasured marker.
+Scope §4:none; no observed §5 breach. Historical test-time limits stay recorded.
+
+Recorded UP(.55) missed, binary Brier .3025; owner prediction not taken.
+Owner-delegated decision (unattended,2026-09-03 instruction): accept the bounded
+valid WITHIN and end P71 after its single submission/all-outcome intake.
+One later independent unchanged-comparison pair is object-tier advice only;
+no new card/key/run is allocated here. No automatic successor, B consumption,
+direction/Portfolio disposition or formal UAV-entry decision follows.
