@@ -1,0 +1,85 @@
+{
+  "id": "20260909-rcle-003",
+  "created": "2026-09-09T14:38:35-07:00",
+  "direction": "roster_consistent_latent_exploration",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "RCLE B03 missing-only recovery card",
+  "context": "Select prospective recovery: one update-0 W100 plus reference using historical W1 under unchanged seed19/FLEX/learner/native/evaluation. Binding structure: multi-agent credit assignment. No implementation or scientific invocation is allocated by this card.",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "Keep the frozen missing-only comparison and budget for Root allocation; do not launch from this item."
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "Defer new work and retain W1, failed W100 and all recorded costs."
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "Revise the prospective scope before allocation; a changed comparison cannot silently reuse W1."
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "The matched historical control is intact and the minimal missing-only path can answer the original question with bounded spending; logging does not prove a crash cure.",
+  "evidence": [
+    "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B03_RECOVERY_SCIENCE_CARD_20260909.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-09.md#L131",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否保留这份已冻结的缺失比较恢复卡：复用原W1，只新做同seed19的W100及参考？这次只选卡，实际工程与调用由Root另行明确分配。",
+    "changes_if_approved": [
+      {
+        "target": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B03_RECOVERY_SCIENCE_CARD_20260909.md",
+        "from": "原配对缺失；W1可信，W100前缀未知，参考未运行",
+        "to": "选择一次从更新0开始的W100及参考，明确历史W1复用合同与新增750秒上限；尚未启动工程或实验"
+      }
+    ],
+    "if_refused": "继续保留全部原结果与失败事实，按异步意见修订或暂缓未分配部分；不会自动改跑完整对或抹去成本。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B03_RECOVERY_SELECTION_INTAKE_20260909.md",
+        "quote": "The raw W1 summary includes both full panels and all curves.",
+        "why": "原初始化和最终面板完整；同随机语义、同学习法则与评价可以保留原比较器。"
+      },
+      {
+        "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B03_RECOVERY_FEASIBILITY_20260909.md",
+        "quote": "These are concrete output/failure-capture changes, estimated under60 production lines",
+        "why": "只补已有逐块结果持久化及崩溃栈，不需要先改变共享原生代码或学习器。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B03_RECOVERY_FEASIBILITY_20260909.md",
+        "quote": "successful runtime recovery is not yet established.",
+        "why": "未定位signal11根因，记录改动不是修复承诺；再失败仍可能没有最终效应。"
+      },
+      {
+        "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B03_RECOVERY_SELECTION_INTAKE_20260909.md",
+        "quote": "W1's tiny G_U0.0001546224 with conditional uncertainty across zero",
+        "why": "已完成控制未显示所选尺度收益；actor100也可能放大噪声或挤走有用梯度。"
+      }
+    ],
+    "uncertainty": [
+      "只要必要修复改变learner、RNG、host或评价，必须重新判断历史W1是否可配；不会自动切换完整对。",
+      "这不是新独立seed或稳定疗效证据；原失败W100仍未知前缀。",
+      "新增调用若完整才形成主比较；日志或正常退出本身不是有效性证明。"
+    ],
+    "cost": {
+      "compute": "拟新增1 fit、16896 episode、1081344 tick、200次反传；W100≤600秒、参考≤30秒、单次无native聚焦检查≤30秒，全部新增工作≤750秒。已记160秒CM+0.5983968秒DM不消失；已知累计33792/2162688/400另加未知旧前缀。",
+      "owner_time": "无需现在回复；Root收到卡后另行分配工程和调用。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing；只发布选卡，当前没有实验授权。"
+    },
+    "verdict_text": "Owner-delegated decision (unattended, 2026-09-03 instruction): (A).",
+    "source": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B03_RECOVERY_SELECTION_INTAKE_20260909.md"
+  },
+  "starred": false
+}
