@@ -82,5 +82,15 @@
     "verdict_text": "Recommend one separately selected fresh W1/W100 pair at a fixed 1,000-update endpoint; publish this recommendation only, with no successor card or invocation allocated.",
     "source": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B03_S20_RESULT_INTAKE_20260909.md"
   },
-  "starred": true
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-09T23:39:42+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/decisions/2026-09-09-synthesis-execution.md",
+      "record": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B03_S20_RESULT_INTAKE_20260909.md",
+      "state": "applied",
+      "summary": "Root accepted full scientific intake da1cb476b as main4ce82c2aa; branch audit137-139 maps main192-194. This applies recommendation publication only, not selection/allocation of1000-update work. S20 complete468.43s and scoped closeout accepted; all contrary evidence retained."
+    }
+  ]
 }
