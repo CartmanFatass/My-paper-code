@@ -1,0 +1,221 @@
+{
+  "request_id": "folr-public-lifecycle-p78-convergence-20260909",
+  "record_kind": "read-only terminal-blocker reconciliation; not a scientific result",
+  "captured_at_utc": "2026-09-09T10:43:00.599145+00:00",
+  "starting_checkout_sha": "d824897be46558099d565d5d02d836145813eae1",
+  "root_forwarded_terminal_receipt_verbatim": "Transport terminal BLOCKED receipt for same requestfolr-public-lifecycle-p78-convergence-20260909: SEND_CONTROL_NO_EFFECT, conversationUNBOUND homepagehttps://chatgpt.com/, verified6Pro/Latest/Pro5. Exactly2totalclicks(initial+permittedretry) left homepage/composer unchanged Sendenabled; no concrete conversation URL or usernode. Tabclosed, no thirdclick/rebind, no formeddecision. PromptSHAf8719a67576ee1f05e32357c8d008e98ab95c0e1c7ff76babd6499a77ea1090d.",
+  "transport_source": {
+    "registry_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\registry.json",
+    "registry_sha256_at_read": "5fbbfaec3398f4c8c293738fde4a8539d06aaf86615628f7f071926f516f3493",
+    "registry_updated_at_as_reported": "2026-09-09T10:42:00Z",
+    "extracted_json_pointer": "/bindings/em:vap_folr_core:convergence",
+    "extracted_record_values_unchanged": true,
+    "direction_mirror_equal_to_binding": true,
+    "raw_byte_copies": {
+      "TRANSPORT_REQUEST.json": {
+        "source_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\request\\folr-public-lifecycle-p78-convergence-20260909.json",
+        "bytes": 2399,
+        "sha256": "ac868fa130ce4b3c851ff7e8a145aad115d6ce1f9b71599f046d7fa193edbc72",
+        "copy": "unchanged bytes"
+      },
+      "TRANSPORT_PACKET_MANIFEST.json": {
+        "source_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\folr-public-lifecycle-p78-convergence-20260909\\folr-public-lifecycle-p78-convergence-20260909--vap_folr_core__PACKET_MANIFEST.json",
+        "bytes": 1780,
+        "sha256": "bc4ff38705c5347832b2c045a8d0945b9d1375a900874f29f5d97e0f41e9452e",
+        "copy": "unchanged bytes"
+      },
+      "TRANSPORT_PROMPT.md": {
+        "source_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\folr-public-lifecycle-p78-convergence-20260909\\folr-public-lifecycle-p78-convergence-20260909--vap_folr_core__00_PROMPT.md",
+        "bytes": 1257,
+        "sha256": "f8719a67576ee1f05e32357c8d008e98ab95c0e1c7ff76babd6499a77ea1090d",
+        "copy": "unchanged bytes"
+      }
+    }
+  },
+  "request_identity": {
+    "durable_request_equals_original_handoff_request": true,
+    "materialized_prompt_sha256": "f8719a67576ee1f05e32357c8d008e98ab95c0e1c7ff76babd6499a77ea1090d",
+    "original_handoff_prompt_sha256": "f8719a67576ee1f05e32357c8d008e98ab95c0e1c7ff76babd6499a77ea1090d",
+    "registry_prompt_sha256": "f8719a67576ee1f05e32357c8d008e98ab95c0e1c7ff76babd6499a77ea1090d",
+    "all_prompt_hashes_match": true,
+    "original_task_url": "https://github.com/CartmanFatass/My-paper-code/blob/83f7beafd632bd7e54a6c6ad3e47044357284189/docs/research/candidates/vap_folr_core/pro_packets/20260909_p78_public_lifecycle_convergence/TASK.md",
+    "original_handoff_commit": "d824897be46558099d565d5d02d836145813eae1"
+  },
+  "reported_transport_counts": {
+    "send_control_clicks": 2,
+    "confirmed_provider_send_observed": false,
+    "tab_lifecycle": "CLOSED",
+    "confirmed_provider_response_files_in_this_reconciliation": 0,
+    "backend_acceptance_without_observation": "not established; no inference from click count alone"
+  },
+  "clock_provenance_note": "Transport attempt/receipt times are preserved as reported registry fields. The first DM clock observation was 2026-09-09 10:39:59 UTC, while receipt updated_at says10:42:00Z. These timestamps are not an independently measured elapsed-time record; no send-duration or ordering inference is made from that discrepancy.",
+  "github_readbacks": {
+    "branch": {
+      "arguments": [
+        "api",
+        "repos/CartmanFatass/My-paper-code/branches/codex/vap-folr"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"name\":\"codex/vap-folr\",\"commit\":{\"sha\":\"d824897be46558099d565d5d02d836145813eae1\",\"node_id\":\"C_kwDOO8trO9oAKGQ4MjQ4OTdiZTQ2NTU4MDk5ZDU2NWQ1ZDAyZDgzNjE0NTgxM2VhZTE\",\"commit\":{\"author\":{\"name\":\"CartmanFatass\",\"email\":\"czqtpkqc@gmail.com\",\"date\":\"2026-09-09T10:27:18Z\"},\"committer\":{\"name\":\"CartmanFatass\",\"email\":\"czqtpkqc@gmail.com\",\"date\":\"2026-09-09T10:27:18Z\"},\"message\":\"Bind immutable FOLR P78 Convergence handoff\\n\\nCo-Authored-By: Codex <noreply@openai.com>\\n\\nscope: none\",\"tree\":{\"sha\":\"af5f702fffa6a30a2cbe343a78f91ea1780e3a56\",\"url\":\"https://api.github.com/repos/CartmanFatass/My-paper-code/git/trees/af5f702fffa6a30a2cbe343a78f91ea1780e3a56\"},\"url\":\"https://api.github.com/repos/CartmanFatass/My-paper-code/git/commits/d824897be46558099d565d5d02d836145813eae1\",\"comment_count\":0,\"verification\":{\"verified\":false,\"reason\":\"unsigned\",\"signature\":null,\"payload\":null,\"verified_at\":null}},\"url\":\"https://api.github.com/repos/CartmanFatass/My-paper-code/commits/d824897be46558099d565d5d02d836145813eae1\",\"html_url\":\"https://github.com/CartmanFatass/My-paper-code/commit/d824897be46558099d565d5d02d836145813eae1\",\"comments_url\":\"https://api.github.com/repos/CartmanFatass/My-paper-code/commits/d824897be46558099d565d5d02d836145813eae1/comments\",\"author\":{\"login\":\"CartmanFatass\",\"id\":11737246,\"node_id\":\"MDQ6VXNlcjExNzM3MjQ2\",\"avatar_url\":\"https://avatars.githubusercontent.com/u/11737246?v=4\",\"gravatar_id\":\"\",\"url\":\"https://api.github.com/users/CartmanFatass\",\"html_url\":\"https://github.com/CartmanFatass\",\"followers_url\":\"https://api.github.com/users/CartmanFatass/followers\",\"following_url\":\"https://api.github.com/users/CartmanFatass/following{/other_user}\",\"gists_url\":\"https://api.github.com/users/CartmanFatass/gists{/gist_id}\",\"starred_url\":\"https://api.github.com/users/CartmanFatass/starred{/owner}{/repo}\",\"subscriptions_url\":\"https://api.github.com/users/CartmanFatass/subscriptions\",\"organizations_url\":\"https://api.github.com/users/CartmanFatass/orgs\",\"repos_url\":\"https://api.github.com/users/CartmanFatass/repos\",\"events_url\":\"https://api.github.com/users/CartmanFatass/events{/privacy}\",\"received_events_url\":\"https://api.github.com/users/CartmanFatass/received_events\",\"type\":\"User\",\"user_view_type\":\"public\",\"site_admin\":false},\"committer\":{\"login\":\"CartmanFatass\",\"id\":11737246,\"node_id\":\"MDQ6VXNlcjExNzM3MjQ2\",\"avatar_url\":\"https://avatars.githubusercontent.com/u/11737246?v=4\",\"gravatar_id\":\"\",\"url\":\"https://api.github.com/users/CartmanFatass\",\"html_url\":\"https://github.com/CartmanFatass\",\"followers_url\":\"https://api.github.com/users/CartmanFatass/followers\",\"following_url\":\"https://api.github.com/users/CartmanFatass/following{/other_user}\",\"gists_url\":\"https://api.github.com/users/CartmanFatass/gists{/gist_id}\",\"starred_url\":\"https://api.github.com/users/CartmanFatass/starred{/owner}{/repo}\",\"subscriptions_url\":\"https://api.github.com/users/CartmanFatass/subscriptions\",\"organizations_url\":\"https://api.github.com/users/CartmanFatass/orgs\",\"repos_url\":\"https://api.github.com/users/CartmanFatass/repos\",\"events_url\":\"https://api.github.com/users/CartmanFatass/events{/privacy}\",\"received_events_url\":\"https://api.github.com/users/CartmanFatass/received_events\",\"type\":\"User\",\"user_view_type\":\"public\",\"site_admin\":false},\"parents\":[{\"sha\":\"83f7beafd632bd7e54a6c6ad3e47044357284189\",\"url\":\"https://api.github.com/repos/CartmanFatass/My-paper-code/commits/83f7beafd632bd7e54a6c6ad3e47044357284189\",\"html_url\":\"https://github.com/CartmanFatass/My-paper-code/commit/83f7beafd632bd7e54a6c6ad3e47044357284189\"}]},\"_links\":{\"self\":\"https://api.github.com/repos/CartmanFatass/My-paper-code/branches/codex/vap-folr\",\"html\":\"https://github.com/CartmanFatass/My-paper-code/tree/codex/vap-folr\"},\"protected\":false,\"protection\":{\"enabled\":false,\"required_status_checks\":{\"enforcement_level\":\"off\",\"contexts\":[],\"checks\":[]}},\"protection_url\":\"https://api.github.com/repos/CartmanFatass/My-paper-code/branches/codex/vap-folr/protection\"}",
+      "stderr": "",
+      "observed_at_utc": "2026-09-09T10:42:58.035008+00:00",
+      "json": {
+        "name": "codex/vap-folr",
+        "commit": {
+          "sha": "d824897be46558099d565d5d02d836145813eae1",
+          "node_id": "C_kwDOO8trO9oAKGQ4MjQ4OTdiZTQ2NTU4MDk5ZDU2NWQ1ZDAyZDgzNjE0NTgxM2VhZTE",
+          "commit": {
+            "author": {
+              "name": "CartmanFatass",
+              "email": "czqtpkqc@gmail.com",
+              "date": "2026-09-09T10:27:18Z"
+            },
+            "committer": {
+              "name": "CartmanFatass",
+              "email": "czqtpkqc@gmail.com",
+              "date": "2026-09-09T10:27:18Z"
+            },
+            "message": "Bind immutable FOLR P78 Convergence handoff\n\nCo-Authored-By: Codex <noreply@openai.com>\n\nscope: none",
+            "tree": {
+              "sha": "af5f702fffa6a30a2cbe343a78f91ea1780e3a56",
+              "url": "https://api.github.com/repos/CartmanFatass/My-paper-code/git/trees/af5f702fffa6a30a2cbe343a78f91ea1780e3a56"
+            },
+            "url": "https://api.github.com/repos/CartmanFatass/My-paper-code/git/commits/d824897be46558099d565d5d02d836145813eae1",
+            "comment_count": 0,
+            "verification": {
+              "verified": false,
+              "reason": "unsigned",
+              "signature": null,
+              "payload": null,
+              "verified_at": null
+            }
+          },
+          "url": "https://api.github.com/repos/CartmanFatass/My-paper-code/commits/d824897be46558099d565d5d02d836145813eae1",
+          "html_url": "https://github.com/CartmanFatass/My-paper-code/commit/d824897be46558099d565d5d02d836145813eae1",
+          "comments_url": "https://api.github.com/repos/CartmanFatass/My-paper-code/commits/d824897be46558099d565d5d02d836145813eae1/comments",
+          "author": {
+            "login": "CartmanFatass",
+            "id": 11737246,
+            "node_id": "MDQ6VXNlcjExNzM3MjQ2",
+            "avatar_url": "https://avatars.githubusercontent.com/u/11737246?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/CartmanFatass",
+            "html_url": "https://github.com/CartmanFatass",
+            "followers_url": "https://api.github.com/users/CartmanFatass/followers",
+            "following_url": "https://api.github.com/users/CartmanFatass/following{/other_user}",
+            "gists_url": "https://api.github.com/users/CartmanFatass/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/CartmanFatass/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/CartmanFatass/subscriptions",
+            "organizations_url": "https://api.github.com/users/CartmanFatass/orgs",
+            "repos_url": "https://api.github.com/users/CartmanFatass/repos",
+            "events_url": "https://api.github.com/users/CartmanFatass/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/CartmanFatass/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "committer": {
+            "login": "CartmanFatass",
+            "id": 11737246,
+            "node_id": "MDQ6VXNlcjExNzM3MjQ2",
+            "avatar_url": "https://avatars.githubusercontent.com/u/11737246?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/CartmanFatass",
+            "html_url": "https://github.com/CartmanFatass",
+            "followers_url": "https://api.github.com/users/CartmanFatass/followers",
+            "following_url": "https://api.github.com/users/CartmanFatass/following{/other_user}",
+            "gists_url": "https://api.github.com/users/CartmanFatass/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/CartmanFatass/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/CartmanFatass/subscriptions",
+            "organizations_url": "https://api.github.com/users/CartmanFatass/orgs",
+            "repos_url": "https://api.github.com/users/CartmanFatass/repos",
+            "events_url": "https://api.github.com/users/CartmanFatass/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/CartmanFatass/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "parents": [
+            {
+              "sha": "83f7beafd632bd7e54a6c6ad3e47044357284189",
+              "url": "https://api.github.com/repos/CartmanFatass/My-paper-code/commits/83f7beafd632bd7e54a6c6ad3e47044357284189",
+              "html_url": "https://github.com/CartmanFatass/My-paper-code/commit/83f7beafd632bd7e54a6c6ad3e47044357284189"
+            }
+          ]
+        },
+        "_links": {
+          "self": "https://api.github.com/repos/CartmanFatass/My-paper-code/branches/codex/vap-folr",
+          "html": "https://github.com/CartmanFatass/My-paper-code/tree/codex/vap-folr"
+        },
+        "protected": false,
+        "protection": {
+          "enabled": false,
+          "required_status_checks": {
+            "enforcement_level": "off",
+            "contexts": [],
+            "checks": []
+          }
+        },
+        "protection_url": "https://api.github.com/repos/CartmanFatass/My-paper-code/branches/codex/vap-folr/protection"
+      }
+    },
+    "issue": {
+      "arguments": [
+        "issue",
+        "view",
+        "15",
+        "--repo",
+        "CartmanFatass/My-paper-code",
+        "--json",
+        "number,title,url,state,body,comments,createdAt,updatedAt"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"body\":\"FOLR direction discussion: decide whether an explicitly public-lifecycle version of CAMA Traffic Junction warrants one bounded real learned RETAIN-versus-RESET comparison, or preserve the present no-successor boundary.\\r\\r\\n\\r\\r\\nP77 found a concrete source-interface mismatch: native removal and same-step slot refill can hide a new physical car behind an unchanged mask, while the source controller carries slot memory through inactivity. This issue does not override that finding or treat hidden callbacks as already permitted.\\r\\r\\n\\r\\r\\nThe proposed variant keeps native traffic transitions and reward but openly changes its information protocol. Both arms would receive the same trip-aware state bookkeeping, and both learned actors would receive a global membership-change bit and their own birth bit. New cars start fresh in both; RETAIN keeps true survivors' recurrent history, RESET clears it at actual membership events. A RESET loss would establish only bounded erasure cost, never typed-state novelty or original-task necessity.\\r\\r\\n\\r\\r\\nFixed evidence at 64db6307b236ffaa98e61f4ea83a5cdbb0a20bfb:\\r\\r\\n- [P77 source-interface intake](https://github.com/CartmanFatass/My-paper-code/blob/64db6307b236ffaa98e61f4ea83a5cdbb0a20bfb/docs/research/candidates/vap_folr_core/FOLR_P77_CAMA_SURVIVOR_SOURCE_INTAKE_20260909.md)\\r\\r\\n- [Verified source facts and work counts](https://github.com/CartmanFatass/My-paper-code/blob/64db6307b236ffaa98e61f4ea83a5cdbb0a20bfb/docs/research/candidates/vap_folr_core/evidence/2026-09-09-p77-cama-survivor-source.json)\\r\\r\\n\\r\\r\\nKnown unallocated scale: two arms, one matched training instance, 201280 total native ticks, 9938 RMSprop steps, 66783360 online/target replay GRU row forwards. Wall cost is unknown. Exact card, configuration and invocation budget remain unallocated; no diagnostic prerequisite is proposed.\\r\\r\\n\\r\\r\\nCurrent state: question preparation only. The DM recommends the explicit extension narrowly, as a close call. The strong zero-work alternative is ordinary generic RETAIN without another family or claim. The original Convergence node selects scope; Root owns dispatch and any later allocation. No provider Send, model, simulator, implementation or new card has occurred.\\r\\r\\n\\r\\r\\nThe complete answer will be delivered only to `docs/research/candidates/vap_folr_core/pro_packets/20260909_p78_public_lifecycle_convergence/archive/RESPONSE.md` on the existing shared `codex/vap-folr` branch, with its immutable delivery link in this issue.\\r\\n\\r\\nPublished fixed task: [Read the full Convergence question](https://github.com/CartmanFatass/My-paper-code/blob/83f7beafd632bd7e54a6c6ad3e47044357284189/docs/research/candidates/vap_folr_core/pro_packets/20260909_p78_public_lifecycle_convergence/TASK.md).\\r\\n\",\"comments\":[],\"createdAt\":\"2026-09-09T10:18:01Z\",\"number\":15,\"state\":\"OPEN\",\"title\":\"FOLR: public lifecycle information for survivor-memory comparison\",\"updatedAt\":\"2026-09-09T10:25:19Z\",\"url\":\"https://github.com/CartmanFatass/My-paper-code/issues/15\"}\n",
+      "stderr": "",
+      "observed_at_utc": "2026-09-09T10:42:59.377985+00:00",
+      "json": {
+        "body": "FOLR direction discussion: decide whether an explicitly public-lifecycle version of CAMA Traffic Junction warrants one bounded real learned RETAIN-versus-RESET comparison, or preserve the present no-successor boundary.\r\r\n\r\r\nP77 found a concrete source-interface mismatch: native removal and same-step slot refill can hide a new physical car behind an unchanged mask, while the source controller carries slot memory through inactivity. This issue does not override that finding or treat hidden callbacks as already permitted.\r\r\n\r\r\nThe proposed variant keeps native traffic transitions and reward but openly changes its information protocol. Both arms would receive the same trip-aware state bookkeeping, and both learned actors would receive a global membership-change bit and their own birth bit. New cars start fresh in both; RETAIN keeps true survivors' recurrent history, RESET clears it at actual membership events. A RESET loss would establish only bounded erasure cost, never typed-state novelty or original-task necessity.\r\r\n\r\r\nFixed evidence at 64db6307b236ffaa98e61f4ea83a5cdbb0a20bfb:\r\r\n- [P77 source-interface intake](https://github.com/CartmanFatass/My-paper-code/blob/64db6307b236ffaa98e61f4ea83a5cdbb0a20bfb/docs/research/candidates/vap_folr_core/FOLR_P77_CAMA_SURVIVOR_SOURCE_INTAKE_20260909.md)\r\r\n- [Verified source facts and work counts](https://github.com/CartmanFatass/My-paper-code/blob/64db6307b236ffaa98e61f4ea83a5cdbb0a20bfb/docs/research/candidates/vap_folr_core/evidence/2026-09-09-p77-cama-survivor-source.json)\r\r\n\r\r\nKnown unallocated scale: two arms, one matched training instance, 201280 total native ticks, 9938 RMSprop steps, 66783360 online/target replay GRU row forwards. Wall cost is unknown. Exact card, configuration and invocation budget remain unallocated; no diagnostic prerequisite is proposed.\r\r\n\r\r\nCurrent state: question preparation only. The DM recommends the explicit extension narrowly, as a close call. The strong zero-work alternative is ordinary generic RETAIN without another family or claim. The original Convergence node selects scope; Root owns dispatch and any later allocation. No provider Send, model, simulator, implementation or new card has occurred.\r\r\n\r\r\nThe complete answer will be delivered only to `docs/research/candidates/vap_folr_core/pro_packets/20260909_p78_public_lifecycle_convergence/archive/RESPONSE.md` on the existing shared `codex/vap-folr` branch, with its immutable delivery link in this issue.\r\n\r\nPublished fixed task: [Read the full Convergence question](https://github.com/CartmanFatass/My-paper-code/blob/83f7beafd632bd7e54a6c6ad3e47044357284189/docs/research/candidates/vap_folr_core/pro_packets/20260909_p78_public_lifecycle_convergence/TASK.md).\r\n",
+        "comments": [],
+        "createdAt": "2026-09-09T10:18:01Z",
+        "number": 15,
+        "state": "OPEN",
+        "title": "FOLR: public lifecycle information for survivor-memory comparison",
+        "updatedAt": "2026-09-09T10:25:19Z",
+        "url": "https://github.com/CartmanFatass/My-paper-code/issues/15"
+      }
+    },
+    "target_response_at_branch_head": {
+      "arguments": [
+        "api",
+        "repos/CartmanFatass/My-paper-code/contents/docs/research/candidates/vap_folr_core/pro_packets/20260909_p78_public_lifecycle_convergence/archive/RESPONSE.md?ref=d824897be46558099d565d5d02d836145813eae1"
+      ],
+      "exit_code": 1,
+      "stdout": "{\"message\":\"Not Found\",\"documentation_url\":\"https://docs.github.com/rest/repos/contents#get-repository-content\",\"status\":\"404\"}",
+      "stderr": "gh: Not Found (HTTP 404)\n",
+      "observed_at_utc": "2026-09-09T10:43:00.599145+00:00",
+      "json": {
+        "message": "Not Found",
+        "documentation_url": "https://docs.github.com/rest/repos/contents#get-repository-content",
+        "status": "404"
+      }
+    }
+  },
+  "response_candidate": null,
+  "observed_matching_full_response_available": false,
+  "new_reconciliation_exposure": {
+    "scientific_imports": 0,
+    "models": 0,
+    "model_calls": 0,
+    "native_episodes": 0,
+    "probes": 0,
+    "implementation_changes": 0,
+    "science_cards": 0,
+    "rng_masters": 0,
+    "scientific_invocations": 0,
+    "provider_send_clicks": 0,
+    "provider_browser_actions": 0,
+    "transport_dispatches": 0,
+    "registry_mutations": 0
+  },
+  "limit": "No browser page was inspected or controlled by the DM. UI behavior is Transport-reported. GitHub observations cover the declared branch/path and Issue15 at the recorded read times, not every possible provider/backend state."
+}

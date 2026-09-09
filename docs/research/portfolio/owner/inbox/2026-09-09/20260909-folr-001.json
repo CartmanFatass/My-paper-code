@@ -66,5 +66,15 @@
     "verdict_text": "**Recommendation to Convergence:** select the explicitly public-lifecycle extension for one\nbounded real B, narrowly.",
     "source": "docs/research/candidates/vap_folr_core/FOLR_P78_LIFETIME_INTERFACE_QUESTION_INTAKE_20260909.md"
   },
-  "starred": true
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-09T10:46:55+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "AGENTS.md",
+      "record": "docs/research/candidates/vap_folr_core/FOLR_P78_LIFETIME_INTERFACE_QUESTION_INTAKE_20260909.md#7-terminal-transport-blocker-factual-intake-and-recovery-boundary",
+      "state": "blocked",
+      "summary": "依AGENTS第3节记录发送阻塞：两次既有点击均无已确认发送，指定GitHub位置无完整答复；没有形成Pro决定。既有自动执行项仅指问题发布，新范围、训练卡及预算仍未选择，本次不追加发送。"
+    }
+  ]
 }
