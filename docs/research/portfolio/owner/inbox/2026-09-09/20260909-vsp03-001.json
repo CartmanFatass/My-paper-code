@@ -19,7 +19,7 @@
     }
   ],
   "recommended": "a",
-  "auto_applied": null,
+  "auto_applied": "b",
   "dm_reason": "同一控制方案已给出小幅混合符号，继续抽样的边际价值有限；新正值和3.25秒已测成本使此判断保持 close-call。",
   "evidence": [
     "docs/research/candidates/vsp_03/VSP03_P74_POST_B04_QUESTION_INTAKE_20260909.md",
@@ -72,5 +72,15 @@
     "verdict_text": "DM recommends asking Convergence to pause only the tested ordinary-G, update-128 greedy-replacement family on the public fixed-N2 shared-service host, with no successor selected. One further independent G is a credible, close alternative.",
     "source": "docs/research/candidates/vsp_03/VSP03_P74_POST_B04_QUESTION_INTAKE_20260909.md"
   },
-  "starred": true
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-09T08:55:24+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/vsp_03/pro_packets/20260909_post_b04_convergence/archive/RESPONSE.md",
+      "record": "docs/research/candidates/vsp_03/VSP03_P74_POST_B04_CONVERGENCE_INTAKE_20260909.md",
+      "state": "applied",
+      "summary": "P74 complete response93b869313 selects(b),same-family one G/seed7,128 updates,20480 episodes,one complete120s bound; DM accepts, preserves original(a) close-call and recasts1. Scientific selection applied to DIRECTION; no card,source,launcher or invocation allocated/executed in this intake. Root supplies the next bounded command. No owner reply inferred."
+    }
+  ]
 }
