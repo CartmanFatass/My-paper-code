@@ -1,0 +1,86 @@
+{
+  "id": "20260909-scdmp-001",
+  "created": "2026-09-09T09:37:50-07:00",
+  "direction": "semigroup_consistent_duration_model_policy",
+  "tier": "direction",
+  "kind": "second-recast",
+  "title": "残差MC单组重入，第二次实质重铸",
+  "context": "完整新P58裁决选择原单组B并认定实质RECAST。旧D6搜索维持PARK；按现有所有者规则记recasts2，Root在争用时最低排序，不改变生命周期。当前没有新实验结果。",
+  "options": [
+    {
+      "key": "continue-low-priority",
+      "label": "continue at lowest sequencing priority",
+      "consequence": "执行唯一固定学习对照，在所有ACTIVE方向中按最低争用顺序推进；无额外种子或自动后继。"
+    },
+    {
+      "key": "park",
+      "label": "PARK the direction",
+      "consequence": "由Root按真实所有者指令作Portfolio处置，停止未开始部分并保留已运行证据。"
+    }
+  ],
+  "recommended": "continue-low-priority",
+  "auto_applied": "continue-low-priority",
+  "dm_reason": "新合规裁决已形成且无规范冲突；执行其单组探索，同时明确承担第二重铸后果。",
+  "evidence": [
+    "docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260908_held_residual_context_repair/CONVERGENCE_INTAKE_20260909.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-09.md#L5",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260908_held_residual_context_repair/archive/RESPONSE.md",
+        "quote": "选择原候选 SCDMP-NATIVE-HOLD-RESIDUAL-B01，作为一次方向局部的 B/EXPLORE；确认先前完整答复的对象选择，也确认其“新的实质 RECAST”分类。",
+        "why": "新合规上下文中的完整方向裁决，只选原有一组比较，并要求真实记录重铸。"
+      },
+      {
+        "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_NATIVE_HOLD_RESIDUAL_B01_SCIENCE_CARD_20260909.md",
+        "quote": "Both values come from the current epoch's complete-batch critic output and both retain gradients.",
+        "why": "这是改变学习目标的双端梯度耦合，保留完整MC与同信息比较器。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260908_held_residual_context_repair/CONVERGENCE_INTAKE_20260909.md",
+        "quote": "Strongest contradiction: sparse opening pairs can couple imperfect predictions, the full MLP may suffice, and residual/clipping effects can harm control.",
+        "why": "已有MLP可能足够；少量残差对不保证原生收益。"
+      },
+      {
+        "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260908_held_residual_context_repair/archive/RESPONSE.md",
+        "quote": "两组 T−G 均负、两个 T−H 也负，是对乐观可用控制预期的更近反证，不是新残差已失败。",
+        "why": "保留另一个原生时长实验的不利背景，不能借门控正号预判本方法。"
+      }
+    ],
+    "uncertainty": [
+      "尚无新损失的训练结果；一组训练不能估计训练总体方差。",
+      "两臂都可能低于H，残差下降不能补偿原生损失。",
+      "保持支持稀疏，可能得到合法但零辅助项的观察。",
+      "同信息调优headroom缺失；不增设前置测量。"
+    ],
+    "cost": {
+      "compute": "只给原来一组：286720原生步、2048次Adam、96次最终评价，1800秒/臂、3600秒/整对；无额外种子、pilot或自动重试。",
+      "owner_time": "无需立即回复；可在批改台异步改变后续安排。",
+      "reversibility": "costly",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "选择原候选 SCDMP-NATIVE-HOLD-RESIDUAL-B01，作为一次方向局部的 B/EXPLORE；确认先前完整答复的对象选择，也确认其“新的实质 RECAST”分类。",
+    "source": "docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260908_held_residual_context_repair/archive/RESPONSE.md",
+    "question": "按完整新裁决执行第二次实质重铸，只运行选定一组，并在争用算力时置于所有ACTIVE方向末位吗？",
+    "changes_if_approved": [
+      {
+        "target": "DIRECTION.md 与当前 intake",
+        "from": "旧D6家族PARK；P56答复未应用；recasts1",
+        "to": "新增残差MC家族的一组B，recasts2和second-recast标记，旧D6仍PARK。"
+      },
+      {
+        "target": "Root 的 ACTIVE 排序",
+        "from": "未应用本次第二重铸后果",
+        "to": "算力争用时最低顺序，不改变生命周期或阻止使用空闲算力。"
+      }
+    ],
+    "if_refused": "执行真实异步所有者指令；若选择park，由Root记录Portfolio处置，保留此前证据与已运行事实。"
+  },
+  "starred": true
+}
