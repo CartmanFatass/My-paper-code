@@ -1,0 +1,32 @@
+{
+  "id": "20260908-mgtap-005",
+  "created": "2026-09-08T23:17:06-07:00",
+  "direction": "metric_ground_transport_allocation",
+  "tier": "object",
+  "kind": "brief",
+  "title": "N5 B01：原生几何 actor 比较简报",
+  "context": "简报概括本轮 Pro 选择和 B01 卡：REL 将同类当前几何/SINR 行做共享非线性处理，DENSE 用等分支参数的通用支路；二者共享原生输入、速度动作、奖励和训练约定。尚无新实验结果，旧配置坐标家族保持暂缓。",
+  "options": [
+    {
+      "key": "reading-agreed",
+      "label": "the reading stands",
+      "consequence": "the reading stands"
+    },
+    {
+      "key": "reading-disputed",
+      "label": "re-read per the comment",
+      "consequence": "re-read per the comment"
+    }
+  ],
+  "recommended": null,
+  "auto_applied": null,
+  "dm_reason": "",
+  "evidence": [
+    "docs/research/candidates/metric_ground_transport_allocation/MGTAP_NATIVE_GROUND_GEOMETRY_B01_INTAKE_20260908.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-08.md#n5-native-ground-geometry-b01-brief",
+  "brief": "docs/research/portfolio/owner/briefs/metric_ground_transport_allocation/2026-09-08_native_ground_geometry_b01.md",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

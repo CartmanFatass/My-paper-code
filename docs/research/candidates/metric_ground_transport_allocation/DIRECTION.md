@@ -52,6 +52,52 @@ authorized here. All historical B02/B03 and C meanings remain unchanged.
 Evidence: `pro_packets/20260908_native_geometry_convergence/archive/RESPONSE.md`
 and `MGTAP_NATIVE_GEOMETRY_CONVERGENCE_INTAKE_20260908.md`.
 
+## Native ground-geometry B01 re-entry — 2026-09-08
+
+The complete source-backed re-entry answer for request
+`2026-09-08-mgtap-native-geometry-reentry-01` executes
+`PRO_FINAL=CONTINUE_B_NATIVE_GROUND_GEOMETRY`. It freezes one B/EXPLORE
+comparison of a typed nonlinear relation-residual actor (`REL`) against an
+equally informed, parameter-matched dense residual actor (`DENSE`). It does
+not reopen the parked balanced-allocation-coordinate family or either
+historical C object, and it selects no implementation, invocation, compute,
+UAV-validation entry or Portfolio action.
+
+The native host is fixed at five UAVs, fifty users, 256 one-second steps and
+the existing velocity, channel, interference, SINR, capacity-limited greedy
+association and reward path. Each actor retains the existing 108-dimensional
+ordered input, recurrent history and three-coordinate tanh-Gaussian velocity.
+The actual association permits at most one UAV per user and up to ten users
+per UAV. The base coordinate, global diagnostics, local indices and persistent
+IDs are not added to either arm.
+
+REL applies bias-free nonlinear maps to all twenty user rows and ten
+other-UAV rows, averages with fixed denominators, and injects the resulting
+41-dimensional typed context through a 64-dimensional projection alongside
+the full raw affine path. DENSE adds a generic 108-to-16-to-64 nonlinear
+branch alongside the same raw path. Both additional branches contain 2,768
+parameters, and the complete proposed learners have 69,079 parameters. Equal
+counts do not imply equal computation or hypothesis classes; REL retains more
+row-map arithmetic. Both arms use primitive G, common B02 PPO conventions,
+two paired masters (8201, 8202), 512 training episodes per fit, 1,024 Adam
+calls, 32 sampled evaluation episodes and a shared fixed-zero-velocity H
+diagnostic per master.
+
+The primary is complete native sampled return
+`J=(1/256) sum_t sum_i r_i,t`; the two-master REL-minus-DENSE mean is compared
+with an absolute prospective MEI of 0.01. The card reports positive,
+inside-MEI and adverse branches, with no equivalence or generic-competence
+claim. The DM prediction is a small or inside-MEI aggregate; it is not an
+observed result and the owner prediction slot is not taken.
+
+The companion science card and intake are
+`MGTAP_NATIVE_GROUND_GEOMETRY_B01_SCIENCE_CARD_20260908.md` and
+`MGTAP_NATIVE_GROUND_GEOMETRY_B01_INTAKE_20260908.md`. The preceding parking
+record remains the correct boundary for the old underspecified bridge. A
+future CM handoff must preserve the native reward/action/history path and
+check typed padding, equal branch counts, zero-projection pairing and branch
+gradient connection. No run or model exists from this intake.
+
 ## Convergence family boundary after B03 — 2026-09-04
 
 The complete same-node Convergence answer executes
