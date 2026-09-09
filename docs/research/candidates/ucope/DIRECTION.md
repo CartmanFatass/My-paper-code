@@ -26,6 +26,15 @@ remains dated provenance under the controlling evidence specification section 11
 - Historical selected B discriminator:
   `UCOPE-B-EXPLORE-FT-XF-BC-INVERTIBLE-CONDITIONING-DISCRIMINATOR-R01`
 - Latest direction-tier decision:
+  **2026-09-09 PRO_FINAL / CONTINUE** inside the existing own-expiry renewal
+  family. Select the next bounded B question comparing learned renewal T,
+  frozen-initial duration-head renewal F, ordinary feedback G and hover H;
+  T−G remains primary and T−F secondary. This is a future one-instance design,
+  with no new card, master, implementation or invocation allocation in P74.
+  See the [post-renewal-B03 Convergence intake](UCOPE_POST_RENEWAL_B03_CONVERGENCE_INTAKE_20260909.md).
+  Recasts remain **1**, with the prior historical-coverage limitation. No
+  second-recast, C promotion or Portfolio disposition follows.
+- Previous event-boundary direction-tier decision:
   **2026-09-08 PRO_FINAL / RECAST** from opening-only commitment to renewable
   commitment at each owning UAV's expiry. Select exactly one B/EXPLORE matched
   pair, master7301, against ordinary same-information stepwise recurrent PPO;
@@ -119,6 +128,43 @@ The strongest alternative remains that active belief acquisition can matter
 without a distinct count-state architecture because RAW contains the sufficient
 count. The direct-service alternative remains separated by the frozen
 `Gamma=I+D` decomposition and analytic `D≈-0.02` boundary.
+
+## Current next question — 2026-09-09 post-renewal-B03 CONTINUE
+
+The original Convergence node selects one bounded learned-versus-frozen-duration
+comparison within the accepted renewal family. F trains its velocity actor and
+critic from the start while all 2242 initialized duration-head parameters stay
+frozen. Its final zero layer keeps the one/four law uniform at each own expiry,
+independent of private history and command. The comparison preserves the native
+host, free primitive observations, recurrence, own-expiry action/credit boundary
+and ordinary feedback's complete legal action set. It adds no sensor, fee,
+interruption or roster change. The existing recast count remains one.
+
+The next discriminator is T−G as native primary and T−F as secondary, with all
+hover contrasts and every fitted outcome retained. Two prior UPs and positive
+sampled T−H support asking it; P72's loss to feedback is the strongest contrary
+observation. Ending the renewal sequence is the close runner-up. A fourth
+unchanged pair is not selected because it does not compare learned timing with
+simple persistence, and earlier favorable means cannot rescue the adverse fit.
+
+Absolute MEI 0.01 remains the native investment scale. A favorable primary would
+be preliminary package evidence; a within-band point would not demonstrate a
+gain; an adverse primary could not be rescued by T−F or hover. The secondary
+may distinguish package performance against F, but freezing also changes
+capacity, gradient/clipping exposure and partner co-adaptation. No isolated
+timing/information cause, stable superiority/harm/equivalence or tuned headroom
+is established. The three prior endpoints and their conditional noise remain
+descriptive at their original meanings below.
+
+The selected future envelope is one matched instance, three real actor-critic
+learners plus hover, 425984 native steps, 3072 Adam calls and 128 final episodes;
+1800 s per complete arm and 3600 s for the whole study. F's runtime remains
+unmeasured; operation-count ratios are not wall-time predictions. Every future
+outcome ends its named allocation at intake. P74 selects this scientific design
+only: a new concrete Root command must precede its card/binding, implementation
+or invocation. No old allowance is replenished and no stronger prerequisite is
+introduced. See [full immutable response](pro_packets/20260909_post_renewal_b03_convergence/archive/RESPONSE.md)
+and [scientific intake](UCOPE_POST_RENEWAL_B03_CONVERGENCE_INTAKE_20260909.md).
 
 ## Current scientific position — 2026-09-09 renewal B01/B02 UP and B03 DOWN
 

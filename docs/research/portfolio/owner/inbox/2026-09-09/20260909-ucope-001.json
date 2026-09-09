@@ -83,5 +83,15 @@
     "verdict_text": "The actual choice is to prepare and return this complete direction question under **OWNER_DIRECT P74**. Recommend future alternative(a) narrowly; execute only preparation.",
     "source": "docs/research/candidates/ucope/UCOPE_POST_RENEWAL_B03_P74_PREPARATION_INTAKE_20260909.md"
   },
-  "starred": true
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-09T09:33:40+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/ucope/pro_packets/20260909_post_renewal_b03_convergence/archive/RESPONSE.md",
+      "record": "docs/research/candidates/ucope/UCOPE_POST_RENEWAL_B03_CONVERGENCE_INTAKE_20260909.md",
+      "state": "applied",
+      "summary": "已完整读取并接收 c2501bcc6598c28e9061b58db3ee9fd6f9a747cf 的 CONTINUE：原节点选一次 T/F/G/H 比较，T-G 主、T-F 次，重构次数仍为 1。此次只应用方向科学记录、完整答复归档和 intake；没有新卡片、主种子、实现、实验分配或 Send。首选与结束序列接近，保留 close-call。新科学选择账本：docs/research/portfolio/audit/2026-09-09.md#L9；Root 后续具体命令才进入实现或执行。"
+    }
+  ]
 }
