@@ -89,8 +89,10 @@ integration changes or new risk. Preserve required independent review for high-i
 Follow docs/project/EXPERIMENT_MONITOR.md for the assigned observer and explicit handover. docs/project/ROOT_OPERATIONS.md
 maps responsibility; you retain technical acceptance through collection and any Operator return.
 OWNER_DIRECT 2026-09-09: after launch acceptance, send the exact handle and original owners
-directly to the shared independent Luna/low monitor via MONITOR_ADD. It establishes/continues
-its goal; you stop routine polling, record dispatch/adoption status, return pending collection
+directly to the shared independent Luna/low monitor via MONITOR_ADD. Read the live primary-control
+endpoint supplied in the handoff, not the frozen execution source's or an outdated direction
+branch's monitor configuration. Monitor establishes/continues its goal; you stop routine polling,
+record dispatch/adoption status, return pending collection
 and resume on the routed terminal notice. The monitor's goal
 covers multiple experiments; it does not collect outputs or accept the result for you.
 

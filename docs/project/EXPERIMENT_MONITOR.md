@@ -12,6 +12,11 @@ collection and technical acceptance; DM owns scientific intake. After confirmed 
 CM, DM and Root do not maintain parallel status-polling loops. Independent Transport remains
 separate and observes Pro requests.
 
+Read the endpoint from the live primary control checkout (currently
+`C:/Projects/HMASD/.codex/hmasd-monitor.toml`, supplied in the handoff), not a stale direction
+checkout or the frozen remote scientific SHA. Endpoint currentness does not change scientific
+source bindings. Root carries this exact live configuration path in new CM/DM assignments.
+
 The monitor uses an active goal: observe all explicitly adopted accepted experiments, deliver
 each terminal notification, and finish when no observation or notification remains outstanding.
 It first reads its goal state. With an active goal, update the monitored set and task instructions
