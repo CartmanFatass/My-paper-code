@@ -86,6 +86,14 @@
       "record": "docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_B02_SCIENCE_CARD_20260909.md#1-question-authority-and-fresh-instance",
       "state": "applied",
       "summary": "Root P79 now allocates the previously unallocated fresh-instance recommendation. B02 master8902 and unchanged scientific configuration are frozen at the new-card boundary; implementation and the single scientific invocation have not yet occurred. The close-call against stopping remains; no owner reply is invented."
+    },
+    {
+      "at": "2026-09-09T12:18:17+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_B02_SCIENCE_CARD_20260909.md#1-question-authority-and-fresh-instance",
+      "record": "docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_B02_INTAKE_20260909.md#6-decisions-this-intake-produces",
+      "state": "applied",
+      "summary": "The previously recommended fresh pair was actually executed under Root P79: source4e019ca35, master8902, sole handle complete,294912steps/2048Adam/128final and362.9896806s complete bill. T-F is DOWN again; T-G is negative WITHIN. DM accepts all outcomes and recommends no third unchanged pair as next action, with no family or Portfolio disposition. No owner reply is invented."
     }
   ]
 }
