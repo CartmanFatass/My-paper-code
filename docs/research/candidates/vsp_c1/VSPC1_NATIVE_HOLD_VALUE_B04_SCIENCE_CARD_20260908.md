@@ -282,3 +282,30 @@ rule or lifecycle disposition and does not cancel the assigned8202 run. No
 successor, third normalized pair, tuning, extra H/evaluation or scientific retry
 will be selected. Root observes the sole accepted handle, returns terminal facts
 to the same CM for collection and then this DM for final intake and the safe stop.
+
+## 8. Terminal pre-script failure and completed safe stop
+
+The sole accepted supervisor handle
+`vspc1_hold_value_b04_8202_a33a3820fe9d` failed exit127 before opening the script.
+The actual wrapper used `/home/wu-inputs/` in place of the accepted
+`/home/wu/hmasd-inputs/` path. Full log/wrapper/exit/status and absent admission/
+output evidence are preserved in CM collection
+`337ba6f3893a71354820c661150834f1cce50e77`; the [E0](VSPC1_NATIVE_HOLD_VALUE_B04_RESULT_EVIDENCE_20260908.md)
+and [intake](VSPC1_NATIVE_HOLD_VALUE_B04_INTAKE_20260908.md) apply the §4
+missing-primary rule without changing the frozen question or method.
+
+There was one supervisor submission and zero remote admissions, scientific
+invocations, training pairs, models, native steps, Adam calls or evaluations.
+No primary, native wall, memory or moment/exposure measurement exists. B04
+UP(.60) stays unscored; owner prediction is not taken. B03's complete result and
+existing forecast score, its prior failure/correction, and both unnormalized
+pairs remain unchanged. This gives no new scientific polarity or repeatability
+evidence. Sections1–6 remain frozen and accepted-source records are preserved.
+
+Root explicitly closed P66's submission allowance under the owner safe pause:
+**no correction, repair, restaging, retry, extra pair or replacement**. The
+historical ready command in §7 must not be submitted. “Consumed invocation” in
+the return denotes the exhausted assignment allowance, not a valid B result or
+C-style object consumption; zero scientific invocations occurred. The failure
+intake completes P66's assigned closure. Commit/push/archive the records and
+stop this chain at the clean boundary; no successor or new Pro request follows.

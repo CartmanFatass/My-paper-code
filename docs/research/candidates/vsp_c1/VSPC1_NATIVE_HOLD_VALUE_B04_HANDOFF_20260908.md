@@ -1,10 +1,11 @@
 # P66 VSPC1 B04 — accepted binding and sole Root execution
 
-Current state: engineering/review and actual remote staging are complete;
-the one scientific invocation is ready but has not been submitted by DM or CM.
-Root executes the literal command below once, then uses the same CM/DM collection
-and intake route. The owner's safe pause applies after P66's complete intake;
-no successor is selected.
+**Current state: P66 is closed after the accepted supervisor submission failed
+before the script opened. No scientific invocation occurred.** Collection and
+failure intake are complete; Root archives the delivery and this chain stops.
+Do not execute the historical command below or correct/restage/resubmit it.
+The binding and ready-state details below are preserved as pre-submission
+provenance. The final section records the terminal outcome and explicit stop.
 
 ## Accepted inputs and integration
 
@@ -77,3 +78,26 @@ After the assigned intake is committed/pushed and returned to Root, stop at the
 clean archived boundary under OWNER_DIRECT. No successor, third normalized pair,
 extra H/evaluation, tuning, alternate seed or scientific retry is allocated.
 P66 is not complete merely because this launch handoff is ready.
+
+## Terminal outcome: failure intake complete; do not execute
+
+Collection `337ba6f3893a71354820c661150834f1cce50e77` establishes the exact
+accepted handle failed exit127 at2026-09-08T23:55:19Z. Root's actual wrapper
+used `/home/wu-inputs/vspc1_hold_value_b04_8202_a33a3820fe9d.sh`, which differs
+from the correctly staged path above. The script never opened; there was no
+remote admission, model, learner, native step or evaluation. Primary and native
+resources are unavailable; B04 UP(.60) is unscored, with all prior scores intact.
+
+Root explicitly treats the single submission allowance as exhausted under the
+owner pause. The [failure intake](VSPC1_NATIVE_HOLD_VALUE_B04_INTAKE_20260908.md)
+and [E0](VSPC1_NATIVE_HOLD_VALUE_B04_RESULT_EVIDENCE_20260908.md) preserve the raw
+failure, actual/accepted path difference, zero-exposure basis and scientific
+claim limit. No valid B result or scientific invocation was produced; B has no
+consumption state. No correction, repair, restaging, retry, extra pair or
+replacement request is selected. Preserve both original B03 handles and all
+results, the B04 source/staged script and terminal receipts.
+
+Root integrates the final intake/card/handoff/audit/brief delivery, preserving
+parallel rows, and archives P66 under the existing safe-pause handoff. No
+execution or collection remains active in this DM/CM chain. After that archival
+boundary, stop; further work requires an explicit owner resume/new assignment.
