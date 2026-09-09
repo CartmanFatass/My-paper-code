@@ -10,6 +10,8 @@ Root owns planning and integration under [ROOT_OPERATIONS.md](../../project/ROOT
 
 Five original native DMs were actually dispatched and each observed running: MGTAP execution/cost readiness; VSPC1 one new independent768 matched pair through source/remote execution/intake; FSD, UCOPE and VSP03 post-result proper-node question preparation. See [bounded assignments](handoffs/2026-09-09-research-resume-p74.md) and [actual dispatch log](root-log/2026-09-09.md). No new accepted scientific handle or provider generation is yet reported. Original CM/Transport observation ownership will apply to newly accepted work.
 
+MGTAP P74 readiness f94438f69 is accepted. P75 [two-master execution task](../candidates/metric_ground_transport_allocation/MGTAP_NATIVE_GROUND_GEOMETRY_B01_P75_EXECUTION_TASK_20260909.md), main4a20de760, was actually dispatched to original CM `/root/cm_mgtap_p72_repair` and observed running. CM owns technical execution and sole observation; source4f65eefb1, masters8201/8202, one accepted submission each. No handle is yet reported; Root does not poll prospective handles.
+
 ## Historical soft-stop closeout updates — 2026-09-09
 
 - CRTO P72: response/intake/handoff integrated at63550cd83; DM stopped, no live experiment or Pro generation, no successor B. See [handoff](../candidates/commitment_residual_triggered_options/CRTO_RESTART_HANDOFF_20260909.md).
