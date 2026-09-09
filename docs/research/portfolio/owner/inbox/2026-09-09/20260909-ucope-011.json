@@ -76,6 +76,14 @@
   "starred": true,
   "execution_history": [
     {
+      "at": "2026-09-09T16:52:46+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/root-log/2026-09-09.md",
+      "record": "docs/research/portfolio/root-log/2026-09-09.md",
+      "state": "planned",
+      "summary": "Consultation-only packet integratedce85d3dcc/2fb3dc43f/e2efe64e6 and dispatched once to dedicated Transport. Original branch ledger L37 maps to main audit2026-09-09 L124. Provider acceptance pending; no option executed, new card or experiment allocated."
+    },
+    {
       "at": "2026-09-09T17:22:52+00:00",
       "authority": "PRO_FINAL / OWNER_DELEGATED",
       "source": "docs/research/candidates/ucope/pro_packets/20260909_post_mean_velocity_b01_convergence/archive/RESPONSE.md",

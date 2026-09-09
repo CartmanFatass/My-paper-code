@@ -1,6 +1,6 @@
 ---
 name: hmasd-scientific-tools
-description: Use for HMASD literature retrieval, computed experiment counts, run-table analysis and plots, a concrete performance bottleneck, or choosing a MARL baseline/environment adapter. Supplies executable analysis and task-specific tool routing.
+description: Use for HMASD scientific design, comparison, interpretation or review, literature retrieval, computed experiment counts, run-table analysis and plots, a concrete performance bottleneck, or choosing a MARL baseline/environment adapter. Supplies executable analysis and task-specific tool routing.
 ---
 
 # HMASD scientific tools
@@ -9,6 +9,12 @@ Owner approved adoption batches 1 and 2 on 2026-09-05. Use tools to retrieve,
 calculate and measure facts instead of repeatedly deriving them in prose. Select
 only the mode needed now; this is not a launch checklist or new review layer.
 
+- **Scientific reading:** for DM/Claude hub mechanism/card/comparator/estimand choices,
+  intake or scientific Pro questions, Root's Portfolio scientific judgment, and a
+  critic's reviewed claim, use [scientific-reading.md](references/scientific-reading.md).
+  CM/reviewer use it only for affected reward, information, termination, duration or
+  inference semantics. Start from the current assignment and relevant spec sections.
+  Formatting, Git, receipts and accepted technical collection do not trigger this mode.
 - **DM/Root literature:** for a concrete mechanism, comparator, unexpected-result or
   related-work question, start with the two local libraries using
   [local-literature.md](references/local-literature.md). Search indexes first and

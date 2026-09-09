@@ -217,10 +217,10 @@ def mark_answered(root: Path, item_id: str) -> Path:
     return p
 
 
-def pending_instructions(root: Path, days: int = 2) -> list[dict]:
+def pending_instructions(root: Path) -> list[dict]:
     """Replies whose item is not yet marked answered in the item file: what the loop must apply."""
     out = []
-    for item in load_items(root, days=days):
+    for item in load_items(root, days=None):
         reply = item.get("reply")
         if not reply:
             continue

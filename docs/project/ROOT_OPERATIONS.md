@@ -35,13 +35,15 @@ step-by-step rules into every caller.
 | --- | --- |
 | Root | Select ready direction work within authority, resolve Portfolio questions, accept actual delivery, integrate accepted commits on main and keep current state coherent. |
 | DM | Card and prediction, direction-local decisions, CM assignment, scientific intake and authorized continuation. |
-| CM | Accepted implementation and complete technical execution batch: committed inputs, staging, bounded launch, observation, collection and technical acceptance. |
-| Existing Experiment Operator, when useful | One exact launch/observation/collection batch with accepted inputs; return direct process and artifact facts to its assigning parent. CM still accepts the result. |
+| CM | Accepted implementation and complete technical execution batch: committed inputs, staging, bounded launch, confirmed monitor handover, terminal collection and technical acceptance. |
+| Existing Experiment Operator, when useful | One exact launch/handover/collection batch with accepted inputs; return direct process and artifact facts to its assigning parent. CM still accepts the result. |
+| Independent experiment monitor (Luna/low) | Goal-driven observation of multiple adopted accepted handles; sends each terminal event directly to Root for the original CM/DM, without collecting or interpreting science. |
 | Independent Transport | Execute the exact authored Pro request and return its archived facts; Root intakes Portfolio responses or forwards direction responses to DM. |
 
 CM executes short cohesive work itself. Delegate a complete independent mechanical batch to
 an existing Operator when it saves work or enables useful parallelism. Do not add a mandatory
-child, standing observer or chain of per-command helpers. Root delegates accepted work before
+child or chain of per-command helpers. The owner-selected independent monitor is shared across
+experiments. Root delegates accepted work before
 lengthy integration and does not relay each shell step. Root may execute a short bounded operation
 when delegation costs more, or take over an explicitly handed-over handle. Keep one executor
 and one observer for each accepted invocation, using EXPERIMENT_MONITOR.md for transfer.
@@ -50,6 +52,14 @@ Use AGENTS.md's five-item assignment and the existing direction branch/checkout.
 retains acceptance; a child's completion alone does not close the direction. A technical blocker
 returns to the actual assigning parent with evidence; DM/CM handles in-scope repairs, Root
 resolves cross-direction dependencies. Neither a repair nor a task handover adds experiment budget.
+
+CM's terminal return includes its exact cleanup inventory and preservation/dependency
+facts. Root confirms the integration/retention boundary; the originating CM remains
+the default executor of assigned remote execution-worktree/wrapper closeout and returns
+verified disk and worktree-registration absence. Root accepts reclamation; shared
+authoring and live delivery checkouts remain governed by AGENTS §6. Prepare this
+inventory during collection; no deletion precedes verified preservation and the
+integration/retention trigger.
 
 ## Exact execution inputs
 
@@ -81,10 +91,13 @@ batches ready record edits at clean boundaries. Publication must not delay indep
 work. Recovery/cleanup follows AGENTS §6: resolve live request targets before retiring branches,
 update retained checkout locations and preserve unique evidence without merging unaccepted work.
 
-The active task and assigned native tasks drive execution and observation. OWNER_DIRECT
+The active task and assigned native tasks drive execution and acceptance. OWNER_DIRECT
 2026-09-08 replaces the normal completion wake path with an independent Luna/low relay
 under SIBLING_COMMUNICATION.md. Only actionable Root handoffs use it; nested native work
 and Transport's already waking receipts keep their routes. After the relay test succeeds,
-the previous 20-minute Root heartbeat is paused. No observer or scientific budget is added.
+the previous 20-minute Root heartbeat is paused. OWNER_DIRECT 2026-09-09 subsequently assigns
+experiment observation to one independent Luna/low task with a goal over multiple handles,
+under EXPERIMENT_MONITOR.md. Its terminal receipts go directly to Root; native accepted intakes
+still use Relay. No scientific budget or new timer follows.
 A pause or workflow edit does not resume scientific work. Preserve accepted external identities
 and the observation handover authorized by the owner.

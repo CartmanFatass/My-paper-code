@@ -12,9 +12,9 @@ Rigor is proportional to the claim. The project must not demand deployment-grade
 mechanism study, and it must not present a toy result as evidence of deployment safety or general
 MARL superiority.
 
-This document specializes the A/B/C evidence burdens in
-`docs/project/ALGORITHM_PRINCIPLES.md`. If a direction document asks for a stronger burden, that
-stronger burden applies only to the named claim or object; it does not silently become a global MARL
+This document defines the current A/B/C evidence burdens.
+`docs/project/ALGORITHM_PRINCIPLES.md` is historical background, not a current contract.
+If a direction document asks for a stronger burden, that stronger burden applies only to the named claim or object; it does not silently become a global MARL
 standard.
 
 ## 2. Normative terms and scientific units
@@ -378,6 +378,14 @@ hold a B launch. The quarantine rule for incomplete attempts (§6.2) is unchange
 whether an instrumentation failure downgrades rather than annuls a run is a separate owner decision
 not taken here.
 
+#### 11.4.1 Named exception — ACVC_FIXED_RETRACE_REUSE_E01
+
+For ACVC_FIXED_RETRACE_REUSE_E01 only, B/EXPLORE MAY compare the fixed C, F and dwell execution rules on the retained, frozen DENSE/8201 and DENSE/8202 trained policies without new fitting or training. The scope is the unchanged five-UAV, 50-user, 256-step native host and one serial six-panel comparison, with 64 prespecified evaluation episodes per base/rule panel. This is an explicit object-limited exception to the real-learner/trainer, nonzero-update and learner-movement requirements in §§5.2 and 11.4. The learner/trainer wording of §11.8.6 is subject to exactly this substitution for E01; its other verification requirements remain.
+
+The real native environment, retained learned recurrent stochastic policy and evaluator MUST run, with nonzero native transition and evaluation counts. A machine-generated exposure line MUST report two retained base fits; zero new fits, training steps, optimizer updates and parameter displacement during evaluation; and actual transition, evaluation and intervention counts. Historical training is provenance, not new exposure. Private recurrent state evolution and sampled actions MUST NOT be described as parameter learning. Common integrity under §4, fresh actual-node resource admission, reward/information/RNG semantics, own-trajectory recurrence and actual-command feedback, complete cost accounting, and proportionate verification and dependency-based failure interpretation under §§11.8.6–11.8.7 remain applicable.
+
+Report F-C and F-dwell separately for each base, retain dwell-C and all outcomes, and use conditional paired-episode uncertainty. The ceiling is a preliminary native execution-package signal or counterexample conditional on these two selected retained bases and the declared fresh panels, not new learning, training-population superiority, isolated mechanism/history necessity, optimality, tuned headroom or transfer. The named scope retains the proposed 180-second whole-logical-invocation cap, including the proposed 30-second focused-check/readback allowance; this paragraph allocates no execution. It authorizes no additional fit, panel, search, retry or successor and does not reopen the stopped T/G selector. Ordinary B requirements and all other objects remain unchanged; no new class or general Pro-consultation gate is created.
+
 ### 11.5 Direction separation for the untying programme
 
 Untying the skill duration k and untying the agent count N are **two separate directions**, not one
@@ -587,3 +595,27 @@ parallel capacity. Finite counts, native code or batching alone do not establish
 No universal overhead multiplier, asymptotic proof, new profiling run or validation service is
 required. Unknown work/cost stays unknown; a ratio to a budget cap is not an inflation ratio against
 a minimal adequate experiment. This is design reasoning, not an extra §11.4 launch condition.
+
+### 11.10 Scientific knowledge use
+
+For a concrete mechanism, card, comparator, estimand, intake or scientific review,
+local roles start with the current assignment and relevant specification sections, then use
+`hmasd-scientific-tools` scientific-reading mode to locate the relevant passages in
+`docs/rl-marl-foundations-20260907/FOUNDATIONS.md` and its topic notes. Read only the
+concepts needed for this judgment; reuse current relevant reads. In the existing
+card/intake or technical acceptance, state the assumption or inferential limit that
+supports or changes the judgment. A citation alone does not demonstrate use.
+
+Pro reads only the specification sections and knowledge passages listed in TASK at
+their declared fixed versions. TASK adopts the applicable named specification
+requirements; no local skill invocation or unlisted linked dependency is required.
+
+These materials explain concepts; they have no independent decision authority.
+SESSION_CHOICES.md records choices for its original discussion and is an input only
+when explicitly applicable to the current task. It sets no global endpoint, baseline
+or investment rule. Preserve frozen scientific meaning, source versions and budgets.
+Sections 11.8–11.9 remain controlling: no textbook census, fixed seed quota, positive
+result, proof, full mechanism explanation or Pro round becomes a new A/B condition.
+Mechanical work does not preload this material; scientific reading does not invoke
+grilling or require owner confirmation. Missing decision-critical sources follow the
+existing node's gap procedure; an explanatory-source gap alone is no launch refusal.
