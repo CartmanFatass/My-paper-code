@@ -1,12 +1,15 @@
-# VSPC1 restart handoff — owner soft stop, 2026-09-09
+# VSPC1 restart handoff — P73 stop and P74 completion, 2026-09-09
 
-P74 update: the owner explicitly resumed research; Root's committed
+P74 current boundary: the owner explicitly resumed research; Root's committed
 [P74 allocation](../../portfolio/handoffs/2026-09-09-research-resume-p74.md)
-at main `b52d0e1562376cdf833fc30d0543cce64e910e1a` authorizes one further
-independent768 pair. The [B09 card](VSPC1_NATIVE_HOLD_VALUE_B09_SCIENCE_CARD_20260909.md)
-and [intake](VSPC1_NATIVE_HOLD_VALUE_B09_INTAKE_20260909.md) now carry current
-execution state. The stopped P73 account below is historical and remains intact;
-P74 does not reuse its spent allowance or alter any recorded result.
+at main `b52d0e1562376cdf833fc30d0543cce64e910e1a` allocated one further
+independent768 pair. **B09/8402 is now valid complete DOWN and its intake is
+complete; no live experiment remains, and P74 has zero submissions left.** The
+[B09 card](VSPC1_NATIVE_HOLD_VALUE_B09_SCIENCE_CARD_20260909.md) and
+[intake §6](VSPC1_NATIVE_HOLD_VALUE_B09_INTAKE_20260909.md#6-p74-valid-result-intake-and-decisions)
+carry the result and next object-tier recommendation. The stopped P73 account
+below is historical; P74 did not reuse its spent allowance. The final section
+records current source/receipt/ownership and the next unexecuted step.
 
 **STOPPED after complete P73 intake. No live experiment, pending scientific
 submission or Pro Send remains. Do not start new scientific work until the owner
@@ -120,3 +123,73 @@ in this checkout. No fresh master, card, prediction, code assignment or run has
 been created for it. No same-key retry, sign repair, tuning, extra evaluation or
 causal-budget claim follows. This recommendation is not a scientific lifecycle
 decision and gives Root no instruction to resume without the owner.
+
+
+## P74 complete boundary and next unexecuted step
+
+Current allocation is complete, not an owner stop or direction PARK. The owner
+explicitly resumed research, then Root allocated one new B09/8402 pair. It
+completed at scientific SHA `4c9dc8b3de9b7827612b962aa4a4d085dc7cd411`,
+wrapper `f4afd81a0b1d986b56d08bf3187cb2fccbd84ffe`, collection
+`2d8bc1322fc1c64fe166295b5ba4b7cd357fde41`. B09 intake §6 and card §8 are
+current evidence; the P73 stopped account above remains historical.
+
+Result: DOWN, GATED−MLP−.013534955848536409 (conditional SE .009898214718212823,
+20 adverse identities), GATED−H+.03640871339430369 (6 adverse) and
+MLP−H+.0499436692428401 (7 adverse). DOWN(.55) hit/Brier .2025; owner prediction
+not taken. Both768 primary point estimates are DOWN, but H-relative signs differ
+between8401/8402. The old512 three-pair regime and every earlier result remain
+separate. Claim ceiling is local package performance; no stable inferiority,
+causal budget effect, tuned competence or specialized hold-credit conclusion.
+
+Execution was on hmasd-wsl-node, CPU FP32/one thread. Handle
+`vspc1_hold_value_b09_8402_4c9dc8b3de9b`, PID3035657, ended
+2026-09-09T08:35:20Z, exit0/inactive tmux. Whole483.27s, conservative arms
+256.3274/244.2363s, peak RSS547.703125MiB;417792 steps/3072 Adam/96 final
+evaluations. Actual-node admission passed. P74 accepted submissions:1/1 spent,
+zero remain; B has no object-consumption state. CM observation/collection has
+ended, no live process or pending scientific action. Optional aggregate CPU/
+component overhead remain unknown; existing resources_unmeasured qualifies them.
+
+- Authoring checkout/branch: `C:/Projects/HMASD-worktrees/dm-vspc1-next-20260906`,
+  `codex/direction-vsp_c1`; DM's final explicit-path commit contains this intake,
+  analysis, audit rows11–14,401-character Chinese brief and accepted DIRECTION
+  update. Scientific/technical CM return was clean, with ownership returned to DM.
+  Native/relay return supplies the exact final DM commit and clean status.
+- Exact detached execution cwd:
+  `/home/wu/hmasd-worktrees/vspc1-native-hold-value-b09-8402-4c9dc8b3de9b`.
+  Remote output:
+  `/home/wu/projects/HMASD/temp/directions/vsp_c1/exp/native_hold_value_b09_8402_4c9dc8b3de9b`.
+  Local raw collection:
+  `temp/directions/vsp_c1/collection/native_hold_value_b09_8402_4c9dc8b3de9b/`.
+  Durable E0/evidence/analysis:
+  `VSPC1_NATIVE_HOLD_VALUE_B09_RESULT_EVIDENCE_20260909.md` and
+  `results/native_hold_value_b09_8402_20260909/` in this direction directory.
+- New pre-final commits, in order:313feb739e420809481cb5765ca1f065e5345028,
+  4c9dc8b3de9b7827612b962aa4a4d085dc7cd411,
+  732ded23095d70b6ec96eaf4829177d71c8c9147,
+  f4afd81a0b1d986b56d08bf3187cb2fccbd84ffe,
+  76ea7f2b542eecf5257b7268b02c85e305fc43bb,
+  6968ece2bcf5448a5662286d4f9a13d6a319c81c,
+  2d8bc1322fc1c64fe166295b5ba4b7cd357fde41. Root integrates the new bounded
+  paths/audit additions without rolling back later shared UCOPE/main work.
+
+Next selected object-tier advice: in one fresh training pair, prospectively
+measure the same GATED/ordinary-width133 comparison at fixed512 and768 training
+endpoints, retaining both and one H bank. This would observe a local exposure
+response without using different masters for the two budgets. Real training
+remains two768 fits/3072 Adam; four learned endpoints plus H give160 evaluations,
+434176 total steps and proposed1800s complete-arm/3600s whole caps. Added work is
+64 learned evaluations/16384 steps (3.9215686% total steps);524.8039s uniformly
+scaled prior wall is only a planning proxy. Preserve training RNG/data/moments
+across midpoint evaluation; no historical state or favorable checkpoint selection.
+
+The first unexecuted step is Root's separate execution allocation, followed by
+DM freezing a new prospective B card/master/prediction and the same CM's bounded
+implementation/acceptance. No new card/master/prediction/task/run/Pro Send has
+been created, no extra P74 evaluation is allowed, and no family/lifecycle/priority/
+recast/C/formal-UAV-entry decision follows. Root owns integration, allocation and
+reclamation; DM retains the scientific recommendation and this designated
+checkout for its next actual assignment. Any exact-SHA remote checkout retirement
+must preserve the named output/receipt evidence and follow Root's normal cleanup
+ownership; no evidence is deleted by this return.

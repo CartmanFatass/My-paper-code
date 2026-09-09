@@ -3,7 +3,8 @@ Binding MARL structure: (b) temporal abstraction or termination, with five co-ad
 
 # VSPC1-NATIVE-HOLD-VALUE-B09 — B/EXPLORE, P74
 
-Current state: prospective definition; zero new scientific exposure. The owner
+Current state: valid complete DOWN for8402; §8 records the result. The prospective
+definition, prediction and exact allocation remain in §§1–7. The owner
 explicitly resumed research and Root allocated this one pair in the
 [P74 handoff](../../portfolio/handoffs/2026-09-09-research-resume-p74.md) at main
 `b52d0e1562376cdf833fc30d0543cce64e910e1a`. Historical P73 stop/budget records
@@ -259,3 +260,32 @@ execute the one allocated submission. Fresh actual-node physical/effective
 memory≥4GiB precedes scientific state inside this whole-timed chain. CM solely
 observes and collects; no Root adoption or intermediate allocation is needed.
 Acceptance creates no new allowance beyond §6.
+
+## 8. Terminal result — 2026-09-09
+
+The sole P74 submission completed at scientific source
+`4c9dc8b3de9b7827612b962aa4a4d085dc7cd411`, exit0, with accepted complete
+counts/publication/checkpoints. [E0](VSPC1_NATIVE_HOLD_VALUE_B09_RESULT_EVIDENCE_20260909.md)
+and [intake §6](VSPC1_NATIVE_HOLD_VALUE_B09_INTAKE_20260909.md#6-p74-valid-result-intake-and-decisions)
+record **DOWN**, Delta−.013534955848536409, conditional SE .009898214718212823,
+20/32 adverse primary identities. The point estimate lies only .0035349558
+(.3571 conditional SE) below the negative MEI boundary; retain that noise.
+GATED−H+.03640871339430369 and MLP−H+.0499436692428401 retain6/7 adverse
+identities. Both learned means exceed H locally;8401's H losses remain visible.
+Prospective DOWN(.55) hit, Brier .2025; no prediction or rule changes.
+
+Actual417792 steps/3072 Adam/96 final evaluations and768 moment merges satisfy
+the allocated real-learner counts. Whole483.27s, conservative complete-arm
+bounds256.3274/244.2363s and547.703125MiB peak RSS are retained with optional
+`resources_unmeasured` qualifications. No observed cap/scope breach or extra run.
+The two independent768 primary differences are −.0338649204/−.0135349558,
+descriptive mean−.0236999381/SD .0143754558. Their H-relative signs differ;
+old512 n=3 and all older regimes stay separate. No stable, unique-mechanism or
+causal-budget claim follows.
+
+One accepted P74 submission is spent, zero remain; CM observation/collection and
+DM intake are complete, with no live process. B has no object-consumption state.
+The intake recommends a separately allocated B with fixed512/768 evaluation
+endpoints in one fresh training pair to observe its local exposure response.
+That is advice only: no new card/key/prediction/task/run/Pro Send or extra P74
+evaluation. It changes no family, lifecycle, priority, recast, C or formal UAV entry.
