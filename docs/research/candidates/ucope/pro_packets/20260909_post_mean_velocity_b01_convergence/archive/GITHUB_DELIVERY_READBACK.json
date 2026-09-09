@@ -1,0 +1,55 @@
+{
+  "observed_at_utc": "2026-09-09 17:17:27 UTC",
+  "repository": "CartmanFatass/My-paper-code",
+  "branch": "codex/ucope",
+  "observed_delivery_head": "18356085f60fab3bb0d9e092c50bfcc5005f907f",
+  "prior_local_head": "8c27cfa825cc7f56e3eea8cd734b453f0282451f",
+  "fast_forward_completed": true,
+  "fixed_task_sha": "f95de6a771adfa11f550b1e4b69ee21775d75bc0",
+  "fixed_evidence_sha": "bb84696d476fd52ca78b3ca31d9312e5d23efef0",
+  "response": {
+    "path": "docs/research/candidates/ucope/pro_packets/20260909_post_mean_velocity_b01_convergence/archive/RESPONSE.md",
+    "immutable_url": "https://github.com/CartmanFatass/My-paper-code/blob/18356085f60fab3bb0d9e092c50bfcc5005f907f/docs/research/candidates/ucope/pro_packets/20260909_post_mean_velocity_b01_convergence/archive/RESPONSE.md",
+    "git_blob_sha": "2211aa66e4117d54dc27615f75a1c96578629251",
+    "git_blob_sha256": "84e51d592d60844fca5451f70fb2e3588dcc3a1267d07bd1471b9e23ea1ef6d5",
+    "git_blob_bytes": 34602,
+    "lines": 179,
+    "full_content_read": true
+  },
+  "commit": {
+    "sha": "18356085f60fab3bb0d9e092c50bfcc5005f907f",
+    "created_at": "2026-09-09T17:09:36Z",
+    "message": "docs(ucope): deliver post-mean-velocity convergence decision\n\nAssisted-by: ChatGPT\nscope: none",
+    "changed_paths": [
+      "docs/research/candidates/ucope/pro_packets/20260909_post_mean_velocity_b01_convergence/archive/RESPONSE.md"
+    ]
+  },
+  "issue_comment": {
+    "id": 5605809372,
+    "url": "https://github.com/CartmanFatass/My-paper-code/issues/11#issuecomment-5605809372",
+    "matches_response_task_input": true,
+    "timestamps_from_connector": null
+  },
+  "archived_short_receipt": {
+    "captured_at": "2026-09-09T17:09:45.716965Z",
+    "sha256": "2d08a8ccc76fc5dc439105dfce48163b24e51507f2ef34fb4d09fcf3611fb29f",
+    "bytes": 718,
+    "claimed_head": "8c27cfa825cc7f56e3eea8cd734b453f0282451f",
+    "claimed_response_read": "404",
+    "claimed_comment_match": false,
+    "raw_record_preserved": true
+  },
+  "reconciliation": "Current immutable response plus matching Issue comment confirms scoped GitHub delivery. The archived chat/facts remain a contradictory or stale observation of delivery status, not the full response. Commit metadata is 17:09:36Z, preceding archive capture by about 10 seconds; exact external-write/read visibility sequence and cause are not established. No resend or write retry was made.",
+  "dm_new_scientific_exposure": {
+    "native_steps": 0,
+    "model_calls": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0,
+    "diagnostics": 0,
+    "profiling": 0,
+    "new_masters": 0,
+    "new_cards": 0,
+    "new_invocation_allowance": 0,
+    "provider_sends": 0
+  }
+}
