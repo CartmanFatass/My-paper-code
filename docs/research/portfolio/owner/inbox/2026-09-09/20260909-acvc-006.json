@@ -1,0 +1,71 @@
+{
+  "id": "20260909-acvc-006",
+  "created": "2026-09-09T05:36:58-07:00",
+  "direction": "acvc",
+  "tier": "direction",
+  "kind": "decision",
+  "title": "当前学习回退包：结束还是一个有明确理由的新B",
+  "context": "两次T、G胜C负F，T对G先正后负。DM建议仅结束当前实现包，由原Convergence节点评估最强继续理由；P80只准备咨询，方向决定未执行。",
+  "options": [
+    {
+      "key": "end-package",
+      "label": "结束当前具体学习比较包",
+      "consequence": "仅结束固定底座和当前学习配置的比较；不关闭ACVC或认定历史无用。"
+    },
+    {
+      "key": "changed-b",
+      "label": "选择一个有具体理由的改法",
+      "consequence": "原节点需说明一个改法如何更有决策价值及有限B比较；本次不自动运行。"
+    }
+  ],
+  "recommended": "end-package",
+  "auto_applied": null,
+  "dm_reason": "两次未胜F且结构化优势未重复；保留正面结果和未测假设，避免空泛续投。",
+  "evidence": [
+    "docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_P80_PREPARATION_INTAKE_20260909.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-09.md#L66",
+  "brief": "docs/research/portfolio/owner/briefs/acvc/2026-09-09_native_link_loss_p80.md",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否仅结束当前固定底座、学习头、目标和512回合预算下的学习回退方案，还是选择一个有具体理由的新B改法？当前只准备交原节点裁决。",
+    "changes_if_approved": [
+      {
+        "target": "ACVC当前学习回退比较包",
+        "from": "B01/B02已完成，下一步方向结论待定",
+        "to": "仅结束此具体比较包；保留固定回退、历史假设和原方向状态"
+      }
+    ],
+    "if_refused": "由原Convergence节点明确一个更有决策价值的改法及有限B比较；不自动调参、重复训练或关闭整个方向。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_B02_INTAKE_20260909.md",
+        "quote": "T and G each lose to F in both instances",
+        "why": "两次学习门都没有超过已达到的最强固定对照，继续原样比较价值较低。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_B02_INTAKE_20260909.md",
+        "quote": "both learned packages improve over C in both instances",
+        "why": "本地历史与回退组合仍可能有用；没有排除一个有明确理由的新改法。"
+      }
+    ],
+    "uncertainty": [
+      "只有两次训练及各自32个配对评估回合，没有稳定总体或因果结论。",
+      "T相对G先正后负；F使用历史，但这不证明历史必要或F最优。",
+      "底座8201在旧结果已知后选择；本宿主缺少调好同信息基线的余量记录。",
+      "本次没有指定候选改法，不能用未知原因代替具体设计。"
+    ],
+    "cost": {
+      "compute": "本次新增训练、模型、环境步、评估和探针均为0。原样一对需294912步、2048次Adam、128次最终评估；实测完整账单373.4069735/362.9896806秒。新改法成本尚未知。",
+      "owner_time": "可异步查看，无需回复才完成咨询准备。",
+      "reversibility": "reversible",
+      "waits_on_this": "方向结论由原Convergence节点形成；P80没有运行配额。"
+    },
+    "verdict_text": "I recommend ending the instantiated learned selective-retrace comparison on the fixed DENSE/8201 base, unchanged heads, objective and 512-episode training budget. The original Convergence node must decide that direction-local boundary, or select one concrete changed B whose decision value it can specifically justify.",
+    "source": "docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_P80_PREPARATION_INTAKE_20260909.md"
+  },
+  "starred": true
+}

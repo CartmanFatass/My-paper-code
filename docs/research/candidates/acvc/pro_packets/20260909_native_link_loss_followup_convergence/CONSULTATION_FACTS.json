@@ -1,0 +1,258 @@
+{
+  "kind": "P80_CONSULTATION_FROM_ACCEPTED_RECORDS_ONLY",
+  "created_utc": "2026-09-09T12:33:46.784656+00:00",
+  "accepted_direction_input_sha": "075b678239b627b3b898bd4cf2e307e4f7b25937",
+  "new_scientific_exposure": {
+    "scientific_invocations": 0,
+    "model_instantiations": 0,
+    "native_team_steps": 0,
+    "optimizer_updates": 0,
+    "evaluation_episodes": 0,
+    "counterfactual_probes": 0,
+    "policy_search_candidates": 0
+  },
+  "exposure_line": "P80 consultation: new scientific_invocations=0; new model_instantiations=0; new native_team_steps=0; new optimizer_updates=0; new evaluation_episodes=0; new counterfactual_probes=0; new policy_search_candidates=0. Reused accepted B01/B02: 2 matched training instances; 589824 native team steps; 4096 Adam calls; 256 final episodes; complete bills 373.4069735/362.9896806 s.",
+  "independent_unit": "one matched T/G training instance with its own fresh joint-reset/action evaluation panel; 2 instances, not 64 independent trained policies",
+  "instances": [
+    {
+      "object": "ACVC-NATIVE-LINK-LOSS-B01",
+      "training_instance": 8901,
+      "accepted_analysis_path": "docs/research/candidates/acvc/native_link_loss_b01_p78_20260909/dm_analysis.json",
+      "scientific_source_sha": "f429021166eefa9ee6d9b275ac8c91f1b13a8f28",
+      "authority_card_sha": "7ec1849b739cc51f55dee41878da980b8f245b4d",
+      "CM_evidence_sha": "60359f70da4af88831bd0940b4e6ebaeb10dfc81",
+      "counts": {
+        "train_episodes": 1024,
+        "eval_episodes": 128,
+        "total_team_steps": 294912,
+        "explicit_resets": 1152,
+        "constructors_from_run_summary": 4,
+        "unscored_constructor_resets_from_run_summary": 4,
+        "rollouts": 512,
+        "adam": 2048
+      },
+      "arm_mean_J": {
+        "T": 0.23448272818841664,
+        "G": 0.19751402293456757,
+        "C": 0.16730149784780335,
+        "F": 0.2635633631190553
+      },
+      "contrasts": {
+        "T-C": {
+          "mean_J": 0.06718123034061328,
+          "conditional_SE_J": 0.011535219431078811,
+          "reading": "UP",
+          "paired_joint_episodes": 32
+        },
+        "T-F": {
+          "mean_J": -0.029080634930638692,
+          "conditional_SE_J": 0.010507012509350792,
+          "reading": "DOWN",
+          "paired_joint_episodes": 32
+        },
+        "T-G": {
+          "mean_J": 0.036968705253849064,
+          "conditional_SE_J": 0.011175743977192168,
+          "reading": "UP",
+          "paired_joint_episodes": 32
+        },
+        "G-C": {
+          "mean_J": 0.030212525086764218,
+          "conditional_SE_J": 0.012863632347497852,
+          "reading": "UP",
+          "paired_joint_episodes": 32
+        },
+        "G-F": {
+          "mean_J": -0.06604934018448776,
+          "conditional_SE_J": 0.010624357889486674,
+          "reading": "DOWN",
+          "paired_joint_episodes": 32
+        }
+      },
+      "secondary_F_minus_C": {
+        "contrast": "F-C",
+        "status": "outcome-informed descriptive fixed-rule comparison, not an added primary",
+        "mean_J": 0.09626186527125198,
+        "conditional_SE_J": 0.011585547446221228
+      },
+      "training_gate_opportunities": {
+        "T": 51834,
+        "G": 50076
+      },
+      "relative_gate_displacement": {
+        "T": 0.3087579905986786,
+        "G": 0.15127624571323395
+      },
+      "cost": {
+        "process_wall_s": 359.17,
+        "focused_check_wall_s": 14.2369735,
+        "logical_study_bill_s": 373.4069735,
+        "complete_arm_bill_s": {
+          "T": 199.8208294399871,
+          "G": 215.51174089401928
+        },
+        "peak_rss_bytes": 565547008,
+        "aggregate_cpu": "unmeasured",
+        "scratch_high_water": "unmeasured"
+      }
+    },
+    {
+      "object": "ACVC-NATIVE-LINK-LOSS-B02",
+      "training_instance": 8902,
+      "accepted_analysis_path": "docs/research/candidates/acvc/native_link_loss_b02_p79_20260909/dm_analysis.json",
+      "scientific_source_sha": "4e019ca35b930c2216fdfe110ba587e222ca7384",
+      "authority_card_sha": "56ce830386cfab6be30b217e5cc5b0d0f8109120",
+      "CM_evidence_sha": "b273dd633a1ce9cd7fe2b39ef747eb3010d9ccea",
+      "counts": {
+        "train_episodes": 1024,
+        "eval_episodes": 128,
+        "total_team_steps": 294912,
+        "explicit_resets": 1152,
+        "constructors_from_run_summary": 4,
+        "unscored_constructor_resets_from_run_summary": 4,
+        "rollouts": 512,
+        "adam": 2048
+      },
+      "arm_mean_J": {
+        "T": 0.2239949254629433,
+        "G": 0.23058950691624636,
+        "C": 0.17040371445006997,
+        "F": 0.2782482888954908
+      },
+      "contrasts": {
+        "T-C": {
+          "mean_J": 0.05359121101287336,
+          "conditional_SE_J": 0.010947216860939041,
+          "reading": "UP",
+          "paired_joint_episodes": 32
+        },
+        "T-F": {
+          "mean_J": -0.05425336343254749,
+          "conditional_SE_J": 0.010917155605698652,
+          "reading": "DOWN",
+          "paired_joint_episodes": 32
+        },
+        "T-G": {
+          "mean_J": -0.006594581453303034,
+          "conditional_SE_J": 0.010885834322406286,
+          "reading": "WITHIN",
+          "paired_joint_episodes": 32
+        },
+        "G-C": {
+          "mean_J": 0.0601857924661764,
+          "conditional_SE_J": 0.011399763526352413,
+          "reading": "UP",
+          "paired_joint_episodes": 32
+        },
+        "G-F": {
+          "mean_J": -0.047658781979244454,
+          "conditional_SE_J": 0.010763272339913454,
+          "reading": "DOWN",
+          "paired_joint_episodes": 32
+        }
+      },
+      "secondary_F_minus_C": {
+        "contrast": "F-C",
+        "status": "descriptive fixed-rule comparison; introduced outcome-informed at P78; not an added B02 primary",
+        "mean_J": 0.10784457444542085,
+        "conditional_SE_J": 0.010384290142927884
+      },
+      "training_gate_opportunities": {
+        "T": 50137,
+        "G": 49920
+      },
+      "relative_gate_displacement": {
+        "T": 0.1773412525653839,
+        "G": 0.17081859707832336
+      },
+      "cost": {
+        "process_wall_s": 357.55,
+        "focused_check_wall_s": 5.4396806,
+        "logical_study_bill_s": 362.9896806,
+        "complete_arm_bill_s": {
+          "T": 191.57035297096837,
+          "G": 207.23324539599372
+        },
+        "peak_rss_bytes": 562565120,
+        "aggregate_cpu": "unmeasured",
+        "scratch_high_water": "unmeasured"
+      }
+    }
+  ],
+  "cohort_complete_bill_s": 736.3966541,
+  "cohort_bill_per_valid_instance_s": 368.19832705,
+  "cohort_total_team_steps": 589824,
+  "same_count_B_comparison_only": {
+    "allocated": false,
+    "count_reference": {
+      "learned_arms": 2,
+      "matched_training_instances": 1,
+      "train_episodes_per_arm": 512,
+      "horizon": 256,
+      "train_team_steps": 262144,
+      "eval_arms": 4,
+      "eval_episodes_per_arm": 32,
+      "eval_team_steps": 32768,
+      "total_team_steps": 294912,
+      "rollouts_per_arm": 256,
+      "adam_per_rollout": 4,
+      "total_rollouts": 512,
+      "total_adam": 2048,
+      "explicit_resets": 1152,
+      "environment_constructors": 4,
+      "unscored_constructor_resets": 4,
+      "final_evaluation_episodes": 128,
+      "base_agent_forwards": 1474560,
+      "learned_gate_agent_forwards_upper": 1392640,
+      "history_match_pairs_upper": 28672000,
+      "anchor_ambiguity_pairs_upper": 28672000,
+      "all_coordinate_pairs_upper": 57344000
+    },
+    "dominant_work_multiplier_vs_B02": 1,
+    "observed_complete_bills_s": [
+      373.4069735,
+      362.9896806
+    ],
+    "validation_separate_from_algorithm_s": [
+      14.2369735,
+      5.4396806
+    ],
+    "complete_caps_reference_s": {
+      "learned_arm": 1800,
+      "study": 3600,
+      "focused_checks": 300
+    },
+    "runtime_of_new_instance": "unknown; observed bills are references, not a guarantee",
+    "additional_algorithm_work": "recurrent replay, backward, critic and G residual beyond listed collection forwards; no policy/trajectory candidate search"
+  },
+  "decision_cost_comparison": {
+    "end_instantiated_package": {
+      "new_scientific_work": 0
+    },
+    "unchanged_B": {
+      "scientifically_legal": true,
+      "P80_allocated": false,
+      "DM_recommended": false,
+      "reason": "already observed F losses recur and T-G gain does not; not a seed-count or significance refusal"
+    },
+    "changed_B": {
+      "candidate_selected_or_nominated": false,
+      "work_and_runtime": "unknown until one concrete intervention and comparison is justified; no filler candidate, pilot, search or diagnostic prerequisite"
+    }
+  },
+  "units": {
+    "horizon": 256,
+    "J": "S/256",
+    "inherited_quarter_S": 0.25,
+    "inherited_quarter_as_J": 0.0009765625,
+    "MEI_J": 0.01,
+    "MEI_as_S": 2.56
+  },
+  "headroom": "no tuned same-information upper-minus-baseline record on this native host; F is strongest attained fixed null, not an upper or optimal policy",
+  "portfolio_snapshot": {
+    "main_sha": "e628653ee441f09b4aefb71886b87b3e8c8bac4c",
+    "row": "| acvc | ACTIVE | MEDIUM | 2026-09-09 P79 intaken | B02 valid mixed: T-C+.0535912110UP,T-F-.0542533634DOWN,T-G-.0065945815WITHIN negative. Both gates beatC/loseF twice; priorT-Ggain not repeated. No third unchanged pair selected. P80 scopedConvergence question preparation assigned; no successor/family disposition. Recast2/lowest sequencing unchanged. [intake](../candidates/acvc/ACVC_NATIVE_LINK_LOSS_B02_INTAKE_20260909.md) |",
+    "authority": "Root-owned state; P80 takes no Portfolio disposition"
+  },
+  "measurement_limit": "Conditional SEs are from each retained 32-joint-episode panel at its trained pair and frozen outcome-informed DENSE8201; no pooled episode SE, training-population, causal or optimality inference."
+}
