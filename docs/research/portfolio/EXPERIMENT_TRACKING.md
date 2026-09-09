@@ -1,5 +1,9 @@
 # HMASD experiment tracking
 
+## UCOPE P83 reclamation accepted
+
+Event `/root/cm_ucope_main_integration_p70|P83-UCOPE-reclamation|6812b97cf764500108328f059130ce9e301dd92e17a75aaa2ca5cd9ec59e66d0|COMPLETE` accepted once/native final deduplicated. Root read full report, actual removal and final acceptance; report and two archive hashes independently pass. Exactly P82 two worktrees and791byte wrapper removed, disk/registry absent with no additions. Both handles exit0/inactive;three35-process scans no hits/errors.40 entries preserve26 unique worktree files plus supervisors/wrapper,20local comparisons pass. Scientific37668b3b0e71fce3c54165c299df9f2e05054b09953f2afc64a0775367260331/check4899a7bfda871da32c12b97a9a716ee755262ee03e6f68b40909c48a22e16a67 local/remote match; source d99ae3c remains published/recovery referenced. Reporttemp/root-reclamation/p83-ucope-20260909/REPORT.md SHA6812b97cf764500108328f059130ce9e301dd92e17a75aaa2ca5cd9ec59e66d0. No remaining batch target/blocker; collection/supervisors/sharedauthoring/activeP83/VSPintake/blocked scratch unchanged. Cleanup CM idle.
+
 ## UCOPE P82 accepted; one independent short-support follow-up allocated
 
 Event `/root/dm_ucope_p47_resume|P82|cf71b59f6e0161831c6f2870602d24b566bf7089|COMPLETE` processed once/native final deduplicated. Root read full intake, actual learner physical-support/categorical-credit and study accounting/publication diff,22-check2.90s raw receipt and independent reviewer return. Seven local artifact hashes match collection readback. Thirteen scoped base surfaces/JSON/integrated bytes checked;3 child audit rows appended; newer VSPC1 code preserved. Source d99ae3c73e9c6ee73638c8a20afe748ce97b77ec/carded5386b3b159688eff9051bc34f9a49946ed5870/prelaunchc156b35a4e95d6b27f880fc2b18d2ad95ed5e61e/CMc132146024acce49296631c2eaf1d9677579ab34/intakecf71b59f. No repeated native/model/checksuite.
