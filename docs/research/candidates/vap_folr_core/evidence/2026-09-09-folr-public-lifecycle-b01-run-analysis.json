@@ -1,0 +1,49 @@
+{
+  "unit": "caller-declared independent training run",
+  "inference": "descriptive only; no confidence interval or success classification",
+  "groups": [
+    {
+      "task": "FOLR-PUBLIC-LIFECYCLE-B01",
+      "arm": "RESET",
+      "n": 1,
+      "mean": 4.1065625,
+      "sample_sd": null,
+      "min": 4.1065625,
+      "max": 4.1065625,
+      "runs": {
+        "7801": 4.1065625
+      }
+    },
+    {
+      "task": "FOLR-PUBLIC-LIFECYCLE-B01",
+      "arm": "RETAIN",
+      "n": 1,
+      "mean": 2.1043749999999997,
+      "sample_sd": null,
+      "min": 2.1043749999999997,
+      "max": 2.1043749999999997,
+      "runs": {
+        "7801": 2.1043749999999997
+      }
+    }
+  ],
+  "paired_differences": [
+    {
+      "task": "FOLR-PUBLIC-LIFECYCLE-B01",
+      "arm": "RETAIN",
+      "baseline": "RESET",
+      "summary": {
+        "n": 1,
+        "mean": -2.0021875000000002,
+        "sample_sd": null,
+        "min": -2.0021875000000002,
+        "max": -2.0021875000000002
+      },
+      "differences": {
+        "7801": -2.0021875000000002
+      },
+      "unmatched_arm_seeds": [],
+      "unmatched_baseline_seeds": []
+    }
+  ]
+}

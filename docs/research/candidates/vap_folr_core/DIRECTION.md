@@ -115,7 +115,7 @@ Evidence:
 - `N3_FOLR_ROUTING_B04_EVALUATION_CURVES_20260904.csv`
 - `N3_FOLR_ROUTING_B04_INTAKE_20260904.md`
 
-## Accepted public-lifecycle scope — 2026-09-09
+## Accepted public-lifecycle scope — 2026-09-09, before B01 execution
 
 **Conclusion (scope, not performance).** Convergence selects a new lifecycle-visible easy
 Traffic Junction comparison of separately trained survivor-state RETAIN and event-triggered
@@ -150,3 +150,38 @@ References:
 - `pro_packets/20260909_p78_public_lifecycle_convergence/archive/RESPONSE.md` at `653727422183894b2f4d1c82a458fbc55aaf6ee0`
 - `FOLR_P78_LIFETIME_INTERFACE_QUESTION_INTAKE_20260909.md` §8
 - `FOLR_PUBLIC_LIFECYCLE_B01_SCIENCE_CARD_20260909.md`
+
+## Accepted public-lifecycle B01 science — 2026-09-09
+
+**Conclusion.** One matched training pair on the explicitly lifecycle-visible easy Traffic
+Junction host gives final native returns RETAIN `2.104375` and RESET `4.1065625`.
+RETAIN minus RESET is `-2.0021875`, beyond the frozen absolute MEI `1.0`:
+`RESET_ABOVE_MEI`. Each arm trained for 100,000 native ticks/4,969 RMSprop steps and received
+32 final greedy episodes under its own trained rule. This is an opposite-sign preliminary
+trained-system observation; the DM's leading within-MEI prediction missed it.
+
+**Bounded claim.** Event-triggered survivor clearing has a higher observed final return in
+this configuration. Both actors receive identical public event/own-birth cues, entrants
+start fresh, and RESET still uses current information and history between events. The
+result does not show why clearing helped, absence of useful history, stable superiority,
+typed-state novelty, strictly-self ancestry, original-CAMA performance or transfer.
+
+**Strongest support and contradiction.** There were 304/337 real final survivor-control
+opportunities and 0/337 RETAIN/RESET survivor clears. Primary reward, training exposure and
+final selection were preserved. Against a broader conclusion stand one training pair,
+wide conditional episode spread, and RESET's lower mean training return (-5.225858 versus
+-5.044872). Finite optimization, partner co-adaptation and evaluation variation remain
+alternatives to beneficial forgetting. Tuned headroom on this information variant is absent.
+
+**Surviving alternative and next discriminator.** The next useful measurement is one new
+independent matched training pair under the same comparison and final-evaluation protocol,
+preserving every sign. This is scientific advice inside the accepted mechanism; B01's finite
+allocation ended and no successor is allocated. Repeated evaluation of these same weights
+would not add an independent training sample. Historical B04/P77 boundaries and old
+FOLR/DISH pauses are unchanged; no family, priority or lifecycle disposition follows.
+
+References:
+
+- `FOLR_PUBLIC_LIFECYCLE_B01_RESULT_SUMMARY_20260909.json`
+- `FOLR_PUBLIC_LIFECYCLE_B01_RESULT_EVIDENCE_20260909.md`
+- `FOLR_PUBLIC_LIFECYCLE_B01_INTAKE_20260909.md`
