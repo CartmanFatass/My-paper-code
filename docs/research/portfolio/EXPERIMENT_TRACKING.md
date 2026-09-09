@@ -1,6 +1,6 @@
 # HMASD experiment tracking
 
-**Current owner boundary: RESUMED — 2026-09-09**, OWNER_DIRECT “继续推进科研流程”. Resume from [knowledge/review pause handoff](handoffs/2026-09-09-foundations-review-pause.md). Original assembly CM is completing the ten-direction review index and zero-new-exposure record; original RCLE DM is finishing the failed B03 intake from retained bytes. Root authors and dispatches the pending special Pro validity review through dedicated Transport once its fixed inputs are ready. No fresh experiment/retry allocation is made by this restart; historical running handles remain terminal.
+**Current owner boundary: RESUMED — 2026-09-09**, OWNER_DIRECT “继续推进科研流程”. Original assembly CM completed the ten-direction evidence mapping; RCLE source/E0/intake are integrated through eab10bfc8 and its remote closeout is accepted. Root dispatched special validity review2026-09-09-foundations-scientific-validity-review-01 once through dedicated Transport: [TASK](pro_packets/20260909_foundations_special_review/TASK.md) at c18cbc6ae64603f2a70e2474c9ddf9d13c8aaedb, HANDOFF344572f80f3f2aac0648d700b37ff26e9fe25db7, Issue16/codex/portfolio. App dispatch accepted; provider Send/generation unconfirmed. Transport owns observation and receipt; Root owns scientific intake. No fresh experiment/retry allocation is made by this restart; historical running handles remain terminal. The [pause handoff](handoffs/2026-09-09-foundations-review-pause.md) is retained as its historical boundary.
 
 ## Owner-directed Root Pro recovery; FOLR accepted generation
 
