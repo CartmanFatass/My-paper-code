@@ -1,0 +1,77 @@
+{
+  "id": "20260909-acvc-007",
+  "created": "2026-09-09T14:41:21-07:00",
+  "direction": "acvc",
+  "tier": "direction",
+  "kind": "decision",
+  "title": "ACVC：具名零训练回撤复用探索的规范例外",
+  "context": "两份旧DENSE模型均可用。候选用384次新评估比较C/F/dwell，零新训练；现行B条款要求非零学习更新，不能静默按A或C执行。原节点将裁决具名例外及准确应用文字。当前只有可行性与未冻结卡，未运行。",
+  "options": [
+    {
+      "key": "permit",
+      "label": "仅允许具名E01探索例外",
+      "consequence": "完整节点方案形成并核对后，按准确文字应用具名例外；普通B规则不变，后续运行仍须实际分配。"
+    },
+    {
+      "key": "decline",
+      "label": "指出具体冲突并不执行候选",
+      "consequence": "保留未执行卡与证据，返回Root处理真实范围冲突；不添加象征训练、不改称A/C、不重启学习门。"
+    }
+  ],
+  "recommended": "permit",
+  "auto_applied": null,
+  "dm_reason": "现成模型的固定规则复用问题可由小规模直接评估回答；新训练会改变已选问题。推荐尚未作为节点决定应用。",
+  "evidence": [
+    "docs/research/candidates/acvc/ACVC_FIXED_RETRACE_REUSE_E01_PREPARATION_INTAKE_20260909.md",
+    "docs/research/candidates/acvc/ACVC_FIXED_RETRACE_REUSE_E01_SCIENCE_CARD_20260909.md",
+    "docs/research/candidates/acvc/ACVC_FIXED_RETRACE_REUSE_E01_FEASIBILITY_20260909.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-09.md#L153",
+  "brief": "docs/research/portfolio/owner/briefs/acvc/2026-09-09_ACVC_FIXED_RETRACE_REUSE_E01_PREPARATION.md",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": {
+    "question": "是否允许只对具名E01作B类例外：复用两份已训练模型、零新训练，比较固定回撤与总执行和同条件悬停？当前仅提交原节点裁决。",
+    "changes_if_approved": [
+      {
+        "target": "MARL_EMPIRICAL_EVIDENCE_SPEC §§5.2/11.4 与 ACVC_FIXED_RETRACE_REUSE_E01 卡",
+        "from": "B算法实验要求真实学习器及非零新更新；零训练候选尚未冻结。",
+        "to": "仅对此具名固定模型复用探索明确例外及精确文字；一般B要求不变，后续执行仍需实际分配。"
+      }
+    ],
+    "if_refused": "保留未执行候选及具体规范冲突，返回Root处理必要的权限范围；不偷换成A/C，不添加象征性训练，不重启学习门。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/acvc/ACVC_FIXED_RETRACE_REUSE_E01_FEASIBILITY_20260909.md",
+        "quote": "Both named retained DENSE checkpoints are available and byte-identical to their accepted collection records.",
+        "why": "所需旧模型可直接复用；新训练会改变已选的固定资产问题。"
+      },
+      {
+        "path": "docs/research/candidates/acvc/ACVC_FIXED_RETRACE_REUSE_E01_PREPARATION_INTAKE_20260909.md",
+        "quote": "It directly addresses the cheaper movement-suppression alternative without reintroducing T/G or a causal/search prerequisite.",
+        "why": "悬停对照能用小规模直接评估改变下一次复用投入选择。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+        "quote": "A B run MUST exercise the real environment, policy, learner, trainer, and evaluator and report nonzero transition, update, and evaluation counts when it is called an algorithm experiment.",
+        "why": "现行文字确实冲突，不能本地默许；需原节点形成具名且范围明确的方案。"
+      }
+    ],
+    "uncertainty": [
+      "两份底座都是旧训练，8201曾依据结果选出，不能声称新训练总体或稳定优势。",
+      "尚无dwell结果，其耗时仅借用F作估算；回撤增益可能只是少移动。",
+      "完整答案还须说明具名家族范围及条款应用文字；不涉及全局规范改革或Portfolio处置。"
+    ],
+    "cost": {
+      "compute": "本次新增科学执行为0。候选384回合、98304步、491520次基座智能体前向；过程估算91.17秒，加30秒检查额度后121.17秒，提议完整上限180秒，均未分配。",
+      "owner_time": "可异步查看；已有具名咨询准备授权，不等逐项回复。",
+      "reversibility": "reversible",
+      "waits_on_this": "只有候选的规范应用、冻结与后续科学执行；独立方向继续。"
+    },
+    "verdict_text": "Recommend an explicit exception limited to ACVC_FIXED_RETRACE_REUSE_E01, with exact card/spec application wording, preserving zero new fits and all prior selection/exposure. This recommendation is pending the original Convergence node; no local exception or invocation is applied.",
+    "source": "docs/research/candidates/acvc/ACVC_FIXED_RETRACE_REUSE_E01_PREPARATION_INTAKE_20260909.md"
+  },
+  "starred": true
+}
