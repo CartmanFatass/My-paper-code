@@ -100,3 +100,10 @@ Root resumes that original CM on each terminal event for remaining collection/ne
 allocated arm. Adoption is not scientific acceptance. Source/card integration, terminal
 collections, scientific intakes and scoped remote closeouts remain required as each
 batch progresses.
+
+
+## RCLE selected recovery now explicitly allocated
+
+After full card/intake/feasibility reading, Root accepted missing-only selection9b451579a (main80b6b9671) and Monitor correction7415f9a2d (main6586a594a). Root independently matched the1367051-byte historical W1summary SHAa678a5d115a0c4c9d176423ab291f2daa4629bfb13e4f2286e7b68dacfe7acdf. On this boundary Root actually resumed originalCM for the complete narrow engineering/verification/execution/collection batch under the owner command and standing object delegation. This is a new explicit allowance: one update0 W100600s plus one missing reference30s, stop on any failure,750s complete incremental charged work including at most30s focused synthetic check; no retry, replacement, new seed or extra panel. Source is published after conforming focused acceptance/review before remote execution. Actual historical-W1 inputs and scientific/RNG/native semantics remain frozen; any necessary shared-semantic defect returns to DM/Root before affected work. Completed-block rows/fatal handler improve retained failure evidence and do not certify a crash cure.
+
+New work16896episodes/1081344ticks/200backward calls is distinct from known old16896/1081344/200 plus the unchanged unknown failed prefix. The old160s CM plus.5983968s DM window remains; the named old+new-cap910.5983968s is not a full-history bill. Direct Monitor registration, actual adoption and Root terminal resumption govern either separate or explicitly documented fixed-sequence shared handles. OriginalDM intakes the complete result; Root accepts/integrates and triggers scoped closeout. Mainaudit154 maps the branch selection131; the new explicit allocation is the following main audit row.

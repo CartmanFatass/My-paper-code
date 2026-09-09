@@ -81,5 +81,15 @@
     "verdict_text": "Owner-delegated decision (unattended, 2026-09-03 instruction): (A).",
     "source": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B03_RECOVERY_SELECTION_INTAKE_20260909.md"
   },
-  "starred": false
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-09T21:51:21+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/decisions/2026-09-09-synthesis-execution.md",
+      "record": "docs/research/portfolio/root-log/2026-09-09.md",
+      "state": "applied",
+      "summary": "Root验收card/intake并集成80b6b9671及Monitor更正6586a594a，独立匹配W1输入哈希；现明确分配原CM有限missing-only完整批次，尚未观察运行结果。分支audit131→main154，新增分配main156。"
+    }
+  ]
 }
