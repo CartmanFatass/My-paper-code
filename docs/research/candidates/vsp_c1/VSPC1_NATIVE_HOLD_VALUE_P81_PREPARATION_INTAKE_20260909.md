@@ -118,3 +118,51 @@ model, environment, scientific test, profile or new empirical observation.
 The [Issue snapshot](pro_packets/20260909_native_hold_value_post_b13_convergence/ISSUE_SNAPSHOT.json)
 preserves the prior P79 delivery comment used here and the current OPEN Issue5
 identity. Its older title and other discussion do not supply current authority.
+
+## 6. Fixed publication and ready return
+
+The input documents were committed/pushed at
+**`e23e7e47ae8994aa13bc6af8a32fd12d6462bc27`**. The new request is
+`2026-09-09-vspc1-native-hold-value-post-b13-convergence-01`, caller_role `em`,
+workflow_node `em_convergence`, binding `em:vsp_c1:convergence` with reuse required.
+TASK was committed/pushed at **`086637a8b2250f301b0dde9d0a3ba40b5f7cbc49`**, then
+bound with the standard renderer to that exact publication commit:
+
+[Fixed TASK](https://github.com/CartmanFatass/My-paper-code/blob/086637a8b2250f301b0dde9d0a3ba40b5f7cbc49/docs/research/candidates/vsp_c1/pro_packets/20260909_native_hold_value_post_b13_convergence/TASK.md).
+
+GitHub API readback matched all19571 committed TASK bytes, SHA256
+`974a207969f2ab9db7a81f098c673df09490c171486db679df47da30d59e9e15`.
+All12 referenced files exist at the fixed input commit. The OPEN Issue and existing
+delivery branch are verified. The bound [HANDOFF](pro_packets/20260909_native_hold_value_post_b13_convergence/HANDOFF.json)
+is `READY_TO_DISPATCH`, `github_delivery`/paste, with caller Send disabled.
+This is a preparation state, not an accepted Transport dispatch or Pro Send.
+
+Actual routing is source/native author `01a081d4-89c6-7821-97d8-209ac47172f1`
+(`/root/dm_vspc1_p49_value_question`), parent/receipt Root
+`01a07249-b095-7821-8ce2-e9c32ba85267`, operator singleton Transport
+`01a07e52-f085-76a0-886a-4127f490421f`. Provider requirement is6 Pro; the existing
+node conversation is reused, with no replacement requested. App messages carry no
+model/thinking overrides. Root receives the final full HANDOFF commit and fixed TASK
+link; it owns the single dispatch and forwards the full immutable response for DM intake.
+
+Delivery base remains the fixed input SHA on `codex/direction-vsp_c1`, Issue5. Pro may
+add only `docs/research/candidates/vsp_c1/pro_packets/20260909_native_hold_value_post_b13_convergence/archive/RESPONSE.md`
+on the current descendant HEAD and its delivery-link comment, retaining partial/uncertain
+delivery. No prior TASK, HANDOFF, archive, result or item006 was changed.
+
+During preparation the renderer refused an attempted wording rerender in its existing
+unpublished output directory: `use a fresh output directory; preserve existing packet and send state`.
+No publication or external Send occurred in that rejected operation. The original
+REQUEST was restored to match the original rendered TASK, whose question/deliverable
+already constrain the package scope, and that original packet was published and bound.
+No overwrite bypass, alternative request or accepted-input rewrite followed.
+
+[Audit row44](../../portfolio/audit/2026-09-09.md#L44) records this ready return. No
+scientific invocation or family decision was taken; the direction is recoverable at
+this clean boundary. Root's P80 integration/reclamation responsibilities remain separate.
+
+Final focused checks confirm the fixed12 references, ready paste handoff, conversation
+reuse, actual three-party route, zero new exposure and unallocated future master. JSON,
+local links and whitespace checks pass; prior P79 packet, item006 and DIRECTION bytes
+remain unchanged. Main/branch review queries are again `[]`, with no vsp_c1 audit-owner
+override. All prepared changes are committed/pushed before the single ready return.
