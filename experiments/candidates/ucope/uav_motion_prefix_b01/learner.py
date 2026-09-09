@@ -28,7 +28,8 @@ def clipped_policy_loss(new_logp, old_logp, advantage, velocity_mask=None):
 @torch.no_grad()
 def collect_episode(env, actor, critic, horizon, reset_seed, velocity_rng, duration_rng,
                     metadata, check, counts, emit_episode, emit_diagnostic, limits,
-                    real=False, diagnostics=False, ratio_grouping="joint", value_moments=None, renewal=False):
+                    real=False, diagnostics=False, ratio_grouping="joint", value_moments=None, renewal=False,
+                    duration_support=(1, 4)):
     """Counts survive an exception; only a complete episode emits a scored row."""
     check()
     obs, info = env.reset(seed=reset_seed)
@@ -44,6 +45,9 @@ def collect_episode(env, actor, critic, horizon, reset_seed, velocity_rng, durat
     prefix_position = first_position.copy()
     prefix_path = np.zeros(5, dtype=np.float64)
     decisions = {"velocity_decisions": 0, "duration_decisions": 0, "d4": 0}
+    short = duration_support == (1, 2)
+    if short:
+        decisions["d2"] = 0
     if renewal:
         decisions.update(horizon_censored_holds=0, suppressed_decisions=0)
     for t in range(horizon):
@@ -56,6 +60,7 @@ def collect_episode(env, actor, critic, horizon, reset_seed, velocity_rng, durat
         if renewal:
             duration_mask = active & (actor is not None and actor.duration is not None)
         h0 = hidden[0].clone()
+        selected_steps = np.ones(5, dtype=np.int64)
         if actor is None:
             sent = np.zeros((5, 3), dtype=np.float32)
             u, duration = torch.zeros(5, 3), torch.zeros(5, dtype=torch.long)
@@ -74,8 +79,8 @@ def collect_episode(env, actor, critic, horizon, reset_seed, velocity_rng, durat
             sample_options = {"duration_mask": duration_mask} if renewal else {}
             u, duration = sample(actor, mean, recurrent, active, t == 0,
                                  velocity_rng, duration_rng, **sample_options)
-            sent, active = hold.decide(t, u.tanh().numpy(),
-                                       np.where(duration.numpy() == 1, 4, 1))
+            selected_steps = np.where(duration.numpy() == 1, duration_support[1], duration_support[0])
+            sent, active = hold.decide(t, u.tanh().numpy(), selected_steps)
             logp, _ = joint_terms(actor, mean, recurrent, u, duration,
                                   torch.from_numpy(active), torch.from_numpy(duration_mask),
                                   ratio_grouping)
@@ -87,7 +92,7 @@ def collect_episode(env, actor, critic, horizon, reset_seed, velocity_rng, durat
                 frame = dict(metadata, reset_seed=reset_seed, time=t, agent=AGENTS[i],
                              actor_input=x[i].copy().tolist(), remaining_hold=int(remaining_before[i]),
                              actual_decision=bool(active[i]), sent_velocity=sent[i].copy().tolist(),
-                             chosen_duration=(int(1 + 3 * duration[i]) if duration_mask[i] else None))
+                             chosen_duration=(int(selected_steps[i]) if duration_mask[i] else None))
                 try:
                     frame.update(local_indices(env, i))
                 except Exception as error:
@@ -97,9 +102,12 @@ def collect_episode(env, actor, critic, horizon, reset_seed, velocity_rng, durat
                     frame["diagnostic_error"] = message
                 frames.append(frame)
         # These are actual sampling/observation events even if the next call fails.
-        for key, number in (("velocity_decisions", int(active.sum())),
-                            ("duration_decisions", int(duration_mask.sum())),
-                            ("d4", int(((duration.numpy() == 1) & duration_mask).sum()))):
+        events = (("velocity_decisions", int(active.sum())),
+                  ("duration_decisions", int(duration_mask.sum())),
+                  ("d4", int(((selected_steps == 4) & duration_mask).sum())))
+        if short:
+            events += (("d2", int(((selected_steps == 2) & duration_mask).sum())),)
+        for key, number in events:
             decisions[key] += number
             counts[key] += number
             if renewal:
