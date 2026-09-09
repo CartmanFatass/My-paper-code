@@ -5,6 +5,13 @@ integration. DM owns direction science; CM owns technical delivery. Independent 
 Pro browser work. Root uses the owner's selected model/effort. Scientific authority and budgets
 remain in AGENTS.md; the current owner pause applies before any research work.
 
+OWNER_DIRECT 2026-09-09: after unstable Pro delivery defeats Transport, Root personally
+continues the same request using the transport skill's caller-direct lifecycle. Existing
+acceptance and delivery are reconciled before another Send; confirmed generations are
+observed through archival and normal scientific intake. Preserve failed attempts and the
+original request. This is standing recovery authority, not a new scientific allocation;
+an exhausted Transport attempt does not end Root's recovery work.
+
 ## Where each rule is maintained
 
 | Rule | Maintained source |
