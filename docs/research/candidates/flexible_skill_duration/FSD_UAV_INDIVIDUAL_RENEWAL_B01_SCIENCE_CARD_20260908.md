@@ -303,3 +303,35 @@ Object options: (a) execute the newly allocated exact pair; (b) retain source-on
 readiness; (c) add rescue/retry or other scientific work. Recommendation: (a).
 **Owner-delegated decision (unattended, 2026-09-03 instruction): (a)**, carrying
 out Root's explicit P70 allocation within the already accepted B question.
+
+## 10. P70 complete pair intake — 2026-09-08
+
+Both originally allocated arms completed at accepted source
+`ca36e2f941d6c4d4e996a9bd919378af44ea0e93`. CM collection at
+`5c0ba40754119cc1ba6a0f953c64ee9fb967ff81` is accepted by the
+[DM intake](FSD_UAV_INDIVIDUAL_RENEWAL_B01_P70_INTAKE_20260908.md).
+This later boundary supersedes the earlier preparation/unlaunched state without
+rewriting any original scientific field or result branch.
+
+Native I−D0 is **−.049670563167111874**, sample SD.13442151634285882,
+conditional SE.023762591435853447 for the32 paired endpoint episodes of one
+training pair. The original §5 `opposite_sign` branch applies: this weakens the
+exact .25 configuration at five updates, without broader closure. I's coverage
+gain+.02418375 remains alongside lower quality, greater altitude penalty and
+net native loss. The DM's prospective inclusive±.01 forecast missed; owner
+prediction not taken (unattended).
+
+All prescribed training/evaluation completed:80000 stored training transitions,
+160 training episodes/10 update stages,32000 evaluation steps/64 endpoints,
+4 model constructions/2 training starts/0 checkpoint loads. Individual gap
+causes are54390 for I during training and0 for both deterministic endpoints;
+empty endpoint segment buffers do not measure skill durations. The [result](FSD_UAV_INDIVIDUAL_RENEWAL_B01_P70_RESULT_EVIDENCE_20260908.md)
+and machine analysis retain all primary, component, learner and exposure facts.
+
+D0/I complete walls471.89/1221.49s, summed1693.38s, fit the unchanged full caps;
+study critical path1817s and aggregate CPU6722.27s remain distinct. Both fresh
+admissions passed; exactly one accepted handle per arm, both terminal exit0.
+No live run, automatic next seed, threshold change, extra evaluation or successor
+remains allocated. B has no consumption state. Recast increment0; prior corridor
+stops and Portfolio lifecycle/priority remain intact. Root receives actual UAV
+execution evidence against the P67 decision and this card for its own tracking.
