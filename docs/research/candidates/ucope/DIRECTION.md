@@ -198,6 +198,12 @@ invocation, mechanism change, C promotion or Portfolio disposition is selected.
 See [P71 E0 evidence](UCOPE_UAV_RENEWAL_COMMITMENT_B02_P71_RESULT_EVIDENCE_20260908.md)
 and [P71 all-outcome intake](UCOPE_UAV_RENEWAL_COMMITMENT_B02_P71_INTAKE_20260908.md).
 
+P72 now selects one third independent same-package pair,7501, under the
+[renewal B03 card](UCOPE_UAV_RENEWAL_COMMITMENT_B03_SCIENCE_CARD_20260908.md),
+to observe variation while preserving the two prior outcomes separately.
+This object-tier follow-up selects no mechanism amendment or stronger claim;
+the new card's primary uses only7501 and every sign ends its allocation.
+
 ## Previous empirical position — 2026-09-08 B04 (preserved)
 
 The command-conditioned opening policy and ordinary feedback learner both
