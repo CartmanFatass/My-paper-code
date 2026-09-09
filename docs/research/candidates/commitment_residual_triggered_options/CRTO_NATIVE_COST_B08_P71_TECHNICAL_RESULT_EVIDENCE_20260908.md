@@ -1,6 +1,6 @@
 # CRTO B08 P71 technical execution evidence
 
-Status: **STAGED / NOT SUBMITTED**. Root allocated one real invocation at
+Status: **ACCEPTED / RUNNING**. Root allocated one real invocation at
 `9c2153b55b81fc6ab47f216014f62b14b581e476`. The assigned CM is the sole observer and collector;
 DM owns scientific intake and Root receives milestones without parallel polling.
 
@@ -63,6 +63,19 @@ all required scientific output publication and shutdown. Final accounting reduct
 metadata performed after termination, outside the scientific invocation.
 
 The exact command places fresh actual-node `admit-memory` immediately before the runner with
-`&&`; physical and effective available memory must both be >=4GiB. No admission has yet been run.
+`&&`; physical and effective available memory must both be >=4GiB. The accepted command's admission passed at `2026-09-09T05:28:32.086188Z`: physical and effective
+available bytes both14403616768, measured via `/proc/meminfo`, against4294967296 bytes required.
 One accepted submission maximum. An unexpected existing handle/input, admission/integrity/cap
 conflict is returned without a replacement invocation. Partial output remains in place.
+
+## Accepted handle milestone
+
+One supervisor submission was accepted at `2026-09-09T05:28:32Z`, with returncode0 and no stderr.
+`agent-task` reported tmux `agent_crto-b08-p70-seed0-20260909`; log path
+`/home/wu/.agent-tasks/crto-b08-p70-seed0-20260909/task.log`.
+First status: running, PID3024150, uptime18s, tmux active. Admission passed as recorded above.
+The exact command and raw local receipts are preserved in the named stage/collection root:
+`launch_command.txt`, `launch_receipt.json`, `staging_verification.json`.
+CM retains observation through terminal facts and collection. Root/DM were notified once of
+acceptance; no handover or second launch is authorized by that message. Primary result and
+complete time remain unmeasured at this milestone.
