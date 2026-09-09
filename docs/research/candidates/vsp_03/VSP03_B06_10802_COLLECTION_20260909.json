@@ -1,0 +1,660 @@
+{
+  "summary": {
+    "object": "VSP03_B06",
+    "seed": 10802,
+    "launch_sha": "edb74aaf5292600480763403cd30cbd733dd1583",
+    "node": "wsl_4070",
+    "command": "bash -c '/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out \"$1\" && /home/wu/.venvs/hmasd/bin/python scripts/run_vsp03_b06.py --seed \"$2\" --out \"$3\" --node wsl_4070 --started-monotonic \"$VSP03_B04_STARTED\"' bash /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b06_10802_20260909_admission.json 10802 /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b06_10802_20260909",
+    "status": "complete",
+    "arms": {
+      "G": {
+        "initial": {
+          "actor": {
+            "parameters": 1570,
+            "initial_l2": 4.654208183288574,
+            "initial_rms": 0.11746162921190262,
+            "current_l2": 4.654208183288574,
+            "displacement_l2": 0.0,
+            "displacement_over_initial_l2": 0.0
+          },
+          "critic": {
+            "parameters": 513,
+            "initial_l2": 3.4427456855773926,
+            "initial_rms": 0.15200093388557434,
+            "current_l2": 3.4427456855773926,
+            "displacement_l2": 0.0,
+            "displacement_over_initial_l2": 0.0
+          },
+          "total": {
+            "parameters": 2083,
+            "initial_l2": 5.789141654968262,
+            "initial_rms": 0.1268438845872879,
+            "current_l2": 5.789141654968262,
+            "displacement_l2": 0.0,
+            "displacement_over_initial_l2": 0.0
+          }
+        },
+        "training_episodes": 65536,
+        "training_team_ticks": 2621440,
+        "training_target_transitions": 5242880,
+        "training_valid_rows": 396954,
+        "gradient_rows": 396954,
+        "optimizer_steps": 512,
+        "backward_calls": 512,
+        "evaluation_episodes": 8192,
+        "first": {
+          "actor": {
+            "parameters": 1570,
+            "initial_l2": 4.654208183288574,
+            "initial_rms": 0.11746162921190262,
+            "current_l2": 4.65421199798584,
+            "displacement_l2": 0.005830937065184116,
+            "displacement_over_initial_l2": 0.0012528311660231941
+          },
+          "critic": {
+            "parameters": 513,
+            "initial_l2": 3.4427456855773926,
+            "initial_rms": 0.15200093388557434,
+            "current_l2": 3.442845106124878,
+            "displacement_l2": 0.022649461403489113,
+            "displacement_over_initial_l2": 0.006578894717194456
+          },
+          "total": {
+            "parameters": 2083,
+            "initial_l2": 5.789141654968262,
+            "initial_rms": 0.1268438845872879,
+            "current_l2": 5.789203643798828,
+            "displacement_l2": 0.023387989029288292,
+            "displacement_over_initial_l2": 0.004039975254227306
+          }
+        },
+        "128": {
+          "actor": {
+            "parameters": 1570,
+            "initial_l2": 4.654208183288574,
+            "initial_rms": 0.11746162921190262,
+            "current_l2": 5.720558166503906,
+            "displacement_l2": 2.908205032348633,
+            "displacement_over_initial_l2": 0.624854952296902
+          },
+          "critic": {
+            "parameters": 513,
+            "initial_l2": 3.4427456855773926,
+            "initial_rms": 0.15200093388557434,
+            "current_l2": 3.4697980880737305,
+            "displacement_l2": 0.5634108185768127,
+            "displacement_over_initial_l2": 0.16365159382439878
+          },
+          "total": {
+            "parameters": 2083,
+            "initial_l2": 5.789141654968262,
+            "initial_rms": 0.1268438845872879,
+            "current_l2": 6.690611362457275,
+            "displacement_l2": 2.96227765083313,
+            "displacement_over_initial_l2": 0.5116954856841157
+          }
+        },
+        "512": {
+          "actor": {
+            "parameters": 1570,
+            "initial_l2": 4.654208183288574,
+            "initial_rms": 0.11746162921190262,
+            "current_l2": 7.462367057800293,
+            "displacement_l2": 5.414095401763916,
+            "displacement_over_initial_l2": 1.1632688501566812
+          },
+          "critic": {
+            "parameters": 513,
+            "initial_l2": 3.4427456855773926,
+            "initial_rms": 0.15200093388557434,
+            "current_l2": 3.4793598651885986,
+            "displacement_l2": 0.6722039580345154,
+            "displacement_over_initial_l2": 0.1952522839112289
+          },
+          "total": {
+            "parameters": 2083,
+            "initial_l2": 5.789141654968262,
+            "initial_rms": 0.1268438845872879,
+            "current_l2": 8.233643531799316,
+            "displacement_l2": 5.455665588378906,
+            "displacement_over_initial_l2": 0.9423962848960233
+          }
+        },
+        "arm_wall_s": 7.354175776999909
+      }
+    },
+    "checkpoints": {
+      "128": {
+        "update": 128,
+        "status": "complete",
+        "absolute": {
+          "G_greedy": {
+            "episodes": 1024,
+            "return": 0.3714111328125,
+            "fixed_clocks": 17.0,
+            "pending_clocks": 10.37890625,
+            "eligible_decisions": 8.412109375,
+            "blocked_pending": 1.966796875,
+            "blocked_final_clocks": 0.04296875,
+            "success_per_team": 1.01953125,
+            "attempt_per_team": 1.833984375,
+            "failed_attempt_per_team": 0.814453125,
+            "non_submission_per_team": 0.166015625,
+            "waiting_ticks_per_team": 37.001953125
+          },
+          "G_stochastic": {
+            "episodes": 1024,
+            "return": 0.30843261718750004,
+            "fixed_clocks": 17.0,
+            "pending_clocks": 7.904296875,
+            "eligible_decisions": 5.9111328125,
+            "blocked_pending": 1.9931640625,
+            "blocked_final_clocks": 0.0078125,
+            "success_per_team": 0.8447265625,
+            "attempt_per_team": 1.9384765625,
+            "failed_attempt_per_team": 1.09375,
+            "non_submission_per_team": 0.0615234375,
+            "waiting_ticks_per_team": 26.1875
+          },
+          "R0": {
+            "episodes": 1024,
+            "return": 0.3603369140625,
+            "fixed_clocks": 17.0,
+            "pending_clocks": 8.931640625,
+            "eligible_decisions": 6.9482421875,
+            "blocked_pending": 1.9833984375,
+            "blocked_final_clocks": 0.017578125,
+            "success_per_team": 0.96875,
+            "attempt_per_team": 1.8203125,
+            "failed_attempt_per_team": 0.8515625,
+            "non_submission_per_team": 0.1796875,
+            "waiting_ticks_per_team": 31.412109375
+          },
+          "R": {
+            "episodes": 1024,
+            "return": 0.3616552734375,
+            "fixed_clocks": 17.0,
+            "pending_clocks": 8.947265625,
+            "eligible_decisions": 6.9638671875,
+            "blocked_pending": 1.9833984375,
+            "blocked_final_clocks": 0.017578125,
+            "success_per_team": 0.9716796875,
+            "attempt_per_team": 1.8212890625,
+            "failed_attempt_per_team": 0.849609375,
+            "non_submission_per_team": 0.1787109375,
+            "waiting_ticks_per_team": 31.4609375
+          }
+        },
+        "weights_readback": true,
+        "comparisons": {
+          "G_greedy-R0": {
+            "mean": 0.011074218749999993,
+            "conditional_world_sd": 0.23665902888431753,
+            "conditional_world_se": 0.007395594652634923,
+            "worlds": 1024
+          },
+          "G_greedy-R": {
+            "mean": 0.009755859374999993,
+            "conditional_world_sd": 0.2363764807047135,
+            "conditional_world_se": 0.007386765022022297,
+            "worlds": 1024
+          },
+          "G_stochastic-R0": {
+            "mean": -0.051904296875,
+            "conditional_world_sd": 0.3321281781283192,
+            "conditional_world_se": 0.010379005566509975,
+            "worlds": 1024
+          },
+          "G_stochastic-R": {
+            "mean": -0.05322265625,
+            "conditional_world_sd": 0.33287730080963157,
+            "conditional_world_se": 0.010402415650300987,
+            "worlds": 1024
+          },
+          "G_stochastic-G_greedy": {
+            "mean": -0.062978515625,
+            "conditional_world_sd": 0.34017944998044314,
+            "conditional_world_se": 0.010630607811888848,
+            "worlds": 1024
+          }
+        }
+      },
+      "512": {
+        "update": 512,
+        "status": "complete",
+        "absolute": {
+          "G_greedy": {
+            "episodes": 1024,
+            "return": 0.37484375000000003,
+            "fixed_clocks": 17.0,
+            "pending_clocks": 8.484375,
+            "eligible_decisions": 6.498046875,
+            "blocked_pending": 1.986328125,
+            "blocked_final_clocks": 0.015625,
+            "success_per_team": 0.9892578125,
+            "attempt_per_team": 1.962890625,
+            "failed_attempt_per_team": 0.9736328125,
+            "non_submission_per_team": 0.037109375,
+            "waiting_ticks_per_team": 28.28515625
+          },
+          "G_stochastic": {
+            "episodes": 1024,
+            "return": 0.368330078125,
+            "fixed_clocks": 17.0,
+            "pending_clocks": 8.4521484375,
+            "eligible_decisions": 6.458984375,
+            "blocked_pending": 1.9931640625,
+            "blocked_final_clocks": 0.0146484375,
+            "success_per_team": 0.9755859375,
+            "attempt_per_team": 1.970703125,
+            "failed_attempt_per_team": 0.9951171875,
+            "non_submission_per_team": 0.029296875,
+            "waiting_ticks_per_team": 28.078125
+          },
+          "R0": {
+            "episodes": 1024,
+            "return": 0.3603369140625,
+            "fixed_clocks": 17.0,
+            "pending_clocks": 8.931640625,
+            "eligible_decisions": 6.9482421875,
+            "blocked_pending": 1.9833984375,
+            "blocked_final_clocks": 0.017578125,
+            "success_per_team": 0.96875,
+            "attempt_per_team": 1.8203125,
+            "failed_attempt_per_team": 0.8515625,
+            "non_submission_per_team": 0.1796875,
+            "waiting_ticks_per_team": 31.412109375
+          },
+          "R": {
+            "episodes": 1024,
+            "return": 0.3616552734375,
+            "fixed_clocks": 17.0,
+            "pending_clocks": 8.947265625,
+            "eligible_decisions": 6.9638671875,
+            "blocked_pending": 1.9833984375,
+            "blocked_final_clocks": 0.017578125,
+            "success_per_team": 0.9716796875,
+            "attempt_per_team": 1.8212890625,
+            "failed_attempt_per_team": 0.849609375,
+            "non_submission_per_team": 0.1787109375,
+            "waiting_ticks_per_team": 31.4609375
+          }
+        },
+        "weights_readback": true,
+        "comparisons": {
+          "G_greedy-R0": {
+            "mean": 0.014506835937500002,
+            "conditional_world_sd": 0.1283317500714123,
+            "conditional_world_se": 0.004010367189731634,
+            "worlds": 1024
+          },
+          "G_greedy-R": {
+            "mean": 0.013188476562500002,
+            "conditional_world_sd": 0.1310871328053203,
+            "conditional_world_se": 0.0040964729001662595,
+            "worlds": 1024
+          },
+          "G_stochastic-R0": {
+            "mean": 0.007993164062500002,
+            "conditional_world_sd": 0.15696458109592806,
+            "conditional_world_se": 0.004905143159247752,
+            "worlds": 1024
+          },
+          "G_stochastic-R": {
+            "mean": 0.006674804687500003,
+            "conditional_world_sd": 0.15917124903700705,
+            "conditional_world_se": 0.00497410153240647,
+            "worlds": 1024
+          },
+          "G_stochastic-G_greedy": {
+            "mean": -0.006513671875,
+            "conditional_world_sd": 0.14209748353704182,
+            "conditional_world_se": 0.004440546360532557,
+            "worlds": 1024
+          }
+        }
+      }
+    },
+    "actual_rollouts": {
+      "episodes_started": 73728,
+      "episodes_completed": 73728,
+      "team_ticks": 2949120,
+      "target_transitions": 5898240,
+      "decision_rows": 453381,
+      "rollout_policy_forwards": 8704
+    },
+    "model_constructions": 1,
+    "optimizer_steps": 512,
+    "device": "cpu",
+    "dtype": "float32",
+    "compute_threads": 1,
+    "rng": {
+      "worlds": "PCG64 SeedSequence([302,seed,split,episode,target]);40 uniforms",
+      "phase": "[302,seed,split,episode,2];one integers(0,2)",
+      "actions": "[303,seed,split,mode,arm,episode];17 calendar-position uniforms",
+      "splits": "train100/evaluation200",
+      "modes": "train0/stochastic-evaluation1",
+      "arms": "G1",
+      "initialization": 50802
+    },
+    "cost_law": "admission+imports+G_init+512*batch128x40x2+8*eval1024x40x2+weights+publication/readback/exit",
+    "independent_training_instances": 1,
+    "validation_models": 0,
+    "validation_episodes": 0,
+    "validation_optimizer_steps": 0,
+    "aggregate_cpu_s": null,
+    "primary": {
+      "mean": 0.014506835937500002,
+      "conditional_world_sd": 0.1283317500714123,
+      "conditional_world_se": 0.004010367189731634,
+      "worlds": 1024
+    },
+    "primary_name": "update512:G_greedy-R0",
+    "budget_change": {
+      "mean": 0.0034326171875000097,
+      "conditional_world_sd": 0.24895354662646277,
+      "conditional_world_se": 0.0077797983320769615,
+      "worlds": 1024
+    },
+    "elapsed_through_output_start_s": 8.325276351999491,
+    "peak_rss_bytes": 493867008
+  },
+  "admission": {
+    "assessed_at": "2026-09-09T22:51:18.874779Z",
+    "available_physical_bytes": 15194279936,
+    "captured_at": "2026-09-09T22:51:18.874452Z",
+    "cgroup_headroom_bytes": null,
+    "cgroup_memory_current_bytes": null,
+    "cgroup_memory_max_bytes": null,
+    "effective_available_bytes": 15194279936,
+    "effective_floor_pass": true,
+    "failure_reasons": [],
+    "measurement_source": "/proc/meminfo",
+    "minimum_available_bytes": 4294967296,
+    "passed": true,
+    "physical_floor_pass": true,
+    "schema_version": 1
+  },
+  "terminal": {
+    "object": "VSP03_B04",
+    "unit": "vsp03-b06-10802-20260909.service",
+    "manager_properties": {
+      "Type": "oneshot",
+      "TimeoutStartUSec": "59s",
+      "TimeoutStartFailureMode": "kill",
+      "KillMode": "control-group",
+      "InactiveExitTimestampMonotonic": "454881844393"
+    },
+    "started_monotonic": 454881.844393,
+    "cap_s": 60.0,
+    "shutdown_publication_reserve_s": 10.0,
+    "task_exit_code": 0,
+    "supervisor_exit_code": 0,
+    "payload": {
+      "object": "VSP03_B04",
+      "command": [
+        "bash",
+        "-c",
+        "/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out \"$1\" && /home/wu/.venvs/hmasd/bin/python scripts/run_vsp03_b06.py --seed \"$2\" --out \"$3\" --node wsl_4070 --started-monotonic \"$VSP03_B04_STARTED\"",
+        "bash",
+        "/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b06_10802_20260909_admission.json",
+        "10802",
+        "/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b06_10802_20260909"
+      ],
+      "cwd": "/home/wu/hmasd-worktrees/vsp03-b06-edb74aaf5292600480763403cd30cbd733dd1583",
+      "started_unix_s": null,
+      "started_monotonic": 454881.844393,
+      "observed_unix_s": 1788994278.8491657,
+      "observed_monotonic": 454881.903575244,
+      "deadline_monotonic": 454941.844393,
+      "cap_s": 60.0,
+      "shutdown_publication_reserve_s": 10.0,
+      "root_returncode": 0,
+      "task_exit_code": 0,
+      "timed_out": false,
+      "error": null,
+      "descendants_killed": [],
+      "descendants_reaped": [],
+      "descendants_remaining": [],
+      "all_descendants_terminated": true,
+      "elapsed_before_terminal_publication_s": 8.699274374986999
+    },
+    "error": null,
+    "descendants_killed": [
+      3076798,
+      3076798,
+      3076799,
+      3076848
+    ],
+    "descendants_reaped": [
+      {
+        "pid": 3076798,
+        "wait_status": 9
+      },
+      {
+        "pid": 3076799,
+        "wait_status": 1
+      },
+      {
+        "pid": 3076848,
+        "wait_status": 1
+      }
+    ],
+    "descendants_remaining": [],
+    "all_descendants_terminated": true,
+    "elapsed_before_terminal_publication_s": 8.714529859018512
+  },
+  "journal": [
+    {
+      "TID": "638",
+      "_BOOT_ID": "5afa96f012d9434283af54a9a85c7e9f",
+      "_SYSTEMD_USER_SLICE": "-.slice",
+      "_HOSTNAME": "LAPTOP-U9TDKC8A",
+      "_TRANSPORT": "journal",
+      "_AUDIT_LOGINUID": "1000",
+      "_UID": "1000",
+      "_MACHINE_ID": "6910bce2db53443699ddeaa436cc2d2a",
+      "CODE_FUNC": "job_emit_start_message",
+      "__SEQNUM_ID": "ecbd01ef5f624e2a9c9bd9c3dd5cbeb8",
+      "_SYSTEMD_USER_UNIT": "init.scope",
+      "_SYSTEMD_OWNER_UID": "1000",
+      "_EXE": "/usr/lib/systemd/systemd",
+      "_SYSTEMD_CGROUP": "/user.slice/user-1000.slice/user@1000.service/init.scope",
+      "_COMM": "systemd",
+      "_AUDIT_SESSION": "2",
+      "_SELINUX_CONTEXT": "kernel",
+      "__REALTIME_TIMESTAMP": "1788994278790104",
+      "CODE_FILE": "src/core/job.c",
+      "SYSLOG_FACILITY": "3",
+      "__CURSOR": "s=ecbd01ef5f624e2a9c9bd9c3dd5cbeb8;i=280a3;b=5afa96f012d9434283af54a9a85c7e9f;m=69e9121d22;t=65b14b07e13d8;x=cd33c2b973d76421",
+      "_PID": "638",
+      "_CAP_EFFECTIVE": "0",
+      "_RUNTIME_SCOPE": "system",
+      "MESSAGE": "Starting vsp03-b06-10802-20260909.service - /home/wu/.venvs/hmasd/bin/python /home/wu/hmasd-worktrees/vsp03-b06-edb74aaf5292600480763403cd30cbd733dd1583/experiments/candidates/vsp_03/vsp03_b04/control.py --unit=vsp03-b06-10802-20260909.service --name=vsp03-b06-10802-20260909 --record=/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b06_10802_20260909_terminal.json --cap=60 --reserve=10 -- bash -c \"/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out \\\"\\$1\\\" && /home/wu/.venvs/hmasd/bin/python scripts/run_vsp03_b06.py --seed \\\"\\$2\\\" --out \\\"\\$3\\\" --node wsl_4070 --started-monotonic \\\"\\$VSP03_B04_STARTED\\\"\" bash /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b06_10802_20260909_admission.json 10802 /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b06_10802_20260909...",
+      "__MONOTONIC_TIMESTAMP": "454881844514",
+      "_SYSTEMD_UNIT": "user@1000.service",
+      "USER_INVOCATION_ID": "fab4fad94b054cafb838f88e5dc75755",
+      "SYSLOG_IDENTIFIER": "systemd",
+      "CODE_LINE": "609",
+      "_GID": "1000",
+      "JOB_TYPE": "start",
+      "PRIORITY": "6",
+      "_SYSTEMD_SLICE": "user-1000.slice",
+      "JOB_ID": "1312",
+      "USER_UNIT": "vsp03-b06-10802-20260909.service",
+      "__SEQNUM": "164003",
+      "_SOURCE_REALTIME_TIMESTAMP": "1788994278790011",
+      "_CMDLINE": "/usr/lib/systemd/systemd --user --deserialize=8",
+      "MESSAGE_ID": "7d4958e842da4a758f6c1cdc7b36dcc5"
+    },
+    {
+      "_UID": "1000",
+      "_SYSTEMD_UNIT": "user@1000.service",
+      "SYSLOG_FACILITY": "3",
+      "MESSAGE": "Task 'vsp03-b06-10802-20260909' started in tmux session 'agent_vsp03-b06-10802-20260909'. Output: /home/wu/.agent-tasks/vsp03-b06-10802-20260909/task.log",
+      "__MONOTONIC_TIMESTAMP": "454881893573",
+      "_MACHINE_ID": "6910bce2db53443699ddeaa436cc2d2a",
+      "_SELINUX_CONTEXT": "kernel",
+      "_AUDIT_LOGINUID": "1000",
+      "_STREAM_ID": "d236d716360a42ff95b223d84aa36ff2",
+      "_SYSTEMD_USER_SLICE": "app.slice",
+      "_SYSTEMD_USER_UNIT": "vsp03-b06-10802-20260909.service",
+      "_AUDIT_SESSION": "2",
+      "_BOOT_ID": "5afa96f012d9434283af54a9a85c7e9f",
+      "_SYSTEMD_CGROUP": "/user.slice/user-1000.slice/user@1000.service/app.slice/vsp03-b06-10802-20260909.service",
+      "__REALTIME_TIMESTAMP": "1788994278839163",
+      "_GID": "1000",
+      "SYSLOG_IDENTIFIER": "python",
+      "_PID": "3076788",
+      "_COMM": "bash",
+      "__SEQNUM_ID": "ecbd01ef5f624e2a9c9bd9c3dd5cbeb8",
+      "_CAP_EFFECTIVE": "0",
+      "_HOSTNAME": "LAPTOP-U9TDKC8A",
+      "_SYSTEMD_OWNER_UID": "1000",
+      "_TRANSPORT": "stdout",
+      "_SYSTEMD_INVOCATION_ID": "fab4fad94b054cafb838f88e5dc75755",
+      "__CURSOR": "s=ecbd01ef5f624e2a9c9bd9c3dd5cbeb8;i=280a5;b=5afa96f012d9434283af54a9a85c7e9f;m=69e912dcc5;t=65b14b07ed37b;x=e80354ce7359ab83",
+      "_RUNTIME_SCOPE": "system",
+      "PRIORITY": "6",
+      "_SYSTEMD_SLICE": "user-1000.slice",
+      "__SEQNUM": "164005"
+    },
+    {
+      "_SYSTEMD_USER_UNIT": "vsp03-b06-10802-20260909.service",
+      "_SYSTEMD_UNIT": "user@1000.service",
+      "_STREAM_ID": "d236d716360a42ff95b223d84aa36ff2",
+      "SYSLOG_IDENTIFIER": "python",
+      "_AUDIT_SESSION": "2",
+      "_COMM": "python",
+      "_SELINUX_CONTEXT": "kernel",
+      "_SYSTEMD_USER_SLICE": "app.slice",
+      "SYSLOG_FACILITY": "3",
+      "_SYSTEMD_CGROUP": "/user.slice/user-1000.slice/user@1000.service/app.slice/vsp03-b06-10802-20260909.service",
+      "_EXE": "/home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu/bin/python3.10",
+      "MESSAGE": "{\"terminal_published\": \"/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b06_10802_20260909_terminal.json\", \"task_exit_code\": 0, \"elapsed_through_terminal_readback_s\": 8.714708735991735}",
+      "_TRANSPORT": "stdout",
+      "_CMDLINE": "/home/wu/.venvs/hmasd/bin/python /home/wu/hmasd-worktrees/vsp03-b06-edb74aaf5292600480763403cd30cbd733dd1583/experiments/candidates/vsp_03/vsp03_b04/control.py --unit=vsp03-b06-10802-20260909.service --name=vsp03-b06-10802-20260909 --record=/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b06_10802_20260909_terminal.json --cap=60 --reserve=10 -- bash -c \"/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out \\\"\\$1\\\" && /home/wu/.venvs/hmasd/bin/python scripts/run_vsp03_b06.py --seed \\\"\\$2\\\" --out \\\"\\$3\\\" --node wsl_4070 --started-monotonic \\\"\\$VSP03_B04_STARTED\\\"\" bash /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b06_10802_20260909_admission.json 10802 /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b06_10802_20260909",
+      "_HOSTNAME": "LAPTOP-U9TDKC8A",
+      "_MACHINE_ID": "6910bce2db53443699ddeaa436cc2d2a",
+      "__CURSOR": "s=ecbd01ef5f624e2a9c9bd9c3dd5cbeb8;i=280b2;b=5afa96f012d9434283af54a9a85c7e9f;m=69e997172b;t=65b14b1030de1;x=4f86acd8cf19272c",
+      "_GID": "1000",
+      "__MONOTONIC_TIMESTAMP": "454890559275",
+      "_BOOT_ID": "5afa96f012d9434283af54a9a85c7e9f",
+      "__REALTIME_TIMESTAMP": "1788994287504865",
+      "_CAP_EFFECTIVE": "0",
+      "_AUDIT_LOGINUID": "1000",
+      "PRIORITY": "6",
+      "__SEQNUM_ID": "ecbd01ef5f624e2a9c9bd9c3dd5cbeb8",
+      "_PID": "3076786",
+      "_UID": "1000",
+      "_SYSTEMD_OWNER_UID": "1000",
+      "_SYSTEMD_INVOCATION_ID": "fab4fad94b054cafb838f88e5dc75755",
+      "_SYSTEMD_SLICE": "user-1000.slice",
+      "__SEQNUM": "164018",
+      "_RUNTIME_SCOPE": "system"
+    },
+    {
+      "__CURSOR": "s=ecbd01ef5f624e2a9c9bd9c3dd5cbeb8;i=280b3;b=5afa96f012d9434283af54a9a85c7e9f;m=69e99724de;t=65b14b1031b93;x=50a19fa0d4460305",
+      "_COMM": "systemd",
+      "SYSLOG_FACILITY": "3",
+      "__MONOTONIC_TIMESTAMP": "454890562782",
+      "_SYSTEMD_USER_UNIT": "init.scope",
+      "CODE_FILE": "src/core/job.c",
+      "MESSAGE": "Finished vsp03-b06-10802-20260909.service - /home/wu/.venvs/hmasd/bin/python /home/wu/hmasd-worktrees/vsp03-b06-edb74aaf5292600480763403cd30cbd733dd1583/experiments/candidates/vsp_03/vsp03_b04/control.py --unit=vsp03-b06-10802-20260909.service --name=vsp03-b06-10802-20260909 --record=/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b06_10802_20260909_terminal.json --cap=60 --reserve=10 -- bash -c \"/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out \\\"\\$1\\\" && /home/wu/.venvs/hmasd/bin/python scripts/run_vsp03_b06.py --seed \\\"\\$2\\\" --out \\\"\\$3\\\" --node wsl_4070 --started-monotonic \\\"\\$VSP03_B04_STARTED\\\"\" bash /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b06_10802_20260909_admission.json 10802 /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b06_10802_20260909.",
+      "TID": "638",
+      "_CMDLINE": "/usr/lib/systemd/systemd --user --deserialize=8",
+      "_RUNTIME_SCOPE": "system",
+      "_GID": "1000",
+      "_AUDIT_SESSION": "2",
+      "_HOSTNAME": "LAPTOP-U9TDKC8A",
+      "USER_INVOCATION_ID": "fab4fad94b054cafb838f88e5dc75755",
+      "JOB_TYPE": "start",
+      "SYSLOG_IDENTIFIER": "systemd",
+      "_PID": "638",
+      "__SEQNUM_ID": "ecbd01ef5f624e2a9c9bd9c3dd5cbeb8",
+      "_UID": "1000",
+      "MESSAGE_ID": "39f53479d3a045ac8e11786248231fbf",
+      "_BOOT_ID": "5afa96f012d9434283af54a9a85c7e9f",
+      "USER_UNIT": "vsp03-b06-10802-20260909.service",
+      "_EXE": "/usr/lib/systemd/systemd",
+      "_SYSTEMD_OWNER_UID": "1000",
+      "CODE_FUNC": "job_emit_done_message",
+      "_SYSTEMD_SLICE": "user-1000.slice",
+      "_SOURCE_REALTIME_TIMESTAMP": "1788994287508326",
+      "PRIORITY": "6",
+      "_SELINUX_CONTEXT": "kernel",
+      "_AUDIT_LOGINUID": "1000",
+      "_SYSTEMD_CGROUP": "/user.slice/user-1000.slice/user@1000.service/init.scope",
+      "JOB_RESULT": "done",
+      "__SEQNUM": "164019",
+      "CODE_LINE": "796",
+      "JOB_ID": "1312",
+      "__REALTIME_TIMESTAMP": "1788994287508371",
+      "_SYSTEMD_USER_SLICE": "-.slice",
+      "_TRANSPORT": "journal",
+      "_SYSTEMD_UNIT": "user@1000.service",
+      "_MACHINE_ID": "6910bce2db53443699ddeaa436cc2d2a",
+      "_CAP_EFFECTIVE": "0"
+    },
+    {
+      "_COMM": "systemd",
+      "_SELINUX_CONTEXT": "kernel",
+      "SYSLOG_FACILITY": "3",
+      "_AUDIT_SESSION": "2",
+      "_AUDIT_LOGINUID": "1000",
+      "_PID": "638",
+      "MEMORY_PEAK": "8261632",
+      "_SOURCE_REALTIME_TIMESTAMP": "1788994287508445",
+      "_SYSTEMD_USER_SLICE": "-.slice",
+      "_TRANSPORT": "journal",
+      "__MONOTONIC_TIMESTAMP": "454890562976",
+      "MESSAGE_ID": "ae8f7b866b0347b9af31fe1c80b127c0",
+      "_SYSTEMD_USER_UNIT": "init.scope",
+      "MESSAGE": "vsp03-b06-10802-20260909.service: Consumed 8.712s CPU time, 7.8M memory peak, 0B memory swap peak.",
+      "SYSLOG_IDENTIFIER": "systemd",
+      "_HOSTNAME": "LAPTOP-U9TDKC8A",
+      "PRIORITY": "6",
+      "CODE_FILE": "src/core/unit.c",
+      "_SYSTEMD_CGROUP": "/user.slice/user-1000.slice/user@1000.service/init.scope",
+      "_UID": "1000",
+      "TID": "638",
+      "USER_INVOCATION_ID": "fab4fad94b054cafb838f88e5dc75755",
+      "_GID": "1000",
+      "_RUNTIME_SCOPE": "system",
+      "CPU_USAGE_NSEC": "8712799000",
+      "__REALTIME_TIMESTAMP": "1788994287508566",
+      "_SYSTEMD_SLICE": "user-1000.slice",
+      "__SEQNUM_ID": "ecbd01ef5f624e2a9c9bd9c3dd5cbeb8",
+      "_SYSTEMD_OWNER_UID": "1000",
+      "_EXE": "/usr/lib/systemd/systemd",
+      "_MACHINE_ID": "6910bce2db53443699ddeaa436cc2d2a",
+      "USER_UNIT": "vsp03-b06-10802-20260909.service",
+      "_BOOT_ID": "5afa96f012d9434283af54a9a85c7e9f",
+      "_CMDLINE": "/usr/lib/systemd/systemd --user --deserialize=8",
+      "MEMORY_SWAP_PEAK": "0",
+      "_CAP_EFFECTIVE": "0",
+      "CODE_FUNC": "unit_log_resources",
+      "__SEQNUM": "164020",
+      "__CURSOR": "s=ecbd01ef5f624e2a9c9bd9c3dd5cbeb8;i=280b4;b=5afa96f012d9434283af54a9a85c7e9f;m=69e99725a0;t=65b14b1031c56;x=71ae875c480d9dad",
+      "_SYSTEMD_UNIT": "user@1000.service",
+      "CODE_LINE": "2577"
+    }
+  ],
+  "artifact_readback": {
+    "artifact": "VSP03_B06_10802_ARTIFACTS_20260909.tar.gz",
+    "sha256": "a11f011f21a39ac4767cd64098ccf7bfd7fc519daf9adf6826236ffbd561423c",
+    "bytes": 223942,
+    "curve_rows": 512,
+    "native_rows_verified": 8192,
+    "all_five_contrasts_each_endpoint_verified": true,
+    "identical_rule_rows_across_panels": true,
+    "paired_Q_verified": true,
+    "entropy_schedule_verified": true,
+    "snapshot_files": [
+      "b06_10802_20260909/G_128.pt",
+      "b06_10802_20260909/G_512.pt"
+    ]
+  },
+  "complete_wall_s": 8.718388999986928,
+  "aggregate_cpu_s": 8.712
+}

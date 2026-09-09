@@ -45,3 +45,22 @@ removal and task-wrapper closeout. Fit10801 wrapper directory:
 Scientific output root plus admission/terminal/payload receipts remain evidence;
 no evidence deletion is requested. Local test scratch cleanup remains the separately
 recorded policy blocker in technical acceptance; it does not impair this result.
+
+## Fit10802 accepted
+
+Root confirmed Monitor adoption/terminal2026-09-09T22:52:39.1577029Z: finished,
+exit0, tmuxfalse, PID3076799. Collection and raw artifact archive use the matching
+10802 names. Complete manager-through-Finished wall8.718389s; aggregate CPU8.712s;
+learner RSS493867008 bytes; actual-node physical/effective admission15194279936 bytes.
+Controller/payload exit0; no timeout/error/remaining descendants. Source unchanged.
+512 real steps,73728 total episodes,2949120 ticks,5898240 target transitions,
+396954 gradient rows,453381 all decision rows,8704 rollout model calls. Both selected
+snapshots and all512 curve rows retained. Readback verified all8192 native rows,
+all endpoint comparisons, identical rule rows, original entropy schedule and paired Q.
+Primary D512=0.0145068359375; Q=0.0034326171875, conditional Q SD0.248953546626463,
+SE0.007779798332077. No new scientific work occurred during collection. The intact
+fit permits the last allocated10803. No three-fit aggregate is reported yet.
+
+Additional cleanup inventory: /home/wu/.agent-tasks/vsp03-b06-10802-20260909 and
+/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b06_10802_20260909_terminal.tmux;
+scientific root and receipts remain retained. Same CM/Root cleanup event as above.
