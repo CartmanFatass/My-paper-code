@@ -1,0 +1,53 @@
+{
+  "question": "是否接受冻结 MGTAP B01 原生几何 actor 卡，供后续 CM 在明确命令下实现，而不把冻结本身当作训练授权？",
+  "changes_if_approved": [
+    {
+      "target": "MGTAP_NATIVE_GROUND_GEOMETRY_B01_SCIENCE_CARD_20260908.md",
+      "from": "原生几何只有 Pro 重入条件",
+      "to": "冻结 REL typed nonlinear pooling 对 DENSE full-information residual 的完整 B/EXPLORE 规格"
+    },
+    {
+      "target": "后续 CM handoff",
+      "from": "没有可检查的 actor 结构和验收边界",
+      "to": "可按卡实现两分支与 focused checks；仍需 Root 的具体命令、提交和资源准入后才能运行"
+    }
+  ],
+  "if_refused": "在下一个干净边界不采用此卡；保持原生几何的重入条件、旧配置坐标家族的 parking、所有既有 B/C 证据及方向状态，不发起实现或实验。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_NATIVE_GROUND_GEOMETRY_B01_SCIENCE_CARD_20260908.md",
+      "quote": "Both packages retain the full ordered raw actor input, so the treatment receives no information advantage.",
+      "why": "卡片把处理偏置与信息边界分开，并保留同信息 generic comparator。"
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_NATIVE_GROUND_GEOMETRY_B01_SCIENCE_CARD_20260908.md",
+      "quote": "This card itself authorizes none of those effects. There is no automatic launch, retry, resume, UAV validation or Portfolio action.",
+      "why": "冻结卡片不会越过 B 研究规格与工程执行之间的授权边界。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260908_native_geometry_reentry/archive/RESPONSE.md",
+      "quote": "Its empirical competence is not certified by a parameter count.",
+      "why": "参数计数相等不足以保证 generic comparator 的经验能力，卡面已保留该限制。"
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260908_native_geometry_reentry/archive/RESPONSE.md",
+      "quote": "The effect sign, magnitude, repeatability, empirical generic competence, tuned headroom and incremental runtime remain unknown.",
+      "why": "未有结果时，接受的是研究规格而非效应结论。"
+    }
+  ],
+  "uncertainty": [
+    "REL 的 typed pooling 可能稀释少数关键记录，也可能改善有限暴露下的共享学习。",
+    "原生增量运行时间、激活内存与 RSS 尚未测量，不能从参数数目推断。",
+    "未来实现必须确认零输出投影初始化后 branch 仍能连接到 velocity loss。"
+  ],
+  "cost": {
+    "compute": "0；冻结与检查文档不创建模型。预计执行暴露仅按卡上的两个 master、四个 learned fits 与共享 H 参考计算。",
+    "owner_time": "约 1 分钟阅读卡片；不等待回复。",
+    "reversibility": "reversible",
+    "waits_on_this": "后续 CM 实现命令和任何运行前的独立内存准入。"
+  },
+  "verdict_text": "Freeze this one B question while keeping the old allocation-coordinate family parked.",
+  "source": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_NATIVE_GROUND_GEOMETRY_B01_SCIENCE_CARD_20260908.md"
+}
