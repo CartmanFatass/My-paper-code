@@ -1,0 +1,26 @@
+{
+  "observed_at": "2026-09-09T08:16:19.035997+00:00",
+  "source": "Read-only configured Transport registry binding; no registry mutation",
+  "registry_updated_at": "2026-09-09T07:16:46Z",
+  "binding": {
+    "conversation_binding_key": "em:flexible_skill_duration:convergence",
+    "conversation_id": "6a9c2865-14a8-83e8-b556-e7f5836d9236",
+    "provider_url": "https://chatgpt.com/c/6a9c2865-14a8-83e8-b556-e7f5836d9236",
+    "request_id": "2026-09-08-fsd-p67-uav-individual-renewal-01",
+    "state": "ARCHIVED",
+    "send_click_count": 1,
+    "source_thread_id": "01a081bd-7f7a-78e1-80bc-1961d85e0d1a",
+    "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+    "updated_at": "2026-09-09T03:44:41Z"
+  },
+  "prior_return_receipt": {
+    "status": "SENT",
+    "attempt_count": 1,
+    "delivery_status": "accepted",
+    "sent_at": "2026-09-09T03:45:13Z",
+    "message_key": "2026-09-08-fsd-p67-uav-individual-renewal-01|flexible_skill_duration|6a9c2865-14a8-83e8-b556-e7f5836d9236|2fef71e66bb201edbc964a8da82c00e58b25e761ef40086c442c7d7e2b088d00"
+  },
+  "new_request_id": "2026-09-09-fsd-p74-post-uav-b02-convergence-01",
+  "new_send_count": 0,
+  "new_acceptance": "not dispatched; preparation only"
+}

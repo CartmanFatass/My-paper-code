@@ -14,6 +14,8 @@ MGTAP P74 readiness f94438f69 is accepted. P75 [two-master execution task](../ca
 
 Latest: MGTAP8201 handle `mgtap-b01-8201-4f65eefb1b15e44b42d694376630fba0c230cc6c` accepted/running, PID3034957, joined admission passed; same CM observes,8202 remains unsubmitted. VSP03 P74 request `2026-09-09-vsp03-p74-post-b04-convergence-01` dispatched once to Transport from HANDOFF1f0b36a9b/TASK564e78fc3; app delivery accepted, provider Send not yet confirmed. Completed DM authoring no longer counts as a live native turn; count the VSP03 chain again only upon actual accepted Pro generation or another native assignment.
 
+Latest subsequent receipt: MGTAP8201 terminal exit0,353.71s/collection2b677b4d3;8202 accepted once under `mgtap-b01-8202-4f65eefb1b15e44b42d694376630fba0c230cc6c`, PID3036438, admission passed. Same CM owns observation, collection and aggregate. FSD P74 request `2026-09-09-fsd-p74-post-uav-b02-convergence-01` dispatched once to Transport from HANDOFF163443793/TASKb2342c20a. App accepted, provider Send unconfirmed; no new FSD invocation allocated. Original DM receives the immutable response for intake.
+
 ## Historical soft-stop closeout updates — 2026-09-09
 
 - CRTO P72: response/intake/handoff integrated at63550cd83; DM stopped, no live experiment or Pro generation, no successor B. See [handoff](../candidates/commitment_residual_triggered_options/CRTO_RESTART_HANDOFF_20260909.md).
