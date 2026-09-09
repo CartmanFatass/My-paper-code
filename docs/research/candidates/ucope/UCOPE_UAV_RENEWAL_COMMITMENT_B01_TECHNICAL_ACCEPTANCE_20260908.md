@@ -93,3 +93,73 @@ Root owns removal of the remote engineering checkout after integration/archive, 
 next concrete allocation establishes an immediate execution dependency; record that event
 rather than retaining a full checkout as backup. The shared local authoring checkout remains
 in use by the direction.
+
+## P70 preparation and committed literal payload
+
+P70 is the subsequent execution allocation at `d749a6a26e450219d4d2f563a3256bc8f6b4fc00`,
+[intake sections 1-3](UCOPE_UAV_RENEWAL_COMMITMENT_B01_P70_INTAKE_20260908.md).
+The P69 source-only history above remains unchanged. Actual local starting HEAD was clean
+`d749a6a26e450219d4d2f563a3256bc8f6b4fc00`; scientific source stays
+`a453447cb011d50c6bb63ed7fc40180134a914b5`. Main integration is separate from this published source binding.
+CM owns the sole observation through collection and returns all outcomes to DM; Root does
+not poll in parallel. This pure execution/collection correction exclusion is already recorded
+once in the P70 intake and creates no new coding/comparison enrollment.
+
+Fresh scientific checkout: `/home/wu/hmasd-worktrees/ucope-uav-renewal-b01-7301-p70-20260908`.
+Execution node: configured `hmasd-wsl-node`, CPU FP32, one Torch thread set by the runner.
+Output relative to that checkout: `temp/directions/ucope/exp/ucope-uav-renewal-b01-7301-p70-20260908`.
+Unique supervisor handle: `ucope-uav-renewal-b01-7301-p70-20260908`.
+The existing P69 engineering checkout and raw receipts are untouched.
+
+Per-arm cost projection before submission: T retains initialization +131072 native/recurrent
+training steps +1024 Adam calls +8192 final evaluation steps +publication, with actual renewal
+sampling/density/backward head work added. G retains that chain plus8192 H steps. B04's complete
+T137.6704245s and G139.2941963s are same-loop references; renewal's incremental seconds and
+aggregate CPU are unknown, and the 64-256x head-row multiplier is not a full-wall multiplier.
+No concrete over-cap projection exists; this allocated invocation retains the original
+1800s per-complete-arm and3600s whole limits. Serial study critical path equals this pair's
+whole elapsed wall; summed per-arm wall and aggregate CPU are distinct. No pilot, new test,
+profile, replay or resource inference from the synthetic suite is used.
+Post-learner path coverage: reuse the accepted P69 short synthetic collector/learner/checkpoint/
+primary publication coverage (81 tests); no repeated suite or smoke is selected.
+
+Preparation observed the handle `not_found`, no prior supervisor directory, and no scientific
+checkout/output before creating this exact-SHA detached checkout. All2176 materialized tracked
+files match accepted Git blobs, with explicit existence/content checks for the four candidate
+modules, runner, canonical `scripts/hmasd_resource_preflight.py`, its `hmasd_platform.py`
+dependency and both base UAV/adapter entry points. Canonical preflight helper SHA256:
+`cb0525e9247f1c7262c198bf051e542282f5928982137b3023d36d5d69eda4dc`.
+[Input readback](../../../../temp/directions/ucope/launch/renewal_b01_7301_p70_20260908/source-input-readback.json)
+and syntax/staging receipts are retained beside the literal local payloads. The staged Bash
+wrapper passes `bash --noprofile --norc -n`; PowerShell Parser reports zero submission errors.
+These checks executed no admission or scientific payload. Both payloads are UTF-8 ASCII/LF,
+with one final LF; shell variables are literal. The submission below is run directly from
+`temp/directions/ucope/launch/renewal_b01_7301_p70_20260908/submit.ps1` without reconstruction.
+
+Remote Bash wrapper `/home/wu/hmasd-inputs/ucope-uav-renewal-b01-7301-p70-20260908.sh` (707 bytes), SHA256
+`d004393622f42a05b66917f8acf3a2fab2bab0f9579a11f849d2a80ddcfdadb8`; exact committed content:
+
+```bash
+set -euo pipefail
+cd /home/wu/hmasd-worktrees/ucope-uav-renewal-b01-7301-p70-20260908
+/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/.agent-tasks/ucope-uav-renewal-b01-7301-p70-20260908/resource_admission.json &&
+mkdir -p temp/directions/ucope/exp/ucope-uav-renewal-b01-7301-p70-20260908 &&
+cp /home/wu/.agent-tasks/ucope-uav-renewal-b01-7301-p70-20260908/resource_admission.json temp/directions/ucope/exp/ucope-uav-renewal-b01-7301-p70-20260908/resource_admission.json &&
+exec /home/wu/.venvs/hmasd/bin/python scripts/run_ucope_uav_motion_prefix_b01.py --pair renewal_b01 --seed 7301 --out temp/directions/ucope/exp/ucope-uav-renewal-b01-7301-p70-20260908
+```
+
+PowerShell submission (338 bytes), SHA256
+`5efe2139a8aeeaa66b40293d9c6768fe33ec350a1ff275b353074d688894adf4`; exact committed content:
+
+```powershell
+& ssh -o BatchMode=yes -o ConnectTimeout=10 hmasd-wsl-node "/usr/local/bin/agent-task run ucope-uav-renewal-b01-7301-p70-20260908 '/usr/bin/time -f whole_wall_seconds=%e,peak_rss_kib=%M /usr/bin/timeout --signal=KILL 3600s /bin/bash --noprofile --norc /home/wu/hmasd-inputs/ucope-uav-renewal-b01-7301-p70-20260908.sh'"
+exit $LASTEXITCODE
+```
+
+The preflight and scientific command are one supervised shell chain joined by `&&`.
+Fresh physical AND effective available memory must meet4GiB before scientific output-root
+creation, model/RNG work or execution. A failed admission remains in the supervisor root.
+The external whole timeout includes admission and publication; the runner retains its own
+per-arm limits. At most one accepted submission is allocated. Uncertain acceptance is
+reconciled on this exact handle; no retry/resume/replacement or extra evaluation follows.
+Terminal observations and collection will append below without changing these payload bytes.
