@@ -75,17 +75,24 @@ def primary_from_rows(rows, expected, reset_start):
     return result
 
 
-def checkpoint_identity(config, arm, sha, object_id=OBJECT, normalize_value=False):
+def checkpoint_identity(config, arm, sha, object_id=OBJECT, normalize_value=False,
+                        second_mlp_width=128, extra_init_seed=None):
     configuration = asdict(config)
     if normalize_value:
         configuration.update(value_normalization="cumulative_population_fp32", entropy_coef=.01)
-    return dict(object=object_id, algorithm=arm, arm=arm, seed=config.seed,
+    identity = dict(object=object_id, algorithm=arm, arm=arm, seed=config.seed,
                 mode="ENGINEERING_FIXTURE" if config.fixture else "UAV_B_EXPLORE",
                 configuration=configuration, ratio_grouping="agent_compound", launch_sha=sha)
+    if second_mlp_width == 133:
+        configuration.update(second_mlp_width=133, extra_initialization_seed=extra_init_seed)
+        identity.update(critic_architecture="136->128->128->1 + 128x5 hold gate" if arm == "GATED-V" else "136->128->133->1",
+                        critic_parameter_count=34817 if arm == "GATED-V" else 34827)
+    return identity
 
 
 def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=write_summary,
-             *, object_id=OBJECT, card=CARD, normalize_value=False):
+             *, object_id=OBJECT, card=CARD, normalize_value=False,
+             second_mlp_width=128, extra_init_seed=None):
     import torch
     from experiments.candidates.ucope.uav_motion_prefix_b01.environment import SyntheticAdapter, make_real
     from experiments.candidates.ucope.uav_motion_prefix_b01.learner import collect_episode, optimizer_for, update
@@ -94,6 +101,7 @@ def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=wri
     if normalize_value:
         from experiments.candidates.vsp_c1.native_hold_value_b03.value_normalization import ValueMoments
 
+    architecture_options = dict(second_mlp_width=second_mlp_width, extra_init_seed=extra_init_seed) if second_mlp_width == 133 else {}
     out = Path(out)
     out.mkdir(parents=True, exist_ok=True)
     deadline = Deadline(start, config.arm_cap, config.pair_cap, clock)
@@ -105,7 +113,7 @@ def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=wri
                                   cwd=Path(__file__).resolve().parents[4], text=True).strip()
     summary = dict(object=object_id, card=card, seed=config.seed, launch_sha=sha,
                    mode="ENGINEERING_FIXTURE" if config.fixture else "UAV_B_EXPLORE",
-                   configuration=checkpoint_identity(config, ARMS[0], sha, object_id, normalize_value)["configuration"],
+                   configuration=checkpoint_identity(config, ARMS[0], sha, object_id, normalize_value, **architecture_options)["configuration"],
                    ratio_grouping="agent_compound",
                    arms=arms, limits=limits, status="INCOMPLETE",
                    resources="resources_unmeasured",
@@ -119,6 +127,8 @@ def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=wri
                               constructor_reset=b+1000, train_reset_start=b+1000,
                               eval_reset_start=b+2000, eval_velocity_start=b+3000,
                               eval_duration_start=b+4000))
+    if second_mlp_width == 133:
+        summary["seeds"]["extra_initialization"] = extra_init_seed
     if normalize_value:
         summary["value_loss_units"] = "normalized_squared"
         for arm in ARMS:
@@ -149,7 +159,10 @@ def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=wri
             value_options = {"value_moments": moments} if moments is not None else {}
             learning_options = dict(value_options, entropy_coef=.01) if moments is not None else {}
             deadline.check()
-            actor, critic = models(common, arm)
+            actor, critic = models(common, arm, **architecture_options)
+            if second_mlp_width == 133:
+                arm_info["critic_architecture"] = checkpoint_identity(config, arm, sha, object_id, normalize_value, **architecture_options)["critic_architecture"]
+                arm_info["critic_parameter_count"] = sum(p.numel() for p in critic.parameters())
             initial = snapshot(actor, critic)
             optimizer = optimizer_for(actor, critic)
             velocity_rng, duration_rng = generator(b+21), generator(b+22)
@@ -191,7 +204,10 @@ def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=wri
             arm_info["exposure"] = movement(initial, actor, critic)
             deadline.check()
             normalization_state = {"value_moments": moments.state()} if moments is not None else {}
-            torch.save(dict(checkpoint_identity(config, arm, sha, object_id, normalize_value), actor=actor.state_dict(),
+            if second_mlp_width == 133:
+                normalization_state.update(critic_architecture=arm_info["critic_architecture"],
+                                           critic_parameter_count=arm_info["critic_parameter_count"])
+            torch.save(dict(checkpoint_identity(config, arm, sha, object_id, normalize_value, **architecture_options), actor=actor.state_dict(),
                             critic=critic.state_dict(), **normalization_state), out / f"final_{arm}.pt")
             arm_info["checkpoint"] = f"final_{arm}.pt"
             deadline.check()
@@ -262,8 +278,12 @@ def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=wri
         for arm, info in arms.items():
             if "checkpoint" in info:
                 saved = torch.load(out / info["checkpoint"], map_location="cpu", weights_only=True)
-                if any(saved[k] != v for k, v in checkpoint_identity(config, arm, sha, object_id, normalize_value).items()):
+                if any(saved[k] != v for k, v in checkpoint_identity(config, arm, sha, object_id, normalize_value, **architecture_options).items()):
                     raise ValueError(f"{arm} checkpoint identity readback mismatch")
+                if second_mlp_width == 133:
+                    for key in ("critic_architecture", "critic_parameter_count"):
+                        if saved[key] != info[key] or loaded["arms"][arm][key] != info[key]:
+                            raise ValueError(f"{arm} critic architecture readback mismatch")
                 if normalize_value:
                     if saved["value_moments"] != info["value_moments"] or loaded["arms"][arm]["value_moments"] != info["value_moments"]:
                         raise ValueError(f"{arm} value moments readback mismatch")
