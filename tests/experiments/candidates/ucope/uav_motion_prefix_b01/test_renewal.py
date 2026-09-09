@@ -117,11 +117,15 @@ def test_t254_t255_original_labels_actual_suppression_and_partial_censor(monkeyp
     assert bool(rows) != fail_last
 
 
-def test_actual_short_pair_primary_counts_checkpoint_and_identity(tmp_path):
-    config = study.Config.engineering(pair="renewal_b01")
+@pytest.mark.parametrize("pair", ["renewal_b01", "renewal_b02"])
+def test_actual_short_pair_primary_counts_checkpoint_and_identity(tmp_path, pair):
+    config = study.Config.engineering(pair=pair)
     summary = study.run_pair(config, tmp_path, time.monotonic())
     assert summary["status"] == "COMPLETE" and summary["scientific_uav_calls"] == 0
-    assert summary["object"] == study.RENEWAL_OBJECT and summary["card"] == study.RENEWAL_CARD
+    expected_object, expected_card = ((study.RENEWAL_B02_OBJECT, study.RENEWAL_B02_CARD) if pair == "renewal_b02"
+                                      else (study.RENEWAL_OBJECT, study.RENEWAL_CARD))
+    assert summary["object"] == expected_object and summary["card"] == expected_card
+    assert summary["card_section"] == 7
     assert summary["commitment"] == "own_expiry"
     assert summary["counts"]["team_steps"] == 80 and summary["counts"]["optimizer_steps"] == 8
     rows = [json.loads(line) for line in (tmp_path / "episodes.jsonl").read_text().splitlines()]
