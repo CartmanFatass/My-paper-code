@@ -3,7 +3,9 @@ Binding MARL structure: (b) temporal abstraction or termination, with five co-ad
 
 # VSPC1-NATIVE-HOLD-VALUE-B10 — B/EXPLORE, P76
 
-Current state: prospective definition; no B10 scientific exposure. Root separately
+Current state: valid complete CHANGE_DOWN for8501; §8 records the result, while
+the prospective definition/prediction and exact allocation remain in §§1–7.
+Root separately
 allocated P76 on2026-09-09, recorded in main Portfolio at
 `00b834a4407ac982f0f4948c3296a405ee4e9e74`. This executes the object-tier
 [B09 intake §6 recommendation](VSPC1_NATIVE_HOLD_VALUE_B09_INTAKE_20260909.md#6-p74-valid-result-intake-and-decisions).
@@ -241,3 +243,25 @@ perform the single already allocated submission. Fresh actual-node memory
 admission precedes scientific state in this whole-timed command. CM solely
 observes and collects. No new planning approval, observer adoption or invocation
 allowance follows from this acceptance. Staging/admission are not yet observed.
+
+## 8. Terminal result — 2026-09-09
+
+The sole P76 submission is valid complete at accepted scientific source
+`2c2c7d9d34814c9834a741ce25b2f36076347315`, exit0, with434176 native steps,
+3072 Adam calls,160 evaluations and four fixed learned checkpoints. The
+[E0](VSPC1_NATIVE_HOLD_VALUE_B10_RESULT_EVIDENCE_20260909.md) and
+[DM intake §6](VSPC1_NATIVE_HOLD_VALUE_B10_INTAKE_20260909.md#6-p76-valid-result-intake-and-decisions)
+retain the full observation/receipts and apply the unchanged rule:
+**C−.054239093386632645, SE .00921549713046484, CHANGE_DOWN;
+Delta512+.06387970396285268 UP; Delta768+.009640610576220038 WITHIN.**
+Forecast CHANGE_DOWN(.55) hit/Brier .2025; owner prediction not taken.
+
+GATED's point mean rose by .0037860920 and MLP's by .0580251854 on the same
+panel. MLP512 is below H; the other three learned means and all adverse
+identities are retained. One pair's local relative erosion does not establish
+a population or causal-budget effect, equivalence, specialized credit or stable superiority.
+Whole475.85s and conservative arms255.2433/238.3501s meet the original caps;
+no scope5 breach was observed. One submission spent, zero remain, no live run.
+The next same-comparison independent pair is advice awaiting separate allocation,
+not a new card/seed/prediction/invocation. CM's test-scratch cleanup remains
+blocked by automatic approval review, independently of this valid result.
