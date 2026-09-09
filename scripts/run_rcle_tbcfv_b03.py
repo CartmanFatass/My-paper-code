@@ -1,6 +1,8 @@
 """Fixed B03 runner; process startup and publication count toward its wall cap."""
 import time
 STARTED = time.perf_counter()
+import faulthandler
+faulthandler.enable()
 import os
 for name in ("OMP_NUM_THREADS", "MKL_NUM_THREADS", "OPENBLAS_NUM_THREADS"):
     os.environ[name] = "1"
@@ -20,6 +22,7 @@ def main():
     parser.add_argument("--launch-sha", required=True)
     parser.add_argument("--admission-receipt", type=Path, required=True)
     parser.add_argument("--control-summary", type=Path)
+    parser.add_argument("--wall-cap", type=float, default=600)
     args = parser.parse_args()
     import torch
     torch.set_num_threads(1)
@@ -27,11 +30,11 @@ def main():
     from experiments.candidates.roster_consistent_latent_exploration_tbcfv_b03.study import run
     from experiments.candidates.roster_consistent_latent_exploration_tbcfv_b01.study import ArmWallExpired
     def expired(signum, frame):
-        raise ArmWallExpired("600s complete invocation cap")
+        raise ArmWallExpired(f"{args.wall_cap}s complete invocation cap")
     signal.signal(signal.SIGALRM, expired)
-    signal.setitimer(signal.ITIMER_REAL, max(0.001, 600 - (time.perf_counter() - STARTED)))
+    signal.setitimer(signal.ITIMER_REAL, max(0.001, args.wall_cap - (time.perf_counter() - STARTED)))
     result = run(args.arm, args.out, args.launch_sha, args.admission_receipt,
-                 STARTED, 600, args.control_summary)
+                 STARTED, args.wall_cap, args.control_summary)
     signal.setitimer(signal.ITIMER_REAL, 0)
     print(result["status"], args.arm, flush=True)
     return 0 if result["status"] == "COMPLETE" else 2
