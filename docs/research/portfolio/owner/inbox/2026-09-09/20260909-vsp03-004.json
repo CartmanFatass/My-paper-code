@@ -19,7 +19,7 @@
     }
   ],
   "recommended": "a",
-  "auto_applied": null,
+  "auto_applied": "a",
   "dm_reason": "固定两端点直接观察预算是否改变原生比较，三fit是本次owner候选大小而非种子配额；收益和耗时仍未测。",
   "evidence": [
     "docs/research/candidates/vsp_03/VSP03_CONTINUOUS512_CANDIDATE_SCIENCE_CARD_20260909.md",
@@ -79,5 +79,23 @@
     "source": "docs/research/candidates/vsp_03/VSP03_CONTINUOUS512_CANDIDATE_SCIENCE_CARD_20260909.md",
     "owner_boundary_checked_at": "2026-09-09T21:32:27Z"
   },
-  "starred": true
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-09T22:26:02+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/vsp_03/pro_packets/20260909_continuous512_convergence/archive/RESPONSE.md@5af9c448879bba3129df32e07a788839658f8a4f",
+      "record": "docs/research/candidates/vsp_03/VSP03_CONTINUOUS512_CONVERGENCE_INTAKE_20260909.md#5-decisions-this-intake-produces",
+      "state": "applied",
+      "summary": "原Convergence完整答复选择(a)：三个新G连续512更新、固定128/512面板、512 greedyG-R0主要量；有限预算重入，旧独立128/N1/T仍暂停、recasts1。接近的选择，旧两小正一较大负及随机亏损保留。没有新运行或Portfolio处置。"
+    },
+    {
+      "at": "2026-09-09T22:26:02+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "Root 2026-09-09 full-intake assignment recorded in docs/research/candidates/vsp_03/VSP03_CONTINUOUS512_CONVERGENCE_INTAKE_20260909.md#5-decisions-this-intake-produces",
+      "record": "docs/research/candidates/vsp_03/VSP03_B06_CONTINUOUS512_SCIENCE_CARD_20260909.md",
+      "state": "applied",
+      "summary": "按Root当前指令冻结完整B06科学卡、低置信度均值幅度预测及配对Q/缺失规则，发布CM五项提案。卡/实现提案已就绪，source、测试、fit均未分配或执行；由Root下一具体任务给出有限分配。六栏中文brief见2026-09-09_continuous512_convergence.md。未虚构owner回复；原准备packet保留为历史，当前执行状态以此trace及intake为准。"
+    }
+  ]
 }

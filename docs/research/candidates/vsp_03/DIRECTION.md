@@ -51,6 +51,14 @@ greedy-replacement family, as a reversible close call, with no successor. The tw
 small positive points remain support for ordinary learning; a further independent
 instance still has possible value but is unselected. Recasts remain 1.
 
+The later continuous512 Convergence decision selects three fresh continuous
+512-update G fits, with fixed 128/512 panels and final512 greedy G−R0 primary.
+This is finite budget re-entry in the same mechanism, not a second recast. The
+old independent128 append sequence stays paused, as do N1 and T/initialization.
+The B06 card is frozen; implementation/execution is not yet allocated and no
+512 result exists. The new question distinguishes the sampled final controller
+from its within-fit budget change, without implying undertraining or convergence.
+
 ## Current position
 
 The historical bootstrap sentence from `RESEARCH_MAP.md` remains provenance:
@@ -269,6 +277,26 @@ same-recipe frozen G's native margin and success/attempt/waiting composition.
 It is unselected and unallocated, with no new-use, significance, positive-sign,
 tuned-headroom or causal-diagnosis prerequisite for a future justified choice.
 
+**PRO_FINAL, 2026-09-09 continuous512: select exactly three fresh continuous
+G fits with fixed128/512 four-mode panels; recasts: 1.** The complete original-node
+answer at `5af9c448879bba3129df32e07a788839658f8a4f` opens only this longer-budget
+comparison. Same-model/Adam continuation adds384 batches of new data, updates
+and partner co-adaptation; the paired change is not a pure optimization cause.
+The 512 endpoint remains primary, with R0/R and stochastic losses visible;
+128 is an explanatory measurement, not a separately restarted fit or selected
+best checkpoint. All three fits and failures will be retained. Their card is
+frozen at B/EXPLORE scope, with no implementation or fit allocated at this intake.
+
+This remains a close call. Two small old greedy gains and low complete costs
+support a bounded further observation, while the larger seed5 loss and competent
+readiness argue that additional training may still buy only small or adverse
+tradeoffs. The old independent128 sequence remains paused; neither seed8 nor
+N1/T is restored. The selected next discriminator is the three new512 margins,
+their paired128→512 changes and success/attempt/waiting composition. A good
+endpoint with flat/negative change and an improving curve still below the rules
+will be distinguished. No stable advantage, convergence, C/UAV or automatic
+successor follows; tuned N2 headroom remains absent and MEI stays .02.
+
 The strongest surviving alternative is that public dwell age already suffices and the generic
 MLP matches the prior, or that all advantage is the fixed rule rather than learning. In the new
 host R0, R or ordinary G may handle scheduling, while the local readiness prior could occupy the
@@ -288,6 +316,10 @@ sharing K1 does not pool polarity or reopen that family.
 
 The evidence set includes historical observations and the separately labelled prospective selection:
 
+- `docs/research/candidates/vsp_03/VSP03_CONTINUOUS512_CONVERGENCE_INTAKE_20260909.md`
+- `docs/research/candidates/vsp_03/pro_packets/20260909_continuous512_convergence/archive/RESPONSE.md` at `5af9c448879bba3129df32e07a788839658f8a4f`
+- `docs/research/candidates/vsp_03/VSP03_B06_CONTINUOUS512_SCIENCE_CARD_20260909.md`
+- `docs/research/candidates/vsp_03/VSP03_B06_CONTINUOUS512_COUNTS_20260909.json`
 - `docs/research/candidates/vsp_03/VSP03_POST_B05_CONVERGENCE_INTAKE_20260909.md`
 - `docs/research/candidates/vsp_03/pro_packets/20260909_post_b05_convergence/archive/RESPONSE.md` at `3da3a0c44ff7296c19e85342a56ee3128dce1451`
 - `docs/research/candidates/vsp_03/VSP03_B05_P76_INTAKE_20260909.md`
