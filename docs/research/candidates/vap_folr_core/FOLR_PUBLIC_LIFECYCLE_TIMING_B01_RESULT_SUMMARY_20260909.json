@@ -212,12 +212,17 @@
         }
       },
       "resource": {
-        "complete_wall_seconds": 738.2,
         "user_cpu_seconds": 732.93,
         "system_cpu_seconds": 6.28,
         "aggregate_cpu_seconds": 739.2099999999999,
         "peak_rss_kib": 673136,
-        "exit_code": 0
+        "exit_code": 0,
+        "runner_process_wall_seconds": 738.2,
+        "runner_process_scope": "External time wraps timeout/runner, including startup, learner, evaluation and publication; excludes prior preflight/mkdir",
+        "supervisor_integer_duration_seconds": 738,
+        "whole_supervisor_wall_upper_bound_seconds": 739,
+        "whole_supervisor_scope": "Task start through command exit including preflight/mkdir; integer epoch endpoints, duration+1 second is a conservative rounding upper charge",
+        "cpu_scope": "External time user+system for timeout/runner; preflight/mkdir CPU not measured"
       },
       "training_log_extent": {
         "training_return_sum": -21655.78999999989,
@@ -562,12 +567,17 @@
         }
       },
       "resource": {
-        "complete_wall_seconds": 786.72,
         "user_cpu_seconds": 765.45,
         "system_cpu_seconds": 22.68,
         "aggregate_cpu_seconds": 788.13,
         "peak_rss_kib": 670720,
-        "exit_code": 0
+        "exit_code": 0,
+        "runner_process_wall_seconds": 786.72,
+        "runner_process_scope": "External time wraps timeout/runner, including startup, learner, evaluation and publication; excludes prior preflight/mkdir",
+        "supervisor_integer_duration_seconds": 787,
+        "whole_supervisor_wall_upper_bound_seconds": 788,
+        "whole_supervisor_scope": "Task start through command exit including preflight/mkdir; integer epoch endpoints, duration+1 second is a conservative rounding upper charge",
+        "cpu_scope": "External time user+system for timeout/runner; preflight/mkdir CPU not measured"
       },
       "training_log_extent": {
         "training_return_sum": -24354.86999999995,
@@ -920,12 +930,17 @@
         }
       },
       "resource": {
-        "complete_wall_seconds": 819.15,
         "user_cpu_seconds": 800.4,
         "system_cpu_seconds": 20.06,
         "aggregate_cpu_seconds": 820.4599999999999,
         "peak_rss_kib": 656492,
-        "exit_code": 0
+        "exit_code": 0,
+        "runner_process_wall_seconds": 819.15,
+        "runner_process_scope": "External time wraps timeout/runner, including startup, learner, evaluation and publication; excludes prior preflight/mkdir",
+        "supervisor_integer_duration_seconds": 819,
+        "whole_supervisor_wall_upper_bound_seconds": 820,
+        "whole_supervisor_scope": "Task start through command exit including preflight/mkdir; integer epoch endpoints, duration+1 second is a conservative rounding upper charge",
+        "cpu_scope": "External time user+system for timeout/runner; preflight/mkdir CPU not measured"
       },
       "training_log_extent": {
         "training_return_sum": -23578.120000000046,
@@ -1085,12 +1100,15 @@
   },
   "claim": "One new fitting instance per arm; unmatched p=.1 trained-package comparison; no pure timing or stable-winner claim",
   "cost": {
-    "sum_complete_wall_seconds": 2344.07,
     "sum_aggregate_cpu_seconds": 2347.7999999999997,
     "critical_path_seconds": 2782.460401,
     "critical_path_boundary": "First RETAIN admission to final RANDOM supervisor exit (second precision), includes inter-arm monitor/collection/sequencing gaps; excludes prior staging and final collection",
     "per_arm_cap_seconds": 1800,
-    "triple_cap_seconds": 5400
+    "triple_cap_seconds": 5400,
+    "sum_runner_process_wall_seconds": 2344.07,
+    "sum_whole_supervisor_wall_upper_bound_seconds": 2347,
+    "cpu_scope": "Preserved measured timeout/runner CPU sum; excludes preflight/mkdir CPU",
+    "cap_evidence": "Conservative whole supervisor wall upper charges739/788/820 seconds, sum2347, each below1800 and total below5400"
   },
   "checks": {
     "exact_source_seeds_counts": true,

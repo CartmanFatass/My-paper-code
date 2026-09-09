@@ -4,6 +4,8 @@
 
 ## Source and check index
 
+**Accounting scope correction after Root readback:** the exact command below places resource preflight and mkdir before `/usr/bin/time`. Therefore738.20/786.72/819.15s are measured **runner-process walls**, covering startup, learning, evaluation and publication but excluding preflight/mkdir. Earlier chronological descriptions of these numbers as full/complete wall are superseded by this correction. Retained supervisor logs record integer epoch durations738/787/819s across the entire command chain. Adding1s to each for endpoint rounding yields conservative whole-supervisor charges **739/788/820s, sum2347s**, including preflight/mkdir. Each is below1800s and the sum below5400s; cap conformance survives the corrected scope. These upper charges are not higher-precision measurements. Preserved user+system CPU2347.80s also covers only timeout/runner; preflight/mkdir CPU is unmeasured. Supporting accounting correction uses0.0731315s log read +0.1071598s assembly, bringing total support to **12.7206671/300s** before DM intake. No science/test/replay ran. The summary now labels both scopes explicitly.
+
 All source is under `experiments/candidates/vap_folr_core/public_lifecycle_b01/` unless named otherwise. Base source `434f10cf95f16dd342cbf754382aa76155fcd2b7`.
 
 | Path | Changed boundary |
@@ -86,7 +88,7 @@ Root confirmed actual RANDOM adoption23:13:19.8055452Z: running/exit null/tmux t
 
 RANDOM training counts births21693/departures8492/event opportunities47239/eligible261232/resets26050; final562/233/1377/6644/649. Admission23:13:06.186769Z passed physical/effective floors at15633313792 bytes each. Whole invocation819.15s, user800.40s/system20.06s, aggregate CPU820.46s, peak RSS656492KiB, exit0. Runner's narrower wall818.798939s/RSS647880KiB remains distinguished. Local/remote hashes agree: summary `40ba74368fd0b52882227cacddc6104b0b489f8b6a5d72dad1215d063390a029`; checkpoint `92f58d70014155f2013f8fe2ee846c0b2b952c6863512f1d2d1bbd615cd9e172`.
 
-| Arm | Final native mean | Complete wall s | OS user+system CPU s | Training resets / eligible | Final resets / eligible |
+| Arm | Final native mean | Runner-process wall s | Runner OS user+system CPU s | Training resets / eligible | Final resets / eligible |
 | --- | ---: | ---: | ---: | ---: | ---: |
 | RETAIN | 2.54453125 | 738.20 | 739.21 | 0 /258975 | 0 /6798 |
 | EVENT | 5.349296875 | 786.72 | 788.13 | 47375 /257715 | 1416 /6294 |
@@ -94,7 +96,7 @@ RANDOM training counts births21693/departures8492/event opportunities47239/eligi
 
 Frozen contrasts: d_ER=+2.804765625 (`EVENT_ABOVE_MEI`), d_MR=+1.44109375 (`RANDOM_ABOVE_MEI`), d_EM=+1.363671875 (`EVENT_ABOVE_MEI`). Since d_ER>=1 and d_EM>=1, the combined rule is **EVENT_CLEAR_ADVANTAGE**. This is the complete triple rule, not an early-arm selection. Mean/vector/count/admission/exit/mask-metadata and cap readback passed; no missing dependent primary measurement. One fitting instance per arm remains one fitting instance, not128. Realized EVENT reset rates were18.3827% training/22.4976% final versus RANDOM9.9720%/9.7682%; p=.1 is explicitly unmatched. Timing, dose, optimization/data and partner co-adaptation remain coupled. Historical B01/B02/B03 pairs and B03 reversal are not pooled or reinterpreted here.
 
-Every complete arm is below1800s; summed scientific wall **2344.07/5400s**, aggregate CPU **2347.80s**. Study critical path is approximately2782.46s from first admission22:40:22.539599Z to final supervisor exit23:26:45Z (second precision). It includes inter-arm Monitor/collection/sequencing gaps, excludes prior staging and final collection, and is distinct from summed machine wall. Peak RSS is per invocation, not summed simultaneous memory. Cgroup fields remain null, with no stronger claim.
+Measured runner-process wall sums to **2344.07s**, measured runner aggregate CPU **2347.80s**. Corrected whole-supervisor upper charges are **739/788/820s**, each below1800s, totaling **2347/5400s** including preflight/mkdir. Study critical path is approximately2782.46s from first admission22:40:22.539599Z to final supervisor exit23:26:45Z (second precision). It includes inter-arm Monitor/collection/sequencing gaps, excludes prior staging and final collection, and is distinct from summed machine wall. Peak RSS is per invocation, not summed simultaneous memory. Cgroup fields remain null, with no stronger claim.
 
 Supporting final accounting: prior9.8888591s + RANDOM receipt/hash read0.5177272s + complete triple readback/rule/JSON assembly2.0467535s + log-extent read0.0870360s = **12.5403758/300s**, leaving287.4596242s for DM intake. Collection transport/Git/authoring are separate control-plane work. The assembly read already collected data and the frozen rule only; it created no model, environment, checkpoint replay or scientific evaluation.
 
