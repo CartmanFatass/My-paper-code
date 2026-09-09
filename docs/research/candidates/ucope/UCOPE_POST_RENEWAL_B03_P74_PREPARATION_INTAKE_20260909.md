@@ -269,3 +269,54 @@ and actual preparation state, with the [audit row](../../portfolio/audit/2026-09
 Owner item: [20260909-ucope-001](../../portfolio/owner/inbox/2026-09-09/20260909-ucope-001.json).
 No new prediction is scored and no new valid-result brief is due: this consultation
 creates no result. The three prior prediction scores remain in machine facts.
+
+## 6. Published task, ready handoff and clean return
+
+Input commit **`3828ed463d5899ac374929a5119c909ebb6e20a7`** was committed and
+immediately pushed on `codex/ucope`. Its seven current control-plane/assignment
+inputs match main `b52d0e1562376cdf833fc30d0543cce64e910e1a` exactly; Root
+already owns those changes on main. The other additions are this preparation,
+machine facts, historical Issue snapshot, P2 owner item and one audit row.
+No scientific source, frozen card, prior result or DIRECTION text changed.
+
+TASK and ordinary REQUEST are published at
+**`9f4702662ba7234ac9a75e49194cab57f75f0c51`**:
+[fixed TASK](https://github.com/CartmanFatass/My-paper-code/blob/9f4702662ba7234ac9a75e49194cab57f75f0c51/docs/research/candidates/ucope/pro_packets/20260909_post_renewal_b03_convergence/TASK.md).
+All 28 listed references resolve at the single fixed input SHA. Renderer binding
+compared the committed TASK bytes before forming the fixed link. GitHub's exact
+commit/path readback returned blob `b98a382a5c9fc9b80bd5c46fb91a8121332aa8a0`, matching local Git,
+size 34885 bytes. No moving branch is used as input evidence.
+
+The existing [Issue 11](https://github.com/CartmanFatass/My-paper-code/issues/11)
+now describes P74. Its [fresh publication readback](pro_packets/20260909_post_renewal_b03_convergence/ISSUE_PUBLICATION_READBACK.json)
+is dated `2026-09-09T08:38:49Z`. All three historical comments and the previous
+body's substantive text are preserved. The first body comparison exposed
+carriage-return normalization in the old text; readback reconciled that exact
+difference without another write. The pre-publication snapshot retains the
+original bytes as returned, and no accepted request or response was modified.
+
+The bound [HANDOFF](pro_packets/20260909_post_renewal_b03_convergence/HANDOFF.json)
+has `READY_TO_DISPATCH`, original `em:ucope:convergence` binding, actual
+native author, Root parent and configured Transport executor. This field means
+the task is publishable for Root; it does not report a dispatch or Pro Send.
+The ready return pins this HANDOFF's full publication commit and same local path.
+Root performs the one actual Transport dispatch, omitting model/effort overrides,
+then forwards the immutable full-response receipt to
+`/root/dm_ucope_p47_resume` for scientific intake.
+
+The final owner check at `2026-09-09T08:41:05Z` found no unapplied reviews
+in either checkout and no nonempty owner column in 179 UCOPE audit rows
+(89 main, 90 direction). No item needed mark-answered. P2 item
+`20260909-ucope-001` remains open asynchronously; publication does not await it.
+Scientific calls, new seeds/cards/allocations, source changes and provider
+Send/Transport dispatch by this DM remain **zero**. No test or CM run was
+repeated for question preparation.
+
+The shared direction checkout is retained for this pending Pro delivery and
+subsequent original-DM intake; Root owns its later reconciliation/reclamation.
+No experiment is live or allocated by P74. At this clean boundary, the selected
+action is **direction-tier escalation only**, with future scientific options
+`PRO_PENDING`. Root's next action is exact dispatch; after the full response,
+the next discriminator and any concrete code/run command remain to be resolved
+at their proper tiers. A selected answer does not silently enlarge this
+preparation assignment.
