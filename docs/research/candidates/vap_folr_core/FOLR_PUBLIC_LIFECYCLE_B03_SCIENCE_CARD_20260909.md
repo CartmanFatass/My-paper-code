@@ -5,8 +5,11 @@ Binding MARL structure: (a) roster change; (d) other-agent non-stationarity or p
 
 ## 1. Question, authority and retained evidence
 
-**B/EXPLORE; Root allocated one fresh pair on 2026-09-09 after accepting B02 through
-main `71c781aec`.** This card and its prediction precede all B03 scientific execution.
+**B/EXPLORE; the allocated pair completed with valid RETAIN_ABOVE_MEI.** The
+[scientific intake §§4–7](FOLR_PUBLIC_LIFECYCLE_B03_INTAKE_20260909.md#4-complete-result-against-the-frozen-card)
+records the reversal, missed prediction and three-pair claim ceiling. Root allocated this
+fresh pair on 2026-09-09 after accepting B02 through main `71c781aec`; the card and its
+prediction were published before all B03 scientific execution. This allocation is finished.
 The [intake §1](FOLR_PUBLIC_LIFECYCLE_B03_INTAKE_20260909.md#1-prospective-allocation-and-reading)
 records the allocation and object-tier selection. It authorizes exactly two accepted
 scientific submissions, one per arm, followed by collection and scientific intake.
@@ -138,6 +141,7 @@ Nominal lr×steps=2.4845 is not parameter displacement.
 | B02 observed | 767.84 | 753.11 | 1,520.95 |
 | B03 point projection, mean at work ratio 1.0 | 769.265 | 750.000 | 1,519.265 |
 | B03 hard limit | 1,800 | 1,800 | 3,600 |
+| B03 actual complete invocation wall | 753.84 | 753.94 | 1,507.78 |
 
 These are same-workload CPU FP32/one-compute-and-interop-thread observations, not guaranteed
 upper bounds or new cost. Different trajectories and contention may change wall. The caps
