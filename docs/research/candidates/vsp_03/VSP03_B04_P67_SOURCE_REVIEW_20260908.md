@@ -57,3 +57,32 @@ technical batch. A source review supplies neither a fresh admission nor a scient
 result. Any accepted failure spends P67's new allowance without retry. No repair is
 requested from this inspection. This is independent technical evidence, not approval
 or a terminal disposition.
+
+## Focused argv-quoting follow-up
+
+**No quoting defect found; no source change is required.** Independently decoded
+[the argv evidence](VSP03_B04_P67_ARGV_CHECK_20260908.json) and compared its new
+bash-c payload to the exact launcher bytes at828da0034. They match. The extracted
+committed payload has zero backslash characters; its start expression is the ordinary
+double-quoted shell expression `"$VSP03_B04_STARTED"` (quote codepoint34, no
+backslash codepoint92). JSON display escapes are serialization, not literal command
+characters. The old_saved_p64 payload in the decoded evidence likewise has zero
+backslashes.
+
+The outer single quotes retain the expression until the contained bash evaluates
+it. That shell consumes the inner double quotes as syntax and passes the expanded
+numeric value as one argument. For both recorded payloads, independently parsing
+the controller's shlex-serialized command recovers exactly `[bash, -c, payload]`.
+The retained harmless printf captures show the final argument
+`375534.924519` without quote characters, and the captured value parses as float.
+Only executable tokens were replaced for those CM captures; no admission or runner
+was executed. This reviewer inspected bytes and existing captures and did not rerun
+the shell fixture, lifecycle checks or scientific code.
+
+The evidence preserves the first fixture's mistaken expectation that the old
+payload would fail float parsing. Its failed assertion concerns that expectation;
+the old capture also contains a valid numeric argument. Correcting the expectation
+does not repair or change production bytes and supplies no new explanation for the
+historical missing-admission-source failure. The prior no-material-finding conclusion
+stands for this exact argv boundary; scientific and invocation acceptance remain
+subject to their existing evidence requirements.
