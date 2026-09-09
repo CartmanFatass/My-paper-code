@@ -10,9 +10,9 @@
 
 | 方向 | 当前状态 | DM 的最后一步 | 清洁边界 |
 | --- | --- | --- | --- |
-| `ucope` | P61 B04/7201 已完成一次远程 pair；技术 collection 已通过并已集成 `cc64a7b84`。T−G = −0.003948225944122139（SE 0.010191826216031805），G−H = +0.0238187196536019（SE 0.011454243503509544），T−H = +0.019870493709479763（SE 0.014677398371169156）；286,720 team steps、2,048 Adam、96 eval、277.51 s 全部可追溯。 | `/root/dm_ucope_p47_resume` 完成 P61 all-outcome intake，保留预测评分、限制、brief、audit 和 no-successor 结论，提交并返回 Root。 | intake 已集成、证据归档、远程测试 checkout/wrapper 按既有规则清理；不再运行。 |
-| `vsp_03` | P65 deadline correction 已由 CM 接受（source `b5d605bf4f39b5ab18f01c98e04dc07e53764354`，evidence `c2c092894`，DM binding `671619257`）；P64 的唯一 seed6 B04 尚未启动。 | `/root/dm_vsp03_p54_reentry` 完成 binding 集成；Root 只执行 preceding return 中的精确命令一次，先做 fresh admission，再观察、CM collection 和 DM intake。 | 单次 B04 及其 collection/intake 完成后停止；接受的 timeout/failure 也消耗唯一 invocation，不 retry、不增加 seed/T。 |
-| `vsp_c1` | P66 已由 Portfolio 发布（`3c32c8f51`），DM/CM 正在同一 checkout 绑定 master8202 的独立 normalized pair；当前仍为零科学 exposure。 | `/root/dm_vspc1_p49_value_question` 完成 card/spec、最小 plumbing、focused checks、exact launch handoff；Root 只执行一次，随后 CM collection 和 DM intake。 | P66 一次 pair 的 intake 完成并归档后停止；不做 third normalized pair、extra H/eval、tuning、seed search 或 retry。 |
+| `ucope` | P61 B04/7201 已完成一次远程 pair；技术 collection 已通过并已集成 `cc64a7b84`，科学 intake 已集成 `31e0fda31`。T−G = −0.003948225944122139（SE 0.010191826216031805），G−H = +0.0238187196536019（SE 0.011454243503509544），T−H = +0.019870493709479763（SE 0.014677398371169156）；286,720 team steps、2,048 Adam、96 eval、277.51 s 全部可追溯。 | `/root/dm_ucope_p47_resume` 已完成 P61 all-outcome intake，保留预测评分、限制、brief、audit 和 no-successor 结论，提交 `43f4cc2c14a3b6662d138ad4b3b7b9a26f9e0227` 并返回 Root。 | intake 已集成、原始证据与 receipts 保留；无 live handle、无后续运行。 |
+| `vsp_03` | P65 deadline correction 已由 CM 接受（source `b5d605bf4f39b5ab18f01c98e04dc07e53764354`，evidence `c2c092894`，DM binding `671619257`）；P64 唯一 seed6 B04 已执行一次并在准入前 exit2，科学曝光为零；DM intake 已集成 `40a2506db`。 | `/root/dm_vsp03_p54_reentry` 完成 failure collection/intake，提交 `380c50499da32affe4b3350387f45f858c88edbb` 并返回 Root。 | 单次 B04、collection 与 intake 已完成；无 live handle、无 retry、无新增 seed/T。 |
+| `vsp_c1` | P66 已由 Portfolio 发布（`3c32c8f51`）；master8202 的一次提交已 exit127 于脚本路径错误，科学曝光为零；DM intake 已集成 `437b2801d`。 | `/root/dm_vspc1_p49_value_question` 完成 failure collection/intake，提交 `49e759d9151b912f974f9916d52cd42f0539c7ce` 并返回 Root。 | P66、collection 与 intake 已完成；无 live handle、无 retry、无 third normalized pair、extra H/eval、tuning 或 successor。 |
 
 P66 依赖的 accepted UCOPE environment files（`experiments/candidates/ucope/uav_motion_prefix_b01/environment.py` 与 `__init__.py`）必须随 exact launch source 保留；不要用无关 main 变更替换。
 
@@ -32,4 +32,4 @@ DISH P62 已作 `PRO_FINAL` narrow stops/no successor；FRRIE P63 仍是 permitt
 
 恢复时从本 handoff、`EXPERIMENT_TRACKING.md`、当日 root log、各方向 card/intake 和 exact commit 读取状态。恢复不得从旧 agent 名称或历史 handoff 推断新任务；每个新对象必须有新的明确 Portfolio/owner 指令和对应证据记录。
 
-状态：`DRAINING_TO_SAFE_BOUNDARY`（三个当前方向链完成前不宣称已暂停）。
+状态：`PAUSED`（2026-09-09T00:27Z；UCOPE P61、VSP03 P64/P65、VSPC1 P66 三条当前链均已完成 intake 并集成；无 live accepted handle、无未完成 DM/CM 收尾、无新的 Portfolio command。证据与原始 receipts 保留，待 owner 明确恢复后再继续。）

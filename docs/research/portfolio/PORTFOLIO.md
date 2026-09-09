@@ -1,8 +1,8 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-08 (owner safe-pause handoff)
+Updated at: 2026-09-08 (owner safe-pause completed)
 
-Safe-pause handoff: [2026-09-08-safe-pause-handoff.md](handoffs/2026-09-08-safe-pause-handoff.md). Existing UCOPE P61, VSP03 P65/P64 and VSPC1 P66 chains may finish only their already-authorized implementation, one execution where selected, collection and intake; after those clean boundaries no replacement, new Pro Send or new scientific exposure is permitted until the owner explicitly resumes.
+Safe-pause handoff: [2026-09-08-safe-pause-handoff.md](handoffs/2026-09-08-safe-pause-handoff.md) is now `PAUSED`. UCOPE P61, VSP03 P65/P64 and VSPC1 P66 completed their already-authorized implementation/one execution/collection/intake routes; no live accepted handle or unfinished DM/CM closeout remains. No replacement, new Pro Send, retry or scientific exposure is permitted until the owner explicitly resumes. The detailed paragraphs below are retained planning history and are not current executable commands.
 
 Prior planning snapshot: P66 independent VSPC1 normalized pair
 
