@@ -166,3 +166,29 @@ assigns the original CM the full source/check/payload, exact committed remote
 invocation, sole observation and technical collection batch in the same
 codex/ucope checkout. No intermediate approval handshake.
 
+## 8. Observed completion — 2026-09-09 P84
+
+The frozen §§1–7 above remain unchanged. One accepted 8301 execution is valid
+complete **UP**: F−G **+0.06439366516106426**, conditional SE
+**0.008200587980245644**, 0.05439366516106426 above +0.01. Both hover
+contrasts are adverse: F−H **−0.029184443306665326**, G−H
+**−0.09357810846772958**. P83's F−G and G−H signs recur; its F−H gain does
+not. P82 WITHIN and every older primary/hover outcome remain unchanged.
+
+Full **286720 native steps / 2048 Adam / 96 final episodes** completed in
+**313.90 s**, without a cap or engineering-budget breach. Whole-head freeze,
+real actor/critic learning and short-support counts conform. Aggregate CPU
+remains resources_unmeasured. Forecast events were true/false/true, mean
+Brier **0.3091666666666667**; owner prediction not taken.
+
+See [E0 evidence](UCOPE_UAV_SHORT_FIXED_RENEWAL_B03_P84_RESULT_EVIDENCE_20260909.md),
+[durable summary](UCOPE_UAV_SHORT_FIXED_RENEWAL_B03_P84_RESULT_SUMMARY_20260909.json)
+and [DM intake §§7–10](UCOPE_UAV_SHORT_FIXED_RENEWAL_B03_P84_INTAKE_20260909.md#7-dm-scientific-intake-against-the-card).
+P84 ends. The next recommendation is a separately allocated B with unchanged
+F/G training and both mean-velocity and stochastic execution on the same new
+fit, plus hover; F duration draws remain fixed stochastic {1,2}. This is
+advice only, with no next card/master/source/allowance, additional P84
+evaluation, automatic fourth history or Pro Send. No competent-comparator,
+stable, shortening-cause or deployment claim follows. Root owns later
+allocation, integration and reclamation.
+

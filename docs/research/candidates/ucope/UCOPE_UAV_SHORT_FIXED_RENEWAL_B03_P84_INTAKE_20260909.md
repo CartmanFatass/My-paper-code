@@ -145,3 +145,208 @@ F duration head and both layers have **zero displacement**; whole/hidden initial
 F training/evaluation renewals **437390 / 27324**, literal d2 **218812 / 13693** (total **232505**), d4 **0** throughout. Suppressed decisions **217970 / 13636**, horizon-censored holds **842 / 57**; d2=suppressed+censored also holds per F episode. F duration-head forward rows **2678988**, within the declared range. Native diagnostics agree with physical support (1, 2), expiration, held velocity and remaining/4.
 
 One allocated invocation is consumed. No further run, retry, changed support, tuning, extra evaluation, Pro send or default fourth unchanged history follows. DM owns scientific intake and evidence archival; Root owns integration and P84 remote check/scientific cwd and wrapper reclamation after verified preservation. The designated shared local checkout remains in use; prior P83 remote roots were untouched.
+
+## 7. DM scientific intake against the card
+
+**Valid complete B/EXPLORE, UP under the frozen F−G primary, with both
+learned-policy hover losses retained.** This is one fresh 8301 learning instance.
+The CM terminal commit is `b34442c957d4c505020f37addb0236778f637ee8`;
+source `6384613b4f8c4204a154427a61ed8012e97af917` and prelaunch record
+`e84451ad734a5d9f4f47131990fb6fb276ac9e73` were pushed before execution.
+[E0 evidence](UCOPE_UAV_SHORT_FIXED_RENEWAL_B03_P84_RESULT_EVIDENCE_20260909.md)
+and [durable summary](UCOPE_UAV_SHORT_FIXED_RENEWAL_B03_P84_RESULT_SUMMARY_20260909.json)
+preserve all outcomes, counts, receipts and the bounded next recommendation.
+
+DM checked the full source diff against card §§2–7, the raw new-binding
+7-pass focused receipt, exact wrapper, actual-node admission, terminal and
+CM collection/readback. The changes only bind B03/8301; accepted P82 physical,
+credit and whole-head-freeze review plus P83 binding coverage remain applicable.
+No question-relevant defect, wider machinery or §5 budget breach was found.
+Engineering conformance supplies trustworthy measurements; it does not choose
+their scientific polarity. B has no object-consumption state; its one allocated
+invocation allowance has been used and ends here.
+
+Card §5 selects **Delta_G=mean_e(F−G)** with
+`J=sum_t sum(info['rewards_dict'].values())/256`, absolute MEI **0.01**.
+The unrounded point is **+0.06439366516106426**, **0.05439366516106426
+above +0.01**. The condition **Delta_G > +0.01** holds. Rule applied verbatim:
+
+> Preliminary favorable short fixed-renewal package evidence on this fresh fit; it does not establish stable advantage across training histories.
+
+| Contrast | Mean | Conditional evaluation SE | Positive / negative / zero |
+| --- | ---: | ---: | --- |
+| F−G, primary | +0.06439366516106426 | 0.008200587980245644 | 29 / 3 / 0 |
+| F−H | −0.029184443306665326 | 0.012741511301119637 | 13 / 19 / 0 |
+| G−H | −0.09357810846772958 | 0.012620868136163161 | 3 / 29 / 0 |
+
+F/G/H means are **0.13591528623865382 / 0.07152162107758955 /
+0.16509972954531915**. Both learned policies lose to hover in these sampled
+means. Neither the favorable primary nor an earlier hover gain erases those
+losses; they also do not retrospectively replace the selected F−G primary.
+
+One [episode-byte analysis](../../../../temp/directions/ucope/exp/ucope-uav-short-fixed-renewal-b03-8301-p84-20260909/dm_analysis/analysis.json)
+finds all **1120** episode identities complete and unique, correct master,
+reset association and 256-step horizon, exact J=reward_sum/256, and exact
+matches for all 96 J values and three vectors/means/SEs. SE is sample SD of
+32 paired episode differences divided by sqrt(32), conditional on these
+fitted policies. The [approved run-level summary](../../../../temp/directions/ucope/exp/ucope-uav-short-fixed-renewal-b03-8301-p84-20260909/dm_analysis/fitted_endpoint_summary.json)
+receives only new 8301 F/G endpoints, n=1. H is untrained and older fits are
+excluded from its rows; it matches the native point exactly here. No new
+cross-instance mean/SD, pooled primary or training-population interval follows.
+F/G completeness governs the primary; the fixed path's absent
+`selected_contrast` remains intentional, with P80's distinct F−H retained.
+
+All **286720 native steps / 2048 Adam / 512 rollouts / 96 final episodes**
+completed. Recorded F train/final renewals **437390/27324**, d2 **218812/13693**,
+d4 zero, suppression **217970/13636** and censoring **842/57** agree with the
+card. Per-episode d2=suppression+censoring and opportunity counts agree.
+F head work **2678988 rows / 5915205504 MACs** is inside the declared bounds.
+The entire 2242-parameter head and both layers remain fixed, norm
+**3.2817656993865967** before/after; final-layer norm zero has undefined
+relative movement. F actor/critic move **3.041435718536377/6.447686672210693**;
+G **3.567142963409424/4.446179389953613**. DM accepts CM checkpoint/physical
+diagnostic checks without tensor loading, learner/evaluator replay or another
+remote observation. All seven collected scientific and seven supervisor
+local hashes match their CM receipts.
+
+## 8. Bounded interpretation, grounding and predictions
+
+**Strongest support:** the above-MEI F−G point and 29/32 positive paired
+differences after real learning; P82/P83 also retain their favorable F−H
+points. **Strongest contradiction to useful, competent-feedback superiority:**
+new F−H **−0.02918** and G−H **−0.09358**, plus earlier P82 F−G WITHIN.
+P83's complete sign pattern did not recur: F−G and G−H signs recur, while
+F−H reverses. This is preliminary advantage against this fitted G and no
+demonstrated native advantage over hover on the new fit.
+
+P82 stays F−G +0.008551004914111454 (WITHIN), F−H +0.02854870179583208,
+G−H +0.019997696881720626. P83 stays F−G +0.04205514630433558 (UP),
+F−H +0.01688043904880538 and G−H −0.025174707255530195. Their conditional
+SEs and all P78–P81 {1,4} points remain individually in the summary; P79's
+old n=2 description and hover losses, P80's F−H primary, and P77's learned-T
+losses remain. Changed training histories and final reset populations do not
+identify a pure training-variance or causal-shortening effect.
+
+Free private observations → each owner's recurrent history and velocity at
+its expiry → held motion, later service and local information → masked
+learner exposure and partner co-adaptation → native return remains the
+proposed mechanism path. Fixed membership and primitive credit/time remain.
+Poor sampled motion, different action opportunities, optimization and
+evaluation variation, and partner co-adaptation survive. Direct service versus
+information value and learned-duration value are unseparated. H is untuned;
+G is legal, with tuned same-information headroom absent. No stable superiority
+or harm, equivalence, tuned competence or deployment conclusion follows.
+
+The new follow-up question is whether **velocity execution choice** is useful
+to test. At the bound source, `policy.py::sample` draws a Gaussian velocity;
+`learner.py::collect_episode` sends its tanh at legal opportunities. This is
+a direct code fact, not evidence that sampling caused either hover loss.
+The question-driven Inst-sci real catalog search used “proximal policy”,
+“what matters”, “on-policy”, “deterministic” and “Gaussian”; only unrelated
+TAPE `MARL-0056` matched. The previously verified published My-lib synthetic
+fixture set remains excluded, without asserting current library-wide coverage.
+P81's verified UTE `VS-0005` passages remain relevant to persistence tradeoffs,
+not this execution-mode question or the cause of P84.
+
+The specific coverage gap was checked against primary documentation.
+[Stable Baselines3 2.7.0, evaluation guidance](https://stable-baselines3.readthedocs.io/en/v2.7.0/guide/rl_tips.html#how-to-evaluate-an-rl-algorithm)
+suggests trying deterministic prediction for stochastic PPO/A2C policies;
+it does not establish a UAV benefit or prescribe our recurrent mixed-duration
+policy. [Spinning Up's test-policy documentation](https://spinningup.openai.com/en/latest/user/saving_and_loading.html)
+restricts its deterministic flag to SAC, so stochastic PPO evaluation remains
+legitimate. This evidence changes the recommendation toward a separately
+declared execution-policy B; it does not invalidate or repair P84, justify a
+new package import, or assign its loss to noise.
+
+Forecast F−G>0.01 (0.55) occurred, Brier **0.2025**; F−H>0.01 (0.65)
+did not occur, **0.4225**; G−H<−0.01 (0.45) occurred, **0.3025**.
+Mean **0.3091666666666667**. No retrospective hard-label accuracy is used.
+Owner prediction **not taken (unattended)**. Owner flags **none**; both native
+hover losses remain explicit in every result surface.
+
+## 9. Decisions this completed intake produces
+
+**(1) Reading, object tier.** Options: (a) accept valid UP while retaining
+both learned-policy hover losses; (b) replace or negate the primary using
+hover; (c) claim stable or competent-comparator superiority. Recommend and
+execute **(a)** under the unchanged card rule. Trustworthy adverse secondaries
+limit the claim without changing its prospective primary identity.
+Owner-delegated decision (unattended, 2026-09-03 instruction): **(a)**.
+
+**(2) Allocation stop and next discriminator, object tier.** Options:
+(a) end P84 and recommend one separately allocated fresh B that evaluates
+mean-velocity and sampled-velocity F/G on the same learned instance, with H;
+(b) only a finite mean-velocity measurement on P84's existing checkpoints;
+(c) a fourth unchanged stochastic history. Recommend **(a)**. The question is
+whether fixed short renewal retains native value against feedback and hover
+when each velocity decision uses **tanh(mu)**, while the original stochastic
+execution on the same fit distinguishes the execution-mode observation from
+a cross-history change. The suggested primary is F_mean−G_mean; both modes'
+hover contrasts and within-fit mean−sampled differences must remain explicit.
+F's fixed {1,2}, half-each duration draws remain stochastic. tanh(mu) is not
+the expectation of a squashed Gaussian, and the F policy is not wholly
+deterministic. No best-mode selection or favorable-sign requirement follows.
+
+This is a distinct real-learning performance question inside the accepted
+renewal mechanism. A narrower fixed-checkpoint A could measure the selected
+P84 policies but would have no fresh learning instance or algorithm-effect
+claim. It is not selected, and is not a preliminary gate for the proposed B.
+A fourth unchanged history would not directly test execution choice. The new
+comparison does not assume that mean velocities improve or that current
+stochastic evaluation is defective; the documented alternative and actual
+sampling path make it a bounded option worth testing.
+
+Known work is computed in [next-question arithmetic](../../../../temp/directions/ucope/exp/ucope-uav-short-fixed-renewal-b03-8301-p84-20260909/dm_analysis/next_question_known_work.json):
+unchanged **2×512×256** training and **2048 Adam**, then **5×32×256**
+final steps for F_mean/G_mean/F_sampled/G_sampled/H, **160 final episodes**,
+**303104 native steps**. The two added execution modes are algorithm measurement
+work, not validation. F head work is **6×training renewals + 2×renewals in
+each F final mode**, bounds **2048000–4096000 rows / 4521984000–9043968000
+MACs**. This is 1.057142857 native steps and 1.020408163 head-bound work times
+the current B. No nested candidate/trajectory search. A three-group fixed-
+checkpoint measurement would instead require **24576 native steps / 0 Adam**,
+96 final episodes and **40960–81920 F head rows**; zero learners do not make
+that work free. Current **313.90 s** and F/G **163.87369038298493 /
+133.33607813803246 s** are reference timings, not a future wall estimate.
+Future source checks are separate; no cost probe is commissioned.
+
+Execute the **P84 stop and recommendation only**. No next card/master/source,
+invocation allowance, extra P84 evaluation, pilot/tuning, retry/resume,
+replacement, T restoration, support change, Pro Send, automatic repeat or
+pooled primary is created. Root owns any later allocation and implementation
+scope; this advice does not initiate the new comparison.
+Owner-delegated decision (unattended, 2026-09-03 instruction): **(a)**.
+No family disposition, recast, C or Portfolio action follows.
+
+## 10. Owner boundary, publication and next responsibility
+
+Owner review reference **2026-09-09T08:06:15-07:00**:
+[boundary and local hash checks](../../../../temp/directions/ucope/exp/ucope-uav-short-fixed-renewal-b03-8301-p84-20260909/dm_analysis/owner_boundary.json)
+show both checkout review lists [] and empty UCOPE audit owner columns.
+No item requires marking answered. Existing new-card item
+[20260909-ucope-009](../../portfolio/owner/inbox/2026-09-09/20260909-ucope-009.json)
+remains; ordinary result/next-question decisions stay in the intake/audit.
+[Audit row 32](../../portfolio/audit/2026-09-09.md#L32) accepts the result;
+[row 33](../../portfolio/audit/2026-09-09.md#L33) records the stop and bounded
+recommendation. The six-heading [Chinese brief](../../portfolio/owner/briefs/ucope/2026-09-09_UCOPE_UAV_SHORT_FIXED_RENEWAL_B03.md)
+retains both losses and the failed F−H forecast.
+
+Measured cost is **313.90 s complete wall / 554744 KiB peak RSS**, one accepted
+and one valid invocation. Both seconds-per-valid-result and accepted-attempt-
+seconds-per-valid-result are 313.90. Nested arms/runner exclude outer startup
+and tail; for this single serial invocation elapsed critical path and sum of
+invocation wall coincide. Aggregate CPU, full engineering/collection work and
+full-history accepted-attempt cost remain **resources_unmeasured**. No controlled
+efficiency comparison follows. Tuned host headroom is absent, recasts **1**;
+ACTIVE/HIGH and actual UAV-entry state remain unchanged.
+
+Publication checks preserve frozen card §§1–7 and CM §§1–6, all copied values,
+prior original primaries, JSON/links, audit mapping and brief length. The
+analysis/publication scripts and outputs remain in the collected root's
+`dm_analysis/`, with preparation records preserved separately. DM made no
+model/learner/evaluator/simulator call.
+
+Root owns integration of only unintegrated commits and, after evidence
+preservation, P84 remote scientific/check worktree and wrapper reclamation.
+Both handles are terminal. Shared local authoring and collected evidence
+remain in use; no other writer's work or old remote root was changed here.
