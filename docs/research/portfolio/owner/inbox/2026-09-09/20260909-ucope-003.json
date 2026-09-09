@@ -1,0 +1,80 @@
+{
+  "id": "20260909-ucope-003",
+  "created": "2026-09-09T03:42:53-07:00",
+  "direction": "ucope",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "UCOPE P78：固定随机续约对合法反馈的一次新训练比较",
+  "context": "固定随机续约F对普通反馈G为主要比较，绑定结构为五个局部观察智能体的异步一或四步动作承诺；两个速度与价值学习器从头真实训练。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "按P78额度执行一次7701 F/G/H并完整收口。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "停止尚未执行的依赖工作并保留已发生证据。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "按明确修改处理后续工作，不改写原结果。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "已接受的对象级删除T选择用更小的真实学习比较检验固定随机持久性，保留原P77主要失败。",
+  "evidence": [
+    "docs/research/candidates/ucope/UCOPE_UAV_FIXED_RENEWAL_B01_SCIENCE_CARD_20260909.md",
+    "docs/research/candidates/ucope/UCOPE_UAV_FIXED_RENEWAL_B01_P78_INTAKE_20260909.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-09.md#L13",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否接受P78已分配的新卡：一次比较固定随机续约F、普通反馈G与悬停H，把F对G作为事前主要比较？",
+    "changes_if_approved": [
+      {
+        "target": "docs/research/candidates/ucope/UCOPE_UAV_FIXED_RENEWAL_B01_SCIENCE_CARD_20260909.md",
+        "from": "P77完成并建议删除学习续约T，尚无后续运行",
+        "to": "按P78冻结7701与独立动作流，完成两臂真实训练和三臂最终评估后收口"
+      }
+    ],
+    "if_refused": "在新的依赖工作前停止或按明确修改处理；保留已经发生的证据，不自动替换运行。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_UAV_FIXED_RENEWAL_B01_SCIENCE_CARD_20260909.md",
+        "quote": "F's velocity actor and critic learn from the start.",
+        "why": "固定时长头保留随机持久性，速度与价值学习使比较对应完整训练策略。"
+      },
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_UAV_FIXED_RENEWAL_B01_P78_INTAKE_20260909.md",
+        "quote": "The new primary and seed are prospective; design selection is openly outcome-informed exploration.",
+        "why": "原P77的主要失败不被改写，新的独立训练直接检验固定持久性相对合法反馈的表现。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_UAV_FIXED_RENEWAL_B01_SCIENCE_CARD_20260909.md",
+        "quote": "Training-population uncertainty is unavailable at n=1.",
+        "why": "仅一个新匹配训练实例，不能推断稳定优势；容量、优化暴露与共同适应也限制机制解释。"
+      }
+    ],
+    "uncertainty": [
+      "P77中F的均值排序只构成后续动机，不是事前选定的F对G结论。",
+      "新两臂全程耗时未测量，已有逐臂时长仅作参照。"
+    ],
+    "cost": {
+      "compute": "2臂各512训练回合，总286720原生步、2048次Adam、96次最终评估；每臂1800秒、全程3600秒，最多一次接受的远程提交。",
+      "owner_time": "无需回复，异步覆盖仍生效。",
+      "reversibility": "costly",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "推荐按P78执行一次新的F/G/H比较7701，把固定初始续约F对普通反馈G作为事前主要比较。固定头不学习，速度与价值网络真实训练；原P77的学习续约失败照实保留，新结果仅说明这一训练实例的完整策略表现。",
+    "source": "docs/research/candidates/ucope/UCOPE_UAV_FIXED_RENEWAL_B01_P78_INTAKE_20260909.md"
+  },
+  "starred": false
+}
