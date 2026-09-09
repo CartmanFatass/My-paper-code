@@ -1,6 +1,6 @@
 # FOLR public lifecycle TIMING-B01 technical evidence
 
-Implementation accepted; RETAIN running under confirmed Monitor adoption, pending terminal collection. EVENT and RANDOM remain unsubmitted. Allocation: card §§2–6 and intake §7 at `8fc84a01eaaf8c89197020a75879ba9dfeea0e33`, Root main `fdede5b8897e412d68d2a341a379efac69feb429`. Original CM owns implementation, execution and terminal collection. The sequence is RETAIN → EVENT → RANDOM, exactly one accepted submission each; failure ends dependent execution. No retry, replacement, top-up, cost probe or successor.
+RETAIN collected and technically accepted; EVENT submitted, pending Monitor adoption/terminal collection; RANDOM unsubmitted. Allocation: card §§2–6 and intake §7 at `8fc84a01eaaf8c89197020a75879ba9dfeea0e33`, Root main `fdede5b8897e412d68d2a341a379efac69feb429`. Original CM owns implementation, execution and terminal collection. The sequence is RETAIN → EVENT → RANDOM, exactly one accepted submission each; failure ends dependent execution. No retry, replacement, top-up, cost probe or successor.
 
 ## Source and check index
 
@@ -57,3 +57,9 @@ Training births22047/departures9020/event-bound opportunities47723/all-eligible2
 Local and remote SHA256 match: summary `959b9bad13a785105789abc56107fc57c4b2a396cb71372fd982607f190c0f83`; checkpoint `ca76e264863100eb7006b9ef3744fa08cb70ab10a5685a52ac4527f38774d96a`. Supporting handover8.8652107s + readback/digest0.4566366s + executable counts/finite-mean/admission/exit checks0.0865406s = **9.4083879/300s**. Collection transport/Git are separate control-plane work. No scientific replay, checkpoint reload, test or smoke was performed.
 
 RETAIN technically accepted. EVENT remains the predetermined next arm, projected765.647s under1800s; RANDOM remains allocated after EVENT acceptance. The unchanged exact launch source is74d023d7d, not a documentation descendant. Full triple interpretation and final scientific intake remain pending. Preserve all data and previously excluded scratch.
+
+## EVENT accepted, pending collection
+
+RETAIN collection was committed/pushed as `9f783a146` before EVENT submission. Supervisor accepted handle `folr-public-lifecycle-timing-b01-event-20260909`, tmux `agent_folr-public-lifecycle-timing-b01-event-20260909`, log `/home/wu/.agent-tasks/folr-public-lifecycle-timing-b01-event-20260909/task.log`. Exact command is the RETAIN block above with `--arm EVENT` and lowercase output/receipt suffix `retain` replaced by `event`; source/cwd/interpreter/seeds/counts/cap unchanged. Its own destination admission is joined to this runner with `&&`.
+
+Direct MONITOR_ADD to the live shared task returned accepted destination threadId / `isError=false`, with complete exact handle paths and original CM/DM/Root. Adoption confirmation and terminal collection remain pending at this entry; no routine status polling follows dispatch. Scientific submission2of3 consumed; RANDOM remains unsubmitted until terminal EVENT collection. Supporting9.4083879/300s and scientific wall738.20s are the measured completed totals, not a cost claim for the live arm.
