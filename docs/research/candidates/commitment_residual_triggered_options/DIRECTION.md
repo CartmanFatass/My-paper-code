@@ -738,3 +738,48 @@ CRTO_NATIVE_COST_B08_P71_TECHNICAL_RESULT_EVIDENCE_20260908.md;
 CRTO_NATIVE_COST_B08_P71_RUNTIME_RECEIPTS_20260908.json;
 CRTO_NATIVE_COST_B08_P71_DM_ANALYSIS_20260908.json;
 CRTO_NATIVE_COST_B08_P71_INTAKE_20260908.md.
+
+## Post-B08 P72 Convergence: retain the family boundary with native yield — 2026-09-08
+
+The complete Convergence decision at `9c8b4b74205e3fe6191e92106aa5b262f868272a` retains the
+**reversible selected-panel balanced residual family PARK** and selects no next B. This is
+PRO_FINAL / DM_EXECUTED for that family, without CLOSE, RECAST, a Portfolio disposition or a
+competent residual negative. P68's limited B08 re-entry has its completed result; no arbitrary
+repair ladder follows. A/B have no consumption state.
+
+The bounded yield is real native learning to a common low-regret vector: RAW, TRUE and DERANGED
+agree on all sixteen decisions at both 33/258 updates. Their mean regret is .0021294544930598857;
+new RAW remains REPLAN5/8, so the reading is weak-RAW diagnostics only. Matched alignment gains
+are zero. Historical RAW gains +.0044524264964700775 SHORT / +.0016519755926440258 LONG retain
+three / two loss rows and worse REPLAN side means. Those gains do not identify aligned residual
+value or prove a generic-objective mechanism.
+
+The strongest support for retaining the boundary is this informative completed comparison,
+zero added matched action value, the recorded-RAW gain ceiling below original MEI .0025, and
+no specified different next observation. The strongest contradiction to broad failure is the
+native improvement, including RAW's improvement, and three remaining errors. Exact-count
+competence is not a total ordering of native value. Common objective behavior, saturation,
+shared parameters, calibration and seed-dependent optimization remain possible; no cause is
+identified and identical readouts do not imply identical functions or intervening policies.
+
+The fixed-reference arithmetic permits maximum mean gain .0021294544930598857 and total gain
+.03407127188895817, below the required >.04. It is not tuned headroom, an accessible oracle,
+a global information limit or a reason to weaken the comparator/MEI. The one reused seed,
+exposed panel and two endpoint facets do not establish replication, family exhaustion,
+full-policy MARL/UAV value or transfer. Old B04/B05/B06/B07 readings, natural-support closure
+and unresolved A01 remain separate; tuned same-information headroom remains absent.
+
+The missing discriminator is a specifically justified legal-action/credit question whose next
+native observation separates an untested effect from the containing RAW and alignment control.
+The unchanged fixed-panel/recorded-RAW original-margin comparison has its demonstrated limit;
+a different population, exposure or estimand needs its own scientific purpose, not a weaker
+reference or larger observed gain. No such configuration, seed, budget or card is selected.
+Re-entry is on specification, not prior success; neither C evidence nor a unique cause, exact
+maximum, headroom training or new cost pilot is required. This consultation adds zero scientific
+exposure. Existing measured B08 work remains one complete 169-second invocation.
+
+References: CRTO_POST_B08_P72_CONVERGENCE_INTAKE_20260908.md;
+pro_packets/20260908_post_b08_convergence/archive/RESPONSE.md at
+9c8b4b74205e3fe6191e92106aa5b262f868272a;
+CRTO_NATIVE_COST_B08_P71_INTAKE_20260908.md; CRTO_NATIVE_COST_B08_P71_DM_ANALYSIS_20260908.json.
+The intake preserves the exact new delivery and the historical P68 one-Send mismatch separately.
