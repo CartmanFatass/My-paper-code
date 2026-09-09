@@ -21,8 +21,9 @@ This authority preserves the direction's source-grounded scientific question, ev
 
 The current selected question is whether a bound private observation of lost native link
 eligibility makes selective retracing useful against competent fixed apply/retrace controls
-and a containing generic learned gate. In the first bounded native B on 2026-09-09, the
-structured gate improves over always-apply and the generic gate, but fixed retrace is stronger.
+and a containing generic learned gate. In two bounded native instances on 2026-09-09, both
+learned gates improve over always-apply, but fixed retrace is stronger in both. The structured
+gate's advantage over the generic gate appears in the first instance and does not recur in the second.
 The historical source-grounded
 statement remains provenance: “Adaptive learner lost to the deterministic comparator; retain
 the negative-evidence protocol lesson.” The closed uncertain/delayed family remains closed.
@@ -40,16 +41,16 @@ same-information GRU moved substantially but converged to the exact `ALWAYS-PROB
 memoryless confidence/freshness rule gained `0.864551` mean return per episode. R01 therefore
 produced `B2-C / FIXED_RULE_CONTAINS` on its one-seed host/budget rung.
 
-The separately selected native link-loss candidate now has one accepted matched training
-instance. Its structured gate T gains +0.0671812 mean native return over always-apply C and
-+0.0369687 over the containing generic gate G, but loses −0.0290806 to fixed retrace F.
-Both gates had real update exposure and moved. This mixed result adds finite-budget native
-evidence without establishing adaptive superiority over the strongest competent fixed control.
+The separately selected native link-loss candidate now has two accepted matched training
+instances. T−C is +0.0671812/+0.0535912 mean native return, while T−F is −0.0290806/−0.0542534.
+T−G changes from +0.0369687 to −0.0065946 (WITHIN). G also improves over C and loses to F
+in both instances. Both gates had real update exposure and moved. These mixed results add
+finite-budget native evidence without adaptive superiority over the strongest observed fixed control.
 
 ## Bounded conclusion
 
 Exact binding remains a useful protocol primitive. Neither historical learner object nor the
-new native B supports adaptive ACVC superiority over its strongest competent fixed control.
+new native comparisons support adaptive ACVC superiority over their strongest competent fixed control.
 R01 closes only its declared
 seed/host/budget rung. It does not show that episode history has no native decision value: R02 now
 establishes a small exact positive legal-history gain, while both learners may still share an
@@ -138,15 +139,15 @@ Guidance census A1 remains separate and incomplete. Neither R02 nor R03 supplies
 same-information upper minus tuned generic baseline pair, its raw gap remains unidentified, and no
 5%/25% MEI threshold is applied.
 
-### Native link-loss B01 — accepted mixed result 2026-09-09
+### Native link-loss B01/B02 — two accepted instances 2026-09-09
 
 The original node's complete response at `2d914ab8b6238b2eb76bb07b90972945a23f7a68` selects
 one bounded native B/EXPLORE comparison. This is the independently motivated new-host re-entry
 allowed by HC-C, not a rescue of R01, an exact headroom witness or a new unrestricted ladder.
 The prior episode-return definition fixes the inherited quarter unit at `0.25 S`, where S is
 the undiscounted native episode reward sum. For this 256-step host `J=S/256`, so it is
-`0.0009765625 J`; the separate selected MEI is `0.01 J = 2.56 S`. The completed B clears both
-against C but loses to F, so it does not clear either against the stronger fixed control.
+`0.0009765625 J`; the separate selected MEI is `0.01 J = 2.56 S`. Both completed instances clear
+both against C but lose to F, so neither clears either against the stronger fixed control.
 Raw thresholds are not claimed to have equal practical meaning across hosts.
 
 The mechanism is fixed-membership multi-agent partial observability and non-stationarity:
@@ -163,36 +164,43 @@ G contains T's complete path plus an unconstrained residual from the same inform
 arm keeps its own recurrence and actual applied-command history. Native T−C/T−F and mandatory
 T−G, G−C/G−F contrasts bound the claim; a T−G gain cannot rescue a loss to fixed controls.
 
-The first accepted native comparison, master 8901, trained T/G once each and retained 32
-paired final joint episodes per arm. Means J were T 0.2344827282, G 0.1975140229,
-C 0.1673014978 and F 0.2635633631. T−C is UP (+0.0671812303, conditional SE 0.0115352194),
-T−F is DOWN (−0.0290806349, SE 0.0105070125), and T−G is UP (+0.0369687053, SE 0.0111757440).
-G also improves over C (+0.0302125251) and loses to F (−0.0660493402). The primary minimum
-of the two fixed-contrast means is −0.0290806349 J. These are native return contrasts;
-the 32-episode SEs do not measure training-instance population uncertainty.
+The accepted comparisons use masters 8901/8902, each training T/G once and retaining its own
+32 paired final joint episodes per arm. Their primary T−C contrasts are UP
+(+0.0671812303/+0.0535912110 J); T−F contrasts are DOWN (−0.0290806349/−0.0542533634 J).
+G−C is UP in both (+0.0302125251/+0.0601857925), and G−F is DOWN in both
+(−0.0660493402/−0.0476587820). T−G is UP in B01 (+0.0369687053) and numerically negative
+WITHIN in B02 (−0.0065945815), not equivalence. The minimum-of-fixed-means summaries equal
+the two T−F losses. Conditional SEs and every episode remain in their respective intakes;
+the panels are not pooled into training-population uncertainty. The descriptive two-instance
+T−G mean does not replace either frozen result or rescue the repeated stronger-fixed losses.
 
-Strongest support is the observed T−C/T−G gain and the large fixed-retrace gain over C.
-Strongest contradiction is that both learned gates lose to F. T/G had 51,834/50,076 eligible
-training choices, 1,024 Adam updates each and relative gate displacements 0.3087580/0.1512762;
-absent learning exposure is not the explanation. Functional inclusion in G does not guarantee
-equal finite-budget optimization. The fixed panel ordering and different retrace fractions
-do not identify a causal dose-response, history necessity or F's optimality. Local loss may
-still be a beneficial teammate handoff. The old R02 positive witness, R03 finite negative and
-separate adverse MGTAP/VSPC1 native comparisons remain intact. There is no tuned current-host
-headroom record and no stable structured superiority claim.
+Strongest support is the repeat T−C/G−C gain and the larger observed fixed-retrace package
+gain over C. Strongest contradiction is that both learned gates lose to F in both instances,
+while the initial structured-package advantage over G does not recur. Both instances had
+eligible updates and measured gate movement; in B02 T/G had 50,137/49,920 eligible training
+choices, 1,024 updates each and relative gate displacements 0.1773413/0.1708186. Functional
+inclusion in G does not guarantee equal finite-budget optimization. The panel ordering and
+different retrace fractions do not identify a causal dose-response, history necessity or F's
+optimality. F itself uses retained private observation history, and local loss may still be
+a beneficial teammate handoff. Old R02/R03 and separate MGTAP/VSPC1 evidence remain intact.
+There is no tuned current-host headroom record or stable structured-superiority conclusion.
 
-The next recommended discriminator is one fresh matched training instance under the same
-budget and controls, asking whether T's disadvantage to F and gain over G recur. This is a
-close call with ending unchanged learned-gate follow-up after the adverse fixed-control result.
-It is unallocated advice: B01's sole batch is complete, and every outcome remains in evidence.
-It changes no Portfolio state, formal UAV-validation status or existing recasts count of 2.
+The allocated next discriminator is answered: T's disadvantage to F recurred, its gain over G
+did not. A third unchanged T/G instance is not recommended as the next follow-up. F remains
+the strongest observed fixed null for any later selected successor's native comparison; no
+changed treatment or family is selected here. All outcomes remain in evidence. This takes
+no family closure, Portfolio state, formal UAV-validation or recasts-count disposition.
 See [complete response](pro_packets/20260909_native_link_loss_convergence/archive/RESPONSE.md)
-and [B01 scientific intake](ACVC_NATIVE_LINK_LOSS_B01_INTAKE_20260909.md).
+and [B02 scientific intake](ACVC_NATIVE_LINK_LOSS_B02_INTAKE_20260909.md).
 
 ## Evidence set
 
 The accepted evidence set is:
 
+- `docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_B02_SCIENCE_CARD_20260909.md`
+- `docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_B02_RESULT_EVIDENCE_20260909.md`
+- `docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_B02_INTAKE_20260909.md`
+- `docs/research/candidates/acvc/native_link_loss_b02_p79_20260909/two_instance_descriptive.json`
 - `docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_B01_SCIENCE_CARD_20260909.md`
 - `docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_B01_RESULT_EVIDENCE_20260909.md`
 - `docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_B01_INTAKE_20260909.md`

@@ -161,7 +161,8 @@ def test_collection_actual_command_replay_and_update(monkeypatch):
     assert all(torch.equal(base_before[k], v) for k, v in base.state_dict().items())
 
 
-def test_primary_rules_and_complete_synthetic_publication(tmp_path):
+@pytest.mark.parametrize("seed", [8901, 8902])
+def test_primary_rules_and_complete_synthetic_publication(tmp_path, seed, monkeypatch):
     assert [reading(x) for x in (.011, .01, -.01, -.011)] == ["UP", "WITHIN", "WITHIN", "DOWN"]
     rows = [dict(arm=a, phase="eval", episode=e, J=v[e]) for a, v in
             {"T": [.03, .03], "G": [.04, .04], "C": [.04, 0], "F": [0, .04]}.items() for e in range(2)]
@@ -180,12 +181,15 @@ def test_primary_rules_and_complete_synthetic_publication(tmp_path):
     finally:
         torch.set_num_interop_threads = original
     checkpoint = tmp_path / "synthetic_base.pt"
-    torch.save({"actor": base_architecture(8901).state_dict()}, checkpoint)
+    torch.save({"actor": base_architecture(seed).state_dict()}, checkpoint)
     out = tmp_path / "panel"
-    code = module.run(out, checkpoint, 8901, 0, time.monotonic(), "synthetic-only",
+    code = module.run(out, checkpoint, seed, 0, time.monotonic(), "synthetic-only",
                       make_env=lambda seed: PrivateFixture(seed, horizon=32), train_episodes=2, horizon=32, eval_episodes=2)
     assert code == 0
     saved = json.loads((out / "summary.json").read_text())
+    assert saved["seed"] == seed
+    assert saved["object"] == f"ACVC-NATIVE-LINK-LOSS-B{seed - 8900:02d}"
+    assert saved["allocation"] == {8901: "P78", 8902: "P79"}[seed]
     assert saved["status"] == "complete"
     assert saved["counts"]["team_steps"] == 384
     assert saved["counts"]["optimizer_steps"] == 8
@@ -193,3 +197,39 @@ def test_primary_rules_and_complete_synthetic_publication(tmp_path):
     assert len((out / "episodes.jsonl").read_text().splitlines()) == 12
     assert set(saved["primary"]["contrasts"]) == {"T-C", "T-F", "T-G", "G-C", "G-F"}
     assert (out / "final_T.pt").exists() and (out / "final_G.pt").exists()
+    rows = [json.loads(line) for line in (out / "episodes.jsonl").read_text().splitlines()]
+    for row in rows:
+        assert row["reset_seed"] == seed * 100000 + (1000 if row["phase"] == "train" else 2000) + row["episode"]
+    for arm in ("T", "G"):
+        assert torch.load(out / f"final_{arm}.pt", weights_only=True)["seed"] == seed
+    calls = []
+    monkeypatch.setattr(module, "run", lambda *args: calls.append(args) or 0)
+    monkeypatch.setattr(module.sys, "argv", [str(script), "--seed", str(seed), "--checkpoint", str(checkpoint),
+                                           "--output", str(out), "--launch-sha", "synthetic-only", "--focused-check-wall-s", "1.0"])
+    assert module.main() == 0 and calls[0][2] == seed
+
+
+def test_b02_stream_identity():
+    def action_seeds(seed):
+        values = []
+        for phase, arms, n in (("train", ("T", "G"), 512), ("eval", ("T", "G", "C", "F"), 32)):
+            for arm in arms:
+                for episode in range(n):
+                    proposal, gate = action_generators(seed, arm, phase, episode)
+                    values.append(proposal.initial_seed())
+                    if arm in ("T", "G"):
+                        values.append(gate.initial_seed())
+        return values
+    previous, current = action_seeds(8901), action_seeds(8902)
+    assert len(current) == len(set(current)) == 2240
+    assert set(current) == {v + 100000 for v in previous}
+    assert not set(current).intersection(previous)
+    non_actions = {890200000 + v for v in (11, 12, 13, 14, 900)}
+    non_actions.update(range(890201000, 890201512))
+    non_actions.update(range(890202000, 890202032))
+    assert not non_actions.intersection(current)
+    assert len(non_actions.union(current)) == 2789
+    launch = Path(__file__).resolve().parents[5] / "experiments/candidates/acvc/native_link_loss_b01/launch_b02.sh"
+    command = launch.read_text()
+    assert "native_link_loss_b02_8902_p79_20260909" in command
+    assert "--seed 8902" in command and "p79_admission.json" in command

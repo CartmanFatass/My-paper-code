@@ -1,0 +1,81 @@
+{
+  "id": "20260909-acvc-005",
+  "created": "2026-09-09T04:52:39-07:00",
+  "direction": "acvc",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "ACVC B02: unchanged fresh matched instance 8902",
+  "context": "Claim: one fresh unchanged training instance tests recurrence of the native T-F loss and T-G gain. Binding MARL structure: other-agent non-stationarity or partial observability. Root P79 explicitly allocates one comparison; existing close-call item004 remains visible.",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "Freeze new master8902 and disjoint streams; execute only the existing single P79 allocation with unchanged native science and all outcomes."
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "Apply a real owner stop or rejection to unexecuted work; preserve P78 and the already recorded close-call without fabricating a reply."
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "Apply the actual requested revision before dependent work; any scientific or budget conflict returns factually."
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "One fresh independent instance addresses observed variation while retaining the strong fixed F control and the adverse P78 result.",
+  "evidence": [
+    "docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_B02_SCIENCE_CARD_20260909.md",
+    "docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_B01_INTAKE_20260909.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-09.md#L63",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "P79已分配一次新训练配对：是否按未改动的T/G/C/F比较冻结新卡和随机种子8902？",
+    "changes_if_approved": [
+      {
+        "target": "ACVC-NATIVE-LINK-LOSS-B02 science card",
+        "from": "P78完成；既有004记录了尚未分配的重复建议",
+        "to": "执行Root已给出的P79单次分配，冻结8902及新私有随机流，复用原科学配置"
+      }
+    ],
+    "if_refused": "保留P78全部结果与固定回退F的优势；按实际所有者修改或停止指令处理尚未运行的部分，不回写旧卡或旧结果。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_B01_INTAKE_20260909.md",
+        "quote": "This is one matched training instance, master 8901, with 32 paired final joint episodes.",
+        "why": "目前只有一次训练；新独立随机性可显示T输F、胜G的结果是否重现。"
+      },
+      {
+        "path": "docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_B02_SCIENCE_CARD_20260909.md",
+        "quote": "No favorable sign is required.",
+        "why": "这次比较保留负面与正面结果，没有必须改进的选择条件。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_B01_INTAKE_20260909.md",
+        "quote": "The strongest new contradiction is that both learned gates lose to F despite genuine learner exposure.",
+        "why": "停止原样学习投入仍是有力备选；新分配不把P78的失败改成成功。"
+      }
+    ],
+    "uncertainty": [
+      "两个训练实例仍不足以宣称训练总体优势或机制因果。",
+      "没有当前主机的已调优同信息头部空间记录；DENSE基座的选择看过旧结果。",
+      "新运行成本未知；相同工作量只提供上次373.41秒的参考。"
+    ],
+    "cost": {
+      "compute": "本次仅1次已分配调用：294912步、2048次Adam、1024训练局和128评估局；完整单学习臂上限1800秒、整体3600秒，最多300秒当前必要检查并计入完整成本。",
+      "owner_time": "无需立即回复；当前既有分配继续，真实后续指令在干净边界应用。",
+      "reversibility": "costly",
+      "waits_on_this": "nothing；按Root P79分配继续，不等此项回复。"
+    },
+    "verdict_text": "冻结新的8902训练配对，科学配置与强固定比较器F不变；仅执行P79已分配的一次远程比较，保留全部结果，继续标明与停止原样投入之间的取舍。",
+    "source": "docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_B02_SCIENCE_CARD_20260909.md#6-decisions-this-card-produces-and-owner-application"
+  },
+  "starred": false
+}

@@ -77,5 +77,23 @@
     "verdict_text": "建议记录一次原样T/G新训练配对作为下一项尚未分配的观察，保留强固定回退F与所有原生结果。这与停止原样学习投入难以明显区分，标记close-call；现在不创建新卡、主随机种子、代码、运行或Pro请求。",
     "source": "docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_B01_INTAKE_20260909.md#6-decisions-this-intake-produces"
   },
-  "starred": true
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-09T11:52:38+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/acvc/pro_packets/20260909_native_link_loss_convergence/archive/RESPONSE.md",
+      "record": "docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_B02_SCIENCE_CARD_20260909.md#1-question-authority-and-fresh-instance",
+      "state": "applied",
+      "summary": "Root P79 now allocates the previously unallocated fresh-instance recommendation. B02 master8902 and unchanged scientific configuration are frozen at the new-card boundary; implementation and the single scientific invocation have not yet occurred. The close-call against stopping remains; no owner reply is invented."
+    },
+    {
+      "at": "2026-09-09T12:18:17+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_B02_SCIENCE_CARD_20260909.md#1-question-authority-and-fresh-instance",
+      "record": "docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_B02_INTAKE_20260909.md#6-decisions-this-intake-produces",
+      "state": "applied",
+      "summary": "The previously recommended fresh pair was actually executed under Root P79: source4e019ca35, master8902, sole handle complete,294912steps/2048Adam/128final and362.9896806s complete bill. T-F is DOWN again; T-G is negative WITHIN. DM accepts all outcomes and recommends no third unchanged pair as next action, with no family or Portfolio disposition. No owner reply is invented."
+    }
+  ]
 }

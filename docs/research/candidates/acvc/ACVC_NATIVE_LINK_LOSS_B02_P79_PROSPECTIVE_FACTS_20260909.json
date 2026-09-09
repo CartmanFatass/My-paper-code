@@ -1,0 +1,277 @@
+{
+  "object": "ACVC-NATIVE-LINK-LOSS-B02",
+  "allocation": "P79",
+  "created_utc": "2026-09-09T11:51:20.533935+00:00",
+  "evidence_class": "B/EXPLORE",
+  "prospective_before_native_or_model_output": true,
+  "master": 8902,
+  "checkpoint": {
+    "source_path": "C:/Projects/HMASD/temp/directions/metric_ground_transport_allocation/exp/mgtap_b01_8201_4f65eefb1b15e44b42d694376630fba0c230cc6c/final_DENSE.pt",
+    "sha256": "f648f2b100d07335ccd9c79c0476b8e9dba0c1644ae837d622b0c5f711030790",
+    "selection": "DENSE/8201, chosen after both prior DENSE means were known; better of those two outcomes",
+    "frozen": true
+  },
+  "configuration": {
+    "device": "cpu",
+    "torch_dtype": "float32",
+    "torch_intraop_threads": 1,
+    "torch_interop_threads": 1,
+    "native_geometry": "unchanged NumPy implementation",
+    "arm_order": [
+      "T",
+      "G",
+      "C",
+      "F"
+    ],
+    "actor_raw_features": 108,
+    "bound_features": 13,
+    "proposal_features": 3,
+    "t_gru_hidden": 32,
+    "g_residual_gru_hidden": 32,
+    "t_head_input": 48,
+    "g_residual_head_input": 156,
+    "gate_head_hidden": 32,
+    "critic": [
+      136,
+      128,
+      128,
+      1
+    ],
+    "recurrent_chunk": 32,
+    "gamma": 1.0,
+    "policy_ratio": "agent Bernoulli on opportunity mask; all primitive rows denominator",
+    "adam_lr": 0.0003,
+    "adam_betas": [
+      0.9,
+      0.999
+    ],
+    "adam_eps": 1e-08,
+    "ppo_clip": [
+      0.8,
+      1.2
+    ],
+    "entropy_coefficient": 0.01,
+    "value_coefficient": 0.5,
+    "gradient_norm_clip": 0.5,
+    "coordinate_match_linf_normalized": 1e-06,
+    "coordinate_ambiguity_linf_normalized": 2e-06
+  },
+  "parameter_arithmetic": {
+    "T_gate": 11425,
+    "G_residual_extra": 14881,
+    "G_gate": 26306,
+    "critic_each": 34177,
+    "T_total_trainable": 45602,
+    "G_total_trainable": 60483,
+    "method": "Linear(i,o)=i*o+o; GRU(i,h)=3*h*i+3*h*h+6*h. No tensor construction."
+  },
+  "counts": {
+    "learned_arms": 2,
+    "matched_training_instances": 1,
+    "train_episodes_per_arm": 512,
+    "horizon": 256,
+    "train_team_steps": 262144,
+    "eval_arms": 4,
+    "eval_episodes_per_arm": 32,
+    "eval_team_steps": 32768,
+    "total_team_steps": 294912,
+    "rollouts_per_arm": 256,
+    "adam_per_rollout": 4,
+    "total_rollouts": 512,
+    "total_adam": 2048,
+    "explicit_resets": 1152,
+    "environment_constructors": 4,
+    "unscored_constructor_resets": 4,
+    "final_evaluation_episodes": 128,
+    "base_agent_forwards": 1474560,
+    "learned_gate_agent_forwards_upper": 1392640,
+    "history_match_pairs_upper": 28672000,
+    "anchor_ambiguity_pairs_upper": 28672000,
+    "all_coordinate_pairs_upper": 57344000
+  },
+  "streams": {
+    "law_base": 890200000,
+    "gate_common_init": 890200011,
+    "critic_common_init": 890200012,
+    "generic_residual_init": 890200013,
+    "overwritten_base_construction_private": 890200014,
+    "environment_constructor": 890200900,
+    "train_environment_reset": {
+      "law": "base+1000+e",
+      "e": [
+        0,
+        511
+      ],
+      "range": [
+        890201000,
+        890201511
+      ],
+      "shared_between": [
+        "T",
+        "G"
+      ]
+    },
+    "eval_environment_reset": {
+      "law": "base+2000+j",
+      "j": [
+        0,
+        31
+      ],
+      "range": [
+        890202000,
+        890202031
+      ],
+      "shared_between": [
+        "T",
+        "G",
+        "C",
+        "F"
+      ]
+    },
+    "train_base_proposal": {
+      "law": "base+10000+1000*a+e",
+      "arm_index": {
+        "T": 0,
+        "G": 1
+      },
+      "e": [
+        0,
+        511
+      ]
+    },
+    "train_gate_choice": {
+      "law": "base+20000+1000*a+e",
+      "arm_index": {
+        "T": 0,
+        "G": 1
+      },
+      "e": [
+        0,
+        511
+      ]
+    },
+    "eval_base_proposal": {
+      "law": "base+30000+100*a+j",
+      "arm_index": {
+        "T": 0,
+        "G": 1,
+        "C": 2,
+        "F": 3
+      },
+      "j": [
+        0,
+        31
+      ]
+    },
+    "eval_gate_choice": {
+      "law": "base+40000+100*a+j",
+      "arm_index": {
+        "T": 0,
+        "G": 1
+      },
+      "j": [
+        0,
+        31
+      ]
+    },
+    "action_draw_rule": "Fresh private CPU torch.Generator per arm/phase/episode; base samples 3 independent Normal values per UAV per primitive step; learned gates sample Bernoulli only on opportunities in UAV order. No generator is shared mutably across arms or phases."
+  },
+  "stream_arithmetic": {
+    "distinct_action_seeds": 2240,
+    "action_seed_collision": false,
+    "action_environment_overlap": false,
+    "intentional_matching": "T/G common T path and critic initialization; T/G training resets; all four final evaluation resets. Action streams are distinct.",
+    "overlap_with_P78_seed_values": false,
+    "distinct_seed_values_including_initialization_and_resets": 2789
+  },
+  "units": {
+    "inherited_episode_sum_threshold": 0.25,
+    "inherited_threshold_mean_J": 0.0009765625,
+    "MEI_mean_J": 0.01,
+    "MEI_episode_sum": 2.56
+  },
+  "work_scope": {
+    "current_matching": "At most 20 current rows for the one retained previous anchor.",
+    "additional_intrinsic_ambiguity": "At most 20 current rows against the newly selected anchor; clarifies the prior count rather than adding validation trajectories.",
+    "excluded_from_forward_counts": [
+      "optimizer recurrent replay",
+      "backward passes",
+      "critic forwards",
+      "generic residual extra path"
+    ],
+    "nested_policy_or_trajectory_search": 0,
+    "historical_P75_process_walls_s": [
+      353.71,
+      368.12
+    ],
+    "new_runtime_forecast_s": null,
+    "P78_observed_complete_cost_reference": {
+      "process_wall_s": 359.17,
+      "focused_check_wall_s": 14.2369735,
+      "logical_study_bill_s": 373.4069735,
+      "complete_arm_bill_s": {
+        "T": 199.8208294399871,
+        "G": 215.51174089401928
+      },
+      "peak_rss_bytes": 565547008,
+      "aggregate_cpu": "unmeasured",
+      "scratch_high_water": "unmeasured"
+    },
+    "same_count_work_multiplier": 1.0,
+    "per_arm_cost_projection": "Unchanged dominant work, multiplier 1 relative to P78: T reference 199.8208294399871 s, G 215.51174089401928 s, whole 373.4069735 s. Actual new check/startup/trajectory cost remains unknown; retain 1800 s per arm and 3600 s complete caps."
+  },
+  "budget": {
+    "scientific_submissions": 1,
+    "complete_learned_arm_s": 1800,
+    "complete_logical_study_s": 3600,
+    "aggregate_focused_checks_s": 300,
+    "new_non_test_source_lines": 2000,
+    "runner_lines": 600,
+    "scope4_items": [],
+    "retry_resume_second_instance_extra_panel": 0
+  },
+  "exposure": {
+    "adam_per_learned_arm": 1024,
+    "reference_constant_scalar_gradient": 0.001,
+    "reference_first_adam_coordinate_step": 0.0002999970000299997,
+    "reference_1024_same_sign_coordinate_displacement": 0.3071969280307197,
+    "line": "T/G each have 1024 trainable gate/critic Adam steps at lr=0.0003. A reference constant nonzero scalar gradient 0.001 gives first-step displacement 0.00029999700003 and nominal 1024-step same-sign displacement 0.307196928031; arithmetic only, not observed gradient or parameter movement. Gate final projections start at zero; actual opportunity counts and absolute/relative group movement will be reported.",
+    "limitation": "Sparse opportunities may yield little or no gate learning; no opportunity threshold gates launch.",
+    "P78_observed_reference": {
+      "T_eligible_train": 51834,
+      "G_eligible_train": 50076,
+      "T_gate_relative_displacement": 0.3087579906,
+      "G_gate_relative_displacement": 0.1512762457,
+      "inference": "Past observations only; no required opportunity, displacement or favorable-sign threshold for B02."
+    }
+  },
+  "prediction": {
+    "T_minus_C_J": 0.04,
+    "T_minus_F_J": -0.025,
+    "T_minus_G_J": 0.015,
+    "P_T_minus_C_above_MEI": 0.75,
+    "P_T_minus_F_below_minus_MEI": 0.65,
+    "P_T_minus_G_above_MEI": 0.6,
+    "P_both_primary_positive": 0.2,
+    "P_both_primary_above_MEI": 0.1,
+    "owner": "not taken (unattended)",
+    "reason": "Prospective new-instance expectation informed by all retained P78 outcomes; low confidence in training repeatability."
+  },
+  "new_preparation_scientific_exposure": {
+    "native_steps": 0,
+    "model_constructions": 0,
+    "optimizer_updates": 0,
+    "evaluation_episodes": 0
+  },
+  "starting_authoring_sha": "ea9c21d4447313c2b6f932cd4b57941e51d01a0a",
+  "required_shared_inputs": {
+    "compared_main_sha": "43abc271b3c19653515102df4001db7bf986e43a",
+    "result": "Required native environment, imported policy/learner, MGTAP geometry, compute route and current instructions/specs match. Only unimported UCOPE study.py differs; no shared-input synchronization is needed.",
+    "new_merge": false,
+    "P78_shared_input_merge_sha": "6048ce191b550fb7dbdcda248f898344ac8433a4"
+  },
+  "historical_result_boundary": {
+    "P78_intake_sha": "ea9c21d4447313c2b6f932cd4b57941e51d01a0a",
+    "new_primary": "Each B02 contrast uses only the new 32 paired joint episodes. Keep P78 separate and report the two matched-training-instance endpoints descriptively; no population or causal inference."
+  }
+}
