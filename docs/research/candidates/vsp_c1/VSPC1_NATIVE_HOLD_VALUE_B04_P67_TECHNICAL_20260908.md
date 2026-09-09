@@ -83,3 +83,14 @@ ssh -o BatchMode=yes -o ConnectTimeout=10 hmasd-wsl-node /usr/local/bin/agent-ta
 The executor loads this exact argv from the checked binding, avoiding manual path
 re-entry. Once accepted, CM observes this handle only and sends the identity to
 Root/DM for tracking; it does not request another launch/adoption authorization.
+
+## Accepted invocation
+
+The exact checked argv was submitted once and accepted at2026-09-09T02:40:39Z;
+[submission receipt](VSPC1_NATIVE_HOLD_VALUE_B04_P67_SUBMISSION_20260908.json)
+retains the literal argv and supervisor acceptance response. Handle
+`vspc1_hold_value_b04_p67_8202` is running with PID3017308 and active tmux.
+The actual-node admission at02:40:39.232806Z passed both physical/effective
+availability15,639,040,000 bytes. Root and DM received exact handle/source/cwd/
+script/output/admission/log facts and CM sole-observer ownership. No further
+submission is allocated. Terminal outcome and technical collection follow below.
