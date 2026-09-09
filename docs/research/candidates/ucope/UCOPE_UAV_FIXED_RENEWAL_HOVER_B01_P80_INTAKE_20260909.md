@@ -86,3 +86,95 @@ owner item and audit row record this selection without waiting for a reply.
 Preparation owner surface at **2026-09-09T04:57:35-07:00**: [new-card item](../../portfolio/owner/inbox/2026-09-09/20260909-ucope-005.json), recommended/auto-applied accept;
 [audit row](../../portfolio/audit/2026-09-09.md#L19). No UCOPE audit owner override
 was found on main or this checkout. No owner reply is awaited.
+
+## 4. CM changed-primary acceptance and execution preparation
+
+**Accepted source `a1a3dd77aa4e02a07e1f6ed17eea04fea633cc11`**, committed/pushed from clean
+`31b79a3596547787c7b3546fa0e0457c7bacf212` in the same `codex/ucope` checkout.
+Three owned paths changed67+/33−; non-test29+/21−, runner54 lines. New7901 selector uses
+the accepted fixed F/G/H path. Only this selector sets `primary.selected_contrast` to
+`F_minus_H` and derives primary completeness from that contrast's finite F/H panels.
+F−G/G−H remain separately calculated and complete; historical defaults retain F−G or
+T−G. Full `COMPLETE` still requires the whole declared F/G/H chain. No statistic formula,
+policy/learner/environment/base/adapter or value-moments behavior changed. UCOPE leaves
+that optional hook None. Scope §4 additions **none**, as card §6 specifies.
+
+One focused exact-source check selected `test_pair_plumbing.py` with
+`-k 'renewal_hover_b01 or renewal_fixed_b01 or renewal_fixed_b02'`: **24 passed,
+79 deselected**, pytest0.12s / full wall **0.22s**, peak RSS **30012 KiB**, exit0.
+Cumulative0.22s of300s. New real7901/fixture9001 sections5/7, config/private streams,
+F/G-only fitting, F/G/H outcomes and publication are exercised through actual CLI/run_pair
+with workload imports substituted. A published fixture has F−H=−1 versus F−G=+1;
+missing H makes the new primary incomplete even with complete F/G. Missing G preserves
+complete F/H while limiting the old F−G primary. All three vectors stay identical between
+selection modes. Historical fixed B01/B02 binding/primary behavior also passed.
+
+Check handle `ucope-uav-renewal-hover-p80-check-20260909`, PID3049360,
+finished/inactive tmux, start2026-09-09T20:02:24+08:00/end20:02:25.
+[Raw receipt](../../../../temp/directions/ucope/exp/ucope-uav-fixed-renewal-hover-b01-7901-p80-20260909/checks/supervisor/task.log) and
+[terminal readback](../../../../temp/directions/ucope/exp/ucope-uav-fixed-renewal-hover-b01-7901-p80-20260909/checks/terminal-readback.txt) confirm own scratch
+removal. Existing cache_dir warning follows disabled cache provider. Source-pack carriers
+were removed after staging. No model/native smoke or unchanged freeze/action-credit suite ran.
+
+The existing independent reviewer `rv_ah_ucope_b02_credit` examined the changed scientific
+primary, publication and selector-binding scope plus the committed exact-source receipt:
+**no material finding or unresolved acceptance gap**. It confirmed F/H completeness,
+unchanged contrast formulas/old meanings and separate full-chain completion. This narrow
+review addresses the new primary only; unaffected P78/P79 semantic acceptance is reused.
+Reviewer performed no tests, scientific execution or edits. CM accepts that evidence.
+Checks establish implementation conformance, not scientific performance.
+
+**Per-arm cost projection.** Card §4 law remains initialization +131072 training steps
++1024 updates +8192 final-policy steps +publication per F/G arm; F adds duration-head work,
+G8192 H steps. P79 complete-path references F155.32251420704415s/G131.7681983509683s/
+outer301.26s and P78 outer334.19s support the unchanged-work plan without guaranteeing
+new time. No known term projects over1800s complete arm/3600s whole; row bounds are not
+wall multipliers. No pilot/cost experiment, hidden phase or increased cap follows. Outer
+critical path, sum of arm wall and aggregate CPU remain distinct; CPU is unmeasured absent
+a credible direct observation.
+
+**Post-learner path coverage.** Reuse the accepted F/G/H actual learner/checkpoint/raw-J/count
+publication path. New focused checks exercise selected-primary identity, completeness and
+published contrast signs. No repeated native/model run is needed for this binding change.
+The scientific allocation remains286720 native steps,2048 Adam,512 rollouts,96 final
+evaluations,1120 explicit/2 constructor resets,1600 diagnostic frames and no T fit/evaluation.
+
+Configured node `hmasd-wsl-node`, CPU FP32/one Torch thread. Fresh detached exact-source cwd
+`/home/wu/hmasd-worktrees/ucope-uav-fixed-renewal-hover-b01-7901-p80-20260909`, output `temp/directions/ucope/exp/ucope-uav-fixed-renewal-hover-b01-7901-p80-20260909`, handle `ucope-uav-fixed-renewal-hover-b01-7901-p80-20260909`. Preparation observed not_found/no
+handle directory and absent cwd/output before staging. All2176 materialized tracked files
+match Git blobs; explicit candidate/runner/preflight/platform/base/adapter hashes are in
+[source readback](../../../../temp/directions/ucope/exp/ucope-uav-fixed-renewal-hover-b01-7901-p80-20260909/preparation/source-input-readback.json). Canonical preflight
+SHA256 `cb0525e9247f1c7262c198bf051e542282f5928982137b3023d36d5d69eda4dc`. Remote wrapper
+matches local UTF-8 ASCII/LF bytes; Bash -n and PowerShell Parser pass without execution.
+CM retains sole observation through collection. Previous evidence remains untouched.
+
+## 5. Literal single-invocation payload
+
+Remote wrapper `/home/wu/hmasd-inputs/ucope-uav-fixed-renewal-hover-b01-7901-p80-20260909.sh`: 785 bytes, SHA256
+`c88a105148a80cb0d67998c0d56ef1e151d6d4d86221190b7f6f33f526ef9bc9`. Exact contents committed before execution:
+
+```bash
+set -euo pipefail
+cd /home/wu/hmasd-worktrees/ucope-uav-fixed-renewal-hover-b01-7901-p80-20260909
+/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/.agent-tasks/ucope-uav-fixed-renewal-hover-b01-7901-p80-20260909/resource_admission.json &&
+mkdir -p temp/directions/ucope/exp/ucope-uav-fixed-renewal-hover-b01-7901-p80-20260909 &&
+cp /home/wu/.agent-tasks/ucope-uav-fixed-renewal-hover-b01-7901-p80-20260909/resource_admission.json temp/directions/ucope/exp/ucope-uav-fixed-renewal-hover-b01-7901-p80-20260909/resource_admission.json &&
+exec /home/wu/.venvs/hmasd/bin/python scripts/run_ucope_uav_motion_prefix_b01.py --pair renewal_hover_b01 --seed 7901 --out temp/directions/ucope/exp/ucope-uav-fixed-renewal-hover-b01-7901-p80-20260909
+```
+
+Local `temp/directions/ucope/exp/ucope-uav-fixed-renewal-hover-b01-7901-p80-20260909/preparation/submit.ps1`: 362 bytes, SHA256
+`bde970aacc3c3b615bd21ce0f6581d7ef159d55b53f044f452c64b6b74c1ae78`. Execute this exact file after commit/push:
+
+```powershell
+& ssh -o BatchMode=yes -o ConnectTimeout=10 hmasd-wsl-node "/usr/local/bin/agent-task run ucope-uav-fixed-renewal-hover-b01-7901-p80-20260909 '/usr/bin/time -f whole_wall_seconds=%e,peak_rss_kib=%M /usr/bin/timeout --signal=KILL 3600s /bin/bash --noprofile --norc /home/wu/hmasd-inputs/ucope-uav-fixed-renewal-hover-b01-7901-p80-20260909.sh'"
+exit $LASTEXITCODE
+```
+
+Canonical actual-node admission and exact runner form one supervised `&&` chain. Physical
+and effective available memory must both meet4GiB before scientific root/RNG/model creation;
+refusal stops in the supervisor root. Outer timeout3600s covers admission through exit;
+runner1800s complete-arm clocks charge startup to F and H/final publication to G. At most
+one accepted submission; uncertain acceptance is reconciled on this handle. No scientific
+admission/invocation occurred at this preparation. No retry/resume/extra evaluation follows.
+Root owns subsequent P80 test/scientific checkout and wrapper reclamation after preserved
+terminal intake. There is no intermediate source-permission gate.
