@@ -1,0 +1,77 @@
+{
+  "prepared_utc": "2026-09-09T21:27:24.336055+00:00",
+  "checkout_sha": "57484569fafc34e7a6981093fac325d64321e6e7",
+  "inputs": [
+    {
+      "master": 8201,
+      "path": "C:\\Projects\\HMASD\\temp\\directions\\metric_ground_transport_allocation\\exp\\mgtap_b01_8201_4f65eefb1b15e44b42d694376630fba0c230cc6c\\final_DENSE.pt",
+      "bytes": 282893,
+      "sha256": "f648f2b100d07335ccd9c79c0476b8e9dba0c1644ae837d622b0c5f711030790",
+      "expected_sha256": "f648f2b100d07335ccd9c79c0476b8e9dba0c1644ae837d622b0c5f711030790",
+      "matches_record": true,
+      "record": "docs\\research\\candidates\\metric_ground_transport_allocation\\MGTAP_NATIVE_GROUND_GEOMETRY_B01_P75_8201_TECHNICAL_COLLECTION.json",
+      "model_load_performed": false
+    },
+    {
+      "master": 8202,
+      "path": "C:\\Projects\\HMASD\\temp\\directions\\metric_ground_transport_allocation\\exp\\mgtap_b01_8202_4f65eefb1b15e44b42d694376630fba0c230cc6c\\final_DENSE.pt",
+      "bytes": 282893,
+      "sha256": "cf883f4591c4bc72b2178004cf0ff6c78126080be81e0cbc900f62acf0e40c15",
+      "expected_sha256": "cf883f4591c4bc72b2178004cf0ff6c78126080be81e0cbc900f62acf0e40c15",
+      "matches_record": true,
+      "record": "docs\\research\\candidates\\metric_ground_transport_allocation\\MGTAP_NATIVE_GROUND_GEOMETRY_B01_P75_8202_TECHNICAL_COLLECTION.json",
+      "model_load_performed": false
+    }
+  ],
+  "preparation_exposure": {
+    "native_episodes": 0,
+    "model_constructions": 0,
+    "model_loads": 0,
+    "optimizer_calls": 0,
+    "tests": 0,
+    "profiles": 0
+  },
+  "proposed_counts": {
+    "retained_base_fits": 2,
+    "new_fits": 0,
+    "arms_per_base": 3,
+    "worlds_per_panel": 64,
+    "episodes": 384,
+    "team_steps": 98304,
+    "base_agent_forwards": 491520,
+    "scored_resets": 384,
+    "proposed_constructor_resets": 6,
+    "gate_critic_constructions": 0,
+    "optimizer_calls": 0,
+    "coordinate_pairs_upper": 13107200
+  },
+  "timing_references": [
+    {
+      "source": "docs\\research\\candidates\\acvc\\native_link_loss_b01_p78_20260909",
+      "C_32_panel_s": 5.263435942993965,
+      "F_32_panel_s": 6.231096152041573,
+      "other_shared_process_s": 16.194091238970863,
+      "old_checks_s": 14.2369735
+    },
+    {
+      "source": "docs\\research\\candidates\\acvc\\native_link_loss_b02_p79_20260909",
+      "C_32_panel_s": 5.2011450009886175,
+      "F_32_panel_s": 6.420700664981268,
+      "other_shared_process_s": 18.75239150099222,
+      "old_checks_s": 5.4396806
+    }
+  ],
+  "projection": {
+    "C_64_panel_reference_s": 10.52687188598793,
+    "F_64_panel_reference_s": 12.841401329962537,
+    "dwell_64_panel_proxy_s": 12.841401329962537,
+    "six_panel_reference_s": 72.419349091826,
+    "other_shared_reference_s": 18.75239150099222,
+    "reference_process_total_s": 91.17174059281822,
+    "proposed_check_allowance_s": 30,
+    "nominal_complete_with_check_allowance_s": 121.17174059281822,
+    "recommended_complete_invocation_cap_s": 180,
+    "cap_headroom_over_nominal_s": 58.828259407181775,
+    "assumption": "Dwell uses F evaluator cost proxy; old panel deltas include one base load/environment constructor per32 panel. Scaling to64 conservatively duplicates that fixed cost. Other shared reference covers startup/publication/exit; new costs and contention remain unknown. Cap is a proposal, not allocation."
+  }
+}
