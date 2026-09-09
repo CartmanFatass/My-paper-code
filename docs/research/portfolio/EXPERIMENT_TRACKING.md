@@ -34,6 +34,8 @@ MGTAP provider acceptance is now confirmed: exactly one Send, fixed TASK6931057f
 
 FSD P74 complete response/intake16bf3509e integrated main477331c62: PRO_FINAL A, narrow unchanged extension ended, no successor. Original blocker remains preserved but is superseded for delivery/decision availability. ACVC original DM actually resumed focused native-host re-entry mapping/no-ready task as replacement, zero new science or Send. VSP03 P76 prospective card3eda7ac6d and original CM work are active, no handle yet.
 
+UCOPE P74 now ARCHIVED with full responsec2501bcc6/Issue11comment5599356790; original DM actually resumed conformity/intake, no new experiment allocated. VSP03 P76 sole handlevsp03-b05-p76-20260909 is terminal/collected atf988ec921, completewall4.191728s, original DM intake active. CM observation ended; no retry or successor. Detailed source/receipt limits remain in the current root log.
+
 ## Historical soft-stop closeout updates — 2026-09-09
 
 - CRTO P72: response/intake/handoff integrated at63550cd83; DM stopped, no live experiment or Pro generation, no successor B. See [handoff](../candidates/commitment_residual_triggered_options/CRTO_RESTART_HANDOFF_20260909.md).
