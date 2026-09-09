@@ -6,6 +6,12 @@ Research is **SOFT STOP / DRAINING** under OWNER_DIRECT 2026-09-09: finish work 
 
 Root owns planning and integration under [ROOT_OPERATIONS.md](../../project/ROOT_OPERATIONS.md). The assigned CM/Operator observes by default; explicit takeover follows [EXPERIMENT_MONITOR.md](../../project/EXPERIMENT_MONITOR.md). Independent Pro provider operations belong to Transport. Exact handles and receipt bindings below remain evidence. Detailed receipts are in [root-log/2026-09-08.md](root-log/2026-09-08.md); lifecycle and priority are in [PORTFOLIO.md](PORTFOLIO.md). The older tracker is preserved in [EXPERIMENT_TRACKING_THROUGH_P45_20260908.md](../../archive/operations/EXPERIMENT_TRACKING_THROUGH_P45_20260908.md).
 
+## Soft-stop closeout updates — 2026-09-09
+
+- CRTO P72: response/intake/handoff integrated at63550cd83; DM stopped, no live experiment or Pro generation, no successor B. See [handoff](../candidates/commitment_residual_triggered_options/CRTO_RESTART_HANDOFF_20260909.md).
+- UCOPE P72: handle `ucope-uav-renewal-b03-7501-p72-20260908` terminal exit0/tmux inactive; CM collection and DM intake complete, both stopped. Source7d3aaab46; whole390.73s; valid DOWN. P72 chain integrated at9868dc355. See [handoff](../candidates/ucope/UCOPE_RESTART_HANDOFF_20260909.md). Scientific and check worktrees plus staged wrapper await separately bounded preservation/reclamation; raw local collection remains in the designated direction checkout.
+- MGTAP technical repair/review completed atc2cca317b with source db34b6c14 and no scientific invocation. Original DM received closure-only intake; direction handoff pending. Shared-source main integration is not yet claimed.
+
 ## P67 completed returns and P68 continuation
 
 The five original P67 DM assignments have returned. Both experiments are collected/intaken and integrated through main 8e19cda9b; neither remains live. FSD and UCOPE each completed one provider Send and returned ARCHIVED/NATURAL_COMPLETION receipts; both original DMs received native intake dispatches. VSPC1 P68 card preparation, CRTO readiness and ACVC replacement readiness have actual native dispatches; FOLR readiness completed no-ready. Count only observed native turns and subsequently confirmed provider generations, not five queued intentions.
