@@ -24,6 +24,15 @@ native handoffs only, under `docs/project/SIBLING_COMMUNICATION.md` and
 `.codex/hmasd-relay.toml`. Ordinary native traffic and nested parent acceptance stay native.
 Cross-session messages omit model and reasoning-effort overrides; configured models persist.
 
+OWNER_DIRECT 2026-09-09: recover unstable Pro delivery under the existing research
+request; do not leave research blocked solely on failed-effect sends. Reconcile actual
+acceptance/delivery before retrying, observe already accepted generations, and preserve
+the original prompt, failed-attempt facts and binding. Root personally completed the
+FOLR/SCDMP recovery and confirmed normal sending. The owner's subsequent instruction
+returns all later Pro Send, observation, reconciliation, archival and receipts to the
+dedicated Transport session. Root dispatches and accepts its returns. Recovery changes
+neither scientific authority, evidence meaning nor experiment budgets.
+
 The independent **Transport** session (Luna/high) owns Pro browser Send, observation,
 reconciliation, archival and parent receipts. Root receives its receipts, performs Portfolio
 intake itself and forwards direction receipts to the original native DM/CM. Transport never

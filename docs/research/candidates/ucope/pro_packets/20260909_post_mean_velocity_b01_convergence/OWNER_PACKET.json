@@ -1,0 +1,39 @@
+{
+  "question": "P85均值动作没有改善原生收益：下一步再做一对独立训练，结束均值执行方案，还是比较一个明确的训练改动？",
+  "changes_if_approved": [
+    {
+      "target": "UCOPE 原 Convergence 问题",
+      "from": "P85完整接收，未分配后续实验",
+      "to": "提交三项选择；DM窄幅推荐一对新训练，并保留零实验停止与归一化训练备选；裁决前不生成新实验卡或调用"
+    }
+  ],
+  "if_refused": "停止建议的重复方案，由原节点处理明确的停止或训练改动选项；P85结果和所有原生损失保留，不自动运行。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/ucope/UCOPE_POST_MEAN_VELOCITY_B01_CONVERGENCE_PREPARATION_INTAKE_20260909.md",
+      "quote": "One new independent fit can reveal whether both adverse within-fit mode effects recur.",
+      "why": "新训练可以改变当前仅一对拟合政策上的执行方式判断；多评估旧模型不能提供另一段学习经历。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/ucope/UCOPE_UAV_MEAN_VELOCITY_RENEWAL_B01_P85_INTAKE_20260909.md",
+      "quote": "Thus tanh(mu) did not rescue native performance on these fits.",
+      "why": "均值F−G仅在±0.01内，四个悬停差和两个均值减采样差全部负；现在就结束均值方案是有实质依据的零工作备选。"
+    }
+  ],
+  "uncertainty": [
+    "P85只有一对独立训练，条件评价误差不代表训练总体不确定性。",
+    "新历史的边际价值是否足够，不能只因完整运行331.58秒而回答。",
+    "归一化G对原G的两臂B有文献和现有接口支持，但没有UAV修复证据，也不直接检验续约。",
+    "同信息调好基线的headroom缺失；不是启动B的前置条件。"
+  ],
+  "cost": {
+    "compute": "本咨询0新仿真/训练/评价。候选a为303104原生步、2048次Adam、160次终局评价；候选b为0；候选c为286720步、2048次Adam、96次评价。未来墙钟未知；提议1800秒/臂、3600秒完整调用。",
+    "owner_time": "异步查看；无需回复后才发布",
+    "reversibility": "reversible",
+    "waits_on_this": "只有后续科学选择等原节点完整答复；Root未分配新实验。"
+  },
+  "verdict_text": "Recommend (a), narrowly over (b), while exposing (c) as a concrete alternative.",
+  "source": "docs/research/candidates/ucope/UCOPE_POST_MEAN_VELOCITY_B01_CONVERGENCE_PREPARATION_INTAKE_20260909.md"
+}

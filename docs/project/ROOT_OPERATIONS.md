@@ -5,6 +5,14 @@ integration. DM owns direction science; CM owns technical delivery. Independent 
 Pro browser work. Root uses the owner's selected model/effort. Scientific authority and budgets
 remain in AGENTS.md; the current owner pause applies before any research work.
 
+OWNER_DIRECT 2026-09-09: unstable failed-effect delivery is recovered under the same
+request after reconciling acceptance and actual delivery; confirmed generations are
+observed through archive and ordinary intake. Root personally recovered FOLR/SCDMP and
+confirmed normal sends. The owner then returned all subsequent transport work to the
+dedicated Transport session. Root dispatches ready handoffs and receives its receipts;
+Transport owns browser Send, observation and archival. Preserve original requests and
+failed attempts. This recovery policy does not allocate scientific execution.
+
 ## Where each rule is maintained
 
 | Rule | Maintained source |
