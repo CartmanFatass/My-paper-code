@@ -1,4 +1,8 @@
-# FOLR-PUBLIC-LIFECYCLE-TIMING-B01 — prospective preparation intake
+# FOLR-PUBLIC-LIFECYCLE-TIMING-B01 — preparation and allocation intake
+
+Current status: Root allocated the complete implementation/review/three-arm batch after
+accepting the preparation. See §7 for the immutable allocation and its application.
+Sections1–5 below preserve the earlier preparation record and its zero-exposure boundary.
 
 ## 1. Assignment, current evidence and recommendation
 
@@ -181,11 +185,11 @@ no source difference from434. This short document/arithmetic check took0.369838s
 no target code and does not measure a future experiment's cost. No global index, library
 build, model construction, resource admission, scientific test or runtime was added.
 
-## 6. Five-item CM handoff for a later explicit assignment
+## 6. Five-item CM handoff under the explicit allocation
 
 1. **Deliverable:** implement/accept the minimal random-survivor law and128-final-episode
-   route under card §§2–4, then execute only the scientific allowance that Root later
-   explicitly assigns. No CM implementation or run is dispatched by this preparation.
+   route under card §§2–4, then execute the complete RETAIN/EVENT/RANDOM allowance now
+   explicitly assigned by Root in §7. Collect and technically accept all resulting evidence.
 2. **Owned paths:** existing shared `C:/Projects/HMASD-worktrees/codex-vap-folr` /
    `codex/vap-folr`; existing runner and public_lifecycle_b01 `model.py`, `collection.py`,
    `environment.py` and directly necessary learner plumbing; mapped focused tests and
@@ -200,9 +204,38 @@ build, model construction, resource admission, scientific test or runtime was ad
    retain independent review of these high-impact changes. Reuse unchanged checks. The
    CAMA/Sable source pointers in §3 only support generic history/consistent boundaries;
    the exact implementation law is card §3, not a copied paper algorithm.
-5. **Budget/stop:** proposed1800s complete arm/5400s triple/300s supporting work, subject
-   to the explicit later assignment; currently zero scientific calls. If allocated, one
+5. **Budget/stop:** allocated1800s complete arm/5400s triple/300s total supporting work; one
    accepted submission each in RETAIN/EVENT/RANDOM order, no replacement/extra evaluation
    or automatic successor. Use a new committed-source detached remote worktree, each
    arm's own fresh admission and live-main direct shared Monitor handoff. Preserve every
    failed/partial result and reconcile uncertain acceptance through its same handle.
+   Any failed scientific invocation ends the remaining dependent sequence. Required CM
+   acceptance and published exact source suffice; no additional Root source-approval gate.
+
+## 7. Allocation applied before implementation
+
+Root accepted the full prepared card/intake `fffffdff4a6d86751d17cb9e32ec14ef8c59331a`
+and integrated it as main `d7d7d9800`. It then published the actual complete allocation
+at main `fdede5b8897e412d68d2a341a379efac69feb429`, final FOLR timing section of
+`docs/research/portfolio/decisions/2026-09-09-synthesis-execution.md`, and resumed the
+original DM/CM. Root mapped preparation auditL20 to mainL163 and recorded the new
+allocation at mainL164; owner item20260909-folr-006 was traced there. This applies the
+already recorded object-tier allocation; it is not a new comparator or budget choice.
+
+The allocation is exactly RETAIN → EVENT → RANDOM, training/evaluation seeds7804/107804,
+private mask seeds207804/307804,5000 training episodes/4969 RMSprop steps/128 once-fixed
+final episodes per arm,1800s complete arm/5400s triple/300s supporting work. There is
+no retry, replacement, extra arm/seed, top-up, cost probe or successor. A failed scientific
+invocation ends dependent execution. An intact early sign does not select later arms.
+The unmatched p=.1 law, observed B03 reversal, absent headroom, complete-package claim
+ceiling and prospective low-confidence MIXED_OR_REVERSE prediction are unchanged.
+
+The shared authoring checkout was clean at fffffdff4. The required committed allocation
+document was brought into this checkout byte-for-byte from fdede5b88; live main Monitor
+policy/config and owner-review surfaces remain the authoritative operational inputs.
+All-age owner reviews were empty at this boundary. Main's current Portfolio row still
+describes accepted B03/preparation; the later explicit allocation controls this task,
+without a DM edit to Portfolio lifecycle or priority. No source or scientific call was
+changed by this allocation-status update. Original CM now receives source/index ownership;
+DM retains card/intake/scientific interpretation and waits for technical returns without
+duplicating implementation or routine experiment observation.

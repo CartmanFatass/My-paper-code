@@ -1,17 +1,19 @@
 Claim under test: event-triggered survivor clearing may outperform full retention and one preset random-clearing law on the public-lifecycle host at equal real training exposure.
 Binding MARL structure: (a) roster change; (d) other-agent non-stationarity or partial observability.
 
-# FOLR-PUBLIC-LIFECYCLE-TIMING-B01 — prospective three-law comparison
+# FOLR-PUBLIC-LIFECYCLE-TIMING-B01 — allocated three-law comparison
 
 ## 1. Status, question and claim boundary
 
-**B/EXPLORE; prospective candidate only. No implementation or scientific invocation is
-allocated.** Root assigned judgment/preparation after complete B03 intake under the owner's
-synthesis execution command. The [preparation intake](FOLR_PUBLIC_LIFECYCLE_TIMING_B01_INTAKE_20260909.md)
-records this authority, retained-denominator finding and object-tier choice. This is a
-comparator refinement inside the accepted public-lifecycle family, not a family opening,
-recast, C/UAV promotion or Portfolio priority decision. Root reviews this concrete candidate
-and allocates any subsequent engineering/execution step.
+**B/EXPLORE; implementation and exactly three sequential scientific submissions allocated.**
+Root accepted the prepared card at `fffffdff4a6d86751d17cb9e32ec14ef8c59331a` and published
+the complete allocation in [synthesis execution, final FOLR timing section](../../portfolio/decisions/2026-09-09-synthesis-execution.md#folr-post-b03-timing-comparison-now-explicitly-allocated),
+main `fdede5b8897e412d68d2a341a379efac69feb429`. This status update freezes that allocation
+without changing the question, laws, seeds, exposure, reading or prediction below.
+The [intake §7](FOLR_PUBLIC_LIFECYCLE_TIMING_B01_INTAKE_20260909.md#7-allocation-applied-before-implementation)
+records application; §§1–5 preserve preparation authority and the denominator finding.
+This remains a comparator refinement inside the accepted public-lifecycle family, not a
+family opening, recast, C/UAV promotion or Portfolio priority decision.
 
 Question: in one new matched training instance, does the event-clearing trained package
 offer a useful final native-return advantage over both generic retention and a fixed
@@ -40,7 +42,7 @@ All three arms are fresh fits and receive the same new evaluation budget.
 
 Use [B03 card §2](FOLR_PUBLIC_LIFECYCLE_B03_SCIENCE_CARD_20260909.md#2-unchanged-scientific-recipe-and-fresh-randomness)
 and accepted source `434f10cf95f16dd342cbf754382aa76155fcd2b7` as the implementation base.
-That source does not yet implement RANDOM or128 final episodes; a future CM publishes the
+That source does not yet implement RANDOM or128 final episodes; the assigned CM publishes the
 minimal changed source before any execution. No launch SHA is invented here.
 
 Keep native CAMA easy Traffic Junction: five slots/actions, vision1, 7×7 grid,20 primitive
@@ -160,7 +162,7 @@ comparators by1.0. RANDOM is untested here, so this is a low-confidence forecast
 literature-backed estimate. Other branches remain possible. Owner prediction: not taken
 (unattended). Selection of this candidate is outcome-informed B exploration.
 
-## 5. Runner-derived work, proposed cost and stop boundary
+## 5. Runner-derived work, allocated cost and stop boundary
 
 The machine-generated plan uses the accepted loops and the explicit128-episode change,
 without a target import, simulator call or cost-only run.
@@ -186,24 +188,26 @@ is not parameter displacement. Additional verification is separate from this alg
 | --- | ---: | ---: | ---: |
 | Mean of three old complete arm walls / proxy | 764.123 | 751.313 | 757.718 |
 | Candidate point projection | 778.701 | 765.647 | 772.174 |
-| Proposed complete-arm cap | 1,800 | 1,800 | 1,800 |
+| Allocated complete-arm cap | 1,800 | 1,800 | 1,800 |
 
 The known learner/replay work ratio is1.0; native/acting work grows by5128/5032=1.019078.
 For planning, apply that latter factor to the complete historical mean, although training
 and evaluation phase times are not separately measured. RANDOM uses the midpoint of the
 two means as an **unmeasured proxy**, with mask overhead and trajectory variation unknown.
-The summed point is2,316.522s, about38.61 minutes; it is neither a guaranteed upper bound
-nor a new allocation. Proposed total cap is**5,400s**, with**300s total supporting
+The summed point is2,316.522s, about38.61 minutes; it is not a guaranteed upper bound.
+The separately allocated total cap is**5,400s**, with**300s total supporting
 engineering/checks/readbacks** for the changed boundary. Full invocation caps include
 startup/imports, learning, final evaluation and publication. No extra profiling or cost
 experiment is proposed.
 
-If separately allocated, submit RETAIN → EVENT → RANDOM sequentially, exactly one accepted
+Submit RETAIN → EVENT → RANDOM sequentially, exactly one accepted
 scientific submission per arm. All arms are planned before output; an intact early sign
 does not choose whether later arms run. A failed scientific attempt ends its allowance and
 returns the exact partial boundary; no scientific retry/replacement, extra seed, fourth
 arm, diagnostic, tuning, extra final evaluation, local fallback or automatic successor.
-Uncertain acceptance is reconciled through the same handle. **Current allocation remains zero.**
+Uncertain acceptance is reconciled through the same handle. Any failed scientific invocation
+ends the remaining dependent sequence and returns all partial facts. The allocation is
+exactly these three submissions; no automatic successor is included.
 
 ## 6. Engineering scope, focused acceptance and execution route
 
@@ -217,10 +221,10 @@ keeps the existing terminal-step convention. RANDOM reset counts come from reali
 Mask storage in the ordinary episode replay is algorithm data needed for consistent history,
 not a new telemetry/archive service. No other §4 machinery is needed.
 
-Future implementation is confined to the existing runner plus `model.py`, `collection.py`,
+Implementation is confined to the existing runner plus `model.py`, `collection.py`,
 the small counter boundary in `environment.py` and any directly necessary `learner.py`
 plumbing under `experiments/candidates/vap_folr_core/public_lifecycle_b01/`. Preserve native
-environment, attention, mixer, reward and optimizer semantics. Name future tests under the
+environment, attention, mixer, reward and optimizer semantics. Name focused tests under the
 existing mapped test surface. No new framework, registry, resume/checkpoint orchestration,
 compatibility shim, guard, repeated smoke or full trajectory publication is requested.
 
@@ -233,8 +237,10 @@ state/replay semantics. Source/test success is not a scientific result. Evidence
 5.2,11.4/11.8 applies; no Pro round or stronger evidence class holds this ordinary B.
 
 Reuse authoring checkout `C:/Projects/HMASD-worktrees/codex-vap-folr`, branch `codex/vap-folr`.
-CM/DM edits and index ownership are serialized; Root owns main integration. No implementation
-is dispatched by this card. Any later accepted source is committed/pushed and staged in a
+CM/DM edits and index ownership are serialized; Root owns main integration. Original CM owns
+the allocated implementation, independent review, execution and technical acceptance batch.
+CM's required acceptance and committed/pushed source establish engineering readiness;
+there is no additional Root source-approval gate. The accepted source is staged in a
 new detached exact-SHA remote worktree with new timing-object roots, not reclaimed B01–B03
 worktrees. Route to `hmasd-wsl-node`, configured Python, CPU FP32 and one Torch compute/interop
 thread, with each arm's own fresh destination admission immediately joined to its runner.
