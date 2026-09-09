@@ -6,7 +6,11 @@ Research is **RESUMED** under OWNER_DIRECT “读取handoff docs然后继续科�
 
 Root owns planning and integration under [ROOT_OPERATIONS.md](../../project/ROOT_OPERATIONS.md). The assigned CM/Operator observes by default; explicit takeover follows [EXPERIMENT_MONITOR.md](../../project/EXPERIMENT_MONITOR.md). Independent Pro provider operations belong to Transport. Exact handles and receipt bindings below remain evidence. Detailed receipts are in [root-log/2026-09-08.md](root-log/2026-09-08.md); lifecycle and priority are in [PORTFOLIO.md](PORTFOLIO.md). The older tracker is preserved in [EXPERIMENT_TRACKING_THROUGH_P45_20260908.md](../../archive/operations/EXPERIMENT_TRACKING_THROUGH_P45_20260908.md).
 
-## Soft-stop closeout updates — 2026-09-09
+## P74 current dispatch — 2026-09-09T08:06Z
+
+Five original native DMs were actually dispatched and each observed running: MGTAP execution/cost readiness; VSPC1 one new independent768 matched pair through source/remote execution/intake; FSD, UCOPE and VSP03 post-result proper-node question preparation. See [bounded assignments](handoffs/2026-09-09-research-resume-p74.md) and [actual dispatch log](root-log/2026-09-09.md). No new accepted scientific handle or provider generation is yet reported. Original CM/Transport observation ownership will apply to newly accepted work.
+
+## Historical soft-stop closeout updates — 2026-09-09
 
 - CRTO P72: response/intake/handoff integrated at63550cd83; DM stopped, no live experiment or Pro generation, no successor B. See [handoff](../candidates/commitment_residual_triggered_options/CRTO_RESTART_HANDOFF_20260909.md).
 - UCOPE P72: handle `ucope-uav-renewal-b03-7501-p72-20260908` terminal exit0/tmux inactive; CM collection and DM intake complete, both stopped. Source7d3aaab46; whole390.73s; valid DOWN. P72 chain integrated at9868dc355. See [handoff](../candidates/ucope/UCOPE_RESTART_HANDOFF_20260909.md). Scientific and check worktrees plus staged wrapper await separately bounded preservation/reclamation; raw local collection remains in the designated direction checkout.
