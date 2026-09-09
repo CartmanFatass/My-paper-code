@@ -1,0 +1,48 @@
+{
+  "question": "执行已由原Convergence选定、由Root分配的一次原生学习纠正比较，并冻结小型门控头与随机流。",
+  "changes_if_approved": [
+    {
+      "target": "docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_B01_SCIENCE_CARD_20260909.md",
+      "from": "已选问题，尚无新卡或运行",
+      "to": "B01卡冻结；一个新训练实例、T/G两个学习器、C/F两个固定对照，单次远程比较"
+    }
+  ],
+  "if_refused": "按主人明确的新指令处理卡或停止尚未开始的动作；不改写旧结果，也不自动替换运行。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260909_native_link_loss_convergence/archive/RESPONSE.md",
+      "quote": "Select the one bounded native B/EXPLORE comparison.",
+      "why": "科学节点已选定直接训练与原生回报比较，Root的P78已分配本批。"
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_B01_SCIENCE_CARD_20260909.md",
+      "quote": "G copies that entire T path and adds a private residual:",
+      "why": "通用对照保留结构化方法的完整能力和信息，同时保留两个固定规则。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260909_native_link_loss_convergence/archive/RESPONSE.md",
+      "quote": "Selection occurred with both outcomes visible, and 8201 is the better of these two original DENSE means.",
+      "why": "固定底座选择已有结果暴露，后续结论只能条件于它。"
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_B01_SCIENCE_CARD_20260909.md",
+      "quote": "Loss of own-link eligibility is not proof of a global service loss; a teammate may have taken over.",
+      "why": "看见失联不保证纠正有用，原生收益可能下降。"
+    }
+  ],
+  "uncertainty": [
+    "门控机会频率、实际参数移动和新增运行耗时未知。",
+    "单一训练实例不估计训练种子总体不确定性。",
+    "低于均值0.01的正差仍是正观察，但不是该卡的投资尺度增益。"
+  ],
+  "cost": {
+    "compute": "294912团队步、2048次Adam、128个最终评估；完整学习臂1800秒、全批3600秒，含必要检查和发布；无重试。",
+    "owner_time": "不等待答复；新指令在下一清洁边界处理。",
+    "reversibility": "costly",
+    "waits_on_this": "nothing"
+  },
+  "verdict_text": "Owner-delegated decision (unattended, 2026-09-03 instruction): (a).",
+  "source": "docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_B01_SCIENCE_CARD_20260909.md"
+}
