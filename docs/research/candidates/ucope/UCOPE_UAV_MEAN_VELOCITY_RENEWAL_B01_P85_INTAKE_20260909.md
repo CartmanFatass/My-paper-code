@@ -101,3 +101,45 @@ Selection is [audit row 34](../../portfolio/audit/2026-09-09.md#L34).
 Preparation checks match the actual configuration arithmetic, stream endpoints,
 all eight contrast identities and the card/item evidence without a model or
 environment call.
+
+## 4. CM source, focused checks and independent review
+
+Designated checkout started clean `d44b9f40e`; source **52bf50a089d3389d9fada0b531e4f4e56e83f9b8** committed/pushed, five owned files **250 additions / 36 deletions**, non-test **83 / 36**, runner **54 lines**. CM inspected the full diff. Engineering scope section4 additions: **none**, per card section6. No environment/base/adapter/VSPC1 change. Training keeps its existing default sampling/update path; only selected mean evaluations pass `velocity_mode="mean"`. Both modes retain separate F categorical generators, fresh episode recurrence/hold and final fitted parameters. Five labels/eight contrasts explicitly select `F_mean_minus_G_mean`.
+
+Independent reviewer **rv_ah_ucope_b02_credit** inspected the actual source and [raw focused receipt](../../../../temp/directions/ucope/exp/ucope-uav-mean-velocity-renewal-b01-8401-p85-20260909/checks/local-focused.log): **no material finding**. It checked changed evaluation/RNG/reset/nonmutation, no optimizer access, current networks' absence of running-stat buffers, serial mode order and paired publication/default behavior; no additional runtime verification question. [Review record](../../../../temp/directions/ucope/exp/ucope-uav-mean-velocity-renewal-b01-8401-p85-20260909/checks/independent-review.txt). DM also read the scientific diff with no requested change.
+
+Focused command: `C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe -m pytest -q -p no:cacheprovider --basetemp temp/directions/ucope/test/p85-mean-local-20260909 tests/experiments/candidates/ucope/uav_motion_prefix_b01/test_mean_velocity.py tests/experiments/candidates/ucope/uav_motion_prefix_b01/test_pair_plumbing.py`. **142 passed**, pytest **6.42 s**, outer **7.61 s**, exit0; existing disabled-cache-provider `cache_dir` warning only. Eleven new checks cover mean's zero Gaussian draws/exact mu, independent fixed categorical stream, default sampled draw order, collector episode reset/nonmutation, CLI8401/fixture9001 and real synthetic fit/checkpoint/five-mode publication with eight contrasts and partial-completeness behavior. Historical131 plumbing checks pass. No native smoke, old-checkpoint evaluation or repeated suite.
+
+**Cleanup limitation:** automatic approval review rejected the combined test/cleanup command before execution and then rejected the separate exact `Remove-Item -LiteralPath 'C:/Projects/HMASD-worktrees/dm-ucope-native-return-prep-20260906/temp/directions/ucope/test/p85-mean-local-20260909' -Recurse -Force` as **blocked by policy**. The separate test invocation passed. Exact resolved completed scratch remains; **CM owns cleanup** when permitted, DM/Root informed, no further deletion retry or alternate-path bypass. [Exact blocker](../../../../temp/directions/ucope/exp/ucope-uav-mean-velocity-renewal-b01-8401-p85-20260909/checks/cleanup-blocker.txt). This is separate from scientific conformance.
+
+**Per-arm cost projection:** card section4 freezes303104 native steps/2048Adam and F head2048000–4096000 rows. Reuse P84 measured F163.87369038298493 s, G including H133.33607813803246 s, outer313.90 s; new native work ratio1.0571428571428572 and F-head-bound ratio1.0204081632653061 are work comparisons, not time scaling assumptions. New wall remains unknown; no known term projects over1800 s/arm or3600 s/invocation. No cost probe. Critical path and summed invocation wall coincide for the serial run; aggregate CPU remains unmeasured.
+
+**Post-learner path coverage:** the new synthetic fixture runs actual learning, final checkpoint, both execution modes and all-five/eight-contrast publication. It checks actual mode order, per-episode generator identity/seed, resets, unchanged parameters/buffers and summary readback. Reuse accepted native reward/short-duration/credit/freeze evidence; no extra physical or native check follows.
+
+## 5. Exact one-invocation payload and observer
+
+Configured `hmasd-wsl-node`, CPU FP32/one Torch thread, `/home/wu/.venvs/hmasd/bin/python`; prospective host portability per card section4. CM `/root/dm_ucope_p47_resume/cm_am_ucope_b02_p47` alone observes/collects through terminal acceptance.
+
+Source **52bf50a089d3389d9fada0b531e4f4e56e83f9b8**, detached cwd `/home/wu/hmasd-worktrees/ucope-uav-mean-velocity-renewal-b01-8401-p85-20260909`, relative output `temp/directions/ucope/exp/ucope-uav-mean-velocity-renewal-b01-8401-p85-20260909`, supervisor handle `ucope-uav-mean-velocity-renewal-b01-8401-p85-20260909`. Handle/cwd/output absent before staging. Committed-object pack 150723 bytes, SHA256 `e5f7a86f19483ce9972ef88770a9a5371f36ef3d18a9193fba372756b7b64951` staged with existing SCP/index-pack; local/remote pack carriers removed. Changed/source/preflight materialized bytes match bound Git and local committed SHA256s: [source readback](../../../../temp/directions/ucope/exp/ucope-uav-mean-velocity-renewal-b01-8401-p85-20260909/preparation/source-input-readback.json). Prior P84 remote roots untouched.
+
+Actual-node canonical admission must show physical/effective ≥4294967296 bytes; joined by `&&` before scientific roots/RNG/models. Existing continuous1800 s arm/3600 s pair deadlines and3600 s outer timeout cover publication/exit. Stop on refusal/cap/nonfinite/meaning-threatening defect and preserve trustworthy partial facts. **One accepted submission only**, no retry/resume/replacement/pilot/tuning/extra evaluation/second instance/T/support change/Pro Send/automatic successor. Every outcome ends P85.
+
+Wrapper `/home/wu/hmasd-inputs/ucope-uav-mean-velocity-renewal-b01-8401-p85-20260909.sh`: 805 ASCII/LF bytes, SHA256 `3b56828d695c10d16f144c25bda61e4d21eb3a9a01053009483e31c5e9bb2739`. [Literal wrapper](../../../../temp/directions/ucope/exp/ucope-uav-mean-velocity-renewal-b01-8401-p85-20260909/preparation/run.sh):
+
+```bash
+set -euo pipefail
+cd /home/wu/hmasd-worktrees/ucope-uav-mean-velocity-renewal-b01-8401-p85-20260909
+/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/.agent-tasks/ucope-uav-mean-velocity-renewal-b01-8401-p85-20260909/resource_admission.json &&
+mkdir -p temp/directions/ucope/exp/ucope-uav-mean-velocity-renewal-b01-8401-p85-20260909 &&
+cp /home/wu/.agent-tasks/ucope-uav-mean-velocity-renewal-b01-8401-p85-20260909/resource_admission.json temp/directions/ucope/exp/ucope-uav-mean-velocity-renewal-b01-8401-p85-20260909/resource_admission.json &&
+exec /home/wu/.venvs/hmasd/bin/python scripts/run_ucope_uav_motion_prefix_b01.py --pair renewal_mean_velocity_b01 --seed 8401 --out temp/directions/ucope/exp/ucope-uav-mean-velocity-renewal-b01-8401-p85-20260909
+```
+
+[Exact submission](../../../../temp/directions/ucope/exp/ucope-uav-mean-velocity-renewal-b01-8401-p85-20260909/preparation/submit.ps1): 366 ASCII/LF bytes, SHA256 `f1878b5420cdda1cf97fc74caa0f74adb3e3f4ef0bbb369fc3540dc54f8e0b43`:
+
+```powershell
+& ssh -o BatchMode=yes -o ConnectTimeout=10 hmasd-wsl-node "/usr/local/bin/agent-task run ucope-uav-mean-velocity-renewal-b01-8401-p85-20260909 '/usr/bin/time -f whole_wall_seconds=%e,peak_rss_kib=%M /usr/bin/timeout --signal=KILL 3600s /bin/bash --noprofile --norc /home/wu/hmasd-inputs/ucope-uav-mean-velocity-renewal-b01-8401-p85-20260909.sh'"
+exit $LASTEXITCODE
+```
+
+Bash `-n` and PowerShell parser passed. This exact payload is committed/pushed before submission. Root owns integration and remote P85 scientific cwd/wrapper reclamation after verified preservation; designated shared local authoring checkout remains in use. CM retains the separately rejected local test-scratch cleanup responsibility.
