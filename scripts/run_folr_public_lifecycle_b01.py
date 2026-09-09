@@ -1,4 +1,4 @@
-"""One frozen FOLR-PUBLIC-LIFECYCLE-B01 arm; external timeout covers startup too."""
+"""One FOLR-PUBLIC-LIFECYCLE-TIMING-B01 arm; external timeout covers startup too."""
 import time
 START = time.monotonic()
 import argparse
@@ -20,9 +20,9 @@ def publish(out, summary):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--arm', required=True, choices=['RETAIN', 'RESET'])
-    parser.add_argument('--seed', type=int, default=7801)
-    parser.add_argument('--evaluation-seed', type=int, default=107801)
+    parser.add_argument('--arm', required=True, choices=['RETAIN', 'EVENT', 'RANDOM'])
+    parser.add_argument('--seed', type=int, default=7804)
+    parser.add_argument('--evaluation-seed', type=int, default=107804)
     parser.add_argument('--launch-sha', required=True)
     parser.add_argument('--out', type=Path, required=True)
     args = parser.parse_args()
@@ -31,8 +31,8 @@ def main():
                    launch_sha=args.launch_sha, status='incomplete', training_episodes=0,
                    training_ticks=0, optimizer_steps=0, evaluation_episodes=0,
                    evaluation_ticks=0, evaluation_returns=[], training_return_sum=0.0,
-                   training_events=dict(births=0, departures=0, survivor_opportunities=0, survivor_resets=0),
-                   evaluation_events=dict(births=0, departures=0, survivor_opportunities=0, survivor_resets=0))
+                   training_events=dict(births=0, departures=0, survivor_opportunities=0, eligible_survivor_opportunities=0, survivor_resets=0),
+                   evaluation_events=dict(births=0, departures=0, survivor_opportunities=0, eligible_survivor_opportunities=0, survivor_resets=0))
 
     def timed_out(signum, frame):
         raise TimeoutError('1800-second complete logical arm cap')
@@ -51,9 +51,10 @@ def main():
         torch.manual_seed(args.seed)
         learner = Learner(args.arm)
         env = LifecycleEnv(difficulty='easy', vision=1, seed=args.seed)
+        mask_rng = np.random.Generator(np.random.PCG64(207804)) if args.arm == 'RANDOM' else None
         replay = []
         for episode_num in range(1, 5001):
-            episode, score, counts = collect(env, learner.actor, epsilon_at(summary['training_ticks']))
+            episode, score, counts = collect(env, learner.actor, epsilon_at(summary['training_ticks']), mask_rng)
             replay.append(episode)  # Exactly 5000 episodes: capacity never exceeded.
             summary['training_episodes'] += 1
             summary['training_ticks'] += 20
@@ -72,8 +73,9 @@ def main():
         np.random.seed(args.evaluation_seed)
         torch.manual_seed(args.evaluation_seed)
         env = LifecycleEnv(difficulty='easy', vision=1, seed=args.evaluation_seed)
-        for _ in range(32):
-            _, score, counts = collect(env, learner.actor, 0.0)
+        mask_rng = np.random.Generator(np.random.PCG64(307804)) if args.arm == 'RANDOM' else None
+        for _ in range(128):
+            _, score, counts = collect(env, learner.actor, 0.0, mask_rng)
             summary['evaluation_returns'].append(score)
             summary['evaluation_episodes'] += 1
             summary['evaluation_ticks'] += 20
@@ -81,7 +83,11 @@ def main():
                 summary['evaluation_events'][k] += v
         summary['mean_native_return'] = float(np.mean(summary['evaluation_returns']))
         summary['status'] = 'complete'
-        summary['exposure'] = '100000 real native training ticks; 4969 actor/mixer RMSprop steps at lr=0.0005; 32 final greedy evaluation episodes'
+        summary['exposure'] = '100000 real native training ticks; 4969 actor/mixer RMSprop steps at lr=0.0005; 128 final greedy evaluation episodes'
+        if args.arm == 'RANDOM':
+            summary['mask_rng'] = dict(bit_generator='PCG64', training_seed=207804,
+                                       evaluation_seed=307804, probability=0.1,
+                                       draws_per_episode=105, frequency_matched=False)
         summary['rng'] = f'Python/global NumPy/Torch seeded before model construction; native traffic and replay share global NumPy; source epsilon selector uses Torch including greedy and terminal draws; all three reset to{args.evaluation_seed} for final evaluation'
         summary['torch_version'] = torch.__version__
         summary['numpy_version'] = np.__version__
