@@ -191,3 +191,54 @@ def test_primary_rules_replay_rng_and_publication(tmp_path, monkeypatch):
     summary = dict(evaluation_returns=[1.25]*32, mean_native_return=1.25, status='complete')
     runner.publish(tmp_path, summary)
     assert json.loads((tmp_path/'summary.json').read_text())['evaluation_returns'] == [1.25]*32
+
+
+@pytest.mark.parametrize('seeds', [None, (7802, 107802)])
+def test_runner_seed_routing_with_standins(tmp_path, monkeypatch, seeds):
+    # Exercise real argparse/main/publication; replace every scientific entry point.
+    import random
+    calls = []
+    for module, name, label in [(random, 'seed', 'python'),
+                                (np.random, 'seed', 'numpy'),
+                                (torch, 'manual_seed', 'torch')]:
+        monkeypatch.setattr(module, name, lambda seed, label=label: calls.append((label, seed)))
+    monkeypatch.setattr(torch, 'set_num_interop_threads', lambda n: None)
+    monkeypatch.setattr(torch, 'get_num_interop_threads', lambda: 1)
+    prefix = 'experiments.candidates.vap_folr_core.public_lifecycle_b01.'
+
+    def environment(**kwargs):
+        calls.append(('environment', kwargs['seed']))
+        return object()
+
+    def learner(arm):
+        calls.append(('learner', arm))
+        return SimpleNamespace(actor=SimpleNamespace(eval=lambda: None),
+                               update=lambda batch, episode: None,
+                               save=lambda path: None)
+
+    monkeypatch.setitem(sys.modules, prefix+'environment', SimpleNamespace(LifecycleEnv=environment))
+    monkeypatch.setitem(sys.modules, prefix+'learner', SimpleNamespace(Learner=learner))
+    monkeypatch.setitem(sys.modules, prefix+'collection', SimpleNamespace(
+        collect=lambda *args: ({}, 1.25, {}), sample=lambda replay: None,
+        epsilon_at=lambda ticks: 0.0))
+    monkeypatch.setitem(sys.modules, 'resource', SimpleNamespace(
+        RUSAGE_SELF=0, getrusage=lambda _: SimpleNamespace(ru_maxrss=123)))
+    path = Path(__file__).resolve().parents[5] / 'scripts/run_folr_public_lifecycle_b01.py'
+    spec = importlib.util.spec_from_file_location('b02_seed_runner', path)
+    runner = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(runner)
+    monkeypatch.setattr(runner.signal, 'signal', lambda *args: None)
+    argv = [str(path), '--arm', 'RESET', '--launch-sha', 'fixture', '--out', str(tmp_path)]
+    if seeds:
+        argv += ['--seed', str(seeds[0]), '--evaluation-seed', str(seeds[1])]
+    monkeypatch.setattr(sys, 'argv', argv)
+    runner.main()
+    train, final = seeds or (7801, 107801)
+    assert calls == [('python', train), ('numpy', train), ('torch', train),
+                     ('learner', 'RESET'), ('environment', train),
+                     ('python', final), ('numpy', final), ('torch', final),
+                     ('environment', final)]
+    summary = json.loads((tmp_path/'summary.json').read_text())
+    assert (summary['training_seed'], summary['evaluation_seed']) == (train, final)
+    assert f'reset to{final} for final evaluation' in summary['rng']
+    assert summary['status'] == 'complete' and summary['evaluation_returns'] == [1.25]*32
