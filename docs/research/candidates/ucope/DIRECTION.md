@@ -165,6 +165,12 @@ transfer, deployment or C promotion follows. See the
 [renewal card](UCOPE_UAV_RENEWAL_COMMITMENT_B01_SCIENCE_CARD_20260908.md) and
 [prior direction decision](UCOPE_POST_B04_RENEWAL_CONVERGENCE_INTAKE_20260908.md).
 
+P71 now selects that next discriminator: one independent same-package pair,
+master7401, under the [renewal B02 card](UCOPE_UAV_RENEWAL_COMMITMENT_B02_SCIENCE_CARD_20260908.md).
+Its primary uses only the new fit; P70 remains separate and every sign ends
+the new allocation. This object-tier selection tests recurrence of the native
+margin without a mechanism amendment or stronger population claim.
+
 ## Previous empirical position — 2026-09-08 B04 (preserved)
 
 The command-conditioned opening policy and ordinary feedback learner both
