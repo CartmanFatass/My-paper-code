@@ -40,6 +40,8 @@ VSPC1 P76 B10/8501 is now accepted/running: `vspc1_hold_value_b10_8501_2c2c7d9d3
 
 MGTAP post-B01 request nowARCHIVED: full response251bffbc4/Issue5comment5599484438, exactly one Send. Original DM actually resumed full scientific/conformity intake of the proposed narrow actor-family PARK; no new invocation or Portfolio lifecycle change. Transport observation for this completed request has ended.
 
+VSP03 P76 full intake49e14080c integrated maina7a7267b8; exact detached execution checkout retired after clean/byte/evidence checks, output retained. Same DM advances zero-exposure next direction question, no seed8 allocation. VSPC1 P76 is terminal/technically collected,475.85s with fixed CHANGE_DOWN C; original DM scientific intake continues. Earlier running-handle descriptions are superseded.
+
 ## Historical soft-stop closeout updates — 2026-09-09
 
 - CRTO P72: response/intake/handoff integrated at63550cd83; DM stopped, no live experiment or Pro generation, no successor B. See [handoff](../candidates/commitment_residual_triggered_options/CRTO_RESTART_HANDOFF_20260909.md).
