@@ -152,3 +152,51 @@ intake to the original DM. No staging, admission, native run, retry, new Pro rou
 or successor work proceeds under the current soft stop.
 
 Final source size: runner 492 lines, geometry 168, package initializer 21 and entry script 29. Relative to the card commit 7e880cb33, 1628 non-test source lines are added including the five reconciled shared UCOPE files; this is below 2000 and the runner is below 600. The independent review found no prohibited machinery; reporting/deadline code is the explicitly assigned repair surface.
+
+## Exact prospective binding at accepted source revision
+
+Accepted and pushed source SHA: `db34b6c14100f19ac197b1eaa53c55be22aaf34b`. These commands were not staged or executed.
+
+The source surface consists of the three B01 package files, its entry script, the five shared UCOPE files, the native environment dependencies and scripts/hmasd_resource_preflight.py at this revision. Future staging compares those committed bytes to the execution checkout; a later documentation-only commit does not change this binding.
+
+Write each wrapper as the literal UTF-8/LF bytes shown, without PowerShell interpolation or escaped newline text. The detached exact-SHA checkout and input directory must be created only after a future execution assignment. Neither directory nor a supervisor handle has been created by this repair.
+
+Wrapper: `/home/wu/hmasd-inputs/mgtap-b01-db34b6c14100f19ac197b1eaa53c55be22aaf34b/run_8201.sh`
+
+```bash
+#!/usr/bin/env bash
+set -euo pipefail
+cd /home/wu/hmasd-worktrees/mgtap_b01_db34b6c14100f19ac197b1eaa53c55be22aaf34b
+/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/hmasd-worktrees/mgtap_b01_db34b6c14100f19ac197b1eaa53c55be22aaf34b/temp/directions/metric_ground_transport_allocation/exp/b01_8201/admission.json && /usr/bin/time -q -f '%e' -o /home/wu/hmasd-worktrees/mgtap_b01_db34b6c14100f19ac197b1eaa53c55be22aaf34b/temp/directions/metric_ground_transport_allocation/exp/b01_8201/process_wall_seconds.txt /home/wu/.venvs/hmasd/bin/python scripts/run_mgtap_native_ground_geometry_b01.py --native --master 8201 --output /home/wu/hmasd-worktrees/mgtap_b01_db34b6c14100f19ac197b1eaa53c55be22aaf34b/temp/directions/metric_ground_transport_allocation/exp/b01_8201 --arm-cap 1800 --pair-cap 3600
+```
+
+Submission (prospective only):
+
+```text
+ssh hmasd-wsl-node '/usr/local/bin/agent-task run mgtap-b01-8201-db34b6c14100f19ac197b1eaa53c55be22aaf34b bash /home/wu/hmasd-inputs/mgtap-b01-db34b6c14100f19ac197b1eaa53c55be22aaf34b/run_8201.sh'
+```
+
+Wrapper: `/home/wu/hmasd-inputs/mgtap-b01-db34b6c14100f19ac197b1eaa53c55be22aaf34b/run_8202.sh`
+
+```bash
+#!/usr/bin/env bash
+set -euo pipefail
+cd /home/wu/hmasd-worktrees/mgtap_b01_db34b6c14100f19ac197b1eaa53c55be22aaf34b
+/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/hmasd-worktrees/mgtap_b01_db34b6c14100f19ac197b1eaa53c55be22aaf34b/temp/directions/metric_ground_transport_allocation/exp/b01_8202/admission.json && /usr/bin/time -q -f '%e' -o /home/wu/hmasd-worktrees/mgtap_b01_db34b6c14100f19ac197b1eaa53c55be22aaf34b/temp/directions/metric_ground_transport_allocation/exp/b01_8202/process_wall_seconds.txt /home/wu/.venvs/hmasd/bin/python scripts/run_mgtap_native_ground_geometry_b01.py --native --master 8202 --output /home/wu/hmasd-worktrees/mgtap_b01_db34b6c14100f19ac197b1eaa53c55be22aaf34b/temp/directions/metric_ground_transport_allocation/exp/b01_8202 --arm-cap 1800 --pair-cap 3600
+```
+
+Submission (prospective only):
+
+```text
+ssh hmasd-wsl-node '/usr/local/bin/agent-task run mgtap-b01-8202-db34b6c14100f19ac197b1eaa53c55be22aaf34b bash /home/wu/hmasd-inputs/mgtap-b01-db34b6c14100f19ac197b1eaa53c55be22aaf34b/run_8202.sh'
+```
+
+Offline post-collection publication on the same source (separate measured process, no fresh scientific invocation):
+
+```bash
+cd /home/wu/hmasd-worktrees/mgtap_b01_db34b6c14100f19ac197b1eaa53c55be22aaf34b && /usr/bin/time -q -f '%e' -o /home/wu/hmasd-worktrees/mgtap_b01_db34b6c14100f19ac197b1eaa53c55be22aaf34b/temp/directions/metric_ground_transport_allocation/exp/aggregate_process_wall_seconds.txt /home/wu/.venvs/hmasd/bin/python scripts/run_mgtap_native_ground_geometry_b01.py --aggregate /home/wu/hmasd-worktrees/mgtap_b01_db34b6c14100f19ac197b1eaa53c55be22aaf34b/temp/directions/metric_ground_transport_allocation/exp/b01_8201/summary.json /home/wu/hmasd-worktrees/mgtap_b01_db34b6c14100f19ac197b1eaa53c55be22aaf34b/temp/directions/metric_ground_transport_allocation/exp/b01_8202/summary.json --output /home/wu/hmasd-worktrees/mgtap_b01_db34b6c14100f19ac197b1eaa53c55be22aaf34b/temp/directions/metric_ground_transport_allocation/exp/aggregate_summary.json
+```
+
+The actual node must supply a fresh physical/effective >=4 GiB receipt adjacent to each selected native invocation. No receipt exists now. Both masters remain required; a failure grants no replacement seed or retry. Commands remain DESIGN ONLY under the restart soft stop.
+
+The two exact CM scratch suffixes were test/cm_p72_20260909_final and test/cm_p72_20260909_endpoint under this checkout's temp/directions/metric_ground_transport_allocation/. Both are absent after cleanup. The prior writer's invocations and original historical evidence remain attributed to their creating tasks.
