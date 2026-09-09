@@ -230,3 +230,20 @@ metrics and ordinary output; add no guards, schemas, registries, retry/resume
 service, new profiler or orchestration layer. Ordinary§5 budgets and focused
 verification remain. The complete bounded [CM assignment](FSD_UAV_INDIVIDUAL_RENEWAL_B01_CM_SPEC_20260908.md)
 names the affected code and exact original acceptance checks.
+
+## 7. P69 source implementation allocation — 2026-09-08
+
+After the conforming P67 intake/card/spec return at
+`b317b1edde00d05a075b5f5ec5a8bb8e18d9cdba`, Root explicitly allocates P69:
+implement the exact existing CM specification, run its focused fake-only checks,
+obtain independent high-impact review and return accepted source/readiness or
+one concrete gap. Reuse the same direction CM and checkout. The source baseline
+remains `335425e92cda16677fd1f4181e2c31730887e911`; this allocation changes no
+arm, key, comparator, learner/evaluator, primary, resource cap or reading rule.
+
+This is a new **source engineering** allocation only. No scientific staging,
+admission, model construction, environment rollout, real-learner smoke, profile,
+invocation or retry is allocated. The accepted-source SHA and exact future per-arm
+argv will be recorded after technical acceptance. The earlier P67 preparation
+and zero-exposure record retain their historical state. Root-action completion
+uses the configured wake relay; nested CM/reviewer acceptance remains native.

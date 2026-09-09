@@ -204,3 +204,20 @@ scientific intake. A defect in this implementation is corrected here before
 acceptance; a required mechanism/comparator/budget change returns its exact
 decision need to DM through Root. No experiment, broader family, new Pro request
 or automatic successor is authorized by this specification.
+
+## 6. Actual P69 allocation — 2026-09-08
+
+Root has now allocated the SOURCE engineering/check/independent-review/readiness
+phase of this exact specification, at published input
+`b317b1edde00d05a075b5f5ec5a8bb8e18d9cdba`. Sections 1–5 remain the original
+complete spec and acceptance; starting code remains
+`335425e92cda16677fd1f4181e2c31730887e911`. Reuse CM
+`/root/dm_fsd_p47_resume/cm_am_fsd_b03_p47` and its existing high-impact reviewer.
+The published direction input is sufficient; do not wait for main integration.
+
+No scientific staging/admission/invocation or retry is allocated. Do not create
+scientific output roots, run a real-learner smoke or profile, or copy/stage source
+to a remote execution worktree. Return accepted source and exact future argv
+or the concrete unresolved gap to the assigning DM natively. DM delivers the
+completed Root-action return through the configured relay. Ordinary in-scope
+source/check corrections continue through acceptance; no fourth CM comparison.
