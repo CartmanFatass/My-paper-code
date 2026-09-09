@@ -74,5 +74,15 @@
     "verdict_text": "Freeze one independent RETAIN/RESET training pair as B02 for later allocation; this preparation grants no scientific execution.",
     "source": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_B02_PREPARATION_INTAKE_20260909.md"
   },
-  "starred": false
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-09T19:56:29+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/root-log/2026-09-09.md",
+      "record": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_B02_PREPARATION_INTAKE_20260909.md",
+      "state": "applied",
+      "summary": "Root accepted preparation d6e324de4 as main 66c64c94c; original branch audit L12 maps to main audit L142. Applied scope is card preparation and subsequently assigned source-only seed routing checks; zero scientific invocation allocated, no owner reply inferred."
+    }
+  ]
 }
