@@ -1,6 +1,6 @@
 # VSPC1 B10 P76 intake — fixed512/768 endpoints on one training pair
 
-Current state: prospective definition; no B10 result, source acceptance or
+Current state: source accepted and exact execution bound in §5; no B10 result or
 scientific submission. P74/B09 intake is complete and remains unchanged.
 
 ## 1. Assignment and starting state
@@ -89,3 +89,38 @@ The new-card P2[20260909-vspc1-002](../../portfolio/owner/inbox/2026-09-09/20260
 was created through item.py, recommended/auto-applied accept, with the decision
 packet and audit2026-09-09 row15. Ordinary technical acceptance and result facts
 stay in this intake; publication waits on no reply.
+
+## 5. Source acceptance and exact execution handoff
+
+Accept `2c2c7d9d34814c9834a741ce25b2f36076347315` on actual study/runner diff,
+focused test code and retained process/review evidence, not a completion claim
+alone. The changed boundary covers completed512/768 updates, separate training/
+evaluation environment state, fresh private evaluation generators and unchanged
+training data/model/optimizer sequence; moment states and checkpoints retain
+actual exposure. Identity validation orders both panels before computing the
+paired change and conditional SE. Missing learned panels suppress dependent C;
+missing H alone does not. Continuous deadline behavior and old caller behavior
+are covered by the same focused invocation. No check/native episode was rerun
+during DM acceptance.
+
+The retained23-case result is exit0,4.257573100000627s whole, with unchanged
+disabled-cacheprovider warning. Required independent read-only review found no
+material defect; actual native counts/publication/resource conclusions await
+execution. Added source139 production lines/35 runner meets2000/600, scope4
+none. Checkpoint output is the existing learner serialization for four fixed
+endpoints; no new resume or validation orchestration was accepted.
+
+Options: (a) accept source and continue the allocated exact route; (b) return a
+concrete semantic defect. Recommend/select(a). Owner-delegated decision
+(unattended,2026-09-03 instruction): (a), **OWNER_DELEGATED object tier**.
+[Card §7](VSPC1_NATIVE_HOLD_VALUE_B10_SCIENCE_CARD_20260909.md#7-accepted-source-and-exact-p76-execution-binding)
+binds source, node, cwd, literal payload, output and handle. No source substitution
+or extra allowance is implied. CM now resumes its existing bounded batch through
+one admitted detached invocation, sole observation, collection and E0; DM performs
+scientific intake. Current new scientific exposure remains zero.
+
+Automatic approval review rejected both exact-resolved recursive and nonrecursive
+PowerShell cleanup as “blocked by policy” before execution. The retained
+`temp/directions/vsp_c1/test/b10_p76_focused1` belongs to CM, who remains its
+cleanup owner at a later permitted boundary. No bypass/escalation/deletion
+occurred; this housekeeping limitation is separate from scientific acceptance.

@@ -189,3 +189,55 @@ failure. No retry, resume, second pair, tuning, extra evaluation, cost probe,
 Pro Send or automatic successor. Complete technical collection and all-outcome
 DM intake/Chinese brief, then return accepted evidence and next recommendation
 to Root for integration and any separate allocation.
+
+## 7. Accepted source and exact P76 execution binding
+
+DM accepts source **`2c2c7d9d34814c9834a741ce25b2f36076347315`** after inspecting
+the actual changed study and35-line runner, both focused test files and the
+[technical acceptance](VSPC1_NATIVE_HOLD_VALUE_B10_TECHNICAL_ACCEPTANCE_20260909.md)/
+[retained check and review receipt](VSPC1_NATIVE_HOLD_VALUE_B10_SOURCE_CHECKS_20260909.json).
+The required independent boundary review found no material defect. All23 focused
+checks passed, pytest3.27s/**4.257573100000627s whole process**, exit0, without
+native/model execution. The disabled-cacheprovider warning is unchanged.
+
+The changed path preserves continuous training and separate evaluation state,
+training-only cumulative counts, private fresh evaluation generators, fixed
+moments per endpoint, actual exposure metadata, paired-change dependency and
+continuous clocks. Prior final-only callers retain their behavior. Source adds139
+production lines,35 runner lines; no scope4 machinery or observed scope5 breach.
+Technical conformance supplies no native-performance evidence. CM-owned test
+scratch remains after automatic approval review blocked both exact cleanup
+commands; CM retains cleanup ownership, with no scientific dependency.
+
+| Field | Binding |
+| --- | --- |
+| Node /interpreter | wsl_4070, hmasd-wsl-node, `/home/wu/.venvs/hmasd/bin/python` |
+| Device /process /numerical threads | CPU FP32 /1 /1 |
+| Exact scientific SHA | `2c2c7d9d34814c9834a741ce25b2f36076347315` |
+| Detached cwd | `/home/wu/hmasd-worktrees/vspc1-native-hold-value-b10-8501-2c2c7d9d3481` |
+| Supervisor handle | `vspc1_hold_value_b10_8501_2c2c7d9d3481` |
+| Staged literal payload | `/home/wu/hmasd-inputs/vspc1_hold_value_b10_8501_2c2c7d9d3481.sh` |
+| Output | `/home/wu/projects/HMASD/temp/directions/vsp_c1/exp/native_hold_value_b10_8501_2c2c7d9d3481` |
+| Admission receipt | `/home/wu/projects/HMASD/temp/directions/vsp_c1/exp/native_hold_value_b10_8501_2c2c7d9d3481_admission.json` |
+| Scientific argv | `scripts/run_vspc1_native_hold_value_b10.py --seed 8501 --out /home/wu/projects/HMASD/temp/directions/vsp_c1/exp/native_hold_value_b10_8501_2c2c7d9d3481` |
+| Counts /complete caps | 434176 steps /3072 Adam /160 evaluations;1800s complete learned arm /3600s whole pair |
+
+Literal seven-line LF execution input:
+
+```bash
+#!/usr/bin/env bash
+set -euo pipefail
+exec /usr/bin/time -f 'whole_wall_seconds=%e,peak_rss_kib=%M' /bin/bash --noprofile --norc -c '
+cd /home/wu/hmasd-worktrees/vspc1-native-hold-value-b10-8501-2c2c7d9d3481 &&
+/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/projects/HMASD/temp/directions/vsp_c1/exp/native_hold_value_b10_8501_2c2c7d9d3481_admission.json &&
+/home/wu/.venvs/hmasd/bin/python scripts/run_vspc1_native_hold_value_b10.py --seed 8501 --out /home/wu/projects/HMASD/temp/directions/vsp_c1/exp/native_hold_value_b10_8501_2c2c7d9d3481
+'
+```
+
+CM commits/pushes the literal wrapper separately; the scientific SHA stays fixed.
+Stage exact committed source/runtime surfaces and canonical admission helper,
+check literal LF payload/readback/syntax and prior handle/output state, then
+perform the single already allocated submission. Fresh actual-node memory
+admission precedes scientific state in this whole-timed command. CM solely
+observes and collects. No new planning approval, observer adoption or invocation
+allowance follows from this acceptance. Staging/admission are not yet observed.
