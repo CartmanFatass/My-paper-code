@@ -84,3 +84,67 @@ row record the actual selection; asynchronous owner overrides remain applicable
 without waiting for a reply.
 
 Preparation owner check at **2026-09-08T23:40:45-07:00** found no owner entry across 170 UCOPE audit rows in main and this checkout. [New-card item 20260908-ucope-008](../../portfolio/owner/inbox/2026-09-08/20260908-ucope-008.json) records recommended/auto-applied accept and the decision packet; [audit row](../../portfolio/audit/2026-09-08.md#L94). No owner reply or result prediction score is fabricated.
+
+## 4. CM source-phase technical acceptance
+
+**Binding implementation and focused checks: PASS.** Source
+`7d3aaab4646360e2473ae352b09c3933ccf8dacf`, tree
+`ed0bb3df8e6acd5a09e9dc533f6d0ce5fb157c6b`, is committed and pushed on `codex/ucope`.
+Actual authoring start was clean `5bdb7aba1fbfcc872a675c97734ee8481924cbee` in the assigned
+checkout. The complete diff is limited to `study.py`, the existing runner and two affected
+test files. Production adds 27/deletes 21 lines; tests add 18/delete 12; runner remains
+54 lines. Scope section4 additions: none. No new configuration framework or semantic
+reimplementation was introduced.
+
+The new `renewal_b03` real route admits master7501 only and carries the B03 object/card,
+section5 real primary and section7 fixture9001 identity. Its existing renewal collector,
+compound clipping, zero entropy, private head initialization, RNG/reset, count and primary
+publication paths are enabled through the same option propagation. All prior routes remain,
+including renewal_b01/7301 and renewal_b02/7401. Direct comparison with accepted
+`7adc5aae35542ba35b4b8a2c07fc8285e958ce4d` confirms unchanged environment/policy/learner
+and base/shared source. Full source/test diff and syntax were inspected before commit.
+No substantive semantic need or scope gap arose; card section7 selects no independent review
+for this binding-only change.
+
+One focused affected-directory suite ran on configured `hmasd-wsl-node` at the exact source.
+Remote engineering cwd: `/home/wu/hmasd-worktrees/ucope-uav-renewal-b03-p72-check-20260908`.
+Complete selected command, bounded externally by timeout300s and measured with `/usr/bin/time`:
+
+```text
+/home/wu/.venvs/hmasd/bin/python -m pytest -q -p no:cacheprovider --basetemp /home/wu/hmasd-worktrees/ucope-uav-renewal-b03-p72-check-20260908/temp/directions/ucope/test/uav-renewal-b03-p72 tests/experiments/candidates/ucope/uav_motion_prefix_b01
+```
+
+**99 passed in 3.21s**, full wall **3.75s**, peak RSS **530152KiB**. Cumulative directory
+wall is3.75s of300s allowed. Supervisor `ucope-uav-renewal-b03-p72-check-20260908`, PID3030912,
+finished exit0 with inactive tmux, log start2026-09-09T14:44:58+08:00 and end14:45:02+08:00.
+The sole warning is the existing cache_dir setting with the explicitly disabled cache provider.
+New tests exercise real/fixture CLI identity, original private RNG/reset and renewal/credit/
+entropy/head options, wrong-master/aggregate refusal before work, old-route preservation,
+and the new-selector short actual-code collector/learner/native-J three-contrast/count/
+checkpoint publication. Existing unchanged algorithm checks also pass. These fixtures are
+software verification, not new UAV observations or evidence of native performance.
+
+[Raw check directory](../../../../temp/directions/ucope/exp/ucope-uav-renewal-b03-7501-p72-20260908/checks/)
+contains the exact staged/check commands, submission/terminal receipts and source readback;
+see [task log](../../../../temp/directions/ucope/exp/ucope-uav-renewal-b03-7501-p72-20260908/checks/supervisor/task.log)
+and [terminal source readback](../../../../temp/directions/ucope/exp/ucope-uav-renewal-b03-7501-p72-20260908/checks/terminal-readback.txt).
+Staging used72 missing committed objects/141475-byte carrier, SHA256
+`f79bd26506e49ee87983e2be3d6e41d77a6724869707dae073683f0a702c2ed1`.
+Both local/remote carriers were removed. Creator-owned pytest scratch was removed and
+absence checked; the remote exact-source checkout was clean at terminal readback.
+No live interpreter upgrade, source substitution, suite repeat or additional smoke occurred.
+
+Per-arm cost projection: preserve card section4's complete-path cost law and original caps,
+using P71's T158.1893359690439s/G138.41656891599996s/whole306.04s as same-package references.
+No known term projects over1800s per arm/3600s whole; head-row bounds are not whole-wall
+multipliers and new elapsed/aggregate CPU remain unmeasured. No cost pilot was selected.
+Post-learner path coverage: the new-selector short actual-code fixture exercised checkpoint,
+primary and counts publication within this one suite; no launch-boundary repetition follows.
+
+This source phase ends at return to **DM source acceptance**. The shared checkout/index is
+released with the pushed technical record. Scientific staging, canonical admission,
+scientific wrapper preparation and accepted scientific submissions are all **zero** here.
+Only the engineering checkout/check was staged. P70/P71 evidence and frozen cards were
+preserved. After DM acceptance the same CM may continue the already allocated P72 batch;
+no intermediate Root allocation request is needed. Root assigns later test-checkout
+archive/reclamation after preservation; no live successor checkout is reclaimed here.
