@@ -64,3 +64,14 @@ Durable collection facts: MGTAP_NATIVE_GROUND_GEOMETRY_B01_P75_8201_TECHNICAL_CO
 Complete raw files/checkpoints and supervisor witnesses are retained at
 C:/Projects/HMASD/temp/directions/metric_ground_transport_allocation/exp/mgtap_b01_8201_4f65eefb1b15e44b42d694376630fba0c230cc6c/,
 as well as the unchanged remote root. CM retains observation for master8202.
+
+## Second accepted handle
+
+Master8202 was accepted once as
+mgtap-b01-8202-4f65eefb1b15e44b42d694376630fba0c230cc6c,
+supervisor PID3036438. Its handle was reconciled as not_found immediately
+before submission; remote source bytes still matched fixed4f65eefb1.
+First observation was running, with fresh joined admission passed:
+effective available15318556672 bytes and physical floor passed.
+CM /root/cm_mgtap_p72_repair remains sole observer through terminal collection
+and the existing timed offline aggregate. No further scientific run is selected.
