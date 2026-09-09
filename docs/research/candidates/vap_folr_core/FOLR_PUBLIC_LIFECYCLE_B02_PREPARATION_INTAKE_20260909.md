@@ -1,7 +1,9 @@
 # FOLR B02 card preparation intake — 2026-09-09
 
-**Prepared a concrete independent-pair B card and five-item CM assignment. No new scientific
-execution or source implementation occurred.** The completed B01 result remains unchanged.
+**Prepared a concrete independent-pair B card and five-item CM assignment with no new
+scientific execution.** Sections 1–4 record the preparation without source implementation;
+section 5 records Root's subsequent engineering authorization and section 6 accepts that
+implementation. The completed B01 result remains unchanged.
 
 ## 1. Assignment, current boundary and what I read
 
@@ -119,3 +121,96 @@ were empty at this clean boundary. No material critic dissent is overruled and n
 close-call, second-recast or Portfolio disposition is asserted. Root retains review-proposal
 intake, integration and sequencing. The return boundary is an inspectable card/assignment;
 there is no active scientific process or unobserved external acceptance for B02.
+
+## 5. Subsequent engineering authority and continuity
+
+After integrating preparation commit `d6e324de4f223a94ac4ecd9698bba25bdfd57c55` as main
+`66c64c94c8c1fbaf313a1a3193e7f554269a1093`, Root explicitly instructed the original DM and CM
+to implement and technically accept the prepared seed-routing/publication change. The
+authoring checkout started clean at `d6e324de4` on the existing `codex/vap-folr` branch.
+This is a later engineering allocation, not a revision of the preparation history or an
+allocation of scientific execution. Root preserved the source scope, defaults 7801/107801,
+selected 7802/107802, the 60s total supporting-check/readback cap, and zero policy training,
+evaluation, native episodes, resource admission, remote scientific staging or Pro Send.
+
+The original CM initially returned a historical pause as unresolved and undertook no B02
+edits or checks. Root then reconciled the chronology: the owner resumed research at
+2026-09-09T17:58Z with “继续推进科研流程”; later questions concerned Transport/provenance and
+did not pause research again. The same CM was resumed with that explicit reconciliation and
+the unchanged bounded assignment. No local exception to a live pause was inferred.
+
+The DM owns acceptance of the technical return; Root retains integration and later
+scientific execution/sequencing. No new scientific card, direction choice, prediction,
+experiment budget or P1/P2 item is created by this implementation stage. All-age owner
+reviews were empty at the engineering entry boundary.
+
+## 6. DM technical intake and decisions — 2026-09-09T19:58:27Z
+
+**Accept the seed-routing implementation for later scientific allocation. No B02 scientific
+result exists.** CM returned source commit `434f10cf95f16dd342cbf754382aa76155fcd2b7` and
+[technical evidence](FOLR_PUBLIC_LIFECYCLE_B02_ENGINEERING_RESULT_20260909.md) at
+`8183830ac99196f044ee7024e097e927bfb54a43`, both pushed on `codex/vap-folr`. I confirmed
+HEAD and upstream at the latter commit and that only this DM-owned intake remained dirty.
+CM released its writer/index ownership before the DM acceptance edit.
+
+The applicable card §5 requirement is: “all actual seed uses and reported values agreeing.”
+I inspected the actual source and fixture diff against `d6e324de4`, the complete technical
+evidence, and the changed-path summary. The runner removes the 7801-only restriction and
+adds `--evaluation-seed` with default 107801; Python, global NumPy, Torch, the fresh final
+environment, summary field and RNG description all read that argument. The training
+default remains 7801 and its existing three-RNG-before-construction route is unchanged.
+The future B02 command fixes 7802/107802 and binds the actual source SHA. No command was
+submitted, no execution checkout/handle/receipt was created, and no scientific budget was
+inferred from the prospective command text.
+
+The two controlled cases exercise real argument parsing, main and publication for defaults
+7801/107801 and explicit 7802/107802. I inspected the stand-ins and exact-call assertions:
+scientific learner, environment, collection and replay entry points are replaced; all three
+seed functions are spies. Assertions require seeds before the corresponding constructors
+and exact agreement with the emitted JSON. Constant fixture returns are synthetic plumbing
+values; they do not supply native-return evidence. The unchanged test module imports the
+accepted modules during collection, but this selected fixture constructs no policy and
+performs no native step, learning or policy evaluation. CM's credible focused command result
+is **2 passed**, with **3.0730197s measured supporting checks/readback of the 60s cap**.
+There was no correction rerun; I did not repeat the test or unchanged semantic suite.
+The DM's added document-link/commit-reference check took 0.0661974s and `git diff --check`
+passed; neither executes target code.
+
+The accepted source change is 8 added/7 removed runner lines, net +1 to 102, plus 51 test
+lines. The seven scientific modules have no diff, so their existing independent semantic
+acceptance remains applicable. No new §4 machinery, source-line breach or scientific
+semantics gap was identified. This establishes the selected seed route, not that a future
+run will finish or that an additional trained pair already exists.
+
+The one outstanding mechanical issue is CM-owned scratch
+`temp/directions/vap_folr_core/test/public_lifecycle_b02_seed_check01`. After checking its
+resolved owned path, CM's native recursive removal was rejected before execution by
+automatic approval review: `rejected: blocked by policy`. The directory remains. This
+intake does not retry or bypass that rejection, waive cleanup, or claim cleanup completion;
+CM remains the cleanup owner if the runtime restriction is resolved. No scientific
+evidence was deleted or altered. The blocked B01 check02/check03 directories also remain
+under their earlier recorded boundary; B01 remote evidence/reclamation is already complete.
+
+### Decisions this technical intake produces
+
+**Object tier, technical.** Options: (a) accept the narrow implementation and return exact
+commits to Root, carrying the cleanup gap separately; (b) return a concrete seed-routing,
+publication or semantic coverage defect to the same CM. Recommend/select **(a)** because
+the actual diff and controlled evidence satisfy the declared changed boundary, with no
+such defect identified. **Owner-delegated decision (unattended, 2026-09-03 instruction):
+(a), technical acceptance only.** Scientific invocations, learner updates, native steps,
+policy evaluations, resource admissions, remote staging, retries and Pro Sends remain zero
+for B02 at this boundary. No scientific branch is scored, no valid-result Chinese brief is
+due, and no new owner item or scientific selection is created by this technical acceptance.
+
+Main's existing item 20260909-folr-004 execution trace at 19:56:29Z records preparation
+integration and source-only assignment; its original branch audit L12 maps to main L142.
+That Root-owned trace is preserved, and this acceptance adds only an ordinary technical
+audit row. All-age owner reviews were empty again at this acceptance boundary.
+
+Root's next action is acceptance/integration of the two CM commits and this DM intake, then
+later execution sequencing/allocation if authorized. The scientific discriminator remains
+the already-frozen independently initialized/trained 7802/107802 pair, with B01 and B02
+endpoints kept separate. B01's RESET-favoring point is still the strongest support; its lower
+RESET training mean, broad conditional final-return spread and single training pair remain
+the strongest limitations. This engineering result changes none of those scientific claims.
