@@ -3,7 +3,8 @@ Binding MARL structure: (b) temporal abstraction or termination, with five co-ad
 
 # VSPC1-NATIVE-HOLD-VALUE-B07 — B/EXPLORE, P72
 
-Current state: prospective definition; no B07 scientific exposure or submission.
+Current state: valid complete UP for8303; §8 records the terminal result.
+The prospective definition, prediction and exact allocation remain in §§1–7.
 
 ## 1. Question and authority
 
@@ -235,3 +236,26 @@ the canonical admission helper, literal readback/syntax and prior handle/output
 state, then continues the one allocated submission. Fresh actual-node physical/
 effective memory admission precedes scientific state inside this whole-timed
 chain. CM remains sole observer, without Root adoption or another launch request.
+
+## 8. Terminal result and allocation completion
+
+The sole accepted P72 submission at science4e83312ea5d35db4472bbc821b0c2cf875e853b3
+completed with exit0. [E0](VSPC1_NATIVE_HOLD_VALUE_B07_RESULT_EVIDENCE_20260908.md)
+and [intake §6](VSPC1_NATIVE_HOLD_VALUE_B07_INTAKE_20260908.md#6-p72-valid-result-intake-and-decisions)
+record valid complete UP: Delta+.03337791639434502, conditional SE
+.008588205927794471,6/32 adverse primary episodes. GATED−H+.0428201398638275
+and MLP−H+.009442223469482484 retain7/12 adverse episodes. WITHIN(.55) missed,
+Brier .3025; owner prediction not taken. No frozen definition/rule is revised.
+
+Actual exposure:286720 native steps/2048 Adam/96 final evaluations, two real fits,
+512 moment merges/262144 target rows/1048576 four-epoch target terms. Complete
+313.50s wall and167.5752/154.3772s conservative arm bounds satisfy original caps;
+545.08203125MiB peak RSS. Native resources_unmeasured and independent measurement
+limits remain explicit in the intake. No added scope machinery or observed budget breach.
+
+Retained8301/8302/8303 differences are+.0165919114/−.0066345182/+.0333779164,
+descriptive mean .0144451032 and sample SD .0200924195. This supports a variable
+local package signal, not an aggregate confirmatory pass or stable superiority.
+All H/adverse outcomes and old regimes remain. P72 ends at full intake: no retry,
+extra evaluation, second new pair or automatic successor. A later768-episode
+same-comparison B is advice only in the intake; no new card/key/run is allocated.
