@@ -42,6 +42,14 @@ remains dated provenance under the controlling evidence specification section 11
   WITHIN**, with both learned means below H. The object-tier intake recommends
   no unchanged normalization follow-up from this observation; it changes no
   family disposition or recast count. See the [8501 intake](UCOPE_UAV_FEEDBACK_VALUE_NORMALIZATION_B01_8501_INTAKE_20260909.md).
+  The owner's later **2026-09-09 execution instruction** now selects one
+  within-family raw fixed-{1,2} F/G budget curve: continuous2048-episode fits,
+  fixed512/1024/2048 evaluations and shared hover, final F−G primary. This
+  tests whether the earlier short-renewal difference survives more learning
+  opportunity for G; it adds no normalization or mechanism attribution.
+  See the [continuous B01 card](UCOPE_UAV_SHORT_FIXED_RENEWAL_CONTINUOUS_B01_SCIENCE_CARD_20260909.md).
+  Its fresh8601 result is unobserved at card freeze; all earlier hover losses,
+  sampled gains and the no-unchanged-normalization recommendation remain.
 - Previous within-family direction-tier decision:
   **2026-09-09 PRO_FINAL / CONTINUE** inside the existing own-expiry renewal
   family. Select the next bounded B question comparing learned renewal T,

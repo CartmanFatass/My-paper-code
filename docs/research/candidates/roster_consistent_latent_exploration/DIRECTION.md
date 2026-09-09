@@ -362,3 +362,52 @@ an intact matched W100/W1 endpoint; none is newly selected or allocated. Root's 
 Portfolio validity review is next. There is no recast, family closure or Portfolio
 change in this intake. Complete failure/cost/diagnosis limits and preserved dependencies
 are recorded in the intake and E0; the pause handoff remains historical provenance.
+
+## Prospective completion of the actor100 comparison selected — 2026-09-09
+
+The owner-directed synthesis and CM feasibility lead to an object-tier selection of
+one fresh update-0 W100 plus the missing reference, with historical W1 explicitly reused
+under unchanged seed19/FLEX/learner/native/evaluation conditions. See
+`RCLE_B03_RECOVERY_SELECTION_INTAKE_20260909.md` and its recovery card. This is the next
+discriminator of the same weighted learning law; no new efficacy evidence, independent
+seed, recast or family disposition is claimed. The tiny W1 change, adverse secondary
+cell, saturated recovery, unknown old W100 prefix and unresolved fatal cause all remain.
+Root receives the prospective750s/one-fit plan for explicit engineering/invocation
+allocation. No call is allocated by this selection, and a necessary shared semantic
+change returns for a new judgment about whether W1 is still a valid comparator.
+
+## Actor-score weighting: recovered small native benefit with limits — 2026-09-09
+
+The valid B recovery in `RCLE_B03_RECOVERY_RESULT_INTAKE_20260909.md` supplies one
+matched seed-19 comparison: a fresh update-0 W100 fit plus the explicitly reused
+historical W1. Both complete 200 nonzero updates. Equal-path ACTIVE_CONTINUATION
+U_W1−U_W100 is **+0.0132242839**, below the fixed 0.05 minimum effect of interest;
+W100's initialization gain is +0.0133789063. Both primary path means and all eight
+cell U means favor W100. The conditional scenario interval [0.0100943, 0.0163543]
+describes these fitted policies, not training-seed uncertainty. The original failed
+W100 prefix remains unknown and its old attempt remains incomplete.
+
+The strongest support is a complete same-information learned-law comparison with
+small positive native U and Y means, alongside decreasing descriptive W100 training
+U. The strongest limits are the sub-MEI size, recovery tau 40 in every learned cell,
+and allocation fragmentation increasing in all four final-roster-12 cells. The simple
+nearest-beacon reference has primary U 0.2860636 versus W100's 0.6911112, leaving a
+0.4050476 gap; it is not an upper or tuned baseline, and H_A1 remains unidentified.
+The overall fragmentation mean conceals the four adverse cells. These observations
+do not establish useful complete recovery, stable superiority or a general roster law.
+
+Weight 100 changes the normalized joint gradient and can alter shared encoders,
+manager/FLEX heads, baselines and visitation. That whole-law explanation and variation
+between training instances remain alternatives to pure actor-credit attribution.
+The unchanged original reading branches jointly retain a small positive local signal
+and end this 200-update spend without a demonstrated MEI-level benefit. There is no C
+promotion, family closure, recast or revision of historical predictions or failures.
+
+The next discriminator recommended for separate selection is one new independent
+W100/W1 training pair with the same law, exposure and endpoints, retaining all outcomes
+and the fragmentation tradeoff. Deferring the unchanged law is a close runner-up given
+the small effect and large reference gap. This is a recorded, unallocated recommendation,
+not a new card or an automatic execution. Supporting evidence is the recovery E0 at
+`a83d397e9b1d85a22df76933f1e41ba0d7a764dd`, the intake's full eight-cell/reference/curve
+reading and `b03_actor100_recovery_20260909/DM_RESULT_ANALYSIS.json`. The accepted recovery
+changes current comparison knowledge without rewriting the incomplete-attempt section.

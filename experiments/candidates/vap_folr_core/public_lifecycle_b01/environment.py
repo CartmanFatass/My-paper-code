@@ -51,10 +51,12 @@ class LifecycleEnv(Entity_Traffic_Junction_Env):
 
 def count_transition(env, arm):
     # Called after a real transition; terminal events have no next native action.
-    opportunities = int(np.sum(env.continuation)) if env.event and env.t < env.max_steps else 0
+    eligible = int(np.sum(env.continuation)) if env.t < env.max_steps else 0
+    opportunities = eligible if env.event else 0
     return {
         'births': int(env.birth.sum()),
         'departures': int(env.departure.sum()),
         'survivor_opportunities': opportunities,
-        'survivor_resets': opportunities if arm == 'RESET' else 0,
+        'eligible_survivor_opportunities': eligible,
+        'survivor_resets': opportunities if arm == 'EVENT' else 0,
     }

@@ -378,6 +378,14 @@ hold a B launch. The quarantine rule for incomplete attempts (§6.2) is unchange
 whether an instrumentation failure downgrades rather than annuls a run is a separate owner decision
 not taken here.
 
+#### 11.4.1 Named exception — ACVC_FIXED_RETRACE_REUSE_E01
+
+For ACVC_FIXED_RETRACE_REUSE_E01 only, B/EXPLORE MAY compare the fixed C, F and dwell execution rules on the retained, frozen DENSE/8201 and DENSE/8202 trained policies without new fitting or training. The scope is the unchanged five-UAV, 50-user, 256-step native host and one serial six-panel comparison, with 64 prespecified evaluation episodes per base/rule panel. This is an explicit object-limited exception to the real-learner/trainer, nonzero-update and learner-movement requirements in §§5.2 and 11.4. The learner/trainer wording of §11.8.6 is subject to exactly this substitution for E01; its other verification requirements remain.
+
+The real native environment, retained learned recurrent stochastic policy and evaluator MUST run, with nonzero native transition and evaluation counts. A machine-generated exposure line MUST report two retained base fits; zero new fits, training steps, optimizer updates and parameter displacement during evaluation; and actual transition, evaluation and intervention counts. Historical training is provenance, not new exposure. Private recurrent state evolution and sampled actions MUST NOT be described as parameter learning. Common integrity under §4, fresh actual-node resource admission, reward/information/RNG semantics, own-trajectory recurrence and actual-command feedback, complete cost accounting, and proportionate verification and dependency-based failure interpretation under §§11.8.6–11.8.7 remain applicable.
+
+Report F-C and F-dwell separately for each base, retain dwell-C and all outcomes, and use conditional paired-episode uncertainty. The ceiling is a preliminary native execution-package signal or counterexample conditional on these two selected retained bases and the declared fresh panels, not new learning, training-population superiority, isolated mechanism/history necessity, optimality, tuned headroom or transfer. The named scope retains the proposed 180-second whole-logical-invocation cap, including the proposed 30-second focused-check/readback allowance; this paragraph allocates no execution. It authorizes no additional fit, panel, search, retry or successor and does not reopen the stopped T/G selector. Ordinary B requirements and all other objects remain unchanged; no new class or general Pro-consultation gate is created.
+
 ### 11.5 Direction separation for the untying programme
 
 Untying the skill duration k and untying the agent count N are **two separate directions**, not one

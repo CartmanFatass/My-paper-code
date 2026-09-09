@@ -1,6 +1,7 @@
 """B03: two FLEX policies, with reporting labels outside all random addresses."""
 from datetime import datetime, timezone
 from pathlib import Path
+import json
 import time
 
 import numpy as np
@@ -151,6 +152,10 @@ def run(arm, out, launch_sha, admission_receipt, started, wall_cap, control_summ
                 host.check_wall(started, wall_cap)
                 baselines, curve = training_update(model, rng, update, baselines, WEIGHTS[arm])
                 summary["curves"].append(curve)
+                # Required block output survives a later fatal interpreter signal.
+                with (out / "completed_blocks.jsonl").open("a", encoding="ascii") as blocks:
+                    blocks.write(json.dumps(curve, allow_nan=False) + "\n")
+                    blocks.flush()
             torch.save(model.state_dict(), out / "parameters.pt")
             host.write_json(out / "summary.json", summary)
             summary["scenarios"] = panel(model, rng, arm, started, wall_cap)

@@ -19,7 +19,7 @@
     }
   ],
   "recommended": "permit",
-  "auto_applied": null,
+  "auto_applied": "permit",
   "dm_reason": "现成模型的固定规则复用问题可由小规模直接评估回答；新训练会改变已选问题。推荐尚未作为节点决定应用。",
   "evidence": [
     "docs/research/candidates/acvc/ACVC_FIXED_RETRACE_REUSE_E01_PREPARATION_INTAKE_20260909.md",
@@ -82,6 +82,14 @@
       "record": "docs/research/candidates/acvc/ACVC_FIXED_RETRACE_REUSE_E01_CONVERGENCE_INTAKE_20260909.md",
       "state": "planned",
       "summary": "完整原节点裁决已读并接受：仅授予E01零新训练B例外。DM已应用四段准确卡文字，并按Root后续准备指令单独冻结科学定义；Root保留主分支§11.4.1准确插入及完整应用记录。本条planned仅指规范整体应用尚由Root收尾，不表示裁决或方向卡尚未处理。无源码任务或科学执行分配；未伪造owner回复。"
+    },
+    {
+      "at": "2026-09-09T22:47:02+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/acvc/pro_packets/20260909_fixed_retrace_reuse_exception/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/decisions/2026-09-09-synthesis-execution.md",
+      "state": "applied",
+      "summary": "Under the recorded 2026-09-05 owner delegation, exact Pro spec block applied on main at 996f121ea; four card replacements and separate freeze accepted at f7003eb36, application return95ba529bd. Named E01 only; ordinary B unchanged. Full specification plan applied; no invented owner reply."
     }
   ]
 }

@@ -84,10 +84,86 @@ def test_initial_birth_previous_action_and_terminal_counts():
     obs = env.observation(np.arange(5))
     np.testing.assert_array_equal(obs['previous_action'].sum(-1), env.continuation)
     env.t = 19
-    assert count_transition(env, 'RESET')['survivor_resets'] == 2
+    assert count_transition(env, 'EVENT')['survivor_resets'] == 2
     assert count_transition(env, 'RETAIN')['survivor_resets'] == 0
+    env.event = False
+    assert count_transition(env, 'RANDOM')['eligible_survivor_opportunities'] == 2
+    assert count_transition(env, 'RANDOM')['survivor_opportunities'] == 0
     env.t = 20
-    assert count_transition(env, 'RESET') == dict(births=1, departures=1, survivor_opportunities=0, survivor_resets=0)
+    assert count_transition(env, 'EVENT') == dict(births=1, departures=1, survivor_opportunities=0, eligible_survivor_opportunities=0, survivor_resets=0)
+
+
+def test_random_collection_schedule_replay_and_rng_isolation():
+    from experiments.candidates.vap_folr_core.public_lifecycle_b01.collection import collect
+    from experiments.candidates.vap_folr_core.public_lifecycle_b01.learner import Learner
+    # Fixed non-scientific observations include entrant, inactive and true survivors.
+    class FixtureEnv:
+        max_steps = 20
+
+        def reset(self):
+            self.t = 0
+            self.birth = np.zeros(5, bool)
+            self.departure = np.zeros(5, bool)
+            self.continuation = np.zeros(5, bool)
+            self.event = False
+
+        def observation(self, previous):
+            b = synthetic_batch()
+            obs = {k: v[0, self.t].numpy().copy() for k, v in b.items()
+                   if k not in ['actions', 'reward', 'terminated', 'reset_mask']}
+            self.continuation = obs['continuation']
+            self.event = bool(obs['event'])
+            return obs
+
+        def step(self, chosen):
+            self.t += 1
+            self.observation(None)
+            return 0.0, self.t == 20, {}
+
+    learner = Learner('RANDOM')
+    rng = np.random.Generator(np.random.PCG64(207804))
+    expected_rng = np.random.Generator(np.random.PCG64(207804))
+    start = np.random.get_state()
+    seen = []
+    hook = learner.actor.register_forward_pre_hook(
+        lambda module, inputs: seen.append(inputs[0]['reset_mask'].clone()))
+    episodes = []
+    for _ in range(2):
+        ep, _, counts = collect(FixtureEnv(), learner.actor, 0.0, rng)
+        expected = ep['continuation'] & (expected_rng.random((21, 5)) < .1)
+        np.testing.assert_array_equal(ep['reset_mask'], expected)
+        assert ep['reset_mask'].dtype == bool and not ep['reset_mask'][0].any()
+        assert counts['survivor_resets'] == int(expected[:20].sum())
+        assert counts['eligible_survivor_opportunities'] == int(ep['continuation'][:20].sum())
+        assert counts['survivor_opportunities'] == int((ep['continuation'][:20] & ep['event'][:20, None]).sum())
+        episodes.append(ep)
+    hook.remove()
+    assert_rng_same(start, np.random.get_state())
+    torch.testing.assert_close(torch.cat(seen, 1)[0], torch.as_tensor(np.concatenate([x['reset_mask'] for x in episodes])))
+    replay_batch = sample([episodes[i % 2] for i in range(32)])
+    captured = []
+    hooks = [actor.register_forward_pre_hook(lambda module, inputs: captured.append(inputs[0]['reset_mask'].clone()))
+             for actor in [learner.actor, learner.target_actor]]
+    private_state = copy.deepcopy(rng.bit_generator.state)
+    learner.update(replay_batch, 32)
+    for h in hooks:
+        h.remove()
+    assert len(captured) == 2
+    for mask in captured:
+        torch.testing.assert_close(mask, replay_batch['reset_mask'])
+    assert rng.bit_generator.state == private_state
+
+
+@pytest.mark.parametrize('r,e,m,rule', [
+    (0, 2, 1, 'EVENT_CLEAR_ADVANTAGE'), (0, 1, 1, 'SHARED_RESET_GAIN'),
+    (0, 1, 2, 'MIXED_OR_REVERSE'), (2, 0, 1, 'MIXED_OR_REVERSE'),
+    (0, .999, 0, 'MIXED_OR_REVERSE'), (0, 2, 1.001, 'SHARED_RESET_GAIN')])
+def test_timing_branches(r, e, m, rule):
+    from experiments.candidates.vap_folr_core.public_lifecycle_b01.collection import timing_primary
+    got = timing_primary([r], [e], [m])
+    assert got['rule'] == rule
+    for key, d in [('d_ER', e-r), ('d_MR', m-r), ('d_EM', e-m)]:
+        assert got['contrasts'][key]['difference'] == d
 
 
 def synthetic_batch():
@@ -107,6 +183,8 @@ def synthetic_batch():
     batch['obs_mask'][:, :, 4] = True
     batch['continuation'][:, :, 4] = False
     batch['birth'][:, :, 4] = False
+    batch['reset_mask'] = torch.zeros(b, t, n, dtype=torch.bool)
+    batch['reset_mask'][:, 7, 1:4] = True
     batch['event'][:, 7] = True
     batch['birth'][:, 7, 0] = True
     batch['continuation'][:, 7, 0] = False
@@ -115,7 +193,7 @@ def synthetic_batch():
     return batch
 
 
-@pytest.mark.parametrize('arm', ['RETAIN', 'RESET'])
+@pytest.mark.parametrize('arm', ['RETAIN', 'EVENT', 'RANDOM'])
 def test_actor_input_reset_timing_and_replay_parity(arm):
     from experiments.candidates.vap_folr_core.public_lifecycle_b01.model import Actor
     torch.manual_seed(13)
@@ -154,7 +232,7 @@ def test_real_learner_synthetic_gradient_targets_checkpoint(tmp_path):
     from experiments.candidates.vap_folr_core.public_lifecycle_b01.learner import Learner
     torch.set_num_threads(1)
     torch.manual_seed(91)
-    learner = Learner('RESET')
+    learner = Learner('EVENT')
     batch = synthetic_batch()
     before = [p.detach().clone() for p in learner.actor.parameters()]
     learner.update(batch, 32)
@@ -193,8 +271,8 @@ def test_primary_rules_replay_rng_and_publication(tmp_path, monkeypatch):
     assert json.loads((tmp_path/'summary.json').read_text())['evaluation_returns'] == [1.25]*32
 
 
-@pytest.mark.parametrize('seeds', [None, (7802, 107802)])
-def test_runner_seed_routing_with_standins(tmp_path, monkeypatch, seeds):
+@pytest.mark.parametrize('arm', ['RETAIN', 'EVENT', 'RANDOM'])
+def test_runner_seed_routing_with_standins(tmp_path, monkeypatch, arm):
     # Exercise real argparse/main/publication; replace every scientific entry point.
     import random
     calls = []
@@ -210,16 +288,22 @@ def test_runner_seed_routing_with_standins(tmp_path, monkeypatch, seeds):
         calls.append(('environment', kwargs['seed']))
         return object()
 
+    updates, evaluations, masks = [], [], []
+
+    def collect(env, actor, epsilon, mask_rng):
+        masks.append(mask_rng)
+        return {}, 1.25, {}
+
     def learner(arm):
         calls.append(('learner', arm))
-        return SimpleNamespace(actor=SimpleNamespace(eval=lambda: None),
-                               update=lambda batch, episode: None,
+        return SimpleNamespace(actor=SimpleNamespace(eval=lambda: evaluations.append(len(updates))),
+                               update=lambda batch, episode: updates.append(episode),
                                save=lambda path: None)
 
     monkeypatch.setitem(sys.modules, prefix+'environment', SimpleNamespace(LifecycleEnv=environment))
     monkeypatch.setitem(sys.modules, prefix+'learner', SimpleNamespace(Learner=learner))
     monkeypatch.setitem(sys.modules, prefix+'collection', SimpleNamespace(
-        collect=lambda *args: ({}, 1.25, {}), sample=lambda replay: None,
+        collect=collect, sample=lambda replay: None,
         epsilon_at=lambda ticks: 0.0))
     monkeypatch.setitem(sys.modules, 'resource', SimpleNamespace(
         RUSAGE_SELF=0, getrusage=lambda _: SimpleNamespace(ru_maxrss=123)))
@@ -228,17 +312,25 @@ def test_runner_seed_routing_with_standins(tmp_path, monkeypatch, seeds):
     runner = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(runner)
     monkeypatch.setattr(runner.signal, 'signal', lambda *args: None)
-    argv = [str(path), '--arm', 'RESET', '--launch-sha', 'fixture', '--out', str(tmp_path)]
-    if seeds:
-        argv += ['--seed', str(seeds[0]), '--evaluation-seed', str(seeds[1])]
+    argv = [str(path), '--arm', arm, '--launch-sha', 'fixture', '--out', str(tmp_path)]
     monkeypatch.setattr(sys, 'argv', argv)
     runner.main()
-    train, final = seeds or (7801, 107801)
+    train, final = 7804, 107804
     assert calls == [('python', train), ('numpy', train), ('torch', train),
-                     ('learner', 'RESET'), ('environment', train),
+                     ('learner', arm), ('environment', train),
                      ('python', final), ('numpy', final), ('torch', final),
                      ('environment', final)]
     summary = json.loads((tmp_path/'summary.json').read_text())
     assert (summary['training_seed'], summary['evaluation_seed']) == (train, final)
     assert f'reset to{final} for final evaluation' in summary['rng']
-    assert summary['status'] == 'complete' and summary['evaluation_returns'] == [1.25]*32
+    assert summary['status'] == 'complete' and summary['evaluation_returns'] == [1.25]*128
+    assert updates == list(range(32, 5001)) and evaluations == [4969]
+    assert len(masks) == 5128
+    if arm == 'RANDOM':
+        assert all(x is masks[0] for x in masks[:5000])
+        assert all(x is masks[5000] for x in masks[5000:])
+        assert masks[0] is not masks[5000]
+        for rng, seed in [(masks[0], 207804), (masks[5000], 307804)]:
+            np.testing.assert_array_equal(rng.random(5), np.random.Generator(np.random.PCG64(seed)).random(5))
+    else:
+        assert all(x is None for x in masks)
