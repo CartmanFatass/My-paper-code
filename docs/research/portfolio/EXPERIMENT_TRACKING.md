@@ -24,6 +24,8 @@ VSP03 P74 has since ARCHIVED/NATURAL_COMPLETION: immutable response93b8693135a44
 
 UCOPE P74 exact question7dd58cdd0/TASK9f4702662 dispatched once to Transport; app accepted, provider Send unconfirmed. MGTAP P75 scientific intake d201c9bff accepts valid adverse result and ends that allocation; same DM actually resumed zero-exposure post-B01 proper-node question preparation, with no unchanged successor or new invocation. VSP03 intake and VSPC1 DM/CM continue; FSD remains with Transport.
 
+FSD P74 is now terminal ARCHIVED with a delivery/tool blocker, not a scientific response: no callable provider-session GitHub write actions, no write attempted, required file404/no matching comment. No decision formed. Original DM actually resumed preservation/blocker intake only; no retry or local A/B selection. This supersedes the earlier FSD-generating state. UCOPE Transport dispatch remains pending provider confirmation.
+
 ## Historical soft-stop closeout updates — 2026-09-09
 
 - CRTO P72: response/intake/handoff integrated at63550cd83; DM stopped, no live experiment or Pro generation, no successor B. See [handoff](../candidates/commitment_residual_triggered_options/CRTO_RESTART_HANDOFF_20260909.md).
