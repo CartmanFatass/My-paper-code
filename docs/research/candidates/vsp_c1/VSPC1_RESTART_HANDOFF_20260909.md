@@ -1,4 +1,13 @@
-# VSPC1 restart handoff — P76 complete, 2026-09-09
+# VSPC1 restart handoff — P77 allocated, 2026-09-09
+
+P77 current boundary: Root accepted P76 and separately allocated one fresh
+independent repeat of the unchanged fixed512/768/common-H comparison. The
+[B11 card](VSPC1_NATIVE_HOLD_VALUE_B11_SCIENCE_CARD_20260909.md) and
+[intake](VSPC1_NATIVE_HOLD_VALUE_B11_INTAKE_20260909.md) freeze8502,
+CHANGE_DOWN(.60),434176 steps/3072 Adam/160 evaluations/four constructors,
+1800s complete arm/3600s whole and one accepted submission maximum. No P77
+result or submission exists at this definition. The original DM/CM reuse the
+designated checkout; older completion/stop boundaries below remain historical.
 
 P76 current boundary: Root's separately allocated same-trajectory512/768
 comparison is valid complete and scientifically intaken. The
