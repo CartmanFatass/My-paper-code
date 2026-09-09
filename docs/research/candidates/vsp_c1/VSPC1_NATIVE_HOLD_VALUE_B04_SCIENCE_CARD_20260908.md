@@ -326,3 +326,25 @@ owns staging, the newly allocated submission, observation and collection under
 current ROOT_OPERATIONS/EXPERIMENT_MONITOR. P67 lifts the prior global pause
 for this route; no third pair, extra H/evaluation, tuning or automatic retry.
 Apply all outcomes and return the complete DM intake to Root.
+
+## 10. P67 terminal result and intake
+
+P67's sole new handle `vspc1_hold_value_b04_p67_8202` completed exit0 on
+`hmasd-wsl-node` at launch source `ec8b7c458b038b3a375ec5639834d0f3527fdf8c`.
+Same-CM collection `4c6572dae1299a724b5b5c9f59c2442993d7acdb` accepts the
+complete frozen counts, primary/H, moments/checkpoints and312.77s enclosing
+wall under both original caps. No numerical/scientific field was changed.
+
+The [P67 E0](VSPC1_NATIVE_HOLD_VALUE_B04_P67_RESULT_EVIDENCE_20260908.md) and
+[intake](VSPC1_NATIVE_HOLD_VALUE_B04_P67_INTAKE_20260908.md) apply §4 verbatim:
+GATED−MLP +.02309832638998633, conditional SE .008740309282664975, UP;
+GATED−H +.055895637043343896 and MLP−H +.03279731065335756, with9/7/10
+adverse episodes of32. Original UP(.60) hits/Brier .16 from this first complete
+8202 primary; P66 remains unscored and every earlier outcome/score is retained.
+Two normalized pairs are described separately from the two unnormalized pairs.
+
+This completes the new P67 allowance and all-outcome intake. No second P67
+submission, extra pair/evaluation, tuning or successor is allocated here.
+A later generic-capacity comparison is recommendation only. P66's failure and
+the owner resume remain separate historical/current-authority facts; no B/C
+consumption, family/lifecycle or formal UAV-entry change is inferred.

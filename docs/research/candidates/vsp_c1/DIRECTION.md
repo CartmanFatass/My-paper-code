@@ -392,3 +392,37 @@ allocated here. Tuned matching headroom remains absent, H remains attained and
 untuned, and stable superiority, unique mechanism, transfer and optimality remain
 outside the claim. Earlier adverse evidence, family boundaries, recast count,
 lifecycle, priority, C status and formal UAV-entry determination are unchanged.
+
+## Normalized native hold-value: a second local signal — 2026-09-08
+
+The [B04 P67 intake](VSPC1_NATIVE_HOLD_VALUE_B04_P67_INTAKE_20260908.md) accepts
+the second normalized matched training pair, master8202, under the same real
+native GATED/full-MLP/H method and budget. GATED−MLP is +.0230983264,
+conditional SE .0087403093, above absolute MEI .01. GATED−H is +.0558956370
+and MLP−H +.0327973107; adverse episode counts are9/7/10 of32 respectively.
+The [E0](VSPC1_NATIVE_HOLD_VALUE_B04_P67_RESULT_EVIDENCE_20260908.md) retains
+all counts, source/receipts, native endpoints and exposure.
+
+Normalized8201/8202 primary differences are +.0398017153/+.0230983264;
+their n=2 descriptive mean is .0314500208, sample SD .0118110796. This is
+recurrence of a local point-estimate gain, not stable superiority. Episode SE
+conditions on each trained policy; two-pair dispersion contains both training
+and evaluation randomness. The old unnormalized regime remains separate.
+
+Strongest support is a positive GATED−H mean in both normalized instances and
+a gate-package gain in the second even when MLP's mean also exceeds H.
+B03's negative MLP−H, all adverse episodes, conditional noise and missing tuned
+headroom still contradict unqualified comparator competence. The full MLP
+already shares nonlinear features; extra640 gate parameters, joint clipping,
+value-unit interactions, FP32 and on-policy co-adaptation remain explanations.
+Nonzero hold inputs occupy about1.14% of8202 training rows; fitted gate movement
+does not identify the hold/state → value/optimization → local action → native
+return path's causal contribution. No specialized hold-credit or transfer claim.
+
+The next discriminator recommended within this mechanism is a same-information
+ordinary MLP with approximately matched critic capacity, under the same normalized
+native learner/budget and with H retained. A136→128→133→1 MLP has34827 critic
+parameters versus34817 for GATED; exact parameter-count search is unnecessary.
+This is a later bounded comparison proposal, not a frozen comparator or an
+allocated run. Accepted family boundaries, recast count, lifecycle, priority,
+C status and formal UAV-entry determination remain unchanged.
