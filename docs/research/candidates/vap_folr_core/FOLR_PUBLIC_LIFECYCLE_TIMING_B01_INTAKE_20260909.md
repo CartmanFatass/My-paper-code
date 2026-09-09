@@ -239,3 +239,41 @@ without a DM edit to Portfolio lifecycle or priority. No source or scientific ca
 changed by this allocation-status update. Original CM now receives source/index ownership;
 DM retains card/intake/scientific interpretation and waits for technical returns without
 duplicating implementation or routine experiment observation.
+
+## 8. Technical acceptance and detached execution handover
+
+CM accepted and pushed source `74d023d7d55453da8a5d5dccebd518e4ffdb65c8`; Root accepted
+and integrated it as main `fd034727b`, and allocation8fc84a01e as main `9249e2fcf`.
+The [E0](FOLR_PUBLIC_LIFECYCLE_TIMING_B01_RESULT_EVIDENCE_20260909.md), through CM's
+published receipt `6dd884bc02debf21110ffea5af17e6cc71ea7709`, records18 focused tests
+passing, independent state/replay review with no material finding, and exact launch
+command/source/host/roots. These are engineering facts, not a performance result.
+
+DM inspected the published model/collector/counter/runner changes and E0 against card
+§§2–6 without rerunning CM checks: phase-persistent private masks are sampled once and
+stored, existing episode stacking supplies the same masks to online/target history,
+clearing precedes GRU, control counts exclude terminal passes, and final evaluation is
+fixed128 with no update. No discrepancy or additional machinery beyond the named aggregate
+was found. CM's independent review covers the high-impact state/replay boundary.
+
+RETAIN handle `folr-public-lifecycle-timing-b01-retain-20260909` was accepted with a
+fresh destination-admission command immediately preceding the runner. Root directly
+confirmed Monitor adoption at2026-09-09T22:40:57.9647914Z: running, exit null, tmux true,
+PID3075634. The exact detached checkout is
+`/home/wu/hmasd-worktrees/folr-public-lifecycle-timing-b01-74d023d7` on hmasd-wsl-node.
+No scientific result or admission-receipt conformance is inferred from dispatch/adoption.
+EVENT and RANDOM remain unsubmitted and already allocated; Root resumes this same CM at
+terminal for collection and the next intact step. No parallel status polling is added.
+
+The E0's measured supporting window8.3007317s includes the earlier DM source/E0 readback.
+DM's terminal-handover E0 readback adds0.2704579s and final document check0.2940211s,
+yielding8.8652107s at this handover; full scientific invocation wall is still unavailable.
+All-age owner reviews remained empty. The only operational
+gap is this invocation's owned test scratch, retained after a pre-execution composite
+test/cleanup rejection (`blocked by policy`). Test-only execution passed. CM retains
+cleanup ownership and the exact rejection in E0; no bypass or scientific-polarity inference.
+
+Current scientific state remains pending collection and full three-arm intake. No result
+branch, prediction score, valid-result Chinese brief or successor selection is asserted
+at this technical handover. The earlier three pairs and unmatched-frequency limitation
+remain binding context for the eventual complete result.

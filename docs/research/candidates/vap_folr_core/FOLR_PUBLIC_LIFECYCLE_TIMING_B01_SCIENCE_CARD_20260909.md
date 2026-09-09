@@ -42,8 +42,11 @@ All three arms are fresh fits and receive the same new evaluation budget.
 
 Use [B03 card §2](FOLR_PUBLIC_LIFECYCLE_B03_SCIENCE_CARD_20260909.md#2-unchanged-scientific-recipe-and-fresh-randomness)
 and accepted source `434f10cf95f16dd342cbf754382aa76155fcd2b7` as the implementation base.
-That source does not yet implement RANDOM or128 final episodes; the assigned CM publishes the
-minimal changed source before any execution. No launch SHA is invented here.
+That base does not implement RANDOM or128 final episodes. CM accepted and published the
+timing implementation at `74d023d7d55453da8a5d5dccebd518e4ffdb65c8` before the first
+submission; this is the exact launch source for the allocated triple. The
+[E0](FOLR_PUBLIC_LIFECYCLE_TIMING_B01_RESULT_EVIDENCE_20260909.md) records checks and
+execution receipts. This binding adds no scientific requirement or invocation.
 
 Keep native CAMA easy Traffic Junction: five slots/actions, vision1, 7×7 grid,20 primitive
 steps, add rate0.1 and the exact native reward/side effects. After each native transition,
