@@ -178,3 +178,72 @@ one accepted submission; uncertain acceptance is reconciled on this handle. No s
 admission/invocation occurred at this preparation. No retry/resume/extra evaluation follows.
 Root owns subsequent P80 test/scientific checkout and wrapper reclamation after preserved
 terminal intake. There is no intermediate source-permission gate.
+
+## 6. CM terminal collection and technical acceptance
+
+**Technical acceptance: PASS.** One accepted master7901 invocation finished `COMPLETE`,
+exit0, no limits/cap breach/partial steps. Source `a1a3dd77aa4e02a07e1f6ed17eea04fea633cc11`;
+literal payload §5 was committed/pushed at `655006b0a` before the single actual PowerShell-file
+submission. CM observed the same handle through collection. No retry/resume/replacement,
+extra T/H/evaluation, tuning, replay, pilot, cost probe or second native invocation occurred.
+
+Handle `ucope-uav-fixed-renewal-hover-b01-7901-p80-20260909`, node `hmasd-wsl-node`, PID3049850,
+finished/inactive tmux. Supervisor start2026-09-09T20:05:21+08:00,
+terminal2026-09-09T20:10:27+08:00, exit0. Actual-node admission at `2026-09-09T12:05:21.099887Z`
+measured physical/effective available memory both 15634460672 bytes,
+above4294967296, before scientific creation. Result/supervisor receipt bytes match.
+
+F complete wall 155.5547909429879s; G including H/publication 136.1789815700031s,
+each below1800s. Outer complete invocation through admission/publication/exit
+**306.09s**, peak RSS **558424 KiB**, below3600s. Runner serial
+elapsed291.73377411300316s; sum of arm walls
+291.733772512991s. These nested scopes are not additive costs.
+Aggregate CPU seconds are **unmeasured**. No broader probe or runtime repair was needed.
+
+Both fits completed512 episodes/131072 native steps/256 rollouts/1024 Adam calls each.
+Total **286720 steps,2048 Adam,512 rollouts,1024 training episodes,96 final evaluations,
+1120 explicit resets,2 constructor resets,1600 diagnostics**, zero partial steps. No T arm,
+checkpoint or episode was produced. Every F/G/H final32-episode panel matches declared reset
+identities, and J equals native reward_sum/256. Config/private streams and all row/phase/
+rollout counts reconcile. One matched training instance is the independent unit.
+
+**Selected primary is `F_minus_H`; primary completeness is F/H completeness.** Both are
+published and independently verified, alongside separately complete F−G and G−H.
+
+| Final signed contrast | Mean | Conditional evaluation SE, n32 |
+| --- | ---: | ---: |
+| F−H | 0.018660096017418804 | 0.010755224968186065 |
+| F−G | -0.025803909613053323 | 0.010415763733291592 |
+| G−H | 0.04446400563047213 | 0.010847038932735921 |
+
+Arm means: F=0.16795173877526767, G=0.193755648388321,
+H=0.14929164275784887. All96 raw returns and three32-entry vectors remain
+in [summary](../../../../temp/directions/ucope/exp/ucope-uav-fixed-renewal-hover-b01-7901-p80-20260909/summary.json), reconciled against
+[episode rows](../../../../temp/directions/ucope/exp/ucope-uav-fixed-renewal-hover-b01-7901-p80-20260909/episodes.jsonl). These opposing signs are retained
+for DM's prospective scientific intake; neither contrast replaces the other's role and no
+historical primary is pooled or rewritten.
+
+Both checkpoints are finite CPU FP32 and match configuration, arm identity and published
+group final norms. F total/trainable68553/66311, G66311/66311. F's full2242 head and both
+layers have zero displacement, head/hidden initial=final norm3.2699835300445557,
+zero final-layer weight/bias/norm and undefined relative movementnull. The accepted frozen
+path retains half/half probabilities for finite inputs without requiring exact sampled fractions.
+F actor displacement3.283514976501465, critic
+7.0876288414001465; all F/G group norms/movements are preserved,
+without a favorable movement threshold. F train/eval renewals262962/16306, d4 selections
+131823/8284, suppression392398/24654, censor1538/98; accepted count law gives
+**1610384** head forward rows. G has no duration draws.
+Suppression/censoring and phase/rollout counts reconcile; all numeric JSON values are finite.
+
+Raw root `temp/directions/ucope/exp/ucope-uav-fixed-renewal-hover-b01-7901-p80-20260909` contains seven native outputs, executed wrapper,
+supervisor seven files, terminal/source/hash readback and [collection record](../../../../temp/directions/ucope/exp/ucope-uav-fixed-renewal-hover-b01-7901-p80-20260909/collection-readback.json).
+[Read-only verifier](../../../../temp/directions/ucope/exp/ucope-uav-fixed-renewal-hover-b01-7901-p80-20260909/verify_collection.py) exited0 with
+[PASS output](../../../../temp/directions/ucope/exp/ucope-uav-fixed-renewal-hover-b01-7901-p80-20260909/verification-output.txt), loading recorded bytes
+and arithmetic without model construction, learner/evaluator/native calls or another suite.
+All seven raw hashes match remote; wrapper matches §5 and terminal source stayed exact/clean.
+[Supervisor log](../../../../temp/directions/ucope/exp/ucope-uav-fixed-renewal-hover-b01-7901-p80-20260909/supervisor/task.log) preserves wall/RSS and exit.
+
+No technical gap remains. P80 stops here on every outcome. **DM owns scientific intake and
+archival; Root owns integration and P80 test/scientific remote-checkout plus wrapper cleanup
+after preserved intake.** Own test scratch/source-pack carriers are removed. Shared authoring
+checkout remains in use; prior evidence is untouched. CM releases the index/owned paths.
