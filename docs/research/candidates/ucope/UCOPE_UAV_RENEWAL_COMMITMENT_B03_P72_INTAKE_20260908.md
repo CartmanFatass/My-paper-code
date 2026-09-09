@@ -177,3 +177,65 @@ no-retry boundaries. The same CM stages exact inputs, takes fresh canonical
 memory admission and owns the single accepted detached run through collection.
 Do not repeat the already accepted focused suite. Card§7 and intake§2 retain
 the full five-item handoff; DM's source acceptance changes no scientific budget.
+
+## 6. CM same-allocation execution preparation and literal payload
+
+DM source acceptance at `28e7833213f788f498bbc874e6e59b9326b22dca` returned the existing
+P72 execution to the same CM. Actual authoring checkout was clean at that HEAD. Scientific
+source remains **7d3aaab4646360e2473ae352b09c3933ccf8dacf**, with prospective card at
+`5bdb7aba1fbfcc872a675c97734ee8481924cbee`; no source amendment or repeated check occurred.
+CM owns the sole observation through collection. Accepted-handle tracking is not a transfer
+or request for parallel Root polling. P70/P71 evidence and checkouts remain untouched.
+
+Node: configured `hmasd-wsl-node`, CPU FP32/one Torch thread. Fresh scientific cwd:
+`/home/wu/hmasd-worktrees/ucope-uav-renewal-b03-7501-p72-20260908`.
+Relative output: `temp/directions/ucope/exp/ucope-uav-renewal-b03-7501-p72-20260908`.
+Unique supervisor handle: `ucope-uav-renewal-b03-7501-p72-20260908`.
+Preparation observed not_found/no supervisor directory and absent scientific cwd/output before
+creating the new exact-SHA detached checkout. All 2176 materialized tracked files match Git
+blobs. Explicit input checks include candidate modules, runner, canonical preflight/platform
+helper and both base UAV/adapter entry points. Canonical preflight SHA256:
+`cb0525e9247f1c7262c198bf051e542282f5928982137b3023d36d5d69eda4dc`.
+[Source/input readback](../../../../temp/directions/ucope/exp/ucope-uav-renewal-b03-7501-p72-20260908/preparation/source-input-readback.json) and staging/syntax
+receipts preserve the exact facts. Both payloads are UTF-8 ASCII/LF with one terminal LF.
+The remote wrapper digest matches local bytes; staged Bash -n and PowerShell Parser pass
+without executing admission or scientific payload.
+
+Per-arm cost projection: card section4 retains the complete-path law and P71 same-package
+references T158.1893359690439s, G138.41656891599996s, whole306.04s with1514598 head rows.
+New T head rows remain bounded1003520-4014080, not whole-wall multipliers. No known term
+projects either complete arm over1800s or the whole over3600s. New elapsed/aggregate CPU are
+not inferred from the synthetic suite, and no timing pilot is selected.
+Post-learner path coverage: reuse the accepted99-test suite's new-selector short actual-code
+learner/checkpoint/native-J/count publication coverage, without another suite or smoke.
+The serial critical path, sum of arm wall and aggregate CPU will be distinguished at return.
+
+Remote wrapper `/home/wu/hmasd-inputs/ucope-uav-renewal-b03-7501-p72-20260908.sh`, 707 bytes, SHA256
+`2c51898fb65bae7597873edaa2f2ac7cd541130e56d35a5bf3736b335b824b9c`; exact committed content:
+
+```bash
+set -euo pipefail
+cd /home/wu/hmasd-worktrees/ucope-uav-renewal-b03-7501-p72-20260908
+/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/.agent-tasks/ucope-uav-renewal-b03-7501-p72-20260908/resource_admission.json &&
+mkdir -p temp/directions/ucope/exp/ucope-uav-renewal-b03-7501-p72-20260908 &&
+cp /home/wu/.agent-tasks/ucope-uav-renewal-b03-7501-p72-20260908/resource_admission.json temp/directions/ucope/exp/ucope-uav-renewal-b03-7501-p72-20260908/resource_admission.json &&
+exec /home/wu/.venvs/hmasd/bin/python scripts/run_ucope_uav_motion_prefix_b01.py --pair renewal_b03 --seed 7501 --out temp/directions/ucope/exp/ucope-uav-renewal-b03-7501-p72-20260908
+```
+
+Local `temp/directions/ucope/exp/ucope-uav-renewal-b03-7501-p72-20260908/preparation/submit.ps1`, 338 bytes, SHA256
+`653424e96a084414bd94d6324218444800da8e5f82e8f11e1c7979639a358077`; execute this exact file after commit/push:
+
+```powershell
+& ssh -o BatchMode=yes -o ConnectTimeout=10 hmasd-wsl-node "/usr/local/bin/agent-task run ucope-uav-renewal-b03-7501-p72-20260908 '/usr/bin/time -f whole_wall_seconds=%e,peak_rss_kib=%M /usr/bin/timeout --signal=KILL 3600s /bin/bash --noprofile --norc /home/wu/hmasd-inputs/ucope-uav-renewal-b03-7501-p72-20260908.sh'"
+exit $LASTEXITCODE
+```
+
+Canonical preflight and runner are one supervised chain joined by `&&`; both physical and
+effective available memory must meet4GiB before scientific output-root/RNG/model creation.
+A failed admission remains in the supervisor root. External timeout3600s covers admission
+through publication/exit, while the runner retains1800s per complete arm. At most one
+accepted submission is allocated. Reconcile uncertain acceptance on this handle; no blind
+resubmission, retry, resume, extra H/evaluation or replacement master follows. Scientific
+admission/submission have not occurred at this preparation record. Root's separate cleanup
+must not reclaim this live P72 checkout; later archive/reclamation follows terminal collection
+and preserved DM intake.
