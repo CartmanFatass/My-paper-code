@@ -1065,3 +1065,22 @@ recast, C or Portfolio lifecycle/priority decision and no UAV-validation entry.
 References: `DISH_POST_B07_DIRECTION_QUESTION_INTAKE_20260908.md` §8;
 `pro_packets/20260908_p62_post_b07_scope/archive/RESPONSE.md` §§一–七, immutable commit above;
 B07 E0/intake and the previous B06/LR evidence retained in the preceding sections.
+
+## P67 source-path distinction — 2026-09-08
+
+The resumed source assessment confirms that ordinary source-state selection is distinct
+from B07's mean and B06's sampled-execution rule. The native snapshot carries18 forecast/
+control fields; it does not transmit the128-dimensional incumbent GRU state. The snapshot
+bridge updates the standby shadow's existing history. At a legal application, source
+promotion instead selects/mixes that history and the full old-incumbent history before
+subsequent control. These are different information paths, with the A03 ceiling preserved.
+
+No new source effect is measured. B07's zero ordinary transfers leave the conditional
+contrast unestimated; B05 CONTROL's three training transfers preserve path existence.
+Own-history control, copying and causal reconstruction remain alternatives, without an
+observed source defect, replay-absorption result or unique-information claim. The bounded
+P67 assessment nominates no new intervention or empirical discriminator. P62's narrow
+stops and the unresolved ordinary-source agenda remain; no broader closure/recast follows.
+
+Reference: `DISH_P67_SOURCE_STATE_REENTRY_INTAKE_20260908.md` §§2–6 and its scoped
+source/literature/count record `evidence/2026-09-08-p67-source-state-reentry.json`.
