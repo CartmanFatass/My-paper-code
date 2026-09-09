@@ -19,7 +19,7 @@
     }
   ],
   "recommended": "a",
-  "auto_applied": null,
+  "auto_applied": "a",
   "dm_reason": "原生成本信用直接影响合法动作与净收益，RAW及打乱对照共用目标；但无对齐收益仍更可能，因此是窄幅建议。",
   "evidence": [
     "docs/research/candidates/commitment_residual_triggered_options/CRTO_NATIVE_COST_P68_REENTRY_ASSESSMENT_20260908.md",
@@ -72,5 +72,17 @@
     "verdict_text": "DM窄幅建议提交并选择这个具体B：原生成本信用有动作与回报路径，三臂共用目标且保留旧RAW比较线；但无对齐收益仍是更可能的预测。当前仅完成问题准备，PARK保持。",
     "source": "docs/research/candidates/commitment_residual_triggered_options/CRTO_NATIVE_COST_P68_REENTRY_ASSESSMENT_20260908.md"
   },
-  "starred": true
+  "starred": true,
+  "approval_correction": "旧RAW只在长期合格；失败对照不自动证明通用预处理；旧171.801791秒计时早于发表。新卡按完整共享时间加各臂工作记账。",
+  "execution_history": [
+    {
+      "at": "2026-09-09T04:33:20+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/commitment_residual_triggered_options/pro_packets/20260908_native_cost_reentry_convergence/archive/RESPONSE.md",
+      "record": "docs/research/candidates/commitment_residual_triggered_options/CRTO_NATIVE_COST_P68_CONVERGENCE_INTAKE_20260908.md",
+      "state": "applied",
+      "summary": "完整合规Convergence答复febfad9778a0a69d3be2618739a31eec86721caa已选一次原生成本B；DM仅冻结前瞻卡，未分配实现或实验。GitHub交付已核实；一次Send多了跨、实际发送哈希缺失及原Transport状态保持。",
+      "correction": "旧RAW只在长期合格；失败对照不自动证明通用预处理；旧171.801791秒计时早于发表。新卡按完整共享时间加各臂工作记账。"
+    }
+  ]
 }

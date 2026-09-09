@@ -649,3 +649,46 @@ claim follows. The DM and CM return at a recoverable zero-live operational bound
 References: CRTO_BALANCED_FAMILY_CONVERGENCE_INTAKE_20260905.md and the byte-preserved
 pro/2026-09-05-crto-balanced-family-convergence-01/RESPONSE.md (request/pin and nine reported
 read paths match the authored packet). The other three original archive files are alongside it.
+
+
+## Native-cost P68 Convergence: bounded B08 re-entry — 2026-09-08
+
+The complete Convergence response selects **CRTO-NATIVE-COST-B08**: one development-informed,
+fresh-from-genesis reused joint seed-0 package, RAW / TRUE_RESIDUAL / CALIBRATED_DERANGEMENT,
+and the fixed 33/258-update readouts. **PRO_FINAL / DM_EXECUTED** permits this specific re-entry
+from the 2026-09-05 family park. It opens no arbitrary repair, seed/objective/budget ladder,
+recast, C promotion or Portfolio change. The prospective card is frozen; no new empirical
+result exists. The natural-support family stays closed.
+
+The accepted discriminator changes all three gate arms from score MSE to stable legal-softmax
+expected native action cost with equal row weights and fixed .01 scaling. Existing information,
+architecture, histories, RNG, exposure and native legal-action evaluation remain matched. The
+new RAW controls common-objective improvement, derangement controls packet alignment, and the
+fixed historical RAW comparison prevents a gain being manufactured by damaging new RAW.
+At a named endpoint, all three native-regret contrasts must exceed .0025 with competent new
+RAW-LONG. Every signed loss and both endpoints remain visible. Historical RAW is competent only
+at LONG; a SHORT signal describes a trajectory competent at LONG. Improvement that fails the
+controls does not prove generic preprocessing.
+
+Strongest support is the direct credit path from available histories to costly legal decisions,
+with a containing same-objective null and an alignment control. Strongest contradiction remains
+B04's competent seed-0 LONG residual deficit of .007134103628296, alongside the ambitious
+>.009634103628296 TRUE recovery needed to clear historical RAW by the original margin.
+TRUE's own learning, B06's KEEP gain and B07's offsetting action changes still oppose a broad
+unlearnability claim. Ordinary finite-budget objective optimization, saturation, scale/optimizer
+interactions and new KEEP errors remain live. The expected result is still more likely to miss
+the specified aligned signal than to meet it.
+
+The ceiling remains adaptive B on the exposed 64-member panel/16 EVAL identities and one reused
+joint seed, without independent replication, tuned same-information headroom, full-policy return,
+information/function-class or general MARL/UAV value. A01 remains unexplained. The next
+discriminator is the exact B08 three-arm native comparison, subject to actual Root allocation.
+This direction judgment comes from the complete fixed GitHub response; its intake separately
+preserves the original one-Send input mismatch and verified immutable delivery.
+
+References: CRTO_NATIVE_COST_P68_CONVERGENCE_INTAKE_20260908.md;
+CRTO_NATIVE_COST_B08_SCIENCE_CARD_20260908.md;
+pro_packets/20260908_native_cost_reentry_convergence/archive/RESPONSE.md at
+febfad9778a0a69d3be2618739a31eec86721caa. P68's prior source retrieval and arithmetic motivate
+selection, not new empirical support. The intake also corrects old pre-publication wall-time
+wording without changing the historical resource numbers.
