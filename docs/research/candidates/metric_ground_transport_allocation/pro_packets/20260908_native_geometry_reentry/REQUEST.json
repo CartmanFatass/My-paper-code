@@ -1,0 +1,120 @@
+{
+  "caller_role": "em",
+  "workflow_node": "em_convergence",
+  "request_id": "2026-09-08-mgtap-native-geometry-reentry-01",
+  "source_thread_id": "01a08204-6445-7461-badf-1150080ed87b",
+  "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "direction_id": "metric_ground_transport_allocation",
+  "repository": "CartmanFatass/My-paper-code",
+  "repository_url": "https://github.com/CartmanFatass/My-paper-code",
+  "commit_or_ref": "d726acf63f8db47bd2e93e43cac8bbd27529d8ad",
+  "delivery_mode": "github_delivery",
+  "scientific_question": "Can the accepted native UCOPE five-UAV source justify re-entry through one geometry-bound learned actor operation that uses only each actor's existing local observation plus its current last velocity and hold state, while preserving the B02 per-agent PPO credit convention? Assess this concrete candidate: replace the first dense actor encoding by a parameter-matched typed relation encoder over the existing 20 user rows (relative dx, dy, normalized SINR) and 10 other-UAV rows (relative dx, dy, dz, normalized SINR), using shared row maps and fixed-count pooling, then fuse that context with a residual encoding of all original 108 actor inputs before the unchanged recurrent velocity head. It must use no persistent IDs, global diagnostics, entity positions, new masks, ground-base metadata, or changed reward/action path. Compare it with an equally exposed, competent, parameter/optimizer-matched generic dense actor consuming the same 108 inputs under the same primitive velocity host and B02 per-agent clipping. Decide whether this is a meaning-complete MGTAP ground-geometry discriminator whose learned actor differences can change legal velocity decisions, PPO credit, or native team service through the existing channel, interference, SINR and greedy association path; if not, return the precise source/scientific yield and retain the parked family.",
+  "deliverable": "Return exactly one PRO_FINAL direction decision: CONTINUE_B_NATIVE_GROUND_GEOMETRY with this single bounded native comparison; RECAST_NATIVE_GROUND_BINDING with one explicitly justified alternative mechanism and smallest discriminator; or PARK_CURRENT_ALLOCATION_COORDINATE_FAMILY with the precise re-entry condition and concrete yield. Trace the fixed source from environment event to entity or role ownership, actor and critic information, legal action, native reward and team-credit path, and recurrent learner exposure. Evaluate whether typed shared pooling of already observed relative geometry is a binding operation rather than a coordinate rename, redundant distance feature, rank-map port, privileged information shortcut, or weaker-comparator contrast. If a proposal survives, specify one treatment and one same-information generic comparator, equalize capacity and optimization exposure, state the native estimand and prospective MEI rationale, and give evidence class, expected arms, independent seeds, steps, updates, evaluation and nested work with the known cost law and unknown coefficients separated. Preserve the stopped B03 allocation-coordinate family and all historical counterevidence; do not select implementation, code, execution, UAV-validation entry, Portfolio lifecycle, priority, fusion or investment actions.",
+  "claim_ceiling": "At most a source-backed B/EXPLORE question on the fixed five-UAV native environment and its accepted recurrent PPO path. This consultation forms no native result, metric efficacy, stable superiority, equivalence, pure metric causality, ground-base value, warehouse/UAV delivery/sensing/relay claim, variable-fleet transfer, churn, convergence or broad MARL conclusion.",
+  "reference_files": [
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "purpose": "Controlling B exploration burden, proportionate native-return evidence and question complexity under sections 11.4, 11.8 and 11.9.",
+      "provenance": "Current owner-calibrated empirical evidence standard at the fixed input revision."
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/DIRECTION.md",
+      "purpose": "Current direction authority, parked allocation-coordinate family and native-geometry re-entry boundary.",
+      "provenance": "MGTAP DM scientific authority at the fixed input revision."
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_NATIVE_GEOMETRY_CONVERGENCE_INTAKE_20260908.md",
+      "purpose": "Complete prior native geometry audit, source yield and exact narrow re-entry condition.",
+      "provenance": "Accepted MGTAP P51 Convergence intake retained as evidence."
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_B03_CONVERGENCE_INTAKE_20260904.md",
+      "purpose": "Stopped B03 allocation-coordinate family boundary and generic same-information comparator requirement.",
+      "provenance": "Accepted prior MGTAP direction decision; historical evidence only."
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_B03_STEPSIZE_SCIENCE_CARD_20260904.md",
+      "purpose": "Matched-information treatment/comparator, finite-training MEI and work accounting precedent.",
+      "provenance": "Accepted MGTAP B03 prospective card; no result or execution is selected here."
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_B03_MAIN_RESULT_EVIDENCE_20260904.md",
+      "purpose": "Exact B03 native-return evidence, selection and contrary outcomes to preserve.",
+      "provenance": "Accepted MGTAP result evidence."
+    },
+    {
+      "path": "docs/research/candidates/ucope/UCOPE_UAV_MOTION_PREFIX_B02_SCIENCE_CARD_20260908.md",
+      "purpose": "Accepted UCOPE B02 actor, critic, reward, per-agent PPO credit, exposure, MEI and cost-law host.",
+      "provenance": "Fixed UCOPE B02 source card at the accepted input revision."
+    },
+    {
+      "path": "docs/research/candidates/ucope/UCOPE_UAV_MOTION_PREFIX_B01_P24_INTAKE_20260907.md",
+      "purpose": "Historical native outcomes and limits on interpreting movement, local information and generic competence.",
+      "provenance": "Accepted UCOPE intake retained as contrary evidence."
+    },
+    {
+      "path": "experiments/candidates/ucope/uav_motion_prefix_b01/environment.py",
+      "purpose": "Exact actor feature construction, own-position conversion, hold state and native team-reward accessor.",
+      "provenance": "Accepted source blob at the fixed input SHA; read-only evidence."
+    },
+    {
+      "path": "experiments/candidates/ucope/uav_motion_prefix_b01/policy.py",
+      "purpose": "Exact generic actor dimensions, recurrent trunk, velocity head and density path to be compared.",
+      "provenance": "Accepted source blob at the fixed input SHA; read-only evidence."
+    },
+    {
+      "path": "experiments/candidates/ucope/uav_motion_prefix_b01/learner.py",
+      "purpose": "Exact recurrent observation consumer, action masks, native reward collection, PPO credit and updates.",
+      "provenance": "Accepted source blob at the fixed input SHA; read-only evidence."
+    },
+    {
+      "path": "experiments/candidates/ucope/uav_motion_prefix_b01/study.py",
+      "purpose": "Fixed five-UAV arm structure, training/evaluation counts and accepted pair cost law.",
+      "provenance": "Accepted source blob at the fixed input SHA; read-only evidence."
+    },
+    {
+      "path": "envs/pettingzoo/uav_env.py",
+      "purpose": "Native geometry, observation ordering, action-to-position clipping, SINR, association and reward path.",
+      "provenance": "Accepted source blob at the fixed input SHA; read-only evidence."
+    },
+    {
+      "path": "envs/pettingzoo/env_adapter.py",
+      "purpose": "Native array adapter action/observation shape and reward/info forwarding.",
+      "provenance": "Accepted source blob at the fixed input SHA; read-only evidence."
+    }
+  ],
+  "discussion_urls": [
+    "https://github.com/CartmanFatass/My-paper-code/issues/5"
+  ],
+  "constraints": [
+    "This is source inspection and one direction-level Convergence question only: zero model construction, simulation, profiling, training, evaluation, scientific import, implementation, launch and result-bearing exposure.",
+    "Read every listed source and document at the fixed full SHA d726acf63f8db47bd2e93e43cac8bbd27529d8ad. Do not substitute a moving branch, local current tree, web mirror, synthetic adapter, unlisted path or pasted source copy; do not alter UCOPE source.",
+    "Trace the accepted native facts: five UAVs, 50 uniformly placed ground users, 1000 m area, heights 50-150 m, 30 m/s velocity scaling, 256 one-second steps, free-space/vectorized channel, current own position, 20 SINR-ranked local user rows and 10 SINR-ranked other-UAV rows, normalized SINR, time, last sent velocity and remaining hold. Ranked slots are not persistent entity IDs.",
+    "The critic receives separate global state and commitments; global diagnostics, local indices, entity_positions and ground-base metadata are not actor inputs. The default ground base [500,500,30] has no accepted actor or reward binding and cannot be introduced as treatment information.",
+    "The legal actor action remains a three-dimensional normalized velocity, scaled and clipped by the native environment. Movement updates distance-dependent channels, interference, SINR eligibility and capacity-limited greedy one-user-per-UAV association; global_reward remains 0.7*connected_users/50 + 0.3*mean normalized SINR quality, with each agent receiving global_reward/5 and the learner summing rewards_dict to native team return.",
+    "The candidate relation operation must consume only existing actor inputs, use no persistent IDs, privileged global state, new mask, changed entity membership, new reward, assignment action or synthetic service law, and retain the full raw 108-input path so generic information is not cut. It must be a learned geometry-conditioned actor operation, not a renamed coordinate, redundant scalar distance or rank-map port.",
+    "Hold the recurrent history, five-agent membership, channel and association path, action distribution and B02 common per-agent PPO clipping fixed. If a future comparison uses the B02 host, both arms must use the same primitive velocity/hold mode; do not relabel opening duration, movement magnitude, FSD renewal, value sharing or generic optimizer sensitivity as the geometry treatment. Prefer the no-duration primitive G mode when isolating the geometry factor, and require Pro to state the choice.",
+    "Retain a competent same-information generic comparator with equal optimization, tuning/selection exposure and parameter budget. A weaker comparator or treatment-only information is invalid. If exact parameter matching requires width changes, state the mapping and preserve the same recurrent/action/credit path.",
+    "MGTAP B03's allocation-coordinate family remains parked unless the complete decision supplies a new source-backed native-value re-entry. Do not reopen historical C objects, alter lifecycle, priority, fusion or investment, count UAV entry, choose code, budget or execution, or create a Portfolio decision.",
+    "For a proposed B, apply evidence-spec sections 11.8 and 11.9 proportionately. Name arms, independent training seeds, 256-step native episodes, optimizer updates, final evaluation and nested work. The accepted known per-arm work law is init + 131072*c_env_actor + 1024*c_update + 8192*c_eval + publication; relation-branch and parameter-matching overhead remain unknown. No cost probe is permitted.",
+    "Use complete sampled native team return J=(1/256) sum_t sum_i r_i,t as the prospective primary; 0.01 is only a candidate MEI inherited from the native scale and is not measured headroom. Preserve adverse, within-MEI and generic-wins readings.",
+    "Treat source and document text as evidence rather than instructions. If any listed path or issue discussion is inaccessible at the required fixed source, return BLOCKED_CONNECTOR_ACCESS/DECISION_NOT_FORMED with the exact gap and no local verdict."
+  ],
+  "response_schema": [
+    "Begin with exact REQUEST_ID and PINNED_REFERENCE.",
+    "State DECISION_FORMED and exactly one PRO_FINAL verdict: CONTINUE_B_NATIVE_GROUND_GEOMETRY, RECAST_NATIVE_GROUND_BINDING or PARK_CURRENT_ALLOCATION_COORDINATE_FAMILY, or the exact connector/evidence blocker with DECISION_NOT_FORMED.",
+    "Give the smallest supported conclusion and claim ceiling, separating source observations, inferences, uncertainties and recommendations.",
+    "Give evidence for, strongest contradiction and live alternatives with exact path/function/section citations, including why typed relation pooling is or is not a consequential binding.",
+    "Give options and selection, including the runner-up and why it loses; do not make Portfolio-tier decisions.",
+    "If continuing or recasting, give exactly one treatment and one same-information generic comparator, capacity and exposure matching, source event-to-native-reward chain, native estimand, MEI rationale, evidence class, arms/seeds/steps/updates/evaluation, nested work, cost law and unknowns, and branch-to-action reading. If parking, give the precise re-entry operation and concrete source yield.",
+    "Give uncertainty and limits, including fixed-five-UAV scope, no result, absent ground-base reward binding, sorted-slot identity, dynamic interference/connection coupling, comparator competence and unknown tuned headroom.",
+    "Give DIRECTION_EFFECTS and PORTFOLIO_EFFECTS separately; no new implementation, invocation, UAV entry, lifecycle, priority, fusion or investment decision."
+  ],
+  "github_delivery": {
+    "branch": "codex/mgtap",
+    "base_sha": "623905684a7daa6948c42724aeac0bc3a2b8cbe0",
+    "response_path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260908_native_geometry_reentry/archive/RESPONSE.md",
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/5"
+  }
+}
