@@ -19,11 +19,12 @@ This authority preserves the direction's source-grounded scientific question, ev
 
 ## Scientific question
 
-The current selected question is whether a bound private observation of lost native link
-eligibility makes selective retracing useful against competent fixed apply/retrace controls
-and a containing generic learned gate. In two bounded native instances on 2026-09-09, both
-learned gates improve over always-apply, but fixed retrace is stronger in both. The structured
-gate's advantage over the generic gate appears in the first instance and does not recur in the second.
+The latest bounded question is whether fixed cue-triggered retrace improves native return
+over always-apply and same-cue dwell on two retained trained bases. E01 answers positively
+on both selected bases, without new training. It follows the stopped learned selective-retrace
+comparison: in two bounded native instances, both learned gates improved over always-apply,
+but fixed retrace was stronger in both. The structured gate's advantage over the generic
+gate appeared in the first instance and did not recur in the second.
 The historical source-grounded
 statement remains provenance: “Adaptive learner lost to the deterministic comparator; retain
 the negative-evidence protocol lesson.” The closed uncertain/delayed family remains closed.
@@ -50,6 +51,13 @@ The original Convergence node's P80 decision ends this instantiated learned sele
 package and selects no successor. It preserves the positive correction observations and all
 untested history/retrace alternatives; this is not a whole-direction or Portfolio disposition.
 
+The subsequent owner-selected fixed-reuse E01, under its named zero-new-training exception,
+now has a valid complete result. On retained DENSE/8201 and DENSE/8202, F-C is
++0.1076985801/+0.0879162035 J and F-dwell is +0.0689296118/+0.0574452965 J, all UP against
+the fixed 0.01 J MEI. Dwell-C is also UP. This supports the complete fixed retrace package
+on these two selected assets; it does not reopen T/G or establish training-population
+superiority, a pure retrace effect or headroom. The one allocated invocation is complete.
+
 ## Bounded conclusion
 
 Exact binding remains a useful protocol primitive. Neither historical learner object nor the
@@ -61,6 +69,11 @@ optimization or objective bias. No accepted policy has established material `0.2
 `DET-CF`. The accepted R03 upper now certifies that no compatible legal history policy can
 reach that registered gain on the unchanged uncertain/delayed host. Its learner-investment family
 is closed by the existing HC-C mapping; this is not a general absence-of-history-value claim.
+
+The later native E01 supports a distinct, bounded fixed-rule reuse claim. Same-cue dwell
+does not attain F's means on either retained base, while its own gains preserve evidence
+for motion suppression. Own trajectories and private recurrent feedback remain coupled;
+fresh episodes on selected old fits do not supply new training replicates or causal isolation.
 
 The first persistent Convergence decision was `PRO_FINAL / RECAST_HEADROOM_FIRST`. Its exact
 full-value object encountered a reproduced engineering blocker: the exact alpha envelope retained
@@ -157,7 +170,7 @@ The mechanism is fixed-membership multi-agent partial observability and non-stat
 joint motion changes interference; one owner remembers the coordinate of its prior lowest-SINR
 observed user; absence from a current nonempty unsaturated list of 1–19 users establishes loss
 of its own eligibility, not loss of global service. On an away-pointing base proposal, the
-alternative action retraces that UAV's realized prior displacement. Empty, saturated, ambiguous
+alternative action retraces that UAV's realized prior displacement. Empty, currently saturated, ambiguous
 and reset cases are excluded; sorted row identity and privileged service/user information are
 not used. Teammates still move, so retrace need not restore the prior link or team assignment.
 
@@ -207,7 +220,56 @@ See the [complete P80 response](pro_packets/20260909_native_link_loss_followup_c
 [original native decision](pro_packets/20260909_native_link_loss_convergence/archive/RESPONSE.md)
 and [B02 intake](ACVC_NATIVE_LINK_LOSS_B02_INTAKE_20260909.md).
 
+### Fixed retrace reuse E01 — accepted 2026-09-09
+
+After the owner selected this bounded reuse question, original-node response
+`a243f23dac21f84aa8de001bbbbd217f3e71024e` granted only E01's fixed C/F/dwell comparison
+under evidence-spec §11.4.1. The corrected card preserves the prior-anchor predicate:
+a saturated preceding list may supply its unique lowest-SINR nonpadding anchor; the loss
+cue requires a current count of 1–19 and the existing absence/away-dot conditions. Root's
+later explicit finite allocation is separate from that class decision. No selector fitting,
+recast or whole-direction disposition was part of this object.
+
+One serial six-panel invocation evaluated retained DENSE/8201 and DENSE/8202, each with
+64 prespecified joint worlds per C/F/dwell rule. All 384 outcomes were retained. There were
+98,304 native team steps, 491,520 base-agent forwards and zero new fits, optimizer updates
+or post-load parameter displacement. Each arm sampled the learned recurrent proposer every
+step and fed back its own actual command. F retraced prior actual displacement; dwell used
+zero velocity on the same predicate evaluated on its own trajectory.
+
+| Base | F-C mean J (conditional SE) | F-dwell mean J (conditional SE) | Dwell-C mean J |
+|---|---:|---:|---:|
+| DENSE/8201 | +0.1076985801 (0.0066070154) | +0.0689296118 (0.0071954850) | +0.0387689683 |
+| DENSE/8202 | +0.0879162035 (0.0079107102) | +0.0574452965 (0.0086159352) | +0.0304709071 |
+
+All four primary and both secondary means are UP under the unchanged >0.01 J rule. The
+strongest support is F's additional mean margin over dwell on both assets, including the
+previously untested 8202 comparison. The strongest contrary episode evidence is F-dwell
+adverse in 7/64 and 11/64 pairs; F-C is adverse in 1/64 and 7/64. All adverse rows remain.
+The principal broader-claim limit is that both bases are retained, outcome-informed assets.
+The SEs concern conditional evaluation on each base; no cross-base aggregate or stable
+training-population statement follows.
+
+Dwell's positive gains preserve the simpler motion-suppression account, but this particular
+dwell package does not match F's attained means. Distinct intervention counts and joint
+trajectory feedback prevent interpreting the remaining margin as isolated retrace causality
+or history necessity. Earlier learned T/G losses to F, old-host R02/R03 and absent tuned
+native headroom remain intact. This is a fixed-package reuse signal, not adaptive superiority.
+
+A new independently trained DENSE base with the same C/F/dwell comparison would discriminate
+whether the signal extends beyond the selected old assets. That follow-up is scientifically
+worth considering but **unselected and unallocated**; E01's named exception does not extend
+itself to another zero-update object. No successor, diagnostic prelude or T/G restart follows.
+See the [E01 card](ACVC_FIXED_RETRACE_REUSE_E01_SCIENCE_CARD_20260909.md),
+[complete E0](ACVC_FIXED_RETRACE_REUSE_E01_RESULT_EVIDENCE_20260909.md) and
+[scientific intake](ACVC_FIXED_RETRACE_REUSE_E01_INTAKE_20260909.md). Complete charged work
+is 89.35 s including preflight/startup and all support; precise runner wall is 79.46 s.
+
 ## Evidence set
+
+- `docs/research/candidates/acvc/ACVC_FIXED_RETRACE_REUSE_E01_RESULT_EVIDENCE_20260909.md`
+- `docs/research/candidates/acvc/ACVC_FIXED_RETRACE_REUSE_E01_INTAKE_20260909.md`
+- `docs/research/candidates/acvc/ACVC_FIXED_RETRACE_REUSE_E01_SCIENCE_CARD_20260909.md`
 
 The accepted evidence set is:
 

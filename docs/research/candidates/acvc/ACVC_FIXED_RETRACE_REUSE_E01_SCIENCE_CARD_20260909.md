@@ -1,9 +1,13 @@
 Claim: On two retained trained DENSE bases, fixed cue-triggered retrace may improve native return over always-apply and same-cue dwell, warranting a bounded reuse follow-up.
 Binding MARL structure: (d) multi-agent partial observability: each UAV acts on its own link history while teammates' simultaneous motions alter interference and service; their parameters remain fixed during this evaluation.
 
-# ACVC fixed retrace reuse E01 — prospective card
+# ACVC fixed retrace reuse E01 — science card
 
-Date: 2026-09-09. **FROZEN AND ALLOCATED: one complete implementation/acceptance/six-panel execution batch; no result observed yet.**
+Date: 2026-09-09. **FROZEN; the one allocated six-panel batch is COMPLETE. All four primary contrasts are UP.**
+Current result and complete accounting are in the [E0 evidence](ACVC_FIXED_RETRACE_REUSE_E01_RESULT_EVIDENCE_20260909.md)
+and [scientific intake](ACVC_FIXED_RETRACE_REUSE_E01_INTAKE_20260909.md). The frozen definition,
+predictions and four exact Pro replacement paragraphs remain unchanged; earlier prospective
+and unallocated statements below retain their historical boundary. No successor is allocated.
 Class of the proposed result-bearing study: B/EXPLORE under the object-limited ACVC_FIXED_RETRACE_REUSE_E01 exception in MARL_EMPIRICAL_EVIDENCE_SPEC §11.4.1. The complete Convergence decision grants that exact specification plan; its repository application is recorded separately through existing intake. The study compares fixed execution rules on retained trained policies, with zero new fitting, training, optimizer updates and parameter displacement during evaluation. Its ceiling is a preliminary native execution-package signal or counterexample conditional on the two selected retained bases and fresh panels. Preparation remains read-only A/RECON plus documentation. This class decision neither freezes the card nor allocates source implementation or scientific execution.
 
 **Separate application and freeze record (2026-09-09):** The complete original-node response
