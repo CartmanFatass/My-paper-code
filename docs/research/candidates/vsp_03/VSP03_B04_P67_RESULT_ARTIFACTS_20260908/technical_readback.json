@@ -1,0 +1,57 @@
+{
+  "artifact_digests_match": true,
+  "source_identity_counts_curve_weights_readback_pass": true,
+  "paired_world_identities_match": true,
+  "endpoint_means_from_rows": {
+    "G_greedy": 0.356015625,
+    "G_stochastic": 0.3046484375,
+    "R0": 0.3534033203125,
+    "R": 0.3543115234375
+  },
+  "computed_existing_paired_differences": {
+    "G_greedy-R0": {
+      "mean": 0.0026123046875000003,
+      "sample_sd": 0.07382005733582477,
+      "conditional_se": 0.002306876791744524,
+      "recorded_mean_difference": -4.336808689942018e-19
+    },
+    "G_greedy-R": {
+      "mean": 0.0017041015625000005,
+      "sample_sd": 0.08871131992187341,
+      "conditional_se": 0.002772228747558544,
+      "recorded_mean_difference": -2.168404344971009e-19
+    },
+    "G_stochastic-R0": {
+      "mean": -0.0487548828125,
+      "sample_sd": 0.33946141787887213,
+      "conditional_se": 0.010608169308714754,
+      "recorded_mean_difference": 0.0
+    },
+    "G_stochastic-R": {
+      "mean": -0.0496630859375,
+      "sample_sd": 0.34142005323555175,
+      "conditional_se": 0.010669376663610992,
+      "recorded_mean_difference": 6.938893903907228e-18
+    },
+    "G_stochastic-G_greedy": {
+      "mean": -0.0513671875,
+      "sample_sd": 0.33904253365337467,
+      "conditional_se": 0.010595079176667958,
+      "recorded_mean_difference": 0.0
+    }
+  },
+  "terminal_exit_and_termination_pass": true,
+  "origin_to_manager_finished_journal_s": 3.25318400003016,
+  "resource_journal_fields": {
+    "MEMORY_PEAK": "8732672",
+    "MEMORY_SWAP_PEAK": "0",
+    "CPU_USAGE_NSEC": "3278770000"
+  },
+  "scientific_validation_models_episodes_updates_evaluations": [
+    0,
+    0,
+    0,
+    0
+  ],
+  "note": "Read existing artifacts only; no model load, rollout, evaluation, comparison selection or new scientific invocation. weights_readback is the observed normal-run check; collected weight bytes independently hash-match remote."
+}
