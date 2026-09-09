@@ -219,6 +219,20 @@ that enrollment. Root receives the complete identical spec, committed starting
 source and original checks before any solo coding dispatch. No fourth comparison
 or scientific duplicate is created.
 
+The [ready five-item CM handoff](UCOPE_UAV_RENEWAL_COMMITMENT_B01_CM_HANDOFF_20260908.md)
+binds the complete card/original acceptance and starting input to
+`ec82119adb83044ac9eff346a4779d3aceffa334`. Its first assignment ends at
+implementation/review/source readiness; its prepared handoff allocates zero
+scientific invocations. All scientific source remains the accepted B04 surface
+until CM implements the selected change. Root's later concrete execution
+allocation retains the already selected one-pair scope and caps.
+
+At this return the owner's newly supplied **Root wake relay** applies to the
+published Root-action handoff, using current main SIBLING_COMMUNICATION and
+`.codex/hmasd-relay.toml`. It is completion notification only, with the same
+source and actual parent; ordinary nested CM/reviewer acceptance stays native.
+No new scientific gate, observer, budget or governance edit follows.
+
 The same CM owns implementation, independent high-risk review and accepted-source
 binding. Subsequent allocated execution remains one cohesive staging/launch/
 observation/collection/technical-acceptance batch under current ROOT_OPERATIONS,
