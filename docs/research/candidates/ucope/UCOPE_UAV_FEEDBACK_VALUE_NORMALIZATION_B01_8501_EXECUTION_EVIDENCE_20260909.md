@@ -31,3 +31,25 @@ exit $LASTEXITCODE
 ```
 
 Bash `-n` and PowerShell parser passed. This binding is committed/pushed before the one submission. CM retains acceptance through terminal collection; DM owns science/intake, Root owns integration and later remote cwd/wrapper reclamation after evidence preservation. The shared authoring checkout remains in use; previously blocked test scratch is a separate CM-owned limitation.
+
+## 2. Terminal collection and technical acceptance
+
+**PASS, complete intact output.** The one accepted supervisor handle finished exit0, PID3066268, tmux inactive, start2026-09-10T04:10:17+08:00/end04:15:20+08:00. Fresh actual-node admission2026-09-09T20:10:17.633150Z passed physical/effective15230320640bytes≥4294967296. Complete outer wall **303.11s**, peak RSS **554648KiB**; normalized arm149.55968460597796s, raw including H152.91804956301348s, pair302.47773671802133s. No cap, partial episode, nonfinite or publication failure. Serial critical path/summed wall coincide; aggregate CPU unmeasured.
+
+[Terminal status](../../../../temp/directions/ucope/exp/ucope-uav-feedback-value-normalization-b01-8501-20260909/terminal-status.json), [supervisor log](../../../../temp/directions/ucope/exp/ucope-uav-feedback-value-normalization-b01-8501-20260909/supervisor/task.log), [summary](../../../../temp/directions/ucope/exp/ucope-uav-feedback-value-normalization-b01-8501-20260909/summary.json), [collection readback](../../../../temp/directions/ucope/exp/ucope-uav-feedback-value-normalization-b01-8501-20260909/collection-readback.json) and [raw verification output](../../../../temp/directions/ucope/exp/ucope-uav-feedback-value-normalization-b01-8501-20260909/verification-output.txt) retain the evidence. Six scientific files (summary,episodes,rollouts,two checkpoints,admission), seven supervisor files and executed wrapper collected; all remote/local SHA256s and source/wrapper identity match. Collection was read-only over completed artifacts, with no model/native/learner/evaluation/replay/suite invocation.
+
+Full **286720 native steps,2048 Adam calls,512 rollouts,1024 training episodes,96 final episodes**,1120 explicit+2 constructor resets. Zero duration decisions/heads and zero diagnostic frames. Exactly normalized fit/final→raw fit/final→H row order; all training/reset IDs,96 J=reward_sum/256,complete3vectors/signs/conditional SE and checkpoints match. Both fits have66311 trainable parameters; raw checkpoint moments are null. Frozen seed-domain summary matches the card. Native reward/information units and algorithm ordering are supported by the unchanged accepted path and its previous independent review.
+
+| Contrast | Mean | Conditional evaluation SE | positive/negative/zero |
+| --- | ---: | ---: | ---: |
+| G_normalized_minus_G_raw | -0.004783423897661355 | 0.011553261422843115 | 10/22/0 |
+| G_normalized_minus_H | -0.01931798762937907 | 0.010907174268587023 | 12/20/0 |
+| G_raw_minus_H | -0.014534563731717716 | 0.011331000482129552 | 13/19/0 |
+
+Means: normalized **0.15129804608644407**, raw **0.15608146998410544**, H **0.17061603371582315**. Primary selection is explicitly G_normalized_minus_G_raw. These are direct values from one matched learning instance; technical acceptance makes no pooled or training-population claim.
+
+Final normalized moments: **n131072,updates256,mean16.589298248291016,M2 29963444.0,scale15.119621276855469**. Checkpoint mean/M2 are scalar FP32 and match exact JSON values; derived scale agrees with sqrt(max(M2/n,1e-8)). All four epoch records per normalized rollout declare normalized-squared critic units; raw records retain the unscaled path. Evaluation moments equal final-training moments; actor/critic/total evaluation displacement is0 in each arm. Current models' no-running-buffer and no-evaluation-optimizer-update path was already independently reviewed.
+
+Training actor displacement normalized2.580615758895874 (relative0.20864733890516843), raw3.0247559547424316 (relative0.24455685764880858); critic normalized2.980358123779297 (relative0.3222436366271974), raw5.951272964477539 (relative0.6434662423059797). Final checkpoint parameter counts/norms reconcile with reported exposure. Learning movement is observed without inferring native benefit from it.
+
+One scientific invocation is consumed, with no retry/extra evaluation/tuning/automatic successor. DM owns all-outcome scientific intake; Root owns integration and remote8501 cwd/wrapper reclamation after verified evidence preservation. The designated local checkout remains in use. Previously policy-blocked test scratch remains separately CM-owned and was untouched; no new cleanup refusal occurred in this execution batch. Source/card/DM intake/audit and old scientific records were not changed.
