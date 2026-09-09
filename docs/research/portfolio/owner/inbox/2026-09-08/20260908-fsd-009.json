@@ -1,0 +1,82 @@
+{
+  "id": "20260908-fsd-009",
+  "created": "2026-09-08T21:13:42-07:00",
+  "direction": "flexible_skill_duration",
+  "tier": "direction",
+  "kind": "decision",
+  "title": "P67：只开放 UAV 个体内部续约 B，旧 corridor 停止保留",
+  "context": "完整 Pro A 选择一个不同的原生 I/D0 早期学习问题；本次只应用方向选择并准备卡片与实现说明，无新 UAV 性能读数、无实现派发或实验分配。",
+  "options": [
+    {
+      "key": "a",
+      "label": "应用所选新 UAV 问题",
+      "consequence": "仅落实这一个 B；旧 P52 与 corridor 边界及 Portfolio 状态不变。"
+    },
+    {
+      "key": "b",
+      "label": "保留无后继",
+      "consequence": "实际 owner 覆盖后停止受影响的新分配，归档裁决与历史结果保留。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "同信息 reactive D0 使额外个体 skill 决策的正、小、反向结果都有新的决策价值；完整节点已接受成本与范围。",
+  "evidence": [
+    "docs/research/candidates/flexible_skill_duration/pro_packets/20260908_p67_uav_internal_renewal/CONVERGENCE_INTAKE.md",
+    "docs/research/candidates/flexible_skill_duration/FSD_UAV_INDIVIDUAL_RENEWAL_B01_SCIENCE_CARD_20260908.md",
+    "docs/research/candidates/flexible_skill_duration/pro_packets/20260908_p67_uav_internal_renewal/archive/RESPONSE.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-08.md#L200",
+  "brief": "docs/research/portfolio/owner/briefs/flexible_skill_duration/2026-09-08_FSD_P67_UAV_INTERNAL_RENEWAL.md",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否保留已按完整 Pro 裁决执行的新 UAV 个体内部续约问题选择？",
+    "changes_if_approved": [
+      {
+        "target": "docs/research/candidates/flexible_skill_duration/DIRECTION.md · P67 boundary",
+        "from": "P52 结束公开规则扩展；尚无内部续约后继",
+        "to": "仅选择 scenario1 固定团队时钟内个体续约 I/D0 的一个 B；旧停止不变"
+      }
+    ],
+    "if_refused": "在下一干净边界应用实际 owner 覆盖指令，停止受影响的后续分配并保留已归档裁决与所有历史结果；本项当前未启动实现或实验。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/flexible_skill_duration/pro_packets/20260908_p67_uav_internal_renewal/archive/RESPONSE.md",
+        "quote": "选择 A：只开放 scenario1 上“固定团队时钟内的个体内部技能续约”这一有界 B/EXPLORE 对象族，并只选择一对新的 I／authentic D0 真实学习比较。",
+        "why": "完整原节点明确选择一个不同的原生控制问题，并限定为一个训练对。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/flexible_skill_duration/pro_packets/20260908_p67_uav_internal_renewal/archive/RESPONSE.md",
+        "quote": "反对开放的最强理由是：D0 已经保留逐步观察、连续动作和记忆，新增 gap 可能只是增加离散技能扰动、样本分布变化及更新成本；旧 E3 对 competent fixed clock 的亏损让这种担忧有实质依据。",
+        "why": "D0 已有反应和记忆；旧 competent 负结果使新增 gap 的性能价值仍很不确定。"
+      }
+    ],
+    "uncertainty": [
+      "尚无本问题的新 UAV 性能、处理活动和当前机器耗时。",
+      "一个训练对不能估计训练种子总体不确定性，也不能隔离唯一原因。",
+      "scenario1 的 tuned 同信息 headroom 缺失；E0 的分数不得拿来排名。"
+    ],
+    "cost": {
+      "compute": "本次咨询与准备新增科学调用为零；若后续明确分配，D0/I 完整上限3600/18000秒，合计21600秒，无自动额外调用。",
+      "owner_time": "可异步批改，无需逐阶段确认。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing；现有委托继续，未来任务分配由 Root 负责。"
+    },
+    "verdict_text": "选择 A：只开放 scenario1 上“固定团队时钟内的个体内部技能续约”这一有界 B/EXPLORE 对象族，并只选择一对新的 I／authentic D0 真实学习比较。",
+    "source": "docs/research/candidates/flexible_skill_duration/pro_packets/20260908_p67_uav_internal_renewal/archive/RESPONSE.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-09T04:14:36+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/flexible_skill_duration/pro_packets/20260908_p67_uav_internal_renewal/archive/RESPONSE.md",
+      "record": "docs/research/candidates/flexible_skill_duration/pro_packets/20260908_p67_uav_internal_renewal/CONVERGENCE_INTAKE.md",
+      "state": "applied",
+      "summary": "按2026-09-03常驻委托应用完整 P67 A，仅选择新的 UAV 个体内部续约 B；旧 corridor 停止保留，无新 recast、Portfolio 或正式 UAV 进入变化，本轮未分配实现或实验。"
+    }
+  ]
+}
