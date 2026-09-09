@@ -177,3 +177,93 @@ H/final publication in G. Three arms do not make a5400s budget. At most one acce
 submission; uncertain acceptance is reconciled on the same handle. No scientific admission
 or invocation has occurred at this preparation record. Root archives/reclaims the test and
 scientific remote checkouts only after preserved collection/intake; no live checkout is reclaimed.
+
+## 6. CM terminal collection and technical acceptance
+
+**Technical acceptance: PASS.** The one accepted master7601 scientific invocation finished
+`COMPLETE`, exit0, no limits/cap breach/partial steps. Source remains
+`002ba439773c72cfdf042a2e31d221cf512a3a3d`; exact literal payload§5 was committed and pushed
+at `ec14605a2` before the single actual PowerShell-file submission. No retry, resume,
+replacement, extra evaluation, tuning, pilot, replay or second result-bearing call occurred.
+CM observed the same handle through terminal collection; this is not a handover to another poller.
+
+Handle `ucope-uav-renewal-frozen-head-b01-7601-p77-20260909`, node `hmasd-wsl-node`,
+PID3040009, finished/inactive tmux. Supervisor start2026-09-09T18:06:29+08:00,
+terminal2026-09-09T18:14:51+08:00, exit0. Actual-node canonical admission at
+`2026-09-09T10:06:29.554373Z` measured physical/effective available memory both
+15628730368bytes against4294967296bytes; both passed before scientific
+root/RNG/model creation. The result's copied receipt exactly matches the supervisor receipt.
+
+| Complete arm | Recorded wall seconds | Original cap seconds |
+| --- | ---: | ---: |
+| T | 163.61914047400933 | 1800 |
+| F | 170.78452501102583 | 1800 |
+| G | 146.30148461798672 | 1800 |
+
+Outer complete invocation through admission/publication/exit: **501.69s**,
+peak RSS **556452KiB**, below original3600s whole cap. Runner serial elapsed
+480.70515270199394s; sum of reported arm walls
+480.7051501030219s. These are nested accounting scopes,
+not additive study costs. Aggregate CPU seconds **unmeasured**; no inference from wall or
+thread settings substitutes for a measurement. F's complete native wall is now observed,
+170.78452501102583s; no fresh profile or performance repair was needed.
+
+All three fits completed512 native episodes/131072 steps/256 two-episode rollouts/1024Adam
+calls each. Total **425984 native steps,3072Adam,768rollouts,1536 training episodes,
+128 final evaluations,1664 explicit resets,3 constructor resets,2400 diagnostic frames**.
+All1664 episode rows/768 rollout rows/2400 diagnostic rows were collected. Every fitted
+arm's final32 episodes and H's32 episodes remain attached to their declared reset ids;
+raw J equals native reward_sum/256. Every configuration/checkpoint and exact seed address
+matches card§3. There is one matched training instance, not three independent effect replicates.
+
+| Signed final contrast | Mean | Conditional evaluation SE, n32 |
+| --- | ---: | ---: |
+| T−G | -0.04379734649032291 | 0.01000711676968817 |
+| T−F | -0.06808369803930205 | 0.00976191558652773 |
+| T−H | -0.02623673364744934 | 0.009678247230574127 |
+| G−H | 0.017560612842873573 | 0.01107486999976469 |
+| F−H | 0.0418469643918527 | 0.012643353547575854 |
+
+Arm means: T=0.12970535221200308, F=0.1977890502513051, G=0.17350269870232599, H=0.15594208585945243.
+All128 raw returns and all five signed32-entry vectors are retained in
+[summary.json](../../../../temp/directions/ucope/exp/ucope-uav-renewal-frozen-head-b01-7601-p77-20260909/summary.json) and independently reconciled against
+[episodes.jsonl](../../../../temp/directions/ucope/exp/ucope-uav-renewal-frozen-head-b01-7601-p77-20260909/episodes.jsonl). These numerical facts do not
+substitute for DM's all-outcome scientific intake, and no secondary or hover comparison
+changes the primary's role. No training-population variance/interval is available at n1.
+
+F total/trainable parameters68553/66311; T68553/68553 and G66311/66311. All three checkpoints
+are finite CPU FP32, with exact config/arm identity and per-group final norms matching the
+published exposure. F head/hidden/final displacements are **0**, head/hidden initial and
+final norm3.297661542892456, final-layer norm0 and relative displacementnull. Collected F
+final-layer weight and bias contain only zeroes; the accepted frozen path therefore retains
+half/half probabilities for finite inputs. Its observed sampled fractions are not constrained
+to one half. F common-actor displacement3.041698455810547 and critic8.580864906311035 record
+real learner exposure. T head displacement0.8138430118560791, hidden0.8027026653289795,
+final0.1341971457004547. All initial/final norms and group movements remain in the raw summary;
+no favorable movement threshold was applied.
+
+| Arm | Renewals train / eval | d4 train / eval | Suppressed train / eval | Horizon censored train / eval |
+| --- | ---: | ---: | ---: | ---: |
+| T | 265318 / 16457 | 131015 / 8239 | 390042 / 24503 | 1528 / 102 |
+| F | 263266 / 16446 | 131711 / 8240 | 392094 / 24514 | 1516 / 96 |
+
+Actual count law yields T1624822 and
+F1612488 duration-head forward rows. G has no duration
+draws. Row/phase/rollout counts reconcile with summary; selected labels and actual suppression/
+censoring retain the unchanged collector meaning. All published numeric JSON fields are finite.
+
+Collected artifact root:
+`temp/directions/ucope/exp/ucope-uav-renewal-frozen-head-b01-7601-p77-20260909`. [Collection readback](../../../../temp/directions/ucope/exp/ucope-uav-renewal-frozen-head-b01-7601-p77-20260909/collection-readback.json)
+retains exact hashes, summary, admission, process receipts, all contrasts and checkpoint norms.
+[Read-only verifier](../../../../temp/directions/ucope/exp/ucope-uav-renewal-frozen-head-b01-7601-p77-20260909/verify_collection.py) exited0 with
+[PASS output](../../../../temp/directions/ucope/exp/ucope-uav-renewal-frozen-head-b01-7601-p77-20260909/verification-output.txt); it loaded recorded bytes
+and performed arithmetic without a model/learner/evaluator or native call. All eight raw files
+match remote SHA256, executed wrapper matches§5, and terminal source readback was exact/clean.
+[Supervisor log](../../../../temp/directions/ucope/exp/ucope-uav-renewal-frozen-head-b01-7601-p77-20260909/supervisor/task.log), status/exit/pid/runner/start
+and admission receipts are retained. This collection check is not another affected test suite.
+
+No technical acceptance gap remains. P77 stops here on every outcome. **DM owns scientific
+intake and evidence archival; Root owns named-commit integration and subsequent reclamation**
+of the two P77 remote checkouts and staged wrapper after preserved intake. Remote test scratch
+and source-pack carriers were already removed; scientific evidence remains intact. The shared
+local authoring checkout stays in use. P70/P71/P72 evidence and unrelated paths are untouched.
