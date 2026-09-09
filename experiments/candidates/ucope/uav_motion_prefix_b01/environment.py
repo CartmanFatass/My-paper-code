@@ -58,7 +58,8 @@ def local_indices(adapter, agent):
 
 
 class HoldState:
-    def __init__(self):
+    def __init__(self, renewal=False):
+        self.renewal = renewal
         self.last = np.zeros((5, 3), dtype=np.float32)
         self.remaining = np.zeros(5, dtype=np.int64)
 
@@ -66,7 +67,7 @@ class HoldState:
         active = self.remaining == 0
         sent = self.last.copy()
         sent[active] = sampled[active]
-        self.remaining[active] = durations[active] if t == 0 else 1
+        self.remaining[active] = durations[active] if t == 0 or self.renewal else 1
         return sent, active
 
     def advance(self, sent):

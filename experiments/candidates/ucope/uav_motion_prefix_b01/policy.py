@@ -101,14 +101,16 @@ def joint_terms(actor, mean, recurrent, u, durations, velocity_mask, duration_ma
     return logp, entropy
 
 
-def sample(actor, mean, recurrent, active, opening, velocity_rng, duration_rng):
+def sample(actor, mean, recurrent, active, opening, velocity_rng, duration_rng,
+           duration_mask=None):
     u = torch.zeros_like(mean)
     durations = torch.zeros(5, dtype=torch.long)
     for i in range(5):
         if active[i]:
             u[i] = mean[i] + actor.log_std.clamp(-5, 2).exp() * torch.randn(
                 3, generator=velocity_rng)
-        if opening and actor.duration is not None:
+        eligible = opening if duration_mask is None else duration_mask[i]
+        if eligible and actor.duration is not None:
             inputs = (torch.cat((recurrent[i], u[i].detach().tanh()), -1)
                       if actor.duration_conditioned else recurrent[i])
             probabilities = actor.duration(inputs).softmax(-1)
