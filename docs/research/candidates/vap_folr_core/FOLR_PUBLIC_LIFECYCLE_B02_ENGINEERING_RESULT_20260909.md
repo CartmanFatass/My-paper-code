@@ -1,5 +1,9 @@
 # FOLR B02 seed routing — technical acceptance
 
+## Later allocated execution completion
+
+The engineering-only preparation below was followed by Root's distinct finite pair allocation recorded in card§6 at8a6b11b14515faf91db9894b443ce7349489f34f. That pair is now complete, using unchanged accepted source434f10cf95f16dd342cbf754382aa76155fcd2b7. [Execution evidence](FOLR_PUBLIC_LIFECYCLE_B02_RESULT_EVIDENCE_20260909.md) records both terminal handles, exact commands, receipts, collection and cleanup inventory; [paired summary](FOLR_PUBLIC_LIFECYCLE_B02_RESULT_SUMMARY_20260909.json) retains all outcomes. RETAIN1.3278125, RESET3.250625, d02−1.9228125 (`RESET_ABOVE_MEI`). Both full invocations and supporting checks stayed within their original caps. No cleanup was attempted during this later batch; Root retains the preservation/reclamation trigger.
+
 Delivered source commit `434f10cf95f16dd342cbf754382aa76155fcd2b7`, pushed on shared `codex/vap-folr`. Starting checkout `C:/Projects/HMASD-worktrees/codex-vap-folr` was clean at `d6e324de4f223a94ac4ecd9698bba25bdfd57c55`. Root reconciled the historical pause against the owner's17:58Z resumption and authorized this engineering-only assignment; no scientific invocation is allocated or performed.
 
 Contract: [five-item assignment](FOLR_PUBLIC_LIFECYCLE_B02_CM_ASSIGNMENT_20260909.md), [card §§2–5](FOLR_PUBLIC_LIFECYCLE_B02_SCIENCE_CARD_20260909.md). The existing runner now accepts unrestricted integer `--seed` with original7801 default and explicit `--evaluation-seed` with original107801 default. Evaluation Python/NumPy/Torch seed calls, new environment constructor, summary field and RNG description all use the selected evaluation argument. B02 selects7802/107802. No algorithm, reward, state, replay, optimizer, observation or evaluation schedule changes.
