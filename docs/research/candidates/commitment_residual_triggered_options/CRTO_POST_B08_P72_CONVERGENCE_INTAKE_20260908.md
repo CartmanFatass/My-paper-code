@@ -265,3 +265,5 @@ capacity or replacement. Shared direction checkout remains clean/recoverable aft
 there is no live DM scientific run, unobserved result, new Send or successor allocation.
 
 Documentation acceptance: one focused pass checked the complete-response identity and thirteen-source mapping, fixed card, exact decision/rule text, owner trace and ledger references, six brief headings/376 characters, and the soft-stop boundary. All passed; the restart document is the only link completed by the immediately following handoff step. No scientific replay or test suite was run.
+
+Publication: the complete intake/owner application is committed and pushed at `bf8f77d289ec972a24b2dbe7a26eb5509d34d97a`. The following restart-handoff commit completes the linked restart record and preserves the explicit soft stop; no successor is selected.
