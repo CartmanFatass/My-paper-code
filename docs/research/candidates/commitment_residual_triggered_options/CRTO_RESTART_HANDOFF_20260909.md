@@ -1,5 +1,11 @@
 # CRTO restart handoff — 2026-09-09
 
+Current maintenance update: Root subsequently resumed only the bounded finite-zero movement
+correction recorded at the end of this handoff. That repair and the pending committed-input sync
+are complete; no next scientific B or Pro request is selected. The original soft-stop account
+below is preserved as the September 9 early restart boundary, not an unhandled interruption of
+the later authorized correction.
+
 **STOPPED under OWNER_DIRECT soft stop for restart.** The in-progress P72 archived Pro intake and
 its required direction/owner/audit/brief records are complete. No successor engineering,
 scientific invocation or new Pro Send may begin until the owner explicitly resumes research.
@@ -160,3 +166,33 @@ fixed-reference original-margin claim. It must state any changed population/expo
 its research purpose. Re-entry is on a justified specification, not prior positivity, exact maxima,
 full causal diagnosis or C-level confirmation. No concrete new configuration or budget is selected
 here. Keep this boundary until the owner resumes and appropriate work is actually assigned.
+
+
+## Bounded foundations-review correction completed — 2026-09-09
+
+Root explicitly resumed the original DM/CM for special Pro review §2.10's untriggered B08
+finite-zero movement rejection only. Required owner configuration/current scientific-reading
+inputs from main `88a540f9273649086c8e84fffb14cb9d784f3afe`, including the pending
+`3e3357c858f068d171a618925e4085d8511f2995` authorization-continuity settings, were synchronized
+exactly on `codex/crto` in `31cf38b790eef1e901d0e67901e36f19a4a11444`. No main/index edit,
+accepted Pro binding change or hot reload was claimed. That formerly pending input sync is done.
+
+Allocation/necessity is committed at `ced81c37f321bc64cf427e075821903d3423bce5`. The original CM
+completed and pushed **`9cd01f8191b1139c59b42ec22f1048e902fed57a`**: finite zero endpoint movement
+is emitted; an all-model-gradients-missing check directly rejects a disconnected update;
+nonfinite checks and primary scientific computation stay unchanged. Eight focused synthetic
+tests passed (5.41 seconds pytest, 7.016 seconds complete process), with four synthetic Adam calls
+and independent semantic review without material finding. No scientific invocation or production
+model/host/native/evaluator call occurred. The old actual B08 movements were positive, so its
+result and source binding remain as recorded above. No card, result, MEI, seed, family or budget
+change follows.
+
+See [repair intake](CRTO_B08_ZERO_MOVEMENT_REPAIR_INTAKE_20260909.md) §§4–5,
+[CM evidence](CRTO_B08_ZERO_MOVEMENT_REPAIR_RESULT_EVIDENCE_20260909.md), and
+[Chinese brief](../../portfolio/owner/briefs/commitment_residual_triggered_options/2026-09-09_B08-zero-movement.md).
+The final annotation's enclosing commit contains this update and its audit row. Root integrates
+only accepted changes not already present; the input-sync content already originated on main.
+The original CM released the index cleanly. Final publication uses the same designated checkout
+and branch, with no unrelated dirty work. The family remains PARK, no successor is selected,
+and no newly accepted external work needs observation. All work for this specifically resumed
+repair is complete; the next scientific step remains unselected and unexecuted.
