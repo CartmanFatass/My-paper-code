@@ -120,3 +120,31 @@ exit $LASTEXITCODE
 ```
 
 Bash `-n` and PowerShell parser passed. Exact record committed/pushed before submission. Root owns integration and later P83 check/scientific worktree/wrapper reclamation after preservation; shared local authoring checkout remains in use.
+
+## 6. CM terminal collection and technical acceptance
+
+The single accepted scientific handle **`ucope-uav-short-fixed-renewal-b02-8201-p83-20260909`**, PID **3056496**, finished **exit 0 / tmux inactive**. CM retained sole observation through collection. Supervisor start `2026-09-09T22:13:38+08:00`, end `2026-09-09T22:18:56+08:00`. [Submission receipt](../../../../temp/directions/ucope/exp/ucope-uav-short-fixed-renewal-b02-8201-p83-20260909/preparation/submission-receipt.json), [terminal status](../../../../temp/directions/ucope/exp/ucope-uav-short-fixed-renewal-b02-8201-p83-20260909/terminal-status.json), [raw log](../../../../temp/directions/ucope/exp/ucope-uav-short-fixed-renewal-b02-8201-p83-20260909/supervisor/task.log). No retry/resume/replacement, extra evaluation, second instance or post-outcome source/meaning change occurred.
+
+Canonical actual-node admission at `2026-09-09T14:13:38.979275Z` passed: physical/effective availability both **15629881344 bytes**, above4294967296. [Admission](../../../../temp/directions/ucope/exp/ucope-uav-short-fixed-renewal-b02-8201-p83-20260909/resource_admission.json) matches supervisor bytes and was joined before scientific root/RNG/models. Remote readback retains exact source **`a2dbdc2452ecf17ef4578962abb20c0cea617d43`** with clean tracked bytes.
+
+Complete invocation through publication/exit: **317.61 s**, peak RSS **554456 KiB**. Runner F **167.0972740459838 s**, G including H **133.13975488004507 s**, pair **300.2370302210329 s**. Both arm bounds and outer cap conform; no cap breach, limits or partial steps. One serial invocation makes study critical path and summed invocation wall coincide; aggregate CPU remains **resources_unmeasured**.
+
+Full exposure completed: **286720 native primitive steps / 2048 Adam calls / 512 rollouts / 1024 training episodes / 96 final evaluations / 1120 explicit resets plus2 constructor resets**. F/G each fit512 episodes,131072 training steps,256 rollouts,1024 updates then32 final stochastic episodes; H contributes32 separate final episodes. Existing1600 diagnostic frames are not another arm/checkpoint/final panel. Episode and rollout count/reset associations match all declared totals.
+
+Prospective primary remains F-G with F/G completeness. All three original vectors and conditional evaluation SEs are retained:
+
+| Contrast | Native mean paired difference | Conditional evaluation SE |
+| --- | ---: | ---: |
+| F-G | 0.04205514630433558 | 0.008895069330742151 |
+| F-H | 0.01688043904880538 | 0.011210216975722664 |
+| G-H | -0.025174707255530195 | 0.011893075742872027 |
+
+Arm means F **0.16472782101275252**, G **0.12267267470841695**, H **0.14784738196394714**. All96 J values, native reward sums and three paired vectors are in [summary](../../../../temp/directions/ucope/exp/ucope-uav-short-fixed-renewal-b02-8201-p83-20260909/summary.json) and [episodes](../../../../temp/directions/ucope/exp/ucope-uav-short-fixed-renewal-b02-8201-p83-20260909/episodes.jsonl). No retrospective pooling or scientific branch selection is made in this technical record; G's negative hover contrast remains visible.
+
+F train/final renewals **437288 / 27362**; d2 **218945 / 13650**, total **232595**; d4 **zero** overall/phase/episode/rollout. Suppressed decisions **218072 / 13598**, censored holds **873 / 52**. Each F episode satisfies `d2 = suppressed_decisions + horizon_censored_holds`; G/H d2/d4 are zero. Counts reconcile at every published level. Diagnostic physical(1, 2) expiry, held actions and remaining/4 agree. F head forward rows **2678452**, within the prospective range; no sampled-frequency threshold was applied.
+
+F entire2242-parameter duration head and both layers have zero displacement; initial/final norm **3.2730531692504883**. Final weight/bias remain exactly zero; relative displacement from zero stays null. F/G trainable counts66311 each, totalF68553/G66311. F actor/critic displacement **2.4717350006103516 / 8.48689079284668**; G **2.9776387214660645 / 6.18130350112915**. Finite FP32 checkpoint tensors and group norms match their reports.
+
+The [read-only verifier](../../../../temp/directions/ucope/exp/ucope-uav-short-fixed-renewal-b02-8201-p83-20260909/verify_collection.py) reports **PASS**: [output](../../../../temp/directions/ucope/exp/ucope-uav-short-fixed-renewal-b02-8201-p83-20260909/verification-output.txt), [complete collection record](../../../../temp/directions/ucope/exp/ucope-uav-short-fixed-renewal-b02-8201-p83-20260909/collection-readback.json). All seven raw scientific/admission outputs match remote SHA256; all96 J/native reward identities, stream/config/card/master/reset associations, counts, full paired vectors/means/SEs, checkpoints/fixed head, literal short-support accounting and diagnostic expiry agree. Supervisor publication/admission and executed wrapper digest match. Collection makes no model/learner/native/evaluation/replay/test-suite call; exit alone was not acceptance.
+
+Local root `temp/directions/ucope/exp/ucope-uav-short-fixed-renewal-b02-8201-p83-20260909` retains seven raw outputs, seven supervisor files, executed wrapper, terminal/source/hash readback, check/preparation receipts and collection verification. Prior evidence roots are untouched. **Technical acceptance PASS; no remaining technical gap.** DM owns all-outcome scientific intake/archive; Root owns integration and later P83 remote check/scientific worktree/wrapper reclamation after preservation. Shared local authoring checkout remains in use; index released on return. P83 is exhausted; no automatic repeat or new allocation follows.
