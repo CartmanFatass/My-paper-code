@@ -18,6 +18,12 @@ or uncertain external acceptance needs factual reconciliation with the assigning
 continue independent authorized work. This instruction grants no new scientific invocation,
 write ownership, destructive operation, or authority beyond the existing assignment.
 
+Scientific reading: after the current assignment/card and relevant spec sections,
+use `.agents/skills/hmasd-scientific-tools/SKILL.md` scientific-reading mode for
+mechanism/card/comparator/estimand choices, result intake and scientific Pro questions.
+Reuse relevant current reads; record the concrete assumption and limit in the existing
+scientific record. Mechanical operations do not trigger this route.
+
 Tool adoption (OWNER_DIRECT 2026-09-05): when the task involves retrieval, arithmetic,
 analysis, profiling or a baseline/adapter, read .agents/skills/hmasd-scientific-tools/SKILL.md
 and only the relevant reference. Use tools for configuration arithmetic, literature retrieval and run-level analysis; choose the independent unit and interpret the result yourself.

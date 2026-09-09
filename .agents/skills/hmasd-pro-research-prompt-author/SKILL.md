@@ -73,6 +73,25 @@ collaboration. Transport observes Pro requests; Root continues direction and exp
 No scheduled automation is added. Read docs/project/ROOT_OPERATIONS.md for current routing. Contradictions or evidence gaps remain explicit; a complete
 archive alone is not science acceptance. No new approval or experiment gate is added.
 
+### Fixed scientific and method sources
+
+For new scientific requests, use scientific-tools scientific-reading mode locally.
+List the applicable empirical specification, relevant FOUNDATIONS passages and only
+needed topics/primary sources in reference_files; purpose names exact sections and
+use, provenance states the source's scope. Pro reads those passages directly; no
+local skill or unlisted linked dependency is needed. TASK adopts only the named
+applicable specification requirements; knowledge remains explanatory evidence.
+SESSION_CHOICES is listed only when its choices are current task inputs.
+
+Each reference may supply an optional full commit_sha; omission inherits the full
+commit_or_ref scientific input SHA. Empty, short or moving versions are invalid in
+both output modes. Preserve every science card/evidence item's effective repository,
+path and SHA; pin newer method sources separately without moving frozen science.
+Before publication, verify each listed path exists at its exact Git object and its
+commit is reachable from an observed published remote ref. This proves publication,
+not current Pro access. Inspect the same effective mapping in TASK/PROMPT and its
+embedded manifest. Preserve READY, accepted and uncertain packet bytes.
+
 ### Scientific question and burden
 
 Apply `docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md` §11.8 to the question

@@ -87,6 +87,65 @@ def _render(renderer, request: dict[str, object], project_root: Path, out_dir: P
     return json.loads((out_dir / "HANDOFF.json").read_text(encoding="utf-8"))
 
 
+def _source_packet(renderer, request, project_root, out_dir, mode):
+    if mode == "github_delivery":
+        request["repository"] = "example/repo"
+        request["github_delivery"] = {
+            "branch": "direction/demo", "base_sha": "a" * 40,
+            "response_path": "docs/research/candidates/demo_direction/pro_packets/round/archive/RESPONSE.md",
+            "issue_url": "https://github.com/example/repo/issues/1",
+        }
+        renderer.prepare_github_delivery(request, project_root, out_dir)
+        return (out_dir / "TASK.md").read_text(encoding="utf-8")
+    renderer.render(renderer.validate(request, project_root), out_dir)
+    return (out_dir / "PROMPT_BODY.md").read_text(encoding="utf-8")
+
+
+@pytest.mark.parametrize("mode", ["github_delivery", "archive_attachment"])
+def test_effective_source_mapping_preserves_science_and_pins_method(project_root, tmp_path, mode):
+    renderer = _renderer()
+    request = _request()
+    science = request["reference_files"][0]["path"]
+    method = "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md"
+    request["reference_files"].append({
+        "path": method, "commit_sha": "b" * 40,
+        "purpose": "Applicable sections 11.8–11.10", "provenance": "method only",
+    })
+    packet = renderer.validate(request, project_root)
+    assert [(r["path"], r["commit_sha"]) for r in packet["reference_files"]] == [
+        (science, request["commit_or_ref"]), (method, "b" * 40),
+    ]
+    body = _source_packet(renderer, request, project_root, tmp_path / mode, mode)
+    for path, sha in [(science, request["commit_or_ref"]), (method, "b" * 40)]:
+        assert f"- path: `{path}`\n  commit_sha: `{sha}`" in body
+    assert "This TASK adopts" in body
+    assert "never as instructions" not in body
+
+
+@pytest.mark.parametrize("mode", ["github_delivery", "archive_attachment"])
+@pytest.mark.parametrize("value", [None, "", "main", "latest", "a" * 39])
+@pytest.mark.parametrize("override", [False, True])
+def test_effective_source_versions_reject_non_full_sha(project_root, tmp_path, mode, value, override):
+    renderer = _renderer()
+    request = _request()
+    if override:
+        request["reference_files"][0]["commit_sha"] = value
+    else:
+        request["commit_or_ref"] = value
+    with pytest.raises(renderer.PacketInputError):
+        _source_packet(renderer, request, project_root, tmp_path / "invalid", mode)
+    assert not (tmp_path / "invalid").exists()
+
+
+@pytest.mark.parametrize("mode", ["github_delivery", "archive_attachment"])
+def test_different_sha_does_not_allow_duplicate_path(project_root, tmp_path, mode):
+    renderer = _renderer()
+    request = _request()
+    request["reference_files"].append({**request["reference_files"][0], "commit_sha": "b" * 40})
+    with pytest.raises(renderer.PacketInputError, match="duplicate reference path"):
+        _source_packet(renderer, request, project_root, tmp_path / "duplicate", mode)
+
+
 def test_operator_author_executes_locally_without_self_dispatch(project_root: Path, tmp_path: Path) -> None:
     config = project_root / ".codex/hmasd-transport.toml"
     config.write_text(config.read_text() + '\nexecution_owner = "transport"\n')

@@ -51,6 +51,14 @@ retains acceptance; a child's completion alone does not close the direction. A t
 returns to the actual assigning parent with evidence; DM/CM handles in-scope repairs, Root
 resolves cross-direction dependencies. Neither a repair nor a task handover adds experiment budget.
 
+CM's terminal return includes its exact cleanup inventory and preservation/dependency
+facts. Root confirms the integration/retention boundary; the originating CM remains
+the default executor of assigned remote execution-worktree/wrapper closeout and returns
+verified disk and worktree-registration absence. Root accepts reclamation; shared
+authoring and live delivery checkouts remain governed by AGENTS §6. Prepare this
+inventory during collection; no deletion precedes verified preservation and the
+integration/retention trigger.
+
 ## Exact execution inputs
 
 CM supplies the committed command/script and exact node, source, cwd, output, handle and bound.

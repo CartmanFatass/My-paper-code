@@ -11,7 +11,16 @@ its declared node. This skill validates the supplied scope, binds it to the exac
 persistent ChatGPT conversation, and preserves transport/response evidence without
 interpreting or overriding the decision. The independent Luna/high Transport task executes
 the complete Send, wait, archive and return-receipt lifecycle. Root retains direction dispatch,
-experiment observation, integration and native DM/CM routing; it does not operate Pro browsers.
+experiment-observer ownership/reconciliation under EXPERIMENT_MONITOR.md, integration
+and native DM/CM routing; Root observes only its explicitly owned/adopted handles.
+It does not operate Pro browsers.
+
+A link-only chat reply is a receipt, not the full decision or evidence that the
+response file contains no decision. Report chat identity and delivery/archive facts
+separately: verified immutable response path/commit, unavailable delivery or conflict;
+scientific formation/conformance remains for the original DM, or Root for Portfolio.
+An uncertain delivery returns to the same Transport; scientific conformance goes to
+the scientific parent. This adds no receipt schema or Send-state transition.
 
 Archive completeness is a transport fact, not specification-conformance acceptance.
 The receiving Root/DM checks the formed decision against current owner/spec constraints
