@@ -131,3 +131,31 @@ exit $LASTEXITCODE
 ```
 
 Bash `-n` and PowerShell parser passed. This exact record is committed/pushed before submission. Root owns integration and later remote check/scientific worktree/wrapper reclamation after evidence preservation; shared authoring checkout remains in use.
+
+## 6. CM terminal collection and technical acceptance
+
+One accepted scientific handle **`ucope-uav-short-fixed-renewal-b01-8101-p82-20260909`**, supervisor PID **3054923**, finished **exit 0 / tmux inactive**. CM retained sole observation through collection. Supervisor start `2026-09-09T21:35:57+08:00`, end `2026-09-09T21:41:13+08:00`. [Submission receipt](../../../../temp/directions/ucope/exp/ucope-uav-short-fixed-renewal-b01-8101-p82-20260909/preparation/submission-receipt.json), [terminal status](../../../../temp/directions/ucope/exp/ucope-uav-short-fixed-renewal-b01-8101-p82-20260909/terminal-status.json), [raw log](../../../../temp/directions/ucope/exp/ucope-uav-short-fixed-renewal-b01-8101-p82-20260909/supervisor/task.log). No retry, resume, replacement, extra evaluation or post-outcome source/meaning change occurred.
+
+Fresh canonical actual-node admission `2026-09-09T13:35:57.952819Z` passed with physical and effective availability both **15636676608 bytes** >=4294967296. The copied [admission](../../../../temp/directions/ucope/exp/ucope-uav-short-fixed-renewal-b01-8101-p82-20260909/resource_admission.json) matches the supervisor bytes and was joined before root/RNG/models. Remote source readback remains exact **`d99ae3c73e9c6ee73638c8a20afe748ce97b77ec`**, with clean tracked bytes.
+
+Whole invocation through publication/exit: **315.65 s**, peak RSS **557920 KiB**. Runner F **166.0954182019923 s**, G including H **135.13421400700463 s**, pair **301.22963369602803 s**. Both arms and the outer chain fit their caps, with no cap breach, limits or partial steps. Single serial study critical path and summed invocation wall coincide; aggregate CPU remains **resources_unmeasured**. This measured complete path replaces uncertainty about this invocation's wall, without a performance-generalization claim.
+
+Full allocation completed: **286720 primitive native steps, 2048 Adam calls, 512 rollouts, 1024 training episodes, 96 final evaluations, 1120 explicit resets plus 2 constructor resets**. Each F/G fit uses 131072 training steps, 256 two-episode rollouts and 1024 updates, followed by its 32 final stochastic episodes; H contributes its 32 separate episodes. Existing **1600 diagnostic frames** are not another arm, checkpoint or final panel. All declared counts and reset associations reconcile against actual records.
+
+F-G remains the prospective primary using F/G completeness; all F/G/H outcomes are retained. No primary selection changed:
+
+| Contrast | Native mean paired difference | Conditional evaluation SE |
+| --- | ---: | ---: |
+| F-G | 0.008551004914111454 | 0.008905535922158366 |
+| F-H | 0.02854870179583208 | 0.011099555695402165 |
+| G-H | 0.019997696881720626 | 0.012754543531711954 |
+
+Arm means F **0.17403423466945092**, G **0.16548322975533947**, H **0.14548553287361884**. All 96 native J values and paired vectors remain in [summary](../../../../temp/directions/ucope/exp/ucope-uav-short-fixed-renewal-b01-8101-p82-20260909/summary.json) and [episode records](../../../../temp/directions/ucope/exp/ucope-uav-short-fixed-renewal-b01-8101-p82-20260909/episodes.jsonl). CM supplies technical facts; DM applies the card's scientific reading without retrospective pooling.
+
+Literal new-support accounting: F train/final renewals **437914 / 27407**; **d2 218317 / 13612** (total **231929**); **d4 zero** overall and every phase/episode/rollout. Suppressed decisions **217446 / 13553**, censored holds **871 / 59**. Each F episode satisfies `d2 = suppressed_decisions + horizon_censored_holds`; G/H d2/d4 are zero. All counts reconcile by phase, episode and rollout. Every retained diagnostic F timer follows physical (1, 2), held velocity persists, chosen duration is 1 or 2 only at expiry, and actor countdown remains /4; G diagnostics have no duration selections. F duration-head forward rows **2682298**, within the prospective range. No frequency threshold or extra profiler was introduced.
+
+Whole F head remains fixed: **2242 parameters**, norm **3.3220746517181396** before/after, zero whole-head and both-layer displacement. Final weight/bias remain exactly zero; relative displacement from zero stays null. F/G trainable counts **66311 each**, total F68553/G66311. F actor/critic displacement **2.0316169261932373 / 8.933422088623047**; G **3.2570714950561523 / 5.180238723754883**. Saved finite FP32 checkpoint tensors and group norms match their reports.
+
+[Read-only collection verifier](../../../../temp/directions/ucope/exp/ucope-uav-short-fixed-renewal-b01-8101-p82-20260909/verify_collection.py) reports **PASS**: [output](../../../../temp/directions/ucope/exp/ucope-uav-short-fixed-renewal-b01-8101-p82-20260909/verification-output.txt), [complete collection record](../../../../temp/directions/ucope/exp/ucope-uav-short-fixed-renewal-b01-8101-p82-20260909/collection-readback.json). All seven scientific/admission outputs match remote SHA256; all 96 J/native reward identities, reset/stream/config/card/master associations, counts, three contrasts and conditional SEs, fixed-head/checkpoint groups, literal support accounting and diagnostic expiry agree. Supervisor publication/admission and executed wrapper digest also match. This check creates no model/learner/evaluation/native call/replay/test suite; exit zero alone was not acceptance.
+
+Local evidence root `temp/directions/ucope/exp/ucope-uav-short-fixed-renewal-b01-8101-p82-20260909` contains seven raw outputs, seven supervisor files, exact wrapper, terminal/source/hash readback, focused/review/preparation receipts and collection checks. Older evidence is untouched. **Technical acceptance PASS; no remaining technical gap.** DM owns all-outcome scientific intake/archive; Root owns integration and later P82 remote check/scientific worktree/wrapper reclamation after preservation. The shared authoring checkout remains in use; index is released on return. This allocation is exhausted and creates no next run.
