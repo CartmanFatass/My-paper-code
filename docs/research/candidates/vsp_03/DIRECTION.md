@@ -40,11 +40,12 @@ the current control choice for this sampled comparison; the single-run allocatio
 complete without an additional invocation or a new family disposition.
 The later P67 seed-6 observation gives a small greedy gain, so the two prospective
 G instances have mixed signs while both stochastic executions lose. P74's complete
-Convergence decision selects one further same-family G observation, seed 7, to
-observe another independently trained deterministic controller. It does not
-establish replacement value or change the N1/T pauses; recasts remain 1. Scientific
-content is selected, with implementation/execution left to the subsequent bounded
-Root assignment rather than allocated by the decision intake.
+Convergence decision selected one further same-family G observation, seed 7,
+subsequently allocated and completed as B05/P76. That controller gives another
+small positive greedy point over both rules and a stochastic loss. Seeds 5/6/7
+have a descriptive primary mean of -0.0030110677083333365; this does not establish
+stable replacement value or change the N1/T pauses. Recasts remain 1 and no
+successor observation or family disposition follows from this completed allocation.
 
 ## Current position
 
@@ -221,14 +222,34 @@ selected. The scientific bound is one model, 20,480 episodes, 128 updates and
 one complete 120 s invocation; this intake launches nothing and leaves its allocation to
 the subsequent Root command.
 
+**B05/P76, 2026-09-09: seed 7 adds a small greedy gain and another stochastic
+loss.** Under the unchanged selected question, greedy G minus R0 is
++0.0023291015625 (conditional-world SE0.007670301077), and minus R is
++0.0034423828125. Stochastic G minus R0/R is -0.0515283203125/-0.0504150390625.
+The primary gain accounts as +0.0048828125 from more successes, -0.002880859375
+from extra attempts and +0.0003271484375 from less waiting; this is native
+accounting, not an isolated coordination cause. One G completed the selected
+128 updates and all 20,480 episodes with real parameter movement.
+
+The three-instance primary points are -0.013974609375, +0.0026123046875 and
++0.0023291015625: descriptive mean -0.0030110677083333365, sample SD
+0.009495761444457974. The adaptive continuation sequence and finite evaluation
+variation are explicit; seed 4 remains separate discovery. The two positive
+points remain positive, the seed-5 loss remains contrary evidence, and all three
+stochastic comparisons to both fixed rules remain negative. None establishes
+stable superiority, inferiority or equivalence. Tuned N2 headroom remains absent;
+0.02 MEI supplies scale, not an equivalence or all-positive threshold. The next
+instance question has been answered; wider independent-instance variability
+remains unresolved, with no successor allocated and no new family disposition.
+
 The strongest surviving alternative is that public dwell age already suffices and the generic
 MLP matches the prior, or that all advantage is the fixed rule rather than learning. In the new
 host R0, R or ordinary G may handle scheduling, while the local readiness prior could occupy the
 slot too early and harm its partner. The strongest current support is the shared-slot action
-consequence and P67's prospective small greedy gain over both fixed rules, alongside
-the separate seed-4 discovery. B03's loss to both rules is the strongest contradiction
-to repeatable ordinary-G replacement value; stochastic losses in both prospective
-instances remain adverse. The strongest current contradiction
+consequence and the small greedy gains over both fixed rules in P67/seed6 and
+P76/seed7, alongside the separate seed-4 discovery. B03's loss to both rules is
+the strongest contradiction to repeatable ordinary-G replacement value; stochastic
+losses in all three subsequent instances remain adverse. The strongest current contradiction
 to a useful initialization/learned-T gain is T matching R0 across every saved B02 world;
 the stochastic losses and three N1 final T=G=F observations remain contrary evidence with
 their distinct populations and budgets. Waiting price,
@@ -239,6 +260,11 @@ sharing K1 does not pool polarity or reopen that family.
 ## Evidence set
 
 The evidence set includes historical observations and the separately labelled prospective selection:
+
+- `docs/research/candidates/vsp_03/VSP03_B05_P76_INTAKE_20260909.md`
+- `docs/research/candidates/vsp_03/VSP03_B05_P76_RESULT_EVIDENCE_20260909.md`
+- `docs/research/candidates/vsp_03/VSP03_B05_P76_DM_ANALYSIS_20260909.json`
+- `docs/research/candidates/vsp_03/VSP03_B05_P76_SCIENCE_CARD_20260909.md`
 - `docs/research/candidates/vsp_03/VSP03_P74_POST_B04_CONVERGENCE_INTAKE_20260909.md`
 - `docs/research/candidates/vsp_03/pro_packets/20260909_post_b04_convergence/archive/RESPONSE.md` at `93b8693135a4420876d7b46c328297a4c3761937`
 - `docs/research/candidates/vsp_03/VSP03_B04_P67_INTAKE_20260908.md`

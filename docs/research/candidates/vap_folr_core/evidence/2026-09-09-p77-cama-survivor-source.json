@@ -1,0 +1,258 @@
+{
+  "assignment": "P77 focused FOLR Traffic Junction survivor-state source mapping",
+  "class": "A/RECON source reading only",
+  "independent_unit": "one source-to-intervention assessment; no empirical replicate",
+  "author": "/root/dm_folr_p68_reentry",
+  "recorded_at": "2026-09-09T10:01:51.040260+00:00",
+  "checkout": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr",
+  "branch": "codex/vap-folr",
+  "starting_sha": "0131f327fb6a7043dfa5dbb75cd258afd11c12d0",
+  "source_repository": "https://github.com/thu-rllab/CAMA",
+  "source_commit": "1d8d6f8c44102d7b8904bf44eeb38cd1276dbb58",
+  "source_discovery": "P68 verified CAMA MARL-0409 Appendix G.2 and official paper repository qyz55/CAMA, redirected to thu-rllab/CAMA; reuse P68 library coverage, no repeat broad search",
+  "source_files": [
+    {
+      "path": "CAMA/components/action_selectors.py",
+      "bytes": 2587,
+      "sha256": "22e38626603ab951e4e846be9346e28cf6dce732a192f130dc5bb6a6d74f388a",
+      "source_url": "https://github.com/thu-rllab/CAMA/blob/1d8d6f8c44102d7b8904bf44eeb38cd1276dbb58/CAMA/components/action_selectors.py",
+      "method": "plain-text source read; never imported or executed"
+    },
+    {
+      "path": "CAMA/controllers/basic_controller.py",
+      "bytes": 5609,
+      "sha256": "b142a3899c7fe869f6dc4e54bba855b3f7d963702a33f94e604f2f3cd4321f82",
+      "source_url": "https://github.com/thu-rllab/CAMA/blob/1d8d6f8c44102d7b8904bf44eeb38cd1276dbb58/CAMA/controllers/basic_controller.py",
+      "method": "plain-text source read; never imported or executed"
+    },
+    {
+      "path": "CAMA/controllers/entity_controller.py",
+      "bytes": 1640,
+      "sha256": "66c0f2e2935694a65c2fe89d280cbd545dcc4c7761f8fe2895a1b2b3eb9e7084",
+      "source_url": "https://github.com/thu-rllab/CAMA/blob/1d8d6f8c44102d7b8904bf44eeb38cd1276dbb58/CAMA/controllers/entity_controller.py",
+      "method": "plain-text source read; never imported or executed"
+    },
+    {
+      "path": "CAMA/controllers/icm_controller.py",
+      "bytes": 4878,
+      "sha256": "8a6bafbfd0cc6a6ebd181bf06eb1a1d7063cbf7817852fdef4eb6516ff3bce0a",
+      "source_url": "https://github.com/thu-rllab/CAMA/blob/1d8d6f8c44102d7b8904bf44eeb38cd1276dbb58/CAMA/controllers/icm_controller.py",
+      "method": "plain-text source read; never imported or executed"
+    },
+    {
+      "path": "CAMA/envs/traffic_junction/traffic_junction.py",
+      "bytes": 13517,
+      "sha256": "fb3d0cc29134bc8c9e02a927fe1a79e04eb3b62316fcaa63e2ef4c84ff6a6444",
+      "source_url": "https://github.com/thu-rllab/CAMA/blob/1d8d6f8c44102d7b8904bf44eeb38cd1276dbb58/CAMA/envs/traffic_junction/traffic_junction.py",
+      "method": "plain-text source read; never imported or executed"
+    },
+    {
+      "path": "CAMA/learners/icm_q_learner.py",
+      "bytes": 24246,
+      "sha256": "9631e7bc3c0d4e2dd3ea0261245fb9f569692ffabc358e98a68d77f2c14cdb21",
+      "source_url": "https://github.com/thu-rllab/CAMA/blob/1d8d6f8c44102d7b8904bf44eeb38cd1276dbb58/CAMA/learners/icm_q_learner.py",
+      "method": "plain-text source read; never imported or executed"
+    },
+    {
+      "path": "CAMA/learners/q_learner.py",
+      "bytes": 15769,
+      "sha256": "26c1ee816f1c8537a92bbcfeed2bd7b47cc35308483e22c3450cf4074201edc4",
+      "source_url": "https://github.com/thu-rllab/CAMA/blob/1d8d6f8c44102d7b8904bf44eeb38cd1276dbb58/CAMA/learners/q_learner.py",
+      "method": "plain-text source read; never imported or executed"
+    },
+    {
+      "path": "CAMA/modules/agents/entity_rnn_agent.py",
+      "bytes": 7189,
+      "sha256": "104e32a5f5227741c09f3bb206b931e870c55e085451b89b6550a73d8eeef254",
+      "source_url": "https://github.com/thu-rllab/CAMA/blob/1d8d6f8c44102d7b8904bf44eeb38cd1276dbb58/CAMA/modules/agents/entity_rnn_agent.py",
+      "method": "plain-text source read; never imported or executed"
+    },
+    {
+      "path": "CAMA/modules/agents/entity_rnn_icm_agent.py",
+      "bytes": 27847,
+      "sha256": "798e2f2feb0224742a41ea5e8ba6634c52e8bb3bc9f8b9d3f1888db09b638196",
+      "source_url": "https://github.com/thu-rllab/CAMA/blob/1d8d6f8c44102d7b8904bf44eeb38cd1276dbb58/CAMA/modules/agents/entity_rnn_icm_agent.py",
+      "method": "plain-text source read; never imported or executed"
+    },
+    {
+      "path": "CAMA/modules/layers/attention.py",
+      "bytes": 7917,
+      "sha256": "e415c4fb60aa323a928d6cfc627b58edc72b4a672a46a0e0d3d223994b6727d6",
+      "source_url": "https://github.com/thu-rllab/CAMA/blob/1d8d6f8c44102d7b8904bf44eeb38cd1276dbb58/CAMA/modules/layers/attention.py",
+      "method": "plain-text source read; never imported or executed"
+    },
+    {
+      "path": "CAMA/run/icm_run.py",
+      "bytes": 18727,
+      "sha256": "1b36468921c0da445ccb400e77aeea70e0c943161c5a5b4c9cde51fddb73223f",
+      "source_url": "https://github.com/thu-rllab/CAMA/blob/1d8d6f8c44102d7b8904bf44eeb38cd1276dbb58/CAMA/run/icm_run.py",
+      "method": "plain-text source read; never imported or executed"
+    },
+    {
+      "path": "CAMA/run/run.py",
+      "bytes": 19386,
+      "sha256": "b11f93bc534487a6ba80bf8a7e327bcc15e72e3526f206e3439006a5cb0d1d39",
+      "source_url": "https://github.com/thu-rllab/CAMA/blob/1d8d6f8c44102d7b8904bf44eeb38cd1276dbb58/CAMA/run/run.py",
+      "method": "plain-text source read; never imported or executed"
+    },
+    {
+      "path": "CAMA/runners/episode_runner.py",
+      "bytes": 7356,
+      "sha256": "321fd5b253b18438d7c7eeec55c0a404f9a70d18810175cf2083fd3405d11a88",
+      "source_url": "https://github.com/thu-rllab/CAMA/blob/1d8d6f8c44102d7b8904bf44eeb38cd1276dbb58/CAMA/runners/episode_runner.py",
+      "method": "plain-text source read; never imported or executed"
+    },
+    {
+      "path": "CAMA/config/algs/cama_qmix_atten.yaml",
+      "bytes": 1269,
+      "sha256": "d930e3c31a53e66ff8166505374e6ee13154c5c065c650e1de98290d8099e1ef",
+      "source_url": "https://github.com/thu-rllab/CAMA/blob/1d8d6f8c44102d7b8904bf44eeb38cd1276dbb58/CAMA/config/algs/cama_qmix_atten.yaml",
+      "method": "plain-text source read; never imported or executed"
+    },
+    {
+      "path": "CAMA/config/algs/qmix_atten.yaml",
+      "bytes": 771,
+      "sha256": "416d49340138cb0aa4676d393dfd3fffba6b32d49845a192a67e9e391aa15162",
+      "source_url": "https://github.com/thu-rllab/CAMA/blob/1d8d6f8c44102d7b8904bf44eeb38cd1276dbb58/CAMA/config/algs/qmix_atten.yaml",
+      "method": "plain-text source read; never imported or executed"
+    },
+    {
+      "path": "CAMA/config/default.yaml",
+      "bytes": 3681,
+      "sha256": "304678db61b9599d054778a12953de68e4772753ceb5e661e231adc2b90b6483",
+      "source_url": "https://github.com/thu-rllab/CAMA/blob/1d8d6f8c44102d7b8904bf44eeb38cd1276dbb58/CAMA/config/default.yaml",
+      "method": "plain-text source read; never imported or executed"
+    },
+    {
+      "path": "CAMA/config/envs/traffic_junction.yaml",
+      "bytes": 230,
+      "sha256": "ac19b120a1876f285203c1a92358cf6e2f5ea0557674dcb3d2941380d41efe80",
+      "source_url": "https://github.com/thu-rllab/CAMA/blob/1d8d6f8c44102d7b8904bf44eeb38cd1276dbb58/CAMA/config/envs/traffic_junction.yaml",
+      "method": "plain-text source read; never imported or executed"
+    }
+  ],
+  "source_reading_ranges": {
+    "CAMA/envs/traffic_junction/traffic_junction.py": [
+      "16-23 easy host",
+      "52-75 reset",
+      "77-99 native transition order",
+      "101-138 reward and removal",
+      "140-183 spawn/reuse",
+      "185-209 observations/masks/actions",
+      "272-284 curriculum and seed method"
+    ],
+    "CAMA/controllers/entity_controller.py": [
+      "11-36 entity and previous-action inputs"
+    ],
+    "CAMA/modules/agents/entity_rnn_agent.py": [
+      "23-34 GRU/init",
+      "36-47 observation masking",
+      "69-88 recurrent carry and Q-output mask"
+    ],
+    "CAMA/runners/episode_runner.py": [
+      "94-146 episode hidden initialization, native action/reward, terminal controller pass"
+    ],
+    "CAMA/learners/q_learner.py": [
+      "18-46 parameters/optimizer/target copy",
+      "76-94 native TD inputs and episode unroll reset",
+      "117-144 online/target unroll",
+      "169-192 mixing/native TD loss",
+      "223-235 optimizer/target updates"
+    ],
+    "CAMA/run/run.py": [
+      "341-385 collection/replay/train loop",
+      "417 episode counter"
+    ]
+  },
+  "direct_facts": [
+    "Five fixed slots in easy 7x7 host; horizon20; actions no-op/up/down/left/right; active mask0, inactive1.",
+    "get_reward removes on goal and collision before _add_car; _add_car can reactivate a removed slot in the same environment step.",
+    "get_masks returns boundary observation mask and active/inactive mask, without per-slot generation ID or removal/arrival event list.",
+    "Uninterrupted active slots retain physical position/target/wait, while removal clears them; each reactivation assigns a spawn position and goal.",
+    "GRU runs through inactive positions; only Q output is masked. EpisodeRunner zeros hidden once per whole20-step episode.",
+    "Previous-action input also follows slot history, so source supplies no fresh-entrant hidden or previous-action boundary.",
+    "Each current active car reobserves its own target/position. Other entity visibility is distance-limited by vision1; complete recurrent state can include earlier teammate observations.",
+    "Native reward uses source distance progress, time penalty and collisions; source wait increments even for inactive slots and is not reset by every spawn.",
+    "Native spawn uses global np.random while seed() creates self.random; seeding and branch-dependent draw consumption must not be assumed from env_args seed alone.",
+    "Online and target replay unrolls both carry recurrent state across the episode, and QLearner.train issues one RMSprop.step."
+  ],
+  "inferences_and_limits": [
+    "An active-to-active boundary mask does not establish uninterrupted physical-car identity.",
+    "True-survivor reset with all entrants fresh requires a declared lifetime boundary; an unmodified mask-difference adapter cannot identify all source lifetimes.",
+    "Using hidden removal/arrival callbacks as reset triggers can reveal events outside a survivor's permitted observation history via its internal-state action path; equal use by both arms is not automatically source-information preservation.",
+    "This is not an impossibility proof for a differently scoped study with common lifecycle metadata or an explicitly restricted observable event population.",
+    "A RETAIN-versus-RESET loss would at most test native cost of a memory erasure intervention; RETAIN is ordinary full causal history, not a newly established strictly-self-ancestry typed mechanism."
+  ],
+  "new_exposure": {
+    "scientific_invocations": 0,
+    "target_imports": 0,
+    "models_created": 0,
+    "model_calls": 0,
+    "training_environment_ticks": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0,
+    "native_calls": 0,
+    "diagnostics": 0,
+    "pro_sends": 0,
+    "science_cards": 0,
+    "rng_masters": 0
+  },
+  "machine_exposure_line": "scientific_invocations=0; target_imports=0; models_created=0; model_calls=0; training_environment_ticks=0; optimizer_steps=0; evaluation_episodes=0; native_calls=0; diagnostics=0; pro_sends=0; science_cards=0; rng_masters=0",
+  "unselected_future_b_work": {
+    "status": "UNSELECTED counterfactual scale only; no card, master, invocation, or permission to run",
+    "arms": 2,
+    "matched_training_instances": 1,
+    "training_episodes_per_arm": 5000,
+    "environment_ticks_per_episode": 20,
+    "maximum_agent_slots": 5,
+    "training_environment_ticks_per_arm": 100000,
+    "training_environment_ticks_pair": 200000,
+    "rmsprop_steps_per_arm": 4969,
+    "rmsprop_steps_pair": 9938,
+    "replay_batch_episodes": 32,
+    "sequence_positions_with_terminal": 21,
+    "live_and_target_unrolls_per_update": 2,
+    "replay_gru_row_forward_evaluations_per_arm": 33391680,
+    "replay_gru_row_forward_evaluations_pair": 66783360,
+    "final_frozen_greedy_evaluation_episodes_per_arm": 32,
+    "evaluation_environment_ticks_pair": 1280,
+    "total_environment_ticks_pair": 201280,
+    "training_plus_final_evaluation_controller_calls_per_arm": 105672,
+    "acting_gru_row_forward_evaluations_pair": 1056720,
+    "nominal_learning_rate": 0.0005,
+    "nominal_learning_rate_times_steps_per_arm": 2.4845,
+    "lr_path_is_not_actual_parameter_displacement": true,
+    "additional_candidate_search": 0,
+    "additional_diagnostic_or_validation_episodes": 0,
+    "wall_cost": "unknown; B04 coefficients do not transfer to this host/learner",
+    "illustrative_complete_machine_seconds_cap_per_arm": 1800,
+    "illustrative_complete_machine_seconds_cap_pair": 3600,
+    "cap_is_not_runtime_prediction_or_current_allocation": true,
+    "count_semantics": "one collected episode and one replay/RMSprop train call after buffer has 32 episodes; train call includes online and target full-sequence passes plus online backward/mixer work; GRU row counts are operations, not independent samples or actual batched controller calls"
+  },
+  "historical_b04": {
+    "result_rule": "B04_WITHIN_MEI",
+    "mean_stale_auc_delta": 0.0026041666666666665,
+    "absolute_mei": 0.05,
+    "paired_seed_deltas": [
+      0.001953125,
+      -0.000244140625,
+      0.006103515625
+    ],
+    "mean_final_generic": 0.98828125,
+    "mean_final_typed": 0.98828125,
+    "mean_final_latch": 0.9986979166666666,
+    "mean_final_reset": 0.5065104166666666,
+    "update16_positive_transient": 0.0221354167,
+    "training_environment_ticks": 444672,
+    "optimizer_steps": 1536,
+    "evaluation_episodes": 49920,
+    "complete_wall_seconds": 40.371825,
+    "meaning": "accepted earlier result; RESET is an information cut; no current run or new headroom claim",
+    "evidence_path": "docs/research/candidates/vap_folr_core/N3_FOLR_ROUTING_B04_RESULT_SUMMARY_20260904.json"
+  },
+  "owner_reviews_unapplied": [],
+  "owner_prediction": "not taken",
+  "engineering_scope_section4": "none for source intake",
+  "section5_budget_breach": false
+}

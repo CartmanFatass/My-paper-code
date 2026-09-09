@@ -45,6 +45,55 @@ direction or Portfolio decision. P75 object decisions retain the standing
 owner delegation recorded on 2026-09-03 and are labelled `OWNER_DELEGATED`;
 this result does not create a new blanket delegation.
 
+## Native ground-geometry post-B01 Convergence boundary — 2026-09-09
+
+The complete post-B01 Convergence answer for request
+`2026-09-09-mgtap-post-b01-convergence-01` executes
+`PRO_FINAL=PARK_NATIVE_GROUND_GEOMETRY_FAMILY`. The disposition is a reversible
+boundary for the current native actor family after the complete P75 package
+observation; it does not claim that geometry-aware actors are impossible or
+that DENSE has stable population superiority. No successor B or native-binding
+recast is selected. The old balanced-allocation-coordinate family remains
+parked, and the broader direction remains `ACTIVE/MEDIUM` under Portfolio
+authority.
+
+P75 remains the complete two-master observation: REL-minus-DENSE is
+`-0.04468252516448091` for master 8201 and `-0.003243683445650989` for master
+8202, with aggregate `-0.02396310430506595` below the declared `0.01` adverse
+boundary. Master 8202 remains visible as an inside-MEI result, and H remains
+a fixed diagnostic. DENSE is a valid same-information native comparator, but
+it is untuned; no native tuned-headroom record exists. These facts do not
+permit a stable DENSE claim, an equivalence claim, or a causal explanation.
+
+The response assesses the offered sum-plus-count successor against zero work.
+Replacing fixed slot-limit denominators by sums is absorbable by learned
+projection rescaling in the stated branch; explicit counts could change finite
+training, but the proposal does not yet specify a decision-relevant
+count-conditioned geometry hypothesis. The strongest contradiction is that a
+different native geometry operation could still help, match or harm a generic
+actor. The runner-up is therefore a bounded count-aware native comparison, but
+it loses because its mechanism and native event-to-velocity prediction are not
+specific enough to justify new exposure at this boundary.
+
+Re-entry requires one materially changed, source-compatible learned actor
+operation against an equally informed valid generic comparator. It must retain
+the full local rows, recurrent history, legal three-coordinate velocity, fixed
+five-UAV host, native channel/interference/SINR/capacity/association path,
+primitive team reward and common PPO credit. A count-based proposal must define
+current observed/truncated row counts, distinguish explicit occupancy
+processing from sum rescaling, and name the native event that should change
+velocity or credit. The future primary remains complete sampled native return
+`J=(1/256) sum_t sum_i r_i,t`; a prospective `0.01` MEI is not tuned headroom.
+The response's bounded design discussion retains one or two independent
+training seeds, 512 training episodes and 1,024 Adam calls per fit, 32 final
+evaluations per learned arm, optional H work, and the known per-arm cost law;
+none is selected or launched here. No model, card, implementation, diagnostic,
+cost probe, scientific invocation, UAV-validation entry or Portfolio change is
+authorized by this boundary.
+
+Evidence: `MGTAP_NATIVE_GROUND_GEOMETRY_B01_POST_B01_CONVERGENCE_INTAKE_20260909.md`
+and `pro_packets/20260909_post_b01_convergence/archive/RESPONSE.md`.
+
 ## Native geometry Convergence boundary — 2026-09-08
 
 The complete source-backed Convergence answer for request

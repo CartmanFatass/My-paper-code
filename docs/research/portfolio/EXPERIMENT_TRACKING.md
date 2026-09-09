@@ -1,5 +1,25 @@
 # HMASD experiment tracking
 
+UCOPE P77 full intake0a732abe0 accepted: valid DOWN, all425984steps3072Adam128eval/501.69s complete; original CM observation ended. Original DM actually resumed P78 ONE fresh F/G/H comparison through card/source/exact remote execution/CM observation/intake,286720steps2048Adam96eval1800/3600caps; new handle pending. FOLR P78 Transport terminal SEND_CONTROL_NO_EFFECT after2totalpermitted clicks, no usernode/conversationURL,UNBOUND/tabclosed; original DM actually resumed read-only factual reconciliation/blocker intake, no new Send. VSPC1 P77 execution checkout retired with source recovery ref/output preserved; P78 authoring continues.
+
+VSPC1 P77 full intakef87af3f86 accepted, sole B11/8502 handle terminal exit0/507.29s; valid CHANGE_DOWN C=-.0119242503 near negative MEI,512 UP and768 WITHIN retained. Original DM actually resumed P78 one fresh independent unchanged fixed512/768/H pair through full card/source/remote execution/CM observation/intake, same434176steps3072Adam160eval1800/3600caps; new master/handle pending. No reuse of spent P77 allowance.
+
+FOLR P78 READY questiond824897be/TASK83f7beafd accepted and actually dispatched once to configured Transport; app accepted/provider Send unconfirmed. Logicalem:vap_folr_core:convergence is unbound pending reconciliation/fresh verified6Pro under cutover. Explicit public lifecycle information protocol versus no successor is the unresolved question, not an adopted change. No experimental allowance.
+
+VSP03 post-B05 and ACVC native-link-loss requests now ARCHIVED with one Send each; full GitHub responses3da3a0c44/2d914ab8b are preserved. Original DMs actually resumed full conformity/scientific intake. Link-only receipts' scientific_decision_formed=false is not treated as a full-file conclusion. VSP03 opening selects narrow-family pause; ACVC selects the proposed bounded native B and explicitly interprets inherited units, all pending full native intake. No new experiment allocated by these receipts.
+
+VSPC1 P77 sole handlevspc1_hold_value_b11_8502_7ed4c3933771 accepted/running on hmasd-wsl-node PID3040577, exactsource7ed4c3933771f85d570b5c952052b9e8c5fbd6e1; actual admission15318642688bytes physical/effective passed. Same CM sole observer/collector, original DM full C/endpoints/H intake. No retry/resume/extra pair or Root polling.
+
+FOLR P77 source intake64db6307b accepted: NO_READY for true-survivor reset under unchanged CAMA observation interface, zero empirical exposure. Original DM actually resumed P78 proper-node question preparation for an explicitly prospective common event/lifetime scope versus no successor; no local scientific scope change, card, run or Send. UCOPE P77 sole handle `ucope-uav-renewal-frozen-head-b01-7601-p77-20260909` now accepted/running on hmasd-wsl-node PID3040009, source002ba4397, actual joined admission15628730368bytes physical/effective; same CM sole observer/collector, original DM scientific intake. No Root polling or extra invocation.
+
+ACVC same unsent request routing corrected atae0faa0a7: actual OWNER_DIRECT cutover/previous request metadata supplied, fixed science unchanged. Root actually resumed original Transport request; first provider Send still unconfirmed. VSP03 post-B05 request2026-09-09-vsp03-post-b05-convergence-01 HANDOFF7b11d9c11/TASK3887b6f5c actually dispatched once to existing bound conversation via Transport, app accepted/provider Send unconfirmed. Both original DMs await complete responses; no scientific successor allocated.
+
+VSPC1 P76 remote execution checkout reclamation completed after integration: exact b10-8501 checkout absent on disk/registry, source preserved under remote refs/recovery/p76-20260909/vspc1-b10 and published ancestry, external outputs retained. Shared authoring checkout remains active; policy-blocked CM test scratch remains separate.
+
+VSPC1 P76 full intake62625efbb accepted: sole B10/8501 handle terminal exit0, valid CHANGE_DOWN C=-.0542390934;512 UP and768 WITHIN, all160 evaluations retained. Source boundary and independent review/focused receipts accepted;434176steps/3072Adam/475.85s, allowance spent. Original DM actually resumed P77 ONE fresh independent unchanged two-endpoint pair through card/source/remote execution/sole CM observation/intake, same caps and no retry. New master/handle pending. Root owns finished remote checkout reclamation; policy-blocked scratch remains original CM-owned.
+
+ACVC P76 preparation `0d812969dffe1aad04751f7daca2a5d4c9f0c902` accepted; fixed TASK `58b5d723e5687f94a81a4f1b787641806d8b1421` actually dispatched once to configured Transport. App delivery accepted, but preflight confirmed zero browser action/Send: internal HANDOFF lacks the reset declaration/evidence required for its retired provider binding. Original DM actually resumed to repair this same unsent routing metadata, preserving fixed science; no second request or experimental allocation. UCOPE P77, VSPC1 P76 intake, VSP03 question preparation and FOLR focused source readiness continue.
+
 ## Current observation and return state — 2026-09-08
 
 Research is **RESUMED** under OWNER_DIRECT “读取handoff docs然后继续科研任务” on 2026-09-09. The [P74 restart plan](handoffs/2026-09-09-research-resume-p74.md) supplies new bounded work for MGTAP, VSPC1, FSD, UCOPE and VSP03. The [completed soft-stop handoff](handoffs/2026-09-09-soft-stop-restart.md) records terminal predecessor handles, retained evidence and restrictions; none is replayed. Actual native dispatches and newly accepted handles are recorded separately.
@@ -31,6 +51,18 @@ VSPC1 B09/8402 is terminal/intaken DOWN at145db14b7,483.27s, no live process or 
 VSP03 P74 conforming intake b033da853 accepted; P76 one-G/seed7/120s complete invocation now concretely allocated to original DM/CM through card, source acceptance, exact remote execution and intake. No handle yet. MGTAP author's one accepted app dispatch for request2026-09-09-mgtap-post-b01-convergence-01 is reconciled/adopted by Root; Transport instructed to preserve the one pending request, no duplicate Send. Provider state remains unconfirmed.
 
 MGTAP provider acceptance is now confirmed: exactly one Send, fixed TASK6931057f2 visible in original conversation6a9b6b01-a918-83e8-8b06-ca9dd8184dab, Pro thinking. Transport observes; no rebind or duplicate Send. Full response remains pending.
+
+FSD P74 complete response/intake16bf3509e integrated main477331c62: PRO_FINAL A, narrow unchanged extension ended, no successor. Original blocker remains preserved but is superseded for delivery/decision availability. ACVC original DM actually resumed focused native-host re-entry mapping/no-ready task as replacement, zero new science or Send. VSP03 P76 prospective card3eda7ac6d and original CM work are active, no handle yet.
+
+UCOPE P74 now ARCHIVED with full responsec2501bcc6/Issue11comment5599356790; original DM actually resumed conformity/intake, no new experiment allocated. VSP03 P76 sole handlevsp03-b05-p76-20260909 is terminal/collected atf988ec921, completewall4.191728s, original DM intake active. CM observation ended; no retry or successor. Detailed source/receipt limits remain in the current root log.
+
+VSPC1 P76 B10/8501 is now accepted/running: `vspc1_hold_value_b10_8501_2c2c7d9d3481`, PID3038411, exact source2c2c7d9d34814c9834a741ce25b2f36076347315. Fresh canonical admission passed; same CM sole observer/collector, then original DM intake. No retry/adoption or extra submission. Technical source/intake acceptance details remain with that parent chain.
+
+MGTAP post-B01 request nowARCHIVED: full response251bffbc4/Issue5comment5599484438, exactly one Send. Original DM actually resumed full scientific/conformity intake of the proposed narrow actor-family PARK; no new invocation or Portfolio lifecycle change. Transport observation for this completed request has ended.
+
+VSP03 P76 full intake49e14080c integrated maina7a7267b8; exact detached execution checkout retired after clean/byte/evidence checks, output retained. Same DM advances zero-exposure next direction question, no seed8 allocation. VSPC1 P76 is terminal/technically collected,475.85s with fixed CHANGE_DOWN C; original DM scientific intake continues. Earlier running-handle descriptions are superseded.
+
+MGTAP full intakecec19bac9 integrated eea198bb7: current native actor family PARK, no successor, broader ACTIVE lifecycle unchanged. UCOPE full intake89c098bf1 integrated; new P77 T/F/G/H instance allocated to original DM/CM, no handle yet. Original FOLR DM actually resumed bounded source/readiness mapping as replacement. VSP03/ACVC question work and VSPC1 terminal intake continue.
 
 ## Historical soft-stop closeout updates — 2026-09-09
 

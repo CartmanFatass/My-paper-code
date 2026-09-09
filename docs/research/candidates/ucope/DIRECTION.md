@@ -26,6 +26,15 @@ remains dated provenance under the controlling evidence specification section 11
 - Historical selected B discriminator:
   `UCOPE-B-EXPLORE-FT-XF-BC-INVERTIBLE-CONDITIONING-DISCRIMINATOR-R01`
 - Latest direction-tier decision:
+  **2026-09-09 PRO_FINAL / CONTINUE** inside the existing own-expiry renewal
+  family. Select the next bounded B question comparing learned renewal T,
+  frozen-initial duration-head renewal F, ordinary feedback G and hover H;
+  T−G remains primary and T−F secondary. This is a future one-instance design,
+  with no new card, master, implementation or invocation allocation in P74.
+  See the [post-renewal-B03 Convergence intake](UCOPE_POST_RENEWAL_B03_CONVERGENCE_INTAKE_20260909.md).
+  Recasts remain **1**, with the prior historical-coverage limitation. No
+  second-recast, C promotion or Portfolio disposition follows.
+- Previous event-boundary direction-tier decision:
   **2026-09-08 PRO_FINAL / RECAST** from opening-only commitment to renewable
   commitment at each owning UAV's expiry. Select exactly one B/EXPLORE matched
   pair, master7301, against ordinary same-information stepwise recurrent PPO;
@@ -120,7 +129,90 @@ without a distinct count-state architecture because RAW contains the sufficient
 count. The direct-service alternative remains separated by the frozen
 `Gamma=I+D` decomposition and analytic `D≈-0.02` boundary.
 
-## Current scientific position — 2026-09-09 renewal B01/B02 UP and B03 DOWN
+## Current scientific position — 2026-09-09 frozen-head B01 adverse package result
+
+The accepted own-expiry renewal family now has one actual T/F/G/H comparison,
+master7601, with **valid DOWN** against both native comparators. Learned T−G is
+**−0.04379734649032291** (conditional evaluation SE0.01000711676968817),
+and T−F is **−0.06808369803930205** (SE0.00976191558652773). T also falls
+below hover, T−H−0.02623673364744934; G−H+0.017560612842873573 and
+F−H+0.0418469643918527. Native means are T0.12970535221200308,
+F0.1977890502513051, G0.17350269870232599 and H0.15594208585945243.
+All128 returns and adverse episodes remain in the
+[durable result](UCOPE_UAV_RENEWAL_FROZEN_HEAD_B01_P77_RESULT_SUMMARY_20260909.json).
+
+F's entire2242-parameter initial duration head stayed fixed with a zero final
+layer, retaining uniform one/four probabilities for finite inputs. Its velocity
+actor and critic trained under that law from the start. This control was a real
+learner, not a T checkpoint frozen only at evaluation. T's head moved without
+earning a favorable comparison. The effect remains a package observation:
+freezing changes capacity, gradient/clipping exposure, trajectories and partner
+co-adaptation. Neither head movement nor similar marginal d4 fractions isolate
+conditional timing value. Primitive observations remain free and private history,
+own-expiry ownership, action suppression and native reward semantics are unchanged.
+
+The strongest retained support for continued interest in persistence is the two
+earlier learned-renewal UPs and this observed fixed-law F−H gain. The strongest
+contradiction to the current learned package is P77's loss to G, F and H,
+alongside P72's earlier T−G reversal. Earlier UP/UP/DOWN and new DOWN remain
+separate outcomes. One matched instance with three fitted arms does not yield
+three effect replicates, stable harm/superiority, tuned headroom or a causal
+explanation. Same-information tuned headroom remains absent; recasts remain1.
+
+The selected object-tier response is to end P77 and remove unchanged learned-T
+extension from the default next choice. The next recommended discriminator is
+**one separately allocated fresh F/G/H comparison**: whether the fixed stochastic
+persistence package earns native return over legal feedback on a new fit. This
+drops an arm inside the accepted own-expiry renewal family; it is not a family
+closure, new recast, rewritten P77 primary or Portfolio disposition. Known work
+at the retained512/32 budget would be286720 steps/2048Adam/96 final episodes.
+No new card, master, source change, run or Pro Send is allocated by this intake.
+
+P77 completed425984 native steps/3072Adam/128 final episodes in501.69s outer
+wall; F's complete arm wall is now observed at170.78452501102583s. One accepted
+submission, no cap breach; aggregate CPU remains unmeasured. See the
+[card](UCOPE_UAV_RENEWAL_FROZEN_HEAD_B01_SCIENCE_CARD_20260909.md),
+[E0 evidence](UCOPE_UAV_RENEWAL_FROZEN_HEAD_B01_P77_RESULT_EVIDENCE_20260909.md)
+and [scientific intake §§7–10](UCOPE_UAV_RENEWAL_FROZEN_HEAD_B01_P77_INTAKE_20260909.md#7-dm-scientific-intake-against-the-card).
+
+## Previous next question — 2026-09-09 post-renewal-B03 CONTINUE
+
+The original Convergence node selects one bounded learned-versus-frozen-duration
+comparison within the accepted renewal family. F trains its velocity actor and
+critic from the start while all 2242 initialized duration-head parameters stay
+frozen. Its final zero layer keeps the one/four law uniform at each own expiry,
+independent of private history and command. The comparison preserves the native
+host, free primitive observations, recurrence, own-expiry action/credit boundary
+and ordinary feedback's complete legal action set. It adds no sensor, fee,
+interruption or roster change. The existing recast count remains one.
+
+The next discriminator is T−G as native primary and T−F as secondary, with all
+hover contrasts and every fitted outcome retained. Two prior UPs and positive
+sampled T−H support asking it; P72's loss to feedback is the strongest contrary
+observation. Ending the renewal sequence is the close runner-up. A fourth
+unchanged pair is not selected because it does not compare learned timing with
+simple persistence, and earlier favorable means cannot rescue the adverse fit.
+
+Absolute MEI 0.01 remains the native investment scale. A favorable primary would
+be preliminary package evidence; a within-band point would not demonstrate a
+gain; an adverse primary could not be rescued by T−F or hover. The secondary
+may distinguish package performance against F, but freezing also changes
+capacity, gradient/clipping exposure and partner co-adaptation. No isolated
+timing/information cause, stable superiority/harm/equivalence or tuned headroom
+is established. The three prior endpoints and their conditional noise remain
+descriptive at their original meanings below.
+
+The selected future envelope is one matched instance, three real actor-critic
+learners plus hover, 425984 native steps, 3072 Adam calls and 128 final episodes;
+1800 s per complete arm and 3600 s for the whole study. F's runtime remains
+unmeasured; operation-count ratios are not wall-time predictions. Every future
+outcome ends its named allocation at intake. P74 selects this scientific design
+only: a new concrete Root command must precede its card/binding, implementation
+or invocation. No old allowance is replenished and no stronger prerequisite is
+introduced. See [full immutable response](pro_packets/20260909_post_renewal_b03_convergence/archive/RESPONSE.md)
+and [scientific intake](UCOPE_POST_RENEWAL_B03_CONVERGENCE_INTAKE_20260909.md).
+
+## Previous scientific position — 2026-09-09 renewal B01/B02 UP and B03 DOWN
 
 Convergence selects one real package comparison of action-conditioned duration
 at every owner's own expiry, rather than only at reset. Source inspection shows

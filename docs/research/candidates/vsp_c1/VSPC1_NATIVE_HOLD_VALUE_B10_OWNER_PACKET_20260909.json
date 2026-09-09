@@ -1,0 +1,38 @@
+{
+  "question": "按P76新预算，用8501同一组训练轨迹比较512和768回合时门控网络相对普通MLP的原生回报变化，是否保留这张卡？",
+  "changes_if_approved": [
+    {
+      "target": "VSPC1 B10 card",
+      "from": "P74已完成后的下一步建议",
+      "to": "一组新配对连续训练768回合，固定512/768评估及公共H参照，主读数为配对差值的变化"
+    }
+  ],
+  "if_refused": "在下一个干净边界应用修订或拒绝；保留旧512和768的所有正负结果，不补跑，不把操作决定当科学负证据。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B10_SCIENCE_CARD_20260909.md#1-question-and-decision-value",
+      "quote": "The primary is their identity-paired\nchange, with both endpoint advantages and all H comparisons retained.",
+      "why": "同一轨迹的两个固定时间点直接回答局部变化，不再依靠不同主键间的预算对比。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B10_SCIENCE_CARD_20260909.md#1-question-and-decision-value",
+      "quote": "The two\n768 differences −.0338649204/−.0135349558 are negative, with both learners\nbelow H for8401 but above H for8402.",
+      "why": "此前两组768回合中门控均落后普通MLP，而且一组两臂低于H；新增测量不能许诺优势。"
+    }
+  ],
+  "uncertainty": [
+    "只有一个独立训练配对，两个端点和32个评估回合不增加训练样本数。",
+    "配对变化仍包含整个学习包、伙伴共同适应及有限评估噪声，不识别预算的独立因果效果。",
+    "调优同信息基线的余量记录缺失，H不是上界。"
+  ],
+  "cost": {
+    "compute": "最多一次被接受的提交；434176团队步、3072次Adam、160次评估；完整每臂1800秒、整组3600秒含中点评估。前次505秒按步数缩放约524.8秒，仅作计划。独立边界审查及聚焦检查不超过300秒；无模型夹具或原生试跑。",
+    "owner_time": "异步阅读；没有等待回复的步骤。",
+    "reversibility": "costly",
+    "waits_on_this": "nothing"
+  },
+  "verdict_text": "Options: (a) this fresh same-trajectory512/768 pair; (b) another final-only768\npair; (c) exact diagnosis or stronger-class work. Recommend/select(a).",
+  "source": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B10_SCIENCE_CARD_20260909.md"
+}
