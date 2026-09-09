@@ -186,3 +186,196 @@ At the 2026-09-09T14:50:12-07:00 boundary, main and direction `item.py reviews
 No owner reply is fabricated or marked answered. The next required owner of
 work is Root for integration, then this same CM for exact detached launch and
 direct Monitor handover, followed by terminal collection and DM scientific intake.
+
+## 6. Scientific intake of the completed 8601 result
+
+**VALID COMPLETE / UP**, B/EXPLORE, one matched training instance. Root resumed
+this intake after the independent Monitor reported exit0 at22:23:14Z and the
+original CM published complete collection/technical acceptance at
+**fbd3b7973c55999caff23d4b3cf608b3f6b94dcb** and released the shared index.
+The actual source is **8a2e20630c6d68f7faed1c54a39ffc792b922fc6**; frozen card
+**66ddec1278e0e170644ee14b155fbd0292b04e57**, prelaunch binding
+**5535b65657e6ca2bf1c135dc2f8641493505f5ac**, accepted launch/Monitor dispatch
+**dfad434f7f76bb21ea9b206f69bf6b65ec822166**. There is one scientific
+invocation and no new learner, evaluation, model replay or test run in DM intake.
+
+**What DM checked:** the [CM execution result §§1–4](UCOPE_UAV_SHORT_FIXED_RENEWAL_CONTINUOUS_B01_8601_EXECUTION_EVIDENCE_20260909.md)
+against card §§2–6, the collected summary, episodes and rollout records, actual
+admission/terminal receipts, CM's six scientific/seven supervisor byte matches
+and protected-source/wrapper readback. Recorded-byte arithmetic checks448
+evaluation rows within4544 episode rows and2048 rollout rows; all reset domains,
+checkpoint/episode identities, J=reward_sum/256, nine paired vectors, means and
+sign counts match. All three fixed panels and the single shared H panel exist;
+both complete fits/final CPU FP32 checkpoints retain raw None. Accepted source
+review/tests from§5 are reused, not repeated. The [E0 evidence §§1–5](UCOPE_UAV_SHORT_FIXED_RENEWAL_CONTINUOUS_B01_8601_RESULT_EVIDENCE_20260909.md)
+and [durable numerical summary](UCOPE_UAV_SHORT_FIXED_RENEWAL_CONTINUOUS_B01_8601_RESULT_SUMMARY_20260909.json)
+retain every curve, contrast, receipt and calculation.
+
+**Rule applied verbatim, card§5:** “UP: Delta_2048 > +0.01” gives
+“Preliminary favorable short-renewal package evidence after the allocated
+training budget on this one fitted pair.” Completeness reads: “Final F/G
+completeness governs the primary; full allocation completion also requires
+both full training histories, all three scheduled panels and H.” All are
+satisfied. Final **F−G=+0.020735036726797745**, conditional SE
+**0.00894880856314393**, exceeds+0.01 by **0.010735036726797745**;
+37/27/0 of64 paired worlds have positive/negative/zero differences. The frozen
+unrounded point rule is applied to2048 only, without selecting a checkpoint
+or substituting an uncertainty threshold.
+
+## 7. Full curve, uncertainty and bounded interpretation
+
+| Training episodes per arm | F−G | F−H | G−H | F−G point reading |
+| ---: | ---: | ---: | ---: | --- |
+| 512 | +0.018416054834028712 | +0.029977950794226403 | +0.011561895960197691 | UP |
+| 1024 | −0.0022538618641926057 | +0.044591482581360295 | +0.046845344445552904 | WITHIN |
+| 2048 | +0.020735036726797745 | +0.06986516119815461 | +0.049130124471356874 | UP — primary |
+
+All nine conditional SEs/sign counts and the F/G/H means are in E0§3 and the
+[fixed-checkpoint figure](UCOPE_UAV_SHORT_FIXED_RENEWAL_CONTINUOUS_B01_8601_CURVE_20260909.png).
+Final F/G/H means are0.20788322088908806/0.18714818416229032/
+0.13801805969093345. G's observed mean grows **0.03756822851115918** from512
+to2048, mostly by1024; F grows **0.03988721040392823** and regains its gap by
+2048. Final F−G is0.0023189818927690335 greater than the512 gap. Thus the final
+gain survives the larger budget on this history even as G improves; the
+intermediate loss prevents a uniform-advantage claim. All six hover point
+contrasts are positive, separately from F−G. No native hover loss occurs in
+this instance; earlier P84/P85/8501 hover losses remain reportable and unchanged.
+
+**Observation versus inference.** The independent learning unit is one matched
+F/G instance.64 common evaluation worlds describe conditional performance of
+these policies; three checkpoints share initialization, optimizer and training
+history. Checkpoint-private action draws also limit causal readings of curve
+changes. The approved run-summary tool receives only the two final fitted means,
+paired by8601; both arms have n1/sample SD null. Neither H nor checkpoint/episode
+rows are independent training replicates. No training-population interval or
+stable superiority follows. The512 G−H SE differs from a local recomputation by
+8.673617379884035e−19; the native published value is retained without an extra
+check or changed interpretation.
+
+**Strongest support** is the complete prospective final above-MEI F−G together
+with both learned policies above H, after equal native training/Adam exposure.
+**Strongest contradiction/limit** is the1024 WITHIN point, only37/64 favorable
+final worlds, one learning history and varied earlier outcomes. More sampled
+worlds on the same fits would not supply the missing independent history.
+**Surviving alternative:** holding actions changes trajectories, exploration,
+masked credit and partner co-adaptation along with temporal commitment;
+finite optimization or regularization can explain this package result without
+pure duration causality or paid-information value. Private observations → each
+UAV's recurrent history → own-expiry velocity and held motion → service and
+later information → actor/critic exposure and co-adapting partners → native
+return remains the measured path. Fixed membership introduces no lifetime or
+identity comparison. G's hover gain does not certify tuned feedback competence;
+**same-information headroom remains absent** and H is not an upper reference.
+
+**Grounding reused:** card§7's verified local UTE retrieval (P82 intake§8) and
+FOUNDATIONS §§5–6/topic notes03–04 support valid fixed options and learning-unit
+interpretation. No new source claim or mechanistic explanation is asserted.
+Their consequence here is to retain the complete curve and treat final training
+history, rather than evaluation rows, as the unit for a possible follow-up.
+This result supplies preliminary package value on one fit, not causal
+localization, general sample efficiency, stable superiority or deployment value.
+
+## 8. Counts, complete cost and prediction scoring
+
+The machine record has **2 fits ×2048 episodes ×256 steps =1048576 training
+steps**, **2048 two-episode rollouts ×4 epochs =8192 Adam calls**, plus
+**(2×3×64+64)×256 =114688 evaluation steps**: **1163264 native steps**,4096
+training episodes,448 evaluations,4544 explicit/two constructor resets. Both
+fits complete4096 Adam calls; no partial, diagnostic or additional run exists.
+Every evaluation group-displacement observation is zero. F's whole2242-parameter
+head remains frozen while common actors/critics move; these facts establish
+exposure/conformance, not the effect's cause. F's1750018 training/164036 evaluation
+renewals imply **10828180 head rows/23908621440 dense MACs** under the frozen law,
+inside the prospective work range. F-only head work means equal trainable
+parameter/native-step counts are not equal compute.
+
+Actual-node preflight **2026-09-09T22:01:44.584920Z** passes physical/effective
+memory15624527872 bytes against4294967296. Measured whole **1289.50s**, peak RSS
+**562340KiB**, internal F712.5588719120133s and G/H/publication576.5732727329596s.
+The complete outer chain itself is below1800s, so even unpartitioned startup/
+exit overhead cannot overturn either complete-arm1800s cap;3600s whole also
+passes. Serial study critical path and summed invocation wall are1289.50s;
+**aggregate CPU resources_unmeasured**. The earlier1208.1183317761854s projection
+was not a guarantee.249 new non-test lines and10.0388972s accepted synthetic
+support meet the scope/support budgets; no engineering§5 breach or new§4
+machinery is present. Recorded-byte analysis and plotting add no scientific
+exposure. Engineering conformance, direct timing and native benefit are separate.
+
+| Exact prospective event | Probability | Observed value | Event occurred | Brier loss |
+| --- | ---: | ---: | --- | ---: |
+| Delta_2048>0.01 | .55 | +0.020735036726797745 | yes | .2025 |
+| F_2048−H>0 | .40 | +0.06986516119815461 | yes | .3600 |
+| mean(G_2048)−mean(G_512)>0 | .65 | +0.03756822851115918 | yes | .1225 |
+
+Mean Brier **0.2283333333333333**. All events occurred; F−H had probability
+below.5 and is a favorable surprise, not a correctly predicted majority event.
+Three scored events from this result do not establish forecast calibration.
+Owner prediction **not taken (unattended)**; no older forecast is rescored.
+
+## 9. Decisions this completed intake produces
+
+**Result classification, object-tier technical.** Options **(a)** accept VALID
+COMPLETE/UP and all curve/hover facts with the one-instance ceiling; **(b)**
+retain only independently intact facts if a dependent measurement is incomplete;
+**(c)** quarantine for a concrete integrity defect. Recommend/select **(a)**:
+the fixed primary, full fits/panels and receipts reconcile with the card, with
+no unresolved defect affecting their meaning. **Owner-delegated decision
+(unattended, 2026-09-03 instruction): (a).** Missing aggregate CPU telemetry
+limits that resource claim and does not invalidate the native result.
+
+**Next discriminator, object-tier selection/recommendation.** Options **(a)**
+end this allocation and recommend one separately allocated independent
+same-recipe continuous2048 F/G/H pair; **(b)** end the allocation with no repeat
+recommended; **(c)** change the learner/comparator or add learned duration now.
+Recommend/select **(a)**. The adopted synthesis§5.1/card§5 condition of final
+useful F−G and beneficial F−H is met. The next independent history can change
+whether the final useful gap/hover benefit warrants further package investment
+or remains a history-contingent result; it resolves a different uncertainty from
+more evaluation of this pair. This is a concrete decision value, not a universal
+replication prerequisite or an all-positive-seeds requirement. Mixed or opposite
+future outcomes would remain evidence. The1024 WITHIN point makes preservation
+of the full curve essential; changing treatment now would make that recurrence
+question harder to answer. Learned duration is not selected by this intake.
+**Owner-delegated decision (unattended, 2026-09-03 instruction): (a).**
+
+The recommendation's dominant work is the same two fits ×2048 episodes and
+2×3×64+64 evaluations:1163264 native steps/8192 Adam, with trajectory-dependent
+F head work. The observed1289.50s whole is a useful current cost reference,
+not a guarantee or additional allowance. **No next card, master, invocation,
+retry, extra evaluation or budget is allocated here.** Current allowance ends;
+Root retains later allocation, capacity and integration. No C consumption,
+new family, recast, direction disposition or Portfolio action follows.
+Recasts remain1. No material dissent or close-call is identified; owner flags
+are **none**. These ordinary object decisions belong in this intake/audit,
+without another P1/P2 owner item or Pro request.
+
+## 10. Owner boundary, durable evidence and remaining work
+
+At the final-boundary review check, `item.py reviews --json` returns empty in
+both main and this direction checkout; main revision was
+**a3713f0a1ce46af6e6fcfffd702556e919539aae**. Every existing UCOPE audit owner
+column is empty in both checkouts. There is no owner instruction or prediction
+reply to apply or mark answered. The [Chinese owner brief](../../portfolio/owner/briefs/ucope/2026-09-09_UCOPE_UAV_SHORT_FIXED_RENEWAL_CONTINUOUS_B01_8601.md)
+records the six required questions in354 characters. The final document check
+confirms unchanged card/prior-intake bytes, matching native counts/curves/primary
+fields and16 existing local evidence links. Current accepted
+mechanism-level science is added to [DIRECTION.md](DIRECTION.md#current-scientific-position--2026-09-09-a-final-renewal-gain-survives-the-longer-budget-on8601);
+all frozen prospective and historical records remain unchanged.
+
+Raw artifacts and collection/readback receipts remain in
+`temp/directions/ucope/exp/ucope-uav-short-fixed-renewal-continuous-b01-8601-20260909/`;
+DM arithmetic/run summary/plot source are in
+`temp/directions/ucope/analysis/continuous-8601-intake-20260909/`.
+The durable summary keeps all448 returns/nine contrast vectors and byte digests;
+the E0 document links the full curve and original CM evidence. Root owns acceptance
+and integration of CM **fbd3b7973** and this completed scientific intake. Root's
+terminal assignment explicitly retains the remote exact-source cwd, wrapper and
+source.pack until later closeout; no cleanup is attempted in this intake.
+
+Automatic approval review previously rejected removal of the two completed
+CM-owned test scratch directories before effect with `exec_command CreateProcess:
+rejected: blocked by policy`. Original CM retains that cleanup gap and evidence;
+DM neither retries nor bypasses it. This is the remaining technical issue,
+separate from the valid native result. Root owns the later closeout trigger and
+any future allocation; no active scientific process or automatic successor
+remains from this allowance.

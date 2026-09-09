@@ -48,8 +48,11 @@ remains dated provenance under the controlling evidence specification section 11
   tests whether the earlier short-renewal difference survives more learning
   opportunity for G; it adds no normalization or mechanism attribution.
   See the [continuous B01 card](UCOPE_UAV_SHORT_FIXED_RENEWAL_CONTINUOUS_B01_SCIENCE_CARD_20260909.md).
-  Its fresh8601 result is unobserved at card freeze; all earlier hover losses,
-  sampled gains and the no-unchanged-normalization recommendation remain.
+  Fresh8601 is now VALID COMPLETE/UP: final F−G+0.020735036726797745,
+  with positive F−H/G−H, and an intervening1024 WITHIN point. The object-tier
+  recommendation is a separately allocated independent repeat of this budget
+  curve; no successor is allocated here. All earlier hover losses, sampled
+  gains and the no-unchanged-normalization recommendation remain.
 - Previous within-family direction-tier decision:
   **2026-09-09 PRO_FINAL / CONTINUE** inside the existing own-expiry renewal
   family. Select the next bounded B question comparing learned renewal T,
@@ -76,7 +79,18 @@ remains dated provenance under the controlling evidence specification section 11
   The **2026-09-05 PRO_FINAL / PARK** of the same-draw retained-policy root-residual
   localization family and its numerical-locus dependency remains unchanged.
   See the [Convergence intake](UCOPE_UAV_INTERFACE_CONVERGENCE_INTAKE_20260907.md).
-- Latest bounded B observation: **2026-09-09 mean-velocity renewal B01 P85,
+- Latest bounded B observation: **2026-09-09 continuous short fixed renewal
+  B01/8601, VALID COMPLETE / UP**. Final2048 F−G+0.020735036726797745
+  (conditional SE0.00894880856314393), F−H+0.06986516119815461 and
+  G−H+0.049130124471356874. The512/1024/2048 F−G points are
+  UP/WITHIN/UP; all six learned-policy hover contrasts are positive on this
+  common panel. One training pair does not establish a uniform or stable gap.
+  See the [8601 intake](UCOPE_UAV_SHORT_FIXED_RENEWAL_CONTINUOUS_B01_8601_INTAKE_20260909.md).
+- Previous bounded B observation: **2026-09-09 normalized feedback8501,
+  VALID COMPLETE / WITHIN**, normalized−raw−0.004783423897661355 with
+  both learned policies below H. No unchanged normalization follow-up was
+  recommended; the later budget curve does not revise this result.
+- Previous bounded B observation: **2026-09-09 mean-velocity renewal B01 P85,
   COMPLETE / WITHIN**, with all four learned-mode hover losses and both
   mean-minus-sampled losses. One new 8401 matched fit gives primary
   F_mean−G_mean **−0.008350131013904307**, conditional SE
@@ -202,7 +216,48 @@ without a distinct count-state architecture because RAW contains the sufficient
 count. The direct-service alternative remains separated by the frozen
 `Gamma=I+D` decomposition and analytic `D≈-0.02` boundary.
 
-## Current scientific position — 2026-09-09 normalized feedback shows no selected-scale point gain on8501
+## Current scientific position — 2026-09-09 a final renewal gain survives the longer budget on8601
+
+**Conclusion and bounded claim.** The owner-selected continuous2048 budget
+comparison is VALID COMPLETE/UP on one matched training instance. Raw fixed
+{1,2} F exceeds raw feedback G at the fixed final endpoint by
+**0.020735036726797745**, conditional SE0.00894880856314393, against MEI0.01.
+Final F−H is+0.06986516119815461 and G−H+0.049130124471356874. This is a
+favorable native package observation at the longer budget; no learned duration,
+mean execution or normalization was added.
+
+**Full curve and strongest support.** F/G means at512,1024,2048 are
+0.167996/0.149580,0.182610/0.184863,0.207883/0.187148, with common
+H0.138018. F−G is+0.0184161,−0.00225386,+0.0207350; all F−H/G−H point
+contrasts are positive. G's observed mean rises0.0375682 from512 to2048 and
+F's rises0.0398872. Thus this final F−G gain accompanies a G policy that also
+beats hover on the panel, unlike the earlier P84 hover-deficit pattern.
+
+**Strongest contradiction and surviving alternative.** G slightly exceeds F
+at1024 (WITHIN), and only37/64 final worlds favor F over G. All checkpoints
+share one learning history, so they cannot establish uniform advantage,
+stable training-population superiority or a generic sample-efficiency ranking.
+Fixed holding still changes trajectories, exploration, masked credit and
+partner co-adaptation together; finite optimization/regularization remains an
+alternative to pure duration causality. Current world levels are not pooled
+with earlier panels. P84/P85/8501 adverse hover facts and all previous primary
+readings remain unchanged. Tuned same-information headroom remains absent;
+hover is not an upper or proof of generic-feedback competence.
+
+**Next discriminator.** Recommend one separately allocated independent
+same-recipe continuous2048 F/G/H pair to assess recurrence of the final gain
+and hover benefit while retaining every checkpoint/outcome. This applies the
+owner's conditional second-pair option; it creates no new card/master/run,
+family disposition, C promotion, recast or Portfolio priority. The current
+one-invocation allocation ends. Its full1163264 native steps/8192 Adam/448
+evaluations completed in1289.50s; both arm and whole caps passed, with CPU
+accounting unmeasured. Engineering completion does not enlarge the claim.
+
+See [DM scientific intake §§6–10](UCOPE_UAV_SHORT_FIXED_RENEWAL_CONTINUOUS_B01_8601_INTAKE_20260909.md#6-scientific-intake-of-the-completed-8601-result),
+[E0 evidence and full curve](UCOPE_UAV_SHORT_FIXED_RENEWAL_CONTINUOUS_B01_8601_RESULT_EVIDENCE_20260909.md),
+and [durable numerical summary](UCOPE_UAV_SHORT_FIXED_RENEWAL_CONTINUOUS_B01_8601_RESULT_SUMMARY_20260909.json).
+
+## Previous scientific position — 2026-09-09 normalized feedback shows no selected-scale point gain on8501
 
 The selected normalized-G/raw-G/H comparison is valid complete B/EXPLORE
 **WITHIN** on one fresh matched8501 learning instance. Primary normalized−raw
