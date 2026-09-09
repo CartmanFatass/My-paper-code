@@ -148,3 +148,152 @@ F entire2242-parameter duration head and both layers have zero displacement; ini
 The [read-only verifier](../../../../temp/directions/ucope/exp/ucope-uav-short-fixed-renewal-b02-8201-p83-20260909/verify_collection.py) reports **PASS**: [output](../../../../temp/directions/ucope/exp/ucope-uav-short-fixed-renewal-b02-8201-p83-20260909/verification-output.txt), [complete collection record](../../../../temp/directions/ucope/exp/ucope-uav-short-fixed-renewal-b02-8201-p83-20260909/collection-readback.json). All seven raw scientific/admission outputs match remote SHA256; all96 J/native reward identities, stream/config/card/master/reset associations, counts, full paired vectors/means/SEs, checkpoints/fixed head, literal short-support accounting and diagnostic expiry agree. Supervisor publication/admission and executed wrapper digest match. Collection makes no model/learner/native/evaluation/replay/test-suite call; exit alone was not acceptance.
 
 Local root `temp/directions/ucope/exp/ucope-uav-short-fixed-renewal-b02-8201-p83-20260909` retains seven raw outputs, seven supervisor files, executed wrapper, terminal/source/hash readback, check/preparation receipts and collection verification. Prior evidence roots are untouched. **Technical acceptance PASS; no remaining technical gap.** DM owns all-outcome scientific intake/archive; Root owns integration and later P83 remote check/scientific worktree/wrapper reclamation after preservation. Shared local authoring checkout remains in use; index released on return. P83 is exhausted; no automatic repeat or new allocation follows.
+
+## 7. DM scientific intake against the card
+
+**Accept valid complete UP at object tier.** CM technical acceptance
+`ad642f0adf2768976e9167c4b3e38f2cbf3db24f` supplies a trustworthy complete
+measurement at source `a2dbdc2452ecf17ef4578962abb20c0cea617d43` and fixed
+[card §5](UCOPE_UAV_SHORT_FIXED_RENEWAL_B02_SCIENCE_CARD_20260909.md#5-prospective-primary-reading-and-predictions).
+Unrounded primary **+0.04205514630433558** exceeds +0.01 by
+**0.03205514630433558**. The applied UP rule verbatim is:
+
+> Preliminary favorable short fixed-renewal package evidence on this fresh fit; it does not establish stable advantage across training histories.
+
+The [E0 record](UCOPE_UAV_SHORT_FIXED_RENEWAL_B02_P83_RESULT_EVIDENCE_20260909.md)
+and [durable summary](UCOPE_UAV_SHORT_FIXED_RENEWAL_B02_P83_RESULT_SUMMARY_20260909.json)
+preserve every final return/contrast and all counts/receipts. F−G conditional
+SE **0.008895069330742151**, signs **24/8/0**. Separate F−H
+**+0.01688043904880538**, SE **0.011210216975722664**, signs **18/14/0**;
+G−H **−0.025174707255530195**, SE **0.011893075742872027**, signs **14/18/0**.
+F/G/H means **0.16472782101275252 / 0.12267267470841695 /
+0.14784738196394714**. G's native hover loss stays explicit.
+
+DM checked the result document against card §§2–7, source diff, new-focused
+raw receipt, reused P82 review, config/master/private streams, admission,
+supervisor/terminal and CM collection evidence. One [recorded-byte arithmetic](../../../../temp/directions/ucope/exp/ucope-uav-short-fixed-renewal-b02-8201-p83-20260909/dm_analysis/analysis.json)
+pass finds all 1120 episode identities complete/unique, master/reset/horizon
+correct, J=reward_sum/256 exactly, and 96 J values plus three vectors/means/SEs
+identical to publication. F/G completeness governs F−G; no selected_contrast
+field is added to this accepted fixed path. P80 remains F−H-primary.
+
+The approved [run-summary output](../../../../temp/directions/ucope/exp/ucope-uav-short-fixed-renewal-b02-8201-p83-20260909/dm_analysis/fitted_endpoint_summary.json)
+contains only new 8201 F/G endpoints, n=1. Its difference of means differs
+from the native mean of differences by floating-point roundoff; the latter
+remains primary. H is not a training replicate. No new cross-instance mean/SD,
+pooled primary or training-population interval is made.
+
+CM physical/credit/checkpoint checks are accepted without repeated tests,
+tensor/model/native calls or remote observation by DM. Full **286720 native
+steps/2048 Adam/512 rollouts/1024 training episodes/96 final episodes**,
+1120 explicit/2 constructor resets and 1600 diagnostic frames agree. F d2
+**232595**, d4 zero, suppression/censor identities and **2678452 head rows /
+5914022016 MACs** agree. All 2242 F-head parameters remain fixed while both
+actor/critic groups learn. No §4 addition or §5 budget breach. Complete wall
+**317.61 s**, RSS **554456 KiB**; nested times in §6, aggregate CPU
+resources_unmeasured. One accepted submission ended; no P83 invocation remains.
+
+## 8. Bounded interpretation, grounding and predictions
+
+**Strongest support:** F beats legal feedback above MEI on this fit and has
+its own positive hover point; P82 also has a positive F−H point. **Strongest
+contradiction to stable or competent-feedback advantage:** G loses to hover
+here and prior same-support P82 F−G is WITHIN. Eight new F−G and fourteen
+F−H episode differences are adverse. The G loss limits the stronger-null
+claim without invalidating this conforming B or erasing F's native gain.
+
+P82's F−G **+0.008551004914111454**, F−H **+0.02854870179583208**, G−H
+**+0.019997696881720626** retain original conditional SEs and WITHIN primary.
+P78/P79 {1,4} F−G gains, P79 hover losses/old n=2, P80 F−H-primary gain and
+feedback loss, P81 F−G loss and P77 learned-T losses remain individually
+visible. No retrospective pooling rescues an old point. The short-support
+observations do not isolate a causal shortening effect.
+
+Private free observation → owner's history/action at expiry → short held
+motion and later information/service → masked learner exposure and partner
+co-adaptation → native return remains the package path. Useful motion,
+feedback optimization variation, changed action opportunities and evaluation
+variation survive. Direct service versus information value and learned-
+duration value are unseparated; F's duration law is fixed. No stable
+superiority/harm, equivalence, tuned competence or deployment claim follows.
+
+Reuse [P82 intake §8](UCOPE_UAV_SHORT_FIXED_RENEWAL_B01_P82_INTAKE_20260909.md#8-bounded-interpretation-grounding-and-predictions)
+and its verified UTE `VS-0005` passages. They frame temporal-action benefits
+and risks, but supply neither this UAV result nor a cause of G's hover loss.
+This intake retains the same performance question/comparison; no new library
+coverage, novelty or paper-derived causal claim follows.
+
+Forecast F−G>0.01 (0.45) occurred, Brier **0.3025**; F−H>0.01 (0.60)
+occurred, Brier **0.16**; mean **0.23125**. No hard-label accuracy is
+retrofitted. Owner prediction **not taken (unattended)**. Both review views
+returned [] and every UCOPE audit owner column was empty at the boundary.
+Owner flags **none**; G's loss remains explicit throughout the result surfaces.
+
+## 9. Decisions this completed intake produces
+
+**(1) Reading, object tier.** Options: (a) accept valid UP with F−H gain and
+G−H loss; (b) claim stable or competent-comparator advantage; (c) discard
+the favorable result because G loses to hover. Recommend and execute **(a)**
+under the frozen class-correct rule. Stronger claims are unsupported; no
+baseline-tuning prerequisite is added to a completed B.
+Owner-delegated decision (unattended, 2026-09-03 instruction): **(a)**.
+
+**(2) Allocation stop and next discriminator, object tier.** Options:
+(a) end P83 and recommend one separately allocated fresh same-recipe F/G/H
+history; (b) change support or tune G now; (c) recommend no further same-recipe
+measurement now. Recommend **(a)**. F's hover gains on both short fits and
+one above-MEI F−G point support bounded performance exploration; P82 WITHIN
+and new G−H loss make the full contrast pattern in another learning history
+the immediate uncertainty. Changing the recipe asks a different question.
+A fresh fit can inform whether this pattern recurs, not identify a cause or
+prove stability. Every sign would remain, with no favorable-replication
+requirement or extra evaluation to seek a boundary.
+
+Execute the **P83 stop and this recommendation only**. No automatic repeat,
+next card/master/source/budget, support change, tuning, pilot, retry/resume,
+replacement, extra evaluation, second P83 instance, T restoration or Pro Send
+is authorized or performed here. Root owns any subsequent allocation.
+Owner-delegated decision (unattended, 2026-09-03 instruction): **(a)**.
+No family, recast, C or Portfolio disposition follows.
+
+Known suggested work: **2×512×256 training + 3×32×256 final = 286720 native
+steps; 2×256×4 = 2048 Adam**, 96 final episodes. F head work is
+**6×training renewals + 2×final renewals = 2007040–4014080 rows**, or
+4431544320–8863088640 MACs. No nested candidate/trajectory search.
+Current **317.61 s** complete wall and F/G **167.0972740459838 /
+133.13975488004507 s** are references, not guarantees of a future run.
+Future verification would be counted separately. This recommendation creates
+zero scientific exposure and no invocation allowance. Tuned headroom remains
+absent; recasts 1 and Portfolio state are unchanged.
+
+## 10. Owner boundary, publication and next responsibility
+
+Review reference **2026-09-09T07:23:40-07:00**, [raw boundary](../../../../temp/directions/ucope/exp/ucope-uav-short-fixed-renewal-b02-8201-p83-20260909/dm_analysis/owner_boundary.json):
+both checkout reviews returned [] and all UCOPE audit owner columns were empty.
+No item needs marking answered. Existing new-card item
+[20260909-ucope-008](../../portfolio/owner/inbox/2026-09-09/20260909-ucope-008.json)
+remains; ordinary result/next-discriminator records create no new owner item.
+Audit [row 29](../../portfolio/audit/2026-09-09.md#L29) accepts the result;
+[row 30](../../portfolio/audit/2026-09-09.md#L30) records the recommendation and
+P83 stop. The six-heading [Chinese brief](../../portfolio/owner/briefs/ucope/2026-09-09_UCOPE_UAV_SHORT_FIXED_RENEWAL_B02.md)
+retains both gains and G's native loss.
+
+DM publication checks cover frozen card §§1–7, unchanged CM §§1–6, all data
+copies/predictions and prior original primaries, links/JSON, audit and brief
+length. Analysis/publication scripts and outputs are retained under the
+collected root's `dm_analysis/` for Root's preservation. DM arithmetic creates
+no learner, simulator, evaluator, checkpoint or policy execution.
+
+Root owns integration of only unintegrated commits. After preserving the
+scientific/check/preparation/DM evidence, Root owns reclamation of
+`/home/wu/hmasd-worktrees/ucope-uav-short-fixed-renewal-b02-8201-p83-20260909`,
+`/home/wu/hmasd-worktrees/ucope-uav-short-fixed-p83-check-20260909` and
+`/home/wu/hmasd-inputs/ucope-uav-short-fixed-renewal-b02-8201-p83-20260909.sh`.
+Both handles are terminal. Shared local codex/ucope remains in use; no
+scientific evidence is deleted. This intake completes the allocation.
+
+Publication check **PASS**: frozen card/CM sections and previous scientific
+records preserved; all 96 J values, three contrasts, predictions and five
+prior primary contexts match; 48 linked targets exist; Chinese brief 396
+characters; audit rows 29–30 and zero future exposure agree. Receipt:
+`temp/directions/ucope/exp/ucope-uav-short-fixed-renewal-b02-8201-p83-20260909/dm_analysis/final-document-checks.json`.

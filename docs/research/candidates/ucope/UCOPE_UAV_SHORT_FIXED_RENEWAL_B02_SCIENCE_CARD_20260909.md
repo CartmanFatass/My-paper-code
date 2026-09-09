@@ -161,3 +161,26 @@ boundaries. Reuse the accepted scientific calculation and P82 semantic checks.
 assigns the original CM the full source/check/payload, exact committed remote
 invocation, sole observation and technical collection batch in the same
 codex/ucope checkout. No intermediate approval handshake.
+
+## 8. Observed completion — 2026-09-09 P83
+
+The frozen §§1–7 above remain unchanged. One accepted 8201 execution is valid
+complete **UP**: F−G **+0.04205514630433558**, conditional SE
+**0.008895069330742151**, 0.03205514630433558 above +0.01. F−H
+**+0.01688043904880538** is a separate gain; G−H **−0.025174707255530195**
+is a separate native loss. The favorable primary does not establish stable
+or competent-comparator advantage. P82 remains WITHIN with both hover gains.
+
+Full **286720 native steps/2048 Adam/96 final episodes** completed in
+**317.61 s**, without a cap/engineering-budget breach; aggregate CPU remains
+resources_unmeasured. Fixed whole-head and real actor/critic learning, actual
+short-support counts and all outcomes conform. Forecasts both occurred;
+Brier losses 0.3025/0.16, mean 0.23125. Owner prediction not taken.
+
+See [E0 evidence](UCOPE_UAV_SHORT_FIXED_RENEWAL_B02_P83_RESULT_EVIDENCE_20260909.md),
+[durable summary](UCOPE_UAV_SHORT_FIXED_RENEWAL_B02_P83_RESULT_SUMMARY_20260909.json)
+and [DM intake §§7–10](UCOPE_UAV_SHORT_FIXED_RENEWAL_B02_P83_INTAKE_20260909.md#7-dm-scientific-intake-against-the-card).
+P83 ends. The next discriminator recommendation is a separately allocated
+same-recipe F/G/H history, preserving the full feedback/hover pattern and
+every sign. No next card/master/source/budget, automatic repeat, support change
+or Pro Send is created. Root owns allocation/integration/reclamation.

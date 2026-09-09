@@ -51,7 +51,17 @@ remains dated provenance under the controlling evidence specification section 11
   The **2026-09-05 PRO_FINAL / PARK** of the same-draw retained-policy root-residual
   localization family and its numerical-locus dependency remains unchanged.
   See the [Convergence intake](UCOPE_UAV_INTERFACE_CONVERGENCE_INTAKE_20260907.md).
-- Latest bounded B observation: **2026-09-09 short fixed renewal B01 P82,
+- Latest bounded B observation: **2026-09-09 short fixed renewal B02 P83,
+  COMPLETE / UP**. New same-recipe 8201 gives prospective F−G
+  **+0.04205514630433558**, conditional SE **0.008895069330742151**.
+  F−H **+0.01688043904880538** is a separate gain; G−H
+  **−0.025174707255530195** is a separate native loss. The full duration
+  head remains fixed with real actor/critic learning. P82 remains WITHIN;
+  no stable or competent-comparator advantage, causal shortening effect,
+  new pooled primary or training-population interval follows.
+  See [P83 intake](UCOPE_UAV_SHORT_FIXED_RENEWAL_B02_P83_INTAKE_20260909.md)
+  and [E0 evidence](UCOPE_UAV_SHORT_FIXED_RENEWAL_B02_P83_RESULT_EVIDENCE_20260909.md).
+- Previous bounded B observation: **2026-09-09 short fixed renewal B01 P82,
   COMPLETE / WITHIN**. New 8101 uses fixed {1,2} support, half each, and gives
   prospective F−G **+0.008551004914111454**, conditional SE
   **0.008905535922158366**; F−H **+0.02854870179583208** and G−H
@@ -146,7 +156,55 @@ without a distinct count-state architecture because RAW contains the sufficient
 count. The direct-service alternative remains separated by the frozen
 `Gamma=I+D` decomposition and analytic `D≈-0.02` boundary.
 
-## Current scientific position — 2026-09-09 short fixed renewal B01 stays within the effect band
+## Current scientific position — 2026-09-09 short fixed renewal B02 gains with a feedback hover loss
+
+Fresh same-recipe 8201 is **valid UP** on prospective F−G:
+**+0.04205514630433558**, conditional SE **0.008895069330742151**,
+0.03205514630433558 above +0.01. F−H **+0.01688043904880538** and
+G−H **−0.025174707255530195** remain separate native gain and loss.
+The [durable result](UCOPE_UAV_SHORT_FIXED_RENEWAL_B02_P83_RESULT_SUMMARY_20260909.json)
+retains all 96 returns, three vectors, counts/receipts and every earlier point
+with its original primary and conditional SE. P82 remains WITHIN; no new
+cross-instance mean/SD, pooled primary or population interval is made.
+
+**Strongest support:** above-MEI F−G and positive F−H on this fit, with a
+positive F−H point also recorded in P82. **Strongest contradiction to stable
+or competent-feedback advantage:** G loses to hover here and P82 F−G is
+WITHIN; eight new F−G and fourteen F−H episode differences are adverse.
+The G loss limits stronger claims without invalidating B or erasing F's gain.
+Earlier {1,4} gains, hover losses and feedback reversals remain, as do P77
+learned-T losses. No causal shortening, learned-duration, equivalence or
+deployment conclusion follows.
+
+The entire F head stayed fixed while its actor and critic learned. Private
+free observation → owner's history/action at expiry → short held motion and
+later service/local information → masked optimizer exposure and partner
+responses → native return remains the package path. Useful learned motion,
+feedback optimization variation, altered action opportunities and evaluation
+variation survive. Direct service and information value remain unseparated.
+
+Recommend **one separately allocated fresh same-recipe F/G/H history** as
+the next bounded performance discriminator, retaining the full contrast
+pattern, especially G−H, and every sign. The two short fits give F−G WITHIN
+then UP and two positive F−H points; G's hover result reverses. Another
+history directly observes whether that pattern recurs. It does not prove
+stability or identify a cause, and no favorable-sign or baseline-tuning
+prerequisite is introduced. Reuse the verified UTE grounding in
+[intake §8](UCOPE_UAV_SHORT_FIXED_RENEWAL_B02_P83_INTAKE_20260909.md#8-bounded-interpretation-grounding-and-predictions);
+the source does not explain G's loss.
+
+Known suggested work remains **286720 steps / 2048 Adam / 96 final episodes**,
+F head **2007040–4014080 rows**. Actual P83 had 2678452 head rows and
+**317.61 s** complete wall, a reference rather than a future guarantee.
+Tuned headroom absent, recasts 1. P83 ends here; no next card/master/source/
+budget, automatic repeat, support change, Pro Send, family/recast/C or
+Portfolio disposition is created. Root owns any allocation and integration.
+
+See [card](UCOPE_UAV_SHORT_FIXED_RENEWAL_B02_SCIENCE_CARD_20260909.md),
+[E0 evidence](UCOPE_UAV_SHORT_FIXED_RENEWAL_B02_P83_RESULT_EVIDENCE_20260909.md)
+and [DM intake §§7–10](UCOPE_UAV_SHORT_FIXED_RENEWAL_B02_P83_INTAKE_20260909.md#7-dm-scientific-intake-against-the-card).
+
+## Previous scientific position — 2026-09-09 short fixed renewal B01 stays within the effect band
 
 Fresh matched instance 8101 is **valid WITHIN** on prospective F−G:
 **+0.008551004914111454**, conditional evaluation SE **0.008905535922158366**,
