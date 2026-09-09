@@ -77,11 +77,21 @@ cherry-pick into `main` (delegate the mechanical sequence to `hmasd-clerk`), the
 
 - **Object tier** (next rung, card wording, treatment or comparator inside an accepted
   mechanism, dropping an arm, budget deviation inside the cap, quarantine after reproduction):
-  the hub decides. Owner present: put the options with a recommendation to the owner in the
-  final message and proceed on the reply. Owner absent: select the recommended option, record
-  `Owner-delegated decision (unattended, 2026-09-03 instruction): (x)` in the intake, append the
-  ledger row (`docs/research/portfolio/audit/<date>.md`), and write the `decision` owner item
-  through `hmasd-clerk`. Reversible actions only.
+  the hub decides under AGENTS §§3–4 and the current owner instruction. Existing object-tier
+  delegation persists when the owner merely asks a question or requests status. List options
+  and the recommendation, select the recommended option under that delegation, record
+  `Owner-delegated decision (unattended, 2026-09-03 instruction): (x)` in the intake and append
+  the ledger row (`docs/research/portfolio/audit/<date>.md`). Ordinary authorized research may
+  consume the declared invocation budget within its bounds. If the owner explicitly takes over
+  the object, follow the provided choice; if the choice is missing, pause only dependent work.
+  Existing pause/stop instructions remain controlling.
+  For a `PRO_BLOCKED / LOCAL_PROVISIONAL` object choice under AGENTS §3, restrict the provisional
+  action to reversible work, queue the consultation for retry, put it first in the audit ledger,
+  and apply the archived Pro decision at the next clean boundary. This restriction does not
+  apply to ordinary owner-delegated object decisions.
+  Ordinary choices remain in intake/audit; create owner items through `hmasd-clerk` only for
+  the existing P1/P2 classes in the owner README. If `item.py add` returns `skipped`, cite the
+  intake directly rather than inventing an item id.
 - **Direction tier** (open or close an object family, park, recast, next object after a consumed
   C, promotion to C-BENCH): the decision belongs to the direction's Pro node. Once the Claude
   transport smoke has passed (`hmasd-pro-transport` skill), author the packet, dispatch it once,

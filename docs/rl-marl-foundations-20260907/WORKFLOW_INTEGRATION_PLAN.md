@@ -1,6 +1,6 @@
 # RL/MARL 基础知识接入 HMASD 控制面的详细修改计划
 
-版本：v3，2026-09-08。适配当前控制面基线 d4926072754c97357238b067efb6745118c36ce5：Root 合并 Portfolio 职责，CM 负责完整技术交付，独立 Transport 保持传输职责。保留 v2 对 R1–R4 和引用合同建议的处置；working/INDEPENDENT_REVIEW.md 的独立 Astra/max 结论只覆盖原 v2，不能作为 v3 已复核的证明。v3 已做针对性文档一致性检查，尚未独立复核、实施或验证行为。
+版本：v3，2026-09-08。适配当前控制面基线 d4926072754c97357238b067efb6745118c36ce5：Root 合并 Portfolio 职责，CM 负责完整技术交付，独立 Transport 保持传输职责。保留 v2 对 R1–R4 和引用合同建议的处置；working/INDEPENDENT_REVIEW.md 的独立 Astra/max 结论只覆盖原 v2，不能作为 v3 已复核的证明。v3 已获独立 Astra/max 计划审核通过，见 working/INDEPENDENT_REVIEW_V3_CONTROL_PLANE.md；随后 C1–C5 控制面修复及本文 runtime 范围澄清通过独立验收，见 working/INDEPENDENT_REVIEW_CONTROL_PLANE_FIXES.md。知识接入本身尚未实施或验证行为。
 
 ## 1. 目标与已确定的边界
 
@@ -38,7 +38,7 @@ v3 针对控制面合并与修复的变化复核：以当前 ROOT_OPERATIONS.md 
 | Pro 作者和 renderer | 正文要求适用经验规范，但 reference_files 由调用方提供，且只允许读取所列文件；规范和基础材料可能没有入清单 | 显式列入方法来源；解决科学输入版本与知识版本不同的情况 |
 | 现有测试 | 能覆盖作者/父任务/Transport 路由、固定 TASK 字节、历史绑定等；没有证明科学问题会实际触发知识读取 | 保留原回归，补最小行为验证与负例 |
 
-其他历史漂移已区分，不借本计划全面治理：旧 Root 兼任 Transport、heartbeat/tracker、早期 M0/positive-first、旧全链工程门槛、Claude 历史容量和 owner 处理文字等。只修复本次新增读取路径直接会重新激活的错误入口；其余作为评审观察留存。IMPLEMENTATION_PLAN、UAV_G0_READINESS 等已有历史状态标识的文件无需重复修改。
+历史非执行材料与现行 runtime 例外分开处理：旧 Root 兼任 Transport、heartbeat/tracker、早期 M0/positive-first 等历史记录不因此重写；Claude 两方向容量、不可嵌套代理和逐文件写入边界仍是其现行约束，不套用 Codex 配额或权限。独立审核指出的 Claude 状态/归档/对象委托及区域入口问题属于活跃控制面缺陷，按各自定点修复处理，不称为历史材料而略过。IMPLEMENTATION_PLAN、UAV_G0_READINESS 等已标为历史非执行的文件保持原状。
 
 ## 3. 接入路径与触发范围
 
@@ -48,7 +48,7 @@ v3 针对控制面合并与修复的变化复核：以当前 ROOT_OPERATIONS.md 
 
 Pro 科学判断：
 
-DM 或承担 Portfolio 科学职责的 Root 完成本地判断 → 实际作者列出固定版本的规范、基础和必要专题 → renderer 生成固定 TASK → Root 将精确 handoff 交独立 Transport → Pro 读取清单并给出节点决定 → Transport 向 Root 返回归档收据 → Root 自行完成 Portfolio intake，或把方向结果交原 DM intake。新请求的 source 为实际作者、parent 为 Root、operator 为独立 Transport；Root 自己出题时 source 与 parent 均为 Root。
+Codex 原生路由：DM 或承担 Portfolio 科学职责的 Root 完成本地判断 → 实际作者列出固定版本的规范、基础和必要专题 → renderer 生成固定 TASK → Root 将精确 handoff 交独立 Transport → Pro 读取清单并给出节点决定 → Transport 向 Root 返回归档收据 → Root 自行完成 Portfolio intake，或把方向结果交原 DM intake。新请求的 source 为实际作者、parent 为 Root、operator 为独立 Transport；Root 自己出题时 source 与 parent 均为 Root。Claude 保留其现行 CALLER_DIRECT、hub/Sonnet 和来源/父级会话映射；共享固定 TASK 的科学阅读合同，不继承 Codex singleton 路由。
 
 本地角色用 skill 定位材料；Pro 直接读取 TASK 明确列出的规范章节与知识材料，无需本地 skill。TASK 明确采纳所列版本的适用规范约束；知识文件和其他仓库内容没有要求代理调用工具、增加权限或扩大读取清单的权力。当前卡/spec 决定要求；知识说明概念与假设；来源记录说明证据可达程度。不能通过知识文档链接递归扩张任务。
 
@@ -233,7 +233,7 @@ E. 区分证据层次与缺口：
 
 ## 6. 实施次序、并行与发布
 
-1. 保留原 v1/v2 及其独立审核原件。v3 先对当前变更表面做一致性检查；后续独立复核以 v2→v3 差异、当前职责入口、启用步骤和行为场景为起点，发现具体矛盾再扩读，不重复声称全量阅读。原 reviewer 可用时复用；评审应记录实际版本及范围。当前 v3 未获得新的独立审核结论。
+1. 保留原 v1/v2 及其独立审核原件。v3 先对当前变更表面做一致性检查；后续独立复核以 v2→v3 差异、当前职责入口、启用步骤和行为场景为起点，发现具体矛盾再扩读，不重复声称全量阅读。原 reviewer 可用时复用；评审应记录实际版本及范围。当前 v3 计划审核及本轮控制面修复验收已完成，结论与实际范围分别见上述两份独立报告；后续知识接入实现仍按本节验证。
 2. 用户后续要求实施时，使用已存在的共享控制面 checkout、一个编辑负责人和显式 owned paths。控制面计划不属于新研究方向，不开占位 direction 分支；保持其他 writer 的未提交内容。任何 shared-index 协调只围绕具体 Git 操作。
 3. 第一批只发布独立知识文件：正文/专题的会话选择分离、README 和 SESSION_CHOICES。尚不启用新 spec 条款、角色触发、Pro 作者要求或 commit_sha 输入。原有流程照常；第一批不是“半套新规范已经生效”的切换点。
 4. 第一批提交后立即推送当前分支，取得已发布版本。第二批将 §11.10、历史权威入口澄清、scientific-tools 新模式及参考、科学角色指针、Pro 作者/renderer/直接合同及测试作为一个一致的启用变更，避免新规范配旧作者或新字段被旧 renderer 丢弃。在提交前完成短检查和独立高风险工程 review；提交后立即推送，不留另一个内部推送批准步骤。
