@@ -33,6 +33,10 @@ remains dated provenance under the controlling evidence specification section 11
   comparison is selected. This supplies no renewal-effect result or prerequisite
   and allocates no card, master, implementation or invocation. Recasts remain **1**.
   See the [post-mean-velocity-B01 Convergence intake](UCOPE_POST_MEAN_VELOCITY_B01_CONVERGENCE_INTAKE_20260909.md).
+  Root's later preparation assignment now has a concrete [normalized-feedback
+  B01 card](UCOPE_UAV_FEEDBACK_VALUE_NORMALIZATION_B01_SCIENCE_CARD_20260909.md):
+  cumulative FP32 population moments and prospective matched master8501;
+  no runtime implementation or invocation is allocated by this preparation.
 - Previous within-family direction-tier decision:
   **2026-09-09 PRO_FINAL / CONTINUE** inside the existing own-expiry renewal
   family. Select the next bounded B question comparing learned renewal T,
@@ -239,8 +243,15 @@ final episodes each for normalized G, raw G and H: **286720 native steps /
 normalized G−raw G, MEI **0.01**; preserve both hover contrasts and every sign.
 No renewal effect, stable improvement or competence follows from that design.
 Tuned headroom remains absent; future wall is unknown. The complete node intake
-selects no card, master, source change or invocation allowance. P85 remains ended;
-Root's later concrete assignment controls any implementation and execution.
+selected no card, master, source change or invocation allowance. The subsequent
+Root preparation assignment now fixes the [B01 card](UCOPE_UAV_FEEDBACK_VALUE_NORMALIZATION_B01_SCIENCE_CARD_20260909.md):
+cumulative equal-weight CPU FP32 target moments, n=0/m=M2=0/scale1 initially,
+population variance floor1e-8, one update per rollout before four fixed-statistic
+epochs, decoded raw baselines and frozen final evaluation. Fresh matched8501
+and all-outcome native reading are prospective; no new observation was made.
+This is a testable optimization intervention, not a normalization-cause diagnosis
+or output-preserving PopArt. P85 remains ended; Root's later concrete assignment
+controls implementation and execution.
 See the [accepted Convergence intake](UCOPE_POST_MEAN_VELOCITY_B01_CONVERGENCE_INTAKE_20260909.md)
 and its full response for the selected training units and bounded interpretation.
 See [intake §§7–10](UCOPE_UAV_MEAN_VELOCITY_RENEWAL_B01_P85_INTAKE_20260909.md#7-dm-scientific-intake-against-the-card),
