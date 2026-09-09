@@ -1,0 +1,87 @@
+{
+  "id": "20260908-vspc1-010",
+  "created": "2026-09-08T20:46:35-07:00",
+  "direction": "vsp_c1",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "固定容量接近的普通 MLP 对照卡，仅准备",
+  "context": "P68 只准备 B05：固定 normalized GATED-V 与同信息 136→128→133→1 普通 MLP，保留原生 H 与全部结果。两者 critic 参数为 34817/34827；拟用主键 8301，UP 概率 0.55，MEI 0.01。完整代码任务交回 Root 分配，本次不实现、不运行。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "接受这份卡与源合同的定义并交回 Root 检查分配；不启动 CM 或科学调用。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "停止使用这份拟议定义，保留当前结果和反例，不自行换配置或增加训练。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "按实际回复调整所指字段，再交回 Root；未分配实现或运行额度。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "在已有机制内固定一个容量接近的普通比较器，可以回答下一步局部性能问题；P68 权限仅覆盖准备。",
+  "evidence": [
+    "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B05_SCIENCE_CARD_20260908.md",
+    "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B05_INTAKE_20260908.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-08.md#L76",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否接受 P68 准备的 B05 定义：门控 critic 与容量接近的普通 MLP 做一次有界原生比较？本次只交付卡与代码任务，不分配实现或运行。",
+    "changes_if_approved": [
+      {
+        "target": "VSPC1-NATIVE-HOLD-VALUE-B05 科学卡与完整 CM 任务",
+        "from": "P67 建议比较容量接近的普通 MLP，初始化、RNG 与源合同尚未固定",
+        "to": "固定普通 MLP 136→128→133→1、共享初始函数与独立新增参数 RNG、拟用单一主键 8301、UP 概率 0.55、MEI 0.01 及原生/H 全结果规则；把完整工程任务交回 Root 检查分配"
+      }
+    ],
+    "if_refused": "在正常边界应用实际的新指令，保留 P67 和所有旧反例，不启动 B05，也不把修改或拒绝卡片解释成机制负面。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B04_P67_INTAKE_20260908.md",
+        "quote": "Strongest support: the native complete-package gain is above MEI in two independent\nnormalized training instances and GATED−H is positive in both; the second also has\npositive MLP−H.",
+        "why": "两次局部信号支持有限地检查一个更强的普通比较器，不需要先穷举策略上界或完整因果解释。"
+      },
+      {
+        "path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B05_SCIENCE_CARD_20260908.md",
+        "quote": "| Unchanged GATED-V | 34,817 |\n| B05 ordinary MLP, 136→128→133→1 | 34,827 |",
+        "why": "普通 MLP 只多十个参数，保留全部相同输入；无需为了精确配平增加搜索或非学习参数。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B04_P67_INTAKE_20260908.md",
+        "quote": "Strongest contradiction to a broader claim: n=2, appreciable\nconditional noise/adverse episodes, the first MLP−H loss and absent tuned headroom.",
+        "why": "旧的 MLP 低于悬停和不利回合仍然限制结论，不能宣称比较器已完全胜任或收益稳定。"
+      },
+      {
+        "path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B05_SCIENCE_CARD_20260908.md",
+        "quote": "Equal parameter count is not equal function\nclass or optimization geometry.",
+        "why": "近似配平参数仍不隔离初始化、梯度裁剪和共同适应，收益保留也不单独证明持续动作机制。"
+      }
+    ],
+    "uncertainty": [
+      "新增五个隐藏单元的输出权重从零开始，输入参数第一次反传为零、之后可学习；这条初始化选择已公开。",
+      "新比较器未训练；宽度变化的实际耗时未知，之前两对约 311 秒只是规划参考。",
+      "若后来运行，必须保留门槛内、反向、H 损失和不完整结果；新比较不能当成旧比较的第三个同类训练对。",
+      "P68 只完成准备，未启动 CM、模型、准入或科学调用；item009 仍没有被推断为所有者批准。"
+    ],
+    "cost": {
+      "compute": "当前新增科学曝光为零。拟议一次新训练对：2×512×256 训练步加 3×32×256 评价步，共 286720 原生团队步、2048 次 Adam、96 次评价；512 次目标合并，无候选搜索。保留完整 1800 秒/臂、3600 秒/对。未来聚焦验收总计不超过 300 秒，另计且本次未执行。",
+      "owner_time": "异步查看或修改；无需回复才能完成已经分配的卡片准备与交接。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing; P68 在提交准备后结束，工程与科学执行由后续具体任务分配"
+    },
+    "verdict_text": "Decision: accept the B05 definition and complete engineering assignment at\nobject tier, then return them to Root for allocation. No implementation or\nscientific execution is allocated or performed by this preparation.",
+    "source": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B05_INTAKE_20260908.md"
+  },
+  "starred": false
+}
