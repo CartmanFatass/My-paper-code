@@ -24,8 +24,8 @@ SEED = 19
 WEIGHTS = {"W1": 1.0, "W100": 100.0}
 
 
-def make_rng():
-    digest = host.block_digest_hex(host.seed_root_key(f"{OBJECT_ID}/seed/{SEED}"), OBJECT_ID, 0)
+def make_rng(seed=SEED):
+    digest = host.block_digest_hex(host.seed_root_key(f"{OBJECT_ID}/seed/{seed}"), OBJECT_ID, 0)
     authority = host.B01BlockAuthority(
         certificate={"native": host.native_certificate_payload()}, block_index=0, root_digest=digest,
     )
@@ -121,12 +121,13 @@ def primary(init_rows, w1_rows, w100_rows):
                 positive_favors="W100", MEI_U=0.05)
 
 
-def run(arm, out, launch_sha, admission_receipt, started, wall_cap, control_summary=None):
+def run(arm, out, launch_sha, admission_receipt, started, wall_cap, control_summary=None,
+        *, seed=SEED, reporting_object=OBJECT_ID):
     out.mkdir(parents=True, exist_ok=True)
-    authority, rng = make_rng()
-    summary = dict(object=OBJECT_ID, arm=arm, package=FLEX if arm in WEIGHTS else arm,
-                   seed=SEED, launch_sha=launch_sha, admission_receipt=str(admission_receipt),
-                   root_key_hex=host.seed_root_key(f"{OBJECT_ID}/seed/{SEED}").hex(),
+    authority, rng = make_rng(seed)
+    summary = dict(object=reporting_object, arm=arm, package=FLEX if arm in WEIGHTS else arm,
+                   seed=seed, launch_sha=launch_sha, admission_receipt=str(admission_receipt),
+                   root_key_hex=host.seed_root_key(f"{OBJECT_ID}/seed/{seed}").hex(),
                    block_digest_hex=authority.root_digest, native=authority.certificate["native"],
                    status="IN_PROGRESS", scenarios=[], curves=[])
     try:
