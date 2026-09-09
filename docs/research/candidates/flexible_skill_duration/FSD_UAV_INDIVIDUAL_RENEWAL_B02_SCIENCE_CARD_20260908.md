@@ -177,3 +177,28 @@ Options: (a) accept this conforming source and continue the allocated pair;
 Recommendation and selected option: (a).
 **Owner-delegated decision (unattended, 2026-09-03 instruction): (a)**.
 This is object-tier technical acceptance, with no scientific performance claim.
+
+## 6. P72 observed result and stopped boundary — 2026-09-09
+
+Both original handles completed at accepted source08199a932; full collection
+is committed in0ae90f0e31daa9d468844c5748a807c9e9bc1ada. The unchanged §3 rule
+reads **opposite_sign**: D0 mean J.4854120288125866, I.45009930351470057,
+I−D0−.035312725297886094, sample SD.07084355729934733 and conditional
+SE.012523489942436556 over32 paired endpoints. The prospective below−.01
+DM prediction is met; owner prediction is not taken (unattended).
+
+P70/P72 effects are−.049670563167111874/−.035312725297886094, with descriptive
+mean−.04249164423249899 and sample SD.01015252452050656 across two learning
+instances, retaining finite endpoint noise. Both observed native losses are
+beyond the MEI; this is not stable superiority or common-cause identification.
+P72 loses coverage while slightly improving quality/altitude cost. Its sampled
+training returns exceed D0 on rollouts2–5 but its final deterministic reward
+is lower. I has65761 training gap decisions and zero endpoint gap decisions.
+
+All80000 train transitions/10 updates/32000 scoring steps are complete; full
+wall sum1768.78s fits21600s. The [result](FSD_UAV_INDIVIDUAL_RENEWAL_B02_P72_RESULT_EVIDENCE_20260909.md)
+and [intake](FSD_UAV_INDIVIDUAL_RENEWAL_B02_P72_INTAKE_20260909.md) retain every
+outcome and limitation. The owner's soft stop arrived after I was terminal;
+collection/intake finish this batch, and the [restart handoff](FSD_P72_RESTART_HANDOFF_20260909.md)
+holds further work. No next pair, retuning, diagnostic or Pro request is selected.
+This appendix records the outcome without changing the prospective rule.
