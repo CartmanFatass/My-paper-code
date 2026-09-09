@@ -1,6 +1,6 @@
 # CRTO B08 finite-zero movement repair intake — 2026-09-09
 
-**Status: original CM technical batch allocated, result pending.** Root explicitly resumed this
+**Status: technically accepted by the original CM and DM; bounded repair complete.** Root explicitly resumed this
 bounded zero-scientific-exposure correction from the foundations special Pro review §2.10.
 The selected-panel balanced-residual family stays PARK. No experiment, scientific retry/resume,
 new seed, endpoint, budget, MEI, successor family or Pro Send is authorized by this assignment.
@@ -107,4 +107,92 @@ All original empirical claims remain exactly as accepted: B08 weak-new-RAW diagn
 matched controls, all historical gains/losses and the fixed-reference original-MEI ceiling. The
 actual B08 movements were positive; the flagged branch never affected the completed run. The
 family PARK and the general no-successor boundary remain while this explicitly assigned repair
-is completed. Final acceptance and restart annotation will be appended on CM return.
+is completed. The final technical acceptance and restart annotation are recorded below.
+
+
+## 4. Final DM technical acceptance and limits
+
+Accepted 2026-09-09T19:36:34.421303+00:00. The original CM returned source/test/result-evidence commit
+**`9cd01f8191b1139c59b42ec22f1048e902fed57a`**, already pushed, with a clean checkout and released
+index. The DM inspected the exact three-path diff against the assigned `ced81c37f...` revision,
+the complete [technical evidence](CRTO_B08_ZERO_MOVEMENT_REPAIR_RESULT_EVIDENCE_20260909.md),
+and the meaningful stationary and failure fixtures. No source, test or scientific command was
+rerun during this intake. Read-only checks confirmed the test scratch directory is absent, the
+focused diff has no whitespace errors, and the frozen card, P71 result/intake, DIRECTION and
+runner have no changes in the repair commit. Required input sync is separate from authored repair.
+
+The final runtime change is four added / three deleted lines. The final positivity rejection is
+removed, while nonfinite movement still fails at every recorded endpoint. Immediately after
+`zero_grad(set_to_none=True)` and backward, an all-model-parameter-`grad is None` condition now
+rejects a disconnected update before clipping/Adam. A detached loss still fails through backward.
+Finite present zero gradients are allowed; the same computed zero displacement is emitted without
+substitution, clipping or a positive surrogate. Nonfinite loss, present gradients and post-step
+parameters still use the original checks. The objective, optimizer arguments, update order,
+snapshots, displacement normalization, exposure fields and primary scores/rules are unchanged.
+
+This is necessary for the card/spec mapping in §1: a norm of final-minus-initial parameters is
+not an optimizer-call or connectivity test. The direct all-None check preserves the relevant
+protection lost by removing the proxy. It does not impose all-parameters-connected or nonzero
+per-parameter-gradient requirements. It is a concrete training-integrity check, not new §4
+infrastructure, a new exposure gate or evidence that a connected update is useful learning.
+
+| Acceptance fact | Observation and bound |
+| --- | --- |
+| Connected finite-zero case | Equal legal costs on a tiny eight-parameter synthetic module; actual B08 loss/backward/clipping and two original Adam.step calls; both gradients present and zero, both endpoint movement ratios zero, update/example counts and snapshots emitted |
+| Genuine failures retained | Six injections: nonfinite loss, gradient, parameter and movement; unrelated differentiable leaf reaching no model parameter; detached loss |
+| Focused checks | 8 passed / 13 deselected; pytest reports 5.41 seconds, complete command process 7.016 seconds, within the 300-second allocation |
+| Synthetic optimizer work | Four Adam calls total across the connected stationary case and two post-step faults; test work only, zero scientific optimizer exposure |
+| Independent semantic review | Original reviewer `rev_ah_crto_b08`, no material finding; source/dependency/fixture inspection, no duplicate test execution |
+| Scope | Runtime module + initializer + runner 360 lines, runner 43; runtime net +1, tests +90; no §4 machinery or §5 breach |
+| Scratch | Named invocation `temp/directions/commitment_residual_triggered_options/test/b08-zero-movement-20260909-a` absent; no retained pytest scratch or deleted scientific evidence |
+
+The existing source-body preservation check was adjusted only to normalize the explicit new
+all-missing-gradient check and its already-known B08 differences. The new stationary fixture
+executes the real loss/optimizer/movement/exposure path with substituted tiny constructor,
+collation and RNG; it would fail the old final-zero condition. Thus acceptance rests on meaningful
+behavior plus dependency inspection, not merely a textual mirror or reviewer completion label.
+Primary native code is unchanged, so no full historical suite or native evaluation was needed.
+
+The CM's independent reviewer concluded that all-None after zeroing/backward is a direct broken-graph
+condition, whereas present finite-zero gradients can be intact. The DM accepts that narrow
+assessment. The limitation remains: these checks do not certify arbitrary partial missing
+gradients, convergence, useful optimization, or native value under all inputs. No broader training
+or telemetry rewrite is included.
+
+Historical classification stays unchanged. The DM separately read the accepted P71 analysis at
+`601d9d8f0612461f4c04ef5f855a9ddd2aed9cee`: all twelve recorded movement numbers (L2 and Linf for
+three arms at two endpoints) are positive. For example, LONG L2 ratios remain RAW
+.21999455794994616, TRUE .21182928158673486, DERANGED .22742086472745415. Therefore the repaired
+branch was untriggered in that run. Original source `d9f643b761d57584de313b1f837d6c2c0becc931`,
+result bytes, weak-new-RAW diagnostic reading, zero matched contrasts, historical gains/losses,
+fixed-baseline bound and original MEI retain their accepted meanings. This source revision is
+not a new B08 execution, retrospective rescue or family re-entry.
+
+## 5. Final decisions this intake produces and next boundary
+
+Options: (a) accept the bounded correction and finish this technical batch; (b) return a specific
+remaining training-integrity or scope gap. Recommendation and executed choice: **(a)**, because
+the exact implementation, connected-zero fixture, preserved failure cases and independent review
+support the required behavior; no unresolved material gap was found.
+
+Owner-delegated decision (unattended, 2026-09-03 instruction): (a), under Root's explicit
+foundations follow-up. This is object-tier technical acceptance, not a new scientific result,
+direction disposition or specification change. Main and direction owner-console reviews were
+empty at the final read boundary; no owner reply was invented. Owner prediction remains not taken.
+No separate P1/P2 item is added for this ordinary technical correction. The
+[Chinese brief](../../portfolio/owner/briefs/commitment_residual_triggered_options/2026-09-09_B08-zero-movement.md)
+labels it as engineering work and preserves the empirical ceiling.
+
+This batch adds zero result-bearing invocations, environment/native/evaluator calls, production
+model or seed-package construction and scientific optimizer updates. Four synthetic Adam calls
+are accounted separately above. No admission, remote staging, profiling, scientific retry/resume,
+new seed/arm/endpoint/budget or Pro Send occurred. All work authorized by this repair is complete;
+no successor is selected or allocated. The selected-panel balanced-residual family remains PARK.
+There is no new live external work requiring observation.
+
+Root's next action is to accept/integrate the allocation, source and final annotation commits,
+checking what is already integrated. `31cf38b790eef1e901d0e67901e36f19a4a11444` contains exact
+main `88a540f92` input surfaces and is not a new control-plane policy to apply on main. The
+[restart record](CRTO_RESTART_HANDOFF_20260909.md) now records that the bounded repair and pending
+input sync are complete, while no next scientific object has been chosen. Future direction work
+needs its actual assignment; this source correction does not lift the scientific family boundary.
