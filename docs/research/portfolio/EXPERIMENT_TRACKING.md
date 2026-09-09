@@ -1,5 +1,7 @@
 # HMASD experiment tracking
 
+FOLR P78 READY questiond824897be/TASK83f7beafd accepted and actually dispatched once to configured Transport; app accepted/provider Send unconfirmed. Logicalem:vap_folr_core:convergence is unbound pending reconciliation/fresh verified6Pro under cutover. Explicit public lifecycle information protocol versus no successor is the unresolved question, not an adopted change. No experimental allowance.
+
 VSP03 post-B05 and ACVC native-link-loss requests now ARCHIVED with one Send each; full GitHub responses3da3a0c44/2d914ab8b are preserved. Original DMs actually resumed full conformity/scientific intake. Link-only receipts' scientific_decision_formed=false is not treated as a full-file conclusion. VSP03 opening selects narrow-family pause; ACVC selects the proposed bounded native B and explicitly interprets inherited units, all pending full native intake. No new experiment allocated by these receipts.
 
 VSPC1 P77 sole handlevspc1_hold_value_b11_8502_7ed4c3933771 accepted/running on hmasd-wsl-node PID3040577, exactsource7ed4c3933771f85d570b5c952052b9e8c5fbd6e1; actual admission15318642688bytes physical/effective passed. Same CM sole observer/collector, original DM full C/endpoints/H intake. No retry/resume/extra pair or Root polling.
