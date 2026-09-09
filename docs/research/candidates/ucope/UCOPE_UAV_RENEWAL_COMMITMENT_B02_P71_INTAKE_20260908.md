@@ -102,3 +102,100 @@ records `accept` as recommended and auto-applied, with the decision packet and
 [audit row](../../portfolio/audit/2026-09-08.md#L91). No owner reply is invented;
 the item permits an asynchronous override without waiting. No valid-result
 brief or prediction score is fabricated before the new native outcome.
+
+## 4. CM binding source acceptance
+
+Accepted source: **7adc5aae35542ba35b4b8a2c07fc8285e958ce4d**, committed/pushed on `codex/ucope`.
+Actual clean authoring start was `ba0915bb0269050609bee9b4d5d988cef913cd2c` in the
+assigned shared direction checkout. Production changes are limited to `study.py` and the
+existing runner: +25/-20 lines, with no algorithm change; runner remains54 lines. Two affected
+test files add21/delete13 lines. Scope section4 additions: none. A local syntax parse caught
+an intermediate tuple-edit error before commit/import/execution; corrected before source
+acceptance, with no test or scientific invocation consumed by it.
+
+`renewal_b02` admits real7401, preserves fixture9001, uses the B02 object/card identity and
+section5 real/section7 fixture. Existing renewal options, compound credit/zero entropy,
+private head seed, RNG/reset expressions, counts and three contrasts propagate unchanged.
+Direct source comparison confirms `environment.py`, `policy.py`, `learner.py` and base/shared
+sources remain at accepted `a453447cb011d50c6bb63ed7fc40180134a914b5`. Full diff inspected;
+old routes stay intact. Card section7 explicitly selects no new independent review for this
+binding-only change; no substantive credit work or scope gap arose.
+
+One exact-source remote affected-directory suite passed **89 tests in3.33s**, full wall
+**3.92s**, peak RSS526592KiB, exit0, below the cumulative300s limit. Supervisor
+`ucope-uav-renewal-b02-p71-check-20260908`, PID3025647, finished with inactive tmux.
+It ran on `/home/wu/hmasd-worktrees/ucope-uav-renewal-b02-p71-check-20260908`:
+
+```text
+/home/wu/.venvs/hmasd/bin/python -m pytest -q -p no:cacheprovider --basetemp /home/wu/hmasd-worktrees/ucope-uav-renewal-b02-p71-check-20260908/temp/directions/ucope/test/uav-renewal-b02-p71 tests/experiments/candidates/ucope/uav_motion_prefix_b01
+```
+
+New cases cover real/fixture CLI identity, private RNG/reset and renewal/credit propagation,
+wrong-master and aggregate refusal, plus the existing actual short synthetic collector/
+learner/checkpoint/native-J three-contrast publication path under the new selector. Prior
+routes and unchanged renewal mechanics pass their existing checks. The sole warning is the
+existing pytest cache_dir setting with explicitly disabled cache provider. The exact-source
+checkout was clean at terminal readback. Creator-owned pytest scratch was removed and absence
+checked; source carrier packs were removed locally/remotely after staging100 committed missing
+objects,149844 bytes. No standalone smoke, profile, pilot, replay or scientific run was added.
+[Check receipts and exact command](../../../../temp/directions/ucope/exp/ucope-uav-renewal-b02-7401-p71-20260908/checks/), especially
+[task log](../../../../temp/directions/ucope/exp/ucope-uav-renewal-b02-7401-p71-20260908/checks/supervisor/task.log), retain terminal evidence.
+
+## 5. CM exact scientific preparation and literal payload
+
+The cohesive P71 allocation already includes this conforming source-to-execution sequence.
+CM remains the sole observer through collection; Root receives tracking facts, not an adoption
+request. No parallel polling or intermediate allocation request is needed.
+
+Scientific source: `7adc5aae35542ba35b4b8a2c07fc8285e958ce4d`; node `hmasd-wsl-node`, CPU FP32/one Torch thread.
+Fresh scientific cwd: `/home/wu/hmasd-worktrees/ucope-uav-renewal-b02-7401-p71-20260908`.
+Relative output: `temp/directions/ucope/exp/ucope-uav-renewal-b02-7401-p71-20260908`.
+Unique supervisor handle: `ucope-uav-renewal-b02-7401-p71-20260908`.
+Preparation observed not_found/no supervisor directory and absent scientific cwd/output before
+creating the distinct exact-SHA checkout. All2176 materialized tracked files match Git blobs;
+explicit input checks include candidate modules, runner, canonical resource preflight/helper
+and base UAV/adapter entry points. Canonical preflight SHA256 remains
+`cb0525e9247f1c7262c198bf051e542282f5928982137b3023d36d5d69eda4dc`.
+[Source/input readback](../../../../temp/directions/ucope/exp/ucope-uav-renewal-b02-7401-p71-20260908/preparation/source-input-readback.json) records exact bytes.
+
+Per-arm cost projection: card section4's unchanged complete path and actual-renewal cost law
+reuse same-package P70 T160.45789840299403s, G135.36679288500454s and whole304.85s with1566026
+head-forward rows. New T head rows remain bounded1003520-4014080; these are not whole-wall
+multipliers. No known term projects either complete arm over1800s or the whole over3600s.
+Actual new seconds and aggregate CPU are unknown until observed; no pilot is commissioned.
+Post-learner path coverage: the selected suite exercised the new-selector short actual-code
+learner/checkpoint/primary/count publication path. It is not repeated at launch.
+Serial study critical path, summed arm wall and aggregate CPU will be reported separately.
+
+Both payloads below are committed literal UTF-8 ASCII/LF bytes with one terminal LF.
+Staged Bash syntax check passed without payload execution; PowerShell Parser reports zero errors.
+The remote wrapper digest matched the local bytes. Canonical preflight and runner share one
+supervised chain joined by `&&`: both physical/effective available memory must reach4GiB
+before scientific roots/RNG/models. A failed admission remains under the supervisor root.
+The outer timeout covers admission through publication/exit; runner retains1800s per arm.
+One accepted submission maximum; uncertain acceptance is reconciled on the same handle,
+without blind resubmission, retry, resume, extra H/evaluation or replacement master.
+
+Remote wrapper `/home/wu/hmasd-inputs/ucope-uav-renewal-b02-7401-p71-20260908.sh`, 707 bytes, SHA256
+`fc26523a08e89c9e84fbb65b20ab79768207ddf647bae6a19742d4f6a5a0abbb`:
+
+```bash
+set -euo pipefail
+cd /home/wu/hmasd-worktrees/ucope-uav-renewal-b02-7401-p71-20260908
+/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/.agent-tasks/ucope-uav-renewal-b02-7401-p71-20260908/resource_admission.json &&
+mkdir -p temp/directions/ucope/exp/ucope-uav-renewal-b02-7401-p71-20260908 &&
+cp /home/wu/.agent-tasks/ucope-uav-renewal-b02-7401-p71-20260908/resource_admission.json temp/directions/ucope/exp/ucope-uav-renewal-b02-7401-p71-20260908/resource_admission.json &&
+exec /home/wu/.venvs/hmasd/bin/python scripts/run_ucope_uav_motion_prefix_b01.py --pair renewal_b02 --seed 7401 --out temp/directions/ucope/exp/ucope-uav-renewal-b02-7401-p71-20260908
+```
+
+Local `temp/directions/ucope/exp/ucope-uav-renewal-b02-7401-p71-20260908/preparation/submit.ps1`, 338 bytes, SHA256
+`7b35f24cdf48bb785935ede387fc754d4c71bf54f88987c8e6c4ca1a9ef6e208`. Execute this exact file after commit/push:
+
+```powershell
+& ssh -o BatchMode=yes -o ConnectTimeout=10 hmasd-wsl-node "/usr/local/bin/agent-task run ucope-uav-renewal-b02-7401-p71-20260908 '/usr/bin/time -f whole_wall_seconds=%e,peak_rss_kib=%M /usr/bin/timeout --signal=KILL 3600s /bin/bash --noprofile --norc /home/wu/hmasd-inputs/ucope-uav-renewal-b02-7401-p71-20260908.sh'"
+exit $LASTEXITCODE
+```
+
+Scientific execution/admission has not yet occurred at this preparation record. P70 evidence
+and its test/scientific checkouts remain untouched. Root owns later archive/reclamation of
+P71 test/scientific checkouts and wrapper after terminal evidence and DM intake are preserved.
