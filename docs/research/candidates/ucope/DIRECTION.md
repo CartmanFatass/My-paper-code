@@ -51,7 +51,18 @@ remains dated provenance under the controlling evidence specification section 11
   The **2026-09-05 PRO_FINAL / PARK** of the same-draw retained-policy root-residual
   localization family and its numerical-locus dependency remains unchanged.
   See the [Convergence intake](UCOPE_UAV_INTERFACE_CONVERGENCE_INTAKE_20260907.md).
-- Latest bounded B observation: **2026-09-09 short fixed renewal B03 P84,
+- Latest bounded B observation: **2026-09-09 mean-velocity renewal B01 P85,
+  COMPLETE / WITHIN**, with all four learned-mode hover losses and both
+  mean-minus-sampled losses. One new 8401 matched fit gives primary
+  F_mean−G_mean **−0.008350131013904307**, conditional SE
+  **0.006736648533933545**. Mean−sampled is **−0.04255880352167644**
+  for F and **−0.05655406829020172** for G. The sampled F−G secondary
+  is also adverse. Mean execution did not rescue native return on these fits;
+  no equivalence, stable harm/superiority or sampling-cause claim follows.
+  P82 WITHIN, P83/P84 UP and every older primary/loss remain unchanged.
+  See [P85 intake](UCOPE_UAV_MEAN_VELOCITY_RENEWAL_B01_P85_INTAKE_20260909.md)
+  and [E0 evidence](UCOPE_UAV_MEAN_VELOCITY_RENEWAL_B01_P85_RESULT_EVIDENCE_20260909.md).
+- Previous bounded B observation: **2026-09-09 short fixed renewal B03 P84,
   COMPLETE / UP with both learned-policy hover losses**. New same-recipe
   8301 gives prospective F−G **+0.06439366516106426**, conditional SE
   **0.008200587980245644**; F−H **−0.029184443306665326** and G−H
@@ -166,7 +177,53 @@ without a distinct count-state architecture because RAW contains the sufficient
 count. The direct-service alternative remains separated by the frozen
 `Gamma=I+D` decomposition and analytic `D≈-0.02` boundary.
 
-## Current scientific position — 2026-09-09 short fixed renewal B03 gains against feedback while both lose to hover
+## Current scientific position — 2026-09-09 mean execution has no selected-scale gain and both modes lose to hover
+
+P85 is valid complete B/EXPLORE **WITHIN**, primary F_mean−G_mean
+**−0.008350131013904307**, conditional SE **0.006736648533933545**,
+0.0016498689860956935 inside the lower MEI boundary. This is no demonstrated
+point gain at the selected scale; it is not equivalence. All four learned-mode
+hover contrasts are negative: mean F/G **−0.0900967755406669 /
+−0.0817466445267626**, sampled F/G **−0.04753797201899047 /
+−0.025192576236560876**. Mean−sampled **−0.04255880352167644 /
+−0.05655406829020172** directly contradict native benefit from mean extraction
+on these two fitted policies. Sampled F−G **−0.02234539578242959** remains
+secondary; its adverse sign does not rewrite the primary.
+
+The strongest surviving favorable short-renewal evidence is P83/P84's sampled
+F−G gain, with their own native limitations. It does not establish mean-mode
+value. P82 remains WITHIN and all earlier outcomes remain. Mean execution
+lowers both current returns, with a greater fall for G; a smaller F−G deficit
+under that mode coexists with native deterioration. One fitted instance and
+conditional paired-episode SE cannot support stable harm/superiority, tuned
+comparator competence, causal shortening or sampling, or deployment readiness.
+
+The same private-observation/recurrence path feeds velocities at own-expiry
+opportunities, held motion changes future service and local observations,
+and real training/partner co-adaptation precede the measured return. The whole
+F head is fixed, F duration remains stochastic {1,2}, and mean velocity uses
+tanh(mu), not the expectation of the squashed Gaussian. Learned motion quality,
+state visitation, finite learning/evaluation variation and partner interaction
+survive. Direct service versus information value and learned-duration value
+remain unseparated. The verified evaluation option was no promised remedy.
+
+The next discriminator recommendation is one **separately allocated fresh B**
+with unchanged training and both modes plus H, to observe whether the full
+pattern recurs in another learning history. Retain mean F−G as prospective
+primary and every mode/hover contrast, without a favorable-sign requirement.
+Known work remains 303104 steps/2048 Adam/160 final episodes and F head
+2048000–4096000 rows. P85 measured 331.58 s is only a reference for future wall.
+P85 ends; no next card/master/source/allowance, extra evaluation, automatic
+successor or Pro Send follows. Tuned headroom absent, recasts 1; no family,
+C, lifecycle or Portfolio disposition. Root allocates no next pair and instead
+asks the existing Convergence node to compare its marginal value with ending
+this mean-execution package or a concrete source-supported training change.
+That consultation has zero new empirical exposure and creates no child Send.
+See [intake §§7–10](UCOPE_UAV_MEAN_VELOCITY_RENEWAL_B01_P85_INTAKE_20260909.md#7-dm-scientific-intake-against-the-card),
+[durable summary](UCOPE_UAV_MEAN_VELOCITY_RENEWAL_B01_P85_RESULT_SUMMARY_20260909.json)
+and [E0 evidence](UCOPE_UAV_MEAN_VELOCITY_RENEWAL_B01_P85_RESULT_EVIDENCE_20260909.md).
+
+## Previous scientific position — 2026-09-09 short fixed renewal B03 gains against feedback while both lose to hover
 
 P84 is valid complete B/EXPLORE **UP** at F−G **+0.06439366516106426**
 (conditional SE **0.008200587980245644**), with F−H
