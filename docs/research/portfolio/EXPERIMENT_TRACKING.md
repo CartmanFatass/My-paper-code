@@ -1,5 +1,7 @@
 # HMASD experiment tracking
 
+VSPC1 P76 remote execution checkout reclamation completed after integration: exact b10-8501 checkout absent on disk/registry, source preserved under remote refs/recovery/p76-20260909/vspc1-b10 and published ancestry, external outputs retained. Shared authoring checkout remains active; policy-blocked CM test scratch remains separate.
+
 VSPC1 P76 full intake62625efbb accepted: sole B10/8501 handle terminal exit0, valid CHANGE_DOWN C=-.0542390934;512 UP and768 WITHIN, all160 evaluations retained. Source boundary and independent review/focused receipts accepted;434176steps/3072Adam/475.85s, allowance spent. Original DM actually resumed P77 ONE fresh independent unchanged two-endpoint pair through card/source/remote execution/sole CM observation/intake, same caps and no retry. New master/handle pending. Root owns finished remote checkout reclamation; policy-blocked scratch remains original CM-owned.
 
 ACVC P76 preparation `0d812969dffe1aad04751f7daca2a5d4c9f0c902` accepted; fixed TASK `58b5d723e5687f94a81a4f1b787641806d8b1421` actually dispatched once to configured Transport. App delivery accepted, but preflight confirmed zero browser action/Send: internal HANDOFF lacks the reset declaration/evidence required for its retired provider binding. Original DM actually resumed to repair this same unsent routing metadata, preserving fixed science; no second request or experimental allocation. UCOPE P77, VSPC1 P76 intake, VSP03 question preparation and FOLR focused source readiness continue.
