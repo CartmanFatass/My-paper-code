@@ -53,3 +53,27 @@ source and literal-wrapper binding, fresh joined actual-node admission, sole
 observation and all-outcome collection. CPU FP32, one process/numerical thread;
 no retry, resume, extra evaluation or successor. DM owns scientific intake and
 Root owns completed remote-worktree reclamation.
+
+## Frozen execution binding
+
+Source SHA `23ebb0f5e22286d9ea77a145f980bedacc32d9da`. Literal LF wrapper: `scripts/run_vspc1_native_hold_value_b13_p80.sh`, SHA256 `f7b02dce93d632e7263303291953cbec63f82ad098e272ef39514738c30f0df9`.
+
+```bash
+#!/usr/bin/env bash
+set -euo pipefail
+exec /usr/bin/time -f 'whole_wall_seconds=%e,peak_rss_kib=%M' /bin/bash --noprofile --norc -c '
+cd /home/wu/hmasd-worktrees/vspc1-native-hold-value-b13-8601-23ebb0f5e222 &&
+/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/projects/HMASD/temp/directions/vsp_c1/exp/native_hold_value_b13_8601_23ebb0f5e222_admission.json &&
+/home/wu/.venvs/hmasd/bin/python scripts/run_vspc1_native_hold_value_b13.py --seed 8601 --out /home/wu/projects/HMASD/temp/directions/vsp_c1/exp/native_hold_value_b13_8601_23ebb0f5e222
+'
+```
+
+Node hmasd-wsl-node; supervisor handle `vspc1_hold_value_b13_8601_23ebb0f5e222`.
+Exact submission argv:
+
+```text
+ssh -o BatchMode=yes -o ConnectTimeout=10 hmasd-wsl-node /usr/local/bin/agent-task run vspc1_hold_value_b13_8601_23ebb0f5e222 /bin/bash /home/wu/hmasd-inputs/vspc1_hold_value_b13_8601_23ebb0f5e222.sh
+```
+
+Whole wrapper includes startup/admission through H/publication/readback/exit.
+The single accepted submission consumes the allowance, including a prelearner failure.
