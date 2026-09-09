@@ -12,7 +12,7 @@ The five original P67 DM assignments have returned. Both experiments are collect
 
 | Direction | Native DM | Synced direction revision | Current bounded work |
 | --- | --- | --- | --- |
-| ucope | /root/dm_ucope_p47_resume | 9f71571dc | Request 2026-09-08-ucope-post-b04-renewal-convergence-01 dispatched to Transport; same binding, zero new experiment allocation; await factual Send/result receipt |
+| ucope | /root/dm_ucope_p47_resume | 9f71571dc | Request 2026-09-08-ucope-post-b04-renewal-convergence-01 ARCHIVED/NATURAL_COMPLETION, one Send; original DM received followup_task for complete GitHub response intake and conforming card/next assignment; no new experiment |
 | vsp_c1 | /root/dm_vspc1_p49_value_question | d220ef01c | P67 COMPLETE/UP, Delta+.0230983264; 312.77s whole invocation, no live process. P68 followup_task prepares same-information approximately capacity-matched ordinary-MLP comparator card/tier return; no code/run allocation yet |
 | vsp_03 | /root/dm_vsp03_p54_reentry | daf20eeee | P67 COMPLETE, source828da0034, collection52160094e; greedy G-R0+.0026123047, stochastic G-R0-.0487548828, mixed two-instance evidence. Complete manager-origin-to-finished wall3.253184s now verified from journal; no successor allocated |
 | flexible_skill_duration | /root/dm_fsd_p47_resume | 27aacfb0d | Request 2026-09-08-fsd-p67-uav-individual-renewal-01 dispatched to Transport; existing binding, P52 stop preserved, await factual Send/result receipt |
