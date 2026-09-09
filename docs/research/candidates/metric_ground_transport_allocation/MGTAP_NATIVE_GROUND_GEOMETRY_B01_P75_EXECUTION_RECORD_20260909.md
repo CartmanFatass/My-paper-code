@@ -47,3 +47,20 @@ supervisor PID3034957. First observation: running, joined memory admission
 passed, effective available15635890176 bytes and physical floor passed.
 Actual task log and admission are collected at terminal state. Master8202 is
 not yet submitted. Sole observer remains /root/cm_mgtap_p72_repair.
+
+## Master8201 terminal collection
+
+Supervisor finished/exit0 at2026-09-09T16:28:36+08:00. Complete external wall
+353.71s; REL173.65472108195536s; DENSE/H/publication/exit remainder
+180.05527891804462s. Collection/validation wall8.782s. All declared learner,
+episode/rollout/optimizer counts, zero duration decisions, primary endpoints,
+checkpoint finiteness/FP32 and copied size/SHA-256 comparisons pass.
+Counts:286720 native team steps,2048 Adam calls,1120 complete episodes,
+96 evaluations (32 each REL/DENSE/H), no partial steps and no limits.
+The per-master reported difference is -0.04468252516448091; conditional SE
+0.003273643145587254. This sign does not gate master8202.
+
+Durable collection facts: MGTAP_NATIVE_GROUND_GEOMETRY_B01_P75_8201_TECHNICAL_COLLECTION.json.
+Complete raw files/checkpoints and supervisor witnesses are retained at
+C:/Projects/HMASD/temp/directions/metric_ground_transport_allocation/exp/mgtap_b01_8201_4f65eefb1b15e44b42d694376630fba0c230cc6c/,
+as well as the unchanged remote root. CM retains observation for master8202.
