@@ -275,3 +275,27 @@ selected by Convergence and concretely assigned by Root. Until then everything i
 no scientific process is live, and Root can advance an independent direction.
 
 Chinese brief: `docs/research/portfolio/owner/briefs/acvc/2026-09-09_native_link_loss_p76.md`.
+
+## 7. Published handoff, still unsent
+
+Input evidence is fixed at `e2a175ef418c05e99a7784f2e5b57856e027281a`. The published TASK
+is fixed at `58b5d723e5687f94a81a4f1b787641806d8b1421`:
+`docs/research/candidates/acvc/pro_packets/20260909_native_link_loss_convergence/TASK.md`.
+Issue: `https://github.com/CartmanFatass/My-paper-code/issues/14`. The same folder contains
+the bound `HANDOFF.json`, with Root as parent, the actual native author UUID as source and
+the configured independent Transport as operator. It reports `READY_TO_DISPATCH`.
+
+Fresh GitHub reads confirmed the committed TASK bytes and the open Issue with zero comments;
+the retained `ISSUE_DISCUSSION_SNAPSHOT.json` records that observation and immutable task
+digest. All 16 permitted reference paths exist at the fixed input SHA. The response path is
+absent. No Transport dispatch, provider Send or scientific call was made by this preparer.
+The renderer refused a wording-only attempt to overwrite its unsent draft with
+`use a fresh output directory; preserve existing packet and send state`; the original TASK
+was retained and its matching REQUEST wording restored before successful binding. No accepted
+request was changed or resent. The temporary Issue-body file and its empty owned directory
+were removed. The original scientific recommendation and unresolved return units are unchanged.
+
+Root's next action is to accept/integrate the named preparation commits and dispatch this
+one exact handoff to Transport. The retired-provider cutover qualification in §6 remains
+explicit. The direction waits at this clean boundary for a formed response, not for an owner
+reply; independent authorized work can proceed elsewhere.
