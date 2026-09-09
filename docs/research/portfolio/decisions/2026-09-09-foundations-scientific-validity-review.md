@@ -1,0 +1,53 @@
+# Foundations special scientific-validity review intake
+
+Status: **complete file read; bounded scientific review accepted; preparation-order proposal pending owner ratification**. No lifecycle, priority, recast, frozen card, result polarity or empirical allocation changes here. Root's owner-requested research continuation remains active.
+
+## Exact response and delivery facts
+
+Request `2026-09-09-foundations-scientific-validity-review-01`, Portfolio node `portfolio:cross_direction`; fixed input9d984bc7544707a7452e1146a8100d0e567458b4, TASKc18cbc6ae64603f2a70e2474c9ddf9d13c8aaedb, HANDOFF344572f80f3f2aac0648d700b37ff26e9fe25db7. One provider Send accepted18:36:24Z in6a9c109e-b264-83e8-a78b-f9ea1b767b7b. Root read all296 lines of the [complete response](../pro_packets/20260909_foundations_special_review/archive/RESPONSE.md), including its source list, at delivery commit e865e7b25beb16a7348070181161f18706fced4e; integrated unchanged as88a540f92. Git blobcf4a77e01707e910220e7cecc47ca132dc477af8;60183 bytes; SHA256906c474084f770d96b9d13672e080ed3dc57cbd2f1f0b1e45c985d8e34e97958.
+
+The owner supplied the Pro webpage's short claim that no write tools were available, no write was attempted, the response was404 at c18cbc6 and Issue16 had no comments. Actual file delivery contradicts that claim. The owner clarified that they pasted only the webpage reply into Root; Pro submitted the GitHub file. Root's initial manual-file-delivery interpretation was mistaken and is superseded. The commit account alone does not identify the actor; attribution cites the owner's explicit clarification. Issue16 comment remained absent at Root's readback. No duplicate Send or replacement scientific response is required to read the complete file. Preserve the contradictory chat receipt separately; replacement Transport owns actual observation/archive closure.
+
+The owner archived stalled Transport01a07e52-f085-76a0-886a-4127f490421f and explicitly requested a new Luna/high session. Config30c1699ca names replacement01a087a3-4f12-7021-9a4d-6da9da2bafcc. It receives recovery only for this accepted request: original input/operator metadata stays preserved and actual recovery executor is separate. Root performed no provider browser action.
+
+## Scientific conformance and claim ceiling
+
+The declared retrospective A/RECON question concerns actual experiment validity and bounded inference, not a new result-bearing comparison. The response addresses all ten directions, reports actual source windows/version snapshots and omitted dependencies, keeps opposite observations, and distinguishes implementation, causal interpretation and investment choices. It does not claim runtime reproduction, exhaustive dependency audit, a model-comparison experiment or new training-population precision. No decision-critical access gap is claimed for its bounded conclusions. Its explicit residual limitations prevent promotion to a comprehensive proof of implementation correctness.
+
+Root accepts the formed bounded review under evidence-spec11.8–11.10 and the declared methods at d89be7656d367ca10f75ca1185797081b5d722fa. Complete trained-package performance remains legitimate without a unique mechanism proof; conditional episode uncertainty does not become independent training evidence; a failed dependency limits the affected comparison while trustworthy narrower data remain usable. No mandatory theorem, tuning exercise, seed quota, explanation-first diagnostic, uniform learner, global exception or additional launch gate is imposed. The report requests no specification change, so §4.7 specification-plan authority is not invoked. There is no concrete conformance conflict requiring another Pro round before the following bounded intake actions.
+
+The report is **PRO_FINAL / ROOT_INTEGRATED** for this retrospective review, not a fresh Direction disposition or owner-ratified Portfolio investment. Its §4 preparation order is maintained below as a proposal. Historical objects retain their executed definitions; append current interpretation rather than rewriting original outcomes.
+
+| Direction | Accepted present interpretation | Actual follow-through |
+| --- | --- | --- |
+| UCOPE | P85 mean-execution WITHIN and H losses remain; prior sampled gains remain; normalization is a hypothesis through actual loss/clip/baseline paths, not an identified cure | Original DM prepares the already-selected normalized/raw G/H card, with no run allocated by this intake |
+| FOLR | Complete RESET_ABOVE_MEI trained-package observation; one pair and action-dependent traffic do not identify pure forgetting or stable superiority | Original DM prepares an independent-pair repeatability card; no new result-bearing invocation in the assignment |
+| RCLE | Final905be66 intake is already complete: W1 retained, W100 prefix unknown, paired effect missing; no efficacy polarity | Original DM informed; no duplicate intake, automatic retry, root-cause claim or silent historical-W1/new-W100 pairing |
+| SCDMP | Valid small positive WITHIN, nonzero residual intervention; no exact Bellman/semigroup conclusion or equivalence | Existing intake already keeps these limits; allocation remains spent, residual family and D6 boundaries unchanged |
+| FSD | Two local endpoint losses support stopping only the tested .25/k10/five-update extension; training gains and component contrasts survive | Existing bounded stop remains; no longer/third pair or whole-direction closure |
+| VSP-C1 | B13's negative intact-body-plus-gate observation does not isolate historical capacity cause or negate all gates; old gains survive | Existing package stop remains; no new critic/run |
+| VSP03 | Two cheap positive greedy points support a real close-call objection; current pause is a reversible investment choice, not a ban on independent replication | Existing pause remains; any renewed value question goes to its original node, not direct fourth training |
+| ACVC | Learned gates beat C and lose to stronger F twice; fixed-F history and frozen proposer/selection background retained | Existing instantiated-package stop and second-recast order remain |
+| MGTAP | Adverse REL package is valid; fixed-slot mean does not erase all count information; sum reparameterization does not imply same optimization | Existing native/coordinate family pauses remain; no sum/count B inferred |
+| CRTO | Complete selected-panel diagnostics and zero matched differences remain; RAW-LONG5/8 prevents original competent-residual claim | Mechanical index wording corrected; original DM/CM receives untriggered finite-zero displacement refusal risk for bounded engineering acceptance |
+
+## Concrete corrections and their limits
+
+1. Review §3's RCLE top-summary conflict is valid at the bound9d984bc snapshot. Main's newer top paragraph had already been corrected before this intake. Retain that historical finding and final905be66 facts; do not recreate an unfinished scientific-intake dependency.
+2. Original assembly CM checked CRTO's actual card §4, changed current EXPOSURE.json from each eight-row budget to RAW-LONG's KEEP/REPLAN eight-row sides, and appended a dated EVIDENCE_INDEX correction. Root inspected the precise diff and accepted the JSON parse result. Published dc5ef5258; all frozen input/TASK bytes, counts, source mappings and diagnostic-only results remain unchanged.
+3. Original CRTO DM resumed in clean codex/crto531263fdc for source/card dependency review with its original CM. Scope: determine whether final finite-zero movement refusal is unnecessary and repair it if confirmed, preserving nonfinite/broken-training/meaningful update checks. No scientific invocation, new framework or retest of the consumed B08. Engineering acceptance remains with original DM/CM; no code is accepted merely because Pro flagged it.
+4. The general inference cautions mostly reaffirm limits already present in current intakes. Do not invent ten new defects or mechanically rewrite ten direction histories. This linked intake supplies the cross-direction annotation; return only actual gaps to their original owners.
+
+## Preparation-order proposal and authority
+
+Pro §4 recommends first preparing UCOPE's already-selected normalized/raw G/H question and FOLR's independent trained-package replication, then considering RCLE's recoverable pair and, where marginal value warrants it, VSP03's original-node reassessment. Other named stops remain. The proposal changes no HIGH/MEDIUM/LOW or ACTIVE/PARKED/CLOSED field, no recast count, no original quota and no empirical invocation.
+
+Maintained owner item: [20260909-root-001](../owner/inbox/2026-09-09/20260909-root-001.json), with the [Chinese decision packet](2026-09-09-foundations-scientific-validity-review-owner-packet.json). No owner answer is fabricated.
+
+Root recommends **ratify this preparation order**; refusal/amendment changes that proposed sequencing, not the accepted empirical facts. It is not yet ratified. Already-authorized reversible card preparation and CRTO engineering correction proceed while the maintained owner item is available; this is not a new owner-response launch condition. A later result-bearing assignment still needs its own legitimate object selection and four evidence-spec11.4 conditions; no exhausted allocation is replayed.
+
+The strongest opposition is VSP03: direct computation is much cheaper than FOLR and two greedy positive points remain, so another independent observation has plausible value despite its current stop. RCLE has no valid paired denominator and an unmeasured W100 prefix. UCOPE normalization may fail. Headroom is missing on the respective current hosts across all ten scoped directions; no H/script/fixed-RAW ceiling substitutes for tuned same-information headroom. MEIs remain card-specific. Costs and distinct scientific/check/CPU/critical-path windows are in response§4 and current Portfolio; no full-history cost completeness is claimed.
+
+Preparation dispatched: UCOPE original DM at clean34c129c39 (response brought fromea3bce806, pushed); FOLR original DM at clean4c1813e4a (response brought from7e1f59e5f, pushed). Each owns one inspectable card/choice/budget preparation, no result-bearing invocation or Pro Send. CRTO original DM owns the focused code-risk assessment and any in-scope repair. Three actual native chains advance; Transport is not a fourth direction. No fifth chain or scientific object is invented solely for capacity.
+
+New scientific exposure in this review/intake is zero. No new training, evaluation, model initialization, profiling or benchmark occurred. The owner's latest instructions govern asynchronous overrides; pending owner item and Transport archival are tracked separately from this accepted file-based scientific intake.
