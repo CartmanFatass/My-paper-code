@@ -214,3 +214,24 @@ renewal algorithm checks are reused. CM reports changed source, focused results,
 actual launch source/input/handle, admission, counts, receipts and every outcome.
 No independent review is added for the binding-only change; a substantive credit
 change exceeds this allocation and returns to DM/Root before execution.
+
+## 8. Observed P71 completion — 2026-09-08
+
+Original §§1–7 remain prospective and unchanged at
+`ba0915bb0269050609bee9b4d5d988cef913cd2c`. One new real pair7401 completes
+at source `7adc5aae35542ba35b4b8a2c07fc8285e958ce4d`: **VALID / UP**,
+T−G **+0.024658177040921356**, conditional evaluation SE
+**0.011145715505143731**, above +0.01 by **0.014658177040921356**.
+T−H is +0.03714831826363973 and G−H +0.012490141222718373.
+All 96 final returns and adverse episodes remain; independent training n=1
+for this card, with P70's separate 7301 fit also favorable. These two fitted
+observations support bounded recurrence, not stable or causal superiority.
+
+All286720 native steps,2048 Adam calls and96 final evaluations complete in
+306.04s whole wall, within the original caps. Fresh admission passed both
+memory floors; one accepted submission, no partial steps or cap breach.
+Recorded predictions both occur,2/2; mean Brier0.2025; owner not taken.
+The [P71 intake §§7–10](UCOPE_UAV_RENEWAL_COMMITMENT_B02_P71_INTAKE_20260908.md#7-dm-all-outcome-check-and-reading)
+and [E0 evidence](UCOPE_UAV_RENEWAL_COMMITMENT_B02_P71_RESULT_EVIDENCE_20260908.md)
+retain the native result and limits. P71 ends here; a further independent
+pair is only a separate-allocation recommendation, with no new master or run.

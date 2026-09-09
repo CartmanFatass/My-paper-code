@@ -318,3 +318,170 @@ later archive/reclamation of the distinct P71 test/scientific checkouts and wrap
 DM intake/evidence preservation. Test scratch and source carrier packs were removed;
 scientific artifacts, P70 evidence and its checkouts were preserved. No successor, tuning,
 extra evaluation, retry or new independent pair follows from this completed allocation.
+
+## 7. DM all-outcome check and reading
+
+**VALID / UP**, B/EXPLORE. The new 7401 primary is
+**T−G +0.024658177040921356**, conditional evaluation SE
+**0.011145715505143731**, above +0.01 by **0.014658177040921356**.
+The prospective [card §§1–7](UCOPE_UAV_RENEWAL_COMMITMENT_B02_SCIENCE_CARD_20260908.md)
+at `ba0915bb0269050609bee9b4d5d988cef913cd2c` remains unchanged.
+The [E0 result](UCOPE_UAV_RENEWAL_COMMITMENT_B02_P71_RESULT_EVIDENCE_20260908.md)
+and [computed summary](UCOPE_UAV_RENEWAL_COMMITMENT_B02_P71_RESULT_SUMMARY_20260908.json)
+carry complete native outcomes, selected arithmetic and receipt bindings.
+
+Rule applied verbatim from card §5:
+
+> Delta>+0.01: the above-MEI native package margin recurs on this new fit; consider a separately justified bounded follow-up with both fitted outcomes visible.
+
+Comparator qualification, verbatim:
+
+> Weak/negative G−H narrows improvement-over-competent-control wording without erasing trustworthy T−G. Positive T−H never reverses primary loss.
+
+DM checked the completed report against the card, the actual binding diff and
+original focused acceptance, exact source/payload/terminal records in §§4–6,
+canonical admission and supervisor log/readback. Read-only analysis checked
+1120 recorded episodes and their `J=reward_sum/256`, the 32 final IDs and
+matched resets for each arm, all 96 final returns and three signed vectors,
+their means/conditional SEs, declared count totals and actual phase arithmetic.
+The collected summary/episodes/admission and executed-wrapper digests agree
+with CM's recorded remote/local facts. CM's all-seven-output checks, finite FP32
+checkpoint and phase/rollout checks were inspected, not rerun. No scientific
+execution, simulator, tensor verification, suite or checkpoint evaluation was added.
+
+The scientific-tools run-level utility used just two selected T/G endpoint rows
+for the declared independent training pair7401, with paired G baseline; training
+SD is null at n=1. H is a fixed reference, not a trained replicate. Its endpoint
+difference of means has an immaterial final-digit reduction difference from
+the native mean of paired differences, which remains the primary. The
+task-specific analysis retains all episode outcomes without treating them as
+training seeds. An initial read-only analysis lookup used P70's wrong SE field
+name; this was corrected before publication and affected no native bytes or rule.
+
+| Contrast | Native mean | Conditional evaluation SE | Positive / negative / zero episodes |
+| --- | ---: | ---: | ---: |
+| T−G | +0.024658177040921356 | 0.011145715505143731 | 22 / 10 / 0 |
+| T−H | +0.03714831826363973 | 0.014042694092488053 | 22 / 10 / 0 |
+| G−H | +0.012490141222718373 | 0.009774298009822923 | 18 / 14 / 0 |
+
+All 286720 native steps, 2048 Adam calls and96 final evaluations are complete.
+T/G each have512 training episodes,256 rollouts and1024 Adam calls; 1120
+explicit resets, two constructor resets and1600 diagnostic rows are retained.
+Native status COMPLETE, limits empty, no partial steps or cap breach. One
+accepted invocation used306.04s whole wall and553464KiB external peak RSS.
+T/G complete arm walls158.1893359690439s/138.41656891599996s satisfy the
+original1800s cap; whole fits3600s. Aggregate CPU and system-wide peak memory
+remain `resources_unmeasured`; the trustworthy native primary is unaffected.
+No engineering §4 addition or §5 breach was accepted. The one suite's complete
+3.92s is separate from scientific invocation wall.
+
+## 8. Scientific interpretation, predictions and owner flags
+
+The new fit has a positive sampled margin at the selected scale and positive
+T−H +0.03714831826363973. G−H +0.012490141222718373 is positive here,
+with conditional SE0.009774298009822923. P70's slightly negative G−H does
+not recur on this panel. Neither hover comparison establishes a tuned or
+generally competent-control baseline.
+
+| Separate renewal fit | T−G | T−H | G−H |
+| --- | ---: | ---: | ---: |
+| P70, 7301 | +0.055673191348834944 | +0.05305453732049459 | −0.002618654028340355 |
+| P71, 7401 | +0.024658177040921356 | +0.03714831826363973 | +0.012490141222718373 |
+
+**Strongest support:** two independently trained fits each show an above-MEI
+native package margin and positive T−hover. The second observation therefore
+supports recurrence beyond the one earlier fit. **Strongest contradiction/limit:**
+the new margin is smaller, both conditional SEs remain material, there are only
+two fitted observations and the first G−H was weak/negative. Training histories
+and evaluation panels both differ; no cause is assigned to changing magnitudes.
+P70 is never averaged into the new primary. Historical opening B04 WITHIN,
+B03/B02 DOWN and P24/6902 harm remain separate contrary package evidence;
+original P21 UP stays visible. No old result is retrospectively relabelled.
+
+T actually makes247346 training and15261 final own-expiry duration selections,
+with408014/25699 actual suppressions and1570/99 censored holds. Head-forward
+rows are1514598, within the original1003520–4014080 bounds, and T/G/head
+parameters move. These facts connect exposure to this native observation.
+They do not isolate information value: persistence, geometry, capacity, gradient
+exposure and partner co-adaptation remain live alternatives. The previously
+verified UTE/ACAC retrieval in card§2 supports the renewal event distinction;
+it supplies no causal explanation or baseline-competence claim for these gains.
+
+Recorded UP0.55 and G−H>0 at0.55 both occur: **2/2**, mean Brier **0.2025**.
+Owner prediction **not taken (unattended)**. These scores belong to this new
+card; P70's previously scored misses remain separate. The Chinese
+[owner brief](../../portfolio/owner/briefs/ucope/2026-09-08_UCOPE_UAV_RENEWAL_COMMITMENT_B02_P71.md)
+is published alongside this intake. No new ordinary-result owner item is needed;
+new-card item20260908-ucope-007 already records the prospective selection.
+Current owner reviews were empty at terminal intake; the final clean-boundary
+check and audit rows below record any later applicable override.
+
+Owner flags: **none**. Report the two-fit ceiling, conditional uncertainty,
+untuned/variable comparator performance, absence of tuned headroom and all
+adverse episodes. These are explicit limitations, not evidence suppression or
+an unrecorded change to the card's acceptance rule.
+
+## 9. Decisions this completed intake produces
+
+**Technical/scientific acceptance, object tier.** Options: (a) accept valid UP
+with the new-fit and two-fit qualifications; (b) withhold it until stable
+population or competent-baseline superiority is established; (c) read source
+conformance or head movement as causal mechanism value. Recommend and execute
+**(a)** under card§5 and evidence-spec §§4,5.2,11.4,11.8. The comparison is real,
+complete and trustworthy; the stronger claims in (b)/(c) are not this B claim.
+
+Owner-delegated decision (unattended, 2026-09-03 instruction): **(a)**.
+
+**Allocation boundary and next observation, object tier.** Options: (a) end P71
+and recommend one separately allocated additional independent same-package pair;
+(b) prefer no unchanged follow-up; (c) tune or require exact/causal diagnostics
+before another fit. Recommend and execute **(a)** as a return recommendation,
+with **no new invocation/master/card or budget selected here**. Two favorable
+fits justify one further direct check of training variability, retaining every
+outcome; their small number does not justify stable superiority. This answers
+the remaining learning question more directly than more evaluation of the same
+checkpoints, an exact policy search or a mandatory tuned-headroom exercise.
+The same complete work is286720 native steps/2048 Adam/96 evaluations for one
+new pair if subsequently allocated; observed306.04s is a reference, not a promise.
+No seed is required to improve and no run-until-positive sequence is authorized.
+
+Owner-delegated decision (unattended, 2026-09-03 instruction): **(a)**.
+
+Every P71 outcome ends this allocation. The recommendation stays inside the
+accepted mechanism and is not a new family, recast, promotion to C-BENCH,
+Portfolio investment/lifecycle/priority change, automatic continuation or
+consumption state. No Pro decision or stronger-class prerequisite is invented.
+
+## 10. Clean return, evidence retention and next discriminator
+
+The cohesive source-to-result P71 batch is complete; both learned arms, H,
+publication and exit are retained. No live P71 process or pending Pro response
+remains. Shared checkout/index returned clean from CM at
+`aea0b6114d005207100fd3661283ec074ebcd690`; DM appends this scientific intake
+and publishes explicit paths on the same `codex/ucope` branch.
+
+Root integrates the required P71 commits and durable result without changing
+P70's historical source. Preserve the raw local collection at the exact
+authoring-checkout path in E0.1 before any containing-checkout reclamation.
+Root owns archive/reclamation of the completed remote P71 test checkout
+`/home/wu/hmasd-worktrees/ucope-uav-renewal-b02-p71-check-20260908`, scientific
+checkout `/home/wu/hmasd-worktrees/ucope-uav-renewal-b02-7401-p71-20260908`
+and staged wrapper `/home/wu/hmasd-inputs/ucope-uav-renewal-b02-7401-p71-20260908.sh`
+after collection/intake integration and verified evidence preservation.
+Creator-owned test scratch/carrier packs are already removed; Root's checkout
+reclamation is not claimed complete here. P70 evidence remains separately owned.
+
+Usage is one accepted complete invocation/one valid new fit at306.04s.
+Across the two renewal fits the sum of whole invocation walls is610.89s,
+305.445s per valid fit, excluding engineering and older opening regimes; this
+is not session critical path or aggregate CPU. Tuned headroom remains absent.
+
+Next discriminator recommendation: **one additional independent trained T/G
+pair with the same native comparison and H reference**, prospective binding and
+all-outcome budget if Root separately allocates it. No new master is chosen,
+source bypass used, second P71 pair started, or successor card frozen by this
+return. The claim ceiling remains a preliminary native renewable-package
+repeatability observation on two independent trained pairs and their evaluation
+panels, with causal and stable population judgments unestablished.
+
+Final intake owner check at **2026-09-08T23:28:42-07:00** found no unapplied reviews and no owner entries in the 165 UCOPE audit rows examined across main and this checkout before the two new rows. No item required mark-answered. Decisions are appended at [audit lines 92–93](../../portfolio/audit/2026-09-08.md#L92); owner flag none.
