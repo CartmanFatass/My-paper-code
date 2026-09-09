@@ -38,6 +38,8 @@ UCOPE P74 now ARCHIVED with full responsec2501bcc6/Issue11comment5599356790; ori
 
 VSPC1 P76 B10/8501 is now accepted/running: `vspc1_hold_value_b10_8501_2c2c7d9d3481`, PID3038411, exact source2c2c7d9d34814c9834a741ce25b2f36076347315. Fresh canonical admission passed; same CM sole observer/collector, then original DM intake. No retry/adoption or extra submission. Technical source/intake acceptance details remain with that parent chain.
 
+MGTAP post-B01 request nowARCHIVED: full response251bffbc4/Issue5comment5599484438, exactly one Send. Original DM actually resumed full scientific/conformity intake of the proposed narrow actor-family PARK; no new invocation or Portfolio lifecycle change. Transport observation for this completed request has ended.
+
 ## Historical soft-stop closeout updates — 2026-09-09
 
 - CRTO P72: response/intake/handoff integrated at63550cd83; DM stopped, no live experiment or Pro generation, no successor B. See [handoff](../candidates/commitment_residual_triggered_options/CRTO_RESTART_HANDOFF_20260909.md).
