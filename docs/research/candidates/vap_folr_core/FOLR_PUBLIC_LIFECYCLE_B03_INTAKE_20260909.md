@@ -90,3 +90,39 @@ fits, wide conditional evaluation variation and live optimization/data/partner e
 including B01's adverse RESET training-return comparison. Tuned headroom remains absent.
 No material critic dissent or new close call is claimed. The next discriminator is the
 allocated fresh fit pair itself; terminal collection and scientific intake remain outstanding.
+
+## 3. RETAIN accepted; shared Monitor adopted; collection pending
+
+CM published [execution evidence](FOLR_PUBLIC_LIFECYCLE_B03_RESULT_EVIDENCE_20260909.md)
+at `96bdc7e2241a40c37151f0be9870fa8daac74170`. DM read its exact accepted command, new
+detached cwd, source/seeds, output/receipt locations and direct MONITOR_ADD receipt against
+card §§2/4/5. The command uses the separate destination preflight followed by the declared
+1800s complete RETAIN runner, with no extra scientific invocation or repeated tests.
+CM's supporting total is 2.1290805s; this DM artifact read adds 0.2585806s, giving
+**2.3876611s of 60s through this pending boundary**. No final scientific output is read here.
+
+The accepted handle is `folr-public-lifecycle-b03-retain-20260909`, source
+`434f10cf95f16dd342cbf754382aa76155fcd2b7`, cwd
+`/home/wu/hmasd-worktrees/folr-public-lifecycle-b03-434f10cf` on `hmasd-wsl-node`, output
+`temp/directions/vap_folr_core/exp/public_lifecycle_b03_seed7803_retain`, with sibling
+`public_lifecycle_b03_seed7803_retain_memory.json`. CM's publication correctly recorded
+dispatch accepted and adoption pending at that point. **Root subsequently confirmed actual
+Monitor adoption at 2026-09-09T21:22:31.4426682Z**, with PID3069223, running and tmux true.
+This later observation is the current boundary and does not rewrite the earlier receipt.
+
+One submission is accepted; RESET remains unsubmitted. The shared Monitor owns observation
+and sends terminal facts directly to Root. No CM/DM parallel routine status polling occurs.
+Root resumes the original CM for terminal collection/technical acceptance and the already
+allocated RESET arm; original DM later performs complete scientific intake. Memory admission,
+learner completion and outcome are not inferred from supervisor acceptance/adoption. The
+two-arm allocation remains **incomplete, pending collection**, with no scientific polarity.
+
+Root also relayed a new owner instruction after B03 dispatch: **after complete B03 intake**,
+read main `docs/research/portfolio/pro_packets/20260909_third_party_planning_comparison/RESEARCH_PLAN_SYNTHESIS_CODEX_20260909.md`
+§§2, 5.2 and 6 at `dae6a74bb` and judge/prepare an event-reset/random-reset/RETAIN timing
+candidate using all three pairs. Random-reset denominator/matching and replay-mask reuse
+must be prospectively fixed; existing `survivor_opportunities` counts only event-bound
+opportunities, not all eligible survivors. The proposed 128 final episodes belong only to
+that future candidate. This instruction changes no B03 arm, endpoint or budget and allocates
+no automatic three-arm invocation. Its judgment follows B03's full result; no new Pro Send
+or candidate result is asserted at this boundary. Root accepted B02 remote closeout separately.
