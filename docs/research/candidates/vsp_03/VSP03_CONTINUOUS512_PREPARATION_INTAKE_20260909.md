@@ -175,3 +175,22 @@ immutable reply to this DM for conformity and scientific intake. If selected,
 Root supplies the bounded implementation/execution continuation; dispatch alone
 does not complete the owner candidate. Current stopped scope, old results,
 recasts1 and Portfolio authority remain intact at this return.
+
+Publication: candidate/CM/counts/owner/audit input is
+**`5a5f7c549c51c3ad9106fc94bd884a34b3f4427a`**. Request
+**`2026-09-09-vsp03-continuous512-convergence-01`** has fixed
+[TASK](https://github.com/CartmanFatass/My-paper-code/blob/0a4f092be84e2fcbeb8b9bed77780a993c5e9546/docs/research/candidates/vsp_03/pro_packets/20260909_continuous512_convergence/TASK.md)
+at **`0a4f092be84e2fcbeb8b9bed77780a993c5e9546`**. All14 effective reference
+path/full-SHA pairs were checked as existing Git objects reachable from published
+remote refs; TASK and its manifest retain those mappings. This establishes local
+publication, not Pro's future connector access. Current main's renderer supplied
+the separately pinned methods and new Transport endpoint
+`01a087a3-4f12-7021-9a4d-6da9da2bafcc`; binding used the direction checkout and
+verified the exact committed TASK bytes. The
+[HANDOFF](pro_packets/20260909_continuous512_convergence/HANDOFF.json) is
+READY_TO_DISPATCH, with Root receipt parent, original DM author and no caller Send.
+The final HANDOFF commit is supplied with the Root return. The
+[candidate owner item004](../../portfolio/owner/inbox/2026-09-09/20260909-vsp03-004.json)
+has recommended(a), no auto_applied choice and no owner reply; audit row27 records
+only the executed preparation. No previous response/request or scientific
+DIRECTION content was changed.
