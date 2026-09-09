@@ -152,3 +152,28 @@ read-only; return an actual scope gap before affected work. No new framework,
 registry, source guard, global object rebinding, profiler or retry service.
 Existing §5 source/runner/test budgets apply. The [CM handoff](FSD_UAV_INDIVIDUAL_RENEWAL_B02_P72_CM_HANDOFF_20260908.md)
 fixes source acceptance and the cohesive execution/collection task.
+
+## 5. Accepted source and allocated continuation — 2026-09-08
+
+DM accepts source `08199a932671d9bacdbe4eb0bfebab38c37fca1f` for this card's
+explicit B02 binding. The [technical evidence](FSD_UAV_INDIVIDUAL_RENEWAL_B02_P72_TECHNICAL_EVIDENCE_20260908.md)
+records the 42 passing fake cases, 9.0115169s total check process wall and
+independent review with no material finding. DM inspected the actual committed
+diff and every changed training/evaluation/summary/pair seed consumer. The new
+entry delegates to the unchanged learning loop; B01 defaults remain intact and
+old B01 companions cannot form a B02 pair. No source or scientific scope gap
+remains in this bounded change.
+
+At this acceptance boundary there is no scientific submission, model, learner,
+native step or B02 outcome. Under the existing P72 allocation, the same CM now
+continues to committed literal inputs and one remote D0 then one I at the source
+above, with the exact §4 keys, complete caps and adjacent admissions. The
+source-bound remote checkout uses the committed card §§1–4; this later acceptance
+appendix does not change those bytes' scientific meaning. No Root relaunch
+request or extra invocation follows from source acceptance.
+
+Options: (a) accept this conforming source and continue the allocated pair;
+(b) return a concrete binding defect; (c) add validation or another launch gate.
+Recommendation and selected option: (a).
+**Owner-delegated decision (unattended, 2026-09-03 instruction): (a)**.
+This is object-tier technical acceptance, with no scientific performance claim.
