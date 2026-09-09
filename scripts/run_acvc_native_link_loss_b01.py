@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""The single P78 T/G/C/F native comparison; synthetic injection is test-only."""
+"""P78/P79 native comparisons; synthetic injection is test-only."""
 import time
 PROCESS_START = time.monotonic()
 
@@ -35,7 +35,8 @@ def run(output, checkpoint, seed, check_wall, process_start, launch_sha,
     counts = dict(environment_constructors=0, unscored_constructor_resets=0, explicit_resets=0,
                   step_calls=0, team_steps=0, train_episodes=0, eval_episodes=0,
                   optimizer_steps=0, rollouts=0, base_agent_forwards=0, learned_gate_agent_forwards=0)
-    summary = dict(object="ACVC-NATIVE-LINK-LOSS-B01", seed=seed, launch_sha=launch_sha,
+    object_name = "ACVC-NATIVE-LINK-LOSS-B01" if seed == 8901 else "ACVC-NATIVE-LINK-LOSS-B02"
+    summary = dict(object=object_name, allocation="P78" if seed == 8901 else "P79", seed=seed, launch_sha=launch_sha,
                    status="incomplete", counts=counts, focused_check_wall_s=check_wall,
                    device="cpu", dtype="float32", torch_threads=torch.get_num_threads(),
                    torch_interop_threads=torch.get_num_interop_threads(), exposure={}, arm_own_wall_s={})
@@ -58,12 +59,12 @@ def run(output, checkpoint, seed, check_wall, process_start, launch_sha,
     def check():
         remaining = deadline_seconds()
         if remaining <= 0:
-            raise TimeoutError("P78 complete arm or logical study cap reached")
+            raise TimeoutError(f"{object_name} complete arm or logical study cap reached")
         if hasattr(signal, "setitimer"):
             signal.setitimer(signal.ITIMER_REAL, remaining)
 
     def timeout(_signum, _frame):
-        raise TimeoutError("P78 wall deadline reached")
+        raise TimeoutError(f"{object_name} wall deadline reached")
 
     previous_handler = signal.signal(signal.SIGALRM, timeout) if hasattr(signal, "SIGALRM") else None
     with (output / "episodes.jsonl").open("w", encoding="utf-8") as episode_file, (output / "updates.jsonl").open("w", encoding="utf-8") as update_file:
@@ -136,7 +137,7 @@ def run(output, checkpoint, seed, check_wall, process_start, launch_sha,
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--seed", type=int, choices=[8901], default=8901)
+    parser.add_argument("--seed", type=int, choices=[8901, 8902], default=8901)
     parser.add_argument("--checkpoint", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--launch-sha", required=True)
