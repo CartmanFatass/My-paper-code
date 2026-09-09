@@ -1,0 +1,38 @@
+{
+  "question": "是否把已明确的原生链路负证据与动作比较交回原Convergence，考虑一次有限真实学习比较？这里只执行问题准备，不开启家族。",
+  "changes_if_approved": [
+    {
+      "target": "acvc 原Convergence问题",
+      "from": "P68缺少具体原生信息到动作映射",
+      "to": "提出一个绑定既往用户链路、执行或回溯移动的有限B问题；科学选择仍待原节点裁决"
+    }
+  ],
+  "if_refused": "保留现有方向边界与旧宿主关闭；不启动任何新实验，也不改变ACTIVE/MEDIUM、两次recast及最低排序。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_P76_PREPARATION_INTAKE_20260909.md",
+      "quote": "The missing source/action/comparator mapping from P68 is now explicit.",
+      "why": "源码说明未满的列表中，绑定的用户消失表示本机链路不再合格；自身旧位置给出合法回溯动作，已有DENSE提供训练过的固定比较器。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_P76_PREPARATION_INTAKE_20260909.md",
+      "quote": "The cue does not establish loss of global service, structured predecessors lost, and fixed handling may suffice.",
+      "why": "队友接手可能使固定纠正有害，通用学习器也可能已包含全部有效处理；不能把局部统计当团队收益。"
+    }
+  ],
+  "uncertainty": [
+    "旧1/4门槛是回合总收益还是每步均值，需要原节点明确；本地不重释或降低门槛。",
+    "一次新配对对一个已知结果的冻结基础策略进行条件比较，不能形成稳定优越性结论。",
+    "实际纠正机会和新算法耗时未知；不先做模型或成本探针。"
+  ],
+  "cost": {
+    "compute": "准备0次科学调用；提案294912原生步、2048更新、128次终局评估，1800秒/学习臂和3600秒完整研究上限均未分配。",
+    "owner_time": "可异步查看，无需回复才继续已授权准备。",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing；新科学选择只由原Convergence形成，之后由Root具体分配。"
+  },
+  "verdict_text": "Recommend (a) narrowly: submit this bounded native B question with an explicit inherited return-unit interpretation. No local family opening, experiment or Pro Send.",
+  "source": "docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_P76_PREPARATION_INTAKE_20260909.md"
+}
