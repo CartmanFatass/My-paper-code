@@ -1,6 +1,6 @@
 # FOLR public lifecycle TIMING-B01 technical evidence
 
-RETAIN collected and technically accepted; EVENT submitted, pending Monitor adoption/terminal collection; RANDOM unsubmitted. Allocation: card §§2–6 and intake §7 at `8fc84a01eaaf8c89197020a75879ba9dfeea0e33`, Root main `fdede5b8897e412d68d2a341a379efac69feb429`. Original CM owns implementation, execution and terminal collection. The sequence is RETAIN → EVENT → RANDOM, exactly one accepted submission each; failure ends dependent execution. No retry, replacement, top-up, cost probe or successor.
+RETAIN and EVENT collected and technically accepted; RANDOM submitted, pending Monitor adoption/terminal collection. Allocation: card §§2–6 and intake §7 at `8fc84a01eaaf8c89197020a75879ba9dfeea0e33`, Root main `fdede5b8897e412d68d2a341a379efac69feb429`. Original CM owns implementation, execution and terminal collection. The sequence is RETAIN → EVENT → RANDOM, exactly one accepted submission each; failure ends dependent execution. No retry, replacement, top-up, cost probe or successor.
 
 ## Source and check index
 
@@ -73,3 +73,9 @@ Executable readback verifies source74d023d7d, seeds7804/107804,5000train/100000t
 Admission22:56:48.618552Z passed physical/effective floors at15633895424 bytes each. Full wall786.72s, user765.45s/system22.68s, CPU788.13s, peak RSS670720KiB, exit0; runner's narrower wall786.436520s/RSS643268KiB. Both individual caps met; completed scientific wall1524.92/5400s and CPU1527.34s. Local/remote hashes match: summary `9e724abbdd5ba9c0892585b622a74dae2284b52ddeba138dd60828423faca64c`, checkpoint `258c323ae643f54d03a1edfdf1a2782d2f0a4e8ecb289746c51a466e08aaeef6`.
 
 EVENT technically accepted. Readback/check/digest0.4804712s brings supporting total to **9.8888591/300s**; transport and Git separate. No new test, model load or scientific replay. Final allocated RANDOM remains projected772.174s under1800s, with fixed private mask streams207804/307804 and unmatched p=.1. Its submission follows this intact terminal acceptance, irrespective of partial return signs.
+
+## RANDOM accepted, pending collection
+
+EVENT collection commit `373c5a280` was pushed before the final submission. Supervisor accepted `folr-public-lifecycle-timing-b01-random-20260909`, tmux `agent_folr-public-lifecycle-timing-b01-random-20260909`, log `/home/wu/.agent-tasks/folr-public-lifecycle-timing-b01-random-20260909/task.log`. Exact command is the RETAIN command above with `--arm RANDOM` and lowercase output/receipt suffix `retain` replaced by `random`; all other arguments/source/cwd/cap preserved. The source fixes PCG64 training207804/evaluation307804 and p=.1. Fresh destination admission immediately precedes this runner.
+
+Direct MONITOR_ADD to live shared Monitor returned accepted destination threadId / `isError=false`; actual adoption and terminal collection await Root's notice. No parallel status polling. All3 allocated submissions are spent; there is no next scientific invocation. Full triple E0/summary and DM intake follow this accepted process's terminal collection. Supporting9.8888591/300s and completed scientific wall1524.92/5400s remain the measured totals at this boundary. Preserve all three arm roots/receipts and supervisor records until scoped closeout.
