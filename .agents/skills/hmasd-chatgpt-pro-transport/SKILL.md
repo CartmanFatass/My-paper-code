@@ -1,6 +1,6 @@
 ---
 name: hmasd-chatgpt-pro-transport
-description: "Use when Root executes or observes an exact HMASD ChatGPT Pro handoff, including model selection, ambiguous sends, long generation, recovery, and exact response archiving."
+description: "Use when the independent HMASD Transport task executes or observes an exact Pro handoff, including migration, model selection, ambiguous sends, recovery, archiving and parent receipts."
 ---
 
 # HMASD ChatGPT Pro Transport
@@ -9,11 +9,12 @@ Use this skill only as a transport operator. The calling session owns the eviden
 scope and exact prompt wording; a complete Pro response owns the final decision for
 its declared node. This skill validates the supplied scope, binds it to the exact
 persistent ChatGPT conversation, and preserves transport/response evidence without
-interpreting or overriding the decision. Root executes the complete transport,
-wait, archive and return-receipt lifecycle locally in its current task.
+interpreting or overriding the decision. The independent Luna/high Transport task executes
+the complete Send, wait, archive and return-receipt lifecycle. Root retains direction dispatch,
+experiment observation, integration and native DM/CM routing; it does not operate Pro browsers.
 
 Archive completeness is a transport fact, not specification-conformance acceptance.
-The receiving Portfolio/DM checks the formed decision against current owner/spec constraints
+The receiving Root/DM checks the formed decision against current owner/spec constraints
 at its existing intake. Transport preserves the full answer and reports it without
 adjudicating or rewriting scientific requirements; a conflict never permits a duplicate Send.
 
@@ -28,15 +29,28 @@ its existing Send state before continuing.
 New requests normally deliver on the corresponding shared direction branch. An extra branch
 requires a concrete special isolation need; keep accepted handoffs unchanged. A changed HEAD
 alone is not delivery evidence on a shared branch: verify the exact response path and commit.
+Load the canonical HANDOFF at the full commit returned for this request and compare its
+request ID, fixed TASK URL and branch/base with the assigned command and accepted-send record.
+An older same-path HANDOFF on main or in another checkout must not replace that artifact.
+For an unsent request, verify the remote target exists and satisfies this TASK's delivery
+clause. Normal descendant HEAD advances are allowed by the current renderer; a legacy fixed-
+HEAD clause is not silently relaxed. Return a stale or incompatible task to Root before
+Send. For an accepted request, observe/archive its actual reply and route any delivery-only
+correction under the existing command; changing a local registry does not amend its prompt.
+Keep prior-round delivery/Send/archive fields in their matching request history when staging
+a successor. Reconcile current binding and direction mirror from exact request/message and
+archive evidence; a stale mirror or old branch note cannot establish a current Send or delivery.
 An Author handoff with `delivery_mode=github_delivery` uses the already supported
 paste transport request. Send its short fixed task link verbatim, no attachment,
 read-only preamble or copied evidence. Dispatch only a bound READY_TO_DISPATCH task;
 TASK_NOT_PUBLISHED has no provider payload. This mode authorizes Pro's named file
 and comment; Transport does not write them. Archive the complete short chat reply
-and actual URLs unchanged. Portfolio/DM retrieves the full file for scientific intake;
+and actual URLs unchanged. Root/DM retrieves the full file for scientific intake;
 a delivery receipt alone is not a formed Pro decision. Repeated/uncertain receipt
 handling observes existing state, never repeats Send. Keep request-scoped existing
-waiting and cleanup, provider binding and parent model unchanged. Root is the shared execution endpoint under OWNER_DIRECT 2026-09-06; see docs/project/ROOT_OPERATIONS.md.
+waiting and cleanup, provider binding and parent model unchanged. The singleton endpoint is
+the independent task in `.codex/hmasd-transport.toml` under OWNER_DIRECT 2026-09-07;
+see docs/project/ROOT_OPERATIONS.md.
 
 ## Input contract and authority
 
@@ -44,7 +58,7 @@ Execute the operation named in the current command: authoring readiness is not a
 and a read-only reconciliation command does not include Send. A prewritten transport return
 route needs no additional planning vote. Accepted requests retain their observation/archive
 obligations; completion of another command does not cancel them. Report a missing operation or
-uncertain external acceptance to Portfolio while continuing other explicitly assigned work.
+uncertain external acceptance to Root while continuing other explicitly assigned work.
 
 Accept a request object containing `request_id`, `direction_id`, `direction_ids`,
 `workflow_node`, `conversation_binding_key`, `decision_authority=pro_final`, and
@@ -56,20 +70,24 @@ exactly one body source:
 
 Every canonical handoff must provide the exact creator Codex `source_thread_id`, its
 exact `parent_thread_id`, and an explicit `operator_thread_id`. The default operator
-is the integrated Luna/xhigh Root declared in `.codex/hmasd-transport.toml`.
-`REUSE_SINGLETON` names this Root endpoint.
+is the independent Luna/high Transport declared in `.codex/hmasd-transport.toml`.
+`REUSE_SINGLETON` names that reusable task, not Root.
 Treat all three as routing metadata, never as scientific content;
 do not infer them from the provider conversation URL, a task title, or prose.
 `parent_thread_id` is the sole completion or terminal-blocker receipt destination.
 `source_thread_id` identifies the handoff author but is not a receipt destination.
-`operator_thread_id` is the Codex execution endpoint, never a provider-conversation binding. It may equal the parent when Root receives a native DM handoff; that completion is routed locally without an app self-message. Default canonical handoffs must
+`operator_thread_id` is the Codex execution endpoint, never a provider-conversation binding.
+For native DM/CM requests, source is the actual author UUID, parent is Root's app-task UUID,
+and operator is Transport's UUID. Do not send a receipt to a native child or replace parent
+with source. Root forwards the original receipt to the named native recipient from its command.
+For a Portfolio request, Root is both author and receipt parent. Default handoffs must
 declare `dispatch_mode=REUSE_SINGLETON`, `operator_reuse_required=true`,
-`operator_model=gpt-5.6-luna`, and `operator_thinking=xhigh`; validate all four and
-validate new handoffs against the current project endpoint. Root records its actual
+`operator_model=gpt-5.6-luna`, and `operator_thinking=high`; validate all four and
+validate new handoffs against the current project endpoint. Transport records its actual
 `execution_thread_id` and reconciles accepted requests against their fixed TASK,
-parent, conversation and message identity before continuing locally.
+parent, conversation and message identity before continuing.
 
-When the author is already the configured Root endpoint, or the owner explicitly asks the caller to operate the browser personally,
+When the author is already the configured Transport endpoint, or the owner explicitly asks the caller to operate the browser personally,
 accept `dispatch_mode=CALLER_DIRECT`, `operator_thread_id=source_thread_id`, and the
 exact `owner_execution_instruction`. No singleton dispatch occurs. The caller follows
 this same transport lifecycle. When executor and parent are the same task, archive and record local completion without sending a message to itself; forward direction science to the DM. Otherwise return the usual parent receipt. This exception changes the executor, not the provider model or decision node.
@@ -199,18 +217,22 @@ the tab lease remains active while generation is pending. During Pro generation,
 observations. Never click `Answer now`, Retry, Continue, or Stop. A timeout becomes
 `WAITING_UNKNOWN`, not a send failure.
 
-Use Root's one existing shared heartbeat in `.codex/hmasd-monitor.toml`; never create a
-request-specific automation; never use `INTERVAL=1` busy polling. Activate/read back the shared wake before yielding accepted
-pending work. A thirty-minute Root pass observes experiments and requests due for a Pro check
-(at the thirty-minute fallback wake). Keep all request identities and tab
-leases separate; each due conversation gets one bounded DOM read, serially. Then persist
-observations and return to other work. A 20–60 minute generation may span several wakes.
+Observe pending Pro work in this Transport task while Root independently continues its goal.
+Do not create goals or scheduled automations for the migration. Keep request identities
+and tab leases separate; each due conversation gets one bounded DOM read, serially. Persist
+observations and return to independent work or a bounded wait, without busy polling.
+The lease protects this request's tab, not the whole Transport queue. After persisting an
+accepted Send or pending observation, service other ready requests and receipts before a
+wait of at most 60 seconds. Serialize browser actions, not whole Pro lifecycles. Root can
+wake an idle Transport with an exact observation-only continuation if pending work remains;
+that continuation never authorizes another Send. See ROOT_OPERATIONS.md for recovery.
+A 20–60 minute generation may span several observation passes.
 At 60 minutes mark `WAITING_TIMEOUT`; retain the same conversation and recoverable tab.
 A timeout never creates a replacement conversation, scientific polarity, or another Send.
 If a page handle is lost, reclaim at most one tab by the exact persisted provider URL and
 update the lease; the tab ID is not identity. User-owned or explicitly mentioned tabs remain
-open without separate closure authorization. Completing this request must not pause the
-shared heartbeat while another experiment, request, archive or notification remains pending.
+open without separate closure authorization. Completing this request does not end observation
+of another experiment, request, archive or notification that remains pending within the goal.
 
 Natural completion requires an explicit completed status, no active generation
 control, and a complete assistant message in the same conversation. Capture the
@@ -241,10 +263,10 @@ do not edit archives or resend accepted requests to change their presentation.
 Deduplicate by `(conversation_binding_key, request_id, conversation_id,
 response_sha256)`; an identical existing archive is
 idempotent, while a different response for the same key is a conflict and must not
-overwrite anything. Mark this request no longer pending only after durable archive verification; pause the shared heartbeat only when the union of all current experiment and Pro pending work is empty. After a complete response is captured, hash-verified, and durably
+overwrite anything. Mark this request no longer pending only after durable archive verification. After a complete response is captured, hash-verified, and durably
 archived, close the agent-created tab and set its ephemeral `tab_id` to null (or
 `tab_lifecycle=CLOSED`) while retaining the conversation URL/ID and archive paths.
-The executor turn ending, a heartbeat wake returning, or a timeout is never
+The executor turn ending, an observation pass returning, or a timeout is never
 sufficient reason to close it; closure occurs only after natural completion and
 archive verification.
 
@@ -252,9 +274,14 @@ archive verification.
 
 When actual executor equals parent, use `stage_receipt` / `stage_blocker_receipt` to record
 `routing_mode=LOCAL`, `status=LOCAL`, `required=false` and zero app-message attempts;
-never send the receipt to Root itself. `execution_thread_id` identifies the actual executor. Root then forwards
-the scientific work to its native DM without redoing the intake. The local record is not a
-claim of remote delivery. Other parent routes retain the procedure below.
+never send an app self-receipt. `execution_thread_id` identifies the actual executor. This is
+an exceptional same-task route, not the native-DM default: independent Transport sends to
+Root, which forwards to the original native DM. A local record is not remote delivery.
+During migration, an old Root-executed request already consumed by Root/native DM keeps
+this LOCAL route even if its stale outbox says PENDING. Use the existing receipt helper and
+actual historical executor. Native intake evidence does not establish an app Send: never
+invent SENT, a send timestamp or an attempt count merely to close a stale record. Preserve
+the intake/parent confirmation as reconciliation evidence separately from message attempts.
 
 After a response is durably archived and hash-verified, call
 `scripts/transport_contract.py:stage_receipt` to stage exactly one structured
@@ -262,14 +289,14 @@ completion receipt in the persisted outbox, then send it once to the exact valid
 `parent_thread_id` using
 `mcp__codex_app__send_message_to_thread`. Omit `model` and `thinking` on every
 parent receipt, including blocker receipts, so the receiving parent retains its
-own settings. `operator_model` and `operator_thinking` apply only to dispatch INTO
-the Root execution endpoint; copying them onto a receipt changes the parent model.
+own settings. `operator_model` and `operator_thinking` describe the execution endpoint;
+do not copy them into any cross-session app message, including dispatch to Transport.
 Use `send_message_to_thread({threadId: parent_thread_id, prompt: receipt_text})`.
 Do not send an extra receipt to repair a prior model override.
 The receipt must contain at least
 `request_id`, `workflow_node`, `conversation_binding_key`, `direction_id`,
 `direction_ids`, `state=ARCHIVED`, `conversation_id`, `provider_url`, response
-SHA-256, archive paths, and heartbeat retirement status; it must report
+SHA-256, archive paths, and request observation status; it must report
 transport facts only and must not add scientific interpretation. Record the receipt
 timestamp, destination thread ID, deterministic message key, attempt count, and
 delivery status in the registry or transport-fact file. Treat the logical receipt as
@@ -289,22 +316,20 @@ records the receipt substate `RETURN_RECEIPT_BLOCKED` without a message key or
 destination and performs no send. Never use the source/creator task, the operator task itself, an old receipt
 task, or any repository UUID as a fallback.
 
-### Shared heartbeat and request completion
+### Goal-driven observation and request completion
 
-Persist the shared heartbeat id and each request's own pending/completed state. A request
-remains pending during `WAITING_GENERATION`, `WAITING_HEARTBEAT`, `ARCHIVE_PENDING`,
+Persist each request's own pending/completed state. A request
+remains pending during `WAITING_GENERATION`, legacy `WAITING_HEARTBEAT`, `ARCHIVE_PENDING`,
 reconciliation or recoverable `WAITING_TIMEOUT`, and until its required notification is handled.
-After durable archival or an explicit terminal blocker without scheduled recovery, close only
-that request's observation. Do not delete/disable the shared automation unless no experiment
-or Pro request remains pending. Root itself remains available for later work.
-Use `automation_update` to update the existing automation, preserving its full prompt, interval
-and Root target; no per-request replacement. Request tabs, facts, archives, receipts and
-idempotency keys remain distinct even though their heartbeat id is shared.
+After durable archival or an explicit terminal blocker without a recovery route, close only
+that request's observation. Transport remains reusable and Root continues its separate goal. The owner removed
+the scheduler; do not recreate it or infer one from legacy state fields. Request tabs, facts,
+archives, receipts and idempotency keys remain distinct during goal-driven observation.
 Never multiplex a later owner-authored follow-up into the already archived request.
 Record its exact user-message identity separately and watch its paired response
 without sending anything. If the owner starts participating in an agent-created
 conversation, keep its tab open for that continuing use; finish only the earlier
-request's archive and wake cleanup. Apply the owner's new scope before intake.
+request's archive and observation cleanup. Apply the owner's new scope before intake.
 
 When a later wake needs a lost or stale page, create at most one recovery tab in the
 same in-app browser and navigate to the persisted exact `provider_url`. Verify the
@@ -326,12 +351,12 @@ evidence; it must produce `MONITOR_IDENTITY_MISMATCH` and stop recovery.
 
 Apply an owner stop or takeover to the affected request. Preserve accepted or uncertain
 Send state and return its factual handover. Close or transfer only that request's
-observation as instructed; preserve the shared wake while other work needs it.
+observation as instructed; preserve other pending records and follow the owner's goal scope.
 Do not resume stopped browser actions or change the prompt. Recovery of a proven
 accepted request observes the same request without another Send.
 
 Stop and report the exact state on unknown direction, missing prompt, failed Pro
 verification, incomplete upload, uncertain/mismatched submission, stale/ambiguous
-conversation identity, partial response, archive conflict, heartbeat overlap, or a
+conversation identity, partial response, archive conflict, observation conflict, or a
 recovery URL that no longer resolves to the bound conversation.
 Transport facts never imply scientific conclusions.

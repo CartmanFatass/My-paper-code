@@ -1,50 +1,46 @@
-# Root experiment observation
+# Experiment observation ownership
 
-Accepted experiment handles go directly to the Root configured in
-`.codex/hmasd-monitor.toml`. `ROOT_OPERATIONS.md` defines the single shared heartbeat
-for all current experiments and Pro work. Existing experiment/scientific constraints remain.
+This document owns experiment observation and handover procedure. AGENTS §5–7 controls
+scientific execution, resources and Git; ROOT_OPERATIONS.md assigns planning and acceptance.
+Independent Transport observes Pro requests under its own skill.
 
-## Assignment and adoption
+## Assignment and handover
 
-Root's native DM/CM sends the accepted handle through collaboration. Separate app tasks use
-`send_message_to_thread` to the configured Root, without model/effort overrides. Root handles
-its own assignment locally; it does not send an adoption message to itself.
+The assigned CM or Experiment Operator observes the exact accepted handle through terminal
+collection by default. The CM owns technical acceptance even when an Operator executes. The
+existing run record and EXPERIMENT_TRACKING.md identify the actual observer, node, supervisor
+handle, launch SHA, cwd, result/receipt paths and responsible CM/DM. An accepted-handle return
+is a state change, not a request for Root to poll in parallel. No new registry is required.
 
-Link the existing card/run record and supply only missing execution facts: node, accepted
-supervisor handle, launch SHA, cwd, log/result/receipt paths, expected bound/reminder and the
-responsible DM/CM identity. A private exec session number alone cannot transfer access;
-local detached work needs PID/start identity and the existing exit witness. Tracking metadata
-is not a new experiment launch condition. Preserve owner pause and existing launch bounds.
+If the observer must end its assignment before termination, or loses access, request a concrete
+handover to Root (endpoint in `.codex/hmasd-monitor.toml`) or the named existing executor. The
+recipient verifies access to the same supervisor/witness, records adoption in current tracking
+and confirms it to the assigning parent. Until confirmed, the prior observer retains responsibility
+or explicitly records that observation is lost. A sender's return alone does not transfer ownership.
+Root reconciles an idle/unavailable observer at the next event boundary and takes over or assigns
+recovery of that same handle. This never authorizes another launch.
 
-Root records adoption in `docs/research/portfolio/EXPERIMENT_TRACKING.md`, activates the
-existing shared automation via `automation_update`, and reads back its ACTIVE state before
-ACK. Preserve the full long-term prompt, thirty-minute schedule and Root target on updates.
-An accepted message or one-off check does not establish recurring activation. Before ACK,
-the launcher retains observation; after ACK Root owns routine polling. Repeated assignments
-update the same (node, accepted handle). Root ACKs the actual native child or external sender.
-CM retains launch/collection/technical acceptance and DM retains scientific intake.
+Use SIBLING_COMMUNICATION.md for native/app addressing. Do not send adoption requests to yourself.
+A private exec session number alone cannot transfer access; local work requires PID/start identity
+and the existing exit witness. Preserve owner pause and existing launch bounds.
 
-## Bounded observation
+## Bounded observation and collection
 
-On each shared wake, read all current assigned rows and relevant owner instructions. Check
-every handle needing observation/terminal notification, not only the latest assignment.
-Never adopt historical handles by scanning old tables. Batch independent read-only checks.
-Use `.codex/hmasd-compute.toml`; on the configured node use
-`ssh -o BatchMode=yes -o ConnectTimeout=10 hmasd-wsl-node /usr/local/bin/agent-task status <accepted-name>`
-and, only when useful, `logs <accepted-name> 40`. Quote supplied names as data. Do not launch,
-retry, stop, attach, change experiments or copy live output trees merely to monitor them.
-Supervisor evidence controls terminal status; SSH failure/PID absence alone is unknown.
-Exit zero is a process fact, not scientific validity.
+Observe only assigned handles, batch independent read-only checks and retain exact unknown state.
+Use the configured node/supervisor from `.codex/hmasd-compute.toml`; for the current remote node:
+`ssh -o BatchMode=yes -o ConnectTimeout=10 hmasd-wsl-node /usr/local/bin/agent-task status <accepted-name>`.
+Read bounded logs only when useful. Quote supplied names as data. SSH failure or PID absence alone
+is unknown; a wait timeout is not terminal. Exit zero is a process fact, not scientific validity.
 
-On completion, failure, lost observation or a supplied bound/reminder, record the direct
-fact and evidence and notify the responsible DM/CM and Portfolio. Root follows the command's named collection/intake route; Portfolio handles any unlisted next task. Use `send_message` for a running native
-child and `followup_task` for an idle one. Reconcile uncertain delivery before retrying.
-Healthy unchanged state is silent: no per-poll messages, commits or sleep loops.
+Healthy unchanged state needs no repeated messages or commits. At terminal status, the assigned
+executor collects the named outputs and direct process facts, verifies artifact integrity and
+returns them to the actual assigning parent. CM performs technical acceptance; DM performs
+scientific intake. Lost observation or a material bound/dependency failure returns promptly with
+evidence. Follow the loop skill for continuation; do not wait for unrelated directions.
 
-Root writes meaningful adoption/terminal changes in the existing tracking table on main,
-using explicit-path commits and immediate push. Preserve terminal rows and their collection
-handoffs. No new registry, daemon, per-experiment task or monitoring worktree is required.
-The shared heartbeat remains ACTIVE while ANY assigned experiment OR Pro request still
-needs observation, reconciliation, archive or notification. A completed experiment does not
-retire another item's observation. Pause only when that combined pending set is empty;
-a new accepted assignment reactivates the same automation before ACK.
+Root maintains compact current tracking at meaningful adoption, terminal and continuation changes,
+linking the original run/collection/intake records. Record observer changes explicitly; the act of
+tracking a handle does not make Root its observer. Historical handles are not adopted by scanning
+archives. No standing monitor agent, scheduler, per-run observation worktree or parallel polling
+loop is added. The owner's active goal and assigned native work drive observation. On owner pause,
+preserve accepted handles and arrange the observation handover or closeout specified by that pause.
