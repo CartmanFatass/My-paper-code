@@ -298,3 +298,8 @@ At allocation there is no accepted handle and scientific exposure remains zero.
 No owner prediction reply or FSD audit override is present at the clean boundary;
 existing empirical forecasts and P67 direction scope remain. No formal UAV-entry
 registration or Portfolio lifecycle/priority change is made by this allocation.
+
+Object options: (a) execute the newly allocated exact pair; (b) retain source-only
+readiness; (c) add rescue/retry or other scientific work. Recommendation: (a).
+**Owner-delegated decision (unattended, 2026-09-03 instruction): (a)**, carrying
+out Root's explicit P70 allocation within the already accepted B question.
