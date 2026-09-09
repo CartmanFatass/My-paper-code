@@ -8,13 +8,13 @@ Root owns planning and integration under [ROOT_OPERATIONS.md](../../project/ROOT
 
 ## P67 active native work — resume dispatch
 
-Five original DM turns were observed running after accepted followup_task dispatch on 2026-09-09. These are five advancing directions, not five launched experiments. No new experiment handle or provider Send is asserted at this boundary.
+Five original DM turns were observed running after accepted followup_task dispatch on 2026-09-09. These are five advancing directions, not five launched experiments. The two accepted P67 handles reported subsequently are recorded below; no new provider Send is asserted.
 
 | Direction | Native DM | Synced direction revision | Current bounded work |
 | --- | --- | --- | --- |
 | ucope | /root/dm_ucope_p47_resume | 9745d270010a8e100cfed0d1ee9533878cf70190 | P61 next-question decision/authoring; no unchanged run allocation |
-| vsp_c1 | /root/dm_vspc1_p49_value_question | d1b8b7b72c1a5c1896b07b13674aee98aa0a3d7d | New single corrected B04/8202 submission selected (main 0da871460); same CM preparing exact inputs and full batch, no accepted handle reported yet |
-| vsp_03 | /root/dm_vsp03_p54_reentry | 38c7a6bebd547187bb110cfa62d1850dc3838e84 | New single corrected seed6/120s submission selected (main 071a29c40); same CM restoring admission-source dependency, no accepted handle reported yet |
+| vsp_c1 | /root/dm_vspc1_p49_value_question | d1b8b7b72c1a5c1896b07b13674aee98aa0a3d7d | CM reports complete/PASS: handle vspc1_hold_value_b04_p67_8202, source ec8b7c458b038b3a375ec5639834d0f3527fdf8c, collection 4c6572dae1299a724b5b5c9f59c2442993d7acdb; exit0, 312.77s, no live process; same DM intake and Root technical integration pending |
+| vsp_03 | /root/dm_vsp03_p54_reentry | 38c7a6bebd547187bb110cfa62d1850dc3838e84 | DM source accepted 9191bd9bf; source 828da00343e5036a4de93ccf1ec636e3b8c777b7; CM reports handle vsp03-b04-p67-20260908 terminal exit0, service runtime3.253s (not complete invocation wall); same CM sole collector, full evidence/intake pending |
 | flexible_skill_duration | /root/dm_fsd_p47_resume | fbe5e67b96f8b390751635fe9c826910c8b3f0a4 | Re-entry question assessment respecting P52 stop |
 | degraded_incumbent_shadow_handover | /root/dm_dish_p53_native_proposal_question | bdfcf10b62ca323340acf965e057f7a727d043a5 | Distinct ordinary source-state question assessment respecting P62 stop |
 
