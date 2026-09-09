@@ -1,0 +1,753 @@
+{
+  "purpose": "Scientific intake of retained S20 rows/curves; no model/tensor/native/learner/test or experiment invocation",
+  "source_sha": "4d96a832eeaa875b2e6178bd9014067ce32d0339",
+  "E0_sha": "a8fd7f915e5b115578b30edb6cf983f15816b572",
+  "card_scientific_freeze": "2da8ec66be12da255e69721d0bdc672ce07edc33",
+  "independent_unit": "one new paired training instance seed20; combined history has two matched pairs (seed19 under disclosed historical-W1 recovery, seed20 fresh); evaluation rows are not training replicates",
+  "panel_rows": 8192,
+  "panels": [
+    "FLEX-INIT",
+    "W1",
+    "W100",
+    "reference"
+  ],
+  "cell_index_coverage": "all four panels have eight cells, each exactly indices0..255; none excluded",
+  "primary": {
+    "Delta_U": 0.009324137369791666,
+    "conditional_SE_Delta_U": 0.0014372501854969077,
+    "G_U_W1": 0.0006856282552083343,
+    "conditional_SE_G_U_W1": 0.0004634354328095084,
+    "G_U_W100": 0.010009765625,
+    "conditional_SE_G_U_W100": 0.0014110714957995187,
+    "FLEX-INIT_U": 0.6998229980468751,
+    "W1_U": 0.6991373697916666,
+    "W100_U": 0.689813232421875,
+    "reference_U": 0.27578938802083336,
+    "conditional_approx_95_Delta_U": [
+      0.0065071270062177266,
+      0.012141147733365606
+    ],
+    "conditional_approx_95_G_U_W1": [
+      -0.00022270519309830212,
+      0.0015939617035149707
+    ],
+    "conditional_approx_95_G_U_W100": [
+      0.007244065493232943,
+      0.012775465756767057
+    ],
+    "relative_U_reduction_vs_W1": 0.013336631358398323,
+    "reduced_normalized_unmet_ticks": 0.37296549479166663,
+    "W100_minus_reference_U": 0.4140238444010416,
+    "emitted_Delta_U_absolute_difference": 0.0
+  },
+  "cells": [
+    {
+      "cell": "12_to_12.ACTIVE_CONTINUATION",
+      "n": 256,
+      "means": {
+        "FLEX-INIT": {
+          "U": 0.6887532552083333,
+          "Y": 0.3107706705729167,
+          "tau": 40.0,
+          "F": 0.2500325520833333
+        },
+        "W1": {
+          "U": 0.688037109375,
+          "Y": 0.3113810221354167,
+          "tau": 40.0,
+          "F": 0.25071614583333335
+        },
+        "W100": {
+          "U": 0.6746826171875,
+          "Y": 0.3234914143880208,
+          "tau": 40.0,
+          "F": 0.2503580729166667
+        },
+        "reference": {
+          "U": 0.23665364583333337,
+          "Y": null,
+          "tau": 39.53125,
+          "F": 0.23665364583333334
+        }
+      },
+      "Delta_U": 0.013354492187500004,
+      "conditional_SE_Delta_U": 0.0016070533381486903,
+      "G_U_W1": 0.0007161458333333282,
+      "conditional_SE_G_U_W1": 0.000629586736168151,
+      "G_U_W100": 0.014070638020833331,
+      "conditional_SE_G_U_W100": 0.0016548223777770243,
+      "W100_minus_W1_F": -0.0003580729166666655,
+      "W100_minus_W1_Y": 0.012110392252604168,
+      "W100_minus_reference_U": 0.43802897135416663,
+      "scenario_Delta_U_sign_counts": {
+        "negative": 79,
+        "zero": 2,
+        "positive": 175
+      },
+      "tau40_counts": {
+        "FLEX-INIT": 256,
+        "W1": 256,
+        "W100": 256,
+        "reference": 253
+      }
+    },
+    {
+      "cell": "12_to_12.NEW_EPOCH",
+      "n": 256,
+      "means": {
+        "FLEX-INIT": {
+          "U": 0.687939453125,
+          "Y": 0.3123931884765625,
+          "tau": 40.0,
+          "F": 0.25071614583333335
+        },
+        "W1": {
+          "U": 0.688134765625,
+          "Y": 0.3125762939453125,
+          "tau": 40.0,
+          "F": 0.25055338541666666
+        },
+        "W100": {
+          "U": 0.6781331380208333,
+          "Y": 0.3228607177734375,
+          "tau": 40.0,
+          "F": 0.24996744791666667
+        },
+        "reference": {
+          "U": 0.25289713541666675,
+          "Y": null,
+          "tau": 39.69921875,
+          "F": 0.23307291666666669
+        }
+      },
+      "Delta_U": 0.010001627604166676,
+      "conditional_SE_Delta_U": 0.0017535538661490814,
+      "G_U_W1": -0.0001953125000000171,
+      "conditional_SE_G_U_W1": 0.0005986224504014695,
+      "G_U_W100": 0.00980631510416666,
+      "conditional_SE_G_U_W100": 0.001749001636426494,
+      "W100_minus_W1_F": -0.000585937499999998,
+      "W100_minus_W1_Y": 0.010284423828124995,
+      "W100_minus_reference_U": 0.42523600260416655,
+      "scenario_Delta_U_sign_counts": {
+        "negative": 91,
+        "zero": 1,
+        "positive": 164
+      },
+      "tau40_counts": {
+        "FLEX-INIT": 256,
+        "W1": 256,
+        "W100": 256,
+        "reference": 254
+      }
+    },
+    {
+      "cell": "12_to_8.ACTIVE_CONTINUATION",
+      "n": 256,
+      "means": {
+        "FLEX-INIT": {
+          "U": 0.71048583984375,
+          "Y": 0.29854075113932294,
+          "tau": 40.0,
+          "F": 0.322900390625
+        },
+        "W1": {
+          "U": 0.710595703125,
+          "Y": 0.2990773518880208,
+          "tau": 40.0,
+          "F": 0.32197265625
+        },
+        "W100": {
+          "U": 0.70186767578125,
+          "Y": 0.30709075927734375,
+          "tau": 40.0,
+          "F": 0.30771484375
+        },
+        "reference": {
+          "U": 0.3060546875,
+          "Y": null,
+          "tau": 39.3125,
+          "F": 0.3060546875
+        }
+      },
+      "Delta_U": 0.008728027343749997,
+      "conditional_SE_Delta_U": 0.0023602243253760744,
+      "G_U_W1": -0.000109863281250002,
+      "conditional_SE_G_U_W1": 0.0007220073590588628,
+      "G_U_W100": 0.008618164062499996,
+      "conditional_SE_G_U_W100": 0.002297627012870964,
+      "W100_minus_W1_F": -0.014257812499999998,
+      "W100_minus_W1_Y": 0.008013407389322918,
+      "W100_minus_reference_U": 0.39581298828125,
+      "scenario_Delta_U_sign_counts": {
+        "negative": 91,
+        "zero": 14,
+        "positive": 151
+      },
+      "tau40_counts": {
+        "FLEX-INIT": 256,
+        "W1": 256,
+        "W100": 256,
+        "reference": 248
+      }
+    },
+    {
+      "cell": "12_to_8.NEW_EPOCH",
+      "n": 256,
+      "means": {
+        "FLEX-INIT": {
+          "U": 0.7120849609375,
+          "Y": 0.29840087890625,
+          "tau": 40.0,
+          "F": 0.319384765625
+        },
+        "W1": {
+          "U": 0.7101318359375,
+          "Y": 0.2999827067057292,
+          "tau": 40.0,
+          "F": 0.3181640625
+        },
+        "W100": {
+          "U": 0.701220703125,
+          "Y": 0.3083140055338542,
+          "tau": 40.0,
+          "F": 0.302978515625
+        },
+        "reference": {
+          "U": 0.34090576171875,
+          "Y": null,
+          "tau": 38.9453125,
+          "F": 0.32353515625
+        }
+      },
+      "Delta_U": 0.0089111328125,
+      "conditional_SE_Delta_U": 0.002293761990309943,
+      "G_U_W1": 0.001953125000000004,
+      "conditional_SE_G_U_W1": 0.0008151719475514076,
+      "G_U_W100": 0.010864257812500003,
+      "conditional_SE_G_U_W100": 0.0024092120383363085,
+      "W100_minus_W1_F": -0.015185546875,
+      "W100_minus_W1_Y": 0.008331298828124997,
+      "W100_minus_reference_U": 0.36031494140625,
+      "scenario_Delta_U_sign_counts": {
+        "negative": 95,
+        "zero": 7,
+        "positive": 154
+      },
+      "tau40_counts": {
+        "FLEX-INIT": 256,
+        "W1": 256,
+        "W100": 256,
+        "reference": 247
+      }
+    },
+    {
+      "cell": "8_to_12.ACTIVE_CONTINUATION",
+      "n": 256,
+      "means": {
+        "FLEX-INIT": {
+          "U": 0.68916015625,
+          "Y": 0.301788330078125,
+          "tau": 40.0,
+          "F": 0.24957682291666666
+        },
+        "W1": {
+          "U": 0.6876790364583333,
+          "Y": 0.3031107584635417,
+          "tau": 40.0,
+          "F": 0.24931640624999998
+        },
+        "W100": {
+          "U": 0.6777587890625,
+          "Y": 0.31603240966796875,
+          "tau": 40.0,
+          "F": 0.25201822916666666
+        },
+        "reference": {
+          "U": 0.2455240885416667,
+          "Y": null,
+          "tau": 40.0,
+          "F": 0.2431640625
+        }
+      },
+      "Delta_U": 0.009920247395833335,
+      "conditional_SE_Delta_U": 0.0016407600424031047,
+      "G_U_W1": 0.0014811197916666705,
+      "conditional_SE_G_U_W1": 0.0005812013205406469,
+      "G_U_W100": 0.011401367187500006,
+      "conditional_SE_G_U_W100": 0.001638719370349059,
+      "W100_minus_W1_F": 0.002701822916666665,
+      "W100_minus_W1_Y": 0.012921651204427098,
+      "W100_minus_reference_U": 0.43223470052083324,
+      "scenario_Delta_U_sign_counts": {
+        "negative": 90,
+        "zero": 1,
+        "positive": 165
+      },
+      "tau40_counts": {
+        "FLEX-INIT": 256,
+        "W1": 256,
+        "W100": 256,
+        "reference": 256
+      }
+    },
+    {
+      "cell": "8_to_12.NEW_EPOCH",
+      "n": 256,
+      "means": {
+        "FLEX-INIT": {
+          "U": 0.6872721354166667,
+          "Y": 0.3047231038411458,
+          "tau": 40.0,
+          "F": 0.24944661458333334
+        },
+        "W1": {
+          "U": 0.6880940755208333,
+          "Y": 0.30460611979166663,
+          "tau": 40.0,
+          "F": 0.24899088541666667
+        },
+        "W100": {
+          "U": 0.6786376953125,
+          "Y": 0.3159942626953125,
+          "tau": 40.0,
+          "F": 0.2501302083333333
+        },
+        "reference": {
+          "U": 0.25948079427083337,
+          "Y": null,
+          "tau": 39.703125,
+          "F": 0.2451171875
+        }
+      },
+      "Delta_U": 0.00945638020833333,
+      "conditional_SE_Delta_U": 0.0016434150224726803,
+      "G_U_W1": -0.0008219401041666659,
+      "conditional_SE_G_U_W1": 0.0005638128642744758,
+      "G_U_W100": 0.008634440104166665,
+      "conditional_SE_G_U_W100": 0.0016714956567674805,
+      "W100_minus_W1_F": 0.0011393229166666693,
+      "W100_minus_W1_Y": 0.011388142903645832,
+      "W100_minus_reference_U": 0.4191569010416666,
+      "scenario_Delta_U_sign_counts": {
+        "negative": 93,
+        "zero": 1,
+        "positive": 162
+      },
+      "tau40_counts": {
+        "FLEX-INIT": 256,
+        "W1": 256,
+        "W100": 256,
+        "reference": 254
+      }
+    },
+    {
+      "cell": "8_to_8.ACTIVE_CONTINUATION",
+      "n": 256,
+      "means": {
+        "FLEX-INIT": {
+          "U": 0.71314697265625,
+          "Y": 0.2864990234375,
+          "tau": 40.0,
+          "F": 0.320068359375
+        },
+        "W1": {
+          "U": 0.71175537109375,
+          "Y": 0.287872314453125,
+          "tau": 40.0,
+          "F": 0.319775390625
+        },
+        "W100": {
+          "U": 0.7078125,
+          "Y": 0.2959442138671875,
+          "tau": 40.0,
+          "F": 0.303271484375
+        },
+        "reference": {
+          "U": 0.3119140625,
+          "Y": null,
+          "tau": 38.8125,
+          "F": 0.3119140625
+        }
+      },
+      "Delta_U": 0.0039428710937500005,
+      "conditional_SE_Delta_U": 0.00230310527106891,
+      "G_U_W1": 0.0013916015625000003,
+      "conditional_SE_G_U_W1": 0.0006839748997596443,
+      "G_U_W100": 0.00533447265625,
+      "conditional_SE_G_U_W100": 0.002272752379849923,
+      "W100_minus_W1_F": -0.01650390625,
+      "W100_minus_W1_Y": 0.0080718994140625,
+      "W100_minus_reference_U": 0.3958984375,
+      "scenario_Delta_U_sign_counts": {
+        "negative": 113,
+        "zero": 10,
+        "positive": 133
+      },
+      "tau40_counts": {
+        "FLEX-INIT": 256,
+        "W1": 256,
+        "W100": 256,
+        "reference": 246
+      }
+    },
+    {
+      "cell": "8_to_8.NEW_EPOCH",
+      "n": 256,
+      "means": {
+        "FLEX-INIT": {
+          "U": 0.715771484375,
+          "Y": 0.28722381591796875,
+          "tau": 40.0,
+          "F": 0.319775390625
+        },
+        "W1": {
+          "U": 0.7167236328125,
+          "Y": 0.28673553466796875,
+          "tau": 40.0,
+          "F": 0.3181640625
+        },
+        "W100": {
+          "U": 0.7029296875,
+          "Y": 0.30063629150390625,
+          "tau": 40.0,
+          "F": 0.29873046875
+        },
+        "reference": {
+          "U": 0.33065185546875,
+          "Y": null,
+          "tau": 39.19921875,
+          "F": 0.3140625
+        }
+      },
+      "Delta_U": 0.013793945312500002,
+      "conditional_SE_Delta_U": 0.002215054181167834,
+      "G_U_W1": -0.0009521484375000023,
+      "conditional_SE_G_U_W1": 0.0006623069145924907,
+      "G_U_W100": 0.012841796874999999,
+      "conditional_SE_G_U_W100": 0.002252584381864052,
+      "W100_minus_W1_F": -0.01943359375,
+      "W100_minus_W1_Y": 0.0139007568359375,
+      "W100_minus_reference_U": 0.37227783203125,
+      "scenario_Delta_U_sign_counts": {
+        "negative": 89,
+        "zero": 8,
+        "positive": 159
+      },
+      "tau40_counts": {
+        "FLEX-INIT": 256,
+        "W1": 256,
+        "W100": 256,
+        "reference": 249
+      }
+    }
+  ],
+  "eight_cell_secondary": {
+    "FLEX-INIT": {
+      "U": 0.7005767822265625,
+      "Y": 0.30004247029622394,
+      "tau": 40.0,
+      "F": 0.2852376302083333
+    },
+    "W1": {
+      "U": 0.7001439412434896,
+      "Y": 0.30066776275634766,
+      "tau": 40.0,
+      "F": 0.2847066243489583
+    },
+    "W100": {
+      "U": 0.6903803507486979,
+      "Y": 0.3112955093383789,
+      "tau": 40.0,
+      "F": 0.2768961588541667
+    },
+    "reference": {
+      "U": 0.28551025390625,
+      "Y": null,
+      "tau": 39.400390625,
+      "F": 0.27669677734375
+    }
+  },
+  "fragmentation_prediction": {
+    "new_seed20_mean_W100_minus_W1_F_final12": 0.0007242838541666677,
+    "new_seed20_signs": {
+      "12_to_12.ACTIVE_CONTINUATION": -0.0003580729166666655,
+      "12_to_12.NEW_EPOCH": -0.000585937499999998,
+      "8_to_12.ACTIVE_CONTINUATION": 0.002701822916666665,
+      "8_to_12.NEW_EPOCH": 0.0011393229166666693
+    },
+    "old_seed19_mean_W100_minus_W1_F_final12": 0.007153320312499996
+  },
+  "curves": {
+    "W1": {
+      "updates": 200,
+      "training_episodes": 12800,
+      "ticks": 819200,
+      "nonzero_steps": 200,
+      "zero_steps": 0,
+      "all_step_before_baseline": true,
+      "balanced_cells": true,
+      "delta_norm_range": [
+        0.019999999999999993,
+        0.020000000000000007
+      ],
+      "raw_gradient_norm_first_last": [
+        0.4896620918506771,
+        0.09449064989235409
+      ],
+      "all_cell_training_tau_40": true,
+      "windows": [
+        {
+          "start_inclusive": 0,
+          "end_inclusive": 49,
+          "U": 0.707753125,
+          "Y": 0.2920406901041666,
+          "tau": 40.0,
+          "F": 0.3104
+        },
+        {
+          "start_inclusive": 50,
+          "end_inclusive": 99,
+          "U": 0.7085427083333333,
+          "Y": 0.2919376627604166,
+          "tau": 40.0,
+          "F": 0.31200833333333333
+        },
+        {
+          "start_inclusive": 100,
+          "end_inclusive": 149,
+          "U": 0.7083041666666666,
+          "Y": 0.29172233072916665,
+          "tau": 40.0,
+          "F": 0.31177499999999997
+        },
+        {
+          "start_inclusive": 150,
+          "end_inclusive": 199,
+          "U": 0.7077354166666667,
+          "Y": 0.29275797526041664,
+          "tau": 40.0,
+          "F": 0.3118625
+        }
+      ]
+    },
+    "W100": {
+      "updates": 200,
+      "training_episodes": 12800,
+      "ticks": 819200,
+      "nonzero_steps": 200,
+      "zero_steps": 0,
+      "all_step_before_baseline": true,
+      "balanced_cells": true,
+      "delta_norm_range": [
+        0.019999999999999993,
+        0.020000000000000007
+      ],
+      "raw_gradient_norm_first_last": [
+        0.6986233644075005,
+        0.1009313243792126
+      ],
+      "all_cell_training_tau_40": true,
+      "windows": [
+        {
+          "start_inclusive": 0,
+          "end_inclusive": 49,
+          "U": 0.7076888020833333,
+          "Y": 0.2934500325520833,
+          "tau": 40.0,
+          "F": 0.3147666666666667
+        },
+        {
+          "start_inclusive": 50,
+          "end_inclusive": 99,
+          "U": 0.7065697916666667,
+          "Y": 0.29556591796875,
+          "tau": 40.0,
+          "F": 0.31933854166666664
+        },
+        {
+          "start_inclusive": 100,
+          "end_inclusive": 149,
+          "U": 0.70334921875,
+          "Y": 0.2973631184895833,
+          "tau": 40.0,
+          "F": 0.30915625
+        },
+        {
+          "start_inclusive": 150,
+          "end_inclusive": 199,
+          "U": 0.7013796875,
+          "Y": 0.2996560872395833,
+          "tau": 40.0,
+          "F": 0.30811875
+        }
+      ]
+    }
+  },
+  "old_seed19_primary": {
+    "Delta_U": 0.013224283854166657,
+    "conditional_SE_Delta_U": 0.0015969401899458364,
+    "conditional_approx_95_interval": [
+      0.010094281081872818,
+      0.016354286626460497
+    ],
+    "G_U_W100": 0.013378906249999998,
+    "conditional_SE_G_U_W100": 0.001563623726531081,
+    "conditional_approx_95_G_U_W100": [
+      0.01031420374599908,
+      0.016443608754000916
+    ],
+    "G_U_W1": 0.00015462239583330373,
+    "W1_U": 0.7043355305989584,
+    "W100_U": 0.6911112467447917,
+    "init_U": 0.7044901529947917,
+    "reference_U": 0.2860636393229167,
+    "relative_U_reduction_vs_W1": 0.018775545574026185,
+    "reduced_normalized_unmet_ticks": 0.5289713541666663
+  },
+  "old_failure": "original W100 prefix unknown within12800episodes/819200ticks/200calls, unchanged",
+  "counts": {
+    "new_total_episodes": 33792,
+    "new_primitive_ticks": 2162688,
+    "new_backward_step_calls": 400,
+    "new_nonzero_calls": 400,
+    "new_zero_calls": 0,
+    "scientific_models": 12,
+    "fits": 2,
+    "untrained_helpers": 10,
+    "known_B03_total_episodes": 67584,
+    "known_B03_ticks": 4325376,
+    "known_B03_calls": 800,
+    "nominal_total_upper_bounds_not_actual": {
+      "episodes": 80384,
+      "ticks": 5144576,
+      "calls": 1000
+    }
+  },
+  "technical_cost": {
+    "prelaunch_conservative_seconds_including_DM": 250,
+    "complete_W1_seconds": 89.83,
+    "complete_W100_seconds": 80.62,
+    "complete_reference_seconds": 2.85,
+    "sum_invocations_seconds": 173.29999999999998,
+    "chain_seconds": 173.43,
+    "collection_seconds": 3.6190638,
+    "aggregate_CPU_seconds": null,
+    "readback_complete_seconds": 2.2984716,
+    "collection_publication_conservative_seconds": 25,
+    "complete_conservative_seconds": 448.43
+  },
+  "reuse_acceptance": {
+    "tensors": {
+      "initial_tensors_equal": true,
+      "initial_tensors_differ_seed19": true,
+      "parameter_scalars": 26161,
+      "dtype": "torch.float64",
+      "learned_readback": {
+        "W1": {
+          "baseline_reconstructed_from_zero_max_error": 4.440892098500626e-16,
+          "final_displacement_readback": 0.39759874927951594,
+          "counts": {
+            "backward_step_calls": 200,
+            "final_episodes": 2048,
+            "init_episodes": 2048,
+            "nonzero_steps": 200,
+            "training_episodes": 12800,
+            "zero_steps": 0
+          },
+          "agent_ticks_training": 6553600,
+          "claim_decisions_training": 1638400
+        },
+        "W100": {
+          "baseline_reconstructed_from_zero_max_error": 3.885780586188048e-16,
+          "final_displacement_readback": 0.5640297973052215,
+          "counts": {
+            "backward_step_calls": 200,
+            "final_episodes": 2048,
+            "init_episodes": 0,
+            "nonzero_steps": 200,
+            "training_episodes": 12800,
+            "zero_steps": 0
+          },
+          "agent_ticks_training": 6553600,
+          "claim_decisions_training": 1638400
+        }
+      },
+      "primary_recomputed": {
+        "Delta_U": 0.009324137369791666,
+        "SE": 0.0014372501854969077,
+        "paths": [
+          {
+            "cell": "8_to_12.ACTIVE_CONTINUATION",
+            "Delta_U": 0.009920247395833335,
+            "SE": 0.0016407600424031047
+          },
+          {
+            "cell": "12_to_8.ACTIVE_CONTINUATION",
+            "Delta_U": 0.008728027343749997,
+            "SE": 0.0023602243253760744
+          }
+        ]
+      },
+      "verified_output_supervisor_files": 23,
+      "arithmetic_readback_seconds_excluding_imports": 0.16494379999494413
+    },
+    "note": "DM accepts actual CM tensor/root/native/zero-baseline readback; no duplicate tensor/native verification"
+  },
+  "analysis_metadata": {
+    "interpreter": "local Python 3.11 standard library",
+    "scientific_calls": 0,
+    "supplied_test_calls": 0,
+    "input_path_correction": "Initial schema read attempted an assumed CURVES filename; FileNotFoundError before curve analysis. Used actual E0-linked b03_actor100_s20_20260909/CURVES.json and SCENARIOS.csv. No scientific defect or re-execution.",
+    "analysis_body_seconds": 0.06930429999920307,
+    "retained_data_read_and_summary_command_seconds": 1.2308357,
+    "DM_intake_support_conservative_seconds": 20,
+    "DM_support_scope": "Post-handoff document/receipt reads, retained-row/curve arithmetic, run-level summary, owner review/item commands, document editing/check and Git publication; includes small failed filename read. Earlier15s allocation preparation is already in CM250s and is not charged again. Agent deliberation/asynchronous waiting are not claimed as measured machine work."
+  },
+  "complete_cost_accounting": {
+    "technical_complete_conservative_seconds": 448.43,
+    "DM_intake_support_conservative_seconds": 20,
+    "new_S20_complete_charged_seconds": 468.43,
+    "S20_cap_seconds": 1500,
+    "original_postlaunch_support_reserved_seconds": 100,
+    "CM_collection_publication_conservative_seconds": 25,
+    "remaining_reserved_support_after_DM_seconds": 55,
+    "previous_named_B03_window_seconds": 261.3980053,
+    "named_B03_window_through_S20_intake_seconds": 729.8280053,
+    "common_study_elapsed_seconds": null,
+    "aggregate_CPU_seconds": null
+  },
+  "unallocated_next_recommendation": {
+    "purpose": "one fresh pair at fixed1000-update endpoint to measure native learning and W100/W1 contrast, not causal effect of lengthening training",
+    "arms": 2,
+    "new_paired_seeds": 1,
+    "blocks_per_arm": 1000,
+    "episodes_per_block": 64,
+    "panels": 4,
+    "cells_per_panel": 8,
+    "episodes_per_cell": 256,
+    "training_episodes": 128000,
+    "evaluation_episodes": 8192,
+    "total_episodes": 136192,
+    "primitive_ticks": 8716288,
+    "backward_step_calls": 2000,
+    "scientific_models": 12,
+    "fits": 2,
+    "untrained_helpers": 10,
+    "summed_parameter_path_length_opportunity_per_fit": 20,
+    "linear_full_process_planning_proxy_seconds": {
+      "W1": 449.15,
+      "W100": 403.1,
+      "reference": 2.85,
+      "sum": 855.1
+    },
+    "cost_limit_candidate_seconds": {
+      "W1": 600,
+      "W100": 600,
+      "reference": 30,
+      "complete_including_support": 1500
+    },
+    "projection_limit": "Five times each observed complete learned invocation plus one reference; deliberately also multiplies fixed overhead, but is only a planning proxy and not a runtime bound. No cost experiment, grid, diagnostic, intermediate panel or invocation allocated.",
+    "action_now": "publish recommendation only; no successor card or launch"
+  }
+}

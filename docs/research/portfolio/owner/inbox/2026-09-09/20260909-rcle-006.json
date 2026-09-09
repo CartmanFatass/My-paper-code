@@ -1,0 +1,86 @@
+{
+  "id": "20260909-rcle-006",
+  "created": "2026-09-09T16:29:09-07:00",
+  "direction": "roster_consistent_latent_exploration",
+  "tier": "object",
+  "kind": "close-call",
+  "title": "RCLE：下一步建议固定1000轮的一对比较",
+  "context": "新种子20重现小正收益，但仍低于0.05、恢复分数全40，碎片两处变差两处改善。比较增加固定训练终点、重复200轮和暂缓；当前仅发布建议，不分配新调用。",
+  "options": [
+    {
+      "key": "propose-1000",
+      "label": "建议一对固定1000轮",
+      "consequence": "发布一个有限的长终点比较建议；尚无卡、源修改或调用额度，后续需另行选择与分配。"
+    },
+    {
+      "key": "another-200",
+      "label": "再比较一对200轮",
+      "consequence": "再测同预算训练实例变异，仍不直接回答剩余原生能力差距。"
+    },
+    {
+      "key": "defer",
+      "label": "暂缓未变学习律比较",
+      "consequence": "本次结束并保留证据；不作方向关闭、暂停或优先级变更。"
+    }
+  ],
+  "recommended": "propose-1000",
+  "auto_applied": "propose-1000",
+  "dm_reason": "两对小收益与后段改善支持更有辨别力的固定训练终点，但参考差距和恢复失败使暂缓仍很接近；只发布建议。",
+  "evidence": [
+    "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B03_S20_RESULT_INTAKE_20260909.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-09.md#L139",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "下一步是否只建议一对固定1000轮的W1/W100比较，而非第三对200轮重复或暂缓？",
+    "changes_if_approved": [
+      {
+        "target": "RCLE对象层下一步建议",
+        "from": "S20已完成，只有两对低于MEI的小正结果；尚无下一次卡或额度",
+        "to": "建议另选一对固定1000轮终点评价；这里只发布建议，不建卡、不分配调用、不改变方向优先级"
+      }
+    ],
+    "if_refused": "保留S20全部正负结果并结束本次支出，暂缓额外未变学习律比较；任何改变问题另按原决策层级处理。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B03_S20_RESULT_INTAKE_20260909.md",
+        "quote": "These two observed gains show limited recurrence and size variation.",
+        "why": "新随机生成的训练对重现小收益，给一次更有辨别力的有限训练比较提供理由；没有要求再跑到所有种子都好。"
+      },
+      {
+        "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B03_S20_RESULT_INTAKE_20260909.md",
+        "quote": "W100 training U decreases across these windows; W1 remains around 0.708.",
+        "why": "训练后段仍改善，固定更长终点可以直接测原生收益；这并不证明训练不足或保证收益线性增长。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B03_S20_RESULT_INTAKE_20260909.md",
+        "quote": "Every initialization, W1 and W100 scenario has failure-coded tau 40 in all eight cells.",
+        "why": "两次200轮仍没有完整恢复；与暂缓的取舍很接近。"
+      },
+      {
+        "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B03_S20_RESULT_INTAKE_20260909.md",
+        "quote": "The same nearest-beacon reference has primary U **0.2757893880**, leaving a **0.4140238444**\ngap below W100, and eight-cell U 0.2855102539.",
+        "why": "简单参考仍远好于学习策略；小幅相对改进不足以支持持续无界投入。"
+      }
+    ],
+    "uncertainty": [
+      "两对且按已见结果选择，只能说明局部重现，不能证明稳定优势。",
+      "种子20最终12人场景有两处碎片变差、两处改善；平均符号符合预测，不代表统一机制。",
+      "1000轮的新终点能否带来0.05量级原生学习未知，不把曲线外推当结论。",
+      "约855秒只是从完整调用做五倍比例的规划代理；未来卡需在完整预算内包含检查与支持。"
+    ],
+    "cost": {
+      "compute": "建议规模：2臂×1新训练对×1000轮×64集，加4×8×256评估；136192集、8716288步、2000次反传。规划449.15/403.10/2.85秒；拟600/600/30秒、完整1500秒。当前新增调用0。",
+      "owner_time": "可异步修改建议；无需等待回复完成本次已授权收尾。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing；这里只发布建议，任何后续卡和调用都未分配。"
+    },
+    "verdict_text": "Recommend one separately selected fresh W1/W100 pair at a fixed 1,000-update endpoint; publish this recommendation only, with no successor card or invocation allocated.",
+    "source": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B03_S20_RESULT_INTAKE_20260909.md"
+  },
+  "starred": true
+}
