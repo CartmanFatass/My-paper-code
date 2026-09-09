@@ -1,5 +1,7 @@
 # HMASD experiment tracking
 
+ACVC same unsent request routing corrected atae0faa0a7: actual OWNER_DIRECT cutover/previous request metadata supplied, fixed science unchanged. Root actually resumed original Transport request; first provider Send still unconfirmed. VSP03 post-B05 request2026-09-09-vsp03-post-b05-convergence-01 HANDOFF7b11d9c11/TASK3887b6f5c actually dispatched once to existing bound conversation via Transport, app accepted/provider Send unconfirmed. Both original DMs await complete responses; no scientific successor allocated.
+
 VSPC1 P76 remote execution checkout reclamation completed after integration: exact b10-8501 checkout absent on disk/registry, source preserved under remote refs/recovery/p76-20260909/vspc1-b10 and published ancestry, external outputs retained. Shared authoring checkout remains active; policy-blocked CM test scratch remains separate.
 
 VSPC1 P76 full intake62625efbb accepted: sole B10/8501 handle terminal exit0, valid CHANGE_DOWN C=-.0542390934;512 UP and768 WITHIN, all160 evaluations retained. Source boundary and independent review/focused receipts accepted;434176steps/3072Adam/475.85s, allowance spent. Original DM actually resumed P77 ONE fresh independent unchanged two-endpoint pair through card/source/remote execution/sole CM observation/intake, same caps and no retry. New master/handle pending. Root owns finished remote checkout reclamation; policy-blocked scratch remains original CM-owned.
