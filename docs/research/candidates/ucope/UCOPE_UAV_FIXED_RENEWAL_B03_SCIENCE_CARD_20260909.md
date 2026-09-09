@@ -164,3 +164,26 @@ the older fixed selectors. No duplicate unchanged statistical/freeze suite.
 assigns the original CM the full source/check/publication, exact committed
 detached remote invocation, sole observation and collection batch in the
 same codex/ucope checkout under §§3–4,6. No intermediate approval handshake.
+
+## 8. Observed P81 completion — 2026-09-09
+
+**Valid complete DOWN**, one new matched instance 8001 at source
+`87e2793098a57a30caf6c816309c42bece30ee98`. All 286720 steps, 2048 Adam and
+96 final evaluations completed in **320.29 s** outer wall, no cap breach.
+Prospective F−G **−0.021798883942210363**, conditional SE
+**0.010646977126718544**, is **0.011798883942210363 below −0.01**.
+F−H **+0.015269670011827153** and G−H **+0.03706855395403751** remain
+separate gains; they do not rescue the primary. All signs and old primary
+identities remain. F's whole head stayed fixed with real F/G actor/critic learning.
+
+F−G>0.01 forecast did not occur; F−H>0.01 occurred. Brier losses 0.25/0.16,
+mean **0.205**; owner prediction not taken. No new cross-instance mean/SD,
+pooled primary or population interval was calculated. Headroom absent, recasts 1.
+
+P81 ends at its all-outcome boundary. [Intake §§7–10](UCOPE_UAV_FIXED_RENEWAL_B03_P81_INTAKE_20260909.md#7-dm-scientific-intake-against-the-card)
+recommends a separately allocated shorter fixed-hold {1,2} F/G/H performance
+comparison after this repeated feedback loss. This is future treatment advice;
+prospective §§1–7 remain unchanged, and no successor card/master/source/budget,
+run or Pro Send is created. See [E0 evidence](UCOPE_UAV_FIXED_RENEWAL_B03_P81_RESULT_EVIDENCE_20260909.md),
+[durable summary](UCOPE_UAV_FIXED_RENEWAL_B03_P81_RESULT_SUMMARY_20260909.json)
+and [Chinese brief](../../portfolio/owner/briefs/ucope/2026-09-09_UCOPE_UAV_FIXED_RENEWAL_B03.md).
