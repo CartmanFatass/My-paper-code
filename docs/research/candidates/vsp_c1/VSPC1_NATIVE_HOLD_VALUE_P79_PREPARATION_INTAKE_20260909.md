@@ -1,8 +1,10 @@
 # P79 preparation intake — one post-B12 direction question
 
-Current state: fixed GitHub TASK published and handoff READY_TO_DISPATCH for Root.
-No Pro decision, new card, scientific invocation or DM dispatch. Direction
-disposition remains pending; all preparation work is committed for return.
+Preparation completed with the fixed GitHub TASK and ready Root handoff below.
+The subsequent [Convergence intake](VSPC1_NATIVE_HOLD_VALUE_P79_CONVERGENCE_INTAKE_20260909.md)
+found and accepted the full immutable decision despite a contradictory raw
+Transport blocker report. The original preparation, TASK/HANDOFF and fixed input
+remain unchanged in their committed versions; no new card or run occurs here.
 
 ## 1. Assignment, authority and checked starting state
 
