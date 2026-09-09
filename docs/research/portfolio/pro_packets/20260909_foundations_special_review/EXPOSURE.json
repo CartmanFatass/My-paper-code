@@ -321,7 +321,7 @@
       "direction": "CRTO",
       "folder": "commitment_residual_triggered_options",
       "executed_source_sha": "d9f643b761d57584de313b1f837d6c2c0becc931",
-      "primary_and_mei": "Primary alignment requires new RAW-LONG competence separately on each 8-row budget (≥6 exact-oracle actions and mean regret≤0.005), then ΔR,ΔD,ΔH>0.0025 strictly at each budget. Actions identical across paths; regret 0.0021294544930598857; KEEP8/8, REPLAN5/8.",
+      "primary_and_mei": "Primary alignment at endpoint b requires new RAW-LONG competence on both eight-row sides, KEEP and REPLAN (each ≥6 exact-oracle actions and mean regret≤0.005), and ΔR(b),ΔD(b),ΔH(b)>0.0025 strictly. SHORT does not independently require competence. Actions identical across paths; regret 0.0021294544930598857; KEEP8/8, REPLAN5/8.",
       "independent_unit": "Selected 16 identities, reused seed0, three RAW/TRUE/DERANGED paths at endpoints33/258. Ninety-six readouts are not independent learner replications.",
       "bounded_reading_and_contrary": "New RAW weak: diagnostics only, not a competent negative. Historical RAW gains +0.0044524264964700775 SHORT/+0.0016519755926440258 LONG with losses3/2 retained. Fixed-reference max gain 0.00212945 below MEI0.0025 is not global upper headroom; three remaining errors preserved.",
       "next_state": "Reversible family PARK retained; no successor. Historical global-stop wording is not current direction closure.",
