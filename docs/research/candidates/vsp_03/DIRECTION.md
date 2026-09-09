@@ -169,6 +169,14 @@ If a later extension is selected, one new independently trained G at the same
 comparison is the direct discriminator of recurring gain versus waiting-cost loss;
 it is unallocated, not a prerequisite or an automatic continuation.
 
+**B04, 2026-09-08: no second learning observation.** The subsequently allocated
+seed-6 invocation failed before resource admission and scientific construction.
+No return or prediction score exists, so the measured prospective population
+remains the single seed-5 G; no two-instance summary is supported. The recorded
+failure adds no scientific polarity and changes neither the seed-5 losses nor the
+separate seed-4 discovery. The independent-training discriminator remains
+unanswered and no further invocation is allocated at this boundary.
+
 The strongest surviving alternative is that public dwell age already suffices and the generic
 MLP matches the prior, or that all advantage is the fixed rule rather than learning. In the new
 host R0, R or ordinary G may handle scheduling, while the local readiness prior could occupy the
@@ -186,6 +194,9 @@ sharing K1 does not pool polarity or reopen that family.
 ## Evidence set
 
 The evidence set includes historical observations and the separately labelled prospective selection:
+- `docs/research/candidates/vsp_03/VSP03_B04_INTAKE_20260908.md`
+- `docs/research/candidates/vsp_03/VSP03_B04_RESULT_EVIDENCE_20260908.md`
+- `docs/research/candidates/vsp_03/VSP03_B04_SCIENCE_CARD_20260908.md`
 - `docs/research/candidates/vsp_03/VSP03_B03_INTAKE_20260908.md`
 - `docs/research/candidates/vsp_03/VSP03_B03_RESULT_EVIDENCE_20260908.md`
 - `docs/research/candidates/vsp_03/VSP03_B03_DM_ANALYSIS_20260908.json`
