@@ -1,5 +1,7 @@
 # HMASD experiment tracking
 
+VSP03 post-B05 and ACVC native-link-loss requests now ARCHIVED with one Send each; full GitHub responses3da3a0c44/2d914ab8b are preserved. Original DMs actually resumed full conformity/scientific intake. Link-only receipts' scientific_decision_formed=false is not treated as a full-file conclusion. VSP03 opening selects narrow-family pause; ACVC selects the proposed bounded native B and explicitly interprets inherited units, all pending full native intake. No new experiment allocated by these receipts.
+
 VSPC1 P77 sole handlevspc1_hold_value_b11_8502_7ed4c3933771 accepted/running on hmasd-wsl-node PID3040577, exactsource7ed4c3933771f85d570b5c952052b9e8c5fbd6e1; actual admission15318642688bytes physical/effective passed. Same CM sole observer/collector, original DM full C/endpoints/H intake. No retry/resume/extra pair or Root polling.
 
 FOLR P77 source intake64db6307b accepted: NO_READY for true-survivor reset under unchanged CAMA observation interface, zero empirical exposure. Original DM actually resumed P78 proper-node question preparation for an explicitly prospective common event/lifetime scope versus no successor; no local scientific scope change, card, run or Send. UCOPE P77 sole handle `ucope-uav-renewal-frozen-head-b01-7601-p77-20260909` now accepted/running on hmasd-wsl-node PID3040009, source002ba4397, actual joined admission15628730368bytes physical/effective; same CM sole observer/collector, original DM scientific intake. No Root polling or extra invocation.
