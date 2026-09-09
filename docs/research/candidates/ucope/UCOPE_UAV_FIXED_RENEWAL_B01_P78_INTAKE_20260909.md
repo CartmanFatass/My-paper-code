@@ -251,3 +251,134 @@ intake and archival; Root owns source/evidence integration and subsequent P78 te
 remote-checkout and wrapper reclamation after preserved intake.** Own test scratch/source-pack
 carriers are already removed. Shared authoring checkout remains in use; P77 cleanup and
 older evidence stay with their recorded owner. CM releases the index/owned paths at return.
+
+## 7. DM scientific intake against the card
+
+**Accept valid COMPLETE / UP for P78.** The
+[E0 evidence](UCOPE_UAV_FIXED_RENEWAL_B01_P78_RESULT_EVIDENCE_20260909.md) and
+[durable summary](UCOPE_UAV_FIXED_RENEWAL_B01_P78_RESULT_SUMMARY_20260909.json)
+retain all96 returns and three signed contrasts. CM returned clean pushed
+20e9aa07c2db0682078df931b8057fc0370fc976 and released this checkout/index.
+DM checked the result against card§§1–7, immutable source/test changes,
+actual native configuration/master/private streams, independent-review and raw
+suite record, terminal/admission receipts and executed wrapper. No source test,
+checkpoint evaluation, CM tensor verification or remote observation was repeated.
+
+Read-only arithmetic over1120 episode records found complete unique identities,
+the7701 reset panels and256-step horizons,512 training episodes per fit and
+32 final episodes per F/G/H. Exactly those three arm labels occur. Native
+J=reward_sum/256 and all96 final values/three vectors/means/conditional SEs
+reconcile with publication. The approved run-summary tool used one fitted
+endpoint per F/G at the declared matched unit, excluding untrained H. Its
+difference-of-means accumulation differs by1.39e-17 from the primary
+mean-of-differences; preserve the native primary with no decision change.
+All286720 steps/2048Adam/512rollouts and actual group exposures are readable.
+Independent training n=1 supplies no training-population SD or interval.
+
+The card§5 UP rule applied verbatim is:
+
+> Preliminary favorable fixed-renewal package evidence for this fit/task/budget; recommend a separately allocated small independent-fit follow-up if investment continues.
+
+F−G is **+0.026550516654013076**, conditional SE**0.011109495362659165**,
+0.016550516654013074 above+0.01, with17 positive/15 negative episodes.
+F−H is **+0.030122962641204728**, SE**0.014904708941129195**,23 positive/9
+negative; G−H **+0.0035724459871916527**, SE**0.01461525282953026**,18/14.
+No hover contrast rescues or redefines the primary. No significance,
+all-episodes-positive or cross-platform equality prerequisite is added.
+
+CM's finite-FP32 checkpoint/norm and frozen-head checks plus the accepted
+unchanged freeze path establish a fixed entire F head with zero final layer,
+and actual actor/critic movement3.3146941661834717/8.124134063720703.
+G's actor/critic movement2.1613593101501465/7.371159076690674 is also real.
+Both have66311 trainable parameters; F's2242 intentionally frozen parameters
+increase the total parameter count but supply no duration-path update. The initial/
+final-layer norm and undefined relative displacement remain explicitly recorded.
+Engineering PASS does not itself establish the favorable scientific point.
+
+## 8. Bounded scientific interpretation and predictions
+
+This fresh fit supports interest in fixed stochastic persistence as a package
+against legal feedback. Its advantage occurs while the duration law is fixed;
+the observation therefore supplies no evidence that learning duration was
+necessary for this particular gain. It does not isolate temporal smoothing,
+geometry/service, later information, masked optimizer exposure or partner
+co-adaptation. Equal trainable parameter counts are retained, without importing
+P77's learned-T versus F capacity difference into this F/G comparison.
+
+**Strongest support:** this prospective above-MEI F−G measurement after real
+learning, alongside positive F−H. P77's displayed fixed-F ordering is compatible
+historical motivation, not a retrospectively favorable P77 primary or pooled
+confirmation. **Strongest limitations and contradiction:** F loses to G on15/32
+paired episodes; G's mean is only0.0035724459871916527 above hover, so this
+observation does not establish a tuned strong baseline or stable advantage.
+P77's learned T losses to G/F/H and P72's earlier reversal remain contrary
+evidence for broader learned-renewal claims. No adverse historical result is erased.
+
+The verified local-library grounding in P74 preparation§3 and its accepted
+Convergence intake remains sufficient for this chosen discriminator. The new
+evidence advances fixed persistence from an outcome-informed alternative to
+one prospective favorable package observation. It imports no new mechanism,
+identifies no unique cause and requires no exact headroom or causal search.
+Tuned same-information headroom remains absent. Neither this run nor another
+small follow-up could alone establish stable population superiority.
+
+Both recorded prediction events occurred: F−G>0.01 at probability0.55 and
+F−H>0 at0.65 yield Brier losses0.2025/0.1225, mean**0.1625**. No hard-label
+accuracy score is retrofitted. Owner prediction **not taken (unattended)**.
+At intake `item.py reviews --json` returned[] on main and this checkout;
+the scoped audit scan found no UCOPE owner instruction. No owner reply,
+override or material critic dissent was fabricated. Owner flags: **none**.
+
+## 9. Decisions this completed intake produces
+
+**Validity and reading, object tier.** Options: (a) accept valid UP with all
+three contrasts and adverse episodes; (b) treat the intended fixed head as a
+failed learner; (c) claim stable or pure duration-learning superiority from
+the favorable point. Recommend and execute **(a)**. Actual learning, complete
+counts, unchanged semantics and trustworthy primary support the bounded
+reading; there is no concrete defect requiring quarantine or replay.
+Owner-delegated decision (unattended, 2026-09-03 instruction): **(a)**.
+
+**Completed allocation and next focus, object tier.** Options: (a) end P78
+and recommend one separately allocated fresh F/G/H training instance with
+the same native comparison; (b) stop the unchanged-fit sequence here;
+(c) retune G, restore learned T, or require causal diagnosis before another
+measurement. Recommend **(a)**. A credible above-MEI point at this modest
+observed cost warrants a small independent-fit follow-up under§11.8.2–3.
+It would ask whether the package advantage survives a new training history,
+not run until all signs are positive. Record all future outcomes if allocated.
+The current execution is the all-outcome stop; recommendation creates no run.
+Owner-delegated decision (unattended, 2026-09-03 instruction): **(a)**.
+
+Known future work at the same512/32 budget is286720 native steps,2048Adam and
+96 final episodes; P78's334.19s is a measured reference, not a guaranteed next
+wall. No new card, numeric master, source amendment, allowance, model/evaluator,
+pilot/probe, retry/resume/replacement, extra evaluation, Pro packet or Send is
+created. Root owns subsequent sequencing/allocation and integration. This is
+ordinary object-tier continuation advice inside the accepted renewal family,
+with no recast, family closure, C promotion or Portfolio disposition. Recasts
+remain1; ACTIVE/HIGH and actual UAV-entry status remain unchanged.
+
+## 10. Cost, owner surface and recoverable boundary
+
+One valid P78 result cost **334.19s complete outer wall**, peak RSS559260KiB.
+F/G arm walls172.7081888440298/146.49354537401814s and runner319.201735989016s
+are nested accounting; they are not added to outer wall. No1800s arm/3600s whole
+or engineering-scope§5 breach occurred; §4 additions none. Aggregate CPU remains
+**resources_unmeasured**. The accepted result is not annulled by that missing
+optional measurement. No new cost probe or budget is implied.
+
+The [Chinese valid-result brief](../../portfolio/owner/briefs/ucope/2026-09-09_UCOPE_UAV_FIXED_RENEWAL_B01.md)
+and audit rows accompany intake. New-card item20260909-ucope-003 remains the
+prospective owner surface; ordinary validity/next-focus decisions get no separate
+item. All raw returns, checkpoints and receipts remain at the local P78 root in§6,
+including CM collection verification and DM read-only run/episode analysis.
+
+Root may integrate the named commits and archive/reclaim the finished scientific
+checkout and staged wrapper in§5 and test checkout
+`/home/wu/hmasd-worktrees/ucope-uav-fixed-renewal-p78-check-20260909` after
+preservation. No accepted P78 process remains live. Root separately owns P77's
+cleanup. The shared local direction checkout remains available for the next
+assigned writer; this DM edits no main control-plane file and deletes no evidence.
+
+Intake owner review reference: **2026-09-09T04:08:05-07:00**, no unapplied instruction/prediction reply on either checkout and no nonempty UCOPE audit owner entry. Decisions are recorded at [technical audit row](../../portfolio/audit/2026-09-09.md#L14) and [selection row](../../portfolio/audit/2026-09-09.md#L15); no item required marking answered.

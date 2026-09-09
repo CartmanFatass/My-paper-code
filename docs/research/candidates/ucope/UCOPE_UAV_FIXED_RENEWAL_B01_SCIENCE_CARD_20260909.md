@@ -187,3 +187,19 @@ submission, sole observation/collection and technical return. No additional
 source-permission phase is inserted. DM inspects accepted artifacts and intakes
 science; Root owns main integration. Return actual scientific-meaning or budget
 conflicts before dependent execution while continuing independent in-scope work.
+
+## 8. Observed P78 completion — 2026-09-09
+
+One7701 invocation at sourcec7c139c512b2dc598a00ff5746b1f89b1aaf8a46 completed
+all286720 steps/2048Adam/96 final evaluations in334.19s with no cap breach.
+[E0 evidence](UCOPE_UAV_FIXED_RENEWAL_B01_P78_RESULT_EVIDENCE_20260909.md) and
+[DM intake §§7–10](UCOPE_UAV_FIXED_RENEWAL_B01_P78_INTAKE_20260909.md#7-dm-scientific-intake-against-the-card)
+accept **valid UP**: F−G+0.026550516654013076, conditional SE0.011109495362659165;
+F−H+0.030122962641204728, G−H+0.0035724459871916527. F's head stayed fixed
+while actor/critic learning was real. All96 outcomes and15 adverse F−G episodes
+are retained. The one-fit package ceiling and absence of tuned headroom remain.
+
+Both forecast events occurred; mean Brier loss0.1625, owner prediction not taken.
+P78 ends at the all-outcome stop. Intake recommends one separately allocated
+new F/G/H training instance, creating no new card/master/run or Pro Send.
+Original§§1–7 and all earlier result meanings remain unchanged; recasts remain1.
