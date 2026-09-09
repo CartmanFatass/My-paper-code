@@ -30,7 +30,8 @@ remains dated provenance under the controlling evidence specification section 11
   commitment at each owning UAV's expiry. Select exactly one B/EXPLORE matched
   pair, master7301, against ordinary same-information stepwise recurrent PPO;
   complete native return remains primary. The selected question changes where
-  duration acts, without a new result or diagnosis of the old losses.
+  duration acts without diagnosing the old losses; its one pair is now complete
+  at P70 below.
   See the [renewal Convergence intake](UCOPE_POST_B04_RENEWAL_CONVERGENCE_INTAKE_20260908.md)
   and [renewal B01 card](UCOPE_UAV_RENEWAL_COMMITMENT_B01_SCIENCE_CARD_20260908.md).
   Its intake records one genuine RECAST entry and the historical account's
@@ -41,13 +42,17 @@ remains dated provenance under the controlling evidence specification section 11
   The **2026-09-05 PRO_FINAL / PARK** of the same-draw retained-policy root-residual
   localization family and its numerical-locus dependency remains unchanged.
   See the [Convergence intake](UCOPE_UAV_INTERFACE_CONVERGENCE_INTAKE_20260907.md).
-- Latest bounded B observation: **2026-09-08 UAV motion prefix B04 P61,
-  COMPLETE / WITHIN**. Duration conditioned on the owner's actual sampled
-  command yields 7201 T−G **−0.003948225944122139**, conditional evaluation
-  SE **0.010191826216031805**. G−H **+0.0238187196536019** and T−H
-  **+0.019870493709479763** are positive sampled means. One matched training
-  pair supports no demonstrated point gain at the selected 0.01 scale/budget,
-  without stable equivalence, conditioning causality or family disposition.
+- Latest bounded B observation: **2026-09-08 UAV renewal B01 P70,
+  COMPLETE / UP**. Own-expiry renewable commitment yields 7301 T−G
+  **+0.055673191348834944**, conditional evaluation SE
+  **0.011556059794903147**. T−H is **+0.05305453732049459**;
+  G−H is **−0.002618654028340355**. One matched training pair supports a
+  preliminary favorable native package comparison at the selected 0.01 scale,
+  with this G fit's competence unestablished. No stable, causal renewal or
+  improvement-over-competent-control conclusion follows. See
+  [P70 intake](UCOPE_UAV_RENEWAL_COMMITMENT_B01_P70_INTAKE_20260908.md).
+  Prior opening B04/P61 remains WITHIN: 7201 T−G −0.003948225944122139
+  with conditional SE 0.010191826216031805 and positive T−H/G−H.
   See [B04 intake](UCOPE_UAV_MOTION_PREFIX_B04_P61_INTAKE_20260908.md).
   B03's near-boundary DOWN, B02 DOWN with both negative T−H and mixed G−H,
   P24 WITHIN/6902 harm and original P21 UP remain separate and unchanged.
@@ -87,12 +92,12 @@ no current opening-commitment gain and no reliable training-population
 comparison or causal diagnosis of either learning amendment.
 P61's command-conditioned opening B04 now gives one WITHIN pair, with
 T−G −0.003948225944122139 and positive sampled T−H/G−H. The selected
-package still has no demonstrated gain at its 0.01 scale/budget. Its less
+opening package still has no demonstrated gain at its 0.01 scale/budget. Its less
 negative point than B03 does not isolate a conditioning effect: masters,
 fitted histories and capacity differ. The exposed conditioning path is
 neither a defect diagnosis nor a cause of past harm. Added capacity,
 sparse credit, direct service and partner co-adaptation remain alternative
-explanations. The selected allocation is complete. Tuned headroom,
+explanations. That P61 allocation is complete. Tuned headroom,
 stable superiority or equivalence, transfer, pure information value and
 deployment remain unestablished.
 
@@ -110,7 +115,7 @@ without a distinct count-state architecture because RAW contains the sufficient
 count. The direct-service alternative remains separated by the frozen
 `Gamma=I+D` decomposition and analytic `D≈-0.02` boundary.
 
-## Current scientific position — 2026-09-08 renewable-commitment RECAST
+## Current scientific position — 2026-09-08 renewal B01 UP
 
 Convergence selects one real package comparison of action-conditioned duration
 at every owner's own expiry, rather than only at reset. Source inspection shows
@@ -119,24 +124,48 @@ history, although recurrence continues throughout. The new event therefore
 tests a different control opportunity; it is not a claim that sparse opening
 exposure caused B04's negative mean.
 
-The strongest support for posing this question is that concrete untested event
-with unchanged legal information and native budget. Prior P21 remains limited
-positive package evidence. The strongest contradiction remains ordinary feedback's
-higher current native mean and the adverse B02/B03/P24 evidence below. Feedback
-can already repeat useful commands and adapt sooner to partners, so repeated
-commitment may be unnecessary or harmful. Added decision exposure, optimization,
-persistence, geometry/capacity and partner co-adaptation remain intertwined.
+P70 now answers that bounded question with one real 7301 pair. Mean T/G/H
+native returns are **0.18553283836801163 / 0.12985964701917668 /
+0.13247830104751704**. T−G **+0.055673191348834944** is UP under the
+unchanged +0.01 rule, with conditional evaluation SE **0.011556059794903147**;
+all 25 positive and 7 negative episode differences remain. Independent training
+n=1 does not provide training-population uncertainty. The strongest support
+is this above-MEI primary together with T−hover **+0.05305453732049459**.
 
-The next discriminator is one fresh7301 T/G pair with final matched-reset T/G/H
-returns under the [renewal B01 card](UCOPE_UAV_RENEWAL_COMMITMENT_B01_SCIENCE_CARD_20260908.md).
-There is no new empirical observation yet. Its native-step/update budget matches
-B04, but duration-head work grows64–256× and incremental seconds are unknown;
-the existing complete time caps remain. No exact diagnosis or headroom prerequisite
-is introduced. Every sign ends this one allocation; no stable, causal renewal,
-pure-information, transfer or deployment claim follows. See the
-[complete decision intake](UCOPE_POST_B04_RENEWAL_CONVERGENCE_INTAKE_20260908.md).
+The strongest current limitation is G−hover **−0.002618654028340355**
+(conditional SE **0.011943248746505064**): competence of this G fit is not
+established. Neither the favorable primary nor this small negative hover
+contrast establishes stable superiority or harm. Historical B04's negative
+WITHIN point and B02/B03/P24 adverse results remain contrary opening-package
+evidence; P21's favorable evidence remains separate. Different masters,
+evaluation panels and control laws prohibit a causal renewal-versus-opening
+reading or pooled primary.
 
-## Latest empirical position — 2026-09-08 B04
+The treatment actually makes 255710 training and 15883 final duration
+decisions, while private observation and recurrence continue during holds.
+The head and both learners move. These connect the accepted owned-action/
+credit path to the native observation; they do not show that conditioning or
+information caused it. Ordinary feedback can already repeat useful commands
+and adapt sooner to partners. Temporal smoothing, geometry, capacity,
+changed decision/gradient exposure and partner co-adaptation remain surviving
+explanations. Prior verified UTE/ACAC retrieval supports the renewal event
+distinction, not this UAV gain or G's competence.
+
+The one allocation is complete, with all 286720 native steps, 2048 Adam calls
+and 96 final evaluations retained. Measured whole wall is 304.85s within the
+original caps. Actual duration-head work is about 99.8741× B04's opening count;
+that count ratio is not a causal wall-time multiplier or future timing promise.
+The next recommended discriminator is one **separately allocated independent
+training pair** of the same renewal package/G/H and budget, retaining every
+outcome. No new master or invocation is selected by this intake. Tuned headroom
+remains absent; no complete diagnosis, stable or pure-information superiority,
+transfer, deployment or C promotion follows. See the
+[P70 E0 evidence](UCOPE_UAV_RENEWAL_COMMITMENT_B01_P70_RESULT_EVIDENCE_20260908.md),
+[all-outcome intake](UCOPE_UAV_RENEWAL_COMMITMENT_B01_P70_INTAKE_20260908.md),
+[renewal card](UCOPE_UAV_RENEWAL_COMMITMENT_B01_SCIENCE_CARD_20260908.md) and
+[prior direction decision](UCOPE_POST_B04_RENEWAL_CONVERGENCE_INTAKE_20260908.md).
+
+## Previous empirical position — 2026-09-08 B04 (preserved)
 
 The command-conditioned opening policy and ordinary feedback learner both
 complete the selected real training budget on master 7201. T/G/H mean native
