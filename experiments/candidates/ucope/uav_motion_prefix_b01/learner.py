@@ -28,7 +28,7 @@ def clipped_policy_loss(new_logp, old_logp, advantage, velocity_mask=None):
 @torch.no_grad()
 def collect_episode(env, actor, critic, horizon, reset_seed, velocity_rng, duration_rng,
                     metadata, check, counts, emit_episode, emit_diagnostic, limits,
-                    real=False, diagnostics=False, ratio_grouping="joint", renewal=False):
+                    real=False, diagnostics=False, ratio_grouping="joint", value_moments=None, renewal=False):
     """Counts survive an exception; only a complete episode emits a scored row."""
     check()
     obs, info = env.reset(seed=reset_seed)
@@ -67,6 +67,8 @@ def collect_episode(env, actor, critic, horizon, reset_seed, velocity_rng, durat
             mean, recurrent, hidden = actor(torch.from_numpy(x)[None], hidden)
             mean, recurrent = mean[0], recurrent[0]
             value = critic(torch.from_numpy(cx))
+            if value_moments is not None:
+                value = value_moments.decode(value)
             if not torch.isfinite(mean).all() or not torch.isfinite(value):
                 raise FloatingPointError("nonfinite learner during collection")
             sample_options = {"duration_mask": duration_mask} if renewal else {}
@@ -193,11 +195,14 @@ def optimizer_for(actor, critic):
 
 
 def update(actor, critic, optimizer, episodes, chunk, check, counts, ratio_grouping="joint",
-           entropy_coef=0.01):
+           entropy_coef=0.01, value_moments=None):
     rollout = {key: torch.stack([ep[key] for ep in episodes]) for key in episodes[0]}
     targets = returns_to_go(rollout["reward"])
     raw = targets - rollout["value"]
     advantages = ((raw - raw.mean()) / (raw.std(unbiased=False) + 1e-8)).detach()
+    if value_moments is not None:
+        value_moments.update(targets)
+        targets = value_moments.normalize(targets)
     parameters = list(actor.parameters()) + list(critic.parameters())
     records = []
     for epoch in range(4):
@@ -225,5 +230,7 @@ def update(actor, critic, optimizer, episodes, chunk, check, counts, ratio_group
                         "policy_loss": float(policy_loss.detach()),
                         "value_loss": float(value_loss.detach()),
                         "entropy": float(entropy.mean().detach()), "grad_norm": float(grad_norm)})
+        if value_moments is not None:
+            records[-1]["value_loss_units"] = "normalized_squared"
         check()
     return records
