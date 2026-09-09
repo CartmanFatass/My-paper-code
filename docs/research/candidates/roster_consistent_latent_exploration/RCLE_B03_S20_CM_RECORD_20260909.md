@@ -94,3 +94,26 @@ actor consumers, preserved19 defaults and metadata-only labels, fixed fresh-W1 c
 600/600/30 admission sequence, supplied fixture and unchanged learner/native/old wrappers.
 No reviewer tests or scientific calls. CM accepts the changed source/check boundary;
 scientific/native execution and full result acceptance remain pending collection.
+
+## Staging resolution and final prelaunch bound
+
+Remote origin fetch stalled before checkout creation and was terminated. The first
+incremental Git bundle triggered a missing delta-base fetch in the partial clone and
+was also terminated before checkout creation. These are source-staging operations,
+not scientific invocations. A committed-object non-thin pack in a Git bundle then
+imported successfully without network dependencies; no source bytes changed.
+Source bundle369790 bytes SHA256
+9e7c2a63a198cd5a5ad9ea4a90bb1a82de0068d97b282d32d5dd937863dc5308
+matched after transfer. Exact detached source4d96a832eeaa875b2e6178bd9014067ce32d0339
+checked out successfully; declared source diff is empty and `bash -n` passed.
+Remote source-only stage `/home/wu/hmasd-inputs/rcle-b03-s20-20260909` now joins the
+later closeout inventory; it contains Git bundles, no historical scientific control.
+
+This supersedes the preliminary75/1300/125 budget split above. Conservatively charge
+**250s prelaunch support including15s DM**, all focused checking and stalled Git staging;
+use **outer timeout1150s**, reserve **100s collection/publication**, totaling1500s.
+Per-invocation600/600/30 sublimits remain; the cumulative bound can stop the sequence
+before all maxima are spent, as required by the unchanged whole-object cap. Complete
+historical projection152.78s remains well below the remaining allowance. No arm/panel
+was removed, no experiment retried and no allowance reset. Actual final charge will
+retain this conservative support debit plus measured sequence and collection/publication.
