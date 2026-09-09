@@ -1,5 +1,9 @@
 # MGTAP B01 P75 technical execution record - 2026-09-09
 
+Latest state: COMPLETE, technically accepted. Both native pairs and the single
+offline aggregate have exited and been collected. See Terminal technical
+acceptance below; the preceding preparation/handle entries retain chronology.
+
 P75 execution task at main 4a20de760 authorizes this batch. Source is fixed at
 4f65eefb1b15e44b42d694376630fba0c230cc6c; production source is unchanged.
 CM /root/cm_mgtap_p72_repair is sole executor and observer through collection.
@@ -75,3 +79,60 @@ First observation was running, with fresh joined admission passed:
 effective available15318556672 bytes and physical floor passed.
 CM /root/cm_mgtap_p72_repair remains sole observer through terminal collection
 and the existing timed offline aggregate. No further scientific run is selected.
+
+## Terminal technical acceptance
+
+Both accepted native handles are finished with exit0, and the one existing
+offline aggregate command returned exit0. Exactly two native submissions were
+accepted (8201 then8202); no retry, resume, replacement, extra evaluation,
+calibration, source change or successor occurred. Complete collection and
+technical acceptance are finished; no observation transfer is pending.
+
+| master | native process wall | REL arm | DENSE/H/publication/exit | collection/validation |
+| --- | ---: | ---: | ---: | ---: |
+| 8201 | 353.71s | 173.654721s | 180.055279s | 8.782s |
+| 8202 | 368.12s | 187.954188s | 180.165812s | 8.328s |
+
+Master8202 finished at2026-09-09T16:36:51+08:00. Both arms and both pairs remain
+well within1800/3600s, including a conservative charge of collection/validation
+to the final arm. The aggregate process took0.81s. Summed remote native and
+aggregate process wall is722.64s. Study critical path from first supervisor
+start through aggregate timing-file completion is899.395665s (start recorded
+to whole seconds); it includes observation/collection/inter-invocation gaps.
+Control-plane collection timings are separately retained in JSON. Peak RSS,
+activation memory and aggregate CPU work remain unmeasured; admission is not
+a runtime memory-use measurement. GNU time wall is rounded to hundredths.
+
+Both source/launch bindings, complete learner counts, episode/rollout counters,
+all retained endpoint rows, zero duration decisions, finite FP32 checkpoints,
+and remote/local file sizes and SHA-256 values pass. There are no limits,
+partial episode steps or missing H endpoints. Counts across both masters:
+573440 native team steps,4096 Adam calls,2048 training episodes,128 learned
+sampled evaluations and64 diagnostic H evaluations:2240 episodes total.
+
+| master | mean REL | mean DENSE | mean H | paired REL-DENSE |
+| --- | ---: | ---: | ---: | ---: |
+| 8201 | .147553181120 | .192235706284 | .147847381964 | -.0446825251645 |
+| 8202 | .165518134487 | .168761817933 | .141367171777 | -.00324368344565 |
+
+The existing aggregate reports mean-.02396310430506595,
+training-pair sample SD .029301685983900646, and combined conditional evaluation
+SE .0026485358205291165, with errors=[] and primary.complete=true. Independent
+arithmetic over the collected pair summaries matches those quantities and the
+fixed runner branch REL_ADVERSE. This is a technical application of the frozen
+rule, not a new direction decision, causal claim, stable-superiority claim or
+competence certification. The original DM performs scientific intake.
+
+Durable artifacts:
+- MGTAP_NATIVE_GROUND_GEOMETRY_B01_P75_8201_TECHNICAL_COLLECTION.json
+- MGTAP_NATIVE_GROUND_GEOMETRY_B01_P75_8202_TECHNICAL_COLLECTION.json
+- MGTAP_NATIVE_GROUND_GEOMETRY_B01_P75_TECHNICAL_RESULT.json
+
+The complete raw run roots and checkpoints remain both remotely and in the
+P74-named local collection roots. Aggregate files and their hashes are at
+C:/Projects/HMASD/temp/directions/metric_ground_transport_allocation/exp/mgtap_b01_p75_aggregate_4f65eefb1b15e44b42d694376630fba0c230cc6c/.
+The actual observer through collection was /root/cm_mgtap_p72_repair.
+Root is next owner for integration and forwarding to original DM. The designated
+authoring checkout remains in use. The detached remote source/evidence checkout
+is retained for source/result acceptance; Root owns its later reclamation after
+verified evidence preservation, not deletion during this technical return.
