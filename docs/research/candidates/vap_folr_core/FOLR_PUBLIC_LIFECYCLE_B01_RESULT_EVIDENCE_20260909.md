@@ -15,3 +15,7 @@ RESET has the identical command replacing `retain` with `reset` in handle/paths 
 ## Observation and collection
 
 Staging/acceptance and terminal facts pending. No scientific process was accepted when this record was first frozen. Exact supervisor status/logs, admission receipt, summary, final checkpoint and external process.time are retained under the named run root upon collection. Scientific comparison requires both intact final summaries and their complete32 native returns. A partial/error summary labels counts as completed episodes/updates only; interrupted prefixes are unmeasured, not zero.
+
+RETAIN accepted at supervisor start epoch1788972342 (2026-09-09T16:45:42Z), PID3061064, tmux `agent_folr-public-lifecycle-b01-retain-20260909`. Destination admission at16:45:42.395319Z passed both physical/effective floors, each15,635,152,896 available bytes, threshold4,294,967,296. At first observation status running/exit null. At26.392907447s, the run reported episode200/update169. These are progress facts, not final performance or a new launch projection.
+
+Staging initially used non-login remote Git and hung in network access; a configured `zsh -lic` fetch succeeded. The two precisely identified non-scientific Git requests were terminated, their SSH sessions ended, then the detached worktree was created and exact HEAD/source diff verified. No scientific process or admission occurred during this repair. Network-shell gitstatus/zle startup warnings did not prevent successful fetch/staging. Remote main's unrelated bundle files were untouched.
