@@ -31,7 +31,8 @@ def runner_module():
                                                (7101, "b03", False), (9001, "b03", True),
                                                (7201, "b04", False), (9001, "b04", True),
                                                (7301, "renewal_b01", False), (9001, "renewal_b01", True),
-                                               (7401, "renewal_b02", False), (9001, "renewal_b02", True)])
+                                               (7401, "renewal_b02", False), (9001, "renewal_b02", True),
+                                               (7501, "renewal_b03", False), (9001, "renewal_b03", True)])
 def test_cli_actual_config_and_rng_propagation(seed, pair, fixture, scratch, monkeypatch):
     # Exercise the actual CLI/Config/run_pair stream expressions; substitute the
     # workload at its existing import boundary, without constructing any model.
@@ -71,7 +72,7 @@ def test_cli_actual_config_and_rng_propagation(seed, pair, fixture, scratch, mon
         calls["episodes"].append((reset, velocity, duration, metadata.copy()))
         calls["credit"].append(kwargs.get("ratio_grouping", "joint"))
         assert "entropy_coef" not in kwargs
-        assert kwargs.get("renewal", False) == (pair in ("renewal_b01", "renewal_b02"))
+        assert kwargs.get("renewal", False) == (pair in ("renewal_b01", "renewal_b02", "renewal_b03"))
         if metadata["arm"] == "T":
             counts["duration_decisions"] += 5
         emit(dict(metadata, J=0.))
@@ -92,10 +93,10 @@ def test_cli_actual_config_and_rng_propagation(seed, pair, fixture, scratch, mon
     assert summary["configuration"]["horizon"] == (8 if fixture else 256)
     assert summary["pair"] == ("ENGINEERING_FIXTURE" if fixture else pair)
     assert summary["declared_masters"] == ([seed] if fixture else list(study.declared_masters(pair)))
-    assert summary["card_section"] == (7 if fixture and pair in ("renewal_b01", "renewal_b02") else "CODE_SPEC §4" if fixture and pair in ("b03", "b04", "renewal_b01", "renewal_b02") else "CODE_SPEC §8" if fixture
-                                       else 5 if pair in ("b02", "b03", "b04", "renewal_b01", "renewal_b02") else 10 if pair == "p24" else 8)
-    grouping = "agent_compound" if pair in ("b02", "b03", "b04", "renewal_b01", "renewal_b02") else "joint"
-    entropy_coef = 0.0 if pair in ("b03", "b04", "renewal_b01", "renewal_b02") else 0.01
+    assert summary["card_section"] == (7 if fixture and pair in ("renewal_b01", "renewal_b02", "renewal_b03") else "CODE_SPEC §4" if fixture and pair in ("b03", "b04", "renewal_b01", "renewal_b02", "renewal_b03") else "CODE_SPEC §8" if fixture
+                                       else 5 if pair in ("b02", "b03", "b04", "renewal_b01", "renewal_b02", "renewal_b03") else 10 if pair == "p24" else 8)
+    grouping = "agent_compound" if pair in ("b02", "b03", "b04", "renewal_b01", "renewal_b02", "renewal_b03") else "joint"
+    entropy_coef = 0.0 if pair in ("b03", "b04", "renewal_b01", "renewal_b02", "renewal_b03") else 0.01
     assert set(calls["credit"]) == {grouping}
     assert all(c.get("ratio_grouping", "joint") == grouping for c in calls["update_credit"])
     assert summary["configuration"]["ratio_grouping"] == grouping
@@ -111,11 +112,13 @@ def test_cli_actual_config_and_rng_propagation(seed, pair, fixture, scratch, mon
     assert calls["initialization"] == [seed]  # templates retains b+11 internally, unchanged.
     b = 100000 * seed
     assert summary["seeds"]["initialization"] == b + 11
-    if pair in ("b04", "renewal_b01", "renewal_b02"):
-        expected_object, expected_card = ((study.RENEWAL_OBJECT, study.RENEWAL_CARD) if pair in ("renewal_b01", "renewal_b02")
+    if pair in ("b04", "renewal_b01", "renewal_b02", "renewal_b03"):
+        expected_object, expected_card = ((study.RENEWAL_OBJECT, study.RENEWAL_CARD) if pair in ("renewal_b01", "renewal_b02", "renewal_b03")
                                           else (study.B04_OBJECT, study.B04_CARD))
         if pair == "renewal_b02":
             expected_object, expected_card = study.RENEWAL_B02_OBJECT, study.RENEWAL_B02_CARD
+        if pair == "renewal_b03":
+            expected_object, expected_card = study.RENEWAL_B03_OBJECT, study.RENEWAL_B03_CARD
         assert summary["object"] == expected_object and summary["card"] == expected_card
         assert summary["ratio_grouping"] == grouping and summary["entropy_coef"] == 0.0
         for binding in (summary, summary["configuration"]):
@@ -243,7 +246,7 @@ def test_b02_negative_partial_and_fixture_rejection():
         study.aggregate(inputs, "b02")
 
 
-@pytest.mark.parametrize("pair", ["b03", "b04", "renewal_b01", "renewal_b02"])
+@pytest.mark.parametrize("pair", ["b03", "b04", "renewal_b01", "renewal_b02", "renewal_b03"])
 def test_single_pair_rejects_aggregate_before_input_access(pair, scratch, monkeypatch):
     with pytest.raises(ValueError, match="one training pair"):
         study.aggregate(None, pair)
@@ -259,8 +262,9 @@ def test_single_pair_rejects_aggregate_before_input_access(pair, scratch, monkey
 
 @pytest.mark.parametrize("pair,seed", [("b03", s) for s in (7001, 7002, 7102, 9001)]
                          + [("b04", s) for s in (7001, 7101, 7202, 9001)]
-                         + [("renewal_b01", s) for s in (7201, 7302, 7401, 9001)]
-                         + [("renewal_b02", s) for s in (7301, 7402, 9001)])
+                         + [("renewal_b01", s) for s in (7201, 7302, 7401, 7501, 9001)]
+                         + [("renewal_b02", s) for s in (7301, 7402, 7501, 9001)]
+                         + [("renewal_b03", s) for s in (7301, 7401, 7502, 9001)])
 def test_single_pair_wrong_master_never_enters_workload(pair, seed, scratch, monkeypatch):
     runner = runner_module()
     monkeypatch.setattr(runner, "run_pair", lambda *a: pytest.fail("workload entered"))

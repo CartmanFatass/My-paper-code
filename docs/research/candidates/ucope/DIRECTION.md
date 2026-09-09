@@ -42,16 +42,18 @@ remains dated provenance under the controlling evidence specification section 11
   The **2026-09-05 PRO_FINAL / PARK** of the same-draw retained-policy root-residual
   localization family and its numerical-locus dependency remains unchanged.
   See the [Convergence intake](UCOPE_UAV_INTERFACE_CONVERGENCE_INTAKE_20260907.md).
-- Latest bounded B observation: **2026-09-08 UAV renewal B02 P71,
-  COMPLETE / UP**. New independent master7401 yields T−G
-  **+0.024658177040921356**, conditional evaluation SE
-  **0.011145715505143731**; T−H **+0.03714831826363973** and G−H
-  **+0.012490141222718373**. P70/7301 remains separately UP at
-  **+0.055673191348834944**, with T−H **+0.05305453732049459** and
-  G−H **−0.002618654028340355**. Two independent fitted observations
-  support recurrence of the native package margin at the 0.01 scale; each
-  card's primary uses its own pair. No stable, causal renewal or general
-  improvement-over-competent-control conclusion follows. See
+- Latest bounded B observation: **2026-09-09 UAV renewal B03 P72,
+  COMPLETE / DOWN**. New independent master7501 yields T−G
+  **−0.03094711061890552**, conditional evaluation SE
+  **0.010056196158593048**; T−H **+0.021107100463981232** and G−H
+  **+0.052054211082886756**. P70/7301 **+0.055673191348834944** and
+  P71/7401 **+0.024658177040921356** remain separately UP. Three fitted
+  observations now include an adverse reversal; all sampled T−hover points
+  are positive. Their secondary outcome-informed paired mean
+  **+0.016461419256950254**, SD **0.043888031476388346**, is descriptive
+  and never rescues the new primary. No stable superiority/harm, causal renewal
+  effect or general comparator competence follows. See
+  [P72 intake](UCOPE_UAV_RENEWAL_COMMITMENT_B03_P72_INTAKE_20260908.md),
   [P71 intake](UCOPE_UAV_RENEWAL_COMMITMENT_B02_P71_INTAKE_20260908.md) and
   [P70 intake](UCOPE_UAV_RENEWAL_COMMITMENT_B01_P70_INTAKE_20260908.md).
   Prior opening B04/P61 remains WITHIN: 7201 T−G −0.003948225944122139
@@ -118,7 +120,7 @@ without a distinct count-state architecture because RAW contains the sufficient
 count. The direct-service alternative remains separated by the frozen
 `Gamma=I+D` decomposition and analytic `D≈-0.02` boundary.
 
-## Current scientific position — 2026-09-08 renewal B01 and B02 UP
+## Current scientific position — 2026-09-09 renewal B01/B02 UP and B03 DOWN
 
 Convergence selects one real package comparison of action-conditioned duration
 at every owner's own expiry, rather than only at reset. Source inspection shows
@@ -197,6 +199,42 @@ to examine training variability while retaining every sign. No new master,
 invocation, mechanism change, C promotion or Portfolio disposition is selected.
 See [P71 E0 evidence](UCOPE_UAV_RENEWAL_COMMITMENT_B02_P71_RESULT_EVIDENCE_20260908.md)
 and [P71 all-outcome intake](UCOPE_UAV_RENEWAL_COMMITMENT_B02_P71_INTAKE_20260908.md).
+
+P72's third independent same-package pair7501 is now **COMPLETE / DOWN**
+under the [renewal B03 card](UCOPE_UAV_RENEWAL_COMMITMENT_B03_SCIENCE_CARD_20260908.md). T/G/H means are
+**0.16159104017261458 / 0.19253815079152012 / 0.14048393970863335**.
+Native T−G **−0.03094711061890552**, conditional SE **0.010056196158593048**,
+is0.02094711061890552 below −0.01, with10 positive and22 negative episode
+differences. T−H **+0.021107100463981232** does not rescue the primary;
+G−H **+0.052054211082886756** is positive with26/6 episode signs.
+
+The three observations are now two above-MEI gains and one below-MEI loss.
+Strongest support for possible package value remains the two earlier UPs and
+positive T−hover in all three. Strongest contradiction to simple recurrence is
+P72 DOWN while G performs well against hover on that panel. The prospectively
+allowed secondary three-fit paired mean **+0.016461419256950254**, sample
+SD **0.043888031476388346**, retains every fit and is descriptive only; it
+is not a pooled primary or a new success rule. Sequential selection after
+earlier gains and differing training/evaluation draws limit interpretation.
+Endpoint variation includes finite evaluation noise, so it does not isolate
+training variance, a causal explanation or stable population performance.
+
+The same native path is exposed:259729 training/16135 final own-expiry duration
+choices,395631/24825 suppressions,1538/102 censored holds,1590644 head-forward
+rows and nonzero parameter movement. Exposure cannot substitute for value:
+all286720 native steps,2048 Adam calls and96 final evaluations finish with the
+negative primary. Whole wall390.73s fits the original caps; timing differences
+have no measured causal attribution. Prior verified UTE/ACAC source passages
+support the renewal-event distinction, not this reversal's cause. Persistence,
+geometry, capacity, gradient exposure and partner co-adaptation remain live.
+
+The P72 allocation ends and another unchanged pair is dropped from the default
+next choice. No successor discriminator is selected in this intake; a newly
+justified question needs a separate allocation. This is no family closure,
+direction/Portfolio disposition, C promotion, equivalence or stable-harm claim.
+Tuned same-information headroom remains absent. Earlier opening results,
+predictions and frozen rules stay intact. See [P72 E0 evidence](UCOPE_UAV_RENEWAL_COMMITMENT_B03_P72_RESULT_EVIDENCE_20260909.md)
+and [P72 all-outcome intake](UCOPE_UAV_RENEWAL_COMMITMENT_B03_P72_INTAKE_20260908.md).
 
 ## Previous empirical position — 2026-09-08 B04 (preserved)
 

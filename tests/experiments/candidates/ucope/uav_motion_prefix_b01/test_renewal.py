@@ -117,13 +117,15 @@ def test_t254_t255_original_labels_actual_suppression_and_partial_censor(monkeyp
     assert bool(rows) != fail_last
 
 
-@pytest.mark.parametrize("pair", ["renewal_b01", "renewal_b02"])
+@pytest.mark.parametrize("pair", ["renewal_b01", "renewal_b02", "renewal_b03"])
 def test_actual_short_pair_primary_counts_checkpoint_and_identity(tmp_path, pair):
     config = study.Config.engineering(pair=pair)
     summary = study.run_pair(config, tmp_path, time.monotonic())
     assert summary["status"] == "COMPLETE" and summary["scientific_uav_calls"] == 0
     expected_object, expected_card = ((study.RENEWAL_B02_OBJECT, study.RENEWAL_B02_CARD) if pair == "renewal_b02"
                                       else (study.RENEWAL_OBJECT, study.RENEWAL_CARD))
+    if pair == "renewal_b03":
+        expected_object, expected_card = study.RENEWAL_B03_OBJECT, study.RENEWAL_B03_CARD
     assert summary["object"] == expected_object and summary["card"] == expected_card
     assert summary["card_section"] == 7
     assert summary["commitment"] == "own_expiry"
