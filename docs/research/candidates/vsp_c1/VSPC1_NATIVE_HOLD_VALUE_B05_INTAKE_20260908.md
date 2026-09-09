@@ -304,3 +304,73 @@ primary-checkout `SIBLING_COMMUNICATION.md` Root wake relay once; ordinary CM
 and reviewer returns stayed native. The relay changes transport only and
 provides no additional execution budget. P69 ends cleanly with source accepted,
 one prospective binding and zero staging/admission/submission/scientific runs.
+
+## 8. P70 continuation — one new execution allocation
+
+Root accepts the P69 return identified by final commit
+`1339db66bb03e05d31e1240653418698956570b9` and now allocates the exact one-pair
+B05 technical execution batch. This new authority is recorded before dispatch.
+The designated checkout starts clean and upstream-synced at that final commit;
+the accepted scientific source remains `bda90e1db76a00123ba889ed6c4b05225473f4cb`.
+Root's main integration proceeds separately; the necessary accepted direction
+inputs are already committed, published and present. The current Portfolio row
+is an older snapshot, not a replacement for this direct P70 command.
+
+Root's limit applies verbatim:
+
+> at most one accepted supervisor submission, unchanged master8301,sourcebda90e1db76a00123ba889ed6c4b05225473f4cb
+
+The [card §10](VSPC1_NATIVE_HOLD_VALUE_B05_SCIENCE_CARD_20260908.md#10-p70-allocation--one-exact-technical-execution-batch)
+records this allocation without changing §§2–6 or §9's binding. Options:
+(a) execute that exact batch and all-outcome intake; (b) add a native probe,
+extra pair/evaluation, retry or diagnostic prerequisite. Recommend/select(a).
+Owner-delegated decision (unattended,2026-09-03 instruction): (a),
+**OWNER_DELEGATED within explicit P70**. The main owner-review query is empty
+at entry. Neither item009 nor item010 is treated as an owner reply. P68/P69
+history and the unmeasured first enclosing test wall remain unchanged.
+
+### Same-CM five-item execution handoff
+
+1. **Deliverable.** Complete P70's exact one-submission technical batch: committed
+   literal input, verified staging, fresh admission, detached launch, sole
+   observation, all-outcome collection and technical acceptance. Return actual
+   result/receipt evidence or a precise input/admission/acceptance/cap conflict.
+   No per-shell Root/DM approval loop; supplied conforming steps execute together.
+2. **Owned paths and inputs.** Reuse the same CM and
+   `C:/Projects/HMASD-worktrees/dm-vspc1-next-20260906`, branch
+   `codex/direction-vsp_c1`. Own a literal
+   `scripts/run_vspc1_native_hold_value_b05_p70.sh` if required, B05 P70
+   technical/staging/collection records, the B05 E0 result evidence and minimal
+   collected result evidence under `docs/research/candidates/vsp_c1/results/`;
+   runtime outputs remain in the existing temp direction surface. Scientific
+   code/tests and prior records are accepted read-only inputs. DM owns the
+   card/intake/DIRECTION/owner/audit. Preserve others' work and serialize
+   overlapping writes/index operations; explicit-path commits push immediately.
+3. **Preserved semantics.** Copy card §9's literal seven-line payload and exact
+   path/handle/source binding; do not reconstruct a similar path. Its detached
+   scientific checkout is the full accepted `bda90e1d` SHA. A wrapper may come
+   from its own published descendant commit without altering that checkout.
+   Preserve all science/RNG/CPU FP32/one-thread fields, native H and continuous
+   whole-chain accounting in §§2–6. Fresh configured-node physical/effective
+   memory admission≥4GiB precedes scientific roots/RNG/models. Confirm the
+   canonical admission helper among actual runtime inputs; a mismatch is a
+   concrete conflict, not permission to substitute it silently.
+4. **Acceptance.** Reuse accepted source checks/review and their timing
+   qualification. Directly verify staged cwd/HEAD/source and all runtime inputs,
+   literal LF payload readback/syntax, current surface conformance and prior
+   handle/path state. These checks authorize no scientific smoke. If conforming,
+   execute the one accepted submission; CM remains its sole observer. Reuse
+   P67's collection pattern for native primary/H/adverse endpoints, complete
+   counts/exposure/frozen moments, checkpoints, resources, terminal log and
+   admission/exit receipts. Keep stub/test observations separate. Apply evidence
+   spec §§4,5.2,11.4,11.8.6–7 and card §5's unchanged reading dependencies.
+5. **Budget and stop.** At most one accepted submission,286720 native steps/
+   2048 Adam/96 evaluations,1800s per complete arm/3600s complete pair. Scope§4:
+   none; the tiny literal wrapper remains within the cumulative2000-source/
+   600-runner and original focused-check bounds. No native smoke/pilot, extra
+   seed/evaluation, retry/resubmit or automatic successor. Reconcile unexpected
+   existing inputs/handles without launch; return an actual input/admission/cap
+   conflict with evidence. Terminal failure does not create a retry allocation.
+   Notify accepted-handle facts natively without transferring observation;
+   ordinary CM-to-DM return remains native. DM takes in every result and sends
+   the final substantive Root-action return once through the configured relay.
