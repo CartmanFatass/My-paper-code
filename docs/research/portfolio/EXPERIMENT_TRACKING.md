@@ -22,6 +22,8 @@ MGTAP P75 is now technically complete: both handles and aggregate exit0, final r
 
 VSP03 P74 has since ARCHIVED/NATURAL_COMPLETION: immutable response93b8693135a4420876d7b46c328297a4c3761937, Issue6 comment5598929595. Original DM actually resumed for conformity/scientific intake of the selected single seed7 G continuation; no new invocation allocated. Transport closed only this completed tab and retains FSD observation. See current [root log](root-log/2026-09-09.md) for complete receipt/provenance.
 
+UCOPE P74 exact question7dd58cdd0/TASK9f4702662 dispatched once to Transport; app accepted, provider Send unconfirmed. MGTAP P75 scientific intake d201c9bff accepts valid adverse result and ends that allocation; same DM actually resumed zero-exposure post-B01 proper-node question preparation, with no unchanged successor or new invocation. VSP03 intake and VSPC1 DM/CM continue; FSD remains with Transport.
+
 ## Historical soft-stop closeout updates — 2026-09-09
 
 - CRTO P72: response/intake/handoff integrated at63550cd83; DM stopped, no live experiment or Pro generation, no successor B. See [handoff](../candidates/commitment_residual_triggered_options/CRTO_RESTART_HANDOFF_20260909.md).
