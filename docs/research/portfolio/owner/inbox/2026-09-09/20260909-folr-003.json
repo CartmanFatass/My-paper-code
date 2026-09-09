@@ -81,5 +81,15 @@
     "verdict_text": "**B/EXPLORE; selected and frozen for the explicit Root allocation of 2026-09-09.**",
     "source": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_B01_SCIENCE_CARD_20260909.md"
   },
-  "starred": false
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-09T16:36:31+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_B01_SCIENCE_CARD_20260909.md",
+      "record": "docs/research/portfolio/audit/2026-09-09.md#L120",
+      "state": "applied",
+      "summary": "Root integrated the separately allocated frozen B01 card at main6de9f4703. The original direction-branch ledger_row L9 maps to main L120 after preserving all concurrent audit rows. CM implementation is dispatched, no accepted result-bearing invocation yet; this records integration, not a new approval or result."
+    }
+  ]
 }
