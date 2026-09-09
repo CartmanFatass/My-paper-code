@@ -53,3 +53,33 @@ duration/gate relative displacement as undefined, retaining raw historical durat
 fields and reporting absolute movement. A failed accepted handle also exhausts
 this allowance; no retry or changed science follows. CM sends accepted identity to
 Root for tracking and remains sole observer through technical collection.
+
+## Direct pre-submission staging acceptance
+
+Launch source committed/pushed: `ec8b7c458b038b3a375ec5639834d0f3527fdf8c`.
+[Direct staging evidence](VSPC1_NATIVE_HOLD_VALUE_B04_P67_STAGING_EVIDENCE_20260908.json)
+records actual cwd/HEAD, clean status and detached HEAD. Thirteen required files
+(the original twelve plus this wrapper) exist and their remote SHA256 digests match
+exact committed blobs. Configured interpreter executes `--version` successfully;
+no scientific imports/fixture were invoked.
+
+The actual full absolute staged script path is
+`/home/wu/hmasd-inputs/vspc1_hold_value_b04_p67_8202.sh`.
+Its653 committed UTF-8 bytes have8 LF and no CR; remote readback matches exactly,
+SHA256 `4d9230b7fba1f6bebc5d3c48cee9bd37d0fa96c1f4bf314f77966a97a8d17d36`.
+Actual remote `bash -n` exits0. The check command took4.5818782s, no native check.
+The requested new handle is not_found and admission/output are absent.
+
+The accepted scientific review and prior B04 shell semantics are reused: only
+P67 identity/path fields change, not ordering, CPU/FP32/RNG, admission or accounting.
+This preparation has no unresolved boundary requiring further checks. The wrapper
+and these facts are committed/pushed before the one submission below. Later
+technical-record commits do not change its bound source surface.
+
+```text
+ssh -o BatchMode=yes -o ConnectTimeout=10 hmasd-wsl-node /usr/local/bin/agent-task run vspc1_hold_value_b04_p67_8202 /bin/bash /home/wu/hmasd-inputs/vspc1_hold_value_b04_p67_8202.sh
+```
+
+The executor loads this exact argv from the checked binding, avoiding manual path
+re-entry. Once accepted, CM observes this handle only and sends the identity to
+Root/DM for tracking; it does not request another launch/adoption authorization.
