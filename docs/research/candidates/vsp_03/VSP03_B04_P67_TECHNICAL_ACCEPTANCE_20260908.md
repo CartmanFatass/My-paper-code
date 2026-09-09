@@ -84,3 +84,24 @@ accepted handle/source/cwd/paths/observer to Root /root and DM immediately; no R
 parallel polling or per-shell relay. Stop on any accepted exit, timeout, admission
 refusal or failure and collect all outcomes, with no resubmission. Uncertain acceptance
 is reconciled on that same handle. DM owns scientific intake. Old cleanup is not retried.
+
+## Parent-requested final argv quoting check
+
+Parent inspection raised a possible literal-backslash/quote defect in line8 and the
+old saved payload. [Exact argv evidence](VSP03_B04_P67_ARGV_CHECK_20260908.json)
+closes that question without a source change. The committed P67 bash-c argument
+contains zero literal backslash bytes; decoded P64 payload JSON likewise contains
+zero. JSON's escaped representation of double quotes is distinct from the command's
+actual bytes. Control.py shlex.join followed by shell token recovery preserves the
+original bash-c argument. A harmless capture substitutes only the two absolute Python
+executable tokens with /usr/bin/printf, so neither admission nor runner can execute.
+The resulting --started-monotonic argument is exactly375534.924519, without quote
+characters, and float parsing succeeds for both supplied commands.
+
+The initial fixture incorrectly expected the historical payload's parse to fail;
+its assertion failed after both captures. That harness expectation was corrected
+and retained in the record. No production source repair was needed or made, and
+this observation does not change the old missing-file failure or spent allowance.
+No scientific validation, submission, scratch or lifecycle fixture was added.
+Source binding remains828da00343e5036a4de93ccf1ec636e3b8c777b7 and the exact cwd/argv
+above. The same reviewer independently dispositions the requested quoting boundary.
