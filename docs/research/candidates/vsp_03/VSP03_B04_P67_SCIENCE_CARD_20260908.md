@@ -148,3 +148,41 @@ no reply is required before authorized continuation.
 P2 item [20260908-vsp03-004](../../portfolio/owner/inbox/2026-09-08/20260908-vsp03-004.json)
 records auto-applied accept. The new selection is the
 [audit row](../../portfolio/audit/2026-09-08.md#L155) at `2026-09-09T02:29:54Z`.
+
+## 6. DM source acceptance and complete CM continuation
+
+DM accepts source **`828da00343e5036a4de93ccf1ec636e3b8c777b7`**, with source/check/
+binding evidence at `dc4b6b5158f4726ad5fbb60d8c74f28f1a14e102` and the focused
+argv follow-up at `15aaf3d2d8f664d1fb3c95c794d56c53bc96fbb4`. DM inspected the
+actual eight-line launcher diff, its direct argument path and the CM's
+[technical record](VSP03_B04_P67_TECHNICAL_ACCEPTANCE_20260908.md),
+[11-file source checks](VSP03_B04_P67_SOURCE_CHECK_20260908.json),
+[argv capture](VSP03_B04_P67_ARGV_CHECK_20260908.json) and independent
+[review](VSP03_B04_P67_SOURCE_REVIEW_20260908.md). No CM execution was repeated.
+
+The synchronized committed tree already contains the canonical admission helper
+and `hmasd_platform.py` dependency. Their recorded blobs match the existing
+canonical source; no helper rewrite was needed. Scientific runner/learner and P65
+deadline source are unchanged. LF/AST/shell-syntax checks and admission parser/help
+passed without resource capture, admission or scientific execution. The parent's
+possible quoting defect was not confirmed: decoded command bytes have no literal
+backslashes, and the harmless final-argv capture yields an unquoted numeric start.
+The initial fixture's mistaken expectation about the old payload is retained as
+a corrected test assumption; production bytes and the old missing-file failure
+remain unchanged. No material review finding remains.
+
+**Object-tier technical decision:** options (a) accept this complete source/binding
+and continue the already allocated P67 technical batch; (b) retain a concrete
+unresolved source/meaning/cap conflict. Recommend and select (a).
+**Owner-delegated decision (unattended, 2026-09-03 instruction): (a).** Owner reviews
+and VSP03 audit overrides remain empty at `2026-09-09T02:44:01Z`; owner flag none.
+This is source acceptance, not admission, a runtime result or stable performance.
+
+The CM now performs the [recorded exact command and staging checks](VSP03_B04_P67_TECHNICAL_ACCEPTANCE_20260908.md#frozen-invocation)
+from new cwd `/home/wu/hmasd-worktrees/vsp03-b04-p67-828da00343e5036a4de93ccf1ec636e3b8c777b7`.
+Handle/unit base is `vsp03-b04-p67-20260908`; output root is
+`/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b04_seed6_p67_20260908`, with
+the distinct admission and terminal siblings recorded by CM. The same CM remains
+sole observer through collection and reports the accepted handle to Root and DM.
+Every actual outcome returns for scientific intake under sections 2–4. The one
+120 s cap, fresh destination admission and no-resubmission stop remain unchanged.
