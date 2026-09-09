@@ -78,5 +78,15 @@
     "verdict_text": "Owner-delegated decision (unattended, 2026-09-03 instruction): (a). Freeze the exact corrected E01 scientific definition under Root's post-response preparation assignment, separately from the Pro class grant; allocate no source implementation or scientific invocation.",
     "source": "docs/research/candidates/acvc/ACVC_FIXED_RETRACE_REUSE_E01_CONVERGENCE_INTAKE_20260909.md"
   },
-  "starred": false
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-09T22:47:02+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/decisions/2026-09-09-synthesis-execution.md",
+      "record": "docs/research/portfolio/decisions/2026-09-09-synthesis-execution.md",
+      "state": "applied",
+      "summary": "Root accepts the corrected frozen card and allocates original DM/CM implementation, independent review, exact-source one six-panel evaluation and full intake. 180s complete includes at most30s support; zero new fitting, no retry or successor. Scientific execution is allocated, not yet observed."
+    }
+  ]
 }
