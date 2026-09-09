@@ -17,6 +17,8 @@ B04_CARD = "docs/research/candidates/ucope/UCOPE_UAV_MOTION_PREFIX_B04_SCIENCE_C
 B04_OBJECT = "UCOPE-UAV-MOTION-PREFIX-B04"
 RENEWAL_CARD = "docs/research/candidates/ucope/UCOPE_UAV_RENEWAL_COMMITMENT_B01_SCIENCE_CARD_20260908.md"
 RENEWAL_OBJECT = "UCOPE-UAV-RENEWAL-COMMITMENT-B01"
+RENEWAL_B02_CARD = "docs/research/candidates/ucope/UCOPE_UAV_RENEWAL_COMMITMENT_B02_SCIENCE_CARD_20260908.md"
+RENEWAL_B02_OBJECT = "UCOPE-UAV-RENEWAL-COMMITMENT-B02"
 
 
 def declared_masters(pair):
@@ -32,7 +34,9 @@ def declared_masters(pair):
         return (7201,)
     if pair == "renewal_b01":
         return (7301,)
-    raise ValueError("pair must be p21, p24, b02, b03, b04 or renewal_b01")
+    if pair == "renewal_b02":
+        return (7401,)
+    raise ValueError("pair must be p21, p24, b02, b03, b04, renewal_b01 or renewal_b02")
 
 
 @dataclass
@@ -52,10 +56,10 @@ class Config:
     treatment_duration_head_seed: int | None = field(init=False)
 
     def __post_init__(self):
-        self.ratio_grouping = "agent_compound" if self.pair in ("b02", "b03", "b04", "renewal_b01") else "joint"
-        self.entropy_coef = 0.0 if self.pair in ("b03", "b04", "renewal_b01") else 0.01
-        self.treatment_duration_mode = "sampled_command" if self.pair in ("b04", "renewal_b01") else "independent"
-        self.treatment_duration_head_seed = 100000 * self.seed + 12 if self.pair in ("b04", "renewal_b01") else None
+        self.ratio_grouping = "agent_compound" if self.pair in ("b02", "b03", "b04", "renewal_b01", "renewal_b02") else "joint"
+        self.entropy_coef = 0.0 if self.pair in ("b03", "b04", "renewal_b01", "renewal_b02") else 0.01
+        self.treatment_duration_mode = "sampled_command" if self.pair in ("b04", "renewal_b01", "renewal_b02") else "independent"
+        self.treatment_duration_head_seed = 100000 * self.seed + 12 if self.pair in ("b04", "renewal_b01", "renewal_b02") else None
 
     @classmethod
     def engineering(cls, seed=9001, pair="p21"):
@@ -115,7 +119,7 @@ def primary_from_rows(rows, expected, renewal=False):
 
 
 def aggregate(summaries, pair="p21"):
-    if pair in ("b03", "b04", "renewal_b01"):
+    if pair in ("b03", "b04", "renewal_b01", "renewal_b02"):
         raise ValueError(f"{pair.upper()} has one training pair and no multi-pair aggregate")
     declared = declared_masters(pair)
     if len(summaries) != 2:
@@ -238,23 +242,24 @@ def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=wri
                        card=B03_CARD if config.pair == "b03" else B02_CARD,
                        ratio_grouping=config.ratio_grouping,
                        card_section="CODE_SPEC §8" if config.fixture else 5)
-    if config.pair in ("b04", "renewal_b01"):
+    if config.pair in ("b04", "renewal_b01", "renewal_b02"):
         summary.update(object=B04_OBJECT, card=B04_CARD, card_section="CODE_SPEC §4" if config.fixture else 5,
                        ratio_grouping=config.ratio_grouping,
                        treatment_duration_mode=config.treatment_duration_mode,
                        treatment_duration_head_seed=config.treatment_duration_head_seed)
-    credit_options = {"ratio_grouping": config.ratio_grouping} if config.pair in ("b02", "b03", "b04", "renewal_b01") else {}
+    credit_options = {"ratio_grouping": config.ratio_grouping} if config.pair in ("b02", "b03", "b04", "renewal_b01", "renewal_b02") else {}
     update_options = dict(credit_options)
-    if config.pair in ("b03", "b04", "renewal_b01"):
+    if config.pair in ("b03", "b04", "renewal_b01", "renewal_b02"):
         summary["entropy_coef"] = config.entropy_coef
         if config.fixture:
             summary["card_section"] = "CODE_SPEC §4"
         update_options["entropy_coef"] = config.entropy_coef
-    if config.pair == "renewal_b01":
-        summary.update(object=RENEWAL_OBJECT, card=RENEWAL_CARD,
+    if config.pair in ("renewal_b01", "renewal_b02"):
+        summary.update(object=RENEWAL_B02_OBJECT if config.pair == "renewal_b02" else RENEWAL_OBJECT,
+                       card=RENEWAL_B02_CARD if config.pair == "renewal_b02" else RENEWAL_CARD,
                        card_section=7 if config.fixture else 5, commitment="own_expiry")
     collect_options = dict(credit_options)
-    if config.pair == "renewal_b01":
+    if config.pair in ("renewal_b01", "renewal_b02"):
         collect_options["renewal"] = True
     files = {name: (out / f"{name}.jsonl").open("w", encoding="utf-8")
              for name in ("episodes", "rollouts", "diagnostics")}
@@ -274,7 +279,7 @@ def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=wri
             if arm == "G":
                 g_start = deadline.start_g()
             arm_start = start if arm == "T" else g_start
-            counts = new_counts(config.pair == "renewal_b01")
+            counts = new_counts(config.pair in ("renewal_b01", "renewal_b02"))
             arm_info = {"counts": counts, "complete": False, "fit_complete": False,
                         "learning_rate": 3e-4, "entropy_coef": config.entropy_coef,
                         "elapsed_wall": None}
@@ -282,7 +287,7 @@ def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=wri
             actor = critic = initial = None
             deadline.check()
             head_options = {}
-            if config.pair in ("b04", "renewal_b01"):
+            if config.pair in ("b04", "renewal_b01", "renewal_b02"):
                 head_seed = config.treatment_duration_head_seed if arm == "T" else None
                 head_options["duration_head_seed"] = head_seed
                 arm_info.update(duration_mode=config.treatment_duration_mode if arm == "T" else "none",
@@ -320,7 +325,7 @@ def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=wri
                                       for key in (("optimizer_steps", "velocity_decisions",
                                                    "duration_decisions", "d4")
                                                   + (("horizon_censored_holds", "suppressed_decisions")
-                                                     if config.pair == "renewal_b01" else ()))}})
+                                                     if config.pair in ("renewal_b01", "renewal_b02") else ()))}})
                 deadline.check()
             arm_info["fit_complete"] = True
             arm_info["training_counts"] = counts.copy()
@@ -360,11 +365,11 @@ def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=wri
         for stream in files.values():
             stream.close()
 
-    summary["counts"] = {key: sum(a["counts"][key] for a in arms.values()) for key in new_counts(config.pair == "renewal_b01")}
+    summary["counts"] = {key: sum(a["counts"][key] for a in arms.values()) for key in new_counts(config.pair in ("renewal_b01", "renewal_b02"))}
     summary["counts"]["partial_episode_steps"] = (summary["counts"]["team_steps"]
                                                    - summary["counts"]["completed_episode_steps"])
     summary["scientific_uav_calls"] = summary["counts"]["scientific_uav_calls"]
-    summary["primary"] = primary_from_rows(rows, config.eval_episodes, renewal=config.pair == "renewal_b01")
+    summary["primary"] = primary_from_rows(rows, config.eval_episodes, renewal=config.pair in ("renewal_b01", "renewal_b02"))
     summary["diagnostics_complete"] = (summary["counts"]["diagnostic_frames"] ==
                                         2 * config.eval_episodes * 5 * min(5, config.horizon)
                                         and not any("diagnostic" in x for x in limits))
