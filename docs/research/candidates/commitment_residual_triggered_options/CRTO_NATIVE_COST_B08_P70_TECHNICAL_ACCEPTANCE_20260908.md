@@ -1,7 +1,7 @@
 # CRTO B08 P70 source technical acceptance
 
 Delivered source-ready B08 implementation, independently reviewed, with no material remaining
-source defect identified. Source/check/review commit `9ed83fc06e328fd9ca4e171852f37bdcb0de8d63`
+source defect identified. Source/check/review commit `d9f643b761d57584de313b1f837d6c2c0becc931`
 was pushed immediately to `origin/codex/crto`. This record is a source-engineering return to DM
 and Root, not a scientific result or allocation. No scientific staging, actual-node admission,
 population/label reconstruction, predictor fitting, real gate training, scientific smoke,
@@ -57,7 +57,7 @@ It reports cap breaches and never sums arm charges as machine time. Interpreter 
 shutdown are covered by the outer measurement; the inner timestamp alone cannot establish
 complete conformance. A callback monitor is not a preemptive operating-system deadline.
 
-Scope-spec Â§4 additions: **none**, per card Â§7. Tool-counted new non-test runtime lines: module315
+Scope-spec §4 additions: **none**, per card §7. Tool-counted new non-test runtime lines: module315
 + initializer1 + runner43 = **359**, within 2,000; runner43 within600. No generic execution,
 retry, provenance guard, telemetry service or framework was added. Required publication and
 wall bookkeeping were reviewed for purpose; no ratio gate or line-by-line census was introduced.
@@ -67,6 +67,8 @@ wall bookkeeping were reviewed for purpose; no ratio gate or line-by-line census
 Independent review: [P70 review](CRTO_NATIVE_COST_B08_P70_REVIEW_20260908.md), including follow-up
 inspection of endpoint-local limitation and unknown RAW competence. No material finding remains.
 Reviewer inspected source, direct dependencies, historical JSON and tests; it did not rerun fixtures.
+The same reviewer acknowledged the parent-discovered adverse/mixed interpretation defect
+and independently accepted its per-contrast trust correction and two-case regression.
 CM inspected the complete staged runtime diff, tests and review. `git diff --cached --check` passed.
 
 Interpreter: `C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe`.
@@ -100,9 +102,9 @@ confirmed all five invocation roots absent. Invocations a/d/e created no scratch
 No evidence root or another invocation's files were removed. Test failure diagnostics above
 were retained before cleanup.
 
-## Literal prospective execution binding â€” not staged or executed
+## Literal prospective execution binding — not staged or executed
 
-- Source/launch SHA: `9ed83fc06e328fd9ca4e171852f37bdcb0de8d63` (all runtime paths and unchanged
+- Source/launch SHA: `d9f643b761d57584de313b1f837d6c2c0becc931` (all runtime paths and unchanged
   dependencies at that commit). This later documentation-only record does not change that surface.
 - Card: `docs/research/candidates/commitment_residual_triggered_options/CRTO_NATIVE_COST_B08_SCIENCE_CARD_20260908.md`
   at `68044fdcbd77ca8875526b099a01f4bb3f892ece`, Git-blob SHA256
@@ -120,7 +122,7 @@ were retained before cleanup.
   Execution remains CPU FP32/thread1. Host identity is not the estimand; only the card/AGENTS
   prospective portability fallback is available, with no accepted remote process duplicated.
 - Prospective detached cwd:
-  `/home/wu/hmasd-worktrees/crto-b08-p70-9ed83fc06e328fd9ca4e171852f37bdcb0de8d63`.
+  `/home/wu/hmasd-worktrees/crto-b08-p70-d9f643b761d57584de313b1f837d6c2c0becc931`.
 - Prospective result root:
   `/home/wu/projects/HMASD/temp/directions/commitment_residual_triggered_options/exp/b08_seed0_p70_20260909`.
 - Prospective supervisor handle `crto-b08-p70-seed0-20260909`; `/usr/local/bin/agent-task`.
@@ -130,7 +132,7 @@ Exact prospective supervisor invocation, issued on the declared node only after 
 result-bearing allocation and exact-source/input staging:
 
 ```bash
-/usr/local/bin/agent-task run crto-b08-p70-seed0-20260909 'cd /home/wu/hmasd-worktrees/crto-b08-p70-9ed83fc06e328fd9ca4e171852f37bdcb0de8d63 && /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/projects/HMASD/temp/directions/commitment_residual_triggered_options/exp/b08_seed0_p70_20260909/admission.json && /home/wu/.venvs/hmasd/bin/python scripts/run_crto_native_cost_b08.py run --seed 0 --historical-summary /home/wu/hmasd-inputs/crto-b08-p70/CRTO_RESIDUAL_CYCLE_ENDPOINTS_B04_RESULT_20260904.json --output-dir /home/wu/projects/HMASD/temp/directions/commitment_residual_triggered_options/exp/b08_seed0_p70_20260909 --execution-node wsl_4070'
+/usr/local/bin/agent-task run crto-b08-p70-seed0-20260909 'cd /home/wu/hmasd-worktrees/crto-b08-p70-d9f643b761d57584de313b1f837d6c2c0becc931 && /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/projects/HMASD/temp/directions/commitment_residual_triggered_options/exp/b08_seed0_p70_20260909/admission.json && /home/wu/.venvs/hmasd/bin/python scripts/run_crto_native_cost_b08.py run --seed 0 --historical-summary /home/wu/hmasd-inputs/crto-b08-p70/CRTO_RESIDUAL_CYCLE_ENDPOINTS_B04_RESULT_20260904.json --output-dir /home/wu/projects/HMASD/temp/directions/commitment_residual_triggered_options/exp/b08_seed0_p70_20260909 --execution-node wsl_4070'
 ```
 
 This is one admitted seed0 package, three arms,258 updates each, endpoints33/258, no retries,
