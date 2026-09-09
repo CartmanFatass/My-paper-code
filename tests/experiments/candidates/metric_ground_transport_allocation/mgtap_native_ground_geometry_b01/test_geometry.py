@@ -123,7 +123,9 @@ def test_rng_isolation_and_fixture_publication(tmp_path):
 
 def test_native_binding_is_literal_and_nonexecuting():
     command = prospective_native_command()
-    assert "--native --master 8201 --output <REMOTE_RUN_ROOT>" in command
+    assert "--native --master 8201 --output /home/wu/hmasd-worktrees/" in command
+    assert "agent-task run " in command
+    assert "--arm-cap 1800 --pair-cap 3600" in command
     assert "admit-memory" in command
     assert "agent-task" in command
 

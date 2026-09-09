@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 """Entry point for the engineering-only MGTAP B01 adapter."""
 
+import time
+PROCESS_START = time.monotonic()
+
 from pathlib import Path
 import sys
 
@@ -11,4 +14,4 @@ from experiments.candidates.metric_ground_transport_allocation.mgtap_native_grou
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    raise SystemExit(main(process_start=PROCESS_START))
