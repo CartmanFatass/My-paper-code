@@ -27,3 +27,10 @@ Raw input/submission/admission receipts: `temp/directions/vsp_c1/engineering/nat
 Raw collection: `temp/directions/vsp_c1/collection/native_hold_value_b10_8501_2c2c7d9d3481/`. Engineering scope4 none.
 CM-owned test scratch remains as documented in source technical acceptance:
 automatic approval review rejected both deletion commands; no retry/bypass.
+
+Terminal2026-09-09T09:31:50Z, exit0 and inactive tmux. Actual artifact acceptance
+PASS; whole475.85s, conservative arms255.2433s/238.3501s.
+[E0](VSPC1_NATIVE_HOLD_VALUE_B10_RESULT_EVIDENCE_20260909.md) retains all160 rows,
+all five means/SEs, both endpoint deltas, four H contrasts and paired change.
+One submission spent, zero remain. CM observation complete; editing/index to DM.
+Scratch cleanup blocker/creator ownership remains as previously recorded.
