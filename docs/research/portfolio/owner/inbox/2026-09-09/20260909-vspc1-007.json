@@ -1,0 +1,71 @@
+{
+  "id": "20260909-vspc1-007",
+  "created": "2026-09-09T06:31:06-07:00",
+  "direction": "vsp_c1",
+  "tier": "direction",
+  "kind": "decision",
+  "title": "P81：完整普通体加门已有局部损失，是否结束该包",
+  "context": "P80的完整普通体加门配对为有效DOWN，普通体相对悬停的收益也更大。DM建议结束当前实例，但只形成待送同一方向节点的问题，尚未执行方向选择。一对训练不能估计训练种子总体不确定性；旧512正向结果与全部晚期和H损失保留。新配对仍合法但未分配。本轮仅准备，不启动实验或发送Pro。",
+  "options": [
+    {
+      "key": "end",
+      "label": "结束已测试的完整体加门包",
+      "consequence": "仅结束当前宿主、学习器与预算下该包的推进，保留全部证据，不改变K4或Portfolio生命周期。"
+    },
+    {
+      "key": "continue",
+      "label": "选择一个有具体理由的后续",
+      "consequence": "同一收敛节点须说明一个观测将改变的决策及完整工作量；没有自动种子、改模或启动。"
+    }
+  ],
+  "recommended": "end",
+  "auto_applied": null,
+  "dm_reason": "新增640参数的门未在保留完整普通体后带来局部用途，普通体直接回报及H优势支持结束；承认单配对与早期正信号的反对理由。",
+  "evidence": [
+    "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_P81_QUESTION_20260909.md",
+    "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B13_INTAKE_20260909.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-09.md#L43",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "完整普通体加门在本次真实训练中落后普通体后，是否结束这个已测试的包，还是有一个更值得做的具体后续？",
+    "changes_if_approved": [
+      {
+        "target": "vsp_c1：当前完整普通体加剩余持有门的实例",
+        "from": "P80已结束，后续方向选择尚未作出",
+        "to": "建议结束当前宿主、学习器和预算下的这个包；保留全部证据与更广的持有敏感价值假设"
+      }
+    ],
+    "if_refused": "由同一方向收敛节点说明一个更有决策价值的具体后续。另一个新配对仍合法但未分配；不因填补容量而改模型、加种子或启动。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B13_INTAKE_20260909.md",
+        "quote": "The strongest support for favoring the ordinary body now is the direct−.03207 primary,\n25 adverse identities and its larger mean margin over H.",
+        "why": "保留整个普通体后，加门仍在这次原生任务中落后，普通体相对悬停的收益也更大；这是局部投入取舍依据。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_P81_QUESTION_20260909.md",
+        "quote": "The strongest opposition is that B13 supplies only one new matched training pair,\nwith conditional evaluation noise, while earlier512 positives remain real.",
+        "why": "不能把一次损失判成稳定劣势；再训练一个独立配对可能改变对可重复用途的判断。"
+      }
+    ],
+    "uncertainty": [
+      "两臂均值均高于未调优悬停，但仍分别有15和11个布局落后它；没有调优能力或上界证书。",
+      "旧的512正向信号、三个负变化和晚期损失全部保留；架构、协议与主种子共同变化不能指出旧650参数取舍的因果作用。",
+      "本项只是问题与建议；完整方向裁决尚未形成，没有新对象、主种子或科学调用。"
+    ],
+    "cost": {
+      "compute": "本次准备新增科学曝光为零。另选相同配对的已知规模为417792团队步、3072次Adam、96次评价；实际同规模B13完整耗时477.99秒，未来时间不保证，未作成本试验。",
+      "owner_time": "异步阅读和纠偏即可，不等待回复。",
+      "reversibility": "reversible",
+      "waits_on_this": "没有工作等待所有者逐项批准；方向后续须由同一收敛节点明确选择，Root另行组织执行。"
+    },
+    "verdict_text": "DM recommends ending the tested intact-body-plus-gate package at this host,\nlearner and budget.",
+    "source": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_P81_QUESTION_20260909.md"
+  },
+  "starred": true
+}
