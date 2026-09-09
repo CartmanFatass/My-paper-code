@@ -274,3 +274,46 @@ References:
 - `FOLR_PUBLIC_LIFECYCLE_B03_RESULT_EVIDENCE_20260909.md`
 - `FOLR_PUBLIC_LIFECYCLE_B03_INTAKE_20260909.md`
 - `evidence/2026-09-09-folr-public-lifecycle-b03-run-analysis.json`
+
+## Accepted public-lifecycle timing B01 science — 2026-09-09
+
+**Conclusion.** One fresh matched fitting instance at7804/107804 gives EVENT5.349296875,
+RANDOM3.985625 and RETAIN2.54453125 after equal5000-episode training and128 fixed final
+episodes each. EVENT−RETAIN+2.804765625 and EVENT−RANDOM+1.363671875 select the frozen
+EVENT_CLEAR_ADVANTAGE branch. RANDOM−RETAIN is also+1.44109375. The low-confidence DM
+MIXED_OR_REVERSE prediction missed; no earlier prediction or result is reclassified.
+
+**Bounded claim.** This is a local complete-trained-package comparison, with one fitting
+instance per arm and broad conditional rollout spread (SD6.107/7.604/7.318 for
+RETAIN/EVENT/RANDOM). It is not stable superiority, event-timing causality, a strictly-self
+memory mechanism, an optimal clearing probability or transfer. Equal seed labels do not
+establish paired evaluation trajectories. The earlier RETAIN−EVENT differences
+−2.0021875,−1.9228125,+2.559375 remain separate32-episode observations; the new128-episode
+branch does not pool them or erase B03's reversal. Same-information tuned headroom is absent.
+
+**Strongest support and contradiction.** EVENT's real final native point beats both legal
+nulls with substantial actual survivor clearing. Conversely, RANDOM also beats retention,
+B03 favors retention, and current cumulative training means favor RETAIN:−4.331158 versus
+EVENT−4.870974 and RANDOM−4.715624. Final performance is not cumulative reward or a learning
+curve. Training return curves were not recorded; aggregate returns and25 progress rows
+per arm are available.
+
+**Surviving alternative.** Realized EVENT clearing covers18.3827%/22.4976% of eligible
+training/final survivor controls, versus RANDOM9.9720%/9.7682%. The preset p=.1 control is
+unmatched. Timing, dose, joint reset pattern, optimization/data paths and partner
+co-adaptation can contribute. Survivor history includes teammate information; generic
+retention remains a competent legal null. Stored masks keep acting/online/target histories
+consistent but do not identify the cause of the return difference.
+
+**Next discriminator.** A fresh matched triple with the same laws would directly test
+repeatability of the trained-package ordering. This is unselected direction-local advice:
+no successor card, seeds, scientific invocation, promotion or family/Portfolio change is
+allocated by the completed batch.
+
+References:
+
+- `FOLR_PUBLIC_LIFECYCLE_TIMING_B01_SCIENCE_CARD_20260909.md`
+- `FOLR_PUBLIC_LIFECYCLE_TIMING_B01_RESULT_EVIDENCE_20260909.md`
+- `FOLR_PUBLIC_LIFECYCLE_TIMING_B01_RESULT_SUMMARY_20260909.json`
+- `FOLR_PUBLIC_LIFECYCLE_TIMING_B01_INTAKE_20260909.md` §§9–13
+- `evidence/2026-09-09-folr-public-lifecycle-timing-b01-run-analysis.json`
