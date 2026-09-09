@@ -1,6 +1,6 @@
 # VSPC1 B12 P78 intake — third independent fixed512/768 pair
 
-Current state: prospective definition; zero new scientific exposure.
+Current state: identity-only source accepted; exact P78 execution binding recorded, zero scientific exposure.
 
 ## 1. Assignment and starting state
 
@@ -80,3 +80,32 @@ P2 [20260909-vspc1-004](../../portfolio/owner/inbox/2026-09-09/20260909-vspc1-00
 was published through item.py with the Chinese packet, recommended/auto-applied
 accept and source-branch audit2026-09-09 row27. Publishing waits on no reply. Ordinary
 source/result facts stay in card/intake/audit without another console item.
+
+## 5. Source acceptance and exact execution handoff
+
+DM inspected actual runner/test diff at **`19e0d0d303686cd7590ecfe7970d2057d652eea5`**, the
+technical record and [retained raw receipt](VSPC1_NATIVE_HOLD_VALUE_B12_SOURCE_CHECKS_20260909.json).
+The35-line runner is exactly B11 with object/card/master8503 identity substitutions.
+All12 binding/exit/metadata checks passed in2.859873499999594s whole process,
+exit0; no scientific fixture ran. Accepted shared-source diff is empty, and all13
+runtime/helper surfaces remain unchanged. Reuse B10's independent boundary review
+and23-case coverage; no changed semantic boundary requires a new review or replay.
+35 production/runner lines meet2000/600 and scope4 none; no scope5 breach observed.
+New scratch was removed; P76's policy-blocked scratch remains creator-owned.
+
+[Card §7](VSPC1_NATIVE_HOLD_VALUE_B12_SCIENCE_CARD_20260909.md#7-accepted-source-and-exact-p78-execution-binding)
+fixes scientific SHA, actual node/cwd, seven-line LF payload, handle/output and
+joined fresh admission. CM continues the already allocated batch through wrapper
+commit/push, exact staging, one accepted submission, sole observation/collection
+and E0. Source-test success is not a scientific result. Root retains main/index,
+integration and finished remote-checkout reclamation.
+
+### Decisions this intake produces
+
+Options: (a) accept the identity-only binding and continue the allocated P78
+remote route; (b) return a concrete defect for repair. Recommend/select(a): no
+semantic change or defect was found. Owner-delegated decision (unattended,
+2026-09-03 instruction): (a), **OWNER_DELEGATED object tier**. The one-submission
+limit and all exclusions remain unchanged. Main and branch again report no
+unapplied owner reviews; no actual owner forecast or audit override is present.
+This ordinary technical decision stays in card/intake/audit without a new item.

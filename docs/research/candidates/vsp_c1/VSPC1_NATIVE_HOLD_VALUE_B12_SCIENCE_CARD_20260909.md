@@ -3,7 +3,7 @@ Binding MARL structure: (b) temporal abstraction or termination, with five co-ad
 
 # VSPC1-NATIVE-HOLD-VALUE-B12 — B/EXPLORE, P78
 
-Current state: prospective definition; zero new scientific exposure. Root separately
+Current state: identity-only source accepted; zero scientific exposure. Root separately
 allocated P78 after accepting [B11 intake §6](VSPC1_NATIVE_HOLD_VALUE_B11_INTAKE_20260909.md#6-p77-valid-result-intake-and-decisions);
 main Portfolio at`0d6bbc50e26bfbb0a824c4a88c053509372299b3` records one new
 unchanged fixed512/768/common-H pair. The spent P76/P77 allowances remain closed.
@@ -179,3 +179,53 @@ tuning, pilot, cost probe, Pro Send or automatic successor. Complete technical
 collection and all-outcome DM intake/Chinese brief, then return evidence and the
 next unallocated recommendation to Root. Root owns integration and completed
 remote-checkout reclamation; this allocation changes no Portfolio disposition.
+
+## 7. Accepted source and exact P78 execution binding
+
+DM accepts source **`19e0d0d303686cd7590ecfe7970d2057d652eea5`** after inspecting the actual35-line
+runner,75-line identity tests, [technical record](VSPC1_NATIVE_HOLD_VALUE_B12_TECHNICAL_ACCEPTANCE_20260909.md)
+and [raw focused receipt](VSPC1_NATIVE_HOLD_VALUE_B12_SOURCE_CHECKS_20260909.json).
+The runner equals B11 with only B12/card/master8503 substitutions.12 checks
+passed, exit0, pytest1.94s/**2.859873499999594s whole process**; the existing
+cache_dir warning remains. No model/optimizer/native/evaluation fixture ran.
+
+All13 shared runtime/helper surfaces remain unchanged, corroborated by DM's
+empty accepted-source diff over experiments/envs/ha_ctse_process and the canonical
+admission helper. B10's independent boundary review/23-case coverage and B10/B11
+actual artifacts remain applicable.35 new production/runner lines meet2000/600;
+no scope4 addition or scope5 breach is observed. New test scratch is removed;
+P76's prior policy-blocked scratch remains CM-owned without a repeated attempt.
+Technical conformance provides no8503 performance evidence.
+
+| Field | Binding |
+| --- | --- |
+| Node /interpreter | wsl_4070, hmasd-wsl-node, `/home/wu/.venvs/hmasd/bin/python` |
+| Device /process /numerical threads | CPU FP32 /1 /1 |
+| Exact scientific SHA | `19e0d0d303686cd7590ecfe7970d2057d652eea5` |
+| Detached cwd | `/home/wu/hmasd-worktrees/vspc1-native-hold-value-b12-8503-19e0d0d30368` |
+| Supervisor handle | `vspc1_hold_value_b12_8503_19e0d0d30368` |
+| Staged literal payload | `/home/wu/hmasd-inputs/vspc1_hold_value_b12_8503_19e0d0d30368.sh` |
+| Committed wrapper path | `scripts/run_vspc1_native_hold_value_b12_p78.sh` |
+| Output | `/home/wu/projects/HMASD/temp/directions/vsp_c1/exp/native_hold_value_b12_8503_19e0d0d30368` |
+| Admission receipt | `/home/wu/projects/HMASD/temp/directions/vsp_c1/exp/native_hold_value_b12_8503_19e0d0d30368_admission.json` |
+| Scientific argv | `scripts/run_vspc1_native_hold_value_b12.py --seed 8503 --out /home/wu/projects/HMASD/temp/directions/vsp_c1/exp/native_hold_value_b12_8503_19e0d0d30368` |
+| Counts /complete caps | 434176 steps /3072 Adam /160 evaluations;1800s complete arm /3600s whole |
+
+Literal seven-line LF execution input:
+
+```bash
+#!/usr/bin/env bash
+set -euo pipefail
+exec /usr/bin/time -f 'whole_wall_seconds=%e,peak_rss_kib=%M' /bin/bash --noprofile --norc -c '
+cd /home/wu/hmasd-worktrees/vspc1-native-hold-value-b12-8503-19e0d0d30368 &&
+/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/projects/HMASD/temp/directions/vsp_c1/exp/native_hold_value_b12_8503_19e0d0d30368_admission.json &&
+/home/wu/.venvs/hmasd/bin/python scripts/run_vspc1_native_hold_value_b12.py --seed 8503 --out /home/wu/projects/HMASD/temp/directions/vsp_c1/exp/native_hold_value_b12_8503_19e0d0d30368
+'
+```
+
+CM commits/pushes the literal wrapper separately; the scientific SHA stays fixed.
+Stage exact committed source/canonical helper and LF payload, retain readback/syntax
+and prior handle/output state, then perform the single allocated submission with
+fresh actual-node memory admission immediately before scientific state inside
+this whole-timed command. CM solely observes/collects through terminal acceptance.
+No further planning approval or invocation follows. Staging/admission are not yet observed.

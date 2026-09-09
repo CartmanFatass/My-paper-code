@@ -1,4 +1,16 @@
-# VSPC1 restart handoff — P77 complete, 2026-09-09
+# VSPC1 restart handoff — P78 source accepted, 2026-09-09
+
+P78 current boundary: Root accepted P77 and separately allocated one further
+independent unchanged fixed512/768/common-H pair. [B12 card](VSPC1_NATIVE_HOLD_VALUE_B12_SCIENCE_CARD_20260909.md)
+and [intake](VSPC1_NATIVE_HOLD_VALUE_B12_INTAKE_20260909.md) select8503,
+CHANGE_DOWN(.60),434176 steps/3072 Adam/160 evaluations/four constructors,
+1800s complete arm/3600s whole and one accepted submission. Source
+`19e0d0d303686cd7590ecfe7970d2057d652eea5` is accepted; card §7 fixes the exact route and
+literal payload. No scientific submission yet. Original CM continues staging,
+one fresh admitted detached run, sole observation/collection; DM then performs
+full intake. Root owns integration/reclamation, with main's later UCOPE changes
+preserved. The third pair measures variation without a required sign; earlier
+completion/stop sections below remain historical.
 
 P77 current boundary: Root accepted P76 and separately allocated one fresh
 independent repeat of the unchanged fixed512/768/common-H comparison. The
