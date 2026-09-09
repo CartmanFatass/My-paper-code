@@ -29,3 +29,21 @@ No scientific invocation had been accepted at this record's preparation.
 Pending: exact-SHA source/input staging, syntax/byte verification, single native
 submissions, observation, complete collection and technical acceptance. Remote
 source checkout/evidence will be retained until Root's integration/cleanup event.
+
+## Staging and first accepted handle
+
+Published inputs7990ff5b0 were staged with matching SHA-256:
+run_8201.sh=8d13770130c7e2d9ff16d87117b9c74f91f9cb529081d5a0d4e0bdbf9b478997;
+run_8202.sh=29c7d7fc627dd6076e8330adce32f345f01869a18cc5b4e9397142a8cb818122;
+aggregate.sh=b8161087d451c03bb6ed0a56e277bd0a63a7b5bbc9a5cf90e34f9d0a62e621ed.
+Remote HEAD is fixed4f65eefb1; declared source diff is empty and all staged
+wrappers pass bash -n. Retrieval required the configured zsh -lic network
+shell; two stalled plain-shell retrieval checks were terminated before staging
+completed. This was source retrieval, not a scientific submission or retry.
+
+Master8201 was accepted once as
+mgtap-b01-8201-4f65eefb1b15e44b42d694376630fba0c230cc6c,
+supervisor PID3034957. First observation: running, joined memory admission
+passed, effective available15635890176 bytes and physical floor passed.
+Actual task log and admission are collected at terminal state. Master8202 is
+not yet submitted. Sole observer remains /root/cm_mgtap_p72_repair.
