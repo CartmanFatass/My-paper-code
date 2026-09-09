@@ -1,5 +1,10 @@
 import json
+import os
+from pathlib import Path
+import shlex
+import subprocess
 
+import pytest
 import torch
 
 from experiments.candidates.metric_ground_transport_allocation.mgtap_native_ground_geometry_b01.geometry import (
@@ -7,9 +12,11 @@ from experiments.candidates.metric_ground_transport_allocation.mgtap_native_grou
     REL,
     build_pair,
     parameter_summary,
+    geometry_snapshot,
+    geometry_exposure,
 )
 from experiments.candidates.metric_ground_transport_allocation.mgtap_native_ground_geometry_b01.runner import (
-    prospective_native_command,
+    prospective_native_binding,
     publish_fixture,
     run_pair,
     run_fixture_pair,
@@ -55,30 +62,50 @@ def test_relation_padding_uses_fixed_denominator():
         encoder.raw.bias.zero_()
         encoder.user_map.weight.zero_()
         encoder.user_map.weight[0, 0] = 1.0
+        encoder.uav_map.weight.zero_()
+        encoder.uav_map.weight[0, 0] = 1.0
         encoder.context.weight.zero_()
         encoder.context.weight[0, 0] = 1.0
+        encoder.context.weight[1, 20] = 1.0
     observations = torch.zeros(1, 108)
     observations[0, 3] = 1.0
+    observations[0, 63] = 1.0
     output = encoder(observations)
     assert torch.allclose(output[0, 0], torch.tanh(torch.tensor(1.0)) / 20,
                           atol=1e-7, rtol=0)
-    observations[0, 3] = 0.0
+    assert torch.allclose(output[0, 1], torch.tanh(torch.tensor(1.0)) / 10,
+                          atol=1e-7, rtol=0)
+    observations.zero_()
     assert torch.equal(encoder(observations), torch.zeros_like(output))
 
 
-def test_branch_is_connected_after_projection_moves():
+@pytest.mark.parametrize("kind", [REL, DENSE])
+def test_branch_is_connected_after_projection_moves(kind):
     pair = build_pair(8201)
-    actor = pair[REL][0]
+    actor, critic = pair[kind]
+    initial = geometry_snapshot(actor, critic)
+    observations = torch.linspace(-.7, .8, 2 * 5 * 108).reshape(2, 5, 108)
+    mask = torch.ones(2, 5, dtype=torch.bool)
+
+    def velocity_loss():
+        mean, recurrent, _ = actor(observations, torch.zeros(1, 5, 64))
+        logp, _ = joint_terms(actor, mean, recurrent, torch.full_like(mean, .3),
+                             torch.zeros(2, 5, dtype=torch.long), mask, mask,
+                             ratio_grouping="agent_compound")
+        return -logp.sum(-1).mean()
+
+    velocity_loss().backward()
+    assert actor.encoder.context.weight.grad.abs().sum() > 0
+    assert all(torch.count_nonzero(p.grad) == 0 for p in actor.branch_parameters[:-1])
+    actor.zero_grad()
     with torch.no_grad():
-        actor.encoder.context.weight[0, 0] = 1.0
-    observations = torch.zeros(2, 108)
-    observations[0, 3] = 1.0
-    observations.requires_grad_()
-    loss = actor.encoder(observations).sum()
-    loss.backward()
-    assert actor.encoder.context.weight.grad is not None
-    assert actor.encoder.user_map.weight.grad is not None
-    assert float(actor.encoder.user_map.weight.grad.abs().sum()) > 0
+        actor.encoder.context.weight.fill_(.03)
+    velocity_loss().backward()
+    assert all(p.grad is not None and p.grad.abs().sum() > 0 for p in actor.branch_parameters)
+    movement = geometry_exposure(initial, actor, critic)
+    assert movement["branch_projection"]["displacement"] > 0
+    assert movement["branch_projection"]["relative_displacement"] is None
+    assert movement["recurrent"]["displacement"] == movement["critic"]["displacement"] == 0
 
 
 def test_source_agent_compound_credit_shape_is_preserved():
@@ -121,13 +148,22 @@ def test_rng_isolation_and_fixture_publication(tmp_path):
     assert loaded["scientific_invocation"] is False
 
 
-def test_native_binding_is_literal_and_nonexecuting():
-    command = prospective_native_command()
-    assert "--native --master 8201 --output /home/wu/hmasd-worktrees/" in command
-    assert "agent-task run " in command
-    assert "--arm-cap 1800 --pair-cap 3600" in command
-    assert "admit-memory" in command
-    assert "agent-task" in command
+@pytest.mark.parametrize("master", [8201, 8202])
+def test_native_binding_is_literal_and_nonexecuting(master, tmp_path):
+    binding = prospective_native_binding(master, "5ce038e4aa6130be48b9cd17095470c6bde65d39")
+    ssh = shlex.split(binding["command"])
+    supervisor = shlex.split(ssh[2])
+    assert ssh[:2] == ["ssh", "hmasd-wsl-node"]
+    assert supervisor == ["/usr/local/bin/agent-task", "run", binding["handle"], "bash", binding["wrapper_path"]]
+    # agent-task flattens argv and evals it once. No nested bash -lc survives that.
+    assert shlex.split(" ".join(supervisor[3:])) == ["bash", binding["wrapper_path"]]
+    assert "\r" not in binding["wrapper"] and "<" not in binding["wrapper"]
+    assert f"--native --master {master} --output {binding['output']} --arm-cap 1800 --pair-cap 3600" in binding["wrapper"]
+    assert "admit-memory" in binding["wrapper"] and " && " in binding["wrapper"]
+    wrapper = tmp_path / "wrapper.sh"
+    wrapper.write_bytes(binding["wrapper"].encode())
+    bash = Path(os.environ.get("ProgramFiles", "C:/Program Files")) / "Git/bin/bash.exe" if os.name == "nt" else Path("/bin/bash")
+    subprocess.run([str(bash), "-n", str(wrapper)], check=True, timeout=10)
 
 
 def test_runner_fixture_reaches_publication_path(tmp_path):
@@ -137,4 +173,6 @@ def test_runner_fixture_reaches_publication_path(tmp_path):
     assert summary["primary"]["complete"] is True
     assert summary["primary"]["hover_complete"] is True
     assert summary["scientific_invocation"] is False
+    assert summary["counts"]["rollouts"] == 2
+    assert summary["counts"]["optimizer_steps"] == 8
     assert (tmp_path / "pair" / "summary.json").exists()

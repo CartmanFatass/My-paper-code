@@ -6,7 +6,7 @@ import math
 import torch
 from torch import nn
 
-from experiments.candidates.ucope.uav_motion_prefix_b01.policy import Actor, Critic, templates
+from experiments.candidates.ucope.uav_motion_prefix_b01.policy import snapshot, templates
 
 
 REL = "REL"
@@ -144,3 +144,25 @@ def parameter_summary(pair):
         }
         for kind in (REL, DENSE)
     }
+
+
+def geometry_snapshot(actor, critic):
+    result = snapshot(actor, critic)
+    for name, parameters in (("encoder", actor.encoder.parameters()),
+                             ("recurrent", actor.gru.parameters()),
+                             ("branch_inner", actor.branch_parameters[:-1]),
+                             ("branch_projection", actor.branch_parameters[-1:])):
+        result[name] = torch.cat([p.detach().flatten() for p in parameters]).clone()
+    return result
+
+
+def geometry_exposure(initial, actor, critic):
+    final = geometry_snapshot(actor, critic)
+    result = {}
+    for name, start in initial.items():
+        norm = float(start.norm())
+        displacement = float((final[name] - start).norm())
+        result[name] = {"parameters": start.numel(), "initial_norm": norm,
+                        "final_norm": float(final[name].norm()), "displacement": displacement,
+                        "relative_displacement": displacement / (norm + 1e-12) if norm else None}
+    return result

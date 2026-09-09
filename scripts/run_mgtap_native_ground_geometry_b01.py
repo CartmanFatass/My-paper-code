@@ -4,6 +4,18 @@
 import time
 PROCESS_START = time.monotonic()
 
+import os
+for _name in ("OMP_NUM_THREADS", "MKL_NUM_THREADS", "OPENBLAS_NUM_THREADS",
+              "NUMEXPR_NUM_THREADS", "VECLIB_MAXIMUM_THREADS", "BLIS_NUM_THREADS"):
+    os.environ[_name] = "1"
+os.environ["CUDA_VISIBLE_DEVICES"] = ""
+
+import torch
+torch.set_num_threads(1)
+torch.set_num_interop_threads(1)
+torch.set_default_dtype(torch.float32)
+torch.set_default_device("cpu")
+
 from pathlib import Path
 import sys
 

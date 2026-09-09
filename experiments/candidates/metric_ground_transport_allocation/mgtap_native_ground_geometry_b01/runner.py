@@ -19,15 +19,14 @@ from experiments.candidates.ucope.uav_motion_prefix_b01.learner import (
     update,
 )
 from experiments.candidates.ucope.uav_motion_prefix_b01.policy import (
-    exposure,
     generator,
-    snapshot,
 )
 from experiments.candidates.ucope.uav_motion_prefix_b01.study import (
     Deadline, clean_json, new_counts, write_summary,
 )
 
-from .geometry import DENSE, REL, build_pair, parameter_summary
+from .geometry import (DENSE, REL, build_pair, parameter_summary,
+                       geometry_snapshot as snapshot, geometry_exposure as exposure)
 
 
 CARD = "docs/research/candidates/metric_ground_transport_allocation/MGTAP_NATIVE_GROUND_GEOMETRY_B01_SCIENCE_CARD_20260908.md"
@@ -36,7 +35,8 @@ MASTERS = (8201, 8202)
 RECONCILED_MAIN_SHA = "6485fe0080abafe7521ed89f3425516407303d78"
 
 
-def _check_finite():
+def _fixture_check():
+    """The tiny fixture relies on its caller's timeout; learner checks numerics."""
     return None
 
 
@@ -75,11 +75,11 @@ def run_fixture_pair(seed=8201, horizon=8, train_episodes=2, eval_episodes=2):
                 env, actor, critic, horizon, seed + 1000 + episode_index,
                 streams["train"], generator(seed + 2000 + episode_index),
                 {"pair_master": seed, "arm": kind, "phase": "train",
-                 "episode": episode_index}, _check_finite, counts,
+                 "episode": episode_index}, _fixture_check, counts,
                 emit_episode, emit_diagnostic, limits, real=False,
                 diagnostics=False, ratio_grouping="agent_compound"))
         records = update(actor, critic, optimizer, episodes, min(4, horizon),
-                         _check_finite, counts, ratio_grouping="agent_compound",
+                         _fixture_check, counts, ratio_grouping="agent_compound",
                          entropy_coef=0.01)
         eval_start = len(rows)
         for episode_index in range(eval_episodes):
@@ -87,7 +87,7 @@ def run_fixture_pair(seed=8201, horizon=8, train_episodes=2, eval_episodes=2):
                 env, actor, critic, horizon, seed + 3000 + episode_index,
                 generator(seed + 4000 + episode_index), generator(seed + 5000 + episode_index),
                 {"pair_master": seed, "arm": kind, "phase": "eval",
-                 "episode": episode_index}, _check_finite, counts,
+                 "episode": episode_index}, _fixture_check, counts,
                 emit_episode, emit_diagnostic, limits, real=False,
                 diagnostics=False, ratio_grouping="agent_compound")
         arms[kind] = {
@@ -111,7 +111,7 @@ def run_fixture_pair(seed=8201, horizon=8, train_episodes=2, eval_episodes=2):
     }
 
 
-def _primary(rows, expected, mei=0.01):
+def _primary(rows, expected, mei=0.01, steps=None):
     values = {arm: {} for arm in (REL, DENSE, "H")}
     errors = {arm: [] for arm in values}
     for row in rows:
@@ -126,8 +126,9 @@ def _primary(rows, expected, mei=0.01):
                 or episode in values[arm]):
             errors[arm].append("duplicate or invalid episode index")
             continue
-        if type(value) not in (int, float) or not math.isfinite(value):
-            errors[arm].append("missing or nonfinite J")
+        if (type(value) not in (int, float) or not math.isfinite(value)
+                or (steps is not None and row.get("steps") != steps)):
+            errors[arm].append("missing, nonfinite or incomplete J")
             values[arm][episode] = None
         else:
             values[arm][episode] = value
@@ -249,6 +250,8 @@ def run_pair(seed, output, *, fixture=False, horizon=256, train_episodes=512,
                     "episodes": 2, "steps": 2 * horizon, "epochs": records,
                     "optimizer_steps": counts["optimizer_steps"] - before["optimizer_steps"],
                 }, allow_nan=False) + "\n")
+                counts["rollouts"] += 1
+                deadline.check()
             arm_info.update(fit_complete=True, training_counts=counts.copy(),
                             exposure=exposure(initial, actor, critic))
             torch.save({"actor": actor.state_dict(), "critic": critic.state_dict(),
@@ -305,7 +308,7 @@ def run_pair(seed, output, *, fixture=False, horizon=256, train_episodes=512,
                           "arm_cap": arm_cap, "pair_cap": pair_cap},
         "arms": arms,
         "rows": rows,
-        "primary": _primary(rows, eval_episodes),
+        "primary": _primary(rows, eval_episodes, steps=horizon),
         "parameter_summary": parameter_summary(pair) if pair is not None else None,
         "cost_law": "C_a=C_init+131072*c_env+actor+1024*c_update+8192*c_eval+C_publication",
         "cost_unknowns": ["c_env+actor", "c_update", "c_eval", "C_init", "C_publication",
@@ -318,6 +321,8 @@ def run_pair(seed, output, *, fixture=False, horizon=256, train_episodes=512,
                          for key in new_counts(False)}
     summary["counts"]["partial_episode_steps"] = (summary["counts"]["team_steps"]
                                                    - summary["counts"]["completed_episode_steps"])
+    if not summary["primary"]["complete"] or not all(a["complete"] for a in arms.values()):
+        summary["status"] = "INCOMPLETE"
 
     def observe_time():
         now = clock()
@@ -366,7 +371,7 @@ def aggregate(summaries, expected=32):
             continue
         rows = summary.get("rows", [])
         try:
-            primary = _primary(rows, expected)
+            primary = _primary(rows, expected, steps=256)
         except (TypeError, KeyError, AttributeError, ValueError) as error:
             errors.append(f"{seed}: corrupt rows: {error}")
             primary = _primary([], expected)
@@ -376,8 +381,7 @@ def aggregate(summaries, expected=32):
         config = summary.get("configuration", {})
         if (summary.get("mode") != "UAV_B_EXPLORE"
                 or config.get("eval_episodes") != expected
-                or config.get("horizon") != 256 or config.get("train_episodes") != 512
-                or any(row.get("steps") != 256 for row in rows if row.get("phase") == "eval")):
+                or config.get("horizon") != 256 or config.get("train_episodes") != 512):
             errors.append(f"{seed}: native endpoint binding mismatch")
         if not all(summary.get("arms", {}).get(arm, {}).get("fit_complete") for arm in (REL, DENSE)):
             errors.append(f"{seed}: incomplete training fit")
@@ -390,9 +394,13 @@ def aggregate(summaries, expected=32):
     means = {str(seed): pairs[seed]["primary"]["REL_minus_DENSE"]["mean"]
              if seed in pairs else None for seed in MASTERS}
     delta = statistics.mean(means.values()) if complete else None
+    ses = [pairs[seed]["primary"]["REL_minus_DENSE"]["conditional_se"]
+           for seed in MASTERS] if complete else []
     return {"mode": "AGGREGATE", "declared_masters": list(MASTERS), "card": CARD,
             "pairs": [pairs[seed] for seed in MASTERS if seed in pairs], "errors": errors,
             "primary": {"complete": complete, "pair_means": means, "mean": delta,
+                        "training_endpoint_sample_sd": statistics.stdev(means.values()) if complete else None,
+                        "conditional_se": math.hypot(*ses) / 2 if complete and all(s is not None for s in ses) else None,
                         "reading": ("INCOMPLETE" if not complete else
                                     "REL_ABOVE_MEI" if delta > .01 else
                                     "REL_ADVERSE" if delta < -.01 else "INSIDE_MEI")}}
@@ -415,20 +423,29 @@ def aggregate_files(paths):
         errors.append(f"corrupt summary: {error}")
     if errors:
         result["errors"].extend(errors)
-        result["primary"].update(complete=False, mean=None, reading="INCOMPLETE")
+        result["primary"].update(complete=False, mean=None, reading="INCOMPLETE",
+                                 training_endpoint_sample_sd=None, conditional_se=None)
     return result
 
 
-def prospective_native_command(master=8201, sha="<EXACT_SHA>"):
-    """Nonexecuting WSL binding; H/publication share the DENSE arm's budget."""
+def prospective_native_binding(master, sha):
+    """Literal LF wrapper and command, generated after the source commit.
+
+    This only describes a later invocation; it neither stages nor launches it.
+    A wrapper avoids agent-task's argument flattening of nested bash -lc.
+    """
     cwd = f"/home/wu/hmasd-worktrees/mgtap_b01_{sha}"
     out = f"{cwd}/temp/directions/metric_ground_transport_allocation/exp/b01_{master}"
     python = "/home/wu/.venvs/hmasd/bin/python"
-    return (f"ssh hmasd-wsl-node '/usr/local/bin/agent-task run mgtap-b01-{master}-{sha} "
-            f"bash -lc \"cd {cwd} && {python} scripts/hmasd_resource_preflight.py "
-            f"admit-memory --out {out}/admission.json && "
-            f"{python} scripts/run_mgtap_native_ground_geometry_b01.py "
-            f"--native --master {master} --output {out} --arm-cap 1800 --pair-cap 3600\"'")
+    wrapper = f"/home/wu/hmasd-inputs/mgtap-b01-{sha}/run_{master}.sh"
+    handle = f"mgtap-b01-{master}-{sha}"
+    payload = (f"#!/usr/bin/env bash\nset -euo pipefail\ncd {cwd}\n"
+               f"{python} scripts/hmasd_resource_preflight.py admit-memory --out {out}/admission.json && "
+               f"/usr/bin/time -q -f '%e' -o {out}/process_wall_seconds.txt "
+               f"{python} scripts/run_mgtap_native_ground_geometry_b01.py "
+               f"--native --master {master} --output {out} --arm-cap 1800 --pair-cap 3600\n")
+    return {"cwd": cwd, "output": out, "wrapper_path": wrapper, "wrapper": payload,
+            "handle": handle, "command": f"ssh hmasd-wsl-node '/usr/local/bin/agent-task run {handle} bash {wrapper}'"}
 
 
 def main(argv=None, process_start=None):

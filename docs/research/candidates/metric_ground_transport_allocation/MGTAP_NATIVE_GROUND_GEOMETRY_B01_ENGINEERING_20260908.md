@@ -1,120 +1,154 @@
-# MGTAP B01 bounded CM repair — 2026-09-08
+# MGTAP B01 source acceptance and restart evidence - 2026-09-09
 
-This record supersedes the earlier engineering readiness claims at `55e3adce5`.
-The original assignment's REL/DENSE encoders remain unchanged. This repair adds
-the fixed two-master primary, elapsed deadlines, startup numerical controls,
-and reconciles shared UCOPE source to current main. No native experiment,
-scientific exposure, cost probe, new arm or child delegation occurred.
+This record corrects the readiness and review claims preserved at `55e3adce5`.
+The final source is technically accepted for the frozen REL/DENSE implementation;
+no native run, pilot, profiler, new scientific exposure or successor is selected.
+The owner's soft stop applies after this source/review/publication closure.
 
-CM execution task: `01a084ec-b10f-7c63-b44f-439ec6a77f3d`.
-Assigning parent: `01a08204-6445-7461-badf-1150080ed87b`.
-Checkout: `C:/Projects/HMASD-worktrees/dm-n5-continue-20260904`;
-branch: `codex/mgtap`. This is CM implementation/testing evidence, not an
-independent Reviewer report. The parent retains the independent review handoff.
+CM: `/root/cm_mgtap_p72_repair`. Independent native Reviewer:
+`/root/cm_mgtap_p72_repair/review_mgtap_b01` (hmasd-reviewer).
+Checkout: `C:/Projects/HMASD-worktrees/dm-n5-continue-20260904`, branch `codex/mgtap`.
+Root is the assigning parent and integration owner; the original DM owns closure
+intake. The prior app writer `01a084ec-b10f-7c63-b44f-439ec6a77f3d` finished and
+pushed `5ce038e4aa6130be48b9cd17095470c6bde65d39` before this CM took sole editing
+ownership. Its implementation and credible checks were reused, not discarded.
 
-## Source reconciliation and preserved semantics
+## Preserved source and scientific boundaries
 
-Inspected main commit: `6485fe0080abafe7521ed89f3425516407303d78`.
-All five files in `experiments/candidates/ucope/uav_motion_prefix_b01/`
-now match that main commit. Relative to this direction's previous checkout,
-only `study.py` needed reconciliation: its newer renewal-B02 route selection
-is retained. The environment, policy, learner and package initializer already
-matched main and the frozen `d726acf63f8db47bd2e93e43cac8bbd27529d8ad`
-source pin. No legacy learner is vendored and current main is not replaced.
+All five shared `experiments/candidates/ucope/uav_motion_prefix_b01/` files match
+main `6485fe0080abafe7521ed89f3425516407303d78`. Only `study.py` needed the prior
+writer's reconciliation, retaining renewal-B02 registration. Environment, policy,
+learner and initializer already matched both main and the frozen source pin
+`d726acf63f8db47bd2e93e43cac8bbd27529d8ad`. No current shared learner, renewal or
+VSPC1 API is downgraded, and no legacy framework is vendored.
 
-The adapter imports main-compatible `collect_episode`, `update`, `optimizer_for`,
-`snapshot`, `exposure`, `generator`, `new_counts`, and the existing `Deadline`
-and JSON publication functions. Reward summation and ordinary value arithmetic
-are unchanged; optional value normalization is not enabled. Both arms retain
-primitive G, no duration draw, `agent_compound`, entropy coefficient 0.01,
-the same seed domains, 512 training episodes and 32 sampled 256-step endpoints.
-The typed equations, parameter counts, common zero-projection initial policy,
-private branch initialization and recurrent consumer are unchanged.
+The unchanged actor equations implement bias-free U(20x3), V(21x4), P(64x41),
+fixed denominators 20/10, and the full 108-to-64 raw affine path. DENSE retains
+D(16x108), zero d(16), Q(64x16), and its full raw path. Correct REL arithmetic is
+`20*3 + 21*4 + 41*64 = 2768`; the earlier `10*4` term was a reporting typo.
+Both complete learners have 69079 parameters. Common initialization at b+11,
+private branch initialization at b+12, zero P/Q, primitive G, no duration or
+renewal, raw actor/global critic inputs, native summed rewards, CPU FP32,
+B02 agent_compound PPO, entropy .01, no ValueNorm, all action/reset RNG domains,
+masters 8201/8202 and the frozen exposure are preserved.
 
-## Primary and failure behavior
+The CLI sets BLAS/OpenMP environment controls before Torch import, then one
+Torch intra/inter-op thread and CPU/FP32 defaults. Merely importing the package
+no longer mutates another consumer's Torch defaults. Numerical movement is
+reported separately for encoder, recurrent, critic, inner branch and projection;
+zero-norm projection movement is absolute with no relative-to-zero ratio.
 
-`runner.aggregate` recomputes per-master values from retained rows and applies
-`mean(Delta[8201], Delta[8202])`, with the frozen ±0.01 branches. It never
-averages only the available master. Both masters' paired differences, means,
-individual REL/DENSE/H values, episode indices and source limits are retained.
-Opposite signs remain explicit; H remains diagnostic and is not an exclusion
-criterion. Incomplete training, missing/duplicate masters, missing/duplicate or
-nonfinite primary endpoints, mismatched row masters, or shortened endpoint
-exposure produce `INCOMPLETE` with no aggregate mean or performance polarity.
-The `--aggregate` CLI accepts exactly the two summary paths and reports unreadable
-or corrupt input without converting it into a favorable subset. No statistical
-model or confidence claim is added.
+## Primary, runtime and publication repairs
 
-## Elapsed bounds and controls
+The offline aggregate retains both masters and their paired episode differences,
+REL/DENSE/H values, means and limits. It applies the card's mean of the two pair
+means and +/- .01 branches. Training-pair sample SD is distinct from conditional
+evaluation SE; the latter is `sqrt(SE_8201^2 + SE_8202^2) / 2`.
+Missing/duplicate/corrupt primary values, wrong master or shortened learned
+endpoints cannot yield aggregate polarity or a COMPLETE pair. Short or missing H
+marks the H diagnostic incomplete without erasing trustworthy learned primary
+measurements. Partial step, episode, rollout and optimizer counters survive
+failures; no retry or resume path exists.
 
-The CLI captures `time.monotonic()` before package and Torch imports. Before
-Torch/NumPy import, the package sets OMP, MKL, OpenBLAS, NumExpr, Accelerate and
-BLIS thread environment controls to one and disables CUDA visibility. Torch
-intra/inter-op threads are one, default dtype is FP32 and device is CPU.
+The existing shared Deadline supplies cooperative 1800-second complete-arm and
+3600-second pair bounds. REL includes imports and shared construction; DENSE
+includes H and pair publication. Checks reach reset, steps, PPO, arm transition
+and publication. Exceptions and observed overruns retain partial facts and
+report INCOMPLETE, PUBLICATION_FAILED or CAP_BREACH, as appropriate.
+The no-op callback is named fixture-only; native execution uses Deadline.check.
 
-The planned bounds are 1,800 seconds per arm and 3,600 seconds per master pair.
-REL includes startup/imports and common pair construction. DENSE includes the H
-reference and final publication. The pair clock never resets between arms.
-The source learner's checks cover reset, primitive steps and PPO updates;
-the runner also checks construction, arm transitions and publication. Exceptions
-retain completed rows and live counters, including partial episode steps, and
-write a summary. A publication overrun preserves completed measurements while
-setting `CAP_BREACH`; a partial endpoint has no performance inference.
+Cooperative checks do not interrupt an opaque call precisely at the cap.
+Persisted runner timing precedes the last write; a final observation detects a
+new breach, but shutdown is outside that clock. The literal wrapper uses the
+installed GNU time to record full interpreter wall through exit. A future
+collector must reconcile supervisor exit, summary status and external wall;
+check pair wall <=3600 and external pair wall minus completed REL wall <=1800
+for DENSE/H/publication/exit. GNU time output is rounded to hundredths, so a
+boundary case cannot establish strict conformance. A zero process exit alone
+is not a resource-conformance claim. No native timing exists here.
 
-As in the shared source, checks are cooperative: an indivisible native step or
-write may finish after its deadline. Its elapsed overrun is recorded, then no
-further learning runs. Corrective serialization reports the breach. This is not
-a promise to interrupt an opaque call at exactly 1,800 seconds. Process exit,
-interpreter teardown and supervisor logs provide the external full-process wall;
-the recorded runner wall includes imports through final publication observation.
+Required offline aggregation is a separate process: its imports, readback and
+final publication must be included in complete-study accounting. Report study
+critical path, sum of pair process walls plus aggregation, and aggregate CPU
+work separately. CPU work remains unmeasured; do not infer it from wall or a
+thread limit. The aggregate's wall does not disappear into an already-ended pair.
 
-## Prospective command, never executed here
+## Actual focused evidence and budget
 
-For each master in 8201, 8202, substitute the committed launch SHA in both the
-detached checkout and handle. `prospective_native_command(master, sha)` emits:
+The original 55e3 record's seven checks and toy publication are historical
+engineering evidence, not an independent review. Its 4.72/5.12-second test
+reports are inconsistent and no complete-process wall was retained; neither is
+silently promoted to a full-process measurement or a proof of the smoke bound.
 
-```text
-ssh hmasd-wsl-node '/usr/local/bin/agent-task run mgtap-b01-8201-<EXACT_SHA> bash -lc "cd /home/wu/hmasd-worktrees/mgtap_b01_<EXACT_SHA> && /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/hmasd-worktrees/mgtap_b01_<EXACT_SHA>/temp/directions/metric_ground_transport_allocation/exp/b01_8201/admission.json && /home/wu/.venvs/hmasd/bin/python scripts/run_mgtap_native_ground_geometry_b01.py --native --master 8201 --output /home/wu/hmasd-worktrees/mgtap_b01_<EXACT_SHA>/temp/directions/metric_ground_transport_allocation/exp/b01_8201 --arm-cap 1800 --pair-cap 3600"'
-```
+The prior app writer's actual command records were inspected and retained:
 
-Node: `wsl_4070`, SSH `hmasd-wsl-node`; CPU FP32 even though the host has a GPU.
-The 8202 command changes master, handle and output suffix only. The existing
-`agent-task run` supervisor receives `bash -lc` directly. Node-local admission
-and runner share one command with `&&`. Worktree setup and any later launch
-remain the parent's selected execution assignment. No local fallback was chosen.
+| Check | Outcome | pytest time | Command wall |
+| --- | --- | ---: | ---: |
+| First setup attempt | 20 pass, 6 setup errors (missing scratch parent) | 5.22 s | 6.395 s |
+| Repaired directory suite | 26 pass | 7.51 s | 9.094 s |
+| Changed endpoint subset | 16 pass, 4 deselected | 4.21 s | 6.405 s (also includes edit/diff commands) |
+| CM changed-path checks | 12 pass, 20 deselected | 12.34 s | 13.829 s including cleanup |
+| Final endpoint/control correction | 3 pass, 21 deselected | 3.97 s | 4.937 s including cleanup |
 
-After collection, aggregate the two exact `summary.json` paths with:
+Known charged command wall is 40.660 seconds. The original total focused-check
+cap remains 300 seconds: known remaining ceiling is 259.340 seconds minus the
+unmeasured older check/process cost. Exact all-history consumed/remaining wall
+cannot be certified. No additional check budget was allocated, and no further
+checks are planned at this soft-stop boundary. The first proposed CM PowerShell
+check/cleanup command was rejected before process creation (policy rejection;
+no more specific reason returned); the same bounded check ran with a Python
+controller and verified scratch cleanup, without escalation or permission.
 
-```text
-python scripts/run_mgtap_native_ground_geometry_b01.py --aggregate <8201_summary.json> <8202_summary.json> --output <aggregate_summary.json>
-```
+CM checks used `C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe -m pytest -q
+-p no:cacheprovider --basetemp <invocation scratch>` on the candidate test directory.
+First selection: `branch_is or relation_padding or native_binding or training_sd
+or controls_precede or package_import or missing_primary or runner_fixture or
+partial_step or publication_is`; final selection on test_reporting_deadline.py:
+`short_hover or short_episode or controls_precede`. Parent process timeouts were
+60 and 30 seconds respectively. Each invocation's resolved scratch was under
+this checkout's temp/directions/metric_ground_transport_allocation/test/ and
+was removed in finally after retaining these results. The cache_dir warning is
+pytest configuration noise; the tests passed. No native environment was called.
 
-The per-fit cost law stays
-`C_init + 131072*c_env_actor + 1024*c_update + 8192*c_eval + C_publication`.
-DENSE additionally pays for 8192 H steps per master. Coefficients remain
-unmeasured; 1800/3600 are planned bounds, not measured affordability. No probe
-or run is selected by this repair.
+Tests establish both branch velocity-density gradient paths after projection
+movement, zero initial inner gradients, both fixed padding denominators,
+separate uncertainty units, default compatibility, pre-import controls,
+partial/deadline/publication behavior and no COMPLETE on missing primary.
+Literal wrapper tests use shlex against agent-task's actual argument flattening
+and local Git Bash `-n`, without submitting the scientific command. Read-only
+remote inspection confirmed agent-task's `run <name> <cmd...>` implementation
+and availability of GNU time. Shared-source diff and git diff --check pass.
 
-## Focused acceptance evidence
+## Independent review and scope
 
-Interpreter: `C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe`.
-Command: `-m pytest -q -p no:cacheprovider --basetemp
-temp/directions/metric_ground_transport_allocation/test/b01_repair_20260908
-tests/experiments/candidates/metric_ground_transport_allocation/mgtap_native_ground_geometry_b01`.
+The named native Reviewer independently inspected actor/credit/source boundaries,
+final runtime/aggregate/exposure/control changes and focused test code. It found
+no remaining material source defect after the velocity-loss, movement reporting,
+uncertainty and H-only endpoint corrections. It accepted the CM's actual check
+evidence without duplicating tests; it executed no scientific import or test.
+This is independent technical review, not the original implementer's self-review
+and not scientific or runtime validation.
 
-The focused suite covers parameter matching/padding/RNG/credit, synthetic
-forward-backward-publication, both-master branches including opposite effects,
-missing/corrupt data and H retention, startup expiration before model construction,
-partial native-shaped step counters, late publication, and a clean process proving
-thread controls precede Torch import. All environment calls use SyntheticAdapter.
-The first pytest invocation had six setup errors because the basetemp parent did
-not exist; after creating that directory, 26 tests passed in 7.51 seconds.
-One additional shortened-endpoint case was then added and checked below.
-The pytest warning about disabled cache configuration is unrelated to code behavior.
+No new Engineering Scope Spec section 4 machinery was added. The implementation
+uses existing collection/learner/deadline/publication APIs, a small numerical
+aggregate and a literal command list. Actor equations and production credit are
+unchanged. Exact final line counts and committed bindings are recorded below.
 
-No new §4 machinery: the source Deadline and publication functions are reused.
-Runner remains under 600 lines, and checks remain below the five-minute budget.
-Parent/Reviewer must inspect this exact repair before claiming independent review;
-no self-review is represented as independent provenance.
+## Cost and restart boundary
 
-Final changed-endpoint check: 16 passed, 4 deselected in 4.21 seconds. Combined with the prior full suite, all 27 cases are covered. git diff --check passes; the runner is 475 lines. git diff against inspected main is empty for all five shared UCOPE paths.
+Per learned fit: 512x256=131072 training steps, 1024 Adam calls and 32x256=8192
+sampled evaluation steps. Four fits plus two H references total 573440 steps,
+4096 Adam calls and 192 evaluation episodes. Per-arm cost law remains
+`C_init + 131072*c_env_actor + 1024*c_update + 8192*c_eval + C_publication`, with
+8192 extra H steps charged once per master to DENSE. REL/DENSE branch arithmetic
+is 4664/2752 matrix-weight products and 610/16 inner tanh outputs per actor row;
+3,317,760 logical actor-row evaluations per fit. These are computed counts,
+not measured time or affordability. Native coefficients, activation memory,
+RSS, CPU work and complete-process times remain unknown.
+
+The final restart HANDOFF in this directory supplies exact source/evidence
+revisions and next owner. Root may integrate accepted source and route closure
+intake to the original DM. No staging, admission, native run, retry, new Pro round
+or successor work proceeds under the current soft stop.
+
+Final source size: runner 492 lines, geometry 168, package initializer 21 and entry script 29. Relative to the card commit 7e880cb33, 1628 non-test source lines are added including the five reconciled shared UCOPE files; this is below 2000 and the runner is below 600. The independent review found no prohibited machinery; reporting/deadline code is the explicitly assigned repair surface.

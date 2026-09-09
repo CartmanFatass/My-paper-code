@@ -1,5 +1,6 @@
 import copy
 import json
+import math
 import os
 from pathlib import Path
 import subprocess
@@ -37,6 +38,17 @@ def test_opposite_master_effects_are_retained():
     assert result["primary"]["reading"] == "INSIDE_MEI"
 
 
+def test_training_sd_and_conditional_se_have_different_units():
+    values = [summary(8201, .04), summary(8202, -.06)]
+    for s, amplitude in zip(values, (.1, .2)):
+        for row in s["rows"]:
+            if row["arm"] == "REL":
+                row["J"] += amplitude if row["episode"] % 2 else -amplitude
+    primary = runner.aggregate(values)["primary"]
+    assert primary["training_endpoint_sample_sd"] == pytest.approx(.1 / math.sqrt(2))
+    assert primary["conditional_se"] == pytest.approx(math.sqrt(.1**2 + .2**2) / (2 * math.sqrt(31)))
+
+
 @pytest.mark.parametrize("defect", ["missing_master", "duplicate_master", "missing_episode",
     "duplicate_episode", "nan", "null", "wrong_master", "unfinished_fit", "bad_rows", "short_episode"])
 def test_missing_or_corrupt_primary_never_gets_polarity(defect):
@@ -69,6 +81,15 @@ def test_hover_missing_does_not_erase_primary_and_bad_files_do(tmp_path):
         result = runner.aggregate_files([good, path])
         assert result["primary"]["reading"] == "INCOMPLETE"
         assert result["pairs"][0]["primary"]["hover_complete"]
+
+
+def test_short_hover_limits_hover_without_erasing_learned_primary():
+    values = [summary(8201, .02), summary(8202, .02)]
+    next(r for r in values[1]["rows"] if r["arm"] == "H")["steps"] = 2
+    result = runner.aggregate(values)
+    assert result["primary"]["complete"]
+    assert result["primary"]["reading"] == "REL_ABOVE_MEI"
+    assert not result["pairs"][1]["primary"]["hover_complete"]
 
 
 class Clock:
@@ -133,7 +154,8 @@ def checked(name, *args, **kwargs):
         seen.append(True)
     return original(name, *args, **kwargs)
 builtins.__import__ = checked
-import experiments.candidates.metric_ground_transport_allocation.mgtap_native_ground_geometry_b01
+import runpy
+runpy.run_path('scripts/run_mgtap_native_ground_geometry_b01.py')
 import torch
 assert seen and torch.get_num_threads() == torch.get_num_interop_threads() == 1
 assert torch.get_default_dtype() == torch.float32
@@ -141,3 +163,32 @@ assert torch.empty(1).device.type == 'cpu'
 """
     env = dict(os.environ, OMP_NUM_THREADS="8", OPENBLAS_NUM_THREADS="8")
     subprocess.run([sys.executable, "-c", code], check=True, env=env, timeout=30)
+
+
+def test_package_import_preserves_shared_torch_defaults():
+    code = """import torch
+torch.set_num_threads(2)
+torch.set_num_interop_threads(2)
+torch.set_default_dtype(torch.float64)
+import experiments.candidates.metric_ground_transport_allocation.mgtap_native_ground_geometry_b01
+assert torch.get_num_threads() == torch.get_num_interop_threads() == 2
+assert torch.get_default_dtype() == torch.float64
+"""
+    subprocess.run([sys.executable, "-c", code], check=True, timeout=30)
+
+
+def test_missing_primary_cannot_publish_complete(tmp_path, monkeypatch):
+    original = runner.collect_episode
+    def omit_one(*args, **kwargs):
+        args = list(args)
+        if args[7]["arm"] == "REL" and args[7]["phase"] == "eval":
+            args[10] = lambda row: None
+        return original(*args, **kwargs)
+    monkeypatch.setattr(runner, "collect_episode", omit_one)
+    result = runner.run_pair(8201, tmp_path, fixture=True, horizon=2,
+                            train_episodes=2, eval_episodes=1)
+    assert result["status"] == "INCOMPLETE"
+    assert not result["primary"]["complete"]
+    assert result["primary"]["hover_complete"]
+    assert result["counts"]["eval_episodes"] == 3
+    assert json.loads((tmp_path / "summary.json").read_text())["status"] == "INCOMPLETE"
