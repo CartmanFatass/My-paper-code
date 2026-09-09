@@ -2,7 +2,7 @@
 
 ## State and scope
 
-Prelaunch engineering acceptance; no scientific invocation yet. Contract:
+Engineering accepted; one scientific invocation accepted and currently observed. Contract:
 [science card](ACVC_NATIVE_LINK_LOSS_B01_SCIENCE_CARD_20260909.md) §§2–6 and
 [prospective facts](ACVC_NATIVE_LINK_LOSS_B01_P78_PROSPECTIVE_FACTS_20260909.json),
 frozen at `7ec1849b739cc51f55dee41878da980b8f245b4d`. The checkout began clean on
@@ -95,3 +95,36 @@ Remote existing Python reports Torch 2.7.0+cu118, NumPy 1.26.3; the scientific r
 explicitly selects CPU. Source/input staging and accepted-handle facts will be recorded
 below. CM is sole observer through terminal collection; DM/Root receives handle facts,
 without observation transfer.
+
+## Accepted invocation
+
+- Source: `f429021166eefa9ee6d9b275ac8c91f1b13a8f28`, committed and pushed before staging.
+- Node: `wsl_4070` / `hmasd-wsl-node`; cwd `/home/wu/hmasd-worktrees/acvc-p78-f42902116`,
+  clean detached exact-source checkout at launch.
+- Supervisor handle: `acvc-p78-native-link-loss-8901-f42902116`; reported PID 3045659.
+- Output: `<cwd>/temp/directions/acvc/exp/native_link_loss_b01_8901_p78_20260909`.
+- Supervisor log: `/home/wu/.agent-tasks/acvc-p78-native-link-loss-8901-f42902116/task.log`.
+- Input: `/home/wu/hmasd-inputs/acvc/p78/final_DENSE.pt`; remote SHA256 equals the frozen
+  `f648f2b100d07335ccd9c79c0476b8e9dba0c1644ae837d622b0c5f711030790`.
+- Admission: `<cwd>/temp/directions/acvc/p78_admission.json`, assessed
+  `2026-09-09T11:06:13.874723Z`; physical and effective available **15,630,286,848 bytes**,
+  both ≥4 GiB. Preflight was joined to this invocation by `&&`.
+- Initial supervisor observation: running, exit null, uptime7 s, tmux active.
+  Native DM was notified; no observation transfer.
+
+Exact submitted command (inside `agent-task run acvc-p78-native-link-loss-8901-f42902116`):
+
+```bash
+cd /home/wu/hmasd-worktrees/acvc-p78-f42902116 && HMASD_PYTHON=/home/wu/.venvs/hmasd/bin/python bash experiments/candidates/acvc/native_link_loss_b01/launch.sh f429021166eefa9ee6d9b275ac8c91f1b13a8f28 /home/wu/hmasd-inputs/acvc/p78/final_DENSE.pt 14.2369735 3585.7630265
+```
+
+Staging facts: direct non-login remote Git transport stalled before any science; its
+identified fetch children were stopped. The configured `zsh -lic` network environment
+fetched the committed objects. Updating remote tracking ref `origin/codex/acvc` failed
+because historical `origin/codex/acvc/next-object-20260904` already exists. No ref was
+deleted or rewritten; `cat-file` verified the exact fetched commit, then the configured
+network shell created its detached worktree successfully. An initial non-login worktree
+checkout similarly failed its promisor-blob fetch and cleaned itself; the successful
+exact-SHA worktree is the one above. These were source-staging operations with zero
+scientific exposure, not scientific retries. Source code and scientific allocation did
+not change.
