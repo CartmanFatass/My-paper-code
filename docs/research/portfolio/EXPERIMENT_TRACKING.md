@@ -2,7 +2,7 @@
 
 ## Current observation and return state — 2026-09-08
 
-Research is **SOFT STOP / DRAINING** under OWNER_DIRECT 2026-09-09: finish work already in progress without interruption, collect/intake its evidence, publish a restart handoff, and stop. Do not start a subsequent invocation, arm, seed, object, successor engineering assignment or Pro Send. This supersedes the prior resume and rolling-refill routes until explicit owner restart. Existing accepted processes retain their observers and original bounds. The [restart handoff](handoffs/2026-09-09-soft-stop-restart.md) records closeout progress; draining is not yet a claim that every process is terminal.
+Research is **STOPPED / CLOSEOUT COMPLETE** under OWNER_DIRECT 2026-09-09. All five current direction chains completed acceptance/intake and restart handoffs; accepted processes are terminal and their original observers finished collection. No new invocation or successor is authorized until explicit owner restart. The [restart handoff](handoffs/2026-09-09-soft-stop-restart.md) records accepted integration commits, exact direction handoffs, retained raw evidence and historical restrictions. No cancellation or process interruption occurred.
 
 Root owns planning and integration under [ROOT_OPERATIONS.md](../../project/ROOT_OPERATIONS.md). The assigned CM/Operator observes by default; explicit takeover follows [EXPERIMENT_MONITOR.md](../../project/EXPERIMENT_MONITOR.md). Independent Pro provider operations belong to Transport. Exact handles and receipt bindings below remain evidence. Detailed receipts are in [root-log/2026-09-08.md](root-log/2026-09-08.md); lifecycle and priority are in [PORTFOLIO.md](PORTFOLIO.md). The older tracker is preserved in [EXPERIMENT_TRACKING_THROUGH_P45_20260908.md](../../archive/operations/EXPERIMENT_TRACKING_THROUGH_P45_20260908.md).
 
@@ -10,7 +10,10 @@ Root owns planning and integration under [ROOT_OPERATIONS.md](../../project/ROOT
 
 - CRTO P72: response/intake/handoff integrated at63550cd83; DM stopped, no live experiment or Pro generation, no successor B. See [handoff](../candidates/commitment_residual_triggered_options/CRTO_RESTART_HANDOFF_20260909.md).
 - UCOPE P72: handle `ucope-uav-renewal-b03-7501-p72-20260908` terminal exit0/tmux inactive; CM collection and DM intake complete, both stopped. Source7d3aaab46; whole390.73s; valid DOWN. P72 chain integrated at9868dc355. See [handoff](../candidates/ucope/UCOPE_RESTART_HANDOFF_20260909.md). Scientific and check worktrees plus staged wrapper await separately bounded preservation/reclamation; raw local collection remains in the designated direction checkout.
-- MGTAP technical repair/review completed atc2cca317b with source db34b6c14 and no scientific invocation. Original DM received closure-only intake; direction handoff pending. Shared-source main integration is not yet claimed.
+- MGTAP source db34b6c14, technical handoffc2cca317b and DM closure3905d3e16 integrated main36e94d735, preserving shared UCOPE B03 additions. DM/CM stopped, no scientific invocation.
+- VSPC1 P73 handle `vspc1_hold_value_b08_8401_e9a05af5d51d` terminal exit0/tmux inactive,505s; source e9a05af5, branch intake/handoff29a50fa03, main0b1eae4ac. DM/CM stopped, zero submissions remain.
+- FSD P72 handles `fsd_uav_b02_p72_D0_08199a932` and `fsd_uav_b02_p72_I_08199a932` terminal exit0,471.50/1297.28s; source08199a932, branch intake/handoff e3de6a89c, main14edf6315. DM/CM stopped, zero submissions remain. Policy-blocked scratch retained.
+- Transport idle with no accepted live generation; [handoff](handoffs/2026-09-09-transport-restart.md). Historical unsent/uncertain requests remain held, not observation duties.
 
 ## P67 completed returns and P68 continuation
 
