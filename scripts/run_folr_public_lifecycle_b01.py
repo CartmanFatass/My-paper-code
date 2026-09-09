@@ -21,12 +21,13 @@ def publish(out, summary):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--arm', required=True, choices=['RETAIN', 'RESET'])
-    parser.add_argument('--seed', type=int, default=7801, choices=[7801])
+    parser.add_argument('--seed', type=int, default=7801)
+    parser.add_argument('--evaluation-seed', type=int, default=107801)
     parser.add_argument('--launch-sha', required=True)
     parser.add_argument('--out', type=Path, required=True)
     args = parser.parse_args()
     args.out.mkdir(parents=True, exist_ok=True)
-    summary = dict(arm=args.arm, training_seed=args.seed, evaluation_seed=107801,
+    summary = dict(arm=args.arm, training_seed=args.seed, evaluation_seed=args.evaluation_seed,
                    launch_sha=args.launch_sha, status='incomplete', training_episodes=0,
                    training_ticks=0, optimizer_steps=0, evaluation_episodes=0,
                    evaluation_ticks=0, evaluation_returns=[], training_return_sum=0.0,
@@ -67,10 +68,10 @@ def main():
                                       wall_seconds=time.monotonic() - START)), flush=True)
         learner.save(args.out / 'final.pt')
         learner.actor.eval()
-        random.seed(107801)
-        np.random.seed(107801)
-        torch.manual_seed(107801)
-        env = LifecycleEnv(difficulty='easy', vision=1, seed=107801)
+        random.seed(args.evaluation_seed)
+        np.random.seed(args.evaluation_seed)
+        torch.manual_seed(args.evaluation_seed)
+        env = LifecycleEnv(difficulty='easy', vision=1, seed=args.evaluation_seed)
         for _ in range(32):
             _, score, counts = collect(env, learner.actor, 0.0)
             summary['evaluation_returns'].append(score)
@@ -81,7 +82,7 @@ def main():
         summary['mean_native_return'] = float(np.mean(summary['evaluation_returns']))
         summary['status'] = 'complete'
         summary['exposure'] = '100000 real native training ticks; 4969 actor/mixer RMSprop steps at lr=0.0005; 32 final greedy evaluation episodes'
-        summary['rng'] = 'Python/global NumPy/Torch seeded before model construction; native traffic and replay share global NumPy; source epsilon selector uses Torch including greedy and terminal draws; all three reset to107801 for final evaluation'
+        summary['rng'] = f'Python/global NumPy/Torch seeded before model construction; native traffic and replay share global NumPy; source epsilon selector uses Torch including greedy and terminal draws; all three reset to{args.evaluation_seed} for final evaluation'
         summary['torch_version'] = torch.__version__
         summary['numpy_version'] = np.__version__
         summary['torch_threads'] = [torch.get_num_threads(), torch.get_num_interop_threads()]
