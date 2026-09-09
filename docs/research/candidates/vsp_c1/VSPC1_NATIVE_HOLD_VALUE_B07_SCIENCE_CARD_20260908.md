@@ -187,3 +187,51 @@ Reuse `C:/Projects/HMASD-worktrees/dm-vspc1-next-20260906`, branch
 [intake §3](VSPC1_NATIVE_HOLD_VALUE_B07_INTAKE_20260908.md#3-five-item-same-cm-assignment)
 provides the same-CM handoff. DM owns scientific/source acceptance and Root
 integrates specified deliveries while preserving concurrent work.
+
+## 7. Accepted source and exact P72 execution binding
+
+DM accepts **`4e83312ea5d35db4472bbc821b0c2cf875e853b3`** after inspecting
+the actual complete runner diff, all new binding tests and retained process
+evidence in the [technical record](VSPC1_NATIVE_HOLD_VALUE_B07_TECHNICAL_ACCEPTANCE_20260908.md).
+The35-line runner changes only B06→B07 labels and8302→8303. Shared scientific
+source and historical runner/tests have no diff against3e743b2cdd5913a1f506ab0e8d4a6ea11489fcb3.
+Eleven pure-data/stub checks passed, exit0,5.04s pytest/6.667623999994248s complete
+process. Owned scratch was removed after retaining evidence. No model/optimizer,
+forward, native episode or evaluation was invoked; prior review stays applicable.
+No scope §4 additions or observed §5 breach. Source acceptance is technical
+conformance, not native evidence or another submission allowance.
+
+The following exact bindings are prospective before staging; readiness has not
+yet been observed. This continues the already allocated P72 route.
+
+| Field | Binding |
+| --- | --- |
+| Node / interpreter | wsl_4070, hmasd-wsl-node, `/home/wu/.venvs/hmasd/bin/python` |
+| Device / process / numerical threads | CPU FP32 /1 /1 |
+| Exact scientific SHA | `4e83312ea5d35db4472bbc821b0c2cf875e853b3` |
+| Detached cwd | `/home/wu/hmasd-worktrees/vspc1-native-hold-value-b07-8303-4e83312ea5d3` |
+| Supervisor handle | `vspc1_hold_value_b07_8303_4e83312ea5d3` |
+| Staged literal payload | `/home/wu/hmasd-inputs/vspc1_hold_value_b07_8303_4e83312ea5d3.sh` |
+| Output | `/home/wu/projects/HMASD/temp/directions/vsp_c1/exp/native_hold_value_b07_8303_4e83312ea5d3` |
+| Admission receipt | `/home/wu/projects/HMASD/temp/directions/vsp_c1/exp/native_hold_value_b07_8303_4e83312ea5d3_admission.json` |
+| Scientific argv | `scripts/run_vspc1_native_hold_value_b07.py --seed 8303 --out /home/wu/projects/HMASD/temp/directions/vsp_c1/exp/native_hold_value_b07_8303_4e83312ea5d3` |
+| Counts / complete caps | 286720 steps /2048 Adam /96 evaluations;1800s complete learned arm /3600s complete pair |
+
+Literal seven-line LF execution input, preserving the accepted whole-timer pattern:
+
+```bash
+#!/usr/bin/env bash
+set -euo pipefail
+exec /usr/bin/time -f 'whole_wall_seconds=%e,peak_rss_kib=%M' /bin/bash --noprofile --norc -c '
+cd /home/wu/hmasd-worktrees/vspc1-native-hold-value-b07-8303-4e83312ea5d3 &&
+/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/projects/HMASD/temp/directions/vsp_c1/exp/native_hold_value_b07_8303_4e83312ea5d3_admission.json &&
+/home/wu/.venvs/hmasd/bin/python scripts/run_vspc1_native_hold_value_b07.py --seed 8303 --out /home/wu/projects/HMASD/temp/directions/vsp_c1/exp/native_hold_value_b07_8303_4e83312ea5d3
+'
+```
+
+Commit/push the literal input separately as needed; its authoring commit does not
+replace the exact scientific SHA above. CM verifies exact source/runtime surfaces,
+the canonical admission helper, literal readback/syntax and prior handle/output
+state, then continues the one allocated submission. Fresh actual-node physical/
+effective memory admission precedes scientific state inside this whole-timed
+chain. CM remains sole observer, without Root adoption or another launch request.

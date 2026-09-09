@@ -124,3 +124,44 @@ entry and again at the2026-09-09T06:00Z definition boundary.
 No reply or prediction is invented. Publishing the new card does not await owner
 ratification. Commit/push definition before same-CM work; the entire conforming
 P72 route is allocated and new scientific exposure is still zero.
+
+## 5. DM source acceptance and continuation
+
+Accept committed/pushed source `4e83312ea5d35db4472bbc821b0c2cf875e853b3`.
+I read the actual35-line runner diff against B06, all74 new binding-test lines,
+the53-line technical record and raw `focused_result.json` stdout/exit/whole wall.
+Only B07/card/master bindings change. Config, CPU/threads, whole-start clock,
+normalization/width133/extra-init law, counts/caps, publication and exit behavior
+are preserved. Git shows no shared scientific or historical runner/test change
+against accepted3e743b2cdd5913a1f506ab0e8d4a6ea11489fcb3.
+
+Eleven pure-data/stub checks passed once: three status/exit cases, six invalid
+key/option cases and both checkpoint identities. Exit0;5.04s pytest and
+6.667623999994248s complete process. The disabled-cacheprovider warning is
+unrelated to these passed checks. Tests construct no model/optimizer and invoke
+no forward/native/evaluation. CM retained the result then removed only verified
+owned empty scratch directories. No parent test replay was needed. Production
+source35 lines remains within scope §5, with no §4 addition. Reuse the unchanged
+architecture/RNG/gradient/full-schedule/native/H/deadline review; preserve P69's
+historical first-test enclosing-wall qualification.
+
+Evidence-spec §11.8.6 applies verbatim: "Use existing trustworthy paths and
+checks where applicable." The changed binding has its focused verification;
+test success supplies no native mechanism value. All B07 scientific exposure,
+remote staging, admission and submission remain zero at this acceptance boundary.
+
+Options: (a) accept this conforming source, bind exact inputs and continue P72;
+(b) repeat unchanged suites or seek an intermediate Root launch allocation;
+(c) treat tests as a scientific result. Recommend/select(a).
+Owner-delegated decision (unattended,2026-09-03 instruction): (a),
+**OWNER_DELEGATED object-tier technical**. No method, scientific meaning or budget
+is changed. [Card §7](VSPC1_NATIVE_HOLD_VALUE_B07_SCIENCE_CARD_20260908.md#7-accepted-source-and-exact-p72-execution-binding)
+fixes full scientific SHA/node/cwd/payload/handle/output/admission and literal
+whole-timed command before staging. These are bindings, not remote readiness
+claims; the same CM performs the actual technical checks next.
+
+Main unapplied reviews were empty at2026-09-09T06:05Z; no instruction/prediction
+is invented. Source acceptance stays in intake/audit without another owner item.
+After DM commit/push, editing/index returns to the same CM for the complete
+allocated staging/execution/sole-observation/collection route. No intermediate
+Root action, extra submission allowance, pilot, retry, second pair or successor.
