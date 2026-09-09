@@ -1,6 +1,6 @@
 # CRTO B08 P71 technical execution evidence
 
-Status: **ACCEPTED / RUNNING**. Root allocated one real invocation at
+Status: **TERMINAL / COLLECTED / TECHNICALLY ACCEPTED**. Root allocated one real invocation at
 `9c2153b55b81fc6ab47f216014f62b14b581e476`. The assigned CM is the sole observer and collector;
 DM owns scientific intake and Root receives milestones without parallel polling.
 
@@ -70,12 +70,114 @@ conflict is returned without a replacement invocation. Partial output remains in
 
 ## Accepted handle milestone
 
-One supervisor submission was accepted at `2026-09-09T05:28:32Z`, with returncode0 and no stderr.
+One supervisor submission was accepted at `2026-09-09T05:28:32Z`, with return code 0 and no stderr.
 `agent-task` reported tmux `agent_crto-b08-p70-seed0-20260909`; log path
 `/home/wu/.agent-tasks/crto-b08-p70-seed0-20260909/task.log`.
-First status: running, PID3024150, uptime18s, tmux active. Admission passed as recorded above.
+First status: running, PID 3024150, uptime 18s, tmux active. Admission passed as recorded above.
 The exact command and raw local receipts are preserved in the named stage/collection root:
 `launch_command.txt`, `launch_receipt.json`, `staging_verification.json`.
-CM retains observation through terminal facts and collection. Root/DM were notified once of
-acceptance; no handover or second launch is authorized by that message. Primary result and
-complete time remain unmeasured at this milestone.
+CM retained sole observation through terminal facts and collection. Root/DM were notified once
+of acceptance; no handover or second launch followed. The next section closes that running
+milestone with actual terminal and collection evidence.
+
+
+## Terminal result and collection acceptance
+
+The same handle finished with exit 0, tmux inactive, at `2026-09-09T05:31:21Z`. Its terminal
+log records **Duration 169s**, from 05:28:32Z. The later status uptimes 218s/320s include post-exit
+waiting and are not used as runtime. There was exactly one accepted submission, one passed
+actual-node admission and one real seed0/three-arm invocation. No retry, resumed process,
+extra seed/arm/endpoint or scientific smoke occurred.
+
+Published evidence:
+
+- [Original complete summary](CRTO_NATIVE_COST_B08_P71_RESULT_20260908.json), all 411368 bytes,
+  SHA256 `5fa2fcb91a643f1d377393994e38d390ae64ee3b39b270616ea788985e08fb61`.
+- [Runtime receipts and technical checks](CRTO_NATIVE_COST_B08_P71_RUNTIME_RECEIPTS_20260908.json):
+  staging/launch/admission, original supervisor log, terminal status, account command/response,
+  complete accounting, copy verification and independently recalculated native facts.
+
+CM copied `summary.json`, `admission.json`, `complete_accounting.json` and `task.log` from the
+bound remote output/supervisor paths and verified their collected bytes against remote
+size/SHA256. The original summary remains unchanged. The accepted source's account command
+ran once after terminal collection with `--complete-wall-seconds 169`, exited0, and produced
+`complete_accounting.json`; it performs no scientific work. Its exact argv is retained in the
+runtime receipts. The summary's pre-publication/pending-accounting fields are preserved as
+original output and are supplemented by this terminal collection record, not overwritten.
+
+| Complete resource fact | Actual |
+| --- | ---: |
+| Whole quoted command, through publication/shutdown | 169s, supervisor whole-second resolution |
+| Inner pre-publication wall | 164.3972584879957s |
+| Shared overhead charged to every arm | 123.0375338079175s |
+| RAW training/evaluation/scoring / final charged wall | 16.06360326905269s /139.1011370769702s |
+| TRUE training/evaluation/scoring / final charged wall | 14.697494718013331s /137.73502852593083s |
+| DERANGED training/evaluation/scoring / final charged wall | 15.201368205016479s /138.23890201293398s |
+| Peak RSS reported by scientific process | 1543303168 bytes |
+
+No charged-arm 1200s or complete shared 1500s cap breach is observed; the large margins are not
+affected by the supervisor's one-second quantization. Study critical path and summed logical
+invocation wall are both 169s; conservative arm charges are not summed as machine time.
+Aggregate CPU is unmeasured. Admission was measured at the actual node and passed both 4 GiB
+floors. Thread output reports all four native environment limits 1 and Torch intra/inter-op 1.
+The source preserved CPU FP32. No cost/resource-efficiency claim is inferred.
+
+Actual work: predictor 128 tapes/32256 available examples/100 updates/12800 processed examples;
+calibration 64 tapes/16128 examples (12160 horizon4,3968 horizon8); gate 774 updates/24768 examples;
+96 network readout rows/scored decisions on 16 unique EVAL identities; 54848 environment transitions
+and 3520 common-future branch steps. Each arm's SHORT33/LONG258 exposure is 1056/8256 examples,
+22/172 canonical recipient and donor occurrences, lr .001 and nominal exposure .033/.258.
+Initial L2/RMS/Linf is 18.87916908516977/.10402732933491829/.28862619400024414 for all arms.
+All six endpoint movements and last-batch expected-cost losses are finite and visible in the
+original summary; all three LONG displacement ratios are nonzero and differ across arms.
+
+CM's stdlib-only arithmetic over the original collected JSON checked 96 row decisions: legal
+first-printed logit argmax, oracle action, native regret, side counts/competence and every signed
+paired gain. Maximum native-regret recalculation discrepancy is 0. The 16 EVAL identities/order,
+48-row canonical training order, donor maps and 22/172 occurrence records match the fixed B04
+package. All historical rows in the summary match the frozen input. Both endpoints' three
+native comparisons are trustworthy under the frozen source; their maximum legal-label
+discrepancy is 0. These are direct checks over output bytes, not an environment replay or new
+scientific invocation. No primary measurement is missing or limited in this result.
+
+## Primary facts returned for DM scientific intake
+
+All six deterministic action vectors are identical. Each arm at each endpoint has equal-side
+regret **.0021294544930598857**, KEEP 8/8 exact oracle actions with 0 mean regret, and REPLAN 5/8
+exact oracle actions with .004258908986119771 mean regret. New RAW-LONG is therefore observed
+**not competent** because REPLAN exact actions 5 is below 6; historical competence is not substituted.
+The emitted frozen reading is `WEAK_NEW_RAW_LONG_DIAGNOSTICS_ONLY`, both endpoint alignment
+flags false, no selected checkpoint, and no competent residual polarity.
+
+| Endpoint | new RAW minus TRUE | new DERANGED minus TRUE | historical B04 RAW minus TRUE |
+| --- | ---: | ---: | ---: |
+| SHORT33 | 0 | 0 | +.0044524264964700775 |
+| LONG258 | 0 | 0 | +.0016519755926440258 |
+
+All signed rows are retained. Against historical RAW, SHORT has 7 gain rows and 3 loss rows,
+net +.07123882394352124 and total negative gain -.03407127188895817; LONG has 3 gain rows and 2
+loss rows, net +.026431609482304413 and total negative gain -.02270649938121741. The positive
+historical aggregate never erases those losses. Historical TRUE regret improvement is
++.015984557591254618 at SHORT and +.008786079220940025 at LONG; those descriptive values do
+not satisfy the new-RAW/new-DERANGED comparisons. New RAW minus new DERANGED regret is 0 at
+both endpoints. These observations retain the reused-seed/exposed-panel ceiling and do not
+establish equivalence, stable superiority or family exhaustion. DM owns the scientific intake,
+forecast scoring and next-node recommendation; P71 allocates no successor.
+
+The original log includes the inherited PyTorch warning about a non-writable NumPy history
+view at `models.py:186`. Execution completed; native-label comparison checks above show no
+observed discrepancy. No source repair or unique root-cause claim is made from that warning.
+
+## Closure and remaining owner
+
+Technical acceptance covers the exact committed source/input, one admitted detached invocation,
+actual complete primary outputs/counts, corrected trustworthy-contrast reading, complete terminal
+accounting and byte-preserving collection. No source was changed in P71 and no assigned process
+remains live. The task's local stage/collection root and remote scientific outputs are evidence,
+not test scratch; they are retained. No tests or disposable test scratch were created by P71.
+
+DM receives all outcomes for scientific intake; Root receives the result and remaining action.
+The detached execution checkout remains at the bound path only for this pending delivery/parent
+acceptance. **Root owns its reclamation after accepting the archived result** under AGENTS 6;
+source commit/input/evidence remain preserved, and the scientific output root is not deleted.
+There is no ongoing observer handover. This return releases the direction checkout's index.
