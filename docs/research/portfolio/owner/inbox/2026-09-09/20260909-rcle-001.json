@@ -1,0 +1,81 @@
+{
+  "id": "20260909-rcle-001",
+  "created": "2026-09-09T10:17:39-07:00",
+  "direction": "roster_consistent_latent_exploration",
+  "tier": "direction",
+  "kind": "decision",
+  "title": "RCLE完整答复选择一次actor100真实配对训练",
+  "context": "A02低actor分配不等于修复有效；完整Pro选择同FLEX、seed19、权重100对1的真实训练。Root另行分配唯一配对；当前只已接收决定及冻结卡片，尚无新训练结果。",
+  "options": [
+    {
+      "key": "actor100",
+      "label": "执行已选actor100配对",
+      "consequence": "按现有单配对卡直接观测原生服务，保留不利路径和旧反例。"
+    },
+    {
+      "key": "zero_baseline",
+      "label": "改为零基线问题",
+      "consequence": "改变科学对象，须对具体改令重新固定法则；本轮不能判断该备选疗效。"
+    },
+    {
+      "key": "factorial",
+      "label": "改为包与权重四臂",
+      "consequence": "新增包交互问题且翻倍训练和反传，超出本次选择及分配。"
+    }
+  ],
+  "recommended": "actor100",
+  "auto_applied": "actor100",
+  "dm_reason": "所选法则直接干预已观察的相对score分配；收益与噪声反例均交给原生结果检验。",
+  "evidence": [
+    "docs/research/candidates/roster_consistent_latent_exploration/RCLE_TBCFV_POST_A02_INNOVATOR_INTAKE_20260909.md",
+    "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260909_post_a02_innovator_recovery/archive/RESPONSE.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-09.md#L125",
+  "brief": "docs/research/portfolio/owner/briefs/roster_consistent_latent_exploration/2026-09-09_post-A02-innovator.md",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260909_post_a02_innovator_recovery/archive/RESPONSE.md",
+        "quote": "唯一下一对象选择：RCLE-TBCFV-B03-ACTOR100，类别 B/EXPLORE。",
+        "why": "完整答复在既定同包、同信息和曝光下选择真实训练，直接观察原生服务。"
+      },
+      {
+        "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_TBCFV_POST_A02_INNOVATOR_INTAKE_20260909.md",
+        "quote": "No correction is required before conforming implementation.",
+        "why": "DM已对照固定问题及当前规范；Root另行分配了恰好这一配对预算。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260909_post_a02_innovator_recovery/archive/RESPONSE.md",
+        "quote": "最强反对意见是范数依赖参数化，小 actor 范数未必意味着有效控制信用不足。",
+        "why": "100倍权重可能放大噪声或挤走有用梯度；A02没有给出任何重权训练收益。"
+      }
+    ],
+    "uncertainty": [
+      "单个配对训练种子不能证明稳定优越，也不识别纯pointer原因。",
+      "零基线是同成本的另一真实学习问题，本次没有比较它。",
+      "新法则实际耗时、初始化改善及两条路径的取舍尚未观测。"
+    ],
+    "cost": {
+      "compute": "2臂×1新配对种子×200×64训练；4个2048评估面板；33792 episode、2162688 tick、400次联合反传/step调用。每完整学习调用600秒，全对象累计1500秒，含必要检查和出版。",
+      "owner_time": "无需现在回复；可异步覆盖选择。",
+      "reversibility": "costly",
+      "waits_on_this": "nothing；既有Root分配及委托下继续。"
+    },
+    "source": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_TBCFV_POST_A02_INNOVATOR_INTAKE_20260909.md",
+    "question": "是否保留已执行的科学选择：以actor100对actor1真实配对训练检验原生未服务需求，而不追加诊断或四臂？",
+    "changes_if_approved": [
+      {
+        "target": "RCLE DIRECTION及post-A02 intake",
+        "from": "A02完成，下一学习对象待选",
+        "to": "完整Pro选择B03-ACTOR100；Root已另行分配固定一对"
+      }
+    ],
+    "if_refused": "在下一个干净边界按你的具体改令调整后续未执行工作；保留原答复、历史结果和已经发生的支出。",
+    "verdict_text": "唯一下一对象选择：RCLE-TBCFV-B03-ACTOR100，类别 B/EXPLORE。"
+  },
+  "starred": true
+}

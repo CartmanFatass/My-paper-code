@@ -1,0 +1,81 @@
+{
+  "id": "20260909-rcle-002",
+  "created": "2026-09-09T10:17:40-07:00",
+  "direction": "roster_consistent_latent_exploration",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "RCLE B03：同FLEX的actor100对1，seed19",
+  "context": "主张：固定TBCFV宿主、单个新配对训练种子中，增加claim-score权重可能降低成员变化后的未服务需求。绑定结构：多agent信用分配与roster变化。卡已按Root分配冻结；科学执行尚未发生。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "保留固定200×64训练和四个最终/初始化/参考面板，按600秒每学习调用及1500秒全对象执行。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "依照异步指令停止尚未执行工作并保留已有支出和证据。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "按具体改令修订尚未执行范围；不增加隐含重试或后继。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "卡把已选法则、真实FLEX随机语义、原生主量符号、全部结果读法及完整预算固定为可实施的唯一配对。",
+  "evidence": [
+    "docs/research/candidates/roster_consistent_latent_exploration/RCLE_TBCFV_B03_ACTOR100_SCIENCE_CARD_20260909.md",
+    "docs/research/candidates/roster_consistent_latent_exploration/RCLE_TBCFV_POST_A02_INNOVATOR_INTAKE_20260909.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-09.md#L126",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260909_post_a02_innovator_recovery/archive/RESPONSE.md",
+        "quote": "唯一下一对象选择：RCLE-TBCFV-B03-ACTOR100，类别 B/EXPLORE。",
+        "why": "完整答复在既定同包、同信息和曝光下选择真实训练，直接观察原生服务。"
+      },
+      {
+        "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_TBCFV_POST_A02_INNOVATOR_INTAKE_20260909.md",
+        "quote": "No correction is required before conforming implementation.",
+        "why": "DM已对照固定问题及当前规范；Root另行分配了恰好这一配对预算。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260909_post_a02_innovator_recovery/archive/RESPONSE.md",
+        "quote": "最强反对意见是范数依赖参数化，小 actor 范数未必意味着有效控制信用不足。",
+        "why": "100倍权重可能放大噪声或挤走有用梯度；A02没有给出任何重权训练收益。"
+      }
+    ],
+    "uncertainty": [
+      "单个配对训练种子不能证明稳定优越，也不识别纯pointer原因。",
+      "零基线是同成本的另一真实学习问题，本次没有比较它。",
+      "新法则实际耗时、初始化改善及两条路径的取舍尚未观测。"
+    ],
+    "cost": {
+      "compute": "2臂×1新配对种子×200×64训练；4个2048评估面板；33792 episode、2162688 tick、400次联合反传/step调用。每完整学习调用600秒，全对象累计1500秒，含必要检查和出版。",
+      "owner_time": "无需现在回复；可异步覆盖选择。",
+      "reversibility": "costly",
+      "waits_on_this": "nothing；既有Root分配及委托下继续。"
+    },
+    "source": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_TBCFV_POST_A02_INNOVATOR_INTAKE_20260909.md",
+    "question": "是否保留已经冻结的B03卡：新seed19、相同FLEX、actor权重100对1、每臂200次完整更新？",
+    "changes_if_approved": [
+      {
+        "target": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_TBCFV_B03_ACTOR100_SCIENCE_CARD_20260909.md",
+        "from": "已选对象，尚无B03结果",
+        "to": "按固定卡实施、审阅并完成唯一配对，主量Delta_U=U_W1-U_W100，MEI0.05"
+      }
+    ],
+    "if_refused": "按异步拒绝或修订意见处理尚未执行部分，不抹去已有结果，也不把本卡视作更大预算授权。",
+    "verdict_text": "Owner-delegated decision (unattended, 2026-09-03 instruction): (a)"
+  },
+  "starred": false
+}

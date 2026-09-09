@@ -1,0 +1,43 @@
+{
+  "read_at_utc": "2026-09-09T17:04:00.677314+00:00",
+  "delivery_commit": "c80efaea6b0df9f22fb08bc1a5706492108836a9",
+  "response_path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260909_post_a02_innovator_recovery/archive/RESPONSE.md",
+  "full_response_blob": "7c1a9088aac8cdd1d21f053d4468ea898a400095",
+  "full_response_bytes": 35124,
+  "full_response_lines": 196,
+  "full_response_sha256": "3e4e149a5a3095c014fea5354df7a04a081943c616fbb01e3cf9e2a303b81b0f",
+  "delivery_changed_paths": [
+    "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260909_post_a02_innovator_recovery/archive/RESPONSE.md"
+  ],
+  "task_commit": "c03c37a6f186a27c2abce3c387aec8a0548325ab",
+  "scientific_input_commit": "9ed540ea7a6de32e2f389fd38aaef5fcf0098689",
+  "captured_files": {
+    "SENT_PROMPT.md": {
+      "source": "\\\\?\\C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\roster_consistent_latent_exploration\\2026-09-09-rcle-post-a02-innovator-recovery-01\\2026-09-09-rcle-post-a02-innovator-recovery-01--roster_consistent_latent_exploration__00_PROMPT.md",
+      "bytes": 1275,
+      "sha256": "e465735fca32db267e4e7f3f0d65d9891092c2218f579ff4662d1df7366900ca"
+    },
+    "CHAT_RECEIPT.md": {
+      "source": "\\\\?\\C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\roster_consistent_latent_exploration\\2026-09-09-rcle-post-a02-innovator-recovery-01\\2026-09-09-rcle-post-a02-innovator-recovery-01--roster_consistent_latent_exploration--attempt-01__02_RESPONSE.md",
+      "bytes": 409,
+      "sha256": "ad88d9c5f86a6a60750f5fe10cb3881581562bcda4c1aa7fe5b85d38bb7058ea"
+    },
+    "PACKET_MANIFEST.json": {
+      "source": "\\\\?\\C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\roster_consistent_latent_exploration\\2026-09-09-rcle-post-a02-innovator-recovery-01\\2026-09-09-rcle-post-a02-innovator-recovery-01--roster_consistent_latent_exploration__PACKET_MANIFEST.json",
+      "bytes": 1960,
+      "sha256": "d100bb37ea49d300340b2ea2fb6fea2b57781b9e325c2d888cb7a809216f1321"
+    },
+    "TRANSPORT_FACTS.json": {
+      "source": "\\\\?\\C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\roster_consistent_latent_exploration\\2026-09-09-rcle-post-a02-innovator-recovery-01\\TRANSPORT_FACTS.json",
+      "bytes": 3094,
+      "sha256": "229a551856166761cc2df8f7d3606e8b69b032605dba3d4079b150582a358a0d"
+    },
+    "ISSUE_COMMENT_5605475814.json": {
+      "bytes": 4075,
+      "sha256": "b4d2826996ee8d772808a65a4ad4229a3348c51d3a88d1830dfb6be03d1c4847"
+    }
+  },
+  "full_answer_read": true,
+  "formed_decision": "PRO_FINAL selects RCLE-TBCFV-B03-ACTOR100, B/EXPLORE; no specification conflict found",
+  "raw_metadata_qualification": "TRANSPORT_FACTS.json scientific_decision_formed=false is retained as a raw field; DM determines that the full GitHub response forms the requested decision. The 409-byte chat is a delivery receipt only. No inference about original unknown attempt acceptance."
+}
