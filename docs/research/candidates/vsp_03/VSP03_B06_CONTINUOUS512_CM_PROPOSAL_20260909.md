@@ -1,7 +1,10 @@
 # Ready CM proposal — selected B06 continuous512 batch
 
-**Ready for Root's finite allocation; no implementation, test or fit has been
-allocated by this proposal.** Reuse original CM
+**Root allocated the complete finite batch at
+`be3061829b0465054f6007a27d8167c541c71fba`; the five items below are now the CM
+assignment.** The proposal itself added no allowance; Root's subsequent
+allocation supplies implementation, existing-budget checks, review and the
+three named fits without changing these bounds. Reuse original CM
 `/root/dm_vsp03_p54_reentry/cm_b03_single_g` and checkout
 `C:/Projects/HMASD-worktrees/dm-vsp03-p07-prep-20260907`, branch
 `codex/pro-vsp03-shared-service-convergence-20260906`. Pro response

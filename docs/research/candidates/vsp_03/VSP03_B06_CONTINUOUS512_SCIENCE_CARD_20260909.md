@@ -3,13 +3,24 @@ Binding structure: temporal abstraction / termination at fixed N=2; an eight-tic
 
 # VSP03 B06 — three fresh continuous512 fits with fixed 128/512 panels
 
-**B/EXPLORE, scientifically selected and frozen; implementation and execution
-not allocated at this freeze.** Convergence selected option (a) in the complete
+**B/EXPLORE, scientifically selected and frozen; the complete implementation and
+three-fit batch is now allocated by Root.** Convergence selected option (a) in the complete
 [response](pro_packets/20260909_continuous512_convergence/archive/RESPONSE.md)
 at **`5af9c448879bba3129df32e07a788839658f8a4f`**. Root's 2026-09-09 intake
 assignment explicitly authorizes freezing this card and returning a ready CM
 proposal, with no fit allocated. [Decision intake](VSP03_CONTINUOUS512_CONVERGENCE_INTAKE_20260909.md)
 records application and the close call. **Recasts: 1.**
+
+Allocation update: Root's [2026-09-09 synthesis-execution decision, final VSP03
+section](https://github.com/CartmanFatass/My-paper-code/blob/be3061829b0465054f6007a27d8167c541c71fba/docs/research/portfolio/decisions/2026-09-09-synthesis-execution.md#vsp03-selected-b06-now-explicitly-allocated)
+now assigns the original DM/CM implementation, focused checks within the existing
+cumulative 300 s directory allowance, required independent semantic review,
+exactly one detached invocation per named fit, and complete intake. Main audit
+row 172 records that allocation. No extra source-approval step, test-budget reset
+or scientific-validation allowance is added. All scientific definitions and
+failure/stop bounds below remain frozen; statements about no allocation at the
+earlier freeze describe that historical boundary. No invocation has started at
+this allocation update.
 
 ## 1. Question, selection and preserved pauses
 
