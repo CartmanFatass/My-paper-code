@@ -1,6 +1,6 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-09. Research is **RESUMED** under OWNER_DIRECT “读取handoff docs然后继续科研任务”. The [P74 restart plan](handoffs/2026-09-09-research-resume-p74.md) defines current bounded work; the [completed soft stop](handoffs/2026-09-09-soft-stop-restart.md) preserves the preceding boundary.
+Updated at: 2026-09-09. Research is **PAUSED** under OWNER_DIRECT “当前几个活跃的subagent先暂停写一个handoff 包括你也补充一下handoff 根据当前情况”. The [current handoff](handoffs/2026-09-09-foundations-review-pause.md) records published knowledge activation, completed/intake-pending evidence and the unsent special Pro review. Only preservation and handoff closeout continue; explicit owner restart is required. The [P74 restart plan](handoffs/2026-09-09-research-resume-p74.md) and [earlier soft stop](handoffs/2026-09-09-soft-stop-restart.md) are historical boundaries.
 
 Historical restart context (superseded by the soft stop above): the [safe-pause handoff](handoffs/2026-09-08-safe-pause-handoff.md) records the completed boundary at 2026-09-09T00:27Z: UCOPE P61, VSP03 P64/P65 and VSPC1 P66 have completed collection/intake and integration. No live accepted handle or unfinished DM/CM closeout remains. The owner explicitly resumed research with “阅读handoff 继续开启科研”; the [P67 resume handoff](handoffs/2026-09-08-research-resume.md) supplies the new bounded assignments. Completed allocations are not replayed; each new scientific invocation still needs its recorded selection and fresh admission.
 

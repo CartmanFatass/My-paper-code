@@ -1,0 +1,48 @@
+# Pause handoff — knowledge activation and special scientific review
+
+Owner instruction: “当前几个活跃的subagent先暂停写一个handoff 包括你也补充一下handoff 根据当前情况”. Research, new Pro Sends/retries and new cleanup operations are paused. Only preservation, reconciliation of already accepted effects and handoff publication continue. An explicit owner restart is required; a status question or app restart alone does not authorize new science.
+
+## Root and published knowledge
+
+Root main checkout: `C:/Projects/HMASD`. Latest completed activation commit is **d89be7656d367ca10f75ca1185797081b5d722fa**, pushed to origin/main. Stage1 **e51bdf299c5638ab76d7ecd48d27acbcbacdf2f7** publishes the knowledge and separates SESSION_CHOICES from general concepts. Stage2 adds conditional scientific reading, evidence-spec11.10, Codex/Claude role pointers, per-reference fixed Pro versions, and original-CM remote-closeout responsibility. Models, frozen experiments and accepted requests are unchanged.
+
+[Independent audit](../../../rl-marl-foundations-20260907/working/WORKFLOW_ADOPTION_AUDIT_20260909.md) includes accepted stage1 review. [Activation acceptance](../../../rl-marl-foundations-20260907/working/ACTIVATION_ACCEPTANCE_20260909.md) lists24 paths,158 passing selected cases,5 skill validators and independent source/behavioral review. These are bounded Codex exercises and offline consumption; actual Claude and current Pro adoption are not yet observed. Root has read the route, FOUNDATIONS and relevant topics; reading proves access, not by itself a scientific change. Original RCLE DM was given the published supplemental pointer before its ongoing failure intake, now subject to this pause.
+
+The dated v3 plan's earlier “not implemented” scope describes that historical planning assignment; current implementation status is this handoff and activation acceptance. Do not repeat implementation from that stale planning sentence. Six activation-test scratch roots remain under the original CM after automatic cleanup rejection; no bypass is authorized by this pause.
+
+## Special Pro review: prepared, NOT SENT
+
+Owner requested special review of current directions and recently stopped packages under current spec plus new knowledge. Latest clarification prioritizes **whether the reasoning and experiments support the conclusions**, rather than primarily ranking research investment. The concern about Astra's conceptual mistakes is a question to investigate, not a presumed causal finding.
+
+Scope: UCOPE, FOLR, RCLE, SCDMP; recent package stops FSD, VSP-C1, VSP03, ACVC, MGTAP, CRTO. Distinguish package cessation from Portfolio lifecycle. Root authored [REVIEW_QUESTION.md](../pro_packets/20260909_foundations_special_review/REVIEW_QUESTION.md): inspect concepts, actual comparison/training/evaluation, validity and inference, evidence for continue/stop, and smallest corrections; retain contrary evidence and claim-proportional B standards. No universal replication/theory/positive-result barrier or imported SESSION_CHOICES.
+
+Original activation CM `/root/cm_foundations_activation` was assembling EVIDENCE_INDEX.md and zero-new-exposure EXPOSURE.json in that folder. It must hand over actual completeness/gaps before continuation. The question is a draft, not a rendered or sent TASK. **No REQUEST.json, bound TASK/HANDOFF, substantive Portfolio Issue or Transport dispatch has been completed for this review. No provider generation exists for it.**
+
+Root established the reusable non-main Portfolio delivery checkout **C:/Projects/HMASD-worktrees/codex-portfolio**, branch **codex/portfolio**, at d89be7656 and pushed its upstream. No prior portfolio branch was present locally/remotely. This is the designated shared Portfolio authoring/delivery branch for actual work, not a branch per review. Retain through pending delivery; Root owns later reconciliation/retirement. No Pro writes to main.
+
+After explicit restart: accept the completed evidence index and exact source mappings; incorporate RCLE's latest terminal evidence; publish these inputs; create/reuse a substantive Portfolio review Issue; render with the accepted author tool, method sources pinned to published activationSHA and each scientific source at its declared SHA; validate all listed objects/publication ancestry; commit/push TASK, bind its actual SHA, commit/push HANDOFF. Dispatch exactly once to existing Transport using `portfolio:cross_direction`. The current request is NOT accepted, so it can still be corrected before those steps. Preserve any subsequent accepted bytes.
+
+## Latest research evidence and outstanding integration
+
+| Chain | Current boundary | Recovery responsibility |
+| --- | --- | --- |
+| FOLR | Full public-lifecycle B01 source/evidence/intake integrated through05f7473af. Valid RESET_ABOVE_MEI: RETAIN2.104375, RESET4.1065625, d−2.0021875, one training pair;1517.58s scientific wall. Independent-pair recommendation unallocated. | Original CM `/root/dm_folr_p68_reentry/cm_public_lifecycle_b01` was assigned remote closeout; pause its new removal steps, retain actual completed archive/absence facts. DM intake7e1f59e5f published in codex/vap-folr. |
+| SCDMP | Full residual-MC B01 integrated throughb2bb63cd1. WITHIN+.0067374075,14/32 adverse,1500pairs/6000terms,323.02s. No unchanged repeat or successor. Main preserves newer UCOPE optional renewal argument with identical default behavior; frozen run source7d0fc9d00 remains intact. | Original CM `/root/dm_scdmp_p56_return_composition/cm_hold_residual_b01` was assigned remote worktree/wrapper closeout, now paused at actual boundary. DM intake40b27ad18 published. |
+| UCOPE | Full post-P85 response18356085f and intakeea3bce806 integrated2b31ffa42/02e811b8f. PRO_FINAL c CONTINUE selects future normalized/raw legal-feedback PPO+H; recasts1, no mean-mode repeat. No card/master/implementation/invocation allocated. | Original DM `/root/dm_ucope_p47_resume` is completed. Special review now precedes any new investment. Raw blocker and actual full GitHub delivery are preserved separately. |
+| RCLE | Card/intake9c729fb7b integratede9095e451. B03 sourcead2fdfb854e295d6d9dddb229dd17cde58465919 and final technical evidence813d236fa8a9ed60bae5bbe1827b912b743f38b3 remain on codex/rcle, not yet accepted/integrated by Root. One batch ended139; W1 complete16896episodes/1081344ticks/200nonzero steps; W100 prefix unknown, no reference, no paired Delta. CM reports79.24/53.20s,132.54s chain; charged155.787568s, conservative160s under1500. | Original DM `/root/dm_rcle_p47_transport_recovery` and CM `cm_actor100_b03` must hand off current scientific-intake completeness and retained evidence. No proved crash cause/repair or retry allocation. A kernel record cannot be firmly associated because timestamps/PID namespace differ. |
+
+Current Portfolio/tracking refresh **2c541a0a9** includes these accepted boundaries and RCLE's earlier provisional terminal facts. Latest RCLE final numbers above are attributed to its technical return, pending Root artifact acceptance. All recent FSD/VSPC1/VSP03/ACVC/MGTAP/CRTO complete intakes were already integrated; their original package stops are not undone by this knowledge update.
+
+During SCDMP integration a Windows default-decoding failure briefly left an owner trace conflict and damaged three audit lines. Explicit follow-up commits cf042ba0c/b2bb63cd1 restored UTF-8 originals and both traces. Scientific artifacts were unaffected; no history rewrite. New audit rows: FOLR128–129, SCDMP130–131, UCOPE132–133; earlier rows retained. Owner review query was empty at the last clean boundary.
+
+## External sessions and retained files
+
+Transport **01a07e52-f085-76a0-886a-4127f490421f** received the pause/handoff instruction. It owns the already-requested RCLE/UCOPE factual delivery reconciliation; metadata commit534d536c6 is on main. Root has not sent the new review. Await Transport's exact pending-provider status before declaring all external observation closed. No new automation was created.
+
+Relay **01a08456-2cf3-7f02-8595-42d84ba41a4c** is a completion relay; its wakeups do not override pause. Retain original observer/delivery identities and deduplicate completed native/relay returns.
+
+Unrelated untracked library PDF `docs/new-libs/papers/Liu 等 - 2024 - Interaction Pattern Disentangling for Multi-Agent Reinforcement Learning.pdf` remains untouched. Do not stage it with handoff work. Main owns its index; engineering children do not commit main. Direction branches publish their explicit handoffs immediately. Shared authoring checkouts and local scientific collections remain; no blanket reclamation follows this stop.
+
+## Pause acknowledgments
+
+At first handoff draft, pause instructions have been delivered to the active assembly CM, RCLE DM, original FOLR/SCDMP cleanup CMs and Transport. Their exact final handoff/status receipts are appended below before Root closeout. Completed agents require no new work or wakeup.

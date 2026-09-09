@@ -1,5 +1,7 @@
 # HMASD experiment tracking
 
+**Current owner boundary: PAUSED — 2026-09-09.** See [knowledge/review pause handoff](handoffs/2026-09-09-foundations-review-pause.md). No new science, Pro Send/retry or cleanup starts; preserve already accepted effects and write handoffs only. Historical running/restart descriptions below do not override this instruction.
+
 ## Owner-directed Root Pro recovery; FOLR accepted generation
 
 OWNER_DIRECT: “此类pro不稳定问题继续尝试发送就可以，transport失败后就由你亲自完成  不要再以这种原因阻塞”. Root personally takes over unstable Pro delivery after Transport failure, without another per-attempt permission. Existing accepted generations/deliveries are reconciled before retry, immutable prompts/bindings and failed facts retained. This execution instruction is recorded in AGENTS.md and ROOT_OPERATIONS.md; scientific authority and experiment budgets unchanged. Transport informed to leave FOLR browser/binding to Root and preserve independent accepted work.
