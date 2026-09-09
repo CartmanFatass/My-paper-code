@@ -1,5 +1,5 @@
 {
-  "status": "SCIENTIFICALLY_SELECTED_FROZEN_NOT_ALLOCATED",
+  "status": "SCIENTIFICALLY_SELECTED_FROZEN_ALLOCATED_NO_INVOCATIONS_YET",
   "created_at": "2026-09-09T21:27:32Z",
   "method": "Python standard-library configuration arithmetic only; no scientific module imports, random generators, models or world construction.",
   "source_reference_sha": "47f8983ed0a241106cdbe8368cb37851f50c7ebd",
@@ -189,5 +189,22 @@
     "missing_128": "retain trusted512; dependent Q missing",
     "prediction": "abs(mean_i D(i,512))<=0.02, low confidence; unscored if selected three-fit mean missing",
     "owner_prediction": "not taken (unattended)"
+  },
+  "current_execution_allocation": {
+    "authority_commit": "be3061829b0465054f6007a27d8167c541c71fba",
+    "authority_path": "docs/research/portfolio/decisions/2026-09-09-synthesis-execution.md#vsp03-selected-b06-now-explicitly-allocated",
+    "main_audit_line": 172,
+    "allocated_fit_keys": [
+      10801,
+      10802,
+      10803
+    ],
+    "maximum_accepted_invocations_per_fit": 1,
+    "accepted_scientific_invocations_at_this_update": 0,
+    "source_implementation": "allocated to original CM",
+    "focused_checks": "existing cumulative300s research-directory allowance; no reset or additional scientific validation",
+    "independent_semantic_review": "required",
+    "extra_Root_source_approval_gate": false,
+    "scientific_definition_change": false
   }
 }
