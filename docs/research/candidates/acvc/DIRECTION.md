@@ -46,6 +46,9 @@ instances. T−C is +0.0671812/+0.0535912 mean native return, while T−F is −
 T−G changes from +0.0369687 to −0.0065946 (WITHIN). G also improves over C and loses to F
 in both instances. Both gates had real update exposure and moved. These mixed results add
 finite-budget native evidence without adaptive superiority over the strongest observed fixed control.
+The original Convergence node's P80 decision ends this instantiated learned selective-retrace
+package and selects no successor. It preserves the positive correction observations and all
+untested history/retrace alternatives; this is not a whole-direction or Portfolio disposition.
 
 ## Bounded conclusion
 
@@ -185,18 +188,31 @@ optimality. F itself uses retained private observation history, and local loss m
 a beneficial teammate handoff. Old R02/R03 and separate MGTAP/VSPC1 evidence remain intact.
 There is no tuned current-host headroom record or stable structured-superiority conclusion.
 
-The allocated next discriminator is answered: T's disadvantage to F recurred, its gain over G
-did not. A third unchanged T/G instance is not recommended as the next follow-up. F remains
-the strongest observed fixed null for any later selected successor's native comparison; no
-changed treatment or family is selected here. All outcomes remain in evidence. This takes
-no family closure, Portfolio state, formal UAV-validation or recasts-count disposition.
-See [complete response](pro_packets/20260909_native_link_loss_convergence/archive/RESPONSE.md)
-and [B02 scientific intake](ACVC_NATIVE_LINK_LOSS_B02_INTAKE_20260909.md).
+The allocated discriminator is answered: T's disadvantage to F recurred, its gain over G
+did not. In its complete P80 response at `b7e659e8b0fb7f250c2b2fe43e179f2c2d0f14c4`, the
+original Convergence node ends the instantiated learned selective-retrace comparison on
+the outcome-informed frozen DENSE/8201 base, unchanged heads, objective and 512-episode budget.
+It selects no successor, third unchanged instance or diagnostic prelude. This is a bounded
+research decision, not a universal two-seed stopping law or a claim of fixed-policy optimality.
+
+The strongest surviving alternative is a specifically motivated different learner that could
+profitably select exceptions to F. A direct native-return comparison against F would distinguish
+that hypothesis, retaining C and the competent same-information generic comparison for the claims
+they address. No such candidate, preparation task or execution is selected. F remains the strongest
+attained fixed null; its history, anchor, retrace/dwell and partner effects are not causally isolated.
+All outcomes and R02/R03 authority remain. The end changes no whole-direction lifecycle,
+Portfolio state, formal UAV-validation status or recasts count.
+See the [complete P80 response](pro_packets/20260909_native_link_loss_followup_convergence/archive/RESPONSE.md),
+[P80 intake](ACVC_NATIVE_LINK_LOSS_P80_CONVERGENCE_INTAKE_20260909.md),
+[original native decision](pro_packets/20260909_native_link_loss_convergence/archive/RESPONSE.md)
+and [B02 intake](ACVC_NATIVE_LINK_LOSS_B02_INTAKE_20260909.md).
 
 ## Evidence set
 
 The accepted evidence set is:
 
+- `docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_P80_CONVERGENCE_INTAKE_20260909.md`
+- `docs/research/candidates/acvc/pro_packets/20260909_native_link_loss_followup_convergence/archive/RESPONSE.md`
 - `docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_B02_SCIENCE_CARD_20260909.md`
 - `docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_B02_RESULT_EVIDENCE_20260909.md`
 - `docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_B02_INTAKE_20260909.md`

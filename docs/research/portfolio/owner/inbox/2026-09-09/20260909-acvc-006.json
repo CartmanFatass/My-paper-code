@@ -19,7 +19,7 @@
     }
   ],
   "recommended": "end-package",
-  "auto_applied": null,
+  "auto_applied": "end-package",
   "dm_reason": "两次未胜F且结构化优势未重复；保留正面结果和未测假设，避免空泛续投。",
   "evidence": [
     "docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_P80_PREPARATION_INTAKE_20260909.md"
@@ -67,5 +67,15 @@
     "verdict_text": "I recommend ending the instantiated learned selective-retrace comparison on the fixed DENSE/8201 base, unchanged heads, objective and 512-episode training budget. The original Convergence node must decide that direction-local boundary, or select one concrete changed B whose decision value it can specifically justify.",
     "source": "docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_P80_PREPARATION_INTAKE_20260909.md"
   },
-  "starred": true
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-09T13:15:48+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/acvc/pro_packets/20260909_native_link_loss_followup_convergence/archive/RESPONSE.md",
+      "record": "docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_P80_CONVERGENCE_INTAKE_20260909.md",
+      "state": "applied",
+      "summary": "已读取并核对完整不可变答复：按原Convergence节点决定结束当前T/G学习回退实现包，不选后续对象。两次胜C负F及T对G变号全部保留；不认定历史无用或F最优，不改变ACVC状态、原排序或重铸次数。新增实验为零；没有推定所有者回复。"
+    }
+  ]
 }
