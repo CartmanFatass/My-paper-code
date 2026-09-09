@@ -290,3 +290,72 @@ accepted/pushed source, DM technical acceptance and one exact prospective
 execution binding returned to Root. **Zero scientific invocation; no staging,
 admission or submission in this phase.** A binding will be a prospective
 declaration, not an observed remote-ready command or an execution allocation.
+
+## 9. P69 accepted source and one prospective execution binding
+
+Accept source **`bda90e1db76a00123ba889ed6c4b05225473f4cb`**, committed and
+pushed by the same CM in the designated checkout. I inspected the complete
+production diff, relevant tests and retained check evidence, the
+[technical acceptance](VSPC1_NATIVE_HOLD_VALUE_B05_TECHNICAL_ACCEPTANCE_20260908.md)
+and full [independent review](VSPC1_NATIVE_HOLD_VALUE_B05_PRODUCTION_REVIEW_20260908.md)
+against the original contract. No material finding remains. The 25-line ordinary
+critic implements §3's copy/draw/zero-output rule; the 35-line runner fixes
+8301/width133/normalization. Narrow shared-caller changes preserve width128
+defaults and attach actual B05 architecture/count identity to summary/checkpoints
+and existing readback. Protected learner/normalization/native/historical-runner
+source has no diff. Complete production change is 95 added/9 removed lines;
+scope §4 additions:none, with no observed source/runner-budget breach.
+
+Sixteen new checks passed in 13.65 pytest seconds and nine directly affected
+default checks passed in 2.69 pytest seconds: sum 16.34s. The second enclosing
+process wall was 3.7350489s; the first was not separately retained. Preserve that
+measurement limit rather than certify a complete enclosing sum from pytest
+durations. No 300s check-budget breach was observed. Deterministic tensor tests
+construct critics and exercise gradients, and pipeline stubs verify identities,
+counts, moments and rule branches; they supply no native performance, scientific
+training pair or forecast outcome. DM/reviewer did not repeat CM execution.
+
+The following is **one prospective binding only**, with no staged inputs,
+admission, accepted handle or scientific invocation in P69. Remote path/handle
+existence has not been probed in this phase. Exact source is the full SHA above;
+the later executor must use its committed scientific bytes, not a moving HEAD.
+
+| Field | Prospective binding |
+| --- | --- |
+| Node / interpreter | `wsl_4070`, `hmasd-wsl-node`, `/home/wu/.venvs/hmasd/bin/python` |
+| Device / process / numerical threads | CPU FP32 / 1 / 1 |
+| Detached cwd | `/home/wu/hmasd-worktrees/vspc1-native-hold-value-b05-8301-bda90e1db76a` |
+| Requested supervisor handle | `vspc1_hold_value_b05_8301_bda90e1db76a` |
+| Prospective staged payload path | `/home/wu/hmasd-inputs/vspc1_hold_value_b05_8301_bda90e1db76a.sh` |
+| Output | `/home/wu/projects/HMASD/temp/directions/vsp_c1/exp/native_hold_value_b05_8301_bda90e1db76a` |
+| Admission receipt | `/home/wu/projects/HMASD/temp/directions/vsp_c1/exp/native_hold_value_b05_8301_bda90e1db76a_admission.json` |
+| Scientific argv | `scripts/run_vspc1_native_hold_value_b05.py --seed 8301 --out /home/wu/projects/HMASD/temp/directions/vsp_c1/exp/native_hold_value_b05_8301_bda90e1db76a` |
+| Counts / complete caps | §6's 286720 steps / 2048 Adam / 96 evaluations; 1800s per learned arm / 3600s complete pair |
+
+Literal prospective LF payload, reusing the accepted P67 enclosing-timer pattern:
+
+```bash
+#!/usr/bin/env bash
+set -euo pipefail
+exec /usr/bin/time -f 'whole_wall_seconds=%e,peak_rss_kib=%M' /bin/bash --noprofile --norc -c '
+cd /home/wu/hmasd-worktrees/vspc1-native-hold-value-b05-8301-bda90e1db76a &&
+/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/projects/HMASD/temp/directions/vsp_c1/exp/native_hold_value_b05_8301_bda90e1db76a_admission.json &&
+/home/wu/.venvs/hmasd/bin/python scripts/run_vspc1_native_hold_value_b05.py --seed 8301 --out /home/wu/projects/HMASD/temp/directions/vsp_c1/exp/native_hold_value_b05_8301_bda90e1db76a
+'
+```
+
+This committed text is not a staged/executed script. A later allocated CM batch
+stages/verifies the exact detached source and these inputs, performs fresh
+actual-node admission before scientific state, and uses the single literal
+binding under the existing supervisor. It retains the enclosing wall/internal
+split and all H/publication/exit work within the original caps. That later
+allocation must explicitly authorize its accepted submission; P69 grants none.
+
+Object-tier technical options: (a) accept conforming source and return this
+prospective binding; (b) add a native smoke or treat check success as a B result.
+Recommend/select (a). Owner-delegated decision (unattended, 2026-09-03 instruction):
+(a), **OWNER_DELEGATED within P69**. Main owner reviews and relevant owner cells
+were empty at 2026-09-09T04:15:46Z. Item009 remains unratified; item010's
+definition acceptance is unchanged. No UP/WITHIN/DOWN, native-cost or mechanism
+decision follows. P69 ends at the pushed technical intake and Root allocation
+return; the future B05 sampled native pair remains the next discriminator.
