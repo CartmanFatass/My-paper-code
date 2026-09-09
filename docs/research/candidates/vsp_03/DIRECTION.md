@@ -38,6 +38,13 @@ It is a bounded re-entry and narrowing, not a second RECAST; recasts remain1.
 That selected B03 seed-5 result is now below both fixed references. Readiness remains
 the current control choice for this sampled comparison; the single-run allocation is
 complete without an additional invocation or a new family disposition.
+The later P67 seed-6 observation gives a small greedy gain, so the two prospective
+G instances have mixed signs while both stochastic executions lose. P74's complete
+Convergence decision selects one further same-family G observation, seed 7, to
+observe another independently trained deterministic controller. It does not
+establish replacement value or change the N1/T pauses; recasts remain 1. Scientific
+content is selected, with implementation/execution left to the subsequent bounded
+Root assignment rather than allocated by the decision intake.
 
 ## Current position
 
@@ -194,6 +201,26 @@ establish stable replacement of fixed readiness, equivalence or a unique cause.
 The independent-instance discriminator has produced a small opposite-sign
 observation; wider repeatability remains unresolved and no further run is allocated.
 
+**PRO_FINAL, P74, 2026-09-09: select one more ordinary-G training observation in
+the same greedy-replacement family; recasts: 1.** The node selects option (b),
+seed 7, with unchanged public fixed-N2 shared-slot law, G initialization/learner,
+128 updates and final greedy G−R0 primary; R and all stochastic comparisons
+remain. One independently trained G is the next direct observation of the
+control scheme's learning variability. A changed use, unique mechanism diagnosis
+or stable result is not needed to justify this bounded B follow-up.
+
+The decision retains the close case for pausing: seed 5 loses more than seed 6
+gains, the two-instance primary mean is negative, and readiness is already useful.
+The prospective seed 6 gain over both rules and the observed complete 3.253184 s
+path support purchasing one more observation. This selects further research,
+not routine use of G. It does not require all-positive seeds, treat MEI as a
+gate or declare readiness optimal. Any completed seed 7 would join seeds 5/6 only
+in an explicitly adaptive descriptive summary; seed 4 remains separate discovery.
+No seed 8, T re-entry, second RECAST, new host, C promotion or UAV conclusion is
+selected. The scientific bound is one model, 20,480 episodes, 128 updates and
+one complete 120 s invocation; this intake launches nothing and leaves its allocation to
+the subsequent Root command.
+
 The strongest surviving alternative is that public dwell age already suffices and the generic
 MLP matches the prior, or that all advantage is the fixed rule rather than learning. In the new
 host R0, R or ordinary G may handle scheduling, while the local readiness prior could occupy the
@@ -212,6 +239,8 @@ sharing K1 does not pool polarity or reopen that family.
 ## Evidence set
 
 The evidence set includes historical observations and the separately labelled prospective selection:
+- `docs/research/candidates/vsp_03/VSP03_P74_POST_B04_CONVERGENCE_INTAKE_20260909.md`
+- `docs/research/candidates/vsp_03/pro_packets/20260909_post_b04_convergence/archive/RESPONSE.md` at `93b8693135a4420876d7b46c328297a4c3761937`
 - `docs/research/candidates/vsp_03/VSP03_B04_P67_INTAKE_20260908.md`
 - `docs/research/candidates/vsp_03/VSP03_B04_P67_RESULT_EVIDENCE_20260908.md`
 - `docs/research/candidates/vsp_03/VSP03_B04_P67_DM_ANALYSIS_20260908.json`

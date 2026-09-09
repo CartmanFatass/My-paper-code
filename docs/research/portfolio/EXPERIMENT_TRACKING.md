@@ -28,6 +28,8 @@ FSD P74 is now terminal ARCHIVED with a delivery/tool blocker, not a scientific 
 
 VSPC1 B09/8402 is terminal/intaken DOWN at145db14b7,483.27s, no live process or remaining P74 submission. Original DM actually resumed new P76 fixed512/768 same-trajectory comparison, one pair/434176steps/3072Adam/160eval, no handle yet. FSD DM found a contrary live P74 GitHub delivery and is reconciling full response/intake without Send; its earlier blocker remains preserved. MGTAP packet app dispatch is under exact receipt reconciliation, no duplicate Send requested.
 
+VSP03 P74 conforming intake b033da853 accepted; P76 one-G/seed7/120s complete invocation now concretely allocated to original DM/CM through card, source acceptance, exact remote execution and intake. No handle yet. MGTAP author's one accepted app dispatch for request2026-09-09-mgtap-post-b01-convergence-01 is reconciled/adopted by Root; Transport instructed to preserve the one pending request, no duplicate Send. Provider state remains unconfirmed.
+
 ## Historical soft-stop closeout updates — 2026-09-09
 
 - CRTO P72: response/intake/handoff integrated at63550cd83; DM stopped, no live experiment or Pro generation, no successor B. See [handoff](../candidates/commitment_residual_triggered_options/CRTO_RESTART_HANDOFF_20260909.md).
