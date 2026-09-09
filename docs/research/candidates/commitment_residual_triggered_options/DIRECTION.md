@@ -692,3 +692,49 @@ pro_packets/20260908_native_cost_reentry_convergence/archive/RESPONSE.md at
 febfad9778a0a69d3be2618739a31eec86721caa. P68's prior source retrieval and arithmetic motivate
 selection, not new empirical support. The intake also corrects old pre-publication wall-time
 wording without changing the historical resource numbers.
+
+## Native-cost B08 P71: common low-regret actions, weak RAW qualifier — 2026-09-08
+
+The one allocated B08 invocation completed. At both 33 and 258 updates, RAW, TRUE_RESIDUAL
+and CALIBRATED_DERANGEMENT make the same 16 native decisions, each with mean regret
+.0021294544930598857. KEEP is 8/8 exact with zero regret; REPLAN is 5/8 exact with mean regret
+.004258908986119771. New RAW-LONG passes both regret limits but misses the required six exact
+REPLAN actions. The frozen reading is **weak-new-RAW diagnostics only**, with no competent
+residual polarity. Both same-objective control gains are zero at both endpoints. No endpoint
+qualifies and no checkpoint is selected.
+
+There is native improvement over history. New TRUE gains .0044524264964700775 at SHORT and
+.0016519755926440258 at LONG against historical RAW, and .015984557591254618 /
+.008786079220940025 against its own historical value. These gains coexist with REPLAN losses:
+SHORT has seven KEEP gain rows and three REPLAN loss rows; LONG has two KEEP gains plus one
+REPLAN gain and two REPLAN losses. New RAW and DERANGED reach the same policy, so these gains
+do not identify residual alignment value or prove a generic objective/preprocessing mechanism.
+
+Strongest support for this bounded reading is the real learner and complete trustworthy native
+comparison against both containing RAW and derangement, with all six action vectors identical.
+The strongest contradiction to a broad failure claim is substantial native improvement despite
+the losses and failed exact-action qualifier. The three remaining wrong choices all KEEP where
+TRANSIT-R is the native oracle. Parameter movement differs across arms and between endpoints;
+finite-budget objective behavior, saturation and shared-parameter effects remain live, without
+a unique causal diagnosis or a function-class equivalence claim.
+
+An A/RECON arithmetic bound from the recorded new RAW regret is .0021294544930598857 maximum
+possible mean gain at either endpoint, because treatment regret cannot be negative. This is
+below the fixed .0025 MEI; even correcting all three residual errors permits total gain only
+.03407127188895817, below the required strictly greater than .04. This observed-baseline ceiling
+does not rewrite the card or establish tuned same-information headroom or an accessible oracle.
+The direction's tuned headroom record remains absent.
+
+The ceiling remains one reused seed, exposed selected panel and two observed budgets, without
+independent replication, full-policy/MARL/UAV value, family exhaustion or historical quarantine
+revision. B04's competent seed-0 negative, natural-support closure and A01 uncertainty remain
+separate. P71 selects no automatic successor or new direction disposition. A future family
+continuation requires a Convergence question about a justified discriminator beyond this
+common-policy/low-regret result at the original scale; a further object is currently unselected.
+
+References: CRTO_NATIVE_COST_B08_SCIENCE_CARD_20260908.md;
+CRTO_NATIVE_COST_B08_P71_RESULT_20260908.json;
+CRTO_NATIVE_COST_B08_P71_TECHNICAL_RESULT_EVIDENCE_20260908.md;
+CRTO_NATIVE_COST_B08_P71_RUNTIME_RECEIPTS_20260908.json;
+CRTO_NATIVE_COST_B08_P71_DM_ANALYSIS_20260908.json;
+CRTO_NATIVE_COST_B08_P71_INTAKE_20260908.md.
