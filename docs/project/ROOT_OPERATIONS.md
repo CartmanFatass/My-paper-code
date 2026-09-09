@@ -73,6 +73,10 @@ batches ready record edits at clean boundaries. Publication must not delay indep
 work. Recovery/cleanup follows AGENTS §6: resolve live request targets before retiring branches,
 update retained checkout locations and preserve unique evidence without merging unaccepted work.
 
-The active goal and assigned native tasks drive execution and observation; no scheduler is added.
+The active task and assigned native tasks drive execution and observation. OWNER_DIRECT
+2026-09-08 replaces the normal completion wake path with an independent Luna/low relay
+under SIBLING_COMMUNICATION.md. Only actionable Root handoffs use it; nested native work
+and Transport's already waking receipts keep their routes. After the relay test succeeds,
+the previous 20-minute Root heartbeat is paused. No observer or scientific budget is added.
 A pause or workflow edit does not resume scientific work. Preserve accepted external identities
 and the observation handover authorized by the owner.

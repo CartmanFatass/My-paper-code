@@ -1,6 +1,6 @@
 # GitHub research collaboration
 
-Portfolio and each direction DM author research questions and intake complete Pro
+Root and each direction DM author research questions and intake complete Pro
 responses. Independent Luna/high Transport owns Pro browser work and delivery receipts;
 Root dispatches handoffs, forwards native returns and integrates accepted commits.
 Use `.agents/skills/hmasd-pro-research-prompt-author/SKILL.md` to create a fixed GitHub
@@ -38,10 +38,10 @@ observations, inferences and limitations. Routing fields stay in HANDOFF.json.
 
 ## Normal sequence
 
-1. Portfolio/DM renders TASK.md and HANDOFF.json with `delivery_mode=github_delivery`.
+1. Root/DM renders TASK.md and HANDOFF.json with `delivery_mode=github_delivery`.
    TASK_NOT_PUBLISHED is preparation state and has no provider payload. Follow the
-   normal worktree/integration rules; only Portfolio's owned scientific files have
-   the explicit direct-main exception.
+   normal worktree/integration rules. Root maintains control-plane files on main;
+   Pro response delivery uses the scoped non-main branch.
 2. Commit and push TASK.md, then bind its full commit SHA using the renderer. Confirm
    that the fixed TASK is published and that the delivery branch and Issue exist.
    Commit and push the updated internal handoff.
@@ -63,7 +63,7 @@ observations, inferences and limitations. Routing fields stay in HANDOFF.json.
    response at that commit and this round's Issue comment. It returns actual immutable
    delivery links, confirmed partial delivery with the remaining gap, or unresolved
    status marked unconfirmed. Input evidence stays pinned to its original SHA.
-6. Transport archives the exact short chat reply and actual delivery facts. Portfolio/DM
+6. Transport archives the exact short chat reply and actual delivery facts. Root/DM
    reads the complete response at its fixed commit, preserves original bytes and the
    comment snapshot, and performs specification-conformance and scientific intake.
    Root checks the actual changed scope and integrates under the normal Git rules.
@@ -85,9 +85,9 @@ Repeated notifications reuse the existing request/commit/path intake.
 | Response exists, comment is missing | Verify the Issue. Only confirmed absence permits completing the same authorized comment; retain the response. |
 | Comment exists, chat receipt or notification is missing | Recover the immutable delivery links and notify once; do not create another response or comment. |
 | Shared direction branch advances | Add only the scoped response on current descendant HEAD, retaining fixed evidence and unrelated files. Reconcile the remote commit before local pushes; report non-descendant history or target conflicts. |
-| Accepted legacy TASK forbids branch-base changes | Preserve its exact Send and reply. New workflow wording does not amend the accepted TASK. Portfolio supplies a bounded delivery correction after reconciling actual file/comment state; use a distinct request and response path, unchanged scientific evidence unless explicitly authorized. |
-| Cleanup removed or renamed a delivery target | Reconcile the affected request and recovery ref before further writes. Correct unsent handoffs and publish/bind their new TASK; preserve accepted/uncertain handoffs and route restoration or explicit correction to Portfolio. Branch cleanup alone never authorizes a replacement conversation or another Send. |
-| Main advances after input was bound | Keep the original input SHA. DM/Portfolio assesses material scientific changes at intake; unrelated commits do not invalidate the response. |
+| Accepted legacy TASK forbids branch-base changes | Preserve its exact Send and reply. New workflow wording does not amend the accepted TASK. Root arranges a bounded delivery correction after reconciling actual file/comment state; use a distinct request and response path, unchanged scientific evidence unless explicitly authorized. |
+| Cleanup removed or renamed a delivery target | Reconcile the affected request and recovery ref before further writes. Correct unsent handoffs and publish/bind their new TASK; preserve accepted/uncertain handoffs and Root resolves restoration or explicit correction. Branch cleanup alone never authorizes a replacement conversation or another Send. |
+| Main advances after input was bound | Keep the original input SHA. DM/Root assesses material scientific changes at intake; unrelated commits do not invalidate the response. |
 | Provider access is unavailable | Record the precise unreadable paths or unavailable action and any confirmed partial delivery. A local tool's access does not establish Pro access. |
 | A conclusion needs correction | Ask the same node a new explicit question with a new output path and links to the prior response; preserve the original answer. |
 
