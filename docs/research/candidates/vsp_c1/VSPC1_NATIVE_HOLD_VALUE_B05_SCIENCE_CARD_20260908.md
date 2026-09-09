@@ -1,7 +1,10 @@
 Claim under test: the normalized gated critic retains a native-return advantage over a same-information ordinary MLP with approximately matched critic capacity in one fresh training pair.
 Binding MARL structure: (b) temporal abstraction or termination, with five co-adapting agents retaining separate partial-observation histories.
 
-# VSPC1-NATIVE-HOLD-VALUE-B05 — B/EXPLORE definition; P68 preparation only
+# VSPC1-NATIVE-HOLD-VALUE-B05 — B/EXPLORE
+
+Current state: P70 valid complete UP for master8301; §11 records the terminal
+result. P68 preparation and P69 source-only history remain in §§1,7–9.
 
 ## 1. Question, authority and evidence boundary
 
@@ -397,3 +400,31 @@ diagnostic first. Recommend/select(a). Owner-delegated decision (unattended,
 At this record the new allocation has zero accepted submissions and zero new
 scientific exposure. The source-test timing qualification in §9 remains intact.
 No scientific polarity or owner reply is inferred from this allocation.
+
+## 11. P70 terminal result and allocation stop
+
+The single accepted submission completed exit0 on2026-09-09T04:36:57Z at §9's
+exact scientific SHA/cwd/handle/output. [E0](VSPC1_NATIVE_HOLD_VALUE_B05_RESULT_EVIDENCE_20260908.md)
+and [scientific intake §9](VSPC1_NATIVE_HOLD_VALUE_B05_INTAKE_20260908.md#9-p70-valid-result--scientific-intake-and-complete-allocation-boundary)
+retain source/receipts, all outcomes, the unchanged rule and decisions.
+Native GATED−MLP-wide133=+.01659191137627875, conditional SE .008099210958544987:
+**UP** at the point estimate, with margin above MEI .0065919114 smaller than SE.
+GATED−H=+.0296867693 and MLP-wide133−H=+.0130948580; adverse episodes are13/8/13
+of32 across the primary/GATED−H/MLP−H contrasts. One independent training pair
+in this new comparator regime supplies no training-population uncertainty or
+stable/mechanism attribution claim; previous regimes and their H losses stay separate.
+
+Actual exposure:2 fits,286720 native steps (262144 train/24576 eval),2048 Adam,
+512 rollouts/512 moment merges,96 final evaluations and no partial steps.
+Fresh actual-node physical/effective admission passed; all publication/identity
+checks passed. Complete wall315.20s and conservative per-arm upper bounds
+167.9571218310/155.6930584460s satisfy1800/3600s caps. Peak RSS546.4296875MiB;
+aggregate CPU/width-specific overhead remain unmeasured. Scope §4 needs none;
+no observed §5 breach, with P69's test-wall measurement qualification preserved.
+
+Recorded UP(.55) is a hit, binary Brier .2025; owner prediction not taken.
+Owner-delegated decision (unattended,2026-09-03 instruction): accept this bounded
+valid UP and finish P70's allocation with every outcome retained. A later one-pair
+repeat of this unchanged comparison is direction-local advice only: no new
+card/key/run or automatic successor is allocated. This B has no consumption
+state; no direction/Portfolio disposition or formal UAV-entry decision is made.
