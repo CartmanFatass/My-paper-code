@@ -28,3 +28,9 @@ Configured hmasd-wsl-node, CPU FP32, one process/numerical thread. Fresh canonic
 physical/effective admission >=4GiB precedes scientific state in the same measured
 chain. CM solely observes at most one accepted submission to terminal all-outcome
 collection; no retry/resume/tuning, extra evaluation, second pair or successor.
+
+Sole submission accepted 2026-09-09T06:58:00Z; PID 3032870 was running with
+tmux active at57s. Canonical actual-node admission at06:58:00.280732Z passed
+both floors with14,394,122,240 bytes available. The accepted-submission allowance
+is spent. CM retains sole observation; scientific source remains
+e9a05af5d51da571642f51c5b7b8f00c96f1c6b5. No retry/resubmission is allocated.
