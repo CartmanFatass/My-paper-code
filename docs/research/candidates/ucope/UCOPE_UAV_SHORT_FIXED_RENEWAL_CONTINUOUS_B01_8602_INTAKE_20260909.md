@@ -137,3 +137,79 @@ owns implementation/execution/collection; DM owns complete result interpretation
 prediction scoring and Chinese brief; Root owns main integration and later scoped
 remote closeout. Accepted launch/source/spend and scientific intake will be appended
 after their actual events. The existing allocation authorizes continuation now.
+
+## 5. DM technical acceptance and accepted invocation
+
+Root accepted the complete frozen card/intake **a052560c2** as main
+**c6bda65c8**, audit183→main184. Original CM then accepted and published source
+**d2d72c11e55294a33f38bda83e6e99c8f5c1fb83**, prelaunch binding
+**39b285197**, and accepted-launch evidence
+**dc7f0538049630b557d4fbafdf9b631207b6b60b**. The shared checkout/index was
+clean and released to DM; no further approval was requested before launch.
+
+**What DM checked:** the full five-added/three-removed non-test source diff and
+33-line focused test, the actual focused log, cleanup-blocker receipt, complete
+[CM engineering/execution evidence §§1–3](UCOPE_UAV_SHORT_FIXED_RENEWAL_CONTINUOUS_B01_8602_EXECUTION_EVIDENCE_20260909.md),
+literal bound wrapper/submission, eight-file destination source readback and
+actual initial status/admission. The only production changes are admission of
+real8602 and its new-card pointer; Config8601 defaults, fixture9001, old card
+metadata, selector and all training/evaluation formulas/loops are unchanged.
+Four shared52bf runtime blobs remain preserved. No model, native run, remote
+status query, source verification command or test was repeated by DM.
+
+**Rule applied verbatim, card§6:** “Original CM accepts the minimal diff, focused
+synthetic/mocked8602 wiring and independent review of new seed/card publication.”
+The one focused test exercises actual CLI→Config→run_pair→summary, stops at
+mocked templates before model/RNG creation, checks8601/8602/fixture9001 and
+rejected unallocated/mismatched modes, and reads all seed/card fields. The
+independent original reviewer reports no material finding at exactd2d72c11e.
+Accepted13-case continuity/native/nonmutation/completeness coverage is reused.
+This establishes source conformance, not native performance or final completeness.
+
+**Counts and receipts:** one focused case passes1.99s pytest/**2.86791s outer**,
+exit0; prior10.0388972s gives **12.9068072s cumulative directory test wall**.
+Prelaunch scientific model/environment/RNG/native exposure is zero. Source
+diff+5/−3 adds no engineering§4 machinery; no line/support budget breach occurs.
+The current result-bearing allowance is one accepted invocation with planned
+1163264 native steps/8192 Adam/448 evaluations. Actual completed counts and whole
+runtime remain pending terminal evidence; admission is not a cap-conformance result.
+
+The accepted handle is **ucope-uav-short-fixed-renewal-continuous-b01-8602-20260909**,
+node **hmasd-wsl-node**, exact detached source **d2d72c11e**, CPU FP32/thread1.
+Cwd `/home/wu/hmasd-worktrees/ucope-uav-short-fixed-renewal-continuous-b01-8602-20260909`,
+relative scientific output `temp/directions/ucope/exp/ucope-uav-short-fixed-renewal-continuous-b01-8602-20260909`,
+supervisor `/home/wu/.agent-tasks/ucope-uav-short-fixed-renewal-continuous-b01-8602-20260909`.
+Initial direct status is running/exitnull/PID3081306/tmuxactive/uptime10s.
+Actual admission **2026-09-09T23:13:38.810832Z** passed both physical/effective
+availability **15220748288 bytes** against4294967296. The exact wrapper joins
+preflight and source runner before scientific roots/RNG/models.
+
+MONITOR_ADD was accepted directly at live task
+**01a087e5-2044-7301-abb6-7a1709a98197** with the complete handle and original
+owners. The launch document retains its dispatch-pending snapshot. CM's later
+native final return reports completed observation transfer. Root's subsequent
+receipt confirms **actual Monitor adoption at2026-09-09T23:14:34.5855514Z**:
+running, exitnull, tmuxactive and PID3081306. Root also accepted/integrated the
+source/review/check and prelaunch evidence, with launchdc7f05380 as main
+**affcb2368**. This is accepted observation ownership, not a scientific result.
+CM and DM do not start parallel polling. Root resumes the same CM at terminal
+for collection/technical acceptance, followed by DM's complete scientific intake.
+
+**Decisions this acceptance produces, object-tier technical:** **(a)** accept
+the conforming source, focused evidence and already accepted single-invocation
+handoff; **(b)** return a concrete seed/card/comparison/information/publication
+defect to original CM. Recommend/select **(a)**. **Owner-delegated decision
+(unattended, 2026-09-03 instruction): (a).** No new selection, allowance,
+scientific reading, family/Portfolio disposition or owner item follows.
+Forecasts remain .60/.65/.70; owner prediction is not taken. The next scientific
+observation is this invocation's fixed final2048 F−G with all curve/hover outcomes.
+
+At this boundary, all-age owner reviews in main/direction remain empty; main
+was **499bd5b027813082b55007694ecd85a84e40758d**. No reply is fabricated.
+Automatic approval review rejected removal of this new completed CM-owned
+`temp/directions/ucope/test/continuous-8602-wiring-20260909` directory before
+effect as `exec_command CreateProcess: blocked by policy`. Original CM retains
+cleanup ownership and its receipt; prior scratch is untouched, with no retry
+or bypass. This technical cleanup gap does not alter the running scientific
+comparison. Exact remote cwd/wrapper/423624-byte source pack remain for Root's
+later scoped closeout; the shared authoring checkout and local evidence persist.
