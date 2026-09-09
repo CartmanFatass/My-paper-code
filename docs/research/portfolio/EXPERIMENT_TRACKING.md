@@ -1,5 +1,7 @@
 # HMASD experiment tracking
 
+ACVC P76 preparation `0d812969dffe1aad04751f7daca2a5d4c9f0c902` accepted; fixed TASK `58b5d723e5687f94a81a4f1b787641806d8b1421` actually dispatched once to configured Transport. App delivery accepted, but preflight confirmed zero browser action/Send: internal HANDOFF lacks the reset declaration/evidence required for its retired provider binding. Original DM actually resumed to repair this same unsent routing metadata, preserving fixed science; no second request or experimental allocation. UCOPE P77, VSPC1 P76 intake, VSP03 question preparation and FOLR focused source readiness continue.
+
 ## Current observation and return state — 2026-09-08
 
 Research is **RESUMED** under OWNER_DIRECT “读取handoff docs然后继续科研任务” on 2026-09-09. The [P74 restart plan](handoffs/2026-09-09-research-resume-p74.md) supplies new bounded work for MGTAP, VSPC1, FSD, UCOPE and VSP03. The [completed soft-stop handoff](handoffs/2026-09-09-soft-stop-restart.md) records terminal predecessor handles, retained evidence and restrictions; none is replayed. Actual native dispatches and newly accepted handles are recorded separately.
