@@ -28,3 +28,10 @@ Raw collection: `temp/directions/vsp_c1/collection/native_hold_value_b12_8503_19
 New P78 test scratch was removed; historical policy-blocked P76 scratch remains
 creator-owned with no repeated rejected cleanup or bypass. Root owns completed
 remote-checkout reclamation.
+
+Terminal2026-09-09T10:57:02Z, exit0 and inactive tmux. Artifact acceptance PASS;
+whole504.91s, conservative arms267.9792s/259.2685s within caps.
+[E0](VSPC1_NATIVE_HOLD_VALUE_B12_RESULT_EVIDENCE_20260909.md) retains all160 rows,
+five means/SEs, both endpoint deltas, four H contrasts and paired change.
+One submission spent, zero remain. CM observation complete; editing/index to DM.
+Historical P76 scratch cleanup blocker remains creator-owned.
