@@ -3,7 +3,8 @@ Binding MARL structure: (b) temporal abstraction or termination, with five co-ad
 
 # VSPC1-NATIVE-HOLD-VALUE-B12 — B/EXPLORE, P78
 
-Current state: identity-only source accepted; zero scientific exposure. Root separately
+Current state: valid complete CHANGE_DOWN and scientifically intaken; one P78
+submission spent, zero remain. Root separately
 allocated P78 after accepting [B11 intake §6](VSPC1_NATIVE_HOLD_VALUE_B11_INTAKE_20260909.md#6-p77-valid-result-intake-and-decisions);
 main Portfolio at`0d6bbc50e26bfbb0a824c4a88c053509372299b3` records one new
 unchanged fixed512/768/common-H pair. The spent P76/P77 allowances remain closed.
@@ -229,3 +230,31 @@ and prior handle/output state, then perform the single allocated submission with
 fresh actual-node memory admission immediately before scientific state inside
 this whole-timed command. CM solely observes/collects through terminal acceptance.
 No further planning approval or invocation follows. Staging/admission are not yet observed.
+
+## 8. Terminal result — 2026-09-09
+
+The sole P78 invocation is valid complete at source
+`19e0d0d303686cd7590ecfe7970d2057d652eea5`, exit0, with434176 team steps,
+3072 Adam,160 evaluations and four fixed learned endpoints. The
+[E0](VSPC1_NATIVE_HOLD_VALUE_B12_RESULT_EVIDENCE_20260909.md) and
+[DM intake §6](VSPC1_NATIVE_HOLD_VALUE_B12_INTAKE_20260909.md#6-p78-valid-result-intake-and-decisions)
+apply the unchanged rule: **C−.05860815861231437, conditional SE .01145908955291803,
+CHANGE_DOWN;512 Delta−.014981597171180248 DOWN;768−.07358975578349462 DOWN.**
+The512 point is only .0049815972 (.68985 SE) below negative MEI; region/noise
+are retained together. Forecast CHANGE_DOWN(.60) hit/Brier .16; owner not taken.
+
+GATED's point mean falls .0041748298 with conditional SE .0094990262, while
+MLP's rises .0544333288. All four learned means exceed H, with11/11/14/5
+individual H losses retained. Three fixed-protocol Cs are negative;512 regions
+are UP/UP/DOWN and768 WITHIN/WITHIN/DOWN. Their descriptive C mean/SD are
+−.0415905008/.0257844332, with no population or causal conclusion. The new
+large768 deficit strengthens contrary evidence without erasing prior512 gains.
+Older protocols remain separate; tuned headroom and unique attribution remain absent.
+
+Whole504.91s and conservative complete arms267.9792/259.2685s satisfy the
+caps. No scope5 breach was observed. No live process or P78 allowance remains.
+Next advice is a separately assigned scoped Convergence question on continuing
+with a concrete performance-motivated B change or ending this instantiated
+comparison. No family/Portfolio decision, Pro packet/Send, card/master/prediction,
+code task or scientific submission is created here. Historical blocked P76
+scratch remains CM-owned; Root owns integration and remote-checkout reclamation.
