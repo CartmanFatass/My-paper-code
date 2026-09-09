@@ -149,3 +149,13 @@ fit permits the last allocated10803. No three-fit aggregate is reported yet.
 Additional cleanup inventory: /home/wu/.agent-tasks/vsp03-b06-10802-20260909 and
 /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b06_10802_20260909_terminal.tmux;
 scientific root and receipts remain retained. Same CM/Root cleanup event as above.
+
+## Documentary publication repair
+
+The final prose write in a6365f5ef failed on a Windows default-encoding Unicode
+symbol and truncated this Markdown file; raw10803 artifacts and aggregate JSON in
+that commit were unaffected.97198c367 restored prior sequential text from750a9b79c,
+added the complete summary, and converted acceptance prose to UTF-8. The follow-up
+normalizes line endings after that conversion. UTF-8 decoding, required summary/
+retention text and git diff whitespace checks now pass. Failed/intermediate commits
+remain in history; no source, scientific bytes, calculations or result polarity changed.
