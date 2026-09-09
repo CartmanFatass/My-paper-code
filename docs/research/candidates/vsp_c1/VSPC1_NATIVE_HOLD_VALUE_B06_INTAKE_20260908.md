@@ -150,3 +150,51 @@ source/check facts for DM acceptance and exact launch binding, then the same
 CM continues staging/execution within this task. DM source acceptance is not
 an intermediate Root launch allocation. All8302 scientific exposure remains zero
 at this dispatch boundary.
+
+## 5. DM source acceptance and in-task continuation
+
+Accept source `fd4c9f4a65c7c4049f9c0e5f18b28534f14abe01`, committed/pushed by
+the same CM. I inspected the complete35-line runner against B05 and all74 lines
+of binding tests, the technical record and actual focused-result stdout/exit/wall.
+The only production changes are the new B06 object/card and master8302; default
+Config, CPU/threads, initial whole clock, width133/normalization/extra-seed law,
+publication and exit behavior are preserved. Git comparison of shared scientific
+source/historical runners/tests against4fa2829a347032ec80f375f95ca8ebec4ad723dd
+has no diff. The new tests cover3 status/exit cases,6 invalid binding cases and
+both pure checkpoint identities:11 passed, exit0,2.29 pytest seconds and
+3.39652800001204s complete enclosing process. No parent test replay was needed.
+
+CM retained check evidence before removing only its verified invocation scratch;
+the earlier combined test/recursive-cleanup command was rejected before execution,
+then tests ran once and empty-directory cleanup completed. No scientific attempt
+or partial learning arose from that technical rejection. Source35 lines is
+within scope; no section4 machinery or observed section5 budget breach. The
+accepted B05 architecture/RNG/full-pipeline review remains applicable because
+none of those implementation surfaces changed. P69's first-enclosing-test-wall
+gap remains a historical qualification, not a new test requirement. All B06
+scientific exposure, staging, admission and submissions are zero so far.
+
+The applicable evidence-spec §11.8.6 rule remains: "Use existing trustworthy
+paths and checks where applicable." The new binding has its focused check;
+its source acceptance is technical conformance, not native performance or a
+forecast outcome. Actual native primary/H/checkpoints will be inspected after
+the already allocated execution.
+
+Options: (a) accept this conforming source, bind its exact invocation and
+continue the allocated P71 route; (b) repeat unchanged suites or request a new
+Root launch allocation; (c) treat test success as a native result.
+Recommend/select(a). Owner-delegated decision (unattended,2026-09-03 instruction):
+(a), **OWNER_DELEGATED object-tier technical**. No scientific field/budget changes.
+The [card §7](VSPC1_NATIVE_HOLD_VALUE_B06_SCIENCE_CARD_20260908.md#7-accepted-source-and-exact-p71-execution-binding)
+fixes the full accepted science SHA, exact configured node/cwd/payload/handle/
+output/admission and literal whole-timed command. These are prospective bindings,
+not claims of verified remote readiness. CM performs those actual checks next.
+
+Main owner reviews are empty at2026-09-09T05:17:18Z; no instruction/prediction or
+ratification is invented. Ordinary source acceptance stays in this intake/audit,
+with no new owner item. After the DM's explicit-path commit/push, editing/index
+returns to the same CM for the complete staged execution and sole observation/
+collection. No intermediate Root relay, new scientific allowance, native smoke,
+retry, second pair or successor follows. A concrete source/runtime/input/
+admission/cap conflict is returned before dependent work; conforming steps
+continue under P71 without another scheduling decision.
