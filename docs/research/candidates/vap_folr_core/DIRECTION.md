@@ -114,3 +114,39 @@ Evidence:
 - `N3_FOLR_ROUTING_B04_RESULT_SUMMARY_20260904.json`
 - `N3_FOLR_ROUTING_B04_EVALUATION_CURVES_20260904.csv`
 - `N3_FOLR_ROUTING_B04_INTAKE_20260904.md`
+
+## Accepted public-lifecycle scope — 2026-09-09
+
+**Conclusion (scope, not performance).** Convergence selects a new lifecycle-visible easy
+Traffic Junction comparison of separately trained survivor-state RETAIN and event-triggered
+RESET. Actual car departures/activations determine trip ownership, including same-step slot
+refill; both actors receive the same public event/own-birth cues and both arms start entrants
+fresh. P77's no-ready finding for unchanged permitted information remains correct. Full
+survivor GRU history can contain teammate observations; this is not strictly-self ancestry.
+
+**Bounded claim.** The selected question concerns the finite trained-system native-return cost
+or benefit of blanket survivor-memory erasure on that explicit information variant. No such
+effect has yet been observed. It does not establish typed-state novelty, information necessity,
+original-CAMA performance, stable superiority, transfer, UAV value or a Portfolio disposition.
+
+**Strongest support and contradiction.** A true survivor can carry recent partially observed
+traffic context into later native movement decisions after another car arrives or leaves.
+The counterweight is that ordinary generic retention is already standard, own position/goal
+are reobserved, and twenty steps may leave little useful extra history. Event opportunity,
+learned competence, effect size and wall cost remain unknown. Tuned headroom on this variant
+is absent; the B04 host's observations/actions/information/budget do not form a matching baseline.
+
+**Surviving alternative and next discriminator.** Ordinary generic RETAIN without a further
+claim remains the strong zero-work alternative. The selected next discriminator is one real
+trained RETAIN/RESET class-B pair and sampled final full-episode native return. Root separately
+allocated that pair after Pro's scope-only decision; the card fixes the limited budget.
+Historical B04 positives, adverse seed, transient and within-MEI conclusion, old FOLR/DISH
+pauses, and recast counts remain unchanged. B04's 444,672 primitive transitions comprise
+294,912 training and 149,760 evaluation transitions; this corrects a later preparation label,
+not the original result counters.
+
+References:
+
+- `pro_packets/20260909_p78_public_lifecycle_convergence/archive/RESPONSE.md` at `653727422183894b2f4d1c82a458fbc55aaf6ee0`
+- `FOLR_P78_LIFETIME_INTERFACE_QUESTION_INTAKE_20260909.md` §8
+- `FOLR_PUBLIC_LIFECYCLE_B01_SCIENCE_CARD_20260909.md`

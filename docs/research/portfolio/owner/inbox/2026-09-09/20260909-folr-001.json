@@ -75,6 +75,14 @@
       "record": "docs/research/candidates/vap_folr_core/FOLR_P78_LIFETIME_INTERFACE_QUESTION_INTAKE_20260909.md#7-terminal-transport-blocker-factual-intake-and-recovery-boundary",
       "state": "blocked",
       "summary": "依AGENTS第3节记录发送阻塞：两次既有点击均无已确认发送，指定GitHub位置无完整答复；没有形成Pro决定。既有自动执行项仅指问题发布，新范围、训练卡及预算仍未选择，本次不追加发送。"
+    },
+    {
+      "at": "2026-09-09T16:25:29+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/vap_folr_core/pro_packets/20260909_p78_public_lifecycle_convergence/archive/RESPONSE.md",
+      "record": "docs/research/candidates/vap_folr_core/FOLR_P78_LIFETIME_INTERFACE_QUESTION_INTAKE_20260909.md#8-formed-convergence-decision-and-new-root-allocation",
+      "state": "applied",
+      "summary": "原问题经Root授权恢复后收到完整Pro答复，范围已按原节点选择应用；旧发送阻塞保留。此项原自动执行a仍仅指问题发布。Root后续单独分配的一对训练及新卡另记，尚无性能结果。"
     }
   ]
 }
