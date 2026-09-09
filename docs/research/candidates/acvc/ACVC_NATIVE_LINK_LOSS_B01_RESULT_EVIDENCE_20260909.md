@@ -2,7 +2,10 @@
 
 ## State and scope
 
-Engineering accepted; one scientific invocation accepted and currently observed. Contract:
+**Complete native comparison technically accepted.** The sole allocated invocation exited 0;
+all required training/final outcomes, updates, primary contrasts and checkpoints were
+collected. Scientific interpretation and any unallocated next object remain with DM.
+Contract:
 [science card](ACVC_NATIVE_LINK_LOSS_B01_SCIENCE_CARD_20260909.md) §§2–6 and
 [prospective facts](ACVC_NATIVE_LINK_LOSS_B01_P78_PROSPECTIVE_FACTS_20260909.json),
 frozen at `7ec1849b739cc51f55dee41878da980b8f245b4d`. The checkout began clean on
@@ -92,8 +95,8 @@ the study and the runner applies remaining complete-arm/shared deadlines.
 Fixed input SHA256 verified locally before staging:
 `f648f2b100d07335ccd9c79c0476b8e9dba0c1644ae837d622b0c5f711030790`.
 Remote existing Python reports Torch 2.7.0+cu118, NumPy 1.26.3; the scientific route
-explicitly selects CPU. Source/input staging and accepted-handle facts will be recorded
-below. CM is sole observer through terminal collection; DM/Root receives handle facts,
+explicitly selects CPU. Source/input staging and accepted-handle facts are recorded
+below. CM was sole observer through terminal collection; DM/Root received handle facts,
 without observation transfer.
 
 ## Accepted invocation
@@ -128,3 +131,125 @@ checkout similarly failed its promisor-blob fetch and cleaned itself; the succes
 exact-SHA worktree is the one above. These were source-staging operations with zero
 scientific exposure, not scientific retries. Source code and scientific allocation did
 not change.
+
+## Terminal collection and technical acceptance
+
+Supervisor terminal: finished/exit 0/tmux inactive. Its task log records exit at
+`2026-09-09T19:12:13+08:00` (`11:12:13Z`), duration 360 s. The supervisor's increasing
+`uptime_seconds` is age at observation, not process duration. External `/usr/bin/time`
+measured **359.17 s** through process exit and **552292 KiB = 0.526707 GiB** peak RSS.
+Runner summary-to-external-process difference is **15.519041 s**; this outer-boundary
+work is included in all complete bills, not hidden as free publication or exit.
+
+| Complete accounting | Seconds |
+|---|---:|
+| Focused checks, all invocations | 14.2369735 |
+| Scientific process through exit | 359.17 |
+| Logical study bill / summed serial machine invocation wall | **373.4069735** |
+| Shared work conservatively charged to each learned arm | 41.9255968 |
+| T complete bill | **199.8208294** |
+| G complete bill | **215.5117409** |
+
+Both learned arms are below 1800 s and the whole study below 3600 s. The computation's
+serial machine critical path is the same 373.4069735 s total; authoring, review waits,
+network staging and time between invocations are outside the card's machine bill.
+Aggregate CPU and scratch high-water are unmeasured; no aggregate CPU or scratch claim
+is made. Actual summary reports Torch intra/inter-op=1, CPU/FP32. Native NumPy geometry
+and its thread environment were preserved. Wall/RSS are direct external measurements,
+not inferred from exit 0 or admission.
+
+All six remote scientific files' SHA256 values matched their local collected copies.
+The complete collected root is
+`C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/exp/native_link_loss_b01_8901_p78_20260909`.
+It includes the T/G final checkpoints; both deserialize with correct arm/master,
+11425/26306 gate parameters and finite tensors. Their recorded digests are in
+[collection acceptance](native_link_loss_b01_p78_20260909/collection_acceptance.json).
+The remote source/output root remains available pending Root's normal integration and
+execution-worktree reclamation; all result bytes have a verified local copy. No live
+scientific process remains, no monitor handover occurred, and no retry was launched.
+
+Committed readable artifacts:
+[summary](native_link_loss_b01_p78_20260909/summary.json),
+[all 1152 episode rows](native_link_loss_b01_p78_20260909/episodes.jsonl),
+[all 512 rollout records](native_link_loss_b01_p78_20260909/updates.jsonl),
+[admission](native_link_loss_b01_p78_20260909/admission.json),
+[external process timing](native_link_loss_b01_p78_20260909/process_time.txt),
+[supervisor terminal](native_link_loss_b01_p78_20260909/supervisor_terminal.json), and
+[task log](native_link_loss_b01_p78_20260909/task.log).
+
+Direct collection checks established 1024 training episodes, 128 final episodes,
+1152 explicit resets, 4 additional constructor resets, 294912 completed team steps,
+1474560 base agent forwards, 1392640 learned-gate agent forwards, 512 rollout records and
+2048 Adam records. Each T/G training reset panel is exactly 890101000–890101511;
+all four final panels are exactly 890102000–890102031 in episode order. Every episode
+has 256 steps and S=256J. Gate aggregates recomputed from episode rows match summary.
+Every fixed contrast's mean, sample-SD/√32 SE, signed rule and quarter-S condition were
+recomputed directly from retained episode pairs and matched. These are post-collection
+read-only arithmetic/output checks, not extra environments, fits, tests or evaluation.
+
+## Native endpoint and verbatim card rules
+
+Native units remain `S = sum_t r_team[t]`, `J = S/256`. Arm means:
+
+| Arm | Final mean J |
+|---|---:|
+| T | 0.2344827282 |
+| G | 0.1975140229 |
+| C | 0.1673014978 |
+| F | 0.2635633631 |
+
+Card rule: **UP if mean difference >0.01 J; DOWN if <−0.01 J; otherwise WITHIN**.
+The quarter-unit test is separately **mean difference >0.25 S**.
+
+| Fixed paired contrast | Mean J difference | Conditional SE J | Mean S difference | Rule | >0.25 S |
+|---|---:|---:|---:|---|---|
+| T−C (primary) | +0.0671812303 | 0.0115352194 | +17.1983950 | UP | yes |
+| T−F (primary) | −0.0290806349 | 0.0105070125 | −7.4446425 | DOWN | no |
+| T−G | +0.0369687053 | 0.0111757440 | +9.4639885 | UP | yes |
+| G−C | +0.0302125251 | 0.0128636323 | +7.7344064 | UP | yes |
+| G−F | −0.0660493402 | 0.0106243579 | −16.9086311 | DOWN | no |
+
+Primary transparent summary `min(mean(T−C),mean(T−F))` is **−0.0290806349 J**
+(−7.4446425 S). It is a minimum of panel means, not an episode-wise oracle; no naive
+selected-max SE is attached. Each fixed-contrast SE uses 32 paired joint episodes,
+conditional on the single matched training instance. These numbers do not estimate
+training-seed population uncertainty. All adverse and favorable outcomes are retained.
+
+## Gate exposure and parameter movement
+
+| Arm/phase | Opportunities | Apply on opportunity | Retrace | Distinguishable b/c |
+|---|---:|---:|---:|---:|
+| T train | 51834 | 20413 | 31421 | 51834 |
+| T final | 3338 | 891 | 2447 | 3338 |
+| G train | 50076 | 22991 | 27085 | 50076 |
+| G final | 2629 | 1353 | 1276 | 2629 |
+| F final | 3670 | 0 | 3670 | 3670 |
+
+C does no anchor matching by design; its zero opportunity counter means **not measured**,
+not an absence of possible link-loss events. C always sends the base proposal. The apply
+counts above concern eligible gate choices; every ineligible step sends the base as well.
+Both gate learners received 1024 Adam updates, with finite nonzero gate displacement:
+
+| Arm/group | Initial norm | Absolute displacement | Relative displacement |
+|---|---:|---:|---:|
+| T gate | 9.3525381 | 2.8876708 | 0.3087580 |
+| T common final projection | 0 | 0.2287203 | not defined |
+| T critic | 9.2879753 | 6.2130876 | 0.6689389 |
+| G gate | 13.1903706 | 1.9953898 | 0.1512762 |
+| G common final projection | 0 | 0.0513526 | not defined |
+| G residual final projection | 0 | 0.0459827 | not defined |
+| G critic | 9.2879753 | 6.7530994 | 0.7270798 |
+
+Full common/residual path movement remains in summary. Gate movement is measured
+separately from critic movement; neither substitutes for the signed native outcomes.
+
+## Remaining boundary
+
+No scientific execution or technical acceptance gap remains in this allocated comparison.
+The previously reported runtime rejection still prevents cleanup of the single owned
+synthetic publication scratch directory; CM retains ownership and has not retried or
+bypassed that rejection. The frozen outcome-informed base choice, one fitted instance,
+private observed-coordinate ambiguity exclusions and approximate realized retrace limit
+the claim as stated in the card. No scientific interpretation, new object, additional
+training instance, native diagnostic panel or tuning is selected by this technical return.
+DM owns scientific intake; Root owns accepted integration and execution-worktree reclamation.

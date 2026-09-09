@@ -1,0 +1,54 @@
+=== Task 'acvc-p78-native-link-loss-8901-f42902116' started at 2026-09-09T19:06:13+08:00 ===
+{
+  "assessed_at": "2026-09-09T11:06:13.874723Z",
+  "available_physical_bytes": 15630286848,
+  "captured_at": "2026-09-09T11:06:13.874425Z",
+  "cgroup_headroom_bytes": null,
+  "cgroup_memory_current_bytes": null,
+  "cgroup_memory_max_bytes": null,
+  "effective_available_bytes": 15630286848,
+  "effective_floor_pass": true,
+  "failure_reasons": [],
+  "measurement_source": "/proc/meminfo",
+  "minimum_available_bytes": 4294967296,
+  "passed": true,
+  "physical_floor_pass": true,
+  "schema_version": 1
+}
+{"arm": "T", "rollouts": 16, "team_steps": 8192, "process_wall_s": 10.63409322296502}
+{"arm": "T", "rollouts": 32, "team_steps": 16384, "process_wall_s": 19.835526573995594}
+{"arm": "T", "rollouts": 48, "team_steps": 24576, "process_wall_s": 28.978329434990883}
+{"arm": "T", "rollouts": 64, "team_steps": 32768, "process_wall_s": 38.222151635971386}
+{"arm": "T", "rollouts": 80, "team_steps": 40960, "process_wall_s": 47.53093919396633}
+{"arm": "T", "rollouts": 96, "team_steps": 49152, "process_wall_s": 56.865217184997164}
+{"arm": "T", "rollouts": 112, "team_steps": 57344, "process_wall_s": 66.10783017997164}
+{"arm": "T", "rollouts": 128, "team_steps": 65536, "process_wall_s": 75.33822839899221}
+{"arm": "T", "rollouts": 144, "team_steps": 73728, "process_wall_s": 84.55729398096446}
+{"arm": "T", "rollouts": 160, "team_steps": 81920, "process_wall_s": 93.81782493495848}
+{"arm": "T", "rollouts": 176, "team_steps": 90112, "process_wall_s": 103.3949567739619}
+{"arm": "T", "rollouts": 192, "team_steps": 98304, "process_wall_s": 112.74067742895568}
+{"arm": "T", "rollouts": 208, "team_steps": 106496, "process_wall_s": 121.99510899599409}
+{"arm": "T", "rollouts": 224, "team_steps": 114688, "process_wall_s": 131.29035049898084}
+{"arm": "T", "rollouts": 240, "team_steps": 122880, "process_wall_s": 140.6619716999703}
+{"arm": "T", "rollouts": 256, "team_steps": 131072, "process_wall_s": 150.05889524100348}
+{"completed_arm": "T", "team_steps": 139264, "process_wall_s": 158.56885723996675}
+{"arm": "G", "rollouts": 16, "team_steps": 147456, "process_wall_s": 168.8621754939668}
+{"arm": "G", "rollouts": 32, "team_steps": 155648, "process_wall_s": 179.1726567519945}
+{"arm": "G", "rollouts": 48, "team_steps": 163840, "process_wall_s": 189.44088721595472}
+{"arm": "G", "rollouts": 64, "team_steps": 172032, "process_wall_s": 199.68129287695047}
+{"arm": "G", "rollouts": 80, "team_steps": 180224, "process_wall_s": 210.02298859297298}
+{"arm": "G", "rollouts": 96, "team_steps": 188416, "process_wall_s": 220.40644056996098}
+{"arm": "G", "rollouts": 112, "team_steps": 196608, "process_wall_s": 230.6285373029532}
+{"arm": "G", "rollouts": 128, "team_steps": 204800, "process_wall_s": 240.88213447999442}
+{"arm": "G", "rollouts": 144, "team_steps": 212992, "process_wall_s": 251.20046792400535}
+{"arm": "G", "rollouts": 160, "team_steps": 221184, "process_wall_s": 261.4805011129938}
+{"arm": "G", "rollouts": 176, "team_steps": 229376, "process_wall_s": 271.76568117697025}
+{"arm": "G", "rollouts": 192, "team_steps": 237568, "process_wall_s": 281.9840568979853}
+{"arm": "G", "rollouts": 208, "team_steps": 245760, "process_wall_s": 292.1896891569486}
+{"arm": "G", "rollouts": 224, "team_steps": 253952, "process_wall_s": 302.48259778897045}
+{"arm": "G", "rollouts": 240, "team_steps": 262144, "process_wall_s": 312.7246319410042}
+{"arm": "G", "rollouts": 256, "team_steps": 270336, "process_wall_s": 322.98416893498506}
+{"completed_arm": "G", "team_steps": 278528, "process_wall_s": 332.15502091596136}
+{"completed_arm": "C", "team_steps": 286720, "process_wall_s": 337.4184568589553}
+{"completed_arm": "F", "team_steps": 294912, "process_wall_s": 343.6495530109969}
+=== Task 'acvc-p78-native-link-loss-8901-f42902116' exited with code 0 at 2026-09-09T19:12:13+08:00 (Duration: 360s) ===
