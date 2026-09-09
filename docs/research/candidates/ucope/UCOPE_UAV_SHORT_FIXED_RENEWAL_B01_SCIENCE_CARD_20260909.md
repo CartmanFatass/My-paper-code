@@ -171,3 +171,26 @@ Independent semantic review examines these changes and focused evidence.
 assigns the original CM the complete implementation/check/review, committed
 exact remote launch, sole observation and technical collection batch in the
 same codex/ucope checkout. No intermediate approval handshake.
+
+## 8. Observed P82 completion — 2026-09-09
+
+**Valid complete WITHIN**, new 8101 at source
+`d99ae3c73e9c6ee73638c8a20afe748ce97b77ec`. All 286720 native steps,
+2048 Adam and 96 final evaluations completed in **315.65 s** outer wall.
+Prospective F−G **+0.008551004914111454**, conditional SE
+**0.008905535922158366**, is **0.001448995085888546 below +0.01**.
+F−H **+0.02854870179583208** and G−H **+0.019997696881720626** remain
+separate gains. All signs and old primary identities are preserved.
+
+Actual F two-step selections total 231929, four-step selections zero, with
+correct expiry/categorical credit and fixed whole head plus real actor/critic
+learning. Forecast F−G>0.01 did not occur; F−H>0.01 occurred. Brier losses
+0.2025/0.16, mean **0.18125**; owner prediction not taken. No pooled or causal
+support-change analysis or training-population interval was made.
+
+P82 ends at its all-outcome boundary. [Intake §§7–10](UCOPE_UAV_SHORT_FIXED_RENEWAL_B01_P82_INTAKE_20260909.md#7-dm-scientific-intake-against-the-card)
+recommends one separately allocated fresh fit of the same short-support F/G/H
+comparison. No next card/master/source/budget, run or Pro Send is created;
+prospective §§1–7 remain unchanged. See [E0 evidence](UCOPE_UAV_SHORT_FIXED_RENEWAL_B01_P82_RESULT_EVIDENCE_20260909.md),
+[durable summary](UCOPE_UAV_SHORT_FIXED_RENEWAL_B01_P82_RESULT_SUMMARY_20260909.json)
+and [Chinese brief](../../portfolio/owner/briefs/ucope/2026-09-09_UCOPE_UAV_SHORT_FIXED_RENEWAL_B01.md).

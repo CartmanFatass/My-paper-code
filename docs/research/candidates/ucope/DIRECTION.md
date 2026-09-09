@@ -51,17 +51,18 @@ remains dated provenance under the controlling evidence specification section 11
   The **2026-09-05 PRO_FINAL / PARK** of the same-draw retained-policy root-residual
   localization family and its numerical-locus dependency remains unchanged.
   See the [Convergence intake](UCOPE_UAV_INTERFACE_CONVERGENCE_INTAKE_20260907.md).
-- Latest bounded B observation: **2026-09-09 fixed renewal B03 P81,
-  COMPLETE / DOWN**. New 8001 gives prospective F−G
-  **−0.021798883942210363**, conditional SE **0.010646977126718544**;
-  F−H **+0.015269670011827153** and G−H **+0.03706855395403751** remain
-  separate native gains. The latest feedback loss repeats P80's adverse
-  F−G ordering while both learned means beat hover. F's whole initial duration
-  head remained fixed with real velocity/critic learning. No stable harm or
-  superiority follows. P80 remains F−H-primary UP; P78/P79's positive F−G
-  primaries, P79's negative hover points and old descriptive n=2 remain.
-  No new pooled primary, cross-instance mean/SD or population interval is
-  created. See [P81 intake](UCOPE_UAV_FIXED_RENEWAL_B03_P81_INTAKE_20260909.md),
+- Latest bounded B observation: **2026-09-09 short fixed renewal B01 P82,
+  COMPLETE / WITHIN**. New 8101 uses fixed {1,2} support, half each, and gives
+  prospective F−G **+0.008551004914111454**, conditional SE
+  **0.008905535922158366**; F−H **+0.02854870179583208** and G−H
+  **+0.019997696881720626** remain separate gains. The feedback point is
+  positive but below the selected 0.01 scale. F's whole duration head stayed
+  fixed with real actor/critic learning. This does not identify a shortening
+  effect or stable advantage. Earlier {1,4} P81 F−G DOWN, P80 F−H-primary UP
+  with feedback loss, P78/P79 F−G UPs and P79 hover losses/n=2 remain.
+  No new pooled primary, cross-instance mean/SD or population interval is made.
+  See [P82 intake](UCOPE_UAV_SHORT_FIXED_RENEWAL_B01_P82_INTAKE_20260909.md),
+  [P81 intake](UCOPE_UAV_FIXED_RENEWAL_B03_P81_INTAKE_20260909.md),
   [P80 intake](UCOPE_UAV_FIXED_RENEWAL_HOVER_B01_P80_INTAKE_20260909.md),
   [P79 intake](UCOPE_UAV_FIXED_RENEWAL_B02_P79_INTAKE_20260909.md),
   [P78 intake](UCOPE_UAV_FIXED_RENEWAL_B01_P78_INTAKE_20260909.md) and
@@ -97,10 +98,11 @@ remains dated provenance under the controlling evidence specification section 11
 ## Scientific question
 
 On the selected fixed-five-UAV, 256-step task, can renewable velocity commitment
-of one or four primitive steps, selected at each owner's own expiry using either
-a learned action-conditioned duration law or a fixed stochastic law, improve complete time-average
+at each owner's own expiry improve complete time-average
 team native service return over a recurrent PPO controller with the same free local
-observations and every legal velocity action available at every step? Movement can
+observations and every legal velocity action available at every step? The current
+fixed stochastic support is one or two primitive steps; prior learned and fixed
+one-or-four-step treatments retain their own evidence. Movement can
 change subsequent local information and service opportunities. The strongest null
 is competent ordinary feedback control doing the useful movement and information
 use itself. A positive two-arm comparison would support only the package: direct
@@ -144,7 +146,52 @@ without a distinct count-state architecture because RAW contains the sufficient
 count. The direct-service alternative remains separated by the frozen
 `Gamma=I+D` decomposition and analytic `D≈-0.02` boundary.
 
-## Current scientific position — 2026-09-09 fixed renewal B03 repeats the feedback loss
+## Current scientific position — 2026-09-09 short fixed renewal B01 stays within the effect band
+
+Fresh matched instance 8101 is **valid WITHIN** on prospective F−G:
+**+0.008551004914111454**, conditional evaluation SE **0.008905535922158366**,
+0.001448995085888546 below +0.01. F−H **+0.02854870179583208** and G−H
+**+0.019997696881720626** are separate native gains. The [durable result](UCOPE_UAV_SHORT_FIXED_RENEWAL_B01_P82_RESULT_SUMMARY_20260909.json)
+retains all 96 returns, three vectors, actual support/credit exposure and old
+points with their original primaries and conditional SEs. No new cross-instance
+mean/SD, pooled primary or training-population interval is introduced.
+
+The strongest support for the amended package is useful sampled F−H after
+real learning and positive F−G. The strongest contradiction to an above-scale
+feedback advantage is the WITHIN primary with 12 adverse paired episodes.
+G also beats hover. These points do not establish tuned comparator competence,
+equivalence, stable superiority/harm or why the old {1,4} fits sometimes lost.
+P78/P79 gains, P79 hover losses, P80/P81 feedback losses and P77 T losses remain.
+
+The entire F head stayed fixed, while its velocity actor and critic learned.
+Private free observation → owner's action at expiry → short held motion and
+later service/local information → masked optimizer exposure and partner
+responses → native return remains the proposed package path. Useful ordinary
+motion, altered action opportunities and finite learning/evaluation variation
+are surviving alternatives. This fit separates neither direct service from
+information value nor duration support from a new training history.
+
+The next recommended discriminator is **one separately allocated fresh fit
+of the same short fixed {1,2} F/G/H comparison**, F−G primary and both hover
+contrasts. One useful native result with a positive but below-MEI feedback
+point supports testing another learning history before changing support again.
+This is a bounded performance follow-up with all signs retained, not a required
+positive-replication gate or an exact causal prerequisite. The verified source
+grounding in [intake §8](UCOPE_UAV_SHORT_FIXED_RENEWAL_B01_P82_INTAKE_20260909.md#8-bounded-interpretation-grounding-and-predictions)
+is reused without a new library-wide or paper-derived UAV claim.
+
+Known work stays **286720 native steps / 2048 Adam / 96 evaluations** and
+F head bounds **2007040–4014080 rows**. Actual current work was 2682298 head
+rows and **315.65 s complete wall**; this is a reference, not a future timing
+guarantee or controlled efficiency comparison. Headroom remains absent,
+recasts 1. P82 ends here: no next card/master/source/budget, run, Pro Send,
+recast, C promotion, family or Portfolio disposition is created.
+
+See [card](UCOPE_UAV_SHORT_FIXED_RENEWAL_B01_SCIENCE_CARD_20260909.md),
+[E0 evidence](UCOPE_UAV_SHORT_FIXED_RENEWAL_B01_P82_RESULT_EVIDENCE_20260909.md)
+and [DM intake §§7–10](UCOPE_UAV_SHORT_FIXED_RENEWAL_B01_P82_INTAKE_20260909.md#7-dm-scientific-intake-against-the-card).
+
+## Previous scientific position — 2026-09-09 fixed renewal B03 repeats the feedback loss
 
 The fresh matched instance 8001 is **valid DOWN** on its prospective F−G
 primary: **−0.021798883942210363**, conditional evaluation SE
