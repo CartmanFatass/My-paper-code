@@ -4,7 +4,7 @@
 
 ## 1. 建议先做什么
 
-**建议以两项小规模实证比较作为下一轮重点：FOLR 检查重置收益是否与成员事件的时机有关；UCOPE 检查短保持策略相对逐步反馈的收益是否随训练预算改变。** 把学习曲线直接放进这项算法比较，先做一个新训练对、连续训练到 2048 episode；暂不采用 Claude 的 3×8192 episode 主机能力普查。ACVC 的固定 retrace 发现值得保留并检查可复用性，VSP03 可作为便宜的预算敏感性候选。FSD 需要纠正诊断，不能以“原终点关闭了机制”为理由直接重开。
+**建议以两项小规模实证比较作为下一轮重点：FOLR 检查重置收益是否与成员事件的时机有关；UCOPE 检查短保持策略相对逐步反馈的收益是否随训练预算改变。** 把学习曲线直接放进这项算法比较，先做一个新训练对、连续训练到 2048 episode；暂不采用 Claude 的 3×8192 episode 主机能力普查。交付前主仓库已分配 FOLR 第三个同配方训练对，本文三臂建议是该既有分配之后、结合其结果再判断的候选，不替换该训练对。ACVC 的固定 retrace 发现值得保留并检查可复用性，VSP03 可作为便宜的预算敏感性候选。FSD 需要纠正诊断，不能以“原终点关闭了机制”为理由直接重开。
 
 Claude 抓住了两个实际问题：不少比较缺少充分的训练预算记录，FOLR 的最终评价噪声不小。但它把这些问题进一步推成“主机整体不会学”“先证明能力再研究机制”，证据不够；其 FSD、RCLE 和部分统计解读也需要修改。Pro 专项复审的总体原则更可取：保留有限实验事实，缩小解释，分别处理科学负结果和技术缺失；仍然优先考虑能改变下一步选择的真实学习实验。
 
@@ -16,14 +16,14 @@ Claude 抓住了两个实际问题：不少比较缺少充分的训练预算记�
 
 本轮实际读到一份第三方规划答复，即 [Claude 增强版回复](RESPONSE_CLAUDE_FABLE_WITH_SPECS_20260909.md)，以及十个相关方向的 Pro 回复和 [Pro 科学有效性专项复审](../20260909_foundations_special_review/archive/RESPONSE.md)。背景包括 [Portfolio](../../PORTFOLIO.md)、[证据规范](../../../specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md) 的相关类别与 §11、工程范围和运行时规范、[FOUNDATIONS](../../../../rl-marl-foundations-20260907/FOUNDATIONS.md) 及四篇专题。对改变结论的争点补查了卡、结果和直接源码；没有重新运行学习器、环境或评价器。
 
-主仓库阅读基线是 `aae3f2ac89d91d6584732862df184e19b11bcd57`。第三方原提示的科学截止点是 `4b997913e2a7ea91391058e40d4781fd9c0a78bc`；以下两项在该条件计划之后已经形成结果。为避免把正在编辑的草稿当成决定，只使用注明版本的已提交文件：
+主仓库初读基线是 `aae3f2ac89d91d6584732862df184e19b11bcd57`；交付前补查了 `4f216bc9e` 已集成的新 intake 和原研究任务分配。第三方原提示的科学截止点是 `4b997913e2a7ea91391058e40d4781fd9c0a78bc`；以下两项在该条件计划之后已经形成结果。为避免把正在编辑的草稿当成决定，只使用注明版本的已提交文件：
 
 | 结果 | 已读事实 | 对后续方案的影响 |
 | --- | --- | --- |
 | UCOPE normalization /8501 | normalized−raw = **−0.0047834239**，条件评价 SE **0.0115532614**，原卡读法 WITHIN。normalized/raw/H 分别 **0.1512980461 / 0.1560814700 / 0.1706160337**。 | 归一化没有在这一个实例带来所选尺度的点增益，两臂均低于 H。DM 已选择不做不变的 normalization 后续；不能仍按“若 UP 就用 normalized”安排。下一候选使用 raw 的理由是保留已知配方、检验另一问题，并非证明 raw 普遍更优。 |
-| FOLR public-lifecycle B02 | RETAIN/RESET = **1.3278125 / 3.250625**；RETAIN−RESET = **−1.9228125**，完整技术结果落入 RESET_ABOVE_MEI。B01 为 **−2.0021875**。 | 两个独立训练对都出现约 2 个原生回报单位的 RESET 优势，足以提高“比较重置时机”的边际价值；仍不证明总体稳定优势或遗忘机制。B02 科学 intake 由原 DM 负责，本报告不替其写入决定。 |
+| FOLR public-lifecycle B02 | RETAIN/RESET = **1.3278125 / 3.250625**；RETAIN−RESET = **−1.9228125**，科学验收为有效 B、RESET_ABOVE_MEI。B01 为 **−2.0021875**。 | 两个独立训练对都出现约 2 个原生回报单位的 RESET 优势，足以提高“比较重置时机”的边际价值；仍不证明总体稳定优势或遗忘机制。原 DM intake 已集成 `71c781aec`；Root 已另分配一个不变两臂新实例。 |
 
-UCOPE 的补充科学结果与 intake 读取于方向分支提交 [860f98bf6](https://github.com/CartmanFatass/My-paper-code/blob/860f98bf6ea4ce8882ccd340e40af3b0af7eed0c/docs/research/candidates/ucope/UCOPE_UAV_FEEDBACK_VALUE_NORMALIZATION_B01_8501_RESULT_EVIDENCE_20260909.md)，执行源为 `7c88fb8405c75339e9634b78f1ef6de770f24e31`；主仓库也已有[终态执行证据](../../../candidates/ucope/UCOPE_UAV_FEEDBACK_VALUE_NORMALIZATION_B01_8501_EXECUTION_EVIDENCE_20260909.md)。FOLR B02 使用已提交的 [429e4df7b 技术证据](https://github.com/CartmanFatass/My-paper-code/blob/429e4df7bbb1712ffe98917ca50183093374203d/docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_B02_RESULT_EVIDENCE_20260909.md)，执行源为 `434f10cf95f16dd342cbf754382aa76155fcd2b7`。这些分支文件在本报告阅读时尚未全部集成 main；没有把其他会话的未提交内容纳入结论。
+UCOPE 的补充科学结果与 intake 初读于方向分支提交 [860f98bf6](https://github.com/CartmanFatass/My-paper-code/blob/860f98bf6ea4ce8882ccd340e40af3b0af7eed0c/docs/research/candidates/ucope/UCOPE_UAV_FEEDBACK_VALUE_NORMALIZATION_B01_8501_RESULT_EVIDENCE_20260909.md)，执行源为 `7c88fb8405c75339e9634b78f1ef6de770f24e31`；主仓库也已有[终态执行证据](../../../candidates/ucope/UCOPE_UAV_FEEDBACK_VALUE_NORMALIZATION_B01_8501_EXECUTION_EVIDENCE_20260909.md)。FOLR B02 使用已提交的 [429e4df7b 技术证据](https://github.com/CartmanFatass/My-paper-code/blob/429e4df7bbb1712ffe98917ca50183093374203d/docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_B02_RESULT_EVIDENCE_20260909.md)，执行源为 `434f10cf95f16dd342cbf754382aa76155fcd2b7`。交付前分别核对了 main 已集成的 [UCOPE intake](../../../candidates/ucope/UCOPE_UAV_FEEDBACK_VALUE_NORMALIZATION_B01_8501_INTAKE_20260909.md)、[FOLR intake](../../../candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_B02_INTAKE_20260909.md)与 `83f3dfc19` 的分配记录。没有把其他会话的未提交内容纳入结论。
 
 Claude 的 normalization UP 概率 0.55 在这次结果上没有命中；这只是一个预测事件。当前只有一份增强版答复，且作者披露了旧上下文，不能据此评价不同模型的总体能力，或归因于“读了基础知识所以更好”。
 
@@ -89,7 +89,7 @@ ACVC 的 F−C **+0.09626/+0.10784** 值得保留，但两次 native 比较都�
 
 | 方向 | 当前证据最能支持什么 | 后续建议及改变建议的证据 |
 | --- | --- | --- |
-| **FOLR / N3** | 两个 public-lifecycle 训练对都支持 RESET 的有限终点优势；真实成员事件、续存者与实际 reset 已记录。 | 优先准备三臂时机比较。若事件方案只胜 RETAIN 而不胜随机方案，保留状态管理价值、缩小事件专属解释；若新比较反向，保留混合性，不自动迁移。 |
+| **FOLR / N3** | 两个 public-lifecycle 训练对都支持 RESET 的有限终点优势；真实成员事件、续存者与实际 reset 已记录。第三个不变训练对已分配。 | 现有第三对按其分配推进，之后优先评估三臂时机候选。若事件方案只胜 RETAIN 而不胜随机方案，保留状态管理价值、缩小事件专属解释；若新比较反向，保留混合性，不自动迁移。 |
 | **UCOPE / K3** | fixed short F 相对 G 有收益，H 对照结果混合；normalization 这次 WITHIN。尚未证明学会了续约或付费取信息。 | 优先准备 raw F/G 的连续训练曲线比较。若差值随普通 G 改善而消失，就不再围绕 512 endpoint 复制固定律增益；若仍有任务收益，再问 learned duration。 |
 | **ACVC** | outcome-informed 固定 proposer 上的 F 规则有较大 native 收益；学习选择器输给 F。 | 保留 F 作为候选强对照。优先于新选择器的是检查 F 对另一个现有 proposer 和 dwell 控制是否有价值；若仅选中 fit 有效，不扩大主张。 |
 | **VSP03 / K1** | 三个 greedy G−R0 值混合，均远小于 .02；stochastic 执行更差；计算很便宜。 | 可排入小预算连续训练检查，非必做。若更长预算仍无有用收益，结束这个普通 G 用途；若出现收益，先做有限重复，不直接跳到 10 seed。 |
@@ -126,7 +126,7 @@ SCDMP 与 CRTO 的细节分别来自 [SCDMP Pro](../../../candidates/semigroup_c
 
 ### 5.2 FOLR：三臂比较重置时机
 
-**决策问题：** 在已有两次 RESET 优势之后，成员事件对齐是否比一种不对齐事件的重置律更有价值？类别 B/EXPLORE。三臂分别训练 RETAIN、RESET-on-event、RESET-random，保留 public lifecycle 信息、真正续存者集合、训练器与 20 步 TJ 主机。online 与 target unroll 必须使用各自同一状态规则；评价时不学习参数。
+**决策问题：** 在已有两次 RESET 优势之后，成员事件对齐是否比一种不对齐事件的重置律更有价值？类别 B/EXPLORE。当前第三个不变两臂实例的已分配额度不用于这项候选；其结果进入下一次选择，可能降低或提高三臂比较的价值。三臂分别训练 RETAIN、RESET-on-event、RESET-random，保留 public lifecycle 信息、真正续存者集合、训练器与 20 步 TJ 主机。online 与 target unroll 必须使用各自同一状态规则；评价时不学习参数。
 
 **随机对照必须在新输出出现前说清：** 对每个实际续存者，在读取下一个观测前按独立外生随机律决定是否清零；新生/不活动 slot 的共同清理保持不变。将实际 random-reset mask 随轨迹保存，供 online/target replay unroll 一致复用，不能在每次 replay 时重新抽样后继续把它当成原行为历史。若要称“同频率”，概率应由既有开发轨迹中“事件清零次数/全部合格续存者机会”的定义算出并冻结，随机流与交通和探索隔离。现有汇总的 `survivor_opportunities` 是事件下的机会数，并非所有时步续存者分母，不能直接据此宣称频率匹配。该分母能否从保留日志恢复，是卡冻结前一个具体未决事实；只读日志即可解决，不值得另开科学普查。
 
@@ -157,7 +157,7 @@ B02 的实测每臂约 753–768 秒，三臂训练加上述评价估计 **38–
 | 方向及明确窗口 | 一个有效结果自身的已知计算 | 已接受尝试计算/有效结果 | 主机或重要限制 |
 | --- | --- | --- | --- |
 | UCOPE /8501 | 303.11 s 完整过程 wall | 同窗口1接受/1有效：303.11 s | WSL CPU FP32/1线程；aggregate CPU未测 |
-| FOLR B02 | 1520.95 s 两臂完整 wall之和；CPU1523.30 s另记 | 2臂接受/1完整pair：1520.95 s | WSL CPU FP32/1线程；执行关键路径1622 s另记 |
+| FOLR B02 | 1520.95 s 两臂完整科学wall之和；含已测支持操作1528.79684 s | 2臂接受/1完整pair：科学wall1520.95 s；同支持窗口1528.79684 s | WSL CPU FP32/1线程；CPU1523.30 s、关键路径1622 s另记 |
 | FSD P72 | 1768.78 s 两臂wall之和；CPU7016.85 s另记 | 2臂接受/1完整pair：1768.78 s | WSL CPU FP32/4线程，不能与单线程wall直接排名 |
 | VSP-C1 B13 | 477.99 s 完整调用 | 1接受/1有效：477.99 s | WSL CPU FP32；aggregate CPU未测 |
 | SCDMP residual B01 | 323.02 s 完整pair过程 | 1接受/1有效：323.02 s | WSL CPU FP32/1线程；checks另记 |
@@ -171,12 +171,12 @@ B02 的实测每臂约 753–768 秒，三臂训练加上述评价估计 **38–
 
 ### 6.2 顺序是可修改的投入建议
 
-1. **先完成已存在的结果整理与决定边界对齐。** UCOPE /8501 已有科学 intake；FOLR B02 等原 DM 自身 intake 完成。复用 VSP-C1 既有曲线和本报告的 FSD 直接代码事实，不增设资格实验。
-2. **优先准备 FOLR 三臂和 UCOPE 曲线对。** 前者已有两次同向信号，后者同时回答预算与固定保持的实际用途。若只能先买一项，FOLR 的事件特异性比较有更直接的新信息，但必须把随机对照的频率/主张界限先写清。两项都准备好且资源允许，可独立推进。
+1. **先与已有结果和分配对齐。** UCOPE /8501 与 FOLR B02 的科学 intake 已集成；FOLR 第三个不变训练对已分配，沿其原卡推进，本报告没有改种子、预算、臂或终点。复用 VSP-C1 既有曲线和本报告的 FSD 直接代码事实，不增设资格实验。
+2. **准备 UCOPE 曲线对，并在 FOLR 现有第三对之后评估三臂候选。** 前者同时回答预算与固定保持的用途，后者在当前两次同向证据下有较直接的新信息，但要读入第三对的全部结果并先写清随机对照的频率/主张界限。UCOPE 准备不依赖 FOLR；两项候选各自成立且资源允许时可独立推进。
 3. **保留小额候选。** VSP03 有很低的已测学习成本；ACVC 有可复用的较大条件效应。选择哪项取决于准备成本和能否改变下一步，不由绝对效应大小直接决定。RCLE 的技术恢复与上述科学计算可以独立准备。
 4. **不购买不变的 SCDMP、VSP-C1、MGTAP、ACVC selector、CRTO 或 FSD 当前包重复。** 这是边际信息判断，不把所有方向整体 PARK，也不限制合理的新问题。
 
-两项核心比较估计 **约1–1.25小时 summed invocation wall**，不含尚未实测的工程工作，也不宣称并行 elapsed。把第二个 UCOPE 训练对作为条件追加，约再20–30分钟；不是提前买3×8192普查与后续3×8192算法比较。各臂上限、外推误差及实际资源 admission 在正式卡/执行中分别处理；43200秒UAV调查阈值不是可花预算。现有 remote-first、精确提交、逐调用内存准入、detached执行和指定观察责任足够，无需新建调度器或审批层。
+两项核心候选比较估计 **约1–1.25小时 summed invocation wall**，不含已分配的 FOLR 第三个不变训练对或尚未实测的工程工作，也不宣称并行 elapsed。把第二个 UCOPE 训练对作为条件追加，约再20–30分钟；不是提前买3×8192普查与后续3×8192算法比较。各臂上限、外推误差及实际资源 admission 在正式卡/执行中分别处理；43200秒UAV调查阈值不是可花预算。现有 remote-first、精确提交、逐调用内存准入、detached执行和指定观察责任足够，无需新建调度器或审批层。
 
 ### 6.3 下一阶段应形成算法问题，而不只累积诊断
 
