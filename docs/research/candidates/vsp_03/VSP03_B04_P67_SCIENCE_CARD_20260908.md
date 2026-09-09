@@ -186,3 +186,21 @@ the distinct admission and terminal siblings recorded by CM. The same CM remains
 sole observer through collection and reports the accepted handle to Root and DM.
 Every actual outcome returns for scientific intake under sections 2–4. The one
 120 s cap, fresh destination admission and no-resubmission stop remain unchanged.
+
+## 7. Sole P67 result and all-outcome intake
+
+The [P67 intake](VSP03_B04_P67_INTAKE_20260908.md) accepts the complete
+[seed-6 result](VSP03_B04_P67_RESULT_EVIDENCE_20260908.md) at evidence commit
+`52160094e2be449047a97fad2972a98cb192344c`. Greedy G minus R0 is
+**+0.0026123046875**, and minus R **+0.0017041015625**; stochastic G loses to both.
+The above-both-rules branch supports this small sampled greedy gain, with its
+execution-mode restriction. The low-confidence absolute-margin prediction matched.
+
+One G completed 128 real backward/Adam steps and all 20,480 joint episodes.
+Fresh admission passed, actual exits are 0 and complete manager-boundary wall is
+3.253184 s. The two prospective instances, seeds 5 and 6, now have mixed greedy
+signs; primary descriptive mean is -0.00568115234375, sample SD 0.011728719413.
+The small gain is retained without stable replacement or equivalence. Discovery
+seed 4 and the failed zero-exposure P64/P65 attempt remain separately preserved.
+The P67 allocation ends at this intake with no further submission or successor;
+B has no consumption state and no family/lifecycle/recast/UAV disposition changes.
