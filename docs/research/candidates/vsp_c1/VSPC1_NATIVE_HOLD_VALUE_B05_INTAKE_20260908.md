@@ -567,13 +567,15 @@ Added engineering work for a later binding is not allocated or timed here.
    Owner-delegated decision (unattended,2026-09-03 instruction): (a),
    **OWNER_DELEGATED within P70**. This ends the allocation, without B consumption
    or a family, recast, park, lifecycle, priority, C or formal UAV-entry decision.
-4. **Later-task advice, object-tier selection; allocation is Portfolio tier.**
+4. **Later-task advice, object-tier selection.**
    Options: (a) recommend one later independent pair of this unchanged comparison;
    (b) change the comparator again; (c) replace training with an exact diagnostic
    or promote the claim. Recommend/select(a) as direction-local advice.
    Owner-delegated decision (unattended,2026-09-03 instruction): (a),
-   **OWNER_DELEGATED advice only**. Portfolio allocation is
-   **DM_RECOMMENDATION / NOT_EXECUTED**. No missing direction-tier decision exists.
+   **OWNER_DELEGATED advice only**. The later task was **NOT_EXECUTED in P70**.
+   Root's administrative assignment does not make this scientific next-rung
+   choice Portfolio tier; [P71's clarification](VSPC1_NATIVE_HOLD_VALUE_B06_INTAKE_20260908.md#1-assignment-and-authority-clarification)
+   corrects that earlier wording. No missing direction-tier decision exists.
 
 ### Owner surfaces and clean Root return
 
@@ -588,13 +590,14 @@ the audit; the owner CLI created
 for the later-task recommendation, with null `auto_applied` and its
 [packet](VSPC1_NATIVE_HOLD_VALUE_B05_FOLLOWUP_OWNER_PACKET_20260908.json).
 The loop does not wait for a reply. Owner flags: absent tuned headroom, n=1,
-near-MEI conditional noise, H/adverse qualifications and unexecuted Portfolio
-allocation advice. No critic dissent or second recast is created.
+near-MEI conditional noise, H/adverse qualifications and then-unexecuted later-task
+advice. The historical item011 filing does not require owner ratification for an
+object-tier continuation. No critic dissent or second recast is created.
 
 DM returns the pushed E0/intake/card/analysis/brief/audit/DIRECTION delivery to
 Root through the configured relay once. Root accepts/integrates the named
-direction commits, reconciles already integrated work, and uses the supplied
-Portfolio route for any later assignment. CM's accepted observation is terminal;
+direction commits, reconciles already integrated work, and administratively
+assigns later authorized work. CM's accepted observation is terminal;
 Root observation, transfer or relaunch is unnecessary. No scientific blocker
 remains for this completed P70 deliverable; the proposed later pair has no
 allocation in this task.

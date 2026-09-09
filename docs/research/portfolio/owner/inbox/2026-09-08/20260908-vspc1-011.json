@@ -73,5 +73,17 @@
     "verdict_text": "Recommend a later single independent matched training pair using this unchanged\nnormalized GATED/width-133 MLP/H comparison, retaining every outcome. A new\nbounded assignment must declare its fresh key and allocation; P70 selects no\nnew card, key, code dispatch or run.",
     "source": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B05_INTAKE_20260908.md"
   },
-  "starred": true
+  "starred": true,
+  "approval_correction": "P70将后续行政分配写成Portfolio层，且把本建议存为portfolio项，分类措辞不准确；保留原项和null auto_applied，不伪造所有者回复。P70额度已结束，P71另记新额度。",
+  "execution_history": [
+    {
+      "at": "2026-09-09T05:11:18+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/decisions/2026-09-03-unattended-delegation.md",
+      "record": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B06_INTAKE_20260908.md",
+      "state": "applied",
+      "summary": "P71已在既有对象层委托下选择不变比较的新独立训练对；Root分配完整任务，不构成新的科学Portfolio层决策。这里的实际依据是OWNER_DELEGATED，没有新的Pro裁决或所有者ratify。",
+      "correction": "P70将后续行政分配写成Portfolio层，且把本建议存为portfolio项，分类措辞不准确；保留原项和null auto_applied，不伪造所有者回复。P70额度已结束，P71另记新额度。"
+    }
+  ]
 }
