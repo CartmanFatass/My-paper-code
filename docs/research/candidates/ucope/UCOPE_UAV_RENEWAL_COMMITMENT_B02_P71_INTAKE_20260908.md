@@ -199,3 +199,122 @@ exit $LASTEXITCODE
 Scientific execution/admission has not yet occurred at this preparation record. P70 evidence
 and its test/scientific checkouts remain untouched. Root owns later archive/reclamation of
 P71 test/scientific checkouts and wrapper after terminal evidence and DM intake are preserved.
+
+## 6. CM terminal execution and technical acceptance
+
+**Technical acceptance: PASS.** Exactly one accepted scientific submission completed for
+master 7401, source `7adc5aae35542ba35b4b8a2c07fc8285e958ce4d`. The source acceptance and
+literal payload were committed/pushed at `0f65cf3771bbc119f303afd378f6132a44e6589a` before
+executing the exact `preparation/submit.ps1` file. Immediately prior reconciliation found
+no accepted handle or output root. No retry, resume, replacement master, extra evaluation,
+source change, second submission or parallel observer followed. CM retained observation,
+collected the same handle's outputs and now returns every outcome to DM.
+
+Supervisor `ucope-uav-renewal-b02-7401-p71-20260908` finished exit 0, PID 3026239,
+start epoch 1788933915, inactive tmux. Raw boundary lines:
+
+```text
+=== Task 'ucope-uav-renewal-b02-7401-p71-20260908' started at 2026-09-09T14:05:15+08:00 ===
+=== Task 'ucope-uav-renewal-b02-7401-p71-20260908' exited with code 0 at 2026-09-09T14:10:21+08:00 (Duration: 306s) ===
+```
+
+Canonical admission was independently successful at 2026-09-09T06:05:15.185521Z:
+physical and effective available memory both 15640408064 bytes exceed
+4294967296; both floor flags/pass are true and failure reasons empty. The supervised
+preflight preceded scientific root/RNG/model creation. Supervisor and scientific-root
+admission receipts are byte-identical. Subsequent ordinary observations recorded 146, 427, 
+718, 1034 complete episode rows on the same running PID, establishing actual learner progress
+separately from supervisor acceptance and resource admission.
+
+| Complete-path measurement | Observed value |
+| --- | ---: |
+| External whole wall, including admission/publication/exit | 306.04 s |
+| Runner whole wall | 296.60590592201333 s |
+| T complete arm wall | 158.1893359690439 s |
+| G complete arm wall, including H/final publication | 138.41656891599996 s |
+| Sum of measured arm wall | 296.60590488504386 s |
+| External peak RSS | 553464 KiB |
+| Aggregate CPU work | unmeasured |
+
+The serial study critical path is the external 306.04s. Outer/runner clocks have different
+boundaries; their difference is not assigned to an independently measured kernel/phase.
+Status COMPLETE, limits empty, cap_breach false. Both arms fit 1800s and whole fits 3600s.
+Admission and peak RSS are direct measurements; continuous resource telemetry was not collected.
+
+### Complete work, primary and phase counts
+
+All 1120 episodes, 512 rollouts and 1600 prescribed diagnostic rows are present: 286720 native
+steps, 2048 Adam calls, 96 final evaluations, 1120 explicit resets, 2 constructor resets and
+zero partial steps. Each T/G arm completed 512 training episodes/131072 native steps/256
+rollouts/1024 Adam calls, then 32 final stochastic evaluations; H completed 32. No additional
+native calls or trained arms were present. Readback verifies every reset association,
+configuration and seed binding, J=reward_sum/256, native three-contrast differences/SEs,
+phase/rollout event totals, finite numeric JSON and finite FP32 T/G checkpoints. Supervisor
+printed primary/counts match the native summary. Source stayed exact and clean at terminal;
+the executed wrapper retains the committed 707-byte LF digest.
+
+| New 7401 native contrast | Mean | Conditional evaluation SE |
+| --- | ---: | ---: |
+| T-G | 0.024658177040921356 | 0.011145715505143731 |
+| T-H | 0.03714831826363973 | 0.014042694092488053 |
+| G-H | 0.012490141222718373 | 0.009774298009822923 |
+
+Arm means: T=0.1848478520611129, G=0.16018967502019155,
+H=0.14769953379747316. All 96 native J values and three signed paired vectors
+are retained; SEs are conditional on these fitted policies over 32 paired final episodes.
+The primary uses 7401 alone, independent training n=1. No old 7301 outcome is pooled into it.
+DM owns the card's all-outcome scientific intake; source/runtime conformance establishes no
+stable training-population, causal, tuned-headroom, transfer or deployment claim.
+
+| T phase | Owned velocity/duration selections | Selected d4 | Actual suppressed decisions | Horizon-censored holds |
+| --- | ---: | ---: | ---: | ---: |
+| Training | 247346 | 137057 | 408014 | 1570 |
+| Final evaluation | 15261 | 8628 | 25699 | 99 |
+
+G has 655360 training/40960 final velocity decisions, with zero duration/suppression/censor
+counts; H has zero decisions. Actual per-episode selections+suppression equal 5*256 for T,
+and velocity/duration selections agree. All episode/rollout/phase totals match summary.
+The frozen actual path implies 1514598 T duration-head
+forward rows, or 3344232384 dense forward multiply-adds
+at 2208/row; these are arithmetic from actual selected counts, not a new performance probe.
+
+Stored T/G checkpoint totals 68553/66311 and T head 2242 (hidden 2176/final 66) match. Final norms
+match all reported exposure groups. T total displacement is 8.74242877960205;
+G total displacement is 8.507596969604492; T duration displacement
+is 0.8151726722717285, hidden 0.7989710569381714,
+final 0.16171500086784363. The zero-initial final layer retains null
+relative displacement. No minimum movement is an acceptance rule, and the artifact readback
+does not replay the training history or create new trajectories.
+
+### Collected artifacts and closeout boundary
+
+Local root in the authoring checkout: `temp/directions/ucope/exp/ucope-uav-renewal-b02-7401-p71-20260908`.
+All seven output SHA256 values independently read on the remote node match collected bytes:
+
+| Output | SHA256 |
+| --- | --- |
+| summary.json | `4a4f2b421e423d3e6ede7a470e2a65fa605a9418cbed252b6eb10fa4a45affbb` |
+| episodes.jsonl | `85580775387ceaaa43b40c72b7dc6ca2a24b5468f6f4a5bdbd8d3525af61883c` |
+| rollouts.jsonl | `010173663bc85f1ca3a6ecbfd5da0b4d4120477601f73c21833e08c1a1b51269` |
+| diagnostics.jsonl | `e1b04654f8d28a3f507d8295668440b959855f70c0253a220829a853df323c58` |
+| final_T.pt | `f9b4b38960ff0836bf2f32f6dc35bf027d17345a16a061f2db57136c9994de89` |
+| final_G.pt | `62be600de3749beb1b369363b9fbd9706c51766b63aa1163c43583bb8c63ac38` |
+| resource_admission.json | `d4e8a3943d56c987debb6388fbe49e2f5aea278dce633000655f89a5b6b0e8d4` |
+
+[Complete readback report](../../../../temp/directions/ucope/exp/ucope-uav-renewal-b02-7401-p71-20260908/collection-readback.json),
+[verification source](../../../../temp/directions/ucope/exp/ucope-uav-renewal-b02-7401-p71-20260908/verify_collection.py),
+[verification output](../../../../temp/directions/ucope/exp/ucope-uav-renewal-b02-7401-p71-20260908/verification-output.txt),
+[remote source/process/hash readback](../../../../temp/directions/ucope/exp/ucope-uav-renewal-b02-7401-p71-20260908/remote-readback.txt),
+[supervisor log](../../../../temp/directions/ucope/exp/ucope-uav-renewal-b02-7401-p71-20260908/supervisor/task.log) and
+[collected exact wrapper](../../../../temp/directions/ucope/exp/ucope-uav-renewal-b02-7401-p71-20260908/executed-wrapper.sh) retain direct evidence.
+Read-only JSON/tensor verification exited 0, without model, learner, evaluator, replay or
+new suite execution. No material implementation/count/native-publication/config/RNG/
+checkpoint/numeric/admission/cap gap remains. Aggregate CPU and unselected full event
+trajectories remain unmeasured; these do not alter the preserved native outputs.
+
+CM's cohesive assignment ends at this terminal technical acceptance and return to DM.
+The shared direction checkout/index is released with the pushed evidence commit. Root owns
+later archive/reclamation of the distinct P71 test/scientific checkouts and wrapper after
+DM intake/evidence preservation. Test scratch and source carrier packs were removed;
+scientific artifacts, P70 evidence and its checkouts were preserved. No successor, tuning,
+extra evaluation, retry or new independent pair follows from this completed allocation.
