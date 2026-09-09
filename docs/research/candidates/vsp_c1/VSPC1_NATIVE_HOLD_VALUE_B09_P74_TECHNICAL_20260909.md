@@ -26,3 +26,8 @@ Raw submission/admission receipts and staging tools remain in
 `temp/directions/vsp_c1/engineering/native_hold_value_b09_p74/`. Raw collection will be retained under
 `temp/directions/vsp_c1/collection/native_hold_value_b09_8402_4c9dc8b3de9b/`.
 Engineering scope section4: none. Shared source remained read-only.
+
+Terminal2026-09-09T08:35:20Z, exit0 and inactive tmux. Artifact checks PASS;
+whole483.27s, conservative arms256.3274s/244.2363s within caps.
+[E0](VSPC1_NATIVE_HOLD_VALUE_B09_RESULT_EVIDENCE_20260909.md) retains all outcomes.
+CM observation complete; one submission spent, zero remain; editing/index to DM.
