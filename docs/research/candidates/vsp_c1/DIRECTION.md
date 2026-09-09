@@ -465,3 +465,44 @@ additional evaluation of8301 or an exact maximum would not supply that unit.
 P70 ends at the completed intake: no successor card/key/run is allocated.
 Accepted family boundaries, recast count, lifecycle, priority, C status and
 formal UAV-entry determination remain unchanged.
+
+## Similarly sized ordinary critic: selected-scale gain did not recur — 2026-09-08
+
+The [B06 P71 intake](VSPC1_NATIVE_HOLD_VALUE_B06_INTAKE_20260908.md#6-p71-valid-result-intake-and-decisions)
+accepts a second independent matched training pair of the unchanged normalized
+GATED/width133 MLP/H comparison. Master8302 yields GATED−MLP=−.0066345182,
+conditional SE .0069821943: WITHIN under absolute MEI .01, with a negative
+point sign. GATED−H=+.0196776739 and MLP−H=+.0263121921; adverse episode
+counts are18/11/8 of32. The [E0](VSPC1_NATIVE_HOLD_VALUE_B06_RESULT_EVIDENCE_20260908.md)
+retains every outcome and full native exposure.
+
+Same-comparison8301/8302 primary differences are +.0165919114/−.0066345182,
+descriptive mean .0049786966 and sample SD .0164235659. Selected-scale positive
+separation did not recur in the second pair. This is not equivalence or a stable
+population result; per-pair evaluation noise and two-pair dispersion remain
+distinct. Both old normalized-width128 and old unnormalized regimes stay
+separate, including all prior H losses.
+
+Strongest support for a gated-package advantage remains8301's local UP against
+the same similarly sized ordinary critic. B06 retains positive learned GATED−H
+by mean, but MLP also exceeds H and leads GATED by point sign. Those native H
+gains therefore do not separate the gate from the ordinary null. Strongest
+contradiction to recurrence is8302's WITHIN/negative sign,18 adverse primary
+episodes and the two-pair mean below MEI. Neither two positive H means per arm
+nor parameter-count matching establishes comparator competence or mechanism
+attribution. H is untuned and matching tuned headroom remains absent.
+
+The opening duration → entity-owned hold/state → centralized value and joint
+optimization → local recurrent actor update → motion/service → native return
+path is unchanged. About1.147% of training rows have nonzero hold inputs.
+Initialization, gated geometry, shared clipping, value units, FP32 and partner
+co-adaptation remain explanations for the variable package result; movement
+and sparse exposure alone do not identify a competent action improvement.
+No specialized hold-credit, stable superiority, transfer or optimality claim.
+
+The next discriminator recommended is one later independent pair of this
+unchanged comparison, retaining both current outcomes. It addresses observed
+training-instance variation before changing the comparator again; it is not an
+all-positive or significance requirement. P71 ends with complete intake and
+allocates no further card/key/run. This is ordinary object-tier advice, with
+no family, recast, lifecycle, priority, C or formal UAV-entry change.
