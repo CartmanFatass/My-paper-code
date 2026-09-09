@@ -32,3 +32,9 @@ tmux active at 32s. Canonical actual-node admission at 06:09:59.320218Z passed
 both floors with 15,320,178,688 bytes available. This spends the one accepted
 submission allowance. CM retains sole observation; scientific source remains
 4e83312ea5d35db4472bbc821b0c2cf875e853b3. No retry/resubmission is allocated.
+
+Terminal fixed handle: exit 0 at 2026-09-09T06:15:12Z, inactive tmux.
+Artifact-only checks PASS, whole wall 313.50s and conservative arm bounds
+167.5752s /154.3772s within their original caps. [E0 evidence](VSPC1_NATIVE_HOLD_VALUE_B07_RESULT_EVIDENCE_20260908.md)
+retains all native primary/H/adverse identities, moments/exposure, hashes,
+resource and terminal receipts. Sole observation is complete, no second submission.
