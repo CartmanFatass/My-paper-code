@@ -1,6 +1,6 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-09. Research is **STOPPED / CLOSEOUT COMPLETE** under OWNER_DIRECT. All five current chains published restart handoffs; no successor dispatch until explicit owner restart. See the [current restart handoff](handoffs/2026-09-09-soft-stop-restart.md).
+Updated at: 2026-09-09. Research is **RESUMED** under OWNER_DIRECT “读取handoff docs然后继续科研任务”. The [P74 restart plan](handoffs/2026-09-09-research-resume-p74.md) defines current bounded work; the [completed soft stop](handoffs/2026-09-09-soft-stop-restart.md) preserves the preceding boundary.
 
 Historical restart context (superseded by the soft stop above): the [safe-pause handoff](handoffs/2026-09-08-safe-pause-handoff.md) records the completed boundary at 2026-09-09T00:27Z: UCOPE P61, VSP03 P64/P65 and VSPC1 P66 have completed collection/intake and integration. No live accepted handle or unfinished DM/CM closeout remains. The owner explicitly resumed research with “阅读handoff 继续开启科研”; the [P67 resume handoff](handoffs/2026-09-08-research-resume.md) supplies the new bounded assignments. Completed allocations are not replayed; each new scientific invocation still needs its recorded selection and fresh admission.
 
@@ -8,7 +8,7 @@ Root maintains this lifecycle/priority snapshot and [EXPERIMENT_TRACKING.md](EXP
 
 ## Lifecycle, priority and latest verified operational boundary
 
-The lifecycle/priority mapping below is preserved from the preceding snapshot. ACTIVE means admitted to the research queue; actual P67 work is recorded in tracking, not inferred from lifecycle. The current owner soft stop supersedes prior resume instructions; no exhausted or held allocation is revived. Family stops do not change a direction's lifecycle.
+The lifecycle/priority mapping below is preserved from the preceding snapshot. ACTIVE means admitted to the research queue; actual P74 work is recorded in tracking, not inferred from lifecycle. The explicit owner restart lifts the global stop with newly bounded assignments; exhausted allocations are not revived. Family stops do not change a direction's lifecycle.
 
 Rows with an intake link reflect the tracking/safe-pause sources checked for this update. For other directions, no newer operational state was verified in those sources: their lifecycle/priority and direction record are retained without turning an older plan into a current task. This is not a fresh scientific reaudit.
 

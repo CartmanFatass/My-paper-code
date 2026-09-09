@@ -2,7 +2,7 @@
 
 ## Current observation and return state — 2026-09-08
 
-Research is **STOPPED / CLOSEOUT COMPLETE** under OWNER_DIRECT 2026-09-09. All five current direction chains completed acceptance/intake and restart handoffs; accepted processes are terminal and their original observers finished collection. No new invocation or successor is authorized until explicit owner restart. The [restart handoff](handoffs/2026-09-09-soft-stop-restart.md) records accepted integration commits, exact direction handoffs, retained raw evidence and historical restrictions. No cancellation or process interruption occurred.
+Research is **RESUMED** under OWNER_DIRECT “读取handoff docs然后继续科研任务” on 2026-09-09. The [P74 restart plan](handoffs/2026-09-09-research-resume-p74.md) supplies new bounded work for MGTAP, VSPC1, FSD, UCOPE and VSP03. The [completed soft-stop handoff](handoffs/2026-09-09-soft-stop-restart.md) records terminal predecessor handles, retained evidence and restrictions; none is replayed. Actual native dispatches and newly accepted handles are recorded separately.
 
 Root owns planning and integration under [ROOT_OPERATIONS.md](../../project/ROOT_OPERATIONS.md). The assigned CM/Operator observes by default; explicit takeover follows [EXPERIMENT_MONITOR.md](../../project/EXPERIMENT_MONITOR.md). Independent Pro provider operations belong to Transport. Exact handles and receipt bindings below remain evidence. Detailed receipts are in [root-log/2026-09-08.md](root-log/2026-09-08.md); lifecycle and priority are in [PORTFOLIO.md](PORTFOLIO.md). The older tracker is preserved in [EXPERIMENT_TRACKING_THROUGH_P45_20260908.md](../../archive/operations/EXPERIMENT_TRACKING_THROUGH_P45_20260908.md).
 
