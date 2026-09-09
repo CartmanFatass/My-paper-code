@@ -3,7 +3,7 @@ Binding MARL structure: (b) temporal abstraction or termination, with five co-ad
 
 # VSPC1-NATIVE-HOLD-VALUE-B13 — B/EXPLORE, P80
 
-Current state: defined prospectively under Root's P80 allocation; no scientific submission yet.
+Current state: valid complete DOWN, scientifically intaken; the sole P80 submission ended, zero remain.
 Design authority is the complete [P79 Pro decision §§3–6](pro_packets/20260909_native_hold_value_post_b12_convergence/archive/RESPONSE.md)
 at `77687230cb1f3898e55c21d23c05ba1840d820ea`, accepted in the
 [P79 intake](VSPC1_NATIVE_HOLD_VALUE_P79_CONVERGENCE_INTAKE_20260909.md).
@@ -209,3 +209,54 @@ not decide whether the second runs. Integrity/resource/cap failure stops by actu
 Every outcome ends the allowance, not a B consumption state. Technical collection and full
 DM intake/Chinese brief retain every outcome, then return to Root for integration and the
 next unallocated recommendation. Root owns completed remote-worktree reclamation.
+
+## 7. Accepted implementation and actual execution
+
+CM source `23ebb0f5e22286d9ea77a145f980bedacc32d9da` implements §§2–4 with 62 new
+production lines and a 35-line runner. `intact_body=True` widens both ordinary bodies
+before GATED is wrapped; `separate_eval=True` isolates final-only evaluation without
+the old two-panel C schedule. The independent changed-boundary reviewer found no material
+issue. All 34 focused checks passed in 4.2679593 seconds whole; DM inspected the actual
+diff, source receipt and question-relevant coverage without rerunning them. Protected
+UCOPE/native/normalization/WideCritic source was unchanged.
+
+Literal seven-line wrapper commit `83b6e2f8c28cbf5e9925252c31057446cce3362e` and
+[staging evidence](VSPC1_NATIVE_HOLD_VALUE_B13_P80_STAGING_EVIDENCE_20260909.json)
+bind source above, CPU FP32/thread1/process1, and these actual locations:
+
+- Node/handle: `hmasd-wsl-node` / `vspc1_hold_value_b13_8601_23ebb0f5e222`, PID3052500.
+- Exact detached cwd: `/home/wu/hmasd-worktrees/vspc1-native-hold-value-b13-8601-23ebb0f5e222`.
+- Output: `/home/wu/projects/HMASD/temp/directions/vsp_c1/exp/native_hold_value_b13_8601_23ebb0f5e222`.
+- Admission: the same output prefix plus `_admission.json`, joined directly before the runner.
+
+Accepted 2026-09-09T12:49:54Z; admission at12:49:54.754938Z measured15323074560 bytes
+physical/effective available against4294967296 required. CM solely observed through
+terminal12:57:52Z, exit0/inactive tmux, native COMPLETE and publication readback complete.
+The [E0](VSPC1_NATIVE_HOLD_VALUE_B13_RESULT_EVIDENCE_20260909.md) and
+[technical record](VSPC1_NATIVE_HOLD_VALUE_B13_P80_TECHNICAL_20260909.md) were published
+at `5cc05738a6b49b95e3106cd6f9c1a0aa6af569ce`. Raw evidence retains all outcomes.
+
+## 8. Terminal scientific reading
+
+Applying the unchanged §4 rule gives **DOWN**, Delta_new **−.032068580497115584**,
+conditional SE **.010110683526267093**, with25/32 negative paired identities. Native
+means are GATED .14432349607139883, MLP .1763920765685144, H .1408296189671304.
+GATED−H is +.003493877104268443 with15 individual losses; MLP−H is
++.035562457601384025 with11 losses. Both learned means exceed H; neither that fact nor
+the comparison establishes tuned competence. See the [full scientific intake](VSPC1_NATIVE_HOLD_VALUE_B13_INTAKE_20260909.md#4-primary-reading-native-levels-and-uncertainty).
+
+Actual417792 steps/3072 Adam/96 evaluations/four constructors/two final768 checkpoints
+match the card. Both complete ordinary bodies are present with35467/34827 critic parameters.
+The gate moved .6176927089691162 absolutely; nonzero-r training rows were2235/2220 of
+196608 per arm. This exposure and parameter movement are not native performance benefits.
+
+Pro's NO_UP event occurred (p=.65, Brier .1225); DM's WITHIN event did not (p=.45,
+Brier .2025). DOWN remains distinct from WITHIN. Owner prediction was not taken.
+Whole wall477.99s, conservative complete arm bounds267.959493/231.922549s and peak
+RSS544.7109375MiB meet the declared caps. Aggregate CPU and component costs remain unmeasured.
+
+The local result favors the ordinary body. No automatic B13 follow-up is selected and
+no further invocation remains. Keeping the whole ordinary body did not prevent this
+instance's gate-package loss; prior deficit causes and broader gate usefulness remain
+unresolved. Family/lifecycle/priority/recast/class are unchanged. Root receives the result
+for integration and any separately allocated next decision; this intake sends no Pro request.

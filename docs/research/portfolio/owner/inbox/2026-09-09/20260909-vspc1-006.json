@@ -77,5 +77,15 @@
     "verdict_text": "Recommend and select (a): freeze the exact Pro-selected comparison with fresh master8601.",
     "source": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B13_SCIENCE_CARD_20260909.md"
   },
-  "starred": false
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-09T13:12:58+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/vsp_c1/pro_packets/20260909_native_hold_value_post_b12_convergence/archive/RESPONSE.md",
+      "record": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B13_INTAKE_20260909.md",
+      "state": "applied",
+      "summary": "P80唯一B13/master8601已完成：完整普通体加门最终DOWN，差-0.0320685805；所有H损失保留。Pro无UP预测命中、DM范围内预测未命中。按裁决局部倾向普通体，不自动续跑；Root负责整合及后续另行选择。没有新增owner回复或方向处分。"
+    }
+  ]
 }

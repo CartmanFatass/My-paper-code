@@ -823,3 +823,36 @@ prerequisite or new cost experiment is required. The claim ceiling remains one
 finite-budget native package signal/counterexample, not stable superiority,
 equivalence, unique hold credit, budget causality, C promotion, transfer or
 formal UAV entry. Recast count and Portfolio lifecycle/priority are unchanged.
+
+## Intact ordinary body plus gate: one final768 counterexample — 2026-09-09
+
+The [B13 intake](VSPC1_NATIVE_HOLD_VALUE_B13_INTAKE_20260909.md#4-primary-reading-native-levels-and-uncertainty)
+accepts the exact P79-selected additive comparison on fresh master8601. Both critics
+retain the complete136→128→133→1 ordinary body; GATED alone adds the640-parameter gate,
+for35467 versus34827 critic parameters. At final768 the native difference is
+**−.0320685805 (DOWN)**, conditional SE .0101106835, with25/32 adverse paired identities.
+Native means GATED .1443234961, ordinary MLP .1763920766, H .1408296190 give H margins
++.0034938771 and+.0355624576; GATED and MLP still lose15 and11 individual episodes to H.
+
+Keeping the ordinary body intact did not prevent a gate-package loss in this instance.
+The strongest support for favoring the ordinary body locally is the direct native deficit
+and larger attained H margin. Earlier512 gains and the single new training unit are the
+strongest reasons not to dismiss all hold-sensitive value structure. Older three negative
+C values, mixed512 signs, final-only768 deficits, H losses and quarantines retain their
+own protocols; this new final-only result is not a fourth C or a pooled old-protocol mean.
+
+The opening-duration/remaining-hold → centralized value/joint PPO → local recurrent actor
+→ native return path was exercised with unchanged information and fixed membership.
+Direct nonzero-r training exposure was1.1368%/1.1292%; absolute gate movement .61769
+establishes exposure, not benefit. Capacity, initialization, FP32 arithmetic, moments,
+shared clipping and partner co-adaptation survive as alternatives. The old650-parameter
+tradeoff's causal role remains unresolved, and a broader stable claim is unavailable.
+
+No automatic follow-up of this additive candidate is selected. The ordinary body is
+favored for this one realization; a separately selected fresh matched pair could test
+repeatability if the question is reopened. No new such allocation, family closure,
+recast, lifecycle/priority change, C promotion or formal UAV entry follows here.
+Tuned matching headroom remains absent and H remains untuned. The
+[E0](VSPC1_NATIVE_HOLD_VALUE_B13_RESULT_EVIDENCE_20260909.md) records complete source,
+counts and measurements; [DM analysis](results/native_hold_value_b13_8601_20260909/dm_analysis.json)
+preserves the native/H contrasts and forecast scoring.
