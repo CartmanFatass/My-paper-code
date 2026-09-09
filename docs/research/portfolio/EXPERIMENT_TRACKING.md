@@ -45,3 +45,7 @@ ACVC P68 replacement: /root/dm_acvc_p68_reentry, C:/Projects/HMASD-worktrees/cod
 ## Latest P69 boundary
 
 VSPC1 B05 definition c5835e980 is accepted and source engineering has been assigned to its original DM/CM; original card/spec and focused-check budget apply, zero scientific invocation allocated. CRTO question b6af4d6ee was dispatched once to Transport, whose current turn is active; provider acceptance remains unconfirmed. ACVC P68 is complete NO_READY_CONTINUATION (7380cf576, integrated4dc618c5a), as is FOLR. FSD/UCOPE remain native full-response intake. Completed preparatory returns and the unconfirmed CRTO request are not counted as active directions. This latest boundary supersedes earlier P68 running-state descriptions.
+
+## Completion wake path — latest owner instruction
+
+Independent relay01a08456-2cf3-7f02-8595-42d84ba41a4c (Luna/low) now forwards only actionable Root returns under SIBLING_COMMUNICATION.md. Bootstrap delivery verified; prior20min heartbeat hmasd is PAUSED. Nested native messages and Transport direct receipts retain their routes. CRTO exact request returned SENT_INPUT_MISMATCH after one Send with extra trailing character; same DM has read-only blocker intake, no retry allocation. Current DM recipients received the relay protocol; completed prior events are not resent.
