@@ -179,7 +179,20 @@ precision, interpreter, node or local-fallback change is selected. Each actual W
 reference invocation requires fresh same-node memory admission≥4GiB physical/effective,
 joined to its runner by `&&`. Original execution checkout/supervisor were closed; recreate
 only new scoped execution after allocation. Old outputs/archives and shared cache remain
-preserved. CM alone observes through collection, using the existing handover rules.
+preserved. After each accepted supervisor handle, CM sends `MONITOR_ADD` directly to the
+independent Monitor resolved from live `C:/Projects/HMASD/.codex/hmasd-monitor.toml`, with
+exact node/handle/source/cwd/output, bounds, sequence and original CM/DM owners. CM stops
+routine polling and returns pending collection. Root confirms actual adoption from the
+Monitor's direct status; sending alone is not adoption. Pending or failed adoption returns
+to Root for recovery, without a second CM polling loop. The independent Monitor owns
+observation and sends terminal facts to Root; Root resumes the original CM for collection.
+With separate W100/reference handles, Root resumes CM after W100's terminal receipt for
+collection and the already allocated reference, followed by its own direct `MONITOR_ADD`.
+If a shared supervisor handle runs the fixed W100→reference list, its handoff explicitly
+names both invocations, each fresh same-node admission joined to its runner by `&&`,
+the600s/30s limits within750s, and stop-on-any-failure behavior. The Monitor observes that
+entire handle; Root resumes the original CM for terminal collection. Neither arrangement
+adds a retry or changes the scientific invocation budget.
 
 Stop for the declared caps, failed admission, fatal/nonfinite output or a concrete
 reward/information/RNG/training/readout defect. Preserve completed blocks and actual
