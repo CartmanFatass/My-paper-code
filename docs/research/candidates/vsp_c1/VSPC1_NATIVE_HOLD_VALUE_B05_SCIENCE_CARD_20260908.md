@@ -263,3 +263,30 @@ committed card/spec and original acceptance checks before any CM starts.
 An actual scope or numerical-integrity gap returns to this DM; routine future
 engineering choices/corrections stay with the assigned CM. P68 ends at the
 committed, pushed preparation and precise allocation return.
+
+## 8. P69 source engineering allocation
+
+After the completed P68 preparation, Root explicitly accepts this definition
+and allocates the exact five-item CM source task frozen at
+`c5835e98004daa4b77ac1e82f36eec7171e44972`. This new P69 allocation changes the
+current implementation state; it does not rewrite P68's zero-implementation
+history or infer an owner ratification of item009/010. Scientific §§2–6,
+prospective master8301, prediction, comparator and caps remain unchanged.
+
+Resume the same CM, `/root/dm_vspc1_p49_value_question/cm_am_vspc1_hold_value_b01`,
+in the existing direction checkout/branch. Its source starting surface remains
+`d220ef01c717c3053c2b26528c6f984302ee4aee` beneath the doc-only descendants.
+The CM implements directly by default and reuses the original independent
+reviewer. The original ≤300s focused-check allowance and scope bounds apply;
+long committed verification follows remote-first when relevant. Source and
+checks protect the historical width-128 route, private RNG, normalized native
+method and explicit B05 publication identity. No fourth comparison is enrolled.
+
+Options: (a) execute exactly that source engineering and DM technical intake;
+(b) widen the task or launch its proposed native pair. Recommend/select (a).
+Owner-delegated decision (unattended, 2026-09-03 instruction): (a),
+**OWNER_DELEGATED within Root's explicit P69 source allocation**. P69 ends at
+accepted/pushed source, DM technical acceptance and one exact prospective
+execution binding returned to Root. **Zero scientific invocation; no staging,
+admission or submission in this phase.** A binding will be a prospective
+declaration, not an observed remote-ready command or an execution allocation.

@@ -151,3 +151,34 @@ for integration and allocation. The precise remaining decision is whether to
 assign the complete proposed CM engineering task. No technical blocker, failed
 scientific result, Pro wait or owner-confirmation wait is claimed. Once allocated,
 source acceptance and a concrete later execution assignment remain separate facts.
+
+## 6. P69 continuation — source task allocated, science unallocated
+
+Root's new P69 assignment accepts the B05 definition and allocates the exact
+five-item source engineering contract at
+`c5835e98004daa4b77ac1e82f36eec7171e44972`. It explicitly resumes the same CM
+and original independent reviewer, with the original source/check/scope limits.
+The direction checkout is still clean and upstream-synced at that commit;
+the starting production surface remains `d220ef01c717c3053c2b26528c6f984302ee4aee`.
+Required inputs are already published and locally present. Root's main
+integration proceeds separately and is not a new prerequisite for this assignment.
+
+The current main unapplied owner-review query is empty at entry. No instruction
+needs application and neither item009 nor item010 is treated as an owner reply.
+The original P68 return and its zero-code/zero-run boundary in §§1–5 remain
+historically true. P69 adds source engineering authority only; it does not change
+the frozen architecture, initialization, master8301, UP(.55), MEI or native rule.
+
+Object-tier technical options: (a) execute the exact allocated source task and
+return its technical intake/prospective execution binding; (b) change the scope
+or execute the native pair. Recommend/select (a). Owner-delegated decision
+(unattended, 2026-09-03 instruction): (a), **OWNER_DELEGATED within P69**.
+The [card §8](VSPC1_NATIVE_HOLD_VALUE_B05_SCIENCE_CARD_20260908.md#8-p69-source-engineering-allocation)
+records the allocation. No new scientific or direction-tier selection is needed.
+
+The CM owns implementation, meaningful focused tensor/stubbed checks and
+independent review; DM checks the delivered source/evidence against the card
+without duplicating routine CM execution. No real native constructor, episode
+or standalone learner fixture is added. P69's boundary is accepted/pushed source
+and one exact prospective binding for Root: **no scientific invocation, remote
+staging, admission or submission**. There is no additional training-seed allowance.
