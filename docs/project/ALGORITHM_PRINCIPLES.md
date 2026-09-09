@@ -1,8 +1,9 @@
 # HMASD Scientific Exploration Principles
 
-This file is the durable scientific contract for HMASD algorithm exploration.
-It contains cross-experiment principles, not the active route, implementation
-specification, experiment dashboard, or research history.
+Historical background: this file preserves earlier scientific principles and their evidence.
+Current requirements are in `docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md`,
+applicable AGENTS instructions and the current direction/card. The historical body
+below does not create a current contract or additional evidence burden.
 
 Current direction science belongs in
 `docs/research/candidates/<direction>/DIRECTION.md` and its cited evidence;

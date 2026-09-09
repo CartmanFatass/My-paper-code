@@ -308,3 +308,57 @@ unchanged same-information law, judged by native service return; baseline-law ch
 candidate, not an already demonstrated remedy. This A ends without a successor selection, new
 prerequisite, family closure, recast or Portfolio change. Detailed source-grounded limits on
 gradient-conflict and baseline language are retained in the intake §3.
+
+## Same-FLEX actor-score learning intervention selected — 2026-09-09
+
+The complete post-A02 Innovator answer at `c80efaea6b0df9f22fb08bc1a5706492108836a9`
+selects **RCLE-TBCFV-B03-ACTOR100, B/EXPLORE** (`PRO_FINAL`;
+`RCLE_TBCFV_POST_A02_INNOVATOR_INTAKE_20260909.md`). Its question is whether claim-score
+weight100 versus1, in the same FLEX model and at the same full-vector nonzero step norm0.02,
+reduces post-event U after200 updates on one fresh paired training seed19. This is a
+whole-learning-law effect on native service, not a proof that low actor allocation caused
+flat service. The final primary is equal-weight ACTIVE_CONTINUATION8→12/12→8 U_W1−U_W100,
+positive for W100; both path levels, initialization gains, recovery saturation and all
+other held-out cells remain alongside it. MEI0.05 is a descriptive two-normalized-tick scale.
+
+The strongest support for selecting it is A02's low actor/pointer allocation on both sampled
+blocks and small average conditional policy change. The strongest counterargument remains
+parameterization dependence: reweighting may amplify noise, displace useful manager credit,
+and change shared encoders, FLEX heads and visited states without improving service. The
+same-cost zero-baseline learning comparison is a surviving alternative because frozen
+baseline removal changed direction; it is not selected and has not shown useful training.
+B02's nearly flat native service and A02's nonzero parameter/probability changes remain
+contrary evidence to stronger causal or efficacy stories. H_A1 remains unidentified; the
+historical script-versus-learned gap is diagnostic only.
+
+The next discriminator is the selected B03 card
+`RCLE_TBCFV_B03_ACTOR100_SCIENCE_CARD_20260909.md`: two real FLEX training instances,
+shared init/reference, final-only panels, no new diagnostic or coefficient search. No stable
+superiority, pure-pointer cause, package difference, arbitrary-roster generalization or C
+conclusion follows from its selection. No recast, family closure or Portfolio change is
+made. A successful recovered delivery does not resolve the earlier attempt's historical
+unknown acceptance; its evidence is retained separately in the intake and packet archive.
+
+## B03 incomplete pair: actor100 effect remains unavailable — 2026-09-09
+
+The completed scientific intake `RCLE_TBCFV_B03_ACTOR100_RESULT_INTAKE_20260909.md`
+retains W1's full200 nonzero updates and initialization/final native panels from source
+`ad2fdfb854e295d6d9dddb229dd17cde58465919`, evidence`813d236fa`. W1's equal-path
+ACTIVE_CONTINUATION G_U is+0.0001546224, small against the declared0.05 scale;
+conditional scenario SE0.0005000111 crosses zero. Every cell's initialization/final
+tau is40, and8→8 NEW_EPOCH worsens by0.0006347656. Parameter movement is observed;
+useful service improvement or faster recovery is not established.
+
+W100 terminated signal11 without retained curves/final panel. Its training prefix is
+unknown, not zero; reference was not invoked and Delta_U is unavailable. Completed
+W1 does not supply the absent paired efficacy or support a pure actor-credit cause.
+The strongest support is the complete W1 learner/native record; the strongest limit
+is the missing treatment endpoint, with the adverse secondary cell and recovery
+saturation preserved. No stable, causal, package-wide or direction-negative conclusion
+follows. B02/A02 results and predictions keep their prior meanings.
+
+The score-weighting question survives unanswered. The next discriminator would require
+an intact matched W100/W1 endpoint; none is newly selected or allocated. Root's special
+Portfolio validity review is next. There is no recast, family closure or Portfolio
+change in this intake. Complete failure/cost/diagnosis limits and preserved dependencies
+are recorded in the intake and E0; the pause handoff remains historical provenance.

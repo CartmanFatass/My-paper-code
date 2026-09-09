@@ -12,9 +12,9 @@ Rigor is proportional to the claim. The project must not demand deployment-grade
 mechanism study, and it must not present a toy result as evidence of deployment safety or general
 MARL superiority.
 
-This document specializes the A/B/C evidence burdens in
-`docs/project/ALGORITHM_PRINCIPLES.md`. If a direction document asks for a stronger burden, that
-stronger burden applies only to the named claim or object; it does not silently become a global MARL
+This document defines the current A/B/C evidence burdens.
+`docs/project/ALGORITHM_PRINCIPLES.md` is historical background, not a current contract.
+If a direction document asks for a stronger burden, that stronger burden applies only to the named claim or object; it does not silently become a global MARL
 standard.
 
 ## 2. Normative terms and scientific units
@@ -587,3 +587,27 @@ parallel capacity. Finite counts, native code or batching alone do not establish
 No universal overhead multiplier, asymptotic proof, new profiling run or validation service is
 required. Unknown work/cost stays unknown; a ratio to a budget cap is not an inflation ratio against
 a minimal adequate experiment. This is design reasoning, not an extra §11.4 launch condition.
+
+### 11.10 Scientific knowledge use
+
+For a concrete mechanism, card, comparator, estimand, intake or scientific review,
+local roles start with the current assignment and relevant specification sections, then use
+`hmasd-scientific-tools` scientific-reading mode to locate the relevant passages in
+`docs/rl-marl-foundations-20260907/FOUNDATIONS.md` and its topic notes. Read only the
+concepts needed for this judgment; reuse current relevant reads. In the existing
+card/intake or technical acceptance, state the assumption or inferential limit that
+supports or changes the judgment. A citation alone does not demonstrate use.
+
+Pro reads only the specification sections and knowledge passages listed in TASK at
+their declared fixed versions. TASK adopts the applicable named specification
+requirements; no local skill invocation or unlisted linked dependency is required.
+
+These materials explain concepts; they have no independent decision authority.
+SESSION_CHOICES.md records choices for its original discussion and is an input only
+when explicitly applicable to the current task. It sets no global endpoint, baseline
+or investment rule. Preserve frozen scientific meaning, source versions and budgets.
+Sections 11.8–11.9 remain controlling: no textbook census, fixed seed quota, positive
+result, proof, full mechanism explanation or Pro round becomes a new A/B condition.
+Mechanical work does not preload this material; scientific reading does not invoke
+grilling or require owner confirmation. Missing decision-critical sources follow the
+existing node's gap procedure; an explanatory-source gap alone is no launch refusal.

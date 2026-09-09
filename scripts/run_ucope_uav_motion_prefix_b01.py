@@ -22,13 +22,13 @@ def main():
     mode.add_argument("--engineering-fixture", action="store_true")
     mode.add_argument("--aggregate", nargs=2, metavar="SUMMARY")
     parser.add_argument("--seed", type=int)
-    parser.add_argument("--pair", choices=("p21", "p24", "b02", "b03", "b04", "renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01"), default="p21")
+    parser.add_argument("--pair", choices=("p21", "p24", "b02", "b03", "b04", "renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01", "renewal_fixed_b01", "renewal_fixed_b02", "renewal_fixed_b03", "renewal_short_fixed_b01", "renewal_short_fixed_b02", "renewal_short_fixed_b03", "renewal_mean_velocity_b01", "renewal_hover_b01"), default="p21")
     parser.add_argument("--out", type=Path, required=True)
     args = parser.parse_args()
-    if args.pair in ("b03", "b04", "renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01") and args.aggregate:
+    if args.pair in ("b03", "b04", "renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01", "renewal_fixed_b01", "renewal_fixed_b02", "renewal_fixed_b03", "renewal_short_fixed_b01", "renewal_short_fixed_b02", "renewal_short_fixed_b03", "renewal_mean_velocity_b01", "renewal_hover_b01") and args.aggregate:
         parser.error(f"{args.pair.upper()} has one training pair and no multi-pair aggregate")
     if args.engineering_fixture and args.pair == "p24":
-        parser.error("engineering fixture requires p21, b02, b03, b04, renewal_b01, renewal_b02 or renewal_b03 or renewal_frozen_b01 with seed 9001")
+        parser.error("engineering fixture requires p21, b02, b03, b04, renewal_b01, renewal_b02 or renewal_b03 or renewal_frozen_b01 or renewal_fixed_b01 or renewal_fixed_b02 or renewal_fixed_b03 or renewal_short_fixed_b01 or renewal_short_fixed_b02 or renewal_short_fixed_b03 or renewal_mean_velocity_b01 or renewal_hover_b01 with seed 9001")
     if args.aggregate:
         if args.seed is not None:
             parser.error("aggregation does not take a seed")

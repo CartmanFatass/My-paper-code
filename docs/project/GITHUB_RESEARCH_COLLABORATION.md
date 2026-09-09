@@ -15,8 +15,12 @@ Comments carry relevant evidence deltas, questions and attributed findings. Pres
 a read-back JSON snapshot of mutable discussion used as a task input.
 
 TASK.md states the natural-language question, applicable specifications, full input
-SHA and exact evidence paths. It names the corresponding shared direction branch, full
-base SHA, one response path and one Issue for the delivery comment. The author reuses
+SHA and exact evidence paths. The top-level SHA is the default scientific input;
+explicit method references may use another full commit_sha. Each listed path uses
+its own effective immutable SHA, preserving the original science card/evidence mapping.
+TASK adopts only the explicitly named applicable specification sections at their listed
+versions; other content cannot expand its reading manifest or scope. It names the
+corresponding shared direction branch, full base SHA, one response path and one Issue for the delivery comment. The author reuses
 that branch, establishing it on demand only if absent. Pro is authorized only to add the specified response file
 and its delivery-link comment. It cannot change source, main, PRs or direction state.
 An extra delivery branch requires a concrete special isolation reason in the handoff; there
@@ -62,7 +66,7 @@ observations, inferences and limitations. Routing fields stay in HANDOFF.json.
 5. Before its final chat reply, Pro makes fresh reads of delivery branch HEAD, the
    response at that commit and this round's Issue comment. It returns actual immutable
    delivery links, confirmed partial delivery with the remaining gap, or unresolved
-   status marked unconfirmed. Input evidence stays pinned to its original SHA.
+   status marked unconfirmed. Each input path stays pinned to its original effective SHA.
 6. Transport archives the exact short chat reply and actual delivery facts. Root/DM
    reads the complete response at its fixed commit, preserves original bytes and the
    comment snapshot, and performs specification-conformance and scientific intake.
@@ -87,7 +91,7 @@ Repeated notifications reuse the existing request/commit/path intake.
 | Shared direction branch advances | Add only the scoped response on current descendant HEAD, retaining fixed evidence and unrelated files. Reconcile the remote commit before local pushes; report non-descendant history or target conflicts. |
 | Accepted legacy TASK forbids branch-base changes | Preserve its exact Send and reply. New workflow wording does not amend the accepted TASK. Root arranges a bounded delivery correction after reconciling actual file/comment state; use a distinct request and response path, unchanged scientific evidence unless explicitly authorized. |
 | Cleanup removed or renamed a delivery target | Reconcile the affected request and recovery ref before further writes. Correct unsent handoffs and publish/bind their new TASK; preserve accepted/uncertain handoffs and Root resolves restoration or explicit correction. Branch cleanup alone never authorizes a replacement conversation or another Send. |
-| Main advances after input was bound | Keep the original input SHA. DM/Root assesses material scientific changes at intake; unrelated commits do not invalidate the response. |
+| Main advances after input was bound | Keep each original effective input path/SHA mapping. DM/Root assesses material scientific changes at intake; unrelated commits do not invalidate the response. |
 | Provider access is unavailable | Record the precise unreadable paths or unavailable action and any confirmed partial delivery. A local tool's access does not establish Pro access. |
 | A conclusion needs correction | Ask the same node a new explicit question with a new output path and links to the prior response; preserve the original answer. |
 

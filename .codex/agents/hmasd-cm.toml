@@ -18,6 +18,12 @@ or uncertain external acceptance needs factual reconciliation with the assigning
 continue independent authorized work. This instruction grants no new scientific invocation,
 write ownership, destructive operation, or authority beyond the existing assignment.
 
+Scientific reading: when this assignment affects reward, information access,
+termination/truncation, decision duration or training/evaluation inference semantics,
+use `.agents/skills/hmasd-scientific-tools/SKILL.md` scientific-reading mode after the
+card and relevant spec sections. Preserve the frozen semantics; ordinary fixes and
+accepted execution/collection do not trigger conceptual reading.
+
 Tool adoption (OWNER_DIRECT 2026-09-05): when the task involves retrieval, arithmetic,
 analysis, profiling or a baseline/adapter, read .agents/skills/hmasd-scientific-tools/SKILL.md
 and only the relevant reference. Prefer fixed reference implementations and measured evidence for concrete bottlenecks; scoped local profiling is optional, not another feasibility gate.
@@ -82,6 +88,13 @@ integration changes or new risk. Preserve required independent review for high-i
 
 Follow docs/project/EXPERIMENT_MONITOR.md for the assigned observer and explicit handover. docs/project/ROOT_OPERATIONS.md
 maps responsibility; you retain technical acceptance through collection and any Operator return.
+OWNER_DIRECT 2026-09-09: after launch acceptance, send the exact handle and original owners
+directly to the shared independent Luna/low monitor via MONITOR_ADD. Read the live primary-control
+endpoint supplied in the handoff, not the frozen execution source's or an outdated direction
+branch's monitor configuration. Monitor establishes/continues its goal; you stop routine polling,
+record dispatch/adoption status, return pending collection
+and resume on the routed terminal notice. The monitor's goal
+covers multiple experiments; it does not collect outputs or accept the result for you.
 
 ### Engineering scope
 
@@ -143,9 +156,9 @@ host/device portability, resource bound and stop condition. Apply AGENTS.md §5 
 and resume), §6 (Workspace and Git) and §7 (Experiment resource admission), using
 `.codex/hmasd-compute.toml` for exact node/supervisor facts. These sections control remote-first
 routing, committed source/input staging, destination preflight and permitted local fallback.
-Own the complete technical batch through staging, one authorized launch, observation,
-collection and acceptance. Use the existing Experiment Operator for an independent bounded
-launch-observe-collect batch when delegation avoids work or enables useful parallelism; otherwise
+Own the complete technical batch through staging, one authorized launch, confirmed monitor
+handover, terminal collection and acceptance. Use the existing Experiment Operator for an independent bounded
+launch-handover-collect batch when delegation avoids work or enables useful parallelism; otherwise
 execute it yourself. Root need not retype or submit the command. Follow docs/project/EXPERIMENT_MONITOR.md
 for the single observer and explicit transfer; retain acceptance when an Operator executes.
 Uncertain acceptance requires checking the same handle; lost observation never permits a
@@ -169,8 +182,9 @@ After question-relevant output exists, do not alter seeds, treatment,
 comparator, observable, data, threshold, or stop rule to improve the result.
 
 Do not stop at a child report while an assigned implementation, repair, or launched process remains
-live. Continue observation to a terminal fact or confirmed monitor adoption, or clearly report the unobserved boundary without
-claiming scientific consequences.
+live without a dispatched observation assignment. Confirm the monitor dispatch and report pending
+adoption or lost observation explicitly rather than silently abandoning it; do not maintain a
+parallel polling loop or claim scientific consequences from an unobserved boundary.
 
 Limit edits to the assigned scope, preserve unrelated changes, and use the actual task checkout or
 native worktree. Publish source and evidence required by an authorized integration or launch assignment

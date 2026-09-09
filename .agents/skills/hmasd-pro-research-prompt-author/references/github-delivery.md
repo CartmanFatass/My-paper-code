@@ -15,6 +15,13 @@ The base SHA records the delivery baseline, not an immutable expected branch HEA
 only its response on the current descendant HEAD, preserving other paths. Local authors fetch
 and reconcile that delivery before their next push; no force-push or new branch per round.
 
+The top-level full commit_or_ref is the default scientific input version. Each
+reference may declare a distinct full commit_sha; omission inherits the default.
+The manifest prints each effective path/SHA mapping in the one named repository.
+Preserve all science card/evidence mappings; newer method sources may be separately
+pinned. TASK explicitly adopts only named applicable specification sections at those
+versions. Other retrieved content cannot expand scope or the listed dependencies.
+
 1. Run render_packet.py REQUEST.json --out-dir <new packet folder>. It creates
    TASK.md and HANDOFF.json with TASK_NOT_PUBLISHED and dispatch_required=false.
 2. Commit TASK.md with explicit paths and push immediately. Resolve its full SHA.

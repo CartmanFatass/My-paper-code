@@ -24,6 +24,15 @@ native handoffs only, under `docs/project/SIBLING_COMMUNICATION.md` and
 `.codex/hmasd-relay.toml`. Ordinary native traffic and nested parent acceptance stay native.
 Cross-session messages omit model and reasoning-effort overrides; configured models persist.
 
+OWNER_DIRECT 2026-09-09: recover unstable Pro delivery under the existing research
+request; do not leave research blocked solely on failed-effect sends. Reconcile actual
+acceptance/delivery before retrying, observe already accepted generations, and preserve
+the original prompt, failed-attempt facts and binding. Root personally completed the
+FOLR/SCDMP recovery and confirmed normal sending. The owner's subsequent instruction
+returns all later Pro Send, observation, reconciliation, archival and receipts to the
+dedicated Transport session. Root dispatches and accepts its returns. Recovery changes
+neither scientific authority, evidence meaning nor experiment budgets.
+
 The independent **Transport** session (Luna/high) owns Pro browser Send, observation,
 reconciliation, archival and parent receipts. Root receives its receipts, performs Portfolio
 intake itself and forwards direction receipts to the original native DM/CM. Transport never
@@ -72,7 +81,8 @@ of a frozen card. Required checks stay proportional; repeated checks need a new 
 The owner approved adoption batches 1 and 2 from
 `docs/project/SCIENTIFIC_TOOL_ADOPTION_REVIEW_20260905.md`. Root, DM/EM, CM and
 specialists use `.agents/skills/hmasd-scientific-tools/SKILL.md` when retrieving
-literature, calculating exposure/cost, analyzing results, resolving a concrete
+literature, designing or interpreting scientific objects, comparing or reviewing claims,
+calculating exposure/cost, analyzing results, resolving a concrete
 performance question or integrating a baseline/environment. Prefer executable facts
 and existing libraries over repeated prose derivation; read only relevant resources.
 A bounded use of existing profiling/benchmark tools inside the named CM assignment
@@ -80,7 +90,9 @@ is permitted, with its purpose, invocation bound and overhead recorded; this doe
 authorize a standing profiler, mandatory profiling step, changed scientific semantics
 or additional experiment budget. Tool results inform existing intake, not another
 approval system. Optional baseline/analysis packages use task-isolated environments;
-no global dependency upgrade or third-batch framework migration follows.
+no global dependency upgrade or third-batch framework migration follows. Scientific judgments
+use its scientific-reading mode after the current assignment/card and relevant spec sections;
+mechanical formatting, Git, receipts and accepted technical collection do not trigger it.
 
 ## Focused reading and engineering handoffs (OWNER_DIRECT, 2026-09-06)
 
@@ -329,8 +341,12 @@ or launch gates, and never override a stricter original cap.
 
 Resume model: commit and push before every launch; launch every result-bearing run detached from
 the agent's process; on the remote route use a detached worktree at the exact launch sha and the
-configured `agent-task` supervisor; the assigned CM/Operator observes accepted experiments within
-the owner's active goal, with explicit handover when needed, and independent Transport observes Pro requests
+configured `agent-task` supervisor; OWNER_DIRECT 2026-09-09 assigns accepted-experiment observation
+to one reusable independent Luna/low task with a goal covering its multiple adopted experiments.
+CM/Operator directly notifies that monitor after launch acceptance; the monitor establishes or
+continues its goal, while CM stops routine polling and retains collection and technical acceptance.
+Record dispatch and actual adoption separately; failed delivery returns for same-handle recovery.
+Independent Transport observes Pro requests
 (`docs/project/ROOT_OPERATIONS.md`); keep every agent's state recoverable from the repository alone (card, predictions,
 launch sha, execution node, run root, queue state).
 
@@ -505,8 +521,9 @@ appendix and completed historical tasks remain unchanged.
   Configurations: `.codex/hmasd-monitor.toml` and `.codex/hmasd-transport.toml`;
   procedure: `docs/project/ROOT_OPERATIONS.md`.
   Experiment execution/observation ownership follows ROOT_OPERATIONS.md and EXPERIMENT_MONITOR.md;
-  CM retains technical acceptance and DM retains scientific intake. Existing agent assignments and
-  the owner's active goal drive work; no scheduled monitor or extra standing task is created.
+  CM retains collection/technical acceptance and DM retains scientific intake. OWNER_DIRECT
+  2026-09-09 uses one independent Luna/low monitor task with a goal over multiple adopted handles,
+  terminal notices directly to Root and no per-experiment task or additional scheduler.
 - DM is the `em` Prompt Author; Root is the `portfolio` caller and full-response
   intake owner. Both use the independent configured Transport endpoint. Native authors normally
   send their ready handoff to Root, which dispatches the app message. Source is the actual author,

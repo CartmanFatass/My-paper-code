@@ -739,3 +739,161 @@ with475.85/507.29s actual planning references and1800s complete arm/3600s whole
 caps. Different outcomes remain informative; no third pair is required for
 accepting these two. No new card, invocation, Pro request, family, lifecycle,
 priority, recast, C or formal UAV-entry disposition is created by this intake.
+
+## Third relative reduction and a contrary early endpoint — 2026-09-09
+
+The [B12 P78 intake](VSPC1_NATIVE_HOLD_VALUE_B12_INTAKE_20260909.md#6-p78-valid-result-intake-and-decisions)
+accepts8503 as valid complete **CHANGE_DOWN**, C−.0586081586, conditional
+SE .0114590896,28/32 negative changes. Both endpoints are DOWN:
+Delta512−.0149815972 (SE .0072213019) and Delta768−.0735897558
+(SE .0103586543), with20/32 and31/32 adverse identities.512 is close to
+negative MEI by .0049815972 (.68985 conditional SE); the768 deficit is much
+larger relative to conditional noise. The [E0](VSPC1_NATIVE_HOLD_VALUE_B12_RESULT_EVIDENCE_20260909.md)
+retains all160 evaluations from two continuous real fits,434176 team steps
+and3072 Adam calls, with the accepted training/evaluation separation.
+
+GATED means .1653390673→.1611642375; MLP .1803206645→.2347539933.
+The descriptive GATED change−.0041748298 is small/noisy (SE .0094990262),
+while MLP's+.0544333288 (SE .0084185173) accounts for most of the relative
+reduction. No isolated budget cause follows. H is .1394977424; all four
+learned point means exceed it, with11/11/14/5 H-loss identities retained.
+The ordinary MLP768 endpoint is the strongest attained comparison in this pair;
+H is untuned and matching tuned same-information headroom remains absent.
+
+Three same-protocol Cs are−.0542390934/−.0119242503/−.0586081586,
+descriptive mean−.0415905008/sample SD .0257844332.512 regions now read
+UP/UP/DOWN, descriptive mean+.0234043192/SD .0394721498;768 reads
+WITHIN/WITHIN/DOWN, mean−.0181861815/SD .0479810656. These are three
+independent training pairs, each with repeated checkpoints and finite panels.
+No pooled pass, equivalence, stable population trend or superiority/inferiority
+follows. Earlier final-only768 negatives/H losses and other regimes remain separate.
+
+Strongest support for the gated package remains the first two fixed512 gains
+with GATED above H, plus the earlier8301/8303 UPs. Strongest contradiction is
+the new large768 deficit, all three relative reductions and the contrary512
+point; prior positives are preserved. Opening duration → entity-owned remaining
+hold → centralized value/joint optimization → partial-history recurrent actor
+→ motion/service → native return remains the exercised path. Membership is
+fixed, histories separate and the critic absent from action selection. About
+1.13% of training rows carry nonzero holds. Generic nonlinear capacity,
+initialization, geometry, clipping, evolving value units/moments, FP32 and partner
+co-adaptation survive as alternatives; movement/rare exposure identify no cause.
+Verified PPO/ACAC/UTE/MVD distinctions keep their original setting limits.
+
+The next recommended discriminator is now the direction question of whether
+this instantiated comparison warrants a concrete performance-motivated B change
+or should end. A fourth unchanged pair remains legal, but would mainly extend
+variation; known work is434176 steps/3072 Adam/160 evaluations with475.85/
+507.29/504.91s actual references. This evidence-specific recommendation is not
+a three-seed threshold or an added Pro gate for conforming A/B. Any family
+continuation/closure or recast belongs to em:vsp_c1:convergence. P78 is complete
+and permits no Pro Send; no packet or decision exists yet. No family, lifecycle,
+priority, recast, C or formal UAV-entry disposition has been made here.
+
+## One additive-gate comparison on the intact ordinary body — 2026-09-09
+
+The [P79 Convergence intake](VSPC1_NATIVE_HOLD_VALUE_P79_CONVERGENCE_INTAKE_20260909.md)
+accepts the full fixed [Pro response](pro_packets/20260909_native_hold_value_post_b12_convergence/archive/RESPONSE.md)
+at77687230cb1f3898e55c21d23c05ba1840d820ea. The proper node selects one
+same-family B: both critics keep the full136→128→133→1 ordinary body, with
+the existing640-parameter remaining-hold gate added only to treatment. It is
+explicitly **not RECAST**. The previous DM stopping recommendation was never
+executed and is superseded by this conforming node decision. No completed
+experiment is rewritten and no new card, master or invocation is allocated by
+the receipt-intake assignment.
+
+The scientific distinction is additive use on an intact generic body versus the
+previous near-equal-total-parameter allocation of gate and ordinary units.
+35,467 versus34,827 critic parameters leave capacity and optimization confounded;
+the old comparison was valid for its own packages. A new benefit could not show
+that650 ordinary parameters caused the prior late deficit. The same opening
+duration → entity-owned residual hold → centralized value/joint optimization →
+local recurrent actor → native return path is retained, with fixed membership
+and existing information. Earlier measured nonzero-hold training exposure was
+about1.13%; the new pair has no observed exposure yet.
+
+Strongest support for a bounded continuation is the preserved early512 gains
+and a concrete additive use that keeps the strongest attained generic structure.
+Strongest contradiction remains all three relative reductions, no768 UP,
+8503's −.0735897558 late deficit/31 adverse identities and mixed512 signs.
+All native/H losses and older final-only, width128, unnormalized and quarantine
+records remain separate. Tuned matching headroom is still absent; H is untuned.
+Initialization, general capacity, FP32 arithmetic, value moments, joint clipping
+and partner co-adaptation survive as alternatives. Neither sparsity nor gate
+movement isolates a cause.
+
+The selected next discriminator is one fresh matched pair of768-episode fits,
+final768 evaluation only and one new matched H panel, retaining four private
+train/eval environments and frozen evaluation moments. Its primary is final
+Delta_new in mean native J units, MEI .01; it does not measure the old C change.
+Known work is417792 team steps/3072 Adam/96 evaluations, complete1800s/arm and
+3600s/whole; new runtime remains unknown. A fourth unchanged B remains legal
+but is not this node's choice. No exact upper, unique-cause diagnosis, search
+prerequisite or new cost experiment is required. The claim ceiling remains one
+finite-budget native package signal/counterexample, not stable superiority,
+equivalence, unique hold credit, budget causality, C promotion, transfer or
+formal UAV entry. Recast count and Portfolio lifecycle/priority are unchanged.
+## Intact ordinary body plus gate: one final768 counterexample — 2026-09-09
+
+The [B13 intake](VSPC1_NATIVE_HOLD_VALUE_B13_INTAKE_20260909.md#4-primary-reading-native-levels-and-uncertainty)
+accepts the exact P79-selected additive comparison on fresh master8601. Both critics
+retain the complete136→128→133→1 ordinary body; GATED alone adds the640-parameter gate,
+for35467 versus34827 critic parameters. At final768 the native difference is
+**−.0320685805 (DOWN)**, conditional SE .0101106835, with25/32 adverse paired identities.
+Native means GATED .1443234961, ordinary MLP .1763920766, H .1408296190 give H margins
++.0034938771 and+.0355624576; GATED and MLP still lose15 and11 individual episodes to H.
+
+Keeping the ordinary body intact did not prevent a gate-package loss in this instance.
+The strongest support for favoring the ordinary body locally is the direct native deficit
+and larger attained H margin. Earlier512 gains and the single new training unit are the
+strongest reasons not to dismiss all hold-sensitive value structure. Older three negative
+C values, mixed512 signs, final-only768 deficits, H losses and quarantines retain their
+own protocols; this new final-only result is not a fourth C or a pooled old-protocol mean.
+
+The opening-duration/remaining-hold → centralized value/joint PPO → local recurrent actor
+→ native return path was exercised with unchanged information and fixed membership.
+Direct nonzero-r training exposure was1.1368%/1.1292%; absolute gate movement .61769
+establishes exposure, not benefit. Capacity, initialization, FP32 arithmetic, moments,
+shared clipping and partner co-adaptation survive as alternatives. The old650-parameter
+tradeoff's causal role remains unresolved, and a broader stable claim is unavailable.
+
+No automatic follow-up of this additive candidate is selected. The ordinary body is
+favored for this one realization; a separately selected fresh matched pair could test
+repeatability if the question is reopened. No new such allocation, family closure,
+recast, lifecycle/priority change, C promotion or formal UAV entry follows here.
+Tuned matching headroom remains absent and H remains untuned. The
+[E0](VSPC1_NATIVE_HOLD_VALUE_B13_RESULT_EVIDENCE_20260909.md) records complete source,
+counts and measurements; [DM analysis](results/native_hold_value_b13_8601_20260909/dm_analysis.json)
+preserves the native/H contrasts and forecast scoring.
+
+## Tested intact-body-plus-gate package ends — 2026-09-09
+
+The [P81 Convergence intake](VSPC1_NATIVE_HOLD_VALUE_P81_CONVERGENCE_INTAKE_20260909.md)
+accepts the full immutable [Pro response](pro_packets/20260909_native_hold_value_post_b13_convergence/archive/RESPONSE.md)
+at `f5f053f5f271785c83cac735bc69d641fad3be5f`. **PRO_FINAL ends continued investment
+in the B13-tested additive gate package; no successor B is selected.** The exact scope
+is the current five-UAV native host, duration-selecting recurrent actor, normalized
+value training/compound PPO,768-episode budget and final sampled evaluation. This is
+a direction choice after the allocated test, beyond merely ending P80's invocation.
+P79's selected comparison and B13's valid complete DOWN retain their original meanings.
+
+The strongest direct support is B13's−.0320685805 native difference,25/32 adverse
+identities and the ordinary body's larger H mean margin (+.0355624576 versus GATED's
++.0034938771). The strongest contradiction remains earlier512 UP instances and the
+single new training pair, with conditional primary SE .0101106835. All prior negative
+C values, mixed early signs, late deficits, H losses and quarantines remain separate.
+This is a bounded investment judgment, not stable inferiority, equivalence or a causal
+resolution of the old650-parameter tradeoff. Tuned matching headroom remains absent.
+
+The broader hypothesis that legal entity hold information can improve finite-budget
+native control through value/credit/optimization survives. B13 exercised the hold →
+central value/compound PPO → local recurrent policy → native return path, but exposure
+and gate movement supplied no compensating native benefit. Capacity, initialization,
+FP32, moments, clipping and partner co-adaptation remain alternatives.
+
+No next discriminator is allocated. A separately selected fresh identical matched pair
+could later test instance variation; it remains legal and unselected, not a seed-count,
+causal-proof or Pro prerequisite. No replacement candidate is invented. This choice
+does not recast, invalidate all hold-value/K4 mechanisms, PARK/CLOSE the entire direction,
+change Portfolio priority/capacity or promote C/transfer/formal UAV status. Root retains
+Portfolio planning and integration responsibilities.

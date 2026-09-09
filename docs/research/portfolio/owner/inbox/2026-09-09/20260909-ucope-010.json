@@ -1,0 +1,76 @@
+{
+  "id": "20260909-ucope-010",
+  "created": "2026-09-09T08:37:29-07:00",
+  "direction": "ucope",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "P85：同一新拟合的均值速度与随机速度续约比较",
+  "context": "固定短续约在均值速度执行下能否超过合法反馈？结构是部分可观测五机团队的异步时长承诺。同一对新拟合保留均值、随机与悬停全部结果，均值F−G主差值不随结果选择。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "依Root P85完成一次8401真实训练与五组固定评估，任何符号都结束。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "在下一边界停止本卡未来工作，保留已发生的全部观测。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "在下一边界应用具体改动；已经发生的结果及旧主差值保持其原意。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "新问题在同一新拟合上直接比较速度执行，不以旧检查点分析或第四次同方重复作为前提。",
+  "evidence": [
+    "docs/research/candidates/ucope/UCOPE_UAV_MEAN_VELOCITY_RENEWAL_B01_SCIENCE_CARD_20260909.md",
+    "docs/research/candidates/ucope/UCOPE_UAV_MEAN_VELOCITY_RENEWAL_B01_P85_INTAKE_20260909.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-09.md#L34",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否保留本卡：新训练一对F/G，同时比较均值速度、随机速度与悬停，以均值模式F−G为主差值？",
+    "changes_if_approved": [
+      {
+        "target": "docs/research/candidates/ucope/UCOPE_UAV_MEAN_VELOCITY_RENEWAL_B01_SCIENCE_CARD_20260909.md",
+        "from": "P84结束，仅建议新的执行模式问题",
+        "to": "P85已分配一对8401真实训练及五组最终评估，均值模式F−G主差值冻结"
+      }
+    ],
+    "if_refused": "在下一可执行边界停止本卡未来工作；保留所有已发生的观测，不改写旧主差值。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_UAV_MEAN_VELOCITY_RENEWAL_B01_SCIENCE_CARD_20260909.md",
+        "quote": "Claim under test: fixed short renewal retains an above-MEI native-return gain over legal feedback when both learned velocity policies execute tanh(mu), on one fresh matched training instance.",
+        "why": "同一新拟合的均值与随机模式可直接观察速度执行方式，同时保留续约与反馈比较。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_UAV_MEAN_VELOCITY_RENEWAL_B01_SCIENCE_CARD_20260909.md",
+        "quote": "P84's sampled F−G +0.06439366516106426 is UP, while F−H\n−0.029184443306665326 and G−H −0.09357810846772958 are losses.",
+        "why": "旧反馈差值增益伴随两条悬停损失，不能预设均值速度有用或把损失归因于噪声。"
+      }
+    ],
+    "uncertainty": [
+      "只有一对新训练；32次评估给定拟合，不能估计训练总体不确定性。",
+      "F均值速度仍抽取随机时长；tanh(mu)并非高斯动作经tanh后的期望。",
+      "同信息调好基线的剩余空间未知；均值与随机模式可能异号，全部保留。"
+    ],
+    "cost": {
+      "compute": "一次303104原生步/2048 Adam/160最终局；F头2048000–4096000行。每臂1800秒、整次3600秒；P84的313.90秒仅作参考，检查≤300秒。",
+      "owner_time": "无需等待回复；可异步覆写未来边界。",
+      "reversibility": "costly",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "It directly tests the new\nexecution question on one fresh learning instance while retaining sampled-mode\nand hover observations from those same fits. Neither the primary nor any\nsecondary is required to improve. F's duration remains fixed stochastic, so\nthe F policy is not wholly deterministic. No sampling-cause inference follows.",
+    "source": "docs/research/candidates/ucope/UCOPE_UAV_MEAN_VELOCITY_RENEWAL_B01_P85_INTAKE_20260909.md"
+  },
+  "starred": false
+}

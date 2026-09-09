@@ -20,6 +20,12 @@ No additional per-item approval is needed within that delegation. Do not fabrica
 replies, accept code solely from a rule change or broaden unrelated dispositions.
 Use `$hmasd-owner-item` for the maintained item classes and review procedure.
 
+For Root's cross-direction scientific comparison, investment judgment and scientific
+Pro authoring, use `hmasd-scientific-tools` scientific-reading mode after the current
+assignment and relevant spec sections. Reuse relevant current reads and state the
+assumption and limit in the existing intake. Queueing, Git and receipt forwarding
+do not trigger conceptual reading.
+
 ## Core principle
 
 Apply evidence-spec §11.8 to the chosen research question as well as its implementation.

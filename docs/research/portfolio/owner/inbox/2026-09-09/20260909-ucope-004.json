@@ -1,0 +1,80 @@
+{
+  "id": "20260909-ucope-004",
+  "created": "2026-09-09T04:18:26-07:00",
+  "direction": "ucope",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "UCOPE P79：固定续约新独立训练，观察波动",
+  "context": "固定随机续约F对普通反馈G，异步动作承诺与私有历史保持不变；只新增独立训练7801并与7701描述性比较，不要求再次改善。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "按P79分配执行一次7801，并完整保留所有结果后收口。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "停止未执行的依赖工作，保留已有证据。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "按明确修改处理新工作，不改写旧结果。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "P78可信改善支持一个小规模独立训练跟进，保持原比较以观察训练变化。",
+  "evidence": [
+    "docs/research/candidates/ucope/UCOPE_UAV_FIXED_RENEWAL_B02_SCIENCE_CARD_20260909.md",
+    "docs/research/candidates/ucope/UCOPE_UAV_FIXED_RENEWAL_B02_P79_INTAKE_20260909.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-09.md#L16",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否接受P79已分配的新卡：保持F/G/H比较不变，新增一次独立训练7801观察训练波动？",
+    "changes_if_approved": [
+      {
+        "target": "docs/research/candidates/ucope/UCOPE_UAV_FIXED_RENEWAL_B02_SCIENCE_CARD_20260909.md",
+        "from": "P78已完成，F对G一次事前主要比较改善，下一次尚未运行",
+        "to": "按P79冻结7801与新随机流，完成一次相同比较，并把7701和7801作描述性并列"
+      }
+    ],
+    "if_refused": "在新的依赖工作前停止或按明确修改处理；保留P78及更早证据，不自动重跑或替换。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_UAV_FIXED_RENEWAL_B01_P78_RESULT_SUMMARY_20260909.json",
+        "quote": "\"primary_reading\": \"UP\"",
+        "why": "P78有真实学习、完整原生回报与明确比较，可支持小规模独立训练跟进。"
+      },
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_UAV_FIXED_RENEWAL_B02_P79_INTAKE_20260909.md",
+        "quote": "New seed and reading are prospective.",
+        "why": "新种子和主要比较事先固定，避免从既有结果选择性改写。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_UAV_FIXED_RENEWAL_B01_P78_RESULT_EVIDENCE_20260909.md",
+        "quote": "F loses to G on15 paired episodes despite its favorable mean.",
+        "why": "已有优势仍含很多反向回合，且G比悬停的均值仅略高，不能声称稳定胜出。"
+      }
+    ],
+    "uncertainty": [
+      "独立训练变异仍未知，新结果可以持平或反转；两次训练仍不足以支撑稳定优势。",
+      "已有334.19秒全程耗时只作参照，不保证下一次耗时。"
+    ],
+    "cost": {
+      "compute": "两臂各512训练回合，总286720原生步、2048次Adam、96次最终评估；每臂1800秒、全程3600秒，最多一次接受的远程提交。",
+      "owner_time": "无需回复，异步覆盖仍生效。",
+      "reversibility": "costly",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "推荐按P79执行一次新的独立F/G/H训练7801，保持固定随机续约、比较器、阈值和预算。把新结果与7701并列看训练波动，保留所有反向结果，不要求再次改善，也不据两次训练宣称稳定优势。",
+    "source": "docs/research/candidates/ucope/UCOPE_UAV_FIXED_RENEWAL_B02_P79_INTAKE_20260909.md"
+  },
+  "starred": false
+}

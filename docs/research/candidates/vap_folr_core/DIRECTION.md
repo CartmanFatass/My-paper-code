@@ -114,3 +114,122 @@ Evidence:
 - `N3_FOLR_ROUTING_B04_RESULT_SUMMARY_20260904.json`
 - `N3_FOLR_ROUTING_B04_EVALUATION_CURVES_20260904.csv`
 - `N3_FOLR_ROUTING_B04_INTAKE_20260904.md`
+
+## Accepted public-lifecycle scope — 2026-09-09, before B01 execution
+
+**Conclusion (scope, not performance).** Convergence selects a new lifecycle-visible easy
+Traffic Junction comparison of separately trained survivor-state RETAIN and event-triggered
+RESET. Actual car departures/activations determine trip ownership, including same-step slot
+refill; both actors receive the same public event/own-birth cues and both arms start entrants
+fresh. P77's no-ready finding for unchanged permitted information remains correct. Full
+survivor GRU history can contain teammate observations; this is not strictly-self ancestry.
+
+**Bounded claim.** The selected question concerns the finite trained-system native-return cost
+or benefit of blanket survivor-memory erasure on that explicit information variant. No such
+effect has yet been observed. It does not establish typed-state novelty, information necessity,
+original-CAMA performance, stable superiority, transfer, UAV value or a Portfolio disposition.
+
+**Strongest support and contradiction.** A true survivor can carry recent partially observed
+traffic context into later native movement decisions after another car arrives or leaves.
+The counterweight is that ordinary generic retention is already standard, own position/goal
+are reobserved, and twenty steps may leave little useful extra history. Event opportunity,
+learned competence, effect size and wall cost remain unknown. Tuned headroom on this variant
+is absent; the B04 host's observations/actions/information/budget do not form a matching baseline.
+
+**Surviving alternative and next discriminator.** Ordinary generic RETAIN without a further
+claim remains the strong zero-work alternative. The selected next discriminator is one real
+trained RETAIN/RESET class-B pair and sampled final full-episode native return. Root separately
+allocated that pair after Pro's scope-only decision; the card fixes the limited budget.
+Historical B04 positives, adverse seed, transient and within-MEI conclusion, old FOLR/DISH
+pauses, and recast counts remain unchanged. B04's 444,672 primitive transitions comprise
+294,912 training and 149,760 evaluation transitions; this corrects a later preparation label,
+not the original result counters.
+
+References:
+
+- `pro_packets/20260909_p78_public_lifecycle_convergence/archive/RESPONSE.md` at `653727422183894b2f4d1c82a458fbc55aaf6ee0`
+- `FOLR_P78_LIFETIME_INTERFACE_QUESTION_INTAKE_20260909.md` §8
+- `FOLR_PUBLIC_LIFECYCLE_B01_SCIENCE_CARD_20260909.md`
+
+## Accepted public-lifecycle B01 science — 2026-09-09
+
+**Conclusion.** One matched training pair on the explicitly lifecycle-visible easy Traffic
+Junction host gives final native returns RETAIN `2.104375` and RESET `4.1065625`.
+RETAIN minus RESET is `-2.0021875`, beyond the frozen absolute MEI `1.0`:
+`RESET_ABOVE_MEI`. Each arm trained for 100,000 native ticks/4,969 RMSprop steps and received
+32 final greedy episodes under its own trained rule. This is an opposite-sign preliminary
+trained-system observation; the DM's leading within-MEI prediction missed it.
+
+**Bounded claim.** Event-triggered survivor clearing has a higher observed final return in
+this configuration. Both actors receive identical public event/own-birth cues, entrants
+start fresh, and RESET still uses current information and history between events. The
+result does not show why clearing helped, absence of useful history, stable superiority,
+typed-state novelty, strictly-self ancestry, original-CAMA performance or transfer.
+The common approximate Q-learning procedure uses gamma 0.99; it does not guarantee exact
+optimization of the undiscounted final native-return endpoint.
+
+**Strongest support and contradiction.** There were 304/337 real final survivor-control
+opportunities and 0/337 RETAIN/RESET survivor clears. Primary reward, training exposure and
+final selection were preserved. Against a broader conclusion stand one training pair,
+wide conditional episode spread, and RESET's lower mean training return (-5.225858 versus
+-5.044872). Finite optimization, partner co-adaptation and evaluation variation remain
+alternatives to beneficial forgetting. Tuned headroom on this information variant is absent.
+
+**Surviving alternative and next discriminator.** The next useful measurement is one new
+independent matched training pair under the same comparison and final-evaluation protocol,
+preserving every sign. The prepared B02 card now fixes fresh training/evaluation randomness
+at the same finite exposure to test repeatability of this trained-package effect, not causal
+memory isolation. B01's finite allocation ended; B02 was initially unallocated and later
+executed under its separately recorded allocation. Repeated
+evaluation of the B01 weights would not add an independent training sample. Historical B04/P77
+boundaries and old FOLR/DISH pauses are unchanged; no family, priority or lifecycle disposition
+follows. The special review's FOLR section supports this question preparation; Root retains
+its cross-direction proposal intake.
+
+References:
+
+- `FOLR_PUBLIC_LIFECYCLE_B01_RESULT_SUMMARY_20260909.json`
+- `FOLR_PUBLIC_LIFECYCLE_B01_RESULT_EVIDENCE_20260909.md`
+- `FOLR_PUBLIC_LIFECYCLE_B01_INTAKE_20260909.md`
+- `FOLR_PUBLIC_LIFECYCLE_B02_SCIENCE_CARD_20260909.md`
+- `FOLR_PUBLIC_LIFECYCLE_B02_PREPARATION_INTAKE_20260909.md`
+
+## Accepted public-lifecycle B02 science — 2026-09-09
+
+**Conclusion.** A fresh independently initialized/trained pair at seeds 7802/107802 gives
+RETAIN `1.3278125`, RESET `3.250625`, and `d_02=-1.9228125`: `RESET_ABOVE_MEI` under the
+unchanged absolute MEI 1.0. Both arms completed 100,000 training ticks/4,969 RMSprop steps
+and 32 final greedy episodes. The pre-output RESET_ABOVE_MEI prediction matched. B01 stays
+separate at `d_01=-2.0021875`; its prior WITHIN_MEI prediction remains a miss.
+
+**Bounded claim.** The observed final RESET preference repeated in these two fitting/evaluation
+instances on the same explicitly public-lifecycle easy Traffic Junction package. The
+two-pair mean difference -1.9625 is descriptive and changes neither object's branch.
+This supports preliminary trained-package repeatability, not stable population superiority,
+particular harmful memory contents, typed/strictly-self state, original-CAMA information
+performance or transfer. Approximate discounted learning and undiscounted final return
+remain different quantities; the mechanism attribution is unresolved.
+
+**Strongest support and contradiction.** The new final comparison contains 292/389 true
+survivor-control opportunities and 0/389 RETAIN/RESET resets, with all 64 returns preserved.
+Both independent pairs have an above-MEI RESET point against generic RETAIN at the same
+exposure. Against a wider conclusion stand only two training instances, outcome-informed
+selection of B02 and wide conditional episode variation (new SD 5.520/9.253). B02 has higher
+RESET training mean (-3.798230 versus -4.716158), while B01's lower RESET training mean is
+preserved. Finite optimization/data paths, partner co-adaptation and evaluation variation
+remain live explanations. Same-information tuned headroom remains absent.
+
+**Surviving alternative and next discriminator.** Generic RETAIN remains a competent legal
+comparator. The next direction-local recommendation is another fresh matched fitting/
+evaluation instance under the same package, with every sign retained, to probe repeatability
+further. It is advice, not a new card, fixed seed quota or automatic invocation. B02's finite
+allocation is complete; Root owns integration and later execution capacity. No family,
+priority/lifecycle or C/UAV disposition follows from this B result.
+
+References:
+
+- `FOLR_PUBLIC_LIFECYCLE_B02_SCIENCE_CARD_20260909.md`
+- `FOLR_PUBLIC_LIFECYCLE_B02_RESULT_SUMMARY_20260909.json`
+- `FOLR_PUBLIC_LIFECYCLE_B02_RESULT_EVIDENCE_20260909.md`
+- `FOLR_PUBLIC_LIFECYCLE_B02_INTAKE_20260909.md`
+- `evidence/2026-09-09-folr-public-lifecycle-b02-run-analysis.json`

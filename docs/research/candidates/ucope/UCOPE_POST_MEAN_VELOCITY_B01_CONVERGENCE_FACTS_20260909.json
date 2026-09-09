@@ -1,0 +1,854 @@
+{
+  "prepared_at": "2026-09-09T09:31:21-07:00",
+  "evidence_class": "consultation over accepted B/EXPLORE evidence; zero new scientific execution",
+  "authoring_start": "67d60c9a58cdf6f4f89879ff6682c4c76251b948",
+  "main_integration": "0402ceec73bfa856438147b36ebad82357bae7d6",
+  "required_control_plane_source": "4fb14955c",
+  "new_exposure": {
+    "native_steps": 0,
+    "model_calls": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0,
+    "diagnostics": 0,
+    "profiling": 0,
+    "new_masters": 0,
+    "new_cards": 0,
+    "new_invocation_allowance": 0,
+    "provider_sends": 0
+  },
+  "new_exposure_line": "consultation_new_native_steps=0; model_calls=0; optimizer_steps=0; evaluation_episodes=0; diagnostics=0; profiling=0; new_masters=0; new_cards=0; new_invocation_allowance=0; provider_sends_by_DM=0",
+  "accepted_P77_P85": [
+    {
+      "allocation": "P77",
+      "summary": "docs/research/candidates/ucope/UCOPE_UAV_RENEWAL_FROZEN_HEAD_B01_P77_RESULT_SUMMARY_20260909.json",
+      "summary_sha256": "28f2439bb11dcbc9e4a4306bbf0388fd412c63c976543cace17992e3cf902d34",
+      "master": 7601,
+      "object": "UCOPE-UAV-RENEWAL-FROZEN-HEAD-B01",
+      "primary": "T_minus_G",
+      "reading": "DOWN",
+      "independent_training_instances": 1,
+      "contrasts": {
+        "T_minus_G": {
+          "mean": -0.04379734649032291,
+          "conditional_se": 0.01000711676968817,
+          "positive": 8,
+          "negative": 24,
+          "zero": 0
+        },
+        "T_minus_F": {
+          "mean": -0.06808369803930205,
+          "conditional_se": 0.00976191558652773,
+          "positive": 3,
+          "negative": 29,
+          "zero": 0
+        },
+        "T_minus_H": {
+          "mean": -0.02623673364744934,
+          "conditional_se": 0.009678247230574127,
+          "positive": 9,
+          "negative": 23,
+          "zero": 0
+        },
+        "G_minus_H": {
+          "mean": 0.017560612842873573,
+          "conditional_se": 0.01107486999976469,
+          "positive": 19,
+          "negative": 13,
+          "zero": 0
+        },
+        "F_minus_H": {
+          "mean": 0.0418469643918527,
+          "conditional_se": 0.012643353547575854,
+          "positive": 25,
+          "negative": 7,
+          "zero": 0
+        }
+      },
+      "arm_means": {
+        "T": 0.12970535221200308,
+        "F": 0.1977890502513051,
+        "G": 0.17350269870232599,
+        "H": 0.15594208585945243
+      },
+      "counts": {
+        "team_steps": 425984,
+        "train_team_steps": 393216,
+        "optimizer_steps": 3072,
+        "eval_episodes": 128
+      },
+      "complete_wall_seconds": 501.69,
+      "predictions": [
+        {
+          "event": "T_minus_G>0.01",
+          "probability": 0.5,
+          "observed": false,
+          "Brier_loss": 0.25
+        },
+        {
+          "event": "T_minus_F>0.01",
+          "probability": 0.45,
+          "observed": false,
+          "Brier_loss": 0.2025
+        }
+      ],
+      "mean_Brier_loss": 0.22625,
+      "owner_prediction": "not taken (unattended); reviews and audit owner columns checked at intake"
+    },
+    {
+      "allocation": "P78",
+      "summary": "docs/research/candidates/ucope/UCOPE_UAV_FIXED_RENEWAL_B01_P78_RESULT_SUMMARY_20260909.json",
+      "summary_sha256": "c826859be418e8ad9b1c4ce27328317158c466b3e86ba20add895d4651bedd31",
+      "master": 7701,
+      "object": "UCOPE-UAV-FIXED-RENEWAL-B01",
+      "primary": "F_minus_G",
+      "reading": "UP",
+      "independent_training_instances": 1,
+      "contrasts": {
+        "F_minus_G": {
+          "mean": 0.026550516654013076,
+          "conditional_se": 0.011109495362659165,
+          "positive": 17,
+          "negative": 15,
+          "zero": 0
+        },
+        "F_minus_H": {
+          "mean": 0.030122962641204728,
+          "conditional_se": 0.014904708941129195,
+          "positive": 23,
+          "negative": 9,
+          "zero": 0
+        },
+        "G_minus_H": {
+          "mean": 0.0035724459871916527,
+          "conditional_se": 0.01461525282953026,
+          "positive": 18,
+          "negative": 14,
+          "zero": 0
+        }
+      },
+      "arm_means": {
+        "F": 0.1734220791445782,
+        "G": 0.14687156249056513,
+        "H": 0.14329911650337346
+      },
+      "counts": {
+        "team_steps": 286720,
+        "train_team_steps": 262144,
+        "optimizer_steps": 2048,
+        "eval_episodes": 96
+      },
+      "complete_wall_seconds": 334.19,
+      "predictions": [
+        {
+          "event": "F_minus_G>0.01",
+          "probability": 0.55,
+          "observed": true,
+          "Brier_loss": 0.20249999999999996
+        },
+        {
+          "event": "F_minus_H>0.0",
+          "probability": 0.65,
+          "observed": true,
+          "Brier_loss": 0.12249999999999998
+        }
+      ],
+      "mean_Brier_loss": 0.16249999999999998,
+      "owner_prediction": "not taken (unattended)"
+    },
+    {
+      "allocation": "P79",
+      "summary": "docs/research/candidates/ucope/UCOPE_UAV_FIXED_RENEWAL_B02_P79_RESULT_SUMMARY_20260909.json",
+      "summary_sha256": "db7d9462d9f8d31cb424a0d5862318f2359e166c31e8cda9945cf7e0c96aaa02",
+      "master": 7801,
+      "object": "UCOPE-UAV-FIXED-RENEWAL-B02",
+      "primary": "F_minus_G",
+      "reading": "UP",
+      "independent_training_instances": 1,
+      "contrasts": {
+        "F_minus_G": {
+          "mean": 0.030362608571553623,
+          "conditional_se": 0.008159350975084483,
+          "positive": 20,
+          "negative": 12,
+          "zero": 0,
+          "scale_reading": "UP"
+        },
+        "F_minus_H": {
+          "mean": -0.0035128012832155745,
+          "conditional_se": 0.011513244819621678,
+          "positive": 15,
+          "negative": 17,
+          "zero": 0,
+          "scale_reading": "WITHIN"
+        },
+        "G_minus_H": {
+          "mean": -0.033875409854769195,
+          "conditional_se": 0.009095001328253357,
+          "positive": 9,
+          "negative": 23,
+          "zero": 0,
+          "scale_reading": "DOWN"
+        }
+      },
+      "arm_means": {
+        "F": 0.1500611221234821,
+        "G": 0.1196985135519285,
+        "H": 0.15357392340669768
+      },
+      "counts": {
+        "team_steps": 286720,
+        "train_team_steps": 262144,
+        "optimizer_steps": 2048,
+        "eval_episodes": 96
+      },
+      "complete_wall_seconds": 301.26,
+      "predictions": [
+        {
+          "event": "F_minus_G>0.01",
+          "probability": 0.6,
+          "observed": true,
+          "Brier_loss": 0.16000000000000003
+        },
+        {
+          "event": "F_minus_H>0.0",
+          "probability": 0.65,
+          "observed": false,
+          "Brier_loss": 0.42250000000000004
+        }
+      ],
+      "mean_Brier_loss": 0.29125,
+      "owner_prediction": "not taken (unattended)"
+    },
+    {
+      "allocation": "P80",
+      "summary": "docs/research/candidates/ucope/UCOPE_UAV_FIXED_RENEWAL_HOVER_B01_P80_RESULT_SUMMARY_20260909.json",
+      "summary_sha256": "1df673ecdb0ff6377db0aa500903be0dd314bb419635ca86fef8e94b81e5ea27",
+      "master": 7901,
+      "object": "UCOPE-UAV-FIXED-RENEWAL-HOVER-B01",
+      "primary": "F_minus_H",
+      "reading": "UP",
+      "independent_training_instances": 1,
+      "contrasts": {
+        "F_minus_G": {
+          "mean": -0.025803909613053323,
+          "conditional_se": 0.010415763733291592,
+          "positive": 10,
+          "negative": 22,
+          "zero": 0,
+          "scale_reading": "DOWN"
+        },
+        "F_minus_H": {
+          "mean": 0.018660096017418804,
+          "conditional_se": 0.010755224968186065,
+          "positive": 20,
+          "negative": 12,
+          "zero": 0,
+          "scale_reading": "UP"
+        },
+        "G_minus_H": {
+          "mean": 0.04446400563047213,
+          "conditional_se": 0.010847038932735921,
+          "positive": 24,
+          "negative": 8,
+          "zero": 0,
+          "scale_reading": "UP"
+        }
+      },
+      "arm_means": {
+        "F": 0.16795173877526767,
+        "G": 0.193755648388321,
+        "H": 0.14929164275784887
+      },
+      "counts": {
+        "team_steps": 286720,
+        "train_team_steps": 262144,
+        "optimizer_steps": 2048,
+        "eval_episodes": 96
+      },
+      "complete_wall_seconds": 306.09,
+      "predictions": [
+        {
+          "event": "F_minus_H>0.01",
+          "probability": 0.5,
+          "observed": true,
+          "Brier_loss": 0.25
+        },
+        {
+          "event": "F_minus_G>0.01",
+          "probability": 0.65,
+          "observed": false,
+          "Brier_loss": 0.42250000000000004
+        }
+      ],
+      "mean_Brier_loss": 0.33625000000000005,
+      "owner_prediction": "not taken (unattended)"
+    },
+    {
+      "allocation": "P81",
+      "summary": "docs/research/candidates/ucope/UCOPE_UAV_FIXED_RENEWAL_B03_P81_RESULT_SUMMARY_20260909.json",
+      "summary_sha256": "01d67e77f5a15a1f013dd35410b5316aa47c6b198af5c1231f9d91e948fb30ed",
+      "master": 8001,
+      "object": "UCOPE-UAV-FIXED-RENEWAL-B03",
+      "primary": "F_minus_G",
+      "reading": "DOWN",
+      "independent_training_instances": 1,
+      "contrasts": {
+        "F_minus_G": {
+          "mean": -0.021798883942210363,
+          "conditional_se": 0.010646977126718544,
+          "positive": 12,
+          "negative": 20,
+          "zero": 0,
+          "scale_reading": "DOWN"
+        },
+        "F_minus_H": {
+          "mean": 0.015269670011827153,
+          "conditional_se": 0.012567527601623765,
+          "positive": 17,
+          "negative": 15,
+          "zero": 0,
+          "scale_reading": "UP"
+        },
+        "G_minus_H": {
+          "mean": 0.03706855395403751,
+          "conditional_se": 0.011330703710254264,
+          "positive": 25,
+          "negative": 7,
+          "zero": 0,
+          "scale_reading": "UP"
+        }
+      },
+      "arm_means": {
+        "F": 0.15470866836029662,
+        "G": 0.176507552302507,
+        "H": 0.13943899834846948
+      },
+      "counts": {
+        "team_steps": 286720,
+        "train_team_steps": 262144,
+        "optimizer_steps": 2048,
+        "eval_episodes": 96
+      },
+      "complete_wall_seconds": 320.29,
+      "predictions": [
+        {
+          "event": "F_minus_G>0.01",
+          "probability": 0.5,
+          "observed": false,
+          "Brier_loss": 0.25
+        },
+        {
+          "event": "F_minus_H>0.01",
+          "probability": 0.6,
+          "observed": true,
+          "Brier_loss": 0.16000000000000003
+        }
+      ],
+      "mean_Brier_loss": 0.20500000000000002,
+      "owner_prediction": "not taken (unattended)"
+    },
+    {
+      "allocation": "P82",
+      "summary": "docs/research/candidates/ucope/UCOPE_UAV_SHORT_FIXED_RENEWAL_B01_P82_RESULT_SUMMARY_20260909.json",
+      "summary_sha256": "58d34c20c8c2a6d21373d38f4d47b1b915149932aa3a855e4f28a41c72575413",
+      "master": 8101,
+      "object": "UCOPE-UAV-SHORT-FIXED-RENEWAL-B01",
+      "primary": "F_minus_G",
+      "reading": "WITHIN",
+      "independent_training_instances": 1,
+      "contrasts": {
+        "F_minus_G": {
+          "mean": 0.008551004914111454,
+          "conditional_se": 0.008905535922158366,
+          "positive": 20,
+          "negative": 12,
+          "zero": 0,
+          "scale_reading": "WITHIN"
+        },
+        "F_minus_H": {
+          "mean": 0.02854870179583208,
+          "conditional_se": 0.011099555695402165,
+          "positive": 24,
+          "negative": 8,
+          "zero": 0,
+          "scale_reading": "UP"
+        },
+        "G_minus_H": {
+          "mean": 0.019997696881720626,
+          "conditional_se": 0.012754543531711954,
+          "positive": 20,
+          "negative": 12,
+          "zero": 0,
+          "scale_reading": "UP"
+        }
+      },
+      "arm_means": {
+        "F": 0.17403423466945092,
+        "G": 0.16548322975533947,
+        "H": 0.14548553287361884
+      },
+      "counts": {
+        "team_steps": 286720,
+        "train_team_steps": 262144,
+        "optimizer_steps": 2048,
+        "eval_episodes": 96
+      },
+      "complete_wall_seconds": 315.65,
+      "predictions": [
+        {
+          "event": "F_minus_G>0.01",
+          "probability": 0.45,
+          "observed": false,
+          "Brier_loss": 0.2025
+        },
+        {
+          "event": "F_minus_H>0.01",
+          "probability": 0.6,
+          "observed": true,
+          "Brier_loss": 0.16000000000000003
+        }
+      ],
+      "mean_Brier_loss": 0.18125000000000002,
+      "owner_prediction": "not taken (unattended)"
+    },
+    {
+      "allocation": "P83",
+      "summary": "docs/research/candidates/ucope/UCOPE_UAV_SHORT_FIXED_RENEWAL_B02_P83_RESULT_SUMMARY_20260909.json",
+      "summary_sha256": "ba0fc06eae364b2c8f18646283bd2d829115fb2297a52da56a933ef1493a0265",
+      "master": 8201,
+      "object": "UCOPE-UAV-SHORT-FIXED-RENEWAL-B02",
+      "primary": "F_minus_G",
+      "reading": "UP",
+      "independent_training_instances": 1,
+      "contrasts": {
+        "F_minus_G": {
+          "mean": 0.04205514630433558,
+          "conditional_se": 0.008895069330742151,
+          "positive": 24,
+          "negative": 8,
+          "zero": 0,
+          "scale_reading": "UP"
+        },
+        "F_minus_H": {
+          "mean": 0.01688043904880538,
+          "conditional_se": 0.011210216975722664,
+          "positive": 18,
+          "negative": 14,
+          "zero": 0,
+          "scale_reading": "UP"
+        },
+        "G_minus_H": {
+          "mean": -0.025174707255530195,
+          "conditional_se": 0.011893075742872027,
+          "positive": 14,
+          "negative": 18,
+          "zero": 0,
+          "scale_reading": "DOWN"
+        }
+      },
+      "arm_means": {
+        "F": 0.16472782101275252,
+        "G": 0.12267267470841695,
+        "H": 0.14784738196394714
+      },
+      "counts": {
+        "team_steps": 286720,
+        "train_team_steps": 262144,
+        "optimizer_steps": 2048,
+        "eval_episodes": 96
+      },
+      "complete_wall_seconds": 317.61,
+      "predictions": [
+        {
+          "event": "F_minus_G>0.01",
+          "probability": 0.45,
+          "observed": true,
+          "Brier_loss": 0.30250000000000005
+        },
+        {
+          "event": "F_minus_H>0.01",
+          "probability": 0.6,
+          "observed": true,
+          "Brier_loss": 0.16000000000000003
+        }
+      ],
+      "mean_Brier_loss": 0.23125000000000004,
+      "owner_prediction": "not taken (unattended)"
+    },
+    {
+      "allocation": "P84",
+      "summary": "docs/research/candidates/ucope/UCOPE_UAV_SHORT_FIXED_RENEWAL_B03_P84_RESULT_SUMMARY_20260909.json",
+      "summary_sha256": "83c1b5088740778927eec03ba577f5eb6831c3141120fddcf0611fdd6b8df147",
+      "master": 8301,
+      "object": "UCOPE-UAV-SHORT-FIXED-RENEWAL-B03",
+      "primary": "F_minus_G",
+      "reading": "UP",
+      "independent_training_instances": 1,
+      "contrasts": {
+        "F_minus_G": {
+          "mean": 0.06439366516106426,
+          "conditional_se": 0.008200587980245644,
+          "positive": 29,
+          "negative": 3,
+          "zero": 0,
+          "scale_reading": "UP"
+        },
+        "F_minus_H": {
+          "mean": -0.029184443306665326,
+          "conditional_se": 0.012741511301119637,
+          "positive": 13,
+          "negative": 19,
+          "zero": 0,
+          "scale_reading": "DOWN"
+        },
+        "G_minus_H": {
+          "mean": -0.09357810846772958,
+          "conditional_se": 0.012620868136163161,
+          "positive": 3,
+          "negative": 29,
+          "zero": 0,
+          "scale_reading": "DOWN"
+        }
+      },
+      "arm_means": {
+        "F": 0.13591528623865382,
+        "G": 0.07152162107758955,
+        "H": 0.16509972954531915
+      },
+      "counts": {
+        "team_steps": 286720,
+        "train_team_steps": 262144,
+        "optimizer_steps": 2048,
+        "eval_episodes": 96
+      },
+      "complete_wall_seconds": 313.9,
+      "predictions": [
+        {
+          "event": "F_minus_G>0.01",
+          "probability": 0.55,
+          "observed": true,
+          "Brier_loss": 0.20249999999999996
+        },
+        {
+          "event": "F_minus_H>0.01",
+          "probability": 0.65,
+          "observed": false,
+          "Brier_loss": 0.42250000000000004
+        },
+        {
+          "event": "G_minus_H<-0.01",
+          "probability": 0.45,
+          "observed": true,
+          "Brier_loss": 0.30250000000000005
+        }
+      ],
+      "mean_Brier_loss": 0.3091666666666667,
+      "owner_prediction": "not taken (unattended)"
+    },
+    {
+      "allocation": "P85",
+      "summary": "docs/research/candidates/ucope/UCOPE_UAV_MEAN_VELOCITY_RENEWAL_B01_P85_RESULT_SUMMARY_20260909.json",
+      "summary_sha256": "781bbf2366867dea1e04078cf37d87654f70e6dcef2d1d54d2c595789252fa74",
+      "master": 8401,
+      "object": "UCOPE-UAV-MEAN-VELOCITY-RENEWAL-B01",
+      "primary": "F_mean_minus_G_mean",
+      "reading": "WITHIN",
+      "independent_training_instances": 1,
+      "contrasts": {
+        "F_mean_minus_G_mean": {
+          "mean": -0.008350131013904307,
+          "conditional_se": 0.006736648533933545,
+          "positive": 13,
+          "negative": 19,
+          "zero": 0,
+          "scale_reading": "WITHIN"
+        },
+        "F_sampled_minus_G_sampled": {
+          "mean": -0.02234539578242959,
+          "conditional_se": 0.011146317759927301,
+          "positive": 12,
+          "negative": 20,
+          "zero": 0,
+          "scale_reading": "DOWN"
+        },
+        "F_mean_minus_H": {
+          "mean": -0.0900967755406669,
+          "conditional_se": 0.007991683312183612,
+          "positive": 0,
+          "negative": 31,
+          "zero": 1,
+          "scale_reading": "DOWN"
+        },
+        "G_mean_minus_H": {
+          "mean": -0.0817466445267626,
+          "conditional_se": 0.01058012468337991,
+          "positive": 3,
+          "negative": 29,
+          "zero": 0,
+          "scale_reading": "DOWN"
+        },
+        "F_sampled_minus_H": {
+          "mean": -0.04753797201899047,
+          "conditional_se": 0.011108766806409685,
+          "positive": 8,
+          "negative": 24,
+          "zero": 0,
+          "scale_reading": "DOWN"
+        },
+        "G_sampled_minus_H": {
+          "mean": -0.025192576236560876,
+          "conditional_se": 0.012349499534101622,
+          "positive": 11,
+          "negative": 21,
+          "zero": 0,
+          "scale_reading": "DOWN"
+        },
+        "F_mean_minus_F_sampled": {
+          "mean": -0.04255880352167644,
+          "conditional_se": 0.007527296196624865,
+          "positive": 6,
+          "negative": 26,
+          "zero": 0,
+          "scale_reading": "DOWN"
+        },
+        "G_mean_minus_G_sampled": {
+          "mean": -0.05655406829020172,
+          "conditional_se": 0.00913219329993519,
+          "positive": 4,
+          "negative": 28,
+          "zero": 0,
+          "scale_reading": "DOWN"
+        }
+      },
+      "arm_means": {
+        "F_mean": 0.06637304972645941,
+        "G_mean": 0.07472318074036371,
+        "F_sampled": 0.10893185324813584,
+        "G_sampled": 0.13127724903056542,
+        "H": 0.1564698252671263
+      },
+      "counts": {
+        "team_steps": 303104,
+        "train_team_steps": 262144,
+        "optimizer_steps": 2048,
+        "eval_episodes": 160
+      },
+      "complete_wall_seconds": 331.58,
+      "predictions": [
+        {
+          "event": "F_mean_minus_G_mean>0.01",
+          "probability": 0.5,
+          "observed": false,
+          "Brier_loss": 0.25
+        },
+        {
+          "event": "F_mean_minus_H>0.01",
+          "probability": 0.55,
+          "observed": false,
+          "Brier_loss": 0.30250000000000005
+        },
+        {
+          "event": "F_mean_minus_F_sampled>0.01",
+          "probability": 0.6,
+          "observed": false,
+          "Brier_loss": 0.36
+        },
+        {
+          "event": "G_mean_minus_G_sampled>0.01",
+          "probability": 0.6,
+          "observed": false,
+          "Brier_loss": 0.36
+        }
+      ],
+      "mean_Brier_loss": 0.318125,
+      "owner_prediction": "not taken (unattended)"
+    }
+  ],
+  "historical_window_exposure": {
+    "window": "P77 through P85 only; excludes earlier objects and all engineering/collection",
+    "accepted_invocations": 9,
+    "valid_results": 9,
+    "independent_matched_training_instances": 9,
+    "fitted_arms": 19,
+    "native_steps": 2736128,
+    "optimizer_steps": 19456,
+    "final_evaluation_episodes": 960,
+    "sum_invocation_wall_seconds": 3042.2599999999998,
+    "aggregate_CPU_seconds": null,
+    "study_elapsed_critical_path_seconds": null,
+    "statistical_pooling": false,
+    "scope": "Resource sum only; no combined primary or training-population estimate."
+  },
+  "prospective_alternatives": {
+    "a": {
+      "question": "Does the same-fit pattern of mean-execution losses and short-renewal versus feedback/hover contrasts recur in one new independent learning history?",
+      "class_": "B/EXPLORE proposal only",
+      "independent_matched_instances": 1,
+      "fitted_arms": 2,
+      "train_episodes_per_arm": 512,
+      "train_steps_per_arm": 131072,
+      "Adam_calls_per_arm": 1024,
+      "native_steps": 303104,
+      "Adam_calls": 2048,
+      "final_groups": 5,
+      "eval_episodes_per_group": 32,
+      "eval_episodes": 160,
+      "primary": "F_mean_minus_G_mean",
+      "MEI_proposed_absolute": 0.01,
+      "F_head_rows": [
+        2048000,
+        4096000
+      ],
+      "F_head_MACs": [
+        4521984000,
+        9043968000
+      ],
+      "per_arm": {
+        "F": {
+          "training_steps": 131072,
+          "Adam": 1024,
+          "policy_eval_steps": 16384,
+          "hover_steps": 0
+        },
+        "G": {
+          "training_steps": 131072,
+          "Adam": 1024,
+          "policy_eval_steps": 16384,
+          "hover_steps": 8192
+        }
+      },
+      "within_fit_mode_and_hover_contrasts": "all eight P85 contrasts; no best-mode selection",
+      "measured_wall_reference": 331.58,
+      "future_wall_seconds": null
+    },
+    "b": {
+      "question": "End the tested mean-execution package without more empirical work",
+      "native_steps": 0,
+      "Adam_calls": 0,
+      "eval_episodes": 0,
+      "scope": "Family/package decision; no broad UCOPE lifecycle disposition"
+    },
+    "c": {
+      "question": "Does training-only scalar value-target normalization improve current legal feedback G versus raw-target G?",
+      "class_": "B/EXPLORE proposal only",
+      "independent_matched_instances": 1,
+      "fitted_arms": 2,
+      "train_episodes_per_arm": 512,
+      "train_steps_per_arm": 131072,
+      "Adam_calls_per_arm": 1024,
+      "native_steps": 286720,
+      "Adam_calls": 2048,
+      "final_groups": [
+        "G_normalized",
+        "G_raw",
+        "H"
+      ],
+      "eval_episodes_per_group": 32,
+      "eval_episodes": 96,
+      "primary": "G_normalized_minus_G_raw",
+      "MEI_proposed_absolute": 0.01,
+      "F_head_rows": 0,
+      "F_head_MACs": 0,
+      "additional_scalar_work": "One training-target moments update per two-episode rollout per fit (256 for normalized G); normalizing 512 targets per rollout, decoding one scalar per policy step. No added model or optimizer.",
+      "decision_value": "Direct matched training-change comparison, no renewal or mean-mode effect claim; not a prerequisite for a future F/G B.",
+      "future_wall_seconds": null
+    },
+    "existing_checkpoint_A": {
+      "evidence_class": "A/RECON, if separately selected; not selected here",
+      "new_training": 0,
+      "optimizer_steps": 0,
+      "native_steps": 40960,
+      "final_evaluation_episodes": 160,
+      "F_head_forward_row_bounds": [
+        81920,
+        163840
+      ],
+      "F_head_dense_MAC_bounds": [
+        180879360,
+        361758720
+      ],
+      "decision_value": "Adds conditional evaluation precision on the already selected P85 policies, not a fresh learning history; not a prerequisite or a way to cross the old MEI boundary."
+    }
+  },
+  "prospective_common_constraints": {
+    "complete_arm_seconds": 1800,
+    "complete_invocation_seconds": 3600,
+    "focused_supporting_checks_seconds": 300,
+    "max_instances_proposed": 1,
+    "new_allocation_here": 0,
+    "node": "hmasd-wsl-node remote_first",
+    "device": "CPU FP32, one Torch thread",
+    "nested_candidate_or_trajectory_search": false,
+    "validation": "Future focused changed-boundary checks separate from algorithm work; reuse accepted P85 semantic review for unchanged paths. No new cost probe or diagnostic gate."
+  },
+  "source_grounding": {
+    "UCOPE_source": "52bf50a089d3389d9fada0b531e4f4e56e83f9b8",
+    "UCOPE_hooks": "learner.py collect_episode lines74-76 decodes when value_moments supplied; update lines209-215 uses decoded stored value for raw advantage then updates moments and normalizes critic targets. P85 supplies None.",
+    "existing_reusable_component": {
+      "commit": "0402ceec73bfa856438147b36ebad82357bae7d6",
+      "path": "experiments/candidates/vsp_c1/native_hold_value_b03/value_normalization.py",
+      "status": "Read-only source example on main, not imported into the authoring branch or accepted for a new UCOPE card. No cross-direction result reused."
+    },
+    "literature": {
+      "question": "Is value-target normalization a concrete source-supported alternative to another execution-mode repeat?",
+      "inst_sci_catalog": "C:\\Projects\\Inst-sci\\papers\\MyLib\\llm-index\\catalog.v2.jsonl",
+      "catalog_records": 190,
+      "catalog_sha256": "2e682c6d1131d503ad48920794dd8005ccf8f535dc9ff75679b0c8502533efc0",
+      "search_fields": [
+        "title",
+        "algorithm_names"
+      ],
+      "pattern": "\\bPPO\\b|MAPPO|IPPO|Proximal|Surprising Effectiveness|Value Normal|Implementation Matters",
+      "matches": [],
+      "my_lib_coverage": {
+        "collections": [
+          "synthetic-core"
+        ],
+        "paper_count": 2,
+        "mechanism_count": 2,
+        "limitation": "Published coverage is synthetic fixtures only; excluded from scientific support."
+      },
+      "coverage_limit": "No selected real PPO/MAPPO/value-normalization record in this bounded published-index search; does not establish absence from unpublished files or literature.",
+      "official_source": {
+        "title": "The Surprising Effectiveness of PPO in Cooperative Multi-Agent Games",
+        "authors": "Chao Yu, Akash Velu, Eugene Vinitsky, Jiaxuan Gao, Yu Wang, Alexandre Bayen, Yi Wu",
+        "venue": "NeurIPS 2022 Datasets and Benchmarks",
+        "section": "5.1, printed p7 (PDF zero-based page6)",
+        "url": "https://papers.nips.cc/paper/2022/file/9c1535a02f0ce079433344e14d910597-Paper-Datasets_and_Benchmarks.pdf",
+        "verified_quote": "Utilize value normalization to stabilize value learning.",
+        "bounded_source_claim": "The reported MAPPO ablations in MPE Spread and SMAC regress critic targets after running mean/standard-deviation normalization and decode value outputs for advantages.",
+        "HMASD_inference": "This supports considering a bounded scalar training-target change, not diagnosing P85, promising a UAV gain, matching its MC/gamma1/hold semantics, or importing MAPPO wholesale."
+      },
+      "reused_prior": "P84 intake section8 and P85 intake section8 preserve mean-action evaluation motivation and stochastic-PPO qualification; no invalid-evaluation claim."
+    }
+  },
+  "owner_boundary": {
+    "checked_at": "2026-09-09T09:31:21-07:00",
+    "reviews": {
+      "authoring": [],
+      "main": []
+    },
+    "ucope_nonempty_audit_owners": {
+      "authoring": [],
+      "main": []
+    }
+  },
+  "previous_node_binding": {
+    "conversation_binding_key": "em:ucope:convergence",
+    "conversation_id": "6a9c6b1c-1c34-83e8-8ebc-dee64b334240",
+    "request_id": "2026-09-09-ucope-post-renewal-b03-convergence-01",
+    "state": "ARCHIVED",
+    "tab_lifecycle": "CLOSED",
+    "send_click_count": 1
+  },
+  "decision": {
+    "recommendation": "a, narrowly over b",
+    "state": "PRO_PENDING direction-tier escalation only",
+    "no_work_is_substantive": true,
+    "change_recommended_by_new_retrieval": "Make c a specific normalized-versus-raw legal feedback B, while keeping all three options open to Convergence.",
+    "current_result_already_supports": "Withhold mean execution as a demonstrated native-performance remedy on the P85 policies.",
+    "headroom": "Tuned same-information current-host record absent",
+    "recasts": 1,
+    "all_scientific_dispositions_and_allocations_pending": true
+  }
+}

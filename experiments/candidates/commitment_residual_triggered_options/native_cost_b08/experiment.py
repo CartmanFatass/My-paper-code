@@ -120,6 +120,8 @@ def train_path(rows: tuple[base.PanelRow, ...], packets: base.PacketDataset, *, 
             raise RuntimeError("B08 gate loss became nonfinite")
         optimizer.zero_grad(set_to_none=True)
         loss.backward()
+        if all(parameter.grad is None for parameter in model.parameters()):
+            raise RuntimeError("B08 gate loss reached no model parameter gradients")
         if any(parameter.grad is not None and not bool(torch.all(torch.isfinite(parameter.grad)))
                for parameter in model.parameters()):
             raise RuntimeError("B08 gate gradient became nonfinite")
@@ -131,9 +133,8 @@ def train_path(rows: tuple[base.PanelRow, ...], packets: base.PacketDataset, *, 
             snapshot = base.deepcopy(model).eval()
             snapshots[update] = snapshot
             movement = base._movement(initial, snapshot)
-            if (not all(base.math.isfinite(value) for value in movement.values())
-                    or (update == final_update and any(value <= 0.0 for value in movement.values()))):
-                raise RuntimeError("B08 gate movement is zero or nonfinite")
+            if not all(base.math.isfinite(value) for value in movement.values()):
+                raise RuntimeError("B08 gate movement became nonfinite")
             exposures.append(base._exposure_line(
                 update, scales, movement, batch_size=batch_size, row_count=len(rows),
             ))

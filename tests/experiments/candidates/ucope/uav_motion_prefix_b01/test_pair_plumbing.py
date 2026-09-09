@@ -33,11 +33,20 @@ def runner_module():
                                                (7301, "renewal_b01", False), (9001, "renewal_b01", True),
                                                (7401, "renewal_b02", False), (9001, "renewal_b02", True),
                                                (7501, "renewal_b03", False), (9001, "renewal_b03", True),
-                                               (7601, "renewal_frozen_b01", False), (9001, "renewal_frozen_b01", True)])
+                                               (7601, "renewal_frozen_b01", False), (9001, "renewal_frozen_b01", True),
+                                               (7701, "renewal_fixed_b01", False), (9001, "renewal_fixed_b01", True),
+                                               (7801, "renewal_fixed_b02", False), (9001, "renewal_fixed_b02", True),
+                                               (8001, "renewal_fixed_b03", False), (9001, "renewal_fixed_b03", True),
+                                               (8101, "renewal_short_fixed_b01", False), (9001, "renewal_short_fixed_b01", True),
+                                               (8201, "renewal_short_fixed_b02", False), (9001, "renewal_short_fixed_b02", True),
+                                               (8301, "renewal_short_fixed_b03", False), (9001, "renewal_short_fixed_b03", True),
+                                               (7901, "renewal_hover_b01", False), (9001, "renewal_hover_b01", True)])
 def test_cli_actual_config_and_rng_propagation(seed, pair, fixture, scratch, monkeypatch):
     # Exercise the actual CLI/Config/run_pair stream expressions; substitute the
     # workload at its existing import boundary, without constructing any model.
-    fitted = ("T", "F", "G") if pair == "renewal_frozen_b01" else ("T", "G")
+    short = pair in ("renewal_short_fixed_b01", "renewal_short_fixed_b02", "renewal_short_fixed_b03")
+    fixed = pair in ("renewal_fixed_b01", "renewal_fixed_b02", "renewal_fixed_b03", "renewal_short_fixed_b01", "renewal_short_fixed_b02", "renewal_short_fixed_b03", "renewal_hover_b01")
+    fitted = ("F", "G") if fixed else ("T", "F", "G") if pair == "renewal_frozen_b01" else ("T", "G")
     calls = {"initialization": [], "generator": [], "reset": [], "episodes": [], "saved": [], "credit": [], "update_credit": [], "heads": []}
     torch = ModuleType("torch")
     torch.set_num_threads = torch.set_num_interop_threads = lambda n: None
@@ -75,10 +84,18 @@ def test_cli_actual_config_and_rng_propagation(seed, pair, fixture, scratch, mon
         calls["episodes"].append((reset, velocity, duration, metadata.copy()))
         calls["credit"].append(kwargs.get("ratio_grouping", "joint"))
         assert "entropy_coef" not in kwargs
-        assert kwargs.get("renewal", False) == (pair in ("renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01"))
+        assert kwargs.get("renewal", False) == (pair in ("renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01", "renewal_fixed_b01", "renewal_fixed_b02", "renewal_fixed_b03", "renewal_short_fixed_b01", "renewal_short_fixed_b02", "renewal_short_fixed_b03", "renewal_hover_b01"))
         if metadata["arm"] in ("T", "F"):
             counts["duration_decisions"] += 5
-        emit(dict(metadata, J=0.))
+        assert kwargs.get("duration_support", (1, 4)) == ((1, 2) if short else (1, 4))
+        value = {"F": 1., "G": 0., "H": 2.}[metadata["arm"]] if pair in ("renewal_hover_b01", "renewal_fixed_b03", "renewal_short_fixed_b01", "renewal_short_fixed_b02", "renewal_short_fixed_b03") else 0.
+        output = dict(metadata, J=value)
+        if short:
+            d2 = 2 if metadata["arm"] == "F" else 0
+            counts["d2"] += d2
+            counts[metadata["phase"] + "_d2"] += d2
+            output.update(d2=d2, d4=0)
+        emit(output)
         return {}
     learner.collect_episode = collect
     monkeypatch.setitem(sys.modules, prefix + "learner", learner)
@@ -96,10 +113,10 @@ def test_cli_actual_config_and_rng_propagation(seed, pair, fixture, scratch, mon
     assert summary["configuration"]["horizon"] == (8 if fixture else 256)
     assert summary["pair"] == ("ENGINEERING_FIXTURE" if fixture else pair)
     assert summary["declared_masters"] == ([seed] if fixture else list(study.declared_masters(pair)))
-    assert summary["card_section"] == (7 if fixture and pair in ("renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01") else "CODE_SPEC §4" if fixture and pair in ("b03", "b04", "renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01") else "CODE_SPEC §8" if fixture
-                                       else 5 if pair in ("b02", "b03", "b04", "renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01") else 10 if pair == "p24" else 8)
-    grouping = "agent_compound" if pair in ("b02", "b03", "b04", "renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01") else "joint"
-    entropy_coef = 0.0 if pair in ("b03", "b04", "renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01") else 0.01
+    assert summary["card_section"] == (7 if fixture and pair in ("renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01", "renewal_fixed_b01", "renewal_fixed_b02", "renewal_fixed_b03", "renewal_short_fixed_b01", "renewal_short_fixed_b02", "renewal_short_fixed_b03", "renewal_hover_b01") else "CODE_SPEC §4" if fixture and pair in ("b03", "b04", "renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01", "renewal_fixed_b01", "renewal_fixed_b02", "renewal_fixed_b03", "renewal_short_fixed_b01", "renewal_short_fixed_b02", "renewal_short_fixed_b03", "renewal_hover_b01") else "CODE_SPEC §8" if fixture
+                                       else 5 if pair in ("b02", "b03", "b04", "renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01", "renewal_fixed_b01", "renewal_fixed_b02", "renewal_fixed_b03", "renewal_short_fixed_b01", "renewal_short_fixed_b02", "renewal_short_fixed_b03", "renewal_hover_b01") else 10 if pair == "p24" else 8)
+    grouping = "agent_compound" if pair in ("b02", "b03", "b04", "renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01", "renewal_fixed_b01", "renewal_fixed_b02", "renewal_fixed_b03", "renewal_short_fixed_b01", "renewal_short_fixed_b02", "renewal_short_fixed_b03", "renewal_hover_b01") else "joint"
+    entropy_coef = 0.0 if pair in ("b03", "b04", "renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01", "renewal_fixed_b01", "renewal_fixed_b02", "renewal_fixed_b03", "renewal_short_fixed_b01", "renewal_short_fixed_b02", "renewal_short_fixed_b03", "renewal_hover_b01") else 0.01
     assert set(calls["credit"]) == {grouping}
     assert all(c.get("ratio_grouping", "joint") == grouping for c in calls["update_credit"])
     assert summary["configuration"]["ratio_grouping"] == grouping
@@ -115,8 +132,8 @@ def test_cli_actual_config_and_rng_propagation(seed, pair, fixture, scratch, mon
     assert calls["initialization"] == [seed]  # templates retains b+11 internally, unchanged.
     b = 100000 * seed
     assert summary["seeds"]["initialization"] == b + 11
-    if pair in ("b04", "renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01"):
-        expected_object, expected_card = ((study.RENEWAL_OBJECT, study.RENEWAL_CARD) if pair in ("renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01")
+    if pair in ("b04", "renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01", "renewal_fixed_b01", "renewal_fixed_b02", "renewal_fixed_b03", "renewal_short_fixed_b01", "renewal_short_fixed_b02", "renewal_short_fixed_b03", "renewal_hover_b01"):
+        expected_object, expected_card = ((study.RENEWAL_OBJECT, study.RENEWAL_CARD) if pair in ("renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01", "renewal_fixed_b01", "renewal_fixed_b02", "renewal_fixed_b03", "renewal_short_fixed_b01", "renewal_short_fixed_b02", "renewal_short_fixed_b03", "renewal_hover_b01")
                                           else (study.B04_OBJECT, study.B04_CARD))
         if pair == "renewal_b02":
             expected_object, expected_card = study.RENEWAL_B02_OBJECT, study.RENEWAL_B02_CARD
@@ -124,24 +141,64 @@ def test_cli_actual_config_and_rng_propagation(seed, pair, fixture, scratch, mon
             expected_object, expected_card = study.RENEWAL_B03_OBJECT, study.RENEWAL_B03_CARD
         if pair == "renewal_frozen_b01":
             expected_object, expected_card = study.FROZEN_OBJECT, study.FROZEN_CARD
+        if fixed:
+            expected_object, expected_card = study.FIXED_OBJECT, study.FIXED_CARD
+        if pair == "renewal_fixed_b02":
+            expected_object, expected_card = study.FIXED_B02_OBJECT, study.FIXED_B02_CARD
+        if pair == "renewal_fixed_b03":
+            expected_object, expected_card = study.FIXED_B03_OBJECT, study.FIXED_B03_CARD
+        if pair == "renewal_short_fixed_b01":
+            expected_object, expected_card = study.SHORT_FIXED_OBJECT, study.SHORT_FIXED_CARD
+            assert summary["treatment_duration_support"] == [1, 2]
+        if pair == "renewal_short_fixed_b02":
+            expected_object, expected_card = study.SHORT_FIXED_B02_OBJECT, study.SHORT_FIXED_B02_CARD
+            assert summary["treatment_duration_support"] == [1, 2]
+        if pair == "renewal_short_fixed_b03":
+            expected_object, expected_card = study.SHORT_FIXED_B03_OBJECT, study.SHORT_FIXED_B03_CARD
+            assert summary["treatment_duration_support"] == [1, 2]
+        if pair == "renewal_hover_b01":
+            expected_object, expected_card = study.HOVER_OBJECT, study.HOVER_CARD
         assert summary["object"] == expected_object and summary["card"] == expected_card
         assert summary["ratio_grouping"] == grouping and summary["entropy_coef"] == 0.0
         for binding in (summary, summary["configuration"]):
             assert binding["treatment_duration_mode"] == "sampled_command"
             assert binding["treatment_duration_head_seed"] == b + 12
-        expected_heads = [(True, {"duration_head_seed": b + 12})]
-        if pair == "renewal_frozen_b01":
+        expected_heads = [] if fixed else [(True, {"duration_head_seed": b + 12})]
+        if pair == "renewal_frozen_b01" or fixed:
             expected_heads.append((True, {"duration_head_seed": b + 12, "freeze_duration": True}))
         expected_heads.append((False, {"duration_head_seed": None}))
         assert calls["heads"] == expected_heads
-        assert summary["arms"]["T"]["duration_mode"] == "sampled_command"
-        assert summary["arms"]["T"]["duration_head_seed"] == b + 12
+        first = "F" if fixed else "T"
+        assert summary["arms"][first]["duration_mode"] == "sampled_command"
+        assert summary["arms"][first]["duration_head_seed"] == b + 12
         assert summary["arms"]["G"]["duration_mode"] == "none"
         assert summary["arms"]["G"]["duration_head_seed"] is None
     else:
         assert calls["heads"] == [(True, {}), (False, {})]
+    if fixed:
+        assert summary["primary"]["complete"] and set(summary["primary"]["J"]) == {"F", "G", "H"}
+        assert {k for k in summary["primary"] if "_minus_" in k} == {"F_minus_G", "F_minus_H", "G_minus_H"}
+        assert list(summary["arms"]) == ["F", "G"]
+    if pair == "renewal_hover_b01":
+        assert summary["primary"]["selected_contrast"] == "F_minus_H"
+        assert summary["primary"]["F_minus_H"]["mean"] == -1.
+        assert summary["primary"]["F_minus_G"]["mean"] == 1.
+    if pair in ("renewal_fixed_b03", "renewal_short_fixed_b01", "renewal_short_fixed_b02", "renewal_short_fixed_b03"):
+        assert "selected_contrast" not in summary["primary"]
+        assert summary["primary"]["complete"] == summary["primary"]["F_minus_G"]["complete"]
+        assert summary["primary"]["F_minus_G"]["mean"] == 1.
+        assert summary["primary"]["F_minus_H"]["mean"] == -1.
     assert calls["reset"] == [b + 1000] * len(fitted)
     train_n, eval_n = (2, 2) if fixture else (512, 32)
+    if short:
+        assert summary["counts"]["d2"] == 2 * (train_n + eval_n)
+        assert summary["counts"]["train_d2"] == 2 * train_n
+        assert summary["counts"]["eval_d2"] == 2 * eval_n
+        assert summary["counts"]["d4"] == 0
+        emitted = [json.loads(line) for line in (scratch / "episodes.jsonl").read_text().splitlines()]
+        assert sum(row["d2"] for row in emitted) == summary["counts"]["d2"]
+        rolls = [json.loads(line) for line in (scratch / "rollouts.jsonl").read_text().splitlines()]
+        assert all(row["d2"] == (4 if row["arm"] == "F" else 0) and row["d4"] == 0 for row in rolls)
     assert len(calls["update_credit"]) == len(fitted) * train_n // 2
     for arm in fitted:
         assert sum(c["arm"] == arm for c in calls["update_credit"]) == train_n // 2
@@ -254,7 +311,7 @@ def test_b02_negative_partial_and_fixture_rejection():
         study.aggregate(inputs, "b02")
 
 
-@pytest.mark.parametrize("pair", ["b03", "b04", "renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01"])
+@pytest.mark.parametrize("pair", ["b03", "b04", "renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01", "renewal_fixed_b01", "renewal_fixed_b02", "renewal_fixed_b03", "renewal_short_fixed_b01", "renewal_short_fixed_b02", "renewal_short_fixed_b03", "renewal_hover_b01"])
 def test_single_pair_rejects_aggregate_before_input_access(pair, scratch, monkeypatch):
     with pytest.raises(ValueError, match="one training pair"):
         study.aggregate(None, pair)
@@ -273,7 +330,14 @@ def test_single_pair_rejects_aggregate_before_input_access(pair, scratch, monkey
                          + [("renewal_b01", s) for s in (7201, 7302, 7401, 7501, 9001)]
                          + [("renewal_b02", s) for s in (7301, 7402, 7501, 9001)]
                          + [("renewal_b03", s) for s in (7301, 7401, 7502, 9001)]
-                         + [("renewal_frozen_b01", s) for s in (7301, 7401, 7501, 7602, 9001)])
+                         + [("renewal_frozen_b01", s) for s in (7301, 7401, 7501, 7602, 9001)]
+                         + [("renewal_fixed_b01", s) for s in (7501, 7601, 7702, 9001)]
+                         + [("renewal_fixed_b02", s) for s in (7601, 7701, 7802, 9001)]
+                         + [("renewal_fixed_b03", s) for s in (7801, 7901, 8002, 9001)]
+                         + [("renewal_short_fixed_b01", s) for s in (7901, 8001, 8102, 9001)]
+                         + [("renewal_short_fixed_b02", s) for s in (8001, 8101, 8202, 9001)]
+                         + [("renewal_short_fixed_b03", s) for s in (8101, 8201, 8302, 9001)]
+                         + [("renewal_hover_b01", s) for s in (7701, 7801, 7902, 9001)])
 def test_single_pair_wrong_master_never_enters_workload(pair, seed, scratch, monkeypatch):
     runner = runner_module()
     monkeypatch.setattr(runner, "run_pair", lambda *a: pytest.fail("workload entered"))
@@ -281,3 +345,20 @@ def test_single_pair_wrong_master_never_enters_workload(pair, seed, scratch, mon
     with pytest.raises(SystemExit) as error:
         runner.main()
     assert error.value.code == 2
+
+
+@pytest.mark.parametrize('missing', [None, 'H', 'G'])
+def test_renewal_hover_b01_primary_selection_and_historical_completeness(missing):
+    rows=[dict(arm=a,phase='eval',episode=e,J=j) for a,j in [('F',1.),('G',0.),('H',2.)]
+          if a != missing for e in range(2)]
+    new=study.primary_from_rows(rows,2,renewal=True,fixed=True,hover=True)
+    old=study.primary_from_rows(rows,2,renewal=True,fixed=True)
+    assert new['selected_contrast']=='F_minus_H' and 'selected_contrast' not in old
+    assert new['complete']==(missing!='H')
+    assert old['complete']==(missing!='G')
+    assert new['F_minus_H']['complete']==(missing!='H')
+    assert new['F_minus_G']['complete']==(missing!='G')
+    for key in ('F_minus_G','F_minus_H','G_minus_H'):
+        assert new[key]==old[key]
+    if missing is None:
+        assert new['F_minus_H']['mean']==-1. and new['F_minus_G']['mean']==1.
