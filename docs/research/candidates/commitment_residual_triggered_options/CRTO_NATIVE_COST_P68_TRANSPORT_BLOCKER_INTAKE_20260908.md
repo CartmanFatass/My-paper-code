@@ -1,6 +1,7 @@
 # CRTO P68 sent-input mismatch: blocker intake
 
-2026-09-08 PDT. **SENT_INPUT_MISMATCH; no formed scientific decision.**
+2026-09-08 PDT. **SENT_INPUT_MISMATCH; no accepted scientific decision. A later scoped response
+file exists and remains scientifically unintaken.**
 Request `2026-09-08-crto-native-cost-reentry-convergence-01`, node
 `em:commitment_residual_triggered_options:convergence`.
 
@@ -79,6 +80,28 @@ completion or no GitHub delivery. This intake did not inspect provider output or
 comments. The observed remote branch SHA is only a point-in-time branch fact. Provider acceptance
 and any later output/delivery remain unresolved; no scientific decision is taken from them.
 
+## Later immutable file delivery: preserve, do not silently accept
+
+The immediate push of the preserved intake commit `7a3960998ab2263f43914fc03025622268aedb2b`
+was rejected as non-fast-forward. Fetching the existing direction branch revealed
+`febfad9778a0a69d3be2618739a31eec86721caa`, whose only changed path from the prior branch HEAD is
+the scoped `pro_packets/20260908_native_cost_reentry_convergence/archive/RESPONSE.md`.
+Its recorded commit time is `2026-09-09T04:12:09Z`; this is Git metadata, not a provider-generation
+timer. The immutable delivery is:
+
+[Scoped response at its original commit](https://github.com/CartmanFatass/My-paper-code/blob/febfad9778a0a69d3be2618739a31eec86721caa/docs/research/candidates/commitment_residual_triggered_options/pro_packets/20260908_native_cost_reentry_convergence/archive/RESPONSE.md).
+
+DM inspected the commit identity and changed-path list, **not the response's scientific body**.
+The new file does not repair the recorded sent-input mismatch or establish an accepted direction
+answer by its existence. Issue-comment delivery and exact response-to-request conformance remain
+unchecked in this bounded blocker assignment. This later observation confirms why the earlier
+missing local archive was never a no-output finding.
+
+A normal merge, `0a41e0ea34b7457f2fc08e6cce9b9a2305f56343`, preserved both the published response
+commit and the blocker intake without rewriting either history; its push succeeded. Root was
+notified natively of the concurrent delivery. No replacement, resend or scientific intake was
+performed. The response is preserved for Root's separately handled recovery/intake route.
+
 ## Counts, scientific reading and owner flags
 
 This intake adds **0 scientific invocations, 0 environment/model/evaluator/native calls,
@@ -109,8 +132,9 @@ Engineering-scope §4: **none**. No source, tests, governance, DIRECTION or runt
    proposal unselected. There is no `LOCAL_PROVISIONAL` scientific continuation at this tier.
 3. **Unresolved Root action.** Accept/integrate this intake, then resolve transport recovery
    separately with the existing Transport. Before any correction is authorized, reconcile the
-   original accepted visible message and any provider generation or fixed-file/Issue delivery;
-   establish the precise allowed correction scope. A hash of the intended prompt, absent local
+   original accepted visible message, the now-present immutable response at `febfad9778`, and
+   Issue delivery; establish the precise allowed correction or full-response-intake scope.
+   A hash of the intended prompt, absent local
    archive or closed tab cannot justify a resend. This DM does not choose a replacement or
    corrective prompt and does not request another Send under the old handoff.
 
