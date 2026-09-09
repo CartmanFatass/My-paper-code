@@ -1,0 +1,136 @@
+{
+  "kind": "P80_FULL_RESPONSE_INTAKE_RECEIPTS",
+  "read_utc": "2026-09-09T13:11:08.677129+00:00",
+  "request_id": "2026-09-09-acvc-native-link-loss-followup-convergence-02",
+  "fixed_input_sha": "aaa158275389d33d762d4ac444cc1067b3b801cf",
+  "fixed_task_sha": "d86d328d30f1bf502d049d6d3770c40c494512c8",
+  "prior_ready_handoff_sha": "b4308d2e2c5e786b017a5071f747fb6dd6ca1584",
+  "delivery_commit": "b7e659e8b0fb7f250c2b2fe43e179f2c2d0f14c4",
+  "delivery_commit_is_descendant": true,
+  "changed_delivery_paths": [
+    "docs/research/candidates/acvc/pro_packets/20260909_native_link_loss_followup_convergence/archive/RESPONSE.md"
+  ],
+  "full_response": {
+    "path": "docs/research/candidates/acvc/pro_packets/20260909_native_link_loss_followup_convergence/archive/RESPONSE.md",
+    "bytes": 27036,
+    "sha256": "41e7a9fd1b6e3950e90a51fa07ac8689d83b9cf464a4a2fd217dd95ea4295159",
+    "git_blob_sha": "81d36c0c2215e4ea4416495182f0d9277a38f76f",
+    "github_immutable_read_matches_git": true,
+    "entire_response_read_by_DM": true,
+    "worktree_lf_normalized_content_matches": true,
+    "raw_byte_authority": "GitHub file bytes at delivery commit, identical to git show; Windows checkout EOL conversion is not substituted for the immutable byte hash."
+  },
+  "raw_transport_copies": {
+    "CHAT_RECEIPT.md": {
+      "source": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\acvc\\2026-09-09-acvc-native-link-loss-followup-convergence-02\\2026-09-09-acvc-native-link-loss-followup-convergence-02--acvc--attempt-01__02_RESPONSE.md",
+      "bytes": 391,
+      "sha256": "29f3d1dea062d0802b943e069d5bdda19e60cf75d5d96976651ee0d6cabb6451"
+    },
+    "TRANSPORT_FACTS.json": {
+      "source": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\acvc\\2026-09-09-acvc-native-link-loss-followup-convergence-02\\2026-09-09-acvc-native-link-loss-followup-convergence-02--acvc--attempt-01__03_TRANSPORT_FACTS.json",
+      "bytes": 5733,
+      "sha256": "a608cb867e8b4c951b2a2eacb24a1d9877a20ac61ab502e25e0fbb761daa4f3c"
+    },
+    "TRANSPORT_MANIFEST.json": {
+      "source": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\acvc\\2026-09-09-acvc-native-link-loss-followup-convergence-02\\2026-09-09-acvc-native-link-loss-followup-convergence-02--acvc__PACKET_MANIFEST.json",
+      "bytes": 1819,
+      "sha256": "35541212a7853c2de16291ecbffbdf1c31c3f7926dd1120a0a85f3e0bcff78e3"
+    },
+    "TRANSPORT_PROMPT.md": {
+      "source": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\acvc\\2026-09-09-acvc-native-link-loss-followup-convergence-02\\2026-09-09-acvc-native-link-loss-followup-convergence-02--acvc__00_PROMPT.md",
+      "bytes": 1253,
+      "sha256": "44c01225354d1015fbb82504f34218bf009e5ff45987b7a695af0efdce3f6e43"
+    }
+  },
+  "delivery_comment": {
+    "id": 5602246491,
+    "url": "https://github.com/CartmanFatass/My-paper-code/issues/14#issuecomment-5602246491",
+    "created_at": "2026-09-09T13:00:32Z",
+    "task_input_and_response_links_match": true,
+    "snapshot_sha256": "e272edb1ccd4c69a839d78e4994cc053c8cb5e9d4e484e01145365da1cc76e36"
+  },
+  "transport": {
+    "conversation_binding_key": "em:acvc:convergence",
+    "conversation_id": "6aa12e74-8e54-83e8-95f6-001681b456f7",
+    "user_message_id": "a1c0e8ea-4dce-4ee5-8b58-14af2808b9f2",
+    "assistant_message_id": "0cc12c41-606e-442d-ac4b-10c573aa3887",
+    "visible_model": "6 Pro",
+    "underlying_model": "Latest",
+    "thinking_effort": "Pro, 5 of 5.",
+    "send_click_count": 1,
+    "wait_status": "NATURAL_COMPLETION",
+    "tab_lifecycle": "CLOSED"
+  },
+  "transport_scientific_flag": "Original false flag retained in raw Transport facts; Transport archived short links. DM accepts the full response separately in the scientific intake.",
+  "accepted_record_numeric_checks": {
+    "8901": {
+      "five_signed_means_and_conditional_SEs_match": true,
+      "counts": {
+        "train_episodes": 1024,
+        "eval_episodes": 128,
+        "total_team_steps": 294912,
+        "explicit_resets": 1152,
+        "constructors_from_run_summary": 4,
+        "unscored_constructor_resets_from_run_summary": 4,
+        "rollouts": 512,
+        "adam": 2048
+      },
+      "cost": {
+        "process_wall_s": 359.17,
+        "focused_check_wall_s": 14.2369735,
+        "logical_study_bill_s": 373.4069735,
+        "complete_arm_bill_s": {
+          "T": 199.8208294399871,
+          "G": 215.51174089401928
+        },
+        "peak_rss_bytes": 565547008,
+        "aggregate_cpu": "unmeasured",
+        "scratch_high_water": "unmeasured"
+      }
+    },
+    "8902": {
+      "five_signed_means_and_conditional_SEs_match": true,
+      "counts": {
+        "train_episodes": 1024,
+        "eval_episodes": 128,
+        "total_team_steps": 294912,
+        "explicit_resets": 1152,
+        "constructors_from_run_summary": 4,
+        "unscored_constructor_resets_from_run_summary": 4,
+        "rollouts": 512,
+        "adam": 2048
+      },
+      "cost": {
+        "process_wall_s": 357.55,
+        "focused_check_wall_s": 5.4396806,
+        "logical_study_bill_s": 362.9896806,
+        "complete_arm_bill_s": {
+          "T": 191.57035297096837,
+          "G": 207.23324539599372
+        },
+        "peak_rss_bytes": 562565120,
+        "aggregate_cpu": "unmeasured",
+        "scratch_high_water": "unmeasured"
+      }
+    }
+  },
+  "intake_scientific_exposure": {
+    "scientific_invocations": 0,
+    "model_instantiations": 0,
+    "native_team_steps": 0,
+    "optimizer_updates": 0,
+    "evaluation_episodes": 0,
+    "probes": 0,
+    "policy_search_candidates": 0
+  },
+  "new_or_changed_candidate_selected": false,
+  "authority_interpretation": "Full response selects end of instantiated learned selective-retrace package only; no successor, recast, Portfolio action or scientific allocation.",
+  "issue_intake_state": {
+    "url": "https://github.com/CartmanFatass/My-paper-code/issues/14",
+    "state": "OPEN",
+    "body_marks_current_end_boundary": true,
+    "accepted_delivery_comments_preserved": 2,
+    "snapshot_path": "docs/research/candidates/acvc/pro_packets/20260909_native_link_loss_followup_convergence/archive/ISSUE_INTAKE_SNAPSHOT.json",
+    "snapshot_sha256": "e22ae28554dcfa1d91938821b2a0c6893bcc836b532546a1fdecbaccc1b7f271"
+  }
+}

@@ -1,3 +1,13 @@
+Current P80 conclusion: **end the instantiated learned selective-retrace comparison, with no successor selected.** The complete original-node response was read and accepted as conforming. This covers the tested T/G gates on the outcome-informed frozen DENSE/8201 base, unchanged heads/objective and 512-episode training budget. It closes neither ACVC nor retained-history/retrace hypotheses and changes no Portfolio state or recasts count.
+
+[Complete immutable P80 decision](https://github.com/CartmanFatass/My-paper-code/blob/b7e659e8b0fb7f250c2b2fe43e179f2c2d0f14c4/docs/research/candidates/acvc/pro_packets/20260909_native_link_loss_followup_convergence/archive/RESPONSE.md) · [confirmed delivery comment](https://github.com/CartmanFatass/My-paper-code/issues/14#issuecomment-5602246491).
+
+Both gates beat C and lose to F in both instances; T−G changes sign. F remains the strongest attained fixed null, with no stable, causal, optimal-policy or headroom conclusion. No third unchanged instance, changed B, diagnostic prelude, new card or scientific invocation is selected. A future specifically motivated learner remains possible, but no successor or preparation task follows from this decision. The complete response and every prior result remain evidence.
+
+The original Transport completed one Send in the same bound conversation and archived its receipt. No additional prompt or Send is required for this completed question. Root handles integration and any later assignment; the direction-local scientific intake applies the exact end boundary.
+
+Earlier P80 question and publication state (historical, retained below):
+
 The current ACVC question is the smallest direction-local conclusion after two accepted native comparisons: end the instantiated learned selective-retrace package, or select one concrete changed B whose decision value is specifically justified. The DM recommends ending only this tested package. The direction decision is pending; no changed treatment is nominated merely to fill capacity.
 
 Both learned gates beat always-apply C and lose to fixed retrace F in both instances. T−G is +0.0369687053 J in B01 and −0.0065945815 J in B02. F remains the strongest attained fixed null. The retained 32-episode panels are conditional on two trained pairs and the outcome-informed DENSE/8201 base; they do not establish population, causal, optimality, headroom or whole-direction conclusions.
