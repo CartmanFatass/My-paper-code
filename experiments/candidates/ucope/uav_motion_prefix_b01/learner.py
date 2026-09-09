@@ -29,7 +29,7 @@ def clipped_policy_loss(new_logp, old_logp, advantage, velocity_mask=None):
 def collect_episode(env, actor, critic, horizon, reset_seed, velocity_rng, duration_rng,
                     metadata, check, counts, emit_episode, emit_diagnostic, limits,
                     real=False, diagnostics=False, ratio_grouping="joint", value_moments=None, renewal=False,
-                    duration_support=(1, 4)):
+                    duration_support=(1, 4), velocity_mode="sampled"):
     """Counts survive an exception; only a complete episode emits a scored row."""
     check()
     obs, info = env.reset(seed=reset_seed)
@@ -77,6 +77,8 @@ def collect_episode(env, actor, critic, horizon, reset_seed, velocity_rng, durat
             if not torch.isfinite(mean).all() or not torch.isfinite(value):
                 raise FloatingPointError("nonfinite learner during collection")
             sample_options = {"duration_mask": duration_mask} if renewal else {}
+            if velocity_mode == "mean":
+                sample_options["velocity_mode"] = velocity_mode
             u, duration = sample(actor, mean, recurrent, active, t == 0,
                                  velocity_rng, duration_rng, **sample_options)
             selected_steps = np.where(duration.numpy() == 1, duration_support[1], duration_support[0])

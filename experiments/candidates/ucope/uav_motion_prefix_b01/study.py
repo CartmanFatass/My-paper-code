@@ -37,6 +37,8 @@ SHORT_FIXED_B03_CARD = "docs/research/candidates/ucope/UCOPE_UAV_SHORT_FIXED_REN
 SHORT_FIXED_B03_OBJECT = "UCOPE-UAV-SHORT-FIXED-RENEWAL-B03"
 HOVER_CARD = "docs/research/candidates/ucope/UCOPE_UAV_FIXED_RENEWAL_HOVER_B01_SCIENCE_CARD_20260909.md"
 HOVER_OBJECT = "UCOPE-UAV-FIXED-RENEWAL-HOVER-B01"
+MEAN_VELOCITY_CARD = "docs/research/candidates/ucope/UCOPE_UAV_MEAN_VELOCITY_RENEWAL_B01_SCIENCE_CARD_20260909.md"
+MEAN_VELOCITY_OBJECT = "UCOPE-UAV-MEAN-VELOCITY-RENEWAL-B01"
 
 
 def declared_masters(pair):
@@ -70,9 +72,11 @@ def declared_masters(pair):
         return (8201,)
     if pair == "renewal_short_fixed_b03":
         return (8301,)
+    if pair == "renewal_mean_velocity_b01":
+        return (8401,)
     if pair == "renewal_hover_b01":
         return (7901,)
-    raise ValueError("pair must be p21, p24, b02, b03, b04, renewal_b01, renewal_b02 or renewal_b03 or renewal_frozen_b01 or renewal_fixed_b01 or renewal_fixed_b02 or renewal_fixed_b03 or renewal_short_fixed_b01 or renewal_short_fixed_b02 or renewal_short_fixed_b03 or renewal_hover_b01")
+    raise ValueError("pair must be p21, p24, b02, b03, b04, renewal_b01, renewal_b02 or renewal_b03 or renewal_frozen_b01 or renewal_fixed_b01 or renewal_fixed_b02 or renewal_fixed_b03 or renewal_short_fixed_b01 or renewal_short_fixed_b02 or renewal_short_fixed_b03 or renewal_mean_velocity_b01 or renewal_hover_b01")
 
 
 @dataclass
@@ -92,10 +96,10 @@ class Config:
     treatment_duration_head_seed: int | None = field(init=False)
 
     def __post_init__(self):
-        self.ratio_grouping = "agent_compound" if self.pair in ("b02", "b03", "b04", "renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01", "renewal_fixed_b01", "renewal_fixed_b02", "renewal_fixed_b03", "renewal_short_fixed_b01", "renewal_short_fixed_b02", "renewal_short_fixed_b03", "renewal_hover_b01") else "joint"
-        self.entropy_coef = 0.0 if self.pair in ("b03", "b04", "renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01", "renewal_fixed_b01", "renewal_fixed_b02", "renewal_fixed_b03", "renewal_short_fixed_b01", "renewal_short_fixed_b02", "renewal_short_fixed_b03", "renewal_hover_b01") else 0.01
-        self.treatment_duration_mode = "sampled_command" if self.pair in ("b04", "renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01", "renewal_fixed_b01", "renewal_fixed_b02", "renewal_fixed_b03", "renewal_short_fixed_b01", "renewal_short_fixed_b02", "renewal_short_fixed_b03", "renewal_hover_b01") else "independent"
-        self.treatment_duration_head_seed = 100000 * self.seed + 12 if self.pair in ("b04", "renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01", "renewal_fixed_b01", "renewal_fixed_b02", "renewal_fixed_b03", "renewal_short_fixed_b01", "renewal_short_fixed_b02", "renewal_short_fixed_b03", "renewal_hover_b01") else None
+        self.ratio_grouping = "agent_compound" if self.pair in ("b02", "b03", "b04", "renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01", "renewal_fixed_b01", "renewal_fixed_b02", "renewal_fixed_b03", "renewal_short_fixed_b01", "renewal_short_fixed_b02", "renewal_short_fixed_b03", "renewal_mean_velocity_b01", "renewal_hover_b01") else "joint"
+        self.entropy_coef = 0.0 if self.pair in ("b03", "b04", "renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01", "renewal_fixed_b01", "renewal_fixed_b02", "renewal_fixed_b03", "renewal_short_fixed_b01", "renewal_short_fixed_b02", "renewal_short_fixed_b03", "renewal_mean_velocity_b01", "renewal_hover_b01") else 0.01
+        self.treatment_duration_mode = "sampled_command" if self.pair in ("b04", "renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01", "renewal_fixed_b01", "renewal_fixed_b02", "renewal_fixed_b03", "renewal_short_fixed_b01", "renewal_short_fixed_b02", "renewal_short_fixed_b03", "renewal_mean_velocity_b01", "renewal_hover_b01") else "independent"
+        self.treatment_duration_head_seed = 100000 * self.seed + 12 if self.pair in ("b04", "renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01", "renewal_fixed_b01", "renewal_fixed_b02", "renewal_fixed_b03", "renewal_short_fixed_b01", "renewal_short_fixed_b02", "renewal_short_fixed_b03", "renewal_mean_velocity_b01", "renewal_hover_b01") else None
 
     @classmethod
     def engineering(cls, seed=9001, pair="p21"):
@@ -133,13 +137,17 @@ def difference_stats(differences):
                                if len(differences) > 1 else None)}
 
 
-def primary_from_rows(rows, expected, renewal=False, frozen=False, fixed=False, hover=False):
-    first = "F" if fixed else "T"
+def primary_from_rows(rows, expected, renewal=False, frozen=False, fixed=False, hover=False,
+                      mean_velocity=False):
+    first = "F_mean" if mean_velocity else "F" if fixed else "T"
+    second = "G_mean" if mean_velocity else "G"
+    labels = (("F_sampled", "F_mean", "G_sampled", "G_mean", "H") if mean_velocity else
+              ("T", "F", "G", "H") if frozen else (first, "G", "H"))
     values = {arm: {r["episode"]: r["J"] for r in rows
-                    if r["arm"] == arm and r["phase"] == "eval"} for arm in (("T", "F", "G", "H") if frozen else (first, "G", "H"))}
+                    if r["arm"] == arm and r["phase"] == "eval"} for arm in labels}
     complete = {arm: set(v) == set(range(expected))
                and all(math.isfinite(x) for x in v.values()) for arm, v in values.items()}
-    result = {"complete": complete[first] and complete["G"],
+    result = {"complete": complete[first] and complete[second],
               "hover_complete": complete["H"],
               "J": {arm: [v[e] for e in sorted(v)] for arm, v in values.items()},
               "episode_ids": {arm: sorted(v) for arm, v in values.items()}}
@@ -151,6 +159,14 @@ def primary_from_rows(rows, expected, renewal=False, frozen=False, fixed=False, 
     if frozen:
         contrasts.extend((("T_minus_F", "T", "F"), ("F_minus_H", "F", "H")))
         result["secondary_complete"] = complete["T"] and complete["F"]
+    if mean_velocity:
+        contrasts = [(a + "_minus_" + b, a, b) for a, b in (
+            ("F_mean", "G_mean"), ("F_sampled", "G_sampled"),
+            ("F_mean", "H"), ("G_mean", "H"), ("F_sampled", "H"),
+            ("G_sampled", "H"), ("F_mean", "F_sampled"), ("G_mean", "G_sampled"))]
+        result.update(selected_contrast="F_mean_minus_G_mean", all_modes_complete=all(complete.values()),
+                      arm_means={arm: statistics.mean(v.values()) if v else None
+                                 for arm, v in values.items()})
     for name, first, second in contrasts:
         ids = sorted(values[first].keys() & values[second].keys())
         result[name] = difference_stats(values[first][i] - values[second][i] for i in ids)
@@ -161,7 +177,7 @@ def primary_from_rows(rows, expected, renewal=False, frozen=False, fixed=False, 
 
 
 def aggregate(summaries, pair="p21"):
-    if pair in ("b03", "b04", "renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01", "renewal_fixed_b01", "renewal_fixed_b02", "renewal_fixed_b03", "renewal_short_fixed_b01", "renewal_short_fixed_b02", "renewal_short_fixed_b03", "renewal_hover_b01"):
+    if pair in ("b03", "b04", "renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01", "renewal_fixed_b01", "renewal_fixed_b02", "renewal_fixed_b03", "renewal_short_fixed_b01", "renewal_short_fixed_b02", "renewal_short_fixed_b03", "renewal_mean_velocity_b01", "renewal_hover_b01"):
         raise ValueError(f"{pair.upper()} has one training pair and no multi-pair aggregate")
     declared = declared_masters(pair)
     if len(summaries) != 2:
@@ -258,8 +274,9 @@ def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=wri
 
     out = Path(out)
     out.mkdir(parents=True, exist_ok=True)
-    short = config.pair in ("renewal_short_fixed_b01", "renewal_short_fixed_b02", "renewal_short_fixed_b03")
-    fixed = config.pair in ("renewal_fixed_b01", "renewal_fixed_b02", "renewal_fixed_b03", "renewal_short_fixed_b01", "renewal_short_fixed_b02", "renewal_short_fixed_b03", "renewal_hover_b01")
+    mean_velocity = config.pair == "renewal_mean_velocity_b01"
+    short = config.pair in ("renewal_short_fixed_b01", "renewal_short_fixed_b02", "renewal_short_fixed_b03", "renewal_mean_velocity_b01")
+    fixed = config.pair in ("renewal_fixed_b01", "renewal_fixed_b02", "renewal_fixed_b03", "renewal_short_fixed_b01", "renewal_short_fixed_b02", "renewal_short_fixed_b03", "renewal_mean_velocity_b01", "renewal_hover_b01")
     deadline = Deadline(start, config.arm_cap, config.pair_cap, clock, first_arm="F" if fixed else "T")
     if factory is None:
         factory = ((lambda seed: SyntheticAdapter(seed, config.horizon)) if config.fixture else make_real)
@@ -290,19 +307,19 @@ def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=wri
                        card=B03_CARD if config.pair == "b03" else B02_CARD,
                        ratio_grouping=config.ratio_grouping,
                        card_section="CODE_SPEC §8" if config.fixture else 5)
-    if config.pair in ("b04", "renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01", "renewal_fixed_b01", "renewal_fixed_b02", "renewal_fixed_b03", "renewal_short_fixed_b01", "renewal_short_fixed_b02", "renewal_short_fixed_b03", "renewal_hover_b01"):
+    if config.pair in ("b04", "renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01", "renewal_fixed_b01", "renewal_fixed_b02", "renewal_fixed_b03", "renewal_short_fixed_b01", "renewal_short_fixed_b02", "renewal_short_fixed_b03", "renewal_mean_velocity_b01", "renewal_hover_b01"):
         summary.update(object=B04_OBJECT, card=B04_CARD, card_section="CODE_SPEC §4" if config.fixture else 5,
                        ratio_grouping=config.ratio_grouping,
                        treatment_duration_mode=config.treatment_duration_mode,
                        treatment_duration_head_seed=config.treatment_duration_head_seed)
-    credit_options = {"ratio_grouping": config.ratio_grouping} if config.pair in ("b02", "b03", "b04", "renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01", "renewal_fixed_b01", "renewal_fixed_b02", "renewal_fixed_b03", "renewal_short_fixed_b01", "renewal_short_fixed_b02", "renewal_short_fixed_b03", "renewal_hover_b01") else {}
+    credit_options = {"ratio_grouping": config.ratio_grouping} if config.pair in ("b02", "b03", "b04", "renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01", "renewal_fixed_b01", "renewal_fixed_b02", "renewal_fixed_b03", "renewal_short_fixed_b01", "renewal_short_fixed_b02", "renewal_short_fixed_b03", "renewal_mean_velocity_b01", "renewal_hover_b01") else {}
     update_options = dict(credit_options)
-    if config.pair in ("b03", "b04", "renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01", "renewal_fixed_b01", "renewal_fixed_b02", "renewal_fixed_b03", "renewal_short_fixed_b01", "renewal_short_fixed_b02", "renewal_short_fixed_b03", "renewal_hover_b01"):
+    if config.pair in ("b03", "b04", "renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01", "renewal_fixed_b01", "renewal_fixed_b02", "renewal_fixed_b03", "renewal_short_fixed_b01", "renewal_short_fixed_b02", "renewal_short_fixed_b03", "renewal_mean_velocity_b01", "renewal_hover_b01"):
         summary["entropy_coef"] = config.entropy_coef
         if config.fixture:
             summary["card_section"] = "CODE_SPEC §4"
         update_options["entropy_coef"] = config.entropy_coef
-    if config.pair in ("renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01", "renewal_fixed_b01", "renewal_fixed_b02", "renewal_fixed_b03", "renewal_short_fixed_b01", "renewal_short_fixed_b02", "renewal_short_fixed_b03", "renewal_hover_b01"):
+    if config.pair in ("renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01", "renewal_fixed_b01", "renewal_fixed_b02", "renewal_fixed_b03", "renewal_short_fixed_b01", "renewal_short_fixed_b02", "renewal_short_fixed_b03", "renewal_mean_velocity_b01", "renewal_hover_b01"):
         summary.update(object=RENEWAL_B03_OBJECT if config.pair == "renewal_b03" else
                        RENEWAL_B02_OBJECT if config.pair == "renewal_b02" else RENEWAL_OBJECT,
                        card=RENEWAL_B03_CARD if config.pair == "renewal_b03" else
@@ -333,8 +350,13 @@ def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=wri
         summary.update(object=SHORT_FIXED_B03_OBJECT, card=SHORT_FIXED_B03_CARD)
     if config.pair == "renewal_hover_b01":
         summary.update(object=HOVER_OBJECT, card=HOVER_CARD)
+    if mean_velocity:
+        summary.update(object=MEAN_VELOCITY_OBJECT, card=MEAN_VELOCITY_CARD,
+                       evaluation_velocity_modes=["sampled", "mean"],
+                       cost_projection="Per F/G fit: init + 131072 training steps + 1024 updates + "
+                                       "16384 final-policy steps + publication; G adds 8192 H steps")
     collect_options = dict(credit_options)
-    if config.pair in ("renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01", "renewal_fixed_b01", "renewal_fixed_b02", "renewal_fixed_b03", "renewal_short_fixed_b01", "renewal_short_fixed_b02", "renewal_short_fixed_b03", "renewal_hover_b01"):
+    if config.pair in ("renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01", "renewal_fixed_b01", "renewal_fixed_b02", "renewal_fixed_b03", "renewal_short_fixed_b01", "renewal_short_fixed_b02", "renewal_short_fixed_b03", "renewal_mean_velocity_b01", "renewal_hover_b01"):
         collect_options["renewal"] = True
     if short:
         collect_options["duration_support"] = (1, 2)
@@ -356,7 +378,7 @@ def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=wri
             if arm != fitted_arms[0]:
                 g_start = deadline.start_g(arm) if frozen else deadline.start_g()
             arm_start = start if arm == fitted_arms[0] else g_start
-            counts = new_counts(config.pair in ("renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01", "renewal_fixed_b01", "renewal_fixed_b02", "renewal_fixed_b03", "renewal_short_fixed_b01", "renewal_short_fixed_b02", "renewal_short_fixed_b03", "renewal_hover_b01"), short=short)
+            counts = new_counts(config.pair in ("renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01", "renewal_fixed_b01", "renewal_fixed_b02", "renewal_fixed_b03", "renewal_short_fixed_b01", "renewal_short_fixed_b02", "renewal_short_fixed_b03", "renewal_mean_velocity_b01", "renewal_hover_b01"), short=short)
             arm_info = {"counts": counts, "complete": False, "fit_complete": False,
                         "learning_rate": 3e-4, "entropy_coef": config.entropy_coef,
                         "elapsed_wall": None}
@@ -366,7 +388,7 @@ def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=wri
             actor = critic = initial = None
             deadline.check()
             head_options = {}
-            if config.pair in ("b04", "renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01", "renewal_fixed_b01", "renewal_fixed_b02", "renewal_fixed_b03", "renewal_short_fixed_b01", "renewal_short_fixed_b02", "renewal_short_fixed_b03", "renewal_hover_b01"):
+            if config.pair in ("b04", "renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01", "renewal_fixed_b01", "renewal_fixed_b02", "renewal_fixed_b03", "renewal_short_fixed_b01", "renewal_short_fixed_b02", "renewal_short_fixed_b03", "renewal_mean_velocity_b01", "renewal_hover_b01"):
                 head_seed = config.treatment_duration_head_seed if arm in ("T", "F") else None
                 head_options["duration_head_seed"] = head_seed
                 arm_info.update(duration_mode=config.treatment_duration_mode if arm in ("T", "F") else "none",
@@ -388,7 +410,10 @@ def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=wri
             counts["constructor_resets"] += 1
             deadline.check()
 
-            def episode(phase, e, model, value_model, vrng, drng, label):
+            def episode(phase, e, model, value_model, vrng, drng, label, velocity_mode="sampled"):
+                options = dict(collect_options)
+                if velocity_mode == "mean":
+                    options["velocity_mode"] = velocity_mode
                 return collect_episode(env, model, value_model, config.horizon,
                                        b + (1000 if phase == "train" else 2000) + e,
                                        vrng, drng, {"pair_master": config.seed, "arm": label,
@@ -396,7 +421,7 @@ def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=wri
                                        deadline.check, counts, lambda row: emit("episodes", row),
                                        lambda row: emit("diagnostics", row), limits,
                                        real=not config.fixture, diagnostics=phase == "eval" and label != "H",
-                                       **collect_options)
+                                       **options)
 
             for rollout_index in range(config.train_episodes // 2):
                 before_counts = counts.copy()
@@ -412,7 +437,7 @@ def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=wri
                                                    "duration_decisions", "d4")
                                                   + (("d2",) if short else ())
                                                   + (("horizon_censored_holds", "suppressed_decisions")
-                                                     if config.pair in ("renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01", "renewal_fixed_b01", "renewal_fixed_b02", "renewal_fixed_b03", "renewal_short_fixed_b01", "renewal_short_fixed_b02", "renewal_short_fixed_b03", "renewal_hover_b01") else ()))}})
+                                                     if config.pair in ("renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01", "renewal_fixed_b01", "renewal_fixed_b02", "renewal_fixed_b03", "renewal_short_fixed_b01", "renewal_short_fixed_b02", "renewal_short_fixed_b03", "renewal_mean_velocity_b01", "renewal_hover_b01") else ()))}})
                 deadline.check()
             arm_info["fit_complete"] = True
             arm_info["training_counts"] = counts.copy()
@@ -422,9 +447,25 @@ def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=wri
                         "configuration": asdict(config), "arm": arm}, out / f"final_{arm}.pt")
             deadline.check()
             before_eval = counts.copy()
-            for e in range(config.eval_episodes):
-                episode("eval", e, actor, critic, generator(b + (5000 if arm == "F" else 3000) + e),
-                        generator(b + (6000 if arm == "F" else 4000) + e), arm)
+            if mean_velocity:
+                final_fit = snapshot(actor, critic)
+                buffers = {kind: {name: value.clone() for name, value in model.named_buffers()}
+                           for kind, model in (("actor", actor), ("critic", critic))}
+                arm_info["evaluation_modes"] = {}
+            for mode in (("sampled", "mean") if mean_velocity else ("sampled",)):
+                before_mode = counts.copy()
+                for e in range(config.eval_episodes):
+                    episode("eval", e, actor, critic,
+                            generator(b + (5000 if arm == "F" else 3000) + e) if mode == "sampled" else None,
+                            generator(b + (6000 if arm == "F" else 4000) + e),
+                            arm + "_" + mode if mean_velocity else arm, mode)
+                if mean_velocity:
+                    arm_info["evaluation_modes"][mode] = {
+                        "counts": {key: counts[key] - before_mode[key] for key in counts},
+                        "parameter_exposure_from_final_fit": exposure(final_fit, actor, critic),
+                        "buffers_unchanged": all(torch.equal(buffers[kind][name], value)
+                            for kind, model in (("actor", actor), ("critic", critic))
+                            for name, value in model.named_buffers())}
             arm_info["evaluation_counts"] = {key: counts[key] - before_eval[key] for key in counts}
             arm_info["sampled_d4_frequency"] = (arm_info["evaluation_counts"]["d4"] /
                                                  arm_info["evaluation_counts"]["duration_decisions"]
@@ -453,16 +494,17 @@ def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=wri
         for stream in files.values():
             stream.close()
 
-    summary["counts"] = {key: sum(a["counts"][key] for a in arms.values()) for key in new_counts(config.pair in ("renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01", "renewal_fixed_b01", "renewal_fixed_b02", "renewal_fixed_b03", "renewal_short_fixed_b01", "renewal_short_fixed_b02", "renewal_short_fixed_b03", "renewal_hover_b01"), short=short)}
+    summary["counts"] = {key: sum(a["counts"][key] for a in arms.values()) for key in new_counts(config.pair in ("renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01", "renewal_fixed_b01", "renewal_fixed_b02", "renewal_fixed_b03", "renewal_short_fixed_b01", "renewal_short_fixed_b02", "renewal_short_fixed_b03", "renewal_mean_velocity_b01", "renewal_hover_b01"), short=short)}
     summary["counts"]["partial_episode_steps"] = (summary["counts"]["team_steps"]
                                                    - summary["counts"]["completed_episode_steps"])
     summary["scientific_uav_calls"] = summary["counts"]["scientific_uav_calls"]
-    summary["primary"] = primary_from_rows(rows, config.eval_episodes, renewal=config.pair in ("renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01", "renewal_fixed_b01", "renewal_fixed_b02", "renewal_fixed_b03", "renewal_short_fixed_b01", "renewal_short_fixed_b02", "renewal_short_fixed_b03", "renewal_hover_b01"), frozen=frozen, fixed=fixed, hover=config.pair == "renewal_hover_b01")
+    summary["primary"] = primary_from_rows(rows, config.eval_episodes, renewal=config.pair in ("renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01", "renewal_fixed_b01", "renewal_fixed_b02", "renewal_fixed_b03", "renewal_short_fixed_b01", "renewal_short_fixed_b02", "renewal_short_fixed_b03", "renewal_mean_velocity_b01", "renewal_hover_b01"), frozen=frozen, fixed=fixed, hover=config.pair == "renewal_hover_b01", mean_velocity=mean_velocity)
     summary["diagnostics_complete"] = (summary["counts"]["diagnostic_frames"] ==
-                                        len(fitted_arms) * config.eval_episodes * 5 * min(5, config.horizon)
+                                        len(fitted_arms) * (2 if mean_velocity else 1) * config.eval_episodes * 5 * min(5, config.horizon)
                                         and not any("diagnostic" in x for x in limits))
     summary["status"] = ("COMPLETE" if all(a.get("complete") for a in arms.values())
-                         and len(arms) == len(fitted_arms) and summary["primary"]["hover_complete"] and not limits
+                         and len(arms) == len(fitted_arms) and summary["primary"]["hover_complete"]
+                         and summary["primary"].get("all_modes_complete", True) and not limits
                          else "PRIMARY_COMPLETE_WITH_LIMITS" if summary["primary"]["complete"] else "INCOMPLETE")
 
     def observe_time():
