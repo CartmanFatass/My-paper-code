@@ -222,7 +222,7 @@ Canonical admission was independently successful at 2026-09-09T06:05:15.185521Z:
 physical and effective available memory both 15640408064 bytes exceed
 4294967296; both floor flags/pass are true and failure reasons empty. The supervised
 preflight preceded scientific root/RNG/model creation. Supervisor and scientific-root
-admission receipts are byte-identical. Subsequent ordinary observations recorded 146, 427, 
+admission receipts are byte-identical. Subsequent ordinary observations recorded 146, 427,
 718, 1034 complete episode rows on the same running PID, establishing actual learner progress
 separately from supervisor acceptance and resource admission.
 
