@@ -89,3 +89,45 @@ Preparation owner surface at **2026-09-09T05:40:44-07:00**:
 [new-card item](../../portfolio/owner/inbox/2026-09-09/20260909-ucope-006.json),
 recommended/auto-applied accept; [audit row](../../portfolio/audit/2026-09-09.md#L22).
 No owner instruction needs applying or marking answered at this boundary.
+
+## 4. CM binding acceptance
+
+CM used the same designated checkout/index, starting clean `6572984b73536c41b7d46bac13c46a56c0751257`. Source **`87e2793098a57a30caf6c816309c42bece30ee98`** is committed and pushed. The three owned source/test files add 45 and remove 30 lines; production adds 26/removes 20, and the runner remains 54 lines. Scope specification section 4 additions: **none**, per card section 6. No policy, learner, environment, base, adapter, primary formula or VSPC1 hook changed.
+
+`renewal_fixed_b03` declares master 8001 and maps to the existing fixed F/G/H path with the B03 card/object. All prior selectors remain; P80 alone retains its explicit hover-primary flag. The new selector inherits existing F/G completeness. Private stream expressions, grouping, zero entropy, deadlines and learner behavior are unchanged.
+
+One focused remote check on this exact source: `test_pair_plumbing.py -k 'renewal_fixed_b03 or renewal_hover_b01'`, **17 passed, 93 deselected**, pytest 0.09 s / full wall **0.25 s**, peak RSS **29828 KiB**, exit 0, supervisor PID **3051558**. It checks actual CLI/config/card/master/private-stream propagation at the existing workload substitution boundary, F/G-only fitting and all F/G/H output, distinct F-G=+1 and F-H=-1 fixture values, wrong-master/aggregate rejection and preserved P80 primary/completeness. Accepted fixed-pair missing-arm fixtures and prior freeze/credit evidence are reused; no model, native smoke, extra review or unchanged suite follows. Existing disabled-cache-provider `cache_dir` warning only.
+
+Check cwd `/home/wu/hmasd-worktrees/ucope-uav-fixed-p81-check-20260909`; [supervisor log](../../../../temp/directions/ucope/exp/ucope-uav-fixed-renewal-b03-8001-p81-20260909/checks/supervisor/task.log), [terminal readback](../../../../temp/directions/ucope/exp/ucope-uav-fixed-renewal-b03-8001-p81-20260909/checks/terminal-readback.txt) show exit and own scratch removal/absence. Exact committed-object pack was 135218 bytes, SHA256 `8518398c1f780d6b7ea01559c3bd1cb8f79d828dd0bf192619c8291c0b5be788`; temporary local/remote pack carriers were removed. [Stage receipt](../../../../temp/directions/ucope/exp/ucope-uav-fixed-renewal-b03-8001-p81-20260909/checks/stage-receipt.json).
+
+**Per-arm cost projection:** card section 4 reuses complete P80 F 155.5547909429879 s and G including H 136.1789815700031 s, outer 306.09 s, for the unchanged work law and 1800 s per-arm / 3600 s whole cap. Initialization, learning, evaluation, checking and publication stay in one serial invocation. No known over-cap term and no extra assessment. The chain's critical path and summed invocation wall coincide for this single serial run; aggregate CPU remains unmeasured.
+
+**Post-learner path coverage:** the new binding fixture traverses actual run_pair publication with substituted workload, verifying card/config and all contrasts on written summary output. Accepted unchanged native publication/checkpoint evidence from P78-P80 remains applicable. This is engineering coverage, not a scientific result.
+
+## 5. Exact one-invocation payload and observation assignment
+
+Node `hmasd-wsl-node`, CPU FP32, one Torch thread, configured interpreter `/home/wu/.venvs/hmasd/bin/python`. Host portability is prospective per card section 4. CM `/root/dm_ucope_p47_resume/cm_am_ucope_b02_p47` is sole observer/collector through terminal acceptance. No monitor transfer or second launch is authorized.
+
+Source `87e2793098a57a30caf6c816309c42bece30ee98`; detached cwd `/home/wu/hmasd-worktrees/ucope-uav-fixed-renewal-b03-8001-p81-20260909`; output `temp/directions/ucope/exp/ucope-uav-fixed-renewal-b03-8001-p81-20260909` relative to cwd; supervisor handle `ucope-uav-fixed-renewal-b03-8001-p81-20260909`. Handle/cwd/output were absent before staging. All 2176 materialized tracked files match committed bytes; focused input SHA256 readback matches local Git blobs: [source readback](../../../../temp/directions/ucope/exp/ucope-uav-fixed-renewal-b03-8001-p81-20260909/preparation/source-input-readback.json). Canonical preflight SHA256 `cb0525e9247f1c7262c198bf051e542282f5928982137b3023d36d5d69eda4dc`.
+
+Fresh actual-node canonical admission is joined with `&&` before scientific root/RNG/model construction. Both availability fields must be >=4294967296 bytes. Full chain bounded by 3600 s outer timeout and existing 1800 s arm/3600 s pair deadlines. Stop on refusal, cap, nonfinite learning or meaning-threatening defect, preserving trustworthy partial facts. No retry/resume/replacement, pilot, tuning, extra evaluation or Pro Send. Every result ends P81. Root owns integration and later remote check/scientific cwd/wrapper cleanup after preservation; shared local authoring checkout remains in use.
+
+Wrapper `/home/wu/hmasd-inputs/ucope-uav-fixed-renewal-b03-8001-p81-20260909.sh`: 749 UTF-8 ASCII/LF bytes, SHA256 `903ad0bdab2b78dbac12c659d6409636d5db993a2caa71bccc2955009872a7ba`. [Literal file](../../../../temp/directions/ucope/exp/ucope-uav-fixed-renewal-b03-8001-p81-20260909/preparation/run.sh):
+
+```bash
+set -euo pipefail
+cd /home/wu/hmasd-worktrees/ucope-uav-fixed-renewal-b03-8001-p81-20260909
+/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/.agent-tasks/ucope-uav-fixed-renewal-b03-8001-p81-20260909/resource_admission.json &&
+mkdir -p temp/directions/ucope/exp/ucope-uav-fixed-renewal-b03-8001-p81-20260909 &&
+cp /home/wu/.agent-tasks/ucope-uav-fixed-renewal-b03-8001-p81-20260909/resource_admission.json temp/directions/ucope/exp/ucope-uav-fixed-renewal-b03-8001-p81-20260909/resource_admission.json &&
+exec /home/wu/.venvs/hmasd/bin/python scripts/run_ucope_uav_motion_prefix_b01.py --pair renewal_fixed_b03 --seed 8001 --out temp/directions/ucope/exp/ucope-uav-fixed-renewal-b03-8001-p81-20260909
+```
+
+Actual submission uses the [PowerShell file](../../../../temp/directions/ucope/exp/ucope-uav-fixed-renewal-b03-8001-p81-20260909/preparation/submit.ps1), 350 bytes, SHA256 `8ea93f6385f4289ffeae51c2d717f94b77d66805540091d5d71664676d4f9f8c`:
+
+```powershell
+& ssh -o BatchMode=yes -o ConnectTimeout=10 hmasd-wsl-node "/usr/local/bin/agent-task run ucope-uav-fixed-renewal-b03-8001-p81-20260909 '/usr/bin/time -f whole_wall_seconds=%e,peak_rss_kib=%M /usr/bin/timeout --signal=KILL 3600s /bin/bash --noprofile --norc /home/wu/hmasd-inputs/ucope-uav-fixed-renewal-b03-8001-p81-20260909.sh'"
+exit $LASTEXITCODE
+```
+
+Both Bash `-n` and PowerShell parser passed. This exact record is committed/pushed before the single actual submission; the admission and accepted-handle facts will follow below.
