@@ -52,3 +52,19 @@ then any selected prospective card/full CM specification; then return the concre
 implementation/budget need through Root. No CM dispatch or run is authorized by this
 preparation, and no current comparison batch is consumed. A blocker forms no direction
 decision. A no-successor answer yields the assignment without another abstract assessment.
+
+## Completed return — 2026-09-08
+
+The ready/not-sent statements above describe preparation. The single request subsequently
+completed; full scientific response is immutable `ddb4c9ff20167837c99d146b2177c3e784066411`,
+`archive/RESPONSE.md`, SHA256
+`9797d7961500ddacfa1f61d6af03c29991190ef57d42beda747a8811adf7445d`.
+The received `c9f88329d4c558a280110e0b9c041786c38bec03bb0f9bcea6aa1b098c186b2c` hashes
+the separate short chat receipt. Both are preserved with Transport facts and the Issue4
+comment snapshot. The unchanged HANDOFF retains the accepted request's fixed bindings.
+
+Full class/scope intake accepts PRO_FINAL selection of the single seed127 B07 pair in
+`../../DISH_P53_NATIVE_PROPOSAL_SOURCE_INTAKE_20260908.md` §9 and records the actual
+choice in the existing P2 item. Root's present return scope ends at this committed intake;
+the later prospective card/full CM specification follows the original route. This return
+adds no implementation, experiment, master, seed exposure or second Send.

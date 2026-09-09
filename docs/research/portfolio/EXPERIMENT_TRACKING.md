@@ -6,6 +6,22 @@ Research is **RESUMED** under OWNER_DIRECT “阅读handoff 继续开启科研�
 
 Root owns planning and integration under [ROOT_OPERATIONS.md](../../project/ROOT_OPERATIONS.md). The assigned CM/Operator observes by default; explicit takeover follows [EXPERIMENT_MONITOR.md](../../project/EXPERIMENT_MONITOR.md). Independent Pro provider operations belong to Transport. Exact handles and receipt bindings below remain evidence. Detailed receipts are in [root-log/2026-09-08.md](root-log/2026-09-08.md); lifecycle and priority are in [PORTFOLIO.md](PORTFOLIO.md). The older tracker is preserved in [EXPERIMENT_TRACKING_THROUGH_P45_20260908.md](../../archive/operations/EXPERIMENT_TRACKING_THROUGH_P45_20260908.md).
 
+## P67 completed returns and P68 continuation
+
+The five original P67 DM assignments have returned. Both experiments are collected/intaken and integrated through main 8e19cda9b; neither remains live. FSD and UCOPE each completed one provider Send and returned ARCHIVED/NATURAL_COMPLETION receipts; both original DMs received native intake dispatches. VSPC1 P68 card preparation and CRTO/FOLR P68 readiness preparation have actual native dispatches. Count only observed native turns and subsequently confirmed provider generations, not five queued intentions.
+
+| Direction | Native DM | Synced direction revision | Current bounded work |
+| --- | --- | --- | --- |
+| ucope | /root/dm_ucope_p47_resume | 9f71571dc | Request 2026-09-08-ucope-post-b04-renewal-convergence-01 ARCHIVED/NATURAL_COMPLETION, one Send; original DM received followup_task for complete GitHub response intake and conforming card/next assignment; no new experiment |
+| vsp_c1 | /root/dm_vspc1_p49_value_question | d220ef01c | P67 COMPLETE/UP, Delta+.0230983264; 312.77s whole invocation, no live process. P68 followup_task prepares same-information approximately capacity-matched ordinary-MLP comparator card/tier return; no code/run allocation yet |
+| vsp_03 | /root/dm_vsp03_p54_reentry | daf20eeee | P67 COMPLETE, source828da0034, collection52160094e; greedy G-R0+.0026123047, stochastic G-R0-.0487548828, mixed two-instance evidence. Complete manager-origin-to-finished wall3.253184s now verified from journal; no successor allocated |
+| flexible_skill_duration | /root/dm_fsd_p47_resume | 27aacfb0d | Request 2026-09-08-fsd-p67-uav-individual-renewal-01 ARCHIVED/NATURAL_COMPLETION, one Send; original DM received followup_task for full GitHub delivery intake and conforming card/assignment; no new experiment |
+| degraded_incumbent_shadow_handover | /root/dm_dish_p53_native_proposal_question | f9d3aa52d | P67 source/readiness intake complete NO_READY_CONTINUATION; no nominated source treatment, P62 narrow stops retained, zero new exposure |
+| commitment_residual_triggered_options | /root/dm_crto_p68_reentry | 8e19cda9b | P68 zero-exposure source/re-entry assessment in C:/Projects/HMASD-worktrees/codex-crto, codex/crto; ready proper-node packet or precise no-ready return |
+| vap_folr_core | /root/dm_folr_p68_reentry | 8e19cda9b | P68 zero-exposure multi-step state-retention readiness assessment in C:/Projects/HMASD-worktrees/codex-vap-folr, codex/vap-folr; ready proper-node packet or precise no-ready return |
+
+Independent Transport received a read-only reconciliation of RCLE exact-request acceptance and SCDMP P58 terminal no-effect state. No third click, resend or new binding was authorized; this unresolved external dependency does not add an advancing direction.
+
 | Direction | Request or accepted handle | Latest recorded evidence / unresolved dependency | Current action boundary | Completed intake |
 | --- | --- | --- | --- | --- |
 | `flexible_skill_duration` | P52 request `2026-09-08-fsd-post-b03-convergence-01`; Transport turn `01a08264-3712-74f0-ba81-6eaac17a92b6`; HANDOFF `52c30986d1af6b20ab0df4d2c0f1b68a68a90306` | Transport `ARCHIVED` after one provider Send; response SHA256 `0a630d11a37d5179d6df1149d02cf112bb529b32b7a761a393becdea35e83c47`; complete P52 intake is integrated (`b1139b0b8`) and ends the route with no successor or native run | Prior allocation complete; preserve evidence and its stated dependency. P67 work, if assigned, is separate. | [intake](../candidates/flexible_skill_duration/pro_packets/20260908_post_b03_convergence/CONVERGENCE_INTAKE.md) |

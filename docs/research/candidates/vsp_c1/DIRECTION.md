@@ -309,38 +309,130 @@ publication failure and narrower intake remain historical facts. K4 and the reac
 remain open, older stopped/ended boundaries stand, and there is no B consumption, recast
 or Portfolio disposition. No next measurement is selected; Portfolio owns the next assignment.
 
-## Native opening-hold value family selected — 2026-09-08
+## Native opening-hold value: two local paired signals, weak MLP reference — 2026-09-08
 
-P49's complete Convergence response at `7ac8ccb01543f82715f38ad33d846c2ec649ecc2`
-opens the narrow native opening-hold-conditioned central-value family and selects
-[NATIVE-HOLD-VALUE-B01](VSPC1_NATIVE_HOLD_VALUE_B01_SCIENCE_CARD_20260908.md),
-as taken in by the [DM](VSPC1_NATIVE_HOLD_VALUE_CONVERGENCE_INTAKE_20260908.md).
-The existing native UAV actor/learner source at637406340 admits a same-information
-comparison of a640-parameter multiplicative remaining-hold critic gate against its
-full136→128→128→1 MLP, with identical duration-capable recurrent actors and common
-agent-compound PPO. This is an accepted question and B selection, not a measured
-gate effect, source acceptance, actual UAV entry or Portfolio disposition.
+P49's complete Convergence response `7ac8ccb01543f82715f38ad33d846c2ec649ecc2`
+opened the narrow opening-hold-conditioned central-value family. Its
+[B01](VSPC1_NATIVE_HOLD_VALUE_B01_SCIENCE_CARD_20260908.md) and P55's independent
+[B02](VSPC1_NATIVE_HOLD_VALUE_B02_SCIENCE_CARD_20260908.md) now have two valid
+complete training-pair observations. The unchanged budget is512 episodes/1024 Adam
+per fit and32 final sampled evaluations per learner/H, with an absolute .01 MEI.
 
-The strongest support is the actual prior-hold/state → value baseline and joint
-optimization → actor update → native-return path with an intact generic null.
-The strongest contrary source fact is that nonzero remaining holds occur only at
-t1–3 of256 steps, while the MLP already shares nonlinear features. The value at t0
-cannot see the just-chosen duration. Advantages are detached once per rollout;
-joint gradient clipping can also change actor step scaling. Sparse direct input
-is not a bound on complete-return effects, and added capacity/optimization remain
-alternatives to unique sharing causality.
+| Master | GATED−MLP (conditional SE) | GATED−H | MLP−H |
+| --- | ---: | ---: | ---: |
+| 8101 | +.029365659 (.005274226) | +.019400549 | −.009965109 |
+| 8102 | +.115727130 (.009472056) | +.026502085 | −.089225045 |
 
-UCOPE's prior positive and adverse native outcomes remain context, especially6902's
-T−G−.0503654/T−H−.0332645 and6901's weak G−H−.0282038. They used a different actor
-contrast and do not establish this gate's benefit. The completed service-allocation
-rule advantage and its object stop remain unchanged. Tuned matching headroom is
-absent; H is an attained reference rather than an upper. No recast count changes.
+Both individual primary means are UP. Their descriptive mean is+.072546395,
+sample SD .061066782, n=2 matched independent training pairs. This is a repeated
+local finite-budget signal for the complete gated-critic package, not stable
+superiority. B02 was selected after B01's result. Full endpoints, conditional SEs,
+adverse episodes and exposure remain in the [B01 intake](VSPC1_NATIVE_HOLD_VALUE_B01_INTAKE_20260908.md)
+and [B02 intake/E0](VSPC1_NATIVE_HOLD_VALUE_B02_INTAKE_20260908.md).
 
-The next discriminator is one independent matched training pair, seed8101:
-GATED-V−MLP-V final sampled native return after512 episodes/1024 Adam per fit,
-32 matched endpoint episodes each plus the same-reset zero-velocity H. MEI is.01,
-with all signs and H-relative weakness retained; at most1800s/arm and3600s/pair.
-The selected ceiling is one finite-budget package signal or counterexample, with
-no stable superiority, unique mechanism, transfer or optimality claim. The
-[CM specification](VSPC1_NATIVE_HOLD_VALUE_B01_CM_SPEC_20260908.md) is prepared;
-the exact-source dependency gap is technical and no scientific call has started.
+Both actors have the same local information/action law, duration head and independent
+recurrent histories. The selected640-parameter critic gate and intact full MLP
+receive the same136 pre-decision inputs. The realized path is prior hold/state →
+scalar baseline and joint optimization → local actor update → motion/service and
+native return. Strongest support is the gain over the complete MLP in both trained
+instances at equal exposure, with both GATED−H point estimates also positive.
+
+The strongest qualification is MLP below H in both pairs, markedly in B02.
+B02 GATED−MLP/GATED−H/MLP−H adverse counts are1/32,11/32,29/32; B01's6/32,7/32,16/32
+remain included. The larger primary margin mainly reflects the lower MLP relative
+to H as an arithmetic fact; it does not identify a training defect or a gate cause.
+Episode SEs do not estimate training-population uncertainty. The full MLP already
+shares nonlinear features. Added capacity, joint clipping, value scale, FP32 and
+seed-specific on-policy optimization remain alternatives to specialized hold-credit
+improvement. Natural hold inputs occupy about1.1% of training rows at t1–3 only;
+their sparsity, gate movement and sampled duration fractions do not explain the gain.
+
+UCOPE6902's T−G−.0503654/T−H−.0332645 and6901's weak G−H−.0282038 remain context
+with a different actor/clipping comparison, not pooled gate evidence. Earlier
+service-allocation and other family boundaries stand. Tuned matching headroom is
+absent; H is attained and untuned. Recast count, lifecycle, priority, C status and
+formal UAV-entry determination remain unchanged.
+
+The recommended next discriminator is a later single matched GATED/full-MLP/H B
+comparison with value-target normalization applied symmetrically to both learners,
+preserving native measurement and budget. This asks whether the gate gain persists
+under that common training change and whether MLP's H-relative behavior improves;
+it is a hypothesis, not a promised repair. The current intake records the source
+rationale and work projection. No new card, key, implementation or invocation is
+allocated here; P55 is complete and the recommendation returns through Root for
+a new bounded assignment. A changed training regime would not be pooled as a third
+seed of the current comparison. Stable superiority, unique mechanism, transfer
+and optimality remain outside the supported claim.
+## Normalized native hold-value: one local signal persists — 2026-09-08
+
+P60's [B03](VSPC1_NATIVE_HOLD_VALUE_B03_SCIENCE_CARD_20260908.md) applies the same
+value-target normalization method to GATED and the intact full MLP, with separate
+cumulative training-only FP32 moments and native-value credit conversion. The
+native measurement, actor information/action law and512-episode training budget
+remain fixed. Its sole new pair, master8201, is valid complete UP:
+
+| Normalized pair | GATED−MLP (conditional SE) | GATED−H | MLP−H |
+| --- | ---: | ---: | ---: |
+| B03/8201 | +.039801715 (.006008657) | +.035212797 | −.004588918 |
+
+Strongest support is that the local complete gate-package gain remains above
+MEI .01 under this common training method, with a positive GATED−H mean. Strongest
+qualification is MLP's still-negative H-relative point estimate and4/9/19 adverse
+episode differences for GATED−MLP/GATED−H/MLP−H. The small negative MLP−H mean
+with conditional SE .012026064 establishes neither equivalence to H nor a repaired
+competent comparator. All32 endpoints remain in the [E0 evidence](VSPC1_NATIVE_HOLD_VALUE_B03_RESULT_EVIDENCE_20260908.md)
+and [intake](VSPC1_NATIVE_HOLD_VALUE_B03_INTAKE_20260908.md#8-observation-and-bounded-scientific-interpretation).
+
+This is n=1 normalized training pair, separate from the old regime's n=2.
+Historical mean differences cannot identify normalization's causal effect when
+training/evaluation randomness also changes. The signal does not identify
+specialized hold-credit sharing: extra gate capacity, joint clipping, interactions
+between value units and optimization, FP32 and on-policy co-adaptation remain
+surviving explanations. The intact full MLP already shares nonlinear features.
+The same hold/state → centralized value/optimization → local actor update →
+motion/service → native-return path is exercised; nonzero hold inputs occur in
+about1.133% of training rows at t1–3. Gate movement and exposure are not attribution.
+
+The next useful discriminator is one fresh independent matched training pair
+under this unchanged normalized comparison, preserving native H contrasts and all
+outcomes. This is direction-local advice for a later Portfolio assignment; P60
+ends after its complete intake. A larger evaluation of8201 or an exact policy
+maximum would not answer that training-repeatability question. No new run is
+allocated here. Tuned matching headroom remains absent, H remains attained and
+untuned, and stable superiority, unique mechanism, transfer and optimality remain
+outside the claim. Earlier adverse evidence, family boundaries, recast count,
+lifecycle, priority, C status and formal UAV-entry determination are unchanged.
+
+## Normalized native hold-value: a second local signal — 2026-09-08
+
+The [B04 P67 intake](VSPC1_NATIVE_HOLD_VALUE_B04_P67_INTAKE_20260908.md) accepts
+the second normalized matched training pair, master8202, under the same real
+native GATED/full-MLP/H method and budget. GATED−MLP is +.0230983264,
+conditional SE .0087403093, above absolute MEI .01. GATED−H is +.0558956370
+and MLP−H +.0327973107; adverse episode counts are9/7/10 of32 respectively.
+The [E0](VSPC1_NATIVE_HOLD_VALUE_B04_P67_RESULT_EVIDENCE_20260908.md) retains
+all counts, source/receipts, native endpoints and exposure.
+
+Normalized8201/8202 primary differences are +.0398017153/+.0230983264;
+their n=2 descriptive mean is .0314500208, sample SD .0118110796. This is
+recurrence of a local point-estimate gain, not stable superiority. Episode SE
+conditions on each trained policy; two-pair dispersion contains both training
+and evaluation randomness. The old unnormalized regime remains separate.
+
+Strongest support is a positive GATED−H mean in both normalized instances and
+a gate-package gain in the second even when MLP's mean also exceeds H.
+B03's negative MLP−H, all adverse episodes, conditional noise and missing tuned
+headroom still contradict unqualified comparator competence. The full MLP
+already shares nonlinear features; extra640 gate parameters, joint clipping,
+value-unit interactions, FP32 and on-policy co-adaptation remain explanations.
+Nonzero hold inputs occupy about1.14% of8202 training rows; fitted gate movement
+does not identify the hold/state → value/optimization → local action → native
+return path's causal contribution. No specialized hold-credit or transfer claim.
+
+The next discriminator recommended within this mechanism is a same-information
+ordinary MLP with approximately matched critic capacity, under the same normalized
+native learner/budget and with H retained. A136→128→133→1 MLP has34827 critic
+parameters versus34817 for GATED; exact parameter-count search is unnecessary.
+This is a later bounded comparison proposal, not a frozen comparator or an
+allocated run. Accepted family boundaries, recast count, lifecycle, priority,
+C status and formal UAV-entry determination remain unchanged.

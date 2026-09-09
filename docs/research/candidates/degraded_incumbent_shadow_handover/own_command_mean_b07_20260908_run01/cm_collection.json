@@ -1,0 +1,531 @@
+{
+  "technical_status": "COMPLETE_READBACK",
+  "source_sha": "a4612a020921d24269a19a3471cc03fa62c082c8",
+  "handle": "dish_b07_seed127_20260908_run01",
+  "master_hex": "e3426c64f47fff20f417f005c1b1b85e2eb64de28cb48b7c2ba25472426b6764",
+  "primary": {
+    "D_DIRECT": 164.5,
+    "D_OWN": 55.75,
+    "Delta_mean": -135.25,
+    "branch_facts": {
+      "at_least_plus24": false,
+      "at_most_minus24": true,
+      "increment_with_own_initial_loss": false,
+      "input_learner_or_primary_incomplete": false,
+      "native_tradeoff_disposition": "DM judgment from all native rows; no automated gate",
+      "no_ordinary_legal_transfer_in_complete_panel": true,
+      "open_band": false,
+      "ordinary_legal_transfers_observed": 0
+    },
+    "final_differences": [
+      {
+        "coordinate": "DISH/RBHR/R06/EVALUATION_COORDINATE/0/CLAIM/TARGET_VISUAL_MASK/K8/0",
+        "own_minus_direct": -221
+      },
+      {
+        "coordinate": "DISH/RBHR/R06/EVALUATION_COORDINATE/0/CLAIM/TARGET_VISUAL_MASK/K4_TO_K12/0",
+        "own_minus_direct": 74
+      },
+      {
+        "coordinate": "DISH/RBHR/R06/EVALUATION_COORDINATE/0/CLAIM/TERRAIN_RELAY_MASK/K8/0",
+        "own_minus_direct": -329
+      },
+      {
+        "coordinate": "DISH/RBHR/R06/EVALUATION_COORDINATE/0/CLAIM/TERRAIN_RELAY_MASK/K4_TO_K12/0",
+        "own_minus_direct": -65
+      }
+    ],
+    "means": {
+      "DIRECT_MEAN": {
+        "final": 693.0,
+        "initial": 528.5
+      },
+      "OWN_COMMAND_MEAN": {
+        "final": 557.75,
+        "initial": 502.0
+      }
+    },
+    "status": "COMPLETE"
+  },
+  "rows": [
+    {
+      "arm": "DIRECT_MEAN",
+      "phase": "initial",
+      "regime": "TARGET_VISUAL_MASK",
+      "schedule": "K8",
+      "service_ticks": 604,
+      "energy": 247931.4180596054,
+      "hard_events": {
+        "buffer_clear": 0,
+        "command_slew_breach": 0,
+        "dual_owner": 0,
+        "dual_payload": 0,
+        "invalid_commit": 0,
+        "separation_breach": 0,
+        "token_gap": 0
+      },
+      "completed_ticks": 1200,
+      "legal_transfers": 0,
+      "first_legal_transfer_tick": null
+    },
+    {
+      "arm": "DIRECT_MEAN",
+      "phase": "initial",
+      "regime": "TARGET_VISUAL_MASK",
+      "schedule": "K4_TO_K12",
+      "service_ticks": 446,
+      "energy": 278280.3112458669,
+      "hard_events": {
+        "buffer_clear": 0,
+        "command_slew_breach": 0,
+        "dual_owner": 0,
+        "dual_payload": 0,
+        "invalid_commit": 10,
+        "separation_breach": 0,
+        "token_gap": 0
+      },
+      "completed_ticks": 1200,
+      "legal_transfers": 0,
+      "first_legal_transfer_tick": null
+    },
+    {
+      "arm": "DIRECT_MEAN",
+      "phase": "initial",
+      "regime": "TERRAIN_RELAY_MASK",
+      "schedule": "K8",
+      "service_ticks": 699,
+      "energy": 279263.6935615641,
+      "hard_events": {
+        "buffer_clear": 0,
+        "command_slew_breach": 0,
+        "dual_owner": 0,
+        "dual_payload": 0,
+        "invalid_commit": 0,
+        "separation_breach": 0,
+        "token_gap": 0
+      },
+      "completed_ticks": 1200,
+      "legal_transfers": 0,
+      "first_legal_transfer_tick": null
+    },
+    {
+      "arm": "DIRECT_MEAN",
+      "phase": "initial",
+      "regime": "TERRAIN_RELAY_MASK",
+      "schedule": "K4_TO_K12",
+      "service_ticks": 365,
+      "energy": 261340.28283166932,
+      "hard_events": {
+        "buffer_clear": 0,
+        "command_slew_breach": 0,
+        "dual_owner": 0,
+        "dual_payload": 0,
+        "invalid_commit": 22,
+        "separation_breach": 0,
+        "token_gap": 0
+      },
+      "completed_ticks": 1200,
+      "legal_transfers": 0,
+      "first_legal_transfer_tick": null
+    },
+    {
+      "arm": "DIRECT_MEAN",
+      "phase": "final",
+      "regime": "TARGET_VISUAL_MASK",
+      "schedule": "K8",
+      "service_ticks": 770,
+      "energy": 289057.18465655454,
+      "hard_events": {
+        "buffer_clear": 0,
+        "command_slew_breach": 0,
+        "dual_owner": 0,
+        "dual_payload": 0,
+        "invalid_commit": 0,
+        "separation_breach": 0,
+        "token_gap": 0
+      },
+      "completed_ticks": 1200,
+      "legal_transfers": 0,
+      "first_legal_transfer_tick": null
+    },
+    {
+      "arm": "DIRECT_MEAN",
+      "phase": "final",
+      "regime": "TARGET_VISUAL_MASK",
+      "schedule": "K4_TO_K12",
+      "service_ticks": 400,
+      "energy": 274505.0280899282,
+      "hard_events": {
+        "buffer_clear": 0,
+        "command_slew_breach": 0,
+        "dual_owner": 0,
+        "dual_payload": 0,
+        "invalid_commit": 75,
+        "separation_breach": 0,
+        "token_gap": 0
+      },
+      "completed_ticks": 1200,
+      "legal_transfers": 0,
+      "first_legal_transfer_tick": null
+    },
+    {
+      "arm": "DIRECT_MEAN",
+      "phase": "final",
+      "regime": "TERRAIN_RELAY_MASK",
+      "schedule": "K8",
+      "service_ticks": 910,
+      "energy": 289220.1344356523,
+      "hard_events": {
+        "buffer_clear": 0,
+        "command_slew_breach": 0,
+        "dual_owner": 0,
+        "dual_payload": 0,
+        "invalid_commit": 4,
+        "separation_breach": 0,
+        "token_gap": 0
+      },
+      "completed_ticks": 1200,
+      "legal_transfers": 0,
+      "first_legal_transfer_tick": null
+    },
+    {
+      "arm": "DIRECT_MEAN",
+      "phase": "final",
+      "regime": "TERRAIN_RELAY_MASK",
+      "schedule": "K4_TO_K12",
+      "service_ticks": 692,
+      "energy": 282166.09421074874,
+      "hard_events": {
+        "buffer_clear": 0,
+        "command_slew_breach": 0,
+        "dual_owner": 0,
+        "dual_payload": 0,
+        "invalid_commit": 40,
+        "separation_breach": 0,
+        "token_gap": 0
+      },
+      "completed_ticks": 1200,
+      "legal_transfers": 0,
+      "first_legal_transfer_tick": null
+    },
+    {
+      "arm": "OWN_COMMAND_MEAN",
+      "phase": "initial",
+      "regime": "TARGET_VISUAL_MASK",
+      "schedule": "K8",
+      "service_ticks": 473,
+      "energy": 294261.43554124516,
+      "hard_events": {
+        "buffer_clear": 0,
+        "command_slew_breach": 0,
+        "dual_owner": 0,
+        "dual_payload": 0,
+        "invalid_commit": 19,
+        "separation_breach": 0,
+        "token_gap": 0
+      },
+      "completed_ticks": 1200,
+      "legal_transfers": 0,
+      "first_legal_transfer_tick": null
+    },
+    {
+      "arm": "OWN_COMMAND_MEAN",
+      "phase": "initial",
+      "regime": "TARGET_VISUAL_MASK",
+      "schedule": "K4_TO_K12",
+      "service_ticks": 495,
+      "energy": 298122.8377135606,
+      "hard_events": {
+        "buffer_clear": 0,
+        "command_slew_breach": 0,
+        "dual_owner": 0,
+        "dual_payload": 0,
+        "invalid_commit": 23,
+        "separation_breach": 0,
+        "token_gap": 0
+      },
+      "completed_ticks": 1200,
+      "legal_transfers": 0,
+      "first_legal_transfer_tick": null
+    },
+    {
+      "arm": "OWN_COMMAND_MEAN",
+      "phase": "initial",
+      "regime": "TERRAIN_RELAY_MASK",
+      "schedule": "K8",
+      "service_ticks": 655,
+      "energy": 296356.44733690104,
+      "hard_events": {
+        "buffer_clear": 0,
+        "command_slew_breach": 0,
+        "dual_owner": 0,
+        "dual_payload": 0,
+        "invalid_commit": 0,
+        "separation_breach": 0,
+        "token_gap": 0
+      },
+      "completed_ticks": 1200,
+      "legal_transfers": 0,
+      "first_legal_transfer_tick": null
+    },
+    {
+      "arm": "OWN_COMMAND_MEAN",
+      "phase": "initial",
+      "regime": "TERRAIN_RELAY_MASK",
+      "schedule": "K4_TO_K12",
+      "service_ticks": 385,
+      "energy": 296402.50432522694,
+      "hard_events": {
+        "buffer_clear": 0,
+        "command_slew_breach": 0,
+        "dual_owner": 0,
+        "dual_payload": 0,
+        "invalid_commit": 49,
+        "separation_breach": 0,
+        "token_gap": 0
+      },
+      "completed_ticks": 1200,
+      "legal_transfers": 0,
+      "first_legal_transfer_tick": null
+    },
+    {
+      "arm": "OWN_COMMAND_MEAN",
+      "phase": "final",
+      "regime": "TARGET_VISUAL_MASK",
+      "schedule": "K8",
+      "service_ticks": 549,
+      "energy": 297840.2235710073,
+      "hard_events": {
+        "buffer_clear": 0,
+        "command_slew_breach": 0,
+        "dual_owner": 0,
+        "dual_payload": 0,
+        "invalid_commit": 0,
+        "separation_breach": 0,
+        "token_gap": 0
+      },
+      "completed_ticks": 1200,
+      "legal_transfers": 0,
+      "first_legal_transfer_tick": null
+    },
+    {
+      "arm": "OWN_COMMAND_MEAN",
+      "phase": "final",
+      "regime": "TARGET_VISUAL_MASK",
+      "schedule": "K4_TO_K12",
+      "service_ticks": 474,
+      "energy": 298727.31459338544,
+      "hard_events": {
+        "buffer_clear": 0,
+        "command_slew_breach": 0,
+        "dual_owner": 0,
+        "dual_payload": 0,
+        "invalid_commit": 0,
+        "separation_breach": 0,
+        "token_gap": 0
+      },
+      "completed_ticks": 1200,
+      "legal_transfers": 0,
+      "first_legal_transfer_tick": null
+    },
+    {
+      "arm": "OWN_COMMAND_MEAN",
+      "phase": "final",
+      "regime": "TERRAIN_RELAY_MASK",
+      "schedule": "K8",
+      "service_ticks": 581,
+      "energy": 298386.3429133974,
+      "hard_events": {
+        "buffer_clear": 0,
+        "command_slew_breach": 0,
+        "dual_owner": 0,
+        "dual_payload": 0,
+        "invalid_commit": 0,
+        "separation_breach": 0,
+        "token_gap": 0
+      },
+      "completed_ticks": 1200,
+      "legal_transfers": 0,
+      "first_legal_transfer_tick": null
+    },
+    {
+      "arm": "OWN_COMMAND_MEAN",
+      "phase": "final",
+      "regime": "TERRAIN_RELAY_MASK",
+      "schedule": "K4_TO_K12",
+      "service_ticks": 627,
+      "energy": 294856.91973422305,
+      "hard_events": {
+        "buffer_clear": 0,
+        "command_slew_breach": 0,
+        "dual_owner": 0,
+        "dual_payload": 0,
+        "invalid_commit": 32,
+        "separation_breach": 0,
+        "token_gap": 0
+      },
+      "completed_ticks": 1200,
+      "legal_transfers": 0,
+      "first_legal_transfer_tick": null
+    }
+  ],
+  "training": {
+    "DIRECT_MEAN": {
+      "ordinary_training_transitions": 65536,
+      "completed_updates": 16,
+      "optimizer_steps": 512,
+      "training_service": 29426,
+      "training_energy": 15122722.557419622,
+      "training_hard_events": {
+        "buffer_clear": 0,
+        "command_slew_breach": 0,
+        "dual_owner": 0,
+        "dual_payload": 0,
+        "invalid_commit": 4366,
+        "separation_breach": 1,
+        "token_gap": 0
+      },
+      "training_terminals": 32,
+      "training_legal_transfers": 0,
+      "service_label_eligible": 24846,
+      "next_mask_count": 65504
+    },
+    "OWN_COMMAND_MEAN": {
+      "ordinary_training_transitions": 65536,
+      "completed_updates": 16,
+      "optimizer_steps": 512,
+      "training_service": 29548,
+      "training_energy": 15933012.081799326,
+      "training_hard_events": {
+        "buffer_clear": 0,
+        "command_slew_breach": 0,
+        "dual_owner": 0,
+        "dual_payload": 0,
+        "invalid_commit": 4405,
+        "separation_breach": 2,
+        "token_gap": 0
+      },
+      "training_terminals": 32,
+      "training_legal_transfers": 0,
+      "service_label_eligible": 24835,
+      "next_mask_count": 65504
+    }
+  },
+  "checkpoints": {
+    "DIRECT_MEAN": {
+      "update": 16,
+      "all_model_tensors_finite": true,
+      "welford_counts": {
+        "actor": 262144,
+        "snapshot": 12321,
+        "critic": 65536
+      },
+      "bytes": 2356639,
+      "relative_l2_displacement": 0.04690254949701972
+    },
+    "OWN_COMMAND_MEAN": {
+      "update": 16,
+      "all_model_tensors_finite": true,
+      "welford_counts": {
+        "actor": 262144,
+        "snapshot": 12309,
+        "critic": 65536
+      },
+      "bytes": 2356639,
+      "relative_l2_displacement": 0.0484554855508188
+    }
+  },
+  "terminal_cost": {
+    "charged_arm_seconds": {
+      "DIRECT_MEAN": 228.0632913620072,
+      "OWN_COMMAND_MEAN": 228.17795193997216
+    },
+    "charged_pair_seconds": 456.24124330197935,
+    "exclusive_arm_seconds": {
+      "DIRECT_MEAN": 221.12230213201838,
+      "OWN_COMMAND_MEAN": 221.23696270998335
+    },
+    "in_run_wall_seconds": 444.38009880197933,
+    "prior_shared_seconds": 11.8611445,
+    "remaining_arm_seconds": {
+      "DIRECT_MEAN": 1571.9367086379928,
+      "OWN_COMMAND_MEAN": 1571.8220480600278
+    },
+    "remaining_pair_seconds": 3143.7587566980205,
+    "shared_seconds": 13.881978459977631
+  },
+  "whole_chain": {
+    "whole_chain_measured_seconds": 444.7305436860188,
+    "whole_chain_with_0_02s_closure_allowance": 444.7505436860188,
+    "prior_check_seconds": 11.7811445,
+    "supervised_exit": 0,
+    "scope": "wrapper entry through timing readback; final write/exit allowance0.02s, not observed completion"
+  },
+  "pre_collection_charged_pair_seconds": 456.53168818601876,
+  "pre_collection_shared_seconds": 14.172423344017034,
+  "pre_collection_charged_arm_seconds": {
+    "DIRECT_MEAN": 228.2085138040269,
+    "OWN_COMMAND_MEAN": 228.32317438199186
+  },
+  "resources": {
+    "peak_self_rss_bytes": 629612544,
+    "peak_child_rss_bytes": 629612544,
+    "resources_unmeasured": true,
+    "resource_scope": "Linux separate self/reaped-child RSS maxima; H and scratch unmeasured"
+  },
+  "limitations": [
+    "H unmeasured; existing E-based bounds retained",
+    "RSS maxima separate self/child, not additive",
+    "Whole-chain readback has0.02s final closure allowance; not measured last write/exit"
+  ],
+  "collection_charge": {
+    "components_seconds": {
+      "initial_instruction_read_command": 0.3164587,
+      "status_and_copy_command": 2.8291136,
+      "initial_result_readback_command": 0.3312412,
+      "checkpoint_and_row_check_command": 2.2347854,
+      "final_accounting_write_allowance": 1.0
+    },
+    "total_seconds": 6.7115989,
+    "scope": "actual command wall including read/transfer overhead; final1s is conservative write allowance, not exact measured completion",
+    "check_inner_process_seconds": 2.1103512
+  },
+  "charged_pair_seconds": 463.24328708601877,
+  "charged_arm_seconds": {
+    "DIRECT_MEAN": 231.5643132540269,
+    "OWN_COMMAND_MEAN": 231.67897383199187
+  },
+  "shared_seconds": 20.884022244017032,
+  "remaining_pair_seconds": 3136.756712913981,
+  "remaining_arm_seconds": {
+    "DIRECT_MEAN": 1568.435686745973,
+    "OWN_COMMAND_MEAN": 1568.321026168008
+  },
+  "additional_root_syntax_charge": "not reported to CM; append if separately recorded, never double count",
+  "evaluation_aggregates": {
+    "DIRECT_MEAN": {
+      "initial": {
+        "mean_energy": 266703.92642467644,
+        "invalid_commit_sum": 32,
+        "mean_invalid_commit": 8.0
+      },
+      "final": {
+        "mean_energy": 283737.110348221,
+        "invalid_commit_sum": 119,
+        "mean_invalid_commit": 29.75
+      }
+    },
+    "OWN_COMMAND_MEAN": {
+      "initial": {
+        "mean_energy": 296285.8062292334,
+        "invalid_commit_sum": 91,
+        "mean_invalid_commit": 22.75
+      },
+      "final": {
+        "mean_energy": 297452.7002030033,
+        "invalid_commit_sum": 32,
+        "mean_invalid_commit": 8.0
+      }
+    }
+  }
+}

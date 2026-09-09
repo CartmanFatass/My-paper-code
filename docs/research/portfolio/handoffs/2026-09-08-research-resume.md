@@ -25,4 +25,8 @@ Native source/parent routing and current CM responsibilities must be reread at r
 
 ## Dispatch state
 
-Prepared for five original DMs; only accepted native dispatch/current turns count as advancing. Root records actual outcomes in tracking and the root log. No experiment or provider Send is claimed by preparation alone.
+All five original DMs received accepted followup_task dispatch and were observed running after their own control-plane input sync/push. Exact revisions and work are recorded in EXPERIMENT_TRACKING.md. This is five advancing native direction chains, with zero newly claimed experiment handles or provider Sends. Independent Transport separately received only read-only RCLE/SCDMP reconciliation.
+
+## Owner-requested heartbeat
+
+The owner subsequently requested “恢复20min的 heartbeat 维护自动科研工作流”. App heartbeat `hmasd` is ACTIVE for Root task `01a07249-b095-7821-8ce2-e9c32ba85267` every 20 minutes. This explicit instruction supersedes the former no-scheduler convention for this one Root wakeup only. Each wake follows current maintained procedures, handles returns and ready work, respects owner pause/stop and unknown external acceptance, and stays quiet when unchanged. No separate experiment observer, new budget or legacy Transport heartbeat is created.

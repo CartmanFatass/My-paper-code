@@ -1,0 +1,43 @@
+{
+  "response_commit": "a38ac96da86cdb758259c715520bb041b211bbe5",
+  "response_path": "docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260908_held_residual_convergence/archive/RESPONSE.md",
+  "complete_response_bytes": 25915,
+  "complete_response_lines": 141,
+  "complete_response_sha256": "cc6cc8a0fdd6e4c2e93e731d17d896bcfd1d1aff105bd8112843682b44a64ec3",
+  "chat_receipt_bytes": 395,
+  "chat_receipt_sha256": "d5458125a339ce2a899e205990427ab2a037f2b27b7c32858de5fa8c272de692",
+  "chat_is_complete_scientific_response": false,
+  "delivered_changed_paths": [
+    "docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260908_held_residual_convergence/archive/RESPONSE.md"
+  ],
+  "delivery_comment_url": "https://github.com/CartmanFatass/My-paper-code/issues/12#issuecomment-5591419084",
+  "delivery_comment_body": "本轮 held-residual convergence 完整答复已交付并读回：\n\n[RESPONSE.md — 不可变提交 a38ac96da86cdb758259c715520bb041b211bbe5](https://github.com/CartmanFatass/My-paper-code/blob/a38ac96da86cdb758259c715520bb041b211bbe5/docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260908_held_residual_convergence/archive/RESPONSE.md)\n\n对应固定任务：[TASK.md @ 59071e00b3ac63253894bd3fc283317a20ba247c](https://github.com/CartmanFatass/My-paper-code/blob/59071e00b3ac63253894bd3fc283317a20ba247c/docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260908_held_residual_convergence/TASK.md)。科学证据版本为 `21a801279bd449c09907f5cf040efa693ae345a3`；完整裁决、实际 RECAST 分类、反证、预算和后续边界均在响应文件内。",
+  "direction_decision_text": "select SCDMP-NATIVE-HOLD-RESIDUAL-B01; a new substantive mechanism RECAST",
+  "scientific_conformance": "full reading complete; same single pair/loss/population/count/caps; no extra B qualification or source change selected",
+  "transport_conflict": "Confirmed: actual conversation6a961753-0424-83e8-848c-dbe2cfe3369c is explicitly retired; original HANDOFF requested_conversation_id=null does not override the owner exclusion; no compliant replacement inferred, no resend/rebind/evidence rewrite.",
+  "new_scientific_invocations": 0,
+  "intake_recorded_at": "2026-09-08T20:42:21.513301+00:00",
+  "initial_transport_snapshot_sha256": "b50c2b94bfb937633a65dbf91005fdf686f13934a763d81129cff92eee18102b",
+  "reconciled_transport_snapshot_sha256": "7b6ff202869bc5ca1ac1400ced41fc83cbf42ee52123f0b838c4a98be1a1a320",
+  "reconciliation_at": "2026-09-08T20:37:15Z",
+  "scientific_content_selection": "single SCDMP-NATIVE-HOLD-RESIDUAL-B01 and new substantive mechanism RECAST",
+  "application_state": "BLOCKED_RECONCILIATION: recorded scientific answer is not an applicable PRO_FINAL while the confirmed owner transport-policy conflict remains unresolved",
+  "selected_b_card_frozen": false,
+  "recast_applied": false,
+  "new_provider_sends_in_dm_intake": 0,
+  "total_provider_sends_for_request": 1,
+  "new_research_code_lines": 0,
+  "scope_section4": "none",
+  "direction_or_portfolio_scientific_status_changed": false,
+  "owner_reviews_at_intake": {
+    "direction_checkout": [],
+    "main_checkout": []
+  },
+  "root_reconciliation_instruction": "Transport preserves the blocker; perform the DM scientific intake with this policy conflict recorded.",
+  "archive_eol_preservation": {
+    "initial_checkout_response_bytes": 26056,
+    "immutable_response_bytes": 25915,
+    "initial_difference": "checkout CRLF only; scientific bytes always read directly from immutable Git blob",
+    "action": "archive-scoped .gitattributes -text; restore exact immutable response bytes, preserve copied receipt snapshots"
+  }
+}

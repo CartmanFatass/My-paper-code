@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "request_id": "2026-09-08-scdmp-p56-held-residual-convergence-01",
+  "workflow_node": "em_convergence",
+  "conversation_binding_key": "em:semigroup_consistent_duration_model_policy:convergence",
+  "direction_id": "semigroup_consistent_duration_model_policy",
+  "direction_ids": [
+    "semigroup_consistent_duration_model_policy"
+  ],
+  "conversation_id": "6a961753-0424-83e8-848c-dbe2cfe3369c",
+  "provider_url": "https://chatgpt.com/c/6a961753-0424-83e8-848c-dbe2cfe3369c",
+  "user_message_id": "0e94f4b3-b8bf-4152-8e1d-a9d59fe81863",
+  "assistant_message_id": "3bb293f3-f1ac-47cf-b095-c454c968ec2e",
+  "visible_model": "6 Pro",
+  "underlying_model": "Latest",
+  "thinking_effort": "Pro, 5 of 5.",
+  "state": "ARCHIVED",
+  "tab_id": null,
+  "source_mode": "paste",
+  "source_path": "<paste>",
+  "prompt_sha256": "c01e4f2b1c752e9e051c24409ca62c8525215ed28becfa96a6571c7ec59c7495",
+  "response_sha256": "d5458125a339ce2a899e205990427ab2a037f2b27b7c32858de5fa8c272de692",
+  "response_characters": 391,
+  "response_bytes": 395,
+  "send_click_count": 1,
+  "send_evidence": {
+    "send_click_count": 1,
+    "send_attempted": true,
+    "url_observed": true,
+    "user_node_observed": true,
+    "user_node_exact": true,
+    "user_message_id": "0e94f4b3-b8bf-4152-8e1d-a9d59fe81863",
+    "assistant_message_id": "3bb293f3-f1ac-47cf-b095-c454c968ec2e",
+    "paste_mode": true,
+    "provider_url_observed": "https://chatgpt.com/c/6a961753-0424-83e8-848c-dbe2cfe3369c",
+    "prompt_sha256": "c01e4f2b1c752e9e051c24409ca62c8525215ed28becfa96a6571c7ec59c7495",
+    "prompt_link_resource_pill_observed": true,
+    "prompt_link": "https://github.com/CartmanFatass/My-paper-code/blob/59071e00b3ac63253894bd3fc283317a20ba247c/docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260908_held_residual_convergence/TASK.md",
+    "binding_match": true
+  },
+  "identity_validation": "PASS",
+  "identity_expected": {
+    "conversation_id": "6a961753-0424-83e8-848c-dbe2cfe3369c",
+    "user_message_id": "0e94f4b3-b8bf-4152-8e1d-a9d59fe81863",
+    "assistant_message_id": "3bb293f3-f1ac-47cf-b095-c454c968ec2e"
+  },
+  "identity_observed": {
+    "conversation_id": "6a961753-0424-83e8-848c-dbe2cfe3369c",
+    "user_message_id": "0e94f4b3-b8bf-4152-8e1d-a9d59fe81863",
+    "assistant_message_id": "3bb293f3-f1ac-47cf-b095-c454c968ec2e"
+  },
+  "archive_paths": {
+    "manifest_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\semigroup_consistent_duration_model_policy\\2026-09-08-scdmp-p56-held-residual-convergence-01\\2026-09-08-scdmp-p56-held-residual-convergence-01--semigroup_consistent_duration_model_policy__PACKET_MANIFEST.json",
+    "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\semigroup_consistent_duration_model_policy\\2026-09-08-scdmp-p56-held-residual-convergence-01\\2026-09-08-scdmp-p56-held-residual-convergence-01--semigroup_consistent_duration_model_policy__00_PROMPT.md",
+    "reference_files": [],
+    "response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\semigroup_consistent_duration_model_policy\\2026-09-08-scdmp-p56-held-residual-convergence-01\\2026-09-08-scdmp-p56-held-residual-convergence-01--semigroup_consistent_duration_model_policy--attempt-01__02_RESPONSE.md",
+    "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\semigroup_consistent_duration_model_policy\\2026-09-08-scdmp-p56-held-residual-convergence-01\\2026-09-08-scdmp-p56-held-residual-convergence-01--semigroup_consistent_duration_model_policy--attempt-01__03_TRANSPORT_FACTS.json",
+    "response_sha256": "d5458125a339ce2a899e205990427ab2a037f2b27b7c32858de5fa8c272de692"
+  },
+  "wait_status": "NATURAL_COMPLETION",
+  "observed_page_state": "Worked for 9m 23s; complete assistant response; Copy response present; no active generation control",
+  "capture_method": "Current-round Copy response control (third) via CUA clipboard.readText; raw UTF-8 response preserved",
+  "archive_status": "ARCHIVED",
+  "timestamps": {
+    "sent_at": "2026-09-08T20:20:23Z",
+    "completed_at": "2026-09-08T20:32:29Z",
+    "captured_at": "2026-09-08T20:32:29Z",
+    "archived_at": "2026-09-08T20:32:29Z"
+  },
+  "scientific_decision_formed": false,
+  "github_delivery": {
+    "response_url": "https://github.com/CartmanFatass/My-paper-code/blob/a38ac96da86cdb758259c715520bb041b211bbe5/docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260908_held_residual_convergence/archive/RESPONSE.md",
+    "delivery_comment_url": "https://github.com/CartmanFatass/My-paper-code/issues/12#issuecomment-5591419084",
+    "response_commit": "a38ac96da86cdb758259c715520bb041b211bbe5"
+  },
+  "return_receipt": {
+    "required": true,
+    "status": "SENT",
+    "attempt_count": 1,
+    "message_key": "2026-09-08-scdmp-p56-held-residual-convergence-01|semigroup_consistent_duration_model_policy|6a961753-0424-83e8-848c-dbe2cfe3369c|d5458125a339ce2a899e205990427ab2a037f2b27b7c32858de5fa8c272de692",
+    "routing_mode": "PARENT_SESSION",
+    "destination_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+    "delivery_status": "accepted",
+    "retry_allowed": false,
+    "source_thread_id": "01a08293-427f-71e0-930f-6cd91d33a011",
+    "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+    "delivery_mode": "bounded_single_attempt",
+    "return_control_after_attempt": true,
+    "archive_paths": {
+      "manifest_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\semigroup_consistent_duration_model_policy\\2026-09-08-scdmp-p56-held-residual-convergence-01\\2026-09-08-scdmp-p56-held-residual-convergence-01--semigroup_consistent_duration_model_policy__PACKET_MANIFEST.json",
+      "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\semigroup_consistent_duration_model_policy\\2026-09-08-scdmp-p56-held-residual-convergence-01\\2026-09-08-scdmp-p56-held-residual-convergence-01--semigroup_consistent_duration_model_policy__00_PROMPT.md",
+      "reference_files": [],
+      "response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\semigroup_consistent_duration_model_policy\\2026-09-08-scdmp-p56-held-residual-convergence-01\\2026-09-08-scdmp-p56-held-residual-convergence-01--semigroup_consistent_duration_model_policy--attempt-01__02_RESPONSE.md",
+      "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\semigroup_consistent_duration_model_policy\\2026-09-08-scdmp-p56-held-residual-convergence-01\\2026-09-08-scdmp-p56-held-residual-convergence-01--semigroup_consistent_duration_model_policy--attempt-01__03_TRANSPORT_FACTS.json",
+      "response_sha256": "d5458125a339ce2a899e205990427ab2a037f2b27b7c32858de5fa8c272de692"
+    },
+    "response_sha256": "d5458125a339ce2a899e205990427ab2a037f2b27b7c32858de5fa8c272de692",
+    "staged_at": "2026-09-08T20:32:48Z",
+    "fallback_enabled": false,
+    "updated_at": "2026-09-08T20:33:15Z",
+    "sent_at": "2026-09-08T20:33:15Z"
+  },
+  "notes": [
+    "Exactly one provider Send occurred; no second Send or repair prompt was attempted.",
+    "Response paired to current-round user message and assistant node by independent DOM inspection."
+  ]
+}

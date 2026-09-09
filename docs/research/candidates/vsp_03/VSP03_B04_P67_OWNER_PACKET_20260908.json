@@ -1,0 +1,17 @@
+{
+  "question": "在 P67 恢复授权下，新分配一次修正后的 seed6 调用，取得仍缺失的独立训练观察吗？",
+  "changes_if_approved": [
+    {"target": "VSP03_B04_P67_SCIENCE_CARD_20260908.md", "from": "P64/P65 失败额度已用完，独立训练观察仍缺失", "to": "新 P67 额度至多一次，seed6 与比较不变，完整 120 秒，新 handle 和输出"}
+  ],
+  "if_refused": "不执行新的调用，保留 seed5 负向观察、seed4 单列发现和旧失败；不改旧证据或重新开放 T 家族。",
+  "evidence_for": [
+    {"path": "docs/research/candidates/vsp_03/VSP03_B04_INTAKE_20260908.md", "quote": "The independent-training discriminator remains unanswered: another independently trained G with the same final greedy/R0/R/stochastic comparison could distinguish recurring gain from the waiting-cost loss.", "why": "旧调用在训练前失败，未提供计划中的独立学习观察；一次真实训练仍直接回答这个问题。"}
+  ],
+  "evidence_against": [
+    {"path": "docs/research/candidates/vsp_03/VSP03_B04_INTAKE_20260908.md", "quote": "G greedy minus R0 = -0.013974609375 and minus R = -0.014775390625, with all three stochastic contrasts negative.", "why": "已有前瞻实例输给固定规则；旧发现的微小收益不能保证新实例有用或稳定。"}
+  ],
+  "uncertainty": ["缺失脚本的源/执行目录问题须由原 CM 修正并核对；旧失败本身不构成性能证据。", "新结果仍可能负向；两次实例最多提供有限的描述性证据。"],
+  "cost": {"compute": "一个 G，128 次 Adam、20480 个联合 episode；一次完整 120 秒上限，零额外科学验证。", "owner_time": "可异步干预，当前无需操作", "reversibility": "reversible", "waits_on_this": "nothing"},
+  "verdict_text": "Select one new P67 corrected seed-6 submission, preserving B04 science and the complete 120 s cap, then intake every outcome.",
+  "source": "docs/research/candidates/vsp_03/VSP03_B04_P67_SCIENCE_CARD_20260908.md"
+}

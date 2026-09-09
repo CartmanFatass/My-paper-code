@@ -1,0 +1,43 @@
+{
+  "question": "按完整已接受裁决执行一次普通G的B03科学卡：单新seed5、最终greedy对R0、统一120秒cap，是否需要异步覆盖或修订？",
+  "changes_if_approved": [
+    {
+      "target": "docs/research/candidates/vsp_03/VSP03_B03_SCIENCE_CARD_20260908.md",
+      "from": "无已选B03卡",
+      "to": "冻结一次真实普通G学习的完整前瞻卡，组织CM实现与接受后的单次运行；不训练T、不增加诊断或第二次recast"
+    }
+  ],
+  "if_refused": "暂停依赖的新调用，保留来源、完整裁决与历史结果；按所有者具体指令调整，未执行工作不会被当作结果。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/vsp_03/pro_packets/20260908_greedy_use_reentry_convergence/archive/RESPONSE.md",
+      "quote": "本轮定性为已有共享服务终止问题内的方向层有限重入与研究问题收窄，不是第二次 RECAST；累计 recasts 保持 1。",
+      "why": "完整同节点裁决明确实际家族和计数，允许同DM继续选定对象。"
+    },
+    {
+      "path": "docs/research/candidates/vsp_03/pro_packets/20260908_greedy_use_reentry_convergence/archive/RESPONSE.md",
+      "quote": "我选择（a）：开展一次明确标注结果启发的普通 G 重入研究，只训练一个新的 seed-5 G，在最终 update-128 冻结后，以确定性 greedy 调度相对 R0 的原生团队回报为主要比较。",
+      "why": "实际训练对象、独立单位和主要比较已具体选择。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/vsp_03/pro_packets/20260908_greedy_use_reentry_convergence/archive/RESPONSE.md",
+      "quote": "继续暂停仍是很接近的选择：旧收益很小且不确定，随机执行明显不利，规则可能已经足够。",
+      "why": "保留close-call；不是已有稳定优势，不预定下一种子。"
+    }
+  ],
+  "uncertainty": [
+    "新driver仍需CM技术验收，裁决不是源码接受。",
+    "新seed5的性能、位移和完整耗时尚未观察。",
+    "没有UAV接口或验证卡，本研究不能算UAV进入。"
+  ],
+  "cost": {
+    "compute": "仅1个2083参数G，128真实Adam步；20480joint episodes、1638400target transitions；新增验证模型/集/更新为0。统一完整120秒cap，远端CPUfloat32单线程。",
+    "owner_time": "异步看卡，无需回复后才实现。",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing；沿P54现有CM和一次执行路径推进，不等待owner逐项批准。"
+  },
+  "verdict_text": "Freeze the exact conforming single-G design selected by the response. One seed5, final update128 greedy G−R0, R and stochastic G retained, complete120s cap; recasts remains1.",
+  "source": "docs/research/candidates/vsp_03/VSP03_P54_GREEDY_USE_CONVERGENCE_INTAKE_20260908.md"
+}

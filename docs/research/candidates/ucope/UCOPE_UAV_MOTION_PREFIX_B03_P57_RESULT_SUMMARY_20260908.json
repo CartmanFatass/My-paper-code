@@ -1,0 +1,274 @@
+{
+  "object": "UCOPE-UAV-MOTION-PREFIX-B03",
+  "evidence_class": "B/EXPLORE",
+  "source": "70900ac7e7aa3a85b4f4ad6a2a8031ccb346fd44",
+  "frozen_card_sha": "f5230ca30537e7baa7db71ee2ba437a17efe807b",
+  "collection_commit": "e904ceb5d9352a9eab28233890eaca28af8f8281",
+  "collection_path": "docs/research/candidates/ucope/UCOPE_UAV_MOTION_PREFIX_B03_7101_COLLECTION_20260908.json",
+  "artifact_root": "C:\\Projects\\HMASD\\temp\\directions\\ucope\\exp\\uav-motion-prefix-b03-7101-p57-20260908",
+  "independent_training_pairs": 1,
+  "master": 7101,
+  "training_endpoint_sd": null,
+  "training_population_uncertainty": "not estimable from n=1",
+  "J_means": {
+    "T": 0.1784473239057538,
+    "G": 0.18854040905238276,
+    "H": 0.1409724467347594
+  },
+  "contrasts": {
+    "T_minus_G": {
+      "mean": -0.010093085146628955,
+      "conditional_episode_se": 0.008506138301283968,
+      "negative_episodes": 15,
+      "positive_episodes": 17,
+      "zero_episodes": 0,
+      "min": -0.11007592829342794,
+      "max": 0.08040545648681256
+    },
+    "G_minus_H": {
+      "mean": 0.04756796231762334,
+      "conditional_episode_se": 0.011545966671454506,
+      "negative_episodes": 8,
+      "positive_episodes": 24,
+      "zero_episodes": 0,
+      "min": -0.06520037935073608,
+      "max": 0.17534285953832038
+    },
+    "T_minus_H": {
+      "mean": 0.03747487717099439,
+      "conditional_episode_se": 0.010037043349360902,
+      "negative_episodes": 7,
+      "positive_episodes": 25,
+      "zero_episodes": 0,
+      "min": -0.0503732620966412,
+      "max": 0.14243598143193595
+    }
+  },
+  "MEI_absolute": 0.01,
+  "reading": "DOWN",
+  "rule_verbatim": "Delta<-.01: adverse native evidence for this task/prefix/learner budget; local movement or information changes do not compensate.",
+  "distance_below_negative_MEI": 9.30851466289552e-05,
+  "boundary_distance_in_conditional_SE": 0.010943290989626205,
+  "predictions": [
+    {
+      "event": "WITHIN",
+      "probability": 0.55,
+      "observed": false,
+      "brier": 0.30250000000000005
+    },
+    {
+      "event": "G_minus_H_positive",
+      "probability": 0.55,
+      "observed": true,
+      "brier": 0.20249999999999996
+    }
+  ],
+  "prediction_correct": 1,
+  "prediction_total": 2,
+  "prediction_mean_brier": 0.2525,
+  "owner_prediction": "not taken (unattended)",
+  "counts": {
+    "train_team_steps": 262144,
+    "eval_team_steps": 24576,
+    "team_steps": 286720,
+    "optimizer_steps": 2048,
+    "train_episodes": 1024,
+    "eval_episodes": 96,
+    "velocity_decisions": 1388332,
+    "duration_decisions": 2720,
+    "d4": 1436,
+    "recurrent_observations": 1392640,
+    "explicit_resets": 1120,
+    "constructor_resets": 2,
+    "constructors": 2,
+    "step_calls": 286720,
+    "scientific_uav_calls": 286720,
+    "diagnostic_frames": 1600,
+    "completed_episode_steps": 286720,
+    "rollouts": 512,
+    "partial_episode_steps": 0
+  },
+  "exposure": {
+    "T": {
+      "train_team_steps": 131072,
+      "adam_calls": 1024,
+      "learning_rate": 0.0003,
+      "entropy_coef": 0.0,
+      "total": {
+        "parameters": 66441,
+        "initial_norm": 15.454122543334961,
+        "final_norm": 17.842164993286133,
+        "displacement": 8.625264167785645,
+        "relative_displacement": 0.5581206013863907
+      },
+      "common_actor": {
+        "parameters": 32134,
+        "initial_norm": 12.346709251403809,
+        "final_norm": 12.513291358947754,
+        "displacement": 2.1527419090270996,
+        "relative_displacement": 0.17435754460502587
+      },
+      "critic": {
+        "parameters": 34177,
+        "initial_norm": 9.294557571411133,
+        "final_norm": 12.717764854431152,
+        "displacement": 8.351143836975098,
+        "relative_displacement": 0.8984982633989214
+      },
+      "duration_absolute_displacement": 0.1387743502855301
+    },
+    "G": {
+      "train_team_steps": 131072,
+      "adam_calls": 1024,
+      "learning_rate": 0.0003,
+      "entropy_coef": 0.0,
+      "total": {
+        "parameters": 66311,
+        "initial_norm": 15.454122543334961,
+        "final_norm": 17.680580139160156,
+        "displacement": 8.321733474731445,
+        "relative_displacement": 0.5384798426048392
+      },
+      "common_actor": {
+        "parameters": 32134,
+        "initial_norm": 12.346709251403809,
+        "final_norm": 12.657620429992676,
+        "displacement": 2.846850633621216,
+        "relative_displacement": 0.2305756599311919
+      },
+      "critic": {
+        "parameters": 34177,
+        "initial_norm": 9.294557571411133,
+        "final_norm": 12.344537734985352,
+        "displacement": 7.819635391235352,
+        "relative_displacement": 0.841313352588907
+      }
+    }
+  },
+  "exposure_line": "2 real fits; T/G each131072 train steps/1024 Adam at lr0.0003 and entropy_coef0.0; T66441/G66311 parameters; total relative displacement T0.558120601386/G0.538479842605; no new exposure at intake",
+  "descriptive_existing_action_path": {
+    "eval_opening_duration_decisions": 160,
+    "eval_four_step_openings": 85,
+    "eval_one_step_openings": 75,
+    "eval_four_step_frequency": 0.53125,
+    "T_eval_velocity_decisions": 40705,
+    "G_eval_velocity_decisions": 40960,
+    "G_minus_T_eval_velocity_decisions": 255,
+    "recurrent_observations_each_eval_arm": 40960
+  },
+  "outcome_informed_logged_G_entropy_description": {
+    "first_epoch_of_first_rollout": 21.284074783325195,
+    "last_epoch_of_last_rollout": 21.359865188598633,
+    "source_inferred_effective_latent_geomean_std": [
+      0.9999997856836967,
+      1.005065264665869
+    ],
+    "boundary": "recorded pre-update objective values, not final checkpoint inference",
+    "interpretation": "descriptive only; zero explicit bonus still permits variance changes from native policy credit; no cross-object entropy-causal contrast"
+  },
+  "resources": {
+    "admission": {
+      "assessed_at": "2026-09-08T20:46:06.795821Z",
+      "available_physical_bytes": 15645777920,
+      "captured_at": "2026-09-08T20:46:06.795543Z",
+      "cgroup_headroom_bytes": null,
+      "cgroup_memory_current_bytes": null,
+      "cgroup_memory_max_bytes": null,
+      "effective_available_bytes": 15645777920,
+      "effective_floor_pass": true,
+      "failure_reasons": [],
+      "measurement_source": "/proc/meminfo",
+      "minimum_available_bytes": 4294967296,
+      "passed": true,
+      "physical_floor_pass": true,
+      "schema_version": 1
+    },
+    "whole_wall_seconds": 283.51,
+    "internal_pair_wall_seconds": 282.95776479900815,
+    "arm_wall_seconds": {
+      "T": 143.64492219901877,
+      "G": 139.312841313018
+    },
+    "peak_rss_kib": 554276,
+    "aggregate_cpu_seconds": null,
+    "cap_breach": false,
+    "limits": [],
+    "run_start_utc": "2026-09-08T20:46:06Z",
+    "run_end_utc": "2026-09-08T20:50:50Z",
+    "supervisor_pid": 3007532
+  },
+  "evidence_sha256": {
+    "diagnostics.jsonl": "13500dc7a302fe4d77169d627696f17b59cab3a1801cdff61171b39fb6e32f5b",
+    "episodes.jsonl": "731d52dff806eb5f6b11629b9aff78c2f28b9af73339862b9f6c685046dd0af4",
+    "final_G.pt": "4c2ab31f4cd665f89722b7a0097e6fac37871e6ed079913fb6a63e530ffa061e",
+    "final_T.pt": "ab7a629c43b063a421305755ca2a634fa8b54a9f5ca122cac34536649b3d147a",
+    "resource_admission.json": "822d7877e86347d90fadfb1a6c76af8a8df1455e61f796c15548a6d6ecacd605",
+    "rollouts.jsonl": "26e8b61fed368833b64dd4c21a9f791c5802e3cb2144a9f1047bcc65ee4e4da4",
+    "summary.json": "87a81036eb623e25ae61f235a2ceea78f73e60d3af9077ecf1e4e6c7a6a07143"
+  },
+  "supervisor_sha256": {
+    "exit_code": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "pid": "267760e1d834ea37168971429389683e1130e2eefb144c1b75e44bf1e1f979f7",
+    "runner.sh": "521542a7c5953294a2f62de6ab01e5886929b36312ebf59f4f2aa0f40fc658df",
+    "start_time": "c154131b9f04e06a316735f8f78e298d84df641f7acde5c6544757f68088d33a",
+    "status": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983",
+    "task.log": "2fb743cbc23463880fd81121061d0cd8b17a9a2c28944583e659d01b7a96c29e"
+  },
+  "actual_intake_exposure": {
+    "model_calls": 0,
+    "environment_steps": 0,
+    "learner_steps": 0,
+    "evaluation_episodes": 0
+  },
+  "descriptive_run_summary": {
+    "unit": "caller-declared independent training run",
+    "inference": "descriptive only; no confidence interval or success classification",
+    "groups": [
+      {
+        "task": "UCOPE-UAV-MOTION-PREFIX-B03",
+        "arm": "G",
+        "n": 1,
+        "mean": 0.18854040905238276,
+        "sample_sd": null,
+        "min": 0.18854040905238276,
+        "max": 0.18854040905238276,
+        "runs": {
+          "7101": 0.18854040905238276
+        }
+      },
+      {
+        "task": "UCOPE-UAV-MOTION-PREFIX-B03",
+        "arm": "T",
+        "n": 1,
+        "mean": 0.1784473239057538,
+        "sample_sd": null,
+        "min": 0.1784473239057538,
+        "max": 0.1784473239057538,
+        "runs": {
+          "7101": 0.1784473239057538
+        }
+      }
+    ],
+    "paired_differences": [
+      {
+        "task": "UCOPE-UAV-MOTION-PREFIX-B03",
+        "arm": "T",
+        "baseline": "G",
+        "summary": {
+          "n": 1,
+          "mean": -0.01009308514662896,
+          "sample_sd": null,
+          "min": -0.01009308514662896,
+          "max": -0.01009308514662896
+        },
+        "differences": {
+          "7101": -0.01009308514662896
+        },
+        "unmatched_arm_seeds": [],
+        "unmatched_baseline_seeds": []
+      }
+    ]
+  },
+  "analysis_script": "temp/directions/ucope/exp/uav-motion-prefix-b03-p57-dm-intake/analyze_existing.py",
+  "analysis_limit": "Recorded-byte arithmetic only. All 96 J outcomes remain in the referenced collection JSON. The card primary is mean of paired episode differences, not subtraction of rounded endpoint means."
+}

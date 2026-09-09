@@ -1,0 +1,6 @@
+summary.json -text
+cm_collection.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+admission.json -text
+whole_chain.json -text
+supervised.time -text
+resets.json -text

@@ -111,7 +111,7 @@ conversation for a bound key.
    request (`ARCHIVED`) before the next turn on the same key; the Claude agent's
    `bind_conversation.py` call alone leaves `DIRECTION_VERIFIED` and the next request on that
    key is refused `BINDING_BUSY` for both loops. Phase 2 therefore ends by walking the record to
-   `ARCHIVED` with `temp/sessions/hmasd-chatgpt-pro-transport/archive_delivered_claude_request.py`
+   `ARCHIVED` with `.agents/skills/hmasd-chatgpt-pro-transport/scripts/archive_delivered_claude_request.py`
    (the contract's own validated transitions; no rebinding), as described in the agent file.
    Codex-skill items with no Claude counterpart: `validate_request.py` (singleton routing),
    heartbeat automations (replaced by the GitHub head watch), parent-thread receipts

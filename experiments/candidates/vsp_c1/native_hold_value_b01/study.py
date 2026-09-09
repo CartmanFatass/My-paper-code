@@ -75,18 +75,24 @@ def primary_from_rows(rows, expected, reset_start):
     return result
 
 
-def checkpoint_identity(config, arm, sha):
-    return dict(object=OBJECT, algorithm=arm, arm=arm, seed=config.seed,
+def checkpoint_identity(config, arm, sha, object_id=OBJECT, normalize_value=False):
+    configuration = asdict(config)
+    if normalize_value:
+        configuration.update(value_normalization="cumulative_population_fp32", entropy_coef=.01)
+    return dict(object=object_id, algorithm=arm, arm=arm, seed=config.seed,
                 mode="ENGINEERING_FIXTURE" if config.fixture else "UAV_B_EXPLORE",
-                configuration=asdict(config), ratio_grouping="agent_compound", launch_sha=sha)
+                configuration=configuration, ratio_grouping="agent_compound", launch_sha=sha)
 
 
-def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=write_summary):
+def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=write_summary,
+             *, object_id=OBJECT, card=CARD, normalize_value=False):
     import torch
     from experiments.candidates.ucope.uav_motion_prefix_b01.environment import SyntheticAdapter, make_real
     from experiments.candidates.ucope.uav_motion_prefix_b01.learner import collect_episode, optimizer_for, update
     from experiments.candidates.ucope.uav_motion_prefix_b01.policy import generator, snapshot, templates
     from .critic import R_COLUMNS, models, movement
+    if normalize_value:
+        from experiments.candidates.vsp_c1.native_hold_value_b03.value_normalization import ValueMoments
 
     out = Path(out)
     out.mkdir(parents=True, exist_ok=True)
@@ -97,9 +103,10 @@ def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=wri
     b = 100000 * config.seed
     sha = subprocess.check_output(["git", "rev-parse", "HEAD"],
                                   cwd=Path(__file__).resolve().parents[4], text=True).strip()
-    summary = dict(object=OBJECT, card=CARD, seed=config.seed, launch_sha=sha,
+    summary = dict(object=object_id, card=card, seed=config.seed, launch_sha=sha,
                    mode="ENGINEERING_FIXTURE" if config.fixture else "UAV_B_EXPLORE",
-                   configuration=asdict(config), ratio_grouping="agent_compound",
+                   configuration=checkpoint_identity(config, ARMS[0], sha, object_id, normalize_value)["configuration"],
+                   ratio_grouping="agent_compound",
                    arms=arms, limits=limits, status="INCOMPLETE",
                    resources="resources_unmeasured",
                    timing_boundary="in-process through publication/readback; excludes interpreter exit",
@@ -112,6 +119,10 @@ def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=wri
                               constructor_reset=b+1000, train_reset_start=b+1000,
                               eval_reset_start=b+2000, eval_velocity_start=b+3000,
                               eval_duration_start=b+4000))
+    if normalize_value:
+        summary["value_loss_units"] = "normalized_squared"
+        for arm in ARMS:
+            summary["cost_projection"][arm] += " + 256*c_moment_merge(512); normalization overhead unmeasured"
     files = {name: (out / f"{name}.jsonl").open("w", encoding="utf-8") for name in ("episodes", "rollouts")}
 
     def emit(name, row):
@@ -120,7 +131,7 @@ def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=wri
         files[name].write(json.dumps(clean_json(row, limits), allow_nan=False) + "\n")
         files[name].flush()
 
-    actor = critic = initial = arm_info = None
+    actor = critic = initial = arm_info = moments = None
     try:
         deadline.check()
         common = templates(config.seed)
@@ -134,6 +145,9 @@ def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=wri
                             hold_count_coverage="returned complete episodes only", elapsed_wall=None)
             arms[arm] = arm_info
             actor = critic = initial = None
+            moments = ValueMoments() if normalize_value else None
+            value_options = {"value_moments": moments} if moments is not None else {}
+            learning_options = dict(value_options, entropy_coef=.01) if moments is not None else {}
             deadline.check()
             actor, critic = models(common, arm)
             initial = snapshot(actor, critic)
@@ -152,7 +166,8 @@ def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=wri
                     dict(pair_master=config.seed, arm=label, phase=phase, episode=e),
                     deadline.check, counts, lambda row: emit("episodes", row),
                     lambda row: None, limits, real=not config.fixture, diagnostics=False,
-                    ratio_grouping="agent_compound")
+                    ratio_grouping="agent_compound",
+                    **(value_options if model is not None else {}))
                 if model is not None:
                     arm_info["nonzero_r_rows"][phase] += int((data["critic"][..., R_COLUMNS] != 0).any(-1).sum())
                 return data
@@ -161,24 +176,33 @@ def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=wri
                 before = counts.copy()
                 episodes = [episode("train", 2*index+i, actor, critic, velocity_rng, duration_rng, arm) for i in range(2)]
                 records = update(actor, critic, optimizer, episodes, config.chunk, deadline.check,
-                                 counts, ratio_grouping="agent_compound")
+                                 counts, ratio_grouping="agent_compound", **learning_options)
                 counts["rollouts"] += 1
+                normalization_row = {}
+                if moments is not None:
+                    arm_info["value_moments"] = moments.state()
+                    normalization_row = dict(value_moments=moments.state(), value_loss_units="normalized_squared")
                 emit("rollouts", dict(arm=arm, pair_master=config.seed, rollout=index,
-                                      steps=2*config.horizon, episodes=2, epochs=records,
+                                      steps=2*config.horizon, episodes=2, epochs=records, **normalization_row,
                                       **{k: counts[k]-before[k] for k in ("optimizer_steps", "velocity_decisions", "duration_decisions", "d4")}))
                 deadline.check()
             arm_info["fit_complete"] = True
             arm_info["training_counts"] = counts.copy()
             arm_info["exposure"] = movement(initial, actor, critic)
             deadline.check()
-            torch.save(dict(checkpoint_identity(config, arm, sha), actor=actor.state_dict(),
-                            critic=critic.state_dict()), out / f"final_{arm}.pt")
+            normalization_state = {"value_moments": moments.state()} if moments is not None else {}
+            torch.save(dict(checkpoint_identity(config, arm, sha, object_id, normalize_value), actor=actor.state_dict(),
+                            critic=critic.state_dict(), **normalization_state), out / f"final_{arm}.pt")
             arm_info["checkpoint"] = f"final_{arm}.pt"
             deadline.check()
             before = counts.copy()
+            if moments is not None:
+                arm_info["moments_before_evaluation"] = moments.state()
             for e in range(config.eval_episodes):
                 episode("eval", e, actor, critic, generator(b+3000+e), generator(b+4000+e), arm)
             arm_info["evaluation_counts"] = {k: counts[k]-before[k] for k in counts}
+            if moments is not None:
+                arm_info["moments_after_evaluation"] = moments.state()
             ec = arm_info["evaluation_counts"]
             arm_info["sampled_d4_frequency"] = ec["d4"] / ec["duration_decisions"]
             arm_info["complete"] = True
@@ -194,10 +218,14 @@ def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=wri
                         raise
                 finally:
                     arm_info["hover_counts"] = {k: counts[k]-before[k] for k in counts}
+                    if moments is not None:
+                        arm_info["moments_after_hover"] = moments.state()
             arm_info["elapsed_wall"] = deadline.check() - deadline.arm_start
     except Exception as error:
         limits.append(f"execution: {type(error).__name__}: {error}")
         if arm_info is not None:
+            if moments is not None:
+                arm_info["value_moments"] = moments.state()
             if initial is not None:
                 arm_info["exposure"] = movement(initial, actor, critic)
             arm_info["elapsed_wall"] = clock() - deadline.arm_start
@@ -234,8 +262,11 @@ def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=wri
         for arm, info in arms.items():
             if "checkpoint" in info:
                 saved = torch.load(out / info["checkpoint"], map_location="cpu", weights_only=True)
-                if any(saved[k] != v for k, v in checkpoint_identity(config, arm, sha).items()):
+                if any(saved[k] != v for k, v in checkpoint_identity(config, arm, sha, object_id, normalize_value).items()):
                     raise ValueError(f"{arm} checkpoint identity readback mismatch")
+                if normalize_value:
+                    if saved["value_moments"] != info["value_moments"] or loaded["arms"][arm]["value_moments"] != info["value_moments"]:
+                        raise ValueError(f"{arm} value moments readback mismatch")
         summary["publication_readback"] = "complete"
     except Exception as error:
         limits.append(f"publication/readback: {type(error).__name__}: {error}")

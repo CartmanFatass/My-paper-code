@@ -7,7 +7,7 @@ hierarchically; Claude Code reads the one-line `CLAUDE.md` beside each, which im
 | --- | --- |
 | Collaboration, decision ladder, unattended operation, capacity, Git under concurrent sessions | [`AGENTS.md`](../../AGENTS.md) |
 | Native agent messages, idle-agent wakeups and app task addressing | [`SIBLING_COMMUNICATION.md`](SIBLING_COMMUNICATION.md) |
-| Root execution, Portfolio boundaries and shared observation | [`ROOT_OPERATIONS.md`](ROOT_OPERATIONS.md), [`EXPERIMENT_MONITOR.md`](EXPERIMENT_MONITOR.md) |
+| Root planning, execution and Transport observation | [`ROOT_OPERATIONS.md`](ROOT_OPERATIONS.md), [`EXPERIMENT_MONITOR.md`](EXPERIMENT_MONITOR.md) |
 | Fixed GitHub research tasks, scoped Pro delivery and partial success | [`GITHUB_RESEARCH_COLLABORATION.md`](GITHUB_RESEARCH_COLLABORATION.md) |
 | Environment, interpreters, commands | [`CLAUDE.md`](../../CLAUDE.md) |
 | What research code may and may not build; core versus research tier | [`ENGINEERING_SCOPE_SPEC.md`](ENGINEERING_SCOPE_SPEC.md) |

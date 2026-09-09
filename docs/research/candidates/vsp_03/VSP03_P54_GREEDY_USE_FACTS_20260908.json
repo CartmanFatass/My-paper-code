@@ -1,0 +1,235 @@
+{
+  "kind": "P54 source and configuration arithmetic only; candidate B03 unselected",
+  "source_revision": "8e98c807bfe39e6caa52969900f10a3032b67b30",
+  "generated_at": "2026-09-08T19:36:37.177121+00:00",
+  "historical_source": "docs/research/candidates/vsp_03/b02_p10_result_20260907/summary.json",
+  "historical_b02": {
+    "seed": 4,
+    "training_pairs": 1,
+    "learner_arms": [
+      "T",
+      "G"
+    ],
+    "models": 2,
+    "optimizer_steps": 256,
+    "actual_rollouts": {
+      "episodes_started": 38920,
+      "episodes_completed": 38920,
+      "team_ticks": 1556800,
+      "target_transitions": 3113600,
+      "decision_rows": 187200,
+      "rollout_policy_forwards": 4295
+    },
+    "absolute": {
+      "T_greedy": {
+        "episodes": 1024,
+        "return": 0.35067382812500003,
+        "fixed_clocks": 17.0,
+        "pending_clocks": 8.830078125,
+        "eligible_decisions": 6.8369140625,
+        "blocked_pending": 1.9931640625,
+        "blocked_final_clocks": 0.0107421875,
+        "success_per_team": 0.947265625,
+        "attempt_per_team": 1.8193359375,
+        "failed_attempt_per_team": 0.8720703125,
+        "non_submission_per_team": 0.1806640625,
+        "waiting_ticks_per_team": 30.990234375
+      },
+      "T_stochastic": {
+        "episodes": 1024,
+        "return": 0.3388134765625,
+        "fixed_clocks": 17.0,
+        "pending_clocks": 8.5322265625,
+        "eligible_decisions": 6.5390625,
+        "blocked_pending": 1.9931640625,
+        "blocked_final_clocks": 0.0107421875,
+        "success_per_team": 0.91796875,
+        "attempt_per_team": 1.9267578125,
+        "failed_attempt_per_team": 1.0087890625,
+        "non_submission_per_team": 0.0732421875,
+        "waiting_ticks_per_team": 28.80078125
+      },
+      "G_greedy": {
+        "episodes": 1024,
+        "return": 0.35466796875000006,
+        "fixed_clocks": 17.0,
+        "pending_clocks": 8.111328125,
+        "eligible_decisions": 6.1123046875,
+        "blocked_pending": 1.9990234375,
+        "blocked_final_clocks": 0.009765625,
+        "success_per_team": 0.94140625,
+        "attempt_per_team": 1.9716796875,
+        "failed_attempt_per_team": 1.0302734375,
+        "non_submission_per_team": 0.0283203125,
+        "waiting_ticks_per_team": 26.697265625
+      },
+      "G_stochastic": {
+        "episodes": 1024,
+        "return": 0.2890380859375,
+        "fixed_clocks": 17.0,
+        "pending_clocks": 5.9775390625,
+        "eligible_decisions": 3.9775390625,
+        "blocked_pending": 2.0,
+        "blocked_final_clocks": 0.0,
+        "success_per_team": 0.767578125,
+        "attempt_per_team": 1.9892578125,
+        "failed_attempt_per_team": 1.2216796875,
+        "non_submission_per_team": 0.0107421875,
+        "waiting_ticks_per_team": 18.0078125
+      },
+      "R": {
+        "episodes": 1024,
+        "return": 0.34958984375,
+        "fixed_clocks": 17.0,
+        "pending_clocks": 8.8408203125,
+        "eligible_decisions": 6.84765625,
+        "blocked_pending": 1.9931640625,
+        "blocked_final_clocks": 0.0107421875,
+        "success_per_team": 0.9453125,
+        "attempt_per_team": 1.818359375,
+        "failed_attempt_per_team": 0.873046875,
+        "non_submission_per_team": 0.181640625,
+        "waiting_ticks_per_team": 31.04296875
+      },
+      "R0": {
+        "episodes": 1024,
+        "return": 0.35067382812500003,
+        "fixed_clocks": 17.0,
+        "pending_clocks": 8.830078125,
+        "eligible_decisions": 6.8369140625,
+        "blocked_pending": 1.9931640625,
+        "blocked_final_clocks": 0.0107421875,
+        "success_per_team": 0.947265625,
+        "attempt_per_team": 1.8193359375,
+        "failed_attempt_per_team": 0.8720703125,
+        "non_submission_per_team": 0.1806640625,
+        "waiting_ticks_per_team": 30.990234375
+      }
+    },
+    "comparisons": {
+      "T_greedy-R": {
+        "mean": 0.0010839843749999999,
+        "conditional_world_sd": 0.022572718967533434,
+        "conditional_world_se": 0.0007053974677354198,
+        "worlds": 1024
+      },
+      "T_greedy-G_greedy": {
+        "mean": -0.003994140625000004,
+        "conditional_world_sd": 0.13732115878442092,
+        "conditional_world_se": 0.004291286212013154,
+        "worlds": 1024
+      },
+      "G_greedy-R": {
+        "mean": 0.0050781250000000045,
+        "conditional_world_sd": 0.1391688909393137,
+        "conditional_world_se": 0.004349027841853553,
+        "worlds": 1024
+      },
+      "T_greedy-R0": {
+        "mean": 0.0,
+        "conditional_world_sd": 0.0,
+        "conditional_world_se": 0.0,
+        "worlds": 1024
+      },
+      "G_greedy-R0": {
+        "mean": 0.003994140625000004,
+        "conditional_world_sd": 0.13732115878442092,
+        "conditional_world_se": 0.004291286212013154,
+        "worlds": 1024
+      },
+      "T_stochastic-R": {
+        "mean": -0.010776367187500002,
+        "conditional_world_sd": 0.2516362053669968,
+        "conditional_world_se": 0.00786363141771865,
+        "worlds": 1024
+      },
+      "T_stochastic-R0": {
+        "mean": -0.011860351562500001,
+        "conditional_world_sd": 0.25148431508427144,
+        "conditional_world_se": 0.007858884846383482,
+        "worlds": 1024
+      },
+      "T_stochastic-T_greedy": {
+        "mean": -0.011860351562500001,
+        "conditional_world_sd": 0.25148431508427144,
+        "conditional_world_se": 0.007858884846383482,
+        "worlds": 1024
+      },
+      "G_stochastic-R": {
+        "mean": -0.060551757812499996,
+        "conditional_world_sd": 0.35268937878113155,
+        "conditional_world_se": 0.01102154308691036,
+        "worlds": 1024
+      },
+      "G_stochastic-R0": {
+        "mean": -0.06163574218749999,
+        "conditional_world_sd": 0.3537717937382875,
+        "conditional_world_se": 0.011055368554321484,
+        "worlds": 1024
+      },
+      "G_stochastic-G_greedy": {
+        "mean": -0.06562988281249998,
+        "conditional_world_sd": 0.358912047710543,
+        "conditional_world_se": 0.01121600149095447,
+        "worlds": 1024
+      }
+    },
+    "G_initial_l2": 5.880751609802246,
+    "G_final_displacement_over_initial_l2": 0.37748837857977446,
+    "G_arm_wall_s": 1.4709916989668272,
+    "complete_invocation_wall_s": 5.05,
+    "complete_wall_source": "VSP03_B02_P10_RESULT_EVIDENCE_20260907.md / Bound execution and direct evidence"
+  },
+  "proposed_b03": {
+    "selected": false,
+    "learner_arms": [
+      "G"
+    ],
+    "training_seeds": [
+      5
+    ],
+    "parameter_count": 2083,
+    "optimizer_steps": 128,
+    "learning_rate": 0.001,
+    "training_joint_episodes": 16384,
+    "training_team_ticks": 655360,
+    "training_target_transitions": 1310720,
+    "final_evaluation_executions": [
+      "G_greedy",
+      "G_stochastic",
+      "R0",
+      "R"
+    ],
+    "joint_episodes_per_execution": 1024,
+    "evaluation_joint_episodes": 4096,
+    "total_joint_episodes": 20480,
+    "total_team_ticks": 819200,
+    "total_target_transitions": 1638400,
+    "additional_validation_episodes": 0,
+    "additional_validation_models": 0,
+    "additional_validation_optimizer_steps": 0,
+    "max_rollout_model_batch_calls": 2210,
+    "nested_candidate_searches": 0,
+    "trajectory_searches": 0,
+    "solver_calls": 0,
+    "whole_invocation_cap_s": 120,
+    "planning_anchor_s": 5.05,
+    "planning_anchor_is_upper_bound": false,
+    "host": "wsl_4070",
+    "device": "cpu",
+    "dtype": "float32",
+    "compute_threads": 1
+  },
+  "p54_actual_new_exposure": {
+    "model_constructions": 0,
+    "training_starts": 0,
+    "training_seeds": 0,
+    "simulation_episodes": 0,
+    "evaluation_episodes": 0,
+    "optimizer_steps": 0,
+    "replays": 0,
+    "profiling_calls": 0,
+    "result_bearing_invocations": 0
+  },
+  "exposure_line": "Consultation: zero new models/training starts/seeds/environment episodes/optimizer steps/evaluations/replays/profiling/invocations. Historical B02 G: 2083 parameters, 128 real Adam steps at lr0.001, initial total L2 5.8807516098, final displacement/initial L2 0.3774883786. Unselected B03 candidate: 1 new G learner at seed5, 2083 parameters, 128 real Adam steps at lr0.001, 16384 training and2048 learner evaluation episodes; R0/R add2048 shared-world reference episodes. The historical displacement supports that the recipe can move; it does not predict seed5 displacement or gain."
+}

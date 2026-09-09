@@ -1,0 +1,80 @@
+{
+  "id": "20260908-ucope-003",
+  "created": "2026-09-08T14:52:41-07:00",
+  "direction": "ucope",
+  "tier": "direction",
+  "kind": "close-call",
+  "title": "B03后：一对动作条件化持续时间B，还是结束已测开场家族",
+  "context": "当前只是P61方向建议，尚无Pro决定或实验分配。B03仅一对，T-G刚越负门槛但两学习臂均胜hover；保留B02两次原生损失。新候选只让开场持续时间读取刚采样的自有速度，普通反馈比较器不变。",
+  "options": [
+    {
+      "key": "a",
+      "label": "建议一对新动作条件化B",
+      "consequence": "由Convergence决定是否保留候选；若选择再冻结卡和预算，当前不运行。"
+    },
+    {
+      "key": "b",
+      "label": "结束已测开场家族且无后继",
+      "consequence": "由Convergence结束该已测家族，不改变全部UCOPE方向的生命周期或证明所有持续动作无用。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "未使用已采样动作的源代码事实与经核对的扩展策略文献支持一个小改动，但普通反馈已胜出且此前负值使无后继仍是强选项。",
+  "evidence": [
+    "docs/research/candidates/ucope/UCOPE_POST_B03_CONVERGENCE_PREPARATION_INTAKE_20260908.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-08.md#L48",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "UCOPE在B02/B03后，是否值得只做一对动作条件化开场持续时间的真实B，还是结束已测开场家族并保留无后继？",
+    "changes_if_approved": [
+      {
+        "target": "UCOPE Convergence方向选择",
+        "from": "P57已完成，当前无选定后继",
+        "to": "建议一对新B：持续时间读取刚采样的自有速度；须先取得完整合规Pro决定并冻结前瞻卡，当前不启动实验"
+      }
+    ],
+    "if_refused": "保留全部旧结果，把结束已测开场家族且无后继的选项交给同一Convergence；不新增B03对、扫描或诊断。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_POST_B03_CONVERGENCE_PREPARATION_INTAKE_20260908.md",
+        "quote": "The current T sampler first draws each UAV's velocity latent `u`, then evaluates\n`actor.duration(recurrent[i])` without that sampled velocity.",
+        "why": "源代码给出具体未测试的动作依赖；改变的是开场自有动作与持续时间的关联，时间与信息边界不变。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_UAV_MOTION_PREFIX_B03_P57_INTAKE_20260908.md",
+        "quote": "The negative T−G mean contains17 positive and15 negative paired episodes,\nwith range−0.1100759283 to+0.0804054565.",
+        "why": "B03虽两学习臂高于hover，但相对普通反馈仍负；B02两组还低于hover，不应把新增条件化当作必然补救。"
+      }
+    ],
+    "uncertainty": [
+      "B03仅一对训练且距负门槛0.0000930851；不能判稳定伤害，也不能把变化归因于熵或裁剪。",
+      "增加T头容量属于算法包改变；两臂测试不辨识条件化单独因果。",
+      "当前缺少调优后headroom；这不阻止普通B，也不是必须新增的前置实验。"
+    ],
+    "cost": {
+      "compute": "本次咨询0模型/训练/仿真/评价。若Pro明确选择：1对、2学习臂、286720原生team steps、2048 Adam、96终局评价；1800秒/臂、3600秒完整对；新头额外时间未知，B03整对参考283.51秒。",
+      "owner_time": "可异步介入；不等待回复。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing; 正式方向决定由此次Convergence形成，当前不分配实验。"
+    },
+    "verdict_text": "建议由Convergence选择一对新的B：让每架UAV在开场根据刚采样的自有速度选择持续1或4步，再与同信息逐步反馈控制比较完整原生回报。只提这一对，不重复B03或扫熵/裁剪；保留结束该已测家族且无后继这一有力选项。当前只是提交方向建议，尚未作出Pro决定或分配实验。",
+    "source": "docs/research/candidates/ucope/UCOPE_POST_B03_CONVERGENCE_PREPARATION_INTAKE_20260908.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-08T22:47:23+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/ucope/pro_packets/20260908_post_b03_convergence/archive/RESPONSE.md",
+      "record": "docs/research/candidates/ucope/UCOPE_POST_B03_CONVERGENCE_INTAKE_20260908.md",
+      "state": "applied",
+      "summary": "P61完整475f445答复已核对合规：CONTINUE一对7201条件化开场B04；本次已写入卡/完整CM任务，实施与真实运行尚未发生。保留B02/B03负面证据和关闭家族备选；670字旧路径Transport文本与实际交付冲突，两个档案均保留，不重发。"
+    }
+  ]
+}

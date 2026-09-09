@@ -1,0 +1,73 @@
+{
+  "preparation_exposure": {
+    "new_models": 0,
+    "new_training_transitions": 0,
+    "new_optimizer_steps": 0,
+    "new_evaluation_episodes": 0,
+    "new_native_calls": 0,
+    "new_scientific_invocations": 0
+  },
+  "source": "own_command_mean_b07_20260908_run01/dm_analysis.json at19a6234b280913e28b8f5330141858cbafbf74d1",
+  "historical_B07": {
+    "unit": "one matched training pair, seed127; four conditions are within-pair observations",
+    "relative_l2": {
+      "DIRECT_MEAN": 0.04690254949701972,
+      "OWN_COMMAND_MEAN": 0.0484554855508188
+    },
+    "ordinary_transitions": 131072,
+    "optimizer_steps": 1024,
+    "evaluation_episodes": 16,
+    "evaluation_ticks": 19200,
+    "primary": -135.25,
+    "final_condition_deltas": [
+      -221,
+      74,
+      -329,
+      -65
+    ],
+    "native_training_call_bounds": [
+      361506,
+      1355126
+    ],
+    "H_measured": false,
+    "known_accounted_pair_subtotal_seconds": "463.83358418601877",
+    "additional_syntax_seconds": null,
+    "exact_complete_cost_measured": false
+  },
+  "minimal_real_B_scale_comparison_only": {
+    "status": "not a proposed or selected object; no treatment, seed, master, invocation or new cap allocated",
+    "arms": 2,
+    "independent_training_pairs": 1,
+    "updates_per_arm": 16,
+    "lanes": 32,
+    "ticks_per_update_per_lane": 128,
+    "ordinary_transitions_per_arm": 65536,
+    "ordinary_transitions_pair": 131072,
+    "optimizer_steps_per_arm": 512,
+    "optimizer_steps_pair": 1024,
+    "final_checkpoints_per_arm": 1,
+    "final_episodes_per_arm": 4,
+    "final_evaluation_ticks_pair_upper": 9600,
+    "initial_evaluations": "not required for this hypothetical final-service primary; add only if a selected question needs them",
+    "native_training_law": "per arm2N+2E+H,0<=E<=N,0<=H<=20E",
+    "native_training_calls_per_arm_bounds": [
+      131072,
+      1572864
+    ],
+    "native_training_calls_pair_bounds": [
+      262144,
+      3145728
+    ],
+    "batched_controller_forwards_per_arm": 2048,
+    "new_candidate_or_trajectory_search_calls": 0,
+    "nested_private_labels": "existing algorithm work retained; trajectory-dependent E/H unknown prospectively",
+    "added_validation": "one focused changed-behavior and primary check if a real treatment is later selected; reuse accepted source checks; no added scientific invocation",
+    "runtime": "unknown for an unspecified new treatment; B07 known subtotal is an anchor only",
+    "existing_B07_cap_reference_only": {
+      "seconds_per_complete_arm": 1800,
+      "seconds_per_pair": 3600
+    }
+  },
+  "no_successor_option_new_scientific_compute": 0,
+  "preparation_control_plane_time": "not treated as zero compute cost; not a result-bearing invocation"
+}

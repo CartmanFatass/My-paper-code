@@ -1,0 +1,14 @@
+{
+  "read_at_utc": "2026-09-08T22:00:53.216642+00:00",
+  "task_commit": "6307d2fd9f3911ef1dd7d3b7c7c154bfaa766fa8",
+  "task_url": "https://github.com/CartmanFatass/My-paper-code/blob/6307d2fd9f3911ef1dd7d3b7c7c154bfaa766fa8/docs/research/candidates/ucope/pro_packets/20260908_post_b03_convergence/TASK.md",
+  "task_blob_sha": "003ba5709be7857ebe028e2f8937b5b7eb1b11ab",
+  "task_sha256": "527a813bec83f7a046055b3a54712e8ff2378b96074d006be1b7d27ebbefe72b",
+  "github_task_bytes_equal_local": true,
+  "delivery_branch": "codex/ucope",
+  "delivery_branch_head_at_read": "6307d2fd9f3911ef1dd7d3b7c7c154bfaa766fa8",
+  "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/11",
+  "issue_state": "OPEN",
+  "issue_title": "UCOPE：开场持续动作家族与后继选择",
+  "dispatch_state": "ready; no Transport dispatch or provider Send performed by DM"
+}
