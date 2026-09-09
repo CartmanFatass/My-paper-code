@@ -1,5 +1,7 @@
 # HMASD experiment tracking
 
+UCOPE P77 full intake0a732abe0 accepted: valid DOWN, all425984steps3072Adam128eval/501.69s complete; original CM observation ended. Original DM actually resumed P78 ONE fresh F/G/H comparison through card/source/exact remote execution/CM observation/intake,286720steps2048Adam96eval1800/3600caps; new handle pending. FOLR P78 Transport terminal SEND_CONTROL_NO_EFFECT after2totalpermitted clicks, no usernode/conversationURL,UNBOUND/tabclosed; original DM actually resumed read-only factual reconciliation/blocker intake, no new Send. VSPC1 P77 execution checkout retired with source recovery ref/output preserved; P78 authoring continues.
+
 VSPC1 P77 full intakef87af3f86 accepted, sole B11/8502 handle terminal exit0/507.29s; valid CHANGE_DOWN C=-.0119242503 near negative MEI,512 UP and768 WITHIN retained. Original DM actually resumed P78 one fresh independent unchanged fixed512/768/H pair through full card/source/remote execution/CM observation/intake, same434176steps3072Adam160eval1800/3600caps; new master/handle pending. No reuse of spent P77 allowance.
 
 FOLR P78 READY questiond824897be/TASK83f7beafd accepted and actually dispatched once to configured Transport; app accepted/provider Send unconfirmed. Logicalem:vap_folr_core:convergence is unbound pending reconciliation/fresh verified6Pro under cutover. Explicit public lifecycle information protocol versus no successor is the unresolved question, not an adopted change. No experimental allowance.

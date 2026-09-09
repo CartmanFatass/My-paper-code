@@ -117,8 +117,9 @@ def test_t254_t255_original_labels_actual_suppression_and_partial_censor(monkeyp
     assert bool(rows) != fail_last
 
 
-@pytest.mark.parametrize("pair", ["renewal_b01", "renewal_b02", "renewal_b03"])
+@pytest.mark.parametrize("pair", ["renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01"])
 def test_actual_short_pair_primary_counts_checkpoint_and_identity(tmp_path, pair):
+    frozen = pair == "renewal_frozen_b01"
     config = study.Config.engineering(pair=pair)
     summary = study.run_pair(config, tmp_path, time.monotonic())
     assert summary["status"] == "COMPLETE" and summary["scientific_uav_calls"] == 0
@@ -126,25 +127,96 @@ def test_actual_short_pair_primary_counts_checkpoint_and_identity(tmp_path, pair
                                       else (study.RENEWAL_OBJECT, study.RENEWAL_CARD))
     if pair == "renewal_b03":
         expected_object, expected_card = study.RENEWAL_B03_OBJECT, study.RENEWAL_B03_CARD
+    if frozen:
+        expected_object, expected_card = study.FROZEN_OBJECT, study.FROZEN_CARD
     assert summary["object"] == expected_object and summary["card"] == expected_card
     assert summary["card_section"] == 7
     assert summary["commitment"] == "own_expiry"
-    assert summary["counts"]["team_steps"] == 80 and summary["counts"]["optimizer_steps"] == 8
+    assert summary["counts"]["team_steps"] == (112 if frozen else 80) and summary["counts"]["optimizer_steps"] == (12 if frozen else 8)
     rows = [json.loads(line) for line in (tmp_path / "episodes.jsonl").read_text().splitlines()]
     primary = summary["primary"]
-    for arm in ("T", "G", "H"):
+    for arm in (("T", "F", "G", "H") if frozen else ("T", "G", "H")):
         values = [r["reward_sum"] / 8 for r in rows if r["arm"] == arm and r["phase"] == "eval"]
         assert primary["J"][arm] == values
         assert primary["arm_means"][arm] == pytest.approx(sum(values) / 2)
-    for a, b in (("T", "G"), ("T", "H"), ("G", "H")):
+    contrasts = (("T", "G"), ("T", "H"), ("G", "H")) + ((("T", "F"), ("F", "H")) if frozen else ())
+    assert {key for key in primary if "_minus_" in key} == {a + "_minus_" + b for a, b in contrasts}
+    for a, b in contrasts:
         differences = [x-y for x,y in zip(primary["J"][a], primary["J"][b])]
         observed = primary[a + "_minus_" + b]
         assert observed["differences"] == differences
         assert observed["conditional_se"] == pytest.approx(abs(differences[0]-differences[1])/2)
-    for arm in ("T", "G"):
+    for arm in (("T", "F", "G") if frozen else ("T", "G")):
         checkpoint = torch.load(tmp_path / f"final_{arm}.pt", weights_only=True)
         assert checkpoint["configuration"] == summary["configuration"] and checkpoint["arm"] == arm
-        assert sum(v.numel() for field in ("actor", "critic") for v in checkpoint[field].values()) == (68553 if arm == "T" else 66311)
+        assert sum(v.numel() for field in ("actor", "critic") for v in checkpoint[field].values()) == (68553 if arm in ("T", "F") else 66311)
+    if frozen:
+        assert summary['counts']['diagnostic_frames'] == 150 and summary['diagnostics_complete']
+        assert summary['counts']['explicit_resets'] == 14 and summary['counts']['constructor_resets'] == 3
+        assert summary['counts']['rollouts'] == 3 and summary['primary']['secondary_complete']
+        assert [summary['arms'][a]['trainable_parameters'] for a in ('T', 'F', 'G')] == [68553, 66311, 66311]
+        checkpoint = torch.load(tmp_path / 'final_F.pt', weights_only=True)
+        initial_actor, _ = policy.arm_copy(policy.templates(9001), True, duration_head_seed=900100012)
+        for name, tensor in initial_actor.state_dict().items():
+            if name.startswith('duration.'):
+                assert torch.equal(tensor, checkpoint['actor'][name])
+        assert summary['arms']['F']['exposure']['duration']['displacement'] == 0
     for phase in ("train", "eval"):
         for key in ("d4", "suppressed_decisions", "horizon_censored_holds", "duration_decisions"):
             assert summary["counts"][f"{phase}_{key}"] == sum(r[key] for r in rows if r["phase"] == phase)
+
+
+def test_frozen_head_uniform_independent_and_fixed_through_real_adam():
+    common = policy.templates(9001)
+    rng = torch.random.get_rng_state().clone()
+    actor, critic = policy.arm_copy(common, True, duration_head_seed=900100012, freeze_duration=True)
+    trained, _ = policy.arm_copy(common, True, duration_head_seed=900100012)
+    assert torch.equal(rng, torch.random.get_rng_state())
+    for f, t in zip(actor.duration.parameters(), trained.duration.parameters()):
+        assert torch.equal(f, t) and f.data_ptr() != t.data_ptr()
+        assert not f.requires_grad and t.requires_grad
+    initial = policy.snapshot(actor, critic)
+    inputs = torch.linspace(-3, 3, 134).reshape(2, 67).requires_grad_()
+    assert torch.equal(actor.duration(inputs).softmax(-1), torch.full((2, 2), .5))
+    grad, = torch.autograd.grad(actor.duration(inputs).sum(), inputs)
+    assert torch.count_nonzero(grad) == 0
+    counts, rows = study.new_counts(True), []
+    ep = collect(SyntheticAdapter(9001), actor, critic, counts, rows, 8)
+    batch = {key: value[None] for key, value in ep.items()}
+    mean, rec = learner.recurrent_outputs(actor, batch, 8)
+    lp, _ = policy.joint_terms(actor, mean, rec, batch['u'], batch['durations'],
+                               batch['velocity_mask'], batch['duration_mask'], 'agent_compound')
+    torch.testing.assert_close(lp[0], ep['logp'], rtol=1e-5, atol=1e-6)
+    optimizer = learner.optimizer_for(actor, critic)
+    learner.update(actor, critic, optimizer, [ep, ep], 8, lambda: None, counts,
+                   ratio_grouping='agent_compound', entropy_coef=0.)
+    assert counts['optimizer_steps'] == 4
+    for p in actor.duration.parameters():
+        assert p.grad is None and p not in optimizer.state
+    for group in (actor.encoder, actor.gru, actor.mean, critic):
+        assert any(p.grad is not None and p.grad.abs().sum() > 0 for p in group.parameters())
+    movement = policy.exposure(initial, actor, critic)
+    for group in ('duration', 'duration_hidden', 'duration_final'):
+        assert movement[group]['displacement'] == 0
+    assert movement['duration_final']['relative_displacement'] is None
+    assert movement['common_actor']['displacement'] > 0 and movement['critic']['displacement'] > 0
+    assert sum(p.numel() for p in (*actor.parameters(), *critic.parameters()) if p.requires_grad) == 66311
+    assert torch.equal(actor.duration(inputs).softmax(-1), torch.full((2, 2), .5))
+
+
+def test_three_arm_deadlines_keep_whole_cap_and_do_not_reset_expired_arm():
+    now = [0.]
+    deadline = study.Deadline(0., 10., 25., lambda: now[0])
+    now[0] = 9.
+    deadline.start_g('F')
+    now[0] = 18.
+    deadline.start_g('G')
+    now[0] = 26.
+    with pytest.raises(TimeoutError):
+        deadline.check()
+    now[0] = 0.
+    deadline = study.Deadline(0., 10., 100., lambda: now[0])
+    now[0] = 11.
+    with pytest.raises(TimeoutError):
+        deadline.start_g('F')
+    assert deadline.arm == 'T'
