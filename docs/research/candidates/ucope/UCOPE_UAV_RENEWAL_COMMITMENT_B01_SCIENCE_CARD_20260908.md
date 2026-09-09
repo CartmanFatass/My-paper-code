@@ -315,3 +315,25 @@ Source acceptance does not select a favorable result or another object.
 The same CM's scientific execution requires Root's concrete allocation and
 the original §6 admission/caps/stop rules. No original budget, contrast,
 information/RNG law, all-outcome branch or historical route is changed.
+
+## 9. Observed P70 completion — 2026-09-08
+
+The concrete P70 allocation at `d749a6a26e450219d4d2f563a3256bc8f6b4fc00`
+executed one 7301 pair at accepted source
+`a453447cb011d50c6bb63ed7fc40180134a914b5`. CM's terminal collection is
+`d165366d815fa6c926023b6e9d9dbf43a93e35fa`. The
+[E0 evidence](UCOPE_UAV_RENEWAL_COMMITMENT_B01_P70_RESULT_EVIDENCE_20260908.md)
+and [all-outcome intake](UCOPE_UAV_RENEWAL_COMMITMENT_B01_P70_INTAKE_20260908.md#4-completed-result-and-checks-against-the-frozen-card)
+accept **COMPLETE / UP**: T−G **+0.055673191348834944**, conditional
+evaluation SE **0.011556059794903147**. T−H is **+0.05305453732049459**;
+G−H is **−0.002618654028340355**. The weak G−H fit qualification is applied;
+no competent-control, stable or causal renewal superiority is established.
+
+All 286720 native steps, 2048 Adam calls and 96 final evaluations are retained.
+One accepted invocation exits 0 in 304.85s outer wall, with no cap breach.
+Independent training n=1; training-population SD remains unavailable.
+Both §5 predictions fail: 0/2 hits, mean Brier loss 0.28125; owner prediction
+not taken (unattended). Original §§1–7 and P69's dated zero-run history are
+unchanged. Every sign ends this allocation: P70 is complete, with a separately
+allocated independent training pair recommended and no new master/invocation
+selected here. No B consumption, direction disposition or new recast follows.
