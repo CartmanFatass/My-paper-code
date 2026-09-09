@@ -51,14 +51,17 @@ remains dated provenance under the controlling evidence specification section 11
   The **2026-09-05 PRO_FINAL / PARK** of the same-draw retained-policy root-residual
   localization family and its numerical-locus dependency remains unchanged.
   See the [Convergence intake](UCOPE_UAV_INTERFACE_CONVERGENCE_INTAKE_20260907.md).
-- Latest bounded B observation: **2026-09-09 fixed renewal B01 P78,
-  COMPLETE / UP**. New7701 gives prospective F−G
-  **+0.026550516654013076**, conditional SE**0.011109495362659165**;
-  F−H+0.030122962641204728 and G−H+0.0035724459871916527. F's whole
-  initial duration head remained fixed, with real velocity/critic learning.
-  This is one matched training instance, not stable superiority or evidence
-  of learned-duration benefit. All96 outcomes and15 adverse F−G episodes
-  remain. P77's learned-T losses remain separately DOWN. See
+- Latest bounded B observation: **2026-09-09 fixed renewal B02 P79,
+  COMPLETE / UP**. New 7801 gives prospective F−G
+  **+0.030362608571553623**, conditional SE **0.008159350975084483**;
+  F−H **−0.0035128012832155745** and G−H **−0.033875409854769195** remain
+  separate native negatives. F's entire initial duration head stayed fixed,
+  with real velocity/critic learning. P78/7701 remains UP at
+  +0.026550516654013076. Their predeclared descriptive mean
+  **+0.02845656261278335**, sample SD **0.00269555604539935**, includes
+  evaluation noise and establishes no stable advantage or pure training variance.
+  All outcomes and P77's learned-T losses remain. See
+  [P79 intake](UCOPE_UAV_FIXED_RENEWAL_B02_P79_INTAKE_20260909.md),
   [P78 intake](UCOPE_UAV_FIXED_RENEWAL_B01_P78_INTAKE_20260909.md) and
   [P77 intake](UCOPE_UAV_RENEWAL_FROZEN_HEAD_B01_P77_INTAKE_20260909.md).
 - Previous bounded B observation: **2026-09-09 UAV renewal B03 P72,
@@ -139,7 +142,51 @@ without a distinct count-state architecture because RAW contains the sufficient
 count. The direct-service alternative remains separated by the frozen
 `Gamma=I+D` decomposition and analytic `D≈-0.02` boundary.
 
-## Current scientific position — 2026-09-09 fixed renewal B01 favorable package result
+## Current scientific position — 2026-09-09 fixed renewal B02 and hover limitation
+
+P79's new matched instance 7801 is **valid UP**: F−G
+**+0.030362608571553623**, conditional evaluation SE **0.008159350975084483**,
+0.02036260857155362 above the prospective 0.01 MEI. Native means are
+F **0.1500611221234821**, G **0.1196985135519285**, H **0.15357392340669768**.
+F−H **−0.0035128012832155745** is inside ±0.01 with a negative point; G−H
+**−0.033875409854769195** is below −0.01. Both remain separate from the UP
+primary. The [durable result](UCOPE_UAV_FIXED_RENEWAL_B02_P79_RESULT_SUMMARY_20260909.json)
+retains all 96 final returns and three signed vectors.
+
+The unchanged 7701/7801 F−G points are both above the MEI; their predeclared
+descriptive mean is **+0.02845656261278335**, sample SD **0.00269555604539935**.
+These two observed points include conditional evaluation noise and cannot
+identify pure training variance or establish stable superiority. Neither primary
+is replaced. P78's positive F−H +0.030122962641204728 remains beside P79's
+small negative. Untrained H and P77 are excluded from the fitted-run aggregation.
+
+F's entire initial 2242-parameter duration head stayed fixed while its own
+actor/critic learned. The effect therefore occurs without duration learning.
+The strongest support is two prospective native F−G gains under this package;
+the strongest present limitation is the new failure to demonstrate point value
+beyond hover, with 12/32 adverse F−G and 17/32 adverse F−H episodes. One
+surviving alternative is that persistence reduces losses from weak learned
+motion without a reliable benefit over remaining still. This is not a diagnosis.
+Temporal smoothing, service geometry, later private information, masked learning
+exposure and partner co-adaptation remain unseparated. P77's learned-T losses
+and P72's reversal still contradict broad learned-renewal superiority.
+
+The next recommended discriminator is **one separately allocated new F/G/H
+instance with prospective F−H primary**, retaining F−G/G−H. It asks whether
+the fixed-renewal learner provides native value beyond the existing no-motion
+null; no tuned upper, baseline repair or causal prerequisite is required.
+The current result's primary remains F−G. Known work remains 286720 native
+steps / 2048 Adam / 96 final episodes; observed 334.19/301.26 s complete walls
+are references, not guaranteed future times. This is within-family object-tier
+advice. P79 ends at its all-outcome boundary, with no new card/master/source,
+allowance, Pro Send, recast, C promotion, family or Portfolio disposition.
+Tuned headroom remains absent; recasts remain 1.
+
+See [card](UCOPE_UAV_FIXED_RENEWAL_B02_SCIENCE_CARD_20260909.md),
+[E0 evidence](UCOPE_UAV_FIXED_RENEWAL_B02_P79_RESULT_EVIDENCE_20260909.md) and
+[DM intake §§7–10](UCOPE_UAV_FIXED_RENEWAL_B02_P79_INTAKE_20260909.md#7-dm-scientific-intake-against-the-card).
+
+## Previous scientific position — 2026-09-09 fixed renewal B01 favorable package result
 
 The fresh7701 F/G/H comparison is **valid UP** under its prospective F−G
 primary: **+0.026550516654013076**, conditional evaluation
