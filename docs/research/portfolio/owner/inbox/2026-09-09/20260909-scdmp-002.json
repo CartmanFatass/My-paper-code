@@ -82,5 +82,15 @@
     ],
     "if_refused": "按所有者拒绝或修订指令处理尚未执行部分；不擅自换机制、种子、预算或解释已见结果。"
   },
-  "starred": false
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-09T16:52:46+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260908_held_residual_context_repair/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/root-log/2026-09-09.md",
+      "state": "applied",
+      "summary": "Root accepted/integrated the exact one-pair card4c618f335. Original branch ledger L6 maps to main audit2026-09-09 L122. CM owns its accepted source7d0fc9d00 one-pair execution and observation; no extra allocation."
+    }
+  ]
 }

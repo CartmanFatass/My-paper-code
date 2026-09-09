@@ -82,5 +82,15 @@
     ],
     "if_refused": "执行真实异步所有者指令；若选择park，由Root记录Portfolio处置，保留此前证据与已运行事实。"
   },
-  "starred": true
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-09T16:52:46+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260908_held_residual_context_repair/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/root-log/2026-09-09.md",
+      "state": "applied",
+      "summary": "Root integrated P58 intake/card as4c618f335 and applied recasts2/lowest ACTIVE contention sequencing in08b19a751. Original branch ledger L5 maps to main audit2026-09-09 L121. Lifecycle ACTIVE/HIGH preserved; no owner reply invented."
+    }
+  ]
 }
