@@ -26,26 +26,38 @@ remains dated provenance under the controlling evidence specification section 11
 - Historical selected B discriminator:
   `UCOPE-B-EXPLORE-FT-XF-BC-INVERTIBLE-CONDITIONING-DISCRIMINATOR-R01`
 - Latest direction-tier decision:
-  **2026-09-08 PRO_FINAL / CONTINUE** the opening-commitment family through
-  exactly one action-conditioned-duration B04 matched pair, master7201,
-  versus unchanged same-information stepwise recurrent PPO. Duration reads
-  its owner's actual sampled command; native complete return remains primary.
-  This selected discriminator is now complete: B04 is WITHIN with a negative
-  T−G point; its one-pair allocation is exhausted without a successor. This
-  intake forms no new family disposition.
-  See the [post-B03 Convergence intake](UCOPE_POST_B03_CONVERGENCE_INTAKE_20260908.md)
-  and [B04 card](UCOPE_UAV_MOTION_PREFIX_B04_SCIENCE_CARD_20260908.md).
+  **2026-09-08 PRO_FINAL / RECAST** from opening-only commitment to renewable
+  commitment at each owning UAV's expiry. Select exactly one B/EXPLORE matched
+  pair, master7301, against ordinary same-information stepwise recurrent PPO;
+  complete native return remains primary. The selected question changes where
+  duration acts without diagnosing the old losses; its one pair is now complete
+  at P70 below.
+  See the [renewal Convergence intake](UCOPE_POST_B04_RENEWAL_CONVERGENCE_INTAKE_20260908.md)
+  and [renewal B01 card](UCOPE_UAV_RENEWAL_COMMITMENT_B01_SCIENCE_CARD_20260908.md).
+  Its intake records one genuine RECAST entry and the historical account's
+  limited coverage. No Portfolio lifecycle or priority decision is made here.
+  The earlier CONTINUE through B04 is complete/WITHIN; P61 remains exhausted.
+  See the [post-B03 intake](UCOPE_POST_B03_CONVERGENCE_INTAKE_20260908.md).
   The family was opened by the 2026-09-07 fixed-five-UAV interface decision.
   The **2026-09-05 PRO_FINAL / PARK** of the same-draw retained-policy root-residual
   localization family and its numerical-locus dependency remains unchanged.
   See the [Convergence intake](UCOPE_UAV_INTERFACE_CONVERGENCE_INTAKE_20260907.md).
-- Latest bounded B observation: **2026-09-08 UAV motion prefix B04 P61,
-  COMPLETE / WITHIN**. Duration conditioned on the owner's actual sampled
-  command yields 7201 T−G **−0.003948225944122139**, conditional evaluation
-  SE **0.010191826216031805**. G−H **+0.0238187196536019** and T−H
-  **+0.019870493709479763** are positive sampled means. One matched training
-  pair supports no demonstrated point gain at the selected 0.01 scale/budget,
-  without stable equivalence, conditioning causality or family disposition.
+- Latest bounded B observation: **2026-09-09 UAV renewal B03 P72,
+  COMPLETE / DOWN**. New independent master7501 yields T−G
+  **−0.03094711061890552**, conditional evaluation SE
+  **0.010056196158593048**; T−H **+0.021107100463981232** and G−H
+  **+0.052054211082886756**. P70/7301 **+0.055673191348834944** and
+  P71/7401 **+0.024658177040921356** remain separately UP. Three fitted
+  observations now include an adverse reversal; all sampled T−hover points
+  are positive. Their secondary outcome-informed paired mean
+  **+0.016461419256950254**, SD **0.043888031476388346**, is descriptive
+  and never rescues the new primary. No stable superiority/harm, causal renewal
+  effect or general comparator competence follows. See
+  [P72 intake](UCOPE_UAV_RENEWAL_COMMITMENT_B03_P72_INTAKE_20260908.md),
+  [P71 intake](UCOPE_UAV_RENEWAL_COMMITMENT_B02_P71_INTAKE_20260908.md) and
+  [P70 intake](UCOPE_UAV_RENEWAL_COMMITMENT_B01_P70_INTAKE_20260908.md).
+  Prior opening B04/P61 remains WITHIN: 7201 T−G −0.003948225944122139
+  with conditional SE 0.010191826216031805 and positive T−H/G−H.
   See [B04 intake](UCOPE_UAV_MOTION_PREFIX_B04_P61_INTAKE_20260908.md).
   B03's near-boundary DOWN, B02 DOWN with both negative T−H and mixed G−H,
   P24 WITHIN/6902 harm and original P21 UP remain separate and unchanged.
@@ -60,8 +72,9 @@ remains dated provenance under the controlling evidence specification section 11
 
 ## Scientific question
 
-On the selected fixed-five-UAV, 256-step task, can a learned optional opening
-velocity commitment of one or four primitive steps improve complete time-average
+On the selected fixed-five-UAV, 256-step task, can a learned renewable
+velocity commitment of one or four primitive steps, selected at each owner's
+own expiry using current private history and its just-sampled command, improve complete time-average
 team native service return over a recurrent PPO controller with the same free local
 observations and every legal velocity action available at every step? Movement can
 change subsequent local information and service opportunities. The strongest null
@@ -69,7 +82,7 @@ is competent ordinary feedback control doing the useful movement and information
 use itself. A positive two-arm comparison would support only the package: direct
 geometry, temporal smoothing and optimization remain unseparated explanations.
 
-The tested MARL structure is partial observability in a fixed moving
+The selected MARL structure is temporal abstraction/termination under partial observability in a fixed moving
 team. Actual service opportunity consequences replace no existing sensor bill:
 there is no asserted positive sensing fee or B05 count interface on this host.
 The first two real UAV pairs supported a preliminary package advantage;
@@ -84,12 +97,12 @@ no current opening-commitment gain and no reliable training-population
 comparison or causal diagnosis of either learning amendment.
 P61's command-conditioned opening B04 now gives one WITHIN pair, with
 T−G −0.003948225944122139 and positive sampled T−H/G−H. The selected
-package still has no demonstrated gain at its 0.01 scale/budget. Its less
+opening package still has no demonstrated gain at its 0.01 scale/budget. Its less
 negative point than B03 does not isolate a conditioning effect: masters,
 fitted histories and capacity differ. The exposed conditioning path is
 neither a defect diagnosis nor a cause of past harm. Added capacity,
 sparse credit, direct service and partner co-adaptation remain alternative
-explanations. The selected allocation is complete. Tuned headroom,
+explanations. That P61 allocation is complete. Tuned headroom,
 stable superiority or equivalence, transfer, pure information value and
 deployment remain unestablished.
 
@@ -107,7 +120,123 @@ without a distinct count-state architecture because RAW contains the sufficient
 count. The direct-service alternative remains separated by the frozen
 `Gamma=I+D` decomposition and analytic `D≈-0.02` boundary.
 
-## Current scientific position — 2026-09-08 B04
+## Current scientific position — 2026-09-09 renewal B01/B02 UP and B03 DOWN
+
+Convergence selects one real package comparison of action-conditioned duration
+at every owner's own expiry, rather than only at reset. Source inspection shows
+that B04's duration head never chooses persistence from an evolved within-episode
+history, although recurrence continues throughout. The new event therefore
+tests a different control opportunity; it is not a claim that sparse opening
+exposure caused B04's negative mean.
+
+P70 answered the first bounded question with one real 7301 pair. Mean T/G/H
+native returns are **0.18553283836801163 / 0.12985964701917668 /
+0.13247830104751704**. T−G **+0.055673191348834944** is UP under the
+unchanged +0.01 rule, with conditional evaluation SE **0.011556059794903147**;
+all 25 positive and 7 negative episode differences remain. Independent training
+n=1 does not provide training-population uncertainty. The strongest support
+is this above-MEI primary together with T−hover **+0.05305453732049459**.
+
+The strongest limitation of that fit is G−hover **−0.002618654028340355**
+(conditional SE **0.011943248746505064**): competence of this G fit is not
+established. Neither the favorable primary nor this small negative hover
+contrast establishes stable superiority or harm. Historical B04's negative
+WITHIN point and B02/B03/P24 adverse results remain contrary opening-package
+evidence; P21's favorable evidence remains separate. Different masters,
+evaluation panels and control laws prohibit a causal renewal-versus-opening
+reading or pooled primary.
+
+The treatment actually makes 255710 training and 15883 final duration
+decisions, while private observation and recurrence continue during holds.
+The head and both learners move. These connect the accepted owned-action/
+credit path to the native observation; they do not show that conditioning or
+information caused it. Ordinary feedback can already repeat useful commands
+and adapt sooner to partners. Temporal smoothing, geometry, capacity,
+changed decision/gradient exposure and partner co-adaptation remain surviving
+explanations. Prior verified UTE/ACAC retrieval supports the renewal event
+distinction, not this UAV gain or G's competence.
+
+That one allocation is complete, with all 286720 native steps, 2048 Adam calls
+and 96 final evaluations retained. Measured whole wall is 304.85s within the
+original caps. Actual duration-head work is about 99.8741× B04's opening count;
+that count ratio is not a causal wall-time multiplier or future timing promise.
+P70 recommended one separately allocated independent training pair of the
+same package/G/H and budget, retaining every outcome; P71 below has now
+answered that discriminator. Tuned headroom remains absent; no complete
+diagnosis, stable or pure-information superiority, transfer, deployment or C
+promotion follows. See the
+[P70 E0 evidence](UCOPE_UAV_RENEWAL_COMMITMENT_B01_P70_RESULT_EVIDENCE_20260908.md),
+[all-outcome intake](UCOPE_UAV_RENEWAL_COMMITMENT_B01_P70_INTAKE_20260908.md),
+[renewal card](UCOPE_UAV_RENEWAL_COMMITMENT_B01_SCIENCE_CARD_20260908.md) and
+[prior direction decision](UCOPE_POST_B04_RENEWAL_CONVERGENCE_INTAKE_20260908.md).
+
+P71's new independent same-package pair7401 is **COMPLETE / UP** under the
+[renewal B02 card](UCOPE_UAV_RENEWAL_COMMITMENT_B02_SCIENCE_CARD_20260908.md).
+T/G/H means are **0.1848478520611129 / 0.16018967502019155 /
+0.14769953379747316**. T−G **+0.024658177040921356**, conditional SE
+**0.011145715505143731**, exceeds +0.01 by **0.014658177040921356**;
+all22 positive and10 negative evaluation differences remain. T−H is
+**+0.03714831826363973**, and G−H is **+0.012490141222718373**
+(conditional SE0.009774298009822923). P70's negative G−H point does not recur
+on this panel; no tuned or general comparator competence is established.
+
+The strongest renewal support is now two independent fitted observations
+with above-MEI T−G and positive T−hover. The new margin is smaller and both
+conditional SEs remain material. Independent training histories and final
+evaluation panels differ, so changing means do not isolate a training or
+mechanism effect. Each card remains n=1; these two separately presented fits
+do not provide stable population superiority. Earlier opening nulls/losses
+stay separate. Persistence, geometry, capacity, gradient exposure and partner
+co-adaptation remain surviving explanations.
+
+P71 completes all286720 native steps,2048 Adam calls and96 final evaluations
+in306.04s whole wall, with247346 training/15261 final duration decisions and
+1514598 head-forward rows. Exposure and native return are observed together;
+head movement or suppressed decisions do not isolate information value.
+The allocation ends at this intake. The next discriminator recommendation is
+one **additional separately allocated independent same-package T/G pair with H**,
+to examine training variability while retaining every sign. No new master,
+invocation, mechanism change, C promotion or Portfolio disposition is selected.
+See [P71 E0 evidence](UCOPE_UAV_RENEWAL_COMMITMENT_B02_P71_RESULT_EVIDENCE_20260908.md)
+and [P71 all-outcome intake](UCOPE_UAV_RENEWAL_COMMITMENT_B02_P71_INTAKE_20260908.md).
+
+P72's third independent same-package pair7501 is now **COMPLETE / DOWN**
+under the [renewal B03 card](UCOPE_UAV_RENEWAL_COMMITMENT_B03_SCIENCE_CARD_20260908.md). T/G/H means are
+**0.16159104017261458 / 0.19253815079152012 / 0.14048393970863335**.
+Native T−G **−0.03094711061890552**, conditional SE **0.010056196158593048**,
+is0.02094711061890552 below −0.01, with10 positive and22 negative episode
+differences. T−H **+0.021107100463981232** does not rescue the primary;
+G−H **+0.052054211082886756** is positive with26/6 episode signs.
+
+The three observations are now two above-MEI gains and one below-MEI loss.
+Strongest support for possible package value remains the two earlier UPs and
+positive T−hover in all three. Strongest contradiction to simple recurrence is
+P72 DOWN while G performs well against hover on that panel. The prospectively
+allowed secondary three-fit paired mean **+0.016461419256950254**, sample
+SD **0.043888031476388346**, retains every fit and is descriptive only; it
+is not a pooled primary or a new success rule. Sequential selection after
+earlier gains and differing training/evaluation draws limit interpretation.
+Endpoint variation includes finite evaluation noise, so it does not isolate
+training variance, a causal explanation or stable population performance.
+
+The same native path is exposed:259729 training/16135 final own-expiry duration
+choices,395631/24825 suppressions,1538/102 censored holds,1590644 head-forward
+rows and nonzero parameter movement. Exposure cannot substitute for value:
+all286720 native steps,2048 Adam calls and96 final evaluations finish with the
+negative primary. Whole wall390.73s fits the original caps; timing differences
+have no measured causal attribution. Prior verified UTE/ACAC source passages
+support the renewal-event distinction, not this reversal's cause. Persistence,
+geometry, capacity, gradient exposure and partner co-adaptation remain live.
+
+The P72 allocation ends and another unchanged pair is dropped from the default
+next choice. No successor discriminator is selected in this intake; a newly
+justified question needs a separate allocation. This is no family closure,
+direction/Portfolio disposition, C promotion, equivalence or stable-harm claim.
+Tuned same-information headroom remains absent. Earlier opening results,
+predictions and frozen rules stay intact. See [P72 E0 evidence](UCOPE_UAV_RENEWAL_COMMITMENT_B03_P72_RESULT_EVIDENCE_20260909.md)
+and [P72 all-outcome intake](UCOPE_UAV_RENEWAL_COMMITMENT_B03_P72_INTAKE_20260908.md).
+
+## Previous empirical position — 2026-09-08 B04 (preserved)
 
 The command-conditioned opening policy and ordinary feedback learner both
 complete the selected real training budget on master 7201. T/G/H mean native
@@ -132,12 +261,12 @@ No cross-object pooling or conditioning/entropy/clipping causal comparison
 is made. H is untuned and no upper/tuned same-information headroom is recorded.
 
 The accepted P61 discriminator is answered through one complete bounded
-comparison and all-outcome intake. The object-tier choice prefers no unchanged
-continuation; no further seed, evaluation, retry or successor is allocated.
-This does not close/recast the opening family or change UCOPE lifecycle,
-priority or actual UAV entry. A future task would need a specifically
-justified changed question or independently warranted replication within its
-proper scope; no such task is selected here. Ordinary feedback doing useful
+comparison and all-outcome intake. That object-tier choice prefers no unchanged
+continuation and allocated no further seed, evaluation, retry or successor.
+It did not close/recast the opening family or change UCOPE lifecycle,
+priority or actual UAV entry. The subsequent P67 Convergence separately
+selects the changed own-expiry question above; it neither replenishes P61 nor
+turns B04 into a renewal observation. Ordinary feedback doing useful
 control itself, sparse opening credit, geometry/persistence/capacity and
 partner co-adaptation remain surviving explanations. Exact diagnosis or
 headroom is not installed as a prerequisite. See [B04 card §8](UCOPE_UAV_MOTION_PREFIX_B04_SCIENCE_CARD_20260908.md#8-observed-p61-completion--2026-09-08),

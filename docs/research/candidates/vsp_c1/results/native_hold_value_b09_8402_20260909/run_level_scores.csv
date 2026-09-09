@@ -1,0 +1,5 @@
+task,seed,arm,score
+native_hold_value_wide133_768,8401,GATED-V,0.11587725095166812
+native_hold_value_wide133_768,8401,MLP-V,0.14974217136462054
+native_hold_value_wide133_768,8402,GATED-V,0.2033071379568666
+native_hold_value_wide133_768,8402,MLP-V,0.21684209380540304

@@ -28,14 +28,14 @@ def clipped_policy_loss(new_logp, old_logp, advantage, velocity_mask=None):
 @torch.no_grad()
 def collect_episode(env, actor, critic, horizon, reset_seed, velocity_rng, duration_rng,
                     metadata, check, counts, emit_episode, emit_diagnostic, limits,
-                    real=False, diagnostics=False, ratio_grouping="joint", value_moments=None):
+                    real=False, diagnostics=False, ratio_grouping="joint", value_moments=None, renewal=False):
     """Counts survive an exception; only a complete episode emits a scored row."""
     check()
     obs, info = env.reset(seed=reset_seed)
     counts["explicit_resets"] += 1
     check()
     state = info["state"]
-    hold = HoldState()
+    hold = HoldState(renewal=renewal)
     hidden = torch.zeros(1, 5, 64)
     storage = {key: [] for key in ("obs", "hidden", "critic", "u", "durations",
                                    "velocity_mask", "duration_mask", "logp", "value", "reward")}
@@ -44,6 +44,8 @@ def collect_episode(env, actor, critic, horizon, reset_seed, velocity_rng, durat
     prefix_position = first_position.copy()
     prefix_path = np.zeros(5, dtype=np.float64)
     decisions = {"velocity_decisions": 0, "duration_decisions": 0, "d4": 0}
+    if renewal:
+        decisions.update(horizon_censored_holds=0, suppressed_decisions=0)
     for t in range(horizon):
         check()
         x = actor_features(obs, hold.last, hold.remaining)
@@ -51,6 +53,8 @@ def collect_episode(env, actor, critic, horizon, reset_seed, velocity_rng, durat
         remaining_before = hold.remaining.copy()
         active = hold.remaining == 0
         duration_mask = np.full(5, actor is not None and actor.duration is not None and t == 0)
+        if renewal:
+            duration_mask = active & (actor is not None and actor.duration is not None)
         h0 = hidden[0].clone()
         if actor is None:
             sent = np.zeros((5, 3), dtype=np.float32)
@@ -67,8 +71,9 @@ def collect_episode(env, actor, critic, horizon, reset_seed, velocity_rng, durat
                 value = value_moments.decode(value)
             if not torch.isfinite(mean).all() or not torch.isfinite(value):
                 raise FloatingPointError("nonfinite learner during collection")
+            sample_options = {"duration_mask": duration_mask} if renewal else {}
             u, duration = sample(actor, mean, recurrent, active, t == 0,
-                                 velocity_rng, duration_rng)
+                                 velocity_rng, duration_rng, **sample_options)
             sent, active = hold.decide(t, u.tanh().numpy(),
                                        np.where(duration.numpy() == 1, 4, 1))
             logp, _ = joint_terms(actor, mean, recurrent, u, duration,
@@ -97,6 +102,8 @@ def collect_episode(env, actor, critic, horizon, reset_seed, velocity_rng, durat
                             ("d4", int(((duration.numpy() == 1) & duration_mask).sum()))):
             decisions[key] += number
             counts[key] += number
+            if renewal:
+                counts[f"{metadata['phase']}_{key}"] += number
         if actor is not None:
             counts["recurrent_observations"] += 5
         check()
@@ -107,6 +114,15 @@ def collect_episode(env, actor, critic, horizon, reset_seed, velocity_rng, durat
         next_obs, _scalar, terminated, truncated, info = env.step(sent)
         counts["team_steps"] += 1
         counts[f"{metadata['phase']}_team_steps"] += 1
+        if renewal:
+            # Only executed held steps suppress decisions. A remaining timer >1
+            # on the final executed step identifies an actually censored label.
+            for key, number in (("suppressed_decisions", int((remaining_before > 0).sum())),
+                                ("horizon_censored_holds", int((hold.remaining > 1).sum())
+                                 if t + 1 == horizon else 0)):
+                decisions[key] += number
+                counts[key] += number
+                counts[f"{metadata['phase']}_{key}"] += number
         reward = team_reward(info)
         if not math.isfinite(reward):
             raise FloatingPointError("nonfinite native team reward")

@@ -19,6 +19,11 @@ acceptance, integration, experiment observation and exact Pro handoffs. Root use
 and reasoning effort selected by the owner. Portfolio denotes these responsibilities and the
 Portfolio decision tier, not another session.
 
+OWNER_DIRECT 2026-09-08: the independent Luna/low completion relay wakes Root for actionable
+native handoffs only, under `docs/project/SIBLING_COMMUNICATION.md` and
+`.codex/hmasd-relay.toml`. Ordinary native traffic and nested parent acceptance stay native.
+Cross-session messages omit model and reasoning-effort overrides; configured models persist.
+
 The independent **Transport** session (Luna/high) owns Pro browser Send, observation,
 reconciliation, archival and parent receipts. Root receives its receipts, performs Portfolio
 intake itself and forwards direction receipts to the original native DM/CM. Transport never

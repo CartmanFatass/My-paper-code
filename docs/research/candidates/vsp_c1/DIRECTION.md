@@ -436,3 +436,206 @@ parameters versus34817 for GATED; exact parameter-count search is unnecessary.
 This is a later bounded comparison proposal, not a frozen comparator or an
 allocated run. Accepted family boundaries, recast count, lifecycle, priority,
 C status and formal UAV-entry determination remain unchanged.
+
+## Similarly sized ordinary critic: one local signal near MEI — 2026-09-08
+
+The [B05 P70 intake](VSPC1_NATIVE_HOLD_VALUE_B05_INTAKE_20260908.md#9-p70-valid-result--scientific-intake-and-complete-allocation-boundary)
+accepts one new matched training pair,8301, against the ordinary fully connected
+136→128→133→1 critic (34827 parameters), with normalized GATED unchanged
+(34817 parameters). Native GATED−MLP-wide133=+.0165919114, conditional
+SE .0080992110, is UP under absolute MEI .01. GATED−H=+.0296867693 and
+MLP-wide133−H=+.0130948580; adverse episode counts are13/8/13 of32.
+The [E0](VSPC1_NATIVE_HOLD_VALUE_B05_RESULT_EVIDENCE_20260908.md) preserves the
+full native exposure, H and every endpoint.
+
+Strongest support is a local native-return gain against an ordinary critic with
+ten more parameters, while both learned mean returns exceed H. A deficit in
+total ordinary-critic parameter count does not describe this new comparison.
+Strongest qualification is the .0065919114 margin above MEI being smaller than
+conditional SE, alongside13 primary adverse episodes and a noisy MLP−H mean
+(SE .0124980086,13 adverse episodes). This is n=1 of a changed-comparator regime;
+it does not establish stable superiority or repaired comparator competence.
+Earlier normalized n=2 and unnormalized n=2 remain separate, including MLP/H
+losses. The smaller new gap cannot identify a capacity effect when the master
+also changed.
+
+The opening duration → entity-owned hold/state → centralized value/joint
+optimization → local recurrent actor update → UAV motion/service → native
+return path remains available. Nonzero hold inputs occupy about1.15% of this
+pair's training rows. Similar parameter counts and observed gate movement do
+not isolate the path: initialization, gated geometry, shared clipping, value
+units, FP32 and partner co-adaptation remain alternatives. No specialized
+hold-credit, stable population or transfer claim follows. Matching tuned
+headroom remains absent; H remains an attained untuned reference.
+
+The next discriminator recommended is one later independent matched training
+pair with this unchanged normalized GATED/width-133 MLP/H comparison and all
+outcomes retained. It asks about recurrence under new training randomness;
+additional evaluation of8301 or an exact maximum would not supply that unit.
+P70 ends at the completed intake: no successor card/key/run is allocated.
+Accepted family boundaries, recast count, lifecycle, priority, C status and
+formal UAV-entry determination remain unchanged.
+
+## Similarly sized ordinary critic: selected-scale gain did not recur — 2026-09-08
+
+The [B06 P71 intake](VSPC1_NATIVE_HOLD_VALUE_B06_INTAKE_20260908.md#6-p71-valid-result-intake-and-decisions)
+accepts a second independent matched training pair of the unchanged normalized
+GATED/width133 MLP/H comparison. Master8302 yields GATED−MLP=−.0066345182,
+conditional SE .0069821943: WITHIN under absolute MEI .01, with a negative
+point sign. GATED−H=+.0196776739 and MLP−H=+.0263121921; adverse episode
+counts are18/11/8 of32. The [E0](VSPC1_NATIVE_HOLD_VALUE_B06_RESULT_EVIDENCE_20260908.md)
+retains every outcome and full native exposure.
+
+Same-comparison8301/8302 primary differences are +.0165919114/−.0066345182,
+descriptive mean .0049786966 and sample SD .0164235659. Selected-scale positive
+separation did not recur in the second pair. This is not equivalence or a stable
+population result; per-pair evaluation noise and two-pair dispersion remain
+distinct. Both old normalized-width128 and old unnormalized regimes stay
+separate, including all prior H losses.
+
+Strongest support for a gated-package advantage remains8301's local UP against
+the same similarly sized ordinary critic. B06 retains positive learned GATED−H
+by mean, but MLP also exceeds H and leads GATED by point sign. Those native H
+gains therefore do not separate the gate from the ordinary null. Strongest
+contradiction to recurrence is8302's WITHIN/negative sign,18 adverse primary
+episodes and the two-pair mean below MEI. Neither two positive H means per arm
+nor parameter-count matching establishes comparator competence or mechanism
+attribution. H is untuned and matching tuned headroom remains absent.
+
+The opening duration → entity-owned hold/state → centralized value and joint
+optimization → local recurrent actor update → motion/service → native return
+path is unchanged. About1.147% of training rows have nonzero hold inputs.
+Initialization, gated geometry, shared clipping, value units, FP32 and partner
+co-adaptation remain explanations for the variable package result; movement
+and sparse exposure alone do not identify a competent action improvement.
+No specialized hold-credit, stable superiority, transfer or optimality claim.
+
+The next discriminator recommended is one later independent pair of this
+unchanged comparison, retaining both current outcomes. It addresses observed
+training-instance variation before changing the comparator again; it is not an
+all-positive or significance requirement. P71 ends with complete intake and
+allocates no further card/key/run. This is ordinary object-tier advice, with
+no family, recast, lifecycle, priority, C or formal UAV-entry change.
+
+## Similarly sized ordinary critic: three-pair variable native signal — 2026-09-08
+
+The [B07 P72 intake](VSPC1_NATIVE_HOLD_VALUE_B07_INTAKE_20260908.md#6-p72-valid-result-intake-and-decisions)
+accepts8303 as valid complete UP: GATED−MLP-wide133=+.0333779164,
+conditional SE .0085882059,6/32 adverse primary episodes. GATED−H=+.0428201399
+and MLP−H=+.0094422235 retain7/12 adverse episodes. The latter positive mean
+is smaller than its conditional SE. The [E0](VSPC1_NATIVE_HOLD_VALUE_B07_RESULT_EVIDENCE_20260908.md)
+records complete real learning, native evaluation and unchanged information/credit paths.
+
+The normalized width133 comparison now has three independent pairs:
+8301 +.0165919114 (UP),8302 −.0066345182 (WITHIN, negative sign),
+8303 +.0333779164 (UP). Their descriptive mean .0144451032 and sample SD
+.0200924195 describe variation with training and finite evaluation randomness;
+they do not create an aggregate confirmatory pass or a stable population claim.
+Earlier normalized-width128 and unnormalized regimes remain separate.
+
+Strongest support is8303's native UP and positive GATED−H mean, alongside8301's
+UP against the same similarly sized ordinary critic. The positive package
+observation is no longer confined to8301. Strongest contradiction to stable
+recurrence remains8302's negative sign/WITHIN and18 adverse primary episodes;
+all three retain adverse outcomes and the three-pair SD exceeds its mean.
+Both arms' mean returns exceed untuned H in each instance, but8303 MLP−H is
+small/noisy, individual H losses remain and matching tuned headroom is absent.
+These observations do not establish specialized hold credit or comparator competence.
+
+Opening duration → entity-owned hold/state → centralized value/joint optimization
+→ local recurrent actor updates → motion/service → native return remains the
+mechanism path. The critic is absent from final action selection; only about1.15%
+of training rows carry nonzero remaining holds. Initialization, gated geometry,
+shared clipping, value units, FP32 and partner co-adaptation remain alternatives.
+Parameter movement and successful checking alone do not identify action value.
+
+The next recommended discriminator is a separately allocated B performance
+comparison at768 training episodes per arm with unchanged normalized GATED/
+width133 MLP/H and32 final evaluations per arm/H. It asks about local performance
+at modestly greater learning exposure; fresh-master results would remain a
+separate budget regime, not a causal estimate of the budget change. It is not
+an acceptance condition for these three pairs. No new card/key/run or automatic
+successor is allocated in P72, and no family, recast, lifecycle, priority, C or
+formal UAV-entry decision follows from this intake.
+
+## Greater training exposure: a native counterexample — 2026-09-09
+
+The [B08 P73 intake](VSPC1_NATIVE_HOLD_VALUE_B08_INTAKE_20260908.md#6-p73-valid-result-intake-and-decisions--2026-09-09)
+accepts the first768-episode-per-arm comparison,8401, as valid complete **DOWN**:
+GATED−ordinary-MLP-width133=−.0338649204, conditional SE .0128328015,
+24/32 adverse primary identities. GATED−H=−.0405925743 and MLP−H=−.0067276539
+have23/19 adverse identities. Both learned means are below untuned H, with
+MLP's H-relative mean smaller in magnitude than its conditional SE. The
+[E0](VSPC1_NATIVE_HOLD_VALUE_B08_RESULT_EVIDENCE_20260908.md) retains full real
+learning,768 rollouts/3072 Adam,417792 native steps and96 final evaluations.
+
+This is a local native counterexample to a useful gated-package advantage at
+the selected higher exposure. The ordinary critic is preferable in8401; neither
+learner establishes better usable control than H. The strongest contradiction
+is the DOWN outcome together with both H losses. Surviving support remains the
+two512-episode UP pairs, especially8303's positive native GATED−H comparison,
+while8302's negative-sign WITHIN remains. Keep old512 n=3 and new768 n=1 separate:
+changing the budget and master does not identify a causal budget effect. There
+is no aggregate pass, stable superiority/inferiority, tuned competence, transfer,
+equivalence or unique hold-credit conclusion. Matching tuned headroom is absent.
+
+Opening duration → entity-owned remaining hold → centralized value/joint
+optimization → local recurrent actor updates → motion/service → native return
+remains the exercised path. Five agents retain separate partial histories and
+fixed membership; the critic is absent from final action choice. About1.126%
+of training rows have nonzero remaining holds. Initialization, gated geometry,
+shared clipping, value units, FP32 and partner co-adaptation remain alternatives;
+the negative result and parameter movement do not diagnose which caused it.
+Prior verified PPO/ACAC/UTE/MVD and containing-MLP distinctions remain applicable
+with their original setting limits; no new literature finding is asserted.
+
+The next recommended discriminator is one separately allocated independent
+768-episode matched pair of the same normalized GATED/width133 MLP/H comparison,
+with32 final evaluations each, to describe new-budget variation while retaining
+8401 DOWN and every H loss. It is not a same-key retry, sign repair, causal-budget
+test, or prerequisite for accepting the current result. No successor or stronger
+scientific disposition is authorized by this intake; the owner restart handoff
+holds this recommendation without changing lifecycle or formal UAV-entry status.
+
+## Independent768 repeat: ordinary critic favored again — 2026-09-09
+
+The [B09 P74 intake](VSPC1_NATIVE_HOLD_VALUE_B09_INTAKE_20260909.md#6-p74-valid-result-intake-and-decisions)
+accepts8402 as valid complete **DOWN**, GATED−ordinary-MLP-width133
+−.0135349558, conditional SE .0098982147,20/32 adverse primary identities.
+The point lies only .0035349558 (.3571 conditional SE) below negative MEI;
+the frozen branch and conditional noise stay separate. GATED−H+.0364087134
+and MLP−H+.0499436692 have6/7 adverse identities. Both learned means exceed
+untuned H in this pair; the [E0](VSPC1_NATIVE_HOLD_VALUE_B09_RESULT_EVIDENCE_20260909.md)
+retains every outcome and the full417792 native steps/3072 Adam/96 evaluations.
+
+The two independent768 primary differences are −.0338649204/−.0135349558,
+descriptive mean−.0236999381 and sample SD .0143754558. Both favor the ordinary
+critic locally, while their H-relative signs differ:8401's GATED/MLP means below
+H remain intact. New8402 supports local learned control above H, but the ordinary
+MLP improves more. The strongest support for a gated-package advantage remains
+the two512 UP pairs, especially8303's positive GATED−H comparison; the strongest
+contradiction is two768 DOWN point estimates plus8401's H losses. Retain the
+three512 results and all older regimes separately. Two units and their finite
+evaluations do not establish stable superiority/inferiority, an aggregate pass,
+equivalence, tuned competence, unique hold credit or a causal budget effect.
+Matching tuned headroom is absent; H is an attained reference, not an upper.
+
+Opening duration → entity-owned remaining hold → centralized value/joint
+optimization → local recurrent actor updates → motion/service → native return
+remains the exercised path. Five agents retain separate partial histories and
+fixed membership; the critic is absent from final action choice. About1.14% of
+training rows carry nonzero remaining holds. Initialization, gated geometry,
+shared clipping, value units, FP32 and partner co-adaptation remain alternatives;
+parameter movement and the native sign pattern do not diagnose their causes.
+
+The next recommended discriminator is a separately allocated real-learning B:
+one fresh unchanged training pair with two prospectively fixed512/768 native
+evaluation endpoints per learned arm and H on the common bank. It would compare
+Delta512, Delta768 and their paired change along the same training trajectories,
+without the old regimes' between-master mismatch. It adds64 learned evaluations
+to the same two768 fits (434176 total steps/3072 Adam/160 evaluations), with no
+search, historical-state reuse or favorable-checkpoint selection. The local
+exposure response would remain conditional, not a population budget-causality
+or complete-mechanism claim. This is an object-tier recommendation only; it
+authorizes no extra P74 work or family, lifecycle, priority, recast, C or formal
+UAV-entry disposition.

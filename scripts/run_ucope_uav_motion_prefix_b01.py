@@ -22,13 +22,13 @@ def main():
     mode.add_argument("--engineering-fixture", action="store_true")
     mode.add_argument("--aggregate", nargs=2, metavar="SUMMARY")
     parser.add_argument("--seed", type=int)
-    parser.add_argument("--pair", choices=("p21", "p24", "b02", "b03"), default="p21")
+    parser.add_argument("--pair", choices=("p21", "p24", "b02", "b03", "b04", "renewal_b01", "renewal_b02", "renewal_b03"), default="p21")
     parser.add_argument("--out", type=Path, required=True)
     args = parser.parse_args()
-    if args.pair == "b03" and args.aggregate:
-        parser.error("B03 has one training pair and no multi-pair aggregate")
+    if args.pair in ("b03", "b04", "renewal_b01", "renewal_b02", "renewal_b03") and args.aggregate:
+        parser.error(f"{args.pair.upper()} has one training pair and no multi-pair aggregate")
     if args.engineering_fixture and args.pair == "p24":
-        parser.error("engineering fixture requires p21, b02 or b03 with seed 9001")
+        parser.error("engineering fixture requires p21, b02, b03, b04, renewal_b01, renewal_b02 or renewal_b03 with seed 9001")
     if args.aggregate:
         if args.seed is not None:
             parser.error("aggregation does not take a seed")

@@ -1,0 +1,92 @@
+{
+  "prepared_at": "2026-09-08T22:45:26.514226-07:00",
+  "object_working_name": "UCOPE-UAV-RENEWAL-COMMITMENT-B02",
+  "new_pair_selector": "renewal_b02",
+  "master": 7401,
+  "source_before_binding_changes": "a453447cb011d50c6bb63ed7fc40180134a914b5",
+  "current_authoring_head": "8dae7a67a814b1b411df878e86daa5530e803b0f",
+  "bounded_nonreuse_check": {
+    "surfaces": [
+      "docs/research/candidates/ucope",
+      "experiments/candidates/ucope/uav_motion_prefix_b01",
+      "scripts/run_ucope_uav_motion_prefix_b01.py",
+      "tests/experiments/candidates/ucope/uav_motion_prefix_b01"
+    ],
+    "files_in_visible_inventory": 253,
+    "query": "\\b7401\\b|\\b740100000\\b|renewal_b02|RENEWAL-COMMITMENT-B02",
+    "prior_matches": 0,
+    "scope_limit": "Current UCOPE documents and mapped source/tests; not a global RNG census."
+  },
+  "rng": {
+    "b": 740100000,
+    "common_initialization": 740100011,
+    "T_duration_head": 740100012,
+    "training_velocity": 740100021,
+    "training_duration": 740100022,
+    "training_reset_first_last": [
+      740101000,
+      740101511
+    ],
+    "final_reset_first_last": [
+      740102000,
+      740102031
+    ],
+    "final_velocity_first_last": [
+      740103000,
+      740103031
+    ],
+    "final_duration_first_last": [
+      740104000,
+      740104031
+    ]
+  },
+  "work": {
+    "new_training_pairs": 1,
+    "learned_arms": 2,
+    "train_episodes_per_arm": 512,
+    "horizon": 256,
+    "train_steps_per_arm": 131072,
+    "rollouts_per_arm": 256,
+    "Adam_calls_per_arm": 1024,
+    "total_native_steps": 286720,
+    "total_Adam_calls": 2048,
+    "final_eval_episodes": 96,
+    "explicit_resets": 1120,
+    "constructor_resets": 2,
+    "diagnostic_rows": 1600,
+    "T_training_renewals_bounds": [
+      163840,
+      655360
+    ],
+    "T_final_renewals_bounds": [
+      10240,
+      40960
+    ],
+    "T_head_forward_rows_bounds": [
+      1003520,
+      4014080
+    ],
+    "T_head_dense_MAC_bounds": [
+      2215772160,
+      8863088640
+    ],
+    "G_train_plus_final_velocity_decisions": 696320
+  },
+  "P70_reference": {
+    "master": 7301,
+    "T_minus_G": 0.055673191348834944,
+    "T_minus_H": 0.05305453732049459,
+    "G_minus_H": -0.002618654028340355,
+    "whole_wall_seconds": 304.85,
+    "T_arm_wall_seconds": 160.45789840299403,
+    "G_arm_wall_seconds": 135.36679288500454,
+    "duration_forward_rows": 1566026,
+    "no_future_wall_guarantee": true
+  },
+  "fixed_limits": {
+    "arm_seconds": 1800,
+    "whole_seconds": 3600,
+    "max_accepted_submissions": 1
+  },
+  "new_scientific_exposure_at_preparation": 0
+}

@@ -19,7 +19,7 @@
     }
   ],
   "recommended": "a",
-  "auto_applied": null,
+  "auto_applied": "a",
   "dm_reason": "改变的是后续状态上的真实决策机会；原生训练预算可保留，但普通反馈的优势和增加的头部工作使这只是窄幅推荐。",
   "evidence": [
     "docs/research/candidates/ucope/UCOPE_POST_B04_RENEWAL_P67_PREPARATION_INTAKE_20260908.md"
@@ -87,6 +87,14 @@
       "state": "planned",
       "summary": "P67只执行新问题的准备，方向选项均未应用；实验/Send仍为零。",
       "correction": "证据反方的quote字段是B04三项对比的紧凑转录，并非一整句原文。原表的主指标行逐字为：| T−G | −0.003948225944122139 | 0.010191826216031805 | 18 / 14 / 0 |。全部数值及推荐保持不变；其余两项来自同表的G−H和T−H行。"
+    },
+    {
+      "at": "2026-09-09T04:03:45+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/ucope/pro_packets/20260908_post_b04_renewal_convergence/archive/RESPONSE.md",
+      "record": "docs/research/candidates/ucope/UCOPE_POST_B04_RENEWAL_CONVERGENCE_INTAKE_20260908.md",
+      "state": "applied",
+      "summary": "完整同一节点答复选择RECAST及一次7301 B，卡片与检查要求已落实；旧结论保留。当前未编码或运行；方向选择不等于实验已执行。"
     }
   ]
 }
