@@ -1,0 +1,108 @@
+{
+  "master": 8401,
+  "b": 840100000,
+  "configuration_source": "experiments/candidates/vsp_c1/native_hold_value_b01/study.py",
+  "configuration_defaults": {
+    "seed": 8101,
+    "fixture": false,
+    "horizon": 256,
+    "train_episodes": 512,
+    "eval_episodes": 32,
+    "chunk": 32,
+    "arm_cap": 1800,
+    "pair_cap": 3600,
+    "ratio_grouping": "agent_compound"
+  },
+  "selected_configuration": {
+    "seed": 8401,
+    "fixture": false,
+    "horizon": 256,
+    "train_episodes": 768,
+    "eval_episodes": 32,
+    "chunk": 32,
+    "arm_cap": 1800,
+    "pair_cap": 3600,
+    "ratio_grouping": "agent_compound"
+  },
+  "common_initialization": 840100011,
+  "extra_initialization": 840100012,
+  "training_velocity": 840100021,
+  "training_duration": 840100022,
+  "constructor_reset": 840101000,
+  "training_resets": [
+    840101000,
+    840101767
+  ],
+  "evaluation_resets": [
+    840102000,
+    840102031
+  ],
+  "evaluation_velocity": [
+    840103000,
+    840103031
+  ],
+  "evaluation_duration": [
+    840104000,
+    840104031
+  ],
+  "unique_integer_keys": 868,
+  "overlap_with_prior": {
+    "8101": 0,
+    "8102": 0,
+    "8201": 0,
+    "8202": 0,
+    "8301": 0,
+    "8302": 0,
+    "8303": 0
+  },
+  "train_eval_reset_overlap": 0,
+  "algorithm_work": {
+    "train_steps": 393216,
+    "eval_steps": 24576,
+    "steps": 417792,
+    "adam": 3072,
+    "rollouts": 768,
+    "moment_merges": 768,
+    "target_rows": 393216,
+    "four_epoch_target_terms": 1572864,
+    "scored_episodes": 1632,
+    "eval_episodes": 96,
+    "fits": 2,
+    "matched_pairs": 1,
+    "constructors": 2
+  },
+  "per_arm_work": {
+    "train_steps": 196608,
+    "adam": 1536,
+    "moment_merges": 384,
+    "targets_per_merge": 512,
+    "learned_evaluation_steps": 8192,
+    "mlp_hover_steps": 8192
+  },
+  "actual_new_exposure_at_definition": {
+    "scientific_invocations": 0,
+    "accepted_submissions": 0,
+    "native_steps": 0,
+    "training_pairs": 0,
+    "models": 0,
+    "adam": 0,
+    "eval_episodes": 0
+  },
+  "prediction": {
+    "event": "Delta > 0.01",
+    "label": "UP",
+    "probability": 0.55
+  },
+  "planning_proxy": {
+    "training_multiplier": 1.5,
+    "prior_max_pair_wall_seconds": 407.33,
+    "conservative_uniform_scaled_pair_seconds": 610.995,
+    "prior_gated_bound_seconds": 208.50617863300255,
+    "prior_mlp_bound_seconds": 210.40934887200825,
+    "scaled_gated_seconds": 312.75926794950385,
+    "scaled_mlp_seconds": 315.6140233080124,
+    "qualification": "Uniform 1.5x scaling is a planning proxy only, including unchanged evaluation; no guaranteed cap admission or timing experiment."
+  },
+  "freshness_qualification": "Whole-token 8401 or B08 binding search of current direction, code, tests, scripts and Portfolio surfaces found no prior binding before this definition; no global scientific-unused guarantee.",
+  "computed_utc": "2026-09-09T06:42:26.708258+00:00"
+}
