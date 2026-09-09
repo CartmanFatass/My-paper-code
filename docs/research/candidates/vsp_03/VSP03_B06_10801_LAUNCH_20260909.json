@@ -1,0 +1,21 @@
+{
+  "fit": 10801,
+  "source_sha": "edb74aaf5292600480763403cd30cbd733dd1583",
+  "cwd": "/home/wu/hmasd-worktrees/vsp03-b06-edb74aaf5292600480763403cd30cbd733dd1583",
+  "command": "bash /home/wu/hmasd-worktrees/vsp03-b06-edb74aaf5292600480763403cd30cbd733dd1583/experiments/candidates/vsp_03/vsp03_b06/launch.sh /home/wu/hmasd-worktrees/vsp03-b06-edb74aaf5292600480763403cd30cbd733dd1583 10801",
+  "handle": "vsp03-b06-10801-20260909",
+  "submission_utc": "2026-09-09T22:47:06.161539+00:00",
+  "return_utc": "2026-09-09T22:47:15.571091+00:00",
+  "ssh_returncode": 0,
+  "stdout": "",
+  "stderr": "Running as unit: vsp03-b06-10801-20260909.service; invocation ID: 39fc8235b1b048e3b75d51c57c9a1bc6\nFinished with result: success\nMain processes terminated with: code=exited/status=0\nService runtime: 8.887s\nCPU time consumed: 8.762s\nMemory peak: 9.9M\nMemory swap peak: 0B\n",
+  "monitor_adoption": "pending",
+  "monitor_dispatch": {
+    "thread_id": "01a087e5-2044-7301-abb6-7a1709a98197",
+    "accepted": true,
+    "adoption": "pending",
+    "original_cm": "/root/dm_vsp03_p54_reentry/cm_b03_single_g",
+    "original_dm": "/root/dm_vsp03_p54_reentry",
+    "root_thread": "01a07249-b095-7821-8ce2-e9c32ba85267"
+  }
+}
