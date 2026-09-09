@@ -1,4 +1,4 @@
-# UCOPE renewable commitment B01 â€” implementation acceptance, 2026-09-08
+# UCOPE renewable commitment B01 — implementation acceptance, 2026-09-08
 
 ## Binding and delivered source
 
@@ -7,16 +7,16 @@ source tree `e2372f46fcf50ad10eddb04f3e30aafc288651b3`, pushed on `codex/ucope`.
 Authoring checkout: `C:/Projects/HMASD-worktrees/dm-ucope-native-return-prep-20260906`.
 Starting checkout `5a7455c0f4745622e7dcadc8b96e607218b3a300` was clean; unrelated work was preserved.
 Contract: [CM handoff](UCOPE_UAV_RENEWAL_COMMITMENT_B01_CM_HANDOFF_20260908.md)
-and [science card Â§Â§2â€“7](UCOPE_UAV_RENEWAL_COMMITMENT_B01_SCIENCE_CARD_20260908.md),
+and [science card §§2–7](UCOPE_UAV_RENEWAL_COMMITMENT_B01_SCIENCE_CARD_20260908.md),
 the latter frozen at `ec82119adb83044ac9eff346a4779d3aceffa334`.
 
 The five changed production paths are existing `uav_motion_prefix_b01/{environment,policy,learner,study}.py`
 and `scripts/run_ucope_uav_motion_prefix_b01.py`. The owned tests are expanded
 `test_pair_plumbing.py` and new `test_renewal.py` in the mirrored directory.
 Production adds 72/deletes 30 lines; tests add 158/delete 9; runner remains 54 lines.
-Scope Â§4 additions: **none**, as card Â§6 fixes. No base environment or governance changed.
+Scope §4 additions: **none**, as card §6 fixes. No base environment or governance changed.
 Most production additions are the requested selector/publication/count fields; their necessity
-is card Â§Â§2,5,7, and independent review covers this orchestration share.
+is card §§2,5,7, and independent review covers this orchestration share.
 
 T samples velocity and conditional duration at each owner's own expiry. The same eligibility
 mask controls sampling and stored PPO density. Held owners keep commands and consume no fresh
@@ -25,7 +25,7 @@ PPO objective/denominator, recurrence, initialization, optimizer and RNG laws re
 A selected duration label survives administrative truncation. Suppression is counted after
 executed held steps; censoring is counted only after executing the horizon step with a timer
 still exceeding one. Partial attempts retain actual selections and steps. Added phase counts,
-Tâˆ’H and arm means are limited to `renewal_b01`; historical selectors retain their output laws.
+T−H and arm means are limited to `renewal_b01`; historical selectors retain their output laws.
 
 ## Focused execution and coverage
 
@@ -81,7 +81,7 @@ technical evidence with that limit; no open correction remains.
 Per-arm cost projection: unchanged native step/update budgets plus the card's actual-renewal
 head work; B04 timings are a same-loop reference, not measured renewable duration coefficients.
 No new performance experiment was selected or performed. A real-invocation projection and any
-concrete over-cap gap remain with the separately allocated execution plan under card Â§6.
+concrete over-cap gap remain with the separately allocated execution plan under card §6.
 Post-learner path coverage: the selected suite exercised the affected short synthetic learner,
 checkpoint, episode/count and final-primary publication path. Real 7301 remains unexecuted.
 Scientific invocations, independent smoke, profiling, replay, pilot and extra evaluation: **zero**.
