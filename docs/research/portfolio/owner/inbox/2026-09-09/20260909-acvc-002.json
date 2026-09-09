@@ -1,0 +1,81 @@
+{
+  "id": "20260909-acvc-002",
+  "created": "2026-09-09T03:34:15-07:00",
+  "direction": "acvc",
+  "tier": "direction",
+  "kind": "decision",
+  "title": "原节点选择一次原生链路对照；旧门槛按回合收益解释",
+  "context": "已读完整不可变Pro答复并核对当前规范：接受一次条件于冻结DENSE/8201的T/G/C/F比较。1/4是回合总收益，另保留每步均值0.01的有意义增益标准。旧宿主关闭、反面结果及两次recast保留，本次只登记结论，零新增卡、代码、主种子或运行。",
+  "options": [
+    {
+      "key": "a",
+      "label": "登记限定原生比较",
+      "consequence": "应用已形成的方向选择到科学记录；实现和执行仍须Root具体分配，不等待主人补批。"
+    },
+    {
+      "key": "b",
+      "label": "主人覆写为无后继",
+      "consequence": "若主人异步选择此项，在任何新执行前保留无后继边界；历史证据不变。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "完整答复符合当前B证据负担，旧回合收益定义支持单位解释；局部失联未必伤害团队，因此仍是close call。",
+  "evidence": [
+    "docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_P76_CONVERGENCE_INTAKE_20260909.md",
+    "docs/research/candidates/acvc/pro_packets/20260909_native_link_loss_convergence/archive/RESPONSE.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-09.md#L30",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "原Convergence已选择一次限定原生对照：登记该方向结论，并保留旧宿主关闭、反面证据和零新增执行分配。",
+    "changes_if_approved": [
+      {
+        "target": "acvc/DIRECTION.md 与本次 intake",
+        "from": "原生链路问题已准备，1/4收益单位待原节点解释",
+        "to": "接受一次限定原生B的方向选择；1/4指回合总收益，另保留每步均值0.01的有意义增益标准；卡、实现和运行尚未分配"
+      }
+    ],
+    "if_refused": "主人可异步覆写方向选择；在任何新执行前应用该指示，旧R01宿主关闭和历史证据仍保留。当前不等待回复才完成已授权的科学记录。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/acvc/pro_packets/20260909_native_link_loss_convergence/archive/RESPONSE.md",
+        "quote": "Select the one bounded native B/EXPLORE comparison.",
+        "why": "完整不可变答复明确选择该候选，信息、合法纠正动作、已训练基础控制器和固定/通用比较器现已具体。"
+      },
+      {
+        "path": "docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_P76_CONVERGENCE_INTAKE_20260909.md",
+        "quote": "The inherited quarter-unit condition means `0.25` undiscounted native **episode reward sum S**.",
+        "why": "旧定义明确按回合累计；新显示字母J不改变物理量，0.25 J反而会是64回合收益单位。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/acvc/pro_packets/20260909_native_link_loss_convergence/archive/RESPONSE.md",
+        "quote": "Consequently, an own-link loss is neither a global service-loss certificate nor evidence that the preceding own action caused harm.",
+        "why": "队友接手可能有益，固定规则或通用学习器可能已包含所有价值。"
+      },
+      {
+        "path": "docs/research/candidates/acvc/pro_packets/20260909_native_link_loss_convergence/archive/RESPONSE.md",
+        "quote": "Selection occurred with both outcomes visible, and 8201 is the better of these two original DENSE means.",
+        "why": "新对照条件于已看过结果的固定基础策略，不是独立基线训练或稳定优势证据。"
+      }
+    ],
+    "uncertainty": [
+      "本次只形成方向结论，没有新收益、学习暴露、headroom或运行时间结果。",
+      "当前用户列表1至19才考虑线索，空列表等情况跳过；真实可学习机会未知。",
+      "两个MGTAP原生负差和两个VSPC1较长训练负差仍独立保留；不跨方向合并。"
+    ],
+    "cost": {
+      "compute": "本次0科学调用。所选未来一次配对共294912原生步、2048更新、128终局评价；1800秒/完整学习臂及3600秒/完整研究上限均尚未分配。",
+      "owner_time": "异步查看，不需要补一个批准；真正实现/执行须由Root另行具体分配。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing；科学记录继续，Root决定下一具体执行分配。"
+    },
+    "verdict_text": "**The final direction decision is to continue with this single bounded native comparison, with the inherited quarter-unit condition explicitly in episode-sum units and the separate 0.01 J MEI retained.** The scientific reason is the now-concrete legal information/action path against credible controls; the uncertainty is whether selective correction has any net value once interference, handoffs, fixed handling and generic learning are allowed to explain the outcome. The answer authorizes only this scoped direction conclusion and its delivery, not scientific execution.",
+    "source": "docs/research/candidates/acvc/pro_packets/20260909_native_link_loss_convergence/archive/RESPONSE.md"
+  },
+  "starred": true
+}
