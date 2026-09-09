@@ -473,6 +473,40 @@ summed wall/7016.85s aggregate CPU and no added scientific invocation.
 Evidence: `FSD_UAV_INDIVIDUAL_RENEWAL_B02_P72_RESULT_EVIDENCE_20260909.md`,
 `FSD_UAV_INDIVIDUAL_RENEWAL_B02_P72_INTAKE_20260909.md`, and the B02 card.
 
+## Post-native-UAV-B02 extension boundary (P74, 2026-09-09)
+
+Complete Convergence selects **A: end the unchanged scenario1 individual
+cost .25, k10/caps10, five-update extension; no next object or twenty-rollout
+pair is selected**. The two real native I/D0 learning instances are complete;
+this stops their exact early-budget extension without claiming stable D0
+superiority, all-budget failure or broad FSD invalidity. Other thresholds,
+training budgets and questions remain empirically unresolved. P52 and the
+ordinary corridor stops remain; no recast or Portfolio disposition is added.
+
+The strongest contradiction to benefit is I−D0−.049670563167111874 and
+−.035312725297886094 with greater I training work. P70's coverage gain and
+P72's higher sampled training returns on rollouts2–5, small quality/altitude
+benefits and positive endpoint contrasts remain support for possible further
+exploration. P70 gains coverage with quality/altitude harm; P72 loses coverage
+while improving the other terms. Their signs do not identify a common cause.
+Both deterministic endpoints have zero extra gap causes, so the observations
+remain learning/data/credit/control package comparisons, not isolated online
+renewal effects. Two finite endpoint panels do not establish population
+superiority; authentic D0 remains valid but untuned, with tuned headroom absent.
+
+The surviving alternative is a possible native benefit after more training.
+The specified twenty-rollout B is a legal different question, but the node
+judges its current information value insufficient for its visible additional
+work. This is not a prior-positive, competence, headroom, exact-diagnostic or
+convergence gate. No ten/twenty-rollout substitute, third unchanged pair,
+search, profile or next discriminator is selected. All existing results and
+frozen card meanings remain intact.
+
+Evidence: `pro_packets/20260909_p74_post_uav_b02_convergence/archive/RESPONSE.md`
+(full immutable Pro commit `c01801fc2fcead64c417deeb8a7e214252d47d1f`),
+`pro_packets/20260909_p74_post_uav_b02_convergence/CONVERGENCE_INTAKE.md`,
+and the accepted P70/P72 result/intake records above.
+
 ## Objects and their state (2026-09-09)
 
 | Object | State | Record |
@@ -491,6 +525,7 @@ Evidence: `FSD_UAV_INDIVIDUAL_RENEWAL_B02_P72_RESULT_EVIDENCE_20260909.md`,
 | Post-B03 Convergence / P52 | complete PRO_FINAL A; tested supplied-public-mask learning extension ended, ordinary family pause retained, no successor/recast/UAV entry; all B results preserved | `pro_packets/20260908_post_b03_convergence/archive/RESPONSE.md`; `pro_packets/20260908_post_b03_convergence/CONVERGENCE_INTAKE.md` |
 | Native individual-renewal UAV B01 / P67–P70 | complete valid B, one new770503/780503 I/D0 pair; native I−D0−.0496705632 below−.01 MEI, coverage gain retained, training gaps but zero endpoint gaps; both exit0,1693.38s summed wall; no successor or broader closure | `FSD_UAV_INDIVIDUAL_RENEWAL_B01_P70_RESULT_EVIDENCE_20260908.md`; `FSD_UAV_INDIVIDUAL_RENEWAL_B01_P70_INTAKE_20260908.md`; original card/P67 decision |
 | Native individual-renewal UAV B02 / P72 | complete valid B, new770603/780603 pair; I−D0−.0353127253 below−.01, native loss in both observed learning instances; different component balance, training activity and endpoint inactivity retained;1768.78s summed wall; no successor selected | `FSD_UAV_INDIVIDUAL_RENEWAL_B02_P72_RESULT_EVIDENCE_20260909.md`; `FSD_UAV_INDIVIDUAL_RENEWAL_B02_P72_INTAKE_20260909.md`; B02 card |
+| Post-native-UAV-B02 Convergence / P74 | complete PRO_FINAL A; end only unchanged .25/k10/five-update extension, no twenty-rollout B or successor selected; longer-budget value remains unresolved, no recast or Portfolio change | `pro_packets/20260909_p74_post_uav_b02_convergence/archive/RESPONSE.md`; `pro_packets/20260909_p74_post_uav_b02_convergence/CONVERGENCE_INTAKE.md` |
 | Advancement plan | E1 → E2 → E2b/E3 → E4 → C-gate; E2b is not selected at this boundary | `docs/Claude_docs/plans/RESEARCH_ADVANCEMENT_PLAN_20260902.md` |
 
 ## Code
