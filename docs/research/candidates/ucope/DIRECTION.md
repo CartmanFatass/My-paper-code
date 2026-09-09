@@ -26,6 +26,14 @@ remains dated provenance under the controlling evidence specification section 11
 - Historical selected B discriminator:
   `UCOPE-B-EXPLORE-FT-XF-BC-INVERTIBLE-CONDITIONING-DISCRIMINATOR-R01`
 - Latest direction-tier decision:
+  **2026-09-09 PRO_FINAL / CONTINUE**, bounded current-host comparator
+  development inside the existing renewal family. Select one future B question
+  comparing training-only scalar value-target normalization in legal feedback G
+  with raw-target G, retaining H and sampled evaluation. No further mean-execution
+  comparison is selected. This supplies no renewal-effect result or prerequisite
+  and allocates no card, master, implementation or invocation. Recasts remain **1**.
+  See the [post-mean-velocity-B01 Convergence intake](UCOPE_POST_MEAN_VELOCITY_B01_CONVERGENCE_INTAKE_20260909.md).
+- Previous within-family direction-tier decision:
   **2026-09-09 PRO_FINAL / CONTINUE** inside the existing own-expiry renewal
   family. Select the next bounded B question comparing learned renewal T,
   frozen-initial duration-head renewal F, ordinary feedback G and hover H;
@@ -177,7 +185,7 @@ without a distinct count-state architecture because RAW contains the sufficient
 count. The direct-service alternative remains separated by the frozen
 `Gamma=I+D` decomposition and analytic `D≈-0.02` boundary.
 
-## Current scientific position — 2026-09-09 mean execution has no selected-scale gain and both modes lose to hover
+## Current scientific position — 2026-09-09 mean execution is adverse on these fits; select a feedback-training comparison
 
 P85 is valid complete B/EXPLORE **WITHIN**, primary F_mean−G_mean
 **−0.008350131013904307**, conditional SE **0.006736648533933545**,
@@ -207,18 +215,34 @@ state visitation, finite learning/evaluation variation and partner interaction
 survive. Direct service versus information value and learned-duration value
 remain unseparated. The verified evaluation option was no promised remedy.
 
-The next discriminator recommendation is one **separately allocated fresh B**
-with unchanged training and both modes plus H, to observe whether the full
-pattern recurs in another learning history. Retain mean F−G as prospective
-primary and every mode/hover contrast, without a favorable-sign requirement.
-Known work remains 303104 steps/2048 Adam/160 final episodes and F head
-2048000–4096000 rows. P85 measured 331.58 s is only a reference for future wall.
-P85 ends; no next card/master/source/allowance, extra evaluation, automatic
-successor or Pro Send follows. Tuned headroom absent, recasts 1; no family,
-C, lifecycle or Portfolio disposition. Root allocates no next pair and instead
-asks the existing Convergence node to compare its marginal value with ending
-this mean-execution package or a concrete source-supported training change.
-That consultation has zero new empirical exposure and creates no child Send.
+The next discriminator selected by the original Convergence node is **one
+future normalized-versus-raw legal-feedback B**, with both hover contrasts.
+This supersedes the DM's preparation preference for another five-mode history;
+the substantive zero-work option is the close runner-up. No further mean-mode
+comparison is selected. The governing renewal question and ordinary-feedback
+null remain, with no normalization-success prerequisite or pairing of a new G
+with historical F. This is CONTINUE as comparator development, recasts **1**.
+
+Strongest support for the next question is a concrete change to the current
+critic-target/advantage path after mean execution failed to improve either fit.
+Strongest contradiction is that P85 already justifies declining that mean
+package without more work, raw G sometimes beats H, and normalization may fail.
+The verified training-target literature motivates a comparison, not a diagnosis
+of P85 or a UAV benefit claim. Private observations and owned every-step motion
+still change service, future information and partner co-adaptation; only the
+critic's training coordinates change. Native reward and raw-unit advantages
+remain intact, while final sampled return decides the package observation.
+
+Future scope is one matched instance, two real 512×256-step fits and 32 sampled
+final episodes each for normalized G, raw G and H: **286720 native steps /
+2048 Adam / 96 final episodes**, plus 256 scalar moments updates. Primary is
+normalized G−raw G, MEI **0.01**; preserve both hover contrasts and every sign.
+No renewal effect, stable improvement or competence follows from that design.
+Tuned headroom remains absent; future wall is unknown. The complete node intake
+selects no card, master, source change or invocation allowance. P85 remains ended;
+Root's later concrete assignment controls any implementation and execution.
+See the [accepted Convergence intake](UCOPE_POST_MEAN_VELOCITY_B01_CONVERGENCE_INTAKE_20260909.md)
+and its full response for the selected training units and bounded interpretation.
 See [intake §§7–10](UCOPE_UAV_MEAN_VELOCITY_RENEWAL_B01_P85_INTAKE_20260909.md#7-dm-scientific-intake-against-the-card),
 [durable summary](UCOPE_UAV_MEAN_VELOCITY_RENEWAL_B01_P85_RESULT_SUMMARY_20260909.json)
 and [E0 evidence](UCOPE_UAV_MEAN_VELOCITY_RENEWAL_B01_P85_RESULT_EVIDENCE_20260909.md).

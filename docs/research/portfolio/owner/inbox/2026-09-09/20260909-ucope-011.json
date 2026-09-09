@@ -24,7 +24,7 @@
     }
   ],
   "recommended": "a",
-  "auto_applied": null,
+  "auto_applied": "c",
   "dm_reason": "仅一对新模式比较留下学习历史依赖问题，但现有损失也足以支持立即停止；把这次边际取舍交原节点。",
   "evidence": [
     "docs/research/candidates/ucope/UCOPE_POST_MEAN_VELOCITY_B01_CONVERGENCE_PREPARATION_INTAKE_20260909.md",
@@ -73,5 +73,15 @@
     "verdict_text": "Recommend (a), narrowly over (b), while exposing (c) as a concrete alternative.",
     "source": "docs/research/candidates/ucope/UCOPE_POST_MEAN_VELOCITY_B01_CONVERGENCE_PREPARATION_INTAKE_20260909.md"
   },
-  "starred": true
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-09T17:22:52+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/ucope/pro_packets/20260909_post_mean_velocity_b01_convergence/archive/RESPONSE.md",
+      "record": "docs/research/candidates/ucope/UCOPE_POST_MEAN_VELOCITY_B01_CONVERGENCE_INTAKE_20260909.md",
+      "state": "applied",
+      "summary": "Pro完整合规裁决改选c；原准备建议a仅保留为历史。当前方向决策及新中文包见20260909-ucope-012。应用仅为intake和DIRECTION科学记录，未新增卡、种子、源码或实验分配；Transport短回执的未确认判断已用GitHub实物核对，原文保留。"
+    }
+  ]
 }
