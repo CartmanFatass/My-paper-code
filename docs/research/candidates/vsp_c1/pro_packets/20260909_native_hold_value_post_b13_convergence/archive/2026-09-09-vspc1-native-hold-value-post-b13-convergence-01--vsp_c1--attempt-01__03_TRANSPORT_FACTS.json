@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "request_id": "2026-09-09-vspc1-native-hold-value-post-b13-convergence-01",
+  "workflow_node": "em_convergence",
+  "conversation_binding_key": "em:vsp_c1:convergence",
+  "direction_id": "vsp_c1",
+  "direction_ids": [
+    "vsp_c1"
+  ],
+  "conversation_id": "6a9cfac6-4d34-83e8-9f0a-088c03f4fb0c",
+  "provider_url": "https://chatgpt.com/c/6a9cfac6-4d34-83e8-9f0a-088c03f4fb0c",
+  "user_message_id": "5e1ad105-d7cb-40df-92b6-eaa1a799e65a",
+  "assistant_message_id": "0475d87d-911b-49f1-b220-cf6043ab8677",
+  "visible_model": "6 Pro",
+  "underlying_model": "Latest",
+  "thinking_effort": "Pro, 5 of 5.",
+  "source_mode": "paste",
+  "prompt_sha256": "2e2f00c490b1bae891e2d9ebc4d720af7d9260cd938358d3084e33a6943a7197",
+  "response_sha256": "5cfe11dd7c505cd70ca954fb7b4509892efaf2a38565a0cc55b5b25564653343",
+  "response_characters": 346,
+  "response_bytes": 348,
+  "send_click_count": 1,
+  "send_evidence": {
+    "send_click_count": 1,
+    "send_attempted": true,
+    "url_observed": true,
+    "user_node_observed": true,
+    "user_node_exact": true,
+    "user_message_id": "5e1ad105-d7cb-40df-92b6-eaa1a799e65a",
+    "provider_url_observed": "https://chatgpt.com/c/6a9cfac6-4d34-83e8-9f0a-088c03f4fb0c",
+    "binding_match": true,
+    "paste_mode": true,
+    "resource_pill_observed": true
+  },
+  "identity_validation": "PASS",
+  "identity_expected": {
+    "conversation_id": "6a9cfac6-4d34-83e8-9f0a-088c03f4fb0c",
+    "user_message_id": "5e1ad105-d7cb-40df-92b6-eaa1a799e65a",
+    "assistant_message_id": "0475d87d-911b-49f1-b220-cf6043ab8677"
+  },
+  "identity_observed": {
+    "conversation_id": "6a9cfac6-4d34-83e8-9f0a-088c03f4fb0c",
+    "user_message_id": "5e1ad105-d7cb-40df-92b6-eaa1a799e65a",
+    "assistant_message_id": "0475d87d-911b-49f1-b220-cf6043ab8677"
+  },
+  "archive_paths": {
+    "manifest_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_c1\\2026-09-09-vspc1-native-hold-value-post-b13-convergence-01\\2026-09-09-vspc1-native-hold-value-post-b13-convergence-01--vsp_c1__PACKET_MANIFEST.json",
+    "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_c1\\2026-09-09-vspc1-native-hold-value-post-b13-convergence-01\\2026-09-09-vspc1-native-hold-value-post-b13-convergence-01--vsp_c1__00_PROMPT.md",
+    "reference_files": [],
+    "response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_c1\\2026-09-09-vspc1-native-hold-value-post-b13-convergence-01\\2026-09-09-vspc1-native-hold-value-post-b13-convergence-01--vsp_c1--attempt-01__02_RESPONSE.md",
+    "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_c1\\2026-09-09-vspc1-native-hold-value-post-b13-convergence-01\\2026-09-09-vspc1-native-hold-value-post-b13-convergence-01--vsp_c1--attempt-01__03_TRANSPORT_FACTS.json",
+    "response_sha256": "5cfe11dd7c505cd70ca954fb7b4509892efaf2a38565a0cc55b5b25564653343"
+  },
+  "wait_status": "NATURAL_COMPLETION",
+  "observed_page_state": "Worked for 14m 8s; complete assistant response; Copy response present; no active generation control",
+  "capture_method": "Current-round scoped Copy response control via CUA clipboard.read",
+  "archive_status": "ARCHIVED",
+  "timestamps": {
+    "completed_at": "2026-09-09T13:59:52Z",
+    "captured_at": "2026-09-09T13:59:52Z",
+    "archived_at": "2026-09-09T13:59:52Z"
+  },
+  "scientific_decision_formed": false,
+  "return_receipt": {
+    "required": true,
+    "source_thread_id": "01a081d4-89c6-7821-97d8-209ac47172f1",
+    "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+    "destination_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+    "status": "SENT",
+    "attempt_count": 1,
+    "message_key": "2026-09-09-vspc1-native-hold-value-post-b13-convergence-01|vsp_c1|6a9cfac6-4d34-83e8-9f0a-088c03f4fb0c|5cfe11dd7c505cd70ca954fb7b4509892efaf2a38565a0cc55b5b25564653343",
+    "retry_allowed": false,
+    "routing_mode": "PARENT_SESSION",
+    "delivery_mode": "bounded_single_attempt",
+    "return_control_after_attempt": true,
+    "archive_paths": {
+      "manifest_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_c1\\2026-09-09-vspc1-native-hold-value-post-b13-convergence-01\\2026-09-09-vspc1-native-hold-value-post-b13-convergence-01--vsp_c1__PACKET_MANIFEST.json",
+      "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_c1\\2026-09-09-vspc1-native-hold-value-post-b13-convergence-01\\2026-09-09-vspc1-native-hold-value-post-b13-convergence-01--vsp_c1__00_PROMPT.md",
+      "reference_files": [],
+      "response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_c1\\2026-09-09-vspc1-native-hold-value-post-b13-convergence-01\\2026-09-09-vspc1-native-hold-value-post-b13-convergence-01--vsp_c1--attempt-01__02_RESPONSE.md",
+      "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_c1\\2026-09-09-vspc1-native-hold-value-post-b13-convergence-01\\2026-09-09-vspc1-native-hold-value-post-b13-convergence-01--vsp_c1--attempt-01__03_TRANSPORT_FACTS.json",
+      "response_sha256": "5cfe11dd7c505cd70ca954fb7b4509892efaf2a38565a0cc55b5b25564653343"
+    },
+    "response_sha256": "5cfe11dd7c505cd70ca954fb7b4509892efaf2a38565a0cc55b5b25564653343",
+    "staged_at": "2026-09-09T13:59:52Z",
+    "fallback_enabled": false,
+    "delivery_status": "accepted",
+    "sent_at": "2026-09-09T14:01:09Z",
+    "updated_at": "2026-09-09T14:01:09Z"
+  },
+  "tab_id": null,
+  "tab_lifecycle": "CLOSED",
+  "tab_closed_at": "2026-09-09T14:00:14Z",
+  "receipt_status": "SENT",
+  "receipt_attempt_count": 1,
+  "receipt_delivery_status": "accepted",
+  "receipt_sent_at": "2026-09-09T14:01:09Z"
+}

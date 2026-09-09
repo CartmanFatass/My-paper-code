@@ -856,3 +856,35 @@ Tuned matching headroom remains absent and H remains untuned. The
 [E0](VSPC1_NATIVE_HOLD_VALUE_B13_RESULT_EVIDENCE_20260909.md) records complete source,
 counts and measurements; [DM analysis](results/native_hold_value_b13_8601_20260909/dm_analysis.json)
 preserves the native/H contrasts and forecast scoring.
+
+## Tested intact-body-plus-gate package ends — 2026-09-09
+
+The [P81 Convergence intake](VSPC1_NATIVE_HOLD_VALUE_P81_CONVERGENCE_INTAKE_20260909.md)
+accepts the full immutable [Pro response](pro_packets/20260909_native_hold_value_post_b13_convergence/archive/RESPONSE.md)
+at `f5f053f5f271785c83cac735bc69d641fad3be5f`. **PRO_FINAL ends continued investment
+in the B13-tested additive gate package; no successor B is selected.** The exact scope
+is the current five-UAV native host, duration-selecting recurrent actor, normalized
+value training/compound PPO,768-episode budget and final sampled evaluation. This is
+a direction choice after the allocated test, beyond merely ending P80's invocation.
+P79's selected comparison and B13's valid complete DOWN retain their original meanings.
+
+The strongest direct support is B13's−.0320685805 native difference,25/32 adverse
+identities and the ordinary body's larger H mean margin (+.0355624576 versus GATED's
++.0034938771). The strongest contradiction remains earlier512 UP instances and the
+single new training pair, with conditional primary SE .0101106835. All prior negative
+C values, mixed early signs, late deficits, H losses and quarantines remain separate.
+This is a bounded investment judgment, not stable inferiority, equivalence or a causal
+resolution of the old650-parameter tradeoff. Tuned matching headroom remains absent.
+
+The broader hypothesis that legal entity hold information can improve finite-budget
+native control through value/credit/optimization survives. B13 exercised the hold →
+central value/compound PPO → local recurrent policy → native return path, but exposure
+and gate movement supplied no compensating native benefit. Capacity, initialization,
+FP32, moments, clipping and partner co-adaptation remain alternatives.
+
+No next discriminator is allocated. A separately selected fresh identical matched pair
+could later test instance variation; it remains legal and unselected, not a seed-count,
+causal-proof or Pro prerequisite. No replacement candidate is invented. This choice
+does not recast, invalidate all hold-value/K4 mechanisms, PARK/CLOSE the entire direction,
+change Portfolio priority/capacity or promote C/transfer/formal UAV status. Root retains
+Portfolio planning and integration responsibilities.

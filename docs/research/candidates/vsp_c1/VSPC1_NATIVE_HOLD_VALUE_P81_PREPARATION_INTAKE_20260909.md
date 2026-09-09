@@ -166,3 +166,8 @@ reuse, actual three-party route, zero new exposure and unallocated future master
 local links and whitespace checks pass; prior P79 packet, item006 and DIRECTION bytes
 remain unchanged. Main/branch review queries are again `[]`, with no vsp_c1 audit-owner
 override. All prepared changes are committed/pushed before the single ready return.
+
+The later [full P81 Convergence intake](VSPC1_NATIVE_HOLD_VALUE_P81_CONVERGENCE_INTAKE_20260909.md)
+accepts immutable response `f5f053f5f271785c83cac735bc69d641fad3be5f`: end the tested
+package, with no successor B selected. The preparation and accepted TASK/HANDOFF remain
+historical fixed inputs; the later intake carries the actual decision and its boundary.
