@@ -358,3 +358,173 @@ for all-outcome intake. Checkout/index ownership is released with the pushed evi
 Root owns later archive/reclamation of P72 test/scientific checkouts and wrapper after raw
 evidence and DM intake are preserved; this CM reclaimed no live successor checkout. No second
 new pair, extra evaluation, retry, tuning or successor follows from this completed allocation.
+
+## 8. DM all-outcome check and reading
+
+**Valid B/EXPLORE DOWN, new7501 only.** Native T−G
+**−0.03094711061890552**, conditional evaluation SE **0.010056196158593048**,
+lies0.02094711061890552 below the negative MEI boundary. Rule applied verbatim
+from card§5:
+
+> Delta<−0.01: retain an adverse native reversal on this third fit and drop unchanged continuation from the next default choice; earlier gains cannot compensate.
+
+Comparator qualification, verbatim:
+
+> Weak/negative G−H narrows improvement-over-competent-control wording without erasing trustworthy T−G. Positive T−H never reverses primary loss.
+
+DM inspected the completed report against the prospective card, actual source
+diff/original acceptance, payload and terminal records in§§4–7, canonical
+admission, raw supervisor boundaries and exact source/output readback. Read-only
+analysis checked1120 episode rows and `J=reward_sum/256`, final IDs0..31 and
+matched resets, all96 final returns and three signed paired vectors, their
+means/conditional SEs, complete counts and phase arithmetic. Collected summary,
+episodes, admission and executed-wrapper digests match CM's recorded facts.
+CM's all-seven-output/checkpoint/rollout checks were inspected, not rerun.
+No simulator, model, tensor verification, focused suite or native invocation
+was added. No material engineering or measurement gap limits this primary.
+
+The run-level utility used two T/G endpoints for the declared new independent
+training pair; n=1 has null training SD. A separate six-row input describes all
+three declared independent pairs as allowed prospectively by card§1. Evaluation
+episodes are never training replicates, and H is not a trained replicate.
+The [E0 evidence](UCOPE_UAV_RENEWAL_COMMITMENT_B03_P72_RESULT_EVIDENCE_20260909.md) and [durable summary](UCOPE_UAV_RENEWAL_COMMITMENT_B03_P72_RESULT_SUMMARY_20260909.json) retain all
+outcomes, calculations, tool output and hashes. Small last-digit reduction
+differences between endpoint and native paired means do not change the primary.
+
+| Contrast | Native mean | Conditional evaluation SE | Positive / negative / zero episodes |
+| --- | ---: | ---: | ---: |
+| T−G | -0.03094711061890552 | 0.010056196158593048 | 10 / 22 / 0 |
+| T−H | +0.021107100463981232 | 0.014144010759846842 | 19 / 13 / 0 |
+| G−H | +0.052054211082886756 | 0.010175312737684957 | 26 / 6 / 0 |
+
+Counts are complete:286720 native steps,2048 Adam calls,96 final evaluations,
+512 rollouts,1120 explicit/two constructor resets and1600 diagnostic rows;
+no partial steps. One accepted invocation ended exit0,390.73s whole wall,
+559132KiB peak RSS, within1800s per arm/3600s whole. Actual T/G arm walls
+204.3931929190294s/172.94761272502365s also fit. Aggregate CPU and system-wide
+peak memory are unmeasured; this does not change native polarity. Engineering
+scope§4 none, no§5 breach. The99-test3.75s check remains separate from the run.
+
+## 9. Scientific interpretation, predictions and owner flags
+
+The third new fit gives an adverse native reversal. Positive T−H
++0.021107100463981232 cannot rescue T−G. G−H +0.052054211082886756
+(conditional SE0.010175312737684957) is the largest sampled control-hover
+contrast in the three fits. Competent ordinary feedback remains a live and
+directly relevant null; there is still no tuned-headroom or general competence
+record. This observation does not establish that renewal is intrinsically harmful.
+
+| Separate renewal fit | T−G | Conditional evaluation SE | T−H | G−H |
+| --- | ---: | ---: | ---: | ---: |
+| P70, 7301 | +0.055673191348834944 | 0.011556059794903147 | +0.05305453732049459 | -0.002618654028340355 |
+| P71, 7401 | +0.024658177040921356 | 0.011145715505143731 | +0.03714831826363973 | +0.012490141222718373 |
+| P72, 7501 | -0.03094711061890552 | 0.010056196158593048 | +0.021107100463981232 | +0.052054211082886756 |
+
+**Strongest support for possible package value:** the two earlier independent
+UP fits and positive sampled T−hover in all three. **Strongest contradiction
+to uniform recurrence:** this third DOWN while G substantially exceeds hover
+on the same panel. All adverse episodes remain. Card§1's secondary three-fit
+description is mean +0.016461419256950254, sample SD0.043888031476388346,
+n=3, with all individual endpoints visible. It is outcome-informed exploration,
+not a new pooled primary, another UP ruling or a stable population estimate.
+Endpoint variation includes finite evaluation noise; differing training histories
+and panels prevent isolating training variance or explaining the reversal.
+
+Actual T renewals259729/16135, suppressions395631/24825 and censored
+holds1538/102 connect exposure to this negative primary. Head-forward work is
+1590644 rows and parameters move; these facts do not imply value. Persistence,
+geometry, capacity, gradient exposure and partner co-adaptation survive as
+alternatives. For the unexpected sign, reuse the verified UTE/ACAC source
+passages already inherited through card§2: they establish an event distinction,
+not the sign or cause of this UAV result. No new retrieval claim is needed.
+Historical opening B04 WITHIN, B03/B02 DOWN, P24/6902 harm and original P21 UP
+remain separate; no retrospective relabelling or cross-package causal contrast.
+
+Prospective UP0.60 **missed**, G−H>0 at0.55 **hit**: **1/2**, mean Brier
+**0.28125**. Owner prediction **not taken (unattended)**. The earlier cards'
+predictions/scores are preserved. The Chinese [owner brief](../../portfolio/owner/briefs/ucope/2026-09-09_UCOPE_UAV_RENEWAL_COMMITMENT_B03_P72.md)
+is published; no separate ordinary-result item is created. Prospective new-card
+item20260908-ucope-008 remains the selection record.
+
+Owner flags: **none**. Explicit cautions are the adverse third fit, three-fit
+selection history/conditional noise, absent tuned headroom and unseparated
+mechanisms. The DOWN point is not a close-call boundary reclassification.
+
+## 10. Decisions this completed intake produces
+
+**Acceptance, object tier.** Options: (a) accept valid DOWN under the unchanged
+card, retaining both prior UPs; (b) compensate using the positive three-fit mean
+or T−hover; (c) withhold until stable harm or a causal diagnosis is established.
+Recommend and execute **(a)** under card§5 and evidence-spec§§4,5.2,11.4,11.8.
+This is a complete trustworthy native comparison, not a stable-harm claim.
+
+Owner-delegated decision (unattended, 2026-09-03 instruction): **(a)**.
+
+**Allocation boundary, object tier.** Options: (a) end P72 and drop another
+unchanged pair from the default next choice; (b) request a fourth unchanged pair
+to recover the positive margin; (c) require exact search/complete causal diagnosis
+before recognizing the result. Recommend and execute **(a)**. The third fit
+answers the selected variation question with a sign reversal. A further identical
+pair is not entitled to compute merely because two earlier fits were favorable;
+the existing positive secondary mean does not justify running until positive.
+This choice ends only the named allocation/default unchanged continuation,
+not the object family, direction or Portfolio lifecycle.
+
+Owner-delegated decision (unattended, 2026-09-03 instruction): **(a)**.
+
+No successor question/card/master, CM task, scientific budget or Pro request is
+selected. A new discriminator would need a separately justified question and
+allocation. More evaluation of these checkpoints and exact/causal diagnostics
+are not prerequisites for this B reading. The owner's subsequently delivered
+soft stop independently prohibits all next arms/seeds/objects/Pro requests until
+restart, even if a prior route existed. No Portfolio or direction decision is made.
+
+## 11. Clean return and owner restart boundary
+
+P72's binding-through-result batch is complete. CM released the checkout/index
+clean at `616e8649d5a29373815d04f519d4b8a3eb6d05c7`; no P72 process or
+pending Pro remains. Exact scientific source is still
+`7d3aaab4646360e2473ae352b09c3933ccf8dacf`. Root's authorization-continuity
+instruction from main `3e3357c858f068d171a618925e4085d8511f2995` was relayed
+to CM and its exact nine-role bytes synchronized after terminal release at
+`84b82f267f9fa09eaad36a59a49e1801749e7b88`. This changed no source/budget
+or model and makes no hot-reload claim.
+
+Root then relayed **OWNER_DIRECT soft stop for restart**: finish this intake,
+write a durable handoff, commit/push, return and remain stopped. CM received
+the boundary without interruption; its sole observation was already complete.
+[Restart handoff](UCOPE_RESTART_HANDOFF_20260909.md) identifies accepted commits, source, terminal
+handle, local/remote roots, consumed budget and the next unexecuted step.
+
+The one allocated pair and its one99-test check are spent. There is **zero
+remaining scientific allocation**: no retry/resume, extra evaluation, pilot,
+second new pair or automatic successor. Usage is390.73s per valid new fit;
+three complete renewal fits sum1001.62s/333.8733333333334s per valid fit,
+excluding engineering, older opening regimes and aggregate CPU. Tuned headroom
+remains absent. Next discriminator **unselected and held for owner restart**;
+the scientific recommendation is no fourth unchanged pair. A future concrete
+command must select a newly justified question, not reinterpret this loss.
+
+Root integrates the named P72 source/evidence and final intake bundle, preserving
+the raw local collection before any containing-checkout reclamation. Root owns
+later archive/reclamation of the completed P72 test/scientific checkouts and
+staged wrapper named in the handoff; no cleanup is claimed here and no live
+successor may be reclaimed. Earlier P70/P71 evidence remains unchanged.
+
+Owner reviews were empty in main and this checkout at intake. At
+**2026-09-09T00:07:43-07:00**, all172 UCOPE audit rows inspected across both
+checkouts had empty owner columns; no item needed mark-answered. The latest
+Portfolio row read at00:06 still described two UPs/P72 allocated; this is a
+dated reading, and Root receives the completed three-fit evidence for its
+integration route. Final publication checks record any later relevant override.
+The two object decisions are appended to [2026-09-09 audit](../../portfolio/audit/2026-09-09.md).
+
+Final publication check at **2026-09-09T00:17:09-07:00** found no unapplied
+reviews and empty owner columns in all174 UCOPE audit rows across main and
+this checkout, including the two new rows. No item needed mark-answered.
+The original CM intake prefix, frozen P72 card, accepted scientific source
+and all P70/P71 evidence/cards/predictions remain unchanged. The written
+summary preserves the declared independent units and all96 native returns/
+paired differences;32 local evidence links resolve. The Chinese brief has
+350 characters and the required six headings. The seven-path result/handoff
+bundle passes the focused document/diff checks; no native work was repeated.
