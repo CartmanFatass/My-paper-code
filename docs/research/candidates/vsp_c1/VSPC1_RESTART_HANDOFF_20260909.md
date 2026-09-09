@@ -1,5 +1,13 @@
 # VSPC1 restart handoff — owner soft stop, 2026-09-09
 
+P74 update: the owner explicitly resumed research; Root's committed
+[P74 allocation](../../portfolio/handoffs/2026-09-09-research-resume-p74.md)
+at main `b52d0e1562376cdf833fc30d0543cce64e910e1a` authorizes one further
+independent768 pair. The [B09 card](VSPC1_NATIVE_HOLD_VALUE_B09_SCIENCE_CARD_20260909.md)
+and [intake](VSPC1_NATIVE_HOLD_VALUE_B09_INTAKE_20260909.md) now carry current
+execution state. The stopped P73 account below is historical and remains intact;
+P74 does not reuse its spent allowance or alter any recorded result.
+
 **STOPPED after complete P73 intake. No live experiment, pending scientific
 submission or Pro Send remains. Do not start new scientific work until the owner
 explicitly resumes.** This is the owner's operational soft stop, not a scientific

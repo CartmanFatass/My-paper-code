@@ -1,0 +1,81 @@
+{
+  "id": "20260909-vspc1-001",
+  "created": "2026-09-09T01:16:29-07:00",
+  "direction": "vsp_c1",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "P74：新增一组独立768回合比较",
+  "context": "Claim under test: normalized GATED will fall below the width133 ordinary MLP by more than absolute MEI .01 on one additional independent 768-episode native pair. Binding MARL structure: (b) temporal abstraction or termination, with five co-adapting agents retaining separate partial-observation histories.",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "按P74新预算执行一组8402配对，保留8401负结果与旧512全部结果。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "在下一干净边界停止这张卡的未执行步骤，已得证据保留，不补跑。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "按具体修改更新未执行范围，涉及科学语义冲突时回到相应决策层。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "首组768回合仅一个独立训练实例；新配对直接观察第二个结果，不要求正向，也不作稳定或因果预算结论。",
+  "evidence": [
+    "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B09_SCIENCE_CARD_20260909.md",
+    "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B09_INTAKE_20260909.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-09.md#L9",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "按已恢复的 P74 授权，用新主键8402再做一组768回合的门控价值网络与普通宽MLP原生比较，是否保留这张新卡？",
+    "changes_if_approved": [
+      {
+        "target": "VSPC1 B09 card",
+        "from": "P73结束后的后续建议，尚无新运行",
+        "to": "一组独立768回合训练配对，固定8402、DOWN(.55)预测与原比较方法"
+      }
+    ],
+    "if_refused": "在下一个干净边界应用拒绝或修订；保留8401负结果和所有旧512回合结果，不补跑、不调参，也不把拒绝当成科学负证据。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B09_SCIENCE_CARD_20260909.md#1-question-and-authority",
+        "quote": "A second independent 768 pair directly measures another performance outcome; exact diagnosis or stronger-class requirements would not answer this bounded question.",
+        "why": "首组只是一个训练实例，新配对可直接观察该预算下的变化，不需要先做完整机制诊断。"
+      },
+      {
+        "path": "docs/research/portfolio/handoffs/2026-09-09-research-resume-p74.md",
+        "quote": "Select and freeze one further independent768-episode GATED/width133 MLP/H pair, as recommended by the P73 handoff.",
+        "why": "所有者已明确恢复研究，Root已给这一组独立的新预算。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B09_SCIENCE_CARD_20260909.md#1-question-and-authority",
+        "quote": "Master8401 produced Delta −.03386492041295242, with GATED−H −.04059257431545819 and MLP−H −.0067276539025057655.",
+        "why": "首组门控方法落后普通MLP，而且两个学习器均低于悬停参照，不能许诺可用控制或稳定优势。"
+      }
+    ],
+    "uncertainty": [
+      "新增一组后仍只有两个独立768回合实例；32个评估回合不等于32个训练种子。",
+      "调优同信息基线的余量记录缺失，悬停不是上界。",
+      "不同预算和新主键不能识别训练预算的因果效果，旧512结果单列保留。"
+    ],
+    "cost": {
+      "compute": "最多一次被接受的提交；两次真实训练共417792团队步、3072次Adam、96次最终评估；完整每臂1800秒、整组3600秒。上一组完整505秒仅作计划参考。新增绑定检查总进程不超过300秒。",
+      "owner_time": "异步阅读此卡；没有等待回复的步骤。",
+      "reversibility": "costly",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "Options: (a) one additional independent768 pair; (b) change method/budget; (c) diagnostic or stronger-class work. Recommend/select(a).",
+    "source": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B09_SCIENCE_CARD_20260909.md"
+  },
+  "starred": false
+}
