@@ -294,3 +294,24 @@ it does not commission another scientific invocation or impose a stronger claim.
 Return credible focused-suite/review evidence, the complete diff, exact committed
 source and any concrete semantic/verification-budget gap. Source acceptance
 is a technical finding; it is not a favorable scientific result.
+
+## 8. P69 accepted source and execution readiness — 2026-09-08
+
+Original §§1–7 remain frozen at
+`ec82119adb83044ac9eff346a4779d3aceffa334`. The P69 implementation/check/review
+phase accepts source **`a453447cb011d50c6bb63ed7fc40180134a914b5`**, tree
+`e2372f46fcf50ad10eddb04f3e30aafc288651b3`, under that unchanged contract.
+The [CM technical record](UCOPE_UAV_RENEWAL_COMMITMENT_B01_TECHNICAL_ACCEPTANCE_20260908.md)
+is corrected at `d4f32a1d8e1d339bbdcaf394259346c4b52372b7`; the
+[DM source intake](UCOPE_UAV_RENEWAL_COMMITMENT_B01_P69_IMPLEMENTATION_INTAKE_20260908.md#3-completed-source-phase-and-acceptance-evidence)
+records the full diff, raw receipts and original rule applied.
+
+One exact-source remote affected-directory suite: 81 passed, 3.97s complete
+wall of 300s allowed; independent review found no material gap. Scope §4 none.
+Scientific staging, admission, invocation and real 7301 output are all zero
+in P69. Native return and complete-invocation timing remain unmeasured; the
+§5 predictions remain pending.
+Source acceptance does not select a favorable result or another object.
+The same CM's scientific execution requires Root's concrete allocation and
+the original §6 admission/caps/stop rules. No original budget, contrast,
+information/RNG law, all-outcome branch or historical route is changed.
