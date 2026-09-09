@@ -109,3 +109,80 @@ integration before launch and later reclamation. CM implementation, source
 acceptance, actual invocation/receipts, result analysis, owner brief and final
 object decisions will be appended here after those events; no completed result
 or launch acceptance is asserted by this prospective section.
+
+## 5. DM implementation acceptance — 2026-09-09
+
+Root accepted the full frozen card/facts without correction and integrated
+**66ddec1278e0e170644ee14b155fbd0292b04e57** as main **e1c04b980**; the selection
+audit row is mainL153 (direction branchL45). Original CM returned source
+**a7f1a8bf4acbad1f666997a12b8f624773ee1672**, technical evidence
+**ce3b0e12a1978c9d0b04851a5550ae21b62cd501**, then a DM-requested one-line
+publication-pointer correction at final source
+**8a2e20630c6d68f7faed1c54a39ffc792b922fc6** with updated evidence
+**dcc9c55e389c3c31b0bd2213b58f2474baf72f22**. All were pushed; checkout/index
+were clean when handed back. [CM engineering evidence §§1–5](UCOPE_UAV_SHORT_FIXED_RENEWAL_CONTINUOUS_B01_RESULT_EVIDENCE_20260909.md)
+is implementation evidence only, not a native result.
+
+**What DM checked:** the complete new215-line driver and33-line CLI, all203
+test lines, focused logs, protected-source readback, cleanup receipt, CM's
+source-bound independent review record and the final exact one-line diff.
+No test, model, trajectory or remote command was repeated by DM. The four
+shared52bf runtime blobs, frozen card/facts, earlier records, governance and
+item014 remain unchanged. New non-test source249 lines includes the one-line
+package init; no engineering-scope§4 machinery was added.
+
+**Rule applied verbatim, card§6:** “Focused synthetic checks plus the existing
+independent reviewer cover the changed continuous optimizer/training-RNG path,
+evaluation nonmutation and disjoint seed laws, frozen whole F head, correct
+checkpoint/episode labels, shared H contrasts and honest partial/final-primary
+completeness.” The reviewed/tested computation meets that rule. The native
+card§5 reading remains unobserved and is not applied to synthetic output.
+
+The actual driver retains each actor/critic/Adam and training generators over
+all rollouts, evaluates only after full updates, uses the frozen private seed
+laws, resets episode state before renewed training, passes raw None and the
+unchanged primitive-credit collector/update, and labels checkpoint plus episode.
+Full-fit state/final policy publication precedes final evaluation, so an
+evaluation failure cannot erase completed learning or borrow an early primary.
+Every scheduled panel and shared H is retained. Existing deadline logic charges
+startup to F and H/publication to G without resetting at checkpoints. Scientific
+group-displacement observations reuse the existing helper; they add no runtime
+refusal guard or resource telemetry framework.
+
+**Counts and receipts:**13 current cases pass:11 in4.00s plus two targeted
+final-evaluation-failure cases in3.84s; outer5.1503854+4.8885118 =
+**10.0388972s**, within300s. The synthetic9001 complete path exercises208
+synthetic steps,24 Adam calls,26 explicit resets and two constructors; its
+native calls are zero. The real8601 CLI/config binding is inspected with a stub
+and arithmetic only. Logs and `source-identity.json` remain in
+`temp/directions/ucope/analysis/continuous-8601-implementation-20260909/`.
+Independent original reviewer reported no unresolved material finding at
+a7f1a8; its trainable-count and completed-fit reporting findings were corrected
+and covered before that source commit. Final8a2e changes only native
+`card_section` from6 to5 while keeping fixture6; computation is byte-identical
+apart from that metadata line, so the same checks/review apply without rerun.
+
+**Decisions this intake produces:** options **(a)** accept final source and
+technical evidence for Root's required integration, then carry the already
+allocated invocation; **(b)** return a concrete reward/information/continuity/
+comparison/publication/scope defect to the original CM. Recommend/select **(a)**.
+**Owner-delegated decision (unattended, 2026-09-03 instruction): (a).** This is
+an **object-tier technical acceptance**, not new scientific selection, new
+invocation budget, stable benefit or native affordability evidence. Root still
+performs the requested source integration before launch; predictions and
+1163264-step/8192-Adam/448-evaluation allocation are unchanged.
+
+**Observation limit and remaining issue:** zero native/scientific invocations
+or master8601 RNG/model creation have occurred. Native effect and full remote
+runtime remain unknown. Automatic approval review rejected exact removal of
+the two completed CM-owned temp test directories before execution as
+`exec_command CreateProcess: rejected: blocked by policy`; CM retains cleanup
+ownership, receipts and scratch, without retry or bypass. Old scratch remains
+untouched. This filesystem cleanup issue does not change the scientific question
+or measurement. No material critic dissent, close-call or new owner item arises.
+
+At the 2026-09-09T14:50:12-07:00 boundary, main and direction `item.py reviews
+--json` both returned empty; main was402274b52e781f15b3ce40dc88a66a17be5f8daf.
+No owner reply is fabricated or marked answered. The next required owner of
+work is Root for integration, then this same CM for exact detached launch and
+direct Monitor handover, followed by terminal collection and DM scientific intake.
