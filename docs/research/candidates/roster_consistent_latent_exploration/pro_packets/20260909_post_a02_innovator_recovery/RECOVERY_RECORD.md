@@ -108,4 +108,16 @@ optimizer steps, tests and experiments. Engineering-scope §4 additions: none. A
 handoff is not confirmed Pro generation. Root owns dispatch/forwarding, Transport owns provider
 operation/observation, and DM owns response intake.
 
+## Ready publication
+
+TASK was committed/pushed at `c03c37a6f186a27c2abce3c387aec8a0548325ab`, then bound by the
+current renderer to its exact committed bytes. The fixed
+[TASK link](https://github.com/CartmanFatass/My-paper-code/blob/c03c37a6f186a27c2abce3c387aec8a0548325ab/docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260909_post_a02_innovator_recovery/TASK.md)
+is ready in HANDOFF. Current read-only `validate_request.py` accepts the embedded transport
+request with the intended source, parent, singleton operator, 6 Pro requirement, absent requested
+conversation and owner-directed reset evidence. The short provider-prompt digest and publication
+facts are in PREPARATION_FACTS. `git diff --check` passes; all original request/blocker/scientific
+files remain unchanged. The following binding commit is the exact HANDOFF source returned to
+Root. No Send or dispatch has occurred during preparation.
+
 scope: none
