@@ -53,6 +53,9 @@ remains dated provenance under the controlling evidence specification section 11
   recommendation is a separately allocated independent repeat of this budget
   curve; no successor is allocated here. All earlier hover losses, sampled
   gains and the no-unchanged-normalization recommendation remain.
+  Root subsequently allocates one independent8602 pair in1040f2d97 under the
+  adopted synthesis. Its [standalone prospective card](UCOPE_UAV_SHORT_FIXED_RENEWAL_CONTINUOUS_B01_8602_SCIENCE_CARD_20260909.md)
+  preserves the recipe and all outcomes; no8602 scientific output is observed.
 - Previous within-family direction-tier decision:
   **2026-09-09 PRO_FINAL / CONTINUE** inside the existing own-expiry renewal
   family. Select the next bounded B question comparing learned renewal T,
@@ -252,6 +255,13 @@ family disposition, C promotion, recast or Portfolio priority. The current
 one-invocation allocation ends. Its full1163264 native steps/8192 Adam/448
 evaluations completed in1289.50s; both arm and whole caps passed, with CPU
 accounting unmeasured. Engineering completion does not enlarge the claim.
+
+Root's separate1040f2d97 allocation now supplies that one independent pair,
+fresh8602 with unchanged raw F/G/H, continuous2048 learning and all fixed panels.
+The [8602 card](UCOPE_UAV_SHORT_FIXED_RENEWAL_CONTINUOUS_B01_8602_SCIENCE_CARD_20260909.md)
+and [prospective intake](UCOPE_UAV_SHORT_FIXED_RENEWAL_CONTINUOUS_B01_8602_INTAKE_20260909.md)
+record this next discriminator before source binding/output. It supplies no new
+effect, direction/Portfolio disposition or automatic third pair.
 
 See [DM scientific intake §§6–10](UCOPE_UAV_SHORT_FIXED_RENEWAL_CONTINUOUS_B01_8601_INTAKE_20260909.md#6-scientific-intake-of-the-completed-8601-result),
 [E0 evidence and full curve](UCOPE_UAV_SHORT_FIXED_RENEWAL_CONTINUOUS_B01_8601_RESULT_EVIDENCE_20260909.md),
