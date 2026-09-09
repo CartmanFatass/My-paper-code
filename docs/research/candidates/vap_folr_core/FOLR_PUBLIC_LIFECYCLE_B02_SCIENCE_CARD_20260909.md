@@ -5,8 +5,9 @@ Binding MARL structure: (a) roster change; (d) other-agent non-stationarity or p
 
 ## 1. Status, question and retained evidence
 
-**B/EXPLORE; exactly one RETAIN/RESET training pair is now allocated.** Root's subsequent
-execution assignment is recorded in §6 and the [execution intake](FOLR_PUBLIC_LIFECYCLE_B02_INTAKE_20260909.md).
+**B/EXPLORE; the allocated pair completed with a valid RESET_ABOVE_MEI result.** Root's
+execution assignment is recorded in §6; the [scientific intake](FOLR_PUBLIC_LIFECYCLE_B02_INTAKE_20260909.md)
+§§3–6 records acceptance and the bounded reading. This allocation is finished; no successor is allocated.
 The original preparation and implementation assignments each had zero scientific execution;
 this new allocation does not reopen B01's completed batch. The
 [preparation intake](FOLR_PUBLIC_LIFECYCLE_B02_PREPARATION_INTAKE_20260909.md) records that
@@ -143,7 +144,7 @@ counterfactual rollout or selected-checkpoint sweep. Prospective exposure per ar
 | --- | ---: | ---: | ---: |
 | B01 same-workload point reference, seconds | 770.69 | 746.89 | 1,517.58 |
 | B02 prospective hard limit, seconds | 1,800 | 1,800 | 3,600 |
-| B02 actual elapsed | unmeasured | unmeasured | unmeasured |
+| B02 actual complete invocation wall, seconds | 767.84 | 753.11 | 1,520.95 |
 
 The dominant loop work ratio to B01 is 1.0 on the same CPU FP32/thread topology. The point
 reference is not a guaranteed upper bound or new consumed cost; fresh trajectories and

@@ -179,7 +179,8 @@ alternatives to beneficial forgetting. Tuned headroom on this information varian
 independent matched training pair under the same comparison and final-evaluation protocol,
 preserving every sign. The prepared B02 card now fixes fresh training/evaluation randomness
 at the same finite exposure to test repeatability of this trained-package effect, not causal
-memory isolation. B01's finite allocation ended and B02 remains unallocated. Repeated
+memory isolation. B01's finite allocation ended; B02 was initially unallocated and later
+executed under its separately recorded allocation. Repeated
 evaluation of the B01 weights would not add an independent training sample. Historical B04/P77
 boundaries and old FOLR/DISH pauses are unchanged; no family, priority or lifecycle disposition
 follows. The special review's FOLR section supports this question preparation; Root retains
@@ -192,3 +193,43 @@ References:
 - `FOLR_PUBLIC_LIFECYCLE_B01_INTAKE_20260909.md`
 - `FOLR_PUBLIC_LIFECYCLE_B02_SCIENCE_CARD_20260909.md`
 - `FOLR_PUBLIC_LIFECYCLE_B02_PREPARATION_INTAKE_20260909.md`
+
+## Accepted public-lifecycle B02 science — 2026-09-09
+
+**Conclusion.** A fresh independently initialized/trained pair at seeds 7802/107802 gives
+RETAIN `1.3278125`, RESET `3.250625`, and `d_02=-1.9228125`: `RESET_ABOVE_MEI` under the
+unchanged absolute MEI 1.0. Both arms completed 100,000 training ticks/4,969 RMSprop steps
+and 32 final greedy episodes. The pre-output RESET_ABOVE_MEI prediction matched. B01 stays
+separate at `d_01=-2.0021875`; its prior WITHIN_MEI prediction remains a miss.
+
+**Bounded claim.** The observed final RESET preference repeated in these two fitting/evaluation
+instances on the same explicitly public-lifecycle easy Traffic Junction package. The
+two-pair mean difference -1.9625 is descriptive and changes neither object's branch.
+This supports preliminary trained-package repeatability, not stable population superiority,
+particular harmful memory contents, typed/strictly-self state, original-CAMA information
+performance or transfer. Approximate discounted learning and undiscounted final return
+remain different quantities; the mechanism attribution is unresolved.
+
+**Strongest support and contradiction.** The new final comparison contains 292/389 true
+survivor-control opportunities and 0/389 RETAIN/RESET resets, with all 64 returns preserved.
+Both independent pairs have an above-MEI RESET point against generic RETAIN at the same
+exposure. Against a wider conclusion stand only two training instances, outcome-informed
+selection of B02 and wide conditional episode variation (new SD 5.520/9.253). B02 has higher
+RESET training mean (-3.798230 versus -4.716158), while B01's lower RESET training mean is
+preserved. Finite optimization/data paths, partner co-adaptation and evaluation variation
+remain live explanations. Same-information tuned headroom remains absent.
+
+**Surviving alternative and next discriminator.** Generic RETAIN remains a competent legal
+comparator. The next direction-local recommendation is another fresh matched fitting/
+evaluation instance under the same package, with every sign retained, to probe repeatability
+further. It is advice, not a new card, fixed seed quota or automatic invocation. B02's finite
+allocation is complete; Root owns integration and later execution capacity. No family,
+priority/lifecycle or C/UAV disposition follows from this B result.
+
+References:
+
+- `FOLR_PUBLIC_LIFECYCLE_B02_SCIENCE_CARD_20260909.md`
+- `FOLR_PUBLIC_LIFECYCLE_B02_RESULT_SUMMARY_20260909.json`
+- `FOLR_PUBLIC_LIFECYCLE_B02_RESULT_EVIDENCE_20260909.md`
+- `FOLR_PUBLIC_LIFECYCLE_B02_INTAKE_20260909.md`
+- `evidence/2026-09-09-folr-public-lifecycle-b02-run-analysis.json`
