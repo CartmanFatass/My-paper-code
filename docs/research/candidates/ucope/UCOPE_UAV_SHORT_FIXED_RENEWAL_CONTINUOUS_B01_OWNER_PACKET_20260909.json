@@ -1,0 +1,49 @@
+{
+  "question": "保留所有者已指示执行的一对UCOPE连续训练预算曲线卡，并查看固定续约在普通反馈多训练后是否仍有用。",
+  "changes_if_approved": [
+    {
+      "target": "UCOPE连续短固定续约B01，master8601",
+      "from": "既有512轮F/G有阳性差值但悬停损失反复出现；8501归一化主差WITHIN，已结束",
+      "to": "原始F{1,2}/G各连续训练2048轮；512/1024/2048各评价64轮、H一次64轮；最终F−G为主，保留全曲线与悬停差；训练评价reset与随机流事前隔离"
+    }
+  ],
+  "if_refused": "依你的具体覆盖指令停止尚未执行部分或修订卡；保存已生成证据和全部旧结果，不从改判推出方向关闭。现有执行授权不等待你再次回复。",
+  "evidence_for": [
+    {
+      "path": "docs/research/portfolio/pro_packets/20260909_third_party_planning_comparison/RESEARCH_PLAN_SYNTHESIS_CODEX_20260909.md",
+      "quote": "现有短保持 F 的收益，到了普通反馈 G 有更多学习机会时，是否仍有任务价值？",
+      "why": "所有者已把最终综合稿交给Root作为执行命令；该问题直接改变对现有预算下收益的解释。"
+    },
+    {
+      "path": "docs/research/candidates/ucope/UCOPE_UAV_SHORT_FIXED_RENEWAL_B03_SCIENCE_CARD_20260909.md",
+      "quote": "One accepted 8301 execution is valid complete **UP**: F−G **+0.06439366516106426**",
+      "why": "有真实有限训练的F/G差值可供新预算曲线区分，仍只是一对新学习历史。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/ucope/UCOPE_UAV_SHORT_FIXED_RENEWAL_B03_SCIENCE_CARD_20260909.md",
+      "quote": "Both hover contrasts are adverse: F−H **−0.029184443306665326**, G−H **−0.09357810846772958**.",
+      "why": "F胜G未必比不动有用；更多训练也不保证改善。"
+    },
+    {
+      "path": "docs/research/candidates/ucope/UCOPE_UAV_FEEDBACK_VALUE_NORMALIZATION_B01_8501_INTAKE_20260909.md",
+      "quote": "−0.004783423897661355",
+      "why": "归一化没有显示所选尺度的收益，不能拿新预算问题掩盖该结果或宣称已定位弱反馈原因。"
+    }
+  ],
+  "uncertainty": [
+    "同一训练的三个点不是三个独立训练seed；64个评价世界只能描述给定策略的条件表现。",
+    "F独有head计算约179亿至358亿MAC；参数数相等不等于计算相等。",
+    "同信息调好基线与上参考headroom仍缺失；H不是上界，也不是B有效性门槛。",
+    "实际运行时间及最终回报未知；所有正负结果保留，不能挑最好checkpoint。"
+  ],
+  "cost": {
+    "compute": "已分配一对：1163264原生步、8192次Adam、448次评价；P84外推F约675秒/G含H约533秒，非保证。上限1800秒/完整臂、3600秒/整项，支持检查300秒；不含重试、调参、第二对或自动后继。",
+    "owner_time": "异步查看冻结比较与结果读法，无需重复授权。",
+    "reversibility": "costly",
+    "waits_on_this": "nothing；按现有所有者命令推进，先完成Root已要求的源码接受/集成再运行。"
+  },
+  "verdict_text": "Freeze the owner-directed continuous-budget B: one fresh8601 raw F/G pair, final2048 F−G primary, all three fixed evaluation panels and shared H, with disjoint reset domains and isolated evaluation streams.",
+  "source": "docs/research/candidates/ucope/UCOPE_UAV_SHORT_FIXED_RENEWAL_CONTINUOUS_B01_8601_INTAKE_20260909.md"
+}
