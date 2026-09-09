@@ -24,7 +24,7 @@
     }
   ],
   "recommended": "ratify",
-  "auto_applied": null,
+  "auto_applied": "amend",
   "dm_reason": "两个首组问题已具体关联现有未决证据，能形成有限而可解释的比较；VSP03更便宜的反对理由仍保留。",
   "evidence": [
     "docs/research/portfolio/decisions/2026-09-09-foundations-scientific-validity-review.md",
@@ -72,5 +72,15 @@
     "verdict_text": "### 后续是问题准备次序，不是新的调用队列\n\n\n\n**先完成不增加实验的纠正。** Root 在后续正常 intake 中修正 RCLE 当前状态和 CRTO 索引字样；将本报告中需要降低解释强度的句子附在相应旧记录旁。原 DM/CM 处理 CRTO 的未触发 guard 风险及 RCLE 的真实缺失依赖。不要为这两条事实开一项十方向普查，也不要删除旧产物或把每个警告变成一个新 A。\n\n\n\n**第一组准备：UCOPE、FOLR。** UCOPE 已有与实际 loss/clip 路径相连的 normalized/raw G 问题，宜先把尚未选择的具体比较补完整；现有331.58秒只是原P85参考，不是新方案时长。FOLR有一个反向但可解释的完整训练对，原建议的独立训练比较直接回答重复性；已测约1,518秒显示其成本明显不是VSP03那样的几秒。两者无需先做完整原因审计，也不互为资格前置。\n\n\n\n**第二组准备：RCLE 的可恢复配对问题，以及有明确优先价值时的 VSP03 原节点复议。** RCLE首先缺的是比较产物和受控运行风险，不是更多梯度推演；前缀未知使任何后续不能宣称原W100已完整计费或未执行。VSP03是十项中再次同配置训练的直接计算成本最低、又有两个真实正点的停止争议，但它仍是当前暂停包，只能把这份价值意见返回原节点，不能据此直接启动第四次。\n\n\n\n**其余维持现时边界。** SCDMP的小正点可作为未来重复性问题的理由，目前不自动追加；FSD、VSP-C1、ACVC、MGTAP、CRTO按各节说明保持具名停止。重入条件是一个具体、能改变决策的比较或对重复性的重新估价，不是事先证明成功。其作用、信息和对照必须清楚，但不要求独特机制证明或全新架构。任何改变旧margin、host、控制器或支持的提案都须明确说是新问题。\n\n\n\n以上顺序仅是本 Portfolio 节点的待整合建议，不变更当前 HIGH/MEDIUM/LOW。SCDMP、ACVC 的第二次 recast／争用时最低排序保持；UCOPE、VSP03已记次数也不重算。科学回报的有效性先判断，排序再考虑已有成本与授权；不为凑满五个工作链制造研究。当前各方向运行额度均不因本报告恢复。",
     "source": "docs/research/portfolio/pro_packets/20260909_foundations_special_review/archive/RESPONSE.md"
   },
-  "starred": true
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-09T21:26:50+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/decisions/2026-09-09-synthesis-execution.md",
+      "record": "docs/research/portfolio/decisions/2026-09-09-synthesis-execution.md",
+      "state": "applied",
+      "summary": "后续综合方案执行命令接续当前投入次序；旧归一化/重复准备已完成，不伪造对旧提案逐字ratify。"
+    }
+  ]
 }

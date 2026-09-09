@@ -73,5 +73,15 @@
     "verdict_text": "Owner-delegated decision (unattended, 2026-09-03 instruction): (a), execute one B03 pair\nunder Root's explicit finite allocation.",
     "source": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_B03_INTAKE_20260909.md"
   },
-  "starred": false
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-09T21:26:50+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_B03_INTAKE_20260909.md",
+      "record": "docs/research/portfolio/decisions/2026-09-09-synthesis-execution.md",
+      "state": "applied",
+      "summary": "Root已验收并集成0653b30ed为main5f14975aa；分支auditL17映射mainL151；原两臂卡不变，RETAIN已实际监控接管。"
+    }
+  ]
 }
