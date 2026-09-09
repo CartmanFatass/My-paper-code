@@ -5,9 +5,10 @@ Binding MARL structure: (a) roster change; (d) other-agent non-stationarity or p
 
 ## 1. Status, question and retained evidence
 
-**B/EXPLORE; frozen prospective design, no scientific invocation allocated.** Root's current
-assignment authorizes this card and an implementation-ready assignment with zero scientific
-execution. It does not extend B01's completed run allocation. The
+**B/EXPLORE; exactly one RETAIN/RESET training pair is now allocated.** Root's subsequent
+execution assignment is recorded in §6 and the [execution intake](FOLR_PUBLIC_LIFECYCLE_B02_INTAKE_20260909.md).
+The original preparation and implementation assignments each had zero scientific execution;
+this new allocation does not reopen B01's completed batch. The
 [preparation intake](FOLR_PUBLIC_LIFECYCLE_B02_PREPARATION_INTAKE_20260909.md) records that
 authority and the relevant special-review reading; the review itself allocated no training.
 
@@ -33,8 +34,8 @@ not tuned headroom. The old B04 scalar host does not supply a matching baseline.
 The complete unchanged scientific recipe is [B01 card §§2–3](FOLR_PUBLIC_LIFECYCLE_B01_SCIENCE_CARD_20260909.md#2-native-host-information-and-state-intervention),
 frozen at `97eb1683ee2a19d56918b80e2e92ff939328aa7a` and implemented at
 `387a40f3f1c15ba0ddc4c59d9245ff2b47bc2358`. Its information/state/native-reward and learning
-semantics remain binding; B02's new source SHA will identify only the later accepted seed
-plumbing change. No launch SHA is invented in this preparation.
+semantics remain binding. The accepted B02 seed-routing source is
+`434f10cf95f16dd342cbf754382aa76155fcd2b7`; the original preparation invented no launch SHA.
 
 - Keep CAMA `1d8d6f8c44102d7b8904bf44eeb38cd1276dbb58` easy Traffic Junction: five slots,
   five actions, vision 1, 7×7 grid, 20 native steps, add rate 0.1 under ordinary reset, native
@@ -151,10 +152,10 @@ invocation, including startup/imports, learning, final evaluation and publicatio
 Prospective supporting seed-plumbing checks and artifact readbacks have a **60s total** cap,
 including necessary correction reruns; this is added verification, not algorithmic exposure.
 
-If later allocated, run exactly RETAIN then RESET, regardless of an intact first-arm sign.
+Under the §6 allocation, run exactly RETAIN then RESET, regardless of an intact first-arm sign.
 No pilot, retry, tuning, extra evaluation, local fallback or automatic successor is included.
 Admission failure, a cap, damaged primary path or exhausted scoped engineering/check budget
-returns the exact boundary without another scientific invocation. Current preparation has
+returns the exact boundary without another scientific invocation. The original preparation had
 zero target imports/calls, simulator steps, learning/evaluation, resource admissions and runs.
 
 ## 5. Engineering scope, acceptance and execution boundary
@@ -180,15 +181,51 @@ concrete semantic discrepancy appears, return it to DM without changing the ques
 Ordinary 2,000 new non-test-source/600 runner line limits remain; no new framework is needed.
 
 Use the shared `C:/Projects/HMASD-worktrees/codex-vap-folr` / `codex/vap-folr` checkout.
-No CM is dispatched and no source is edited by this preparation. After a later allocation,
+The original preparation dispatched no CM and edited no source. Under the later §6 allocation,
 portable execution uses configured `hmasd-wsl-node` and `/home/wu/.venvs/hmasd/bin/python`,
 CPU FP32, one Torch compute and interop thread, native NumPy arithmetic. Host identity is
 not the estimand; no device/dtype/topology substitution follows. Commit/push exact new source,
 create a new detached exact-SHA execution worktree, and use fresh B02 output roots. The B01
 execution worktree/handles have been archived and reclaimed and must not be resumed.
 
-Immediately before each later arm, join destination `admit-memory` and its exact runner
+Immediately before each arm, join destination `admit-memory` and its exact runner
 with `&&`, requiring physical/effective available memory at least 4 GiB before scientific
 roots, RNG or model creation. CM records actual SHA/command/node/cwd/root, receipt and
-accepted supervisor handle and owns observation through collection. No such command or
-receipt is created here. Return the card and assignment to Root for later sequencing.
+accepted supervisor handle and owns observation through collection. Execution facts and
+complete results are recorded by CM and taken in by DM; Root integrates the accepted return.
+
+## 6. Execution allocation and prediction before output — 2026-09-09T20:05:36Z
+
+Root accepted the narrow source, technical evidence and DM intake, integrated them on main,
+then allocated exactly two accepted arm submissions: one RETAIN and one RESET at training
+seed 7802/final evaluation seed 107802. The original CM executes them sequentially from
+the committed/pushed source `434f10cf95f16dd342cbf754382aa76155fcd2b7`, on fresh detached
+remote execution state, and observes each accepted handle through terminal publication and
+verified collection. The shared authoring checkout remains `codex/vap-folr`; no new
+authoring branch or B01 recovery is involved.
+
+**Object-tier execution selection:** (a) execute the frozen independent training pair;
+(b) defer it and retain only B01's observation. Recommend/select (a), because the next
+observation must test the complete trained effect on a new independent fitting process.
+**Owner-delegated decision (unattended, 2026-09-03 instruction): (a), under Root's new finite
+execution allocation.** This is not a priority, lifecycle, comparator or direction change.
+
+The §3 prediction remains **RESET_ABOVE_MEI**, outcome-informed from B01 and recorded before
+any B02 output; confidence remains limited. Owner prediction: **not taken (unattended)**.
+The inclusive ±1 branches apply to `d_02` alone, with B01 displayed separately. All §2–5
+science, exposure, host/device and result interpretation stay fixed.
+
+Complete limits remain 1,800s per arm and 3,600s per pair. The 60s supporting-check/readback
+budget includes CM's already spent 3.0730197s and DM's 0.0661974s: **3.1392171s spent,
+56.8607829s remaining at this allocation**. Reuse the two controlled cases and unchanged
+semantic acceptance; no native smoke or repeated scientific check is allocated.
+Pre-acceptance technical failures may be repaired within the existing rules/budget;
+uncertain acceptance is reconciled against the same handle. A failed scientific attempt
+retains evidence and returns without a replacement. No missing arm is silently paired.
+There is no pilot, tuning, additional seed/arm, diagnostic, retry or automatic successor.
+
+CM records per-arm and complete study timing, keeping summed invocation wall, aggregate CPU
+work and elapsed critical path separate. The completed return includes all outcomes,
+resource receipts, exact commands/handles, collected artifacts and cleanup inventory. DM
+performs scientific intake, prediction scoring, the Chinese brief and audit; Root handles
+integration and any later successor allocation. Previously blocked scratch stays with CM.
