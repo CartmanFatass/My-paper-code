@@ -11,3 +11,6 @@ Post-learner coverage: reuse accepted B05 pipeline-stub checkpoint/architecture/
 Frozen execution: configured hmasd-wsl-node CPU FP32, one process/numerical thread; detached cwd and handle exactly card §9. Fresh configured-node canonical memory admission precedes scientific state in the same chain. CM remains sole observer; stop at terminal all-outcome technical collection. At most one accepted supervisor submission, with no retry/successor.
 
 The sole submission was accepted 2026-09-09T04:31:42Z under the fixed handle; supervisor PID3019318 was running with tmux active at24s. Canonical actual-node admission at04:31:42.703984Z passed both floors with15,637,360,640 bytes available. The allocation is spent; CM retains observation and no resubmission is authorized. Accepted receipt is adjacent; scientific source remains bda90e1db76a00123ba889ed6c4b05225473f4cb.
+
+
+Terminal: fixed handle finished exit 0 at 2026-09-09T04:36:57Z. Artifact checks PASS, actual enclosing 315.20s, both conservative arm bounds below 1800s. Full technical acceptance, native endpoints and optional measurement limits are retained in [E0 result evidence](VSPC1_NATIVE_HOLD_VALUE_B05_RESULT_EVIDENCE_20260908.md). CM observation is complete; no second submission occurred.
