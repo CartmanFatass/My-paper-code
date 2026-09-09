@@ -1,8 +1,8 @@
 # P79 preparation intake — one post-B12 direction question
 
-Current state: one scoped question prepared for fixed GitHub publication; no Pro
-decision, new card or scientific invocation. This record will receive the exact
-publication binding before return to Root. Direction disposition remains pending.
+Current state: fixed GitHub TASK published and handoff READY_TO_DISPATCH for Root.
+No Pro decision, new card, scientific invocation or DM dispatch. Direction
+disposition remains pending; all preparation work is committed for return.
 
 ## 1. Assignment, authority and checked starting state
 
@@ -158,3 +158,35 @@ generic-body additive test. Strongest contradiction is 8503's large768 deficit,
 all three reductions and the negative512 point. The next discriminator is the
 formed Convergence decision on that concrete investment, not more local code
 or another training result under P79.
+
+### Ready fixed handoff — 2026-09-09T11:42:59Z
+
+Request `2026-09-09-vspc1-native-hold-value-post-b12-convergence-01`, caller `em`, node `em_convergence`,
+existing binding `em:vsp_c1:convergence`, reuse required, no reset.
+Input evidence/base SHA **`a35611b5f43e9bcb72045bb896bf3f09b0285000`** was
+the actual remote direction HEAD when REQUEST was authored. TASK commit
+**`6e79265827c31f10870b89d6b0fef36274e0acf7`** is pushed. The renderer compared its
+committed bytes before binding; direct GitHub contents readback also matched
+local/committed TASK bytes (SHA256 `ba46f295bd4100f7c7a84c60ff41b8f2b90bd5711745255aa4511dc3ab21cb20`).
+
+[Fixed TASK](https://github.com/CartmanFatass/My-paper-code/blob/6e79265827c31f10870b89d6b0fef36274e0acf7/docs/research/candidates/vsp_c1/pro_packets/20260909_native_hold_value_post_b12_convergence/TASK.md).
+Ready [HANDOFF](pro_packets/20260909_native_hold_value_post_b12_convergence/HANDOFF.json) uses `github_delivery`/`paste`; its exact prompt refers only to that TASK.
+Delivery is the existing `codex/direction-vsp_c1` descendant branch, one
+`docs/research/candidates/vsp_c1/pro_packets/20260909_native_hold_value_post_b12_convergence/archive/RESPONSE.md`
+and Issue5. The existing Issue is open and its11-comment snapshot is retained.
+
+Actual internal routing:
+
+- author/source: `01a081d4-89c6-7821-97d8-209ac47172f1` (original native DM);
+- parent/receipt: `01a07249-b095-7821-8ce2-e9c32ba85267` (Root);
+- operator: `01a07e52-f085-76a0-886a-4127f490421f` (configured independent Transport).
+
+Nested/top-level routes agree, `pro_send_from_caller=false`. Root receives the
+full handoff commit/path and fixed TASK URL, reads those exact authored bytes,
+and handles any dispatch once without model/effort overrides. **P79 has made
+no provider Send or Transport dispatch.** No existing accepted packet changed.
+
+JSON parsing, all new Markdown links, known integer/parameter arithmetic, the
+324-character six-heading Chinese brief, exact TASK readback and scoped diff
+checks passed. No code or scientific test ran. The operational boundary is clean
+and recoverable; scientific direction state awaits the formed node response.
