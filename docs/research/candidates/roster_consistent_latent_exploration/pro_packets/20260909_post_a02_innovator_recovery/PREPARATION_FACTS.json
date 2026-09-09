@@ -175,5 +175,22 @@
   "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
   "authorized_execution_thread_id": "01a07e52-f085-76a0-886a-4127f490421f",
   "superseded_unexecuted_plan": "Root personal execution was initially assigned, then superseded before publication/dispatch by: 你确认能够正常发送后 后续transport就交给专用session即可.",
-  "last_preparation_update_utc": "2026-09-09T16:24:27.997821+00:00"
+  "last_preparation_update_utc": "2026-09-09T16:24:27.997821+00:00",
+  "task_commit": "c03c37a6f186a27c2abce3c387aec8a0548325ab",
+  "task_url": "https://github.com/CartmanFatass/My-paper-code/blob/c03c37a6f186a27c2abce3c387aec8a0548325ab/docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260909_post_a02_innovator_recovery/TASK.md",
+  "task_sha256": "f90292043042f911984c94fcb3563f6c674b5a3be5c6f24417e74cf59d5ca897",
+  "prepared_handoff_sha256": "802b595856733bc34a8d772a0c3709e901eb9c13cfff9001e376a874dddaf8b7",
+  "preparation_state": "READY_TO_DISPATCH; DM has not dispatched",
+  "read_only_handoff_validation": {
+    "valid": true,
+    "request_id": "2026-09-09-rcle-post-a02-innovator-recovery-01",
+    "source_thread_id": "01a081be-08a9-7dd3-b057-c0a8f060177e",
+    "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+    "operator_thread_id": "01a07e52-f085-76a0-886a-4127f490421f",
+    "operator_model": "gpt-5.6-luna",
+    "operator_thinking": "high",
+    "requested_conversation_id": null,
+    "reset_invalid_provider_context": true,
+    "prompt_sha256": "e465735fca32db267e4e7f3f0d65d9891092c2218f579ff4662d1df7366900ca"
+  }
 }
