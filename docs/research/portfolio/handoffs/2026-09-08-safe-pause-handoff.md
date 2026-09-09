@@ -1,5 +1,7 @@
 # HMASD 安全暂停 handoff — 2026-09-08
 
+> Historical completed pause: owner explicitly resumed on 2026-09-08; follow [P67 resume](2026-09-08-research-resume.md). The facts and spent allowances below remain unchanged.
+
 ## 目的与边界
 
 本 handoff 根据 owner 的最新指令建立“安全暂停”边界。当前已接受的方向任务只完成各自已经授权的收尾；到达清洁边界后停止自动研究循环。暂停期间不新增 Portfolio replacement，不发起新的 Pro Send，不创建新的研究方向，不改变冻结卡片、比较器、预算、RNG、设备或证据含义。
