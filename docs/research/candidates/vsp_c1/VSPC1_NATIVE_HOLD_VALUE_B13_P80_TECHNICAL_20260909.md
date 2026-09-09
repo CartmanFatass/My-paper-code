@@ -77,3 +77,17 @@ ssh -o BatchMode=yes -o ConnectTimeout=10 hmasd-wsl-node /usr/local/bin/agent-ta
 
 Whole wrapper includes startup/admission through H/publication/readback/exit.
 The single accepted submission consumes the allowance, including a prelearner failure.
+
+## Accepted submission
+
+Accepted 2026-09-09T12:49:54Z on hmasd-wsl-node, handle
+`vspc1_hold_value_b13_8601_23ebb0f5e222`, PID 3052500, detached tmux supervisor.
+Wrapper commit `83b6e2f8c28cbf5e9925252c31057446cce3362e`.
+[Staging evidence](VSPC1_NATIVE_HOLD_VALUE_B13_P80_STAGING_EVIDENCE_20260909.json)
+retains exact source/payload digests and readback, detached clean HEAD, interpreter,
+prior handle/output/admission absence and exact submission argv. All 14 hashes matched.
+Actual-node adjacent admission passed at 12:49:54.754938Z; both physical/effective
+available memory were 15323074560 bytes. Admission is not runtime peak evidence.
+Raw receipts: `temp/directions/vsp_c1/engineering/native_hold_value_b13_p80/`.
+CM `/root/dm_vspc1_p49_value_question/cm_am_vspc1_hold_value_b01` is sole observer
+through terminal collection. One accepted submission spent; zero remain.
