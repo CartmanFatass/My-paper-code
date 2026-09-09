@@ -1,6 +1,6 @@
 ---
 name: hmasd-owner-item
-description: Use when DM, Portfolio or Root records a P1/P2 owner item (new card, direction decision, material dissent, close call, second recast or Portfolio proposal), and at clean boundaries to apply owner reviews.
+description: Use when DM or Root records a P1/P2 owner item (new card, direction decision, material dissent, close call, second recast or Portfolio proposal), and at clean boundaries to apply owner reviews.
 ---
 
 # HMASD owner items

@@ -1,8 +1,7 @@
 # Root observes accepted experiments; independent Transport owns Pro requests.
 thread_id = "01a07249-b095-7821-8ce2-e9c32ba85267"
 root_thread_id = "01a07249-b095-7821-8ce2-e9c32ba85267"
-model = "gpt-5.6-luna"
-thinking = "xhigh"
+# Root uses the model and reasoning effort selected by the owner.
 # Automatic execution is driven by the owner's goal; no scheduled automation.
 primary_checkout = 'C:\Projects\HMASD'
 monitor_checkout = 'C:\Projects\HMASD'

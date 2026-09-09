@@ -37,11 +37,10 @@ Exit zero is a process fact, not scientific validity.
 
 On completion, failure, lost observation or a supplied bound/reminder, record the direct
 fact and evidence and notify the responsible DM/CM. Log the routine receipt in
-`docs/research/portfolio/root-log/YYYY-MM-DD.md`; notify Portfolio only under
-SIBLING_COMMUNICATION.md's actionable-message filter. Root follows the command's named
+`docs/research/portfolio/root-log/YYYY-MM-DD.md`. Root follows the assignment's named
 collection/intake route with `followup_task` to the same native CM/DM whenever work is required,
 regardless of its last observed running/idle state. Direction-local continuation stays with its
-assigned DM/CM; only a replacement or conflict beyond that route needs Portfolio. Reconcile
+assigned DM/CM; Root resolves working-set replacements and conflicts beyond that route. Reconcile
 uncertain delivery before retrying, and distinguish recorded follow-on work from an accepted
 continuation. The current tracking row records that handoff and its next observed turn/return.
 Healthy unchanged state is silent: no per-poll messages, commits or sleep loops.

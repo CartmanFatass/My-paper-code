@@ -1,8 +1,10 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-08 (owner safe-pause completed)
+Updated at: 2026-09-08 (Root owns Portfolio planning and execution; research remains paused)
 
 Safe-pause handoff: [2026-09-08-safe-pause-handoff.md](handoffs/2026-09-08-safe-pause-handoff.md) is now `PAUSED`. UCOPE P61, VSP03 P65/P64 and VSPC1 P66 completed their already-authorized implementation/one execution/collection/intake routes; no live accepted handle or unfinished DM/CM closeout remains. No replacement, new Pro Send, retry or scientific exposure is permitted until the owner explicitly resumes. The detailed paragraphs below are retained planning history and are not current executable commands.
+
+Root maintains scientific comparison, working-set readiness, selection, acceptance and integration in the primary session. Current workflow: [ROOT_OPERATIONS.md](../../project/ROOT_OPERATIONS.md).
 
 Prior planning snapshot: P66 independent VSPC1 normalized pair
 
@@ -187,7 +189,8 @@ Audit ledger (delegated decisions): `docs/research/portfolio/audit/<YYYY-MM-DD>.
 Controlling decision:
 `docs/research/portfolio/decisions/2026-09-01-empirical-standard-full-direction-reaudit.md`;
 direction registration 2026-09-02: `docs/research/portfolio/decisions/2026-09-02-register-flexible-skill-duration.md`
-Current execution ownership: `docs/project/ROOT_OPERATIONS.md` and `decisions/2026-09-06-root-luna-portfolio-separation.md`. New exact Pro handoffs go to independent Transport from current config; native requests name Root as parent, while Portfolio declares this Portfolio task as receipt parent. Accepted legacy handoffs, bindings and Send facts remain immutable. The September 4 fresh-conversation cutover remains provenance, not the current executor endpoint.
+Current execution ownership: Root plans and executes under `docs/project/ROOT_OPERATIONS.md`. New Pro requests use independent Transport with Root as receipt parent; Root intakes Portfolio responses and forwards direction responses to the responsible DM.
+
 Compute execution: `docs/research/portfolio/decisions/2026-09-04-remote-first-compute-routing.md`
 Direction working set: `docs/research/portfolio/decisions/2026-09-04-five-direction-execution-parallelism.md`
 Current organization and resume: `docs/research/portfolio/decisions/2026-09-04-adopt-nine-routes-and-resume.md`
@@ -199,7 +202,7 @@ Previous pause (superseded): `docs/research/portfolio/decisions/2026-09-04-pause
 Current controlling resume: `decisions/2026-09-05-resume-automatic-research.md`. Owner instruction 「继续自动推进任务」 supersedes the completed pause. Prior final handoff `handoffs/2026-09-04-resumed-round-pause.md` remains the recovery evidence; lifecycle and priority fields are unchanged.
 
 Current organization: the owner has adopted the revised two-category, six-family, nine-route
-map. Automatic execution continues through Root, independent Portfolio and the September 7 independent Transport endpoint. Five reserve sources initially changed to PARKED; the later September5 ACVC review restores that source to ACTIVE. All historical IDs,
+map. Root holds research planning and execution; independent Transport handles Pro browser work. The current pause above controls execution. Five reserve sources initially changed to PARKED; the later September5 ACVC review restores that source to ACTIVE. All historical IDs,
 cards, results and family boundaries are preserved. The initial two-investment recommendation
 was never applied. See `decisions/2026-09-04-adopt-nine-routes-and-resume.md` and the complete owner-supplied 6 Pro archive.
 
