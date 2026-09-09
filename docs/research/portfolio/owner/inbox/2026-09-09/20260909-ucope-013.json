@@ -86,6 +86,14 @@
       "record": "docs/research/candidates/ucope/UCOPE_UAV_FEEDBACK_VALUE_NORMALIZATION_B01_SCIENCE_CARD_20260909.md",
       "state": "applied",
       "summary": "Root只授权本次准备。accept实际仅表示科学卡已准备；工具默认标签launch as carded在此不代表源码实施、科学调用已被授权或已运行。当前运行额度0，所有未来实现/分配仍由Root具体任务处理。"
+    },
+    {
+      "at": "2026-09-09T19:47:33+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/ucope/UCOPE_UAV_FEEDBACK_VALUE_NORMALIZATION_B01_PREPARATION_INTAKE_20260909.md",
+      "record": "docs/research/portfolio/decisions/2026-09-09-foundations-scientific-validity-review.md",
+      "state": "applied",
+      "summary": "Root已核对并集成科学卡为7dcffabcc；主分支对应audit/2026-09-09.md#L141，原item行号为方向分支位置。当前accept表示卡已准备；另已给原DM/CM代码和合成检查任务，结果性实验调用仍为0。"
     }
   ]
 }
