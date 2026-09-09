@@ -85,21 +85,20 @@
   "starred": true,
   "execution_history": [
     {
-<<<<<<< HEAD
       "at": "2026-09-09T16:52:46+00:00",
       "authority": "PRO_FINAL / OWNER_DELEGATED",
       "source": "docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260908_held_residual_context_repair/archive/RESPONSE.md",
       "record": "docs/research/portfolio/root-log/2026-09-09.md",
       "state": "applied",
       "summary": "Root accepted/integrated the exact one-pair card4c618f335. Original branch ledger L6 maps to main audit2026-09-09 L122. CM owns its accepted source7d0fc9d00 one-pair execution and observation; no extra allocation."
-=======
+    },
+    {
       "at": "2026-09-09T17:13:24+00:00",
       "authority": "PRO_FINAL / OWNER_DELEGATED",
       "source": "docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260908_held_residual_context_repair/archive/RESPONSE.md",
       "record": "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_NATIVE_HOLD_RESIDUAL_B01_INTAKE_20260909.md",
       "state": "applied",
       "summary": "原单组已完整实现、独立review、运行并intake；主差+0.006737落在±0.01内。全部286720步、2048 Adam和96次评价完整；不重复原惩罚、不追加种子或后继。保留双端非零曝光、14次负对照差及两项H结果。"
->>>>>>> 40b27ad18 (Intake SCDMP residual-MC B01 as a complete WITHIN result)
     }
   ]
 }
