@@ -359,3 +359,41 @@ were empty at 2026-09-09T04:15:46Z. Item009 remains unratified; item010's
 definition acceptance is unchanged. No UP/WITHIN/DOWN, native-cost or mechanism
 decision follows. P69 ends at the pushed technical intake and Root allocation
 return; the future B05 sampled native pair remains the next discriminator.
+
+## 10. P70 allocation — one exact technical execution batch
+
+Root accepted the completed P69 source/technical return and now explicitly
+allocates **at most one accepted supervisor submission** for B05/master8301.
+This is a new P70 allocation after P69 ended, not owner ratification of item009
+and not a rewrite of P68/P69's zero-execution history. Scientific source remains
+`bda90e1db76a00123ba889ed6c4b05225473f4cb`; §9's exact node/cwd/payload/handle/
+output binding and §§2–6's science, UP(.55), MEI and all-outcome rule are unchanged.
+The pair remains286720 native steps/2048 Adam/96 evaluations, with1800s per
+complete learned arm and3600s through H/publication/readback/process exit.
+
+The same CM owns the whole technical batch: commit/push the literal wrapper if
+needed, stage exact scientific bytes and every runtime input including the
+canonical admission helper, compare the current source surface, and use the
+configured detached supervisor. Stage the science checkout at the bound full
+SHA; a separately committed literal wrapper does not change those scientific
+bytes or permit a moving checkout. Fresh actual-node admission must report
+both physical and effective available memory≥4GiB before scientific state.
+CM is sole observer through terminal all-outcome collection and technical
+acceptance; DM owns scientific intake/brief/audit. No per-shell Root relay or
+additional pre-launch approval step is added.
+
+If an unexpected prior handle/path exists, reconcile its actual state without
+launching. An actual input, cap or admission conflict returns its precise
+evidence; never silently substitute a path, helper, source, key or cap. No native
+smoke/pilot, extra seed/evaluation, retry/resubmit or automatic successor is
+allocated. One accepted submission spends this allocation even if the payload
+fails before learning; retain the failed identity and every independently
+trustworthy fact. This is an allocation boundary, not B-object consumption.
+
+Object-tier options: (a) execute exactly this new P70 one-submission allocation
+and take in every outcome; (b) enlarge/retry the pair or require an extra
+diagnostic first. Recommend/select(a). Owner-delegated decision (unattended,
+2026-09-03 instruction): (a), **OWNER_DELEGATED within explicit Root P70**.
+At this record the new allocation has zero accepted submissions and zero new
+scientific exposure. The source-test timing qualification in §9 remains intact.
+No scientific polarity or owner reply is inferred from this allocation.
