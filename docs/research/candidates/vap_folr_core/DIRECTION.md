@@ -233,3 +233,44 @@ References:
 - `FOLR_PUBLIC_LIFECYCLE_B02_RESULT_EVIDENCE_20260909.md`
 - `FOLR_PUBLIC_LIFECYCLE_B02_INTAKE_20260909.md`
 - `evidence/2026-09-09-folr-public-lifecycle-b02-run-analysis.json`
+
+## Accepted public-lifecycle B03 science — 2026-09-09
+
+**Conclusion.** A third fresh fitting/evaluation instance at7803/107803 reverses the
+observed preference: RETAIN `2.820625`, RESET `0.26125`, `d_03=+2.559375`, hence
+`RETAIN_ABOVE_MEI` under the same inclusive absolute MEI1.0. Both arms completed100,000
+training ticks/4,969 RMSprop steps and32 final greedy episodes. The prospective leading
+RESET_ABOVE_MEI prediction missed; the earlier prediction records remain unchanged.
+
+**Bounded claim.** The three trained-package differences are separately
+`-2.0021875`, `-1.9228125`, `+2.559375`. Their descriptive mean `-0.4552083333` and sample
+SD `2.6110073923` do not replace any frozen branch or establish equivalence, stable
+population superiority, beneficial forgetting or transfer. B03 weakens the simple
+repeatability expectation without erasing the two prior RESET observations. Public
+lifecycle visibility and the approximate discounted learner/undiscounted endpoint
+distinction remain explicit.
+
+**Strongest support and contradiction.** B03's intact native comparison includes321/290
+event-bound survivor-control opportunities and0/290 RETAIN/RESET resets. Its RETAIN
+preference also appears in mean training return (-4.892248 versus-5.837704). Conversely,
+the two earlier RESET final points contradict a general RETAIN-winner interpretation;
+B01's lower RESET training mean and B02's higher one remain separate. Only three training
+instances and broad conditional rollout variation (new SD6.463/5.407) leave optimization,
+data paths, partner co-adaptation and evaluation variation unresolved. Tuned same-information
+headroom is absent. The event-only counter is not an all-eligible-survivor denominator.
+
+**Surviving alternative and next discriminator.** Generic RETAIN remains a competent
+legal comparator. The owner-directed next judgment is a prospective event/random/RETAIN
+timing comparison informed by all three outcomes, with random frequency/matching and
+replay-mask semantics made explicit. An unmatched random arm cannot isolate timing from
+reset dose. This is preparation after B03, not an automatically allocated invocation or
+stronger claim. B03's finite allocation is finished; no family, lifecycle, priority,
+recast or C/UAV disposition follows.
+
+References:
+
+- `FOLR_PUBLIC_LIFECYCLE_B03_SCIENCE_CARD_20260909.md`
+- `FOLR_PUBLIC_LIFECYCLE_B03_RESULT_SUMMARY_20260909.json`
+- `FOLR_PUBLIC_LIFECYCLE_B03_RESULT_EVIDENCE_20260909.md`
+- `FOLR_PUBLIC_LIFECYCLE_B03_INTAKE_20260909.md`
+- `evidence/2026-09-09-folr-public-lifecycle-b03-run-analysis.json`
