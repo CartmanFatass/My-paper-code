@@ -1,0 +1,5 @@
+{
+  "journal_cgroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/vsp03-b04-p67-20260908.service",
+  "directory_exists": false,
+  "members": []
+}

@@ -1,0 +1,18 @@
+{
+  "source_sha": "828da00343e5036a4de93ccf1ec636e3b8c777b7",
+  "cwd": "/home/wu/hmasd-worktrees/vsp03-b04-p67-828da00343e5036a4de93ccf1ec636e3b8c777b7",
+  "node": "wsl_4070",
+  "handle": "vsp03-b04-p67-20260908",
+  "observer": "/root/dm_vsp03_p54_reentry/cm_b03_single_g",
+  "argv": [
+    "bash",
+    "/home/wu/hmasd-worktrees/vsp03-b04-p67-828da00343e5036a4de93ccf1ec636e3b8c777b7/experiments/candidates/vsp_03/vsp03_b04/launch_p67.sh",
+    "/home/wu/hmasd-worktrees/vsp03-b04-p67-828da00343e5036a4de93ccf1ec636e3b8c777b7"
+  ],
+  "ssh_command": "bash /home/wu/hmasd-worktrees/vsp03-b04-p67-828da00343e5036a4de93ccf1ec636e3b8c777b7/experiments/candidates/vsp_03/vsp03_b04/launch_p67.sh /home/wu/hmasd-worktrees/vsp03-b04-p67-828da00343e5036a4de93ccf1ec636e3b8c777b7",
+  "client_started_unix_s": 1788922071.958894,
+  "client_finished_unix_s": 1788922075.6877418,
+  "client_exit_code": 0,
+  "stdout": "",
+  "stderr": "Running as unit: vsp03-b04-p67-20260908.service; invocation ID: 5f02c336578644a7a5ad91d005a6a53a\nFinished with result: success\nMain processes terminated with: code=exited/status=0\nService runtime: 3.253s\nCPU time consumed: 3.278s\nMemory peak: 8.3M\nMemory swap peak: 0B\n"
+}
