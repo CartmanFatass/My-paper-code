@@ -309,3 +309,20 @@ the return denotes the exhausted assignment allowance, not a valid B result or
 C-style object consumption; zero scientific invocations occurred. The failure
 intake completes P66's assigned closure. Commit/push/archive the records and
 stop this chain at the clean boundary; no successor or new Pro request follows.
+
+## 9. P67 owner resume and newly selected submission
+
+At2026-09-09T02:31:12Z the owner explicitly resumed research. Under the new
+[P67 assignment](../../portfolio/handoffs/2026-09-08-research-resume.md), select
+one new corrected submission of the unchanged B04/master8202 pair; the
+[P67 decision and CM handoff](VSPC1_NATIVE_HOLD_VALUE_B04_P67_RESUME_20260908.md)
+records options, reason, source acceptance, counts and exact limits.
+Owner-delegated decision (unattended,2026-09-03 instruction): (a),
+**OWNER_DELEGATED within OWNER_DIRECT P67**. P66's spent allowance and zero
+exposure remain historical facts; no old handle or output is reused.
+
+Sections1–8 and all frozen scientific fields remain unchanged. The same CM now
+owns staging, the newly allocated submission, observation and collection under
+current ROOT_OPERATIONS/EXPERIMENT_MONITOR. P67 lifts the prior global pause
+for this route; no third pair, extra H/evaluation, tuning or automatic retry.
+Apply all outcomes and return the complete DM intake to Root.
