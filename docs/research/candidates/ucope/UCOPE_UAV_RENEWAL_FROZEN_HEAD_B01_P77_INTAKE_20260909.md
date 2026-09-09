@@ -267,3 +267,144 @@ intake and evidence archival; Root owns named-commit integration and subsequent 
 of the two P77 remote checkouts and staged wrapper after preserved intake. Remote test scratch
 and source-pack carriers were already removed; scientific evidence remains intact. The shared
 local authoring checkout stays in use. P70/P71/P72 evidence and unrelated paths are untouched.
+
+## 7. DM scientific intake against the card
+
+**Accept valid COMPLETE / DOWN for P77.** The
+[E0 evidence](UCOPE_UAV_RENEWAL_FROZEN_HEAD_B01_P77_RESULT_EVIDENCE_20260909.md)
+and [durable numerical summary](UCOPE_UAV_RENEWAL_FROZEN_HEAD_B01_P77_RESULT_SUMMARY_20260909.json)
+retain all128 returns and all five signed contrasts. CM returned clean pushed
+**693af475135bd680aa3ea9da9c527079251cb834** and released this checkout/index.
+DM checked its result record against card§§1–7, the immutable source/test diff,
+actual native configuration/master/stream fields, suite/independent-review
+record, terminal receipt, admission and executed wrapper. No source, simulator,
+tensor verification, checkpoint evaluation or CM suite was repeated at intake.
+
+Read-only arithmetic over all1664 episode records found complete unique
+arm/phase identities, correct7601 reset panels,512 training episodes per fit
+and32 final episodes per T/F/G/H. Native J=reward_sum/256,128 final values and
+all five signed vectors/means reconcile. Conditional SEs agree up to3.47e-18
+rounding in hover contrasts; retain native published values, without an exact
+cross-platform obligation. The approved run-level tool used one selected
+endpoint per T/F/G at the declared matched training unit; H remained a fixed
+reference. Every actual425984 step/3072Adam/768rollout and all exposures remain
+readable. Independent training n=1; no training-population SD or interval.
+
+The card§5 DOWN rule applied verbatim is:
+
+> Adverse learned-renewal package evidence against legal feedback. Do not rescue it with a favorable T−F, T−H, motion statistic or duration count.
+
+Primary T−G is **−0.04379734649032291**, conditional SE
+**0.01000711676968817**, with8 positive/24 negative episodes. It is
+0.033797346490322906 below−0.01. Secondary T−F is
+**−0.06808369803930205**, SE**0.00976191558652773**, with3 positive/29 negative,
+so the card's **“below−0.01 favors F”** secondary reading applies. T−H is
+−0.02623673364744934; G−H +0.017560612842873573 and F−H +0.0418469643918527.
+These are separate native facts, with all conditional SEs and opposing episodes
+in E0. None is a rescue or a redefinition of the primary.
+
+CM's recorded finite-FP32 checkpoint/norm reconciliation and the accepted
+freeze path establish that F's entire head stayed fixed with zero final layer,
+while its actor/critic moved3.041698455810547/8.580864906311035. This is real
+learner exposure under fixed timing, not an untrained whole-policy control.
+T's head movement0.8138430118560791 is not mechanism value. Similar aggregate
+d4 fractions do not establish equal conditional policies or identify a cause.
+
+## 8. Bounded scientific reading and predictions
+
+This fit contradicts favorable learned-renewal package performance against both
+legal feedback and the fixed initial duration-law package. T also lies below
+hover here. G and F exceed hover in their sampled means, while both retain
+adverse individual hover episodes and neither is a tuned competent baseline.
+The fixed law remains a surviving simpler explanation for why renewal might
+sometimes be useful; this observation supplies no demonstrated benefit from
+learning the duration head. Freezing changes trainable capacity, clipping and
+gradient exposure, velocity learning trajectories and partner co-adaptation.
+The negative T−F cannot isolate which change caused the loss.
+
+**Strongest support retained:** the two earlier renewal UPs and this observed
+F−H gain justify keeping persistence as a bounded research alternative.
+**Strongest contradiction:** P77 T loses to G, F and H after real training;
+P72's adverse T−G remains separately visible. The two earlier UPs, P72 DOWN
+and P77 DOWN are individual observations, not a pooled primary or stable
+superiority/harm claim. Tuned same-information headroom remains absent.
+
+Reuse the verified local-literature and source grounding already accepted in
+P74 preparation§3 and Convergence intake§3. The new evidence changes the
+local scientific emphasis toward the fixed persistence package; it does not
+establish that an imported method works here, identify the cause of reversal,
+or justify a new theory/search prerequisite. No new retrieval was needed to
+interpret the already selected comparison.
+
+Prediction events T−G>0.01 and T−F>0.01 were both false. Recorded probabilities
+0.50/0.45 give Brier losses0.25/0.2025, mean**0.22625**. No retrospective
+hard-label hit rate is assigned. Owner prediction: **not taken (unattended)**.
+At intake `item.py reviews --json` returned[] on main and this checkout; a
+scoped audit scan found no UCOPE owner instruction in either. No override,
+prediction reply or material critic dissent was invented.
+
+Owner flags: **none**. The material limits remain one new matched training
+instance, only one observed F fit, tuned same-information headroom absent, package-level
+capacity/optimization/co-adaptation alternatives and unmeasured aggregate CPU.
+
+## 9. Decisions this completed intake produces
+
+**Validity and reading, object tier.** Options: (a) accept valid DOWN with the
+secondary adverse result and all hover contrasts; (b) call F's intended zero
+head movement a learner failure; (c) rescue T using old UPs or claim stable/
+causal harm from this fit. Recommend and execute **(a)**. The accepted source,
+actual nonzero actor/critic learning, complete counts and raw primary support
+the bounded adverse reading; no concrete defect warrants quarantine or replay.
+Owner-delegated decision (unattended, 2026-09-03 instruction): **(a)**.
+
+**Completed allocation and next focus, object tier.** Options: (a) end P77,
+drop unchanged learned-T extension from the default next choice, and recommend
+one separately allocated fresh F/G/H comparison inside the accepted own-expiry
+renewal family; (b) repeat the full T/F/G/H design unchanged; (c) tune T or demand
+causal diagnosis before another performance observation. Recommend and record
+**(a)**. The secondary favors F here while the learned package loses its native
+primary. A new F/G/H comparison would directly ask whether fixed stochastic
+persistence earns return over legal feedback on a new fit, at two fitted arms
+rather than three. It removes an arm inside the accepted mechanism; it neither
+closes a family nor changes P77's frozen primary or Pro's completed design.
+Owner-delegated decision (unattended, 2026-09-03 instruction): **(a)**.
+
+This is outcome-informed direction-local advice for Root's sequencing and
+allocation. Its known same-budget work would be286720 native steps,2048Adam
+and96 final evaluations, versus425984/3072/128 for another full three-fit
+comparison. It is **not an allocated successor**: no new card, numeric master,
+source change, model, evaluator, diagnostic/pilot, retry/resume/replacement,
+extra evaluation, Pro packet or Send is created. A new native result could
+contradict F's current point ordering; no every-seed-positive requirement follows.
+
+Current action is the all-outcome stop and return of completed P77 evidence.
+Root owns integration and any later allocation. Recasts remain1; ACTIVE/HIGH,
+UAV-entry status and Portfolio investment are unchanged. Ordinary object
+decisions stay in this intake/audit; no separate owner item is manufactured.
+
+## 10. Cost, owner surface and recoverable boundary
+
+Accepted complete cost is **501.69s per valid P77 result**, with one accepted
+submission and one matched training instance containing three fitted arms.
+T/F/G walls163.61914047400933/170.78452501102583/146.30148461798672s and
+runner480.70515270199394s are nested within that outer wall. F's cost is now
+observed; no algorithmic timing explanation is inferred. RSS556452KiB is
+measured; aggregate CPU is `resources_unmeasured`. There is no1800s arm or
+3600s whole breach, no§5 engineering budget breach and no scope§4 addition.
+Historical two-fit walls remain their own cost window rather than being
+silently mixed with this changed three-fit design.
+
+The [Chinese valid-result brief](../../portfolio/owner/briefs/ucope/2026-09-09_UCOPE_UAV_RENEWAL_FROZEN_HEAD_B01.md)
+and new audit rows accompany intake. The existing new-card item
+`20260909-ucope-002` remains the prospective record; no owner reply is implied.
+All raw outcomes, checkpoints and receipts remain at the local P77 collection
+root named in§6, including CM collection hashes and DM read-only analysis.
+
+Root may integrate the named commits and archive/reclaim the finished remote
+scientific checkout and wrapper named in§5 and test checkout
+`/home/wu/hmasd-worktrees/ucope-uav-renewal-frozen-p77-check-20260909` after
+preservation. No accepted process remains live. The shared local direction
+checkout stays available for the next assigned writer; this DM edits no main
+control-plane file and deletes no scientific evidence.
+
+Intake owner review reference: **2026-09-09T03:28:45-07:00**, no unapplied instruction or prediction reply on either checkout and no nonempty UCOPE audit owner entry. Decisions are recorded at [technical audit row](../../portfolio/audit/2026-09-09.md#L11) and [selection row](../../portfolio/audit/2026-09-09.md#L12); no item required marking answered.

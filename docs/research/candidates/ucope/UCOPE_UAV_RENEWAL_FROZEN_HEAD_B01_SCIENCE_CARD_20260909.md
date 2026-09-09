@@ -212,3 +212,20 @@ and technical return as one allocated batch. Send source and handle facts as
 available; no redundant permission phase is inserted. DM inspects accepted
 artifacts and performs all-outcome scientific intake; Root owns main integration.
 An actual scientific-meaning/budget conflict returns before dependent work.
+
+## 8. Observed P77 completion — 2026-09-09
+
+One7601 invocation at source002ba439773c72cfdf042a2e31d221cf512a3a3d completed
+all425984 steps/3072Adam/128 final evaluations in501.69s, without cap breach.
+[E0 evidence](UCOPE_UAV_RENEWAL_FROZEN_HEAD_B01_P77_RESULT_EVIDENCE_20260909.md)
+and [DM intake §§7–10](UCOPE_UAV_RENEWAL_FROZEN_HEAD_B01_P77_INTAKE_20260909.md#7-dm-scientific-intake-against-the-card)
+accept **valid DOWN**: T−G−0.04379734649032291, conditional SE0.01000711676968817;
+secondary T−F−0.06808369803930205, SE0.00976191558652773. T−H is negative,
+G−H/F−H positive. F's entire head remained fixed while actor/critic learning
+was real. No stable or causal timing conclusion follows.
+
+Both recorded above-MEI events were false; mean Brier loss0.22625, owner
+prediction not taken. All-outcome P77 stop applies. Intake recommends a later
+separately allocated F/G/H discriminator inside the accepted renewal family;
+no new card/master/invocation or Pro Send is created here. Original§§1–7,
+earlier outcome meanings and recast count1 remain unchanged.
