@@ -1,0 +1,65 @@
+{
+  "object": "VSP03_B04",
+  "unit": "vsp03-b05-p76-20260909.service",
+  "manager_properties": {
+    "Type": "oneshot",
+    "TimeoutStartUSec": "1min 59s",
+    "TimeoutStartFailureMode": "kill",
+    "KillMode": "control-group",
+    "InactiveExitTimestampMonotonic": "407907852649"
+  },
+  "started_monotonic": 407907.852649,
+  "cap_s": 120.0,
+  "shutdown_publication_reserve_s": 10.0,
+  "task_exit_code": 0,
+  "supervisor_exit_code": 0,
+  "payload": {
+    "object": "VSP03_B04",
+    "command": [
+      "bash",
+      "-c",
+      "/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b05_seed7_p76_20260909_admission.json && exec /home/wu/.venvs/hmasd/bin/python scripts/run_vsp03_b05.py --seed 7 --out /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b05_seed7_p76_20260909 --started-monotonic \"$VSP03_B04_STARTED\" --node wsl_4070"
+    ],
+    "cwd": "/home/wu/hmasd-worktrees/vsp03-b05-p76-32ce8a7355b86bee64956e3d24b76d01c31a8d77",
+    "started_unix_s": null,
+    "started_monotonic": 407907.852649,
+    "observed_unix_s": 1788945550.734027,
+    "observed_monotonic": 407907.952239894,
+    "deadline_monotonic": 408027.852649,
+    "cap_s": 120.0,
+    "shutdown_publication_reserve_s": 10.0,
+    "root_returncode": 0,
+    "task_exit_code": 0,
+    "timed_out": false,
+    "error": null,
+    "descendants_killed": [],
+    "descendants_reaped": [],
+    "descendants_remaining": [],
+    "all_descendants_terminated": true,
+    "elapsed_before_terminal_publication_s": 4.17064136301633
+  },
+  "error": null,
+  "descendants_killed": [
+    3037833,
+    3037833,
+    3037834,
+    3037847
+  ],
+  "descendants_reaped": [
+    {
+      "pid": 3037833,
+      "wait_status": 9
+    },
+    {
+      "pid": 3037834,
+      "wait_status": 1
+    },
+    {
+      "pid": 3037847,
+      "wait_status": 1
+    }
+  ],
+  "descendants_remaining": [],
+  "all_descendants_terminated": true,
+  "elapsed_before_terminal_publication_s": 4.188119662983809
+}
