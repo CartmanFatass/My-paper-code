@@ -596,3 +596,46 @@ with32 final evaluations each, to describe new-budget variation while retaining
 test, or prerequisite for accepting the current result. No successor or stronger
 scientific disposition is authorized by this intake; the owner restart handoff
 holds this recommendation without changing lifecycle or formal UAV-entry status.
+
+## Independent768 repeat: ordinary critic favored again — 2026-09-09
+
+The [B09 P74 intake](VSPC1_NATIVE_HOLD_VALUE_B09_INTAKE_20260909.md#6-p74-valid-result-intake-and-decisions)
+accepts8402 as valid complete **DOWN**, GATED−ordinary-MLP-width133
+−.0135349558, conditional SE .0098982147,20/32 adverse primary identities.
+The point lies only .0035349558 (.3571 conditional SE) below negative MEI;
+the frozen branch and conditional noise stay separate. GATED−H+.0364087134
+and MLP−H+.0499436692 have6/7 adverse identities. Both learned means exceed
+untuned H in this pair; the [E0](VSPC1_NATIVE_HOLD_VALUE_B09_RESULT_EVIDENCE_20260909.md)
+retains every outcome and the full417792 native steps/3072 Adam/96 evaluations.
+
+The two independent768 primary differences are −.0338649204/−.0135349558,
+descriptive mean−.0236999381 and sample SD .0143754558. Both favor the ordinary
+critic locally, while their H-relative signs differ:8401's GATED/MLP means below
+H remain intact. New8402 supports local learned control above H, but the ordinary
+MLP improves more. The strongest support for a gated-package advantage remains
+the two512 UP pairs, especially8303's positive GATED−H comparison; the strongest
+contradiction is two768 DOWN point estimates plus8401's H losses. Retain the
+three512 results and all older regimes separately. Two units and their finite
+evaluations do not establish stable superiority/inferiority, an aggregate pass,
+equivalence, tuned competence, unique hold credit or a causal budget effect.
+Matching tuned headroom is absent; H is an attained reference, not an upper.
+
+Opening duration → entity-owned remaining hold → centralized value/joint
+optimization → local recurrent actor updates → motion/service → native return
+remains the exercised path. Five agents retain separate partial histories and
+fixed membership; the critic is absent from final action choice. About1.14% of
+training rows carry nonzero remaining holds. Initialization, gated geometry,
+shared clipping, value units, FP32 and partner co-adaptation remain alternatives;
+parameter movement and the native sign pattern do not diagnose their causes.
+
+The next recommended discriminator is a separately allocated real-learning B:
+one fresh unchanged training pair with two prospectively fixed512/768 native
+evaluation endpoints per learned arm and H on the common bank. It would compare
+Delta512, Delta768 and their paired change along the same training trajectories,
+without the old regimes' between-master mismatch. It adds64 learned evaluations
+to the same two768 fits (434176 total steps/3072 Adam/160 evaluations), with no
+search, historical-state reuse or favorable-checkpoint selection. The local
+exposure response would remain conditional, not a population budget-causality
+or complete-mechanism claim. This is an object-tier recommendation only; it
+authorizes no extra P74 work or family, lifecycle, priority, recast, C or formal
+UAV-entry disposition.
