@@ -121,8 +121,8 @@ def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=wri
                    complete_exit_cap_conformance="unmeasured: use existing supervisor terminal process wall",
                    mlp_start_pair_elapsed=None,
                    rollout_loss_coverage="completed source updates only; partial-update Adam counts are retained",
-                   cost_projection={"GATED-V": "init + 131072*c_env_actor + 1024*c_update + 8192*c_eval + publication; gate increment unmeasured",
-                                    "MLP-V": "131072*c_env_actor + 1024*c_update + 16384*c_eval + pair publication/readback/exit"},
+                   cost_projection={"GATED-V": f"init + {config.train_episodes * config.horizon}*c_env_actor + {config.train_episodes // 2 * 4}*c_update + {config.eval_episodes * config.horizon}*c_eval + publication; gate increment unmeasured",
+                                    "MLP-V": f"{config.train_episodes * config.horizon}*c_env_actor + {config.train_episodes // 2 * 4}*c_update + {2 * config.eval_episodes * config.horizon}*c_eval + pair publication/readback/exit"},
                    seeds=dict(initialization=b+11, train_velocity=b+21, train_duration=b+22,
                               constructor_reset=b+1000, train_reset_start=b+1000,
                               eval_reset_start=b+2000, eval_velocity_start=b+3000,
@@ -132,7 +132,7 @@ def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=wri
     if normalize_value:
         summary["value_loss_units"] = "normalized_squared"
         for arm in ARMS:
-            summary["cost_projection"][arm] += " + 256*c_moment_merge(512); normalization overhead unmeasured"
+            summary["cost_projection"][arm] += f" + {config.train_episodes // 2}*c_moment_merge({2 * config.horizon}); normalization overhead unmeasured"
     files = {name: (out / f"{name}.jsonl").open("w", encoding="utf-8") for name in ("episodes", "rollouts")}
 
     def emit(name, row):
