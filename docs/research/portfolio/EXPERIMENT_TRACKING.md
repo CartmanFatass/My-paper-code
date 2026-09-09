@@ -32,6 +32,8 @@ VSP03 P74 conforming intake b033da853 accepted; P76 one-G/seed7/120s complete in
 
 MGTAP provider acceptance is now confirmed: exactly one Send, fixed TASK6931057f2 visible in original conversation6a9b6b01-a918-83e8-8b06-ca9dd8184dab, Pro thinking. Transport observes; no rebind or duplicate Send. Full response remains pending.
 
+FSD P74 complete response/intake16bf3509e integrated main477331c62: PRO_FINAL A, narrow unchanged extension ended, no successor. Original blocker remains preserved but is superseded for delivery/decision availability. ACVC original DM actually resumed focused native-host re-entry mapping/no-ready task as replacement, zero new science or Send. VSP03 P76 prospective card3eda7ac6d and original CM work are active, no handle yet.
+
 ## Historical soft-stop closeout updates — 2026-09-09
 
 - CRTO P72: response/intake/handoff integrated at63550cd83; DM stopped, no live experiment or Pro generation, no successor B. See [handoff](../candidates/commitment_residual_triggered_options/CRTO_RESTART_HANDOFF_20260909.md).
