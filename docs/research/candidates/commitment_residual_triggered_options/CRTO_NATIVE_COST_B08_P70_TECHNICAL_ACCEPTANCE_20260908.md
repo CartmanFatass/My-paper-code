@@ -41,6 +41,11 @@ Its 1e-7 absolute label tolerance is below the .01 action/.0025 mean scales; cha
 margin readings can limit even smaller discrepancies. This is numerical comparison integrity,
 not a byte-equality requirement. Damaged endpoint comparisons retain other trustworthy endpoint
 facts. Missing RAW-LONG competence is unknown, not observed weakness or negative polarity.
+Parent acceptance subsequently found that the adverse list and mixed-budget flag could still
+use an untrustworthy negative contrast. The correction filters those interpretations by each
+individual contrast's trust flag, retaining all numerical contrasts/rows and any independently
+trustworthy loss even when another comparison limits that endpoint. The original source
+acceptance is superseded for this corrected reading; no result-bearing work used it.
 
 Wall accounting measures each arm's training/evaluation/scoring intervals and charges every
 arm all remaining shared time. The monitor includes accrued common time, checks during work
@@ -52,8 +57,8 @@ It reports cap breaches and never sums arm charges as machine time. Interpreter 
 shutdown are covered by the outer measurement; the inner timestamp alone cannot establish
 complete conformance. A callback monitor is not a preemptive operating-system deadline.
 
-Scope-spec §4 additions: **none**, per card §7. Tool-counted new non-test runtime lines: module314
-+ initializer1 + runner43 = **358**, within 2,000; runner43 within600. No generic execution,
+Scope-spec Â§4 additions: **none**, per card Â§7. Tool-counted new non-test runtime lines: module315
++ initializer1 + runner43 = **359**, within 2,000; runner43 within600. No generic execution,
 retry, provenance guard, telemetry service or framework was added. Required publication and
 wall bookkeeping were reviewed for purpose; no ratio gate or line-by-line census was introduced.
 
@@ -78,8 +83,9 @@ Base fixture command (run tags below are invocation-owned):
 | `b08-p70-20260909-b` | Parent directory created; all 13 passed | 1.98s | 3.093s |
 | `b08-p70-20260909-c` | Endpoint-local incomplete comparison correction; all 13 passed | 2.16s | 3.329s |
 | `b08-p70-20260909-d` | Only `test_native_cost.py::test_historical_floor_and_weak_new_raw_cannot_be_rescued`, after unknown-competence correction; 1 passed | 1.95s | 3.099s |
+| `b08-p70-20260909-e` | `test_adverse_and_mixed_reading_requires_individual_contrast_trust` and existing `test_mixed_budget_preserves_losses_and_no_best_endpoint`; 2 passed | 1.93s | 3.102s |
 
-Total reported fixture wall **8.17s**; total command process wall **12.629s**, below300s.
+Total reported fixture wall **10.10s**; total command process wall **15.731s**, below300s.
 Tests cover independently calculated equal-row masked loss/gradients, detached labels, unequal
 legal-set sizes, extreme logits, single legal actions, zero illegal gradients, printed ties,
 competence limits, all three strict thresholds, historical floor, weak/unknown RAW, signed
@@ -90,11 +96,11 @@ host/RNG helpers were reused and inspected, not rerun as a historical reconstruc
 
 Automatic tool review rejected recursive scratch deletion (generic `blocked by policy`). CM
 used scoped deletion of the known fixture files followed by empty directories. `Test-Path`
-confirmed all four invocation roots absent. The first and last tests created no scratch root.
+confirmed all five invocation roots absent. Invocations a/d/e created no scratch root.
 No evidence root or another invocation's files were removed. Test failure diagnostics above
 were retained before cleanup.
 
-## Literal prospective execution binding — not staged or executed
+## Literal prospective execution binding â€” not staged or executed
 
 - Source/launch SHA: `9ed83fc06e328fd9ca4e171852f37bdcb0de8d63` (all runtime paths and unchanged
   dependencies at that commit). This later documentation-only record does not change that surface.
