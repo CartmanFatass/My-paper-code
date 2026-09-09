@@ -1,8 +1,6 @@
 #:schema https://developers.openai.com/codex/config-schema.json
 
-# Every local task created in this trusted HMASD project starts with Full Access.
-# Keep these explicit here so the project Transport singleton and research tasks do
-# not inherit the desktop client's Workspace/on-request defaults.
+# Project defaults for Root; individual agent configurations may narrow their sandbox.
 approval_policy = "never"
 sandbox_mode = "danger-full-access"
 
@@ -12,7 +10,7 @@ hooks = false
 
 [agents]
 # Research capacity is repository-unbounded under AGENTS.md section 5. This knob limits only the
-# runtime's thread fan-out; nested DM -> CM -> implementer chains may need several threads each.
+# runtime's thread fan-out; DM -> CM is the default chain, with specialist children as needed.
 max_concurrent_threads_per_session = 40
 interrupt_message = true
 
@@ -37,12 +35,8 @@ description = "Optional focused runtime-observation method."
 config_file = "./agents/hmasd-verifier.toml"
 
 [agents.HMASDExperimentOperator]
-description = "Optional operator for one exact result-bearing command."
+description = "Optional executor for a bounded launch, observation and collection batch."
 config_file = "./agents/hmasd-experiment-operator.toml"
-
-[agents.HMASDExperimentTracker]
-description = "Shared Terra/low sibling for accepted experiment handles, tracking, and direct DM reminders."
-config_file = "./agents/hmasd-experiment-tracker.toml"
 
 [agents.HMASDResearchCritic]
 description = "Optional independent scientific-criticism method."

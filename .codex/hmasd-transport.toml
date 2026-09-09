@@ -2,14 +2,16 @@ schema_version = 1
 mode = "singleton"
 status = "active"
 
-# Project-owned reusable Transport task. Handoffs reuse this task but retain
-# request-specific source_thread_id, parent_thread_id, receipt, tab, and heartbeat state.
-thread_id = "01a06c45-e279-7813-822f-9ea90cb14a72"
-task_title = "transport_lxh_project_singleton"
+# OWNER_DIRECT 2026-09-07: one independent reusable Transport task.
+# Root dispatches and receives native-direction receipts; Transport owns Pro observation.
+# No scheduled automation; preserve request-specific bindings, archives and receipt state.
+thread_id = "01a07e52-f085-76a0-886a-4127f490421f"
+task_title = "HMASD Pro Transport"
+execution_owner = "transport"
 project_id = "177ab8d8-53ae-448c-9a9e-aaa2fecd2498"
 environment = "local"
 model = "gpt-5.6-luna"
-reasoning_effort = "xhigh"
+reasoning_effort = "high"
 
 # Owner request 2026-09-04: use 6 Pro for provider research reviews.
 # This is independent of the Codex Transport executor model above.
@@ -18,3 +20,9 @@ model = "GPT-6 Astra"
 mode = "Pro"
 label = "6 Pro"
 selector_hint = "Latest"
+
+# Reuse each node's current verified binding. Apply the exclusion policy in
+# retired_ids_record; its observed-ID inventory is not exhaustive.
+[conversation_policy]
+mode = "serial_reuse"
+retired_ids_record = "docs/research/portfolio/decisions/2026-09-04-retired-provider-conversations.json"
