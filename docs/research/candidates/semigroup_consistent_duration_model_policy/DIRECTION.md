@@ -663,3 +663,32 @@ contrasts, 286,720 total steps, 2,048 Adam calls and original 1,800s/arm, 3,600s
 Old D6 source/countdown-search family PARK and earlier evidence remain unchanged.
 See `SCDMP_NATIVE_HOLD_RESIDUAL_B01_SCIENCE_CARD_20260909.md` and
 `pro_packets/20260908_held_residual_context_repair/CONVERGENCE_INTAKE_20260909.md`.
+
+## Native held-segment residual-MC B01 result — 2026-09-09
+
+The complete original master8201 pair is a valid B/EXPLORE observation. Final sampled
+RESIDUAL-MC minus intact MLP-MC is **+0.006737407456**, conditional evaluation SE
+0.005596546536, with 14/32 negative episode contrasts. The card reads **WITHIN** its
+inclusive ±0.01 scale. This completes the allocated batch without selected-scale reason
+to repeat the unchanged penalty; it is neither statistical equivalence nor a direction
+or residual-family closure. No successor is allocated.
+
+Both means exceed attained H: residual−H +0.007086659469 and MLP−H +0.000349252013,
+with 15/32 and 18/32 adverse H contrasts. One independent training pair cannot estimate
+training-seed uncertainty or establish stable useful duration control. Tuned same-
+information headroom remains absent; no automatic UAV-entry or C promotion follows.
+
+The strongest support is the positive native point difference after genuine two-ended
+learning: 1,500 eligible training pairs, 6,000 residual terms, 286,720 native steps and
+2,048 Adam. The strongest contradiction is the below-MEI effect with a competitive
+complete MLP and adverse episodes. Generic regularization, clipping/optimization,
+successor noise and gradient cancellation remain unresolved alternatives to a hold-
+specific mechanism. Sparse-support nonexecution was excluded for this instance.
+
+Complete process wall 323.02 s meets original caps; implementation and focused review
+were accepted. Runtime-blocked cleanup of two test scratch paths is an engineering
+limitation, separate from the trustworthy result. Source 7d0fc9d00 and E0 e5ed77030
+facts are in `SCDMP_NATIVE_HOLD_RESIDUAL_B01_RESULT_EVIDENCE_20260909.md`; scientific
+intake, decisions and bounded alternatives are in
+`SCDMP_NATIVE_HOLD_RESIDUAL_B01_INTAKE_20260909.md`. Recasts: 2 and old D6 family PARK
+remain unchanged. No next scientific discriminator is currently selected.
