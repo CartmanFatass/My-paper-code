@@ -338,3 +338,27 @@ superiority, pure-pointer cause, package difference, arbitrary-roster generaliza
 conclusion follows from its selection. No recast, family closure or Portfolio change is
 made. A successful recovered delivery does not resolve the earlier attempt's historical
 unknown acceptance; its evidence is retained separately in the intake and packet archive.
+
+## B03 incomplete pair: actor100 effect remains unavailable — 2026-09-09
+
+The completed scientific intake `RCLE_TBCFV_B03_ACTOR100_RESULT_INTAKE_20260909.md`
+retains W1's full200 nonzero updates and initialization/final native panels from source
+`ad2fdfb854e295d6d9dddb229dd17cde58465919`, evidence`813d236fa`. W1's equal-path
+ACTIVE_CONTINUATION G_U is+0.0001546224, small against the declared0.05 scale;
+conditional scenario SE0.0005000111 crosses zero. Every cell's initialization/final
+tau is40, and8→8 NEW_EPOCH worsens by0.0006347656. Parameter movement is observed;
+useful service improvement or faster recovery is not established.
+
+W100 terminated signal11 without retained curves/final panel. Its training prefix is
+unknown, not zero; reference was not invoked and Delta_U is unavailable. Completed
+W1 does not supply the absent paired efficacy or support a pure actor-credit cause.
+The strongest support is the complete W1 learner/native record; the strongest limit
+is the missing treatment endpoint, with the adverse secondary cell and recovery
+saturation preserved. No stable, causal, package-wide or direction-negative conclusion
+follows. B02/A02 results and predictions keep their prior meanings.
+
+The score-weighting question survives unanswered. The next discriminator would require
+an intact matched W100/W1 endpoint; none is newly selected or allocated. Root's special
+Portfolio validity review is next. There is no recast, family closure or Portfolio
+change in this intake. Complete failure/cost/diagnosis limits and preserved dependencies
+are recorded in the intake and E0; the pause handoff remains historical provenance.
