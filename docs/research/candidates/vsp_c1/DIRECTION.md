@@ -557,3 +557,42 @@ separate budget regime, not a causal estimate of the budget change. It is not
 an acceptance condition for these three pairs. No new card/key/run or automatic
 successor is allocated in P72, and no family, recast, lifecycle, priority, C or
 formal UAV-entry decision follows from this intake.
+
+## Greater training exposure: a native counterexample — 2026-09-09
+
+The [B08 P73 intake](VSPC1_NATIVE_HOLD_VALUE_B08_INTAKE_20260908.md#6-p73-valid-result-intake-and-decisions--2026-09-09)
+accepts the first768-episode-per-arm comparison,8401, as valid complete **DOWN**:
+GATED−ordinary-MLP-width133=−.0338649204, conditional SE .0128328015,
+24/32 adverse primary identities. GATED−H=−.0405925743 and MLP−H=−.0067276539
+have23/19 adverse identities. Both learned means are below untuned H, with
+MLP's H-relative mean smaller in magnitude than its conditional SE. The
+[E0](VSPC1_NATIVE_HOLD_VALUE_B08_RESULT_EVIDENCE_20260908.md) retains full real
+learning,768 rollouts/3072 Adam,417792 native steps and96 final evaluations.
+
+This is a local native counterexample to a useful gated-package advantage at
+the selected higher exposure. The ordinary critic is preferable in8401; neither
+learner establishes better usable control than H. The strongest contradiction
+is the DOWN outcome together with both H losses. Surviving support remains the
+two512-episode UP pairs, especially8303's positive native GATED−H comparison,
+while8302's negative-sign WITHIN remains. Keep old512 n=3 and new768 n=1 separate:
+changing the budget and master does not identify a causal budget effect. There
+is no aggregate pass, stable superiority/inferiority, tuned competence, transfer,
+equivalence or unique hold-credit conclusion. Matching tuned headroom is absent.
+
+Opening duration → entity-owned remaining hold → centralized value/joint
+optimization → local recurrent actor updates → motion/service → native return
+remains the exercised path. Five agents retain separate partial histories and
+fixed membership; the critic is absent from final action choice. About1.126%
+of training rows have nonzero remaining holds. Initialization, gated geometry,
+shared clipping, value units, FP32 and partner co-adaptation remain alternatives;
+the negative result and parameter movement do not diagnose which caused it.
+Prior verified PPO/ACAC/UTE/MVD and containing-MLP distinctions remain applicable
+with their original setting limits; no new literature finding is asserted.
+
+The next recommended discriminator is one separately allocated independent
+768-episode matched pair of the same normalized GATED/width133 MLP/H comparison,
+with32 final evaluations each, to describe new-budget variation while retaining
+8401 DOWN and every H loss. It is not a same-key retry, sign repair, causal-budget
+test, or prerequisite for accepting the current result. No successor or stronger
+scientific disposition is authorized by this intake; the owner restart handoff
+holds this recommendation without changing lifecycle or formal UAV-entry status.
