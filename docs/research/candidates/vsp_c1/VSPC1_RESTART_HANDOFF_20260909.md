@@ -1,17 +1,18 @@
-# VSPC1 restart handoff — P77 allocated, 2026-09-09
+# VSPC1 restart handoff — P77 complete, 2026-09-09
 
 P77 current boundary: Root accepted P76 and separately allocated one fresh
 independent repeat of the unchanged fixed512/768/common-H comparison. The
 [B11 card](VSPC1_NATIVE_HOLD_VALUE_B11_SCIENCE_CARD_20260909.md) and
 [intake](VSPC1_NATIVE_HOLD_VALUE_B11_INTAKE_20260909.md) freeze8502,
 CHANGE_DOWN(.60),434176 steps/3072 Adam/160 evaluations/four constructors,
-1800s complete arm/3600s whole and one accepted submission maximum. No P77
-result or submission exists at the accepted source boundary. Scientific source
-is`7ed4c3933771f85d570b5c952052b9e8c5fbd6e1`; B11 card §7 binds the exact
-remote cwd/payload/handle/output.12 focused checks passed in2.3934099s; shared
-runtime is unchanged and B10 boundary review remains applicable. CM next
-commits/stages the wrapper, performs the sole joined-admission submission and
-observes/collects through terminal. The original DM/CM reuse the
+1800s complete arm/3600s whole and one accepted submission maximum. P77 is now
+**valid complete CHANGE_DOWN and fully intaken**: C−.0119242503, conditional
+SE .0074169721;512UP+.0213148509/768WITHIN+.0093906006. One submission spent,
+zero remain; no live process. Scientific source is
+`7ed4c3933771f85d570b5c952052b9e8c5fbd6e1`; B11 card §7 retains exact
+remote bindings, §8/intake §6 the complete result. Whole507.29s and caps pass.
+The final P77 section records evidence, ownership and unallocated next advice.
+The original DM/CM reuse the
 designated checkout; older completion/stop boundaries below remain historical.
 
 P76 current boundary: Root's separately allocated same-trajectory512/768
@@ -278,3 +279,50 @@ P76 submission, new card/master/prediction, code task, extra evaluation, tuning,
 cost probe or Pro Send has been created. Root's separate capacity allocation
 would precede a prospective fresh definition and reuse of the accepted CM path.
 No lifecycle, priority, family, recast, C or formal UAV-entry change is implied.
+
+## P77 completion and next unallocated recommendation
+
+The fresh independent unchanged two-endpoint comparison is complete; Root
+receives the final intake for integration. CM result commit
+`0a2f20408cf2321447f0c149374fd65f9a916214` contains E0/full collected evidence;
+scientific SHA`7ed4c3933771f85d570b5c952052b9e8c5fbd6e1`, wrapper
+`40bdcdcba7df2017d5636665b7e5b2f8d2f8f5b9`. B11 intake §6 applies the unchanged
+rule and the Chinese brief records the bounded reading.
+
+C−.011924250290295561, conditional SE .0074169720617037575, is CHANGE_DOWN,
+only .25944 SE beyond negative MEI.512 Delta+.02131485092772898 is UP;
+768+.00939060063743342 is WITHIN. GATED/MLP mean increments
++.0002862584/+.0122105087 again show greater MLP point-mean growth. All four
+learned means exceed H; all5/10/7/9 H losses remain. Two new-protocol pairs have
+C mean−.0330816718/SD .0299211125, descriptive only. No stable/causal trend,
+equivalence or isolated hold credit follows, and older protocols stay separate.
+CHANGE_DOWN(.60) prediction hit/Brier .16; owner prediction not taken.
+
+Sole handle`vspc1_hold_value_b11_8502_7ed4c3933771`, PID3040577 on
+hmasd-wsl-node ran2026-09-09T10:08:02Z–10:16:30Z, exit0/inactive.
+Actual-node canonical admission10:08:02.935732Z passed physical/effective
+15318642688 bytes each. Whole507.29s; conservative complete arms279.1950192/
+248.6227211s; RSS548.796875MiB;434176 steps/3072 Adam/160 evaluations/four
+constructors. Source checks plus artifact acceptance4.4991832s≤300; no breach.
+Aggregate CPU/component work and tuned headroom remain unmeasured/absent.
+
+Raw output: `/home/wu/projects/HMASD/temp/directions/vsp_c1/exp/native_hold_value_b11_8502_7ed4c3933771`;
+admission is adjacent `_admission.json`. Local collection:
+`temp/directions/vsp_c1/collection/native_hold_value_b11_8502_7ed4c3933771/`.
+Detached execution checkout:
+`/home/wu/hmasd-worktrees/vspc1-native-hold-value-b11-8502-7ed4c3933771`.
+Root owns reclamation after acceptance/integration, preserving scientific
+output/receipts. Reuse the existing local authoring checkout and direction branch.
+CM observation and DM intake are complete; no run or scientific action is pending.
+P77 test scratch was removed. Historical P76 scratch remains creator/CM-owned
+after automatic approval review rejected cleanup as “blocked by policy,” with
+no repeated rejected operation or bypass pending.
+
+Next selected object-tier advice: one separately allocated fresh independent
+unchanged fixed512/768/common-H pair, to observe training variation in the512
+advantage and subsequent change. Work434176 steps/3072 Adam/160 eval/four
+constructors,1800s complete arm/3600s whole; actual475.85/507.29s planning
+references are not guarantees. All signs remain informative. No new card/master/
+prediction, CM code task, submission, retry, extra evaluation or Pro Send exists.
+Root owns integration and any separate allocation; no direction or Portfolio
+disposition has been inferred from completion.

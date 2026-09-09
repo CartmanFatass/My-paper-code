@@ -676,3 +676,56 @@ and H32 once (434176 steps/3072 Adam/160 evaluations), without historical-state
 reuse, extra checkpoints, tuning or search. A different sign remains informative.
 This is bounded object-tier advice; no new scientific allocation, family,
 lifecycle, priority, recast, C or formal UAV-entry disposition is implied.
+
+## Second local narrowing, with a weaker near-boundary change — 2026-09-09
+
+The [B11 P77 intake](VSPC1_NATIVE_HOLD_VALUE_B11_INTAKE_20260909.md#6-p77-valid-result-intake-and-decisions)
+accepts8502 as valid complete **CHANGE_DOWN**, C−.0119242503, conditional
+SE .0074169721,22/32 negative changes. It lies only .0019242503 (.25944 SE)
+below negative MEI. Delta512 is +.0213148509 (UP); Delta768 +.0093906006
+(WITHIN), only .0006093994 below positive MEI with conditional SE .0076329951.
+Point regions and noise remain separate. The [E0](VSPC1_NATIVE_HOLD_VALUE_B11_RESULT_EVIDENCE_20260909.md)
+retains all160 evaluations,434176 team steps and3072 Adam calls from two
+continuous real fits with separated training/evaluation state.
+
+GATED's point mean rises .2091129100→.2093991683, while MLP rises
+.1877980590→.2000085677: descriptive increments +.0002862584/+.0122105087,
+again a larger ordinary-MLP increase. Both increments carry conditional noise;
+this decomposition is no isolated budget-causality claim. H is .1623154235.
+All four learned means exceed H, unlike8501's MLP512 mean below H.
+GATED512/MLP512/GATED768/MLP768 still lose to H on5/10/7/9 individual
+identities, all retained. H is an untuned attained reference; tuned matching
+headroom remains absent and no competence claim follows.
+
+The two new-protocol Cs are −.0542390934/−.0119242503, descriptive mean
+−.0330816718 and sample SD .0299211125. Both fixed512 points are UP and
+both768 points WITHIN. Delta512's descriptive mean/SD are .0425972774/
+.0300978962; Delta768's .0095156056/.0001767837. These are two independent
+training pairs with repeated checkpoints and finite panels, not four training
+seeds or64 independent training observations. No pooled pass, equivalence,
+stable population trend or superiority/inferiority follows from n=2.
+Prior final-only768 DOWNs and8401's H losses, the older512 set and other
+regimes remain separate and unchanged.
+
+Strongest current support is the two prospectively fixed512 gated advantages
+with GATED above H. Strongest contradiction to a durable selected-scale
+advantage is its reduction to WITHIN by768 in both, alongside the two older
+final-only768 negatives.8502 adds a second local narrowing, but its small
+boundary distance and the differing change amplitudes bound recurrence.
+Opening duration → entity-owned remaining hold → centralized value/joint
+optimization → partial-history recurrent actor → motion/service → native return
+remains the exercised path. Fixed membership and critic-free action selection
+are unchanged. About1.13% of training rows have nonzero holds. Initialization,
+geometry, joint clipping, evolving moments/units, FP32 and partner co-adaptation
+remain alternatives; movement and this local pattern do not isolate hold credit.
+Previously verified literature distinctions keep their original setting limits.
+
+The next selected object-tier recommendation is one separately allocated
+independent unchanged fixed512/768/common-H pair to describe variation of the
+local512 advantage and its subsequent change. Extra8502 evaluation would mainly
+refine conditional panel noise; a new real pair observes training variation.
+Known work remains434176 steps/3072 Adam/160 evaluations/four constructors,
+with475.85/507.29s actual planning references and1800s complete arm/3600s whole
+caps. Different outcomes remain informative; no third pair is required for
+accepting these two. No new card, invocation, Pro request, family, lifecycle,
+priority, recast, C or formal UAV-entry disposition is created by this intake.

@@ -3,7 +3,7 @@ Binding MARL structure: (b) temporal abstraction or termination, with five co-ad
 
 # VSPC1-NATIVE-HOLD-VALUE-B11 — B/EXPLORE, P77
 
-Current state: source accepted and exact execution bound, zero B11 scientific exposure. Root's new
+Current state: valid complete CHANGE_DOWN and scientifically intaken; one P77 submission spent, zero remain. Root's new
 P77 allocation is recorded in main Portfolio at
 `c1b1818b621ffe90e60f8ef9c018dc3f35eee058`, after accepting
 [B10 intake §6](VSPC1_NATIVE_HOLD_VALUE_B10_INTAKE_20260909.md#6-p76-valid-result-intake-and-decisions).
@@ -230,3 +230,28 @@ single already allocated submission. Fresh actual-node memory admission immediat
 precedes scientific state in this whole-timed command. CM solely observes and
 collects through terminal. No further planning approval or invocation follows
 from this acceptance. Staging/admission are not yet observed.
+
+## 8. Terminal result — 2026-09-09
+
+The sole P77 submission is valid complete at scientific source
+`7ed4c3933771f85d570b5c952052b9e8c5fbd6e1`, exit0, with434176 team steps,
+3072 Adam,160 evaluations and four fixed learned checkpoints. The
+[E0](VSPC1_NATIVE_HOLD_VALUE_B11_RESULT_EVIDENCE_20260909.md) and
+[DM intake §6](VSPC1_NATIVE_HOLD_VALUE_B11_INTAKE_20260909.md#6-p77-valid-result-intake-and-decisions)
+apply the unchanged rule: **C−.011924250290295561, conditional SE .0074169720617037575,
+CHANGE_DOWN;512 Delta+.02131485092772898 UP;768+.00939060063743342 WITHIN.**
+C is only .0019242503 (.25944 SE) below negative MEI; region/noise stay separate.
+Forecast CHANGE_DOWN(.60) hit/Brier .16; owner prediction not taken.
+
+GATED's native mean rises .0002862584 and MLP's .0122105087 on the common panel.
+All four learned means exceed H; GATED512/MLP512/GATED768/MLP768 have5/10/7/9
+H-loss identities, all retained. Both new-protocol pairs show512 UP/768 WITHIN and negative C, but
+their C magnitudes vary: descriptive mean−.0330816718/SD .0299211125, n=2.
+This is no stable trend, causal budget effect, equivalence, isolated hold credit
+or tuned-competence claim; older protocols and all contrary evidence stay separate.
+
+Whole507.29s and conservative arms279.1950/248.6227s meet the original caps;
+no section5 breach was observed. No live process or P77 allowance remains.
+One further independent unchanged pair is object-tier advice awaiting separate
+allocation, with no new card/master/prediction/task/submission or Pro Send.
+Historical P76 scratch cleanup remains policy-blocked and CM-owned.
