@@ -1,6 +1,6 @@
 # FOLR public lifecycle TIMING-B01 technical evidence
 
-RETAIN and EVENT collected and technically accepted; RANDOM submitted, pending Monitor adoption/terminal collection. Allocation: card §§2–6 and intake §7 at `8fc84a01eaaf8c89197020a75879ba9dfeea0e33`, Root main `fdede5b8897e412d68d2a341a379efac69feb429`. Original CM owns implementation, execution and terminal collection. The sequence is RETAIN → EVENT → RANDOM, exactly one accepted submission each; failure ends dependent execution. No retry, replacement, top-up, cost probe or successor.
+**Complete triple technical acceptance:** RETAIN2.54453125, EVENT5.349296875, RANDOM3.985625; frozen branch **EVENT_CLEAR_ADVANTAGE**. All384 final returns, raw artifact/receipt hash mapping, training statistics and complete costs are retained in the [triple summary](FOLR_PUBLIC_LIFECYCLE_TIMING_B01_RESULT_SUMMARY_20260909.json). Allocation: card §§2–6 and intake §7 at `8fc84a01eaaf8c89197020a75879ba9dfeea0e33`, Root main `fdede5b8897e412d68d2a341a379efac69feb429`. Original CM completed implementation, execution and terminal collection. Exactly one accepted submission each in RETAIN → EVENT → RANDOM order; all3 allowances spent. No retry, replacement, top-up, cost probe or successor. Earlier pending entries below preserve their historical boundaries.
 
 ## Source and check index
 
@@ -79,3 +79,27 @@ EVENT technically accepted. Readback/check/digest0.4804712s brings supporting to
 EVENT collection commit `373c5a280` was pushed before the final submission. Supervisor accepted `folr-public-lifecycle-timing-b01-random-20260909`, tmux `agent_folr-public-lifecycle-timing-b01-random-20260909`, log `/home/wu/.agent-tasks/folr-public-lifecycle-timing-b01-random-20260909/task.log`. Exact command is the RETAIN command above with `--arm RANDOM` and lowercase output/receipt suffix `retain` replaced by `random`; all other arguments/source/cwd/cap preserved. The source fixes PCG64 training207804/evaluation307804 and p=.1. Fresh destination admission immediately precedes this runner.
 
 Direct MONITOR_ADD to live shared Monitor returned accepted destination threadId / `isError=false`; actual adoption and terminal collection await Root's notice. No parallel status polling. All3 allocated submissions are spent; there is no next scientific invocation. Full triple E0/summary and DM intake follow this accepted process's terminal collection. Supporting9.8888591/300s and completed scientific wall1524.92/5400s remain the measured totals at this boundary. Preserve all three arm roots/receipts and supervisor records until scoped closeout.
+
+## RANDOM terminal collection and complete triple
+
+Root confirmed actual RANDOM adoption23:13:19.8055452Z: running/exit null/tmux true, PID3081137, uptime13s. Monitor terminal observed23:27:25.2516823Z: finished/exit0/tmux false, actual exit23:26:45Z,819s. Root resumed this original CM for final collection; no parallel status loop or new invocation. RANDOM summary/all128 returns, final.pt, process.time and task.log were collected under local `temp/directions/vap_folr_core/exp/public_lifecycle_timing_b01_seed7804_random`, with sibling memory receipt. Source74d023d7d, seeds7804/107804,5000train/100000ticks/4969steps/128eval/2560eval ticks, FP32/thread1/1 contract and frozen mask metadata agree. All128 returns finite, mean3.985625.
+
+RANDOM training counts births21693/departures8492/event opportunities47239/eligible261232/resets26050; final562/233/1377/6644/649. Admission23:13:06.186769Z passed physical/effective floors at15633313792 bytes each. Whole invocation819.15s, user800.40s/system20.06s, aggregate CPU820.46s, peak RSS656492KiB, exit0. Runner's narrower wall818.798939s/RSS647880KiB remains distinguished. Local/remote hashes agree: summary `40ba74368fd0b52882227cacddc6104b0b489f8b6a5d72dad1215d063390a029`; checkpoint `92f58d70014155f2013f8fe2ee846c0b2b952c6863512f1d2d1bbd615cd9e172`.
+
+| Arm | Final native mean | Complete wall s | OS user+system CPU s | Training resets / eligible | Final resets / eligible |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| RETAIN | 2.54453125 | 738.20 | 739.21 | 0 /258975 | 0 /6798 |
+| EVENT | 5.349296875 | 786.72 | 788.13 | 47375 /257715 | 1416 /6294 |
+| RANDOM | 3.985625 | 819.15 | 820.46 | 26050 /261232 | 649 /6644 |
+
+Frozen contrasts: d_ER=+2.804765625 (`EVENT_ABOVE_MEI`), d_MR=+1.44109375 (`RANDOM_ABOVE_MEI`), d_EM=+1.363671875 (`EVENT_ABOVE_MEI`). Since d_ER>=1 and d_EM>=1, the combined rule is **EVENT_CLEAR_ADVANTAGE**. This is the complete triple rule, not an early-arm selection. Mean/vector/count/admission/exit/mask-metadata and cap readback passed; no missing dependent primary measurement. One fitting instance per arm remains one fitting instance, not128. Realized EVENT reset rates were18.3827% training/22.4976% final versus RANDOM9.9720%/9.7682%; p=.1 is explicitly unmatched. Timing, dose, optimization/data and partner co-adaptation remain coupled. Historical B01/B02/B03 pairs and B03 reversal are not pooled or reinterpreted here.
+
+Every complete arm is below1800s; summed scientific wall **2344.07/5400s**, aggregate CPU **2347.80s**. Study critical path is approximately2782.46s from first admission22:40:22.539599Z to final supervisor exit23:26:45Z (second precision). It includes inter-arm Monitor/collection/sequencing gaps, excludes prior staging and final collection, and is distinct from summed machine wall. Peak RSS is per invocation, not summed simultaneous memory. Cgroup fields remain null, with no stronger claim.
+
+Supporting final accounting: prior9.8888591s + RANDOM receipt/hash read0.5177272s + complete triple readback/rule/JSON assembly2.0467535s + log-extent read0.0870360s = **12.5403758/300s**, leaving287.4596242s for DM intake. Collection transport/Git/authoring are separate control-plane work. The assembly read already collected data and the frozen rule only; it created no model, environment, checkpoint replay or scientific evaluation.
+
+### Training evidence extent and final ownership
+
+Retained training return sums: RETAIN−21655.79, EVENT−24354.87, RANDOM−23578.12; corresponding5000-episode means−4.331158,−4.870974,−4.715624. Each task.log has exactly25 progress rows at episodes200 through5000, with episode/update/wall fields, plus final summary. **No per-episode training-return curve or retained trajectory/replay exists.** The summary publishes those actual25 rows and aggregate statistics; no curve was reconstructed. Final128-element return vectors remain separate from training statistics.
+
+Technical batch complete, all3 submissions consumed; no further experiment assigned. Shared source remains74d023d7d. Original DM owns scientific intake/owner brief; Root owns integration and later explicit preservation/reclamation acceptance. Index released after this evidence commit/push. Retain the new remote worktree and all three exact supervisor directories, local collected roots/receipts, Monitor terminal records and source/evidence. No deletion performed. The previously reported policy-blocked test scratch is excluded from current cleanup and remains an operational gap, not scientific polarity.
