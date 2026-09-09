@@ -41,3 +41,7 @@ The P67 resume handoff supersedes the global pause, while preserving every spent
 A direction counts as advancing only when a native turn, accepted handle or accepted Pro generation is actually live. Completed returns, undispatched intentions and unresolved idle dependencies count zero. Resume decisions use these current facts and the linked intakes, not old agent names or superseded handoff instructions.
 
 ACVC P68 replacement: /root/dm_acvc_p68_reentry, C:/Projects/HMASD-worktrees/codex-acvc, codex/acvc atbee83af7a (clean/pushed at dispatch), zero-exposure source/readiness packet-or-no-ready assignment under the recorded R03 re-entry boundary. No local family reopening or experiment allocation.
+
+## Latest P69 boundary
+
+VSPC1 B05 definition c5835e980 is accepted and source engineering has been assigned to its original DM/CM; original card/spec and focused-check budget apply, zero scientific invocation allocated. CRTO question b6af4d6ee was dispatched once to Transport, whose current turn is active; provider acceptance remains unconfirmed. ACVC P68 is complete NO_READY_CONTINUATION (7380cf576, integrated4dc618c5a), as is FOLR. FSD/UCOPE remain native full-response intake. Completed preparatory returns and the unconfirmed CRTO request are not counted as active directions. This latest boundary supersedes earlier P68 running-state descriptions.
