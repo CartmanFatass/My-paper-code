@@ -1,0 +1,411 @@
+{
+  "purpose": "P67 post-B04 decision preparation; a proposed new renewal-at-expiry B requires direction selection and a prospective card, not allocated by these calculations.",
+  "created_utc": "2026-09-09T02:38:38.773274+00:00",
+  "starting_checkout_sha": "9745d270010a8e100cfed0d1ee9533878cf70190",
+  "accepted_scientific_source_sha": "7693b7af6b7d89cdaa028659d606a37dee9eb68e",
+  "current_owner_authority": {
+    "instruction": "阅读handoff 继续开启科研",
+    "handoff": "docs/research/portfolio/handoffs/2026-09-08-research-resume.md",
+    "handoff_publication_sha": "6d0c12153a266735d8c2e13e8e59eb7601735a26",
+    "pause_lifted": true,
+    "P61_allocation_still_exhausted": true,
+    "Root_is_Portfolio_and_parent": true
+  },
+  "recorded_B04": {
+    "object": "UCOPE-UAV-MOTION-PREFIX-B04",
+    "evidence_class": "B/EXPLORE",
+    "reading": "WITHIN",
+    "collection_commit": "2d8750b46da3cff99f3f632bb8a17b5a70a9ed91",
+    "independent_training_pairs": 1,
+    "training_population_sd": null,
+    "arm_means": {
+      "T": 0.18320920071658314,
+      "G": 0.18715742666070528,
+      "H": 0.16333870700710337
+    },
+    "contrasts": {
+      "T_minus_G": {
+        "mean": -0.003948225944122139,
+        "conditional_evaluation_se": 0.010191826216031805,
+        "paired_episode_sample_sd": 0.057653675440247375,
+        "evaluation_pairs": 32,
+        "positive": 18,
+        "negative": 14,
+        "zero": 0,
+        "min": -0.16125563298518442,
+        "max": 0.09350894263405753,
+        "recomputed_conditional_evaluation_se": 0.010191826216031806,
+        "se_recomputation_minus_recorded": 1.734723475976807e-18
+      },
+      "G_minus_H": {
+        "mean": 0.0238187196536019,
+        "conditional_evaluation_se": 0.011454243503509544,
+        "paired_episode_sample_sd": 0.06479498603754846,
+        "evaluation_pairs": 32,
+        "positive": 20,
+        "negative": 12,
+        "zero": 0,
+        "min": -0.11740354563730576,
+        "max": 0.14757291601052216,
+        "recomputed_conditional_evaluation_se": 0.011454243503509544,
+        "se_recomputation_minus_recorded": 0.0
+      },
+      "T_minus_H": {
+        "mean": 0.019870493709479763,
+        "conditional_evaluation_se": 0.014677398371169156,
+        "paired_episode_sample_sd": 0.08302790334744078,
+        "evaluation_pairs": 32,
+        "positive": 21,
+        "negative": 11,
+        "zero": 0,
+        "min": -0.19468040105328094,
+        "max": 0.20137099875325076,
+        "recomputed_conditional_evaluation_se": 0.014677398371169156,
+        "se_recomputation_minus_recorded": 0.0
+      }
+    },
+    "counts": {
+      "train_team_steps": 262144,
+      "eval_team_steps": 24576,
+      "team_steps": 286720,
+      "optimizer_steps": 2048,
+      "train_episodes": 1024,
+      "eval_episodes": 96,
+      "velocity_decisions": 1388728,
+      "duration_decisions": 2720,
+      "d4": 1304,
+      "recurrent_observations": 1392640,
+      "explicit_resets": 1120,
+      "constructor_resets": 2,
+      "constructors": 2,
+      "step_calls": 286720,
+      "scientific_uav_calls": 286720,
+      "diagnostic_frames": 1600,
+      "completed_episode_steps": 286720,
+      "rollouts": 512,
+      "partial_episode_steps": 0
+    },
+    "learning_rate": {
+      "T": 0.0003,
+      "G": 0.0003
+    },
+    "parameter_exposure": {
+      "T": {
+        "common_actor": {
+          "parameters": 32134,
+          "initial_norm": 12.372705459594727,
+          "final_norm": 12.57672119140625,
+          "displacement": 2.2458720207214355,
+          "relative_displacement": 0.1815182643808623
+        },
+        "critic": {
+          "parameters": 34177,
+          "initial_norm": 9.290486335754395,
+          "final_norm": 12.600772857666016,
+          "displacement": 8.228468894958496,
+          "relative_displacement": 0.8856876376094958
+        },
+        "duration": {
+          "parameters": 2242,
+          "initial_norm": 3.2531657218933105,
+          "final_norm": 3.2857747077941895,
+          "displacement": 0.41481131315231323,
+          "relative_displacement": 0.12751004670944632
+        },
+        "duration_hidden": {
+          "parameters": 2176,
+          "initial_norm": 3.2531657218933105,
+          "final_norm": 3.28520131111145,
+          "displacement": 0.4102451503276825,
+          "relative_displacement": 0.1261064407406819
+        },
+        "duration_final": {
+          "parameters": 66,
+          "initial_norm": 0.0,
+          "final_norm": 0.06137862801551819,
+          "displacement": 0.06137862801551819,
+          "relative_displacement": null
+        },
+        "total": {
+          "parameters": 68553,
+          "initial_norm": 15.810752868652344,
+          "final_norm": 18.103853225708008,
+          "displacement": 8.53953742980957,
+          "relative_displacement": 0.5401094749093319
+        }
+      },
+      "G": {
+        "common_actor": {
+          "parameters": 32134,
+          "initial_norm": 12.372705459594727,
+          "final_norm": 12.519095420837402,
+          "displacement": 1.9179810285568237,
+          "relative_displacement": 0.15501710881425063
+        },
+        "critic": {
+          "parameters": 34177,
+          "initial_norm": 9.290486335754395,
+          "final_norm": 13.130178451538086,
+          "displacement": 8.972776412963867,
+          "relative_displacement": 0.9658026596983639
+        },
+        "total": {
+          "parameters": 66311,
+          "initial_norm": 15.472453117370605,
+          "final_norm": 18.14191436767578,
+          "displacement": 9.17547607421875,
+          "relative_displacement": 0.5930201245151642
+        }
+      }
+    },
+    "opening_observation": {
+      "T_training_duration_samples": 2560,
+      "T_training_d4": 1231,
+      "T_final_duration_samples": 160,
+      "T_final_d4": 73,
+      "T_final_d1": 87,
+      "T_final_d4_frequency": 0.45625,
+      "T_final_velocity_decisions": 40741,
+      "G_final_velocity_decisions": 40960,
+      "T_final_recurrent_observations": 40960,
+      "G_final_recurrent_observations": 40960,
+      "interpretation": "Observed owned opening/hold exposure and continuing recurrence; neither useful conditional selection nor information value established."
+    },
+    "resources": {
+      "label": "resources_unmeasured",
+      "unmeasured": [
+        "whole_invocation_aggregate_cpu",
+        "systemwide_peak_memory"
+      ],
+      "start_utc": "2026-09-08T23:15:53Z",
+      "terminal_utc": "2026-09-08T23:20:30Z",
+      "supervisor_pid": 3012256,
+      "supervisor_status": "finished",
+      "exit_code": 0,
+      "admission_available_physical_bytes": 15640686592,
+      "admission_effective_available_bytes": 15640686592,
+      "admission_passed": true,
+      "whole_wall_seconds": 277.51,
+      "peak_rss_kib": 554964,
+      "T_seconds": 137.67042454401962,
+      "G_seconds_including_hover": 139.29419632797362,
+      "pair_internal_seconds": 276.9646218509879,
+      "cap_breach": false,
+      "limits": []
+    }
+  },
+  "source_observation": {
+    "learner": "collect_episode resets private hidden to zero per episode; duration_mask and sample opening argument are t==0; every primitive step still observes and updates recurrence.",
+    "environment": "HoldState.decide sets the chosen duration only at t==0; after that every active agent is assigned one primitive step.",
+    "policy": "Existing B04 head already conditions on recurrent feature and its own detached sampled tanh(u); only true duration-mask rows evaluate the head in PPO.",
+    "scientific_inference": "The tested duration decision sees reset-time information only. Renewing at expiry would test duration decisions using evolved private histories and changing teammate/service states; it does not establish that such decisions will improve native return."
+  },
+  "consultation_exposure": {
+    "new_models": 0,
+    "new_training_pairs": 0,
+    "new_environment_episodes": 0,
+    "new_native_steps": 0,
+    "new_optimizer_steps": 0,
+    "new_evaluation_episodes": 0,
+    "new_replay_calls": 0,
+    "new_profiling_calls": 0,
+    "new_scientific_invocations": 0
+  },
+  "consultation_exposure_line": "P67_consultation: new_models=0; new_training_pairs=0; new_environment_episodes=0; new_native_steps=0; new_optimizer_steps=0; new_evaluation_episodes=0; new_replay_calls=0; new_profiling_calls=0; new_scientific_invocations=0.",
+  "proposed_renewal_B": {
+    "status": "unselected; one proper-node decision requested, no new invocation authorized",
+    "working_object_name": "UCOPE-UAV-RENEWAL-COMMITMENT-B01",
+    "candidate_master": 7301,
+    "candidate_seed_search": {
+      "scope": "current UCOPE Markdown/JSON and mapped native source, before this file; not a global census",
+      "files_searched": 215,
+      "matches": []
+    },
+    "decision_event": "Every own remaining-hold expiry, including t0, independently for each UAV; no interruption or synchronized team barrier.",
+    "terminal_boundary": "Allow selected d=4 near t255; execute only until the fixed horizon and record its actual duration as min(d,256-start). No post-terminal steps, bootstrap or carryover into the next reset.",
+    "counts": {
+      "independent_training_pairs": 1,
+      "learned_arms": 2,
+      "training_episodes_per_arm": 512,
+      "primitive_steps_per_episode": 256,
+      "training_steps_per_arm": 131072,
+      "train_team_steps": 262144,
+      "optimizer_steps_per_arm": 1024,
+      "optimizer_steps": 2048,
+      "rollouts": 512,
+      "eval_arms_including_hover": 3,
+      "eval_episodes_per_arm": 32,
+      "eval_episodes": 96,
+      "eval_team_steps": 24576,
+      "team_steps": 286720,
+      "explicit_episodes_resets": 1120,
+      "constructor_resets": 2,
+      "existing_diagnostic_frames": 1600
+    },
+    "native_counts_note": "Existing diagnostics are T/G final t0..4 only (1600 rows); no complete renewal-event dump or added native observation is needed for the primary.",
+    "parameters": {
+      "T": 68553,
+      "G": 66311,
+      "T_duration_head": 2242,
+      "added_over_B04": 0,
+      "T_minus_G": 2242
+    },
+    "duration_work_bounds": {
+      "T_training_owned_decisions": [
+        163840,
+        655360
+      ],
+      "T_final_owned_decisions": [
+        10240,
+        40960
+      ],
+      "head_forward_rows": [
+        1003520,
+        4014080
+      ],
+      "head_row_law": "6 * training_owned_decisions + 2 * final_owned_decisions (sample + behavior density + four PPO epochs, then final sample + density)",
+      "dense_multiply_adds_per_head_row": 2208,
+      "dense_forward_multiply_adds": [
+        2215772160,
+        8863088640
+      ],
+      "head_forward_row_multiplier_vs_B04": [
+        64.0,
+        256.0
+      ],
+      "bounds_basis": "All d=4 gives 64 renewals per UAV episode; all d=1 gives256. These deterministic work bounds are not a policy-class search or prediction of trained durations.",
+      "actual_owned_decisions_and_extra_seconds": null,
+      "T_velocity_samples": "same as true own renewal count; fewer on held rows",
+      "G_velocity_samples_train_plus_eval": 696320
+    },
+    "new_environment_or_recurrent_forward_steps": 0,
+    "nested_candidates_trajectories_search_ensemble": 0,
+    "objective": "B04 native complete undiscounted return-to-go, gamma1, zero entropy coefficient, agent-compound PPO clipping; true action density only on renewal rows, primitive-row denominator retained.",
+    "primary": "mean of 32 matched final episode J_T-J_G, J=sum primitive native team rewards/256; all T/G/H values and conditional evaluation SE retained; n=1 independent training pair.",
+    "MEI_absolute": 0.01,
+    "headroom_record": "absent; G and untuned H reused under matching task/action/information/training budget, no claim of tuned competence.",
+    "proposed_cap_seconds_per_complete_arm": 1800,
+    "proposed_cap_seconds_complete_pair_through_exit": 3600,
+    "per_arm_cost_law": "initialization + 131072 primitive environment/actor/recurrent steps + 1024 Adam updates +8192 final learned-arm evaluation steps + publication; G adds8192 H steps. T adds duration sampling/density/head-backward work at actual renewals; no extra environment or recurrent steps.",
+    "cost_reference": {
+      "source": "one accepted B04, no rerun",
+      "T_seconds": 137.67042454401962,
+      "G_seconds_including_hover": 139.29419632797362,
+      "whole_seconds": 277.51,
+      "incremental_duration_seconds": null,
+      "interpretation": "Same native loop reference, not a measured renewal-policy forecast; head/categorical work grows materially and actual costs must be preserved within the same cap. No timing pilot or automatic cap growth."
+    },
+    "added_validation": "one focused affected-directory suite <=300s and independent ownership/mask/terminal/full-native-primary review; no standalone smoke, model replay, profiling or cost experiment.",
+    "engineering_scope_section4": "none",
+    "execution_if_selected": "same CM complete bounded technical batch; portable remote-first CPU FP32 one Torch thread, exact committed source and fresh physical/effective memory admission; accepted handle has one observer and is reported to Root.",
+    "all_outcome_stop": "one selected pair ends at intake, no automatic second pair/retry/extra H/evaluation/tuning or successor.",
+    "censoring_reporting": "Aggregate selected d=4 choices, censored holds and actually suppressed primitive decisions in existing counts/summary; no complete renewal event dump."
+  },
+  "no_successor_option": {
+    "new_scientific_invocations": 0,
+    "new_native_steps": 0,
+    "reading": "retain no ready successor from the tested opening evidence; do not infer broad impossibility or local lifecycle/family closure."
+  },
+  "local_library_query": {
+    "question": "Does action repetition used at successive own expiries supply a specific event change beyond B04 opening-only control, and which asynchronous observation/credit assumptions actually apply?",
+    "My_lib_readonly_coverage": {
+      "command": "python -m my_lib coverage",
+      "collections": [
+        "synthetic-core"
+      ],
+      "paper_count": 2,
+      "mechanism_count": 2,
+      "corpus_coverage_date": "2026-07-26",
+      "limits": "default published CLI covers synthetic fixtures only, excluded; no verified unified real collection is claimed"
+    },
+    "Inst_sci_catalog_path": "C:\\Projects\\Inst-sci\\papers\\MyLib\\llm-index\\catalog.v2.jsonl",
+    "catalog_records": 190,
+    "query_pattern": "temporally.extended|temporal abstraction|macro.?action|action.repet|asynchronous|semi.markov|option.critic|termination",
+    "matched_candidates": [
+      {
+        "id": "MARL-0066",
+        "title": "CoDe: Communication Delay-Tolerant Multi-Agent Collaboration via Dual Alignment of Intent and Timeliness"
+      },
+      {
+        "id": "MARL-0411",
+        "title": "Cooperative Multi-Agent Reinforcement Learning: Asynchronous Communication and Linear Function Approximation"
+      },
+      {
+        "id": "MARL-0449",
+        "title": "Agent-Centric Actor-Critic for Asynchronous Multi-Agent Reinforcement Learning"
+      },
+      {
+        "id": "MARL-0500",
+        "title": "Inducing Stackelberg Equilibrium through Spatio-Temporal Sequential Decision-Making in Multi-Agent Reinforcement Learning"
+      },
+      {
+        "id": "MARL-0530",
+        "title": "Asynchronous Credit Assignment for Multi-Agent Reinforcement Learning"
+      },
+      {
+        "id": "MARL-0543",
+        "title": "Variational Offline Multi-agent Skill Discovery"
+      },
+      {
+        "id": "MARL-0588",
+        "title": "Multi-Agent Coordination via Multi-Level Communication"
+      },
+      {
+        "id": "VS-0005",
+        "title": "Learning Uncertainty-Aware Temporally-Extended Actions"
+      }
+    ],
+    "verified_sources": [
+      {
+        "id": "VS-0005",
+        "title": "Learning Uncertainty-Aware Temporally-Extended Actions",
+        "year": "2024",
+        "source_json": "C:\\Projects\\Inst-sci\\papers\\MyLib\\json\\VS-0005.json",
+        "source_json_sha256": "557fff1f849ae5129224ed41ec6b4851aed6a6b2687653e57abf1ce5397f14e3",
+        "page": 3,
+        "element_id": 144,
+        "verified_short_quote": "at every time an option initiates",
+        "use_and_limit": "Action selection precedes duration selection at each option initiation; source uses state-and-selected-action duration, single-agent Q-learning and ensembles, not this PPO/UAV system.",
+        "metadata_quality": {
+          "bibliographic_status": "local_evidence",
+          "grade": "B",
+          "identity_status": "verified_local_pdf",
+          "json_status": "json_ready",
+          "score": 85,
+          "semantic_status": "luna_json_abstract_grounded",
+          "warnings": [
+            "doi_missing_or_not_applicable",
+            "official_url_missing"
+          ]
+        },
+        "official_record": "https://ojs.aaai.org/index.php/AAAI/article/view/29241",
+        "official_identity_provenance": "ACAC catalog/metadata and previously verified P61 official record; UTE missing official URL in metadata is preserved and its prior P61 official identity verification is reused."
+      },
+      {
+        "id": "MARL-0449",
+        "title": "Agent-Centric Actor-Critic for Asynchronous Multi-Agent Reinforcement Learning",
+        "year": "2025",
+        "source_json": "C:\\Projects\\Inst-sci\\papers\\MyLib\\json\\MARL-0449.json",
+        "source_json_sha256": "37d15c5db4bb825ba117b35e90f07e5fbcec659ee07957d6390f4a6f5d538379",
+        "page": 3,
+        "element_id": 410,
+        "verified_short_quote": "This cycle continues until the episode concludes.",
+        "use_and_limit": "Each agent chooses a new macro-action when its own previous one terminates; paper assumes macro-observations available on completion. Our proposal retains free primitive observations and the existing full-return critic, so its missing-observation/padding remedy is not transplanted.",
+        "metadata_quality": {
+          "bibliographic_status": "official_enriched",
+          "grade": "A",
+          "identity_status": "official_title_matched",
+          "json_status": "json_ready",
+          "score": 95,
+          "semantic_status": "luna_json_abstract_grounded",
+          "warnings": [
+            "doi_missing_or_not_applicable"
+          ]
+        },
+        "official_record": "https://proceedings.mlr.press/v267/jung25a.html",
+        "official_identity_provenance": "ACAC catalog/metadata and previously verified P61 official record; UTE missing official URL in metadata is preserved and its prior P61 official identity verification is reused."
+      }
+    ],
+    "limits": "190-record searched snapshot and eight lexical candidates; not a novelty census or a claim that either physical library has no additional material. Other matches were not used as substantive source evidence."
+  }
+}
