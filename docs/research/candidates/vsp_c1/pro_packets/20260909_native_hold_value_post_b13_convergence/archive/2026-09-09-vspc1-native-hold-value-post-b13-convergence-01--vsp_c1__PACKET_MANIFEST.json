@@ -1,0 +1,36 @@
+{
+  "schema_version": 4,
+  "packet_id": "2026-09-09-vspc1-native-hold-value-post-b13-convergence-01--vsp_c1",
+  "attempt": 1,
+  "canonical_form": "logical_packet_manifest",
+  "request_id": "2026-09-09-vspc1-native-hold-value-post-b13-convergence-01",
+  "direction_id": "vsp_c1",
+  "direction_ids": [
+    "vsp_c1"
+  ],
+  "workflow_node": "em_convergence",
+  "conversation_binding_key": "em:vsp_c1:convergence",
+  "decision_authority": "pro_final",
+  "source_mode": "paste",
+  "body": {
+    "role": "prompt",
+    "source_path": "<paste>",
+    "canonical_filename": "2026-09-09-vspc1-native-hold-value-post-b13-convergence-01--vsp_c1__00_PROMPT.md",
+    "bytes": 1256,
+    "sha256": "2e2f00c490b1bae891e2d9ebc4d720af7d9260cd938358d3084e33a6943a7197",
+    "materialized_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_c1\\2026-09-09-vspc1-native-hold-value-post-b13-convergence-01\\2026-09-09-vspc1-native-hold-value-post-b13-convergence-01--vsp_c1__00_PROMPT.md"
+  },
+  "references": [],
+  "reference_order_is_authoritative": true,
+  "provider_filename_policy": "record_observed_name_only",
+  "companion_prompt_is_transport_ui_only": true,
+  "manifest_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_c1\\2026-09-09-vspc1-native-hold-value-post-b13-convergence-01\\2026-09-09-vspc1-native-hold-value-post-b13-convergence-01--vsp_c1__PACKET_MANIFEST.json",
+  "materialized_artifacts": {
+    "body": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_c1\\2026-09-09-vspc1-native-hold-value-post-b13-convergence-01\\2026-09-09-vspc1-native-hold-value-post-b13-convergence-01--vsp_c1__00_PROMPT.md",
+    "references": []
+  },
+  "materialized_hashes": {
+    "body": "2e2f00c490b1bae891e2d9ebc4d720af7d9260cd938358d3084e33a6943a7197",
+    "references": []
+  }
+}
