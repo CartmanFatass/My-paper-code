@@ -1,0 +1,76 @@
+{
+  "id": "20260908-vspc1-009",
+  "created": "2026-09-08T20:04:14-07:00",
+  "direction": "vsp_c1",
+  "tier": "portfolio",
+  "kind": "portfolio",
+  "title": "准备容量接近的普通MLP原生对照",
+  "context": "P67第二个normalized pair完成UP：主差值0.02310，两个学习策略均高于H。两对局部信号仍未排除额外容量和优化因素。建议后续单独准备一次容量接近的普通MLP比较；P67没有后续运行额度。",
+  "options": [
+    {
+      "key": "ratify",
+      "label": "ratify the proposal",
+      "consequence": "安排独立的后续卡与源合同，明确初始化和RNG后再分配一次新比较；不复用P67额度。"
+    },
+    {
+      "key": "refuse",
+      "label": "refuse",
+      "consequence": "保留P67结果与未决机制解释，不追加运行或改判方向。"
+    },
+    {
+      "key": "amend",
+      "label": "amend per the comment",
+      "consequence": "调整后续问题或比较器后另行冻结；当前不执行。"
+    }
+  ],
+  "recommended": "ratify",
+  "auto_applied": null,
+  "dm_reason": "两对原生局部优势和第二对正向MLP-H支持检验容量相近的普通对照，但不足以宣称稳定或独特机制。",
+  "evidence": [
+    "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B04_P67_INTAKE_20260908.md",
+    "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B04_P67_RESULT_EVIDENCE_20260908.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-08.md#L75",
+  "brief": "docs/research/portfolio/owner/briefs/vsp_c1/2026-09-08_VSPC1_NATIVE_HOLD_VALUE_B04_P67.md",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否另行安排一个有界任务，比较门控价值网络与容量接近的普通MLP，而不是追加当前配置的训练对？",
+    "changes_if_approved": [
+      {
+        "target": "vsp_c1 后续对象任务与科学卡",
+        "from": "P67完成；两对共同归一化训练均出现局部正向主差值，没有后续运行额度",
+        "to": "准备一个新的B比较：保留门控网络、原生学习方法和H，普通MLP容量接近门控网络；先冻结新卡、初始化和RNG，再按新任务分配执行"
+      }
+    ],
+    "if_refused": "保留P67完整结果、旧反例和当前科学边界，不自动增加训练、改判结果或停掉方向。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B04_P67_INTAKE_20260908.md",
+        "quote": "The primary gain recurs while MLP's H-relative point estimate is positive in8202.",
+        "why": "两次主差值都超过0.01，且第二对普通MLP也高于H，值得检验同等信息和接近容量的普通对照。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B04_P67_INTAKE_20260908.md",
+        "quote": "The gate adds640 parameters,\njoint clipping couples critic/actor gradients, and normalized value units, FP32\nand on-policy partner co-adaptation can affect optimization.",
+        "why": "目前仍是完整方案的局部性能事实；额外容量、优化相互作用和只有两对训练限制了机制与稳定性结论。"
+      }
+    ],
+    "uncertainty": [
+      "136→128→133→1普通MLP有34827参数，门控网络有34817；这是待冻结的具体候选，不是已调优或已执行的比较器。",
+      "新比较的初始化、私有RNG及验收必须在后续卡中明确；本次未选择新种子。",
+      "即使新对照仍落后，也不单独证明某种独特的时长信用机制或稳定总体优势。"
+    ],
+    "cost": {
+      "compute": "当前P67完整运行312.77秒，已完成。后续若分配一对，主工作为2×512×256训练加3×32×256评估，共286720原生步、2048次Adam、96次评估；建议仍为每臂1800秒、整对3600秒上限。加宽MLP的增量成本未测，无额外搜索或成本实验。",
+      "owner_time": "无需等待回复；可异步批准、拒绝或修改建议。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing；P67已完成，本建议没有分配新运行"
+    },
+    "verdict_text": "Recommend a later one-pair B comparison of the normalized gated critic against\na same-information ordinary full MLP with approximately matched critic capacity,\nretaining native H and all outcomes. Prepare its card/source contract in a new\nbounded assignment; no new card, seed, code dispatch or run is allocated here.",
+    "source": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B04_P67_INTAKE_20260908.md"
+  },
+  "starred": true
+}
