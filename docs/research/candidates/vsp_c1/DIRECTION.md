@@ -739,3 +739,53 @@ with475.85/507.29s actual planning references and1800s complete arm/3600s whole
 caps. Different outcomes remain informative; no third pair is required for
 accepting these two. No new card, invocation, Pro request, family, lifecycle,
 priority, recast, C or formal UAV-entry disposition is created by this intake.
+
+## Third relative reduction and a contrary early endpoint — 2026-09-09
+
+The [B12 P78 intake](VSPC1_NATIVE_HOLD_VALUE_B12_INTAKE_20260909.md#6-p78-valid-result-intake-and-decisions)
+accepts8503 as valid complete **CHANGE_DOWN**, C−.0586081586, conditional
+SE .0114590896,28/32 negative changes. Both endpoints are DOWN:
+Delta512−.0149815972 (SE .0072213019) and Delta768−.0735897558
+(SE .0103586543), with20/32 and31/32 adverse identities.512 is close to
+negative MEI by .0049815972 (.68985 conditional SE); the768 deficit is much
+larger relative to conditional noise. The [E0](VSPC1_NATIVE_HOLD_VALUE_B12_RESULT_EVIDENCE_20260909.md)
+retains all160 evaluations from two continuous real fits,434176 team steps
+and3072 Adam calls, with the accepted training/evaluation separation.
+
+GATED means .1653390673→.1611642375; MLP .1803206645→.2347539933.
+The descriptive GATED change−.0041748298 is small/noisy (SE .0094990262),
+while MLP's+.0544333288 (SE .0084185173) accounts for most of the relative
+reduction. No isolated budget cause follows. H is .1394977424; all four
+learned point means exceed it, with11/11/14/5 H-loss identities retained.
+The ordinary MLP768 endpoint is the strongest attained comparison in this pair;
+H is untuned and matching tuned same-information headroom remains absent.
+
+Three same-protocol Cs are−.0542390934/−.0119242503/−.0586081586,
+descriptive mean−.0415905008/sample SD .0257844332.512 regions now read
+UP/UP/DOWN, descriptive mean+.0234043192/SD .0394721498;768 reads
+WITHIN/WITHIN/DOWN, mean−.0181861815/SD .0479810656. These are three
+independent training pairs, each with repeated checkpoints and finite panels.
+No pooled pass, equivalence, stable population trend or superiority/inferiority
+follows. Earlier final-only768 negatives/H losses and other regimes remain separate.
+
+Strongest support for the gated package remains the first two fixed512 gains
+with GATED above H, plus the earlier8301/8303 UPs. Strongest contradiction is
+the new large768 deficit, all three relative reductions and the contrary512
+point; prior positives are preserved. Opening duration → entity-owned remaining
+hold → centralized value/joint optimization → partial-history recurrent actor
+→ motion/service → native return remains the exercised path. Membership is
+fixed, histories separate and the critic absent from action selection. About
+1.13% of training rows carry nonzero holds. Generic nonlinear capacity,
+initialization, geometry, clipping, evolving value units/moments, FP32 and partner
+co-adaptation survive as alternatives; movement/rare exposure identify no cause.
+Verified PPO/ACAC/UTE/MVD distinctions keep their original setting limits.
+
+The next recommended discriminator is now the direction question of whether
+this instantiated comparison warrants a concrete performance-motivated B change
+or should end. A fourth unchanged pair remains legal, but would mainly extend
+variation; known work is434176 steps/3072 Adam/160 evaluations with475.85/
+507.29/504.91s actual references. This evidence-specific recommendation is not
+a three-seed threshold or an added Pro gate for conforming A/B. Any family
+continuation/closure or recast belongs to em:vsp_c1:convergence. P78 is complete
+and permits no Pro Send; no packet or decision exists yet. No family, lifecycle,
+priority, recast, C or formal UAV-entry disposition has been made here.

@@ -1,4 +1,17 @@
-# VSPC1 restart handoff — P77 complete, 2026-09-09
+# VSPC1 restart handoff — P78 complete, 2026-09-09
+
+P78 current boundary: the separately allocated third independent fixed512/768/
+common-H pair is valid complete and fully intaken. [B12 card](VSPC1_NATIVE_HOLD_VALUE_B12_SCIENCE_CARD_20260909.md)
+and [intake §6](VSPC1_NATIVE_HOLD_VALUE_B12_INTAKE_20260909.md#6-p78-valid-result-intake-and-decisions)
+record8503, C−.0586081586 CHANGE_DOWN,512Delta−.0149815972 DOWN and
+768−.0735897558 DOWN. All learned means exceed H, with every loss retained.
+Source19e0d0d303686cd7590ecfe7970d2057d652eea5, wrapperc1514944a1522d90f96f51e744125f3091bc90c2,
+CM result a07774d436eb431d646a5d15864af900111a85a3. Whole504.91s;
+434176steps/3072Adam/160evaluations, all complete caps pass. One submission
+spent, zero remain; no live process. Final P78 section below names preserved
+artifacts, ownership and the next unallocated direction-question recommendation.
+Earlier completion/stop boundaries remain historical. Original DM/CM reuse the
+designated checkout; Root owns integration and completed remote-checkout reclamation.
 
 P77 current boundary: Root accepted P76 and separately allocated one fresh
 independent repeat of the unchanged fixed512/768/common-H comparison. The
@@ -326,3 +339,29 @@ references are not guarantees. All signs remain informative. No new card/master/
 prediction, CM code task, submission, retry, extra evaluation or Pro Send exists.
 Root owns integration and any separate allocation; no direction or Portfolio
 disposition has been inferred from completion.
+
+## Final P78 result, ownership and next unallocated work
+
+- Scientific source:19e0d0d303686cd7590ecfe7970d2057d652eea5; CM result:
+  a07774d436eb431d646a5d15864af900111a85a3. Card §§7–8 and intake §6 hold the
+  frozen binding, all outcomes, counts, receipts and decisions. Source/checker
+  changes are identity-only; unchanged independent boundary review remains applicable.
+- Sole handlevspc1_hold_value_b12_8503_19e0d0d30368 finished10:57:02Z,
+  exit0/inactive. Complete504.91s, conservative arms267.9792/259.2685s,
+  peakRSS545.83203125MiB. One accepted/one valid P78 result; no allowance remains.
+- Local collection:temp/directions/vsp_c1/collection/native_hold_value_b12_8503_19e0d0d30368/.
+  Remote output:/home/wu/projects/HMASD/temp/directions/vsp_c1/exp/native_hold_value_b12_8503_19e0d0d30368.
+  Durable results/native_hold_value_b12_8503_20260909/ includes E0 data, all160
+  evaluation rows, supervisor/acceptance receipts, DM analysis and three-pair run tables.
+- Three Cs are negative;512UP/UP/DOWN and768WITHIN/WITHIN/DOWN remain separate.
+  Mean/SD are descriptive only.8503's GATED native change is small/noisy while MLP
+  improves more; all H losses, old protocols and absent tuned headroom remain visible.
+- Next advice: separately assign a scoped Convergence question about continuing
+  this instantiation with a concrete B change or ending the instantiated comparison.
+  That direction-tier disposition is not made locally. P78 authorizes no Pro Send:
+  no packet/request/new card/master/prediction/code task/run has been created.
+- DM returns full intake/brief/audit for Root integration and next allocation,
+  preserving main's later UCOPE changes and other work. Root reclaims the finished
+  exact-SHA remote checkout after evidence preservation; keep scientific outputs.
+  The designated local direction checkout stays in use. Original CM owns the
+  historical policy-blocked P76 scratch; no rejected cleanup is repeated or bypassed.
