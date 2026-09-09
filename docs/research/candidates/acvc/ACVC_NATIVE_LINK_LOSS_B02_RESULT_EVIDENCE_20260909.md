@@ -2,7 +2,8 @@
 
 ## Engineering acceptance
 
-Identity adaptation accepted; the sole P79 scientific invocation is running. Contract:
+**Complete B02/P79 native comparison technically accepted.** The sole invocation exited 0,
+all required outcomes were collected, and scientific intake remains with DM. Contract:
 [B02 card §§1–5](ACVC_NATIVE_LINK_LOSS_B02_SCIENCE_CARD_20260909.md) and
 [P79 prospective facts](ACVC_NATIVE_LINK_LOSS_B02_P79_PROSPECTIVE_FACTS_20260909.json)
 at `56ce830386cfab6be30b217e5cc5b0d0f8109120`. The designated `codex/acvc` checkout
@@ -47,7 +48,7 @@ in every synthetic phase, checkpoint master fields, all-arm post-learner output 
 2240 distinct action streams shifted exactly 100000 from P78, separation from all initialization/
 reset streams (2789 distinct declared values total), and the dedicated P79 launch identity.
 The synthetic fixture is not scientific performance evidence. Complete native output and
-actual process-exit accounting remain to be established by the sole allocated invocation.
+actual process-exit accounting are established separately by the sole invocation below.
 
 ## Prospective cost and publication coverage
 
@@ -108,3 +109,119 @@ The configured `zsh -lic` network shell fetched the committed source with an emp
 refmap into FETCH_HEAD (preserving the old remote-tracking prefix conflict), and created
 the exact detached checkout. Its unrelated interactive gitstatus warning did not prevent
 fetch/checkout; both operations exited 0. No scientific retries or source changes followed.
+
+## Terminal acceptance and accounting
+
+Same supervisor handle finished with exit 0, tmux inactive; task log exit timestamp
+`2026-09-09T20:05:07+08:00` (`12:05:07Z`), integer duration 357 s. External `/usr/bin/time`
+measured **357.55 s** through actual process exit and **549380 KiB = 0.523930 GiB** peak RSS.
+The runner-to-summary versus outer-process difference is **17.5826431 s**, included in
+the complete bill rather than omitted as free publication/exit work.
+
+| Complete cost | Seconds |
+|---|---:|
+| Current focused checks | 5.4396806 |
+| Scientific process through exit | 357.55 |
+| Logical study / summed serial machine wall | **362.9896806** |
+| Shared work charged to both learned arms | 35.8139178 |
+| T complete bill | **191.5703530** |
+| G complete bill | **207.2332454** |
+
+Both learned arms are below 1800 s, study below 3600 s, and focused checks below 300 s.
+The serial machine execution critical path equals the summed machine wall above; human
+authoring/review waits, Git/SSH staging and gaps between invocations are outside the card's
+machine bill. Aggregate CPU and scratch high-water remain unmeasured, with no claims on
+either. The actual summary reports CPU/FP32 and Torch intra/inter-op 1; native geometry
+and its single-thread environment are unchanged. Admission is separate from actual wall/RSS.
+
+All six remote scientific artifacts' digests matched their collected copies. Final T/G
+checkpoints deserialize with master 8902, correct arm tags, 11425/26306 gate parameters,
+and finite gate/critic tensors. The complete local runtime copy, including checkpoints, is
+`C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/exp/native_link_loss_b02_8902_p79_20260909`.
+Original P78 runtime and evidence were untouched. The P79 remote worktree/output remains
+available for Root's normal integration/reclamation; all scientific bytes have verified
+local copies. No live scientific process or observation handover remains.
+
+Published artifacts: [summary](native_link_loss_b02_p79_20260909/summary.json),
+[all episode outcomes](native_link_loss_b02_p79_20260909/episodes.jsonl),
+[all rollout/update records](native_link_loss_b02_p79_20260909/updates.jsonl),
+[collection acceptance and digests](native_link_loss_b02_p79_20260909/collection_acceptance.json),
+[admission](native_link_loss_b02_p79_20260909/admission.json),
+[external process time](native_link_loss_b02_p79_20260909/process_time.txt),
+[supervisor terminal](native_link_loss_b02_p79_20260909/supervisor_terminal.json),
+and [complete task log](native_link_loss_b02_p79_20260909/task.log).
+
+Post-collection read-only arithmetic established **1024 training episodes, 128 final
+episodes, 1152 scored resets, 4 additional constructor resets, 294912 team steps,
+1474560 base agent forwards, 1392640 gate collection agent forwards, 512 rollout records
+and 2048 Adam records**. T/G each retain the entire training reset range
+890201000–890201511 and all arms retain final reset range 890202000–890202031, in order.
+All episode records have 256 steps and S=256J. Every gate aggregate matches its episode
+rows. Each paired mean, conditional SE, signed rule and quarter-S condition was recomputed
+from its own B02 panel and matched summary. There was no new environment, model fitting,
+native diagnostic or evaluation exposure during collection/acceptance.
+
+## Native primary outputs and card rule
+
+Native `S=sum_t r_team[t]`, `J=S/256` remains unchanged. Final arm means:
+
+| Arm | Mean J |
+|---|---:|
+| T | 0.2239949255 |
+| G | 0.2305895069 |
+| C | 0.1704037145 |
+| F | 0.2782482889 |
+
+Verbatim rule: **UP if mean difference >0.01 J; DOWN if <−0.01 J; otherwise WITHIN**.
+The separate inherited test is **mean difference >0.25 S**.
+
+| Fixed contrast | Mean ΔJ | Conditional SE J | Mean ΔS | Rule | >0.25 S |
+|---|---:|---:|---:|---|---|
+| T−C (primary) | +0.0535912110 | 0.0109472169 | +13.7193500 | UP | yes |
+| T−F (primary) | −0.0542533634 | 0.0109171556 | −13.8888610 | DOWN | no |
+| T−G | −0.0065945815 | 0.0108858343 | −1.6882129 | WITHIN | no |
+| G−C | +0.0601857925 | 0.0113997635 | +15.4075629 | UP | yes |
+| G−F | −0.0476587820 | 0.0107632723 | −12.2006482 | DOWN | no |
+
+Primary `min(mean(T−C),mean(T−F))` is **−0.0542533634 J** (−13.8888610 S).
+There is no selected-max SE and no episode-wise oracle. Each fixed contrast uses 32 paired
+joint episodes conditional on this fitted instance. P78's panels are kept separate; no
+pooling, training-population inference or scientific reinterpretation is part of this return.
+Every favorable, adverse and within-MEI outcome remains visible.
+
+## Actual gate exposure
+
+| Arm/phase | Opportunities | Apply on opportunity | Retrace | Distinguishable b/c |
+|---|---:|---:|---:|---:|
+| T train | 50137 | 22816 | 27321 | 50137 |
+| T final | 3301 | 1464 | 1837 | 3301 |
+| G train | 49920 | 22579 | 27341 | 49920 |
+| G final | 3190 | 1486 | 1704 | 3190 |
+| F final | 3877 | 0 | 3877 | 3877 |
+
+C does no anchor matching; its zero counter denotes unmeasured opportunities, not proven
+absence. C always applies the sampled base command. All ineligible rows in every arm also
+apply the base command, outside the eligible-choice counts above. Both learned arms received
+1024 Adam updates. Gate and critic movement are measured independently:
+
+| Arm/group | Initial norm | Absolute displacement | Relative displacement |
+|---|---:|---:|---:|
+| T gate | 9.4158669 | 1.6698216 | 0.1773413 |
+| T final projection | 0 | 0.1196913 | undefined |
+| T critic | 9.2905779 | 6.9057150 | 0.7433031 |
+| G gate | 13.2589827 | 2.2648809 | 0.1708186 |
+| G common final projection | 0 | 0.0757322 | undefined |
+| G residual final projection | 0 | 0.0952114 | undefined |
+| G critic | 9.2905779 | 7.3091612 | 0.7867284 |
+
+All common/residual path norms and movement are retained in summary. Gate movement is
+not inferred from critic movement and does not replace the native endpoints.
+
+## Remaining responsibility
+
+This allocated scientific/engineering batch has no remaining technical acceptance gap.
+DM owns all-outcome scientific intake and next unallocated recommendation; Root owns
+integration and terminal remote worktree reclamation. The previously blocked P78 publication
+scratch path remains untouched, with its original CM cleanup ownership and recorded runtime
+policy rejection. P79 created no leftover test scratch. No retry, resume, extra native panel,
+third instance, tuning, new allocation or Pro Send is implied by this return.
