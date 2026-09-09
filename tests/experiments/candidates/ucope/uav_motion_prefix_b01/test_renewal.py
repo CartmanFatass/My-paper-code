@@ -117,9 +117,11 @@ def test_t254_t255_original_labels_actual_suppression_and_partial_censor(monkeyp
     assert bool(rows) != fail_last
 
 
-@pytest.mark.parametrize("pair", ["renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01"])
+@pytest.mark.parametrize("pair", ["renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01", "renewal_fixed_b01"])
 def test_actual_short_pair_primary_counts_checkpoint_and_identity(tmp_path, pair):
+    fixed = pair == "renewal_fixed_b01"
     frozen = pair == "renewal_frozen_b01"
+    fitted = ("F", "G") if fixed else ("T", "F", "G") if frozen else ("T", "G")
     config = study.Config.engineering(pair=pair)
     summary = study.run_pair(config, tmp_path, time.monotonic())
     assert summary["status"] == "COMPLETE" and summary["scientific_uav_calls"] == 0
@@ -129,32 +131,41 @@ def test_actual_short_pair_primary_counts_checkpoint_and_identity(tmp_path, pair
         expected_object, expected_card = study.RENEWAL_B03_OBJECT, study.RENEWAL_B03_CARD
     if frozen:
         expected_object, expected_card = study.FROZEN_OBJECT, study.FROZEN_CARD
+    if fixed:
+        expected_object, expected_card = study.FIXED_OBJECT, study.FIXED_CARD
     assert summary["object"] == expected_object and summary["card"] == expected_card
     assert summary["card_section"] == 7
     assert summary["commitment"] == "own_expiry"
     assert summary["counts"]["team_steps"] == (112 if frozen else 80) and summary["counts"]["optimizer_steps"] == (12 if frozen else 8)
     rows = [json.loads(line) for line in (tmp_path / "episodes.jsonl").read_text().splitlines()]
     primary = summary["primary"]
-    for arm in (("T", "F", "G", "H") if frozen else ("T", "G", "H")):
+    for arm in (*fitted, "H"):
         values = [r["reward_sum"] / 8 for r in rows if r["arm"] == arm and r["phase"] == "eval"]
         assert primary["J"][arm] == values
         assert primary["arm_means"][arm] == pytest.approx(sum(values) / 2)
-    contrasts = (("T", "G"), ("T", "H"), ("G", "H")) + ((("T", "F"), ("F", "H")) if frozen else ())
+    first = "F" if fixed else "T"
+    contrasts = ((first, "G"), (first, "H"), ("G", "H")) + ((("T", "F"), ("F", "H")) if frozen else ())
     assert {key for key in primary if "_minus_" in key} == {a + "_minus_" + b for a, b in contrasts}
     for a, b in contrasts:
         differences = [x-y for x,y in zip(primary["J"][a], primary["J"][b])]
         observed = primary[a + "_minus_" + b]
         assert observed["differences"] == differences
         assert observed["conditional_se"] == pytest.approx(abs(differences[0]-differences[1])/2)
-    for arm in (("T", "F", "G") if frozen else ("T", "G")):
+    for arm in fitted:
         checkpoint = torch.load(tmp_path / f"final_{arm}.pt", weights_only=True)
         assert checkpoint["configuration"] == summary["configuration"] and checkpoint["arm"] == arm
         assert sum(v.numel() for field in ("actor", "critic") for v in checkpoint[field].values()) == (68553 if arm in ("T", "F") else 66311)
-    if frozen:
-        assert summary['counts']['diagnostic_frames'] == 150 and summary['diagnostics_complete']
-        assert summary['counts']['explicit_resets'] == 14 and summary['counts']['constructor_resets'] == 3
-        assert summary['counts']['rollouts'] == 3 and summary['primary']['secondary_complete']
-        assert [summary['arms'][a]['trainable_parameters'] for a in ('T', 'F', 'G')] == [68553, 66311, 66311]
+    if frozen or fixed:
+        assert summary['counts']['diagnostic_frames'] == (150 if frozen else 100) and summary['diagnostics_complete']
+        assert summary['counts']['explicit_resets'] == (14 if frozen else 10) and summary['counts']['constructor_resets'] == len(fitted)
+        assert summary['counts']['rollouts'] == len(fitted)
+        assert list(summary['arms']) == list(fitted)
+        assert set(primary['J']) == set((*fitted, 'H'))
+        if frozen:
+            assert summary['primary']['secondary_complete']
+        else:
+            assert not (tmp_path / 'final_T.pt').exists()
+        assert [summary['arms'][a]['trainable_parameters'] for a in fitted] == ([68553, 66311, 66311] if frozen else [66311, 66311])
         checkpoint = torch.load(tmp_path / 'final_F.pt', weights_only=True)
         initial_actor, _ = policy.arm_copy(policy.templates(9001), True, duration_head_seed=900100012)
         for name, tensor in initial_actor.state_dict().items():
@@ -220,3 +231,17 @@ def test_three_arm_deadlines_keep_whole_cap_and_do_not_reset_expired_arm():
     with pytest.raises(TimeoutError):
         deadline.start_g('F')
     assert deadline.arm == 'T'
+
+
+def test_fixed_primary_missing_f_and_first_arm_startup_cap(tmp_path):
+    rows=[dict(arm=a, phase='eval', episode=e, J=j) for a,j in [('F',3.),('G',2.),('H',1.)] for e in range(2)]
+    result=study.primary_from_rows(rows, 2, renewal=True, fixed=True)
+    assert result['complete'] and result['F_minus_G']['mean']==1.
+    assert set(k for k in result if '_minus_' in k)=={'F_minus_G','F_minus_H','G_minus_H'}
+    partial=study.primary_from_rows(rows[1:], 2, renewal=True, fixed=True)
+    assert not partial['complete'] and partial['G_minus_H']['complete']
+    cfg=study.Config.engineering(pair='renewal_fixed_b01')
+    cfg.arm_cap=10
+    summary=study.run_pair(cfg,tmp_path,0.,clock=lambda:11.)
+    assert summary['status']=='CAP_BREACH' and summary['arms']=={}
+    assert any('F deadline exceeded' in x for x in summary['limits'])

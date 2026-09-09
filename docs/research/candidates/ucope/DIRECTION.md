@@ -29,8 +29,8 @@ remains dated provenance under the controlling evidence specification section 11
   **2026-09-09 PRO_FINAL / CONTINUE** inside the existing own-expiry renewal
   family. Select the next bounded B question comparing learned renewal T,
   frozen-initial duration-head renewal F, ordinary feedback G and hover H;
-  T−G remains primary and T−F secondary. This is a future one-instance design,
-  with no new card, master, implementation or invocation allocation in P74.
+  T−G remains primary and T−F secondary for that now completed P77 design.
+  P74 itself supplied no card, master, implementation or invocation allowance.
   See the [post-renewal-B03 Convergence intake](UCOPE_POST_RENEWAL_B03_CONVERGENCE_INTAKE_20260909.md).
   Recasts remain **1**, with the prior historical-coverage limitation. No
   second-recast, C promotion or Portfolio disposition follows.
@@ -51,7 +51,17 @@ remains dated provenance under the controlling evidence specification section 11
   The **2026-09-05 PRO_FINAL / PARK** of the same-draw retained-policy root-residual
   localization family and its numerical-locus dependency remains unchanged.
   See the [Convergence intake](UCOPE_UAV_INTERFACE_CONVERGENCE_INTAKE_20260907.md).
-- Latest bounded B observation: **2026-09-09 UAV renewal B03 P72,
+- Latest bounded B observation: **2026-09-09 fixed renewal B01 P78,
+  COMPLETE / UP**. New7701 gives prospective F−G
+  **+0.026550516654013076**, conditional SE**0.011109495362659165**;
+  F−H+0.030122962641204728 and G−H+0.0035724459871916527. F's whole
+  initial duration head remained fixed, with real velocity/critic learning.
+  This is one matched training instance, not stable superiority or evidence
+  of learned-duration benefit. All96 outcomes and15 adverse F−G episodes
+  remain. P77's learned-T losses remain separately DOWN. See
+  [P78 intake](UCOPE_UAV_FIXED_RENEWAL_B01_P78_INTAKE_20260909.md) and
+  [P77 intake](UCOPE_UAV_RENEWAL_FROZEN_HEAD_B01_P77_INTAKE_20260909.md).
+- Previous bounded B observation: **2026-09-09 UAV renewal B03 P72,
   COMPLETE / DOWN**. New independent master7501 yields T−G
   **−0.03094711061890552**, conditional evaluation SE
   **0.010056196158593048**; T−H **+0.021107100463981232** and G−H
@@ -81,9 +91,9 @@ remains dated provenance under the controlling evidence specification section 11
 
 ## Scientific question
 
-On the selected fixed-five-UAV, 256-step task, can a learned renewable
-velocity commitment of one or four primitive steps, selected at each owner's
-own expiry using current private history and its just-sampled command, improve complete time-average
+On the selected fixed-five-UAV, 256-step task, can renewable velocity commitment
+of one or four primitive steps, selected at each owner's own expiry using either
+a learned action-conditioned duration law or a fixed stochastic law, improve complete time-average
 team native service return over a recurrent PPO controller with the same free local
 observations and every legal velocity action available at every step? Movement can
 change subsequent local information and service opportunities. The strongest null
@@ -129,7 +139,49 @@ without a distinct count-state architecture because RAW contains the sufficient
 count. The direct-service alternative remains separated by the frozen
 `Gamma=I+D` decomposition and analytic `D≈-0.02` boundary.
 
-## Current scientific position — 2026-09-09 frozen-head B01 adverse package result
+## Current scientific position — 2026-09-09 fixed renewal B01 favorable package result
+
+The fresh7701 F/G/H comparison is **valid UP** under its prospective F−G
+primary: **+0.026550516654013076**, conditional evaluation
+SE**0.011109495362659165**,0.016550516654013074 above the0.01 MEI.
+F−H is+0.030122962641204728, G−H+0.0035724459871916527. Native means
+F0.1734220791445782/G0.14687156249056513/H0.14329911650337346 and all96
+final returns remain in the
+[durable result](UCOPE_UAV_FIXED_RENEWAL_B01_P78_RESULT_SUMMARY_20260909.json).
+
+F's entire2242-parameter initial duration head stayed fixed with zero final
+layer, retaining uniform one/four probabilities for finite inputs. Its own
+velocity actor and critic trained from the start; both F/G have66311 trainable
+parameters. The observed advantage therefore occurs without duration-head
+learning. It is a package fact: temporal smoothing, service geometry, later
+information, masked optimizer exposure and partner co-adaptation remain
+unseparated. Native reward, free private observations, own expiry, suppression
+and selected-label censoring preserve the accepted path.
+
+The strongest support for fixed persistence is this prospective above-MEI
+comparison and positive F−H. P77's displayed F ordering is compatible
+historical motivation, not a changed or pooled P77 primary. The strongest
+limits are15/32 adverse F−G episodes, only one new matched training instance,
+and G's small/noisy hover margin. Tuned same-information headroom and general
+baseline competence remain absent. P77's learned T losses to G/F/H and P72's
+earlier reversal continue to contradict broad learned-renewal superiority.
+No stable advantage, equivalence, causal timing/information effect or
+learned-duration value follows from the new favorable point.
+
+The next recommended discriminator is **one separately allocated fresh F/G/H
+training instance** at the same native comparison, retaining every sign. It
+tests sensitivity to a new training history without first requiring an exact
+upper or causal diagnosis. Known work is286720 steps/2048Adam/96 final episodes;
+P78's complete cost334.19s is a reference, not a guaranteed future wall.
+Current action is P78's all-outcome stop. No new card/master/source/allowance,
+Pro Send, family disposition or C promotion is selected. Recasts remain1.
+
+See [card](UCOPE_UAV_FIXED_RENEWAL_B01_SCIENCE_CARD_20260909.md),
+[E0 evidence](UCOPE_UAV_FIXED_RENEWAL_B01_P78_RESULT_EVIDENCE_20260909.md)
+and [DM intake §§7–10](UCOPE_UAV_FIXED_RENEWAL_B01_P78_INTAKE_20260909.md#7-dm-scientific-intake-against-the-card).
+The previous interpretations below retain their original result meanings.
+
+## Previous scientific position — 2026-09-09 frozen-head B01 adverse package result
 
 The accepted own-expiry renewal family now has one actual T/F/G/H comparison,
 master7601, with **valid DOWN** against both native comparators. Learned T−G is

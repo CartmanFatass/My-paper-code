@@ -23,6 +23,8 @@ RENEWAL_B03_CARD = "docs/research/candidates/ucope/UCOPE_UAV_RENEWAL_COMMITMENT_
 RENEWAL_B03_OBJECT = "UCOPE-UAV-RENEWAL-COMMITMENT-B03"
 FROZEN_CARD = "docs/research/candidates/ucope/UCOPE_UAV_RENEWAL_FROZEN_HEAD_B01_SCIENCE_CARD_20260909.md"
 FROZEN_OBJECT = "UCOPE-UAV-RENEWAL-FROZEN-HEAD-B01"
+FIXED_CARD = "docs/research/candidates/ucope/UCOPE_UAV_FIXED_RENEWAL_B01_SCIENCE_CARD_20260909.md"
+FIXED_OBJECT = "UCOPE-UAV-FIXED-RENEWAL-B01"
 
 
 def declared_masters(pair):
@@ -44,7 +46,9 @@ def declared_masters(pair):
         return (7501,)
     if pair == "renewal_frozen_b01":
         return (7601,)
-    raise ValueError("pair must be p21, p24, b02, b03, b04, renewal_b01, renewal_b02 or renewal_b03 or renewal_frozen_b01")
+    if pair == "renewal_fixed_b01":
+        return (7701,)
+    raise ValueError("pair must be p21, p24, b02, b03, b04, renewal_b01, renewal_b02 or renewal_b03 or renewal_frozen_b01 or renewal_fixed_b01")
 
 
 @dataclass
@@ -64,10 +68,10 @@ class Config:
     treatment_duration_head_seed: int | None = field(init=False)
 
     def __post_init__(self):
-        self.ratio_grouping = "agent_compound" if self.pair in ("b02", "b03", "b04", "renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01") else "joint"
-        self.entropy_coef = 0.0 if self.pair in ("b03", "b04", "renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01") else 0.01
-        self.treatment_duration_mode = "sampled_command" if self.pair in ("b04", "renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01") else "independent"
-        self.treatment_duration_head_seed = 100000 * self.seed + 12 if self.pair in ("b04", "renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01") else None
+        self.ratio_grouping = "agent_compound" if self.pair in ("b02", "b03", "b04", "renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01", "renewal_fixed_b01") else "joint"
+        self.entropy_coef = 0.0 if self.pair in ("b03", "b04", "renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01", "renewal_fixed_b01") else 0.01
+        self.treatment_duration_mode = "sampled_command" if self.pair in ("b04", "renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01", "renewal_fixed_b01") else "independent"
+        self.treatment_duration_head_seed = 100000 * self.seed + 12 if self.pair in ("b04", "renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01", "renewal_fixed_b01") else None
 
     @classmethod
     def engineering(cls, seed=9001, pair="p21"):
@@ -75,11 +79,11 @@ class Config:
 
 
 class Deadline:
-    def __init__(self, start, arm_cap, pair_cap, clock=time.monotonic):
+    def __init__(self, start, arm_cap, pair_cap, clock=time.monotonic, first_arm="T"):
         self.start = self.arm_start = start
         self.clock = clock
         self.arm_cap, self.pair_cap = arm_cap, pair_cap
-        self.arm = "T"
+        self.arm = first_arm
         self.breach = None
 
     def check(self):
@@ -105,18 +109,19 @@ def difference_stats(differences):
                                if len(differences) > 1 else None)}
 
 
-def primary_from_rows(rows, expected, renewal=False, frozen=False):
+def primary_from_rows(rows, expected, renewal=False, frozen=False, fixed=False):
+    first = "F" if fixed else "T"
     values = {arm: {r["episode"]: r["J"] for r in rows
-                    if r["arm"] == arm and r["phase"] == "eval"} for arm in (("T", "F", "G", "H") if frozen else ("T", "G", "H"))}
+                    if r["arm"] == arm and r["phase"] == "eval"} for arm in (("T", "F", "G", "H") if frozen else (first, "G", "H"))}
     complete = {arm: set(v) == set(range(expected))
                and all(math.isfinite(x) for x in v.values()) for arm, v in values.items()}
-    result = {"complete": complete["T"] and complete["G"],
+    result = {"complete": complete[first] and complete["G"],
               "hover_complete": complete["H"],
               "J": {arm: [v[e] for e in sorted(v)] for arm, v in values.items()},
               "episode_ids": {arm: sorted(v) for arm, v in values.items()}}
-    contrasts = [("T_minus_G", "T", "G"), ("G_minus_H", "G", "H")]
+    contrasts = [(first + "_minus_G", first, "G"), ("G_minus_H", "G", "H")]
     if renewal:
-        contrasts.append(("T_minus_H", "T", "H"))
+        contrasts.append((first + "_minus_H", first, "H"))
         result["arm_means"] = {arm: statistics.mean(v.values()) if v else None
                                for arm, v in values.items()}
     if frozen:
@@ -130,7 +135,7 @@ def primary_from_rows(rows, expected, renewal=False, frozen=False):
 
 
 def aggregate(summaries, pair="p21"):
-    if pair in ("b03", "b04", "renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01"):
+    if pair in ("b03", "b04", "renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01", "renewal_fixed_b01"):
         raise ValueError(f"{pair.upper()} has one training pair and no multi-pair aggregate")
     declared = declared_masters(pair)
     if len(summaries) != 2:
@@ -225,11 +230,12 @@ def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=wri
 
     out = Path(out)
     out.mkdir(parents=True, exist_ok=True)
-    deadline = Deadline(start, config.arm_cap, config.pair_cap, clock)
+    fixed = config.pair == "renewal_fixed_b01"
+    deadline = Deadline(start, config.arm_cap, config.pair_cap, clock, first_arm="F" if fixed else "T")
     if factory is None:
         factory = ((lambda seed: SyntheticAdapter(seed, config.horizon)) if config.fixture else make_real)
     frozen = config.pair == "renewal_frozen_b01"
-    fitted_arms = ("T", "F", "G") if frozen else ("T", "G")
+    fitted_arms = ("F", "G") if fixed else ("T", "F", "G") if frozen else ("T", "G")
     rows, limits, arms = [], [], {}
     b = 100000 * config.seed
     try:
@@ -255,34 +261,39 @@ def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=wri
                        card=B03_CARD if config.pair == "b03" else B02_CARD,
                        ratio_grouping=config.ratio_grouping,
                        card_section="CODE_SPEC §8" if config.fixture else 5)
-    if config.pair in ("b04", "renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01"):
+    if config.pair in ("b04", "renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01", "renewal_fixed_b01"):
         summary.update(object=B04_OBJECT, card=B04_CARD, card_section="CODE_SPEC §4" if config.fixture else 5,
                        ratio_grouping=config.ratio_grouping,
                        treatment_duration_mode=config.treatment_duration_mode,
                        treatment_duration_head_seed=config.treatment_duration_head_seed)
-    credit_options = {"ratio_grouping": config.ratio_grouping} if config.pair in ("b02", "b03", "b04", "renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01") else {}
+    credit_options = {"ratio_grouping": config.ratio_grouping} if config.pair in ("b02", "b03", "b04", "renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01", "renewal_fixed_b01") else {}
     update_options = dict(credit_options)
-    if config.pair in ("b03", "b04", "renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01"):
+    if config.pair in ("b03", "b04", "renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01", "renewal_fixed_b01"):
         summary["entropy_coef"] = config.entropy_coef
         if config.fixture:
             summary["card_section"] = "CODE_SPEC §4"
         update_options["entropy_coef"] = config.entropy_coef
-    if config.pair in ("renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01"):
+    if config.pair in ("renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01", "renewal_fixed_b01"):
         summary.update(object=RENEWAL_B03_OBJECT if config.pair == "renewal_b03" else
                        RENEWAL_B02_OBJECT if config.pair == "renewal_b02" else RENEWAL_OBJECT,
                        card=RENEWAL_B03_CARD if config.pair == "renewal_b03" else
                        RENEWAL_B02_CARD if config.pair == "renewal_b02" else RENEWAL_CARD,
                        card_section=7 if config.fixture else 5, commitment="own_expiry")
-    if frozen:
-        summary.update(object=FROZEN_OBJECT, card=FROZEN_CARD,
+    if frozen or fixed:
+        summary.update(object=FIXED_OBJECT if fixed else FROZEN_OBJECT,
+                       card=FIXED_CARD if fixed else FROZEN_CARD,
                        frozen_duration_parameters=2242)
         summary["seeds"].update(frozen_train_velocity=b + 31, frozen_train_duration=b + 32,
                                 frozen_eval_velocity_start=b + 5000, frozen_eval_duration_start=b + 6000)
         summary["cost_projection"] = ("Per T/F/G arm: initialization + 131072 training steps + "
                                       "1024 updates + 8192 final-policy steps + publication; "
                                       "T/F duration-head work; G adds 8192 H steps. F wall unmeasured.")
+        if fixed:
+            summary["cost_projection"] = ("Per F/G arm: initialization + 131072 training steps + "
+                                          "1024 updates + 8192 final-policy steps + publication; "
+                                          "F duration-head work; G adds 8192 H steps.")
     collect_options = dict(credit_options)
-    if config.pair in ("renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01"):
+    if config.pair in ("renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01", "renewal_fixed_b01"):
         collect_options["renewal"] = True
     files = {name: (out / f"{name}.jsonl").open("w", encoding="utf-8")
              for name in ("episodes", "rollouts", "diagnostics")}
@@ -296,13 +307,13 @@ def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=wri
     actor = critic = initial = arm_info = None
     g_start = None
     try:
-        deadline.check()  # Startup/imports have consumed T's allowance.
+        deadline.check()  # Startup/imports consume the first fitted arm's allowance.
         common = templates(config.seed)
         for arm in fitted_arms:
-            if arm != "T":
+            if arm != fitted_arms[0]:
                 g_start = deadline.start_g(arm) if frozen else deadline.start_g()
-            arm_start = start if arm == "T" else g_start
-            counts = new_counts(config.pair in ("renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01"))
+            arm_start = start if arm == fitted_arms[0] else g_start
+            counts = new_counts(config.pair in ("renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01", "renewal_fixed_b01"))
             arm_info = {"counts": counts, "complete": False, "fit_complete": False,
                         "learning_rate": 3e-4, "entropy_coef": config.entropy_coef,
                         "elapsed_wall": None}
@@ -310,7 +321,7 @@ def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=wri
             actor = critic = initial = None
             deadline.check()
             head_options = {}
-            if config.pair in ("b04", "renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01"):
+            if config.pair in ("b04", "renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01", "renewal_fixed_b01"):
                 head_seed = config.treatment_duration_head_seed if arm in ("T", "F") else None
                 head_options["duration_head_seed"] = head_seed
                 arm_info.update(duration_mode=config.treatment_duration_mode if arm in ("T", "F") else "none",
@@ -318,7 +329,7 @@ def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=wri
             if arm == "F":
                 head_options["freeze_duration"] = True
             actor, critic = arm_copy(common, arm in ("T", "F"), **head_options)
-            if frozen:
+            if frozen or fixed:
                 parameters = list(actor.parameters()) + list(critic.parameters())
                 arm_info.update(total_parameters=sum(p.numel() for p in parameters),
                                 trainable_parameters=sum(p.numel() for p in parameters if p.requires_grad),
@@ -355,7 +366,7 @@ def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=wri
                                       for key in (("optimizer_steps", "velocity_decisions",
                                                    "duration_decisions", "d4")
                                                   + (("horizon_censored_holds", "suppressed_decisions")
-                                                     if config.pair in ("renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01") else ()))}})
+                                                     if config.pair in ("renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01", "renewal_fixed_b01") else ()))}})
                 deadline.check()
             arm_info["fit_complete"] = True
             arm_info["training_counts"] = counts.copy()
@@ -396,11 +407,11 @@ def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=wri
         for stream in files.values():
             stream.close()
 
-    summary["counts"] = {key: sum(a["counts"][key] for a in arms.values()) for key in new_counts(config.pair in ("renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01"))}
+    summary["counts"] = {key: sum(a["counts"][key] for a in arms.values()) for key in new_counts(config.pair in ("renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01", "renewal_fixed_b01"))}
     summary["counts"]["partial_episode_steps"] = (summary["counts"]["team_steps"]
                                                    - summary["counts"]["completed_episode_steps"])
     summary["scientific_uav_calls"] = summary["counts"]["scientific_uav_calls"]
-    summary["primary"] = primary_from_rows(rows, config.eval_episodes, renewal=config.pair in ("renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01"), frozen=frozen)
+    summary["primary"] = primary_from_rows(rows, config.eval_episodes, renewal=config.pair in ("renewal_b01", "renewal_b02", "renewal_b03", "renewal_frozen_b01", "renewal_fixed_b01"), frozen=frozen, fixed=fixed)
     summary["diagnostics_complete"] = (summary["counts"]["diagnostic_frames"] ==
                                         len(fitted_arms) * config.eval_episodes * 5 * min(5, config.horizon)
                                         and not any("diagnostic" in x for x in limits))
