@@ -37,6 +37,11 @@ remains dated provenance under the controlling evidence specification section 11
   B01 card](UCOPE_UAV_FEEDBACK_VALUE_NORMALIZATION_B01_SCIENCE_CARD_20260909.md):
   cumulative FP32 population moments and prospective matched master8501;
   no runtime implementation or invocation is allocated by this preparation.
+  Subsequent separately allocated implementation and one native8501 invocation
+  are now complete. The normalized−raw primary is **−0.004783423897661355,
+  WITHIN**, with both learned means below H. The object-tier intake recommends
+  no unchanged normalization follow-up from this observation; it changes no
+  family disposition or recast count. See the [8501 intake](UCOPE_UAV_FEEDBACK_VALUE_NORMALIZATION_B01_8501_INTAKE_20260909.md).
 - Previous within-family direction-tier decision:
   **2026-09-09 PRO_FINAL / CONTINUE** inside the existing own-expiry renewal
   family. Select the next bounded B question comparing learned renewal T,
@@ -189,7 +194,59 @@ without a distinct count-state architecture because RAW contains the sufficient
 count. The direct-service alternative remains separated by the frozen
 `Gamma=I+D` decomposition and analytic `D≈-0.02` boundary.
 
-## Current scientific position — 2026-09-09 mean execution is adverse on these fits; select a feedback-training comparison
+## Current scientific position — 2026-09-09 normalized feedback shows no selected-scale point gain on8501
+
+The selected normalized-G/raw-G/H comparison is valid complete B/EXPLORE
+**WITHIN** on one fresh matched8501 learning instance. Primary normalized−raw
+is **−0.004783423897661355**, conditional evaluation SE **0.011553261422843115**,
+10/22/0 positive/negative/zero paired differences. The point is
+0.005216576102338645 inside the lower−0.01 boundary. This is no demonstrated
+point gain at the selected scale, without equivalence or stable-harm claims.
+
+Both learned means are below hover: normalized−H **−0.01931798762937907**,
+SE0.010907174268587023,12/20/0 signs; raw−H **−0.014534563731717716**,
+SE0.011331000482129552,13/19/0 signs. Native means are normalized
+0.15129804608644407, raw0.15608146998410544 and H0.17061603371582315.
+H is a legal untuned reference, not an upper or a tuned headroom record.
+The relative comparison and both absolute deficits remain separate observations.
+
+The intervention actually executed the selected cumulative FP32 population
+moments: complete raw MC targets, stored decoded raw baselines before detached
+advantages and one merge per rollout, followed by four fixed-target PPO epochs.
+Final normalized moments have n131072/updates256 and frozen evaluation state;
+both no-head actor/critic fits moved in training and remained fixed during
+evaluation. Full286720 native steps/2048 Adam/96 final episodes completed in
+303.11s outer wall. These facts establish real exposure and technical conformance,
+not value inferred from a lower critic-loss scale or larger parameter movement.
+
+The effect path remains private observation/history→owned every-step velocity→
+movement/service and future observation→native team reward→critic training,
+detached future advantages/joint clipping→partner co-adaptation→sampled return.
+The source comparison changes critic coordinates; one finite comparison does
+not isolate a causal reason for the return ordering. Cumulative statistics under
+co-adapting data, learned motion quality, visitation and finite learning variation
+survive. No causal credit, information value, renewal effect, normalized-PPO
+equivalence or tuned-competence claim follows.
+
+Strongest support for the bounded reading is the complete unchanged-comparator
+native observation with all three negative point contrasts. Strongest limits on
+a broader negative claim are the primary's magnitude below MEI, conditional SE
+exceeding it,10 favorable paired episodes and just one matched learning history.
+Episode variation cannot supply training-population uncertainty. The failed
+positive forecasts (.50/.55/.50; mean Brier0.2675) are preserved.
+
+The card's WITHIN recommendation is selected: end this allocation and prefer no
+unchanged normalization follow-up from this observation. No new discriminator,
+master or successor is selected here; Root retains later allocation/sequencing
+within the appropriate scientific authority. The existing renewal-family
+Convergence disposition remains, recasts **1**. P85's mean-execution deficits,
+P83/P84's distinct sampled renewal gains and all earlier native losses remain
+unmodified. A broader normalization or direction-family closure is unsupported.
+See [scientific intake §§6–10](UCOPE_UAV_FEEDBACK_VALUE_NORMALIZATION_B01_8501_INTAKE_20260909.md),
+[E0 evidence](UCOPE_UAV_FEEDBACK_VALUE_NORMALIZATION_B01_8501_RESULT_EVIDENCE_20260909.md)
+and [durable summary](UCOPE_UAV_FEEDBACK_VALUE_NORMALIZATION_B01_8501_RESULT_SUMMARY_20260909.json).
+
+## Previous scientific position — 2026-09-09 mean execution is adverse on these fits; select a feedback-training comparison
 
 P85 is valid complete B/EXPLORE **WITHIN**, primary F_mean−G_mean
 **−0.008350131013904307**, conditional SE **0.006736648533933545**,
