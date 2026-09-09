@@ -247,3 +247,170 @@ No technical gap remains. P80 stops here on every outcome. **DM owns scientific 
 archival; Root owns integration and P80 test/scientific remote-checkout plus wrapper cleanup
 after preserved intake.** Own test scratch/source-pack carriers are removed. Shared authoring
 checkout remains in use; prior evidence is untouched. CM releases the index/owned paths.
+
+## 7. DM scientific intake against the card
+
+**Accepted: valid complete B/EXPLORE UP against hover**, P80/new 7901.
+CM returned clean/pushed `c4703c04d9b0805b3e2c43d97b98208d3b691768` and released
+the checkout/index. DM checked card §§1–7 against the result document, immutable
+source/binding change, focused test and independent narrow primary-review evidence,
+native configuration/selected-primary/completeness and raw terminal/admission/
+wrapper receipts. The F−H selection is explicit and its finite F/H panels are
+complete; both fits and all three final panels completed the allocated chain.
+
+Read-only arithmetic over all 1120 episode rows found complete unique arm/phase/
+episode identities, exact 7901 reset associations, 256-step horizons and native
+J=reward_sum/256. All 96 final values and three signed vectors/means/conditional
+SEs reconcile with publication. The approved run-summary tool used only fitted
+F/G endpoints at one matched instance as a **secondary** comparison. H is an
+untrained reference; it supplies no independent training row. One new fit cannot
+estimate training-population SD or uncertainty. Native episode SEs remain conditional.
+The secondary endpoint difference differs by about 6.94e-18 accumulation rounding
+from the native mean of differences; the reported native values remain controlling.
+
+Card §5 UP condition: **Delta_H > +0.01**. Rule applied verbatim:
+
+> Preliminary sampled native gain over hover on this fit/task/budget; retain F−G/G−H and consider a bounded independent-fit follow-up without claiming stable advantage.
+
+F−H **+0.018660096017418804**, conditional SE **0.010755224968186065**, is
+**0.008660096017418803 above +0.01**, with 20 positive/12 negative episodes.
+F−G **−0.025803909613053323**, SE **0.010415763733291592**, 10 positive/22
+negative, is below −0.01. G−H **+0.04446400563047213**, SE
+**0.010847038932735921**, 24 positive/8 negative, is above +0.01. These native
+comparisons retain separate roles; the hover UP neither erases the feedback
+loss nor supports a retrospective F−G UP. No significance, all-positive or
+equivalence condition is added. See [E0 evidence](UCOPE_UAV_FIXED_RENEWAL_HOVER_B01_P80_RESULT_EVIDENCE_20260909.md)
+and [durable summary](UCOPE_UAV_FIXED_RENEWAL_HOVER_B01_P80_RESULT_SUMMARY_20260909.json).
+
+All 286720 steps / 2048 Adam / 512 rollouts / 96 evaluations and actual exposure
+are readable. CM's finite-FP32 checkpoint/norm, full fixed-head and collection
+checks are accepted without repeating its tests, tensor loading, evaluator,
+simulator or remote observation. F's entire initial 2242-parameter head remained
+fixed while its actor/critic moved 3.283514976501465 / 7.0876288414001465;
+G's moved 2.7967748641967773 / 7.5603413581848145. The zero final-layer norm
+and undefined relative movement are intentional. Engineering PASS and the
+scientific UP/adverse secondary are distinct conclusions.
+
+## 8. Bounded interpretation, grounding and predictions
+
+This prospective measurement supports native value beyond no-motion hover on
+the new fit. The stronger legal feedback null has a larger sampled return,
+so this observation does not establish a benefit from choosing commitment over
+ordinary feedback. F/G have equal trainable parameter counts and both actually
+learned; equal parameter counts do not equate action opportunities, masking,
+trajectories or partner co-adaptation. Free private observation → own expiry
+and fixed persistence → motion/service/later information → learner exposure
+and partner responses → native return remains the accepted package path.
+Membership, censoring and primitive reward/discount semantics are unchanged.
+
+**Strongest support:** a prospectively selected F−H gain above the declared MEI
+after real learning, consistent with P78's positive secondary F−H. **Strongest
+current contradiction to broader package superiority:** G exceeds F by
+0.025803909613053323, with 22/32 adverse F−G episodes. F loses to H on 12/32.
+P78/P79's positive F−G points remain true observations; the new feedback
+reversal limits their generalization. P79's small negative F−H remains visible.
+P77's learned-T losses and P72's earlier reversal remain separate, not pooled
+into this primary. There is no stable superiority/harm, learned-duration value,
+causal timing/information effect, equivalence or deployment conclusion.
+
+One surviving explanation is that these controllers acquire useful motion at
+variable success across training instances, with a fixed persistence advantage
+depending on how well ordinary feedback learns. This is an alternative, not
+a diagnosis or a variance decomposition. The latest G−H point demonstrates
+value on this particular fit, not tuned or general baseline competence. It
+therefore makes the feedback comparison the more relevant next question while
+preserving the present hover result. Tuned same-information headroom is absent.
+
+The question-driven local-library interpretation reuses
+[P79 intake §8](UCOPE_UAV_FIXED_RENEWAL_B02_P79_INTAKE_20260909.md#8-bounded-interpretation-grounding-and-predictions)
+and its verified P74 source pointers: UTE (`VS-0005`, Lee et al., AAAI 2024,
+p1 element65/p6 element354/p7 element407) motivates comparing simple repetition
+without presuming its competence. Its Atari findings do not explain this UAV
+reversal. Previously verified My-lib synthetic-only published coverage remains
+excluded; no new corpus-wide or novelty claim follows. Both comparators already
+exist. The new host evidence shifts emphasis back to ordinary feedback; no new
+algorithm, literature-dependent repair or exact causal prerequisite is selected.
+
+Forecast F−H>0.01 (0.50) occurred, Brier loss 0.25; F−G>0.01 (0.65) did not,
+loss 0.4225; mean **0.33625**. No hard-label accuracy is retrofitted. Owner
+prediction **not taken (unattended)**. Both checkout reviews returned [] and
+no UCOPE audit owner column was nonempty. Owner flags: **none**; the adverse
+feedback comparison and absent tuned headroom remain explicit owner-facing limits.
+
+## 9. Decisions this completed intake produces
+
+**Validity and reading, object tier.** Options: (a) accept valid F−H UP with
+adverse F−G and positive G−H separately retained; (b) replace the primary with
+F−G after seeing the loss; (c) claim commitment superiority from the hover UP.
+Recommend and execute **(a)**. The real complete chain and trustworthy selected
+primary support its bounded reading. The stronger feedback result narrows its
+practical interpretation; no defect or quarantine/replay requirement was found.
+Owner-delegated decision (unattended, 2026-09-03 instruction): **(a)**.
+
+**Completed allocation and next focus, object tier.** Options: (a) end P80 and
+recommend one separately allocated new F/G/H instance with prospective F−G
+primary, retaining F−H/G−H; (b) repeat an F−H-primary fit to accumulate hover
+gains; (c) stop unchanged exploration or require tuning/causal diagnosis first.
+Recommend **(a)**. P80 answers the narrow native-value question favorably on
+this fit while showing that legal feedback can do better. Another hover-primary
+UP would not by itself resolve that feedback deficit. A small independent fit
+focused on F−G would examine the observed reversal against the stronger legal
+null, with every sign and both hover contrasts kept. Earlier F−G gains and the
+new loss make training sensitivity worth this bounded comparison under §11.8.2–3;
+neither stable superiority nor a uniformly positive seed series is required.
+Current execution is P80's all-outcome stop.
+Owner-delegated decision (unattended, 2026-09-03 instruction): **(a)**.
+
+This explicitly outcome-informed future recommendation returns emphasis to
+feedback after measuring native value beyond H. It does not relabel P80, promote
+H to a tuned upper, pool old primaries or select a favorable subset. Same known
+work would be two 512-episode fits / three 32-episode panels, **286720 native
+steps / 2048 Adam / 96 final evaluations**. P80's 306.09 s complete wall is a
+reference, not a future guarantee. No nested search, extra cost probe, exact
+maximum or causal diagnosis has necessary decision value for that proposed
+learning-performance question. All future outcomes would remain if allocated.
+
+No next card, numeric master, source amendment, allowance, learner/evaluator,
+pilot/tuning, retry/resume/replacement, extra evaluation or Pro packet/Send is
+created. Root owns future sequencing/allocation and integration. This is an
+object-tier comparator-emphasis recommendation inside the accepted family;
+no recast, family closure, C promotion or Portfolio disposition follows.
+Recasts remain 1 and lifecycle/priority/UAV entry keep their recorded authority.
+
+## 10. Cost, owner surface and recoverable boundary
+
+P80 costs **306.09 s complete outer wall** for one valid result, peak RSS
+**558424 KiB**. F/G complete arm walls 155.5547909429879 / 136.1789815700031 s,
+summed arm wall 291.733772512991 s and runner 291.73377411300316 s are nested
+accounting scopes. Aggregate CPU is **resources_unmeasured**. No scientific cap
+or engineering §5 breach occurred; scope §4 additions **none**. Optional missing
+CPU accounting limits that quantity, not the valid native measurement. The
+1600 diagnostic frames do not add another set of environment transitions.
+
+The [Chinese valid-result brief](../../portfolio/owner/briefs/ucope/2026-09-09_UCOPE_UAV_FIXED_RENEWAL_HOVER_B01.md)
+and audit rows accompany intake. New-card item `20260909-ucope-005` remains
+the prospective owner surface; ordinary validity/next-focus decisions receive
+no new item. The local P80 collection in §6 preserves seven native outputs,
+checkpoints, supervisor/source/wrapper receipts and CM's read-only verification.
+`dm_analysis/` retains native episode arithmetic and the secondary fitted-run
+tool output. No new pooled training result was created.
+
+Root may integrate the named commits and preserve/archive/reclaim the finished
+scientific checkout and wrapper in §5, plus the finished test checkout
+`/home/wu/hmasd-worktrees/ucope-uav-renewal-hover-p80-check-20260909` and its
+collected supervisor files. Both handles are terminal. Own test scratch/source
+carriers are removed. The shared local direction checkout remains in use; DM
+deletes no evidence and edits no main control-plane file. Older cleanup remains
+with its existing owner.
+
+Owner review reference: **2026-09-09T05:18:49-07:00**, no unapplied instruction,
+prediction or UCOPE audit override in either checkout, no item needing marking
+answered. Decisions are at [technical audit row](../../portfolio/audit/2026-09-09.md#L20)
+and [selection row](../../portfolio/audit/2026-09-09.md#L21).
+
+Final document checks matched all 96 saved returns, three contrasts and
+predictions to the completed DM analysis, preserved frozen card §§1–7 and
+CM intake §§1–6, resolved 32 linked targets and confirmed both audit rows.
+The Chinese brief has all six headings and 427 characters. These read-only
+checks created no additional native execution; the final owner recheck found
+no unapplied instruction or UCOPE audit override.

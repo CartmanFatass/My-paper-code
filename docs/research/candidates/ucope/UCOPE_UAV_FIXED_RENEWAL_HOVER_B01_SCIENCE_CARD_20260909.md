@@ -169,3 +169,25 @@ assigns the original CM the complete technical batch in the same codex/ucope
 checkout: minimal source, focused acceptance, commit/push, one exact detached
 remote invocation, sole observation and collection. There is no intermediate
 approval handshake. DM inspects the return against this card and interprets it.
+
+## 8. Observed P80 completion — 2026-09-09
+
+**Valid complete UP against hover**, new 7901. Accepted source
+`a1a3dd77aa4e02a07e1f6ed17eea04fea633cc11` completed all 286720 steps,
+2048 Adam and 96 evaluations in **306.09 s** complete outer wall, within caps.
+Prospective F−H **+0.018660096017418804**, conditional evaluation SE
+**0.010755224968186065**, is **0.008660096017418803 above +0.01**.
+F−G **−0.025803909613053323** and G−H **+0.04446400563047213** remain separate:
+this fit beats hover but loses to ordinary feedback. All outcomes are retained.
+
+F's entire duration head stayed fixed while its actor/critic learned. One
+matched instance supplies no stable or causal claim. F−H>0.01 occurred,
+F−G>0.01 did not; mean forecast Brier loss **0.33625**. Owner prediction not
+taken; tuned headroom absent, recasts 1 unchanged. P80 ends at its all-outcome
+boundary. [Intake §§7–10](UCOPE_UAV_FIXED_RENEWAL_HOVER_B01_P80_INTAKE_20260909.md#7-dm-scientific-intake-against-the-card)
+recommends a separately allocated F−G-primary follow-up with H retained; it
+does not rewrite the present F−H primary or create another run. See
+[E0 evidence](UCOPE_UAV_FIXED_RENEWAL_HOVER_B01_P80_RESULT_EVIDENCE_20260909.md),
+[durable summary](UCOPE_UAV_FIXED_RENEWAL_HOVER_B01_P80_RESULT_SUMMARY_20260909.json)
+and [Chinese brief](../../portfolio/owner/briefs/ucope/2026-09-09_UCOPE_UAV_FIXED_RENEWAL_HOVER_B01.md).
+Prospective §§1–7 remain unchanged.
