@@ -193,7 +193,8 @@ def result_reading(contrasts, raw_long_competent):
                if trustworthy[b] and raw_long_competent is not None else None for b, point in contrasts.items()}
     losses = [{"endpoint": b, "reference": name, "delta": c["delta_regret"],
                "material": c["delta_regret"] < -MEI}
-              for b, point in contrasts.items() for name, c in point.items() if c["delta_regret"] < 0]
+              for b, point in contrasts.items() for name, c in point.items()
+              if c["comparison_trustworthy"] and c["delta_regret"] < 0]
     qualifying = [b for b, flag in signals.items() if flag]
     if not complete or raw_long_competent is None:
         description = "PRIMARY_COMPARISON_LIMITED"
