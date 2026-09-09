@@ -94,3 +94,11 @@ The actual-node admission at02:40:39.232806Z passed both physical/effective
 availability15,639,040,000 bytes. Root and DM received exact handle/source/cwd/
 script/output/admission/log facts and CM sole-observer ownership. No further
 submission is allocated. Terminal outcome and technical collection follow below.
+
+## Terminal technical acceptance
+
+Handle finished exit0, native COMPLETE, no limits or cap breach; actual collection
+checks passed. [Collection](VSPC1_NATIVE_HOLD_VALUE_B04_P67_COLLECTION_20260908.md)
+and [machine evidence](VSPC1_NATIVE_HOLD_VALUE_B04_P67_COLLECTION_EVIDENCE_20260908.json)
+retain all outcome/resource/state facts. The one P67 submission is complete and
+there is no remaining live CM observation or second allocated submission.
