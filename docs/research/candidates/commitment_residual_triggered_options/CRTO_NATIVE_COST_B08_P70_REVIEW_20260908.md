@@ -1,7 +1,9 @@
 # CRTO B08 P70 independent source review
 
-No material finding was found in the assigned B08 source implementation. This is independent
-technical evidence for CM acceptance, not scientific acceptance or an execution allocation.
+No material finding remains in the reviewed correction. Parent acceptance identified a material
+adverse-reading defect missed by the initial independent review; its evidence and repair are
+recorded below. This is independent technical evidence for CM acceptance, not scientific
+acceptance or an execution allocation.
 
 Reviewed the working-tree additions on `codex/crto` against base
 `de14dbab4bde01c3467885c78270ed73888e13fa`: `native_cost_b08/experiment.py`, its one-line
@@ -23,7 +25,7 @@ mode-specific reference or profiler was needed.
   in-memory snapshots. The only objective replacement is the selected loss. B04 preparation
   and packet construction remain unchanged and are directly reused. All three paths finish
   before evaluation. No checkpoint, replay, recurrent-state or RNG interface was added.
-- **Native measurement:** `score_summary` at line 218 reuses the inspected RAW scorer's legal
+- **Native measurement:** `score_summary` at line 219 reuses the inspected RAW scorer's legal
   first-printed argmax and FP64 native regret. Its inherited competence predicate requires
   eight rows, at least six exact actions and mean regret <=.005 on each side. B08 uses new
   RAW-LONG competence for both endpoint predicates. The three contrasts are separately
@@ -40,7 +42,7 @@ mode-specific reference or profiler was needed.
   complete elapsed minus their sum is common time charged in full to every arm. This includes
   active arm time while monitoring. Checks surround publication. Runner timing starts before
   its heavy imports, but is explicitly pre-publication in the summary. The collection reducer
-  at line 301 uses terminal supervisor elapsed through command shutdown for final shared and
+  at line 302 uses terminal supervisor elapsed through command shutdown for final shared and
   per-arm charges, reports breaches, and does not sum per-arm charges as actual machine time.
   Aggregate CPU remains explicitly unmeasured. No new resource-efficiency claim is made.
 - **Counts, topology and scope:** inspected loop/configuration counts are three paths ×258
@@ -49,8 +51,9 @@ mode-specific reference or profiler was needed.
   times and legal masks; calibration reports its actual example count. The reused import path
   sets native thread environment before NumPy/Torch imports and sets both Torch thread counts
   to one. B08 adds no compute team, mutable shared worker state, native build or device change.
-  Tool-counted additions were 314 module lines, one initializer line and 43 runner lines
-  (358 total), within 2,000/600. No uncarded prohibited item or concrete scope-budget breach
+  Tool-counted additions were 314 module lines before the one-line adverse-reading correction,
+  one initializer line and 43 runner lines (359 total after correction), within 2,000/600.
+  No uncarded prohibited item or concrete scope-budget breach
   was found. Required wall accounting and scientific comparison checks serve card sections
   4/6; no separate orchestration-ratio gate was imposed.
 - **Focused test coverage:** inspected the synthetic algebra test's independent explicit
@@ -76,3 +79,27 @@ The follow-up `result_reading` correction also preserves missing RAW-LONG compet
 and its added fixture assertions; no material finding. CM reports 13 fixtures passing in
 2.16s after endpoint-local handling and the modified weak/unknown-RAW fixture passing in
 1.95s after this correction. These are CM execution results, not reviewer reruns.
+
+**Parent-discovered finding and repair, same P70 source-only batch:** At `5fab87c44`,
+`result_reading` filtered `losses` only by negative delta. With an untrustworthy SHORT
+historical contrast of -.004 and trustworthy LONG contrasts of +.004, the implementation
+correctly left SHORT alignment unknown but incorrectly labelled that unsupported comparison
+adverse and set `mixed_budget=True`. This gave damaged primary measurement scientific polarity,
+contrary to card section 4 and evidence-spec section 11.8.7. This was a material correctness
+finding (P2), missed in the earlier review.
+
+The inspected correction at `experiment.py:193–197` requires each adverse contrast's own
+`comparison_trustworthy` flag as well as a negative delta. It does not require the entire
+endpoint to be trustworthy: a valid SHORT new-RAW loss still supports mixed-budget reading
+alongside a valid LONG signal even when SHORT's historical comparison is unavailable. Full
+contrast values and signed row facts remain unchanged. This implements the suggested repair
+at the actual dependency, with no new machinery or scientific exposure.
+
+Inspected `test_adverse_and_mixed_reading_requires_individual_contrast_trust`: its first case
+excludes an untrustworthy negative from both adverse and mixed reading, while its second case
+retains a trustworthy new-RAW negative at that otherwise limited endpoint. The fixture also
+checks that the original untrustworthy numerical delta remains available. CM reports this
+regression and the existing mixed-budget test passed together (2 tests, 1.93s pytest wall;
+3.102s process wall). No reviewer rerun, source edit, index change or scientific work occurred.
+The parent-discovered defect is repaired in the inspected working-tree diff against `5fab87c44`;
+the runtime and scientific-evidence limits above remain.

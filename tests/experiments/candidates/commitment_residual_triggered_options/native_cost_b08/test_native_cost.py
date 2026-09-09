@@ -205,3 +205,22 @@ def test_run_assembly_three_paths_before_any_readout(tmp_path, monkeypatch):
     assert result["work_counts"]["processed_examples"] == 24768
     assert (output / "summary.json").is_file()
     assert "inner_prepublication_wall_seconds" in result["resources"]
+
+
+def test_adverse_and_mixed_reading_requires_individual_contrast_trust():
+    values = contrasts(short=(.004, .004, -.004))
+    values["SHORT"]["historical_B04_RAW"]["comparison_trustworthy"] = False
+    result = e.result_reading(values, True)
+    assert result["alignment_by_endpoint"] == {"SHORT": None, "LONG": True}
+    assert result["opposite_sign_or_adverse_contrasts"] == []
+    assert not result["mixed_budget"]
+    assert values["SHORT"]["historical_B04_RAW"]["delta_regret"] == -.004
+
+    # One independently trustworthy loss still matters at an otherwise limited endpoint.
+    values["SHORT"]["new_RAW"]["delta_regret"] = -.003
+    result = e.result_reading(values, True)
+    assert result["alignment_by_endpoint"] == {"SHORT": None, "LONG": True}
+    assert result["opposite_sign_or_adverse_contrasts"] == [
+        {"endpoint": "SHORT", "reference": "new_RAW", "delta": -.003, "material": True}]
+    assert result["mixed_budget"]
+    assert values["SHORT"]["historical_B04_RAW"]["delta_regret"] == -.004
