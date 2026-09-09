@@ -172,3 +172,82 @@ H/publication to G. At most one accepted submission; uncertain acceptance is rec
 on this same handle. No admission or scientific invocation has occurred at this preparation.
 No retry/resume/replacement/extra evaluation is allocated. Root owns later archival/reclamation
 of these P78 test/scientific checkouts and wrapper after preserved terminal intake.
+
+## 6. CM terminal collection and technical acceptance
+
+**Technical acceptance: PASS.** One accepted master7701 invocation finished `COMPLETE`,
+exit0, no limits/cap breach/partial steps. Exact source
+`c7c139c512b2dc598a00ff5746b1f89b1aaf8a46`; literal payload§5 was committed/pushed at
+`35609f31f` before the one actual PowerShell-file submission. CM observed the same handle
+through terminal collection. No retry/resume/replacement, extra T/H/evaluation, tuning,
+replay, pilot, cost probe or second native invocation occurred.
+
+Handle `ucope-uav-fixed-renewal-b01-7701-p78-20260909`, node `hmasd-wsl-node`, PID3043842,
+finished/inactive tmux. Supervisor start2026-09-09T18:50:52+08:00,
+terminal2026-09-09T18:56:26+08:00, exit0. Actual-node canonical admission at
+`2026-09-09T10:50:52.137988Z` measured physical/effective available memory both
+15327395840bytes against4294967296; both passed before scientific
+root/RNG/model creation. Copied result/supervisor admission receipts are byte-identical.
+
+Complete F wall **172.7081888440298s**, G including H/publication
+**146.49354537401814s**, each below1800s. Outer complete invocation through
+admission/publication/exit **334.19s**, peak RSS **559260KiB**,
+below3600s. Runner serial elapsed319.201735989016s; sum of arm walls
+319.20173421804793s. These are nested accounting scopes,
+not additive costs. Aggregate CPU seconds **unmeasured**; no inference from thread limits
+or wall substitutes for direct evidence. No runtime repair or broader probe was needed.
+
+Both fits completed512 episodes/131072 native steps/256 rollouts/1024Adam calls each.
+Total **286720 native steps,2048Adam,512rollouts,1024training episodes,96final evaluations,
+1120explicit resets,2constructor resets,1600diagnostic frames**, zero partial steps.
+No T arm, checkpoint or episode was produced. All F/G/H final32-episode panels retain
+card§3's exact reset association; J equals native reward_sum/256. Config, arm identity,
+private stream addresses and all episode/rollout/phase counts reconcile. There is one
+matched training instance, not two independent treatment-effect replicates.
+
+| Final signed contrast | Mean | Conditional evaluation SE, n32 |
+| --- | ---: | ---: |
+| F−G | 0.026550516654013076 | 0.011109495362659165 |
+| F−H | 0.030122962641204728 | 0.014904708941129195 |
+| G−H | 0.0035724459871916527 | 0.01461525282953026 |
+
+Arm means: F=0.1734220791445782, G=0.14687156249056513,
+H=0.14329911650337346. All96 raw returns and all three32-entry signed vectors
+remain in [summary](../../../../temp/directions/ucope/exp/ucope-uav-fixed-renewal-b01-7701-p78-20260909/summary.json), independently reconciled
+against [episode rows](../../../../temp/directions/ucope/exp/ucope-uav-fixed-renewal-b01-7701-p78-20260909/episodes.jsonl). These numerical facts
+are for DM's all-outcome intake; no hover contrast replaces the prospective F−G primary,
+and no training-population variance/interval is inferred at n1.
+
+Both final checkpoints are finite CPU FP32, with config/arm identity and per-group final
+norms matching published exposure. F total/trainable68553/66311 and G66311/66311. F's
+entire2242 head and both layers have zero displacement; head/hidden initial and final
+norm **3.281481981277466**, final-layer weights/bias allzero,
+final norm0 and undefined relative displacementnull. The accepted fixed path keeps
+half/half probabilities for finite inputs, while sampled fractions remain empirical.
+F common-actor displacement3.3146941661834717 and critic
+8.124134063720703 record real learner exposure. G common-actor
+movement2.1613593101501465, critic
+7.371159076690674. All initial/final norms and group
+movements remain in the summary; no favorable movement threshold was applied.
+
+F train/eval renewals263570/16454, d4131630/8229, suppressed decisions391790/24506,
+horizon-censored holds1557/91. Actual head forward rows **1614328**
+from the accepted count law; G has no duration draws. Phase/rollout/episode counters and
+suppression/censoring identities reconcile, preserving selected labels. All numeric JSON
+fields are finite. No extra diagnostic measurement was created.
+
+Local raw root `temp/directions/ucope/exp/ucope-uav-fixed-renewal-b01-7701-p78-20260909` contains all seven native outputs,
+executed wrapper, supervisor status/exit/pid/start/runner/log/admission, exact-source/hash
+readback and [collection record](../../../../temp/directions/ucope/exp/ucope-uav-fixed-renewal-b01-7701-p78-20260909/collection-readback.json).
+[Read-only verifier](../../../../temp/directions/ucope/exp/ucope-uav-fixed-renewal-b01-7701-p78-20260909/verify_collection.py) completed exit0 with
+[PASS output](../../../../temp/directions/ucope/exp/ucope-uav-fixed-renewal-b01-7701-p78-20260909/verification-output.txt), loading recorded bytes
+and arithmetic only, without model construction, learner/evaluator/native calls or another
+test suite. All seven outputs match remote SHA256; wrapper matches§5; terminal source
+remained exact/clean. [Supervisor log](../../../../temp/directions/ucope/exp/ucope-uav-fixed-renewal-b01-7701-p78-20260909/supervisor/task.log)
+retains the complete invocation wall/RSS and exit boundary. Original scientific evidence remains intact.
+
+No technical acceptance gap remains. Every outcome stops P78 here. **DM owns scientific
+intake and archival; Root owns source/evidence integration and subsequent P78 test/scientific
+remote-checkout and wrapper reclamation after preserved intake.** Own test scratch/source-pack
+carriers are already removed. Shared authoring checkout remains in use; P77 cleanup and
+older evidence stay with their recorded owner. CM releases the index/owned paths at return.
