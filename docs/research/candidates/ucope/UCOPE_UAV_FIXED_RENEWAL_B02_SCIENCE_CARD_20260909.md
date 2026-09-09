@@ -137,3 +137,28 @@ cover actual CLI/config/RNG/card identity, F/G/H arms and primary propagation.
 The same CM completes source publication, one exact detached remote invocation,
 sole observation and collection under§§3–4,6. No semantic change or new review
 round is selected; any concrete scientific conflict returns before dependent work.
+
+## 8. Observed P79 completion — 2026-09-09
+
+**Valid complete UP**, one actual new matched instance 7801. Source
+`5296520116682670a5d48336941ddd16f5d18e38` completed all 286720 native steps,
+2048 Adam calls and 96 final evaluations in 301.26 s complete outer wall,
+with no cap breach. F−G **+0.030362608571553623**, conditional evaluation
+SE **0.008159350975084483**, exceeds +0.01 by **0.02036260857155362**.
+F−H **−0.0035128012832155745** and G−H **−0.033875409854769195** remain separate
+native negatives. F's whole duration head stayed fixed while its actor/critic learned.
+
+The predeclared 7701/7801 F−G description has mean **+0.02845656261278335**,
+sample SD **0.00269555604539935**; both points are UP. This n=2 includes
+evaluation noise and establishes no stable advantage or pure training variance.
+It does not replace either primary or include P77 as a training replicate.
+F−G>0.01 occurred, F−H>0 did not; Brier losses 0.16/0.4225, mean 0.29125.
+Owner prediction not taken. Tuned headroom remains absent; recasts remain 1.
+
+P79 ends at its all-outcome boundary. [DM intake §§7–10](UCOPE_UAV_FIXED_RENEWAL_B02_P79_INTAKE_20260909.md#7-dm-scientific-intake-against-the-card)
+recommends a separately allocated prospective F−H-primary question with the
+same F/G/H panel. No new card/master/source/allowance or Pro Send follows.
+[E0 evidence](UCOPE_UAV_FIXED_RENEWAL_B02_P79_RESULT_EVIDENCE_20260909.md),
+[durable summary](UCOPE_UAV_FIXED_RENEWAL_B02_P79_RESULT_SUMMARY_20260909.json)
+and [Chinese brief](../../portfolio/owner/briefs/ucope/2026-09-09_UCOPE_UAV_FIXED_RENEWAL_B02.md)
+retain all outcomes and the bounded reading. Prospective §§1–7 remain unchanged.
