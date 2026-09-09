@@ -1,0 +1,193 @@
+{
+  "status": "SCIENTIFICALLY_SELECTED_FROZEN_NOT_ALLOCATED",
+  "created_at": "2026-09-09T21:27:32Z",
+  "method": "Python standard-library configuration arithmetic only; no scientific module imports, random generators, models or world construction.",
+  "source_reference_sha": "47f8983ed0a241106cdbe8368cb37851f50c7ebd",
+  "synthesis_reference_sha": "dae6a74bbf8e402a3ea47256176f5795eb277206",
+  "arm": 1,
+  "configuration": {
+    "fits": 3,
+    "arms_per_fit": 1,
+    "parameters_per_model": 2083,
+    "actor_and_direct_parameters_per_model": 1570,
+    "critic_parameters_per_model": 513,
+    "updates_per_fit": 512,
+    "episodes_per_update": 128,
+    "ticks_per_episode": 40,
+    "target_transitions_per_tick": 2,
+    "fixed_evaluation_updates": [
+      128,
+      512
+    ],
+    "primary_update": 512,
+    "modes_per_panel": [
+      "G_greedy",
+      "G_stochastic",
+      "R0",
+      "R"
+    ],
+    "worlds_per_mode": 1024,
+    "optimizer": "Adam",
+    "learning_rate": 0.001,
+    "entropy_schedule": "original update-index schedule; coefficient zero from update64; no stretch"
+  },
+  "per_fit": {
+    "new_models": 1,
+    "training_episodes": 65536,
+    "training_team_ticks": 2621440,
+    "training_target_transitions": 5242880,
+    "backward_calls": 512,
+    "Adam_steps": 512,
+    "evaluation_episodes": 8192,
+    "evaluation_team_ticks": 327680,
+    "evaluation_target_transitions": 655360,
+    "total_episodes": 73728,
+    "total_team_ticks": 2949120,
+    "total_target_transitions": 5898240,
+    "rollout_policy_batch_calls_upper": 8772,
+    "forward_bound_excludes": "objective, critic and backward work; R0/R make no model forward calls",
+    "decision_or_gradient_rows": "unknown path-dependent actual rows; no fill-to-count training",
+    "complete_wall_cap_s": 60
+  },
+  "study": {
+    "new_independent_training_fits": 3,
+    "new_models": 3,
+    "training_episodes": 196608,
+    "training_team_ticks": 7864320,
+    "training_target_transitions": 15728640,
+    "backward_calls": 1536,
+    "Adam_steps": 1536,
+    "evaluation_episodes": 24576,
+    "evaluation_team_ticks": 983040,
+    "evaluation_target_transitions": 1966080,
+    "total_episodes": 221184,
+    "total_team_ticks": 8847360,
+    "total_target_transitions": 17694720,
+    "rollout_policy_batch_calls_upper": 26316,
+    "study_elapsed_cap": "none selected; actual study elapsed recorded separately from180s sum of complete-fit caps",
+    "nested_candidates": 0,
+    "future_trajectory_search": 0,
+    "policy_search": 0,
+    "solver_calls": 0,
+    "added_validation_models": 0,
+    "added_validation_episodes": 0,
+    "added_validation_optimizer_steps": 0,
+    "added_validation_evaluations": 0,
+    "sum_of_complete_fit_wall_caps_s": 180
+  },
+  "RNG_design": {
+    "worlds": "PCG64 SeedSequence([302,fit,split,episode,target]); 40 uniforms per target",
+    "phase": "[302,fit,split,episode,2]",
+    "training_world_split": 100,
+    "training_episode_range": [
+      0,
+      65535
+    ],
+    "evaluation_world_split": 200,
+    "evaluation_world_range": [
+      0,
+      1023
+    ],
+    "same_evaluation_worlds_at_both_panels": true,
+    "actions": "PCG64 SeedSequence([303,fit,split,mode,1,episode]); 17 fixed-calendar uniforms",
+    "training_action_mode": 0,
+    "evaluation_stochastic_action_mode": 1,
+    "same_evaluation_stochastic_tapes_at_both_panels": true,
+    "no_training_state_feedback_from_evaluation": true,
+    "disjointness": "all three fit keys and train/eval address tuples differ; no old weights/optimizer/RNG state; same worlds/tapes within fit intentionally pair fixed panels",
+    "numeric_rng_state_constructed_in_preparation": false
+  },
+  "historical_exposure_reused": {
+    "P76_parameters": 2083,
+    "P76_Adam_steps": 128,
+    "P76_initial_total_L2": 5.815270900726318,
+    "P76_final_displacement_L2": 2.679697036743164,
+    "P76_final_displacement_relative_initial_L2": 0.4608034745910933,
+    "P76_complete_wall_s": 4.191728,
+    "P76_aggregate_unit_CPU_s": 3.500596,
+    "P67_complete_wall_s": 3.253184,
+    "interpretation": "Prior accepted exposure demonstrates that this learner can move; neither future displacement nor useful return is known. The 512 budget is not guaranteed to improve or converge."
+  },
+  "known_work_ratios_to_P76": {
+    "training_update_multiplier": 4.0,
+    "evaluation_panel_multiplier": 2,
+    "total_episode_ratio": 3.6
+  },
+  "cost_projection_status": "Original CM read-only source/current-loop and retained-timing feasibility confirms60s complete per fit is plausible; not a measured or statistical upper.180s is summed complete fit invocation caps, not study elapsed. No calibration executed.",
+  "new_preparation_exposure": {
+    "scientific_imports": 0,
+    "models": 0,
+    "RNG_masters": 0,
+    "training_starts": 0,
+    "environment_episodes": 0,
+    "Adam_steps": 0,
+    "evaluations": 0,
+    "scientific_submissions": 0,
+    "test_invocations": 0,
+    "profiling_invocations": 0,
+    "Pro_Sends": 0
+  },
+  "exposure_line": "Selected B06, not allocated: 3 fresh independent G fits x512 real Adam updates x128 joint episodes =196608 training episodes; 3x2 fixed panels x4 modes x1024 worlds =24576 evaluation episodes. Total221184 episodes /8847360 team ticks /17694720 target transitions /1536 Adam steps. Each G has2083 parameters. Accepted P76 moved0.4608034745910933 of initial L2; future movement/return/wall unknown. This DM intake/freeze constructs zero learner/world/RNG objects and executes zero scientific/test/profiling calls; the already completed Transport consultation is separately archived.",
+  "cost_projection": {
+    "fourfold_complete_wall_per_fit_P67_basis_s": 13.012736,
+    "fourfold_complete_wall_per_fit_P76_basis_s": 16.766912,
+    "fourfold_complete_wall_three_fit_P67_basis_s": 39.038208,
+    "fourfold_complete_wall_three_fit_P76_basis_s": 50.300736,
+    "per_fit_cap_s": 60,
+    "work_limit_s": 50,
+    "cleanup_limit_s": 58,
+    "kill_limit_s": 59,
+    "summed_complete_fit_cap_s": 180,
+    "study_elapsed_cap": null,
+    "actual_new_wall_s": null,
+    "authority": "PRO_FINAL selected bounds; Root authorized card freeze only; no scientific invocation allocation"
+  },
+  "object": "VSP03_B06_CONTINUOUS512",
+  "frozen_at": "2026-09-09T22:21:22+00:00",
+  "selected_response_commit": "5af9c448879bba3129df32e07a788839658f8a4f",
+  "freeze_authority": "Root 2026-09-09 original-DM full-intake assignment: freeze selected complete card and return CM proposal; no fit allocated.",
+  "instance_keys": [
+    10801,
+    10802,
+    10803
+  ],
+  "torch_initialization_keys": [
+    50801,
+    50802,
+    50803
+  ],
+  "new_intake_and_freeze_exposure": {
+    "scientific_imports": 0,
+    "models": 0,
+    "RNG_masters": 0,
+    "training_starts": 0,
+    "environment_episodes": 0,
+    "Adam_steps": 0,
+    "evaluations": 0,
+    "scientific_submissions": 0,
+    "test_invocations": 0,
+    "profiling_invocations": 0,
+    "Pro_Sends": 0,
+    "source_implementation_changes": 0,
+    "Transport_app_dispatches": 0
+  },
+  "scientific_allocation_at_freeze": {
+    "allocated_fits": 0,
+    "accepted_scientific_invocations": 0,
+    "execution_roots_created": 0,
+    "source_binding": null
+  },
+  "statistics": {
+    "primary_per_fit": "D(i,512)=mean_e(J(Ggreedy,i,512,e)-J(R0,i,512,e))",
+    "three_fit_primary_summary": "arithmetic mean and descriptive ddof1 sample SD only when all three512 primaries are complete",
+    "budget_contrast_per_world": "b(i,e)=d(i,512,e)-d(i,128,e)",
+    "budget_contrast_per_fit": "Q(i)=mean_e b(i,e); conditional SD uses ddof1 over1024 paired b values; SE=SD/32",
+    "conditional_SD_ddof": 1,
+    "conditional_SE_denominator": 32.0,
+    "independent_training_unit": "one fresh continuous fit",
+    "missing_512": "retain actual counts and trusted128; no zero/128/best substitution; completed subset n explicit, no random-missingness assumption",
+    "missing_128": "retain trusted512; dependent Q missing",
+    "prediction": "abs(mean_i D(i,512))<=0.02, low confidence; unscored if selected three-fit mean missing",
+    "owner_prediction": "not taken (unattended)"
+  }
+}
