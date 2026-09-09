@@ -1,7 +1,11 @@
 # VSPC1 B07 P72 intake — third unchanged-comparison training pair
 
-Current state: prospective definition. One new pair is allocated; no B07
-scientific submission, staging, model or outcome exists at this boundary.
+**Current result: B07/8303 is valid complete UP, Delta +.0333779164,
+conditional SE .0085882059. The three same-comparison differences are
++.0165919114/−.0066345182/+.0333779164; descriptive mean .0144451032,
+sample SD .0200924195. P72 ends after its single submission and all-outcome
+intake.** The earlier prospective/source boundaries remain in §§1–5;
+§6 records scientific acceptance, forecast scoring and the next-rung advice.
 
 ## 1. Assignment and starting state
 
@@ -165,3 +169,234 @@ is invented. Source acceptance stays in intake/audit without another owner item.
 After DM commit/push, editing/index returns to the same CM for the complete
 allocated staging/execution/sole-observation/collection route. No intermediate
 Root action, extra submission allowance, pilot, retry, second pair or successor.
+
+## 6. P72 valid-result intake and decisions
+
+### Evidence checked and rule applied verbatim
+
+I read the full [E0](VSPC1_NATIVE_HOLD_VALUE_B07_RESULT_EVIDENCE_20260908.md),
+[execution record](VSPC1_NATIVE_HOLD_VALUE_B07_P72_TECHNICAL_20260908.md),
+[staging evidence](VSPC1_NATIVE_HOLD_VALUE_B07_P72_STAGING_EVIDENCE_20260908.json),
+[accepted receipt](VSPC1_NATIVE_HOLD_VALUE_B07_P72_ACCEPTED_RECEIPT_20260908.json)
+and the question-relevant native/check/terminal fields of the
+[collected evidence](results/native_hold_value_b07_8303_20260908/evidence.json)
+at CM commit `2c905e0a7bf328cc56892c99a70cbd9777728f49`.
+They match card §§2–5 and §7's object/master/source/node/cwd/input/handle/output.
+Scientific SHA remained `4e83312ea5d35db4472bbc821b0c2cf875e853b3`; the separately
+committed wrapper is `e76c34949ae3a2301ae3fd1adc0dc78e78bff272`. CM alone
+observed the single accepted submission through terminal collection. No Root
+observer transfer, repeat submission or scientific replay occurred.
+
+I recomputed J=reward/256 from all96 saved8303 evaluation rows, checked the32
+matched identities per arm, and calculated all means, conditional sample-SD/
+sqrt(32) SEs and adverse identities. Saved J and reported contrast mean/SE errors
+are zero. [DM analysis](results/native_hold_value_b07_8303_20260908/dm_analysis.json)
+retains every contrast, provenance, counts and resource arithmetic. Prior8301/
+8302 per-pair records are reused from the accepted B06 analysis, with their
+retained evidence digests unchanged; their technical checks were not replayed.
+The scientific-tools helper reads [six fitted endpoints](results/native_hold_value_b07_8303_20260908/run_scores.csv)
+with `--paired --baseline MLP-V`; its [summary](results/native_hold_value_b07_8303_20260908/run_level_summary.json)
+has three matched training pairs and no unmatched seed. H is an untrained
+reference, not another training sample. No model, native call or collection
+replay was added by DM analysis.
+
+Card §4's applicable rule, verbatim:
+
+> Delta>.01 with trustworthy primary
+>
+> UP: a local gated-package advantage over this specified ordinary critic in8303; retain both prior width133 outcomes and H, with no stable claim or automatic successor.
+
+The point-estimate margin above .01 is .0233779164, compared with conditional
+SE .0085882059. This supplies a local UP observation; no population-significance
+rule is added. Both learned mean returns exceed H, so the below-H mean branch
+does not trigger, while every individual H loss remains. Native primary and
+learner dependencies are complete under evidence-spec §§4,5.2,11.8.1–3,11.8.6–7.
+This is valid B/EXPLORE, not a consumed C or a changed frozen rule.
+
+### Native observations, counts and exposure
+
+| Native final sampled endpoint | Mean J |
+| --- | ---: |
+| GATED-V | .1736901218918796 |
+| MLP-V, ordinary136→128→133→1 | .14031220549753456 |
+| H, zero velocity | .13086998202805208 |
+
+| Matched8303 contrast | Mean difference | Conditional SE | Adverse episodes |
+| --- | ---: | ---: | ---: |
+| GATED−MLP-wide133 | +.03337791639434502 | .008588205927794471 | 6/32 |
+| GATED−H | +.0428201398638275 | .01074415193119564 | 7/32 |
+| MLP-wide133−H | +.009442223469482484 | .010821897784159864 | 12/32 |
+
+Zero-based adverse indices with reset830302000+index: GATED−MLP
+`[3,4,15,16,23,28]`; GATED−H `[4,13,15,16,18,23,28]`; MLP−H
+`[2,5,9,10,13,18,19,21,25,28,29,30]`. No endpoint, reset, seed or checkpoint
+is removed. MLP's positive H-relative mean is smaller than its conditional SE;
+it does not establish tuned comparator competence.
+
+Actual work is two real fits,512 complete training episodes per arm,32 final
+sampled evaluations per learned arm and32 H evaluations. The1120 episode rows,
+512 rollouts and2048 epoch records reconcile with **286720 native team steps**
+(262144 train/24576 eval), **2048 Adam calls**,96 final evaluations,1120 explicit
+resets, two constructor resets and zero partial steps/diagnostic frames.
+Recorded velocity/duration decisions are1384609/5440, d4 count2677 and recurrent
+observations1392640. Each arm merges131072 targets in256 updates of512 rows:
+512 total moment merges/262144 target rows/1048576 four-epoch target terms.
+
+Relative total parameter movement is GATED .2559565566326407 /
+MLP .24775843450121335. Gate absolute movement is .5661719441413879; duration
+absolute movements .09483914822340012/.09940600395202637. Initial gate/duration
+norms are zero, so relative movement is undefined/null; the raw legacy summary
+field is preserved with that qualification. Nonzero held training rows are
+1500/1506 of131072 (about1.1444%/1.1490%), with96 held evaluation rows each.
+Movement and exposure establish actual learning opportunity, not mechanism value.
+
+Final moment mean/M2/scale are GATED20.516817092895508/31541034/
+15.512542724609375 and MLP20.77504539489746/29015816/14.878612518310547.
+Actual summary/checkpoint/moment/publication records agree and moments stay
+fixed through learned/H evaluation. Accepted native information, reward,
+agent-compound PPO, joint clipping, CPU FP32 and normalization are preserved.
+Full return-to-go arrays and old native runs were not replayed for this intake.
+
+### Three-pair reading and its limits
+
+| Independent master | GATED−MLP-wide133 | Conditional SE | Frozen point region |
+| --- | ---: | ---: | --- |
+| 8301 /B05 | +.0165919114 | .0080992110 | UP |
+| 8302 /B06 | −.0066345182 | .0069821943 | WITHIN, negative sign |
+| 8303 /B07 | +.0333779164 | .0085882059 | UP |
+
+All-three descriptive primary mean is **.01444510318799445**, sample
+SD **.020092419459151696**. GATED−H mean/SD is .03072819437351555/
+.011606328322584885; MLP−H .0162830911855211/.008875392040135868. The dispersion
+combines training and finite evaluation randomness. It is not isolated training
+variance, a population confidence interval or a new aggregate pass/fail rule.
+The mean's position above MEI is descriptive only. Older normalized-width128
+and unnormalized regimes remain separate, including their adverse/H outcomes.
+
+Strongest support is8303's local UP with a positive native GATED−H mean, added
+to8301's UP against the same similarly sized ordinary critic. Thus the positive
+package observation is no longer confined to8301. Strongest contradiction to
+stable recurrence remains8302's negative sign/WITHIN and18/32 adverse primary
+episodes. The three-pair SD exceeds the descriptive mean, all three pairs retain
+adverse episodes, and8303 MLP−H is noisy and small. These facts remain alongside
+the positive mean; no all-positive or equivalence claim is made. Both learners
+exceeding untuned H by mean in each instance is not matching tuned headroom,
+which remains absent.
+
+The five-agent opening-duration → entity-owned hold/state → centralized value/
+joint optimization → decentralized recurrent actor updates → motion/service →
+native-return path is unchanged. The critic is absent from final action
+selection. Initialization, gated geometry, shared clipping, value units, FP32
+and partner co-adaptation remain explanations for this variable package result.
+Existing verified B03/P67/B05/B06 source distinctions already separate generic
+MLP feature sharing from the proposed gate; they do not identify specialized
+hold credit. No new literature finding or novelty claim is asserted. The result
+supports continued bounded package exploration, not stable superiority,
+capacity causality, transfer, optimality or a direction-level disposition.
+
+### Complete resources and engineering conformance
+
+The actual canonical admission at2026-09-09T06:09:59.320218Z passes physical and
+effective floors with15320178688 available bytes against4294967296 required.
+Staging/readback retains14 matching source/runtime paths, including canonical
+helper digest `cb0525e9247f1c7262c198bf051e542282f5928982137b3023d36d5d69eda4dc`.
+Literal payload is595 bytes/seven LF/zero CR, digest
+`bbe34ae41768ce7925cc00f21ef4e24ae6f18740618e1410b9fabe15dc68687a`.
+Actual source, interpreter, node, payload and submission match card §7.
+
+Sole handle PID3026966 exited0 at06:15:12Z with tmux inactive. Complete enclosing
+wall is **313.50s**; supervisor whole-second start/end span313s. Terminal-status
+uptime322s is observation age, not invocation duration. Internal pair wall
+305.0476207679603s and MLP transition159.12280644796556s leave8.452379232039675s
+unpartitioned residual. Conservatively charging that residual to each arm gives
+upper bounds **167.57518568000523/154.37719355203444s**, both≤1800s; whole≤3600s.
+These are bounds, not additive arm-duration measurements. H/publication/readback/
+exit are covered; serial critical path equals invocation wall.
+
+Peak RSS558164KiB = **545.08203125MiB**. Native `resources_unmeasured` remains
+in the original summary; independent whole wall/RSS are measured, while aggregate
+CPU and isolated width/normalization overhead remain unknown. No timing cause
+is assigned. Across the three same-comparison native chains,315.20+407.33+313.50
+=**1036.03s**, three accepted submissions/three valid pairs,345.3433333333s per
+valid pair. This excludes older regimes, engineering, collection/analysis and
+unmeasured aggregate CPU; it is not full-history or workflow cost.
+
+Artifact-only checks passed in2.3815832999534905s without model/forward/native
+replay. The new35-line runner plus seven-line wrapper add42 non-test lines,
+within2000/600; no §4 machinery or observed §5 breach. Eleven source checks took
+6.667623999994248s, owned scratch was removed, and P69's first-enclosing-test-wall
+qualification stays historical. Technical conformance supports trust in the
+measurement; it is separate from the scientific positive observation.
+
+### Next discriminator recommendation, outside P72 execution
+
+Recommend one later **B performance rung at768 training episodes per arm**, with
+the same normalized GATED/width133 MLP/H, one fresh matched training pair and
+the same32 final sampled evaluations per arm/H. The question would be whether
+the local package advantage appears at modestly greater learner exposure.
+Three current pairs already expose mixed signs; a fourth512-episode pair would
+mainly refine that same descriptive variation. The next-budget question instead
+tests the usefulness of continued real learning for both competing packages,
+without demanding exact maxima, diagnosis, significance or repaired H competence.
+It is not a requirement for accepting any of these three results.
+
+Only training exposure would increase1.5×; method, information, comparator,
+final evaluation and complete1800s/3600s caps would remain. Proposed work:
+2×768×256 train+3×32×256 eval=**417792 steps**,3072 Adam,768 rollouts/moment merges,
+393216 target rows/1572864 four-epoch terms,1632 scored episodes/96 evaluations.
+The current reset law remains disjoint: training offsets1000..1767 versus final
+reset2000..2031. This modest increase avoids requiring a new stream-spacing law.
+A1.5× proxy of the largest prior complete pair is610.995s; it is planning context,
+not a guarantee or an extra cost experiment. No nested search or extra evaluation.
+
+This is a new-budget local comparison if separately allocated; a fresh master
+does not identify a causal effect of increasing training budget. The old512
+baseline set would then differ in training exposure and remain context only;
+both768-budget arms must train afresh and be reported separately. No new master,
+card, prediction, source assignment, invocation or automatic successor is created
+inside P72. This ordinary object-tier advice does not open/recast a family or
+promote C/formal UAV validation.
+
+### Decisions this intake produces
+
+1. **Scientific reading, object tier.** Options: (a) accept valid complete UP
+   with all three same-comparison outcomes and native/H/noise limits;
+   (b) withhold the result because WITHIN was predicted; (c) treat the mean
+   above MEI as a new confirmatory pass. Recommend/select(a).
+   Owner-delegated decision (unattended,2026-09-03 instruction): (a),
+   **OWNER_DELEGATED**, applying the unchanged card §4.
+2. **Prediction, object-tier technical.** Options: (a) score WITHIN(.55) against
+   inclusive −.01≤Delta≤.01; (b) revise it or omit8303. Recommend/select(a).
+   Owner-delegated decision (unattended,2026-09-03 instruction): (a),
+   **OWNER_DELEGATED**. The event missed; binary Brier=.55²=.3025. Owner
+   prediction was not taken. B05/B06 forecasts and their scores remain intact.
+3. **Allocation completion, object-tier technical.** Options: (a) end P72 at
+   this sole submission and full intake; (b) retry, add evaluation, another pair
+   or automatic successor. Recommend/select(a). Owner-delegated decision
+   (unattended,2026-09-03 instruction): (a), **OWNER_DELEGATED within P72**.
+   B has no consumption state; no family/lifecycle/priority/recast/C/UAV-entry change.
+4. **Next-rung advice, object tier.** Options: (a) one later768-episode-per-arm
+   B with unchanged comparison/final evaluation; (b) a fourth512-episode pair;
+   (c) diagnosis or stronger-class promotion. Recommend/select(a) as
+   **advice only, not executed in P72**. Owner-delegated decision (unattended,
+   2026-09-03 instruction): (a), **OWNER_DELEGATED object tier**. The scientific
+   choice and its cost are explicit; any later administrative allocation is
+   separate from Portfolio scientific dispositions.
+
+### Owner record and clean return
+
+Main unapplied reviews and relevant audit owner cells were empty at
+2026-09-09T06:24:22Z; unapplied reviews remained empty at06:29:51Z.
+No instruction, prediction or ratification is invented.
+The [Chinese brief](../../portfolio/owner/briefs/vsp_c1/2026-09-08_VSPC1_NATIVE_HOLD_VALUE_B07.md)
+records this valid result. Ordinary reading/prediction/stop/next-rung advice
+stay in intake/audit; no extra owner-console item is needed. Item013 remains
+the auto-applied new-card record. Owner flags are mixed signs, few independent
+pairs, remaining H losses/noisy MLP−H and absent tuned headroom; no material
+critic dissent or second recast is asserted.
+
+DM commits/pushes the complete card/intake/analysis/brief/audit/DIRECTION delivery
+and returns actionable completion to Root once through the existing relay.
+Root integrates specified commits while preserving concurrent main changes.
+CM observation is terminal; no Root adoption or relaunch remains. P72 is complete,
+with no unresolved acceptance dependency and no executable successor allocation.
