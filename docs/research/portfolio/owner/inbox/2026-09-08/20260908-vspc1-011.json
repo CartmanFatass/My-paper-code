@@ -1,0 +1,77 @@
+{
+  "id": "20260908-vspc1-011",
+  "created": "2026-09-08T21:57:17-07:00",
+  "direction": "vsp_c1",
+  "tier": "portfolio",
+  "kind": "portfolio",
+  "title": "另配一对不变的加宽MLP原生比较",
+  "context": "P70完成一对新比较：门控减加宽MLP为0.01659，条件标准误0.00810；两臂均值高于H，但有13/8/13个不利回合。建议后续单独分配一对独立训练来观察重现；本次额度已结束，没有新卡、主键或运行分配。",
+  "options": [
+    {
+      "key": "ratify",
+      "label": "ratify the proposal",
+      "consequence": "另行分配一次有界任务，声明新主键并保持现有比较、预算和所有结果；不复用P70额度。"
+    },
+    {
+      "key": "refuse",
+      "label": "refuse",
+      "consequence": "保留本次完整结果及历史反例，不自动续跑或改变方向状态。"
+    },
+    {
+      "key": "amend",
+      "label": "amend per the comment",
+      "consequence": "先调整后续问题或任务边界，再另行分配；当前不执行。"
+    }
+  ],
+  "recommended": "ratify",
+  "auto_applied": null,
+  "dm_reason": "可信但接近门槛的单对原生信号支持有限独立训练跟进；其结果无论正负都应保留。",
+  "evidence": [
+    "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B05_INTAKE_20260908.md",
+    "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B05_RESULT_EVIDENCE_20260908.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-08.md#L85",
+  "brief": "docs/research/portfolio/owner/briefs/vsp_c1/2026-09-08_VSPC1_NATIVE_HOLD_VALUE_B05.md",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否在后续独立任务中，保持本次门控与加宽普通MLP比较，另做一对独立训练来观察局部信号是否重现？",
+    "changes_if_approved": [
+      {
+        "target": "vsp_c1 后续任务分配与科学卡",
+        "from": "P70唯一运行与科学intake已完成；容量接近的新比较只有一对训练，没有后续额度",
+        "to": "另配一次有界任务，先声明新训练主键与原有比较、预算，再执行一对独立训练并保留所有结果"
+      }
+    ],
+    "if_refused": "保留B05全部结果和历史反例，不自动续跑、换比较器、升格结论或改变方向状态。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B05_INTAKE_20260908.md",
+        "quote": "Strongest support: the gated package has a local positive native-return\ndifference against an ordinary critic with ten more parameters, and both learned\nmeans exceed H.",
+        "why": "主差值0.01659超过事前0.01门槛，且本次普通对照也高于H；可以支持一次有限的独立训练跟进。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B05_INTAKE_20260908.md",
+        "quote": "Strongest contradiction/qualification: the margin above MEI is smaller than\nconditional SE,13/32 primary differences are adverse, and the wider MLP's\nH-relative difference is .013094858 with conditional SE .012498009 and13/32\nadverse episodes.",
+        "why": "超过门槛的幅度仅0.00659，小于条件标准误0.00810；目前不能声称稳定优势或对照能力已修复。"
+      }
+    ],
+    "uncertainty": [
+      "新比较只有一对训练；32个评估回合不能估计训练种子总体的不确定性。",
+      "比较器和种子同时改变，历史差值缩小不能识别容量的因果作用；初始化、结构及优化相互作用仍未区分。",
+      "新训练可以正、负或在门槛内；全部保留，不能跑到每个种子都为正。",
+      "没有经过调优的同信息余量记录，H只是已达到的未调优参考。"
+    ],
+    "cost": {
+      "compute": "本次完整原生运行315.20秒，峰值内存546.43MiB；总CPU和加宽专属开销未测。后续若另行分配一对，主工作仍为2×512×256训练加3×32×256评估，共286720原生步、2048次Adam、96次评估；建议每完整臂1800秒、整对3600秒上限，不加搜索、调优或额外评估。后续绑定所需工程未分配或计时。",
+      "owner_time": "无需等待回复；可以异步批准、拒绝或修改建议。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing；P70已完成，本建议没有分配新的运行"
+    },
+    "verdict_text": "Recommend a later single independent matched training pair using this unchanged\nnormalized GATED/width-133 MLP/H comparison, retaining every outcome. A new\nbounded assignment must declare its fresh key and allocation; P70 selects no\nnew card, key, code dispatch or run.",
+    "source": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B05_INTAKE_20260908.md"
+  },
+  "starred": true
+}

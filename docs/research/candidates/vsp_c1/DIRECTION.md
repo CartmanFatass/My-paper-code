@@ -436,3 +436,42 @@ parameters versus34817 for GATED; exact parameter-count search is unnecessary.
 This is a later bounded comparison proposal, not a frozen comparator or an
 allocated run. Accepted family boundaries, recast count, lifecycle, priority,
 C status and formal UAV-entry determination remain unchanged.
+
+## Similarly sized ordinary critic: one local signal near MEI — 2026-09-08
+
+The [B05 P70 intake](VSPC1_NATIVE_HOLD_VALUE_B05_INTAKE_20260908.md#9-p70-valid-result--scientific-intake-and-complete-allocation-boundary)
+accepts one new matched training pair,8301, against the ordinary fully connected
+136→128→133→1 critic (34827 parameters), with normalized GATED unchanged
+(34817 parameters). Native GATED−MLP-wide133=+.0165919114, conditional
+SE .0080992110, is UP under absolute MEI .01. GATED−H=+.0296867693 and
+MLP-wide133−H=+.0130948580; adverse episode counts are13/8/13 of32.
+The [E0](VSPC1_NATIVE_HOLD_VALUE_B05_RESULT_EVIDENCE_20260908.md) preserves the
+full native exposure, H and every endpoint.
+
+Strongest support is a local native-return gain against an ordinary critic with
+ten more parameters, while both learned mean returns exceed H. A deficit in
+total ordinary-critic parameter count does not describe this new comparison.
+Strongest qualification is the .0065919114 margin above MEI being smaller than
+conditional SE, alongside13 primary adverse episodes and a noisy MLP−H mean
+(SE .0124980086,13 adverse episodes). This is n=1 of a changed-comparator regime;
+it does not establish stable superiority or repaired comparator competence.
+Earlier normalized n=2 and unnormalized n=2 remain separate, including MLP/H
+losses. The smaller new gap cannot identify a capacity effect when the master
+also changed.
+
+The opening duration → entity-owned hold/state → centralized value/joint
+optimization → local recurrent actor update → UAV motion/service → native
+return path remains available. Nonzero hold inputs occupy about1.15% of this
+pair's training rows. Similar parameter counts and observed gate movement do
+not isolate the path: initialization, gated geometry, shared clipping, value
+units, FP32 and partner co-adaptation remain alternatives. No specialized
+hold-credit, stable population or transfer claim follows. Matching tuned
+headroom remains absent; H remains an attained untuned reference.
+
+The next discriminator recommended is one later independent matched training
+pair with this unchanged normalized GATED/width-133 MLP/H comparison and all
+outcomes retained. It asks about recurrence under new training randomness;
+additional evaluation of8301 or an exact maximum would not supply that unit.
+P70 ends at the completed intake: no successor card/key/run is allocated.
+Accepted family boundaries, recast count, lifecycle, priority, C status and
+formal UAV-entry determination remain unchanged.
