@@ -2,14 +2,14 @@
 
 ## Engineering acceptance
 
-Identity adaptation accepted; no P79 scientific invocation yet. Contract:
+Identity adaptation accepted; the sole P79 scientific invocation is running. Contract:
 [B02 card §§1–5](ACVC_NATIVE_LINK_LOSS_B02_SCIENCE_CARD_20260909.md) and
 [P79 prospective facts](ACVC_NATIVE_LINK_LOSS_B02_P79_PROSPECTIVE_FACTS_20260909.json)
 at `56ce830386cfab6be30b217e5cc5b0d0f8109120`. The designated `codex/acvc` checkout
 `C:/Projects/HMASD-worktrees/codex-acvc` began clean at that revision. Shared native,
 UCOPE/MGTAP, fixed checkpoint, DM-owned inputs and all P78 evidence remain unchanged.
 
-The sole source adaptation adds seed8902 to the existing runner CLI, publishes the
+The sole source adaptation adds seed 8902 to the existing runner CLI, publishes the
 corresponding B02/P79 identity, and uses a dedicated `launch_b02.sh` with the new run root
 and admission path. `binding.py`, `model.py`, `learner.py`, `report.py`, PPO, initialization
 laws, recurrence and sampling are unchanged from accepted P78 source `f42902116`.
@@ -18,8 +18,8 @@ checkpoints are never loaded. The source reference and retained P78 bytes remain
 at their original revisions; there is no compatibility shim or generic registry.
 
 Scope §4 additions: **none**, as required by B02 card §5. Source change is 20 added /
-5 removed non-test lines, including the dedicated14-line launch command. The reused
-attempt now has484 non-test lines and the runner150 lines, within2000/600 limits.
+5 removed non-test lines, including the dedicated 14-line launch command. The reused
+attempt now has 484 non-test lines and the runner 150 lines, within 2000/600 limits.
 
 ## Focused checks and reused review
 
@@ -36,49 +36,75 @@ python -m pytest -q -p no:cacheprovider --basetemp <new owned P79 temporary dire
   tests/experiments/candidates/acvc/native_link_loss_b01/test_link_loss.py::test_b02_stream_identity
 ```
 
-Result: **2 passed**, pytest4.16 s; complete command wall **5.4396806 s**, charged to the
-logical study and both learned arms. The Python wrapper reported5.234 s internally and
+Result: **2 passed**, pytest 4.16 s; complete command wall **5.4396806 s**, charged to the
+logical study and both learned arms. The Python wrapper reported 5.234 s internally and
 confirmed its new `temp/directions/acvc/test/p79_identity_*` directory was absent after
 standard temporary-directory teardown. There was no native environment or scientific
 training/evaluation exposure. The old P78 blocked scratch path was neither touched nor retried.
 
 Checks cover B02 object/allocation/master publication, CLI propagation, fresh reset identities
 in every synthetic phase, checkpoint master fields, all-arm post-learner output publication,
-2240 distinct action streams shifted exactly100000 from P78, separation from all initialization/
+2240 distinct action streams shifted exactly 100000 from P78, separation from all initialization/
 reset streams (2789 distinct declared values total), and the dedicated P79 launch identity.
 The synthetic fixture is not scientific performance evidence. Complete native output and
 actual process-exit accounting remain to be established by the sole allocated invocation.
 
 ## Prospective cost and publication coverage
 
-The complete work law is unchanged: T/G each512×256 collection steps,1024 Adam updates
-with chunk32 recurrent replay and32×256 final steps; C/F each32×256 final steps. Together:
-294912 team steps,2048 Adam calls,512 rollouts,1152 scored resets and4 unscored constructor
+The complete work law is unchanged: T/G each 512×256 collection steps, 1024 Adam updates
+with chunk32 recurrent replay and 32×256 final steps; C/F each 32×256 final steps. Together:
+294912 team steps, 2048 Adam calls, 512 rollouts, 1152 scored resets and 4 unscored constructor
 resets. G retains its additional recurrent residual cost. Required checks, imports/startup,
 C/F evaluation and publication/exit are charged to both learned arms; the other learned
 fit is excluded from an arm's bill. No native pilot or alternative configuration is added.
 
-P78 same-count costs are the measured reference (work multiplier1): process359.17 s,
-T199.8208294 s, G215.5117409 s, whole373.4069735 s including14.2369735 s checks. Substituting
-the current5.4396806 s check cost while retaining P78 scientific-path costs gives a planning
-projection of **T191.0235365 s, G206.7144480 s, whole364.6096806 s**. New initialization,
+P78 same-count costs are the measured reference (work multiplier 1): process 359.17 s,
+T 199.8208294 s, G 215.5117409 s, whole 373.4069735 s including 14.2369735 s checks. Substituting
+the current 5.4396806 s check cost while retaining P78 scientific-path costs gives a planning
+projection of **T 191.0235365 s, G 206.7144480 s, whole 364.6096806 s**. New initialization,
 trajectory and machine contention remain unknown; this is a reuse-based projection, not
-a timing observation of P79. Caps remain1800 s per complete arm and3600 s complete study.
+a timing observation of P79. Caps remain 1800 s per complete arm and 3600 s complete study.
 
 Post-learner coverage uses the same synthetic publication path as the actual runner,
 with new identity/reset/checkpoint fields read back. All training/final native S/J outcomes,
 gate choices, update records and five fixed paired contrasts will be retained separately
-from P78. Conditional SE uses32 paired joint episodes; no selected-max SE or pooling with
+from P78. Conditional SE uses 32 paired joint episodes; no selected-max SE or pooling with
 P78's evaluation episodes is introduced. Final T/G checkpoints are the only learned outputs.
 
 ## Execution boundary
 
-One accepted scientific invocation is allocated, with master8902 and the unchanged frozen
+One accepted scientific invocation is allocated, with master 8902 and the unchanged frozen
 DENSE input digest `f648f2b100d07335ccd9c79c0476b8e9dba0c1644ae837d622b0c5f711030790`.
-Route: configured `wsl_4070`, CPU/FP32, Torch intra/inter-op1, unchanged native NumPy;
+Route: configured `wsl_4070`, CPU/FP32, Torch intra/inter-op 1, unchanged native NumPy;
 detached exact-source worktree and configured `agent-task`. Fresh actual-node admission
 is joined by `&&` to the committed B02 launch command. Runtime root:
 `temp/directions/acvc/exp/native_link_loss_b02_8902_p79_20260909/`.
 No dependency on the old P78 remote worktree, local fallback, scientific retry, resume,
 extra evaluation, tuning or second new instance is allocated. CM is sole observer through
 terminal collection and technical acceptance; DM owns all-outcome scientific intake.
+
+## Accepted invocation
+
+- Exact pushed source: `4e019ca35b930c2216fdfe110ba587e222ca7384`.
+- Node/cwd: `wsl_4070` / `/home/wu/hmasd-worktrees/acvc-p79-4e019ca35`, clean detached
+  worktree at the exact source SHA; no dependency on the P78 execution checkout.
+- Handle: `acvc-p79-native-link-loss-8902-4e019ca35`; supervisor PID 3049045.
+- Run root: `<cwd>/temp/directions/acvc/exp/native_link_loss_b02_8902_p79_20260909`.
+- Input: `/home/wu/hmasd-inputs/acvc/p79/final_DENSE.pt`; both local original and remote
+  staged bytes verified against the fixed SHA256 above.
+- Admission: `<cwd>/temp/directions/acvc/p79_admission.json`, assessed at
+  `2026-09-09T11:59:10.378280Z`; physical/effective available **15627145216 bytes**, both
+  above 4 GiB, passed. It immediately precedes this runner through the same `&&` command.
+- Supervisor initially running, exit null, tmux active. CM remains sole observer;
+  native DM received these facts without a monitoring handover.
+
+Exact command submitted once under `agent-task run acvc-p79-native-link-loss-8902-4e019ca35`:
+
+```bash
+cd /home/wu/hmasd-worktrees/acvc-p79-4e019ca35 && HMASD_PYTHON=/home/wu/.venvs/hmasd/bin/python bash experiments/candidates/acvc/native_link_loss_b01/launch_b02.sh 4e019ca35b930c2216fdfe110ba587e222ca7384 /home/wu/hmasd-inputs/acvc/p79/final_DENSE.pt 5.4396806 3594.5603194
+```
+
+The configured `zsh -lic` network shell fetched the committed source with an empty
+refmap into FETCH_HEAD (preserving the old remote-tracking prefix conflict), and created
+the exact detached checkout. Its unrelated interactive gitstatus warning did not prevent
+fetch/checkout; both operations exited 0. No scientific retries or source changes followed.
