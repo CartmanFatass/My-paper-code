@@ -1,0 +1,87 @@
+{
+  "id": "20260909-ucope-001",
+  "created": "2026-09-09T01:29:05-07:00",
+  "direction": "ucope",
+  "tier": "direction",
+  "kind": "close-call",
+  "title": "P74：续约第三次反向后，提问冻结头比较是否值得做",
+  "context": "三次真实训练的 T-G 为 +0.05567、+0.02466、-0.03095，三次 T-H 均正。拟向原 Convergence 提问下一步，窄幅推荐冻结初始持续时间头的 B 比较，并保留结束本序列及第四次相同配对。实际只准备和发布提问，不选择新臂、种子、卡片、预算或调用。",
+  "options": [
+    {
+      "key": "a",
+      "label": "提问并首选建议冻结头 B（仅提问）",
+      "consequence": "发布准备材料给 Root；节点决定科学方案；零科研调用与零 Send。"
+    },
+    {
+      "key": "b",
+      "label": "改以结束当前续约序列为首选建议",
+      "consequence": "仍由节点决定最小范围的序列结论；不擅自关闭或暂停整个方向。"
+    },
+    {
+      "key": "c",
+      "label": "改以第四次相同配对为首选建议",
+      "consequence": "节点须说明额外相同配对的决策价值；未获后续具体命令不运行。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "固定现有初始化能提出比单纯增加相同配对更有区分力的问题，但成本和第三次原生损失使推荐接近结束序列。",
+  "evidence": [
+    "docs/research/candidates/ucope/UCOPE_POST_RENEWAL_B03_P74_PREPARATION_INTAKE_20260909.md",
+    "docs/research/candidates/ucope/UCOPE_POST_RENEWAL_B03_P74_FACTS_20260909.json"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-09.md#L7",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": {
+    "question": "P74 的原 Convergence 问题，是否应以一次冻结初始持续时间头的 B 比较为首选建议，同时保留结束本序列和第四次相同配对作为备选？本项只记录提问，不批准实验。",
+    "changes_if_approved": [
+      {
+        "target": "UCOPE P74 原 Convergence 提问",
+        "from": "P72 已结束，尚无后继决定",
+        "to": "将冻结头比较作为待节点裁决的首选；由 Root 转交 Transport，零新增科研调用"
+      }
+    ],
+    "if_refused": "按所有者明确修改调整尚未发送的问题；保留三次结果和既有科学边界，不自行选择新家族、实验臂、随机种子或预算。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_POST_RENEWAL_B03_P74_PREPARATION_INTAKE_20260909.md",
+        "quote": "The first two primary readings are UP; P72 is DOWN by its unchanged point rule.",
+        "why": "已有两次正向结果和一次反向结果，值得向原节点提出能区分解释的新问题，而不能按平均值抹掉失败。"
+      },
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_POST_RENEWAL_B03_P74_PREPARATION_INTAKE_20260909.md",
+        "quote": "Its one/four duration law would remain1/2–1/2 at every own expiry.",
+        "why": "固定现有初始化可保留随机持续动作，提出学习持续时间是否有额外价值的有限比较；普通反馈仍是主比较器。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_POST_RENEWAL_B03_P74_PREPARATION_INTAKE_20260909.md",
+        "quote": "Its positive T−H does not rescue that loss.",
+        "why": "第三次普通反馈胜出，优于悬停不能说明机制有益。"
+      },
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_POST_RENEWAL_B03_P74_PREPARATION_INTAKE_20260909.md",
+        "quote": "Tuned same-information headroom on this host remains absent.",
+        "why": "不知道经过调优的同信息基线还有多少提升空间；一个新训练实例也不足以建立稳定优势。"
+      }
+    ],
+    "uncertainty": [
+      "冻结头与学习头仍可能在优化暴露、可训练容量和队友适应上不同，不能隔离纯粹信息或持续时间因果效应。",
+      "三次训练终点的离散程度只是事后描述，并包含有限评估噪声。",
+      "冻结头每单位耗时尚未测量；计数倍率不是运行时间预测。",
+      "首选与结束当前序列较接近；节点可否决，不以继续运行获得正号为目标。"
+    ],
+    "cost": {
+      "compute": "此次提问为零模型、训练、评估及诊断调用。仅供节点考虑的后续 B：三个真实 actor/critic、一个悬停，单个匹配实例，425984 个环境步、3072 次 Adam、128 个最终评估；1800 秒/臂与 3600 秒整项只是建议，尚未分配。",
+      "owner_time": "可异步审阅；无需回复才发布",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing; Root 可直接接收已授权的问题；下一步科研等待原节点完整答复及 Root 后续具体命令"
+    },
+    "verdict_text": "The actual choice is to prepare and return this complete direction question under **OWNER_DIRECT P74**. Recommend future alternative(a) narrowly; execute only preparation.",
+    "source": "docs/research/candidates/ucope/UCOPE_POST_RENEWAL_B03_P74_PREPARATION_INTAKE_20260909.md"
+  },
+  "starred": true
+}

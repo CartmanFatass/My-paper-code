@@ -1,0 +1,432 @@
+{
+  "prepared_at": "2026-09-09T01:19:51-07:00",
+  "assignment": "P74 proper-node post-renewal-B03 direction question; preparation only",
+  "authoring_checkout": "C:\\Projects\\HMASD-worktrees\\dm-ucope-native-return-prep-20260906",
+  "branch": "codex/ucope",
+  "starting_HEAD": "23e22176909a757af05c1d66fbeb94e180a94cfb",
+  "required_current_inputs_from_main": "b52d0e1562376cdf833fc30d0543cce64e910e1a",
+  "accepted_scientific_source": "7d3aaab4646360e2473ae352b09c3933ccf8dacf",
+  "exposure_line": "consultation_new_models=0; new_environment_steps=0; new_Adam_calls=0; new_evaluation_episodes=0; new_diagnostic_or_replay_calls=0; selected_new_masters=0; scientific_allocation=0; evidence=3 accepted independent renewal fits,860160 native steps,6144 Adam calls,288 final evaluations; no previous run is repeated",
+  "independent_fit_results": [
+    {
+      "allocation": "P70",
+      "master": 7301,
+      "primary_reading": "UP",
+      "arm_means": {
+        "T": 0.18553283836801163,
+        "G": 0.12985964701917668,
+        "H": 0.13247830104751704
+      },
+      "contrasts": {
+        "T_minus_G": {
+          "mean": 0.055673191348834944,
+          "conditional_evaluation_se": 0.011556059794903147,
+          "positive_episodes": 25,
+          "negative_episodes": 7,
+          "zero_episodes": 0
+        },
+        "T_minus_H": {
+          "mean": 0.05305453732049459,
+          "conditional_evaluation_se": 0.01182038845858344,
+          "positive_episodes": 24,
+          "negative_episodes": 8,
+          "zero_episodes": 0
+        },
+        "G_minus_H": {
+          "mean": -0.002618654028340355,
+          "conditional_evaluation_se": 0.011943248746505064,
+          "positive_episodes": 17,
+          "negative_episodes": 15,
+          "zero_episodes": 0
+        }
+      },
+      "counts": {
+        "team_steps": 286720,
+        "optimizer_steps": 2048,
+        "eval_episodes": 96
+      },
+      "whole_wall_seconds": 304.85,
+      "arm_wall_seconds": {
+        "T": 160.45789840299403,
+        "G": 135.36679288500454
+      },
+      "duration_head_forward_rows": 1566026,
+      "predictions": [
+        {
+          "event": "WITHIN",
+          "probability": 0.45,
+          "observed": false,
+          "brier": 0.2025
+        },
+        {
+          "event": "G_minus_H_positive",
+          "probability": 0.6,
+          "observed": false,
+          "brier": 0.36
+        }
+      ],
+      "prediction_hits": 0,
+      "prediction_brier_mean": 0.28125
+    },
+    {
+      "allocation": "P71",
+      "master": 7401,
+      "primary_reading": "UP",
+      "arm_means": {
+        "T": 0.1848478520611129,
+        "G": 0.16018967502019155,
+        "H": 0.14769953379747316
+      },
+      "contrasts": {
+        "T_minus_G": {
+          "mean": 0.024658177040921356,
+          "conditional_evaluation_se": 0.011145715505143731,
+          "positive_episodes": 22,
+          "negative_episodes": 10,
+          "zero_episodes": 0
+        },
+        "T_minus_H": {
+          "mean": 0.03714831826363973,
+          "conditional_evaluation_se": 0.014042694092488053,
+          "positive_episodes": 22,
+          "negative_episodes": 10,
+          "zero_episodes": 0
+        },
+        "G_minus_H": {
+          "mean": 0.012490141222718373,
+          "conditional_evaluation_se": 0.009774298009822923,
+          "positive_episodes": 18,
+          "negative_episodes": 14,
+          "zero_episodes": 0
+        }
+      },
+      "counts": {
+        "team_steps": 286720,
+        "optimizer_steps": 2048,
+        "eval_episodes": 96
+      },
+      "whole_wall_seconds": 306.04,
+      "arm_wall_seconds": {
+        "T": 158.1893359690439,
+        "G": 138.41656891599996
+      },
+      "duration_head_forward_rows": 1514598,
+      "predictions": [
+        {
+          "event": "UP",
+          "probability": 0.55,
+          "realized": true,
+          "hit": true,
+          "brier": 0.20249999999999996
+        },
+        {
+          "event": "G_minus_H_positive",
+          "probability": 0.55,
+          "realized": true,
+          "hit": true,
+          "brier": 0.20249999999999996
+        }
+      ],
+      "prediction_hits": 2,
+      "prediction_brier_mean": 0.20249999999999996
+    },
+    {
+      "allocation": "P72",
+      "master": 7501,
+      "primary_reading": "DOWN",
+      "arm_means": {
+        "T": 0.16159104017261458,
+        "G": 0.19253815079152012,
+        "H": 0.14048393970863335
+      },
+      "contrasts": {
+        "T_minus_G": {
+          "mean": -0.03094711061890552,
+          "conditional_evaluation_se": 0.010056196158593048,
+          "positive_episodes": 10,
+          "negative_episodes": 22,
+          "zero_episodes": 0
+        },
+        "T_minus_H": {
+          "mean": 0.021107100463981232,
+          "conditional_evaluation_se": 0.014144010759846842,
+          "positive_episodes": 19,
+          "negative_episodes": 13,
+          "zero_episodes": 0
+        },
+        "G_minus_H": {
+          "mean": 0.052054211082886756,
+          "conditional_evaluation_se": 0.010175312737684957,
+          "positive_episodes": 26,
+          "negative_episodes": 6,
+          "zero_episodes": 0
+        }
+      },
+      "counts": {
+        "team_steps": 286720,
+        "optimizer_steps": 2048,
+        "eval_episodes": 96
+      },
+      "whole_wall_seconds": 390.73,
+      "arm_wall_seconds": {
+        "T": 204.3931929190294,
+        "G": 172.94761272502365
+      },
+      "duration_head_forward_rows": 1590644,
+      "predictions": [
+        {
+          "event": "UP",
+          "probability": 0.6,
+          "realized": false,
+          "hit": false,
+          "brier": 0.36
+        },
+        {
+          "event": "G_minus_H_positive",
+          "probability": 0.55,
+          "realized": true,
+          "hit": true,
+          "brier": 0.20249999999999996
+        }
+      ],
+      "prediction_hits": 1,
+      "prediction_brier_mean": 0.28125
+    }
+  ],
+  "three_fit_secondary": {
+    "unit": "caller-declared independent training run",
+    "inference": "descriptive only; no confidence interval or success classification",
+    "groups": [
+      {
+        "task": "UCOPE-renewal-same-package-P70-P72",
+        "arm": "G",
+        "n": 3,
+        "mean": 0.16086249094362945,
+        "sample_sd": 0.03134466812290475,
+        "min": 0.12985964701917668,
+        "max": 0.19253815079152012,
+        "runs": {
+          "7301": 0.12985964701917668,
+          "7401": 0.16018967502019155,
+          "7501": 0.19253815079152012
+        }
+      },
+      {
+        "task": "UCOPE-renewal-same-package-P70-P72",
+        "arm": "T",
+        "n": 3,
+        "mean": 0.1773239102005797,
+        "sample_sd": 0.013629369062718645,
+        "min": 0.16159104017261458,
+        "max": 0.18553283836801163,
+        "runs": {
+          "7301": 0.18553283836801163,
+          "7401": 0.1848478520611129,
+          "7501": 0.16159104017261458
+        }
+      }
+    ],
+    "paired_differences": [
+      {
+        "task": "UCOPE-renewal-same-package-P70-P72",
+        "arm": "T",
+        "baseline": "G",
+        "summary": {
+          "n": 3,
+          "mean": 0.016461419256950254,
+          "sample_sd": 0.043888031476388346,
+          "min": -0.030947110618905538,
+          "max": 0.055673191348834944
+        },
+        "differences": {
+          "7301": 0.055673191348834944,
+          "7401": 0.024658177040921353,
+          "7501": -0.030947110618905538
+        },
+        "unmatched_arm_seeds": [],
+        "unmatched_baseline_seeds": []
+      }
+    ]
+  },
+  "selection_limit": "Sequential outcome-informed B follow-ups; every fit retained. Endpoint dispersion includes finite evaluation noise. Conditional episode SE is not training-population uncertainty. No pooled primary or stable/causal claim.",
+  "measured_regime_costs": {
+    "accepted_complete_invocations": 3,
+    "valid_fits": 3,
+    "sum_whole_invocation_wall_seconds": 1001.62,
+    "wall_seconds_per_valid_fit": 333.8733333333334,
+    "excludes": "engineering, older opening regimes, aggregate CPU and session/study critical path",
+    "total_native_steps": 860160,
+    "total_Adam_calls": 6144,
+    "total_final_evaluations": 288
+  },
+  "headroom": "No tuned same-information current-host upper/baseline headroom record",
+  "prospective_comparison_alternative_NOT_SELECTED": {
+    "new_independent_matched_instances": 1,
+    "trained_actor_critic_arms": 3,
+    "fixed_hover_arms": 1,
+    "training_episodes_per_trained_arm": 512,
+    "native_training_steps_per_trained_arm": 131072,
+    "final_episodes_per_arm": 32,
+    "horizon": 256,
+    "native_steps": 425984,
+    "Adam_calls": 3072,
+    "rollouts": 768,
+    "final_evaluations": 128,
+    "explicit_resets": 1664,
+    "seeds_selected": [],
+    "new_checkpoint_or_configuration_searches": 0,
+    "nested_candidate_or_trajectory_searches": 0,
+    "native_steps_over_unchanged_pair": 1.4857142857142858,
+    "training_work_multiplier": 1.5,
+    "evaluation_work_multiplier": 1.3333333333333333,
+    "head_parameters_each_renewal_arm": 2242,
+    "total_parameters": 203417,
+    "trainable_parameters": 201175,
+    "frozen_head_parameters": 2242,
+    "per_head_forward_rows_bound": [
+      1003520,
+      4014080
+    ],
+    "two_heads_forward_rows_bound": [
+      2007040,
+      8028160
+    ],
+    "two_heads_dense_forward_multiply_adds_bound": [
+      4431544320,
+      17726177280
+    ],
+    "head_row_law": "6*training_own_expiries+2*final_own_expiries per renewal arm; frozen head may execute the same forward route but receives no parameter updates",
+    "prospective_caps_not_allocation": {
+      "complete_arm_seconds": 1800,
+      "whole_study_seconds": 3600
+    },
+    "frozen_head_unit_time": "unmeasured; no simulation, model call, timing probe or pilot requested",
+    "added_validation": "No scientific validation invocation; later one affected-behavior/primary-output suite within300s if explicitly assigned. No profiler or repeated smoke."
+  },
+  "unchanged_fourth_pair_alternative_NOT_SELECTED": {
+    "new_independent_matched_instances": 1,
+    "trained_actor_critic_arms": 2,
+    "fixed_hover_arms": 1,
+    "training_episodes_per_trained_arm": 512,
+    "native_training_steps_per_trained_arm": 131072,
+    "final_episodes_per_arm": 32,
+    "horizon": 256,
+    "native_steps": 286720,
+    "Adam_calls": 2048,
+    "rollouts": 512,
+    "final_evaluations": 96,
+    "explicit_resets": 1120,
+    "seeds_selected": [],
+    "new_checkpoint_or_configuration_searches": 0,
+    "nested_candidate_or_trajectory_searches": 0
+  },
+  "no_successor_alternative_new_exposure": 0,
+  "scientific_source_reading": {
+    "path": "experiments/candidates/ucope/uav_motion_prefix_b01/policy.py",
+    "sections": "arm_copy, sample, joint_terms",
+    "observation": "The final duration layer is zero-initialized, producing equal1/4 probabilities before training. Keeping the complete duration head frozen would retain uniform input-independent renewal without requiring any fitted probability estimate. This is a proposed future comparison, not an implemented source change."
+  },
+  "local_literature": {
+    "question": "Does the learned renewal package need comparison with a duration-independent persistence law, while ordinary feedback remains the strong legal null?",
+    "catalog_path": "C:\\Projects\\Inst-sci\\papers\\MyLib\\llm-index\\catalog.v2.jsonl",
+    "catalog_sha256": "2e682c6d1131d503ad48920794dd8005ccf8f535dc9ff75679b0c8502533efc0",
+    "catalog_records": 190,
+    "query_regex": "extension|repetition|duration|action commitment|frame.skip|temporal abstraction|macro.action",
+    "lexical_candidates": [
+      {
+        "id": "MARL-0002",
+        "title": "ACE: Cooperative Multi-Agent Q-learning with Bidirectional Action-Dependency"
+      },
+      {
+        "id": "MARL-0203",
+        "title": "VIL2C: Value-of-Information Aware Low-Latency Communication for Multi-Agent Reinforcement Learning"
+      },
+      {
+        "id": "MARL-0449",
+        "title": "Agent-Centric Actor-Critic for Asynchronous Multi-Agent Reinforcement Learning"
+      },
+      {
+        "id": "MARL-0460",
+        "title": "Explicit Exploration for High-Welfare Equilibria in Game-Theoretic Multiagent Reinforcement Learning"
+      },
+      {
+        "id": "MARL-0543",
+        "title": "Variational Offline Multi-agent Skill Discovery"
+      },
+      {
+        "id": "MARL-0568",
+        "title": "Team-PSRO for Learning Approximate TMECor in Large Team Games via Cooperative Reinforcement Learning"
+      },
+      {
+        "id": "MARL-0590",
+        "title": "Multi-Agent Imitation Learning: Value is Easy, Regret is Hard"
+      },
+      {
+        "id": "VS-0005",
+        "title": "Learning Uncertainty-Aware Temporally-Extended Actions"
+      }
+    ],
+    "my_lib_actual_coverage": {
+      "command": "PYTHONPATH=src python -m my_lib coverage",
+      "collections": [
+        "synthetic-core"
+      ],
+      "mechanism_count": 2,
+      "paper_count": 2,
+      "corpus_coverage_date": "2026-07-26",
+      "exclusion": "Synthetic fixtures only, not scientific literature evidence; no real corpus claimed from that CLI."
+    },
+    "ute": {
+      "id": "VS-0005",
+      "title": "Learning Uncertainty-Aware Temporally-Extended Actions",
+      "authors": "Joongkyu Lee, Seung Joon Park, Yunhao Tang, Min-hwan Oh",
+      "year": "2024",
+      "venue": "AAAI",
+      "source_json": "C:\\Projects\\Inst-sci\\papers\\MyLib\\json\\VS-0005.json",
+      "pdf_sha256": "2a39d04ccadf27e2652ddcd50f125ca6680747ac843f4b252841ac231d4ec264",
+      "official_identity_reused": "https://ojs.aaai.org/index.php/AAAI/article/view/29241",
+      "quality_warnings": [
+        "doi_missing_or_not_applicable",
+        "official_url_missing"
+      ],
+      "passages": [
+        {
+          "page": 1,
+          "element_id": 65,
+          "reading": "Discusses simple fixed repetition as a relevant temporal-abstraction baseline."
+        },
+        {
+          "page": 6,
+          "element_id": 354,
+          "reading": "Includes Fixed Repeat j=4 alongside learned/action-repetition baselines in its Atari comparison."
+        },
+        {
+          "page": 7,
+          "element_id": 407,
+          "reading": "Reports Fixed Repeat failures in many tested games; this is contrary evidence against assuming that a fixed repetition controller is competent."
+        }
+      ],
+      "effect_on_proposal": "Include a simple duration-independent alternative to test the value of learning timing, but retain ordinary feedback G. The proposed uniform1/4 law is derived from existing UCOPE initialization, not this paper and not fitted to the observed duration rates. No Atari/PPO/MARL/UAV equivalence or benefit is inferred."
+    },
+    "reused_acac": "P67 preparation§3 verified MARL-0449 p1e382,p2e388,p3e410 own-completion decisions and fresh primitive-observation distinction. No new empirical claim or implementation component adopted.",
+    "retrieval_limits": "190-record snapshot/lexical candidates are not a novelty census; My-lib and Inst-sci are not assigned fixed scientific roles. Initial source stdout encoding/module-path mistakes were corrected in read-only retrieval, without model or diagnostic execution."
+  },
+  "pro_routing": {
+    "caller_role": "em",
+    "workflow_node": "em_convergence",
+    "conversation_binding_key": "em:ucope:convergence",
+    "conversation_id": "6a9c6b1c-1c34-83e8-8ebc-dee64b334240",
+    "source_thread_id": "01a081bd-a835-78c0-8a7a-89471ed262f8",
+    "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+    "operator_thread_id": "01a07e52-f085-76a0-886a-4127f490421f",
+    "provider_Send_count_this_assignment": 0
+  },
+  "issue": {
+    "url": "https://github.com/CartmanFatass/My-paper-code/issues/11",
+    "state": "OPEN",
+    "title_at_preparation": "UCOPE：开场持续动作家族与后继选择",
+    "updatedAt": "2026-09-09T03:38:14Z",
+    "comments": 3,
+    "snapshot": "pro_packets/20260909_post_renewal_b03_convergence/ISSUE_DISCUSSION_SNAPSHOT.json"
+  }
+}

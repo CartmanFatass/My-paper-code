@@ -3,7 +3,8 @@
 thread_id = "01a07249-b095-7821-8ce2-e9c32ba85267"
 root_thread_id = "01a07249-b095-7821-8ce2-e9c32ba85267"
 # Root uses the model and reasoning effort selected by the owner.
-# Automatic execution is driven by the owner's goal; no scheduled automation.
+# OWNER_DIRECT 2026-09-08: actionable native returns wake Root via hmasd-relay.toml.
+# The prior twenty-minute heartbeat is paused after the successful relay test.
 primary_checkout = 'C:\Projects\HMASD'
 monitor_checkout = 'C:\Projects\HMASD'
 tracking_path = "docs/research/portfolio/EXPERIMENT_TRACKING.md"
