@@ -459,6 +459,6 @@ The updated Chinese brief reports a selected question, not an empirical gain. Al
 reviews were empty at this clean boundary.
 
 The next discriminator is the single newly allocated real trained RETAIN/RESET pair and
-sampled final native return. Whatever its sign, the result ends this finite allocation and
-requires scientific intake before any follow-up. No complete causal diagnosis or repeated
-source-identification work precedes it.
+32 final greedy native-return episodes per arm. Whatever its sign, the result ends this finite
+allocation and requires scientific intake before any follow-up. No complete causal diagnosis
+or repeated source-identification work precedes it.
