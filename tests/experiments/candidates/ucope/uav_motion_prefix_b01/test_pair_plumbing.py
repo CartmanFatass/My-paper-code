@@ -12,11 +12,8 @@ from experiments.candidates.ucope.uav_motion_prefix_b01 import study
 
 
 @pytest.fixture
-def scratch():
-    import tempfile
-    root = Path("temp/directions/ucope/test/p26_pair_plumbing")
-    root.mkdir(parents=True, exist_ok=True)
-    return Path(tempfile.mkdtemp(dir=root))
+def scratch(tmp_path):
+    return tmp_path
 
 
 def runner_module():
@@ -31,11 +28,13 @@ def runner_module():
                                                (6801, "p21", False), (6802, "p21", False),
                                                (9001, "p21", True), (7001, "b02", False),
                                                (7002, "b02", False), (9001, "b02", True),
-                                               (7101, "b03", False), (9001, "b03", True)])
+                                               (7101, "b03", False), (9001, "b03", True),
+                                               (7201, "b04", False), (9001, "b04", True),
+                                               (7301, "renewal_b01", False), (9001, "renewal_b01", True)])
 def test_cli_actual_config_and_rng_propagation(seed, pair, fixture, scratch, monkeypatch):
     # Exercise the actual CLI/Config/run_pair stream expressions; substitute the
     # workload at its existing import boundary, without constructing any model.
-    calls = {"initialization": [], "generator": [], "reset": [], "episodes": [], "saved": [], "credit": [], "update_credit": []}
+    calls = {"initialization": [], "generator": [], "reset": [], "episodes": [], "saved": [], "credit": [], "update_credit": [], "heads": []}
     torch = ModuleType("torch")
     torch.set_num_threads = torch.set_num_interop_threads = lambda n: None
     torch.save = lambda payload, path: calls["saved"].append(payload["configuration"])
@@ -55,8 +54,11 @@ def test_cli_actual_config_and_rng_propagation(seed, pair, fixture, scratch, mon
         calls["generator"].append(seed)
         return seed
     policy.templates, policy.generator = templates, generator
-    policy.arm_copy = lambda common, treatment: (SimpleNamespace(state_dict=lambda: {}, arm="T" if treatment else "G"),
-                                                SimpleNamespace(state_dict=lambda: {}))
+    def arm_copy(common, treatment, **kwargs):
+        calls["heads"].append((treatment, kwargs))
+        return (SimpleNamespace(state_dict=lambda: {}, arm="T" if treatment else "G"),
+                SimpleNamespace(state_dict=lambda: {}))
+    policy.arm_copy = arm_copy
     policy.snapshot = lambda *args: {}
     policy.exposure = lambda *args: {}
     monkeypatch.setitem(sys.modules, prefix + "policy", policy)
@@ -68,6 +70,7 @@ def test_cli_actual_config_and_rng_propagation(seed, pair, fixture, scratch, mon
         calls["episodes"].append((reset, velocity, duration, metadata.copy()))
         calls["credit"].append(kwargs.get("ratio_grouping", "joint"))
         assert "entropy_coef" not in kwargs
+        assert kwargs.get("renewal", False) == (pair == "renewal_b01")
         if metadata["arm"] == "T":
             counts["duration_decisions"] += 5
         emit(dict(metadata, J=0.))
@@ -88,10 +91,10 @@ def test_cli_actual_config_and_rng_propagation(seed, pair, fixture, scratch, mon
     assert summary["configuration"]["horizon"] == (8 if fixture else 256)
     assert summary["pair"] == ("ENGINEERING_FIXTURE" if fixture else pair)
     assert summary["declared_masters"] == ([seed] if fixture else list(study.declared_masters(pair)))
-    assert summary["card_section"] == ("CODE_SPEC §4" if fixture and pair == "b03" else "CODE_SPEC §8" if fixture
-                                       else 5 if pair in ("b02", "b03") else 10 if pair == "p24" else 8)
-    grouping = "agent_compound" if pair in ("b02", "b03") else "joint"
-    entropy_coef = 0.0 if pair == "b03" else 0.01
+    assert summary["card_section"] == (7 if fixture and pair == "renewal_b01" else "CODE_SPEC §4" if fixture and pair in ("b03", "b04", "renewal_b01") else "CODE_SPEC §8" if fixture
+                                       else 5 if pair in ("b02", "b03", "b04", "renewal_b01") else 10 if pair == "p24" else 8)
+    grouping = "agent_compound" if pair in ("b02", "b03", "b04", "renewal_b01") else "joint"
+    entropy_coef = 0.0 if pair in ("b03", "b04", "renewal_b01") else 0.01
     assert set(calls["credit"]) == {grouping}
     assert all(c.get("ratio_grouping", "joint") == grouping for c in calls["update_credit"])
     assert summary["configuration"]["ratio_grouping"] == grouping
@@ -107,6 +110,22 @@ def test_cli_actual_config_and_rng_propagation(seed, pair, fixture, scratch, mon
     assert calls["initialization"] == [seed]  # templates retains b+11 internally, unchanged.
     b = 100000 * seed
     assert summary["seeds"]["initialization"] == b + 11
+    if pair in ("b04", "renewal_b01"):
+        expected_object, expected_card = ((study.RENEWAL_OBJECT, study.RENEWAL_CARD) if pair == "renewal_b01"
+                                          else (study.B04_OBJECT, study.B04_CARD))
+        assert summary["object"] == expected_object and summary["card"] == expected_card
+        assert summary["ratio_grouping"] == grouping and summary["entropy_coef"] == 0.0
+        for binding in (summary, summary["configuration"]):
+            assert binding["treatment_duration_mode"] == "sampled_command"
+            assert binding["treatment_duration_head_seed"] == b + 12
+        assert calls["heads"] == [(True, {"duration_head_seed": b + 12}),
+                                  (False, {"duration_head_seed": None})]
+        assert summary["arms"]["T"]["duration_mode"] == "sampled_command"
+        assert summary["arms"]["T"]["duration_head_seed"] == b + 12
+        assert summary["arms"]["G"]["duration_mode"] == "none"
+        assert summary["arms"]["G"]["duration_head_seed"] is None
+    else:
+        assert calls["heads"] == [(True, {}), (False, {})]
     assert calls["reset"] == [b + 1000, b + 1000]
     train_n, eval_n = (2, 2) if fixture else (512, 32)
     assert len(calls["update_credit"]) == train_n
@@ -221,24 +240,27 @@ def test_b02_negative_partial_and_fixture_rejection():
         study.aggregate(inputs, "b02")
 
 
-def test_b03_rejects_aggregate_before_input_access(scratch, monkeypatch):
+@pytest.mark.parametrize("pair", ["b03", "b04", "renewal_b01"])
+def test_single_pair_rejects_aggregate_before_input_access(pair, scratch, monkeypatch):
     with pytest.raises(ValueError, match="one training pair"):
-        study.aggregate(None, "b03")
+        study.aggregate(None, pair)
     runner = runner_module()
     monkeypatch.setattr(runner, "run_pair", lambda *a: pytest.fail("workload entered"))
     monkeypatch.setattr(Path, "read_text", lambda *a, **kw: pytest.fail("aggregate input read"))
-    monkeypatch.setattr(sys, "argv", ["runner", "--pair", "b03", "--aggregate",
+    monkeypatch.setattr(sys, "argv", ["runner", "--pair", pair, "--aggregate",
                                      "missing-first.json", "missing-second.json", "--out", str(scratch)])
     with pytest.raises(SystemExit) as error:
         runner.main()
     assert error.value.code == 2
 
 
-@pytest.mark.parametrize("seed", [7001, 7002, 7102, 9001])
-def test_b03_wrong_master_never_enters_workload(seed, scratch, monkeypatch):
+@pytest.mark.parametrize("pair,seed", [("b03", s) for s in (7001, 7002, 7102, 9001)]
+                         + [("b04", s) for s in (7001, 7101, 7202, 9001)]
+                         + [("renewal_b01", s) for s in (7201, 7302, 9001)])
+def test_single_pair_wrong_master_never_enters_workload(pair, seed, scratch, monkeypatch):
     runner = runner_module()
     monkeypatch.setattr(runner, "run_pair", lambda *a: pytest.fail("workload entered"))
-    monkeypatch.setattr(sys, "argv", ["runner", "--pair", "b03", "--seed", str(seed), "--out", str(scratch)])
+    monkeypatch.setattr(sys, "argv", ["runner", "--pair", pair, "--seed", str(seed), "--out", str(scratch)])
     with pytest.raises(SystemExit) as error:
         runner.main()
     assert error.value.code == 2
