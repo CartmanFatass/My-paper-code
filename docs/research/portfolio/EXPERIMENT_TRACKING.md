@@ -13,8 +13,8 @@ Five original DM turns were observed running after accepted followup_task dispat
 | Direction | Native DM | Synced direction revision | Current bounded work |
 | --- | --- | --- | --- |
 | ucope | /root/dm_ucope_p47_resume | 9745d270010a8e100cfed0d1ee9533878cf70190 | P61 next-question decision/authoring; no unchanged run allocation |
-| vsp_c1 | /root/dm_vspc1_p49_value_question | d1b8b7b72c1a5c1896b07b13674aee98aa0a3d7d | New object allocation decision; if selected, same CM corrected-input execution/collection then DM intake |
-| vsp_03 | /root/dm_vsp03_p54_reentry | 38c7a6bebd547187bb110cfa62d1850dc3838e84 | New object allocation decision; if selected, same CM dependency repair/execution/collection then DM intake |
+| vsp_c1 | /root/dm_vspc1_p49_value_question | d1b8b7b72c1a5c1896b07b13674aee98aa0a3d7d | New single corrected B04/8202 submission selected (main 0da871460); same CM preparing exact inputs and full batch, no accepted handle reported yet |
+| vsp_03 | /root/dm_vsp03_p54_reentry | 38c7a6bebd547187bb110cfa62d1850dc3838e84 | New single corrected seed6/120s submission selected (main 071a29c40); same CM restoring admission-source dependency, no accepted handle reported yet |
 | flexible_skill_duration | /root/dm_fsd_p47_resume | fbe5e67b96f8b390751635fe9c826910c8b3f0a4 | Re-entry question assessment respecting P52 stop |
 | degraded_incumbent_shadow_handover | /root/dm_dish_p53_native_proposal_question | bdfcf10b62ca323340acf965e057f7a727d043a5 | Distinct ordinary source-state question assessment respecting P62 stop |
 
