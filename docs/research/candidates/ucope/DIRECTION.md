@@ -51,16 +51,17 @@ remains dated provenance under the controlling evidence specification section 11
   The **2026-09-05 PRO_FINAL / PARK** of the same-draw retained-policy root-residual
   localization family and its numerical-locus dependency remains unchanged.
   See the [Convergence intake](UCOPE_UAV_INTERFACE_CONVERGENCE_INTAKE_20260907.md).
-- Latest bounded B observation: **2026-09-09 fixed renewal B02 P79,
-  COMPLETE / UP**. New 7801 gives prospective F−G
-  **+0.030362608571553623**, conditional SE **0.008159350975084483**;
-  F−H **−0.0035128012832155745** and G−H **−0.033875409854769195** remain
-  separate native negatives. F's entire initial duration head stayed fixed,
-  with real velocity/critic learning. P78/7701 remains UP at
-  +0.026550516654013076. Their predeclared descriptive mean
-  **+0.02845656261278335**, sample SD **0.00269555604539935**, includes
-  evaluation noise and establishes no stable advantage or pure training variance.
-  All outcomes and P77's learned-T losses remain. See
+- Latest bounded B observation: **2026-09-09 fixed renewal versus hover B01
+  P80, COMPLETE / UP**. New 7901 gives prospective F−H
+  **+0.018660096017418804**, conditional SE **0.010755224968186065**;
+  F−G **−0.025803909613053323** and G−H **+0.04446400563047213** show
+  ordinary feedback doing better on this fit. F's entire initial duration
+  head stayed fixed with real velocity/critic learning. This supports sampled
+  native value beyond hover, with no demonstrated advantage over feedback or
+  stable superiority. P78/P79's positive F−G primaries, P79's negative hover
+  points and its descriptive n=2 record remain unchanged; no new pooled
+  primary or training-population interval is created. See
+  [P80 intake](UCOPE_UAV_FIXED_RENEWAL_HOVER_B01_P80_INTAKE_20260909.md),
   [P79 intake](UCOPE_UAV_FIXED_RENEWAL_B02_P79_INTAKE_20260909.md),
   [P78 intake](UCOPE_UAV_FIXED_RENEWAL_B01_P78_INTAKE_20260909.md) and
   [P77 intake](UCOPE_UAV_RENEWAL_FROZEN_HEAD_B01_P77_INTAKE_20260909.md).
@@ -142,7 +143,59 @@ without a distinct count-state architecture because RAW contains the sufficient
 count. The direct-service alternative remains separated by the frozen
 `Gamma=I+D` decomposition and analytic `D≈-0.02` boundary.
 
-## Current scientific position — 2026-09-09 fixed renewal B02 and hover limitation
+## Current scientific position — 2026-09-09 fixed renewal hover gain and feedback reversal
+
+P80's fresh matched instance 7901 is **valid UP** on its prospectively selected
+F−H primary: **+0.018660096017418804**, conditional evaluation SE
+**0.010755224968186065**, 0.008660096017418803 above the 0.01 MEI. Native means
+are F **0.16795173877526767**, G **0.193755648388321**, H **0.14929164275784887**.
+The separate F−G **−0.025803909613053323** reverses the earlier feedback
+ordering; G−H **+0.04446400563047213** gives the larger hover margin. All 96
+returns and three signed vectors remain in the
+[durable result](UCOPE_UAV_FIXED_RENEWAL_HOVER_B01_P80_RESULT_SUMMARY_20260909.json).
+P80 retains F−H as primary; this outcome-informed future question does not
+rewrite P78/P79's F−G primaries or pool their readings.
+
+The strongest support is sampled native value beyond no motion after real
+learning, compatible with P78's positive secondary F−H. The strongest current
+contradiction to broader fixed-persistence superiority is G exceeding F by
+more than 0.01, with 22/32 adverse F−G episodes. F also loses to H on 12/32.
+P79's negative F−H and G−H remain visible alongside its F−G UP. P77's learned-T
+losses and P72's renewal reversal continue to limit broader learned-renewal
+claims. One new matched training instance and conditional evaluation noise
+establish neither stable superiority/harm nor a training-population interval.
+
+F's entire initial 2242-parameter duration head stayed fixed while its own
+velocity actor and critic learned. Free private observation informs the owning
+UAV's action at expiry; persistent motion changes service geometry and later
+local information, then credit exposure and partner responses can change
+learning and native return. The experiment measures this package without
+separating those paths. One surviving alternative is variable success in
+learning useful motion across training instances, with persistence's advantage
+depending on the learned feedback controller. That is an explanation to test,
+not a diagnosis; the latest G−H gain does not establish tuned competence.
+
+The next recommended discriminator is **one separately allocated new F/G/H
+instance with prospective F−G primary**, retaining both hover contrasts and
+every outcome. The present hover gain plus feedback deficit makes comparison
+with the stronger legal null more informative than another hover-primary UP
+alone. This explicitly outcome-informed future recommendation leaves the P80
+primary intact. Known work remains two 512-episode fits / three 32-episode
+panels, **286720 native steps / 2048 Adam / 96 final evaluations**; the observed
+306.09 s complete wall is a reference, not a future guarantee. No tuning, exact
+upper or full causal diagnosis is a prerequisite to that bounded question.
+
+P80 ends at its all-outcome boundary. This is within-family object-tier advice,
+with no new card/master/source, invocation allowance, Pro Send, recast, C
+promotion, family or Portfolio disposition. Tuned headroom remains absent;
+recasts remain 1. No causal timing/information value, equivalence, deployment
+or need for commitment follows from the hover gain.
+
+See [card](UCOPE_UAV_FIXED_RENEWAL_HOVER_B01_SCIENCE_CARD_20260909.md),
+[E0 evidence](UCOPE_UAV_FIXED_RENEWAL_HOVER_B01_P80_RESULT_EVIDENCE_20260909.md) and
+[DM intake §§7–10](UCOPE_UAV_FIXED_RENEWAL_HOVER_B01_P80_INTAKE_20260909.md#7-dm-scientific-intake-against-the-card).
+
+## Previous scientific position — 2026-09-09 fixed renewal B02 and hover limitation
 
 P79's new matched instance 7801 is **valid UP**: F−G
 **+0.030362608571553623**, conditional evaluation SE **0.008159350975084483**,
