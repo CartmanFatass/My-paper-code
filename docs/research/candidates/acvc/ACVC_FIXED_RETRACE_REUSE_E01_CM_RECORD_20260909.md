@@ -41,3 +41,16 @@ The internal 140 s limit reserves publication time. Full 30 s support reserve re
 After accepted launch, dispatch MONITOR_ADD to the endpoint read from live
 `C:/Projects/HMASD/.codex/hmasd-monitor.toml`. CM returns pending collection with adoption
 state; Root resumes the original CM on terminal. No parallel status polling follows dispatch.
+
+## Accepted launch
+
+Source `6b269374d98886bce120ccde9bd6879ddc32882b` committed and pushed, then fetched into
+the detached execution checkout above. The supervisor accepted the exact named task and
+reported tmux session `agent_acvc-fixed-retrace-reuse-e01-20260909`, log
+`/home/wu/.agent-tasks/acvc-fixed-retrace-reuse-e01-20260909/task.log`.
+MONITOR_ADD was delivered to live monitor `01a087e5-2044-7301-abb6-7a1709a98197` with all
+handle/source/receipt/owner facts. Adoption is pending Root confirmation; no status poll or
+scientific output readback has occurred. Admission, actual resource use and completion remain
+unaccepted until terminal collection. Root is the next notification owner, original CM retains
+technical acceptance and DM retains scientific intake. Remote checkout is retained for this
+live execution/collection dependency; Root owns reclamation after artifact preservation.
