@@ -242,3 +242,22 @@ acceptance, not a seed6 result or a guarantee of completion. Root's latest expli
 continuation assigns Root the sole invocation, including fresh admission, after
 integration. The same CM retains collection and does not launch separately; no
 additional run is selected.
+
+## 10. Actual sole invocation and all-outcome stop
+
+The [B04 intake](VSP03_B04_INTAKE_20260908.md) accepts the
+[preserved failure evidence](VSP03_B04_RESULT_EVIDENCE_20260908.md): the sole Root
+handle `vsp03-b04-p64-20260908` exited 2 before the admission script body, because
+Python could not open that script in the recorded detached cwd. The `&&`-following
+seed-6 runner never executed. Successful admissions, scientific models, training
+instances, episodes, optimizer steps and evaluations are all zero; the primary is
+unavailable, not a measured zero. The prediction is unscored and the frozen reading
+rule is not evaluated. No two-instance summary is supported; measured prospective
+G remains seed 5 alone, with discovery seed 4 separate.
+
+The invocation allowance is spent, without C-style B consumption. Actual exit,
+publication and containment facts remain usable within their engineering scope.
+Sections 1–5 retain their prospective scientific meaning. The owner safe-pause
+instruction ends this route after collection/intake/archive: no repair, restaging,
+retry, replacement seed, extra evaluation or successor is selected. Recasts: 1;
+older family pauses and the absence of UAV entry remain.
