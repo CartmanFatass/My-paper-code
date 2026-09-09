@@ -34,3 +34,12 @@ tmux active at57s. Canonical actual-node admission at06:58:00.280732Z passed
 both floors with14,394,122,240 bytes available. The accepted-submission allowance
 is spent. CM retains sole observation; scientific source remains
 e9a05af5d51da571642f51c5b7b8f00c96f1c6b5. No retry/resubmission is allocated.
+
+Terminal fixed handle exited0 at2026-09-09T07:06:25Z, tmux inactive.
+Actual768 artifact checks PASS, whole505.00s, conservative arms293.7102s /
+226.9720s within caps. [E0 evidence](VSPC1_NATIVE_HOLD_VALUE_B08_RESULT_EVIDENCE_20260908.md)
+preserves all negative/H/adverse outcomes, counts, moments/checkpoints and
+resource receipts. Owner soft stop received while the same handle was active:
+finish only this accepted invocation/collection, then stop. One submission is
+spent, zero remain; no second invocation or successor occurred. CM observation
+is complete and editing/index returns to DM for intake/restart handoff.
