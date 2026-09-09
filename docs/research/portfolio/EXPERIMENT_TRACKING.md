@@ -30,6 +30,8 @@ VSPC1 B09/8402 is terminal/intaken DOWN at145db14b7,483.27s, no live process or 
 
 VSP03 P74 conforming intake b033da853 accepted; P76 one-G/seed7/120s complete invocation now concretely allocated to original DM/CM through card, source acceptance, exact remote execution and intake. No handle yet. MGTAP author's one accepted app dispatch for request2026-09-09-mgtap-post-b01-convergence-01 is reconciled/adopted by Root; Transport instructed to preserve the one pending request, no duplicate Send. Provider state remains unconfirmed.
 
+MGTAP provider acceptance is now confirmed: exactly one Send, fixed TASK6931057f2 visible in original conversation6a9b6b01-a918-83e8-8b06-ca9dd8184dab, Pro thinking. Transport observes; no rebind or duplicate Send. Full response remains pending.
+
 ## Historical soft-stop closeout updates — 2026-09-09
 
 - CRTO P72: response/intake/handoff integrated at63550cd83; DM stopped, no live experiment or Pro generation, no successor B. See [handoff](../candidates/commitment_residual_triggered_options/CRTO_RESTART_HANDOFF_20260909.md).
