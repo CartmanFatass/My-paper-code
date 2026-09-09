@@ -1,0 +1,94 @@
+{
+  "object": "FOLR-PUBLIC-LIFECYCLE-B02",
+  "created_at": "2026-09-09T19:33:06.072998+00:00",
+  "phase": "frozen prospective design; preparation only",
+  "new_execution_authorized": false,
+  "source_reference_sha": "387a40f3f1c15ba0ddc4c59d9245ff2b47bc2358",
+  "launch_source_sha": null,
+  "source_count_method": "stdlib AST reads of existing runner range(1,5001), final range(32), len(replay)>=32 and collector range(21)/five slots; one update per new complete episode; two online/target actor passes from accepted learner",
+  "source_paths": {
+    "scripts/run_folr_public_lifecycle_b01.py": "cf3f71dbb7220c7a5cb86efef2ba942e631af4e8f3f18cbdb9286bfc0becb9cd",
+    "experiments/candidates/vap_folr_core/public_lifecycle_b01/collection.py": "9e017d4848fef8b16b84703bc842664e4c9658d97b1a4e29f9b15ed2a3d1383b"
+  },
+  "training_seed": 7802,
+  "final_evaluation_seed": 107802,
+  "prior_training_seed": 7801,
+  "prior_evaluation_seed": 107801,
+  "training_pair_units": 1,
+  "arms": [
+    "RETAIN",
+    "RESET"
+  ],
+  "independence": "fresh separately seeded processes, actor/mixer initialization, optimizer and replay with no B01 state/data reuse; matched arm initialization inside this pair; PRNG labels alone do not guarantee equal traffic or statistical independence",
+  "primitive_steps_per_episode": 20,
+  "controller_positions_per_episode": 21,
+  "slots": 5,
+  "replay_batch_episodes": 32,
+  "actor_replay_passes": 2,
+  "per_arm": {
+    "training_episodes": 5000,
+    "training_native_ticks": 100000,
+    "optimizer_steps": 4969,
+    "final_evaluation_episodes": 32,
+    "evaluation_native_ticks": 640,
+    "total_native_ticks": 100640,
+    "acting_controller_calls": 105672,
+    "acting_gru_row_forwards": 528360,
+    "online_plus_target_replay_gru_row_forwards": 33391680,
+    "sampled_td_timepoints": 3180160
+  },
+  "whole_pair": {
+    "training_episodes": 10000,
+    "training_native_ticks": 200000,
+    "optimizer_steps": 9938,
+    "final_evaluation_episodes": 64,
+    "evaluation_native_ticks": 1280,
+    "total_native_ticks": 201280,
+    "acting_controller_calls": 211344,
+    "acting_gru_row_forwards": 1056720,
+    "online_plus_target_replay_gru_row_forwards": 66783360,
+    "sampled_td_timepoints": 6360320
+  },
+  "optimizer": {
+    "name": "RMSprop",
+    "lr": 0.0005,
+    "nominal_lr_times_steps": 2.4845,
+    "trainable_actor_and_mixer": true
+  },
+  "dominant_factors": "2 arms x 4969 updates x 32 replay episodes x 21 controller positions x 5 slots x 2 actor passes, plus backward and mixing; acting 2 x 5032 x 21 x 5; no search or added evaluation candidates",
+  "minimum_effect_of_interest": 1.0,
+  "reading": "d = final J_RETAIN - final J_RESET; d>=1 RETAIN_ABOVE_MEI; d<=-1 RESET_ABOVE_MEI; otherwise WITHIN_MEI",
+  "historical_reference": {
+    "object": "B01",
+    "per_arm_wall_seconds": {
+      "RETAIN": 770.69,
+      "RESET": 746.89
+    },
+    "pair_wall_seconds": 1517.58,
+    "known_work_ratio": 1.0,
+    "point_projection_basis": "same complete loop dimensions, CPU FP32 and thread topology; new seed trajectories and runtime contention can change actual wall",
+    "new_actual_wall_seconds": null
+  },
+  "prospective_limits": {
+    "complete_logical_arm_wall_seconds": 1800,
+    "whole_pair_wall_seconds": 3600,
+    "supporting_checks_and_readbacks_seconds": 60,
+    "additional_evaluation_checkpoints": 0,
+    "automatic_successors": 0,
+    "scientific_invocations_if_later_allocated": 2,
+    "additional_scientific_invocations_beyond_pair": 0
+  },
+  "actual_preparation_exposure": {
+    "target_imports": 0,
+    "model_constructions_or_calls": 0,
+    "simulator_steps": 0,
+    "training_episodes": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0,
+    "resource_admissions": 0,
+    "scientific_invocations": 0,
+    "pro_sends": 0
+  },
+  "governing_reading_revision": "d89be7656d367ca10f75ca1185797081b5d722fa",
+  "special_review_delivery_revision": "4c1813e4ac3f8a072fc8e7d44e2b34e5121e5940"
+}

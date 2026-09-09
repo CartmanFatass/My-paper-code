@@ -165,6 +165,8 @@ this configuration. Both actors receive identical public event/own-birth cues, e
 start fresh, and RESET still uses current information and history between events. The
 result does not show why clearing helped, absence of useful history, stable superiority,
 typed-state novelty, strictly-self ancestry, original-CAMA performance or transfer.
+The common approximate Q-learning procedure uses gamma 0.99; it does not guarantee exact
+optimization of the undiscounted final native-return endpoint.
 
 **Strongest support and contradiction.** There were 304/337 real final survivor-control
 opportunities and 0/337 RETAIN/RESET survivor clears. Primary reward, training exposure and
@@ -175,13 +177,18 @@ alternatives to beneficial forgetting. Tuned headroom on this information varian
 
 **Surviving alternative and next discriminator.** The next useful measurement is one new
 independent matched training pair under the same comparison and final-evaluation protocol,
-preserving every sign. This is scientific advice inside the accepted mechanism; B01's finite
-allocation ended and no successor is allocated. Repeated evaluation of these same weights
-would not add an independent training sample. Historical B04/P77 boundaries and old
-FOLR/DISH pauses are unchanged; no family, priority or lifecycle disposition follows.
+preserving every sign. The prepared B02 card now fixes fresh training/evaluation randomness
+at the same finite exposure to test repeatability of this trained-package effect, not causal
+memory isolation. B01's finite allocation ended and B02 remains unallocated. Repeated
+evaluation of the B01 weights would not add an independent training sample. Historical B04/P77
+boundaries and old FOLR/DISH pauses are unchanged; no family, priority or lifecycle disposition
+follows. The special review's FOLR section supports this question preparation; Root retains
+its cross-direction proposal intake.
 
 References:
 
 - `FOLR_PUBLIC_LIFECYCLE_B01_RESULT_SUMMARY_20260909.json`
 - `FOLR_PUBLIC_LIFECYCLE_B01_RESULT_EVIDENCE_20260909.md`
 - `FOLR_PUBLIC_LIFECYCLE_B01_INTAKE_20260909.md`
+- `FOLR_PUBLIC_LIFECYCLE_B02_SCIENCE_CARD_20260909.md`
+- `FOLR_PUBLIC_LIFECYCLE_B02_PREPARATION_INTAKE_20260909.md`
