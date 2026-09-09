@@ -25,4 +25,4 @@ Native source/parent routing and current CM responsibilities must be reread at r
 
 ## Dispatch state
 
-Prepared for five original DMs; only accepted native dispatch/current turns count as advancing. Root records actual outcomes in tracking and the root log. No experiment or provider Send is claimed by preparation alone.
+All five original DMs received accepted followup_task dispatch and were observed running after their own control-plane input sync/push. Exact revisions and work are recorded in EXPERIMENT_TRACKING.md. This is five advancing native direction chains, with zero newly claimed experiment handles or provider Sends. Independent Transport separately received only read-only RCLE/SCDMP reconciliation.

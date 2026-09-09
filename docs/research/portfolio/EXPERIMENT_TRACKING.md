@@ -6,6 +6,20 @@ Research is **RESUMED** under OWNER_DIRECT “阅读handoff 继续开启科研�
 
 Root owns planning and integration under [ROOT_OPERATIONS.md](../../project/ROOT_OPERATIONS.md). The assigned CM/Operator observes by default; explicit takeover follows [EXPERIMENT_MONITOR.md](../../project/EXPERIMENT_MONITOR.md). Independent Pro provider operations belong to Transport. Exact handles and receipt bindings below remain evidence. Detailed receipts are in [root-log/2026-09-08.md](root-log/2026-09-08.md); lifecycle and priority are in [PORTFOLIO.md](PORTFOLIO.md). The older tracker is preserved in [EXPERIMENT_TRACKING_THROUGH_P45_20260908.md](../../archive/operations/EXPERIMENT_TRACKING_THROUGH_P45_20260908.md).
 
+## P67 active native work — resume dispatch
+
+Five original DM turns were observed running after accepted followup_task dispatch on 2026-09-09. These are five advancing directions, not five launched experiments. No new experiment handle or provider Send is asserted at this boundary.
+
+| Direction | Native DM | Synced direction revision | Current bounded work |
+| --- | --- | --- | --- |
+| ucope | /root/dm_ucope_p47_resume | 9745d270010a8e100cfed0d1ee9533878cf70190 | P61 next-question decision/authoring; no unchanged run allocation |
+| vsp_c1 | /root/dm_vspc1_p49_value_question | d1b8b7b72c1a5c1896b07b13674aee98aa0a3d7d | New object allocation decision; if selected, same CM corrected-input execution/collection then DM intake |
+| vsp_03 | /root/dm_vsp03_p54_reentry | 38c7a6bebd547187bb110cfa62d1850dc3838e84 | New object allocation decision; if selected, same CM dependency repair/execution/collection then DM intake |
+| flexible_skill_duration | /root/dm_fsd_p47_resume | fbe5e67b96f8b390751635fe9c826910c8b3f0a4 | Re-entry question assessment respecting P52 stop |
+| degraded_incumbent_shadow_handover | /root/dm_dish_p53_native_proposal_question | bdfcf10b62ca323340acf965e057f7a727d043a5 | Distinct ordinary source-state question assessment respecting P62 stop |
+
+Independent Transport received a read-only reconciliation of RCLE exact-request acceptance and SCDMP P58 terminal no-effect state. No third click, resend or new binding was authorized; this unresolved external dependency does not add an advancing direction.
+
 | Direction | Request or accepted handle | Latest recorded evidence / unresolved dependency | Current action boundary | Completed intake |
 | --- | --- | --- | --- | --- |
 | `flexible_skill_duration` | P52 request `2026-09-08-fsd-post-b03-convergence-01`; Transport turn `01a08264-3712-74f0-ba81-6eaac17a92b6`; HANDOFF `52c30986d1af6b20ab0df4d2c0f1b68a68a90306` | Transport `ARCHIVED` after one provider Send; response SHA256 `0a630d11a37d5179d6df1149d02cf112bb529b32b7a761a393becdea35e83c47`; complete P52 intake is integrated (`b1139b0b8`) and ends the route with no successor or native run | Prior allocation complete; preserve evidence and its stated dependency. P67 work, if assigned, is separate. | [intake](../candidates/flexible_skill_duration/pro_packets/20260908_post_b03_convergence/CONVERGENCE_INTAKE.md) |
