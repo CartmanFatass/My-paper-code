@@ -19,7 +19,7 @@
     }
   ],
   "recommended": "a",
-  "auto_applied": null,
+  "auto_applied": "a",
   "dm_reason": "P74 的同配置观察理由成立；P76 又得到小而不确定的差，当前稍倾向结束同配方追加，但低成本和两个独立正值使这是 close-call。",
   "evidence": [
     "docs\\research\\candidates\\vsp_03\\VSP03_POST_B05_QUESTION_INTAKE_20260909.md",
@@ -72,5 +72,15 @@
     "verdict_text": "**DM recommendation: ask Convergence to select (a), a reversible pause of only\nthe tested ordinary-G, update-128, public fixed-N2 greedy-replacement family,\nwith no successor selected. This is a close call; neither (a) nor (b) has run.**",
     "source": "docs/research/candidates/vsp_03/VSP03_POST_B05_QUESTION_INTAKE_20260909.md"
   },
-  "starred": true
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-09T10:32:48+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/vsp_03/pro_packets/20260909_post_b05_convergence/archive/RESPONSE.md",
+      "record": "docs/research/candidates/vsp_03/VSP03_POST_B05_CONVERGENCE_INTAKE_20260909.md",
+      "state": "applied",
+      "summary": "完整 Pro 答复3da3a0c44ff7296c19e85342a56ee3128dce1451选择(a)，DM已合规接收并在DIRECTION应用已测ordinary-G/update128/公开固定N2 greedy替代规则窄家族的可逆暂停，不选后继。保留两小正/seed5负值及全部随机损失、低成本继续理由和P74纠正，仍为close-call；N1/T暂停、recasts1不变，无Portfolio处置。记录audit/2026-09-09.md#L25；source/card/master/model/science/Pro Send新增均0。原推荐和未回复状态保留，不虚构owner回答。"
+    }
+  ]
 }

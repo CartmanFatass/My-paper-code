@@ -44,8 +44,12 @@ Convergence decision selected one further same-family G observation, seed 7,
 subsequently allocated and completed as B05/P76. That controller gives another
 small positive greedy point over both rules and a stochastic loss. Seeds 5/6/7
 have a descriptive primary mean of -0.0030110677083333365; this does not establish
-stable replacement value or change the N1/T pauses. Recasts remain 1 and no
-successor observation or family disposition follows from this completed allocation.
+stable replacement value or change the N1/T pauses. That completed allocation
+selected no successor or family disposition. The subsequent complete post-B05
+Convergence decision now pauses only the tested ordinary-G/update128/public fixed-N2
+greedy-replacement family, as a reversible close call, with no successor. The two
+small positive points remain support for ordinary learning; a further independent
+instance still has possible value but is unselected. Recasts remain 1.
 
 ## Current position
 
@@ -240,7 +244,30 @@ stochastic comparisons to both fixed rules remain negative. None establishes
 stable superiority, inferiority or equivalence. Tuned N2 headroom remains absent;
 0.02 MEI supplies scale, not an equivalence or all-positive threshold. The next
 instance question has been answered; wider independent-instance variability
-remains unresolved, with no successor allocated and no new family disposition.
+remained unresolved, with no successor or family disposition at that intake.
+
+**PRO_FINAL, post-B05, 2026-09-09: pause the tested ordinary-G, final-update-128,
+public fixed-N2 shared-service greedy-replacement family; no successor,
+recasts: 1.** The scope retains the current target law, offset clocks, eight-tick
+slot, 40-tick native utility and complete team credit, 14 public features,
+generic actor–critic and fixed 128×128 training budget, with strict logit>0
+greedy G−R0 primary and the existing R/stochastic comparisons. N1 and
+T/initialization pauses remain. No broader direction or Portfolio disposition
+follows, and no card, new training instance, old-weight evaluation or diagnostic
+is selected.
+
+The node preserves P74's correction that an unchanged independent training
+sample is legitimate B value without a new use, algorithm change or stable proof.
+It slightly prefers pausing this incremental sequence while acknowledging that
+seed6/7 both beat both rules and their complete runs cost only 3.253184/4.191728 s.
+That is the strongest counterargument; the pause may leave useful ordinary
+learning underexplored. Seed5's larger loss, two small uncertain gains and a
+competent fixed readiness reference support the local pause without establishing
+population inferiority, equivalence, optimality or a three-seed stopping rule.
+The unresolved direct discriminator remains another independently trained,
+same-recipe frozen G's native margin and success/attempt/waiting composition.
+It is unselected and unallocated, with no new-use, significance, positive-sign,
+tuned-headroom or causal-diagnosis prerequisite for a future justified choice.
 
 The strongest surviving alternative is that public dwell age already suffices and the generic
 MLP matches the prior, or that all advantage is the fixed rule rather than learning. In the new
@@ -261,6 +288,8 @@ sharing K1 does not pool polarity or reopen that family.
 
 The evidence set includes historical observations and the separately labelled prospective selection:
 
+- `docs/research/candidates/vsp_03/VSP03_POST_B05_CONVERGENCE_INTAKE_20260909.md`
+- `docs/research/candidates/vsp_03/pro_packets/20260909_post_b05_convergence/archive/RESPONSE.md` at `3da3a0c44ff7296c19e85342a56ee3128dce1451`
 - `docs/research/candidates/vsp_03/VSP03_B05_P76_INTAKE_20260909.md`
 - `docs/research/candidates/vsp_03/VSP03_B05_P76_RESULT_EVIDENCE_20260909.md`
 - `docs/research/candidates/vsp_03/VSP03_B05_P76_DM_ANALYSIS_20260909.json`
