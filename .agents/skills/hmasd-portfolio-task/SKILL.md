@@ -60,25 +60,14 @@ Before investing or making a material lifecycle recommendation, Root identifies:
   live choices; and
 - the contrary observation that would change the recommendation.
 
-Every `ACTIVE` direction remains admitted to the research queue. Root selects ready tasks
-and maintains five advancing direction chains from current evidence and authorized priorities.
-Count native work, running experiments and accepted Pro generation once per direction;
-completed returns and unresolved waits yield a slot. Scheduling does not change lifecycle,
-priority, scientific meaning or budgets. A queued direction is not `PARKED`. UAV entry must
-be supported by the concrete direction decision and card.
+## Planning boundary
 
-Execution remains remote-first under `.codex/hmasd-compute.toml` within frozen host/device
-bounds. CM owns feasibility and exact bindings; Root resolves scheduling and dependencies.
-A failed admission cannot authorize a different scientific invocation.
-
-## Plan and execute
-
-Use `hmasd-loop-dispatch` for each return and vacancy. Select and dispatch a ready follow-on
-or replacement without waiting for unrelated directions. Root performs planning and execution
-in one session, recording current facts in the existing Portfolio/tracking records. Known
-collection, intake and selected execution routes continue through the original DM/CM.
-Cross-direction scientific decisions use the Portfolio decision node below; routine scheduling
-within authorized priorities and open ladders is local Root work.
+Use AGENTS §5 for capacity and counting, `hmasd-loop-dispatch` for event ordering and
+ROOT_OPERATIONS.md for complete DM/CM/Operator assignments. This skill owns scientific
+comparison and Portfolio intake. Scheduling within authorized priorities and open ladders is
+local Root work; a queued direction is not `PARKED`. A new cross-direction scientific investment
+uses the Portfolio decision node below. Technical failures affect feasibility without selecting
+a new scientific invocation or changing a direction's polarity.
 
 Compare directions at their honest claim ceilings. Do not reward a direction merely for producing
 more formal artifacts, and do not penalize a bounded empirical direction for lacking a theorem,
@@ -90,12 +79,6 @@ C-FORMAL work.
 Distinguish technical success, bounded task competence, comparative algorithm advantage,
 cross-scenario transfer, safety, and deployment. Evidence for an earlier claim does not silently
 promote a later one.
-
-OWNER_DIRECT 2026-09-08: define a direction deliverable and authority boundary, leaving
-ordinary implementation, repair and intermediate decisions with its DM/CM. Root closes that
-delegation through acceptance and authorized continuation. Do not end an ordinary selected
-card/specification route at another implementation request. Root handles an
-actual working-set replacement, cross-direction choice or conflict beyond that direction.
 
 ## Investment fields (owner decision 2026-09-04, revised the same day)
 

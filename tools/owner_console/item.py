@@ -61,7 +61,7 @@ def cmd_add(a) -> int:
 
 
 def cmd_reviews(a) -> int:
-    rows = srv.pending_instructions(a.root, days=a.days)
+    rows = srv.pending_instructions(a.root)
     if a.json:
         print(json.dumps(rows, ensure_ascii=False, indent=2))
         return 0
@@ -116,7 +116,6 @@ def main(argv=None) -> int:
     s.set_defaults(fn=cmd_add)
 
     r = sub.add_parser("reviews", help="owner instructions not yet applied")
-    r.add_argument("--days", type=int, default=2)
     r.add_argument("--json", action="store_true")
     r.set_defaults(fn=cmd_reviews)
 

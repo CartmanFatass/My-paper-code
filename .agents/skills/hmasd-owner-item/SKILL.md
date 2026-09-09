@@ -85,7 +85,7 @@ Required: `question`, `changes_if_approved` (at least one entry, or one string `
 ## Read point (every clean boundary)
 
 ```
-python tools/owner_console/item.py reviews          # unapplied owner instructions, last 2 days
+python tools/owner_console/item.py reviews          # all unapplied owner instructions, regardless of age
 python tools/owner_console/item.py reviews --json
 python tools/owner_console/item.py mark-answered <id> [<id> ...]
 ```

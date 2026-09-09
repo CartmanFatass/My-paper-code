@@ -15,26 +15,25 @@ At goal-turn entry, a return or receipt, and before waiting:
 1. Apply current owner instructions and pause/stop boundaries first. Control-plane edits
    and status questions do not resume research. During a pause, perform only authorized
    closeout, evidence preservation and the requested non-research work.
-2. Read the affected current Portfolio row, card/intake and original return. Use accepted
-   handles and actual native/Transport state. Count each direction once across active
-   native work, running experiments and accepted Pro generation. Completed returns,
-   unresolved waits and undispatched intentions count zero.
-3. Accept and integrate the bounded delivery, then resume its original DM/CM with
-   `followup_task` for collection, intake, repair or authorized continuation. Keep scientific
-   choices with the DM and technical acceptance with CM. A completed child is not parent
-   completion. Reuse the existing executor and direction checkout.
-4. Fill an actionable vacancy directly from current evidence, readiness and authorized
-   priorities. Target five advancing chains under AGENTS §5; identify concrete dependencies
-   when fewer are justified. Use the proper Pro/owner tier for an unresolved scientific or
-   Portfolio decision. Schedule independent conforming work while that decision is pending.
-5. Dispatch all independently ready work before a long local step. Advance each direction
-   when its own dependencies arrive; a batch is never a completion barrier. Update current
-   planning and execution facts in existing records and publish required inputs before launch.
-6. Observe accepted experiment handles and service terminal results. If Transport is idle
-   with a pending request, reconcile its persisted state and resume the same observation/
-   recovery route. App dispatch acceptance is not provider Send acceptance.
-7. When no authorized action is ready, wait for the first event for at most 60 seconds,
-   retaining exact dependencies. On wake, process changed facts before waiting again.
+2. Make a short pass over changed returns and current tracking. Identify ready continuations,
+   completed deliveries needing integration and actionable vacancies. Read only the affected
+   current Portfolio row and original evidence. Count actual advancing directions under AGENTS §5.
+3. Dispatch already-ready independent work before lengthy acceptance, integration or planning.
+   Do not dispatch a dependent launch until its own inputs are accepted and published. Short
+   routing of another direction's result to its existing DM/CM need not wait for that integration.
+4. Accept one bounded delivery or resolve one vacancy from current evidence and authorized
+   priorities, then dispatch its ready continuation and return to step 2. For a lengthy operation,
+   service other ready work at its next recoverable boundary. Keep scientific intake with DM
+   and the complete technical batch with CM/Operator under ROOT_OPERATIONS.md. Root selects
+   replacements directly; an unresolved scientific choice goes to the proper Pro/owner tier.
+5. Check that each accepted experiment has a current observer under EXPERIMENT_MONITOR.md.
+   Read supervisor state only for handles Root actually owns or is reconciling after lost
+   observation. Route terminal evidence promptly. If Transport is idle with a pending request,
+   reconcile its persisted state and resume that same observation/recovery route. App dispatch
+   acceptance is not provider Send acceptance.
+6. When no authorized action is ready, wait for the first event for at most 60 seconds,
+   retaining exact dependencies. On wake, process changed facts before waiting again. A batch
+   never creates a completion barrier; unresolved waits do not fill available direction slots.
 
 ## Bounded assignments
 

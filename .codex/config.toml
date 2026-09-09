@@ -1,8 +1,6 @@
 #:schema https://developers.openai.com/codex/config-schema.json
 
-# Every local task created in this trusted HMASD project starts with Full Access.
-# Keep these explicit here so Root and research tasks do
-# not inherit the desktop client's Workspace/on-request defaults.
+# Project defaults for Root; individual agent configurations may narrow their sandbox.
 approval_policy = "never"
 sandbox_mode = "danger-full-access"
 
@@ -37,7 +35,7 @@ description = "Optional focused runtime-observation method."
 config_file = "./agents/hmasd-verifier.toml"
 
 [agents.HMASDExperimentOperator]
-description = "Optional operator for one exact result-bearing command."
+description = "Optional executor for a bounded launch, observation and collection batch."
 config_file = "./agents/hmasd-experiment-operator.toml"
 
 [agents.HMASDResearchCritic]

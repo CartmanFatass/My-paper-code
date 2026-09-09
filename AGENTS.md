@@ -123,7 +123,8 @@ ordinary in-scope implementation choices to the executor rather than remotely di
 
 Routine Luna children complete work at their own level without further delegation by default.
 Routine Implementer, Scout, Verifier and Operator do not initiate another child chain; a concrete
-question outside their scope returns to the assigning CM with evidence and completed work.
+question outside their scope returns to the actual assigning parent with evidence and completed work.
+CM retains final engineering acceptance when a Reviewer or Implementer assigned that specialist.
 In-scope repairs continue without an arbitrary retry count. Reviewer ordinarily checks facts
 itself; a separate Scout/Verifier is exceptional, for an independent bounded question that can
 change a finding and whose delegation saves substantial reading or enables useful parallel work.
@@ -279,13 +280,11 @@ cards. Count active native work, accepted running experiments and accepted Pro g
 per direction. Completed returns, unresolved waits and queued intentions do not count. Root,
 Transport, CM, specialists and detached processes do not each consume another direction slot.
 
-Root handles each return as its own dependencies arrive, resumes the responsible DM/CM and
-selects ready replacements from current evidence and authorized priorities. Dispatch independent
-work without waiting for a full batch. Keep direction-local choices with the DM and use the
-proper Pro/owner tier for decisions beyond its authority. Root owns readiness and cross-direction
-planning, including resolving conflicts and recording named dependencies when work cannot advance.
-Temporary overlap drains at clean boundaries without interrupting live work. Scheduling changes
-no lifecycle, scientific meaning, priority or budget by itself.
+The loop skill owns event ordering and rolling dispatch. ROOT_OPERATIONS.md maps complete
+deliverables to Root, DM, CM and optional Operator; EXPERIMENT_MONITOR.md owns observation
+transfer. Root resolves readiness and cross-direction dependencies while DM/CM carries its
+assigned direction through scientific/technical acceptance. Temporary overlap drains at clean
+boundaries. Scheduling alone changes no lifecycle, scientific meaning, priority or budget.
 
 There is no fixed limit on concurrent implementers or result-bearing runs within the direction
 working set. Root plans from actual runtime capacity and dependencies; DM/CM apply the fresh
@@ -325,8 +324,8 @@ or launch gates, and never override a stricter original cap.
 
 Resume model: commit and push before every launch; launch every result-bearing run detached from
 the agent's process; on the remote route use a detached worktree at the exact launch sha and the
-configured `agent-task` supervisor; Root observes accepted experiment handles within the owner's active goal
-and independent Transport observes accepted Pro requests
+configured `agent-task` supervisor; the assigned CM/Operator observes accepted experiments within
+the owner's active goal, with explicit handover when needed, and independent Transport observes Pro requests
 (`docs/project/ROOT_OPERATIONS.md`); keep every agent's state recoverable from the repository alone (card, predictions,
 launch sha, execution node, run root, queue state).
 
@@ -500,12 +499,9 @@ appendix and completed historical tasks remain unchanged.
   The independent reusable Transport task uses Luna/high and owns all Pro browser work.
   Configurations: `.codex/hmasd-monitor.toml` and `.codex/hmasd-transport.toml`;
   procedure: `docs/project/ROOT_OPERATIONS.md`.
-  DM/CM sends accepted handles directly to Root, which observes and wakes native children;
-  collection/technical acceptance remains CM's and scientific intake remains DM's.
-  Root's owner-driven goal covers experiment work and receipt-driven direction continuation;
-  Transport observes its accepted Pro requests in its own task. Record adoption and the
-  responsible observer before ACK. Do not create scheduled observation automations or an
-  independent Monitor; reuse the owner-created Transport rather than creating one per request.
+  Experiment execution/observation ownership follows ROOT_OPERATIONS.md and EXPERIMENT_MONITOR.md;
+  CM retains technical acceptance and DM retains scientific intake. Existing agent assignments and
+  the owner's active goal drive work; no scheduled monitor or extra standing task is created.
 - DM is the `em` Prompt Author; Root is the `portfolio` caller and full-response
   intake owner. Both use the independent configured Transport endpoint. Native authors normally
   send their ready handoff to Root, which dispatches the app message. Source is the actual author,

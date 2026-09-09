@@ -131,6 +131,30 @@ def test_pending_instructions_and_mark_answered(tmp_path):
     assert srv.pending_instructions(root) == []
 
 
+def test_old_item_reply_remains_pending_until_applied(tmp_path, capsys):
+    import datetime as dt
+    old_day = (dt.date.today() - dt.timedelta(days=30)).isoformat()
+    root = make_repo(tmp_path, old_day)
+    item_id = "20260905-fsd-001"
+    srv.write_reply(root, item_id, "b", "override after a long pause")
+    # Both an old item with a fresh reply and an old unapplied reply must survive.
+    reply_path = srv.item_path(root, item_id).with_suffix(".reply.json")
+    reply = json.loads(reply_path.read_text(encoding="utf-8"))
+    reply["answered_at"] = f"{old_day}T12:00:00"
+    for timestamp in (dt.datetime.now().isoformat(), reply["answered_at"]):
+        reply["answered_at"] = timestamp
+        reply_path.write_text(json.dumps(reply), encoding="utf-8")
+        assert [row["id"] for row in srv.pending_instructions(root)] == [item_id]
+
+    spec = importlib.util.spec_from_file_location("owner_console_item_age", ROOT / "tools/owner_console/item.py")
+    cli = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(cli)
+    assert cli.main(["--root", str(root), "reviews", "--json"]) == 0
+    assert [row["id"] for row in json.loads(capsys.readouterr().out)] == [item_id]
+    srv.mark_answered(root, item_id)
+    assert srv.pending_instructions(root) == []
+
+
 def test_item_priority_buckets():
     assert srv.item_priority({"kind": "portfolio"}) == 1
     assert srv.item_priority({"kind": "new-card"}) == 2

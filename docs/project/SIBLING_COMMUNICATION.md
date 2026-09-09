@@ -45,20 +45,13 @@ Root forwards direction evidence with `followup_task` when intake or continuatio
 and performs Portfolio intake itself. Preserve unknown Send state and reconcile the original
 request before recovery. No second Send follows from a routing failure.
 
-## Experiment adoption and records
+## Experiment and specialist returns
 
-DM/CM supplies Root the accepted supervisor handle, node, launch SHA, cwd, evidence paths and
-responsible recipient in the existing run record. Follow EXPERIMENT_MONITOR.md for observation
-adoption. Root observes the same handle; CM collects and checks technical evidence, DM performs
-scientific intake. A private terminal ID does not transfer process access.
+Return evidence and out-of-scope questions to the actual assigning parent, including when that
+parent is a Reviewer or Implementer. CM retains final technical acceptance; do not bypass a
+parent merely because a role name mentions CM. Reuse the original request and actual tool
+address when forwarding a nested result.
 
-Root maintains useful execution facts in EXPERIMENT_TRACKING.md and the existing root-log:
-time, direction, exact handle/request, evidence and actual continuation state. Distinguish
-pending work from accepted and running work. Use observed event time or actual recording time.
-Batch ready routine record edits at clean boundaries; do not delay required publication or
-ready work to assemble a batch. Push every commit immediately.
-
-Root owns main's index and ready control-plane files. Coordinate an actual overlapping edit
-or index transaction with its writer; complete an in-progress conflict before another writer
-stages paths. Preserve unrelated edits and inspect actual Git state before repeating operations.
-Use explicit paths without reset, stash, history rewrite or automatic locking machinery.
+Observation ownership and transfer are maintained in EXPERIMENT_MONITOR.md; Root tracking and
+integration are maintained in ROOT_OPERATIONS.md. An accepted-handle message does not transfer
+observation by itself. A private terminal ID is not an accessible supervisor handle.
