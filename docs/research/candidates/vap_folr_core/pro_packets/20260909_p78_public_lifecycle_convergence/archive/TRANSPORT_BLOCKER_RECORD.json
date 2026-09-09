@@ -1,0 +1,103 @@
+{
+  "schema_version": 4,
+  "conversation_binding_key": "em:vap_folr_core:convergence",
+  "workflow_node": "em_convergence",
+  "direction_id": "vap_folr_core",
+  "direction_ids": [
+    "vap_folr_core"
+  ],
+  "decision_authority": "pro_final",
+  "request_id": "folr-public-lifecycle-p78-convergence-20260909",
+  "packet_id": "folr-public-lifecycle-p78-convergence-20260909--vap_folr_core",
+  "packet": {
+    "canonical_form": "logical_packet_manifest",
+    "manifest_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\folr-public-lifecycle-p78-convergence-20260909\\folr-public-lifecycle-p78-convergence-20260909--vap_folr_core__PACKET_MANIFEST.json",
+    "body_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\folr-public-lifecycle-p78-convergence-20260909\\folr-public-lifecycle-p78-convergence-20260909--vap_folr_core__00_PROMPT.md",
+    "reference_paths": []
+  },
+  "source_thread_id": "01a08438-c6e4-7981-b75d-ba81fabd4c2f",
+  "creator_thread_id": "01a08438-c6e4-7981-b75d-ba81fabd4c2f",
+  "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "operator_thread_id": "01a07e52-f085-76a0-886a-4127f490421f",
+  "operator_model": "gpt-5.6-luna",
+  "operator_thinking": "high",
+  "return_route": "PARENT_SESSION",
+  "conversation_id": "UNBOUND",
+  "provider_url": "https://chatgpt.com/",
+  "tab_id": null,
+  "tab_lifecycle": "CLOSED",
+  "tab_lease": {
+    "handle": null,
+    "lifecycle": "CLOSED",
+    "origin": "agent",
+    "reusable": true,
+    "last_observed_at": "2026-09-09T10:40:00Z",
+    "lease_expires_at": null
+  },
+  "state": "BLOCKED",
+  "send_click_count": 2,
+  "source_mode": "paste",
+  "prompt_sha256": "f8719a67576ee1f05e32357c8d008e98ab95c0e1c7ff76babd6499a77ea1090d",
+  "reference_files": [],
+  "send_evidence": {
+    "send_click_count": 2,
+    "send_attempted": true,
+    "url_observed": false,
+    "user_node_observed": false,
+    "user_node_exact": false,
+    "attachment_observed": false,
+    "paste_mode": true,
+    "prompt_sha256": "f8719a67576ee1f05e32357c8d008e98ab95c0e1c7ff76babd6499a77ea1090d",
+    "provider_url_observed": "https://chatgpt.com/",
+    "binding_match": false
+  },
+  "monitor": {
+    "identity_key": "folr-public-lifecycle-p78-convergence-20260909|em:vap_folr_core:convergence|UNBOUND|https://chatgpt.com/",
+    "provider_url": "https://chatgpt.com/",
+    "last_observed_url": "https://chatgpt.com/",
+    "last_observed_state": "SEND_CONTROL_NO_EFFECT",
+    "last_observed_at": "2026-09-09T10:40:00Z"
+  },
+  "observed_page_state": "unchanged homepage/composer after two clicks; Send remained enabled; no concrete conversation URL or user node",
+  "blocker_code": "SEND_CONTROL_NO_EFFECT",
+  "blocker_detail": "Two total Send clicks (one initial and one permitted retry) left the homepage URL and composer unchanged with Send still enabled; no concrete /c/<uuid> URL or user-message node appeared. No third click or rebind was attempted.",
+  "attempt_history": [
+    {
+      "attempted_at": "2026-09-09T10:40:00Z",
+      "provider_url": "https://chatgpt.com/",
+      "tab_id": "8",
+      "visible_model": "6 Pro",
+      "underlying_model": "Latest",
+      "thinking_effort": "Pro, 5 of 5.",
+      "prompt_sha256": "f8719a67576ee1f05e32357c8d008e98ab95c0e1c7ff76babd6499a77ea1090d",
+      "send_click_count": 2,
+      "first_click": "unchanged homepage/composer; Send remained enabled; no concrete conversation URL or user node",
+      "retry_click": "same unchanged state after the single permitted retry",
+      "no_provider_send_confirmed": true,
+      "no_rebind": true,
+      "no_third_click": true
+    }
+  ],
+  "updated_at": "2026-09-09T10:40:00Z",
+  "return_receipt": {
+    "kind": "TERMINAL_BLOCKER",
+    "blocker_state": "BLOCKED",
+    "error": "Two total Send clicks (one initial and one permitted retry) left the homepage URL and composer unchanged with Send still enabled; no concrete /c/<uuid> URL or user-message node appeared. No third click or rebind was attempted.",
+    "required": true,
+    "source_thread_id": "01a08438-c6e4-7981-b75d-ba81fabd4c2f",
+    "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+    "destination_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+    "status": "SENT",
+    "message_key": "folr-public-lifecycle-p78-convergence-20260909|em:vap_folr_core:convergence|UNBOUND|BLOCKER|BLOCKED|1fc403887a539100",
+    "attempt_count": 1,
+    "retry_allowed": false,
+    "delivery_mode": "bounded_single_attempt",
+    "return_control_after_attempt": true,
+    "staged_at": "2026-09-09T10:40:00Z",
+    "routing_mode": "PARENT_SESSION",
+    "fallback_enabled": false,
+    "delivery_status": "accepted",
+    "updated_at": "2026-09-09T10:42:00Z",
+    "sent_at": "2026-09-09T10:42:00Z"
+  }
+}

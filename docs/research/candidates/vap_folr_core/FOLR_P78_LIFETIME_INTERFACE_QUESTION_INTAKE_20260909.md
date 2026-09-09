@@ -3,6 +3,13 @@ Binding MARL structure: (a) roster change; (d) other-agent non-stationarity or p
 
 # FOLR P78 public-lifecycle question preparation — 2026-09-09
 
+**Current status: DIRECTION_TIER_BLOCKED / NO_DECISION.** Read-only reconciliation found no
+matching full response on the declared GitHub delivery surfaces. Section 7 records the
+terminal Transport receipt, checked evidence and recovery boundary. The question remains
+unselected; no further provider attempt or scientific invocation is allocated.
+
+Preparation state at publication:
+
 **READY_QUESTION; recommend one narrowly scoped B comparison to Convergence, as a close call.**
 Only question publication is executed. The prospective information change, family meaning,
 training choices, MEI and invocation budget remain unselected/unallocated. P77's exact no-ready
@@ -222,3 +229,104 @@ retention is already standard, own goals are reobserved, and any observed gap co
 an intentionally poor reset rule on a changed information protocol. The next discriminator,
 only if selected and allocated, is sampled native return after real training under these
 two rules. Unknown event exposure or cost remains unknown; neither is scientific polarity.
+
+## 7. Terminal Transport blocker: factual intake and recovery boundary
+
+Root forwarded `SEND_CONTROL_NO_EFFECT` for the same P78 request and assigned read-only
+reconciliation of the durable request, registry and declared GitHub delivery. This follow-up
+started at clean/pushed HANDOFF commit `d824897be46558099d565d5d02d836145813eae1` in the same
+direction checkout. It authorizes no Send, retry, browser action, rebind or alternate executor.
+The preserved [reconciliation facts](pro_packets/20260909_p78_public_lifecycle_convergence/archive/RECONCILIATION_20260909.json)
+include Root's forwarded terminal receipt verbatim and raw GitHub command arguments, outputs,
+exit codes and observation times. No full Pro response was available for scientific intake.
+
+### 7.1 What was checked and what was observed
+
+- The unchanged-byte [durable Transport request](pro_packets/20260909_p78_public_lifecycle_convergence/archive/TRANSPORT_REQUEST.json)
+  equals the original HANDOFF's nested request. The
+  [packet manifest](pro_packets/20260909_p78_public_lifecycle_convergence/archive/TRANSPORT_PACKET_MANIFEST.json)
+  and [1,257-byte prompt](pro_packets/20260909_p78_public_lifecycle_convergence/archive/TRANSPORT_PROMPT.md)
+  were copied from Transport's existing artifacts. Prompt SHA-256 is
+  `f8719a67576ee1f05e32357c8d008e98ab95c0e1c7ff76babd6499a77ea1090d` in the copied bytes,
+  accepted HANDOFF and registry. TASK, REQUEST and HANDOFF remain unchanged.
+- The [extracted FOLR registry record](pro_packets/20260909_p78_public_lifecycle_convergence/archive/TRANSPORT_BLOCKER_RECORD.json)
+  preserves the binding's values and equals its direction mirror. It reports `BLOCKED`,
+  conversation `UNBOUND`, homepage `https://chatgpt.com/`, closed tab, and exactly **two Send
+  control clicks**: the initial click and one permitted retry. Transport reports visible
+  `6 Pro`, underlying `Latest`, effort `Pro, 5 of 5.`, unchanged homepage/composer with Send
+  enabled, and no concrete conversation URL or user-message node. It reports no third click,
+  no rebind and no confirmed provider Send. These are Transport's UI observations; this DM
+  inspected no browser page and performed no browser action. Two clicks are not two confirmed
+  Sends, and unobserved backend acceptance is not inferred either way.
+- The same registry's `TERMINAL_BLOCKER` return receipt is `SENT`, delivery `accepted`, to
+  Root, with one receipt-delivery attempt and `retry_allowed=false`. This confirms the
+  recorded **parent receipt delivery**, not provider acceptance or a scientific answer.
+  Transport timestamps are preserved as reported fields; their early mismatch with the DM
+  clock is documented in the facts JSON and supports no elapsed-time or ordering inference.
+- GitHub readbacks completed at `2026-09-09T10:43:00.599145+00:00`. The shared branch still
+  pointed to `d824897be46558099d565d5d02d836145813eae1`. Reading the declared
+  `archive/RESPONSE.md` at that full SHA returned `HTTP 404 Not Found`, while repository and
+  branch reads succeeded. [Issue 15](https://github.com/CartmanFatass/My-paper-code/issues/15)
+  was open, unchanged since `2026-09-09T10:25:19Z`, with **zero comments**. There was **zero
+  available matching full response** on those declared surfaces at the recorded read times.
+  This bounded observation does not establish every possible provider/backend state.
+
+The strongest operational support is agreement among the exact request/prompt identity,
+Transport's terminal record and the empty declared response location. No contradictory
+delivery evidence was observed in the checked branch/path/Issue. This establishes a delivery
+blocker with no formed decision available; it says nothing about the prospective mechanism's
+return. Scientific support and contradiction remain those in §§3–6, including the serious
+zero-work alternative of ordinary generic RETAIN.
+
+### 7.2 Reading rule, counts and decisions this intake produces
+
+AGENTS §3 applies verbatim:
+
+> - **Direction and Portfolio tiers**: the direction parks at a clean boundary (everything
+>   committed, runs detached, state recoverable from the repository) and Root advances independent authorized work. Nothing is decided provisionally at these tiers.
+
+**Direction-tier outcome: blocked; no Pro decision formed and no local provisional family
+selection.** This is an operational clean boundary, not a lifecycle PARK, recast, scientific
+negative or Portfolio disposition. The prospective public-lifecycle interface, real-training
+comparison, card, MEI and budget remain unselected/unallocated. P77's unchanged-interface
+`NO_READY_CONTINUATION`, B04's positive and opposite-sign outcomes and bounded MEI reading,
+and older FOLR/DISH pauses retain their recorded meaning. DIRECTION is unchanged.
+
+**Technical options:** (a) accept the reconciled terminal blocker and return the exact recovery
+boundary; (b) infer a direction decision without a response; (c) attempt another delivery.
+Recommend/select **(a)**. The checked evidence supports (a); (b) has no scientific authority,
+and (c) is outside this factual allocation. **Owner-delegated decision (unattended, 2026-09-03
+instruction): (a).** Root's explicit follow-up and AGENTS §3 control this technical handling.
+
+New reconciliation exposure is **zero** for scientific imports, models/model calls, native
+episodes, probes, implementation, cards, masters, scientific invocations, provider Send
+clicks, provider browser actions, Transport dispatches and registry mutations. The only two
+reported Send-control clicks belong to the prior Transport attempt. Engineering-scope §4
+needs **none** for this records-only follow-up; no §5 budget breach occurs. Owner prediction
+is **not taken**. All-age unapplied owner reviews were empty at reconciliation. The existing
+P2 item is traced to this blocked delivery state; its earlier `auto_applied=a` continues to
+mean question publication only. No new P1/P2 scientific decision is manufactured.
+
+### 7.3 Exact recovery handoff to Root
+
+Request `folr-public-lifecycle-p78-convergence-20260909` remains bound to logical node
+`em:vap_folr_core:convergence`, immutable TASK commit
+`83f7beafd632bd7e54a6c6ad3e47044357284189`, HANDOFF commit
+`d824897be46558099d565d5d02d836145813eae1`, the prompt digest above, and Issue 15. The provider
+conversation is `UNBOUND`; no conversation ID is fabricated. Its original source, parent and
+configured Transport routes remain in the accepted HANDOFF and copied request.
+
+Root receives this committed reconciliation for integration and independent working-set
+advancement. Any later recovery requires its own explicit authorization and reconciliation
+of uncertain acceptance; this return provides **no additional provider attempt budget**.
+Do not resend, open/rebind a conversation, dispatch Transport or use an alternate executor
+from this allocation. If a real matching complete response later appears, read it directly
+from its immutable commit and apply the original class-correct conformity intake while
+preserving the contrary terminal receipt. Otherwise the direction stays at this operational
+boundary. The next scientific discriminator remains the proposed trained native return
+comparison only if selected and allocated; no diagnostic or run is authorized now.
+
+The shared `codex/vap-folr` checkout retains this recoverable request and evidence. Root owns
+later delivery/recovery sequencing and eventual checkout cleanup. There is no live experiment
+to hand over. The audit addition is one FOLR technical row; integration must preserve the
+other directions' rows already present on main.
