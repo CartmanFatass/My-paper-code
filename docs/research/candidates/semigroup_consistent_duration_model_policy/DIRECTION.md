@@ -632,3 +632,34 @@ lineage has no current decision-relevant continuation. Exact decision intake and
 bytes are in `SCDMP_D6_A02_POPULATION_CONVERGENCE_INTAKE_20260904.md` and
 `external/2026-09-04-scdmp-d6-a02-population-convergence-04/`. Portfolio state and the separate
 unmeasured headroom item remain unchanged.
+
+## Native held-segment residual-MC recast — 2026-09-09
+
+The complete P58 Convergence response at immutable commit
+`ac1d97f5920fe2dfc88698681d389af0b907dbfe` selects
+`SCDMP-NATIVE-HOLD-RESIDUAL-B01` and explicitly confirms a new substantive RECAST.
+Its full SHA256 is `bbf51f5f7448071bb177628059468bf8d15c89f6688ef4d45f01b7517037b845`.
+The compliant replacement answer is applied; the retired-context P56 answer stays
+historically unapplied. Recasts: **2**; the existing owner rule requires lowest ACTIVE
+sequencing through Root, without a direction-local Portfolio lifecycle change.
+
+The accepted question changes from D6 cross-k action-value sharing and its population
+search to a fixed two-ended residual-MC learning loss on actual opening hold segments
+of the existing five-UAV native actor–critic. Preserve complete same-information MLP,
+MC targets, duration actor, native law and optimizer counts. Both current critic
+endpoints differentiate; the sampled residual is a real error-coupling change, not
+new information, MC target identity, ordinary semi-gradient TD or the VSPC1 capacity gate.
+
+Strongest support is the nonredundant gradient change and complete native action path.
+Strongest contradiction is harmful coupling of imperfect predictions on sparse opening
+pairs, with an already competent containing MLP and adverse UCOPE/H context. Generic
+regularization, gradient cancellation, omitted history and joint clipping remain live
+explanations. No mechanism or performance effect has yet been measured for this loss.
+
+The one-pair B ceiling is a final sampled native-return package comparison, not stable
+superiority, unique hold/semigroup attribution, TD/gate superiority or automatic UAV
+entry. The next discriminator is master8201 RESIDUAL-MC versus MLP-MC with both H
+contrasts, 286,720 total steps, 2,048 Adam calls and original 1,800s/arm, 3,600s/pair caps.
+Old D6 source/countdown-search family PARK and earlier evidence remain unchanged.
+See `SCDMP_NATIVE_HOLD_RESIDUAL_B01_SCIENCE_CARD_20260909.md` and
+`pro_packets/20260908_held_residual_context_repair/CONVERGENCE_INTAKE_20260909.md`.
