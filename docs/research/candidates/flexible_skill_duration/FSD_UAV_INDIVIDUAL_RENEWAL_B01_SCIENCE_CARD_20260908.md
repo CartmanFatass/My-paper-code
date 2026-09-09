@@ -266,3 +266,35 @@ remains zero, the forecast remains unscored, and no formal UAV-entry registratio
 is made. Staging, admission and the complete D0/I technical execution still
 require their later explicit allocation. Old complete caps, first/final exposure,
 unique endpoint, all-outcome reading and no-retry/no-successor boundaries remain.
+
+## 9. P70 full pair execution allocation — 2026-09-08
+
+Root now explicitly allocates **one full D0-then-I technical execution,
+observation and collection batch**, after accepting P69 readiness
+`8215fd50869cb5306466005cb2853f6da41c03ed`. The exact scientific source is
+`ca36e2f941d6c4d4e996a9bd919378af44ea0e93`; the seed/lane laws, CPU4/FP32,
+I/authentic-D0 configurations, five rollouts, unique final endpoint, native
+primary and all reading branches in §§2–6 remain unchanged. The exact runner
+argv and output roots remain those in the P69 source intake §5.
+
+This is a new allocation, not a replay of P69 or an old P47/P52 balance.
+Allow **at most one accepted supervisor submission per arm**, D0 first then I
+with the named D0 summary. Each arm has its own fresh physical/effective-memory
+admission at least 4 GiB before scientific roots or model/learner state. Full
+outer caps remain D0 3600s / I 18000s / summed 21600s, including admission,
+imports, models, training, unique evaluation and closed-file publication. No
+grace, borrowing, retry/resume, extra arm/evaluation, pilot or source fixture.
+
+The same CM remains sole observer and collector through both terminal facts;
+accepted-handle notifications do not transfer polling to Root. An adverse/weak
+but valid D0 is the actual comparator. Stop affected dependent work for a
+concrete shared integrity error; preserve trustworthy own-arm facts and the
+incomplete-pair branch if the companion is missing. Do not invent rescue work.
+DM owns the all-outcome scientific intake, unchanged prediction, brief and audit.
+The [P70 handoff](FSD_UAV_INDIVIDUAL_RENEWAL_B01_P70_EXECUTION_HANDOFF_20260908.md)
+records the complete technical batch and source/observation boundaries.
+
+At allocation there is no accepted handle and scientific exposure remains zero.
+No owner prediction reply or FSD audit override is present at the clean boundary;
+existing empirical forecasts and P67 direction scope remain. No formal UAV-entry
+registration or Portfolio lifecycle/priority change is made by this allocation.
