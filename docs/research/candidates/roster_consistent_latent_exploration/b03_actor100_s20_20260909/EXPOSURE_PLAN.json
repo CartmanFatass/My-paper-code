@@ -13,8 +13,8 @@
     "W100",
     "RCLE-TBCFV-B03-ACTOR100-S20"
   ],
-  "scientific_calls_allocated_now": 0,
-  "implementation_and_tests_allocated_now": false,
+  "scientific_calls_allocated_now": 3,
+  "implementation_and_tests_allocated_now": true,
   "new_training_pairs_if_later_allocated": 1,
   "fresh_fits": 2,
   "updates_each": 200,
@@ -165,7 +165,7 @@
   "computation": "Python stdlib integer arithmetic/hash only; no project imports, models, RNG objects, native calls or experiment",
   "feasibility_commit": "17aa7f01533887750b74a6ca62465e67b41a4580",
   "source_baseline": "4e89f24197a79d0b4fc724018f0223ca2c1e4289",
-  "status": "prospectively frozen; no implementation/test/scientific invocation allocated",
+  "status": "explicit complete batch allocated; no S20 scientific execution yet at allocation binding",
   "future_cli_seed_choices": [
     19,
     20
@@ -177,5 +177,14 @@
     "training_batches_per_update": 2,
     "training_batch_evaluations": 800,
     "panel_batch_evaluations": 256
-  }
+  },
+  "allocation_commit": "fb4f3e0ae9058675162bcb183f34182a969a935f",
+  "allocation_source": "docs/research/portfolio/decisions/2026-09-09-synthesis-execution.md / RCLE fresh S20 pair now explicitly allocated",
+  "scientific_freeze_commit": "2da8ec66be12da255e69721d0bdc672ce07edc33",
+  "allocation_time_scientific_calls_observed": 0,
+  "pre_handoff_conservative_DM_preparation_seconds_inside_cap": 15,
+  "remaining_complete_allowance_at_handoff_seconds": 1485,
+  "known_directory_checks_spent_seconds": 19.4703507,
+  "known_directory_allowance_remaining_seconds": 280.5296493,
+  "directory_check_accounting_note": "CM must reconcile any additional recorded spend; no budget reset; selected S20 check remains at most30s."
 }

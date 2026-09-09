@@ -167,3 +167,20 @@ this is prospective selection, with the previous Chinese result brief retained u
 Root accepts/integrates this preparation and makes the next allocation. CM remains the
 same executor; DM retains scientific intake. Original recovery remote closeout is already
 complete with preserved archives; no old process or checkout is inherited by S20.
+
+## 7. Subsequent explicit execution allocation — 2026-09-09
+
+Root accepted this preparation as main `bb3854c61`/`7296b485d`, traced item 005 while
+retaining close-call 004, and issued the complete S20 allocation at
+`fb4f3e0ae9058675162bcb183f34182a969a935f`, final RCLE section of the synthesis-execution
+decision. The earlier preparation-only statements above describe that completed stage;
+the current status is the separate complete allocation in card §7. Frozen sections 2–6,
+scientific question, source constraints, counts, reading rules and caps are unchanged.
+
+The original CM is resumed with the complete §6 handoff and current committed operating
+inputs. No additional Root source gate follows CM's required review/acceptance and source
+publication. DM retains scientific intake after CM collection; Root handles Monitor
+adoption/terminal resumption, integration and later scoped closeout. Current preparation
+has no S20 model/native/test/preflight/scientific invocation. The 15s conservative DM
+preparation debit and prior directory-test usage are carried in card §7/exposure record
+inside existing caps. Root's newer main decision/item records remain untouched.

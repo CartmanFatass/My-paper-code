@@ -3,12 +3,14 @@ Binding MARL structure: multi-agent credit assignment.
 
 # RCLE B03 actor100 fresh-pair S20 science card — 2026-09-09
 
-**B/EXPLORE; prospectively frozen for the next concrete allocation.** The assigned
-source-read-only feasibility is accepted at `17aa7f01533887750b74a6ca62465e67b41a4580`.
-Reporting object `RCLE-TBCFV-B03-ACTOR100-S20`. Root selected preparation
-under standing object delegation after accepting the recovered result at main
-`d374ed8c11f2b55308e6090a937c29254fff785b`. No implementation, test, model, diagnostic or scientific invocation is
-allocated by this card. Root will allocate the concrete accepted batch separately.
+**B/EXPLORE; complete S20 batch explicitly allocated by Root on 2026-09-09.**
+The scientific freeze remains `2da8ec66be12da255e69721d0bdc672ce07edc33`, with accepted
+read-only feasibility `17aa7f01533887750b74a6ca62465e67b41a4580`.
+Reporting object `RCLE-TBCFV-B03-ACTOR100-S20`. Root's allocation is main
+`fb4f3e0ae9058675162bcb183f34182a969a935f`, final RCLE section of
+`docs/research/portfolio/decisions/2026-09-09-synthesis-execution.md`.
+Sections 2–6 retain the frozen law/counts/caps; §7 records the subsequent allocation.
+No scientific invocation has occurred at this allocation binding.
 
 ## 1. Question, reason to spend and claim ceiling
 
@@ -273,3 +275,34 @@ A necessary semantic change or an unaccounted invocation returns as a concrete c
 All work stays in `C:/Projects/HMASD-worktrees/dm-rcle-a02-20260906`, branch `codex/rcle`.
 CM owns implementation/technical acceptance only after Root's concrete allocation; DM
 owns the card and scientific intake. No additional owner approval is requested.
+
+## 7. Explicit allocation and handoff — 2026-09-09
+
+Root accepted feasibility/card/intake into main `bb3854c61`/`7296b485d` and allocated
+the complete batch at `fb4f3e0ae9058675162bcb183f34182a969a935f`: minimal study/CLI
+seed and reporting wiring, fixed fresh-W1 command list, one supplied-fixture focused
+check ≤30s within the remaining directory allowance, independent semantic review,
+then exactly the three sequential remote invocations and full technical/scientific
+intake. Main audit rows 177–178 map the preceding selection rows 135–136; Root's later
+allocation/owner-item trace remains in main and is not overwritten from this checkout.
+There is no extra Root source gate after CM acceptance and exact committed/pushed source.
+
+The same CM owns this complete batch in the existing `codex/rcle` authoring checkout.
+Before transfer, DM synchronized only the committed applicable operating instructions
+from the allocation SHA; this input-only commit does not introduce governance changes.
+CM resolves the Monitor from the live primary path in §6, directly registers the accepted
+shared handle, records dispatch separately from adoption, and returns pending collection.
+Root confirms adoption and later resumes that same CM at terminal. No DM parallel polling.
+Source SHA, command, handle, receipts and actual cost will be published in the CM/launch/E0
+records; they cannot be filled from this allocation alone.
+
+At handoff, no S20 source edit, check/model/native call, preflight or experiment has run.
+Carry a conservative **15s DM preparation charge inside the 1,500s cap** for the short
+allocation-input reads, synchronization and document/Git publication commands. Actual
+known prior B03-directory focused checks total 14.3754106s + 5.0949401s = 19.4703507s;
+CM reconciles any further recorded spend before using the selected ≤30s S20 check, without
+resetting the 300s directory allowance. This arithmetic and existing receipts are enough;
+no new cost probe is selected. Subsequent support is charged once and the chain is bounded
+by the remaining allowance with collection/publication reserved. The same 600/600/30s
+invocation caps, zero retry/replacement/extra panel or successor, and dependency-based stops
+remain. A failed invocation does not regain its allowance through a new source SHA.
