@@ -2,7 +2,7 @@
 
 ## Current observation and return state — 2026-09-08
 
-Research is **RESUMED** under OWNER_DIRECT “阅读handoff 继续开启科研” at 2026-09-09T02:23:51Z. The [P67 handoff](handoffs/2026-09-08-research-resume.md) records bounded restart work. The prior [safe pause](handoffs/2026-09-08-safe-pause-handoff.md) had no live accepted handle or unfinished closeout. The historical handle rows below are completed evidence/dependencies; new native turns or invocations are recorded separately.
+Research is **SOFT STOP / DRAINING** under OWNER_DIRECT 2026-09-09: finish work already in progress without interruption, collect/intake its evidence, publish a restart handoff, and stop. Do not start a subsequent invocation, arm, seed, object, successor engineering assignment or Pro Send. This supersedes the prior resume and rolling-refill routes until explicit owner restart. Existing accepted processes retain their observers and original bounds. The [restart handoff](handoffs/2026-09-09-soft-stop-restart.md) records closeout progress; draining is not yet a claim that every process is terminal.
 
 Root owns planning and integration under [ROOT_OPERATIONS.md](../../project/ROOT_OPERATIONS.md). The assigned CM/Operator observes by default; explicit takeover follows [EXPERIMENT_MONITOR.md](../../project/EXPERIMENT_MONITOR.md). Independent Pro provider operations belong to Transport. Exact handles and receipt bindings below remain evidence. Detailed receipts are in [root-log/2026-09-08.md](root-log/2026-09-08.md); lifecycle and priority are in [PORTFOLIO.md](PORTFOLIO.md). The older tracker is preserved in [EXPERIMENT_TRACKING_THROUGH_P45_20260908.md](../../archive/operations/EXPERIMENT_TRACKING_THROUGH_P45_20260908.md).
 
