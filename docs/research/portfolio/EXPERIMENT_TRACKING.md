@@ -1,5 +1,7 @@
 # HMASD experiment tracking
 
+VSPC1 P77 full intakef87af3f86 accepted, sole B11/8502 handle terminal exit0/507.29s; valid CHANGE_DOWN C=-.0119242503 near negative MEI,512 UP and768 WITHIN retained. Original DM actually resumed P78 one fresh independent unchanged fixed512/768/H pair through full card/source/remote execution/CM observation/intake, same434176steps3072Adam160eval1800/3600caps; new master/handle pending. No reuse of spent P77 allowance.
+
 FOLR P78 READY questiond824897be/TASK83f7beafd accepted and actually dispatched once to configured Transport; app accepted/provider Send unconfirmed. Logicalem:vap_folr_core:convergence is unbound pending reconciliation/fresh verified6Pro under cutover. Explicit public lifecycle information protocol versus no successor is the unresolved question, not an adopted change. No experimental allowance.
 
 VSP03 post-B05 and ACVC native-link-loss requests now ARCHIVED with one Send each; full GitHub responses3da3a0c44/2d914ab8b are preserved. Original DMs actually resumed full conformity/scientific intake. Link-only receipts' scientific_decision_formed=false is not treated as a full-file conclusion. VSP03 opening selects narrow-family pause; ACVC selects the proposed bounded native B and explicitly interprets inherited units, all pending full native intake. No new experiment allocated by these receipts.
