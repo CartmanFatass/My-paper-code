@@ -55,9 +55,12 @@ The later continuous512 Convergence decision selects three fresh continuous
 512-update G fits, with fixed 128/512 panels and final512 greedy G−R0 primary.
 This is finite budget re-entry in the same mechanism, not a second recast. The
 old independent128 append sequence stays paused, as do N1 and T/initialization.
-The B06 card is frozen; implementation/execution is not yet allocated and no
-512 result exists. The new question distinguishes the sampled final controller
-from its within-fit budget change, without implying undertraining or convergence.
+The allocated B06 batch is now complete: all three fixed-512 greedy controllers
+beat both rules, with G−R0 mean +0.016730143229166668 and sample SD
+0.008378536806060969. Within-fit 128→512 changes are all positive, mean
++0.006103515625000007, with different native tradeoffs. The three learning fits
+remain the independent units; neither the modest mean nor positive signs establish
+stable superiority, undertraining or convergence. No successor is allocated.
 
 ## Current position
 
@@ -284,27 +287,61 @@ comparison. Same-model/Adam continuation adds384 batches of new data, updates
 and partner co-adaptation; the paired change is not a pure optimization cause.
 The 512 endpoint remains primary, with R0/R and stochastic losses visible;
 128 is an explanatory measurement, not a separately restarted fit or selected
-best checkpoint. All three fits and failures will be retained. Their card is
-frozen at B/EXPLORE scope, with no implementation or fit allocated at this intake.
+best checkpoint. The selection and card freeze preceded implementation and
+allocation; Root subsequently allocated exactly the three fits, now completed.
 
 This remains a close call. Two small old greedy gains and low complete costs
 support a bounded further observation, while the larger seed5 loss and competent
 readiness argue that additional training may still buy only small or adverse
 tradeoffs. The old independent128 sequence remains paused; neither seed8 nor
-N1/T is restored. The selected next discriminator is the three new512 margins,
-their paired128→512 changes and success/attempt/waiting composition. A good
-endpoint with flat/negative change and an improving curve still below the rules
-will be distinguished. No stable advantage, convergence, C/UAV or automatic
-successor follows; tuned N2 headroom remains absent and MEI stays .02.
+N1/T is restored. The selected discriminator was the three new512 margins,
+their paired128→512 changes and success/attempt/waiting composition. No stable
+advantage, convergence, C/UAV or automatic successor follows; tuned N2 headroom
+remains absent and MEI stays .02.
+
+**Accepted B06 result, 2026-09-09:** fits10801/10802/10803 have final greedy
+G−R0 margins +0.02599609375 / +0.0145068359375 / +0.0096875; all also beat R.
+Their three-fit primary mean is +0.016730143229166668, sample SD
+0.008378536806060969. Fixed128 margins are +0.02076171875 /
++0.01107421875 / +0.0000439453125. Direct paired-world changes are
++0.005234375 / +0.0034326171875 / +0.0096435546875, descriptive mean
++0.006103515625000007. These are three continuous training fits, not six
+independent checkpoints. Conditional paired-world Q uncertainty uses the
+actual per-world differences, not independent endpoint variance addition.
+The final controller and positive budget-change branches support bounded
+native performance along these paths; earlier gains already explain part of
+the endpoint advantage, and continuation includes new data and co-adaptation.
+
+Stochastic execution loses to both rules at128 in all fits and beats both at512
+in all fits. At512 it still loses to its own greedy mode in10802/10803, preserving
+execution-mode limitations. Every final greedy gain over R0 combines more
+successes and less waiting with more attempts. Continuation in10801 adds waiting;
+in10802/10803 it reduces successes and adds attempts, offset by less waiting.
+Positive net change therefore does not establish componentwise improvement or
+one causal mechanism. All512 training-return rows per fit are retained; their
+late increase and nonzero parameter movement do not establish convergence.
+
+The low-confidence prediction abs(three-fit mean)<=.02 matched; the first fit
+exceeds .02, which was not a per-fit magnitude forecast. Three complete invocations
+cost25.986804s summed wall,25.787s CPU; each is below60s. MEI remains a scale and
+headroom remains absent. The smallest recommended future discriminator is one
+fresh same-budget continuous fit with the same fixed128/512 panels, asking about
+variation across learning paths and native tradeoffs. It is unselected and
+unallocated, not an automatic fourth B06 fit, longer-budget sweep or reopening
+of the old independent128/N1/T pauses. Full scientific intake preserves all
+outcomes and the three-unit claim ceiling.
 
 The strongest surviving alternative is that public dwell age already suffices and the generic
 MLP matches the prior, or that all advantage is the fixed rule rather than learning. In the new
 host R0, R or ordinary G may handle scheduling, while the local readiness prior could occupy the
 slot too early and harm its partner. The strongest current support is the shared-slot action
-consequence and the small greedy gains over both fixed rules in P67/seed6 and
-P76/seed7, alongside the separate seed-4 discovery. B03's loss to both rules is
-the strongest contradiction to repeatable ordinary-G replacement value; stochastic
-losses in all three subsequent instances remain adverse. The strongest current contradiction
+consequence and all three B06 fixed512 gains over both rules with positive paired
+budget changes and stochastic recovery. The earlier P67/seed6 and P76/seed7 gains
+and seed-4 discovery remain distinct support. B03's loss to both rules remains
+contrary to repeatable ordinary-G replacement at the old128 budget; all three
+old stochastic losses remain adverse. B06's inside-MEI mean, noisy Q, native
+component costs and two final stochastic-versus-greedy losses limit the new
+longer-budget claim. The strongest current contradiction
 to a useful initialization/learned-T gain is T matching R0 across every saved B02 world;
 the stochastic losses and three N1 final T=G=F observations remain contrary evidence with
 their distinct populations and budgets. Waiting price,
@@ -314,8 +351,14 @@ sharing K1 does not pool polarity or reopen that family.
 
 ## Evidence set
 
-The evidence set includes historical observations and the separately labelled prospective selection:
+The evidence set includes historical observations, the separately recorded selection
+and the completed B06 result:
 
+- `docs/research/candidates/vsp_03/VSP03_B06_INTAKE_20260909.md`
+- `docs/research/candidates/vsp_03/VSP03_B06_RESULT_EVIDENCE_20260909.md`
+- `docs/research/candidates/vsp_03/VSP03_B06_DM_ANALYSIS_20260909.json`
+- `docs/research/candidates/vsp_03/VSP03_B06_CURVES_20260909.png`
+- `docs/research/candidates/vsp_03/VSP03_B06_AGGREGATE_20260909.json`
 - `docs/research/candidates/vsp_03/VSP03_CONTINUOUS512_CONVERGENCE_INTAKE_20260909.md`
 - `docs/research/candidates/vsp_03/pro_packets/20260909_continuous512_convergence/archive/RESPONSE.md` at `5af9c448879bba3129df32e07a788839658f8a4f`
 - `docs/research/candidates/vsp_03/VSP03_B06_CONTINUOUS512_SCIENCE_CARD_20260909.md`
