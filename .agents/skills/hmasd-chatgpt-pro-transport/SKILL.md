@@ -14,7 +14,7 @@ the complete Send, wait, archive and return-receipt lifecycle. Root retains dire
 experiment observation, integration and native DM/CM routing; it does not operate Pro browsers.
 
 Archive completeness is a transport fact, not specification-conformance acceptance.
-The receiving Portfolio/DM checks the formed decision against current owner/spec constraints
+The receiving Root/DM checks the formed decision against current owner/spec constraints
 at its existing intake. Transport preserves the full answer and reports it without
 adjudicating or rewriting scientific requirements; a conflict never permits a duplicate Send.
 
@@ -34,7 +34,7 @@ request ID, fixed TASK URL and branch/base with the assigned command and accepte
 An older same-path HANDOFF on main or in another checkout must not replace that artifact.
 For an unsent request, verify the remote target exists and satisfies this TASK's delivery
 clause. Normal descendant HEAD advances are allowed by the current renderer; a legacy fixed-
-HEAD clause is not silently relaxed. Return a stale or incompatible task to Portfolio before
+HEAD clause is not silently relaxed. Return a stale or incompatible task to Root before
 Send. For an accepted request, observe/archive its actual reply and route any delivery-only
 correction under the existing command; changing a local registry does not amend its prompt.
 Keep prior-round delivery/Send/archive fields in their matching request history when staging
@@ -45,7 +45,7 @@ paste transport request. Send its short fixed task link verbatim, no attachment,
 read-only preamble or copied evidence. Dispatch only a bound READY_TO_DISPATCH task;
 TASK_NOT_PUBLISHED has no provider payload. This mode authorizes Pro's named file
 and comment; Transport does not write them. Archive the complete short chat reply
-and actual URLs unchanged. Portfolio/DM retrieves the full file for scientific intake;
+and actual URLs unchanged. Root/DM retrieves the full file for scientific intake;
 a delivery receipt alone is not a formed Pro decision. Repeated/uncertain receipt
 handling observes existing state, never repeats Send. Keep request-scoped existing
 waiting and cleanup, provider binding and parent model unchanged. The singleton endpoint is
@@ -58,7 +58,7 @@ Execute the operation named in the current command: authoring readiness is not a
 and a read-only reconciliation command does not include Send. A prewritten transport return
 route needs no additional planning vote. Accepted requests retain their observation/archive
 obligations; completion of another command does not cancel them. Report a missing operation or
-uncertain external acceptance to Portfolio while continuing other explicitly assigned work.
+uncertain external acceptance to Root while continuing other explicitly assigned work.
 
 Accept a request object containing `request_id`, `direction_id`, `direction_ids`,
 `workflow_node`, `conversation_binding_key`, `decision_authority=pro_final`, and
@@ -80,7 +80,7 @@ do not infer them from the provider conversation URL, a task title, or prose.
 For native DM/CM requests, source is the actual author UUID, parent is Root's app-task UUID,
 and operator is Transport's UUID. Do not send a receipt to a native child or replace parent
 with source. Root forwards the original receipt to the named native recipient from its command.
-For a Portfolio-authored request, parent remains the actual Portfolio task. Default handoffs must
+For a Portfolio request, Root is both author and receipt parent. Default handoffs must
 declare `dispatch_mode=REUSE_SINGLETON`, `operator_reuse_required=true`,
 `operator_model=gpt-5.6-luna`, and `operator_thinking=high`; validate all four and
 validate new handoffs against the current project endpoint. Transport records its actual

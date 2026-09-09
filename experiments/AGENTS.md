@@ -20,11 +20,16 @@ by a direction's attempts lives at `experiments/candidates/<direction-id>/` itse
 the example). Existing directories are never moved: their paths are bound into launch shas,
 runner argv and evidence documents.
 
-What an attempt must contain, and what it must not, is in the scope spec §3–§5: one runner with
-`argparse` and a seed, one `summary.json` per run, the resource-admission receipt, one smoke test
-under 60 s plus rule tests; no orchestration, guards, receipts, witnesses, resume machinery,
-schema validators, registries or telemetry beyond wall time and peak RSS unless a card line names
-the need. Budgets: 2,000 new lines per attempt, 600 per runner, orchestration under 30% of a diff.
+Use the scope spec §3–§5 for required outputs and additions: one runner with `argparse` and a
+seed, one `summary.json` per run, and the resource-admission receipt. Apply evidence-spec
+§11.8.6/§11.8.8 and tests/AGENTS.md: a proportionate focused check of changed behavior and primary
+output, plus rule tests when the object has branch rules. Reuse checks for unchanged paths; a
+launch boundary alone does not require another smoke. Named frozen requirements, including
+VNFC E01, retain their stated scope. Add orchestration, guards, receipts, witnesses, resume
+machinery, schema validators, registries or telemetry beyond wall time and peak RSS only for
+the need named by the applicable card and scope spec. Budgets remain 2,000 new lines per attempt
+and 600 per runner. An orchestration share above 30% is a review signal under scope spec §5,
+not a hard budget, automatic rejection or scientific-validity criterion.
 
 Native backends: a candidate that needs C++ ships its own `native_backend.py`/`native_loader.py`
 (most do) or reuses `envs/native/cpp_extension_cache.py`; the first run compiles through the

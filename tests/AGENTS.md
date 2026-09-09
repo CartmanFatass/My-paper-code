@@ -26,16 +26,26 @@ only). No lint, format, or type tooling is configured; do not add any.
 
 ```powershell
 # one research directory
-C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe -m pytest -q tests/experiments/candidates/ucope/
+C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe -m pytest -q --basetemp temp/directions/ucope/test/<run-tag> tests/experiments/candidates/ucope/
 # one file or one test
-C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe -m pytest -q tests/hmasd_run_test.py::test_name
+C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe -m pytest -q --basetemp temp/tests/<run-tag> tests/hmasd_run_test.py::test_name
 # evidence-bearing run: isolate the temp dir under the direction's scratch root
 C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe -m pytest -q -p no:cacheprovider `
   --basetemp C:/Projects/HMASD/temp/directions/<direction-id>/test/<run-tag> <paths>
 ```
 
-`--basetemp` is always under `temp/directions/<direction-id>/test/`; the flat `temp/pytest-<slug>`
-and root `.tmp_pytest_*` forms are retired.
+Every invocation supplies its own `--basetemp`: research tests use
+`temp/directions/<direction-id>/test/<run-tag>`, other tests use `temp/tests/<run-tag>`.
+All other generated test files also stay under that invocation's scratch directory.
+Choose a unique run tag when tests may overlap. Pytest's cache provider is disabled
+by default; test results belong in the existing acceptance record, not a retained cache.
+
+The creating agent/process cleans its directory on completion, on success or failure,
+using `finally` or an equivalent teardown. Before cleanup, retain only the result or
+diagnostic evidence needed by the assignment. Confirm the resolved target is the exact
+invocation directory under this checkout's `temp/`, then remove it; never clean the
+shared `temp/` or another invocation's directory. After an interrupted process, its
+creating agent performs the same cleanup before declaring the task complete.
 
 ## What tests are for here
 
