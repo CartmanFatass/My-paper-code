@@ -247,3 +247,22 @@ invocation or retry is allocated. The accepted-source SHA and exact future per-a
 argv will be recorded after technical acceptance. The earlier P67 preparation
 and zero-exposure record retain their historical state. Root-action completion
 uses the configured wake relay; nested CM/reviewer acceptance remains native.
+
+## 8. P69 source accepted — 2026-09-08
+
+DM accepts implementation `ca36e2f941d6c4d4e996a9bd919378af44ea0e93` after
+reading its actual changed source, focused fake checks and independent review.
+The [P69 source intake](FSD_UAV_INDIVIDUAL_RENEWAL_B01_P69_SOURCE_INTAKE_20260908.md)
+records the applied rule, three owned paths, 33 passing cases plus the corrected
+pairing regression, 424-line runner, 19.6496163-second observed check total,
+source/counter readback, preserved semantics and exact future per-arm argv.
+The read-only baseline source remains unchanged; no scientific fields in this
+card are revised. The reviewer-found SHA pairing gate was removed before source
+acceptance. Ignored test scratch remains after automatic cleanup rejection,
+without affecting the source or future scientific output roots.
+
+This completes P69 source/check/review/readiness only. Real scientific exposure
+remains zero, the forecast remains unscored, and no formal UAV-entry registration
+is made. Staging, admission and the complete D0/I technical execution still
+require their later explicit allocation. Old complete caps, first/final exposure,
+unique endpoint, all-outcome reading and no-retry/no-successor boundaries remain.
