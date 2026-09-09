@@ -123,3 +123,25 @@ exit $LASTEXITCODE
 ```
 
 Bash `-n` and PowerShell parser passed; exact record committed/pushed before submission. Root owns integration and later P84 check/scientific worktree/wrapper reclamation after preservation. Shared local authoring checkout stays in use.
+
+## 6. CM terminal collection and technical acceptance
+
+The one accepted handle finished **exit0**, PID **3058083**, tmux inactive. Supervisor start **2026-09-09T22:55:02+08:00**, end **2026-09-09T23:00:15+08:00**. Actual-node admission at **2026-09-09T14:55:02.034332Z** passed with physical/effective **15633850368 bytes**, each above4294967296. Outer measured wall **313.90 s**, peak RSS **554744 KiB**; F **163.87369038298493 s**, G including H **133.33607813803246 s**, runner pair **297.20977014803793 s**. Critical path and summed invocation wall coincide; aggregate CPU unmeasured. No cap/partial/failure occurred.
+
+[Terminal status](../../../../temp/directions/ucope/exp/ucope-uav-short-fixed-renewal-b03-8301-p84-20260909/terminal-status.json), [supervisor log](../../../../temp/directions/ucope/exp/ucope-uav-short-fixed-renewal-b03-8301-p84-20260909/supervisor/task.log), [summary](../../../../temp/directions/ucope/exp/ucope-uav-short-fixed-renewal-b03-8301-p84-20260909/summary.json), [readback](../../../../temp/directions/ucope/exp/ucope-uav-short-fixed-renewal-b03-8301-p84-20260909/collection-readback.json), [verification output](../../../../temp/directions/ucope/exp/ucope-uav-short-fixed-renewal-b03-8301-p84-20260909/verification-output.txt) retain direct evidence. Seven scientific files, seven supervisor files and executed wrapper were collected; remote SHA256s, exact source SHA and wrapper digest matched.
+
+Read-only collection acceptance **PASS**: full **286720** native team steps, **2048** Adam updates, **512** rollouts, **1024** training episodes, **96** evaluation episodes, **1120** explicit plus **2** constructor resets and **1600** existing diagnostic frames. No additional model/native/learner/evaluation/replay/suite invocation was used for collection. All96 episode rewards/reset streams, three paired vectors and conditional SEs, FP32 checkpoint groups, source/card/config streams, literal short-support counts and remaining/4 held-velocity/expiry diagnostics were checked. No T artifact or extra checkpoint evaluation.
+
+| Contrast | Mean | Conditional SE |
+| --- | ---: | ---: |
+| F minus G (primary) | 0.06439366516106426 | 0.008200587980245644 |
+| F minus H | -0.029184443306665326 | 0.012741511301119637 |
+| G minus H | -0.09357810846772958 | 0.012620868136163161 |
+
+Arm means F **0.13591528623865382**, G **0.07152162107758955**, H **0.16509972954531915**. These are this history's direct facts; no pooled primary or scientific disposition is asserted by technical acceptance.
+
+F duration head and both layers have **zero displacement**; whole/hidden initial=final norm **3.2817656993865967**, final layer weights/bias remain zero and relative displacement is undefined for its zero initial norm. F common actor displacement **3.041435718536377**, critic **6.447686672210693**; G common actor **3.567142963409424**, critic **4.446179389953613**.
+
+F training/evaluation renewals **437390 / 27324**, literal d2 **218812 / 13693** (total **232505**), d4 **0** throughout. Suppressed decisions **217970 / 13636**, horizon-censored holds **842 / 57**; d2=suppressed+censored also holds per F episode. F duration-head forward rows **2678988**, within the declared range. Native diagnostics agree with physical support (1, 2), expiration, held velocity and remaining/4.
+
+One allocated invocation is consumed. No further run, retry, changed support, tuning, extra evaluation, Pro send or default fourth unchanged history follows. DM owns scientific intake and evidence archival; Root owns integration and P84 remote check/scientific cwd and wrapper reclamation after verified preservation. The designated shared local checkout remains in use; prior P83 remote roots were untouched.
