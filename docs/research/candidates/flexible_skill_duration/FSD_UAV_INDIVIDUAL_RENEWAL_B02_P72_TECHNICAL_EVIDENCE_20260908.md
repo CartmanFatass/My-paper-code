@@ -49,3 +49,23 @@ Future production argv, only after DM source acceptance, from the accepted-sourc
 DM source acceptance precedes scientific submission under this P72 handoff; existing P72 then authorizes one D0→I batch without another Root request. Literal cwd/source/handles/admission/payloads will be committed and staged before each submission. Fresh on-node physical/effective≥4GiB admission and outer3600/18000s caps include imports, learning and closed publication with zero grace/retry/resume. Same CM remains sole observer/collector; DM owns science/owner/audit/Root relay. P70 evidence and old blocked P69 scratch are untouched.
 
 P72 scratch cleanup: after retaining check output above, the exact invocation directory was resolved under this checkout's direction test root. Automatic approval review rejected native PowerShell `Remove-Item -LiteralPath` for that exact P72 scratch with “blocked by policy”; no deletion occurred and no bypass followed. The ignored P72 scratch/checks.log remains. This housekeeping limitation does not alter source or fake-check acceptance. The separately blocked P69 scratch was never targeted.
+
+## P72 exact execution binding
+
+DM source acceptance was published at `f95ebcb037865bd0020dfc0e14b3e09302ba4562` before this phase. Accepted scientific source is exactly `08199a932671d9bacdbe4eb0bfebab38c37fca1f`. Configured node/interpreter/supervisor are unchanged from the handoff. Detached execution cwd `/home/wu/hmasd-worktrees/fsd-uav-b02-p72-08199a932` was created at that exact SHA with sparse checkout disabled. Actual source and staged LF syntax/digest checks follow before submission; no fake suite is repeated.
+
+Literal inputs are the only explicitly tracked files under `temp/directions/flexible_skill_duration/exp/uav_b02_p72_control_20260908`: `D0.sh` and `I.sh`. Remaining control artifacts stay scoped/ignored. Remote staging `/home/wu/hmasd-inputs/fsd-uav-b02-p72-20260908`. Scripts change to the exact cwd and join canonical fresh on-node admit-memory directly with `&&` to the exact B02 argv above. Admission receipts remain outside the scientific roots. Scientific outputs are the new B02 root; I reads only its original B02 D0 summary.
+
+| LF input | SHA256 |
+| --- | --- |
+| D0.sh | bbb490d21391dc839c9a234d4651446398588f15616b50740bd9f2a6e39f40f8 |
+| I.sh | c51de29af52b338b329d622e981d7df94ea90262d1b8ef2305c618d6f7f5f515 |
+
+Literal supervisor payloads, sequential D0 then I after terminal collection; at most one accepted submission each:
+
+```text
+/usr/local/bin/agent-task run fsd_uav_b02_p72_D0_08199a932 '/usr/bin/time -f elapsed_seconds=%e,peak_rss_kib=%M,user_seconds=%U,system_seconds=%S,exit_status=%x -o /home/wu/hmasd-inputs/fsd-uav-b02-p72-20260908/D0_process_time.txt /usr/bin/timeout --signal=KILL 3600s /bin/bash /home/wu/hmasd-inputs/fsd-uav-b02-p72-20260908/D0.sh'
+/usr/local/bin/agent-task run fsd_uav_b02_p72_I_08199a932 '/usr/bin/time -f elapsed_seconds=%e,peak_rss_kib=%M,user_seconds=%U,system_seconds=%S,exit_status=%x -o /home/wu/hmasd-inputs/fsd-uav-b02-p72-20260908/I_process_time.txt /usr/bin/timeout --signal=KILL 18000s /bin/bash /home/wu/hmasd-inputs/fsd-uav-b02-p72-20260908/I.sh'
+```
+
+Outer timeouts cover the whole script from adjacent admission through imports/setup/learning/own evaluation/closed pair publication, with KILL and zero grace. Time/RSS and minimal aggregate user+system CPU accounting remain outside scientific output roots. Supervisor directories `/home/wu/.agent-tasks/<handle>/` preserve actual command, log, status, PID/start and exit facts. Acceptance, fresh admission and scientific execution remain separate observations. Both handles are proposed, not accepted, at this input-binding boundary. No retry/resume, additional scientific endpoint, source repair or old-data rescue is allocated.
