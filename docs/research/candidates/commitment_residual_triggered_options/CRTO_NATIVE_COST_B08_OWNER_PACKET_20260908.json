@@ -1,0 +1,39 @@
+{
+  "question": "是否接受这张前瞻性B08卡的科学定义？已冻结文档；实现与实验仍为0分配。",
+  "changes_if_approved": [
+    {
+      "target": "docs/research/candidates/commitment_residual_triggered_options/CRTO_NATIVE_COST_B08_SCIENCE_CARD_20260908.md",
+      "from": "P68提出的未冻结比较",
+      "to": "精确冻结三臂共同原生成本损失、三个原生对比、长期RAW合格解释及完整时间记账"
+    }
+  ],
+  "if_refused": "拒绝则停止该卡的后续分配；修改意见在下一边界落实，保留Pro决定和旧结果。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/commitment_residual_triggered_options/pro_packets/20260908_native_cost_reentry_convergence/archive/RESPONSE.md",
+      "quote": "Select the single native-cost B proposed in P68.",
+      "why": "新目标直接按合法动作的原生成本分配信用；RAW和打乱对照共用目标，旧RAW防止比较器退化制造正值。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/commitment_residual_triggered_options/pro_packets/20260908_native_cost_reentry_convergence/archive/RESPONSE.md",
+      "quote": "Retaining PARK is the close runner-up.",
+      "why": "唯一合格旧比较仍是残差负值，且种子和样本已用于开发；同样目标可能更帮助RAW。"
+    }
+  ],
+  "uncertainty": [
+    "尚无新训练结果，仍预测不达原门槛更可能。",
+    "旧RAW只在长期合格；失败对照不能自动证明通用预处理。",
+    "一次发送末尾多了跨；实际发送字节及哈希未恢复。GitHub固定答复与Issue交付已核实，内容完整合规。",
+    "缺少调优同信息headroom；新目标和发表耗时未测。"
+  ],
+  "cost": {
+    "compute": "本次0新增科学调用；未来拟774 gate更新/24768样本/96评价决定。旧计时外推共享515.38秒；拟每臂1200秒、完整共享1500秒，尚未分配。",
+    "owner_time": "异步查看卡和简报，无需逐次批准",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing；Root处理实际分配和集成"
+  },
+  "verdict_text": "DM执行合规Convergence选择，冻结这一个前瞻B08卡；所有三项原生对比必须超过0.0025才有该端点的对齐信号。当前没有实现、暂存、运行或重发。",
+  "source": "docs/research/candidates/commitment_residual_triggered_options/CRTO_NATIVE_COST_B08_SCIENCE_CARD_20260908.md"
+}
