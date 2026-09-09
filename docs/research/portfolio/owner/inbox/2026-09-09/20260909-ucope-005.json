@@ -1,0 +1,79 @@
+{
+  "id": "20260909-ucope-005",
+  "created": "2026-09-09T04:57:35-07:00",
+  "direction": "ucope",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "P80：新训练检验固定续约是否超过悬停",
+  "context": "固定续约在两次独立训练中都高于反馈，但P79低于悬停。新7901以前瞻F-H为主，沿用0.01阈值，保留反馈比较与旧结果。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "执行已分配的一次7901完整F/G/H比较并按新卡解释全部结果。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "在下一边界停止未执行工作，保留既有证据与原有读法。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "按所有者具体修改处理未执行对象，不回改已观测结果。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "原生悬停比较能直接检验运动收益；已按Root P80分配一次完整训练，不要求结果有利。",
+  "evidence": [
+    "docs/research/candidates/ucope/UCOPE_UAV_FIXED_RENEWAL_HOVER_B01_SCIENCE_CARD_20260909.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-09.md#L19",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否保留已按P80委托选定的一次新训练，将固定续约超过悬停作为前瞻主问题？",
+    "changes_if_approved": [
+      {
+        "target": "docs/research/candidates/ucope/UCOPE_UAV_FIXED_RENEWAL_HOVER_B01_SCIENCE_CARD_20260909.md §5",
+        "from": "尚无7901对象；P78/P79仍以F−G为主",
+        "to": "新7901对象以F−H为主，绝对阈值0.01，同时保留F−G/G−H；旧主结果不变"
+      }
+    ],
+    "if_refused": "在下一干净边界按所有者指令停止或修改尚未执行的工作，保留已经产生的所有结果及原有解释。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_UAV_FIXED_RENEWAL_B02_P79_INTAKE_20260909.md",
+        "quote": "The two prospective F−G observations support limited interest in fixed stochastic\npersistence as a learned actor/critic package.",
+        "why": "已有真实学习后的反馈对照信号，值得直接问新训练是否优于无运动选择。"
+      },
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_UAV_FIXED_RENEWAL_HOVER_B01_P80_INTAKE_20260909.md",
+        "quote": "Measuring native value beyond no motion has\nmore direct decision value now than another F−G sign alone.",
+        "why": "新问题直接回应P79中固定续约并未显示超过悬停的收益。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_UAV_FIXED_RENEWAL_B02_P79_INTAKE_20260909.md",
+        "quote": "F−H **−0.0035128012832155745**, SE **0.011513244819621678**,\n15 positive/17 negative, is inside ±0.01 with a negative point.",
+        "why": "新训练可能仍不能超过悬停；已有两次反馈对照正点不等于稳定胜出。"
+      }
+    ],
+    "uncertainty": [
+      "一次新训练不能估计训练总体的可靠区间，也不能解释平滑、信息或优化哪条路径起作用。",
+      "悬停不训练，不能被称为调优上界或普遍胜任的比较器。"
+    ],
+    "cost": {
+      "compute": "仅一次：两臂各512训练回合，F/G/H各32最终评估；286720步、2048次Adam、96评估；完整单臂1800秒、整次3600秒上限。P79实测301.26秒只是参考。",
+      "owner_time": "可异步覆盖；无需逐次批准。",
+      "reversibility": "costly",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "推荐按P80另做一次独立训练7901，将固定续约相对悬停的原生回报差设为前瞻主问题，并保留反馈比较。沿用0.01阈值和原预算，不改旧结果，也不要求新结果有利。悬停只是现有合法的无训练比较器，不代表调优上界或普遍胜任的基线。",
+    "source": "docs/research/candidates/ucope/UCOPE_UAV_FIXED_RENEWAL_HOVER_B01_P80_INTAKE_20260909.md"
+  },
+  "starred": false
+}
