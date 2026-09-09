@@ -1,8 +1,9 @@
 # VSPC1 B09 P74 intake — independent repeat at768 episodes
 
-Current state: prospective card frozen; zero new scientific exposure. One P74
-submission is allocated. Source acceptance, execution and all-outcome intake
-remain ahead; no result is implied by the forecast.
+Current state: source accepted at4c9dc8b3d and exact P74 execution input bound;
+zero new scientific exposure. One submission is allocated. Remote staging,
+execution and all-outcome intake remain ahead; no result is implied by the
+forecast or technical acceptance.
 
 ## 1. Assignment and starting state
 
@@ -120,3 +121,36 @@ recommended/auto-applied accept, with the Chinese
 [decision packet](VSPC1_NATIVE_HOLD_VALUE_B09_OWNER_PACKET_20260909.json) and
 [audit selection row9](../../portfolio/audit/2026-09-09.md#L9). Publication does
 not wait for a reply. Scientific exposure remains zero at this boundary.
+
+## 5. Source acceptance and exact execution handoff
+
+CM returned clean/pushed source
+`4c9dc8b3de9b7827612b962aa4a4d085dc7cd411`. I inspected the actual35-line
+runner,75-line binding test, complete commit surface and
+[technical record](VSPC1_NATIVE_HOLD_VALUE_B09_TECHNICAL_ACCEPTANCE_20260909.md),
+including the retained focused_result.json stdout, exit0 and whole wall
+11.312071900000092s. All12 checks passed (9.10s pytest); the cacheprovider
+warning does not alter the result. The code fixes8402/B09/carddate20260909,
+Config768/normalization/width133/private840200012, complete/limited/incomplete
+exits, invalid-key/switch rejection before state, and both checkpoint identities.
+No model, optimizer, forward, native episode or evaluation was invoked.
+
+Only the new runner, its tests and technical record changed. The14 previously
+declared source surfaces retain e9a05af5 scientific semantics; no shared
+implementation/main UCOPE change is required. Existing full768 and scientific
+coverage is reused, not rerun. Production adds35 lines with scope §4 none and no
+observed §5 breach. Owned scratch removal is recorded. These facts establish
+engineering conformance, not performance or mechanism value.
+
+Options: (a) accept this identity-only source and execute the already allocated
+P74 route; (b) return a concrete defect. Recommend/select(a), since no defect was
+found. Owner-delegated decision (unattended,2026-09-03 instruction): (a),
+**OWNER_DELEGATED object tier**. The exact scientific SHA/node/cwd/handle/output/
+admission/literal seven-line payload is fixed in
+[card §7](VSPC1_NATIVE_HOLD_VALUE_B09_SCIENCE_CARD_20260909.md#7-accepted-source-and-exact-p74-execution-binding).
+CM commits/pushes the wrapper separately, stages the exact accepted source and
+canonical helper, checks actual input/readback/prior state, and continues through
+fresh actual-node admission and the single detached submission to sole
+observation/collection/technical acceptance. No Root permission step or second
+submission is supplied. Main and direction owner reviews remain empty at this
+source boundary; the original prediction and all frozen limits are unchanged.
