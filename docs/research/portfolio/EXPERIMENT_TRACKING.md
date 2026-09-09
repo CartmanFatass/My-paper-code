@@ -42,6 +42,8 @@ MGTAP post-B01 request nowARCHIVED: full response251bffbc4/Issue5comment55994844
 
 VSP03 P76 full intake49e14080c integrated maina7a7267b8; exact detached execution checkout retired after clean/byte/evidence checks, output retained. Same DM advances zero-exposure next direction question, no seed8 allocation. VSPC1 P76 is terminal/technically collected,475.85s with fixed CHANGE_DOWN C; original DM scientific intake continues. Earlier running-handle descriptions are superseded.
 
+MGTAP full intakecec19bac9 integrated eea198bb7: current native actor family PARK, no successor, broader ACTIVE lifecycle unchanged. UCOPE full intake89c098bf1 integrated; new P77 T/F/G/H instance allocated to original DM/CM, no handle yet. Original FOLR DM actually resumed bounded source/readiness mapping as replacement. VSP03/ACVC question work and VSPC1 terminal intake continue.
+
 ## Historical soft-stop closeout updates — 2026-09-09
 
 - CRTO P72: response/intake/handoff integrated at63550cd83; DM stopped, no live experiment or Pro generation, no successor B. See [handoff](../candidates/commitment_residual_triggered_options/CRTO_RESTART_HANDOFF_20260909.md).
