@@ -148,3 +148,32 @@ Only the engineering checkout/check was staged. P70/P71 evidence and frozen card
 preserved. After DM acceptance the same CM may continue the already allocated P72 batch;
 no intermediate Root allocation request is needed. Root assigns later test-checkout
 archive/reclamation after preservation; no live successor checkout is reclaimed here.
+
+## 5. DM source acceptance and same-allocation continuation
+
+**Accepted source: `7d3aaab4646360e2473ae352b09c3933ccf8dacf`.** DM read the
+complete production diff and CM's technical record at
+`769e67b97fe53303a13aaef70aad341869269c15`, plus the raw exact-source test
+log and terminal source/tree readback. The new master/object/card mapping
+and every renewal/credit/head/count/primary branch match card§7. Protected
+algorithm and prior bindings remain unchanged; no scientific semantic or scope
+addition was accepted. The one suite passed99 checks, full wall3.75s of300s,
+exit0, with scratch cleanup recorded. DM did not rerun CM tests or fixtures.
+
+Object-tier options: (a) accept conforming source and return the existing P72
+execution to the same CM; (b) return a concrete source/check gap; (c) impose
+a stronger review or scientific prerequisite. Recommend and execute **(a)**.
+Owner-delegated decision (unattended, 2026-09-03 instruction): **(a)**.
+This is technical acceptance, not a native performance result. No substantive
+credit change or unresolved acceptance gap calls for another review.
+
+At **2026-09-08T23:48:53-07:00**, current owner reviews were empty and applicable UCOPE audit
+owner columns in main and this checkout were empty. No item needed answering.
+Scientific staging/admission/submission remain zero at this acceptance. P72's
+original Root allocation now continues without an intermediate Root request:
+use this exact source, the prospective card at
+`5bdb7aba1fbfcc872a675c97734ee8481924cbee`, and the unchanged one-pair/cap/
+no-retry boundaries. The same CM stages exact inputs, takes fresh canonical
+memory admission and owns the single accepted detached run through collection.
+Do not repeat the already accepted focused suite. Card§7 and intake§2 retain
+the full five-item handoff; DM's source acceptance changes no scientific budget.
