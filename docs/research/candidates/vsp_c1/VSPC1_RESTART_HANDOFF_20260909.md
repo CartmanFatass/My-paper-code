@@ -1,4 +1,13 @@
-# VSPC1 restart handoff — P73 stop and P74 completion, 2026-09-09
+# VSPC1 restart handoff — P76 allocated, 2026-09-09
+
+P76 current boundary: Root separately allocates the same-trajectory512/768
+comparison recommended after P74. The prospective
+[B10 card](VSPC1_NATIVE_HOLD_VALUE_B10_SCIENCE_CARD_20260909.md) and
+[intake](VSPC1_NATIVE_HOLD_VALUE_B10_INTAKE_20260909.md) select8501 and one
+matched pair with434176 steps/3072 Adam/160 evaluations, continuous1800s
+arm/3600s whole limits. No P76 result or scientific submission exists yet;
+the original DM/CM and shared direction checkout carry the authorized batch.
+P74 completion and the older P73 stop below are historical boundaries.
 
 P74 current boundary: the owner explicitly resumed research; Root's committed
 [P74 allocation](../../portfolio/handoffs/2026-09-09-research-resume-p74.md)
