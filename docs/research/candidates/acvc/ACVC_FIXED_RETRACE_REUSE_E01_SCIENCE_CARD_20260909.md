@@ -3,11 +3,23 @@ Binding MARL structure: (d) multi-agent partial observability: each UAV acts on 
 
 # ACVC fixed retrace reuse E01 — prospective card
 
-Date: 2026-09-09. **PROPOSED, NOT FROZEN; no scientific invocation allocated.**
-Requested class: a named B/EXPLORE exception for fixed trained-policy execution-rule
-exploration, pending `em:acvc:convergence`. Current empirical-spec §§5.2 and 11.4 require
-nonzero new learner updates, which this zero-new-fit proposal deliberately does not have.
-It cannot silently become A or C. Preparation is read-only A/RECON plus card authoring.
+Date: 2026-09-09. **FROZEN scientific definition; no source implementation or scientific invocation allocated.**
+Class of the proposed result-bearing study: B/EXPLORE under the object-limited ACVC_FIXED_RETRACE_REUSE_E01 exception in MARL_EMPIRICAL_EVIDENCE_SPEC §11.4.1. The complete Convergence decision grants that exact specification plan; its repository application is recorded separately through existing intake. The study compares fixed execution rules on retained trained policies, with zero new fitting, training, optimizer updates and parameter displacement during evaluation. Its ceiling is a preliminary native execution-package signal or counterexample conditional on the two selected retained bases and fresh panels. Preparation remains read-only A/RECON plus documentation. This class decision neither freezes the card nor allocates source implementation or scientific execution.
+
+**Separate application and freeze record (2026-09-09):** The complete original-node response
+at `a243f23dac21f84aa8de001bbbbd217f3e71024e` was read and accepted as conforming. Its four
+exact card replacements below are applied. Root's subsequent post-response assignment
+explicitly requested the ready frozen card; the DM freezes the unchanged scientific choices
+under that assignment and standing object-tier delegation, separately from the class decision.
+The original prospective authority narrative is retained below as preparation history. All
+scientific selections, including the declared seed laws, contrasts, MEI, predictions and
+180-second complete cap, are now the frozen definition for any later authorized execution;
+planned exposure and timing references remain unobserved, and no invocation is allocated.
+Root owns the shared §11.4.1 insertion and its application record; this card does not edit or
+substitute for the specification. Root applied the exact insertion on main at
+`996f121eaba29bfb22af29e0f252a2c4c4eb7d41`; its immutable text matches the granted block.
+See the [Convergence intake](ACVC_FIXED_RETRACE_REUSE_E01_CONVERGENCE_INTAKE_20260909.md)
+for exact source, scope checks, the separate freeze decision and application state.
 
 ## 1. Question, authority and smallest useful observation
 
@@ -54,9 +66,7 @@ after each step feed back that arm's actual sent command. Each arm owns its traj
 | F | On the accepted `Binding.observe(obs, b)` mask, the returned retrace command; otherwise b. |
 | dwell | On the identical predicate evaluated on dwell's own history and sampled b, zero xyz velocity; otherwise b. |
 
-The accepted predicate retains one prior lowest-SINR non-saturated user coordinate, uses
-only unambiguous coordinate matches in private observations, detects loss of the UAV's own
-eligibility, and requires b to point away. Empty/reset/ambiguous cases do not qualify.
+The accepted predicate retains the preceding observation's lowest-SINR nonpadding user coordinate when that anchor is unambiguous; a saturated preceding list may supply this one anchor. A loss cue requires a current visible count of 1–19 and no current visible coordinate within the accepted normalized L-infinity 2e-6 vicinity of the retained anchor, and an intervention additionally requires the sampled proposal's positive away-dot. Empty, reset, ambiguous and currently saturated cases do not qualify. Use Binding.observe unchanged.
 F reverses the UAV's **prior actual realized displacement**, divided by the existing 30-unit
 velocity scale and clipped to the legal range. The source of record is
 `experiments/candidates/acvc/native_link_loss_b01/binding.py`; its predicate is unchanged.
@@ -103,8 +113,7 @@ filters for excluding returns and are not additional success gates.
 
 MEI is **0.01 J = 2.56 S**, chosen as a useful one-percentage-point native mean-reward scale
 for deciding whether this small reuse comparison merits further work, consistent with the
-recent native ladder. The historical **0.25 S = 0.0009765625 J** remains the original
-old-host threshold; it is not an E01 rescue criterion. The current native host has no tuned
+recent native ladder. The inherited ACVC quarter-unit meaning remains 0.25 episode-sum S, equivalent to 0.0009765625 J on this 256-step native host; the old-host threshold and envelope remain unchanged, and no E01 result rescues the failed T/G comparisons or reopens the closed old host. The current native host has no tuned
 same-information baseline/upper headroom record. F is an attained comparator, not an upper.
 
 Proposed rule, applied independently to all four primary contrasts and both secondary ones:
@@ -129,15 +138,7 @@ taken (unattended); check relevant reviews at the later clean boundary.
 
 ## 5. Exposure and complete cost proposal
 
-Machine-generated counts and exposure are in the prospective facts. Future proposal:
-**2 retained base fits; 0 new fits; 0 training episodes/steps/optimizer calls; 6 fixed panels;
-384 scored episodes; 98,304 team steps; 491,520 base-agent forwards; 6 base loads and
-environment constructors with 6 unscored constructor resets; no gate or critic construction.**
-The retained DENSE phases each had 512 training episodes at 256 steps; their earlier REL/DENSE/H
-collection totals are preserved separately, never billed as new E01 work. E01 intentionally
-has zero parameter displacement and no optimizer capable of moving in its budget. That
-explicit exposure line requires the requested named exception, not an assertion that §11.4
-is already satisfied. Preparation/consultation adds zero scientific exposure.
+The prospective facts provide the machine-generated preparation and planned-exposure record. Preparation/consultation has zero scientific invocations, model constructions or loads, native team steps, optimizer updates, evaluation episodes, tests, profiles and probes. Proposed future E01, not allocated: retained_base_fits=2; new_fits=0; new_training_episodes=0; new_training_team_steps=0; new_optimizer_updates=0; parameter_displacement_during_evaluation=0, intentionally frozen after loading; fixed_panels=6; scored_evaluation_episodes=384; native_team_steps=98304; base_agent_forwards=491520; base_loads=6; environment_constructors=6; unscored_constructor_resets=6; gate_constructions=0; critic_constructions=0. These are planned counts, not observed execution. Report actual counts and each rule's opportunity, intervention and distinguishability counts without filtering native returns by those counts. The explicit zero-new-learning disclosure substitutes for learner movement only under §11.4.1; it does not assert satisfaction of ordinary B's nonzero-update requirement. Each retained DENSE fit's 512 training episodes/131072 team steps are old provenance, not new E01 exposure or new paired training samples; the original full-study counts remain separately recorded.
 
 Dominant algorithm work: 2 bases x3 arms x64x256x5 base-agent forwards; F/dwell add at most
 2 bases x2 rules x64x256x5x20x2 = **13,107,200** coordinate-pair checks. There is no candidate
