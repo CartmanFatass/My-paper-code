@@ -40,7 +40,7 @@ def templates(seed):
     return actor, critic
 
 
-def arm_copy(common, treatment, duration_head_seed=None):
+def arm_copy(common, treatment, duration_head_seed=None, freeze_duration=False):
     actor, critic = copy.deepcopy(common)
     if treatment:
         actor.duration_conditioned = duration_head_seed is not None
@@ -53,6 +53,8 @@ def arm_copy(common, treatment, duration_head_seed=None):
         final = actor.duration[-1] if actor.duration_conditioned else actor.duration
         nn.init.zeros_(final.weight)
         nn.init.zeros_(final.bias)
+        if freeze_duration:
+            actor.duration.requires_grad_(False)
     return actor, critic
 
 
