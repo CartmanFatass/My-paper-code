@@ -362,3 +362,16 @@ an intact matched W100/W1 endpoint; none is newly selected or allocated. Root's 
 Portfolio validity review is next. There is no recast, family closure or Portfolio
 change in this intake. Complete failure/cost/diagnosis limits and preserved dependencies
 are recorded in the intake and E0; the pause handoff remains historical provenance.
+
+## Prospective completion of the actor100 comparison selected — 2026-09-09
+
+The owner-directed synthesis and CM feasibility lead to an object-tier selection of
+one fresh update-0 W100 plus the missing reference, with historical W1 explicitly reused
+under unchanged seed19/FLEX/learner/native/evaluation conditions. See
+`RCLE_B03_RECOVERY_SELECTION_INTAKE_20260909.md` and its recovery card. This is the next
+discriminator of the same weighted learning law; no new efficacy evidence, independent
+seed, recast or family disposition is claimed. The tiny W1 change, adverse secondary
+cell, saturated recovery, unknown old W100 prefix and unresolved fatal cause all remain.
+Root receives the prospective750s/one-fit plan for explicit engineering/invocation
+allocation. No call is allocated by this selection, and a necessary shared semantic
+change returns for a new judgment about whether W1 is still a valid comparator.
