@@ -3,7 +3,8 @@ Binding MARL structure: (b) temporal abstraction or termination, with five co-ad
 
 # VSPC1-NATIVE-HOLD-VALUE-B08 — B/EXPLORE, P73
 
-Current state: prospective definition; zero new scientific exposure.
+Current state: valid complete DOWN for8401 at768 episodes; §8 records the result.
+The prospective definition, prediction and exact allocation remain in §§1–7.
 
 ## 1. Question and authority
 
@@ -244,3 +245,28 @@ the one allocated submission. Fresh actual-node physical/effective memory≥4GiB
 precedes scientific state inside this whole-timed chain. CM solely observes and
 collects; no Root adoption or intermediate allocation is required. Source
 acceptance creates no new invocation or allowance beyond §6.
+
+## 8. Terminal result and owner-directed stop — 2026-09-09
+
+The sole P73 submission completed at scientific source
+`e9a05af5d51da571642f51c5b7b8f00c96f1c6b5`, exit0, with all768 training
+counts/publication/checkpoints accepted. [E0](VSPC1_NATIVE_HOLD_VALUE_B08_RESULT_EVIDENCE_20260908.md)
+and [intake §6](VSPC1_NATIVE_HOLD_VALUE_B08_INTAKE_20260908.md#6-p73-valid-result-intake-and-decisions--2026-09-09)
+record **DOWN**, Delta−.03386492041295242, conditional SE .012832801495252571,
+24/32 adverse primary identities. GATED−H−.04059257431545819 and
+MLP−H−.0067276539025057655 retain23/19 adverse identities. Both learned mean
+returns are below H; UP(.55) missed, Brier .3025. No prediction or rule changes.
+
+Actual417792 steps/3072 Adam/96 final evaluations and768 moment merges satisfy
+the allocated real-learner counts. Whole505.00s, conservative complete-arm
+bounds293.7102/226.9720s and544.87109375MiB peak RSS are retained with optional
+`resources_unmeasured` qualifications. No observed cap/scope breach or extra run.
+This is one local new-budget counterexample; the old512 three-pair regime and
+earlier observations remain separate, with no causal-budget or stable claim.
+
+The owner soft stop arrived during the accepted invocation. Collection/intake
+complete that invocation, then work stops. Its one-submission allowance is spent,
+zero remain; B has no object-consumption state. A later independent768 pair is
+held advice only: no new card/key/task/run/Pro Send. The
+[restart handoff](VSPC1_RESTART_HANDOFF_20260909.md) records the exact stopped
+state without a family, recast, lifecycle, priority, C or formal UAV-entry change.
