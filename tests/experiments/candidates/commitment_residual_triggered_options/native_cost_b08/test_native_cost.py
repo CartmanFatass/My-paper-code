@@ -144,6 +144,8 @@ def test_loss_loop_preserves_b04_update_semantics():
     old, new = inspect.getsource(e.b04.train_path), inspect.getsource(e.train_path)
     def update_body(s):
         s = s[s.index("    order ="):s.index("        if update in trace_updates:")]
+        s = s.replace('        if all(parameter.grad is None for parameter in model.parameters()):\n'
+                      '            raise RuntimeError("B08 gate loss reached no model parameter gradients")\n', "")
         return s.replace("check_wall(started, time.perf_counter() - arm_started)", "monitor()").replace(
             "base.legal_masked_mse", "expected_native_cost_loss").replace("RAW gate", "B08 gate")
     assert update_body(old) == update_body(new)
@@ -224,3 +226,91 @@ def test_adverse_and_mixed_reading_requires_individual_contrast_trust():
         {"endpoint": "SHORT", "reference": "new_RAW", "delta": -.003, "material": True}]
     assert result["mixed_budget"]
     assert values["SHORT"]["historical_B04_RAW"]["delta_regret"] == -.004
+
+
+@pytest.fixture
+def stationary_training(monkeypatch):
+    """Connected equal-cost logits; real Adam on a tiny synthetic module, no host/model package."""
+    state = SimpleNamespace(steps=0, gradients=[], model=None)
+
+    class TinyGate(torch.nn.Module):
+        def __init__(self, unused_rng):
+            super().__init__()
+            self.logits = torch.nn.Parameter(torch.arange(1., 9.))
+            state.model = self
+
+        def forward(self, histories, lengths, packet):
+            return self.logits.unsqueeze(0).expand(len(lengths), -1)
+
+    def collate(rows, packets, indices):
+        n = len(indices)
+        return (torch.zeros(n, 1, 42), torch.ones(n, dtype=torch.int64),
+                torch.zeros(n, 52), torch.ones(n, 8, dtype=torch.bool), torch.ones(n, 8))
+
+    original_step = torch.optim.Adam.step
+    def step(optimizer, *args, **kwargs):
+        state.gradients.append(state.model.logits.grad.detach().clone())
+        result = original_step(optimizer, *args, **kwargs)
+        state.steps += 1
+        return result
+
+    monkeypatch.setattr(e.base, "CommonHistoryGate", TinyGate)
+    monkeypatch.setattr(e.base, "counter_rng_for_namespace", lambda *args: None)
+    monkeypatch.setattr(e.base, "_collate", collate)
+    monkeypatch.setattr(torch.optim.Adam, "step", step)
+    state.run = lambda: e.train_path((None, None), SimpleNamespace(values=None), seed=0,
+        final_update=2, trace_updates=(1, 2), batch_size=2, monitor=lambda: None, representation=e.RAW)
+    return state
+
+
+def test_finite_zero_movement_emitted_after_connected_adam_updates(stationary_training):
+    state = stationary_training
+    snapshots, exposures, _, scales = state.run()
+    assert state.steps == 2 and len(state.gradients) == 2
+    assert all(torch.equal(g, torch.zeros(8)) for g in state.gradients)
+    assert state.model.logits.grad is not None
+    assert scales["initial_parameter_l2"] > 0
+    assert set(snapshots) == {1, 2}
+    for update, line in enumerate(exposures, start=1):
+        assert line["update"] == update and line["processed_examples"] == update*2
+        assert line["parameter_displacement_l2_over_initial_l2"] == 0.
+        assert line["parameter_displacement_linf_over_initial_linf"] == 0.
+        assert line["last_batch_expected_native_cost_loss"] == 0.
+        assert torch.equal(snapshots[update].logits, torch.arange(1., 9.))
+
+
+@pytest.mark.parametrize("fault,message,expected_steps", [
+    ("loss", "loss became nonfinite", 0),
+    ("gradient", "gradient became nonfinite", 0),
+    ("parameter", "parameter became nonfinite", 1),
+    ("movement", "movement became nonfinite", 1),
+    ("disconnected", "no model parameter gradients", 0),
+    ("detached", "does not require grad", 0),
+])
+def test_training_integrity_failures_remain_detected(stationary_training, monkeypatch, fault, message, expected_steps):
+    state = stationary_training
+    original_loss = e.expected_native_cost_loss
+    if fault == "loss":
+        monkeypatch.setattr(e, "expected_native_cost_loss", lambda *a: original_loss(*a)*float("nan"))
+    elif fault == "gradient":
+        def loss(*args):
+            args[0].register_hook(lambda g: torch.full_like(g, float("nan")))
+            return original_loss(*args)
+        monkeypatch.setattr(e, "expected_native_cost_loss", loss)
+    elif fault == "parameter":
+        original_step = torch.optim.Adam.step
+        def step(*args, **kwargs):
+            result = original_step(*args, **kwargs)
+            with torch.no_grad():
+                state.model.logits[0] = float("nan")
+            return result
+        monkeypatch.setattr(torch.optim.Adam, "step", step)
+    elif fault == "movement":
+        monkeypatch.setattr(e.base, "_movement", lambda *a: {"synthetic_displacement": float("nan")})
+    elif fault == "disconnected":
+        monkeypatch.setattr(e, "expected_native_cost_loss", lambda *a: torch.tensor(0., requires_grad=True))
+    else:
+        monkeypatch.setattr(e, "expected_native_cost_loss", lambda *a: original_loss(*a).detach())
+    with pytest.raises(RuntimeError, match=message):
+        state.run()
+    assert state.steps == expected_steps
