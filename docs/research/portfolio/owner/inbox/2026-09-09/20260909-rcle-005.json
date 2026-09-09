@@ -84,5 +84,15 @@
     "verdict_text": "Recommend/select\n   (a), preserving (b) as the close runner-up and item `20260909-rcle-004`.",
     "source": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B03_S20_SELECTION_INTAKE_20260909.md"
   },
-  "starred": false
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-09T22:50:14+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/decisions/2026-09-09-synthesis-execution.md",
+      "record": "docs/research/portfolio/decisions/2026-09-09-synthesis-execution.md",
+      "state": "applied",
+      "summary": "Root accepted complete card/intake and read-only feasibility at bb3854c61/7296b485d. Selected fresh S20 implementation/review/three-invocation/collection batch now allocated to original DM/CM under synthesis continuation;600/600/30s within1500 complete including≤30s check. No execution observed yet; close-call004 and contrary outcomes preserved."
+    }
+  ]
 }
