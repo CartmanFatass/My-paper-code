@@ -21,8 +21,9 @@ This authority preserves the direction's source-grounded scientific question, ev
 
 The current selected question is whether a bound private observation of lost native link
 eligibility makes selective retracing useful against competent fixed apply/retrace controls
-and a containing generic learned gate. The original Convergence node selected this one native
-candidate on 2026-09-09; no new performance is established. The historical source-grounded
+and a containing generic learned gate. In the first bounded native B on 2026-09-09, the
+structured gate improves over always-apply and the generic gate, but fixed retrace is stronger.
+The historical source-grounded
 statement remains provenance: “Adaptive learner lost to the deterministic comparator; retain
 the negative-evidence protocol lesson.” The closed uncertain/delayed family remains closed.
 
@@ -32,22 +33,24 @@ The historical map sentence remains provenance:
 
 > Adaptive learner lost to the deterministic comparator; retain the negative-evidence protocol lesson.
 
-Two accepted B results now bound the mechanism. In B1, correct five-field association improved a
+Two historical accepted B results bound the original mechanism. In B1, correct five-field association improved a
 tabular learner over randomized association, but the adaptive learner was inferior to deterministic
 exact-match handling. In uncertain/delayed R01, both the structured history gate and the stronger
 same-information GRU moved substantially but converged to the exact `ALWAYS-PROBE` policy; the
 memoryless confidence/freshness rule gained `0.864551` mean return per episode. R01 therefore
 produced `B2-C / FIXED_RULE_CONTAINS` on its one-seed host/budget rung.
 
-The separately selected native link-loss candidate below now has a concrete legal information/
-action path and credible fixed/generic controls. It is one bounded B question, with native gain
-and new gate exposure still unknown; it adds no accepted learning result to those historical
-observations.
+The separately selected native link-loss candidate now has one accepted matched training
+instance. Its structured gate T gains +0.0671812 mean native return over always-apply C and
++0.0369687 over the containing generic gate G, but loses −0.0290806 to fixed retrace F.
+Both gates had real update exposure and moved. This mixed result adds finite-budget native
+evidence without establishing adaptive superiority over the strongest competent fixed control.
 
 ## Bounded conclusion
 
-Exact binding remains a useful protocol primitive, but neither accepted object supports adaptive
-ACVC superiority over its strongest competent fixed control. R01 closes only its declared
+Exact binding remains a useful protocol primitive. Neither historical learner object nor the
+new native B supports adaptive ACVC superiority over its strongest competent fixed control.
+R01 closes only its declared
 seed/host/budget rung. It does not show that episode history has no native decision value: R02 now
 establishes a small exact positive legal-history gain, while both learners may still share an
 optimization or objective bias. No accepted policy has established material `0.25` headroom over
@@ -135,15 +138,16 @@ Guidance census A1 remains separate and incomplete. Neither R02 nor R03 supplies
 same-information upper minus tuned generic baseline pair, its raw gap remains unidentified, and no
 5%/25% MEI threshold is applied.
 
-### Native link-loss candidate — Convergence selected 2026-09-09
+### Native link-loss B01 — accepted mixed result 2026-09-09
 
 The original node's complete response at `2d914ab8b6238b2eb76bb07b90972945a23f7a68` selects
 one bounded native B/EXPLORE comparison. This is the independently motivated new-host re-entry
 allowed by HC-C, not a rescue of R01, an exact headroom witness or a new unrestricted ladder.
 The prior episode-return definition fixes the inherited quarter unit at `0.25 S`, where S is
 the undiscounted native episode reward sum. For this 256-step host `J=S/256`, so it is
-`0.0009765625 J`; the separate selected MEI is `0.01 J = 2.56 S`. Neither has been attained by
-new evidence, and raw thresholds are not claimed to have equal practical meaning across hosts.
+`0.0009765625 J`; the separate selected MEI is `0.01 J = 2.56 S`. The completed B clears both
+against C but loses to F, so it does not clear either against the stronger fixed control.
+Raw thresholds are not claimed to have equal practical meaning across hosts.
 
 The mechanism is fixed-membership multi-agent partial observability and non-stationarity:
 joint motion changes interference; one owner remembers the coordinate of its prior lowest-SINR
@@ -159,25 +163,40 @@ G contains T's complete path plus an unconstrained residual from the same inform
 arm keeps its own recurrence and actual applied-command history. Native T−C/T−F and mandatory
 T−G, G−C/G−F contrasts bound the claim; a T−G gain cannot rescue a loss to fixed controls.
 
-Strongest support is the now-explicit legal information/action distinction and trained base.
-Strongest contradiction is that the local loss may be a beneficial teammate handoff, the weak
-link may be irrelevant, and fixed/generic handling may contain all value. The old R02 positive
-witness, R03 finite negative and separate adverse MGTAP/VSPC1 native comparisons remain intact.
-There is no tuned current-host headroom record. Positive cue statistics alone would not be
-native mechanism value, and any learned-package gain would not establish unique causal or
-stable structured superiority.
+The first accepted native comparison, master 8901, trained T/G once each and retained 32
+paired final joint episodes per arm. Means J were T 0.2344827282, G 0.1975140229,
+C 0.1673014978 and F 0.2635633631. T−C is UP (+0.0671812303, conditional SE 0.0115352194),
+T−F is DOWN (−0.0290806349, SE 0.0105070125), and T−G is UP (+0.0369687053, SE 0.0111757440).
+G also improves over C (+0.0302125251) and loses to F (−0.0660493402). The primary minimum
+of the two fixed-contrast means is −0.0290806349 J. These are native return contrasts;
+the 32-episode SEs do not measure training-instance population uncertainty.
 
-The next discriminator is the selected one matched training instance: two gate/critic fits and
-four final T/G/C/F panels, with all outcomes preserved. It remains a direction selection, with
-card, implementation and execution awaiting a concrete Root allocation. It does not change
-Portfolio state, formal UAV-validation status or the existing recasts count of 2.
+Strongest support is the observed T−C/T−G gain and the large fixed-retrace gain over C.
+Strongest contradiction is that both learned gates lose to F. T/G had 51,834/50,076 eligible
+training choices, 1,024 Adam updates each and relative gate displacements 0.3087580/0.1512762;
+absent learning exposure is not the explanation. Functional inclusion in G does not guarantee
+equal finite-budget optimization. The fixed panel ordering and different retrace fractions
+do not identify a causal dose-response, history necessity or F's optimality. Local loss may
+still be a beneficial teammate handoff. The old R02 positive witness, R03 finite negative and
+separate adverse MGTAP/VSPC1 native comparisons remain intact. There is no tuned current-host
+headroom record and no stable structured superiority claim.
+
+The next recommended discriminator is one fresh matched training instance under the same
+budget and controls, asking whether T's disadvantage to F and gain over G recur. This is a
+close call with ending unchanged learned-gate follow-up after the adverse fixed-control result.
+It is unallocated advice: B01's sole batch is complete, and every outcome remains in evidence.
+It changes no Portfolio state, formal UAV-validation status or existing recasts count of 2.
 See [complete response](pro_packets/20260909_native_link_loss_convergence/archive/RESPONSE.md)
-and [scientific intake](ACVC_NATIVE_LINK_LOSS_P76_CONVERGENCE_INTAKE_20260909.md).
+and [B01 scientific intake](ACVC_NATIVE_LINK_LOSS_B01_INTAKE_20260909.md).
 
 ## Evidence set
 
 The accepted evidence set is:
 
+- `docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_B01_SCIENCE_CARD_20260909.md`
+- `docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_B01_RESULT_EVIDENCE_20260909.md`
+- `docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_B01_INTAKE_20260909.md`
+- `docs/research/candidates/acvc/native_link_loss_b01_p78_20260909/dm_analysis.json`
 - `docs/research/candidates/acvc/pro_packets/20260909_native_link_loss_convergence/archive/RESPONSE.md`
 - `docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_P76_CONVERGENCE_INTAKE_20260909.md`
 
