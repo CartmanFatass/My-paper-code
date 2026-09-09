@@ -292,3 +292,39 @@ no Send. After publication, return at a clean boundary for Root→Transport;
 the full immutable response returns to this DM for conformity and scientific
 intake. No scientific successor exists until that decision and its explicit
 card/budget; no independent Portfolio session is contacted.
+
+## 7. Fixed publication and clean return
+
+Request **`2026-09-08-ucope-post-b04-renewal-convergence-01`** uses fixed input
+`5ac3469a85109a82af8c66670865150f320dd85d`. Its [TASK](https://github.com/CartmanFatass/My-paper-code/blob/b632b8a720f6e053c97c73274037da2423476bb1/docs/research/candidates/ucope/pro_packets/20260908_post_b04_renewal_convergence/TASK.md)
+is published at `b632b8a720f6e053c97c73274037da2423476bb1`, 29655 bytes,
+SHA-256 `7c25dfd1c8fe536aad5eaabaf62efee746ddb306c43199583a5f38935bf6b1b1`.
+Fresh GitHub reads match the working and committed TASK bytes and confirm
+shared branch `codex/ucope` and open Issue 11. The new response path is absent
+at that TASK commit. This is preparation evidence, not a claim about future
+provider access, Send or delivery.
+
+[HANDOFF.json](pro_packets/20260908_post_b04_renewal_convergence/HANDOFF.json)
+is bound to that TASK. Both the canonical REQUEST and its generated
+`transport_request` pass the existing validator with identical results.
+Transport-only fields in REQUEST come directly from this bound handoff;
+the scientific question and fixed inputs are unchanged. The
+[publication receipt](pro_packets/20260908_post_b04_renewal_convergence/archive/PUBLICATION_RECEIPT.json)
+retains the actual byte/readback and validation facts.
+
+The node binding remains `em:ucope:convergence`, conversation
+`6a9c6b1c-1c34-83e8-8ebc-dee64b334240`. Source is the actual native DM,
+parent is Root and operator is the existing independent Transport; no reset,
+new conversation or old-request resend is requested. Root loads the handoff
+from the final returned full commit and dispatches its exact prompt once,
+then returns the complete immutable response to `/root/dm_ucope_p47_resume`
+with `followup_task`. This preparation performs zero dispatch, Send or
+scientific invocation. Direction authority and the proposed allocation are
+still pending. Keep this shared checkout/branch for its live Pro delivery
+and subsequent DM intake, then apply the existing reclamation policy.
+
+Object / technical options are (a) bind this published TASK and return the
+same-node handoff, or (b) change conversation/reuse an old request. Recommend
+and select (a). **Owner-delegated decision (unattended, 2026-09-03
+instruction): (a).** The appended ordinary technical audit row records the
+choice; it changes neither pending direction option.
