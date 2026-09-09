@@ -202,3 +202,38 @@ review checks the actual changed semantics, not merely a completion assertion.
 assigns the original CM the full source/review/check/payload, one committed
 remote invocation, sole observation and technical collection batch in the same
 codex/ucope checkout. No intermediate approval handshake.
+
+## 8. Observed completion — 2026-09-09 P85
+
+Frozen §§1–7 remain unchanged. One accepted 8401 execution is **valid complete
+WITHIN**: F_mean−G_mean **−0.008350131013904307**, conditional SE
+**0.006736648533933545**, **0.0016498689860956935 inside −0.01**.
+There is no demonstrated point gain at the selected scale and no equivalence
+conclusion. Sampled F−G remains secondary at **−0.02234539578242959**.
+
+All four hover means are negative: F_mean−H **−0.0900967755406669**,
+G_mean−H **−0.0817466445267626**, F_sampled−H **−0.04753797201899047**,
+G_sampled−H **−0.025192576236560876**. Mean−sampled is
+**−0.04255880352167644** for F and **−0.05655406829020172** for G.
+Mean extraction did not rescue native return on these fits. Every P82/P83/P84
+primary and earlier loss remains unchanged; no pooled or stable claim follows.
+
+Full **303104 native steps / 2048 Adam / 160 final episodes** completed in
+**331.58 s**, with fixed F head, real actor/critic learning and zero evaluation
+parameter displacement. Eight contrasts are complete. No cap or scope §5
+budget breach; aggregate CPU resources_unmeasured. All four forecast gain
+events failed, mean Brier **0.318125**; owner prediction not taken.
+
+See [E0 evidence](UCOPE_UAV_MEAN_VELOCITY_RENEWAL_B01_P85_RESULT_EVIDENCE_20260909.md),
+[summary](UCOPE_UAV_MEAN_VELOCITY_RENEWAL_B01_P85_RESULT_SUMMARY_20260909.json)
+and [DM intake §§7–10](UCOPE_UAV_MEAN_VELOCITY_RENEWAL_B01_P85_INTAKE_20260909.md#7-dm-scientific-intake-against-the-card).
+P85 ends. Recommend one separately allocated same-five-mode fresh learning
+history to observe recurrence of the full pattern, with the same primary and
+all outcomes retained. No next card/master/source/allowance, extra evaluation,
+automatic successor or Pro Send is created. Root owns later allocation,
+integration and remote reclamation. Automatic approval review blocked deletion
+of the completed local test scratch; CM retains that cleanup responsibility.
+Root allocates no next pair at this boundary. A separately authorized
+consultation-only Convergence question will compare the fresh-pair recommendation
+with no further empirical work/ending this package and a concrete training
+change; no next empirical card/master or child Send is authorized.

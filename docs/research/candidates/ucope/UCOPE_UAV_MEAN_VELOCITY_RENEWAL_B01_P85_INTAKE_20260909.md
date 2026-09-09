@@ -170,3 +170,202 @@ Outcome means: F_sampled **0.10893185324813584**, F_mean **0.06637304972645941**
 F renewals: training **438136**, sampled final **27386**, mean final **27386**. Literal d2: training **218019**, each final mode **13616**, total **245251**; d4 **0** throughout. Suppressed decisions training **217224**, each final mode **13574**; censored holds training **795**, each final mode **42**. Every F episode satisfies d2=suppressed+censored; phase/rollout/mode totals and physical support/expiry/held velocity/remaining4 diagnostics agree. F duration-head forward rows **2738360**, within the declared2048000–4096000 range.
 
 One allocated invocation is consumed; every outcome ends P85. No additional run or scientific change follows from this technical return. DM owns scientific intake and evidence archival; Root owns integration and P85 remote scientific cwd/wrapper reclamation after verified preservation. Designated local checkout remains in use. The separately rejected completed local test-scratch cleanup in section4 remains **CM-owned**, preserved under the DM's no-retry/no-bypass instruction; it does not alter these measurements.
+
+## 7. DM scientific intake against the card
+
+Accept **valid complete B/EXPLORE, WITHIN**, preserving every adverse
+secondary. The explicit prospective primary is F_mean−G_mean
+**−0.008350131013904307**, conditional SE **0.006736648533933545**,
+**0.0016498689860956935 inside −0.01**, with 13 positive/19 negative
+paired differences. Card §5 says **−0.01 ≤ Delta_mean ≤ +0.01**; apply
+its reading verbatim:
+
+> No demonstrated point gain at the selected scale on this fresh fit; no equivalence conclusion.
+
+The mean F−G point is negative but lies inside its declared band. Neither the
+adverse sampled F−G nor any other mode/hover result replaces this primary.
+The [E0 evidence](UCOPE_UAV_MEAN_VELOCITY_RENEWAL_B01_P85_RESULT_EVIDENCE_20260909.md)
+and [durable summary](UCOPE_UAV_MEAN_VELOCITY_RENEWAL_B01_P85_RESULT_SUMMARY_20260909.json)
+carry all five outcomes, eight paired vectors/means/SEs and original bindings.
+
+DM read source `52bf50a089d3389d9fada0b531e4f4e56e83f9b8` against the card,
+the actual changed tests, independent review and raw 142-test receipt, then
+CM's complete result/source/payload, admission and terminal/collection records.
+The single [episode-byte analysis](../../../../temp/directions/ucope/exp/ucope-uav-mean-velocity-renewal-b01-8401-p85-20260909/dm_analysis/analysis.json)
+checks all **1184 unique complete identities**, correct master/reset/horizon,
+J=reward_sum/256, **160 returns and eight difference vectors/means** exactly.
+The primary SE matches; one secondary F_mean−H SE differs by
+**1.734723475976807e-18** in local arithmetic. Native published SE is retained;
+this rounding-scale difference changes no point or rule. All seven collected
+local raw hashes match CM's accepted record.
+
+The approved run tool receives only mean-mode F/G endpoints from **8401, n=1**;
+its endpoint subtraction differs from the episode-paired mean by
+1.734723475976807e-18. Both modes use the same two fitted policies. H and
+32 final episodes are not training replicates; no training-population interval,
+new cross-instance mean/SD, pooled primary or best-mode score is produced.
+DM made no tensor/model/learner/evaluator/simulator call and no remote observation.
+
+Exposure is complete: **303104 native steps / 2048 Adam / 512 rollouts /
+1024 training + 160 final episodes / 1184 explicit + 2 constructor resets /
+3200 diagnostic frames**. Both actors/critics moved during real learning;
+the whole 2242-parameter F head stayed fixed. All parameter groups have zero
+displacement from the final fit after sampled and mean evaluation, with
+unchanged buffers and no optimizer access in the reviewed path. F renewals
+**438136 / 27386 / 27386** yield **2738360 head rows / 6046298880 MACs**;
+the two final duration-count vectors agree, short support and censoring
+conform, and d4 stays zero. CM's checkpoint/physical-path checks are accepted
+without replay. No cap/partial/nonfinite or engineering §5 budget breach.
+
+## 8. Bounded interpretation, grounding and predictions
+
+All four native hover contrasts are losses: F_mean−H
+**−0.0900967755406669**, G_mean−H **−0.0817466445267626**,
+F_sampled−H **−0.04753797201899047**, G_sampled−H
+**−0.025192576236560876**. Mean−sampled is **−0.04255880352167644**
+for F and **−0.05655406829020172** for G, adverse in 26/32 and 28/32
+pairs. Thus tanh(mu) did not rescue native performance on these fits.
+G deteriorates more under mean execution; a smaller F−G deficit coexists
+with worse absolute returns for both policies. The sampled F−G secondary
+**−0.02234539578242959** is also adverse, in 20/32 pairs.
+
+The strongest surviving favorable evidence for the broader short-renewal
+proposal is the earlier sampled F−G gain at P83/P84. Neither is mean-mode
+evidence, and P85 has no above-MEI favorable primary. The current two mode
+losses and all four hover losses directly oppose adopting mean extraction
+for native benefit on these fitted policies. P82 remains WITHIN at
+F−G **+0.008551004914111454**; P83 remains UP **+0.04205514630433558**
+with F−H gain/G−H loss; P84 remains UP **+0.06439366516106426** with
+both hover losses. P85's sampled contrast remains secondary. Every older
+support, primary and P77 learned-T loss is separately preserved; these data
+do not identify pure training variance or a causal-shortening effect.
+
+The event/information/action path is unchanged: free local observations
+update each owning UAV's private recurrence, velocity is chosen at its legal
+opportunity and held until its own expiry, motion changes future service and
+local observations, and masked training/partner co-adaptation precede native
+return. Switching the whole team's execution mode changes this closed loop.
+Learned motion quality, state visitation, finite optimization and evaluation
+variation, and partner interactions survive as explanations. Fixed membership,
+primitive time/credit and gamma 1 remain. Direct service versus information
+value and learned-duration value remain unseparated. G is legal and H untuned;
+tuned same-information headroom is absent.
+
+Reuse the question-driven local-library/source work already verified in
+[P84 intake §8](UCOPE_UAV_SHORT_FIXED_RENEWAL_B03_P84_INTAKE_20260909.md#8-bounded-interpretation-grounding-and-predictions):
+SB3's mean-action suggestion motivates trying an option, while the Spinning Up
+qualification preserves legitimate stochastic PPO evaluation. It supplies no
+UAV benefit guarantee. This adverse result narrows the current option without
+retroactively calling P84 defective or attributing its losses to Gaussian noise.
+No new mechanism-level fact requiring another retrieval was established.
+No stable harm/superiority, equivalence, competent-comparator, causal sampling
+or shortening, learned-duration or deployment conclusion follows.
+
+All four forecast events failed: primary>0.01 at probability 0.50 gives
+Brier **0.25**; F_mean−H>0.01 at 0.55 gives **0.30250000000000005**;
+F_mean−F_sampled>0.01 and G_mean−G_sampled>0.01 at 0.60 each give **0.36**.
+Mean Brier **0.318125**. The two mode-benefit expectations are contradicted
+on this fit and retained. No retrospective hard-label accuracy is assigned.
+Owner prediction **not taken (unattended)**; owner flags **none**.
+
+## 9. Decisions this completed intake produces
+
+**(1) Reading, object tier.** Options: (a) accept valid complete WITHIN with
+all mode/hover losses; (b) replace the primary using adverse sampled F−G;
+(c) claim equivalence or stable mean-policy harm. Recommend and execute **(a)**.
+The unrounded mean-mode point satisfies the prospective band; adverse
+secondaries limit the claim without changing its identity.
+Owner-delegated decision (unattended, 2026-09-03 instruction): **(a)**.
+
+**(2) Allocation stop and next discriminator, object tier.** Options:
+(a) end P85 and recommend one separately allocated fresh same-five-mode B;
+(b) end P85 with no further empirical work and ask whether to end this
+mean-execution package; (c) select a concrete source-supported training change.
+Recommend **(a)**; **(b)** is the no-work runner-up. The new question
+is whether the full same-fit mode/feedback/hover pattern recurs in one new
+independent learning history. Preserve the prospective mean F−G primary,
+eight contrasts and every sign; no seed is required to improve. One fresh
+history is a bounded discriminator after a single new execution comparison,
+particularly because the sampled F−G sign also differs from earlier histories.
+It is not an attempt to promote mean execution despite the present losses.
+Its expected marginal value is whether the two adverse within-fit mode effects
+recur under independently learned parameters. Another adverse pattern would
+strengthen advice to end the mean-execution package; a reversal would reveal
+history dependence that a fixed-checkpoint measurement cannot observe. Neither
+outcome would establish stable superiority or obligate a further run. The current
+result already suffices to withhold mean execution as a performance remedy;
+another pair is not required to accept that bounded negative. Repeated low cost
+does not itself justify investment, and the no-work alternative remains substantive.
+
+More evaluation on these selected policies adds conditional precision but no
+learning instance. Changing training or tuning G asks a different performance
+question. Neither is a prerequisite for the recommended B. Missing tuned
+headroom remains a limitation and sequencing input, not a stop condition.
+No exact diagnostic, controller search or causal explanation is required.
+
+[Executable known-work comparison](../../../../temp/directions/ucope/exp/ucope-uav-mean-velocity-renewal-b01-8401-p85-20260909/dm_analysis/next_question_known_work.json):
+the fresh B would retain **2×512×256 training + 5×32×256 evaluation =
+303104 native steps**, **2048 Adam**, **160 final episodes**, F head
+**2048000–4096000 rows / 4521984000–9043968000 MACs**. These are the same
+work factors as P85, not a wall-time guarantee; **331.58 s** and its arm
+times are measured references. An additional five-mode existing-fit measurement
+would use **40960 native steps / 0 Adam / 160 final episodes**, F head
+**81920–163840 rows**, without another learner. Zero learners are not zero
+work. No such measurement, validation probe or tuning is commissioned.
+
+Execute **P85's all-outcome stop and recommendation only**. No next card,
+master, source or invocation allowance, extra evaluation, retry/resume,
+replacement, pilot/tuning, T restoration, support change, Pro Send or automatic
+successor is created. A/B has no C-object consumption state; the single
+allocated invocation has been used. Root owns any later allocation and
+integration; no family, recast, C or Portfolio decision follows.
+Owner-delegated decision (unattended, 2026-09-03 instruction): **(a)**.
+
+**Root's subsequent boundary instruction:** no further pair is allocated now.
+After this intake is published, author one **consultation-only** question on
+the existing `em:ucope:convergence` node: compare another independent five-mode
+pair's marginal decision value with ending the mean-execution package or a
+concrete source-supported training change. Preserve the DM recommendation and
+no-work runner-up, every hover/mode loss, zero new empirical exposure and fixed
+GitHub evidence. Return READY to Root; no child Send, next empirical card/master
+or invocation occurs before a formed conforming selection. This authoring
+instruction does not select a family disposition or allocate another experiment.
+
+## 10. Owner boundary, publication and next responsibility
+
+Owner review reference **2026-09-09T09:02:10-07:00**:
+[boundary and local hashes](../../../../temp/directions/ucope/exp/ucope-uav-mean-velocity-renewal-b01-8401-p85-20260909/dm_analysis/owner_boundary.json)
+show both checkout review lists [] and empty UCOPE audit owner columns;
+no item needs marking answered. Main `419f4b7ca4bbcb0abfbc056e34bdd52496e06f79`
+adds the owner's 2026-09-09 Pro-recovery instruction. It was read; P85's
+scientific meaning/budget are unaffected. Root's later consultation authoring
+instruction in §9 creates no empirical allocation or child Send. New-card
+item [20260909-ucope-010](../../portfolio/owner/inbox/2026-09-09/20260909-ucope-010.json)
+remains; ordinary result/next-question decisions belong here and in the audit.
+[Audit row 35](../../portfolio/audit/2026-09-09.md#L35) records validity;
+[row 36](../../portfolio/audit/2026-09-09.md#L36) records the stop and recommendation.
+The [Chinese brief](../../portfolio/owner/briefs/ucope/2026-09-09_UCOPE_UAV_MEAN_VELOCITY_RENEWAL_B01.md)
+retains the four hover losses, two mean-mode losses and failed forecasts.
+
+One accepted and one valid invocation cost **331.58 s / 556548 KiB peak RSS**;
+per-valid-result and accepted-attempt-per-valid-result wall are both 331.58 s.
+For this single serial invocation, elapsed critical path and sum of invocation
+wall coincide. Nested F/G/runner timings exclude outer startup/tail. Aggregate
+CPU, full engineering/collection work and full-history accepted-attempt cost
+remain **resources_unmeasured**; no controlled efficiency comparison follows.
+Tuned host headroom is absent, recasts **1**, ACTIVE/HIGH and UAV-entry state
+remain unchanged.
+
+Publication preserves frozen card §§1–7 and CM §§1–6, all original primaries,
+raw and recomputed SE distinction, JSON/links and the six-heading brief.
+Analysis/publication records stay in the collected root's `dm_analysis/`;
+preparation evidence remains separate. DM performed no model/native replay.
+Root owns integration of unintegrated commits, evidence preservation and P85
+remote scientific cwd/wrapper reclamation. The handle is terminal; the shared
+authoring checkout and local raw evidence remain in use.
+
+Automatic approval review rejected the CM's exact completed local test-scratch
+removal as **blocked by policy**. That scratch remains preserved under
+`temp/directions/ucope/test/p85-mean-local-20260909`; CM retains cleanup ownership
+when permitted. There was no further deletion retry or alternate bypass. This
+unresolved engineering cleanup limitation is separate from the valid result.
