@@ -26,15 +26,17 @@ remains dated provenance under the controlling evidence specification section 11
 - Historical selected B discriminator:
   `UCOPE-B-EXPLORE-FT-XF-BC-INVERTIBLE-CONDITIONING-DISCRIMINATOR-R01`
 - Latest direction-tier decision:
-  **2026-09-08 PRO_FINAL / CONTINUE** the opening-commitment family through
-  exactly one action-conditioned-duration B04 matched pair, master7201,
-  versus unchanged same-information stepwise recurrent PPO. Duration reads
-  its owner's actual sampled command; native complete return remains primary.
-  This selected discriminator is now complete: B04 is WITHIN with a negative
-  T−G point; its one-pair allocation is exhausted without a successor. This
-  intake forms no new family disposition.
-  See the [post-B03 Convergence intake](UCOPE_POST_B03_CONVERGENCE_INTAKE_20260908.md)
-  and [B04 card](UCOPE_UAV_MOTION_PREFIX_B04_SCIENCE_CARD_20260908.md).
+  **2026-09-08 PRO_FINAL / RECAST** from opening-only commitment to renewable
+  commitment at each owning UAV's expiry. Select exactly one B/EXPLORE matched
+  pair, master7301, against ordinary same-information stepwise recurrent PPO;
+  complete native return remains primary. The selected question changes where
+  duration acts, without a new result or diagnosis of the old losses.
+  See the [renewal Convergence intake](UCOPE_POST_B04_RENEWAL_CONVERGENCE_INTAKE_20260908.md)
+  and [renewal B01 card](UCOPE_UAV_RENEWAL_COMMITMENT_B01_SCIENCE_CARD_20260908.md).
+  Its intake records one genuine RECAST entry and the historical account's
+  limited coverage. No Portfolio lifecycle or priority decision is made here.
+  The earlier CONTINUE through B04 is complete/WITHIN; P61 remains exhausted.
+  See the [post-B03 intake](UCOPE_POST_B03_CONVERGENCE_INTAKE_20260908.md).
   The family was opened by the 2026-09-07 fixed-five-UAV interface decision.
   The **2026-09-05 PRO_FINAL / PARK** of the same-draw retained-policy root-residual
   localization family and its numerical-locus dependency remains unchanged.
@@ -60,8 +62,9 @@ remains dated provenance under the controlling evidence specification section 11
 
 ## Scientific question
 
-On the selected fixed-five-UAV, 256-step task, can a learned optional opening
-velocity commitment of one or four primitive steps improve complete time-average
+On the selected fixed-five-UAV, 256-step task, can a learned renewable
+velocity commitment of one or four primitive steps, selected at each owner's
+own expiry using current private history and its just-sampled command, improve complete time-average
 team native service return over a recurrent PPO controller with the same free local
 observations and every legal velocity action available at every step? Movement can
 change subsequent local information and service opportunities. The strongest null
@@ -69,7 +72,7 @@ is competent ordinary feedback control doing the useful movement and information
 use itself. A positive two-arm comparison would support only the package: direct
 geometry, temporal smoothing and optimization remain unseparated explanations.
 
-The tested MARL structure is partial observability in a fixed moving
+The selected MARL structure is temporal abstraction/termination under partial observability in a fixed moving
 team. Actual service opportunity consequences replace no existing sensor bill:
 there is no asserted positive sensing fee or B05 count interface on this host.
 The first two real UAV pairs supported a preliminary package advantage;
@@ -107,7 +110,33 @@ without a distinct count-state architecture because RAW contains the sufficient
 count. The direct-service alternative remains separated by the frozen
 `Gamma=I+D` decomposition and analytic `D≈-0.02` boundary.
 
-## Current scientific position — 2026-09-08 B04
+## Current scientific position — 2026-09-08 renewable-commitment RECAST
+
+Convergence selects one real package comparison of action-conditioned duration
+at every owner's own expiry, rather than only at reset. Source inspection shows
+that B04's duration head never chooses persistence from an evolved within-episode
+history, although recurrence continues throughout. The new event therefore
+tests a different control opportunity; it is not a claim that sparse opening
+exposure caused B04's negative mean.
+
+The strongest support for posing this question is that concrete untested event
+with unchanged legal information and native budget. Prior P21 remains limited
+positive package evidence. The strongest contradiction remains ordinary feedback's
+higher current native mean and the adverse B02/B03/P24 evidence below. Feedback
+can already repeat useful commands and adapt sooner to partners, so repeated
+commitment may be unnecessary or harmful. Added decision exposure, optimization,
+persistence, geometry/capacity and partner co-adaptation remain intertwined.
+
+The next discriminator is one fresh7301 T/G pair with final matched-reset T/G/H
+returns under the [renewal B01 card](UCOPE_UAV_RENEWAL_COMMITMENT_B01_SCIENCE_CARD_20260908.md).
+There is no new empirical observation yet. Its native-step/update budget matches
+B04, but duration-head work grows64–256× and incremental seconds are unknown;
+the existing complete time caps remain. No exact diagnosis or headroom prerequisite
+is introduced. Every sign ends this one allocation; no stable, causal renewal,
+pure-information, transfer or deployment claim follows. See the
+[complete decision intake](UCOPE_POST_B04_RENEWAL_CONVERGENCE_INTAKE_20260908.md).
+
+## Latest empirical position — 2026-09-08 B04
 
 The command-conditioned opening policy and ordinary feedback learner both
 complete the selected real training budget on master 7201. T/G/H mean native
@@ -132,12 +161,12 @@ No cross-object pooling or conditioning/entropy/clipping causal comparison
 is made. H is untuned and no upper/tuned same-information headroom is recorded.
 
 The accepted P61 discriminator is answered through one complete bounded
-comparison and all-outcome intake. The object-tier choice prefers no unchanged
-continuation; no further seed, evaluation, retry or successor is allocated.
-This does not close/recast the opening family or change UCOPE lifecycle,
-priority or actual UAV entry. A future task would need a specifically
-justified changed question or independently warranted replication within its
-proper scope; no such task is selected here. Ordinary feedback doing useful
+comparison and all-outcome intake. That object-tier choice prefers no unchanged
+continuation and allocated no further seed, evaluation, retry or successor.
+It did not close/recast the opening family or change UCOPE lifecycle,
+priority or actual UAV entry. The subsequent P67 Convergence separately
+selects the changed own-expiry question above; it neither replenishes P61 nor
+turns B04 into a renewal observation. Ordinary feedback doing useful
 control itself, sparse opening credit, geometry/persistence/capacity and
 partner co-adaptation remain surviving explanations. Exact diagnosis or
 headroom is not installed as a prerequisite. See [B04 card §8](UCOPE_UAV_MOTION_PREFIX_B04_SCIENCE_CARD_20260908.md#8-observed-p61-completion--2026-09-08),
