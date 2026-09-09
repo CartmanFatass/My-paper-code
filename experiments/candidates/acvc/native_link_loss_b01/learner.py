@@ -23,6 +23,8 @@ def collect(env, base, gate, critic, seed, arm, phase, episode, horizon, check, 
     proposal_rng, gate_rng = action_generators(seed, arm, phase, episode)
     storage = {k: [] for k in ("x", "hidden", "z", "b", "u", "choice", "mask", "logp", "value", "critic", "reward")}
     decisions = {"opportunities": 0, "retrace": 0, "apply": 0, "distinguishable": 0}
+    if arm == "dwell":
+        decisions["dwell"] = 0
     rewards = []
     for t in range(horizon):
         check()
@@ -34,7 +36,9 @@ def collect(env, base, gate, critic, seed, arm, phase, episode, horizon, check, 
         else:
             z, mask, c = binding.observe(obs, b.numpy())
         z, mask = torch.from_numpy(z), torch.from_numpy(mask)
-        choices = mask.float() if arm == "F" else torch.zeros(5)
+        choices = mask.float() if arm in ("F", "dwell") else torch.zeros(5)
+        if arm == "dwell":
+            c = np.zeros_like(c)
         logp, value = torch.zeros(5), torch.tensor(0.)
         if gate is not None:
             h0 = hidden.clone()
@@ -48,7 +52,7 @@ def collect(env, base, gate, critic, seed, arm, phase, episode, horizon, check, 
         n = int(mask.sum())
         nr = int(choices.sum())
         decisions["opportunities"] += n
-        decisions["retrace"] += nr
+        decisions["dwell" if arm == "dwell" else "retrace"] += nr
         decisions["apply"] += n - nr
         decisions["distinguishable"] += int((mask.numpy() & np.any(c != b.numpy(), axis=1)).sum())
         counts["base_agent_forwards"] += 5

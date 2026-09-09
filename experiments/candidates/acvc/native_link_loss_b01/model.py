@@ -67,7 +67,7 @@ def load_base(path, seed):
 
 
 def action_generators(seed, arm, phase, episode):
-    a = ("T", "G", "C", "F").index(arm)
+    a = ("T", "G", "C", "F", "dwell").index(arm)
     base = seed * 100000
     if phase == "train":
         proposal, gate = base + 10000 + 1000 * a + episode, base + 20000 + 1000 * a + episode
