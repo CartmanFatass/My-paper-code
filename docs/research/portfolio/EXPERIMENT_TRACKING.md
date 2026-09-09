@@ -12,6 +12,8 @@ Five original native DMs were actually dispatched and each observed running: MGT
 
 MGTAP P74 readiness f94438f69 is accepted. P75 [two-master execution task](../candidates/metric_ground_transport_allocation/MGTAP_NATIVE_GROUND_GEOMETRY_B01_P75_EXECUTION_TASK_20260909.md), main4a20de760, was actually dispatched to original CM `/root/cm_mgtap_p72_repair` and observed running. CM owns technical execution and sole observation; source4f65eefb1, masters8201/8202, one accepted submission each. No handle is yet reported; Root does not poll prospective handles.
 
+Latest: MGTAP8201 handle `mgtap-b01-8201-4f65eefb1b15e44b42d694376630fba0c230cc6c` accepted/running, PID3034957, joined admission passed; same CM observes,8202 remains unsubmitted. VSP03 P74 request `2026-09-09-vsp03-p74-post-b04-convergence-01` dispatched once to Transport from HANDOFF1f0b36a9b/TASK564e78fc3; app delivery accepted, provider Send not yet confirmed. Completed DM authoring no longer counts as a live native turn; count the VSP03 chain again only upon actual accepted Pro generation or another native assignment.
+
 ## Historical soft-stop closeout updates — 2026-09-09
 
 - CRTO P72: response/intake/handoff integrated at63550cd83; DM stopped, no live experiment or Pro generation, no successor B. See [handoff](../candidates/commitment_residual_triggered_options/CRTO_RESTART_HANDOFF_20260909.md).
