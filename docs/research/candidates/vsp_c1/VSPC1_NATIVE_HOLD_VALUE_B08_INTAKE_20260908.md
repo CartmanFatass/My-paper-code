@@ -133,3 +133,44 @@ continue the authorized work. Owner prediction remains not taken (unattended).
 No new result, forecast score, lifecycle disposition or successor exists yet.
 
 New-card owner item: [20260908-vspc1-014](../../portfolio/owner/inbox/2026-09-08/20260908-vspc1-014.json), accept auto-applied from the Chinese packet; audit [line99](../../portfolio/audit/2026-09-08.md#L99). No owner reply is assumed.
+
+## 5. DM source acceptance and continuation
+
+Accept **`e9a05af5d51da571642f51c5b7b8f00c96f1c6b5`** after reading the
+complete production diff, both new test files and
+`temp/directions/vsp_c1/engineering/native_hold_value_b08_p73/focused_result.json`.
+Actual diffs are the35-line fixed B08 runner and only three Config-derived
+cost-report strings, plus tests/technical text. Defaults512, training loops,
+normalization, shared learner/critic/native/H and old runners/tests/cards have
+no change. The35-line entry selects768/8401, normalization/width133 and exact
+extra initialization; the actual config also reaches checkpoint identity.
+
+Fifteen focused cases pass,3.22s pytest/4.3296453999355435s whole process, exit0.
+The full768 pure-stub execution checks384 rollouts/1536 Adam per arm,417792
+steps,96 final evaluations, final-only ordering, private paired RNGs and exact
+reset domains, separate moments, frozen evaluation state and published summary/
+checkpoints. Two deliberate test-only incomplete returns stop at templates and
+verify unchanged512 cost strings with/without normalization. They create no
+scientific attempt. No real model/optimizer/forward/learner/native execution
+occurred. Retained evidence and scratch removal support the focused budget;
+unchanged checks/review are reused without replay. This establishes binding and
+publication behavior, not performance or mechanism value.
+
+No substantive shared schedule/exposure change was needed, so the conditional
+independent-review requirement is not triggered.38 production additions/3
+removed and35-line runner meet scope limits; no §4 additions or observed §5
+breach. Historical P69 enclosing-test-wall uncertainty remains unchanged.
+Main/checkout owner reviews returned[] and main VSPC1 audit owner cells were
+empty at this boundary; no prediction reply or override is inferred.
+
+Options: (a) accept conforming source and continue the allocated exact P73 route;
+(b) replay unchanged checks or request an intermediate Root launch allocation;
+(c) treat passing tests as a scientific result. Recommend/select(a).
+Owner-delegated decision (unattended,2026-09-03 instruction): (a),
+**OWNER_DELEGATED object tier**, technical acceptance under existing P73.
+[Card §7](VSPC1_NATIVE_HOLD_VALUE_B08_SCIENCE_CARD_20260908.md#7-accepted-source-and-exact-p73-execution-binding)
+now binds full scientific SHA/node/cwd/payload/handle/output prospectively.
+Commit/push this boundary, then return edit/index ownership to the same CM for
+literal-input publication, exact staging, fresh admission, one accepted detached
+submission, sole observation/collection and technical return. Zero scientific
+exposure so far; all original counts, complete caps and stop conditions remain.
