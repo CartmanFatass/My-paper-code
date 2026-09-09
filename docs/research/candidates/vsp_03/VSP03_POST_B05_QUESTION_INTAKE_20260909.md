@@ -218,3 +218,31 @@ DM; parent is Root; the configured independent Transport is the executor. Root
 receives the ready full HANDOFF commit and fixed TASK link, dispatches once under
 its own route, and forwards the full immutable response for this DM's intake.
 No Transport app dispatch or Pro Send occurs in this preparation.
+
+Prepared publication record: request
+`2026-09-09-vsp03-post-b05-convergence-01`; all ten scientific/policy references
+are pinned to input **`beaacd790d4ae033b81ffbc67cdf381e8f6badf4`**. The fixed
+[TASK](https://github.com/CartmanFatass/My-paper-code/blob/3887b6f5ca99be7b6f6bfd18edc4310b37637d08/docs/research/candidates/vsp_03/pro_packets/20260909_post_b05_convergence/TASK.md)
+was committed and pushed at **`3887b6f5ca99be7b6f6bfd18edc4310b37637d08`**.
+The renderer compared the committed TASK and formed
+[HANDOFF](pro_packets/20260909_post_b05_convergence/HANDOFF.json) as
+`READY_TO_DISPATCH`; this is an unsent handoff, not accepted Pro generation.
+The preparation's initial console-print encoding error occurred before staging
+and was corrected by UTF-8 display; no scientific or external Send action occurred.
+
+The accepted P74 archive confirms conversation
+`6a9cbb9d-374c-83e8-b600-23d3a8033a69` on `em:vsp_03:convergence`. The original
+DM author is `01a08280-6335-79a2-8055-61bb0596eb1e`, parent Root is
+`01a07249-b095-7821-8ce2-e9c32ba85267`, and the configured Transport executor
+is `01a07e52-f085-76a0-886a-4127f490421f`. The shared branch and Issue6 were
+verified present/open; no new branch or Issue was created. Only the new
+`pro_packets/20260909_post_b05_convergence/archive/RESPONSE.md` and one delivery
+comment are in the future Pro write scope. The fixed input SHA is not a
+requirement that delivery branch HEAD remain unchanged.
+
+Root receives the new request ID, the final full HANDOFF commit and fixed TASK
+URL together, loads those exact bytes and owns the one Transport dispatch and
+full-response return to the original DM. Current P76 cards, source, evidence,
+DIRECTION and prior accepted requests remain unchanged by this preparation.
+The shared checkout is retained for this live delivery dependency; Root owns
+eventual cleanup after its last delivery/intake/integration boundary.
