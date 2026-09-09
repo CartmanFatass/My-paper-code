@@ -73,7 +73,7 @@ def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=wri
     b = config.seed * 100000
     sha = subprocess.check_output(["git", "rev-parse", "HEAD"],
                                   cwd=Path(__file__).resolve().parents[4], text=True).strip()
-    summary = dict(object=OBJECT, card=CARD, card_section=6,
+    summary = dict(object=OBJECT, card=CARD, card_section=(6 if config.fixture else 5),
         pair=SELECTOR, mode="ENGINEERING_FIXTURE" if config.fixture else "UAV_B_EXPLORE",
         launch_sha=sha, comparator_source=COMPARATOR_SOURCE, seed=config.seed,
         configuration=asdict(config), status="INCOMPLETE", arms=arms, limits=limits,
