@@ -18,6 +18,8 @@ Latest subsequent receipt: MGTAP8201 terminal exit0,353.71s/collection2b677b4d3;
 
 Transport subsequently confirmed both P74 provider Sends exactly once and WAITING_GENERATION: VSP03 message9f150cdc-0598-4c88-b214-842a71df0273 in its bound conversation6a9cbb9d-374c-83e8-b600-23d3a8033a69; FSD message208d1b36-1d27-483b-a364-91e9c9c405b5 in6a9c2865-14a8-83e8-b556-e7f5836d9236. Transport retains both tabs and sole observation. These two accepted generations restore five advancing direction chains with UCOPE authoring, VSPC1 and MGTAP; full decisions/intakes remain pending.
 
+MGTAP P75 is now technically complete: both handles and aggregate exit0, final returnfb86e93bd integrated mainf25218236. Frozen REL_ADVERSE mean-.0239631043; full [execution record](../candidates/metric_ground_transport_allocation/MGTAP_NATIVE_GROUND_GEOMETRY_B01_P75_EXECUTION_RECORD_20260909.md). No live experimental observer remains. Original DM actually resumed for full scientific intake/brief and next bounded recommendation; no successor invocation or Send allocated. This supersedes the earlier8202-running receipt.
+
 ## Historical soft-stop closeout updates — 2026-09-09
 
 - CRTO P72: response/intake/handoff integrated at63550cd83; DM stopped, no live experiment or Pro generation, no successor B. See [handoff](../candidates/commitment_residual_triggered_options/CRTO_RESTART_HANDOFF_20260909.md).
