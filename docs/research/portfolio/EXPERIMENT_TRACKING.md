@@ -16,6 +16,8 @@ Latest: MGTAP8201 handle `mgtap-b01-8201-4f65eefb1b15e44b42d694376630fba0c230cc6
 
 Latest subsequent receipt: MGTAP8201 terminal exit0,353.71s/collection2b677b4d3;8202 accepted once under `mgtap-b01-8202-4f65eefb1b15e44b42d694376630fba0c230cc6c`, PID3036438, admission passed. Same CM owns observation, collection and aggregate. FSD P74 request `2026-09-09-fsd-p74-post-uav-b02-convergence-01` dispatched once to Transport from HANDOFF163443793/TASKb2342c20a. App accepted, provider Send unconfirmed; no new FSD invocation allocated. Original DM receives the immutable response for intake.
 
+Transport subsequently confirmed both P74 provider Sends exactly once and WAITING_GENERATION: VSP03 message9f150cdc-0598-4c88-b214-842a71df0273 in its bound conversation6a9cbb9d-374c-83e8-b600-23d3a8033a69; FSD message208d1b36-1d27-483b-a364-91e9c9c405b5 in6a9c2865-14a8-83e8-b556-e7f5836d9236. Transport retains both tabs and sole observation. These two accepted generations restore five advancing direction chains with UCOPE authoring, VSPC1 and MGTAP; full decisions/intakes remain pending.
+
 ## Historical soft-stop closeout updates — 2026-09-09
 
 - CRTO P72: response/intake/handoff integrated at63550cd83; DM stopped, no live experiment or Pro generation, no successor B. See [handoff](../candidates/commitment_residual_triggered_options/CRTO_RESTART_HANDOFF_20260909.md).
