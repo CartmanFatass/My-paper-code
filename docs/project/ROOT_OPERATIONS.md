@@ -5,12 +5,13 @@ integration. DM owns direction science; CM owns technical delivery. Independent 
 Pro browser work. Root uses the owner's selected model/effort. Scientific authority and budgets
 remain in AGENTS.md; the current owner pause applies before any research work.
 
-OWNER_DIRECT 2026-09-09: after unstable Pro delivery defeats Transport, Root personally
-continues the same request using the transport skill's caller-direct lifecycle. Existing
-acceptance and delivery are reconciled before another Send; confirmed generations are
-observed through archival and normal scientific intake. Preserve failed attempts and the
-original request. This is standing recovery authority, not a new scientific allocation;
-an exhausted Transport attempt does not end Root's recovery work.
+OWNER_DIRECT 2026-09-09: unstable failed-effect delivery is recovered under the same
+request after reconciling acceptance and actual delivery; confirmed generations are
+observed through archive and ordinary intake. Root personally recovered FOLR/SCDMP and
+confirmed normal sends. The owner then returned all subsequent transport work to the
+dedicated Transport session. Root dispatches ready handoffs and receives its receipts;
+Transport owns browser Send, observation and archival. Preserve original requests and
+failed attempts. This recovery policy does not allocate scientific execution.
 
 ## Where each rule is maintained
 

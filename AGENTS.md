@@ -24,14 +24,14 @@ native handoffs only, under `docs/project/SIBLING_COMMUNICATION.md` and
 `.codex/hmasd-relay.toml`. Ordinary native traffic and nested parent acceptance stay native.
 Cross-session messages omit model and reasoning-effort overrides; configured models persist.
 
-OWNER_DIRECT 2026-09-09: when Pro transport is unstable, continue recovery and sending
-under the existing research request. After Transport fails, Root personally takes over
-the browser through completion; do not leave research blocked solely on that failure
-or require another per-attempt authorization. Reconcile actual acceptance/delivery before
-retrying, observe an already accepted generation, and preserve the original prompt,
-failed-attempt facts and provider binding. This standing instruction overrides older
-Transport-only and exhausted-retry wording for these recovery operations. It changes
-execution ownership, not scientific authority, evidence meaning or experiment budgets.
+OWNER_DIRECT 2026-09-09: recover unstable Pro delivery under the existing research
+request; do not leave research blocked solely on failed-effect sends. Reconcile actual
+acceptance/delivery before retrying, observe already accepted generations, and preserve
+the original prompt, failed-attempt facts and binding. Root personally completed the
+FOLR/SCDMP recovery and confirmed normal sending. The owner's subsequent instruction
+returns all later Pro Send, observation, reconciliation, archival and receipts to the
+dedicated Transport session. Root dispatches and accepts its returns. Recovery changes
+neither scientific authority, evidence meaning nor experiment budgets.
 
 The independent **Transport** session (Luna/high) owns Pro browser Send, observation,
 reconciliation, archival and parent receipts. Root receives its receipts, performs Portfolio
