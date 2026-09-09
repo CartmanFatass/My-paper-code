@@ -3,7 +3,7 @@ Binding MARL structure: (d) multi-agent partial observability: each UAV acts on 
 
 # ACVC fixed retrace reuse E01 — prospective card
 
-Date: 2026-09-09. **FROZEN scientific definition; no source implementation or scientific invocation allocated.**
+Date: 2026-09-09. **FROZEN AND ALLOCATED: one complete implementation/acceptance/six-panel execution batch; no result observed yet.**
 Class of the proposed result-bearing study: B/EXPLORE under the object-limited ACVC_FIXED_RETRACE_REUSE_E01 exception in MARL_EMPIRICAL_EVIDENCE_SPEC §11.4.1. The complete Convergence decision grants that exact specification plan; its repository application is recorded separately through existing intake. The study compares fixed execution rules on retained trained policies, with zero new fitting, training, optimizer updates and parameter displacement during evaluation. Its ceiling is a preliminary native execution-package signal or counterexample conditional on the two selected retained bases and fresh panels. Preparation remains read-only A/RECON plus documentation. This class decision neither freezes the card nor allocates source implementation or scientific execution.
 
 **Separate application and freeze record (2026-09-09):** The complete original-node response
@@ -20,6 +20,36 @@ substitute for the specification. Root applied the exact insertion on main at
 `996f121eaba29bfb22af29e0f252a2c4c4eb7d41`; its immutable text matches the granted block.
 See the [Convergence intake](ACVC_FIXED_RETRACE_REUSE_E01_CONVERGENCE_INTAKE_20260909.md)
 for exact source, scope checks, the separate freeze decision and application state.
+
+## 0. Current execution allocation — 2026-09-09
+
+Root's later committed instruction **`26f8b1abdf90d5cb34baf9eb7f14d138e5874901`**, final
+“ACVC corrected E01 now explicitly allocated” section of
+`docs/research/portfolio/decisions/2026-09-09-synthesis-execution.md`, allocates the original
+DM/CM complete implementation, required independent semantic review, proportionate synthetic
+acceptance, one detached remote six-panel execution and full technical/scientific intake.
+The four verbatim Pro replacements are preserved unchanged. Their historical “not allocated”
+wording and prior preparation status record that earlier decision boundary; this later
+explicit allocation now controls. The scientific definition in §§2–5 is unchanged.
+
+Exactly one six-panel invocation is allocated, with the declared two retained bases, C/F/dwell,
+64 episodes per panel and evaluation namespaces 8911/8912. The complete logical work cap is
+**180 seconds**, including **at most 30 seconds total supporting checks/readback**, all
+imports, six base loads and constructors, evaluation, publication and actual exit. Charge
+measured support against the remaining execution allowance; the 30 seconds is inside the
+180 seconds and is not a renewable allowance. Preserve complete cost and any partial result.
+No scientific retry, replacement, extra panel, profiling, selector reopening or successor
+is allocated. Required source/check repairs before scientific execution do not create a
+new scientific invocation allowance or increase either cap.
+
+The original CM accepts required review/checks, commits and pushes exact source, then executes
+the single detached remote batch after fresh actual-node resource admission; no further Root
+source-approval gate is added. Register the accepted handle directly with the live shared
+Monitor and obtain adoption under `docs/project/EXPERIMENT_MONITOR.md`. Root resumes that CM
+on terminal for collection and this DM for full scientific intake. The same designated
+`codex/acvc` checkout is retained. Required committed main inputs were reconciled at merge
+`4ee6a25f5d358400d96f646c4699cd4cb97e701c`, whose tree matches the accepted allocation input.
+See [E01 intake](ACVC_FIXED_RETRACE_REUSE_E01_INTAKE_20260909.md) for prediction and cost state.
 
 ## 1. Question, authority and smallest useful observation
 
