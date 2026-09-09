@@ -8,14 +8,14 @@ Root owns planning and integration under [ROOT_OPERATIONS.md](../../project/ROOT
 
 ## P67 completed returns and P68 continuation
 
-The five original P67 DM assignments have returned. Both experiments are collected/intaken and integrated through main 8e19cda9b; neither remains live. FSD and UCOPE ready packets were dispatched once to independent Transport, whose turn is active; provider Send acceptance is still unconfirmed. VSPC1 P68 card preparation and CRTO/FOLR P68 readiness preparation have actual native dispatches. Count only observed native turns and subsequently confirmed provider generations, not five queued intentions.
+The five original P67 DM assignments have returned. Both experiments are collected/intaken and integrated through main 8e19cda9b; neither remains live. FSD and UCOPE each completed one provider Send and returned ARCHIVED/NATURAL_COMPLETION receipts; both original DMs received native intake dispatches. VSPC1 P68 card preparation and CRTO/FOLR P68 readiness preparation have actual native dispatches. Count only observed native turns and subsequently confirmed provider generations, not five queued intentions.
 
 | Direction | Native DM | Synced direction revision | Current bounded work |
 | --- | --- | --- | --- |
 | ucope | /root/dm_ucope_p47_resume | 9f71571dc | Request 2026-09-08-ucope-post-b04-renewal-convergence-01 ARCHIVED/NATURAL_COMPLETION, one Send; original DM received followup_task for complete GitHub response intake and conforming card/next assignment; no new experiment |
 | vsp_c1 | /root/dm_vspc1_p49_value_question | d220ef01c | P67 COMPLETE/UP, Delta+.0230983264; 312.77s whole invocation, no live process. P68 followup_task prepares same-information approximately capacity-matched ordinary-MLP comparator card/tier return; no code/run allocation yet |
 | vsp_03 | /root/dm_vsp03_p54_reentry | daf20eeee | P67 COMPLETE, source828da0034, collection52160094e; greedy G-R0+.0026123047, stochastic G-R0-.0487548828, mixed two-instance evidence. Complete manager-origin-to-finished wall3.253184s now verified from journal; no successor allocated |
-| flexible_skill_duration | /root/dm_fsd_p47_resume | 27aacfb0d | Request 2026-09-08-fsd-p67-uav-individual-renewal-01 dispatched to Transport; existing binding, P52 stop preserved, await factual Send/result receipt |
+| flexible_skill_duration | /root/dm_fsd_p47_resume | 27aacfb0d | Request 2026-09-08-fsd-p67-uav-individual-renewal-01 ARCHIVED/NATURAL_COMPLETION, one Send; original DM received followup_task for full GitHub delivery intake and conforming card/assignment; no new experiment |
 | degraded_incumbent_shadow_handover | /root/dm_dish_p53_native_proposal_question | f9d3aa52d | P67 source/readiness intake complete NO_READY_CONTINUATION; no nominated source treatment, P62 narrow stops retained, zero new exposure |
 | commitment_residual_triggered_options | /root/dm_crto_p68_reentry | 8e19cda9b | P68 zero-exposure source/re-entry assessment in C:/Projects/HMASD-worktrees/codex-crto, codex/crto; ready proper-node packet or precise no-ready return |
 | vap_folr_core | /root/dm_folr_p68_reentry | 8e19cda9b | P68 zero-exposure multi-step state-retention readiness assessment in C:/Projects/HMASD-worktrees/codex-vap-folr, codex/vap-folr; ready proper-node packet or precise no-ready return |
