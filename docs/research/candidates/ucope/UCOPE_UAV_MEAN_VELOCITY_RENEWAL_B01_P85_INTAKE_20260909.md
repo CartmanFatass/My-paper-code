@@ -143,3 +143,30 @@ exit $LASTEXITCODE
 ```
 
 Bash `-n` and PowerShell parser passed. This exact payload is committed/pushed before submission. Root owns integration and remote P85 scientific cwd/wrapper reclamation after verified preservation; designated shared local authoring checkout remains in use. CM retains the separately rejected local test-scratch cleanup responsibility.
+
+## 6. CM terminal collection and technical acceptance
+
+The one accepted handle finished **exit0**, PID **3059411**, tmux inactive. Supervisor start **2026-09-09T23:50:01+08:00**, end **2026-09-09T23:55:32+08:00**. Fresh actual-node admission at **2026-09-09T15:50:01.191180Z** passed with physical/effective **15638007808 bytes**, each ≥4294967296. Outer wall **331.58 s**, peak RSS **556548 KiB**, complete F **174.66877074097283 s**, G including H **140.52741507801693 s**, runner pair **315.19618722598534 s**. Critical path and summed invocation wall coincide; aggregate CPU unmeasured. No cap, partial episode, nonfinite or publication failure.
+
+[Terminal status](../../../../temp/directions/ucope/exp/ucope-uav-mean-velocity-renewal-b01-8401-p85-20260909/terminal-status.json), [supervisor log](../../../../temp/directions/ucope/exp/ucope-uav-mean-velocity-renewal-b01-8401-p85-20260909/supervisor/task.log), [summary](../../../../temp/directions/ucope/exp/ucope-uav-mean-velocity-renewal-b01-8401-p85-20260909/summary.json), [readback](../../../../temp/directions/ucope/exp/ucope-uav-mean-velocity-renewal-b01-8401-p85-20260909/collection-readback.json) and [verification output](../../../../temp/directions/ucope/exp/ucope-uav-mean-velocity-renewal-b01-8401-p85-20260909/verification-output.txt) preserve direct evidence. Seven scientific files, seven supervisor files and executed wrapper collected; all remote/raw hashes, source and wrapper binding match. Read-only collection acceptance **PASS**, without any model/native/learner/evaluation/replay or additional suite invocation.
+
+Full planned **303104** native steps, **2048** Adam calls, **512** rollouts, **1024** training and **160** final episodes, **1184** explicit plus **2** constructor resets, **3200** diagnostic frames. Exactly F training→F_sampled→F_mean→G training→G_sampled→G_mean→H row order, two final FP32 checkpoints, five32-episode final outcomes and eight complete paired contrasts. All160 J/reset associations, reward_sum/256, mode counts, optimizer counts, three-level F frozen-head exposure and all parameter groups were checked. The selected primary is explicitly **F_mean_minus_G_mean**; all_modes_complete and diagnostics_complete are true.
+
+| Contrast | Mean | Conditional evaluation SE |
+| --- | ---: | ---: |
+| F_mean_minus_G_mean | -0.008350131013904307 | 0.006736648533933545 |
+| F_sampled_minus_G_sampled | -0.02234539578242959 | 0.011146317759927301 |
+| F_mean_minus_H | -0.0900967755406669 | 0.007991683312183612 |
+| G_mean_minus_H | -0.0817466445267626 | 0.01058012468337991 |
+| F_sampled_minus_H | -0.04753797201899047 | 0.011108766806409685 |
+| G_sampled_minus_H | -0.025192576236560876 | 0.012349499534101622 |
+| F_mean_minus_F_sampled | -0.04255880352167644 | 0.007527296196624865 |
+| G_mean_minus_G_sampled | -0.05655406829020172 | 0.00913219329993519 |
+
+Outcome means: F_sampled **0.10893185324813584**, F_mean **0.06637304972645941**, G_sampled **0.13127724903056542**, G_mean **0.07472318074036371**, H **0.1564698252671263**. These are one fresh matched training instance's direct outputs; technical acceptance makes no pooled or training-population claim.
+
+**Evaluation nonmutation:** all parameter groups for both fits have displacement **0** from the final fit after sampled mode and after mean mode; buffers_unchanged is true for all four mode measurements. Current models have no running-stat buffers, and code review found no evaluation optimizer access. F whole/hidden duration initial=final norm **3.3659768104553223**, displacement0; final layer weight/bias remain zero, relative displacement undefined at zero norm. Training moved common actors F **3.0816524028778076**, G **2.731663465499878** and critics F **6.852802753448486**, G **5.5406646728515625**.
+
+F renewals: training **438136**, sampled final **27386**, mean final **27386**. Literal d2: training **218019**, each final mode **13616**, total **245251**; d4 **0** throughout. Suppressed decisions training **217224**, each final mode **13574**; censored holds training **795**, each final mode **42**. Every F episode satisfies d2=suppressed+censored; phase/rollout/mode totals and physical support/expiry/held velocity/remaining4 diagnostics agree. F duration-head forward rows **2738360**, within the declared2048000–4096000 range.
+
+One allocated invocation is consumed; every outcome ends P85. No additional run or scientific change follows from this technical return. DM owns scientific intake and evidence archival; Root owns integration and P85 remote scientific cwd/wrapper reclamation after verified preservation. Designated local checkout remains in use. The separately rejected completed local test-scratch cleanup in section4 remains **CM-owned**, preserved under the DM's no-retry/no-bypass instruction; it does not alter these measurements.
