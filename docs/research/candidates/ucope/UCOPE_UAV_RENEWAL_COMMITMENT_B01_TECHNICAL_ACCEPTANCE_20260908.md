@@ -102,7 +102,7 @@ The P69 source-only history above remains unchanged. Actual local starting HEAD 
 `d749a6a26e450219d4d2f563a3256bc8f6b4fc00`; scientific source stays
 `a453447cb011d50c6bb63ed7fc40180134a914b5`. Main integration is separate from this published source binding.
 CM owns the sole observation through collection and returns all outcomes to DM; Root does
-not poll in parallel. This pure execution/collection correction exclusion is already recorded
+not poll in parallel. This pure execution/collection exclusion is already recorded
 once in the P70 intake and creates no new coding/comparison enrollment.
 
 Fresh scientific checkout: `/home/wu/hmasd-worktrees/ucope-uav-renewal-b01-7301-p70-20260908`.
@@ -111,20 +111,20 @@ Output relative to that checkout: `temp/directions/ucope/exp/ucope-uav-renewal-b
 Unique supervisor handle: `ucope-uav-renewal-b01-7301-p70-20260908`.
 The existing P69 engineering checkout and raw receipts are untouched.
 
-Per-arm cost projection before submission: T retains initialization +131072 native/recurrent
-training steps +1024 Adam calls +8192 final evaluation steps +publication, with actual renewal
-sampling/density/backward head work added. G retains that chain plus8192 H steps. B04's complete
-T137.6704245s and G139.2941963s are same-loop references; renewal's incremental seconds and
+Per-arm cost projection before submission: T retains initialization + 131072 native/recurrent
+training steps + 1024 Adam calls + 8192 final evaluation steps +publication, with actual renewal
+sampling/density/backward head work added. G retains that chain plus 8192 H steps. B04's complete
+T 137.6704245s and G 139.2941963s are same-loop references; renewal's incremental seconds and
 aggregate CPU are unknown, and the 64-256x head-row multiplier is not a full-wall multiplier.
 No concrete over-cap projection exists; this allocated invocation retains the original
-1800s per-complete-arm and3600s whole limits. Serial study critical path equals this pair's
+1800s per-complete-arm and 3600s whole limits. Serial study critical path equals this pair's
 whole elapsed wall; summed per-arm wall and aggregate CPU are distinct. No pilot, new test,
 profile, replay or resource inference from the synthetic suite is used.
 Post-learner path coverage: reuse the accepted P69 short synthetic collector/learner/checkpoint/
 primary publication coverage (81 tests); no repeated suite or smoke is selected.
 
 Preparation observed the handle `not_found`, no prior supervisor directory, and no scientific
-checkout/output before creating this exact-SHA detached checkout. All2176 materialized tracked
+checkout/output before creating this exact-SHA detached checkout. All 2176 materialized tracked
 files match accepted Git blobs, with explicit existence/content checks for the four candidate
 modules, runner, canonical `scripts/hmasd_resource_preflight.py`, its `hmasd_platform.py`
 dependency and both base UAV/adapter entry points. Canonical preflight helper SHA256:
@@ -157,9 +157,121 @@ exit $LASTEXITCODE
 ```
 
 The preflight and scientific command are one supervised shell chain joined by `&&`.
-Fresh physical AND effective available memory must meet4GiB before scientific output-root
+Fresh physical AND effective available memory must meet 4 GiB before scientific output-root
 creation, model/RNG work or execution. A failed admission remains in the supervisor root.
 The external whole timeout includes admission and publication; the runner retains its own
 per-arm limits. At most one accepted submission is allocated. Uncertain acceptance is
 reconciled on this exact handle; no retry/resume/replacement or extra evaluation follows.
 Terminal observations and collection will append below without changing these payload bytes.
+
+## P70 terminal execution and collection acceptance
+
+**Technical acceptance: PASS**, one accepted scientific submission, source
+`a453447cb011d50c6bb63ed7fc40180134a914b5`, master 7301. Literal payload binding was
+committed/pushed at `345e41b2f83b9ebe86725c9099bf2f5d295358cf` before executing the exact
+local `submit.ps1`; its output confirms one accepted supervisor submission. No resubmission,
+retry, resume, changed master, extra H/evaluation or parallel observation occurred.
+CM followed the same handle to terminal and collected all outputs. Source remained clean
+and exact at terminal readback. The staged wrapper's collected bytes retain the committed digest.
+
+Supervisor `ucope-uav-renewal-b01-7301-p70-20260908`, PID 3020108/start epoch 1788929303,
+finished exit 0 with inactive tmux. Log start 2026-09-09T12:48:23+08:00 and
+end 2026-09-09T12:53:28+08:00. Admission was a separate successful event, assessed
+2026-09-09T04:48:23.972732Z: physical/effective available memory both 15639891968 bytes,
+minimum 4294967296 bytes, both floors true, no failure reasons. The supervisor's admission
+receipt is byte-identical to the copy in the scientific output root. The committed shell
+chain ran that accepted canonical helper before output-root creation and learner execution.
+Subsequent normal observations saw 65, 323, 583, 903 complete episode rows under the same running
+PID, establishing learner progress separately from supervisor acceptance and memory admission.
+
+| Complete-path measurement | Observation |
+| --- | ---: |
+| Outer wall, including admission and publication/exit | 304.85 s |
+| Runner whole wall | 295.8246927349828 s |
+| T complete arm wall | 160.45789840299403 s |
+| G complete arm wall, including H and final publication | 135.36679288500454 s |
+| External peak RSS | 556972 KiB |
+| Aggregate CPU work | not measured |
+
+Runner status COMPLETE; limits empty; no cap breach. Both complete arms are below 1800s and
+outer whole is below 3600s. Serial study critical path is 304.85s; the sum of recorded arm
+wall is 295.82469128799857s. Outer and runner clocks have different boundaries; their gap
+includes admission/startup/shutdown and is not attributed to a measured kernel or phase.
+These are direct wall/RSS/admission observations, not an assertion of continuous resource telemetry.
+
+### Frozen work, primary and renewal counts
+
+All 1120 episode rows, 512 rollout rows and 1600 prescribed diagnostic rows were retained.
+There are 286720 native team steps, 2048 Adam calls, 96 final evaluation episodes, 1120 explicit
+resets,2 constructor resets and zero partial episode steps. Each learned arm completed 512
+training episodes/131072 native steps/256 rollouts/1024 Adam calls. T/G each have 32 final
+episodes and H has 32; no extra native calls were collected. Config/seed/reset/checkpoint
+bindings, every J=reward_sum/256, finite numeric JSON, finite FP32 checkpoints, parameter
+counts and native publication values passed read-only inspection. Supervisor-printed primary
+and counts match summary.json. No favorable parameter movement was imposed as an acceptance rule.
+
+| Native final endpoint | Mean | Conditional evaluation SE |
+| --- | ---: | ---: |
+| T-G | 0.055673191348834944 | 0.011556059794903147 |
+| T-H | 0.05305453732049459 | 0.01182038845858344 |
+| G-H | -0.002618654028340355 | 0.011943248746505064 |
+
+Arm means: T=0.18553283836801163, G=0.12985964701917668,
+H=0.13247830104751704. All 96 J values and all three signed paired-difference
+vectors are retained in the native summary. Conditional SEs were recomputed from 32 paired
+final episodes; independent training n=1 remains unchanged. DM owns the all-outcome interpretation,
+including G-H's sign; technical acceptance makes no training-population or causal claim.
+
+| T phase | Owned velocity/duration selections | Selected d4 | Actual suppressed decisions | Horizon-censored holds |
+| --- | ---: | ---: | ---: | ---: |
+| Training | 255710 | 134282 | 399650 | 1592 |
+| Final evaluation | 15883 | 8419 | 25077 | 93 |
+
+G has 655360 training and 40960 final velocity decisions, zero durations/suppression/censoring;
+H has zero decisions. Episode, rollout and phase-summary event sums match. Every complete T
+episode satisfies selections +actual suppressed decisions =5*256; duration and velocity
+selection counts agree. Actual duration-head forward rows are 1566026
+(6*255710+2*15883), giving 3457785408 dense forward
+multiply-adds at 2208/row. These counts derive from the frozen path and actual events; they
+are not additional profiling or counterfactual runtime measurements. Full per-event timing/
+label trajectories were not collected, as the card selected aggregate counts only.
+
+T/G final checkpoint parameter totals 68553/66311 match; T head 2242, hidden 2176/final 66.
+Stored-checkpoint final norms match the reported exposure groups. T total displacement is
+8.719639778137207; G total displacement is7.15549898147583.
+T duration-head displacement is0.7187902927398682, hidden-layer
+0.6962713599205017, final-layer0.1785096526145935.
+The final layer's zero initial norm retains null relative displacement. The readback does
+not reconstruct a training run or claim independent replay of displacement histories.
+
+### Collected bytes, checks and return boundary
+
+Collected local artifact root in the authoring checkout:
+`temp/directions/ucope/exp/ucope-uav-renewal-b01-7301-p70-20260908`. The seven output SHA256 values independently read on the remote node
+match the local bytes:
+
+| Output | SHA256 |
+| --- | --- |
+| summary.json | `d04ae37aa99ae2a648c1db66494549626a986f42a80e12102da10606920f6e5d` |
+| episodes.jsonl | `1e7cb79778940283b1eaa3bd67a92b42416cc226984de6ce8f5f24b4d4183811` |
+| rollouts.jsonl | `09d53d6d4918b3251b3dda85d2bfc3c87b05d805f782670d33006011425b33ad` |
+| diagnostics.jsonl | `4ddaef03efe044670bc939eada8ed0cd34f7d5f1d38675f1e3e35584c45d8a04` |
+| final_T.pt | `2714bec3aa4f7f067db0ced5f50eb24897915c151b7a689747adc7a915d7032a` |
+| final_G.pt | `6e4d8e0f39e68213124b92efdc6e1e0ed43afee202f1e4588d367b482dcbdb64` |
+| resource_admission.json | `8df70040e845698ff003ac83a8ff7df4dd8d0a053663230e667d2d5c77b5adca` |
+
+[Read-only collection report](../../../../temp/directions/ucope/exp/ucope-uav-renewal-b01-7301-p70-20260908/collection-readback.json),
+[verification source](../../../../temp/directions/ucope/exp/ucope-uav-renewal-b01-7301-p70-20260908/verify_collection.py),
+[verification output](../../../../temp/directions/ucope/exp/ucope-uav-renewal-b01-7301-p70-20260908/verification-output.txt),
+[remote source/process/hash readback](../../../../temp/directions/ucope/exp/ucope-uav-renewal-b01-7301-p70-20260908/remote-readback.txt),
+[supervisor log](../../../../temp/directions/ucope/exp/ucope-uav-renewal-b01-7301-p70-20260908/supervisor/task.log) and
+[executed wrapper](../../../../temp/directions/ucope/exp/ucope-uav-renewal-b01-7301-p70-20260908/executed-wrapper.sh) preserve the detailed evidence.
+The collection verifier inspected recorded JSON/tensor bytes only; exit 0, no model,
+learner, evaluator, scientific replay or extra test invocation. No material source,
+count, publication, checkpoint, numerical, admission or cap discrepancy remains.
+
+This batch ends with terminal collection and technical acceptance. Checkout/index ownership
+returns to DM for all-outcome intake; Root integrates that return and owns later archive/
+reclamation of the scientific checkout and wrapper after evidence and intake are preserved.
+P69's separate test checkout/raw receipts are untouched and remain Root's separate cleanup.
+No subsequent pair, extra evaluation, source change or scientific follow-up is implied.
