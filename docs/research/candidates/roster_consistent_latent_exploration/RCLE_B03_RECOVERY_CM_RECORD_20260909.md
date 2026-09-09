@@ -22,7 +22,7 @@ weighted-law review/check evidence is reused. No unchanged suite/native smoke re
 Independent original reviewer `rev_ah_rcle_b03` returned no material finding after
 checking the changed output/handler/wrapper boundary and exact historical W1 input.
 Read-only review ran no tests or science. CM inspected the complete diff; runtime success,
-exact staging and Monitor adoption remain prospective. New production changes add24 lines
+exact staging and Monitor adoption remain prospective. New production changes add21 lines
 and remove3 (including10-line shell); Python runner44 lines, below the fixed limits.
 
 Frozen runtime input is historical W1 summary only,1,367,051 bytes SHA256
@@ -52,3 +52,16 @@ The newly created test scratch removal was rejected by automatic approval review
 `Remove-Item -LiteralPath C:/Projects/HMASD-worktrees/dm-rcle-a02-20260906/temp/directions/roster_consistent_latent_exploration/test/b03-recovery-focused-20260909 -Recurse -Force`,
 `blocked by policy`. It remains preserved; no bypass/retry. Older blocked scratch and
 all closed-attempt archives remain untouched. No scientific result exists at this record.
+
+## Accepted launch and pending collection
+
+Source committed/pushed `4e89f24197a79d0b4fc724018f0223ca2c1e4289`. Detached remote cwd
+matches that source; diff of scripts/experiments is empty and `bash -n` passed.
+Remote frozen W1 input matches1,367,051bytes and its declared SHA256. Fixed shell digest
+`5cf162db62de0e920fd7ec809231dd7beaa703fe6ba1a7b07efb2854b1255171`.
+Supervisor accepted `rcle-b03-recovery-20260909`; direct MONITOR_ADD app delivery to
+the live Monitor ID above succeeded. Actual adoption is pending Monitor's direct
+observation/Root confirmation. CM did not query running scientific status or continue
+routine polling after dispatch. Root will resume this CM for terminal collection.
+Mandatory per-invocation admission is part of the accepted list, not inferred from
+supervisor acceptance. No runtime completion or scientific acceptance is claimed here.
