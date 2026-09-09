@@ -8,7 +8,7 @@ Root owns planning and integration under [ROOT_OPERATIONS.md](../../project/ROOT
 
 ## P67 completed returns and P68 continuation
 
-The five original P67 DM assignments have returned. Both experiments are collected/intaken and integrated through main 8e19cda9b; neither remains live. FSD and UCOPE each completed one provider Send and returned ARCHIVED/NATURAL_COMPLETION receipts; both original DMs received native intake dispatches. VSPC1 P68 card preparation and CRTO/FOLR P68 readiness preparation have actual native dispatches. Count only observed native turns and subsequently confirmed provider generations, not five queued intentions.
+The five original P67 DM assignments have returned. Both experiments are collected/intaken and integrated through main 8e19cda9b; neither remains live. FSD and UCOPE each completed one provider Send and returned ARCHIVED/NATURAL_COMPLETION receipts; both original DMs received native intake dispatches. VSPC1 P68 card preparation, CRTO readiness and ACVC replacement readiness have actual native dispatches; FOLR readiness completed no-ready. Count only observed native turns and subsequently confirmed provider generations, not five queued intentions.
 
 | Direction | Native DM | Synced direction revision | Current bounded work |
 | --- | --- | --- | --- |
@@ -18,7 +18,7 @@ The five original P67 DM assignments have returned. Both experiments are collect
 | flexible_skill_duration | /root/dm_fsd_p47_resume | 27aacfb0d | Request 2026-09-08-fsd-p67-uav-individual-renewal-01 ARCHIVED/NATURAL_COMPLETION, one Send; original DM received followup_task for full GitHub delivery intake and conforming card/assignment; no new experiment |
 | degraded_incumbent_shadow_handover | /root/dm_dish_p53_native_proposal_question | f9d3aa52d | P67 source/readiness intake complete NO_READY_CONTINUATION; no nominated source treatment, P62 narrow stops retained, zero new exposure |
 | commitment_residual_triggered_options | /root/dm_crto_p68_reentry | 8e19cda9b | P68 zero-exposure source/re-entry assessment in C:/Projects/HMASD-worktrees/codex-crto, codex/crto; ready proper-node packet or precise no-ready return |
-| vap_folr_core | /root/dm_folr_p68_reentry | 8e19cda9b | P68 zero-exposure multi-step state-retention readiness assessment in C:/Projects/HMASD-worktrees/codex-vap-folr, codex/vap-folr; ready proper-node packet or precise no-ready return |
+| vap_folr_core | /root/dm_folr_p68_reentry | 8e19cda9b | P68 complete NO_READY_CONTINUATION at0131f327f, integratedbee83af7a; no specific multi-step retention intervention selected, no new exposure or family disposition |
 
 Independent Transport received a read-only reconciliation of RCLE exact-request acceptance and SCDMP P58 terminal no-effect state. No third click, resend or new binding was authorized; this unresolved external dependency does not add an advancing direction.
 
@@ -39,3 +39,5 @@ Independent Transport received a read-only reconciliation of RCLE exact-request 
 The P67 resume handoff supersedes the global pause, while preserving every spent allowance and uncertain external identity. FRRIE's P59 intake and later unresolved P63 observation-method dependency are distinct; this snapshot does not infer a completed P63 result. RCLE's provider acceptance remains unproven, so no failed-Send conclusion or duplicate request follows.
 
 A direction counts as advancing only when a native turn, accepted handle or accepted Pro generation is actually live. Completed returns, undispatched intentions and unresolved idle dependencies count zero. Resume decisions use these current facts and the linked intakes, not old agent names or superseded handoff instructions.
+
+ACVC P68 replacement: /root/dm_acvc_p68_reentry, C:/Projects/HMASD-worktrees/codex-acvc, codex/acvc atbee83af7a (clean/pushed at dispatch), zero-exposure source/readiness packet-or-no-ready assignment under the recorded R03 re-entry boundary. No local family reopening or experiment allocation.
