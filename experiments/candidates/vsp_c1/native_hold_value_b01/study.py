@@ -75,6 +75,22 @@ def primary_from_rows(rows, expected, reset_start):
     return result
 
 
+def paired_change_from_rows(rows, expected, reset_start):
+    """Fixed 512/768 panels; missing H does not invalidate the learned change."""
+    endpoints = {str(n): primary_from_rows(
+        [r for r in rows if r["arm"] == "H" or r.get("training_episodes") == n],
+        expected, reset_start) for n in (512, 768)}
+    complete = all(p["complete"] for p in endpoints.values())
+    change = difference_stats(b - a for a, b in zip(
+        endpoints["512"]["GATED-V_minus_MLP-V"]["differences"],
+        endpoints["768"]["GATED-V_minus_MLP-V"]["differences"])) if complete else difference_stats([])
+    change.update(complete=complete, identities=endpoints["512"]["GATED-V_minus_MLP-V"]["identities"] if complete else [])
+    mean = change["mean"]
+    return dict(complete=complete, hover_complete=endpoints["768"]["hover_complete"],
+                endpoints=endpoints, change=change, independent_training_pairs=1,
+                reading=("CHANGE_UP" if mean > .01 else "CHANGE_DOWN" if mean < -.01 else "CHANGE_WITHIN") if complete else None)
+
+
 def checkpoint_identity(config, arm, sha, object_id=OBJECT, normalize_value=False,
                         second_mlp_width=128, extra_init_seed=None):
     configuration = asdict(config)
@@ -92,7 +108,7 @@ def checkpoint_identity(config, arm, sha, object_id=OBJECT, normalize_value=Fals
 
 def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=write_summary,
              *, object_id=OBJECT, card=CARD, normalize_value=False,
-             second_mlp_width=128, extra_init_seed=None):
+             second_mlp_width=128, extra_init_seed=None, fixed_endpoints=False):
     import torch
     from experiments.candidates.ucope.uav_motion_prefix_b01.environment import SyntheticAdapter, make_real
     from experiments.candidates.ucope.uav_motion_prefix_b01.learner import collect_episode, optimizer_for, update
@@ -127,6 +143,12 @@ def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=wri
                               constructor_reset=b+1000, train_reset_start=b+1000,
                               eval_reset_start=b+2000, eval_velocity_start=b+3000,
                               eval_duration_start=b+4000))
+    if fixed_endpoints:
+        summary["evaluation_endpoints"] = [512, 768]
+        summary["seeds"]["evaluation_constructor_reset"] = b+2000
+        summary["cost_projection"] = {
+            "GATED-V": "init + 196608*c_env_actor + 1536*c_update + 16384*c_eval + two endpoint publications; gate increment unmeasured",
+            "MLP-V": "196608*c_env_actor + 1536*c_update + 24576*c_eval + two endpoint publications + pair publication/readback/exit"}
     if second_mlp_width == 133:
         summary["seeds"]["extra_initialization"] = extra_init_seed
     if normalize_value:
@@ -172,11 +194,24 @@ def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=wri
             counts["constructor_resets"] += 1
             deadline.check()
 
-            def episode(phase, e, model, value_model, vrng, drng, label):
+            eval_env = env
+            if fixed_endpoints:
+                eval_env = factory(b+2000)
+                counts["constructors"] += 1
+                counts["constructor_resets"] += 1
+                deadline.check()
+                arm_info["endpoints"] = {}
+            training_counts = new_counts()
+            training_counts["constructors"] = training_counts["constructor_resets"] = 1
+
+            def episode(phase, e, model, value_model, vrng, drng, label, endpoint=None):
+                metadata = dict(pair_master=config.seed, arm=label, phase=phase, episode=e)
+                if fixed_endpoints and phase == "eval":
+                    metadata["training_episodes"] = endpoint if model is not None else 0
                 data = collect_episode(
-                    env, model, value_model, config.horizon,
+                    env if phase == "train" else eval_env, model, value_model, config.horizon,
                     b + (1000 if phase == "train" else 2000) + e, vrng, drng,
-                    dict(pair_master=config.seed, arm=label, phase=phase, episode=e),
+                    metadata,
                     deadline.check, counts, lambda row: emit("episodes", row),
                     lambda row: None, limits, real=not config.fixture, diagnostics=False,
                     ratio_grouping="agent_compound",
@@ -185,12 +220,51 @@ def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=wri
                     arm_info["nonzero_r_rows"][phase] += int((data["critic"][..., R_COLUMNS] != 0).any(-1).sum())
                 return data
 
+            def evaluate_endpoint(completed):
+                info = arm_info
+                filename = f"final_{arm}.pt"
+                if fixed_endpoints:
+                    info = dict(training_episodes=completed, complete=False,
+                                critic_architecture=arm_info["critic_architecture"],
+                                critic_parameter_count=arm_info["critic_parameter_count"])
+                    arm_info["endpoints"][str(completed)] = info
+                    filename = f"endpoint_{completed}_{arm}.pt"
+                    if moments is not None:
+                        info["value_moments"] = moments.state()
+                info["training_counts"] = training_counts.copy() if fixed_endpoints else counts.copy()
+                info["exposure"] = movement(initial, actor, critic)
+                deadline.check()
+                normalization_state = {"value_moments": moments.state()} if moments is not None else {}
+                if second_mlp_width == 133:
+                    normalization_state.update(critic_architecture=info["critic_architecture"],
+                                               critic_parameter_count=info["critic_parameter_count"])
+                torch.save(dict(checkpoint_identity(config, arm, sha, object_id, normalize_value, **architecture_options), actor=actor.state_dict(),
+                                critic=critic.state_dict(), **normalization_state,
+                                **({"training_episodes": completed} if fixed_endpoints else {})), out / filename)
+                info["checkpoint"] = filename
+                deadline.check()
+                before = counts.copy()
+                if moments is not None:
+                    info["moments_before_evaluation"] = moments.state()
+                for e in range(config.eval_episodes):
+                    episode("eval", e, actor, critic, generator(b+3000+e), generator(b+4000+e), arm, completed)
+                info["evaluation_counts"] = {k: counts[k]-before[k] for k in counts}
+                if moments is not None:
+                    info["moments_after_evaluation"] = moments.state()
+                ec = info["evaluation_counts"]
+                info["sampled_d4_frequency"] = ec["d4"] / ec["duration_decisions"]
+                info["complete"] = True
+                deadline.check()
+
             for index in range(config.train_episodes // 2):
                 before = counts.copy()
                 episodes = [episode("train", 2*index+i, actor, critic, velocity_rng, duration_rng, arm) for i in range(2)]
                 records = update(actor, critic, optimizer, episodes, config.chunk, deadline.check,
                                  counts, ratio_grouping="agent_compound", **learning_options)
                 counts["rollouts"] += 1
+                if fixed_endpoints:
+                    for key in counts:
+                        training_counts[key] += counts[key] - before[key]
                 normalization_row = {}
                 if moments is not None:
                     arm_info["value_moments"] = moments.state()
@@ -199,30 +273,15 @@ def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=wri
                                       steps=2*config.horizon, episodes=2, epochs=records, **normalization_row,
                                       **{k: counts[k]-before[k] for k in ("optimizer_steps", "velocity_decisions", "duration_decisions", "d4")}))
                 deadline.check()
+                if fixed_endpoints and 2*(index+1) in (512, 768):
+                    evaluate_endpoint(2*(index+1))
             arm_info["fit_complete"] = True
-            arm_info["training_counts"] = counts.copy()
-            arm_info["exposure"] = movement(initial, actor, critic)
-            deadline.check()
-            normalization_state = {"value_moments": moments.state()} if moments is not None else {}
-            if second_mlp_width == 133:
-                normalization_state.update(critic_architecture=arm_info["critic_architecture"],
-                                           critic_parameter_count=arm_info["critic_parameter_count"])
-            torch.save(dict(checkpoint_identity(config, arm, sha, object_id, normalize_value, **architecture_options), actor=actor.state_dict(),
-                            critic=critic.state_dict(), **normalization_state), out / f"final_{arm}.pt")
-            arm_info["checkpoint"] = f"final_{arm}.pt"
-            deadline.check()
-            before = counts.copy()
-            if moments is not None:
-                arm_info["moments_before_evaluation"] = moments.state()
-            for e in range(config.eval_episodes):
-                episode("eval", e, actor, critic, generator(b+3000+e), generator(b+4000+e), arm)
-            arm_info["evaluation_counts"] = {k: counts[k]-before[k] for k in counts}
-            if moments is not None:
-                arm_info["moments_after_evaluation"] = moments.state()
-            ec = arm_info["evaluation_counts"]
-            arm_info["sampled_d4_frequency"] = ec["d4"] / ec["duration_decisions"]
-            arm_info["complete"] = True
-            deadline.check()
+            if not fixed_endpoints:
+                evaluate_endpoint(config.train_episodes)
+            else:
+                arm_info["training_counts"] = training_counts.copy()
+                arm_info["exposure"] = movement(initial, actor, critic)
+                arm_info["complete"] = all(i["complete"] for i in arm_info["endpoints"].values())
             if arm == ARMS[1]:
                 before = counts.copy()
                 try:
@@ -252,7 +311,7 @@ def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=wri
     summary["counts"] = {k: sum(a["counts"][k] for a in arms.values()) for k in new_counts()}
     summary["counts"]["partial_episode_steps"] = summary["counts"]["team_steps"] - summary["counts"]["completed_episode_steps"]
     summary["scientific_uav_calls"] = summary["counts"]["scientific_uav_calls"]
-    summary["primary"] = primary_from_rows(rows, config.eval_episodes, b+2000)
+    summary["primary"] = (paired_change_from_rows if fixed_endpoints else primary_from_rows)(rows, config.eval_episodes, b+2000)
     summary["status"] = ("COMPLETE" if summary["primary"]["complete"] and summary["primary"]["hover_complete"] and not limits
                          else "PRIMARY_COMPLETE_WITH_LIMITS" if summary["primary"]["complete"] else "INCOMPLETE")
 
@@ -275,18 +334,23 @@ def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=wri
         loaded = json.loads((out / "summary.json").read_text(encoding="utf-8"))
         if loaded["primary"] != clean_json(summary["primary"], limits):
             raise ValueError("primary summary readback mismatch")
-        for arm, info in arms.items():
-            if "checkpoint" in info:
-                saved = torch.load(out / info["checkpoint"], map_location="cpu", weights_only=True)
-                if any(saved[k] != v for k, v in checkpoint_identity(config, arm, sha, object_id, normalize_value, **architecture_options).items()):
-                    raise ValueError(f"{arm} checkpoint identity readback mismatch")
-                if second_mlp_width == 133:
-                    for key in ("critic_architecture", "critic_parameter_count"):
-                        if saved[key] != info[key] or loaded["arms"][arm][key] != info[key]:
-                            raise ValueError(f"{arm} critic architecture readback mismatch")
-                if normalize_value:
-                    if saved["value_moments"] != info["value_moments"] or loaded["arms"][arm]["value_moments"] != info["value_moments"]:
-                        raise ValueError(f"{arm} value moments readback mismatch")
+        for arm, arm_record in arms.items():
+            records = arm_record.get("endpoints", {}).values() if fixed_endpoints else [arm_record]
+            for info in records:
+                if "checkpoint" in info:
+                    loaded_info = loaded["arms"][arm]["endpoints"][str(info["training_episodes"])] if fixed_endpoints else loaded["arms"][arm]
+                    saved = torch.load(out / info["checkpoint"], map_location="cpu", weights_only=True)
+                    if any(saved[k] != v for k, v in checkpoint_identity(config, arm, sha, object_id, normalize_value, **architecture_options).items()):
+                        raise ValueError(f"{arm} checkpoint identity readback mismatch")
+                    if fixed_endpoints and saved["training_episodes"] != info["training_episodes"]:
+                        raise ValueError(f"{arm} endpoint exposure readback mismatch")
+                    if second_mlp_width == 133:
+                        for key in ("critic_architecture", "critic_parameter_count"):
+                            if saved[key] != info[key] or loaded_info[key] != info[key]:
+                                raise ValueError(f"{arm} critic architecture readback mismatch")
+                    if normalize_value:
+                        if saved["value_moments"] != info["value_moments"] or loaded_info["value_moments"] != info["value_moments"]:
+                            raise ValueError(f"{arm} value moments readback mismatch")
         summary["publication_readback"] = "complete"
     except Exception as error:
         limits.append(f"publication/readback: {type(error).__name__}: {error}")

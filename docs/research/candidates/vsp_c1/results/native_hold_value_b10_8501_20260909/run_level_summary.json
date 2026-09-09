@@ -1,0 +1,90 @@
+{
+  "unit": "caller-declared independent training run",
+  "inference": "descriptive only; no confidence interval or success classification",
+  "groups": [
+    {
+      "task": "B10_fixed_endpoint_512",
+      "arm": "GATED-V",
+      "n": 1,
+      "mean": 0.2003165067135222,
+      "sample_sd": null,
+      "min": 0.2003165067135222,
+      "max": 0.2003165067135222,
+      "runs": {
+        "8501": 0.2003165067135222
+      }
+    },
+    {
+      "task": "B10_fixed_endpoint_512",
+      "arm": "MLP-V",
+      "n": 1,
+      "mean": 0.13643680275066952,
+      "sample_sd": null,
+      "min": 0.13643680275066952,
+      "max": 0.13643680275066952,
+      "runs": {
+        "8501": 0.13643680275066952
+      }
+    },
+    {
+      "task": "B10_fixed_endpoint_768",
+      "arm": "GATED-V",
+      "n": 1,
+      "mean": 0.2041025987306807,
+      "sample_sd": null,
+      "min": 0.2041025987306807,
+      "max": 0.2041025987306807,
+      "runs": {
+        "8501": 0.2041025987306807
+      }
+    },
+    {
+      "task": "B10_fixed_endpoint_768",
+      "arm": "MLP-V",
+      "n": 1,
+      "mean": 0.19446198815446067,
+      "sample_sd": null,
+      "min": 0.19446198815446067,
+      "max": 0.19446198815446067,
+      "runs": {
+        "8501": 0.19446198815446067
+      }
+    }
+  ],
+  "paired_differences": [
+    {
+      "task": "B10_fixed_endpoint_512",
+      "arm": "GATED-V",
+      "baseline": "MLP-V",
+      "summary": {
+        "n": 1,
+        "mean": 0.06387970396285267,
+        "sample_sd": null,
+        "min": 0.06387970396285267,
+        "max": 0.06387970396285267
+      },
+      "differences": {
+        "8501": 0.06387970396285267
+      },
+      "unmatched_arm_seeds": [],
+      "unmatched_baseline_seeds": []
+    },
+    {
+      "task": "B10_fixed_endpoint_768",
+      "arm": "GATED-V",
+      "baseline": "MLP-V",
+      "summary": {
+        "n": 1,
+        "mean": 0.009640610576220038,
+        "sample_sd": null,
+        "min": 0.009640610576220038,
+        "max": 0.009640610576220038
+      },
+      "differences": {
+        "8501": 0.009640610576220038
+      },
+      "unmatched_arm_seeds": [],
+      "unmatched_baseline_seeds": []
+    }
+  ]
+}
