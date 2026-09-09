@@ -1,6 +1,6 @@
 # FOLR public lifecycle TIMING-B01 technical evidence
 
-Implementation accepted; science not yet submitted at this entry. Allocation: card §§2–6 and intake §7 at `8fc84a01eaaf8c89197020a75879ba9dfeea0e33`, Root main `fdede5b8897e412d68d2a341a379efac69feb429`. Original CM owns implementation, execution and terminal collection. The sequence is RETAIN → EVENT → RANDOM, exactly one accepted submission each; failure ends dependent execution. No retry, replacement, top-up, cost probe or successor.
+Implementation accepted; RETAIN submitted and pending Monitor adoption/terminal collection. EVENT and RANDOM remain unsubmitted. Allocation: card §§2–6 and intake §7 at `8fc84a01eaaf8c89197020a75879ba9dfeea0e33`, Root main `fdede5b8897e412d68d2a341a379efac69feb429`. Original CM owns implementation, execution and terminal collection. The sequence is RETAIN → EVENT → RANDOM, exactly one accepted submission each; failure ends dependent execution. No retry, replacement, top-up, cost probe or successor.
 
 ## Source and check index
 
@@ -33,3 +33,15 @@ Route: configured `hmasd-wsl-node`, `/home/wu/.venvs/hmasd/bin/python`, CPU FP32
 Per-arm complete-path projections reused from card §5: RETAIN778.701s, EVENT765.647s, RANDOM772.174s (unmeasured midpoint proxy with unknown mask overhead), sum2316.522s. Training work is4969×32×21×5×2 replay actor rows per arm, plus backward/mixing and5128×21×5 acting rows; RANDOM alone538440 private uniform draws. All three planned arms fit their individual1800s caps. Projection is not observed conformance. Complete external wall, aggregate OS CPU and study critical path remain distinct and will be reported after collection.
 
 The original CM directly registers each accepted handle with live-main shared Monitor `01a087e5-2044-7301-abb6-7a1709a98197`, Root destination `01a07249-b095-7821-8ce2-e9c32ba85267`. Dispatch acceptance is not adoption. Root confirms adoption and resumes this same CM at terminal for collection and the next already allocated arm. No parallel status polling after dispatch. Preserve exact handles and roots until explicit closeout.
+
+## RETAIN accepted, pending collection
+
+Source/check/E0 commit `74d023d7d55453da8a5d5dccebd518e4ffdb65c8` was pushed before execution. A non-login-shell Git fetch stalled and was stopped before any worktree or scientific submission; the configured `zsh -lic` network shell then fetched successfully and staged a new detached exact-source checkout. The staged source was clean and source/preflight/interpreter presence readback passed in0.6174942s. DM's independent source/E0 readback took0.6924301s. Cumulative measured support is **8.3007317s of300s** before collection, leaving291.6992683s; Git/staging transport is separate control-plane work.
+
+Accepted handle `folr-public-lifecycle-timing-b01-retain-20260909`, tmux `agent_folr-public-lifecycle-timing-b01-retain-20260909`, log `/home/wu/.agent-tasks/folr-public-lifecycle-timing-b01-retain-20260909/task.log`. Exact supervisor command:
+
+```sh
+cd /home/wu/hmasd-worktrees/folr-public-lifecycle-timing-b01-74d023d7 && /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/vap_folr_core/exp/public_lifecycle_timing_b01_seed7804_retain_memory.json && mkdir -p temp/directions/vap_folr_core/exp/public_lifecycle_timing_b01_seed7804_retain && /usr/bin/time -v -o temp/directions/vap_folr_core/exp/public_lifecycle_timing_b01_seed7804_retain/process.time /usr/bin/timeout --signal=TERM --kill-after=5s 1800s /home/wu/.venvs/hmasd/bin/python scripts/run_folr_public_lifecycle_b01.py --arm RETAIN --seed 7804 --evaluation-seed 107804 --launch-sha 74d023d7d55453da8a5d5dccebd518e4ffdb65c8 --out temp/directions/vap_folr_core/exp/public_lifecycle_timing_b01_seed7804_retain
+```
+
+Direct MONITOR_ADD via app tool to the live configured task returned destination threadId and `isError=false`, carrying the exact handle/source/cwd/root/receipt and original CM/DM/Root. **Dispatch accepted, adoption not yet confirmed.** No remote scientific status polling followed. Acceptance of submission does not establish memory admission, resource conformance or scientific result. Root resumes original CM for terminal collection of summary/all128 returns, checkpoint, process.time, receipt and log; only then does the next already allocated arm proceed. Preserve new execution/supervisor roots for later explicit closeout. Technical acceptance of the complete triple remains pending.
