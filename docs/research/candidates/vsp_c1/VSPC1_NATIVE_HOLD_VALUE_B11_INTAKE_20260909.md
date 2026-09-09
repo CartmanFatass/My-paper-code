@@ -1,6 +1,6 @@
 # VSPC1 B11 P77 intake — independent fixed512/768 repeat
 
-Current state: prospective definition; no B11 scientific submission or result.
+Current state: source accepted and exact execution bound; no B11 scientific submission or result.
 
 ## 1. Assignment and starting state
 
@@ -82,3 +82,38 @@ owner columns carry no override. Owner prediction is not taken. New-card P2
 was created through item.py, recommended/auto-applied accept, with the packet
 and source-branch audit2026-09-09 row21. Ordinary source/result facts remain
 here, and publishing the item waits on no reply.
+
+## 5. Source acceptance and exact execution handoff
+
+DM inspected the actual runner/test diff at
+**`7ed4c3933771f85d570b5c952052b9e8c5fbd6e1`**, the technical record and
+[raw check receipt](VSPC1_NATIVE_HOLD_VALUE_B11_SOURCE_CHECKS_20260909.json).
+The35-line thin runner preserves the accepted B10 call except its new
+B11/card/master8502 identity.12 focused binding/exit/metadata checks passed
+in2.3934099000007336s whole process, exit0, without scientific state. DM's
+relevant shared-source diff against2c2c7d9d is empty; CM verifies all13 runtime/
+helper surfaces unchanged. B10's independent state-boundary review and23-case
+checks remain applicable; repeating those tests or review adds no new coverage.
+No semantic change or new machinery is accepted.35 new production/runner lines
+meet2000/600 limits. New scratch was removed; P76's previous policy-blocked
+scratch remains creator-owned and does not bound this scientific result.
+
+[Card §7](VSPC1_NATIVE_HOLD_VALUE_B11_SCIENCE_CARD_20260909.md#7-accepted-source-and-exact-p77-execution-binding)
+binds the full scientific SHA, remote exact-SHA cwd, literal payload, handle,
+output and fresh joined admission. CM now continues the already allocated
+batch: commit/push wrapper, stage committed source, one accepted submission,
+sole observation, collection/E0 and complete-process caps. No source-test result
+or new-card item establishes scientific polarity;8502 exposure remains zero
+at this boundary. Root retains integration/main and old remote-checkout cleanup.
+
+### Decisions this intake produces
+
+Options: (a) accept the identity-only binding and continue P77's allocated
+remote route; (b) return a concrete source/measurement defect for repair.
+Recommend/select(a), because no defect or scientific semantic change was found.
+Owner-delegated decision (unattended,2026-09-03 instruction): (a),
+**OWNER_DELEGATED object tier**. One accepted submission maximum is unchanged;
+no retry, resume, extra pair, evaluation, pilot, tuning, cost probe or Pro Send.
+Main and branch again returned no unapplied owner reviews; no ledger override
+or actual owner prediction is present. This ordinary technical decision stays
+in card/intake/audit, without another owner-console item.

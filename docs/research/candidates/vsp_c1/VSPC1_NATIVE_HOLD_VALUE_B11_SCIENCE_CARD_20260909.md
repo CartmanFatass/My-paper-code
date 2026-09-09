@@ -3,7 +3,7 @@ Binding MARL structure: (b) temporal abstraction or termination, with five co-ad
 
 # VSPC1-NATIVE-HOLD-VALUE-B11 — B/EXPLORE, P77
 
-Current state: prospective definition, zero B11 scientific exposure. Root's new
+Current state: source accepted and exact execution bound, zero B11 scientific exposure. Root's new
 P77 allocation is recorded in main Portfolio at
 `c1b1818b621ffe90e60f8ef9c018dc3f35eee058`, after accepting
 [B10 intake §6](VSPC1_NATIVE_HOLD_VALUE_B10_INTAKE_20260909.md#6-p76-valid-result-intake-and-decisions).
@@ -180,3 +180,53 @@ failure. No retry/resume/second pair, replay8501, extra checkpoint/evaluation,
 tuning, pilot, cost probe, Pro Send or automatic successor. Complete technical
 collection and all-outcome DM intake/Chinese brief, then return evidence and the
 next bounded recommendation to Root for integration and any separate allocation.
+
+## 7. Accepted source and exact P77 execution binding
+
+DM accepts source **`7ed4c3933771f85d570b5c952052b9e8c5fbd6e1`** after inspecting
+the actual35-line runner,75-line identity tests and
+[technical acceptance](VSPC1_NATIVE_HOLD_VALUE_B11_TECHNICAL_ACCEPTANCE_20260909.md).
+The [retained raw check receipt](VSPC1_NATIVE_HOLD_VALUE_B11_SOURCE_CHECKS_20260909.json)
+shows12 passed, exit0, pytest1.63s/**2.3934099000007336s whole process**.
+The disabled-cacheprovider warning is unchanged. No native/model fixture ran.
+
+The runner substitutes only B11/card/master8502 identity into accepted B10.
+All13 shared runtime/helper surfaces remain unchanged; DM's actual relevant
+source diff is empty. Reuse B10's independent boundary review and23-case coverage;
+there is no new semantic boundary to review.35 new production/runner lines meet
+2000/600 limits, with scope4 none and no observed scope5 breach. New test scratch
+was removed by its creator. P76's separate policy-blocked scratch remains CM-owned.
+Technical conformance supplies no8502 native-performance evidence.
+
+| Field | Binding |
+| --- | --- |
+| Node /interpreter | wsl_4070, hmasd-wsl-node, `/home/wu/.venvs/hmasd/bin/python` |
+| Device /process /numerical threads | CPU FP32 /1 /1 |
+| Exact scientific SHA | `7ed4c3933771f85d570b5c952052b9e8c5fbd6e1` |
+| Detached cwd | `/home/wu/hmasd-worktrees/vspc1-native-hold-value-b11-8502-7ed4c3933771` |
+| Supervisor handle | `vspc1_hold_value_b11_8502_7ed4c3933771` |
+| Staged literal payload | `/home/wu/hmasd-inputs/vspc1_hold_value_b11_8502_7ed4c3933771.sh` |
+| Output | `/home/wu/projects/HMASD/temp/directions/vsp_c1/exp/native_hold_value_b11_8502_7ed4c3933771` |
+| Admission receipt | `/home/wu/projects/HMASD/temp/directions/vsp_c1/exp/native_hold_value_b11_8502_7ed4c3933771_admission.json` |
+| Scientific argv | `scripts/run_vspc1_native_hold_value_b11.py --seed 8502 --out /home/wu/projects/HMASD/temp/directions/vsp_c1/exp/native_hold_value_b11_8502_7ed4c3933771` |
+| Counts /complete caps | 434176 steps /3072 Adam /160 evaluations;1800s complete learned arm /3600s whole pair |
+
+Literal seven-line LF execution input:
+
+```bash
+#!/usr/bin/env bash
+set -euo pipefail
+exec /usr/bin/time -f 'whole_wall_seconds=%e,peak_rss_kib=%M' /bin/bash --noprofile --norc -c '
+cd /home/wu/hmasd-worktrees/vspc1-native-hold-value-b11-8502-7ed4c3933771 &&
+/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/projects/HMASD/temp/directions/vsp_c1/exp/native_hold_value_b11_8502_7ed4c3933771_admission.json &&
+/home/wu/.venvs/hmasd/bin/python scripts/run_vspc1_native_hold_value_b11.py --seed 8502 --out /home/wu/projects/HMASD/temp/directions/vsp_c1/exp/native_hold_value_b11_8502_7ed4c3933771
+'
+```
+
+CM commits/pushes the literal wrapper separately; scientific source stays fixed.
+Stage exact committed runtime surfaces/canonical admission helper and literal LF
+payload, check readback/syntax and prior handle/output state, then perform the
+single already allocated submission. Fresh actual-node memory admission immediately
+precedes scientific state in this whole-timed command. CM solely observes and
+collects through terminal. No further planning approval or invocation follows
+from this acceptance. Staging/admission are not yet observed.
