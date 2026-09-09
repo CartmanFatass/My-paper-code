@@ -39,6 +39,19 @@ Rows with an intake link reflect the tracking/safe-pause sources checked for thi
 
 FRRIE has two distinct boundaries: P59 is the latest completed diagnostic intake cited by tracking; the later P63 observation-method dependency is recorded by the safe-pause handoff. No completed P63 result or permitted next observation is established here. RCLE's unknown provider acceptance remains uncertainty, not a failed-Send conclusion or new decision.
 
+## P67 returns and P68 readiness — 2026-09-09 UTC
+
+This update supersedes the older operational descriptions above for the five P67 directions; lifecycle and priority remain unchanged. Full source, collection and intake chains are integrated through main `8e19cda9b`. Both accepted P67 experiments are terminal and collected.
+
+- VSPC1: [P67 intake](../candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B04_P67_INTAKE_20260908.md) accepts UP, GATED minus MLP +0.0230983264, with native H and adverse outcomes retained. Two normalized pairs do not establish stable superiority or unique mechanism. P68 now prepares a proposed approximately capacity-matched ordinary-MLP comparator card under the same direction; preparation allocates no run or owner ratification.
+- VSP03: [P67 intake](../candidates/vsp_03/VSP03_B04_P67_INTAKE_20260908.md) accepts the small seed6 greedy gain +0.0026123047 versus R0 and stochastic loss -0.0487548828. Two separately trained instances remain mixed; no successor or UAV entry is selected.
+- DISH: [P67 intake](../candidates/degraded_incumbent_shadow_handover/DISH_P67_SOURCE_STATE_REENTRY_INTAKE_20260908.md) returns NO_READY_CONTINUATION after distinguishing source-state paths without nominating a worthwhile intervention. P62 narrow stops and unestimated native source-state value remain.
+- FSD and UCOPE: source-grounded P67 questions are committed and dispatched once to Transport; actual provider acceptance is pending. Existing family stops remain until a conforming proper-node decision. Exact requests are in tracking.
+
+Root selected reversible zero-exposure readiness authoring for admitted CRTO and FOLR directions as P68 replacements for completed DISH/VSP03 work. CRTO assesses its explicit legal-action/credit re-entry condition; FOLR assesses a distinct multi-step state-retention question. These assignments produce a proper-node packet or no-ready conclusion, without changing investment, lifecycle, priority or opening a family. Restricted FRRIE/CBSC work and uncertain RCLE/SCDMP sends remain untouched. VNFC retains its recorded second-recast sequencing and paused comparison family. No missing headroom becomes an eligibility condition.
+
+P67 cost refresh, scoped to the newly accepted allocation (full-history totals remain unaggregated): VSPC1 CPU FP32 on hmasd-wsl-node, 312.77s for one valid pair and one accepted P67 submission, peak RSS555844KiB; VSP03 CPU on wsl_4070, 3.253184s complete manager-origin-to-finished invocation for one valid training instance and one accepted P67 submission, aggregate unit CPU3.278770s, scientific peak RSS492875776B. Thus each named one-result P67 window has the same per-result and accepted-attempt-per-valid-result wall value. Historical failed allowances and all-history costs are preserved separately; no cross-hardware efficiency ranking or tuned-headroom finding follows.
+
 ## Research organization
 
 These owner-adopted labels classify research and shared agendas; they are not priority ranks, current commands or separate permanent DM reservations. Source mappings are preserved. See the [organization decision](decisions/2026-09-04-adopt-nine-routes-and-resume.md) for provenance; its historical resume is not a command to replay; the P67 handoff records the current owner instruction.

@@ -6,17 +6,19 @@ Research is **RESUMED** under OWNER_DIRECT “阅读handoff 继续开启科研�
 
 Root owns planning and integration under [ROOT_OPERATIONS.md](../../project/ROOT_OPERATIONS.md). The assigned CM/Operator observes by default; explicit takeover follows [EXPERIMENT_MONITOR.md](../../project/EXPERIMENT_MONITOR.md). Independent Pro provider operations belong to Transport. Exact handles and receipt bindings below remain evidence. Detailed receipts are in [root-log/2026-09-08.md](root-log/2026-09-08.md); lifecycle and priority are in [PORTFOLIO.md](PORTFOLIO.md). The older tracker is preserved in [EXPERIMENT_TRACKING_THROUGH_P45_20260908.md](../../archive/operations/EXPERIMENT_TRACKING_THROUGH_P45_20260908.md).
 
-## P67 active native work — resume dispatch
+## P67 completed returns and P68 continuation
 
-Five original DM turns were observed running after accepted followup_task dispatch on 2026-09-09. These are five advancing directions, not five launched experiments. The two accepted P67 handles reported subsequently are recorded below; no new provider Send is asserted.
+The five original P67 DM assignments have returned. Both experiments are collected/intaken and integrated through main 8e19cda9b; neither remains live. FSD and UCOPE ready packets were dispatched once to independent Transport, whose turn is active; provider Send acceptance is still unconfirmed. VSPC1 P68 card preparation and CRTO/FOLR P68 readiness preparation have actual native dispatches. Count only observed native turns and subsequently confirmed provider generations, not five queued intentions.
 
 | Direction | Native DM | Synced direction revision | Current bounded work |
 | --- | --- | --- | --- |
-| ucope | /root/dm_ucope_p47_resume | 9745d270010a8e100cfed0d1ee9533878cf70190 | P61 next-question decision/authoring; no unchanged run allocation |
-| vsp_c1 | /root/dm_vspc1_p49_value_question | d1b8b7b72c1a5c1896b07b13674aee98aa0a3d7d | CM reports complete/PASS: handle vspc1_hold_value_b04_p67_8202, source ec8b7c458b038b3a375ec5639834d0f3527fdf8c, collection 4c6572dae1299a724b5b5c9f59c2442993d7acdb; exit0, 312.77s, no live process; same DM intake and Root technical integration pending |
-| vsp_03 | /root/dm_vsp03_p54_reentry | 38c7a6bebd547187bb110cfa62d1850dc3838e84 | DM source accepted 9191bd9bf; source 828da00343e5036a4de93ccf1ec636e3b8c777b7; CM reports handle vsp03-b04-p67-20260908 terminal exit0, service runtime3.253s (not complete invocation wall); same CM sole collector, full evidence/intake pending |
-| flexible_skill_duration | /root/dm_fsd_p47_resume | fbe5e67b96f8b390751635fe9c826910c8b3f0a4 | Re-entry question assessment respecting P52 stop |
-| degraded_incumbent_shadow_handover | /root/dm_dish_p53_native_proposal_question | bdfcf10b62ca323340acf965e057f7a727d043a5 | Distinct ordinary source-state question assessment respecting P62 stop |
+| ucope | /root/dm_ucope_p47_resume | 9f71571dc | Request 2026-09-08-ucope-post-b04-renewal-convergence-01 dispatched to Transport; same binding, zero new experiment allocation; await factual Send/result receipt |
+| vsp_c1 | /root/dm_vspc1_p49_value_question | d220ef01c | P67 COMPLETE/UP, Delta+.0230983264; 312.77s whole invocation, no live process. P68 followup_task prepares same-information approximately capacity-matched ordinary-MLP comparator card/tier return; no code/run allocation yet |
+| vsp_03 | /root/dm_vsp03_p54_reentry | daf20eeee | P67 COMPLETE, source828da0034, collection52160094e; greedy G-R0+.0026123047, stochastic G-R0-.0487548828, mixed two-instance evidence. Complete manager-origin-to-finished wall3.253184s now verified from journal; no successor allocated |
+| flexible_skill_duration | /root/dm_fsd_p47_resume | 27aacfb0d | Request 2026-09-08-fsd-p67-uav-individual-renewal-01 dispatched to Transport; existing binding, P52 stop preserved, await factual Send/result receipt |
+| degraded_incumbent_shadow_handover | /root/dm_dish_p53_native_proposal_question | f9d3aa52d | P67 source/readiness intake complete NO_READY_CONTINUATION; no nominated source treatment, P62 narrow stops retained, zero new exposure |
+| commitment_residual_triggered_options | /root/dm_crto_p68_reentry | 8e19cda9b | P68 zero-exposure source/re-entry assessment in C:/Projects/HMASD-worktrees/codex-crto, codex/crto; ready proper-node packet or precise no-ready return |
+| vap_folr_core | /root/dm_folr_p68_reentry | 8e19cda9b | P68 zero-exposure multi-step state-retention readiness assessment in C:/Projects/HMASD-worktrees/codex-vap-folr, codex/vap-folr; ready proper-node packet or precise no-ready return |
 
 Independent Transport received a read-only reconciliation of RCLE exact-request acceptance and SCDMP P58 terminal no-effect state. No third click, resend or new binding was authorized; this unresolved external dependency does not add an advancing direction.
 
