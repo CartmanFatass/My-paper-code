@@ -177,13 +177,31 @@ failure adds no scientific polarity and changes neither the seed-5 losses nor th
 separate seed-4 discovery. The independent-training discriminator remains
 unanswered and no further invocation is allocated at this boundary.
 
+**P67 seed 6, 2026-09-08: a small prospective greedy gain, with mixed training
+instances.** The newly allocated submission completed real learning and returned
+G greedy minus R0 **+0.0026123046875**, and minus R **+0.0017041015625**. Slightly
+more successes and less waiting outweigh additional attempt cost on these sampled
+worlds. Stochastic G loses to R0 by **-0.0487548828125** and to R by
+**-0.0496630859375**, restricting the gain to the declared greedy execution.
+The low-confidence absolute-margin prediction matched; the prior failed attempt
+remains unscored and supplies no learning replicate.
+
+Seeds 5 and 6 now form two separately trained prospective observations, with
+mixed greedy signs and primary descriptive mean **-0.00568115234375** (sample SD
+**0.011728719413**). Seed 4 remains outcome-informed discovery outside this
+summary. The positive seed-6 point is retained, but these two instances do not
+establish stable replacement of fixed readiness, equivalence or a unique cause.
+The independent-instance discriminator has produced a small opposite-sign
+observation; wider repeatability remains unresolved and no further run is allocated.
+
 The strongest surviving alternative is that public dwell age already suffices and the generic
 MLP matches the prior, or that all advantage is the fixed rule rather than learning. In the new
 host R0, R or ordinary G may handle scheduling, while the local readiness prior could occupy the
 slot too early and harm its partner. The strongest current support is the shared-slot action
-consequence and the historical G's small greedy gain over both fixed rules. B03's
-loss to both rules is the strongest contradiction to a repeatable ordinary-G replacement
-gain. The strongest current contradiction
+consequence and P67's prospective small greedy gain over both fixed rules, alongside
+the separate seed-4 discovery. B03's loss to both rules is the strongest contradiction
+to repeatable ordinary-G replacement value; stochastic losses in both prospective
+instances remain adverse. The strongest current contradiction
 to a useful initialization/learned-T gain is T matching R0 across every saved B02 world;
 the stochastic losses and three N1 final T=G=F observations remain contrary evidence with
 their distinct populations and budgets. Waiting price,
@@ -194,6 +212,10 @@ sharing K1 does not pool polarity or reopen that family.
 ## Evidence set
 
 The evidence set includes historical observations and the separately labelled prospective selection:
+- `docs/research/candidates/vsp_03/VSP03_B04_P67_INTAKE_20260908.md`
+- `docs/research/candidates/vsp_03/VSP03_B04_P67_RESULT_EVIDENCE_20260908.md`
+- `docs/research/candidates/vsp_03/VSP03_B04_P67_DM_ANALYSIS_20260908.json`
+- `docs/research/candidates/vsp_03/VSP03_B04_P67_SCIENCE_CARD_20260908.md`
 - `docs/research/candidates/vsp_03/VSP03_B04_INTAKE_20260908.md`
 - `docs/research/candidates/vsp_03/VSP03_B04_RESULT_EVIDENCE_20260908.md`
 - `docs/research/candidates/vsp_03/VSP03_B04_SCIENCE_CARD_20260908.md`
