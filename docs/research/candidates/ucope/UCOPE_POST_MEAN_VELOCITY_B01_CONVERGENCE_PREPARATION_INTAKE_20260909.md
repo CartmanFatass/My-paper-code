@@ -260,3 +260,53 @@ That engineering cleanup limit neither invalidates P85 nor supplies a
 scientific reason to select any of the three alternatives.
 
 Owner surface: [20260909-ucope-011](../../portfolio/owner/inbox/2026-09-09/20260909-ucope-011.json), P2 close-call, no experimental option auto-applied; [audit row 37](../../portfolio/audit/2026-09-09.md#L37) records escalation only. Publication reference 2026-09-09T09:36:23-07:00.
+
+## 6. Fixed publication and READY return
+
+Input evidence is committed and pushed at
+**`bb84696d476fd52ca78b3ca31d9312e5d23efef0`**. The two imported current
+control-plane files match their existing main authority; Root already has
+those changes. The additions are the question intake/facts, fixed discussion
+snapshot, P2 packet/item and one audit row. No scientific source or prior
+card/result/DIRECTION bytes changed.
+
+TASK and ordinary REQUEST are committed and pushed at
+**`f95de6a771adfa11f550b1e4b69ee21775d75bc0`**:
+[fixed TASK](https://github.com/CartmanFatass/My-paper-code/blob/f95de6a771adfa11f550b1e4b69ee21775d75bc0/docs/research/candidates/ucope/pro_packets/20260909_post_mean_velocity_b01_convergence/TASK.md).
+All **18** declared paths resolve at the fixed input. The existing renderer
+bound that actual pushed TASK; the existing Python 3.11 interpreter supplied
+its standard-library requirement without changing the research interpreter.
+Fresh GitHub base64 readback matches the committed **27377 bytes** exactly,
+blob **`60c3fb33e4969d6368c7180f6d8593dfea057ce4`**, SHA256
+**`e9bffe020d4acad50ad0e8db5ce247a42c2ad2fd19b627d74a68aae087b22d88`**.
+
+Issue 11 was updated once after confirming its old body unchanged, retaining
+the entire old body and all four prior delivery comments. The [publication
+readback](pro_packets/20260909_post_mean_velocity_b01_convergence/ISSUE_PUBLICATION_READBACK.json)
+at **2026-09-09T16:43:36Z** matches the requested new body exactly and confirms
+the fixed TASK link. Its preparation state is time-specific, not a claim that
+a later Root dispatch did not occur.
+
+The bound [HANDOFF](pro_packets/20260909_post_mean_velocity_b01_convergence/HANDOFF.json)
+is **READY_TO_DISPATCH**, using the original same-node conversation, actual
+native author as source, Root as receipt parent and configured dedicated
+Transport as operator. No caller-direct or replacement conversation is used.
+Root must load these bytes from the full HANDOFF commit returned with this
+intake, dispatch the exact prompt once and forward the complete immutable
+response to the original DM. READY is not an actual dispatch or Pro acceptance.
+
+Final boundary checks around **2026-09-09T16:44Z** found both owner-review
+lists empty, **120 authoring / 119 main** UCOPE audit rows with no nonempty
+owner column, and no changed applicable normative inputs on main
+`68e3590ffd733bd7a7bde63c941281eb1a668792`. No item needs marking answered.
+The remote branch was the pushed TASK commit before the final handoff commit.
+Preparation mapping checks retain nine distinct original primary records,
+eight P85 contrasts, the unapplied close-call item and zero new exposure.
+
+This completed deliverable is **direction-tier escalation only**. No empirical
+card, master, implementation, model/native call, source change, additional
+evaluation, invocation allowance, family disposition or provider Send has
+been selected or executed. Root owns dispatch/integration; the shared checkout
+is retained for the pending response and original-DM intake. P85 is already
+accepted/integrated. Its CM-owned policy-rejected scratch cleanup remains the
+separate exact limitation stated above.
