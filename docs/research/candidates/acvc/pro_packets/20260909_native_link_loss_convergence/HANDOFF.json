@@ -13,8 +13,12 @@
   "conversation_binding_key": "em:acvc:convergence",
   "requested_conversation_id": null,
   "conversation_reuse_required": true,
-  "reset_invalid_provider_context": false,
-  "provider_context_reset_evidence": null,
+  "reset_invalid_provider_context": true,
+  "provider_context_reset_evidence": {
+    "previous_request_id": "2026-09-04-acvc-headroom-engineering-dissent-convergence-02",
+    "reset_authority": "OWNER_DIRECT",
+    "owner_instruction": "弃用这个session 创建一个新的transport\n然后不要再使用旧的conversation id 这些没有兼容到6 pro"
+  },
   "decision_authority": "pro_final",
   "repository": "CartmanFatass/My-paper-code",
   "repository_url": "https://github.com/CartmanFatass/My-paper-code",
@@ -69,8 +73,12 @@
     "conversation_binding_key": "em:acvc:convergence",
     "requested_conversation_id": null,
     "conversation_reuse_required": true,
-    "reset_invalid_provider_context": false,
-    "provider_context_reset_evidence": null,
+    "reset_invalid_provider_context": true,
+    "provider_context_reset_evidence": {
+      "previous_request_id": "2026-09-04-acvc-headroom-engineering-dissent-convergence-02",
+      "reset_authority": "OWNER_DIRECT",
+      "owner_instruction": "弃用这个session 创建一个新的transport\n然后不要再使用旧的conversation id 这些没有兼容到6 pro"
+    },
     "decision_authority": "pro_final",
     "creator_thread_id": "01a08447-a33c-7881-8c2a-a6e7e918b2a7",
     "return_route": "PARENT_SESSION",

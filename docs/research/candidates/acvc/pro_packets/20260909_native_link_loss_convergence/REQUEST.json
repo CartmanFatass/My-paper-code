@@ -11,7 +11,7 @@
   "execution_mode": "REUSE_SINGLETON",
   "delivery_mode": "github_delivery",
   "conversation_id": null,
-  "reset_invalid_provider_context": false,
+  "reset_invalid_provider_context": true,
   "github_delivery": {
     "branch": "codex/acvc",
     "base_sha": "e2a175ef418c05e99a7784f2e5b57856e027281a",
@@ -116,5 +116,10 @@
     "Known future work is 294912 native steps,2048 Adam,128 final episodes plus explicit base/gate/matching factors. Runtime, trigger frequency and new gate displacement remain unknown. Proposed 1800-second learned-arm and 3600-second complete-study caps are unallocated. No new machinery, hidden phase, cap increase or additional seed follows.",
     "Root is the receipt parent and owns subsequent concrete implementation/execution and integration; the original native ACVC DM owns science intake. P76 preparer does not dispatch Transport or Send. No extra task, branch, monitor or scheduler is requested.",
     "Write only the specified response path on the current descendant codex/acvc HEAD and the delivery-link comment on Issue 14. Preserve all other files and accepted requests. Full input SHA stays fixed as later handoff/doc commits advance the delivery branch."
-  ]
+  ],
+  "provider_context_reset_evidence": {
+    "previous_request_id": "2026-09-04-acvc-headroom-engineering-dissent-convergence-02",
+    "reset_authority": "OWNER_DIRECT",
+    "owner_instruction": "弃用这个session 创建一个新的transport\n然后不要再使用旧的conversation id 这些没有兼容到6 pro"
+  }
 }
