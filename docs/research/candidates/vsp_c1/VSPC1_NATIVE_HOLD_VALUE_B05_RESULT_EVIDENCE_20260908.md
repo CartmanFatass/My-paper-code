@@ -1,4 +1,4 @@
-# VSPC1 NATIVE HOLD VALUE B05 ó E0 result evidence
+# VSPC1 NATIVE HOLD VALUE B05 ‚Äî E0 result evidence
 
 The one allocated P70 invocation completed with exit 0, native status COMPLETE,
 complete publication readback and no limit/cap breach. Technical acceptance is
@@ -40,10 +40,10 @@ Local raw collection remains at
 | GATED minus H | 0.029686769342801844 | 0.011221422877033574 |
 | Wider MLP minus H | 0.013094857966523096 | 0.01249800862351387 |
 
-Card ß5's rule is **Delta>.01 with trustworthy primary**. Its verbatim reading:
-ìUP: a local gated-package advantage over this specified similarly sized ordinary
+Card ¬ß5's rule is **Delta>.01 with trustworthy primary**. Its verbatim reading:
+‚ÄúUP: a local gated-package advantage over this specified similarly sized ordinary
 critic; retain H and all outcomes, then assess whether one later independent pair
-is worthwhile. No automatic follow-up allocation.î The observed Delta places this
+is worthwhile. No automatic follow-up allocation.‚Äù The observed Delta places this
 instance in UP. The excess above .01 is smaller than the conditional SE; keep that
 noise qualification. Both learned mean returns exceed H, with all adverse
 individual identities retained. One matched training pair remains n=1; the 32
