@@ -51,7 +51,17 @@ remains dated provenance under the controlling evidence specification section 11
   The **2026-09-05 PRO_FINAL / PARK** of the same-draw retained-policy root-residual
   localization family and its numerical-locus dependency remains unchanged.
   See the [Convergence intake](UCOPE_UAV_INTERFACE_CONVERGENCE_INTAKE_20260907.md).
-- Latest bounded B observation: **2026-09-09 short fixed renewal B02 P83,
+- Latest bounded B observation: **2026-09-09 short fixed renewal B03 P84,
+  COMPLETE / UP with both learned-policy hover losses**. New same-recipe
+  8301 gives prospective F−G **+0.06439366516106426**, conditional SE
+  **0.008200587980245644**; F−H **−0.029184443306665326** and G−H
+  **−0.09357810846772958** are separate native losses. The whole head
+  remains fixed with real actor/critic learning. P83's full sign pattern
+  does not recur; P82 WITHIN and all prior outcomes remain. No stable,
+  competent-feedback, causal-shortening or pooled claim follows.
+  See [P84 intake](UCOPE_UAV_SHORT_FIXED_RENEWAL_B03_P84_INTAKE_20260909.md)
+  and [E0 evidence](UCOPE_UAV_SHORT_FIXED_RENEWAL_B03_P84_RESULT_EVIDENCE_20260909.md).
+- Previous bounded B observation: **2026-09-09 short fixed renewal B02 P83,
   COMPLETE / UP**. New same-recipe 8201 gives prospective F−G
   **+0.04205514630433558**, conditional SE **0.008895069330742151**.
   F−H **+0.01688043904880538** is a separate gain; G−H
@@ -156,7 +166,42 @@ without a distinct count-state architecture because RAW contains the sufficient
 count. The direct-service alternative remains separated by the frozen
 `Gamma=I+D` decomposition and analytic `D≈-0.02` boundary.
 
-## Current scientific position — 2026-09-09 short fixed renewal B02 gains with a feedback hover loss
+## Current scientific position — 2026-09-09 short fixed renewal B03 gains against feedback while both lose to hover
+
+P84 is valid complete B/EXPLORE **UP** at F−G **+0.06439366516106426**
+(conditional SE **0.008200587980245644**), with F−H
+**−0.029184443306665326** and G−H **−0.09357810846772958**. Strongest
+support is the native F−G point and 29/32 favorable paired differences.
+Strongest contradiction to useful, competent-feedback superiority is the
+loss of both learned policies to hover, with 19/32 adverse F−H episodes.
+This is preliminary advantage against this fitted feedback policy.
+
+P83's F−G gain and G−H loss recur in sign, while its F−H gain reverses.
+P82 stays WITHIN with both hover gains. Every earlier support, original
+primary and adverse outcome remains separate, with no new cross-instance
+mean/SD, pooled primary or training-population interval. Fixed persistence,
+sampled motion quality, action opportunities, optimization/evaluation
+variation and partner co-adaptation remain alternatives. Neither direct
+service versus information value nor learned-duration value is identified.
+The frozen-head and real actor/critic learning facts are both verified.
+
+The next discriminator recommendation is a **separately allocated B** that
+keeps F/G training and evaluates mean-velocity and stochastic execution on
+the same new fitted instance, with hover. Mean velocity would use tanh(mu)
+at legal opportunities; F's fixed {1,2}, half-each duration draws remain.
+The suggested primary is F_mean−G_mean, retaining every hover and within-fit
+execution contrast. This tests a control choice without assuming Gaussian
+sampling caused P84 losses. It is no default fourth unchanged history or
+fixed-checkpoint diagnostic prerequisite. Source grounding, the narrower
+finite alternative and known work are in [intake §§8–9](UCOPE_UAV_SHORT_FIXED_RENEWAL_B03_P84_INTAKE_20260909.md#8-bounded-interpretation-grounding-and-predictions).
+
+P84 ends; no next card/master/source/allowance, additional evaluation or Pro
+Send is created. Tuned same-information headroom remains absent, recasts 1.
+No family, C, lifecycle or Portfolio disposition follows. See the
+[durable summary](UCOPE_UAV_SHORT_FIXED_RENEWAL_B03_P84_RESULT_SUMMARY_20260909.json)
+and [E0 evidence](UCOPE_UAV_SHORT_FIXED_RENEWAL_B03_P84_RESULT_EVIDENCE_20260909.md).
+
+## Previous scientific position — 2026-09-09 short fixed renewal B02 gains with a feedback hover loss
 
 Fresh same-recipe 8201 is **valid UP** on prospective F−G:
 **+0.04205514630433558**, conditional SE **0.008895069330742151**,
