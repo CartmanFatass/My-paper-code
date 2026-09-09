@@ -27,13 +27,13 @@ class GatedCritic(nn.Module):
         return self.network[4](torch.tanh(self.network[2](hidden))).squeeze(-1)
 
 
-def models(common, arm, second_mlp_width=128, extra_init_seed=None):
+def models(common, arm, second_mlp_width=128, extra_init_seed=None, intact_body=False):
     actor, critic = arm_copy(common, True)
-    if arm == "GATED-V":
-        critic = GatedCritic(critic)
-    elif second_mlp_width == 133:
+    if second_mlp_width == 133 and (arm != "GATED-V" or intact_body):
         from experiments.candidates.vsp_c1.native_hold_value_b05.critic import WideCritic
         critic = WideCritic(critic, extra_init_seed)
+    if arm == "GATED-V":
+        critic = GatedCritic(critic)
     return actor, critic
 
 

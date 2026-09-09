@@ -1,0 +1,43 @@
+{
+  "question": "是否接受 P79 已选的完整普通价值网络加门 B13 卡，并执行 Root 分配的唯一新配对训练？",
+  "changes_if_approved": [
+    {
+      "target": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B13_SCIENCE_CARD_20260909.md",
+      "from": "P79 已选比较，未命名新卡或主种子",
+      "to": "B13/master8601；两臂保留完整136→128→133→1普通体，仅处理臂加零门，最终768面板和独立训练/评价状态"
+    }
+  ],
+  "if_refused": "在下个干净边界应用实际拒绝或修改；不自行改跑旧比较、调参、换种子或新增预算；已发生的事实保留。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/vsp_c1/pro_packets/20260909_native_hold_value_post_b12_convergence/archive/RESPONSE.md",
+      "quote": "两臂共同普通体均为 **136→128→133→1**，第一层与第二层后仍用原 tanh。",
+      "why": "完整裁决直接选择本次结构，保留已达到的普通对照；这是新有限性能问题。"
+    },
+    {
+      "path": "docs/research/candidates/vsp_c1/pro_packets/20260909_native_hold_value_post_b12_convergence/archive/RESPONSE.md",
+      "quote": "该 B 只产生一个新配对训练实例。",
+      "why": "完整回复已由 DM 和 Root 读入；这次新增分配才授权实现和一对训练。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/vsp_c1/pro_packets/20260909_native_hold_value_post_b12_convergence/archive/RESPONSE.md",
+      "quote": "−0.01≤Delta_new≤0.01",
+      "why": "三个旧变化量为负，8503最终差−.0735897558且31/32身份不利；完整体加门仍可能无益或有害。"
+    }
+  ],
+  "uncertainty": [
+    "35467对34827参数并非容量匹配；容量、初始化、联合裁剪、价值矩和队友共适应仍可能解释差异。",
+    "一次配对只能产生本实例信号或反例；条件评价误差不能代表训练总体不确定性。",
+    "H是未调优的控制，匹配调优headroom仍缺失。"
+  ],
+  "cost": {
+    "compute": "一个新主种子配对：417792团队步、3072次Adam、96评价回合；完整每臂1800秒/整对3600秒，聚焦检查≤300秒。",
+    "owner_time": "异步阅读；没有回复也按现有委托推进。",
+    "reversibility": "costly",
+    "waits_on_this": "nothing；卡已接受并进入唯一技术批次，不新增审批等待。"
+  },
+  "verdict_text": "Recommend and select (a): freeze the exact Pro-selected comparison with fresh master8601.",
+  "source": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B13_SCIENCE_CARD_20260909.md"
+}
