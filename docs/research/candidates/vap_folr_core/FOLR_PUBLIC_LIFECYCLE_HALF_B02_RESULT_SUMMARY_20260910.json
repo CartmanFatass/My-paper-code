@@ -1,0 +1,148 @@
+{
+  "object": "FOLR-PUBLIC-LIFECYCLE-HALF-B02",
+  "state": "selected_card_preparation_no_invocation",
+  "source_sha": "c6be208cd514b5d12fb13c7637e2d6376de11eb6",
+  "authority_commit": "674f246a202eef1467b084fdd25e2eeb531c0b1e",
+  "starting_checkout_commit": "85a443f413e07773a5d89904dd21476c5b4b8550",
+  "starting_status": "clean",
+  "arms": [
+    "RETAIN",
+    "HALF_EVENT"
+  ],
+  "training_seed": 7808,
+  "evaluation_seed": 107808,
+  "primary": null,
+  "arms_results": {},
+  "accepted_handles": [],
+  "budget": {
+    "accepted_invocations": 2,
+    "per_complete_arm_seconds": 1800,
+    "summed_pair_scientific_seconds": 3600,
+    "all_additional_runtime_support_including_Monitor_seconds": 300,
+    "complete_seconds": 3900,
+    "cumulative_directory_tests_already_used_seconds": 32.4911638,
+    "directory_tests_cap_seconds": 300
+  },
+  "launch_plans": [
+    {
+      "arm": "RETAIN",
+      "node": "hmasd-wsl-node",
+      "source_sha": "c6be208cd514b5d12fb13c7637e2d6376de11eb6",
+      "handle": "folr-public-lifecycle-half-b02-retain-20260910",
+      "cwd": "/home/wu/hmasd-worktrees/folr-public-lifecycle-half-b02-c6be208cd",
+      "out": "temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_seed7808_retain",
+      "memory_receipt": "temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_seed7808_retain_memory.json",
+      "command": "/usr/bin/time -v -o /home/wu/.agent-tasks/folr-public-lifecycle-half-b02-retain-20260910/whole.time /usr/bin/timeout --signal=TERM --kill-after=5s 1800s bash -lc 'cd /home/wu/hmasd-worktrees/folr-public-lifecycle-half-b02-c6be208cd && /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_seed7808_retain_memory.json && /home/wu/.venvs/hmasd/bin/python scripts/run_folr_public_lifecycle_b01.py --arm RETAIN --seed 7808 --evaluation-seed 107808 --launch-sha c6be208cd514b5d12fb13c7637e2d6376de11eb6 --out temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_seed7808_retain'",
+      "state": "prepared_not_submitted"
+    },
+    {
+      "arm": "HALF_EVENT",
+      "node": "hmasd-wsl-node",
+      "source_sha": "c6be208cd514b5d12fb13c7637e2d6376de11eb6",
+      "handle": "folr-public-lifecycle-half-b02-half-event-20260910",
+      "cwd": "/home/wu/hmasd-worktrees/folr-public-lifecycle-half-b02-c6be208cd",
+      "out": "temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_seed7808_half_event",
+      "memory_receipt": "temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_seed7808_half_event_memory.json",
+      "command": "/usr/bin/time -v -o /home/wu/.agent-tasks/folr-public-lifecycle-half-b02-half-event-20260910/whole.time /usr/bin/timeout --signal=TERM --kill-after=5s 1800s bash -lc 'cd /home/wu/hmasd-worktrees/folr-public-lifecycle-half-b02-c6be208cd && /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_seed7808_half_event_memory.json && /home/wu/.venvs/hmasd/bin/python scripts/run_folr_public_lifecycle_b01.py --arm HALF_EVENT --seed 7808 --evaluation-seed 107808 --launch-sha c6be208cd514b5d12fb13c7637e2d6376de11eb6 --out temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_seed7808_half_event'",
+      "state": "prepared_not_submitted"
+    }
+  ],
+  "checks": {
+    "source_and_tests_match_accepted_c6": true,
+    "loop_ranges": [
+      [
+        1,
+        5001
+      ],
+      [
+        128
+      ]
+    ],
+    "existing_test_count": 26,
+    "new_tests": 0,
+    "existing_independent_review": "no material finding; unchanged source reused",
+    "prepared_commands": [
+      {
+        "arm": "RETAIN",
+        "handle_absent": true,
+        "scientific_out_absent": true,
+        "memory_receipt_absent": true,
+        "bash_syntax_passed": true,
+        "runner_arguments_match": true
+      },
+      {
+        "arm": "HALF_EVENT",
+        "handle_absent": true,
+        "scientific_out_absent": true,
+        "memory_receipt_absent": true,
+        "bash_syntax_passed": true,
+        "runner_arguments_match": true
+      }
+    ],
+    "first_argument_readback_failure": "first --out selected memory path in joined command; corrected check isolates last runner command; source/command never changed and zero scientific invocations"
+  },
+  "support": {
+    "scope": "all additional invoked runtime work including Monitor, once; excludes idle waiting and double-counted native chains",
+    "initial_preparation_reads_seconds": 1.5200933,
+    "binding_and_plan_seconds": 0.05237610000767745,
+    "dm_seconds": 3.4691496999924607,
+    "monitor_seconds": 0.0,
+    "total_seconds": 3.4691496999924607,
+    "cap_seconds": 300,
+    "monitor_actual_receipts": "to accompany adoption/terminal for each named handle; no standing accounting service",
+    "source_stage_first_failed_readback_seconds": 0.7768738,
+    "source_stage_corrected_check_seconds": 0.484080800000811,
+    "owner_cli_usage_read_seconds": 0.2447053,
+    "input_binding_and_owner_item_command_seconds": 0.3910203999839723
+  },
+  "monitor": {
+    "config_source": "C:/Projects/HMASD/.codex/hmasd-monitor.toml",
+    "thread_id": "01a087e5-2044-7301-abb6-7a1709a98197",
+    "root_thread": "01a07249-b095-7821-8ce2-e9c32ba85267",
+    "collection_owner": "/root/dm_folr_restart_recovery",
+    "new_registration": "none; no handle accepted"
+  },
+  "full_engineering_elapsed": "not measured as command runtime; not imputed zero",
+  "owner_reviews": [],
+  "source_staging": {
+    "source_sha": "c6be208cd514b5d12fb13c7637e2d6376de11eb6",
+    "cwd": "/home/wu/hmasd-worktrees/folr-public-lifecycle-half-b02-c6be208cd",
+    "verified_at_utc": "2026-09-10T23:41:23.627434+00:00",
+    "source_from": "existing published compute-repository commit; detached worktree created in initial source-staging command, no new bundle/input staging",
+    "tracked_status": "",
+    "source_diff_passed": true,
+    "prepared_checks": [
+      {
+        "arm": "RETAIN",
+        "handle_absent": true,
+        "scientific_out_absent": true,
+        "memory_receipt_absent": true,
+        "bash_syntax_passed": true,
+        "runner_arguments_match": true
+      },
+      {
+        "arm": "HALF_EVENT",
+        "handle_absent": true,
+        "scientific_out_absent": true,
+        "memory_receipt_absent": true,
+        "bash_syntax_passed": true,
+        "runner_arguments_match": true
+      }
+    ],
+    "scientific_invocations": 0,
+    "remote_stage_check_seconds": 0.09611529391258955,
+    "local_orchestration_seconds": 0.484080800000811
+  },
+  "selection_time_utc": "2026-09-10T23:42:46.925546+00:00",
+  "required_input_import": {
+    "source_commit": "674f246a202eef1467b084fdd25e2eeb531c0b1e",
+    "paths": [
+      "docs/research/portfolio/decisions/2026-09-10-rolling-successor-allocation.md",
+      "docs/research/portfolio/pro_packets/20260910_rolling_successor_allocation/EXECUTION_MAPPING.md",
+      "docs/research/portfolio/pro_packets/20260910_rolling_successor_allocation/archive/RESPONSE.md"
+    ],
+    "git_blob_ids_match": true,
+    "other_paths_reconciled": false
+  },
+  "owner_item_cli_result": "docs/research/portfolio/owner/inbox/2026-09-10/20260910-folr-005.json"
+}
