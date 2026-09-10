@@ -1,0 +1,60 @@
+{
+  "object": "UCOPE-UAV-SHORT-LEARNED-RENEWAL-CONTINUOUS-B01",
+  "master": 8701,
+  "base": 870100000,
+  "method": "Pure integer arithmetic over the card and current source; no environment, model, generator or scientific invocation.",
+  "exposure": {
+    "independent_matched_training_instances": 1,
+    "fits": 3,
+    "train_episodes_per_fit": 2048,
+    "rollouts_per_fit": 1024,
+    "adam_calls_per_fit": 4096,
+    "total_adam_calls": 12288,
+    "training_ticks": 1572864,
+    "evaluation_episodes": 640,
+    "evaluation_ticks": 163840,
+    "total_native_ticks": 1736704,
+    "explicit_resets": 6784,
+    "constructor_resets": 3,
+    "trainable_parameters": {
+      "T": 68553,
+      "F": 66311,
+      "G": 66311
+    },
+    "duration_head_parameters": 2242
+  },
+  "seed_addresses": {
+    "created_or_reserved": 3272,
+    "minimum": 870100011,
+    "maximum": 870182063,
+    "overlap_with_8601": 0,
+    "overlap_with_8602": 0,
+    "intentional_shared": "common initial actor/critic; initial T/F head; matched training worlds and all evaluation worlds; constructor reuses training0",
+    "fixture_master": 9002
+  },
+  "dominant_head_work_per_T_or_F_fit": {
+    "min_forward_rows": 8110080,
+    "max_forward_rows": 16220160,
+    "dense_forward_MACs_per_row": 2208,
+    "min_dense_forward_MACs": 17907056640,
+    "max_dense_forward_MACs": 35814113280,
+    "T_backward_increment": "unknown; no timing probe"
+  },
+  "cost": {
+    "complete_fit_cap_s": 1800,
+    "complete_study_cap_s_including_support": 5400,
+    "internal_scientific_deadline_s": 5100,
+    "support_reserved_cap_s": 300,
+    "new_focused_checks_cap_s": 60,
+    "existing_cumulative_directory_test_s": 12.9068072,
+    "remaining_cumulative_directory_test_s": 287.0931928,
+    "historical_8602_outer_s": 1370.01,
+    "historical_nested_F_s": 795.986692883,
+    "historical_nested_GH_s": 573.65647489,
+    "internal_T_equals_F_scenario_s": 2165.6298606560003,
+    "T_incremental_cost": "unknown; scenario is not complete forecast"
+  },
+  "new_scientific_invocations": 0,
+  "exposure_line": "NEW allocation: 1 matched training instance; 3 fits; 6144 training episodes / 1572864 training ticks; 3072 rollouts / 12288 Adam calls; 640 evaluations / 163840 evaluation ticks; total1736704 native ticks; no search or extra native validation. Preparation: zero scientific invocations.",
+  "arithmetic_command_elapsed_s_before_serialization": 0.0008036999934120104
+}

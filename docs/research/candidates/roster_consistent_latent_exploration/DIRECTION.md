@@ -465,3 +465,44 @@ a causal 200-versus1,000 estimate or an extrapolated promised gain. Another unch
 runner-up. The bounded recommendation names 136,192 episodes / 8,716,288 ticks / 2,000 calls and
 rough 855.1s runner projection within a candidate 1500s complete cap. No successor card,
 invocation, priority/lifecycle disposition or Pro request is made by this recommendation.
+
+## Fixed 1,000-update learning comparison selected — 2026-09-10
+
+Portfolio PRO_FINAL A at `08e989073839fe5f0f91c6a8ad90a399bee37b6c`, applied by Root,
+selects the preceding finite learning question. The new
+`RCLE_B03_FRESH1000_S21_SCIENCE_CARD_20260910.md` fixes a fresh matched seed-21 pair,
+1,000 updates per arm and the same four native panels. This is the next discriminator
+for practical learning and whole-law contrast at that endpoint. The two earlier
+200-update comparisons, sub-MEI effects, recovery/reference limitations and unexplained
+failed prefix retain their original meaning. No new empirical result exists at freeze;
+this selection grants no successor, causal budget effect or stable-superiority claim.
+
+## Fresh 1,000-update pair: large local native learning signal — 2026-09-10
+
+`RCLE_B03_FRESH1000_S21_RESULT_INTAKE_20260910.md` accepts one fresh seed-21 W1/W100
+pair at the prospectively fixed 1,000-update endpoint. Both fits make 1,000 nonzero
+joint updates from matching fresh initial tensors. Primary native U_W1−U_W100 is
+**+0.3791442871**, conditional scenario interval [.3728085,.3854801]; W100's gain from
+initialization is **+.38115234375** versus W1's small+.00200806. Both primary paths
+and all8 U/Y/F cell means favor W100. The above-MEI local-service branch applies.
+This is substantial native learning for this pair, beyond the earlier small200-update
+signals. Those outcomes and the unknown historical failed prefix retain their meanings;
+unequal endpoints are not pooled or treated as a causal budget comparison.
+
+The strongest support is the complete native service/reward comparison and the retained
+late improvement in W100's training curve. The strongest competence contradiction is
+that the fixed reference still has lower U in every cell (primary gap+.0419108), while
+2035/2048 W100 recovery scores remain failure-coded at40. H_A1 remains unidentified.
+All four final-roster12 F means now improve versus W1, so the old universal adverse-F
+story does not describe this outcome. This does not causally attribute its reversal
+to training duration. The DM's small-size forecast is refuted; practical learning and
+majority-tau40 forecasts are supported.
+
+The full normalized joint gradient changes shared features, plans, baselines and
+visitation as well as action scores. Those remain alternatives to pure actor-credit
+causality; one1,000-update pair does not establish stable superiority, broad recovery,
+optimality, transfer or C readiness. Strongest evidence is the complete fresh1000 E0,
+its row/checkpoint/count readback, and `b03_fresh1000_s21_20260910/DM_RESULT_ANALYSIS.json`.
+The next discriminator recommended for separate allocation is one fresh matched pair
+at the same fixed1,000 endpoint with all outcomes retained. The current allocation
+ends; no successor, seed, priority/lifecycle disposition or Pro request is created.

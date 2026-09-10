@@ -1,0 +1,68 @@
+{
+  "reporting_object": "RCLE-TBCFV-B03-ACTOR100-FRESH1000-S21",
+  "class": "B/EXPLORE",
+  "allocation": "Portfolio PRO_FINAL A, response08e989073839fe5f0f91c6a8ad90a399bee37b6c; Root complete assignment at synchronized26b32c3454b20564f455899ca8ef7ef4af1d0306",
+  "master": 21,
+  "block": 0,
+  "scientific_RNG_namespace": "RCLE-TBCFV-B03-ACTOR100",
+  "root_key_hex": "f6a8584fe1948509b3501011e27178e8914f63fc794731e5d92b328415c7b6d8",
+  "true_learned_package": "FLEX-REKEY",
+  "parameters_per_fit": 26161,
+  "updates_per_fit": 1000,
+  "step_norm_nonzero": 0.02,
+  "path_length_opportunity_per_fit": 20.0,
+  "arms": 2,
+  "fresh_paired_training_instances": 1,
+  "model_allocations": 12,
+  "fits": 2,
+  "untrained_helpers": 10,
+  "training_episodes": 128000,
+  "evaluation_episodes": 8192,
+  "total_episodes": 136192,
+  "primitive_ticks": 8716288,
+  "backward_step_calls": 2000,
+  "per_invocation_episodes": {
+    "W1": 68096,
+    "W100": 66048,
+    "reference": 2048
+  },
+  "episode_batches": {
+    "training": 4000,
+    "evaluation": 256
+  },
+  "cost_proxy_seconds": {
+    "W1": 449.15,
+    "W100": 403.1,
+    "reference": 2.85,
+    "sum": 855.1
+  },
+  "caps_seconds": {
+    "W1": 600,
+    "W100": 600,
+    "reference": 30,
+    "complete_all_support": 1500,
+    "focused_check_selected_maximum": 30,
+    "directory_test_cumulative_limit": 300
+  },
+  "prior_recorded_directory_tests_seconds": 28.0615492,
+  "known_B03_prior": {
+    "episodes": 67584,
+    "ticks": 4325376,
+    "calls": 800,
+    "models": 30
+  },
+  "known_B03_if_complete": {
+    "episodes": 203776,
+    "ticks": 13041664,
+    "calls": 2800,
+    "models": 42
+  },
+  "unknown_original_W100_prefix_upper_bound": {
+    "episodes": 12800,
+    "ticks": 819200,
+    "calls": 200
+  },
+  "scientific_exposure_at_authoring": 0,
+  "historical_same_endpoint_pairs": 0,
+  "do_not_pool": "Two earlier200-update pairs are context, not additional1000-update training units."
+}

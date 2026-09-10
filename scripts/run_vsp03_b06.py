@@ -1,4 +1,4 @@
-"""Sole VSP03 B06 invocation; external timeout covers admission through exit."""
+"""Selected VSP03 continuous512 invocation; timeout covers admission through exit."""
 import argparse
 import os
 import subprocess
@@ -16,7 +16,7 @@ from experiments.candidates.vsp_03.vsp03_b06.b06 import run
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--seed", type=int, choices=[10801, 10802, 10803], required=True)
+    parser.add_argument("--seed", type=int, choices=[10801, 10802, 10803, 10804], required=True)
     parser.add_argument("--out", type=Path, required=True)
     parser.add_argument("--started-monotonic", type=float, required=True,
                         help="Earliest manager monotonic start, shared with inherited deadline adapter")

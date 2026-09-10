@@ -1,0 +1,38 @@
+{
+  "question": "是否保留已按Portfolio A选择的一个学习短续约T/F/G实例及其新卡？",
+  "changes_if_approved": [
+    {
+      "target": "UCOPE · 8701对象卡",
+      "from": "已有固定短续约两次结果；学习长短续约旧结果为负",
+      "to": "执行一次全新的物理1/2步可学习T，与固定半概率F和逐步反馈G比较，H保留；2048训练回合"
+    }
+  ],
+  "if_refused": "在下一清洁边界执行明确异议；保留已发生的支出与证据，不自动换种子或重复。",
+  "evidence_for": [
+    {
+      "path": "docs/research/portfolio/pro_packets/20260910_next_five_chains/EXECUTION_MAPPING.md",
+      "quote": "Complete one fresh matched T/F/G learning instance inside the accepted renewal family, testing final T−G primary and T−F secondary at2048 **training episodes**.",
+      "why": "这是已形成并由Root应用的具体投入；T相对F可区分学习短续约是否有包级增益。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/ucope/UCOPE_UAV_RENEWAL_FROZEN_HEAD_B01_P77_INTAKE_20260909.md",
+      "quote": "| T−G | -0.04379734649032291 | 0.01000711676968817 |\n| T−F | -0.06808369803930205 | 0.00976191558652773 |\n| T−H | -0.02623673364744934 | 0.009678247230574127 |",
+      "why": "旧物理1/4步、512回合的学习方案同时落后反馈、固定续约和悬停；不是同一条件，但不能略去。"
+    }
+  ],
+  "uncertainty": [
+    "仅一个新训练实例，64评估世界不成为64个训练重复。",
+    "更短续约且更多训练是否让T有效未知；T头部反传的增量耗时未知。",
+    "同信息调优基线的余量记录缺失。"
+  ],
+  "cost": {
+    "compute": "3 fits，每个2048训练回合/4096 Adam；总1736704原生步。1800秒/完整fit，5400秒完整研究含支持；内部5100秒，预留支持最多300秒。无后续、替换种子或重试。",
+    "owner_time": "可异步复审，无须回复才继续。",
+    "reversibility": "costly",
+    "waits_on_this": "nothing"
+  },
+  "verdict_text": "Owner-delegated decision (unattended, 2026-09-03 instruction): (a), with(a1).",
+  "source": "docs/research/candidates/ucope/UCOPE_UAV_SHORT_LEARNED_RENEWAL_CONTINUOUS_B01_SCIENCE_CARD_20260910.md"
+}

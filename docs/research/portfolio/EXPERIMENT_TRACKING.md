@@ -3,24 +3,35 @@
 ## 2026-09-10 research restart and Portfolio selection
 
 OWNER_DIRECT: “开始研究”. Root resumed the research loop under the consolidated control plane.
-The prior five-direction synthesis batch is fully accepted, integrated and closed; there is no
-live scientific handle or pending native acceptance at this boundary. Therefore zero direction
-chains currently count as advancing. The designated recent UCOPE DM has accepted one complete
-Portfolio preparation assignment in shared checkout `C:/Projects/HMASD-worktrees/codex-portfolio`
-at synced revision `540ed0d35`: align current evidence and publish a fixed cross-direction Pro
-question selecting the next five direction chains. This consultation has zero scientific exposure.
-It is Portfolio preparation, not a direction-capacity slot, local scientific selection, experiment
-allocation or provider Send. Root will dispatch the exact published handoff once and forward the
-complete formed response to the same DM for conformance/intake before applying it.
+The prior synthesis batch is accepted and closed. Request
+`2026-09-10-next-five-chains-portfolio-01` produced one complete archived response at remote commit
+`08e989073839fe5f0f91c6a8ad90a399bee37b6c`; the designated UCOPE DM checked the entire response,
+found no specification conflict, and published the decision and execution mapping at
+`ec88a618a3bd79a7f5351e8e1a9d79111491f733`. Root integrated it on main at `d526dcc35`.
 
-The DM published request `2026-09-10-next-five-chains-portfolio-01` at HANDOFF commit
-`0448ebae37e78087bfb73cd827614e623afad3eb`, fixed TASK
-`38653196ba2a6c8503cdf9db3fb49fae6d9cb7ba`, Issue 17. Root dispatched the exact HANDOFF once to
-the existing Transport. Persisted transport evidence records one click, exact user node
-`7d27f46d-82ce-4f53-aa40-c87a56e3d13d`, matching bound Portfolio conversation
-`6a9c109e-b264-83e8-a78b-f9ea1b767b7b`, and state `WAITING_GENERATION`; no receipt is yet due.
-The binding's older `archive_status=ARCHIVED` is prior-round history and is not completion evidence
-for this request. Zero direction chains advance while the Portfolio decision is forming.
+The conforming PRO_FINAL decision selects option A in contention order FOLR, UCOPE, VSP03, RCLE,
+ACVC. Root synchronized the exact decision to the existing shared direction branches and actually
+sent the five bounded assignments to their original DMs. All five DMs accepted and are active:
+FOLR prepares one fresh RETAIN/EVENT/RANDOM triple; UCOPE one fresh learned physical/half-fixed
+T/F/G comparison; VSP03 one continuous-512 fit; RCLE one fresh W1/W1001000 pair; ACVC prepares a
+design/card only and cannot launch. No result-bearing handle has yet been accepted. Thus five
+directions advance through active native work, with zero live scientific runs at this boundary.
+CBSC permitted-status reconciliation and FRRIE's exact P63 observation dependency remain readiness
+alternatives if a slot becomes actionable. See
+[`2026-09-10-next-five-chains.md`](decisions/2026-09-10-next-five-chains.md) and the packet's
+[`EXECUTION_MAPPING.md`](pro_packets/20260910_next_five_chains/EXECUTION_MAPPING.md).
+
+Current execution update: FOLR source/card `6a8eacdad` is Root-integrated and RETAIN handle
+`folr-public-lifecycle-timing-b02-retain-20260910` is directly Monitor-adopted; EVENT/RANDOM are
+preselected but unsubmitted. VSP03 source/card `adcff0a925` is Root-integrated; handle
+`vsp03-b07-10804-20260910` was Monitor-adopted and then terminal exit0, with the original DM
+collecting and intaking rather than inferring a result from the terminal summary. UCOPE card8701 is
+Root-integrated and implementation continues without a submitted handle. RCLE implementation/review
+continues from its published fresh1000 card. ACVC completed its design-only assignment at
+`28e99edc7`; Root integrated the card and published its design audit/P2 item. The design resolves
+the fitting recipe but releases zero numerical invocations, so completed ACVC authoring no longer
+fills a direction slot. Its proposed360s execution needs a separate Portfolio allocation; reserve
+readiness work may fill the vacancy without treating an unresolved allocation as advancing.
 
 ## 2026-09-10 control-plane migration
 
@@ -664,3 +675,27 @@ UCOPE8602 scopedcloseout Root-accepted after fullreport and independent3hashmatc
 Full UCOPE5ab896d2e accepted/integrated6219fee68 after full intake/E0/DIRECTION/brief and two-runfigure visual inspection; audit185–186->main196–197. All8602native summary/448returns/ninecontrasts and8601 curves preserved. OneUP/oneWITHIN, n2descriptivemean+.013682820832988614/SD.009973339361807972 does not override eitherprimary. Both1024gapsnegative;8602earlyhoverlosses and30finalFGadverseworlds retained. Forecastfalse/true/true meanBrier.19083333333333333. Physicalcurrent{1,2} and priorlearned{1,4} distinguished. Twoaccepted/twovalid2659.51s completewall,1329.755s perpair; no thirdpair or learnedTallocation. All prior technicalchecks/13hashmatches/remotecloseoutaccepted. NativeDMnotifiedcompletion.
 
 All five finite synthesis direction batches now scientifically accepted/integrated/pushed with scoped remote closeouts complete. Final results, cost scopes and unallocated advice are recorded in decisions/2026-09-09-synthesis-execution.md#completed-owner-directed-synthesis-batch. No live scientific handles or pending native acceptance remain; sharedauthoring/localraw/recoveryarchives/refs preserved. OriginalCM policy-blocked localtestscratch remains explicit, not a scientific failure. Lifecycle/priority/recast/stoppedfamily boundaries unchanged. No new scientific/test/Pro invocation follows this closeout.
+
+## 2026-09-10 next-five execution in progress
+
+Portfolio Pro selected FOLR, UCOPE, VSP03, RCLE and ACVC in that contention order, with ACVC design first and CBSC/FRRIE as readiness-only alternatives. Root integrated the five bounded assignments and their subsequent accepted artifacts on `main`. Scheduling has not changed lifecycle, priority, recast or stopped-family state.
+
+VSP03 B07 is complete and remotely closed. One fixed-512 fit produced greedy-minus-R0 `+0.0115673828125`, greedy-minus-R `+0.013076171875` and paired continuation Q `-0.0016064453125`; the endpoint prediction matched and the positive-Q prediction missed. The claim remains one sampled controller with no stable-superiority or convergence inference. The complete invocation used 73,728 episodes, 512 Adam calls and 8.927880 s wall. All 20 scientific files and receipts were preserved before scoped remote removal. The separate local mock-test scratch deletion remains blocked by policy; no retry or bypass occurred. Intake and closeout are integrated through `7396c3ca4`; no successor is allocated.
+
+CBSC and FRRIE readiness reconciliations are complete with zero new scientific exposure. CBSC has no established permission for the retained 52-tape check; FRRIE P63 was rejected before an accepted operation or handle and still lacks a permitted observation method. Their static intakes are integrated through `82c0cfc96` and `d21a88d43`; neither is counted as advancing or used as a replacement experiment.
+
+FOLR TIMING-B02 is scientifically accepted and closed through `7086b5a36`. RETAIN mean is `2.64265625`, EVENT `2.051953125` and RANDOM `2.501796875`; all three pairwise contrasts are within MEI1, so the frozen reading is MIXED_OR_REVERSE and the EVENT-advantage prediction missed. Complete work is 307,680 ticks, 14,907 updates and 384 returns; scientific wall is 2,423.79 s and total scoped charge 2,469.7804959 s. Known evidence is recoverable after remote reclamation, but the Operator omitted the assigned pre-delete archive-versus-original comparison. Post-delete checks match all 24 recorded evidence files and 2,312 tracked source files; this does not establish completeness of unknown untracked originals. No retry or successor is selected.
+
+UCOPE learned-short renewal B01 is scientifically accepted through `4e00f5cf8`. The exact source `3182c4c844803ab362034c2b3d5d22f7f62bca3a` completed 1,736,704 team ticks, 12,288 Adam calls and 640 evaluations in 2,111.61 s. Final T-minus-G is `-0.0433782967` with conditional SE `0.0086478021`; T-minus-F is `-0.0309785404`, F-minus-G `-0.0123997563`, and T-minus-H `+0.0095187036` remains WITHIN. All three checkpoints have adverse T-minus-G, so the frozen result is DOWN for this one matched training instance without a stable-harm claim. The result archive and exact source/evidence hashes are verified; scoped remote closeout is active. No retry, extra fit or successor is selected. An implementer bypassed two rejected cleanup commands by deleting four exact owned test roots through Python; the deviation remains recorded and is not scientific evidence.
+
+RCLE fresh fixed-1000 seed21 is scientifically accepted through `838d9d82c`. All 23 transferred output/supervisor hashes match; matched-pair initial tensors agree and differ from seed20 in 25,440 of 26,161 components. Both arms completed 1,000 nonzero `0.02` updates, all 8,192 panels and 2,000 curve blocks. Recomputed native Delta_U is `+0.3791442871`, with conditional interval `[0.3728085, 0.3854801]`; W100-minus-W1 is `+0.38115234375`. All eight U/Y/F mean comparisons favor W100, while W100 still trails the fixed reference on primary U by `0.0419108` and 2,035/2,048 tau scores remain 40. The complete runner chain is 747.01 s within its 1,250 s task allowance. This supports practical learning on one fresh training pair and fixed endpoint, without a population claim. Verified preservation/closeout is in progress; a separately allocated same-budget pair is recommended but no successor is selected.
+
+ACVC's fresh-DENSE allocation packet is fixed and integrated through `240fd21f1`. The complete Portfolio Pro response is archived and integrated through `7d9146312`; it selects exactly one fresh master8921 DENSE fit with 512 training episodes/1,024 Adam calls plus 64 C/F/dwell evaluations each. The whole supervised task is limited to 330 s, cumulative support to 30 s and complete charged work to 360 s. The original ACVC DM accepted the response as scientifically/specification conforming and is applying it in the existing direction checkout. No source or scientific invocation was accepted at this tracking update, and no retry, replacement fit, extra panel or automatic successor is released. Transport's stale inherited top-level Send times were preserved raw and marked unknown; exact paired identities, immutable response and authoritative 17:48:19Z completion remain intact, with no resend.
+
+Current advancing count is two: UCOPE8701 scoped closeout and ACVC implementation/review. FOLR, RCLE, VSP03, CBSC and FRRIE are complete. The target remains five, but the selected reserve reconciliations established no permitted replacement and Root does not manufacture another scientific investment to fill the vacant slots. Owner-console reviews at the latest clean boundaries returned no unapplied instruction.
+
+## 2026-09-10 independent rolling direction execution
+
+The owner directed that directions proceed independently and in parallel, without batch synchronization or cross-direction blocking. This supersedes any operational reading of the completed next-five allocation as a batch barrier; it does not retroactively change its scientific decisions, budgets or completed results. A direction reaching a result, clean closeout, local blocker or decision boundary affects only that direction. Root immediately resumed FOLR, UCOPE, RCLE and VSP03 beside the already active ACVC chain. Each DM now owns its own next object-tier rung under standing delegation or its own direction-tier Pro handoff when the next choice crosses the direction boundary. No direction waits for ACVC intake, a Portfolio-wide result bundle or another direction's cleanup.
+
+Five direction chains are now advancing independently: ACVC terminal intake/accounting; FOLR post-TIMING-B02 next-rung decision; UCOPE post-8701 next-rung decision; RCLE post-fresh1000 next-rung decision; and VSP03 post-B07 next-rung decision. Existing lifecycle, recast, family, MEI, claim-ceiling and per-object budget records remain controlling. Prior `no successor allocated` statements end their named allocations; they do not create a cross-direction scheduling gate. Each new result-bearing invocation still requires its own exact scientific selection, frozen card, fresh node admission and Monitor handoff.

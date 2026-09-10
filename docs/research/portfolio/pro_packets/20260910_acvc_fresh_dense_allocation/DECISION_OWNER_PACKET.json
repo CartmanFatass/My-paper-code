@@ -1,0 +1,38 @@
+{
+  "question": "Portfolio Pro已选择A：应用一次ACVC新DENSE拟合及完整C/F/dwell比较；主人可异步覆盖，无需再逐项批准。",
+  "changes_if_approved": [
+    {
+      "target": "ACVC_FRESH_DENSE_REUSE_B01分配与工程任务",
+      "from": "已接受设计，0次数值调用、0秒分配",
+      "to": "仅一次master8921新拟合；整段任务330秒、累计支持30秒、完整360秒。当前开始工程，尚无实验结果。"
+    }
+  ],
+  "if_refused": "保留已发生事实并在下一干净边界应用具体覆盖；未发生的相关工作停止或调整。不得补跑、改旧结果或自行替换科学问题。",
+  "evidence_for": [
+    {
+      "path": "docs/research/portfolio/pro_packets/20260910_acvc_fresh_dense_allocation/archive/RESPONSE.md",
+      "quote": "A prospectively selected new fit directly tests whether the fixed-rule benefit survives beyond the previously selected retained assets.",
+      "why": "一个事前选定的新训练实例直接检查旧底座选择限制。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/portfolio/pro_packets/20260910_acvc_fresh_dense_allocation/archive/RESPONSE.md",
+      "quote": "F−dwell lost on **7/64 and 11/64 worlds**; F−C also had adverse worlds.",
+      "why": "旧结果有反向世界，dwell也有效；新研究仍只支持一个拟合实例上的整体规则比较。"
+    }
+  ],
+  "uncertainty": [
+    "新runner、必要检查与实际完整耗时尚未验证；不能把历史252.200秒推算当成运行承诺。",
+    "一项训练实例的64个配对世界不能估计训练总体，亦不能单独识别物理回退因果效应。",
+    "ACVC仍为第二次重构后的最低争用顺序；此决定不填充其他空位、不重开T/G。"
+  ],
+  "cost": {
+    "compute": "分配上限360秒：从资源准入到实际子进程退出的整段任务至多330秒，必要运行检查与数值读回合计至多30秒。512训练回合/1024次Adam，然后3×64评价回合；无重试、切片、替代底座或后继预算。当前尚未发生科学调用。",
+    "owner_time": "异步查看或覆盖；不等待新的逐项批准。",
+    "reversibility": "costly",
+    "waits_on_this": "nothing"
+  },
+  "verdict_text": "**Select option A and release exactly one ACVC_FRESH_DENSE_REUSE_B01 study, with a complete charged limit of 360 seconds: at most 330 seconds for the entire supervised scientific task and at most 30 seconds total for its supporting runtime checks and readback.**",
+  "source": "https://github.com/CartmanFatass/My-paper-code/blob/caf8cf61d92fb3a669f93439a0e2b9967eca943c/docs/research/portfolio/pro_packets/20260910_acvc_fresh_dense_allocation/archive/RESPONSE.md"
+}

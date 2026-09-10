@@ -1,0 +1,113 @@
+{
+  "object": "ACVC_FRESH_DENSE_REUSE_B01",
+  "source_sha": "60d42dd739ef125a505772f2b1d698b099b43a16",
+  "supervisor_handle": "acvc-fresh-dense-b01-8921-60d42dd73",
+  "execution_node": "wsl_4070",
+  "remote_checkout": "/home/wu/hmasd-worktrees/acvc-fresh-dense-b01-60d42dd73",
+  "monitor_terminal_source": "C:/Users/fires/Documents/Codex/2026-09-09/hmasd-folr-b02-monitor-20260909/outputs/acvc-fresh-dense-b01-8921-60d42dd73-terminal.txt",
+  "direct_terminal_observed_at": "2026-09-10T18:40:50.1426335Z",
+  "supervisor_start": "2026-09-11T02:37:57+08:00",
+  "supervisor_exit": "2026-09-11T02:40:46+08:00",
+  "supervisor_exit_code": 0,
+  "tmux_active_at_terminal": false,
+  "local_archive": "C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/exp/fresh_dense_reuse_b01_8921_20260910_collection/collection.tgz",
+  "archive_sha256": "441de0bda690b1d99c2cfc653c2cd3c088f4bb434062117df755db18942c16a4",
+  "archive_verification": "Remote sha256sum equals complete local archive hash; all 16 captured raw/support/supervisor files extracted, inventoried and hashed in dm_analysis.json. Final checkpoint retained in this archive and the extracted local runtime root.",
+  "final_checkpoint_sha256": "0e2e2b78b8c37d538d143b9c736e58e4bb0de925fb641c230ba1999a230bf0cb",
+  "durable_readback": "docs/research/candidates/acvc/fresh_dense_reuse_b01_20260910",
+  "checks": [
+    {
+      "name": "first focused target, fixture setup failed before test body",
+      "charge_s": 2.3801562,
+      "method": "client Stopwatch including SSH/readback/cleanup",
+      "remote_process_s": 1.61
+    },
+    {
+      "name": "same focused target after parent directory repair; one passed",
+      "charge_s": 1.3373995,
+      "method": "client Stopwatch including SSH/readback/cleanup",
+      "remote_process_s": 0.95
+    },
+    {
+      "name": "read supplied monitor terminal evidence and shell",
+      "charge_s": 0.1634922,
+      "method": "full tool command wall, conservatively including source read"
+    },
+    {
+      "name": "remote archive, scp and local extraction",
+      "charge_s": 1.5858694,
+      "method": "full tool command wall; intended nested Stopwatch lines were absent, so wider tool wall is charged"
+    },
+    {
+      "name": "initial summary/admission/timing/manifest readback",
+      "charge_s": 0.2755094,
+      "method": "full tool command wall"
+    },
+    {
+      "name": "supervisor and first/last raw row/update readback",
+      "charge_s": 0.2105334,
+      "method": "full tool command wall"
+    },
+    {
+      "name": "independent finite row reduction, hash verification and raw preservation",
+      "charge_s": 0.3236268,
+      "method": "full tool command wall; inner analysis runtime .09011349998763762s is included"
+    },
+    {
+      "name": "compact analysis and card readback",
+      "charge_s": 0.2813909,
+      "method": "full tool command wall, conservatively including card read"
+    },
+    {
+      "name": "preserve supplied direct monitor terminal witness",
+      "charge_s": 0.1683533,
+      "method": "full tool command wall"
+    }
+  ],
+  "timing": {
+    "runner_to_summary_s": 157.50844278297154,
+    "whole_admission_through_command_exit_s": 168.37,
+    "supervisor_integer_duration_s": 169,
+    "supervisor_final_sleep_s": 1,
+    "submission_client_wall_s": 0.6461753,
+    "whole_supervised_task_conservative_charge_s": 172,
+    "whole_task_charge_method": "Ceiling of integer supervisor duration + one-second timestamp granularity + recorded one-second final supervisor sleep + entire submit-client interval. Monitor directly observed no active tmux session. This conservative charge is not a separately precise timer.",
+    "support_charge_s": 6.7263310999999995,
+    "complete_charge_so_far_s": 178.7263311,
+    "task_cap_s": 330,
+    "support_cap_s": 30,
+    "complete_cap_s": 360,
+    "support_cap_pass": true,
+    "whole_task_cap_pass": true,
+    "complete_cap_pass": true,
+    "study_elapsed_critical_path": "not charged as a sum of control-plane deliberation and waits",
+    "aggregate_cpu_work": "unmeasured",
+    "prior_directory_test_charge_s": 24.0266541,
+    "new_focused_test_charge_s": 3.7175557,
+    "directory_test_total_s": 27.7442098,
+    "directory_test_cap_s": 300
+  },
+  "resources": {
+    "physical_available_bytes": 15633838080,
+    "effective_available_bytes": 15633838080,
+    "minimum_available_bytes": 4294967296,
+    "passed": true,
+    "peak_rss_kib": 555852,
+    "peak_rss_MiB": 542.82421875,
+    "cgroup_headroom": "unmeasured",
+    "resources_unmeasured_fields": [
+      "aggregate CPU work",
+      "cgroup memory headroom"
+    ],
+    "raw_summary_flag_preserved": "resources_unmeasured"
+  },
+  "closeout": {
+    "state": "pending scoped removal after committed preservation",
+    "owned_remote_checkout": "/home/wu/hmasd-worktrees/acvc-fresh-dense-b01-60d42dd73",
+    "owned_supervisor_root": "/home/wu/.agent-tasks/acvc-fresh-dense-b01-8921-60d42dd73",
+    "preservation_complete": true,
+    "local_authoring_checkout": "C:/Projects/HMASD-worktrees/codex-acvc",
+    "local_authoring_branch": "codex/acvc",
+    "local_authoring_retention": "shared active direction checkout; Root owns its later consolidation"
+  }
+}
