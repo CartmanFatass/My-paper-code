@@ -145,3 +145,33 @@ adoption state above. Routine observation belongs to the shared Monitor; DM does
 poll. Root requested publication of these facts and the exact commit chain, then will
 forward terminal facts to the same DM. No new scientific outcome or completed resource
 measurement is inferred from adoption. Collection/intake/preservation remain pending.
+
+## Restart terminal acceptance and verified preservation
+
+Root's restart assignment transfers the remaining terminal work to
+`/root/dm_rcle_restart_recovery`, using this same authoring checkout/branch and frozen
+source. Existing draft evidence, readback, analysis and owner brief were preserved.
+The E0 and scientific intake separately accept a complete third B root: service gain
+with all-eight fragmentation loss and continuing reference/recovery deficits.
+No new scientific invocation or repeated training/checkpoint evaluation occurred.
+
+At preservation, supervisor status remains finished/exit0, tmux is inactive, and
+original PID3325747 is absent. The remote checkout remains at the exact source. All
+contents of that checkout (excluding only its Git pointer), source stage and supervisor
+were archived before removal. GNU tar comparison against original contents passed.
+Archive **10851632 bytes**, **2362 regular members**, SHA256
+**`e5fb667047626d280a58e750f5c732f3d4ffccd787edd96f81095c014b24130a`**.
+Local transfer hash matches. All23 accepted output/supervisor members and the staged
+source bundle match their retained digests. Member-list SHA256
+`bb85a0e87d9eb4de374226aff3709987237bbb7057ac2737097b3ea48fabc32a`.
+
+Remote archive `/home/wu/hmasd-recovery/rcle-b03-fresh1000-s23-20260910/remote.tar.gz`;
+local archive `temp/directions/roster_consistent_latent_exploration/closeout/b03-fresh1000-s23-20260910/remote.tar.gz`.
+Remote ref `refs/recovery/rcle-b03-fresh1000-s23-20260910` pins the exact source.
+`preservation.json` and `members.json` in that local closeout directory retain the
+verification. Complete preservation/transfer/member checking took **5.7546513s**;
+the restart raw/derived hash and primary check took **.1143776s**. Both are inside
+the existing150s post-support charge; conservative whole allocation remains978.73/1500s.
+Aggregate CPU and all-history elapsed work remain unmeasured. Exact removal follows
+publication of the accepted result. Shared authoring, native cache and prior evidence
+are outside the inventory. Root accepts integration/retention and reclamation.
