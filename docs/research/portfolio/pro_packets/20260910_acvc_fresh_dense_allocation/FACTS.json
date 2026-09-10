@@ -2,8 +2,8 @@
   "purpose": "Static Portfolio allocation materials, not an empirical result or local allocation",
   "scientific_design_sha": "28e99edc7ae93c1101aa78d00e46f6c71e92e81d",
   "starting_portfolio_checkout_sha": "e65bdce30b40f5b23202b557f0e292d4966e7de3",
-  "current_published_context_sha": "e0ef4a7c006a921ef6717884e11d985faaadca4d",
-  "remote_context_observed_at_utc": "2026-09-10T17:08:29Z",
+  "current_published_context_sha": "99168437c1c0d52101b6326fe4db491f760fe28d",
+  "remote_context_observed_at_utc": "2026-09-10T17:22:22Z",
   "calculation_method": "Static arithmetic over the accepted ACVC prospective facts in the tool runtime; no project imports, model/RNG construction, simulator, test or numerical probe.",
   "consultation_exposure": {
     "scientific_invocations": 0,
@@ -83,7 +83,7 @@
     ]
   },
   "contention_snapshot": {
-    "source": "EXPERIMENT_TRACKING.md current execution update at e0ef4a7c, supplemented by RCLE_B03_FRESH1000_S21_EXECUTION_20260910.md at that same SHA",
+    "source": "Published current tracking plus FOLR TIMING_B02 intake, VSP03 B07 intake, RCLE S21 execution and CBSC RESERVE_READINESS intake at 99168437c1c0d52101b6326fe4db491f760fe28d; the direct latest records supersede older tracking preparation labels.",
     "accepted_order": [
       "vap_folr_core",
       "ucope",
@@ -94,7 +94,7 @@
     "direction_states": [
       {
         "direction": "vap_folr_core",
-        "state": "One new triple allocated; RETAIN Monitor-adopted, EVENT/RANDOM preselected but unsubmitted in the fixed record.",
+        "state": "RETAIN technically complete at832.49s; all128 final returns retained, mean2.64265625. EVENT Monitor-adopted; RANDOM remains preselected/unsubmitted. No triple contrast accepted.",
         "new_scope_from_this_request": "none",
         "verified_tuned_same_information_headroom": "absent"
       },
@@ -106,9 +106,10 @@
       },
       {
         "direction": "vsp_03",
-        "state": "B07 handle Monitor-adopted then terminal exit0; original DM collecting/intaking, result not accepted at cutoff.",
+        "state": "B07 result accepted complete:512 greedy-R0 +0.0115673828125, greedy-R +0.013076171875, Q=-0.0016064453125. One finite allocation ends; no next fit/card selected. Completion is not a permanently counted chain.",
         "new_scope_from_this_request": "none",
-        "verified_tuned_same_information_headroom": "absent"
+        "verified_tuned_same_information_headroom": "absent",
+        "accepted_result_wall_s": 8.92788
       },
       {
         "direction": "roster_consistent_latent_exploration",
@@ -125,8 +126,8 @@
       },
       {
         "direction": "capability_bound_semantic_currentness",
-        "state": "Reserve readiness reconciliation only; no newly permitted retained52-tape execution or fresh B allocation in scoped records.",
-        "new_scope_from_this_request": "Only a specifically named permitted readiness action if Pro selects C; no bypass or unidentified numerical allocation.",
+        "state": "Static reserve reconciliation accepted complete; no next executable action established as permitted. Original reported P47 runtime restriction still lacks an authoritative current disposition; do not repeat completed authoring or count it as a standing chain.",
+        "new_scope_from_this_request": "No repeated readiness batch or numerical call is proposed. C needs an actually permitted new action/authoritative status fact, without bypass; otherwise there is no immediately executable CBSC substitute.",
         "verified_tuned_same_information_headroom": "absent"
       },
       {
