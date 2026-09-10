@@ -1,0 +1,103 @@
+{
+  "source_sha": "6fb1e1f6d6f726f133e9aab9c9d96758e3b6d36c",
+  "verified_at_utc": "2026-09-10T20:14:37.252248+00:00",
+  "archive_ref": "refs/archive/folr-public-lifecycle-timing-b03-20260910",
+  "roots": [
+    "/home/wu/hmasd-worktrees/folr-public-lifecycle-timing-b03-6fb1e1f6",
+    "/home/wu/.agent-tasks/folr-public-lifecycle-timing-b03-retain-20260910",
+    "/home/wu/.agent-tasks/folr-public-lifecycle-timing-b03-event-20260910",
+    "/home/wu/hmasd-inputs/folr-public-lifecycle-timing-b03-20260910"
+  ],
+  "processes": [
+    {
+      "handle": "folr-public-lifecycle-timing-b03-retain-20260910",
+      "pid": 3097075,
+      "pid_active": false,
+      "tmux_active": false,
+      "status": "finished",
+      "exit_code": 0
+    },
+    {
+      "handle": "folr-public-lifecycle-timing-b03-event-20260910",
+      "pid": 3098405,
+      "pid_active": false,
+      "tmux_active": false,
+      "status": "finished",
+      "exit_code": 0
+    }
+  ],
+  "archives": [
+    {
+      "path": "/home/wu/hmasd-recovery/folr-public-lifecycle-timing-b03-20260910/worktree.tar.gz",
+      "bytes": 17097390,
+      "sha256": "0bff6614549c75187bfe2d8a1ee6198ca1131534fb3ee501e0b6cdf8136337d5",
+      "original_roots": [
+        "/home/wu/hmasd-worktrees/folr-public-lifecycle-timing-b03-6fb1e1f6"
+      ],
+      "members": 2688,
+      "regular_files": 2332,
+      "directories": 356,
+      "symlinks": 0,
+      "all_member_content_and_mode_match_originals": true,
+      "originals_unchanged_after_archive": true
+    },
+    {
+      "path": "/home/wu/hmasd-recovery/folr-public-lifecycle-timing-b03-20260910/supervisors.tar.gz",
+      "bytes": 5009,
+      "sha256": "9195537dc6580921aad5592ea6987746c263839a4b9b927a45791bc2563cd853",
+      "original_roots": [
+        "/home/wu/.agent-tasks/folr-public-lifecycle-timing-b03-retain-20260910",
+        "/home/wu/.agent-tasks/folr-public-lifecycle-timing-b03-event-20260910"
+      ],
+      "members": 16,
+      "regular_files": 14,
+      "directories": 2,
+      "symlinks": 0,
+      "all_member_content_and_mode_match_originals": true,
+      "originals_unchanged_after_archive": true
+    },
+    {
+      "path": "/home/wu/hmasd-recovery/folr-public-lifecycle-timing-b03-20260910/inputs.tar.gz",
+      "bytes": 1756594,
+      "sha256": "d6c8dad51eb5380b23b2f69bdb0026aa068100d49db0b9a498db833891443075",
+      "original_roots": [
+        "/home/wu/hmasd-inputs/folr-public-lifecycle-timing-b03-20260910"
+      ],
+      "members": 2,
+      "regular_files": 1,
+      "directories": 1,
+      "symlinks": 0,
+      "all_member_content_and_mode_match_originals": true,
+      "originals_unchanged_after_archive": true
+    }
+  ],
+  "archive_members_compared_to_originals_before_delete": true,
+  "deletion_performed": false,
+  "local_archive_copies": [
+    {
+      "path": "temp/directions/vap_folr_core/exp/folr-public-lifecycle-timing-b03-20260910/worktree.tar.gz",
+      "bytes": 17097390,
+      "sha256": "0bff6614549c75187bfe2d8a1ee6198ca1131534fb3ee501e0b6cdf8136337d5",
+      "remote_local_match": true,
+      "members": 2688,
+      "regular_files": 2332
+    },
+    {
+      "path": "temp/directions/vap_folr_core/exp/folr-public-lifecycle-timing-b03-20260910/supervisors.tar.gz",
+      "bytes": 5009,
+      "sha256": "9195537dc6580921aad5592ea6987746c263839a4b9b927a45791bc2563cd853",
+      "remote_local_match": true,
+      "members": 16,
+      "regular_files": 14
+    },
+    {
+      "path": "temp/directions/vap_folr_core/exp/folr-public-lifecycle-timing-b03-20260910/inputs.tar.gz",
+      "bytes": 1756594,
+      "sha256": "d6c8dad51eb5380b23b2f69bdb0026aa068100d49db0b9a498db833891443075",
+      "remote_local_match": true,
+      "members": 2,
+      "regular_files": 1
+    }
+  ],
+  "source_bundle_digest_matches_launch_input": true
+}

@@ -5,7 +5,7 @@ Binding MARL structure: (a) roster change; (d) other-agent non-stationarity or p
 
 ## 1. Question, decision tier and current authority
 
-**B/EXPLORE; RETAIN technically accepted; EVENT accepted and Monitor registration delivered.** Root's 2026-09-10
+**B/EXPLORE; complete valid RETAIN_ABOVE_MEI pair; scoped remote closeout complete.** Root's 2026-09-10
 OWNER_DIRECT independent-direction steering resumes this direction from accepted
 TIMING-B02. [Current rolling-execution record](../../portfolio/EXPERIMENT_TRACKING.md#2026-09-10-independent-rolling-direction-execution)
 is synchronized in this checkout at `35eb3f6c55a75269b8928dbffb2f89256f1600be` from Root's
@@ -20,7 +20,7 @@ not an open/close/recast/park, promotion or Portfolio decision. This new selecti
 its own finite two-invocation budget under standing delegation; it borrows no remaining
 slot from TIMING-B02. The full published launch source is
 `6fb1e1f6d6f726f133e9aab9c9d96758e3b6d36c`; E0 records exact command, recovered source
-transport and actual observation handover. No pair result exists at this boundary. [Prospective intake](FOLR_PUBLIC_LIFECYCLE_TIMING_B03_INTAKE_20260910.md#1-next-question-and-object-tier-selection)
+transport and actual observation handover. The complete pair gives EVENT−RETAIN −5.44609375, selecting RETAIN_ABOVE_MEI. The [final intake](FOLR_PUBLIC_LIFECYCLE_TIMING_B03_INTAKE_20260910.md#9-complete-pair-observed-result-counts-and-frozen-rule) records the unchanged rule and completed closeout. [Prospective intake](FOLR_PUBLIC_LIFECYCLE_TIMING_B03_INTAKE_20260910.md#1-next-question-and-object-tier-selection)
 records the options, selected recommendation and prediction before output.
 
 After observing both128-endpoint triples, the primary contrast is narrowed to EVENT−RETAIN.

@@ -1,5 +1,7 @@
 # FOLR public lifecycle TIMING-B03 technical evidence
 
+Current final state: valid RETAIN_ABOVE_MEI pair; scoped remote closeout complete. The chronological records below retain earlier publication boundaries.
+
 ## Prospective source and selected execution
 
 [Card §§1–6](FOLR_PUBLIC_LIFECYCLE_TIMING_B03_SCIENCE_CARD_20260910.md) fixes the new
@@ -210,3 +212,75 @@ The handover publication check and focused observation-procedure read add 0.5484
 bringing support to **17.8892036/300s**. EXPERIMENT_MONITOR.md “Assignment, adoption
 and return” permits returning pending collection after accepted registration, with actual
 adoption explicitly pending until Root confirms it. No duplicate observation or send follows.
+
+## Final EVENT collection, pair rule and prediction
+
+The original EVENT completed at 2026-09-11T04:04:25+08:00, exit 0. Root supplied the
+terminal handoff. Direct remote collection at 2026-09-10T20:08:54.989929Z found clean
+full source `6fb1e1f6d6f726f133e9aab9c9d96758e3b6d36c`, actual EVENT seed 7806/evaluation
+107806, 5000 training episodes/100000 ticks/4969 updates and 128 final episodes/2560 ticks.
+All eight EVENT copies match the remote raw SHA-256 digests. With RETAIN, all 16 copies
+and all 256 finite returns are preserved. The local EVENT root is
+`temp/directions/vap_folr_core/exp/public_lifecycle_timing_b03_seed7806_event`, with
+five supervisor files under `supervisor/` and its adjacent `_memory.json`; bounded
+remote/Monitor records are in the existing `public_lifecycle_timing_b03_control_20260910`.
+No separate Monitor adoption timestamp was relayed to this DM; the terminal handoff and
+direct collection resolve pending observation. There is no live observation dependency.
+
+EVENT mean **1.44703125**, RETAIN **6.893125**, difference **−5.44609375** selects the
+frozen **RETAIN_ABOVE_MEI** branch. The **WITHIN_MEI** forecast missed; owner not taken.
+[Full intake §§9–13](FOLR_PUBLIC_LIFECYCLE_TIMING_B03_INTAKE_20260910.md#9-complete-pair-observed-result-counts-and-frozen-rule)
+provides the verbatim rule, learner counts, unit, bounded claim, surviving alternatives,
+knowledge use, decisions and owner flags. Source, endpoint, arm set and rule were not
+changed after observation. Standard run-level analysis is stored in
+`evidence/2026-09-10-folr-public-lifecycle-timing-b03-run-analysis.json`; the separately
+labelled three-instance historical R/E display is in the corresponding
+`-matched-128-analysis.json`. Both use one endpoint per training instance/arm and no
+confidence interval; historical 32-episode data and RANDOM outcomes are not pooled away.
+
+EVENT memory passed with physical/effective 15630598144 bytes. Whole wall **764.25s**,
+CPU **765.85s**, peak RSS **677660 KiB**; narrower runner **763.911434450s / 653372 KiB**.
+The complete pair is **1519.65s wall / 1522.30s CPU**; narrower summed wall is
+**1515.273757639s**. First admission to rounded final exit is **1961.521162s**, a separate
+elapsed window. The raw Monitor observation timestamp's −07 offset is inconsistent with
+direct collection chronology when parsed; it is retained verbatim and excluded from
+elapsed arithmetic. Independent remote logs/whole clocks and primary returns remain valid.
+Cgroup fields are `resources_unmeasured`. No source or test change was added.
+
+## Final scoped archive verification and remote removal
+
+Three archives were created and every member compared with the original before any
+removal, with exact identity/type/mode and regular-file byte matches. At
+2026-09-10T20:14:37.252248Z the 2706 members/2347 regular files were verified, including
+all worktree contents, both complete supervisors and the staged source bundle. All three
+local archive copies match remote whole hashes and expected member counts; the original
+Git bundle digest also matches its launch record. The full member manifest stays with
+the archives; compact evidence is
+[evidence/2026-09-10-folr-public-lifecycle-timing-b03-archive-verification.json](evidence/2026-09-10-folr-public-lifecycle-timing-b03-archive-verification.json).
+
+A malformed bracket in the initial removal script caused a pre-execution SyntaxError,
+with no filesystem effects. Its correction re-read the same member inventories and
+verified inactive PIDs/tmux, recovery ref and exact paths at 20:18:02.310084Z, then
+removed only the four declared roots. Disk absence and worktree unregistration were
+confirmed at 20:18:02.366574Z in
+[evidence/2026-09-10-folr-public-lifecycle-timing-b03-remote-closeout.json](evidence/2026-09-10-folr-public-lifecycle-timing-b03-remote-closeout.json).
+Recovery ref `refs/archive/folr-public-lifecycle-timing-b03-20260910` preserves frozen source.
+Remote recovery is `/home/wu/hmasd-recovery/folr-public-lifecycle-timing-b03-20260910`; local
+recovery is `temp/directions/vap_folr_core/exp/folr-public-lifecycle-timing-b03-20260910`.
+All collected original summaries/checkpoints/logs/receipts remain local. Historical B02
+cleanup gaps are preserved; no old rejected scratch or unrelated path was touched.
+
+Final scoped support is **48.3790650/300s**. This includes all
+recorded analysis/collection/closure command walls, including failed commands, and excludes
+ordinary authoring/Git administration. Directory tests remain **25.9131638/300s**, unchanged.
+One valid pair used exactly two accepted invocations. No new compute or family disposition
+is selected; Root owns integration and final execution-closure acceptance.
+
+The final record/brief write and preservation/count/link/owner-review validation add
+1.0952423s, giving **48.3790650s scoped support** and **1568.0290650s scoped charge per
+one valid pair** including its 1519.65s complete scientific wall. All focused checks
+passed: frozen claim/card §§2–6 unchanged; scientific source/tests unchanged; actual
+means/counts and n=1/n=3 training units consistent; archive/closeout records consistent;
+relative file links valid; six-heading Chinese brief 306 characters; current-object
+owner review matches and live FOLR audit owner entries empty. No repeated scientific
+or test invocation was used. Commit/push publication is administrative.

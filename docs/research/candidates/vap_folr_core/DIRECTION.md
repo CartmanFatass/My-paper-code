@@ -362,3 +362,53 @@ References:
 - `FOLR_PUBLIC_LIFECYCLE_TIMING_B02_INTAKE_20260910.md` §§7–12
 - `evidence/2026-09-10-folr-public-lifecycle-timing-b02-run-analysis.json`
 - `evidence/2026-09-10-folr-public-lifecycle-timing-b02-matched-128-analysis.json`
+
+## Accepted public-lifecycle timing B03 science — 2026-09-10
+
+**Conclusion.** A new matched fitting instance at 7806/107806 gives RETAIN 6.893125
+and EVENT 1.44703125 after equal 5000-episode training and 128 fixed final episodes
+per arm. EVENT−RETAIN **−5.44609375** selects the unchanged RETAIN_ABOVE_MEI branch.
+The low-confidence WITHIN_MEI forecast missed. This fresh comparison supplies a
+native counterexample to a useful event-clearing advantage in the observed instance.
+
+**Bounded claim.** This is one complete-trained-package comparison on the explicit
+public-lifecycle Traffic Junction variant. The outcome-informed three-instance
+128-endpoint R/E display has descriptive mean EVENT−RETAIN −1.07734375 and sample
+SD 4.146900581; it does not replace any frozen rule or establish a stable population
+winner. Earlier 32-episode pairs stay separate. Omitting a fresh RANDOM fit was an
+explicit outcome-informed narrowing; its two previous outcomes remain, and this
+pair cannot establish an all-controls or event-exclusive timing claim. Same-information
+tuned headroom remains absent. No equivalence, causal harm, transfer or C claim follows.
+
+**Strongest support and contradiction.** TIMING-B01's EVENT advantage over both legal
+controls remains the strongest local support for clearing: +2.804765625 over RETAIN
+and +1.363671875 over RANDOM. The current −5.44609375 is the strongest contrary
+128-endpoint point, alongside TIMING-B02's within-MEI nonrecurrence and the older
+32-episode retention advantage. All observed outcomes remain visible. Current cumulative
+training means also favor retention (−3.76395 versus −5.073054), but are distinct
+from final greedy returns and do not form a recorded learning curve.
+
+**Surviving alternative.** EVENT actually reset 18.0880%/19.1760% of eligible train/final
+survivor controls, while RETAIN reset none. Common entity freshness, public/local
+information, legal survivor actions and consistent acting/learner histories remain
+matched. The measured loss can involve useful history, optimization/data paths, joint
+resets, partner co-adaptation and evaluation variation. Conditional final-return SDs
+7.820/6.710 do not estimate training-population uncertainty; equal seeds do not pair
+final traffic worlds. Actual clearing exposure and reconstruction conformance do not
+identify the causal explanation.
+
+**Next discriminator.** The mixed history and new native loss favor reconsidering
+unchanged-law spending. A separately selected question could ask whether a defined
+clearing change preserves useful survivor history while improving native return over
+competent retention; a timing-specific claim would also need the relevant reset-law
+comparison. This is unselected direction-local advice. No new run, exact diagnostic,
+recast, family closure, promotion or Portfolio disposition follows from this result.
+
+References:
+
+- `FOLR_PUBLIC_LIFECYCLE_TIMING_B03_SCIENCE_CARD_20260910.md`
+- `FOLR_PUBLIC_LIFECYCLE_TIMING_B03_RESULT_SUMMARY_20260910.json`
+- `FOLR_PUBLIC_LIFECYCLE_TIMING_B03_RESULT_EVIDENCE_20260910.md`
+- `FOLR_PUBLIC_LIFECYCLE_TIMING_B03_INTAKE_20260910.md` §§9–13
+- `evidence/2026-09-10-folr-public-lifecycle-timing-b03-run-analysis.json`
+- `evidence/2026-09-10-folr-public-lifecycle-timing-b03-matched-128-analysis.json`
