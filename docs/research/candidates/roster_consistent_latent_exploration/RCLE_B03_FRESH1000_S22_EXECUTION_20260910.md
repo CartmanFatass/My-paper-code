@@ -125,3 +125,10 @@ DM/Root return route. **Actual adoption remains pending** until Root forwards th
 Monitor's direct observation. DM ceased routine polling at dispatch and has read no
 question-relevant new output. Collection, technical/scientific intake and scoped
 closeout remain owned by this DM after Root's terminal follow-up.
+
+**Actual adoption confirmed.** Root subsequently notified this original DM that the
+independent Monitor has adopted the exact W1→W100→reference handle on hmasd-wsl-node
+at source9a11fb084; receipt recorded 2026-09-10T19:15:35.602356+00:00.
+Root also reported main integration through81db62478. This supersedes the preceding
+launch-time pending adoption state. DM retains terminal collection/intake ownership
+and has not polled the accepted process; no scientific completion is claimed.
