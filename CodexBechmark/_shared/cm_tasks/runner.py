@@ -59,11 +59,15 @@ def hashes(root):
             for p in all_files(root)}
 
 
-def choose_tasks(seed, difficulty="mixed", bank=None):
+def choose_tasks(seed, difficulty="mixed", bank=None, suite="pair"):
     if bank is None:
         from _host.task_bank import TASKS as bank
     rng = random.Random(seed)
     classics = sorted(k for k, v in bank.items() if v["kind"] == "classic")
+    if suite == "five-plus-one":
+        classics.sort(key=lambda k: (bank[k]["family"], k))
+        others = sorted(k for k, v in bank.items() if v["kind"] == "non_example")
+        return classics + [rng.choice(others)]
     first = rng.choice(classics)
     others = sorted(k for k, v in bank.items() if v["kind"] == "non_example" and
                     (difficulty == "any" or v["difficulty"] != bank[first]["difficulty"]))
@@ -80,13 +84,13 @@ def install_task(workspace, task_id):
 
 def task_message(state, include_brief=True):
     if state["finished"]:
-        return "COMPLETE: the two-task sequence is closed. Give the user the final delivery; do not self-grade."
+        return "COMPLETE: the task sequence is closed. Give the user the final delivery; do not self-grade."
     task_id = state["tasks"][state["position"]]
     task = state["task_metadata"][task_id]
     cmd = [state["python"], *task["public_command"]]
     details = (f"\n{task['brief']}\n\nPublic check argv: {json.dumps(cmd, ensure_ascii=False)}\n"
                if include_brief else f"\nTask facts remain in tasks/{task_id}.md.\n")
-    return f"Task {state['position'] + 1}/2: {task_id}{details}Next checkpoint: {BOUNDARIES[state['phase']]}\n"
+    return f"Task {state['position'] + 1}/{len(state['tasks'])}: {task_id}{details}Next checkpoint: {BOUNDARIES[state['phase']]}\n"
 
 
 def candidate_message(directory, state, extra="", include_brief=True):
@@ -135,10 +139,12 @@ def prepare(args):
     for relative in ("materials.py", "events.py", "runtime.py", "completion.py", "judge_schema.json", "pricing.json"):
         shutil.copy2(BASE / "_host" / relative, runtime_dir / "_host" / relative)
     shutil.copy2(BASE / "runner.py", runtime_dir / "runner.py")
-    tasks = choose_tasks(args.seed, args.difficulty)
-    state = {"id": run_id, "version": VERSION, "created": now(), "finished": None,
+    suite = getattr(args, "suite", "pair")
+    tasks = choose_tasks(args.seed, args.difficulty, suite=suite)
+    state = {"id": run_id, "version": "cm-six-v1" if suite == "five-plus-one" else VERSION, "created": now(), "finished": None,
              "mode": args.mode, "level": args.level, "delivery": args.delivery,
-             "seed": args.seed, "difficulty_policy": args.difficulty, "tasks": tasks,
+             "suite": suite, "all_tasks_upfront": suite == "five-plus-one",
+             "seed": args.seed, "difficulty_policy": "all_classic_plus_random_non_example" if suite == "five-plus-one" else args.difficulty, "tasks": tasks,
              "task_metadata": {k: TASKS[k] for k in tasks}, "position": 0, "phase": 0,
              "workspace": str(workspace), "python": str(Path(args.python).resolve()),
              "runtime_dir": str(runtime_dir),
@@ -149,7 +155,13 @@ def prepare(args):
              "dependencies": dependencies,
              "runtime_verification": "unmeasured", "library_cost": "unmeasured"}
     materials.install(workspace, state, BASE)
-    install_task(workspace, tasks[0])
+    for task in tasks if state["all_tasks_upfront"] else tasks[:1]:
+        install_task(workspace, task)
+    if state["all_tasks_upfront"]:
+        materials.write(workspace / "TASKS.md", "# All tasks in this run\n\n"
+                        + "\n".join(f"{i + 1}. [{t}](tasks/{t}.md)" for i, t in enumerate(tasks))
+                        + "\n\nAll listed source packages and task contracts are available now. "
+                        "Complete checkpoints in this order; preserve earlier accepted behavior.\n")
     materials.write(workspace / "notes/neighbor.md", events.NEIGHBOR_BASE)
     materials.write(workspace / "notes/team.md", "Independent documentation note.\n")
     materials.write(workspace / ".gitignore", "__pycache__/\n*.pyc\ntemp/\n.pytest_cache/\n")
@@ -227,8 +239,11 @@ def checkpoint(args, directory, state):
     if state["phase"] == len(BOUNDARIES):
         state["phase"] = 0
         state["position"] += 1
-        if state["position"] == 2:
+        if state["position"] == len(state["tasks"]):
             state["finished"] = now()
+        elif state.get("all_tasks_upfront"):
+            extra += "\nContinue with the next task already listed in TASKS.md. Preserve earlier accepted behavior."
+            include_brief = True
         else:
             before = set(hashes(workspace))
             install_task(workspace, state["tasks"][state["position"]])
@@ -252,7 +267,7 @@ def checkpoint(args, directory, state):
 
 def public_status(state):
     return {"id": state["id"], "completed_boundaries": len(state["checkpoints"]),
-            "total_boundaries": 8, "finished": state["finished"],
+            "total_boundaries": 4 * len(state["tasks"]), "finished": state["finished"],
             "expected": None if state["finished"] else BOUNDARIES[state["phase"]]}
 
 
@@ -270,6 +285,8 @@ def main(argv=None):
     prep = argparse.ArgumentParser(add_help=False)
     prep.add_argument("--mode", choices=("direct", "delegation"), required=True)
     prep.add_argument("--seed", type=int, help="Omit to draw and record a random seed")
+    prep.add_argument("--suite", choices=("pair", "five-plus-one"), default="five-plus-one",
+                      help="five-plus-one exposes all five classic tasks and one sampled non-example upfront")
     prep.add_argument("--difficulty", choices=("mixed", "any"), default="mixed")
     prep.add_argument("--level", choices=tuple(materials.LEVELS), default="L0")
     prep.add_argument("--delivery", choices=("fresh", "reuse"), default="fresh")
@@ -317,7 +334,7 @@ def main(argv=None):
             state["launch"] = {"mode": "existing_session", "session_id": args.session, "started": now(),
                                "codex_home": os.environ.get("CODEX_HOME", str(Path.home() / ".codex"))}
             save(directory / "state.json", state)
-            materials.write(directory / "REPORT.md", "# CM benchmark\n\n当前 CM 正在执行两题；结束后自动更新评分与成本。\n")
+            materials.write(directory / "REPORT.md", f"# CM benchmark\n\n当前 CM 正在执行 {len(state['tasks'])} 题；结束后自动更新评分与成本。\n")
             print(json.dumps({"run": str(directory), "workspace": state["workspace"],
                               "seed": state["seed"], "cm": "this existing session; do not spawn a CM",
                               "next": "Read the run workspace AGENTS.md, then invoke its benchmark.py next",

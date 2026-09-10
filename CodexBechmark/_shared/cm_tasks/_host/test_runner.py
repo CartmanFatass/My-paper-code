@@ -70,6 +70,51 @@ class ProtocolTests(unittest.TestCase):
                         if level == "L1":
                             self.assertNotIn("## L2", body)
 
+    def test_five_plus_one_upfront_and_complete(self):
+        for seed in range(10):
+            tasks = runner.choose_tasks(seed, suite="five-plus-one")
+            self.assertEqual(len(tasks), 6)
+            self.assertEqual(len({TASKS[t]["family"] for t in tasks[:5]}), 5)
+            self.assertTrue(all(TASKS[t]["kind"] == "classic" for t in tasks[:5]))
+            self.assertEqual(TASKS[tasks[-1]]["kind"], "non_example")
+        directory = silent(runner.prepare, self.options(suite="five-plus-one", level="L1", delivery="fresh"))
+        state = runner.read(directory / "state.json")
+        workspace = Path(state["workspace"])
+        self.assertEqual(runner.public_status(state)["total_boundaries"], 24)
+        self.assertIn("TASKS.md", (workspace / "AGENTS.md").read_text(encoding="utf-8"))
+        for task in state["tasks"]:
+            self.assertTrue((workspace / f"tasks/{task}.md").is_file())
+            self.assertTrue((workspace / f"cm_{task}/api.py").is_file())
+        for position, task in enumerate(state["tasks"]):
+            note = f"work/{task}.md"
+            materials.write(workspace / note, "Offline fixture; no model result.\n")
+            for boundary in runner.BOUNDARIES:
+                if boundary == "checked":
+                    apply_reference(workspace, task)
+                    materials.write(workspace / f"work/handoffs/{task}.md", "Offline fixture.\n")
+                    materials.write(workspace / f"work/reviews/{task}.md", "Offline fixture.\n")
+                if boundary == "accepted":
+                    owned = TASKS[task]["owned_paths"]
+                    runner.git(workspace, "add", "--", *owned)
+                    runner.git(workspace, "commit", "-m", "Reference fixture repair", "--", *owned)
+                    runner.git(workspace, "push", "origin", "main")
+                    if position == 5:
+                        materials.write(workspace / "work/final.md", "Six reference repairs.\n")
+                        materials.write(workspace / "work/status.md", "All six covered.\n")
+                        runner.save(workspace / "work/background.json", {
+                            "archive-A/seed19": {"status": "complete", "missing": []},
+                            "archive-B/seed20": {"status": "incomplete", "missing": ["returns.json"]}})
+                silent(runner.checkpoint, argparse.Namespace(boundary=boundary, note=note), directory, state)
+                if position < 5:
+                    self.assertFalse(state["finished"])
+        self.assertEqual(len(state["checkpoints"]), 24)
+        self.assertTrue(state["finished"])
+        result = runtime.judge(directory, state, BASE)
+        self.assertEqual(len(result["tasks"]), 6)
+        self.assertTrue(result["behavior_passed"], result)
+        self.assertTrue(result["protocol_artifacts_passed"], result)
+        self.assertTrue(all(t["first_implementation"]["passed"] for t in result["tasks"]))
+
     def test_complete_reference_episode_and_negative_evidence(self):
         # Work on a maintenance-copy, then mutate it after prepare: the run must keep
         # its own task2 bytes and oracle despite ordinary later bank maintenance.
@@ -256,6 +301,15 @@ class ProtocolTests(unittest.TestCase):
         self.assertEqual(state["launch"]["session_id"], "fixture-root")
         self.assertEqual(state["launch"]["mode"], "existing_session")
         self.assertEqual(state["expected_models"], {})
+        self.assertEqual(state["suite"], "five-plus-one")
+        self.assertEqual(state["version"], "cm-six-v1")
+        self.assertEqual(len(state["tasks"]), 6)
+        workspace = Path(state["workspace"])
+        self.assertTrue((workspace / "TASKS.md").is_file())
+        self.assertFalse((workspace / ".codex/agents/cm_implementer.toml").exists())
+        self.assertTrue((workspace / ".codex/agents/cm_reviewer.toml").is_file())
+        for task in state["tasks"]:
+            self.assertTrue((workspace / f"cm_{task}/api.py").is_file())
         with patch.object(runtime, "session_metadata", return_value={"sessions": []}):
             exported = silent(runtime.export, argparse.Namespace(session="fixture-root", codex_home=str(self.root)),
                               Path(result["run"]), state, BASE)

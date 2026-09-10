@@ -1,5 +1,21 @@
 # 在独立 session 一句话启动
 
+## 一轮五类经典题＋一道非典型题
+
+在委派 workspace 的全新 session（界面选择 Sol medium）发送：
+
+```text
+开始测试，一轮5+1题，L1 fresh。CM：gpt-5.6-sol / medium；Implementer：gpt-5.6-luna / max；Reviewer：gpt-6-astra / medium。
+运行 start.py 时使用 --suite five-plus-one --level L1 --delivery fresh --cm gpt-5.6-sol medium --implementer gpt-5.6-luna max --reviewer gpt-6-astra medium。
+开局读取本轮 TASKS.md，全部六题说明和源码立即可访问。同一 CM 按清单逐题完成真实委派、独立审查和四个检查点，六题全部完成后统一交付 REPORT.md。不要拆成多个 run。
+```
+
+此模式为 `cm-six-v1`：五类经典题按类别顺序全部纳入，再从三道非典型题抽一道；
+seed 可省略并自动记录，不需要逐轮替换。一次六题共24个检查点，首次实现与最终
+回归均逐题评分。所有题提前可见，不能与旧两题顺序投递模式当作完全相同处理。
+“非典型+1”不表示三道非典型题全覆盖。直接实现和委派入口现在都默认六题。
+下文涉及两题顺序投递的旧流程仅在显式 `--suite pair` 时使用。
+
 完整流程、数据字段、自动统计范围和异常处理见 [操作与统计文档](OPERATING_GUIDE.md)。
 
 先选目录，在 Codex 中打开一个全新 session：
@@ -20,7 +36,7 @@ Terra/high implementer 只是默认建议，用户可以自选组合；按实际
 
 > 开始测试，L2 reuse，seed=17
 
-不指定时为 L0 fresh、自动随机 seed、不同预估难度的两题。直接实现场景忽略 spec 档位的含义。
+不指定时为 L0 fresh、自动随机 seed、六题模式。直接实现场景忽略 spec 档位的含义。
 相同输入的配置比较使用同一 seed 和同一已冻结题库版本，各自在全新 session 执行。
 不要让已读题库、隐藏答案或其他配置结果的 session 参测。
 

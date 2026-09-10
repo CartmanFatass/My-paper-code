@@ -9,12 +9,15 @@
 
 用户说“开始测试”时，直接运行 `python -B start.py`。用户指定 seed 时加 `--seed <整数>`；
 委派场景指定档位/方式时加 `--level L0|L1|L2|L3 --delivery fresh|reuse`。
+默认 `--suite five-plus-one`；仅用户明确要求旧两题模式时传 `--suite pair`。
+该模式开局即分发六题全部说明与源码，读取本轮 TASKS.md；每题仍依次完成四个边界，
+同一 CM 完成全部六题后才结束。不要拆成多轮，不要求用户逐轮更换 seed。
 未指定时为 L0 fresh，抽题 seed 自动产生并保存。不要为了默认值再询问确认。
 同一比较组应使用相同 seed。不要在已看过本轮答案的 session 重开新一轮；每轮使用新 session。
 
 start.py 返回本轮独立 workspace 和 run 路径。立即读取该 workspace/AGENTS.md，
 之后所有代码与 work/记录都写在该 workspace，执行它的 benchmark.py next/checkpoint 循环。
-两题由当前 CM 连续完成；实际调用所需 implementer/reviewer，按运行说明保存交接/审查记录。
+本轮所有题由当前 CM 连续完成；实际调用所需 implementer/reviewer，按运行说明保存交接/审查记录。
 用户中途问状态时简短回答后继续；普通问题和杂务不结束本轮。
 只能读取本轮分发的源码、任务说明、材料与公开检查；不得查看其它 run、_host、
 共享维护文档、原项目历史正确 patch 或隐藏检查。只允许通过列明命令执行主持脚本。

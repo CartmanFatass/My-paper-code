@@ -10,7 +10,9 @@
 | [cm_direct_review](cm_direct_review/README.md) | 当前项目的 CM 直接实现基线 | `cm_direct_review/workspace` |
 
 CM 场景打开后说 **“开始测试”** 即可；委派场景可说 **“开始测试，L2 reuse，seed=17”**。
-每轮随机抽一个经典范例和一个非范例，共两题，默认来自不同预估难度。
+两种 CM 入口均默认 `--suite five-plus-one`：五类经典题＋随机一道非典型题，
+六题说明和源码开局全部可见，同一 CM 一轮完成24个检查点，最后统一评分与计费。
+旧两题模式需显式指定 `--suite pair`；已有冻结运行保持原协议。
 同一 CM 连续完成代码、真实子代理审查、回执和 Git 杂务；结束后自动独立评分并提取成本。
 入口不会创建第二个 CM，也不会自动展开配置矩阵。详见 [启动说明](_shared/cm_tasks/QUICKSTART.md)。
 完整过程和数据如何统计见 [两项 CM 测试操作文档](_shared/cm_tasks/OPERATING_GUIDE.md)。

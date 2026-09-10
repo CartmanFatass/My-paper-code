@@ -38,7 +38,7 @@ Use an independent cm_reviewer for each semantic change, with the task's facts, 
 invariants and fixed diff. Reviewers do not receive implementation discussion before their
 first review. Disposition material findings; independent review is evidence, not an approval
 gate. Do not simulate any child or reviewer. Continue in the SAME CM session until the
-two-task sequence has ended, including status questions, late receipts and Git chores.
+task sequence has ended, including status questions, late receipts and Git chores.
 """
 IMPLEMENTER = """You are the implementation worker for the assigning CM's bounded handoff.
 You are not alone in this workspace; preserve unrelated edits. Implement and check the owned
@@ -77,6 +77,10 @@ def install(workspace, state, source):
                    if delivery == "reuse" else
                    " Write the handoff fresh from the task and code; no reusable pattern library is supplied.")
         policy += " Record any CM coding takeover, its reason and changed paths in work/takeovers.md."
+    task_access = ("All six task contracts and source packages are available immediately; read TASKS.md. "
+                   "You may inspect all listed tasks now; complete their checkpoints in the listed order."
+                   if state.get("all_tasks_upfront") else
+                   "The two tasks are frozen before execution. Task identities arrive sequentially.")
     protocol = f"""# CM benchmark run {state['id']}
 
 {COMMON}
@@ -88,7 +92,7 @@ another CM CLI from this session. Only the implementer (delegation mode) and rev
 candidate child agents. The host starts a separate post-run evaluator after you finish.
 
 This is an isolated adaptation of the current HMASD workflow, not production research.
-The two tasks are frozen before execution. Task identities arrive sequentially. Essential facts,
+{task_access} Essential facts,
 source, public acceptance and final checks are identical across treatment groups.
 Five-item handoff structure:
 {FIVE_ITEMS}
@@ -123,7 +127,7 @@ receipt and BOTH metrics.json and returns.json; trust actual delivered files, no
 claim alone. Preserve earlier evidence. A status question requests an answer in work/status.md
 and continuation. Preserve notes/neighbor.md as an unrelated, uncommitted change.
 Before the last accepted checkpoint write work/final.md with delivered work, checks, unresolved
-issues and background collection state. Do not grade yourself or read later/hidden materials.
+issues and background collection state. Do not grade yourself or read hidden materials.
 If this run was started with start.py/begin in an existing CM session, the last checkpoint
 starts automatic post-run collection. End the CM turn after your delivery; do not wait for
 your own turn-completion event or call the grader/cost tool while still executing the task.

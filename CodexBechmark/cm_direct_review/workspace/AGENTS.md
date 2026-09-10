@@ -7,6 +7,10 @@
 这些参数记录选择并生成子角色配置，不切换当前CM模型；当前CM使用用户在界面选择的模型。
 这是独立 benchmark，不继承 HMASD 科研运行授权，不读取生产源或主持答案。
 
+默认 `--suite five-plus-one`：六题全部说明和源码开局可见，读取本轮 TASKS.md。
+同一 CM 直接实现五类经典题和一道随机非典型题，每题独立审查，六题全部完成后统一交付。
+不要拆成多轮，不创建 implementer。仅用户明确要求旧两题时传 `--suite pair`。
+
 用户说“开始测试”时，直接运行 `python -B start.py`。用户指定 seed 时加 `--seed <整数>`；
 委派场景指定档位/方式时加 `--level L0|L1|L2|L3 --delivery fresh|reuse`。
 未指定时为 L0 fresh，抽题 seed 自动产生并保存。不要为了默认值再询问确认。
@@ -14,7 +18,7 @@
 
 start.py 返回本轮独立 workspace 和 run 路径。立即读取该 workspace/AGENTS.md，
 之后所有代码与 work/记录都写在该 workspace，执行它的 benchmark.py next/checkpoint 循环。
-两题由当前 CM 连续完成；实际调用所需 implementer/reviewer，按运行说明保存交接/审查记录。
+本轮所有题由当前 CM 连续完成；实际调用所需 implementer/reviewer，按运行说明保存交接/审查记录。
 用户中途问状态时简短回答后继续；普通问题和杂务不结束本轮。
 只能读取本轮分发的源码、任务说明、材料与公开检查；不得查看其它 run、_host、
 共享维护文档、原项目历史正确 patch 或隐藏检查。只允许通过列明命令执行主持脚本。
