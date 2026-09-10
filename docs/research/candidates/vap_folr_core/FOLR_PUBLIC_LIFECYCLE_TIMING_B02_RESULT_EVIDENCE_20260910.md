@@ -80,3 +80,13 @@ Dispatch is accepted; **actual adoption is pending** at this record. Root was no
 natively; this DM performs no parallel status poll. No summary, admission pass, training
 count, native return or terminal exit is inferred from supervisor acceptance. Root resumes
 this DM at terminal for collection and the next already allocated law.
+
+## RETAIN actual Monitor adoption confirmed
+
+After the pending record was published at `b3b2251cd5d9213f8c0b3d60d9b6f70f4cb23b0a`,
+Root's 2026-09-10 native continuation confirmed **direct actual Monitor adoption** of
+`folr-public-lifecycle-timing-b02-retain-20260910` on the declared node/supervisor with
+the identical full source, detached cwd and result root. Observation is now owned by the
+shared Monitor. This DM returns pending terminal collection and performs no parallel
+polls. EVENT/RANDOM remain unsubmitted; no terminal, resource or scientific result fact
+is supplied by this adoption update. Root will resume this same DM on terminal notice.
