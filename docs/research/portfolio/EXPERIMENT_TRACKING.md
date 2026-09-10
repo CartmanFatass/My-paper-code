@@ -753,3 +753,26 @@ direction disposition. Its exact request waits only for the singleton Transport 
 accepted VSP03 request; other directions continue. RCLE seed22 meanwhile ended exit2 after W1 completed,
 W100 reached TECHNICAL_STOP and the reference was not reached. The original DM is collecting the partial
 evidence and classifying the failure; no paired result or automatic retry is inferred.
+
+## Direction decisions and incomplete-run intakes
+
+VSP03's complete Pro response and DM intake are integrated through `8e7cd9e95`. PRO_FINAL pauses only
+the unchanged continuous512/public fixed-N2 comparison family; ACTIVE/LOW and recasts1 remain. No
+successor is selected, and the positive endpoint/negative-Q evidence remains intact.
+
+RCLE seed22's incomplete intake and verified closeout are integrated through `59ce84b67`. W1 completed
+1,000 updates; W100 stopped after983 recorded blocks and reference was absent. The allocation yields no
+paired polarity. Recorded exposure is131,008 episodes/1,983 backward calls plus at most one unfinished
+block; conservative complete charge is894/1,500s. Traceback reporting is prospective only and no retry
+is allocated.
+
+UCOPE8702's incomplete intake and preservation are integrated through `ebe006a62`. Only T completed
+1,738 training episodes with partial512/1024 panels; all paired outcomes are absent. The preserved
+ValueError has no traceback or root-cause location, so no recurrence conclusion follows. Exact scoped
+remote cleanup remains with the DM after Root preservation acceptance; no restart or replacement exists.
+
+FOLR RETAIN passed all artifact checks at755.40s and mean `6.893125`. Its preselected EVENT arm is
+accepted, Monitor-adopted and integrated through `2482db440`; no extra selection, retry or polling loop
+was added. SCDMP Transport is active on its fixed request. VNFC and DISH have independently entered
+zero-exposure re-entry analysis to replace completed VSP03 and RCLE chains, restoring five advancing
+directions without changing Portfolio lifecycle or priority.
