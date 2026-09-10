@@ -109,3 +109,19 @@ preserves/compares source and raw evidence before exact completed-path reclamati
 Root accepts integration/retention. No replacement seed, retry or further scientific
 exposure is implicit. This record will append actual submission/adoption and terminal
 facts without editing the frozen command or historical evidence.
+
+## Actual launch and direct Monitor dispatch
+
+At **2026-09-10T19:12:26.464320+00:00**, the published literal payload was read from Git and submitted
+once. `agent-task run` returned **0** in **0.6412406000017654s**, reporting
+tmux `agent_rcle-b03-fresh1000-s22-20260910` and its supervisor log. Exact argv/stdout
+are retained in `fresh1000-s22-preparation/launch.json`; no alternate or duplicate
+submission occurred. This confirms supervisor submission only, not any individual
+resource admission or scientific completion.
+
+Direct MONITOR_ADD to live task `01a087e5-2044-7301-abb6-7a1709a98197` was accepted
+by the app. It supplied the full sequence, source/cwd/root, receipts and original
+DM/Root return route. **Actual adoption remains pending** until Root forwards the
+Monitor's direct observation. DM ceased routine polling at dispatch and has read no
+question-relevant new output. Collection, technical/scientific intake and scoped
+closeout remain owned by this DM after Root's terminal follow-up.
