@@ -1748,5 +1748,28 @@
     "members_sha256": "058419a2843a8a5f92db1343c42042fa1996fc3eb5d075a1b72dd7d756b7c979",
     "local_transfer_digest_matches": true,
     "whole_preservation_transfer_verification_s": 5.519070300011663
+  },
+  "closeout": {
+    "exit_code": 0,
+    "stdout": "{\"removed\": [\"/home/wu/hmasd-worktrees/rcle-b03-fresh1000-s22-recovery-20260910\", \"/home/wu/hmasd-inputs/rcle-b03-fresh1000-s22-recovery-20260910\", \"/home/wu/.agent-tasks/rcle-b03-fresh1000-s22-recovery-20260910\"], \"all_absent_on_disk\": true, \"worktree_registry_exact_line_present\": false, \"source_recovery_ref\": \"refs/recovery/rcle-b03-fresh1000-s22-recovery-20260910\", \"source\": \"5b30bf8ef7a00af1d7a7621c412f161d4e4282ee\", \"archive_sha256\": \"5a2796b82bc71876252811b364ae1a248d2d2abedd16933db6b886d8feb0d399\", \"archive_retained\": true, \"original_pid\": 3102025, \"original_pid_absent_before_removal\": true, \"remote_removal_verification_seconds\": 0.05445211392361671}\n",
+    "stderr": "",
+    "whole_removal_verification_seconds": 0.39999159998842515,
+    "publication_before_removal": "2fc458d90d655cbfce8b883339fb78fc27493c7d",
+    "facts": {
+      "removed": [
+        "/home/wu/hmasd-worktrees/rcle-b03-fresh1000-s22-recovery-20260910",
+        "/home/wu/hmasd-inputs/rcle-b03-fresh1000-s22-recovery-20260910",
+        "/home/wu/.agent-tasks/rcle-b03-fresh1000-s22-recovery-20260910"
+      ],
+      "all_absent_on_disk": true,
+      "worktree_registry_exact_line_present": false,
+      "source_recovery_ref": "refs/recovery/rcle-b03-fresh1000-s22-recovery-20260910",
+      "source": "5b30bf8ef7a00af1d7a7621c412f161d4e4282ee",
+      "archive_sha256": "5a2796b82bc71876252811b364ae1a248d2d2abedd16933db6b886d8feb0d399",
+      "archive_retained": true,
+      "original_pid": 3102025,
+      "original_pid_absent_before_removal": true,
+      "remote_removal_verification_seconds": 0.05445211392361671
+    }
   }
 }
