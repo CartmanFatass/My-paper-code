@@ -1,0 +1,84 @@
+{
+  "object": "UCOPE-UAV-SHORT-LEARNED-RENEWAL-CONTINUOUS-B01",
+  "master": 8702,
+  "configuration": {
+    "seed": 8702,
+    "fixture": false,
+    "horizon": 256,
+    "train_episodes": 2048,
+    "checkpoints": [
+      512,
+      1024,
+      2048
+    ],
+    "eval_episodes": 64,
+    "chunk": 32,
+    "arm_cap": 1800,
+    "pair_cap": 5100
+  },
+  "method": "Integer arithmetic from accepted8701 configuration and fixed card, no model/environment/RNG invocation.",
+  "exposure": {
+    "independent_matched_training_instances": 1,
+    "fits": 3,
+    "training_episodes": 6144,
+    "training_ticks": 1572864,
+    "rollouts": 3072,
+    "adam_calls": 12288,
+    "evaluation_episodes": 640,
+    "evaluation_ticks": 163840,
+    "total_native_ticks": 1736704,
+    "explicit_resets": 6784,
+    "constructor_resets": 3,
+    "trainable_parameters": {
+      "T": 68553,
+      "F": 66311,
+      "G": 66311
+    },
+    "frozen_F_head_parameters": 2242
+  },
+  "seed_addresses": {
+    "created_or_reserved": 3272,
+    "minimum": 870200011,
+    "maximum": 870282063,
+    "overlap_with_declared_8601_8602_8701": {
+      "8601": 0,
+      "8602": 0,
+      "8701": 0
+    },
+    "fixture_master": 9002,
+    "intentional_sharing": "Common actor/critic initialization, common initial T/F head, matched train/evaluation worlds; constructor reuses first train world."
+  },
+  "dominant_head_work": {
+    "forward_rows_per_T_or_F_fit_lower": 8110080,
+    "forward_rows_per_T_or_F_fit_upper": 16220160,
+    "dense_forward_MACs_per_row": 2208,
+    "observed_8701_T_forward_rows": 11245232,
+    "observed_8701_F_forward_rows": 10826492,
+    "isolated_T_backward_time": "unmeasured; no profiling allocation"
+  },
+  "cost": {
+    "complete_fit_cap_s": 1800,
+    "complete_study_cap_including_support_s": 5400,
+    "internal_scientific_deadline_s": 5100,
+    "support_reserve_s": 300,
+    "new_focused_check_cap_s": 15,
+    "cumulative_directory_test_s_before_8702": 42.9793062,
+    "remaining_directory_test_s": 257.0206938,
+    "prior_8701_outer_s": 2111.61,
+    "prior_nested_fit_s": {
+      "T": 729.1363350299653,
+      "F": 708.7234487819951,
+      "G": 553.0765516850515
+    },
+    "prior_unlocalized_outer_overhead_s": 120.67366450298823,
+    "prior_each_fit_upper_assigning_all_outer_overhead": {
+      "T": 849.8099995329535,
+      "F": 829.3971132849833,
+      "G": 673.7502161880398
+    },
+    "forecast_limit": "Same dimensions and actual algorithm; prior time is a reference, not a guarantee or isolated head cost."
+  },
+  "new_scientific_invocations": 0,
+  "exposure_line": "NEW allocation8702:1 independent matched instance;3 fits;6144 training episodes/1572864 training ticks;3072 rollouts/12288 Adam;640 evaluations/163840 ticks;1736704 native ticks total. No search, retuning, extra native validation or replacement. Preparation scientific exposure0.",
+  "arithmetic_elapsed_s_before_serialization": 0.0036921999999321997
+}
