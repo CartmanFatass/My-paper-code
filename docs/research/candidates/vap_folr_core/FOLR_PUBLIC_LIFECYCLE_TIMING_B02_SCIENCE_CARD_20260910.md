@@ -5,11 +5,15 @@ Binding MARL structure: (a) roster change; (d) other-agent non-stationarity or p
 
 ## 1. Question, authority and interpretation boundary
 
-**B/EXPLORE; prospectively bound, no new result yet.** Root applied Portfolio
+**B/EXPLORE; RETAIN accepted, Monitor dispatch accepted, adoption pending; no result yet.** Root applied Portfolio
 PRO_FINAL A and assigned this complete triple on 2026-09-10; see
 [execution mapping, FOLR](../../portfolio/pro_packets/20260910_next_five_chains/EXECUTION_MAPPING.md#folr--one-new-timing-triple)
 and [conforming Portfolio intake](../../portfolio/decisions/2026-09-10-next-five-chains.md).
 The current assignment supplies a fresh finite allocation; the earlier triple is complete.
+Source/check/card commit `6a8eacdad072c37d477aca95a9c871aba68cee78` was pushed and staged
+before RETAIN submission; Root integrated it as main `8eb423ff2`. This is the launch source
+for all three allocated laws. [E0](FOLR_PUBLIC_LIFECYCLE_TIMING_B02_RESULT_EVIDENCE_20260910.md)
+records the exact accepted command and observation handover. EVENT/RANDOM are unsubmitted.
 The shared checkout started clean at `0a809f5282a957e28ff772dc0ffc33cc84b2350a`.
 This is an object-tier new instance inside the accepted public-lifecycle family.
 

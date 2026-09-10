@@ -48,3 +48,35 @@ Publication/source-command readbacks add1.2265025s as itemized in intake §3; cu
 support charge **19.3086876/300s** before staging and collection. The only publication
 check correction normalized a Markdown line wrap when matching a retained quote; no
 card, source, result or quoted words changed. No additional test/target execution.
+
+## RETAIN accepted; observation dispatched, adoption pending
+
+The DM committed/pushed source `6a8eacdad072c37d477aca95a9c871aba68cee78`; Root accepted
+and integrated it as main `8eb423ff2`. The configured network shell fetched that branch
+and staged detached worktree `/home/wu/hmasd-worktrees/folr-public-lifecycle-timing-b02-6a8eacda`.
+Readback confirmed exact HEAD, clean declared source surface, runner/preflight presence
+and configured interpreter. This readback took0.6473996s, bringing supporting charge to
+**19.9560872/300s** before handover publication and collection. Git/staging transport is
+separate control-plane work. Latest all-age owner reviews were `[]` before submission.
+
+Accepted handle: `folr-public-lifecycle-timing-b02-retain-20260910`, tmux
+`agent_folr-public-lifecycle-timing-b02-retain-20260910`. The supervisor returned acceptance
+and `/home/wu/.agent-tasks/folr-public-lifecycle-timing-b02-retain-20260910/task.log`.
+Exactly one RETAIN submission is accepted; EVENT/RANDOM have not been submitted.
+
+```sh
+/usr/bin/time -v -o /home/wu/.agent-tasks/folr-public-lifecycle-timing-b02-retain-20260910/whole.time /usr/bin/timeout --signal=TERM --kill-after=5s 1800s bash -lc 'cd /home/wu/hmasd-worktrees/folr-public-lifecycle-timing-b02-6a8eacda && /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/vap_folr_core/exp/public_lifecycle_timing_b02_seed7805_retain_memory.json && /home/wu/.venvs/hmasd/bin/python scripts/run_folr_public_lifecycle_b01.py --arm RETAIN --seed 7805 --evaluation-seed 107805 --launch-sha 6a8eacdad072c37d477aca95a9c871aba68cee78 --out temp/directions/vap_folr_core/exp/public_lifecycle_timing_b02_seed7805_retain'
+```
+
+`whole.time` encloses the full admission/runner command, including its shell startup,
+initialization/imports, learning, evaluation, publication and exit. It is separate from
+the runner summary's narrower wall. A TERM/kill-after failure is an incomplete invocation,
+not permission to claim cap conformance or submit a replacement.
+
+Direct MONITOR_ADD to the live configured task returned that task's threadId with
+`isError=false`. It carries handle, full source/cwd/root, memory/whole.time/log paths,
+Root destination and original execution/scientific owner `/root/dm_folr_p68_reentry`.
+Dispatch is accepted; **actual adoption is pending** at this record. Root was notified
+natively; this DM performs no parallel status poll. No summary, admission pass, training
+count, native return or terminal exit is inferred from supervisor acceptance. Root resumes
+this DM at terminal for collection and the next already allocated law.
