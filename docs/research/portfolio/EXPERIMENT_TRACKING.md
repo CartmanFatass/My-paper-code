@@ -716,3 +716,19 @@ part of support, full 30/360 s conformance is unestablished; no silent charge, e
 applied. All 16 captured evidence files and the checkpoint were preserved before verified remote
 checkout/supervisor removal. ACVC is complete and no longer counted; FOLR, UCOPE, RCLE and VSP03
 continue at their own decision or execution boundaries without waiting for a replacement bundle.
+
+## RCLE seed22 accepted; VSP03 direction question prepared
+
+RCLE independently selected one fresh master22 pair at the unchanged 1,000-update law, preserving
+all seed21 limits and the fixed reference gap. Card, reviewed source and bound execution are integrated
+through `81db62478`; launch evidence is integrated through `9fd11ee45`. The exact handle
+`rcle-b03-fresh1000-s22-20260910` was submitted once at source `9a11fb084` on `hmasd-wsl-node`, and
+independent Monitor adoption is confirmed for the W1→W100→reference sequence. No mirrored polling,
+retry or replacement seed is active. The same DM owns terminal collection, paired-initialization
+checks, same-endpoint n=2 intake, preservation and closeout.
+
+VSP03 independently reached a direction-tier boundary after B07. Its zero-exposure narrow-family
+question is integrated through `f1834564d`, recommending a family pause as a close call while retaining
+one fresh same-budget fit as an explicit alternative. The recommendation is not a local disposition;
+the existing direction Pro route owns the choice. VSP03 does not wait for RCLE execution or any sibling
+intake while that question is delivered and resolved.
