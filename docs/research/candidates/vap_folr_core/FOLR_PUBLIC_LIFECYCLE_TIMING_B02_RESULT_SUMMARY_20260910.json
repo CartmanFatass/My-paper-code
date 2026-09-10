@@ -1,6 +1,6 @@
 {
   "object": "FOLR-PUBLIC-LIFECYCLE-TIMING-B02",
-  "technical_state": "RETAIN accepted; EVENT and RANDOM unsubmitted",
+  "technical_state": "RETAIN technically accepted; EVENT accepted and Monitor-adopted; RANDOM unsubmitted",
   "launch_sha": "6a8eacdad072c37d477aca95a9c871aba68cee78",
   "remote_node": "hmasd-wsl-node",
   "remote_cwd": "/home/wu/hmasd-worktrees/folr-public-lifecycle-timing-b02-6a8eacda",
@@ -398,5 +398,12 @@
   "prior_support_charge_seconds": 22.2473039,
   "collection_readback_script_seconds": 0.014246599996113218,
   "support_charge_after_collection_seconds": 22.4285027,
-  "collection_readback_command_seconds": 0.1811988
+  "collection_readback_command_seconds": 0.1811988,
+  "pending_runtime": {
+    "arm": "EVENT",
+    "handle": "folr-public-lifecycle-timing-b02-event-20260910",
+    "source": "6a8eacdad072c37d477aca95a9c871aba68cee78",
+    "result_root": "temp/directions/vap_folr_core/exp/public_lifecycle_timing_b02_seed7805_event",
+    "monitor_adoption": "Root-confirmed actual direct adoption; no DM parallel status poll"
+  }
 }

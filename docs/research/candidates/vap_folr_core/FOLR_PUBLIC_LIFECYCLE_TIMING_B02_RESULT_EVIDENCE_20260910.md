@@ -138,3 +138,27 @@ Technical decision: accept intact RETAIN and proceed to the **already-preselecte
 No concrete primary, information, training, budget or publication defect supports
 quarantine. This is execution of the fixed sequence, independent of the RETAIN sign;
 RANDOM remains unsubmitted. Scientific interpretation waits for all allocated outcomes.
+
+## EVENT accepted and actual Monitor adoption confirmed
+
+RETAIN acceptance/E0/intake was committed and pushed at
+`015c05eb5ecc032ae6841c894e585fe37ca51b3e` before submitting the second preselected law.
+Scientific source remains `6a8eacdad072c37d477aca95a9c871aba68cee78`; there is no source
+change, new fit allocation, test, retry or outcome-based arm choice.
+
+Accepted EVENT handle `folr-public-lifecycle-timing-b02-event-20260910`, tmux
+`agent_folr-public-lifecycle-timing-b02-event-20260910`, same exact-source detached cwd.
+The supervisor accepted this command:
+
+```sh
+/usr/bin/time -v -o /home/wu/.agent-tasks/folr-public-lifecycle-timing-b02-event-20260910/whole.time /usr/bin/timeout --signal=TERM --kill-after=5s 1800s bash -lc 'cd /home/wu/hmasd-worktrees/folr-public-lifecycle-timing-b02-6a8eacda && /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/vap_folr_core/exp/public_lifecycle_timing_b02_seed7805_event_memory.json && /home/wu/.venvs/hmasd/bin/python scripts/run_folr_public_lifecycle_b01.py --arm EVENT --seed 7805 --evaluation-seed 107805 --launch-sha 6a8eacdad072c37d477aca95a9c871aba68cee78 --out temp/directions/vap_folr_core/exp/public_lifecycle_timing_b02_seed7805_event'
+```
+
+Fresh destination admission precedes this arm's new model/RNG/result creation within
+the same complete outer time/timeout command. Submission acceptance alone does not
+establish resource/count/result conformance; those are checked at terminal collection.
+Direct MONITOR_ADD returned the live Monitor task ID with `isError=false`. Root then
+confirmed **actual direct Monitor adoption** with the identical handle/source/cwd and
+`_seed7805_event` result root, acknowledging RETAIN predecessor collection. Monitor owns
+observation; DM returns pending terminal collection and does not poll. RANDOM is still
+unsubmitted and remains the already-selected next law after complete EVENT acceptance.

@@ -160,3 +160,10 @@ Owner review read returned `[]`; prediction remains not taken/unscored while the
 is incomplete. Current support22.4285027/300s and cumulative tests25.9131638/300s remain
 bounded. The operational scratch rejection persists separately. There is no new material
 dissent, close call, family or Portfolio decision; no additional owner-console item is made.
+
+After publishing RETAIN acceptance at `015c05eb5ecc032ae6841c894e585fe37ca51b3e`, the DM
+submitted EVENT at the identical frozen source with its fresh admission, directly
+registered the accepted handle and received Root's actual Monitor-adoption confirmation.
+E0 records the complete command and handover. Monitor remains sole observer; this DM
+resumes on terminal notice to collect EVENT and then execute the preselected RANDOM.
+No three-arm scientific conclusion or prediction score is drawn at this boundary.
