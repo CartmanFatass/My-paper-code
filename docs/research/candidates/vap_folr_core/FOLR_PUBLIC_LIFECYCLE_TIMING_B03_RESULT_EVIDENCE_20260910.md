@@ -125,3 +125,52 @@ No scientific or test invocation was added.
 The final preservation/owner-review/whitespace check passed in 0.5827729s, giving
 **9.1878363/300s** scoped support through this handover. Live-primary reviews
 returned `[]`; the claim and card sections 2-6 remain exactly as frozen.
+
+## RETAIN terminal collection and technical acceptance
+
+Monitor observed the original handle at 2026-09-10T19:44:38.4926524Z: finished, exit 0,
+PID 3097075/tmux inactive. Its source receipt is
+`C:/Users/fires/Documents/Codex/2026-09-09/hmasd-folr-b02-monitor-20260909/outputs/folr-public-lifecycle-timing-b03-retain-20260910-terminal.txt`;
+a byte copy is retained at
+`temp/directions/vap_folr_core/exp/public_lifecycle_timing_b03_control_20260910/retain_monitor_terminal.txt`.
+The terminal log reports 2026-09-11T03:44:18+08:00, equivalent to 2026-09-10T19:44:18Z;
+its second-resolution duration is 755s. The direct remote collection at
+2026-09-10T19:46:31.611172Z binds full source 6fb1e1f6d6f726f133e9aab9c9d96758e3b6d36c,
+clean tracked source, summary/checkpoint/memory and five supervisor files.
+
+All eight files were copied and compared with their pre-copy remote SHA-256 digests.
+[RESULT_SUMMARY](FOLR_PUBLIC_LIFECYCLE_TIMING_B03_RESULT_SUMMARY_20260910.json) preserves
+the full arm summary, eight mappings/hashes, 25 progress rows, memory receipt and exact
+clocks. Raw scientific output is retained at
+`temp/directions/vap_folr_core/exp/public_lifecycle_timing_b03_seed7806_retain/`, with
+supervisor bytes in its `supervisor/` directory and the adjacent `_memory.json`.
+No original or staged input has been removed.
+
+Actual exposure: 100000 real training ticks, 4969 actor/mixer RMSprop steps at lr .0005,
+128 final greedy evaluations/2560 ticks. Mean 6.893125 recomputes from all 128 finite
+returns. Counts, seeds, source and retained summaries satisfy [intake §7](FOLR_PUBLIC_LIFECYCLE_TIMING_B03_INTAKE_20260910.md#7-retain-terminal-technical-acceptance-and-preselected-continuation).
+Complete invocation wall 755.40s, CPU 756.45s, peak RSS 677224 KiB; narrower runner
+wall 751.362323189s and peak RSS 644796 KiB remain distinct. Physical/effective memory
+15321518080 bytes passed; unmeasured cgroup telemetry limits only that resource detail.
+Support through this collection is **15.6963948/300s**, including the initial missing
+local `outputs/` lookup before resolving the Monitor checkout. No scientific/test replay.
+The pair effect and prediction score remain pending EVENT.
+
+## Preselected EVENT command, not yet submitted
+
+Handle `folr-public-lifecycle-timing-b03-event-20260910`; output
+`temp/directions/vap_folr_core/exp/public_lifecycle_timing_b03_seed7806_event`.
+The second arm is the same prospective allocation and exact source; RETAIN's realized
+mean does not select it. Commit and push this acceptance before submission.
+
+```sh
+/usr/bin/time -v -o /home/wu/.agent-tasks/folr-public-lifecycle-timing-b03-event-20260910/whole.time /usr/bin/timeout --signal=TERM --kill-after=5s 1800s bash -lc 'cd /home/wu/hmasd-worktrees/folr-public-lifecycle-timing-b03-6fb1e1f6 && /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/vap_folr_core/exp/public_lifecycle_timing_b03_seed7806_event_memory.json && /home/wu/.venvs/hmasd/bin/python scripts/run_folr_public_lifecycle_b01.py --arm EVENT --seed 7806 --evaluation-seed 107806 --launch-sha 6fb1e1f6d6f726f133e9aab9c9d96758e3b6d36c --out temp/directions/vap_folr_core/exp/public_lifecycle_timing_b03_seed7806_event'
+```
+
+Fresh admission and the exact runner are one complete invocation. One accepted EVENT
+submission remains; no retry or replacement is included. After explicit acceptance,
+register it directly with the live Monitor and distinguish registration from adoption.
+
+The RETAIN intake/card-preservation/whitespace check passed in 0.3931626s; support
+through that pre-EVENT publication check is **16.0895574/300s**. No scientific source
+or test change was made. The live-primary FOLR audit owner column is also empty.

@@ -5,7 +5,7 @@ Binding MARL structure: (a) roster change; (d) other-agent non-stationarity or p
 
 ## 1. Question, decision tier and current authority
 
-**B/EXPLORE; RETAIN accepted and Monitor-adopted; EVENT preselected and unsubmitted.** Root's 2026-09-10
+**B/EXPLORE; RETAIN complete and technically accepted; EVENT preselected and unsubmitted.** Root's 2026-09-10
 OWNER_DIRECT independent-direction steering resumes this direction from accepted
 TIMING-B02. [Current rolling-execution record](../../portfolio/EXPERIMENT_TRACKING.md#2026-09-10-independent-rolling-direction-execution)
 is synchronized in this checkout at `35eb3f6c55a75269b8928dbffb2f89256f1600be` from Root's
