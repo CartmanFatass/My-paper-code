@@ -5,7 +5,7 @@ Binding MARL structure: (a) roster change; (d) other-agent non-stationarity or p
 
 ## 1. Question, decision tier and current authority
 
-**B/EXPLORE; selected prospectively, no new invocation accepted yet.** Root's2026-09-10
+**B/EXPLORE; RETAIN accepted and Monitor-adopted; EVENT preselected and unsubmitted.** Root's 2026-09-10
 OWNER_DIRECT independent-direction steering resumes this direction from accepted
 TIMING-B02. [Current rolling-execution record](../../portfolio/EXPERIMENT_TRACKING.md#2026-09-10-independent-rolling-direction-execution)
 is synchronized in this checkout at `35eb3f6c55a75269b8928dbffb2f89256f1600be` from Root's
@@ -18,7 +18,9 @@ benefit over competent generic retention in another independent instance? This i
 **object-tier** comparator/arm-set narrowing inside the accepted public-lifecycle family,
 not an open/close/recast/park, promotion or Portfolio decision. This new selection supplies
 its own finite two-invocation budget under standing delegation; it borrows no remaining
-slot from TIMING-B02. [Prospective intake](FOLR_PUBLIC_LIFECYCLE_TIMING_B03_INTAKE_20260910.md#1-next-question-and-object-tier-selection)
+slot from TIMING-B02. The full published launch source is
+`6fb1e1f6d6f726f133e9aab9c9d96758e3b6d36c`; E0 records exact command, recovered source
+transport and actual observation handover. No pair result exists at this boundary. [Prospective intake](FOLR_PUBLIC_LIFECYCLE_TIMING_B03_INTAKE_20260910.md#1-next-question-and-object-tier-selection)
 records the options, selected recommendation and prediction before output.
 
 After observing both128-endpoint triples, the primary contrast is narrowed to EVENT−RETAIN.
