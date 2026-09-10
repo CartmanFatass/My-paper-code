@@ -3,7 +3,7 @@ Binding MARL structure: (d) multi-agent partial observability: each UAV uses its
 
 # ACVC fresh DENSE reuse B01 — science card
 
-Date: 2026-09-10. **B/EXPLORE; the sole allocated scientific result is complete.**
+Date: 2026-09-10. **B/EXPLORE; original 8921 result complete; one new 8931 fit allocated in §10.**
 Section8 records the later Portfolio allocation. The original design-stage statements in
 §§1,6–7 below remain historical; §8 supersedes their no-execution boundary prospectively.
 The [design intake](ACVC_FRESH_DENSE_REUSE_B01_DESIGN_INTAKE_20260910.md) records the decision;
@@ -311,3 +311,64 @@ unestablished if Monitor observation is included; the intake records this budget
 deviation without changing the scientific rule or exempting the Monitor surface.
 All raw evidence and the checkpoint are preserved; scoped remote closeout is complete.
 No retry, successor, T/G restart, C promotion, disposition or additional budget follows.
+
+## 10. Prospectively bound independent follow-up 8931
+
+The [rolling Portfolio allocation](../../portfolio/decisions/2026-09-10-rolling-successor-allocation.md)
+at main `674f246a2` selects exactly one new unscreened fit under this accepted recipe.
+Root assigned the complete batch on 2026-09-10. This section supersedes the earlier
+no-successor boundary only for that new allocation; §§1–9 and the 8921 evidence remain
+historical. There is no retry or successor after this new allowance.
+
+Select training master **8931** and evaluation namespace **8932** before constructing
+any new learner, RNG master or native episode. Replace m/q in §§3–4 with these values;
+all other scientific quantities, constructor/draw ordering and private streams stay
+unchanged. The source remains `scripts/run_acvc_fresh_dense_reuse_b01.py` and its shell
+wrapper. The [8931 facts](ACVC_FRESH_DENSE_REUSE_B01_8931_PROSPECTIVE_FACTS_20260910.json)
+expand the seeds and complete count/cost law. Prior namespaces include 8921/8922;
+8931/8932 had no occurrence in the owned ACVC card/facts/intake records when selected.
+
+The unchanged endpoint is 256 sequential two-episode rollouts, four full-rollout PPO
+epochs each: 512 episodes, 1,024 Adam/backward calls, final checkpoint and C→F→dwell
+64-episode panels. All 69,079 actor/critic parameters can move under nonzero-lr,
+loss-dependent Adam. Always apply proposals during training. No initial/H/T/G panel,
+retained-base substitution, screening, replacement, additional evaluation or early
+best-checkpoint selection is allowed. A weak intact fit receives every final panel.
+
+Apply §5 separately and verbatim: **UP** if mean difference >0.01 J; **DOWN** if
+<−0.01 J; otherwise **WITHIN**, retaining sign. Thus both exact MEI boundaries are
+included in WITHIN. F−C and F−dwell remain separate primaries; dwell−C is secondary.
+New pre-output predictions: P(F−C is UP)=.75; P(F−dwell is UP)=.65. Owner prediction:
+**not taken (unattended)**. The prior fit's predictions remain already scored.
+
+This question buys one further independent training realization with the same conditional
+paired panel reading. Scientific-reading mode used FOUNDATIONS §6 and 04_EMPIRICAL:
+the complete fit is the independent training unit; common initial worlds justify these
+conditional pairs, while divergent own histories and private proposal streams remain
+part of the packages. Even a second favorable fresh fit does not establish training-
+population uncertainty or isolate a retrace component. Existing 8921 support (+.12293 J
+F−C, +.08772 J F−dwell) coexists with five adverse F−dwell worlds and dwell's +.03522 J
+gain. No tuned native headroom record exists. The §5 interpretation narrative and
+stopped learned T/G package continue unchanged; recasts remain two.
+
+The new caps are **270 s whole supervised native task**, **90 s all additional runtime
+support including Monitor**, **360 s total**, with no savings transfer between task and
+support. Support includes required checks, observation, collection/readback, numerical
+analysis, preservation and closeout. Existing 8921 costs are not reclassified: its old
+inclusive support is >52.3964878 s with exact aggregate/full 360 s conformance unknown.
+The retained 172 s conservative native task and the older 222.200 s projection support
+feasibility, not a guarantee for new trajectories or contention. Proposed support is
+30 s DM plus 60 s Monitor within the inclusive 90 s; actual components must be retained.
+No profiler or accounting experiment is added. Cap failure preserves partial evidence
+and required terminal facts, without replacement, budget transfer or negative polarity.
+
+Engineering-scope §4: **none needed**. The existing CPU FP32 Torch1/1 route, joined
+destination admission, supervisor, checkpoint and summary paths suffice. L0, exact
+source, focused check, independent review, actual handle and Monitor adoption are in
+the [8931 execution record](ACVC_FRESH_DENSE_REUSE_B01_8931_EXECUTION_20260910.md).
+Existing source/runner/test budgets are inherited, not reset.
+
+Object-tier options: (a) bind the one allocated fit to fresh 8931/8932 with the unchanged
+law; (b) substitute a retained or screened base; (c) alter panels or seek another law.
+Recommend/select (a), the only conforming realization of the Portfolio allocation.
+**Owner-delegated decision (unattended, 2026-09-03 instruction): (a).**
