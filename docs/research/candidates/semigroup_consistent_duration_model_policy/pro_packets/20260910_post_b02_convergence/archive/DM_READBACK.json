@@ -1,0 +1,101 @@
+{
+  "checked_at_utc": "2026-09-10T22:18:54.424744+00:00",
+  "request_id": "2026-09-10-scdmp-post-b02-family-convergence-01",
+  "task_sha": "476e757cb1f0cbf2ad252ee3158b95eee216f29a",
+  "handoff_sha": "4825b12ee5b3defba1ff29cc074bc61fd38e4f4a",
+  "full_response": {
+    "commit": "1eef68f018b16470e870876f1c8acb985409f785",
+    "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260910_post_b02_convergence/archive/RESPONSE.md",
+    "blob_sha": "098cb4a6cefbe6f7a802d16fa24b487ab3976743",
+    "bytes": 28185,
+    "lines": 133,
+    "sha256": "0fc4de0d2e5a4a22924f7e4b611de2e9172623c6cd7ff8a081bef0a8e5ba935b",
+    "github_api_matches_immutable_git_blob": true,
+    "direct_read": "complete response, including every operative/re-entry/cost/source section and all references",
+    "working_copy_bytes_equal_git_blob": false,
+    "working_copy_lf_normalized_equal_git_blob": true,
+    "checkout_line_endings": "CRLF working copy; immutable Git/API bytes remain LF; no response rewrite"
+  },
+  "short_chat_receipt": {
+    "source": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\semigroup_consistent_duration_model_policy\\20260910_b02\\RESPONSE.md",
+    "bytes": 413,
+    "sha256": "bf18136a21f1525ec515a3b9a41c98bd35baaa8ffeb736c0feac89749eb844dd"
+  },
+  "short_chat_is_full_decision": false,
+  "copied_transport_artifacts": {
+    "PROMPT.md": {
+      "source": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\semigroup_consistent_duration_model_policy\\20260910_b02\\PROMPT_BODY.md",
+      "bytes": 1274,
+      "sha256": "ab3f09e3cba4ab79c281fdb134775b0b4598f97d0db510239e2e6753623aabec"
+    },
+    "CHAT_RECEIPT.md": {
+      "source": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\semigroup_consistent_duration_model_policy\\20260910_b02\\RESPONSE.md",
+      "bytes": 413,
+      "sha256": "bf18136a21f1525ec515a3b9a41c98bd35baaa8ffeb736c0feac89749eb844dd"
+    },
+    "TRANSPORT_FACTS.json": {
+      "source": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\semigroup_consistent_duration_model_policy\\20260910_b02\\TRANSPORT_FACTS.json",
+      "bytes": 2300,
+      "sha256": "7ff6a536792090bc2abfcf82b27b30d52370aec0d20e6a1225c3767326f393e0"
+    },
+    "PACKET_MANIFEST.json": {
+      "source": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\semigroup_consistent_duration_model_policy\\20260910_b02\\PACKET_MANIFEST.json",
+      "bytes": 1913,
+      "sha256": "51a7edd93b147e66788eb4170e83b7cf4ed5ab39d0151dfc52332088cadc7b75"
+    }
+  },
+  "delivery_comment": {
+    "url": "https://github.com/CartmanFatass/My-paper-code/issues/12#issuecomment-5626047834",
+    "id": 5626047834,
+    "created_at": "2026-09-10T22:03:49Z",
+    "response_and_task_links_match": true
+  },
+  "request_response_reference_mapping": {
+    "declared_paths": 15,
+    "response_cited_paths": 15,
+    "exact_effective_path_sha_set_equal": true
+  },
+  "receipt_identity_fields_match_handoff": true,
+  "prompt_exactly_matches_handoff": true,
+  "scientific_decision_formed": true,
+  "conformance": "conforms; see CONVERGENCE_INTAKE_20260910.md",
+  "selected_disposition": "PARK current fixed opening t1-3 to t4 full-MC coefficient1 residual-MC package only",
+  "selected_successor": null,
+  "new_scientific_exposure": {
+    "models": 0,
+    "environments": 0,
+    "native_steps": 0,
+    "synthetic_steps": 0,
+    "training_episodes": 0,
+    "evaluation_episodes": 0,
+    "optimizer_steps": 0,
+    "replay": 0,
+    "profiling": 0,
+    "support_search": 0,
+    "new_scientific_invocations": 0
+  },
+  "current_primary_control_sha": "01cd746102a32f460adf82ce7d5b2b9eb66e59d6",
+  "method_currentness": {
+    "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md": {
+      "same_bytes_as_task_method": true,
+      "task_sha256": "44418af31752086f6752f8f3d6874b260134e4c91b6c82ed8dbc61e4ef0b87e1",
+      "current_sha256": "44418af31752086f6752f8f3d6874b260134e4c91b6c82ed8dbc61e4ef0b87e1"
+    },
+    "docs/project/ENGINEERING_SCOPE_SPEC.md": {
+      "same_bytes_as_task_method": true,
+      "task_sha256": "a52a26e3b9ba876cb954ef4e671b5826ff9e1bab573320ca6da1033e12e64996",
+      "current_sha256": "a52a26e3b9ba876cb954ef4e671b5826ff9e1bab573320ca6da1033e12e64996"
+    },
+    "docs/rl-marl-foundations-20260907/FOUNDATIONS.md": {
+      "same_bytes_as_task_method": true,
+      "task_sha256": "c1f7d6c68fcec55de48ea555346d5d65af8d311e28502be43a2b05436a174247",
+      "current_sha256": "c1f7d6c68fcec55de48ea555346d5d65af8d311e28502be43a2b05436a174247"
+    },
+    "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md": {
+      "same_bytes_as_task_method": true,
+      "task_sha256": "99b7e727a890d4e93a64b5c0f44fe588e383b5de56f2da663fb3f864c6d8293c",
+      "current_sha256": "99b7e727a890d4e93a64b5c0f44fe588e383b5de56f2da663fb3f864c6d8293c"
+    }
+  },
+  "owner_reviews_unapplied": []
+}
