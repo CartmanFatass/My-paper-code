@@ -129,7 +129,7 @@ source/input staging computation, observation-tool work, collection, intake/publ
 preservation/closeout computation. Record administrative/provider latency separately; it exempts
 no machine work. Use actual command durations; incomplete wall coverage cannot certify exact cost.
 Pre-card receipt/intake command work is conservatively charged20s (coarse observed tool walls;
-not a claim of exact instrumentation). Reserve **90 shared seconds** for final publication,
+not a claim of exact instrumentation). Reserve **60 shared seconds** for final publication,
 Monitor observation, collection and bounded closeout before launching; prior measured support
 reduces the remaining common-init/check allowance. Record later components in this card/intake.
 
@@ -182,3 +182,31 @@ committed command, run root, support charges and acceptance are appended before 
 After accepted handle, directly send MONITOR_ADD using live primary configuration; stop routine
 polling, retain collection ownership. Cleanup inventory preserves unique evidence before any
 authorized removal; shared authoring checkout remains for active work.
+
+## 7. Pre-execution technical record and internal allocation
+
+Source publication `db2480c2ca1e21592a785582c0c5ec0c2c4cb3c6` implements the selected
+checkpoint-owned mode; ordinary old checkpoints retain REPLACE without added metadata.
+Independent Astra/high read-only review found no material bridge, replay, checkpoint,
+primary, cap or publication defect. Source-only scope:231 added/3 deleted non-test lines,
+89-line runner, no unnamed §4 addition. Reviewer read-command wall2.8032521s. Runtime focused
+checks and complete external cost reconciliation remain separate acceptance facts.
+
+The first remote staging shell failed on CRLF input (0.5096286s); no worktree was created.
+The LF-corrected ordinary-shell fetch failed with `Recv failure: Connection reset by peer`
+(20.5825781s). The configured login network shell then fetched the exact published branch and
+created detached worktree `/home/wu/hmasd-worktrees/dish-b08-db2480c2`; checkout's lazy blob fetch
+ran outside that environment and stalled. Its identified `git-remote-https` PID3103670 was
+terminated, yielding `could not fetch a2adbb5c555edae2caf726d328eb751cf7a58cd0 from promisor remote`.
+This staging attempt cost128.7516418s. No model, test or scientific invocation was accepted.
+These costs remain shared support; the specific failure has no scientific polarity.
+
+Object-tier internal allocation: (a) reserve60s for publication/observation/collection/closeout,
+with actual measured support and unchanged300s shared/900s exclusive limits; (b) end this
+allocation without attempting the corrected bounded staging/check path. Recommend/select(a).
+**Owner-delegated decision (unattended, 2026-09-03 instruction): (a).** The original90s reserve
+is reduced before any scientific output; no scientific exposure, selected cap or category limit
+changes. Ten of the60 seconds are available for in-process final publication/closure, leaving
+at least50 for external follow-up after the runner's reserved deadline. The exact pre-run
+support amount and remaining common-init budget are recorded before launch; a concrete
+insufficiency returns as a technical gap, without borrowing either arm's allowance.
