@@ -718,3 +718,28 @@ third pair or already executes a future family disposition.
 References: [decision and conformance intake](pro_packets/20260910_post_b01_convergence/CONVERGENCE_INTAKE_20260910.md),
 [B02 card](SCDMP_NATIVE_HOLD_RESIDUAL_B02_SCIENCE_CARD_20260910.md) and preserved
 [B01 result intake](SCDMP_NATIVE_HOLD_RESIDUAL_B01_INTAKE_20260909.md).
+
+## Native held-segment residual-MC B02 result — 2026-09-10
+
+The selected independent master 8202 pair is accepted WITHIN: native treatment-minus-MLP
+Δ2=+0.003658055973, conditional evaluation SE0.009076161384,12/32 adverse episodes.
+Its actual treatment exercises 1,494 held team pairs and 5,976 residual terms with fully
+trained learners. Alongside B01's+0.006737407456, both observed training-pair means are
+positive but below the fixed absolute MEI 0.01. These are two bounded package observations,
+not 64 independent training samples, stable superiority, equivalence or unique semigroup causality.
+
+The positive signs and real nonzero treatment are the strongest support. The two within-scale
+outcomes are the strongest contradiction to continued use of this fixed package for the
+selected effect. B02 RESIDUAL−H is+0.002998505017, whereas MLP−H is−0.000659550956;
+the native loss to attained H is retained separately. Tuned same-information headroom
+remains absent. Small regularization benefit, clipping/optimization, baseline changes,
+error cancellation, successor noise and omitted history remain possible explanations.
+
+The next discriminator is Convergence's narrow-family disposition: the DM recommends PARK
+of this unchanged opening t1–3→t4/full-MC/coefficient1 package, with the positive evidence
+and uncertainty presented against that recommendation. No third pair or replacement is
+selected. This intake does not change old D6 PARK, recasts 2 or Portfolio state.
+
+References: [B02 E0](SCDMP_NATIVE_HOLD_RESIDUAL_B02_RESULT_EVIDENCE_20260910.md),
+[B02 intake](SCDMP_NATIVE_HOLD_RESIDUAL_B02_INTAKE_20260910.md),
+[B02 card](SCDMP_NATIVE_HOLD_RESIDUAL_B02_SCIENCE_CARD_20260910.md).
