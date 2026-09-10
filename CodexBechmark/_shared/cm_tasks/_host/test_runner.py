@@ -204,6 +204,27 @@ class ProtocolTests(unittest.TestCase):
         self.assertEqual(set(runner.read(self.root / "cost/status.json")["results"]), {"team", "evaluator"})
         out.close()
 
+    def test_native_export_keeps_edit_and_test_tools_not_reasoning(self):
+        rollout = self.root / "rollout.jsonl"
+        payloads = [
+            {"type": "custom_tool_call", "name": "functions.exec", "call_id": "edit", "input": "public command"},
+            {"type": "custom_tool_call_output", "call_id": "edit", "output": "test passed"},
+            {"type": "function_call", "name": "spawn_agent", "call_id": "spawn", "arguments": "encrypted"},
+            {"type": "function_call_output", "call_id": "spawn", "output": "child-id"},
+            {"type": "message", "role": "assistant", "channel": "analysis", "content": "private"},
+            {"type": "message", "role": "assistant", "channel": "final", "content": "public"},
+            {"type": "reasoning", "content": "private"}]
+        rollout.write_text("\n".join(json.dumps({"type": "response_item", "payload": p}) for p in payloads), encoding="utf-8")
+        with sqlite3.connect(self.root / "state_5.sqlite") as db:
+            db.execute("CREATE TABLE threads (id,source,cwd,model,reasoning_effort,agent_role,agent_path,cli_version,rollout_path,history_mode)")
+            db.execute("INSERT INTO threads VALUES (?,?,?,?,?,?,?,?,?,?)",
+                       ("root", '"cli"', str(self.root), "model", "high", None, None, "test", str(rollout), "full"))
+        db.close()
+        evidence = runtime.session_metadata(self.root, "root")["sessions"][0]["native_evidence"]
+        self.assertEqual(len(evidence), 5)
+        self.assertNotIn("private", json.dumps(evidence))
+        self.assertIn("test passed", json.dumps(evidence))
+
     def test_existing_session_begin_does_not_launch_a_cm(self):
         output = io.StringIO()
         with patch.object(runtime, "launch") as launch, contextlib.redirect_stdout(output):

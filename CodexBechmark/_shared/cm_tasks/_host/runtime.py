@@ -153,12 +153,10 @@ def session_metadata(codex_home, root_id):
                     if event.get("type") == "response_item":
                         payload = event.get("payload", {})
                         kind = payload.get("type")
-                        name = payload.get("name", "")
-                        if kind == "function_call" and any(action in name for action in
-                                ("spawn_agent", "followup_task", "send_message", "wait_agent", "interrupt_agent")):
+                        if kind in ("function_call", "custom_tool_call"):
                             calls.add(payload.get("call_id"))
                             item["native_evidence"].append({"at": event.get("timestamp"), "payload": payload})
-                        elif kind == "function_call_output" and payload.get("call_id") in calls:
+                        elif kind in ("function_call_output", "custom_tool_call_output") and payload.get("call_id") in calls:
                             item["native_evidence"].append({"at": event.get("timestamp"), "payload": payload})
                         elif (kind == "message" and payload.get("role") == "assistant" and
                               payload.get("channel") != "analysis"):
@@ -356,7 +354,7 @@ def assess(args, directory, state, base):
     native = [{k: s.get(k) for k in ("id", "parent_id", "agent_role", "native_evidence")}
               for s in recorded.get("runtime", {}).get("sessions", [])]
     save(assessment / "native_evidence.json", {"sessions": native,
-        "limit": "Only recorded public replies and native delegation calls/returns; private reasoning excluded. Missing/encrypted spawn evidence cannot establish fresh context or review."})
+        "limit": "Recorded public replies and delegation/edit/check tool calls with their outputs; private reasoning excluded. Missing/encrypted evidence remains unavailable, not a presumed pass."})
     materials.write(assessment / "AGENTS.md", "Independent post-run reviewer. The candidate is closed. Do not edit candidate code or contact its agents. No children. Use supplied evidence only.\n")
     behavior = judge(directory, state, base)
     behavior.pop("configuration", None)
