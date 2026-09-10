@@ -82,7 +82,7 @@ with selection audit flagged close-call. Publishing them never waits for a reply
    acceptance conflict; no scientific retry/replacement. Root-confirmed Monitor
    owns observation; DM returns exact source/handle/adoption facts and later intake.
 
-## 4. Implementation, execution and result intake (pending)
+## 4. Implementation and execution (source accepted; result pending)
 
 No8702 result has been observed. Append actual changed-source/check/review facts,
 published SHA, exact command/node/cwd/root, fresh adjacent admission and accepted
@@ -93,3 +93,82 @@ then take the next direction-local decision without a sibling synchronization ga
 ### Prospective publication
 
 Selection recorded at 2026-09-10T19:13:26Z, audit [17](../../portfolio/audit/2026-09-10.md#L17). Owner items: docs/research/portfolio/owner/inbox/2026-09-10/20260910-ucope-002.json; docs/research/portfolio/owner/inbox/2026-09-10/20260910-ucope-003.json. Both record the executed selection/card freeze, not an owner reply. Latest main and direction review queries returned `[]`; no unapplied override exists. The forthcoming source diff is limited to seed/card routing and its focused test.
+
+### Source, independent review and focused check acceptance
+
+Card and source are frozen at **b6c75d5cf8e1781bb0e3c6824ab2dc9cb32dbce9**,
+committed and pushed on `codex/ucope`. Production changes are **+7/−5** in the
+existing study/CLI; tests **+33/−12**. The runner remains 38 lines. The CLI
+accepts 8702 and passes it to `Config.learned`; its existing master-derived
+template, reset and private-stream consumers receive it, and the real 8702
+summary names the new card. Default 8701, synthetic 9002, fixed 8601/8602 and
+synthetic 9001 retain their recipes. No helper, learner, native or preflight
+source changed. **Engineering scope §4: no addition.** This small parameter
+routing diff needs its bookkeeping; the orchestration review signal supplies
+no unnecessary machinery or concrete breach.
+
+The reused independent Astra/high reviewer inspected this three-file diff and
+traced actual template, common head, constructor/reset and arm/checkpoint RNG
+consumers. It found **no material finding or additional probe gap**, using
+the prior 8701 semantic review for unchanged learning, reward, holding, panels
+and comparison. It checked the rewritten test reaches the actual template call
+before aborting all model/RNG creation. No test or scientific call was made by
+the reviewer; this is independent technical evidence, not empirical support.
+
+One focused test passed on the exact remote source: **1 passed in 0.79s**,
+complete pytest subprocess **1.052899732021615s**. The first attempt stopped
+in `tmp_path` setup because pytest could not create its missing parent;
+**1.3469966979464516s**, before the test body. Creating that invocation's
+parent and using a new owned scratch suffix repaired the setup, with no source
+or scientific change. Both exact invocation directories were checked absent
+after their Bash cleanup. There was no policy rejection or interpreter switch.
+
+The two measured pytest subprocesses total **2.3998964299680665s**, giving
+**45.37920262996807s** with the previous directory total. Conservatively charging
+all source packing/staging/check preparation tool wall (3.7429017s) and the
+repair/check tool wall (1.785196s) gives **5.5280977s** new, **48.5074039s**
+cumulative; even this includes non-test work and remains below both 15s and
+300s. Nested subprocess and preparation times are not added twice. Other
+support, execution, collection and final publication remain in the complete
+5400s accounting; actual aggregate CPU remains unmeasured.
+
+Receipts are under
+`temp/directions/ucope/exp/ucope-uav-short-learned-renewal-continuous-b01-8702-20260910/preparation/`:
+`PREPARATION.json`, `focused-check-attempt1.json`, `FOCUSED_CHECK_ATTEMPT2.json`,
+`focused-check.json`, and both exact Bash check scripts. They retain the failed
+setup and successful output. No unchanged learner smoke was repeated.
+
+**Technical decision, object tier:** options (a) accept this source/check/review
+for the allocated invocation; (b) repair a concrete dependent defect; (c) add
+unrequested validation. Recommend/select (a). **Owner-delegated decision
+(unattended, 2026-09-03 instruction): (a).** No dependent defect remains in
+the changed source. Source acceptance does not establish native completion,
+actual learning or scientific value; those remain terminal intake obligations.
+
+### Exact prepared invocation, not yet submitted
+
+Node `hmasd-wsl-node`, interpreter `/home/wu/.venvs/hmasd/bin/python`, CPU FP32,
+one Torch compute/interop thread; detached cwd
+`/home/wu/hmasd-worktrees/ucope-uav-short-learned-renewal-continuous-b01-8702-20260910`
+at full source b6c75d5cf8e1781bb0e3c6824ab2dc9cb32dbce9. Remote tracked
+status was clean and all 12 declared source/test SHA256 values matched local
+Git blobs. The committed-object pack is 400083 bytes, SHA256
+`029d1f6d4db26c222f8eff20e730361d87385e76afe7e36661199bb27faba444`;
+it reuses already-present source 3182c4c84. Staged wrapper is 552 LF bytes,
+SHA256 `151dd01a280e797721fab7e7ec034c892a9d74d4054c041215d44bb654778fc9`;
+both remote digests match and Bash syntax checking exited zero without running
+the scientific payload. Exact command/source facts are in `source-facts.json`.
+
+The fixed supervisor command is:
+
+```bash
+/usr/local/bin/agent-task run ucope-uav-short-learned-renewal-continuous-b01-8702-20260910 '/usr/bin/time -f whole_wall_seconds=%e,peak_rss_kib=%M /usr/bin/timeout --signal=KILL 5100s /bin/bash --noprofile --norc /home/wu/hmasd-inputs/ucope-uav-short-learned-renewal-continuous-b01-8702-20260910.sh'
+```
+
+The wrapper changes to that cwd, runs canonical `admit-memory --out
+/home/wu/.agent-tasks/ucope-uav-short-learned-renewal-continuous-b01-8702-20260910/resource_admission.json`,
+and joins it by `&&` to `exec` of the committed runner with
+`--pair renewal_short_learned_continuous_b01 --seed 8702 --out
+temp/directions/ucope/exp/ucope-uav-short-learned-renewal-continuous-b01-8702-20260910`.
+Scientific root/model/RNG creation occurs only after that admission. Supervisor
+acceptance, actual memory and Monitor adoption are still unobserved here.
