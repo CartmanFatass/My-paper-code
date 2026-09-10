@@ -161,3 +161,48 @@ resolved and no remaining gap is identified. **Owner-delegated decision
 (unattended, 2026-09-03 instruction): (a).** Owner flag none. This acceptance
 adds no scientific budget, retry or required root-cause proof. Detailed
 [launch facts](UCOPE_UAV_8702_FAILURE_LOCATION_A01_LAUNCH_FACTS_20260910.json) retain source/check receipts.
+
+
+### Actual launch and confirmed Monitor handover
+
+Exactly one `agent-task run` was accepted at
+**2026-09-10T20:29:39.224601+00:00**, source
+**b1d347ef303083824a72dd259c2fbb54e2b5ef75**, under published technical acceptance
+**a8c52ca95a6ae227c74ae7b2294ada46c13ddfc1**. The fixed command above returned
+exit 0 and created tmux `agent_ucope-uav-8702-failure-location-a01-20260910`. Submission
+subprocess wall was **0.6309091000002809 s**. No command/source changed
+after acceptance, and no duplicate submission occurred.
+
+The executing node's canonical admission passed at
+**2026-09-10T20:29:38.661154Z**, using `/proc/meminfo`:
+physical and effective available memory were both **15631753216 bytes**,
+against **4294967296 bytes** required. Failure reasons
+were empty; cgroup-specific telemetry was unavailable. The actual admission
+and runner were adjacent through `&&` in the same supervised command. Cross-node
+clock readings are retained without subtracting them to infer execution order.
+
+One launch readback at **2026-09-10T20:29:39.909261+00:00** found **running**,
+PID **3100625**, tmux active, exit null and uptime 0 s. It read only supervisor
+and admission facts, not reward or intermediate learner output. The readback
+took **0.6850104999903124 s**. The exact cwd is
+`/home/wu/hmasd-worktrees/ucope-uav-8702-failure-location-a01-20260910`;
+native output is that cwd plus `temp/directions/ucope/exp/ucope-uav-8702-failure-location-a01-20260910`;
+supervisor/log/admission root is `/home/wu/.agent-tasks/ucope-uav-8702-failure-location-a01-20260910`.
+
+DM read the live main Monitor configuration and directly delivered
+`MONITOR_ADD` to **01a087e5-2044-7301-abb6-7a1709a98197**; the tool returned
+the same task ID with `isError=false`. Root subsequently **confirmed Monitor
+adoption for this exact handle/source** and directed the DM to publish these
+facts and stop routine polling. Thus observation ownership is confirmed,
+not inferred from dispatch. The Monitor owns further observation and sends
+Root the terminal event; Root resumes this original DM for collection,
+scientific intake and scoped preservation/closeout.
+
+No A01 recurrence, non-recurrence, failing operation, actual completed counts
+or performance result is claimed yet. The shared authoring checkout remains
+in use. This exact remote cwd/supervisor/wrapper/source pack has the named live
+A01 dependency and DM's terminal-closeout owner; local evidence remains.
+One 900 s scientific /1000 s complete diagnostic is allocated; no accepted
+retry, F/G/H collection, new independent seed or successor follows implicitly.
+All direct launch/adoption receipts are retained in the
+[launch facts](UCOPE_UAV_8702_FAILURE_LOCATION_A01_LAUNCH_FACTS_20260910.json).
