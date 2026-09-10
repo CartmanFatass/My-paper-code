@@ -20,16 +20,17 @@ This question is the finite next allocation, not a correction/resend of the prio
 
 The shared Portfolio checkout began clean at
 `e65bdce30b40f5b23202b557f0e292d4966e7de3`. Current published execution context is separately
-pinned to observed main `e0ef4a7c006a921ef6717884e11d985faaadca4d`; it adds RCLE's accepted
-launch and Monitor adoption. These are read-only published records, not fresh process polling
+pinned to observed main `99168437c1c0d52101b6326fe4db491f760fe28d`; its direct latest intakes
+add accepted VSP03 completion, FOLR RETAIN completion/EVENT adoption, RCLE adoption and completed
+CBSC readiness beyond older tracking labels. These are read-only published records, not fresh process polling
 or resource admission. The state cutoff and arithmetic are in `FACTS.json`.
 
 Under AGENTS §§2,4.8 and evidence-spec §8.1, this is the existing Portfolio node's final
 investment decision, subject to the designated DM's complete scientific/specification conformance
 intake and asynchronous owner overrides. Root then applies its bounded consequences. No new
 owner-ratification layer or universal Pro prerequisite for ordinary B is proposed. The first
-four directions' existing finite assignments remain intact, including accepted handles and all
-pending collection. Their completion never grants an automatic replacement run.
+four directions' finite assignments remain intact, including accepted handles and all pending
+collection. VSP03's completed B07 has no successor allocation; completion never grants a replacement run.
 
 ## Options and operational effects
 
@@ -37,7 +38,7 @@ pending collection. Their completion never grants an automatic replacement run.
 |---|---|---|
 | **A — recommended: allocate the exact ACVC B once** | Release the accepted one-fresh-fit design for a complete DM implementation/required semantic review/proportionate verification/one detached fitting-and-three-panel task/collection and scientific intake, inside **360 s complete**, comprising **330 s maximum whole supervised task** and **≤30 s total runtime support/readback**. Root maps that exact batch to the existing ACVC DM/checkout. ACVC keeps lowest contention priority; do not interrupt live work or displace a ready higher-priority ACTIVE task to make it run. Stop at this one fit/all panels/intake or a bounded failure; no retry, pilot, replacement or successor. | The scientific fitting dependency is resolved and retained timings support a finite proposal. A new independently initialized/trained base directly reduces the old-base selection limitation. The largest remaining cost components and native result are unmeasured; this is an investment, not an execution-readiness or superiority finding. |
 | **B — keep the completed design only** | Release no code or numerical execution, preserve its exact bytes and all old results, and name the concrete observation or opportunity-cost change that would justify revisiting allocation. Root advances other authorized work; completed authoring is not a standing direction slot. No lifecycle change or P80 restart follows. | Conserves the proposed 360 s and engineering attention because one more fit still cannot establish stable superiority or pure retrace causality. It leaves an already specified, bounded selection discriminator unanswered; stronger C evidence is not required merely to justify this B. |
-| **C — defer ACVC and substitute one actually permitted reserve action** | Keep ACVC at zero allocation. Name one bounded CBSC or FRRIE readiness action justified by the fixed evidence, with its exact owner, permitted scope, known work/cost and stop. Existing restriction/acceptance reconciliation may proceed; an unproven permission, rejected operation, old unused allowance or unknown new training recipe may not become an executable substitute. If no such action is established, say so and name the missing fact rather than counting an unresolved wait. | May invest the vacancy in a more decision-relevant ready technical question. The current record establishes neither a newly permitted CBSC 52-tape execution nor FRRIE's exact P63 continuation; restrictions are real operational dependencies, not scientific negatives. |
+| **C — defer ACVC and substitute one actually permitted reserve action** | Keep ACVC at zero allocation. Name one bounded CBSC or FRRIE action justified by the fixed evidence, with its exact owner, permitted scope, known work/cost and stop. CBSC's static reconciliation is already complete and must not be repeated merely to fill a slot. An unproven permission, rejected operation, old unused allowance or unknown new training recipe may not become an executable substitute. If no such action is established, say so and name the missing fact rather than counting an unresolved wait. | May invest the vacancy in a more decision-relevant ready technical question. The new CBSC intake confirms that no next executable action is established as permitted; FRRIE's exact P63 continuation remains unresolved. These are operational dependencies, not scientific negatives. |
 
 These options do not reopen the other four finite allocations, change lifecycle/priority/recasts,
 create a new reserve B with an unspecified budget, or fuse directions. If a materially different
@@ -161,12 +162,16 @@ tracking before application, without modifying the fixed scientific evidence.
 
 | Direction | Current fixed record | Bounded investment already allocated; material reason to preserve it |
 |---|---|---|
-| FOLR | RETAIN Monitor-adopted; EVENT/RANDOM preselected and unsubmitted in current tracking. | One new timing triple:307,680 ticks/14,907 RMSprop/384 final episodes;1800 s per law,5400 s sum plus≤300 s support. Earlier EVENT−RANDOM+1.363671875 exceeded MEI1 once, while reversal, lower EVENT training return and unmatched dose limit it. |
+| FOLR | RETAIN technically accepted:832.49 s whole law, all128 returns, final mean2.64265625; EVENT Monitor-adopted, RANDOM preselected/unsubmitted. No complete triple comparison yet. | One timing triple:307,680 ticks/14,907 RMSprop/384 final episodes;1800 s per law,5400 s sum plus≤300 s support. Earlier EVENT−RANDOM+1.363671875 exceeded MEI1 once, while reversal, lower EVENT training return and unmatched dose limit it. RETAIN alone does not update those contrasts. |
 | UCOPE | 8701 card integrated; implementation, no submitted handle in the fixed record. | One T/F/G triple:2048 **episodes per fit**,12,288 Adam calls/1,736,704 ticks/640 evaluations;1800 s per complete fit inside5400 s whole including support. Old final F/G UP/WITHIN and earlier learned-T losses both remain; fixed short laws are competent alternatives. |
-| VSP03 | B07 adopted then terminal exit0; original DM collecting/intaking, no accepted B07 scientific result at cutoff. | One60 s continuous512 fit with128/512 panels;73,728 episodes/2,949,120 ticks/512 Adam. B06 mean+.016730143229 is below MEI.02 despite positive continuation; terminal success alone is not another positive observation or a new fit allowance. |
+| VSP03 | B07 is scientifically accepted complete: final greedy−R0+.0115673828125, greedy−R+.013076171875, both inside MEI.02; paired Q−.0016064453125. | Complete wall8.927880 s for the allocated one60 s fit;73,728 episodes/2,949,120 ticks/512 Adam. The endpoint-positive/negative-Q branch supports this controller, not improved greedy continuation. B06 stays separate; no successor or completed-work slot is implied. |
 | RCLE | Fresh1000 S21 accepted16:57:56.651200Z and Monitor adoption confirmed at main e0ef4a7c; this supplements the older tracking “implementation” phrase. | One pair:136,192 episodes/8,716,288 ticks/2,000 backward calls;600/600/30 s sublimits within1500 s whole. Seed20 small+.00932413737, saturated tau and reference gap justify the finite exposure question but remain a strong defer countercase. No new result is inferred. |
 | ACVC | Design complete and accepted; zero numerical allocation. | This exact360 s proposal. Recasts2 means lowest ACTIVE contention, without PARK or exclusion. Completed design is not a permanent fifth chain. |
-| CBSC / FRRIE | Only prior bounded readiness/restriction reconciliation is established; exact permitted numerical continuation is not. | CBSC's retained52-tape/7,904-token/15,808-pack-call≤120 s A is not newly permitted. FRRIE's P63 observation-method/accepted-state fact remains unresolved. No new B learner/exposure/cap exists for either in the scoped evidence. |
+| CBSC / FRRIE | CBSC's static reconciliation is accepted complete and found no next executable action established as permitted. FRRIE's exact P63 observation-method/permission/accepted-state dependency remains unresolved. | CBSC's retained52-tape/7,904-token/15,808-pack-call≤120 s A is still unexecuted and not newly permitted; its system312 binding is not replaced by the default remote interpreter. No new B learner/exposure/cap exists for either, and completed readiness is not a standing substitute. |
+
+VSP03's accepted completion and CBSC's completed status return are not ongoing empirical work.
+This question allocates at most the one ACVC study; it does not automatically fill every newly
+vacant slot or select VSP03's next family. Root handles other readiness and proper-node actions.
 
 None of these seven has a verified tuned same-information baseline plus stated upper-reference
 headroom record in the scoped Portfolio/current intake evidence. RCLE's reference gap is not
