@@ -581,3 +581,27 @@ reference/recovery deficits persist and further recurrence cannot establish comp
 Seed21 and recovered22 remain the two prior units; the failed/repeated22 exposure and
 recovery adaptivity are retained. This finite next discriminator changes no family,
 lifecycle, priority or class and grants no automatic subsequent pair.
+
+## Third same1000 root: service signal with fragmentation loss — 2026-09-10
+
+`RCLE_B03_FRESH1000_S23_RESULT_INTAKE_20260910.md` accepts a complete fresh seed23
+pair. Delta_U +.3033203125 and W100 initialization gain +.3080179850 exceed .05;
+all512 primary scenarios and all8 U/Y means favor W100. This supports recurrence
+of native service learning under the whole normalized law, with smaller magnitude
+than roots21/22. Three-root descriptive mean Delta +.3500963 (sample SD .0409027)
+retains outcome-informed selection and recovered22 as one root.
+
+The strongest new contradiction is fragmentation: all8 F means worsen, primary
+increase +.015234375, reversing the prior two roots' favorable F pattern. Reference
+U is still better in every cell, primary deficit .1162374; W1002045/2048 recovery
+scores remain failure-coded40. No unqualified nonharm branch or all-native improvement
+is claimed. A post-hoc F threshold is not supplied. Pure actor-credit causality,
+tuned headroom, stable superiority and transfer remain unidentified; whole-law
+feature/plan/baseline/visitation changes survive as alternatives, with no explanation
+assigned to the F reversal or historical failures.
+
+The next discriminator recommended for separate selection is a competence comparison
+addressing absolute U/reference deficit with explicit fragmentation consequences,
+rather than another immediate unchanged-law replica. Current allocation ends after
+preserved closeout; no new card, seed, budget, family/lifecycle/priority disposition or
+C promotion is selected. Evidence: the S23 E0/readback and three-root analysis.
