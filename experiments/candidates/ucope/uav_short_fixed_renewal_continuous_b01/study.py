@@ -14,6 +14,7 @@ CARD = "docs/research/candidates/ucope/UCOPE_UAV_SHORT_FIXED_RENEWAL_CONTINUOUS_
 CARD_8602 = "docs/research/candidates/ucope/UCOPE_UAV_SHORT_FIXED_RENEWAL_CONTINUOUS_B01_8602_SCIENCE_CARD_20260909.md"
 LEARNED_CARD = "docs/research/candidates/ucope/UCOPE_UAV_SHORT_LEARNED_RENEWAL_CONTINUOUS_B01_SCIENCE_CARD_20260910.md"
 LEARNED_CARD_8702 = "docs/research/candidates/ucope/UCOPE_UAV_SHORT_LEARNED_RENEWAL_CONTINUOUS_B01_8702_SCIENCE_CARD_20260910.md"
+FAILURE_CARD = "docs/research/candidates/ucope/UCOPE_UAV_8702_FAILURE_LOCATION_A01_SCIENCE_CARD_20260910.md"
 OBJECT = "UCOPE-UAV-SHORT-FIXED-RENEWAL-CONTINUOUS-B01"
 LEARNED_OBJECT = "UCOPE-UAV-SHORT-LEARNED-RENEWAL-CONTINUOUS-B01"
 SELECTOR = "renewal_short_fixed_continuous_b01"
@@ -49,6 +50,14 @@ class Config:
         config.selector = LEARNED_SELECTOR
         return config
 
+    @classmethod
+    def failure_location(cls, fixture=False, seed=8702):
+        config = cls.learned(fixture, seed)
+        config.train_episodes = 6 if fixture else 1740
+        config.checkpoints = (2, 4) if fixture else (512, 1024)
+        config.arm_cap = config.pair_cap = 900
+        return config
+
 
 def panel_from_rows(rows, expected, checkpoint, labels=LABELS):
     selected = {a: [r for r in rows if r["phase"] == "eval" and r["arm"] == a
@@ -79,7 +88,8 @@ def panel_from_rows(rows, expected, checkpoint, labels=LABELS):
     return result
 
 
-def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=write_summary):
+def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=write_summary,
+             failure_location=False):
     import torch
     from ..uav_motion_prefix_b01.environment import SyntheticAdapter, make_real
     from ..uav_motion_prefix_b01.learner import collect_episode, optimizer_for, update
@@ -115,6 +125,10 @@ def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=wri
                    G_eval_velocity_start=b+50000, G_eval_duration_start=b+60000,
                    eval_checkpoint_stride=1000),
         treatment_duration_support=[1, 2], value_moments=None)
+    if failure_location:
+        summary.update(object="UCOPE-UAV-8702-FAILURE-LOCATION-A01", card=FAILURE_CARD,
+                       card_section=3, mode="ENGINEERING_FIXTURE" if config.fixture else "UAV_A_RECON",
+                       diagnostic_repeated_prefix=True, independent_training_samples=0)
     files = {name: (out / (name + ".jsonl")).open("w", encoding="utf-8")
              for name in ("episodes", "rollouts")}
 
@@ -123,6 +137,25 @@ def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=wri
             rows.append(row)
         files[name].write(json.dumps(clean_json(row, limits), allow_nan=False) + "\n")
         files[name].flush()
+
+    def record_failure(error):
+        if not failure_location or "failure_context" in summary:
+            return
+        import numpy as np
+        record = dict(type=type(error).__name__, message=str(error), frames=[])
+        trace = error.__traceback__
+        while trace is not None:
+            frame = trace.tb_frame
+            arrays = {name: dict(shape=list(value.shape), dtype=str(value.dtype))
+                      for name, value in frame.f_locals.items() if isinstance(value, np.ndarray)}
+            record["frames"].append(dict(path=frame.f_code.co_filename, line=trace.tb_lineno,
+                                        function=frame.f_code.co_name, ndarrays=arrays))
+            trace = trace.tb_next
+        summary["failure_context"] = record
+        try:
+            write_summary(out / "failure_context.json", record)
+        except Exception as publication_error:
+            limits.append(f"failure context publication: {type(publication_error).__name__}: {publication_error}")
 
     try:
         deadline.check()
@@ -214,21 +247,29 @@ def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=wri
                 deadline.start_g(arm)
             try:
                 fit(arm, models)
+                if failure_location:
+                    break
             except Exception as error:
                 traceback.print_exc()
                 limits.append(f"execution: {type(error).__name__}: {error}")
+                record_failure(error)
                 break
     except Exception as error:
         traceback.print_exc()
         message = f"execution: {type(error).__name__}: {error}"
         if message not in limits:
             limits.append(message)
+        record_failure(error)
     finally:
         for stream in files.values():
             stream.close()
     summary["counts"] = {key: sum(a["counts"][key] for a in arms.values()) for key in new_counts(renewal=True, short=True)}
     summary["counts"]["partial_episode_steps"] = summary["counts"]["team_steps"]-summary["counts"]["completed_episode_steps"]
     summary["scientific_uav_calls"] = summary["counts"]["scientific_uav_calls"]
+    if failure_location:
+        t_fit = arms.get("T", {})
+        summary["diagnostic_prefix_complete"] = (bool(t_fit.get("fit_complete")) and
+            all(point["complete"] for point in t_fit.get("checkpoints", {}).values()))
     summary["curve"] = [panel_from_rows(rows, config.eval_episodes, c, labels) for c in config.checkpoints]
     summary["primary"] = summary["curve"][-1]
     summary["all_panels_complete"] = all(p["all_outcomes_complete"] for p in summary["curve"])
