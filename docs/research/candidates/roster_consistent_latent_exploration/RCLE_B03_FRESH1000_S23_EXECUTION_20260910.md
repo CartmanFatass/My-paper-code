@@ -116,3 +116,22 @@ adoption and terminal facts append here without changing the frozen payload or c
 Prelaunch owner boundary at 2026-09-10T21:32:25.592333+00:00: live main `b34dc4a3ef18236402054ef8d4d307c1af5ccfd7`,
 reviews[] and all-age relevant ledger owner columns[]. No new owner instruction or
 prediction changes this card. Live Monitor and Relay endpoints retain their bindings.
+
+## Actual launch and direct Monitor dispatch
+
+At **2026-09-10T21:33:31.334650+00:00**, the literal payload was read from published
+record `839bc6ed6c8d821fb6159c94763fb9ff1712bad2` and submitted exactly once. Agent-task
+returned exit0, "Task 'rcle-b03-fresh1000-s23-20260910' started in tmux session 'agent_rcle-b03-fresh1000-s23-20260910'. Output: /home/wu/.agent-tasks/rcle-b03-fresh1000-s23-20260910/task.log".
+Submission wall **0.6079070999985561s**; stderr empty. Exact argv/response
+are retained in `fresh1000-s23-preparation/launch.json`. This establishes accepted
+detached execution, not completed learning, passed admissions or scientific validity.
+
+Direct MONITOR_ADD to live-primary `01a087e5-2044-7301-abb6-7a1709a98197` was
+accepted by the app tool; receipt `monitor-dispatch.json`. Actual adoption awaits
+Root confirmation. DM routine remote polling has stopped. Live owner reviews remained[]
+at handover. Root must integrate these commits and return terminal facts to this same DM.
+
+The exact remote checkout, source stage and supervisor directory have a live execution/
+collection dependency. DM owns preservation and reclamation at terminal acceptance;
+Root owns integration/retention acceptance. The existing shared authoring checkout remains
+in use. Allocation is open; no retry, continuation exposure or stronger claim is selected.
