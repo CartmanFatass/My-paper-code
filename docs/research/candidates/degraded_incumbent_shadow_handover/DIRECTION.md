@@ -1,12 +1,33 @@
 # Direction degraded_incumbent_shadow_handover: degraded incumbent shadow handover
 
+## B08 arrival-bridge finite observation — 2026-09-10
+
+The one fresh matched pair on retained A03 gives HALF_RETAIN minus REPLACE final service
+−6.5 mean ticks (434.5 versus441), inside the±24 effect band. The four condition differences
+are−15,0,−8,−3; all eight episodes complete1200 ticks. Mean energy is lower, while HALF_RETAIN
+adds four final invalid commits. The frozen negative-mean branch favors REPLACE and ending
+this fixed half-retention candidate's extension; no broader arrival/source-family closure follows.
+
+The receipt-to-standby-control/learner path remains the strongest mechanistic support for
+asking the question: masked training snapshot counts are13263/13949. The strongest contrary
+evidence is the nonpositive service sign in every final condition. A full bridge already
+learning useful retention, stale retained history and finite co-adaptation remain alternatives;
+their causes are not identified. TRAIN and EVAL ordinary CAS counts are zero, leaving source
+origin and COPY−RETAIN/SHADOW−COPY unestimated. The ceiling is one-pair finite whole-policy
+performance; no population equivalence, safety or formal UAV validation follows. Headroom
+remains unmeasured. No next empirical discriminator or successor is selected.
+
+References: [B08 E0](DISH_ARRIVAL_BRIDGE_RETENTION_B08_RESULT_EVIDENCE_20260910.md),
+[B08 intake and decisions](DISH_ARRIVAL_BRIDGE_RETENTION_B08_RESULT_INTAKE_20260910.md),
+[frozen card](DISH_ARRIVAL_BRIDGE_RETENTION_B08_SCIENCE_CARD_20260910.md).
+
 ## Accepted arrival-bridge question — 2026-09-10
 
 Convergence selected one narrow B08 performance pair: ordinary receipt replaces the standby
 shadow with the full learned bridge in REPLACE, versus fixed half previous state plus half
 bridge in HALF_RETAIN, followed by unchanged GRU/control/replay. Both are newly trained with
 equal exposure on retained A03; the next discriminator is complete final native service and
-costs. This is an untested finite-learning hypothesis, not a diagnosed overwrite defect.
+costs. At selection this was an untested finite-learning hypothesis, not a diagnosed overwrite defect.
 Strongest support is a receipt-to-standby-action and learner path active before CAS; historical
 masked samples12321/12309 establish exposure only. Strongest alternative is useful retention
 already learned by full bridge/GRU, while the fixed skip may preserve staleness. The one-pair

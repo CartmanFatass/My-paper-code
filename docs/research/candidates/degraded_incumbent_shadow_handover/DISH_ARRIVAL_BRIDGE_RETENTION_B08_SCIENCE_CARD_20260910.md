@@ -276,3 +276,25 @@ prediction and selects or escalates only the next decision actually supported by
 The remote checkout and supervisor/output roots remain live; no cleanup is performed on them.
 Both focused-test invocation directories were removed. Shared local authoring checkout remains
 owned by this direction for collection/intake; Root owns main integration and later reclamation.
+
+## 10. Terminal result and collected return
+
+The single accepted invocation finished exit0. Both arms completed16 updates,65,536 ordinary
+transitions and512 optimizer calls, with four final1200-tick episodes each. REPLACE mean441,
+HALF_RETAIN434.5, `Delta_bridge=-6.5`; all four differences are−15,0,−8,−3. The negative-mean
+row in§4 is applied without changing its rule: favor REPLACE and end extension of this fixed
+candidate. The effect is inside±24 and does not establish equivalence or stable inferiority.
+No ordinary CAS occurred in TRAIN/EVAL; source-origin contrasts remain unestimated.
+
+[E0 evidence](DISH_ARRIVAL_BRIDGE_RETENTION_B08_RESULT_EVIDENCE_20260910.md) and
+[scientific intake](DISH_ARRIVAL_BRIDGE_RETENTION_B08_RESULT_INTAKE_20260910.md) preserve all
+native companions, predictions, receipts and the object-tier decision. Technical source and
+native-primary acceptance stand separately from the small negative result. Both exclusive
+arm times are below900s. Complete shared/category cost conformance remains unverified because
+Monitor command wall is unmeasured; experiment Duration455 is never counted again as observation.
+The [accounting](evidence/2026-09-10-b08-accounting.json) preserves this limit and actual charges.
+
+All unique evidence is archived on primary control; the terminal remote checkout is verified
+absent on disk and from Git registration. Shared authoring checkout and terminal supervisor
+records are retained. Root owns integration/retention acceptance. No successor, scientific
+retry, extra seed or Pro request is selected by this result; B08 has no C consumption state.
