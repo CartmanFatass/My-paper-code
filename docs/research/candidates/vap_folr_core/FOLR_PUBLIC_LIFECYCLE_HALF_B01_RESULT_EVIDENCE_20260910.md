@@ -1,6 +1,6 @@
 # FOLR public lifecycle HALF-B01 technical evidence
 
-Current state: RETAIN complete and technically accepted; HALF_EVENT accepted with actual Monitor adoption confirmed by Root. Earlier preparation boundaries remain chronological evidence.
+Current state: both arms complete and technically accepted; HALF_EVENT_ABOVE_MEI under the frozen rule. Scientific intake complete; verified scoped closeout pending. Earlier preparation boundaries remain chronological evidence.
 
 ## 1. Fixed comparison and changed implementation
 
@@ -238,3 +238,91 @@ owner `/root/dm_folr_p68_reentry`, and Root receipt thread01a07249-b095-7821-8ce
 No duplicate status polling follows. Root routes terminal facts to this DM,
 which retains terminal collection, technical acceptance, scientific intake and the
 already assigned preservation/closeout. Until then all live remote roots remain intact.
+
+## 9. Complete pair: primary, counts and technical acceptance
+
+Root routed the original HALF_EVENT terminal fact, and this DM collected its complete
+summary/checkpoint, seven supervisor files and memory receipt. All10 additional files
+match remote sizes/SHA-256; **20 of20** collected files across both arms match. The
+new receipt is `evidence/2026-09-10-folr-public-lifecycle-half-b01-half-event-collection.json`.
+Both raw summaries, all256 final returns, all50 progress rows and both checkpoints are
+preserved. This is a technical collection, with no model loading or new evaluation.
+
+HALF_EVENT finished exit0 at2026-09-11T06:32:27+08:00. Final log and summary agree,
+all25 episode/update progress rows match, the frozen7807/107807 seeds and source match,
+and Torch compute/interop remain1/1. Actual-node admission at22:19:47.430290Z passed
+with15,630,790,656 physical/effective available bytes. The receipt shares the frozen
+command chain with the runner. **Technical acceptance: both complete arms accepted.**
+
+| Arm | Training episodes / ticks / RMSprop | Final episodes / ticks | Final native mean | Conditional final sample SD | Cumulative training sum / mean |
+| --- | --- | --- | --- | --- | --- |
+| RETAIN | 5000 /100000 /4969 | 128 /2560 | 1.68046875 | 5.60026938 | −26706.82 /−5.341364 |
+| HALF_EVENT | 5000 /100000 /4969 | 128 /2560 | 3.2459375 | 6.83346195 | −22095.24 /−4.419048 |
+
+The card §4 rule, verbatim:
+
+1. **HALF_EVENT_ABOVE_MEI:** `d_HR>=1`.
+2. **RETAIN_ABOVE_MEI:** `d_HR<=-1`.
+3. **WITHIN_MEI:** `-1<d_HR<1`.
+
+Direct arithmetic on the two complete128-episode means gives
+**d_HR =3.2459375−1.68046875 =+1.56546875**, hence **HALF_EVENT_ABOVE_MEI**.
+The prospective low-confidence WITHIN_MEI prediction **missed**; owner prediction was
+not taken (unattended). All returned episodes enter each mean; no sign, checkpoint,
+episode or seed was selected after this pair's output. The .5 question itself was
+outcome-informed from the earlier public-lifecycle family and remains class B.
+
+| Arm / phase | Births | Departures | Event survivor opportunities | Eligible survivor controls | Full survivor resets | Survivor attenuations |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| RETAIN training | 21123 | 7533 | 45424 | 267138 | 0 | 0 |
+| RETAIN final | 515 | 95 | 1125 | 7343 | 0 | 0 |
+| HALF_EVENT training | 21859 | 8933 | 48079 | 259794 | 0 | 48079 |
+| HALF_EVENT final | 569 | 211 | 1350 | 6640 | 0 | 1350 |
+
+HALF_EVENT attenuates exactly its action-followed event survivor opportunities,
+18.50658599%/20.33132530% of eligible training/final controls, and never counts them
+as full resets. Entrant/episode clears and terminal-only controls remain excluded.
+Different native opportunity counts arise on the separately learned policy paths;
+the card preserves this action-dependent data/RNG divergence. They do not establish
+that a useful half of memory was preserved, or that attenuation caused the return gap.
+
+Run-level analysis uses scientific-tools `summarize_runs.py` on the two score rows in
+`evidence/2026-09-10-folr-public-lifecycle-half-b01-run-scores.csv`, with
+`--paired --baseline RETAIN`. The matching analysis JSON reports **one training pair**,
+delta+1.56546875 and `sample_sd:null` at the training-run level. The128 episodes per
+arm are conditional observations and not paired worlds or128 independent learners.
+No training-population confidence interval, significance, equivalence or stable
+superiority is claimed. See the [scientific intake](FOLR_PUBLIC_LIFECYCLE_HALF_B01_INTAKE_20260910.md#5-complete-pair-scientific-intake).
+
+## 10. Complete exposure, resource accounting and preservation boundary
+
+Total actual exposure is10000 training episodes/200000 training ticks/9938 RMSprop
+steps, then256 final episodes/5120 evaluation ticks: **205120 native ticks**. Each
+fresh learner had100000 real ticks and4969 actor/mixer RMSprop steps at lr.0005,
+with one final checkpoint and128 greedy final episodes. The known algorithm factors
+remain2×4969×32×21×5×2=66783360 replay GRU row forwards and1076880 acting rows;
+these are derived work counts, not separately measured CPU events. No private mask
+stream, coefficient search, extra fit, periodic evaluation or top-up was run.
+
+| Arm | Complete outer wall (s) | User CPU (s) | System CPU (s) | Total CPU (s) | Runner wall (s) | Outer peak RSS (KiB) |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| RETAIN | 753.10 | 732.34 | 22.12 | 754.46 | 752.75510065 | 663420 |
+| HALF_EVENT | 760.14 | 741.78 | 19.97 | 761.75 | 759.80474161 | 662600 |
+| Sum | 1513.24 | 1474.12 | 42.09 | 1516.21 | 1512.55984226 | not additive |
+
+Both complete chains satisfy1800s each and1513.24s satisfies the3600s pair cap.
+Supervisor integer start/final-exit clocks give **1980s study elapsed**, including the
+inter-arm restart/collection interval; this is separate from summed invocation wall
+and aggregate CPU work. The Monitor's second local timestamp also carries the
+inconsistent−07:00 label and is preserved without use in these elapsed values.
+Half-arm collection4.0781130s, terminal procedure reads.6223301s and pair analysis
+.1343852s bring measured/scoped support to **65.2891878s/300s before closeout**.
+Full engineering and independent Monitor work remain unmeasured; no zero is imputed.
+Directory tests remain32.4911638s and no new test or runtime diagnostic was executed.
+
+No source/Scope §5 breach, reward/information/learner/publication defect, failed
+admission or partial attempt was found. Successful run acceptance does not retroactively
+repair earlier objects' quarantine or closeout deviations. Both completed remote
+supervisors, this exact worktree and its staged source are retained for the assigned
+pre-delete archive-to-original comparison and verified local preservation. This live
+local direction checkout remains the DM's authoring surface. No further run is allocated.

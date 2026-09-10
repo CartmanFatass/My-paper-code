@@ -85,3 +85,103 @@ and stops under the card; it grants no retry or replacement. No automatic succes
 selected. The shared local authoring checkout remains the current DM's continuation
 surface; active remote execution, both named supervisors and staged source remain
 until this object's assigned closeout can preserve and verify them.
+
+## 5. Complete-pair scientific intake
+
+At2026-09-10T22:35:28Z the original HALF_EVENT output was technically accepted after
+checking all10 new raw files against their remote originals, complete summary/log
+agreement,25 progress rows, allocated learner/evaluation counts, source/seeds, fresh
+admission, complete outer timing and the separately named attenuation counters.
+Together with RETAIN,20 files match and both full final checkpoints and256 episode
+returns are retained. Accepted implementation/check evidence remains the existing26
+focused tests and independent high-risk review; no scientific execution was repeated.
+The [E0 §§9–10](FOLR_PUBLIC_LIFECYCLE_HALF_B01_RESULT_EVIDENCE_20260910.md#9-complete-pair-primary-counts-and-technical-acceptance)
+and [summary](FOLR_PUBLIC_LIFECYCLE_HALF_B01_RESULT_SUMMARY_20260910.json) contain all
+receipts, both phase counter tables, progress rows, costs and exact raw-return arrays.
+
+Rule applied verbatim from card §4:
+
+1. **HALF_EVENT_ABOVE_MEI:** `d_HR>=1`.
+2. **RETAIN_ABOVE_MEI:** `d_HR<=-1`.
+3. **WITHIN_MEI:** `-1<d_HR<1`.
+
+**Observed result:** RETAIN1.68046875, HALF_EVENT3.2459375,
+**d_HR=+1.56546875 → HALF_EVENT_ABOVE_MEI**. Both fresh fits completed5000 training
+episodes/100000 ticks/4969 RMSprop and128 final episodes/2560 ticks. Cumulative
+training means also favor HALF_EVENT (−4.419048 versus−5.341364), but those exploratory
+behavior-process returns are a separate descriptive observation, not the primary final
+greedy endpoint or a reconstructed training curve. No outcomes are omitted.
+
+**Observation that bounds the result.** This is one matched fresh training instance
+at7807/107807 of two complete learned packages on the declared public-lifecycle easy
+Traffic Junction variant. The run-analysis tool takes one endpoint row per fit and
+reports one paired difference with no estimable training-run SD. Conditional final
+episode SD is5.60026938 for RETAIN and6.83346195 for HALF_EVENT. These describe execution
+spread for two fitted policies, not training-population uncertainty, and same-index
+episodes are not paired native worlds. The positive point lies1.56546875 return units
+above RETAIN and exceeds the card's1-unit MEI; it establishes neither stable superiority
+nor a population effect exceeding that margin.
+
+**Strongest support.** The complete native endpoint favors the fixed .5 package under
+equal finite real training and evaluation, and actual action-followed attenuation was
+applied48079 times during training and1350 times at final evaluation, with zero full
+survivor resets. Reused technical checks support common freshness, before-GRU placement
+and consistent acting/online/target replay. This supports bounded interest in the
+implemented rule; a valid B signal does not require a significant or replicated point.
+
+**Strongest contradiction and surviving alternatives.** No second attenuation fit
+exists, so recurrence is unresolved. Earlier full-EVENT evidence remains mixed:
+TIMING-B01 EVENT−RETAIN+2.804765625 and EVENT−RANDOM+1.363671875 were local positives;
+TIMING-B02 did not separate practically; TIMING-B03 EVENT−RETAIN−5.44609375 was a native
+loss. Those are different rules/seeds and do not enter the current primary or establish
+HALF_EVENT superiority over full EVENT. They contradict a broad claim that erasing
+survivor history reliably helps. Useful retained context, learned representation,
+optimization/data-path variation, joint intervention, partner co-adaptation and
+conditional evaluation variation remain possible explanations of the current gain.
+The counter totals do not distinguish them.
+
+**Claim ceiling and non-goals.** One preliminary complete-trained-package advantage
+over fresh RETAIN on this host. No stable winner, equivalence, pure event timing,
+half-useful-memory preservation, stale-memory diagnosis, strictly-self ancestry,
+RANDOM or full-EVENT superiority, old-loss recovery, original-CAMA performance,
+transfer/UAV/C or Portfolio claim. Tuned same-information headroom remains absent;
+the matching generic comparator is competent but untuned. Earlier failures and
+historical closeout limitations retain their original boundaries. B has no consumption
+state; the present two-invocation allocation is complete.
+
+## 6. Prediction, cost, owner flags and decisions this completed intake produces
+
+The prospective **WITHIN_MEI, low confidence** DM prediction **missed**. Owner
+prediction is **not taken (unattended)**; current live-primary unapplied owner reviews
+again returned `[]`. The [Chinese brief](../../portfolio/owner/briefs/vap_folr_core/2026-09-10_FOLR_PUBLIC_LIFECYCLE_HALF_B01.md)
+reports the complete result and limits without a new owner-console item.
+
+Whole arm walls753.10/760.14s sum1513.24s; complete CPU work1516.21 CPU-s;
+narrower runner walls sum1512.55984226s. Study first-start to final-exit elapsed1980s
+includes the inter-arm restart/collection gap. Both1800s arm caps and the3600s pair cap
+pass. Scoped support65.2891878s/300s is recorded before preservation/closeout;
+full engineering/Monitor work is unmeasured and not claimed as zero. The retained
+source extension is15 added/4 removed non-test lines and no §5 source-budget breach
+was identified. No post-result repair or scientific retry was needed.
+
+**Object-tier technical acceptance.** Options: (a) accept both complete arms and the
+unchanged positive branch; (b) quarantine a concrete measurement-threatening defect;
+(c) treat the point as a stable or causal claim. Recommend/select **(a)** because
+the primary bytes, complete counts and comparison meaning are trustworthy; there is
+no observed defect requiring quarantine and the stronger claim is unsupported.
+**Owner-delegated decision (unattended, 2026-09-03 instruction): (a).** Owner flag:none.
+
+**Assigned preservation and closeout.** Options: (a) verify archives against every
+original member and retain matching local copies/recovery refs before removing the
+four exact remote roots; (b) keep original roots if any verification is unresolved.
+Recommend **(a)** under Root's explicit terminal-closeout assignment; execution remains
+pending the concrete preservation facts. No evidence is removed based on this
+recommendation alone. Root accepts reclamation and retains main integration authority.
+
+**Next discriminator, direction-local advice only.** If a separately selected bounded
+learning follow-up is desired, one new independent matched training pair of the same
+fixed HALF_EVENT/RETAIN comparison could test recurrence of this positive instance.
+No exact memory-content diagnosis or new control is needed for that narrow performance
+question. This intake allocates none of it: no retry, extra arm, coefficient/seed
+search, recast, direction/Portfolio disposition or automatic successor is selected.
+The immediate next action is the already assigned evidence-preservation/closeout.
