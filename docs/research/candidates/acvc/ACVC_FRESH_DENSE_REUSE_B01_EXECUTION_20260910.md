@@ -1,6 +1,6 @@
 # ACVC fresh DENSE reuse B01 — engineering and execution
 
-Date: 2026-09-10. **One run completed and technically accepted; scoped closeout and scientific intake are being published.**
+Date: 2026-09-10. **One run completed and technically accepted; scientific intake and scoped remote closeout complete. Monitor cost-accounting deviation retained.**
 
 ## Authority and owned work
 
@@ -50,7 +50,7 @@ The actual complete charge must cover the supervisor start/end boundary conserva
 fractional command wall and final supervisor wall are reported separately. Any measured
 cap breach is retained. No timing probe or uncharged verification phase is selected.
 
-Current new support used: **3.7175557s**. Current scientific accepted invocations: **1**.
+Current measured DM runtime support: **8.0564878s**. Current scientific accepted invocations: **1**, complete.
 Before submission no model, RNG master, native episode, learner update or evaluation
 had been created by this engineering assignment. Actual exposure awaits collection.
 
@@ -223,3 +223,26 @@ All16 native/support/supervisor files are inventoried; the final282957-byte chec
 is retained in the archive and extracted runtime root. Every other file is also copied
 into the durable result folder. No retry, extra test/panel, replacement or model loading
 occurred during collection. Scientific interpretation is in the separate intake.
+
+## Scoped closeout and final accounting limitation
+
+Raw evidence was committed/pushed at809ecf104, followed by otherwise ignored supervisor
+and check logs at236dc02fa. All16 captured files, including the final checkpoint, are in
+the verified local collection archive; every noncheckpoint file also has a durable copy.
+After confirming terminal state, no live tmux session, exact source and no tracked change,
+only the owned remote execution checkout and supervisor root were removed. The cleanup
+receipt directly confirms both paths absent and no Git worktree registration, at remote
+2026-09-11T02:50:53+08:00. Cleanup/readback tool wall1.3301567s is included in DM support.
+The shared local authoring checkout and local scientific archive remain for Root.
+
+The final known native-task-plus-DM subtotal is180.0564878s:172s conservative whole task
+and8.0564878s measured DM runtime support. Independent Monitor bookkeeping subsequently
+returned retained tool-wall parts30.2s+14.14s for its terminal query, with other approximate
+status/log/delivery costs and an unavailable exact aggregate. Root confirmed a separate
+retained lower bound>44.34s; no observation was rerun. Do not silently add it to or exclude
+it from either existing boundary. Complete≤360s and support≤30s conformance is unestablished
+if Monitor observation is included; its lower bound alone is above30s. This is an explicit
+budget/accounting deviation, with intact native scientific counts/results. No new local
+allocation, successor or scientific polarity follows. The collection receipt and
+[intake](ACVC_FRESH_DENSE_REUSE_B01_INTAKE_20260910.md) return the same-Portfolio-node
+consequence to Root while completing this assignment's numerical work and cleanup.
