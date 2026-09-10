@@ -518,3 +518,18 @@ owner's independent-progression instruction select it; no family/class/lifecycle
 is made. S21 remains n1 at selection, with its reference gap, saturated recovery,
 whole-law attribution limits and all earlier failures retained. Every S22 outcome will
 be reported; no all-positive seed rule or causal200-to1000 claim follows.
+
+## Independent same1000 attempt incomplete; native contrast still n1 — 2026-09-10
+
+`RCLE_B03_FRESH1000_S22_RESULT_INTAKE_20260910.md` preserves an incomplete seed22 pair.
+W1 completed1000 updates and its native endpoint has only a small initialization gain
++.0039571, with all recovery scores40. W100 retained983 completed training blocks and
+a favorable late training trend, then stopped with a caught exception before its final
+evaluation; reference was not invoked. That curve cannot substitute for the fixed
+held-out comparison. The large W100 signal remains supported by the one complete S21
+pair, with its existing reference gap and recovery limitation. This attempt adds no
+second paired effect and no algorithmic negative; all exposure and unknown partial
+work remain visible. The next discriminator is a traceback-equipped, separately selected
+completion attempt using the intact W1 control, or the actual failure location if it
+stops again. No cause is assigned to the error or linked to the historical signal11;
+no family/lifecycle/class decision or automatic retry follows.

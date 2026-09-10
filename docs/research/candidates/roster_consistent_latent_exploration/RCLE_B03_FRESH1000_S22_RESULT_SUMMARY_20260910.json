@@ -1,0 +1,1129 @@
+{
+  "source": "9a11fb084a16f293c27f3bd1fe8275dc19bd1a47",
+  "root_key_hex": "9e02ca6eed367ce80c7b396fc99a128c501c744d0e888e374803b5b2a4feb9fa",
+  "status": "INCOMPLETE_PAIRED_OBJECT",
+  "direct_failure": "TypeError: unsupported operand type(s) for *: 'range_iterator' and 'int'",
+  "root_cause": "not identified; no traceback retained",
+  "arms": {
+    "W1": {
+      "actor_score_weight": 1.0,
+      "admission_receipt": "/home/wu/hmasd-worktrees/rcle-b03-fresh1000-s22-20260910/temp/directions/roster_consistent_latent_exploration/exp/b03-actor100-fresh1000-s22-20260910/W1-admission.json",
+      "allocations": {
+        "models": 6,
+        "training_instances": 1,
+        "untrained_helpers": 5
+      },
+      "arm": "W1",
+      "block_digest_hex": "17d27675aa05de9ca420bfd915292995dc29ed28ef9407c678cd294507a7fad3",
+      "cells": {
+        "12_to_12.ACTIVE_CONTINUATION": {
+          "40U_mean": 27.468098958333332,
+          "F_mean": 0.24931640624999998,
+          "U_mean": 0.6867024739583333,
+          "Y_mean": 0.31317138671875,
+          "episodes": 256,
+          "tau40_count": 256,
+          "tau40_fraction": 1.0,
+          "tau_mean": 40.0
+        },
+        "12_to_12.NEW_EPOCH": {
+          "40U_mean": 27.569661458333332,
+          "F_mean": 0.24498697916666667,
+          "U_mean": 0.6892415364583333,
+          "Y_mean": 0.3118998209635417,
+          "episodes": 256,
+          "tau40_count": 256,
+          "tau40_fraction": 1.0,
+          "tau_mean": 40.0
+        },
+        "12_to_8.ACTIVE_CONTINUATION": {
+          "40U_mean": 28.595703125,
+          "F_mean": 0.329345703125,
+          "U_mean": 0.714892578125,
+          "Y_mean": 0.296875,
+          "episodes": 256,
+          "tau40_count": 256,
+          "tau40_fraction": 1.0,
+          "tau_mean": 40.0
+        },
+        "12_to_8.NEW_EPOCH": {
+          "40U_mean": 28.45751953125,
+          "F_mean": 0.319970703125,
+          "U_mean": 0.71143798828125,
+          "Y_mean": 0.29742177327473956,
+          "episodes": 256,
+          "tau40_count": 256,
+          "tau40_fraction": 1.0,
+          "tau_mean": 40.0
+        },
+        "8_to_12.ACTIVE_CONTINUATION": {
+          "40U_mean": 27.5380859375,
+          "F_mean": 0.25143229166666664,
+          "U_mean": 0.6884521484375,
+          "Y_mean": 0.30328369140625,
+          "episodes": 256,
+          "tau40_count": 256,
+          "tau40_fraction": 1.0,
+          "tau_mean": 40.0
+        },
+        "8_to_12.NEW_EPOCH": {
+          "40U_mean": 27.484700520833336,
+          "F_mean": 0.24436848958333332,
+          "U_mean": 0.6871175130208333,
+          "Y_mean": 0.30382029215494794,
+          "episodes": 256,
+          "tau40_count": 256,
+          "tau40_fraction": 1.0,
+          "tau_mean": 40.0
+        },
+        "8_to_8.ACTIVE_CONTINUATION": {
+          "40U_mean": 28.42626953125,
+          "F_mean": 0.32724609375,
+          "U_mean": 0.71065673828125,
+          "Y_mean": 0.2879486083984375,
+          "episodes": 256,
+          "tau40_count": 256,
+          "tau40_fraction": 1.0,
+          "tau_mean": 40.0
+        },
+        "8_to_8.NEW_EPOCH": {
+          "40U_mean": 28.6572265625,
+          "F_mean": 0.3279296875,
+          "U_mean": 0.7164306640625,
+          "Y_mean": 0.28533172607421875,
+          "episodes": 256,
+          "tau40_count": 256,
+          "tau40_fraction": 1.0,
+          "tau_mean": 40.0
+        }
+      },
+      "counts": {
+        "backward_step_calls": 1000,
+        "final_episodes": 2048,
+        "init_episodes": 2048,
+        "nonzero_steps": 1000,
+        "training_episodes": 64000,
+        "zero_steps": 0
+      },
+      "eight_cell_mean": {
+        "40U_mean": 28.024658203125,
+        "F_mean": 0.2868245442708333,
+        "U_mean": 0.700616455078125,
+        "Y_mean": 0.29996903737386066,
+        "cells": [
+          "8_to_8.ACTIVE_CONTINUATION",
+          "8_to_8.NEW_EPOCH",
+          "12_to_12.ACTIVE_CONTINUATION",
+          "12_to_12.NEW_EPOCH",
+          "8_to_12.ACTIVE_CONTINUATION",
+          "8_to_12.NEW_EPOCH",
+          "12_to_8.ACTIVE_CONTINUATION",
+          "12_to_8.NEW_EPOCH"
+        ],
+        "tau40_fraction": 1.0,
+        "tau_mean": 40.0
+      },
+      "final_baselines": [
+        0.28351060173333187,
+        0.28812829097799847,
+        0.2971658383685156,
+        0.2992055669330512,
+        0.29468374702499994,
+        0.29172586952916285,
+        0.2907472821247852,
+        0.2924831073731721
+      ],
+      "final_displacement": 0.7281851117872841,
+      "initial_parameter_norm": 21.20666078552823,
+      "initialization_summary": {
+        "cells": {
+          "12_to_12.ACTIVE_CONTINUATION": {
+            "40U_mean": 27.545572916666664,
+            "F_mean": 0.2556640625,
+            "U_mean": 0.6886393229166666,
+            "Y_mean": 0.3108367919921875,
+            "episodes": 256,
+            "tau40_count": 256,
+            "tau40_fraction": 1.0,
+            "tau_mean": 40.0
+          },
+          "12_to_12.NEW_EPOCH": {
+            "40U_mean": 27.684244791666668,
+            "F_mean": 0.2511393229166667,
+            "U_mean": 0.6921061197916667,
+            "Y_mean": 0.3093363444010417,
+            "episodes": 256,
+            "tau40_count": 256,
+            "tau40_fraction": 1.0,
+            "tau_mean": 40.0
+          },
+          "12_to_8.ACTIVE_CONTINUATION": {
+            "40U_mean": 28.77880859375,
+            "F_mean": 0.336865234375,
+            "U_mean": 0.71947021484375,
+            "Y_mean": 0.29324086507161456,
+            "episodes": 256,
+            "tau40_count": 256,
+            "tau40_fraction": 1.0,
+            "tau_mean": 40.0
+          },
+          "12_to_8.NEW_EPOCH": {
+            "40U_mean": 28.50830078125,
+            "F_mean": 0.324853515625,
+            "U_mean": 0.71270751953125,
+            "Y_mean": 0.29616546630859375,
+            "episodes": 256,
+            "tau40_count": 256,
+            "tau40_fraction": 1.0,
+            "tau_mean": 40.0
+          },
+          "8_to_12.ACTIVE_CONTINUATION": {
+            "40U_mean": 27.671549479166664,
+            "F_mean": 0.25641276041666666,
+            "U_mean": 0.6917887369791667,
+            "Y_mean": 0.29990895589192706,
+            "episodes": 256,
+            "tau40_count": 256,
+            "tau40_fraction": 1.0,
+            "tau_mean": 40.0
+          },
+          "8_to_12.NEW_EPOCH": {
+            "40U_mean": 27.541341145833332,
+            "F_mean": 0.25166015625,
+            "U_mean": 0.6885335286458333,
+            "Y_mean": 0.3026987711588542,
+            "episodes": 256,
+            "tau40_count": 256,
+            "tau40_fraction": 1.0,
+            "tau_mean": 40.0
+          },
+          "8_to_8.ACTIVE_CONTINUATION": {
+            "40U_mean": 28.65966796875,
+            "F_mean": 0.333837890625,
+            "U_mean": 0.71649169921875,
+            "Y_mean": 0.2845001220703125,
+            "episodes": 256,
+            "tau40_count": 256,
+            "tau40_fraction": 1.0,
+            "tau_mean": 40.0
+          },
+          "8_to_8.NEW_EPOCH": {
+            "40U_mean": 28.7998046875,
+            "F_mean": 0.3333984375,
+            "U_mean": 0.7199951171875,
+            "Y_mean": 0.282745361328125,
+            "episodes": 256,
+            "tau40_count": 256,
+            "tau40_fraction": 1.0,
+            "tau_mean": 40.0
+          }
+        },
+        "eight_cell_mean": {
+          "40U_mean": 28.148661295572914,
+          "F_mean": 0.2929789225260417,
+          "U_mean": 0.7037165323893229,
+          "Y_mean": 0.29742908477783203,
+          "cells": [
+            "8_to_8.ACTIVE_CONTINUATION",
+            "8_to_8.NEW_EPOCH",
+            "12_to_12.ACTIVE_CONTINUATION",
+            "12_to_12.NEW_EPOCH",
+            "8_to_12.ACTIVE_CONTINUATION",
+            "8_to_12.NEW_EPOCH",
+            "12_to_8.ACTIVE_CONTINUATION",
+            "12_to_8.NEW_EPOCH"
+          ],
+          "tau40_fraction": 1.0,
+          "tau_mean": 40.0
+        }
+      },
+      "launch_sha": "9a11fb084a16f293c27f3bd1fe8275dc19bd1a47",
+      "native": {
+        "abi": {
+          "abi_version": 2,
+          "event_input_size": 64,
+          "fixture_input_size": 224,
+          "fixture_magic": 5927665395199787847,
+          "snapshot_size": 464,
+          "step_input_size": 64
+        },
+        "artifact_sha256": "5b918da7e23d7b65251fb20efcb6678e4a17e62538f6ebdedbda1d9e96221983",
+        "build_key": "a70147fa7b390c5d12fd6e16060105bf2ea530a09f21cb8487d51d6fcfc24fdb",
+        "load_seconds": 0.005498355021700263,
+        "path": "/tmp/hmasd_rcle_tbcfv_native/a70147fa7b390c5d12fd6e16060105bf2ea530a09f21cb8487d51d6fcfc24fdb/tbcfv_backend.so",
+        "resolved_build_root": "/tmp/hmasd_rcle_tbcfv_native",
+        "runtime_abi": {
+          "byteorder": "little",
+          "cache_tag": "cpython-310",
+          "event_input_size": 64,
+          "fixture_input_size": 224,
+          "implementation": "cpython",
+          "machine": "x86_64",
+          "pointer_bits": 64,
+          "python_version": [
+            3,
+            10,
+            21
+          ],
+          "snapshot_size": 464,
+          "step_input_size": 64
+        },
+        "source_sha256": "18d45b95a29c1ca8d17b4d192a9328ddc9c56a821a2690f118de44dbf0054819",
+        "toolchain": {
+          "compile_flags": [
+            "-std=c++17",
+            "-O2",
+            "-fexceptions",
+            "-shared",
+            "-fPIC",
+            "-fno-fast-math",
+            "-ffp-contract=off",
+            "-fno-unsafe-math-optimizations"
+          ],
+          "compiler_path": "/usr/bin/x86_64-linux-gnu-g++-13",
+          "compiler_sha256": "1353e9bdd29a7295c7226bf6c63abccce056d8cac31f112e5cdbecc3f28c2769"
+        }
+      },
+      "object": "RCLE-TBCFV-B03-ACTOR100-FRESH1000-S22",
+      "package": "FLEX-REKEY",
+      "peak_rss_bytes": 590462976,
+      "root_key_hex": "9e02ca6eed367ce80c7b396fc99a128c501c744d0e888e374803b5b2a4feb9fa",
+      "seed": 22,
+      "status": "COMPLETE",
+      "updates_per_fit": 1000,
+      "wall_seconds": 317.2263444219716
+    },
+    "W100": {
+      "actor_score_weight": 100.0,
+      "admission_receipt": "/home/wu/hmasd-worktrees/rcle-b03-fresh1000-s22-20260910/temp/directions/roster_consistent_latent_exploration/exp/b03-actor100-fresh1000-s22-20260910/W100-admission.json",
+      "allocations": {
+        "models": 6,
+        "training_instances": 1,
+        "untrained_helpers": 5
+      },
+      "arm": "W100",
+      "block_digest_hex": "17d27675aa05de9ca420bfd915292995dc29ed28ef9407c678cd294507a7fad3",
+      "counts": {
+        "backward_step_calls": 983,
+        "final_episodes": 0,
+        "init_episodes": 0,
+        "nonzero_steps": 983,
+        "training_episodes": 62912,
+        "zero_steps": 0
+      },
+      "initial_parameter_norm": 21.20666078552823,
+      "launch_sha": "9a11fb084a16f293c27f3bd1fe8275dc19bd1a47",
+      "native": {
+        "abi": {
+          "abi_version": 2,
+          "event_input_size": 64,
+          "fixture_input_size": 224,
+          "fixture_magic": 5927665395199787847,
+          "snapshot_size": 464,
+          "step_input_size": 64
+        },
+        "artifact_sha256": "5b918da7e23d7b65251fb20efcb6678e4a17e62538f6ebdedbda1d9e96221983",
+        "build_key": "a70147fa7b390c5d12fd6e16060105bf2ea530a09f21cb8487d51d6fcfc24fdb",
+        "load_seconds": 0.0022605489939451218,
+        "path": "/tmp/hmasd_rcle_tbcfv_native/a70147fa7b390c5d12fd6e16060105bf2ea530a09f21cb8487d51d6fcfc24fdb/tbcfv_backend.so",
+        "resolved_build_root": "/tmp/hmasd_rcle_tbcfv_native",
+        "runtime_abi": {
+          "byteorder": "little",
+          "cache_tag": "cpython-310",
+          "event_input_size": 64,
+          "fixture_input_size": 224,
+          "implementation": "cpython",
+          "machine": "x86_64",
+          "pointer_bits": 64,
+          "python_version": [
+            3,
+            10,
+            21
+          ],
+          "snapshot_size": 464,
+          "step_input_size": 64
+        },
+        "source_sha256": "18d45b95a29c1ca8d17b4d192a9328ddc9c56a821a2690f118de44dbf0054819",
+        "toolchain": {
+          "compile_flags": [
+            "-std=c++17",
+            "-O2",
+            "-fexceptions",
+            "-shared",
+            "-fPIC",
+            "-fno-fast-math",
+            "-ffp-contract=off",
+            "-fno-unsafe-math-optimizations"
+          ],
+          "compiler_path": "/usr/bin/x86_64-linux-gnu-g++-13",
+          "compiler_sha256": "1353e9bdd29a7295c7226bf6c63abccce056d8cac31f112e5cdbecc3f28c2769"
+        }
+      },
+      "object": "RCLE-TBCFV-B03-ACTOR100-FRESH1000-S22",
+      "package": "FLEX-REKEY",
+      "peak_rss_bytes": 587186176,
+      "root_key_hex": "9e02ca6eed367ce80c7b396fc99a128c501c744d0e888e374803b5b2a4feb9fa",
+      "seed": 22,
+      "status": "TECHNICAL_STOP",
+      "stop_reason": "TypeError: unsupported operand type(s) for *: 'range_iterator' and 'int'",
+      "updates_per_fit": 1000,
+      "wall_seconds": 305.72103107592557
+    }
+  },
+  "acceptance": {
+    "initial_tensors_equal": true,
+    "initial_tensors_differ_seed21": true,
+    "different_scalars_from_seed21": 25440,
+    "parameter_scalars": 26161,
+    "dtype": "torch.float64",
+    "learned_readback": {
+      "W1": {
+        "recorded_completed_blocks": 1000,
+        "counts": {
+          "backward_step_calls": 1000,
+          "final_episodes": 2048,
+          "init_episodes": 2048,
+          "nonzero_steps": 1000,
+          "training_episodes": 64000,
+          "zero_steps": 0
+        },
+        "step_norm_max_absolute_error": 1.0408340855860843e-17,
+        "recorded_measured_path_length": 19.999999999999662,
+        "initial_parameter_norm_readback": 21.20666078552823,
+        "baseline_reconstruction_at_last_recorded_block": [
+          0.2835106017333317,
+          0.28812829097799814,
+          0.2971658383685155,
+          0.29920556693305095,
+          0.2946837470249997,
+          0.2917258695291625,
+          0.290747282124785,
+          0.2924831073731718
+        ],
+        "agent_ticks_training_recorded": 32768000,
+        "claim_decisions_training_recorded": 8192000,
+        "baseline_reconstruction_max_error": 3.3306690738754696e-16,
+        "final_displacement_readback": 0.7281851117872875
+      },
+      "W100": {
+        "recorded_completed_blocks": 983,
+        "counts": {
+          "backward_step_calls": 983,
+          "final_episodes": 0,
+          "init_episodes": 0,
+          "nonzero_steps": 983,
+          "training_episodes": 62912,
+          "zero_steps": 0
+        },
+        "step_norm_max_absolute_error": 1.0408340855860843e-17,
+        "recorded_measured_path_length": 19.65999999999967,
+        "initial_parameter_norm_readback": 21.20666078552823,
+        "baseline_reconstruction_at_last_recorded_block": [
+          0.6073442254584874,
+          0.6007330428715023,
+          0.6440891393803221,
+          0.628259592983775,
+          0.6202919080018066,
+          0.6125624638747735,
+          0.6249666882131486,
+          0.6144308539574427
+        ],
+        "agent_ticks_training_recorded": 32210944,
+        "claim_decisions_training_recorded": 8052736,
+        "baseline_end_state_unavailable": true,
+        "final_displacement_readback": null,
+        "unrecorded_interrupted_block_upper": {
+          "episodes": 64,
+          "primitive_ticks": 4096,
+          "backward_step_calls": 1
+        }
+      }
+    },
+    "verified_output_supervisor_files": 19,
+    "present_panel_cells_indices_verified": true,
+    "missing_W100_endpoint_and_reference": true,
+    "complete_readback_seconds_including_imports": 2.182774899993092
+  },
+  "w1_narrow_primary": {
+    "W1_U": 0.70167236328125,
+    "init_U": 0.7056294759114583,
+    "G_U_W1": 0.003957112630208346,
+    "G_U_W1_conditional_SE": 0.0009328017509983967,
+    "paths": [
+      {
+        "cell": "8_to_12.ACTIVE_CONTINUATION",
+        "W1_U": 0.6884521484375,
+        "init_U": 0.6917887369791667,
+        "G_U_W1": 0.003336588541666687,
+        "G_U_W1_conditional_SE": 0.0011148395501320795
+      },
+      {
+        "cell": "12_to_8.ACTIVE_CONTINUATION",
+        "W1_U": 0.714892578125,
+        "init_U": 0.71947021484375,
+        "G_U_W1": 0.004577636718750005,
+        "G_U_W1_conditional_SE": 0.0014958640326326461
+      }
+    ],
+    "paired_W100_Delta_U": null
+  },
+  "cell_means_recomputed": {
+    "FLEX-INIT": {
+      "8_to_8.ACTIVE_CONTINUATION": {
+        "U_mean": 0.71649169921875,
+        "Y_mean": 0.2845001220703125,
+        "tau_mean": 40.0,
+        "F_mean": 0.333837890625,
+        "tau40_count": 256,
+        "tau40_fraction": 1.0
+      },
+      "8_to_8.NEW_EPOCH": {
+        "U_mean": 0.7199951171875,
+        "Y_mean": 0.282745361328125,
+        "tau_mean": 40.0,
+        "F_mean": 0.3333984375,
+        "tau40_count": 256,
+        "tau40_fraction": 1.0
+      },
+      "12_to_12.ACTIVE_CONTINUATION": {
+        "U_mean": 0.6886393229166666,
+        "Y_mean": 0.3108367919921875,
+        "tau_mean": 40.0,
+        "F_mean": 0.2556640625,
+        "tau40_count": 256,
+        "tau40_fraction": 1.0
+      },
+      "12_to_12.NEW_EPOCH": {
+        "U_mean": 0.6921061197916667,
+        "Y_mean": 0.3093363444010417,
+        "tau_mean": 40.0,
+        "F_mean": 0.2511393229166667,
+        "tau40_count": 256,
+        "tau40_fraction": 1.0
+      },
+      "8_to_12.ACTIVE_CONTINUATION": {
+        "U_mean": 0.6917887369791667,
+        "Y_mean": 0.29990895589192706,
+        "tau_mean": 40.0,
+        "F_mean": 0.25641276041666666,
+        "tau40_count": 256,
+        "tau40_fraction": 1.0
+      },
+      "8_to_12.NEW_EPOCH": {
+        "U_mean": 0.6885335286458333,
+        "Y_mean": 0.3026987711588542,
+        "tau_mean": 40.0,
+        "F_mean": 0.25166015625,
+        "tau40_count": 256,
+        "tau40_fraction": 1.0
+      },
+      "12_to_8.ACTIVE_CONTINUATION": {
+        "U_mean": 0.71947021484375,
+        "Y_mean": 0.29324086507161456,
+        "tau_mean": 40.0,
+        "F_mean": 0.336865234375,
+        "tau40_count": 256,
+        "tau40_fraction": 1.0
+      },
+      "12_to_8.NEW_EPOCH": {
+        "U_mean": 0.71270751953125,
+        "Y_mean": 0.29616546630859375,
+        "tau_mean": 40.0,
+        "F_mean": 0.324853515625,
+        "tau40_count": 256,
+        "tau40_fraction": 1.0
+      }
+    },
+    "W1": {
+      "8_to_8.ACTIVE_CONTINUATION": {
+        "U_mean": 0.71065673828125,
+        "Y_mean": 0.2879486083984375,
+        "tau_mean": 40.0,
+        "F_mean": 0.32724609375,
+        "tau40_count": 256,
+        "tau40_fraction": 1.0
+      },
+      "8_to_8.NEW_EPOCH": {
+        "U_mean": 0.7164306640625,
+        "Y_mean": 0.28533172607421875,
+        "tau_mean": 40.0,
+        "F_mean": 0.3279296875,
+        "tau40_count": 256,
+        "tau40_fraction": 1.0
+      },
+      "12_to_12.ACTIVE_CONTINUATION": {
+        "U_mean": 0.6867024739583333,
+        "Y_mean": 0.31317138671875,
+        "tau_mean": 40.0,
+        "F_mean": 0.24931640624999998,
+        "tau40_count": 256,
+        "tau40_fraction": 1.0
+      },
+      "12_to_12.NEW_EPOCH": {
+        "U_mean": 0.6892415364583333,
+        "Y_mean": 0.3118998209635417,
+        "tau_mean": 40.0,
+        "F_mean": 0.24498697916666667,
+        "tau40_count": 256,
+        "tau40_fraction": 1.0
+      },
+      "8_to_12.ACTIVE_CONTINUATION": {
+        "U_mean": 0.6884521484375,
+        "Y_mean": 0.30328369140625,
+        "tau_mean": 40.0,
+        "F_mean": 0.25143229166666664,
+        "tau40_count": 256,
+        "tau40_fraction": 1.0
+      },
+      "8_to_12.NEW_EPOCH": {
+        "U_mean": 0.6871175130208333,
+        "Y_mean": 0.30382029215494794,
+        "tau_mean": 40.0,
+        "F_mean": 0.24436848958333332,
+        "tau40_count": 256,
+        "tau40_fraction": 1.0
+      },
+      "12_to_8.ACTIVE_CONTINUATION": {
+        "U_mean": 0.714892578125,
+        "Y_mean": 0.296875,
+        "tau_mean": 40.0,
+        "F_mean": 0.329345703125,
+        "tau40_count": 256,
+        "tau40_fraction": 1.0
+      },
+      "12_to_8.NEW_EPOCH": {
+        "U_mean": 0.71143798828125,
+        "Y_mean": 0.29742177327473956,
+        "tau_mean": 40.0,
+        "F_mean": 0.319970703125,
+        "tau40_count": 256,
+        "tau40_fraction": 1.0
+      }
+    }
+  },
+  "training_curve_reading": {
+    "W1": {
+      "windows100": [
+        {
+          "updates": [
+            0,
+            99
+          ],
+          "completed_blocks": 100,
+          "U": 0.7110673177083333,
+          "Y": 0.2904314778645833,
+          "tau": 40.0,
+          "F": 0.3196598958333333
+        },
+        {
+          "updates": [
+            100,
+            199
+          ],
+          "completed_blocks": 100,
+          "U": 0.7112972656250001,
+          "Y": 0.2903938802083333,
+          "tau": 40.0,
+          "F": 0.32038697916666664
+        },
+        {
+          "updates": [
+            200,
+            299
+          ],
+          "completed_blocks": 100,
+          "U": 0.709701171875,
+          "Y": 0.29142537434895827,
+          "tau": 40.0,
+          "F": 0.3216072916666667
+        },
+        {
+          "updates": [
+            300,
+            399
+          ],
+          "completed_blocks": 100,
+          "U": 0.7101298177083334,
+          "Y": 0.29134790039062497,
+          "tau": 40.0,
+          "F": 0.3201171875
+        },
+        {
+          "updates": [
+            400,
+            499
+          ],
+          "completed_blocks": 100,
+          "U": 0.7097721354166667,
+          "Y": 0.29156689453124995,
+          "tau": 40.0,
+          "F": 0.31929375
+        },
+        {
+          "updates": [
+            500,
+            599
+          ],
+          "completed_blocks": 100,
+          "U": 0.7104670572916667,
+          "Y": 0.2911151529947916,
+          "tau": 40.0,
+          "F": 0.3186822916666667
+        },
+        {
+          "updates": [
+            600,
+            699
+          ],
+          "completed_blocks": 100,
+          "U": 0.7103709635416666,
+          "Y": 0.2910125325520833,
+          "tau": 40.0,
+          "F": 0.3160484375
+        },
+        {
+          "updates": [
+            700,
+            799
+          ],
+          "completed_blocks": 100,
+          "U": 0.7099494791666667,
+          "Y": 0.2912554524739583,
+          "tau": 40.0,
+          "F": 0.31537604166666666
+        },
+        {
+          "updates": [
+            800,
+            899
+          ],
+          "completed_blocks": 100,
+          "U": 0.7096348958333334,
+          "Y": 0.29107885742187495,
+          "tau": 40.0,
+          "F": 0.316240625
+        },
+        {
+          "updates": [
+            900,
+            999
+          ],
+          "completed_blocks": 100,
+          "U": 0.7086779947916667,
+          "Y": 0.291952880859375,
+          "tau": 40.0,
+          "F": 0.3159255208333333
+        }
+      ],
+      "first": {
+        "U": 0.7085026041666667,
+        "Y": 0.2936442057291666,
+        "tau": 40.0,
+        "F": 0.32166666666666666
+      },
+      "last": {
+        "U": 0.7136848958333333,
+        "Y": 0.28903808593749997,
+        "tau": 40.0,
+        "F": 0.31036458333333333
+      }
+    },
+    "W100": {
+      "windows100": [
+        {
+          "updates": [
+            0,
+            99
+          ],
+          "completed_blocks": 100,
+          "U": 0.7102572916666666,
+          "Y": 0.2924071451822916,
+          "tau": 40.0,
+          "F": 0.3263479166666667
+        },
+        {
+          "updates": [
+            100,
+            199
+          ],
+          "completed_blocks": 100,
+          "U": 0.7046549479166667,
+          "Y": 0.2968819173177083,
+          "tau": 40.0,
+          "F": 0.3183651041666667
+        },
+        {
+          "updates": [
+            200,
+            299
+          ],
+          "completed_blocks": 100,
+          "U": 0.7002180989583333,
+          "Y": 0.3014087727864583,
+          "tau": 40.0,
+          "F": 0.3206192708333333
+        },
+        {
+          "updates": [
+            300,
+            399
+          ],
+          "completed_blocks": 100,
+          "U": 0.6929981770833333,
+          "Y": 0.30876904296874996,
+          "tau": 40.0,
+          "F": 0.32170364583333333
+        },
+        {
+          "updates": [
+            400,
+            499
+          ],
+          "completed_blocks": 100,
+          "U": 0.6762649739583334,
+          "Y": 0.32486979166666663,
+          "tau": 40.0,
+          "F": 0.3153171875
+        },
+        {
+          "updates": [
+            500,
+            599
+          ],
+          "completed_blocks": 100,
+          "U": 0.6470208333333334,
+          "Y": 0.3543888346354166,
+          "tau": 40.0,
+          "F": 0.32436354166666664
+        },
+        {
+          "updates": [
+            600,
+            699
+          ],
+          "completed_blocks": 100,
+          "U": 0.6008270833333333,
+          "Y": 0.40042797851562495,
+          "tau": 40.0,
+          "F": 0.3248916666666667
+        },
+        {
+          "updates": [
+            700,
+            799
+          ],
+          "completed_blocks": 100,
+          "U": 0.5351635416666667,
+          "Y": 0.4655447591145833,
+          "tau": 39.99796875,
+          "F": 0.31535416666666666
+        },
+        {
+          "updates": [
+            800,
+            899
+          ],
+          "completed_blocks": 100,
+          "U": 0.453213671875,
+          "Y": 0.5454694010416667,
+          "tau": 39.92171875,
+          "F": 0.2945703125
+        },
+        {
+          "updates": [
+            900,
+            982
+          ],
+          "completed_blocks": 83,
+          "U": 0.3889150351405623,
+          "Y": 0.6075450238453816,
+          "tau": 39.65643825301205,
+          "F": 0.28371423192771084
+        }
+      ],
+      "first": {
+        "U": 0.7085026041666667,
+        "Y": 0.2936442057291666,
+        "tau": 40.0,
+        "F": 0.32166666666666666
+      },
+      "last": {
+        "U": 0.3649348958333334,
+        "Y": 0.6265950520833334,
+        "tau": 39.796875,
+        "F": 0.27807291666666667
+      }
+    }
+  },
+  "admissions": {
+    "W1": {
+      "assessed_at": "2026-09-10T19:12:25.049409Z",
+      "available_physical_bytes": 15633362944,
+      "captured_at": "2026-09-10T19:12:25.049162Z",
+      "cgroup_headroom_bytes": null,
+      "cgroup_memory_current_bytes": null,
+      "cgroup_memory_max_bytes": null,
+      "effective_available_bytes": 15633362944,
+      "effective_floor_pass": true,
+      "failure_reasons": [],
+      "measurement_source": "/proc/meminfo",
+      "minimum_available_bytes": 4294967296,
+      "passed": true,
+      "physical_floor_pass": true,
+      "schema_version": 1
+    },
+    "W100": {
+      "assessed_at": "2026-09-10T19:17:58.264040Z",
+      "available_physical_bytes": 15617634304,
+      "captured_at": "2026-09-10T19:17:58.263788Z",
+      "cgroup_headroom_bytes": null,
+      "cgroup_memory_current_bytes": null,
+      "cgroup_memory_max_bytes": null,
+      "effective_available_bytes": 15617634304,
+      "effective_floor_pass": true,
+      "failure_reasons": [],
+      "measurement_source": "/proc/meminfo",
+      "minimum_available_bytes": 4294967296,
+      "passed": true,
+      "physical_floor_pass": true,
+      "schema_version": 1
+    }
+  },
+  "exposure": {
+    "training_episodes_recorded": 126912,
+    "evaluation_episodes": 4096,
+    "total_episodes_recorded": 131008,
+    "primitive_ticks_recorded": 8384512,
+    "backward_step_calls_recorded": 1983,
+    "recorded_nonzero": 1983,
+    "recorded_zero": 0,
+    "additional_interrupted_block_upper": {
+      "episodes": 64,
+      "primitive_ticks": 4096,
+      "backward_step_calls": 1
+    },
+    "total_episodes_upper": 131072,
+    "primitive_ticks_upper": 8388608,
+    "backward_step_calls_upper": 1984,
+    "models": 12,
+    "fits_started": 2,
+    "untrained_helpers": 10,
+    "B03_cumulative_recorded_lower": {
+      "episodes": 334784,
+      "ticks": 21426176,
+      "calls": 4783,
+      "models": 54
+    },
+    "historical_original_W100_prefix_upper": {
+      "episodes": 12800,
+      "ticks": 819200,
+      "calls": 200
+    },
+    "current_complete_paired_training_results": 0,
+    "historical_complete_same1000_pairs": 1
+  },
+  "hashes": {
+    "temp/directions/roster_consistent_latent_exploration/exp/b03-actor100-fresh1000-s22-20260910/W100-admission.json": "d3618d8fc5c7990a3968359cf9f20b5c28537be15c00649af55d1ca55e596bd2",
+    "temp/directions/roster_consistent_latent_exploration/exp/b03-actor100-fresh1000-s22-20260910/W100-time.txt": "18ba14bcca3a6db3201e1433bd346bb42fdeb8dd62dcf4c72b2e6771c6d80ff1",
+    "temp/directions/roster_consistent_latent_exploration/exp/b03-actor100-fresh1000-s22-20260910/W1-time.txt": "49f7c865ae941d92cbba8e261cbf0696cc3ff1f02352ef33c9de46a6b4fa92f7",
+    "temp/directions/roster_consistent_latent_exploration/exp/b03-actor100-fresh1000-s22-20260910/W1-admission.json": "9cc3fbd6355df32180ba9361a6d1d1d8548c2feaf1519e34f00a6fd14c8d992c",
+    "temp/directions/roster_consistent_latent_exploration/exp/b03-actor100-fresh1000-s22-20260910/chain-time.txt": "162df63c9ac25b7f3e3002d0767066d10172d388423f42f15f05b97022af8613",
+    "temp/directions/roster_consistent_latent_exploration/exp/b03-actor100-fresh1000-s22-20260910/W100/summary.json": "e0b6f238fa120c3bf9e8d4ad95421bfea57032ee7125a6c737e9d5970e3891c6",
+    "temp/directions/roster_consistent_latent_exploration/exp/b03-actor100-fresh1000-s22-20260910/W100/initial_parameters.pt": "4fcc2412fb3c7f528599322bee5c074caa8976163ed3aefe84c3e16211225790",
+    "temp/directions/roster_consistent_latent_exploration/exp/b03-actor100-fresh1000-s22-20260910/W100/completed_blocks.jsonl": "2719c3d0b17539526caf756176da4b71dc34c94b91f6c166eb3b2949c1e80897",
+    "temp/directions/roster_consistent_latent_exploration/exp/b03-actor100-fresh1000-s22-20260910/W1/summary.json": "f4d23dcfc1c6925183fecdcbd0e217c781c6955c1e99b048aeb1b06a968922ba",
+    "temp/directions/roster_consistent_latent_exploration/exp/b03-actor100-fresh1000-s22-20260910/W1/initial_parameters.pt": "4fcc2412fb3c7f528599322bee5c074caa8976163ed3aefe84c3e16211225790",
+    "temp/directions/roster_consistent_latent_exploration/exp/b03-actor100-fresh1000-s22-20260910/W1/init_scenarios.json": "030f372b7bd0b1f62d2c1e990ba96a0a2c3ee791da7050a69af2054037a711c1",
+    "temp/directions/roster_consistent_latent_exploration/exp/b03-actor100-fresh1000-s22-20260910/W1/parameters.pt": "4c5238864d571cc4afe692c59679d5e31c18d7dda77e952479a37877060dccaa",
+    "temp/directions/roster_consistent_latent_exploration/exp/b03-actor100-fresh1000-s22-20260910/W1/completed_blocks.jsonl": "c1abde84391e6f51a93ef5b0040603f32cc1a08d7f8d35c527e6f71efe13549a",
+    "temp/directions/roster_consistent_latent_exploration/fresh1000-s22-preparation/supervisor/runner.sh": "71a571208c8b382ea72aee5e807890fc018c0233d66c2b5b26acb597970065fd",
+    "temp/directions/roster_consistent_latent_exploration/fresh1000-s22-preparation/supervisor/exit_code": "53c234e5e8472b6ac51c1ae1cab3fe06fad053beb8ebfd8977b010655bfdd3c3",
+    "temp/directions/roster_consistent_latent_exploration/fresh1000-s22-preparation/supervisor/status": "6da5b18878e110928643ebcc38dbb7552cf3a296eea56493e23edc2b93eecff8",
+    "temp/directions/roster_consistent_latent_exploration/fresh1000-s22-preparation/supervisor/start_time": "77b49c2d583ff78937417ebf28a02d822f73c596d3514132c28d227a386ac2e9",
+    "temp/directions/roster_consistent_latent_exploration/fresh1000-s22-preparation/supervisor/pid": "9f220a30ce5dacb76adfd64c24919db632bb8ccedbd9d0fa05c33047304b2ec6",
+    "temp/directions/roster_consistent_latent_exploration/fresh1000-s22-preparation/supervisor/task.log": "f2385f8fcf6be1a3562077af8f1d52a6a37b2334d2f8c496d312a8731fde4475"
+  },
+  "cost": {
+    "prelaunch_conservative_seconds": 100,
+    "timings": {
+      "W1": {
+        "wall_s": 333.18,
+        "peak_rss_kib": 597300.0,
+        "exit": 0.0
+      },
+      "W100": {
+        "wall_s": 310.74,
+        "peak_rss_kib": 592388.0,
+        "exit": 2.0
+      },
+      "chain": {
+        "wall_s": 644.0,
+        "peak_rss_kib": 597300.0,
+        "exit": 2.0
+      }
+    },
+    "sum_invocations_seconds": 643.9200000000001,
+    "chain_seconds": 644.0,
+    "collection": {
+      "wall_seconds": 5.693639900011476,
+      "results": [
+        {
+          "argv": [
+            "scp",
+            "-o",
+            "BatchMode=yes",
+            "-o",
+            "ConnectTimeout=10",
+            "-r",
+            "hmasd-wsl-node:/home/wu/hmasd-worktrees/rcle-b03-fresh1000-s22-20260910/temp/directions/roster_consistent_latent_exploration/exp/b03-actor100-fresh1000-s22-20260910",
+            "temp\\directions\\roster_consistent_latent_exploration\\exp"
+          ],
+          "exit_code": 0,
+          "wall_seconds": 4.639501099998597,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "scp",
+            "-o",
+            "BatchMode=yes",
+            "-o",
+            "ConnectTimeout=10",
+            "-r",
+            "hmasd-wsl-node:/home/wu/.agent-tasks/rcle-b03-fresh1000-s22-20260910",
+            "temp\\directions\\roster_consistent_latent_exploration\\fresh1000-s22-preparation\\supervisor"
+          ],
+          "exit_code": 0,
+          "wall_seconds": 0.6498460000002524,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "ssh",
+            "-o",
+            "BatchMode=yes",
+            "-o",
+            "ConnectTimeout=10",
+            "hmasd-wsl-node",
+            "git -C /home/wu/hmasd-worktrees/rcle-b03-fresh1000-s22-20260910 diff --exit-code 9a11fb084a16f293c27f3bd1fe8275dc19bd1a47 -- experiments/candidates/roster_consistent_latent_exploration_tbcfv experiments/candidates/roster_consistent_latent_exploration_tbcfv_b01 experiments/candidates/roster_consistent_latent_exploration_tbcfv_b02 experiments/candidates/roster_consistent_latent_exploration_tbcfv_b03 scripts/run_rcle_tbcfv_b03.py scripts/run_rcle_tbcfv_b03_fresh1000_s22.sh scripts/hmasd_resource_preflight.py && git -C /home/wu/hmasd-worktrees/rcle-b03-fresh1000-s22-20260910 rev-parse HEAD"
+          ],
+          "exit_code": 0,
+          "wall_seconds": 0.38412329999846406,
+          "stdout": "9a11fb084a16f293c27f3bd1fe8275dc19bd1a47\n",
+          "stderr": ""
+        }
+      ],
+      "verified_hashes": {
+        "temp/directions/roster_consistent_latent_exploration/exp/b03-actor100-fresh1000-s22-20260910/W100-admission.json": "d3618d8fc5c7990a3968359cf9f20b5c28537be15c00649af55d1ca55e596bd2",
+        "temp/directions/roster_consistent_latent_exploration/exp/b03-actor100-fresh1000-s22-20260910/W100-time.txt": "18ba14bcca3a6db3201e1433bd346bb42fdeb8dd62dcf4c72b2e6771c6d80ff1",
+        "temp/directions/roster_consistent_latent_exploration/exp/b03-actor100-fresh1000-s22-20260910/W1-time.txt": "49f7c865ae941d92cbba8e261cbf0696cc3ff1f02352ef33c9de46a6b4fa92f7",
+        "temp/directions/roster_consistent_latent_exploration/exp/b03-actor100-fresh1000-s22-20260910/W1-admission.json": "9cc3fbd6355df32180ba9361a6d1d1d8548c2feaf1519e34f00a6fd14c8d992c",
+        "temp/directions/roster_consistent_latent_exploration/exp/b03-actor100-fresh1000-s22-20260910/chain-time.txt": "162df63c9ac25b7f3e3002d0767066d10172d388423f42f15f05b97022af8613",
+        "temp/directions/roster_consistent_latent_exploration/exp/b03-actor100-fresh1000-s22-20260910/W100/summary.json": "e0b6f238fa120c3bf9e8d4ad95421bfea57032ee7125a6c737e9d5970e3891c6",
+        "temp/directions/roster_consistent_latent_exploration/exp/b03-actor100-fresh1000-s22-20260910/W100/initial_parameters.pt": "4fcc2412fb3c7f528599322bee5c074caa8976163ed3aefe84c3e16211225790",
+        "temp/directions/roster_consistent_latent_exploration/exp/b03-actor100-fresh1000-s22-20260910/W100/completed_blocks.jsonl": "2719c3d0b17539526caf756176da4b71dc34c94b91f6c166eb3b2949c1e80897",
+        "temp/directions/roster_consistent_latent_exploration/exp/b03-actor100-fresh1000-s22-20260910/W1/summary.json": "f4d23dcfc1c6925183fecdcbd0e217c781c6955c1e99b048aeb1b06a968922ba",
+        "temp/directions/roster_consistent_latent_exploration/exp/b03-actor100-fresh1000-s22-20260910/W1/initial_parameters.pt": "4fcc2412fb3c7f528599322bee5c074caa8976163ed3aefe84c3e16211225790",
+        "temp/directions/roster_consistent_latent_exploration/exp/b03-actor100-fresh1000-s22-20260910/W1/init_scenarios.json": "030f372b7bd0b1f62d2c1e990ba96a0a2c3ee791da7050a69af2054037a711c1",
+        "temp/directions/roster_consistent_latent_exploration/exp/b03-actor100-fresh1000-s22-20260910/W1/parameters.pt": "4c5238864d571cc4afe692c59679d5e31c18d7dda77e952479a37877060dccaa",
+        "temp/directions/roster_consistent_latent_exploration/exp/b03-actor100-fresh1000-s22-20260910/W1/completed_blocks.jsonl": "c1abde84391e6f51a93ef5b0040603f32cc1a08d7f8d35c527e6f71efe13549a",
+        "temp/directions/roster_consistent_latent_exploration/fresh1000-s22-preparation/supervisor/runner.sh": "71a571208c8b382ea72aee5e807890fc018c0233d66c2b5b26acb597970065fd",
+        "temp/directions/roster_consistent_latent_exploration/fresh1000-s22-preparation/supervisor/exit_code": "53c234e5e8472b6ac51c1ae1cab3fe06fad053beb8ebfd8977b010655bfdd3c3",
+        "temp/directions/roster_consistent_latent_exploration/fresh1000-s22-preparation/supervisor/status": "6da5b18878e110928643ebcc38dbb7552cf3a296eea56493e23edc2b93eecff8",
+        "temp/directions/roster_consistent_latent_exploration/fresh1000-s22-preparation/supervisor/start_time": "77b49c2d583ff78937417ebf28a02d822f73c596d3514132c28d227a386ac2e9",
+        "temp/directions/roster_consistent_latent_exploration/fresh1000-s22-preparation/supervisor/pid": "9f220a30ce5dacb76adfd64c24919db632bb8ccedbd9d0fa05c33047304b2ec6",
+        "temp/directions/roster_consistent_latent_exploration/fresh1000-s22-preparation/supervisor/task.log": "f2385f8fcf6be1a3562077af8f1d52a6a37b2334d2f8c496d312a8731fde4475"
+      },
+      "verified_files": 19,
+      "monitor_terminal_sha256": "4fad7c8788be4def361ef70a4d19caa17d54dcf06e6b2f3de859c182992e784e"
+    },
+    "postlaunch_support_cap_seconds": 150,
+    "complete_conservative_charge_seconds": 894.0,
+    "aggregate_CPU_seconds": null
+  },
+  "supervisor": {
+    "exit_code": "2\n",
+    "pid": "3095314\n",
+    "runner.sh": "#!/usr/bin/env bash\necho $$ > \"/home/wu/.agent-tasks/rcle-b03-fresh1000-s22-20260910/pid\"\nSTART_TS=$(date +%s)\necho \"=== Task 'rcle-b03-fresh1000-s22-20260910' started at $(date -Iseconds) ===\" >> \"/home/wu/.agent-tasks/rcle-b03-fresh1000-s22-20260910/task.log\"\n\n# Execute command capturing output\nset +e\neval 'cd /home/wu/hmasd-worktrees/rcle-b03-fresh1000-s22-20260910 && mkdir -p temp/directions/roster_consistent_latent_exploration/exp/b03-actor100-fresh1000-s22-20260910 && HMASD_PYTHON=/home/wu/.venvs/hmasd/bin/python /usr/bin/time -f wall_s=%e,peak_rss_kib=%M,exit=%x -o temp/directions/roster_consistent_latent_exploration/exp/b03-actor100-fresh1000-s22-20260910/chain-time.txt timeout 1250 bash scripts/run_rcle_tbcfv_b03_fresh1000_s22.sh 9a11fb084a16f293c27f3bd1fe8275dc19bd1a47 /home/wu/hmasd-worktrees/rcle-b03-fresh1000-s22-20260910/temp/directions/roster_consistent_latent_exploration/exp/b03-actor100-fresh1000-s22-20260910' >> \"/home/wu/.agent-tasks/rcle-b03-fresh1000-s22-20260910/task.log\" 2>&1\nEXIT_CODE=$?\nset -e\n\nEND_TS=$(date +%s)\necho $EXIT_CODE > \"/home/wu/.agent-tasks/rcle-b03-fresh1000-s22-20260910/exit_code\"\nif [ $EXIT_CODE -eq 0 ]; then\n    echo \"finished\" > \"/home/wu/.agent-tasks/rcle-b03-fresh1000-s22-20260910/status\"\nelse\n    echo \"failed\" > \"/home/wu/.agent-tasks/rcle-b03-fresh1000-s22-20260910/status\"\nfi\necho \"=== Task 'rcle-b03-fresh1000-s22-20260910' exited with code $EXIT_CODE at $(date -Iseconds) (Duration: $((END_TS - START_TS))s) ===\" >> \"/home/wu/.agent-tasks/rcle-b03-fresh1000-s22-20260910/task.log\"\n\n# Keep session alive briefly for inspection, then exit\nsleep 1\n",
+    "start_time": "1789067545\n",
+    "status": "failed\n",
+    "task.log": "=== Task 'rcle-b03-fresh1000-s22-20260910' started at 2026-09-11T03:12:25+08:00 ===\n{\n  \"assessed_at\": \"2026-09-10T19:12:25.049409Z\",\n  \"available_physical_bytes\": 15633362944,\n  \"captured_at\": \"2026-09-10T19:12:25.049162Z\",\n  \"cgroup_headroom_bytes\": null,\n  \"cgroup_memory_current_bytes\": null,\n  \"cgroup_memory_max_bytes\": null,\n  \"effective_available_bytes\": 15633362944,\n  \"effective_floor_pass\": true,\n  \"failure_reasons\": [],\n  \"measurement_source\": \"/proc/meminfo\",\n  \"minimum_available_bytes\": 4294967296,\n  \"passed\": true,\n  \"physical_floor_pass\": true,\n  \"schema_version\": 1\n}\nCOMPLETE W1\n{\n  \"assessed_at\": \"2026-09-10T19:17:58.264040Z\",\n  \"available_physical_bytes\": 15617634304,\n  \"captured_at\": \"2026-09-10T19:17:58.263788Z\",\n  \"cgroup_headroom_bytes\": null,\n  \"cgroup_memory_current_bytes\": null,\n  \"cgroup_memory_max_bytes\": null,\n  \"effective_available_bytes\": 15617634304,\n  \"effective_floor_pass\": true,\n  \"failure_reasons\": [],\n  \"measurement_source\": \"/proc/meminfo\",\n  \"minimum_available_bytes\": 4294967296,\n  \"passed\": true,\n  \"physical_floor_pass\": true,\n  \"schema_version\": 1\n}\nTECHNICAL_STOP W100\n=== Task 'rcle-b03-fresh1000-s22-20260910' exited with code 2 at 2026-09-11T03:23:09+08:00 (Duration: 644s) ===\n"
+  },
+  "monitor_terminal": "RCLE B03 fresh1000 S22 terminal evidence\ntask: rcle-b03-fresh1000-s22-20260910\nlocal_observation_time: 2026-09-10T19:23:21.5306913Z\nstatus: failed\nexit_code: 2\npid: 3095314\ntmux_active: false\nremote_start: 2026-09-11T03:12:25+08:00\nremote_exit: 2026-09-11T03:23:09+08:00\nduration_seconds: 644\nW1: COMPLETE; memory gate passed\nW100: TECHNICAL_STOP; no scientific completion inferred\nreference: not reached\nresource_preflight: passed=true, available_physical_bytes=15633362944\n",
+  "published_artifact_hashes": {
+    "CURVES.json": "dc1aedd413053e15cd416b3a3fd8092244afce205e8d51d97443f5bde9e6ef4f",
+    "SCENARIOS.csv": "460b2ceffc8eb06b8bc0fbc127139e35f0b552e1c8ed49281cae97dd35d67542",
+    "RUN_SCORES.csv": "b73afd28af0f1563b3c9a9f2637beade656d5ecf4636f7600fa91e460badcd88",
+    "W1_RUN_SUMMARY.json": "5e800d137a74979bca064287828c6562f1551d539643001c6eedfe954915432d"
+  },
+  "prospective_reporting_repair": {
+    "source": "ce189071a9487de36c7e1347508f1dcf0ed3f432",
+    "new_scientific_invocations": 0,
+    "check": {
+      "argv": [
+        "C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "--basetemp",
+        "C:\\Projects\\HMASD-worktrees\\dm-rcle-a02-20260906\\temp\\directions\\roster_consistent_latent_exploration\\test\\exception-diagnostics-s22-20260910",
+        "tests/experiments/candidates/roster_consistent_latent_exploration_tbcfv_b03/test_exception_diagnostics.py"
+      ],
+      "exit_code": 0,
+      "stdout": ".                                                                        [100%]\n1 passed in 2.30s\n",
+      "stderr": "",
+      "wall_seconds": 3.2292261000111466,
+      "cumulative_directory_test_wall_seconds": 44.116429500012885,
+      "own_scratch_absent": true
+    },
+    "root_cause_repaired": false
+  },
+  "preservation": {
+    "archive": "/home/wu/hmasd-recovery/rcle-b03-fresh1000-s22-20260910/remote.tar.gz",
+    "bytes": 11549691,
+    "sha256": "023d847fe1a2665ebf9788b13ead873a6d106ad2b144156860fa4a44eef9a885",
+    "source_recovery_ref": "refs/recovery/rcle-b03-fresh1000-s22-20260910",
+    "source": "9a11fb084a16f293c27f3bd1fe8275dc19bd1a47",
+    "archive_creation_and_original_compare_seconds": 1.0503714559599757,
+    "prearchive_status": {
+      "task": "rcle-b03-fresh1000-s22-20260910",
+      "status": "failed",
+      "exit_code": 2,
+      "pid": 3095314,
+      "uptime_seconds": 1994,
+      "tmux_active": false
+    },
+    "pid_absent": 3095314,
+    "original_tar_comparison": "passed",
+    "git_pointer_excluded_only": true,
+    "local_archive": "temp/directions/roster_consistent_latent_exploration/closeout/b03-fresh1000-s22-20260910/remote.tar.gz",
+    "transfer_hash_matches": true,
+    "wall_seconds": 5.393398699990939,
+    "commands": [
+      {
+        "kind": "archive_and_compare",
+        "exit_code": 0,
+        "wall_seconds": 1.7010168000124395,
+        "stdout": "{\n  \"archive\": \"/home/wu/hmasd-recovery/rcle-b03-fresh1000-s22-20260910/remote.tar.gz\",\n  \"bytes\": 11549691,\n  \"sha256\": \"023d847fe1a2665ebf9788b13ead873a6d106ad2b144156860fa4a44eef9a885\",\n  \"source_recovery_ref\": \"refs/recovery/rcle-b03-fresh1000-s22-20260910\",\n  \"source\": \"9a11fb084a16f293c27f3bd1fe8275dc19bd1a47\",\n  \"archive_creation_and_original_compare_seconds\": 1.0503714559599757,\n  \"prearchive_status\": {\n    \"task\": \"rcle-b03-fresh1000-s22-20260910\",\n    \"status\": \"failed\",\n    \"exit_code\": 2,\n    \"pid\": 3095314,\n    \"uptime_seconds\": 1994,\n    \"tmux_active\": false\n  },\n  \"pid_absent\": 3095314,\n  \"original_tar_comparison\": \"passed\",\n  \"git_pointer_excluded_only\": true\n}\n",
+        "stderr": ""
+      },
+      {
+        "kind": "transfer_archive",
+        "exit_code": 0,
+        "wall_seconds": 3.6840469000017038,
+        "stdout": "",
+        "stderr": ""
+      }
+    ],
+    "regular_members": 2355,
+    "members_sha256": "02d6c1c5455ec3eba927e9f3b9db90c4a3968fa23aa4e48b7a64d02a7b533ab5",
+    "accepted_output_and_supervisor_members_matched": 19,
+    "both_source_bundles_matched": true,
+    "member_verification_seconds": 0.43075230000249576
+  },
+  "published_artifact_hash_basis": "SHA256 of UTF-8/LF Git blob bytes for these derived tables; raw remote output/supervisor hashes are unchanged byte digests under hashes."
+}
