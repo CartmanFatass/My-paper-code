@@ -77,5 +77,15 @@
     "verdict_text": "DM recommendation: (a) Open only the specified native-service temporal-credit B comparison. No scientific option is auto_applied before the formed decision.",
     "source": "docs/research/candidates/variable_n_fleet_churn/VNFC_NATIVE_SERVICE_CREDIT_REENTRY_INTAKE_20260910.md"
   },
-  "starred": true
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-10T20:34:06+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "AGENTS.md",
+      "record": "docs/research/candidates/variable_n_fleet_churn/VNFC_NATIVE_SERVICE_CREDIT_REENTRY_INTAKE_20260910.md",
+      "state": "blocked",
+      "summary": "按 AGENTS 第3节阻断规则记录：Pro 点击一次后接收状态未明，原请求等待 Transport 核对；无裁决、无本地代选、无新增科学预算或暴露，auto_applied 仍为空。此项只记录流程状态，不代表 owner 选择科学选项。"
+    }
+  ]
 }
