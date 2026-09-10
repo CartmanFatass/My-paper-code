@@ -1,5 +1,7 @@
 # 在独立 session 一句话启动
 
+完整流程、数据字段、自动统计范围和异常处理见 [操作与统计文档](OPERATING_GUIDE.md)。
+
 先选目录，在 Codex 中打开一个全新 session：
 
 | 用途 | 目录 |
@@ -23,7 +25,7 @@ reviewer 使用 Astra/high；委派场景另用 Terra/high implementer。
 不要让已读题库、隐藏答案或其他配置结果的 session 参测。
 
 入口指令会执行 `python -B start.py`，绑定 `CODEX_THREAD_ID` 中的当前真实 CM，
-建立本轮代码仓库、当地 bare origin、材料和私有主持记录。CM 随后自动读取本轮
+建立本轮代码仓库、本地 bare origin、材料和私有主持记录。CM 随后自动读取本轮
 AGENTS，按 located → checked → reviewed → accepted 的四个边界各完成两题。
 implementer/reviewer 必须是真实独立子代理；子代理首次调用不继承 CM 全部历史。
 

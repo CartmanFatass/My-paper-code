@@ -3,7 +3,8 @@
 版本 `cm-pair-v1`：可运行实现和离线校准已完成，尚无候选模型比较结果。
 主线是 spec 颗粒度、交接详细度和常见范例复用；使用同一顶层 CM 连续完成两题。
 
-先看 [一句话启动](QUICKSTART.md)。两个并列场景：
+完整执行、自动化边界与数据统计见 [操作与统计文档](OPERATING_GUIDE.md)，
+入口速查见 [一句话启动](QUICKSTART.md)。两个并列场景：
 
 - [直接实现](../../cm_direct_review/README.md)：当前 HMASD 的 Astra/medium CM + Astra/high 独立 reviewer 基线。
 - [委派与复用](../../cm_delegation_granularity/README.md)：固定 CM/reviewer，实际委派给 Terra/high，比较 L0–L3 和 fresh/reuse。
@@ -14,6 +15,7 @@ seed 与题库字节冻结。任务依据当前 HMASD 代码边界重新构造�
 
 | 材料 | 用途 |
 | --- | --- |
+| [OPERATING_GUIDE.md](OPERATING_GUIDE.md) | 两项测试全过程、逐项自动化、报告判读、跨轮统计与异常处理 |
 | [QUICKSTART.md](QUICKSTART.md) | 独立 session 入口、默认值、自动报告和维护命令 |
 | [SPEC_DESIGN.md](SPEC_DESIGN.md) | 比较问题、分组与复用成本 |
 | [DESIGN.md](DESIGN.md) | 当前两题协议、角色、质量和冻结边界 |
