@@ -81,3 +81,32 @@ this new card/plan/command boundary before the first submission. Both arms remai
 preselected; no additional scientific or implementation dependency is outstanding.
 Actual source publication, launch acceptance, Monitor dispatch/adoption and terminal
 acceptance will be recorded as separate facts in the same E0/intake/summary.
+
+## 5. Published launch and adopted observation boundary
+
+Card/selection/commands were pushed at ea73b1c3dabafe6482db03df8a9e51c1ad672260; actual
+scientific bytes remain c6be208cd. The original RETAIN command was accepted exactly once
+at 2026-09-10T23:47:46.571111+00:00, with tmux-start returned 23:47:46.884434+00:00.
+The [E0 §5](FOLR_PUBLIC_LIFECYCLE_HALF_B02_RESULT_EVIDENCE_20260910.md#5-published-inputs-retain-acceptance-and-actual-monitor-adoption)
+and summary preserve the complete source/command/receipt facts. Fresh admission and
+the exact runner share the outer 1800s chain; no actual scientific output is intaken yet.
+
+Direct Monitor dispatch succeeded and Root confirmed actual adoption of the same
+handle. The existing Monitor will retain actual enclosing query seconds under this
+pair's inclusive 300s support limit; the current Monitor bill is pending. Known DM
+work through submission/dispatch is 9.9111575s before later handover/publication costs.
+The updated enclosing-command accounting and corrected UTF-8 metadata read do not
+change science, policy/RNG semantics or allocation. No repeated suite, numerical pilot
+or extra arm was run.
+
+Return this clean boundary to Root. On the routed original RETAIN terminal fact,
+collect and technically accept it, reconcile actual support and any concrete stop,
+then execute only the already selected HALF_EVENT under fresh joined admission.
+This DM retains complete-pair intake and verified scoped closeout; Monitor retains
+routine observation. One accepted invocation and one preselected unsubmitted arm
+remain; no prediction/branch is scored and no third pair or successor is allocated.
+
+At the adopted-boundary readback, measured DM support is **10.7798254s**. Primary owner
+reviews returned no unapplied items. One handover bookkeeping command has no returned
+elapsed receipt; it remains unmeasured, not zero. Final publication and actual Monitor
+work are also pending reconciliation, so no complete-support total is claimed here.

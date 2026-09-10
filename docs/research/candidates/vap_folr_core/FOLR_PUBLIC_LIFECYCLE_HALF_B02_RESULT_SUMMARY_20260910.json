@@ -1,6 +1,6 @@
 {
   "object": "FOLR-PUBLIC-LIFECYCLE-HALF-B02",
-  "state": "selected_card_preparation_no_invocation",
+  "state": "RETAIN_accepted_Monitor_adoption_confirmed_HALF_EVENT_preselected_unsubmitted",
   "source_sha": "c6be208cd514b5d12fb13c7637e2d6376de11eb6",
   "authority_commit": "674f246a202eef1467b084fdd25e2eeb531c0b1e",
   "starting_checkout_commit": "85a443f413e07773a5d89904dd21476c5b4b8550",
@@ -13,7 +13,9 @@
   "evaluation_seed": 107808,
   "primary": null,
   "arms_results": {},
-  "accepted_handles": [],
+  "accepted_handles": [
+    "folr-public-lifecycle-half-b02-retain-20260910"
+  ],
   "budget": {
     "accepted_invocations": 2,
     "per_complete_arm_seconds": 1800,
@@ -21,7 +23,8 @@
     "all_additional_runtime_support_including_Monitor_seconds": 300,
     "complete_seconds": 3900,
     "cumulative_directory_tests_already_used_seconds": 32.4911638,
-    "directory_tests_cap_seconds": 300
+    "directory_tests_cap_seconds": 300,
+    "accepted_invocations_so_far": 1
   },
   "launch_plans": [
     {
@@ -33,7 +36,7 @@
       "out": "temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_seed7808_retain",
       "memory_receipt": "temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_seed7808_retain_memory.json",
       "command": "/usr/bin/time -v -o /home/wu/.agent-tasks/folr-public-lifecycle-half-b02-retain-20260910/whole.time /usr/bin/timeout --signal=TERM --kill-after=5s 1800s bash -lc 'cd /home/wu/hmasd-worktrees/folr-public-lifecycle-half-b02-c6be208cd && /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_seed7808_retain_memory.json && /home/wu/.venvs/hmasd/bin/python scripts/run_folr_public_lifecycle_b01.py --arm RETAIN --seed 7808 --evaluation-seed 107808 --launch-sha c6be208cd514b5d12fb13c7637e2d6376de11eb6 --out temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_seed7808_retain'",
-      "state": "prepared_not_submitted"
+      "state": "accepted"
     },
     {
       "arm": "HALF_EVENT",
@@ -79,28 +82,93 @@
         "runner_arguments_match": true
       }
     ],
-    "first_argument_readback_failure": "first --out selected memory path in joined command; corrected check isolates last runner command; source/command never changed and zero scientific invocations"
+    "first_argument_readback_failure": "first --out selected memory path in joined command; corrected check isolates last runner command; source/command never changed and zero scientific invocations",
+    "owner_metadata_decode": "default Windows decoder failed on Chinese owner item before bookkeeping update; explicit UTF-8 read and accept value passed. Published scientific card/commands were unchanged."
   },
   "support": {
     "scope": "all additional invoked runtime work including Monitor, once; excludes idle waiting and double-counted native chains",
     "initial_preparation_reads_seconds": 1.5200933,
     "binding_and_plan_seconds": 0.05237610000767745,
-    "dm_seconds": 3.4691496999924607,
-    "monitor_seconds": 0.0,
-    "total_seconds": 3.4691496999924607,
+    "dm_seconds": 10.779825400000002,
+    "monitor_seconds": null,
+    "total_seconds": null,
     "cap_seconds": 300,
     "monitor_actual_receipts": "to accompany adoption/terminal for each named handle; no standing accounting service",
     "source_stage_first_failed_readback_seconds": 0.7768738,
     "source_stage_corrected_check_seconds": 0.484080800000811,
     "owner_cli_usage_read_seconds": 0.2447053,
-    "input_binding_and_owner_item_command_seconds": 0.3910203999839723
+    "input_binding_and_owner_item_command_seconds": 0.3910203999839723,
+    "command_wall_records": [
+      {
+        "activity": "initial assignment/Portfolio/card/spec/source reads",
+        "seconds": 1.5200933
+      },
+      {
+        "activity": "committed input import and static binding/plan command",
+        "seconds": 0.3164187
+      },
+      {
+        "activity": "owner CLI usage read",
+        "seconds": 0.2447053
+      },
+      {
+        "activity": "source worktree creation and failed admission-out readback",
+        "seconds": 0.7768738
+      },
+      {
+        "activity": "corrected isolated-runner readback command",
+        "seconds": 0.6671776
+      },
+      {
+        "activity": "fixed-input blob check, owner packet and owner CLI insertion",
+        "seconds": 0.6038299
+      },
+      {
+        "activity": "metadata tail/read after patch-context mismatch",
+        "seconds": 0.2505273
+      },
+      {
+        "activity": "selection publication including default-decoder read failure, explicit-path commit and push",
+        "seconds": 4.824346
+      },
+      {
+        "activity": "UTF8 correction, source/current command check and RETAIN submission",
+        "seconds": 0.5251856
+      },
+      {
+        "activity": "direct Monitor dispatch API wall",
+        "seconds": 0.182
+      },
+      {
+        "activity": "handover record and current branch readback",
+        "seconds": 0.322604
+      },
+      {
+        "activity": "bound card and publication readback",
+        "seconds": 0.2157146
+      },
+      {
+        "activity": "primary owner review read at adopted boundary",
+        "seconds": 0.3303493
+      }
+    ],
+    "accounting_method": "Enclosing invoked command/tool wall including startup and nested remote work once; narrower helper durations not separately summed. Publication commands included conservatively.",
+    "known_subtotal_seconds": 10.779825400000002,
+    "subtotal_boundary": "through adopted-boundary readback; handover bookkeeping and final publication/Monitor work remain to reconcile",
+    "unmeasured_pending_work": [
+      "one handover bookkeeping command has no returned elapsed receipt; not imputed zero",
+      "this final record-check/publication command and actual Monitor work will be added at the next natural boundary"
+    ]
   },
   "monitor": {
     "config_source": "C:/Projects/HMASD/.codex/hmasd-monitor.toml",
     "thread_id": "01a087e5-2044-7301-abb6-7a1709a98197",
     "root_thread": "01a07249-b095-7821-8ce2-e9c32ba85267",
     "collection_owner": "/root/dm_folr_restart_recovery",
-    "new_registration": "none; no handle accepted"
+    "new_registration": "delivered",
+    "adoption": "confirmed_by_Root",
+    "adoption_observation_timestamp": "not separately supplied;23:47:46.884434Z is supervisor acceptance",
+    "actual_enclosing_query_seconds": "Monitor will track; cumulative receipt pending"
   },
   "full_engineering_elapsed": "not measured as command runtime; not imputed zero",
   "owner_reviews": [],
@@ -144,5 +212,19 @@
     "git_blob_ids_match": true,
     "other_paths_reconciled": false
   },
-  "owner_item_cli_result": "docs/research/portfolio/owner/inbox/2026-09-10/20260910-folr-005.json"
+  "owner_item_cli_result": "docs/research/portfolio/owner/inbox/2026-09-10/20260910-folr-005.json",
+  "selection_source_command_commit": "ea73b1c3dabafe6482db03df8a9e51c1ad672260",
+  "retain_launch": {
+    "submission_started_utc": "2026-09-10T23:47:46.571111+00:00",
+    "returned_utc": "2026-09-10T23:47:46.884434+00:00",
+    "command_record_commit": "ea73b1c3dabafe6482db03df8a9e51c1ad672260",
+    "source_sha": "c6be208cd514b5d12fb13c7637e2d6376de11eb6",
+    "command": "/usr/bin/time -v -o /home/wu/.agent-tasks/folr-public-lifecycle-half-b02-retain-20260910/whole.time /usr/bin/timeout --signal=TERM --kill-after=5s 1800s bash -lc 'cd /home/wu/hmasd-worktrees/folr-public-lifecycle-half-b02-c6be208cd && /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_seed7808_retain_memory.json && /home/wu/.venvs/hmasd/bin/python scripts/run_folr_public_lifecycle_b01.py --arm RETAIN --seed 7808 --evaluation-seed 107808 --launch-sha c6be208cd514b5d12fb13c7637e2d6376de11eb6 --out temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_seed7808_retain'",
+    "remote_submission": "git -C /home/wu/hmasd-worktrees/folr-public-lifecycle-half-b02-c6be208cd diff --exit-code c6be208cd514b5d12fb13c7637e2d6376de11eb6 -- experiments/candidates/vap_folr_core/public_lifecycle_b01 scripts/run_folr_public_lifecycle_b01.py scripts/hmasd_resource_preflight.py && test ! -e /home/wu/.agent-tasks/folr-public-lifecycle-half-b02-retain-20260910 && test ! -e /home/wu/hmasd-worktrees/folr-public-lifecycle-half-b02-c6be208cd/temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_seed7808_retain && /usr/local/bin/agent-task run folr-public-lifecycle-half-b02-retain-20260910 '/usr/bin/time -v -o /home/wu/.agent-tasks/folr-public-lifecycle-half-b02-retain-20260910/whole.time /usr/bin/timeout --signal=TERM --kill-after=5s 1800s bash -lc '\"'\"'cd /home/wu/hmasd-worktrees/folr-public-lifecycle-half-b02-c6be208cd && /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_seed7808_retain_memory.json && /home/wu/.venvs/hmasd/bin/python scripts/run_folr_public_lifecycle_b01.py --arm RETAIN --seed 7808 --evaluation-seed 107808 --launch-sha c6be208cd514b5d12fb13c7637e2d6376de11eb6 --out temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_seed7808_retain'\"'\"''",
+    "handle": "folr-public-lifecycle-half-b02-retain-20260910",
+    "returncode": 0,
+    "stdout": "Task 'folr-public-lifecycle-half-b02-retain-20260910' started in tmux session 'agent_folr-public-lifecycle-half-b02-retain-20260910'. Output: /home/wu/.agent-tasks/folr-public-lifecycle-half-b02-retain-20260910/task.log\n",
+    "stderr": "",
+    "local_inner_seconds": 0.3470421000092756
+  }
 }
