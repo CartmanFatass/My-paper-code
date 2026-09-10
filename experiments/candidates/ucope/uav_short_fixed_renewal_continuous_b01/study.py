@@ -14,6 +14,7 @@ CARD = "docs/research/candidates/ucope/UCOPE_UAV_SHORT_FIXED_RENEWAL_CONTINUOUS_
 CARD_8602 = "docs/research/candidates/ucope/UCOPE_UAV_SHORT_FIXED_RENEWAL_CONTINUOUS_B01_8602_SCIENCE_CARD_20260909.md"
 LEARNED_CARD = "docs/research/candidates/ucope/UCOPE_UAV_SHORT_LEARNED_RENEWAL_CONTINUOUS_B01_SCIENCE_CARD_20260910.md"
 LEARNED_CARD_8702 = "docs/research/candidates/ucope/UCOPE_UAV_SHORT_LEARNED_RENEWAL_CONTINUOUS_B01_8702_SCIENCE_CARD_20260910.md"
+LEARNED_CARD_8703 = "docs/research/candidates/ucope/UCOPE_UAV_SHORT_LEARNED_RENEWAL_CONTINUOUS_B01_8703_SCIENCE_CARD_20260910.md"
 FAILURE_CARD = "docs/research/candidates/ucope/UCOPE_UAV_8702_FAILURE_LOCATION_A01_SCIENCE_CARD_20260910.md"
 OBJECT = "UCOPE-UAV-SHORT-FIXED-RENEWAL-CONTINUOUS-B01"
 LEARNED_OBJECT = "UCOPE-UAV-SHORT-LEARNED-RENEWAL-CONTINUOUS-B01"
@@ -109,7 +110,8 @@ def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=wri
     sha = subprocess.check_output(["git", "rev-parse", "HEAD"],
                                   cwd=Path(__file__).resolve().parents[4], text=True).strip()
     summary = dict(object=LEARNED_OBJECT if learned else OBJECT,
-        card=(LEARNED_CARD_8702 if learned and config.seed == 8702 and not config.fixture else
+        card=(LEARNED_CARD_8703 if learned and config.seed == 8703 and not config.fixture else
+              LEARNED_CARD_8702 if learned and config.seed == 8702 and not config.fixture else
               LEARNED_CARD if learned else CARD_8602 if config.seed == 8602 and not config.fixture else CARD),
         card_section=(6 if config.fixture else 5),
         pair=selector, mode="ENGINEERING_FIXTURE" if config.fixture else "UAV_B_EXPLORE",

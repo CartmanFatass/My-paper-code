@@ -21,7 +21,7 @@ def main():
     args = parser.parse_args()
     learned = args.pair == LEARNED_SELECTOR
     expected = (9002,) if learned and args.engineering_fixture else \
-               (8701, 8702) if learned else (9001,) if args.engineering_fixture else (8601, 8602)
+               (8701, 8702, 8703) if learned else (9001,) if args.engineering_fixture else (8601, 8602)
     if args.seed not in expected:
         parser.error("seed does not match the selected study and fixture mode")
     import torch

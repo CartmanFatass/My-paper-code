@@ -323,7 +323,7 @@ def test_learned_cli_seed_and_card_without_scientific_draws(tmp_path, monkeypatc
         raise RuntimeError("mock boundary before model/RNG")
 
     monkeypatch.setattr(policy, "templates", no_templates)
-    for seed, fixture in ((8701, False), (8702, False), (9002, True)):
+    for seed, fixture in ((8701, False), (8702, False), (8703, False), (9002, True)):
         out = tmp_path / str(seed)
         argv = ["runner", "--pair", study.LEARNED_SELECTOR, "--seed", str(seed),
                 "--out", str(out)]
@@ -336,7 +336,8 @@ def test_learned_cli_seed_and_card_without_scientific_draws(tmp_path, monkeypatc
         assert result["pair"] == study.LEARNED_SELECTOR
         assert result["configuration"]["fixture"] == fixture
         assert result["configuration"]["pair_cap"] == 5100
-        assert result["card"] == (study.LEARNED_CARD_8702 if seed == 8702 else study.LEARNED_CARD)
+        assert result["card"] == (study.LEARNED_CARD_8703 if seed == 8703 else
+                                  study.LEARNED_CARD_8702 if seed == 8702 else study.LEARNED_CARD)
         assert result["card_section"] == (6 if fixture else 5)
         assert result["counts"]["scientific_uav_calls"] == 0
         b = seed * 100000
@@ -348,7 +349,7 @@ def test_learned_cli_seed_and_card_without_scientific_draws(tmp_path, monkeypatc
             T_eval_duration_start=b+80000, F_eval_velocity_start=b+30000,
             F_eval_duration_start=b+40000, G_eval_velocity_start=b+50000,
             G_eval_duration_start=b+60000, eval_checkpoint_stride=1000)
-    for seed, fixture in ((8701, True), (8702, True), (8703, False), (9002, False), (8601, False)):
+    for seed, fixture in ((8701, True), (8702, True), (8703, True), (8704, False), (9002, False), (8601, False)):
         argv = ["runner", "--pair", study.LEARNED_SELECTOR, "--seed", str(seed),
                 "--out", str(tmp_path)]
         if fixture:
@@ -356,7 +357,7 @@ def test_learned_cli_seed_and_card_without_scientific_draws(tmp_path, monkeypatc
         monkeypatch.setattr(sys, "argv", argv)
         with pytest.raises(SystemExit):
             runner.main()
-    assert seen == [8701, 8702, 9002]
+    assert seen == [8701, 8702, 8703, 9002]
     assert study.Config.learned().seed == 8701
     assert study.Config.learned(fixture=True, seed=8702).seed == 9002
 
