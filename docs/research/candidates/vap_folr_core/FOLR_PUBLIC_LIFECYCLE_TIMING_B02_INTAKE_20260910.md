@@ -123,3 +123,10 @@ receipts belong in [E0](FOLR_PUBLIC_LIFECYCLE_TIMING_B02_RESULT_EVIDENCE_2026091
 Root resumes this same DM for terminal collection and subsequent allocated arms. The
 full scientific intake, all-outcome analysis, Chinese brief and scoped closeout remain
 due after the finite sequence; none are claimed by this prospective record.
+
+Source `6a8eacdad072c37d477aca95a9c871aba68cee78` is now published and Root-integrated
+as main `8eb423ff2`. RETAIN's exact source/run handle is accepted and directly registered
+with Monitor; dispatch succeeded, adoption remains pending in E0. Source readback adds
+0.6473996s, current support **19.9560872/300s**. EVENT/RANDOM remain unsubmitted. No local
+scientific intake is possible from acceptance alone; this handover changes no prediction,
+law, branch, budget or declared source. Full continuation stays with the same DM.
