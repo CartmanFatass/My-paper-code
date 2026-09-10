@@ -132,3 +132,40 @@ at source9a11fb084; receipt recorded 2026-09-10T19:15:35.602356+00:00.
 Root also reported main integration through81db62478. This supersedes the preceding
 launch-time pending adoption state. DM retains terminal collection/intake ownership
 and has not polled the accepted process; no scientific completion is claimed.
+
+## Terminal technical repair L0 — prospective diagnostics only
+
+Root's terminal assignment requests exact failure, exposure, preservation and retry
+authority. The collected W100 stop is a caught TypeError with no retained traceback;
+the current exception handler stores only type/message. Independent bounded review
+identifies that diagnostic omission, not the underlying multiplication's cause.
+
+- Deliverable: preserve caught ordinary-exception tracebacks on existing stderr for
+  a future invocation; this cannot recover the lost stack or claim to fix this failure.
+- Owned paths: this same checkout, B03 `study.py` exception reporting and mirrored
+  `test_exception_diagnostics.py`; frozen source9a11fb084 and its raw outputs remain intact.
+- Preserve: learner/native/RNG/reward/normalization/stop/count behavior, successful output
+  and exception type/message. No invocation, checkpoint resume or model/state reconstruction.
+- Acceptance: one supplied reference-path exception, with RNG/native evaluation faked,
+  verifies traceback file/function/message, existing TECHNICAL_STOP and zero counts.
+  Evidence-spec §11.8.7 and scope-spec §§3,7 apply. Reuse prior successful-path coverage.
+- Budget/stop: ≤30s focused check inside the existing300s directory total and150s
+  postlaunch support; no scientific exposure. Existing test spend40.8872034s is retained.
+
+Options: retain the diagnostic omission; emit the existing caught exception traceback;
+add a new diagnostic framework or run an unallocated reproduction. DM selects the small
+stderr repair under standing technical delegation. It adds no scope-spec §4 machinery,
+changes no frozen scientific meaning and grants no retry budget. Actual checks and final
+acceptance will be appended after the patch, separately from the failed source's evidence.
+
+The prospective patch adds only `import traceback` and `traceback.print_exc()` in the
+existing caught-exception handler. A supplied pure-Python TypeError with native/RNG
+paths replaced by fakes passed **1 test in2.30s**, complete subprocess
+**3.2292261000111466s**; cumulative directory tests **44.116429500012885/300s**.
+The assertion covers originating test file/function/message, unchanged TECHNICAL_STOP
+and zero counts. It is not a reproduction of the actual learner failure. The creating
+process removed its exact `exception-diagnostics-s22-20260910` scratch; absence is
+recorded in `fresh1000-s22-preparation/failure-reporting-test.json`.
+DM self-check accepts this mechanical reporting change. Actual learner/native/loss/RNG
+behavior is untouched and prior coverage is reused. No scientific execution used the
+patch; failed-run source9a11fb084 remains the frozen evidence binding.
