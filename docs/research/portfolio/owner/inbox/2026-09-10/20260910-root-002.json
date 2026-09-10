@@ -24,7 +24,7 @@
     }
   ],
   "recommended": "a",
-  "auto_applied": null,
+  "auto_applied": "a",
   "dm_reason": "现有五条有限问题有直接结果和反证；完整因果诊断不应替代小规模学习测量。",
   "evidence": [
     "docs/research/portfolio/pro_packets/20260910_next_five_chains/SCIENCE_BRIEF.md"
@@ -81,6 +81,14 @@
       "state": "planned",
       "summary": "已读完整immutable response 08e989073839fe5f0f91c6a8ad90a399bee37b6c并通过conformance；Pro选择A，四条有限B加ACVC普通B设计，ACVC最低争用。五个L0已备；Root尚未dispatch，本项auto_applied保持空。权源AGENTS4.8 OWNER_DIRECT 2026-09-10。",
       "correction": "UCOPE前瞻统一2048 training episodes/4096 Adam每fit，nested时间不充当完整预算；VSP03累计测试不重置；ACVC E01例外不扩展。"
+    },
+    {
+      "at": "2026-09-10T16:32:08+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260910_next_five_chains/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/decisions/2026-09-10-next-five-chains.md",
+      "state": "applied",
+      "summary": "Root集成PRO_FINAL决定并同步五个既有方向branch；FOLR、UCOPE、VSP03、RCLE完整DM批次及ACVC design-only批次均已实际followup，未声称任何实验已launch。"
     }
   ]
 }

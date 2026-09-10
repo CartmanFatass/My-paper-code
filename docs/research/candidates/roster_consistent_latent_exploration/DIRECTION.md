@@ -465,3 +465,14 @@ a causal 200-versus1,000 estimate or an extrapolated promised gain. Another unch
 runner-up. The bounded recommendation names 136,192 episodes / 8,716,288 ticks / 2,000 calls and
 rough 855.1s runner projection within a candidate 1500s complete cap. No successor card,
 invocation, priority/lifecycle disposition or Pro request is made by this recommendation.
+
+## Fixed 1,000-update learning comparison selected — 2026-09-10
+
+Portfolio PRO_FINAL A at `08e989073839fe5f0f91c6a8ad90a399bee37b6c`, applied by Root,
+selects the preceding finite learning question. The new
+`RCLE_B03_FRESH1000_S21_SCIENCE_CARD_20260910.md` fixes a fresh matched seed-21 pair,
+1,000 updates per arm and the same four native panels. This is the next discriminator
+for practical learning and whole-law contrast at that endpoint. The two earlier
+200-update comparisons, sub-MEI effects, recovery/reference limitations and unexplained
+failed prefix retain their original meaning. No new empirical result exists at freeze;
+this selection grants no successor, causal budget effect or stable-superiority claim.

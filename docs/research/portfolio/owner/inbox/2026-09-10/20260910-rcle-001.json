@@ -1,0 +1,75 @@
+{
+  "id": "20260910-rcle-001",
+  "created": "2026-09-10T09:47:34-07:00",
+  "direction": "roster_consistent_latent_exploration",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "RCLE：fresh1000 配对种子21科学卡",
+  "context": "Claim to test: at a fixed 1,000-update endpoint, fresh W100 learning improves native unmet demand from initialization and relative to W1 under the same legal information and exposure. Binding MARL structure: multi-agent credit assignment. Portfolio A and Root have allocated one complete pair; this card fixes its fresh seed and prospective readings.",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "落实已分配的种子21新训练对、固定1000次终点和四套面板；全部工作同计1500秒。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "下个安全边界停止尚未发生的工作，保留已发生的证据；不擅自替换或重跑。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "在下个安全边界应用具体修订，保护旧结果与已发生暴露。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "落实已选Portfolio问题；旧小幅优势和恢复缺口支持一次有限学习检验，但不保证实用收益。",
+  "evidence": [
+    "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B03_FRESH1000_S21_SCIENCE_CARD_20260910.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-10.md#L10",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "落实已选定的 fresh1000 比较：用新的配对种子21、固定1000次更新，观察实际学习及W100/W1差异。",
+    "changes_if_approved": [
+      {
+        "target": "RCLE B03 fresh1000 科学卡",
+        "from": "Portfolio已分配完整比较，尚未固定新种子和预测",
+        "to": "新种子21；两臂各1000次更新；保留四套面板和全部训练曲线；完成一次后停止"
+      }
+    ],
+    "if_refused": "在下一个安全边界按所有者的异步修订或拒绝执行，保留已发生的工作；不会擅自换种子、重跑或改变旧200次结果。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B03_FRESH1000_S21_SCIENCE_CARD_20260910.md",
+        "quote": "Select fresh master 21 and the prospectively fixed 1,000-update endpoint for the allocated pair.",
+        "why": "Portfolio和Root已分配整个链；此处只落实一个新的独立训练对，不能视为旧种子的继续训练。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/roster_consistent_latent_exploration/DIRECTION.md",
+        "quote": "The strongest competence limits remain sub-MEI size,\nevery learned recovery score 40, and reference primary U 0.2757894 versus W100 0.6898132\n(gap 0.4140238).",
+        "why": "旧结果优势小、恢复仍差；更长训练可能仍无实用学习，暂缓是可信的对照意见。"
+      }
+    ],
+    "uncertainty": [
+      "只有一个1000次训练对；旧两组200次结果不能合并成三个同终点种子。",
+      "比较完整归一化学习规律，不能把效果归因于一个网络部件，也不证明预算从200增至1000的因果收益。",
+      "历史signal11原因未明；此次即使成功也不证明已经治愈，失败不自动成为科学负面。"
+    ],
+    "cost": {
+      "compute": "136192回合、8716288原始tick、2000次反向更新；600/600/30秒分项，全部支持工作同计1500秒；855.10秒只是粗略运行预测。",
+      "owner_time": "可异步查看或修订；无需逐步批准。",
+      "reversibility": "costly",
+      "waits_on_this": "nothing；既有分配持续有效"
+    },
+    "verdict_text": "Select fresh master 21 and the prospectively fixed 1,000-update endpoint for the allocated pair.",
+    "source": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B03_FRESH1000_S21_SCIENCE_CARD_20260910.md"
+  },
+  "starred": false
+}

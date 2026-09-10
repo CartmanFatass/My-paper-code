@@ -1,0 +1,358 @@
+{
+  "object": "VSP03_B07",
+  "independent_training_units": 1,
+  "historical_fit_pooling": false,
+  "method": "Raw archive readback and float64 native decomposition; summarize_runs.py on one score per fit/endpoint/contrast, no pairing across fits; Q uses actual within-fit paired worlds.",
+  "float_recomputation_absolute_tolerance": 1e-09,
+  "artifact_sha256": "0cd6a91504065af646cf1e7d036aa31ff64e3b5a168f179120e7c4b4db677741",
+  "recomputed_comparisons": {
+    "128": {
+      "G_greedy-R0": {
+        "mean": 0.013173828124999998,
+        "conditional_world_sd": 0.09105488584990667,
+        "conditional_world_se": 0.0028454651828095836,
+        "worlds": 1024
+      },
+      "G_greedy-R": {
+        "mean": 0.0146826171875,
+        "conditional_world_sd": 0.0974517543645329,
+        "conditional_world_se": 0.0030453673238916533,
+        "worlds": 1024
+      },
+      "G_stochastic-R0": {
+        "mean": -0.04842773437499999,
+        "conditional_world_sd": 0.31479293672673747,
+        "conditional_world_se": 0.009837279272710546,
+        "worlds": 1024
+      },
+      "G_stochastic-R": {
+        "mean": -0.046918945312499995,
+        "conditional_world_sd": 0.31470385817527197,
+        "conditional_world_se": 0.009834495567977249,
+        "worlds": 1024
+      },
+      "G_stochastic-G_greedy": {
+        "mean": -0.061601562500000005,
+        "conditional_world_sd": 0.32163313320135845,
+        "conditional_world_se": 0.010051035412542451,
+        "worlds": 1024
+      }
+    },
+    "512": {
+      "G_greedy-R0": {
+        "mean": 0.011567382812500002,
+        "conditional_world_sd": 0.09613782948786226,
+        "conditional_world_se": 0.0030043071714956956,
+        "worlds": 1024
+      },
+      "G_greedy-R": {
+        "mean": 0.013076171875000002,
+        "conditional_world_sd": 0.10228479809054714,
+        "conditional_world_se": 0.003196399940329598,
+        "worlds": 1024
+      },
+      "G_stochastic-R0": {
+        "mean": 0.011767578125,
+        "conditional_world_sd": 0.14249007677062117,
+        "conditional_world_se": 0.004452814899081912,
+        "worlds": 1024
+      },
+      "G_stochastic-R": {
+        "mean": 0.013276367187500002,
+        "conditional_world_sd": 0.14667488464964026,
+        "conditional_world_se": 0.004583590145301258,
+        "worlds": 1024
+      },
+      "G_stochastic-G_greedy": {
+        "mean": 0.00020019531249999985,
+        "conditional_world_sd": 0.11991111060975396,
+        "conditional_world_se": 0.003747222206554811,
+        "worlds": 1024
+      }
+    }
+  },
+  "paired_Q": {
+    "mean": -0.0016064453124999994,
+    "conditional_world_sd": 0.05288252531171355,
+    "conditional_world_se": 0.0016525789159910485,
+    "worlds": 1024
+  },
+  "native_components": {
+    "128:G_greedy-R0": {
+      "delta_success_per_team": 0.0224609375,
+      "delta_attempt_per_team": 0.10546875,
+      "delta_waiting_ticks_per_team": -1.83203125,
+      "success_contribution": 0.01123046875,
+      "attempt_contribution": -0.00263671875,
+      "waiting_contribution": 0.004580078125,
+      "net": 0.013173828124999953
+    },
+    "128:G_greedy-R": {
+      "delta_success_per_team": 0.025390625,
+      "delta_attempt_per_team": 0.10546875,
+      "delta_waiting_ticks_per_team": -1.849609375,
+      "success_contribution": 0.0126953125,
+      "attempt_contribution": -0.00263671875,
+      "waiting_contribution": 0.0046240234375,
+      "net": 0.014682617187499969
+    },
+    "128:G_stochastic-R0": {
+      "delta_success_per_team": -0.1416015625,
+      "delta_attempt_per_team": 0.1669921875,
+      "delta_waiting_ticks_per_team": -10.619140625,
+      "success_contribution": -0.07080078125,
+      "attempt_contribution": -0.0041748046875,
+      "waiting_contribution": 0.0265478515625,
+      "net": -0.048427734374999976
+    },
+    "128:G_stochastic-R": {
+      "delta_success_per_team": -0.138671875,
+      "delta_attempt_per_team": 0.1669921875,
+      "delta_waiting_ticks_per_team": -10.63671875,
+      "success_contribution": -0.0693359375,
+      "attempt_contribution": -0.0041748046875,
+      "waiting_contribution": 0.026591796875,
+      "net": -0.04691894531249996
+    },
+    "128:G_stochastic-G_greedy": {
+      "delta_success_per_team": -0.1640625,
+      "delta_attempt_per_team": 0.0615234375,
+      "delta_waiting_ticks_per_team": -8.787109375,
+      "success_contribution": -0.08203125,
+      "attempt_contribution": -0.0015380859375000002,
+      "waiting_contribution": 0.0219677734375,
+      "net": -0.06160156249999993
+    },
+    "512:G_greedy-R0": {
+      "delta_success_per_team": 0.0166015625,
+      "delta_attempt_per_team": 0.12890625,
+      "delta_waiting_ticks_per_team": -2.595703125,
+      "success_contribution": 0.00830078125,
+      "attempt_contribution": -0.0032226562500000003,
+      "waiting_contribution": 0.0064892578125,
+      "net": 0.011567382812499971
+    },
+    "512:G_greedy-R": {
+      "delta_success_per_team": 0.01953125,
+      "delta_attempt_per_team": 0.12890625,
+      "delta_waiting_ticks_per_team": -2.61328125,
+      "success_contribution": 0.009765625,
+      "attempt_contribution": -0.0032226562500000003,
+      "waiting_contribution": 0.006533203125,
+      "net": 0.013076171874999987
+    },
+    "512:G_stochastic-R0": {
+      "delta_success_per_team": 0.015625,
+      "delta_attempt_per_team": 0.140625,
+      "delta_waiting_ticks_per_team": -2.98828125,
+      "success_contribution": 0.0078125,
+      "attempt_contribution": -0.003515625,
+      "waiting_contribution": 0.007470703125,
+      "net": 0.011767578125000011
+    },
+    "512:G_stochastic-R": {
+      "delta_success_per_team": 0.0185546875,
+      "delta_attempt_per_team": 0.140625,
+      "delta_waiting_ticks_per_team": -3.005859375,
+      "success_contribution": 0.00927734375,
+      "attempt_contribution": -0.003515625,
+      "waiting_contribution": 0.0075146484375,
+      "net": 0.013276367187500027
+    },
+    "512:G_stochastic-G_greedy": {
+      "delta_success_per_team": -0.0009765625,
+      "delta_attempt_per_team": 0.01171875,
+      "delta_waiting_ticks_per_team": -0.392578125,
+      "success_contribution": -0.00048828125,
+      "attempt_contribution": -0.00029296875000000004,
+      "waiting_contribution": 0.0009814453125,
+      "net": 0.00020019531250003997
+    },
+    "Q": {
+      "delta_success_per_team": -0.005859375,
+      "delta_attempt_per_team": 0.0234375,
+      "delta_waiting_ticks_per_team": -0.763671875,
+      "success_contribution": -0.0029296875,
+      "attempt_contribution": -0.0005859375000000001,
+      "waiting_contribution": 0.0019091796875,
+      "net": -0.0016064453124999822
+    },
+    "stochastic_continuation": {
+      "delta_success_per_team": 0.1572265625,
+      "delta_attempt_per_team": -0.0263671875,
+      "delta_waiting_ticks_per_team": 7.630859375,
+      "success_contribution": 0.07861328125,
+      "attempt_contribution": 0.0006591796875,
+      "waiting_contribution": -0.0190771484375,
+      "net": 0.06019531249999999
+    }
+  },
+  "descriptive_run_tool": {
+    "unit": "caller-declared independent training run",
+    "inference": "descriptive only; no confidence interval or success classification",
+    "groups": [
+      {
+        "task": "VSP03_B07_continuation",
+        "arm": "paired_Q",
+        "n": 1,
+        "mean": -0.0016064453124999994,
+        "sample_sd": null,
+        "min": -0.0016064453124999994,
+        "max": -0.0016064453124999994,
+        "runs": {
+          "10804": -0.0016064453124999994
+        }
+      },
+      {
+        "task": "VSP03_B07_fixed128",
+        "arm": "G_greedy-R",
+        "n": 1,
+        "mean": 0.0146826171875,
+        "sample_sd": null,
+        "min": 0.0146826171875,
+        "max": 0.0146826171875,
+        "runs": {
+          "10804": 0.0146826171875
+        }
+      },
+      {
+        "task": "VSP03_B07_fixed128",
+        "arm": "G_greedy-R0",
+        "n": 1,
+        "mean": 0.013173828124999998,
+        "sample_sd": null,
+        "min": 0.013173828124999998,
+        "max": 0.013173828124999998,
+        "runs": {
+          "10804": 0.013173828124999998
+        }
+      },
+      {
+        "task": "VSP03_B07_fixed128",
+        "arm": "G_stochastic-G_greedy",
+        "n": 1,
+        "mean": -0.061601562500000005,
+        "sample_sd": null,
+        "min": -0.061601562500000005,
+        "max": -0.061601562500000005,
+        "runs": {
+          "10804": -0.061601562500000005
+        }
+      },
+      {
+        "task": "VSP03_B07_fixed128",
+        "arm": "G_stochastic-R",
+        "n": 1,
+        "mean": -0.046918945312499995,
+        "sample_sd": null,
+        "min": -0.046918945312499995,
+        "max": -0.046918945312499995,
+        "runs": {
+          "10804": -0.046918945312499995
+        }
+      },
+      {
+        "task": "VSP03_B07_fixed128",
+        "arm": "G_stochastic-R0",
+        "n": 1,
+        "mean": -0.04842773437499999,
+        "sample_sd": null,
+        "min": -0.04842773437499999,
+        "max": -0.04842773437499999,
+        "runs": {
+          "10804": -0.04842773437499999
+        }
+      },
+      {
+        "task": "VSP03_B07_fixed512",
+        "arm": "G_greedy-R",
+        "n": 1,
+        "mean": 0.013076171875000002,
+        "sample_sd": null,
+        "min": 0.013076171875000002,
+        "max": 0.013076171875000002,
+        "runs": {
+          "10804": 0.013076171875000002
+        }
+      },
+      {
+        "task": "VSP03_B07_fixed512",
+        "arm": "G_greedy-R0",
+        "n": 1,
+        "mean": 0.011567382812500002,
+        "sample_sd": null,
+        "min": 0.011567382812500002,
+        "max": 0.011567382812500002,
+        "runs": {
+          "10804": 0.011567382812500002
+        }
+      },
+      {
+        "task": "VSP03_B07_fixed512",
+        "arm": "G_stochastic-G_greedy",
+        "n": 1,
+        "mean": 0.00020019531249999985,
+        "sample_sd": null,
+        "min": 0.00020019531249999985,
+        "max": 0.00020019531249999985,
+        "runs": {
+          "10804": 0.00020019531249999985
+        }
+      },
+      {
+        "task": "VSP03_B07_fixed512",
+        "arm": "G_stochastic-R",
+        "n": 1,
+        "mean": 0.013276367187500002,
+        "sample_sd": null,
+        "min": 0.013276367187500002,
+        "max": 0.013276367187500002,
+        "runs": {
+          "10804": 0.013276367187500002
+        }
+      },
+      {
+        "task": "VSP03_B07_fixed512",
+        "arm": "G_stochastic-R0",
+        "n": 1,
+        "mean": 0.011767578125,
+        "sample_sd": null,
+        "min": 0.011767578125,
+        "max": 0.011767578125,
+        "runs": {
+          "10804": 0.011767578125
+        }
+      }
+    ],
+    "paired_differences": []
+  },
+  "curve_windows_outcome_informed": {
+    "1-32": 0.26735595703125,
+    "97-128": 0.29340087890625,
+    "481-512": 0.3641259765625
+  },
+  "prediction": {
+    "primary_0_lt_D512_le_0_02": "matched",
+    "secondary_Q_gt_0": "not matched",
+    "owner": "not taken (unattended)"
+  },
+  "scientific_exposure_added": {
+    "models": 0,
+    "worlds": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0
+  },
+  "checked": {
+    "native_rows": 8192,
+    "curve_rows": 512,
+    "rule_panels_identical": true,
+    "five_contrasts_both_endpoints": true,
+    "paired_world_Q": true,
+    "entropy_schedule": true,
+    "two_immediate_snapshot_files": [
+      "b07_10804_20260910/G_128.pt",
+      "b07_10804_20260910/G_512.pt"
+    ],
+    "primary_source_and_receipts": true
+  }
+}

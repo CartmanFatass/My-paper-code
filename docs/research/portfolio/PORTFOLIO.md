@@ -2,13 +2,16 @@
 
 ## Current execution boundary — 2026-09-10
 
-OWNER_DIRECT “开始研究” resumes the loop after the complete 2026-09-09 synthesis batch. No
-direction currently has accepted native work, a live experiment or an accepted Pro generation,
-so the actual advancing-direction count is zero. Root assigned the relevant recent UCOPE DM to
-author the next `portfolio:cross_direction` question from current evidence and specifications.
-That preparation does not change lifecycle, priority, recast, result polarity or allocation and
-does not consume a direction slot. A conforming formed Portfolio Pro decision will select the next
-working set; Root will route and apply it without locally substituting scientific choices.
+OWNER_DIRECT “开始研究” resumes the loop after the complete 2026-09-09 synthesis batch. The
+complete Portfolio Pro response at remote commit `08e989073` passed designated-DM conformance and
+is integrated through decision/intake commit `ec88a618a3` and main `d526dcc35`. It selected option A:
+FOLR, UCOPE, VSP03, RCLE and ACVC, in that contention order. Root synchronized that decision into
+the five existing direction branches and actually dispatched all five bounded native DM batches.
+The actual advancing-direction count is five while those DMs are working. No scientific invocation
+or live handle had been accepted at this update; ACVC is design/card-only until its concrete fitting
+law, exposure, panels, cost and caps are accepted. Lifecycle, priority, recast counts and prior
+result polarity are unchanged. CBSC and FRRIE remain readiness alternatives under the decision's
+explicit dependency rules rather than counted waits.
 
 ## 2026-09-10 control-plane migration
 
