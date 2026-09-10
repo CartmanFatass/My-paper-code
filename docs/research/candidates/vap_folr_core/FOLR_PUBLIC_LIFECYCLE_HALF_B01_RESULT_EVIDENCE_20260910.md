@@ -1,6 +1,6 @@
 # FOLR public lifecycle HALF-B01 technical evidence
 
-Current state: RETAIN complete and technically accepted; HALF_EVENT remains preselected and unsubmitted. Earlier preparation boundaries remain chronological evidence.
+Current state: RETAIN complete and technically accepted; HALF_EVENT accepted with actual Monitor adoption confirmed by Root. Earlier preparation boundaries remain chronological evidence.
 
 ## 1. Fixed comparison and changed implementation
 
@@ -210,3 +210,31 @@ No source repair, new test, policy replay or scientific retry occurred. Recovery
 procedure/source reads are conservatively charged10s; collection4.1652834s and
 acceptance analysis0.0490410s bring scoped support to **59.4301727s/300s**.
 Whole engineering/Monitor elapsed is unmeasured and is not invented as zero.
+
+## 8. HALF_EVENT accepted; pending independent observation and collection
+
+RETAIN acceptance commit **fdb1868b9af8a27878a526b53ed3dbdca15a0fc2** was immediately
+pushed before the second submission. The command is byte-equal to the HALF_EVENT
+command published at3a3ea076d; source/currentness and absent-handle/output checks
+passed. At **2026-09-10T22:19:47.060187+00:00** this DM submitted it once, with explicit
+tmux acceptance returned at **22:19:47.709977+00:00**, exit0 and no stderr.
+The exact handle is `folr-public-lifecycle-half-b01-half-event-20260910`, source
+**c6be208cd514b5d12fb13c7637e2d6376de11eb6**, cwd unchanged from §5. Its output is
+`temp/directions/vap_folr_core/exp/public_lifecycle_half_b01_seed7807_half_event`.
+The complete payload remains in §5 and RESULT_SUMMARY; original local receipt is
+`public_lifecycle_half_b01_control_20260910/half_event_launch_receipt.json`.
+
+This is accepted invocation **2 of2**, with no scientific retry, extra arm or successor.
+Fresh destination admission and the exact runner are joined inside the same1800s
+outer chain. Actual admission/learner counts/completion are not yet collected.
+Source check and submission add0.6818749s, making scoped support **60.1120476s/300s** before the0.3423119s handover-record check; current total **60.4543595s/300s**.
+
+Direct MONITOR_ADD to the live-primary endpoint01a087e5-2044-7301-abb6-7a1709a98197
+was delivered successfully. Root then confirmed **actual Monitor adoption** of this
+exact handle and integration/push of RETAIN acceptance asa96369c7e. No distinct
+Monitor observation clock was supplied;22:19:47.709977Z remains supervisor acceptance.
+The message records current collection owner `/root/dm_folr_restart_recovery`, historic
+owner `/root/dm_folr_p68_reentry`, and Root receipt thread01a07249-b095-7821-8ce2-e9c32ba85267.
+No duplicate status polling follows. Root routes terminal facts to this DM,
+which retains terminal collection, technical acceptance, scientific intake and the
+already assigned preservation/closeout. Until then all live remote roots remain intact.
