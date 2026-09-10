@@ -175,3 +175,20 @@ Preservation/transfer5.393398699990939s and member verification0.430752300002495
 inside the same150s postlaunch support charge. No scientific evidence was discarded,
 no new learner invoked, and historical/native-cache/shared-authoring paths are outside
 the cleanup inventory. Final removal facts will be appended after result publication.
+
+## Final scoped closeout
+
+After publication `b70520eba7edff0a9900f0c6f97ce227f4a4fd9d`, the exact completed remote
+execution checkout was unregistered and removed; the matching supervisor and source-only
+stage were removed after the verified archive/source-ref preservation above. Removal
+returned0 in0.3662557000061497s. All three paths are absent on disk, PID3095314 is absent,
+and a direct exact-line check of `git worktree list --porcelain` confirms the execution
+checkout is absent from the registry (additional0.42907800000102725s). The archive digest
+and source recovery ref still match. `closeout/b03-fresh1000-s22-20260910/removal.json`
+and `REPORT.md` retain the exact inventory/results.
+
+Local raw W1/partial W100 evidence, the verified local and remote archives, historical
+evidence, native cache and shared authoring checkout remain. All closeout work is inside
+the conservative894.00s complete charge. This terminal assignment is complete; Root
+integrates/accepts the return. The next scientific object remains an explicit separate
+DM selection under standing authority; no scientific retry or replacement was launched.
