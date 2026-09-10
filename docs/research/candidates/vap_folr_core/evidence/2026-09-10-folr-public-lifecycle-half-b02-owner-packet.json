@@ -1,0 +1,43 @@
+{
+  "question": "按已生效Portfolio分配，绑定固定半衰减与保留状态的第二个独立训练实例。",
+  "changes_if_approved": [
+    {
+      "target": "FOLR-PUBLIC-LIFECYCLE-HALF-B02",
+      "from": "已有一次新独立训练对的Pro分配，尚无新随机流/命令绑定",
+      "to": "固定7808/107808与原.5干预，每臂5000训练、128最终评价；至多两次完整调用"
+    }
+  ],
+  "if_refused": "保留已形成的Portfolio决定和历史结果；异步修改在下一自然边界按实际指令处理，不把拒绝解释成额外调用。",
+  "evidence_for": [
+    {
+      "path": "docs/research/portfolio/decisions/2026-09-10-rolling-successor-allocation.md",
+      "quote": "FOLR receives one new independent HALF_EVENT/RETAIN pair;",
+      "why": "完整Pro分配已通过一致性检查并由Root实际派发。"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_HALF_B01_INTAKE_20260910.md",
+      "quote": "**d_HR=+1.56546875 → HALF_EVENT_ABOVE_MEI**.",
+      "why": "首个实例的原生收益超过1单位门槛，值得按既定分配看新的独立实例。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_HALF_B01_INTAKE_20260910.md",
+      "quote": "No second attenuation fit\nexists, so recurrence is unresolved.",
+      "why": "一个训练实例不能给出稳定优势；旧完全清空还有反向结果。"
+    }
+  ],
+  "uncertainty": [
+    "同一策略的128回合不等于128次独立训练；等编号最终回合不是配对世界。",
+    "固定半衰减可能影响表示、优化和伙伴适应，收益不能定位到有用记忆保存。",
+    "旧Monitor总开销未知；新分配把实际Monitor命令明确计入300秒支持上限，不能转借训练余量。"
+  ],
+  "cost": {
+    "compute": "新205120原生步/9938次RMSprop/256次最终评价；1800秒每完整臂、3600科学工作+至多300全部运行支持(含Monitor)=3900。旧臂753.10/760.14秒是规划点。",
+    "owner_time": "可异步干预；不等待答复。",
+    "reversibility": "costly",
+    "waits_on_this": "nothing; apply the authorized finite card and exact publication path"
+  },
+  "verdict_text": "Execute **RETAIN then HALF_EVENT**, both preselected regardless of RETAIN's score,\none accepted invocation each. Failure retains evidence and stops the dependent sequence.\nIf required remaining support cannot credibly fit, return the concrete conflict before\ndependent execution. An overrun is recorded and grants no more science; required\nterminal observation and evidence are retained. No retry, replacement, third pair,\nextra coefficient/control, evaluation top-up, source/device substitution or successor.",
+  "source": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_HALF_B02_SCIENCE_CARD_20260910.md"
+}

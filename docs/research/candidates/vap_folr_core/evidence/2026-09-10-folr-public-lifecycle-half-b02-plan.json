@@ -1,0 +1,83 @@
+{
+  "object": "FOLR-PUBLIC-LIFECYCLE-HALF-B02",
+  "class": "B/EXPLORE",
+  "question": "Does the fixed HALF_EVENT .5 package again exceed RETAIN by MEI1 in one new independent matched fitting instance?",
+  "selection": "PRO_FINAL Portfolio response b4d71be60f789e97bf1f4c7130bb9995fc84f387; conformance/integration674f246a202eef1467b084fdd25e2eeb531c0b1e; Root actual one-pair assignment2026-09-10",
+  "source_sha": "c6be208cd514b5d12fb13c7637e2d6376de11eb6",
+  "source_reuse": "unchanged accepted source and26-test/independent-review evidence; explicit new CLI seeds/output only",
+  "generation_method": "Python AST reads existing actual loop literals and integer arithmetic, no learner/environment imports or invocation",
+  "training_seed": 7808,
+  "evaluation_seed": 107808,
+  "seed_binding": "7808/107808 not present as standalone bindings in current direction docs/source/tests before this card; separate new processes seed Python/global NumPy/Torch before construction; ordinary PRNG independence assumption, no new private-mask generator",
+  "arms": [
+    "RETAIN",
+    "HALF_EVENT"
+  ],
+  "per_arm": {
+    "training_episodes": 5000,
+    "training_ticks": 100000,
+    "optimizer_steps": 4969,
+    "learning_rate": 0.0005,
+    "nominal_lr_times_steps": 2.4845,
+    "evaluation_episodes": 128,
+    "evaluation_ticks": 2560,
+    "total_native_ticks": 102560,
+    "exposure_line": "100000 real native training ticks; 4969 actor/mixer RMSprop steps at lr=.0005;128 final non-learning greedy episodes"
+  },
+  "total": {
+    "training_episodes": 10000,
+    "training_ticks": 200000,
+    "optimizer_steps": 9938,
+    "evaluation_episodes": 256,
+    "evaluation_ticks": 5120,
+    "total_native_ticks": 205120
+  },
+  "dominant_work": {
+    "replay_actor_rows_expression": "2 arms*4969 updates*32 episodes*21 positions*5 slots*2 online/target passes",
+    "replay_actor_rows": 66783360,
+    "acting_actor_rows": 1076880,
+    "plus": "backward/mixing and fixed64-vector event-survivor rescaling; no search/diagnostic/pilot",
+    "random_private_draws": 0
+  },
+  "projection": {
+    "RETAIN": {
+      "work_ratio_to_HALF_B01": 1,
+      "previous_complete_arm_wall_seconds": 753.1,
+      "projected_complete_arm_wall_point_seconds": 753.1,
+      "cap_seconds": 1800
+    },
+    "HALF_EVENT": {
+      "work_ratio_to_HALF_B01": 1,
+      "previous_complete_arm_wall_seconds": 760.14,
+      "projected_complete_arm_wall_point_seconds": 760.14,
+      "cap_seconds": 1800
+    },
+    "scientific_sum_point_seconds": 1513.24,
+    "uncertainty": "new trajectories/runtime contention unknown; points are not upper bounds",
+    "prior_recorded_DM_support_seconds": 73.4849765,
+    "prior_Monitor_total_seconds": null,
+    "support_planning": "Reuse requires no code edits or new suite; plan within300 total actual invoked support seconds. Track DM and Monitor command wall once through existing receipts; no idle/calendar double count and no transfer from native savings. No new component sublimit."
+  },
+  "caps": {
+    "accepted_invocations": 2,
+    "per_complete_arm_seconds": 1800,
+    "summed_pair_scientific_seconds": 3600,
+    "all_additional_runtime_support_including_Monitor_seconds": 300,
+    "complete_seconds": 3900,
+    "cumulative_directory_tests_already_used_seconds": 32.4911638,
+    "directory_tests_cap_seconds": 300
+  },
+  "stop": "RETAIN then HALF_EVENT, preselected regardless of first return; each accepted once. Failure stops dependent sequence without replacement. If support cannot credibly fit, report concrete conflict before dependent execution; overrun keeps required terminal observation/evidence, records breach and grants no extra science. No retry/third pair/extra coefficient/control/successor.",
+  "claim_ceiling": "one new independent matched fitted-package comparison; priorHALF_B01 retained separately, no stable/causal/equivalence/RANDOM/fullEVENT/transfer/C claim",
+  "source_loop_ranges_observed": [
+    [
+      1,
+      5001
+    ],
+    [
+      128
+    ]
+  ],
+  "source_surface_unchanged": true,
+  "new_scientific_invocations_at_selection": 0
+}
