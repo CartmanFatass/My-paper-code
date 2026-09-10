@@ -70,5 +70,17 @@
     "verdict_text": "建议A：FOLR、UCOPE、VSP03、RCLE、ACVC；检验现有信号的有限延续，ACVC保持最低争用顺序。建议未执行，Portfolio Pro最终选择。",
     "source": "docs/research/portfolio/pro_packets/20260910_next_five_chains/SCIENCE_BRIEF.md"
   },
-  "starred": true
+  "starred": true,
+  "approval_correction": "UCOPE前瞻统一2048 training episodes/4096 Adam每fit，nested时间不充当完整预算；VSP03累计测试不重置；ACVC E01例外不扩展。",
+  "execution_history": [
+    {
+      "at": "2026-09-10T16:18:14+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260910_next_five_chains/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/decisions/2026-09-10-next-five-chains.md",
+      "state": "planned",
+      "summary": "已读完整immutable response 08e989073839fe5f0f91c6a8ad90a399bee37b6c并通过conformance；Pro选择A，四条有限B加ACVC普通B设计，ACVC最低争用。五个L0已备；Root尚未dispatch，本项auto_applied保持空。权源AGENTS4.8 OWNER_DIRECT 2026-09-10。",
+      "correction": "UCOPE前瞻统一2048 training episodes/4096 Adam每fit，nested时间不充当完整预算；VSP03累计测试不重置；ACVC E01例外不扩展。"
+    }
+  ]
 }
