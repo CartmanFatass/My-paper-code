@@ -1,0 +1,50 @@
+{
+  "object": "UCOPE_UAV_8702_FAILURE_LOCATION_A01",
+  "evidence_class": "A/RECON",
+  "repeated_master": 8702,
+  "independent_training_samples": 0,
+  "allocated_invocations": 1,
+  "maximum": {
+    "training_episodes": 1740,
+    "training_ticks": 445440,
+    "eval_episodes": 128,
+    "evaluation_ticks": 32768,
+    "native_ticks": 478208,
+    "optimizer_steps": 3480,
+    "rollout_updates": 870,
+    "explicit_resets": 1868,
+    "environment_constructors": 1,
+    "constructor_resets": 1,
+    "recurrent_actor_observation_rows": 2391040
+  },
+  "checkpoints": [
+    512,
+    1024
+  ],
+  "arm_execution": [
+    "T"
+  ],
+  "initialization": "Preserve original templates plus T/F/G copy construction order; only T creates environment/optimizer and collects data.",
+  "rng": "Intentionally reuse 8702's exact initialization, T private streams and reset/evaluation addresses; no independent sample or replacement comparator.",
+  "head_forward_rows": {
+    "lower": 6845440,
+    "upper": 13690880,
+    "dense_forward_MACs_per_row": 2208
+  },
+  "complete_budget_s": 1000,
+  "scientific_cap_s": 900,
+  "support_reserve_s": 100,
+  "new_focused_tests_s": 15,
+  "existing_directory_tests_s": 45.37920262996807,
+  "existing_conservative_support_charged_as_tests_s": 48.5074039,
+  "reference": {
+    "failed_8702_outer_s": 603.07,
+    "completed_8701_outer_s": 2111.61,
+    "completed_8701_nested_T_s": 729.13633503,
+    "fresh_TFG_ticks": 1736704,
+    "fresh_TFG_Adam": 12288
+  },
+  "scope_section_4": "Exception-only telemetry: one first caught exception traceback's repository/library frame locations and ndarray shape/dtype metadata; no array values, per-step telemetry or framework.",
+  "exposure_line": "A01 new diagnostic invocation, repeated 8702 master: at most 1 T fit/1740 training episodes/445440 training ticks; 870 rollouts/3480 real Adam steps at lr 0.0003; 128 evaluations/32768 ticks; 478208 native ticks total. Original T duration head has 2242 trainable parameters. No independent training sample, F/G/H rollout, search or retuning. Historical 3476 Adam calls moved the whole T head by L2 1.3008228540420532; this is prior exposure evidence, not a guaranteed new displacement.",
+  "newly_executed_scientific_exposure": 0
+}
