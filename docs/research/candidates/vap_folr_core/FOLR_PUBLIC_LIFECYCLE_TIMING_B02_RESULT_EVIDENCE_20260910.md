@@ -205,3 +205,27 @@ transport. No new tests; cumulative directory test time stays25.9131638/300s.
 Technical acceptance is complete and supports the preselected **RANDOM** under the
 existing finite allocation. No primary/learning/information/publication/budget defect
 was found; no retry, replacement, source change, added test or extra evaluation is needed.
+
+## RANDOM accepted and actual Monitor adoption confirmed
+
+The EVENT collection/acceptance commit `149ae560c832c416b1b03945883687218b71ff79`
+was pushed before the third submission; Root accepted/integrated it as main `091919892`.
+Scientific source remains `6a8eacdad072c37d477aca95a9c871aba68cee78`, with unchanged
+p=.1, common7805/107805 and private mask207805/307805 streams. This is the final
+already-preselected invocation, not an outcome-based replacement or new allowance.
+
+Supervisor accepted handle `folr-public-lifecycle-timing-b02-random-20260910`, tmux
+`agent_folr-public-lifecycle-timing-b02-random-20260910`, at the same detached source cwd:
+
+```sh
+/usr/bin/time -v -o /home/wu/.agent-tasks/folr-public-lifecycle-timing-b02-random-20260910/whole.time /usr/bin/timeout --signal=TERM --kill-after=5s 1800s bash -lc 'cd /home/wu/hmasd-worktrees/folr-public-lifecycle-timing-b02-6a8eacda && /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/vap_folr_core/exp/public_lifecycle_timing_b02_seed7805_random_memory.json && /home/wu/.venvs/hmasd/bin/python scripts/run_folr_public_lifecycle_b01.py --arm RANDOM --seed 7805 --evaluation-seed 107805 --launch-sha 6a8eacdad072c37d477aca95a9c871aba68cee78 --out temp/directions/vap_folr_core/exp/public_lifecycle_timing_b02_seed7805_random'
+```
+
+Direct MONITOR_ADD returned the configured task ID and `isError=false`. Root then
+confirmed **actual Monitor adoption**, matching exact handle/source/cwd/root, with the
+existing active monitor goal. All3 planned supervisor submissions are now accepted;
+no retry, replacement, fourth arm or extra evaluation is allocated. Fresh memory and
+RANDOM training/mask/publication conformance remain terminal-collection facts, not
+inferences from submission. The Monitor alone observes this handle; the DM returns
+pending terminal collection. Full three-law scientific intake, Chinese brief and scoped
+remote closeout follow this final arm, with every outcome retained.
