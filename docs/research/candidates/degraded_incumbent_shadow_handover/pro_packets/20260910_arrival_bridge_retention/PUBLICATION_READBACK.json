@@ -1,0 +1,95 @@
+{
+  "observed_at_utc": "2026-09-10T20:14:52.608846+00:00",
+  "fields": {
+    "number": 4,
+    "state": "open",
+    "title": "DISH B05: two LR pairs and the next ordinary-application question",
+    "html_url": "https://github.com/CartmanFatass/My-paper-code/issues/4",
+    "updated_at": "2026-09-08T22:43:15Z"
+  },
+  "use": "delivery target existence only; title/body/comments are not new scientific task inputs",
+  "delivery_branch": "codex/pro-dish-post-b06-20260907",
+  "remote_branch_sha": "b666f575a95ad15da9b9ff9f23cbc003f2e34450",
+  "mapped_files": [
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_ARRIVAL_BRIDGE_RETENTION_REENTRY_INTAKE_20260910.md",
+      "commit_sha": "b666f575a95ad15da9b9ff9f23cbc003f2e34450",
+      "bytes": 19137,
+      "sha256": "42499ee206342fb18c29dec96d6253d169a1ae85065f35a3d55862187e0538ae"
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_P67_SOURCE_STATE_REENTRY_INTAKE_20260908.md",
+      "commit_sha": "f9d3aa52d398ddbb32ccad21e8033c662c07b283",
+      "bytes": 14633,
+      "sha256": "06d17204fbc1dfb5e62112f49b4bbfd406c384ee4f9b1e9c62a5a021ab6d9683"
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260908_p62_post_b07_scope/archive/RESPONSE.md",
+      "commit_sha": "0086cfd7e8f7326fbadf879f844b757f661e8809",
+      "bytes": 27061,
+      "sha256": "2351fdda3c924746197785279ff4463de649d8090c1e6c97aff0db6c0b015d80"
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_OWN_COMMAND_MEAN_B07_RESULT_EVIDENCE_20260908.md",
+      "commit_sha": "f9d3aa52d398ddbb32ccad21e8033c662c07b283",
+      "bytes": 10678,
+      "sha256": "1aef8fb00a8c1557142a5f02fcdd9c91abc1d690801040c203c4fdfbe9468904"
+    },
+    {
+      "path": "experiments/candidates/degraded_incumbent_shadow_handover_rbhr_r06/production_training_engine.py",
+      "commit_sha": "f9d3aa52d398ddbb32ccad21e8033c662c07b283",
+      "bytes": 38273,
+      "sha256": "69369e5058081177086e4e5e5834c0cb91e146fb2d107116eb67d396810907e6"
+    },
+    {
+      "path": "experiments/candidates/degraded_incumbent_shadow_handover_rbhr_r06/production_recurrent_trainer.py",
+      "commit_sha": "f9d3aa52d398ddbb32ccad21e8033c662c07b283",
+      "bytes": 32288,
+      "sha256": "c61e4bc27d342ee213041f80836f532b0c8fb157a36b59213e66eb8978a8a4a5"
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260910_arrival_bridge_retention/EXPOSURE_AND_COST.json",
+      "commit_sha": "b666f575a95ad15da9b9ff9f23cbc003f2e34450",
+      "bytes": 3715,
+      "sha256": "a845e10343ee1ddb175232b68d635b04352583ac9446e7c0cc122865ffa7411d"
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/evidence/2026-09-10-arrival-bridge-reentry.json",
+      "commit_sha": "b666f575a95ad15da9b9ff9f23cbc003f2e34450",
+      "bytes": 8334,
+      "sha256": "0fbef2ca67dc9432e472a9dc3a3f5d2930e7aebbf8345e2aaac7b11a475594a1"
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "commit_sha": "9b0c700b33d307745a5d7fbf88b1fb490a65d2ab",
+      "bytes": 45053,
+      "sha256": "44418af31752086f6752f8f3d6874b260134e4c91b6c82ed8dbc61e4ef0b87e1"
+    },
+    {
+      "path": "AGENTS.md",
+      "commit_sha": "9b0c700b33d307745a5d7fbf88b1fb490a65d2ab",
+      "bytes": 42101,
+      "sha256": "417364067f9f41bea9069d0f8399fda4454d5fd1cc09b4b94f3cf2ef0dd82fc6"
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "commit_sha": "9b0c700b33d307745a5d7fbf88b1fb490a65d2ab",
+      "bytes": 20899,
+      "sha256": "a52a26e3b9ba876cb954ef4e671b5826ff9e1bab573320ca6da1033e12e64996"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "commit_sha": "9b0c700b33d307745a5d7fbf88b1fb490a65d2ab",
+      "bytes": 7819,
+      "sha256": "c1f7d6c68fcec55de48ea555346d5d65af8d311e28502be43a2b05436a174247"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/02_MARL.md",
+      "commit_sha": "9b0c700b33d307745a5d7fbf88b1fb490a65d2ab",
+      "bytes": 4038,
+      "sha256": "4dae3729dc54db39599a689712fa1f6ccdb80d5fd2f08e96757bcf8686e6e0b9"
+    }
+  ],
+  "mapped_reference_count": 13,
+  "initial_handoff_routing_checked": true
+}
