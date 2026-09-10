@@ -699,3 +699,20 @@ Current advancing count is two: UCOPE8701 scoped closeout and ACVC implementatio
 The owner directed that directions proceed independently and in parallel, without batch synchronization or cross-direction blocking. This supersedes any operational reading of the completed next-five allocation as a batch barrier; it does not retroactively change its scientific decisions, budgets or completed results. A direction reaching a result, clean closeout, local blocker or decision boundary affects only that direction. Root immediately resumed FOLR, UCOPE, RCLE and VSP03 beside the already active ACVC chain. Each DM now owns its own next object-tier rung under standing delegation or its own direction-tier Pro handoff when the next choice crosses the direction boundary. No direction waits for ACVC intake, a Portfolio-wide result bundle or another direction's cleanup.
 
 Five direction chains are now advancing independently: ACVC terminal intake/accounting; FOLR post-TIMING-B02 next-rung decision; UCOPE post-8701 next-rung decision; RCLE post-fresh1000 next-rung decision; and VSP03 post-B07 next-rung decision. Existing lifecycle, recast, family, MEI, claim-ceiling and per-object budget records remain controlling. Prior `no successor allocated` statements end their named allocations; they do not create a cross-direction scheduling gate. Each new result-bearing invocation still requires its own exact scientific selection, frozen card, fresh node admission and Monitor handoff.
+
+## ACVC fresh-DENSE intake complete
+
+ACVC's independently rolling chain completed its allocated fresh8921 object and is integrated through
+`69f951fe4`. One intact fit completed 512 training episodes, 1,024 finite Adam/backward records,
+192 evaluation episodes and 180,224 native team steps. F-minus-C is `+0.1229328560 J`, F-minus-dwell
+is `+0.0877164686 J`, and dwell-minus-C is `+0.0352163875 J`; all three are UP, with respectively
+0, 5 and 13 adverse worlds among 64. The result supports the fixed package on one fresh learner with
+conditional world uncertainty; it does not establish training-population stability, pure retrace
+causality, headroom or UAV transfer. No successor is selected.
+
+The native task has a conservative 172 s charge and DM support is 8.0564878 s. The independent
+Monitor retained more than 44.34 s of tool wall with exact aggregate unavailable. If Monitor time is
+part of support, full 30/360 s conformance is unestablished; no silent charge, exemption or rerun is
+applied. All 16 captured evidence files and the checkpoint were preserved before verified remote
+checkout/supervisor removal. ACVC is complete and no longer counted; FOLR, UCOPE, RCLE and VSP03
+continue at their own decision or execution boundaries without waiting for a replacement bundle.
