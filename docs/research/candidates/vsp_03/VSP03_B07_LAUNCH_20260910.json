@@ -38,7 +38,7 @@
   "ssh_returncode": 0,
   "stdout": "",
   "stderr": "Running as unit: vsp03-b07-10804-20260910.service; invocation ID: 3d9b2ce7fe1a4657a2319a83d7737bc4\nFinished with result: success\nMain processes terminated with: code=exited/status=0\nService runtime: 8.927s\nCPU time consumed: 9.244s\nMemory peak: 8.3M\nMemory swap peak: 0B\n",
-  "monitor_adoption": "pending",
+  "monitor_adoption": "confirmed_by_Root_with_terminal",
   "monitor_dispatch": {
     "thread_id": "01a087e5-2044-7301-abb6-7a1709a98197",
     "live_configuration": "C:/Projects/HMASD/.codex/hmasd-monitor.toml",
@@ -47,5 +47,14 @@
     "root_destination": "01a07249-b095-7821-8ce2-e9c32ba85267",
     "original_execution_owner": "/root/dm_vsp03_p54_reentry",
     "collection": "pending Root-forwarded Monitor terminal receipt"
-  }
+  },
+  "monitor_terminal": {
+    "status": "finished",
+    "exit_code": 0,
+    "observed_utc": "2026-09-10T16:56:07.3329491Z",
+    "remote_exit": "2026-09-11T00:52:39+08:00",
+    "evidence_in_collection": "VSP03_B07_COLLECTION_20260910.json#monitor_terminal_evidence",
+    "Root_forwarded_collection": true
+  },
+  "collection": "technically and scientifically accepted; scoped closeout inventory prepared"
 }

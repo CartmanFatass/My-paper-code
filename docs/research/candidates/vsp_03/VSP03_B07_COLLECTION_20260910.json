@@ -1,0 +1,1056 @@
+{
+  "object": "VSP03_B07",
+  "collected_utc": "2026-09-10T16:59:00.080148+00:00",
+  "source_sha": "adcff0a92559ac5552e24a9861e2b65572b478c5",
+  "summary": {
+    "object": "VSP03_B07",
+    "seed": 10804,
+    "launch_sha": "adcff0a92559ac5552e24a9861e2b65572b478c5",
+    "node": "wsl_4070",
+    "command": "bash -c '/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out \"$1\" && /home/wu/.venvs/hmasd/bin/python scripts/run_vsp03_b06.py --seed \"$2\" --out \"$3\" --node wsl_4070 --started-monotonic \"$VSP03_B04_STARTED\"' bash /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b07_10804_20260910_admission.json 10804 /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b07_10804_20260910",
+    "status": "complete",
+    "arms": {
+      "G": {
+        "initial": {
+          "actor": {
+            "parameters": 1570,
+            "initial_l2": 4.779683589935303,
+            "initial_rms": 0.12062833458185196,
+            "current_l2": 4.779683589935303,
+            "displacement_l2": 0.0,
+            "displacement_over_initial_l2": 0.0
+          },
+          "critic": {
+            "parameters": 513,
+            "initial_l2": 3.3480474948883057,
+            "initial_rms": 0.1478199064731598,
+            "current_l2": 3.3480474948883057,
+            "displacement_l2": 0.0,
+            "displacement_over_initial_l2": 0.0
+          },
+          "total": {
+            "parameters": 2083,
+            "initial_l2": 5.835648059844971,
+            "initial_rms": 0.12786288559436798,
+            "current_l2": 5.835648059844971,
+            "displacement_l2": 0.0,
+            "displacement_over_initial_l2": 0.0
+          }
+        },
+        "training_episodes": 65536,
+        "training_team_ticks": 2621440,
+        "training_target_transitions": 5242880,
+        "training_valid_rows": 377648,
+        "gradient_rows": 377648,
+        "optimizer_steps": 512,
+        "backward_calls": 512,
+        "evaluation_episodes": 8192,
+        "first": {
+          "actor": {
+            "parameters": 1570,
+            "initial_l2": 4.779683589935303,
+            "initial_rms": 0.12062833458185196,
+            "current_l2": 4.77968692779541,
+            "displacement_l2": 0.0058309296146035194,
+            "displacement_over_initial_l2": 0.0012199405054514176
+          },
+          "critic": {
+            "parameters": 513,
+            "initial_l2": 3.3480474948883057,
+            "initial_rms": 0.1478199064731598,
+            "current_l2": 3.347179889678955,
+            "displacement_l2": 0.022649358958005905,
+            "displacement_over_initial_l2": 0.006764945536939437
+          },
+          "total": {
+            "parameters": 2083,
+            "initial_l2": 5.835648059844971,
+            "initial_rms": 0.12786288559436798,
+            "current_l2": 5.835154056549072,
+            "displacement_l2": 0.023387886583805084,
+            "displacement_over_initial_l2": 0.004007761664850365
+          }
+        },
+        "128": {
+          "actor": {
+            "parameters": 1570,
+            "initial_l2": 4.779683589935303,
+            "initial_rms": 0.12062833458185196,
+            "current_l2": 5.637790679931641,
+            "displacement_l2": 2.590357542037964,
+            "displacement_over_initial_l2": 0.5419516780341994
+          },
+          "critic": {
+            "parameters": 513,
+            "initial_l2": 3.3480474948883057,
+            "initial_rms": 0.1478199064731598,
+            "current_l2": 3.3614485263824463,
+            "displacement_l2": 0.553089439868927,
+            "displacement_over_initial_l2": 0.16519760866993874
+          },
+          "total": {
+            "parameters": 2083,
+            "initial_l2": 5.835648059844971,
+            "initial_rms": 0.12786288559436798,
+            "current_l2": 6.563841819763184,
+            "displacement_l2": 2.648746967315674,
+            "displacement_over_initial_l2": 0.4538908001566565
+          }
+        },
+        "512": {
+          "actor": {
+            "parameters": 1570,
+            "initial_l2": 4.779683589935303,
+            "initial_rms": 0.12062833458185196,
+            "current_l2": 7.536132335662842,
+            "displacement_l2": 5.445645332336426,
+            "displacement_over_initial_l2": 1.139331763258023
+          },
+          "critic": {
+            "parameters": 513,
+            "initial_l2": 3.3480474948883057,
+            "initial_rms": 0.1478199064731598,
+            "current_l2": 3.4206666946411133,
+            "displacement_l2": 0.7654324769973755,
+            "displacement_over_initial_l2": 0.22862055516417074
+          },
+          "total": {
+            "parameters": 2083,
+            "initial_l2": 5.835648059844971,
+            "initial_rms": 0.12786288559436798,
+            "current_l2": 8.276124954223633,
+            "displacement_l2": 5.499176502227783,
+            "displacement_over_initial_l2": 0.9423420408210624
+          }
+        },
+        "arm_wall_s": 7.284978263021912
+      }
+    },
+    "checkpoints": {
+      "128": {
+        "update": 128,
+        "status": "complete",
+        "absolute": {
+          "G_greedy": {
+            "episodes": 1024,
+            "return": 0.3583056640625,
+            "fixed_clocks": 17.0,
+            "pending_clocks": 8.73046875,
+            "eligible_decisions": 6.7412109375,
+            "blocked_pending": 1.9892578125,
+            "blocked_final_clocks": 0.0166015625,
+            "success_per_team": 0.9609375,
+            "attempt_per_team": 1.921875,
+            "failed_attempt_per_team": 0.9609375,
+            "non_submission_per_team": 0.078125,
+            "waiting_ticks_per_team": 29.646484375
+          },
+          "G_stochastic": {
+            "episodes": 1024,
+            "return": 0.29670410156250004,
+            "fixed_clocks": 17.0,
+            "pending_clocks": 6.6767578125,
+            "eligible_decisions": 4.6796875,
+            "blocked_pending": 1.9970703125,
+            "blocked_final_clocks": 0.0009765625,
+            "success_per_team": 0.796875,
+            "attempt_per_team": 1.9833984375,
+            "failed_attempt_per_team": 1.1865234375,
+            "non_submission_per_team": 0.0166015625,
+            "waiting_ticks_per_team": 20.859375
+          },
+          "R0": {
+            "episodes": 1024,
+            "return": 0.3451318359375,
+            "fixed_clocks": 17.0,
+            "pending_clocks": 8.9443359375,
+            "eligible_decisions": 6.9560546875,
+            "blocked_pending": 1.98828125,
+            "blocked_final_clocks": 0.0185546875,
+            "success_per_team": 0.9384765625,
+            "attempt_per_team": 1.81640625,
+            "failed_attempt_per_team": 0.8779296875,
+            "non_submission_per_team": 0.18359375,
+            "waiting_ticks_per_team": 31.478515625
+          },
+          "R": {
+            "episodes": 1024,
+            "return": 0.343623046875,
+            "fixed_clocks": 17.0,
+            "pending_clocks": 8.94921875,
+            "eligible_decisions": 6.9609375,
+            "blocked_pending": 1.98828125,
+            "blocked_final_clocks": 0.01953125,
+            "success_per_team": 0.935546875,
+            "attempt_per_team": 1.81640625,
+            "failed_attempt_per_team": 0.880859375,
+            "non_submission_per_team": 0.18359375,
+            "waiting_ticks_per_team": 31.49609375
+          }
+        },
+        "weights_readback": true,
+        "comparisons": {
+          "G_greedy-R0": {
+            "mean": 0.013173828124999998,
+            "conditional_world_sd": 0.09105488584990667,
+            "conditional_world_se": 0.0028454651828095836,
+            "worlds": 1024
+          },
+          "G_greedy-R": {
+            "mean": 0.0146826171875,
+            "conditional_world_sd": 0.0974517543645329,
+            "conditional_world_se": 0.0030453673238916533,
+            "worlds": 1024
+          },
+          "G_stochastic-R0": {
+            "mean": -0.04842773437499999,
+            "conditional_world_sd": 0.31479293672673747,
+            "conditional_world_se": 0.009837279272710546,
+            "worlds": 1024
+          },
+          "G_stochastic-R": {
+            "mean": -0.046918945312499995,
+            "conditional_world_sd": 0.31470385817527197,
+            "conditional_world_se": 0.009834495567977249,
+            "worlds": 1024
+          },
+          "G_stochastic-G_greedy": {
+            "mean": -0.061601562500000005,
+            "conditional_world_sd": 0.32163313320135845,
+            "conditional_world_se": 0.010051035412542451,
+            "worlds": 1024
+          }
+        }
+      },
+      "512": {
+        "update": 512,
+        "status": "complete",
+        "absolute": {
+          "G_greedy": {
+            "episodes": 1024,
+            "return": 0.35669921875,
+            "fixed_clocks": 17.0,
+            "pending_clocks": 8.5908203125,
+            "eligible_decisions": 6.6025390625,
+            "blocked_pending": 1.98828125,
+            "blocked_final_clocks": 0.0185546875,
+            "success_per_team": 0.955078125,
+            "attempt_per_team": 1.9453125,
+            "failed_attempt_per_team": 0.990234375,
+            "non_submission_per_team": 0.0546875,
+            "waiting_ticks_per_team": 28.8828125
+          },
+          "G_stochastic": {
+            "episodes": 1024,
+            "return": 0.35689941406250003,
+            "fixed_clocks": 17.0,
+            "pending_clocks": 8.5205078125,
+            "eligible_decisions": 6.533203125,
+            "blocked_pending": 1.9873046875,
+            "blocked_final_clocks": 0.015625,
+            "success_per_team": 0.9541015625,
+            "attempt_per_team": 1.95703125,
+            "failed_attempt_per_team": 1.0029296875,
+            "non_submission_per_team": 0.04296875,
+            "waiting_ticks_per_team": 28.490234375
+          },
+          "R0": {
+            "episodes": 1024,
+            "return": 0.3451318359375,
+            "fixed_clocks": 17.0,
+            "pending_clocks": 8.9443359375,
+            "eligible_decisions": 6.9560546875,
+            "blocked_pending": 1.98828125,
+            "blocked_final_clocks": 0.0185546875,
+            "success_per_team": 0.9384765625,
+            "attempt_per_team": 1.81640625,
+            "failed_attempt_per_team": 0.8779296875,
+            "non_submission_per_team": 0.18359375,
+            "waiting_ticks_per_team": 31.478515625
+          },
+          "R": {
+            "episodes": 1024,
+            "return": 0.343623046875,
+            "fixed_clocks": 17.0,
+            "pending_clocks": 8.94921875,
+            "eligible_decisions": 6.9609375,
+            "blocked_pending": 1.98828125,
+            "blocked_final_clocks": 0.01953125,
+            "success_per_team": 0.935546875,
+            "attempt_per_team": 1.81640625,
+            "failed_attempt_per_team": 0.880859375,
+            "non_submission_per_team": 0.18359375,
+            "waiting_ticks_per_team": 31.49609375
+          }
+        },
+        "weights_readback": true,
+        "comparisons": {
+          "G_greedy-R0": {
+            "mean": 0.011567382812500002,
+            "conditional_world_sd": 0.09613782948786226,
+            "conditional_world_se": 0.0030043071714956956,
+            "worlds": 1024
+          },
+          "G_greedy-R": {
+            "mean": 0.013076171875000002,
+            "conditional_world_sd": 0.10228479809054714,
+            "conditional_world_se": 0.003196399940329598,
+            "worlds": 1024
+          },
+          "G_stochastic-R0": {
+            "mean": 0.011767578125,
+            "conditional_world_sd": 0.14249007677062117,
+            "conditional_world_se": 0.004452814899081912,
+            "worlds": 1024
+          },
+          "G_stochastic-R": {
+            "mean": 0.013276367187500002,
+            "conditional_world_sd": 0.14667488464964026,
+            "conditional_world_se": 0.004583590145301258,
+            "worlds": 1024
+          },
+          "G_stochastic-G_greedy": {
+            "mean": 0.00020019531249999985,
+            "conditional_world_sd": 0.11991111060975396,
+            "conditional_world_se": 0.003747222206554811,
+            "worlds": 1024
+          }
+        }
+      }
+    },
+    "actual_rollouts": {
+      "episodes_started": 73728,
+      "episodes_completed": 73728,
+      "team_ticks": 2949120,
+      "target_transitions": 5898240,
+      "decision_rows": 431296,
+      "rollout_policy_forwards": 8716
+    },
+    "model_constructions": 1,
+    "optimizer_steps": 512,
+    "device": "cpu",
+    "dtype": "float32",
+    "compute_threads": 1,
+    "rng": {
+      "worlds": "PCG64 SeedSequence([302,seed,split,episode,target]);40 uniforms",
+      "phase": "[302,seed,split,episode,2];one integers(0,2)",
+      "actions": "[303,seed,split,mode,arm,episode];17 calendar-position uniforms",
+      "splits": "train100/evaluation200",
+      "modes": "train0/stochastic-evaluation1",
+      "arms": "G1",
+      "initialization": 50804
+    },
+    "cost_law": "admission+imports+G_init+512*batch128x40x2+8*eval1024x40x2+weights+publication/readback/exit",
+    "independent_training_instances": 1,
+    "validation_models": 0,
+    "validation_episodes": 0,
+    "validation_optimizer_steps": 0,
+    "aggregate_cpu_s": null,
+    "primary": {
+      "mean": 0.011567382812500002,
+      "conditional_world_sd": 0.09613782948786226,
+      "conditional_world_se": 0.0030043071714956956,
+      "worlds": 1024
+    },
+    "primary_name": "update512:G_greedy-R0",
+    "budget_change": {
+      "mean": -0.0016064453124999994,
+      "conditional_world_sd": 0.05288252531171355,
+      "conditional_world_se": 0.0016525789159910485,
+      "worlds": 1024
+    },
+    "elapsed_through_output_start_s": 8.365503572043963,
+    "peak_rss_bytes": 493867008
+  },
+  "admission": {
+    "assessed_at": "2026-09-10T16:52:30.902188Z",
+    "available_physical_bytes": 15183974400,
+    "captured_at": "2026-09-10T16:52:30.901859Z",
+    "cgroup_headroom_bytes": null,
+    "cgroup_memory_current_bytes": null,
+    "cgroup_memory_max_bytes": null,
+    "effective_available_bytes": 15183974400,
+    "effective_floor_pass": true,
+    "failure_reasons": [],
+    "measurement_source": "/proc/meminfo",
+    "minimum_available_bytes": 4294967296,
+    "passed": true,
+    "physical_floor_pass": true,
+    "schema_version": 1
+  },
+  "terminal": {
+    "object": "VSP03_B04",
+    "unit": "vsp03-b07-10804-20260910.service",
+    "manager_properties": {
+      "Type": "oneshot",
+      "TimeoutStartUSec": "59s",
+      "TimeoutStartFailureMode": "kill",
+      "KillMode": "control-group",
+      "InactiveExitTimestampMonotonic": "517780880234"
+    },
+    "started_monotonic": 517780.880234,
+    "cap_s": 60.0,
+    "shutdown_publication_reserve_s": 10.0,
+    "task_exit_code": 0,
+    "supervisor_exit_code": 0,
+    "payload": {
+      "object": "VSP03_B04",
+      "command": [
+        "bash",
+        "-c",
+        "/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out \"$1\" && /home/wu/.venvs/hmasd/bin/python scripts/run_vsp03_b06.py --seed \"$2\" --out \"$3\" --node wsl_4070 --started-monotonic \"$VSP03_B04_STARTED\"",
+        "bash",
+        "/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b07_10804_20260910_admission.json",
+        "10804",
+        "/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b07_10804_20260910"
+      ],
+      "cwd": "/home/wu/hmasd-worktrees/vsp03-b07-adcff0a92559ac5552e24a9861e2b65572b478c5",
+      "started_unix_s": null,
+      "started_monotonic": 517780.880234,
+      "observed_unix_s": 1789059150.8705254,
+      "observed_monotonic": 517780.951406507,
+      "deadline_monotonic": 517840.880234,
+      "cap_s": 60.0,
+      "shutdown_publication_reserve_s": 10.0,
+      "root_returncode": 0,
+      "task_exit_code": 0,
+      "timed_out": false,
+      "error": null,
+      "descendants_killed": [],
+      "descendants_reaped": [],
+      "descendants_remaining": [],
+      "all_descendants_terminated": true,
+      "elapsed_before_terminal_publication_s": 8.901619348034728
+    },
+    "error": null,
+    "descendants_killed": [
+      3086928,
+      3086928,
+      3086929,
+      3086942
+    ],
+    "descendants_reaped": [
+      {
+        "pid": 3086928,
+        "wait_status": 9
+      },
+      {
+        "pid": 3086929,
+        "wait_status": 1
+      },
+      {
+        "pid": 3086942,
+        "wait_status": 1
+      }
+    ],
+    "descendants_remaining": [],
+    "all_descendants_terminated": true,
+    "elapsed_before_terminal_publication_s": 8.923692061041947
+  },
+  "payload": {
+    "object": "VSP03_B04",
+    "command": [
+      "bash",
+      "-c",
+      "/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out \"$1\" && /home/wu/.venvs/hmasd/bin/python scripts/run_vsp03_b06.py --seed \"$2\" --out \"$3\" --node wsl_4070 --started-monotonic \"$VSP03_B04_STARTED\"",
+      "bash",
+      "/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b07_10804_20260910_admission.json",
+      "10804",
+      "/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b07_10804_20260910"
+    ],
+    "cwd": "/home/wu/hmasd-worktrees/vsp03-b07-adcff0a92559ac5552e24a9861e2b65572b478c5",
+    "started_unix_s": null,
+    "started_monotonic": 517780.880234,
+    "observed_unix_s": 1789059150.8705254,
+    "observed_monotonic": 517780.951406507,
+    "deadline_monotonic": 517840.880234,
+    "cap_s": 60.0,
+    "shutdown_publication_reserve_s": 10.0,
+    "root_returncode": 0,
+    "task_exit_code": 0,
+    "timed_out": false,
+    "error": null,
+    "descendants_killed": [],
+    "descendants_reaped": [],
+    "descendants_remaining": [],
+    "all_descendants_terminated": true,
+    "elapsed_before_terminal_publication_s": 8.901619348034728
+  },
+  "journal": [
+    {
+      "CODE_FUNC": "job_emit_start_message",
+      "CODE_LINE": "609",
+      "_TRANSPORT": "journal",
+      "_CAP_EFFECTIVE": "0",
+      "_SYSTEMD_CGROUP": "/user.slice/user-1000.slice/user@1000.service/init.scope",
+      "JOB_TYPE": "start",
+      "_RUNTIME_SCOPE": "system",
+      "_EXE": "/usr/lib/systemd/systemd",
+      "__SEQNUM": "176111",
+      "_UID": "1000",
+      "PRIORITY": "6",
+      "_SELINUX_CONTEXT": "kernel",
+      "CODE_FILE": "src/core/job.c",
+      "_AUDIT_LOGINUID": "1000",
+      "USER_UNIT": "vsp03-b07-10804-20260910.service",
+      "_SYSTEMD_USER_UNIT": "init.scope",
+      "_SYSTEMD_SLICE": "user-1000.slice",
+      "_SYSTEMD_UNIT": "user@1000.service",
+      "_MACHINE_ID": "6910bce2db53443699ddeaa436cc2d2a",
+      "_SYSTEMD_OWNER_UID": "1000",
+      "__MONOTONIC_TIMESTAMP": "517780880275",
+      "MESSAGE": "Starting vsp03-b07-10804-20260910.service - /home/wu/.venvs/hmasd/bin/python /home/wu/hmasd-worktrees/vsp03-b07-adcff0a92559ac5552e24a9861e2b65572b478c5/experiments/candidates/vsp_03/vsp03_b04/control.py --unit=vsp03-b07-10804-20260910.service --name=vsp03-b07-10804-20260910 --record=/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b07_10804_20260910_terminal.json --cap=60 --reserve=10 -- bash -c \"/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out \\\"\\$1\\\" && /home/wu/.venvs/hmasd/bin/python scripts/run_vsp03_b06.py --seed \\\"\\$2\\\" --out \\\"\\$3\\\" --node wsl_4070 --started-monotonic \\\"\\$VSP03_B04_STARTED\\\"\" bash /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b07_10804_20260910_admission.json 10804 /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b07_10804_20260910...",
+      "USER_INVOCATION_ID": "3d9b2ce7fe1a4657a2319a83d7737bc4",
+      "__CURSOR": "s=ecbd01ef5f624e2a9c9bd9c3dd5cbeb8;i=2afef;b=5afa96f012d9434283af54a9a85c7e9f;m=788e253b93;t=65b23cb2a6221;x=982b9699313ed599",
+      "TID": "638",
+      "SYSLOG_FACILITY": "3",
+      "_SOURCE_REALTIME_TIMESTAMP": "1789059150799367",
+      "SYSLOG_IDENTIFIER": "systemd",
+      "_BOOT_ID": "5afa96f012d9434283af54a9a85c7e9f",
+      "MESSAGE_ID": "7d4958e842da4a758f6c1cdc7b36dcc5",
+      "__REALTIME_TIMESTAMP": "1789059150799393",
+      "__SEQNUM_ID": "ecbd01ef5f624e2a9c9bd9c3dd5cbeb8",
+      "_HOSTNAME": "LAPTOP-U9TDKC8A",
+      "_CMDLINE": "/usr/lib/systemd/systemd --user --deserialize=8",
+      "_AUDIT_SESSION": "2",
+      "_GID": "1000",
+      "JOB_ID": "1374",
+      "_SYSTEMD_USER_SLICE": "-.slice",
+      "_COMM": "systemd",
+      "_PID": "638"
+    },
+    {
+      "__REALTIME_TIMESTAMP": "1789059150855710",
+      "PRIORITY": "6",
+      "_GID": "1000",
+      "SYSLOG_FACILITY": "3",
+      "_SYSTEMD_SLICE": "user-1000.slice",
+      "_STREAM_ID": "4fd8da4342c8463d9ff6875e22333ef1",
+      "_SELINUX_CONTEXT": "kernel",
+      "__SEQNUM": "176113",
+      "_AUDIT_LOGINUID": "1000",
+      "_SYSTEMD_CGROUP": "/user.slice/user-1000.slice/user@1000.service/app.slice/vsp03-b07-10804-20260910.service",
+      "_SYSTEMD_USER_UNIT": "vsp03-b07-10804-20260910.service",
+      "_PID": "3086918",
+      "__MONOTONIC_TIMESTAMP": "517780936592",
+      "_HOSTNAME": "LAPTOP-U9TDKC8A",
+      "_AUDIT_SESSION": "2",
+      "_COMM": "bash",
+      "MESSAGE": "Task 'vsp03-b07-10804-20260910' started in tmux session 'agent_vsp03-b07-10804-20260910'. Output: /home/wu/.agent-tasks/vsp03-b07-10804-20260910/task.log",
+      "__SEQNUM_ID": "ecbd01ef5f624e2a9c9bd9c3dd5cbeb8",
+      "_SYSTEMD_UNIT": "user@1000.service",
+      "_SYSTEMD_INVOCATION_ID": "3d9b2ce7fe1a4657a2319a83d7737bc4",
+      "_CAP_EFFECTIVE": "0",
+      "_TRANSPORT": "stdout",
+      "_BOOT_ID": "5afa96f012d9434283af54a9a85c7e9f",
+      "_SYSTEMD_USER_SLICE": "app.slice",
+      "__CURSOR": "s=ecbd01ef5f624e2a9c9bd9c3dd5cbeb8;i=2aff1;b=5afa96f012d9434283af54a9a85c7e9f;m=788e261790;t=65b23cb2b3e1e;x=8c1634f9e1640726",
+      "_MACHINE_ID": "6910bce2db53443699ddeaa436cc2d2a",
+      "_UID": "1000",
+      "_SYSTEMD_OWNER_UID": "1000",
+      "SYSLOG_IDENTIFIER": "python",
+      "_RUNTIME_SCOPE": "system"
+    },
+    {
+      "PRIORITY": "6",
+      "_PID": "3086916",
+      "__MONOTONIC_TIMESTAMP": "517789804185",
+      "_SELINUX_CONTEXT": "kernel",
+      "_BOOT_ID": "5afa96f012d9434283af54a9a85c7e9f",
+      "_SYSTEMD_OWNER_UID": "1000",
+      "_SYSTEMD_SLICE": "user-1000.slice",
+      "_SYSTEMD_USER_UNIT": "vsp03-b07-10804-20260910.service",
+      "_GID": "1000",
+      "_UID": "1000",
+      "_SYSTEMD_UNIT": "user@1000.service",
+      "SYSLOG_IDENTIFIER": "python",
+      "_TRANSPORT": "stdout",
+      "_CMDLINE": "/home/wu/.venvs/hmasd/bin/python /home/wu/hmasd-worktrees/vsp03-b07-adcff0a92559ac5552e24a9861e2b65572b478c5/experiments/candidates/vsp_03/vsp03_b04/control.py --unit=vsp03-b07-10804-20260910.service --name=vsp03-b07-10804-20260910 --record=/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b07_10804_20260910_terminal.json --cap=60 --reserve=10 -- bash -c \"/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out \\\"\\$1\\\" && /home/wu/.venvs/hmasd/bin/python scripts/run_vsp03_b06.py --seed \\\"\\$2\\\" --out \\\"\\$3\\\" --node wsl_4070 --started-monotonic \\\"\\$VSP03_B04_STARTED\\\"\" bash /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b07_10804_20260910_admission.json 10804 /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b07_10804_20260910",
+      "_RUNTIME_SCOPE": "system",
+      "__CURSOR": "s=ecbd01ef5f624e2a9c9bd9c3dd5cbeb8;i=2aff2;b=5afa96f012d9434283af54a9a85c7e9f;m=788ead6699;t=65b23cbb28d28;x=4c9f42f86f1250cf",
+      "_HOSTNAME": "LAPTOP-U9TDKC8A",
+      "_SYSTEMD_INVOCATION_ID": "3d9b2ce7fe1a4657a2319a83d7737bc4",
+      "_COMM": "python",
+      "_AUDIT_LOGINUID": "1000",
+      "__SEQNUM_ID": "ecbd01ef5f624e2a9c9bd9c3dd5cbeb8",
+      "_AUDIT_SESSION": "2",
+      "_STREAM_ID": "4fd8da4342c8463d9ff6875e22333ef1",
+      "__REALTIME_TIMESTAMP": "1789059159723304",
+      "_SYSTEMD_USER_SLICE": "app.slice",
+      "SYSLOG_FACILITY": "3",
+      "_EXE": "/home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu/bin/python3.10",
+      "MESSAGE": "{\"terminal_published\": \"/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b07_10804_20260910_terminal.json\", \"task_exit_code\": 0, \"elapsed_through_terminal_readback_s\": 8.923879990004934}",
+      "_CAP_EFFECTIVE": "0",
+      "_SYSTEMD_CGROUP": "/user.slice/user-1000.slice/user@1000.service/app.slice/vsp03-b07-10804-20260910.service",
+      "__SEQNUM": "176114",
+      "_MACHINE_ID": "6910bce2db53443699ddeaa436cc2d2a"
+    },
+    {
+      "__CURSOR": "s=ecbd01ef5f624e2a9c9bd9c3dd5cbeb8;i=2aff3;b=5afa96f012d9434283af54a9a85c7e9f;m=788ead75f2;t=65b23cbb29c80;x=8f37a8446e30dda2",
+      "USER_INVOCATION_ID": "3d9b2ce7fe1a4657a2319a83d7737bc4",
+      "_SYSTEMD_CGROUP": "/user.slice/user-1000.slice/user@1000.service/init.scope",
+      "_SOURCE_REALTIME_TIMESTAMP": "1789059159727214",
+      "_SYSTEMD_UNIT": "user@1000.service",
+      "CODE_FILE": "src/core/job.c",
+      "USER_UNIT": "vsp03-b07-10804-20260910.service",
+      "_AUDIT_LOGINUID": "1000",
+      "_SYSTEMD_USER_UNIT": "init.scope",
+      "_COMM": "systemd",
+      "_BOOT_ID": "5afa96f012d9434283af54a9a85c7e9f",
+      "_HOSTNAME": "LAPTOP-U9TDKC8A",
+      "MESSAGE_ID": "39f53479d3a045ac8e11786248231fbf",
+      "_MACHINE_ID": "6910bce2db53443699ddeaa436cc2d2a",
+      "MESSAGE": "Finished vsp03-b07-10804-20260910.service - /home/wu/.venvs/hmasd/bin/python /home/wu/hmasd-worktrees/vsp03-b07-adcff0a92559ac5552e24a9861e2b65572b478c5/experiments/candidates/vsp_03/vsp03_b04/control.py --unit=vsp03-b07-10804-20260910.service --name=vsp03-b07-10804-20260910 --record=/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b07_10804_20260910_terminal.json --cap=60 --reserve=10 -- bash -c \"/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out \\\"\\$1\\\" && /home/wu/.venvs/hmasd/bin/python scripts/run_vsp03_b06.py --seed \\\"\\$2\\\" --out \\\"\\$3\\\" --node wsl_4070 --started-monotonic \\\"\\$VSP03_B04_STARTED\\\"\" bash /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b07_10804_20260910_admission.json 10804 /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b07_10804_20260910.",
+      "_AUDIT_SESSION": "2",
+      "CODE_LINE": "796",
+      "_EXE": "/usr/lib/systemd/systemd",
+      "JOB_TYPE": "start",
+      "__MONOTONIC_TIMESTAMP": "517789808114",
+      "_UID": "1000",
+      "_SELINUX_CONTEXT": "kernel",
+      "JOB_ID": "1374",
+      "__SEQNUM": "176115",
+      "TID": "638",
+      "__REALTIME_TIMESTAMP": "1789059159727232",
+      "SYSLOG_FACILITY": "3",
+      "_RUNTIME_SCOPE": "system",
+      "SYSLOG_IDENTIFIER": "systemd",
+      "PRIORITY": "6",
+      "_GID": "1000",
+      "__SEQNUM_ID": "ecbd01ef5f624e2a9c9bd9c3dd5cbeb8",
+      "_SYSTEMD_SLICE": "user-1000.slice",
+      "JOB_RESULT": "done",
+      "_CMDLINE": "/usr/lib/systemd/systemd --user --deserialize=8",
+      "_CAP_EFFECTIVE": "0",
+      "_SYSTEMD_OWNER_UID": "1000",
+      "CODE_FUNC": "job_emit_done_message",
+      "_SYSTEMD_USER_SLICE": "-.slice",
+      "_PID": "638",
+      "_TRANSPORT": "journal"
+    },
+    {
+      "_TRANSPORT": "journal",
+      "USER_UNIT": "vsp03-b07-10804-20260910.service",
+      "MEMORY_SWAP_PEAK": "0",
+      "_EXE": "/usr/lib/systemd/systemd",
+      "_AUDIT_SESSION": "2",
+      "USER_INVOCATION_ID": "3d9b2ce7fe1a4657a2319a83d7737bc4",
+      "_SYSTEMD_SLICE": "user-1000.slice",
+      "_SYSTEMD_USER_UNIT": "init.scope",
+      "__SEQNUM": "176116",
+      "MESSAGE_ID": "ae8f7b866b0347b9af31fe1c80b127c0",
+      "_RUNTIME_SCOPE": "system",
+      "_CMDLINE": "/usr/lib/systemd/systemd --user --deserialize=8",
+      "_COMM": "systemd",
+      "_BOOT_ID": "5afa96f012d9434283af54a9a85c7e9f",
+      "_PID": "638",
+      "SYSLOG_FACILITY": "3",
+      "_SYSTEMD_CGROUP": "/user.slice/user-1000.slice/user@1000.service/init.scope",
+      "SYSLOG_IDENTIFIER": "systemd",
+      "MEMORY_PEAK": "8785920",
+      "CODE_LINE": "2577",
+      "__SEQNUM_ID": "ecbd01ef5f624e2a9c9bd9c3dd5cbeb8",
+      "_GID": "1000",
+      "__CURSOR": "s=ecbd01ef5f624e2a9c9bd9c3dd5cbeb8;i=2aff4;b=5afa96f012d9434283af54a9a85c7e9f;m=788ead76fa;t=65b23cbb29d88;x=ac006b5bc0651724",
+      "CODE_FILE": "src/core/unit.c",
+      "MESSAGE": "vsp03-b07-10804-20260910.service: Consumed 9.244s CPU time, 8.3M memory peak, 0B memory swap peak.",
+      "TID": "638",
+      "__MONOTONIC_TIMESTAMP": "517789808378",
+      "_MACHINE_ID": "6910bce2db53443699ddeaa436cc2d2a",
+      "_SELINUX_CONTEXT": "kernel",
+      "_SOURCE_REALTIME_TIMESTAMP": "1789059159727332",
+      "_AUDIT_LOGINUID": "1000",
+      "_SYSTEMD_OWNER_UID": "1000",
+      "CPU_USAGE_NSEC": "9244309000",
+      "_UID": "1000",
+      "CODE_FUNC": "unit_log_resources",
+      "_SYSTEMD_UNIT": "user@1000.service",
+      "_HOSTNAME": "LAPTOP-U9TDKC8A",
+      "__REALTIME_TIMESTAMP": "1789059159727496",
+      "_CAP_EFFECTIVE": "0",
+      "PRIORITY": "6",
+      "_SYSTEMD_USER_SLICE": "-.slice"
+    }
+  ],
+  "artifact_readback": {
+    "artifact": "VSP03_B07_ARTIFACTS_20260910.tar.gz",
+    "sha256": "0cd6a91504065af646cf1e7d036aa31ff64e3b5a168f179120e7c4b4db677741",
+    "bytes": 219454,
+    "all_scientific_bytes_match_remote": true,
+    "remote_files": {
+      "b07_10804_20260910/G_128.pt": {
+        "bytes": 11936,
+        "sha256": "1b054ef7ba7f73ac1dd10c3e8e85a5a306b13a27e2512b039fac7b5d4c0dc6b1"
+      },
+      "b07_10804_20260910/G_512.pt": {
+        "bytes": 11936,
+        "sha256": "f79b703e1884540f68ae6f8544b45b90ff705808885f3efaeadb421934074894"
+      },
+      "b07_10804_20260910/G_curve.jsonl": {
+        "bytes": 284570,
+        "sha256": "140db265779ca9937ff22337b36b21a53b3b95b5063662b09beee90bff99e5fa"
+      },
+      "b07_10804_20260910/G_greedy_128.json": {
+        "bytes": 646407,
+        "sha256": "596a3acb8d2fa29b5a12da0cb098ff7b48ed5c08d603ad65f972ebf655b79457"
+      },
+      "b07_10804_20260910/G_greedy_512.json": {
+        "bytes": 646359,
+        "sha256": "7060013214d543b86903974b0ba944febb8be2ca2551ac17c9c6574010987bb2"
+      },
+      "b07_10804_20260910/G_stochastic_128.json": {
+        "bytes": 645745,
+        "sha256": "ffb015acaf9c0c4f606d82b6fae38b13082a75bfddb7077f5e0f774ecb343f65"
+      },
+      "b07_10804_20260910/G_stochastic_512.json": {
+        "bytes": 646363,
+        "sha256": "365bfbf0383aa247bbcecabafbf221b36584bd0b44fc54d506a3193f055b6ef3"
+      },
+      "b07_10804_20260910/R0_128.json": {
+        "bytes": 646462,
+        "sha256": "3733a50221579699e66632292efb173c714195c6103ae6a42b6c04457e9cab93"
+      },
+      "b07_10804_20260910/R0_512.json": {
+        "bytes": 646462,
+        "sha256": "3733a50221579699e66632292efb173c714195c6103ae6a42b6c04457e9cab93"
+      },
+      "b07_10804_20260910/R_128.json": {
+        "bytes": 646470,
+        "sha256": "39e4290995a25b668ed155806d9144e15d2f3d4c8a240e04f6758968fa2777b5"
+      },
+      "b07_10804_20260910/R_512.json": {
+        "bytes": 646470,
+        "sha256": "39e4290995a25b668ed155806d9144e15d2f3d4c8a240e04f6758968fa2777b5"
+      },
+      "b07_10804_20260910/checkpoint_128.json": {
+        "bytes": 2983,
+        "sha256": "873f243802d558a40c74e6438d4a9f0dc645be8116990bdb0d4709638bd18d9b"
+      },
+      "b07_10804_20260910/checkpoint_512.json": {
+        "bytes": 2985,
+        "sha256": "cf0ee1c2f76b09bc96cdc35fa1878f713c9b5dce6b859954ad6e7428f02a2194"
+      },
+      "b07_10804_20260910/paired_budget_change.json": {
+        "bytes": 73206,
+        "sha256": "e738eb3b1f8b687eecb8ad18a63b101f7dc3a55e3c4e2838d2c33948d8bce509"
+      },
+      "b07_10804_20260910/paired_differences_128.json": {
+        "bytes": 228157,
+        "sha256": "ff8ccaadd59a5315f36c6577cd6c7a4029770e3e7f83f988d8a04b640986c10c"
+      },
+      "b07_10804_20260910/paired_differences_512.json": {
+        "bytes": 215250,
+        "sha256": "34f4dc1fbeafcc68c50a79b94b00f7052711d52de79113d5bd3da8dd2f9c5e46"
+      },
+      "b07_10804_20260910/summary.json": {
+        "bytes": 12806,
+        "sha256": "9295b32fd00dc3fcc485a4cdf5f49fd9698d79cc06d0d00136355707b85852fe"
+      },
+      "b07_10804_20260910_admission.json": {
+        "bytes": 504,
+        "sha256": "2f7c6bc5c75a70be8782e8da376cda2510514105b2b26281e25f897525feeafc"
+      },
+      "b07_10804_20260910_terminal.json": {
+        "bytes": 2055,
+        "sha256": "3ca87cc068339906cbda9ca21f12f2a71a46319b819d7757801cf3450dc3eca3"
+      },
+      "b07_10804_20260910_terminal.payload.json": {
+        "bytes": 1118,
+        "sha256": "cef89fc72371ee9753ea8b1097ea23e722a143978242d52b983a1eb32c8deafe"
+      }
+    },
+    "archive_members": [
+      {
+        "name": "b07_10804_20260910",
+        "bytes": 0,
+        "type": "5"
+      },
+      {
+        "name": "b07_10804_20260910/G_128.pt",
+        "bytes": 11936,
+        "type": "0"
+      },
+      {
+        "name": "b07_10804_20260910/summary.json",
+        "bytes": 12806,
+        "type": "0"
+      },
+      {
+        "name": "b07_10804_20260910/G_stochastic_128.json",
+        "bytes": 645745,
+        "type": "0"
+      },
+      {
+        "name": "b07_10804_20260910/G_stochastic_512.json",
+        "bytes": 646363,
+        "type": "0"
+      },
+      {
+        "name": "b07_10804_20260910/checkpoint_512.json",
+        "bytes": 2985,
+        "type": "0"
+      },
+      {
+        "name": "b07_10804_20260910/G_512.pt",
+        "bytes": 11936,
+        "type": "0"
+      },
+      {
+        "name": "b07_10804_20260910/R0_128.json",
+        "bytes": 646462,
+        "type": "0"
+      },
+      {
+        "name": "b07_10804_20260910/G_curve.jsonl",
+        "bytes": 284570,
+        "type": "0"
+      },
+      {
+        "name": "b07_10804_20260910/paired_differences_128.json",
+        "bytes": 228157,
+        "type": "0"
+      },
+      {
+        "name": "b07_10804_20260910/checkpoint_128.json",
+        "bytes": 2983,
+        "type": "0"
+      },
+      {
+        "name": "b07_10804_20260910/R_128.json",
+        "bytes": 646470,
+        "type": "0"
+      },
+      {
+        "name": "b07_10804_20260910/paired_budget_change.json",
+        "bytes": 73206,
+        "type": "0"
+      },
+      {
+        "name": "b07_10804_20260910/G_greedy_128.json",
+        "bytes": 646407,
+        "type": "0"
+      },
+      {
+        "name": "b07_10804_20260910/paired_differences_512.json",
+        "bytes": 215250,
+        "type": "0"
+      },
+      {
+        "name": "b07_10804_20260910/R_512.json",
+        "bytes": 646470,
+        "type": "0"
+      },
+      {
+        "name": "b07_10804_20260910/R0_512.json",
+        "bytes": 646462,
+        "type": "0"
+      },
+      {
+        "name": "b07_10804_20260910/G_greedy_512.json",
+        "bytes": 646359,
+        "type": "0"
+      },
+      {
+        "name": "b07_10804_20260910_admission.json",
+        "bytes": 504,
+        "type": "0"
+      },
+      {
+        "name": "b07_10804_20260910_terminal.json",
+        "bytes": 2055,
+        "type": "0"
+      },
+      {
+        "name": "b07_10804_20260910_terminal.payload.json",
+        "bytes": 1118,
+        "type": "0"
+      },
+      {
+        "name": "vsp03-b07-10804-20260910",
+        "bytes": 0,
+        "type": "5"
+      },
+      {
+        "name": "vsp03-b07-10804-20260910/runner.sh",
+        "bytes": 1662,
+        "type": "0"
+      },
+      {
+        "name": "vsp03-b07-10804-20260910/exit_code",
+        "bytes": 2,
+        "type": "0"
+      },
+      {
+        "name": "vsp03-b07-10804-20260910/status",
+        "bytes": 9,
+        "type": "0"
+      },
+      {
+        "name": "vsp03-b07-10804-20260910/start_time",
+        "bytes": 11,
+        "type": "0"
+      },
+      {
+        "name": "vsp03-b07-10804-20260910/pid",
+        "bytes": 8,
+        "type": "0"
+      },
+      {
+        "name": "vsp03-b07-10804-20260910/task.log",
+        "bytes": 2015,
+        "type": "0"
+      }
+    ],
+    "native_rows": 8192,
+    "curve_rows": 512,
+    "rule_panels_identical": true,
+    "five_contrasts_both_endpoints": true,
+    "paired_world_Q": true,
+    "entropy_schedule": true,
+    "two_immediate_snapshot_files": [
+      "b07_10804_20260910/G_128.pt",
+      "b07_10804_20260910/G_512.pt"
+    ],
+    "primary_source_and_receipts": true,
+    "exposure_counts_reconciled_from_curve_and_native_rows": {
+      "episodes_started": 73728,
+      "episodes_completed": 73728,
+      "team_ticks": 2949120,
+      "target_transitions": 5898240,
+      "decision_rows": 431296
+    },
+    "supervisor_files_match_remote": {
+      "exit_code": {
+        "bytes": 2,
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "pid": {
+        "bytes": 8,
+        "sha256": "6fa2e4d8540f546e29ef3c03eb26a0ff7a7f66d07ebfd9b1998151210bb3d719"
+      },
+      "runner.sh": {
+        "bytes": 1662,
+        "sha256": "edabe63887dec06c9d05946db19ddaf93e245d21b82c9a2cd407d87fcbbe8ca7"
+      },
+      "start_time": {
+        "bytes": 11,
+        "sha256": "486a39fca86dd7f3aa526263370a14415503d16e4ae487f24c3d76bb79502fa8"
+      },
+      "status": {
+        "bytes": 9,
+        "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+      },
+      "task.log": {
+        "bytes": 2015,
+        "sha256": "1c4c70cbf0b693d0e2b7043bc3f78a20da0c88c05dac20855efb25606bd536c9"
+      }
+    }
+  },
+  "monitor_terminal_evidence": "VSP03 B07 terminal evidence\ntask: vsp03-b07-10804-20260910\nlocal_observation_time: 2026-09-10T16:56:07.3329491Z\nstatus: finished\nexit_code: 0\npid: 3086929\ntmux_active: false\nremote_start: 2026-09-11T00:52:30+08:00\nremote_exit: 2026-09-11T00:52:39+08:00\nduration_seconds: 9\ncompletion: complete\narm: G\nepisodes_started: 73728\nepisodes_completed: 73728\nteam_ticks: 2949120\ntarget_transitions: 5898240\ndecision_rows: 431296\nrollout_policy_forwards: 8716\noptimizer_steps: 512\nresource_preflight: passed=true, available_physical_bytes=15183974400\nterminal_published: /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b07_10804_20260910_terminal.payload.json\nall_descendants_terminated: true\n",
+  "scientific_reexecution": {
+    "models": 0,
+    "worlds": 0,
+    "optimizer_steps": 0
+  },
+  "complete_wall_s": 8.927880000032019,
+  "study_elapsed_s": 8.927880000032019,
+  "aggregate_cpu_s": 9.244309,
+  "unit_memory_peak_bytes": 8785920,
+  "earliest_manager_monotonic_s": 517780.880234,
+  "finished_journal_monotonic_us": 517789808114,
+  "resources_unmeasured": [
+    "cgroup_headroom_bytes",
+    "cgroup_memory_current_bytes",
+    "cgroup_memory_max_bytes"
+  ],
+  "cleanup_inventory": {
+    "source_cwd": "/home/wu/hmasd-worktrees/vsp03-b07-adcff0a92559ac5552e24a9861e2b65572b478c5",
+    "source_status_including_ignored": "!! experiments/candidates/vsp_03/vsp03_b01/__pycache__/b01.cpython-310.pyc\n!! experiments/candidates/vsp_03/vsp03_b02/__pycache__/b02.cpython-310.pyc\n!! experiments/candidates/vsp_03/vsp03_b04/__pycache__/deadline.cpython-310.pyc\n!! experiments/candidates/vsp_03/vsp03_b06/__pycache__/__init__.cpython-310.pyc\n!! experiments/candidates/vsp_03/vsp03_b06/__pycache__/b06.cpython-310.pyc\n!! scripts/__pycache__/hmasd_platform.cpython-310.pyc\n",
+    "supervisor_directory": "/home/wu/.agent-tasks/vsp03-b07-10804-20260910",
+    "private_socket_directory": "/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b07_10804_20260910_terminal.tmux",
+    "read_only_process_query": "Only the collection Python process matched the initial broad pgrep; scientific terminal already confirmed. Fresh exact-cwd/argv checks precede cleanup.",
+    "preserve": [
+      "/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b07_10804_20260910",
+      "adjacent _admission.json, _terminal.json, _terminal.payload.json",
+      "committed scientific archive and launch source"
+    ],
+    "source_recovery_archive": {
+      "path": "VSP03_B07_EXECUTION_SOURCE_20260910.tar.gz",
+      "bytes": 42506,
+      "sha256": "ca11417e981aed9314af54e751dacd441210813fe8897636375e592dcd9e8f6d",
+      "members": {
+        "scripts/hmasd_resource_preflight.py": {
+          "bytes": 21314,
+          "sha256": "cb0525e9247f1c7262c198bf051e542282f5928982137b3023d36d5d69eda4dc"
+        },
+        "scripts/__pycache__/hmasd_platform.cpython-310.pyc": {
+          "bytes": 2850,
+          "sha256": "13c2ad30beb25499edc1909d22b5ed29fc60578137f44ef17dc7a19b229d702c"
+        },
+        "scripts/run_vsp03_b06.py": {
+          "bytes": 1280,
+          "sha256": "d425cf2b0ca40d6d8666b557ba4f2eda2764f3513821ed72a4de7c056e9295fd"
+        },
+        "scripts/hmasd_platform.py": {
+          "bytes": 2599,
+          "sha256": "f9e1fd0a88f9c0eef9b706802ae3aaceac4bc2f8ea394e895d01146e8e17865b"
+        },
+        "experiments/candidates/vsp_03/vsp03_b04/launch.sh": {
+          "bytes": 838,
+          "sha256": "77987fcbb3d9467a53836392f4f7ee652f442f65467dfa058ec8db7ea41ef74c"
+        },
+        "experiments/candidates/vsp_03/vsp03_b04/control.py": {
+          "bytes": 4781,
+          "sha256": "cee3ade931bbd06dcbf3a9f0480efe933c435c6b0d341ec4a3e5e959670fc552"
+        },
+        "experiments/candidates/vsp_03/vsp03_b04/__pycache__/deadline.cpython-310.pyc": {
+          "bytes": 4267,
+          "sha256": "bbb4a995c0b755e6368edac277d3f435ae9805a591ace856e217e335ef0d2a18"
+        },
+        "experiments/candidates/vsp_03/vsp03_b04/deadline.py": {
+          "bytes": 5243,
+          "sha256": "abe9e120f5a9489bb8e0a012a4ceef6ee2f979ecb27834ba834ce3719760bc86"
+        },
+        "experiments/candidates/vsp_03/vsp03_b02/b02.py": {
+          "bytes": 16014,
+          "sha256": "9cb1bf9cc44e5cad8185997e3d6b2e71d1d581580c283b1cc77599e80da86be4"
+        },
+        "experiments/candidates/vsp_03/vsp03_b02/__pycache__/b02.cpython-310.pyc": {
+          "bytes": 13897,
+          "sha256": "f1fc68d75cdba6851300aec4da47b85a0470cc86c0c4eddba046254cd10de839"
+        },
+        "experiments/candidates/vsp_03/vsp03_b06/launch_b07.sh": {
+          "bytes": 623,
+          "sha256": "c6f34678e151526e069aef49b5259878dc67e9906831451dd8f26898fb72261b"
+        },
+        "experiments/candidates/vsp_03/vsp03_b06/b06.py": {
+          "bytes": 8735,
+          "sha256": "a8bd7e95000a4dfe94c5573e90a5da898d5248ae57f084a37463d3016f6e70c6"
+        },
+        "experiments/candidates/vsp_03/vsp03_b06/__pycache__/b06.cpython-310.pyc": {
+          "bytes": 7230,
+          "sha256": "e295ea17d794d33c58514959ac61f92c70ba84c3f77537e65589c8e12c0b0664"
+        },
+        "experiments/candidates/vsp_03/vsp03_b06/__pycache__/__init__.cpython-310.pyc": {
+          "bytes": 259,
+          "sha256": "b896ede7a2094e98d885e6945ac97b94fb983641ae2dc7748e456341e27fa9ec"
+        },
+        "experiments/candidates/vsp_03/vsp03_b06/__init__.py": {
+          "bytes": 34,
+          "sha256": "e8b2225d4cd089038426761068fac425ea7df80ffa5830b6cb2878996985b77d"
+        },
+        "experiments/candidates/vsp_03/vsp03_b01/b01.py": {
+          "bytes": 22425,
+          "sha256": "39481f270f2d26349f872b5965754b918f0e5cfd6517e7f043afc1571fd195ed"
+        },
+        "experiments/candidates/vsp_03/vsp03_b01/__pycache__/b01.cpython-310.pyc": {
+          "bytes": 17026,
+          "sha256": "728de1a7eccbd428eedec660e67424d08052f394b164c80b83ac033c6b1bec7f"
+        }
+      },
+      "all_11_source_files_match_frozen_Git": true,
+      "six_generated_pyc_files_preserved": true
+    },
+    "state": "prepared; no removal performed"
+  }
+}
