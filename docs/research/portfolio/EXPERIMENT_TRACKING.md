@@ -13,6 +13,15 @@ It is Portfolio preparation, not a direction-capacity slot, local scientific sel
 allocation or provider Send. Root will dispatch the exact published handoff once and forward the
 complete formed response to the same DM for conformance/intake before applying it.
 
+The DM published request `2026-09-10-next-five-chains-portfolio-01` at HANDOFF commit
+`0448ebae37e78087bfb73cd827614e623afad3eb`, fixed TASK
+`38653196ba2a6c8503cdf9db3fb49fae6d9cb7ba`, Issue 17. Root dispatched the exact HANDOFF once to
+the existing Transport. Persisted transport evidence records one click, exact user node
+`7d27f46d-82ce-4f53-aa40-c87a56e3d13d`, matching bound Portfolio conversation
+`6a9c109e-b264-83e8-a78b-f9ea1b767b7b`, and state `WAITING_GENERATION`; no receipt is yet due.
+The binding's older `archive_status=ARCHIVED` is prior-round history and is not completion evidence
+for this request. Zero direction chains advance while the Portfolio decision is forming.
+
 ## 2026-09-10 control-plane migration
 
 [OWNER_DIRECT consolidation](decisions/2026-09-10-control-plane-consolidation.md) changes future
