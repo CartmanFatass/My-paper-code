@@ -169,3 +169,18 @@ recorded in `fresh1000-s22-preparation/failure-reporting-test.json`.
 DM self-check accepts this mechanical reporting change. Actual learner/native/loss/RNG
 behavior is untouched and prior coverage is reused. No scientific execution used the
 patch; failed-run source9a11fb084 remains the frozen evidence binding.
+
+## Terminal acceptance and closure
+
+The accepted source9a11fb084 sequence ended exit2 after644.00s: W1 COMPLETE1000,
+W100 TECHNICAL_STOP983 recorded blocks, reference not reached. The actual caught
+TypeError has no traceback; no cause or W100 endpoint comparison is established.
+Full19-file readback, initial-state/count checks, intact W1 measurements and possible
+one-block missing exposure are in `RCLE_B03_FRESH1000_S22_RESULT_EVIDENCE_20260910.md`
+and its separate scientific intake. Conservative complete charge894.00/1500s includes
+all support and the prospective reporting-only repair; no new scientific execution.
+
+All source/output/supervisor bytes were archived and compared before exact remote
+checkout/supervisor/stage removal. Disk and Git-registry absence, retained source ref
+and archive hashes are verified in the final intake/closeout receipts. Local/old
+evidence and shared authoring remain. Current allocation is closed; no automatic retry.

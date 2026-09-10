@@ -1125,5 +1125,19 @@
     "both_source_bundles_matched": true,
     "member_verification_seconds": 0.43075230000249576
   },
-  "published_artifact_hash_basis": "SHA256 of UTF-8/LF Git blob bytes for these derived tables; raw remote output/supervisor hashes are unchanged byte digests under hashes."
+  "published_artifact_hash_basis": "SHA256 of UTF-8/LF Git blob bytes for these derived tables; raw remote output/supervisor hashes are unchanged byte digests under hashes.",
+  "remote_closeout": {
+    "exit_code": 0,
+    "wall_seconds": 0.3662557000061497,
+    "stdout": "{\n  \"removed_paths\": [\n    \"/home/wu/hmasd-worktrees/rcle-b03-fresh1000-s22-20260910\",\n    \"/home/wu/.agent-tasks/rcle-b03-fresh1000-s22-20260910\",\n    \"/home/wu/hmasd-inputs/rcle-b03-fresh1000-s22-20260910\"\n  ],\n  \"all_absent_on_disk\": true,\n  \"execution_absent_from_worktree_registry\": true,\n  \"pid_absent\": 3095314,\n  \"preserved_source_ref\": \"refs/recovery/rcle-b03-fresh1000-s22-20260910\",\n  \"source\": \"9a11fb084a16f293c27f3bd1fe8275dc19bd1a47\",\n  \"archive_sha256_after_removal\": \"023d847fe1a2665ebf9788b13ead873a6d106ad2b144156860fa4a44eef9a885\",\n  \"wall_seconds\": 0.05828855594154447,\n  \"new_scientific_invocations\": 0\n}\n",
+    "stderr": "",
+    "exact_registry_line_verification": {
+      "result": {
+        "exact_registry_line": "worktree /home/wu/hmasd-worktrees/rcle-b03-fresh1000-s22-20260910",
+        "line_present": false,
+        "method": "exact membership in splitlines"
+      },
+      "wall_seconds": 0.42907800000102725
+    }
+  }
 }
