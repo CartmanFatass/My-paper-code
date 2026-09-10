@@ -6,6 +6,7 @@ from pathlib import Path
 import statistics
 import subprocess
 import time
+import traceback
 
 from ..uav_motion_prefix_b01.study import Deadline, clean_json, difference_stats, new_counts, write_summary
 
@@ -214,9 +215,11 @@ def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=wri
             try:
                 fit(arm, models)
             except Exception as error:
+                traceback.print_exc()
                 limits.append(f"execution: {type(error).__name__}: {error}")
                 break
     except Exception as error:
+        traceback.print_exc()
         message = f"execution: {type(error).__name__}: {error}"
         if message not in limits:
             limits.append(message)
