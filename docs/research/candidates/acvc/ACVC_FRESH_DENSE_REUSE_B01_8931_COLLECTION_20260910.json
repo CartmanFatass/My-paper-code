@@ -6,7 +6,7 @@
   "supervisor_handle": "acvc-fresh-dense-b01-8931-dfee6e8a3",
   "execution_node": "wsl_4070",
   "remote_checkout": "/home/wu/hmasd-worktrees/acvc-fresh-dense-b01-8931-dfee6e8a3",
-  "status": "supervisor accepted; Monitor adopted; terminal collection pending",
+  "status": "valid complete native B result accepted; inclusive accounting limitation; remote cleanup pending",
   "checks": [
     {
       "name": "single focused synthetic target, shell syntax and creator cleanup",
@@ -24,6 +24,30 @@
       "method": "client Stopwatch including SSH",
       "exit_code": 1,
       "result": "usage text received; no scientific submission"
+    },
+    {
+      "name": "initial local terminal receipt/readback",
+      "charge_s": 0.287587,
+      "method": "full tool command wall; includes source/status read",
+      "exit_code": 0
+    },
+    {
+      "name": "remote archive, scp, extraction and archive hash comparison",
+      "charge_s": 1.2440704,
+      "method": "client Stopwatch including SSH and local extraction",
+      "exit_code": 0
+    },
+    {
+      "name": "authoritative summary/admission/supervisor/timing readback",
+      "charge_s": 0.1049822,
+      "method": "client Stopwatch",
+      "exit_code": 0
+    },
+    {
+      "name": "independent complete-row reduction and durable preservation",
+      "charge_s": 0.3062593,
+      "method": "client Stopwatch; no model load/native work",
+      "exit_code": 0
     }
   ],
   "timing": {
@@ -34,9 +58,22 @@
     "prior_directory_test_s": 27.7442098,
     "new_directory_test_s": 2.0633717,
     "directory_test_total_s": 29.8075815,
-    "monitor_observation_s": null,
-    "whole_task_charge_s": null,
-    "complete_charge_s": null
+    "monitor_observation_s": 1.082,
+    "whole_task_charge_s": 169,
+    "complete_charge_s": null,
+    "whole_command_wall_s": 166.05,
+    "peak_rss_kib": 549820,
+    "runner_to_summary_s": 165.6791978069814,
+    "whole_task_charge_method": "ceil(166 integer supervisor duration +1 timestamp granularity +1 final sleep +.5530635 submission client wall)",
+    "whole_task_cap_pass": true,
+    "dm_runtime_support_s": 4.6189937,
+    "monitor_observation_is_partial": true,
+    "measured_support_subtotal_s": 5.7009937,
+    "native_plus_measured_support_subtotal_s": 174.7009937,
+    "all_support_cap_pass": null,
+    "complete_cap_pass": null,
+    "measurement_limit": "Monitor partial measured1.082s plus two estimated.8s observations and unmeasured publication/message overhead; not a complete inclusive cost bill",
+    "resources": "resources_unmeasured; peakRSS/wall retained, aggregate CPU/scratch/cgroup headroom unavailable"
   },
   "submission": {
     "accepted_handle": "acvc-fresh-dense-b01-8931-dfee6e8a3",
@@ -44,7 +81,7 @@
     "submit_client_wall_s": 0.5530635,
     "accepted_submissions": 1,
     "no_scientific_retry": true,
-    "empirical_counts": "pending actual-node admission and terminal collection"
+    "empirical_counts": "512 training episodes;1024 Adam/backward calls;192 evaluation episodes;180224 team steps; complete"
   },
   "monitor": {
     "thread_id": "01a087e5-2044-7301-abb6-7a1709a98197",
@@ -54,6 +91,47 @@
     "adoption": "MONITOR_ADOPTED forwarded by Root for exact handle/source/node",
     "inclusive_support_required": true,
     "proposed_monitor_support_s": 60,
-    "acceptance_timestamp": "not supplied; authoritative supervisor timestamps will be collected, no placeholder timestamp recorded"
+    "acceptance_timestamp": "not supplied; authoritative supervisor timestamps will be collected, no placeholder timestamp recorded",
+    "terminal_evidence": "C:/Users/fires/Documents/Codex/2026-09-09/hmasd-folr-b02-monitor-20260909/outputs/acvc-fresh-dense-b01-8931-dfee6e8a3-terminal.txt",
+    "bookkeeping_correction": "Root forwarded Monitor correction:1.082s includes only three stopwatch-measured SSH queries; separate initial adoption observation and terminal collection/status each about.8s tool wall; adoption/terminal messaging/publication overhead unmeasured. No new query was commissioned to repair this bill.",
+    "measured_query_components_s": [
+      0.308,
+      0.426,
+      0.348
+    ],
+    "other_observation_estimates_s": [
+      0.8,
+      0.8
+    ],
+    "message_publication_overhead_s": null
+  },
+  "archive": {
+    "local": "C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/exp/fresh_dense_reuse_b01_8931_20260910_collection/collection.tgz",
+    "sha256": "c3b637e02295dadd20db62587a96f5be0a64ea8a78f9474c776c3fc04e738de6",
+    "remote_local_hash_match": true,
+    "captured_files": 14,
+    "final_checkpoint_sha256": "2078fc6495a777e306f4831d9878e82ec5b4a83e97caa41961b649c70e29c312",
+    "readback": "docs/research/candidates/acvc/fresh_dense_reuse_b01_8931_20260910",
+    "full_archive_and_extracted_checkpoint_retained": true
+  },
+  "terminal": {
+    "status": "finished",
+    "exit_code": 0,
+    "supervisor_start": "2026-09-11T07:42:21+08:00",
+    "supervisor_exit": "2026-09-11T07:45:07+08:00",
+    "duration_s": 166,
+    "no_active_tmux_during_collection": true,
+    "memory_admission_pass": true,
+    "physical_and_effective_available_bytes": 15633240064,
+    "raw_monitor_timestamp": "2026-09-10T23:45:31-07:00",
+    "timestamp_limit": "Monitor local label inconsistent with authoritative remote UTC; preserved verbatim and excluded from duration derivation"
+  },
+  "cleanup": {
+    "owner": "DM /root/dm_acvc_restart_successor; Root integration/retention and acceptance",
+    "status": "pending after preservation commit/push",
+    "exact_remote_checkout": "/home/wu/hmasd-worktrees/acvc-fresh-dense-b01-8931-dfee6e8a3",
+    "exact_remote_supervisor": "/home/wu/.agent-tasks/acvc-fresh-dense-b01-8931-dfee6e8a3",
+    "preserve_shared_authoring_checkout": true,
+    "source_reachable_from_published_direction_branch": true
   }
 }
