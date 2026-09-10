@@ -130,3 +130,8 @@ with Monitor; dispatch succeeded, adoption remains pending in E0. Source readbac
 0.6473996s, current support **19.9560872/300s**. EVENT/RANDOM remain unsubmitted. No local
 scientific intake is possible from acceptance alone; this handover changes no prediction,
 law, branch, budget or declared source. Full continuation stays with the same DM.
+
+Root subsequently confirmed actual direct Monitor adoption at this same clean boundary;
+E0 records that update after the historical pending-dispatch entry. RETAIN observation
+is handed over, with terminal collection still due. EVENT/RANDOM remain unsubmitted.
+No new scientific decision, source edit, test or invocation follows this receipt.
