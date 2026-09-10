@@ -168,3 +168,55 @@ latency has its separate administrative scope in E0. There is no native result/p
 score yet. This DM retains terminal collection/technical intake and the preselected EVENT,
 then full scientific intake, Chinese brief and archive-before-delete scoped closeout.
 Root integrates and accepts closure while every direction proceeds independently.
+
+## 7. RETAIN terminal technical acceptance and preselected continuation
+
+Root forwarded the Monitor terminal receipt for the original accepted handle. I read
+`outputs/folr-public-lifecycle-timing-b03-retain-20260910-terminal.txt` in the configured
+Monitor checkout, then directly collected the exact remote summary, checkpoint, memory
+receipt and five supervisor files. All **eight remote/local byte digests match**. Remote
+HEAD and the actual summary both bind full `6fb1e1f6d6f726f133e9aab9c9d96758e3b6d36c`;
+the tracked remote source is clean. No learner/checkpoint execution was used for intake.
+The [machine-readable result](FOLR_PUBLIC_LIFECYCLE_TIMING_B03_RESULT_SUMMARY_20260910.json)
+retains all 128 returns, all 25 training progress rows, receipts, hashes and recomputations.
+
+Card §§3–5 control technical acceptance. The selected arm actually completed 5000 training
+episodes, 100000 native ticks, 4969 RMSprop updates and 128 final episodes/2560 ticks with
+training/evaluation seeds 7806/107806. All final returns are finite; the recomputed mean is
+**6.893125** and the cumulative training-return mean is **−3.76395**. Training and final
+survivor resets are both zero. Torch 2.7.0+cu118, NumPy 1.26.3 and Torch threads 1/1 match
+the fixed environment. Every logged progress row matches episode−31 optimizer updates.
+
+The rule applied verbatim is: “A failed invocation preserves trustworthy partial
+facts and stops the dependent sequence.” The original supervisor and whole-command
+records both exit 0; its completed native output and counts pass the named conditions.
+The fresh memory receipt passed at 19:31:43.478838Z, with physical/effective available
+15321518080 bytes, each above 4 GiB. Cgroup fields remain `resources_unmeasured`.
+The complete invocation took **755.40s wall / 756.45s CPU**, below 1800s. Whole-command
+peak RSS is **677224 KiB**; the narrower runner reports **751.362323189s / 644796 KiB**.
+The 4.037676811s wall difference is unattributed. Monitor's 755s duration and 644796 KiB
+summary reading refer to their respective rounded/narrower measures, not conflicting data.
+
+These are one completed comparator's facts. The three-branch pair rule in card §4 is
+**pending EVENT**; no between-arm effect, mechanism finding or prediction score exists
+yet. Final-episode sample SD 7.819777143 describes this fitted policy's sampled returns,
+not independent training variability. Neither the high RETAIN point nor its sign changes
+the already selected second arm. No new headroom, causal or stable-winner claim follows.
+
+### Decisions this intake produces
+
+**Object-tier technical acceptance.** Options: (a) accept the complete RETAIN artifacts
+and execute the already selected EVENT once; (b) hold for a concrete acceptance defect.
+Recommend/select **(a)**: actual source, counts, receipts and bounded timing satisfy the
+card, with no defect threatening the comparison. **Owner-delegated decision (unattended,
+2026-09-03 instruction): (a).** Root's terminal handoff explicitly supplies this continuation;
+there is no new scientific arm, selection or budget. Current owner reviews return `[]`.
+Owner flags: none. Pair prediction remains pending; owner prediction remains not taken.
+
+Retain all originals and the staged source bundle for the final scoped closeout. EVENT
+will reuse the frozen source in the same detached execution worktree, with its own fresh
+admission immediately adjacent to its runner inside the complete 1800s time/timeout
+command. Total accepted invocations remain 1 of 2 at this publication. Support through
+collection is **15.6963948/300s**; directory tests remain **25.9131638/300s**. The exact
+remaining invocation and observation handover are recorded in E0, then Root owns
+integration while this DM retains collection, pair intake and scoped closeout.
