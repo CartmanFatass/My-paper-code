@@ -135,3 +135,13 @@ The exact remote checkout, source stage and supervisor directory have a live exe
 collection dependency. DM owns preservation and reclamation at terminal acceptance;
 Root owns integration/retention acceptance. The existing shared authoring checkout remains
 in use. Allocation is open; no retry, continuation exposure or stronger claim is selected.
+
+## Confirmed observation handover
+
+Root subsequently confirmed actual Monitor adoption of this exact handle/node/source/
+cwd/output/supervisor binding. Confirmation recorded at 2026-09-10T21:35:46.770720+00:00;
+receipt `fresh1000-s23-preparation/monitor-adoption.json`. This supersedes the pending
+adoption state above. Routine observation belongs to the shared Monitor; DM does not
+poll. Root requested publication of these facts and the exact commit chain, then will
+forward terminal facts to the same DM. No new scientific outcome or completed resource
+measurement is inferred from adoption. Collection/intake/preservation remain pending.
