@@ -1,0 +1,442 @@
+{
+  "passed": true,
+  "python": "C:\\Users\\fires\\.conda\\envs\\hmasd-amd-cpu\\python.exe",
+  "tasks": {
+    "masked_credit": {
+      "baseline": {
+        "passed": false,
+        "checks": [
+          {
+            "name": "hidden_behavior",
+            "passed": false,
+            "returncode": 1,
+            "stdout": "",
+            "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 13, in <module>\nAssertionError\n"
+          }
+        ]
+      },
+      "reference": {
+        "passed": true,
+        "checks": [
+          {
+            "name": "hidden_behavior",
+            "passed": true,
+            "returncode": 0,
+            "stdout": "",
+            "stderr": ""
+          }
+        ]
+      },
+      "wrong": {
+        "passed": false,
+        "checks": [
+          {
+            "name": "hidden_behavior",
+            "passed": false,
+            "returncode": 1,
+            "stdout": "",
+            "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 13, in <module>\nAssertionError\n"
+          }
+        ]
+      },
+      "public_baseline_returncode": 1,
+      "public_reference_returncode": 0,
+      "public_reference_stderr": "",
+      "passed": true
+    },
+    "timeout_bootstrap": {
+      "baseline": {
+        "passed": false,
+        "checks": [
+          {
+            "name": "hidden_behavior",
+            "passed": false,
+            "returncode": 1,
+            "stdout": "",
+            "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 17, in <module>\nAssertionError\n"
+          }
+        ]
+      },
+      "reference": {
+        "passed": true,
+        "checks": [
+          {
+            "name": "hidden_behavior",
+            "passed": true,
+            "returncode": 0,
+            "stdout": "",
+            "stderr": ""
+          }
+        ]
+      },
+      "wrong": {
+        "passed": false,
+        "checks": [
+          {
+            "name": "hidden_behavior",
+            "passed": false,
+            "returncode": 1,
+            "stdout": "",
+            "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 13, in <module>\nAssertionError\n"
+          }
+        ]
+      },
+      "public_baseline_returncode": 1,
+      "public_reference_returncode": 0,
+      "public_reference_stderr": "",
+      "passed": true
+    },
+    "evaluation_stream": {
+      "baseline": {
+        "passed": false,
+        "checks": [
+          {
+            "name": "hidden_behavior",
+            "passed": false,
+            "returncode": 1,
+            "stdout": "",
+            "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 17, in <module>\nAssertionError\n"
+          }
+        ]
+      },
+      "reference": {
+        "passed": true,
+        "checks": [
+          {
+            "name": "hidden_behavior",
+            "passed": true,
+            "returncode": 0,
+            "stdout": "",
+            "stderr": ""
+          }
+        ]
+      },
+      "wrong": {
+        "passed": false,
+        "checks": [
+          {
+            "name": "hidden_behavior",
+            "passed": false,
+            "returncode": 1,
+            "stdout": "",
+            "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 27, in <module>\nAssertionError\n"
+          }
+        ]
+      },
+      "public_baseline_returncode": 1,
+      "public_reference_returncode": 0,
+      "public_reference_stderr": "",
+      "passed": true
+    },
+    "publish_count": {
+      "baseline": {
+        "passed": false,
+        "checks": [
+          {
+            "name": "hidden_behavior",
+            "passed": false,
+            "returncode": 1,
+            "stdout": "",
+            "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 12, in <module>\nAssertionError\n"
+          }
+        ]
+      },
+      "reference": {
+        "passed": true,
+        "checks": [
+          {
+            "name": "hidden_behavior",
+            "passed": true,
+            "returncode": 0,
+            "stdout": "",
+            "stderr": ""
+          }
+        ]
+      },
+      "wrong": {
+        "passed": false,
+        "checks": [
+          {
+            "name": "hidden_behavior",
+            "passed": false,
+            "returncode": 1,
+            "stdout": "",
+            "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 15, in <module>\nAssertionError\n"
+          }
+        ]
+      },
+      "public_baseline_returncode": 1,
+      "public_reference_returncode": 0,
+      "public_reference_stderr": "",
+      "passed": true
+    },
+    "replay_snapshot": {
+      "baseline": {
+        "passed": false,
+        "checks": [
+          {
+            "name": "hidden_behavior",
+            "passed": false,
+            "returncode": 1,
+            "stdout": "",
+            "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 16, in <module>\nAssertionError\n"
+          }
+        ]
+      },
+      "reference": {
+        "passed": true,
+        "checks": [
+          {
+            "name": "hidden_behavior",
+            "passed": true,
+            "returncode": 0,
+            "stdout": "",
+            "stderr": ""
+          }
+        ]
+      },
+      "wrong": {
+        "passed": false,
+        "checks": [
+          {
+            "name": "hidden_behavior",
+            "passed": false,
+            "returncode": 1,
+            "stdout": "",
+            "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 16, in <module>\nAssertionError\n"
+          }
+        ]
+      },
+      "public_baseline_returncode": 1,
+      "public_reference_returncode": 0,
+      "public_reference_stderr": "",
+      "passed": true
+    },
+    "fixed_slot_credit": {
+      "baseline": {
+        "passed": false,
+        "checks": [
+          {
+            "name": "hidden_behavior",
+            "passed": false,
+            "returncode": 1,
+            "stdout": "",
+            "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 11, in <module>\nAssertionError\n"
+          }
+        ]
+      },
+      "reference": {
+        "passed": true,
+        "checks": [
+          {
+            "name": "hidden_behavior",
+            "passed": true,
+            "returncode": 0,
+            "stdout": "",
+            "stderr": ""
+          }
+        ]
+      },
+      "wrong": {
+        "passed": false,
+        "checks": [
+          {
+            "name": "hidden_behavior",
+            "passed": false,
+            "returncode": 1,
+            "stdout": "",
+            "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 11, in <module>\nAssertionError\n"
+          }
+        ]
+      },
+      "public_baseline_returncode": 1,
+      "public_reference_returncode": 0,
+      "public_reference_stderr": "",
+      "passed": true
+    },
+    "finite_horizon": {
+      "baseline": {
+        "passed": false,
+        "checks": [
+          {
+            "name": "hidden_behavior",
+            "passed": false,
+            "returncode": 1,
+            "stdout": "",
+            "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 16, in <module>\nAssertionError\n"
+          }
+        ]
+      },
+      "reference": {
+        "passed": true,
+        "checks": [
+          {
+            "name": "hidden_behavior",
+            "passed": true,
+            "returncode": 0,
+            "stdout": "",
+            "stderr": ""
+          }
+        ]
+      },
+      "wrong": {
+        "passed": false,
+        "checks": [
+          {
+            "name": "hidden_behavior",
+            "passed": false,
+            "returncode": 1,
+            "stdout": "",
+            "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 12, in <module>\nAssertionError\n"
+          }
+        ]
+      },
+      "public_baseline_returncode": 1,
+      "public_reference_returncode": 0,
+      "public_reference_stderr": "",
+      "passed": true
+    },
+    "paired_tape": {
+      "baseline": {
+        "passed": false,
+        "checks": [
+          {
+            "name": "hidden_behavior",
+            "passed": false,
+            "returncode": 1,
+            "stdout": "",
+            "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 19, in <module>\nAssertionError\n"
+          }
+        ]
+      },
+      "reference": {
+        "passed": true,
+        "checks": [
+          {
+            "name": "hidden_behavior",
+            "passed": true,
+            "returncode": 0,
+            "stdout": "",
+            "stderr": ""
+          }
+        ]
+      },
+      "wrong": {
+        "passed": false,
+        "checks": [
+          {
+            "name": "hidden_behavior",
+            "passed": false,
+            "returncode": 1,
+            "stdout": "",
+            "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 19, in <module>\nAssertionError\n"
+          }
+        ]
+      },
+      "public_baseline_returncode": 1,
+      "public_reference_returncode": 0,
+      "public_reference_stderr": "",
+      "passed": true
+    }
+  },
+  "scratch": "C:\\Projects\\HMASD\\temp\\tests\\cm-bank-cviuej1i",
+  "two_task_isolation": true,
+  "seconds": 42.65699999999924,
+  "publication_scratch_supplement": {
+    "public_baseline_returncode": 1,
+    "public_reference_returncode": 0,
+    "hidden_reference": {
+      "passed": true,
+      "checks": [
+        {
+          "name": "hidden_behavior",
+          "passed": true,
+          "returncode": 0,
+          "stdout": "",
+          "stderr": ""
+        }
+      ]
+    },
+    "hidden_wrong": {
+      "passed": false,
+      "checks": [
+        {
+          "name": "hidden_behavior",
+          "passed": false,
+          "returncode": 1,
+          "stdout": "",
+          "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 16, in <module>\nAssertionError\n"
+        }
+      ]
+    },
+    "workspace_root_only_package_and_temp": true,
+    "scratch_empty_after_each_check": true,
+    "passed": true,
+    "seconds": 0.35900000000401633,
+    "invocation_scratch_removed": true
+  },
+  "publication_contract_supplement": {
+    "passed": true,
+    "common_brief_equals_installed_task": true,
+    "partial_score_helper_contract_explicit": true,
+    "note": "Documentation-only acceptance clarification; existing hidden reference/wrong checks unchanged and covered by publication_scratch_supplement."
+  },
+  "masked_credit_row_mean_supplement": {
+    "contract": "Sum active agent terms, mean over ALL time rows (denominator T); detached advantage.",
+    "supersedes": "Original tasks.masked_credit calibration used the pre-freeze active-count contract. Other seven tasks unchanged.",
+    "baseline": {
+      "passed": false,
+      "checks": [
+        {
+          "name": "hidden_behavior",
+          "passed": false,
+          "returncode": 1,
+          "stdout": "",
+          "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 13, in <module>\nAssertionError\n"
+        }
+      ]
+    },
+    "public_baseline_returncode": 1,
+    "reference": {
+      "passed": true,
+      "checks": [
+        {
+          "name": "hidden_behavior",
+          "passed": true,
+          "returncode": 0,
+          "stdout": "",
+          "stderr": ""
+        }
+      ]
+    },
+    "public_reference_returncode": 0,
+    "public_reference_stderr": "",
+    "active_count_wrong": {
+      "passed": false,
+      "checks": [
+        {
+          "name": "hidden_behavior",
+          "passed": false,
+          "returncode": 1,
+          "stdout": "",
+          "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 13, in <module>\nAssertionError\n"
+        }
+      ]
+    },
+    "all_entries_mean_wrong": {
+      "passed": false,
+      "checks": [
+        {
+          "name": "hidden_behavior",
+          "passed": false,
+          "returncode": 1,
+          "stdout": "",
+          "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 13, in <module>\nAssertionError\n"
+        }
+      ]
+    },
+    "passed": true,
+    "seconds": 11.625,
+    "scratch_removed": true
+  }
+}

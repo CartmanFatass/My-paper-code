@@ -1,8 +1,8 @@
 {
-  "version": "cm-design-v0.2-spec-first",
-  "status": "design_only_no_candidate_runs",
+  "version": "cm-pair-v1",
+  "status": "implemented_offline_checked_no_candidate_runs",
   "primary_question": "spec granularity and reusable RL task patterns under continuous context",
-  "source_revision": "0fae6912f20a8322376b6289fca3ead4ef2a56ac",
+  "source_revision": "1385b56b6a0761d4064dcafbce0c66c590ecc5a2",
   "models": {
     "AM": {
       "model": "gpt-6-astra",
@@ -22,11 +22,6 @@
     }
   },
   "primary_context": "continuous_same_cm",
-  "screen_episode": "S1_FOLR",
-  "heldout_episodes": [
-    "H1_UCOPE",
-    "H2_RCLE"
-  ],
   "spec_screen": [
     {
       "id": "S-L0-FRESH",
@@ -108,20 +103,8 @@
     "implementer": null,
     "status": "not_run"
   },
-  "heldout": {
-    "spec_policy_limit": 2,
-    "direct_baseline_config_count": 1,
-    "repeats_per_config_episode": 2,
-    "status": "not_run"
-  },
-  "planned_primary_episode_counts": {
-    "spec_screen": 8,
-    "direct_baseline_screen": 1,
-    "heldout_max": 12
-  },
-  "planned_primary_total_max_excluding_calibration_and_diagnostics": 21,
   "optional_model_extension": {
-    "status": "not_selected_not_run",
+    "status": "optional_configuration_catalog_not_selected_not_run",
     "implementer_transfer": {
       "selected_spec_policy_limit": 2,
       "additional_implementers": [
@@ -161,7 +144,7 @@
     "trial_tokens": null,
     "trial_wall_seconds": null,
     "phase_usd_reference": null,
-    "status": "set_after_protocol_calibration_before_candidate_phase"
+    "status": "single_two_task_run_only_no_batch_selected_no_dollar_cap_measured"
   },
   "notes": [
     "Model and effort are separately recorded; actual runtime settings must be verified.",
@@ -169,5 +152,37 @@
     "Reuse has separately accounted pattern-authoring and maintenance costs.",
     "Final grading is independent of the in-team reviewer.",
     "No scientific invocation is authorized by a fixture or simulated receipt."
-  ]
+  ],
+  "default_run": {
+    "task_count": 2,
+    "classic_count": 1,
+    "non_example_count": 1,
+    "sampling": "seeded_one_classic_then_one_non_example",
+    "difficulty_policy": "different_estimated_labels",
+    "cm": "existing_fresh_top_level_session",
+    "level": "L0",
+    "delivery": "fresh",
+    "automatic_matrix": false,
+    "soft_minutes_per_task": 30
+  },
+  "legacy_preimplementation_campaign": {
+    "screen_episode": "S1_FOLR",
+    "heldout_episodes": [
+      "H1_UCOPE",
+      "H2_RCLE"
+    ],
+    "heldout": {
+      "spec_policy_limit": 2,
+      "direct_baseline_config_count": 1,
+      "repeats_per_config_episode": 2,
+      "status": "not_run"
+    },
+    "planned_primary_episode_counts": {
+      "spec_screen": 8,
+      "direct_baseline_screen": 1,
+      "heldout_max": 12
+    },
+    "planned_primary_total_max_excluding_calibration_and_diagnostics": 21,
+    "status": "superseded_by_two_task_owner_scope_not_scheduled"
+  }
 }

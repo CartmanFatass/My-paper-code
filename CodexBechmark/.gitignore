@@ -1,3 +1,5 @@
 **/_host/runs/
 **/workspace/responses/
+cm_direct_review/workspace/[0-9]*/
+cm_delegation_granularity/workspace/[0-9]*/
 __pycache__/

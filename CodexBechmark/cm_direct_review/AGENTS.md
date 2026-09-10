@@ -1,5 +1,8 @@
 # CM direct-review 场景
 
-当前为设计维护阶段；先读 README.md，不能声称已执行测试或调用尚未实现的 runner。
-维护者可读相关共用设计和主持材料。未来被测会话只读取该 run 分发的代码与说明。
-本项 CM 自己编辑，必须调用独立 reviewer；不创建 implementer，也不执行生产科研。
+用户接受测试时，在 workspace/ 使用全新顶层 session；该 session 就是 CM，
+按 workspace/AGENTS.md 的一句话入口启动。CM 自己编辑，实际调用独立 reviewer，
+不创建 CM 子代理或 implementer。不得读取主持材料、历史正确 patch 或其他 run。
+
+维护任务可读相关共用实现和主持材料。当前实现已完成离线检查，但没有候选模型比较结果。
+生产科研授权和预算不随题包继承。

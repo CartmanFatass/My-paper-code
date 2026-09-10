@@ -1,0 +1,18 @@
+{
+  "type": "object",
+  "properties": {
+    "semantic_passed": {"type": "boolean"},
+    "policy_adherence": {"type": "string", "enum": ["conforming", "deviation", "insufficient_evidence"]},
+    "native_workflow": {"type": "string", "enum": ["conforming", "deviation", "insufficient_evidence"]},
+    "spec_assessment": {"type": "string"},
+    "review_assessment": {"type": "string"},
+    "takeover_and_rework": {"type": "string"},
+    "findings": {"type": "array", "items": {"type": "object", "properties": {
+      "severity": {"type": "string", "enum": ["severe", "material", "minor"]},
+      "evidence": {"type": "string"}, "finding": {"type": "string"}
+    }, "required": ["severity", "evidence", "finding"], "additionalProperties": false}},
+    "limitations": {"type": "array", "items": {"type": "string"}}
+  },
+  "required": ["semantic_passed", "policy_adherence", "native_workflow", "spec_assessment", "review_assessment", "takeover_and_rework", "findings", "limitations"],
+  "additionalProperties": false
+}

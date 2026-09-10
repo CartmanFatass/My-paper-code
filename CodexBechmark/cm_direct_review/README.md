@@ -1,35 +1,21 @@
 # CM 直接实现 + 独立 reviewer
 
-状态：设计已建立；题包/新 runner 尚未制作，未运行模型比较。
-与 [root_delegation](../root_delegation/README.md) 并列，不继承其文本答案协议。
+当前项目基线：Astra/medium CM 直接实现，Astra/high reviewer 独立审查。
+无 implementer。每轮随机一个经典范例和一个非范例，共两题，默认预估难度不同。
+代码题、Git 和检查真实执行；背景回执为明确标注的 synthetic 材料。
 
-CM 实际完成连续代码任务和杂务，独立 reviewer 实际检查改动；不设 implementer。
-流程、代码起点与验收使用[共用设计](../_shared/cm_tasks/DESIGN.md)。
-本项是 [spec 主研究](../_shared/cm_tasks/SPEC_DESIGN.md) 的直接实现基线与后续架构对照。
-先执行 D-AM-AH 基线；其余模型/reviewer 组合放在 spec 筛选之后，不抢先展开。
+在 `C:/Projects/CodexBechmark/cm_direct_review/workspace` 打开新 session，说：
 
-| 候选配置 | CM | 团队 reviewer | 目的 |
-| --- | --- | --- | --- |
-| D-AM-AH | Astra / medium | Astra / high | 当前默认直接实现基线 |
-| D-TH-AH | Terra / high | Astra / high | 固定 reviewer，比较 CM 配置 |
-| D-LMX-AH | Luna / max | Astra / high | 固定 reviewer，比较 CM 配置 |
+> 开始测试，seed=17
 
-这是部署配置比较，模型与 effort 同时不同；不作纯模型因果结论。
-Sol/high 保留为可选扩展，不默默加入首轮预算。
+当前 session 就是 CM。它连续完成两题和杂务、调用真实 reviewer、保留无关改动并
+完成本地 Git 交付。结束后自动生成 REPORT.md、独立评分和真实会话成本，无需创建 CM
+子代理或手工粘贴下一题。[完整入口说明](../_shared/cm_tasks/QUICKSTART.md)。
 
-模型扩展阶段仅对选出的两个 CM，分别换 Terra/high、Luna/max reviewer，并与原
-Astra/high reviewer 结果比较。实际重新执行团队流程；不能把对同一 patch 的离线 review
-分数当成 CM+reviewer 的完整成本/质量。若需要便宜的 reviewer 诊断，可单列离线交叉审查。
+实现与离线校准完成；候选模型试跑尚未发生。每次独立裁判单列成本，未完成或缺失
+证据不按通过处理。预估难度尚未用实际模型成功率校准。
 
-同一 CM 连续经历全部工作，中途不为它人工重述约束。每个配置的最终结果由同一独立
-裁判和隐藏检查评定；不能让正在比较的 reviewer 给自己团队打最终分。
-
-模型扩展后需另外规划两个留出流程各两次独立重复；不计入 spec 主研究的 21 次范围。
-报告整个流程的失败、成本和时间，同时给
-语义修复、参数连接、集成/收尾等分层结果。按事先固定规则最多保留两个直接实现配置；
-未达到同一验收的组不因便宜而被选为生产配置。
-
-候选排序规则：先比较完整流程验收和严重失败，再比较总成本与时间；若互有优势则保留
-两个作留出验证，不用小样本拼出一个任意综合分。筛选结果不直接修改 HMASD 生产角色。
-
-后续启动目录：本场景各 run 的隔离 workspace，由 prepare 生成；目前无可用启动命令。
+本项是 [spec 比较](../_shared/cm_tasks/SPEC_DESIGN.md) 的直接实现参照。
+Terra/high、Luna/max CM 或其他 reviewer 组合是可选后续配置；入口不批量执行它们。
+变更模型需要在新 session 启动前配置并核验实际运行设置，不能仅更改记录中的名称。
+不得从一个两题流程宣称生产角色最优；生产配置不会随 benchmark 改动。

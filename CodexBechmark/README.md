@@ -1,41 +1,24 @@
 # CodexBechmark
 
-多个独立 Codex 测试场景的集合，实际安装在 `C:\Projects\CodexBechmark`。
-顶层仅提供目录索引和通用约定，不默认启动任何一项测试。
+独立 Codex 测试集合，实际安装在 `C:/Projects/CodexBechmark`。在所选场景的
+`workspace` 打开**全新 session**；当前 session 就是被测角色。
 
-| 场景 | 测试目标 | 状态/入口 |
+| 场景 | 测试目标 | 入口 |
 | --- | --- | --- |
-| [root_delegation](root_delegation/README.md) | 持续执行 delegation、正确升级、完成验收 | runner 可用；`root_delegation/workspace/` |
-| [cm_delegation_granularity](cm_delegation_granularity/README.md) | spec 颗粒度、交接详细度、RL 任务模板/范例复用 | 设计/筛选/微例子；完整题包待制作 |
-| [cm_direct_review](cm_direct_review/README.md) | CM 直接实现与独立 reviewer 的组合 | 基线/架构对照设计；未试跑 |
+| [root_delegation](root_delegation/README.md) | 持续委派、升级与验收 | 原 runner 和协议保持原样 |
+| [cm_delegation_granularity](cm_delegation_granularity/README.md) | spec 颗粒度和范例复用 | `cm_delegation_granularity/workspace` |
+| [cm_direct_review](cm_direct_review/README.md) | 当前项目的 CM 直接实现基线 | `cm_direct_review/workspace` |
 
-CM 测试先读 [spec 主设计](_shared/cm_tasks/SPEC_DESIGN.md)。同一个 CM 连续处理代码问题和
-杂务；先比较 spec 策略，再扩展模型，不把每个问题都变成干净上下文的新会话。
+CM 场景打开后说 **“开始测试”** 即可；委派场景可说 **“开始测试，L2 reuse，seed=17”**。
+每轮随机抽一个经典范例和一个非范例，共两题，默认来自不同预估难度。
+同一 CM 连续完成代码、真实子代理审查、回执和 Git 杂务；结束后自动独立评分并提取成本。
+入口不会创建第二个 CM，也不会自动展开配置矩阵。详见 [启动说明](_shared/cm_tasks/QUICKSTART.md)。
 
-```text
-CodexBechmark/
-  README.md
-  AGENTS.md
-  root_delegation/
-    README.md             # 本项测试的启动与评分说明
-    DESIGN.md             # 场景设计
-    AGENTS.md             # 本项测试入口
-    ROOT_PROMPT.md
-    runner.py
-    _host/                # 本项事件、评分依据与私有运行记录
-    workspace/            # 本项被测CLI目录
-      AGENTS.md
-      responses/          # 本项逐次回答与导出记录
-  cm_delegation_granularity/ # spec 主测试的独立入口
-  cm_direct_review/         # 并列的直接实现对照
-  _shared/cm_tasks/         # 两项共用的模式、材料与主持筛选
-  <future_scenario>/        # 后续测试各自独立
-```
+代码题、投递、留档和自动收尾已实现并通过离线检查。尚未运行候选模型比较；
+预估难度、策略优劣和自动流程的真实候选运行效果都没有实测结论。
 
-每项测试拥有自己的入口指令、材料、运行记录和评分方式；不共享隐含的当前run。
-先选择场景，再在该场景的workspace启动全新CLI。不要遍历所有测试材料。
-运行记录保留场景版本、模型与effort；完成回放和通过评分分别报告。
-
-HMASD仓库内同名目录是版本管理副本，仓库外目录用于实际测试，避免加载HMASD
-项目AGENTS。个人全局配置仍可能生效；目录分离不是OS级读取隔离。更新安装时
-只同步维护文件，保留各场景的`_host/runs/`及`workspace/responses/`。
+HMASD 内同名目录是版本管理副本，实际测试在仓库外目录进行，避免加载 HMASD 项目指令。
+个人全局配置仍可能生效；目录分离和 `_host` 访问约定不是 OS 级保密隔离。
+更新只同步维护文件，保留既有运行数据。CM 新运行位于
+`<scene>/workspace/<run-id>` 和 `<scene>/workspace/_host/runs/<run-id>`；
+root_delegation 的既有 `_host/runs` 与 `workspace/responses` 不受影响。
