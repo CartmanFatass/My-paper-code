@@ -44,7 +44,7 @@ requires all three full fits, nine panels and H.”** Every requirement is met.
 Signed distances from −0.01/+0.01 are **+0.010193085169865999** and
 **−0.009806914830134001**. Use the unrounded fixed final mean; no panel or
 secondary comparison replaces it. T−F's descriptive DOWN is only
-0.0010732136708538199 below −0.01; F−G's UP is0.0012662988407198192 above
+0.0010732136708538204 below −0.01; F−G's UP is0.0012662988407198192 above
 +0.01. Their conditional SEs below limit interpretation of these point bands.
 
 Offline checks recomputed every one of6784 episode J values as recorded native
@@ -164,3 +164,6 @@ The earlier selection was a recorded close call; no new close-call or direction
 decision is inferred from a secondary contrast near MEI. The
 [full intake](UCOPE_UAV_SHORT_LEARNED_RENEWAL_CONTINUOUS_B01_8703_INTAKE_20260910.md#5-terminal-technical-acceptance-and-scientific-intake)
 records interpretation, options, recommendation and executed closeout boundary.
+
+
+Scoped preservation/cleanup is complete: [intake§8](UCOPE_UAV_SHORT_LEARNED_RENEWAL_CONTINUOUS_B01_8703_INTAKE_20260910.md#completed-scoped-remote-closeout) and [full receipts](UCOPE_UAV_SHORT_LEARNED_RENEWAL_CONTINUOUS_B01_8703_PRESERVATION_20260910.json). Four remote paths/cwd registration/recorded PID/session are absent;48 local originals and the verified archive remain. Final publication timing is recorded separately in the linked support receipt.

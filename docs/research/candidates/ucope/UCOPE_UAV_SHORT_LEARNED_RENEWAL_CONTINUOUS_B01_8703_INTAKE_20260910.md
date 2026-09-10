@@ -367,3 +367,70 @@ no further per-edit approval is needed. Root still owns main integration and
 acceptance of the returned preservation/reclamation facts. Append actual archive,
 source recovery reference, disk/registration absence and final support accounting
 below; do not claim cleanup or Root acceptance before those facts exist.
+
+
+### Completed scoped remote closeout
+
+Result/intake commit **aa3b3b4a0450ca6ea534cc29008a81098430c842** was pushed
+before remote reclamation. The exact recovery ZIP is
+`temp/directions/ucope/closeout/ucope-uav-short-learned-renewal-continuous-b01-8703-20260910/ucope-8703-recovery.zip`,
+**2789909 bytes**, **48 members**, SHA256
+`35002e5c88ea12a70ca9d68dcb6e755f35b4c5d58b923f882ade98842dc7ca63`.
+Every member was read back with length/SHA256 checks. It preserves all native
+data/weights, supervisor/admission, launch/check/analysis scripts and receipts,
+wrapper and incremental source pack. The original local files remain intact.
+Exact source is also retained by remote recovery reference
+`refs/hmasd-recovery/ucope-8703-20260910` atc40a4cd66.
+
+The remote inventory contained only the six preserved native outputs and
+reproducible Python bytecode among ignored files; no additional dirty or
+untracked source/evidence was found. The one cleanup command verified four
+resolved literal non-symlink targets, exact clean HEAD, terminal finished/exit0,
+recorded PID3132956 and exact tmux absence, all15 native/supervisor/input
+hashes and the recovery reference before removal. At
+**2026-09-10T22:26:29.938411+00:00**, these paths were absent on disk:
+
+- `/home/wu/hmasd-worktrees/ucope-uav-short-learned-renewal-continuous-b01-8703-20260910`
+- `/home/wu/.agent-tasks/ucope-uav-short-learned-renewal-continuous-b01-8703-20260910`
+- `/home/wu/hmasd-inputs/ucope-uav-short-learned-renewal-continuous-b01-8703-20260910.sh`
+- `/home/wu/hmasd-inputs/ucope-learned-8703-source.pack`
+
+The cwd is absent from `git worktree list`; recorded PID3132956 and its exact
+tmux session are absent. The source recovery reference remains atc40a4cd66.
+All48 local originals were rechecked after removal and the archive digest is
+unchanged. Shared authoring checkout/branch and historical evidence remain.
+No new test scratch was created during terminal intake. Source-ref preservation
+took0.5683349999890197s; remote cleanup0.4890880000020843s (inside0.734444s
+outer), exit0 with empty stderr. Cleanup was accepted once and invoked no science.
+The [preservation record](UCOPE_UAV_SHORT_LEARNED_RENEWAL_CONTINUOUS_B01_8703_PRESERVATION_20260910.json) retains the exact
+inventory, source reference,15 hash receipts and full absence readback.
+
+One optional precommit documentation/link read failed before writes because
+Windows selected its legacy default text encoding. Explicit UTF8 read then
+passed all14 local link targets; it changed no reward, measurement or source.
+The committed E0's two secondary boundary distances were subsequently corrected
+at the final displayed rounding digits from the existing summary, without
+changing any result, band or interpretation. No scientific analysis was repeated.
+
+Cost accounting preserves measured command times and unknowns: prior launch
+support8.0199625s plus18.372512500s of terminal outer commands;
+first publication is conservatively charged70s from recorded writer/push stamps
+(actual machine wall was not separately captured). Subtotal
+**96.392475000s**, leaving
+**203.607525000s** of300s for final record/publication.
+The final commit/push wall is written to the receipt named in preservation
+`support_accounting`; it is not silently counted as zero. Nested subprocess
+times are not added twice. Native scientific wall remains2108.73s and the
+conservative complete bound with all300s support remains2408.73s <5400s.
+No measured budget breach occurred; final publication must fit its remaining
+support. Full engineering/control-plane cost and aggregate CPU remain unmeasured.
+
+Main and direction owner reviews again returned[] at this clean boundary; all
+applicable owner audit cells were empty. The completed closeout is a technical
+object decision under Root's existing assignment: options (a) reclaim these
+preserved terminal paths or (b) retain for a live dependency; recommend/select(a)
+because no such dependency remains. **Owner-delegated decision (unattended,
+2026-09-03 instruction): (a).** Owner flag none. Root accepts returned integration,
+retention and reclamation facts; this DM does not invent Root acceptance.
+No retry, fourth fit, automatic successor, new family/Portfolio disposition or
+formal UAV-validation advancement is selected. The terminal assignment is complete.
