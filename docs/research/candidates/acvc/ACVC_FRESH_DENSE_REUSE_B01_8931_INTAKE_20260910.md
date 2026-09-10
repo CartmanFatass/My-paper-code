@@ -143,3 +143,12 @@ The collection receipt supplies exact archive/checkpoint digests and cleanup inv
 Only this completed remote checkout and supervisor root are candidates for removal;
 the shared `codex/acvc` authoring checkout and all historical evidence stay retained.
 Root confirms integration/retention and accepts the verified reclamation facts.
+
+
+Closeout completed after preservation commits94a001969/7edbb1ce0 were pushed and
+Root confirmed the scope. Both exact remote paths are absent on disk; the checkout
+is absent from Git registration. Final measured DM support5.0119838s plus Monitor's
+partial1.082s gives6.0939838s measured support and175.0939838s native-plus-measured
+subtotal; estimated/unmeasured Monitor components remain separate. This completes
+the assigned scientific and cleanup work with the stated cost-conformance limitation.
+No local full archive, shared authoring checkout or other evidence was removed.
