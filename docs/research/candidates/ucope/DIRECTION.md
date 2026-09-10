@@ -55,7 +55,15 @@ remains dated provenance under the controlling evidence specification section 11
   gains and the no-unchanged-normalization recommendation remain.
   Root subsequently allocates one independent8602 pair in1040f2d97 under the
   adopted synthesis. Its [standalone prospective card](UCOPE_UAV_SHORT_FIXED_RENEWAL_CONTINUOUS_B01_8602_SCIENCE_CARD_20260909.md)
-  preserves the recipe and all outcomes; no8602 scientific output is observed.
+  preserves the recipe and all outcomes.8602 is now VALID COMPLETE/WITHIN,
+  final F−G+0.0066306049391794825, with positive final F−H/G−H. The two
+  independent final signs favor F but only8601 exceeds MEI; both1024 points
+  favor G. Above-MEI recurrence is not established. The object-tier intake
+  ends the allocated unchanged sequence and recommends a future learned
+  short-duration versus fixed F/feedback G comparison if separately allocated;
+  no third pair, new card or successor allowance follows. This leaves the
+  earlier learned-{1,4} P77 losses and every short-budget hover loss visible.
+  See the [8602 intake](UCOPE_UAV_SHORT_FIXED_RENEWAL_CONTINUOUS_B01_8602_INTAKE_20260909.md).
 - Previous within-family direction-tier decision:
   **2026-09-09 PRO_FINAL / CONTINUE** inside the existing own-expiry renewal
   family. Select the next bounded B question comparing learned renewal T,
@@ -83,6 +91,20 @@ remains dated provenance under the controlling evidence specification section 11
   localization family and its numerical-locus dependency remains unchanged.
   See the [Convergence intake](UCOPE_UAV_INTERFACE_CONVERGENCE_INTAKE_20260907.md).
 - Latest bounded B observation: **2026-09-09 continuous short fixed renewal
+  B01/8602, VALID COMPLETE / WITHIN**. Final2048 F−G+0.0066306049391794825
+  (conditional SE0.0066248912599555865), F−H+0.05782004427226144 and
+  G−H+0.051189439333081954. F−G is UP/WITHIN/WITHIN; the large512 gap
+  occurred with both learned means below H, then G improved0.12768413563691794
+  by2048. Final F−G retains30 adverse paired worlds.8601 remains UP; the
+  two-unit descriptive mean+0.013682820832988614 does not replace either
+  primary or establish stable superiority. Strongest support is repeated
+  final mean utility over H for both learners; strongest contradiction is
+  absent above-MEI recurrence and both negative1024 gaps. Finite optimization,
+  trajectory, action-holding and credit/co-adaptation effects remain live
+  alternatives. The next unallocated discriminator is learned short timing
+  against its fixed law and legal feedback, not another unchanged repeat.
+  See the [8602 full evidence](UCOPE_UAV_SHORT_FIXED_RENEWAL_CONTINUOUS_B01_8602_RESULT_EVIDENCE_20260909.md).
+- Previous bounded B observation: **2026-09-09 continuous short fixed renewal
   B01/8601, VALID COMPLETE / UP**. Final2048 F−G+0.020735036726797745
   (conditional SE0.00894880856314393), F−H+0.06986516119815461 and
   G−H+0.049130124471356874. The512/1024/2048 F−G points are
