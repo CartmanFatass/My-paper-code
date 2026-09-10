@@ -257,3 +257,37 @@ Its `auto_applied` is null. Publishing it does not wait for an owner
 reply. This intake and the packet are the existing recovery record, not a second approval
 system. At the published handoff boundary the direction awaits its own Pro answer and
 Root may advance independent work.
+
+## 7. Published request and return boundary
+
+Preparation/evidence commit: `b610a07986d839e4a44159d8c7c5a85ca300606c`.
+The final [fixed TASK](https://github.com/CartmanFatass/My-paper-code/blob/b03b1471ff8808d5cf3c9256889b724d501ae92f/docs/research/candidates/variable_n_fleet_churn/pro_packets/20260910_native_service_credit_reentry/delivery/TASK.md)
+and REQUEST are published at `b03b1471ff8808d5cf3c9256889b724d501ae92f` on `codex/vnfc`.
+All 19 effective path/SHA mappings existed at their Git objects, were reachable from the
+observed published direction ref, and matched the embedded path/SHA/purpose/provenance
+manifest. Issue 1 was OPEN with four previous comments at the saved observation. This
+establishes local publication, not current provider access. No tests or native invocation
+were needed for this documentary packet.
+
+Request `2026-09-10-vnfc-native-service-credit-reentry-01` is READY_TO_DISPATCH in
+`pro_packets/20260910_native_service_credit_reentry/delivery/HANDOFF.json` after binding
+the exact committed TASK. Source is this native DM, parent is Root, operator is the
+configured independent Transport. The current registry has the preceding request at
+`DIRECTION_VERIFIED` on `em:variable_n_fleet_churn:convergence` /
+`6a9c674e-6eb8-83e8-b19f-06cb6f3ebe08`; this preserves that post-cutover binding and does
+not reuse retired `6a9aa8d1-3338-83e8-aeae-18863837a4ea`. Transport rechecks provider model
+and Send state. The author has not dispatched Transport or sent a provider message.
+
+One initial uncommitted, unpublished TASK/HANDOFF draft remains in
+`temp/directions/variable_n_fleet_churn/pro_authoring/20260910_native_service_credit_draft01/`.
+The renderer required a fresh output directory for wording revision, so the final generated
+pair uses the `delivery/` directory above; the old draft retains TASK_NOT_PUBLISHED and
+has no acceptance/Send. This is authoring provenance, not a second scientific request.
+The DM retains its preservation/cleanup through the request's intake boundary; Root owns
+eventual direction-checkout reclamation after integration. No live run or scientific
+evidence depends on the draft.
+
+Root's next action is to load this committed HANDOFF and dispatch it exactly once through
+the existing Transport. On the immutable full response, resume this DM for conformance,
+direction intake and any exact authorized continuation. Until then, the proposed scientific
+option and its 900-second allocation remain unexecuted; all prior pauses and limits stand.
