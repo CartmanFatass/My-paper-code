@@ -1,0 +1,317 @@
+{
+  "evidence_role": "DOCUMENTARY_ARITHMETIC_ONLY_NOT_A_NEW_EXPERIMENT",
+  "created_utc": "2026-09-10T20:04:58.228810+00:00",
+  "source_base_sha": "2482db44052705b130b3970456415d2309c99e2b",
+  "method": "Read existing JSON summaries, retain source bytes/digests, and evaluate declared loop arithmetic in Python stdlib. No project import, model/checkpoint load, native library or experiment.",
+  "exposure_line": "Consultation: 0 new models/worlds/native steps/optimizer steps/backward calls/evaluations/tests/profiling. Unselected B02: 1 independent training pair, 2 fresh MAPR models x 89090 parameters, 4096 training + 384 policy evaluation + 64 fixed-reference episodes = 4544 complete episodes / 1090560 native ticks; 24576 training joint transitions; 4096 real optimizer/backward calls; 384 complete BCRH calls. Same-size historical MAPR displacement/initial L2 was 0.29212423694331174 and 0.3045346767518269; new displacement unmeasured.",
+  "consultation": {
+    "new_models": 0,
+    "worlds": 0,
+    "native_steps": 0,
+    "optimizer_steps": 0,
+    "backward_calls": 0,
+    "evaluations": 0,
+    "tests": 0,
+    "profiling": 0
+  },
+  "accepted_source_records": [
+    {
+      "path": "docs/research/candidates/variable_n_fleet_churn/evidence/b01_formal_20260905_02/summary.json",
+      "sha256": "cdf12b9c5306912e9fdf1ea0cde9eea82a5347a4d613ced26ed55f0af64ae49e",
+      "launch_sha": "33e08f440c2117dcfd9457d825f42fef7b38ccd7",
+      "cost_projection": {
+        "terms_seconds": {
+          "shared_setup": 9.802925261989003,
+          "shared_training_worlds": 2.571479359641671,
+          "evaluation_world_generation": 0.057763596996665,
+          "other_measured_overhead": 0.4543270380818285,
+          "MAPR": 170.35347127632122,
+          "DIRECT": 201.22880871553207,
+          "fixed_BCRH": 46.37707634198887,
+          "publication": 0.3178949620050844
+        },
+        "per_arm": {
+          "MAPR": {
+            "unit_seconds": {
+              "collect_episode": 0.022124624187654263,
+              "update_round": 1.902159176999703,
+              "eval_episode": 0.017208612562626513
+            },
+            "projected_seconds": 170.35347127632122
+          },
+          "DIRECT": {
+            "unit_seconds": {
+              "collect_episode": 0.02353470990601636,
+              "update_round": 2.337099948999821,
+              "eval_episode": 0.017996490062614612
+            },
+            "projected_seconds": 201.22880871553207
+          }
+        },
+        "projected_complete_seconds": 431.1637465525564,
+        "cap_seconds": 2700,
+        "source": "maximum observed unit wall; full/check publication row-ratio scaling includes all six checkpoints",
+        "formula": "shared + sum(2048*collect_episode+64*update_round+192*eval_episode) +64*BCRH_episode+publication",
+        "limitation": "planning estimate from selected N7 sizes; no performance guarantee or additional benchmark",
+        "final_summary_write_scope": "final stdout adds this replacement write/readback cost"
+      },
+      "MAPR_exposure": {
+        "training_instances": 1,
+        "rounds": 64,
+        "training_episodes": 2048,
+        "joint_transitions": 12288,
+        "optimizer_steps": 2048,
+        "backward_calls": 2048,
+        "collection_forward_calls": 384,
+        "optimizer_forward_calls": 2048,
+        "optimizer_forward_decisions": 49152,
+        "evaluation_forward_calls": 18,
+        "evaluation_episodes": 192,
+        "initial_parameters": {
+          "count": 89090,
+          "norm": 33.31666549941635,
+          "max_abs": 1.0321377407278138,
+          "rms": 0.11162129301443717
+        },
+        "final_parameters": {
+          "count": 89090,
+          "norm": 35.20383734507634,
+          "max_abs": 1.0510793456531569,
+          "rms": 0.11794391139161839,
+          "displacement_norm": 9.732605486512563,
+          "relative_displacement": 0.29212423694331174
+        }
+      },
+      "DIRECT_exposure": {
+        "training_instances": 1,
+        "rounds": 64,
+        "training_episodes": 2048,
+        "joint_transitions": 12288,
+        "optimizer_steps": 2048,
+        "backward_calls": 2048,
+        "collection_forward_calls": 384,
+        "optimizer_forward_calls": 2048,
+        "optimizer_forward_decisions": 49152,
+        "evaluation_forward_calls": 18,
+        "evaluation_episodes": 192,
+        "initial_parameters": {
+          "count": 148739,
+          "norm": 38.65229876734371,
+          "max_abs": 1.0321377407278138,
+          "rms": 0.10022196169386131,
+          "residual_parameter_norm": 19.595917942265427,
+          "residual_output_parameter_norm": 0.0
+        },
+        "final_parameters": {
+          "count": 148739,
+          "norm": 40.38555271529366,
+          "max_abs": 1.0638084689964964,
+          "rms": 0.10471613451972017,
+          "displacement_norm": 9.906929058626236,
+          "relative_displacement": 0.2563089227437188,
+          "residual_parameter_norm": 21.007158772750866,
+          "residual_output_parameter_norm": 0.4019159714293883
+        }
+      },
+      "wall_before_summary_seconds": 388.15414462699846
+    },
+    {
+      "path": "docs/research/candidates/variable_n_fleet_churn/evidence/b01_seed02_20260905_01/summary.json",
+      "sha256": "3dc1c1457df882c9296e3db84981c5511e9ce70c8a998d99746069a909ea7b24",
+      "launch_sha": "33e08f440c2117dcfd9457d825f42fef7b38ccd7",
+      "cost_projection": {
+        "terms_seconds": {
+          "shared_setup": 8.499549846004811,
+          "shared_training_worlds": 1.7517304318025708,
+          "evaluation_world_generation": 0.04175876399676781,
+          "other_measured_overhead": 0.34146753008826636,
+          "MAPR": 129.53078187030042,
+          "DIRECT": 150.38330526140635,
+          "fixed_BCRH": 37.74674161399889,
+          "publication": 0.25009647400293034
+        },
+        "per_arm": {
+          "MAPR": {
+            "unit_seconds": {
+              "collect_episode": 0.01640372149995528,
+              "update_round": 1.4566697909904178,
+              "eval_episode": 0.014109862578152388
+            },
+            "projected_seconds": 129.53078187030042
+          },
+          "DIRECT": {
+            "unit_seconds": {
+              "collect_episode": 0.01708877987539381,
+              "update_round": 1.759107115009101,
+              "eval_episode": 0.014597024562590377
+            },
+            "projected_seconds": 150.38330526140635
+          }
+        },
+        "projected_complete_seconds": 328.545431791601,
+        "cap_seconds": 2700,
+        "source": "maximum observed unit wall; full/check publication row-ratio scaling includes all six checkpoints",
+        "formula": "shared + sum(2048*collect_episode+64*update_round+192*eval_episode) +64*BCRH_episode+publication",
+        "limitation": "planning estimate from selected N7 sizes; no performance guarantee or additional benchmark",
+        "final_summary_write_scope": "final stdout adds this replacement write/readback cost"
+      },
+      "MAPR_exposure": {
+        "training_instances": 1,
+        "rounds": 64,
+        "training_episodes": 2048,
+        "joint_transitions": 12288,
+        "optimizer_steps": 2048,
+        "backward_calls": 2048,
+        "collection_forward_calls": 384,
+        "optimizer_forward_calls": 2048,
+        "optimizer_forward_decisions": 49152,
+        "evaluation_forward_calls": 18,
+        "evaluation_episodes": 192,
+        "initial_parameters": {
+          "count": 89090,
+          "norm": 33.31666549941635,
+          "max_abs": 0.9193439370157355,
+          "rms": 0.11162129301443717
+        },
+        "final_parameters": {
+          "count": 89090,
+          "norm": 35.36142693198008,
+          "max_abs": 0.9247192455733968,
+          "rms": 0.11847188600108566,
+          "displacement_norm": 10.146079958313502,
+          "relative_displacement": 0.3045346767518269
+        }
+      },
+      "DIRECT_exposure": {
+        "training_instances": 1,
+        "rounds": 64,
+        "training_episodes": 2048,
+        "joint_transitions": 12288,
+        "optimizer_steps": 2048,
+        "backward_calls": 2048,
+        "collection_forward_calls": 384,
+        "optimizer_forward_calls": 2048,
+        "optimizer_forward_decisions": 49152,
+        "evaluation_forward_calls": 18,
+        "evaluation_episodes": 192,
+        "initial_parameters": {
+          "count": 148739,
+          "norm": 38.65229876734371,
+          "max_abs": 0.9193439370157355,
+          "rms": 0.10022196169386131,
+          "residual_parameter_norm": 19.595917942265427,
+          "residual_output_parameter_norm": 0.0
+        },
+        "final_parameters": {
+          "count": 148739,
+          "norm": 40.65842667181265,
+          "max_abs": 0.9624038238161682,
+          "rms": 0.10542367233997017,
+          "displacement_norm": 10.441576654084814,
+          "relative_displacement": 0.2701411555606266,
+          "residual_parameter_norm": 21.112230055816728,
+          "residual_output_parameter_norm": 0.44351649862553294
+        }
+      },
+      "wall_before_summary_seconds": 306.2656297969952
+    }
+  ],
+  "proposed_B02_unselected": {
+    "selected": false,
+    "arm_names": [
+      "INTERVAL",
+      "TERMINAL"
+    ],
+    "independent_training_pairs": 1,
+    "fresh_models": 2,
+    "parameters_per_model": 89090,
+    "rounds_per_arm": 64,
+    "train_episodes_per_round": 32,
+    "decisions_per_episode": 6,
+    "ppo_epochs": 4,
+    "minibatch": 24,
+    "updates_per_arm": 2048,
+    "train_episodes": 4096,
+    "training_joint_transitions": 24576,
+    "eval_checkpoints": [
+      0,
+      32,
+      64
+    ],
+    "evaluation_episodes": 384,
+    "reference_episodes": 64,
+    "fresh_world_fixtures_shared": 2112,
+    "optimizer_steps": 4096,
+    "backward_calls": 4096,
+    "native_ticks_per_complete_episode": 240,
+    "nested_search": "none added; existing BCRH intrinsic enumeration/checker retained at 384 complete calls",
+    "bcrh_complete_calls": 384,
+    "collection_batch_forwards": 768,
+    "optimizer_forwards": 4096,
+    "evaluation_batch_forwards": 36,
+    "new_parameters_initial_L2": "unmeasured; historical same MAPR construction L2 33.31666549941635",
+    "new_parameter_displacement": "unmeasured; must report after actual fitting",
+    "exact_seed_and_namespace": "not selected",
+    "existing_checkpoint_loads": 0,
+    "complete_episodes": 4544,
+    "native_ticks": 1090560
+  },
+  "per_arm_cost_projection": {
+    "INTERVAL": {
+      "formula": "2048*collect_episode + 64*update_round + 192*eval_episode + delta_counter_collection_and_credit_and_publication",
+      "historical_MAPR_unit_seconds": {
+        "collect_episode": 0.022124624187654263,
+        "update_round": 1.902159176999703,
+        "eval_episode": 0.017208612562626513
+      },
+      "historical_component_seconds": 170.35347127632122,
+      "delta_new_path_seconds": null,
+      "delta_state": "unknown, not zero and not a bound"
+    },
+    "TERMINAL": {
+      "formula": "2048*collect_episode + 64*update_round + 192*eval_episode + delta_counter_collection_and_credit_and_publication",
+      "historical_MAPR_unit_seconds": {
+        "collect_episode": 0.022124624187654263,
+        "update_round": 1.902159176999703,
+        "eval_episode": 0.017208612562626513
+      },
+      "historical_component_seconds": 170.35347127632122,
+      "delta_new_path_seconds": null,
+      "delta_state": "unknown, not zero and not a bound"
+    }
+  },
+  "shared_projection_terms_seconds": {
+    "shared_setup": 9.802925261989003,
+    "shared_training_worlds": 2.571479359641671,
+    "evaluation_world_generation": 0.057763596996665,
+    "other_measured_overhead": 0.4543270380818285,
+    "fixed_BCRH": 46.37707634198887,
+    "publication": 0.3178949620050844
+  },
+  "historical_replacement_projection_seconds": 400.28840911334555,
+  "projection_limit": "Historical unit maxima from already accepted same-host MAPR path only. New target/counter overhead and current capacity variability are unknown. Not measured new performance/cost, not an upper bound.",
+  "proposed_caps_unselected": {
+    "complete_machine_wall_seconds": 900,
+    "complete_native_invocation_seconds": 600,
+    "all_support_machine_work_seconds": 300,
+    "support_includes": "preparation, focused checks, source staging, actual Monitor observation commands, collection/readback and closeout",
+    "scientific_invocations": 1,
+    "automatic_retries": 0,
+    "successor": null
+  },
+  "historical_b01_cost_scope": {
+    "original_cumulative_cap_seconds": 2700,
+    "recorded_runner_mixed_cumulative_seconds": 827.76,
+    "consistent_outer_cumulative_seconds": 828.98,
+    "old_balance_transfers": false
+  },
+  "scalar_arithmetic": {
+    "gamma": 1,
+    "lambda": 0.95,
+    "earliest_terminal_weight_lambda5": 0.7737809374999998
+  },
+  "headroom": "Absent tuned same-information upper-reference pair; not zero.",
+  "recasts": 2,
+  "lifecycle": "ACTIVE",
+  "priority": "HIGH"
+}
