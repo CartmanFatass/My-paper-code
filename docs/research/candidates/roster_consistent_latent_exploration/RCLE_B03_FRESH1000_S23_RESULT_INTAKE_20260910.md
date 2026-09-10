@@ -197,10 +197,11 @@ training roots; old failures/count bounds retained. The Chinese brief states bot
 gain and fragmentation loss. The monitor timestamp-label inconsistency is preserved
 and excluded from elapsed-time calculations; it changes no reward or primary value.
 
-Remote execution is terminal. DM now preserves verified evidence/source, then reclaims
-only this exact completed checkout, source stage and supervisor directory. Root accepts
-integration/retention. Local raw evidence and the shared authoring checkout stay intact;
-no scientific work remains authorized in this allocation after scoped closeout.
+Remote execution is terminal. DM preserved verified evidence/source and reclaimed only
+this exact completed checkout, source stage and supervisor directory; final disk and
+worktree-registration absence is recorded below and in the execution record. Root accepts
+integration/retention. Local raw evidence and the shared authoring checkout remain intact;
+no scientific work remains authorized in this completed allocation.
 
 ## 8. Restart recovery and preservation
 
@@ -237,3 +238,10 @@ match their retained digests, and a recovery ref pins source9a7b7a3d1. Archive i
 and final removal facts are in the execution record. Preservation took 5.7546513 s,
 within the existing150s post-support charge. Shared authoring and prior/raw evidence
 remain. No scientific dependency is missing; Root owns integration/retention acceptance.
+
+After publication68d406726, scoped removal completed in .9523736s. All three exact
+execution/stage/supervisor paths are absent on disk; execution worktree registration is
+absent, while the verified archive and source ref remain. The final execution record
+and `closeout/b03-fresh1000-s23-20260910/removal.json` record these facts. Conservative
+full charge remains978.73/1500s. This completes the assigned recovery with no new
+invocation, retry, successor, scientific blocker or pending direction-local cleanup.
