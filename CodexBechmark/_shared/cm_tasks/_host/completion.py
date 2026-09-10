@@ -16,7 +16,7 @@ from . import runtime
 def detach(directory, state):
     if state.get("finalizer"):
         return
-    command = [sys.executable, "-B", str(Path(state["runtime_dir"]) / "runner.py"),
+    command = [sys.executable, "-X", "utf8", "-B", str(Path(state["runtime_dir"]) / "runner.py"),
                "finalize", "--run", str(directory)]
     options = {"start_new_session": True} if os.name != "nt" else {
         "creationflags": subprocess.CREATE_NO_WINDOW | subprocess.CREATE_NEW_PROCESS_GROUP}
@@ -68,6 +68,7 @@ def report(directory, state, status):
     content = (f"# CM benchmark {state['id']}\n\n自动收尾状态：{status}\n\n抽题 seed：`{state['seed']}`。本轮两题：\n\n{rows}\n\n"
         f"行为检查：{label(judgement.get('behavior_passed'))}；流程产物：{label(judgement.get('protocol_artifacts_passed'))}；"
         f"完整判定：{label(judgement.get('full_run_passed'))}。\n\n"
+        "证据不足或裁判执行受阻显示为未完成/无法确认，不等于代码缺陷。模型默认值不是固定测试组合；实际配置见导出记录。\n\n"
         "- [逐题与流程评分](judgement.json)\n- [实际会话与配置](export.json)\n"
         "- [独立裁判](assessment/report.json)\n- [CM 团队成本原始报告](cost/team.md)\n"
         "- [独立裁判成本原始报告](cost/evaluator.md)\n- [成本提取状态](cost/status.json)\n\n"

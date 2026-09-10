@@ -6,7 +6,8 @@
 
 **现在已经接通单轮自动流程：抽题、连续执行、留档、独立评分和成本提取。**
 选择配置、打开全新 session 由用户完成；跨轮统计、策略排序和下一轮选择尚未自动化。
-当前完成了离线验证，尚无真实候选模型试跑结果；首次在线执行仍需验证实际角色加载和后台收尾。
+已出现真实候选试跑。2026-09-10修复自选组合、裁判材料传递和Windows收尾编码；
+模型默认值只是建议，用户选择组合优先，实际模型由元数据记录。未核实证据不算通过。
 
 ## 1. 两个测试分别测什么
 
@@ -22,7 +23,7 @@
 | 交接处理 | 不套用 L0–L3 委派处理 | L0–L3 × fresh/reuse，单轮只选一格 |
 
 Astra、Terra 的配置标识分别是 `gpt-6-astra`、`gpt-5.6-terra`。
-直接实现的角色配置来源于当前 HMASD 工作方式；强制 Terra 委派是实验处理，
+表中角色配置是默认建议，用户可选择其他模型/effort组合。委派职责是实验处理，
 不能称为生产 CM 当前默认做法。两项测试都没有运行中的 DM：任务由冻结题包提供，
 不是再调用一个 DM 现场设计科学任务。它们也不启动原有 `root_delegation` 测试。
 
@@ -181,7 +182,7 @@ helper 随后依次：
 | `tasks[].final.passed` | 最终快照中的该题行为是否通过 |
 | `behavior_passed` | 两题流程闭合，且两题最终行为均通过 |
 | `protocol_artifacts_passed` | 已实现的流程产物检查是否全部通过 |
-| `configuration.status` | `verified`：观察到的模型/角色等符合请求；`mismatch`：存在不符；`unmeasured`：证据缺失 |
+| `configuration.status` | `verified`：实际模型元数据齐备且符合显式选择；`mismatch`：偏离显式选择；`unmeasured`：证据缺失；角色职责与工作目录由独立工作流评审核实 |
 | `semantic_review` / `assessment/report.json` | 语义、档位遵循、原生工作流、spec/review/接管的独立评价 |
 | `full_run_passed` | 行为、流程、配置与成功完成的独立裁判共同满足要求 |
 
@@ -189,8 +190,8 @@ helper 随后依次：
 裁判还需给出语义通过，以及 policy/native workflow conforming。
 
 `full_run_passed=true` 表示上述实现条件满足。
-`false` 需查看分项：它可能是代码/流程错误，也可能是配置不符或证据不足。
-没有独立评估时该字段可为 `null`，不能当成功。
+`false` 表示已经发现行为/流程/显式配置偏离或独立评审确认的问题。
+裁判未完成、证据不足等无法确认情况为 `null`，不能当成功，也不代表已发现代码缺陷。
 `finalization.status=finished` 只表示收尾流程走到末尾，不等于质量通过、费用完整或裁判无故障。
 
 原生交接正文若加密或缺失，裁判无法核实的部分应标 `insufficient_evidence`；

@@ -134,8 +134,8 @@ class ProtocolTests(unittest.TestCase):
         runner.save(directory / "assessment/report.json", {"semantic_passed": True,
             "policy_adherence": "conforming", "native_workflow": "conforming"})
         fake = subprocess.CompletedProcess([], 0, json.dumps({"passed": True, "checks": []}), "")
-        for exit_code, identity, wanted in ((1, "grader-root", False), (0, None, False),
-                                           (0, "candidate-root", False), (0, "grader-root", True)):
+        for exit_code, identity, wanted in ((1, "grader-root", None), (0, None, None),
+                                           (0, "candidate-root", None), (0, "grader-root", True)):
             runner.save(directory / "assessment/completion.json", {"returncode": exit_code,
                 "session_id": identity, "ended": "2026-09-10T03:00:10Z"})
             with patch.object(runtime.subprocess, "run", return_value=fake):
@@ -160,6 +160,7 @@ class ProtocolTests(unittest.TestCase):
 
     def test_runtime_metadata_is_not_self_report(self):
         state = vars(self.options())
+        state["expected_models"] = {role: state[role] for role in ("cm", "implementer", "reviewer")}
         state["workspace"] = str(self.root)
         config = lambda model, effort: [{"model": model, "effort": effort}]
         rows = [{"id": "root", "agent_role": None, "turn_configurations": config(*state["cm"])},
@@ -172,8 +173,36 @@ class ProtocolTests(unittest.TestCase):
         rows[2]["turn_configurations"] = config("gpt-6-astra", "medium")
         self.assertEqual(runtime.verify_configuration(state, meta)["status"], "mismatch")
         self.assertEqual(runtime.verify_configuration(state, {"sessions": []})["status"], "unmeasured")
-        state["mode"] = "direct"
-        self.assertEqual(runtime.verify_configuration(state, meta)["status"], "mismatch")
+        state["expected_models"] = {}
+        rows[2]["agent_role"] = None
+        self.assertEqual(runtime.verify_configuration(state, meta)["status"], "verified")
+        self.assertIsNone(runtime.verify_configuration(state, meta)["observed_sessions"][2]["role"])
+        rows[2]["turn_configurations"] = []
+        self.assertEqual(runtime.verify_configuration(state, meta)["status"], "unmeasured")
+
+    def test_inline_assessment_contains_closed_evidence(self):
+        for name in ("candidate/tasks/task.md", "candidate/work/reviews/task.md", "first/task/code.py",
+                     "POLICY.md", "behavior.json", "boundaries.json", "native_evidence.json"):
+            materials.write(self.root / name, "中文 evidence " + name)
+        materials.write(self.root / "candidate/temp/scratch.txt", "not evidence")
+        packet = json.loads(runtime.assessment_packet(self.root))["closed_run_evidence_files"]
+        self.assertEqual(len(packet), 7)
+        self.assertTrue(all("中文" in item["content"] for item in packet))
+        self.assertFalse(any("scratch" in item["path"] for item in packet))
+
+    def test_cost_keeps_unicode_reports_with_legacy_stdout(self):
+        runner.save(self.root / "export.json", {"runtime": {"root_session": "root"}})
+        runner.save(self.root / "assessment/completion.json", {"session_id": "judge"})
+        script = self.root / "cost.py"
+        script.write_text("# fixture", encoding="utf-8")
+        args = argparse.Namespace(script=script, pricing_json=None)
+        out = io.TextIOWrapper(io.BytesIO(), encoding="cp1252")
+        completed = subprocess.CompletedProcess([], 0, "中文完整成本\n", "")
+        with patch.object(runtime.subprocess, "run", return_value=completed), contextlib.redirect_stdout(out):
+            runtime.cost(args, self.root, {}, BASE)
+        self.assertEqual((self.root / "cost/team.md").read_text(encoding="utf-8"), "中文完整成本\n")
+        self.assertEqual(set(runner.read(self.root / "cost/status.json")["results"]), {"team", "evaluator"})
+        out.close()
 
     def test_existing_session_begin_does_not_launch_a_cm(self):
         output = io.StringIO()

@@ -92,11 +92,14 @@ The two tasks are frozen before execution. Task identities arrive sequentially. 
 source, public acceptance and final checks are identical across treatment groups.
 Five-item handoff structure:
 {FIVE_ITEMS}
-Use the configured named roles cm_reviewer and (delegation only) cm_implementer. Spawn with
+Use real independent reviewer and (delegation only) implementer agents. The supplied
+cm_reviewer/cm_implementer roles are convenient defaults; user-selected model/effort combinations
+and equivalent child names are allowed. Record actual child IDs and assigned roles in the
+handoff/review records. Spawn with
 no inherited conversation (`fork_turns="none"`, or the runtime's fresh-context equivalent).
 If the runtime cannot provide real independent agents, record the deviation and stop the
-dependent task honestly; never replace the agent with a written imitation. Role model/effort
-comes from the supplied config. Do not override it in spawn. Child tools follow the same scope.
+dependent task honestly; never replace the agent with a written imitation. Use the owner's
+chosen models/efforts, or the supplied defaults when none were specified. Child tools follow the same scope.
 
 Run `python -B benchmark.py next` now. For EACH task, visit these boundaries in order:
 

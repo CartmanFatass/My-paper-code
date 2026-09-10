@@ -9,8 +9,8 @@
 | 当前项目直接实现基线 | `C:/Projects/CodexBechmark/cm_direct_review/workspace` |
 | 委派详细度与范例复用 | `C:/Projects/CodexBechmark/cm_delegation_granularity/workspace` |
 
-当前打开的顶层 session 本身就是 CM。入口使用 Astra/medium；
-reviewer 使用 Astra/high；委派场景另用 Terra/high implementer。
+当前打开的顶层 session 本身就是 CM。Astra/medium CM、Astra/high reviewer、
+Terra/high implementer 只是默认建议，用户可以自选组合；按实际运行元数据记录。
 
 发送一句：
 
@@ -61,11 +61,16 @@ Torch 2.7.0+cpu（默认 `C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe`�
 `codex-task-cost-analysis`。自动裁判会调用一个独立模型会话，成本单列。
 定价为冻结的 API Standard 参考口径，不是订阅额度或实际账单。
 
-模型配置在新 session 启动前生效。当前入口预设基线模型；若改 CM/子代理模型，
-先修改入口 `.codex` 对应配置，再开新 session，并用匹配的
-`--cm MODEL EFFORT / --implementer MODEL EFFORT / --reviewer MODEL EFFORT` 记录请求。
-在运行中传参数只改变请求记录，不能改变一个已运行 session 的实际模型。
-模型/effort 由真实日志核验，设置不符时不会算作该组通过。
+先在界面选择CM模型。通过 `--cm MODEL EFFORT / --implementer MODEL EFFORT / --reviewer MODEL EFFORT`
+记录本轮明确选择；未指定的模型字段不作为硬性约束。生成角色是便利入口，可使用等价真实子代理，
+但必须记录ID/职责并接受独立工作流核验，不能从名字推断模型或实际工作。
+参数不能切换已运行CM模型；显式指定与实际不符才算配置偏离，证据缺失标未核实。
+
+维护者可对已关闭run使用 `runner.py export|judge|assess|cost --run <目录> --maintenance`
+运行修复后的收尾工具，冻结runtime、题目和候选快照不变。补评额外传 `assess --retry`，
+前次已结束裁判归档至assessment_attempts/，全部裁判费用单列保留；禁止覆盖仍运行的裁判。
+裁判完整证据通过标准输入提供，保留assessment/input.txt；不依赖shell读取，权限不放宽。
+`full_run_passed=null`表示尚不能确认，不把评估受阻或证据不足显示为代码失败。
 
 ## 维护者命令
 

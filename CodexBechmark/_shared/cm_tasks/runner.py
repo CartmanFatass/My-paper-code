@@ -100,6 +100,13 @@ def candidate_message(directory, state, extra="", include_brief=True):
 
 def prepare(args):
     from _host.task_bank import TASKS
+    expected_models = {role: getattr(args, role) for role in ("cm", "implementer", "reviewer")
+                       if getattr(args, role) is not None}
+    for role, default in {"cm": ["gpt-6-astra", "medium"],
+                          "implementer": ["gpt-5.6-terra", "high"],
+                          "reviewer": ["gpt-6-astra", "high"]}.items():
+        if getattr(args, role) is None:
+            setattr(args, role, default)
     if args.seed is None:
         args.seed = secrets.randbits(32)
     probe = subprocess.run([args.python, "-B", "-c",
@@ -136,6 +143,8 @@ def prepare(args):
              "workspace": str(workspace), "python": str(Path(args.python).resolve()),
              "runtime_dir": str(runtime_dir),
              "cm": args.cm, "implementer": args.implementer, "reviewer": args.reviewer,
+             "expected_models": expected_models,
+             "configuration_policy": "user_selected",
              "task_minutes": args.task_minutes, "checkpoints": [], "launch": None,
              "dependencies": dependencies,
              "runtime_verification": "unmeasured", "library_cost": "unmeasured"}
@@ -267,9 +276,9 @@ def main(argv=None):
     preferred_python = Path.home() / ".conda/envs/hmasd-amd-cpu/python.exe"
     prep.add_argument("--python", default=str(preferred_python) if preferred_python.is_file() else sys.executable)
     prep.add_argument("--task-minutes", type=int, default=30)
-    prep.add_argument("--cm", nargs=2, default=["gpt-6-astra", "medium"], metavar=("MODEL", "EFFORT"))
-    prep.add_argument("--implementer", nargs=2, default=["gpt-5.6-terra", "high"], metavar=("MODEL", "EFFORT"))
-    prep.add_argument("--reviewer", nargs=2, default=["gpt-6-astra", "high"], metavar=("MODEL", "EFFORT"))
+    prep.add_argument("--cm", nargs=2, metavar=("MODEL", "EFFORT"))
+    prep.add_argument("--implementer", nargs=2, metavar=("MODEL", "EFFORT"))
+    prep.add_argument("--reviewer", nargs=2, metavar=("MODEL", "EFFORT"))
     prep.add_argument("--root", help="Alternate isolated benchmark collection directory")
     sub.add_parser("prepare", parents=[prep])
     begin_parser = sub.add_parser("begin", parents=[prep])
@@ -277,6 +286,10 @@ def main(argv=None):
     for name in ("next", "checkpoint", "status", "export", "launch", "judge", "assess", "cost", "finalize"):
         command = sub.add_parser(name)
         command.add_argument("--run", required=True, help="Absolute host run directory returned by prepare")
+        if name in ("export", "judge", "assess", "cost", "finalize"):
+            command.add_argument("--maintenance", action="store_true", help="Use maintained post-run tools; preserve frozen candidate/runtime inputs")
+        if name == "assess":
+            command.add_argument("--retry", action="store_true", help="Archive a completed previous assessment before a requested reassessment")
         if name == "checkpoint":
             command.add_argument("--boundary", choices=BOUNDARIES, required=True)
             command.add_argument("--note", required=True)
@@ -315,7 +328,7 @@ def main(argv=None):
     directory = Path(args.run).resolve()
     state = read(directory / "state.json")
     frozen = Path(state["runtime_dir"]).resolve()
-    if frozen != BASE:
+    if frozen != BASE and not getattr(args, "maintenance", False):
         return subprocess.call([sys.executable, "-B", str(frozen / "runner.py"),
                                 *(sys.argv[1:] if argv is None else argv)])
     if args.command == "next":
@@ -336,6 +349,9 @@ def main(argv=None):
 
 
 if __name__ == "__main__":
+    for stream in (sys.stdout, sys.stderr):
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8")
     try:
         raise SystemExit(main())
     except (ValueError, OSError, subprocess.CalledProcessError) as exc:

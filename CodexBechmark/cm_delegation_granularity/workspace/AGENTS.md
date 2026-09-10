@@ -1,7 +1,10 @@
 # 独立 CM 测试入口
 
 用户在本目录打开的当前顶层 session 本身就是 CM。不要创建 CM 子代理，不要另启动一个 CM CLI。
-默认根配置 Astra/medium；独立 reviewer Astra/high。仅委派场景使用 Terra/high implementer。
+默认建议 Astra/medium CM、Astra/high reviewer、Terra/high implementer；用户可选择任意可用组合。
+实际模型从运行元数据记录，不要求匹配默认值。用户指定组合时向start.py传入
+`--cm MODEL EFFORT --implementer MODEL EFFORT --reviewer MODEL EFFORT`，只传已明确的角色。
+这些参数记录选择并生成子角色配置，不切换当前CM模型；当前CM使用用户在界面选择的模型。
 这是独立 benchmark，不继承 HMASD 科研运行授权，不读取生产源或主持答案。
 
 用户说“开始测试”时，直接运行 `python -B start.py`。用户指定 seed 时加 `--seed <整数>`；
