@@ -1,5 +1,18 @@
 # HMASD experiment tracking
 
+## 2026-09-10 research restart and Portfolio selection
+
+OWNER_DIRECT: “开始研究”. Root resumed the research loop under the consolidated control plane.
+The prior five-direction synthesis batch is fully accepted, integrated and closed; there is no
+live scientific handle or pending native acceptance at this boundary. Therefore zero direction
+chains currently count as advancing. The designated recent UCOPE DM has accepted one complete
+Portfolio preparation assignment in shared checkout `C:/Projects/HMASD-worktrees/codex-portfolio`
+at synced revision `540ed0d35`: align current evidence and publish a fixed cross-direction Pro
+question selecting the next five direction chains. This consultation has zero scientific exposure.
+It is Portfolio preparation, not a direction-capacity slot, local scientific selection, experiment
+allocation or provider Send. Root will dispatch the exact published handoff once and forward the
+complete formed response to the same DM for conformance/intake before applying it.
+
 ## 2026-09-10 control-plane migration
 
 [OWNER_DIRECT consolidation](decisions/2026-09-10-control-plane-consolidation.md) changes future
