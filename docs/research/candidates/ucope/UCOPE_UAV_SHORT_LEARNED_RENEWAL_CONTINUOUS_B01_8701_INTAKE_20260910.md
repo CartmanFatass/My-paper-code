@@ -249,3 +249,42 @@ The latest main owner-review read returned[]; nothing needed marking answered.
 The source/command binding above is now fixed for the one submission. Scientific
 admission, accepted process and Monitor adoption are still pending facts at this
 prelaunch record. The next result must retain all outcomes and end this allocation.
+
+### Accepted invocation and actual Monitor adoption
+
+**Exactly one submission was accepted**, using the committed3182c4c84 source and
+the literal wrapper/submission above. Agent-task started tmux
+`agent_ucope-uav-short-learned-renewal-continuous-b01-8701-20260910` and the
+named supervisor log. The actual-node canonical admission passed at
+**2026-09-10T17:24:59.907722Z**: physical/effective available memory
+**15633612800bytes**, floor4294967296, `/proc/meminfo`, both floor checks true,
+empty failure reasons. This precedes scientific root/RNG/model creation in the
+same `&&`-joined command. Initial direct status: **running, exit_code=null,
+PID3090371, uptime28s, tmux_active=true**.
+
+`preparation/submission-receipt.txt` preserves the actual supervisor response;
+`acceptance-admission.json` preserves direct status and admission. The source
+binding record **00f4cf24b** was committed/pushed before submission. No replacement
+command, second handle, extra fit or scientific retry was submitted.
+
+DM sent **MONITOR_ADD directly** to the configured shared task
+01a087e5-2044-7301-abb6-7a1709a98197; the app returned that exact threadId with
+`isError=false`. `preparation/monitor-dispatch.json` retains the return. Root
+then confirmed **actual Monitor adoption** of the exact handle/source/cwd/output,
+an active Monitor goal and accepted canonical admission; this confirmation was
+received before this record at2026-09-10T17:29:04Z. Root's confirmation did not
+supply a separate observation timestamp, so none is invented here.
+
+**State: running under the adopted Monitor; collection and scientific intake
+pending.** DM stopped routine remote polling at dispatch. Root forwards the
+terminal facts to the original science/engineering/collection owner
+`/root/dm_ucope_p47_resume`. Terminal collection must account complete outer/fit
+time, all raw outcomes, actual T-head exposure, source/artifact receipts, the
+fixed primary rule and predictions; preserve the operational finding separately.
+No test pass, source review or process acceptance is a scientific result.
+
+Cleanup owner/event: DM prepares the exact remote cwd/wrapper/source-pack and
+result/supervisor preservation inventory after collection; Root confirms main
+integration/retention before scoped reclamation. Shared `codex/ucope` authoring
+checkout remains in use. No other branch, checkout, historical scratch or evidence
+is in this cleanup scope. No further work is allocated after this one triple/intake.
