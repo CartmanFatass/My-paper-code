@@ -1,6 +1,6 @@
 # ACVC fresh DENSE reuse B01 — engineering and execution
 
-Date: 2026-09-10. **One scientific submission accepted; monitor adopted; collection pending.**
+Date: 2026-09-10. **One run completed and technically accepted; scoped closeout and scientific intake are being published.**
 
 ## Authority and owned work
 
@@ -193,3 +193,33 @@ handle/source/cwd/root on wsl_4070, with the independent monitor goal active. Ro
 `/root/dm_acvc_p68_reentry` (source task01a08447-a33c-7881-8c2a-a6e7e918b2a7).
 DM has no parallel polling loop and retains collection, engineering acceptance and
 separate scientific intake. There is no second submission, retry or successor.
+
+## Terminal collection and engineering acceptance
+
+Root forwarded the adopted monitor's terminal receipt, directly observed at
+`2026-09-10T18:40:50.1426335Z`: finished, exit0, tmux inactive, remote start
+`2026-09-11T02:37:57+08:00`, remote exit `2026-09-11T02:40:46+08:00`, integer
+supervisor duration169s. The full direct witness and supervisor files are preserved in
+[fresh_dense_reuse_b01_20260910](fresh_dense_reuse_b01_20260910/).
+
+The allocated endpoint completed:512 training episodes,256 rollouts,1024 finite update
+records/Adam calls, one final checkpoint and192 final evaluation rows. All704 raw rows,
+reset keys, update rollout/epoch keys and finite S=256J values were checked. Independent
+finite reduction from the raw rows matched all paired vectors, means, conditional SEs,
+reading-rule labels and intervention totals. Actual nonzero actor/critic movements are
+published in the summary. No partial-update or publication limit occurred.
+
+The actual-node admission passed both4GiB floors with15633838080 bytes available;
+its source is/proc/meminfo and cgroup headroom was unmeasured. The outer timer reports
+168.37s admission-through-command-exit and555852KiB peak RSS. Runner-to-summary is
+157.50844278297154s and is not substituted for the whole task. The wider conservative
+supervisor charge is172s, including timestamp granularity, its final one-second sleep
+and the full0.6461753s submit-client interval. Aggregate CPU work remains unmeasured.
+
+The [collection receipt](ACVC_FRESH_DENSE_REUSE_B01_COLLECTION_20260910.json) records
+all charged support calls and preservation state. The complete local tar archive hash
+matches the remote441de0bda690b1d99c2cfc653c2cd3c088f4bb434062117df755db18942c16a4.
+All16 native/support/supervisor files are inventoried; the final282957-byte checkpoint
+is retained in the archive and extracted runtime root. Every other file is also copied
+into the durable result folder. No retry, extra test/panel, replacement or model loading
+occurred during collection. Scientific interpretation is in the separate intake.
