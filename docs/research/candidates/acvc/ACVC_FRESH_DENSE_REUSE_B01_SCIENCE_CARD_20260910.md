@@ -3,7 +3,7 @@ Binding MARL structure: (d) multi-agent partial observability: each UAV uses its
 
 # ACVC fresh DENSE reuse B01 — science card
 
-Date: 2026-09-10. **B/EXPLORE; option A allocated once; implementation pending.**
+Date: 2026-09-10. **B/EXPLORE; the sole allocated scientific result is complete.**
 Section8 records the later Portfolio allocation. The original design-stage statements in
 §§1,6–7 below remain historical; §8 supersedes their no-execution boundary prospectively.
 The [design intake](ACVC_FRESH_DENSE_REUSE_B01_DESIGN_INTAKE_20260910.md) records the decision;
@@ -292,3 +292,22 @@ supplies the five engineering facts and current DM/Monitor responsibilities. Sco
 At application publication, source implementation/independent review/runtime checks/launch
 are pending, and new scientific exposure remains zero. Actual command, published source SHA,
 resource receipt, supervised handle and complete costs belong in the execution/result record.
+
+## 9. Completed observation and accounting boundary
+
+The exact recipe above completed once at source60d42dd739ef125a505772f2b1d698b099b43a16.
+The [E0 result](ACVC_FRESH_DENSE_REUSE_B01_RESULT_EVIDENCE_20260910.md) and
+[scientific intake](ACVC_FRESH_DENSE_REUSE_B01_INTAKE_20260910.md) retain all512 training
+episodes,1024 update records and192 final evaluation rows. F−C +0.1229328560 J and
+F−dwell +0.0877164686 J are UP under the unchanged rule; dwell−C +0.0352163875 J is UP.
+Both prospective predictions are now scored in the intake; the original probabilities
+above remain the pre-output record. Owner prediction was not taken. One fit is not a
+training population, and the old retained fits are not pooled into this fresh result.
+
+The native task's conservative charge is172s and measured DM runtime support8.0564878s.
+Independent Monitor bookkeeping reports a separate retained tool-wall lower bound>44.34s
+with exact aggregate unavailable. Thus full support≤30/complete≤360 conformance is
+unestablished if Monitor observation is included; the intake records this budget/accounting
+deviation without changing the scientific rule or exempting the Monitor surface.
+All raw evidence and the checkpoint are preserved; scoped remote closeout is complete.
+No retry, successor, T/G restart, C promotion, disposition or additional budget follows.
