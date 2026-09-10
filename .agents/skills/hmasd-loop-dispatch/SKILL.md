@@ -5,8 +5,9 @@ description: Use when HMASD Root plans or advances the research working set, han
 
 # HMASD research loop
 
-Root owns Portfolio planning and execution. Use `hmasd-portfolio-task` for scientific
-comparison and proper-node decisions; use ROOT_OPERATIONS.md for execution and routing.
+Root coordinates execution within accepted decisions. ROOT_OPERATIONS.md owns responsibilities
+and routing. Assign a relevant recently active DM to prepare Portfolio Pro materials and check
+its response under `hmasd-portfolio-task`; Root does not draft or select Portfolio science.
 
 ## Stable next-action trigger
 
@@ -20,16 +21,18 @@ At goal-turn entry, a return or receipt, and before waiting:
    current Portfolio row and original evidence. Count actual advancing directions under AGENTS §5.
 3. Dispatch already-ready independent work before lengthy acceptance, integration or planning.
    Do not dispatch a dependent launch until its own inputs are accepted and published. Short
-   routing of another direction's result to its existing DM/CM need not wait for that integration.
+   routing of another direction's result to its existing DM need not wait for that integration.
 4. Accept one bounded delivery or resolve one vacancy from current evidence and authorized
    priorities, then dispatch its ready continuation and return to step 2. For a lengthy operation,
    service other ready work at its next recoverable boundary. Keep scientific intake with DM
-   and the complete technical batch with CM/Operator under ROOT_OPERATIONS.md. Root selects
-   replacements directly; an unresolved scientific choice goes to the proper Pro/owner tier.
+   and the complete technical batch with the same DM, optionally using an Operator under ROOT_OPERATIONS.md. Root selects
+   replacements within accepted priorities; an unresolved scientific choice goes through the
+   designated DM to the proper Pro node. Portfolio responses return to their designated DM
+   for scientific/specification checking, then Root applies the conforming decision.
 5. Check that each accepted experiment has confirmed adoption by the independent Luna/low
-   monitor under EXPERIMENT_MONITOR.md. CM/Operator directly adds new accepted handles to its shared active set;
+   monitor under EXPERIMENT_MONITOR.md. DM/Operator directly adds new accepted handles to its shared active set;
    a dispatched message alone is not adoption. Route each terminal notice to its original
-   DM/CM for remaining collection/intake using followup_task, without waiting for other runs.
+   DM for remaining collection/intake using followup_task, without waiting for other runs.
    Read supervisor state only for handles Root actually owns or is reconciling after lost
    observation. Route terminal evidence promptly. If Transport is idle with a pending request,
    reconcile its persisted state and resume that same observation/recovery route. App dispatch
@@ -40,11 +43,10 @@ At goal-turn entry, a return or receipt, and before waiting:
 
 ## Bounded assignments
 
-Use five concise items: deliverable and goal; owned paths, existing branch/checkout and
-entry points; preserved semantics; acceptance with relevant card/spec sections; budget and
-stop condition. Include known collection, integration, intake and selected follow-on work
-in the assignment. Let the DM organize ordinary CM steps through completion. A missing
-intermediate instruction does not require a new planning handoff.
+Use ENGINEERING_SCOPE_SPEC §7.1 for L0 and optional L1–L3 detail. Include the existing
+branch/checkout and known collection, integration, intake, cleanup and selected follow-on work.
+DM carries the engineering and scientific batch through completion; no separate CM or new
+planning handoff is required for ordinary implementation steps.
 
 Native work uses `followup_task`; `send_message` only conveys information requiring no
 new work. Retain actual dispatch outcomes and reconcile uncertain delivery before retrying.

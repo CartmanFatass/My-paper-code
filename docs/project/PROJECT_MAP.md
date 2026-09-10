@@ -17,12 +17,12 @@ hierarchically; Claude Code reads the one-line `CLAUDE.md` beside each, which im
 | Test layout, naming, commands, basetemp rule | [`tests/AGENTS.md`](../../tests/AGENTS.md) |
 | Runner naming, interpreter rule, admission, queues | [`scripts/AGENTS.md`](../../scripts/AGENTS.md) |
 | Which documentation tree is an authority; document families | [`docs/AGENTS.md`](../AGENTS.md) |
-| The 22 current directions, their code and test paths, script prefixes | [`../research/RESEARCH_MAP.md`](../research/RESEARCH_MAP.md) |
+| The current directions, their code and test paths, script prefixes | [`../research/RESEARCH_MAP.md`](../research/RESEARCH_MAP.md) |
 | Lifecycle, priority, capacity, decisions, audit ledger | [`../research/portfolio/PORTFOLIO.md`](../research/portfolio/PORTFOLIO.md) |
 | Evidence classes and the §11 calibration | [`../research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md`](../research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md) |
 | Parked defects that block interpretation | [`PROBLEM_CACHE.md`](PROBLEM_CACHE.md) |
 | Measured throughput numbers and the rules they support | [`EFFICIENCY_PRACTICES.md`](EFFICIENCY_PRACTICES.md), [`ENGINEERING_ADDITIONS.md`](ENGINEERING_ADDITIONS.md) |
-| The 14 closed or absorbed directions | [`../research/legacy/directions/README.md`](../research/legacy/directions/README.md) |
+| Closed or absorbed directions | [`../research/legacy/directions/README.md`](../research/legacy/directions/README.md) |
 
 ## Routes, in one screen
 
@@ -42,3 +42,11 @@ describe meaning; they never control execution.
 
 Update this index when a nested `AGENTS.md` is added or removed. Update `RESEARCH_MAP.md` when a
 direction changes its primary implementation or test path.
+
+## Control-plane source map
+
+AGENTS defines authority and role responsibility; ENGINEERING_SCOPE_SPEC §7 defines L0–L3 and
+engineering acceptance; empirical evidence spec §§7–8 and §11 define Portfolio principles and
+scientific burdens. ROOT_OPERATIONS maps execution ownership. Skills provide procedures, while
+cards/intakes/decision archives preserve evidence and actual choices. See the
+[2026-09-10 migration](../research/portfolio/decisions/2026-09-10-control-plane-consolidation.md).

@@ -1,198 +1,77 @@
 ---
 name: hmasd-portfolio-task
-description: Use when Root compares HMASD directions, plans research investment or working-set readiness, or handles Portfolio priority, lifecycle, capacity, fusion, separation and proper-node decisions.
+description: Use when the DM designated by Root prepares Portfolio Pro decision materials, checks the complete Portfolio response, or maps its conforming decision to execution.
 ---
 
-# HMASD Portfolio Decisions
+# HMASD Portfolio materials and Pro intake
 
-Root holds the Portfolio responsibilities in the primary session: scientific comparison,
-readiness, dependencies, sequencing, replacement and the current PORTFOLIO.md. Root plans,
-delegates, accepts and integrates work directly. Independent Transport owns Pro browser work;
-DM and CM retain direction-local scientific and technical responsibilities. Follow current owner
-pause/stop instructions before planning execution. Use `hmasd-loop-dispatch` for the event loop.
+Portfolio is the existing `portfolio:cross_direction` Pro node. Root is the execution coordinator;
+it chooses a relevant recently active DM as author and response checker. The DM supplies science
+and recommendations but does not replace Pro's final decision. ROOT_OPERATIONS.md maintains this
+responsibility split. Existing Direction Pro nodes remain separate.
 
-## Delegated specification changes
+## Ground the question
 
-Apply AGENTS §4.7 to complete Pro-directed specification plans within delegated scope.
-Read/archive the full decision, implement its exact authorized plan, and trace the relevant
-P1/P2 item through item.py with actual authority, source, affected files and application state.
-No additional per-item approval is needed within that delegation. Do not fabricate owner
-replies, accept code solely from a rule change or broaden unrelated dispositions.
-Use `$hmasd-owner-item` for the maintained item classes and review procedure.
+Start with the assigned question and current affected Portfolio rows/intakes. Read only relevant
+sections of `docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md`: §8.1 maintains Portfolio principles,
+§7 lifecycle meanings and §§11.7–11.10 investment/evidence calibration. AGENTS §§2,4.7–4.8 maintain
+final authority, specification changes and asynchronous owner overrides. Use scientific-tools for
+scientific reading or analysis, not for mechanical routing.
 
-For Root's cross-direction scientific comparison, investment judgment and scientific
-Pro authoring, use `hmasd-scientific-tools` scientific-reading mode after the current
-assignment and relevant spec sections. Reuse relevant current reads and state the
-assumption and limit in the existing intake. Queueing, Git and receipt forwarding
-do not trigger conceptual reading.
+Prepare a decision-ready packet from:
 
-## Core principle
+- the specific choice, options, recommendation and operational consequences;
+- applicable Portfolio principles, evidence class, claim ceiling, MEI/headroom and frozen limits;
+- empirical and engineering experience, prior decisions and their actual effects, with exact
+  evidence sources, scope, contrary results and known complete costs;
+- uncertainties, the smallest useful investment and the evidence that would change the choice.
 
-Apply evidence-spec §11.8 to the chosen research question as well as its implementation.
-Do not treat exact headroom, full policy-class maxima or complete causal explanation as
-eligibility for ordinary learning investment. Compare proposed diagnostic value and known
-work with a minimal B; finite/zero-learner is not a cost argument. Cost refusal reopens
-the adequacy of the question, not only its execution design. In the existing intake,
-return any concrete Pro/spec conflict to that node before applying the affected clause;
-a complete answer cannot silently supersede owner instructions or specs. Explicit changes
-use the existing authority. No new reviewer layer, approval or launch condition follows.
+Explain how the principles/specifications/experience bear on each option. Do not just attach a
+reading list. Ask Pro to state its choice, decisive reasons, uncertainty, revisit condition and
+bounded consequences. Historical experience informs judgment but cannot silently amend a spec.
+If a rule change is necessary, name the rule, necessity and scope for the proper node.
 
-Choose the smallest investment that can change a direction decision without confusing scientific
-value with execution convenience or strength of claim with strength of ceremony.
+A relevant DM authors one cross-direction packet; other DMs may supply their direction facts.
+Root can request missing facts but does not rewrite scientific content. If the author becomes
+unavailable, Root explicitly transfers the remaining scope and evidence to another relevant DM.
 
-Keep classification, management grouping, investment, and execution capacity separate. The owner's
-two-line framework (`flexible agents` and `flexible skill duration`) classifies research; it does
-not imply one retained route per line or a two-route budget. Offer complementary routes when they
-share useful learners, controls, interventions or diagnostics. Similar families can share one
-agenda with named subdirections without claiming their scientific objects or results are equivalent.
-Explain each proposed PARK by its marginal decision value, cost and concrete re-entry condition,
-not by a target direction count. An owner follow-up that changes scope reopens that question;
-preserve the prior answer and wait for the revised proposal before applying its dispositions.
+## Publish and route
 
-Before comparing evidence or changing a direction, read the relevant class and decision sections
-of `docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md`, with section 11 controlling. Apply the
-burden of the evidence class being considered; do not preload unrelated classes or cited history. General mathematical proof is
-not the default admission condition for empirical MARL: structural motivation plus bounded toy or
-benchmark evidence is scientifically legitimate when the claim ceiling is bounded to that evidence.
+Use `hmasd-pro-research-prompt-author` with `workflow_node=portfolio_decision` and
+`caller_role=portfolio`. These choose the node, not the author's native role. Bind every in-scope
+direction in `direction_ids`. Include the current Portfolio snapshot, applicable principle/spec
+sections and only needed experience/card/evidence references at their exact published revisions.
+Include the machine-generated exposure line (zero new exposure when appropriate) and any required
+per-arm projection; no consultation-only exposure experiment is needed.
 
-## Portfolio responsibilities
+Reuse `portfolio:cross_direction` and the existing Transport endpoint. The new request's source is
+the actual DM author, parent is the existing Root task, operator is Transport. Root dispatches the
+committed exact handoff, Transport returns its factual receipt only to Root, and Root forwards the
+complete response to the designated DM using `followup_task`. Preserve in-flight identities and
+accepted bytes; an author transfer or missing receipt does not authorize another Send.
 
-Before investing or making a material lifecycle recommendation, Root identifies:
+## Read the complete response and return an application mapping
 
-- the exact Portfolio decision question;
-- the lowest evidence class able to answer it;
-- the strongest claim that class can support and the material non-goals;
-- the smallest valid implementation, derivation, counterexample, or experiment that separates the
-  live choices; and
-- the contrary observation that would change the recommendation.
+Read and preserve the full immutable Pro response, not just the receipt or a summary. Check the
+bound question, evidence class, current owner instructions, applicable specs, scientific meaning
+and declared budget. An incomplete response or concrete conflict goes back to the same Pro node
+with exact evidence; no local substitute or new approval tier follows. Independent conforming work
+continues. Direction/Portfolio questions have no local provisional disposition on a Pro blocker.
 
-## Planning boundary
+For a complete conforming decision, record the actual choice, reasons, limits, opposing evidence
+and affected direction/actions in the existing Portfolio decision record. Return that record and
+an execution mapping to Root. Pro is final under AGENTS §4.8; Root applies and integrates without
+waiting for per-item owner ratify. Root does not rewrite scientific conclusions during integration.
+A specification change follows AGENTS §4.7 and does not itself accept code or launch an experiment.
 
-Use AGENTS §5 for capacity and counting, `hmasd-loop-dispatch` for event ordering and
-ROOT_OPERATIONS.md for complete DM/CM/Operator assignments. This skill owns scientific
-comparison and Portfolio intake. Scheduling within authorized priorities and open ladders is
-local Root work; a queued direction is not `PARKED`. A new cross-direction scientific investment
-uses the Portfolio decision node below. Technical failures affect feasibility without selecting
-a new scientific invocation or changing a direction's polarity.
+Use `hmasd-owner-item` to provide the Chinese decision packet and actual application trace.
+`PRO_FINAL / OWNER_DELEGATED` records the Pro decision under owner standing delegation;
+`ROOT_INTEGRATED` means integration, not a second verdict. Record planned/applied/blocked truthfully,
+keep owner replies distinct and apply real asynchronous overrides at clean boundaries. Historical
+unratified proposals are not automatically authorized by this prospective workflow change.
 
-Compare directions at their honest claim ceilings. Do not reward a direction merely for producing
-more formal artifacts, and do not penalize a bounded empirical direction for lacking a theorem,
-exact support census, bit identity, transfer evidence, or deployment assurance that its current
-claim does not require. When the project objective is performant MARL, prioritize real algorithm
-implementation and decision-relevant empirical evidence unless the proposed claim itself requires
-C-FORMAL work.
-
-Distinguish technical success, bounded task competence, comparative algorithm advantage,
-cross-scenario transfer, safety, and deployment. Evidence for an earlier claim does not silently
-promote a later one.
-
-## Investment fields (owner decision 2026-09-04, revised the same day)
-
-Controlling records: `docs/research/portfolio/decisions/2026-09-04-owner-intervention-surfaces.md`
-and its execution-parallelism clarification,
-`docs/research/portfolio/decisions/2026-09-04-five-direction-execution-parallelism.md`; field text:
-evidence spec §11.7 and `AGENTS.md` §2. These are comparison inputs and sequencing rules, not launch
-gates, exclusion rules, or lifecycle dispositions. All `ACTIVE` directions remain admitted, while
-the five-chain direction working set controls which ones advance concurrently; sequencing orders
-work and never parks a direction by itself.
-
-- **Headroom record.** Every Portfolio proposal states each in-scope direction's headroom record
-  on its host or its absence. A missing record sequences that measurement early (A/RECON when
-  computed from existing results, a declared B when a baseline must be trained); it is never a
-  reason to stop investing. When compute is contended, a direction with a record sequences ahead
-  of one without.
-- **Declared MEI.** Compare B signals across directions against each card's own declared minimum
-  effect of interest (absolute, relative, or both), not against a repository-wide number and not
-  by absolute edge alone. The declared MEI never rewrites a card's result branches.
-- **Recast budget one.** A direction at its second Convergence `RECAST` continues (the Pro
-  decision is final for its node) but takes the lowest sequencing priority among ACTIVE
-  directions: Root sequences other ACTIVE directions first and dispatches the selected tasks. It appears in the owner
-  digest as `second-recast`; Root does not mutate the lifecycle field, and an owner reply may PARK
-  it. Nothing waits for that reply.
-- **Usage per valid result, two measures.** `PORTFOLIO.md` carries two columns per direction:
-  the compute of each valid result itself, and the total compute of all accepted attempts divided
-  by the number of valid results. Each value names its node and device and is `unmeasured` where
-  the summary lacks it; a single wall-time number is not used because it mixes hardware, technical
-  failure and scientific cost. Root refreshes both with every snapshot and cites them in every
-  cross-direction proposal.
-- **Fusion and shared assets.** Directions on one host share baseline sets and evidence
-  interfaces without fusing. Fusion is proposed only when question, comparator, estimand and next
-  object are shown to be materially the same.
-- **Owner items.** Every Portfolio proposal awaiting ratification, and every direction
-  recommendation a DM returns, is one owner item of kind `portfolio` written with
-  `python tools/owner_console/item.py add --direction portfolio --tier portfolio --kind portfolio ...`
-  (`$hmasd-owner-item`; never by hand). At every clean boundary Root runs
-  `python tools/owner_console/item.py reviews`: a `ratify` instruction is the owner's
-  ratification, `refuse` or `amend` is not; then `mark-answered`. Nothing waits for it.
-
-## Lifecycle semantics
-
-Update the smallest implicated unit:
-
-- a technical or instrumentation failure has no scientific polarity;
-- a valid negative may close its exact implementation, benchmark-comparator pair, or frozen object;
-- `PARKED` means a valuable question may remain but no sufficiently specified or feasible
-  decision-relevant object currently merits investment, or a named dependency is unresolved;
-- `CLOSED` requires no valuable independent question at an appropriate evidence class, absorption
-  by another direction, structural impossibility/equivalence, sufficient independent bounded
-  failures, or a documented Portfolio judgment that all plausible narrower/recast objects are
-  dominated; and
-- failure of one confirmatory object does not by itself close a direction.
-
-PARKED does not mean "waiting for a theorem" or "waiting for user authorization" unless that is the
-actual named dependency. Absence of a general proof or of real-UAV validation is not itself a reason
-to park or close a direction whose declared target is exploratory or bounded benchmark performance.
-Use explicit `CLOSE_OBJECT`, `PARK_DIRECTION`, `CLOSE_DIRECTION`, fusion, and absorption reasoning
-rather than treating them as synonyms.
-
-A direction Pro node may conclude that direction-local execution should stop at a clean boundary
-or recommend `PARK_DIRECTION`. That conclusion does not by itself mutate the lifecycle field in
-`PORTFOLIO.md`; an `ACTIVE`/`PARKED`/`CLOSED` Portfolio mutation remains a Portfolio-tier action and
-requires the owner-ratified path below.
-
-## Persistent Pro decision node
-
-Before changing direction priority, capacity, lifecycle, fusion, separation, registering a new
-direction, or selecting the next cross-direction investment, Root must use
-`$hmasd-pro-research-prompt-author` with `workflow_node=portfolio_decision`. Every packet binds to
-the single persistent conversation key `portfolio:cross_direction`, lists every direction in scope,
-and includes the current Portfolio snapshot, this evidence specification, the selected evidence
-class and claim ceiling, plus the exact direction/evidence paths needed for the decision. The
-project-shared registry creates or binds the provider conversation on first use under the stable
-conversation binding key and reuses that exact provider conversation for later Portfolio rounds.
-Each default handoff goes to independent Transport, the reusable endpoint declared in `.codex/hmasd-transport.toml` and
-sends exactly one completion or terminal-blocker receipt back to the handoff author's declared
-`parent_thread_id`. App dispatch omits `model` and `thinking`, preserving the recipient settings; it never
-calls `create_thread` or selects a replacement task. The singleton task ID is an execution endpoint,
-never a provider-conversation binding. For Portfolio requests, Root is both author and receipt parent. Native-direction requests also name Root as parent for native forwarding.
-The configured provider model is separate from that executor. Honor an explicit owner request
-for a new provider conversation or caller-direct execution using the Prompt Author/Transport
-exceptions; do not send through both routes or repeat an accepted provider request.
-
-A complete archived Pro response that decides the posed question at its declared evidence class is
-the Portfolio proposal. Root records it with its evidence and bounded rationale in a decision record
-for the owner to ratify. Existing explicit owner authorization applies within its stated scope;
-record it as `OWNER_DIRECT` rather than asking the owner to authorize the same action again.
-Discretionary dispositions not covered by that instruction still need owner ratification, and
-`PORTFOLIO.md` is updated only with the authorized disposition. Root does not
-replace or override the proposal with a local-model judgment. If Pro reports missing connector
-access or insufficient evidence, Transport has not archived a complete response, or the answer
-rejects bounded empirical work solely for lacking an unrequested stronger class, no class-correct
-Portfolio decision exists:
-the question parks (AGENTS.md section 3), Root advances independent authorized work, and nothing is decided
-provisionally at this tier. Root may commission reversible evidence collection or request a
-class-corrected answer but must not convert the mismatch into scientific polarity.
-
-Read the current rows in `docs/research/portfolio/PORTFOLIO.md` and relevant current sections of
-`DIRECTION.md` for scientific authority. Follow historical evidence only when the decision needs
-it. Root-to-DM/CM handoffs use AGENTS focused-reading guidance: precise section/code pointers and
-concise deliverables, not a copied research history. Compare claim ceiling, decision relevance, complementarity, substitution,
-reversibility, cost, live external effects, and the smallest discriminating observation.
-
-Transport, implementation, and process status may change sequencing or feasibility; they do not by
-themselves determine scientific polarity or lifecycle. Preserve uncertainty and state why the
-recommended action would change under a contrary result.
-
-Root records the Pro proposal, obtains the owner's ratification, and integrates the ratified
-disposition in `PORTFOLIO.md`. Outside the Prompt Author and Transport packet boundary, use ordinary
-language; no additional response schema is required.
+Update only the supported lifecycle/object unit under evidence-spec §7. A direction-node
+recommendation to stop a package is not a whole-direction Portfolio mutation. A second recast
+continues at the lowest ACTIVE sequencing priority under §11.7; do not silently PARK it. Working-set
+scheduling changes no scientific meaning, lifecycle or allocation. Preserve per-result and
+all-attempts-per-valid-result costs with node/device and honest unknowns in current Portfolio records.

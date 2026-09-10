@@ -1,5 +1,15 @@
 # HMASD experiment tracking
 
+## 2026-09-10 control-plane migration
+
+[OWNER_DIRECT consolidation](decisions/2026-09-10-control-plane-consolidation.md) changes future
+responsibility and configuration: existing Root becomes Sol/low after restart, DM absorbs CM,
+Portfolio Pro remains the final node with designated-DM authoring/conformance intake. Existing
+accepted handles, task IDs, source bindings and finite allocations retain their recorded scope.
+This workflow implementation grants no research resumption or new invocation. Historical status
+paragraphs below describe their own execution boundaries, not a fresh launch instruction.
+
+
 **Current owner boundary: RESUMED — 2026-09-09**. Owner has directed execution of the completed synthesis; see [current allocation and authority](decisions/2026-09-09-synthesis-execution.md). UCOPE prepares one raw F/G continuous2048-episode curve pair; FOLR preserves B03 two-arm7803/107803; Monitor reported RETAIN terminal and original CM resumed collection plus allocated RESET. ACVC and VSP03 original DMs prepare bounded candidates; RCLE original CM feasibility is integratedadd5464d4 and original DM now selects the recovery plan. These five chains retain exact finite allocations and proper-node conflicts; no historical call is repeated. UCOPE8501/FOLR B02 intakes and remote closeouts are accepted. The older preparation-order proposal is superseded for current sequencing by the later owner command, not retroactively ratified. Lifecycle, priority and recasts remain unchanged.
 
 ## Owner-directed Root Pro recovery; FOLR accepted generation

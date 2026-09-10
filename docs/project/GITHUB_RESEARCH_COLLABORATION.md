@@ -1,7 +1,7 @@
 # GitHub research collaboration
 
-Root and each direction DM author research questions and intake complete Pro
-responses. Independent Luna/high Transport owns Pro browser work and delivery receipts;
+The designated DM authors research questions and intakes complete Pro responses,
+including Portfolio questions and scientific/specification conformance. Independent Luna/high Transport owns Pro browser work and delivery receipts;
 Root dispatches handoffs, forwards native returns and integrates accepted commits.
 Use `.agents/skills/hmasd-pro-research-prompt-author/SKILL.md` to create a fixed GitHub
 task and `.agents/skills/hmasd-chatgpt-pro-transport/SKILL.md` for Transport operations.
@@ -42,7 +42,7 @@ observations, inferences and limitations. Routing fields stay in HANDOFF.json.
 
 ## Normal sequence
 
-1. Root/DM renders TASK.md and HANDOFF.json with `delivery_mode=github_delivery`.
+1. The designated DM renders TASK.md and HANDOFF.json with `delivery_mode=github_delivery`.
    TASK_NOT_PUBLISHED is preparation state and has no provider payload. Follow the
    normal worktree/integration rules. Root maintains control-plane files on main;
    Pro response delivery uses the scoped non-main branch.
@@ -50,9 +50,9 @@ observations, inferences and limitations. Routing fields stay in HANDOFF.json.
    that the fixed TASK is published and that the delivery branch and Issue exist.
    Commit and push the updated internal handoff.
 3. Send the rendered handoff once to the independent configured Transport endpoint,
-   omitting app model/thinking overrides. Native DM/CM authors normally hand it to Root
+   omitting app model/thinking overrides. Native DM authors normally hand it to Root
    for this dispatch, with source=actual author, parent=Root, operator=Transport.
-   Root-authored requests also dispatch to Transport. Transport verifies 6 Pro and the
+   Accepted legacy Root-authored requests retain their bound route. Transport verifies 6 Pro and the
    exact conversation, sends the supplied short prompt once, observes and archives.
    Preserve accepted request content and migration evidence under ROOT_OPERATIONS.md;
    uncertain acceptance is reconciled against the existing message before continuing.
@@ -67,7 +67,7 @@ observations, inferences and limitations. Routing fields stay in HANDOFF.json.
    response at that commit and this round's Issue comment. It returns actual immutable
    delivery links, confirmed partial delivery with the remaining gap, or unresolved
    status marked unconfirmed. Each input path stays pinned to its original effective SHA.
-6. Transport archives the exact short chat reply and actual delivery facts. Root/DM
+6. Transport archives the exact short chat reply and actual delivery facts. The designated DM
    reads the complete response at its fixed commit, preserves original bytes and the
    comment snapshot, and performs specification-conformance and scientific intake.
    Root checks the actual changed scope and integrates under the normal Git rules.
@@ -91,7 +91,7 @@ Repeated notifications reuse the existing request/commit/path intake.
 | Shared direction branch advances | Add only the scoped response on current descendant HEAD, retaining fixed evidence and unrelated files. Reconcile the remote commit before local pushes; report non-descendant history or target conflicts. |
 | Accepted legacy TASK forbids branch-base changes | Preserve its exact Send and reply. New workflow wording does not amend the accepted TASK. Root arranges a bounded delivery correction after reconciling actual file/comment state; use a distinct request and response path, unchanged scientific evidence unless explicitly authorized. |
 | Cleanup removed or renamed a delivery target | Reconcile the affected request and recovery ref before further writes. Correct unsent handoffs and publish/bind their new TASK; preserve accepted/uncertain handoffs and Root resolves restoration or explicit correction. Branch cleanup alone never authorizes a replacement conversation or another Send. |
-| Main advances after input was bound | Keep each original effective input path/SHA mapping. DM/Root assesses material scientific changes at intake; unrelated commits do not invalidate the response. |
+| Main advances after input was bound | Keep each original effective input path/SHA mapping. The designated DM assesses material scientific changes at intake; unrelated commits do not invalidate the response. |
 | Provider access is unavailable | Record the precise unreadable paths or unavailable action and any confirmed partial delivery. A local tool's access does not establish Pro access. |
 | A conclusion needs correction | Ask the same node a new explicit question with a new output path and links to the prior response; preserve the original answer. |
 
@@ -102,6 +102,11 @@ same unresolved request. No cross-service atomicity or race-free write guarantee
 implied by a separate branch.
 
 For branch-retirement routing and current-record reconciliation, use
-ROOT_OPERATIONS.md, “Reconcile routing when branches are retired”. Request-specific delivery,
+ROOT_OPERATIONS.md, “Current records, integration and cleanup”. Request-specific delivery,
 Send and archive fields belong to that request; carrying a prior round's fields into a new
 current record is not delivery evidence. Preserve them in their original request history.
+
+OWNER_DIRECT 2026-09-10: for new Portfolio requests the designated DM is the actual author/source,
+Root remains parent and dispatcher, and Transport remains operator. Root forwards complete responses
+to that DM for scientific/specification checking, then applies conforming decisions. Existing
+request identities and delivery clauses are unchanged; no new protocol or duplicate Send follows.

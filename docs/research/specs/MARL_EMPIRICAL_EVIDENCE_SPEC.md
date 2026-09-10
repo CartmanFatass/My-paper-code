@@ -234,7 +234,14 @@ or a portfolio value judgment that no narrower or recast object merits investmen
 
 ## 8. Responsibility split
 
-### 8.1 Portfolio / Root
+### 8.1 Portfolio Pro and its designated DM author
+
+OWNER_DIRECT 2026-09-10: Portfolio is the persistent `portfolio:cross_direction` Pro node.
+Root designates a relevant recently active DM to prepare its materials and check the full response
+for scientific/specification conformance. Root owns routing and operational application, not
+scientific selection. A complete conforming Pro decision is final under AGENTS §4.8 without
+per-item owner ratification; asynchronous owner overrides remain. Existing direction Pro nodes
+and DM object-tier decisions retain their scopes. A local conformance check is not another verdict.
 
 Portfolio MUST:
 
@@ -255,7 +262,29 @@ When an external scientific consultation applies a stronger class than the state
 Portfolio must treat the mismatch as an unresolved methodology issue and seek a class-corrected
 answer. It must not convert the mismatched standard into a scientific negative.
 
-### 8.2 Evidence / Experiment Manager
+**Portfolio principles and experience.** Keep classification, management grouping, investment
+and execution capacity separate. The owner's two-line framework (flexible agents and flexible
+skill duration) does not require one retained route per line or a two-route budget. Share useful
+learners, controls, interventions and diagnostics without conflating scientific objects. Propose
+fusion only when question, comparator, estimand and next object materially coincide. Apply the
+smallest justified disposition under §7; scheduling alone never changes lifecycle.
+
+Every material Portfolio request makes its basis explicit: the relevant principles in this
+section and §§7,11.7–11.10; the applicable card/specification constraints; and empirical/engineering
+experience with exact sources, original scope and strongest contrary evidence. Explain what each
+source changes about the live choices. Prior formal artifacts, an untuned reference gap, a finite
+or zero-learner calculation, and a cheap model are not investment value by themselves. Compare
+decision relevance, known complete cost, uncertainty, substitutability and reversibility. Preserve
+unknown costs and the observation that would change the recommendation. Do not turn a benchmark
+sample or local failure into a universal investment threshold.
+
+Experience informs the choice; it does not silently override a specification. Pro states its
+chosen option, decisive reasons, uncertainty, revisit condition and bounded consequences. A needed
+rule change names the exact rule, necessity and scope under the proper-node authority. Owner
+changes to the question return to that node; preserve its previous answer instead of inventing
+a revised local decision. No new required response schema or scientific exposure follows.
+
+### 8.2 Direction Manager (including engineering delivery)
 
 EM MUST:
 
@@ -270,8 +299,8 @@ EM MUST:
    and a refuted mechanism proposition;
 6. preserve every valid result at its original meaning while permitting explicitly new follow-up
    objects;
-7. ask CM for the performance and instrumentation implementation required by the selected class,
-   not for unrelated proof machinery; and
+7. implement and technically accept the performance/instrumentation path required by the selected
+   class, optionally using a bounded Implementer, not unrelated proof machinery; and
 8. recommend lifecycle consequences at the smallest supported unit and state what evidence would
    justify promotion, parking, recasting, or closure.
 
@@ -564,7 +593,7 @@ On cost refusal, reconsider the chosen question and necessary evidence as well a
 Moving a prohibited B prerequisite into a preceding A does not make it permissible.
 
 Pro decisions are final within current owner instructions and applicable specifications. In the
-existing intake, Root/DM cites any concrete conflict and returns it to the same node for correction
+existing intake, the designated DM cites any concrete conflict and returns it to the same node for correction
 before executing the affected requirement, while independent conforming work continues. Preserve
 the exact response and do not invent a substitute decision. Explicit specification exceptions name
 the rule, scientific necessity and scope and follow existing appropriate-node authority. No silent
