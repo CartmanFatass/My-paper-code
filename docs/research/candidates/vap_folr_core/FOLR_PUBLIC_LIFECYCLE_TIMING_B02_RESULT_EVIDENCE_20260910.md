@@ -90,3 +90,51 @@ the identical full source, detached cwd and result root. Observation is now owne
 shared Monitor. This DM returns pending terminal collection and performs no parallel
 polls. EVENT/RANDOM remain unsubmitted; no terminal, resource or scientific result fact
 is supplied by this adoption update. Root will resume this same DM on terminal notice.
+
+## RETAIN terminal collection and technical acceptance
+
+Root delivered the Monitor terminal notice observed `2026-09-10T17:04:06.0084286Z`:
+finished/exit0, remote start `2026-09-11T00:49:37+08:00`, exit
+`2026-09-11T01:03:30+08:00`, integer supervisor duration833s. The DM collected raw
+summary/checkpoint, memory receipt, full outer time, log, command wrapper, status and exit
+witness into local `temp/directions/vap_folr_core/exp/public_lifecycle_timing_b02_seed7805_retain`
+plus sibling `_memory.json`; all **8 remote/local SHA256 mappings agree**. The Monitor
+receipt is copied there as `monitor_terminal.txt`. Full raw mapping, all128 returns,
+25 progress rows and measured quantities are in the
+[result summary](FOLR_PUBLIC_LIFECYCLE_TIMING_B02_RESULT_SUMMARY_20260910.json).
+
+The exact source/seeds7805/107805, complete status,5000 training episodes/100000 native
+training ticks/4969 RMSprop steps/128 final episodes/2560 final ticks and Torch threads1/1
+match the card. Every final return is finite, the recomputed mean is **2.64265625**, and
+the printed final log summary equals the published JSON. The25 progress rows end at
+episode5000/update4969. The native training return sum is−22343.380000000183, mean
+**−4.468676000000037**. No training-return curve is reconstructed from progress timing.
+
+Training counters: births20978, departures8373, event-bound survivor opportunities46007,
+all eligible survivor opportunities260235, resets0. Final counters:588/306/1402/6159/0.
+The zero-reset RETAIN law and nonzero eligible exposure agree. No new learned fit,
+checkpoint reload, simulator call or evaluation occurred during collection.
+
+Fresh admission at `2026-09-10T16:49:37.756230Z` passed both physical/effective4GiB
+floors, each15631716352 bytes. Null cgroup headroom/current/max remain
+`resources_unmeasured`; the passing recorded measurements support this invocation only.
+The actual outer `whole.time` encloses the full admission-through-exit chain:
+**832.49s wall;812.40s user +20.47s system =832.87 CPU-s;651624KiB peak RSS; exit0**.
+The summary's **790.0774647570215s** wall and632060KiB RSS are narrower runner records.
+The42.41253524297849s outer-minus-runner difference is observed but not attributed to
+a specific phase; no profiling or cost experiment is needed for this accepted budget.
+The whole measurement and rounded supervisor duration are consistent, and the1800s
+complete-law cap is met. Remaining two laws are unexecuted, so no complete-triple wall,
+contrast, combined branch or scientific winner exists yet.
+
+Supporting accounting now includes the prior handover read0.2805764s, terminal/owner
+read0.4673387s, remote raw read0.7006461s, hash read0.8426555s and enclosing local
+readback/assembly command0.1811988s: **22.4285027/300s** through this collection.
+The assembly's internal0.0142466s is nested and is not charged again. SCP transport
+6.3356898s is separate administrative transfer. Tests remain25.9131638/300s cumulative.
+No source or test changed and no existing blocked scratch was touched.
+
+Technical decision: accept intact RETAIN and proceed to the **already-preselected EVENT**.
+No concrete primary, information, training, budget or publication defect supports
+quarantine. This is execution of the fixed sequence, independent of the RETAIN sign;
+RANDOM remains unsubmitted. Scientific interpretation waits for all allocated outcomes.
