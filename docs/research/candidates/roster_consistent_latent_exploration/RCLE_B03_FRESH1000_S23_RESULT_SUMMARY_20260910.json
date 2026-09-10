@@ -1607,6 +1607,35 @@
       "members_sha256": "bb85a0e87d9eb4de374226aff3709987237bbb7057ac2737097b3ea48fabc32a",
       "complete_wall_seconds": 5.754651299997931,
       "new_scientific_invocations": 0
-    }
+    },
+    "final_closeout": {
+      "source": "9a7b7a3d14274111030db01e1fa8a1a5e5752e56",
+      "before_removal_status": {
+        "task": "rcle-b03-fresh1000-s23-20260910",
+        "status": "finished",
+        "exit_code": 0,
+        "pid": 3325747,
+        "uptime_seconds": 3003,
+        "tmux_active": false
+      },
+      "original_pid_absent": 3325747,
+      "tar_comparison_exit": 0,
+      "disk_absence": {
+        "/home/wu/hmasd-worktrees/rcle-b03-fresh1000-s23-20260910": true,
+        "/home/wu/hmasd-inputs/rcle-b03-fresh1000-s23-20260910": true,
+        "/home/wu/.agent-tasks/rcle-b03-fresh1000-s23-20260910": true
+      },
+      "worktree_registration_absent": true,
+      "archive": "/home/wu/hmasd-recovery/rcle-b03-fresh1000-s23-20260910/remote.tar.gz",
+      "archive_sha256": "e5fb667047626d280a58e750f5c732f3d4ffccd787edd96f81095c014b24130a",
+      "archive_still_present": true,
+      "recovery_ref": "refs/recovery/rcle-b03-fresh1000-s23-20260910",
+      "recovery_ref_still_matches": true,
+      "removed_only_exact_terminal_checkout_stage_supervisor": true,
+      "complete_wall_seconds": 0.9523735999828205,
+      "result_intake_published_commit": "68d4067262e591bb31bd988695c053632faeeaf0",
+      "new_scientific_invocations": 0
+    },
+    "verified_published_git_blobs": 8
   }
 }

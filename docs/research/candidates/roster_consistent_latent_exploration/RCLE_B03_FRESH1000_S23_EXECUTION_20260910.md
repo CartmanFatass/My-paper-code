@@ -175,3 +175,25 @@ the existing150s post-support charge; conservative whole allocation remains978.7
 Aggregate CPU and all-history elapsed work remain unmeasured. Exact removal follows
 publication of the accepted result. Shared authoring, native cache and prior evidence
 are outside the inventory. Root accepts integration/retention and reclamation.
+
+## Final scoped closeout
+
+After result/intake **68d4067262e591bb31bd988695c053632faeeaf0** was pushed, the exact
+terminal execution checkout was unregistered and removed, followed only by its matching
+source-stage and supervisor directories. The archive digest, source recovery ref,
+finished/exit0 status, inactive tmux and original PID absence were checked before
+removal; GNU tar comparison still passed. Removal and verification took **.9523736s**,
+inside the existing150s post-support charge.
+
+All three exact paths are absent on disk, and the execution checkout is absent from
+`git worktree list --porcelain`. The archive remains present at its recorded digest;
+the recovery ref still resolves to source9a7b7a3d1. The local closeout directory retains
+`preservation.json`, `members.json`, `removal.json`, `REPORT.md` and `remote.tar.gz`.
+Local raw output, all old evidence, native cache and the shared authoring checkout stay
+intact. No result-bearing work, retry or automatic successor was launched during recovery.
+
+Collection, technical acceptance, scientific intake, publication, preservation and scoped
+cleanup are complete. Conservative full charge stays **978.73/1500s**, with scientific
+chain728.73s and invocation365.55/360.19/2.87s inside600/600/30s. Root's remaining action
+is main integration and acceptance of retained evidence/reclamation. Further science
+requires its separate selection/allocation; this closeout changes no lifecycle or priority.
