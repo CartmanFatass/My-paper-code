@@ -2,20 +2,23 @@
 
 ## 2026-09-10 rolling execution update
 
-The five advancing direction chains are independent and do not wait at a batch barrier. UCOPE handle
-`ucope-uav-short-learned-renewal-continuous-b01-8703-20260910` remains Monitor-owned at exact
-source `c40a4cd66`; its one fresh T/F/G fit has no accepted result yet. RCLE seed23 handle
-`rcle-b03-fresh1000-s23-20260910` finished exit 0 in 729 seconds at source `9a7b7a3d1`; W1, W100
-and reference are complete with all three admissions passed, and the original DM owns collection,
-intake and verified closeout. DISH B08 source `a01522a6` finished one valid HALF_RETAIN/REPLACE
-pair (mean delta -6.5, 65,536 transitions and 512 optimizer calls per arm); the DM is recording the
-fixed-candidate negative result and closeout without a successor. FOLR's complete Convergence
-response is archived and applied at `11b861ed0`: one fixed HALF_EVENT-versus-RETAIN B is selected,
-with no sweep or extra arm, and implementation remains with the original DM. SCDMP B02 is accepted
-WITHIN at `71b935c89`; its original DM is preparing the direction-tier narrow-family disposition for
-the existing independent Transport task. VNFC remains parked on its recorded `SEND_UNCERTAIN`
-receipt with no resend while provider acceptance is uncertain. CBSC readiness is reconciled but has
-no permitted executable next action. No owner reviews are pending at this boundary.
+The app restart was reconciled against persisted repository and supervisor state; no completed
+object was replayed and no uncertain Pro Send was duplicated. UCOPE 8703 is accepted WITHIN and
+fully preserved/closed through `28c15dd3e`: final T-G `+0.0001930852`, T-F
+`-0.0110732137`; 8701's DOWN did not recur, while T again trails F. RCLE seed23 is accepted and
+closed through `a84313d7e`: Delta_U `+0.3033203125`, but all eight fragmentation cells worsen,
+reference U remains better by `0.1162374`, and no stable or unqualified nonharm claim follows.
+SCDMP's complete direction response narrowly PARKS only the fixed opening t1-3->t4/full-MC/
+coefficient1 package and is closed through `6801a5cd8`, without successor or budget.
+
+Two direction chains currently advance: FOLR's single frozen HALF_EVENT arm is Monitor-owned at
+source `c6be208cd` after RETAIN completed at mean `1.68046875`; DISH's exact post-B08 Convergence
+request is Transport-owned through `cc67137bb`, asking the Pro node to choose narrow PARK or one
+justified bounded continuation. A designated recently active DM is preparing a zero-exposure
+`portfolio:cross_direction` request to fill the three current vacancies and bind fallbacks. CBSC
+and FRRIE still have no permitted executable next action; VNFC retains `SEND_UNCERTAIN` with no
+blind resend. Scheduling changes no lifecycle, priority, recast count or scientific meaning. No
+owner review is pending at this boundary.
 
 ## 2026-09-10 research restart and Portfolio selection
 
