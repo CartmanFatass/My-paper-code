@@ -2,7 +2,7 @@
   "handle": "ucope-uav-short-learned-renewal-continuous-b01-8702-20260910",
   "source": "b6c75d5cf8e1781bb0e3c6824ab2dc9cb32dbce9",
   "recorded_at": "2026-09-10T19:54:56.986617+00:00",
-  "status": "local recovery archive verified; remote source reference preserved; scoped removal pending Root acceptance",
+  "status": "SCOPED_REMOTE_CLOSEOUT_COMPLETE; local original evidence and verified archive retained",
   "local_archive": {
     "path": "C:/Projects/HMASD-worktrees/dm-ucope-native-return-prep-20260906/temp/directions/ucope/closeout/ucope-uav-short-learned-renewal-continuous-b01-8702-20260910/ucope-8702-recovery.zip",
     "bytes": 978361,
@@ -183,7 +183,75 @@
   ],
   "preservation_boundary": "All10 collected native/supervisor files, source pack, exact wrapper, launch/check/analysis scripts and receipts are archived; durable scientific interpretation and future reporting repair are in Git. No final fitted weights were produced. Original local evidence remains in place.",
   "historical_error": "INCOMPLETE with unlocalized step-interface ValueError; no comparison or scientific polarity; no attempt to reconstruct missing frame/weights",
-  "next_cleanup_owner": "DM after Root integration/preservation acceptance, exact four paths only",
+  "next_cleanup_owner": "none for this completed remote execution; shared direction authoring checkout remains active",
   "no_new_scientific_invocations": true,
-  "whole_preservation_wall_seconds": 0.7643548000050941
+  "whole_preservation_wall_seconds": 0.7643548000050941,
+  "root_acceptance": {
+    "integrated_main_sha": "ebe006a6202741ca8eb7dc4e61f059b2dc96d104",
+    "instruction": "Root accepted integration/preservation and directed exact four-path removal in native message 2026-09-10T19:58Z"
+  },
+  "closeout": {
+    "outcome": {
+      "state": "SCOPED_REMOTE_CLOSEOUT_COMPLETE",
+      "checked_at_utc": "2026-09-10T20:02:11.421887+00:00",
+      "removed_paths": [
+        "/home/wu/hmasd-worktrees/ucope-uav-short-learned-renewal-continuous-b01-8702-20260910",
+        "/home/wu/.agent-tasks/ucope-uav-short-learned-renewal-continuous-b01-8702-20260910",
+        "/home/wu/hmasd-inputs/ucope-uav-short-learned-renewal-continuous-b01-8702-20260910.sh",
+        "/home/wu/hmasd-inputs/ucope-learned-8702-source.pack"
+      ],
+      "all_absent_on_disk": true,
+      "source_worktree_absent_from_registration": true,
+      "recorded_pid_absent": true,
+      "tmux_session_absent": true,
+      "process_check_scope": "recorded PID3096219 and exact agent-task tmux session",
+      "recovery_ref": "refs/hmasd-recovery/ucope-8702-20260910",
+      "recovery_sha": "b6c75d5cf8e1781bb0e3c6824ab2dc9cb32dbce9",
+      "scientific_invocations": 0
+    },
+    "receipt": {
+      "returncode": 0,
+      "stdout": "/home/wu/hmasd-worktrees/ucope-uav-short-learned-renewal-continuous-b01-8702-20260910/temp/directions/ucope/exp/ucope-uav-short-learned-renewal-continuous-b01-8702-20260910/episodes.jsonl: OK\n/home/wu/hmasd-worktrees/ucope-uav-short-learned-renewal-continuous-b01-8702-20260910/temp/directions/ucope/exp/ucope-uav-short-learned-renewal-continuous-b01-8702-20260910/rollouts.jsonl: OK\n/home/wu/hmasd-worktrees/ucope-uav-short-learned-renewal-continuous-b01-8702-20260910/temp/directions/ucope/exp/ucope-uav-short-learned-renewal-continuous-b01-8702-20260910/summary.json: OK\n/home/wu/.agent-tasks/ucope-uav-short-learned-renewal-continuous-b01-8702-20260910/exit_code: OK\n/home/wu/.agent-tasks/ucope-uav-short-learned-renewal-continuous-b01-8702-20260910/pid: OK\n/home/wu/.agent-tasks/ucope-uav-short-learned-renewal-continuous-b01-8702-20260910/resource_admission.json: OK\n/home/wu/.agent-tasks/ucope-uav-short-learned-renewal-continuous-b01-8702-20260910/runner.sh: OK\n/home/wu/.agent-tasks/ucope-uav-short-learned-renewal-continuous-b01-8702-20260910/start_time: OK\n/home/wu/.agent-tasks/ucope-uav-short-learned-renewal-continuous-b01-8702-20260910/status: OK\n/home/wu/.agent-tasks/ucope-uav-short-learned-renewal-continuous-b01-8702-20260910/task.log: OK\n/home/wu/hmasd-inputs/ucope-uav-short-learned-renewal-continuous-b01-8702-20260910.sh: OK\n/home/wu/hmasd-inputs/ucope-learned-8702-source.pack: OK\n{\"state\": \"SCOPED_REMOTE_CLOSEOUT_COMPLETE\", \"checked_at_utc\": \"2026-09-10T20:02:11.421887+00:00\", \"removed_paths\": [\"/home/wu/hmasd-worktrees/ucope-uav-short-learned-renewal-continuous-b01-8702-20260910\", \"/home/wu/.agent-tasks/ucope-uav-short-learned-renewal-continuous-b01-8702-20260910\", \"/home/wu/hmasd-inputs/ucope-uav-short-learned-renewal-continuous-b01-8702-20260910.sh\", \"/home/wu/hmasd-inputs/ucope-learned-8702-source.pack\"], \"all_absent_on_disk\": true, \"source_worktree_absent_from_registration\": true, \"recorded_pid_absent\": true, \"tmux_session_absent\": true, \"process_check_scope\": \"recorded PID3096219 and exact agent-task tmux session\", \"recovery_ref\": \"refs/hmasd-recovery/ucope-8702-20260910\", \"recovery_sha\": \"b6c75d5cf8e1781bb0e3c6824ab2dc9cb32dbce9\", \"scientific_invocations\": 0}\n",
+      "stderr": "",
+      "remote_command_wall_seconds": 0.9348233000055188,
+      "recorded_at_utc": "2026-09-10T20:02:11.981945+00:00",
+      "authority": "Root integration/preservation acceptance main ebe006a62, native instruction 2026-09-10T19:58Z",
+      "local_archive_sha256_after": "cde5efe2eb347e35c6a7e5da0953339350206720551a7d4de631444cb77ed61f",
+      "original_local_member_count": 38,
+      "whole_closeout_wall_seconds": 0.9426383999962127
+    },
+    "local_receipt": "temp/directions/ucope/closeout/ucope-uav-short-learned-renewal-continuous-b01-8702-20260910/CLOSEOUT.json",
+    "all_12_remote_hashes_verified_before_removal": true,
+    "all_38_local_originals_hash_verified_after_removal": true,
+    "initial_attempt": {
+      "receipt": {
+        "returncode": 1,
+        "stdout": "",
+        "stderr": "Traceback (most recent call last):\n  File \"<stdin>\", line 12, in <module>\nPermissionError: [Errno 13] Permission denied: '/proc/639/cwd'\n",
+        "remote_command_wall_seconds": 0.4513125000084983,
+        "recorded_at_utc": "2026-09-10T20:01:17.122710+00:00",
+        "authority": "Root integration/preservation acceptance main ebe006a62, native instruction 2026-09-10T19:58Z",
+        "local_archive_sha256_after": "cde5efe2eb347e35c6a7e5da0953339350206720551a7d4de631444cb77ed61f",
+        "original_local_member_count": 38,
+        "whole_closeout_wall_seconds": 0.4590483999927528
+      },
+      "local_receipt": "temp/directions/ucope/closeout/ucope-uav-short-learned-renewal-continuous-b01-8702-20260910/CLOSEOUT_ATTEMPT_1.json",
+      "reading": "Broad /proc scan denied access to /proc/639/cwd; command stopped before hashes or removal. No permission override or repeat of the denied read. Successful scope uses recorded PID and exact tmux session."
+    },
+    "scientific_invocations": 0,
+    "closeout_script_receipts": {
+      "cleanup_8702.sh": {
+        "bytes": 5498,
+        "sha256": "5e42e7ee01b753074c8c4ac65c4c78f220406e1433b0690c9fb6ed845f177f35"
+      },
+      "cleanup_8702_attempt_1.sh": {
+        "bytes": 6874,
+        "sha256": "41fd1f0dd19e02929ea898e36570f92224e58d07612c61be4c3450ed038d11e3"
+      },
+      "closeout_8702.py": {
+        "bytes": 5778,
+        "sha256": "7551b5609e587314c9cf04e09f3a54cb66829ba6ff0cf30ae8b19b034901f8ab"
+      }
+    }
+  }
 }
