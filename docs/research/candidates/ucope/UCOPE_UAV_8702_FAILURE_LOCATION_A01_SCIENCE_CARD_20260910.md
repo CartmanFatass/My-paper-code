@@ -26,7 +26,8 @@ Start from the accepted 8702 source **b6c75d5cf8e1781bb0e3c6824ab2dc9cb32dbce9**
 plus the prospective traceback-only repair in **58bc8d91ebd1b61d67e151a3dc75d8f0ae723b2c**.
 Reuse the [8702 card §§2–3](UCOPE_UAV_SHORT_LEARNED_RENEWAL_CONTINUOUS_B01_8702_SCIENCE_CARD_20260910.md#2-exact-preserved-mechanism-and-comparators)
 for real learner, reward, own-information actor, central critic, five agents,
-physical durations {1,2}, stochastic movement, primitive GAE, agent-compound
+physical durations {1,2}, stochastic movement, raw gamma=1 Monte Carlo returns
+with no bootstrap, agent-compound
 PPO, entropy zero, continuous recurrent/Adam state, CPU FP32 and private RNG.
 
 Intentionally reuse master **8702**, b=870200000, its original T initialization,
