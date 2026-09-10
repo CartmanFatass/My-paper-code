@@ -81,5 +81,25 @@
     "verdict_text": "**A — recommended:** allocate one new independent matched FOLR HALF_EVENT/RETAIN pair; give UCOPE and RCLE one bounded, concrete successor-design assignment each, in that order after FOLR, and allocate one additional independent fresh-DENSE C/F/dwell B to ACVC as the fourth chain if the prospective complete-cost boundary below is accepted. UCOPE's question is whether a specific change in learned continue/end credit can produce a useful native gain over the attained fixed-short comparator; RCLE's is whether a competent learned service comparison can reduce the attained reference deficit while retaining fragmentation as a native consequence. Their DMs must select the smallest real-training comparison within the accepted mechanism, or return the precise direction-node question if the needed change opens a family. These are not invitations to implement unnamed algorithms, search for exact maxima, or repeat the old recipe. This request releases **zero numerical invocations** for those two design assignments. Their concrete cards and numerical allowance remain separately selected; completed design cannot stay counted indefinitely.",
     "source": "docs/research/portfolio/pro_packets/20260910_rolling_successor_allocation/SCIENCE_BRIEF.md"
   },
-  "starred": true
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-10T23:27:40+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/pro_packets/20260910_rolling_successor_allocation/DELIVERY_STATUS.md#recovery-authority-and-later-observation",
+      "record": "docs/research/portfolio/pro_packets/20260910_rolling_successor_allocation/DELIVERY_STATUS.md",
+      "state": "blocked",
+      "summary": "保留首个终止回执：确认发送一次后报告GitHub交付不可用，未形成当时可用裁决。Root曾授权同绑定精确恢复；本条是历史状态，不是本地临时Portfolio决定。"
+    },
+    {
+      "at": "2026-09-10T23:27:40+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260910_rolling_successor_allocation/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/decisions/2026-09-10-rolling-successor-allocation.md",
+      "state": "planned",
+      "summary": "完整回答已核对并符合规范：依次FOLR一独立训练对总3900秒、UCOPE与RCLE各一具体设计且零数值额度、ACVC一拟合270+90=360秒；Root按实际空位执行，最多四项且未产生第五项。交付已ARCHIVED，无新增发送；实际派发尚未声称。",
+      "correction": "保留RCLE现有ACTIVE/MEDIUM；旧简报HIGH是笔误。ACVC按256个双episode rollout各四epoch更新，并非每episode后更新两次。旧支持成本下界>52.3964878秒超过30秒，旧完整360秒是否通过仍未知；新270/90仅向前适用。"
+    }
+  ],
+  "approval_correction": "保留RCLE现有ACTIVE/MEDIUM；旧简报HIGH是笔误。ACVC按256个双episode rollout各四epoch更新，并非每episode后更新两次。旧支持成本下界>52.3964878秒超过30秒，旧完整360秒是否通过仍未知；新270/90仅向前适用。"
 }

@@ -1,0 +1,87 @@
+{
+  "schema_version": 4,
+  "packet_id": "2026-09-10-rolling-successor-allocation-portfolio-01--portfolio",
+  "attempt": 1,
+  "canonical_form": "logical_packet_manifest",
+  "request_id": "2026-09-10-rolling-successor-allocation-portfolio-01",
+  "direction_id": "portfolio",
+  "direction_ids": [
+    "acvc",
+    "capability_bound_semantic_currentness",
+    "commitment_residual_triggered_options",
+    "degraded_incumbent_shadow_handover",
+    "finite_resource_relational_inductive_efficiency",
+    "flexible_skill_duration",
+    "metric_ground_transport_allocation",
+    "roster_consistent_latent_exploration",
+    "semigroup_consistent_duration_model_policy",
+    "ucope",
+    "vap_folr_core",
+    "variable_n_fleet_churn",
+    "vsp_02",
+    "vsp_03",
+    "vsp_c1"
+  ],
+  "workflow_node": "portfolio_decision",
+  "conversation_binding_key": "portfolio:cross_direction",
+  "decision_authority": "pro_final",
+  "source_mode": "paste",
+  "body": {
+    "role": "prompt",
+    "source_path": "<paste>",
+    "canonical_filename": "2026-09-10-rolling-successor-allocation-portfolio-01--portfolio__00_PROMPT.md",
+    "bytes": 1238,
+    "sha256": "e37bb4aeb5bfbc9a3d5e5b13c967153d682d97ad57bfd6e4e1b1c7707bce0928",
+    "materialized_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-10-rolling-successor-allocation-portfolio-01\\2026-09-10-rolling-successor-allocation-portfolio-01--portfolio__00_PROMPT.md"
+  },
+  "references": [],
+  "reference_order_is_authoritative": true,
+  "provider_filename_policy": "record_observed_name_only",
+  "companion_prompt_is_transport_ui_only": true,
+  "manifest_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-10-rolling-successor-allocation-portfolio-01\\2026-09-10-rolling-successor-allocation-portfolio-01--portfolio__PACKET_MANIFEST.json",
+  "materialized_artifacts": {
+    "body": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-10-rolling-successor-allocation-portfolio-01\\2026-09-10-rolling-successor-allocation-portfolio-01--portfolio__00_PROMPT.md",
+    "references": []
+  },
+  "materialized_hashes": {
+    "body": "e37bb4aeb5bfbc9a3d5e5b13c967153d682d97ad57bfd6e4e1b1c7707bce0928",
+    "references": []
+  },
+  "archive_status": "RECONCILED_FULL_RESPONSE",
+  "response": {
+    "role": "complete_github_response",
+    "bytes": 45614,
+    "sha256": "2425ab285bc8f1d026fed880045bd92b75868a0fc85774ea2e77312a74590142",
+    "source_commit": "b4d71be60f789e97bf1f4c7130bb9995fc84f387",
+    "source_path": "docs/research/portfolio/pro_packets/20260910_rolling_successor_allocation/archive/RESPONSE.md",
+    "immutable_url": "https://github.com/CartmanFatass/My-paper-code/blob/b4d71be60f789e97bf1f4c7130bb9995fc84f387/docs/research/portfolio/pro_packets/20260910_rolling_successor_allocation/archive/RESPONSE.md"
+  },
+  "archive_paths": {
+    "manifest_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-10_rolling_successor_allocation_reconciled\\PACKET_MANIFEST.json",
+    "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-10_rolling_successor_allocation_reconciled\\PROMPT_BODY.md",
+    "response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-10_rolling_successor_allocation_reconciled\\RESPONSE.md",
+    "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-10_rolling_successor_allocation_reconciled\\TRANSPORT_FACTS.json",
+    "response_sha256": "2425ab285bc8f1d026fed880045bd92b75868a0fc85774ea2e77312a74590142"
+  },
+  "reconciliation": {
+    "prior_archive": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-10_rolling_successor_allocation",
+    "prior_response_sha256": "8c232cf46cf2055e5ff217c1a40c09c0feab24fd114fa67e4498ef8f527ad0e9",
+    "delivery": {
+      "status": "VERIFIED_BY_EXTERNAL_GITHUB_READBACK",
+      "delivery_branch": "codex/portfolio",
+      "delivery_commit": "b4d71be60f789e97bf1f4c7130bb9995fc84f387",
+      "response_path": "docs/research/portfolio/pro_packets/20260910_rolling_successor_allocation/archive/RESPONSE.md",
+      "response_url": "https://github.com/CartmanFatass/My-paper-code/blob/b4d71be60f789e97bf1f4c7130bb9995fc84f387/docs/research/portfolio/pro_packets/20260910_rolling_successor_allocation/archive/RESPONSE.md",
+      "response_sha256": "2425ab285bc8f1d026fed880045bd92b75868a0fc85774ea2e77312a74590142",
+      "task_url": "https://github.com/CartmanFatass/My-paper-code/blob/134f9aaa4e1f82af05a61f291a796f373ceebfb9/docs/research/portfolio/pro_packets/20260910_rolling_successor_allocation/TASK.md",
+      "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/17",
+      "issue_comment_url": "https://github.com/CartmanFatass/My-paper-code/issues/17#issuecomment-5626718531",
+      "issue_comment_id": 5626718531,
+      "comment_matches_request": true,
+      "response_path_matches_request": true,
+      "single_path_commit_scope": true,
+      "verified_at": "2026-09-10T23:24:30Z",
+      "no_new_send": true
+    }
+  }
+}
