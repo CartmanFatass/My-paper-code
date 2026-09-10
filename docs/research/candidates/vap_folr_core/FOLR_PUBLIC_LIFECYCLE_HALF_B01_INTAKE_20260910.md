@@ -185,3 +185,32 @@ No exact memory-content diagnosis or new control is needed for that narrow perfo
 question. This intake allocates none of it: no retry, extra arm, coefficient/seed
 search, recast, direction/Portfolio disposition or automatic successor is selected.
 The immediate next action is the already assigned evidence-preservation/closeout.
+
+## 7. Verified preservation and scoped closeout
+
+Executed the previously recommended option **(a)** under Root's explicit closeout
+assignment. **Owner-delegated decision (unattended, 2026-09-03 instruction): (a).**
+All2710 archive members (2351 regular files/359 directories) matched original content,
+type and mode before deletion. All3 retained local archive lengths/digests matched
+the verified remote copies before deletion. The original inventory was checked again
+immediately before removal, with no live process/tmux instance and both exit0 facts.
+
+At2026-09-10T22:42:46.242774Z the exact execution worktree, both named supervisors and
+source-input staging were absent on disk, and the worktree was unregistered. Both
+local and remote source recovery refs still preservec6be208cd. Raw summaries/checkpoints,
+logs, admission receipts, source and ignored/untracked execution files remain in the
+verified compact archives and local collection. The shared local authoring checkout
+and all older objects/scratch remain intact. No evidence-only orphan checkout is kept.
+
+[E0 §11](FOLR_PUBLIC_LIFECYCLE_HALF_B01_RESULT_EVIDENCE_20260910.md#11-verified-preservation-and-completed-scoped-reclamation)
+lists every removed path, archive location, digest and cost; the linked verification
+and closeout JSONs hold the direct receipts. Final recorded/scoped support is
+**73.4849765s/300s**; broader engineering/Monitor elapsed is still unmeasured. No source
+budget, invocation, preservation-order or scoped-deletion breach was observed for this
+object. Prior objects' limitations are not retroactively changed.
+
+Result/intake publication isb8e90eee1732323edd45e8b9d62961bdcc16a088, already pushed.
+This closeout update is returned to Root for integration and reclamation acceptance.
+The selected outcome remains **HALF_EVENT_ABOVE_MEI, d_HR=+1.56546875**, with the single
+training-pair claim ceiling, missed forecast and every contrary earlier outcome
+preserved. No additional invocation or automatic successor remains assigned.

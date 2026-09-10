@@ -1,6 +1,6 @@
 # FOLR public lifecycle HALF-B01 technical evidence
 
-Current state: both arms complete and technically accepted; HALF_EVENT_ABOVE_MEI under the frozen rule. Scientific intake complete; verified scoped closeout pending. Earlier preparation boundaries remain chronological evidence.
+Current state: both arms complete and technically accepted; HALF_EVENT_ABOVE_MEI under the frozen rule. Scientific intake and verified scoped closeout complete; returned for Root integration/acceptance. Earlier preparation boundaries remain chronological evidence.
 
 ## 1. Fixed comparison and changed implementation
 
@@ -326,3 +326,58 @@ repair earlier objects' quarantine or closeout deviations. Both completed remote
 supervisors, this exact worktree and its staged source are retained for the assigned
 pre-delete archive-to-original comparison and verified local preservation. This live
 local direction checkout remains the DM's authoring surface. No further run is allocated.
+
+## 11. Verified preservation and completed scoped reclamation
+
+The result/intake/Chinese brief were published and pushed at
+**b8e90eee1732323edd45e8b9d62961bdcc16a088** before this closeout. Root's existing
+terminal assignment covers the exact detached execution worktree, both completed
+supervisors and this object's source-input staging. Live process and tmux sessions were
+absent and both supervisors recorded finished/exit0. The worktree remained atc6be208cd
+with no tracked changes; the archive also includes its ignored/untracked runtime files.
+
+At22:41:03.070982Z every archive member was compared to its original content/type/mode,
+and originals were checked unchanged after archiving. **2710 members** matched:
+2351 regular files,359 directories and0 symlinks. No complete original inventory was
+omitted. The same inventory was reconciled again immediately before removal.
+
+| Archive | Bytes | Members | SHA-256 |
+| --- | ---: | ---: | --- |
+| worktree.tar.gz | 18467400 | 2692 | 620c493b7c291642266b39189ec6f930a1ea7c3b8e03226f885c18f1d641882c |
+| supervisors.tar.gz | 5647 | 16 | a1b40a749c36ad9b937ccdde4930672e18b3f467b7bc3b85552b87148a9704b8 |
+| inputs.tar.gz | 898773 | 2 | e62ce85b1daee0648ff24db958796eab23124f3b7d7135c64bf637be28a4da05 |
+
+All three were copied locally and byte-length/digest verified at22:41:43.123596Z,
+before deletion. Remote retained archive root is
+`/home/wu/hmasd-recovery/folr-public-lifecycle-half-b01-20260910`; the matching local
+root is `temp/directions/vap_folr_core/exp/public_lifecycle_half_b01_control_20260910/folr-public-lifecycle-half-b01-20260910/`
+in the shared direction checkout. Raw collected files remain in the adjacent
+`collected/` directory. Local and remote `refs/archive/folr-public-lifecycle-half-b01-20260910`
+preserve sourcec6be208cd514b5d12fb13c7637e2d6376de11eb6. These are retained compact
+source/evidence recovery copies, with both full checkpoints, not retained full checkouts.
+
+After the pre-delete reconciliation at22:42:46.127806Z, the four exact roots were
+removed and verified absent at **22:42:46.242774Z**:
+
+- `/home/wu/hmasd-worktrees/folr-public-lifecycle-half-b01-c6be208cd`
+- `/home/wu/.agent-tasks/folr-public-lifecycle-half-b01-retain-20260910`
+- `/home/wu/.agent-tasks/folr-public-lifecycle-half-b01-half-event-20260910`
+- `/home/wu/hmasd-inputs/folr-public-lifecycle-half-b01-20260910`
+
+The execution worktree is also absent from `git worktree list`; the source recovery
+ref still resolves to the accepted source. No other root, old test scratch, historical
+evidence or shared authoring checkout was removed. This DM created no test scratch
+during recovery/intake. There was no rejected operation or fallback deletion route.
+
+Durable [archive verification](evidence/2026-09-10-folr-public-lifecycle-half-b01-archive-verification.json)
+and [remote closeout](evidence/2026-09-10-folr-public-lifecycle-half-b01-remote-closeout.json)
+retain original/local archive identities, timing, absence and registration facts.
+Scoped closeout costs add.1904385s reference read,2.0044469s archive/verification,
+3.3234195s transfer/local verification and1.3354793s final reconciliation/removal.
+These enclosing wall measurements include their remote work and are not double-counted
+with narrower remote timings. Result/closeout record checks add.4257946/.4335459s
+and the final live-primary owner-review read.482664s (no unapplied instructions).
+Final recorded/scoped support is **73.4849765s/300s**;
+full engineering/Monitor elapsed remains unmeasured. Root receives this verified
+reclamation for acceptance and integrates the result/closeout commits. The positive
+one-instance reading and no-successor allocation are unchanged by successful cleanup.

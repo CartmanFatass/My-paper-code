@@ -1,6 +1,6 @@
 {
   "object": "FOLR-PUBLIC-LIFECYCLE-HALF-B01",
-  "state": "complete_pair_technically_and_scientifically_accepted_scoped_closeout_pending",
+  "state": "complete_pair_intaken_scoped_closeout_verified_pending_Root_integration_acceptance",
   "source_base": "ade8a1c7fe92fb420c981e15148ee7166047b122",
   "source_sha": "c6be208cd514b5d12fb13c7637e2d6376de11eb6",
   "arms": [
@@ -416,7 +416,7 @@
     "carried_directory_test_seconds": 25.9131638,
     "directory_test_cumulative_seconds": 32.4911638,
     "preparatory_allowance_seconds": 5,
-    "total_seconds": 65.28918780000444,
+    "total_seconds": 73.4849765000179,
     "cap_seconds": 300,
     "full_engineering_elapsed": "unmeasured",
     "stage_read_seconds": 0.6438701,
@@ -432,7 +432,14 @@
     "handover_record_check_seconds": 0.3423119,
     "half_event_terminal_reads_seconds": 0.6223301,
     "half_event_collection_seconds": 4.078112999995938,
-    "pair_analysis_seconds": 0.1343852000136394
+    "pair_analysis_seconds": 0.1343852000136394,
+    "closeout_reference_read_seconds": 0.1904385,
+    "archive_and_predelete_verification_orchestration_seconds": 2.0044469000131357,
+    "archive_transfer_and_local_verification_seconds": 3.3234194999968167,
+    "closeout_reconciliation_removal_orchestration_seconds": 1.3354793000034988,
+    "result_publication_record_check_seconds": 0.4257946,
+    "closeout_final_record_check_seconds": 0.4335459,
+    "closeout_owner_review_read_seconds": 0.482664
   },
   "budget": {
     "accepted_invocations": 2,
@@ -1026,5 +1033,28 @@
     "headroom": "tuned same-information record absent",
     "successor_allocation": "none",
     "unapplied_owner_reviews": []
+  },
+  "closeout": {
+    "state": "scoped_remote_cleanup_verified_pending_Root_acceptance",
+    "archive_verification": "docs/research/candidates/vap_folr_core/evidence/2026-09-10-folr-public-lifecycle-half-b01-archive-verification.json",
+    "remote_closeout": "docs/research/candidates/vap_folr_core/evidence/2026-09-10-folr-public-lifecycle-half-b01-remote-closeout.json",
+    "all2710_members_compared_before_removal": true,
+    "local_archives_match_remote": true,
+    "four_exact_roots_absent": true,
+    "remote_worktree_unregistered": true,
+    "source_recovery_ref": "refs/archive/folr-public-lifecycle-half-b01-20260910",
+    "source_recovery_sha": "c6be208cd514b5d12fb13c7637e2d6376de11eb6",
+    "local_archive_root": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\exp\\public_lifecycle_half_b01_control_20260910\\folr-public-lifecycle-half-b01-20260910",
+    "remote_archive_root": "/home/wu/hmasd-recovery/folr-public-lifecycle-half-b01-20260910",
+    "completed_at_utc": "2026-09-10T22:42:46.242774+00:00",
+    "shared_local_direction_checkout_retained_for_DM": true,
+    "other_objects_or_old_scratch_untouched": true,
+    "unapplied_owner_reviews_at_final_boundary": []
+  },
+  "publication": {
+    "result_commit": "b8e90eee1732323edd45e8b9d62961bdcc16a088",
+    "result_commit_pushed": true,
+    "next_publication": "this closeout update; Root integrates named commits",
+    "additional_invocations": 0
   }
 }
