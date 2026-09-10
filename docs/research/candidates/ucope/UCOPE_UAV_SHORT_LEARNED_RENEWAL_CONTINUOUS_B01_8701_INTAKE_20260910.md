@@ -214,3 +214,38 @@ already allocated one remote invocation, with the operational finding retained.
 No science has run. Commit/push and exact-source staging follow; actual remote
 admission and acceptance remain future facts. Existing one-triple stop and
 30.072499s supporting-test charge remain unchanged.
+
+### Published source and exact staging, before the one submission
+
+Accepted source **3182c4c844803ab362034c2b3d5d22f7f62bca3a** was committed and
+pushed on `codex/ucope`; Root accepted/integrated it as main **371299015** and
+pushed. Root preserved both UCOPE audit rows and the operational finding. No
+code changed after the independent review. The shared authoring checkout was
+clean after publication.
+
+The committed-object pack is **9375677bytes**, SHA256
+`e2ca851713dc2d2ac42d85a827ef37f6ca6c47e52616c13aee0b505f4004d6b0`, staged at
+`/home/wu/hmasd-inputs/ucope-learned-8701-source.pack`. It excludes the already
+available d2d72c11e and72f798c59 histories. Remote pack and552-byte wrapper
+digests matched local recorded bytes, and `bash -n` passed without executing
+the payload. The exact remote worktree is detached at the accepted full SHA,
+with the configured sparse source paths and an empty working diff. Remote
+readback of all eleven named study/policy/learner/environment/native-adapter/
+CLI/preflight/platform files matches their accepted Git bytes. Both the new
+scientific output root and supervisor root were absent. No model, scientific
+RNG or native environment was created during staging.
+
+Receipts are the local `preparation/source-facts.json`,
+`source-input-readback.json` and `payload-facts.json`. Metadata readback gives
+Torch2.7.0+cu118 and NumPy1.26.3 on the configured interpreter; learner execution
+remains CPU FP32. Git pack/local source readback took0.9948294s outer; transfer
+plus remote digest/syntax readback2.4186223s; pack import/detached sparse checkout
+1.572782s; actual-source/absence/version readback0.8314468s; local comparison
+0.2554176s. These are bounded preparation observations, not a native runtime
+forecast or hidden extra invocation. Record them separately from scientific
+outer time; necessary verification remains inside the300s support reserve.
+The latest main owner-review read returned[]; nothing needed marking answered.
+
+The source/command binding above is now fixed for the one submission. Scientific
+admission, accepted process and Monitor adoption are still pending facts at this
+prelaunch record. The next result must retain all outcomes and end this allocation.
