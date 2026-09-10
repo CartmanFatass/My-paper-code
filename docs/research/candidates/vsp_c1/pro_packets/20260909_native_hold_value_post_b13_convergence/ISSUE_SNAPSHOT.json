@@ -1,0 +1,29 @@
+{
+  "read_utc": "2026-09-09T13:28:57.582002+00:00",
+  "source": "gh issue view 5 --repo CartmanFatass/My-paper-code --json number,url,title,state,comments",
+  "selection": "Only the prior P79 VSP-C1 delivery comment is used. Older title is historical discussion, not current authority; other directions/comments are not task evidence.",
+  "total_comments_read": 12,
+  "issue": {
+    "number": 5,
+    "url": "https://github.com/CartmanFatass/My-paper-code/issues/5",
+    "title": "VSP-C1 K4：三种子混合结果后，当前跨周期价值学习 toy 的下一步",
+    "state": "OPEN"
+  },
+  "selected_comments": [
+    {
+      "id": "IC_kwDOO8trO88AAAABTeGg_A",
+      "author": {
+        "login": "CartmanFatass"
+      },
+      "authorAssociation": "OWNER",
+      "body": "VSP-C1 native hold-value post-B12 收敛完整答复已交付：[RESPONSE.md（固定提交）](https://github.com/CartmanFatass/My-paper-code/blob/77687230cb1f3898e55c21d23c05ba1840d820ea/docs/research/candidates/vsp_c1/pro_packets/20260909_native_hold_value_post_b12_convergence/archive/RESPONSE.md)。决定继续同家族的一个有限 B：两臂均保留完整 136→128→133→1 普通体，仅处理臂添加现有 640 参数门；一个全新配对训练实例，各训练 768 回合，仅最终 32 回合评价及同布局 H，保持四环境隔离，417792 团队步、3072 次 Adam、1800 秒/臂及 3600 秒/对。不选第四个原双面板比较，不作 RECAST；保留全部旧正负、H 损失和条件不确定性。固定科学证据版本为 a35611b5f43e9bcb72045bb896bf3f09b0285000。响应已通过连接器完整分段读回；已核对本次提交仅新增指定文件，保留共享方向分支其他内容。未执行模型、代码、测试或实验，未修改科研源码、规范或 Portfolio 状态；本交付是科学选择，不是实现接受或进程启动。",
+      "createdAt": "2026-09-09T12:10:12Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/CartmanFatass/My-paper-code/issues/5#issuecomment-5601599740",
+      "viewerDidAuthor": true
+    }
+  ]
+}

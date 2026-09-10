@@ -1,0 +1,46 @@
+{
+  "source_sha": "828da00343e5036a4de93ccf1ec636e3b8c777b7",
+  "gap_from_parent": "possible literal double quotes around --started-monotonic value",
+  "fixture_method": "extract exact committed bash-c argument; control shlex.join/shell-token roundtrip; substitute only both Python executable tokens with /usr/bin/printf argument capture; no admission/runner/model invocation",
+  "first_fixture_attempt": "new and old captures both completed; harness incorrectly expected old payload float parse to fail and raised AssertionError. Actual old JSON also has zero literal backslashes. Corrected that test expectation; production bytes unchanged.",
+  "checks": [
+    {
+      "label": "new_p67",
+      "payload": "/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b04_seed6_p67_20260908_admission.json && exec /home/wu/.venvs/hmasd/bin/python scripts/run_vsp03_b04.py --seed 6 --out /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b04_seed6_p67_20260908 --started-monotonic \"$VSP03_B04_STARTED\" --node wsl_4070",
+      "literal_backslash_count": 0,
+      "serialized_command": "bash -c '/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b04_seed6_p67_20260908_admission.json && exec /home/wu/.venvs/hmasd/bin/python scripts/run_vsp03_b04.py --seed 6 --out /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b04_seed6_p67_20260908 --started-monotonic \"$VSP03_B04_STARTED\" --node wsl_4070'",
+      "recovered_command": [
+        "bash",
+        "-c",
+        "/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b04_seed6_p67_20260908_admission.json && exec /home/wu/.venvs/hmasd/bin/python scripts/run_vsp03_b04.py --seed 6 --out /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b04_seed6_p67_20260908 --started-monotonic \"$VSP03_B04_STARTED\" --node wsl_4070"
+      ],
+      "fixture": "/usr/bin/printf '<ARG>%s</ARG>\\n' scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b04_seed6_p67_20260908_admission.json && exec /usr/bin/printf '<ARG>%s</ARG>\\n' scripts/run_vsp03_b04.py --seed 6 --out /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b04_seed6_p67_20260908 --started-monotonic \"$VSP03_B04_STARTED\" --node wsl_4070",
+      "stdout": "<ARG>scripts/hmasd_resource_preflight.py</ARG>\n<ARG>admit-memory</ARG>\n<ARG>--out</ARG>\n<ARG>/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b04_seed6_p67_20260908_admission.json</ARG>\n<ARG>scripts/run_vsp03_b04.py</ARG>\n<ARG>--seed</ARG>\n<ARG>6</ARG>\n<ARG>--out</ARG>\n<ARG>/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b04_seed6_p67_20260908</ARG>\n<ARG>--started-monotonic</ARG>\n<ARG>375534.924519</ARG>\n<ARG>--node</ARG>\n<ARG>wsl_4070</ARG>\n",
+      "exit_code": 0,
+      "final_start_argument": "375534.924519",
+      "float_parse_passed": true,
+      "elapsed_s": 0.5014201999874786
+    },
+    {
+      "label": "old_saved_p64",
+      "payload": "/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b04_seed6_p64_20260908_admission.json && exec /home/wu/.venvs/hmasd/bin/python scripts/run_vsp03_b04.py --seed 6 --out /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b04_seed6_p64_20260908 --started-monotonic \"$VSP03_B04_STARTED\" --node wsl_4070",
+      "literal_backslash_count": 0,
+      "serialized_command": "bash -c '/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b04_seed6_p64_20260908_admission.json && exec /home/wu/.venvs/hmasd/bin/python scripts/run_vsp03_b04.py --seed 6 --out /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b04_seed6_p64_20260908 --started-monotonic \"$VSP03_B04_STARTED\" --node wsl_4070'",
+      "recovered_command": [
+        "bash",
+        "-c",
+        "/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b04_seed6_p64_20260908_admission.json && exec /home/wu/.venvs/hmasd/bin/python scripts/run_vsp03_b04.py --seed 6 --out /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b04_seed6_p64_20260908 --started-monotonic \"$VSP03_B04_STARTED\" --node wsl_4070"
+      ],
+      "fixture": "/usr/bin/printf '<ARG>%s</ARG>\\n' scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b04_seed6_p64_20260908_admission.json && exec /usr/bin/printf '<ARG>%s</ARG>\\n' scripts/run_vsp03_b04.py --seed 6 --out /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b04_seed6_p64_20260908 --started-monotonic \"$VSP03_B04_STARTED\" --node wsl_4070",
+      "stdout": "<ARG>scripts/hmasd_resource_preflight.py</ARG>\n<ARG>admit-memory</ARG>\n<ARG>--out</ARG>\n<ARG>/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b04_seed6_p64_20260908_admission.json</ARG>\n<ARG>scripts/run_vsp03_b04.py</ARG>\n<ARG>--seed</ARG>\n<ARG>6</ARG>\n<ARG>--out</ARG>\n<ARG>/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b04_seed6_p64_20260908</ARG>\n<ARG>--started-monotonic</ARG>\n<ARG>375534.924519</ARG>\n<ARG>--node</ARG>\n<ARG>wsl_4070</ARG>\n",
+      "exit_code": 0,
+      "final_start_argument": "375534.924519",
+      "float_parse_passed": true,
+      "elapsed_s": 0.5853696999838576
+    }
+  ],
+  "scientific_exposure": 0,
+  "scratch_created": false,
+  "source_change_required": false,
+  "passed": true
+}

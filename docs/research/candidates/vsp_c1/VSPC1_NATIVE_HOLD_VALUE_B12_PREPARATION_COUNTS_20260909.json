@@ -1,0 +1,162 @@
+{
+  "master": 8503,
+  "b": 850300000,
+  "configuration_source": "experiments/candidates/vsp_c1/native_hold_value_b01/study.py",
+  "configuration_read_sha": "f87af3f86a5a54519817b29b7dd3ac206b0dea8f",
+  "configuration_defaults": {
+    "seed": 8101,
+    "fixture": false,
+    "horizon": 256,
+    "train_episodes": 512,
+    "eval_episodes": 32,
+    "chunk": 32,
+    "arm_cap": 1800,
+    "pair_cap": 3600,
+    "ratio_grouping": "agent_compound"
+  },
+  "selected_configuration": {
+    "seed": 8503,
+    "fixture": false,
+    "horizon": 256,
+    "train_episodes": 768,
+    "eval_episodes": 32,
+    "chunk": 32,
+    "arm_cap": 1800,
+    "pair_cap": 3600,
+    "ratio_grouping": "agent_compound"
+  },
+  "evaluation_endpoints": [
+    512,
+    768
+  ],
+  "common_initialization": 850300011,
+  "extra_initialization": 850300012,
+  "training_velocity": 850300021,
+  "training_duration": 850300022,
+  "training_constructor_reset": 850301000,
+  "evaluation_constructor_reset": 850302000,
+  "training_resets": [
+    850301000,
+    850301767
+  ],
+  "evaluation_resets": [
+    850302000,
+    850302031
+  ],
+  "evaluation_velocity": [
+    850303000,
+    850303031
+  ],
+  "evaluation_duration": [
+    850304000,
+    850304031
+  ],
+  "unique_integer_keys": 868,
+  "prior_train_episodes": {
+    "8101": 512,
+    "8102": 512,
+    "8201": 512,
+    "8202": 512,
+    "8301": 512,
+    "8302": 512,
+    "8303": 512,
+    "8401": 768,
+    "8402": 768,
+    "8501": 768,
+    "8502": 768
+  },
+  "overlap_with_prior": {
+    "8101": 0,
+    "8102": 0,
+    "8201": 0,
+    "8202": 0,
+    "8301": 0,
+    "8302": 0,
+    "8303": 0,
+    "8401": 0,
+    "8402": 0,
+    "8501": 0,
+    "8502": 0
+  },
+  "train_eval_reset_overlap": 0,
+  "algorithm_work": {
+    "train_steps": 393216,
+    "eval_steps": 40960,
+    "steps": 434176,
+    "adam": 3072,
+    "rollouts": 768,
+    "moment_merges": 768,
+    "target_rows": 393216,
+    "four_epoch_target_terms": 1572864,
+    "scored_episodes": 1696,
+    "eval_episodes": 160,
+    "learned_endpoints": 4,
+    "hover_banks": 1,
+    "fits": 2,
+    "matched_pairs": 1,
+    "constructors": 4
+  },
+  "per_arm_work": {
+    "train_steps": 196608,
+    "adam": 1536,
+    "moment_merges": 384,
+    "targets_per_merge": 512,
+    "learned_evaluation_steps": 16384,
+    "mlp_hover_steps": 8192,
+    "training_constructor_resets": 1,
+    "evaluation_constructor_resets": 1
+  },
+  "per_arm_endpoint_exposure": {
+    "512": {
+      "train_episodes": 512,
+      "train_steps": 131072,
+      "adam": 1024,
+      "moment_merges": 256,
+      "target_rows": 131072
+    },
+    "768": {
+      "train_episodes": 768,
+      "train_steps": 196608,
+      "adam": 1536,
+      "moment_merges": 384,
+      "target_rows": 196608
+    }
+  },
+  "actual_new_exposure_at_definition": {
+    "scientific_invocations": 0,
+    "accepted_submissions": 0,
+    "native_steps": 0,
+    "training_pairs": 0,
+    "fits": 0,
+    "models": 0,
+    "adam": 0,
+    "eval_episodes": 0
+  },
+  "prediction": {
+    "event": "C < -0.01",
+    "label": "CHANGE_DOWN",
+    "probability": 0.6
+  },
+  "planning_reference": {
+    "same_protocol_masters": [
+      8501,
+      8502
+    ],
+    "complete_wall_seconds": [
+      475.85,
+      507.29
+    ],
+    "gated_arm_upper_bound_seconds": [
+      255.24334310399138,
+      279.195019181
+    ],
+    "mlp_arm_upper_bound_seconds": [
+      238.35012046197664,
+      248.622721096
+    ],
+    "work_multiplier": 1.0,
+    "qualification": "Observed same-protocol planning references only; component/aggregate CPU cost unknown, no cost probe or guarantee."
+  },
+  "freshness_qualification": "Bounded whole-token8503/B12/b12 search in current direction/code/tests/scripts/Portfolio found8503 only in the prior B11 rejected-CLI test and its technical description; B12 is an unrelated DISH synthetic branch-vector identity. Neither creates scientific state or a VSPC1 binding; not a global guarantee.",
+  "computed_utc": "2026-09-09T10:37:22.826477+00:00"
+}

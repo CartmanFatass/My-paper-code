@@ -1,0 +1,32 @@
+{
+  "id": "20260909-mgtap-002",
+  "created": "2026-09-09T02:34:28-07:00",
+  "direction": "metric_ground_transport_allocation",
+  "tier": "object",
+  "kind": "brief",
+  "title": "N5：P75 后原生 geometry family 暂缓简报",
+  "context": "简报概括本轮方向裁决：P75 的 REL 相对同信息 DENSE 聚合不利，8202 仍为 inside-MEI，H 只作诊断；DENSE 有效但未调参。当前原生 ground-geometry actor family 可逆暂缓，旧配置坐标 family 继续 parked，整体方向仍 ACTIVE/MEDIUM。未来重入须有实质同信息原生 actor 操作与合格 generic comparator；没有新训练或 Portfolio 变化。",
+  "options": [
+    {
+      "key": "reading-agreed",
+      "label": "阅读结论成立",
+      "consequence": ""
+    },
+    {
+      "key": "reading-disputed",
+      "label": "按评论重新阅读",
+      "consequence": ""
+    }
+  ],
+  "recommended": null,
+  "auto_applied": null,
+  "dm_reason": "",
+  "evidence": [
+    "docs/research/candidates/metric_ground_transport_allocation/MGTAP_NATIVE_GROUND_GEOMETRY_B01_POST_B01_CONVERGENCE_INTAKE_20260909.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-09.md#n5-post-b01-native-geometry-convergence-final-brief",
+  "brief": "docs/research/portfolio/owner/briefs/metric_ground_transport_allocation/2026-09-09_native_ground_geometry_b01_post_convergence.md",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

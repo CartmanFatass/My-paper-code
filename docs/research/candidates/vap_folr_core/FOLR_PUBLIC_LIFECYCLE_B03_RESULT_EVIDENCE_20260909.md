@@ -1,0 +1,51 @@
+# FOLR B03 execution evidence
+
+**Complete paired technical acceptance.** RETAIN2.820625, RESET0.26125, d03+2.559375, fixed branch `RETAIN_ABOVE_MEI`. Both arms terminal exit0 and collected with all frozen counts and64 final returns in the [paired summary](FOLR_PUBLIC_LIFECYCLE_B03_RESULT_SUMMARY_20260909.json). Frozen allocation/card/intake at0653b30ed35b4b007cd70a1e310ec8eadacf2cba; exact unchanged scientific source434f10cf95f16dd342cbf754382aa76155fcd2b7. Original CM `/root/dm_folr_p68_reentry/cm_public_lifecycle_b01` completed terminal collection/technical acceptance; original DM owns scientific intake. Earlier pending entries below retain their historical meaning.
+
+New detached cwd `/home/wu/hmasd-worktrees/folr-public-lifecycle-b03-434f10cf` on `hmasd-wsl-node`, interpreter `/home/wu/.venvs/hmasd/bin/python`, CPU FP32, Torch compute/interop1. Fresh seeds7803/107803; no earlier state/data/checkpoint reused. Per-arm projections from card§4: RETAIN769.265s/RESET750.000s; hard1800s each/3600s pair. Reuse unchanged semantic review, B02 seed-route and final publication coverage; no tests/smoke rerun. Staged HEAD/source/preflight presence check0.4876519s plus1.6414286s prior support =2.1290805s of60s; ordinary staging/monitor dispatch is control-plane work.
+
+Exact RETAIN command submitted under `/usr/local/bin/agent-task run folr-public-lifecycle-b03-retain-20260909`:
+
+```sh
+cd /home/wu/hmasd-worktrees/folr-public-lifecycle-b03-434f10cf && /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/vap_folr_core/exp/public_lifecycle_b03_seed7803_retain_memory.json && mkdir -p temp/directions/vap_folr_core/exp/public_lifecycle_b03_seed7803_retain && /usr/bin/time -v -o temp/directions/vap_folr_core/exp/public_lifecycle_b03_seed7803_retain/process.time /usr/bin/timeout --signal=TERM --kill-after=5s 1800s /home/wu/.venvs/hmasd/bin/python scripts/run_folr_public_lifecycle_b01.py --arm RETAIN --seed 7803 --evaluation-seed 107803 --launch-sha 434f10cf95f16dd342cbf754382aa76155fcd2b7 --out temp/directions/vap_folr_core/exp/public_lifecycle_b03_seed7803_retain
+```
+
+Supervisor accepted submission and returned tmux `agent_folr-public-lifecycle-b03-retain-20260909`, log `/home/wu/.agent-tasks/folr-public-lifecycle-b03-retain-20260909/task.log`. This confirms submission, not memory admission or scientific completion. One of two allowed submissions consumed; RESET remains unsubmitted until original-CM terminal collection/acceptance of RETAIN. No retry, third arm, extra evaluation or successor.
+
+## Shared Monitor handoff
+
+Read live primary `C:/Projects/HMASD/docs/project/EXPERIMENT_MONITOR.md` and `.codex/hmasd-monitor.toml`, with Root address calibration4f216bc9e. Direct MONITOR_ADD delivered successfully via app tool to configured task `01a087e5-2044-7301-abb6-7a1709a98197`, with exact node/handle/source/cwd/output/receipt paths and original CM/DM plus Root `01a07249-b095-7821-8ce2-e9c32ba85267`. Tool returned destination threadId, isError=false. Monitor instructed to read goal state and continue its active set or create a nonempty goal without invented budget, and notify Root directly of adoption/terminal facts.
+
+**Dispatch accepted; adoption pending confirmation.** CM performed no remote status polling after dispatch and does not poll Monitor's task. Resource receipt and terminal facts await Monitor notification and Root's native resumption of the original CM. This handoff does not complete the two-arm batch or transfer technical acceptance. Root handles any observation-dispatch/adoption loss against the same accepted handle, never a duplicate launch.
+
+On resumption collect summary.json/all32 final returns, final.pt, process.time, memory receipt and task.log under the same local relative B03 output root. Preserve both scoped supervisor records and this new execution worktree until Root's later explicit closeout trigger. Shared authoring checkout and policy-blocked earlier scratch remain untouched.
+
+## RETAIN terminal collection and acceptance
+
+Root confirmed actual Monitor adoption at2026-09-09T21:22:31.4426682Z, running/PID3069223/tmux true. Monitor later delivered event `folr-public-lifecycle-b03-retain-20260909-exit0`, observed21:35:44.4739373Z, actual finished/exit0/tmux false; remote exit21:34:53Z. Monitor evidence: `C:/Users/fires/Documents/Codex/2026-09-09/hmasd-folr-b02-monitor-20260909/outputs/folr-public-lifecycle-b03-retain-terminal.txt`. Root resumed this original CM for collection; no parallel status loop occurred.
+
+Collected all five artifact types into local `temp/directions/vap_folr_core/exp/public_lifecycle_b03_seed7803_retain` plus sibling receipt. Admission21:22:19.461212Z passed both physical/effective floors,15,633,620,992 bytes each. Summary confirms source434f10cf, seeds7803/107803,5000 episodes/100000 training ticks/4969 updates/32 final evaluations/640 evaluation ticks and Torch threads1/1. All32 returns finite, mean readback2.820625. Training counters births21249/departures8205/opportunities46234/resets0; final132/28/321/0. External whole invocation753.84s, user735.05s/system19.32s, peak RSS650884KiB, exit0; runner pre-publication wall753.391533s/RSS637332KiB is narrower. Full cap1800s met. No dependent primary gap.
+
+Local/remote checkpoint SHA256 `5e5a9e5d927ae6161acecfb54da1dd5f6ab5fd915b5bf9113e9813778c28859e` and summary `5c786123870b86dc93eebbca781d963a0ffc55e22fa31f4ab1163153b58ed7c9` match. Direct count/seed/primary readback and digest command0.5878325s; cumulative supporting2.7169130s of60s, excluding collection transport. RETAIN technically accepted; no scientific interpretation or change to the fixed RESET allocation. RESET projection remains card750.000s under its unchanged1800s cap.
+
+## RESET accepted, pending collection
+
+Second/final submission accepted under `folr-public-lifecycle-b03-reset-20260909`, tmux `agent_folr-public-lifecycle-b03-reset-20260909`, log `/home/wu/.agent-tasks/folr-public-lifecycle-b03-reset-20260909/task.log`. Exact command is the RETAIN block above with `--arm RESET` and every lowercase path suffix `retain` replaced by `reset`; source/cwd/interpreter/seeds/counts/cap otherwise unchanged. Its own destination `admit-memory` precedes the runner with `&&`; submission acceptance alone does not claim admission.
+
+Direct MONITOR_ADD to the live-configured task01a087e5-2044-7301-abb6-7a1709a98197 returned accepted/isError=false, supplying exact RESET paths and original CM/DM/Root. **Adoption confirmation and terminal collection pending.** No CM remote-status or Monitor-task polling follows dispatch. RETAIN is collected/accepted, RESET remains incomplete; no new scientific submission remains in this allocation. Root will resume original CM after Monitor terminal notification. Source unchanged; earlier artifacts preserved.
+
+## RESET terminal collection and complete E0
+
+Root confirmed Monitor adoption21:38:11.9431270Z: running/exit null/tmux true, PID3070357, uptime13s. Monitor event `folr-public-lifecycle-b03-reset-20260909-exit0` observed21:51:16.5965425Z reports finished/exit0/tmux false and actual exit21:50:33Z. Monitor evidence: `C:/Users/fires/Documents/Codex/2026-09-09/hmasd-folr-b02-monitor-20260909/outputs/folr-public-lifecycle-b03-reset-terminal.txt`. Original CM resumed on Root's terminal handoff; no parallel status polling or duplicate scientific invocation.
+
+RESET's fresh memory receipt21:37:59.894378Z passed physical/effective floors at15,633,948,672 bytes each. Exact source/seeds7803/107803,5000 episodes/100000 training ticks/4969 updates/32 final evaluations/640 evaluation ticks and Torch threads1/1 agree. Native mean0.26125; all32 finite returns retained. Training events births21151/departures7846/opportunities45808/resets45808; final131/35/290/290. Full external wall753.94s, user736.05s/system19.27s, RSS661928KiB, exit0. Runner pre-publication wall753.639940s/RSS639496KiB has a narrower boundary.
+
+RESET's five artifact types collected into local `temp/directions/vap_folr_core/exp/public_lifecycle_b03_seed7803_reset` plus sibling memory receipt. Local/remote checkpoint SHA256 `acfeb9aec9efdf2f09830dc2c324e3715bd421219c61daa9326e00bd31811244` and summary `a141b710cfcd6234e68c9255071ed08c3f945bb1afaefd8f8612594b2604fc6d` agree. RETAIN was not recollected. Paired JSON derives directly from already collected summaries and retains source/seed/count/mean/thread/event-rule/admission/exit/cap checks. No model, episode or learner was executed during collection.
+
+Supporting total: prior CM2.7169130s + DM pending-read0.2585806s + RESET digest read0.5631490s + paired readback/assembly2.1474275s = **5.6860701s of60s**, leaving54.3139299s before DM final intake. Collection/network/ordinary Git operations are separate control-plane work. No repeated smoke/test or source edit.
+
+Per-arm full walls753.84/753.94s each satisfy1800s; summed1507.78s satisfies3600s. Aggregate OS user+system CPU1509.69s is distinct from wall. First admission21:22:19Z to final exit21:50:33Z critical path1694s uses rounded timestamps and includes186s between first exit and next admission for Monitor/collection/sequencing; prior staging and later final collection are excluded. Peak RSS is per invocation, not summed simultaneous memory. Null cgroup fields remain unmeasured without a stronger cgroup claim.
+
+The fixed inclusive rule applies to d03 alone; B01/B02 outcomes remain separately identifiable, not pooled or re-evaluated. Reversal is preserved on the same terms as earlier signs. These checks establish conformance, not stable performance, memory-feature causation or a new investment decision. All two accepted submissions are spent; no retry, third arm, random-reset arm,128-episode evaluation, diagnostic or successor occurred.
+
+Full pair technical acceptance and Monitor observation are complete. DM owns scientific intake; Root integration and later preservation/reclamation trigger. Retain this new remote execution worktree, both exact B03 supervisor directories, both local collected arm roots/receipts and the two Monitor terminal records for closeout. No deletion performed; shared authoring checkout and all earlier policy-blocked scratch remain untouched.

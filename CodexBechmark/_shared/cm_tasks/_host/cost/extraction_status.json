@@ -1,0 +1,156 @@
+{
+  "cohort": "strict hmasd-cm created in [2026-09-06T07:00:00Z,2026-09-10T01:00:00Z), HMASD cwd",
+  "source_script": "C:/Users/fires/.agents/skills/codex-task-cost-analysis/scripts/codex_task_cost_analysis.py",
+  "command_common": [
+    "summary",
+    "--role",
+    "hmasd-cm",
+    "--unit",
+    "turn",
+    "--cost-scope",
+    "self",
+    "--start-local",
+    "2026-09-06T00:00:00",
+    "--end-local",
+    "2026-09-09T18:00:00",
+    "--label",
+    "current_cm"
+  ],
+  "rows": [
+    {
+      "thread_id": "01a079ca-e1bb-7cd3-95c3-b009f6251f26",
+      "returncode": 0,
+      "error": null
+    },
+    {
+      "thread_id": "01a079cf-8ac8-7a00-aac3-cc5e627d7edc",
+      "returncode": 2,
+      "error": "TOKEN_COUNTER_REGRESSED: token counter regressed in 01a079cf-8ac8-7a00-aac3-cc5e627d7edc"
+    },
+    {
+      "thread_id": "01a079fc-2cce-7b43-b0ba-6ef080848e48",
+      "returncode": 2,
+      "error": "TOKEN_COUNTER_REGRESSED: token counter regressed in 01a079fc-2cce-7b43-b0ba-6ef080848e48"
+    },
+    {
+      "thread_id": "01a07a35-4139-7a50-b804-c8bd6e5c74e5",
+      "returncode": 2,
+      "error": "TOKEN_COUNTER_REGRESSED: token counter regressed in 01a07a35-4139-7a50-b804-c8bd6e5c74e5"
+    },
+    {
+      "thread_id": "01a07ab8-1c13-7281-9ffa-5365532558d3",
+      "returncode": 0,
+      "error": null
+    },
+    {
+      "thread_id": "01a07d38-165d-70a2-b4bf-de6eeba82032",
+      "returncode": 2,
+      "error": "TOKEN_COUNTER_REGRESSED: token counter regressed in 01a07d38-165d-70a2-b4bf-de6eeba82032"
+    },
+    {
+      "thread_id": "01a07db1-80bd-7520-b309-cc62a6bac48d",
+      "returncode": 0,
+      "error": null
+    },
+    {
+      "thread_id": "01a07dc3-d972-7c71-aedb-02cc3c6d5288",
+      "returncode": 0,
+      "error": null
+    },
+    {
+      "thread_id": "01a07e34-311b-7682-b4d8-125677f33acd",
+      "returncode": 2,
+      "error": "TOKEN_COUNTER_REGRESSED: token counter regressed in 01a07e34-311b-7682-b4d8-125677f33acd"
+    },
+    {
+      "thread_id": "01a07e89-46e5-7882-8202-2f19645fbfce",
+      "returncode": 0,
+      "error": null
+    },
+    {
+      "thread_id": "01a07e93-8a85-7fc2-a471-92380a62eb65",
+      "returncode": 0,
+      "error": null
+    },
+    {
+      "thread_id": "01a07f54-6106-72d2-9e0e-556bddfb9360",
+      "returncode": 0,
+      "error": null
+    },
+    {
+      "thread_id": "01a081bf-7d4b-76e0-9322-0bd6198070d8",
+      "returncode": 2,
+      "error": "TOKEN_COUNTER_REGRESSED: token counter regressed in 01a081bf-7d4b-76e0-9322-0bd6198070d8"
+    },
+    {
+      "thread_id": "01a081bf-b176-7dd2-9ee8-6a232f6de382",
+      "returncode": 0,
+      "error": null
+    },
+    {
+      "thread_id": "01a081c0-46d6-7cf2-a521-f405bff38bb8",
+      "returncode": 0,
+      "error": null
+    },
+    {
+      "thread_id": "01a081c2-7890-7163-abd6-415c89e0d60b",
+      "returncode": 0,
+      "error": null
+    },
+    {
+      "thread_id": "01a0822a-1f07-7601-83a8-a26126a6c30f",
+      "returncode": 2,
+      "error": "TOKEN_COUNTER_REGRESSED: token counter regressed in 01a0822a-1f07-7601-83a8-a26126a6c30f"
+    },
+    {
+      "thread_id": "01a0828e-2172-7803-b10e-2aee46759a00",
+      "returncode": 0,
+      "error": null
+    },
+    {
+      "thread_id": "01a082ac-28b2-7c82-8fd2-e0a7ef062390",
+      "returncode": 2,
+      "error": "TOKEN_COUNTER_REGRESSED: token counter regressed in 01a082ac-28b2-7c82-8fd2-e0a7ef062390"
+    },
+    {
+      "thread_id": "01a0847a-24aa-7c23-a51a-378f4aeb8539",
+      "returncode": 2,
+      "error": "TOKEN_COUNTER_REGRESSED: token counter regressed in 01a0847a-24aa-7c23-a51a-378f4aeb8539"
+    },
+    {
+      "thread_id": "01a0847a-43eb-7731-be5c-98c0297fa0e1",
+      "returncode": 2,
+      "error": "TOKEN_COUNTER_REGRESSED: token counter regressed in 01a0847a-43eb-7731-be5c-98c0297fa0e1"
+    },
+    {
+      "thread_id": "01a084ef-b7a9-7991-96ff-835148902291",
+      "returncode": 2,
+      "error": "TOKEN_COUNTER_REGRESSED: token counter regressed in 01a084ef-b7a9-7991-96ff-835148902291"
+    },
+    {
+      "thread_id": "01a085cc-17b3-7bd1-a8fc-24830a30c5d7",
+      "returncode": 0,
+      "error": null
+    },
+    {
+      "thread_id": "01a08702-d1ef-7ca0-afe3-45ba22d88518",
+      "returncode": 0,
+      "error": null
+    },
+    {
+      "thread_id": "01a0870c-2ef0-7393-bea5-e0ee2e424100",
+      "returncode": 0,
+      "error": null
+    },
+    {
+      "thread_id": "01a08730-10fe-74e3-a163-29be9c8bd61d",
+      "returncode": 0,
+      "error": null
+    },
+    {
+      "thread_id": "01a0873a-02fa-7362-a51d-90e70126c44d",
+      "returncode": 0,
+      "error": null
+    }
+  ]
+}

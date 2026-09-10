@@ -5,6 +5,13 @@ with a nonempty `fallback_reason`. The shared author fields, scientific decision
 scope and current Transport routing are defined in [the Author skill](../SKILL.md).
 Attachment mode changes delivery format, not scientific authority or executor.
 
+The top-level full commit_or_ref is the default scientific input version. Each
+reference may declare a distinct full commit_sha; omission inherits the default.
+The manifest prints each effective path/SHA mapping in the one named repository.
+Preserve all science card/evidence mappings; newer method sources may be separately
+pinned. TASK explicitly adopts only named applicable specification sections at those
+versions. Other retrieved content cannot expand scope or the listed dependencies.
+
 ## Inputs and rendering
 
 Supply the ordinary author request, exact source and parent task IDs, registered

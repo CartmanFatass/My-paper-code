@@ -1,0 +1,85 @@
+{
+  "id": "20260908-dish-003",
+  "created": "2026-09-08T14:49:27-07:00",
+  "direction": "degraded_incumbent_shadow_handover",
+  "tier": "direction",
+  "kind": "decision",
+  "title": "DISH B07后没有具体后继：窄停止还是更广关闭",
+  "context": "B07固定均值对DIRECT平均少135.25个服务tick，三种情况负、一种正，耗能四种均高；所有训练评价无普通转移。P62允许如实报告没有具体新候选。DM建议本轮无后继，来源问题仍未估计；交同一Convergence节点判断停止范围，尚未执行任何方向选项。",
+  "options": [
+    {
+      "key": "a",
+      "label": "本轮无后继，保持窄停止",
+      "consequence": "保留DIRECT及既有停止；普通来源应用仍未估计；不新建卡、启动实验、重构或关闭整个来源族。"
+    },
+    {
+      "key": "b",
+      "label": "更广关闭保留宿主来源族",
+      "consequence": "须由Convergence明确更广的方向范围和有限证据理由；仍不代表来源不可能或Portfolio生命周期处置。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "没有具体新干预进入建议，有限负结果也不足以自动扩大为整个来源问题的否定。",
+  "evidence": [
+    "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_POST_B07_DIRECTION_QUESTION_INTAKE_20260908.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-08.md#L77",
+  "brief": "docs/research/portfolio/owner/briefs/degraded_incumbent_shadow_handover/2026-09-08_P62-source.md",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "没有具体新干预进入建议后，是否只维持已测试方案的窄停止，而不扩大关闭整个保留宿主上的来源应用问题？",
+    "changes_if_approved": [
+      {
+        "target": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_POST_B07_DIRECTION_QUESTION_INTAKE_20260908.md §6",
+        "from": "B07已窄停止，P62方向问题待裁决",
+        "to": "本轮无后继；DIRECT保留；普通来源应用仍未估计，不作更广关闭或重构"
+      }
+    ],
+    "if_refused": "将更广的保留宿主来源族停止交同一个Convergence节点明确裁决；本次不先行运行任何替代实验。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_POST_B07_DIRECTION_QUESTION_INTAKE_20260908.md",
+        "quote": "Final OWN_COMMAND_MEAN minus DIRECT is **−135.25**\nmean service ticks; the four differences are **−221,+74,−329,−65**.",
+        "why": "支持执行已接受的固定均值窄停止；减少无效提交不能替代原生服务。"
+      },
+      {
+        "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_POST_B07_DIRECTION_QUESTION_INTAKE_20260908.md",
+        "quote": "No new treatment survives this bounded\nassessment strongly enough for me to nominate it.",
+        "why": "本次选择如实报告没有具体候选，而不是为延续循环临时编造实验。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_POST_B07_DIRECTION_QUESTION_INTAKE_20260908.md",
+        "quote": "Strongest contrary evidence to a **broader closure** is the B07+74\ncondition, prior B04/B05 LOW_LR gains with their adverse conditions, both current learners moving,\nand the previously recorded three ordinary training transfers in B05 CONTROL.",
+        "why": "有限负结果没有穷尽方法；普通应用路径历史上曾出现，更广关闭需另外的方向判断。"
+      }
+    ],
+    "uncertainty": [
+      "B07损失的具体原因未识别；这不是未来新B必须先解决的条件。",
+      "普通来源价值仍未估计；零转移不证明不可能。",
+      "无候选是有限源代码和文献评估的判断，不是全领域无方案证明。"
+    ],
+    "cost": {
+      "compute": "当前科学暴露为零。真实小B的对比尺度为两臂、一个配对种子、131072训练转移、1024优化步和最多9600最终评价tick；未选择处理或分配新预算。B07已知小计463.8336秒，另有未测量语法检查时间。",
+      "owner_time": "可异步修改；无需等待所有者回复",
+      "reversibility": "reversible",
+      "waits_on_this": "仅方向节点决定范围；当前没有待启动的实验"
+    },
+    "verdict_text": "DM建议：本轮不安排后继，保留DIRECT及两项已接受的窄停止；普通来源应用仍未估计，不把这次有限负结果扩大为整个来源问题的结论。",
+    "source": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_POST_B07_DIRECTION_QUESTION_INTAKE_20260908.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-08T22:57:05+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "https://github.com/CartmanFatass/My-paper-code/blob/0086cfd7e8f7326fbadf879f844b757f661e8809/docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260908_p62_post_b07_scope/archive/RESPONSE.md",
+      "record": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_POST_B07_DIRECTION_QUESTION_INTAKE_20260908.md#8-completed-p62-convergence-intake-and-application--2026-09-08",
+      "state": "applied",
+      "summary": "完整P62裁决已核对并执行(a)：保留DIRECT及B07/B06两项窄停止，本轮不安排后继；普通来源问题仍未解决。不新建卡、实验、种子、诊断或继续筛选，不扩大关闭或重构。方向记录、中文简报及审计第78–79行已更新。旧聊天链接原样保存，当前科学依据是固定GitHub全文；零新科学暴露，无第二次发送。依据AGENTS第2节及2026-09-03持续授权执行，未制造所有者回复。"
+    }
+  ]
+}

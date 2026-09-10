@@ -1,0 +1,193 @@
+{
+  "kind": "read_only_arithmetic_on_accepted_evidence",
+  "recorded_at": "2026-09-09T03:42:26.703304+00:00",
+  "input_checkout_sha": "8e19cda9bcb3b94deb428b885c854318f35bd70d",
+  "source_result_path": "docs/research/candidates/commitment_residual_triggered_options/CRTO_RESIDUAL_CYCLE_ENDPOINTS_B04_RESULT_20260904.json",
+  "source_launch_sha": "c53f3bb19c91d01ef87cb2c4b9737811eb10d795",
+  "new_exposure": {
+    "scientific_invocations": 0,
+    "environment_calls": 0,
+    "model_calls": 0,
+    "native_calls": 0,
+    "evaluator_calls": 0,
+    "optimizer_updates": 0
+  },
+  "calculation_method": "Python 3.11 stdlib JSON reads and arithmetic; no project imports, model instantiation, runner or project-cost call.",
+  "proposed_work": {
+    "joint_seed": 0,
+    "seed_scope": "reused seed-0 package; no independent replication; proposed only",
+    "gate_trajectories": 3,
+    "endpoints": [
+      33,
+      258
+    ],
+    "batch_size": 32,
+    "gate_updates": 774,
+    "gate_processed_examples": 24768,
+    "predictor_updates": 100,
+    "predictor_processed_examples": 12800,
+    "eval_decisions": 96,
+    "unique_eval_rows": 16,
+    "cost_terms_upper": 198144,
+    "shared_host_step_upper": 73728,
+    "SHORT_per_arm": {
+      "updates": 33,
+      "processed_examples": 1056,
+      "visits_per_train_row": 22,
+      "nominal_lr_exposure": 0.033
+    },
+    "LONG_per_arm": {
+      "updates": 258,
+      "processed_examples": 8256,
+      "visits_per_train_row": 172,
+      "nominal_lr_exposure": 0.258
+    }
+  },
+  "historical_exposure": {
+    "RAW": {
+      "representation": "RAW",
+      "update": 258,
+      "update_mod_3": 0,
+      "post_update_cyclic_cursor": 0,
+      "batch_size": 32,
+      "processed_examples": 8256,
+      "adam_lr": 0.001,
+      "nominal_lr_exposure": 0.258,
+      "initial_parameter_l2": 18.87916908516977,
+      "initial_parameter_rms": 0.10402732933491829,
+      "initial_parameter_linf": 0.28862619400024414,
+      "parameter_displacement_l2_over_initial_l2": 0.1369227563959056,
+      "parameter_displacement_linf_over_initial_linf": 0.915735779252775
+    },
+    "TRUE_RESIDUAL": {
+      "representation": "TRUE_RESIDUAL",
+      "update": 258,
+      "update_mod_3": 0,
+      "post_update_cyclic_cursor": 0,
+      "batch_size": 32,
+      "processed_examples": 8256,
+      "adam_lr": 0.001,
+      "nominal_lr_exposure": 0.258,
+      "initial_parameter_l2": 18.87916908516977,
+      "initial_parameter_rms": 0.10402732933491829,
+      "initial_parameter_linf": 0.28862619400024414,
+      "parameter_displacement_l2_over_initial_l2": 0.08801190138964558,
+      "parameter_displacement_linf_over_initial_linf": 0.5338464052739748
+    },
+    "CALIBRATED_DERANGEMENT": {
+      "representation": "CALIBRATED_DERANGEMENT",
+      "update": 258,
+      "update_mod_3": 0,
+      "post_update_cyclic_cursor": 0,
+      "batch_size": 32,
+      "processed_examples": 8256,
+      "adam_lr": 0.001,
+      "nominal_lr_exposure": 0.258,
+      "initial_parameter_l2": 18.87916908516977,
+      "initial_parameter_rms": 0.10402732933491829,
+      "initial_parameter_linf": 0.28862619400024414,
+      "parameter_displacement_l2_over_initial_l2": 0.13797244260322725,
+      "parameter_displacement_linf_over_initial_linf": 0.9070316204301058
+    }
+  },
+  "historical_work_counts": {
+    "gate_updates": 774,
+    "processed_examples": 24768,
+    "network_forward_rows": 96,
+    "scored_decisions": 96,
+    "unique_eval_rows": 16,
+    "environment_transitions": 54848,
+    "common_future_branch_steps": 3520
+  },
+  "cost_projection": {
+    "arm_law": "3*(S+258*t_j+E_j+Q)",
+    "shared_law": "3*(S+sum_j(258*t_j+E_j)+Q)",
+    "S": 120.60043037099967,
+    "t": {
+      "RAW": 0.06733760550387935,
+      "TRUE_RESIDUAL": 0.06475017771316384,
+      "CALIBRATED_DERANGEMENT": 0.06617708206977113
+    },
+    "E": {
+      "RAW": 0.014060344998142682,
+      "TRUE_RESIDUAL": 0.011793982004746795,
+      "CALIBRATED_DERANGEMENT": 0.012702049003564753
+    },
+    "Q": 0.00270985699899029,
+    "per_arm_seconds": {
+      "RAW": 413.97090837899304,
+      "TRUE_RESIDUAL": 411.96144017999904,
+      "CALIBRATED_DERANGEMENT": 413.06858835300955
+    },
+    "shared_invocation_seconds": 515.3820955440096,
+    "proposed_per_arm_cap_seconds": 1200,
+    "proposed_shared_cap_seconds": 1500,
+    "unmeasured": [
+      "new expected-native-cost objective overhead",
+      "current node load",
+      "new setup/check/publication overhead"
+    ],
+    "new_budget_allocated": false
+  },
+  "historical_node": "wsl_4070",
+  "historical_resources": {
+    "wall_seconds": 171.8017914000011,
+    "peak_rss_bytes": 1541214208,
+    "status": "measured"
+  },
+  "native_accounting": {
+    "original_mei": 0.0025,
+    "diagnostic_mei": 0.000625,
+    "eval_rows": 16,
+    "original_mei_net_gain": 0.04,
+    "diagnostic_mei_net_gain": 0.01,
+    "historical_endpoint_regrets": {
+      "SHORT": {
+        "RAW": 0.006581880989529963,
+        "TRUE_RESIDUAL": 0.018114012084314506,
+        "CALIBRATED_DERANGEMENT": 0.009491068185733439
+      },
+      "LONG": {
+        "RAW": 0.0037814300857039115,
+        "TRUE_RESIDUAL": 0.010915533713999911,
+        "CALIBRATED_DERANGEMENT": 0.00965134486557058
+      }
+    },
+    "TRUE_mean_recovery_needed_to_clear_fixed_RAW": {
+      "SHORT": 0.014032131094784543,
+      "LONG": 0.009634103628296
+    },
+    "three_largest_LONG_error_corrections": {
+      "0/EVALUATION/K8/850/156/0": 0.05438343183122113,
+      "1/EVALUATION/K8/858/156/0": 0.054714365493479994,
+      "5/EVALUATION/K8/833/60/0": 0.03933975906542861
+    },
+    "three_error_mean_recovery": 0.009277347274383108
+  },
+  "literature_coverage": {
+    "My-lib": {
+      "tracked_real_collection_verified": false,
+      "registered_papers": 2,
+      "registered_mechanisms": 2,
+      "collection": "synthetic-core; excluded",
+      "page_rows": 0,
+      "semantic_page_rows": 0
+    },
+    "Inst-sci": {
+      "catalog": "C:/Projects/Inst-sci/papers/MyLib/llm-index/catalog.v2.jsonl",
+      "records": 190,
+      "query_hits": {
+        "ranking": 1,
+        "advantage": 8,
+        "termination": 0,
+        "option": 1,
+        "counterfactual": 4,
+        "regret minim": 0,
+        "decision-focused": 0,
+        "cost-sensitive": 0
+      },
+      "source_checked": "MARL-0530 pp.1-2 elements126-134"
+    }
+  },
+  "scope_section_4": "none"
+}

@@ -1,0 +1,157 @@
+{
+  "condition": "ACVC native link-loss unchanged T/G with fixed C/F, DENSE8201",
+  "unit": "one matched training instance including its own fresh reset/action evaluation panel",
+  "inference": "two-instance descriptive endpoints only; no pooled episode SE or population/causal inference",
+  "instances": [
+    {
+      "object": "ACVC-NATIVE-LINK-LOSS-B01",
+      "training_instance": 8901,
+      "scientific_source_sha": "f429021166eefa9ee6d9b275ac8c91f1b13a8f28",
+      "arm_mean_J": {
+        "T": 0.23448272818841664,
+        "G": 0.19751402293456757,
+        "C": 0.16730149784780335,
+        "F": 0.2635633631190553
+      },
+      "primary_min_of_means_J": -0.029080634930638692,
+      "selected_fixed_panel_reference": "F",
+      "cost": {
+        "process_wall_s": 359.17,
+        "focused_check_wall_s": 14.2369735,
+        "logical_study_bill_s": 373.4069735,
+        "complete_arm_bill_s": {
+          "T": 199.8208294399871,
+          "G": 215.51174089401928
+        },
+        "peak_rss_bytes": 565547008,
+        "aggregate_cpu": "unmeasured",
+        "scratch_high_water": "unmeasured"
+      }
+    },
+    {
+      "object": "ACVC-NATIVE-LINK-LOSS-B02",
+      "training_instance": 8902,
+      "scientific_source_sha": "4e019ca35b930c2216fdfe110ba587e222ca7384",
+      "arm_mean_J": {
+        "T": 0.2239949254629433,
+        "G": 0.23058950691624636,
+        "C": 0.17040371445006997,
+        "F": 0.2782482888954908
+      },
+      "primary_min_of_means_J": -0.05425336343254749,
+      "selected_fixed_panel_reference": "F",
+      "cost": {
+        "process_wall_s": 357.55,
+        "focused_check_wall_s": 5.4396806,
+        "logical_study_bill_s": 362.9896806,
+        "complete_arm_bill_s": {
+          "T": 191.57035297096837,
+          "G": 207.23324539599372
+        },
+        "peak_rss_bytes": 562565120,
+        "aggregate_cpu": "unmeasured",
+        "scratch_high_water": "unmeasured"
+      }
+    }
+  ],
+  "contrasts": {
+    "T-C": {
+      "instance_ids": [
+        8901,
+        8902
+      ],
+      "mean_J_by_instance": [
+        0.06718123034061328,
+        0.05359121101287336
+      ],
+      "reading_by_instance": [
+        "UP",
+        "UP"
+      ],
+      "descriptive_mean_J": 0.06038622067674332,
+      "descriptive_sample_SD_J": 0.009609594823101144,
+      "min_J": 0.05359121101287336,
+      "max_J": 0.06718123034061328,
+      "population_SE": null
+    },
+    "T-F": {
+      "instance_ids": [
+        8901,
+        8902
+      ],
+      "mean_J_by_instance": [
+        -0.029080634930638692,
+        -0.05425336343254749
+      ],
+      "reading_by_instance": [
+        "DOWN",
+        "DOWN"
+      ],
+      "descriptive_mean_J": -0.04166699918159309,
+      "descriptive_sample_SD_J": 0.01779980702466759,
+      "min_J": -0.05425336343254749,
+      "max_J": -0.029080634930638692,
+      "population_SE": null
+    },
+    "T-G": {
+      "instance_ids": [
+        8901,
+        8902
+      ],
+      "mean_J_by_instance": [
+        0.036968705253849064,
+        -0.006594581453303034
+      ],
+      "reading_by_instance": [
+        "UP",
+        "WITHIN"
+      ],
+      "descriptive_mean_J": 0.015187061900273014,
+      "descriptive_sample_SD_J": 0.030803895441401035,
+      "min_J": -0.006594581453303034,
+      "max_J": 0.036968705253849064,
+      "population_SE": null
+    },
+    "G-C": {
+      "instance_ids": [
+        8901,
+        8902
+      ],
+      "mean_J_by_instance": [
+        0.030212525086764218,
+        0.0601857924661764
+      ],
+      "reading_by_instance": [
+        "UP",
+        "UP"
+      ],
+      "descriptive_mean_J": 0.04519915877647031,
+      "descriptive_sample_SD_J": 0.02119430061829989,
+      "min_J": 0.030212525086764218,
+      "max_J": 0.0601857924661764,
+      "population_SE": null
+    },
+    "G-F": {
+      "instance_ids": [
+        8901,
+        8902
+      ],
+      "mean_J_by_instance": [
+        -0.06604934018448776,
+        -0.047658781979244454
+      ],
+      "reading_by_instance": [
+        "DOWN",
+        "DOWN"
+      ],
+      "descriptive_mean_J": -0.05685406108186611,
+      "descriptive_sample_SD_J": 0.013004088416733442,
+      "min_J": -0.06604934018448776,
+      "max_J": -0.047658781979244454,
+      "population_SE": null
+    }
+  },
+  "total_logical_study_bill_s": 736.3966541,
+  "cost_per_valid_instance_s": 368.19832705,
+  "total_team_steps": 589824
+}

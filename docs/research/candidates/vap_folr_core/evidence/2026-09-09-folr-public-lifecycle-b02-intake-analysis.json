@@ -1,0 +1,89 @@
+{
+  "unit": "one endpoint per trained run; two matched independent fitting/evaluation pairs under the common fixed public-lifecycle recipe",
+  "selection": "B02 was selected after B01; no new seed was tried or selected using B02 output",
+  "interpretation": "B02 branch uses d02 alone. Episode spread is conditional rollout variation; n=2 pair mean/sample SD is descriptive only, not stable population superiority or causal localization.",
+  "objects": {
+    "B01": {
+      "source": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_B01_RESULT_SUMMARY_20260909.json",
+      "summary_sha256": "5a608e726032cab571e2b719533ea875eac661b9cbce3375627d734c742b9dd2",
+      "arms": {
+        "RETAIN": {
+          "training_seed": 7801,
+          "evaluation_seed": 107801,
+          "final_mean_native_return": 2.1043749999999997,
+          "conditional_evaluation_episodes": 32,
+          "conditional_episode_sample_sd": 6.888062575818188,
+          "conditional_episode_min": -11.709999999999997,
+          "conditional_episode_max": 16.31,
+          "conditional_episode_median": 0.6050000000000002,
+          "negative_evaluation_episodes": 14,
+          "training_mean_native_return": -5.044871999999994
+        },
+        "RESET": {
+          "training_seed": 7801,
+          "evaluation_seed": 107801,
+          "final_mean_native_return": 4.1065625,
+          "conditional_evaluation_episodes": 32,
+          "conditional_episode_sample_sd": 7.996783066666406,
+          "conditional_episode_min": -14.049999999999999,
+          "conditional_episode_max": 18.44,
+          "conditional_episode_median": 4.425,
+          "negative_evaluation_episodes": 8,
+          "training_mean_native_return": -5.225858000000012
+        }
+      },
+      "difference_RETAIN_minus_RESET": -2.0021875000000002,
+      "independently_applied_branch": "RESET_ABOVE_MEI"
+    },
+    "B02": {
+      "source": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_B02_RESULT_SUMMARY_20260909.json",
+      "summary_sha256": "e15843540cd7f9d923084cdd104dfa8053812af948f5a283a78a74df2d55b07b",
+      "arms": {
+        "RETAIN": {
+          "training_seed": 7802,
+          "evaluation_seed": 107802,
+          "final_mean_native_return": 1.3278124999999996,
+          "conditional_evaluation_episodes": 32,
+          "conditional_episode_sample_sd": 5.519984066348556,
+          "conditional_episode_min": -8.93,
+          "conditional_episode_max": 11.33,
+          "conditional_episode_median": -0.26000000000000023,
+          "negative_evaluation_episodes": 17,
+          "training_mean_native_return": -4.716158
+        },
+        "RESET": {
+          "training_seed": 7802,
+          "evaluation_seed": 107802,
+          "final_mean_native_return": 3.250625,
+          "conditional_evaluation_episodes": 32,
+          "conditional_episode_sample_sd": 9.253384712040901,
+          "conditional_episode_min": -16.020000000000003,
+          "conditional_episode_max": 24.700000000000003,
+          "conditional_episode_median": 3.6649999999999983,
+          "negative_evaluation_episodes": 13,
+          "training_mean_native_return": -3.7982300000000127
+        }
+      },
+      "difference_RETAIN_minus_RESET": -1.9228125000000003,
+      "independently_applied_branch": "RESET_ABOVE_MEI"
+    }
+  },
+  "descriptive_two_pair_mean_difference": -1.9625000000000004,
+  "complete_arm_wall_seconds": {
+    "RETAIN": 767.84,
+    "RESET": 753.11
+  },
+  "summed_complete_arm_wall_seconds": 1520.95,
+  "aggregate_cpu_seconds": 1523.3000000000002,
+  "study_critical_path_seconds": 1622,
+  "study_critical_path_scope": "supervisor first start20:09:12Z to final exit20:36:14Z; includes101s between arms and rounded timestamps, excludes prior staging and final collection",
+  "new_scientific_invocations_by_this_analysis": 0,
+  "prior_supporting_checks_readbacks_seconds": 7.1517154,
+  "dm_final_readback_seconds": 0.0749846,
+  "analysis_prepublication_seconds": 0.10835860000224784,
+  "analysis_command_wall_seconds": 0.3421748,
+  "analysis_output_readback_seconds": 0.0655182,
+  "final_document_consistency_command_wall_seconds": 0.2124487,
+  "supporting_checks_through_scientific_intake_seconds": 7.8468417,
+  "complete_scientific_wall_plus_measured_supporting_seconds": 1528.7968417
+}

@@ -1,0 +1,59 @@
+{
+  "observed_at_utc": "2026-09-08T17:27:11.465734+00:00",
+  "command": "gh issue view 10 --repo CartmanFatass/My-paper-code --json number,title,state,url,updatedAt,body,comments",
+  "issue": {
+    "body": "FSD 当前固定 K2 policy-gap 学习家族仍按 post-E4 Convergence 暂停。本讨论承接 P14：判断 P13 已查明的原生续约动作干预是否值得有限重入，或直接有界学习/维持暂停更合适。尚未选择或执行任何实验。\n\n问题：对已接受的 E3 large seed2 最终模型，只把环境实际续约掩码替换为公开事件规则、保留模型自身的技能与递归状态路径，原生服务会怎样变化？比较原 D2、只改实际续约动作的 H、公开信息贪心 G。固定权重并不固定后续动作或内部状态；G 绕过 actor，不能被记作 actor 学会了正确角色。\n\n证据入口：[P13 source preparation](https://github.com/CartmanFatass/My-paper-code/blob/13b4677e44265a2aa62fe4c7ebecb6c9056d493e/docs/research/candidates/flexible_skill_duration/FSD_P13_REENTRY_SOURCE_PREPARATION_20260907.md)；[post-E4 decision and re-entry criterion](https://github.com/CartmanFatass/My-paper-code/blob/13b4677e44265a2aa62fe4c7ebecb6c9056d493e/docs/research/candidates/flexible_skill_duration/FSD_POST_E4_CONVERGENCE_INTAKE_20260905.md)。\n\n保留 outcome-informed checkpoint 选择、缺失的 native-role competence、E3 正负结果、E4 public-greedy 解释和实际 checkpoint/normalizer/reset 限制。96 episodes / 38,400 steps 及每策略 180 秒、合计 540 秒只是待讨论预算，不是已测成本或调用分配。零 learner 不自动便宜，也不能成为后续真实学习的强制前置步骤。\n\n新请求只允许 Pro 在 codex/fsd 的本轮指定 archive/RESPONSE.md 写完整方向结论，并在此 Issue 留不可变交付链接。固定 TASK 链接由随后的已提交 HANDOFF 绑定；不更改科学状态、代码或 main。Root 按 P14 执行已有节点的一次可验证 Transport，DM 接收完整回复后检查现行规范。\n",
+    "comments": [
+      {
+        "id": "IC_kwDOO8trO88AAAABTGQB1Q",
+        "author": {
+          "login": "CartmanFatass"
+        },
+        "authorAssociation": "OWNER",
+        "body": "本轮原生续约 Convergence 的完整答复已交付，并已按提交读回。\n\n[完整研究答复（不可变提交 a19678fb7e0618db0c665dabe3d3cc769dc93ff5）](https://github.com/CartmanFatass/My-paper-code/blob/a19678fb7e0618db0c665dabe3d3cc769dc93ff5/docs/research/candidates/flexible_skill_duration/pro_packets/20260907_native_renewal_convergence/archive/RESPONSE.md)\n\n对应 [固定 TASK](https://github.com/CartmanFatass/My-paper-code/blob/27a1858b457a734a152a7784205bc81095b9b164/docs/research/candidates/flexible_skill_duration/pro_packets/20260907_native_renewal_convergence/TASK.md)，科学证据保持在 13b4677e44265a2aa62fe4c7ebecb6c9056d493e。提交只在 codex/fsd 新增指定 archive/RESPONSE.md；未执行实验、加载模型或修改源码、main、科学卡及 Portfolio 状态。",
+        "createdAt": "2026-09-07T23:17:55Z",
+        "includesCreatedEdit": false,
+        "isMinimized": false,
+        "minimizedReason": "",
+        "reactionGroups": [],
+        "url": "https://github.com/CartmanFatass/My-paper-code/issues/10#issuecomment-5576589781",
+        "viewerDidAuthor": true
+      },
+      {
+        "id": "IC_kwDOO8trO88AAAABTJ0R9A",
+        "author": {
+          "login": "CartmanFatass"
+        },
+        "authorAssociation": "OWNER",
+        "body": "P25「完成原生控制观测后的 Convergence」完整研究答复已交付，并已按交付提交读回全文。\n\n[完整答复（不可变提交 eaff53a10b21383fb682f63bcf58782875599ff0）](https://github.com/CartmanFatass/My-paper-code/blob/eaff53a10b21383fb682f63bcf58782875599ff0/docs/research/candidates/flexible_skill_duration/pro_packets/20260907_post_native_control_convergence/archive/RESPONSE.md)\n\n对应[本轮固定 TASK](https://github.com/CartmanFatass/My-paper-code/blob/c3fb335a3af51ae156354209df1c9e3d8718c1c0/docs/research/candidates/flexible_skill_duration/pro_packets/20260907_post_native_control_convergence/TASK.md)，科学证据固定于 1db0df54cf19b0a9eb300468144fab7eb8abbd29。本轮不同于先前的 native_renewal_convergence 交付。\n\n该提交在 codex/fsd 的当前后继上仅新增本轮指定 archive/RESPONSE.md，保留其他路径。未执行实验、加载模型、实现代码或修改 main、科学卡、DIRECTION、Portfolio。完整方向选择、限制与下一问题的设计边界以链接中的答复为准；没有新增科学调用分配。",
+        "createdAt": "2026-09-08T06:27:32Z",
+        "includesCreatedEdit": false,
+        "isMinimized": false,
+        "minimizedReason": "",
+        "reactionGroups": [],
+        "url": "https://github.com/CartmanFatass/My-paper-code/issues/10#issuecomment-5580329460",
+        "viewerDidAuthor": true
+      },
+      {
+        "id": "IC_kwDOO8trO88AAAABTOlodg",
+        "author": {
+          "login": "CartmanFatass"
+        },
+        "authorAssociation": "OWNER",
+        "body": "本轮 post-B02 Convergence 的完整研究答复已交付，并已按交付提交读回全文。\n\n[完整研究答复（不可变提交 128f90b3a2c8b037dcd71c1d3e34ca0c26bccba7）](https://github.com/CartmanFatass/My-paper-code/blob/128f90b3a2c8b037dcd71c1d3e34ca0c26bccba7/docs/research/candidates/flexible_skill_duration/pro_packets/20260908_post_b02_convergence/archive/RESPONSE.md)\n\n对应[本轮固定 TASK](https://github.com/CartmanFatass/My-paper-code/blob/e04604a460b2871ef4e9d6928599085dcd06268b/docs/research/candidates/flexible_skill_duration/pro_packets/20260908_post_b02_convergence/TASK.md)，科学证据固定于 7b773b5a27336d3855fea83c4d6c5fc723ac74bc。本轮不是前两轮 native_renewal 或 post_native_control 的重复交付。\n\n该提交仅在 codex/fsd 当前后继新增本轮指定 archive/RESPONSE.md，已核对仅此一路径变化，保留所有其他路径及历史交付。未执行代码、加载模型、运行实验、指定数值 keys，或修改 main、源码、card、DIRECTION、Portfolio。方向内选择、有限设计与未知成本以完整答复为准；没有新增实际科学调用分配。",
+        "createdAt": "2026-09-08T12:44:38Z",
+        "includesCreatedEdit": false,
+        "isMinimized": false,
+        "minimizedReason": "",
+        "reactionGroups": [],
+        "url": "https://github.com/CartmanFatass/My-paper-code/issues/10#issuecomment-5585332342",
+        "viewerDidAuthor": true
+      }
+    ],
+    "number": 10,
+    "state": "OPEN",
+    "title": "FSD：原生续约动作问题是否支持有限重入",
+    "updatedAt": "2026-09-08T12:44:38Z",
+    "url": "https://github.com/CartmanFatass/My-paper-code/issues/10"
+  }
+}

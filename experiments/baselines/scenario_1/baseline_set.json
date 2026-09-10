@@ -88,7 +88,7 @@
       "implementation_switch": "hmasd.baselines.apply_algorithm_config(config, 'mappo')",
       "exact_scenario_1_runner_exists": false,
       "result_exists": false,
-      "note": "train_multiproc_config_1.py --scenario base constructs UAVRoutedRelayEnv, not UAVBaseStationEnv"
+      "note": "experiments/launchers/train_multiproc_config_1.py --scenario base constructs UAVRoutedRelayEnv, not UAVBaseStationEnv"
     },
     "TUNED_HMASD_AS_SHIPPED": {
       "performance_result_exists": false

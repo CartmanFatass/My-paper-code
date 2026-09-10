@@ -1,0 +1,72 @@
+{
+  "id": "20260908-crto-002",
+  "created": "2026-09-08T21:33:20-07:00",
+  "direction": "commitment_residual_triggered_options",
+  "tier": "direction",
+  "kind": "decision",
+  "title": "CRTO P68裁决：仅选择一次原生成本B",
+  "context": "完整Pro答复满足既有再入条件；只选种子0、三臂、33/258更新。旧负值保留，PARK是接近的备选。一次发送多了跨，但固定GitHub答复与Issue交付已核实，科学内容完整合规；发送记录不改写。",
+  "options": [
+    {
+      "key": "a",
+      "label": "选择这个具体B",
+      "consequence": "已执行科学选择和前瞻卡冻结；实现、暂存和实验仍为0分配，Root另行处理。"
+    },
+    {
+      "key": "b",
+      "label": "维持家族PARK",
+      "consequence": "所有者若异步改选，停止受影响的B08后续分配；旧证据及Pro源保留。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "合规Convergence选择对原生动作价值有直接区分力的新目标；不代表残差会成功。",
+  "evidence": [
+    "docs/research/candidates/commitment_residual_triggered_options/CRTO_NATIVE_COST_P68_CONVERGENCE_INTAKE_20260908.md",
+    "docs/research/candidates/commitment_residual_triggered_options/pro_packets/20260908_native_cost_reentry_convergence/archive/RESPONSE.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-08.md#L204",
+  "brief": "docs/research/portfolio/owner/briefs/commitment_residual_triggered_options/2026-09-08_P68-convergence.md",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否保留已由Convergence选定的这一次原生成本B及其精确卡？目前只完成文档，不分配实现或运行。",
+    "changes_if_approved": [
+      {
+        "target": "CRTO当前已选样本的平衡残差家族",
+        "from": "PARK，等待具体有原生价值路径的再入问题",
+        "to": "仅选择CRTO-NATIVE-COST-B08：重用联合种子0、三臂、33/258更新；其他任意修补未开放"
+      }
+    ],
+    "if_refused": "异步拒绝或修改将在下一边界执行；现有旧结果和发送记录保持，不继续受影响的新对象。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/commitment_residual_triggered_options/pro_packets/20260908_native_cost_reentry_convergence/archive/RESPONSE.md",
+        "quote": "Select the single native-cost B proposed in P68.",
+        "why": "新目标直接按合法动作的原生成本分配信用；RAW和打乱对照共用目标，旧RAW防止比较器退化制造正值。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/commitment_residual_triggered_options/pro_packets/20260908_native_cost_reentry_convergence/archive/RESPONSE.md",
+        "quote": "Retaining PARK is the close runner-up.",
+        "why": "唯一合格旧比较仍是残差负值，且种子和样本已用于开发；同样目标可能更帮助RAW。"
+      }
+    ],
+    "uncertainty": [
+      "尚无新训练结果，仍预测不达原门槛更可能。",
+      "旧RAW只在长期合格；失败对照不能自动证明通用预处理。",
+      "一次发送末尾多了跨；实际发送字节及哈希未恢复。GitHub固定答复与Issue交付已核实，内容完整合规。",
+      "缺少调优同信息headroom；新目标和发表耗时未测。"
+    ],
+    "cost": {
+      "compute": "本次0新增科学调用；未来拟774 gate更新/24768样本/96评价决定。旧计时外推共享515.38秒；拟每臂1200秒、完整共享1500秒，尚未分配。",
+      "owner_time": "异步查看卡和简报，无需逐次批准",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing；Root处理实际分配和集成"
+    },
+    "verdict_text": "**Select the single native-cost B proposed in P68. It meets the existing re-entry condition because it specifies a genuinely different action-credit intervention, gives that intervention to the containing RAW comparator as well as both residual arms, and requires a net native-value improvement that also clears the historical RAW reference. This is a narrowly justified learning comparison, not evidence that residual alignment will succeed.**",
+    "source": "docs/research/candidates/commitment_residual_triggered_options/pro_packets/20260908_native_cost_reentry_convergence/archive/RESPONSE.md"
+  },
+  "starred": true
+}

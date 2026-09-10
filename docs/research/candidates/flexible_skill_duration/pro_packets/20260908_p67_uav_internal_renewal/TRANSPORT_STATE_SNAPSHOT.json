@@ -1,0 +1,28 @@
+{
+  "captured_at": "2026-09-09T02:43:38+00:00",
+  "source": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\registry.json",
+  "registry_updated_at": "2026-09-08T22:46:32Z",
+  "binding": {
+    "conversation_binding_key": "em:flexible_skill_duration:convergence",
+    "conversation_id": "6a9c2865-14a8-83e8-b556-e7f5836d9236",
+    "provider_url": "https://chatgpt.com/c/6a9c2865-14a8-83e8-b556-e7f5836d9236",
+    "request_id": "2026-09-08-fsd-post-b03-convergence-01",
+    "source_thread_id": "01a081bd-7f7a-78e1-80bc-1961d85e0d1a",
+    "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+    "operator_thread_id": "01a07e52-f085-76a0-886a-4127f490421f",
+    "state": "ARCHIVED",
+    "send_click_count": 1,
+    "updated_at": "2026-09-08T19:15:47Z",
+    "response_sha256": "0a630d11a37d5179d6df1149d02cf112bb529b32b7a761a393becdea35e83c47",
+    "response_bytes": 371,
+    "scientific_decision_formed": false,
+    "return_receipt": {
+      "status": "SENT",
+      "delivery_status": "accepted",
+      "attempt_count": 1,
+      "destination_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+      "sent_at": "2026-09-08T19:16:46Z"
+    }
+  },
+  "interpretation": "Prior P52 request is ARCHIVED, one Send, accepted parent receipt. scientific_decision_formed=false and 371-byte response digest classify its short chat receipt only; the full fixed GitHub response fda33aabbd7579b3bc9183a5e684493d55fea07d was accepted in P52 intake. No new request accepted, registry mutation, reset or Send."
+}

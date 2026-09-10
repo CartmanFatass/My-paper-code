@@ -33,7 +33,11 @@ DEFAULT_OPTIONS = {
     "new-card": [("accept", "launch as carded"), ("reject", "do not launch"), ("revise", "revise before launch")],
     "brief": [("reading-agreed", "the reading stands"), ("reading-disputed", "re-read per the comment")],
     "second-recast": [("continue-low-priority", "continue at lowest sequencing priority"), ("park", "PARK the direction")],
-    "portfolio": [("ratify", "ratify the proposal"), ("refuse", "refuse"), ("amend", "amend per the comment")],
+    "portfolio": [
+        ("keep", "retain the formed Pro disposition"),
+        ("refuse", "override the Pro disposition at the next clean boundary"),
+        ("amend", "override the Pro disposition per the comment at the next clean boundary"),
+    ],
 }
 
 

@@ -1,0 +1,50 @@
+{
+  "question": "是否在保留已停128家族的历史含义下，选择3个新G各连续512更新、固定128/512面板的有限预算比较？当前仅准备，原Convergence尚未选择。",
+  "changes_if_approved": [
+    {
+      "target": "vsp_03 的新continuous512候选",
+      "from": "已测试的ordinary-G/update128窄家族暂停，后继未选",
+      "to": "若原Convergence合规选择，随后按Root具体指令冻结并实施3个连续512 fit；原停止和全部旧证据仍保留"
+    }
+  ],
+  "if_refused": "保持已测128窄家族暂停且不选512后继；不把新问题拒绝改成整个方向失败，不运行旧权重诊断或替代网格。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/vsp_03/VSP03_CONTINUOUS512_CANDIDATE_SCIENCE_CARD_20260909.md#1-question-and-the-stopped-scope",
+      "quote": "Does extending the same real training process from128 to512 updates change the\nnative comparison enough to reconsider ordinary greedy G's usefulness against\nR0 and R?",
+      "why": "同一训练过程的两个预选终点直接观察预算变化，不只是再抽一个旧128实例。"
+    },
+    {
+      "path": "docs/research/candidates/vsp_03/VSP03_CONTINUOUS512_CM_FEASIBILITY_20260909.md",
+      "quote": "The shared model/environment/objective need no redesign.",
+      "why": "原CM根据真实源码和既有完整耗时确认小幅实现可行；不靠新增profiling或放宽预算。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/vsp_03/VSP03_POST_B05_CONVERGENCE_INTAKE_20260909.md",
+      "quote": "The negative descriptive mean does not establish population inferiority.",
+      "why": "旧两小正一较大负保留，不保证更长训练改善；同信息readiness仍强。"
+    },
+    {
+      "path": "docs/research/candidates/vsp_03/VSP03_B05_P76_INTAKE_20260909.md",
+      "quote": "All three stochastic\nexecutions lose to both fixed rules.",
+      "why": "更多优化仍可能只给greedy小幅混合收益，随机用途仍亏损。"
+    }
+  ],
+  "uncertainty": [
+    "512是否改善、幅度及各fit结果未知；两个面板不能证明收敛或唯一机制。",
+    "三fit是本次owner候选尺寸，不是种子配额；不要求全正。",
+    "60秒每fit是有源码依据的可行上限建议，不是实测保证；180秒是完整调用wall之和。",
+    "原暂停不能本地忽略；新预算是否值得选择由原Convergence明确决定。"
+  ],
+  "cost": {
+    "compute": "候选3模型、1536Adam、221184joint episodes、8847360team ticks、17694720target transitions；60秒完整fit、180秒summed wall。外推约13.01–16.77秒/fit、三fit约39.04–50.30秒，非保证。本轮新模型、RNG、科学/测试/profiling调用、source实现、Pro Send均0。",
+    "owner_time": "异步查看候选和原节点决定；不等待。",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing; preparation returns one ready proper-node handoff, with no source implementation or scientific allocation"
+  },
+  "verdict_text": "DM recommends asking Convergence\nto select this one bounded512 comparison because it directly separates continued\nlearning from another unchanged128 realization at low projected work.",
+  "source": "docs/research/candidates/vsp_03/VSP03_CONTINUOUS512_CANDIDATE_SCIENCE_CARD_20260909.md",
+  "owner_boundary_checked_at": "2026-09-09T21:32:27Z"
+}

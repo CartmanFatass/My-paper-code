@@ -1,0 +1,1 @@
+{"whole_chain_measured_seconds": 444.7305436860188, "whole_chain_with_0_02s_closure_allowance": 444.7505436860188, "prior_check_seconds": 11.7811445, "supervised_exit": 0, "scope": "wrapper entry through timing readback; final write/exit allowance0.02s, not observed completion"}

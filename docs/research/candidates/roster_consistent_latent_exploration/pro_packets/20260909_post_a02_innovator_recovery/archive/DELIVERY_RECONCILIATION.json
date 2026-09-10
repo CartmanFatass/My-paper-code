@@ -1,0 +1,39 @@
+{
+  "reconciliation_kind": "append_only_verified_delivery",
+  "reconciled_at": "2026-09-09T17:33:05Z",
+  "request_id": "2026-09-09-rcle-post-a02-innovator-recovery-01",
+  "workflow_node": "em_innovator",
+  "direction_id": "roster_consistent_latent_exploration",
+  "conversation_binding_key": "em:roster_consistent_latent_exploration:innovator",
+  "original_transport_snapshot": {
+    "facts_path": "temp/sessions/hmasd-chatgpt-pro-transport/archive/roster_consistent_latent_exploration/2026-09-09-rcle-post-a02-innovator-recovery-01/TRANSPORT_FACTS.json",
+    "facts_sha256": "229a551856166761cc2df8f7d3606e8b69b032605dba3d4079b150582a358a0d",
+    "chat_receipt_sha256": "ad88d9c5f86a6a60750f5fe10cb3881581562bcda4c1aa7fe5b85d38bb7058ea",
+    "chat_receipt_bytes": 409,
+    "captured_at": "2026-09-09T16:52:28.935370Z",
+    "send_state": "SEND_CONFIRMED",
+    "archive_status": "ARCHIVED",
+    "scientific_decision_formed": false
+  },
+  "verified_delivery": {
+    "branch": "codex/rcle",
+    "delivery_commit": "c80efaea6b0df9f22fb08bc1a5706492108836a9",
+    "delivery_parent": "4e3910a982429a1f4a9352f7e3b3f5fe32de4d31",
+    "task_commit": "c03c37a6f186a27c2abce3c387aec8a0548325ab",
+    "scientific_input_commit": "9ed540ea7a6de32e2f389fd38aaef5fcf0098689",
+    "response_path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260909_post_a02_innovator_recovery/archive/RESPONSE.md",
+    "response_blob": "7c1a9088aac8cdd1d21f053d4468ea898a400095",
+    "response_bytes": 35124,
+    "response_lines": 196,
+    "response_sha256": "3e4e149a5a3095c014fea5354df7a04a081943c616fbb01e3cf9e2a303b81b0f",
+    "commit_author_date": "2026-09-09T16:43:48Z",
+    "response_url": "https://github.com/CartmanFatass/My-paper-code/blob/c80efaea6b0df9f22fb08bc1a5706492108836a9/docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260909_post_a02_innovator_recovery/archive/RESPONSE.md",
+    "issue_comment_id": 5605475814,
+    "issue_comment_url": "https://github.com/CartmanFatass/My-paper-code/issues/8#issuecomment-5605475814",
+    "issue_comment_created_at": "2026-09-09T16:46:36Z",
+    "changed_paths": [
+      "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260909_post_a02_innovator_recovery/archive/RESPONSE.md"
+    ]
+  },
+  "remaining_discrepancy": "The preserved Transport receipt is link-only and its raw scientific_decision_formed=false remains a transport fact; the verified full GitHub response is a separate artifact with a different digest. No cause or scientific classification is inferred, and no raw snapshot is overwritten."
+}

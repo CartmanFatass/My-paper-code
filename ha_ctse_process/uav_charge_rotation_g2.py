@@ -22,7 +22,7 @@ import numpy as np
 from scipy.optimize import linear_sum_assignment
 import torch
 
-from config_1 import Config
+from configs.config_1 import Config
 from envs.pettingzoo.relay.energy_aware import UAVEnergyAwareRelayEnv
 from ha_ctse_process.continuous_roster_policy import (
     ContinuousRosterPolicy,

@@ -5,7 +5,7 @@ from types import SimpleNamespace
 import pytest
 
 from hmasd.agent import _rollout_sampler_seed_from_config
-from train_multiproc_config_1 import bind_runtime_seed
+from experiments.launchers.train_multiproc_config_1 import bind_runtime_seed
 
 
 def _named_rollout_seed(cli_seed: int) -> int:

@@ -17,7 +17,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(
 
 from envs.pettingzoo.relay.forced_relay import UAVForcedRelayEnv
 from hmasd.logging import main_logger, init_multiproc_logging
-from config_1 import Config
+from configs.config_1 import Config
 from hmasd.agent import HMASDAgent
 
 # 导入强化学习模型相关库

@@ -1,0 +1,101 @@
+{
+  "source_sha": "828da00343e5036a4de93ccf1ec636e3b8c777b7",
+  "check_kind": "committed source/LF/AST/shell syntax/admission help only",
+  "paths": {
+    "scripts/hmasd_resource_preflight.py": {
+      "sha256": "cb0525e9247f1c7262c198bf051e542282f5928982137b3023d36d5d69eda4dc",
+      "git_blob": "4127cd22d2e0c4cc1ad6df85aafeb7131c3d07b2",
+      "bytes": 21314,
+      "lf_only": true,
+      "syntax_passed": true
+    },
+    "scripts/hmasd_platform.py": {
+      "sha256": "f9e1fd0a88f9c0eef9b706802ae3aaceac4bc2f8ea394e895d01146e8e17865b",
+      "git_blob": "eb54e7c31170ad14c903ba87e55b1a479416b51b",
+      "bytes": 2599,
+      "lf_only": true,
+      "syntax_passed": true
+    },
+    "scripts/run_vsp03_b04.py": {
+      "sha256": "34fe361f5524a05df4d6a132490e47a2da0972a36d32da25cdf5ef4eeabc974f",
+      "git_blob": "fdcc2af16af49e402c05bd12dc122477b8de8d11",
+      "bytes": 1256,
+      "lf_only": true,
+      "syntax_passed": true
+    },
+    "experiments/candidates/vsp_03/vsp03_b01/b01.py": {
+      "sha256": "39481f270f2d26349f872b5965754b918f0e5cfd6517e7f043afc1571fd195ed",
+      "git_blob": "ba0db7107e19ca5404e999f0aed9ff49bd8ec798",
+      "bytes": 22425,
+      "lf_only": true,
+      "syntax_passed": true
+    },
+    "experiments/candidates/vsp_03/vsp03_b02/b02.py": {
+      "sha256": "9cb1bf9cc44e5cad8185997e3d6b2e71d1d581580c283b1cc77599e80da86be4",
+      "git_blob": "381b82795625442414bfb22dcee07009d5c7747d",
+      "bytes": 16014,
+      "lf_only": true,
+      "syntax_passed": true
+    },
+    "experiments/candidates/vsp_03/vsp03_b03/b03.py": {
+      "sha256": "ca8e6af3881591ddccc22314c490dde5a5edc598a93c37c569c603af234bf9b3",
+      "git_blob": "da81197a67e6e7113c64558d016ae86ac40606f8",
+      "bytes": 7123,
+      "lf_only": true,
+      "syntax_passed": true
+    },
+    "experiments/candidates/vsp_03/vsp03_b04/control.py": {
+      "sha256": "cee3ade931bbd06dcbf3a9f0480efe933c435c6b0d341ec4a3e5e959670fc552",
+      "git_blob": "d285a49e4a824e01865d9bdb578872d2403c955e",
+      "bytes": 4781,
+      "lf_only": true,
+      "syntax_passed": true
+    },
+    "experiments/candidates/vsp_03/vsp03_b04/deadline.py": {
+      "sha256": "abe9e120f5a9489bb8e0a012a4ceef6ee2f979ecb27834ba834ce3719760bc86",
+      "git_blob": "16772e9a1d96f7db002eb13a69f6bf110fb0c930",
+      "bytes": 5243,
+      "lf_only": true,
+      "syntax_passed": true
+    },
+    "experiments/candidates/vsp_03/vsp03_b04/launch.sh": {
+      "sha256": "77987fcbb3d9467a53836392f4f7ee652f442f65467dfa058ec8db7ea41ef74c",
+      "git_blob": "0e18f9e1a978404d5828b12850b8104ec5256030",
+      "bytes": 838,
+      "lf_only": true,
+      "syntax_passed": true
+    },
+    "experiments/candidates/vsp_03/vsp03_b04/launch_p67.sh": {
+      "sha256": "370a3e28a3b687d54ca3f24fbde389297608c84afe5bc2f2674c8e482ea6b0ca",
+      "git_blob": "39b04bacc99f7eeabea0c8732002c33f0cc03a44",
+      "bytes": 752,
+      "lf_only": true,
+      "syntax_passed": true
+    },
+    "experiments/candidates/vsp_03/vsp03_b01/__init__.py": {
+      "sha256": "ec6e5e09a43af36e2c7ac6332e674aa8891bc8baf0d453981a4d42b38685cf39",
+      "git_blob": "842d1839e39a93da3874f4507494f0499da7ee55",
+      "bytes": 61,
+      "lf_only": true,
+      "syntax_passed": true
+    }
+  },
+  "scientific_exposure": 0,
+  "canonical_helper_blobs_match_888bd9f50": true,
+  "protected_source_diff_vs_b5d605bf4": "",
+  "admission_help": {
+    "argv": [
+      "python",
+      "-B",
+      "scripts/hmasd_resource_preflight.py",
+      "admit-memory",
+      "--help"
+    ],
+    "exit_code": 0,
+    "elapsed_s": 0.13100349996238947,
+    "stdout": "usage: hmasd_resource_preflight.py admit-memory [-h] --out OUT\n\noptions:\n  -h, --help  show this help message and exit\n  --out OUT\n",
+    "stderr": "",
+    "no_capture_or_admission_executed": true
+  },
+  "passed": true
+}

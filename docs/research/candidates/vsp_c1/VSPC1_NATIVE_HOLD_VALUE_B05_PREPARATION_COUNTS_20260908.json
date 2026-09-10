@@ -1,0 +1,100 @@
+{
+  "object": "VSPC1-NATIVE-HOLD-VALUE-B05",
+  "kind": "configuration arithmetic only; no model, environment or scientific invocation",
+  "computed_utc": "2026-09-09T03:38:12.037623+00:00",
+  "source_start_sha": "d220ef01c717c3053c2b26528c6f984302ee4aee",
+  "critic_parameters": {
+    "full_mlp_136_128_128_1": 34177,
+    "gated_136_128_128_1_plus_128_by_5": 34817,
+    "ordinary_mlp_136_128_133_1": 34827,
+    "wide_minus_gated": 10,
+    "wide_surplus_percent": 0.02872160151650056,
+    "wide_minus_base": 650
+  },
+  "new_mlp_parameters": {
+    "incoming_weights": 640,
+    "hidden_biases": 5,
+    "outgoing_weights": 5,
+    "total": 650
+  },
+  "prospective_master": 8301,
+  "rng": {
+    "initialization": 830100011,
+    "wide_extra_initialization": 830100012,
+    "train_velocity": 830100021,
+    "train_duration": 830100022,
+    "constructor_reset": 830101000,
+    "train_resets": [
+      830101000,
+      830101511
+    ],
+    "eval_resets": [
+      830102000,
+      830102031
+    ],
+    "eval_velocity": [
+      830103000,
+      830103031
+    ],
+    "eval_duration": [
+      830104000,
+      830104031
+    ],
+    "distinct_integer_keys": 612,
+    "overlap_with_previous_master_domains": {
+      "8101": 0,
+      "8102": 0,
+      "8201": 0,
+      "8202": 0
+    },
+    "constructor_and_first_training_reset_share_key": true
+  },
+  "proposed_work": {
+    "independent_training_pairs": 1,
+    "learned_fits": 2,
+    "train_episodes_per_fit": 512,
+    "horizon": 256,
+    "rollouts_per_fit": 256,
+    "adam_per_fit": 1024,
+    "eval_episodes_per_arm": 32,
+    "evaluated_arms_including_H": 3,
+    "training_team_steps": 262144,
+    "evaluation_team_steps": 24576,
+    "total_native_team_steps": 286720,
+    "total_adam_steps": 2048,
+    "total_rollouts": 512,
+    "total_evaluation_episodes": 96,
+    "total_scored_episodes": 1120,
+    "constructor_resets": 2,
+    "moment_merges": 512,
+    "scalar_target_rows": 262144,
+    "four_epoch_value_terms": 1048576,
+    "nested_candidates": 0,
+    "search_trajectories": 0
+  },
+  "proposed_caps_seconds": {
+    "complete_learned_arm": 1800,
+    "complete_pair_including_H_publication_exit": 3600
+  },
+  "prior_normalized_pair_wall_seconds": [
+    310.79,
+    312.77
+  ],
+  "width_specific_wall_increment": null,
+  "width_specific_wall_increment_status": "unmeasured; no timing experiment selected",
+  "current_P68_actual_exposure": {
+    "scientific_invocations": 0,
+    "independent_training_pairs": 0,
+    "learned_fits": 0,
+    "native_team_steps": 0,
+    "adam_steps": 0,
+    "evaluation_episodes": 0,
+    "models_constructed": 0
+  },
+  "prior_P67_exposure": {
+    "gated_total_relative_displacement": 0.2534176631653249,
+    "mlp_total_relative_displacement": 0.23690194561741526,
+    "gate_absolute_displacement": 0.5487287640571594,
+    "gate_relative_displacement": null
+  }
+}

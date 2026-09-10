@@ -1,0 +1,266 @@
+{
+  "staging_verification.json": {
+    "source_sha": "d9f643b761d57584de313b1f837d6c2c0becc931",
+    "git_status": "",
+    "source_diff_exit": 0,
+    "source_diff": "",
+    "input_bytes": 193466,
+    "input_sha256": "1e5bd64d9f93ec75d5fe27921ac5c7877c4f027b5f01e239cf691c9e0ad4716a",
+    "handle": {
+      "task": "crto-b08-p70-seed0-20260909",
+      "status": "not_found"
+    },
+    "result_root_exists": false
+  },
+  "launch_receipt.json": {
+    "submitted_at_utc": "2026-09-09T05:28:32.447901+00:00",
+    "returned_at_utc": "2026-09-09T05:28:32.845509+00:00",
+    "exact_supervisor_command": "/usr/local/bin/agent-task run crto-b08-p70-seed0-20260909 'cd /home/wu/hmasd-worktrees/crto-b08-p70-d9f643b761d57584de313b1f837d6c2c0becc931 && /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/projects/HMASD/temp/directions/commitment_residual_triggered_options/exp/b08_seed0_p70_20260909/admission.json && /home/wu/.venvs/hmasd/bin/python scripts/run_crto_native_cost_b08.py run --seed 0 --historical-summary /home/wu/hmasd-inputs/crto-b08-p70/CRTO_RESIDUAL_CYCLE_ENDPOINTS_B04_RESULT_20260904.json --output-dir /home/wu/projects/HMASD/temp/directions/commitment_residual_triggered_options/exp/b08_seed0_p70_20260909 --execution-node wsl_4070'",
+    "returncode": 0,
+    "stdout": "Task 'crto-b08-p70-seed0-20260909' started in tmux session 'agent_crto-b08-p70-seed0-20260909'. Output: /home/wu/.agent-tasks/crto-b08-p70-seed0-20260909/task.log\n",
+    "stderr": ""
+  },
+  "admission.json": {
+    "assessed_at": "2026-09-09T05:28:32.086188Z",
+    "available_physical_bytes": 14403616768,
+    "captured_at": "2026-09-09T05:28:32.085872Z",
+    "cgroup_headroom_bytes": null,
+    "cgroup_memory_current_bytes": null,
+    "cgroup_memory_max_bytes": null,
+    "effective_available_bytes": 14403616768,
+    "effective_floor_pass": true,
+    "failure_reasons": [],
+    "measurement_source": "/proc/meminfo",
+    "minimum_available_bytes": 4294967296,
+    "passed": true,
+    "physical_floor_pass": true,
+    "schema_version": 1
+  },
+  "account_receipt.json": {
+    "recorded_at_utc": "2026-09-09T05:32:47.985949+00:00",
+    "command": "cd /home/wu/hmasd-worktrees/crto-b08-p70-d9f643b761d57584de313b1f837d6c2c0becc931 && /home/wu/.venvs/hmasd/bin/python scripts/run_crto_native_cost_b08.py account --output-dir /home/wu/projects/HMASD/temp/directions/commitment_residual_triggered_options/exp/b08_seed0_p70_20260909 --complete-wall-seconds 169",
+    "returncode": 0,
+    "stdout": "{\n  \"complete_shared_wall_seconds\": 169.0,\n  \"shared_overhead_seconds\": 123.0375338079175,\n  \"arm_training_evaluation_scoring_seconds\": {\n    \"RAW\": 16.06360326905269,\n    \"TRUE_RESIDUAL\": 14.697494718013331,\n    \"CALIBRATED_DERANGEMENT\": 15.201368205016479\n  },\n  \"charged_seconds_by_arm\": {\n    \"RAW\": 139.1011370769702,\n    \"TRUE_RESIDUAL\": 137.73502852593083,\n    \"CALIBRATED_DERANGEMENT\": 138.23890201293398\n  },\n  \"arm_cap_breaches\": [],\n  \"shared_cap_breached\": false,\n  \"study_elapsed_critical_path_seconds\": 169.0,\n  \"summed_invocation_wall_seconds\": 169.0,\n  \"aggregate_cpu_seconds\": null,\n  \"aggregate_cpu_status\": \"unmeasured; wall is not CPU work\",\n  \"timing_source\": \"terminal agent-task elapsed of the complete run command\",\n  \"scope\": \"run command including startup/preparation/checks/summary publication/shutdown; excludes collection reduction\"\n}\n",
+    "stderr": "",
+    "scientific_invocation": false
+  },
+  "complete_accounting.json": {
+    "complete_shared_wall_seconds": 169.0,
+    "shared_overhead_seconds": 123.0375338079175,
+    "arm_training_evaluation_scoring_seconds": {
+      "RAW": 16.06360326905269,
+      "TRUE_RESIDUAL": 14.697494718013331,
+      "CALIBRATED_DERANGEMENT": 15.201368205016479
+    },
+    "charged_seconds_by_arm": {
+      "RAW": 139.1011370769702,
+      "TRUE_RESIDUAL": 137.73502852593083,
+      "CALIBRATED_DERANGEMENT": 138.23890201293398
+    },
+    "arm_cap_breaches": [],
+    "shared_cap_breached": false,
+    "study_elapsed_critical_path_seconds": 169.0,
+    "summed_invocation_wall_seconds": 169.0,
+    "aggregate_cpu_seconds": null,
+    "aggregate_cpu_status": "unmeasured; wall is not CPU work",
+    "timing_source": "terminal agent-task elapsed of the complete run command",
+    "scope": "run command including startup/preparation/checks/summary publication/shutdown; excludes collection reduction"
+  },
+  "collection_verification.json": {
+    "terminal_status": {
+      "task": "crto-b08-p70-seed0-20260909",
+      "status": "finished",
+      "exit_code": 0,
+      "pid": 3024150,
+      "uptime_seconds": 320,
+      "tmux_active": false
+    },
+    "files": {
+      "summary.json": {
+        "bytes": 411368,
+        "sha256": "5fa2fcb91a643f1d377393994e38d390ae64ee3b39b270616ea788985e08fb61"
+      },
+      "admission.json": {
+        "bytes": 504,
+        "sha256": "bc026d16f016f9b9ea470b662a2b0c9f5ebc411d86be02db1d961e70d600bdd7"
+      },
+      "complete_accounting.json": {
+        "bytes": 864,
+        "sha256": "e18ca846947aed2f53b7a5239084f8471164942fd4ee34f93b1a845ad45b7f15"
+      },
+      "task.log": {
+        "bytes": 1382,
+        "sha256": "aead14a69b4991f4edb916286111984047fcfea3cef98889a2f08a18263cff51"
+      }
+    },
+    "all_collected_bytes_match_remote": true
+  },
+  "technical_collection_checks.json": {
+    "method": "stdlib arithmetic over collected original JSON, no project/model/native/evaluator calls",
+    "checks_passed": true,
+    "new_scientific_invocations": 0,
+    "native_rows_checked": 96,
+    "unique_eval_identities": 16,
+    "all_actions_legal_printed_argmax": true,
+    "max_regret_recalculation_error": 0.0,
+    "all_six_deterministic_policies_identical": true,
+    "canonical_training_order_matches_fixed_B04": true,
+    "donor_maps_and_endpoint_occurrences_match_fixed_B04": true,
+    "historical_rows_match_frozen_input": true,
+    "recomputed_metrics": {
+      "RAW": {
+        "SHORT": {
+          "equal_side_regret": 0.0021294544930598857,
+          "competent": false,
+          "sides": {
+            "KEEP": {
+              "row_count": 8,
+              "exact_action_count": 8,
+              "mean_regret": 0.0
+            },
+            "REPLAN": {
+              "row_count": 8,
+              "exact_action_count": 5,
+              "mean_regret": 0.004258908986119771
+            }
+          }
+        },
+        "LONG": {
+          "equal_side_regret": 0.0021294544930598857,
+          "competent": false,
+          "sides": {
+            "KEEP": {
+              "row_count": 8,
+              "exact_action_count": 8,
+              "mean_regret": 0.0
+            },
+            "REPLAN": {
+              "row_count": 8,
+              "exact_action_count": 5,
+              "mean_regret": 0.004258908986119771
+            }
+          }
+        }
+      },
+      "TRUE_RESIDUAL": {
+        "SHORT": {
+          "equal_side_regret": 0.0021294544930598857,
+          "competent": false,
+          "sides": {
+            "KEEP": {
+              "row_count": 8,
+              "exact_action_count": 8,
+              "mean_regret": 0.0
+            },
+            "REPLAN": {
+              "row_count": 8,
+              "exact_action_count": 5,
+              "mean_regret": 0.004258908986119771
+            }
+          }
+        },
+        "LONG": {
+          "equal_side_regret": 0.0021294544930598857,
+          "competent": false,
+          "sides": {
+            "KEEP": {
+              "row_count": 8,
+              "exact_action_count": 8,
+              "mean_regret": 0.0
+            },
+            "REPLAN": {
+              "row_count": 8,
+              "exact_action_count": 5,
+              "mean_regret": 0.004258908986119771
+            }
+          }
+        }
+      },
+      "CALIBRATED_DERANGEMENT": {
+        "SHORT": {
+          "equal_side_regret": 0.0021294544930598857,
+          "competent": false,
+          "sides": {
+            "KEEP": {
+              "row_count": 8,
+              "exact_action_count": 8,
+              "mean_regret": 0.0
+            },
+            "REPLAN": {
+              "row_count": 8,
+              "exact_action_count": 5,
+              "mean_regret": 0.004258908986119771
+            }
+          }
+        },
+        "LONG": {
+          "equal_side_regret": 0.0021294544930598857,
+          "competent": false,
+          "sides": {
+            "KEEP": {
+              "row_count": 8,
+              "exact_action_count": 8,
+              "mean_regret": 0.0
+            },
+            "REPLAN": {
+              "row_count": 8,
+              "exact_action_count": 5,
+              "mean_regret": 0.004258908986119771
+            }
+          }
+        }
+      }
+    },
+    "recomputed_contrasts": {
+      "SHORT": {
+        "new_RAW": {
+          "delta": 0.0,
+          "net_gain": 0.0,
+          "gain_rows": 0,
+          "loss_rows": 0,
+          "negative_gain_sum": 0
+        },
+        "new_DERANGED": {
+          "delta": 0.0,
+          "net_gain": 0.0,
+          "gain_rows": 0,
+          "loss_rows": 0,
+          "negative_gain_sum": 0
+        },
+        "historical_B04_RAW": {
+          "delta": 0.0044524264964700775,
+          "net_gain": 0.07123882394352124,
+          "gain_rows": 7,
+          "loss_rows": 3,
+          "negative_gain_sum": -0.03407127188895817
+        }
+      },
+      "LONG": {
+        "new_RAW": {
+          "delta": 0.0,
+          "net_gain": 0.0,
+          "gain_rows": 0,
+          "loss_rows": 0,
+          "negative_gain_sum": 0
+        },
+        "new_DERANGED": {
+          "delta": 0.0,
+          "net_gain": 0.0,
+          "gain_rows": 0,
+          "loss_rows": 0,
+          "negative_gain_sum": 0
+        },
+        "historical_B04_RAW": {
+          "delta": 0.0016519755926440258,
+          "net_gain": 0.026431609482304413,
+          "gain_rows": 3,
+          "loss_rows": 2,
+          "negative_gain_sum": -0.02270649938121741
+        }
+      }
+    },
+    "complete_accounting_matches_terminal_duration_and_charge_definition": true
+  },
+  "task.log": "=== Task 'crto-b08-p70-seed0-20260909' started at 2026-09-09T13:28:32+08:00 ===\n{\n  \"assessed_at\": \"2026-09-09T05:28:32.086188Z\",\n  \"available_physical_bytes\": 14403616768,\n  \"captured_at\": \"2026-09-09T05:28:32.085872Z\",\n  \"cgroup_headroom_bytes\": null,\n  \"cgroup_memory_current_bytes\": null,\n  \"cgroup_memory_max_bytes\": null,\n  \"effective_available_bytes\": 14403616768,\n  \"effective_floor_pass\": true,\n  \"failure_reasons\": [],\n  \"measurement_source\": \"/proc/meminfo\",\n  \"minimum_available_bytes\": 4294967296,\n  \"passed\": true,\n  \"physical_floor_pass\": true,\n  \"schema_version\": 1\n}\n/home/wu/hmasd-worktrees/crto-b08-p70-d9f643b761d57584de313b1f837d6c2c0becc931/experiments/candidates/commitment_residual_triggered_options_common_history_gate_r01/models.py:186: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /pytorch/torch/csrc/utils/tensor_numpy.cpp:203.)\n  history = torch.as_tensor(np.asarray(origin_history), dtype=torch.float32).unsqueeze(0)\n=== Task 'crto-b08-p70-seed0-20260909' exited with code 0 at 2026-09-09T13:31:21+08:00 (Duration: 169s) ===\n",
+  "exact_supervisor_command": "/usr/local/bin/agent-task run crto-b08-p70-seed0-20260909 'cd /home/wu/hmasd-worktrees/crto-b08-p70-d9f643b761d57584de313b1f837d6c2c0becc931 && /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/projects/HMASD/temp/directions/commitment_residual_triggered_options/exp/b08_seed0_p70_20260909/admission.json && /home/wu/.venvs/hmasd/bin/python scripts/run_crto_native_cost_b08.py run --seed 0 --historical-summary /home/wu/hmasd-inputs/crto-b08-p70/CRTO_RESIDUAL_CYCLE_ENDPOINTS_B04_RESULT_20260904.json --output-dir /home/wu/projects/HMASD/temp/directions/commitment_residual_triggered_options/exp/b08_seed0_p70_20260909 --execution-node wsl_4070'"
+}

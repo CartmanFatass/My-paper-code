@@ -1,0 +1,91 @@
+{
+  "id": "20260908-mgtap-003",
+  "created": "2026-09-08T23:16:30-07:00",
+  "direction": "metric_ground_transport_allocation",
+  "tier": "direction",
+  "kind": "decision",
+  "title": "N5：冻结原生几何 REL/DENSE B 比较",
+  "context": "完整 Pro re-entry 已把先前重入条件具体化为一个保持同信息、原生速度动作与奖励的 typed relation-residual REL 对 dense residual DENSE 比较。方向决策 CONTINUE_B_NATIVE_GROUND_GEOMETRY 已执行；旧配置坐标家族仍可逆暂缓，本轮不创建模型或运行。",
+  "options": [
+    {
+      "key": "a",
+      "label": "继续冻结 B01 问题",
+      "consequence": "保留 B01 卡并等待后续明确 CM 命令；不自动训练或改变 Portfolio。"
+    },
+    {
+      "key": "b",
+      "label": "维持原生几何暂缓",
+      "consequence": "撤回本次 B01 继续边界，保留 Pro 证据和旧家族停车状态。"
+    },
+    {
+      "key": "c",
+      "label": "重新设定原生任务",
+      "consequence": "需要另行形成改变信息、动作或奖励的研究问题；既有证据不改写。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "完整 PRO_FINAL 已具体定义同信息 REL/DENSE 原生 return 问题，因此执行最小可逆继续边界，同时保留旧家族停车。",
+  "evidence": [
+    "docs/research/candidates/metric_ground_transport_allocation/MGTAP_NATIVE_GROUND_GEOMETRY_B01_INTAKE_20260908.md",
+    "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260908_native_geometry_reentry/archive/RESPONSE.md",
+    "docs/research/candidates/metric_ground_transport_allocation/MGTAP_NATIVE_GROUND_GEOMETRY_B01_SCIENCE_CARD_20260908.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-08.md#n5-native-ground-geometry-b01-direction",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否接受已形成的 PRO_FINAL，冻结一个保持原生信息与奖励的 REL 对 DENSE 几何 actor B 比较并继续到后续工程准备？",
+    "changes_if_approved": [
+      {
+        "target": "metric_ground_transport_allocation · N5 native geometry re-entry",
+        "from": "原生几何仍只有重入条件，没有具体 actor 操作",
+        "to": "冻结一个 REL/DENSE、primitive G、完整原生 return 的 B/EXPLORE 科学问题；旧配置坐标家族继续可逆暂缓"
+      },
+      {
+        "target": "MGTAP_NATIVE_GROUND_GEOMETRY_B01_SCIENCE_CARD_20260908.md",
+        "from": "不存在本轮具体原生 actor 卡",
+        "to": "记录 typed nonlinear relation pooling、同信息 dense residual、参数匹配、B02 PPO 暴露和结果分支"
+      }
+    ],
+    "if_refused": "所有者若拒绝，循环在下一个干净边界保留原生几何条件和既有停车证据，不推断任何训练授权；可另行要求 park、revise 或重新形成问题。B02/B03 结果、历史 C 含义、方向 ACTIVE/MEDIUM 与 Portfolio 状态不改写。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260908_native_geometry_reentry/archive/RESPONSE.md",
+        "quote": "The final direction decision is CONTINUE_B_NATIVE_GROUND_GEOMETRY. The decision is formed for the single scientific comparison defined below, using primitive G mode in both arms and the common B02 per-agent PPO convention.",
+        "why": "完整同节点 Pro 回答已经明确选择一个有界的原生 actor 比较，并给出了共同学习与暴露约定。"
+      },
+      {
+        "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260908_native_geometry_reentry/archive/RESPONSE.md",
+        "quote": "The question is whether this specified allocation of actor parameters to typed local relations improves complete sampled native return relative to the same parameter budget spent on unstructured dense processing.",
+        "why": "REL 与 DENSE 的 treatment、comparator、主估计量和解释上限已经具体到可检查的科学问题。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260908_native_geometry_reentry/archive/RESPONSE.md",
+        "quote": "No native result for REL or DENSE exists in the inspected evidence or was generated here. The effect sign, magnitude, repeatability, empirical generic competence, tuned headroom and incremental runtime remain unknown.",
+        "why": "当前仍没有结果或运行时能力证明；继续只代表冻结问题和准备后续工作，不代表预期有效。"
+      },
+      {
+        "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260908_native_geometry_reentry/archive/RESPONSE.md",
+        "quote": "The proposed branches add different computation despite identical parameter counts.",
+        "why": "参数匹配不能消除 REL 与 DENSE 的实际计算量差异，后续实现必须保留这一限制。"
+      }
+    ],
+    "uncertainty": [
+      "REL 的 typed sharing 可能带来小幅优势、无明显差异或在干扰耦合下有害。",
+      "DENSE 的经验能力和原生 tuned headroom 尚未建立；两组 master 也不能支持稳定性或普适性主张。",
+      "后续 CM 必须先按卡检查零 projection、固定计数 padding、branch 梯度连接与原生 team-return 路径。"
+    ],
+    "cost": {
+      "compute": "0；本轮没有模型、训练、评估、成本探针或结果性调用。若未来执行，卡面预期四个 learned fits、共享 H 参考及其明确暴露计数。",
+      "owner_time": "约 2 分钟阅读卡片、保留停车边界和后续重入限制；不等待回复。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing；工程 handoff 需 Root 在后续干净边界提供具体命令，其他方向继续。"
+    },
+    "verdict_text": "Continue with one bounded native comparison of a typed relation-residual actor against an equally informed, parameter-matched dense residual actor.",
+    "source": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260908_native_geometry_reentry/archive/RESPONSE.md"
+  }
+}

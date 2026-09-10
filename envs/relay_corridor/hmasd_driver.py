@@ -44,7 +44,7 @@ from typing import Dict, List, Optional
 import numpy as np
 import torch
 
-from config_1 import Config
+from configs.config_1 import Config
 from envs.relay_corridor.adapter import RelayCorridorAdapter
 from envs.relay_corridor.config import RelayCorridorConfig
 from hmasd.agent import HMASDAgent

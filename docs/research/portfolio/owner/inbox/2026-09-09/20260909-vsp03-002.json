@@ -1,0 +1,80 @@
+{
+  "id": "20260909-vsp03-002",
+  "created": "2026-09-09T02:12:36-07:00",
+  "direction": "vsp_03",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "P76：一次独立 G，固定 greedy 主指标与完整120秒上限",
+  "context": "A new independently trained ordinary G scheduler may improve sampled native team utility over fixed readiness under the same frozen greedy use and learning budget. Binding structure: temporal abstraction / termination at fixed N=2; an irreversible eight-tick shared-slot commitment changes the partner's feasible submission opportunities.",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "按已接受 P74 与 Root P76 分配执行一次 seed7 G，保留所有结果。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "应用实际 owner 覆盖指令，停止尚未执行的相关工作并保留已生成证据。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "在下一干净边界应用明确修订；任何已接受的调用不重试也不扩额。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "执行符合当前规范的 P74 PRO_FINAL(b) 和 Root P76 明确分配；无新方向或 Portfolio 处置。",
+  "evidence": [
+    "docs\\research\\candidates\\vsp_03\\VSP03_B05_P76_SCIENCE_CARD_20260909.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-09.md#L19",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "按已接受的 P74 Convergence(b) 与 Root 的 P76 分配，冻结一次独立 seed 7 的 G 训练及全结果 intake；所有者可异步接受、拒绝或修改这张新卡。",
+    "changes_if_approved": [
+      {
+        "target": "VSP03_B05 / P76 science card and complete technical batch",
+        "from": "P74 已选择同家族追加一个 G；P74 intake 本身尚未分配执行",
+        "to": "Root 已明确分配 seed7/Torch40007、128 Adam、20480 episodes、一次完整120秒调用；原 CM 完成绑定、执行、采集，DM 纳入所有结果"
+      }
+    ],
+    "if_refused": "在下一干净边界落实实际 owner 指令；尚未执行的相关工作停止或修订，已产生的全部证据保留。不会自动分配 seed8、重试或改用旧的家族暂停建议。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/vsp_03/VSP03_B05_P76_SCIENCE_CARD_20260909.md#1-question-accepted-selection-and-authority",
+        "quote": "A new trained controller directly adds a bounded learning observation; no changed use, exact optimum or causal prerequisite is needed.",
+        "why": "P74 完整裁决选择了这个普通 B 问题，Root 已分配一次执行；不需要额外 Pro 或批准往返。"
+      },
+      {
+        "path": "docs/research/candidates/vsp_03/VSP03_B04_P67_INTAKE_20260908.md",
+        "quote": "**Seed 6 supports a small sampled greedy-G gain over both fixed rules:**",
+        "why": "上一次的正值虽小，仍是真实的新学习观察；追加独立实例能增加对实例变化的描述。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/vsp_03/VSP03_B04_P67_INTAKE_20260908.md#4-independent-training-answer-and-retained-contrary-evidence",
+        "quote": "Both greedy primary magnitudes are inside the 0.02 MEI, while both stochastic comparisons to fixed rules are negative.",
+        "why": "两个前瞻实例一负一正，尚无稳定替代 readiness 的证据；旧 close-call 和随机执行亏损都保留。"
+      }
+    ],
+    "uncertainty": [
+      "预测仅为 greedy G−R0 的绝对值不超过0.02，置信度低，不预测正负。",
+      "新实例即使完成，三实例汇总也只是事后选择的描述，不是稳定优势或总体等价检验。",
+      "任何接受后的失败、拒绝或超时都结束这次分配；缺失主指标不能记成零或亏损。"
+    ],
+    "cost": {
+      "compute": "1 G×128 updates×128 training episodes，加4×1024最终执行；共20480 joint episodes、1638400 target transitions、128 Adam。最多一次接受的完整120秒调用，含准入、导入、训练、评价、读回、发布、退出和子进程终止。新增验证模型/episodes/更新/评价为0。",
+      "owner_time": "可异步复核；不等待回复。",
+      "reversibility": "costly",
+      "waits_on_this": "nothing; the conforming P76 batch is already allocated and proceeds under existing authority"
+    },
+    "verdict_text": "Execution choice: (a) freeze and carry the conforming P74 selection through the\none newly allocated P76 batch and all-outcome intake; (b) retain the prior pause\npreference or expand the allocation. Recommend and execute **(a), OWNER_DIRECT\nP76**, implementing **PRO_FINAL(b)**. The original direction close-call is\npreserved in P74 intake; no new family decision, second recast or Portfolio\nchange occurs. No new empirical exposure has occurred at card creation.",
+    "source": "docs/research/candidates/vsp_03/VSP03_B05_P76_SCIENCE_CARD_20260909.md"
+  },
+  "starred": false
+}

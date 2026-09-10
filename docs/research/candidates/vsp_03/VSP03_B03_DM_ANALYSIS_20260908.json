@@ -1,0 +1,192 @@
+{
+  "object": "VSP03_B03",
+  "launch_sha": "4eb8a36b9184633f5e28eff999a99f2dbc948040",
+  "source_summary_path": "docs/research/candidates/vsp_03/VSP03_B03_RESULT_ARTIFACTS_20260908/summary.json",
+  "source_summary_sha256": "3a8e37bb3e2089967d06677a3045f1314374c97e7a4f77679946ecca6124b484",
+  "independent_training_instances": 1,
+  "seed": 5,
+  "training_population_uncertainty": "not estimable from one instance",
+  "historical_seed4": "outcome-informed discovery; excluded from prospective B03 aggregation",
+  "primary": {
+    "mean": -0.013974609375000007,
+    "conditional_world_sd": 0.2337120721914452,
+    "conditional_world_se": 0.007303502255982663,
+    "worlds": 1024
+  },
+  "mei_absolute": 0.02,
+  "prediction": {
+    "text": "abs(final greedy G-R0)<=0.02",
+    "confidence": "low",
+    "matched": true
+  },
+  "native_accounting": {
+    "G_greedy-R0": {
+      "native_mean_deltas": {
+        "success_per_team": 0.0,
+        "attempt_per_team": -0.0712890625,
+        "waiting_ticks_per_team": 6.302734375,
+        "non_submission_per_team": 0.0712890625,
+        "blocked_pending": -0.0302734375,
+        "blocked_final_clocks": 0.0390625
+      },
+      "utility_components": {
+        "success": 0.0,
+        "attempt_cost": 0.0017822265625,
+        "waiting_cost": -0.0157568359375
+      },
+      "total_from_recorded_integer_utility_means": -0.013974609375,
+      "difference_from_reported_mean": 6.938893903907228e-18,
+      "interpretation": "Accounting identity on sampled outcomes, not causal attribution."
+    },
+    "G_greedy-R": {
+      "native_mean_deltas": {
+        "success_per_team": -0.001953125,
+        "attempt_per_team": -0.0673828125,
+        "waiting_ticks_per_team": 6.193359375,
+        "non_submission_per_team": 0.0673828125,
+        "blocked_pending": -0.0302734375,
+        "blocked_final_clocks": 0.0380859375
+      },
+      "utility_components": {
+        "success": -0.0009765625,
+        "attempt_cost": 0.0016845703125,
+        "waiting_cost": -0.0154833984375
+      },
+      "total_from_recorded_integer_utility_means": -0.014775390625,
+      "difference_from_reported_mean": 8.673617379884035e-18,
+      "interpretation": "Accounting identity on sampled outcomes, not causal attribution."
+    },
+    "G_stochastic-R0": {
+      "native_mean_deltas": {
+        "success_per_team": -0.0771484375,
+        "attempt_per_team": 0.1064453125,
+        "waiting_ticks_per_team": -4.8671875,
+        "non_submission_per_team": -0.1064453125,
+        "blocked_pending": 0.0068359375,
+        "blocked_final_clocks": -0.0029296875
+      },
+      "utility_components": {
+        "success": -0.03857421875,
+        "attempt_cost": -0.0026611328125,
+        "waiting_cost": 0.01216796875
+      },
+      "total_from_recorded_integer_utility_means": -0.0290673828125,
+      "difference_from_reported_mean": 0.0,
+      "interpretation": "Accounting identity on sampled outcomes, not causal attribution."
+    },
+    "G_stochastic-R": {
+      "native_mean_deltas": {
+        "success_per_team": -0.0791015625,
+        "attempt_per_team": 0.1103515625,
+        "waiting_ticks_per_team": -4.9765625,
+        "non_submission_per_team": -0.1103515625,
+        "blocked_pending": 0.0068359375,
+        "blocked_final_clocks": -0.00390625
+      },
+      "utility_components": {
+        "success": -0.03955078125,
+        "attempt_cost": -0.0027587890625,
+        "waiting_cost": 0.01244140625
+      },
+      "total_from_recorded_integer_utility_means": -0.0298681640625,
+      "difference_from_reported_mean": -3.469446951953614e-18,
+      "interpretation": "Accounting identity on sampled outcomes, not causal attribution."
+    },
+    "G_stochastic-G_greedy": {
+      "native_mean_deltas": {
+        "success_per_team": -0.0771484375,
+        "attempt_per_team": 0.177734375,
+        "waiting_ticks_per_team": -11.169921875,
+        "non_submission_per_team": -0.177734375,
+        "blocked_pending": 0.037109375,
+        "blocked_final_clocks": -0.0419921875
+      },
+      "utility_components": {
+        "success": -0.03857421875,
+        "attempt_cost": -0.004443359375,
+        "waiting_cost": 0.0279248046875
+      },
+      "total_from_recorded_integer_utility_means": -0.0150927734375,
+      "difference_from_reported_mean": -3.469446951953614e-18,
+      "interpretation": "Accounting identity on sampled outcomes, not causal attribution."
+    }
+  },
+  "analysis_added_models_episodes_updates": [
+    0,
+    0,
+    0
+  ],
+  "unit_warning": "Five contrasts share the one trained G; fixed R/R0 are not trained instances.",
+  "run_level_summary": {
+    "unit": "caller-declared independent training run",
+    "inference": "descriptive only; no confidence interval or success classification",
+    "groups": [
+      {
+        "task": "VSP03_B03_seed5_prospective",
+        "arm": "G_greedy-R",
+        "n": 1,
+        "mean": -0.01477539062500001,
+        "sample_sd": null,
+        "min": -0.01477539062500001,
+        "max": -0.01477539062500001,
+        "runs": {
+          "5": -0.01477539062500001
+        }
+      },
+      {
+        "task": "VSP03_B03_seed5_prospective",
+        "arm": "G_greedy-R0",
+        "n": 1,
+        "mean": -0.013974609375000007,
+        "sample_sd": null,
+        "min": -0.013974609375000007,
+        "max": -0.013974609375000007,
+        "runs": {
+          "5": -0.013974609375000007
+        }
+      },
+      {
+        "task": "VSP03_B03_seed5_prospective",
+        "arm": "G_stochastic-G_greedy",
+        "n": 1,
+        "mean": -0.015092773437499997,
+        "sample_sd": null,
+        "min": -0.015092773437499997,
+        "max": -0.015092773437499997,
+        "runs": {
+          "5": -0.015092773437499997
+        }
+      },
+      {
+        "task": "VSP03_B03_seed5_prospective",
+        "arm": "G_stochastic-R",
+        "n": 1,
+        "mean": -0.029868164062499997,
+        "sample_sd": null,
+        "min": -0.029868164062499997,
+        "max": -0.029868164062499997,
+        "runs": {
+          "5": -0.029868164062499997
+        }
+      },
+      {
+        "task": "VSP03_B03_seed5_prospective",
+        "arm": "G_stochastic-R0",
+        "n": 1,
+        "mean": -0.0290673828125,
+        "sample_sd": null,
+        "min": -0.0290673828125,
+        "max": -0.0290673828125,
+        "runs": {
+          "5": -0.0290673828125
+        }
+      }
+    ],
+    "paired_differences": []
+  },
+  "analysis_commands": [
+    "python temp/directions/vsp_03/exp/b03_p54_dm_intake_20260908/analyze_saved_summary.py",
+    "python .agents/skills/hmasd-scientific-tools/scripts/summarize_runs.py temp/directions/vsp_03/exp/b03_p54_dm_intake_20260908/endpoint_scores.csv --out temp/directions/vsp_03/exp/b03_p54_dm_intake_20260908/run_summary.json"
+  ],
+  "publication_note": "The five group contrasts share one trained G; no paired-training option or episode-level training inference was used."
+}

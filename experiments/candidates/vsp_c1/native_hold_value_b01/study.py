@@ -1,0 +1,377 @@
+"""One matched GATED-V/MLP-V fit and final sampled endpoints, followed by H."""
+from dataclasses import asdict, dataclass
+import json
+import math
+from pathlib import Path
+import subprocess
+import time
+
+from experiments.candidates.ucope.uav_motion_prefix_b01.study import (
+    clean_json, difference_stats, new_counts, write_summary)
+
+OBJECT = "VSPC1-NATIVE-HOLD-VALUE-B01"
+CARD = "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B01_SCIENCE_CARD_20260908.md"
+ARMS = ("GATED-V", "MLP-V")
+
+
+@dataclass
+class Config:
+    seed: int = 8101
+    fixture: bool = False
+    horizon: int = 256
+    train_episodes: int = 512
+    eval_episodes: int = 32
+    chunk: int = 32
+    arm_cap: float = 1800
+    pair_cap: float = 3600
+    ratio_grouping: str = "agent_compound"
+
+    @classmethod
+    def engineering(cls):
+        return cls(9001, True, 8, 2, 2, 8)
+
+
+class Deadline:
+    def __init__(self, start, arm_cap, pair_cap, clock=time.monotonic):
+        self.start = self.arm_start = start
+        self.arm_cap, self.pair_cap, self.clock = arm_cap, pair_cap, clock
+        self.arm = ARMS[0]
+        self.breach = None
+
+    def check(self):
+        now = self.clock()
+        if self.breach is None and (now - self.start > self.pair_cap
+                                    or now - self.arm_start > self.arm_cap):
+            self.breach = f"{self.arm} deadline exceeded at pair elapsed {now-self.start:.6f}s"
+        if self.breach:
+            raise TimeoutError(self.breach)
+        return now
+
+    def next_arm(self):
+        now = self.check()  # Never borrow the second allowance for a first-arm overrun.
+        self.arm, self.arm_start = ARMS[1], now
+
+
+def primary_from_rows(rows, expected, reset_start):
+    identities = [(e, reset_start + e) for e in range(expected)]
+    values, complete = {}, {}
+    for arm in (*ARMS, "H"):
+        selected = [r for r in rows if r["arm"] == arm and r["phase"] == "eval"]
+        values[arm] = {(r["episode"], r["reset_seed"]): r["J"] for r in selected}
+        complete[arm] = (len(selected) == expected and set(values[arm]) == set(identities)
+                         and all(math.isfinite(v) for v in values[arm].values()))
+    result = {"complete": all(complete[a] for a in ARMS), "hover_complete": complete["H"],
+              "J": {a: [v[k] for k in sorted(v)] for a, v in values.items()},
+              "identities": {a: [list(k) for k in sorted(v)] for a, v in values.items()},
+              "reading": None, "independent_training_pairs": 1}
+    for first, second in ((ARMS[0], ARMS[1]), (ARMS[0], "H"), (ARMS[1], "H")):
+        valid = complete[first] and complete[second]
+        stats = difference_stats(values[first][k] - values[second][k] for k in identities) if valid else difference_stats([])
+        stats.update(complete=valid, identities=[list(k) for k in identities] if valid else [])
+        result[f"{first}_minus_{second}"] = stats
+    if result["complete"]:
+        delta = result["GATED-V_minus_MLP-V"]["mean"]
+        result["reading"] = "UP" if delta > .01 else "DOWN" if delta < -.01 else "WITHIN"
+    return result
+
+
+def paired_change_from_rows(rows, expected, reset_start):
+    """Fixed 512/768 panels; missing H does not invalidate the learned change."""
+    endpoints = {str(n): primary_from_rows(
+        [r for r in rows if r["arm"] == "H" or r.get("training_episodes") == n],
+        expected, reset_start) for n in (512, 768)}
+    complete = all(p["complete"] for p in endpoints.values())
+    change = difference_stats(b - a for a, b in zip(
+        endpoints["512"]["GATED-V_minus_MLP-V"]["differences"],
+        endpoints["768"]["GATED-V_minus_MLP-V"]["differences"])) if complete else difference_stats([])
+    change.update(complete=complete, identities=endpoints["512"]["GATED-V_minus_MLP-V"]["identities"] if complete else [])
+    mean = change["mean"]
+    return dict(complete=complete, hover_complete=endpoints["768"]["hover_complete"],
+                endpoints=endpoints, change=change, independent_training_pairs=1,
+                reading=("CHANGE_UP" if mean > .01 else "CHANGE_DOWN" if mean < -.01 else "CHANGE_WITHIN") if complete else None)
+
+
+def checkpoint_identity(config, arm, sha, object_id=OBJECT, normalize_value=False,
+                        second_mlp_width=128, extra_init_seed=None, intact_body=False):
+    configuration = asdict(config)
+    if normalize_value:
+        configuration.update(value_normalization="cumulative_population_fp32", entropy_coef=.01)
+    identity = dict(object=object_id, algorithm=arm, arm=arm, seed=config.seed,
+                mode="ENGINEERING_FIXTURE" if config.fixture else "UAV_B_EXPLORE",
+                configuration=configuration, ratio_grouping="agent_compound", launch_sha=sha)
+    if second_mlp_width == 133:
+        configuration.update(second_mlp_width=133, extra_initialization_seed=extra_init_seed)
+        if intact_body:
+            configuration["intact_body"] = True
+        gated_width = 133 if intact_body else 128
+        identity.update(critic_architecture=f"136->128->{gated_width}->1 + 128x5 hold gate" if arm == "GATED-V" else "136->128->133->1",
+                        critic_parameter_count=(35467 if intact_body else 34817) if arm == "GATED-V" else 34827)
+    return identity
+
+
+def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=write_summary,
+             *, object_id=OBJECT, card=CARD, normalize_value=False,
+             second_mlp_width=128, extra_init_seed=None, fixed_endpoints=False,
+             separate_eval=False, intact_body=False):
+    import torch
+    from experiments.candidates.ucope.uav_motion_prefix_b01.environment import SyntheticAdapter, make_real
+    from experiments.candidates.ucope.uav_motion_prefix_b01.learner import collect_episode, optimizer_for, update
+    from experiments.candidates.ucope.uav_motion_prefix_b01.policy import generator, snapshot, templates
+    from .critic import R_COLUMNS, models, movement
+    if normalize_value:
+        from experiments.candidates.vsp_c1.native_hold_value_b03.value_normalization import ValueMoments
+
+    architecture_options = dict(second_mlp_width=second_mlp_width, extra_init_seed=extra_init_seed) if second_mlp_width == 133 else {}
+    if intact_body:
+        architecture_options["intact_body"] = True
+    isolated_eval = fixed_endpoints or separate_eval
+    out = Path(out)
+    out.mkdir(parents=True, exist_ok=True)
+    deadline = Deadline(start, config.arm_cap, config.pair_cap, clock)
+    if factory is None:
+        factory = (lambda seed: SyntheticAdapter(seed, config.horizon)) if config.fixture else make_real
+    rows, limits, arms = [], [], {}
+    b = 100000 * config.seed
+    sha = subprocess.check_output(["git", "rev-parse", "HEAD"],
+                                  cwd=Path(__file__).resolve().parents[4], text=True).strip()
+    summary = dict(object=object_id, card=card, seed=config.seed, launch_sha=sha,
+                   mode="ENGINEERING_FIXTURE" if config.fixture else "UAV_B_EXPLORE",
+                   configuration=checkpoint_identity(config, ARMS[0], sha, object_id, normalize_value, **architecture_options)["configuration"],
+                   ratio_grouping="agent_compound",
+                   arms=arms, limits=limits, status="INCOMPLETE",
+                   resources="resources_unmeasured",
+                   timing_boundary="in-process through publication/readback; excludes interpreter exit",
+                   complete_exit_cap_conformance="unmeasured: use existing supervisor terminal process wall",
+                   mlp_start_pair_elapsed=None,
+                   rollout_loss_coverage="completed source updates only; partial-update Adam counts are retained",
+                   cost_projection={"GATED-V": f"init + {config.train_episodes * config.horizon}*c_env_actor + {config.train_episodes // 2 * 4}*c_update + {config.eval_episodes * config.horizon}*c_eval + publication; gate increment unmeasured",
+                                    "MLP-V": f"{config.train_episodes * config.horizon}*c_env_actor + {config.train_episodes // 2 * 4}*c_update + {2 * config.eval_episodes * config.horizon}*c_eval + pair publication/readback/exit"},
+                   seeds=dict(initialization=b+11, train_velocity=b+21, train_duration=b+22,
+                              constructor_reset=b+1000, train_reset_start=b+1000,
+                              eval_reset_start=b+2000, eval_velocity_start=b+3000,
+                              eval_duration_start=b+4000))
+    if isolated_eval:
+        summary["evaluation_endpoints"] = [512, 768] if fixed_endpoints else [config.train_episodes]
+        summary["seeds"]["evaluation_constructor_reset"] = b+2000
+    if fixed_endpoints:
+        summary["cost_projection"] = {
+            "GATED-V": "init + 196608*c_env_actor + 1536*c_update + 16384*c_eval + two endpoint publications; gate increment unmeasured",
+            "MLP-V": "196608*c_env_actor + 1536*c_update + 24576*c_eval + two endpoint publications + pair publication/readback/exit"}
+    if second_mlp_width == 133:
+        summary["seeds"]["extra_initialization"] = extra_init_seed
+    if normalize_value:
+        summary["value_loss_units"] = "normalized_squared"
+        for arm in ARMS:
+            summary["cost_projection"][arm] += f" + {config.train_episodes // 2}*c_moment_merge({2 * config.horizon}); normalization overhead unmeasured"
+    files = {name: (out / f"{name}.jsonl").open("w", encoding="utf-8") for name in ("episodes", "rollouts")}
+
+    def emit(name, row):
+        if name == "episodes":
+            rows.append(row)
+        files[name].write(json.dumps(clean_json(row, limits), allow_nan=False) + "\n")
+        files[name].flush()
+
+    actor = critic = initial = arm_info = moments = None
+    try:
+        deadline.check()
+        common = templates(config.seed)
+        for arm in ARMS:
+            if arm == ARMS[1]:
+                deadline.next_arm()
+                summary["mlp_start_pair_elapsed"] = deadline.arm_start - start
+            counts = new_counts()
+            arm_info = dict(counts=counts, fit_complete=False, complete=False,
+                            nonzero_r_rows={"train": 0, "eval": 0},
+                            hold_count_coverage="returned complete episodes only", elapsed_wall=None)
+            arms[arm] = arm_info
+            actor = critic = initial = None
+            moments = ValueMoments() if normalize_value else None
+            value_options = {"value_moments": moments} if moments is not None else {}
+            learning_options = dict(value_options, entropy_coef=.01) if moments is not None else {}
+            deadline.check()
+            actor, critic = models(common, arm, **architecture_options)
+            if second_mlp_width == 133:
+                arm_info["critic_architecture"] = checkpoint_identity(config, arm, sha, object_id, normalize_value, **architecture_options)["critic_architecture"]
+                arm_info["critic_parameter_count"] = sum(p.numel() for p in critic.parameters())
+            initial = snapshot(actor, critic)
+            optimizer = optimizer_for(actor, critic)
+            velocity_rng, duration_rng = generator(b+21), generator(b+22)
+            deadline.check()
+            env = factory(b+1000)
+            counts["constructors"] += 1
+            counts["constructor_resets"] += 1
+            deadline.check()
+
+            eval_env = env
+            if isolated_eval:
+                eval_env = factory(b+2000)
+                counts["constructors"] += 1
+                counts["constructor_resets"] += 1
+                deadline.check()
+            if fixed_endpoints:
+                arm_info["endpoints"] = {}
+            training_counts = new_counts()
+            training_counts["constructors"] = training_counts["constructor_resets"] = 1
+
+            def episode(phase, e, model, value_model, vrng, drng, label, endpoint=None):
+                metadata = dict(pair_master=config.seed, arm=label, phase=phase, episode=e)
+                if isolated_eval and phase == "eval":
+                    metadata["training_episodes"] = endpoint if model is not None else 0
+                data = collect_episode(
+                    env if phase == "train" else eval_env, model, value_model, config.horizon,
+                    b + (1000 if phase == "train" else 2000) + e, vrng, drng,
+                    metadata,
+                    deadline.check, counts, lambda row: emit("episodes", row),
+                    lambda row: None, limits, real=not config.fixture, diagnostics=False,
+                    ratio_grouping="agent_compound",
+                    **(value_options if model is not None else {}))
+                if model is not None:
+                    arm_info["nonzero_r_rows"][phase] += int((data["critic"][..., R_COLUMNS] != 0).any(-1).sum())
+                return data
+
+            def evaluate_endpoint(completed):
+                info = arm_info
+                filename = f"final_{arm}.pt"
+                if fixed_endpoints:
+                    info = dict(training_episodes=completed, complete=False,
+                                critic_architecture=arm_info["critic_architecture"],
+                                critic_parameter_count=arm_info["critic_parameter_count"])
+                    arm_info["endpoints"][str(completed)] = info
+                    filename = f"endpoint_{completed}_{arm}.pt"
+                    if moments is not None:
+                        info["value_moments"] = moments.state()
+                if isolated_eval:
+                    info["training_episodes"] = completed
+                info["training_counts"] = training_counts.copy() if isolated_eval else counts.copy()
+                info["exposure"] = movement(initial, actor, critic)
+                deadline.check()
+                normalization_state = {"value_moments": moments.state()} if moments is not None else {}
+                if second_mlp_width == 133:
+                    normalization_state.update(critic_architecture=info["critic_architecture"],
+                                               critic_parameter_count=info["critic_parameter_count"])
+                torch.save(dict(checkpoint_identity(config, arm, sha, object_id, normalize_value, **architecture_options), actor=actor.state_dict(),
+                                critic=critic.state_dict(), **normalization_state,
+                                **({"training_episodes": completed} if isolated_eval else {})), out / filename)
+                info["checkpoint"] = filename
+                deadline.check()
+                before = counts.copy()
+                if moments is not None:
+                    info["moments_before_evaluation"] = moments.state()
+                for e in range(config.eval_episodes):
+                    episode("eval", e, actor, critic, generator(b+3000+e), generator(b+4000+e), arm, completed)
+                info["evaluation_counts"] = {k: counts[k]-before[k] for k in counts}
+                if moments is not None:
+                    info["moments_after_evaluation"] = moments.state()
+                ec = info["evaluation_counts"]
+                info["sampled_d4_frequency"] = ec["d4"] / ec["duration_decisions"]
+                info["complete"] = True
+                deadline.check()
+
+            for index in range(config.train_episodes // 2):
+                before = counts.copy()
+                episodes = [episode("train", 2*index+i, actor, critic, velocity_rng, duration_rng, arm) for i in range(2)]
+                records = update(actor, critic, optimizer, episodes, config.chunk, deadline.check,
+                                 counts, ratio_grouping="agent_compound", **learning_options)
+                counts["rollouts"] += 1
+                if isolated_eval:
+                    for key in counts:
+                        training_counts[key] += counts[key] - before[key]
+                normalization_row = {}
+                if moments is not None:
+                    arm_info["value_moments"] = moments.state()
+                    normalization_row = dict(value_moments=moments.state(), value_loss_units="normalized_squared")
+                emit("rollouts", dict(arm=arm, pair_master=config.seed, rollout=index,
+                                      steps=2*config.horizon, episodes=2, epochs=records, **normalization_row,
+                                      **{k: counts[k]-before[k] for k in ("optimizer_steps", "velocity_decisions", "duration_decisions", "d4")}))
+                deadline.check()
+                if fixed_endpoints and 2*(index+1) in (512, 768):
+                    evaluate_endpoint(2*(index+1))
+            arm_info["fit_complete"] = True
+            if not fixed_endpoints:
+                evaluate_endpoint(config.train_episodes)
+            else:
+                arm_info["training_counts"] = training_counts.copy()
+                arm_info["exposure"] = movement(initial, actor, critic)
+                arm_info["complete"] = all(i["complete"] for i in arm_info["endpoints"].values())
+            if arm == ARMS[1]:
+                before = counts.copy()
+                try:
+                    for e in range(config.eval_episodes):
+                        episode("eval", e, None, None, None, None, "H")
+                except Exception as error:
+                    limits.append(f"H: {type(error).__name__}: {error}")
+                    if isinstance(error, TimeoutError):
+                        raise
+                finally:
+                    arm_info["hover_counts"] = {k: counts[k]-before[k] for k in counts}
+                    if moments is not None:
+                        arm_info["moments_after_hover"] = moments.state()
+            arm_info["elapsed_wall"] = deadline.check() - deadline.arm_start
+    except Exception as error:
+        limits.append(f"execution: {type(error).__name__}: {error}")
+        if arm_info is not None:
+            if moments is not None:
+                arm_info["value_moments"] = moments.state()
+            if initial is not None:
+                arm_info["exposure"] = movement(initial, actor, critic)
+            arm_info["elapsed_wall"] = clock() - deadline.arm_start
+    finally:
+        for stream in files.values():
+            stream.close()
+
+    summary["counts"] = {k: sum(a["counts"][k] for a in arms.values()) for k in new_counts()}
+    summary["counts"]["partial_episode_steps"] = summary["counts"]["team_steps"] - summary["counts"]["completed_episode_steps"]
+    summary["scientific_uav_calls"] = summary["counts"]["scientific_uav_calls"]
+    summary["primary"] = (paired_change_from_rows if fixed_endpoints else primary_from_rows)(rows, config.eval_episodes, b+2000)
+    summary["status"] = ("COMPLETE" if summary["primary"]["complete"] and summary["primary"]["hover_complete"] and not limits
+                         else "PRIMARY_COMPLETE_WITH_LIMITS" if summary["primary"]["complete"] else "INCOMPLETE")
+
+    def observe_time():
+        now = clock()
+        summary["pair_elapsed_wall"] = now - start
+        if deadline.arm in arms:
+            arms[deadline.arm]["elapsed_wall"] = now - deadline.arm_start
+        try:
+            deadline.check()
+        except TimeoutError as error:
+            if str(error) not in limits:
+                limits.append(str(error))
+            summary["status"] = "CAP_BREACH"
+        summary["cap_breach"] = deadline.breach is not None
+
+    observe_time()
+    try:
+        publish(out / "summary.json", summary)
+        loaded = json.loads((out / "summary.json").read_text(encoding="utf-8"))
+        if loaded["primary"] != clean_json(summary["primary"], limits):
+            raise ValueError("primary summary readback mismatch")
+        for arm, arm_record in arms.items():
+            records = arm_record.get("endpoints", {}).values() if fixed_endpoints else [arm_record]
+            for info in records:
+                if "checkpoint" in info:
+                    loaded_info = loaded["arms"][arm]["endpoints"][str(info["training_episodes"])] if fixed_endpoints else loaded["arms"][arm]
+                    saved = torch.load(out / info["checkpoint"], map_location="cpu", weights_only=True)
+                    if any(saved[k] != v for k, v in checkpoint_identity(config, arm, sha, object_id, normalize_value, **architecture_options).items()):
+                        raise ValueError(f"{arm} checkpoint identity readback mismatch")
+                    if isolated_eval and saved["training_episodes"] != info["training_episodes"]:
+                        raise ValueError(f"{arm} endpoint exposure readback mismatch")
+                    if second_mlp_width == 133:
+                        for key in ("critic_architecture", "critic_parameter_count"):
+                            if saved[key] != info[key] or loaded_info[key] != info[key]:
+                                raise ValueError(f"{arm} critic architecture readback mismatch")
+                    if normalize_value:
+                        if saved["value_moments"] != info["value_moments"] or loaded_info["value_moments"] != info["value_moments"]:
+                            raise ValueError(f"{arm} value moments readback mismatch")
+        summary["publication_readback"] = "complete"
+    except Exception as error:
+        limits.append(f"publication/readback: {type(error).__name__}: {error}")
+        summary["publication_readback"] = "failed"
+        summary["status"] = "PUBLICATION_FAILED"
+    observe_time()
+    write_summary(out / "summary.json", summary)
+    # Serialization is indivisible. Record a late breach; never restart its clock.
+    previous = summary["cap_breach"]
+    observe_time()
+    if summary["cap_breach"] and not previous:
+        write_summary(out / "summary.json", summary)
+    return clean_json(summary, limits)
