@@ -92,3 +92,26 @@ actual adoption and resumes this same DM at terminal. Dispatch alone is not adop
 Retain the exact worktree, source-only stage and supervisor until scoped preservation/
 cleanup; shared authoring and older scientific evidence remain. Missing result components
 limit their dependent claims under the card; no failure or spare budget buys a replacement.
+
+## Accepted submission and Monitor handover
+
+The exact command above was submitted once at **2026-09-10T16:57:56.651200Z**.
+Supervisor submission returned exit0 in 0.3756127000087872s:
+
+> Task 'rcle-b03-fresh1000-s21-20260910' started in tmux session 'agent_rcle-b03-fresh1000-s21-20260910'.
+
+Supervisor output is `/home/wu/.agent-tasks/rcle-b03-fresh1000-s21-20260910/task.log`.
+The local exact argv/response receipt is `fresh1000-s21-preparation/launch.json`.
+This establishes accepted submission only; it is neither fresh memory admission nor
+successful learning, complete exposure, primary publication or scientific acceptance.
+
+DM sent MONITOR_ADD directly to live configured task
+`01a087e5-2044-7301-abb6-7a1709a98197`; the cross-task tool accepted delivery. It names
+the entire sequence, exact source/cwd/output/receipts and original DM. Actual adoption
+is **pending Root confirmation at this publication**. No second observation loop runs.
+Monitor returns adoption/terminal facts directly to Root `01a07249-b095-7821-8ce2-e9c32ba85267`,
+which resumes `/root/dm_rcle_p47_transport_recovery` for collection, E0, separate scientific
+intake/Chinese brief and scoped closeout. Full assignment remains open at this handover.
+The remote worktree, source-only stage, supervisor and all local evidence remain available;
+their cleanup owner is this DM after preserved result acceptance, with Root integration/
+retention confirmation. No cleanup, successor or additional invocation has occurred.
