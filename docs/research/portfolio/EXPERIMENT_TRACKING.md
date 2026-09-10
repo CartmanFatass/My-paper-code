@@ -3,24 +3,23 @@
 ## 2026-09-10 research restart and Portfolio selection
 
 OWNER_DIRECT: “开始研究”. Root resumed the research loop under the consolidated control plane.
-The prior five-direction synthesis batch is fully accepted, integrated and closed; there is no
-live scientific handle or pending native acceptance at this boundary. Therefore zero direction
-chains currently count as advancing. The designated recent UCOPE DM has accepted one complete
-Portfolio preparation assignment in shared checkout `C:/Projects/HMASD-worktrees/codex-portfolio`
-at synced revision `540ed0d35`: align current evidence and publish a fixed cross-direction Pro
-question selecting the next five direction chains. This consultation has zero scientific exposure.
-It is Portfolio preparation, not a direction-capacity slot, local scientific selection, experiment
-allocation or provider Send. Root will dispatch the exact published handoff once and forward the
-complete formed response to the same DM for conformance/intake before applying it.
+The prior synthesis batch is accepted and closed. Request
+`2026-09-10-next-five-chains-portfolio-01` produced one complete archived response at remote commit
+`08e989073839fe5f0f91c6a8ad90a399bee37b6c`; the designated UCOPE DM checked the entire response,
+found no specification conflict, and published the decision and execution mapping at
+`ec88a618a3bd79a7f5351e8e1a9d79111491f733`. Root integrated it on main at `d526dcc35`.
 
-The DM published request `2026-09-10-next-five-chains-portfolio-01` at HANDOFF commit
-`0448ebae37e78087bfb73cd827614e623afad3eb`, fixed TASK
-`38653196ba2a6c8503cdf9db3fb49fae6d9cb7ba`, Issue 17. Root dispatched the exact HANDOFF once to
-the existing Transport. Persisted transport evidence records one click, exact user node
-`7d27f46d-82ce-4f53-aa40-c87a56e3d13d`, matching bound Portfolio conversation
-`6a9c109e-b264-83e8-a78b-f9ea1b767b7b`, and state `WAITING_GENERATION`; no receipt is yet due.
-The binding's older `archive_status=ARCHIVED` is prior-round history and is not completion evidence
-for this request. Zero direction chains advance while the Portfolio decision is forming.
+The conforming PRO_FINAL decision selects option A in contention order FOLR, UCOPE, VSP03, RCLE,
+ACVC. Root synchronized the exact decision to the existing shared direction branches and actually
+sent the five bounded assignments to their original DMs. All five DMs accepted and are active:
+FOLR prepares one fresh RETAIN/EVENT/RANDOM triple; UCOPE one fresh learned physical/half-fixed
+T/F/G comparison; VSP03 one continuous-512 fit; RCLE one fresh W1/W1001000 pair; ACVC prepares a
+design/card only and cannot launch. No result-bearing handle has yet been accepted. Thus five
+directions advance through active native work, with zero live scientific runs at this boundary.
+CBSC permitted-status reconciliation and FRRIE's exact P63 observation dependency remain readiness
+alternatives if a slot becomes actionable. See
+[`2026-09-10-next-five-chains.md`](decisions/2026-09-10-next-five-chains.md) and the packet's
+[`EXECUTION_MAPPING.md`](pro_packets/20260910_next_five_chains/EXECUTION_MAPPING.md).
 
 ## 2026-09-10 control-plane migration
 
