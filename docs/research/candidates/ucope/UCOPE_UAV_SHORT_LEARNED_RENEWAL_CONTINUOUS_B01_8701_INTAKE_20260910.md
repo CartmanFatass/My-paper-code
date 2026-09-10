@@ -426,3 +426,39 @@ only the listed completed-run reclamation and returns disk/registration checks.
 The source was published on shared `codex/ucope`; that authoring checkout and
 all local scientific evidence remain. No broader cleanup or successor is part
 of this return. Current closeout state is recorded in the preservation receipt.
+
+### Completed scoped remote closeout
+
+Root accepted result commit **f21171215b37eebc6396e62d15c22ef1ad0e3055**,
+integrated/pushed it as main **4e00f5cf898242b11c942d1eb4e06a86b5259d6f**,
+and accepted the exact preservation inventory before reclamation. The32-entry,
+11813891-byte local recovery archive has SHA256
+**4c31e9858d034cd207a856c3beb5836f34ed808d0d3ce953ebca7f5987edc9cf**.
+All entries were read back; its hash still matches after closeout and all13
+local native/supervisor originals remain. Shared authoring/local evidence is retained.
+
+The first cleanup submission stopped at Bash line2 with
+`set: pipefail: invalid option name`, consistent with Windows text-mode stdin
+converting LF to CRLF. The original wire bytes were not captured; that diagnosis
+is inferred from the text-mode failure and binary-mode success. The first command
+failed before any path operation. Read-only
+reconciliation confirmed all four targets still present. The same Bash script
+was then sent as exact binary bytes, after which all13 recorded scientific/
+supervisor hashes and2 staged-input hashes passed. This was a command-format
+repair; there was no policy rejection or interpreter substitution in closeout.
+Both attempts and elapsed times remain in the preservation receipt.
+
+Before deletion the source was clean/exact3182c4c84, PID3090371 was absent,
+the named tmux session absent and supervisor finished/exit0. Remote recovery
+ref `refs/hmasd-recovery/ucope-8701-20260910` was created and verified at full
+source3182c4c844803ab362034c2b3d5d22f7f62bca3a. DM then removed only the
+recorded source cwd, supervisor directory, wrapper and source pack. Final
+remote check at2026-09-10T18:25:24.387644Z reports **all four paths absent
+on disk and the source checkout absent from Git worktree registration**;
+local receipt finished18:25:26.323045Z. These are distinct node clock readings.
+
+Closeout command outer walls0.5791032s/1.2196918s and preparation0.2200321s
+are supporting work inside the existing300s reservation. No result-bearing
+invocation, extra evaluation, scientific retry or successor occurred. The
+allocated engineering/scientific chain is complete; Root receives the final
+closeout commit for integration. No obsolete remote checkout remains for this run.
