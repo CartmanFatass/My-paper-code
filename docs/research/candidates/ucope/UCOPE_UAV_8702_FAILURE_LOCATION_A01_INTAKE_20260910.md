@@ -312,3 +312,63 @@ T/F/G comparison against ending unchanged spending or a concretely justified
 within-mechanism change. The next scientific discriminator remains that complete
 independent final comparison; another original-path replay is not obligatory.
 This terminal assignment selects and launches no successor.
+
+
+## 6. Verified preservation and completed scoped remote closeout
+
+The E0/intake/summary/Chinese brief and audit were committed and pushed as
+**24059c8ef43789d35bab968698f96f918019af0b**. Under Root's existing terminal instruction,
+options were (a) reclaim this completed execution's four paths after verified
+preservation or (b) retain them for an actual live dependency. Recommend/select
+(a): the execution is terminal and the artifacts/source are preserved.
+**Owner-delegated decision (unattended, 2026-09-03 instruction): (a).** This
+technical closeout follows Root's explicit 2026-09-10T20:41Z assignment; it
+requires no additional approval and invents no Root integration acceptance.
+Owner flag none. Main and direction review queries again returned `[]`.
+
+Preservation created a **38-member**, **995723-byte** recovery ZIP at
+`temp/directions/ucope/closeout/ucope-uav-8702-failure-location-a01-20260910/ucope-a01-recovery.zip`.
+Every member was read back and checked by length/SHA256, including all native
+rows, summary, diagnostic final_T.pt, supervisor evidence, source pack, exact
+wrapper and launch/check/analysis scripts and receipts. Archive SHA256:
+`2958bd29b759ca2287d711985a2cc1e14522b7e2ab87f1d263f1da0c9648d4bb`.
+The remote source reference `refs/hmasd-recovery/ucope-a01-20260910`
+was created and verified at **b1d347ef303083824a72dd259c2fbb54e2b5ef75**.
+The original local evidence and separate historical 8702 archive remain intact.
+
+Before removal, the remote command verified all four resolved literal targets
+and their non-symlink boundaries, exact clean launch HEAD, terminal finished/
+exit0, absent recorded PID3100625 and exact tmux session, all **13** retained
+artifact/input hashes and the source recovery reference. At
+**2026-09-10T20:53:46.421950+00:00**, these exact targets were absent on disk:
+
+- `/home/wu/hmasd-worktrees/ucope-uav-8702-failure-location-a01-20260910`
+- `/home/wu/.agent-tasks/ucope-uav-8702-failure-location-a01-20260910`
+- `/home/wu/hmasd-inputs/ucope-uav-8702-failure-location-a01-20260910.sh`
+- `/home/wu/hmasd-inputs/ucope-8702-failure-location-a01-source.pack`
+
+The cwd is also absent from the Git worktree registry. Recorded PID3100625 and
+the exact tmux session remain absent; the recovery reference still resolves to
+b1d347ef3. All 38 original local members were hash-verified again after removal,
+and the ZIP digest is unchanged. The shared authoring checkout and unrelated
+paths were not removal targets. No live A01 observation dependency remains.
+
+Preservation took 0.9233357000048272s through record
+construction; the complete outer command took 1.154264s. The remote cleanup
+subprocess took 0.7225977999914903s within
+0.7414841999998316s local execution /0.9819721s outer
+command. These times are nested. One local preparation snippet had an
+unterminated-string SyntaxError before any file write or SSH call; it took
+0.1870096s and was corrected locally. The remote cleanup command itself was
+accepted exactly once, completed with exit0 and empty stderr, and made
+**zero scientific invocations**. This routine preparation correction has no
+relation to the historical native step error. Measured support fits within
+the conservatively charged 100s reserve; the E0 complete cost bound remains
+692.44s with no budget breach.
+
+The [preservation record](UCOPE_UAV_8702_FAILURE_LOCATION_A01_PRESERVATION_20260910.json) holds archive
+members, source-reference receipt, exact inventory and full cleanup readback.
+All work for the terminal assignment is complete. Root integrates the result
+and closeout commits; the next object-tier scientific choice remains separate
+and unallocated. No fresh comparison, diagnostic retry, family disposition or
+performance interpretation was introduced during closeout.

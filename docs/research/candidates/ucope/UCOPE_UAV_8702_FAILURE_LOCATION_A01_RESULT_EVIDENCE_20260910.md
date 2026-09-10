@@ -144,3 +144,17 @@ allowance ends; it has no C consumption state. Fresh independent T/F/G remains
 a next object-tier choice to consider, with no automatic budget or mandatory
 replay. Chinese owner brief:
 [2026-09-10_failure-location-a01.md](../../portfolio/owner/briefs/ucope/2026-09-10_failure-location-a01.md).
+
+
+## Preservation and completed remote closeout
+
+The [preservation record](UCOPE_UAV_8702_FAILURE_LOCATION_A01_PRESERVATION_20260910.json) records the
+verified 38-member recovery archive and source reference at b1d347ef3. Root's
+terminal assignment already authorized scoped removal. At
+**2026-09-10T20:53:46.421950+00:00**, all four exact remote targets were absent,
+the execution cwd was unregistered, and its recorded PID/session were absent.
+All 13 remote artifact/input hashes matched before removal; all 38 local
+originals and the unchanged archive were verified afterward. No scientific
+invocation or claim changed. The shared authoring checkout and local evidence
+remain; no A01 remote cleanup is outstanding. Full timing and the corrected
+local preparation syntax error are documented in intake §6.
