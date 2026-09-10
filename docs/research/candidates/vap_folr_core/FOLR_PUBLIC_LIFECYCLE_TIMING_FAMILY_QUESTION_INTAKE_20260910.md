@@ -259,3 +259,35 @@ published SHA, and return the exact HANDOFF commit to Root for independent Trans
 The DM performs no browser Send, resend, rebind or scientific compute. Runs are complete
 and scoped remote roots are closed; the direction is recoverable at this clean boundary.
 This direction-local wait is no barrier to Root advancing other ready directions.
+
+## 8. Fixed publication and Root dispatch return
+
+The scientific preparation and owner record were published as
+`867f0c9145af12e459494e58350927569883179e`. The new fixed TASK was published as
+`6a400c4ca8c8076bf8701d8977f60fc56d9a1e2c`:
+[read the complete Convergence question](https://github.com/CartmanFatass/My-paper-code/blob/6a400c4ca8c8076bf8701d8977f60fc56d9a1e2c/docs/research/candidates/vap_folr_core/pro_packets/20260910_timing_family_convergence/TASK.md).
+The renderer bound that full published SHA and produced READY_TO_DISPATCH. All 23
+reference paths exist at their effective full commits, and all those commits are
+ancestors of the observed published direction HEAD. GitHub's exact TASK bytes match
+the committed bytes. These are local publication/access facts, not proof of Pro access.
+
+The existing substantive Issue 15 remains open. Its historical body/comment were
+snapshotted before the new update; the author added and read back
+[comment 5625341036](https://github.com/CartmanFatass/My-paper-code/issues/15#issuecomment-5625341036)
+with the new question, all three signs, unexecuted recommendation and fixed TASK link.
+No accepted P78 bytes or old comment were edited. Publication and actual comment
+readback are retained in `pro_packets/20260910_timing_family_convergence/` as
+`PUBLICATION_FACTS.json` and `AUTHOR_ISSUE_UPDATE.json`.
+
+The bound HANDOFF keeps actual source DM `01a08438-c6e4-7981-b75d-ba81fabd4c2f`,
+parent/dispatcher Root `01a07249-b095-7821-8ce2-e9c32ba85267`, current configured
+Transport `01a087a3-4f12-7021-9a4d-6da9da2bafcc`, and the original verified
+Convergence conversation. The sole new Pro response path is
+`pro_packets/20260910_timing_family_convergence/archive/RESPONSE.md` on the shared
+direction branch, on its current descendant HEAD. All-age owner reviews and FOLR
+ledger override columns remained empty at publication. The P2 item remains unapplied.
+
+No provider Send, scientific invocation or successor selection occurred. Root receives
+the exact published HANDOFF commit for one independent Transport dispatch; the same DM
+will read the full immutable response and perform scientific/specification intake when
+it is forwarded. This prepared request is not an already accepted Pro generation.
