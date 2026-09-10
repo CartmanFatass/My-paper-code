@@ -1,6 +1,6 @@
 # Root delegation：五方向回放测试 v1
 
-状态：2026-09-09 应 owner 请求固化的测试设计，尚未执行模型比较。
+状态：2026-09-09 应 owner 请求固化的测试设计，runner已实现，尚未执行模型比较。
 目的：检验独立 Portfolio + 执行 Root 的分工能否减少总成本，同时保持授权边界和完成能力。
 这不是现行治理修改，也不创建 session、发送 Pro 请求或启动实验。
 
@@ -15,13 +15,21 @@
 原 DM/CM 负责方向科学与工程。Portfolio session 不自动等同于 Pro 科学决策节点，
 拆 session 也不转移 owner、方向节点或规格变更权限。
 
-## 文件与操作
+## 自动投递（默认）
+
+按[入口说明](../README.md)从仓库外workspace启动新CLI；被测session读取AGENTS后，
+自行start → next → 按需evidence → 写答案 → submit，循环到13轮完成并export。
+无需人工逐轮粘贴。事件与评分保存在`../_host/root_delegation/`，runner不向候选
+提供标准答案，也不调用模型API；评分由另一个裁判会话完成。
+
+下面保留无runner时的人工备用流程。
+
+## 人工备用流程
 
 ### 最简启动：一个被测 session，加人工主持
 
-可以只新开一个被测 session，并选定要测的模型和 effort，但**不能只让它读取
-本 README 就期待自动完成测试**：v1 是人工主持的回放材料，尚无自动投递/评分 runner。
-本 README 给操作者阅读，被测模型只接收开场提示及当前事件。
+新开一个被测 session，选定模型和 effort。本 README 给操作者阅读，被测模型只
+接收开场提示及当前事件；默认使用上方自动投递，或使用以下人工步骤。
 
 1. 在不带 HMASD 生产上下文、工具及目录访问的隔离会话中，粘贴
    `ROOT_PROMPT.md` 全文。不要让被测模型遍历此目录或读取本 README/GRADING。
@@ -31,12 +39,11 @@
    被测 Root；无需为每个 DM/CM/Portfolio 建立真实会话，这些角色由事件卡模拟。
 
 仅要求同一仓库内的模型“不读答案”属于软约束练习，不等同于隔离评测。
-若未来需要“一条启动指令自动跑完”，另建主持 runner：按序投递、隐藏答案、
-保存输出并独立评分；当前版本不声称具备该能力。
+runner现已提供按序投递、保存输出及导出裁判材料；语义评分仍须独立完成。
 
 - [ROOT_PROMPT.md](ROOT_PROMPT.md)：只给被测 Root 的开场材料，包含冻结 delegation。
-- [EVENTS.md](EVENTS.md)：主持人逐条投递；不能一次给被测模型全文。
-- [GRADING.md](GRADING.md)：主持人专用判分依据，不能放进被测上下文。
+- [EVENTS.md](../_host/root_delegation/EVENTS.md)：主持人逐条投递；不能一次给被测模型全文。
+- [GRADING.md](../_host/root_delegation/GRADING.md)：主持人专用判分依据，不能放进被测上下文。
 
 1. 为每个候选模型/effort 使用全新隔离测试会话；记录设置，不更改生产任务。
    被测环境只提供开场材料和已投递事件，无生产工具、全库搜索和标准答案访问。
@@ -81,7 +88,7 @@ E06→E07、E11→E12→E13 等依赖顺序保持不变。
 ## 冻结来源
 
 重建基于 main `3b135c3f2ef0fa1dcb0628b64df09245dbc800bd`，
-[执行授权及五方向完成记录](../../docs/research/portfolio/decisions/2026-09-09-synthesis-execution.md)。
+[执行授权及五方向完成记录](https://github.com/CartmanFatass/My-paper-code/blob/3b135c3f2ef0fa1dcb0628b64df09245dbc800bd/docs/research/portfolio/decisions/2026-09-09-synthesis-execution.md)。
 主持人溯源时从该 revision 读取；后续生产文档变化不改变 v1。
 具体授权段：UCOPE conditional second continuous pair；FOLR timing comparison；
 ACVC named E01 specification plan / corrected E01 allocation；VSP03 selected B06；
