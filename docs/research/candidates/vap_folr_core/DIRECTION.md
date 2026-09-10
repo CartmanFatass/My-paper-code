@@ -412,3 +412,44 @@ References:
 - `FOLR_PUBLIC_LIFECYCLE_TIMING_B03_INTAKE_20260910.md` §§9–13
 - `evidence/2026-09-10-folr-public-lifecycle-timing-b03-run-analysis.json`
 - `evidence/2026-09-10-folr-public-lifecycle-timing-b03-matched-128-analysis.json`
+
+## Accepted timing-family Convergence — 2026-09-10
+
+**Conclusion.** The complete original-node response at
+`f64b461cd918ecefc7058a6e1e83aaa1b9f96ce6` selects one fixed0.5 before-GRU survivor-state
+attenuation comparison against freshly trained RETAIN. This in-family treatment
+refinement supersedes the DM's unexecuted narrow-pause recommendation. No fourth
+unchanged full-EVENT fit, RANDOM arm, coefficient sweep, true RECAST or Portfolio
+change is selected. Ordinary retention remains the usable generic baseline.
+
+**Bounded claim.** This is a selected B question, not attenuation performance evidence.
+The next pair asks for final native benefit over retention at the same5000-train /
+128-final recipe and absolute MEI1. The altered state path remains common across
+acting and online/target learning; a nonzero incoming-vector dependence neither means
+half the useful information nor identifies memory ancestry. No stable winner,
+equivalence, causal timing, improvement over RANDOM or recovery of the historical
+full-EVENT loss follows. Tuned same-information headroom remains absent.
+
+**Strongest support and contradiction.** TIMING-B01's real gain over both controls
+supports examining one concrete changed rule. B02 nonrecurrence, B03's−5.44609375
+EVENT−RETAIN point, retention's better cumulative training means and the absence of
+any attenuation observation favor caution. The node judged this next question more
+useful than another unchanged sign, as a close call; no positive-result quota follows.
+
+**Surviving alternative.** Attenuation may preserve useful numerical context, change
+optimization/co-adaptation, have no practical effect or cause another native loss.
+Partial observation does not make all old survivor memory obsolete. Existing CAMA/
+Sable and empirical-foundation readings support the comparator and consistent
+reconstruction, not a winning multiplier or uniquely localized cause.
+
+**Next discriminator.** The separately selected HALF-B01 card binds one fresh
+RETAIN/HALF_EVENT fitting instance at7807/107807, with205120 total native ticks /
+9938 RMSprop /256 final episodes and1800s per complete arm. Implementation/acceptance
+and actual invocation remain to occur. Earlier results, stopped families, recast
+counts and Portfolio lifecycle/priority retain their meanings.
+
+References:
+
+- `pro_packets/20260910_timing_family_convergence/archive/RESPONSE.md`
+- `FOLR_PUBLIC_LIFECYCLE_TIMING_FAMILY_CONVERGENCE_INTAKE_20260910.md`
+- `FOLR_PUBLIC_LIFECYCLE_HALF_B01_SCIENCE_CARD_20260910.md`
