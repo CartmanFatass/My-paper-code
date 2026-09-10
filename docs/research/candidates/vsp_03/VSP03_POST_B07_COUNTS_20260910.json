@@ -1,0 +1,135 @@
+{
+  "purpose": "post-B07 direction consultation, existing-byte extraction and configuration arithmetic only",
+  "created_utc": "2026-09-10T19:09:36.492663+00:00",
+  "source": {
+    "collection_path": "docs/research/candidates/vsp_03/VSP03_B07_COLLECTION_20260910.json",
+    "collection_commit_sha": "4b1682acfc45a2c2acde6688302aba8fdac8883a",
+    "frozen_card_and_source_sha": "adcff0a92559ac5552e24a9861e2b65572b478c5",
+    "prospective_counts_path": "docs/research/candidates/vsp_03/VSP03_B07_COUNTS_20260910.json"
+  },
+  "owner_boundary": {
+    "read_utc": "2026-09-10T19:09:36.492663+00:00",
+    "primary_sha": "4e8ce22f5263a4ebbf096cca6c4af225a0559831",
+    "unapplied_reviews": [],
+    "vsp03_audit_owner_overrides": []
+  },
+  "accepted_B07": {
+    "independent_training_units": 1,
+    "model_constructions": 1,
+    "parameters": 2083,
+    "training_episodes": 65536,
+    "evaluation_episodes": 8192,
+    "actual_rollouts": {
+      "episodes_started": 73728,
+      "episodes_completed": 73728,
+      "team_ticks": 2949120,
+      "target_transitions": 5898240,
+      "decision_rows": 431296,
+      "rollout_policy_forwards": 8716
+    },
+    "backward_calls": 512,
+    "Adam_steps": 512,
+    "initial_scale": {
+      "parameters": 2083,
+      "initial_l2": 5.835648059844971,
+      "initial_rms": 0.12786288559436798,
+      "current_l2": 5.835648059844971,
+      "displacement_l2": 0.0,
+      "displacement_over_initial_l2": 0.0
+    },
+    "final_scale": {
+      "parameters": 2083,
+      "initial_l2": 5.835648059844971,
+      "initial_rms": 0.12786288559436798,
+      "current_l2": 8.276124954223633,
+      "displacement_l2": 5.499176502227783,
+      "displacement_over_initial_l2": 0.9423420408210624
+    },
+    "primary": {
+      "mean": 0.011567382812500002,
+      "conditional_world_sd": 0.09613782948786226,
+      "conditional_world_se": 0.0030043071714956956,
+      "worlds": 1024
+    },
+    "paired_Q": {
+      "mean": -0.0016064453124999994,
+      "conditional_world_sd": 0.05288252531171355,
+      "conditional_world_se": 0.0016525789159910485,
+      "worlds": 1024
+    },
+    "complete_wall_s": 8.927880000032019,
+    "study_elapsed_s": 8.927880000032019,
+    "aggregate_cpu_s": 9.244309,
+    "peak_rss_bytes": 493867008,
+    "resources_unmeasured": [
+      "cgroup_headroom_bytes",
+      "cgroup_memory_current_bytes",
+      "cgroup_memory_max_bytes"
+    ]
+  },
+  "historical_planning_walls_B06_separate_s": [
+    8.888241,
+    8.718389,
+    8.380174
+  ],
+  "future_option_b_unselected": {
+    "fits": 1,
+    "learned_arms": [
+      "G"
+    ],
+    "updates_per_fit": 512,
+    "episodes_per_update": 128,
+    "training_episodes": 65536,
+    "evaluation_endpoints": [
+      128,
+      512
+    ],
+    "evaluation_modes": [
+      "G_greedy",
+      "G_stochastic",
+      "R0",
+      "R"
+    ],
+    "worlds_per_panel": 1024,
+    "evaluation_episodes": 8192,
+    "total_episodes": 73728,
+    "team_ticks": 2949120,
+    "target_transitions": 5898240,
+    "models": 1,
+    "Adam_steps": 512,
+    "rollout_policy_batch_call_upper": 8772,
+    "rollout_count_excludes": "objective/critic/backward calls; fixed rules do not call the learned model",
+    "nested_candidate_trajectory_solver_search": 0,
+    "added_scientific_validation": {
+      "models": 0,
+      "episodes": 0,
+      "updates": 0,
+      "evaluations": 0
+    },
+    "complete_cap_s": 60,
+    "work_origin_s": 50,
+    "cleanup_origin_s": 58,
+    "kill_origin_s": 59,
+    "same_recipe_observed_complete_wall_range_s": [
+      8.380174,
+      8.927880000032019
+    ],
+    "future_wall_CPU_and_parameter_movement": "unknown; existing timings are planning evidence, not guarantee",
+    "new_RNG_or_fit_identity": null,
+    "execution_allocation": null
+  },
+  "new_exposure": {
+    "models": 0,
+    "worlds": 0,
+    "optimizer_steps": 0,
+    "evaluations": 0,
+    "tests": 0,
+    "profiling_invocations": 0
+  },
+  "exposure_line": "Consultation: zero new models/worlds/updates/evaluations/tests/profiling. Accepted B07 only: 1 independent G fit, 2083 parameters, 65536 training + 8192 evaluation = 73728 episodes, 2949120 team ticks, 5898240 target transitions, 512 backward calls/512 Adam steps; initial L2 5.835648059844971, final displacement L2 5.499176502227783 (0.9423420408210624 of initial L2); complete wall 8.927880s, aggregate CPU 9.244309s. Option b would add 1 fresh fit with the same counts under one complete 60s cap; no invocation or RNG key selected here.",
+  "scientific_pooling": "none; B06 and B07 are not recast as a new pooled four-fit primary",
+  "headroom": "tuned current-N2 record absent, not zero",
+  "MEI_absolute": 0.02,
+  "recasts": 1,
+  "preparation_scope_section4": "none"
+}

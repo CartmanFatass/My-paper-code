@@ -699,3 +699,80 @@ Current advancing count is two: UCOPE8701 scoped closeout and ACVC implementatio
 The owner directed that directions proceed independently and in parallel, without batch synchronization or cross-direction blocking. This supersedes any operational reading of the completed next-five allocation as a batch barrier; it does not retroactively change its scientific decisions, budgets or completed results. A direction reaching a result, clean closeout, local blocker or decision boundary affects only that direction. Root immediately resumed FOLR, UCOPE, RCLE and VSP03 beside the already active ACVC chain. Each DM now owns its own next object-tier rung under standing delegation or its own direction-tier Pro handoff when the next choice crosses the direction boundary. No direction waits for ACVC intake, a Portfolio-wide result bundle or another direction's cleanup.
 
 Five direction chains are now advancing independently: ACVC terminal intake/accounting; FOLR post-TIMING-B02 next-rung decision; UCOPE post-8701 next-rung decision; RCLE post-fresh1000 next-rung decision; and VSP03 post-B07 next-rung decision. Existing lifecycle, recast, family, MEI, claim-ceiling and per-object budget records remain controlling. Prior `no successor allocated` statements end their named allocations; they do not create a cross-direction scheduling gate. Each new result-bearing invocation still requires its own exact scientific selection, frozen card, fresh node admission and Monitor handoff.
+
+## ACVC fresh-DENSE intake complete
+
+ACVC's independently rolling chain completed its allocated fresh8921 object and is integrated through
+`69f951fe4`. One intact fit completed 512 training episodes, 1,024 finite Adam/backward records,
+192 evaluation episodes and 180,224 native team steps. F-minus-C is `+0.1229328560 J`, F-minus-dwell
+is `+0.0877164686 J`, and dwell-minus-C is `+0.0352163875 J`; all three are UP, with respectively
+0, 5 and 13 adverse worlds among 64. The result supports the fixed package on one fresh learner with
+conditional world uncertainty; it does not establish training-population stability, pure retrace
+causality, headroom or UAV transfer. No successor is selected.
+
+The native task has a conservative 172 s charge and DM support is 8.0564878 s. The independent
+Monitor retained more than 44.34 s of tool wall with exact aggregate unavailable. If Monitor time is
+part of support, full 30/360 s conformance is unestablished; no silent charge, exemption or rerun is
+applied. All 16 captured evidence files and the checkpoint were preserved before verified remote
+checkout/supervisor removal. ACVC is complete and no longer counted; FOLR, UCOPE, RCLE and VSP03
+continue at their own decision or execution boundaries without waiting for a replacement bundle.
+
+## RCLE seed22 accepted; VSP03 direction question prepared
+
+RCLE independently selected one fresh master22 pair at the unchanged 1,000-update law, preserving
+all seed21 limits and the fixed reference gap. Card, reviewed source and bound execution are integrated
+through `81db62478`; launch evidence is integrated through `9fd11ee45`. The exact handle
+`rcle-b03-fresh1000-s22-20260910` was submitted once at source `9a11fb084` on `hmasd-wsl-node`, and
+independent Monitor adoption is confirmed for the W1→W100→reference sequence. No mirrored polling,
+retry or replacement seed is active. The same DM owns terminal collection, paired-initialization
+checks, same-endpoint n=2 intake, preservation and closeout.
+
+VSP03 independently reached a direction-tier boundary after B07. Its zero-exposure narrow-family
+question is integrated through `f1834564d`, recommending a family pause as a close call while retaining
+one fresh same-budget fit as an explicit alternative. The recommendation is not a local disposition;
+the existing direction Pro route owns the choice. VSP03 does not wait for RCLE execution or any sibling
+intake while that question is delivered and resolved.
+
+## Further independent rolling advances
+
+FOLR selected TIMING-B03 as a fresh RETAIN/EVENT pair, integrated through `c7b3f9bef`, with
+205,120 ticks, 9,938 RMSprop updates, 256 final evaluations, 1,800 s per arm, 3,600 s for the pair
+and 300 s support. The low-confidence forecast is WITHIN_MEI. A remote HTTPS fetch failed before
+worktree creation or scientific submission; the DM is staging the same committed source over the
+existing SSH route, so this remains technical transport recovery rather than a scientific retry.
+
+UCOPE8702 is accepted and running independently. The fresh same-recipe T/F/G selection, reviewed
+source and command binding are integrated through `368b9a9db`; launch and confirmed Monitor adoption
+are integrated through `d8a5b69e3`. Canonical remote admission passed and conservative preparation
+used 5.5280977 s of its 15 s allowance. The same DM owns terminal collection and recurrence intake;
+no third instance or mirrored polling is active.
+
+SCDMP's complete fixed Convergence handoff is integrated through `e3c682543`. The narrow PARK remains
+a recommendation against one bounded B alternative, with zero new scientific exposure and no local
+direction disposition. Its exact request waits only for the singleton Transport to finish the earlier
+accepted VSP03 request; other directions continue. RCLE seed22 meanwhile ended exit2 after W1 completed,
+W100 reached TECHNICAL_STOP and the reference was not reached. The original DM is collecting the partial
+evidence and classifying the failure; no paired result or automatic retry is inferred.
+
+## Direction decisions and incomplete-run intakes
+
+VSP03's complete Pro response and DM intake are integrated through `8e7cd9e95`. PRO_FINAL pauses only
+the unchanged continuous512/public fixed-N2 comparison family; ACTIVE/LOW and recasts1 remain. No
+successor is selected, and the positive endpoint/negative-Q evidence remains intact.
+
+RCLE seed22's incomplete intake and verified closeout are integrated through `59ce84b67`. W1 completed
+1,000 updates; W100 stopped after983 recorded blocks and reference was absent. The allocation yields no
+paired polarity. Recorded exposure is131,008 episodes/1,983 backward calls plus at most one unfinished
+block; conservative complete charge is894/1,500s. Traceback reporting is prospective only and no retry
+is allocated.
+
+UCOPE8702's incomplete intake and preservation are integrated through `ebe006a62`. Only T completed
+1,738 training episodes with partial512/1024 panels; all paired outcomes are absent. The preserved
+ValueError has no traceback or root-cause location, so no recurrence conclusion follows. Exact scoped
+remote cleanup remains with the DM after Root preservation acceptance; no restart or replacement exists.
+
+FOLR RETAIN passed all artifact checks at755.40s and mean `6.893125`. Its preselected EVENT arm is
+accepted, Monitor-adopted and integrated through `2482db440`; no extra selection, retry or polling loop
+was added. SCDMP Transport is active on its fixed request. VNFC and DISH have independently entered
+zero-exposure re-entry analysis to replace completed VSP03 and RCLE chains, restoring five advancing
+directions without changing Portfolio lifecycle or priority.

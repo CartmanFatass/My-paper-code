@@ -1,0 +1,165 @@
+{
+  "source": "b1d347ef303083824a72dd259c2fbb54e2b5ef75",
+  "prepared_source": {
+    "source": "b1d347ef303083824a72dd259c2fbb54e2b5ef75",
+    "base": "b6c75d5cf8e1781bb0e3c6824ab2dc9cb32dbce9",
+    "node": "hmasd-wsl-node",
+    "cwd": "/home/wu/hmasd-worktrees/ucope-uav-8702-failure-location-a01-20260910",
+    "handle": "ucope-uav-8702-failure-location-a01-20260910",
+    "sha256": {
+      "experiments/candidates/ucope/uav_motion_prefix_b01/study.py": "0e787d017f6486603aa573ce29b3be9ac6c4ce8c775df55412fdaa20afe5e5f1",
+      "experiments/candidates/ucope/uav_motion_prefix_b01/policy.py": "08873c2e0e918cf3194c7e7d7c81cac34d117d82611e2d4082d814f6b3d40944",
+      "experiments/candidates/ucope/uav_motion_prefix_b01/learner.py": "e0f907921ab8b48f6755b2513431b78a7f4a95ebce9a631e925fb82c0dfed911",
+      "experiments/candidates/ucope/uav_motion_prefix_b01/environment.py": "fb25e48857cc8531ac9b80f13243ccd6ca88fa5bf2b194a43dffed21c80690e6",
+      "experiments/candidates/ucope/uav_short_fixed_renewal_continuous_b01/study.py": "954ea103e6826722fdd1c77fbc3b3c7b4ff79fce142c963b104d0d8a69167ace",
+      "experiments/candidates/ucope/uav_short_fixed_renewal_continuous_b01/__init__.py": "ac2510ac2e2167070946b91d6331e471626f8a3bd69b70ac0b74a4d16134b989",
+      "scripts/run_ucope_uav_short_fixed_renewal_continuous_b01.py": "1a5d48ad52bff810648fbc9571a01320afa9bcf161335145c8c0da19f77da942",
+      "scripts/hmasd_resource_preflight.py": "cb0525e9247f1c7262c198bf051e542282f5928982137b3023d36d5d69eda4dc",
+      "scripts/hmasd_platform.py": "f9e1fd0a88f9c0eef9b706802ae3aaceac4bc2f8ea394e895d01146e8e17865b",
+      "envs/pettingzoo/uav_env.py": "f50d74cdba92d5ef976c8ba53d2697fc72742683fcb746b404b8c8807f463803",
+      "envs/pettingzoo/env_adapter.py": "8b42c1c3e7ef44cb814f79225b4af944b1018ad764dfeb17e9e1cc294df79d40",
+      "tests/experiments/candidates/ucope/uav_short_fixed_renewal_continuous_b01/test_continuous.py": "05d112ba4e5a5a3afa14243fe78f187a4f9f234381e499ca176da40781873221",
+      "scripts/run_ucope_uav_8702_failure_location_a01.py": "db51ec39e7755ffd71763c7836ebd2f2160a93da6a58d1869ac1af3ca1cb0b74",
+      "tests/experiments/candidates/ucope/uav_short_fixed_renewal_continuous_b01/test_failure_location.py": "64cbba5a8c5312b5615f14df9384299bf42df7cb6938847b7dfcb892557ac70e"
+    },
+    "pack_bytes": 160936,
+    "pack_sha256": "debb17acdc2b0b970faf8e210e8b2164574215768514b192e62e2ae0b033f3aa",
+    "wrapper_bytes": 469,
+    "wrapper_sha256": "2d5b9e990a11652941b9c2d61f57ef238eec6f6609cad260148ff2cf9710e672",
+    "command": "/usr/local/bin/agent-task run ucope-uav-8702-failure-location-a01-20260910 '/usr/bin/time -f whole_wall_seconds=%e,peak_rss_kib=%M /usr/bin/timeout --signal=KILL 900s /bin/bash --noprofile --norc /home/wu/hmasd-inputs/ucope-uav-8702-failure-location-a01-20260910.sh'",
+    "prepared_at": "2026-09-10T20:26:08.999898+00:00",
+    "whole_preparation_wall_seconds": 6.127114500006428,
+    "new_scientific_invocations": 0
+  },
+  "source_commit": "13fb404a75bac9c452f3553f5d78cddac259f5a0",
+  "corrected_card_commit": "b1d347ef303083824a72dd259c2fbb54e2b5ef75",
+  "production_added_lines": 74,
+  "production_deleted_lines": 1,
+  "runner_lines": 32,
+  "test_lines": 60,
+  "tests": {
+    "argv": [
+      "ssh",
+      "-o",
+      "BatchMode=yes",
+      "-o",
+      "ConnectTimeout=10",
+      "hmasd-wsl-node",
+      "/bin/bash --noprofile --norc -s"
+    ],
+    "returncode": 0,
+    "stdout": "..                                                                       [100%]\n2 passed in 1.15s\n{\"pytest_exitcode\": 0, \"whole_python_seconds\": 2.442227151012048, \"scientific_invocations\": 0}\nOwned focused-test scratch absent.\n",
+    "stderr": "focused_wall_seconds=2.88,peak_rss_kib=520392\n",
+    "wall_seconds": 3.3848417999979574
+  },
+  "directory_tests_wall_s": 48.25920262996807,
+  "conservative_new_preparation_including_AST_tool_s": 6.8615972,
+  "conservative_directory_test_charge_s": 55.3690011,
+  "review": {
+    "reviewer": "review_ucope_t8701, independent Astra/high, read-only",
+    "source_range": "ffe8c1089af5ae7cbffe4a404216f398c92452e4..13fb404a75bac9c452f3553f5d78cddac259f5a0",
+    "source_findings": "No material source finding; no additional probe gap.",
+    "card_finding": "Primitive GAE phrase conflicted with preserved gamma=1 Monte Carlo returns without bootstrap.",
+    "disposition": "Corrected card only at b1d347ef303083824a72dd259c2fbb54e2b5ef75 before tests or native calls; reviewed source surface unchanged.",
+    "observed_boundaries": [
+      "Original templates and T/F/G copies ordered identically; only T starts optimizer/environment.",
+      "8702 streams, resets, two-episode updates and 512/1024 evaluation order preserved through the prefix.",
+      "A/RECON repeated prefix, zero independent samples; absent comparators remain incomplete.",
+      "First exception records direct ndarray shapes/dtypes and frame locations without values; same record in separate file and summary.",
+      "Default routes unchanged; sole scope addition is explicitly named exception telemetry."
+    ],
+    "tests_and_scientific_calls_by_reviewer": 0
+  },
+  "current_owner_reviews": {
+    "main": [],
+    "direction": []
+  },
+  "accepted_scientific_invocations": 1,
+  "status": "RUNNING; Monitor adoption confirmed by Root; terminal result pending",
+  "recorded_at": "2026-09-10T20:28:32.735575+00:00",
+  "submission": {
+    "started_at": "2026-09-10T20:29:38.597444+00:00",
+    "returned_at": "2026-09-10T20:29:39.224601+00:00",
+    "source": "b1d347ef303083824a72dd259c2fbb54e2b5ef75",
+    "acceptance_record": "a8c52ca95a6ae227c74ae7b2294ada46c13ddfc1",
+    "handle": "ucope-uav-8702-failure-location-a01-20260910",
+    "cwd": "/home/wu/hmasd-worktrees/ucope-uav-8702-failure-location-a01-20260910",
+    "argv": [
+      "ssh",
+      "-o",
+      "BatchMode=yes",
+      "-o",
+      "ConnectTimeout=10",
+      "hmasd-wsl-node",
+      "/usr/local/bin/agent-task run ucope-uav-8702-failure-location-a01-20260910 '/usr/bin/time -f whole_wall_seconds=%e,peak_rss_kib=%M /usr/bin/timeout --signal=KILL 900s /bin/bash --noprofile --norc /home/wu/hmasd-inputs/ucope-uav-8702-failure-location-a01-20260910.sh'"
+    ],
+    "returncode": 0,
+    "stdout": "Task 'ucope-uav-8702-failure-location-a01-20260910' started in tmux session 'agent_ucope-uav-8702-failure-location-a01-20260910'. Output: /home/wu/.agent-tasks/ucope-uav-8702-failure-location-a01-20260910/task.log\n",
+    "stderr": "",
+    "wall_seconds": 0.6309091000002809
+  },
+  "initial_readback": {
+    "supervisor": {
+      "returncode": 0,
+      "stdout": "{\"task\": \"ucope-uav-8702-failure-location-a01-20260910\", \"status\": \"running\", \"exit_code\": null, \"pid\": 3100625, \"uptime_seconds\": 0, \"tmux_active\": true}\n",
+      "stderr": ""
+    },
+    "admission": {
+      "returncode": 0,
+      "stdout": "{\n  \"assessed_at\": \"2026-09-10T20:29:38.661154Z\",\n  \"available_physical_bytes\": 15631753216,\n  \"captured_at\": \"2026-09-10T20:29:38.660883Z\",\n  \"cgroup_headroom_bytes\": null,\n  \"cgroup_memory_current_bytes\": null,\n  \"cgroup_memory_max_bytes\": null,\n  \"effective_available_bytes\": 15631753216,\n  \"effective_floor_pass\": true,\n  \"failure_reasons\": [],\n  \"measurement_source\": \"/proc/meminfo\",\n  \"minimum_available_bytes\": 4294967296,\n  \"passed\": true,\n  \"physical_floor_pass\": true,\n  \"schema_version\": 1\n}\n",
+      "stderr": ""
+    },
+    "observed_at": "2026-09-10T20:29:39.909261+00:00",
+    "wall_seconds": 0.6850104999903124
+  },
+  "actual_admission": {
+    "assessed_at": "2026-09-10T20:29:38.661154Z",
+    "available_physical_bytes": 15631753216,
+    "captured_at": "2026-09-10T20:29:38.660883Z",
+    "cgroup_headroom_bytes": null,
+    "cgroup_memory_current_bytes": null,
+    "cgroup_memory_max_bytes": null,
+    "effective_available_bytes": 15631753216,
+    "effective_floor_pass": true,
+    "failure_reasons": [],
+    "measurement_source": "/proc/meminfo",
+    "minimum_available_bytes": 4294967296,
+    "passed": true,
+    "physical_floor_pass": true,
+    "schema_version": 1
+  },
+  "initial_supervisor": {
+    "task": "ucope-uav-8702-failure-location-a01-20260910",
+    "status": "running",
+    "exit_code": null,
+    "pid": 3100625,
+    "uptime_seconds": 0,
+    "tmux_active": true
+  },
+  "monitor_dispatch": {
+    "thread_id": "01a087e5-2044-7301-abb6-7a1709a98197",
+    "endpoint_source": "live C:/Projects/HMASD/.codex/hmasd-monitor.toml",
+    "tool": "mcp__codex_app__send_message_to_thread",
+    "isError": false,
+    "result": {
+      "threadId": "01a087e5-2044-7301-abb6-7a1709a98197"
+    },
+    "payload_type": "MONITOR_ADD",
+    "handle": "ucope-uav-8702-failure-location-a01-20260910",
+    "source": "b1d347ef303083824a72dd259c2fbb54e2b5ef75",
+    "original_owner": "/root/dm_ucope_p47_resume",
+    "root_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267"
+  },
+  "monitor_adoption": {
+    "state": "confirmed",
+    "source": "Root native MONITOR_ADOPTED confirmation 2026-09-10",
+    "handle": "ucope-uav-8702-failure-location-a01-20260910",
+    "launch_source": "b1d347ef303083824a72dd259c2fbb54e2b5ef75",
+    "pid": 3100625,
+    "initial_status": "running",
+    "tmux_active": true,
+    "record": "Root confirmed this exact handle/source/cwd/output/supervisor and directed publication plus no routine polling."
+  },
+  "next_responsibility": "Independent Monitor observes and notifies Root; Root resumes original DM for collection/intake. DM owns scoped preservation/closeout after terminal acceptance.",
+  "updated_at": "2026-09-10T20:31:57.595068+00:00"
+}

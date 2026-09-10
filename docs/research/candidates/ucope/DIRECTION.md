@@ -278,6 +278,18 @@ See [E0 and every fixed curve](UCOPE_UAV_SHORT_LEARNED_RENEWAL_CONTINUOUS_B01_87
 [scientific intake§§5–8](UCOPE_UAV_SHORT_LEARNED_RENEWAL_CONTINUOUS_B01_8701_INTAKE_20260910.md#5-terminal-result-and-scientific-intake),
 and [full vectors/exposure](UCOPE_UAV_SHORT_LEARNED_RENEWAL_CONTINUOUS_B01_8701_RESULT_SUMMARY_20260910.json).
 
+**Subsequent independent8702 observation.** The same-recipe attempt produced
+1738 T training episodes and two T-only64-world panels, then stopped before
+the final endpoint and every comparator. No paired effect or recurrence is
+observed; the current learned-short comparison evidence still consists of
+8701's bounded adverse result. T's recorded head movement and intermediate
+returns do not supply missing F/G/H outcomes. The next scientific discriminator
+remains a complete independent final comparison; no new instance or family
+disposition is selected from this incomplete attempt. See the
+[8702 partial E0](UCOPE_UAV_SHORT_LEARNED_RENEWAL_CONTINUOUS_B01_8702_RESULT_EVIDENCE_20260910.md)
+and [intake](UCOPE_UAV_SHORT_LEARNED_RENEWAL_CONTINUOUS_B01_8702_INTAKE_20260910.md#5-terminal-partial-result-intake).
+
+
 ## Previous scientific position — 2026-09-09 a final renewal gain survives the longer budget on8601
 
 **Conclusion and bounded claim.** The owner-selected continuous2048 budget

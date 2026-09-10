@@ -1,0 +1,19 @@
+{
+  "unit": "caller-declared independent training run",
+  "inference": "descriptive only; no confidence interval or success classification",
+  "groups": [
+    {
+      "task": "RCLE-fresh1000-W1-only",
+      "arm": "W1",
+      "n": 1,
+      "mean": -0.70167236328125,
+      "sample_sd": null,
+      "min": -0.70167236328125,
+      "max": -0.70167236328125,
+      "runs": {
+        "22": -0.70167236328125
+      }
+    }
+  ],
+  "paired_differences": []
+}

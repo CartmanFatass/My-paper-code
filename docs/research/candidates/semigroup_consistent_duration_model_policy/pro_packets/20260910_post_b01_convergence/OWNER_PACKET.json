@@ -1,0 +1,38 @@
+{
+  "question": "是否在当前边界暂停这个开场保持段残差MC家族，或为一个明确的新学习问题选择一次有界B？目前只有DM建议，等待同一Convergence节点裁决，不等待所有者答复。",
+  "changes_if_approved": [
+    {
+      "target": "SCDMP 当前 opening held-residual package family",
+      "from": "B01完整WITHIN，尚未选择后继；家族未暂停",
+      "to": "建议仅暂停这个家族，保留重入讨论条件；ACTIVE/HIGH、recasts2及旧D6 PARK均不变"
+    }
+  ],
+  "if_refused": "由同一节点明确选择一个有理由的新B，写清问题、比较器、独立训练单位、观测与预算后再形成新卡；不把B01改判成功。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_NATIVE_HOLD_RESIDUAL_B01_INTAKE_20260909.md",
+      "quote": "Valid complete B/EXPLORE, WITHIN: master8201's final sampled RESIDUAL-MC minus MLP-MC native return is +0.0067374074558942025, inside the card's inclusive ±0.01 scale.",
+      "why": "完整预算没有达到预先选定的改善尺度；原规则没有给原样重复提供选定尺度上的理由。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_NATIVE_HOLD_RESIDUAL_B01_INTAKE_20260909.md",
+      "quote": "Strongest support for further scientific plausibility is a real nonzero two-ended update followed by a positive native point difference on a complete fair comparison.",
+      "why": "独立训练对只有一个，条件评价SE不能排除有用的训练平均效应；科学配对进程323.02秒，一次新B可能仍有价值。"
+    }
+  ],
+  "uncertainty": [
+    "没有测到跨训练seed的方差，也没有建立统计等价。",
+    "无法区分通用残差正则、梯度裁剪、抵消、后继噪声与遗漏历史。",
+    "同信息调优headroom缺失；H是已达到的参考而非上界。"
+  ],
+  "cost": {
+    "compute": "本咨询新增模型/训练/评价/科学调用均为0。备选单对预计286720原生步、2048 Adam、96评价；历史科学进程323.02秒为参考，仍保留每臂1800秒、整对3600秒上限；未分配新seed或预算。",
+    "owner_time": "可异步介入；无需回复来推动咨询。",
+    "reversibility": "reversible",
+    "waits_on_this": "本家族下一裁决等待Pro完整响应；其他方向继续。"
+  },
+  "verdict_text": "DM recommendation: park the current opening held-segment residual-MC package family at this boundary; do not infer a general residual-method failure or change SCDMP lifecycle.",
+  "source": "docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260910_post_b01_convergence/SCIENCE_BRIEF.md"
+}
