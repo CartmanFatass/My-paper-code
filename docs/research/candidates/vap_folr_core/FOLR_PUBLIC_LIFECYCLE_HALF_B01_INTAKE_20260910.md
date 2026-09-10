@@ -63,3 +63,25 @@ Next: publish this acceptance, submit the original exact-source joined-admission
 HALF_EVENT command, notify the live Monitor, and return pending collection. Terminal
 collection, complete-pair scientific intake and verified scoped preservation/closeout
 remain assigned to this DM. Root owns integration and final closeout acceptance.
+
+## 4. Second-arm launch and clean handover
+
+The preselected HALF_EVENT command was submitted exactly once after the RETAIN
+acceptance commitfdb1868b9 was pushed. Supervisor tmux acceptance is explicit at
+2026-09-10T22:19:47.709977+00:00 on sourcec6be208cd, handle
+`folr-public-lifecycle-half-b01-half-event-20260910`; fresh admission and the runner
+share the frozen outer1800s chain. [E0 §8](FOLR_PUBLIC_LIFECYCLE_HALF_B01_RESULT_EVIDENCE_20260910.md#8-half_event-accepted-pending-independent-observation-and-collection)
+preserves the source/command/receipt facts. All2 allocated invocations are now accepted.
+No complete pair result is available and no primary branch or prediction is scored.
+
+Direct Monitor dispatch succeeded, and Root confirmed actual adoption of the exact
+handle plus RETAIN-acceptance integration/push asa96369c7e. A separate Monitor
+observation timestamp was not supplied. The DM returns
+this clean boundary to Root without remote polling. On the routed original-handle
+terminal fact, collect and technically check this arm, then apply the unchanged rule
+to both complete128-episode means, retain every outcome, write the Chinese owner brief,
+and finish verified scoped preservation/closeout. A failure retains partial evidence
+and stops under the card; it grants no retry or replacement. No automatic successor is
+selected. The shared local authoring checkout remains the current DM's continuation
+surface; active remote execution, both named supervisors and staged source remain
+until this object's assigned closeout can preserve and verify them.
