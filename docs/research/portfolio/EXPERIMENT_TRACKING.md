@@ -776,3 +776,36 @@ accepted, Monitor-adopted and integrated through `2482db440`; no extra selection
 was added. SCDMP Transport is active on its fixed request. VNFC and DISH have independently entered
 zero-exposure re-entry analysis to replace completed VSP03 and RCLE chains, restoring five advancing
 directions without changing Portfolio lifecycle or priority.
+
+## Rolling state after terminal recovery and direction decisions
+
+FOLR TIMING-B03 is complete and closed through `9d94e0880`. EVENT − RETAIN is
+`-5.44609375`, so the frozen `WITHIN_MEI` forecast missed and the result is
+`RETAIN_ABOVE_MEI`. All 2,706 archived members matched the originals before scoped remote removal.
+The three-instance timing-family Convergence handoff is integrated through `f067ca463` and is now at
+the original Pro node; its narrow-pause recommendation applies no local family decision or compute.
+
+UCOPE8702 ended incomplete, and the bounded A01 replay then completed the entire retained T prefix
+without reproducing the failure. Every one of the 1,866 historical episode rows and 869 historical
+rollout rows matched the replay prefix byte-for-byte. A01 therefore records bounded nonrecurrence,
+not a cause repair or performance sample; its intake and verified closeout are integrated through
+`b43d73a40`. UCOPE independently selected a fresh same-recipe master8703 T/F/G comparison next; its
+card, review and launch remain direction-local work.
+
+RCLE's separately selected seed22 W100 recovery completed 1,000 nonzero updates and reference.
+Against the retained W1 endpoint, `Delta_U=+0.36782430013020834`; all 512 paired scenarios and all
+eight U/Y/F means favor W100, while the reference remains better. Roots21/22 are only two descriptive
+training roots, and the failed seed22 attempt remains preserved. Result and verified closeout are
+integrated through `38d2edd1a`; a further independent same1000 pair is a new, separately selected rung.
+
+SCDMP Convergence selected one unchanged independent B02 pair and declined immediate narrow PARK.
+The conforming response, fixed card and reviewed binding are integrated through `6fb30cbaa`; the exact
+B02 handle is Monitor-adopted at source `f079c7530`, with terminal result intake in progress. DISH
+Convergence independently selected one HALF_RETAIN versus REPLACE B08 pair; response, card and
+independently reviewed implementation are integrated through `da1d3041a`, with launch preparation
+remaining inside the fixed 2,100-second complete envelope.
+
+VNFC's one Send remains `SEND_UNCERTAIN`. Read-only reconciliation found no current-round user node or
+assistant response in the bound conversation, so no decision or archive exists and no resend is
+permitted while acceptance is unresolved. The same fixed request remains queued; its blocker record is
+integrated through `73d4ef889`. This parked direction does not hold any sibling chain.
