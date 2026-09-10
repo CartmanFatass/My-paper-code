@@ -1,0 +1,48 @@
+{
+  "question": "B07完成后，是否暂停这个不变的512更新公开双任务调度比较，还是再选一次同预算的新训练？",
+  "changes_if_approved": [
+    {
+      "target": "VSP03的ordinary-G连续512、固定双控制器、greedy对R0/R窄家族",
+      "from": "B07已完成，尚无后继；本轮只有方向建议",
+      "to": "建议原Convergence暂停这个不变家族，不选择后继；不改ACTIVE/LOW、旧N1/T/128暂停或recasts=1"
+    }
+  ],
+  "if_refused": "原Convergence可选择一个新的同配方512更新fit；DM再按对象层绑定身份、预测和60秒完整额度。这次准备不分配或执行运行，也不等待其他方向。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/vsp_03/VSP03_B07_INTAKE_20260910.md#8-bounded-conclusion-and-next-discriminator",
+      "quote": "This fit was the selected minimal check of whether a fresh same-budget path retained the endpoint gain and positive Q; it retained the first and contradicted the second prediction.",
+      "why": "新增观察仍只有小的终点收益，且继续训练的greedy变化转负，降低继续原样重复的边际决策价值。"
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260910_next_five_chains/archive/RESPONSE.md",
+      "quote": "A further small final gain would remain a positive observation but would favor ending unchanged repetitions; a larger gain or an adverse result could change the next investment judgment.",
+      "why": "原选择明确保留小正值，并将其作为考虑结束不变重复的线索，不是自动停机规则。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/vsp_03/VSP03_B07_INTAKE_20260910.md#8-bounded-conclusion-and-next-discriminator",
+      "quote": "this fresh512 controller again beats both fixed rules; the final gains appear under greedy and stochastic execution, and complete wall is8.927880s.",
+      "why": "真实终点收益再次出现且很便宜；再一条独立训练路径仍可能改变判断，不能因未达到稳定优势而拒绝B。"
+    },
+    {
+      "path": "docs/research/candidates/vsp_03/VSP03_B06_INTAKE_20260909.md",
+      "quote": "Fixed update-512 greedy G beats R0 and R in each sampled comparison.",
+      "why": "前三次连续训练的Q为正且其中一个终点超过.02；不与B07合并，也不被B07小负Q抹掉。"
+    }
+  ],
+  "uncertainty": [
+    "B07只有一个独立训练单位，Q=-.00160645且条件世界SE约.00165258，不能判定训练总体退化。",
+    "终点G-R0=+.01156738仍为正，增加尝试成本；继续训练损失成功且增加尝试，节省等待不足抵消。",
+    "MEI=.02是解释尺度，当前N2调优headroom缺失并非0或启动门槛；全公开固定N2不支持独有MARL因果。"
+  ],
+  "cost": {
+    "compute": "本咨询新增模型、训练、评价、测试、profiling均0。备选一fit=73728 episodes/512 Adam/60秒完整cap，历史同配方8.380174–8.927880秒；未来实际耗时未知。",
+    "owner_time": "无需回复才能推进；异步可选择或纠正建议。",
+    "reversibility": "reversible",
+    "waits_on_this": "仅本方向窄家族处置等待原Convergence；其他方向独立继续。"
+  },
+  "verdict_text": "DM narrowly prefers (a): pause only the unchanged ordinary-G continuous512/public fixed-N2 greedy-replacement family, with no successor. This recommendation is unexecuted; option (b), one fresh same-budget fit, remains a legitimate B alternative.",
+  "source": "docs/research/candidates/vsp_03/VSP03_POST_B07_QUESTION_INTAKE_20260910.md"
+}

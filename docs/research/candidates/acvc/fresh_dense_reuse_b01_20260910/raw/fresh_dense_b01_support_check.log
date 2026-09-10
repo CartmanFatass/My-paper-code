@@ -1,0 +1,19 @@
+E                                                                        [100%]
+==================================== ERRORS ====================================
+___ ERROR at setup of test_fresh_dense_orchestration_counts_and_publication ____
+
+self = PosixPath('/home/wu/hmasd-worktrees/acvc-fresh-dense-b01-60d42dd73/temp/directions/acvc/test/fresh-dense-b01-60d42dd73')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           self._accessor.mkdir(self, mode)
+E           FileNotFoundError: [Errno 2] No such file or directory: '/home/wu/hmasd-worktrees/acvc-fresh-dense-b01-60d42dd73/temp/directions/acvc/test/fresh-dense-b01-60d42dd73'
+
+../../.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/pathlib.py:1175: FileNotFoundError
+=========================== short test summary info ============================
+ERROR tests/experiments/candidates/acvc/native_link_loss_b01/test_fresh_dense_b01.py::test_fresh_dense_orchestration_counts_and_publication
+1 error in 1.20s

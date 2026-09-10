@@ -1,0 +1,399 @@
+{
+  "recorded_at": "2026-09-10T20:49:06.311020+00:00",
+  "basis": "Static retained-result and configuration arithmetic only; no target import or scientific execution. Existing three-instance analysis reused, no new statistical method or inference.",
+  "scientific_input_sha": "cfc1b60d1a3edd729e89edda928ea07d15098abd",
+  "method_sha": "0d3c0a7aae861f0600acebe35a841d8c0865b5a5",
+  "current_consultation": {
+    "new_scientific_invocations": 0,
+    "target_imports": 0,
+    "models_created": 0,
+    "model_calls": 0,
+    "native_steps": 0,
+    "training_episodes": 0,
+    "evaluation_episodes": 0,
+    "optimizer_steps": 0,
+    "replay": 0,
+    "diagnostics": 0,
+    "profiling": 0,
+    "policy_search": 0,
+    "scientific_tests": 0,
+    "source_changes": 0,
+    "new_cards": 0,
+    "rng_masters": 0,
+    "pro_sends": 0,
+    "parameter_displacement": "not applicable: no learner"
+  },
+  "exposure_line": "FOLR_TIMING_FAMILY_CONSULTATION: new_scientific_invocations=0; models=0; native_steps=0; training_episodes=0; evaluation_episodes=0; optimizer_steps=0; replay=0; diagnostics=0; source_changes=0; new_cards=0; parameter_displacement=not applicable (no learner).",
+  "historical_rows": [
+    {
+      "object": "TIMING-B01",
+      "source_path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_TIMING_B01_RESULT_SUMMARY_20260909.json",
+      "source_sha": "cfc1b60d1a3edd729e89edda928ea07d15098abd",
+      "training_seed": 7804,
+      "evaluation_seed": 107804,
+      "means": {
+        "RETAIN": 2.5445312499999995,
+        "EVENT": 5.349296874999999,
+        "RANDOM": 3.985625
+      },
+      "event_minus_retain": 2.804765625,
+      "event_minus_random": 1.3636718749999992,
+      "training_mean_return": {
+        "RETAIN": -4.331157999999978,
+        "EVENT": -4.870973999999991,
+        "RANDOM": -4.715624000000009
+      },
+      "arms": [
+        {
+          "arm": "RETAIN",
+          "training_episodes": 5000,
+          "training_ticks": 100000,
+          "optimizer_steps": 4969,
+          "evaluation_episodes": 128,
+          "evaluation_ticks": 2560,
+          "training_events": {
+            "births": 22047,
+            "departures": 9020,
+            "survivor_opportunities": 47723,
+            "eligible_survivor_opportunities": 258975,
+            "survivor_resets": 0
+          },
+          "evaluation_events": {
+            "births": 556,
+            "departures": 172,
+            "survivor_opportunities": 1244,
+            "eligible_survivor_opportunities": 6798,
+            "survivor_resets": 0
+          }
+        },
+        {
+          "arm": "EVENT",
+          "training_episodes": 5000,
+          "training_ticks": 100000,
+          "optimizer_steps": 4969,
+          "evaluation_episodes": 128,
+          "evaluation_ticks": 2560,
+          "training_events": {
+            "births": 21775,
+            "departures": 8833,
+            "survivor_opportunities": 47375,
+            "eligible_survivor_opportunities": 257715,
+            "survivor_resets": 47375
+          },
+          "evaluation_events": {
+            "births": 611,
+            "departures": 277,
+            "survivor_opportunities": 1416,
+            "eligible_survivor_opportunities": 6294,
+            "survivor_resets": 1416
+          }
+        },
+        {
+          "arm": "RANDOM",
+          "training_episodes": 5000,
+          "training_ticks": 100000,
+          "optimizer_steps": 4969,
+          "evaluation_episodes": 128,
+          "evaluation_ticks": 2560,
+          "training_events": {
+            "births": 21693,
+            "departures": 8492,
+            "survivor_opportunities": 47239,
+            "eligible_survivor_opportunities": 261232,
+            "survivor_resets": 26050
+          },
+          "evaluation_events": {
+            "births": 562,
+            "departures": 233,
+            "survivor_opportunities": 1377,
+            "eligible_survivor_opportunities": 6644,
+            "survivor_resets": 649
+          }
+        }
+      ]
+    },
+    {
+      "object": "TIMING-B02",
+      "source_path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_TIMING_B02_RESULT_SUMMARY_20260910.json",
+      "source_sha": "cfc1b60d1a3edd729e89edda928ea07d15098abd",
+      "training_seed": 7805,
+      "evaluation_seed": 107805,
+      "means": {
+        "RETAIN": 2.64265625,
+        "EVENT": 2.051953125,
+        "RANDOM": 2.5017968749999993
+      },
+      "event_minus_retain": -0.5907031250000001,
+      "event_minus_random": -0.44984374999999943,
+      "training_mean_return": {
+        "RETAIN": -4.468676000000037,
+        "EVENT": -5.001920000000013,
+        "RANDOM": -5.204831999999984
+      },
+      "arms": [
+        {
+          "arm": "RETAIN",
+          "training_episodes": 5000,
+          "training_ticks": 100000,
+          "optimizer_steps": 4969,
+          "evaluation_episodes": 128,
+          "evaluation_ticks": 2560,
+          "training_events": {
+            "births": 20978,
+            "departures": 8373,
+            "survivor_opportunities": 46007,
+            "eligible_survivor_opportunities": 260235,
+            "survivor_resets": 0
+          },
+          "evaluation_events": {
+            "births": 588,
+            "departures": 306,
+            "survivor_opportunities": 1402,
+            "eligible_survivor_opportunities": 6159,
+            "survivor_resets": 0
+          }
+        },
+        {
+          "arm": "EVENT",
+          "training_episodes": 5000,
+          "training_ticks": 100000,
+          "optimizer_steps": 4969,
+          "evaluation_episodes": 128,
+          "evaluation_ticks": 2560,
+          "training_events": {
+            "births": 21773,
+            "departures": 8704,
+            "survivor_opportunities": 47153,
+            "eligible_survivor_opportunities": 260059,
+            "survivor_resets": 47153
+          },
+          "evaluation_events": {
+            "births": 562,
+            "departures": 201,
+            "survivor_opportunities": 1262,
+            "eligible_survivor_opportunities": 6746,
+            "survivor_resets": 1262
+          }
+        },
+        {
+          "arm": "RANDOM",
+          "training_episodes": 5000,
+          "training_ticks": 100000,
+          "optimizer_steps": 4969,
+          "evaluation_episodes": 128,
+          "evaluation_ticks": 2560,
+          "training_events": {
+            "births": 21778,
+            "departures": 8932,
+            "survivor_opportunities": 47458,
+            "eligible_survivor_opportunities": 259266,
+            "survivor_resets": 26050
+          },
+          "evaluation_events": {
+            "births": 561,
+            "departures": 209,
+            "survivor_opportunities": 1309,
+            "eligible_survivor_opportunities": 6580,
+            "survivor_resets": 623
+          }
+        }
+      ]
+    },
+    {
+      "object": "TIMING-B03",
+      "source_path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_TIMING_B03_RESULT_SUMMARY_20260910.json",
+      "source_sha": "cfc1b60d1a3edd729e89edda928ea07d15098abd",
+      "training_seed": 7806,
+      "evaluation_seed": 107806,
+      "means": {
+        "RETAIN": 6.8931249999999995,
+        "EVENT": 1.4470312499999993
+      },
+      "event_minus_retain": -5.44609375,
+      "event_minus_random": null,
+      "training_mean_return": {
+        "RETAIN": -3.763949999999993,
+        "EVENT": -5.073054000000007
+      },
+      "arms": [
+        {
+          "arm": "RETAIN",
+          "training_episodes": 5000,
+          "training_ticks": 100000,
+          "optimizer_steps": 4969,
+          "evaluation_episodes": 128,
+          "evaluation_ticks": 2560,
+          "training_events": {
+            "births": 21192,
+            "departures": 7910,
+            "survivor_opportunities": 47410,
+            "eligible_survivor_opportunities": 262307,
+            "survivor_resets": 0
+          },
+          "evaluation_events": {
+            "births": 563,
+            "departures": 261,
+            "survivor_opportunities": 1404,
+            "eligible_survivor_opportunities": 6261,
+            "survivor_resets": 0
+          }
+        },
+        {
+          "arm": "EVENT",
+          "training_episodes": 5000,
+          "training_ticks": 100000,
+          "optimizer_steps": 4969,
+          "evaluation_episodes": 128,
+          "evaluation_ticks": 2560,
+          "training_events": {
+            "births": 21509,
+            "departures": 8150,
+            "survivor_opportunities": 47766,
+            "eligible_survivor_opportunities": 264075,
+            "survivor_resets": 47766
+          },
+          "evaluation_events": {
+            "births": 566,
+            "departures": 217,
+            "survivor_opportunities": 1266,
+            "eligible_survivor_opportunities": 6602,
+            "survivor_resets": 1266
+          }
+        }
+      ]
+    }
+  ],
+  "historical_counts": {
+    "training_episodes": 40000,
+    "training_ticks": 800000,
+    "optimizer_steps": 39752,
+    "evaluation_episodes": 1024,
+    "evaluation_ticks": 20480,
+    "fresh_fits": 8,
+    "independent_fitting_instances": 3,
+    "native_ticks_total": 820480
+  },
+  "accepted_three_instance_analysis": {
+    "source_path": "docs/research/candidates/vap_folr_core/evidence/2026-09-10-folr-public-lifecycle-timing-b03-matched-128-analysis.json",
+    "source_sha": "cfc1b60d1a3edd729e89edda928ea07d15098abd",
+    "data": {
+      "unit": "caller-declared independent training run",
+      "inference": "descriptive only; no confidence interval or success classification",
+      "groups": [
+        {
+          "task": "FOLR_TIMING_128",
+          "arm": "EVENT",
+          "n": 3,
+          "mean": 2.949427083333333,
+          "sample_sd": 2.10024138646705,
+          "min": 1.4470312499999995,
+          "max": 5.349296874999999,
+          "runs": {
+            "7804": 5.349296874999999,
+            "7805": 2.051953125,
+            "7806": 1.4470312499999995
+          }
+        },
+        {
+          "task": "FOLR_TIMING_128",
+          "arm": "RETAIN",
+          "n": 3,
+          "mean": 4.026770833333333,
+          "sample_sd": 2.482820328876371,
+          "min": 2.5445312499999995,
+          "max": 6.8931249999999995,
+          "runs": {
+            "7804": 2.5445312499999995,
+            "7805": 2.64265625,
+            "7806": 6.8931249999999995
+          }
+        }
+      ],
+      "paired_differences": [
+        {
+          "task": "FOLR_TIMING_128",
+          "arm": "EVENT",
+          "baseline": "RETAIN",
+          "summary": {
+            "n": 3,
+            "mean": -1.07734375,
+            "sample_sd": 4.146900581148726,
+            "min": -5.44609375,
+            "max": 2.804765625
+          },
+          "differences": {
+            "7804": 2.804765625,
+            "7805": -0.5907031250000001,
+            "7806": -5.44609375
+          },
+          "unmatched_arm_seeds": [],
+          "unmatched_baseline_seeds": []
+        }
+      ]
+    }
+  },
+  "historical_costs": [
+    {
+      "object": "TIMING-B01",
+      "complete_arm_wall_charge_seconds": "2347",
+      "scoped_support_seconds": "15.5107405",
+      "scoped_charge_per_valid_object_seconds": "2362.5107405",
+      "recorded_cpu_seconds": "2347.80"
+    },
+    {
+      "object": "TIMING-B02",
+      "complete_arm_wall_charge_seconds": "2423.79",
+      "scoped_support_seconds": "45.9904959",
+      "scoped_charge_per_valid_object_seconds": "2469.7804959",
+      "recorded_cpu_seconds": "2427.91"
+    },
+    {
+      "object": "TIMING-B03",
+      "complete_arm_wall_charge_seconds": "1519.65",
+      "scoped_support_seconds": "48.3790650",
+      "scoped_charge_per_valid_object_seconds": "1568.0290650",
+      "recorded_cpu_seconds": "1522.30"
+    }
+  ],
+  "historical_complete_chain_wall_charge_sum_seconds": "6290.44",
+  "historical_scoped_charge_sum_seconds": "6400.3203014",
+  "cost_scope_limits": [
+    "Two complete triples and one pair; these are different arm sets/questions, not interchangeable valid-pair units.",
+    "B01 wall is a conservative whole-supervisor sum; its narrower runner wall is2344.07s; its CPU excludes preflight.",
+    "B02 and B03 use recorded complete-chain wall/CPU.",
+    "Scoped support is not complete engineering/control-plane elapsed.",
+    "No new scientific compute is allocated; document/Git/network administration is not declared free or fully measured."
+  ],
+  "prospective_two_arm_scale": {
+    "allocation": "none; unselected prospective scale only",
+    "arms": 2,
+    "fresh_fitting_instances": 1,
+    "training_episodes_per_arm": 5000,
+    "training_ticks_per_arm": 100000,
+    "optimizer_steps_per_arm": 4969,
+    "learning_rate": 0.0005,
+    "nominal_lr_times_steps": 2.4845,
+    "final_checkpoints_per_arm": 1,
+    "final_episodes_per_arm": 128,
+    "native_ticks_total": 205120,
+    "optimizer_steps_total": 9938,
+    "final_episodes_total": 256,
+    "replay_gru_row_forwards": 66783360,
+    "acting_gru_row_forwards": 1076880,
+    "nested_candidates_trajectories_solvers": 0,
+    "existing_retain_complete_wall_seconds": "755.40",
+    "existing_event_complete_wall_seconds": "764.25",
+    "unchanged_pair_wall_point_seconds": "1519.65",
+    "partial_attenuation_arm_wall": "unmeasured; EVENT time is a planning proxy, added rescaling/implementation overhead unknown",
+    "possible_per_arm_ceiling_seconds": 1800,
+    "possible_pair_ceiling_seconds": 3600,
+    "possible_scoped_support_ceiling_seconds": 300,
+    "additional_random_arm": {
+      "native_ticks": 102560,
+      "optimizer_steps": 4969,
+      "final_episodes": 128,
+      "replay_gru_row_forwards": 33391680,
+      "last_complete_wall_point_seconds": "821.64"
+    }
+  }
+}

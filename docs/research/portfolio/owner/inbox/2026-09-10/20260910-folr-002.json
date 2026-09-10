@@ -1,0 +1,76 @@
+{
+  "id": "20260910-folr-002",
+  "created": "2026-09-10T12:11:15-07:00",
+  "direction": "vap_folr_core",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "FOLR TIMING-B03：新实例比较事件清空与保留记忆",
+  "context": "Claim under test: event-triggered survivor clearing may yield at least one native-return unit over retention in one further fresh fitting instance on the public-lifecycle host. Binding MARL structure: (a) roster change; (d) other-agent non-stationarity or partial observability.",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "按新卡执行独立两臂实例，有限预算与较窄结论边界同时生效。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "在下一干净边界停止尚未执行的本卡部分，保留所有已完成记录。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "在下一干净边界按具体异步指令修订未执行部分；不重写旧三臂结果。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "新两臂实例直接检查相对保留记忆的收益重复性；省去另一随机臂也明确放弃本轮的全比较器结论。",
+  "evidence": [
+    "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_TIMING_B03_SCIENCE_CARD_20260910.md",
+    "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_TIMING_B03_INTAKE_20260910.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-10.md#L43",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否接受这张新的两臂卡：在新训练实例上比较事件清空与保留记忆的原生回报？",
+    "changes_if_approved": [
+      {
+        "target": "FOLR-PUBLIC-LIFECYCLE-TIMING-B03",
+        "from": "上一轮三臂预算已完成",
+        "to": "新的7806/107806两臂实例，训练与评价配额保持一致，预测差值在1单位以内"
+      }
+    ],
+    "if_refused": "在下一干净边界按你的异步指令修订尚未执行部分；已经完成的历史结果、规则和预算不重写。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_TIMING_B03_SCIENCE_CARD_20260910.md",
+        "quote": "The selected comparison is one fresh RETAIN/EVENT matched fitting instance.",
+        "why": "它直接补充一个独立训练实例；只问相对保留记忆是否有实际收益，少跑一个不能回答这条窄问题所必需的随机臂。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_TIMING_B03_INTAKE_20260910.md",
+        "quote": "RANDOM's two-instance mean 3.2437109375 exceeds RETAIN's2.59359375; no evidence-based dismissal of RANDOM follows.",
+        "why": "随机清空仍是合法且可能更强的比较器，所以本轮不能宣称对所有清空规则最好。上一轮事件收益未重现也降低信心。"
+      }
+    ],
+    "uncertainty": [
+      "一个新实例仍不能给出稳定优越、等效或因果时机结论。",
+      "既有两次128局结果一正一在阈值内，旧32局结果保留但不混合。",
+      "主机竞争可能改变耗时；以每臂完整链1800秒硬界为准。"
+    ],
+    "cost": {
+      "compute": "两臂共205120原生步、9938次RMSprop、256局终评；已有完整链点估计1602.15秒，新界3600秒另300秒支持。",
+      "owner_time": "无需立即回复；可异步接受、拒绝或修订。",
+      "reversibility": "costly",
+      "waits_on_this": "nothing; 按已有对象层授权继续执行"
+    },
+    "verdict_text": "Recommendation and selection: **(a)**.",
+    "source": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_TIMING_B03_INTAKE_20260910.md"
+  },
+  "starred": false
+}

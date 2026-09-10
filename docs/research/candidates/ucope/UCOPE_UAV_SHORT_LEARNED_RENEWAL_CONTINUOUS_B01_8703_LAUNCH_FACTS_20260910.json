@@ -1,0 +1,298 @@
+{
+  "source": "c40a4cd66cacc892d13afd9b277407b6505b8742",
+  "base": "b1d347ef303083824a72dd259c2fbb54e2b5ef75",
+  "sha256": {
+    "experiments/candidates/ucope/uav_motion_prefix_b01/study.py": "0e787d017f6486603aa573ce29b3be9ac6c4ce8c775df55412fdaa20afe5e5f1",
+    "experiments/candidates/ucope/uav_motion_prefix_b01/policy.py": "08873c2e0e918cf3194c7e7d7c81cac34d117d82611e2d4082d814f6b3d40944",
+    "experiments/candidates/ucope/uav_motion_prefix_b01/learner.py": "e0f907921ab8b48f6755b2513431b78a7f4a95ebce9a631e925fb82c0dfed911",
+    "experiments/candidates/ucope/uav_motion_prefix_b01/environment.py": "fb25e48857cc8531ac9b80f13243ccd6ca88fa5bf2b194a43dffed21c80690e6",
+    "experiments/candidates/ucope/uav_short_fixed_renewal_continuous_b01/study.py": "9a99c4b3906ab33d027bae71ca9ba2a2827abe0ca57c5cb13d6689d215613f43",
+    "experiments/candidates/ucope/uav_short_fixed_renewal_continuous_b01/__init__.py": "ac2510ac2e2167070946b91d6331e471626f8a3bd69b70ac0b74a4d16134b989",
+    "scripts/run_ucope_uav_short_fixed_renewal_continuous_b01.py": "1ad4f21df65aaca191490b0407d93ce94797b7261775c27fcc256e3d8f001ec6",
+    "scripts/hmasd_resource_preflight.py": "cb0525e9247f1c7262c198bf051e542282f5928982137b3023d36d5d69eda4dc",
+    "scripts/hmasd_platform.py": "f9e1fd0a88f9c0eef9b706802ae3aaceac4bc2f8ea394e895d01146e8e17865b",
+    "envs/pettingzoo/uav_env.py": "f50d74cdba92d5ef976c8ba53d2697fc72742683fcb746b404b8c8807f463803",
+    "envs/pettingzoo/env_adapter.py": "8b42c1c3e7ef44cb814f79225b4af944b1018ad764dfeb17e9e1cc294df79d40",
+    "tests/experiments/candidates/ucope/uav_short_fixed_renewal_continuous_b01/test_continuous.py": "7b57fdde2bc9f379816fcbdad6950adc9073136d70c354ca22a874dca67c1aa5",
+    "scripts/run_ucope_uav_8702_failure_location_a01.py": "db51ec39e7755ffd71763c7836ebd2f2160a93da6a58d1869ac1af3ca1cb0b74",
+    "tests/experiments/candidates/ucope/uav_short_fixed_renewal_continuous_b01/test_failure_location.py": "64cbba5a8c5312b5615f14df9384299bf42df7cb6938847b7dfcb892557ac70e"
+  },
+  "pack_bytes": 103866,
+  "pack_sha256": "4682e945ce0c3b54ea48496ac484b70584166bf9a6a671d3f33dabb7b9eb9317",
+  "wrapper_bytes": 552,
+  "wrapper_sha256": "ceb128861c7f998d0a5432c7ddae183bf325273537e8e869caabb105b009c45d",
+  "command": "/usr/local/bin/agent-task run ucope-uav-short-learned-renewal-continuous-b01-8703-20260910 '/usr/bin/time -f whole_wall_seconds=%e,peak_rss_kib=%M /usr/bin/timeout --signal=KILL 5100s /bin/bash --noprofile --norc /home/wu/hmasd-inputs/ucope-uav-short-learned-renewal-continuous-b01-8703-20260910.sh'",
+  "node": "hmasd-wsl-node",
+  "cwd": "/home/wu/hmasd-worktrees/ucope-uav-short-learned-renewal-continuous-b01-8703-20260910",
+  "handle": "ucope-uav-short-learned-renewal-continuous-b01-8703-20260910",
+  "status": "ACCEPTED; initial direct readback RUNNING; Monitor adoption confirmed by Root; terminal result pending",
+  "scientific_invocations": 1,
+  "technical_acceptance_at": "2026-09-10T21:17:53Z",
+  "frozen_card_commit": "0c88c81b14adeda97b9543daaf4e2bdee1d5d6f8",
+  "protected_runtime_source": "b1d347ef303083824a72dd259c2fbb54e2b5ef75",
+  "production_diff": {
+    "added": 4,
+    "deleted": 2
+  },
+  "test_diff": {
+    "added": 5,
+    "deleted": 4
+  },
+  "scope_additions": [],
+  "static_AST_parse_seconds": 0.012779599986970425,
+  "source_readback": {
+    "argv": [
+      "ssh",
+      "-o",
+      "BatchMode=yes",
+      "-o",
+      "ConnectTimeout=10",
+      "hmasd-wsl-node",
+      "/bin/bash --noprofile --norc -s"
+    ],
+    "returncode": 0,
+    "stdout": "pack\t43968d92b23af224dc7815624b6b7cede42d30fd\nHEAD is now at c40a4cd66 Bind UCOPE learned renewal instance 8703\nc40a4cd66cacc892d13afd9b277407b6505b8742\n0e787d017f6486603aa573ce29b3be9ac6c4ce8c775df55412fdaa20afe5e5f1  experiments/candidates/ucope/uav_motion_prefix_b01/study.py\n08873c2e0e918cf3194c7e7d7c81cac34d117d82611e2d4082d814f6b3d40944  experiments/candidates/ucope/uav_motion_prefix_b01/policy.py\ne0f907921ab8b48f6755b2513431b78a7f4a95ebce9a631e925fb82c0dfed911  experiments/candidates/ucope/uav_motion_prefix_b01/learner.py\nfb25e48857cc8531ac9b80f13243ccd6ca88fa5bf2b194a43dffed21c80690e6  experiments/candidates/ucope/uav_motion_prefix_b01/environment.py\n9a99c4b3906ab33d027bae71ca9ba2a2827abe0ca57c5cb13d6689d215613f43  experiments/candidates/ucope/uav_short_fixed_renewal_continuous_b01/study.py\nac2510ac2e2167070946b91d6331e471626f8a3bd69b70ac0b74a4d16134b989  experiments/candidates/ucope/uav_short_fixed_renewal_continuous_b01/__init__.py\n1ad4f21df65aaca191490b0407d93ce94797b7261775c27fcc256e3d8f001ec6  scripts/run_ucope_uav_short_fixed_renewal_continuous_b01.py\ncb0525e9247f1c7262c198bf051e542282f5928982137b3023d36d5d69eda4dc  scripts/hmasd_resource_preflight.py\nf9e1fd0a88f9c0eef9b706802ae3aaceac4bc2f8ea394e895d01146e8e17865b  scripts/hmasd_platform.py\nf50d74cdba92d5ef976c8ba53d2697fc72742683fcb746b404b8c8807f463803  envs/pettingzoo/uav_env.py\n8b42c1c3e7ef44cb814f79225b4af944b1018ad764dfeb17e9e1cc294df79d40  envs/pettingzoo/env_adapter.py\n7b57fdde2bc9f379816fcbdad6950adc9073136d70c354ca22a874dca67c1aa5  tests/experiments/candidates/ucope/uav_short_fixed_renewal_continuous_b01/test_continuous.py\ndb51ec39e7755ffd71763c7836ebd2f2160a93da6a58d1869ac1af3ca1cb0b74  scripts/run_ucope_uav_8702_failure_location_a01.py\n64cbba5a8c5312b5615f14df9384299bf42df7cb6938847b7dfcb892557ac70e  tests/experiments/candidates/ucope/uav_short_fixed_renewal_continuous_b01/test_failure_location.py\n4682e945ce0c3b54ea48496ac484b70584166bf9a6a671d3f33dabb7b9eb9317  /home/wu/hmasd-inputs/ucope-learned-8703-source.pack\nceb128861c7f998d0a5432c7ddae183bf325273537e8e869caabb105b009c45d  /home/wu/hmasd-inputs/ucope-uav-short-learned-renewal-continuous-b01-8703-20260910.sh\n",
+    "stderr": "Preparing worktree (detached HEAD c40a4cd66)\n",
+    "wall_seconds": 0.6718543999886606
+  },
+  "all_14_declared_source_test_hashes_match": true,
+  "preparation": {
+    "time": "2026-09-10T21:13:22.001071+00:00",
+    "wall_seconds": 3.1854468999954406,
+    "steps": [
+      {
+        "operation": "committed-object pack",
+        "wall_seconds": 0.0724560999951791,
+        "returncode": 0,
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "scp",
+          "-o",
+          "BatchMode=yes",
+          "-o",
+          "ConnectTimeout=10",
+          "temp\\directions\\ucope\\exp\\ucope-uav-short-learned-renewal-continuous-b01-8703-20260910\\preparation\\ucope-learned-8703-source.pack",
+          "temp\\directions\\ucope\\exp\\ucope-uav-short-learned-renewal-continuous-b01-8703-20260910\\preparation\\ucope-uav-short-learned-renewal-continuous-b01-8703-20260910.sh",
+          "hmasd-wsl-node:/home/wu/hmasd-inputs/"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "",
+        "wall_seconds": 0.46530680000432767
+      },
+      {
+        "argv": [
+          "ssh",
+          "-o",
+          "BatchMode=yes",
+          "-o",
+          "ConnectTimeout=10",
+          "hmasd-wsl-node",
+          "/bin/bash --noprofile --norc -s"
+        ],
+        "returncode": 0,
+        "stdout": "pack\t43968d92b23af224dc7815624b6b7cede42d30fd\nHEAD is now at c40a4cd66 Bind UCOPE learned renewal instance 8703\nc40a4cd66cacc892d13afd9b277407b6505b8742\n0e787d017f6486603aa573ce29b3be9ac6c4ce8c775df55412fdaa20afe5e5f1  experiments/candidates/ucope/uav_motion_prefix_b01/study.py\n08873c2e0e918cf3194c7e7d7c81cac34d117d82611e2d4082d814f6b3d40944  experiments/candidates/ucope/uav_motion_prefix_b01/policy.py\ne0f907921ab8b48f6755b2513431b78a7f4a95ebce9a631e925fb82c0dfed911  experiments/candidates/ucope/uav_motion_prefix_b01/learner.py\nfb25e48857cc8531ac9b80f13243ccd6ca88fa5bf2b194a43dffed21c80690e6  experiments/candidates/ucope/uav_motion_prefix_b01/environment.py\n9a99c4b3906ab33d027bae71ca9ba2a2827abe0ca57c5cb13d6689d215613f43  experiments/candidates/ucope/uav_short_fixed_renewal_continuous_b01/study.py\nac2510ac2e2167070946b91d6331e471626f8a3bd69b70ac0b74a4d16134b989  experiments/candidates/ucope/uav_short_fixed_renewal_continuous_b01/__init__.py\n1ad4f21df65aaca191490b0407d93ce94797b7261775c27fcc256e3d8f001ec6  scripts/run_ucope_uav_short_fixed_renewal_continuous_b01.py\ncb0525e9247f1c7262c198bf051e542282f5928982137b3023d36d5d69eda4dc  scripts/hmasd_resource_preflight.py\nf9e1fd0a88f9c0eef9b706802ae3aaceac4bc2f8ea394e895d01146e8e17865b  scripts/hmasd_platform.py\nf50d74cdba92d5ef976c8ba53d2697fc72742683fcb746b404b8c8807f463803  envs/pettingzoo/uav_env.py\n8b42c1c3e7ef44cb814f79225b4af944b1018ad764dfeb17e9e1cc294df79d40  envs/pettingzoo/env_adapter.py\n7b57fdde2bc9f379816fcbdad6950adc9073136d70c354ca22a874dca67c1aa5  tests/experiments/candidates/ucope/uav_short_fixed_renewal_continuous_b01/test_continuous.py\ndb51ec39e7755ffd71763c7836ebd2f2160a93da6a58d1869ac1af3ca1cb0b74  scripts/run_ucope_uav_8702_failure_location_a01.py\n64cbba5a8c5312b5615f14df9384299bf42df7cb6938847b7dfcb892557ac70e  tests/experiments/candidates/ucope/uav_short_fixed_renewal_continuous_b01/test_failure_location.py\n4682e945ce0c3b54ea48496ac484b70584166bf9a6a671d3f33dabb7b9eb9317  /home/wu/hmasd-inputs/ucope-learned-8703-source.pack\nceb128861c7f998d0a5432c7ddae183bf325273537e8e869caabb105b009c45d  /home/wu/hmasd-inputs/ucope-uav-short-learned-renewal-continuous-b01-8703-20260910.sh\n",
+        "stderr": "Preparing worktree (detached HEAD c40a4cd66)\n",
+        "wall_seconds": 0.6718543999886606
+      },
+      {
+        "argv": [
+          "ssh",
+          "-o",
+          "BatchMode=yes",
+          "-o",
+          "ConnectTimeout=10",
+          "hmasd-wsl-node",
+          "/bin/bash --noprofile --norc -s"
+        ],
+        "returncode": 1,
+        "stdout": "{\"argv\": [\"/home/wu/.venvs/hmasd/bin/python\", \"-m\", \"pytest\", \"-q\", \"-p\", \"no:cacheprovider\", \"--basetemp\", \"/home/wu/hmasd-worktrees/ucope-uav-short-learned-renewal-continuous-b01-8703-20260910/temp/directions/ucope/test/seed8703-routing-20260910\", \"tests/experiments/candidates/ucope/uav_short_fixed_renewal_continuous_b01/test_continuous.py::test_learned_cli_seed_and_card_without_scientific_draws\"], \"returncode\": 1, \"wall_seconds\": 1.0536312749609351, \"stdout\": \"E                                                                        [100%]\\n==================================== ERRORS ====================================\\n__ ERROR at setup of test_learned_cli_seed_and_card_without_scientific_draws ___\\n\\nself = PosixPath('/home/wu/hmasd-worktrees/ucope-uav-short-learned-renewal-continuous-b01-8703-20260910/temp/directions/ucope/test/seed8703-routing-20260910')\\nmode = 448, parents = False, exist_ok = False\\n\\n    def mkdir(self, mode=0o777, parents=False, exist_ok=False):\\n        \\\"\\\"\\\"\\n        Create a new directory at this given path.\\n        \\\"\\\"\\\"\\n        try:\\n>           self._accessor.mkdir(self, mode)\\nE           FileNotFoundError: [Errno 2] No such file or directory: '/home/wu/hmasd-worktrees/ucope-uav-short-learned-renewal-continuous-b01-8703-20260910/temp/directions/ucope/test/seed8703-routing-20260910'\\n\\n../../.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/pathlib.py:1175: FileNotFoundError\\n=========================== short test summary info ============================\\nERROR tests/experiments/candidates/ucope/uav_short_fixed_renewal_continuous_b01/test_continuous.py::test_learned_cli_seed_and_card_without_scientific_draws\\n1 error in 0.81s\\n\", \"stderr\": \"\"}\nowned_scratch_absent=true\n",
+        "stderr": "",
+        "wall_seconds": 1.4284874000004493
+      }
+    ]
+  },
+  "focused_check": {
+    "argv": [
+      "/home/wu/.venvs/hmasd/bin/python",
+      "-m",
+      "pytest",
+      "-q",
+      "-p",
+      "no:cacheprovider",
+      "--basetemp",
+      "/home/wu/hmasd-worktrees/ucope-uav-short-learned-renewal-continuous-b01-8703-20260910/temp/directions/ucope/test/seed8703-routing-20260910",
+      "tests/experiments/candidates/ucope/uav_short_fixed_renewal_continuous_b01/test_continuous.py::test_learned_cli_seed_and_card_without_scientific_draws"
+    ],
+    "returncode": 0,
+    "wall_seconds": 1.0666544620180503,
+    "stdout": ".                                                                        [100%]\n1 passed in 0.82s\n",
+    "stderr": "",
+    "owned_scratch_absent": true,
+    "both_pytest_processes_wall_seconds": 2.1202857369789854,
+    "cumulative_directory_seconds": 50.37948836694706,
+    "setup_failure_preserved": "focused-check-attempt-1.json"
+  },
+  "failed_setup_check": {
+    "argv": [
+      "/home/wu/.venvs/hmasd/bin/python",
+      "-m",
+      "pytest",
+      "-q",
+      "-p",
+      "no:cacheprovider",
+      "--basetemp",
+      "/home/wu/hmasd-worktrees/ucope-uav-short-learned-renewal-continuous-b01-8703-20260910/temp/directions/ucope/test/seed8703-routing-20260910",
+      "tests/experiments/candidates/ucope/uav_short_fixed_renewal_continuous_b01/test_continuous.py::test_learned_cli_seed_and_card_without_scientific_draws"
+    ],
+    "returncode": 1,
+    "wall_seconds": 1.0536312749609351,
+    "stdout": "E                                                                        [100%]\n==================================== ERRORS ====================================\n__ ERROR at setup of test_learned_cli_seed_and_card_without_scientific_draws ___\n\nself = PosixPath('/home/wu/hmasd-worktrees/ucope-uav-short-learned-renewal-continuous-b01-8703-20260910/temp/directions/ucope/test/seed8703-routing-20260910')\nmode = 448, parents = False, exist_ok = False\n\n    def mkdir(self, mode=0o777, parents=False, exist_ok=False):\n        \"\"\"\n        Create a new directory at this given path.\n        \"\"\"\n        try:\n>           self._accessor.mkdir(self, mode)\nE           FileNotFoundError: [Errno 2] No such file or directory: '/home/wu/hmasd-worktrees/ucope-uav-short-learned-renewal-continuous-b01-8703-20260910/temp/directions/ucope/test/seed8703-routing-20260910'\n\n../../.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/pathlib.py:1175: FileNotFoundError\n=========================== short test summary info ============================\nERROR tests/experiments/candidates/ucope/uav_short_fixed_renewal_continuous_b01/test_continuous.py::test_learned_cli_seed_and_card_without_scientific_draws\n1 error in 0.81s\n",
+    "stderr": "",
+    "owned_scratch_absent": true,
+    "remote_shell_receipt": {
+      "argv": [
+        "ssh",
+        "-o",
+        "BatchMode=yes",
+        "-o",
+        "ConnectTimeout=10",
+        "hmasd-wsl-node",
+        "/bin/bash --noprofile --norc -s"
+      ],
+      "returncode": 1,
+      "stdout": "{\"argv\": [\"/home/wu/.venvs/hmasd/bin/python\", \"-m\", \"pytest\", \"-q\", \"-p\", \"no:cacheprovider\", \"--basetemp\", \"/home/wu/hmasd-worktrees/ucope-uav-short-learned-renewal-continuous-b01-8703-20260910/temp/directions/ucope/test/seed8703-routing-20260910\", \"tests/experiments/candidates/ucope/uav_short_fixed_renewal_continuous_b01/test_continuous.py::test_learned_cli_seed_and_card_without_scientific_draws\"], \"returncode\": 1, \"wall_seconds\": 1.0536312749609351, \"stdout\": \"E                                                                        [100%]\\n==================================== ERRORS ====================================\\n__ ERROR at setup of test_learned_cli_seed_and_card_without_scientific_draws ___\\n\\nself = PosixPath('/home/wu/hmasd-worktrees/ucope-uav-short-learned-renewal-continuous-b01-8703-20260910/temp/directions/ucope/test/seed8703-routing-20260910')\\nmode = 448, parents = False, exist_ok = False\\n\\n    def mkdir(self, mode=0o777, parents=False, exist_ok=False):\\n        \\\"\\\"\\\"\\n        Create a new directory at this given path.\\n        \\\"\\\"\\\"\\n        try:\\n>           self._accessor.mkdir(self, mode)\\nE           FileNotFoundError: [Errno 2] No such file or directory: '/home/wu/hmasd-worktrees/ucope-uav-short-learned-renewal-continuous-b01-8703-20260910/temp/directions/ucope/test/seed8703-routing-20260910'\\n\\n../../.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/pathlib.py:1175: FileNotFoundError\\n=========================== short test summary info ============================\\nERROR tests/experiments/candidates/ucope/uav_short_fixed_renewal_continuous_b01/test_continuous.py::test_learned_cli_seed_and_card_without_scientific_draws\\n1 error in 0.81s\\n\", \"stderr\": \"\"}\nowned_scratch_absent=true\n",
+      "stderr": "",
+      "wall_seconds": 1.4284874000004493
+    },
+    "reading": "Failed during pytest tmp_path setup: scratch parent was missing; before model/RNG/native invocation. Correct the parent directory and repeat the same focused test within its existing budget."
+  },
+  "focused_setup_repair": {
+    "returncode": 0,
+    "stdout": "{\"argv\": [\"/home/wu/.venvs/hmasd/bin/python\", \"-m\", \"pytest\", \"-q\", \"-p\", \"no:cacheprovider\", \"--basetemp\", \"/home/wu/hmasd-worktrees/ucope-uav-short-learned-renewal-continuous-b01-8703-20260910/temp/directions/ucope/test/seed8703-routing-20260910\", \"tests/experiments/candidates/ucope/uav_short_fixed_renewal_continuous_b01/test_continuous.py::test_learned_cli_seed_and_card_without_scientific_draws\"], \"returncode\": 0, \"wall_seconds\": 1.0666544620180503, \"stdout\": \".                                                                        [100%]\\n1 passed in 0.82s\\n\", \"stderr\": \"\"}\nowned_scratch_absent=true\n",
+    "stderr": "",
+    "remote_command_wall_seconds": 1.5207408000133,
+    "recorded_at": "2026-09-10T21:14:27.628322+00:00"
+  },
+  "independent_review": {
+    "agent": "/root/dm_ucope_p47_resume/review_ucope_t8701",
+    "model_effort": "existing Astra/high reviewer",
+    "source": "c40a4cd66cacc892d13afd9b277407b6505b8742",
+    "comparison_base": "0c88c81b1",
+    "no_material_finding": true,
+    "no_additional_probe_gap": true,
+    "record": "No material finding in 0c88c81b1 -> c40a4cd66. No additional probe gap identified.\nThe existing independent reviewer traced 8703 through Config.learned into actual template,\nT/F head, constructor/training/evaluation resets and private arm/checkpoint generators,\nall from b=870300000. The B call leaves failure_location=False. The new card binds only\nreal learned 8703; prior learned/fixed/fixture routes and A01 defaults are unchanged.\nThe routing check stops at the mocked template boundary before model/RNG creation.\nProduction +4/-2 and tests +5/-4; no new Section 4 machinery. Shared learner, policy,\nnative environment and A01 runner remain unchanged from the prior reviewed b1 source.\nResidual limit: source review reuses prior semantic evidence; remote test and actual\nexecution evidence were pending when the reviewer returned. No test/scientific call\nwas made by the reviewer. Routing correctness is not runtime completion or performance.\n",
+    "scientific_invocations": 0
+  },
+  "measured_support_outer_command_seconds": {
+    "configuration_authoring": 0.3105928,
+    "owner_publication": 0.496261,
+    "source_AST_diff_check": 0.3938959,
+    "preparation_script_generation": 0.2383337,
+    "initial_remote_preparation_including_failed_test": 3.4067599,
+    "repair_preparation": 0.2278002,
+    "repaired_remote_test": 1.7424105
+  },
+  "measured_support_subtotal_seconds": 6.816054,
+  "timing_boundary": "Each outer command includes its nested subprocesses; do not add test-process times to these again. Later acceptance/collection/publication work is also within the 300 s support reserve.",
+  "canonical_admission": "Actual-node PASS in the wrapper, joined by && immediately before this runner.",
+  "monitor_endpoint": "01a087e5-2044-7301-abb6-7a1709a98197",
+  "root_endpoint": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "execution_constraints": "One new 8703 B invocation only, CPU FP32/thread1; 1800 s per fit,5100 s complete science,5400 s including<=300 s support; no accepted retry/resume/replacement.",
+  "owner_reviews_main": [],
+  "actual_process_accepted": true,
+  "accepted_scientific_invocations": 1,
+  "submission": {
+    "started_at": "2026-09-10T21:19:15.021934+00:00",
+    "returned_at": "2026-09-10T21:19:15.342213+00:00",
+    "source": "c40a4cd66cacc892d13afd9b277407b6505b8742",
+    "acceptance_record": "b2e4f5afe68ac0ad2d39fba7c8b8df1497c5b67b",
+    "handle": "ucope-uav-short-learned-renewal-continuous-b01-8703-20260910",
+    "cwd": "/home/wu/hmasd-worktrees/ucope-uav-short-learned-renewal-continuous-b01-8703-20260910",
+    "argv": [
+      "ssh",
+      "-o",
+      "BatchMode=yes",
+      "-o",
+      "ConnectTimeout=10",
+      "hmasd-wsl-node",
+      "/usr/local/bin/agent-task run ucope-uav-short-learned-renewal-continuous-b01-8703-20260910 '/usr/bin/time -f whole_wall_seconds=%e,peak_rss_kib=%M /usr/bin/timeout --signal=KILL 5100s /bin/bash --noprofile --norc /home/wu/hmasd-inputs/ucope-uav-short-learned-renewal-continuous-b01-8703-20260910.sh'"
+    ],
+    "returncode": 0,
+    "stdout": "Task 'ucope-uav-short-learned-renewal-continuous-b01-8703-20260910' started in tmux session 'agent_ucope-uav-short-learned-renewal-continuous-b01-8703-20260910'. Output: /home/wu/.agent-tasks/ucope-uav-short-learned-renewal-continuous-b01-8703-20260910/task.log\n",
+    "stderr": "",
+    "wall_seconds": 0.3241538000002038
+  },
+  "initial_readback": {
+    "supervisor": {
+      "returncode": 0,
+      "stdout": "{\"task\": \"ucope-uav-short-learned-renewal-continuous-b01-8703-20260910\", \"status\": \"running\", \"exit_code\": null, \"pid\": 3132956, \"uptime_seconds\": 1, \"tmux_active\": true}\n",
+      "stderr": ""
+    },
+    "admission": {
+      "returncode": 0,
+      "stdout": "{\n  \"assessed_at\": \"2026-09-10T21:19:14.748389Z\",\n  \"available_physical_bytes\": 15260344320,\n  \"captured_at\": \"2026-09-10T21:19:14.748073Z\",\n  \"cgroup_headroom_bytes\": null,\n  \"cgroup_memory_current_bytes\": null,\n  \"cgroup_memory_max_bytes\": null,\n  \"effective_available_bytes\": 15260344320,\n  \"effective_floor_pass\": true,\n  \"failure_reasons\": [],\n  \"measurement_source\": \"/proc/meminfo\",\n  \"minimum_available_bytes\": 4294967296,\n  \"passed\": true,\n  \"physical_floor_pass\": true,\n  \"schema_version\": 1\n}\n",
+      "stderr": ""
+    },
+    "observed_at": "2026-09-10T21:19:16.008123+00:00",
+    "wall_seconds": 0.6660809000022709
+  },
+  "actual_admission": {
+    "assessed_at": "2026-09-10T21:19:14.748389Z",
+    "available_physical_bytes": 15260344320,
+    "captured_at": "2026-09-10T21:19:14.748073Z",
+    "cgroup_headroom_bytes": null,
+    "cgroup_memory_current_bytes": null,
+    "cgroup_memory_max_bytes": null,
+    "effective_available_bytes": 15260344320,
+    "effective_floor_pass": true,
+    "failure_reasons": [],
+    "measurement_source": "/proc/meminfo",
+    "minimum_available_bytes": 4294967296,
+    "passed": true,
+    "physical_floor_pass": true,
+    "schema_version": 1
+  },
+  "initial_supervisor": {
+    "task": "ucope-uav-short-learned-renewal-continuous-b01-8703-20260910",
+    "status": "running",
+    "exit_code": null,
+    "pid": 3132956,
+    "uptime_seconds": 1,
+    "tmux_active": true
+  },
+  "monitor_dispatch": {
+    "thread_id": "01a087e5-2044-7301-abb6-7a1709a98197",
+    "endpoint_source": "live C:/Projects/HMASD/.codex/hmasd-monitor.toml",
+    "tool": "mcp__codex_app__send_message_to_thread",
+    "payload_type": "MONITOR_ADD",
+    "isError": false,
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"threadId\":\"01a087e5-2044-7301-abb6-7a1709a98197\"}"
+        }
+      ],
+      "isError": false
+    },
+    "handle": "ucope-uav-short-learned-renewal-continuous-b01-8703-20260910",
+    "source": "c40a4cd66cacc892d13afd9b277407b6505b8742",
+    "original_owner": "/root/dm_ucope_p47_resume",
+    "original_execution_owner": "/root/dm_ucope_p47_resume",
+    "root_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+    "reading": "Accepted dispatch; Monitor must directly observe and send adoption to Root. No adoption is inferred from dispatch."
+  },
+  "monitor_adoption": {
+    "state": "confirmed",
+    "root_confirmation": "Root native message 2026-09-10 confirms exact handle/node/source/cwd/output/supervisor/accepted time, running PID3132956 and active tmux; publish facts, stop routine polling, resume from Root terminal handoff.",
+    "handle": "ucope-uav-short-learned-renewal-continuous-b01-8703-20260910",
+    "source": "c40a4cd66cacc892d13afd9b277407b6505b8742",
+    "pid": 3132956,
+    "tmux_active": true
+  },
+  "next_responsibility": "Existing Monitor observes and notifies Root; Root confirmed adoption and resumes original DM at terminal for collection/intake/preservation/closeout. No DM routine polling.",
+  "updated_at": "2026-09-10T21:23:01.457554+00:00"
+}

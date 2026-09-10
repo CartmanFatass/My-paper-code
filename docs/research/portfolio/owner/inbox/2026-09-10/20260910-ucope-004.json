@@ -1,0 +1,76 @@
+{
+  "id": "20260910-ucope-004",
+  "created": "2026-09-10T13:19:01-07:00",
+  "direction": "ucope",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "UCOPE A01：有界复跑8702的T前缀定位错误",
+  "context": "8702在T训练中失败且无堆栈。选定一次最多1740训练轮的同种子前缀，保留原评价插入，不运行F/G/H；只问直接失败位置，不能当作新的独立性能样本。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "执行已冻结的一次A01诊断，完整机器预算1000秒，保留任何结果。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "下一干净边界停止后续A01工作，保留已执行证据，另行选择下一对象。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "下一干净边界按明确改令调整未执行工作；不改变旧8702结果或隐含补跑。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "缺失失败位置直接影响后续训练；重放已知T前缀比完整新三臂比较工作少，且不要求穷尽根因。",
+  "evidence": [
+    "docs/research/candidates/ucope/UCOPE_UAV_8702_FAILURE_LOCATION_A01_SCIENCE_CARD_20260910.md",
+    "docs/research/candidates/ucope/UCOPE_UAV_8702_FAILURE_LOCATION_A01_INTAKE_20260910.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-10.md#L23",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否接受先复跑8702的一个有界T前缀，补齐失败位置证据，再决定下一笔比较投入？",
+    "changes_if_approved": [
+      {
+        "target": "UCOPE当前对象",
+        "from": "8702已结束且错误内部位置未知",
+        "to": "选定一次A01诊断：T最多1740训练轮，保留512/1024评价，不运行F/G/H，完整机器预算1000秒"
+      }
+    ],
+    "if_refused": "在下一干净边界应用所有者改令，保留已经执行的证据；新独立T/F/G比较仍需明确对象选择。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_UAV_SHORT_LEARNED_RENEWAL_CONTINUOUS_B01_8702_RESULT_EVIDENCE_20260910.md",
+        "quote": "The exact failing operation remains unresolved.",
+        "why": "原运行有真实训练失败，但没有堆栈；有限前缀复跑可补齐直接位置证据。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_UAV_8702_FAILURE_LOCATION_A01_SCIENCE_CARD_20260910.md",
+        "quote": "It is not a fresh independent training sample, a replacement 8702 performance comparison, evidence of DOWN/UP, or a unique causal diagnosis of an unrecorded historical frame.",
+        "why": "诊断花费真实训练预算，但不能回答完整性能比较，也不保证重现错误。"
+      }
+    ],
+    "uncertainty": [
+      "同样RNG历史仍不保证复现；未重现只限于这个前缀。",
+      "堆栈和数组形状可能仍不足以支持具体修复。",
+      "8701的负向比较保留，8702仍不计为重复性能结果。"
+    ],
+    "cost": {
+      "compute": "一次，最多478208环境步、3480次Adam、128次评价；科学部分900秒，连同支持完整不超过1000秒。",
+      "owner_time": "异步查阅，无需阻塞执行",
+      "reversibility": "costly",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "Owner-delegated decision (unattended, 2026-09-03 instruction): (b).",
+    "source": "docs/research/candidates/ucope/UCOPE_UAV_8702_FAILURE_LOCATION_A01_INTAKE_20260910.md"
+  },
+  "starred": false
+}

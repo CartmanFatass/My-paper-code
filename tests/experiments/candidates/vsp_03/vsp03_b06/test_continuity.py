@@ -17,8 +17,11 @@ def test_paired_change_uses_world_pairing():
     assert rows[1]["b"] == 1
 
 
-@pytest.mark.parametrize("fail_at", [None, 129])
-def test_continuous_driver_and_partial_publication(monkeypatch, tmp_path, fail_at):
+@pytest.mark.parametrize("seed,object_id,fail_at", [
+    (10801, "VSP03_B06", None), (10801, "VSP03_B06", 129),
+    (10804, "VSP03_B07", None),
+])
+def test_continuous_driver_and_partial_publication(monkeypatch, tmp_path, seed, object_id, fail_at):
     calls, panels, saved = [], [], {}
     state = SimpleNamespace(step=0, backward=0, model_count=0, optim_count=0)
     class Tensor:
@@ -26,8 +29,8 @@ def test_continuous_driver_and_partial_publication(monkeypatch, tmp_path, fail_a
         def detach(self): return self
         def clone(self): return Tensor(self.value)
     class Model:
-        def __init__(self, seed, arm):
-            assert (seed, arm) == (10801, "G")
+        def __init__(self, model_seed, arm):
+            assert (model_seed, arm) == (seed, "G")
             state.model_count += 1
         def parameters(self): return self
         def state_dict(self): return {"w": Tensor(state.step)}
@@ -49,7 +52,7 @@ def test_continuous_driver_and_partial_publication(monkeypatch, tmp_path, fail_a
         assert kwargs["deadline"] == 50
         if draws[0] == 100:
             assert draws[1] == state.step * 128
-            assert uniforms == (10801,100,0,1,state.step*128,128)
+            assert uniforms == (seed,100,0,1,state.step*128,128)
             if state.step + 1 == fail_at: raise RuntimeError("literal injected failure")
         else:
             assert not b06.torch.is_grad_enabled()
@@ -78,10 +81,12 @@ def test_continuous_driver_and_partial_publication(monkeypatch, tmp_path, fail_a
     monkeypatch.setattr(b06.time,"perf_counter",lambda: 0)
     if fail_at:
         with pytest.raises(RuntimeError,match="literal injected failure"):
-            b06.run(10801,tmp_path,"sha",0,"wsl_4070","literal")
+            b06.run(seed,tmp_path,"sha",0,"wsl_4070","literal")
     else:
-        b06.run(10801,tmp_path,"sha",0,"wsl_4070","literal")
+        b06.run(seed,tmp_path,"sha",0,"wsl_4070","literal")
     summary = json.loads((tmp_path / "summary.json").read_text())
+    assert (summary["object"], summary["seed"]) == (object_id, seed)
+    assert summary["rng"]["initialization"] == 40000 + seed
     assert state.model_count == state.optim_count == 1
     assert state.step == state.backward == (128 if fail_at else 512)
     assert len((tmp_path / "G_curve.jsonl").read_text().splitlines()) == state.step
@@ -90,7 +95,8 @@ def test_continuous_driver_and_partial_publication(monkeypatch, tmp_path, fail_a
     assert len(panels) == (4 if fail_at else 8)
     assert len({p[1] for p in panels}) == len({p[2] for p in panels}) == 1
     assert len({p[3] for p in panels if p[5] == "R0" and p[4] is not None}) == 1
-    assert calls[0] == (10801,200,0,1024)
+    assert calls[0] == (seed,200,0,1024)
+    assert all(call[0] == seed for call in calls)
     if fail_at:
         assert summary["status"] == "incomplete" and "primary" not in summary
     else:
@@ -99,4 +105,4 @@ def test_continuous_driver_and_partial_publication(monkeypatch, tmp_path, fail_a
         assert summary["budget_change"]["mean"] == 384
         assert summary["budget_change"]["conditional_world_sd"] == 0
         assert summary["arms"]["G"]["evaluation_episodes"] == 8192
-        assert panels[1][4] == panels[5][4] == (10801,200,1,1,0,1024)
+        assert panels[1][4] == panels[5][4] == (seed,200,1,1,0,1024)

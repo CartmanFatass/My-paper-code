@@ -1,0 +1,4 @@
+Command exited with non-zero status 1
+support_process_wall_s=1.61
+peak_rss_kib=381820
+exit_code=1

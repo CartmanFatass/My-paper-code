@@ -1,0 +1,379 @@
+{
+  "checked_at_utc": "2026-09-10T18:01:59.689855+00:00",
+  "timing": "post-deletion reconciliation; does not establish pre-deletion comparison conformance",
+  "method": "Read tar members in memory without extraction; compare whole archive SHA256 to transferred remote manifest, 24 evidence members to pre-deletion remote/local hashes and retained local bytes, and tracked files to frozen Git blob IDs.",
+  "source_sha": "6a8eacdad072c37d477aca95a9c871aba68cee78",
+  "archives": {
+    "worktree": {
+      "path": "temp/directions/vap_folr_core/exp/folr-public-lifecycle-timing-b02-20260910/folr-public-lifecycle-timing-b02-worktree.tar.gz",
+      "bytes": 21355901,
+      "sha256": "d76ca3acc5c84d51fe5ae3e0c5706781950bf3489cd05b2e6a4f2e300f48468c",
+      "manifest_match": true,
+      "member_count": 2686,
+      "regular_file_count": 2329,
+      "other_members": []
+    },
+    "supervisors": {
+      "path": "temp/directions/vap_folr_core/exp/folr-public-lifecycle-timing-b02-20260910/folr-public-lifecycle-timing-b02-supervisors.tar.gz",
+      "bytes": 6234,
+      "sha256": "ad71fbc382349d060ab233764027b2bee7eac135daaa4593c3b00e2ec75a52da",
+      "manifest_match": true,
+      "member_count": 24,
+      "regular_file_count": 21,
+      "other_members": []
+    }
+  },
+  "evidence_checks": [
+    {
+      "arm": "RETAIN",
+      "archive": "worktree",
+      "member": "temp/directions/vap_folr_core/exp/public_lifecycle_timing_b02_seed7805_retain/summary.json",
+      "bytes": 3979,
+      "sha256": "5faa292e29be3753a90e6cbd344d044a691a2c233243a96e1c8417c6d83ba5e8",
+      "pre_deletion_hash_match": true,
+      "retained_local_bytes_match": true
+    },
+    {
+      "arm": "RETAIN",
+      "archive": "worktree",
+      "member": "temp/directions/vap_folr_core/exp/public_lifecycle_timing_b02_seed7805_retain/final.pt",
+      "bytes": 4662779,
+      "sha256": "e33fb1dbe86c613a2cd0c121e969aef940e18ff7b85db8766fc0fc6823b8facd",
+      "pre_deletion_hash_match": true,
+      "retained_local_bytes_match": true
+    },
+    {
+      "arm": "RETAIN",
+      "archive": "worktree",
+      "member": "temp/directions/vap_folr_core/exp/public_lifecycle_timing_b02_seed7805_retain_memory.json",
+      "bytes": 504,
+      "sha256": "a14d4b9770d971c40e10e82a77542a0f94c1171af6afbcfaf77c11ae80461518",
+      "pre_deletion_hash_match": true,
+      "retained_local_bytes_match": true
+    },
+    {
+      "arm": "RETAIN",
+      "archive": "supervisors",
+      "member": "folr-public-lifecycle-timing-b02-retain-20260910/whole.time",
+      "bytes": 1320,
+      "sha256": "69cc6d036ff8bbed558949a5c4e06f595fc743594c1f34799ec54470294790f7",
+      "pre_deletion_hash_match": true,
+      "retained_local_bytes_match": true
+    },
+    {
+      "arm": "RETAIN",
+      "archive": "supervisors",
+      "member": "folr-public-lifecycle-timing-b02-retain-20260910/task.log",
+      "bytes": 5841,
+      "sha256": "0c826932fd9536461d9ef7dff8eb46983efae39ba41758c56253ac2a0cee918b",
+      "pre_deletion_hash_match": true,
+      "retained_local_bytes_match": true
+    },
+    {
+      "arm": "RETAIN",
+      "archive": "supervisors",
+      "member": "folr-public-lifecycle-timing-b02-retain-20260910/runner.sh",
+      "bytes": 1827,
+      "sha256": "5883913667628d9a1a7b476ce5b8c99c49f110e9f05f809b542c276c65911139",
+      "pre_deletion_hash_match": true,
+      "retained_local_bytes_match": true
+    },
+    {
+      "arm": "RETAIN",
+      "archive": "supervisors",
+      "member": "folr-public-lifecycle-timing-b02-retain-20260910/status",
+      "bytes": 9,
+      "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983",
+      "pre_deletion_hash_match": true,
+      "retained_local_bytes_match": true
+    },
+    {
+      "arm": "RETAIN",
+      "archive": "supervisors",
+      "member": "folr-public-lifecycle-timing-b02-retain-20260910/exit_code",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "pre_deletion_hash_match": true,
+      "retained_local_bytes_match": true
+    },
+    {
+      "arm": "EVENT",
+      "archive": "worktree",
+      "member": "temp/directions/vap_folr_core/exp/public_lifecycle_timing_b02_seed7805_event/summary.json",
+      "bytes": 4093,
+      "sha256": "391f6a13c5bae70bdd826c091604d302bd506fca5da3a4ee869ff04962922ac5",
+      "pre_deletion_hash_match": true,
+      "retained_local_bytes_match": true
+    },
+    {
+      "arm": "EVENT",
+      "archive": "worktree",
+      "member": "temp/directions/vap_folr_core/exp/public_lifecycle_timing_b02_seed7805_event/final.pt",
+      "bytes": 4662779,
+      "sha256": "f7f1f7e53658e7c3d39980689ab0a9a2e9a2aa93a6a14de49d89d37eef04917b",
+      "pre_deletion_hash_match": true,
+      "retained_local_bytes_match": true
+    },
+    {
+      "arm": "EVENT",
+      "archive": "worktree",
+      "member": "temp/directions/vap_folr_core/exp/public_lifecycle_timing_b02_seed7805_event_memory.json",
+      "bytes": 504,
+      "sha256": "4b501c352a54e6ee6b437f34e616e4ab80f498eb9e8b2bb4b3603e5b3d982bd6",
+      "pre_deletion_hash_match": true,
+      "retained_local_bytes_match": true
+    },
+    {
+      "arm": "EVENT",
+      "archive": "supervisors",
+      "member": "folr-public-lifecycle-timing-b02-event-20260910/whole.time",
+      "bytes": 1313,
+      "sha256": "5045b75202c120fda8c951c2bc95151da8e8583a1f29cdd3bebcdd073453bb23",
+      "pre_deletion_hash_match": true,
+      "retained_local_bytes_match": true
+    },
+    {
+      "arm": "EVENT",
+      "archive": "supervisors",
+      "member": "folr-public-lifecycle-timing-b02-event-20260910/task.log",
+      "bytes": 5946,
+      "sha256": "35c4247a6133cf31e8ca8245cf42aca5aca7bbe1e961ff8a0f5d6071ca3a5b5c",
+      "pre_deletion_hash_match": true,
+      "retained_local_bytes_match": true
+    },
+    {
+      "arm": "EVENT",
+      "archive": "supervisors",
+      "member": "folr-public-lifecycle-timing-b02-event-20260910/runner.sh",
+      "bytes": 1814,
+      "sha256": "322acdad7eda3dbc2433b0e72f234942d69d87f7bde583e8d4e604f07c0da37f",
+      "pre_deletion_hash_match": true,
+      "retained_local_bytes_match": true
+    },
+    {
+      "arm": "EVENT",
+      "archive": "supervisors",
+      "member": "folr-public-lifecycle-timing-b02-event-20260910/status",
+      "bytes": 9,
+      "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983",
+      "pre_deletion_hash_match": true,
+      "retained_local_bytes_match": true
+    },
+    {
+      "arm": "EVENT",
+      "archive": "supervisors",
+      "member": "folr-public-lifecycle-timing-b02-event-20260910/exit_code",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "pre_deletion_hash_match": true,
+      "retained_local_bytes_match": true
+    },
+    {
+      "arm": "RANDOM",
+      "archive": "worktree",
+      "member": "temp/directions/vap_folr_core/exp/public_lifecycle_timing_b02_seed7805_random/summary.json",
+      "bytes": 4061,
+      "sha256": "30ae0fb2e209c5650eca1df7d0ee18ad05978b4ae5e4d3d714353c3143ce4d1f",
+      "pre_deletion_hash_match": true,
+      "retained_local_bytes_match": true
+    },
+    {
+      "arm": "RANDOM",
+      "archive": "worktree",
+      "member": "temp/directions/vap_folr_core/exp/public_lifecycle_timing_b02_seed7805_random/final.pt",
+      "bytes": 4662779,
+      "sha256": "47d52cf4da6efb76f420bff0f8d41382c7db7a4f02bc7d5e30f2fd4589edef4c",
+      "pre_deletion_hash_match": true,
+      "retained_local_bytes_match": true
+    },
+    {
+      "arm": "RANDOM",
+      "archive": "worktree",
+      "member": "temp/directions/vap_folr_core/exp/public_lifecycle_timing_b02_seed7805_random_memory.json",
+      "bytes": 504,
+      "sha256": "458bd8dbfb11444654f711f3d7e55db35d5f1e53854efccf475dd379b1be2912",
+      "pre_deletion_hash_match": true,
+      "retained_local_bytes_match": true
+    },
+    {
+      "arm": "RANDOM",
+      "archive": "supervisors",
+      "member": "folr-public-lifecycle-timing-b02-random-20260910/whole.time",
+      "bytes": 1313,
+      "sha256": "efe0c4b468255079934f634d09cb3c5e9ab5ef1fc7fa6f30c31899c6abaea40b",
+      "pre_deletion_hash_match": true,
+      "retained_local_bytes_match": true
+    },
+    {
+      "arm": "RANDOM",
+      "archive": "supervisors",
+      "member": "folr-public-lifecycle-timing-b02-random-20260910/task.log",
+      "bytes": 5886,
+      "sha256": "6b49e6ce70cd63bd7869485895464e0691b8184836906bbe5eb99e46b1532f4d",
+      "pre_deletion_hash_match": true,
+      "retained_local_bytes_match": true
+    },
+    {
+      "arm": "RANDOM",
+      "archive": "supervisors",
+      "member": "folr-public-lifecycle-timing-b02-random-20260910/runner.sh",
+      "bytes": 1827,
+      "sha256": "5945e41a0926217ddaf4e6c91a8bf0fe09d4b61d4e1223a06a749cd0777b982b",
+      "pre_deletion_hash_match": true,
+      "retained_local_bytes_match": true
+    },
+    {
+      "arm": "RANDOM",
+      "archive": "supervisors",
+      "member": "folr-public-lifecycle-timing-b02-random-20260910/status",
+      "bytes": 9,
+      "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983",
+      "pre_deletion_hash_match": true,
+      "retained_local_bytes_match": true
+    },
+    {
+      "arm": "RANDOM",
+      "archive": "supervisors",
+      "member": "folr-public-lifecycle-timing-b02-random-20260910/exit_code",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "pre_deletion_hash_match": true,
+      "retained_local_bytes_match": true
+    }
+  ],
+  "frozen_source_check": {
+    "method": "git ls-tree -rz frozen SHA; SHA1 of blob header and archive bytes for every tracked blob",
+    "matched": 2312,
+    "mismatches": [],
+    "non_blob_entries": [],
+    "archive_extra_regular_files": [
+      {
+        "path": "scripts/__pycache__/hmasd_platform.cpython-310.pyc",
+        "bytes": 2841,
+        "sha256": "ee42ddc8d6ba18b360f95028db4a908875d85ff56d807f48e48913ec9632657d"
+      },
+      {
+        "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/__pycache__/native_env.cpython-310.pyc",
+        "bytes": 10845,
+        "sha256": "b34f6ff9ece8da19d66c3125ceb7f1c49fb12709c564e2c6c8eaa06f5292ee41"
+      },
+      {
+        "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/__pycache__/collection.cpython-310.pyc",
+        "bytes": 4181,
+        "sha256": "495cddc426fa5374192db49c89d24617a9373ecd5934f641565fa137c6c07ce2"
+      },
+      {
+        "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/__pycache__/learner.cpython-310.pyc",
+        "bytes": 2837,
+        "sha256": "6dc2a16ae863727d7d6dc0dcd8c7005c8e28c6685e13e0d798f165843f099b60"
+      },
+      {
+        "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/__pycache__/flex_qmix.cpython-310.pyc",
+        "bytes": 2520,
+        "sha256": "5234e00379191437b5ffeba085ddcdbe9341d780d1ba043069eec5ee13c8fff3"
+      },
+      {
+        "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/__pycache__/model.cpython-310.pyc",
+        "bytes": 2304,
+        "sha256": "914a55d4b8ee0201e32b28c4e0a9946ee691d1cd35516995c45d85d5e1da7cde"
+      },
+      {
+        "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/__pycache__/attention.cpython-310.pyc",
+        "bytes": 2021,
+        "sha256": "56a69fe1f1534ae1622e3aa7fdbdf1d21f616f7831523bbd4196ad537f6a8f16"
+      },
+      {
+        "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/__pycache__/environment.cpython-310.pyc",
+        "bytes": 2577,
+        "sha256": "2ade8669b0d4dedde583859a007fff0f1aa183c287e1008cdbdcb2fd7ee949fd"
+      },
+      {
+        "path": "temp/directions/vap_folr_core/exp/public_lifecycle_timing_b02_seed7805_event/summary.json",
+        "bytes": 4093,
+        "sha256": "391f6a13c5bae70bdd826c091604d302bd506fca5da3a4ee869ff04962922ac5"
+      },
+      {
+        "path": "temp/directions/vap_folr_core/exp/public_lifecycle_timing_b02_seed7805_event/final.pt",
+        "bytes": 4662779,
+        "sha256": "f7f1f7e53658e7c3d39980689ab0a9a2e9a2aa93a6a14de49d89d37eef04917b"
+      },
+      {
+        "path": "temp/directions/vap_folr_core/exp/public_lifecycle_timing_b02_seed7805_random/summary.json",
+        "bytes": 4061,
+        "sha256": "30ae0fb2e209c5650eca1df7d0ee18ad05978b4ae5e4d3d714353c3143ce4d1f"
+      },
+      {
+        "path": "temp/directions/vap_folr_core/exp/public_lifecycle_timing_b02_seed7805_random/final.pt",
+        "bytes": 4662779,
+        "sha256": "47d52cf4da6efb76f420bff0f8d41382c7db7a4f02bc7d5e30f2fd4589edef4c"
+      },
+      {
+        "path": "temp/directions/vap_folr_core/exp/public_lifecycle_timing_b02_seed7805_event_memory.json",
+        "bytes": 504,
+        "sha256": "4b501c352a54e6ee6b437f34e616e4ab80f498eb9e8b2bb4b3603e5b3d982bd6"
+      },
+      {
+        "path": "temp/directions/vap_folr_core/exp/public_lifecycle_timing_b02_seed7805_random_memory.json",
+        "bytes": 504,
+        "sha256": "458bd8dbfb11444654f711f3d7e55db35d5f1e53854efccf475dd379b1be2912"
+      },
+      {
+        "path": "temp/directions/vap_folr_core/exp/public_lifecycle_timing_b02_seed7805_retain_memory.json",
+        "bytes": 504,
+        "sha256": "a14d4b9770d971c40e10e82a77542a0f94c1171af6afbcfaf77c11ae80461518"
+      },
+      {
+        "path": "temp/directions/vap_folr_core/exp/public_lifecycle_timing_b02_seed7805_retain/summary.json",
+        "bytes": 3979,
+        "sha256": "5faa292e29be3753a90e6cbd344d044a691a2c233243a96e1c8417c6d83ba5e8"
+      },
+      {
+        "path": "temp/directions/vap_folr_core/exp/public_lifecycle_timing_b02_seed7805_retain/final.pt",
+        "bytes": 4662779,
+        "sha256": "e33fb1dbe86c613a2cd0c121e969aef940e18ff7b85db8766fc0fc6823b8facd"
+      }
+    ],
+    "comparison_scope": "All tracked files materialized under the configured cone sparse roots plus repository-root files. Other committed directories remain recoverable from frozen Git; filesystem metadata and completeness of unknown untracked originals are not established.",
+    "configured_sparse_roots": [
+      "environments",
+      "envs",
+      "experiments",
+      "ha_ctse_process",
+      "hmasd",
+      "manifold_hmasd",
+      "scripts",
+      "tests",
+      "tools"
+    ],
+    "missing_inside_configured_sparse_surface": [],
+    "omitted_outside_sparse_surface_count": 7813,
+    "omitted_outside_sparse_surface_by_top_directory": {
+      ".agents": 50,
+      ".claude": 15,
+      ".codex": 12,
+      "CodexBechmark": 91,
+      "baselines": 1,
+      "configs": 7,
+      "dist": 5,
+      "docs": 7593,
+      "examples": 2,
+      "gnn_hmasd": 2,
+      "logs": 24,
+      "ref": 1,
+      "requirements": 3,
+      "temp": 7
+    },
+    "initial_check_correction": "Initial assertion compared the sparse remote archive to every repository path and failed on absent paths outside configured sparse roots. All present tracked files matched; this corrected scope excludes only unmaterialized directories. A subsequent read-only report edit first failed under default Windows text decoding and passed with explicit UTF-8. No archive or result bytes were changed.",
+    "source_surface_status": "all configured sparse tracked files present and byte-matched"
+  },
+  "supervisor_additional_metadata": {
+    "folr-public-lifecycle-timing-b02-retain-20260910/start_time": "1789058977",
+    "folr-public-lifecycle-timing-b02-retain-20260910/pid": "3086548",
+    "folr-public-lifecycle-timing-b02-event-20260910/start_time": "1789060224",
+    "folr-public-lifecycle-timing-b02-event-20260910/pid": "3088772",
+    "folr-public-lifecycle-timing-b02-random-20260910/start_time": "1789061327",
+    "folr-public-lifecycle-timing-b02-random-20260910/pid": "3090888"
+  },
+  "pre_deletion_inventory_limitation": "The operator reported a clean tracked worktree and omitted the required tar-to-original comparison before removing the originals. Archived extras are recorded, but omitted unknown untracked originals cannot be independently ruled out after deletion.",
+  "wall_seconds": 0.49491230001149233
+}

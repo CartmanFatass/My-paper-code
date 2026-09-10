@@ -1,0 +1,35 @@
+{
+  "request_id": "2026-09-10-scdmp-post-b02-family-convergence-01",
+  "workflow_node": "em_convergence",
+  "conversation_binding_key": "em:semigroup_consistent_duration_model_policy:convergence",
+  "direction_id": "semigroup_consistent_duration_model_policy",
+  "direction_ids": [
+    "semigroup_consistent_duration_model_policy"
+  ],
+  "conversation_id": "6aa1834e-c600-83e8-b20e-630f175aecf3",
+  "provider_url": "https://chatgpt.com/c/6aa1834e-c600-83e8-b20e-630f175aecf3",
+  "tab_id": "1",
+  "visible_model": "6 Pro",
+  "underlying_model": "Latest",
+  "thinking_effort": "Pro, 5 of 5.",
+  "source_mode": "paste",
+  "prompt_sha256": "ab3f09e3cba4ab79c281fdb134775b0b4598f97d0db510239e2e6753623aabec",
+  "response_sha256": "bf18136a21f1525ec515a3b9a41c98bd35baaa8ffeb736c0feac89749eb844dd",
+  "user_message_id": "today-14:55|TASK.md@476e757cb1f0cbf2ad252ee3158b95eee216f29a|current-round-user-node",
+  "assistant_message_id": "today-14:55|Complete response 1eef68f018b16470e870876f1c8acb985409f785|current-round-assistant-node",
+  "natural_completion": "Thought 8m 22s; complete response and delivery comment links; no active generation",
+  "archive_paths": {
+    "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\semigroup_consistent_duration_model_policy\\20260910_b02\\PROMPT_BODY.md",
+    "response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\semigroup_consistent_duration_model_policy\\20260910_b02\\RESPONSE.md",
+    "packet_manifest": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\semigroup_consistent_duration_model_policy\\20260910_b02\\PACKET_MANIFEST.json",
+    "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\semigroup_consistent_duration_model_policy\\20260910_b02\\TRANSPORT_FACTS.json"
+  },
+  "return_receipt": {
+    "status": "SENT",
+    "attempt_count": 1,
+    "delivery_status": "accepted",
+    "message_key": "2026-09-10-scdmp-post-b02-family-convergence-01|semigroup_consistent_duration_model_policy|6aa1834e-c600-83e8-b20e-630f175aecf3|bf18136a21f1525ec515a3b9a41c98bd35baaa8ffeb736c0feac89749eb844dd",
+    "sent_at": "2026-09-10T22:15:05Z",
+    "destination_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267"
+  }
+}

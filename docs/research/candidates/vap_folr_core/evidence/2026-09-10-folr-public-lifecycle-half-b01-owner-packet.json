@@ -1,0 +1,39 @@
+{
+  "question": "接受原Convergence选择，执行一次固定半衰减与保留状态的新训练比较吗？",
+  "changes_if_approved": [
+    {
+      "target": "FOLR-PUBLIC-LIFECYCLE-HALF-B01",
+      "from": "半衰减已被Pro选为下一问题，尚无新计算分配或性能结果",
+      "to": "新卡固定RETAIN/HALF_EVENT、7807/107807、每臂5000训练与128最终评价，恰好两次完整调用"
+    }
+  ],
+  "if_refused": "保留Pro科学决定和所有历史结果；按实际异步修改意见处理新卡，不自动增加控制臂或更改已冻结结果。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260910_timing_family_convergence/archive/RESPONSE.md",
+      "quote": "Select the proposed **fixed 0.5 survivor-state attenuation versus RETAIN comparison** as the next bounded real-learning question.",
+      "why": "完整原节点已选择一个具体有界的新问题，而非继续原样清空或扫系数。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_TIMING_FAMILY_CONVERGENCE_INTAKE_20260910.md",
+      "quote": "Strongest contradiction remains B03 EVENT−RETAIN −5.44609375, following B02's −0.590703125 nonrecurrence within MEI.",
+      "why": "半衰减没有自己的性能支持，过去清空的收益不稳定，保留状态是有效基线。"
+    }
+  ],
+  "uncertainty": [
+    "固定.5改变循环网络输入和学习路径，不保证保留有用记忆。",
+    "只检验相对RETAIN的单训练实例收益，不比较新的RANDOM或完整EVENT，也不证明机制因果或稳定优势。",
+    "绝对MEI仍为1；当前同信息调优余量缺失但不是启动条件。",
+    "新臂运行时间未测；764.25秒是旧EVENT的规划代理。"
+  ],
+  "cost": {
+    "compute": "新分配205120原生步、9938次RMSprop、256次最终评价；每完整臂1800秒、整对3600秒，另≤300秒支持。旧双臂1519.65秒仅为规划点。",
+    "owner_time": "可以异步干预；不等待回复。",
+    "reversibility": "costly",
+    "waits_on_this": "nothing: implementation and focused acceptance continue under existing delegation"
+  },
+  "verdict_text": "Execute RETAIN then HALF_EVENT, one accepted invocation each, at the fixed 7807/107807 training/evaluation seeds and card budget. No retry, replacement, extra arm, coefficient sweep or evaluation top-up is allocated.",
+  "source": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_HALF_B01_SCIENCE_CARD_20260910.md"
+}

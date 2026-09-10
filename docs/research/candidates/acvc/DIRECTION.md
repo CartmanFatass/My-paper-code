@@ -257,7 +257,7 @@ or history necessity. Earlier learned T/G losses to F, old-host R02/R03 and abse
 native headroom remain intact. This is a fixed-package reuse signal, not adaptive superiority.
 
 A new independently trained DENSE base with the same C/F/dwell comparison would discriminate
-whether the signal extends beyond the selected old assets. That follow-up is scientifically
+whether the signal extends beyond the selected old assets. At the E01 intake it was
 worth considering but **unselected and unallocated**; E01's named exception does not extend
 itself to another zero-update object. No successor, diagnostic prelude or T/G restart follows.
 See the [E01 card](ACVC_FIXED_RETRACE_REUSE_E01_SCIENCE_CARD_20260909.md),
@@ -265,7 +265,45 @@ See the [E01 card](ACVC_FIXED_RETRACE_REUSE_E01_SCIENCE_CARD_20260909.md),
 [scientific intake](ACVC_FIXED_RETRACE_REUSE_E01_INTAKE_20260909.md). Complete charged work
 is 89.35 s including preflight/startup and all support; precise runner wall is 79.46 s.
 
+### Fresh DENSE reuse B01 — accepted 2026-09-10
+
+The prospectively selected DENSE/8921 fit completed 512 native training episodes and
+1,024 Adam/backward calls, then the fixed final checkpoint received C/F/dwell panels of
+64 prespecified initial worlds each. Actor and critic both moved under the unchanged
+learner. This is one new training realization; the retained 8201/8202 results remain
+separate development evidence and are not pooled into a three-fit population claim.
+
+F−C is **+0.1229328560 J** (conditional SE .0061216915); F−dwell is
+**+0.0877164686 J** (SE .0071186843). Both are UP under the unchanged .01 J rule.
+Dwell−C is also UP, +.0352163875 J. Thus the fixed package's mean advantage extends
+beyond the two selected retained assets to this new realized fit. The strongest new
+support is the extra margin over the simpler dwell package. The claim remains conditional
+on this one endpoint and its prescribed worlds/action streams; a prospectively chosen
+fit does not erase outcome-informed choice of the recipe and host.
+
+The strongest direct contradiction to a universal advantage is F−dwell's five adverse
+worlds, with minimum −.0448863449 J. F−C has no adverse world in this panel, which does
+not make all-world positivity a requirement or a population conclusion. Dwell's own
+gain preserves the motion-suppression explanation. F's 7,661 interventions and dwell's
+4,533 occur on their respective histories, commands and joint trajectories; the remaining
+margin does not isolate retrace causality, history necessity or matched-dose effects.
+All 704 training/evaluation rows and 1,024 update records are retained.
+
+The next useful discriminator, if separately selected and allocated, is the same endpoint
+comparison on another prospectively chosen independent fit, to assess variation between
+learners. No successor is selected here. P80's learned T/G end, older R02/R03 limits,
+absent tuned native headroom, recasts and formal UAV-validation status remain unchanged.
+See the [B01 card](ACVC_FRESH_DENSE_REUSE_B01_SCIENCE_CARD_20260910.md),
+[E0 evidence](ACVC_FRESH_DENSE_REUSE_B01_RESULT_EVIDENCE_20260910.md) and
+[intake](ACVC_FRESH_DENSE_REUSE_B01_INTAKE_20260910.md), including its separate
+budget/accounting limitation.
+
 ## Evidence set
+
+- `docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_SCIENCE_CARD_20260910.md`
+- `docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_RESULT_EVIDENCE_20260910.md`
+- `docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_INTAKE_20260910.md`
+- `docs/research/candidates/acvc/fresh_dense_reuse_b01_20260910/dm_analysis.json`
 
 - `docs/research/candidates/acvc/ACVC_FIXED_RETRACE_REUSE_E01_RESULT_EVIDENCE_20260909.md`
 - `docs/research/candidates/acvc/ACVC_FIXED_RETRACE_REUSE_E01_INTAKE_20260909.md`
