@@ -570,3 +570,14 @@ matched pair at the same endpoint, retaining every outcome; it can measure addit
 training variation but cannot alone establish competence against the reference.
 Current allocation closes after preserved cleanup; no successor/card/budget, family
 change, C promotion or Portfolio disposition follows automatically.
+
+## Third independent same1000 root selected as a close call — 2026-09-10
+
+`RCLE_B03_FRESH1000_S23_SCIENCE_CARD_20260910.md` selects one fresh matched seed23
+pair at the unchanged1000 endpoint under object-tier delegation. Two completed roots
+support a large whole-law native signal; another independent root can expose training
+variation or contradiction. Ending unchanged-law spending is the close runner-up because
+reference/recovery deficits persist and further recurrence cannot establish competence.
+Seed21 and recovered22 remain the two prior units; the failed/repeated22 exposure and
+recovery adaptivity are retained. This finite next discriminator changes no family,
+lifecycle, priority or class and grants no automatic subsequent pair.

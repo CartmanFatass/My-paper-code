@@ -1,0 +1,80 @@
+{
+  "id": "20260910-rcle-004",
+  "created": "2026-09-10T14:26:01-07:00",
+  "direction": "roster_consistent_latent_exploration",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "RCLE：冻结第三个独立same1000训练根23",
+  "context": "同一W1/W100整体学习规律与四套面板；多智能体信用分配。保留两根证据、补跑适应性和参考缺口。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "按现有授权执行一次配对训练及参考，完整上限1500秒。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "在安全边界结束此卡后续执行，保存已发生结果。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "应用具体异步修订；不自动变更冻结规律或重跑。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "新增独立根观察训练变化；以近似相当的停止追加计算为备选。",
+  "evidence": [
+    "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B03_FRESH1000_S23_SCIENCE_CARD_20260910.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-10.md#L30",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "保留已自动冻结的seed23科学卡：同一1000次更新规律，一次新的独立配对训练，所有结果都报告。",
+    "changes_if_approved": [
+      {
+        "target": "RCLE B03 fresh1000 seed23 科学卡",
+        "from": "两个完成的1000次训练根；种子22另有失败与补全开销",
+        "to": "同一规律下新增配对种子23，四套终点面板，完整上限1500秒"
+      }
+    ],
+    "if_refused": "在下一个安全边界执行异步修订，保留已经发生的全部计算和结果；不自动换种子或重跑。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B03_FRESH1000_S23_SCIENCE_CARD_20260910.md",
+        "quote": "A third fresh root can expose training variation or a sign\ncontradiction that extra evaluation of these fitted policies cannot.",
+        "why": "新的训练结果可以检验变异或反例；既有两个根不能代替新根。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B03_FRESH1000_S23_SCIENCE_CARD_20260910.md",
+        "quote": "reference U is still better in every cell (primary gaps\n.0419108073 and .0568257650), and2035/2048 and2037/2048 W100 recovery scores are40.",
+        "why": "服务参考仍更好，恢复失败仍多；第三个正结果也不解决能力缺口。"
+      },
+      {
+        "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B03_FRESH1000_S23_SCIENCE_CARD_20260910.md",
+        "quote": "The current same1000 scoped charge is2465.65s for two completed roots, including the\nfailed attempt.",
+        "why": "后续同一问题的边际价值降低，结束追加计算是接近的备选。"
+      }
+    ],
+    "uncertainty": [
+      "种子21/22支持较大的局部服务收益，选择第三根仍受既有结果影响，不是确认性研究。",
+      "补跑22只完成原来的根，不能计作第三个独立结果；旧失败不被抹去。",
+      "整个归一化梯度规律的比较不能归因于单个部件，也没有已调优基线的头部空间记录。"
+    ],
+    "cost": {
+      "compute": "新增136192回合、8716288原始tick、2000次更新；两臂/参考600/600/30秒，完整上限1500秒；已有同形运行加保守支持预测907.74秒。",
+      "owner_time": "可异步审阅，无需逐项批准。",
+      "reversibility": "costly",
+      "waits_on_this": "nothing；不等待兄弟方向或所有者回复"
+    },
+    "verdict_text": "Recommend and select (a), using unused B03 master23.",
+    "source": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B03_FRESH1000_S23_SCIENCE_CARD_20260910.md"
+  },
+  "starred": false
+}
