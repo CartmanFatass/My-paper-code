@@ -181,3 +181,17 @@ same direction checkout, serialize its source/index ownership, and intake every
 returned outcome under the new card. Root receives commits and accepted-handle facts
 for its integration/observation responsibilities; it does not need to reselect this
 scientific question. No scientific invocation had occurred when this intake was written.
+
+### Operational ownership correction before implementation
+
+At 2026-09-10 21:48 UTC the existing executor identified that the initial new-batch
+handoff used the older CM routing. Current AGENTS §1 / ROOT_OPERATIONS, under
+OWNER_DIRECT 2026-09-10, prohibit new full CM assignments and put engineering ownership
+with the DM. This was detected at clean ade8a1c7 before any source edit, test or launch.
+Options: (a) apply the current consolidation, using the available executor only for a
+bounded source/tests deliverable and retaining review, index/publication, execution and
+acceptance directly here; (b) retain the superseded full-CM handoff. Recommend/select
+**(a)**. **Owner-delegated decision (unattended, 2026-09-03 instruction): (a).** Root
+was notified of the factual correction. The card's operational ownership paragraph is
+corrected; its question, treatment, RNG, budget and reading rule are unchanged. This
+is a technical application correction, not a scientific Pro conflict or new allocation.

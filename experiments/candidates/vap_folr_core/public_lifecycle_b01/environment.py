@@ -59,4 +59,5 @@ def count_transition(env, arm):
         'survivor_opportunities': opportunities,
         'eligible_survivor_opportunities': eligible,
         'survivor_resets': opportunities if arm == 'EVENT' else 0,
+        'survivor_attenuations': opportunities if arm == 'HALF_EVENT' else 0,
     }

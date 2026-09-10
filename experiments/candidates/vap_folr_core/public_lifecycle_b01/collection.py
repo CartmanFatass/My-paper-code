@@ -24,7 +24,7 @@ def collect(env, actor, epsilon, mask_rng=None):
     previous = np.zeros(5, dtype=np.int64)
     observations, actions, rewards, terminals = [], [], [], []
     counts = dict(births=0, departures=0, survivor_opportunities=0,
-                  eligible_survivor_opportunities=0, survivor_resets=0)
+                  eligible_survivor_opportunities=0, survivor_resets=0, survivor_attenuations=0)
     for t in range(21):
         obs = env.observation(previous)
         if actor.arm == 'RANDOM':
@@ -78,3 +78,10 @@ def timing_primary(retain, event, random):
         contrasts[name] = dict(difference=d, rule=first + '_ABOVE_MEI' if d >= 1 else
                                second + '_ABOVE_MEI' if d <= -1 else 'WITHIN_MEI')
     return dict(J_RETAIN=jr, J_EVENT=je, J_RANDOM=jm, contrasts=contrasts, rule=rule)
+
+
+def half_primary(retain, half_event):
+    jr, jh = float(np.mean(retain)), float(np.mean(half_event))
+    d = jh - jr
+    rule = 'HALF_EVENT_ABOVE_MEI' if d >= 1 else 'RETAIN_ABOVE_MEI' if d <= -1 else 'WITHIN_MEI'
+    return dict(J_RETAIN=jr, J_HALF_EVENT=jh, d_HR=d, rule=rule)

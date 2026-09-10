@@ -86,11 +86,17 @@ def test_initial_birth_previous_action_and_terminal_counts():
     env.t = 19
     assert count_transition(env, 'EVENT')['survivor_resets'] == 2
     assert count_transition(env, 'RETAIN')['survivor_resets'] == 0
+    assert count_transition(env, 'HALF_EVENT')['survivor_attenuations'] == 2
+    assert count_transition(env, 'HALF_EVENT')['survivor_resets'] == 0
+    assert count_transition(env, 'RETAIN')['survivor_attenuations'] == 0
     env.event = False
     assert count_transition(env, 'RANDOM')['eligible_survivor_opportunities'] == 2
     assert count_transition(env, 'RANDOM')['survivor_opportunities'] == 0
+    assert count_transition(env, 'HALF_EVENT')['survivor_attenuations'] == 0
+    env.event = True
     env.t = 20
-    assert count_transition(env, 'EVENT') == dict(births=1, departures=1, survivor_opportunities=0, eligible_survivor_opportunities=0, survivor_resets=0)
+    assert count_transition(env, 'EVENT') == dict(births=1, departures=1, survivor_opportunities=0, eligible_survivor_opportunities=0, survivor_resets=0, survivor_attenuations=0)
+    assert count_transition(env, 'HALF_EVENT')['survivor_attenuations'] == 0
 
 
 def test_random_collection_schedule_replay_and_rng_isolation():
@@ -193,7 +199,7 @@ def synthetic_batch():
     return batch
 
 
-@pytest.mark.parametrize('arm', ['RETAIN', 'EVENT', 'RANDOM'])
+@pytest.mark.parametrize('arm', ['RETAIN', 'EVENT', 'RANDOM', 'HALF_EVENT'])
 def test_actor_input_reset_timing_and_replay_parity(arm):
     from experiments.candidates.vap_folr_core.public_lifecycle_b01.model import Actor
     torch.manual_seed(13)
@@ -225,14 +231,43 @@ def test_actor_input_reset_timing_and_replay_parity(arm):
     h.remove()
     got = actual_inputs[0].reshape(2, 5, 64)
     assert not got[:, 0].any() and not got[:, 4].any()
-    assert bool(got[:, 1:4].any()) == (arm == 'RETAIN')
+    multiplier = 1 if arm == 'RETAIN' else 0.5 if arm == 'HALF_EVENT' else 0
+    torch.testing.assert_close(got[:, 1:4], torch.full_like(got[:, 1:4], multiplier))
 
 
-def test_real_learner_synthetic_gradient_targets_checkpoint(tmp_path):
+def test_half_event_incoming_state_and_gradient_before_gru():
+    from experiments.candidates.vap_folr_core.public_lifecycle_b01.model import Actor
+    actor = Actor('HALF_EVENT')
+    batch = synthetic_batch()
+    for t in [0, 7, 8, 20]:
+        current = {k: v[:, t:t+1] for k, v in batch.items()
+                   if k not in ['actions', 'reward', 'terminated']}
+        if t == 20:
+            current['event'] = torch.ones(2, 1, dtype=torch.bool)
+        incoming = torch.linspace(-2, 2, 2*5*64).reshape(2, 5, 64).requires_grad_()
+        captured = []
+        hook = actor.rnn.register_forward_pre_hook(lambda module, inputs: captured.append(inputs))
+        _, hs = actor(current, incoming)
+        hook.remove()
+        carry = current['continuation'][:, 0].float()
+        scale = carry * torch.where(current['event'][:, 0, None], 0.5, 1.0)
+        x, actual_h = captured[0]
+        torch.testing.assert_close(actual_h.reshape_as(incoming), incoming*scale[..., None])
+        actual_h.sum().backward()
+        torch.testing.assert_close(incoming.grad, scale[..., None].expand_as(incoming))
+        # Output equals the GRU processing the current input, not a post-GRU rescale.
+        expected_h = actor.rnn(x, actual_h).reshape(2, 1, 5, 64)
+        expected_h = expected_h.masked_fill(current['entity_mask'][..., None], 0)
+        torch.testing.assert_close(hs, expected_h)
+
+
+@pytest.mark.parametrize('arm', ['EVENT', 'HALF_EVENT'])
+def test_real_learner_synthetic_gradient_targets_checkpoint(tmp_path, arm):
     from experiments.candidates.vap_folr_core.public_lifecycle_b01.learner import Learner
     torch.set_num_threads(1)
     torch.manual_seed(91)
-    learner = Learner('EVENT')
+    learner = Learner(arm)
+    assert learner.target_actor.arm == arm
     batch = synthetic_batch()
     before = [p.detach().clone() for p in learner.actor.parameters()]
     learner.update(batch, 32)
@@ -271,7 +306,7 @@ def test_primary_rules_replay_rng_and_publication(tmp_path, monkeypatch):
     assert json.loads((tmp_path/'summary.json').read_text())['evaluation_returns'] == [1.25]*32
 
 
-@pytest.mark.parametrize('arm', ['RETAIN', 'EVENT', 'RANDOM'])
+@pytest.mark.parametrize('arm', ['RETAIN', 'EVENT', 'RANDOM', 'HALF_EVENT'])
 def test_runner_seed_routing_with_standins(tmp_path, monkeypatch, arm):
     # Exercise real argparse/main/publication; replace every scientific entry point.
     import random
@@ -292,7 +327,7 @@ def test_runner_seed_routing_with_standins(tmp_path, monkeypatch, arm):
 
     def collect(env, actor, epsilon, mask_rng):
         masks.append(mask_rng)
-        return {}, 1.25, {}
+        return {}, 1.25, dict(survivor_attenuations=3 if arm == 'HALF_EVENT' else 0)
 
     def learner(arm):
         calls.append(('learner', arm))
@@ -313,9 +348,11 @@ def test_runner_seed_routing_with_standins(tmp_path, monkeypatch, arm):
     spec.loader.exec_module(runner)
     monkeypatch.setattr(runner.signal, 'signal', lambda *args: None)
     argv = [str(path), '--arm', arm, '--launch-sha', 'fixture', '--out', str(tmp_path)]
+    if arm in ['RETAIN', 'HALF_EVENT']:
+        argv += ['--seed', '7807', '--evaluation-seed', '107807']
     monkeypatch.setattr(sys, 'argv', argv)
     runner.main()
-    train, final = 7805, 107805
+    train, final = (7807, 107807) if arm in ['RETAIN', 'HALF_EVENT'] else (7805, 107805)
     assert calls == [('python', train), ('numpy', train), ('torch', train),
                      ('learner', arm), ('environment', train),
                      ('python', final), ('numpy', final), ('torch', final),
@@ -326,6 +363,8 @@ def test_runner_seed_routing_with_standins(tmp_path, monkeypatch, arm):
     assert summary['status'] == 'complete' and summary['evaluation_returns'] == [1.25]*128
     assert updates == list(range(32, 5001)) and evaluations == [4969]
     assert len(masks) == 5128
+    assert summary['training_events']['survivor_attenuations'] == (15000 if arm == 'HALF_EVENT' else 0)
+    assert summary['evaluation_events']['survivor_attenuations'] == (384 if arm == 'HALF_EVENT' else 0)
     if arm == 'RANDOM':
         assert all(x is masks[0] for x in masks[:5000])
         assert all(x is masks[5000] for x in masks[5000:])
@@ -338,3 +377,13 @@ def test_runner_seed_routing_with_standins(tmp_path, monkeypatch, arm):
     else:
         assert all(x is None for x in masks)
         assert 'mask_rng' not in summary
+
+
+@pytest.mark.parametrize('d,rule', [(1, 'HALF_EVENT_ABOVE_MEI'),
+                                   (-1, 'RETAIN_ABOVE_MEI'),
+                                   (.999, 'WITHIN_MEI'), (-.999, 'WITHIN_MEI')])
+def test_half_primary_inclusive_thresholds(d, rule):
+    from experiments.candidates.vap_folr_core.public_lifecycle_b01.collection import half_primary
+    result = half_primary([0]*128, [d]*128)
+    assert result['rule'] == rule
+    assert result['d_HR'] == pytest.approx(d)
