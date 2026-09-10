@@ -217,10 +217,10 @@ def mark_answered(root: Path, item_id: str) -> Path:
     return p
 
 
-def pending_instructions(root: Path, days: int = 2) -> list[dict]:
+def pending_instructions(root: Path) -> list[dict]:
     """Replies whose item is not yet marked answered in the item file: what the loop must apply."""
     out = []
-    for item in load_items(root, days=days):
+    for item in load_items(root, days=None):
         reply = item.get("reply")
         if not reply:
             continue
@@ -313,10 +313,14 @@ def _atomic_write(path: Path, text: str) -> None:
 def instruction_for(item: dict, reply: dict) -> str:
     choice, auto = reply.get("choice"), item.get("auto_applied")
     kind = item.get("kind", "decision")
+    option_keys = {o.get("key") for o in item.get("options", [])}
+    pro_override_options = {"keep", "refuse", "amend"}
     if choice == "needs-context":
         return ("owner cannot rule on this context; re-file as a new item with a complete decision packet "
                 "(owner/README.md, packet section), then mark this one answered")
     if choice == "agree":
+        if kind == "portfolio" and option_keys == pro_override_options:
+            return "none (seen; the formed Pro disposition remains; no new decision or launch authorization)"
         return "none (seen; delegated decision stands)" if auto else "none (seen)"
     if kind == "decision" or kind in ("critic-dissent", "close-call"):
         if auto and choice == auto:
@@ -334,8 +338,28 @@ def instruction_for(item: dict, reply: dict) -> str:
     if kind == "second-recast":
         return "PARK at the next clean boundary (Portfolio record required)" if choice == "park" else "continue at lowest sequencing priority"
     if kind == "portfolio":
-        return {"ratify": "ratified; integrate into PORTFOLIO.md", "refuse": "refused; do not apply",
-                "amend": "amend per the comment and resubmit"}.get(choice, f"apply ({choice})")
+        # Items carrying the former ratify option retain their historical approval semantics.
+        if "ratify" in option_keys:
+            return {"ratify": "ratified; integrate into PORTFOLIO.md", "refuse": "refused; do not apply",
+                    "amend": "amend per the comment and resubmit"}.get(choice, f"apply ({choice})")
+        # The new procedural options review a Pro disposition that is already final under the
+        # recorded authority. They never manufacture a new decision or authorize a launch.
+        if option_keys == pro_override_options:
+            if choice == "keep":
+                return "none (retain the formed Pro disposition; no new decision or launch authorization)"
+            if choice == "refuse":
+                return ("override the Pro disposition at the next clean boundary; preserve already executed "
+                        "effects and history; no implicit rerun or reversal")
+            if choice == "amend":
+                return ("apply the owner's amendment at the next clean boundary; preserve already executed "
+                        "effects and history; no implicit rerun or reversal")
+        # Custom Portfolio options can be substantive choices, so report their actual relation
+        # to the executed choice instead of treating their names as procedural controls.
+        if auto and choice == auto:
+            return f"none (owner confirms the recorded ({auto}))"
+        if auto:
+            return f"apply ({choice}) at the next clean boundary; supersede the recorded ({auto})"
+        return f"apply ({choice}) at the next clean boundary"
     return f"apply ({choice})"
 
 

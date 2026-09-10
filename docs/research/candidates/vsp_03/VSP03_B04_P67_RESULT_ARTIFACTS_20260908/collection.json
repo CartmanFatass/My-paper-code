@@ -1,0 +1,122 @@
+{
+  "collected_unix_s": 1788922132.737725,
+  "files": {
+    "/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b04_seed6_p67_20260908/summary.json": {
+      "sha256": "1182980dbb169b0b0bcbac8b5054026f83bc9a5e2acddaf6caff57158d49ab8c",
+      "size": 7820,
+      "local_path": "science/summary.json"
+    },
+    "/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b04_seed6_p67_20260908/paired_differences.json": {
+      "sha256": "eef2c8b719f276be6432099d11b70645409ae60f6fb2be19f0a9e06a2a23212d",
+      "size": 226177,
+      "local_path": "science/paired_differences.json"
+    },
+    "/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b04_seed6_p67_20260908/R.json": {
+      "sha256": "849112e844648ff2cd8d54e5295b73e85a863f8f6f609dfbf2d049961ef463f9",
+      "size": 646283,
+      "local_path": "science/R.json"
+    },
+    "/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b04_seed6_p67_20260908/G_curve.jsonl": {
+      "sha256": "0ef43836a753760648b54fcf604d61d9ae693da4688942211c21b9fe3cbacb61",
+      "size": 70870,
+      "local_path": "science/G_curve.jsonl"
+    },
+    "/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b04_seed6_p67_20260908/G_greedy.json": {
+      "sha256": "5ca66d53cc8c9ec14d83a767929d998fd0e83d6e694f4f8360e0701256de6f91",
+      "size": 646243,
+      "local_path": "science/G_greedy.json"
+    },
+    "/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b04_seed6_p67_20260908/R0.json": {
+      "sha256": "48e16c63767a5a5bd036540659e30fb364e2df801f790a505abd8ec57650556d",
+      "size": 646270,
+      "local_path": "science/R0.json"
+    },
+    "/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b04_seed6_p67_20260908/G_final.pt": {
+      "sha256": "50eb6452e50b49f96d0f049b44164a3c972b9bf7745e21b2af64ec62ffdc0bef",
+      "size": 12354,
+      "local_path": "science/G_final.pt"
+    },
+    "/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b04_seed6_p67_20260908/G_stochastic.json": {
+      "sha256": "d330c14f16dfba0edfaa1c066a1089d858b1faf7aa6c3f7c511b12a1d76fc306",
+      "size": 645765,
+      "local_path": "science/G_stochastic.json"
+    },
+    "/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b04_seed6_p67_20260908_admission.json": {
+      "sha256": "05c4bbbe2236058ca2b9eae804f2c5bf60a42ea36d099fb5ed14313c86890b30",
+      "size": 504,
+      "local_path": "b04_seed6_p67_20260908_admission.json"
+    },
+    "/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b04_seed6_p67_20260908_terminal.json": {
+      "sha256": "bab375e2b1f8978a46d3ce37a750b9d83b1f3695c650d7354428cb4f2c56481d",
+      "size": 2012,
+      "local_path": "b04_seed6_p67_20260908_terminal.json"
+    },
+    "/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b04_seed6_p67_20260908_terminal.payload.json": {
+      "sha256": "27ca0c672716d7fc6e7a9ee618f90259c97fb983b096b810494126612bce25ee",
+      "size": 1078,
+      "local_path": "b04_seed6_p67_20260908_terminal.payload.json"
+    },
+    "/home/wu/.agent-tasks/vsp03-b04-p67-20260908/task.log": {
+      "sha256": "dbe4b63c3aeb621626e3a0b4188ec09c88eb3522249ac8de3fc434d36106c6e4",
+      "size": 2275,
+      "local_path": "supervisor_task.log"
+    },
+    "/home/wu/.agent-tasks/vsp03-b04-p67-20260908/start_time": {
+      "sha256": "ca13daefb77898b324d0494731a2a52e96ab4050b6acba1bd76e50908e81b0c7",
+      "size": 11,
+      "local_path": "supervisor_start_time"
+    },
+    "/home/wu/.agent-tasks/vsp03-b04-p67-20260908/exit_code": {
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "size": 2,
+      "local_path": "supervisor_exit_code"
+    },
+    "/home/wu/.agent-tasks/vsp03-b04-p67-20260908/status": {
+      "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983",
+      "size": 9,
+      "local_path": "supervisor_status"
+    },
+    "/home/wu/.agent-tasks/vsp03-b04-p67-20260908/runner.sh": {
+      "sha256": "abfe3c28ba95ce1cacb6e17c05455fc6f4b3a42c0ca0ca9500639271b6dd3c12",
+      "size": 1642,
+      "local_path": "supervisor_runner.sh"
+    },
+    "/home/wu/.agent-tasks/vsp03-b04-p67-20260908/pid": {
+      "sha256": "153996a648b468d727c6afa05b68b053725eec83e433b472ba0790d357d95353",
+      "size": 8,
+      "local_path": "supervisor_pid"
+    }
+  },
+  "manager": {
+    "argv": [
+      "systemctl",
+      "--user",
+      "show",
+      "vsp03-b04-p67-20260908.service"
+    ],
+    "exit_code": 0,
+    "stdout": "ExitType=main\nRestart=no\nRestartMode=normal\nNotifyAccess=none\nRestartUSec=100ms\nRestartSteps=0\nRestartMaxDelayUSec=infinity\nRestartUSecNext=100ms\nTimeoutStartUSec=1min 30s\nTimeoutStopUSec=1min 30s\nTimeoutAbortUSec=1min 30s\nTimeoutStartFailureMode=terminate\nTimeoutStopFailureMode=terminate\nRuntimeMaxUSec=infinity\nRuntimeRandomizedExtraUSec=0\nWatchdogUSec=infinity\nWatchdogTimestampMonotonic=0\nRootDirectoryStartOnly=no\nRemainAfterExit=no\nGuessMainPID=yes\nMainPID=0\nControlPID=0\nFileDescriptorStoreMax=0\nNFileDescriptorStore=0\nFileDescriptorStorePreserve=restart\nStatusErrno=0\nResult=success\nReloadResult=success\nCleanResult=success\nUID=[not set]\nGID=[not set]\nNRestarts=0\nReloadSignal=1\nExecMainStartTimestampMonotonic=0\nExecMainExitTimestampMonotonic=0\nExecMainPID=0\nExecMainCode=0\nExecMainStatus=0\nControlGroupId=0\nMemoryCurrent=[not set]\nMemoryPeak=[not set]\nMemorySwapCurrent=[not set]\nMemorySwapPeak=[not set]\nMemoryZSwapCurrent=[not set]\nMemoryAvailable=[not set]\nCPUUsageNSec=[not set]\nTasksCurrent=[not set]\nIPIngressBytes=[no data]\nIPIngressPackets=[no data]\nIPEgressBytes=[no data]\nIPEgressPackets=[no data]\nIOReadBytes=[not set]\nIOReadOperations=[not set]\nIOWriteBytes=[not set]\nIOWriteOperations=[not set]\nDelegate=no\nCPUAccounting=yes\nCPUWeight=[not set]\nStartupCPUWeight=[not set]\nCPUShares=[not set]\nStartupCPUShares=[not set]\nCPUQuotaPerSecUSec=infinity\nCPUQuotaPeriodUSec=infinity\nIOAccounting=no\nIOWeight=[not set]\nStartupIOWeight=[not set]\nBlockIOAccounting=no\nBlockIOWeight=[not set]\nStartupBlockIOWeight=[not set]\nMemoryAccounting=yes\nDefaultMemoryLow=0\nDefaultStartupMemoryLow=0\nDefaultMemoryMin=0\nMemoryMin=0\nMemoryLow=0\nStartupMemoryLow=0\nMemoryHigh=infinity\nStartupMemoryHigh=infinity\nMemoryMax=infinity\nStartupMemoryMax=infinity\nMemorySwapMax=infinity\nStartupMemorySwapMax=infinity\nMemoryZSwapMax=infinity\nStartupMemoryZSwapMax=infinity\nMemoryLimit=infinity\nDevicePolicy=auto\nTasksAccounting=yes\nTasksMax=18949\nIPAccounting=no\nManagedOOMSwap=auto\nManagedOOMMemoryPressure=auto\nManagedOOMMemoryPressureLimit=0\nManagedOOMPreference=none\nMemoryPressureWatch=auto\nMemoryPressureThresholdUSec=200ms\nCoredumpReceive=no\nUMask=0002\nLimitCPU=infinity\nLimitCPUSoft=infinity\nLimitFSIZE=infinity\nLimitFSIZESoft=infinity\nLimitDATA=infinity\nLimitDATASoft=infinity\nLimitSTACK=infinity\nLimitSTACKSoft=8388608\nLimitCORE=infinity\nLimitCORESoft=0\nLimitRSS=infinity\nLimitRSSSoft=infinity\nLimitNOFILE=1048576\nLimitNOFILESoft=1048576\nLimitAS=infinity\nLimitASSoft=infinity\nLimitNPROC=63165\nLimitNPROCSoft=63165\nLimitMEMLOCK=2071089152\nLimitMEMLOCKSoft=2071089152\nLimitLOCKS=infinity\nLimitLOCKSSoft=infinity\nLimitSIGPENDING=63165\nLimitSIGPENDINGSoft=63165\nLimitMSGQUEUE=819200\nLimitMSGQUEUESoft=819200\nLimitNICE=0\nLimitNICESoft=0\nLimitRTPRIO=0\nLimitRTPRIOSoft=0\nLimitRTTIME=infinity\nLimitRTTIMESoft=infinity\nRootEphemeral=no\nOOMScoreAdjust=200\nCoredumpFilter=0x33\nNice=0\nIOSchedulingClass=2\nIOSchedulingPriority=4\nCPUSchedulingPolicy=0\nCPUSchedulingPriority=0\nCPUAffinityFromNUMA=no\nNUMAPolicy=n/a\nTimerSlackNSec=50000\nCPUSchedulingResetOnFork=no\nNonBlocking=no\nStandardInput=null\nStandardOutput=inherit\nStandardError=inherit\nTTYReset=no\nTTYVHangup=no\nTTYVTDisallocate=no\nSyslogPriority=30\nSyslogLevelPrefix=yes\nSyslogLevel=6\nSyslogFacility=3\nLogLevelMax=-1\nLogRateLimitIntervalUSec=0\nLogRateLimitBurst=0\nSecureBits=0\nCapabilityBoundingSet=cap_chown cap_dac_override cap_dac_read_search cap_fowner cap_fsetid cap_kill cap_setgid cap_setuid cap_setpcap cap_linux_immutable cap_net_bind_service cap_net_broadcast cap_net_admin cap_net_raw cap_ipc_lock cap_ipc_owner cap_sys_module cap_sys_rawio cap_sys_chroot cap_sys_ptrace cap_sys_pacct cap_sys_admin cap_sys_boot cap_sys_nice cap_sys_resource cap_sys_time cap_sys_tty_config cap_mknod cap_lease cap_audit_write cap_audit_control cap_setfcap cap_mac_override cap_mac_admin cap_syslog cap_wake_alarm cap_block_suspend cap_audit_read cap_perfmon cap_bpf cap_checkpoint_restore\nDynamicUser=no\nSetLoginEnvironment=no\nRemoveIPC=no\nPrivateTmp=no\nPrivateDevices=no\nProtectClock=no\nProtectKernelTunables=no\nProtectKernelModules=no\nProtectKernelLogs=no\nProtectControlGroups=no\nPrivateNetwork=no\nPrivateUsers=no\nPrivateMounts=no\nPrivateIPC=no\nProtectHome=no\nProtectSystem=no\nSameProcessGroup=no\nUtmpMode=init\nIgnoreSIGPIPE=yes\nNoNewPrivileges=no\nSystemCallErrorNumber=2147483646\nLockPersonality=no\nRuntimeDirectoryPreserve=no\nRuntimeDirectoryMode=0755\nStateDirectoryMode=0755\nCacheDirectoryMode=0755\nLogsDirectoryMode=0755\nConfigurationDirectoryMode=0755\nTimeoutCleanUSec=infinity\nMemoryDenyWriteExecute=no\nRestrictRealtime=no\nRestrictSUIDSGID=no\nRestrictNamespaces=no\nMountAPIVFS=no\nKeyringMode=inherit\nProtectProc=default\nProcSubset=all\nProtectHostname=no\nMemoryKSM=no\nRootImagePolicy=root=verity+signed+encrypted+unprotected+absent:usr=verity+signed+encrypted+unprotected+absent:home=encrypted+unprotected+absent:srv=encrypted+unprotected+absent:tmp=encrypted+unprotected+absent:var=encrypted+unprotected+absent\nMountImagePolicy=root=verity+signed+encrypted+unprotected+absent:usr=verity+signed+encrypted+unprotected+absent:home=encrypted+unprotected+absent:srv=encrypted+unprotected+absent:tmp=encrypted+unprotected+absent:var=encrypted+unprotected+absent\nExtensionImagePolicy=root=verity+signed+encrypted+unprotected+absent:usr=verity+signed+encrypted+unprotected+absent:home=encrypted+unprotected+absent:srv=encrypted+unprotected+absent:tmp=encrypted+unprotected+absent:var=encrypted+unprotected+absent\nKillMode=control-group\nKillSignal=15\nRestartKillSignal=15\nFinalKillSignal=9\nSendSIGKILL=yes\nSendSIGHUP=no\nWatchdogSignal=6\nId=vsp03-b04-p67-20260908.service\nNames=vsp03-b04-p67-20260908.service\nDescription=vsp03-b04-p67-20260908.service\nLoadState=not-found\nActiveState=inactive\nFreezerState=running\nSubState=dead\nStateChangeTimestampMonotonic=0\nInactiveExitTimestampMonotonic=0\nActiveEnterTimestampMonotonic=0\nActiveExitTimestampMonotonic=0\nInactiveEnterTimestampMonotonic=0\nCanStart=no\nCanStop=yes\nCanReload=no\nCanIsolate=no\nCanFreeze=yes\nStopWhenUnneeded=no\nRefuseManualStart=no\nRefuseManualStop=no\nAllowIsolate=no\nDefaultDependencies=yes\nSurviveFinalKillSignal=no\nOnSuccessJobMode=fail\nOnFailureJobMode=replace\nIgnoreOnIsolate=no\nNeedDaemonReload=no\nJobTimeoutUSec=infinity\nJobRunningTimeoutUSec=infinity\nJobTimeoutAction=none\nConditionResult=no\nAssertResult=no\nConditionTimestampMonotonic=0\nAssertTimestampMonotonic=0\nLoadError=org.freedesktop.systemd1.NoSuchUnit \"Unit vsp03-b04-p67-20260908.service not found.\"\nTransient=no\nPerpetual=no\nStartLimitIntervalUSec=10s\nStartLimitBurst=5\nStartLimitAction=none\nFailureAction=none\nSuccessAction=none\nCollectMode=inactive\n",
+    "stderr": ""
+  },
+  "journal": {
+    "argv": [
+      "journalctl",
+      "--user",
+      "-u",
+      "vsp03-b04-p67-20260908.service",
+      "--no-pager",
+      "-o",
+      "short-precise"
+    ],
+    "exit_code": 0,
+    "stdout": "Sep 09 10:47:51.867818 LAPTOP-U9TDKC8A systemd[638]: Starting vsp03-b04-p67-20260908.service - /home/wu/.venvs/hmasd/bin/python /home/wu/hmasd-worktrees/vsp03-b04-p67-828da00343e5036a4de93ccf1ec636e3b8c777b7/experiments/candidates/vsp_03/vsp03_b04/control.py --unit=vsp03-b04-p67-20260908.service --name=vsp03-b04-p67-20260908 --record=/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b04_seed6_p67_20260908_terminal.json --cap=120 --reserve=10 -- bash -c \"/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b04_seed6_p67_20260908_admission.json && exec /home/wu/.venvs/hmasd/bin/python scripts/run_vsp03_b04.py --seed 6 --out /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b04_seed6_p67_20260908 --started-monotonic \\\"\\$VSP03_B04_STARTED\\\" --node wsl_4070\"...\nSep 09 10:47:51.919031 LAPTOP-U9TDKC8A python[3018004]: Task 'vsp03-b04-p67-20260908' started in tmux session 'agent_vsp03-b04-p67-20260908'. Output: /home/wu/.agent-tasks/vsp03-b04-p67-20260908/task.log\nSep 09 10:47:55.117098 LAPTOP-U9TDKC8A python[3018002]: {\"terminal_published\": \"/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b04_seed6_p67_20260908_terminal.json\", \"task_exit_code\": 0, \"elapsed_through_terminal_readback_s\": 3.249249075015541}\nSep 09 10:47:55.120972 LAPTOP-U9TDKC8A systemd[638]: Finished vsp03-b04-p67-20260908.service - /home/wu/.venvs/hmasd/bin/python /home/wu/hmasd-worktrees/vsp03-b04-p67-828da00343e5036a4de93ccf1ec636e3b8c777b7/experiments/candidates/vsp_03/vsp03_b04/control.py --unit=vsp03-b04-p67-20260908.service --name=vsp03-b04-p67-20260908 --record=/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b04_seed6_p67_20260908_terminal.json --cap=120 --reserve=10 -- bash -c \"/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b04_seed6_p67_20260908_admission.json && exec /home/wu/.venvs/hmasd/bin/python scripts/run_vsp03_b04.py --seed 6 --out /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b04_seed6_p67_20260908 --started-monotonic \\\"\\$VSP03_B04_STARTED\\\" --node wsl_4070\".\nSep 09 10:47:55.121081 LAPTOP-U9TDKC8A systemd[638]: vsp03-b04-p67-20260908.service: Consumed 3.278s CPU time, 8.3M memory peak, 0B memory swap peak.\n",
+    "stderr": ""
+  },
+  "recorded_pid_states_at_collection": {
+    "3018028": null,
+    "3018014": null,
+    "3018015": null
+  },
+  "manager_cgroup": null,
+  "manager_cgroup_pids_at_collection": []
+}

@@ -109,8 +109,8 @@ on_exit() {
 trap on_exit EXIT
 
 TRAIN_COMMAND=(
-  "$PYTHON_BIN" train_multiproc_config_1.py
-  --config config_1
+  "$PYTHON_BIN" experiments/launchers/train_multiproc_config_1.py
+  --config configs.config_1
   --algorithm hmasd_original
   --scenario energy
   --preset S7-S1
@@ -184,8 +184,8 @@ if [[ "$DRY_RUN" == "1" ]]; then
   exit 0
 fi
 
-if [[ ! -f train_multiproc_config_1.py ]]; then
-  echo "Training entry point is missing: train_multiproc_config_1.py" >&2
+if [[ ! -f experiments/launchers/train_multiproc_config_1.py ]]; then
+  echo "Training entry point is missing: experiments/launchers/train_multiproc_config_1.py" >&2
   exit 2
 fi
 if [[ ! -f "$ANALYZER" ]]; then

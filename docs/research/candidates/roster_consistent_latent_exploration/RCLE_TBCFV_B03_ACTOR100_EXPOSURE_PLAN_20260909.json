@@ -1,0 +1,101 @@
+{
+  "purpose": "Frozen B03-ACTOR100 scientific exposure plan; Root allocation 664afecaf36c6f436dbe870fd6c80afb11a05d75; not execution evidence",
+  "source_config": "experiments/candidates/roster_consistent_latent_exploration_tbcfv/config.py",
+  "source_cost_law": "experiments/candidates/roster_consistent_latent_exploration_tbcfv_b01/study.py:cost_law",
+  "proposal": "RCLE-TBCFV-B03-ACTOR100",
+  "seed_key_ascii": "RCLE-TBCFV-B03-ACTOR100/seed/19",
+  "seed_root_sha256": "4b17629c25d71afceed93bbe657c0b5799d468d1f5673d90a7ceee644ec474c5",
+  "arms": [
+    "FLEX-W1",
+    "FLEX-W100"
+  ],
+  "actor_score_weights": [
+    1,
+    100
+  ],
+  "paired_training_seeds": [
+    19
+  ],
+  "training_instances": 2,
+  "updates_per_arm": 200,
+  "episodes_per_update": 64,
+  "training_cells": 8,
+  "episodes_per_training_cell": 8,
+  "training_episodes": 25600,
+  "training_ticks": 1638400,
+  "backward_and_joint_update_calls": 400,
+  "final_evaluation_episodes": 4096,
+  "shared_initialization_evaluation_episodes": 2048,
+  "scripted_reference_evaluation_episodes": 2048,
+  "evaluation_episodes": 8192,
+  "evaluation_ticks": 524288,
+  "all_episodes": 33792,
+  "all_environment_ticks": 2162688,
+  "selection": "one fixed coefficient; no sweep or checkpoint selection",
+  "proposed_caps_s": {
+    "complete_learned_arm": 600,
+    "complete_object": 1500
+  },
+  "planning_reference": {
+    "source": "pro_packets/20260906_post_b02_innovator/EXPOSURE_AND_COST.json:measured",
+    "whole_arm_wall_s": [
+      71.47,
+      71.23
+    ],
+    "whole_reference_wall_s": 2.62,
+    "whole_chain_wall_s": 152.622,
+    "matched_episode_factor_per_arm": [
+      1,
+      1
+    ],
+    "per_arm_planning_projection_s": [
+      71.47,
+      71.23
+    ],
+    "new_law_runtime_measured": false,
+    "interpretation": "count-matched B02 references only; first source arm C1P1 included initialization panel, second FLEX did not; new-law and necessary startup/check costs unknown"
+  },
+  "alternatives": {
+    "zero_baseline_pair": {
+      "training_instances": 2,
+      "training_episodes": 25600,
+      "all_episodes": 33792,
+      "backward_calls": 400
+    },
+    "package_by_weight_factorial": {
+      "training_instances": 4,
+      "training_episodes": 51200,
+      "final_panels": 4,
+      "shared_init_panels": 1,
+      "reference_panels": 1,
+      "all_episodes": 63488,
+      "backward_calls": 800
+    }
+  },
+  "added_validation": "one focused weighted-loss/control-limit/primary-output check, actual technical exposure to be recorded by CM; no new A or mandatory replay",
+  "consultation_actual_exposure": {
+    "models": 0,
+    "native_states": 0,
+    "episodes": 0,
+    "derivatives": 0,
+    "optimizer_steps": 0,
+    "tests": 0,
+    "experiments": 0
+  },
+  "exposure_line": "2 FLEX training instances x 1 paired seed19 x 200 updates x 64 episodes = 25600 training episodes, 1638400 ticks, 400 backward/joint-step calls; four 2048-episode evaluation panels = 8192 episodes/524288 ticks; total33792 episodes/2162688 ticks. Each nonzero whole-vector step has norm0.02; path length <=4 per arm (about0.19 x historical init norm21.2); seed19 initial norm and actual zero/nonzero steps recorded in the charged invocation. No search or model selection; technical checks reported separately.",
+  "proposal_source": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260906_post_a02_innovator/EXPOSURE_AND_COST.json",
+  "actual_scientific_execution_at_card_freeze": {
+    "training_instances": 0,
+    "episodes": 0,
+    "derivatives": 0,
+    "updates": 0
+  },
+  "parameter_displacement_exposure": {
+    "nonzero_step_norm": 0.02,
+    "max_steps_per_arm": 200,
+    "max_path_length_per_arm": 4.0,
+    "historical_init_norm_approx": 21.2,
+    "path_budget_over_historical_init_norm_approx": 0.18867924528301888,
+    "actual_seed19_init_norm": "record within allocated W1 invocation; unknown at freeze"
+  }
+}

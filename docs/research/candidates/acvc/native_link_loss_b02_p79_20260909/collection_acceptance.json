@@ -1,0 +1,29 @@
+{
+  "verified": "complete retained native B02/P79 T/G/C/F comparison",
+  "scientific_process_exit_code": 0,
+  "process_wall_s": 357.55,
+  "logical_study_bill_s": 362.9896806,
+  "shared_bill_s": 35.813917766962106,
+  "complete_arm_bill_s": {
+    "T": 191.57035297096837,
+    "G": 207.23324539599372
+  },
+  "peak_rss_kib": 549380,
+  "peak_rss_gib": 0.5239295959472656,
+  "outer_timing_difference_s": 17.582643130980443,
+  "all_episodes": 1152,
+  "rollout_records": 512,
+  "adam_records": 2048,
+  "source_sha": "4e019ca35b930c2216fdfe110ba587e222ca7384",
+  "remote_scientific_file_digests_match": true,
+  "artifact_sha256": {
+    "admission.json": "2a40cf25d6fcac45a19628f73f9815f6fe3bf5ba95f76741e6aec49910d54f4b",
+    "episodes.jsonl": "e53dd24b51c6c22cb44784085cf61c534bc354e0a4f9eb60b51e680c9a1f8839",
+    "final_G.pt": "d3dc999ee400d14f54a2c0ca5d0c28455f97c8cf1cea2cd20ed358b0aafb799c",
+    "final_T.pt": "8f4dffcbede7f584103a8faf8511bdc33ba1ae14125be3f624fd8d13223f95a6",
+    "process_time.txt": "3c930277aa53288010685f6616e1b18afa42375ad7dc2a8161ce53df6898ab83",
+    "summary.json": "d7fa7d4284d6f56193974c7920af323c2123a066f052228838879d91bbb4e720",
+    "task.log": "208e149d9164f619058c5bf8c8b25c1e5bc3dc1bfeb7abd7a0af7ede2e0dff61",
+    "updates.jsonl": "b35878dd09c84280749a699c92f113a3ae79c52c816ef3dc6d92db67d85b315f"
+  }
+}

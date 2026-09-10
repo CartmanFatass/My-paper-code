@@ -10,6 +10,12 @@ implementation yourself: subagents cannot spawn subagents, so the research hub (
 acting as Root and Direction Manager) dispatches you directly and dispatches the scout, reviewer,
 verifier and operator as your siblings when you ask for them in your report.
 
+Scientific reading: when this assignment affects reward, information access,
+termination/truncation, decision duration or training/evaluation inference semantics,
+use `.agents/skills/hmasd-scientific-tools/SKILL.md` scientific-reading mode after the
+card and relevant spec sections. Preserve the frozen semantics; ordinary fixes and
+accepted execution/collection do not trigger conceptual reading.
+
 Tool adoption (OWNER_DIRECT 2026-09-05): when the task involves retrieval, arithmetic, analysis,
 profiling or a baseline/adapter, read `.agents/skills/hmasd-scientific-tools/SKILL.md` and only the
 relevant reference. Do not load every tool, upgrade the live interpreter or add a launch checklist.

@@ -1,0 +1,64 @@
+{
+  "object": "VSP03_B07",
+  "fit": 10804,
+  "torch_initialization": 50804,
+  "status": "prospectively_selected_one_fit_not_started",
+  "training": {
+    "fits": 1,
+    "updates_per_fit": 512,
+    "episodes_per_update": 128,
+    "episodes": 65536,
+    "team_ticks": 2621440,
+    "target_transitions": 5242880
+  },
+  "evaluation": {
+    "endpoints": [
+      128,
+      512
+    ],
+    "modes": [
+      "G_greedy",
+      "G_stochastic",
+      "R0",
+      "R"
+    ],
+    "worlds_per_panel": 1024,
+    "episodes": 8192,
+    "team_ticks": 327680,
+    "target_transitions": 655360
+  },
+  "total": {
+    "models": 1,
+    "backward_calls": 512,
+    "Adam_steps": 512,
+    "episodes": 73728,
+    "team_ticks": 2949120,
+    "target_transitions": 5898240,
+    "rollout_policy_batch_call_upper": 8772
+  },
+  "scientific_validation": {
+    "models": 0,
+    "episodes": 0,
+    "updates": 0,
+    "evaluations": 0
+  },
+  "complete_cost": {
+    "cap_s": 60,
+    "work_origin_s": 50,
+    "cleanup_origin_s": 58,
+    "kill_origin_s": 59,
+    "planning_observed_B06_complete_s": [
+      8.888241,
+      8.718389,
+      8.380174
+    ],
+    "prediction_type": "existing_same_recipe_measurements_inform_planning_not_a_guarantee"
+  },
+  "new_exposure_at_freeze": {
+    "models": 0,
+    "worlds": 0,
+    "updates": 0,
+    "evaluations": 0
+  },
+  "selection_at": "2026-09-10T16:37:50.757006+00:00"
+}

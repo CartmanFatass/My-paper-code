@@ -1,0 +1,87 @@
+{
+  "id": "20260910-acvc-001",
+  "created": "2026-09-10T09:58:18-07:00",
+  "direction": "acvc",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "ACVC：一个新 DENSE 底座后的 C/F/dwell 设计，尚未分配运行",
+  "context": "一个新512回合DENSE拟合后进行C/F/dwell各64回合面板；仅设计已选择，建议完整上限360秒，数值配额仍为零。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "保留设计",
+      "consequence": "保留已选定的单次新拟合设计；Root另行映射工程与运行，当前不消耗实验预算。"
+    },
+    {
+      "key": "reject",
+      "label": "撤回设计",
+      "consequence": "异步撤回此设计并交回Root处理；不运行、不改写旧结果或方向排序。"
+    },
+    {
+      "key": "revise",
+      "label": "修订设计",
+      "consequence": "按具体意见修改本次有限设计；任何改变在数值运行前记录，当前不运行。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "既有DENSE拟合法已查清；保留训练暴露并更换一个预先选定的新底座，直接检查旧底座选择限制。",
+  "evidence": [
+    "docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_DESIGN_INTAKE_20260910.md",
+    "docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_SCIENCE_CARD_20260910.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-10.md#L16",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否保留这个已委托选定的有限设计：只新训练一个预先选定的DENSE底座，再完整比较C/F/dwell？当前只完成卡片，尚未分配数值运行。",
+    "changes_if_approved": [
+      {
+        "target": "ACVC_FRESH_DENSE_REUSE_B01 科学卡片",
+        "from": "后继新底座拟合法、暴露与完整成本未固定",
+        "to": "固定一个新种子、512个训练回合与1024次更新，再做3×64个评价回合；建议完整上限360秒，其中运行330秒、支持工作至多30秒；运行配额仍为零"
+      }
+    ],
+    "if_refused": "异步撤回或修订该设计，交由Root按现有任务处理；当前没有需要撤销的训练或评价，旧E01结果、T/G终止和最低争用排序保留。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_DESIGN_INTAKE_20260910.md",
+        "quote": "The accepted law is recoverable, its prior timing supports a finite proposal, and keeping it fixes the new observation on fresh-base selection rather than simultaneously changing training exposure.",
+        "why": "实际拟合法已由已接受源码查清，保留该法能把下一次观察集中在新底座选择上。"
+      },
+      {
+        "path": "docs/research/candidates/acvc/ACVC_FIXED_RETRACE_REUSE_E01_INTAKE_20260909.md",
+        "quote": "The observation answers the selected reuse question positively **for both retained bases**.",
+        "why": "旧的两个保留底座上F都高于C和dwell，足以支持一个有限的新底座问题；这不是稳定优势结论。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/acvc/ACVC_FIXED_RETRACE_REUSE_E01_INTAKE_20260909.md",
+        "quote": "The strongest contrary observations inside E01 are **7/64 and 11/64 adverse F-dwell pairs**;",
+        "why": "旧观察仍有不利世界，且保留底座曾被选择；新卡不丢弃弱底座或不利结果。"
+      },
+      {
+        "path": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_DESIGN_INTAKE_20260910.md",
+        "quote": "It cannot estimate training-population uncertainty, establish stable superiority or identify the pure physical retrace effect.",
+        "why": "一个新拟合仍不足以回答训练种子总体或纯回退动作的因果问题；64个世界只给定此底座的条件误差。"
+      }
+    ],
+    "uncertainty": [
+      "尚无新数值结果，也没有可宣称已就绪的单拟合runner；Root需另行给出具体工程和执行映射。",
+      "完整成本名义估计252.200秒，含30秒支持工作；新初始化、轨迹、节点争用和未来检查成本未测量。",
+      "无论底座表现强弱，都保留最终训练端点和全部C/F/dwell结果；不得换回8201/8202、重挑种子或加跑到正向。",
+      "本机原生host仍无同信息调优基线与上界的headroom记录；这不是普通B卡片的停止条件。"
+    ],
+    "cost": {
+      "compute": "本批科学调用、模型构造、测试、训练和评价均为零。后续建议1次新拟合：131072个训练步、1024次更新，再49152个评价步；完整上限建议360秒，当前释放0秒、0次调用。E01的旧上限和89.35秒历史消耗不提供新预算。",
+      "owner_time": "可异步查看设计或提出具体修改；无需逐次批准已委托的文档选择。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing：已授权设计选择不等待回复；当前没有已分配运行。Root下一步为接收文档和单独映射工程与执行。"
+    },
+    "verdict_text": "Recommend and select **(a)**. The accepted law is recoverable, its prior timing supports a finite proposal, and keeping it fixes the new observation on fresh-base selection rather than simultaneously changing training exposure.",
+    "source": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_DESIGN_INTAKE_20260910.md"
+  },
+  "starred": false
+}

@@ -1,0 +1,40 @@
+{
+  "question": "是否保留已准备好的 B02 独立训练对设计，供 Root 后续安排；本次不授予运行额度？",
+  "changes_if_approved": [
+    {
+      "target": "FOLR_PUBLIC_LIFECYCLE_B02_SCIENCE_CARD_20260909.md",
+      "from": "B01 intake 只有一对独立训练的未实例化建议",
+      "to": "冻结训练种子7802、评估种子107802、相同 RETAIN/RESET 包和预算的 B02 卡及 CM 交接；尚无运行额度"
+    }
+  ],
+  "if_refused": "不安排该设计的后续实现或运行；保留 B01 和本次准备记录，由原 DM 按异步意见修订。",
+  "evidence_for": [
+    {
+      "path": "docs/research/portfolio/pro_packets/20260909_foundations_special_review/archive/RESPONSE.md",
+      "quote": "保留本次 B 和公开生命周期问题；支持将原 DM 的另一个独立训练对建议优先准备，目的只是检验这种训练后效果的重复性，不需先定位哪个记忆内容有害。",
+      "why": "新训练实例直接回答已观测整体训练效果能否重复，额外评估旧权重不增加独立训练单位。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/portfolio/pro_packets/20260909_foundations_special_review/archive/RESPONSE.md",
+      "quote": "一个配对训练实例不证明 RESET 稳定获益。",
+      "why": "B01 虽有超过门槛的反向终点，训练期 RESET 平均回报更低、最终局间离散很大；第二对也不能证明稳定优势或有害记忆的原因。"
+    }
+  ],
+  "uncertainty": [
+    "本卡在看到 B01 后选择继续；未尝试或筛选任何新种子，三种结果分支均保留。",
+    "新参数、优化器、回放、环境和随机状态均从零开始；仅有不同 seed 编号本身不证明独立，相同编号也不保证相同交通。",
+    "共享 gamma0.99 的近似 Q 学习不保证精确优化未折扣最终回报；仍比较同一完整训练包。",
+    "同信息调优基线与上界的 headroom 仍缺失，不为此新增调参或普查。",
+    "复审本身未分配训练对或挑选种子；Root 这次另行授权冻结设计，仍未授权运行。"
+  ],
+  "cost": {
+    "compute": "当前新科学曝光为0。若未来另行分配，一对共200000训练原生步、9938更新和64个最终评估回合，含评估共201280步；完整上限1800秒/臂、3600秒/对，支持性检查和读回60秒。B01的1517.58秒仅为同工作量历史参考，不是本次消耗或保证上界。",
+    "owner_time": "可异步查看，无需立即回复。",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing；本次仅完成已授权的准备，不启动后续调用。"
+  },
+  "verdict_text": "Freeze one independent RETAIN/RESET training pair as B02 for later allocation; this preparation grants no scientific execution.",
+  "source": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_B02_PREPARATION_INTAKE_20260909.md"
+}

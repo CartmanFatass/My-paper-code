@@ -1,0 +1,45 @@
+{
+  "question": "是否保留这个待分配三臂卡：事件清零、固定p=.1随机清零、保留记忆，各从零训练并固定128局终评？本次只准备，不新增运行额度。",
+  "changes_if_approved": [
+    {
+      "target": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_TIMING_B01_SCIENCE_CARD_20260909.md",
+      "from": "三对两臂已完成，差值为-2.0021875、-1.9228125、+2.559375；没有随机清零比较",
+      "to": "固定三臂设计、7804/107804新种子、独立207804/307804随机流、实际掩码回放复用；随机臂明确不匹配频率；等Root具体分配后才实现或运行"
+    }
+  ],
+  "if_refused": "保留B01-B03全部结果和本次只读准备，由原DM按异步意见修改或撤回未运行候选，不改写已完成对象。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_TIMING_B01_INTAKE_20260909.md",
+      "quote": "the extra legal control can change which trained memory rule merits a later bounded\nfollow-up; another unchanged pair cannot observe that comparator.",
+      "why": "增加一个简单合法对照，能改变下一步研究哪种状态规则的选择；不需要先解释旧结果的全部原因。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_B03_INTAKE_20260909.md",
+      "quote": "Opposing observed signs weaken the earlier\nsimple repeatability expectation.",
+      "why": "第三对RETAIN以2.559375分反向胜出，只三对且评价波动大，不能假定事件清零有稳定作用。"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_TIMING_B01_SCIENCE_CARD_20260909.md",
+      "quote": "Random clearing is\nexplicitly **unmatched in frequency**.",
+      "why": "旧记录没有全部合格续存机会分母；p=.1不是等频率或最优控制，结果仍混合时机、清零量和训练路径。"
+    }
+  ],
+  "uncertainty": [
+    "第三对反转降低事件专属优势的预期；DM新预测为MIXED_OR_REVERSE，保留全部其他分支。",
+    "128局只降低条件评价误差的可能来源，不新增训练实例，也不保证某个SE。",
+    "RANDOM本地尚未实现或训练，掩码开销与轨迹变化成本未测；新执行SHA尚未产生。",
+    "所有随机掩码仅在行为收集时抽取并随轨迹存储；online/target回放不重新抽样，终端控制pass不算原生动作机会。",
+    "无同信息调优基线/上界headroom；没有纯事件因果、过时记忆、正则化原因、稳定赢家或迁移主张。"
+  ],
+  "cost": {
+    "compute": "当前新增科学曝光和源码实现均为0。候选3臂共307680原生步、14907更新、384终评回合；点估计2316.522秒约38.61分钟，不是保证上界。拟1800秒/完整臂、5400秒/整项、300秒支持性工程检查读回；三次接受调用需Root后续实际分配，无重试或自动后继。",
+    "owner_time": "可异步查看，无需立即回复。",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing；已执行授权的设计准备，未来实现和科学运行由Root另行明确分配。"
+  },
+  "verdict_text": "**Recommendation:** prepare one three-law B candidate with a preset **unmatched p=.1**\nrandom-clearing arm, the same real training recipe and128 once-fixed final episodes per\narm. Confidence that EVENT will usefully beat both nulls is lower after B03. Nevertheless,\nthe extra legal control can change which trained memory rule merits a later bounded\nfollow-up; another unchanged pair cannot observe that comparator. This is a performance\nquestion with a deliberately limited timing/dose interpretation, not a claim that event\nclearing is already useful or that a causal explanation must precede learning. Existing\ntrustworthy positive points can justify bounded exploration despite a new opposing sign\nunder evidence-spec §§11.8.2–3. This recommendation does not itself allocate its compute.",
+  "source": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_TIMING_B01_INTAKE_20260909.md"
+}

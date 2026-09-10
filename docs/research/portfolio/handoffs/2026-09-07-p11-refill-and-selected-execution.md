@@ -102,3 +102,37 @@ Apply `docs/project/CM_MODEL_COMPARISON_20260907.md` to the next three genuinely
 CM assignments before solving starts, with one identical complete code spec and source for all
 arms. Existing VSP03 repair and unchanged-code UCOPE/CBSC execution are not old-task substitutes.
 Keep shadow comparison work isolated; it allocates zero extra research/Pro invocations.
+
+## P11 terminal-failure disposition (2026-09-07)
+
+Root reports the selected CBSC handle terminated exit18 during its first Torch body transfer
+after fresh admission, with no install/import/model exposure. The allocated single attempt is
+consumed; do not repeat it or change the endpoint. Route the original logs, admission, whole
+time and retained partial-file facts to the same CBSC CM for collection/technical acceptance,
+then the same DM for all-outcome intake and Chinese brief. Preserve the two command/source
+bindings and all retained evidence. This is acquisition failure, without scientific polarity.
+After intake, that DM/CM may prepare one concrete repair recommendation from existing logs and
+configuration facts, explicitly separating known facts from an unestablished proxy/network/server
+cause. No network probe, download, installation, import, new invocation or new budget is granted.
+Return the necessary changed condition, exact proposed command/bound and alternative yield to
+Portfolio. Use the existing codex/cbsc checkout and current card/intake paths; no new branch.
+
+Root additionally reports UCOPE 6701 shell-quoting exit2 before admission. Reuse its P11 collection
+CM to preserve the accepted handle/log and inspect the original payload against the frozen B05
+handoff. Deliver only the smallest transport-quoting correction and a local Bash syntax check
+of the exact UTF-8/LF artifact; reconcile no admitted scientific process or result was created.
+Do not execute payloads during syntax checking. Preserve source71433bfabb70481def4329e622a838fa0cd9eeec,
+datasets6701/6702, scalar order, all metrics and the original pair limits. Return the exact
+corrected delivery bytes and acceptance facts to Portfolio for a bounded execution continuation;
+6702 waits for the original first-dataset dependency. This is a correction to an existing CM
+assignment, excluded from the new-task model comparison. No new result-bearing launch is released
+by this paragraph. Reuse the UCOPE checkout named above, with one editing owner.
+
+VSP03 retains integration of CM d6844bb25 followed by DM46a63ad7b and its complete intake; no
+next invocation is selected here. After that intake, its same DM may prepare the next
+object-tier recommendation within the accepted mechanism, or identify the exact direction-node
+question if the completed ladder requires one. Preserve the current card's result branch and
+return the prospective task/spec; no new experiment or Pro Send follows this preparation.
+FRRIE and VSP02 retain their independent preparation commands above. Root dispatches these
+bounded continuations and records actual acceptance; prepared commands are not active counts.
+Report only a concrete remaining repair/decision or exhausted route under the notification filter.

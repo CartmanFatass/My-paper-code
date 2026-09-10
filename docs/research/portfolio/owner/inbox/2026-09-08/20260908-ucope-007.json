@@ -1,0 +1,76 @@
+{
+  "id": "20260908-ucope-007",
+  "created": "2026-09-08T22:57:14-07:00",
+  "direction": "ucope",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "UCOPE P71：原续约机制的第二个独立训练对",
+  "context": "新卡检验逐机到期、动作条件化的一步或四步承诺，能否在新训练对7401上再次超过同信息普通反馈的原生回报。绑定结构：多智能体时间抽象与终止。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "按卡继续已分配的一次独立训练，保留全部结果。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "在下一干净边界停止尚未执行的卡内工作，保留既有证据。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "按具体修订重记受影响的卡或执行绑定，不自动增加预算。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "P70的可信增益支持一次新训练观察，弱G对悬停结果限制结论而不抹去原生比较。",
+  "evidence": [
+    "docs/research/candidates/ucope/UCOPE_UAV_RENEWAL_COMMITMENT_B02_SCIENCE_CARD_20260908.md",
+    "docs/research/candidates/ucope/UCOPE_UAV_RENEWAL_COMMITMENT_B01_P70_RESULT_EVIDENCE_20260908.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-08.md#L91",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否接受P71这一张新探索卡：用原机制再做一个独立训练对7401，检查上次原生回报增益能否重现？",
+    "changes_if_approved": [
+      {
+        "target": "docs/research/candidates/ucope/UCOPE_UAV_RENEWAL_COMMITMENT_B02_SCIENCE_CARD_20260908.md",
+        "from": "P70训练对7301已完成，仅有一次拟合的正向结果",
+        "to": "新卡独立绑定7401；同一机制、比较器与预算，预先记录预测和全部结果的判读规则"
+      }
+    ],
+    "if_refused": "在下一干净边界执行所有者的拒绝或修订；保留P70与已产生的事实，不自动换种子或追加运行。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_UAV_RENEWAL_COMMITMENT_B01_P70_RESULT_EVIDENCE_20260908.md",
+        "quote": "**B/EXPLORE, valid UP on one matched training pair.** Renewal T has an above-MEI\nnative gain over this G fit and over untuned hover H.",
+        "why": "T对普通反馈与悬停都出现正向原生回报，足以支持一次有限的独立训练检查。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_UAV_RENEWAL_COMMITMENT_B01_P70_RESULT_EVIDENCE_20260908.md",
+        "quote": "G's slightly negative\nhover contrast prevents an improvement-over-competent-control conclusion.",
+        "why": "上次普通反馈没有在点估计上超过悬停，且只有一次训练；新实验也不能直接证明稳定优势。"
+      }
+    ],
+    "uncertainty": [
+      "新训练对可能为正、在最小效果范围内或为负，全部保留。",
+      "几何变化、持续控制、容量、梯度暴露和队友共同适应仍未分离。",
+      "没有调优同信息基线的当前主机余量记录。"
+    ],
+    "cost": {
+      "compute": "新配对1个，学习臂2个，原生步286720，Adam更新2048，最终评估96集；每臂1800秒/全程3600秒上限。P70实测全程304.85秒仅作参考。",
+      "owner_time": "可异步查看或改动；无需先回复。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "推荐按原机制、原比较器和原预算执行一个全新独立训练对7401，完整保留正负结果；新结果单独判读，并结合G对悬停的表现限制结论，不调参、不追加种子，也不把两次拟合说成稳定优势。",
+    "source": "docs/research/candidates/ucope/UCOPE_UAV_RENEWAL_COMMITMENT_B02_P71_INTAKE_20260908.md"
+  },
+  "starred": false
+}

@@ -1,0 +1,25 @@
+{
+  "object": "VSP03_B04",
+  "command": [
+    "bash",
+    "-c",
+    "/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b04_seed6_p64_20260908_admission.json && exec /home/wu/.venvs/hmasd/bin/python scripts/run_vsp03_b04.py --seed 6 --out /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b04_seed6_p64_20260908 --started-monotonic \"$VSP03_B04_STARTED\" --node wsl_4070"
+  ],
+  "cwd": "/home/wu/hmasd-worktrees/vsp03-b04-p64-b5d605bf4f39b5ab18f01c98e04dc07e53764354",
+  "started_unix_s": null,
+  "started_monotonic": 375534.924519,
+  "observed_unix_s": 1788912360.5154057,
+  "observed_monotonic": 375534.983580801,
+  "deadline_monotonic": 375654.924519,
+  "cap_s": 120.0,
+  "shutdown_publication_reserve_s": 10.0,
+  "root_returncode": 2,
+  "task_exit_code": 2,
+  "timed_out": false,
+  "error": null,
+  "descendants_killed": [],
+  "descendants_reaped": [],
+  "descendants_remaining": [],
+  "all_descendants_terminated": true,
+  "elapsed_before_terminal_publication_s": 0.07490039302501827
+}

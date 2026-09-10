@@ -1,0 +1,80 @@
+{
+  "id": "20260909-ucope-002",
+  "created": "2026-09-09T02:54:39-07:00",
+  "direction": "ucope",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "UCOPE P77：学习续约与固定初始时长的一次训练比较",
+  "context": "学习续约T对普通反馈G为主要比较，对固定初始时长F为次要比较。绑定结构为多智能体局部观察下的异步时长选择；三个速度与价值学习器真实训练。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "按已分配的P77额度执行一次7601并完整收口。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "停止尚未执行的依赖工作，保留已发生证据。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "按明确修改处理后续工作；不改写已有结果。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "执行符合B级规范的CONTINUE决定，保留普通反馈主比较并新增固定初始策略的包级区分。",
+  "evidence": [
+    "docs/research/candidates/ucope/UCOPE_UAV_RENEWAL_FROZEN_HEAD_B01_SCIENCE_CARD_20260909.md",
+    "docs/research/candidates/ucope/UCOPE_UAV_RENEWAL_FROZEN_HEAD_B01_P77_INTAKE_20260909.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-09.md#L10",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否接受这张已获P77执行额度的新卡：一次比较学习续约T、固定初始时长续约F、普通反馈G与悬停H？",
+    "changes_if_approved": [
+      {
+        "target": "docs/research/candidates/ucope/UCOPE_UAV_RENEWAL_FROZEN_HEAD_B01_SCIENCE_CARD_20260909.md",
+        "from": "P74仅选定后续问题，尚无新卡或运行额度",
+        "to": "按P77冻结7601和F独立动作随机流；完成一次三臂训练及四臂评估后收口"
+      }
+    ],
+    "if_refused": "在新的依赖工作前停止或按明确修改处理；已发生结果及旧卡保持原意，不自动替换运行。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/ucope/pro_packets/20260909_post_renewal_b03_convergence/archive/RESPONSE.md",
+        "quote": "Keep **T−G as the native performance primary** and **T−F as the predeclared secondary discriminator**.",
+        "why": "已形成且符合B级证据规范的CONTINUE决定保留最强合法反馈比较器。"
+      },
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_UAV_RENEWAL_FROZEN_HEAD_B01_SCIENCE_CARD_20260909.md",
+        "quote": "F's own velocity actor and critic train from the start.",
+        "why": "F直接比较训练期间固定初始续约策略，区别于评估时冻结旧检查点。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_UAV_RENEWAL_FROZEN_HEAD_B01_SCIENCE_CARD_20260909.md",
+        "quote": "Neither their descriptive mean nor the new secondary may rescue an adverse primary.",
+        "why": "此前两次改善与一次反转均保留；初始随机持久性、容量、优化和共同适应仍是替代解释。"
+      }
+    ],
+    "uncertainty": [
+      "F运行耗时尚未测量；现有成本参照不是保证。",
+      "一次匹配训练不能估计训练总体不确定性，T对F也不能隔离纯时长或信息因果价值。"
+    ],
+    "cost": {
+      "compute": "3臂各512训练回合；总425984原生步、3072次Adam、128次最终评估；每臂1800秒、全程3600秒，最多一次接受的远程提交。",
+      "owner_time": "无需回复，异步覆盖仍生效。",
+      "reversibility": "costly",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "推荐按已接受的续约问题执行一次新的T/F/G/H训练比较7601：T对普通反馈为主，T对固定初始时长策略为次。固定头不学习，但速度与价值网络真实训练；保留全部结果，不让次要优势挽救主要失败，也不据此声称稳定或纯机制优势。",
+    "source": "docs/research/candidates/ucope/UCOPE_UAV_RENEWAL_FROZEN_HEAD_B01_P77_INTAKE_20260909.md"
+  },
+  "starred": false
+}

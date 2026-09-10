@@ -1,0 +1,81 @@
+{
+  "id": "20260908-fsd-004",
+  "created": "2026-09-08T05:57:53-07:00",
+  "direction": "flexible_skill_duration",
+  "tier": "direction",
+  "kind": "decision",
+  "title": "P45：Pro 选择一次 H/fair-D0/G 比较，保留普通家族暂停",
+  "context": "B01/B02 的两组 C/H 原生收益保持有效且分别报告，G 仍领先。DM 原建议结束有限扩展；完整 P45 答复选择一次真正固定时钟学习比较。现按合规 PRO_FINAL 记录该方向选择，不建卡、指定 keys、派发 CM 或运行实验。",
+  "options": [
+    {
+      "key": "a",
+      "label": "结束有限扩展",
+      "consequence": "owner 若明确改选，将在干净边界撤回有限后继选择，保留已完成结果和普通家族暂停。"
+    },
+    {
+      "key": "b",
+      "label": "保留单次 H/fair-D0/G 选择",
+      "consequence": "当前已记录 Pro 选定的有限比较；等待后续明确卡片/CM-spec准备任务，所有结果完成一次 intake 后停止。"
+    }
+  ],
+  "recommended": "b",
+  "auto_applied": "b",
+  "dm_reason": "接受 Pro 对这一次同预算固定时钟性能问题的决策价值判断；完整答复符合 B 类与本次范围，无需本地替代裁决。",
+  "evidence": [
+    "docs/research/candidates/flexible_skill_duration/pro_packets/20260908_post_b02_convergence/archive/RESPONSE.md",
+    "docs/research/candidates/flexible_skill_duration/pro_packets/20260908_post_b02_convergence/CONVERGENCE_INTAKE.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-08.md#L38",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否保留本次 Pro 已选定的单对 H／真实 fair D0 k5／G 有限学习比较？",
+    "changes_if_approved": [
+      {
+        "target": "DIRECTION.md · Post-B02 fixed-clock comparison boundary (P45)",
+        "from": "B01/B02 的 C/H 问题已完成；P44 建议结束有限扩展，方向选项尚未裁决。",
+        "to": "按 PRO_FINAL 仅选择一次同预算 H/fair-D0 k5/G 比较；普通 fixed-K2 家族其余部分仍暂停，本次不建卡、不编程、不运行。"
+      }
+    ],
+    "if_refused": "在下一个干净边界应用 owner 的明确改令；保留完整 Pro 答复与 B01/B02 正反结果，不自动改选或补跑。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/flexible_skill_duration/pro_packets/20260908_post_b02_convergence/archive/RESPONSE.md",
+        "quote": "B01/B02 已回答混合控制包相对内部 D2 控制的早期学习与再次出现问题，却仍未回答它相对实际固定时钟学习构造的同期性能问题。",
+        "why": "更换为实际学习的固定时钟比较器，能判断支持是否超出较弱的内部 component control；它是一次有限性能观察。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/flexible_skill_duration/pro_packets/20260908_post_b02_convergence/archive/RESPONSE.md",
+        "quote": "公开规则已经解释主要原生机会，G 又在两组领先，即使 H 胜 D0，也未必值得把它发展为新的时长学习方法。",
+        "why": "保留 DM 原结束建议的理由；新正值仍不证明 learned renewal、稳定优势或 UAV 迁移。"
+      }
+    ],
+    "uncertainty": [
+      "新五轮 D0 的实际学习能力、optimizer 次数和完整成本未知，旧二十轮成绩不能替代。",
+      "一对训练样本只支持本次局部性能，不能估计训练总体稳定性。",
+      "供给的公开规则、训练数据、内部时钟与 credit/actor 原因不能由这一比较分离。"
+    ],
+    "cost": {
+      "compute": "未来设计为64000训练 transitions、96终点回合；D0/H/G完整上限1200/900/60秒，合计2160秒。当前咨询与 intake 新科学调用、模型、训练和评价均为0；未分配机器时间。",
+      "owner_time": "异步查看即可，无需回复才能应用本次完整方向裁决。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing；后续卡片/CM-spec准备须由 Portfolio 给出明确任务，当前不启动实验。"
+    },
+    "verdict_text": "**选择 B：只开放一次全新、同训练预算的 H／fair D0 k=5 比较，并保留公开信息 G。** 两个 learner 各训练五个 rollout、每个 rollout 十六个环境与四百步，各作一次三十二回合终点评价；G 使用同一组三十二个评价外生 keys。完整调用上限保持 D0／H／G 分别为 1200／900／60 秒，合计 2160 秒。不加入 C、第三个相同 C/H pair、调参网格、因果面板或新 host。",
+    "source": "docs/research/candidates/flexible_skill_duration/pro_packets/20260908_post_b02_convergence/archive/RESPONSE.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-08T12:58:40+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/flexible_skill_duration/pro_packets/20260908_post_b02_convergence/archive/RESPONSE.md",
+      "record": "docs/research/candidates/flexible_skill_duration/pro_packets/20260908_post_b02_convergence/CONVERGENCE_INTAKE.md",
+      "state": "applied",
+      "summary": "Applied under the 2026-09-03 standing delegation only P45 option B: one future H/fair-D0 k5/G B comparison, ordinary-family pause otherwise retained. No card, keys, code, scientific invocation or Portfolio/UAV change."
+    }
+  ]
+}

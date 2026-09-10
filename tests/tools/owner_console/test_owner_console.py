@@ -131,6 +131,30 @@ def test_pending_instructions_and_mark_answered(tmp_path):
     assert srv.pending_instructions(root) == []
 
 
+def test_old_item_reply_remains_pending_until_applied(tmp_path, capsys):
+    import datetime as dt
+    old_day = (dt.date.today() - dt.timedelta(days=30)).isoformat()
+    root = make_repo(tmp_path, old_day)
+    item_id = "20260905-fsd-001"
+    srv.write_reply(root, item_id, "b", "override after a long pause")
+    # Both an old item with a fresh reply and an old unapplied reply must survive.
+    reply_path = srv.item_path(root, item_id).with_suffix(".reply.json")
+    reply = json.loads(reply_path.read_text(encoding="utf-8"))
+    reply["answered_at"] = f"{old_day}T12:00:00"
+    for timestamp in (dt.datetime.now().isoformat(), reply["answered_at"]):
+        reply["answered_at"] = timestamp
+        reply_path.write_text(json.dumps(reply), encoding="utf-8")
+        assert [row["id"] for row in srv.pending_instructions(root)] == [item_id]
+
+    spec = importlib.util.spec_from_file_location("owner_console_item_age", ROOT / "tools/owner_console/item.py")
+    cli = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(cli)
+    assert cli.main(["--root", str(root), "reviews", "--json"]) == 0
+    assert [row["id"] for row in json.loads(capsys.readouterr().out)] == [item_id]
+    srv.mark_answered(root, item_id)
+    assert srv.pending_instructions(root) == []
+
+
 def test_item_priority_buckets():
     assert srv.item_priority({"kind": "portfolio"}) == 1
     assert srv.item_priority({"kind": "new-card"}) == 2
@@ -182,6 +206,27 @@ def test_item_cli_add_and_reviews(tmp_path, capsys):
     assert cli.main(["--root", str(root), "reviews"]) == 0
     out = capsys.readouterr().out
     assert item["id"] in out and "do not launch" in out
+
+
+def test_new_portfolio_cli_defaults_are_async_override_options(tmp_path, capsys):
+    root = make_repo(tmp_path, "2026-09-01")
+    spec = importlib.util.spec_from_file_location("owner_console_item_portfolio", ROOT / "tools/owner_console/item.py")
+    cli = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(cli)
+    packet = tmp_path / "packet.json"
+    packet.write_text(json.dumps(PACKET, ensure_ascii=False), encoding="utf-8")
+    assert cli.main(["--root", str(root), "add", "--direction", "portfolio", "--kind", "portfolio",
+                     "--tier", "portfolio", "--title", "formed Pro disposition", "--packet", str(packet)]) == 0
+    path = root / capsys.readouterr().out.strip()
+    item = json.loads(path.read_text(encoding="utf-8"))
+    assert [o["key"] for o in item["options"]] == ["keep", "refuse", "amend"]
+    assert item["auto_applied"] is None
+    assert cli.main(["--root", str(root), "add", "--direction", "portfolio", "--kind", "portfolio",
+                     "--tier", "portfolio", "--title", "already applied Pro disposition", "--packet", str(packet),
+                     "--auto-applied", "keep"]) == 0
+    applied_path = root / capsys.readouterr().out.strip()
+    assert json.loads(applied_path.read_text(encoding="utf-8"))["auto_applied"] == "keep"
+    assert not applied_path.with_suffix(".reply.json").exists()
 
 
 PACKET = {"question": "批准吗", "changes_if_approved": [{"target": "PORTFOLIO.md", "from": "x", "to": "y"}],
@@ -315,6 +360,67 @@ def test_trace_does_not_fabricate_reply_or_promote_ordinary_item(tmp_path):
         srv.record_trace(root, "20260905-fsd-001", **args)
     with pytest.raises(ValueError, match="requires an applied option"):
         srv.record_trace(root, p.stem, **{**args, "state": "planned"}, auto_applied="apply")
+
+
+def test_pro_trace_records_full_lifecycle_without_reply(tmp_path):
+    root = make_repo(tmp_path, "2020-01-01")
+    opts = [{"key": k, "label": k, "consequence": k} for k in ("keep", "refuse", "amend")]
+    p = srv.new_item(root, "portfolio", "portfolio", "policy", opts, tier="portfolio", packet=PACKET)
+    common = dict(authority="PRO_FINAL / OWNER_DELEGATED", source="docs/pro.md", record="docs/intake.md")
+    srv.record_trace(root, p.stem, **common, state="planned", summary="application planned")
+    srv.record_trace(root, p.stem, **common, state="blocked", summary="application blocked")
+    srv.record_trace(root, p.stem, **common, state="applied", summary="application complete", auto_applied="keep")
+    item = json.loads(p.read_text(encoding="utf-8"))
+    assert [t["state"] for t in item["execution_history"]] == ["planned", "blocked", "applied"]
+    assert item["auto_applied"] == "keep"
+    assert not p.with_suffix(".reply.json").exists()
+
+
+@pytest.mark.parametrize("choice", ["keep", "agree"])
+def test_new_portfolio_keep_and_agree_are_noops(choice):
+    item = {"kind": "portfolio", "options": [{"key": k} for k in ("keep", "refuse", "amend")],
+            "auto_applied": "keep"}
+    instruction = srv.instruction_for(item, {"choice": choice})
+    assert instruction.startswith("none")
+    assert "no new decision or launch authorization" in instruction
+
+
+@pytest.mark.parametrize("choice", ["refuse", "amend"])
+@pytest.mark.parametrize("auto_applied", [None, "keep"])
+def test_new_portfolio_override_preserves_executed_history(choice, auto_applied):
+    item = {"kind": "portfolio", "options": [{"key": k} for k in ("keep", "refuse", "amend")],
+            "auto_applied": auto_applied}
+    instruction = srv.instruction_for(item, {"choice": choice})
+    assert "at the next clean boundary" in instruction
+    assert "preserve already executed effects and history" in instruction
+    assert "no implicit rerun or reversal" in instruction
+
+
+def test_historical_portfolio_ratify_semantics_and_reply_stay_unchanged(tmp_path):
+    root = make_repo(tmp_path, "2026-09-01")
+    opts = [{"key": k, "label": k, "consequence": k} for k in ("ratify", "refuse", "amend")]
+    p = srv.new_item(root, "portfolio", "portfolio", "historical", opts, tier="portfolio",
+                     packet=PACKET, day="2026-09-06")
+    assert srv.instruction_for({"kind": "portfolio", "options": opts}, {"choice": "ratify"}) == \
+        "ratified; integrate into PORTFOLIO.md"
+    srv.write_reply(root, p.stem, "ratify", "historical approval")
+    reply = json.loads(p.with_suffix(".reply.json").read_text(encoding="utf-8"))
+    assert reply["choice"] == "ratify" and reply["comment"] == "historical approval"
+
+
+def test_custom_portfolio_options_preserve_actual_choice_semantics():
+    item = {"kind": "portfolio", "options": [{"key": "expand"}, {"key": "park"}],
+            "auto_applied": "expand"}
+    assert srv.instruction_for(item, {"choice": "expand"}) == "none (owner confirms the recorded (expand))"
+    assert srv.instruction_for(item, {"choice": "park"}) == \
+        "apply (park) at the next clean boundary; supersede the recorded (expand)"
+
+
+def test_ui_labels_new_portfolio_items_as_trace_and_override_surface():
+    html = (ROOT / "tools/owner_console/index.html").read_text(encoding="utf-8")
+    assert "Pro 裁决已形成" in html
+    assert "不等待逐项批准" in html
+    assert "待复核" in html
 
 
 def test_new_owner_override_reopens_previously_applied_reply(tmp_path):

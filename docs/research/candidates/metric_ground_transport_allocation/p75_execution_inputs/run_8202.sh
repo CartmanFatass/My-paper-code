@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -euo pipefail
+cd /home/wu/hmasd-worktrees/mgtap_b01_4f65eefb1b15e44b42d694376630fba0c230cc6c
+/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/hmasd-worktrees/mgtap_b01_4f65eefb1b15e44b42d694376630fba0c230cc6c/temp/directions/metric_ground_transport_allocation/exp/b01_8202/admission.json && /usr/bin/time -q -f '%e' -o /home/wu/hmasd-worktrees/mgtap_b01_4f65eefb1b15e44b42d694376630fba0c230cc6c/temp/directions/metric_ground_transport_allocation/exp/b01_8202/process_wall_seconds.txt /home/wu/.venvs/hmasd/bin/python scripts/run_mgtap_native_ground_geometry_b01.py --native --master 8202 --output /home/wu/hmasd-worktrees/mgtap_b01_4f65eefb1b15e44b42d694376630fba0c230cc6c/temp/directions/metric_ground_transport_allocation/exp/b01_8202 --arm-cap 1800 --pair-cap 3600

@@ -1,0 +1,107 @@
+{
+  "object": "FOLR-PUBLIC-LIFECYCLE-B03",
+  "created_at": "2026-09-09T21:14:00.092425+00:00",
+  "phase": "prospective allocated pair; zero B03 scientific execution at publication",
+  "new_execution_authorized": true,
+  "launch_source_sha": "434f10cf95f16dd342cbf754382aa76155fcd2b7",
+  "source_count_method": "stdlib AST of unchanged runner range(1,5001), final range(32), collector range(21); unchanged accepted batch32,20native steps,5slots,2actor replay passes; prior plan checked against arithmetic; no target import",
+  "source_paths": {
+    "scripts/run_folr_public_lifecycle_b01.py": "a0a73aebdf3e55868aa87c052247de4256d1788542dc6211a0bb6a36caa4a7cb",
+    "experiments/candidates/vap_folr_core/public_lifecycle_b01/collection.py": "9e017d4848fef8b16b84703bc842664e4c9658d97b1a4e29f9b15ed2a3d1383b"
+  },
+  "source_surface_diff": "empty for runner, scientific package and preflight at accepted source",
+  "training_seed": 7803,
+  "final_evaluation_seed": 107803,
+  "prior_training_seeds": [
+    7801,
+    7802
+  ],
+  "prior_evaluation_seeds": [
+    107801,
+    107802
+  ],
+  "seed_selection": "next unused pair in current direction records, chosen once without candidate outcomes",
+  "training_pair_units": 1,
+  "arms": [
+    "RETAIN",
+    "RESET"
+  ],
+  "independence": "fresh separately seeded processes, actor/mixer/targets, optimizer, replay, environment and all three PRNG states; no earlier state/checkpoint/data reuse; matched initialization inside new pair under ordinary PRNG assumption, not a common traffic tape",
+  "primitive_steps_per_episode": 20,
+  "controller_positions_per_episode": 21,
+  "slots": 5,
+  "replay_batch_episodes": 32,
+  "actor_replay_passes": 2,
+  "per_arm": {
+    "training_episodes": 5000,
+    "training_native_ticks": 100000,
+    "optimizer_steps": 4969,
+    "final_evaluation_episodes": 32,
+    "evaluation_native_ticks": 640,
+    "total_native_ticks": 100640,
+    "acting_controller_calls": 105672,
+    "acting_gru_row_forwards": 528360,
+    "online_plus_target_replay_gru_row_forwards": 33391680,
+    "sampled_td_timepoints": 3180160
+  },
+  "whole_pair": {
+    "training_episodes": 10000,
+    "training_native_ticks": 200000,
+    "optimizer_steps": 9938,
+    "final_evaluation_episodes": 64,
+    "evaluation_native_ticks": 1280,
+    "total_native_ticks": 201280,
+    "acting_controller_calls": 211344,
+    "acting_gru_row_forwards": 1056720,
+    "online_plus_target_replay_gru_row_forwards": 66783360,
+    "sampled_td_timepoints": 6360320
+  },
+  "optimizer": {
+    "name": "RMSprop",
+    "lr": 0.0005,
+    "nominal_lr_times_steps": 2.4845,
+    "trainable_actor_and_mixer": true
+  },
+  "dominant_factors": "2 arms x 4969 updates x 32 replay episodes x 21 controller positions x 5 slots x 2 actor passes, plus backward and mixing; acting 2 x 5032 x 21 x 5; no search or added evaluation candidates",
+  "exposure_line": "Per arm: 100000 real training native ticks; 4969 trainable actor/mixer RMSprop steps at lr0.0005, nominal lr*steps=2.4845; 32 final greedy episodes. Nominal lr*steps is not parameter displacement.",
+  "minimum_effect_of_interest": 1.0,
+  "reading": "d_03=J_RETAIN,03-J_RESET,03; d_03>=1 RETAIN_ABOVE_MEI; d_03<=-1 RESET_ABOVE_MEI; otherwise WITHIN_MEI; earlier pairs separate",
+  "historical_wall_seconds": {
+    "B01": {
+      "RETAIN": 770.69,
+      "RESET": 746.89,
+      "pair": 1517.58
+    },
+    "B02": {
+      "RETAIN": 767.84,
+      "RESET": 753.11,
+      "pair": 1520.95
+    }
+  },
+  "point_projection": {
+    "known_work_ratio": 1.0,
+    "per_arm_wall_seconds": {
+      "RETAIN": 769.2650000000001,
+      "RESET": 750.0
+    },
+    "pair_wall_seconds": 1519.265,
+    "basis": "mean of two same-workload complete invocation observations on CPU FP32 one compute/interop thread; not a guaranteed upper or new cost; contention/trajectories may change actual wall"
+  },
+  "prospective_limits": {
+    "complete_logical_arm_wall_seconds": 1800,
+    "whole_pair_wall_seconds": 3600,
+    "supporting_checks_and_readbacks_seconds": 60,
+    "accepted_scientific_submissions": 2,
+    "accepted_submissions_per_arm": 1,
+    "replacement_scientific_attempts": 0,
+    "additional_evaluation_checkpoints": 0,
+    "additional_scientific_invocations_beyond_pair": 0,
+    "automatic_successors": 0
+  },
+  "new_source_lines": 0,
+  "reused_engineering": "B02 seed-routing two controlled cases and unchanged B01 scientific independent review; no repeat without new concrete risk",
+  "scientific_execution_at_publication": 0,
+  "governing_reading_revision": "d89be7656d367ca10f75ca1185797081b5d722fa",
+  "foundations_current_blob": "05b3dc8d8628e2510431250c119b533f2ac3c29a",
+  "monitor_policy_main_revision": "4f216bc9e0b249f31aa1081c84adcc6671d8ab2c"
+}

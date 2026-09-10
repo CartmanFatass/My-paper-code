@@ -153,3 +153,18 @@ tests and result-bearing invocations. No additional owner-console item is needed
 technical return.
 
 scope: none
+
+## P47 bounded recovery receipt — 2026-09-08
+
+The singleton Transport's recovery, forwarded by Root and persisted in the 2026-09-08 Root
+log at 09:15:50-07:00, still leaves exact-request provider acceptance and the complete matching
+post-A02 response unproven. P47 permits first delivery only on positive evidence of original
+non-acceptance; that evidence has not been supplied. No duplicate Send, rebind, replacement
+conversation, successor selection or A02 repeat follows. The original accepted request remains
+unchanged and the unresolved idle wait counts zero advancing slots.
+
+[RCLE_TBCFV_POST_A02_TRANSPORT_BLOCKER_INTAKE_20260908.md](../../RCLE_TBCFV_POST_A02_TRANSPORT_BLOCKER_INTAKE_20260908.md)
+records the received facts, including the discrepancy between Root's corrected forwarded
+`requested_conversation_id` and the original request/provider URL, the exact unmet evidence
+condition, the applied P47 rule, zero new scientific exposure and the return to Root.
+No formed direction decision or scientific polarity is created by this recovery.

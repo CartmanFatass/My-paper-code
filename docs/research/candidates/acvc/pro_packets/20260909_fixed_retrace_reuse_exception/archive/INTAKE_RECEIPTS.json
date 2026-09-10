@@ -1,0 +1,75 @@
+{
+  "checked_utc": "2026-09-09T22:28:49.018291+00:00",
+  "request_id": "2026-09-09-acvc-fixed-retrace-reuse-exception-convergence-03",
+  "fixed_task_sha": "22a51d7b7ad25ac6439f5bfea6dd19086ccc914a",
+  "fixed_input_sha": "db8651a43237a2560b674bcd324c3d95e8f348d3",
+  "ready_handoff_sha": "e2f401fea99b40f12b079abe482419b668496548",
+  "full_response_commit": "a243f23dac21f84aa8de001bbbbd217f3e71024e",
+  "full_response_path": "docs/research/candidates/acvc/pro_packets/20260909_fixed_retrace_reuse_exception/archive/RESPONSE.md",
+  "full_response_bytes": 34292,
+  "full_response_sha256": "170ecb80013466e7ba3e7d3dee799d283e1dac4741f08ced2d0d94521cd0e758",
+  "github_blob_sha": "bf1417f1bbacdcce8adb8abcd938caacb0822718",
+  "immutable_github_matches_git": true,
+  "delivery_changed_paths": [
+    "docs/research/candidates/acvc/pro_packets/20260909_fixed_retrace_reuse_exception/archive/RESPONSE.md"
+  ],
+  "comment_url": "https://github.com/CartmanFatass/My-paper-code/issues/14#issuecomment-5609533248",
+  "comment_created_at": "2026-09-09T22:20:41Z",
+  "raw_transport_archives": [
+    {
+      "source": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\acvc\\2026-09-09-acvc-fixed-retrace-reuse-exception-convergence-03\\2026-09-09-acvc-fixed-retrace-reuse-exception-convergence-03--acvc--attempt-01__02_RESPONSE.md",
+      "archive": "docs/research/candidates/acvc/pro_packets/20260909_fixed_retrace_reuse_exception/archive/CHAT_RECEIPT.md",
+      "bytes": 384,
+      "sha256": "1d1d790b6cca384c18fc875f7fdbe0c61f3cf5c52e514d59de49df5929e7be1b"
+    },
+    {
+      "source": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\acvc\\2026-09-09-acvc-fixed-retrace-reuse-exception-convergence-03\\2026-09-09-acvc-fixed-retrace-reuse-exception-convergence-03--acvc--attempt-01__03_TRANSPORT_FACTS.json",
+      "archive": "docs/research/candidates/acvc/pro_packets/20260909_fixed_retrace_reuse_exception/archive/TRANSPORT_FACTS.json",
+      "bytes": 2855,
+      "sha256": "332f6f8430ebd46685b848e53e21f5ea549ea856dbb98c9383171379a481118a"
+    },
+    {
+      "source": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\acvc\\2026-09-09-acvc-fixed-retrace-reuse-exception-convergence-03\\2026-09-09-acvc-fixed-retrace-reuse-exception-convergence-03--acvc__00_PROMPT.md",
+      "archive": "docs/research/candidates/acvc/pro_packets/20260909_fixed_retrace_reuse_exception/archive/TRANSPORT_PROMPT.md",
+      "bytes": 1245,
+      "sha256": "1128390320fe420fa8196fbfe2f72d6404ae4c8b76bf5b73c4e648f26eeaf745"
+    },
+    {
+      "source": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\acvc\\2026-09-09-acvc-fixed-retrace-reuse-exception-convergence-03\\2026-09-09-acvc-fixed-retrace-reuse-exception-convergence-03--acvc__PACKET_MANIFEST.json",
+      "archive": "docs/research/candidates/acvc/pro_packets/20260909_fixed_retrace_reuse_exception/archive/TRANSPORT_MANIFEST.json",
+      "bytes": 1834,
+      "sha256": "57691bc3e6dbc9878e5eca1ba3000f324d61df3d411f3828d378eed1d3ed60f0"
+    }
+  ],
+  "spec_insertion_extracted_from": "first markdown block in full immutable RESPONSE.md",
+  "spec_insertion_sha256": "7f5cd144a25bd187082ff5a3726a17e9862480ed861ff08e6a93f5d5d0cadcc6",
+  "full_decision_read": true,
+  "spec_application_to_main": "Applied by Root, not this DM; direct immutable block readback matches",
+  "new_scientific_exposure": {
+    "invocations": 0,
+    "model_loads": 0,
+    "models": 0,
+    "native_steps": 0,
+    "updates": 0,
+    "evaluations": 0,
+    "tests": 0,
+    "profiles": 0,
+    "probes": 0
+  },
+  "exact_card_blocks_applied": 4,
+  "card_application_rule": "Four markdown blocks from immutable response; separate status/freeze note follows Root post-response assignment",
+  "redundant_spec_extraction_published": false,
+  "root_shared_spec_application": "Root accepted exact archived block and is applying it on main; this DM does not write shared spec",
+  "binding_source_checked": {
+    "next_valid": "count > 0 and selected coordinate unique, including prior count20",
+    "loss": "valid retained anchor absent within normalized Linf2e-6 and current count1..19",
+    "intervention": "loss and positive away dot",
+    "source_changed": false
+  },
+  "root_shared_spec_application_commit": "996f121eaba29bfb22af29e0f252a2c4c4eb7d41",
+  "root_shared_spec_block_matches_exact_response": true,
+  "root_application_changed_paths": [
+    "docs/research/portfolio/decisions/2026-09-09-synthesis-execution.md",
+    "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md"
+  ]
+}

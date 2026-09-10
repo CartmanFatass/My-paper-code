@@ -12,19 +12,22 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from experiments.candidates.capability_bound_semantic_currentness.opportunity_credit_b04.run import (
-    ARMS, OBJECT, expected_seed, run_arm, write_read,
+    ARMS, OBJECT, B05_OBJECT, expected_seed, run_arm, write_read,
 )
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--engineering", action="store_true")
+    parser.add_argument("--b05", action="store_true", help="selected B05 formal seed and identity")
     parser.add_argument("--arm", choices=ARMS)
     parser.add_argument("--seed", type=int, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--raw-result", type=Path)
     args = parser.parse_args()
-    if args.seed != expected_seed(args.engineering):
+    if args.b05 and args.engineering:
+        parser.error("B05 has no engineering profile")
+    if args.seed != expected_seed(args.engineering, b05=args.b05):
         parser.error("seed differs from selected profile")
     sha = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
     if args.engineering:
@@ -51,8 +54,8 @@ def main():
         if args.arm is None:
             parser.error("formal arm is required")
         result = run_arm(arm=args.arm, seed=args.seed, output=args.output,
-                         launch_sha=sha, raw_result=args.raw_result, started=STARTED)
-    print(json.dumps({"object": OBJECT, "output": str(args.output),
+                         launch_sha=sha, raw_result=args.raw_result, started=STARTED, b05=args.b05)
+    print(json.dumps({"object": B05_OBJECT if args.b05 else OBJECT, "output": str(args.output),
                       "profile": result["profile"], "complete": True}))
 
 

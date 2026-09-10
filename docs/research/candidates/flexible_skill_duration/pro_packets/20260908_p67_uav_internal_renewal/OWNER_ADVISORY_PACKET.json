@@ -1,0 +1,43 @@
+{
+  "question": "是否认可将这个有具体原生动作路径的 UAV 个体技能续约 B 问题交给既有 Convergence，而不是重复已停止的走廊实验？",
+  "changes_if_approved": [
+    {
+      "target": "flexible_skill_duration：P67 方向建议",
+      "from": "P52 已结束所测 public-mask 扩展，没有后继对象",
+      "to": "建议 Convergence 评估一次固定团队时钟内的个体提前续约与 reactive D0 的新 UAV 对比；此项本身不打开 family、不建卡、不分配运行"
+    }
+  ],
+  "if_refused": "保留 P52 与普通走廊 family 暂停，返回这次没有准备好的继续问题；不制造新的经验负例或重跑旧 seed。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_P67_UAV_INTERNAL_RENEWAL_QUESTION_INTAKE_20260908.md",
+      "quote": "The candidate changes the **tested action/learning question**, not just a host\nlabel.",
+      "why": "这次改的是实际进入连续运动 actor 的内部技能，旧 H 改的是外部服务续约 mask；有可指出的动作与回报路径。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_P67_UAV_INTERNAL_RENEWAL_QUESTION_INTAKE_20260908.md",
+      "quote": "A held skill does **not** freeze velocity or withhold new observations.",
+      "why": "最强直接对照本来就每步反应，续约可能没有增益或扰乱学习。"
+    },
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_P67_UAV_INTERNAL_RENEWAL_QUESTION_INTAKE_20260908.md",
+      "quote": "Illustrative complete invocation caps are3600s D0 and18000s I,21600s summed;",
+      "why": "决策行数最多增长十倍；旧机器估计不是新实测，有限实验也可能很贵。"
+    }
+  ],
+  "uncertainty": [
+    "只建议提问，尚无 formed Pro decision、UAV 卡、seed 或运行额度。",
+    "B03 的 H-D0 增益与 G-H 缺口均保留，不能预测这次 UAV 的符号。",
+    "原生 D0 与 I 的当前远程耗时、优化器工作和学习结果未知；不要求另设试跑或完整因果诊断。"
+  ],
+  "cost": {
+    "compute": "本次零模型/训练/评估/仿真/回放；候选 B 为 2 个 learner、1 个新配对、共 8 万训练与 3.2 万评价步，未来完整上限合计 21600 秒，未分配。",
+    "owner_time": "可异步认可、拒绝或修改建议，无等待。",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing；已有 P67 授权允许先发布问题，方向选择由 proper node 形成"
+  },
+  "verdict_text": "Recommend submitting this distinct prospective B question to the existing\nConvergence node.",
+  "source": "docs/research/candidates/flexible_skill_duration/FSD_P67_UAV_INTERNAL_RENEWAL_QUESTION_INTAKE_20260908.md"
+}

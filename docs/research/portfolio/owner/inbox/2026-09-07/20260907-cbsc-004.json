@@ -72,5 +72,15 @@
     "verdict_text": "Recommendation and selected option: (a).",
     "source": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_POST_A03_ACQUISITION_SELECTION_20260907.md"
   },
-  "starred": false
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-07T21:31:27+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/decisions/2026-09-03-unattended-delegation.md",
+      "record": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_POST_A03_ACQUISITION_INTAKE_20260907.md",
+      "state": "applied",
+      "summary": "Standing object delegation plus P11 one-call release executed the selected card: PATH_INCOMPLETE, curl18 at2.85s with444302Torch bytes and0install/import. This application records card execution, not candidate readiness or an owner reply. DM retains the result and yields acquisition with commandnone/newbound0; no retry."
+    }
+  ]
 }

@@ -1,0 +1,216 @@
+{
+  "task": "P56 source question; no selected scientific object",
+  "recorded_utc": "2026-09-08T19:57:54.585934+00:00",
+  "checkout_revision": "8906f6571ce61a606b3d7da19a5680d8f62a38ae",
+  "sources": [
+    {
+      "ref": "6374063408208ba67b8cb7c69ebc0babb0f00259",
+      "path": "experiments/candidates/ucope/uav_motion_prefix_b01/learner.py",
+      "symbols": {
+        "returns_to_go": {
+          "first_line": 12,
+          "last_line": 14
+        },
+        "collect_episode": {
+          "first_line": 29,
+          "last_line": 155
+        },
+        "optimizer_for": {
+          "first_line": 173,
+          "last_line": 176
+        },
+        "update": {
+          "first_line": 179,
+          "last_line": 212
+        }
+      }
+    },
+    {
+      "ref": "6374063408208ba67b8cb7c69ebc0babb0f00259",
+      "path": "experiments/candidates/ucope/uav_motion_prefix_b01/environment.py",
+      "symbols": {
+        "make_real": {
+          "first_line": 8,
+          "last_line": 24
+        },
+        "actor_features": {
+          "first_line": 27,
+          "last_line": 29
+        },
+        "critic_features": {
+          "first_line": 32,
+          "last_line": 39
+        },
+        "team_reward": {
+          "first_line": 49,
+          "last_line": 50
+        },
+        "HoldState": {
+          "first_line": 60,
+          "last_line": 74
+        }
+      }
+    },
+    {
+      "ref": "6374063408208ba67b8cb7c69ebc0babb0f00259",
+      "path": "experiments/candidates/ucope/uav_motion_prefix_b01/policy.py",
+      "symbols": {
+        "Actor": {
+          "first_line": 10,
+          "last_line": 21
+        },
+        "Critic": {
+          "first_line": 24,
+          "last_line": 31
+        },
+        "joint_terms": {
+          "first_line": 64,
+          "last_line": 81
+        },
+        "sample": {
+          "first_line": 84,
+          "last_line": 94
+        }
+      }
+    },
+    {
+      "ref": "65c89368ab0fc7402fb0e24254447629e829a12d",
+      "path": "experiments/candidates/vsp_c1/native_hold_value_b01/study.py",
+      "symbols": {
+        "Config": {
+          "first_line": 18,
+          "last_line": 31
+        },
+        "run_pair": {
+          "first_line": 84,
+          "last_line": 251
+        }
+      }
+    },
+    {
+      "ref": "65c89368ab0fc7402fb0e24254447629e829a12d",
+      "path": "experiments/candidates/vsp_c1/native_hold_value_b01/critic.py",
+      "symbols": {
+        "GatedCritic": {
+          "first_line": 14,
+          "last_line": 27
+        },
+        "models": {
+          "first_line": 30,
+          "last_line": 32
+        }
+      }
+    }
+  ],
+  "source_config": {
+    "seed": 8101,
+    "fixture": false,
+    "horizon": 256,
+    "train_episodes": 512,
+    "eval_episodes": 32,
+    "chunk": 32,
+    "arm_cap": 1800,
+    "pair_cap": 3600,
+    "ratio_grouping": "agent_compound"
+  },
+  "source_budget_reference_only": {
+    "independent_training_pairs": 1,
+    "learned_arms": 2,
+    "training_team_steps_per_arm": 131072,
+    "training_team_steps_pair": 262144,
+    "evaluation_team_steps_three_arms": 24576,
+    "total_team_steps": 286720,
+    "rollouts_per_arm": 256,
+    "adam_calls_per_arm": 1024,
+    "adam_calls_pair": 2048,
+    "training_duration_decisions_per_arm": 2560,
+    "max_nonzero_remaining_hold_rows_per_arm": 1536,
+    "max_nonzero_remaining_hold_fraction": 0.01171875,
+    "max_scalar_held_to_t4_pairs_per_two_episode_rollout": 6,
+    "max_added_pair_residual_terms_per_arm_across_four_epochs": 6144,
+    "extra_critic_forward_calls_needed_if_full_rollout_values_reused": 0
+  },
+  "actual_p56_exposure": {
+    "model_constructions": 0,
+    "environment_constructions": 0,
+    "native_steps": 0,
+    "synthetic_steps": 0,
+    "training_episodes": 0,
+    "evaluation_episodes": 0,
+    "replays": 0,
+    "profiling_invocations": 0,
+    "optimizer_steps": 0,
+    "result_bearing_invocations": 0,
+    "pro_sends": 0
+  },
+  "exposure_line": "P56_SOURCE_ONLY: models=0; envs=0; native_steps=0; synthetic_steps=0; train_episodes=0; eval_episodes=0; optimizer_steps=0; replay=0; profiling=0; new_result_invocations=0; parameter_displacement=not_applicable(no learner)",
+  "engineering_scope_section4": "none",
+  "engineering_budget_breach": false,
+  "resource_admission": "not applicable: source text/AST, registry reads and arithmetic only",
+  "source_dependency_gap": "environment.py is present at pinned UCOPE ref but absent in checkout revision; read with git show, no repair or scientific polarity inferred",
+  "held_interface_excerpts": {
+    "actor_features": {
+      "first_line": 27,
+      "text": "def actor_features(obs, last, remaining):\n    return np.concatenate((np.asarray(obs, dtype=np.float32), last,\n                           remaining[:, None] / 4), axis=-1).astype(np.float32)"
+    },
+    "critic_features": {
+      "first_line": 32,
+      "text": "def critic_features(state, last, remaining):\n    state = np.array(state, dtype=np.float32, copy=True)\n    xyz = state[:15].reshape(5, 3)\n    xyz[:, :2] /= 1000\n    xyz[:, 2] = (xyz[:, 2] - 50) / 100\n    state[15:115] /= 1000\n    commitments = np.concatenate((last, remaining[:, None] / 4), axis=1)\n    return np.concatenate((state, commitments.ravel())).astype(np.float32)"
+    },
+    "team_reward": {
+      "first_line": 49,
+      "text": "def team_reward(info):\n    return sum(float(info[\"rewards_dict\"][a]) for a in AGENTS)"
+    },
+    "HoldState": {
+      "first_line": 60,
+      "text": "class HoldState:\n    def __init__(self):\n        self.last = np.zeros((5, 3), dtype=np.float32)\n        self.remaining = np.zeros(5, dtype=np.int64)\n\n    def decide(self, t, sampled, durations):\n        active = self.remaining == 0\n        sent = self.last.copy()\n        sent[active] = sampled[active]\n        self.remaining[active] = durations[active] if t == 0 else 1\n        return sent, active\n\n    def advance(self, sent):\n        self.last[:] = sent\n        self.remaining = np.maximum(self.remaining - 1, 0)"
+    }
+  },
+  "prior_mlp_exposure": {
+    "evidence_path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B01_COLLECTION_EVIDENCE_20260908.json",
+    "master": 8101,
+    "parameters": 66441,
+    "adam_calls": 1024,
+    "total_displacement_over_initial_l2": 0.46816692102357516,
+    "critic_displacement_over_initial_l2": 0.7238134732229137,
+    "duration_absolute_displacement": 0.15823301672935486,
+    "duration_relative_displacement": "undefined: zero initial norm"
+  },
+  "unselected_candidate": {
+    "name": "SCDMP-NATIVE-HOLD-RESIDUAL-B01",
+    "master": 8201,
+    "learned_arms": [
+      "RESIDUAL-MC",
+      "MLP-MC"
+    ],
+    "attained_reference": "H",
+    "residual_coefficient": 1.0,
+    "value_coefficient": 0.5,
+    "pairs": "one scalar pair (t,4) per episode for t in {1,2,3} iff any stored remaining hold is nonzero",
+    "two_endpoint_gradients": true,
+    "added_parameters": 0,
+    "native_mei_absolute": 0.01,
+    "nonempty_pair_normalization": "mean over actual pairs",
+    "zero_pairs": "zero auxiliary loss",
+    "native_work_allocated": false
+  },
+  "prospective_exposure_line": "Candidate only: 2 fresh learners x 66441 parameters x 1024 Adam calls at lr=0.0003; source MLP total displacement/initial-L2=0.4681669210; proposed pairs add no optimizer steps or parameters; P56 new model/env/train/eval/optimizer/replay/profile/result invocations all 0.",
+  "literature_index_observation": {
+    "inst_sci_formal_catalog_rows": 190,
+    "my_lib_mechanism_index_rows": 2,
+    "my_lib_mechanism_ids": [
+      "M-DELAYED-WINDOW",
+      "M-POPULATION-CREDIT"
+    ],
+    "my_lib_page_index_rows": 0,
+    "my_lib_scientific_coverage": "synthetic fixtures excluded",
+    "inst_sci_semigroup_matches": 0,
+    "inst_sci_temporal_consistency_matches": 0,
+    "inst_sci_multi_step_matches": [
+      "MARL-0016",
+      "MARL-0483",
+      "MARL-0653"
+    ],
+    "reused_and_checked_prior_retrieval": "VS-0005"
+  }
+}

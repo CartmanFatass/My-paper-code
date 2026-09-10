@@ -1,0 +1,100 @@
+{
+  "id": "20260908-ucope-005",
+  "created": "2026-09-08T19:43:20-07:00",
+  "direction": "ucope",
+  "tier": "direction",
+  "kind": "close-call",
+  "title": "UCOPE：到期后持续时间再决策是否值得一次新比较？",
+  "context": "B04完整结果在±0.01内，T均值低于G。当前持续时间只在开局选择；新问题是各自到期时使用已演化的私有历史再选择1或4步。仅提交方向节点，未选实验。",
+  "options": [
+    {
+      "key": "a",
+      "label": "一个明确的到期再决策B",
+      "consequence": "若方向节点选择，冻结新卡并由同一CM完成一次有界比较和所有结果接收；当前只有提案。"
+    },
+    {
+      "key": "b",
+      "label": "保留无已就绪后续",
+      "consequence": "保留全部旧结论并返回无后续，不自动补种子或改写家族。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "改变的是后续状态上的真实决策机会；原生训练预算可保留，但普通反馈的优势和增加的头部工作使这只是窄幅推荐。",
+  "evidence": [
+    "docs/research/candidates/ucope/UCOPE_POST_B04_RENEWAL_P67_PREPARATION_INTAKE_20260908.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-08.md#L75",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "完成B04后，是否值得把持续时间选择从一次开局改为每架无人机各自承诺到期时再选，并做一次同信息反馈比较？当前仅准备交给同一Convergence节点的问题，尚未选择实验。",
+    "changes_if_approved": [
+      {
+        "target": "UCOPE 下一判别问题",
+        "from": "P61已完整接收，当前无已选后续",
+        "to": "由方向节点明确选择一次全程到期再决策的B及预算，或保留无后续；本地不先行启动"
+      }
+    ],
+    "if_refused": "保留P61 WITHIN及全部正反结果，返回无已就绪后续；不重跑7201、不补评价，不在本地关闭或重写整个方向。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_POST_B04_RENEWAL_P67_PREPARATION_INTAKE_20260908.md#2-the-untested-event-change-and-strongest-null",
+        "quote": "The existing duration mask and `sample` opening flag both use `t == 0`.",
+        "why": "现有持续时间选择只见初始状态，未在演化后的局部历史上反复决定承诺。"
+      },
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_POST_B04_RENEWAL_P67_PREPARATION_INTAKE_20260908.md#3-question-driven-local-library-check",
+        "quote": "the surviving question is repeated own-expiry selection using existing private history",
+        "why": "核对的真实论文区分了到期再决策；只支持这个机制问题，不证明UAV收益。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_UAV_MOTION_PREFIX_B04_P61_INTAKE_20260908.md#2-rule-applied-verbatim-and-complete-comparison",
+        "quote": "T−G −0.003948225944122139; G−H +0.0238187196536019; T−H +0.019870493709479763.",
+        "why": "反馈策略的当前样本均值更高，只有一对训练，且B02/B03也没有支持稳定收益。"
+      },
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_POST_B04_RENEWAL_P67_PREPARATION_INTAKE_20260908.md#5-dominant-work-and-decision-value",
+        "quote": "64–256 times B04's duration-head rows",
+        "why": "原生步数不增加，但持续时间采样和更新显著增多；新增秒数未知，不把过去耗时当预测。"
+      }
+    ],
+    "uncertainty": [
+      "可能只是增加承诺错误和学习暴露，普通反馈仍可完成所有有用控制。",
+      "头部更新或更多持续时间选择并不证明有效信息利用。",
+      "改变事件边界须由同一方向节点裁决；若属RECAST，不能靠新命名规避其计数。"
+    ],
+    "cost": {
+      "compute": "本次准备零实验。提案一次独立训练对：286720原生步、2048 Adam、96最终评价；1800秒/臂、3600秒完整上限。头部前向约22.16–88.63亿乘加，额外秒数未知。",
+      "owner_time": "可异步改选，无需等回复。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing; 本地提交packet后由Root路由Pro，实验尚未获选"
+    },
+    "verdict_text": "The DM narrowly favors one concrete renewable-commitment comparison; only the preparation question is selected. The direction decision and any scientific allocation remain pending.",
+    "source": "docs/research/candidates/ucope/UCOPE_POST_B04_RENEWAL_P67_PREPARATION_INTAKE_20260908.md"
+  },
+  "starred": true,
+  "approval_correction": "证据反方的quote字段是B04三项对比的紧凑转录，并非一整句原文。原表的主指标行逐字为：| T−G | −0.003948225944122139 | 0.010191826216031805 | 18 / 14 / 0 |。全部数值及推荐保持不变；其余两项来自同表的G−H和T−H行。",
+  "execution_history": [
+    {
+      "at": "2026-09-09T02:44:59+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/handoffs/2026-09-08-research-resume.md",
+      "record": "docs/research/candidates/ucope/UCOPE_POST_B04_RENEWAL_P67_PREPARATION_INTAKE_20260908.md",
+      "state": "planned",
+      "summary": "P67只执行新问题的准备，方向选项均未应用；实验/Send仍为零。",
+      "correction": "证据反方的quote字段是B04三项对比的紧凑转录，并非一整句原文。原表的主指标行逐字为：| T−G | −0.003948225944122139 | 0.010191826216031805 | 18 / 14 / 0 |。全部数值及推荐保持不变；其余两项来自同表的G−H和T−H行。"
+    },
+    {
+      "at": "2026-09-09T04:03:45+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/ucope/pro_packets/20260908_post_b04_renewal_convergence/archive/RESPONSE.md",
+      "record": "docs/research/candidates/ucope/UCOPE_POST_B04_RENEWAL_CONVERGENCE_INTAKE_20260908.md",
+      "state": "applied",
+      "summary": "完整同一节点答复选择RECAST及一次7301 B，卡片与检查要求已落实；旧结论保留。当前未编码或运行；方向选择不等于实验已执行。"
+    }
+  ]
+}

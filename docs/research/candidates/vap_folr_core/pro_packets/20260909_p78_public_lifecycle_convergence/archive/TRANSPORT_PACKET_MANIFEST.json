@@ -1,0 +1,36 @@
+{
+  "schema_version": 4,
+  "packet_id": "folr-public-lifecycle-p78-convergence-20260909--vap_folr_core",
+  "attempt": 1,
+  "canonical_form": "logical_packet_manifest",
+  "request_id": "folr-public-lifecycle-p78-convergence-20260909",
+  "direction_id": "vap_folr_core",
+  "direction_ids": [
+    "vap_folr_core"
+  ],
+  "workflow_node": "em_convergence",
+  "conversation_binding_key": "em:vap_folr_core:convergence",
+  "decision_authority": "pro_final",
+  "source_mode": "paste",
+  "body": {
+    "role": "prompt",
+    "source_path": "<paste>",
+    "canonical_filename": "folr-public-lifecycle-p78-convergence-20260909--vap_folr_core__00_PROMPT.md",
+    "bytes": 1257,
+    "sha256": "f8719a67576ee1f05e32357c8d008e98ab95c0e1c7ff76babd6499a77ea1090d",
+    "materialized_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\folr-public-lifecycle-p78-convergence-20260909\\folr-public-lifecycle-p78-convergence-20260909--vap_folr_core__00_PROMPT.md"
+  },
+  "references": [],
+  "reference_order_is_authoritative": true,
+  "provider_filename_policy": "record_observed_name_only",
+  "companion_prompt_is_transport_ui_only": true,
+  "manifest_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\folr-public-lifecycle-p78-convergence-20260909\\folr-public-lifecycle-p78-convergence-20260909--vap_folr_core__PACKET_MANIFEST.json",
+  "materialized_artifacts": {
+    "body": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\folr-public-lifecycle-p78-convergence-20260909\\folr-public-lifecycle-p78-convergence-20260909--vap_folr_core__00_PROMPT.md",
+    "references": []
+  },
+  "materialized_hashes": {
+    "body": "f8719a67576ee1f05e32357c8d008e98ab95c0e1c7ff76babd6499a77ea1090d",
+    "references": []
+  }
+}

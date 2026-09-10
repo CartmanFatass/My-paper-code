@@ -1,0 +1,511 @@
+{
+  "object": "UCOPE-UAV-MOTION-PREFIX-B01",
+  "independent_unit": "prospectively matched T/G training pair; n=2",
+  "selection": "all final sampled episodes; no historical runs or selected checkpoints",
+  "new_environment_calls": 0,
+  "new_optimizer_calls": 0,
+  "diagnostic_scope": "Descriptive saved prefix/local-input/service rows; not causal interventions or extra independent runs.",
+  "pairs": {
+    "6801": {
+      "source": "C:\\Projects\\HMASD\\temp\\directions\\ucope\\exp\\uav-motion-prefix-b01-6801-p21-20260907",
+      "launch_sha": "536949660fee3ab9ac92aba29c2c0455ffe9f6e1",
+      "counts": {
+        "train_team_steps": 262144,
+        "eval_team_steps": 24576,
+        "team_steps": 286720,
+        "optimizer_steps": 2048,
+        "train_episodes": 1024,
+        "eval_episodes": 96,
+        "velocity_decisions": 1388371,
+        "duration_decisions": 2720,
+        "d4": 1423,
+        "recurrent_observations": 1392640,
+        "explicit_resets": 1120,
+        "constructor_resets": 2,
+        "constructors": 2,
+        "step_calls": 286720,
+        "scientific_uav_calls": 286720,
+        "diagnostic_frames": 1600,
+        "completed_episode_steps": 286720,
+        "rollouts": 512,
+        "partial_episode_steps": 0
+      },
+      "limits": [],
+      "cap_breach": false,
+      "arms": {
+        "T": {
+          "n_eval_episodes": 32,
+          "J_mean": 0.19815651099380138,
+          "prefix_contribution_to_J": 0.0025976650962994726,
+          "suffix_contribution_to_J": 0.19555884589750192,
+          "mean_prefix_displacement_m": 88.8723999285124,
+          "mean_prefix_path_length_m": 119.62687391783466,
+          "mean_served_connections": 11.9110107421875,
+          "eval_d4": 83,
+          "eval_duration_decisions": 160,
+          "train_J_by_128_episode_blocks": [
+            0.13003104274358418,
+            0.1314112950952309,
+            0.1427055105255146,
+            0.18596923355472023
+          ],
+          "exposure": {
+            "common_actor": {
+              "parameters": 32134,
+              "initial_norm": 12.32491683959961,
+              "final_norm": 12.542105674743652,
+              "displacement": 2.3661301136016846,
+              "relative_displacement": 0.1919793978649157
+            },
+            "critic": {
+              "parameters": 34177,
+              "initial_norm": 9.319281578063965,
+              "final_norm": 12.589037895202637,
+              "displacement": 8.235507011413574,
+              "relative_displacement": 0.8837062108733468
+            },
+            "duration": {
+              "parameters": 130,
+              "initial_norm": 0.0,
+              "final_norm": 0.191929429769516,
+              "displacement": 0.191929429769516,
+              "relative_displacement": 191929429769.516
+            },
+            "total": {
+              "parameters": 66441,
+              "initial_norm": 15.451618194580078,
+              "final_norm": 17.771465301513672,
+              "displacement": 8.570823669433594,
+              "relative_displacement": 0.55468777195384
+            }
+          },
+          "observation_trace": {
+            "agent_prefixes": 160,
+            "user_set_changed_t0_t4": 99,
+            "uav_set_changed_t0_t4": 26,
+            "other_local_values_changed_t0_t4": 142,
+            "d4_prefixes": 83,
+            "d4_other_local_values_changed_during_hold": 72,
+            "t4_new_decisions": 160,
+            "t4_command_differs_from_t0": 160,
+            "local_user_entries_t0": 289,
+            "local_user_entries_t4": 334,
+            "local_uav_entries_t0": 49,
+            "local_uav_entries_t4": 39
+          }
+        },
+        "G": {
+          "n_eval_episodes": 32,
+          "J_mean": 0.1914424787546125,
+          "prefix_contribution_to_J": 0.002455516269216777,
+          "suffix_contribution_to_J": 0.18898696248539576,
+          "mean_prefix_displacement_m": 58.53021141656094,
+          "mean_prefix_path_length_m": 123.35286272830315,
+          "mean_served_connections": 11.5533447265625,
+          "eval_d4": 0,
+          "eval_duration_decisions": 0,
+          "train_J_by_128_episode_blocks": [
+            0.1360649961469168,
+            0.1424295100836651,
+            0.13978852021913143,
+            0.171903745401057
+          ],
+          "exposure": {
+            "common_actor": {
+              "parameters": 32134,
+              "initial_norm": 12.32491683959961,
+              "final_norm": 12.504206657409668,
+              "displacement": 2.0696828365325928,
+              "relative_displacement": 0.16792671816515567
+            },
+            "critic": {
+              "parameters": 34177,
+              "initial_norm": 9.319281578063965,
+              "final_norm": 12.670134544372559,
+              "displacement": 8.308616638183594,
+              "relative_displacement": 0.8915511961501196
+            },
+            "total": {
+              "parameters": 66311,
+              "initial_norm": 15.451619148254395,
+              "final_norm": 17.801328659057617,
+              "displacement": 8.562516212463379,
+              "relative_displacement": 0.554150094582816
+            }
+          },
+          "observation_trace": {
+            "agent_prefixes": 160,
+            "user_set_changed_t0_t4": 84,
+            "uav_set_changed_t0_t4": 23,
+            "other_local_values_changed_t0_t4": 140,
+            "d4_prefixes": 0,
+            "d4_other_local_values_changed_during_hold": 0,
+            "t4_new_decisions": 160,
+            "t4_command_differs_from_t0": 160,
+            "local_user_entries_t0": 289,
+            "local_user_entries_t4": 317,
+            "local_uav_entries_t0": 49,
+            "local_uav_entries_t4": 50
+          }
+        },
+        "H": {
+          "n_eval_episodes": 32,
+          "J_mean": 0.1490047481461882,
+          "prefix_contribution_to_J": 0.0023281991897841914,
+          "suffix_contribution_to_J": 0.146676548956404,
+          "mean_prefix_displacement_m": 0.0,
+          "mean_prefix_path_length_m": 0.0,
+          "mean_served_connections": 9.03125,
+          "eval_d4": 0,
+          "eval_duration_decisions": 0
+        }
+      },
+      "contrasts": {
+        "T_minus_G": {
+          "mean": 0.006714032239188856,
+          "conditional_se": 0.011125795446968265,
+          "positive_episodes": 17,
+          "negative_episodes": 15,
+          "zero_episodes": 0,
+          "min_episode_difference": -0.13907727630980815,
+          "max_episode_difference": 0.10714095638179272,
+          "prefix_contribution": 0.00014214882708269534,
+          "suffix_contribution": 0.006571883412106161
+        },
+        "G_minus_H": {
+          "mean": 0.04243773060842434,
+          "conditional_se": 0.012071690736933637,
+          "positive_episodes": 25,
+          "negative_episodes": 7,
+          "zero_episodes": 0,
+          "min_episode_difference": -0.18228016960119237,
+          "max_episode_difference": 0.13637513683962826,
+          "prefix_contribution": 0.00012731707943258554,
+          "suffix_contribution": 0.04231041352899175
+        }
+      },
+      "runtime": {
+        "handle": "ucope-uav-motion-prefix-b01-6801-p21-20260907",
+        "start_unix": 1788840906,
+        "start_utc": "2026-09-08T04:15:06+00:00",
+        "end_utc": "2026-09-08T04:19:55+00:00",
+        "status": "finished",
+        "pid": 2758585,
+        "exit_code": 0,
+        "whole_wall_seconds": 288.88,
+        "peak_rss_kib": 553808,
+        "admission": {
+          "assessed_at": "2026-09-08T04:15:06.418646Z",
+          "available_physical_bytes": 15651278848,
+          "captured_at": "2026-09-08T04:15:06.418375Z",
+          "cgroup_headroom_bytes": null,
+          "cgroup_memory_current_bytes": null,
+          "cgroup_memory_max_bytes": null,
+          "effective_available_bytes": 15651278848,
+          "effective_floor_pass": true,
+          "failure_reasons": [],
+          "measurement_source": "/proc/meminfo",
+          "minimum_available_bytes": 4294967296,
+          "passed": true,
+          "physical_floor_pass": true,
+          "schema_version": 1
+        },
+        "aggregate_cpu": null,
+        "resource_flag": "resources_unmeasured: aggregate CPU"
+      }
+    },
+    "6802": {
+      "source": "C:\\Projects\\HMASD\\temp\\directions\\ucope\\exp\\uav-motion-prefix-b01-6802-p21-20260907",
+      "launch_sha": "536949660fee3ab9ac92aba29c2c0455ffe9f6e1",
+      "counts": {
+        "train_team_steps": 262144,
+        "eval_team_steps": 24576,
+        "team_steps": 286720,
+        "optimizer_steps": 2048,
+        "train_episodes": 1024,
+        "eval_episodes": 96,
+        "velocity_decisions": 1388884,
+        "duration_decisions": 2720,
+        "d4": 1252,
+        "recurrent_observations": 1392640,
+        "explicit_resets": 1120,
+        "constructor_resets": 2,
+        "constructors": 2,
+        "step_calls": 286720,
+        "scientific_uav_calls": 286720,
+        "diagnostic_frames": 1600,
+        "completed_episode_steps": 286720,
+        "rollouts": 512,
+        "partial_episode_steps": 0
+      },
+      "limits": [],
+      "cap_breach": false,
+      "arms": {
+        "T": {
+          "n_eval_episodes": 32,
+          "J_mean": 0.17927686870918463,
+          "prefix_contribution_to_J": 0.0023365170973273985,
+          "suffix_contribution_to_J": 0.17694035161185723,
+          "mean_prefix_displacement_m": 80.78822038278108,
+          "mean_prefix_path_length_m": 117.07400940906541,
+          "mean_served_connections": 10.611328125,
+          "eval_d4": 78,
+          "eval_duration_decisions": 160,
+          "train_J_by_128_episode_blocks": [
+            0.09532998340285763,
+            0.09114829957079891,
+            0.1298738564163752,
+            0.16958126587359323
+          ],
+          "exposure": {
+            "common_actor": {
+              "parameters": 32134,
+              "initial_norm": 12.342048645019531,
+              "final_norm": 12.514739036560059,
+              "displacement": 2.056136131286621,
+              "relative_displacement": 0.16659601581753453
+            },
+            "critic": {
+              "parameters": 34177,
+              "initial_norm": 9.276254653930664,
+              "final_norm": 13.146763801574707,
+              "displacement": 9.004271507263184,
+              "relative_displacement": 0.9706796377616475
+            },
+            "duration": {
+              "parameters": 130,
+              "initial_norm": 0.0,
+              "final_norm": 0.20335447788238525,
+              "displacement": 0.20335447788238525,
+              "relative_displacement": 203354477882.38525
+            },
+            "total": {
+              "parameters": 66441,
+              "initial_norm": 15.439399719238281,
+              "final_norm": 18.152061462402344,
+              "displacement": 9.238286972045898,
+              "relative_displacement": 0.5983579115795494
+            }
+          },
+          "observation_trace": {
+            "agent_prefixes": 160,
+            "user_set_changed_t0_t4": 99,
+            "uav_set_changed_t0_t4": 28,
+            "other_local_values_changed_t0_t4": 142,
+            "d4_prefixes": 78,
+            "d4_other_local_values_changed_during_hold": 73,
+            "t4_new_decisions": 160,
+            "t4_command_differs_from_t0": 160,
+            "local_user_entries_t0": 285,
+            "local_user_entries_t4": 277,
+            "local_uav_entries_t0": 44,
+            "local_uav_entries_t4": 33
+          }
+        },
+        "G": {
+          "n_eval_episodes": 32,
+          "J_mean": 0.15555605970373051,
+          "prefix_contribution_to_J": 0.002248880484628323,
+          "suffix_contribution_to_J": 0.15330717921910217,
+          "mean_prefix_displacement_m": 59.532216842907765,
+          "mean_prefix_path_length_m": 123.98424986472403,
+          "mean_served_connections": 9.283447265625,
+          "eval_d4": 0,
+          "eval_duration_decisions": 0,
+          "train_J_by_128_episode_blocks": [
+            0.12523556894413265,
+            0.15036402364133394,
+            0.12514950633058644,
+            0.15050848311285633
+          ],
+          "exposure": {
+            "common_actor": {
+              "parameters": 32134,
+              "initial_norm": 12.342048645019531,
+              "final_norm": 12.588972091674805,
+              "displacement": 2.4982070922851562,
+              "relative_displacement": 0.20241429637316102
+            },
+            "critic": {
+              "parameters": 34177,
+              "initial_norm": 9.276254653930664,
+              "final_norm": 12.149480819702148,
+              "displacement": 7.603028297424316,
+              "relative_displacement": 0.8196226366211103
+            },
+            "total": {
+              "parameters": 66311,
+              "initial_norm": 15.439400672912598,
+              "final_norm": 17.495481491088867,
+              "displacement": 8.002942085266113,
+              "relative_displacement": 0.5183453849543671
+            }
+          },
+          "observation_trace": {
+            "agent_prefixes": 160,
+            "user_set_changed_t0_t4": 85,
+            "uav_set_changed_t0_t4": 22,
+            "other_local_values_changed_t0_t4": 146,
+            "d4_prefixes": 0,
+            "d4_other_local_values_changed_during_hold": 0,
+            "t4_new_decisions": 160,
+            "t4_command_differs_from_t0": 160,
+            "local_user_entries_t0": 285,
+            "local_user_entries_t4": 280,
+            "local_uav_entries_t0": 44,
+            "local_uav_entries_t4": 44
+          }
+        },
+        "H": {
+          "n_eval_episodes": 32,
+          "J_mean": 0.14625468074141884,
+          "prefix_contribution_to_J": 0.0022852293865846677,
+          "suffix_contribution_to_J": 0.14396945135483416,
+          "mean_prefix_displacement_m": 0.0,
+          "mean_prefix_path_length_m": 0.0,
+          "mean_served_connections": 8.875,
+          "eval_d4": 0,
+          "eval_duration_decisions": 0
+        }
+      },
+      "contrasts": {
+        "T_minus_G": {
+          "mean": 0.023720809005454126,
+          "conditional_se": 0.010131530857286448,
+          "positive_episodes": 21,
+          "negative_episodes": 11,
+          "zero_episodes": 0,
+          "min_episode_difference": -0.0753549453009299,
+          "max_episode_difference": 0.18185873709872416,
+          "prefix_contribution": 8.763661269907557e-05,
+          "suffix_contribution": 0.023633172392755055
+        },
+        "G_minus_H": {
+          "mean": 0.009301378962311667,
+          "conditional_se": 0.008782791170015744,
+          "positive_episodes": 20,
+          "negative_episodes": 12,
+          "zero_episodes": 0,
+          "min_episode_difference": -0.10653661161780434,
+          "max_episode_difference": 0.08759381942066122,
+          "prefix_contribution": -3.6348901956344924e-05,
+          "suffix_contribution": 0.00933772786426801
+        }
+      },
+      "runtime": {
+        "handle": "ucope-uav-motion-prefix-b01-6802-p21-20260907",
+        "start_unix": 1788841451,
+        "start_utc": "2026-09-08T04:24:11+00:00",
+        "end_utc": "2026-09-08T04:28:57+00:00",
+        "status": "finished",
+        "pid": 2760832,
+        "exit_code": 0,
+        "whole_wall_seconds": 286.36,
+        "peak_rss_kib": 557216,
+        "admission": {
+          "assessed_at": "2026-09-08T04:24:11.250661Z",
+          "available_physical_bytes": 15654449152,
+          "captured_at": "2026-09-08T04:24:11.250313Z",
+          "cgroup_headroom_bytes": null,
+          "cgroup_memory_current_bytes": null,
+          "cgroup_memory_max_bytes": null,
+          "effective_available_bytes": 15654449152,
+          "effective_floor_pass": true,
+          "failure_reasons": [],
+          "measurement_source": "/proc/meminfo",
+          "minimum_available_bytes": 4294967296,
+          "passed": true,
+          "physical_floor_pass": true,
+          "schema_version": 1
+        },
+        "aggregate_cpu": null,
+        "resource_flag": "resources_unmeasured: aggregate CPU"
+      }
+    }
+  },
+  "joint": {
+    "T_minus_G": {
+      "mean": 0.015217420622321492,
+      "sample_sd": 0.012025607177551996,
+      "conditional_se": 0.007523816216520829,
+      "prefix_contribution": 0.00011489271989088545,
+      "suffix_contribution": 0.015102527902430609
+    },
+    "G_minus_H": {
+      "mean": 0.025869554785368003,
+      "sample_sd": 0.02343093895274829,
+      "conditional_se": 0.0074643006702616805,
+      "prefix_contribution": 4.548408873812031e-05,
+      "suffix_contribution": 0.02582407069662988
+    },
+    "reading": "UP",
+    "margin_above_mei": 0.005217420622321492,
+    "summed_whole_wall_seconds": 575.24,
+    "supervisor_interval_seconds": 831.0
+  },
+  "predictions": [
+    {
+      "prediction": "joint WITHIN",
+      "probability": 0.65,
+      "observed": "UP",
+      "match": false
+    },
+    {
+      "prediction": "at least one nonpositive G-H pair mean",
+      "probability": 0.6,
+      "observed": false,
+      "match": false
+    },
+    {
+      "prediction": "each final T d4 frequency strictly between .1 and .9",
+      "probability": 0.6,
+      "observed": true,
+      "match": true
+    }
+  ],
+  "owner_prediction": "not taken (unattended)",
+  "uav_entry": {
+    "status": "actual_B_UAV_validation_entry",
+    "direction_decision_sha": "426513b18b38b477dd255b3e8524424d8deb8a19",
+    "card": "docs/research/candidates/ucope/UCOPE_UAV_MOTION_PREFIX_B01_SCIENCE_CARD_20260907.md#8-current-p21-execution-allocation--2026-09-07",
+    "execution_sha": "536949660fee3ab9ac92aba29c2c0455ffe9f6e1",
+    "first_accepted_invocation": "ucope-uav-motion-prefix-b01-6801-p21-20260907",
+    "invocation_start_utc": "2026-09-08T04:15:06+00:00",
+    "observed_complete_by_utc": "2026-09-08T04:19:55+00:00",
+    "first_env_step_timestamp": null,
+    "basis": "Accepted invocation with 286720 actual UAV steps, 2048 optimizer updates and full native final evaluation; supervisor start anchors invocation, not exact first-step time."
+  },
+  "run_summary": {
+    "unit": "caller-declared independent training run",
+    "inference": "descriptive only; no confidence interval or success classification",
+    "groups": [
+      {
+        "task": "UCOPE-UAV-MOTION-PREFIX-B01",
+        "arm": "G_minus_H",
+        "n": 2,
+        "mean": 0.025869554785368003,
+        "sample_sd": 0.02343093895274829,
+        "min": 0.009301378962311667,
+        "max": 0.04243773060842434,
+        "runs": {
+          "6801": 0.04243773060842434,
+          "6802": 0.009301378962311667
+        }
+      },
+      {
+        "task": "UCOPE-UAV-MOTION-PREFIX-B01",
+        "arm": "T_minus_G",
+        "n": 2,
+        "mean": 0.015217420622321492,
+        "sample_sd": 0.012025607177551996,
+        "min": 0.006714032239188856,
+        "max": 0.023720809005454126,
+        "runs": {
+          "6801": 0.006714032239188856,
+          "6802": 0.023720809005454126
+        }
+      }
+    ],
+    "paired_differences": []
+  }
+}

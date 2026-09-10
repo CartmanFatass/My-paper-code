@@ -1,0 +1,48 @@
+{
+  "question": "是否接受已选UAV家族的首张B卡及完整实现规格，交Root做同输入五臂工程比较？",
+  "changes_if_approved": [
+    {
+      "target": "UCOPE-UAV-MOTION-PREFIX-B01 science card / CODE_SPEC / CM_TASK",
+      "from": "Pro已选择固定五机移动前缀问题，但种子、实现细节、完整秒数上限和原始工程检查尚未绑定",
+      "to": "绑定两对种子6801/6802、实际局部观测与团队原生回报、同信息recurrent PPO、完整计时和原始合成检查；先交Root统一捕获，尚无UAV调用"
+    }
+  ],
+  "if_refused": "按所有者具体覆盖修改或撤回这张待执行卡；保留已存Pro决策和历史结果，不启动UAV调用，也不把拒绝写成机制负结果。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/ucope/pro_packets/20260907_uav_interface_convergence/archive/RESPONSE.md",
+      "quote": "**可检验差别**是：显式学习一次“是否承担短运动承诺、随后反馈”的结构，是否在有限训练预算下改善相对于更自由 generic 控制器的完整原生回报。它不检验 generic 无法表示该行为。",
+      "why": "完整规格落实原节点选定的真实控制比较，保留generic全部免费信息与合法移动，不虚构传感费。"
+    },
+    {
+      "path": "docs/research/candidates/ucope/UCOPE_UAV_MOTION_PREFIX_B01_PREPARATION_INTAKE_20260907.md",
+      "quote": "These are read-only source observations, not executed API/learner acceptance.",
+      "why": "接口、预算和种子在数据前固定；准备、工程验收与实际UAV结果分开。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/ucope/UCOPE_UAV_MOTION_PREFIX_B01_SCIENCE_CARD_20260907.md",
+      "quote": "B04's harmful extra purchase/negative endpoint, B01's two nulls and older false-probe/unchanged-competence limits remain the strongest contradictions to broad usefulness.",
+      "why": "旧负值和零值保留；有限宿主有益购买不证明移动前缀在UAV有净收益。"
+    },
+    {
+      "path": "docs/research/candidates/ucope/UCOPE_UAV_MOTION_PREFIX_B01_SCIENCE_CARD_20260907.md",
+      "quote": "There is no measured UAV wall/CPU forecast or tuned headroom.",
+      "why": "预算内能否完成、普通控制器能力和实际余量未知；合成检查不能证明这些事实。"
+    }
+  ],
+  "uncertainty": [
+    "只有两对独立训练；正值也只支持该任务和预算下两个控制方案的初步表现，不能分离信息、位置、时间结构或优化原因。",
+    "generic相对悬停未显示能力时，保留T−G数值并限制能力解释；局部信息变化不能抵消原生损失。",
+    "实际UAV运行时兼容、每步/更新成本和所选完整cap能否容纳尚未执行；无额外成本pilot或自动加预算。"
+  ],
+  "cost": {
+    "compute": "本次零UAV调用。未来卡规模4个fit、524288训练步、49152评价步、4096次Adam；1800秒/臂、3600秒/对、两对合计7200秒是停止上限，尚非运行分配。工程比较每臂行政上限3600秒，原始测试最多300秒加一次60秒合成检查。",
+    "owner_time": "异步阅读；无须等待答复。",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing；Root按P15统一捕获同一规格后再编码；实际UAV调用仍须后续具名命令。"
+  },
+  "verdict_text": "接受这张前瞻B卡并交Root按完全相同的规格、源码和原始检查开展五臂工程比较；保留全部旧负值、未知成本/能力和有限解释，当前不启动UAV验证。",
+  "source": "docs/research/candidates/ucope/UCOPE_UAV_MOTION_PREFIX_B01_PREPARATION_INTAKE_20260907.md"
+}

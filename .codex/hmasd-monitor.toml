@@ -1,10 +1,12 @@
-# Root observes accepted experiments and current Pro requests.
-thread_id = "01a07249-b095-7821-8ce2-e9c32ba85267"
+# OWNER_DIRECT 2026-09-09: one independent Luna/low task monitors multiple accepted experiments.
+thread_id = "01a087e5-2044-7301-abb6-7a1709a98197"
 root_thread_id = "01a07249-b095-7821-8ce2-e9c32ba85267"
 model = "gpt-5.6-luna"
-thinking = "xhigh"
-# Automatic execution is driven by the owner's goal; no scheduled automation.
+reasoning_effort = "low"
+# Model/effort describe creation only; cross-task messages omit overrides.
+# OWNER_DIRECT 2026-09-08: actionable native returns wake Root via hmasd-relay.toml.
+# The prior twenty-minute heartbeat is paused after the successful relay test.
 primary_checkout = 'C:\Projects\HMASD'
-monitor_checkout = 'C:\Projects\HMASD'
+monitor_checkout = 'C:\Users\fires\Documents\Codex\2026-09-09\hmasd-folr-b02-monitor-20260909'
 tracking_path = "docs/research/portfolio/EXPERIMENT_TRACKING.md"
-instructions_path = "docs/project/ROOT_OPERATIONS.md"
+instructions_path = "docs/project/EXPERIMENT_MONITOR.md"

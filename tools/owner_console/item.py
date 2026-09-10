@@ -33,7 +33,11 @@ DEFAULT_OPTIONS = {
     "new-card": [("accept", "launch as carded"), ("reject", "do not launch"), ("revise", "revise before launch")],
     "brief": [("reading-agreed", "the reading stands"), ("reading-disputed", "re-read per the comment")],
     "second-recast": [("continue-low-priority", "continue at lowest sequencing priority"), ("park", "PARK the direction")],
-    "portfolio": [("ratify", "ratify the proposal"), ("refuse", "refuse"), ("amend", "amend per the comment")],
+    "portfolio": [
+        ("keep", "retain the formed Pro disposition"),
+        ("refuse", "override the Pro disposition at the next clean boundary"),
+        ("amend", "override the Pro disposition per the comment at the next clean boundary"),
+    ],
 }
 
 
@@ -61,7 +65,7 @@ def cmd_add(a) -> int:
 
 
 def cmd_reviews(a) -> int:
-    rows = srv.pending_instructions(a.root, days=a.days)
+    rows = srv.pending_instructions(a.root)
     if a.json:
         print(json.dumps(rows, ensure_ascii=False, indent=2))
         return 0
@@ -116,7 +120,6 @@ def main(argv=None) -> int:
     s.set_defaults(fn=cmd_add)
 
     r = sub.add_parser("reviews", help="owner instructions not yet applied")
-    r.add_argument("--days", type=int, default=2)
     r.add_argument("--json", action="store_true")
     r.set_defaults(fn=cmd_reviews)
 

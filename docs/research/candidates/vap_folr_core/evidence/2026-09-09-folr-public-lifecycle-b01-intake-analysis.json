@@ -1,0 +1,39 @@
+{
+  "read_at": "2026-09-09T17:17:14.857884+00:00",
+  "accepted_result_commit": "ab24bdd8c4bca48479b12abbe53285e858affbef",
+  "result_summary_sha256": "5a608e726032cab571e2b719533ea875eac661b9cbce3375627d734c742b9dd2",
+  "method": "stdlib arithmetic from accepted paired summary; final vectors checked against each collected summary; descriptive episodes are conditional, not independent training runs",
+  "independent_training_pairs": 1,
+  "conditional_rollouts": {
+    "RETAIN": {
+      "episodes": 32,
+      "mean": 2.1043749999999997,
+      "episode_sample_sd": 6.888062575818188,
+      "minimum": -11.709999999999997,
+      "maximum": 16.31,
+      "negative_episodes": 14,
+      "training_mean": -5.044871999999994,
+      "survivor_opportunities_per_final_episode": 9.5,
+      "peak_rss_bytes": 672116736
+    },
+    "RESET": {
+      "episodes": 32,
+      "mean": 4.1065625,
+      "episode_sample_sd": 7.996783066666406,
+      "minimum": -14.049999999999999,
+      "maximum": 18.44,
+      "negative_episodes": 8,
+      "training_mean": -5.225858000000012,
+      "survivor_opportunities_per_final_episode": 10.53125,
+      "peak_rss_bytes": 686571520
+    }
+  },
+  "complete_pair_wall_seconds": 1517.58,
+  "focused_checks_and_readbacks_seconds": 13.4333944,
+  "selected_execution_plus_checks_seconds": 1531.0133944,
+  "valid_pair_results": 1,
+  "admitted_scientific_invocations": 2,
+  "failed_scientific_invocations": 0,
+  "prior_history_cost": "not aggregated; excludes control-plane staging, collection and intake",
+  "new_target_exposure_during_intake": 0
+}

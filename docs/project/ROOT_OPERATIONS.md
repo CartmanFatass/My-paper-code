@@ -1,126 +1,119 @@
-# Portfolio plans; Root executes
+# Research execution responsibilities
 
-Portfolio (`gpt-6-astra`, effort selected by the owner) plans the research queue and prepares bounded commands.
-Root (`gpt-5.6-luna` / `xhigh`) executes those commands, integrates specified deliveries,
-observes accepted experiments and performs exact Pro transport. The owner directs this
-boundary. DM owns scientific decisions within its existing delegation; CM owns technical
-judgment and acceptance. Existing Pro authority, scientific budgets and model settings remain.
+OWNER_DIRECT 2026-09-10: the existing Root task is the execution coordinator; DM owns direction
+science and the former CM engineering responsibilities. Portfolio is the persistent Pro node,
+not a native session. Authority, budgets and owner pause/stop instructions remain in AGENTS.md.
+The current consolidation record is `docs/research/portfolio/decisions/2026-09-10-control-plane-consolidation.md`.
 
-## Endpoints and files
+## Maintained sources
 
-Root is task `01a07249-b095-7821-8ce2-e9c32ba85267` in `C:/Projects/HMASD`.
-Portfolio's exact task and checkout are in `.codex/hmasd-portfolio.toml`; it works directly
-on main and owns `docs/research/portfolio/PORTFOLIO.md`. Root owns operational facts in
-`docs/research/portfolio/EXPERIMENT_TRACKING.md`. Coordinate overlapping edits, commit
-explicit paths and push immediately. Current commands belong beside the current Portfolio
-working set; their dispatch/handle/receipt facts belong in existing tracking. Historical
-records are evidence, not a command queue.
+| Rule | Maintained source |
+| --- | --- |
+| Authority, decisions, delegation, capacity, Git and resource invariants | AGENTS.md §§2–8 and the evidence specification |
+| Complete owner assignments and integration | This document |
+| Code-task L0–L3 detail, delegation and high-risk review | ENGINEERING_SCOPE_SPEC.md §7 |
+| Ready-work ordering and waits | hmasd-loop-dispatch Skill |
+| Portfolio principles and decision evidence | MARL_EMPIRICAL_EVIDENCE_SPEC.md §§11.3,11.7–11.10 |
+| Portfolio material preparation, Pro intake and application handoff | hmasd-portfolio-task Skill |
+| Native/app addressing and return routes | SIBLING_COMMUNICATION.md |
+| Experiment observation, adoption and terminal handover | EXPERIMENT_MONITOR.md |
+| Scientific reading, literature, analysis and empirical tools | hmasd-scientific-tools Skill |
+| Pro question publication and exact references | hmasd-pro-research-prompt-author Skill |
+| Pro Send, identity, archive and receipt state | hmasd-chatgpt-pro-transport Skill |
+| Owner intervention and execution trace | hmasd-owner-item Skill and owner/README.md |
 
-## Authoring branches
+Skills live under `.agents/skills/`; the owner README is under `docs/research/portfolio/owner/`.
+Role configurations keep role/model boundaries and link to these sources instead of copying the
+whole procedure. Change a rule at its maintained source and update affected entrypoints together.
+Historical decisions, snapshots and benchmark materials remain evidence, not competing procedures.
 
-Use main plus one reusable branch/checkout for each direction with actual authoring work.
-Create that branch on demand from accepted inputs; do not provision idle directions or give
-each DM, CM, stage or child another branch. Record the chosen checkout in the existing command
-handoff. Pro uses the corresponding direction branch too, with a fixed evidence SHA and its
-one scoped response path. Serialize overlapping writers and reconcile remote Pro commits before
-local pushes. Extra delivery branches need a concrete special isolation reason; only these are
-temporary. Existing accepted requests retain their bindings through archival/intake or explicit
-obsolete-request resolution. One completed Pro round does not retire a shared branch still in use.
-At completion Root integrates accepted commits, preserves other unique commits and dirty files,
-reconciles live writers/PRs/delivery dependencies, and retires obsolete local and remote names.
-Historical detached worktrees may retain evidence; retiring a branch does not delete their files.
+## Complete deliverables and owners
 
-### Reconcile routing when branches are retired
+| Owner | Deliverable |
+| --- | --- |
+| Root | Ready-work dispatch within existing decisions; dependencies and working-set replacement; main integration, current tracking, exact Pro dispatch/receipt forwarding and operational application |
+| Direction DM | Card/predictions, object decisions, direct implementation or optional Implementer assignment, review disposition, published inputs, bounded execution, monitor handover, collection, technical acceptance, scientific intake, cleanup and continuation |
+| Designated Portfolio DM | Decision materials grounded in Portfolio principles/specs/experience, complete Pro-response conformance and intake, execution mapping or exact conflict returned to Pro |
+| Implementer | One owned code/check deliverable to DM; no scientific selection, Git/index work or result-bearing launch |
+| Reviewer | Independent high-risk engineering evidence, with findings returned to the engineering owner |
+| Scout / Verifier / Critic | One bounded factual, runtime or scientific-criticism question directly for the parent; no new child chain |
+| Operator, when useful | Exact launch/handover/collection or cleanup batch from accepted inputs; DM retains acceptance |
+| Independent Monitor | Observe adopted accepted handles; send adoption/terminal facts to Root, without collecting full results or interpreting science |
+| Independent Transport | Execute exact authored Pro requests, observe and archive, return one factual receipt to the bound Root parent |
+| Portfolio Pro | Final decision on the bound cross-direction question within current owner/specification constraints |
 
-Root's reclamation return includes the retained direction branch/checkout and the affected
-request IDs with their actual Send, delivery and archive states. Use current handoffs,
-Transport's binding/request records and actual remote refs; a response merged to main does
-not by itself close every request that names the branch. Resolve pending or uncertain delivery
-before retiring its target. If an accepted target was already removed, preserve recovery refs
-and report its exact request/base to Portfolio for a bounded restoration or delivery correction.
+DM may use optional specialists when a complete independent task saves work or enables useful
+parallelism. It does not rebuild a CM layer or delegate individual shell steps. Root does not
+retype DM launch commands, repeat its tests or redo its scientific intake. Neither a child's
+completion nor a Monitor exit-zero receipt is technical/scientific acceptance.
 
-Portfolio updates current command locations; Root updates current operational/Transport records
-under their existing single-writer coordination. Preserve old branches, bases and receipts in
-the matching request history. Historical TASK/HANDOFF/archive files remain immutable evidence,
-not sources for a new dispatch. A same-path file in an old checkout is not the latest handoff.
-Do not mark cleanup complete while affected live routing remains unresolved; name any retained
-dependency in the existing return. No new registry, scheduler or experiment gate is required.
+For shared control-plane engineering without a direction owner, Root owns the edit/check/review
+and acceptance batch, optionally using an Implementer and high-risk Reviewer directly. A shared
+scientific-code change is assigned to one existing relevant DM, with affected DMs supplying their
+constraints. Only the assigning owner resolves out-of-scope decisions; specialists return precise
+gaps rather than inventing another authority layer.
 
-## Portfolio prepares the command
+## Portfolio material and response route
 
-Use [hmasd-loop-dispatch](../../.agents/skills/hmasd-loop-dispatch/SKILL.md), Portfolio
-section, on every command, completion/exception return and vacancy. It is the maintained
-procedure for whole-working-set planning, five-item handoffs, actual dispatch confirmation
-and prewritten collection/intake routes. Use
-[hmasd-portfolio-task](../../.agents/skills/hmasd-portfolio-task/SKILL.md) for scientific
-Portfolio judgment and the existing decision ladder. Planning targets five advancing
-direction chains. OWNER_DIRECT 2026-09-07 counts active native work, running experiments and
-accepted Pro generation once per direction; completed tasks and unresolved waits do not count.
+Root chooses a relevant recently active DM with the current evidence, and names the question,
+scope and original sources. One DM authors the complete Portfolio packet; other DMs contribute
+facts where needed. The author uses `hmasd-portfolio-task` and Prompt Author, preserving exact
+references and contrary evidence. If unavailable, Root explicitly transfers the remaining work
+to another relevant DM; Root does not take over scientific drafting.
 
-## Root's execution loop
+For a new request the actual author is source, the unchanged Root task is parent and the existing
+Transport is operator. `caller_role=portfolio` selects the Pro node, not a native Root identity.
+Root checks published artifact/route facts and dispatches the exact handoff. It returns substantive
+omissions to the author instead of rewriting the packet. Transport receipts still go only to Root;
+Root forwards the complete response to the designated DM using `followup_task`.
 
-Use [hmasd-loop-dispatch](../../.agents/skills/hmasd-loop-dispatch/SKILL.md), Root section,
-when receiving commands, native returns, failed dispatches or vacancies, including after
-an observation pass within the active goal. Read it directly from the repository if the current session's skill
-catalog predates its addition. It supplies the dispatch-before-wait sequence, whole-working-set
-receipt and exact conditions for reporting gaps. Root executes named choices; Portfolio
-owns readiness and replacement planning. DM and CM retain their scientific/technical work.
+The DM reads the full response and checks the bound question, current owner/spec constraints,
+scientific meaning and evidence. It returns the actual decision and operational mapping, or a
+concrete conflict for the same Pro node. It does not locally overrule or add approval to a formed
+conforming decision. Root applies the conforming decision, updates Portfolio/tracking and assigns
+follow-on work within the existing limits. Unresolved questions do not block independent work.
 
-Tool addressing and native/app message differences live in
-[SIBLING_COMMUNICATION.md](SIBLING_COMMUNICATION.md). Routine app messages preserve the
-recipient's model/effort; all cross-session messages omit model/thinking overrides. New Pro
-handoffs use Author-rendered provider settings inside the request packet, not as app-message
-overrides, and Transport's identity/acceptance procedure. Root records its own receipts locally rather than app-messaging
-itself. A native DM with Root as app parent receives its result through native collaboration.
+## Execution inputs and observation
 
-### Report events
+DM freezes the committed command/script, exact node/source/cwd/output/handle, host/device boundary,
+budget and stop condition. The assigned executor uses those bytes rather than reconstructing a
+similar command. Check staged inputs, including preflight helpers, against accepted sources;
+Windows-to-Linux wrappers preserve literal variables and LF bytes and receive a syntax check
+without executing the scientific payload. A disagreement returns to the same DM before submission.
 
-For the next three new CM engineering tasks, apply
-`CM_MODEL_COMPARISON_20260907.md` before implementation starts: identical code spec and source,
-isolated model/client arms, Codex token/time collection. Existing tasks are not replayed.
+Apply AGENTS §§5–7: remote-first where portable, published exact source, fresh destination memory
+admission adjacent to each invocation, and no extra invocation from a repair or handover. Cost
+projection uses the runner's complete per-arm law. Relevant post-learner publication coverage
+follows the empirical/runtime specs and the actual dependent claim, not blanket historical replay.
 
-Apply SIBLING_COMMUNICATION.md's Root-to-Portfolio notification filter. Record routine receipts
-in `docs/research/portfolio/root-log/YYYY-MM-DD.md`; completion of an intermediate step is not
-itself a Portfolio notification. An actionable message gives the needed decision, original
-evidence and working-set delta, including an advancing-chain count when capacity changes.
-Report a yielded/unavailable direction needing a replacement immediately. Known routes
-continue without an extra Portfolio exchange. A changed command's scope replaces only the
-specified earlier boundary; an unrelated preparation-only task does not suspend the batch.
+After acceptance, DM/Operator directly adds the handle to the shared Monitor, using the live
+primary-control configuration, not frozen or stale direction copies. Keep adoption pending until
+the Monitor reports it; do not start a second status-polling loop. Root forwards terminal facts to
+the original collection owner, then DM completes technical acceptance and separate scientific
+intake. Uncertain process or message acceptance is reconciled on the same identity, never retried
+as a fresh invocation merely because an observation was lost.
 
-Missing scope, next-task choices, authorization/skill applicability, transport/tool permissions
-and scheduling gaps route from Root to Portfolio first, with the affected action, evidence and
-existing authority. Root does not ask DM to invent the missing command or approve the workflow.
-Portfolio handles the planning question and may assign a bounded scientific/technical inquiry;
-DM retains object-tier decisions inside its assigned task and CM ordinary in-scope repair.
-Root also sends a prompt repair request for an unresolved execution, input, access/tool or
-uncertain-state problem outside its assigned repair path. Portfolio arranges the bounded fix
-and returns the next step; routine-message filtering must never suppress this help channel.
-This is not a new approval gate for accepted work, nor authority for Portfolio to bypass a real
-runtime restriction or grant permission reserved to the owner. Unrelated authorized work continues.
+## Current records, integration and cleanup
 
-## Goal-driven observation
+Root owns main and its index, and integrates named accepted commits after checking what is already
+integrated. DM owns its direction branch/checkout and code publication. Preserve one editing owner
+for overlapping work. Independent paths can proceed concurrently; every authorized commit pushes
+immediately. A role migration does not create a new branch or a new scientific object.
 
-OWNER_DIRECT 2026-09-07: the owner uses a goal to drive automatic execution and deleted the
-previous observation automation. Root observes assigned experiment handles and exact current
-Pro requests within that active goal. `.codex/hmasd-monitor.toml` names the endpoint, not a
-schedule. Do not create or reactivate an observation automation. Use `EXPERIMENT_MONITOR.md`
-for adoption and the Transport skill
-for exact request identity, model verification, Send state, archiving and receipt delivery.
-The observation pass checks accepted work; it does not select tasks or refill the research queue.
+Root maintains `docs/research/portfolio/PORTFOLIO.md` as the current disposition/readiness snapshot
+and `EXPERIMENT_TRACKING.md` as accepted handles, owners, terminal facts and pending work. Scientific
+statements cite DM intake/Pro authority; Root integration is not another verdict. Batch useful
+routine record edits and apply actual owner overrides at clean boundaries via hmasd-owner-item.
 
-Keep pending experiments and Pro requests recoverable in their existing records and observe
-them during goal execution. An unresolved blocker goes promptly to Portfolio under the help
-rule; unchanged waits need no repeated message. Empty observation state does not mean the
-research goal is complete. Owner pause/end preserves accepted processes and pending request
-evidence with an explicit observation handover, without a replacement scheduler.
+DM prepares its exact cleanup inventory during collection. Assigned executors preserve unique
+source/evidence and verify removed paths absent from disk and worktree registration; Root confirms
+main integration/retention and accepts reclamation. Shared authoring and active delivery checkouts
+remain while used. A creator cleans its own test scratch under tests/AGENTS.md; Root is not a
+routine garbage collector. Never remove live work, evidence or another invocation's scratch.
 
-Each observation pass reads current assigned rows, batches independent supervisor checks, observes due Pro
-requests serially and applies the shared dispatch skill. It executes remaining explicit commands and
-return routes; unlisted actions go to Portfolio. Historical handles and requests are not adopted
-by scanning archives. Reuse the owner's goal; no new scheduler, polling task or replacement goal is created.
-
-Owner pause changes the affected work first while preserving accepted-process observation and
-unknown-Send evidence. Waiting for one conversation does not hold other issued commands.
-Record only meaningful state changes with the exact handle/request, responsible recipient,
-evidence and receipt state in existing tracking. Recover from those current facts, not by
-reconstructing every direction's history.
+Existing CM assignments retain their original parent/accepted scope until closeout; the receiving
+DM explicitly takes any remaining responsibility. New work uses the consolidated DM role. Preserve
+accepted Pro requests and generations, Monitor handles, receipt destinations and historical names.
+Codex App supplies messaging/wake/recovery behavior; configuration changes take effect on restart.
+Do not add a scheduler, delivery service, reload detector or new heartbeat for this migration.
+A workflow edit or restart does not resume or enlarge scientific execution.

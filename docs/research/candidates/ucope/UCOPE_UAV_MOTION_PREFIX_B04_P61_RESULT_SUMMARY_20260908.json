@@ -1,0 +1,216 @@
+{
+  "object": "UCOPE-UAV-MOTION-PREFIX-B04",
+  "evidence_class": "B/EXPLORE",
+  "status": "COMPLETE",
+  "reading": "WITHIN",
+  "launch_sha": "7693b7af6b7d89cdaa028659d606a37dee9eb68e",
+  "card_freeze_sha": "c54d8d9403d8613550b6b050f3df465d1b0e1424",
+  "pro_response_sha": "475f4452177a98e20fb4c0aedf31a89aee4d8912",
+  "collection_commit": "2d8750b46da3cff99f3f632bb8a17b5a70a9ed91",
+  "collection_path": "docs/research/candidates/ucope/UCOPE_UAV_MOTION_PREFIX_B04_7201_COLLECTION_20260908.json",
+  "raw_artifact_root": "C:/Projects/HMASD-worktrees/dm-ucope-native-return-prep-20260906/temp/directions/ucope/exp/uav-motion-prefix-b04-7201-p61-20260908",
+  "raw_summary_sha256": "4767b13d7edd445a9a40937f591f961218b8504618ba5af98f7e36f51b72a9e6",
+  "endpoint_source": "All 96 J values and signed differences are retained in the referenced immutable collection; none excluded.",
+  "independent_unit": "matched independent training pair",
+  "independent_training_pairs": 1,
+  "training_population_sd": null,
+  "training_population_interval": null,
+  "arm_means": {
+    "T": 0.18320920071658314,
+    "G": 0.18715742666070528,
+    "H": 0.16333870700710337
+  },
+  "contrasts": {
+    "T_minus_G": {
+      "mean": -0.003948225944122139,
+      "conditional_evaluation_se": 0.010191826216031805,
+      "paired_episode_sample_sd": 0.057653675440247375,
+      "evaluation_pairs": 32,
+      "positive": 18,
+      "negative": 14,
+      "zero": 0,
+      "min": -0.16125563298518442,
+      "max": 0.09350894263405753,
+      "recomputed_conditional_evaluation_se": 0.010191826216031806,
+      "se_recomputation_minus_recorded": 1.734723475976807e-18
+    },
+    "G_minus_H": {
+      "mean": 0.0238187196536019,
+      "conditional_evaluation_se": 0.011454243503509544,
+      "paired_episode_sample_sd": 0.06479498603754846,
+      "evaluation_pairs": 32,
+      "positive": 20,
+      "negative": 12,
+      "zero": 0,
+      "min": -0.11740354563730576,
+      "max": 0.14757291601052216,
+      "recomputed_conditional_evaluation_se": 0.011454243503509544,
+      "se_recomputation_minus_recorded": 0.0
+    },
+    "T_minus_H": {
+      "mean": 0.019870493709479763,
+      "conditional_evaluation_se": 0.014677398371169156,
+      "paired_episode_sample_sd": 0.08302790334744078,
+      "evaluation_pairs": 32,
+      "positive": 21,
+      "negative": 11,
+      "zero": 0,
+      "min": -0.19468040105328094,
+      "max": 0.20137099875325076,
+      "recomputed_conditional_evaluation_se": 0.014677398371169156,
+      "se_recomputation_minus_recorded": 0.0
+    }
+  },
+  "mei": 0.01,
+  "distance_above_lower_boundary": 0.006051774055877862,
+  "distance_below_upper_boundary": 0.01394822594412214,
+  "rule_applied_verbatim": "-.01<=Delta<=.01: no demonstrated point gain at the selected scale/budget; prefer no unchanged continuation, not stable equivalence.",
+  "predictions": [
+    {
+      "event": "reading WITHIN",
+      "probability": 0.5,
+      "occurred": true,
+      "binary_brier": 0.25
+    },
+    {
+      "event": "G_minus_H.mean > 0",
+      "probability": 0.6,
+      "occurred": true,
+      "binary_brier": 0.16000000000000003
+    }
+  ],
+  "prediction_events_correct": 2,
+  "mean_binary_brier": 0.20500000000000002,
+  "owner_prediction": "not taken (unattended)",
+  "counts": {
+    "train_team_steps": 262144,
+    "eval_team_steps": 24576,
+    "team_steps": 286720,
+    "optimizer_steps": 2048,
+    "train_episodes": 1024,
+    "eval_episodes": 96,
+    "velocity_decisions": 1388728,
+    "duration_decisions": 2720,
+    "d4": 1304,
+    "recurrent_observations": 1392640,
+    "explicit_resets": 1120,
+    "constructor_resets": 2,
+    "constructors": 2,
+    "step_calls": 286720,
+    "scientific_uav_calls": 286720,
+    "diagnostic_frames": 1600,
+    "completed_episode_steps": 286720,
+    "rollouts": 512,
+    "partial_episode_steps": 0
+  },
+  "learning_rate": {
+    "T": 0.0003,
+    "G": 0.0003
+  },
+  "parameter_exposure": {
+    "T": {
+      "common_actor": {
+        "parameters": 32134,
+        "initial_norm": 12.372705459594727,
+        "final_norm": 12.57672119140625,
+        "displacement": 2.2458720207214355,
+        "relative_displacement": 0.1815182643808623
+      },
+      "critic": {
+        "parameters": 34177,
+        "initial_norm": 9.290486335754395,
+        "final_norm": 12.600772857666016,
+        "displacement": 8.228468894958496,
+        "relative_displacement": 0.8856876376094958
+      },
+      "duration": {
+        "parameters": 2242,
+        "initial_norm": 3.2531657218933105,
+        "final_norm": 3.2857747077941895,
+        "displacement": 0.41481131315231323,
+        "relative_displacement": 0.12751004670944632
+      },
+      "duration_hidden": {
+        "parameters": 2176,
+        "initial_norm": 3.2531657218933105,
+        "final_norm": 3.28520131111145,
+        "displacement": 0.4102451503276825,
+        "relative_displacement": 0.1261064407406819
+      },
+      "duration_final": {
+        "parameters": 66,
+        "initial_norm": 0.0,
+        "final_norm": 0.06137862801551819,
+        "displacement": 0.06137862801551819,
+        "relative_displacement": null
+      },
+      "total": {
+        "parameters": 68553,
+        "initial_norm": 15.810752868652344,
+        "final_norm": 18.103853225708008,
+        "displacement": 8.53953742980957,
+        "relative_displacement": 0.5401094749093319
+      }
+    },
+    "G": {
+      "common_actor": {
+        "parameters": 32134,
+        "initial_norm": 12.372705459594727,
+        "final_norm": 12.519095420837402,
+        "displacement": 1.9179810285568237,
+        "relative_displacement": 0.15501710881425063
+      },
+      "critic": {
+        "parameters": 34177,
+        "initial_norm": 9.290486335754395,
+        "final_norm": 13.130178451538086,
+        "displacement": 8.972776412963867,
+        "relative_displacement": 0.9658026596983639
+      },
+      "total": {
+        "parameters": 66311,
+        "initial_norm": 15.472453117370605,
+        "final_norm": 18.14191436767578,
+        "displacement": 9.17547607421875,
+        "relative_displacement": 0.5930201245151642
+      }
+    }
+  },
+  "opening_observation": {
+    "T_training_duration_samples": 2560,
+    "T_training_d4": 1231,
+    "T_final_duration_samples": 160,
+    "T_final_d4": 73,
+    "T_final_d1": 87,
+    "T_final_d4_frequency": 0.45625,
+    "T_final_velocity_decisions": 40741,
+    "G_final_velocity_decisions": 40960,
+    "T_final_recurrent_observations": 40960,
+    "G_final_recurrent_observations": 40960,
+    "interpretation": "Observed owned opening/hold exposure and continuing recurrence; neither useful conditional selection nor information value established."
+  },
+  "resources": {
+    "label": "resources_unmeasured",
+    "unmeasured": [
+      "whole_invocation_aggregate_cpu",
+      "systemwide_peak_memory"
+    ],
+    "start_utc": "2026-09-08T23:15:53Z",
+    "terminal_utc": "2026-09-08T23:20:30Z",
+    "supervisor_pid": 3012256,
+    "supervisor_status": "finished",
+    "exit_code": 0,
+    "admission_available_physical_bytes": 15640686592,
+    "admission_effective_available_bytes": 15640686592,
+    "admission_passed": true,
+    "whole_wall_seconds": 277.51,
+    "peak_rss_kib": 554964,
+    "T_seconds": 137.67042454401962,
+    "G_seconds_including_hover": 139.29419632797362,
+    "pair_internal_seconds": 276.9646218509879,
+    "cap_breach": false,
+    "limits": []
+  },
+  "analysis_exposure": "read-only arithmetic over collected bytes; zero new model, environment, learner, evaluator, replay or scientific invocation",
+  "next_route": "P61 selected 7201 allocation exhausted at intake. Owner requested a safe pause on 2026-09-08: push and return the intake, then stop without successor, rerun or new exposure. Root integrates, verifies evidence archival and owns the named checkout/wrapper cleanup."
+}

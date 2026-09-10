@@ -12,9 +12,9 @@ Rigor is proportional to the claim. The project must not demand deployment-grade
 mechanism study, and it must not present a toy result as evidence of deployment safety or general
 MARL superiority.
 
-This document specializes the A/B/C evidence burdens in
-`docs/project/ALGORITHM_PRINCIPLES.md`. If a direction document asks for a stronger burden, that
-stronger burden applies only to the named claim or object; it does not silently become a global MARL
+This document defines the current A/B/C evidence burdens.
+`docs/project/ALGORITHM_PRINCIPLES.md` is historical background, not a current contract.
+If a direction document asks for a stronger burden, that stronger burden applies only to the named claim or object; it does not silently become a global MARL
 standard.
 
 ## 2. Normative terms and scientific units
@@ -234,7 +234,14 @@ or a portfolio value judgment that no narrower or recast object merits investmen
 
 ## 8. Responsibility split
 
-### 8.1 Portfolio / Root
+### 8.1 Portfolio Pro and its designated DM author
+
+OWNER_DIRECT 2026-09-10: Portfolio is the persistent `portfolio:cross_direction` Pro node.
+Root designates a relevant recently active DM to prepare its materials and check the full response
+for scientific/specification conformance. Root owns routing and operational application, not
+scientific selection. A complete conforming Pro decision is final under AGENTS §4.8 without
+per-item owner ratification; asynchronous owner overrides remain. Existing direction Pro nodes
+and DM object-tier decisions retain their scopes. A local conformance check is not another verdict.
 
 Portfolio MUST:
 
@@ -255,7 +262,29 @@ When an external scientific consultation applies a stronger class than the state
 Portfolio must treat the mismatch as an unresolved methodology issue and seek a class-corrected
 answer. It must not convert the mismatched standard into a scientific negative.
 
-### 8.2 Evidence / Experiment Manager
+**Portfolio principles and experience.** Keep classification, management grouping, investment
+and execution capacity separate. The owner's two-line framework (flexible agents and flexible
+skill duration) does not require one retained route per line or a two-route budget. Share useful
+learners, controls, interventions and diagnostics without conflating scientific objects. Propose
+fusion only when question, comparator, estimand and next object materially coincide. Apply the
+smallest justified disposition under §7; scheduling alone never changes lifecycle.
+
+Every material Portfolio request makes its basis explicit: the relevant principles in this
+section and §§7,11.7–11.10; the applicable card/specification constraints; and empirical/engineering
+experience with exact sources, original scope and strongest contrary evidence. Explain what each
+source changes about the live choices. Prior formal artifacts, an untuned reference gap, a finite
+or zero-learner calculation, and a cheap model are not investment value by themselves. Compare
+decision relevance, known complete cost, uncertainty, substitutability and reversibility. Preserve
+unknown costs and the observation that would change the recommendation. Do not turn a benchmark
+sample or local failure into a universal investment threshold.
+
+Experience informs the choice; it does not silently override a specification. Pro states its
+chosen option, decisive reasons, uncertainty, revisit condition and bounded consequences. A needed
+rule change names the exact rule, necessity and scope under the proper-node authority. Owner
+changes to the question return to that node; preserve its previous answer instead of inventing
+a revised local decision. No new required response schema or scientific exposure follows.
+
+### 8.2 Direction Manager (including engineering delivery)
 
 EM MUST:
 
@@ -270,8 +299,8 @@ EM MUST:
    and a refuted mechanism proposition;
 6. preserve every valid result at its original meaning while permitting explicitly new follow-up
    objects;
-7. ask CM for the performance and instrumentation implementation required by the selected class,
-   not for unrelated proof machinery; and
+7. implement and technically accept the performance/instrumentation path required by the selected
+   class, optionally using a bounded Implementer, not unrelated proof machinery; and
 8. recommend lifecycle consequences at the smallest supported unit and state what evidence would
    justify promotion, parking, recasting, or closure.
 
@@ -377,6 +406,14 @@ the run's own claim needs, capacity gates, formal-analysis flags, or prospective
 hold a B launch. The quarantine rule for incomplete attempts (§6.2) is unchanged by this section;
 whether an instrumentation failure downgrades rather than annuls a run is a separate owner decision
 not taken here.
+
+#### 11.4.1 Named exception — ACVC_FIXED_RETRACE_REUSE_E01
+
+For ACVC_FIXED_RETRACE_REUSE_E01 only, B/EXPLORE MAY compare the fixed C, F and dwell execution rules on the retained, frozen DENSE/8201 and DENSE/8202 trained policies without new fitting or training. The scope is the unchanged five-UAV, 50-user, 256-step native host and one serial six-panel comparison, with 64 prespecified evaluation episodes per base/rule panel. This is an explicit object-limited exception to the real-learner/trainer, nonzero-update and learner-movement requirements in §§5.2 and 11.4. The learner/trainer wording of §11.8.6 is subject to exactly this substitution for E01; its other verification requirements remain.
+
+The real native environment, retained learned recurrent stochastic policy and evaluator MUST run, with nonzero native transition and evaluation counts. A machine-generated exposure line MUST report two retained base fits; zero new fits, training steps, optimizer updates and parameter displacement during evaluation; and actual transition, evaluation and intervention counts. Historical training is provenance, not new exposure. Private recurrent state evolution and sampled actions MUST NOT be described as parameter learning. Common integrity under §4, fresh actual-node resource admission, reward/information/RNG semantics, own-trajectory recurrence and actual-command feedback, complete cost accounting, and proportionate verification and dependency-based failure interpretation under §§11.8.6–11.8.7 remain applicable.
+
+Report F-C and F-dwell separately for each base, retain dwell-C and all outcomes, and use conditional paired-episode uncertainty. The ceiling is a preliminary native execution-package signal or counterexample conditional on these two selected retained bases and the declared fresh panels, not new learning, training-population superiority, isolated mechanism/history necessity, optimality, tuned headroom or transfer. The named scope retains the proposed 180-second whole-logical-invocation cap, including the proposed 30-second focused-check/readback allowance; this paragraph allocates no execution. It authorizes no additional fit, panel, search, retry or successor and does not reopen the stopped T/G selector. Ordinary B requirements and all other objects remain unchanged; no new class or general Pro-consultation gate is created.
 
 ### 11.5 Direction separation for the untying programme
 
@@ -556,7 +593,7 @@ On cost refusal, reconsider the chosen question and necessary evidence as well a
 Moving a prohibited B prerequisite into a preceding A does not make it permissible.
 
 Pro decisions are final within current owner instructions and applicable specifications. In the
-existing intake, Root/DM cites any concrete conflict and returns it to the same node for correction
+existing intake, the designated DM cites any concrete conflict and returns it to the same node for correction
 before executing the affected requirement, while independent conforming work continues. Preserve
 the exact response and do not invent a substitute decision. Explicit specification exceptions name
 the rule, scientific necessity and scope and follow existing appropriate-node authority. No silent
@@ -587,3 +624,27 @@ parallel capacity. Finite counts, native code or batching alone do not establish
 No universal overhead multiplier, asymptotic proof, new profiling run or validation service is
 required. Unknown work/cost stays unknown; a ratio to a budget cap is not an inflation ratio against
 a minimal adequate experiment. This is design reasoning, not an extra §11.4 launch condition.
+
+### 11.10 Scientific knowledge use
+
+For a concrete mechanism, card, comparator, estimand, intake or scientific review,
+local roles start with the current assignment and relevant specification sections, then use
+`hmasd-scientific-tools` scientific-reading mode to locate the relevant passages in
+`docs/rl-marl-foundations-20260907/FOUNDATIONS.md` and its topic notes. Read only the
+concepts needed for this judgment; reuse current relevant reads. In the existing
+card/intake or technical acceptance, state the assumption or inferential limit that
+supports or changes the judgment. A citation alone does not demonstrate use.
+
+Pro reads only the specification sections and knowledge passages listed in TASK at
+their declared fixed versions. TASK adopts the applicable named specification
+requirements; no local skill invocation or unlisted linked dependency is required.
+
+These materials explain concepts; they have no independent decision authority.
+SESSION_CHOICES.md records choices for its original discussion and is an input only
+when explicitly applicable to the current task. It sets no global endpoint, baseline
+or investment rule. Preserve frozen scientific meaning, source versions and budgets.
+Sections 11.8–11.9 remain controlling: no textbook census, fixed seed quota, positive
+result, proof, full mechanism explanation or Pro round becomes a new A/B condition.
+Mechanical work does not preload this material; scientific reading does not invoke
+grilling or require owner confirmation. Missing decision-critical sources follow the
+existing node's gap procedure; an explanatory-source gap alone is no launch refusal.

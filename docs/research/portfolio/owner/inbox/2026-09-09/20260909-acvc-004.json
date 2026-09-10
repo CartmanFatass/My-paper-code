@@ -1,0 +1,99 @@
+{
+  "id": "20260909-acvc-004",
+  "created": "2026-09-09T04:38:14-07:00",
+  "direction": "acvc",
+  "tier": "object",
+  "kind": "close-call",
+  "title": "ACVC B01: fresh-pair recommendation after loss to fixed retrace",
+  "context": "The valid P78 native result has T above C/G but below F; G also loses to F. One matched training instance leaves repeatability unknown. Decide only which next observation to recommend; the P78 allocation is complete and no successor is launched.",
+  "options": [
+    {
+      "key": "a",
+      "label": "Recommend one fresh unchanged matched T/G instance with C/F",
+      "consequence": "Record repeatability advice only; keep every outcome and fixed F; separate Root allocation is required before any new card or execution."
+    },
+    {
+      "key": "b",
+      "label": "Recommend no further unchanged learned-gate comparison",
+      "consequence": "Withdraw the unchanged-repeat recommendation and retain this adverse stronger-fixed result without a direction or Portfolio closure."
+    },
+    {
+      "key": "c",
+      "label": "Recommend tuning or expanded exposure",
+      "consequence": "Would change the next treatment or budget; not selected or executed under P78."
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "Large native T-C/T-G effects and one training instance justify a bounded repeatability recommendation, while F superiority makes stopping a close alternative.",
+  "evidence": [
+    "docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_B01_INTAKE_20260909.md",
+    "docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_B01_RESULT_EVIDENCE_20260909.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-09.md#L62",
+  "brief": "docs/research/portfolio/owner/briefs/acvc/2026-09-09_native_link_loss_b01.md",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否保留一次全新训练配对的后续建议，检验学习门输给固定回退是否重现？这不是追加运行授权。",
+    "changes_if_approved": [
+      {
+        "target": "ACVC-NATIVE-LINK-LOSS-B01 intake · next unallocated recommendation",
+        "from": "本轮唯一已分配比较完成，未选后续观察",
+        "to": "记录一次原样T/G新训练配对建议，继续保留C/F和全部结果；运行仍须Root另行分配"
+      }
+    ],
+    "if_refused": "接受本轮T胜C/G但输F的混合结果，撤回原样重复建议；不改旧证据、强固定比较器、方向状态或阈值。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_B01_INTAKE_20260909.md",
+        "quote": "T improves over C and G, but loses to fixed retrace F. This is one matched training instance, master 8901, with 32 paired final joint episodes.",
+        "why": "T对C、G的原生收益较大，但只有一次训练；全新训练可改变有限预算下是否继续的判断。"
+      },
+      {
+        "path": "docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_B01_RESULT_EVIDENCE_20260909.md",
+        "quote": "Both learned arms are below 1800 s and the whole study below 3600 s.",
+        "why": "本轮完整账单373.41秒，已有合格实现；再一次配对的已知工作可界定，无须先做成本试验。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_B01_INTAKE_20260909.md",
+        "quote": "The strongest new contradiction is that both learned gates lose to F despite genuine learner exposure.",
+        "why": "固定回退已经胜过两种学习门；停止原样学习投入是有力备选，不能用T对G的收益抵消T对F的损失。"
+      }
+    ],
+    "uncertainty": [
+      "32局误差只反映给定已训练模型的评估波动；训练种子总体波动仍未知。",
+      "功能上包含T的G不保证有限步优化同样好；本轮未定位输给F的原因。",
+      "固定基座选择已看过旧结果；没有当前主机的已调优同信息头部空间记录。"
+    ],
+    "cost": {
+      "compute": "仅建议：另一次仍为两臂各512×256训练，四臂各32×256评估，共294912步、2048次Adam；参考本轮373.4069735秒，拟保留1800秒单学习臂和3600秒整体上限。本次未追加预算。",
+      "owner_time": "无需立即回复；如不同意可撤回该后续建议。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing；本轮已完成，后续容量及运行分配仍由Root处理。"
+    },
+    "verdict_text": "建议记录一次原样T/G新训练配对作为下一项尚未分配的观察，保留强固定回退F与所有原生结果。这与停止原样学习投入难以明显区分，标记close-call；现在不创建新卡、主随机种子、代码、运行或Pro请求。",
+    "source": "docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_B01_INTAKE_20260909.md#6-decisions-this-intake-produces"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-09T11:52:38+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/acvc/pro_packets/20260909_native_link_loss_convergence/archive/RESPONSE.md",
+      "record": "docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_B02_SCIENCE_CARD_20260909.md#1-question-authority-and-fresh-instance",
+      "state": "applied",
+      "summary": "Root P79 now allocates the previously unallocated fresh-instance recommendation. B02 master8902 and unchanged scientific configuration are frozen at the new-card boundary; implementation and the single scientific invocation have not yet occurred. The close-call against stopping remains; no owner reply is invented."
+    },
+    {
+      "at": "2026-09-09T12:18:17+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_B02_SCIENCE_CARD_20260909.md#1-question-authority-and-fresh-instance",
+      "record": "docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_B02_INTAKE_20260909.md#6-decisions-this-intake-produces",
+      "state": "applied",
+      "summary": "The previously recommended fresh pair was actually executed under Root P79: source4e019ca35, master8902, sole handle complete,294912steps/2048Adam/128final and362.9896806s complete bill. T-F is DOWN again; T-G is negative WITHIN. DM accepts all outcomes and recommends no third unchanged pair as next action, with no family or Portfolio disposition. No owner reply is invented."
+    }
+  ]
+}

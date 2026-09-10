@@ -1,0 +1,214 @@
+Claim: one task-specific command can express the observed local Windows acquisition route and the pinned remote setup inside one bounded invocation.
+Binding structure: systems / information flow.
+
+# CBSC-LOCAL-ACQUISITION-P16 — A/RECON engineering preparation
+
+This engineering access question does not itself arise from multi-agent partial
+observability or non-stationarity. P16 selects command implementation and inert
+engineering checks. It allocates no real acquisition, candidate setup or science.
+
+## Question, primary observable and reading
+
+Can a disposable command close the concrete gap in the [P15 intake](CBSC_LOCAL_ACQUISITION_P15_INTAKE_20260907.md#concrete-return-and-next-discriminator)
+by enclosing local Windows direct acquisition, transfer and remote pinned setup
+under one complete 600 s bound? The primary observable now is the delivered
+command and its focused fake-boundary evidence, independently reviewed for
+cross-node timing and termination. Real body delivery and import are unobserved.
+
+Minimum effect of interest: one reviewable complete command satisfying the
+[code specification](CBSC_LOCAL_ACQUISITION_P16_CODE_SPEC_20260907.md), including
+its deadline, lost-connection and failure boundaries. This binary engineering
+quantity directly determines whether a future execution request is concrete.
+
+Reading rule: accept command preparation only if the delivered source, fake checks
+and independent review support the specified complete boundary and preserved inputs.
+Otherwise return the precise technical gap within this assignment. Neither result
+establishes actual acquisition/import readiness, throughput, a proxy diagnosis or
+an algorithm effect. The accepted command returns through Root for a separately
+selected execution allocation; it is never launched by P16 preparation.
+
+Above the MEI, recommend one prospective execution request with the complete
+600 s cap and existing 540 s work cutoff. Missing or contrary boundary evidence
+returns a focused repair to the same executor, or the scoped gap if the command
+cannot express it without unrequested infrastructure. There is no direction recast
+or lifecycle change. No complete causal diagnosis or throughput trial is required.
+
+## Preserved inputs and host
+
+Use the exact 23 pins, 21 retained containers, two complete cp312 Torch/Triton
+bodies and metadata semantics from the literal at
+`71131d728a0b5f04663301e3d838e699ce70af41`, separately from preflight source
+`ec8866b3968fcb1566976ce405d7c552d4d9a5de`. The preflight file's current bytes
+match that source. The new command must acquire its own full source binding;
+neither historical SHA is relabelled as the new command revision.
+
+The changed condition is local Windows .NET HttpClient with `UseProxy=false`,
+default TLS validation, no credentials/cookies and no redirects/retries. Both
+canonical URLs returned HTTP 200 in P15. Those are header facts only. Reuse
+FRRIE's [exact cp312 metadata](../finite_resource_relational_inductive_efficiency/FRRIE_P15_CP312_TORCH_METADATA_20260907.json)
+at `aa44d72ec78ee537671012b21202dc315258542f`; do not retrieve it again.
+
+The acquisition client is pinned to `local_windows`; transfer and setup use
+`wsl_4070` through the configured SSH/scp route and `/usr/local/bin/agent-task`.
+The candidate uses `/usr/bin/python3` (system CPython 3.12.3), full pinned offline
+installation and the unchanged NumPy/Torch metadata process. This is the explicit
+Windows-only acquisition component of the otherwise remote-first route. No device,
+interpreter, package, learner, comparator, scientific RNG or numeric change follows.
+
+All old attempts, partial bodies and retained containers remain untouched. B04 is
+still RAW 12.0375 versus REQUEST_ONLY 12.375, with no STRUCT/pair and unknown
+failure cause. Tuned host headroom remains absent; this task does not train a
+baseline or substitute readiness evidence for the missing native comparison.
+
+## Work, prospective bound and exposure
+
+The prospective invocation is one local acquisition/transfer chain and one remote
+candidate: two sequential complete body requests, transfer of both files, one
+venv, 21 links to read-only containers, one full 23-pin offline install and one
+metadata/publication/readback process. The two bodies total 1,111,959,613 bytes;
+local acquisition plus subsequent node transfer moves that payload twice, or
+2,223,919,226 bytes before protocol overhead. The 21 remote containers total
+3,254,401,676 bytes; installation I/O is not inferred from container size.
+Stdlib parsing of the bound literal confirms 21 container names, 23 install pins
+and 23 matching metadata pins. The computed work counts are retained at
+`temp/directions/capability_bound_semantic_currentness/exp/local_acquisition_p16_preparation_20260907/contract_counts.json`.
+
+The same 600 s complete wall bound includes task-owned bootstrap, admissions,
+client setup, acquisition, transfer, remote work, publication/collection and
+termination. Retain a 540 s work cutoff within that origin; it never restarts
+after a phase or at the remote node. Remote work must enforce its remaining bound
+without relying on the continued local SSH connection. Known previous candidate
+commands total 743.35 s with no ready environment; no cheaper path is presumed.
+
+Current allocation/exposure: 0 network requests, 0 wheel-body bytes, 0 actual
+candidate creations, 0 installs/imports/probes, 0 scientific host/model/RNG calls,
+0 optimizer/learner/evaluation calls. P15's two unused requests do not carry over.
+Only inert process/transfer fixtures run. Focused checks stay within the existing
+5-minute test budget. The first-three-CM comparison, if still open, adds five
+isolated implementations and their same checks, never five acquisition invocations.
+
+## Named engineering scope and stop
+
+Engineering-scope §4 needs: task-specific multi-process/multi-node execution for
+one local acquisition/transfer chain plus one remote setup, and minimal ordered
+phase control with a shared deadline for the complete wall and bounded termination
+of every started task process. Use existing OS process groups/jobs and the existing
+remote supervisor; this names only the quantity P16 explicitly commissions.
+No retry/resume, lease, heartbeat, standing monitor/service/scheduler, kill-and-
+restart supervisor, provenance gate, internal JSON schema or generic framework is
+needed. Exact package metadata checks already belong to the preserved primary
+observable. No new hash/identity launch predicate is requested.
+
+Research budgets remain 2,000 new non-test source lines, 600 per runner and the
+ordinary test budget. Orchestration is expected for this command and remains a
+review signal: independent review must identify unnecessary machinery rather than
+reject the ratio alone. Return a concrete excess or unresolved boundary; do not
+grow infrastructure or run a real probe to justify more implementation.
+
+## Prediction and delegated preparation decision
+
+DM prediction: the task-specific boundary is expressible with existing process
+tools, but clock-domain/start-delay handling and orphaned work after client loss
+are the principal engineering risks. Passing fixtures would not predict body
+delivery. Owner prediction: not taken (unattended).
+
+Options: (a) implement/check this bounded P16 command; (b) retain P15's yield
+without implementing the newly selected repair. Recommend/select (a) under the
+P16 assignment and the 2026-09-03 standing delegation. Owner-delegated decision
+(unattended, 2026-09-03 instruction): (a). Only preparation is selected; future
+execution and any Portfolio action remain unallocated. Owner flags: none.
+
+## Prospective execution request after code intake
+
+The [P16 code intake](CBSC_LOCAL_ACQUISITION_P16_INTAKE_20260907.md) accepts command
+source `5828af584c5f5e6764f5a44c9951473d82bf04ad` under its documented assumptions.
+Its [exact future literal](CBSC_LOCAL_ACQUISITION_P16_ROOT_HANDOFF_20260907.md#prospective-bindings-not-an-execution-allocation)
+is bound at `35a4fcaeabb8f8590ac0ac4a410327414bc4ef63`. This later prospective
+section leaves the original engineering-preparation reading above intact.
+
+Request one invocation of that literal: a complete 600 s bound with the same
+540 s work cutoff, on the named Windows/WSL nodes, candidate and output roots.
+No invocation is currently allocated. Root provisions the exact committed source
+through the existing route and detaches the local controller with hidden windows
+and its normal PID/start/exit/log record. The command creates its own fresh local
+output directory; do not precreate it for redirected logs. Root can place those
+logs in the existing direction exp parent. An accepted remote setup retains the
+same named `agent-task` handle; observation never relaunches it.
+
+Question/MEI for that future observation: does this one complete invocation produce
+one fresh environment whose recorded CPython, all 23 versions and NumPy/Torch/CUDA
+metadata match the fixed input? One such environment is the absolute MEI because
+it supplies the selected metadata path; it does not establish B04 execution.
+The comparator is the retained failed remote acquisition path, with its different
+client/connection condition recorded. This is not a controlled causal comparison.
+
+Prospective reading: `PATH_PREPARED` requires observed successful local terminal
+exit and remote terminal exit, complete primary metadata publication/readback with
+`metadata_matches=true`, and the actual complete invocation within 600 s. A ready
+flag, file, test result or SSH success alone is insufficient. `PATH_INCOMPLETE`
+records failure, timeout, missing/mismatching primary metadata, uncertain terminal
+completion or cap breach, while retaining independently observed narrower facts.
+Record controller-origin wall and independently observed outer command wall with
+their measurement boundaries; do not substitute request or phase times for either.
+
+The implemented timing argument assumes local monotonic time measures the complete
+bound, maximum elapsed-clock rate divided by minimum rate is at most 1.01, and
+ordinary OS timer scheduling. Host/VM suspension and clock-domain restart are
+unsupported. These limits are disclosed; no separate clock-rate, throughput or
+compatibility experiment is required or allocated before the proposed invocation.
+Actual Linux timer/group/supervisor behavior remains source-reviewed only.
+
+The same budget includes two complete GETs, four SSH client calls (clock anchor,
+receiver, supervisor launch, collection), both full-file transfers, local admission,
+remote setup admission, venv/21 links, one full pinned install, one metadata process
+and publication/termination. The one clock sample is command timing work, not an
+additional diagnostic allocation. No extra retry, resume, fallback, old partial
+credit, target probe, scientific call or later attempt follows from unused time.
+
+Above the future MEI, retain one metadata-ready path and return the result for the
+next selected task. If incomplete or opposite to readiness, retain all partials,
+report the exact dependent gap and return a bounded repair proposal or yield.
+Neither outcome changes the B04 partial result, selects a learner retry, consumes
+a C object or changes direction lifecycle. The requested allocation still belongs
+to Portfolio; this card and its intake do not supply it.
+
+## P17 execution allocation — 2026-09-07
+
+[P17, CBSC section](../../portfolio/handoffs/2026-09-07-p17-cbsc-execution-vsp02-fresh-prefix.md#cbsc--one-prepared-complete-acquisitionsetup-invocation)
+at `a787ff12cd0212b9fd23d9d861d5d192186028fe` now allocates exactly one execution
+of source `5828af584c5f5e6764f5a44c9951473d82bf04ad` and the literal at
+`35a4fcaeabb8f8590ac0ac4a410327414bc4ef63`. It supersedes only the earlier
+zero-execution boundary. The prospective reading, 600 s complete / 540 s work
+clock, inputs, nodes, paths, assumptions and stop conditions above are unchanged.
+
+Reconcile committed inputs, provision the detached remote exact-source checkout,
+then execute once with the existing node admissions and hidden detached local
+controller. Same CM collects all outcomes; Root observes accepted identities.
+Uncertain acceptance is reconciled without another invocation. No learner,
+substitute route, retry, resume, extra probe or follow-on allocation is selected.
+This is execution/collection of accepted code, outside the completed three-batch
+CM comparison; it adds no engineering implementation or duplicate arm.
+
+Prelaunch DM prediction: the first local GET will acquire some Torch body bytes,
+given P15's direct-access headers. Whether the full chain reaches PATH_PREPARED
+is uncertain. Score the body-acquisition prediction separately from readiness;
+no throughput or B04-return prediction is made. Owner prediction: not taken
+(unattended). At this selection, actual P17 invocation count is zero.
+
+Options: (a) execute the exact newly allocated invocation; (b) retain the prior
+unallocated wait; (c) alter the route or add diagnostic calls. Recommend/select
+(a) under P17. Owner-delegated decision (unattended, 2026-09-03 instruction): (a).
+Owner reviews returned [] and relevant audit owner columns were blank at this
+boundary. Owner flags: none. The allocation is spent only by actual acceptance;
+an unsuccessful accepted invocation supplies no second attempt.
+
+## P17 intake boundary — 2026-09-07
+
+The one allocated execution returned PATH_PREPARED. The [P17 intake](CBSC_LOCAL_ACQUISITION_P17_INTAKE_20260907.md)
+accepts actual complete 174.5612299 s outer wall, both terminal exits zero and
+matching 23-pin primary metadata. The body-acquisition prediction is supported;
+owner prediction was not taken. This is one metadata-path observation with zero
+scientific exposure. The exact input bodies, fresh environment and earlier
+failures remain retained. P17's invocation allowance is finished; no B04 retry or
+further acquisition follows. The intake returns a fresh paired B preparation
+recommendation to Root for the next Portfolio command, without allocating it.

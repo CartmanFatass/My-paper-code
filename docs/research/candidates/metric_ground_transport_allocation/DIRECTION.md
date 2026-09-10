@@ -12,6 +12,174 @@ second-recast counts and stopped object-family boundaries remain unchanged.
 
 This authority preserves the direction's source-grounded scientific question, evidence references, and provenance.
 
+## Native ground-geometry B01 P75 result — 2026-09-09
+
+The accepted P75 native execution and scientific intake are now part of the
+direction's current position. The complete intake is
+`MGTAP_NATIVE_GROUND_GEOMETRY_B01_P75_INTAKE_20260909.md`; its machine-readable
+result is `MGTAP_NATIVE_GROUND_GEOMETRY_B01_P75_TECHNICAL_RESULT.json`, with
+per-master collections in
+`MGTAP_NATIVE_GROUND_GEOMETRY_B01_P75_8201_TECHNICAL_COLLECTION.json` and
+`MGTAP_NATIVE_GROUND_GEOMETRY_B01_P75_8202_TECHNICAL_COLLECTION.json`.
+
+Both frozen B01 native pairs completed with exit 0 and passed technical
+collection. The paired REL-minus-DENSE means are `-0.04468252516448091` for
+8201 and `-0.003243683445650989` for 8202. The complete two-master aggregate
+is `Delta=-0.02396310430506595` with combined conditional evaluation SE
+`0.0026485358205291165`; under the frozen `0.01` scale this is
+`REL_ADVERSE`. H remains diagnostic only. The evidence supports a complete
+adverse observation for this REL package, native task and fixed exposure; it
+does not establish metric-specific causality, stable population superiority,
+equivalence, generic competence, convergence, deployment value or warehouse/
+UAV efficacy.
+
+This is an object-end boundary: the B01 allocation is consumed and no unchanged
+REL/DENSE successor, retry, extra seed, tuning, evaluation or UAV-validation
+entry is selected. The previously parked balanced-allocation-coordinate family
+remains parked, and the broader direction's lifecycle and priority remain
+`ACTIVE/MEDIUM` under Portfolio authority. A family-level disposition or a
+materially changed native geometry comparison belongs to
+`em:metric_ground_transport_allocation:convergence`; the original DM's exact
+post-B01 question preparation is recorded separately and makes no local
+direction or Portfolio decision. P75 object decisions retain the standing
+owner delegation recorded on 2026-09-03 and are labelled `OWNER_DELEGATED`;
+this result does not create a new blanket delegation.
+
+## Native ground-geometry post-B01 Convergence boundary — 2026-09-09
+
+The complete post-B01 Convergence answer for request
+`2026-09-09-mgtap-post-b01-convergence-01` executes
+`PRO_FINAL=PARK_NATIVE_GROUND_GEOMETRY_FAMILY`. The disposition is a reversible
+boundary for the current native actor family after the complete P75 package
+observation; it does not claim that geometry-aware actors are impossible or
+that DENSE has stable population superiority. No successor B or native-binding
+recast is selected. The old balanced-allocation-coordinate family remains
+parked, and the broader direction remains `ACTIVE/MEDIUM` under Portfolio
+authority.
+
+P75 remains the complete two-master observation: REL-minus-DENSE is
+`-0.04468252516448091` for master 8201 and `-0.003243683445650989` for master
+8202, with aggregate `-0.02396310430506595` below the declared `0.01` adverse
+boundary. Master 8202 remains visible as an inside-MEI result, and H remains
+a fixed diagnostic. DENSE is a valid same-information native comparator, but
+it is untuned; no native tuned-headroom record exists. These facts do not
+permit a stable DENSE claim, an equivalence claim, or a causal explanation.
+
+The response assesses the offered sum-plus-count successor against zero work.
+Replacing fixed slot-limit denominators by sums is absorbable by learned
+projection rescaling in the stated branch; explicit counts could change finite
+training, but the proposal does not yet specify a decision-relevant
+count-conditioned geometry hypothesis. The strongest contradiction is that a
+different native geometry operation could still help, match or harm a generic
+actor. The runner-up is therefore a bounded count-aware native comparison, but
+it loses because its mechanism and native event-to-velocity prediction are not
+specific enough to justify new exposure at this boundary.
+
+Re-entry requires one materially changed, source-compatible learned actor
+operation against an equally informed valid generic comparator. It must retain
+the full local rows, recurrent history, legal three-coordinate velocity, fixed
+five-UAV host, native channel/interference/SINR/capacity/association path,
+primitive team reward and common PPO credit. A count-based proposal must define
+current observed/truncated row counts, distinguish explicit occupancy
+processing from sum rescaling, and name the native event that should change
+velocity or credit. The future primary remains complete sampled native return
+`J=(1/256) sum_t sum_i r_i,t`; a prospective `0.01` MEI is not tuned headroom.
+The response's bounded design discussion retains one or two independent
+training seeds, 512 training episodes and 1,024 Adam calls per fit, 32 final
+evaluations per learned arm, optional H work, and the known per-arm cost law;
+none is selected or launched here. No model, card, implementation, diagnostic,
+cost probe, scientific invocation, UAV-validation entry or Portfolio change is
+authorized by this boundary.
+
+Evidence: `MGTAP_NATIVE_GROUND_GEOMETRY_B01_POST_B01_CONVERGENCE_INTAKE_20260909.md`
+and `pro_packets/20260909_post_b01_convergence/archive/RESPONSE.md`.
+
+## Native geometry Convergence boundary — 2026-09-08
+
+The complete source-backed Convergence answer for request
+`2026-09-08-mgtap-native-geometry-convergence-01` executes
+`PRO_FINAL=PARK_CURRENT_ALLOCATION_COORDINATE_FAMILY`. This is the same
+reversible family boundary recorded after B03, now with a native five-UAV
+geometry audit: no native successor comparison or recast is selected, and the
+broader direction remains ACTIVE/MEDIUM under Portfolio authority.
+
+The accepted UCOPE host is a partially observed, dynamically coupled
+velocity-control task. Each actor receives current ranked relative user/UAV
+records and recurrent history, samples a three-coordinate velocity, and affects
+native team return through distance-dependent channels, interference, SINR
+eligibility, capacity-limited greedy association and the default reward. It
+does not expose a semantic task token, allocation action, additive service law
+or accepted ground-base service consumer. The base-station coordinate in
+metadata is therefore not a native MGTAP bridge. A rank slot is not a persistent
+task identity, but the current geometry is real and reward-relevant.
+
+The strongest support for parking is that the proposed old allocator transfer
+does not define a source-compatible treatment/comparator pair: a base-distance
+feature, rank-map port, nearest-user assignment or additive service surrogate
+would either rename information, restrict the generic actor, or change the
+native action/reward path. The strongest contradiction is that geometry-aware
+learning remains possible; source inspection cannot rule out a useful local
+geometry inductive bias. Therefore this is not equivalence, impossibility,
+metric-family failure, or direction closure.
+
+Re-entry requires one specified geometry-bound actor operation against a
+competent same-information generic actor, preserving local information,
+velocity action, native reward, five-UAV membership, channel/association law,
+recurrent history and B02 credit. The deciding observation is complete native
+return, with candidate scale `J=(1/256) sum_t sum_i r_i,t` and prospective MEI
+`0.01` only if a later object adopts that scale. No model, run, cost probe,
+learner, implementation task, UAV-validation entry or Portfolio change is
+authorized here. All historical B02/B03 and C meanings remain unchanged.
+
+Evidence: `pro_packets/20260908_native_geometry_convergence/archive/RESPONSE.md`
+and `MGTAP_NATIVE_GEOMETRY_CONVERGENCE_INTAKE_20260908.md`.
+
+## Native ground-geometry B01 re-entry — 2026-09-08
+
+The complete source-backed re-entry answer for request
+`2026-09-08-mgtap-native-geometry-reentry-01` executes
+`PRO_FINAL=CONTINUE_B_NATIVE_GROUND_GEOMETRY`. It freezes one B/EXPLORE
+comparison of a typed nonlinear relation-residual actor (`REL`) against an
+equally informed, parameter-matched dense residual actor (`DENSE`). It does
+not reopen the parked balanced-allocation-coordinate family or either
+historical C object, and it selects no implementation, invocation, compute,
+UAV-validation entry or Portfolio action.
+
+The native host is fixed at five UAVs, fifty users, 256 one-second steps and
+the existing velocity, channel, interference, SINR, capacity-limited greedy
+association and reward path. Each actor retains the existing 108-dimensional
+ordered input, recurrent history and three-coordinate tanh-Gaussian velocity.
+The actual association permits at most one UAV per user and up to ten users
+per UAV. The base coordinate, global diagnostics, local indices and persistent
+IDs are not added to either arm.
+
+REL applies bias-free nonlinear maps to all twenty user rows and ten
+other-UAV rows, averages with fixed denominators, and injects the resulting
+41-dimensional typed context through a 64-dimensional projection alongside
+the full raw affine path. DENSE adds a generic 108-to-16-to-64 nonlinear
+branch alongside the same raw path. Both additional branches contain 2,768
+parameters, and the complete proposed learners have 69,079 parameters. Equal
+counts do not imply equal computation or hypothesis classes; REL retains more
+row-map arithmetic. Both arms use primitive G, common B02 PPO conventions,
+two paired masters (8201, 8202), 512 training episodes per fit, 1,024 Adam
+calls, 32 sampled evaluation episodes and a shared fixed-zero-velocity H
+diagnostic per master.
+
+The primary is complete native sampled return
+`J=(1/256) sum_t sum_i r_i,t`; the two-master REL-minus-DENSE mean is compared
+with an absolute prospective MEI of 0.01. The card reports positive,
+inside-MEI and adverse branches, with no equivalence or generic-competence
+claim. The DM prediction is a small or inside-MEI aggregate; it is not an
+observed result and the owner prediction slot is not taken.
+
+The companion science card and intake are
+`MGTAP_NATIVE_GROUND_GEOMETRY_B01_SCIENCE_CARD_20260908.md` and
+`MGTAP_NATIVE_GROUND_GEOMETRY_B01_INTAKE_20260908.md`. The preceding parking
+record remains the correct boundary for the old underspecified bridge. A
+future CM handoff must preserve the native reward/action/history path and
+check typed padding, equal branch counts, zero-projection pairing and branch
+gradient connection. No run or model exists from this intake.
+
 ## Convergence family boundary after B03 — 2026-09-04
 
 The complete same-node Convergence answer executes

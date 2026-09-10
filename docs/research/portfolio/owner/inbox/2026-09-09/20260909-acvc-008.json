@@ -1,0 +1,92 @@
+{
+  "id": "20260909-acvc-008",
+  "created": "2026-09-09T15:34:52-07:00",
+  "direction": "acvc",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "ACVC：固定回撤复用E01科学卡已冻结，尚无运行分配",
+  "context": "固定回撤可能在两份旧训练底座上提高原生回报，相对总执行与同条件悬停。绑定结构是多智能体部分可观测：各机私有历史与联合运动相互影响。原节点已授予具名零更新例外，四段准确卡文字已应用；后续Root任务授权单独冻结科学定义。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "保留已冻结定义",
+      "consequence": "保持两旧底座C/F/dwell各64回合、四个分开主对比及180秒完整上限；后续实现和科学调用仍须实际分配。"
+    },
+    {
+      "key": "reject",
+      "label": "停止此卡后续执行",
+      "consequence": "按明确停止指令保留证据与旧结果，不启动此卡，且不据此否定整个方向。"
+    },
+    {
+      "key": "revise",
+      "label": "明确修改具体定义",
+      "consequence": "在新科学输出前按具体问题修订；保留原节点范围、过去结果及零训练设计，涉及冲突则回原节点。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "所需旧模型及有限实现路径已核实，规范冲突形成具名答案；冻结的只是科学定义，不是运行或代码接受。",
+  "evidence": [
+    "docs/research/candidates/acvc/ACVC_FIXED_RETRACE_REUSE_E01_SCIENCE_CARD_20260909.md",
+    "docs/research/candidates/acvc/ACVC_FIXED_RETRACE_REUSE_E01_CONVERGENCE_INTAKE_20260909.md",
+    "docs/research/candidates/acvc/pro_packets/20260909_fixed_retrace_reuse_exception/archive/RESPONSE.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-09.md#L156",
+  "brief": "docs/research/portfolio/owner/briefs/acvc/2026-09-09_ACVC_FIXED_RETRACE_REUSE_E01_CONVERGENCE.md",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "原节点已授予仅限E01的零新训练例外；是否保留现已按后续授权冻结的两旧底座C/F/dwell科学定义？",
+    "changes_if_approved": [
+      {
+        "target": "ACVC_FIXED_RETRACE_REUSE_E01_SCIENCE_CARD_20260909.md",
+        "from": "未冻结的零训练提案，类别条款冲突待裁决。",
+        "to": "采用具名B例外及四段准确文字；科学定义已冻结，规范由Root应用，仍没有源码或科学运行分配。"
+      }
+    ],
+    "if_refused": "按你的具体修订或停止指令处理当前卡；在有实际分配前不运行，不改写旧T/G阴性或恢复旧学习包。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/acvc/pro_packets/20260909_fixed_retrace_reuse_exception/archive/RESPONSE.md",
+        "quote": "Grant the object-limited B/EXPLORE exception for ACVC_FIXED_RETRACE_REUSE_E01 and permit only its named fixed-rule reuse comparison.",
+        "why": "完整原节点答案明确解决具名条款冲突，保持普通B与其余对象不变。"
+      },
+      {
+        "path": "docs/research/candidates/acvc/ACVC_FIXED_RETRACE_REUSE_E01_CONVERGENCE_INTAKE_20260909.md",
+        "quote": "The old card phrase \"non-saturated user coordinate\" was an inaccurate description. Correcting it preserves accepted implementation rather than introducing a new rule.",
+        "why": "已直接核对绑定源码；修正文义无需修改谓词或增加诊断运行。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/acvc/pro_packets/20260909_fixed_retrace_reuse_exception/archive/RESPONSE.md",
+        "quote": "The old F−C gains motivate this reuse question, but both used the same outcome-informed DENSE/8201 asset. They are neither dwell results nor F results on DENSE/8202.",
+        "why": "旧增益不等于本次复用成功，不能据卡冻结宣称稳定优势。"
+      }
+    ],
+    "uncertainty": [
+      "dwell及8202的F回报仍未知；两份底座都是旧训练、选择条件继续披露。",
+      "dwell采用F的耗时代理；约91秒过程估算并非实测完整新账单。",
+      "共享规范的准确应用与后续源码接受、运行分配分别由Root记录，当前没有新科学执行。"
+    ],
+    "cost": {
+      "compute": "本次0科学调用。冻结的未来定义为384回合/98304步，零新训练；完整上限180秒，内含30秒检查额度，尚未分配。",
+      "owner_time": "可异步查看；现有后续准备与无人委托允许冻结，无需逐项回复。",
+      "reversibility": "reversible",
+      "waits_on_this": "没有事项等待你的回复；后续实现和运行等待各自实际分配。"
+    },
+    "verdict_text": "Owner-delegated decision (unattended, 2026-09-03 instruction): (a). Freeze the exact corrected E01 scientific definition under Root's post-response preparation assignment, separately from the Pro class grant; allocate no source implementation or scientific invocation.",
+    "source": "docs/research/candidates/acvc/ACVC_FIXED_RETRACE_REUSE_E01_CONVERGENCE_INTAKE_20260909.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-09T22:47:02+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/decisions/2026-09-09-synthesis-execution.md",
+      "record": "docs/research/portfolio/decisions/2026-09-09-synthesis-execution.md",
+      "state": "applied",
+      "summary": "Root accepts the corrected frozen card and allocates original DM/CM implementation, independent review, exact-source one six-panel evaluation and full intake. 180s complete includes at most30s support; zero new fitting, no retry or successor. Scientific execution is allocated, not yet observed."
+    }
+  ]
+}

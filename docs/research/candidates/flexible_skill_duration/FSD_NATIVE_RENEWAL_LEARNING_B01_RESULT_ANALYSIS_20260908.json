@@ -1,0 +1,1157 @@
+{
+  "scope": "DM outcome-informed read-only arithmetic from complete published P38 bytes; no new model/environment/scientific invocation",
+  "source_collection_commit": "52e75380b296bf8fc9381014a154336728b69721",
+  "source_root": "native_renewal_learning_b01_p38_20260908/results",
+  "independent_training_pairs": 1,
+  "training_master": 770203,
+  "evaluation_master": 770204,
+  "evaluation_episode_ids": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31
+  ],
+  "conditional_uncertainty": "sample SD(ddof=1)/sqrt(32) over matched exogenous episodes conditional on one learned pair; no training-seed SE",
+  "arms": {
+    "G": {
+      "counts": {
+        "model_constructions": 0,
+        "training_starts": 0,
+        "checkpoint_loads": 0,
+        "training_host_steps": 0,
+        "training_transitions": 0,
+        "training_episodes": 0,
+        "update_stages": 0,
+        "training_agent_step_batches": 0,
+        "scoring_steps": 12800,
+        "evaluation_episodes": 32,
+        "evaluation_agent_step_batches": 0,
+        "greedy_act_batches": 400,
+        "agent_observations": 76800
+      },
+      "optimizer_calls": {
+        "coordinator": 0,
+        "discoverer_actor": 0,
+        "discoverer_critic": 0,
+        "team_discriminator": 0,
+        "individual_discriminator": 0
+      },
+      "initial_parameter_norms": {},
+      "evaluation_optimizer_calls": null,
+      "training_rows": [],
+      "full": {
+        "mean": 0.8937890625,
+        "stderr": 0.0015589519949166636,
+        "min": 0.8775,
+        "max": 0.9075,
+        "eligible": 68643,
+        "wrong": 0,
+        "pooled_wrong_rate": 0.0,
+        "mean_role_loss": 0.0,
+        "internal_renew": null,
+        "applied_renew": 8157,
+        "zero_eligible_episodes": 0
+      },
+      "post": {
+        "mean": 0.8935228696741855,
+        "stderr": 0.0015628591427735959,
+        "min": 0.8771929824561403,
+        "max": 0.9072681704260651,
+        "eligible": 68451,
+        "wrong": 0,
+        "pooled_wrong_rate": 0.0,
+        "mean_role_loss": 0.0,
+        "internal_renew": null,
+        "applied_renew": 8157,
+        "zero_eligible_episodes": 0
+      },
+      "training_totals": {
+        "internal_renew": 0,
+        "applied_renew": 0,
+        "coordinator_inference_calls": 0,
+        "rows_M_agent": 0,
+        "rows_M_team": 0,
+        "rows_M": 0
+      },
+      "raw_summary": "docs/research/candidates/flexible_skill_duration/native_renewal_learning_b01_p38_20260908/results/G/summary.json"
+    },
+    "C": {
+      "counts": {
+        "model_constructions": 2,
+        "training_starts": 1,
+        "checkpoint_loads": 0,
+        "training_host_steps": 32000,
+        "training_transitions": 32000,
+        "training_episodes": 80,
+        "update_stages": 5,
+        "training_agent_step_batches": 2000,
+        "scoring_steps": 12800,
+        "evaluation_episodes": 32,
+        "evaluation_agent_step_batches": 400,
+        "greedy_act_batches": 0,
+        "agent_observations": 268800
+      },
+      "optimizer_calls": {
+        "coordinator": 615,
+        "discoverer_actor": 2250,
+        "discoverer_critic": 2250,
+        "team_discriminator": 75,
+        "individual_discriminator": 300
+      },
+      "initial_parameter_norms": {
+        "coordinator": 98.69493804169102,
+        "discoverer_actor": 39.70366786302341,
+        "discoverer_critic": 40.40352794242615,
+        "team_discriminator": 49.638694751330796,
+        "individual_discriminator": 53.49766372926759
+      },
+      "evaluation_optimizer_calls": {
+        "coordinator": 0,
+        "discoverer_actor": 0,
+        "discoverer_critic": 0,
+        "team_discriminator": 0,
+        "individual_discriminator": 0
+      },
+      "training_rows": [
+        {
+          "rollout": 1,
+          "episode_ids": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ],
+          "training_return_mean": 0.19528645833333336,
+          "internal_renew": 1373,
+          "applied_renew": 1373,
+          "optimizer_calls_delta": {
+            "coordinator": 90,
+            "discoverer_actor": 450,
+            "discoverer_critic": 450,
+            "team_discriminator": 15,
+            "individual_discriminator": 60
+          },
+          "coordinator_inference_calls": 506,
+          "rows_M_agent": 1373,
+          "rows_M_team": 21,
+          "rows_M": 760,
+          "segments": {
+            "agent": {
+              "count": 1373,
+              "total_length": 38400,
+              "min": 1,
+              "max": 40,
+              "mean": 27.967953386744355
+            },
+            "team": {
+              "count": 21,
+              "total_length": 6400,
+              "min": 1,
+              "max": 400,
+              "mean": 304.76190476190476
+            }
+          },
+          "relative_initialization_displacement": {
+            "coordinator": 0.01921171166710975,
+            "discoverer_actor": 0.07058660215521181,
+            "discoverer_critic": 0.10814301176512385,
+            "team_discriminator": 0.013025555981522122,
+            "individual_discriminator": 0.016638662051873834
+          }
+        },
+        {
+          "rollout": 2,
+          "episode_ids": [
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31
+          ],
+          "training_return_mean": 0.20973958333333328,
+          "internal_renew": 1705,
+          "applied_renew": 1705,
+          "optimizer_calls_delta": {
+            "coordinator": 150,
+            "discoverer_actor": 450,
+            "discoverer_critic": 450,
+            "team_discriminator": 15,
+            "individual_discriminator": 60
+          },
+          "coordinator_inference_calls": 769,
+          "rows_M_agent": 1705,
+          "rows_M_team": 25,
+          "rows_M": 1246,
+          "segments": {
+            "agent": {
+              "count": 1705,
+              "total_length": 38400,
+              "min": 1,
+              "max": 40,
+              "mean": 22.521994134897362
+            },
+            "team": {
+              "count": 25,
+              "total_length": 6400,
+              "min": 1,
+              "max": 400,
+              "mean": 256.0
+            }
+          },
+          "relative_initialization_displacement": {
+            "coordinator": 0.04478060790961146,
+            "discoverer_actor": 0.11955648943541605,
+            "discoverer_critic": 0.15521004322034468,
+            "team_discriminator": 0.01895923916534586,
+            "individual_discriminator": 0.02940482913586614
+          }
+        },
+        {
+          "rollout": 3,
+          "episode_ids": [
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47
+          ],
+          "training_return_mean": 0.20249999999999996,
+          "internal_renew": 1700,
+          "applied_renew": 1700,
+          "optimizer_calls_delta": {
+            "coordinator": 135,
+            "discoverer_actor": 450,
+            "discoverer_critic": 450,
+            "team_discriminator": 15,
+            "individual_discriminator": 60
+          },
+          "coordinator_inference_calls": 652,
+          "rows_M_agent": 1700,
+          "rows_M_team": 36,
+          "rows_M": 1031,
+          "segments": {
+            "agent": {
+              "count": 1700,
+              "total_length": 38400,
+              "min": 1,
+              "max": 40,
+              "mean": 22.58823529411765
+            },
+            "team": {
+              "count": 36,
+              "total_length": 6400,
+              "min": 1,
+              "max": 400,
+              "mean": 177.77777777777777
+            }
+          },
+          "relative_initialization_displacement": {
+            "coordinator": 0.05173246309454927,
+            "discoverer_actor": 0.15259825641949132,
+            "discoverer_critic": 0.1945707624105436,
+            "team_discriminator": 0.02188744291739508,
+            "individual_discriminator": 0.03431347442001532
+          }
+        },
+        {
+          "rollout": 4,
+          "episode_ids": [
+            48,
+            49,
+            50,
+            51,
+            52,
+            53,
+            54,
+            55,
+            56,
+            57,
+            58,
+            59,
+            60,
+            61,
+            62,
+            63
+          ],
+          "training_return_mean": 0.2311197916666667,
+          "internal_renew": 2713,
+          "applied_renew": 2713,
+          "optimizer_calls_delta": {
+            "coordinator": 120,
+            "discoverer_actor": 450,
+            "discoverer_critic": 450,
+            "team_discriminator": 15,
+            "individual_discriminator": 60
+          },
+          "coordinator_inference_calls": 759,
+          "rows_M_agent": 2713,
+          "rows_M_team": 222,
+          "rows_M": 996,
+          "segments": {
+            "agent": {
+              "count": 2713,
+              "total_length": 38400,
+              "min": 1,
+              "max": 40,
+              "mean": 14.154072981938812
+            },
+            "team": {
+              "count": 222,
+              "total_length": 6400,
+              "min": 1,
+              "max": 400,
+              "mean": 28.82882882882883
+            }
+          },
+          "relative_initialization_displacement": {
+            "coordinator": 0.058384780949582535,
+            "discoverer_actor": 0.18162368243304042,
+            "discoverer_critic": 0.2158991938891572,
+            "team_discriminator": 0.02356900214294369,
+            "individual_discriminator": 0.03892597551835851
+          }
+        },
+        {
+          "rollout": 5,
+          "episode_ids": [
+            64,
+            65,
+            66,
+            67,
+            68,
+            69,
+            70,
+            71,
+            72,
+            73,
+            74,
+            75,
+            76,
+            77,
+            78,
+            79
+          ],
+          "training_return_mean": 0.20744791666666668,
+          "internal_renew": 2676,
+          "applied_renew": 2676,
+          "optimizer_calls_delta": {
+            "coordinator": 120,
+            "discoverer_actor": 450,
+            "discoverer_critic": 450,
+            "team_discriminator": 15,
+            "individual_discriminator": 60
+          },
+          "coordinator_inference_calls": 709,
+          "rows_M_agent": 2676,
+          "rows_M_team": 204,
+          "rows_M": 982,
+          "segments": {
+            "agent": {
+              "count": 2676,
+              "total_length": 38400,
+              "min": 1,
+              "max": 40,
+              "mean": 14.349775784753364
+            },
+            "team": {
+              "count": 204,
+              "total_length": 6400,
+              "min": 1,
+              "max": 329,
+              "mean": 31.372549019607842
+            }
+          },
+          "relative_initialization_displacement": {
+            "coordinator": 0.06484310332198788,
+            "discoverer_actor": 0.20169514948168563,
+            "discoverer_critic": 0.23869030519707707,
+            "team_discriminator": 0.024872535428620522,
+            "individual_discriminator": 0.04327740718295305
+          }
+        }
+      ],
+      "full": {
+        "mean": 0.3752213541666668,
+        "stderr": 0.009154917177768283,
+        "min": 0.2699999999999995,
+        "max": 0.46666666666666734,
+        "eligible": 32555,
+        "wrong": 3738,
+        "pooled_wrong_rate": 0.11482107203194594,
+        "mean_role_loss": 0.048671875,
+        "internal_renew": 3969,
+        "applied_renew": 3969,
+        "zero_eligible_episodes": 0
+      },
+      "post": {
+        "mean": 0.37616175856307443,
+        "stderr": 0.009177861832349157,
+        "min": 0.2706766917293228,
+        "max": 0.4678362573099422,
+        "eligible": 32555,
+        "wrong": 3738,
+        "pooled_wrong_rate": 0.11482107203194594,
+        "mean_role_loss": 0.048793859649122806,
+        "internal_renew": 3777,
+        "applied_renew": 3777,
+        "zero_eligible_episodes": 0
+      },
+      "training_totals": {
+        "internal_renew": 10167,
+        "applied_renew": 10167,
+        "coordinator_inference_calls": 3395,
+        "rows_M_agent": 10167,
+        "rows_M_team": 508,
+        "rows_M": 5015
+      },
+      "raw_summary": "docs/research/candidates/flexible_skill_duration/native_renewal_learning_b01_p38_20260908/results/C/summary.json"
+    },
+    "H": {
+      "counts": {
+        "model_constructions": 2,
+        "training_starts": 1,
+        "checkpoint_loads": 0,
+        "training_host_steps": 32000,
+        "training_transitions": 32000,
+        "training_episodes": 80,
+        "update_stages": 5,
+        "training_agent_step_batches": 2000,
+        "scoring_steps": 12800,
+        "evaluation_episodes": 32,
+        "evaluation_agent_step_batches": 400,
+        "greedy_act_batches": 0,
+        "agent_observations": 268800
+      },
+      "optimizer_calls": {
+        "coordinator": 495,
+        "discoverer_actor": 2250,
+        "discoverer_critic": 2250,
+        "team_discriminator": 75,
+        "individual_discriminator": 300
+      },
+      "initial_parameter_norms": {
+        "coordinator": 98.69493804169102,
+        "discoverer_actor": 39.70366786302341,
+        "discoverer_critic": 40.40352794242615,
+        "team_discriminator": 49.638694751330796,
+        "individual_discriminator": 53.49766372926759
+      },
+      "evaluation_optimizer_calls": {
+        "coordinator": 0,
+        "discoverer_actor": 0,
+        "discoverer_critic": 0,
+        "team_discriminator": 0,
+        "individual_discriminator": 0
+      },
+      "training_rows": [
+        {
+          "rollout": 1,
+          "episode_ids": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ],
+          "training_return_mean": 0.4482291666666668,
+          "internal_renew": 1377,
+          "applied_renew": 4191,
+          "optimizer_calls_delta": {
+            "coordinator": 105,
+            "discoverer_actor": 450,
+            "discoverer_critic": 450,
+            "team_discriminator": 15,
+            "individual_discriminator": 60
+          },
+          "coordinator_inference_calls": 504,
+          "rows_M_agent": 1377,
+          "rows_M_team": 21,
+          "rows_M": 812,
+          "segments": {
+            "agent": {
+              "count": 1377,
+              "total_length": 38400,
+              "min": 1,
+              "max": 40,
+              "mean": 27.886710239651418
+            },
+            "team": {
+              "count": 21,
+              "total_length": 6400,
+              "min": 1,
+              "max": 400,
+              "mean": 304.76190476190476
+            }
+          },
+          "relative_initialization_displacement": {
+            "coordinator": 0.025417607361811003,
+            "discoverer_actor": 0.08900903969786768,
+            "discoverer_critic": 0.11810718270347033,
+            "team_discriminator": 0.012852855288585157,
+            "individual_discriminator": 0.012530956694937548
+          }
+        },
+        {
+          "rollout": 2,
+          "episode_ids": [
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31
+          ],
+          "training_return_mean": 0.47078125000000004,
+          "internal_renew": 1305,
+          "applied_renew": 4392,
+          "optimizer_calls_delta": {
+            "coordinator": 75,
+            "discoverer_actor": 450,
+            "discoverer_critic": 450,
+            "team_discriminator": 15,
+            "individual_discriminator": 60
+          },
+          "coordinator_inference_calls": 511,
+          "rows_M_agent": 1305,
+          "rows_M_team": 22,
+          "rows_M": 640,
+          "segments": {
+            "agent": {
+              "count": 1305,
+              "total_length": 38400,
+              "min": 1,
+              "max": 40,
+              "mean": 29.42528735632184
+            },
+            "team": {
+              "count": 22,
+              "total_length": 6400,
+              "min": 1,
+              "max": 400,
+              "mean": 290.90909090909093
+            }
+          },
+          "relative_initialization_displacement": {
+            "coordinator": 0.04266883981780222,
+            "discoverer_actor": 0.1326403516863418,
+            "discoverer_critic": 0.1812627200546273,
+            "team_discriminator": 0.0189930472042029,
+            "individual_discriminator": 0.025463382046326723
+          }
+        },
+        {
+          "rollout": 3,
+          "episode_ids": [
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47
+          ],
+          "training_return_mean": 0.4950000000000001,
+          "internal_renew": 1498,
+          "applied_renew": 4272,
+          "optimizer_calls_delta": {
+            "coordinator": 105,
+            "discoverer_actor": 450,
+            "discoverer_critic": 450,
+            "team_discriminator": 15,
+            "individual_discriminator": 60
+          },
+          "coordinator_inference_calls": 583,
+          "rows_M_agent": 1498,
+          "rows_M_team": 22,
+          "rows_M": 830,
+          "segments": {
+            "agent": {
+              "count": 1498,
+              "total_length": 38400,
+              "min": 1,
+              "max": 40,
+              "mean": 25.63417890520694
+            },
+            "team": {
+              "count": 22,
+              "total_length": 6400,
+              "min": 1,
+              "max": 400,
+              "mean": 290.90909090909093
+            }
+          },
+          "relative_initialization_displacement": {
+            "coordinator": 0.04749787570951363,
+            "discoverer_actor": 0.1676426241183203,
+            "discoverer_critic": 0.21963837685929744,
+            "team_discriminator": 0.02209755831521477,
+            "individual_discriminator": 0.030363122606689445
+          }
+        },
+        {
+          "rollout": 4,
+          "episode_ids": [
+            48,
+            49,
+            50,
+            51,
+            52,
+            53,
+            54,
+            55,
+            56,
+            57,
+            58,
+            59,
+            60,
+            61,
+            62,
+            63
+          ],
+          "training_return_mean": 0.5197916666666667,
+          "internal_renew": 1403,
+          "applied_renew": 4308,
+          "optimizer_calls_delta": {
+            "coordinator": 90,
+            "discoverer_actor": 450,
+            "discoverer_critic": 450,
+            "team_discriminator": 15,
+            "individual_discriminator": 60
+          },
+          "coordinator_inference_calls": 535,
+          "rows_M_agent": 1403,
+          "rows_M_team": 23,
+          "rows_M": 706,
+          "segments": {
+            "agent": {
+              "count": 1403,
+              "total_length": 38400,
+              "min": 1,
+              "max": 40,
+              "mean": 27.36992159657876
+            },
+            "team": {
+              "count": 23,
+              "total_length": 6400,
+              "min": 1,
+              "max": 400,
+              "mean": 278.2608695652174
+            }
+          },
+          "relative_initialization_displacement": {
+            "coordinator": 0.051083083119264086,
+            "discoverer_actor": 0.18933040525151773,
+            "discoverer_critic": 0.23571232070065756,
+            "team_discriminator": 0.024081948500464873,
+            "individual_discriminator": 0.03863953529064124
+          }
+        },
+        {
+          "rollout": 5,
+          "episode_ids": [
+            64,
+            65,
+            66,
+            67,
+            68,
+            69,
+            70,
+            71,
+            72,
+            73,
+            74,
+            75,
+            76,
+            77,
+            78,
+            79
+          ],
+          "training_return_mean": 0.5262760416666665,
+          "internal_renew": 1642,
+          "applied_renew": 4389,
+          "optimizer_calls_delta": {
+            "coordinator": 120,
+            "discoverer_actor": 450,
+            "discoverer_critic": 450,
+            "team_discriminator": 15,
+            "individual_discriminator": 60
+          },
+          "coordinator_inference_calls": 658,
+          "rows_M_agent": 1642,
+          "rows_M_team": 35,
+          "rows_M": 903,
+          "segments": {
+            "agent": {
+              "count": 1642,
+              "total_length": 38400,
+              "min": 1,
+              "max": 40,
+              "mean": 23.38611449451888
+            },
+            "team": {
+              "count": 35,
+              "total_length": 6400,
+              "min": 1,
+              "max": 400,
+              "mean": 182.85714285714286
+            }
+          },
+          "relative_initialization_displacement": {
+            "coordinator": 0.05451185894775235,
+            "discoverer_actor": 0.22101640047353746,
+            "discoverer_critic": 0.24465843484030148,
+            "team_discriminator": 0.02563043566706593,
+            "individual_discriminator": 0.040799434334449144
+          }
+        }
+      ],
+      "full": {
+        "mean": 0.8726041666666656,
+        "stderr": 0.002506501961565866,
+        "min": 0.8279166666666654,
+        "max": 0.8962500000000001,
+        "eligible": 68451,
+        "wrong": 1435,
+        "pooled_wrong_rate": 0.020963901184789118,
+        "mean_role_loss": 0.018684895833333333,
+        "internal_renew": 2796,
+        "applied_renew": 8349,
+        "zero_eligible_episodes": 0
+      },
+      "post": {
+        "mean": 0.8747911445279857,
+        "stderr": 0.0025127839213692875,
+        "min": 0.8299916457811183,
+        "max": 0.8984962406015039,
+        "eligible": 68451,
+        "wrong": 1435,
+        "pooled_wrong_rate": 0.020963901184789118,
+        "mean_role_loss": 0.01873172514619883,
+        "internal_renew": 2604,
+        "applied_renew": 8157,
+        "zero_eligible_episodes": 0
+      },
+      "training_totals": {
+        "internal_renew": 7225,
+        "applied_renew": 21552,
+        "coordinator_inference_calls": 2791,
+        "rows_M_agent": 7225,
+        "rows_M_team": 123,
+        "rows_M": 3891
+      },
+      "raw_summary": "docs/research/candidates/flexible_skill_duration/native_renewal_learning_b01_p38_20260908/results/H/summary.json"
+    }
+  },
+  "paired": {
+    "h_minus_c_full": {
+      "differences": [
+        0.46583333333333254,
+        0.5083333333333326,
+        0.45124999999999954,
+        0.5670833333333327,
+        0.477083333333333,
+        0.42916666666666564,
+        0.5337499999999997,
+        0.4954166666666644,
+        0.45499999999999763,
+        0.575416666666666,
+        0.39791666666666436,
+        0.5466666666666667,
+        0.4083333333333317,
+        0.5562499999999987,
+        0.450833333333331,
+        0.49458333333333326,
+        0.5508333333333327,
+        0.5183333333333318,
+        0.4829166666666653,
+        0.5924999999999996,
+        0.5041666666666655,
+        0.5387499999999987,
+        0.49999999999999856,
+        0.4845833333333314,
+        0.5537499999999996,
+        0.5087499999999987,
+        0.4837499999999967,
+        0.49916666666666604,
+        0.4512499999999987,
+        0.42583333333333356,
+        0.48749999999999943,
+        0.5212499999999993
+      ],
+      "mean": 0.49738281249999894,
+      "stderr": 0.00864640484198601,
+      "min": 0.39791666666666436,
+      "max": 0.5924999999999996,
+      "positive": 32,
+      "zero": 0,
+      "negative": 0,
+      "max_published_vector_readback_residual": 0.0,
+      "published_mean_readback_residual": 0.0,
+      "published_se_readback_residual": 0.0
+    },
+    "g_minus_h_full": {
+      "differences": [
+        0.009999999999999898,
+        0.020416666666667527,
+        0.053333333333334565,
+        0.0316666666666674,
+        0.01666666666666783,
+        0.022083333333333455,
+        0.027500000000000968,
+        0.02708333333333479,
+        0.014583333333334503,
+        0.010833333333334028,
+        0.031666666666668286,
+        0.019166666666667664,
+        0.024583333333335178,
+        0.03500000000000136,
+        0.025000000000001577,
+        0.021666666666666834,
+        0.011666666666666936,
+        0.017083333333334783,
+        0.017500000000001514,
+        0.023750000000000826,
+        0.014166666666667882,
+        0.010833333333333806,
+        0.03208333333333491,
+        0.02416666666666878,
+        0.012500000000000622,
+        0.016250000000000875,
+        0.020416666666668193,
+        0.01625000000000021,
+        0.0154166666666673,
+        0.010416666666667296,
+        0.027083333333334236,
+        0.017083333333334005
+      ],
+      "mean": 0.021184895833334313,
+      "stderr": 0.001613971807427201,
+      "min": 0.009999999999999898,
+      "max": 0.053333333333334565,
+      "positive": 32,
+      "zero": 0,
+      "negative": 0,
+      "max_published_vector_readback_residual": 0.0,
+      "published_mean_readback_residual": 0.0,
+      "published_se_readback_residual": 0.0
+    },
+    "g_minus_c_full": {
+      "differences": [
+        0.47583333333333244,
+        0.5287500000000002,
+        0.504583333333334,
+        0.5987500000000001,
+        0.49375000000000085,
+        0.4512499999999991,
+        0.5612500000000007,
+        0.5224999999999992,
+        0.46958333333333213,
+        0.5862499999999999,
+        0.42958333333333265,
+        0.5658333333333344,
+        0.4329166666666669,
+        0.59125,
+        0.47583333333333255,
+        0.5162500000000001,
+        0.5624999999999997,
+        0.5354166666666665,
+        0.5004166666666667,
+        0.6162500000000004,
+        0.5183333333333334,
+        0.5495833333333325,
+        0.5320833333333335,
+        0.5087500000000003,
+        0.5662500000000003,
+        0.5249999999999995,
+        0.5041666666666649,
+        0.5154166666666662,
+        0.466666666666666,
+        0.43625000000000086,
+        0.5145833333333336,
+        0.5383333333333333
+      ],
+      "mean": 0.5185677083333332,
+      "stderr": 0.008570016255319007,
+      "min": 0.42958333333333265,
+      "max": 0.6162500000000004,
+      "positive": 32,
+      "zero": 0,
+      "negative": 0,
+      "max_published_vector_readback_residual": 0.0,
+      "published_mean_readback_residual": 0.0,
+      "published_se_readback_residual": 0.0
+    },
+    "h_minus_c_post": {
+      "differences": [
+        0.4670008354218873,
+        0.5096073517126142,
+        0.452380952380952,
+        0.5685045948203837,
+        0.4782790309106096,
+        0.4302422723475345,
+        0.5350877192982453,
+        0.4966583124477839,
+        0.4561403508771906,
+        0.5768588137009183,
+        0.39891395154552817,
+        0.5480367585630744,
+        0.40935672514619725,
+        0.5576441102756879,
+        0.45196324143692335,
+        0.49582289055973255,
+        0.552213868003341,
+        0.5196324143692549,
+        0.48412698412698274,
+        0.5939849624060147,
+        0.5054302422723465,
+        0.5401002506265651,
+        0.5012531328320788,
+        0.4857978279030891,
+        0.5551378446115285,
+        0.5100250626566403,
+        0.48496240601503426,
+        0.500417710944026,
+        0.45238095238095105,
+        0.42690058479532184,
+        0.48872180451127767,
+        0.522556390977443
+      ],
+      "mean": 0.49862938596491124,
+      "stderr": 0.008668075029559913,
+      "min": 0.39891395154552817,
+      "max": 0.5939849624060147,
+      "positive": 32,
+      "zero": 0,
+      "negative": 0,
+      "max_published_vector_readback_residual": 0.0,
+      "published_mean_readback_residual": 0.0,
+      "published_se_readback_residual": 0.0
+    },
+    "g_minus_h_post": {
+      "differences": [
+        0.007518796992481036,
+        0.0179615705931504,
+        0.05096073517126265,
+        0.029239766081872065,
+        0.014202172096910104,
+        0.019632414369256557,
+        0.025062656641605008,
+        0.02464494569757869,
+        0.012113617376776409,
+        0.008354218880535336,
+        0.029239766081872953,
+        0.01670843776107034,
+        0.02213868003341868,
+        0.0325814536340866,
+        0.022556390977445107,
+        0.019214703425229906,
+        0.009189640768588414,
+        0.014619883040937087,
+        0.01503759398496396,
+        0.021303258145364268,
+        0.011695906432749759,
+        0.008354218880535114,
+        0.029657477025899603,
+        0.02172096908939225,
+        0.01002506265664227,
+        0.01378446115288312,
+        0.017961570593151066,
+        0.013784461152882455,
+        0.012949039264829376,
+        0.007936507936508574,
+        0.024644945697578136,
+        0.01461988304093631
+      ],
+      "mean": 0.0187317251461998,
+      "stderr": 0.0016180168495510767,
+      "min": 0.007518796992481036,
+      "max": 0.05096073517126265,
+      "positive": 32,
+      "zero": 0,
+      "negative": 0,
+      "max_published_vector_readback_residual": 0.0,
+      "published_mean_readback_residual": 0.0,
+      "published_se_readback_residual": 0.0
+    },
+    "g_minus_c_post": {
+      "differences": [
+        0.47451963241436834,
+        0.5275689223057646,
+        0.5033416875522146,
+        0.5977443609022558,
+        0.4924812030075197,
+        0.44987468671679104,
+        0.5601503759398503,
+        0.5213032581453626,
+        0.46825396825396703,
+        0.5852130325814536,
+        0.4281537176274011,
+        0.5647451963241448,
+        0.43149540517961593,
+        0.5902255639097744,
+        0.47451963241436845,
+        0.5150375939849625,
+        0.5614035087719296,
+        0.534252297410192,
+        0.4991645781119467,
+        0.615288220551379,
+        0.5171261487050962,
+        0.5484544695071003,
+        0.5309106098579783,
+        0.5075187969924814,
+        0.5651629072681708,
+        0.5238095238095233,
+        0.5029239766081853,
+        0.5142021720969085,
+        0.4653299916457804,
+        0.4348370927318304,
+        0.5133667502088558,
+        0.5371762740183793
+      ],
+      "mean": 0.517361111111111,
+      "stderr": 0.008591494992801013,
+      "min": 0.4281537176274011,
+      "max": 0.615288220551379,
+      "positive": 32,
+      "zero": 0,
+      "negative": 0,
+      "max_published_vector_readback_residual": 0.0,
+      "published_mean_readback_residual": 0.0,
+      "published_se_readback_residual": 0.0
+    }
+  },
+  "accounting": {
+    "full": {
+      "h_minus_c_eligible_count_difference": 35896,
+      "h_minus_c_eligible_reward_term": 0.46739583333333334,
+      "c_minus_h_wrong_count_difference": 2303,
+      "c_minus_h_wrong_reward_term": 0.029986979166666667,
+      "h_minus_c_minus_count_accounting_residual": -1.0547118733938987e-15,
+      "g_minus_h_less_h_role_loss_published_mean": 0.0025000000000009797
+    },
+    "post": {
+      "h_minus_c_eligible_count_difference": 35896,
+      "h_minus_c_eligible_reward_term": 0.4685672514619883,
+      "c_minus_h_wrong_count_difference": 2303,
+      "c_minus_h_wrong_reward_term": 0.030062134502923978,
+      "h_minus_c_minus_count_accounting_residual": -1.0547118733938987e-15,
+      "g_minus_h_less_h_role_loss_published_mean": 9.705777848090236e-16
+    },
+    "interpretation": "Observed reward accounting on distinct arm-specific opportunity sets, not a common-population rate comparison or causal decomposition of learning/rule/credit."
+  },
+  "actual_totals": {
+    "model_constructions": 4,
+    "training_starts": 2,
+    "checkpoint_loads": 0,
+    "training_host_steps": 64000,
+    "training_transitions": 64000,
+    "training_episodes": 160,
+    "update_stages": 10,
+    "training_agent_step_batches": 4000,
+    "scoring_steps": 38400,
+    "evaluation_episodes": 96,
+    "evaluation_agent_step_batches": 800,
+    "greedy_act_batches": 400,
+    "agent_observations": 614400
+  },
+  "actual_optimizer_calls_all_networks": 10860,
+  "card_branch": "above_mei",
+  "prediction": {
+    "dm_h_minus_c_above_mei": true,
+    "dm_positive_g_minus_h": true,
+    "owner": "not taken (unattended)",
+    "interpretation": "Both qualitative directional predictions agree with this pair; no numerical forecast or independent confirmation."
+  }
+}

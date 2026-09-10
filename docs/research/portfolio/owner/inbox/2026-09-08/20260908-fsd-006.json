@@ -1,0 +1,82 @@
+{
+  "id": "20260908-fsd-006",
+  "created": "2026-09-08T10:35:05-07:00",
+  "direction": "flexible_skill_duration",
+  "tier": "direction",
+  "kind": "portfolio",
+  "title": "P52: FSD post-B03 direction recommendation",
+  "context": "B03 gives one valid H-D0 gain of .392865, with G ahead of H by .115286. DM recommends ending only the tested supplied-public-mask extension, while presenting one concrete fresh-pair B and a source-grounded native-action alternative for Convergence. This is advice, not an executed family disposition or experiment allocation.",
+  "options": [
+    {
+      "key": "ratify",
+      "label": "Support this advice in the authorized Convergence question",
+      "consequence": "The existing single-delivery and full-intake route continues; no experiment or family decision is fabricated."
+    },
+    {
+      "key": "refuse",
+      "label": "Reject the DM recommendation",
+      "consequence": "Apply the owner correction within current authority while retaining the fixed accepted request and all prior outcomes."
+    },
+    {
+      "key": "amend",
+      "label": "Amend the question or recommendation",
+      "consequence": "Apply the precise amendment without duplicate Send or an automatic successor."
+    }
+  ],
+  "recommended": "ratify",
+  "auto_applied": null,
+  "dm_reason": "The selected package and fixed-clock questions have direct observations; one more pair mainly adds variation coverage, so its concrete decision value must justify it.",
+  "evidence": [
+    "docs/research/candidates/flexible_skill_duration/pro_packets/20260908_post_b03_convergence/PREPARATION_INTAKE.md",
+    "docs/research/candidates/flexible_skill_duration/pro_packets/20260908_post_b03_convergence/EXPOSURE_AND_COST.json"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-08.md#L64",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": {
+    "question": "是否支持 DM 在一次已授权的 post-B03 Convergence 问题中建议结束当前已测试的公开续约混合学习扩展，同时保留具体 B 和源码能支持的不同原生动作问题作为节点选项？",
+    "changes_if_approved": [
+      {
+        "target": "P52 post-B03 Convergence 的方向建议",
+        "from": "DM 建议 A，节点尚未作出新方向裁决",
+        "to": "所有者异步支持这项建议；本轮既定问答及完整 intake 路线继续，实验不自动分配"
+      }
+    ],
+    "if_refused": "按回复修订尚可变的建议或在完整回复 intake 时保留所有者的新指令；不重发已接受的请求，不改写 B03 结果或擅自运行后继。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/flexible_skill_duration/FSD_NATIVE_RENEWAL_LEARNING_B03_INTAKE_20260908.md",
+        "quote": "P47's selected full native H−D0 discriminator is answered.",
+        "why": "专门选择的固定时钟比较已产生有效直接读数，再一对主要增加同一构造的变异覆盖。"
+      },
+      {
+        "path": "docs/research/candidates/flexible_skill_duration/FSD_NATIVE_RENEWAL_LEARNING_B03_INTAKE_20260908.md",
+        "quote": "The strong contrary fact is H's native deficit to the public G reference:",
+        "why": "G 高出 H .115286，当前 package 收益仍不等于学会续约或优于公开同信息规则。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/flexible_skill_duration/FSD_NATIVE_RENEWAL_LEARNING_B03_INTAKE_20260908.md",
+        "quote": "The primary supplies local performance support against a newly trained authentic\nfixed-clock k5 comparator; the result is no longer supported only by H versus C.",
+        "why": "H−D0 +.392865 是真实学习后的大幅局部正结果；一项明确有用的新 B 仍可能值得继续，不能因缺少更强结论而拒绝。"
+      }
+    ],
+    "uncertainty": [
+      "只有一个 H/D0 training pair；32 个评价回合不是32个独立训练。",
+      "D0 弱但有效，actor/critic 梯度次数是 H 的8倍；数据和 credit clock 不同，尚无 timing causality 或 matched-compute claim。",
+      "新的 H/D0/G pair 可增加一次局部观察，但不能自动建立稳定性；是否值得由本次 Convergence 明确选择。",
+      "不同 UAV 原生动作问题须说明实际 internal boundary 或 movement 路径及家族决定；没有 runnable UAV 对象或实际进入。"
+    ],
+    "cost": {
+      "compute": "本次新科学调用为0。未选 B 的主导工作64000训练转换/96终点回合；历史完整墙时G/D0/H=2.47/462.10/434.04秒，合计898.61秒；拟保持60/1200/900秒完整上限，未来工作量及墙时仍有不确定性。",
+      "owner_time": "可异步支持、拒绝或修改；无需立即回复。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing；P52 已授权一次固定交付及完整 intake/所选准备路线，发布本项不等待所有者。"
+    },
+    "verdict_text": "推荐结束这次已测试的公开续约混合路线的有限学习扩展，保留原普通分支暂停；真实固定时钟比较已经回答。另一个配对可以增加局部变异证据，但不应仅因 n=1 自动购买。若节点选择不同的原生动作问题，应明确实际路径和家族决定，不能把已有源码或长期 UAV 目标当作迁移收益。本段是 DM 建议，不是已执行的方向裁决。",
+    "source": "docs/research/candidates/flexible_skill_duration/pro_packets/20260908_post_b03_convergence/PREPARATION_INTAKE.md"
+  },
+  "starred": true
+}
