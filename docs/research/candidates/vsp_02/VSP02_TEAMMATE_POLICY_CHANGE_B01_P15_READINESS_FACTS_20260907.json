@@ -1,0 +1,118 @@
+{
+  "accepted_implementation_sha": "b0c957d9b9a23506dbd0ba8a1b8c729ea50d8cad",
+  "source_correspondence": [
+    {
+      "path": "experiments/candidates/vsp_02/teammate_policy_change_b01/__init__.py",
+      "baseline_bytes_equal": true,
+      "git_blob": "77a8c87b8fd27a30ae2d414168bf061aad933ee3",
+      "lines": 1
+    },
+    {
+      "path": "experiments/candidates/vsp_02/teammate_policy_change_b01/host.py",
+      "baseline_bytes_equal": true,
+      "git_blob": "6464fbff706347c88de01dd42335bc75982d17f6",
+      "lines": 64
+    },
+    {
+      "path": "experiments/candidates/vsp_02/teammate_policy_change_b01/learner.py",
+      "baseline_bytes_equal": true,
+      "git_blob": "357d7edbd7291b5cb8d7c20bb0d4ff9219ac949e",
+      "lines": 131
+    },
+    {
+      "path": "experiments/candidates/vsp_02/teammate_policy_change_b01/study.py",
+      "baseline_bytes_equal": true,
+      "git_blob": "874e85a290b036912462a63f6d839fc53906c19d",
+      "lines": 398
+    },
+    {
+      "path": "scripts/run_vsp02_teammate_policy_change_b01.py",
+      "baseline_bytes_equal": true,
+      "git_blob": "9e6a5cfe698584714736e51b8770a053630d6af9",
+      "lines": 32
+    },
+    {
+      "path": "tests/experiments/candidates/vsp_02/teammate_policy_change_b01/test_host.py",
+      "baseline_bytes_equal": true,
+      "git_blob": "7f5e636085b5ad9674f87c540fd4213af65de2b1",
+      "lines": 79
+    },
+    {
+      "path": "tests/experiments/candidates/vsp_02/teammate_policy_change_b01/test_learner.py",
+      "baseline_bytes_equal": true,
+      "git_blob": "5a5d78ca29c629ad87611668d6b622e8d1a706de",
+      "lines": 129
+    },
+    {
+      "path": "tests/experiments/candidates/vsp_02/teammate_policy_change_b01/test_study.py",
+      "baseline_bytes_equal": true,
+      "git_blob": "5a534657265692c2501e1d75a61ff517c5fe3f6f",
+      "lines": 128
+    }
+  ],
+  "config_from_source_ast": {
+    "prefix_episodes": 4096,
+    "adaptation_episodes": 1024,
+    "evaluation_episodes": 64,
+    "checkpoints": [
+      16,
+      32,
+      64,
+      128,
+      256,
+      512,
+      768,
+      1024
+    ],
+    "wall_seconds": 1800
+  },
+  "scientific_counts": {
+    "training_episodes": 6144,
+    "training_joint_steps": 294912,
+    "rollout_batches": 384,
+    "optimizer_steps": 6144,
+    "evaluation_episodes": 1152,
+    "evaluation_joint_steps": 55296,
+    "joint_steps_total": 350208,
+    "ppo_transition_passes": 1179648
+  },
+  "fixture_movement": {
+    "initial_parameter_rms": 0.07669830322265625,
+    "first_rollout_displacement_rms": 0.0021576136350631714,
+    "relative_to_initial_rms": 0.028131178193076693
+  },
+  "p15_current_exposure": {
+    "environment_transitions": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0,
+    "model_selection_trials": 0,
+    "result_bearing_invocations": 0
+  },
+  "runtime_readiness": {
+    "node": "wsl_4070",
+    "ssh_target": "hmasd-wsl-node",
+    "python": "/home/wu/.venvs/hmasd/bin/python",
+    "python_version": "3.10.21",
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "torch_distribution": "2.7.0+cu118",
+    "numpy": "1.26.3",
+    "matplotlib": "3.10.0",
+    "method": "read-only on-node stdlib metadata; no workload import",
+    "device": "cpu",
+    "dtype": "float32",
+    "torch_compute_threads": 1,
+    "torch_interop_threads": 1,
+    "admission_status": "not performed; Root must execute adjacent fresh admission in the accepted launch command"
+  },
+  "p15_allocation": {
+    "source": "25b1a88b162ae137b5071ca2d9acb87007fb3ea9",
+    "scientific_pairs": 1,
+    "master_seed": 1103,
+    "complete_pair_cap_seconds": 1800,
+    "extra_arms": 0,
+    "extra_seeds": 0,
+    "retries": 0,
+    "resume": false
+  },
+  "exposure_line": "new_readiness_transitions=0; new_readiness_optimizer_steps=0; scientific_invocations_so_far=0; planned_training_joint_steps=294912; planned_optimizer_steps=6144; planned_evaluation_episodes=1152; learner_movement_reference=ENGINEERING_FIXTURE_seed17; first_16_step_displacement_rms=0.0021576136350631714; initial_parameter_rms=0.07669830322265625; displacement_relative_to_initial_rms=0.028131178193076693"
+}

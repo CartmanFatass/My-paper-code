@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "request_id": "2026-09-09-acvc-native-link-loss-convergence-01",
+  "workflow_node": "em_convergence",
+  "conversation_binding_key": "em:acvc:convergence",
+  "direction_id": "acvc",
+  "direction_ids": [
+    "acvc"
+  ],
+  "conversation_id": "6aa12e74-8e54-83e8-95f6-001681b456f7",
+  "provider_url": "https://chatgpt.com/c/6aa12e74-8e54-83e8-95f6-001681b456f7",
+  "user_message_id": "f690489f-6460-4361-ada9-cf02556427a6",
+  "assistant_message_id": "280156b2-9336-41c7-915f-9afe813bac0f",
+  "visible_model": "6 Pro",
+  "underlying_model": "Latest",
+  "thinking_effort": "Pro, 5 of 5.",
+  "source_mode": "paste",
+  "prompt_sha256": "a22e3714e935fd478ed6f9745087ab24b4f78b20c3c9967ecc32cad1fcdaed17",
+  "response_sha256": "09263eebbb8f5335423c708a7f9061fb8ea7c88b055a9db017d3bc42c92b27ac",
+  "response_characters": 382,
+  "response_bytes": 382,
+  "send_click_count": 1,
+  "send_evidence": {
+    "send_click_count": 1,
+    "send_attempted": true,
+    "url_observed": true,
+    "user_node_observed": true,
+    "user_node_exact": true,
+    "user_message_id": "f690489f-6460-4361-ada9-cf02556427a6",
+    "provider_url_observed": "https://chatgpt.com/c/6aa12e74-8e54-83e8-95f6-001681b456f7",
+    "binding_match": true,
+    "paste_mode": true,
+    "post_send_replacement": true
+  },
+  "identity_validation": "PASS",
+  "identity_expected": {
+    "conversation_id": "6aa12e74-8e54-83e8-95f6-001681b456f7",
+    "user_message_id": "f690489f-6460-4361-ada9-cf02556427a6",
+    "assistant_message_id": "280156b2-9336-41c7-915f-9afe813bac0f"
+  },
+  "identity_observed": {
+    "conversation_id": "6aa12e74-8e54-83e8-95f6-001681b456f7",
+    "user_message_id": "f690489f-6460-4361-ada9-cf02556427a6",
+    "assistant_message_id": "280156b2-9336-41c7-915f-9afe813bac0f"
+  },
+  "archive_paths": {
+    "manifest_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\acvc\\2026-09-09-acvc-native-link-loss-convergence-01\\2026-09-09-acvc-native-link-loss-convergence-01--acvc__PACKET_MANIFEST.json",
+    "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\acvc\\2026-09-09-acvc-native-link-loss-convergence-01\\2026-09-09-acvc-native-link-loss-convergence-01--acvc__00_PROMPT.md",
+    "reference_files": [],
+    "response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\acvc\\2026-09-09-acvc-native-link-loss-convergence-01\\2026-09-09-acvc-native-link-loss-convergence-01--acvc--attempt-01__02_RESPONSE.md",
+    "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\acvc\\2026-09-09-acvc-native-link-loss-convergence-01\\2026-09-09-acvc-native-link-loss-convergence-01--acvc--attempt-01__03_TRANSPORT_FACTS.json",
+    "response_sha256": "09263eebbb8f5335423c708a7f9061fb8ea7c88b055a9db017d3bc42c92b27ac"
+  },
+  "wait_status": "NATURAL_COMPLETION",
+  "observed_page_state": "Worked for 12m 30s; complete assistant response; Copy response present; no active generation control",
+  "capture_method": "Current-round scoped Copy response control via CUA clipboard.read; raw UTF-8 response preserved",
+  "archive_status": "ARCHIVED",
+  "timestamps": {
+    "completed_at": "2026-09-09T10:15:44Z",
+    "captured_at": "2026-09-09T10:15:44Z",
+    "archived_at": "2026-09-09T10:15:44Z"
+  },
+  "scientific_decision_formed": false,
+  "context_reset": {
+    "reset_authority": "OWNER_DIRECT",
+    "previous_request_id": "2026-09-04-acvc-headroom-engineering-dissent-convergence-02",
+    "quarantined_conversation_id": "6a9aaf1b-f200-83e8-af10-dc9d00d0b8c9"
+  },
+  "return_receipt": {
+    "required": true,
+    "source_thread_id": "01a08447-a33c-7881-8c2a-a6e7e918b2a7",
+    "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+    "destination_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+    "status": "SENT",
+    "attempt_count": 1,
+    "message_key": "2026-09-09-acvc-native-link-loss-convergence-01|acvc|6aa12e74-8e54-83e8-95f6-001681b456f7|09263eebbb8f5335423c708a7f9061fb8ea7c88b055a9db017d3bc42c92b27ac",
+    "retry_allowed": false,
+    "routing_mode": "PARENT_SESSION",
+    "delivery_mode": "bounded_single_attempt",
+    "return_control_after_attempt": true,
+    "archive_paths": {
+      "manifest_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\acvc\\2026-09-09-acvc-native-link-loss-convergence-01\\2026-09-09-acvc-native-link-loss-convergence-01--acvc__PACKET_MANIFEST.json",
+      "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\acvc\\2026-09-09-acvc-native-link-loss-convergence-01\\2026-09-09-acvc-native-link-loss-convergence-01--acvc__00_PROMPT.md",
+      "reference_files": [],
+      "response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\acvc\\2026-09-09-acvc-native-link-loss-convergence-01\\2026-09-09-acvc-native-link-loss-convergence-01--acvc--attempt-01__02_RESPONSE.md",
+      "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\acvc\\2026-09-09-acvc-native-link-loss-convergence-01\\2026-09-09-acvc-native-link-loss-convergence-01--acvc--attempt-01__03_TRANSPORT_FACTS.json",
+      "response_sha256": "09263eebbb8f5335423c708a7f9061fb8ea7c88b055a9db017d3bc42c92b27ac"
+    },
+    "response_sha256": "09263eebbb8f5335423c708a7f9061fb8ea7c88b055a9db017d3bc42c92b27ac",
+    "staged_at": "2026-09-09T10:15:44Z",
+    "fallback_enabled": false,
+    "delivery_status": "accepted",
+    "updated_at": "2026-09-09T10:21:05Z",
+    "sent_at": "2026-09-09T10:21:05Z"
+  },
+  "tab_lifecycle": "CLOSED",
+  "tab_closed_at": "2026-09-09T10:16:30Z"
+}

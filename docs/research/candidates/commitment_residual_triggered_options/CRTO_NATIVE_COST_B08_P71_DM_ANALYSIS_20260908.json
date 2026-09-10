@@ -1,0 +1,723 @@
+{
+  "object_id": "CRTO-NATIVE-COST-B08",
+  "source_sha": "d9f643b761d57584de313b1f837d6c2c0becc931",
+  "result_commit": "8ea7fa71622f8f436b87fbeb3beee0b3b918fc67",
+  "result_sha256": "5fa2fcb91a643f1d377393994e38d390ae64ee3b39b270616ea788985e08fb61",
+  "result_bytes": 411368,
+  "git_archive_equals_collected_original": true,
+  "analysis_method": "Python standard-library arithmetic over recorded JSON plus existing summarize_runs.py; no model/environment/evaluator or scientific invocation",
+  "independent_unit": "one reused joint training-seed package; three paired arms; SHORT/LONG are endpoint facets of each trajectory, not independent runs; no independent replication of prior work",
+  "score": "selected endpoint equal-side native regret; smaller is better",
+  "new_scientific_exposure": 0,
+  "endpoints": {
+    "SHORT": {
+      "arms": {
+        "RAW": {
+          "mean_regret": 0.0021294544930598857,
+          "sides": {
+            "KEEP": {
+              "row_count": 8,
+              "exact_action_count": 8,
+              "mean_regret": 0.0
+            },
+            "REPLAN": {
+              "row_count": 8,
+              "exact_action_count": 5,
+              "mean_regret": 0.004258908986119771
+            }
+          },
+          "historical_mean_regret": 0.006581880989529963,
+          "native_improvement_over_own_history": 0.0044524264964700775,
+          "exposure": {
+            "representation": "RAW",
+            "update": 33,
+            "update_mod_3": 0,
+            "post_update_cyclic_cursor": 0,
+            "batch_size": 32,
+            "processed_examples": 1056,
+            "adam_lr": 0.001,
+            "nominal_lr_exposure": 0.033,
+            "initial_parameter_l2": 18.87916908516977,
+            "initial_parameter_rms": 0.10402732933491829,
+            "initial_parameter_linf": 0.28862619400024414,
+            "parameter_displacement_l2_over_initial_l2": 0.15089434542847777,
+            "parameter_displacement_linf_over_initial_linf": 0.11549907441520058,
+            "last_batch_expected_native_cost_loss": 0.038618940860033035
+          }
+        },
+        "TRUE_RESIDUAL": {
+          "mean_regret": 0.0021294544930598857,
+          "sides": {
+            "KEEP": {
+              "row_count": 8,
+              "exact_action_count": 8,
+              "mean_regret": 0.0
+            },
+            "REPLAN": {
+              "row_count": 8,
+              "exact_action_count": 5,
+              "mean_regret": 0.004258908986119771
+            }
+          },
+          "historical_mean_regret": 0.018114012084314506,
+          "native_improvement_over_own_history": 0.015984557591254618,
+          "exposure": {
+            "representation": "TRUE_RESIDUAL",
+            "update": 33,
+            "update_mod_3": 0,
+            "post_update_cyclic_cursor": 0,
+            "batch_size": 32,
+            "processed_examples": 1056,
+            "adam_lr": 0.001,
+            "nominal_lr_exposure": 0.033,
+            "initial_parameter_l2": 18.87916908516977,
+            "initial_parameter_rms": 0.10402732933491829,
+            "initial_parameter_linf": 0.28862619400024414,
+            "parameter_displacement_l2_over_initial_l2": 0.15172545452949593,
+            "parameter_displacement_linf_over_initial_linf": 0.10697484524023902,
+            "last_batch_expected_native_cost_loss": 0.03874076530337334
+          }
+        },
+        "CALIBRATED_DERANGEMENT": {
+          "mean_regret": 0.0021294544930598857,
+          "sides": {
+            "KEEP": {
+              "row_count": 8,
+              "exact_action_count": 8,
+              "mean_regret": 0.0
+            },
+            "REPLAN": {
+              "row_count": 8,
+              "exact_action_count": 5,
+              "mean_regret": 0.004258908986119771
+            }
+          },
+          "historical_mean_regret": 0.009491068185733439,
+          "native_improvement_over_own_history": 0.007361613692673553,
+          "exposure": {
+            "representation": "CALIBRATED_DERANGEMENT",
+            "update": 33,
+            "update_mod_3": 0,
+            "post_update_cyclic_cursor": 0,
+            "batch_size": 32,
+            "processed_examples": 1056,
+            "adam_lr": 0.001,
+            "nominal_lr_exposure": 0.033,
+            "initial_parameter_l2": 18.87916908516977,
+            "initial_parameter_rms": 0.10402732933491829,
+            "initial_parameter_linf": 0.28862619400024414,
+            "parameter_displacement_l2_over_initial_l2": 0.1564027755189968,
+            "parameter_displacement_linf_over_initial_linf": 0.11840892228536427,
+            "last_batch_expected_native_cost_loss": 0.040355756878852844
+          }
+        }
+      },
+      "all_three_action_vectors_identical": true,
+      "comparisons": {
+        "new_RAW": {
+          "mean_signed_gain": 0.0,
+          "net_signed_gain": 0.0,
+          "positive_gain_sum": 0,
+          "negative_gain_sum": 0,
+          "gain_rows": 0,
+          "loss_rows": 0,
+          "same_rows": 16,
+          "comparison_trustworthy": true,
+          "clears_original_MEI": false,
+          "clears_diagnostic_margin": false,
+          "by_side": {
+            "KEEP": {
+              "rows": 8,
+              "mean_gain": 0.0,
+              "net_gain": 0.0,
+              "gain_rows": 0,
+              "loss_rows": 0
+            },
+            "REPLAN": {
+              "rows": 8,
+              "mean_gain": 0.0,
+              "net_gain": 0.0,
+              "gain_rows": 0,
+              "loss_rows": 0
+            }
+          },
+          "loss_details": []
+        },
+        "new_DERANGED": {
+          "mean_signed_gain": 0.0,
+          "net_signed_gain": 0.0,
+          "positive_gain_sum": 0,
+          "negative_gain_sum": 0,
+          "gain_rows": 0,
+          "loss_rows": 0,
+          "same_rows": 16,
+          "comparison_trustworthy": true,
+          "clears_original_MEI": false,
+          "clears_diagnostic_margin": false,
+          "by_side": {
+            "KEEP": {
+              "rows": 8,
+              "mean_gain": 0.0,
+              "net_gain": 0.0,
+              "gain_rows": 0,
+              "loss_rows": 0
+            },
+            "REPLAN": {
+              "rows": 8,
+              "mean_gain": 0.0,
+              "net_gain": 0.0,
+              "gain_rows": 0,
+              "loss_rows": 0
+            }
+          },
+          "loss_details": []
+        },
+        "historical_B04_RAW": {
+          "mean_signed_gain": 0.0044524264964700775,
+          "net_signed_gain": 0.07123882394352124,
+          "positive_gain_sum": 0.10531009583247941,
+          "negative_gain_sum": -0.03407127188895817,
+          "gain_rows": 7,
+          "loss_rows": 3,
+          "same_rows": 6,
+          "comparison_trustworthy": true,
+          "clears_original_MEI": true,
+          "clears_diagnostic_margin": true,
+          "by_side": {
+            "KEEP": {
+              "rows": 8,
+              "mean_gain": 0.013163761979059926,
+              "net_gain": 0.10531009583247941,
+              "gain_rows": 7,
+              "loss_rows": 0
+            },
+            "REPLAN": {
+              "rows": 8,
+              "mean_gain": -0.004258908986119771,
+              "net_gain": -0.03407127188895817,
+              "gain_rows": 0,
+              "loss_rows": 3
+            }
+          },
+          "loss_details": [
+            {
+              "row_key": "0/EVALUATION/K8/850/156/0",
+              "material_side": "REPLAN",
+              "reference_action_index": 6,
+              "true_action_index": 0,
+              "reference_selected_g16": -0.20731001761413503,
+              "true_selected_g16": -0.21869770296967378,
+              "signed_native_gain": -0.011387685355538746,
+              "same_new_labels_signed_gain": -0.011387685355538746,
+              "max_abs_native_label_difference": 0.0
+            },
+            {
+              "row_key": "1/EVALUATION/K8/858/156/0",
+              "material_side": "REPLAN",
+              "reference_action_index": 6,
+              "true_action_index": 0,
+              "reference_selected_g16": -0.18904921301912153,
+              "true_selected_g16": -0.2003680270448002,
+              "signed_native_gain": -0.011318814025678664,
+              "same_new_labels_signed_gain": -0.011318814025678664,
+              "max_abs_native_label_difference": 0.0
+            },
+            {
+              "row_key": "7/EVALUATION/K8/879/108/0",
+              "material_side": "REPLAN",
+              "reference_action_index": 6,
+              "true_action_index": 0,
+              "reference_selected_g16": -0.1849619397921416,
+              "true_selected_g16": -0.19632671229988236,
+              "signed_native_gain": -0.011364772507740761,
+              "same_new_labels_signed_gain": -0.011364772507740761,
+              "max_abs_native_label_difference": 0.0
+            }
+          ]
+        }
+      },
+      "arithmetic_upper_gain_against_recorded_new_RAW": 0.0021294544930598857,
+      "shortfall_below_original_MEI": 0.00037054550694011435,
+      "upper_total_gain_16_rows": 0.03407127188895817,
+      "original_required_total_gain_strictly_above": 0.04,
+      "headroom_classification": "A/RECON arithmetic ceiling from already measured comparator regret and nonnegative treatment regret; no tuned same-information headroom or accessible oracle policy established"
+    },
+    "LONG": {
+      "arms": {
+        "RAW": {
+          "mean_regret": 0.0021294544930598857,
+          "sides": {
+            "KEEP": {
+              "row_count": 8,
+              "exact_action_count": 8,
+              "mean_regret": 0.0
+            },
+            "REPLAN": {
+              "row_count": 8,
+              "exact_action_count": 5,
+              "mean_regret": 0.004258908986119771
+            }
+          },
+          "historical_mean_regret": 0.0037814300857039115,
+          "native_improvement_over_own_history": 0.0016519755926440258,
+          "exposure": {
+            "representation": "RAW",
+            "update": 258,
+            "update_mod_3": 0,
+            "post_update_cyclic_cursor": 0,
+            "batch_size": 32,
+            "processed_examples": 8256,
+            "adam_lr": 0.001,
+            "nominal_lr_exposure": 0.258,
+            "initial_parameter_l2": 18.87916908516977,
+            "initial_parameter_rms": 0.10402732933491829,
+            "initial_parameter_linf": 0.28862619400024414,
+            "parameter_displacement_l2_over_initial_l2": 0.21999455794994616,
+            "parameter_displacement_linf_over_initial_linf": 0.8563966645079325,
+            "last_batch_expected_native_cost_loss": 0.035966839641332626
+          }
+        },
+        "TRUE_RESIDUAL": {
+          "mean_regret": 0.0021294544930598857,
+          "sides": {
+            "KEEP": {
+              "row_count": 8,
+              "exact_action_count": 8,
+              "mean_regret": 0.0
+            },
+            "REPLAN": {
+              "row_count": 8,
+              "exact_action_count": 5,
+              "mean_regret": 0.004258908986119771
+            }
+          },
+          "historical_mean_regret": 0.010915533713999911,
+          "native_improvement_over_own_history": 0.008786079220940025,
+          "exposure": {
+            "representation": "TRUE_RESIDUAL",
+            "update": 258,
+            "update_mod_3": 0,
+            "post_update_cyclic_cursor": 0,
+            "batch_size": 32,
+            "processed_examples": 8256,
+            "adam_lr": 0.001,
+            "nominal_lr_exposure": 0.258,
+            "initial_parameter_l2": 18.87916908516977,
+            "initial_parameter_rms": 0.10402732933491829,
+            "initial_parameter_linf": 0.28862619400024414,
+            "parameter_displacement_l2_over_initial_l2": 0.21182928158673486,
+            "parameter_displacement_linf_over_initial_linf": 0.7190695250068975,
+            "last_batch_expected_native_cost_loss": 0.03601280599832535
+          }
+        },
+        "CALIBRATED_DERANGEMENT": {
+          "mean_regret": 0.0021294544930598857,
+          "sides": {
+            "KEEP": {
+              "row_count": 8,
+              "exact_action_count": 8,
+              "mean_regret": 0.0
+            },
+            "REPLAN": {
+              "row_count": 8,
+              "exact_action_count": 5,
+              "mean_regret": 0.004258908986119771
+            }
+          },
+          "historical_mean_regret": 0.00965134486557058,
+          "native_improvement_over_own_history": 0.007521890372510694,
+          "exposure": {
+            "representation": "CALIBRATED_DERANGEMENT",
+            "update": 258,
+            "update_mod_3": 0,
+            "post_update_cyclic_cursor": 0,
+            "batch_size": 32,
+            "processed_examples": 8256,
+            "adam_lr": 0.001,
+            "nominal_lr_exposure": 0.258,
+            "initial_parameter_l2": 18.87916908516977,
+            "initial_parameter_rms": 0.10402732933491829,
+            "initial_parameter_linf": 0.28862619400024414,
+            "parameter_displacement_l2_over_initial_l2": 0.22742086472745415,
+            "parameter_displacement_linf_over_initial_linf": 0.9268531321039976,
+            "last_batch_expected_native_cost_loss": 0.036023106426000595
+          }
+        }
+      },
+      "all_three_action_vectors_identical": true,
+      "comparisons": {
+        "new_RAW": {
+          "mean_signed_gain": 0.0,
+          "net_signed_gain": 0.0,
+          "positive_gain_sum": 0,
+          "negative_gain_sum": 0,
+          "gain_rows": 0,
+          "loss_rows": 0,
+          "same_rows": 16,
+          "comparison_trustworthy": true,
+          "clears_original_MEI": false,
+          "clears_diagnostic_margin": false,
+          "by_side": {
+            "KEEP": {
+              "rows": 8,
+              "mean_gain": 0.0,
+              "net_gain": 0.0,
+              "gain_rows": 0,
+              "loss_rows": 0
+            },
+            "REPLAN": {
+              "rows": 8,
+              "mean_gain": 0.0,
+              "net_gain": 0.0,
+              "gain_rows": 0,
+              "loss_rows": 0
+            }
+          },
+          "loss_details": []
+        },
+        "new_DERANGED": {
+          "mean_signed_gain": 0.0,
+          "net_signed_gain": 0.0,
+          "positive_gain_sum": 0,
+          "negative_gain_sum": 0,
+          "gain_rows": 0,
+          "loss_rows": 0,
+          "same_rows": 16,
+          "comparison_trustworthy": true,
+          "clears_original_MEI": false,
+          "clears_diagnostic_margin": false,
+          "by_side": {
+            "KEEP": {
+              "rows": 8,
+              "mean_gain": 0.0,
+              "net_gain": 0.0,
+              "gain_rows": 0,
+              "loss_rows": 0
+            },
+            "REPLAN": {
+              "rows": 8,
+              "mean_gain": 0.0,
+              "net_gain": 0.0,
+              "gain_rows": 0,
+              "loss_rows": 0
+            }
+          },
+          "loss_details": []
+        },
+        "historical_B04_RAW": {
+          "mean_signed_gain": 0.0016519755926440258,
+          "net_signed_gain": 0.026431609482304413,
+          "positive_gain_sum": 0.04913810886352182,
+          "negative_gain_sum": -0.02270649938121741,
+          "gain_rows": 3,
+          "loss_rows": 2,
+          "same_rows": 11,
+          "comparison_trustworthy": true,
+          "clears_original_MEI": false,
+          "clears_diagnostic_margin": true,
+          "by_side": {
+            "KEEP": {
+              "rows": 8,
+              "mean_gain": 0.003754710220270765,
+              "net_gain": 0.03003768176216612,
+              "gain_rows": 2,
+              "loss_rows": 0
+            },
+            "REPLAN": {
+              "rows": 8,
+              "mean_gain": -0.00045075903498271314,
+              "net_gain": -0.003606072279861705,
+              "gain_rows": 1,
+              "loss_rows": 2
+            }
+          },
+          "loss_details": [
+            {
+              "row_key": "0/EVALUATION/K8/850/156/0",
+              "material_side": "REPLAN",
+              "reference_action_index": 6,
+              "true_action_index": 0,
+              "reference_selected_g16": -0.20731001761413503,
+              "true_selected_g16": -0.21869770296967378,
+              "signed_native_gain": -0.011387685355538746,
+              "same_new_labels_signed_gain": -0.011387685355538746,
+              "max_abs_native_label_difference": 0.0
+            },
+            {
+              "row_key": "1/EVALUATION/K8/858/156/0",
+              "material_side": "REPLAN",
+              "reference_action_index": 6,
+              "true_action_index": 0,
+              "reference_selected_g16": -0.18904921301912153,
+              "true_selected_g16": -0.2003680270448002,
+              "signed_native_gain": -0.011318814025678664,
+              "same_new_labels_signed_gain": -0.011318814025678664,
+              "max_abs_native_label_difference": 0.0
+            }
+          ]
+        }
+      },
+      "arithmetic_upper_gain_against_recorded_new_RAW": 0.0021294544930598857,
+      "shortfall_below_original_MEI": 0.00037054550694011435,
+      "upper_total_gain_16_rows": 0.03407127188895817,
+      "original_required_total_gain_strictly_above": 0.04,
+      "headroom_classification": "A/RECON arithmetic ceiling from already measured comparator regret and nonnegative treatment regret; no tuned same-information headroom or accessible oracle policy established"
+    }
+  },
+  "observed_policy": {
+    "action_counts": {
+      "KEEP": 11,
+      "RELAY-L": 5
+    },
+    "mistakes": [
+      {
+        "row_key": "0/EVALUATION/K8/850/156/0",
+        "side": "REPLAN",
+        "action": "KEEP",
+        "oracle": "TRANSIT-R",
+        "regret": 0.011387685355538746
+      },
+      {
+        "row_key": "1/EVALUATION/K8/858/156/0",
+        "side": "REPLAN",
+        "action": "KEEP",
+        "oracle": "TRANSIT-R",
+        "regret": 0.011318814025678664
+      },
+      {
+        "row_key": "7/EVALUATION/K8/879/108/0",
+        "side": "REPLAN",
+        "action": "KEEP",
+        "oracle": "TRANSIT-R",
+        "regret": 0.011364772507740761
+      }
+    ],
+    "all_six_action_vectors_identical": true
+  },
+  "resources": {
+    "complete_wall_seconds": 169.0,
+    "complete_wall_resolution_seconds": 1,
+    "physical_available_GiB": 13.414413452148438,
+    "effective_available_GiB": 13.414413452148438,
+    "peak_rss_GiB": 1.4373130798339844,
+    "summed_gate_intervals_seconds": 45.9624661920825,
+    "charged_arm_seconds": {
+      "RAW": 139.1011370769702,
+      "TRUE_RESIDUAL": 137.73502852593083,
+      "CALIBRATED_DERANGEMENT": 138.23890201293398
+    },
+    "shared_cap_margin_seconds": 1331.0,
+    "least_arm_cap_margin_seconds": 1060.8988629230298,
+    "aggregate_cpu_seconds": null
+  },
+  "work_counts": {
+    "gate_updates": 774,
+    "processed_examples": 24768,
+    "network_forward_rows": 96,
+    "scored_decisions": 96,
+    "unique_eval_rows": 16,
+    "historical_decisions_read": 96,
+    "environment_transitions": 54848,
+    "common_future_branch_steps": 3520
+  },
+  "predictor": {
+    "tapes": 128,
+    "examples": 32256,
+    "updates": 100,
+    "processed_examples": 12800,
+    "rng_namespace": 2026090401
+  },
+  "calibration": {
+    "example_count": 16128,
+    "horizon_counts": {
+      "4": 12160,
+      "8": 3968,
+      "12": 0,
+      "16": 0
+    },
+    "pooled_k_values": [
+      4,
+      8
+    ],
+    "tapes": 64
+  },
+  "recorded_reading": {
+    "new_raw_long_competent": false,
+    "primary_comparisons_trustworthy": true,
+    "primary_comparisons_trustworthy_by_endpoint": {
+      "SHORT": true,
+      "LONG": true
+    },
+    "alignment_by_endpoint": {
+      "SHORT": false,
+      "LONG": false
+    },
+    "qualifying_endpoints": [],
+    "reading": "WEAK_NEW_RAW_LONG_DIAGNOSTICS_ONLY",
+    "opposite_sign_or_adverse_contrasts": [],
+    "mixed_budget": false,
+    "short_signal_lost_at_long": false,
+    "MEI": 0.0025,
+    "diagnostic_margin": 0.000625,
+    "ceiling": "selected seed-0 panel and two observed budgets; no best checkpoint selected"
+  },
+  "run_summary_tool": {
+    "path": ".agents/skills/hmasd-scientific-tools/scripts/summarize_runs.py",
+    "argv": [
+      "scores.csv",
+      "--out",
+      "run_summary.json",
+      "--paired",
+      "--baseline",
+      "TRUE_RESIDUAL"
+    ],
+    "output": {
+      "unit": "caller-declared independent training run",
+      "inference": "descriptive only; no confidence interval or success classification",
+      "groups": [
+        {
+          "task": "B08_LONG",
+          "arm": "CALIBRATED_DERANGEMENT",
+          "n": 1,
+          "mean": 0.0021294544930598857,
+          "sample_sd": null,
+          "min": 0.0021294544930598857,
+          "max": 0.0021294544930598857,
+          "runs": {
+            "joint_seed_0": 0.0021294544930598857
+          }
+        },
+        {
+          "task": "B08_LONG",
+          "arm": "RAW",
+          "n": 1,
+          "mean": 0.0021294544930598857,
+          "sample_sd": null,
+          "min": 0.0021294544930598857,
+          "max": 0.0021294544930598857,
+          "runs": {
+            "joint_seed_0": 0.0021294544930598857
+          }
+        },
+        {
+          "task": "B08_LONG",
+          "arm": "TRUE_RESIDUAL",
+          "n": 1,
+          "mean": 0.0021294544930598857,
+          "sample_sd": null,
+          "min": 0.0021294544930598857,
+          "max": 0.0021294544930598857,
+          "runs": {
+            "joint_seed_0": 0.0021294544930598857
+          }
+        },
+        {
+          "task": "B08_SHORT",
+          "arm": "CALIBRATED_DERANGEMENT",
+          "n": 1,
+          "mean": 0.0021294544930598857,
+          "sample_sd": null,
+          "min": 0.0021294544930598857,
+          "max": 0.0021294544930598857,
+          "runs": {
+            "joint_seed_0": 0.0021294544930598857
+          }
+        },
+        {
+          "task": "B08_SHORT",
+          "arm": "RAW",
+          "n": 1,
+          "mean": 0.0021294544930598857,
+          "sample_sd": null,
+          "min": 0.0021294544930598857,
+          "max": 0.0021294544930598857,
+          "runs": {
+            "joint_seed_0": 0.0021294544930598857
+          }
+        },
+        {
+          "task": "B08_SHORT",
+          "arm": "TRUE_RESIDUAL",
+          "n": 1,
+          "mean": 0.0021294544930598857,
+          "sample_sd": null,
+          "min": 0.0021294544930598857,
+          "max": 0.0021294544930598857,
+          "runs": {
+            "joint_seed_0": 0.0021294544930598857
+          }
+        }
+      ],
+      "paired_differences": [
+        {
+          "task": "B08_LONG",
+          "arm": "CALIBRATED_DERANGEMENT",
+          "baseline": "TRUE_RESIDUAL",
+          "summary": {
+            "n": 1,
+            "mean": 0.0,
+            "sample_sd": null,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "differences": {
+            "joint_seed_0": 0.0
+          },
+          "unmatched_arm_seeds": [],
+          "unmatched_baseline_seeds": []
+        },
+        {
+          "task": "B08_LONG",
+          "arm": "RAW",
+          "baseline": "TRUE_RESIDUAL",
+          "summary": {
+            "n": 1,
+            "mean": 0.0,
+            "sample_sd": null,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "differences": {
+            "joint_seed_0": 0.0
+          },
+          "unmatched_arm_seeds": [],
+          "unmatched_baseline_seeds": []
+        },
+        {
+          "task": "B08_SHORT",
+          "arm": "CALIBRATED_DERANGEMENT",
+          "baseline": "TRUE_RESIDUAL",
+          "summary": {
+            "n": 1,
+            "mean": 0.0,
+            "sample_sd": null,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "differences": {
+            "joint_seed_0": 0.0
+          },
+          "unmatched_arm_seeds": [],
+          "unmatched_baseline_seeds": []
+        },
+        {
+          "task": "B08_SHORT",
+          "arm": "RAW",
+          "baseline": "TRUE_RESIDUAL",
+          "summary": {
+            "n": 1,
+            "mean": 0.0,
+            "sample_sd": null,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "differences": {
+            "joint_seed_0": 0.0
+          },
+          "unmatched_arm_seeds": [],
+          "unmatched_baseline_seeds": []
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "unit": "caller-declared independent training run",
+  "inference": "descriptive only; no confidence interval or success classification",
+  "groups": [
+    {
+      "task": "B03_200_updates_primary_negative_U",
+      "arm": "W1",
+      "n": 2,
+      "mean": -0.7017364501953125,
+      "sample_sd": 0.0036756547565341283,
+      "min": -0.7043355305989584,
+      "max": -0.6991373697916666,
+      "runs": {
+        "19": -0.7043355305989584,
+        "20": -0.6991373697916666
+      }
+    },
+    {
+      "task": "B03_200_updates_primary_negative_U",
+      "arm": "W100",
+      "n": 2,
+      "mean": -0.6904622395833333,
+      "sample_sd": 0.0009178347298117081,
+      "min": -0.6911112467447917,
+      "max": -0.689813232421875,
+      "runs": {
+        "19": -0.6911112467447917,
+        "20": -0.689813232421875
+      }
+    }
+  ],
+  "paired_differences": [
+    {
+      "task": "B03_200_updates_primary_negative_U",
+      "arm": "W100",
+      "baseline": "W1",
+      "summary": {
+        "n": 2,
+        "mean": 0.01127421061197914,
+        "sample_sd": 0.00275782002672242,
+        "min": 0.009324137369791652,
+        "max": 0.01322428385416663
+      },
+      "differences": {
+        "19": 0.01322428385416663,
+        "20": 0.009324137369791652
+      },
+      "unmatched_arm_seeds": [],
+      "unmatched_baseline_seeds": []
+    }
+  ]
+}

@@ -84,4 +84,87 @@ owner correction is applied as stated; no additional owner approval is requested
 scientific decision/card item is created because no such decision is formed. This reconciliation
 adds zero models, native states, episodes, derivatives, optimizer steps, tests or experiments.
 
+## Current Portfolio-command closeout — 2026-09-07 20:00Z
+
+The subsequent P07 Root observation reopened the exact conversation and found no matching
+post-A02 user node, provider Send identity or response; it performed no Send. A fresh read-only
+GitHub check for this closeout still finds response-branch head
+`5a335eaff0f2242c515f6867e22d04bdd8d832ef`, no expected RESPONSE there, and only the same three
+historical Issue 8 comments. The destination binding is known and is **Innovator**, not
+Convergence; the missing facts are a matched Send/response identity and an immutable decision.
+
+Current Portfolio instruction relayed by Root is **no successor and no Pro send**. It supersedes
+the earlier conditional next-operation advice above for this assignment; neither an inferred
+unsent state nor a stale queue entry authorizes a send now. The accepted HANDOFF/TASK/DISPATCH
+remain unchanged. No scientific decision has formed and the old post-B02 answer cannot select
+another A02 or a successor.
+
+B02's retained counts, receipts, primary arithmetic and technical limits are now taken in at
+[RCLE_TBCFV_B02_NORM_0P02_TECHNICAL_INTAKE_20260907.md](../../RCLE_TBCFV_B02_NORM_0P02_TECHNICAL_INTAKE_20260907.md).
+Its existing valid row-4 B reading is unchanged. Root integrates that delivery and returns this
+exact missing-response boundary to Portfolio for the next bounded command. This closeout adds
+zero scientific invocations, tests, model calls, derivatives or optimizer steps.
+
+## P10 existing-request return and explicit vacancy — 2026-09-07 20:36Z
+
+Authority and scope: [P10-RCLE-EXISTING-REQUEST-01](../../../../portfolio/handoffs/2026-09-07-p10-goal-five-directions.md#p10-rcle-existing-request-01),
+OWNER_DIRECT relayed by Root. Its committed input was brought unchanged from
+`ddf621aa5aafca39d91a927672e36d40829d39f3` into the existing `codex/rcle` authoring checkout.
+The B02 technical return is integrated on main at
+`16ca2d8a713e6e464dcc0fd3885fe607b85560b9`; its technical-intake and reconciliation surfaces
+match the accepted direction commit `b0bb44517`. No B02 or A02 work is repeated.
+
+**Question reconciliation.** The unanswered question is still the fixed TASK at
+`c5c96eecb27f60609d195320467b6dbc29af013d`: select a bounded real-learner comparison after A02,
+weighing the proposed same-FLEX actor-score weight 100 versus unchanged weight 1 against the
+separately proposed zero-baseline comparison. These remain proposals. No card or successor is
+selected by this return, and post-B02 response `6c0d1ca55` still selects only the completed A02.
+
+**Root-observed evidence, received by DM in this P10 turn.** Root reports that it read the
+recorded operator thread `01a06f0e-5eab-7431-8491-e7c2c62705b6` and the exact provider conversation
+`6a9d9a3a-fd40-83e8-9e80-ad720582aaee`. No matching post-A02 user/assistant pair or provider Send
+was found in the inspected material; the provider conversation contained prior B01/B02
+delivery-gap turns and no post-A02 response. Root performed no new Send or archive. DM did not
+repeat that provider inspection and records it as Root's direct observation, not its own.
+
+The retained [DISPATCH.json](DISPATCH.json) records one accepted app dispatch at
+2026-09-06T21:32:04-07:00 and no observed provider Send. The request remains
+`2026-09-06-rcle-post-a02-innovator-01`, binding
+`em:roster_consistent_latent_exploration:innovator`, original response branch
+`codex/pro-rcle-post-a02-20260906`, base `5a335eaff0f2242c515f6867e22d04bdd8d832ef`, Issue 8 and
+expected `archive/RESPONSE.md`. No payload, binding, conversation or output branch was retargeted.
+
+**Evidence-bearing repair request to Portfolio through Root.** The missing facts remain a
+matched provider Send/user-message identity and a complete immutable response for that request.
+The two named read-only sources did not supply them. App acceptance is neither proof of provider
+Send nor proof of its absence; there is no complete answer to archive or intake. Portfolio must
+supply the next concrete evidence/access repair route or an explicit transport-disposition
+instruction addressing this uncertainty. The current instruction remains no new Send, and this
+return supplies no substitute scientific decision. Root owns any subsequently named transport
+action; a complete matching existing response returns to this DM for scientific intake.
+
+**Return and slot accounting.** P10's bounded DM reconciliation is complete. RCLE has no
+confirmed accepted Pro generation, live experiment or continuing DM work from this assignment;
+its unresolved identity wait counts as **zero advancing slots after this return**. Report this
+vacancy to Portfolio for working-set replacement under the existing P10 route. This is no
+Portfolio lifecycle/priority change, family PARK/CLOSE/RECAST, UAV-validation entry or negative
+scientific result. New exposure remains zero models, episodes, derivatives, optimizer updates,
+tests and result-bearing invocations. No additional owner-console item is needed for this
+technical return.
+
 scope: none
+
+## P47 bounded recovery receipt — 2026-09-08
+
+The singleton Transport's recovery, forwarded by Root and persisted in the 2026-09-08 Root
+log at 09:15:50-07:00, still leaves exact-request provider acceptance and the complete matching
+post-A02 response unproven. P47 permits first delivery only on positive evidence of original
+non-acceptance; that evidence has not been supplied. No duplicate Send, rebind, replacement
+conversation, successor selection or A02 repeat follows. The original accepted request remains
+unchanged and the unresolved idle wait counts zero advancing slots.
+
+[RCLE_TBCFV_POST_A02_TRANSPORT_BLOCKER_INTAKE_20260908.md](../../RCLE_TBCFV_POST_A02_TRANSPORT_BLOCKER_INTAKE_20260908.md)
+records the received facts, including the discrepancy between Root's corrected forwarded
+`requested_conversation_id` and the original request/provider URL, the exact unmet evidence
+condition, the applied P47 rule, zero new scientific exposure and the return to Root.
+No formed direction decision or scientific polarity is created by this recovery.

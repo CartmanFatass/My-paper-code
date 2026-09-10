@@ -1,0 +1,103 @@
+{
+  "id": "20260909-folr-003",
+  "created": "2026-09-09T09:25:29-07:00",
+  "direction": "vap_folr_core",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "冻结单对公开生命周期RETAIN/RESET探索卡",
+  "context": "Root新授权一对真实训练：每组5000回合、4969更新、仅末次32回合评估、完整上限1800秒。DM选择种子7801、绝对MEI1.0及共同50000步探索衰减，保留原生奖励、生命周期及回放语义。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "执行这张有限卡",
+      "consequence": "CM完成有界实现、独立审查并仅执行这一对；所有正反结果均交科学intake，不自动续跑。"
+    },
+    {
+      "key": "reject",
+      "label": "撤回未启动的工作",
+      "consequence": "按所有者新指令撤回尚未接受的运行，保留已经发生的证据和原Pro决定。"
+    },
+    {
+      "key": "revise",
+      "label": "按新指令修订卡",
+      "consequence": "只在新的明确范围内调整尚未执行工作；已发生结果不改写、不自动重跑。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "具体学习配置适配Root新分配的有限预算，原生回报与四项事件计数足以给出有界探索读数。",
+  "evidence": [
+    "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_B01_SCIENCE_CARD_20260909.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-09.md#L9",
+  "brief": "docs/research/portfolio/owner/briefs/vap_folr_core/2026-09-09_P78-lifetime-question.md",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "冻结并执行Root新分配的单对公开生命周期RETAIN/RESET B探索卡；这不是要求确认稳定优势。",
+    "changes_if_approved": [
+      {
+        "target": "FOLR-PUBLIC-LIFECYCLE-B01",
+        "from": "范围已选择，原P78例子没有执行额度",
+        "to": "Root新授权一对；种子7801、每组5000训练回合、末次32回合评估、每组1800秒；两组同样的信息、架构与训练安排"
+      }
+    ],
+    "if_refused": "按所有者新指令停止尚未接受的执行或修订后续卡，保留已接受进程与证据；不自动重跑。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_B01_SCIENCE_CARD_20260909.md",
+        "quote": "The shorter common epsilon anneal is deliberate: half the 100,000-tick exposure remains at\nthe final exploration rate.",
+        "why": "两组在同一有限预算内都有较长的低探索学习阶段，不机械沿用过长探索期。"
+      },
+      {
+        "path": "docs/research/candidates/vap_folr_core/pro_packets/20260909_p78_public_lifecycle_convergence/archive/RESPONSE.md",
+        "quote": "The primary observation should remain the difference in mean full-episode native team return at final frozen greedy evaluation, with RETAIN minus RESET as the stated sign.",
+        "why": "固定末次原生回报并保留两组读数，避免挑选瞬时或事件子集。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_B01_SCIENCE_CARD_20260909.md",
+        "quote": "One training pair cannot estimate\ntraining-seed population uncertainty; evaluation variation is conditional rollout variation.",
+        "why": "结果只能是本设置的探索信号；大量评估不能替代独立训练样本。"
+      },
+      {
+        "path": "docs/research/candidates/vap_folr_core/pro_packets/20260909_p78_public_lifecycle_convergence/archive/RESPONSE.md",
+        "quote": "Wall cost remains unknown.",
+        "why": "计算量已知但实际耗时未知；达到完整上限就返回，不追加试验。"
+      }
+    ],
+    "uncertainty": [
+      "真实幸存车机会可能少，限制记忆删除解释；仍报告可信的完整回报。",
+      "绝对MEI为每回合1个原生回报单位，源于一个目标进展单位，不沿用B04量纲。",
+      "实现须保持原生等待、随机数消耗、同槽换车和在线/目标回放一致性；独立审查尚待完成。"
+    ],
+    "cost": {
+      "compute": "仅一对；每组100000训练步、4969更新、640评估步。每组完整上限1800秒、两组3600秒，全部支持性检查300秒。无试跑、调参、重复、额外检查点评估或自动后继。",
+      "owner_time": "可异步改卡，无需立即回复。",
+      "reversibility": "costly",
+      "waits_on_this": "nothing；CM继续已授权的工程、审查及一次有界执行。"
+    },
+    "verdict_text": "**B/EXPLORE; selected and frozen for the explicit Root allocation of 2026-09-09.**",
+    "source": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_B01_SCIENCE_CARD_20260909.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-09T16:36:31+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_B01_SCIENCE_CARD_20260909.md",
+      "record": "docs/research/portfolio/audit/2026-09-09.md#L120",
+      "state": "applied",
+      "summary": "Root integrated the separately allocated frozen B01 card at main6de9f4703. The original direction-branch ledger_row L9 maps to main L120 after preserving all concurrent audit rows. CM implementation is dispatched, no accepted result-bearing invocation yet; this records integration, not a new approval or result."
+    },
+    {
+      "at": "2026-09-09T17:22:06+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/vap_folr_core/pro_packets/20260909_p78_public_lifecycle_convergence/archive/RECOVERY_INTAKE_FACTS_20260909.json",
+      "record": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_B01_INTAKE_20260909.md",
+      "state": "applied",
+      "summary": "The separately allocated B01 pair completed intact at technical commit ab24bdd8c4bca48479b12abbe53285e858affbef. Full counts and all64 final returns are preserved; d=-2.0021875 applies RESET_ABOVE_MEI. DM recorded the prediction miss and one-pair claim ceiling. The finite allocation ended, with no new invocation; prior Root integration trace is preserved."
+    }
+  ]
+}

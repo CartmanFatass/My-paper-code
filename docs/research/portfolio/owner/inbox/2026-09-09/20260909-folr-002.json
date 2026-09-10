@@ -1,0 +1,80 @@
+{
+  "id": "20260909-folr-002",
+  "created": "2026-09-09T09:25:29-07:00",
+  "direction": "vap_folr_core",
+  "tier": "direction",
+  "kind": "decision",
+  "title": "原节点选择公开生命周期记忆比较范围",
+  "context": "完整Pro答复选择新的公开生命周期Traffic Junction范围，价值与普通RETAIN不再计算的备选接近；选择只涉及科学范围。Root随后另行分配一对有限训练，尚无性能结果。",
+  "options": [
+    {
+      "key": "a",
+      "label": "执行原节点范围选择",
+      "consequence": "公开生命周期新版本进入一次有限真实学习比较的工程准备；不声称类型机制创新或Pro已分配运行。"
+    },
+    {
+      "key": "b",
+      "label": "保留无后继备选",
+      "consequence": "保留普通RETAIN、全部旧证据和原任务边界；所有者若另行选择则调整未执行工作。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "完整答复符合当前B类规范，原节点决定为终局；反方理由及狭窄主张同时保留。",
+  "evidence": [
+    "docs/research/candidates/vap_folr_core/pro_packets/20260909_p78_public_lifecycle_convergence/archive/RESPONSE.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-09.md#L8",
+  "brief": "docs/research/portfolio/owner/briefs/vap_folr_core/2026-09-09_P78-lifetime-question.md",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "原Convergence已选择公开生命周期后的幸存车记忆范围；记录执行这一有限科学决定及其接近的备选。",
+    "changes_if_approved": [
+      {
+        "target": "FOLR公开生命周期问题范围",
+        "from": "P78待原节点选择，先前发送受阻",
+        "to": "接受完整Pro决定：选择真实训练后的RETAIN/RESET比较；仅限公开生命周期新版本"
+      }
+    ],
+    "if_refused": "保留原始Pro答复、旧结果和已发生操作；按所有者新指令调整尚未执行的工作，不把工具阻塞或暂停记为科学否定。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/vap_folr_core/pro_packets/20260909_p78_public_lifecycle_convergence/archive/RESPONSE.md",
+        "quote": "The proposed information change resolves the particular identity and undisclosed-event problems identified by P77, while the multi-step action/reward path makes the question different from repeating B04's terminal private-bit readout.",
+        "why": "同一事件信号、真实车辆生命周期与后续动作已明确，使有限比较有可解释的原生回报对象。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/vap_folr_core/pro_packets/20260909_p78_public_lifecycle_convergence/archive/RESPONSE.md",
+        "quote": "Ordinary generic RETAIN remains the strong zero-work alternative and already supplies the history capacity under consideration.",
+        "why": "清空记忆若有损失，也可能只是已知的信息删除成本，没有类型算法创新。"
+      }
+    ],
+    "uncertainty": [
+      "只有范围被Pro选择，尚未观察交通回报、学习能力或实际耗时。",
+      "Root随后单独分配一对计算，不能说Pro已经授权运行。",
+      "P77原界面未就绪与B04正负结果、短暂优势均保留；B04总步数包含评估。"
+    ],
+    "cost": {
+      "compute": "范围intake零次科学执行；Root新分配最多每组1800秒、两组3600秒，加总计300秒支持性检查。已知两组201280个原生步、9938次更新、66783360个回放GRU行前向，实际耗时未知。",
+      "owner_time": "异步查看，无需等待回复。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing；按既有授权执行Pro范围及另行分配的卡。"
+    },
+    "verdict_text": "Select the explicitly public-lifecycle easy Traffic Junction extension for a later class-B comparison of trained RETAIN and RESET.",
+    "source": "docs/research/candidates/vap_folr_core/pro_packets/20260909_p78_public_lifecycle_convergence/archive/RESPONSE.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-09T16:36:31+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/vap_folr_core/pro_packets/20260909_p78_public_lifecycle_convergence/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/audit/2026-09-09.md#L119",
+      "state": "applied",
+      "summary": "Root integrated the formed scope decision at main6de9f4703. The original direction-branch ledger_row L8 maps to main L119 after preserving all concurrent audit rows; this trace supplies the current audit location. No owner reply or scientific outcome is inferred."
+    }
+  ]
+}

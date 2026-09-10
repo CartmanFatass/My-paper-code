@@ -1,0 +1,209 @@
+{
+  "scope": "readback of already published P38 outputs; no model or runner execution",
+  "arms": {
+    "G": {
+      "external_elapsed_seconds": 2.47,
+      "peak_rss_kib": 459268,
+      "runner_wall_after_publication": 2.0379341740044765,
+      "admission_physical_effective_bytes": [
+        15651823616,
+        15651823616
+      ],
+      "counts": {
+        "model_constructions": 0,
+        "training_starts": 0,
+        "checkpoint_loads": 0,
+        "training_host_steps": 0,
+        "training_transitions": 0,
+        "training_episodes": 0,
+        "update_stages": 0,
+        "training_agent_step_batches": 0,
+        "scoring_steps": 12800,
+        "evaluation_episodes": 32,
+        "evaluation_agent_step_batches": 0,
+        "greedy_act_batches": 400,
+        "agent_observations": 76800
+      },
+      "optimizer_calls": {
+        "coordinator": 0,
+        "discoverer_actor": 0,
+        "discoverer_critic": 0,
+        "team_discriminator": 0,
+        "individual_discriminator": 0
+      },
+      "return_full_mean": 0.8937890625,
+      "return_post_mean": 0.8935228696741855,
+      "pooled_full": {
+        "wrong": 0,
+        "eligible": 68643,
+        "wrong_rate": 0.0
+      },
+      "pooled_post": {
+        "wrong": 0,
+        "eligible": 68451,
+        "wrong_rate": 0.0
+      },
+      "role_loss_full_mean": 0.0,
+      "role_loss_post_mean": 0.0,
+      "internal_renew_full": null,
+      "applied_renew_full": 8157,
+      "training_rows_M": [],
+      "training_coordinator_inference_calls": []
+    },
+    "C": {
+      "external_elapsed_seconds": 371.89,
+      "peak_rss_kib": 1383224,
+      "runner_wall_after_publication": 358.8676902499865,
+      "admission_physical_effective_bytes": [
+        15650422784,
+        15650422784
+      ],
+      "counts": {
+        "model_constructions": 2,
+        "training_starts": 1,
+        "checkpoint_loads": 0,
+        "training_host_steps": 32000,
+        "training_transitions": 32000,
+        "training_episodes": 80,
+        "update_stages": 5,
+        "training_agent_step_batches": 2000,
+        "scoring_steps": 12800,
+        "evaluation_episodes": 32,
+        "evaluation_agent_step_batches": 400,
+        "greedy_act_batches": 0,
+        "agent_observations": 268800
+      },
+      "optimizer_calls": {
+        "coordinator": 615,
+        "discoverer_actor": 2250,
+        "discoverer_critic": 2250,
+        "team_discriminator": 75,
+        "individual_discriminator": 300
+      },
+      "return_full_mean": 0.3752213541666668,
+      "return_post_mean": 0.37616175856307443,
+      "pooled_full": {
+        "wrong": 3738,
+        "eligible": 32555,
+        "wrong_rate": 0.11482107203194594
+      },
+      "pooled_post": {
+        "wrong": 3738,
+        "eligible": 32555,
+        "wrong_rate": 0.11482107203194594
+      },
+      "role_loss_full_mean": 0.048671875,
+      "role_loss_post_mean": 0.048793859649122806,
+      "internal_renew_full": 3969,
+      "applied_renew_full": 3969,
+      "training_rows_M": [
+        760,
+        1246,
+        1031,
+        996,
+        982
+      ],
+      "training_coordinator_inference_calls": [
+        506,
+        769,
+        652,
+        759,
+        709
+      ]
+    },
+    "H": {
+      "external_elapsed_seconds": 333.89,
+      "peak_rss_kib": 1390068,
+      "runner_wall_after_publication": 322.0350280770217,
+      "admission_physical_effective_bytes": [
+        15650050048,
+        15650050048
+      ],
+      "counts": {
+        "model_constructions": 2,
+        "training_starts": 1,
+        "checkpoint_loads": 0,
+        "training_host_steps": 32000,
+        "training_transitions": 32000,
+        "training_episodes": 80,
+        "update_stages": 5,
+        "training_agent_step_batches": 2000,
+        "scoring_steps": 12800,
+        "evaluation_episodes": 32,
+        "evaluation_agent_step_batches": 400,
+        "greedy_act_batches": 0,
+        "agent_observations": 268800
+      },
+      "optimizer_calls": {
+        "coordinator": 495,
+        "discoverer_actor": 2250,
+        "discoverer_critic": 2250,
+        "team_discriminator": 75,
+        "individual_discriminator": 300
+      },
+      "return_full_mean": 0.8726041666666656,
+      "return_post_mean": 0.8747911445279857,
+      "pooled_full": {
+        "wrong": 1435,
+        "eligible": 68451,
+        "wrong_rate": 0.020963901184789118
+      },
+      "pooled_post": {
+        "wrong": 1435,
+        "eligible": 68451,
+        "wrong_rate": 0.020963901184789118
+      },
+      "role_loss_full_mean": 0.018684895833333333,
+      "role_loss_post_mean": 0.01873172514619883,
+      "internal_renew_full": 2796,
+      "applied_renew_full": 8349,
+      "training_rows_M": [
+        812,
+        640,
+        830,
+        706,
+        903
+      ],
+      "training_coordinator_inference_calls": [
+        504,
+        511,
+        583,
+        535,
+        658
+      ]
+    }
+  },
+  "published_pair_statistics": {
+    "h_minus_c_full": {
+      "mean": 0.49738281249999894,
+      "stderr": 0.00864640484198601
+    },
+    "h_minus_c_post": {
+      "mean": 0.49862938596491124,
+      "stderr": 0.008668075029559913
+    },
+    "g_minus_h_full": {
+      "mean": 0.021184895833334313,
+      "stderr": 0.001613971807427201
+    },
+    "g_minus_c_full": {
+      "mean": 0.5185677083333332,
+      "stderr": 0.008570016255319007
+    },
+    "g_minus_h_post": {
+      "mean": 0.0187317251461998,
+      "stderr": 0.0016180168495510767
+    },
+    "g_minus_c_post": {
+      "mean": 0.517361111111111,
+      "stderr": 0.008591494992801013
+    }
+  },
+  "published_residual_means": {
+    "full": 0.0025000000000009797,
+    "post": 9.705777848090236e-16
+  },
+  "summed_complete_invocation_wall_seconds": 708.25,
+  "supervisor_first_start_to_final_finish_seconds": 885.0,
+  "readback": "passed; published arrays and counts agree; no missing panel repaired"
+}

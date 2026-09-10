@@ -1,0 +1,39 @@
+{
+  "question": "是否认可把两次原生负结果后的 A/B 建议交给原 Convergence：建议结束所测短预算扩展，保留一个更长训练对作为活的备选？",
+  "changes_if_approved": [
+    {
+      "target": "FSD P74 方向建议",
+      "from": "P72 已回答同配置早期亏损是否再次出现，尚无后继选择",
+      "to": "向原节点提交一次 A/B 问题；此项只发布建议，不自行关闭 family、建卡、分配运行或改变 Portfolio"
+    }
+  ],
+  "if_refused": "保留所有结果与当前方向状态，按实际 owner 指令修订建议；不把拒绝、缺测或传输失败当成新的经验负例。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_INDIVIDUAL_RENEWAL_B02_P72_INTAKE_20260909.md",
+      "quote": "The strongest contradiction to native benefit is **two beyond-MEI native\nlosses under the same .25 configuration and early budget**.",
+      "why": "两次都低于−.01，I 花费更多；已完成原先要求的重复性观察，第三个不变配对的新增问题有限。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_INDIVIDUAL_RENEWAL_B02_P72_INTAKE_20260909.md",
+      "quote": "The strongest support retained within P72 is the higher stochastic training\nreturn on rollouts2–5,9 positive endpoint contrasts, a quality gain+.00174615\nand lower altitude cost.00098256.",
+      "why": "训练信号、局部收益和不同分量仍支持考虑一个有明确预算变化的新 B；它们不能取代最终原生亏损。"
+    }
+  ],
+  "uncertainty": [
+    "两个训练对不能说明总体稳定胜负；两个新有限评估面板也含评估噪声。",
+    "两个 D0 都真实且合法，但不是调优后的能力基准；同信息 tuned headroom 仍缺失。",
+    "更长训练可能改变相对收益，但单个更长预算对不能单独解释之前为何亏损。",
+    "A/B 尚未形成方向裁决；现阶段无新实现、数值种子、运行或 Send。"
+  ],
+  "cost": {
+    "compute": "当前零新科学调用。A 后续零工作；B 备选为一对20轮真实训练，共32万训练+3.2万评分步；按旧完整耗时4倍举例合计7076.68秒，非保证。未来新完整上限3600/18000秒、合计21600秒，未分配。",
+    "owner_time": "可异步认可、拒绝或改建议；发布不等确认。",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing；P74 已授权准备问题，方向选择由既有节点形成"
+  },
+  "verdict_text": "Recommend A to the existing Convergence node: end further unchanged .25/k10/five-update extension and select no ready continuation now, at that tested scope. B, one fresh pair with twenty training rollouts per arm, is the strongest live alternative. This recommendation is not a local closure, recast, family opening, Portfolio disposition or allocation.",
+  "source": "docs/research/candidates/flexible_skill_duration/FSD_P74_POST_UAV_B02_QUESTION_INTAKE_20260909.md"
+}

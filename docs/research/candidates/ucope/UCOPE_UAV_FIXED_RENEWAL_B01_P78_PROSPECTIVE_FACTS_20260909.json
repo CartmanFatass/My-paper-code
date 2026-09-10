@@ -1,0 +1,102 @@
+{
+  "prepared_at": "2026-09-09T03:39:24-07:00",
+  "object": "UCOPE-UAV-FIXED-RENEWAL-B01",
+  "selector": "renewal_fixed_b01",
+  "master": 7701,
+  "authoring_start": "0a732abe0944691461673889e098da18a6d25ed2",
+  "accepted_frozen_head_source": "002ba439773c72cfdf042a2e31d221cf512a3a3d",
+  "main_required_inputs_checked_at": "0d6bbc50e26bfbb0a824c4a88c053509372299b3",
+  "required_source_delta": "None since P77 required-input sync; main had not yet integrated P77 source. Preserve accepted newer frozen-head implementation.",
+  "calculation": "Config literal defaults read with ast without source import, model or native environment; parameter counts reuse verified P77 architecture; arm counts are the P78 allocation.",
+  "bounded_nonreuse_check": "Before preparation, no word-boundary match for 7701 or 770100000, selector renewal_fixed_b01 or object name in current UCOPE docs and mapped source/tests/runner; no global RNG census.",
+  "rng": {
+    "b": 770100000,
+    "common_initialization": 770100011,
+    "F_initial_duration_head": 770100012,
+    "G_private_train_velocity": 770100021,
+    "G_private_train_duration": 770100022,
+    "F_private_train_velocity": 770100031,
+    "F_private_train_duration": 770100032,
+    "common_train_reset_first_last": [
+      770101000,
+      770101511
+    ],
+    "common_final_reset_first_last": [
+      770102000,
+      770102031
+    ],
+    "G_private_final_velocity_first_last": [
+      770103000,
+      770103031
+    ],
+    "G_private_final_duration_first_last": [
+      770104000,
+      770104031
+    ],
+    "F_private_final_velocity_first_last": [
+      770105000,
+      770105031
+    ],
+    "F_private_final_duration_first_last": [
+      770106000,
+      770106031
+    ]
+  },
+  "work": {
+    "matched_training_instances": 1,
+    "fitted_arms": 2,
+    "train_episodes_per_arm": 512,
+    "train_native_steps_per_arm": 131072,
+    "rollouts_per_arm": 256,
+    "Adam_per_arm": 1024,
+    "total_rollouts": 512,
+    "total_Adam_calls": 2048,
+    "total_native_steps": 286720,
+    "final_evaluation_episodes": 96,
+    "explicit_resets": 1120,
+    "constructor_resets": 2,
+    "existing_diagnostic_rows": 1600,
+    "F_renewal_head_forward_rows_bounds": [
+      1003520,
+      4014080
+    ],
+    "F_head_dense_MAC_bounds": [
+      2215772160,
+      8863088640
+    ],
+    "G_velocity_selections": 696320,
+    "F_parameters": 68553,
+    "G_parameters": 66311,
+    "F_frozen_duration_parameters": 2242,
+    "total_parameters": 134864,
+    "trainable_parameters": 132622,
+    "learning_rate": 0.0003
+  },
+  "multipliers_vs_P77": {
+    "training": 0.6666666666666666,
+    "final_eval": 0.75,
+    "native_steps": 0.6730769230769231
+  },
+  "P77_measured_reference": {
+    "F_arm_seconds": 170.78452501102583,
+    "G_including_H_seconds": 146.30148461798672,
+    "three_fit_outer_seconds": 501.69,
+    "new_F_G_H_outer_measured": false,
+    "guarantees_new_seconds": false
+  },
+  "caps": {
+    "complete_arm_seconds": 1800,
+    "complete_invocation_seconds": 3600,
+    "max_accepted_submissions": 1,
+    "focused_checks_seconds": 300
+  },
+  "predictions": {
+    "F_minus_G_above_0_01_probability": 0.55,
+    "F_minus_H_above_zero_probability": 0.65,
+    "owner": "not taken (unattended)"
+  },
+  "new_scientific_exposure_at_preparation": 0,
+  "exposure_line": "matched_training_instances=1; fitted_arms=2; native_steps=286720; optimizer_steps=2048; final_eval_episodes=96; lr=0.0003; F_parameters=68553; G_parameters=66311; F_frozen_duration_parameters=2242; trainable_parameters=132622",
+  "latest_required_inputs_checked_at": "912722e8ca4317664ccbd1748f9110746df16714",
+  "latest_required_inputs_result": "No diff in mapped UCOPE source/runner/tests, AGENTS, .codex, evidence and scope specifications after main integrated P77; no required sync remains."
+}

@@ -1,0 +1,76 @@
+{
+  "cwd": "/home/wu/hmasd-worktrees/vsp03-b05-p76-32ce8a7355b86bee64956e3d24b76d01c31a8d77",
+  "head": "32ce8a7355b86bee64956e3d24b76d01c31a8d77",
+  "files": {
+    "scripts/hmasd_resource_preflight.py": {
+      "sha256": "cb0525e9247f1c7262c198bf051e542282f5928982137b3023d36d5d69eda4dc",
+      "bytes": 21314,
+      "lf_only": true
+    },
+    "scripts/hmasd_platform.py": {
+      "sha256": "f9e1fd0a88f9c0eef9b706802ae3aaceac4bc2f8ea394e895d01146e8e17865b",
+      "bytes": 2599,
+      "lf_only": true
+    },
+    "scripts/run_vsp03_b05.py": {
+      "sha256": "d2c8f63e5427869c726ba783a3b237c5ccd28036e14d0bf67724381ce4f26da8",
+      "bytes": 1256,
+      "lf_only": true
+    },
+    "experiments/candidates/vsp_03/vsp03_b01/b01.py": {
+      "sha256": "39481f270f2d26349f872b5965754b918f0e5cfd6517e7f043afc1571fd195ed",
+      "bytes": 22425,
+      "lf_only": true
+    },
+    "experiments/candidates/vsp_03/vsp03_b02/b02.py": {
+      "sha256": "9cb1bf9cc44e5cad8185997e3d6b2e71d1d581580c283b1cc77599e80da86be4",
+      "bytes": 16014,
+      "lf_only": true
+    },
+    "experiments/candidates/vsp_03/vsp03_b03/b03.py": {
+      "sha256": "ca8e6af3881591ddccc22314c490dde5a5edc598a93c37c569c603af234bf9b3",
+      "bytes": 7123,
+      "lf_only": true
+    },
+    "experiments/candidates/vsp_03/vsp03_b04/control.py": {
+      "sha256": "cee3ade931bbd06dcbf3a9f0480efe933c435c6b0d341ec4a3e5e959670fc552",
+      "bytes": 4781,
+      "lf_only": true
+    },
+    "experiments/candidates/vsp_03/vsp03_b04/deadline.py": {
+      "sha256": "abe9e120f5a9489bb8e0a012a4ceef6ee2f979ecb27834ba834ce3719760bc86",
+      "bytes": 5243,
+      "lf_only": true
+    },
+    "experiments/candidates/vsp_03/vsp03_b04/launch.sh": {
+      "sha256": "77987fcbb3d9467a53836392f4f7ee652f442f65467dfa058ec8db7ea41ef74c",
+      "bytes": 838,
+      "lf_only": true
+    },
+    "experiments/candidates/vsp_03/vsp03_b04/launch_p76.sh": {
+      "sha256": "c61f41b4e5f02a61b1fd961945f14edcd36cc98f1634af27fb81e7a99560700a",
+      "bytes": 752,
+      "lf_only": true
+    },
+    "experiments/candidates/vsp_03/vsp03_b01/__init__.py": {
+      "sha256": "ec6e5e09a43af36e2c7ac6332e674aa8891bc8baf0d453981a4d42b38685cf39",
+      "bytes": 61,
+      "lf_only": true
+    }
+  },
+  "unused_paths": {
+    "/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b05_seed7_p76_20260909": true,
+    "/home/wu/.agent-tasks/vsp03-b05-p76-20260909": true,
+    "/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b05_seed7_p76_20260909_admission.json": true,
+    "/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b05_seed7_p76_20260909_terminal.json": true,
+    "/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b05_seed7_p76_20260909_terminal.payload.json": true,
+    "/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b05_seed7_p76_20260909_terminal.tmux": true
+  },
+  "working_tree_status": "",
+  "unit_before_submission": {
+    "exit_code": 0,
+    "stdout": "LoadState=not-found\n",
+    "stderr": ""
+  },
+  "passed": true
+}

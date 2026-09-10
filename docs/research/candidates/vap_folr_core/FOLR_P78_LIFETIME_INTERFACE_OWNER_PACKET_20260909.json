@@ -1,0 +1,38 @@
+{
+  "question": "是否把明确公开生命周期信息后的幸存车记忆问题提交原Convergence，考虑一次有限真实学习比较？本次只发布问题。",
+  "changes_if_approved": [
+    {
+      "target": "FOLR Convergence 的新问题",
+      "from": "P77 在原信息界面下没有就绪后继",
+      "to": "前瞻询问是否选择公开生命周期的新版本；两组都得到事件信号并区分新车与幸存车"
+    }
+  ],
+  "if_refused": "保留无后继边界与普通循环记忆，不新增计算，不改旧任务、旧结果、ACTIVE/MEDIUM 或历史暂停。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_P78_LIFETIME_INTERFACE_QUESTION_INTAKE_20260909.md",
+      "quote": "Adding it to **both** learned actors matters: otherwise RESET's hidden-state discontinuity could itself be an extra event signal unavailable to RETAIN.",
+      "why": "比较器能使用同一事件信息，出生处理一致，剩余差异是幸存车记忆保留规则及其训练后果。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_P78_LIFETIME_INTERFACE_QUESTION_INTAKE_20260909.md",
+      "quote": "The recommendation is a close call because generic RETAIN is already the standard history path and a reset loss would add no new typed algorithm.",
+      "why": "即使清空记忆损失回报，也可能只是说明一种已知有害处理有成本；公开事件后的结论不适用于原私有信息任务。"
+    }
+  ],
+  "uncertainty": [
+    "实际多步回报、事件机会和小预算下的学习能力未测；不先做诊断或成本探针。",
+    "完整GRU包含队友历史，不能改称严格自有祖先的类型机制。",
+    "训练卡、MEI、准确训练配置与预算均未分配；原节点决定是否选择这个方向范围。"
+  ],
+  "cost": {
+    "compute": "准备0次科学调用。未分配的两组一实例规模为201280原生步、9938次RMSprop、66783360个回放GRU行前向；实际耗时未知，1800秒/组仅为备选完整停止包络。",
+    "owner_time": "可异步查看；不等回复继续已授权的问题准备。",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing；Root收到已发布问题后才负责派送。"
+  },
+  "verdict_text": "**Recommendation to Convergence:** select the explicitly public-lifecycle extension for one\nbounded real B, narrowly.",
+  "source": "docs/research/candidates/vap_folr_core/FOLR_P78_LIFETIME_INTERFACE_QUESTION_INTAKE_20260909.md"
+}

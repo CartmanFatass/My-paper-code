@@ -46,7 +46,7 @@ venv/
 /experiments/**/RISP_*_CHECKPOINTS_*/
 /experiments/**/RCLE_*_RESULTS_*/
 
-# Scratch: temp/directions/<direction-id>/{exp,test}/ is the only scratch root
+# Scratch lives under temp/; test creators remove their invocation directories.
 /temp/**
 !/temp/README.md
 /.tmp*

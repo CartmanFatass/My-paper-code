@@ -45,7 +45,7 @@ def _project(tmp_path: Path) -> Path:
                 f'thread_id = "{SINGLETON_THREAD_ID}"',
                 'environment = "local"',
                 'model = "gpt-5.6-luna"',
-                'reasoning_effort = "xhigh"',
+                'reasoning_effort = "high"',
                 "",
             )
         ),
@@ -68,7 +68,7 @@ def _transport_request(**changes: object) -> dict[str, object]:
         "dispatch_mode": "REUSE_SINGLETON",
         "operator_reuse_required": True,
         "operator_model": "gpt-5.6-luna",
-        "operator_thinking": "xhigh",
+        "operator_thinking": "high",
         "prompt": "Decide the next bounded object.",
     }
     request.update(changes)

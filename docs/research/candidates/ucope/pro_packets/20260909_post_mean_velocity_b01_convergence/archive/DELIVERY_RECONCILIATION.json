@@ -1,0 +1,45 @@
+{
+  "reconciliation_kind": "append_only_verified_delivery",
+  "reconciled_at": "2026-09-09T17:33:05Z",
+  "request_id": "2026-09-09-ucope-post-mean-velocity-b01-convergence-01",
+  "workflow_node": "em_convergence",
+  "direction_id": "ucope",
+  "conversation_binding_key": "em:ucope:convergence",
+  "original_transport_snapshot": {
+    "facts_path": "temp/sessions/hmasd-chatgpt-pro-transport/archive/ucope/2026-09-09-ucope-post-mean-velocity-b01-convergence-01/2026-09-09-ucope-post-mean-velocity-b01-convergence-01--ucope--attempt-01__03_TRANSPORT_FACTS.json",
+    "facts_sha256": "983530e5121f113be49b7e38a5fcb3e0cb5bdda9a03a4fc1b1dda9303e6b2d7d",
+    "chat_receipt_sha256": "2d08a8ccc76fc5dc439105dfce48163b24e51507f2ef34fb4d09fcf3611fb29f",
+    "chat_receipt_bytes": 718,
+    "captured_at": "2026-09-09T17:09:45.716965Z",
+    "send_state": "SEND_CONFIRMED",
+    "archive_status": "ARCHIVED",
+    "scientific_decision_formed": false,
+    "reported_delivery_state": "UNCONFIRMED_GITHUB_DELIVERY"
+  },
+  "verified_delivery": {
+    "branch": "codex/ucope",
+    "delivery_commit": "18356085f60fab3bb0d9e092c50bfcc5005f907f",
+    "delivery_parent": "8c27cfa825cc7f56e3eea8cd734b453f0282451f",
+    "task_commit": "f95de6a771adfa11f550b1e4b69ee21775d75bc0",
+    "scientific_input_commit": "bb84696d476fd52ca78b3ca31d9312e5d23efef0",
+    "response_path": "docs/research/candidates/ucope/pro_packets/20260909_post_mean_velocity_b01_convergence/archive/RESPONSE.md",
+    "response_blob": "2211aa66e4117d54dc27615f75a1c96578629251",
+    "response_bytes": 34602,
+    "response_lines": 179,
+    "response_sha256": "84e51d592d60844fca5451f70fb2e3588dcc3a1267d07bd1471b9e23ea1ef6d5",
+    "commit_author_date": "2026-09-09T17:09:36Z",
+    "response_url": "https://github.com/CartmanFatass/My-paper-code/blob/18356085f60fab3bb0d9e092c50bfcc5005f907f/docs/research/candidates/ucope/pro_packets/20260909_post_mean_velocity_b01_convergence/archive/RESPONSE.md",
+    "issue_comment_id": 5605809372,
+    "issue_comment_url": "https://github.com/CartmanFatass/My-paper-code/issues/11#issuecomment-5605809372",
+    "issue_comment_created_at": "2026-09-09T17:11:23Z",
+    "changed_paths": [
+      "docs/research/candidates/ucope/pro_packets/20260909_post_mean_velocity_b01_convergence/archive/RESPONSE.md"
+    ],
+    "delivery_comment_matches": {
+      "task_commit": "f95de6a771adfa11f550b1e4b69ee21775d75bc0",
+      "scientific_input_commit": "bb84696d476fd52ca78b3ca31d9312e5d23efef0"
+    }
+  },
+  "timestamp_note": "The verified commit author timestamp (2026-09-09T17:09:36Z) precedes the archived Transport blocker capture (2026-09-09T17:09:45.716965Z); this ordering does not establish visibility or write causality.",
+  "remaining_discrepancy": "The preserved Transport response reports a 404/no-comment state at observed branch head 8c27cfa825cc7f56e3eea8cd734b453f0282451f, while later direct GitHub reads verify the full response commit and matching Issue 11 comment. No cause or scientific classification is inferred, and no raw snapshot is overwritten."
+}

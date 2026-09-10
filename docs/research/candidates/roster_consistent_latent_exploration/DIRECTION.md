@@ -308,3 +308,171 @@ unchanged same-information law, judged by native service return; baseline-law ch
 candidate, not an already demonstrated remedy. This A ends without a successor selection, new
 prerequisite, family closure, recast or Portfolio change. Detailed source-grounded limits on
 gradient-conflict and baseline language are retained in the intake §3.
+
+## Same-FLEX actor-score learning intervention selected — 2026-09-09
+
+The complete post-A02 Innovator answer at `c80efaea6b0df9f22fb08bc1a5706492108836a9`
+selects **RCLE-TBCFV-B03-ACTOR100, B/EXPLORE** (`PRO_FINAL`;
+`RCLE_TBCFV_POST_A02_INNOVATOR_INTAKE_20260909.md`). Its question is whether claim-score
+weight100 versus1, in the same FLEX model and at the same full-vector nonzero step norm0.02,
+reduces post-event U after200 updates on one fresh paired training seed19. This is a
+whole-learning-law effect on native service, not a proof that low actor allocation caused
+flat service. The final primary is equal-weight ACTIVE_CONTINUATION8→12/12→8 U_W1−U_W100,
+positive for W100; both path levels, initialization gains, recovery saturation and all
+other held-out cells remain alongside it. MEI0.05 is a descriptive two-normalized-tick scale.
+
+The strongest support for selecting it is A02's low actor/pointer allocation on both sampled
+blocks and small average conditional policy change. The strongest counterargument remains
+parameterization dependence: reweighting may amplify noise, displace useful manager credit,
+and change shared encoders, FLEX heads and visited states without improving service. The
+same-cost zero-baseline learning comparison is a surviving alternative because frozen
+baseline removal changed direction; it is not selected and has not shown useful training.
+B02's nearly flat native service and A02's nonzero parameter/probability changes remain
+contrary evidence to stronger causal or efficacy stories. H_A1 remains unidentified; the
+historical script-versus-learned gap is diagnostic only.
+
+The next discriminator is the selected B03 card
+`RCLE_TBCFV_B03_ACTOR100_SCIENCE_CARD_20260909.md`: two real FLEX training instances,
+shared init/reference, final-only panels, no new diagnostic or coefficient search. No stable
+superiority, pure-pointer cause, package difference, arbitrary-roster generalization or C
+conclusion follows from its selection. No recast, family closure or Portfolio change is
+made. A successful recovered delivery does not resolve the earlier attempt's historical
+unknown acceptance; its evidence is retained separately in the intake and packet archive.
+
+## B03 incomplete pair: actor100 effect remains unavailable — 2026-09-09
+
+The completed scientific intake `RCLE_TBCFV_B03_ACTOR100_RESULT_INTAKE_20260909.md`
+retains W1's full200 nonzero updates and initialization/final native panels from source
+`ad2fdfb854e295d6d9dddb229dd17cde58465919`, evidence`813d236fa`. W1's equal-path
+ACTIVE_CONTINUATION G_U is+0.0001546224, small against the declared0.05 scale;
+conditional scenario SE0.0005000111 crosses zero. Every cell's initialization/final
+tau is40, and8→8 NEW_EPOCH worsens by0.0006347656. Parameter movement is observed;
+useful service improvement or faster recovery is not established.
+
+W100 terminated signal11 without retained curves/final panel. Its training prefix is
+unknown, not zero; reference was not invoked and Delta_U is unavailable. Completed
+W1 does not supply the absent paired efficacy or support a pure actor-credit cause.
+The strongest support is the complete W1 learner/native record; the strongest limit
+is the missing treatment endpoint, with the adverse secondary cell and recovery
+saturation preserved. No stable, causal, package-wide or direction-negative conclusion
+follows. B02/A02 results and predictions keep their prior meanings.
+
+The score-weighting question survives unanswered. The next discriminator would require
+an intact matched W100/W1 endpoint; none is newly selected or allocated. Root's special
+Portfolio validity review is next. There is no recast, family closure or Portfolio
+change in this intake. Complete failure/cost/diagnosis limits and preserved dependencies
+are recorded in the intake and E0; the pause handoff remains historical provenance.
+
+## Prospective completion of the actor100 comparison selected — 2026-09-09
+
+The owner-directed synthesis and CM feasibility lead to an object-tier selection of
+one fresh update-0 W100 plus the missing reference, with historical W1 explicitly reused
+under unchanged seed19/FLEX/learner/native/evaluation conditions. See
+`RCLE_B03_RECOVERY_SELECTION_INTAKE_20260909.md` and its recovery card. This is the next
+discriminator of the same weighted learning law; no new efficacy evidence, independent
+seed, recast or family disposition is claimed. The tiny W1 change, adverse secondary
+cell, saturated recovery, unknown old W100 prefix and unresolved fatal cause all remain.
+Root receives the prospective750s/one-fit plan for explicit engineering/invocation
+allocation. No call is allocated by this selection, and a necessary shared semantic
+change returns for a new judgment about whether W1 is still a valid comparator.
+
+## Actor-score weighting: recovered small native benefit with limits — 2026-09-09
+
+The valid B recovery in `RCLE_B03_RECOVERY_RESULT_INTAKE_20260909.md` supplies one
+matched seed-19 comparison: a fresh update-0 W100 fit plus the explicitly reused
+historical W1. Both complete 200 nonzero updates. Equal-path ACTIVE_CONTINUATION
+U_W1−U_W100 is **+0.0132242839**, below the fixed 0.05 minimum effect of interest;
+W100's initialization gain is +0.0133789063. Both primary path means and all eight
+cell U means favor W100. The conditional scenario interval [0.0100943, 0.0163543]
+describes these fitted policies, not training-seed uncertainty. The original failed
+W100 prefix remains unknown and its old attempt remains incomplete.
+
+The strongest support is a complete same-information learned-law comparison with
+small positive native U and Y means, alongside decreasing descriptive W100 training
+U. The strongest limits are the sub-MEI size, recovery tau 40 in every learned cell,
+and allocation fragmentation increasing in all four final-roster-12 cells. The simple
+nearest-beacon reference has primary U 0.2860636 versus W100's 0.6911112, leaving a
+0.4050476 gap; it is not an upper or tuned baseline, and H_A1 remains unidentified.
+The overall fragmentation mean conceals the four adverse cells. These observations
+do not establish useful complete recovery, stable superiority or a general roster law.
+
+Weight 100 changes the normalized joint gradient and can alter shared encoders,
+manager/FLEX heads, baselines and visitation. That whole-law explanation and variation
+between training instances remain alternatives to pure actor-credit attribution.
+The unchanged original reading branches jointly retain a small positive local signal
+and end this 200-update spend without a demonstrated MEI-level benefit. There is no C
+promotion, family closure, recast or revision of historical predictions or failures.
+
+The next discriminator recommended for separate selection is one new independent
+W100/W1 training pair with the same law, exposure and endpoints, retaining all outcomes
+and the fragmentation tradeoff. Deferring the unchanged law is a close runner-up given
+the small effect and large reference gap. This is a recorded, unallocated recommendation,
+not a new card or an automatic execution. Supporting evidence is the recovery E0 at
+`a83d397e9b1d85a22df76933f1e41ba0d7a764dd`, the intake's full eight-cell/reference/curve
+reading and `b03_actor100_recovery_20260909/DM_RESULT_ANALYSIS.json`. The accepted recovery
+changes current comparison knowledge without rewriting the incomplete-attempt section.
+
+## Fresh independent actor100 pair selected for preparation — 2026-09-09
+
+Under object-tier delegation, `RCLE_B03_S20_SELECTION_INTAKE_20260909.md` and
+`RCLE_B03_S20_SCIENCE_CARD_20260909.md` select one new seed-20 W1/W100 pair with the
+same 200-update learning laws and native endpoints. Both fits will start fresh under
+one paired new root; the historical fitted W1 is not reused. The discriminator is
+whether the small U benefit and final-roster-12 fragmentation cost recur across a new
+learning instance. Deferral remains the close runner-up because the existing gain is
+below MEI and recovery/reference competence remains poor.
+
+The original CM's source-read-only feasibility at `17aa7f01533887750b74a6ca62465e67b41a4580`
+finds a minimal explicit seed/reporting path and no required host/learner change. That
+is engineering feasibility, not a scientific observation or source acceptance. The
+prospective card fixes 33,792 episodes/400 calls and a 1,500s complete ceiling, with
+zero implementation/test/scientific invocation allocated at freeze. Root receives the
+concrete next batch for allocation. No new stable/causal claim, recast, family closure,
+priority or lifecycle decision follows; all seed-19 results and failures remain.
+
+## Actor-score weighting: fresh seed reproduces small U gain, not uniform F pattern — 2026-09-09
+
+The valid fresh seed-20 B in `RCLE_B03_S20_RESULT_INTAKE_20260909.md` adds one
+independently generated matched W1/W100 pair at the same 200-update law and endpoints.
+Actual new root and initial tensors distinguish it from seed 19; both arms make 200
+nonzero updates. Equal-path ACTIVE_CONTINUATION U_W1−U_W100 is **+0.0093241374**,
+conditional scenario interval [0.0065071,0.0121411], versus seed 19's +0.0132242839.
+W100 initialization gain is +0.0100097656. Both primary paths and all 8 U/Y cell means
+favor W100. Two paired training instances show limited recurrence, not stable population
+superiority; the historical recovery selection, failed attempt and unknown prefix remain.
+
+The strongest support is the new complete same-information learned-law comparison and
+late declining W100 training U. The strongest competence limits remain sub-MEI size,
+every learned recovery score 40, and reference primary U 0.2757894 versus W100 0.6898132
+(gap 0.4140238). H_A1 remains unidentified. W100 fragmentation worsens in both 8→12 cells
+but slightly improves in both 12→12 cells. Thus the old final-roster 12 all-four-loss
+pattern does not recur uniformly; its positive four-cell mean is much smaller here.
+Both the small-positive branch and end-this-200-update-spend branch apply unchanged.
+
+A full normalized joint-law effect through shared encoders, manager/FLEX heads,
+baselines or visitation remains an alternative to pure actor-credit attribution.
+These two seeds do not establish useful complete recovery, a general roster-scaling
+law, component causality, C promotion, family closure or a recast. Complete scientific
+support is E0 `a8fd7f915e5b115578b30edb6cf983f15816b572`, the intake's full cell/curve
+reading and `b03_actor100_s20_20260909/DM_RESULT_ANALYSIS.json`; the four endpoint rows
+and run summary retain seed-level outcomes without pooling scenario units.
+
+The recommended next discriminator is one separately selected fresh matched pair at
+one fixed 1,000-update endpoint, preserving the native law and required panels, to ask
+about practically sized learning and the W100/W1 contrast at that endpoint. It is not
+a causal 200-versus1,000 estimate or an extrapolated promised gain. Another unchanged
+200-update pair offers less information about the competence gap; deferral is a close
+runner-up. The bounded recommendation names 136,192 episodes / 8,716,288 ticks / 2,000 calls and
+rough 855.1s runner projection within a candidate 1500s complete cap. No successor card,
+invocation, priority/lifecycle disposition or Pro request is made by this recommendation.
+
+## Fixed 1,000-update learning comparison selected — 2026-09-10
+
+Portfolio PRO_FINAL A at `08e989073839fe5f0f91c6a8ad90a399bee37b6c`, applied by Root,
+selects the preceding finite learning question. The new
+`RCLE_B03_FRESH1000_S21_SCIENCE_CARD_20260910.md` fixes a fresh matched seed-21 pair,
+1,000 updates per arm and the same four native panels. This is the next discriminator
+for practical learning and whole-law contrast at that endpoint. The two earlier
+200-update comparisons, sub-MEI effects, recovery/reference limitations and unexplained
+failed prefix retain their original meaning. No new empirical result exists at freeze;
+this selection grants no successor, causal budget effect or stable-superiority claim.

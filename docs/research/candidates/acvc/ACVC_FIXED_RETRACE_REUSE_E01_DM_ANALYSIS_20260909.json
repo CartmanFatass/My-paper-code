@@ -1,0 +1,243 @@
+{
+  "object": "ACVC_FIXED_RETRACE_REUSE_E01",
+  "source": "docs\\research\\candidates\\acvc\\fixed_retrace_reuse_e01_20260909\\summary.json",
+  "independent_training_units": "Two selected retained trained bases; zero new fits.",
+  "uncertainty_unit": "64 paired joint evaluation episodes per base, conditional on that base.",
+  "operation": "Read accepted summary, count signs of retained paired differences, score four frozen UP probabilities; no re-evaluation or simulation.",
+  "by_base": {
+    "8201": {
+      "arm_mean_J": {
+        "C": 0.1765850150019158,
+        "F": 0.28428359509909934,
+        "dwell": 0.21535398327374564
+      },
+      "contrasts": {
+        "F-C": {
+          "mean_J": 0.10769858009718353,
+          "mean_S": 27.570836504878983,
+          "conditional_SE_J": 0.0066070153719637115,
+          "n_joint_episodes": 64,
+          "reading": "UP",
+          "adverse_episodes": 1,
+          "positive_episodes": 63,
+          "zero_episodes": 0,
+          "prediction": {
+            "probability_UP": 0.8,
+            "observed_UP": 1,
+            "brier": 0.03999999999999998
+          }
+        },
+        "F-dwell": {
+          "mean_J": 0.06892961182535368,
+          "mean_S": 17.64598062729054,
+          "conditional_SE_J": 0.007195484983059177,
+          "n_joint_episodes": 64,
+          "reading": "UP",
+          "adverse_episodes": 7,
+          "positive_episodes": 57,
+          "zero_episodes": 0,
+          "prediction": {
+            "probability_UP": 0.5,
+            "observed_UP": 1,
+            "brier": 0.25
+          }
+        },
+        "dwell-C": {
+          "mean_J": 0.03876896827182985,
+          "mean_S": 9.924855877588442,
+          "conditional_SE_J": 0.006520051903074365,
+          "n_joint_episodes": 64,
+          "reading": "UP",
+          "adverse_episodes": 14,
+          "positive_episodes": 50,
+          "zero_episodes": 0
+        }
+      }
+    },
+    "8202": {
+      "arm_mean_J": {
+        "C": 0.1837095479325036,
+        "F": 0.27162575146652157,
+        "dwell": 0.2141804549971599
+      },
+      "contrasts": {
+        "F-C": {
+          "mean_J": 0.08791620353401795,
+          "mean_S": 22.506548104708596,
+          "conditional_SE_J": 0.007910710200633306,
+          "n_joint_episodes": 64,
+          "reading": "UP",
+          "adverse_episodes": 7,
+          "positive_episodes": 57,
+          "zero_episodes": 0,
+          "prediction": {
+            "probability_UP": 0.65,
+            "observed_UP": 1,
+            "brier": 0.12249999999999998
+          }
+        },
+        "F-dwell": {
+          "mean_J": 0.05744529646936167,
+          "mean_S": 14.705995896156587,
+          "conditional_SE_J": 0.008615935185277559,
+          "n_joint_episodes": 64,
+          "reading": "UP",
+          "adverse_episodes": 11,
+          "positive_episodes": 53,
+          "zero_episodes": 0,
+          "prediction": {
+            "probability_UP": 0.5,
+            "observed_UP": 1,
+            "brier": 0.25
+          }
+        },
+        "dwell-C": {
+          "mean_J": 0.03047090706465629,
+          "mean_S": 7.80055220855201,
+          "conditional_SE_J": 0.007330299818264649,
+          "n_joint_episodes": 64,
+          "reading": "UP",
+          "adverse_episodes": 21,
+          "positive_episodes": 43,
+          "zero_episodes": 0
+        }
+      }
+    }
+  },
+  "prediction_mean_brier": 0.165625,
+  "prediction_score_scope": "Four correlated descriptive forecasts, not a calibration estimate.",
+  "exposure_by_base_rule": [
+    {
+      "base": 8201,
+      "arm": "C",
+      "opportunities": 0,
+      "retrace": 0,
+      "dwell": 0,
+      "apply": 0,
+      "distinguishable": 0
+    },
+    {
+      "base": 8201,
+      "arm": "F",
+      "opportunities": 8123,
+      "retrace": 8123,
+      "dwell": 0,
+      "apply": 0,
+      "distinguishable": 8123
+    },
+    {
+      "base": 8201,
+      "arm": "dwell",
+      "opportunities": 5587,
+      "retrace": 0,
+      "dwell": 5587,
+      "apply": 0,
+      "distinguishable": 5587
+    },
+    {
+      "base": 8202,
+      "arm": "C",
+      "opportunities": 0,
+      "retrace": 0,
+      "dwell": 0,
+      "apply": 0,
+      "distinguishable": 0
+    },
+    {
+      "base": 8202,
+      "arm": "F",
+      "opportunities": 7775,
+      "retrace": 7775,
+      "dwell": 0,
+      "apply": 0,
+      "distinguishable": 7775
+    },
+    {
+      "base": 8202,
+      "arm": "dwell",
+      "opportunities": 5771,
+      "retrace": 0,
+      "dwell": 5771,
+      "apply": 0,
+      "distinguishable": 5771
+    }
+  ],
+  "counts": {
+    "base_loads": 6,
+    "environment_constructors": 6,
+    "unscored_constructor_resets": 6,
+    "explicit_resets": 384,
+    "step_calls": 98304,
+    "team_steps": 98304,
+    "eval_episodes": 384,
+    "base_agent_forwards": 491520,
+    "learned_gate_agent_forwards": 0,
+    "retained_base_fits": 2,
+    "new_fits": 0,
+    "training_episodes": 0,
+    "training_team_steps": 0,
+    "optimizer_updates": 0,
+    "gate_constructions": 0,
+    "critic_constructions": 0
+  },
+  "panels": [
+    {
+      "base": 8201,
+      "arm": "C",
+      "episodes": 64,
+      "parameter_displacement_after_loading": 0.0,
+      "wall_s": 11.96904265502235
+    },
+    {
+      "base": 8201,
+      "arm": "F",
+      "episodes": 64,
+      "parameter_displacement_after_loading": 0.0,
+      "wall_s": 13.479934598028194
+    },
+    {
+      "base": 8201,
+      "arm": "dwell",
+      "episodes": 64,
+      "parameter_displacement_after_loading": 0.0,
+      "wall_s": 13.654578721965663
+    },
+    {
+      "base": 8202,
+      "arm": "C",
+      "episodes": 64,
+      "parameter_displacement_after_loading": 0.0,
+      "wall_s": 11.83161417604424
+    },
+    {
+      "base": 8202,
+      "arm": "F",
+      "episodes": 64,
+      "parameter_displacement_after_loading": 0.0,
+      "wall_s": 13.806098793982528
+    },
+    {
+      "base": 8202,
+      "arm": "dwell",
+      "episodes": 64,
+      "parameter_displacement_after_loading": 0.0,
+      "wall_s": 13.679409444972407
+    }
+  ],
+  "native_steps_crosscheck": 98304,
+  "base_agent_forwards_crosscheck": 491520,
+  "coordinate_pair_check_upper_bound": 13107200,
+  "analysis_wall_s_before_publication": 0.0007830000031390227,
+  "analysis_command_wall_s": 0.0747992,
+  "charged_DM_support_s": 1,
+  "complete_support_including_DM_s": 8.35,
+  "timed_process_plus_support_s": 87.81,
+  "reported_whole_supervisor_task_s": 80,
+  "charged_whole_supervisor_task_s": 81,
+  "complete_logical_wall_including_DM_s": 89.35,
+  "unused_support_allowance_s": 21.65,
+  "unused_complete_allowance_s": 90.65,
+  "cost_note": "CM 7.35 s support plus a conservative 1 s DM retained-summary analysis/publication charge. The precise 79.46 s timed process excludes memory preflight. CM confirmed the whole supervisor duration is 80 s at whole-second precision; charge 81 s to include preflight/startup and rounding. Complete charge is 89.35 s, superseding the narrower initial CM bill. Unused allowance is not another invocation allocation.",
+  "analysis_recipe": "temp/directions/acvc/analysis/fixed_retrace_reuse_e01_20260909/intake_summary.py",
+  "analysis_cost_receipt": "temp/directions/acvc/analysis/fixed_retrace_reuse_e01_20260909/analysis_cost.json"
+}

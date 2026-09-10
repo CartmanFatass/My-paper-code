@@ -1,0 +1,178 @@
+{
+  "observed_utc": "2026-09-07T22:45:42.974365+00:00",
+  "inventory_only": true,
+  "workload_imports": 0,
+  "package_imports": 0,
+  "downloads_installs_builds_probes_tapes_learners": 0,
+  "host": "LAPTOP-U9TDKC8A",
+  "sys_executable": "/usr/bin/python3.12",
+  "sys_version": "3.12.3 (main, Jul 15 2026, 23:46:41) [GCC 13.3.0]",
+  "bounds": {
+    "max_venvs": 32,
+    "max_python_lib_roots_per_venv": 4,
+    "package_names": [
+      "numpy",
+      "torch"
+    ]
+  },
+  "venv_count": 5,
+  "venvs": [
+    {
+      "venv": "/home/wu/.venvs/hmasd",
+      "python_resolved": "/home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu/bin/python3.10",
+      "pyvenv_cfg": "home = /home/wu/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/bin\nimplementation = CPython\nuv = 0.12.9\nversion_info = 3.10\ninclude-system-site-packages = false\n",
+      "site_packages": [
+        "/home/wu/.venvs/hmasd/lib/python3.10/site-packages"
+      ]
+    },
+    {
+      "venv": "/home/wu/.venvs/hmasd-cbsc-system312-a02-20260907",
+      "python_resolved": "/usr/bin/python3.12",
+      "pyvenv_cfg": "home = /usr/bin\nimplementation = CPython\nuv = 0.12.9\nversion_info = 3.12.3\ninclude-system-site-packages = false\n",
+      "site_packages": [
+        "/home/wu/.venvs/hmasd-cbsc-system312-a02-20260907/lib/python3.12/site-packages"
+      ]
+    },
+    {
+      "venv": "/home/wu/.venvs/hmasd-cbsc-system312-a03-20260907",
+      "python_resolved": "/usr/bin/python3.12",
+      "pyvenv_cfg": "home = /usr/bin\nimplementation = CPython\nuv = 0.12.9\nversion_info = 3.12.3\ninclude-system-site-packages = false\n",
+      "site_packages": [
+        "/home/wu/.venvs/hmasd-cbsc-system312-a03-20260907/lib/python3.12/site-packages"
+      ]
+    },
+    {
+      "venv": "/home/wu/.venvs/hmasd-cbsc-system312-post-a03-proposal-20260907",
+      "python_resolved": "/usr/bin/python3.12",
+      "pyvenv_cfg": "home = /usr/bin\nimplementation = CPython\nuv = 0.12.9\nversion_info = 3.12.3\ninclude-system-site-packages = false\n",
+      "site_packages": [
+        "/home/wu/.venvs/hmasd-cbsc-system312-post-a03-proposal-20260907/lib/python3.12/site-packages"
+      ]
+    },
+    {
+      "venv": "/home/wu/.venvs/hmasd-frrie-system312-a04-20260907",
+      "python_resolved": "/usr/bin/python3.12",
+      "pyvenv_cfg": "home = /usr/bin\nimplementation = CPython\nuv = 0.12.9\nversion_info = 3.12.3\ninclude-system-site-packages = false\n",
+      "site_packages": [
+        "/home/wu/.venvs/hmasd-frrie-system312-a04-20260907/lib/python3.12/site-packages"
+      ]
+    }
+  ],
+  "package_roots_checked": [
+    "/usr/lib/python3/dist-packages",
+    "/usr/local/lib/python3.12/dist-packages",
+    "/home/wu/.venvs/hmasd/lib/python3.10/site-packages",
+    "/home/wu/.venvs/hmasd-cbsc-system312-a02-20260907/lib/python3.12/site-packages",
+    "/home/wu/.venvs/hmasd-cbsc-system312-a03-20260907/lib/python3.12/site-packages",
+    "/home/wu/.venvs/hmasd-cbsc-system312-post-a03-proposal-20260907/lib/python3.12/site-packages",
+    "/home/wu/.venvs/hmasd-frrie-system312-a04-20260907/lib/python3.12/site-packages"
+  ],
+  "packages": [
+    {
+      "package_root": "/home/wu/.venvs/hmasd/lib/python3.10/site-packages",
+      "dist_info": "/home/wu/.venvs/hmasd/lib/python3.10/site-packages/numpy-1.26.3.dist-info",
+      "metadata_fields": [
+        "Name: numpy",
+        "Version: 1.26.3",
+        "Requires-Python: >=3.9"
+      ],
+      "wheel": "Wheel-Version: 1.0\nGenerator: meson\nRoot-Is-Purelib: false\nTag: cp310-cp310-manylinux_2_17_x86_64\nTag: cp310-cp310-manylinux2014_x86_64\n\n",
+      "direct_url": null
+    },
+    {
+      "package_root": "/home/wu/.venvs/hmasd/lib/python3.10/site-packages",
+      "dist_info": "/home/wu/.venvs/hmasd/lib/python3.10/site-packages/torch-2.7.0+cu118.dist-info",
+      "metadata_fields": [
+        "Name: torch",
+        "Version: 2.7.0+cu118",
+        "Requires-Python: >=3.9.0",
+        "Requires-Dist: filelock",
+        "Requires-Dist: typing-extensions>=4.10.0",
+        "Requires-Dist: setuptools; python_version >= \"3.12\"",
+        "Requires-Dist: sympy>=1.13.3",
+        "Requires-Dist: networkx",
+        "Requires-Dist: jinja2",
+        "Requires-Dist: fsspec",
+        "Requires-Dist: nvidia-cuda-nvrtc-cu11==11.8.89; platform_system == \"Linux\" and platform_machine == \"x86_64\"",
+        "Requires-Dist: nvidia-cuda-runtime-cu11==11.8.89; platform_system == \"Linux\" and platform_machine == \"x86_64\"",
+        "Requires-Dist: nvidia-cuda-cupti-cu11==11.8.87; platform_system == \"Linux\" and platform_machine == \"x86_64\"",
+        "Requires-Dist: nvidia-cudnn-cu11==9.1.0.70; platform_system == \"Linux\" and platform_machine == \"x86_64\"",
+        "Requires-Dist: nvidia-cublas-cu11==11.11.3.6; platform_system == \"Linux\" and platform_machine == \"x86_64\"",
+        "Requires-Dist: nvidia-cufft-cu11==10.9.0.58; platform_system == \"Linux\" and platform_machine == \"x86_64\"",
+        "Requires-Dist: nvidia-curand-cu11==10.3.0.86; platform_system == \"Linux\" and platform_machine == \"x86_64\"",
+        "Requires-Dist: nvidia-cusolver-cu11==11.4.1.48; platform_system == \"Linux\" and platform_machine == \"x86_64\"",
+        "Requires-Dist: nvidia-cusparse-cu11==11.7.5.86; platform_system == \"Linux\" and platform_machine == \"x86_64\"",
+        "Requires-Dist: nvidia-nccl-cu11==2.21.5; platform_system == \"Linux\" and platform_machine == \"x86_64\"",
+        "Requires-Dist: nvidia-nvtx-cu11==11.8.86; platform_system == \"Linux\" and platform_machine == \"x86_64\"",
+        "Requires-Dist: triton==3.3.0; platform_system == \"Linux\" and platform_machine == \"x86_64\"",
+        "Requires-Dist: optree>=0.13.0; extra == \"optree\"",
+        "Requires-Dist: opt-einsum>=3.3; extra == \"opt-einsum\""
+      ],
+      "wheel": "Wheel-Version: 1.0\nGenerator: setuptools (75.8.2)\nRoot-Is-Purelib: false\nTag: cp310-cp310-manylinux_2_28_x86_64\n\n",
+      "direct_url": null
+    },
+    {
+      "package_root": "/home/wu/.venvs/hmasd-frrie-system312-a04-20260907/lib/python3.12/site-packages",
+      "dist_info": "/home/wu/.venvs/hmasd-frrie-system312-a04-20260907/lib/python3.12/site-packages/numpy-1.26.3.dist-info",
+      "metadata_fields": [
+        "Name: numpy",
+        "Version: 1.26.3",
+        "Requires-Python: >=3.9"
+      ],
+      "wheel": "Wheel-Version: 1.0\nGenerator: meson\nRoot-Is-Purelib: false\nTag: cp312-cp312-manylinux_2_17_x86_64\nTag: cp312-cp312-manylinux2014_x86_64\n\n",
+      "direct_url": null
+    }
+  ],
+  "compiler_paths_only": {
+    "c++": {
+      "which": "/usr/bin/c++",
+      "resolved": "/usr/bin/x86_64-linux-gnu-g++-13"
+    },
+    "g++": {
+      "which": "/usr/bin/g++",
+      "resolved": "/usr/bin/x86_64-linux-gnu-g++-13"
+    },
+    "clang++": {
+      "which": null,
+      "resolved": null
+    }
+  },
+  "installed_toolchain_metadata": [
+    [
+      "Package: g++",
+      "Status: install ok installed",
+      "Architecture: amd64",
+      "Version: 4:13.2.0-7ubuntu1"
+    ],
+    [
+      "Package: g++-13",
+      "Status: install ok installed",
+      "Architecture: amd64",
+      "Version: 13.3.0-6ubuntu2~24.04.1"
+    ],
+    [
+      "Package: gcc",
+      "Status: install ok installed",
+      "Architecture: amd64",
+      "Version: 4:13.2.0-7ubuntu1"
+    ],
+    [
+      "Package: gcc-13",
+      "Status: install ok installed",
+      "Architecture: amd64",
+      "Version: 13.3.0-6ubuntu2~24.04.1"
+    ],
+    [
+      "Package: libc6-dev",
+      "Status: install ok installed",
+      "Architecture: amd64",
+      "Version: 2.39-0ubuntu8.8"
+    ],
+    [
+      "Package: libstdc++-13-dev",
+      "Status: install ok installed",
+      "Architecture: amd64",
+      "Version: 13.3.0-6ubuntu2~24.04.1"
+    ]
+  ]
+}

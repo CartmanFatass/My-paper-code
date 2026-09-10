@@ -1,8 +1,9 @@
 #:schema https://developers.openai.com/codex/config-schema.json
 
-# Every local task created in this trusted HMASD project starts with Full Access.
-# Keep these explicit here so Root and research tasks do
-# not inherit the desktop client's Workspace/on-request defaults.
+# Project defaults for the existing Root execution coordinator; effective after restart.
+model = "gpt-5.6-sol"
+model_reasoning_effort = "low"
+# Individual named agent configurations override these defaults.
 approval_policy = "never"
 sandbox_mode = "danger-full-access"
 
@@ -12,24 +13,20 @@ hooks = false
 
 [agents]
 # Research capacity is repository-unbounded under AGENTS.md section 5. This knob limits only the
-# runtime's thread fan-out; DM -> CM is the default chain, with specialist children as needed.
+# runtime's fan-out; DM implements directly, with optional specialist siblings.
 max_concurrent_threads_per_session = 40
 interrupt_message = true
 
 [agents.HMASDDirectionManager]
-description = "Fixed loop driver for one research direction (card, intake, delegated decisions, Pro escalation)."
+description = "Direction science and engineering owner; optional Portfolio Pro author and response checker."
 config_file = "./agents/hmasd-direction-manager.toml"
 
-[agents.HMASDCM]
-description = "Fixed native engineering and implementation subagent."
-config_file = "./agents/hmasd-cm.toml"
-
-[agents.HMASDCMScout]
+[agents.HMASDScout]
 description = "Optional engineering-surface mapping method."
-config_file = "./agents/hmasd-cm-scout.toml"
+config_file = "./agents/hmasd-scout.toml"
 
 [agents.HMASDReviewer]
-description = "Optional engineering-analysis method."
+description = "Independent Astra/high review for high-risk changes; evidence returns to the assigning owner."
 config_file = "./agents/hmasd-reviewer.toml"
 
 [agents.HMASDVerifier]
@@ -37,7 +34,7 @@ description = "Optional focused runtime-observation method."
 config_file = "./agents/hmasd-verifier.toml"
 
 [agents.HMASDExperimentOperator]
-description = "Optional operator for one exact result-bearing command."
+description = "Optional executor for a bounded launch, observation and collection batch."
 config_file = "./agents/hmasd-experiment-operator.toml"
 
 [agents.HMASDResearchCritic]
@@ -45,12 +42,8 @@ description = "Optional independent scientific-criticism method."
 config_file = "./agents/hmasd-research-critic.toml"
 
 [agents.HMASDImplementer]
-description = "Optional semantic implementation method."
+description = "Optional Sol/medium implementation task owned and accepted by DM or Root."
 config_file = "./agents/hmasd-implementer.toml"
-
-[agents.HMASDRoutineImplementer]
-description = "Optional routine implementation method."
-config_file = "./agents/hmasd-routine-implementer.toml"
 
 [mcp_servers.agentify-desktop]
 command = "node"

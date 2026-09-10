@@ -1,0 +1,49 @@
+{
+  "question": "是否把后续一条VSPC1任务设为一个新的独立训练对，检查本次门控收益能否在同样比较下再出现？",
+  "changes_if_approved": [
+    {
+      "target": "VSPC1后续有界任务",
+      "from": "P49的一对训练和intake已完成，当前不追加调用",
+      "to": "只分配一个新独立训练对，保持GATED-V、完整MLP-V和悬停参考、训练量与完整上限；新键由后续卡事前固定"
+    }
+  ],
+  "if_refused": "保留本次UP证据和局限，不增加实验；不把拒绝追加投入改写为科学负面、关闭家族或调整方向优先级。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B01_INTAKE_20260908.md",
+      "quote": "Primary GATED-V−MLP-V is **+.0293656586**, conditional evaluation SE .0052742257.",
+      "why": "在相同信息和学习量下超过事前0.01阈值，足以支持一次有限的独立训练检查。"
+    },
+    {
+      "path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B01_RESULT_EVIDENCE_20260908.md",
+      "quote": "| GATED-V−H | +.01940054939393713 | .010345689108976694 | 7/32 |",
+      "why": "门控相对悬停的点估计也为正，但评价噪声和不利回合仍保留，不能宣布稳定控制能力。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B01_RESULT_EVIDENCE_20260908.md",
+      "quote": "| MLP-V−H | −.009965109166429027 | .010730982423058314 | 16/32 |",
+      "why": "比较器平均低于悬停，且只有一个独立训练对，不能用本次差值支持强性能结论。"
+    },
+    {
+      "path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B01_INTAKE_20260908.md",
+      "quote": "The full MLP already shares nonlinear features.",
+      "why": "额外参数、共同梯度裁剪和优化轨迹仍能解释差异；本次没有分离专属时长信用机制。"
+    }
+  ],
+  "uncertainty": [
+    "跨训练种子的方向和幅度未知；条件评价标准误不能替代训练不确定性。",
+    "没有调好的同信息上界/基线headroom记录；悬停只是已达到的参考。",
+    "后续保留每个结果，不要求每个种子改善，也不先增加消融、精确值解或基线调优。",
+    "本建议不构成正式UAV进入、C晋级、生命周期或优先级决定。"
+  ],
+  "cost": {
+    "compute": "若后来分配：2个真实学习器，各512×256训练步、1024次Adam；3×32×256评价步，共286720原生团队步、2048次Adam、96次最终评价。仍为1800秒/臂、3600秒/对上限；本次包围调用耗时308.63秒只作规划参考，非保证。本轮intake新增原生调用为0。",
+    "owner_time": "异步建议，无需立即回复；可接受、拒绝或修改后续投入。",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing; P49结果和intake已经完成，当前没有等待批准的实验进程"
+  },
+  "verdict_text": "Recommend one new independent matched pair under the unchanged comparison and caps; preserve every outcome and do not require every seed to improve.",
+  "source": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B01_INTAKE_20260908.md"
+}

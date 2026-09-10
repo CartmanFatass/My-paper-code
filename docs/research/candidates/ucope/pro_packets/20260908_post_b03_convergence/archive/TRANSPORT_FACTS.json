@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "request_id": "2026-09-08-ucope-post-b03-convergence-01",
+  "workflow_node": "em_convergence",
+  "conversation_binding_key": "em:ucope:convergence",
+  "direction_id": "ucope",
+  "direction_ids": [
+    "ucope"
+  ],
+  "conversation_id": "6a9c6b1c-1c34-83e8-8ebc-dee64b334240",
+  "provider_url": "https://chatgpt.com/c/6a9c6b1c-1c34-83e8-8ebc-dee64b334240",
+  "user_message_id": "3f9ba7ff-3524-4e62-a08c-3904270cbf62",
+  "assistant_message_id": "110e01ca-8661-4f61-832b-e8711844fafe",
+  "visible_model": "6 Pro",
+  "underlying_model": "Latest",
+  "thinking_effort": "Pro, 5 of 5.",
+  "source_mode": "paste",
+  "prompt_sha256": "713c6713edf7fd09bf757ab29d79c85c9f5c751cd3e7320765f6d92c912fdb39",
+  "response_sha256": "8ee73cfdec7fcb3e3d5235288a25cd69a744ba3dc441a11e3b659aabcf8132e4",
+  "response_characters": 670,
+  "response_bytes": 670,
+  "send_click_count": 1,
+  "send_evidence": {
+    "send_click_count": 1,
+    "send_attempted": true,
+    "url_observed": true,
+    "user_node_observed": true,
+    "user_node_exact": true,
+    "user_message_id": "3f9ba7ff-3524-4e62-a08c-3904270cbf62",
+    "provider_url_observed": "https://chatgpt.com/c/6a9c6b1c-1c34-83e8-8ebc-dee64b334240",
+    "binding_match": true,
+    "paste_mode": true
+  },
+  "identity_validation": "PASS",
+  "identity_expected": {
+    "conversation_id": "6a9c6b1c-1c34-83e8-8ebc-dee64b334240",
+    "user_message_id": "3f9ba7ff-3524-4e62-a08c-3904270cbf62",
+    "assistant_message_id": "110e01ca-8661-4f61-832b-e8711844fafe"
+  },
+  "identity_observed": {
+    "conversation_id": "6a9c6b1c-1c34-83e8-8ebc-dee64b334240",
+    "user_message_id": "3f9ba7ff-3524-4e62-a08c-3904270cbf62",
+    "assistant_message_id": "110e01ca-8661-4f61-832b-e8711844fafe"
+  },
+  "archive_paths": {
+    "manifest_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\ucope\\2026-09-08-ucope-post-b03-convergence-01\\2026-09-08-ucope-post-b03-convergence-01--ucope__PACKET_MANIFEST.json",
+    "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\ucope\\2026-09-08-ucope-post-b03-convergence-01\\2026-09-08-ucope-post-b03-convergence-01--ucope__00_PROMPT.md",
+    "reference_files": [],
+    "response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\ucope\\2026-09-08-ucope-post-b03-convergence-01\\2026-09-08-ucope-post-b03-convergence-01--ucope--attempt-01__02_RESPONSE.md",
+    "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\ucope\\2026-09-08-ucope-post-b03-convergence-01\\2026-09-08-ucope-post-b03-convergence-01--ucope--attempt-01__03_TRANSPORT_FACTS.json",
+    "response_sha256": "8ee73cfdec7fcb3e3d5235288a25cd69a744ba3dc441a11e3b659aabcf8132e4"
+  },
+  "wait_status": "NATURAL_COMPLETION",
+  "observed_page_state": "Worked for 12m 19s; current assistant Copy response present; composer Stop answering remained visible; response stable across bounded observations",
+  "capture_method": "Current-round Copy response control (fourth response copy) via CUA clipboard.readText; raw UTF-8 response preserved",
+  "archive_status": "ARCHIVED",
+  "timestamps": {
+    "sent_at": "2026-09-08T22:31:41Z",
+    "completed_at": "2026-09-08T22:31:41Z",
+    "captured_at": "2026-09-08T22:31:41Z",
+    "archived_at": "2026-09-08T22:31:41Z"
+  },
+  "scientific_decision_formed": false,
+  "return_receipt": {
+    "status": "SENT",
+    "attempt_count": 1,
+    "delivery_status": "accepted",
+    "message_key": "2026-09-08-ucope-post-b03-convergence-01|ucope|6a9c6b1c-1c34-83e8-8ebc-dee64b334240|8ee73cfdec7fcb3e3d5235288a25cd69a744ba3dc441a11e3b659aabcf8132e4",
+    "sent_at": "2026-09-08T22:32:41Z",
+    "destination_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267"
+  },
+  "notes": [
+    "Exactly one provider Send occurred; no second Send or repair prompt was attempted.",
+    "Response paired to current-round user message and assistant node by independent DOM inspection.",
+    "The page exposed both a completed Worked-for status/Copy response controls and a stale Stop answering control; the response remained unchanged during additional observations."
+  ]
+}

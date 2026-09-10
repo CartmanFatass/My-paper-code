@@ -6,7 +6,7 @@ from typing import Any, Mapping, Sequence
 
 import numpy as np
 
-from config_1 import Config
+from configs.config_1 import Config
 from envs.pettingzoo.relay.energy_aware import UAVEnergyAwareRelayEnv
 from ha_ctse_process import uav_g0_controllers as controllers, uav_g0_oracle_evidence as oracle_evidence
 from ha_ctse_process.uav_episode_schema import ACTION_DIM, GROUND_USERS, PHYSICAL_HORIZON, PHYSICAL_UAVS, Cell, G0RealizationError, LifecycleBoundaryEvent, _readonly_array

@@ -1,0 +1,133 @@
+{
+  "prepared_at_utc": "2026-09-08T17:27:11.465734+00:00",
+  "question_scope": "P52 post-B03 direction decision; no new scientific invocation allocated",
+  "computation": "Python standard-library arithmetic over the accepted B03 run-level analysis and proposed unchanged loop counts; no research-module import or simulation",
+  "evidence_input": {
+    "path": "docs/research/candidates/flexible_skill_duration/FSD_NATIVE_RENEWAL_LEARNING_B03_DM_ANALYSIS_20260908.json",
+    "commit": "b06f8a058c4920f7246cb276d676294d8807921c",
+    "sha256": "9d3cb2dce88d04ce56ce390a6bc9818b292ce72137de96545e3bc99f789d85bd",
+    "source_sha": "f09aa00ba0e6f7c709af188b61be6ff8e7e6bc96",
+    "collection_commit": "76f9ffa8b747f9338947ef4d13937ab0bd5f6072"
+  },
+  "current_consultation_new_exposure": {
+    "scientific_invocations": 0,
+    "model_constructions": 0,
+    "checkpoint_loads": 0,
+    "training_starts": 0,
+    "training_transitions": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0,
+    "simulation_steps": 0,
+    "profiling_invocations": 0,
+    "checkpoint_replays": 0,
+    "scientific_validation_invocations": 0
+  },
+  "exposure_line": "scientific_invocations=0; model_constructions=0; checkpoint_loads=0; training_starts=0; training_transitions=0; optimizer_steps=0; evaluation_episodes=0; simulation_steps=0; profiling_invocations=0; checkpoint_replays=0; scientific_validation_invocations=0",
+  "accepted_b03": {
+    "independent_training_pairs": 1,
+    "training_master": 770403,
+    "evaluation_master": 770404,
+    "primary_full_h_minus_d0": {
+      "mean": 0.3928645833333336,
+      "stderr": 0.009650752471672294,
+      "sample_sd": 0.05459290013017851
+    },
+    "full_g_minus_h": 0.1152864583333331,
+    "full_means": {
+      "G": 0.8907812500000001,
+      "D0": 0.3826302083333333,
+      "H": 0.7754947916666669
+    },
+    "complete_wall_seconds": {
+      "G": 2.47,
+      "D0": 462.1,
+      "H": 434.04
+    },
+    "summed_complete_wall_seconds": 898.61,
+    "actor_step_ratio_d0_over_h": 8.0,
+    "pairing_limit": "B01/B02 are H/C pairs, not additional H/D0 pairs; no episode pooling or new run-level analysis"
+  },
+  "prospective_option_b": {
+    "selected": false,
+    "allocated": false,
+    "question": "Does the local H-over-authentic-D0 package gain recur at one fresh independent training pair, while retaining the newly observed larger public-G shortfall?",
+    "minimum_evidence_class": "B/EXPLORE",
+    "claim_ceiling": "one additional independent matched pair, all outcomes separately reported; no stable frequency, timing causality, optimal clock, learned renewal or UAV claim",
+    "shape": {
+      "learners": 2,
+      "independent_training_pairs": 1,
+      "rollouts_per_learner": 5,
+      "training_lanes": 16,
+      "horizon": 400,
+      "endpoint_policies": 3,
+      "evaluation_episodes_per_policy": 32,
+      "agents": 6
+    },
+    "counts": {
+      "scientific_invocations": 3,
+      "model_constructions": 4,
+      "training_starts": 2,
+      "checkpoint_loads": 0,
+      "training_transitions": 64000,
+      "training_episodes": 160,
+      "update_stages": 10,
+      "scoring_steps": 38400,
+      "evaluation_episodes": 96,
+      "host_steps": 102400,
+      "agent_observations": 614400,
+      "learned_agent_batch_calls": 4800,
+      "greedy_act_batches": 400,
+      "nested_search_candidates": 0,
+      "added_scientific_validation_invocations": 0
+    },
+    "dominant_work": [
+      "2 learners x 1 new pair x 5 rollouts x 16 lanes x 400 = 64000 training transitions",
+      "3 policies x 32 endpoint episodes x 400 = 38400 scoring steps",
+      "data-dependent internal segments and optimizer calls; no nested candidate/trajectory/solver search"
+    ],
+    "cost_projection": {
+      "method": "Same loop shape as B03: per-arm complete B03 wall is the empirical one-run work anchor, not a statistical upper, promise, fresh admission measurement or tuning result.",
+      "per_arm": {
+        "G": {
+          "same_work_complete_wall_anchor_seconds": 2.47,
+          "proposed_complete_cap_seconds": 60.0,
+          "observed_optimizer_calls": {
+            "coordinator": 0,
+            "discoverer_actor": 0,
+            "discoverer_critic": 0,
+            "team_discriminator": 0,
+            "individual_discriminator": 0
+          }
+        },
+        "D0": {
+          "same_work_complete_wall_anchor_seconds": 462.1,
+          "proposed_complete_cap_seconds": 1200.0,
+          "observed_optimizer_calls": {
+            "coordinator": 750,
+            "discoverer_actor": 18000,
+            "discoverer_critic": 18000,
+            "team_discriminator": 75,
+            "individual_discriminator": 300
+          }
+        },
+        "H": {
+          "same_work_complete_wall_anchor_seconds": 434.04,
+          "proposed_complete_cap_seconds": 900.0,
+          "observed_optimizer_calls": {
+            "coordinator": 870,
+            "discoverer_actor": 2250,
+            "discoverer_critic": 2250,
+            "team_discriminator": 75,
+            "individual_discriminator": 300
+          }
+        }
+      },
+      "summed_same_work_anchor_seconds": 898.61,
+      "summed_proposed_caps_seconds": 2160.0,
+      "uncertainty": "Actual new optimizer/segment work and wall remain unknown, especially H. Preserve complete per-arm cap; no new cost probe, pilot or raised cap is proposed."
+    },
+    "engineering_validation": "No added scientific validation panel. Any subsequently selected input plumbing receives only proportionate fake checks within its later CM assignment.",
+    "keys_and_implementation": "unassigned; no fourth comparison, new CM or numerical keys are created by this consultation"
+  },
+  "other_native_action_proposal": "No runnable UAV successor is proposed by DM here. Any alternative chosen by the node must name an actual source-supported action/information/renewal path and the required family decision; its work and cost remain unassigned until specified."
+}

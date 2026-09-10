@@ -1,0 +1,118 @@
+{
+  "prepared_at": "2026-09-09T04:13:16-07:00",
+  "object": "UCOPE-UAV-FIXED-RENEWAL-B02",
+  "selector": "renewal_fixed_b02",
+  "master": 7801,
+  "authoring_start": "ce9c2cd9a21f116ba19926f3c4b4f48e42e14c56",
+  "preserved_algorithm_source": "c7c139c512b2dc598a00ff5746b1f89b1aaf8a46",
+  "main_required_inputs_checked_at": "06b659b415903caa097d48dfb28779470e8b6527",
+  "required_input_delta": "None since P78 start; main had not yet integrated P78 binding source. Keep accepted newer P78 source.",
+  "calculation": "AST Config literal defaults without source import/model/native execution; unchanged algorithm work and verified parameter counts reused from P78.",
+  "bounded_nonreuse_check": "No word-boundary match before preparation for7801/780100000/new selector/object in current UCOPE docs and mapped source/runner/tests; no global census.",
+  "rng": {
+    "b": 780100000,
+    "common_initialization": 780100011,
+    "F_initial_duration_head": 780100012,
+    "G_private_train_velocity": 780100021,
+    "G_private_train_duration": 780100022,
+    "F_private_train_velocity": 780100031,
+    "F_private_train_duration": 780100032,
+    "common_train_reset_first_last": [
+      780101000,
+      780101511
+    ],
+    "common_final_reset_first_last": [
+      780102000,
+      780102031
+    ],
+    "G_private_final_velocity_first_last": [
+      780103000,
+      780103031
+    ],
+    "G_private_final_duration_first_last": [
+      780104000,
+      780104031
+    ],
+    "F_private_final_velocity_first_last": [
+      780105000,
+      780105031
+    ],
+    "F_private_final_duration_first_last": [
+      780106000,
+      780106031
+    ]
+  },
+  "work": {
+    "matched_training_instances": 1,
+    "fitted_arms": 2,
+    "train_episodes_per_arm": 512,
+    "train_native_steps_per_arm": 131072,
+    "rollouts_per_arm": 256,
+    "Adam_per_arm": 1024,
+    "total_rollouts": 512,
+    "total_Adam_calls": 2048,
+    "total_native_steps": 286720,
+    "final_evaluation_episodes": 96,
+    "explicit_resets": 1120,
+    "constructor_resets": 2,
+    "existing_diagnostic_rows": 1600,
+    "F_renewal_head_forward_rows_bounds": [
+      1003520,
+      4014080
+    ],
+    "F_head_dense_MAC_bounds": [
+      2215772160,
+      8863088640
+    ],
+    "G_velocity_selections": 696320,
+    "F_parameters": 68553,
+    "G_parameters": 66311,
+    "F_frozen_duration_parameters": 2242,
+    "total_parameters": 134864,
+    "trainable_parameters": 132622,
+    "learning_rate": 0.0003
+  },
+  "multipliers_vs_P78": {
+    "training": 1.0,
+    "final_eval": 1.0,
+    "native_steps": 1.0
+  },
+  "P78_measured_reference": {
+    "F_arm_seconds": 172.7081888440298,
+    "G_including_H_seconds": 146.49354537401814,
+    "outer_seconds": 334.19,
+    "new_outer_measured": false,
+    "guarantees_new_seconds": false
+  },
+  "caps": {
+    "complete_arm_seconds": 1800,
+    "complete_invocation_seconds": 3600,
+    "max_accepted_submissions": 1,
+    "focused_checks_seconds": 300
+  },
+  "predictions": {
+    "F_minus_G_above_0_01_probability": 0.6,
+    "F_minus_H_above_zero_probability": 0.65,
+    "owner": "not taken (unattended)"
+  },
+  "descriptive_independent_pair_comparison": {
+    "masters": [
+      7701,
+      7801
+    ],
+    "independent_unit": "matched training instance",
+    "task_label": "UCOPE-UAV-FIXED-RENEWAL-UNCHANGED",
+    "fitted_arms": [
+      "F",
+      "G"
+    ],
+    "baseline": "G",
+    "paired": true,
+    "prior_frozen_endpoint_source": "UCOPE_UAV_FIXED_RENEWAL_B01_P78_RESULT_SUMMARY_20260909.json",
+    "P77_pooled": false,
+    "new_primary_not_replaced": true,
+    "inference": "descriptive n2 paired training differences and per-instance conditional evaluation uncertainty; no stable-superiority or population-interval claim"
+  },
+  "new_scientific_exposure_at_preparation": 0,
+  "exposure_line": "matched_training_instances=1; fitted_arms=2; native_steps=286720; optimizer_steps=2048; final_eval_episodes=96; lr=0.0003; F_parameters=68553; G_parameters=66311; F_frozen_duration_parameters=2242; trainable_parameters=132622"
+}

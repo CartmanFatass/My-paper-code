@@ -1,0 +1,43 @@
+{
+  "question": "原节点已授予仅限E01的零新训练例外；是否保留现已按后续授权冻结的两旧底座C/F/dwell科学定义？",
+  "changes_if_approved": [
+    {
+      "target": "ACVC_FIXED_RETRACE_REUSE_E01_SCIENCE_CARD_20260909.md",
+      "from": "未冻结的零训练提案，类别条款冲突待裁决。",
+      "to": "采用具名B例外及四段准确文字；科学定义已冻结，规范由Root应用，仍没有源码或科学运行分配。"
+    }
+  ],
+  "if_refused": "按你的具体修订或停止指令处理当前卡；在有实际分配前不运行，不改写旧T/G阴性或恢复旧学习包。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260909_fixed_retrace_reuse_exception/archive/RESPONSE.md",
+      "quote": "Grant the object-limited B/EXPLORE exception for ACVC_FIXED_RETRACE_REUSE_E01 and permit only its named fixed-rule reuse comparison.",
+      "why": "完整原节点答案明确解决具名条款冲突，保持普通B与其余对象不变。"
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_FIXED_RETRACE_REUSE_E01_CONVERGENCE_INTAKE_20260909.md",
+      "quote": "The old card phrase \"non-saturated user coordinate\" was an inaccurate description. Correcting it preserves accepted implementation rather than introducing a new rule.",
+      "why": "已直接核对绑定源码；修正文义无需修改谓词或增加诊断运行。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260909_fixed_retrace_reuse_exception/archive/RESPONSE.md",
+      "quote": "The old F−C gains motivate this reuse question, but both used the same outcome-informed DENSE/8201 asset. They are neither dwell results nor F results on DENSE/8202.",
+      "why": "旧增益不等于本次复用成功，不能据卡冻结宣称稳定优势。"
+    }
+  ],
+  "uncertainty": [
+    "dwell及8202的F回报仍未知；两份底座都是旧训练、选择条件继续披露。",
+    "dwell采用F的耗时代理；约91秒过程估算并非实测完整新账单。",
+    "共享规范的准确应用与后续源码接受、运行分配分别由Root记录，当前没有新科学执行。"
+  ],
+  "cost": {
+    "compute": "本次0科学调用。冻结的未来定义为384回合/98304步，零新训练；完整上限180秒，内含30秒检查额度，尚未分配。",
+    "owner_time": "可异步查看；现有后续准备与无人委托允许冻结，无需逐项回复。",
+    "reversibility": "reversible",
+    "waits_on_this": "没有事项等待你的回复；后续实现和运行等待各自实际分配。"
+  },
+  "verdict_text": "Owner-delegated decision (unattended, 2026-09-03 instruction): (a). Freeze the exact corrected E01 scientific definition under Root's post-response preparation assignment, separately from the Pro class grant; allocate no source implementation or scientific invocation.",
+  "source": "docs/research/candidates/acvc/ACVC_FIXED_RETRACE_REUSE_E01_CONVERGENCE_INTAKE_20260909.md"
+}

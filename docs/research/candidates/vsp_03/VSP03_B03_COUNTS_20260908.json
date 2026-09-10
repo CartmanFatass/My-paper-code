@@ -1,0 +1,68 @@
+{
+  "object": "VSP03_B03",
+  "evidence_class": "B/EXPLORE",
+  "selection": "PRO_FINAL",
+  "response_commit": "861c5072160d624970875b7345c2f72e78183e53",
+  "recasts": 1,
+  "configuration_and_counts": {
+    "selected": true,
+    "learner_arms": [
+      "G"
+    ],
+    "training_seeds": [
+      5
+    ],
+    "parameter_count": 2083,
+    "optimizer_steps": 128,
+    "learning_rate": 0.001,
+    "training_joint_episodes": 16384,
+    "training_team_ticks": 655360,
+    "training_target_transitions": 1310720,
+    "final_evaluation_executions": [
+      "G_greedy",
+      "G_stochastic",
+      "R0",
+      "R"
+    ],
+    "joint_episodes_per_execution": 1024,
+    "evaluation_joint_episodes": 4096,
+    "total_joint_episodes": 20480,
+    "total_team_ticks": 819200,
+    "total_target_transitions": 1638400,
+    "additional_validation_episodes": 0,
+    "additional_validation_models": 0,
+    "additional_validation_optimizer_steps": 0,
+    "max_rollout_model_batch_calls": 2210,
+    "nested_candidate_searches": 0,
+    "trajectory_searches": 0,
+    "solver_calls": 0,
+    "whole_invocation_cap_s": 120,
+    "planning_anchor_s": 5.05,
+    "planning_anchor_is_upper_bound": false,
+    "host": "wsl_4070",
+    "device": "cpu",
+    "dtype": "float32",
+    "compute_threads": 1
+  },
+  "historical_exposure": {
+    "source": "b02_p10_result_20260907/summary.json",
+    "G_parameters": 2083,
+    "G_optimizer_steps": 128,
+    "G_initial_l2": 5.880751609802246,
+    "G_final_displacement_over_initial_l2": 0.37748837857977446,
+    "G_arm_wall_s": 1.4709916989668272,
+    "complete_pair_wall_s": 5.05
+  },
+  "current_actual_exposure": {
+    "model_constructions": 0,
+    "training_starts": 0,
+    "training_seeds": 0,
+    "simulation_episodes": 0,
+    "evaluation_episodes": 0,
+    "optimizer_steps": 0,
+    "replays": 0,
+    "profiling_calls": 0,
+    "result_bearing_invocations": 0
+  },
+  "exposure_line": "Consultation: zero new models/training starts/seeds/environment episodes/optimizer steps/evaluations/replays/profiling/invocations. Historical B02 G: 2083 parameters, 128 real Adam steps at lr0.001, initial total L2 5.8807516098, final displacement/initial L2 0.3774883786. Selected B03: 1 new G learner at seed5, 2083 parameters, 128 real Adam steps at lr0.001, 16384 training and2048 learner evaluation episodes; R0/R add2048 shared-world reference episodes. The historical displacement supports that the recipe can move; it does not predict seed5 displacement or gain."
+}

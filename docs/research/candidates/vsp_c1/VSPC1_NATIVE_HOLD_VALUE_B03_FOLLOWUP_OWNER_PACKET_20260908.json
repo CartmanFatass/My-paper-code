@@ -1,0 +1,50 @@
+{
+  "question": "是否另行分配一个独立训练对，检查共同归一化下的局部门控优势能否重复？",
+  "changes_if_approved": [
+    {
+      "target": "P60完成后的一个新VSPC1有界任务",
+      "from": "P60的单对训练及完整intake结束，没有追加调用",
+      "to": "若另行分配，保持B03归一化、GATED/完整MLP/H比较、原生回报和完整预算，只用一组事前固定的新独立训练与评价随机性；保留全部结果，与旧未归一化两对分开"
+    }
+  ],
+  "if_refused": "保留B03的局部UP、MLP略低于悬停和全部不利回合，不追加训练；旧两对及家族、生命周期、优先级、UAV正式进入状态均不变。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B03_INTAKE_20260908.md",
+      "quote": "| GATED−MLP | +.03980171530455754 | .006008657101475142 | 4/32 |",
+      "why": "共同归一化下，一次完整真实训练仍有超过0.01门槛的原生收益，足以提出有限重复性检查。"
+    },
+    {
+      "path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B03_INTAKE_20260908.md",
+      "quote": "| GATED−H | +.03521279747565949 | .010408850908328956 | 9/32 |",
+      "why": "门控相对固定悬停也有正的平均差；下一观测可直接检查新训练随机性，无需先做精确归因或策略搜索。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B03_INTAKE_20260908.md",
+      "quote": "| MLP−H | −.004588917828898052 | .012026063667580491 | 19/32 |",
+      "why": "MLP平均仍略低于悬停，而且门控也有不利回合；不能宣称比较器已修好或控制可靠。"
+    },
+    {
+      "path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B03_RESULT_EVIDENCE_20260908.md",
+      "quote": "There is no training-seed variance estimate.",
+      "why": "新规则只有一个训练对，32个评价回合不能补足训练样本，也不能把旧规则两对合并成三对。"
+    }
+  ],
+  "uncertainty": [
+    "额外640个价值门控参数、共同梯度裁剪、价值量纲与策略优化相互作用、训练随机性仍可能解释收益。",
+    "新旧规则及随机性同时变化，不能据历史差值确认归一化的因果作用。",
+    "调好的同信息headroom仍缺失；悬停是已达到的未调优参考，不是上界，也不增加B的启动条件。",
+    "下一对可能无收益或相反，必须保留，不做跑到全正为止的选择。",
+    "当前没有新主键、卡、源码任务或科学调用；是否分配由Portfolio经Root给出新命令。"
+  ],
+  "cost": {
+    "compute": "若另行分配：2×512×256训练步加3×32×256评价步，共286720原生团队步、2048次Adam、96次最终评价；512次统计合并各512个目标，共262144标量行，四轮价值损失1048576目标行项。无嵌套搜索或额外模型调用。完整上限1800秒/臂、3600秒/对；本对310.79秒只作参考，额外验证与算法工作分列，不增加原生校准调用。",
+    "owner_time": "可异步查看，无需立即回复。",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing; P60已经结束，没有等待批准的后续实验"
+  },
+  "verdict_text": "Recommend one later independent matched GATED-V/full-MLP/H pair under the unchanged B03 normalization, native measurement and complete budgets; retain every outcome and keep it separate from the unnormalized regime. P60 is complete and allocates no further run.",
+  "source": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B03_INTAKE_20260908.md"
+}

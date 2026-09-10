@@ -1,0 +1,43 @@
+{
+  "question": "是否把一个明确的双端残差学习对照提交给原Convergence一次，还是因区分价值不足而结束P56来源工作？",
+  "changes_if_approved": [
+    {
+      "target": "P56来源问题与Convergence任务",
+      "from": "旧D6家族暂停，无新对象",
+      "to": "仅提交一次已界定的残差学习问题；卡、模型和实验仍未选择"
+    }
+  ],
+  "if_refused": "结束本次来源任务并向Root返回空出的执行位置；不重开D6，不改生命周期或计数。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_NATIVE_RETURN_COMPOSITION_P56_SOURCE_INTAKE_20260908.md#3-the-loss-distinction-including-its-containing-alternatives",
+      "quote": "Its gradient is2(e_t−e_4)(grad V_t−grad V_4); it couples errors and is not a sum of independent MC losses.",
+      "why": "双端求梯度构成实际优化差别；完整MC仍提供绝对回报锚点，观察可以直接读取原生收益。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_NATIVE_RETURN_COMPOSITION_P56_SOURCE_INTAKE_20260908.md#3-the-loss-distinction-including-its-containing-alternatives",
+      "quote": "generic residual regularization rather than the hold boundary explains any gain; sampled successor noise or omitted actor history makes this coupling harmful",
+      "why": "它可能没有保持动作特有价值，并可能传播噪声；不能把已知残差算法包装成新恒等式。"
+    },
+    {
+      "path": "docs/research/candidates/ucope/UCOPE_UAV_MOTION_PREFIX_B02_P47_7002_AND_JOINT_TECHNICAL_ACCEPTANCE_20260908.md",
+      "quote": "mean T−G **−0.026701655118179134**",
+      "why": "较新的两组时长动作比较为负，不能把借用原生宿主视作成功。"
+    }
+  ],
+  "uncertainty": [
+    "一组新训练对只能判断该包的本地效果，不能判断稳定优势。",
+    "是否值得选取新家族以及是否属于RECAST仍由原方向节点裁决。",
+    "调优headroom缺失；全MLP已有非线性共享，H只是已达到的参考。"
+  ],
+  "cost": {
+    "compute": "本次新增科学调用为0；未选B候选为两次训练、286720原生步、2048 Adam、96最终评价，1800秒/臂、3600秒整对。",
+    "owner_time": "无需立即回复；可异步覆盖问题准备选择。",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing"
+  },
+  "verdict_text": "Recommend one Convergence question about the bounded residual-learning intervention; no card, run or direction re-entry is selected locally.",
+  "source": "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_NATIVE_RETURN_COMPOSITION_P56_SOURCE_INTAKE_20260908.md"
+}

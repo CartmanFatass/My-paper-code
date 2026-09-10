@@ -1,0 +1,234 @@
+{
+  "object": "FOLR-PUBLIC-LIFECYCLE-B02",
+  "evidence_class": "B/EXPLORE",
+  "technical_status": "accepted",
+  "source_sha": "434f10cf95f16dd342cbf754382aa76155fcd2b7",
+  "independent_unit": "one fresh matched training pair seed7802; final evaluation seed107802; episode rows are conditional rollouts",
+  "primary": {
+    "J_RETAIN": 1.3278124999999996,
+    "J_RESET": 3.250625,
+    "difference": -1.9228125000000003,
+    "rule": "RESET_ABOVE_MEI"
+  },
+  "arms": {
+    "RETAIN": {
+      "arm": "RETAIN",
+      "training_seed": 7802,
+      "evaluation_seed": 107802,
+      "launch_sha": "434f10cf95f16dd342cbf754382aa76155fcd2b7",
+      "status": "complete",
+      "training_episodes": 5000,
+      "training_ticks": 100000,
+      "optimizer_steps": 4969,
+      "evaluation_episodes": 32,
+      "evaluation_ticks": 640,
+      "evaluation_returns": [
+        -2.840000000000001,
+        3.1100000000000003,
+        -0.9999999999999988,
+        4.349999999999998,
+        11.33,
+        8.46,
+        -2.91,
+        -0.8799999999999999,
+        7.890000000000001,
+        -0.9400000000000015,
+        8.680000000000001,
+        6.4,
+        9.559999999999999,
+        -4.1099999999999985,
+        -0.21000000000000107,
+        3.8599999999999994,
+        0.6999999999999995,
+        -1.48,
+        -1.940000000000002,
+        -3.080000000000001,
+        -6.529999999999999,
+        0.9999999999999978,
+        -8.93,
+        -2.3899999999999992,
+        8.59,
+        8.86,
+        -0.3099999999999994,
+        3.3799999999999994,
+        -6.590000000000002,
+        8.179999999999998,
+        -4.9799999999999995,
+        -2.74
+      ],
+      "training_return_sum": -23580.79,
+      "training_events": {
+        "births": 21110,
+        "departures": 7855,
+        "survivor_opportunities": 46125,
+        "survivor_resets": 0
+      },
+      "evaluation_events": {
+        "births": 136,
+        "departures": 36,
+        "survivor_opportunities": 292,
+        "survivor_resets": 0
+      },
+      "mean_native_return": 1.3278124999999996,
+      "exposure": "100000 real native training ticks; 4969 actor/mixer RMSprop steps at lr=0.0005; 32 final greedy evaluation episodes",
+      "rng": "Python/global NumPy/Torch seeded before model construction; native traffic and replay share global NumPy; source epsilon selector uses Torch including greedy and terminal draws; all three reset to107802 for final evaluation",
+      "torch_version": "2.7.0+cu118",
+      "numpy_version": "1.26.3",
+      "torch_threads": [
+        1,
+        1
+      ],
+      "wall_seconds": 767.4808537570061,
+      "peak_rss_kib": 642872,
+      "external_resources": {
+        "wall_seconds": 767.84,
+        "user_cpu_seconds": 755.86,
+        "system_cpu_seconds": 12.87,
+        "peak_rss_kib": 658116
+      },
+      "artifact_root": "temp/directions/vap_folr_core/exp/public_lifecycle_b02_seed7802_retain",
+      "receipt": {
+        "assessed_at": "2026-09-09T20:09:12.751945Z",
+        "available_physical_bytes": 15637336064,
+        "captured_at": "2026-09-09T20:09:12.751662Z",
+        "cgroup_headroom_bytes": null,
+        "cgroup_memory_current_bytes": null,
+        "cgroup_memory_max_bytes": null,
+        "effective_available_bytes": 15637336064,
+        "effective_floor_pass": true,
+        "failure_reasons": [],
+        "measurement_source": "/proc/meminfo",
+        "minimum_available_bytes": 4294967296,
+        "passed": true,
+        "physical_floor_pass": true,
+        "schema_version": 1
+      }
+    },
+    "RESET": {
+      "arm": "RESET",
+      "training_seed": 7802,
+      "evaluation_seed": 107802,
+      "launch_sha": "434f10cf95f16dd342cbf754382aa76155fcd2b7",
+      "status": "complete",
+      "training_episodes": 5000,
+      "training_ticks": 100000,
+      "optimizer_steps": 4969,
+      "evaluation_episodes": 32,
+      "evaluation_ticks": 640,
+      "evaluation_returns": [
+        -0.5900000000000025,
+        -0.790000000000002,
+        1.599999999999999,
+        21.060000000000006,
+        6.44,
+        8.54,
+        8.359999999999998,
+        7.999999999999998,
+        -6.3500000000000005,
+        4.869999999999998,
+        -9.079999999999998,
+        10.800000000000002,
+        -2.4800000000000004,
+        -7.130000000000001,
+        -0.4999999999999974,
+        3.4900000000000007,
+        11.490000000000002,
+        -12.99,
+        -8.499999999999998,
+        9.720000000000002,
+        10.86,
+        7.59,
+        -3.860000000000001,
+        -5.049999999999997,
+        14.1,
+        10.649999999999999,
+        -0.5699999999999985,
+        8.849999999999998,
+        3.8399999999999954,
+        -16.020000000000003,
+        2.9699999999999975,
+        24.700000000000003
+      ],
+      "training_return_sum": -18991.150000000063,
+      "training_events": {
+        "births": 22474,
+        "departures": 10395,
+        "survivor_opportunities": 50469,
+        "survivor_resets": 50469
+      },
+      "evaluation_events": {
+        "births": 174,
+        "departures": 99,
+        "survivor_opportunities": 389,
+        "survivor_resets": 389
+      },
+      "mean_native_return": 3.250625,
+      "exposure": "100000 real native training ticks; 4969 actor/mixer RMSprop steps at lr=0.0005; 32 final greedy evaluation episodes",
+      "rng": "Python/global NumPy/Torch seeded before model construction; native traffic and replay share global NumPy; source epsilon selector uses Torch including greedy and terminal draws; all three reset to107802 for final evaluation",
+      "torch_version": "2.7.0+cu118",
+      "numpy_version": "1.26.3",
+      "torch_threads": [
+        1,
+        1
+      ],
+      "wall_seconds": 752.8093536479864,
+      "peak_rss_kib": 638404,
+      "external_resources": {
+        "wall_seconds": 753.11,
+        "user_cpu_seconds": 735.19,
+        "system_cpu_seconds": 19.38,
+        "peak_rss_kib": 666984
+      },
+      "artifact_root": "temp/directions/vap_folr_core/exp/public_lifecycle_b02_seed7802_reset",
+      "receipt": {
+        "assessed_at": "2026-09-09T20:23:41.064931Z",
+        "available_physical_bytes": 15635468288,
+        "captured_at": "2026-09-09T20:23:41.064649Z",
+        "cgroup_headroom_bytes": null,
+        "cgroup_memory_current_bytes": null,
+        "cgroup_memory_max_bytes": null,
+        "effective_available_bytes": 15635468288,
+        "effective_floor_pass": true,
+        "failure_reasons": [],
+        "measurement_source": "/proc/meminfo",
+        "minimum_available_bytes": 4294967296,
+        "passed": true,
+        "physical_floor_pass": true,
+        "schema_version": 1
+      }
+    }
+  },
+  "counts": {
+    "training_ticks": 200000,
+    "optimizer_steps": 9938,
+    "evaluation_episodes": 64,
+    "evaluation_ticks": 1280,
+    "total_native_ticks": 201280
+  },
+  "resources": {
+    "summed_complete_arm_wall_seconds": 1520.95,
+    "aggregate_cpu_seconds": 1523.3000000000002,
+    "study_critical_path_seconds": 1622,
+    "study_critical_path_scope": "supervisor first start20:09:12Z to final exit20:36:14Z; includes101s between arms and rounded timestamps, excludes prior staging and final collection"
+  },
+  "historical_b01": {
+    "evidence": "FOLR_PUBLIC_LIFECYCLE_B01_RESULT_SUMMARY_20260909.json",
+    "not_pooled": true
+  },
+  "execution": {
+    "accepted_submissions": 2,
+    "retries": 0,
+    "extra_evaluations": 0,
+    "local_fallbacks": 0,
+    "source_edits_during_execution": 0,
+    "handles": [
+      "folr-public-lifecycle-b02-retain-20260909",
+      "folr-public-lifecycle-b02-reset-20260909"
+    ]
+  },
+  "remaining": [
+    "DM scientific intake and Root integration",
+    "Root-triggered preservation/reclamation of remote worktree and scoped supervisor directories; no deletion performed",
+    "Previously policy-blocked local test scratch remains unchanged"
+  ]
+}

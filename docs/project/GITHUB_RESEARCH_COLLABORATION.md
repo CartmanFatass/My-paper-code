@@ -1,9 +1,10 @@
 # GitHub research collaboration
 
-Portfolio and each direction DM author research questions and intake complete Pro
-responses. Root executes Transport, verifies delivery facts and integrates commits.
+The designated DM authors research questions and intakes complete Pro responses,
+including Portfolio questions and scientific/specification conformance. Independent Luna/high Transport owns Pro browser work and delivery receipts;
+Root dispatches handoffs, forwards native returns and integrates accepted commits.
 Use `.agents/skills/hmasd-pro-research-prompt-author/SKILL.md` to create a fixed GitHub
-task and `.agents/skills/hmasd-chatgpt-pro-transport/SKILL.md` for Root's transport.
+task and `.agents/skills/hmasd-chatgpt-pro-transport/SKILL.md` for Transport operations.
 Scientific authority, experiment admission and Git rules remain in AGENTS.md.
 
 ## Task and delivery scope
@@ -14,8 +15,12 @@ Comments carry relevant evidence deltas, questions and attributed findings. Pres
 a read-back JSON snapshot of mutable discussion used as a task input.
 
 TASK.md states the natural-language question, applicable specifications, full input
-SHA and exact evidence paths. It names the corresponding shared direction branch, full
-base SHA, one response path and one Issue for the delivery comment. The author reuses
+SHA and exact evidence paths. The top-level SHA is the default scientific input;
+explicit method references may use another full commit_sha. Each listed path uses
+its own effective immutable SHA, preserving the original science card/evidence mapping.
+TASK adopts only the explicitly named applicable specification sections at their listed
+versions; other content cannot expand its reading manifest or scope. It names the
+corresponding shared direction branch, full base SHA, one response path and one Issue for the delivery comment. The author reuses
 that branch, establishing it on demand only if absent. Pro is authorized only to add the specified response file
 and its delivery-link comment. It cannot change source, main, PRs or direction state.
 An extra delivery branch requires a concrete special isolation reason in the handoff; there
@@ -37,34 +42,40 @@ observations, inferences and limitations. Routing fields stay in HANDOFF.json.
 
 ## Normal sequence
 
-1. Portfolio/DM renders TASK.md and HANDOFF.json with `delivery_mode=github_delivery`.
+1. The designated DM renders TASK.md and HANDOFF.json with `delivery_mode=github_delivery`.
    TASK_NOT_PUBLISHED is preparation state and has no provider payload. Follow the
-   normal worktree/integration rules; only Portfolio's owned scientific files have
-   the explicit direct-main exception.
+   normal worktree/integration rules. Root maintains control-plane files on main;
+   Pro response delivery uses the scoped non-main branch.
 2. Commit and push TASK.md, then bind its full commit SHA using the renderer. Confirm
    that the fixed TASK is published and that the delivery branch and Issue exist.
    Commit and push the updated internal handoff.
-3. Send the rendered handoff once to the configured Root endpoint. Root executes the
-   full Transport lifecycle locally: verify 6 Pro and the exact bound conversation,
-   send the supplied short prompt once, observe and archive. Root-authored requests
-   use CALLER_DIRECT without an app self-message. Preserve accepted request content;
+3. Send the rendered handoff once to the independent configured Transport endpoint,
+   omitting app model/thinking overrides. Native DM authors normally hand it to Root
+   for this dispatch, with source=actual author, parent=Root, operator=Transport.
+   Accepted legacy Root-authored requests retain their bound route. Transport verifies 6 Pro and the
+   exact conversation, sends the supplied short prompt once, observes and archives.
+   Preserve accepted request content and migration evidence under ROOT_OPERATIONS.md;
    uncertain acceptance is reconciled against the existing message before continuing.
+   Identify that handoff by the author's returned full commit and request ID. Read its
+   fixed TASK link and delivery scope from those bytes, even when main or an older checkout
+   has another HANDOFF at the same path. Before a new Send, reconcile this request with
+   the existing registry and current remote target; do not substitute an older queued prompt.
 4. Pro reads the fixed inputs and checks for this round's existing delivery. It adds
    only the named response file, reads back the committed file, and posts one comment
    with the immutable file link. Matching existing delivery is reused.
 5. Before its final chat reply, Pro makes fresh reads of delivery branch HEAD, the
    response at that commit and this round's Issue comment. It returns actual immutable
    delivery links, confirmed partial delivery with the remaining gap, or unresolved
-   status marked unconfirmed. Input evidence stays pinned to its original SHA.
-6. Root archives the exact short chat reply and actual delivery facts. Portfolio/DM
+   status marked unconfirmed. Each input path stays pinned to its original effective SHA.
+6. Transport archives the exact short chat reply and actual delivery facts. The designated DM
    reads the complete response at its fixed commit, preserves original bytes and the
    comment snapshot, and performs specification-conformance and scientific intake.
    Root checks the actual changed scope and integrates under the normal Git rules.
    A file delivery or process success alone is not a formed scientific decision.
 
-Root handles observation and notification under ROOT_OPERATIONS.md. Issue comments
+Transport handles Pro observation and parent receipts under ROOT_OPERATIONS.md. Issue comments
 do not themselves establish automatic wakeup. Completion goes to the declared parent;
-Root-local completion is recorded locally, and Root forwards direction science to DM.
+Transport returns native-direction receipts to Root, which forwards them to the original DM.
 Repeated notifications reuse the existing request/commit/path intake.
 
 ## Partial success and uncertainty
@@ -78,7 +89,9 @@ Repeated notifications reuse the existing request/commit/path intake.
 | Response exists, comment is missing | Verify the Issue. Only confirmed absence permits completing the same authorized comment; retain the response. |
 | Comment exists, chat receipt or notification is missing | Recover the immutable delivery links and notify once; do not create another response or comment. |
 | Shared direction branch advances | Add only the scoped response on current descendant HEAD, retaining fixed evidence and unrelated files. Reconcile the remote commit before local pushes; report non-descendant history or target conflicts. |
-| Main advances after input was bound | Keep the original input SHA. DM/Portfolio assesses material scientific changes at intake; unrelated commits do not invalidate the response. |
+| Accepted legacy TASK forbids branch-base changes | Preserve its exact Send and reply. New workflow wording does not amend the accepted TASK. Root arranges a bounded delivery correction after reconciling actual file/comment state; use a distinct request and response path, unchanged scientific evidence unless explicitly authorized. |
+| Cleanup removed or renamed a delivery target | Reconcile the affected request and recovery ref before further writes. Correct unsent handoffs and publish/bind their new TASK; preserve accepted/uncertain handoffs and Root resolves restoration or explicit correction. Branch cleanup alone never authorizes a replacement conversation or another Send. |
+| Main advances after input was bound | Keep each original effective input path/SHA mapping. The designated DM assesses material scientific changes at intake; unrelated commits do not invalidate the response. |
 | Provider access is unavailable | Record the precise unreadable paths or unavailable action and any confirmed partial delivery. A local tool's access does not establish Pro access. |
 | A conclusion needs correction | Ask the same node a new explicit question with a new output path and links to the prior response; preserve the original answer. |
 
@@ -87,3 +100,13 @@ and nonempty `fallback_reason`. An unsent request may use that fallback; an acce
 request requires reconciliation before any new prompt. Never send both modes for the
 same unresolved request. No cross-service atomicity or race-free write guarantee is
 implied by a separate branch.
+
+For branch-retirement routing and current-record reconciliation, use
+ROOT_OPERATIONS.md, “Current records, integration and cleanup”. Request-specific delivery,
+Send and archive fields belong to that request; carrying a prior round's fields into a new
+current record is not delivery evidence. Preserve them in their original request history.
+
+OWNER_DIRECT 2026-09-10: for new Portfolio requests the designated DM is the actual author/source,
+Root remains parent and dispatcher, and Transport remains operator. Root forwards complete responses
+to that DM for scientific/specification checking, then applies conforming decisions. Existing
+request identities and delivery clauses are unchanged; no new protocol or duplicate Send follows.

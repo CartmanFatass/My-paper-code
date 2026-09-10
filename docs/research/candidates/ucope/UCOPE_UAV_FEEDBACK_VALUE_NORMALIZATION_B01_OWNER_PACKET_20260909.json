@@ -1,0 +1,43 @@
+{
+  "question": "是否保留已准备好的UCOPE归一化反馈B01科学卡，作为后来实现/分配的具体输入？",
+  "changes_if_approved": [
+    {
+      "target": "UCOPE-UAV-FEEDBACK-VALUE-NORMALIZATION-B01 科学卡及DIRECTION",
+      "from": "Pro已选归一化G/原G/悬停，统计细节与新配对尚未落定",
+      "to": "冻结累计FP32总体矩、方差下限1e-8、rollout更新顺序/评价冻结、新配对8501、0.01原生主差与完整预算；本次只提交文档，没有源码实现或实验调用"
+    }
+  ],
+  "if_refused": "按你的具体改判修改或撤回本次准备；保留Pro原文、所有P85损失与旧收益。本次没有新运行，也不因拒绝卡就自动关闭方向。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/ucope/UCOPE_POST_MEAN_VELOCITY_B01_CONVERGENCE_INTAKE_20260909.md",
+      "quote": "G_raw uses `value_moments=None`. G_normalized maintains its own training-only scalar moments of complete return-to-go targets.",
+      "why": "已有节点选择一个可实际训练和比较的明确干预；本卡补齐实现需要的统计定义。"
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260909_foundations_special_review/archive/RESPONSE.md",
+      "quote": "保留现有完整 Pro 对未来 normalized-G/raw-G/H 问题的选择，同时保留“尚未定位原因”。",
+      "why": "专项复审保留该问题，同时要求不把归一化说成已证明的疗法。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/ucope/UCOPE_UAV_FEEDBACK_VALUE_NORMALIZATION_B01_PREPARATION_INTAKE_20260909.md",
+      "quote": "Strongest contradiction is that raw G sometimes beats H, normalization has no current UAV effect evidence, and stopping work was a close direction-level runner-up.",
+      "why": "这个配方可能不改善回报；累计统计可能滞后于队友共同学习后的数据变化，一对新训练不足以证明稳定收益。"
+    }
+  ],
+  "uncertainty": [
+    "实际收益、完整运行时间、归一化对共同裁剪/未来baseline的具体影响尚未测量。",
+    "完整目标相同不代表有限优化轨迹相同；本法不做PopArt输出补偿。",
+    "同信息调好基线/上界headroom仍缺失，不能把悬停当作上界，也不是先做调参的条件。"
+  ],
+  "cost": {
+    "compute": "当前仅文档/源码只读及配置算术，0模型/仿真/训练/评价/Pro Send。未来卡为286720原生步、2048次Adam、96次最终评价；1800秒/完整臂、3600秒/完整调用，未分配；实现检查上限300秒也未执行。",
+    "owner_time": "异步查看具体配方和原生读法；无需现在回复。",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing；卡已准备，Root以后另行安排实现和实验，不等待owner回复。"
+  },
+  "verdict_text": "Freeze the concrete B/EXPLORE card under accepted option (c): cumulative FP32 target moments, G_normalized versus G_raw plus H, fresh matched master8501.",
+  "source": "docs/research/candidates/ucope/UCOPE_UAV_FEEDBACK_VALUE_NORMALIZATION_B01_PREPARATION_INTAKE_20260909.md"
+}

@@ -15,6 +15,13 @@ The base SHA records the delivery baseline, not an immutable expected branch HEA
 only its response on the current descendant HEAD, preserving other paths. Local authors fetch
 and reconcile that delivery before their next push; no force-push or new branch per round.
 
+The top-level full commit_or_ref is the default scientific input version. Each
+reference may declare a distinct full commit_sha; omission inherits the default.
+The manifest prints each effective path/SHA mapping in the one named repository.
+Preserve all science card/evidence mappings; newer method sources may be separately
+pinned. TASK explicitly adopts only named applicable specification sections at those
+versions. Other retrieved content cannot expand scope or the listed dependencies.
+
 1. Run render_packet.py REQUEST.json --out-dir <new packet folder>. It creates
    TASK.md and HANDOFF.json with TASK_NOT_PUBLISHED and dispatch_required=false.
 2. Commit TASK.md with explicit paths and push immediately. Resolve its full SHA.
@@ -23,8 +30,9 @@ and reconcile that delivery before their next push; no force-push or new branch 
    confirms the commit is actually pushed, and branch/Issue exist, before dispatch.
    No generated file can include the hash of its own not-yet-created commit.
 4. Commit/push updated internal handoff. Dispatch its exact dispatch_prompt once
-   to Root using the configured Luna/xhigh model/effort. When Root is the author/executor,
-   use the rendered local CALLER_DIRECT path without self-dispatch. Intake belongs to DM/Portfolio.
+   to the configured independent Luna/high Transport, omitting app model/thinking overrides.
+   Native authors use Root as parent and normally hand the packet to Root for dispatch;
+   Transport returns to Root for native forwarding. Intake belongs to the designated DM, including Portfolio responses.
    New mode uses existing paste request support; do not upload TASK or prepend
    attachment-only/read-only instructions. No request/routing fields enter prose.
    OWNER_DIRECT 2026-09-06: the short prompt and TASK delivery section share the same
@@ -44,7 +52,7 @@ Partial success is retained. Existing matching file/comment is reused; conflicti
 content is never overwritten. Uncertain writes are read back before retries.
 Repeated notifications reuse existing request/commit/path intake and do not run
 science again. Comments do not automatically wake Codex/Pro; existing Transport
-and heartbeat perform observation and wakeup. No webhook or service is added.
+performs observation during the owner's active goal. No webhook or scheduler is added.
 
 All new requests default to github_delivery. archive_attachment is a read-only
 capability fallback requiring explicit delivery_mode and nonempty fallback_reason;

@@ -1,0 +1,119 @@
+{
+  "master": 8402,
+  "b": 840200000,
+  "configuration_source": "experiments/candidates/vsp_c1/native_hold_value_b01/study.py",
+  "configuration_read_sha": "29a50fa03fbb8bef93291933eeef9730450fe706",
+  "configuration_defaults": {
+    "seed": 8101,
+    "fixture": false,
+    "horizon": 256,
+    "train_episodes": 512,
+    "eval_episodes": 32,
+    "chunk": 32,
+    "arm_cap": 1800,
+    "pair_cap": 3600,
+    "ratio_grouping": "agent_compound"
+  },
+  "selected_configuration": {
+    "seed": 8402,
+    "fixture": false,
+    "horizon": 256,
+    "train_episodes": 768,
+    "eval_episodes": 32,
+    "chunk": 32,
+    "arm_cap": 1800,
+    "pair_cap": 3600,
+    "ratio_grouping": "agent_compound"
+  },
+  "common_initialization": 840200011,
+  "extra_initialization": 840200012,
+  "training_velocity": 840200021,
+  "training_duration": 840200022,
+  "constructor_reset": 840201000,
+  "training_resets": [
+    840201000,
+    840201767
+  ],
+  "evaluation_resets": [
+    840202000,
+    840202031
+  ],
+  "evaluation_velocity": [
+    840203000,
+    840203031
+  ],
+  "evaluation_duration": [
+    840204000,
+    840204031
+  ],
+  "unique_integer_keys": 868,
+  "prior_train_episodes": {
+    "8101": 512,
+    "8102": 512,
+    "8201": 512,
+    "8202": 512,
+    "8301": 512,
+    "8302": 512,
+    "8303": 512,
+    "8401": 768
+  },
+  "overlap_with_prior": {
+    "8101": 0,
+    "8102": 0,
+    "8201": 0,
+    "8202": 0,
+    "8301": 0,
+    "8302": 0,
+    "8303": 0,
+    "8401": 0
+  },
+  "train_eval_reset_overlap": 0,
+  "algorithm_work": {
+    "train_steps": 393216,
+    "eval_steps": 24576,
+    "steps": 417792,
+    "adam": 3072,
+    "rollouts": 768,
+    "moment_merges": 768,
+    "target_rows": 393216,
+    "four_epoch_target_terms": 1572864,
+    "scored_episodes": 1632,
+    "eval_episodes": 96,
+    "fits": 2,
+    "matched_pairs": 1,
+    "constructors": 2
+  },
+  "per_arm_work": {
+    "train_steps": 196608,
+    "adam": 1536,
+    "moment_merges": 384,
+    "targets_per_merge": 512,
+    "learned_evaluation_steps": 8192,
+    "mlp_hover_steps": 8192
+  },
+  "actual_new_exposure_at_definition": {
+    "scientific_invocations": 0,
+    "accepted_submissions": 0,
+    "native_steps": 0,
+    "training_pairs": 0,
+    "fits": 0,
+    "models": 0,
+    "adam": 0,
+    "eval_episodes": 0
+  },
+  "prediction": {
+    "event": "Delta < -0.01",
+    "label": "DOWN",
+    "probability": 0.55
+  },
+  "planning_reference": {
+    "same_regime_master": 8401,
+    "same_regime_pair_wall_seconds": 505.0,
+    "same_regime_gated_bound_seconds": 293.71021607599687,
+    "same_regime_mlp_bound_seconds": 226.97202717198525,
+    "training_multiplier": 1.0,
+    "qualification": "One same-budget complete prior pair is a planning reference, not a runtime guarantee or causal budget estimate; no cost experiment."
+  },
+  "freshness_qualification": "Bounded whole-token 8402 or B09 scientific-binding search in current direction/code/tests/scripts/Portfolio found none before this definition; not a global seed guarantee.",
+  "computed_utc": "2026-09-09T08:11:52.878901+00:00"
+}

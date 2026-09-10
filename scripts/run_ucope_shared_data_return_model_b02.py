@@ -22,14 +22,15 @@ def publish(out, summary):
     (out / "summary.json").write_text(json.dumps(summary, indent=2, allow_nan=False) + "\n", encoding="utf-8")
 
 
-def run(out):
+def run(out, seed=SEED, object_id=OBJECT_ID, batches=None):
+    batches = BATCHES if batches is None else batches
     out = Path(out)
     out.mkdir(parents=True, exist_ok=True)
     model = ReturnModel()
-    summary = dict(object_id=OBJECT_ID, seed=SEED, independent_datasets=1, status="INCOMPLETE",
+    summary = dict(object_id=object_id, seed=seed, independent_datasets=1, status="INCOMPLETE",
                    branch="INCOMPLETE", training={}, evaluation={},
-                   selected_batches=BATCHES, selected_eval_episodes_per_context_policy=EVAL_EPISODES,
-                   cost_law="T_init + 1024*T_batch256_shared_fit + 32768*T_three_policy_eval + T_publish",
+                   selected_batches=batches, selected_eval_episodes_per_context_policy=EVAL_EPISODES,
+                   cost_law=f"T_init + {batches}*T_batch256_shared_fit + 32768*T_three_policy_eval + T_publish",
                    resources_status="resources_unmeasured")
 
     def check_time():
@@ -42,10 +43,10 @@ def run(out):
         summary["runtime"] = dict(python=sys.version, float_mantissa_bits=sys.float_info.mant_dig,
                                   device="cpu", compute_threads=1)
         check_time()
-        collect(model, summary["training"], check_time, batches=BATCHES)
+        collect(model, summary["training"], check_time, batches=batches, seed=seed)
         check_time()
         summary["final_policies"] = model.final_policies()
-        evaluate(summary["final_policies"], EVAL_EPISODES, summary["evaluation"], check_time)
+        evaluate(summary["final_policies"], EVAL_EPISODES, summary["evaluation"], check_time, seed=seed)
         check_time()
         differences = summary["evaluation"]["differences"]
         rule = reading_rule(differences["delta_native"]["mean"], differences["delta_information"]["mean"],

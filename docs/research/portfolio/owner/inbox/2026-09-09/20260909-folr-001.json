@@ -1,0 +1,88 @@
+{
+  "id": "20260909-folr-001",
+  "created": "2026-09-09T03:19:30-07:00",
+  "direction": "vap_folr_core",
+  "tier": "direction",
+  "kind": "close-call",
+  "title": "公开生命周期后的幸存车记忆：提交原节点选择范围",
+  "context": "P77已确认原界面无法区分同槽换车。P78明确提出一个新的公共生命周期信息协议，两组都有事件信号、新车都清空，仅幸存车记忆保留规则不同。这里只发布问题；范围、训练卡和预算尚未选择。",
+  "options": [
+    {
+      "key": "a",
+      "label": "提交明确范围问题",
+      "consequence": "发布固定TASK/HANDOFF给Root，由原Convergence选择是否值得研究；不启动实验或由DM发送Pro。"
+    },
+    {
+      "key": "b",
+      "label": "保留无后继边界",
+      "consequence": "继续保留普通循环记忆及旧证据，不新增科学主张或计算。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "信息变化和比较器现已明确，值得让原节点衡量一次有限比较与零新增计算；清空损失不构成类型机制创新。",
+  "evidence": [
+    "docs/research/candidates/vap_folr_core/FOLR_P78_LIFETIME_INTERFACE_QUESTION_INTAKE_20260909.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-09.md#L6",
+  "brief": "docs/research/portfolio/owner/briefs/vap_folr_core/2026-09-09_P78-lifetime-question.md",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": {
+    "question": "是否把明确公开生命周期信息后的幸存车记忆问题提交原Convergence，考虑一次有限真实学习比较？本次只发布问题。",
+    "changes_if_approved": [
+      {
+        "target": "FOLR Convergence 的新问题",
+        "from": "P77 在原信息界面下没有就绪后继",
+        "to": "前瞻询问是否选择公开生命周期的新版本；两组都得到事件信号并区分新车与幸存车"
+      }
+    ],
+    "if_refused": "保留无后继边界与普通循环记忆，不新增计算，不改旧任务、旧结果、ACTIVE/MEDIUM 或历史暂停。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/vap_folr_core/FOLR_P78_LIFETIME_INTERFACE_QUESTION_INTAKE_20260909.md",
+        "quote": "Adding it to **both** learned actors matters: otherwise RESET's hidden-state discontinuity could itself be an extra event signal unavailable to RETAIN.",
+        "why": "比较器能使用同一事件信息，出生处理一致，剩余差异是幸存车记忆保留规则及其训练后果。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/vap_folr_core/FOLR_P78_LIFETIME_INTERFACE_QUESTION_INTAKE_20260909.md",
+        "quote": "The recommendation is a close call because generic RETAIN is already the standard history path and a reset loss would add no new typed algorithm.",
+        "why": "即使清空记忆损失回报，也可能只是说明一种已知有害处理有成本；公开事件后的结论不适用于原私有信息任务。"
+      }
+    ],
+    "uncertainty": [
+      "实际多步回报、事件机会和小预算下的学习能力未测；不先做诊断或成本探针。",
+      "完整GRU包含队友历史，不能改称严格自有祖先的类型机制。",
+      "训练卡、MEI、准确训练配置与预算均未分配；原节点决定是否选择这个方向范围。"
+    ],
+    "cost": {
+      "compute": "准备0次科学调用。未分配的两组一实例规模为201280原生步、9938次RMSprop、66783360个回放GRU行前向；实际耗时未知，1800秒/组仅为备选完整停止包络。",
+      "owner_time": "可异步查看；不等回复继续已授权的问题准备。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing；Root收到已发布问题后才负责派送。"
+    },
+    "verdict_text": "**Recommendation to Convergence:** select the explicitly public-lifecycle extension for one\nbounded real B, narrowly.",
+    "source": "docs/research/candidates/vap_folr_core/FOLR_P78_LIFETIME_INTERFACE_QUESTION_INTAKE_20260909.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-09T10:46:55+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "AGENTS.md",
+      "record": "docs/research/candidates/vap_folr_core/FOLR_P78_LIFETIME_INTERFACE_QUESTION_INTAKE_20260909.md#7-terminal-transport-blocker-factual-intake-and-recovery-boundary",
+      "state": "blocked",
+      "summary": "依AGENTS第3节记录发送阻塞：两次既有点击均无已确认发送，指定GitHub位置无完整答复；没有形成Pro决定。既有自动执行项仅指问题发布，新范围、训练卡及预算仍未选择，本次不追加发送。"
+    },
+    {
+      "at": "2026-09-09T16:25:29+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/vap_folr_core/pro_packets/20260909_p78_public_lifecycle_convergence/archive/RESPONSE.md",
+      "record": "docs/research/candidates/vap_folr_core/FOLR_P78_LIFETIME_INTERFACE_QUESTION_INTAKE_20260909.md#8-formed-convergence-decision-and-new-root-allocation",
+      "state": "applied",
+      "summary": "原问题经Root授权恢复后收到完整Pro答复，范围已按原节点选择应用；旧发送阻塞保留。此项原自动执行a仍仅指问题发布。Root后续单独分配的一对训练及新卡另记，尚无性能结果。"
+    }
+  ]
+}

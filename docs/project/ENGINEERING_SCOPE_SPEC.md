@@ -2,7 +2,8 @@
 
 Status: confirmed by the owner 2026-09-03 (20:05 PDT; two tiers, the §4 list, the §5 budgets and
 the §7 application all accepted as drafted). Normative for every agent runtime; cited by
-`AGENTS.md` §8, the Codex subagent definitions, and the outsource contract template.
+`AGENTS.md` §8 and the Codex subagent definitions. Section 7 also maintains the owner-approved
+2026-09-10 code-task specification, delegation and review method.
 
 ## 1. Purpose
 
@@ -22,7 +23,7 @@ never an instruction to follow; this document is the exception only because the 
 
 | Tier | Paths | Obligation | Compatibility |
 | --- | --- | --- | --- |
-| **Core** | `hmasd/`, `ha_ctse_process/`, `envs/`, `scripts/hmasd_*.py`, `main.py`, `config*.py`, `train_multiproc_config_1.py` | runnable, behaviour-preserving, tested at the boundary it changes | preserved: routes, checkpoint formats, RNG streams, numerical semantics, public function signatures |
+| **Core** | `hmasd/`, `ha_ctse_process/`, `envs/`, `scripts/hmasd_*.py`, `experiments/launchers/main.py`, `configs/config*.py`, `experiments/launchers/train_multiproc_config_1.py` | runnable, behaviour-preserving, tested at the boundary it changes | preserved: routes, checkpoint formats, RNG streams, numerical semantics, public function signatures |
 | **Research** | `experiments/candidates/**`, `scripts/run_*.py`, `tests/experiments/**`, `temp/directions/**` | runnable now, readable later, disposable when the object closes | none: an attempt may break its own earlier attempts, need not support resume, and is never a dependency of core |
 
 A research directory that core imports (today three prior attempts loaded by
@@ -155,16 +156,16 @@ never grows a service layer: no daemons, no dashboards, no control plane in Pyth
 ## 7. How agents apply this
 
 Apply `MARL_RUNTIME_ENGINEERING_SPEC.md` and the actual object appendix before interpreting §4/§5.
-CM records full work/cost, shapes, topology/state ownership, protected semantics, measurement
-scope, validation and stop. Semantic implementation follows that contract; routine implementation
-does not choose batching/native/parallel/reduction/CPU semantics. Independent review checks full
+DM records full work/cost, shapes, topology/state ownership, protected semantics, measurement
+scope, validation and stop. A delegated Implementer follows that contract and returns any needed
+scientific-meaning change to DM. Independent review checks full
 dependencies, internal threads, scientific outputs and publication as well as complete cost scope.
 No new profiling task or launch condition follows merely from this reference.
 
 - **Direction Manager**: the card names every §4 item the object needs, with the quantity that
   needs it; an object that needs none says so in one line. The DM returns a result whose
   implementation exceeded a §5 budget with the breach recorded.
-- **Code Manager and implementers**: before writing, list the §4 items the change would add and
+- **DM and Implementer**: before writing, list the §4 items the change would add and
   the card line for each; if there is none, do not add it. The smallest runnable path is the
   correct one. A guard is a bug until a card asks for it.
 - **Reviewer and critic**: the first check on any research diff is §4 and §5, before correctness.
@@ -172,6 +173,64 @@ No new profiling task or launch condition follows merely from this reference.
   is not a finding.
 - **Self-check line**: every commit touching research code ends its message with
   `scope: none` or `scope: <item> per <card line>`.
+
+### 7.1 Code-task specification: L0 with optional L1–L3 detail
+
+Every code task, whether implemented directly or delegated, has five concise L0 facts:
+deliverable/goal; owned paths, checkout and entry points; preserved semantics; acceptance with
+applicable card/specification sections; budget and stop condition, including execution constraints.
+Existing accessible card sections supply their facts. Use section/version links and state only
+missing facts or this task's changes; no second contract document or full-history copy is required.
+
+| Detail | Add only when useful for the actual task |
+| --- | --- |
+| L0 | The five facts above; mandatory baseline, ordinary prose or bullets |
+| L1 | Interface, shape, dtype, state/array ownership and local code conventions |
+| L2 | State transitions, data/RNG flow and the specific logic that preserves the contract |
+| L3 | A local skeleton or relevant example with its assumptions and applicability limits |
+
+These are engineering specification detail levels adopted from the delegation benchmark, not
+scientific evidence classes, role counts, model choices or mandatory sequential stages. DM selects
+useful details from known failure risks. Benchmark fixtures/answers and its frozen task treatments
+remain separate evidence; they do not prescribe new research behavior. Do not turn a local example
+into a global convention or write extra details merely to claim a higher level.
+
+### 7.2 Direct work, delegation and acceptance
+
+DM implements directly by default and owns technical acceptance as well as separate scientific
+intake. Delegate one complete bounded implementation only when it saves material work, isolates
+substantial context or enables useful independent parallelism. Small edits and commands stay local.
+The Implementer owns its named edit/check scope; DM owns Git, review disposition and result-bearing
+execution. Reuse the same executor for corrections. Do not delegate and duplicate its work.
+Root retains main integration and accepts shared control-plane engineering without a direction DM.
+
+Scout, Implementer, Reviewer, Verifier, Operator and Critic return to their actual assigning DM
+(or Root for its own bounded work); they do not create another ordinary child chain. A missing
+specialist fact returns with the completed work and exact question so that the parent can resolve
+it or assign an independent sibling. Existing legacy tasks finish their accepted scope on their
+original return route. This is a working method, not a new approval or authorization boundary.
+
+Parent acceptance checks actual artifacts, affected behavior and credible focused check results,
+not a completion assertion. Do not routinely repeat all child commands or reread all inputs.
+Expand for a concrete contradiction, missing coverage, integration change or unresolved risk.
+Keep technical validity, scientific interpretation and dispatch/observation state distinct.
+
+### 7.3 Independent high-risk review
+
+An independent Reviewer is required for a high-risk diff affecting shared core, scientific meaning,
+numerics, RNG, replay/recurrent state, checkpoint compatibility, bit identity or external effects.
+Codex uses Astra/high, read-only. Ordinary mechanical edits use owner self-checks. Risk determines
+review needs, not whether implementation was delegated. Reviewer evidence is not permission or
+a scientific disposition; DM (or Root for control-plane work) resolves findings and accepts.
+
+Give the Reviewer independent initial context containing the fixed contract, protected invariants,
+source/diff and relevant evidence, without the implementer's discussion history. It inspects the
+reachable changed behavior and states exact failure, impact and residual limits. Verify meaningful
+counterexamples rather than merely repeating public examples. For numerical changes consider
+intermediate operations, reduction/normalization, masking and gradients over the contract's actual
+input range; do not impose arbitrary extreme tolerances or unrequested domains. For state/RNG
+changes inspect ownership, lifetime, ordering and consumers. Reuse that Reviewer for correction
+checks. High-risk review does not create another research launch condition or test budget.
 
 ## 8. What this does not change
 

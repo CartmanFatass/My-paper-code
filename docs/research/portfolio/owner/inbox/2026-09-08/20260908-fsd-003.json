@@ -1,0 +1,82 @@
+{
+  "id": "20260908-fsd-003",
+  "created": "2026-09-08T04:53:25-07:00",
+  "direction": "flexible_skill_duration",
+  "tier": "direction",
+  "kind": "portfolio",
+  "title": "P44: FSD post-B02 direction recommendation for Convergence",
+  "context": "Two independent trained pairs show a large supplied-rule package gain, with public G still ahead. DM recommends ending this limited extension and retaining the ordinary-family pause, while presenting one finite H/fair-D0 comparison as the alternative. This advisory is not a formed Direction decision, Portfolio lifecycle action, Pro Send or UAV entry.",
+  "options": [
+    {
+      "key": "ratify",
+      "label": "Support the DM recommendation for the proper-node question",
+      "consequence": "Support the stated advice; subsequent authoring/delivery still needs its named allocation and family disposition remains with Convergence."
+    },
+    {
+      "key": "refuse",
+      "label": "Reject this direction recommendation",
+      "consequence": "Revise the advice without changing prior results or releasing a successor."
+    },
+    {
+      "key": "amend",
+      "label": "Amend the decision question or recommendation",
+      "consequence": "Apply the specified amendment within current authority; no automatic scientific invocation follows."
+    }
+  ],
+  "recommended": "ratify",
+  "auto_applied": null,
+  "dm_reason": "The selected learning and recurrence question is answered; another toy ranking cannot instantiate the missing UAV intervention.",
+  "evidence": [
+    "docs/research/candidates/flexible_skill_duration/FSD_POST_B02_QUESTION_P44_ASSESSMENT_20260908.md",
+    "docs/research/candidates/flexible_skill_duration/FSD_POST_B02_QUESTION_P44_EXPOSURE_AND_COST_20260908.json"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-08.md#L36",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否支持把结束当前公开续约混合路线的有限扩展作为 DM 方向建议，交下一次已授权的 Convergence 裁决？",
+    "changes_if_approved": [
+      {
+        "target": "P44 assessment §5 的方向建议",
+        "from": "DM 已提出建议，尚无 Direction 裁决",
+        "to": "所有者支持该建议；后续仍按明确任务取得完整 Convergence 裁决，不自动发送或运行"
+      }
+    ],
+    "if_refused": "按回复修订建议；保留 B01/B02、原普通分支暂停和零后继运行边界。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/flexible_skill_duration/FSD_POST_B02_QUESTION_P44_ASSESSMENT_20260908.md",
+        "quote": "The fresh-learning advantage and its recurrence are now observed.",
+        "why": "第三个相同配对主要增加种子覆盖，已选问题的直接读数已经到达。"
+      },
+      {
+        "path": "docs/research/candidates/flexible_skill_duration/FSD_POST_B02_QUESTION_P44_ASSESSMENT_20260908.md",
+        "quote": "There is no corridor public-change flag or applied lease\nrenewal input at this inspected interface.",
+        "why": "现有 UAV 执行路径不接收当前 H 的干预量，玩具收益不能直接记作 UAV 迁移。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/flexible_skill_duration/FSD_NATIVE_RENEWAL_LEARNING_B02_INTAKE_20260908.md",
+        "quote": "The observed package gain now occurs in two independently trained pairs on this\nhost; stable seed-population superiority and learned renewal remain unsupported.",
+        "why": "两次真实训练后的大幅收益使另一项有界性能比较仍有价值；停止建议不是负面实验结论。"
+      }
+    ],
+    "uncertainty": [
+      "当前两组不能估计稳定的训练种子总体优势。",
+      "公开规则、不同数据、优化暴露与 actor 的作用尚未分离；这不是开展合理 B 的通用障碍。",
+      "若节点重视固定时钟排名，备选 H/D0/G 可用一对新训练、64000 训练转换和 96 个终点回合回答局部问题。",
+      "任何 UAV 后继须明确实际内部技能到运动动作的路径；本项没有打开新家族或认定 UAV 进入。"
+    ],
+    "cost": {
+      "compute": "P44 新科学调用为 0。备选而未选择的 H/D0/G 上限分别为 900/1200/60 秒，合计 2160 秒；D0 1051.6405 秒仅是旧成本式锚，不是新运行实测保证。",
+      "owner_time": "可异步支持、拒绝或修改，无需现在回复。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing；P44 不等回复。后续 Pro 作者与交付任务须由 Portfolio 明确下达。"
+    },
+    "verdict_text": "建议不再重复已回答的 C/H 问题，并把“结束这次公开续约混合路线的有限扩展、保留原普通分支暂停”交给 Convergence 裁决；一次同预算 H/D0 比较作为明确的备选，不把它设成 UAV 的通用前置条件。当前只发布建议，没有执行方向关闭或后继实验。",
+    "source": "docs/research/candidates/flexible_skill_duration/FSD_POST_B02_QUESTION_P44_ASSESSMENT_20260908.md"
+  },
+  "starred": true
+}

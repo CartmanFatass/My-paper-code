@@ -3,14 +3,23 @@ Binding structure: `systems / information flow` — role-to-role weights aggrega
 
 # FRRIE R09 third-root science card — 2026-09-05
 
-Status: `FROZEN / INCOMPLETE_ATTEMPT / CAUSE_UNREPRODUCED / A_RECON_NEXT`.
+Status: `FROZEN / P22_INCOMPLETE_ATTEMPT / NO_RETRY_ALLOCATED`.
 Object ID: `FRRIE-B01-CONTACT-R128-LR003-R09-THIRD-ROOT-20260905`.
 
-Current boundary: accepted source43eec21e and sole task frrie_b01_contact_r09_43eec21e
+Current boundary (P22, 2026-09-07): the separately allocated original-source offline
+system312 chain completed setup and reached native evaluation, then raised a
+`TypeError` in dataclass handling during training-input construction. Whole-chain
+wall61.54s; no summary, primary or exact optimizer counters survived. The
+[P22 intake](FRRIE_R09_OFFLINE_P22_INTAKE_20260907.md) applies
+`R09_INVALID_INCOMPLETE`, with source-flow work bounds and cause unclassified.
+The question, six-branch rule and prediction remain unchanged; no retry or successor
+is allocated. The original attempt and intervening A observations remain separate.
+
+Historical first-attempt boundary: accepted source43eec21e and task frrie_b01_contact_r09_43eec21e
 ended after16 seconds with exit139 and no published scientific witness. The exact attempt
 is intaken in `FRRIE_R09_INCOMPLETE_INTAKE_20260905.md`; its cause is not classified.
-The original question and rule below are unchanged. A separate bounded A/RECON is selected;
-no full scientific restart or R10 is authorized by the incomplete observation.
+That intake selected a separate bounded A/RECON; the incomplete observation itself
+authorized no full scientific restart or R10.
 
 ## Class, authority, question and ceiling
 
@@ -184,6 +193,21 @@ scientific state. Each invocation gets its own fresh receipt. CPU FP32/Torch1/na
 is prospectively portable across configured Linux/Windows surfaces, not compiler-bit-identity
 pinned. Local fallback requires actual remote refusal, no accepted remote handle and a fresh
 destination admission; do not migrate live work.
+
+Prospective runtime amendment under P21 (2026-09-07): the separately allocated next
+system312 attempt uses original scientific source
+`43eec21e9584c83e5e8d940402d7e4570b454e59`, a dedicated FRRIE CPython 3.12.3 environment
+and the retained CBSC 23-wheel set, with NumPy 1.26.3/Torch 2.7.0+cu118 and all dependency
+pins unchanged. [P21 offline handoff](FRRIE_R09_OFFLINE_RUNTIME_P21_HANDOFF_20260907.md)
+binds the exact source/input/command paths and complete setup-through-R09 accounting.
+CPU FP32, original FP64 reductions, Torch1, four-worker/native32 profile, fixed pdb
+input, root3, comparison, counts, predictions and caps remain unchanged. This amendment
+authorizes preparation only: no setup or learner invocation is released. The old uv
+substrate's A03 stop and every historical failure remain; shared package imports do not
+establish FRRIE native or learner readiness.
+
+P22 subsequently allocated that one exact chain; its incomplete outcome is recorded
+in the current boundary and linked intake above. P22 supplies no retry authorization.
 
 ## Meaning-complete engineering assignment and ratified exception
 

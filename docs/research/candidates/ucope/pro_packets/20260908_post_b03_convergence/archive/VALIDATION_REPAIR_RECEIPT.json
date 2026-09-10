@@ -1,0 +1,169 @@
+{
+  "request_id": "2026-09-08-ucope-post-b03-convergence-01",
+  "repair_kind": "pre-page transport metadata completion, same request",
+  "reported_blocker": {
+    "reporter": "Root forwarding Transport",
+    "text": "REQUEST.json omitted decision_authority=pro_final; no provider conversation opened, prompt pasted, Send or scientific exposure",
+    "direct_DM_check": "old REQUEST has no decision_authority; old bound HANDOFF.transport_request already carries all valid transport fields"
+  },
+  "original_bound_handoff_commit": "eb69c9b21ee6acede4492d05a68a527400f23910",
+  "fixed_task_commit": "6307d2fd9f3911ef1dd7d3b7c7c154bfaa766fa8",
+  "unchanged_scientific_input_commit": "f3ac3991ff30a603adc111cead2e3bd38f6783ca",
+  "task_url": "https://github.com/CartmanFatass/My-paper-code/blob/6307d2fd9f3911ef1dd7d3b7c7c154bfaa766fa8/docs/research/candidates/ucope/pro_packets/20260908_post_b03_convergence/TASK.md",
+  "added_REQUEST_fields": [
+    "conversation_binding_key",
+    "conversation_reuse_required",
+    "creator_thread_id",
+    "decision_authority",
+    "direction_ids",
+    "dispatch_mode",
+    "operator_model",
+    "operator_reuse_required",
+    "operator_thinking",
+    "operator_thread_id",
+    "prompt",
+    "provider_context_reset_evidence",
+    "provider_requirement",
+    "requested_conversation_id",
+    "reset_invalid_provider_context",
+    "return_receipt_thread_id",
+    "return_route",
+    "source_mode"
+  ],
+  "field_source": "exact values copied from the existing bound HANDOFF.transport_request; every pre-existing author input remains equal",
+  "required_validator": "C:/Projects/HMASD/.agents/skills/hmasd-chatgpt-pro-transport/scripts/validate_request.py <input> --project-root C:/Projects/HMASD-worktrees/dm-ucope-native-return-prep-20260906",
+  "validator_runs": {
+    "canonical_REQUEST": {
+      "valid": true,
+      "request_id": "2026-09-08-ucope-post-b03-convergence-01",
+      "direction_id": "ucope",
+      "direction_ids": [
+        "ucope"
+      ],
+      "workflow_node": "em_convergence",
+      "conversation_binding_key": "em:ucope:convergence",
+      "requested_conversation_id": "6a9c6b1c-1c34-83e8-8ebc-dee64b334240",
+      "conversation_reuse_required": true,
+      "reset_invalid_provider_context": false,
+      "provider_context_reset_evidence": null,
+      "decision_authority": "pro_final",
+      "direction_path": "C:\\Projects\\HMASD-worktrees\\dm-ucope-native-return-prep-20260906\\docs\\research\\candidates\\ucope\\DIRECTION.md",
+      "direction_paths": [
+        "C:\\Projects\\HMASD-worktrees\\dm-ucope-native-return-prep-20260906\\docs\\research\\candidates\\ucope\\DIRECTION.md"
+      ],
+      "source_mode": "paste",
+      "transport_input_mode": "paste",
+      "prompt_path": null,
+      "prompt_bytes": 1237,
+      "prompt_sha256": "713c6713edf7fd09bf757ab29d79c85c9f5c751cd3e7320765f6d92c912fdb39",
+      "companion_prompt": null,
+      "companion_prompt_sha256": null,
+      "source_thread_id": "01a081bd-a835-78c0-8a7a-89471ed262f8",
+      "creator_thread_id": "01a081bd-a835-78c0-8a7a-89471ed262f8",
+      "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+      "operator_thread_id": "01a07e52-f085-76a0-886a-4127f490421f",
+      "dispatch_mode": "REUSE_SINGLETON",
+      "owner_execution_instruction": null,
+      "operator_reuse_required": true,
+      "operator_model": "gpt-5.6-luna",
+      "operator_thinking": "high",
+      "provider_requirement": {
+        "model": "GPT-6 Astra",
+        "mode": "Pro",
+        "label": "6 Pro",
+        "selector_hint": "Latest"
+      },
+      "return_route": "PARENT_SESSION",
+      "return_receipt_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+      "return_receipt_ready": true,
+      "reference_files": [],
+      "packet": {
+        "packet_id": "2026-09-08-ucope-post-b03-convergence-01--ucope",
+        "canonical_form": "logical_packet_manifest",
+        "body_filename": "2026-09-08-ucope-post-b03-convergence-01--ucope__00_PROMPT.md",
+        "reference_filenames": [],
+        "manifest_filename": "2026-09-08-ucope-post-b03-convergence-01--ucope__PACKET_MANIFEST.json",
+        "archive_id": "2026-09-08-ucope-post-b03-convergence-01--ucope--attempt-01",
+        "response_filename": "2026-09-08-ucope-post-b03-convergence-01--ucope--attempt-01__02_RESPONSE.md",
+        "transport_facts_filename": "2026-09-08-ucope-post-b03-convergence-01--ucope--attempt-01__03_TRANSPORT_FACTS.json"
+      }
+    },
+    "bound_HANDOFF_transport_request": {
+      "valid": true,
+      "request_id": "2026-09-08-ucope-post-b03-convergence-01",
+      "direction_id": "ucope",
+      "direction_ids": [
+        "ucope"
+      ],
+      "workflow_node": "em_convergence",
+      "conversation_binding_key": "em:ucope:convergence",
+      "requested_conversation_id": "6a9c6b1c-1c34-83e8-8ebc-dee64b334240",
+      "conversation_reuse_required": true,
+      "reset_invalid_provider_context": false,
+      "provider_context_reset_evidence": null,
+      "decision_authority": "pro_final",
+      "direction_path": "C:\\Projects\\HMASD-worktrees\\dm-ucope-native-return-prep-20260906\\docs\\research\\candidates\\ucope\\DIRECTION.md",
+      "direction_paths": [
+        "C:\\Projects\\HMASD-worktrees\\dm-ucope-native-return-prep-20260906\\docs\\research\\candidates\\ucope\\DIRECTION.md"
+      ],
+      "source_mode": "paste",
+      "transport_input_mode": "paste",
+      "prompt_path": null,
+      "prompt_bytes": 1237,
+      "prompt_sha256": "713c6713edf7fd09bf757ab29d79c85c9f5c751cd3e7320765f6d92c912fdb39",
+      "companion_prompt": null,
+      "companion_prompt_sha256": null,
+      "source_thread_id": "01a081bd-a835-78c0-8a7a-89471ed262f8",
+      "creator_thread_id": "01a081bd-a835-78c0-8a7a-89471ed262f8",
+      "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+      "operator_thread_id": "01a07e52-f085-76a0-886a-4127f490421f",
+      "dispatch_mode": "REUSE_SINGLETON",
+      "owner_execution_instruction": null,
+      "operator_reuse_required": true,
+      "operator_model": "gpt-5.6-luna",
+      "operator_thinking": "high",
+      "provider_requirement": {
+        "model": "GPT-6 Astra",
+        "mode": "Pro",
+        "label": "6 Pro",
+        "selector_hint": "Latest"
+      },
+      "return_route": "PARENT_SESSION",
+      "return_receipt_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+      "return_receipt_ready": true,
+      "reference_files": [],
+      "packet": {
+        "packet_id": "2026-09-08-ucope-post-b03-convergence-01--ucope",
+        "canonical_form": "logical_packet_manifest",
+        "body_filename": "2026-09-08-ucope-post-b03-convergence-01--ucope__00_PROMPT.md",
+        "reference_filenames": [],
+        "manifest_filename": "2026-09-08-ucope-post-b03-convergence-01--ucope__PACKET_MANIFEST.json",
+        "archive_id": "2026-09-08-ucope-post-b03-convergence-01--ucope--attempt-01",
+        "response_filename": "2026-09-08-ucope-post-b03-convergence-01--ucope--attempt-01__02_RESPONSE.md",
+        "transport_facts_filename": "2026-09-08-ucope-post-b03-convergence-01--ucope--attempt-01__03_TRANSPORT_FACTS.json"
+      }
+    }
+  },
+  "fresh_author_render": {
+    "exit_code": 0,
+    "task_equal_published_bytes": true,
+    "separate_preparation_output_only": true,
+    "no_new_publication_or_task_binding": true
+  },
+  "byte_invariants": {
+    "TASK_sha256": "527a813bec83f7a046055b3a54712e8ff2378b96074d006be1b7d27ebbefe72b",
+    "HANDOFF_committed_canonical_LF_sha256": "2d08fbdeb8d3060ed25909a78d514601facf024f263df923092d62eb71209aba",
+    "HANDOFF_canonical_LF_unchanged": true,
+    "HANDOFF_worktree_line_endings": "existing CRLF; parsed payload and Git-normalized bytes unchanged",
+    "short_prompt_sha256": "713c6713edf7fd09bf757ab29d79c85c9f5c751cd3e7320765f6d92c912fdb39",
+    "request_identity_and_conversation_unchanged": true,
+    "all_original_REQUEST_values_unchanged": true
+  },
+  "exact_dispatch_prompt": "Execute the handoff packet at C:\\Projects\\HMASD-worktrees\\dm-ucope-native-return-prep-20260906\\docs\\research\\candidates\\ucope\\pro_packets\\20260908_post_b03_convergence\\HANDOFF.json exactly once.",
+  "repair_exposure": {
+    "new_scientific_invocations": 0,
+    "provider_page_actions_by_DM": 0,
+    "provider_sends_by_DM": 0,
+    "new_conversations": 0
+  }
+}

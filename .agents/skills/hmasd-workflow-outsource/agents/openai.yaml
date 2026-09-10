@@ -1,4 +1,0 @@
-interface:
-  display_name: "HMASD Workflow Outsource"
-  short_description: "Delegate workflow implementation to Terra"
-  default_prompt: "Use $hmasd-workflow-outsource to delegate one bounded workflow implementation to a native Terra/high agent."

@@ -1,0 +1,22 @@
+{
+  "question": "是否支持向现有Convergence节点提出一次原生成本动作目标B，还是维持当前家族PARK？这是方向建议，尚未决定或授权实验。",
+  "changes_if_approved": [
+    {"target": "CRTO当前已选样本的平衡残差家族", "from": "PARK，未选后继", "to": "仅在形成合规Convergence决定后，冻结并另行分配一次新目标B；当前只出版问题"}
+  ],
+  "if_refused": "维持PARK，保留所有旧结果和具体再入条件；不增加种子、预算或另一损失。",
+  "evidence_for": [
+    {"path": "docs/research/candidates/commitment_residual_triggered_options/CRTO_NATIVE_COST_P68_REENTRY_ASSESSMENT_20260908.md#2-what-was-checked-and-what-the-sources-change", "quote": "These sources change the proposed loss and comparator choice. They do not demonstrate residual superiority.", "why": "动作原生成本与已试中心化回归不同；给RAW同样目标，才能区分通用优化改善与残差对齐。"}
+  ],
+  "evidence_against": [
+    {"path": "docs/research/candidates/commitment_residual_triggered_options/CRTO_NATIVE_COST_P68_REENTRY_ASSESSMENT_20260908.md#4-native-prediction-honest-attainability-and-reading", "quote": "Therefore a few exact-count repairs cannot satisfy the proposal.", "why": "唯一合格比较仍为残差负值；旧种子0长期残差需改善超过0.009634，才能超过旧RAW的原始门槛。"},
+    {"path": "docs/research/candidates/commitment_residual_triggered_options/CRTO_BALANCED_FAMILY_CONVERGENCE_INTAKE_20260905.md", "quote": "B05's two joint seeds are comparator-limited; B06 doubling and B07 centering fail to repair their REPLAN exact counts.", "why": "不能把计数改变或小收益变成残差家族收益；旧失败与反向学习同时保留。"}
+  ],
+  "uncertainty": [
+    "新目标可能同样或更大幅度帮助RAW，也可能因饱和及参数干扰损害KEEP选择。",
+    "旧种子0为已看结果后的再用；没有独立复现、总体稳定优势或真实UAV结论。",
+    "新目标、当前节点负载及新增检查成本未测；没有调优同信息基线的headroom记录。"
+  ],
+  "cost": {"compute": "本轮0新增科学、模型、原生环境、评价或优化调用。若节点选择，拟1个旧联合种子、3条真实训练轨迹、774 gate Adam、24768样本、96评价决定；旧计时外推共享约515.38秒，拟每臂1200秒/共享1500秒，尚未分配。", "owner_time": "可异步查看本建议；无须逐次回复", "reversibility": "reversible", "waits_on_this": "nothing；发布不等待所有者回复，科学选择仍由现有Convergence形成"},
+  "verdict_text": "DM窄幅建议提交并选择这个具体B：原生成本信用有动作与回报路径，三臂共用目标且保留旧RAW比较线；但无对齐收益仍是更可能的预测。当前仅完成问题准备，PARK保持。",
+  "source": "docs/research/candidates/commitment_residual_triggered_options/CRTO_NATIVE_COST_P68_REENTRY_ASSESSMENT_20260908.md"
+}

@@ -1,0 +1,51 @@
+{
+  "object": "VSP03_B07",
+  "fit": 10804,
+  "source_sha": "adcff0a92559ac5552e24a9861e2b65572b478c5",
+  "cwd": "/home/wu/hmasd-worktrees/vsp03-b07-adcff0a92559ac5552e24a9861e2b65572b478c5",
+  "staging": {
+    "started_utc": "2026-09-10T16:51:16.593035+00:00",
+    "command": "git -C /home/wu/projects/HMASD fetch origin adcff0a92559ac5552e24a9861e2b65572b478c5 && git -C /home/wu/projects/HMASD worktree add --detach --no-checkout /home/wu/hmasd-worktrees/vsp03-b07-adcff0a92559ac5552e24a9861e2b65572b478c5 adcff0a92559ac5552e24a9861e2b65572b478c5 && git -C /home/wu/hmasd-worktrees/vsp03-b07-adcff0a92559ac5552e24a9861e2b65572b478c5 sparse-checkout set --no-cone /experiments/candidates/vsp_03/vsp03_b01/b01.py /experiments/candidates/vsp_03/vsp03_b02/b02.py /experiments/candidates/vsp_03/vsp03_b06/__init__.py /experiments/candidates/vsp_03/vsp03_b06/b06.py /experiments/candidates/vsp_03/vsp03_b06/launch_b07.sh /experiments/candidates/vsp_03/vsp03_b04/launch.sh /experiments/candidates/vsp_03/vsp03_b04/control.py /experiments/candidates/vsp_03/vsp03_b04/deadline.py /scripts/run_vsp03_b06.py /scripts/hmasd_resource_preflight.py /scripts/hmasd_platform.py && git -C /home/wu/hmasd-worktrees/vsp03-b07-adcff0a92559ac5552e24a9861e2b65572b478c5 config --worktree core.autocrlf false && git -C /home/wu/hmasd-worktrees/vsp03-b07-adcff0a92559ac5552e24a9861e2b65572b478c5 read-tree -mu HEAD && /home/wu/.venvs/hmasd/bin/python -c 'import json,pathlib,subprocess\nroot=pathlib.Path('\"'\"'/home/wu/hmasd-worktrees/vsp03-b07-adcff0a92559ac5552e24a9861e2b65572b478c5'\"'\"')\nfiles=['\"'\"'experiments/candidates/vsp_03/vsp03_b01/b01.py'\"'\"', '\"'\"'experiments/candidates/vsp_03/vsp03_b02/b02.py'\"'\"', '\"'\"'experiments/candidates/vsp_03/vsp03_b06/__init__.py'\"'\"', '\"'\"'experiments/candidates/vsp_03/vsp03_b06/b06.py'\"'\"', '\"'\"'experiments/candidates/vsp_03/vsp03_b06/launch_b07.sh'\"'\"', '\"'\"'experiments/candidates/vsp_03/vsp03_b04/launch.sh'\"'\"', '\"'\"'experiments/candidates/vsp_03/vsp03_b04/control.py'\"'\"', '\"'\"'experiments/candidates/vsp_03/vsp03_b04/deadline.py'\"'\"', '\"'\"'scripts/run_vsp03_b06.py'\"'\"', '\"'\"'scripts/hmasd_resource_preflight.py'\"'\"', '\"'\"'scripts/hmasd_platform.py'\"'\"']\nchecks={p: (root/p).read_bytes()==subprocess.check_output(['\"'\"'git'\"'\"','\"'\"'show'\"'\"','\"'\"'HEAD:'\"'\"'+p],cwd=root) for p in files}\nprint(json.dumps({'\"'\"'source_sha'\"'\"':subprocess.check_output(['\"'\"'git'\"'\"','\"'\"'rev-parse'\"'\"','\"'\"'HEAD'\"'\"'],cwd=root,text=True).strip(),'\"'\"'staged_files_match_committed_bytes'\"'\"':checks,'\"'\"'CRLF_files'\"'\"':[p for p in files if b'\"'\"'\\r\\n'\"'\"' in (root/p).read_bytes()],'\"'\"'git_status'\"'\"':subprocess.check_output(['\"'\"'git'\"'\"','\"'\"'status'\"'\"','\"'\"'--porcelain'\"'\"'],cwd=root,text=True),'\"'\"'existing_scientific_root'\"'\"':pathlib.Path('\"'\"'/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b07_10804_20260910'\"'\"').exists(),'\"'\"'existing_task_wrapper'\"'\"':pathlib.Path('\"'\"'/home/wu/.agent-tasks/vsp03-b07-10804-20260910'\"'\"').exists()}))\n'",
+    "returncode": 0,
+    "stdout": "{\"source_sha\": \"adcff0a92559ac5552e24a9861e2b65572b478c5\", \"staged_files_match_committed_bytes\": {\"experiments/candidates/vsp_03/vsp03_b01/b01.py\": true, \"experiments/candidates/vsp_03/vsp03_b02/b02.py\": true, \"experiments/candidates/vsp_03/vsp03_b06/__init__.py\": true, \"experiments/candidates/vsp_03/vsp03_b06/b06.py\": true, \"experiments/candidates/vsp_03/vsp03_b06/launch_b07.sh\": true, \"experiments/candidates/vsp_03/vsp03_b04/launch.sh\": true, \"experiments/candidates/vsp_03/vsp03_b04/control.py\": true, \"experiments/candidates/vsp_03/vsp03_b04/deadline.py\": true, \"scripts/run_vsp03_b06.py\": true, \"scripts/hmasd_resource_preflight.py\": true, \"scripts/hmasd_platform.py\": true}, \"CRLF_files\": [], \"git_status\": \"\", \"existing_scientific_root\": false, \"existing_task_wrapper\": false}\n",
+    "stderr": "From https://github.com/CartmanFatass/My-paper-code\n * branch                adcff0a92559ac5552e24a9861e2b65572b478c5 -> FETCH_HEAD\nPreparing worktree (detached HEAD adcff0a92)\n",
+    "readback": {
+      "source_sha": "adcff0a92559ac5552e24a9861e2b65572b478c5",
+      "staged_files_match_committed_bytes": {
+        "experiments/candidates/vsp_03/vsp03_b01/b01.py": true,
+        "experiments/candidates/vsp_03/vsp03_b02/b02.py": true,
+        "experiments/candidates/vsp_03/vsp03_b06/__init__.py": true,
+        "experiments/candidates/vsp_03/vsp03_b06/b06.py": true,
+        "experiments/candidates/vsp_03/vsp03_b06/launch_b07.sh": true,
+        "experiments/candidates/vsp_03/vsp03_b04/launch.sh": true,
+        "experiments/candidates/vsp_03/vsp03_b04/control.py": true,
+        "experiments/candidates/vsp_03/vsp03_b04/deadline.py": true,
+        "scripts/run_vsp03_b06.py": true,
+        "scripts/hmasd_resource_preflight.py": true,
+        "scripts/hmasd_platform.py": true
+      },
+      "CRLF_files": [],
+      "git_status": "",
+      "existing_scientific_root": false,
+      "existing_task_wrapper": false
+    }
+  },
+  "launch_status": "wrapper_returned",
+  "handle": "vsp03-b07-10804-20260910",
+  "command": "bash /home/wu/hmasd-worktrees/vsp03-b07-adcff0a92559ac5552e24a9861e2b65572b478c5/experiments/candidates/vsp_03/vsp03_b06/launch_b07.sh /home/wu/hmasd-worktrees/vsp03-b07-adcff0a92559ac5552e24a9861e2b65572b478c5",
+  "submission_utc": "2026-09-10T16:52:30.893856+00:00",
+  "return_utc": "2026-09-10T16:52:41.014914+00:00",
+  "ssh_returncode": 0,
+  "stdout": "",
+  "stderr": "Running as unit: vsp03-b07-10804-20260910.service; invocation ID: 3d9b2ce7fe1a4657a2319a83d7737bc4\nFinished with result: success\nMain processes terminated with: code=exited/status=0\nService runtime: 8.927s\nCPU time consumed: 9.244s\nMemory peak: 8.3M\nMemory swap peak: 0B\n",
+  "monitor_adoption": "pending",
+  "monitor_dispatch": {
+    "thread_id": "01a087e5-2044-7301-abb6-7a1709a98197",
+    "live_configuration": "C:/Projects/HMASD/.codex/hmasd-monitor.toml",
+    "accepted": true,
+    "recorded_utc": "2026-09-10T16:56:48.595578+00:00",
+    "root_destination": "01a07249-b095-7821-8ce2-e9c32ba85267",
+    "original_execution_owner": "/root/dm_vsp03_p54_reentry",
+    "collection": "pending Root-forwarded Monitor terminal receipt"
+  }
+}

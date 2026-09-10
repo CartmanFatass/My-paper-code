@@ -1,0 +1,276 @@
+{
+  "source_evidence_path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B01_COLLECTION_EVIDENCE_20260908.json",
+  "collected_evidence_commit": "3ff962acbfabaaa26e2f07d9d38fc2d94a1c3141",
+  "launch_sha": "65c89368ab0fc7402fb0e24254447629e829a12d",
+  "object": "VSPC1-NATIVE-HOLD-VALUE-B01",
+  "seed": 8101,
+  "independent_unit": "one matched training pair",
+  "independent_training_pairs": 1,
+  "hover_role": "fixed no-learning reference; excluded from independent training-run CSV",
+  "run_level_summary": {
+    "unit": "caller-declared independent training run",
+    "inference": "descriptive only; no confidence interval or success classification",
+    "groups": [
+      {
+        "task": "VSPC1-NATIVE-HOLD-VALUE-B01",
+        "arm": "GATED-V",
+        "n": 1,
+        "mean": 0.16488608226755597,
+        "sample_sd": null,
+        "min": 0.16488608226755597,
+        "max": 0.16488608226755597,
+        "runs": {
+          "8101": 0.16488608226755597
+        }
+      },
+      {
+        "task": "VSPC1-NATIVE-HOLD-VALUE-B01",
+        "arm": "MLP-V",
+        "n": 1,
+        "mean": 0.1355204237071898,
+        "sample_sd": null,
+        "min": 0.1355204237071898,
+        "max": 0.1355204237071898,
+        "runs": {
+          "8101": 0.1355204237071898
+        }
+      }
+    ],
+    "paired_differences": [
+      {
+        "task": "VSPC1-NATIVE-HOLD-VALUE-B01",
+        "arm": "GATED-V",
+        "baseline": "MLP-V",
+        "summary": {
+          "n": 1,
+          "mean": 0.02936565856036616,
+          "sample_sd": null,
+          "min": 0.02936565856036616,
+          "max": 0.02936565856036616
+        },
+        "differences": {
+          "8101": 0.02936565856036616
+        },
+        "unmatched_arm_seeds": [],
+        "unmatched_baseline_seeds": []
+      }
+    ]
+  },
+  "endpoint_means": {
+    "GATED-V": 0.16488608226755597,
+    "MLP-V": 0.1355204237071898,
+    "H": 0.14548553287361884
+  },
+  "contrasts": {
+    "GATED-V_minus_MLP-V": {
+      "mean": 0.029365658560366156,
+      "conditional_evaluation_se": 0.005274225674828064,
+      "evaluation_pairs": 32,
+      "positive_episode_differences": 26,
+      "negative_episode_differences": 6,
+      "zero_episode_differences": 0,
+      "minimum_episode_difference": -0.017314067614898565,
+      "maximum_episode_difference": 0.1149646401458361,
+      "negative_episode_identities": [
+        [
+          4,
+          810102004
+        ],
+        [
+          10,
+          810102010
+        ],
+        [
+          15,
+          810102015
+        ],
+        [
+          19,
+          810102019
+        ],
+        [
+          22,
+          810102022
+        ],
+        [
+          31,
+          810102031
+        ]
+      ],
+      "interpretation": "conditional episode description, not independent training replications"
+    },
+    "GATED-V_minus_H": {
+      "mean": 0.01940054939393713,
+      "conditional_evaluation_se": 0.010345689108976694,
+      "evaluation_pairs": 32,
+      "positive_episode_differences": 25,
+      "negative_episode_differences": 7,
+      "zero_episode_differences": 0,
+      "minimum_episode_difference": -0.10413267495360856,
+      "maximum_episode_difference": 0.1614442760299446,
+      "negative_episode_identities": [
+        [
+          5,
+          810102005
+        ],
+        [
+          8,
+          810102008
+        ],
+        [
+          9,
+          810102009
+        ],
+        [
+          14,
+          810102014
+        ],
+        [
+          16,
+          810102016
+        ],
+        [
+          17,
+          810102017
+        ],
+        [
+          19,
+          810102019
+        ]
+      ],
+      "interpretation": "conditional episode description, not independent training replications"
+    },
+    "MLP-V_minus_H": {
+      "mean": -0.009965109166429027,
+      "conditional_evaluation_se": 0.010730982423058314,
+      "evaluation_pairs": 32,
+      "positive_episode_differences": 16,
+      "negative_episode_differences": 16,
+      "zero_episode_differences": 0,
+      "minimum_episode_difference": -0.1430263913630504,
+      "maximum_episode_difference": 0.1018588519058611,
+      "negative_episode_identities": [
+        [
+          0,
+          810102000
+        ],
+        [
+          2,
+          810102002
+        ],
+        [
+          5,
+          810102005
+        ],
+        [
+          6,
+          810102006
+        ],
+        [
+          8,
+          810102008
+        ],
+        [
+          9,
+          810102009
+        ],
+        [
+          13,
+          810102013
+        ],
+        [
+          14,
+          810102014
+        ],
+        [
+          16,
+          810102016
+        ],
+        [
+          17,
+          810102017
+        ],
+        [
+          19,
+          810102019
+        ],
+        [
+          23,
+          810102023
+        ],
+        [
+          24,
+          810102024
+        ],
+        [
+          27,
+          810102027
+        ],
+        [
+          29,
+          810102029
+        ],
+        [
+          30,
+          810102030
+        ]
+      ],
+      "interpretation": "conditional episode description, not independent training replications"
+    }
+  },
+  "absolute_mei": 0.01,
+  "selected_region": "UP",
+  "margin_above_mei": 0.019365658560366157,
+  "working_prediction": {
+    "event": "WITHIN",
+    "probability": 0.65,
+    "observed": "UP",
+    "hit": false,
+    "binary_event_brier": 0.42250000000000004,
+    "calibration": "one forecast outcome does not establish calibration",
+    "owner_prediction": "not taken (unattended)"
+  },
+  "hold_exposure": {
+    "GATED-V": {
+      "training_nonzero_rows": 1491,
+      "training_rows": 131072,
+      "training_fraction": 0.01137542724609375,
+      "final_nonzero_rows": 90,
+      "final_rows": 8192,
+      "sampled_final_long_hold_fraction": 0.5
+    },
+    "MLP-V": {
+      "training_nonzero_rows": 1494,
+      "training_rows": 131072,
+      "training_fraction": 0.0113983154296875,
+      "final_nonzero_rows": 90,
+      "final_rows": 8192,
+      "sampled_final_long_hold_fraction": 0.49375
+    }
+  },
+  "per_valid_result": {
+    "valid_complete_training_pairs": 1,
+    "enclosing_command_wall_seconds": 308.63,
+    "pure_scientific_wall": "bounded by enclosing interval; admission/startup/exit split unmeasured",
+    "internal_pair_wall_seconds": 289.1486691409955,
+    "complete_arm_wall_upper_bounds_seconds": {
+      "GATED-V": 170.77636824501212,
+      "MLP-V": 157.3349626139924
+    },
+    "peak_rss_mib": 542.47265625,
+    "aggregate_cpu": "unmeasured"
+  },
+  "next_discriminator_work_only": {
+    "additional_matched_pairs_if_later_assigned": 1,
+    "real_fits": 2,
+    "training_team_steps": 262144,
+    "evaluation_team_steps": 24576,
+    "native_team_steps": 286720,
+    "adam_calls": 2048,
+    "final_evaluation_episodes": 96,
+    "new_invocation_authorized_by_this_analysis": false
+  },
+  "analysis_new_model_constructions": 0,
+  "analysis_new_environment_steps": 0,
+  "analysis_new_optimizer_calls": 0
+}

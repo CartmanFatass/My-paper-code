@@ -1,11 +1,6 @@
 # CBSC-SYSTEM-RUNTIME-A03 CM source and execution record
 
-**Terminal result: PATH_INCOMPLETE.** The sole invocation stopped during its first
-body acquisition (curl exit18). All21local containers were materialized, but no
-installation or metadata import ran. Whole wall9.65s is within600s.
-
-The following source-preparation boundary is historical, superseded by the
-integrated release and terminal evidence below. **Source prepared at that boundary.** Root integration of the
+**Source prepared; no invocation accepted or launched.** Root integration of the
 accepted source is an explicit P08 prerequisite. The reported main index-lock
 permission denial remains with Root; CM does not bypass it. Static checks below
 establish command/source conformance only, not candidate readiness.
@@ -82,13 +77,13 @@ Node wsl_4070 / SSH hmasd-wsl-node; existing /usr/local/bin/agent-task.
 Handle `cbsc-system-runtime-a03-20260907`. Detached exact integrated-SHA worktree:
 `/home/wu/hmasd-worktrees/cbsc-system-runtime-a03-20260907`. Output root `/home/wu/hmasd-worktrees/cbsc-system-runtime-a03-20260907/temp/directions/capability_bound_semantic_currentness/exp/system_runtime_a03_20260907`.
 Candidate `/home/wu/.venvs/hmasd-cbsc-system312-a03-20260907`.
-After Root integrates accepted bytes, replace only `ec8866b3968fcb1566976ce405d7c552d4d9a5de` below
+After Root integrates accepted bytes, replace only `ROOT_INTEGRATED_SHA` below
 with its supplied exact commit, stage that committed source in the detached
 worktree, and send this literal command directly to existing agent-task run.
 That SHA is identity metadata, not a source-currentness guard. No launch now.
 
 ```sh
-/usr/bin/time -f 'process_wall_seconds=%e peak_rss_kib=%M' -o /home/wu/.agent-tasks/cbsc-system-runtime-a03-20260907/process-time.txt /usr/bin/timeout --signal=KILL 540s /usr/bin/env -u BASH_ENV -u ENV -u ALL_PROXY -u all_proxy /bin/bash --noprofile --norc /home/wu/hmasd-worktrees/cbsc-system-runtime-a03-20260907/scripts/prepare_cbsc_system_runtime_a03.sh /home/wu/hmasd-worktrees/cbsc-system-runtime-a03-20260907 /home/wu/hmasd-worktrees/cbsc-system-runtime-a03-20260907/temp/directions/capability_bound_semantic_currentness/exp/system_runtime_a03_20260907 /home/wu/.venvs/hmasd-cbsc-system312-a03-20260907 ec8866b3968fcb1566976ce405d7c552d4d9a5de
+/usr/bin/time -f 'process_wall_seconds=%e peak_rss_kib=%M' -o /home/wu/.agent-tasks/cbsc-system-runtime-a03-20260907/process-time.txt /usr/bin/timeout --signal=KILL 540s /usr/bin/env -u BASH_ENV -u ENV -u ALL_PROXY -u all_proxy /bin/bash --noprofile --norc /home/wu/hmasd-worktrees/cbsc-system-runtime-a03-20260907/scripts/prepare_cbsc_system_runtime_a03.sh /home/wu/hmasd-worktrees/cbsc-system-runtime-a03-20260907 /home/wu/hmasd-worktrees/cbsc-system-runtime-a03-20260907/temp/directions/capability_bound_semantic_currentness/exp/system_runtime_a03_20260907 /home/wu/.venvs/hmasd-cbsc-system312-a03-20260907 ROOT_INTEGRATED_SHA
 ```
 
 Retain supervisor start/end and process-time.txt. Actual complete measured wall,
@@ -97,75 +92,3 @@ Root receives accepted handle/cwd/output/source for observation after integratio
 and launch. CM retains technical collection and returns the frozen branch to DM.
 No duplicate launch or unused-budget retry. Writer/index ownership returns to DM
 with the pushed source receipt while Root's integration dependency remains.
-
-
-## Integrated-source release
-
-Root integrated and pushed main at `ec8866b3968fcb1566976ce405d7c552d4d9a5de`.
-DM confirmed accepted script/card blob equality and unchanged applicable execution
-instructions, then released the existing sole invocation. The historical integration
-block above is resolved. Source/argv are unchanged except the bound identity value.
-Shared authoring checkout began clean at `525b5b2c9`; CM has the collection/index
-window. This metadata binding is committed/pushed before source staging and launch.
-No repeated source test or new preparation invocation is selected.
-
-
-## Accepted handle and terminal technical evidence
-
-Exactly one agent-task invocation was accepted (transport exit0), handle
-`cbsc-system-runtime-a03-20260907`, PID2743440, integrated source
-`ec8866b3968fcb1566976ce405d7c552d4d9a5de`. Binding metadata commit
-`e78a930dc884dc154dda1ee7e1905b079e11ce02` was pushed before staging/launch.
-The detached worktree was created at the integrated SHA with LF source preserved.
-
-Source staging initially rejected a bundle command naming only a raw SHA as an
-empty bundle. Its following Git worktree command attempted an unproductive lazy
-fetch before a worktree existed. CM staged the named integrated main ref via a
-Git bundle, stopped those two specific Git setup processes and created the exact
-worktree. These were source-staging repairs before the sole accepted invocation;
-no candidate work, admission or result-bearing retry occurred during them.
-
-Supervisor start `2026-09-08T02:33:38+08:00`, end
-`2026-09-08T02:33:47+08:00`, rounded duration9s. Terminal status failed, exit18,
-tmux inactive. Outer GNU time measured **9.65s**, peak RSS **19200KiB**. The
-complete600s cap was met; the540s deadline was not reached or exercised. This
-terminal is not a successful install-speed or complete-path comparison.
-
-Admission at `2026-09-07T18:33:38.192850Z` measured physical/effective available
-memory each **15660122112bytes**, above both4294967296-byte floors. Retained
-pyvenv.cfg reports CPython3.12.3, home/usr/bin and no system site packages.
-
-The packaging process logged **21materialized containers**, and read-only
-terminal file sizes total **3,254,401,676bytes** across those containers. This
-establishes packaging completion, not an independent wheel-integrity or import
-result. First body acquisition left Torch at **16027328bytes**, short of the
-selected955455844-byte body. Curl reported `Transferred a partial file` and
-exited18. This is a partial-transfer fact, not attribution to server, proxy,
-network, hardware or the B04 exception. Triton body acquisition was never reached.
-
-Executed counts:1candidate creation,21local materializations,1body request started,
-0complete downloaded bodies,0second-body requests,0offline installations,
-0candidate metadata processes/publications,0host/model/tensor/device/scientific
-RNG/optimizer/learner/evaluator calls. No summary.json or install.log exists;
-site-packages retains only _virtualenv.py and _virtualenv.pth. No retry, resume,
-source/package substitution or further acquisition followed. Original cache and
-all old environments/evidence remain unchanged. The task-local partial files remain.
-
-Apply the frozen **PATH_INCOMPLETE** branch because acquisition ended before
-installation and the required imports/publication. Measured cap/resource facts
-and successful local materialization remain narrower observations. Candidate
-readiness, stability, numerical equivalence and B04 repair are not established.
-
-Original large wheel/partial files remain in the remote output root's `wheels/`;
-they were not transferred back. Local collection is
-`C:/Projects/HMASD-worktrees/dm-cbsc-next-20260906/temp/directions/capability_bound_semantic_currentness/exp/system_runtime_a03_20260907/`:
-`admission.json`, `terminal_files.json`, and `supervisor/` containing task.log,
-process-time.txt, start_time, status, exit_code, pid and runner.sh. The supervisor
-originals remain under `/home/wu/.agent-tasks/cbsc-system-runtime-a03-20260907/`.
-Scratch total and aggregate CPU remain unmeasured; the wheel-size inventory is
-only the retained listed files, not a whole scratch measurement.
-
-Root received the accepted handle and then terminal facts before adoption was
-needed. No running observation or restart remains. CM returns technical evidence
-and writer/index ownership to DM for intake/Chinese brief, then Root integration
-and Portfolio routing. This terminal grants no further invocation.

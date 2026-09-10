@@ -12,7 +12,7 @@
   "delivery_mode": "github_delivery",
   "github_delivery": {
     "branch": "codex/pro-dish-post-b06-20260907",
-    "base_sha": "6b45ea47bea500bea11f1215080653a8df19bdd6",
+    "base_sha": "1763c96d932bb813777431c07ec3cea0dafe19bd",
     "response_path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260907_post_b06_convergence/archive/RESPONSE.md",
     "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/4"
   },

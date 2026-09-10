@@ -15,7 +15,7 @@ from tqdm import tqdm
 # 添加项目根目录到路径
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from config_1 import Config
+from configs.config_1 import Config
 from envs.pettingzoo.relay.forced_relay import UAVForcedRelayEnv
 from manifold_hmasd.agent import ManifoldHMASDAgent
 from hmasd.logging import main_logger

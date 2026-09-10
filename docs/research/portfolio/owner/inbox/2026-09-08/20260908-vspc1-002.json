@@ -1,0 +1,76 @@
+{
+  "id": "20260908-vspc1-002",
+  "created": "2026-09-08T10:19:31-07:00",
+  "direction": "vsp_c1",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "VSPC1原生持有价值B01卡：8101单对",
+  "context": "同一时长策略下，乘性持有门是否比完整通用价值网络提高原生回报？绑定时间抽象/终止结构。单对B、MEI.01、完整上限1800秒每臂和3600秒每对；当前未编码、未运行。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "保留按Pro选择写出的卡和完整同源工程规范，后续Root处理具体派工。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "在实际调用前停止这张未运行卡，保存来源与原决定。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "在实际调用前应用具体修订，涉及科学含义时沿原决策层级处理。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "逐项保留同信息、相同演员、完整MLP、原生主量及有限预算；不添加更强前置。",
+  "evidence": [
+    "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B01_SCIENCE_CARD_20260908.md",
+    "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B01_CM_SPEC_20260908.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-08.md#L44",
+  "brief": "docs/research/portfolio/owner/briefs/vsp_c1/2026-09-08_NATIVE-HOLD-VALUE-B01-SELECTION.md",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": {
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/vsp_c1/pro_packets/20260908_native_hold_value_convergence/archive/RESPONSE.md",
+        "quote": "源码给出了基线到优势、联合梯度裁剪、演员更新和原生回报的具体路径；这使所选观察有用途，但并不预先证明门控有益。",
+        "why": "同一真实学习器内有可比较的价值到动作后果路径，值得一次有上限的B。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/vsp_c1/pro_packets/20260908_native_hold_value_convergence/archive/RESPONSE.md",
+        "quote": "每回合至多三个原始行有非零剩余持有量；完整 MLP 本来就能利用这些输入。",
+        "why": "直接门曝光稀疏，且原生收益仍可能只是容量、优化或裁剪变化。"
+      }
+    ],
+    "uncertainty": [
+      "尚无新门的实测回报；单对不估计训练群体不确定性。",
+      "旧UCOPE有明显原生损害和弱基线，H参照必须保留。",
+      "main所查版本缺少两个已存在于固定源码提交的依赖；未来派工前Root提供完整输入。"
+    ],
+    "cost": {
+      "compute": "拟两真实训练臂各131072步/1024次Adam，加三臂各32回合；总286720团队步，1800秒每臂、3600秒每对。当前新执行为零。",
+      "owner_time": "可异步复核；不等待回复完成准备。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing; 后续工程/实验仍需具体Root任务和完整已提交源码。"
+    },
+    "verdict_text": "**决定：在方向层开放“原生开局持有条件下的中央价值参数化”这一窄家族，选择一个 VSPC1-NATIVE-HOLD-VALUE-B01，证据类别仅为 B/EXPLORE。只比较 GATED-V 与完整 MLP-V，两臂保留完全相同的时长可选演员和逐智能体复合 PPO；新配对训练种子仅 8101，每臂 512 个完整训练回合、1,024 次 Adam，最终各 32 个采样评价回合，另在同 32 个布局上评价一次零速度 H。完整上限为 1,800 秒/臂、3,600 秒/对，不增加其他臂、种子、检查点或科学调用。** 这是新对象的科学选择与可写卡范围，不是代码接受、实验启动、正式 UAV 进入认定、C 冻结或 Portfolio 动作。服务分配对象的停止和更早家族边界保持不变。[候选，§§2–4][proposal]；[当前授权，Five-item assignment][assignment]",
+    "source": "docs/research/candidates/vsp_c1/pro_packets/20260908_native_hold_value_convergence/archive/RESPONSE.md",
+    "question": "是否保留这张已按Pro选择写出的单对B卡及对应完整工程规范？",
+    "changes_if_approved": [
+      {
+        "target": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B01_SCIENCE_CARD_20260908.md",
+        "from": "只有源代码提案，无选定卡",
+        "to": "8101单对、相同duration演员、完整MLP、MEI.01、完整1800/3600秒上限及原始聚焦检查"
+      }
+    ],
+    "if_refused": "卡拒绝或修订在下一实际调用前应用；当前没有运行需要撤销，不用旧对象、额外种子或合成环境替代。"
+  },
+  "starred": false
+}

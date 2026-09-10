@@ -1,0 +1,59 @@
+{
+  "four_endpoint_sets_of_1024": true,
+  "world_order_and_phase_shared": true,
+  "128_curve_rows_updates_1_to_128": true,
+  "curve_training_episode_sum": 16384,
+  "curve_valid_row_sum": 64912,
+  "curve_gradient_row_sum": 64912,
+  "endpoint_rows_plus_curve_episodes": 20480,
+  "endpoint_plus_training_decision_rows": 93244,
+  "primary_readback_mean": -0.013974609375000007,
+  "primary_readback_sample_sd": 0.2337120721914452,
+  "primary_readback_se": 0.007303502255982663,
+  "paired_difference_rows": 1024,
+  "paired_primary_matches_endpoints": true,
+  "weights_parameters": 2083,
+  "weights_all_cpu_float32": true,
+  "weights_all_finite": true,
+  "normal_run_weights_readback": true,
+  "models_constructed_during_collection": 0,
+  "scientific_episodes_or_steps_during_collection": 0,
+  "files": [
+    {
+      "name": "G_curve.jsonl",
+      "bytes": 70875
+    },
+    {
+      "name": "G_final.pt",
+      "bytes": 12354
+    },
+    {
+      "name": "G_greedy.json",
+      "bytes": 647113
+    },
+    {
+      "name": "G_stochastic.json",
+      "bytes": 646174
+    },
+    {
+      "name": "paired_differences.json",
+      "bytes": 234882
+    },
+    {
+      "name": "R.json",
+      "bytes": 646287
+    },
+    {
+      "name": "R0.json",
+      "bytes": 646281
+    },
+    {
+      "name": "summary.json",
+      "bytes": 7931
+    },
+    {
+      "name": "task.log",
+      "bytes": 1982
+    }
+  ]
+}

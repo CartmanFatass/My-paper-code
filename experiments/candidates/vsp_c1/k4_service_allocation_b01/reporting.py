@@ -64,8 +64,12 @@ def mean_change(left, right):
 def compare(factor, generic, rule=None):
     if factor["status"] != "complete" or generic["status"] != "complete":
         return {"status": "incomplete", "readings": ["no_conclusion_on_damaged_learner_dependency"]}
+    budgets = [dict(s["budget"]) for s in (factor, generic)]
+    for budget in budgets:
+        if isinstance(budget.get("checkpoints"), (list, tuple)):
+            budget["checkpoints"] = tuple(budget["checkpoints"])
     if ((factor["arm"], generic["arm"]) != ("FACTOR", "GENERIC")
-            or factor["budget"] != generic["budget"]):
+            or budgets[0] != budgets[1]):
         raise ValueError("Comparison requires FACTOR/GENERIC with the same fixed budget and seed")
     delta = contrast(factor, generic)
     models = {"FACTOR": factor, "GENERIC": generic}

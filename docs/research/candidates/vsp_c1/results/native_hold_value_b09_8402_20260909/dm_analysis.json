@@ -1,0 +1,662 @@
+{
+  "object": "VSPC1-NATIVE-HOLD-VALUE-B09",
+  "source_sha": "4c9dc8b3de9b7827612b962aa4a4d085dc7cd411",
+  "evidence_path": "docs/research/candidates/vsp_c1/results/native_hold_value_b09_8402_20260909/evidence.json",
+  "evidence_sha256": "73c29c9c522ead0f40291f09e00c30193901b55d4fc2b0157883fd4107d0a920",
+  "selection": "All96 final saved evaluations; reward_sum/256,32 matched reset identities per arm; no episode/checkpoint/seed selection or extra evaluation",
+  "independent_unit": "One matched768-episode training pair; conditional uncertainty is across32 final evaluation identities, not training seeds",
+  "regime": "normalized GATED vs ordinary width133 MLP,768 train episodes",
+  "native_means": {
+    "GATED-V": 0.2033071379568666,
+    "MLP-V": 0.21684209380540304,
+    "H": 0.16689842456256293
+  },
+  "contrasts": {
+    "GATED-V_minus_MLP-V": {
+      "mean": -0.013534955848536409,
+      "sample_sd": 0.05599275799111023,
+      "conditional_se": 0.009898214718212823,
+      "native_reported_conditional_se": 0.009898214718212823,
+      "evaluation_pairs": 32,
+      "differences": [
+        -0.004537271406795995,
+        0.03483704544582106,
+        -0.1580425653038387,
+        0.03970786767784623,
+        -0.033096088013011005,
+        -0.054111732653065514,
+        0.04620335328113653,
+        -0.002718015617186237,
+        0.0250057762356595,
+        -0.009186851782160083,
+        0.02862189034947854,
+        0.034746476621625694,
+        -0.010672663844405544,
+        -0.06895605328158289,
+        0.04309513236327586,
+        -0.03218974915480921,
+        -0.0575720061536919,
+        0.09612324042312684,
+        -0.15578643435120446,
+        -0.053432483118674656,
+        0.04011221436856688,
+        0.04761688613001308,
+        0.024004066753397862,
+        -0.013830309329298768,
+        -0.044913191796532526,
+        -0.04293878081547001,
+        -0.0748198810636446,
+        -0.05269591497495088,
+        -0.0022687096175323662,
+        -0.03594471408381347,
+        -0.010625777794286528,
+        0.025146657352842133
+      ],
+      "adverse_count": 20,
+      "adverse_identities": [
+        {
+          "episode": 0,
+          "reset_seed": 840202000,
+          "difference": -0.004537271406795995
+        },
+        {
+          "episode": 2,
+          "reset_seed": 840202002,
+          "difference": -0.1580425653038387
+        },
+        {
+          "episode": 4,
+          "reset_seed": 840202004,
+          "difference": -0.033096088013011005
+        },
+        {
+          "episode": 5,
+          "reset_seed": 840202005,
+          "difference": -0.054111732653065514
+        },
+        {
+          "episode": 7,
+          "reset_seed": 840202007,
+          "difference": -0.002718015617186237
+        },
+        {
+          "episode": 9,
+          "reset_seed": 840202009,
+          "difference": -0.009186851782160083
+        },
+        {
+          "episode": 12,
+          "reset_seed": 840202012,
+          "difference": -0.010672663844405544
+        },
+        {
+          "episode": 13,
+          "reset_seed": 840202013,
+          "difference": -0.06895605328158289
+        },
+        {
+          "episode": 15,
+          "reset_seed": 840202015,
+          "difference": -0.03218974915480921
+        },
+        {
+          "episode": 16,
+          "reset_seed": 840202016,
+          "difference": -0.0575720061536919
+        },
+        {
+          "episode": 18,
+          "reset_seed": 840202018,
+          "difference": -0.15578643435120446
+        },
+        {
+          "episode": 19,
+          "reset_seed": 840202019,
+          "difference": -0.053432483118674656
+        },
+        {
+          "episode": 23,
+          "reset_seed": 840202023,
+          "difference": -0.013830309329298768
+        },
+        {
+          "episode": 24,
+          "reset_seed": 840202024,
+          "difference": -0.044913191796532526
+        },
+        {
+          "episode": 25,
+          "reset_seed": 840202025,
+          "difference": -0.04293878081547001
+        },
+        {
+          "episode": 26,
+          "reset_seed": 840202026,
+          "difference": -0.0748198810636446
+        },
+        {
+          "episode": 27,
+          "reset_seed": 840202027,
+          "difference": -0.05269591497495088
+        },
+        {
+          "episode": 28,
+          "reset_seed": 840202028,
+          "difference": -0.0022687096175323662
+        },
+        {
+          "episode": 29,
+          "reset_seed": 840202029,
+          "difference": -0.03594471408381347
+        },
+        {
+          "episode": 30,
+          "reset_seed": 840202030,
+          "difference": -0.010625777794286528
+        }
+      ]
+    },
+    "GATED-V_minus_H": {
+      "mean": 0.03640871339430369,
+      "sample_sd": 0.06540063796077035,
+      "conditional_se": 0.011561308648996762,
+      "native_reported_conditional_se": 0.011561308648996765,
+      "evaluation_pairs": 32,
+      "differences": [
+        0.06178069257640856,
+        0.0330567659130854,
+        -0.12201918277151406,
+        0.026370975142473135,
+        0.04039575767292475,
+        0.15318955354022867,
+        0.12552081878169802,
+        -0.04036973083169812,
+        0.10100931133651665,
+        0.020500768920591134,
+        0.04879462116484559,
+        0.018902451886718075,
+        0.06033837024005256,
+        0.03203086112976394,
+        0.023427782684652704,
+        0.08243633766368835,
+        0.02510952822682666,
+        0.11395246827445249,
+        -0.15847277910737023,
+        0.04029739095169327,
+        0.07715056574880719,
+        0.07540081653294686,
+        0.12477791943856943,
+        0.004967646947546339,
+        0.10285924118352169,
+        0.008650428539196203,
+        -0.005772852346880519,
+        0.004645172894862576,
+        -0.006910570606902616,
+        -0.018862885219072673,
+        0.08513079947693905,
+        0.026789782632146902
+      ],
+      "adverse_count": 6,
+      "adverse_identities": [
+        {
+          "episode": 2,
+          "reset_seed": 840202002,
+          "difference": -0.12201918277151406
+        },
+        {
+          "episode": 7,
+          "reset_seed": 840202007,
+          "difference": -0.04036973083169812
+        },
+        {
+          "episode": 18,
+          "reset_seed": 840202018,
+          "difference": -0.15847277910737023
+        },
+        {
+          "episode": 26,
+          "reset_seed": 840202026,
+          "difference": -0.005772852346880519
+        },
+        {
+          "episode": 28,
+          "reset_seed": 840202028,
+          "difference": -0.006910570606902616
+        },
+        {
+          "episode": 29,
+          "reset_seed": 840202029,
+          "difference": -0.018862885219072673
+        }
+      ]
+    },
+    "MLP-V_minus_H": {
+      "mean": 0.0499436692428401,
+      "sample_sd": 0.05353973665099574,
+      "conditional_se": 0.009464577712215256,
+      "native_reported_conditional_se": 0.009464577712215256,
+      "evaluation_pairs": 32,
+      "differences": [
+        0.06631796398320455,
+        -0.0017802795327356569,
+        0.03602338253232465,
+        -0.013336892535373096,
+        0.07349184568593575,
+        0.2073012861932942,
+        0.07931746550056148,
+        -0.03765171521451188,
+        0.07600353510085715,
+        0.029687620702751216,
+        0.02017273081536705,
+        -0.01584402473490762,
+        0.07101103408445811,
+        0.10098691441134683,
+        -0.01966734967862316,
+        0.11462608681849756,
+        0.08268153438051856,
+        0.017829227851325652,
+        -0.002686344756165776,
+        0.09372987407036792,
+        0.03703835138024031,
+        0.027783930402933782,
+        0.10077385268517157,
+        0.018797956276845107,
+        0.1477724329800542,
+        0.05158920935466621,
+        0.06904702871676408,
+        0.057341087869813456,
+        -0.00464186098937025,
+        0.0170818288647408,
+        0.09575657727122558,
+        0.001643125279304769
+      ],
+      "adverse_count": 7,
+      "adverse_identities": [
+        {
+          "episode": 1,
+          "reset_seed": 840202001,
+          "difference": -0.0017802795327356569
+        },
+        {
+          "episode": 3,
+          "reset_seed": 840202003,
+          "difference": -0.013336892535373096
+        },
+        {
+          "episode": 7,
+          "reset_seed": 840202007,
+          "difference": -0.03765171521451188
+        },
+        {
+          "episode": 11,
+          "reset_seed": 840202011,
+          "difference": -0.01584402473490762
+        },
+        {
+          "episode": 14,
+          "reset_seed": 840202014,
+          "difference": -0.01966734967862316
+        },
+        {
+          "episode": 18,
+          "reset_seed": 840202018,
+          "difference": -0.002686344756165776
+        },
+        {
+          "episode": 28,
+          "reset_seed": 840202028,
+          "difference": -0.00464186098937025
+        }
+      ]
+    }
+  },
+  "max_native_J_error": 0.0,
+  "max_reported_mean_error": 0.0,
+  "max_reported_conditional_se_error": 3.469446951953614e-18,
+  "numerical_note": "Initial exact-SE equality in DM arithmetic was too strict: Python3.11.9 stdev/sqrt differs from retained native GATED-H SE by3.469446951953614e-18. Native J, all means and primary SE agree exactly; preserve both SEs. No scientific rerun, artifact change or branch-rule change.",
+  "point_region": "DOWN",
+  "mei_absolute": 0.01,
+  "margin_below_negative_mei": 0.003534955848536409,
+  "margin_below_negative_mei_over_conditional_se": 0.3571306492303154,
+  "dm_forecast": {
+    "event": "Delta < -.01",
+    "label": "DOWN",
+    "probability": 0.55,
+    "occurred": true,
+    "score": "hit",
+    "brier": 0.20249999999999996
+  },
+  "owner_prediction": "not taken (unattended); no reply at intake",
+  "regime768": {
+    "per_pair": {
+      "8401": {
+        "source": "docs/research/candidates/vsp_c1/results/native_hold_value_b08_8401_20260908/dm_analysis.json",
+        "native_means": {
+          "GATED-V": 0.11587725095166812,
+          "MLP-V": 0.14974217136462054,
+          "H": 0.1564698252671263
+        },
+        "contrasts": {
+          "GATED-V_minus_MLP-V": {
+            "mean": -0.03386492041295242,
+            "conditional_se": 0.012832801495252571,
+            "adverse_count": 24
+          },
+          "GATED-V_minus_H": {
+            "mean": -0.04059257431545819,
+            "conditional_se": 0.010690974368617696,
+            "adverse_count": 23
+          },
+          "MLP-V_minus_H": {
+            "mean": -0.0067276539025057655,
+            "conditional_se": 0.015046967261040782,
+            "adverse_count": 19
+          }
+        },
+        "point_region": "DOWN"
+      },
+      "8402": {
+        "source": "docs/research/candidates/vsp_c1/results/native_hold_value_b09_8402_20260909/evidence.json",
+        "native_means": {
+          "GATED-V": 0.2033071379568666,
+          "MLP-V": 0.21684209380540304,
+          "H": 0.16689842456256293
+        },
+        "contrasts": {
+          "GATED-V_minus_MLP-V": {
+            "mean": -0.013534955848536409,
+            "conditional_se": 0.009898214718212823,
+            "adverse_count": 20
+          },
+          "GATED-V_minus_H": {
+            "mean": 0.03640871339430369,
+            "conditional_se": 0.011561308648996762,
+            "adverse_count": 6
+          },
+          "MLP-V_minus_H": {
+            "mean": 0.0499436692428401,
+            "conditional_se": 0.009464577712215256,
+            "adverse_count": 7
+          }
+        },
+        "point_region": "DOWN"
+      }
+    },
+    "descriptive": {
+      "GATED-V_minus_MLP-V": {
+        "training_pairs": 2,
+        "per_pair": {
+          "8401": -0.03386492041295242,
+          "8402": -0.013534955848536409
+        },
+        "mean": -0.023699938130744416,
+        "sample_sd": 0.014375455804780779,
+        "reading": "Descriptive only; dispersion combines independent training and finite evaluation randomness, not a population interval or aggregate confirmatory rule."
+      },
+      "GATED-V_minus_H": {
+        "training_pairs": 2,
+        "per_pair": {
+          "8401": -0.04059257431545819,
+          "8402": 0.03640871339430369
+        },
+        "mean": -0.0020919304605772487,
+        "sample_sd": 0.05444813269966898,
+        "reading": "Descriptive only; dispersion combines independent training and finite evaluation randomness, not a population interval or aggregate confirmatory rule."
+      },
+      "MLP-V_minus_H": {
+        "training_pairs": 2,
+        "per_pair": {
+          "8401": -0.0067276539025057655,
+          "8402": 0.0499436692428401
+        },
+        "mean": 0.021608007670167167,
+        "sample_sd": 0.04007267689488821,
+        "reading": "Descriptive only; dispersion combines independent training and finite evaluation randomness, not a population interval or aggregate confirmatory rule."
+      }
+    }
+  },
+  "old512_context": {
+    "source": "docs/research/candidates/vsp_c1/results/native_hold_value_b08_8401_20260908/dm_analysis.json",
+    "primary_per_pair": {
+      "8301": 0.01659191137627875,
+      "8302": -0.006634518206640422,
+      "8303": 0.03337791639434502
+    },
+    "primary_mean": 0.01444510318799445,
+    "primary_sample_sd": 0.020092419459151696,
+    "boundary": "Preserve all three512 results separately, no512/768 pool or causal budget interpretation; older normalized-width128 and unnormalized regimes also stay separate."
+  },
+  "actual_counts": {
+    "train_team_steps": 393216,
+    "eval_team_steps": 24576,
+    "team_steps": 417792,
+    "optimizer_steps": 3072,
+    "train_episodes": 1536,
+    "eval_episodes": 96,
+    "velocity_decisions": 2035643,
+    "duration_decisions": 8000,
+    "d4": 4119,
+    "recurrent_observations": 2048000,
+    "explicit_resets": 1632,
+    "constructor_resets": 2,
+    "constructors": 2,
+    "step_calls": 417792,
+    "scientific_uav_calls": 417792,
+    "diagnostic_frames": 0,
+    "completed_episode_steps": 417792,
+    "rollouts": 768,
+    "partial_episode_steps": 0
+  },
+  "actual_exposure": {
+    "GATED-V": {
+      "common_actor": {
+        "parameters": 32134,
+        "initial_norm": 12.345212936401367,
+        "final_norm": 13.149531364440918,
+        "displacement": 4.3465657234191895,
+        "relative_displacement": 0.35208511556754585
+      },
+      "critic": {
+        "parameters": 34817,
+        "initial_norm": 9.313546180725098,
+        "final_norm": 9.865379333496094,
+        "displacement": 3.303647041320801,
+        "relative_displacement": 0.3547141955614637
+      },
+      "duration": {
+        "parameters": 130,
+        "initial_norm": 0.0,
+        "final_norm": 0.15164339542388916,
+        "displacement": 0.15164339542388916,
+        "relative_displacement": 151643395423.88916
+      },
+      "total": {
+        "parameters": 67081,
+        "initial_norm": 15.464354515075684,
+        "final_norm": 16.439542770385742,
+        "displacement": 5.461660861968994,
+        "relative_displacement": 0.35317742209312714
+      },
+      "gate": {
+        "parameters": 640,
+        "initial_norm": 0.0,
+        "final_norm": 0.7317023873329163,
+        "displacement": 0.7317023873329163,
+        "relative_displacement": null,
+        "reason": "undefined: gate initial norm is zero"
+      }
+    },
+    "MLP-V": {
+      "common_actor": {
+        "parameters": 32134,
+        "initial_norm": 12.345212936401367,
+        "final_norm": 12.950051307678223,
+        "displacement": 3.8307900428771973,
+        "relative_displacement": 0.31030570818113107
+      },
+      "critic": {
+        "parameters": 34827,
+        "initial_norm": 9.40766716003418,
+        "final_norm": 9.952019691467285,
+        "displacement": 3.306864023208618,
+        "relative_displacement": 0.3515073361923927
+      },
+      "duration": {
+        "parameters": 130,
+        "initial_norm": 0.0,
+        "final_norm": 0.12006508558988571,
+        "displacement": 0.12006508558988571,
+        "relative_displacement": 120065085589.88571
+      },
+      "total": {
+        "parameters": 67091,
+        "initial_norm": 15.521223068237305,
+        "final_norm": 16.332820892333984,
+        "displacement": 5.062086582183838,
+        "relative_displacement": 0.3261396708190211
+      }
+    }
+  },
+  "zero_initial_norm_reading": {
+    "GATED-V": {
+      "duration": {
+        "initial_norm": 0.0,
+        "absolute_displacement": 0.15164339542388916,
+        "relative_displacement": null,
+        "reason": "undefined from zero initialization"
+      },
+      "gate": {
+        "initial_norm": 0.0,
+        "absolute_displacement": 0.7317023873329163,
+        "relative_displacement": null,
+        "reason": "undefined from zero initialization"
+      }
+    },
+    "MLP-V": {
+      "duration": {
+        "initial_norm": 0.0,
+        "absolute_displacement": 0.12006508558988571,
+        "relative_displacement": null,
+        "reason": "undefined from zero initialization"
+      }
+    }
+  },
+  "hold_rows": {
+    "GATED-V": {
+      "train": 2244,
+      "eval": 93
+    },
+    "MLP-V": {
+      "train": 2232,
+      "eval": 93
+    }
+  },
+  "training_hold_fraction": {
+    "GATED-V": 0.01141357421875,
+    "MLP-V": 0.0113525390625
+  },
+  "moments": {
+    "GATED-V": {
+      "n": 196608,
+      "mean": 22.225786209106445,
+      "M2": 51335968.0,
+      "scale": 16.158843994140625,
+      "updates": 384
+    },
+    "MLP-V": {
+      "n": 196608,
+      "mean": 20.890594482421875,
+      "M2": 48216332.0,
+      "scale": 15.660170555114746,
+      "updates": 384
+    }
+  },
+  "resources": {
+    "enclosing_wall_seconds": 483.27,
+    "supervisor_duration_seconds": 484,
+    "internal_wall_seconds": 465.97624772100244,
+    "mlp_start_pair_elapsed": 239.03369589702925,
+    "unpartitioned_residual_seconds": 17.293752278997545,
+    "arm_wall_upper_bounds_seconds": {
+      "GATED-V": 256.3274481760268,
+      "MLP-V": 244.23630410297073
+    },
+    "peak_rss_kib": 560848,
+    "peak_rss_mib": 547.703125,
+    "aggregate_cpu_seconds": null,
+    "admission": {
+      "assessed_at": "2026-09-09T08:27:16.948270Z",
+      "available_physical_bytes": 15312453632,
+      "captured_at": "2026-09-09T08:27:16.947978Z",
+      "cgroup_headroom_bytes": null,
+      "cgroup_memory_current_bytes": null,
+      "cgroup_memory_max_bytes": null,
+      "effective_available_bytes": 15312453632,
+      "effective_floor_pass": true,
+      "failure_reasons": [],
+      "measurement_source": "/proc/meminfo",
+      "minimum_available_bytes": 4294967296,
+      "passed": true,
+      "physical_floor_pass": true,
+      "schema_version": 1
+    }
+  },
+  "resources_qualification": "Native resources_unmeasured retained beside trustworthy enclosing wall/peak RSS; aggregate CPU/component overhead unknown; no runtime cause assigned.",
+  "native_wall_window": {
+    "current_invocation_seconds": 483.27,
+    "regime768_accepted_submissions": 2,
+    "regime768_valid_pairs": 2,
+    "regime768_sum_invocation_seconds": 988.27,
+    "regime768_mean_wall_per_valid_pair_seconds": 494.135,
+    "current_critical_path_seconds": 483.27,
+    "excludes": "engineering/collection/DM/workflow costs and older512 regime; aggregate CPU unknown"
+  },
+  "new_exposure_from_intake": 0,
+  "next_rung_advice": {
+    "status": "ADVICE_ONLY; no new card, master, prediction, task or submission; separate allocation required",
+    "question": "In one fresh unchanged training pair, how does the native GATED-minus-MLP difference change from the fixed512 endpoint to the fixed768 endpoint?",
+    "learner_fits": 2,
+    "independent_training_pairs": 1,
+    "training_episodes_per_arm": 768,
+    "fixed_learned_checkpoints_per_arm": [
+      512,
+      768
+    ],
+    "evaluation_episodes_per_learned_checkpoint": 32,
+    "hover_evaluations_once": 32,
+    "train_steps": 393216,
+    "eval_steps": 40960,
+    "steps": 434176,
+    "adam": 3072,
+    "rollouts": 768,
+    "moment_merges": 768,
+    "target_rows": 393216,
+    "four_epoch_target_terms": 1572864,
+    "eval_episodes": 160,
+    "scored_episodes": 1696,
+    "extra_eval_episodes_vs_B09": 64,
+    "extra_eval_steps_vs_B09": 16384,
+    "total_step_ratio_vs_B09": 1.0392156862745099,
+    "complete_caps_seconds": {
+      "arm": 1800,
+      "pair": 3600
+    },
+    "cost_reference": {
+      "prior_max_same_budget_whole_seconds": 505.0,
+      "uniform_total_step_proxy_seconds": 524.8039215686274,
+      "qualification": "Planning proxy only; training unchanged,64 added learned evaluations, unit evaluation time/aggregate CPU/component overhead unknown; no cost probe."
+    },
+    "preserved_semantics": "Same accepted e9 learner/GATED/ordinary-wide133/H; training RNG/data/moments unaffected by fixed midpoint evaluation; private fresh evaluation generators pair the same fixed evaluation identities across both endpoints; no historical state reuse or checkpoint selection. Freeze prospectively in a new card before implementation.",
+    "claim_boundary": "Within one new training trajectory per arm and fixed finite evaluation bank; not a population causal-budget estimate, stable superiority, unique mechanism diagnosis, or retrospective claim about8401/8402."
+  },
+  "computed_utc": "2026-09-09T08:45:08.397276+00:00",
+  "intake_audit_utc": "2026-09-09T08:51:48Z",
+  "audit_rows": [
+    11,
+    12,
+    13,
+    14
+  ],
+  "run_level_command": "python .agents/skills/hmasd-scientific-tools/scripts/summarize_runs.py docs/research/candidates/vsp_c1/results/native_hold_value_b09_8402_20260909/run_level_scores.csv --paired --baseline MLP-V --out docs/research/candidates/vsp_c1/results/native_hold_value_b09_8402_20260909/run_level_summary.json",
+  "CM_check_process_seconds": 13.391329200000428
+}

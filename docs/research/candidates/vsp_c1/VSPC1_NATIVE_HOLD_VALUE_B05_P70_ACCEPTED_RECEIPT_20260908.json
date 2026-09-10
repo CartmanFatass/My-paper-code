@@ -1,0 +1,20 @@
+{
+  "utc": "2026-09-09T04:31:42.989327+00:00",
+  "argv": [
+    "ssh",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "ConnectTimeout=10",
+    "hmasd-wsl-node",
+    "/usr/local/bin/agent-task",
+    "run",
+    "vspc1_hold_value_b05_8301_bda90e1db76a",
+    "/bin/bash",
+    "/home/wu/hmasd-inputs/vspc1_hold_value_b05_8301_bda90e1db76a.sh"
+  ],
+  "returncode": 0,
+  "stdout": "Task 'vspc1_hold_value_b05_8301_bda90e1db76a' started in tmux session 'agent_vspc1_hold_value_b05_8301_bda90e1db76a'. Output: /home/wu/.agent-tasks/vspc1_hold_value_b05_8301_bda90e1db76a/task.log\n",
+  "stderr": "",
+  "source_sha": "bda90e1db76a00123ba889ed6c4b05225473f4cb"
+}

@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "request_id": "2026-09-07-vsp02-post-b01-two-prefix-convergence-01",
+  "workflow_node": "em_convergence",
+  "conversation_binding_key": "em:vsp_02:convergence",
+  "direction_id": "vsp_02",
+  "direction_ids": [
+    "vsp_02"
+  ],
+  "decision_authority": "pro_final",
+  "conversation_id": "6a9f344c-c6dc-83e8-80e7-e12ced7f445f",
+  "provider_url": "https://chatgpt.com/c/6a9f344c-c6dc-83e8-80e7-e12ced7f445f",
+  "tab_id": "1",
+  "tab_lifecycle": "OPEN",
+  "user_message_id": "cf8b7701-7e60-43bc-b72b-a4f1f8282c44",
+  "assistant_message_id": "56848ce5-d7a2-4ab9-b275-1326e1d2a572",
+  "visible_model": "6 Pro",
+  "underlying_model": "Latest",
+  "thinking_effort": "Pro, 5 of 5.",
+  "source_mode": "paste",
+  "prompt_sha256": "05dd15abbcf0ba958f51a8ecd6c4c59829bc0945c3e648151bc2ae6cfa6c6e93",
+  "response_sha256": "c81a0af0fbb72c4fc8a8b52c7124ad36eb382bcbd0809ce1a218d6e93573d72c",
+  "response_bytes": 383,
+  "response_characters": 383,
+  "send_click_count": 1,
+  "send_evidence": {
+    "url_observed": true,
+    "user_node_observed": true,
+    "user_node_exact": true,
+    "user_message_id": "cf8b7701-7e60-43bc-b72b-a4f1f8282c44",
+    "assistant_message_id": "56848ce5-d7a2-4ab9-b275-1326e1d2a572",
+    "paste_mode": true,
+    "attachment_observed": false,
+    "provider_url_observed": "https://chatgpt.com/c/6a9f344c-c6dc-83e8-80e7-e12ced7f445f"
+  },
+  "wait_status": "NATURAL_COMPLETION",
+  "observed_page_state": "Worked for 7m 12s; complete response links present; no active generation control",
+  "capture_method": "Copy response via CUA clipboard.readText",
+  "identity_validation": "PASS",
+  "identity_expected": {
+    "conversation_id": "6a9f344c-c6dc-83e8-80e7-e12ced7f445f",
+    "user_message_id": "cf8b7701-7e60-43bc-b72b-a4f1f8282c44",
+    "assistant_message_id": "56848ce5-d7a2-4ab9-b275-1326e1d2a572"
+  },
+  "identity_observed": {
+    "conversation_id": "6a9f344c-c6dc-83e8-80e7-e12ced7f445f",
+    "user_message_id": "cf8b7701-7e60-43bc-b72b-a4f1f8282c44",
+    "assistant_message_id": "56848ce5-d7a2-4ab9-b275-1326e1d2a572"
+  },
+  "archive_paths": {
+    "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_02\\2026-09-07-vsp02-post-b01-two-prefix-convergence-01\\2026-09-07-vsp02-post-b01-two-prefix-convergence-01--vsp_02__00_PROMPT.md",
+    "response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_02\\2026-09-07-vsp02-post-b01-two-prefix-convergence-01\\2026-09-07-vsp02-post-b01-two-prefix-convergence-01--vsp_02--attempt-01__02_RESPONSE.md",
+    "packet_manifest": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_02\\2026-09-07-vsp02-post-b01-two-prefix-convergence-01\\2026-09-07-vsp02-post-b01-two-prefix-convergence-01--vsp_02__PACKET_MANIFEST.json",
+    "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_02\\2026-09-07-vsp02-post-b01-two-prefix-convergence-01\\2026-09-07-vsp02-post-b01-two-prefix-convergence-01--vsp_02--attempt-01__03_TRANSPORT_FACTS.json",
+    "response_sha256": "c81a0af0fbb72c4fc8a8b52c7124ad36eb382bcbd0809ce1a218d6e93573d72c"
+  },
+  "captured_at": "2026-09-08T03:57:34Z",
+  "archived_at": "2026-09-08T03:57:34Z",
+  "notes": [
+    "Exact response preserved byte-for-byte from provider clipboard.",
+    "No second Send was attempted."
+  ],
+  "return_receipt": {
+    "status": "SENT",
+    "attempt_count": 1,
+    "delivery_status": "accepted",
+    "message_key": "2026-09-07-vsp02-post-b01-two-prefix-convergence-01|vsp_02|6a9f344c-c6dc-83e8-80e7-e12ced7f445f|c81a0af0fbb72c4fc8a8b52c7124ad36eb382bcbd0809ce1a218d6e93573d72c",
+    "sent_at": "2026-09-08T03:58:53Z",
+    "destination_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267"
+  },
+  "receipt_note": "Parent app receipt accepted after one send; receipt text's transport_facts display path had a cosmetic filename typo, while registry/archive facts retain the canonical path. No corrective app message sent."
+}

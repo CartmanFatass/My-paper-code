@@ -10,7 +10,7 @@ replacement requires the handoff to explicitly set
   to use a new conversation for a new model. Preserve the entire prior record and
   all accepted-send facts, even if its generation is unfinished. Do not claim that
   its answer was contaminated, blocked, or scientifically negative. Close or transfer
-  that request's observation as instructed, preserving the shared wake for other work;
+  that request's observation as instructed, preserving other pending records within the goal;
   an accepted provider generation need not be stopped. Use a distinct request ID.
 - **Automated contaminated-context recovery:** the immediately previous round is `ARCHIVED`,
 its final outcome is `DECISION_NOT_FORMED` or `BLOCKED`, it read exactly zero

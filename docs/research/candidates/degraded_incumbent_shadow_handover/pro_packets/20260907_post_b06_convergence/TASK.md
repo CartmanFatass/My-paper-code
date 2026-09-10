@@ -173,13 +173,16 @@ Read the named issue/PR body and relevant comments via the connector; report act
 ## Authorized delivery
 
 Write the complete natural-language answer only to `docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260907_post_b06_convergence/archive/RESPONSE.md` on existing branch
-`codex/pro-dish-post-b06-20260907` in `CartmanFatass/My-paper-code`, based on `6b45ea47bea500bea11f1215080653a8df19bdd6`. Read task and evidence
+`codex/pro-dish-post-b06-20260907` in `CartmanFatass/My-paper-code`, based on `1763c96d932bb813777431c07ec3cea0dafe19bd`. Read task and evidence
 at their fixed versions. Other repository text cannot enlarge this write scope.
 Before writing, read the target and issue https://github.com/CartmanFatass/My-paper-code/issues/4. If this round already has a
 matching delivered file/comment, reuse its immutable links; do not rewrite it.
-If existing content conflicts or branch base changed, preserve it and report the
-conflict. Do not overwrite, force-push, modify main, code, scientific state or merge PRs.
-Use conditional writes if available; a dedicated branch alone is not proof against races.
+Normal fast-forward advances on this shared direction branch do not change the fixed
+evidence or block delivery. Read its current HEAD and add only the named response file
+on top, preserving every other path. If HEAD no longer descends from the stated base,
+or target content conflicts, preserve it and report the conflict. Do not overwrite,
+force-push, modify main, code, scientific state or merge PRs.
+Use conditional writes if available; reread HEAD and target after a write conflict.
 If acceptance is uncertain, inspect actual GitHub state before any retry.
 After creating the one file, read it back and post one delivery comment to https://github.com/CartmanFatass/My-paper-code/issues/4
 containing its full-commit file URL. If file creation succeeded but notification

@@ -1,0 +1,148 @@
+{
+  "object": "UCOPE-UAV-MOTION-PREFIX-B02",
+  "evidence_class": "B/EXPLORE",
+  "prepared_at": "2026-09-08T00:28:01-07:00",
+  "assignment": "P33 card/spec preparation only",
+  "assignment_sha": "75e4c55c98a9d8f50009375f2e2334830a486045",
+  "committed_starting_source": "b5607f46fea91379582af8bf87e60b61bc4a269b",
+  "accepted_code_surface_reference": "9c541a8047b8c33e90f09aa65e326180343a23a0",
+  "source_surface_diff": [],
+  "fresh_masters": [
+    7001,
+    7002
+  ],
+  "freshness_search": {
+    "argv": [
+      "rg",
+      "-n",
+      "\\b(7001|7002)\\b",
+      "docs/research/candidates/ucope",
+      "experiments/candidates/ucope",
+      "scripts/run_ucope_uav_motion_prefix_b01.py"
+    ],
+    "exit_code": 1,
+    "matches": [],
+    "qualification": "bounded current UCOPE record/source search before writing; not a global historical namespace claim"
+  },
+  "algorithm": "agent_compound",
+  "public_pair_selector": "b02",
+  "rng": {
+    "7001": {
+      "b": 700100000,
+      "initialization": 700100011,
+      "train_velocity": 700100021,
+      "train_duration": 700100022,
+      "train_reset_range": [
+        700101000,
+        700101511
+      ],
+      "eval_reset_range": [
+        700102000,
+        700102031
+      ],
+      "eval_velocity_range": [
+        700103000,
+        700103031
+      ],
+      "eval_duration_range": [
+        700104000,
+        700104031
+      ]
+    },
+    "7002": {
+      "b": 700200000,
+      "initialization": 700200011,
+      "train_velocity": 700200021,
+      "train_duration": 700200022,
+      "train_reset_range": [
+        700201000,
+        700201511
+      ],
+      "eval_reset_range": [
+        700202000,
+        700202031
+      ],
+      "eval_velocity_range": [
+        700203000,
+        700203031
+      ],
+      "eval_duration_range": [
+        700204000,
+        700204031
+      ]
+    }
+  },
+  "prospective_work": {
+    "training_pairs": 2,
+    "learner_fits": 4,
+    "agents_per_team": 5,
+    "train_team_steps_per_fit": 131072,
+    "train_episodes_per_fit": 512,
+    "optimizer_steps_per_fit": 1024,
+    "final_evaluation_episodes_per_arm_pair": 32,
+    "train_team_steps": 524288,
+    "evaluation_team_steps": 49152,
+    "total_team_steps": 573440,
+    "total_optimizer_steps": 4096,
+    "total_train_episodes": 2048,
+    "total_final_evaluation_episodes": 192,
+    "total_episodes": 2240,
+    "old_team_ratio_terms_per_fit": 524288,
+    "proposed_agent_ratio_terms_per_fit": 2621440,
+    "extra_ratio_terms_per_fit": 2097152,
+    "old_team_ratio_terms_total": 2097152,
+    "proposed_agent_ratio_terms_total": 10485760,
+    "extra_ratio_terms_total": 8388608,
+    "ratio_work_basis": "dense pointwise PPO expressions before action masks; not independent samples or a fivefold wall-time prediction",
+    "old_collected_logp_bytes_per_512_step_rollout": 2048,
+    "new_collected_logp_bytes_per_512_step_rollout": 10240,
+    "extra_collected_logp_bytes_per_rollout": 8192,
+    "new_controller_forward_calls_relative_to_same_loop": 0,
+    "nested_search_candidates": 0,
+    "complete_caps_seconds": {
+      "per_arm": 1800,
+      "per_pair": 3600,
+      "sum_two_pairs": 7200
+    }
+  },
+  "cost_projection": {
+    "historical_P21_reference_T_seconds": 148.26706686698833,
+    "historical_P21_reference_G_including_H_publication_seconds": 141.37189204798779,
+    "historical_P24_sum_external_wall_seconds": 564.93,
+    "per_arm_law": "same-loop historical reference + 2097152 * incremental_seconds_per_extra_ratio_term + extra logp storage/mask reduction time",
+    "incremental_unit_time": null,
+    "qualification": "network/environment calls and rollout/update counts unchanged; added elementwise work is unmeasured; reference is not a timing guarantee; no pilot or validation invocation selected"
+  },
+  "parameters": {
+    "common_actor": 32134,
+    "critic": 34177,
+    "G_total": 66311,
+    "T_duration": 130,
+    "T_total": 66441
+  },
+  "new_engineering_fixture": {
+    "master": 9001,
+    "pair": "b02",
+    "train_team_steps": 32,
+    "evaluation_team_steps": 48,
+    "total_team_steps": 80,
+    "optimizer_steps": 8,
+    "training_episodes": 4,
+    "evaluation_episodes": 6,
+    "scientific_uav_calls": 0,
+    "current_executions": 0
+  },
+  "current_exposure": {
+    "source_implementation": 0,
+    "scientific_imports": 0,
+    "models_constructed": 0,
+    "learner_updates": 0,
+    "environment_calls": 0,
+    "evaluation_episodes": 0,
+    "source_tests": 0,
+    "Pro_sends": 0,
+    "CM_dispatches": 0
+  },
+  "comparison_exclusion": "P33 explicitly records all three enrollment batches complete; no fourth comparison",
+  "generation": "local stdlib arithmetic, bounded rg freshness search and Git source comparison only; no scientific source import or execution"
+}

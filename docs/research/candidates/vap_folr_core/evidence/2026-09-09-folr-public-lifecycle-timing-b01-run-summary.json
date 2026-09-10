@@ -1,0 +1,78 @@
+{
+  "unit": "caller-declared independent training run",
+  "inference": "descriptive only; no confidence interval or success classification",
+  "groups": [
+    {
+      "task": "FOLR-PUBLIC-LIFECYCLE-TIMING-B01",
+      "arm": "EVENT",
+      "n": 1,
+      "mean": 5.349296875,
+      "sample_sd": null,
+      "min": 5.349296875,
+      "max": 5.349296875,
+      "runs": {
+        "7804": 5.349296875
+      }
+    },
+    {
+      "task": "FOLR-PUBLIC-LIFECYCLE-TIMING-B01",
+      "arm": "RANDOM",
+      "n": 1,
+      "mean": 3.9856249999999998,
+      "sample_sd": null,
+      "min": 3.9856249999999998,
+      "max": 3.9856249999999998,
+      "runs": {
+        "7804": 3.9856249999999998
+      }
+    },
+    {
+      "task": "FOLR-PUBLIC-LIFECYCLE-TIMING-B01",
+      "arm": "RETAIN",
+      "n": 1,
+      "mean": 2.5445312499999995,
+      "sample_sd": null,
+      "min": 2.5445312499999995,
+      "max": 2.5445312499999995,
+      "runs": {
+        "7804": 2.5445312499999995
+      }
+    }
+  ],
+  "paired_differences": [
+    {
+      "task": "FOLR-PUBLIC-LIFECYCLE-TIMING-B01",
+      "arm": "EVENT",
+      "baseline": "RETAIN",
+      "summary": {
+        "n": 1,
+        "mean": 2.804765625000001,
+        "sample_sd": null,
+        "min": 2.804765625000001,
+        "max": 2.804765625000001
+      },
+      "differences": {
+        "7804": 2.804765625000001
+      },
+      "unmatched_arm_seeds": [],
+      "unmatched_baseline_seeds": []
+    },
+    {
+      "task": "FOLR-PUBLIC-LIFECYCLE-TIMING-B01",
+      "arm": "RANDOM",
+      "baseline": "RETAIN",
+      "summary": {
+        "n": 1,
+        "mean": 1.4410937500000003,
+        "sample_sd": null,
+        "min": 1.4410937500000003,
+        "max": 1.4410937500000003
+      },
+      "differences": {
+        "7804": 1.4410937500000003
+      },
+      "unmatched_arm_seeds": [],
+      "unmatched_baseline_seeds": []
+    }
+  ]
+}

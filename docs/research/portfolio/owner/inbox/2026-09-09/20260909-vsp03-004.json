@@ -1,0 +1,109 @@
+{
+  "id": "20260909-vsp03-004",
+  "created": "2026-09-09T14:35:19-07:00",
+  "direction": "vsp_03",
+  "tier": "direction",
+  "kind": "new-card",
+  "title": "VSP03 候选：3个连续512 fit，固定128/512面板",
+  "context": "候选提出延长同一训练过程而非不变128重跑；旧窄家族仍暂停，原Convergence待选择。原CM只读确认源码可行及60秒完整fit的规划合理性；180秒仅为三fit完整调用wall之和。本轮不冻结、不实现、不分配或执行科学。",
+  "options": [
+    {
+      "key": "a",
+      "label": "选择这个有界连续512比较候选",
+      "consequence": "若原Convergence合规选择，再按Root具体指令冻结与执行；保留原128停止及全部混合结果。"
+    },
+    {
+      "key": "b",
+      "label": "维持窄家族暂停，不选后继",
+      "consequence": "本候选不进入实现或运行；不作整个方向或Portfolio处置。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "固定两端点直接观察预算是否改变原生比较，三fit是本次owner候选大小而非种子配额；收益和耗时仍未测。",
+  "evidence": [
+    "docs/research/candidates/vsp_03/VSP03_CONTINUOUS512_CANDIDATE_SCIENCE_CARD_20260909.md",
+    "docs/research/candidates/vsp_03/VSP03_CONTINUOUS512_CM_FEASIBILITY_20260909.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-09.md#L27",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": {
+    "question": "是否在保留已停128家族的历史含义下，选择3个新G各连续512更新、固定128/512面板的有限预算比较？当前仅准备，原Convergence尚未选择。",
+    "changes_if_approved": [
+      {
+        "target": "vsp_03 的新continuous512候选",
+        "from": "已测试的ordinary-G/update128窄家族暂停，后继未选",
+        "to": "若原Convergence合规选择，随后按Root具体指令冻结并实施3个连续512 fit；原停止和全部旧证据仍保留"
+      }
+    ],
+    "if_refused": "保持已测128窄家族暂停且不选512后继；不把新问题拒绝改成整个方向失败，不运行旧权重诊断或替代网格。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/vsp_03/VSP03_CONTINUOUS512_CANDIDATE_SCIENCE_CARD_20260909.md#1-question-and-the-stopped-scope",
+        "quote": "Does extending the same real training process from128 to512 updates change the\nnative comparison enough to reconsider ordinary greedy G's usefulness against\nR0 and R?",
+        "why": "同一训练过程的两个预选终点直接观察预算变化，不只是再抽一个旧128实例。"
+      },
+      {
+        "path": "docs/research/candidates/vsp_03/VSP03_CONTINUOUS512_CM_FEASIBILITY_20260909.md",
+        "quote": "The shared model/environment/objective need no redesign.",
+        "why": "原CM根据真实源码和既有完整耗时确认小幅实现可行；不靠新增profiling或放宽预算。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/vsp_03/VSP03_POST_B05_CONVERGENCE_INTAKE_20260909.md",
+        "quote": "The negative descriptive mean does not establish population inferiority.",
+        "why": "旧两小正一较大负保留，不保证更长训练改善；同信息readiness仍强。"
+      },
+      {
+        "path": "docs/research/candidates/vsp_03/VSP03_B05_P76_INTAKE_20260909.md",
+        "quote": "All three stochastic\nexecutions lose to both fixed rules.",
+        "why": "更多优化仍可能只给greedy小幅混合收益，随机用途仍亏损。"
+      }
+    ],
+    "uncertainty": [
+      "512是否改善、幅度及各fit结果未知；两个面板不能证明收敛或唯一机制。",
+      "三fit是本次owner候选尺寸，不是种子配额；不要求全正。",
+      "60秒每fit是有源码依据的可行上限建议，不是实测保证；180秒是完整调用wall之和。",
+      "原暂停不能本地忽略；新预算是否值得选择由原Convergence明确决定。"
+    ],
+    "cost": {
+      "compute": "候选3模型、1536Adam、221184joint episodes、8847360team ticks、17694720target transitions；60秒完整fit、180秒summed wall。外推约13.01–16.77秒/fit、三fit约39.04–50.30秒，非保证。本轮新模型、RNG、科学/测试/profiling调用、source实现、Pro Send均0。",
+      "owner_time": "异步查看候选和原节点决定；不等待。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing; preparation returns one ready proper-node handoff, with no source implementation or scientific allocation"
+    },
+    "verdict_text": "DM recommends asking Convergence\nto select this one bounded512 comparison because it directly separates continued\nlearning from another unchanged128 realization at low projected work.",
+    "source": "docs/research/candidates/vsp_03/VSP03_CONTINUOUS512_CANDIDATE_SCIENCE_CARD_20260909.md",
+    "owner_boundary_checked_at": "2026-09-09T21:32:27Z"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-09T22:26:02+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/vsp_03/pro_packets/20260909_continuous512_convergence/archive/RESPONSE.md@5af9c448879bba3129df32e07a788839658f8a4f",
+      "record": "docs/research/candidates/vsp_03/VSP03_CONTINUOUS512_CONVERGENCE_INTAKE_20260909.md#5-decisions-this-intake-produces",
+      "state": "applied",
+      "summary": "原Convergence完整答复选择(a)：三个新G连续512更新、固定128/512面板、512 greedyG-R0主要量；有限预算重入，旧独立128/N1/T仍暂停、recasts1。接近的选择，旧两小正一较大负及随机亏损保留。没有新运行或Portfolio处置。"
+    },
+    {
+      "at": "2026-09-09T22:26:02+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "Root 2026-09-09 full-intake assignment recorded in docs/research/candidates/vsp_03/VSP03_CONTINUOUS512_CONVERGENCE_INTAKE_20260909.md#5-decisions-this-intake-produces",
+      "record": "docs/research/candidates/vsp_03/VSP03_B06_CONTINUOUS512_SCIENCE_CARD_20260909.md",
+      "state": "applied",
+      "summary": "按Root当前指令冻结完整B06科学卡、低置信度均值幅度预测及配对Q/缺失规则，发布CM五项提案。卡/实现提案已就绪，source、测试、fit均未分配或执行；由Root下一具体任务给出有限分配。六栏中文brief见2026-09-09_continuous512_convergence.md。未虚构owner回复；原准备packet保留为历史，当前执行状态以此trace及intake为准。"
+    },
+    {
+      "at": "2026-09-09T22:34:43+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/vsp_03/pro_packets/20260909_continuous512_convergence/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/decisions/2026-09-09-synthesis-execution.md",
+      "state": "applied",
+      "summary": "Full Pro/DM/card accepted and integrateda36158793/319ecb159; branch audit28–30 mapsmain169–171. Root now allocates exact three-fit B06 under standing delegation, unchanged60s perfit/noextra validation/cumulative test cap. Close-call and oldpauses retained; no result or owner reply fabricated."
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "kind": "harmless existing-wrapper postamble check",
+  "payload": "(\n/usr/bin/time -f 'payload_wall_seconds=%e peak_rss_kib=%M' /usr/bin/timeout --signal=KILL 120s bash -c 'exit 7'\n)",
+  "wrapper": "#!/usr/bin/env bash\necho $$ > \"/home/wu/projects/HMASD/temp/directions/vsp_03/test/b04_exit7_20260908_cm1/pid\"\nSTART_TS=$(date +%s)\necho \"=== Task 'vsp03-b03-p54-20260908' started at $(date -Iseconds) ===\" >> \"/home/wu/projects/HMASD/temp/directions/vsp_03/test/b04_exit7_20260908_cm1/task.log\"\n\n# Execute command capturing output\nset +e\neval '(\n/usr/bin/time -f '\"'\"'payload_wall_seconds=%e peak_rss_kib=%M'\"'\"' /usr/bin/timeout --signal=KILL 120s bash -c '\"'\"'exit 7'\"'\"'\n)' >> \"/home/wu/projects/HMASD/temp/directions/vsp_03/test/b04_exit7_20260908_cm1/task.log\" 2>&1\nEXIT_CODE=$?\nset -e\n\nEND_TS=$(date +%s)\necho $EXIT_CODE > \"/home/wu/projects/HMASD/temp/directions/vsp_03/test/b04_exit7_20260908_cm1/exit_code\"\nif [ $EXIT_CODE -eq 0 ]; then\n    echo \"finished\" > \"/home/wu/projects/HMASD/temp/directions/vsp_03/test/b04_exit7_20260908_cm1/status\"\nelse\n    echo \"failed\" > \"/home/wu/projects/HMASD/temp/directions/vsp_03/test/b04_exit7_20260908_cm1/status\"\nfi\necho \"=== Task 'vsp03-b03-p54-20260908' exited with code $EXIT_CODE at $(date -Iseconds) (Duration: $((END_TS - START_TS))s) ===\" >> \"/home/wu/projects/HMASD/temp/directions/vsp_03/test/b04_exit7_20260908_cm1/task.log\"\n\n# Keep session alive briefly for inspection, then exit\nsleep 1\n",
+  "wrapper_process_exit": 0,
+  "stdout": "",
+  "stderr": "",
+  "numeric_exit": 7,
+  "status": "failed",
+  "log": "=== Task 'vsp03-b03-p54-20260908' started at 2026-09-09T06:23:37+08:00 ===\nCommand exited with non-zero status 7\npayload_wall_seconds=0.00 peak_rss_kib=3200\n=== Task 'vsp03-b03-p54-20260908' exited with code 7 at 2026-09-09T06:23:37+08:00 (Duration: 0s) ===\n",
+  "start_time": 1788906217,
+  "publication_mtime_ns": {
+    "exit_code": 1788906217353791744,
+    "status": 1788906217353791744,
+    "task.log": 1788906217353791744
+  },
+  "scientific_models_episodes_updates": [
+    0,
+    0,
+    0
+  ],
+  "complete_receipt_span_s": 0.353791744,
+  "scratch_removed": true
+}

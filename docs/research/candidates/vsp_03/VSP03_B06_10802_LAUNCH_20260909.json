@@ -1,0 +1,18 @@
+{
+  "fit": 10802,
+  "source_sha": "edb74aaf5292600480763403cd30cbd733dd1583",
+  "cwd": "/home/wu/hmasd-worktrees/vsp03-b06-edb74aaf5292600480763403cd30cbd733dd1583",
+  "command": "bash /home/wu/hmasd-worktrees/vsp03-b06-edb74aaf5292600480763403cd30cbd733dd1583/experiments/candidates/vsp_03/vsp03_b06/launch.sh /home/wu/hmasd-worktrees/vsp03-b06-edb74aaf5292600480763403cd30cbd733dd1583 10802",
+  "handle": "vsp03-b06-10802-20260909",
+  "submission_utc": "2026-09-09T22:51:18.350979+00:00",
+  "return_utc": "2026-09-09T22:51:27.750662+00:00",
+  "ssh_returncode": 0,
+  "stdout": "",
+  "stderr": "Running as unit: vsp03-b06-10802-20260909.service; invocation ID: fab4fad94b054cafb838f88e5dc75755\nFinished with result: success\nMain processes terminated with: code=exited/status=0\nService runtime: 8.718s\nCPU time consumed: 8.712s\nMemory peak: 7.8M\nMemory swap peak: 0B\n",
+  "monitor_adoption": "pending",
+  "monitor_dispatch": {
+    "thread_id": "01a087e5-2044-7301-abb6-7a1709a98197",
+    "accepted": true,
+    "adoption": "pending"
+  }
+}

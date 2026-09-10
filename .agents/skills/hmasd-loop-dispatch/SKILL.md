@@ -1,105 +1,62 @@
 ---
 name: hmasd-loop-dispatch
-description: Use when HMASD Portfolio plans or refills direction work, or Root receives a command, native return, dispatch gap or working-set vacancy. Also use when only one direction advances despite available work. Not for scientific intake or provider transport mechanics themselves.
+description: Use when HMASD Root plans or advances the research working set, handles native returns or Transport receipts, replaces an available direction slot, or is about to wait.
 ---
 
-# HMASD Portfolio and Root dispatch
+# HMASD research loop
 
-Portfolio plans the whole working set; Root executes supplied batches and return routes.
-Use the section for the current role. AGENTS and the current owner instruction retain
-authority; this procedure changes no scientific decision tier, model, budget or permission.
-Endpoints and observation rules are in `docs/project/ROOT_OPERATIONS.md`.
+Root coordinates execution within accepted decisions. ROOT_OPERATIONS.md owns responsibilities
+and routing. Assign a relevant recently active DM to prepare Portfolio Pro materials and check
+its response under `hmasd-portfolio-task`; Root does not draft or select Portfolio science.
 
-## Shared state: actual work, not remembered task names
+## Stable next-action trigger
 
-Use current commands in `docs/research/portfolio/PORTFOLIO.md`, actual native dispatch/return
-receipts and current `EXPERIMENT_TRACKING.md` facts. The original delivery artifact establishes
-what completed; an old native summary does not replace a later experiment or scientific intake.
-A committed command, accepted dispatch and running task are different states.
-Before shared-main index mutations, use the peer handoff in
-`docs/project/SIBLING_COMMUNICATION.md`; other work continues while the short Git operation runs.
+At goal-turn entry, a return or receipt, and before waiting:
 
-Count advancing direction chains, not child agents: implementation, collection, intake and
-question preparation count; an external wait, completed child or undispatched intention does
-not. Reuse the latest native inventory until an event changes it. Resolve a missing fact once
-from its current source instead of reconstructing all direction history.
+1. Apply current owner instructions and pause/stop boundaries first. Control-plane edits
+   and status questions do not resume research. During a pause, perform only authorized
+   closeout, evidence preservation and the requested non-research work.
+2. Make a short pass over changed returns and current tracking. Identify ready continuations,
+   completed deliveries needing integration and actionable vacancies. Read only the affected
+   current Portfolio row and original evidence. Count actual advancing directions under AGENTS §5.
+3. Dispatch already-ready independent work before lengthy acceptance, integration or planning.
+   Do not dispatch a dependent launch until its own inputs are accepted and published. Short
+   routing of another direction's result to its existing DM need not wait for that integration.
+4. Accept one bounded delivery or resolve one vacancy from current evidence and authorized
+   priorities, then dispatch its ready continuation and return to step 2. For a lengthy operation,
+   service other ready work at its next recoverable boundary. Keep scientific intake with DM
+   and the complete technical batch with the same DM, optionally using an Operator under ROOT_OPERATIONS.md. Root selects
+   replacements within accepted priorities; an unresolved scientific choice goes through the
+   designated DM to the proper Pro node. Portfolio responses return to their designated DM
+   for scientific/specification checking, then Root applies the conforming decision.
+5. Check that each accepted experiment has confirmed adoption by the independent Luna/low
+   monitor under EXPERIMENT_MONITOR.md. DM/Operator directly adds new accepted handles to its shared active set;
+   a dispatched message alone is not adoption. Route each terminal notice to its original
+   DM for remaining collection/intake using followup_task, without waiting for other runs.
+   Read supervisor state only for handles Root actually owns or is reconciling after lost
+   observation. Route terminal evidence promptly. If Transport is idle with a pending request,
+   reconcile its persisted state and resume that same observation/recovery route. App dispatch
+   acceptance is not provider Send acceptance.
+6. When no authorized action is ready, wait for the first event for at most 60 seconds,
+   retaining exact dependencies. On wake, process changed facts before waiting again. A batch
+   never creates a completion barrier; unresolved waits do not fill available direction slots.
 
-## Portfolio: one return triggers a whole-working-set pass
+## Bounded assignments
 
-1. Read the original return and its affected card/intake sections. Apply owner overrides and
-   distinguish technical completion, missing science, failed dispatch and uncertain acceptance.
-2. Account for every current chain: retain running work; identify completed, undelivered and
-   waiting work; choose the next useful bounded task for each actionable vacancy. Plan toward
-   five advancing chains. If fewer are justified, name the actual dependencies; do not fill a
-   slot with duplicate preparation or invented experiments.
-3. Prepare **one batch of all independent commands**, including follow-ons to the reporting
-   direction and ready work elsewhere. Preserve DM object-tier and Pro decision authority.
-   Give a missing scientific choice to its DM/node rather than asking Root to decide it.
-4. Update the current rows, commit/push, then send the usable batch to Root. Check its actual
-   dispatch receipt. An unaccepted command still needs routing; a snapshot update is not delivery.
+Use ENGINEERING_SCOPE_SPEC §7.1 for L0 and optional L1–L3 detail. Include the existing
+branch/checkout and known collection, integration, intake, cleanup and selected follow-on work.
+DM carries the engineering and scientific batch through completion; no separate CM or new
+planning handoff is required for ordinary implementation steps.
 
-Use the existing five-item handoff, in ordinary prose:
+Native work uses `followup_task`; `send_message` only conveys information requiring no
+new work. Retain actual dispatch outcomes and reconcile uncertain delivery before retrying.
+An unavailable recipient is a Root recovery decision within the same role and scope.
+A written next step does not count as active work.
 
-- **Target/action:** exact existing recipient and bounded deliverable. If the recipient may be
-  unavailable, supply a concrete replacement route with the same role and assignment.
-- **Inputs:** current path/section and bound revision or request identity; name the direction's
-  existing authoring branch/worktree and owned paths. Reuse it across assignments under AGENTS
-  section 6, with one writer for overlapping work; a new task does not create a branch.
-  If actual selected work has no direction checkout, establish one on demand from accepted
-  inputs; do not precreate branches for inactive directions. A temporary exception names its
-  purpose and retirement event in this handoff.
-- **Bounds:** allowed work, scientific/execution budget, stop and the specific earlier boundary
-  this continuation supersedes. Keep preparation-only limits on their own task.
-- **Return route:** name collection, integration, intake and already-selected follow-on actions.
-  State real dependencies, such as technical artifact acceptance before the second frozen arm.
-  Root also reconciles finished temporary branches under AGENTS section 6 and retires their
-  local/remote names after preserving recovery and resolving any live delivery dependency.
-- **Report conditions:** completion, failed/missing dispatch, concrete conflict, uncertain
-  external acceptance or unlisted next action; return them to Portfolio.
+Root maintains PORTFOLIO.md, EXPERIMENT_TRACKING.md and useful evidence in the existing
+root-log. Batch ready routine record edits at clean boundaries; push every commit immediately.
+Coordinate only actual overlapping file/index work. Follow SIBLING_COMMUNICATION.md for
+native tool addressing and independent Transport receipts.
 
-Bundle routine collection → technical acceptance → integration → scientific intake when their
-scope is known. A delegated DM/CM decision within that route needs no extra Portfolio vote.
-For example, a first arm's conforming summary may admit the already-selected second arm without
-selecting on the first score. A new scientific choice or unfrozen invocation remains separate.
-
-## Root: dispatch the batch, execute its routes, report the working set
-
-1. Dispatch every independent command before waiting. Reuse accepted assignments. Use native
-   `send_message` for running agents and `followup_task` to resume idle ones; follow the exact
-   addressing rules in `docs/project/SIBLING_COMMUNICATION.md`.
-2. If an old recipient is absent, try its resumable identity. If unavailable, use the explicitly
-   supplied replacement route or report the missing target immediately. Continue other commands.
-3. Execute each supplied return route as its dependency arrives; integrate/push specified clean
-   deliveries and route actual artifacts to their named CM/DM. Keep technical interpretation
-   with CM and science with DM. Do not replace an E0 result with an earlier implementation record.
-4. Send a concise receipt with **the result, the whole working-set state, and the next event**.
-   For each direction give command, actual recipient/status and any unsent action or dependency.
-   Include the actual advancing-chain count. Changed facts need evidence/commit; unchanged rows
-   can be a compact line. Report a vacancy when it occurs, not when the entire batch finishes.
-5. While native work is running, wait for its returns and handle authorized observations. When
-   only external waits or a requested Portfolio reply remain, return with those exact dependencies
-   and the existing observation route. An empty queue requests a new batch; it is not programme
-   completion. Unchanged healthy observation needs no repeated report or inventory polling.
-
-| Event | Root's next action |
-| --- | --- |
-| Complete native return | Follow its prewritten route; report original evidence and updated working set. |
-| Failed dispatch, unavailable recipient or yielded direction | Report the precise gap/vacancy now; dispatch unrelated commands. |
-| Reversible technical staging problem inside an assigned repair route | Keep the same CM on that authorized repair; report its concrete unresolved gap, not an invented scientific stop. |
-| Unknown Send or launch acceptance | Reconcile the same identity from authoritative state; hold only the uncertain external action. |
-| New scientific choice, extra invocation or unlisted task | Send the question to Portfolio/the named decision owner; continue independent assigned work. |
-
-A later explicit continuation supersedes an earlier command's stop only within its stated scope.
-Successful staging after zero accepted invocations is not a scientific retry. This does not
-authorize a retry of an accepted experiment, a different source/device/budget or duplicate Send.
-Root follows supplied choices; it does not select a replacement direction or technical alternative.
-Routine tool addressing, reads and authorized pre-acceptance mechanical corrections stay local.
-
-## Example: one hot direction and three silent queues
-
-V is preparing a packet; D has a completed experiment with no DM intake; C has a terminal
-technical return; U stopped before launch and has no accepted process. Portfolio sends D intake,
-C intake/next-path preparation and, if selected, U's bounded staging continuation together,
-while retaining V. If all four are still advancing after dispatch, Root reports **four actual
-advancing chains**. An unresolved fifth direction remains a named dependency. Neither session
-waits for V's packet before advancing D, C and U, or counts old DM names as active work.
+Owner delegation, scientific caps, exact-source execution, memory admission and uncertain
+Send rules remain binding. A repaired wrapper does not authorize another scientific attempt.

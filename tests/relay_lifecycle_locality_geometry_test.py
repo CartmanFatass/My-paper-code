@@ -3,7 +3,7 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from config_1 import Config
+from configs.config_1 import Config
 from envs.pettingzoo.relay.energy_aware import UAVEnergyAwareRelayEnv
 from envs.pettingzoo.relay.forced_relay import UAVForcedRelayEnv
 from envs.pettingzoo.relay.progressive import UAVProgressiveRelayEnv

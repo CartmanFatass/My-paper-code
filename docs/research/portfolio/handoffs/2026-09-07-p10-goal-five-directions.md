@@ -1,20 +1,21 @@
 # P10 — five direction tasks under the owner's goal
 
 Authority: OWNER_DIRECT 2026-09-07 goal relayed by Root: maintain five research directions
-until two formally enter UAV validation. Active native work, running experiments and accepted
+until five formally enter UAV validation (latest owner revision, superseding the earlier two).
+Active native work, running experiments and accepted
 Pro review generation count together, at most once per direction. Completed returns, unsent
 commands and unresolved transport identities do not count. Use the existing goal, not a scheduler.
 
 ## Current evidence and dispatch status
 
-This batch is prepared, not a claim of accepted dispatch. Portfolio's outbound task messages
-have been rejected with `Cannot steer conversation without an active turn id`. Root may read
-this committed handoff directly; receipt of a document alone does not count as native dispatch.
-At this boundary there are **zero confirmed active slots** from the latest available returns:
-VSP03's accepted attempt is terminal; the other listed directions returned completed work or
-an unresolved request. This is a confirmed-count lower bound, not a fresh runtime inventory.
-Root reconciles actual inventory once, retains any already accepted identical assignment, then
-dispatches all independent commands below. Report requested acceptance/count once in root-log;
+Root's acceptance receipt `4c5734e58` records **five active native slots** after all five
+dispatches were accepted, including a replacement UCOPE DM. This is the observed dispatch
+state, not a standing count after later returns. Earlier outbound Portfolio messages were
+rejected with `Cannot steer conversation without an active turn id`; Root read the committed
+handoff and supplied this receipt. Do not repeat those accepted dispatches.
+The VSP03 original experiment remains terminal; its repair task is the active slot. Preserve
+each subsequent native/experiment/Pro state transition and reconcile actual inventory when a
+return changes it. Report requested acceptance/count once in root-log;
 an unavailable recipient or unresolved gap needs a direct Portfolio repair request.
 
 Use existing direction DM/CM and designated authoring branch/worktree. Resolve these from the
@@ -113,7 +114,7 @@ direction/owner decision selecting UAV validation and its concrete prospective U
 evidence class, population, comparator, budget and outcome conditions. Record those exact
 decision/card references when counting a direction as entered; entry is not validation success.
 If the direction uses another existing entry definition, return that source for reconciliation.
-No two-direction entry completion has been verified at this boundary.
+No five-direction entry completion has been verified at this boundary.
 
 Root sends actual five-slot acceptance/status as an explicitly requested single response or log
 receipt, never counts this plan itself. Maintain at most one slot per direction across native,
