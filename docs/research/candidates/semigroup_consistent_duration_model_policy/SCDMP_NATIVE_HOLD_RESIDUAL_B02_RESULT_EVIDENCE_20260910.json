@@ -1,0 +1,5036 @@
+{
+  "object": "SCDMP-NATIVE-HOLD-RESIDUAL-B02",
+  "card": "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_NATIVE_HOLD_RESIDUAL_B02_SCIENCE_CARD_20260910.md",
+  "card_freeze_sha": "78397e045e135e3b55a6d6af06a1227d50996f46",
+  "launch_sha": "f079c753052f95f01754e50676a59d7541fd683c",
+  "independent_training_pairs": 1,
+  "rule_verbatim": "| Complete trustworthy observation | Reading and recommendation |\n| --- | --- |\n| Δ2>0.01 | UP: one selected-scale residual-MC package signal alongside B01 WITHIN. Discuss further investment only after complete intake; no stable superiority, two-UP claim or automatic third pair. |\n| −0.01≤Δ2≤0.01 | WITHIN, including both boundaries: a second instance without selected-scale improvement. Recommend narrow PARK of this unchanged opening residual-MC package after intake; no third pair to seek positivity, equivalence or broad residual-method failure. |\n| Δ2<−0.01 | DOWN: this instance materially favors intact MC. Alongside B01's small positive gap it is a warning about inconsistent package outcomes; recommend narrow PARK after intake. No negative-population-mean claim or automatic coefficient change. |\n| Learner primary dependency incomplete | No complete-budget package judgment dependent on the missing facts. Preserve independently trustworthy rows/counts/errors; no replacement seed. Missing H limits H-dependent claims if the learner primary remains independently complete. |",
+  "rule_reading": "WITHIN",
+  "summary": {
+    "object": "SCDMP-NATIVE-HOLD-RESIDUAL-B02",
+    "card": "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_NATIVE_HOLD_RESIDUAL_B02_SCIENCE_CARD_20260910.md",
+    "seed": 8202,
+    "launch_sha": "f079c753052f95f01754e50676a59d7541fd683c",
+    "mode": "UAV_B_EXPLORE",
+    "configuration": {
+      "seed": 8202,
+      "fixture": false,
+      "horizon": 256,
+      "train_episodes": 512,
+      "eval_episodes": 32,
+      "chunk": 32,
+      "arm_cap": 1800,
+      "pair_cap": 3600,
+      "ratio_grouping": "agent_compound"
+    },
+    "ratio_grouping": "agent_compound",
+    "arms": {
+      "RESIDUAL-MC": {
+        "counts": {
+          "train_team_steps": 131072,
+          "eval_team_steps": 8192,
+          "team_steps": 139264,
+          "optimizer_steps": 1024,
+          "train_episodes": 512,
+          "eval_episodes": 32,
+          "velocity_decisions": 692237,
+          "duration_decisions": 2720,
+          "d4": 1361,
+          "recurrent_observations": 696320,
+          "explicit_resets": 544,
+          "constructor_resets": 1,
+          "constructors": 1,
+          "step_calls": 139264,
+          "scientific_uav_calls": 139264,
+          "diagnostic_frames": 0,
+          "completed_episode_steps": 139264,
+          "rollouts": 256
+        },
+        "fit_complete": true,
+        "complete": true,
+        "nonzero_r_rows": {
+          "train": 1494,
+          "eval": 90
+        },
+        "hold_count_coverage": "returned complete episodes only",
+        "elapsed_wall": 145.9011818150757,
+        "training_counts": {
+          "train_team_steps": 131072,
+          "eval_team_steps": 0,
+          "team_steps": 131072,
+          "optimizer_steps": 1024,
+          "train_episodes": 512,
+          "eval_episodes": 0,
+          "velocity_decisions": 651517,
+          "duration_decisions": 2560,
+          "d4": 1281,
+          "recurrent_observations": 655360,
+          "explicit_resets": 512,
+          "constructor_resets": 1,
+          "constructors": 1,
+          "step_calls": 131072,
+          "scientific_uav_calls": 131072,
+          "diagnostic_frames": 0,
+          "completed_episode_steps": 131072,
+          "rollouts": 256
+        },
+        "exposure": {
+          "common_actor": {
+            "parameters": 32134,
+            "initial_norm": 12.348600387573242,
+            "final_norm": 12.748305320739746,
+            "displacement": 3.4003407955169678,
+            "relative_displacement": 0.2753624450377838
+          },
+          "critic": {
+            "parameters": 34177,
+            "initial_norm": 9.27027416229248,
+            "final_norm": 10.79824447631836,
+            "displacement": 5.2277069091796875,
+            "relative_displacement": 0.5639214998023688
+          },
+          "duration": {
+            "parameters": 130,
+            "initial_norm": 0.0,
+            "final_norm": 0.20008046925067902,
+            "displacement": 0.20008046925067902,
+            "relative_displacement": null,
+            "reason": "undefined: zero initial norm"
+          },
+          "total": {
+            "parameters": 66441,
+            "initial_norm": 15.44104290008545,
+            "final_norm": 16.708120346069336,
+            "displacement": 6.239492416381836,
+            "relative_displacement": 0.4040849090800015
+          }
+        },
+        "checkpoint": "final_RESIDUAL-MC.pt",
+        "evaluation_counts": {
+          "train_team_steps": 0,
+          "eval_team_steps": 8192,
+          "team_steps": 8192,
+          "optimizer_steps": 0,
+          "train_episodes": 0,
+          "eval_episodes": 32,
+          "velocity_decisions": 40720,
+          "duration_decisions": 160,
+          "d4": 80,
+          "recurrent_observations": 40960,
+          "explicit_resets": 32,
+          "constructor_resets": 0,
+          "constructors": 0,
+          "step_calls": 8192,
+          "scientific_uav_calls": 8192,
+          "diagnostic_frames": 0,
+          "completed_episode_steps": 8192,
+          "rollouts": 0
+        },
+        "sampled_d4_frequency": 0.5
+      },
+      "MLP-MC": {
+        "counts": {
+          "train_team_steps": 131072,
+          "eval_team_steps": 16384,
+          "team_steps": 147456,
+          "optimizer_steps": 1024,
+          "train_episodes": 512,
+          "eval_episodes": 64,
+          "velocity_decisions": 692222,
+          "duration_decisions": 2720,
+          "d4": 1366,
+          "recurrent_observations": 696320,
+          "explicit_resets": 576,
+          "constructor_resets": 1,
+          "constructors": 1,
+          "step_calls": 147456,
+          "scientific_uav_calls": 147456,
+          "diagnostic_frames": 0,
+          "completed_episode_steps": 147456,
+          "rollouts": 256
+        },
+        "fit_complete": true,
+        "complete": true,
+        "nonzero_r_rows": {
+          "train": 1494,
+          "eval": 90
+        },
+        "hold_count_coverage": "returned complete episodes only",
+        "elapsed_wall": 148.6605473739328,
+        "training_counts": {
+          "train_team_steps": 131072,
+          "eval_team_steps": 0,
+          "team_steps": 131072,
+          "optimizer_steps": 1024,
+          "train_episodes": 512,
+          "eval_episodes": 0,
+          "velocity_decisions": 651502,
+          "duration_decisions": 2560,
+          "d4": 1286,
+          "recurrent_observations": 655360,
+          "explicit_resets": 512,
+          "constructor_resets": 1,
+          "constructors": 1,
+          "step_calls": 131072,
+          "scientific_uav_calls": 131072,
+          "diagnostic_frames": 0,
+          "completed_episode_steps": 131072,
+          "rollouts": 256
+        },
+        "exposure": {
+          "common_actor": {
+            "parameters": 32134,
+            "initial_norm": 12.348600387573242,
+            "final_norm": 12.808670043945312,
+            "displacement": 3.5156102180480957,
+            "relative_displacement": 0.2846970594000007
+          },
+          "critic": {
+            "parameters": 34177,
+            "initial_norm": 9.27027416229248,
+            "final_norm": 11.82335090637207,
+            "displacement": 7.091979026794434,
+            "relative_displacement": 0.7650236554643457
+          },
+          "duration": {
+            "parameters": 130,
+            "initial_norm": 0.0,
+            "final_norm": 0.24749335646629333,
+            "displacement": 0.24749335646629333,
+            "relative_displacement": null,
+            "reason": "undefined: zero initial norm"
+          },
+          "total": {
+            "parameters": 66441,
+            "initial_norm": 15.44104290008545,
+            "final_norm": 17.433162689208984,
+            "displacement": 7.919401168823242,
+            "relative_displacement": 0.5128799408218019
+          }
+        },
+        "checkpoint": "final_MLP-MC.pt",
+        "evaluation_counts": {
+          "train_team_steps": 0,
+          "eval_team_steps": 8192,
+          "team_steps": 8192,
+          "optimizer_steps": 0,
+          "train_episodes": 0,
+          "eval_episodes": 32,
+          "velocity_decisions": 40720,
+          "duration_decisions": 160,
+          "d4": 80,
+          "recurrent_observations": 40960,
+          "explicit_resets": 32,
+          "constructor_resets": 0,
+          "constructors": 0,
+          "step_calls": 8192,
+          "scientific_uav_calls": 8192,
+          "diagnostic_frames": 0,
+          "completed_episode_steps": 8192,
+          "rollouts": 0
+        },
+        "sampled_d4_frequency": 0.5,
+        "hover_counts": {
+          "train_team_steps": 0,
+          "eval_team_steps": 8192,
+          "team_steps": 8192,
+          "optimizer_steps": 0,
+          "train_episodes": 0,
+          "eval_episodes": 32,
+          "velocity_decisions": 0,
+          "duration_decisions": 0,
+          "d4": 0,
+          "recurrent_observations": 0,
+          "explicit_resets": 32,
+          "constructor_resets": 0,
+          "constructors": 0,
+          "step_calls": 8192,
+          "scientific_uav_calls": 8192,
+          "diagnostic_frames": 0,
+          "completed_episode_steps": 8192,
+          "rollouts": 0
+        }
+      }
+    },
+    "limits": [],
+    "status": "COMPLETE",
+    "resources": "resources_unmeasured",
+    "timing_boundary": "in-process through publication/readback; excludes interpreter exit",
+    "complete_exit_cap_conformance": "unmeasured: use existing supervisor terminal process wall",
+    "mlp_start_pair_elapsed": 145.9011875850847,
+    "rollout_loss_coverage": "completed source updates only; partial-update Adam counts are retained",
+    "cost_projection": {
+      "RESIDUAL-MC": "init + 131072*c_env_actor + 1024*c_update + 8192*c_eval + publication; residual increment unmeasured",
+      "MLP-MC": "131072*c_env_actor + 1024*c_update + 16384*c_eval + pair publication/readback/exit"
+    },
+    "seeds": {
+      "initialization": 820200011,
+      "train_velocity": 820200021,
+      "train_duration": 820200022,
+      "constructor_reset": 820201000,
+      "train_reset_start": 820201000,
+      "eval_reset_start": 820202000,
+      "eval_velocity_start": 820203000,
+      "eval_duration_start": 820204000
+    },
+    "counts": {
+      "train_team_steps": 262144,
+      "eval_team_steps": 24576,
+      "team_steps": 286720,
+      "optimizer_steps": 2048,
+      "train_episodes": 1024,
+      "eval_episodes": 96,
+      "velocity_decisions": 1384459,
+      "duration_decisions": 5440,
+      "d4": 2727,
+      "recurrent_observations": 1392640,
+      "explicit_resets": 1120,
+      "constructor_resets": 2,
+      "constructors": 2,
+      "step_calls": 286720,
+      "scientific_uav_calls": 286720,
+      "diagnostic_frames": 0,
+      "completed_episode_steps": 286720,
+      "rollouts": 512,
+      "partial_episode_steps": 0
+    },
+    "scientific_uav_calls": 286720,
+    "primary": {
+      "complete": true,
+      "hover_complete": true,
+      "J": {
+        "RESIDUAL-MC": [
+          0.19208278710001023,
+          0.19717031920471273,
+          0.09204772649760835,
+          0.13864476743275014,
+          0.14976796328877287,
+          0.11325705495389836,
+          0.1685165133210682,
+          0.11837664579610409,
+          0.22110808997089249,
+          0.12828618153855212,
+          0.11318938473115558,
+          0.1575030678333679,
+          0.1686602550064089,
+          0.13359201629320516,
+          0.07563646430860856,
+          0.14539827146115153,
+          0.1388078723197656,
+          0.10574833891453511,
+          0.1442832154260457,
+          0.14239583918502202,
+          0.08178787419781697,
+          0.1091790668281515,
+          0.2050521399655858,
+          0.10688721404764388,
+          0.1952331045760867,
+          0.1437973355633409,
+          0.12620697358785435,
+          0.1757061984318171,
+          0.12654347174014127,
+          0.13924932507700757,
+          0.1862949788253851,
+          0.1792911999892125
+        ],
+        "MLP-MC": [
+          0.13998134119259795,
+          0.293712233724781,
+          0.1275119418220489,
+          0.135454415803101,
+          0.2591266045055362,
+          0.10729503847626404,
+          0.09850726375486776,
+          0.06574466842091221,
+          0.18013795302913738,
+          0.13649483329393222,
+          0.10288675649800301,
+          0.12181766935821146,
+          0.1997897236143669,
+          0.08212482974947165,
+          0.09584788451647638,
+          0.1205173011972864,
+          0.17208463741034533,
+          0.21114881571619426,
+          0.13418204282128174,
+          0.07658454100150816,
+          0.06578084251307817,
+          0.2099905718766284,
+          0.17602261225506682,
+          0.12894970554448504,
+          0.14323960185848492,
+          0.13865714359377715,
+          0.05118296623552245,
+          0.19537197250962515,
+          0.10144936985833854,
+          0.10021390192786848,
+          0.1414874604160714,
+          0.18934722179310084
+        ],
+        "H": [
+          0.1831462463852654,
+          0.21031577503750243,
+          0.10878719435530038,
+          0.12076309570391429,
+          0.17843666760431823,
+          0.23851944520696125,
+          0.14167178917131176,
+          0.17049895255459754,
+          0.2472918053352813,
+          0.24586455350813274,
+          0.11909992239485588,
+          0.13949193807670218,
+          0.09677159306489329,
+          0.10640243617284309,
+          0.1358538740230029,
+          0.28562176213020496,
+          0.06413542523324234,
+          0.04402673084262783,
+          0.19515388447230467,
+          0.11793828564584102,
+          0.09356945155873574,
+          0.15940285212068794,
+          0.3037270249507586,
+          0.04716359651285396,
+          0.10408858198028272,
+          0.0748977822213807,
+          0.06436592730566881,
+          0.03656677783615976,
+          0.07612962987410764,
+          0.12502511453747195,
+          0.11976037190836022,
+          0.16926100915344727
+        ]
+      },
+      "identities": {
+        "RESIDUAL-MC": [
+          [
+            0,
+            820202000
+          ],
+          [
+            1,
+            820202001
+          ],
+          [
+            2,
+            820202002
+          ],
+          [
+            3,
+            820202003
+          ],
+          [
+            4,
+            820202004
+          ],
+          [
+            5,
+            820202005
+          ],
+          [
+            6,
+            820202006
+          ],
+          [
+            7,
+            820202007
+          ],
+          [
+            8,
+            820202008
+          ],
+          [
+            9,
+            820202009
+          ],
+          [
+            10,
+            820202010
+          ],
+          [
+            11,
+            820202011
+          ],
+          [
+            12,
+            820202012
+          ],
+          [
+            13,
+            820202013
+          ],
+          [
+            14,
+            820202014
+          ],
+          [
+            15,
+            820202015
+          ],
+          [
+            16,
+            820202016
+          ],
+          [
+            17,
+            820202017
+          ],
+          [
+            18,
+            820202018
+          ],
+          [
+            19,
+            820202019
+          ],
+          [
+            20,
+            820202020
+          ],
+          [
+            21,
+            820202021
+          ],
+          [
+            22,
+            820202022
+          ],
+          [
+            23,
+            820202023
+          ],
+          [
+            24,
+            820202024
+          ],
+          [
+            25,
+            820202025
+          ],
+          [
+            26,
+            820202026
+          ],
+          [
+            27,
+            820202027
+          ],
+          [
+            28,
+            820202028
+          ],
+          [
+            29,
+            820202029
+          ],
+          [
+            30,
+            820202030
+          ],
+          [
+            31,
+            820202031
+          ]
+        ],
+        "MLP-MC": [
+          [
+            0,
+            820202000
+          ],
+          [
+            1,
+            820202001
+          ],
+          [
+            2,
+            820202002
+          ],
+          [
+            3,
+            820202003
+          ],
+          [
+            4,
+            820202004
+          ],
+          [
+            5,
+            820202005
+          ],
+          [
+            6,
+            820202006
+          ],
+          [
+            7,
+            820202007
+          ],
+          [
+            8,
+            820202008
+          ],
+          [
+            9,
+            820202009
+          ],
+          [
+            10,
+            820202010
+          ],
+          [
+            11,
+            820202011
+          ],
+          [
+            12,
+            820202012
+          ],
+          [
+            13,
+            820202013
+          ],
+          [
+            14,
+            820202014
+          ],
+          [
+            15,
+            820202015
+          ],
+          [
+            16,
+            820202016
+          ],
+          [
+            17,
+            820202017
+          ],
+          [
+            18,
+            820202018
+          ],
+          [
+            19,
+            820202019
+          ],
+          [
+            20,
+            820202020
+          ],
+          [
+            21,
+            820202021
+          ],
+          [
+            22,
+            820202022
+          ],
+          [
+            23,
+            820202023
+          ],
+          [
+            24,
+            820202024
+          ],
+          [
+            25,
+            820202025
+          ],
+          [
+            26,
+            820202026
+          ],
+          [
+            27,
+            820202027
+          ],
+          [
+            28,
+            820202028
+          ],
+          [
+            29,
+            820202029
+          ],
+          [
+            30,
+            820202030
+          ],
+          [
+            31,
+            820202031
+          ]
+        ],
+        "H": [
+          [
+            0,
+            820202000
+          ],
+          [
+            1,
+            820202001
+          ],
+          [
+            2,
+            820202002
+          ],
+          [
+            3,
+            820202003
+          ],
+          [
+            4,
+            820202004
+          ],
+          [
+            5,
+            820202005
+          ],
+          [
+            6,
+            820202006
+          ],
+          [
+            7,
+            820202007
+          ],
+          [
+            8,
+            820202008
+          ],
+          [
+            9,
+            820202009
+          ],
+          [
+            10,
+            820202010
+          ],
+          [
+            11,
+            820202011
+          ],
+          [
+            12,
+            820202012
+          ],
+          [
+            13,
+            820202013
+          ],
+          [
+            14,
+            820202014
+          ],
+          [
+            15,
+            820202015
+          ],
+          [
+            16,
+            820202016
+          ],
+          [
+            17,
+            820202017
+          ],
+          [
+            18,
+            820202018
+          ],
+          [
+            19,
+            820202019
+          ],
+          [
+            20,
+            820202020
+          ],
+          [
+            21,
+            820202021
+          ],
+          [
+            22,
+            820202022
+          ],
+          [
+            23,
+            820202023
+          ],
+          [
+            24,
+            820202024
+          ],
+          [
+            25,
+            820202025
+          ],
+          [
+            26,
+            820202026
+          ],
+          [
+            27,
+            820202027
+          ],
+          [
+            28,
+            820202028
+          ],
+          [
+            29,
+            820202029
+          ],
+          [
+            30,
+            820202030
+          ],
+          [
+            31,
+            820202031
+          ]
+        ]
+      },
+      "reading": "WITHIN",
+      "independent_training_pairs": 1,
+      "RESIDUAL-MC_minus_MLP-MC": {
+        "differences": [
+          0.05210144590741228,
+          -0.09654191452006827,
+          -0.03546421532444054,
+          0.0031903516296491463,
+          -0.10935864121676334,
+          0.0059620164776343215,
+          0.07000924956620044,
+          0.052631977375191874,
+          0.04097013694175511,
+          -0.008208651755380103,
+          0.010302628233152575,
+          0.035685398475156435,
+          -0.031129468607957983,
+          0.051467186543733515,
+          -0.020211420207867828,
+          0.024880970263865126,
+          -0.033276765090579724,
+          -0.10540047680165915,
+          0.010101172604763953,
+          0.06581129818351386,
+          0.0160070316847388,
+          -0.1008115050484769,
+          0.029029527710518976,
+          -0.022062491496841155,
+          0.05199350271760178,
+          0.005140191969563751,
+          0.07502400735233189,
+          -0.019665774077808063,
+          0.025094101881802736,
+          0.03903542314913909,
+          0.044807518409313685,
+          -0.010056021803888343
+        ],
+        "mean": 0.0036580559726658735,
+        "conditional_se": 0.009076161383550479,
+        "negative_episodes": 12,
+        "complete": true,
+        "identities": [
+          [
+            0,
+            820202000
+          ],
+          [
+            1,
+            820202001
+          ],
+          [
+            2,
+            820202002
+          ],
+          [
+            3,
+            820202003
+          ],
+          [
+            4,
+            820202004
+          ],
+          [
+            5,
+            820202005
+          ],
+          [
+            6,
+            820202006
+          ],
+          [
+            7,
+            820202007
+          ],
+          [
+            8,
+            820202008
+          ],
+          [
+            9,
+            820202009
+          ],
+          [
+            10,
+            820202010
+          ],
+          [
+            11,
+            820202011
+          ],
+          [
+            12,
+            820202012
+          ],
+          [
+            13,
+            820202013
+          ],
+          [
+            14,
+            820202014
+          ],
+          [
+            15,
+            820202015
+          ],
+          [
+            16,
+            820202016
+          ],
+          [
+            17,
+            820202017
+          ],
+          [
+            18,
+            820202018
+          ],
+          [
+            19,
+            820202019
+          ],
+          [
+            20,
+            820202020
+          ],
+          [
+            21,
+            820202021
+          ],
+          [
+            22,
+            820202022
+          ],
+          [
+            23,
+            820202023
+          ],
+          [
+            24,
+            820202024
+          ],
+          [
+            25,
+            820202025
+          ],
+          [
+            26,
+            820202026
+          ],
+          [
+            27,
+            820202027
+          ],
+          [
+            28,
+            820202028
+          ],
+          [
+            29,
+            820202029
+          ],
+          [
+            30,
+            820202030
+          ],
+          [
+            31,
+            820202031
+          ]
+        ]
+      },
+      "RESIDUAL-MC_minus_H": {
+        "differences": [
+          0.00893654071474484,
+          -0.013145455832789699,
+          -0.016739467857692023,
+          0.017881671728835855,
+          -0.028668704315545357,
+          -0.1252623902530629,
+          0.026844724149756444,
+          -0.052122306758493456,
+          -0.02618371536438882,
+          -0.11757837196958063,
+          -0.0059105376637002965,
+          0.018011129756665717,
+          0.07188866194151562,
+          0.027189580120362072,
+          -0.060217409714394335,
+          -0.14022349066905343,
+          0.07467244708652326,
+          0.06172160807190728,
+          -0.050870669046258976,
+          0.024457553539181,
+          -0.011781577360918769,
+          -0.050223785292536446,
+          -0.0986748849851728,
+          0.05972361753478992,
+          0.09114452259580398,
+          0.0688995533419602,
+          0.061841046282185536,
+          0.13913942059565731,
+          0.050413841866033635,
+          0.014224210539535626,
+          0.06653460691702487,
+          0.01003019083576523
+        ],
+        "mean": 0.0029985050167081395,
+        "conditional_se": 0.011735783142938593,
+        "negative_episodes": 14,
+        "complete": true,
+        "identities": [
+          [
+            0,
+            820202000
+          ],
+          [
+            1,
+            820202001
+          ],
+          [
+            2,
+            820202002
+          ],
+          [
+            3,
+            820202003
+          ],
+          [
+            4,
+            820202004
+          ],
+          [
+            5,
+            820202005
+          ],
+          [
+            6,
+            820202006
+          ],
+          [
+            7,
+            820202007
+          ],
+          [
+            8,
+            820202008
+          ],
+          [
+            9,
+            820202009
+          ],
+          [
+            10,
+            820202010
+          ],
+          [
+            11,
+            820202011
+          ],
+          [
+            12,
+            820202012
+          ],
+          [
+            13,
+            820202013
+          ],
+          [
+            14,
+            820202014
+          ],
+          [
+            15,
+            820202015
+          ],
+          [
+            16,
+            820202016
+          ],
+          [
+            17,
+            820202017
+          ],
+          [
+            18,
+            820202018
+          ],
+          [
+            19,
+            820202019
+          ],
+          [
+            20,
+            820202020
+          ],
+          [
+            21,
+            820202021
+          ],
+          [
+            22,
+            820202022
+          ],
+          [
+            23,
+            820202023
+          ],
+          [
+            24,
+            820202024
+          ],
+          [
+            25,
+            820202025
+          ],
+          [
+            26,
+            820202026
+          ],
+          [
+            27,
+            820202027
+          ],
+          [
+            28,
+            820202028
+          ],
+          [
+            29,
+            820202029
+          ],
+          [
+            30,
+            820202030
+          ],
+          [
+            31,
+            820202031
+          ]
+        ]
+      },
+      "MLP-MC_minus_H": {
+        "differences": [
+          -0.04316490519266744,
+          0.08339645868727857,
+          0.018724747466748515,
+          0.014691320099186708,
+          0.08068993690121798,
+          -0.1312244067306972,
+          -0.043164525416444,
+          -0.10475428413368533,
+          -0.06715385230614393,
+          -0.10936972021420052,
+          -0.01621316589685287,
+          -0.017674268718490718,
+          0.1030181305494736,
+          -0.024277606423371442,
+          -0.04000598950652651,
+          -0.16510446093291856,
+          0.10794921217710299,
+          0.16712208487356645,
+          -0.06097184165102293,
+          -0.04135374464433286,
+          -0.027788609045657567,
+          0.05058771975594045,
+          -0.12770441269569177,
+          0.08178610903163108,
+          0.0391510198782022,
+          0.06375936137239645,
+          -0.013182961070146361,
+          0.15880519467346538,
+          0.0253197399842309,
+          -0.024811212609603464,
+          0.021727088507711184,
+          0.020086212639653572
+        ],
+        "mean": -0.000659550955957733,
+        "conditional_se": 0.014463146814519831,
+        "negative_episodes": 17,
+        "complete": true,
+        "identities": [
+          [
+            0,
+            820202000
+          ],
+          [
+            1,
+            820202001
+          ],
+          [
+            2,
+            820202002
+          ],
+          [
+            3,
+            820202003
+          ],
+          [
+            4,
+            820202004
+          ],
+          [
+            5,
+            820202005
+          ],
+          [
+            6,
+            820202006
+          ],
+          [
+            7,
+            820202007
+          ],
+          [
+            8,
+            820202008
+          ],
+          [
+            9,
+            820202009
+          ],
+          [
+            10,
+            820202010
+          ],
+          [
+            11,
+            820202011
+          ],
+          [
+            12,
+            820202012
+          ],
+          [
+            13,
+            820202013
+          ],
+          [
+            14,
+            820202014
+          ],
+          [
+            15,
+            820202015
+          ],
+          [
+            16,
+            820202016
+          ],
+          [
+            17,
+            820202017
+          ],
+          [
+            18,
+            820202018
+          ],
+          [
+            19,
+            820202019
+          ],
+          [
+            20,
+            820202020
+          ],
+          [
+            21,
+            820202021
+          ],
+          [
+            22,
+            820202022
+          ],
+          [
+            23,
+            820202023
+          ],
+          [
+            24,
+            820202024
+          ],
+          [
+            25,
+            820202025
+          ],
+          [
+            26,
+            820202026
+          ],
+          [
+            27,
+            820202027
+          ],
+          [
+            28,
+            820202028
+          ],
+          [
+            29,
+            820202029
+          ],
+          [
+            30,
+            820202030
+          ],
+          [
+            31,
+            820202031
+          ]
+        ]
+      },
+      "negative_J_episodes": {
+        "RESIDUAL-MC": 0,
+        "MLP-MC": 0,
+        "H": 0
+      }
+    },
+    "pair_elapsed_wall": 294.5617349590175,
+    "cap_breach": false,
+    "publication_readback": "complete"
+  },
+  "computed_primary": {
+    "RESIDUAL-MC_minus_MLP-MC": {
+      "differences": [
+        0.05210144590741228,
+        -0.09654191452006827,
+        -0.03546421532444054,
+        0.0031903516296491463,
+        -0.10935864121676334,
+        0.0059620164776343215,
+        0.07000924956620044,
+        0.052631977375191874,
+        0.04097013694175511,
+        -0.008208651755380103,
+        0.010302628233152575,
+        0.035685398475156435,
+        -0.031129468607957983,
+        0.051467186543733515,
+        -0.020211420207867828,
+        0.024880970263865126,
+        -0.033276765090579724,
+        -0.10540047680165915,
+        0.010101172604763953,
+        0.06581129818351386,
+        0.0160070316847388,
+        -0.1008115050484769,
+        0.029029527710518976,
+        -0.022062491496841155,
+        0.05199350271760178,
+        0.005140191969563751,
+        0.07502400735233189,
+        -0.019665774077808063,
+        0.025094101881802736,
+        0.03903542314913909,
+        0.044807518409313685,
+        -0.010056021803888343
+      ],
+      "mean": 0.0036580559726658735,
+      "conditional_se": 0.009076161383550479,
+      "negative_episodes": 12
+    },
+    "RESIDUAL-MC_minus_H": {
+      "differences": [
+        0.00893654071474484,
+        -0.013145455832789699,
+        -0.016739467857692023,
+        0.017881671728835855,
+        -0.028668704315545357,
+        -0.1252623902530629,
+        0.026844724149756444,
+        -0.052122306758493456,
+        -0.02618371536438882,
+        -0.11757837196958063,
+        -0.0059105376637002965,
+        0.018011129756665717,
+        0.07188866194151562,
+        0.027189580120362072,
+        -0.060217409714394335,
+        -0.14022349066905343,
+        0.07467244708652326,
+        0.06172160807190728,
+        -0.050870669046258976,
+        0.024457553539181,
+        -0.011781577360918769,
+        -0.050223785292536446,
+        -0.0986748849851728,
+        0.05972361753478992,
+        0.09114452259580398,
+        0.0688995533419602,
+        0.061841046282185536,
+        0.13913942059565731,
+        0.050413841866033635,
+        0.014224210539535626,
+        0.06653460691702487,
+        0.01003019083576523
+      ],
+      "mean": 0.0029985050167081395,
+      "conditional_se": 0.011735783142938593,
+      "negative_episodes": 14
+    },
+    "MLP-MC_minus_H": {
+      "differences": [
+        -0.04316490519266744,
+        0.08339645868727857,
+        0.018724747466748515,
+        0.014691320099186708,
+        0.08068993690121798,
+        -0.1312244067306972,
+        -0.043164525416444,
+        -0.10475428413368533,
+        -0.06715385230614393,
+        -0.10936972021420052,
+        -0.01621316589685287,
+        -0.017674268718490718,
+        0.1030181305494736,
+        -0.024277606423371442,
+        -0.04000598950652651,
+        -0.16510446093291856,
+        0.10794921217710299,
+        0.16712208487356645,
+        -0.06097184165102293,
+        -0.04135374464433286,
+        -0.027788609045657567,
+        0.05058771975594045,
+        -0.12770441269569177,
+        0.08178610903163108,
+        0.0391510198782022,
+        0.06375936137239645,
+        -0.013182961070146361,
+        0.15880519467346538,
+        0.0253197399842309,
+        -0.024811212609603464,
+        0.021727088507711184,
+        0.020086212639653572
+      ],
+      "mean": -0.000659550955957733,
+      "conditional_se": 0.014463146814519831,
+      "negative_episodes": 17
+    }
+  },
+  "computed_final_means": {
+    "RESIDUAL-MC": 0.14436567679417747,
+    "MLP-MC": 0.14070762082151161,
+    "H": 0.14136717177746932
+  },
+  "training_summary": {
+    "RESIDUAL-MC": {
+      "episodes": 512,
+      "rollouts": 256,
+      "adam_calls": 1024,
+      "team_steps": 131072,
+      "eligible_pairs": 1494,
+      "residual_terms": 5976,
+      "zero_pair_rollouts": 0,
+      "pair_count_histogram": {
+        "3": 14,
+        "6": 242
+      },
+      "J_mean": 0.14211367536461617,
+      "J_first32_mean": 0.14645866736091182,
+      "J_last32_mean": 0.1580526634624198,
+      "negative_J_episodes": 0,
+      "d4": 1281,
+      "duration_decisions": 2560,
+      "loss_epoch_means": {
+        "loss": 117.71954380720854,
+        "value_loss": 235.63764233514667,
+        "segment_loss": 0.14090509106199534,
+        "policy_loss": 0.05024960381251731,
+        "entropy": 21.997935965657234,
+        "grad_norm": 81.87211499852128
+      },
+      "first_rollout": {
+        "arm": "RESIDUAL-MC",
+        "pair_master": 8202,
+        "rollout": 0,
+        "steps": 512,
+        "episodes": 2,
+        "epochs": [
+          {
+            "epoch": 0,
+            "loss": 76.64759063720703,
+            "policy_loss": 0.05895272269845009,
+            "value_loss": 153.51287841796875,
+            "segment_loss": 0.08786322921514511,
+            "eligible_pairs": 6,
+            "residual_terms": 6,
+            "entropy": 21.172903060913086,
+            "grad_norm": 32.3244743347168
+          },
+          {
+            "epoch": 1,
+            "loss": 75.60086059570312,
+            "policy_loss": 0.05633518844842911,
+            "value_loss": 151.42507934570312,
+            "segment_loss": 0.08752217143774033,
+            "eligible_pairs": 6,
+            "residual_terms": 6,
+            "entropy": 21.17737579345703,
+            "grad_norm": 32.22770309448242
+          },
+          {
+            "epoch": 2,
+            "loss": 74.5625991821289,
+            "policy_loss": 0.053674645721912384,
+            "value_loss": 149.35397338867188,
+            "segment_loss": 0.08750215917825699,
+            "eligible_pairs": 6,
+            "residual_terms": 6,
+            "entropy": 21.18185043334961,
+            "grad_norm": 32.30316162109375
+          },
+          {
+            "epoch": 3,
+            "loss": 73.53011322021484,
+            "policy_loss": 0.05096836015582085,
+            "value_loss": 147.29449462890625,
+            "segment_loss": 0.08751660585403442,
+            "eligible_pairs": 6,
+            "residual_terms": 6,
+            "entropy": 21.186323165893555,
+            "grad_norm": 32.52089309692383
+          }
+        ],
+        "optimizer_steps": 4,
+        "velocity_decisions": 2545,
+        "duration_decisions": 10,
+        "d4": 5
+      },
+      "last_rollout": {
+        "arm": "RESIDUAL-MC",
+        "pair_master": 8202,
+        "rollout": 255,
+        "steps": 512,
+        "episodes": 2,
+        "epochs": [
+          {
+            "epoch": 0,
+            "loss": 29.88599395751953,
+            "policy_loss": 0.04993416368961334,
+            "value_loss": 60.03303909301758,
+            "segment_loss": 0.09182038903236389,
+            "eligible_pairs": 6,
+            "residual_terms": 6,
+            "entropy": 22.6369686126709,
+            "grad_norm": 58.29741668701172
+          },
+          {
+            "epoch": 1,
+            "loss": 29.710044860839844,
+            "policy_loss": 0.049718912690877914,
+            "value_loss": 59.677001953125,
+            "segment_loss": 0.09643105417490005,
+            "eligible_pairs": 6,
+            "residual_terms": 6,
+            "entropy": 22.6390438079834,
+            "grad_norm": 58.544830322265625
+          },
+          {
+            "epoch": 2,
+            "loss": 29.101900100708008,
+            "policy_loss": 0.04947177320718765,
+            "value_loss": 58.44541549682617,
+            "segment_loss": 0.112263984978199,
+            "eligible_pairs": 6,
+            "residual_terms": 6,
+            "entropy": 22.641035079956055,
+            "grad_norm": 58.50011444091797
+          },
+          {
+            "epoch": 3,
+            "loss": 28.0577449798584,
+            "policy_loss": 0.04919585585594177,
+            "value_loss": 56.325504302978516,
+            "segment_loss": 0.14445272088050842,
+            "eligible_pairs": 6,
+            "residual_terms": 6,
+            "entropy": 22.64293670654297,
+            "grad_norm": 58.1231689453125
+          }
+        ],
+        "optimizer_steps": 4,
+        "velocity_decisions": 2545,
+        "duration_decisions": 10,
+        "d4": 5
+      }
+    },
+    "MLP-MC": {
+      "episodes": 512,
+      "rollouts": 256,
+      "adam_calls": 1024,
+      "team_steps": 131072,
+      "eligible_pairs": 1494,
+      "residual_terms": 0,
+      "zero_pair_rollouts": 0,
+      "pair_count_histogram": {
+        "3": 14,
+        "6": 242
+      },
+      "J_mean": 0.13766402618161835,
+      "J_first32_mean": 0.14648466415312839,
+      "J_last32_mean": 0.15008437443021397,
+      "negative_J_episodes": 0,
+      "d4": 1286,
+      "duration_decisions": 2560,
+      "loss_epoch_means": {
+        "loss": 112.34374982537702,
+        "value_loss": 225.02943317685276,
+        "segment_loss": 0.0,
+        "policy_loss": 0.04878461791031441,
+        "entropy": 21.97513593174517,
+        "grad_norm": 87.95294047836796
+      },
+      "first_rollout": {
+        "arm": "MLP-MC",
+        "pair_master": 8202,
+        "rollout": 0,
+        "steps": 512,
+        "episodes": 2,
+        "epochs": [
+          {
+            "epoch": 0,
+            "loss": 76.6036605834961,
+            "policy_loss": 0.05895272269845009,
+            "value_loss": 153.51287841796875,
+            "segment_loss": 0.0,
+            "eligible_pairs": 6,
+            "residual_terms": 0,
+            "entropy": 21.172903060913086,
+            "grad_norm": 32.34042739868164
+          },
+          {
+            "epoch": 1,
+            "loss": 75.55645751953125,
+            "policy_loss": 0.05633516609668732,
+            "value_loss": 151.42379760742188,
+            "segment_loss": 0.0,
+            "eligible_pairs": 6,
+            "residual_terms": 0,
+            "entropy": 21.17737579345703,
+            "grad_norm": 32.258522033691406
+          },
+          {
+            "epoch": 2,
+            "loss": 74.517333984375,
+            "policy_loss": 0.05367468670010567,
+            "value_loss": 149.3509521484375,
+            "segment_loss": 0.0,
+            "eligible_pairs": 6,
+            "residual_terms": 0,
+            "entropy": 21.18185043334961,
+            "grad_norm": 32.33732223510742
+          },
+          {
+            "epoch": 3,
+            "loss": 73.48396301269531,
+            "policy_loss": 0.0509684756398201,
+            "value_loss": 147.28970336914062,
+            "segment_loss": 0.0,
+            "eligible_pairs": 6,
+            "residual_terms": 0,
+            "entropy": 21.186323165893555,
+            "grad_norm": 32.55735397338867
+          }
+        ],
+        "optimizer_steps": 4,
+        "velocity_decisions": 2545,
+        "duration_decisions": 10,
+        "d4": 5
+      },
+      "last_rollout": {
+        "arm": "MLP-MC",
+        "pair_master": 8202,
+        "rollout": 255,
+        "steps": 512,
+        "episodes": 2,
+        "epochs": [
+          {
+            "epoch": 0,
+            "loss": 24.002363204956055,
+            "policy_loss": 0.048823028802871704,
+            "value_loss": 48.35363006591797,
+            "segment_loss": 0.0,
+            "eligible_pairs": 6,
+            "residual_terms": 0,
+            "entropy": 22.327436447143555,
+            "grad_norm": 104.56874084472656
+          },
+          {
+            "epoch": 1,
+            "loss": 25.058229446411133,
+            "policy_loss": 0.048844873905181885,
+            "value_loss": 50.4653205871582,
+            "segment_loss": 0.0,
+            "eligible_pairs": 6,
+            "residual_terms": 0,
+            "entropy": 22.327640533447266,
+            "grad_norm": 108.0071029663086
+          },
+          {
+            "epoch": 2,
+            "loss": 25.338741302490234,
+            "policy_loss": 0.04883802682161331,
+            "value_loss": 51.026363372802734,
+            "segment_loss": 0.0,
+            "eligible_pairs": 6,
+            "residual_terms": 0,
+            "entropy": 22.327791213989258,
+            "grad_norm": 108.92386627197266
+          },
+          {
+            "epoch": 3,
+            "loss": 24.90928840637207,
+            "policy_loss": 0.048805512487888336,
+            "value_loss": 50.16752243041992,
+            "segment_loss": 0.0,
+            "eligible_pairs": 6,
+            "residual_terms": 0,
+            "entropy": 22.32789421081543,
+            "grad_norm": 107.67572021484375
+          }
+        ],
+        "optimizer_steps": 4,
+        "velocity_decisions": 2545,
+        "duration_decisions": 10,
+        "d4": 5
+      }
+    }
+  },
+  "final_episode_rows": [
+    {
+      "pair_master": 8202,
+      "arm": "RESIDUAL-MC",
+      "phase": "eval",
+      "episode": 0,
+      "reset_seed": 820202000,
+      "steps": 256,
+      "reward_sum": 49.17319349760262,
+      "J": 0.19208278710001023,
+      "prefix_reward_sum": 0.7881511738324123,
+      "suffix_reward_sum": 48.3850423237702,
+      "mean_commanded_velocity_norm": 1.102050177520141,
+      "prefix_displacement": [
+        53.28939576670701,
+        131.463851266491,
+        48.01743871256095,
+        92.34537570333043,
+        43.78413151818205
+      ],
+      "prefix_path_length": [
+        129.7139289997738,
+        135.64192079773983,
+        119.13098800469245,
+        131.15544992525082,
+        134.969964070065
+      ],
+      "mean_served_connections": 10.76953125,
+      "velocity_decisions": 1277,
+      "duration_decisions": 5,
+      "d4": 1
+    },
+    {
+      "pair_master": 8202,
+      "arm": "RESIDUAL-MC",
+      "phase": "eval",
+      "episode": 1,
+      "reset_seed": 820202001,
+      "steps": 256,
+      "reward_sum": 50.47560171640646,
+      "J": 0.19717031920471273,
+      "prefix_reward_sum": 0.8563763954580741,
+      "suffix_reward_sum": 49.61922532094838,
+      "mean_commanded_velocity_norm": 1.102323500905186,
+      "prefix_displacement": [
+        143.31783365818535,
+        154.72828379404382,
+        27.729835271306676,
+        78.87148667480636,
+        97.1655862378514
+      ],
+      "prefix_path_length": [
+        143.94153573849678,
+        155.22234426640412,
+        106.1856282188223,
+        79.68379855745097,
+        108.82693642538726
+      ],
+      "mean_served_connections": 11.81640625,
+      "velocity_decisions": 1271,
+      "duration_decisions": 5,
+      "d4": 3
+    },
+    {
+      "pair_master": 8202,
+      "arm": "RESIDUAL-MC",
+      "phase": "eval",
+      "episode": 2,
+      "reset_seed": 820202002,
+      "steps": 256,
+      "reward_sum": 23.56421798338774,
+      "J": 0.09204772649760835,
+      "prefix_reward_sum": 0.4996164232713682,
+      "suffix_reward_sum": 23.064601560116365,
+      "mean_commanded_velocity_norm": 1.0989503739401698,
+      "prefix_displacement": [
+        17.17482641928028,
+        78.21580758644374,
+        120.51663605402496,
+        43.9135926993973,
+        107.46866472102987
+      ],
+      "prefix_path_length": [
+        114.48466760185177,
+        136.54644166525753,
+        126.4994583395224,
+        136.5636094382882,
+        129.0930097720198
+      ],
+      "mean_served_connections": 4.859375,
+      "velocity_decisions": 1277,
+      "duration_decisions": 5,
+      "d4": 1
+    },
+    {
+      "pair_master": 8202,
+      "arm": "RESIDUAL-MC",
+      "phase": "eval",
+      "episode": 3,
+      "reset_seed": 820202003,
+      "steps": 256,
+      "reward_sum": 35.49306046278404,
+      "J": 0.13864476743275014,
+      "prefix_reward_sum": 0.35908507607888085,
+      "suffix_reward_sum": 35.13397538670515,
+      "mean_commanded_velocity_norm": 1.1169380731880665,
+      "prefix_displacement": [
+        46.9429847308325,
+        19.576078242111937,
+        144.60139376466444,
+        134.1764593646469,
+        95.29419328109883
+      ],
+      "prefix_path_length": [
+        138.98364438596366,
+        155.60840765114648,
+        145.60451132720482,
+        134.17645936468492,
+        95.29419328110114
+      ],
+      "mean_served_connections": 8.02734375,
+      "velocity_decisions": 1271,
+      "duration_decisions": 5,
+      "d4": 3
+    },
+    {
+      "pair_master": 8202,
+      "arm": "RESIDUAL-MC",
+      "phase": "eval",
+      "episode": 4,
+      "reset_seed": 820202004,
+      "steps": 256,
+      "reward_sum": 38.340598601925855,
+      "J": 0.14976796328877287,
+      "prefix_reward_sum": 0.8722658766136835,
+      "suffix_reward_sum": 37.46833272531218,
+      "mean_commanded_velocity_norm": 1.1130168631207198,
+      "prefix_displacement": [
+        101.2112851076312,
+        80.17308151665027,
+        50.485621832959865,
+        36.15592893629554,
+        121.45371142906949
+      ],
+      "prefix_path_length": [
+        101.482950068199,
+        82.490666040492,
+        66.14357909215815,
+        123.9297062920384,
+        128.5362496511472
+      ],
+      "mean_served_connections": 8.70703125,
+      "velocity_decisions": 1271,
+      "duration_decisions": 5,
+      "d4": 3
+    },
+    {
+      "pair_master": 8202,
+      "arm": "RESIDUAL-MC",
+      "phase": "eval",
+      "episode": 5,
+      "reset_seed": 820202005,
+      "steps": 256,
+      "reward_sum": 28.99380606819798,
+      "J": 0.11325705495389836,
+      "prefix_reward_sum": 0.8889145109683749,
+      "suffix_reward_sum": 28.104891557229603,
+      "mean_commanded_velocity_norm": 1.1161762401461601,
+      "prefix_displacement": [
+        145.7560295081838,
+        83.86637480836481,
+        85.25070719437772,
+        71.18591885083028,
+        119.2612098197246
+      ],
+      "prefix_path_length": [
+        146.3955401989997,
+        83.94039894093576,
+        85.51403581588211,
+        72.45094308245396,
+        119.26120981978698
+      ],
+      "mean_served_connections": 6.58203125,
+      "velocity_decisions": 1265,
+      "duration_decisions": 5,
+      "d4": 5
+    },
+    {
+      "pair_master": 8202,
+      "arm": "RESIDUAL-MC",
+      "phase": "eval",
+      "episode": 6,
+      "reset_seed": 820202006,
+      "steps": 256,
+      "reward_sum": 43.14022741019346,
+      "J": 0.1685165133210682,
+      "prefix_reward_sum": 0.5432623133914658,
+      "suffix_reward_sum": 42.59696509680199,
+      "mean_commanded_velocity_norm": 1.0993861351162195,
+      "prefix_displacement": [
+        65.94819516654742,
+        82.9356989058447,
+        116.36155821375029,
+        152.19529626562317,
+        169.14659860673612
+      ],
+      "prefix_path_length": [
+        144.22075550914892,
+        89.95577986022334,
+        116.39069987696507,
+        157.13499660295014,
+        170.11410797083823
+      ],
+      "mean_served_connections": 9.9453125,
+      "velocity_decisions": 1268,
+      "duration_decisions": 5,
+      "d4": 4
+    },
+    {
+      "pair_master": 8202,
+      "arm": "RESIDUAL-MC",
+      "phase": "eval",
+      "episode": 7,
+      "reset_seed": 820202007,
+      "steps": 256,
+      "reward_sum": 30.304421323802647,
+      "J": 0.11837664579610409,
+      "prefix_reward_sum": 0.6768326550364882,
+      "suffix_reward_sum": 29.627588668766162,
+      "mean_commanded_velocity_norm": 1.0999280458781868,
+      "prefix_displacement": [
+        60.404067414140926,
+        45.9814569811902,
+        48.81105113847661,
+        108.96410454165974,
+        64.8709871534861
+      ],
+      "prefix_path_length": [
+        95.10073774074996,
+        99.57134143031661,
+        125.55984936573628,
+        108.96410454166002,
+        105.64376377028512
+      ],
+      "mean_served_connections": 6.4921875,
+      "velocity_decisions": 1277,
+      "duration_decisions": 5,
+      "d4": 1
+    },
+    {
+      "pair_master": 8202,
+      "arm": "RESIDUAL-MC",
+      "phase": "eval",
+      "episode": 8,
+      "reset_seed": 820202008,
+      "steps": 256,
+      "reward_sum": 56.603671032548476,
+      "J": 0.22110808997089249,
+      "prefix_reward_sum": 1.0201014788890446,
+      "suffix_reward_sum": 55.58356955365944,
+      "mean_commanded_velocity_norm": 1.113123643444851,
+      "prefix_displacement": [
+        22.591929932138246,
+        164.8888620580445,
+        106.95504748589244,
+        47.82358488955877,
+        73.77596871994031
+      ],
+      "prefix_path_length": [
+        123.49655946656581,
+        167.60648129610718,
+        106.95504748589347,
+        127.40153920000081,
+        112.05107772938052
+      ],
+      "mean_served_connections": 13.640625,
+      "velocity_decisions": 1274,
+      "duration_decisions": 5,
+      "d4": 2
+    },
+    {
+      "pair_master": 8202,
+      "arm": "RESIDUAL-MC",
+      "phase": "eval",
+      "episode": 9,
+      "reset_seed": 820202009,
+      "steps": 256,
+      "reward_sum": 32.84126247386934,
+      "J": 0.12828618153855212,
+      "prefix_reward_sum": 1.1023191928096663,
+      "suffix_reward_sum": 31.738943281059672,
+      "mean_commanded_velocity_norm": 1.0989696772303432,
+      "prefix_displacement": [
+        96.95102033344224,
+        73.15213673092113,
+        85.26734142881283,
+        141.28191757363095,
+        84.97054921630252
+      ],
+      "prefix_path_length": [
+        143.72563493557493,
+        76.58218909992625,
+        93.66734157880215,
+        147.00320678805187,
+        92.56192686420476
+      ],
+      "mean_served_connections": 7.47265625,
+      "velocity_decisions": 1268,
+      "duration_decisions": 5,
+      "d4": 4
+    },
+    {
+      "pair_master": 8202,
+      "arm": "RESIDUAL-MC",
+      "phase": "eval",
+      "episode": 10,
+      "reset_seed": 820202010,
+      "steps": 256,
+      "reward_sum": 28.97648249117583,
+      "J": 0.11318938473115558,
+      "prefix_reward_sum": 0.36241269305607243,
+      "suffix_reward_sum": 28.61406979811976,
+      "mean_commanded_velocity_norm": 1.1106305515859276,
+      "prefix_displacement": [
+        92.08621003693739,
+        28.78161810461304,
+        60.45485275363181,
+        55.09144017241616,
+        69.99097294730265
+      ],
+      "prefix_path_length": [
+        97.70214842539957,
+        124.53874686624015,
+        127.83440823655803,
+        124.48605605293315,
+        95.29623238286214
+      ],
+      "mean_served_connections": 6.546875,
+      "velocity_decisions": 1277,
+      "duration_decisions": 5,
+      "d4": 1
+    },
+    {
+      "pair_master": 8202,
+      "arm": "RESIDUAL-MC",
+      "phase": "eval",
+      "episode": 11,
+      "reset_seed": 820202011,
+      "steps": 256,
+      "reward_sum": 40.32078536534218,
+      "J": 0.1575030678333679,
+      "prefix_reward_sum": 0.6271398187387982,
+      "suffix_reward_sum": 39.693645546603385,
+      "mean_commanded_velocity_norm": 1.1213766301516443,
+      "prefix_displacement": [
+        58.445783287147464,
+        146.7362090995852,
+        39.31070189427323,
+        60.11266886581367,
+        64.75225586953654
+      ],
+      "prefix_path_length": [
+        151.22820562918525,
+        146.73620909962247,
+        113.93589013992484,
+        149.88527854226373,
+        109.80731234953284
+      ],
+      "mean_served_connections": 8.7734375,
+      "velocity_decisions": 1277,
+      "duration_decisions": 5,
+      "d4": 1
+    },
+    {
+      "pair_master": 8202,
+      "arm": "RESIDUAL-MC",
+      "phase": "eval",
+      "episode": 12,
+      "reset_seed": 820202012,
+      "steps": 256,
+      "reward_sum": 43.17702528164068,
+      "J": 0.1686602550064089,
+      "prefix_reward_sum": 0.4582308573317678,
+      "suffix_reward_sum": 42.718794424308925,
+      "mean_commanded_velocity_norm": 1.1148649181704968,
+      "prefix_displacement": [
+        65.56489260966883,
+        130.90685821129765,
+        82.06911744958666,
+        128.46999032146198,
+        74.75042801611148
+      ],
+      "prefix_path_length": [
+        128.0691182679858,
+        137.64964776566546,
+        135.24751238491817,
+        135.45768981222386,
+        124.29441309480238
+      ],
+      "mean_served_connections": 10.23046875,
+      "velocity_decisions": 1274,
+      "duration_decisions": 5,
+      "d4": 2
+    },
+    {
+      "pair_master": 8202,
+      "arm": "RESIDUAL-MC",
+      "phase": "eval",
+      "episode": 13,
+      "reset_seed": 820202013,
+      "steps": 256,
+      "reward_sum": 34.19955617106052,
+      "J": 0.13359201629320516,
+      "prefix_reward_sum": 0.5092501721654965,
+      "suffix_reward_sum": 33.69030599889502,
+      "mean_commanded_velocity_norm": 1.117759640328586,
+      "prefix_displacement": [
+        71.3709820475028,
+        19.528541843393754,
+        28.401526255796675,
+        135.9919547783586,
+        135.89239303375115
+      ],
+      "prefix_path_length": [
+        113.44962601760582,
+        109.05857511441876,
+        29.291091114373693,
+        135.9919547783851,
+        135.89239303375155
+      ],
+      "mean_served_connections": 7.2890625,
+      "velocity_decisions": 1271,
+      "duration_decisions": 5,
+      "d4": 3
+    },
+    {
+      "pair_master": 8202,
+      "arm": "RESIDUAL-MC",
+      "phase": "eval",
+      "episode": 14,
+      "reset_seed": 820202014,
+      "steps": 256,
+      "reward_sum": 19.36293486300379,
+      "J": 0.07563646430860856,
+      "prefix_reward_sum": 0.5609801937237213,
+      "suffix_reward_sum": 18.801954669280065,
+      "mean_commanded_velocity_norm": 1.1082220708485693,
+      "prefix_displacement": [
+        33.73539084059241,
+        19.70475223383421,
+        31.560390208653857,
+        33.23204703792351,
+        43.712620348845725
+      ],
+      "prefix_path_length": [
+        118.65991240349658,
+        124.14611186322463,
+        119.54252110444627,
+        135.0555957937082,
+        137.81248266395932
+      ],
+      "mean_served_connections": 4.06640625,
+      "velocity_decisions": 1280,
+      "duration_decisions": 5,
+      "d4": 0
+    },
+    {
+      "pair_master": 8202,
+      "arm": "RESIDUAL-MC",
+      "phase": "eval",
+      "episode": 15,
+      "reset_seed": 820202015,
+      "steps": 256,
+      "reward_sum": 37.22195749405479,
+      "J": 0.14539827146115153,
+      "prefix_reward_sum": 1.371736431593411,
+      "suffix_reward_sum": 35.85022106246139,
+      "mean_commanded_velocity_norm": 1.1048706283327192,
+      "prefix_displacement": [
+        144.00564385188503,
+        35.1145679946093,
+        105.03242950240416,
+        58.07134244595613,
+        41.22859698987541
+      ],
+      "prefix_path_length": [
+        144.06595756190325,
+        123.17044744013182,
+        125.54344809827101,
+        136.87631592109244,
+        50.06501227642651
+      ],
+      "mean_served_connections": 8.44921875,
+      "velocity_decisions": 1274,
+      "duration_decisions": 5,
+      "d4": 2
+    },
+    {
+      "pair_master": 8202,
+      "arm": "RESIDUAL-MC",
+      "phase": "eval",
+      "episode": 16,
+      "reset_seed": 820202016,
+      "steps": 256,
+      "reward_sum": 35.534815313859994,
+      "J": 0.1388078723197656,
+      "prefix_reward_sum": 0.4597968983195575,
+      "suffix_reward_sum": 35.07501841554042,
+      "mean_commanded_velocity_norm": 1.100888182874769,
+      "prefix_displacement": [
+        121.71314543338875,
+        49.617974287968664,
+        165.6977533581807,
+        55.01628430132079,
+        130.6850454549811
+      ],
+      "prefix_path_length": [
+        130.49095896023908,
+        104.73135513792414,
+        170.4438783485174,
+        126.93053663723958,
+        134.28885151405228
+      ],
+      "mean_served_connections": 7.96484375,
+      "velocity_decisions": 1271,
+      "duration_decisions": 5,
+      "d4": 3
+    },
+    {
+      "pair_master": 8202,
+      "arm": "RESIDUAL-MC",
+      "phase": "eval",
+      "episode": 17,
+      "reset_seed": 820202017,
+      "steps": 256,
+      "reward_sum": 27.07157476212099,
+      "J": 0.10574833891453511,
+      "prefix_reward_sum": 0.18603277899235204,
+      "suffix_reward_sum": 26.885541983128636,
+      "mean_commanded_velocity_norm": 1.085419669514522,
+      "prefix_displacement": [
+        43.35774796412688,
+        76.77361565755727,
+        65.80381297680789,
+        73.64827460679314,
+        89.61148714941073
+      ],
+      "prefix_path_length": [
+        136.3565119769851,
+        79.24107872603486,
+        132.32878926573977,
+        73.64827460692833,
+        89.6114871494536
+      ],
+      "mean_served_connections": 5.875,
+      "velocity_decisions": 1271,
+      "duration_decisions": 5,
+      "d4": 3
+    },
+    {
+      "pair_master": 8202,
+      "arm": "RESIDUAL-MC",
+      "phase": "eval",
+      "episode": 18,
+      "reset_seed": 820202018,
+      "steps": 256,
+      "reward_sum": 36.9365031490677,
+      "J": 0.1442832154260457,
+      "prefix_reward_sum": 0.6587892511820905,
+      "suffix_reward_sum": 36.27771389788561,
+      "mean_commanded_velocity_norm": 1.1047118117567152,
+      "prefix_displacement": [
+        30.997957429924767,
+        140.77591560933251,
+        148.5796729662425,
+        110.84328941295274,
+        85.83296697592408
+      ],
+      "prefix_path_length": [
+        135.04649498442424,
+        141.065299235728,
+        148.57967296626407,
+        110.84328941295432,
+        85.83296697603487
+      ],
+      "mean_served_connections": 8.25390625,
+      "velocity_decisions": 1268,
+      "duration_decisions": 5,
+      "d4": 4
+    },
+    {
+      "pair_master": 8202,
+      "arm": "RESIDUAL-MC",
+      "phase": "eval",
+      "episode": 19,
+      "reset_seed": 820202019,
+      "steps": 256,
+      "reward_sum": 36.45333483136564,
+      "J": 0.14239583918502202,
+      "prefix_reward_sum": 0.6379631967652182,
+      "suffix_reward_sum": 35.81537163460042,
+      "mean_commanded_velocity_norm": 1.1148395950440317,
+      "prefix_displacement": [
+        142.8800024442384,
+        32.86746734060984,
+        105.89969500954143,
+        86.32612607885537,
+        117.58977122278745
+      ],
+      "prefix_path_length": [
+        142.88000244425473,
+        141.35874892372033,
+        105.98169721846482,
+        87.76553130796415,
+        124.98779751819752
+      ],
+      "mean_served_connections": 8.14453125,
+      "velocity_decisions": 1268,
+      "duration_decisions": 5,
+      "d4": 4
+    },
+    {
+      "pair_master": 8202,
+      "arm": "RESIDUAL-MC",
+      "phase": "eval",
+      "episode": 20,
+      "reset_seed": 820202020,
+      "steps": 256,
+      "reward_sum": 20.937695794641144,
+      "J": 0.08178787419781697,
+      "prefix_reward_sum": 0.3996616574821894,
+      "suffix_reward_sum": 20.538034137158956,
+      "mean_commanded_velocity_norm": 1.0923074099700898,
+      "prefix_displacement": [
+        148.69958907360177,
+        29.778622866921072,
+        99.15475282002379,
+        155.3888195286592,
+        149.44314673768332
+      ],
+      "prefix_path_length": [
+        148.69958907363107,
+        29.799952002308196,
+        99.15475282002836,
+        155.3888195286863,
+        156.47081420713357
+      ],
+      "mean_served_connections": 4.359375,
+      "velocity_decisions": 1265,
+      "duration_decisions": 5,
+      "d4": 5
+    },
+    {
+      "pair_master": 8202,
+      "arm": "RESIDUAL-MC",
+      "phase": "eval",
+      "episode": 21,
+      "reset_seed": 820202021,
+      "steps": 256,
+      "reward_sum": 27.949841108006783,
+      "J": 0.1091790668281515,
+      "prefix_reward_sum": 0.6116328259839039,
+      "suffix_reward_sum": 27.33820828202288,
+      "mean_commanded_velocity_norm": 1.111947122728452,
+      "prefix_displacement": [
+        77.11980967573719,
+        32.4500810075316,
+        68.3975718188074,
+        65.7653308272784,
+        97.63165575284243
+      ],
+      "prefix_path_length": [
+        139.95593386935232,
+        123.66104501923164,
+        116.83535272979469,
+        99.8261949443307,
+        100.78211406286505
+      ],
+      "mean_served_connections": 6.20703125,
+      "velocity_decisions": 1277,
+      "duration_decisions": 5,
+      "d4": 1
+    },
+    {
+      "pair_master": 8202,
+      "arm": "RESIDUAL-MC",
+      "phase": "eval",
+      "episode": 22,
+      "reset_seed": 820202022,
+      "steps": 256,
+      "reward_sum": 52.493347831189965,
+      "J": 0.2050521399655858,
+      "prefix_reward_sum": 1.1519163723172974,
+      "suffix_reward_sum": 51.34143145887268,
+      "mean_commanded_velocity_norm": 1.1058249953202903,
+      "prefix_displacement": [
+        36.116102852784465,
+        90.75381529819612,
+        135.27919479395808,
+        157.78586656808352,
+        72.62256330629309
+      ],
+      "prefix_path_length": [
+        82.56708423174616,
+        90.75381529822363,
+        139.63099426044963,
+        164.25371326244198,
+        102.72254266301134
+      ],
+      "mean_served_connections": 12.5234375,
+      "velocity_decisions": 1271,
+      "duration_decisions": 5,
+      "d4": 3
+    },
+    {
+      "pair_master": 8202,
+      "arm": "RESIDUAL-MC",
+      "phase": "eval",
+      "episode": 23,
+      "reset_seed": 820202023,
+      "steps": 256,
+      "reward_sum": 27.363126796196834,
+      "J": 0.10688721404764388,
+      "prefix_reward_sum": 0.3061081880997114,
+      "suffix_reward_sum": 27.05701860809712,
+      "mean_commanded_velocity_norm": 1.1117031211033463,
+      "prefix_displacement": [
+        55.72372117917408,
+        70.3923802959457,
+        122.44254354151342,
+        128.30379535013648,
+        117.59863482215984
+      ],
+      "prefix_path_length": [
+        111.99851042827399,
+        114.71273083947719,
+        128.3622316838115,
+        129.19610910036755,
+        123.62340628063009
+      ],
+      "mean_served_connections": 6.00390625,
+      "velocity_decisions": 1271,
+      "duration_decisions": 5,
+      "d4": 3
+    },
+    {
+      "pair_master": 8202,
+      "arm": "RESIDUAL-MC",
+      "phase": "eval",
+      "episode": 24,
+      "reset_seed": 820202024,
+      "steps": 256,
+      "reward_sum": 49.979674771478194,
+      "J": 0.1952331045760867,
+      "prefix_reward_sum": 0.4725295372790187,
+      "suffix_reward_sum": 49.50714523419917,
+      "mean_commanded_velocity_norm": 1.1044741778168827,
+      "prefix_displacement": [
+        94.83925719177131,
+        114.57793608198969,
+        48.59741012854561,
+        74.72828998619153,
+        150.62431584158435
+      ],
+      "prefix_path_length": [
+        94.83925719177597,
+        149.79530453559767,
+        125.88088556543822,
+        97.95053918522177,
+        150.62431584159265
+      ],
+      "mean_served_connections": 11.9375,
+      "velocity_decisions": 1274,
+      "duration_decisions": 5,
+      "d4": 2
+    },
+    {
+      "pair_master": 8202,
+      "arm": "RESIDUAL-MC",
+      "phase": "eval",
+      "episode": 25,
+      "reset_seed": 820202025,
+      "steps": 256,
+      "reward_sum": 36.81211790421527,
+      "J": 0.1437973355633409,
+      "prefix_reward_sum": 0.24139697515425845,
+      "suffix_reward_sum": 36.57072092906101,
+      "mean_commanded_velocity_norm": 1.0982873626053333,
+      "prefix_displacement": [
+        100.93909584094708,
+        83.01040629586537,
+        32.07264232221262,
+        63.025368564246186,
+        112.462050099611
+      ],
+      "prefix_path_length": [
+        101.06952748474912,
+        83.0104062959509,
+        103.9599308411263,
+        145.27776641031807,
+        119.21453670290732
+      ],
+      "mean_served_connections": 8.4296875,
+      "velocity_decisions": 1274,
+      "duration_decisions": 5,
+      "d4": 2
+    },
+    {
+      "pair_master": 8202,
+      "arm": "RESIDUAL-MC",
+      "phase": "eval",
+      "episode": 26,
+      "reset_seed": 820202026,
+      "steps": 256,
+      "reward_sum": 32.30898523849071,
+      "J": 0.12620697358785435,
+      "prefix_reward_sum": 0.2732281403845593,
+      "suffix_reward_sum": 32.03575709810616,
+      "mean_commanded_velocity_norm": 1.1038915012031794,
+      "prefix_displacement": [
+        12.603660337808785,
+        62.80672600598318,
+        152.31144735770891,
+        35.053740389607206,
+        32.03911408343496
+      ],
+      "prefix_path_length": [
+        116.8670447744195,
+        130.22910414447668,
+        153.30293822139248,
+        144.45693203278188,
+        126.38740710948943
+      ],
+      "mean_served_connections": 6.98046875,
+      "velocity_decisions": 1277,
+      "duration_decisions": 5,
+      "d4": 1
+    },
+    {
+      "pair_master": 8202,
+      "arm": "RESIDUAL-MC",
+      "phase": "eval",
+      "episode": 27,
+      "reset_seed": 820202027,
+      "steps": 256,
+      "reward_sum": 44.980786798545175,
+      "J": 0.1757061984318171,
+      "prefix_reward_sum": 0.3917113351333303,
+      "suffix_reward_sum": 44.58907546341185,
+      "mean_commanded_velocity_norm": 1.1204383512958884,
+      "prefix_displacement": [
+        115.95674586879757,
+        96.55223331312497,
+        69.36091734493876,
+        133.77127848747722,
+        73.42268080924366
+      ],
+      "prefix_path_length": [
+        119.96359957385278,
+        99.94285500819097,
+        79.97292952183952,
+        137.10532494251478,
+        139.77521534334267
+      ],
+      "mean_served_connections": 10.203125,
+      "velocity_decisions": 1268,
+      "duration_decisions": 5,
+      "d4": 4
+    },
+    {
+      "pair_master": 8202,
+      "arm": "RESIDUAL-MC",
+      "phase": "eval",
+      "episode": 28,
+      "reset_seed": 820202028,
+      "steps": 256,
+      "reward_sum": 32.395128765476166,
+      "J": 0.12654347174014127,
+      "prefix_reward_sum": 0.40832830815087545,
+      "suffix_reward_sum": 31.986800457325284,
+      "mean_commanded_velocity_norm": 1.0993090248666704,
+      "prefix_displacement": [
+        98.53820529205002,
+        122.09509334808202,
+        88.29518393756834,
+        92.47272064051623,
+        83.527236921805
+      ],
+      "prefix_path_length": [
+        98.54497869534839,
+        130.36635134614735,
+        145.96970089609638,
+        127.82818391243657,
+        90.37878972760971
+      ],
+      "mean_served_connections": 7.57421875,
+      "velocity_decisions": 1271,
+      "duration_decisions": 5,
+      "d4": 3
+    },
+    {
+      "pair_master": 8202,
+      "arm": "RESIDUAL-MC",
+      "phase": "eval",
+      "episode": 29,
+      "reset_seed": 820202029,
+      "steps": 256,
+      "reward_sum": 35.64782721971394,
+      "J": 0.13924932507700757,
+      "prefix_reward_sum": 0.5515136072703279,
+      "suffix_reward_sum": 35.096313612443616,
+      "mean_commanded_velocity_norm": 1.1080968780443072,
+      "prefix_displacement": [
+        66.49013121391631,
+        111.7799398412592,
+        68.6912666431496,
+        55.103897647312806,
+        80.13191400600451
+      ],
+      "prefix_path_length": [
+        153.02981720696403,
+        111.77993984128719,
+        79.07668576334007,
+        136.47348290572324,
+        98.42174070992337
+      ],
+      "mean_served_connections": 7.84765625,
+      "velocity_decisions": 1274,
+      "duration_decisions": 5,
+      "d4": 2
+    },
+    {
+      "pair_master": 8202,
+      "arm": "RESIDUAL-MC",
+      "phase": "eval",
+      "episode": 30,
+      "reset_seed": 820202030,
+      "steps": 256,
+      "reward_sum": 47.691514579298584,
+      "J": 0.1862949788253851,
+      "prefix_reward_sum": 0.25470685965563156,
+      "suffix_reward_sum": 47.43680771964296,
+      "mean_commanded_velocity_norm": 1.0992560235317796,
+      "prefix_displacement": [
+        105.9740489125837,
+        36.50171616032005,
+        140.655748029558,
+        171.09099329072484,
+        66.87484383744761
+      ],
+      "prefix_path_length": [
+        108.35761125405003,
+        89.5433529064421,
+        143.2145374461822,
+        173.13737674907242,
+        70.07404735470982
+      ],
+      "mean_served_connections": 11.52734375,
+      "velocity_decisions": 1268,
+      "duration_decisions": 5,
+      "d4": 4
+    },
+    {
+      "pair_master": 8202,
+      "arm": "RESIDUAL-MC",
+      "phase": "eval",
+      "episode": 31,
+      "reset_seed": 820202031,
+      "steps": 256,
+      "reward_sum": 45.8985471972384,
+      "J": 0.1792911999892125,
+      "prefix_reward_sum": 0.6500224782492888,
+      "suffix_reward_sum": 45.24852471898912,
+      "mean_commanded_velocity_norm": 1.0974639288615435,
+      "prefix_displacement": [
+        33.15262913543269,
+        46.349777778148166,
+        55.84777369939596,
+        89.27368808064229,
+        82.82747557966121
+      ],
+      "prefix_path_length": [
+        129.14592102813526,
+        118.89824760181763,
+        126.56970893185115,
+        128.5322895189404,
+        130.90616188219974
+      ],
+      "mean_served_connections": 10.31640625,
+      "velocity_decisions": 1280,
+      "duration_decisions": 5,
+      "d4": 0
+    },
+    {
+      "pair_master": 8202,
+      "arm": "MLP-MC",
+      "phase": "eval",
+      "episode": 0,
+      "reset_seed": 820202000,
+      "steps": 256,
+      "reward_sum": 35.835223345305074,
+      "J": 0.13998134119259795,
+      "prefix_reward_sum": 0.7554425806257661,
+      "suffix_reward_sum": 35.079780764679334,
+      "mean_commanded_velocity_norm": 1.0934989501256496,
+      "prefix_displacement": [
+        61.23841084592911,
+        132.93515529936363,
+        58.505838608281955,
+        98.97215972265896,
+        54.70697737827376
+      ],
+      "prefix_path_length": [
+        132.15053693197234,
+        137.32619822998734,
+        119.6114452857978,
+        133.9175718531301,
+        136.47262341661843
+      ],
+      "mean_served_connections": 7.5546875,
+      "velocity_decisions": 1277,
+      "duration_decisions": 5,
+      "d4": 1
+    },
+    {
+      "pair_master": 8202,
+      "arm": "MLP-MC",
+      "phase": "eval",
+      "episode": 1,
+      "reset_seed": 820202001,
+      "steps": 256,
+      "reward_sum": 75.19033183354394,
+      "J": 0.293712233724781,
+      "prefix_reward_sum": 0.8707438860746499,
+      "suffix_reward_sum": 74.31958794746929,
+      "mean_commanded_velocity_norm": 1.0898058405146003,
+      "prefix_displacement": [
+        140.50365329490057,
+        157.06916356254277,
+        24.83906384219743,
+        82.74307833563589,
+        88.13130333742146
+      ],
+      "prefix_path_length": [
+        141.13949781646352,
+        157.1840928433633,
+        103.18901834596302,
+        83.75186006984802,
+        105.4246593757742
+      ],
+      "mean_served_connections": 18.28515625,
+      "velocity_decisions": 1271,
+      "duration_decisions": 5,
+      "d4": 3
+    },
+    {
+      "pair_master": 8202,
+      "arm": "MLP-MC",
+      "phase": "eval",
+      "episode": 2,
+      "reset_seed": 820202002,
+      "steps": 256,
+      "reward_sum": 32.643057106444516,
+      "J": 0.1275119418220489,
+      "prefix_reward_sum": 0.47627265152357623,
+      "suffix_reward_sum": 32.16678445492094,
+      "mean_commanded_velocity_norm": 1.0921492134220898,
+      "prefix_displacement": [
+        28.08388286912993,
+        70.45739786792699,
+        112.65784538694733,
+        52.05113278285447,
+        106.99631847500989
+      ],
+      "prefix_path_length": [
+        113.29154700744652,
+        137.1693931030847,
+        117.4513640080301,
+        137.6600642658187,
+        129.2154916207655
+      ],
+      "mean_served_connections": 6.171875,
+      "velocity_decisions": 1277,
+      "duration_decisions": 5,
+      "d4": 1
+    },
+    {
+      "pair_master": 8202,
+      "arm": "MLP-MC",
+      "phase": "eval",
+      "episode": 3,
+      "reset_seed": 820202003,
+      "steps": 256,
+      "reward_sum": 34.676330445593855,
+      "J": 0.135454415803101,
+      "prefix_reward_sum": 0.3607629283510146,
+      "suffix_reward_sum": 34.31556751724284,
+      "mean_commanded_velocity_norm": 1.1083337091840804,
+      "prefix_displacement": [
+        38.83374885192715,
+        19.47567219605798,
+        146.06380329203603,
+        134.2014013610168,
+        97.11398222045361
+      ],
+      "prefix_path_length": [
+        135.28546398004107,
+        152.66193770299913,
+        146.61574123935216,
+        134.20140136101986,
+        97.1139822204667
+      ],
+      "mean_served_connections": 8.12890625,
+      "velocity_decisions": 1271,
+      "duration_decisions": 5,
+      "d4": 3
+    },
+    {
+      "pair_master": 8202,
+      "arm": "MLP-MC",
+      "phase": "eval",
+      "episode": 4,
+      "reset_seed": 820202004,
+      "steps": 256,
+      "reward_sum": 66.33641075341727,
+      "J": 0.2591266045055362,
+      "prefix_reward_sum": 0.9000412872117697,
+      "suffix_reward_sum": 65.43636946620552,
+      "mean_commanded_velocity_norm": 1.1028939180541784,
+      "prefix_displacement": [
+        95.34411636400624,
+        88.80346229947672,
+        64.31905602684127,
+        50.28458756338332,
+        117.7045806604065
+      ],
+      "prefix_path_length": [
+        95.34411636403338,
+        90.99287373811089,
+        79.6187946372331,
+        124.51179367826239,
+        124.7829368141588
+      ],
+      "mean_served_connections": 15.78515625,
+      "velocity_decisions": 1271,
+      "duration_decisions": 5,
+      "d4": 3
+    },
+    {
+      "pair_master": 8202,
+      "arm": "MLP-MC",
+      "phase": "eval",
+      "episode": 5,
+      "reset_seed": 820202005,
+      "steps": 256,
+      "reward_sum": 27.467529849923594,
+      "J": 0.10729503847626404,
+      "prefix_reward_sum": 0.9350958511927967,
+      "suffix_reward_sum": 26.5324339987308,
+      "mean_commanded_velocity_norm": 1.1082414099946618,
+      "prefix_displacement": [
+        143.06549936007661,
+        99.0844812337062,
+        78.74154935544094,
+        75.30204242214445,
+        121.4980002790068
+      ],
+      "prefix_path_length": [
+        143.53241411710349,
+        99.14718579058925,
+        79.02617248047535,
+        75.94915740102482,
+        121.49800027908185
+      ],
+      "mean_served_connections": 6.3359375,
+      "velocity_decisions": 1265,
+      "duration_decisions": 5,
+      "d4": 5
+    },
+    {
+      "pair_master": 8202,
+      "arm": "MLP-MC",
+      "phase": "eval",
+      "episode": 6,
+      "reset_seed": 820202006,
+      "steps": 256,
+      "reward_sum": 25.217859521246147,
+      "J": 0.09850726375486776,
+      "prefix_reward_sum": 0.5429846633573195,
+      "suffix_reward_sum": 24.674874857888824,
+      "mean_commanded_velocity_norm": 1.0904805001337081,
+      "prefix_displacement": [
+        71.02309391635659,
+        89.66333753003212,
+        117.61055548228855,
+        146.54435326470272,
+        167.83880112863562
+      ],
+      "prefix_path_length": [
+        145.0368822893417,
+        95.96979586161194,
+        117.63938816620572,
+        151.55650238465614,
+        168.47802852979976
+      ],
+      "mean_served_connections": 5.65234375,
+      "velocity_decisions": 1268,
+      "duration_decisions": 5,
+      "d4": 4
+    },
+    {
+      "pair_master": 8202,
+      "arm": "MLP-MC",
+      "phase": "eval",
+      "episode": 7,
+      "reset_seed": 820202007,
+      "steps": 256,
+      "reward_sum": 16.830635115753527,
+      "J": 0.06574466842091221,
+      "prefix_reward_sum": 0.6726995195329437,
+      "suffix_reward_sum": 16.157935596220586,
+      "mean_commanded_velocity_norm": 1.0925128073431551,
+      "prefix_displacement": [
+        60.211199527591965,
+        46.257730816395586,
+        34.752818124663435,
+        111.45138822725059,
+        69.49292503422895
+      ],
+      "prefix_path_length": [
+        95.339534406692,
+        92.70352171153209,
+        127.52724937871962,
+        111.45138822725093,
+        110.50304623672213
+      ],
+      "mean_served_connections": 3.03125,
+      "velocity_decisions": 1277,
+      "duration_decisions": 5,
+      "d4": 1
+    },
+    {
+      "pair_master": 8202,
+      "arm": "MLP-MC",
+      "phase": "eval",
+      "episode": 8,
+      "reset_seed": 820202008,
+      "steps": 256,
+      "reward_sum": 46.11531597545917,
+      "J": 0.18013795302913738,
+      "prefix_reward_sum": 1.0383389349403336,
+      "suffix_reward_sum": 45.076977040518834,
+      "mean_commanded_velocity_norm": 1.106244239024818,
+      "prefix_displacement": [
+        35.88924219884538,
+        164.35249420461275,
+        111.76902379984895,
+        40.13667239050789,
+        69.2307145628321
+      ],
+      "prefix_path_length": [
+        128.81595579573872,
+        167.07810068381616,
+        111.76902379984955,
+        125.39133224940554,
+        112.47897933895703
+      ],
+      "mean_served_connections": 10.53515625,
+      "velocity_decisions": 1274,
+      "duration_decisions": 5,
+      "d4": 2
+    },
+    {
+      "pair_master": 8202,
+      "arm": "MLP-MC",
+      "phase": "eval",
+      "episode": 9,
+      "reset_seed": 820202009,
+      "steps": 256,
+      "reward_sum": 34.94267732324665,
+      "J": 0.13649483329393222,
+      "prefix_reward_sum": 1.086995836053031,
+      "suffix_reward_sum": 33.855681487193614,
+      "mean_commanded_velocity_norm": 1.0963703752495348,
+      "prefix_displacement": [
+        92.4600977659716,
+        70.46095475851723,
+        96.22775220052785,
+        143.04027557229975,
+        87.86259956609288
+      ],
+      "prefix_path_length": [
+        140.91611647331456,
+        71.83511109396606,
+        103.63477278016921,
+        148.70692056271156,
+        94.97952574879244
+      ],
+      "mean_served_connections": 7.828125,
+      "velocity_decisions": 1268,
+      "duration_decisions": 5,
+      "d4": 4
+    },
+    {
+      "pair_master": 8202,
+      "arm": "MLP-MC",
+      "phase": "eval",
+      "episode": 10,
+      "reset_seed": 820202010,
+      "steps": 256,
+      "reward_sum": 26.33900966348877,
+      "J": 0.10288675649800301,
+      "prefix_reward_sum": 0.36048353293515434,
+      "suffix_reward_sum": 25.978526130553618,
+      "mean_commanded_velocity_norm": 1.102399779483676,
+      "prefix_displacement": [
+        96.81778712573063,
+        31.28009122997815,
+        56.18949579715981,
+        57.120036594851264,
+        89.19166953678065
+      ],
+      "prefix_path_length": [
+        102.70769493704289,
+        125.65668128223123,
+        128.561997424865,
+        127.44907680899443,
+        106.20095214316306
+      ],
+      "mean_served_connections": 5.8125,
+      "velocity_decisions": 1277,
+      "duration_decisions": 5,
+      "d4": 1
+    },
+    {
+      "pair_master": 8202,
+      "arm": "MLP-MC",
+      "phase": "eval",
+      "episode": 11,
+      "reset_seed": 820202011,
+      "steps": 256,
+      "reward_sum": 31.185323355702135,
+      "J": 0.12181766935821146,
+      "prefix_reward_sum": 0.6206603498464075,
+      "suffix_reward_sum": 30.56466300585573,
+      "mean_commanded_velocity_norm": 1.1121385602746159,
+      "prefix_displacement": [
+        67.8355958940363,
+        144.86469037244208,
+        22.475961259367974,
+        59.108016933818696,
+        70.74307532474285
+      ],
+      "prefix_path_length": [
+        152.54562302668006,
+        144.86469037247957,
+        106.28611022683415,
+        150.4589228543578,
+        113.68568777899507
+      ],
+      "mean_served_connections": 6.57421875,
+      "velocity_decisions": 1277,
+      "duration_decisions": 5,
+      "d4": 1
+    },
+    {
+      "pair_master": 8202,
+      "arm": "MLP-MC",
+      "phase": "eval",
+      "episode": 12,
+      "reset_seed": 820202012,
+      "steps": 256,
+      "reward_sum": 51.146169245277925,
+      "J": 0.1997897236143669,
+      "prefix_reward_sum": 0.44590822984772893,
+      "suffix_reward_sum": 50.70026101543021,
+      "mean_commanded_velocity_norm": 1.1074038152582943,
+      "prefix_displacement": [
+        58.09140375454092,
+        126.81169505327937,
+        92.67014392288092,
+        122.76470582583423,
+        64.04979457141606
+      ],
+      "prefix_path_length": [
+        124.89204774811807,
+        133.6719407653777,
+        137.95825836109572,
+        129.8786489966558,
+        116.27249816612759
+      ],
+      "mean_served_connections": 12.04296875,
+      "velocity_decisions": 1274,
+      "duration_decisions": 5,
+      "d4": 2
+    },
+    {
+      "pair_master": 8202,
+      "arm": "MLP-MC",
+      "phase": "eval",
+      "episode": 13,
+      "reset_seed": 820202013,
+      "steps": 256,
+      "reward_sum": 21.023956415864742,
+      "J": 0.08212482974947165,
+      "prefix_reward_sum": 0.5065415406433381,
+      "suffix_reward_sum": 20.517414875221405,
+      "mean_commanded_velocity_norm": 1.1128948838450015,
+      "prefix_displacement": [
+        76.3886734474032,
+        9.996730086416292,
+        29.828793637152494,
+        129.4154552283646,
+        134.50729583344403
+      ],
+      "prefix_path_length": [
+        119.93881922826776,
+        108.68142165489024,
+        30.682983284597615,
+        129.4154552283817,
+        134.50729583347675
+      ],
+      "mean_served_connections": 4.3828125,
+      "velocity_decisions": 1271,
+      "duration_decisions": 5,
+      "d4": 3
+    },
+    {
+      "pair_master": 8202,
+      "arm": "MLP-MC",
+      "phase": "eval",
+      "episode": 14,
+      "reset_seed": 820202014,
+      "steps": 256,
+      "reward_sum": 24.537058436217954,
+      "J": 0.09584788451647638,
+      "prefix_reward_sum": 0.4787485106151642,
+      "suffix_reward_sum": 24.058309925602792,
+      "mean_commanded_velocity_norm": 1.1030648516025394,
+      "prefix_displacement": [
+        35.67121357696446,
+        23.512557925631967,
+        44.03589383629191,
+        40.553143217326515,
+        47.48476143409728
+      ],
+      "prefix_path_length": [
+        116.99943540804081,
+        124.99484102948522,
+        127.70736653330238,
+        130.72156554784004,
+        138.48738628361212
+      ],
+      "mean_served_connections": 5.3203125,
+      "velocity_decisions": 1280,
+      "duration_decisions": 5,
+      "d4": 0
+    },
+    {
+      "pair_master": 8202,
+      "arm": "MLP-MC",
+      "phase": "eval",
+      "episode": 15,
+      "reset_seed": 820202015,
+      "steps": 256,
+      "reward_sum": 30.85242910650532,
+      "J": 0.1205173011972864,
+      "prefix_reward_sum": 1.3351700413017862,
+      "suffix_reward_sum": 29.517259065203532,
+      "mean_commanded_velocity_norm": 1.0996168125420809,
+      "prefix_displacement": [
+        139.04588763133327,
+        32.29722968265842,
+        106.99014279798327,
+        57.66136259001377,
+        53.1959397257193
+      ],
+      "prefix_path_length": [
+        139.10834677275628,
+        120.78998212323498,
+        123.61113799928107,
+        136.20517267579757,
+        61.74245291776623
+      ],
+      "mean_served_connections": 7.19921875,
+      "velocity_decisions": 1274,
+      "duration_decisions": 5,
+      "d4": 2
+    },
+    {
+      "pair_master": 8202,
+      "arm": "MLP-MC",
+      "phase": "eval",
+      "episode": 16,
+      "reset_seed": 820202016,
+      "steps": 256,
+      "reward_sum": 44.0536671770484,
+      "J": 0.17208463741034533,
+      "prefix_reward_sum": 0.45840803625179743,
+      "suffix_reward_sum": 43.5952591407966,
+      "mean_commanded_velocity_norm": 1.092495628632605,
+      "prefix_displacement": [
+        126.83551477810698,
+        50.59643528490698,
+        165.1600078868065,
+        68.16678953284763,
+        126.28884535684834
+      ],
+      "prefix_path_length": [
+        135.39329104510176,
+        104.14444350227602,
+        169.71323499732983,
+        127.47555524741517,
+        129.90426411462204
+      ],
+      "mean_served_connections": 10.40625,
+      "velocity_decisions": 1271,
+      "duration_decisions": 5,
+      "d4": 3
+    },
+    {
+      "pair_master": 8202,
+      "arm": "MLP-MC",
+      "phase": "eval",
+      "episode": 17,
+      "reset_seed": 820202017,
+      "steps": 256,
+      "reward_sum": 54.05409682334573,
+      "J": 0.21114881571619426,
+      "prefix_reward_sum": 0.180179683952305,
+      "suffix_reward_sum": 53.87391713939343,
+      "mean_commanded_velocity_norm": 1.079789575189352,
+      "prefix_displacement": [
+        34.692449693642246,
+        69.54652028558593,
+        69.60850130804174,
+        77.92505170260426,
+        92.06875899825663
+      ],
+      "prefix_path_length": [
+        132.35771646451755,
+        71.61069764967735,
+        130.00903870722118,
+        77.92505170265089,
+        92.06875899827867
+      ],
+      "mean_served_connections": 12.94921875,
+      "velocity_decisions": 1271,
+      "duration_decisions": 5,
+      "d4": 3
+    },
+    {
+      "pair_master": 8202,
+      "arm": "MLP-MC",
+      "phase": "eval",
+      "episode": 18,
+      "reset_seed": 820202018,
+      "steps": 256,
+      "reward_sum": 34.350602962248125,
+      "J": 0.13418204282128174,
+      "prefix_reward_sum": 0.6381754910025265,
+      "suffix_reward_sum": 33.71242747124559,
+      "mean_commanded_velocity_norm": 1.0957838529720902,
+      "prefix_displacement": [
+        43.80232435046029,
+        134.95351240341924,
+        146.00402005777084,
+        107.13068681597525,
+        82.08798796209228
+      ],
+      "prefix_path_length": [
+        138.766779586303,
+        134.953512403447,
+        146.00402005779245,
+        107.13068681597557,
+        82.08798796220269
+      ],
+      "mean_served_connections": 7.8984375,
+      "velocity_decisions": 1268,
+      "duration_decisions": 5,
+      "d4": 4
+    },
+    {
+      "pair_master": 8202,
+      "arm": "MLP-MC",
+      "phase": "eval",
+      "episode": 19,
+      "reset_seed": 820202019,
+      "steps": 256,
+      "reward_sum": 19.60564249638609,
+      "J": 0.07658454100150816,
+      "prefix_reward_sum": 0.647489671875459,
+      "suffix_reward_sum": 18.958152824510627,
+      "mean_commanded_velocity_norm": 1.1071459797676653,
+      "prefix_displacement": [
+        139.7067439456394,
+        27.822129071823433,
+        111.75821319718743,
+        82.17303338221984,
+        115.5613471563596
+      ],
+      "prefix_path_length": [
+        139.70674394566714,
+        141.24475404326589,
+        111.83593607726252,
+        83.67742101948532,
+        122.93782770256595
+      ],
+      "mean_served_connections": 4.08984375,
+      "velocity_decisions": 1268,
+      "duration_decisions": 5,
+      "d4": 4
+    },
+    {
+      "pair_master": 8202,
+      "arm": "MLP-MC",
+      "phase": "eval",
+      "episode": 20,
+      "reset_seed": 820202020,
+      "steps": 256,
+      "reward_sum": 16.83989568334801,
+      "J": 0.06578084251307817,
+      "prefix_reward_sum": 0.38487174937397045,
+      "suffix_reward_sum": 16.45502393397404,
+      "mean_commanded_velocity_norm": 1.0861790881026536,
+      "prefix_displacement": [
+        150.42377865475055,
+        32.27591710942378,
+        91.84631151692753,
+        155.7882968988843,
+        148.01533112092648
+      ],
+      "prefix_path_length": [
+        150.42377865477425,
+        32.29560239494467,
+        91.84631151692798,
+        155.78829689888846,
+        155.0705079087074
+      ],
+      "mean_served_connections": 3.76171875,
+      "velocity_decisions": 1265,
+      "duration_decisions": 5,
+      "d4": 5
+    },
+    {
+      "pair_master": 8202,
+      "arm": "MLP-MC",
+      "phase": "eval",
+      "episode": 21,
+      "reset_seed": 820202021,
+      "steps": 256,
+      "reward_sum": 53.75758640041687,
+      "J": 0.2099905718766284,
+      "prefix_reward_sum": 0.644300157404019,
+      "suffix_reward_sum": 53.11328624301285,
+      "mean_commanded_velocity_norm": 1.105397337116301,
+      "prefix_displacement": [
+        73.64159752213364,
+        36.30042716477555,
+        67.36534593156402,
+        80.84941713305713,
+        101.55867043245112
+      ],
+      "prefix_path_length": [
+        138.21769261255952,
+        125.04114619767563,
+        114.02442960970484,
+        111.5475885790575,
+        104.59756357008565
+      ],
+      "mean_served_connections": 12.90625,
+      "velocity_decisions": 1277,
+      "duration_decisions": 5,
+      "d4": 1
+    },
+    {
+      "pair_master": 8202,
+      "arm": "MLP-MC",
+      "phase": "eval",
+      "episode": 22,
+      "reset_seed": 820202022,
+      "steps": 256,
+      "reward_sum": 45.06178873729711,
+      "J": 0.17602261225506682,
+      "prefix_reward_sum": 1.1468542875752403,
+      "suffix_reward_sum": 43.91493444972187,
+      "mean_commanded_velocity_norm": 1.0982527188025415,
+      "prefix_displacement": [
+        39.81670460434605,
+        100.68565448020159,
+        143.52035433635226,
+        156.90830245370194,
+        69.77144462482367
+      ],
+      "prefix_path_length": [
+        82.29559842403077,
+        100.68565448020777,
+        147.8548046854125,
+        163.43611256751953,
+        97.86097877622734
+      ],
+      "mean_served_connections": 10.64453125,
+      "velocity_decisions": 1271,
+      "duration_decisions": 5,
+      "d4": 3
+    },
+    {
+      "pair_master": 8202,
+      "arm": "MLP-MC",
+      "phase": "eval",
+      "episode": 23,
+      "reset_seed": 820202023,
+      "steps": 256,
+      "reward_sum": 33.01112461938817,
+      "J": 0.12894970554448504,
+      "prefix_reward_sum": 0.29110590146692333,
+      "suffix_reward_sum": 32.72001871792125,
+      "mean_commanded_velocity_norm": 1.1026797101367265,
+      "prefix_displacement": [
+        53.579923269945695,
+        75.74084485879801,
+        115.41959257653319,
+        124.58345541950327,
+        115.58742149946711
+      ],
+      "prefix_path_length": [
+        110.23137636725218,
+        114.63296517137192,
+        120.59959865012995,
+        125.3525337375279,
+        121.27744176785744
+      ],
+      "mean_served_connections": 6.96484375,
+      "velocity_decisions": 1271,
+      "duration_decisions": 5,
+      "d4": 3
+    },
+    {
+      "pair_master": 8202,
+      "arm": "MLP-MC",
+      "phase": "eval",
+      "episode": 24,
+      "reset_seed": 820202024,
+      "steps": 256,
+      "reward_sum": 36.66933807577214,
+      "J": 0.14323960185848492,
+      "prefix_reward_sum": 0.4688622505591966,
+      "suffix_reward_sum": 36.20047582521294,
+      "mean_commanded_velocity_norm": 1.0927831071894616,
+      "prefix_displacement": [
+        93.25590861602885,
+        110.90451113107196,
+        44.76801858471146,
+        60.756525082906684,
+        149.0198606008994
+      ],
+      "prefix_path_length": [
+        93.25590861603416,
+        148.48135190864787,
+        120.66050343294141,
+        93.96241556564567,
+        149.01986060090235
+      ],
+      "mean_served_connections": 8.6875,
+      "velocity_decisions": 1274,
+      "duration_decisions": 5,
+      "d4": 2
+    },
+    {
+      "pair_master": 8202,
+      "arm": "MLP-MC",
+      "phase": "eval",
+      "episode": 25,
+      "reset_seed": 820202025,
+      "steps": 256,
+      "reward_sum": 35.49622876000695,
+      "J": 0.13865714359377715,
+      "prefix_reward_sum": 0.23267122575394017,
+      "suffix_reward_sum": 35.26355753425302,
+      "mean_commanded_velocity_norm": 1.0893433676101267,
+      "prefix_displacement": [
+        104.42102232945861,
+        80.21591526919262,
+        33.38086104506616,
+        66.39060236832974,
+        120.4877526467679
+      ],
+      "prefix_path_length": [
+        104.42102232950926,
+        80.21591526919264,
+        104.35340982579336,
+        144.38498600869292,
+        125.51873764090652
+      ],
+      "mean_served_connections": 8.30078125,
+      "velocity_decisions": 1274,
+      "duration_decisions": 5,
+      "d4": 2
+    },
+    {
+      "pair_master": 8202,
+      "arm": "MLP-MC",
+      "phase": "eval",
+      "episode": 26,
+      "reset_seed": 820202026,
+      "steps": 256,
+      "reward_sum": 13.102839356293748,
+      "J": 0.05118296623552245,
+      "prefix_reward_sum": 0.3009075005281362,
+      "suffix_reward_sum": 12.801931855765611,
+      "mean_commanded_velocity_norm": 1.1002501642797142,
+      "prefix_displacement": [
+        4.099801127365373,
+        64.74567456074466,
+        147.82130496524292,
+        35.23104682144602,
+        27.73738054044822
+      ],
+      "prefix_path_length": [
+        114.04720108689145,
+        131.4330234413533,
+        148.51184585525763,
+        145.2465748814551,
+        126.58781298978052
+      ],
+      "mean_served_connections": 2.45703125,
+      "velocity_decisions": 1277,
+      "duration_decisions": 5,
+      "d4": 1
+    },
+    {
+      "pair_master": 8202,
+      "arm": "MLP-MC",
+      "phase": "eval",
+      "episode": 27,
+      "reset_seed": 820202027,
+      "steps": 256,
+      "reward_sum": 50.01522496246404,
+      "J": 0.19537197250962515,
+      "prefix_reward_sum": 0.3856671779811614,
+      "suffix_reward_sum": 49.62955778448288,
+      "mean_commanded_velocity_norm": 1.1064855649601668,
+      "prefix_displacement": [
+        120.26845583743223,
+        103.30161525996418,
+        71.01380899597709,
+        134.83143261976258,
+        75.86547034138822
+      ],
+      "prefix_path_length": [
+        124.01862927903798,
+        106.5113373008021,
+        81.7516995553666,
+        138.1430439233368,
+        141.3598644396041
+      ],
+      "mean_served_connections": 11.67578125,
+      "velocity_decisions": 1268,
+      "duration_decisions": 5,
+      "d4": 4
+    },
+    {
+      "pair_master": 8202,
+      "arm": "MLP-MC",
+      "phase": "eval",
+      "episode": 28,
+      "reset_seed": 820202028,
+      "steps": 256,
+      "reward_sum": 25.971038683734665,
+      "J": 0.10144936985833854,
+      "prefix_reward_sum": 0.4170585630628131,
+      "suffix_reward_sum": 25.553980120671856,
+      "mean_commanded_velocity_norm": 1.0909243861678988,
+      "prefix_displacement": [
+        105.27548167155157,
+        124.50570185257256,
+        90.28296283299699,
+        85.25215318341121,
+        84.62533140865156
+      ],
+      "prefix_path_length": [
+        105.28182176625302,
+        132.65895265438556,
+        143.64065523970143,
+        122.58621132205582,
+        90.90692583424476
+      ],
+      "mean_served_connections": 5.8203125,
+      "velocity_decisions": 1271,
+      "duration_decisions": 5,
+      "d4": 3
+    },
+    {
+      "pair_master": 8202,
+      "arm": "MLP-MC",
+      "phase": "eval",
+      "episode": 29,
+      "reset_seed": 820202029,
+      "steps": 256,
+      "reward_sum": 25.654758893534332,
+      "J": 0.10021390192786848,
+      "prefix_reward_sum": 0.5428833891802722,
+      "suffix_reward_sum": 25.111875504354057,
+      "mean_commanded_velocity_norm": 1.0997746360953897,
+      "prefix_displacement": [
+        64.3875371796735,
+        116.83236365719885,
+        68.53514165040532,
+        62.54801603744359,
+        90.56560346421804
+      ],
+      "prefix_path_length": [
+        151.59622195350164,
+        116.83236365720266,
+        78.71703735173357,
+        137.34659817470109,
+        104.52218861708258
+      ],
+      "mean_served_connections": 5.63671875,
+      "velocity_decisions": 1274,
+      "duration_decisions": 5,
+      "d4": 2
+    },
+    {
+      "pair_master": 8202,
+      "arm": "MLP-MC",
+      "phase": "eval",
+      "episode": 30,
+      "reset_seed": 820202030,
+      "steps": 256,
+      "reward_sum": 36.22078986651428,
+      "J": 0.1414874604160714,
+      "prefix_reward_sum": 0.2507988408164987,
+      "suffix_reward_sum": 35.96999102569779,
+      "mean_commanded_velocity_norm": 1.087283031316474,
+      "prefix_displacement": [
+        104.16855735830525,
+        30.473359931157876,
+        141.667637227278,
+        168.0611034140032,
+        67.11765900937408
+      ],
+      "prefix_path_length": [
+        106.93828324177846,
+        87.95569897363157,
+        143.85600911135282,
+        170.28854684845618,
+        68.79222551953988
+      ],
+      "mean_served_connections": 8.25,
+      "velocity_decisions": 1268,
+      "duration_decisions": 5,
+      "d4": 4
+    },
+    {
+      "pair_master": 8202,
+      "arm": "MLP-MC",
+      "phase": "eval",
+      "episode": 31,
+      "reset_seed": 820202031,
+      "steps": 256,
+      "reward_sum": 48.472888779033816,
+      "J": 0.18934722179310084,
+      "prefix_reward_sum": 0.6467166503044683,
+      "suffix_reward_sum": 47.82617212872935,
+      "mean_commanded_velocity_norm": 1.086918336339295,
+      "prefix_displacement": [
+        37.50603067164142,
+        58.30644377015061,
+        66.03572799240872,
+        93.93025793643544,
+        71.92890711125179
+      ],
+      "prefix_path_length": [
+        128.26276874433006,
+        120.10980667350242,
+        127.75539726211423,
+        126.51136796308978,
+        127.41179855468015
+      ],
+      "mean_served_connections": 10.80078125,
+      "velocity_decisions": 1280,
+      "duration_decisions": 5,
+      "d4": 0
+    },
+    {
+      "pair_master": 8202,
+      "arm": "H",
+      "phase": "eval",
+      "episode": 0,
+      "reset_seed": 820202000,
+      "steps": 256,
+      "reward_sum": 46.88543907462794,
+      "J": 0.1831462463852654,
+      "prefix_reward_sum": 0.7325849855410633,
+      "suffix_reward_sum": 46.15285408908689,
+      "mean_commanded_velocity_norm": 0.0,
+      "prefix_displacement": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "prefix_path_length": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mean_served_connections": 11.0,
+      "velocity_decisions": 0,
+      "duration_decisions": 0,
+      "d4": 0
+    },
+    {
+      "pair_master": 8202,
+      "arm": "H",
+      "phase": "eval",
+      "episode": 1,
+      "reset_seed": 820202001,
+      "steps": 256,
+      "reward_sum": 53.84083840960062,
+      "J": 0.21031577503750243,
+      "prefix_reward_sum": 0.841263100150013,
+      "suffix_reward_sum": 52.99957530945062,
+      "mean_commanded_velocity_norm": 0.0,
+      "prefix_displacement": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "prefix_path_length": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mean_served_connections": 13.0,
+      "velocity_decisions": 0,
+      "duration_decisions": 0,
+      "d4": 0
+    },
+    {
+      "pair_master": 8202,
+      "arm": "H",
+      "phase": "eval",
+      "episode": 2,
+      "reset_seed": 820202002,
+      "steps": 256,
+      "reward_sum": 27.849521754956896,
+      "J": 0.10878719435530038,
+      "prefix_reward_sum": 0.43514877742120095,
+      "suffix_reward_sum": 27.41437297753569,
+      "mean_commanded_velocity_norm": 0.0,
+      "prefix_displacement": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "prefix_path_length": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mean_served_connections": 6.0,
+      "velocity_decisions": 0,
+      "duration_decisions": 0,
+      "d4": 0
+    },
+    {
+      "pair_master": 8202,
+      "arm": "H",
+      "phase": "eval",
+      "episode": 3,
+      "reset_seed": 820202003,
+      "steps": 256,
+      "reward_sum": 30.915352500202058,
+      "J": 0.12076309570391429,
+      "prefix_reward_sum": 0.4830523828156564,
+      "suffix_reward_sum": 30.4323001173864,
+      "mean_commanded_velocity_norm": 0.0,
+      "prefix_displacement": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "prefix_path_length": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mean_served_connections": 7.0,
+      "velocity_decisions": 0,
+      "duration_decisions": 0,
+      "d4": 0
+    },
+    {
+      "pair_master": 8202,
+      "arm": "H",
+      "phase": "eval",
+      "episode": 4,
+      "reset_seed": 820202004,
+      "steps": 256,
+      "reward_sum": 45.679786906705466,
+      "J": 0.17843666760431823,
+      "prefix_reward_sum": 0.7137466704172734,
+      "suffix_reward_sum": 44.9660402362882,
+      "mean_commanded_velocity_norm": 0.0,
+      "prefix_displacement": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "prefix_path_length": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mean_served_connections": 10.0,
+      "velocity_decisions": 0,
+      "duration_decisions": 0,
+      "d4": 0
+    },
+    {
+      "pair_master": 8202,
+      "arm": "H",
+      "phase": "eval",
+      "episode": 5,
+      "reset_seed": 820202005,
+      "steps": 256,
+      "reward_sum": 61.06097797298208,
+      "J": 0.23851944520696125,
+      "prefix_reward_sum": 0.9540777808278464,
+      "suffix_reward_sum": 60.106900192154235,
+      "mean_commanded_velocity_norm": 0.0,
+      "prefix_displacement": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "prefix_path_length": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mean_served_connections": 15.0,
+      "velocity_decisions": 0,
+      "duration_decisions": 0,
+      "d4": 0
+    },
+    {
+      "pair_master": 8202,
+      "arm": "H",
+      "phase": "eval",
+      "episode": 6,
+      "reset_seed": 820202006,
+      "steps": 256,
+      "reward_sum": 36.26797802785581,
+      "J": 0.14167178917131176,
+      "prefix_reward_sum": 0.5666871566852447,
+      "suffix_reward_sum": 35.70129087117056,
+      "mean_commanded_velocity_norm": 0.0,
+      "prefix_displacement": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "prefix_path_length": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mean_served_connections": 9.0,
+      "velocity_decisions": 0,
+      "duration_decisions": 0,
+      "d4": 0
+    },
+    {
+      "pair_master": 8202,
+      "arm": "H",
+      "phase": "eval",
+      "episode": 7,
+      "reset_seed": 820202007,
+      "steps": 256,
+      "reward_sum": 43.64773185397697,
+      "J": 0.17049895255459754,
+      "prefix_reward_sum": 0.6819958102183915,
+      "suffix_reward_sum": 42.96573604375859,
+      "mean_commanded_velocity_norm": 0.0,
+      "prefix_displacement": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "prefix_path_length": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mean_served_connections": 8.0,
+      "velocity_decisions": 0,
+      "duration_decisions": 0,
+      "d4": 0
+    },
+    {
+      "pair_master": 8202,
+      "arm": "H",
+      "phase": "eval",
+      "episode": 8,
+      "reset_seed": 820202008,
+      "steps": 256,
+      "reward_sum": 63.306702165832014,
+      "J": 0.2472918053352813,
+      "prefix_reward_sum": 0.9891672213411273,
+      "suffix_reward_sum": 62.317534944490895,
+      "mean_commanded_velocity_norm": 0.0,
+      "prefix_displacement": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "prefix_path_length": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mean_served_connections": 15.0,
+      "velocity_decisions": 0,
+      "duration_decisions": 0,
+      "d4": 0
+    },
+    {
+      "pair_master": 8202,
+      "arm": "H",
+      "phase": "eval",
+      "episode": 9,
+      "reset_seed": 820202009,
+      "steps": 256,
+      "reward_sum": 62.94132569808198,
+      "J": 0.24586455350813274,
+      "prefix_reward_sum": 0.9834582140325255,
+      "suffix_reward_sum": 61.957867484049444,
+      "mean_commanded_velocity_norm": 0.0,
+      "prefix_displacement": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "prefix_path_length": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mean_served_connections": 16.0,
+      "velocity_decisions": 0,
+      "duration_decisions": 0,
+      "d4": 0
+    },
+    {
+      "pair_master": 8202,
+      "arm": "H",
+      "phase": "eval",
+      "episode": 10,
+      "reset_seed": 820202010,
+      "steps": 256,
+      "reward_sum": 30.489580133083106,
+      "J": 0.11909992239485588,
+      "prefix_reward_sum": 0.47639968957942286,
+      "suffix_reward_sum": 30.013180443503682,
+      "mean_commanded_velocity_norm": 0.0,
+      "prefix_displacement": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "prefix_path_length": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mean_served_connections": 7.0,
+      "velocity_decisions": 0,
+      "duration_decisions": 0,
+      "d4": 0
+    },
+    {
+      "pair_master": 8202,
+      "arm": "H",
+      "phase": "eval",
+      "episode": 11,
+      "reset_seed": 820202011,
+      "steps": 256,
+      "reward_sum": 35.70993614763576,
+      "J": 0.13949193807670218,
+      "prefix_reward_sum": 0.55796775230681,
+      "suffix_reward_sum": 35.15196839532895,
+      "mean_commanded_velocity_norm": 0.0,
+      "prefix_displacement": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "prefix_path_length": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mean_served_connections": 8.0,
+      "velocity_decisions": 0,
+      "duration_decisions": 0,
+      "d4": 0
+    },
+    {
+      "pair_master": 8202,
+      "arm": "H",
+      "phase": "eval",
+      "episode": 12,
+      "reset_seed": 820202012,
+      "steps": 256,
+      "reward_sum": 24.77352782461268,
+      "J": 0.09677159306489329,
+      "prefix_reward_sum": 0.387086372259571,
+      "suffix_reward_sum": 24.386441452353107,
+      "mean_commanded_velocity_norm": 0.0,
+      "prefix_displacement": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "prefix_path_length": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mean_served_connections": 5.0,
+      "velocity_decisions": 0,
+      "duration_decisions": 0,
+      "d4": 0
+    },
+    {
+      "pair_master": 8202,
+      "arm": "H",
+      "phase": "eval",
+      "episode": 13,
+      "reset_seed": 820202013,
+      "steps": 256,
+      "reward_sum": 27.23902366024783,
+      "J": 0.10640243617284309,
+      "prefix_reward_sum": 0.425609744691374,
+      "suffix_reward_sum": 26.81341391555646,
+      "mean_commanded_velocity_norm": 0.0,
+      "prefix_displacement": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "prefix_path_length": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mean_served_connections": 6.0,
+      "velocity_decisions": 0,
+      "duration_decisions": 0,
+      "d4": 0
+    },
+    {
+      "pair_master": 8202,
+      "arm": "H",
+      "phase": "eval",
+      "episode": 14,
+      "reset_seed": 820202014,
+      "steps": 256,
+      "reward_sum": 34.77859174988874,
+      "J": 0.1358538740230029,
+      "prefix_reward_sum": 0.5434154960920125,
+      "suffix_reward_sum": 34.235176253796716,
+      "mean_commanded_velocity_norm": 0.0,
+      "prefix_displacement": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "prefix_path_length": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mean_served_connections": 8.0,
+      "velocity_decisions": 0,
+      "duration_decisions": 0,
+      "d4": 0
+    },
+    {
+      "pair_master": 8202,
+      "arm": "H",
+      "phase": "eval",
+      "episode": 15,
+      "reset_seed": 820202015,
+      "steps": 256,
+      "reward_sum": 73.11917110533247,
+      "J": 0.28562176213020496,
+      "prefix_reward_sum": 1.1424870485208178,
+      "suffix_reward_sum": 71.97668405681165,
+      "mean_commanded_velocity_norm": 0.0,
+      "prefix_displacement": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "prefix_path_length": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mean_served_connections": 19.0,
+      "velocity_decisions": 0,
+      "duration_decisions": 0,
+      "d4": 0
+    },
+    {
+      "pair_master": 8202,
+      "arm": "H",
+      "phase": "eval",
+      "episode": 16,
+      "reset_seed": 820202016,
+      "steps": 256,
+      "reward_sum": 16.41866885971004,
+      "J": 0.06413542523324234,
+      "prefix_reward_sum": 0.25654170093296846,
+      "suffix_reward_sum": 16.162127158777068,
+      "mean_commanded_velocity_norm": 0.0,
+      "prefix_displacement": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "prefix_path_length": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mean_served_connections": 4.0,
+      "velocity_decisions": 0,
+      "duration_decisions": 0,
+      "d4": 0
+    },
+    {
+      "pair_master": 8202,
+      "arm": "H",
+      "phase": "eval",
+      "episode": 17,
+      "reset_seed": 820202017,
+      "steps": 256,
+      "reward_sum": 11.270843095712724,
+      "J": 0.04402673084262783,
+      "prefix_reward_sum": 0.1761069233705108,
+      "suffix_reward_sum": 11.094736172342213,
+      "mean_commanded_velocity_norm": 0.0,
+      "prefix_displacement": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "prefix_path_length": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mean_served_connections": 3.0,
+      "velocity_decisions": 0,
+      "duration_decisions": 0,
+      "d4": 0
+    },
+    {
+      "pair_master": 8202,
+      "arm": "H",
+      "phase": "eval",
+      "episode": 18,
+      "reset_seed": 820202018,
+      "steps": 256,
+      "reward_sum": 49.959394424909995,
+      "J": 0.19515388447230467,
+      "prefix_reward_sum": 0.7806155378892188,
+      "suffix_reward_sum": 49.178778887020776,
+      "mean_commanded_velocity_norm": 0.0,
+      "prefix_displacement": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "prefix_path_length": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mean_served_connections": 12.0,
+      "velocity_decisions": 0,
+      "duration_decisions": 0,
+      "d4": 0
+    },
+    {
+      "pair_master": 8202,
+      "arm": "H",
+      "phase": "eval",
+      "episode": 19,
+      "reset_seed": 820202019,
+      "steps": 256,
+      "reward_sum": 30.192201125335302,
+      "J": 0.11793828564584102,
+      "prefix_reward_sum": 0.47175314258336287,
+      "suffix_reward_sum": 29.720447982751935,
+      "mean_commanded_velocity_norm": 0.0,
+      "prefix_displacement": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "prefix_path_length": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mean_served_connections": 7.0,
+      "velocity_decisions": 0,
+      "duration_decisions": 0,
+      "d4": 0
+    },
+    {
+      "pair_master": 8202,
+      "arm": "H",
+      "phase": "eval",
+      "episode": 20,
+      "reset_seed": 820202020,
+      "steps": 256,
+      "reward_sum": 23.95377959903635,
+      "J": 0.09356945155873574,
+      "prefix_reward_sum": 0.3742778062349427,
+      "suffix_reward_sum": 23.579501792801405,
+      "mean_commanded_velocity_norm": 0.0,
+      "prefix_displacement": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "prefix_path_length": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mean_served_connections": 5.0,
+      "velocity_decisions": 0,
+      "duration_decisions": 0,
+      "d4": 0
+    },
+    {
+      "pair_master": 8202,
+      "arm": "H",
+      "phase": "eval",
+      "episode": 21,
+      "reset_seed": 820202021,
+      "steps": 256,
+      "reward_sum": 40.80713014289611,
+      "J": 0.15940285212068794,
+      "prefix_reward_sum": 0.637611408482754,
+      "suffix_reward_sum": 40.16951873441337,
+      "mean_commanded_velocity_norm": 0.0,
+      "prefix_displacement": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "prefix_path_length": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mean_served_connections": 10.0,
+      "velocity_decisions": 0,
+      "duration_decisions": 0,
+      "d4": 0
+    },
+    {
+      "pair_master": 8202,
+      "arm": "H",
+      "phase": "eval",
+      "episode": 22,
+      "reset_seed": 820202022,
+      "steps": 256,
+      "reward_sum": 77.7541183873942,
+      "J": 0.3037270249507586,
+      "prefix_reward_sum": 1.214908099803028,
+      "suffix_reward_sum": 76.53921028759116,
+      "mean_commanded_velocity_norm": 0.0,
+      "prefix_displacement": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "prefix_path_length": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mean_served_connections": 20.0,
+      "velocity_decisions": 0,
+      "duration_decisions": 0,
+      "d4": 0
+    },
+    {
+      "pair_master": 8202,
+      "arm": "H",
+      "phase": "eval",
+      "episode": 23,
+      "reset_seed": 820202023,
+      "steps": 256,
+      "reward_sum": 12.073880707290614,
+      "J": 0.04716359651285396,
+      "prefix_reward_sum": 0.1886543860514153,
+      "suffix_reward_sum": 11.885226321239196,
+      "mean_commanded_velocity_norm": 0.0,
+      "prefix_displacement": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "prefix_path_length": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mean_served_connections": 2.0,
+      "velocity_decisions": 0,
+      "duration_decisions": 0,
+      "d4": 0
+    },
+    {
+      "pair_master": 8202,
+      "arm": "H",
+      "phase": "eval",
+      "episode": 24,
+      "reset_seed": 820202024,
+      "steps": 256,
+      "reward_sum": 26.646676986952375,
+      "J": 0.10408858198028272,
+      "prefix_reward_sum": 0.4163543279211328,
+      "suffix_reward_sum": 26.23032265903125,
+      "mean_commanded_velocity_norm": 0.0,
+      "prefix_displacement": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "prefix_path_length": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mean_served_connections": 6.0,
+      "velocity_decisions": 0,
+      "duration_decisions": 0,
+      "d4": 0
+    },
+    {
+      "pair_master": 8202,
+      "arm": "H",
+      "phase": "eval",
+      "episode": 25,
+      "reset_seed": 820202025,
+      "steps": 256,
+      "reward_sum": 19.17383224867346,
+      "J": 0.0748977822213807,
+      "prefix_reward_sum": 0.29959112888552175,
+      "suffix_reward_sum": 18.874241119787936,
+      "mean_commanded_velocity_norm": 0.0,
+      "prefix_displacement": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "prefix_path_length": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mean_served_connections": 3.0,
+      "velocity_decisions": 0,
+      "duration_decisions": 0,
+      "d4": 0
+    },
+    {
+      "pair_master": 8202,
+      "arm": "H",
+      "phase": "eval",
+      "episode": 26,
+      "reset_seed": 820202026,
+      "steps": 256,
+      "reward_sum": 16.477677390251216,
+      "J": 0.06436592730566881,
+      "prefix_reward_sum": 0.25746370922267453,
+      "suffix_reward_sum": 16.22021368102854,
+      "mean_commanded_velocity_norm": 0.0,
+      "prefix_displacement": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "prefix_path_length": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mean_served_connections": 2.0,
+      "velocity_decisions": 0,
+      "duration_decisions": 0,
+      "d4": 0
+    },
+    {
+      "pair_master": 8202,
+      "arm": "H",
+      "phase": "eval",
+      "episode": 27,
+      "reset_seed": 820202027,
+      "steps": 256,
+      "reward_sum": 9.361095126056899,
+      "J": 0.03656677783615976,
+      "prefix_reward_sum": 0.14626711134463913,
+      "suffix_reward_sum": 9.214828014712257,
+      "mean_commanded_velocity_norm": 0.0,
+      "prefix_displacement": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "prefix_path_length": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mean_served_connections": 2.0,
+      "velocity_decisions": 0,
+      "duration_decisions": 0,
+      "d4": 0
+    },
+    {
+      "pair_master": 8202,
+      "arm": "H",
+      "phase": "eval",
+      "episode": 28,
+      "reset_seed": 820202028,
+      "steps": 256,
+      "reward_sum": 19.489185247771555,
+      "J": 0.07612962987410764,
+      "prefix_reward_sum": 0.30451851949643,
+      "suffix_reward_sum": 19.18466672827513,
+      "mean_commanded_velocity_norm": 0.0,
+      "prefix_displacement": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "prefix_path_length": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mean_served_connections": 4.0,
+      "velocity_decisions": 0,
+      "duration_decisions": 0,
+      "d4": 0
+    },
+    {
+      "pair_master": 8202,
+      "arm": "H",
+      "phase": "eval",
+      "episode": 29,
+      "reset_seed": 820202029,
+      "steps": 256,
+      "reward_sum": 32.00642932159282,
+      "J": 0.12502511453747195,
+      "prefix_reward_sum": 0.5001004581498889,
+      "suffix_reward_sum": 31.50632886344293,
+      "mean_commanded_velocity_norm": 0.0,
+      "prefix_displacement": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "prefix_path_length": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mean_served_connections": 6.0,
+      "velocity_decisions": 0,
+      "duration_decisions": 0,
+      "d4": 0
+    },
+    {
+      "pair_master": 8202,
+      "arm": "H",
+      "phase": "eval",
+      "episode": 30,
+      "reset_seed": 820202030,
+      "steps": 256,
+      "reward_sum": 30.658655208540218,
+      "J": 0.11976037190836022,
+      "prefix_reward_sum": 0.4790414876334421,
+      "suffix_reward_sum": 30.17961372090678,
+      "mean_commanded_velocity_norm": 0.0,
+      "prefix_displacement": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "prefix_path_length": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mean_served_connections": 7.0,
+      "velocity_decisions": 0,
+      "duration_decisions": 0,
+      "d4": 0
+    },
+    {
+      "pair_master": 8202,
+      "arm": "H",
+      "phase": "eval",
+      "episode": 31,
+      "reset_seed": 820202031,
+      "steps": 256,
+      "reward_sum": 43.3308183432825,
+      "J": 0.16926100915344727,
+      "prefix_reward_sum": 0.6770440366137911,
+      "suffix_reward_sum": 42.65377430666872,
+      "mean_commanded_velocity_norm": 0.0,
+      "prefix_displacement": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "prefix_path_length": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mean_served_connections": 9.0,
+      "velocity_decisions": 0,
+      "duration_decisions": 0,
+      "d4": 0
+    }
+  ],
+  "node": "wsl_4070",
+  "ssh_target": "hmasd-wsl-node",
+  "supervisor_handle": "scdmp-hold-residual-b02-8202-pair-20260910",
+  "supervisor_terminal": {
+    "status": "finished",
+    "exit_code": 0,
+    "pid": 3103232,
+    "started_at_utc": "2026-09-10T21:01:45Z",
+    "exited_at_utc": "2026-09-10T21:06:40Z",
+    "duration_seconds": 295,
+    "tmux_active": false,
+    "status_uptime_seconds_at_collection": 415,
+    "status_uptime_is_not_terminal_duration": true
+  },
+  "resource_admission": {
+    "assessed_at": "2026-09-10T21:01:45.217948Z",
+    "available_physical_bytes": 15634415616,
+    "captured_at": "2026-09-10T21:01:45.217672Z",
+    "cgroup_headroom_bytes": null,
+    "cgroup_memory_current_bytes": null,
+    "cgroup_memory_max_bytes": null,
+    "effective_available_bytes": 15634415616,
+    "effective_floor_pass": true,
+    "failure_reasons": [],
+    "measurement_source": "/proc/meminfo",
+    "minimum_available_bytes": 4294967296,
+    "passed": true,
+    "physical_floor_pass": true,
+    "schema_version": 1
+  },
+  "process_resources": {
+    "wall_seconds": 295.03,
+    "user_cpu_seconds": 292.58,
+    "system_cpu_seconds": 1.5,
+    "aggregate_cpu_seconds": 294.08,
+    "peak_rss_kib": 553832,
+    "supervisor_duration_seconds": 295,
+    "within_process_seconds": 294.5617349590175,
+    "external_minus_internal_seconds": 0.46826504098248733,
+    "source_resources_label": "resources_unmeasured",
+    "whole_pair_below_each_arm_cap": true,
+    "whole_pair_below_pair_cap": true
+  },
+  "cost_scope": "GNU time complete scientific Python process, including imports/init/learning/final eval/H/publication/readback/exit; one serial pair. Second arm carries H/pair output. Whole295.03s is below either1800s arm cap even charging all overhead to that arm, and below3600s pair cap. Source resources_unmeasured label is unchanged; external whole-process wall/CPU/RSS are separately measured. Full engineering/control-plane cost remains unmeasured.",
+  "collection_checks": {
+    "all_12_remote_local_hashes_match": true,
+    "exact_source_head_and_clean_tracked_tree": true,
+    "all_1120_episode_identities": true,
+    "all_512_rollout_identities": true,
+    "all_2048_recorded_adam_calls": true,
+    "all_96_final_rows": true,
+    "reward_sum_over_256_max_abs_error": 0.0,
+    "recomputed_primary_stats_max_abs_error": 0.0,
+    "checkpoint_readback": {
+      "RESIDUAL-MC": {
+        "identity_matches": true,
+        "parameters": 66441,
+        "all_finite": true,
+        "dtype": "torch.float32",
+        "load_map_location": "cpu"
+      },
+      "MLP-MC": {
+        "identity_matches": true,
+        "parameters": 66441,
+        "all_finite": true,
+        "dtype": "torch.float32",
+        "load_map_location": "cpu"
+      }
+    },
+    "actual_new_env_steps": 0,
+    "actual_new_adam_calls": 0,
+    "actual_new_policy_evaluations": 0
+  },
+  "raw_remote_hashes": {
+    "admission.json": {
+      "sha256": "52b5aa8015f8c2b1b50fe44205b5069e891fd2dfffa14a57ef362e52cf75febb",
+      "bytes": 504,
+      "remote_path": "/home/wu/hmasd-worktrees/scdmp-hold-residual-b02-f079c7530/temp/directions/semigroup_consistent_duration_model_policy/exp/native_hold_residual_b02_master8202_20260910/admission.json"
+    },
+    "episodes.jsonl": {
+      "sha256": "bcf6ef07d38040b177e089dc586882c9a5625d6644231a33454207cce3e0337e",
+      "bytes": 722630,
+      "remote_path": "/home/wu/hmasd-worktrees/scdmp-hold-residual-b02-f079c7530/temp/directions/semigroup_consistent_duration_model_policy/exp/native_hold_residual_b02_master8202_20260910/episodes.jsonl"
+    },
+    "final_MLP-MC.pt": {
+      "sha256": "09e1cbc015f706848a7e5b8d9ce282578ec57400685e24e5957f72adf7ad75ca",
+      "bytes": 272355,
+      "remote_path": "/home/wu/hmasd-worktrees/scdmp-hold-residual-b02-f079c7530/temp/directions/semigroup_consistent_duration_model_policy/exp/native_hold_residual_b02_master8202_20260910/final_MLP-MC.pt"
+    },
+    "final_RESIDUAL-MC.pt": {
+      "sha256": "21039e33dbdaef44607453fd4ae64597ae258419c0832c1701f1ecb22fbc61b5",
+      "bytes": 272470,
+      "remote_path": "/home/wu/hmasd-worktrees/scdmp-hold-residual-b02-f079c7530/temp/directions/semigroup_consistent_duration_model_policy/exp/native_hold_residual_b02_master8202_20260910/final_RESIDUAL-MC.pt"
+    },
+    "rollouts.jsonl": {
+      "sha256": "fac1de759ce6f0775481b3ac8369dfe32cb846f3a562af5c2897f4d17fbfdafa",
+      "bytes": 594450,
+      "remote_path": "/home/wu/hmasd-worktrees/scdmp-hold-residual-b02-f079c7530/temp/directions/semigroup_consistent_duration_model_policy/exp/native_hold_residual_b02_master8202_20260910/rollouts.jsonl"
+    },
+    "summary.json": {
+      "sha256": "d6780c1e8b95912105f7f0d8809078482eb3282c3ee81ae50f8b5c7194b8c2e2",
+      "bytes": 26548,
+      "remote_path": "/home/wu/hmasd-worktrees/scdmp-hold-residual-b02-f079c7530/temp/directions/semigroup_consistent_duration_model_policy/exp/native_hold_residual_b02_master8202_20260910/summary.json"
+    },
+    "supervisor/exit_code": {
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "bytes": 2,
+      "remote_path": "/home/wu/.agent-tasks/scdmp-hold-residual-b02-8202-pair-20260910/exit_code"
+    },
+    "supervisor/pid": {
+      "sha256": "30af51a593f25d2542442e1a9da0ecac7d4ab030ca556e5e69a7acac0645c1b8",
+      "bytes": 8,
+      "remote_path": "/home/wu/.agent-tasks/scdmp-hold-residual-b02-8202-pair-20260910/pid"
+    },
+    "supervisor/runner.sh": {
+      "sha256": "8ba76b8adb89bdf13321e27189311886463af878bbef347cc0076c5eca6bf0bb",
+      "bytes": 1153,
+      "remote_path": "/home/wu/.agent-tasks/scdmp-hold-residual-b02-8202-pair-20260910/runner.sh"
+    },
+    "supervisor/start_time": {
+      "sha256": "6e9eed6d1434c214da99560abc058b42f90af7cc7e35084627dec0bfccf8a0c7",
+      "bytes": 11,
+      "remote_path": "/home/wu/.agent-tasks/scdmp-hold-residual-b02-8202-pair-20260910/start_time"
+    },
+    "supervisor/status": {
+      "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983",
+      "bytes": 9,
+      "remote_path": "/home/wu/.agent-tasks/scdmp-hold-residual-b02-8202-pair-20260910/status"
+    },
+    "supervisor/task.log": {
+      "sha256": "d5c94501954670ea0e63804b20dee9e075c17ba924292a7d5341da6669972303",
+      "bytes": 1817,
+      "remote_path": "/home/wu/.agent-tasks/scdmp-hold-residual-b02-8202-pair-20260910/task.log"
+    }
+  },
+  "raw_evidence_root": "C:\\Projects\\HMASD-worktrees\\codex-scdmp\\temp\\directions\\semigroup_consistent_duration_model_policy\\exp\\native_hold_residual_b02_master8202_20260910",
+  "preservation": {
+    "archive_path": "C:\\Projects\\HMASD\\temp\\directions\\semigroup_consistent_duration_model_policy\\exp\\archive\\native_hold_residual_b02_master8202_20260910_f079c7530.zip",
+    "archive_sha256": "6667d79908e13032d651026ff4e016c9ce7ecd978b41f43fa836787dfe3e8954",
+    "archive_bytes": 809516,
+    "verified_members": 17,
+    "verification": "Every archived member byte-equal to collected evidence; collected raw/supervisor files already match 12 remote SHA256 values.",
+    "files": [
+      {
+        "path": "admission.json",
+        "bytes": 504,
+        "sha256": "52b5aa8015f8c2b1b50fe44205b5069e891fd2dfffa14a57ef362e52cf75febb"
+      },
+      {
+        "path": "collection_analysis.json",
+        "bytes": 18199,
+        "sha256": "6cddcc774470c7628f7b5887c9a9c2ab903fe529d346e609e89a285d0ae6e516"
+      },
+      {
+        "path": "episodes.jsonl",
+        "bytes": 722630,
+        "sha256": "bcf6ef07d38040b177e089dc586882c9a5625d6644231a33454207cce3e0337e"
+      },
+      {
+        "path": "final_MLP-MC.pt",
+        "bytes": 272355,
+        "sha256": "09e1cbc015f706848a7e5b8d9ce282578ec57400685e24e5957f72adf7ad75ca"
+      },
+      {
+        "path": "final_RESIDUAL-MC.pt",
+        "bytes": 272470,
+        "sha256": "21039e33dbdaef44607453fd4ae64597ae258419c0832c1701f1ecb22fbc61b5"
+      },
+      {
+        "path": "launch.sh",
+        "bytes": 525,
+        "sha256": "79ae02442961c4dc410dbfa93268c2724a8f4eaf2c971b6d5f7060d0f3630659"
+      },
+      {
+        "path": "paired_run_endpoints.csv",
+        "bytes": 262,
+        "sha256": "0fb35a22c3f28a612c244dc4de18721130a23c1c77a70c873b8b754bda7c7b08"
+      },
+      {
+        "path": "paired_run_summary.json",
+        "bytes": 1397,
+        "sha256": "c48a20557633b76684fc0a8dd92495441ac4a1df350c79f9c78112860ba6a79c"
+      },
+      {
+        "path": "remote_source_and_hashes.txt",
+        "bytes": 2371,
+        "sha256": "a13f31d6a1a246e7873aa4ef82834ca111979c863232e3d4708ad260d18efbdf"
+      },
+      {
+        "path": "rollouts.jsonl",
+        "bytes": 594450,
+        "sha256": "fac1de759ce6f0775481b3ac8369dfe32cb846f3a562af5c2897f4d17fbfdafa"
+      },
+      {
+        "path": "summary.json",
+        "bytes": 26548,
+        "sha256": "d6780c1e8b95912105f7f0d8809078482eb3282c3ee81ae50f8b5c7194b8c2e2"
+      },
+      {
+        "path": "supervisor/exit_code",
+        "bytes": 2,
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      {
+        "path": "supervisor/pid",
+        "bytes": 8,
+        "sha256": "30af51a593f25d2542442e1a9da0ecac7d4ab030ca556e5e69a7acac0645c1b8"
+      },
+      {
+        "path": "supervisor/runner.sh",
+        "bytes": 1153,
+        "sha256": "8ba76b8adb89bdf13321e27189311886463af878bbef347cc0076c5eca6bf0bb"
+      },
+      {
+        "path": "supervisor/start_time",
+        "bytes": 11,
+        "sha256": "6e9eed6d1434c214da99560abc058b42f90af7cc7e35084627dec0bfccf8a0c7"
+      },
+      {
+        "path": "supervisor/status",
+        "bytes": 9,
+        "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+      },
+      {
+        "path": "supervisor/task.log",
+        "bytes": 1817,
+        "sha256": "d5c94501954670ea0e63804b20dee9e075c17ba924292a7d5341da6669972303"
+      }
+    ],
+    "remote_source_sha": "f079c753052f95f01754e50676a59d7541fd683c",
+    "raw_source_root": "C:\\Projects\\HMASD-worktrees\\codex-scdmp\\temp\\directions\\semigroup_consistent_duration_model_policy\\exp\\native_hold_residual_b02_master8202_20260910",
+    "scientific_exposure_during_archive": 0
+  },
+  "remote_closeout": {
+    "remote_execution_path": "/home/wu/hmasd-worktrees/scdmp-hold-residual-b02-f079c7530",
+    "path_exists": false,
+    "registered": false,
+    "staged_launcher_path": "/home/wu/hmasd-inputs/scdmp-hold-residual-b02-8202-20260910.sh",
+    "staged_launcher_exists": false,
+    "supervisor_receipts_retained": true,
+    "observed_at_utc": "2026-09-10T21:19:36Z",
+    "archive_verified_before_removal": true
+  },
+  "prediction_score": {
+    "predicted": "WITHIN",
+    "observed": "WITHIN",
+    "correct": true,
+    "assigned_probability": 0.6,
+    "multiclass_brier_sum": 0.26,
+    "owner": "not taken (unattended)",
+    "formula": "sum over three classes of (forecast probability - observed one-hot)^2; one observation is not calibration"
+  },
+  "paired_run_endpoints": "task,seed,arm,score\nopening_hold_residual_mc,8201,RESIDUAL-MC,0.1549340414324733\nopening_hold_residual_mc,8201,MLP-MC,0.14819663397657912\nopening_hold_residual_mc,8202,RESIDUAL-MC,0.14436567679417747\nopening_hold_residual_mc,8202,MLP-MC,0.14070762082151161\n",
+  "paired_run_summary": {
+    "unit": "caller-declared independent training run",
+    "inference": "descriptive only; no confidence interval or success classification",
+    "groups": [
+      {
+        "task": "opening_hold_residual_mc",
+        "arm": "MLP-MC",
+        "n": 2,
+        "mean": 0.14445212739904537,
+        "sample_sd": 0.005295531986343493,
+        "min": 0.14070762082151161,
+        "max": 0.14819663397657912,
+        "runs": {
+          "8201": 0.14819663397657912,
+          "8202": 0.14070762082151161
+        }
+      },
+      {
+        "task": "opening_hold_residual_mc",
+        "arm": "RESIDUAL-MC",
+        "n": 2,
+        "mean": 0.1496498591133254,
+        "sample_sd": 0.007472962301791095,
+        "min": 0.14436567679417747,
+        "max": 0.1549340414324733,
+        "runs": {
+          "8201": 0.1549340414324733,
+          "8202": 0.14436567679417747
+        }
+      }
+    ],
+    "paired_differences": [
+      {
+        "task": "opening_hold_residual_mc",
+        "arm": "RESIDUAL-MC",
+        "baseline": "MLP-MC",
+        "summary": {
+          "n": 2,
+          "mean": 0.005197731714280021,
+          "sample_sd": 0.0021774303154476027,
+          "min": 0.003658055972665858,
+          "max": 0.006737407455894184
+        },
+        "differences": {
+          "8201": 0.006737407455894184,
+          "8202": 0.003658055972665858
+        },
+        "unmatched_arm_seeds": [],
+        "unmatched_baseline_seeds": []
+      }
+    ]
+  },
+  "two_pair_accounting": {
+    "independent_training_pairs": 2,
+    "native_team_steps": 573440,
+    "adam_calls": 4096,
+    "final_episodes": 192,
+    "complete_scientific_process_wall_seconds": 618.05,
+    "aggregate_scientific_process_cpu_seconds": 615.8499999999999,
+    "wall_seconds_per_valid_pair": 309.025,
+    "scope": "Two pair invocations across separate days; summed invocation wall, not measured common elapsed study critical path. Control-plane preparation, checks, review, analysis, collection and archival are excluded."
+  },
+  "machine_exposure_line": "B02 observed exposure: n=1 independent training pair; 2 learners x66441 parameters; 512 training episodes and1024 Adam per arm; native training steps=262144, final evaluation steps=24576, total steps=286720; 32 final sampled policy episodes per arm plus32 H; treatment eligible_pairs=1494, residual_terms=5976; total parameter displacement/initial L2=0.4040849090800015/0.5128799408218019; critic ratios=0.5639214998023688/0.7650236554643457; duration relative displacement undefined (zero initialization), absolute=0.20008046925067902/0.24749335646629333. Collection/analysis/archival adds zero models, environment transitions, Adam, policy evaluation, replay or profiling.",
+  "launch_script": "#!/usr/bin/env bash\nset -e\ncd /home/wu/hmasd-worktrees/scdmp-hold-residual-b02-f079c7530\n/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/semigroup_consistent_duration_model_policy/exp/native_hold_residual_b02_master8202_20260910/admission.json && /usr/bin/time -v /home/wu/.venvs/hmasd/bin/python scripts/run_scdmp_native_hold_residual_b02.py --seed 8202 --out temp/directions/semigroup_consistent_duration_model_policy/exp/native_hold_residual_b02_master8202_20260910\n",
+  "supervisor_log": "=== Task 'scdmp-hold-residual-b02-8202-pair-20260910' started at 2026-09-11T05:01:45+08:00 ===\n{\n  \"assessed_at\": \"2026-09-10T21:01:45.217948Z\",\n  \"available_physical_bytes\": 15634415616,\n  \"captured_at\": \"2026-09-10T21:01:45.217672Z\",\n  \"cgroup_headroom_bytes\": null,\n  \"cgroup_memory_current_bytes\": null,\n  \"cgroup_memory_max_bytes\": null,\n  \"effective_available_bytes\": 15634415616,\n  \"effective_floor_pass\": true,\n  \"failure_reasons\": [],\n  \"measurement_source\": \"/proc/meminfo\",\n  \"minimum_available_bytes\": 4294967296,\n  \"passed\": true,\n  \"physical_floor_pass\": true,\n  \"schema_version\": 1\n}\nUAV_B_EXPLORE: COMPLETE; summary: temp/directions/semigroup_consistent_duration_model_policy/exp/native_hold_residual_b02_master8202_20260910/summary.json\n\tCommand being timed: \"/home/wu/.venvs/hmasd/bin/python scripts/run_scdmp_native_hold_residual_b02.py --seed 8202 --out temp/directions/semigroup_consistent_duration_model_policy/exp/native_hold_residual_b02_master8202_20260910\"\n\tUser time (seconds): 292.58\n\tSystem time (seconds): 1.50\n\tPercent of CPU this job got: 99%\n\tElapsed (wall clock) time (h:mm:ss or m:ss): 4:55.03\n\tAverage shared text size (kbytes): 0\n\tAverage unshared data size (kbytes): 0\n\tAverage stack size (kbytes): 0\n\tAverage total size (kbytes): 0\n\tMaximum resident set size (kbytes): 553832\n\tAverage resident set size (kbytes): 0\n\tMajor (requiring I/O) page faults: 3579\n\tMinor (reclaiming a frame) page faults: 960459\n\tVoluntary context switches: 5653\n\tInvoluntary context switches: 895\n\tSwaps: 0\n\tFile system inputs: 755208\n\tFile system outputs: 4624\n\tSocket messages sent: 0\n\tSocket messages received: 0\n\tSignals delivered: 0\n\tPage size (bytes): 4096\n\tExit status: 0\n=== Task 'scdmp-hold-residual-b02-8202-pair-20260910' exited with code 0 at 2026-09-11T05:06:40+08:00 (Duration: 295s) ===\n",
+  "deviations": [
+    "No scientific deviation, failed scientific attempt, cap breach, missing primary/H or automatic successor.",
+    "Two initial Git preparation operations used a non-login shell and were corrected through configured zsh -lic before scientific admission/runner. Card section9 preserves source and zero-exposure facts.",
+    "First combined test/cleanup command was rejected before process creation; separate focused checks passed. B02 Windows test scratch remains after automatic policy rejection; no deletion bypass or repeat cleanup attempt.",
+    "A later E0 documentation-writing shell command was rejected before process creation with blocked by policy. Structured file editing completed the record; no scientific execution or evidence change followed from that rejected command.",
+    "The first documentation-builder process wrote valid UTF-8 JSON and the closeout copy, then stdout printing of the Greek rule text failed under cp1252. The same documentation builder was rerun in UTF-8 mode; no learner, evaluator or scientific publication was rerun."
+  ],
+  "remaining_cleanup": {
+    "test_scratch_path": "C:/Projects/HMASD-worktrees/codex-scdmp/temp/directions/semigroup_consistent_duration_model_policy/test/b02_identity_20260910_2055",
+    "rejection": "Automatic approval review rejected the combined test/recursive-cleanup command before process creation: blocked by policy. Exact operation is preserved in card section8.",
+    "owner": "DM",
+    "boundary": "No retry/bypass; report remaining path until a permitted cleanup operation becomes available. Historical B01 scratch untouched."
+  }
+}
