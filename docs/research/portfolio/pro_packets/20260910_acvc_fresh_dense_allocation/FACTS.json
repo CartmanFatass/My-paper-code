@@ -1,0 +1,145 @@
+{
+  "purpose": "Static Portfolio allocation materials, not an empirical result or local allocation",
+  "scientific_design_sha": "28e99edc7ae93c1101aa78d00e46f6c71e92e81d",
+  "starting_portfolio_checkout_sha": "e65bdce30b40f5b23202b557f0e292d4966e7de3",
+  "current_published_context_sha": "e0ef4a7c006a921ef6717884e11d985faaadca4d",
+  "remote_context_observed_at_utc": "2026-09-10T17:08:29Z",
+  "calculation_method": "Static arithmetic over the accepted ACVC prospective facts in the tool runtime; no project imports, model/RNG construction, simulator, test or numerical probe.",
+  "consultation_exposure": {
+    "scientific_invocations": 0,
+    "model_constructions": 0,
+    "model_loads": 0,
+    "new_fits": 0,
+    "training_team_steps": 0,
+    "optimizer_updates": 0,
+    "evaluation_episodes": 0,
+    "native_steps": 0,
+    "scientific_tests": 0,
+    "performance_probes": 0,
+    "provider_sends_by_author": 0,
+    "local_portfolio_allocations": 0
+  },
+  "exposure_line": "EXPOSURE consultation-only: scientific_invocations=0; new_fits=0; model_constructions/loads=0; training_team_steps=0; optimizer_updates=0; evaluation_episodes=0; native_steps=0; scientific_tests=0; performance_probes=0; provider_sends_by_author=0; local_portfolio_allocations=0.",
+  "proposed_option_a": {
+    "object": "ACVC_FRESH_DENSE_REUSE_B01",
+    "training_master": 8921,
+    "evaluation_namespace": 8922,
+    "independent_fits": 1,
+    "training_episodes": 512,
+    "training_team_steps": 131072,
+    "training_actor_agent_forwards": 655360,
+    "two_episode_rollouts": 256,
+    "adam_backward_calls": 1024,
+    "recurrent_update_batch_calls": 1024,
+    "replay_agent_steps": 2621440,
+    "critic_update_rows": 524288,
+    "trainable_parameters": 69079,
+    "evaluation_panels": 3,
+    "evaluation_episodes": 192,
+    "evaluation_team_steps": 49152,
+    "evaluation_actor_agent_forwards": 245760,
+    "total_team_steps": 180224,
+    "coordinate_pair_check_upper_bound": 6553600,
+    "environment_constructors": 4,
+    "unscored_constructor_resets": 4,
+    "per_arm": {
+      "C": {
+        "evaluation_episodes": 64,
+        "scored_team_steps": 16384,
+        "actor_agent_forwards": 81920,
+        "panel_proxy_s": 11.96904265502235,
+        "full_common_cost_attributed_s": 224.7141763179726
+      },
+      "F": {
+        "evaluation_episodes": 64,
+        "scored_team_steps": 16384,
+        "actor_agent_forwards": 81920,
+        "panel_proxy_s": 13.806098793982528,
+        "full_common_cost_attributed_s": 226.55123245693278
+      },
+      "dwell": {
+        "evaluation_episodes": 64,
+        "scored_team_steps": 16384,
+        "actor_agent_forwards": 81920,
+        "panel_proxy_s": 13.679409444972407,
+        "full_common_cost_attributed_s": 226.42454310792266
+      }
+    },
+    "shared_fit_and_nonpanel_proxy_s": 182.74513366295025,
+    "panel_proxy_sum_s": 39.454550893977284,
+    "nominal_process_projection_s": 222.19968455692754,
+    "nominal_complete_with_support_s": 252.19968455692754,
+    "proposed_scientific_supervisor_cap_s": 330,
+    "proposed_support_cap_s": 30,
+    "proposed_complete_cap_s": 360,
+    "allocated_scientific_invocations": 0,
+    "allocated_seconds": 0,
+    "per_arm_cost_interpretation": "Each arm column attributes the entire shared fit/nonpanel proxy and all 30s support once to that arm. These conservative accounting attributions must not be summed: the actual proposal has one common fit and one shared support allowance. No separate per-panel cap or three-fit allocation is introduced.",
+    "cost_limits": [
+      "Proxies are retained timing observations, not a new timing measurement or guaranteed runtime.",
+      "The historical DENSE tail contains old32-DENSE/32-H evaluation work that the new algorithm does not perform.",
+      "Standalone construction/imports, fresh trajectories, node contention, focused checks and collection costs are unmeasured.",
+      "No panel, timing pilot, tuning, retry, replacement or E01 allowance is added."
+    ]
+  },
+  "contention_snapshot": {
+    "source": "EXPERIMENT_TRACKING.md current execution update at e0ef4a7c, supplemented by RCLE_B03_FRESH1000_S21_EXECUTION_20260910.md at that same SHA",
+    "accepted_order": [
+      "vap_folr_core",
+      "ucope",
+      "vsp_03",
+      "roster_consistent_latent_exploration",
+      "acvc"
+    ],
+    "direction_states": [
+      {
+        "direction": "vap_folr_core",
+        "state": "One new triple allocated; RETAIN Monitor-adopted, EVENT/RANDOM preselected but unsubmitted in the fixed record.",
+        "new_scope_from_this_request": "none",
+        "verified_tuned_same_information_headroom": "absent"
+      },
+      {
+        "direction": "ucope",
+        "state": "8701 card integrated; T/F/G implementation continues without a submitted handle in the fixed record.",
+        "new_scope_from_this_request": "none",
+        "verified_tuned_same_information_headroom": "absent"
+      },
+      {
+        "direction": "vsp_03",
+        "state": "B07 handle Monitor-adopted then terminal exit0; original DM collecting/intaking, result not accepted at cutoff.",
+        "new_scope_from_this_request": "none",
+        "verified_tuned_same_information_headroom": "absent"
+      },
+      {
+        "direction": "roster_consistent_latent_exploration",
+        "state": "S21 fresh1000 accepted at16:57:56.651200Z; later direct Monitor adoption confirmed. No result acceptance or launch duplication inferred.",
+        "new_scope_from_this_request": "none",
+        "verified_tuned_same_information_headroom": "absent"
+      },
+      {
+        "direction": "acvc",
+        "state": "Fresh design accepted; current scientific allocation zero; completed design is not a permanently counted chain.",
+        "recasts": 2,
+        "contention_priority": "lowest among ACTIVE",
+        "verified_tuned_same_information_headroom": "absent"
+      },
+      {
+        "direction": "capability_bound_semantic_currentness",
+        "state": "Reserve readiness reconciliation only; no newly permitted retained52-tape execution or fresh B allocation in scoped records.",
+        "new_scope_from_this_request": "Only a specifically named permitted readiness action if Pro selects C; no bypass or unidentified numerical allocation.",
+        "verified_tuned_same_information_headroom": "absent"
+      },
+      {
+        "direction": "finite_resource_relational_inductive_efficiency",
+        "state": "Reserve with unresolved exact P63 observation-method/permission and accepted-state dependency.",
+        "new_scope_from_this_request": "Only a specifically named permitted readiness action if Pro selects C; no bypass or unidentified numerical allocation.",
+        "verified_tuned_same_information_headroom": "absent"
+      }
+    ],
+    "current_hardware_load_or_admission": "unmeasured; this is a published operational snapshot, not live process polling or fresh resource admission"
+  },
+  "owner_reviews_unapplied": [],
+  "local_recommendation": "A, advice only; Portfolio selection belongs to the existing Pro node.",
+  "engineering_scope_section4": "none",
+  "decision_authority": "pro_final"
+}
