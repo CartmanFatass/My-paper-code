@@ -56,5 +56,13 @@
     "evidence_in_collection": "VSP03_B07_COLLECTION_20260910.json#monitor_terminal_evidence",
     "Root_forwarded_collection": true
   },
-  "collection": "technically and scientifically accepted; scoped closeout inventory prepared"
+  "collection": "technically and scientifically accepted; scoped remote closeout complete",
+  "scoped_remote_closeout": {
+    "completed_utc": "2026-09-10T17:21:35.216252+00:00",
+    "evidence": "VSP03_B07_COLLECTION_20260910.json#closeout",
+    "source_wrapper_socket_absent": true,
+    "source_unregistered": true,
+    "scientific_files_and_receipts_preserved": true,
+    "local_scratch": "separate blocked-by-policy boundary unchanged"
+  }
 }
