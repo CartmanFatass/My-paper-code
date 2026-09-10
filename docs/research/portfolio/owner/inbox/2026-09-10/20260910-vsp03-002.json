@@ -19,7 +19,7 @@
     }
   ],
   "recommended": "a",
-  "auto_applied": null,
+  "auto_applied": "a",
   "dm_reason": "B07回答了上次所选的小问题，收益仍小且Q转负；新增同配方观察的决策价值下降，但真实终点收益及低成本使此选择接近。",
   "evidence": [
     "docs/research/candidates/vsp_03/VSP03_POST_B07_QUESTION_INTAKE_20260910.md"
@@ -87,6 +87,14 @@
       "state": "planned",
       "summary": "方向建议已备妥，原Convergence尚未选择；不变512窄家族暂停与再一fit均未执行，准备新增科学暴露0。",
       "correction": "原owner packet的第二条反方quote为DM转述，不能当作逐字引文。准确原文是：Fixed update-512 greedy G beats R0 and R in each sampled comparison. 已在VSP03_POST_B07_OWNER_PACKET_20260910.json修正并对全部引文逐字核对；科学数值及选项不变。"
+    },
+    {
+      "at": "2026-09-10T19:48:34+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/vsp_03/pro_packets/20260910_post_b07_convergence/archive/RESPONSE.md at 50db79b04bbeb0baf92335dde5502859fc4fc2e9",
+      "record": "docs/research/candidates/vsp_03/VSP03_POST_B07_CONVERGENCE_INTAKE_20260910.md#5-decisions-this-intake-produces-and-owner-records",
+      "state": "applied",
+      "summary": "完整原Convergence答复已逐字读取并完成当前规范核对：已只暂停不变ordinary-G连续512、公开固定N2、固定128/512面板的greedy对R0/R家族，无后继。DIRECTION已记录，B07终点正/Q负和随机恢复、B06及旧反证保留；recasts1及ACTIVE/LOW不变。同配置新fit仍是合法B，本轮未选，无新机制或更强证据门槛。新增科学暴露0；审计2026-09-10.md#L19。原卡/结果未改；无需所有者逐项批准。"
     }
   ]
 }

@@ -70,6 +70,14 @@ against both rules; success/attempt/waiting costs remain. The one-unit result
 is not pooled with B06 and supplies no stable superiority or convergence claim.
 The selected one-fit allocation ends here without a successor or family disposition.
 
+The complete post-B07 Convergence decision now pauses only the unchanged
+ordinary-G continuous512 / fixed128-and512-panel / public fixed-N2 shared-slot
+greedy-replacement family. It selects no successor as a reversible close call,
+preserving the positive endpoints, negative B07 Q and stochastic recovery.
+One more unchanged independent fit remains legitimate B evidence if later
+selected; a new use, mechanism or stronger evidence class is not required.
+This family decision adds no recast and does not change Portfolio lifecycle.
+
 ## Current position
 
 The historical bootstrap sentence from `RESEARCH_MAP.md` remains provenance:
@@ -361,11 +369,39 @@ produced its advantage. MEI stays.02 and tuned current-N2 headroom is absent.
 The selected fresh-path discriminator retained the endpoint gain and contradicted
 its positive-Q prediction. This further small gain and the lack of greedy
 continuation benefit favor ending unchanged repetitions under the current
-finite assignment. No additional fit, longer update budget or concrete new
-treatment is selected. A future discriminator needs a changed decision question
-that could alter the controller choice; a family disposition remains with the
-original direction node and investment with Portfolio. The independent128,
-N1 and T pauses and recasts1 remain.
+finite assignment. That intake selected no additional fit, longer update budget
+or concrete new treatment; family disposition remained with the original
+direction node. The following decision now applies that boundary and clarifies
+the future same-configuration option, preserving the historical intake.
+
+**PRO_FINAL, post-B07, 2026-09-10: pause only unchanged ordinary-G continuous512
+with fixed128/512 panels on the public fixed-N2 shared-slot greedy-replacement
+comparison; no successor, recasts: 1.** The complete response at
+`50db79b04bbeb0baf92335dde5502859fc4fc2e9` retains the same target law, two jobs,
+eight-tick slot, 40-tick utility and complete team credit, 14 public features,
+generic2083-parameter actor-critic, original Adam/objective, continuous512×128
+learning, strict logit>0 final512 greedy G−R0 primary and paired-world Q,
+with R and every stochastic/native-component comparison preserved.
+The independent128, N1 and T pauses remain; no wider direction or Portfolio
+disposition, second recast, C promotion or UAV entry follows.
+
+The node slightly prefers ending this unchanged sequence after B07 repeats a
+small positive endpoint while its greedy continuation change turns negative.
+That is a bounded research choice, not a negative primary, readiness victory,
+convergence claim or four-fit stopping rule. The strongest case against pausing
+is the repeated real endpoint gains in both modes, B06's above-MEI point and
+the complete8.380174–8.927880s cost range. Another fit could still change the
+judgment; its expected value has not been estimated as zero. Native sacrifices
+and the separate B06/B07 units retain their original meanings.
+
+A future same-purpose, same-configuration independent fit is a legitimate B
+discriminator of final D512, paired Q, both modes and success/attempt/waiting
+tradeoffs. The earlier wording about a changed decision question does not
+require a new use, algorithm, mechanism, positive sign, above-MEI gain, tuned
+headroom or stable superiority. Such an observation is currently unselected
+and unallocated; changing this particular family pause uses its existing
+direction authority. Ordinary B work elsewhere gains no Pro gate, and no
+direction waits for a batch or sibling result.
 
 The strongest surviving alternative is that public dwell age already suffices and the generic
 MLP matches the prior, or that all advantage is the fixed rule rather than learning. In the new
@@ -389,9 +425,11 @@ sharing K1 does not pool polarity or reopen that family.
 
 ## Evidence set
 
-The evidence set includes historical observations, the separately recorded selection
-and the completed B06 and separate B07 results:
+The evidence set includes historical observations, the separately recorded selection,
+the completed B06 and separate B07 results, and the post-B07 family decision:
 
+- `docs/research/candidates/vsp_03/VSP03_POST_B07_CONVERGENCE_INTAKE_20260910.md`
+- `docs/research/candidates/vsp_03/pro_packets/20260910_post_b07_convergence/archive/RESPONSE.md` at `50db79b04bbeb0baf92335dde5502859fc4fc2e9`
 - `docs/research/candidates/vsp_03/VSP03_B07_INTAKE_20260910.md`
 - `docs/research/candidates/vsp_03/VSP03_B07_RESULT_EVIDENCE_20260910.md`
 - `docs/research/candidates/vsp_03/VSP03_B07_DM_ANALYSIS_20260910.json`
