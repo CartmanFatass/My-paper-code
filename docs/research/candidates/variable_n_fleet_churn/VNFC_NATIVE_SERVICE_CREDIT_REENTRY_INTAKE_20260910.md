@@ -291,3 +291,63 @@ Root's next action is to load this committed HANDOFF and dispatch it exactly onc
 the existing Transport. On the immutable full response, resume this DM for conformance,
 direction intake and any exact authorized continuation. Until then, the proposed scientific
 option and its 900-second allocation remain unexecuted; all prior pauses and limits stand.
+
+## 8. Transport blocker and same-request reconciliation wait
+
+Root subsequently dispatched the bound request and forwarded a terminal Transport blocker.
+The [exact forwarded receipt and selected registry corroboration](pro_packets/20260910_native_service_credit_reentry/TRANSPORT_BLOCKER_20260910.json)
+record `SEND_UNCERTAIN`, `WAITING_UNKNOWN`, and **one Send click** on the bound conversation
+`6a9c674e-6eb8-83e8-b19f-06cb6f3ebe08`. The forwarded observation is: "Exact bound URL
+reloaded; no current-round user node or assistant response; acceptance unresolved". Its
+blocker is: "Pro Send acceptance unresolved after one click; no retry permitted". There
+is no current-round archive or formed scientific decision. The read-only registry check
+at 2026-09-10T20:32:12Z corroborated this state; Transport's last provider observation was
+2026-09-10T20:28:57Z. The registry's accepted delivery describes its blocker receipt to
+Root, not acceptance of the Pro prompt. The DM did not inspect the browser or retry Send.
+
+This supersedes section 7's ready-to-dispatch status, while its TASK, REQUEST, HANDOFF,
+fixed SHA `b03b1471ff8808d5cf3c9256889b724d501ae92f`, prompt bytes and request identity remain
+unchanged. Current authoring HEAD before this receipt update was
+`607aa7ec6c5095fa2444eb28bd536e415cc56d47`; its checkout and upstream were clean and aligned.
+
+**Rule applied verbatim — AGENTS section 3:** "**Direction and Portfolio tiers**: the
+direction parks at a clean boundary (everything committed, runs detached, state recoverable
+from the repository) and Root advances independent authorized work. Nothing is decided
+provisionally at these tiers."
+
+The direction therefore waits at a clean execution boundary for its own Transport
+reconciliation. This is an operational wait, not a Portfolio `PARK` disposition or option
+(b) selected in section 6. Neither section 6 scientific option is selected; the proposed
+900-second B allocation is not granted or spent. New scientific invocations, learner
+updates, native episodes and scientific exposure remain **zero**. There is no result,
+scientific polarity, prediction score or valid-result brief to add. The prior accepted
+pause, E01 limits, `ACTIVE/HIGH`, two recasts and lowest contention sequencing still apply.
+
+**Decisions this receipt produces.** The procedural options are (a) preserve the receipt
+and same request for Transport reconciliation, (b) blindly resend, or (c) substitute a
+local direction disposition. Recommendation and executed choice: **(a)**.
+**Owner-delegated decision (unattended, 2026-09-03 instruction): preserve the same-request
+reconciliation wait.** This is a technical preservation decision under the blocker rule,
+not `PRO_BLOCKED / LOCAL_PROVISIONAL` scientific selection. The audit records it separately
+from the earlier zero-exposure question submission.
+
+The outstanding queue entry is maintained here: request
+`2026-09-10-vnfc-native-service-credit-reentry-01`, binding
+`em:variable_n_fleet_churn:convergence`, existing conversation and exact fixed inputs above;
+Root owns routing and the dedicated Transport owns acceptance reconciliation, any permitted
+same-request recovery and observation. This return requests that Root retain that entry.
+No resend is authorized while acceptance remains uncertain. An authoritative acceptance
+fact returns to the existing Transport route; a complete response must be archived at its
+immutable commit and forwarded to this DM for full conformance/intake before any affected
+direction action. An authoritative failed-effect fact is handled by Transport under the
+existing request and recovery rules, never by a new DM request or duplicate Send. Root
+continues independent authorized directions meanwhile.
+
+Owner reviews again returned `[]` at this boundary. The existing P2 item
+`20260910-vnfc-001` receives a blocked-state trace through `item.py`, sourced to the explicit
+AGENTS section 3 rule and this receipt record; its recommendation is preserved and
+`auto_applied` remains null. This is no owner reply or formed Pro verdict. Only this intake,
+the receipt, its technical audit row and that trace change. No scientific/source test is
+needed for a documentary receipt update. The direction checkout remains retained for the
+unresolved delivery and subsequent DM intake, with this DM owning draft preservation and
+Root owning integration and eventual reclamation as recorded in section 7.
