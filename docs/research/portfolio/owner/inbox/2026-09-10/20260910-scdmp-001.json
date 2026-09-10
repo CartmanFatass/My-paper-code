@@ -19,7 +19,7 @@
     }
   ],
   "recommended": "a",
-  "auto_applied": null,
+  "auto_applied": "b",
   "dm_reason": "原规则没有给原样重复提供选定尺度上的理由；正点估计、单训练对和低已测成本构成必须保留的反证。",
   "evidence": [
     "docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260910_post_b01_convergence/SCIENCE_BRIEF.md",
@@ -67,5 +67,15 @@
     "verdict_text": "DM recommendation: park the current opening held-segment residual-MC package family at this boundary; do not infer a general residual-method failure or change SCDMP lifecycle.",
     "source": "docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260910_post_b01_convergence/SCIENCE_BRIEF.md"
   },
-  "starred": true
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-10T20:44:51+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260910_post_b01_convergence/archive/RESPONSE.md",
+      "record": "docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260910_post_b01_convergence/CONVERGENCE_INTAKE_20260910.md",
+      "state": "applied",
+      "summary": "完整不可变响应2b1a8d7a8395827ed654dac120641710e6a6c87a已全文读取并通过14路径/SHA及现行规范核对。Pro选择(b)不变比较的新独立B02配对，拒绝DM立即PARK建议；已分配master8202并形成新卡，尚未运行。保留B01 WITHIN、recasts2、旧D6 PARK及Portfolio状态，无第三recast。此记录是Pro裁决应用，不是所有者回复。"
+    }
+  ]
 }
