@@ -161,3 +161,21 @@ source5b30bf8ef. Full preservation/transfer/member verification **5.519070300011
 counts inside the existing150s post-support charge. No old evidence, native cache or
 shared authoring checkout is in the cleanup inventory. Exact removal is still pending
 publication of this intake; final disk/registry/source-ref facts append afterward.
+
+## Final scoped closeout
+
+After published result/intake **2fc458d90d655cbfce8b883339fb78fc27493c7d**, the exact
+terminal execution checkout was unregistered and removed; only its matching staged
+source/control-input directory and supervisor were then removed. Preservation archive
+comparison, source-ref/digest, terminal exit0 and original PID absence were checked
+before removal. Whole removal/verification **0.39999159998842515s**, exit0.
+All three exact paths are absent on disk, and exact-line membership in
+`git worktree list --porcelain` confirms the execution checkout is absent. The archive
+digest and source recovery ref still match. `closeout/b03-fresh1000-s22-recovery-20260910/`
+retains `preservation.json`, `removal.json`, `members.json`, `REPORT.md` and the archive.
+
+Local raw new endpoints/curve/tensors, original W1/failed W100 evidence, old archives,
+native cache and shared authoring checkout remain. This is inside the conservative
+574.64s complete incremental charge. The assigned terminal intake/preservation/closeout
+is complete. Root's next action is main integration and acceptance; any further
+scientific object is a separate decision. No automatic retry/successor was launched.
