@@ -6,7 +6,7 @@
   "supervisor_handle": "acvc-fresh-dense-b01-8931-dfee6e8a3",
   "execution_node": "wsl_4070",
   "remote_checkout": "/home/wu/hmasd-worktrees/acvc-fresh-dense-b01-8931-dfee6e8a3",
-  "status": "source accepted; submission pending",
+  "status": "supervisor accepted; MONITOR_ADD delivered; adoption and terminal pending",
   "checks": [
     {
       "name": "single focused synthetic target, shell syntax and creator cleanup",
@@ -37,5 +37,22 @@
     "monitor_observation_s": null,
     "whole_task_charge_s": null,
     "complete_charge_s": null
+  },
+  "submission": {
+    "accepted_handle": "acvc-fresh-dense-b01-8931-dfee6e8a3",
+    "supervisor_response": "Task started in tmux session agent_acvc-fresh-dense-b01-8931-dfee6e8a3",
+    "submit_client_wall_s": 0.5530635,
+    "accepted_submissions": 1,
+    "no_scientific_retry": true,
+    "empirical_counts": "pending actual-node admission and terminal collection"
+  },
+  "monitor": {
+    "thread_id": "01a087e5-2044-7301-abb6-7a1709a98197",
+    "root_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+    "original_dm_native": "/root/dm_acvc_restart_successor",
+    "dispatch": "MONITOR_ADD accepted by app tool; no error",
+    "adoption": "pending Root-forwarded MONITOR_ADOPTED",
+    "inclusive_support_required": true,
+    "proposed_monitor_support_s": 60
   }
 }

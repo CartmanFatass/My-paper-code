@@ -1,6 +1,6 @@
 # ACVC fresh DENSE reuse B01 / 8931 — execution
 
-Date: 2026-09-10. Source accepted for the one allocated study; submission pending.
+Date: 2026-09-10. One supervisor submission accepted; Monitor dispatch delivered; adoption and terminal collection pending.
 
 ## L0 and ownership
 
@@ -125,3 +125,30 @@ Actual-node admission remains joined inside the wrapper, followed by the only
 authorized result-bearing invocation if it passes. Launch acceptance/adoption and
 eventual empirical acceptance remain separate facts. The source surface has no
 subsequent code change; documentation-only commits do not alter the bound bytes.
+
+## Accepted handle and observation handover
+
+The frozen payload was submitted once and accepted by `agent-task` as
+**acvc-fresh-dense-b01-8931-dfee6e8a3**, tmux session
+`agent_acvc-fresh-dense-b01-8931-dfee6e8a3`, supervisor log
+`/home/wu/.agent-tasks/acvc-fresh-dense-b01-8931-dfee6e8a3/task.log`.
+Client submission wall **.5530635s** will be conservatively included in the native
+whole-task charge. The memory receipt, running counts and endpoint are pending actual
+collection; an accepted supervisor handle is not proof of passing admission or results.
+
+DM sent MONITOR_ADD directly using the live primary configuration; the app tool
+accepted delivery to `01a087e5-2044-7301-abb6-7a1709a98197`. The message includes exact
+source/handle/cwd/output/receipts, Root and this native DM, the new inclusive90s support
+cap and per-query accounting requirement. Adoption is **pending**, separate from
+successful dispatch. No DM status-polling loop continues. Root receives adoption and
+terminal facts and resumes `/root/dm_acvc_restart_successor` for collection/intake.
+The primary owner review query immediately before submission returned[]; no takeover
+or prediction reply exists. Runtime support remains2.6760948s before observation.
+
+Technical object-tier options: (a) accept the independently reviewed binding and single
+passed focused check, retaining the receipt-transport error; (b) repeat runtime checks
+without a new defect; (c) broaden protected code. Recommend/select(a).
+**Owner-delegated decision (unattended, 2026-09-03 instruction): (a).**
+The next authorized work is terminal collection, artifact/count/primary verification,
+complete inclusive accounting, intake and preserved scoped closeout. No successor,
+scientific retry or additional panel is pending or authorized.
