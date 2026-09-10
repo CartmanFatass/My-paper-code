@@ -142,3 +142,22 @@ Live-primary owner reviews remained [] at this handover; no owner override or ac
 pre-execution prediction is recorded. Root will resume this same DM on terminal for
 collection, technical acceptance, scientific intake, Chinese brief and exact preserved
 closeout. The launched allocation remains open; no extra fit or retry is selected.
+
+## Verified preservation before scoped removal
+
+The exact execution checkout (excluding only its Git pointer), staged source/control
+input and terminal supervisor were archived before any removal. Original PID3102025
+was absent; terminal status/exit0 were checked. GNU tar comparison against all original
+archived members passed. Archive **10449759 bytes**, **2355 regular members**,
+SHA256 **`5a2796b82bc71876252811b364ae1a248d2d2abedd16933db6b886d8feb0d399`**.
+Local transfer hash matches; all16 accepted result/supervisor members and both staged
+source bundle/control-input members match their retained digests. Member listing
+SHA256 `058419a2843a8a5f92db1343c42042fa1996fc3eb5d075a1b72dd7d756b7c979`.
+
+Remote archive `/home/wu/hmasd-recovery/rcle-b03-fresh1000-s22-recovery-20260910/remote.tar.gz`; local archive
+`temp/directions/roster_consistent_latent_exploration/closeout/b03-fresh1000-s22-recovery-20260910/remote.tar.gz`.
+Remote recovery ref `refs/recovery/rcle-b03-fresh1000-s22-recovery-20260910` pins
+source5b30bf8ef. Full preservation/transfer/member verification **5.519070300011663s**
+counts inside the existing150s post-support charge. No old evidence, native cache or
+shared authoring checkout is in the cleanup inventory. Exact removal is still pending
+publication of this intake; final disk/registry/source-ref facts append afterward.

@@ -546,3 +546,27 @@ It tests the missing native contrast or records a concrete failure location; nei
 a second independent seed sample from repetition nor a crash-cure claim follows.
 S21 is still the only complete same1000 pair at selection. Prior reference/recovery
 deficits and all failed exposure remain visible. No family/class/lifecycle change.
+
+## Seed22 recovered: large native signal across two1000 roots — 2026-09-10
+
+`RCLE_B03_FRESH1000_S22_RECOVERY_RESULT_INTAKE_20260910.md` accepts a complete
+new W1001000/reference sequence against the exact retained W1 control. New W100
+starts at matching fresh seed22 initial tensors/zero baselines and records1000
+nonzero joint updates. Delta_U+.3678243001 and W100 initialization gain+.3717814128
+exceed.05; all512 primary scenarios and all8 U/Y/F means favor W100. This completes
+seed22's comparison while preserving its old983-block failed attempt and costs.
+S21 and recoveredS22 are two completed training roots, with descriptive mean
+Delta+.3734842936; the repeated22 invocation is not an additional independent seed.
+
+The strongest support is the intact native learning/contrast recurring at the fixed
+endpoint. The strongest competence contradiction remains: reference U is lower in
+every cell (primary gap+.0568258), and2037/2048 W100 recovery scores remain40.
+The full joint law still changes shared features, plans, baselines and visitation;
+pure actor-credit causality, tuned headroom, stable superiority and transfer remain
+unidentified. The successful attempt does not diagnose or cure prior exceptions.
+
+The next discriminator recommended for separate selection is another independent
+matched pair at the same endpoint, retaining every outcome; it can measure additional
+training variation but cannot alone establish competence against the reference.
+Current allocation closes after preserved cleanup; no successor/card/budget, family
+change, C promotion or Portfolio disposition follows automatically.
