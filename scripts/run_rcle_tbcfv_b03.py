@@ -17,7 +17,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--arm", choices=("W1", "W100", "reference"), required=True)
-    parser.add_argument("--seed", type=int, choices=(19, 20, 21), default=19)
+    parser.add_argument("--seed", type=int, choices=(19, 20, 21, 22), default=19)
     parser.add_argument("--updates", type=int, choices=(200, 1000), default=200)
     parser.add_argument("--reporting-object", default="RCLE-TBCFV-B03-ACTOR100")
     parser.add_argument("--out", type=Path, required=True)
