@@ -3,9 +3,9 @@ Binding MARL structure: (d) multi-agent partial observability: each UAV uses its
 
 # ACVC fresh DENSE reuse B01 — science card
 
-Date: 2026-09-10. **B/EXPLORE; scientific design selected; execution unallocated.**
-This is one fresh-fit design, with proposed numerical limits. No source change, test, model,
-training, evaluation, pilot or performance probe belongs to this authoring assignment.
+Date: 2026-09-10. **B/EXPLORE; option A allocated once; implementation pending.**
+Section8 records the later Portfolio allocation. The original design-stage statements in
+§§1,6–7 below remain historical; §8 supersedes their no-execution boundary prospectively.
 The [design intake](ACVC_FRESH_DENSE_REUSE_B01_DESIGN_INTAKE_20260910.md) records the decision;
 the [prospective facts](ACVC_FRESH_DENSE_REUSE_B01_PROSPECTIVE_FACTS_20260910.json) contain
 tool-computed counts and retained-timing arithmetic. They contain no new empirical outcome.
@@ -268,3 +268,27 @@ extend training. A weak but intact fit continues to all panels within the same c
 optional resource telemetry is recorded as resources_unmeasured; §11.8.7 limits only claims
 dependent on damaged measurement. This authoring assignment stops at published design and
 Root return, with zero numerical work and no local allocation.
+
+## 8. Prospective execution allocation after complete Pro intake
+
+The [Portfolio decision](../../portfolio/decisions/2026-09-10-acvc-fresh-dense-allocation.md)
+records full conformance intake of immutable Pro response
+`caf8cf61d92fb3a669f93439a0e2b9967eca943c`. Option A now allocates exactly this study
+under AGENTS§4.8; Root accepted the conformance and assigned its complete implementation,
+independent review, verification, execution and all-outcome intake to the existing ACVC DM.
+This supersedes only the historical design-only/no-allocation statements above. The
+scientific recipe, data/RNG, final endpoint, comparator set, predictions and reading rule
+remain exactly those selected at28e99edc7. No implementation or process is accepted by Pro.
+
+Allocated limits are **330s whole supervised task**, **30s cumulative runtime support**,
+**360s complete charge**. Admission/startup through actual descendant exit stays inside330s;
+checks and numerical readback share one30s allowance with the existing directory-test limit.
+Unused time cannot enlarge either sublimit. No retry, resumed slice, replacement, extra or
+smaller panel, tuning, retained-base substitute or automatic successor is allocated.
+A weak intact fit still receives all panels; broken dependent output is a technical limit.
+The [execution mapping](../../portfolio/pro_packets/20260910_acvc_fresh_dense_allocation/EXECUTION_MAPPING.md)
+supplies the five engineering facts and current DM/Monitor responsibilities. Scope§4:none.
+
+At application publication, source implementation/independent review/runtime checks/launch
+are pending, and new scientific exposure remains zero. Actual command, published source SHA,
+resource receipt, supervised handle and complete costs belong in the execution/result record.
