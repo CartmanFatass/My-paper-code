@@ -142,3 +142,29 @@ is5.3660909/300s before the remaining publication and staging/collection reads.
 Final prospective card/count/link/source checks passed, with no scientific import/test.
 Their measured0.7068222s brings pre-staging support to **6.0729131/300s**. Live-primary
 owner reviews again returned `[]`; the selected pair proceeds under existing authority.
+
+## 6. RETAIN launch and independent observation handover
+
+The prospective card/plan/owner item was committed and immediately pushed at full
+`6fb1e1f6d6f726f133e9aab9c9d96758e3b6d36c` before any scientific submission. E0 records the remote Git HTTPS SSL timeout,
+its zero scientific effects, the exact committed Git-bundle/SCP alternative and verified
+same-SHA staging. The owned source-lookup lazy fetch was terminated; it supplies no
+scientific or source-absence conclusion. The remote staged bundle is added to the exact
+later closeout inventory. Source, host/device, RNG, comparator, allocation and claim are
+unchanged. Root was informed of the transport failure and permitted in-scope resolution.
+
+**Technical method decision, object tier.** Options: (a) stage the already-published exact
+Git objects over the existing SSH/SCP route; (b) repeat the failed HTTPS fetch; (c) change
+execution host/source. Recommend/select **(a)**: bundle verification and exact source
+checkout succeed without changing the card. **Owner-delegated decision (unattended,
+2026-09-03 instruction): (a).** This routine technical method is within Root's supplied
+continuation, not a new scientific allocation or response to an approval rejection.
+
+RETAIN was accepted at 19:31:43.439557Z with the fresh-admission/runner outer 1800s command,
+then directly registered with the live shared Monitor. Root explicitly confirmed actual
+adoption for the exact handle/source. No separate DM status polling follows. Current
+support 9.1878363/300s through final publication checking and cumulative tests 25.9131638/300s remain bounded; Git transport
+latency has its separate administrative scope in E0. There is no native result/prediction
+score yet. This DM retains terminal collection/technical intake and the preselected EVENT,
+then full scientific intake, Chinese brief and archive-before-delete scoped closeout.
+Root integrates and accepts closure while every direction proceeds independently.
