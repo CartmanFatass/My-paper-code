@@ -296,3 +296,17 @@ source bundle match the already accepted bytes. `members.json` digest is
 Remote recovery ref `refs/recovery/rcle-b03-fresh1000-s21-20260910` preserves source806d37805.
 Complete preservation18.4394616s, including archive transfer15.1062139s, is inside the
 same150s postlaunch support charge, not a new budget. Final removal receipt follows.
+
+**Final closeout completed after result publication14932f87e.** Removal of the exact
+remote execution checkout, supervisor and source-only stage returned0 in.4869429s.
+All three resolved paths are absent on disk, the checkout is absent from Git worktree
+registration, and PID3087467 is absent. The source recovery ref and remote archive digest
+still match the retained values. Local raw evidence/preparation, shared authoring, native
+cache, historical evidence and other scratch remain. The existing closeout `REPORT.md`,
+`preservation.json` and `removal.json` contain the inventory and direct verification.
+All closeout work is included in the conservative997.01s complete charge.
+
+This DM's allocated result chain is complete. Root's remaining work is main integration
+and acceptance of the scientific/retention return, with any future allocation handled
+separately. The next discriminator remains a recommendation only; no further direction
+science, invocation, branch or card is silently opened by this completion.

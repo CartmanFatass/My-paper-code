@@ -145,3 +145,11 @@ all23 result/supervisor files and source bundle match retained originals. Recove
 This is scoped closeout within Root's complete assignment; removal facts are appended
 after exact-path absence and worktree-registration checks. Shared authoring and old
 evidence remain outside this cleanup.
+
+After publishing the E0/intake at14932f87ea454ff821b06db7fd9188fef9a60f3f, scoped
+removal completed in0.4869429s: the exact execution worktree, supervisor and source-only
+stage are absent on disk, the checkout is absent from Git's worktree registry, and
+PID3087467 is absent. Source recovery ref and the remote archive digest remain intact.
+The existing closeout `REPORT.md`, `preservation.json` and `removal.json` retain proof.
+This DM's allocated chain is complete through science and cleanup; Root accepts the
+published result/integration/retention return. The proposed next pair remains unallocated.
