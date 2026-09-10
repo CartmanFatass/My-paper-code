@@ -1,6 +1,6 @@
 # ACVC fresh DENSE reuse B01 / 8931 — execution
 
-Date: 2026-09-10. One supervisor submission accepted; Monitor dispatch delivered; adoption and terminal collection pending.
+Date: 2026-09-10. One supervisor submission accepted; Monitor adoption confirmed; terminal collection pending.
 
 ## L0 and ownership
 
@@ -152,3 +152,8 @@ without a new defect; (c) broaden protected code. Recommend/select(a).
 The next authorized work is terminal collection, artifact/count/primary verification,
 complete inclusive accounting, intake and preserved scoped closeout. No successor,
 scientific retry or additional panel is pending or authorized.
+
+Root subsequently forwarded **MONITOR_ADOPTED** for this exact handle/source/node.
+Observation ownership is now confirmed with the shared Monitor. No exact acceptance
+timestamp accompanied that receipt; none is invented. Authoritative supervisor start/
+exit timestamps remain for terminal collection. All output and stop boundaries are unchanged.

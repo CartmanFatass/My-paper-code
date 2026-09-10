@@ -6,7 +6,7 @@
   "supervisor_handle": "acvc-fresh-dense-b01-8931-dfee6e8a3",
   "execution_node": "wsl_4070",
   "remote_checkout": "/home/wu/hmasd-worktrees/acvc-fresh-dense-b01-8931-dfee6e8a3",
-  "status": "supervisor accepted; MONITOR_ADD delivered; adoption and terminal pending",
+  "status": "supervisor accepted; Monitor adopted; terminal collection pending",
   "checks": [
     {
       "name": "single focused synthetic target, shell syntax and creator cleanup",
@@ -51,8 +51,9 @@
     "root_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
     "original_dm_native": "/root/dm_acvc_restart_successor",
     "dispatch": "MONITOR_ADD accepted by app tool; no error",
-    "adoption": "pending Root-forwarded MONITOR_ADOPTED",
+    "adoption": "MONITOR_ADOPTED forwarded by Root for exact handle/source/node",
     "inclusive_support_required": true,
-    "proposed_monitor_support_s": 60
+    "proposed_monitor_support_s": 60,
+    "acceptance_timestamp": "not supplied; authoritative supervisor timestamps will be collected, no placeholder timestamp recorded"
   }
 }
