@@ -12,6 +12,7 @@ from ..uav_motion_prefix_b01.study import Deadline, clean_json, difference_stats
 CARD = "docs/research/candidates/ucope/UCOPE_UAV_SHORT_FIXED_RENEWAL_CONTINUOUS_B01_SCIENCE_CARD_20260909.md"
 CARD_8602 = "docs/research/candidates/ucope/UCOPE_UAV_SHORT_FIXED_RENEWAL_CONTINUOUS_B01_8602_SCIENCE_CARD_20260909.md"
 LEARNED_CARD = "docs/research/candidates/ucope/UCOPE_UAV_SHORT_LEARNED_RENEWAL_CONTINUOUS_B01_SCIENCE_CARD_20260910.md"
+LEARNED_CARD_8702 = "docs/research/candidates/ucope/UCOPE_UAV_SHORT_LEARNED_RENEWAL_CONTINUOUS_B01_8702_SCIENCE_CARD_20260910.md"
 OBJECT = "UCOPE-UAV-SHORT-FIXED-RENEWAL-CONTINUOUS-B01"
 LEARNED_OBJECT = "UCOPE-UAV-SHORT-LEARNED-RENEWAL-CONTINUOUS-B01"
 SELECTOR = "renewal_short_fixed_continuous_b01"
@@ -38,8 +39,8 @@ class Config:
         return cls(seed=9001, fixture=True, horizon=8, train_episodes=6, checkpoints=(2, 4, 6), eval_episodes=2, chunk=8)
 
     @classmethod
-    def learned(cls, fixture=False):
-        config = cls(seed=9002 if fixture else 8701, fixture=fixture,
+    def learned(cls, fixture=False, seed=8701):
+        config = cls(seed=9002 if fixture else seed, fixture=fixture,
                      horizon=8 if fixture else 256, train_episodes=6 if fixture else 2048,
                      checkpoints=(2, 4, 6) if fixture else (512, 1024, 2048),
                      eval_episodes=2 if fixture else 64, chunk=8 if fixture else 32,
@@ -97,7 +98,8 @@ def run_pair(config, out, start, clock=time.monotonic, factory=None, publish=wri
     sha = subprocess.check_output(["git", "rev-parse", "HEAD"],
                                   cwd=Path(__file__).resolve().parents[4], text=True).strip()
     summary = dict(object=LEARNED_OBJECT if learned else OBJECT,
-        card=(LEARNED_CARD if learned else CARD_8602 if config.seed == 8602 and not config.fixture else CARD),
+        card=(LEARNED_CARD_8702 if learned and config.seed == 8702 and not config.fixture else
+              LEARNED_CARD if learned else CARD_8602 if config.seed == 8602 and not config.fixture else CARD),
         card_section=(6 if config.fixture else 5),
         pair=selector, mode="ENGINEERING_FIXTURE" if config.fixture else "UAV_B_EXPLORE",
         launch_sha=sha, comparator_source=COMPARATOR_SOURCE, seed=config.seed,
