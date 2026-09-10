@@ -1,0 +1,192 @@
+{
+  "reference_count": 24,
+  "task_manifest_count": 24,
+  "failures": 0,
+  "observed_published_refs": [
+    {
+      "ref": "refs/heads/codex/portfolio",
+      "sha": "53349830641cff8d64fdf7c6b2007f4ec02c9bfa"
+    },
+    {
+      "ref": "refs/heads/codex/acvc",
+      "sha": "28e99edc7ae93c1101aa78d00e46f6c71e92e81d"
+    },
+    {
+      "ref": "refs/heads/main",
+      "sha": "99168437c1c0d52101b6326fe4db491f760fe28d"
+    }
+  ],
+  "references": [
+    {
+      "path": "docs/research/portfolio/pro_packets/20260910_acvc_fresh_dense_allocation/SCIENCE_BRIEF.md",
+      "commit_sha": "53349830641cff8d64fdf7c6b2007f4ec02c9bfa",
+      "git_blob_exists": true,
+      "published_via": "refs/heads/codex/portfolio@53349830641cff8d64fdf7c6b2007f4ec02c9bfa",
+      "task_manifest_match": true
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260910_acvc_fresh_dense_allocation/FACTS.json",
+      "commit_sha": "53349830641cff8d64fdf7c6b2007f4ec02c9bfa",
+      "git_blob_exists": true,
+      "published_via": "refs/heads/codex/portfolio@53349830641cff8d64fdf7c6b2007f4ec02c9bfa",
+      "task_manifest_match": true
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260910_acvc_fresh_dense_allocation/ISSUE_SNAPSHOT.json",
+      "commit_sha": "53349830641cff8d64fdf7c6b2007f4ec02c9bfa",
+      "git_blob_exists": true,
+      "published_via": "refs/heads/codex/portfolio@53349830641cff8d64fdf7c6b2007f4ec02c9bfa",
+      "task_manifest_match": true
+    },
+    {
+      "path": "AGENTS.md",
+      "commit_sha": "99168437c1c0d52101b6326fe4db491f760fe28d",
+      "git_blob_exists": true,
+      "published_via": "refs/heads/main@99168437c1c0d52101b6326fe4db491f760fe28d",
+      "task_manifest_match": true
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "commit_sha": "99168437c1c0d52101b6326fe4db491f760fe28d",
+      "git_blob_exists": true,
+      "published_via": "refs/heads/main@99168437c1c0d52101b6326fe4db491f760fe28d",
+      "task_manifest_match": true
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "commit_sha": "99168437c1c0d52101b6326fe4db491f760fe28d",
+      "git_blob_exists": true,
+      "published_via": "refs/heads/main@99168437c1c0d52101b6326fe4db491f760fe28d",
+      "task_manifest_match": true
+    },
+    {
+      "path": "docs/project/ROOT_OPERATIONS.md",
+      "commit_sha": "99168437c1c0d52101b6326fe4db491f760fe28d",
+      "git_blob_exists": true,
+      "published_via": "refs/heads/main@99168437c1c0d52101b6326fe4db491f760fe28d",
+      "task_manifest_match": true
+    },
+    {
+      "path": ".codex/hmasd-compute.toml",
+      "commit_sha": "99168437c1c0d52101b6326fe4db491f760fe28d",
+      "git_blob_exists": true,
+      "published_via": "refs/heads/main@99168437c1c0d52101b6326fe4db491f760fe28d",
+      "task_manifest_match": true
+    },
+    {
+      "path": "docs/research/portfolio/PORTFOLIO.md",
+      "commit_sha": "99168437c1c0d52101b6326fe4db491f760fe28d",
+      "git_blob_exists": true,
+      "published_via": "refs/heads/main@99168437c1c0d52101b6326fe4db491f760fe28d",
+      "task_manifest_match": true
+    },
+    {
+      "path": "docs/research/portfolio/EXPERIMENT_TRACKING.md",
+      "commit_sha": "99168437c1c0d52101b6326fe4db491f760fe28d",
+      "git_blob_exists": true,
+      "published_via": "refs/heads/main@99168437c1c0d52101b6326fe4db491f760fe28d",
+      "task_manifest_match": true
+    },
+    {
+      "path": "docs/research/portfolio/decisions/2026-09-10-next-five-chains.md",
+      "commit_sha": "99168437c1c0d52101b6326fe4db491f760fe28d",
+      "git_blob_exists": true,
+      "published_via": "refs/heads/main@99168437c1c0d52101b6326fe4db491f760fe28d",
+      "task_manifest_match": true
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260910_next_five_chains/EXECUTION_MAPPING.md",
+      "commit_sha": "99168437c1c0d52101b6326fe4db491f760fe28d",
+      "git_blob_exists": true,
+      "published_via": "refs/heads/main@99168437c1c0d52101b6326fe4db491f760fe28d",
+      "task_manifest_match": true
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260910_next_five_chains/archive/RESPONSE.md",
+      "commit_sha": "08e989073839fe5f0f91c6a8ad90a399bee37b6c",
+      "git_blob_exists": true,
+      "published_via": "refs/heads/codex/portfolio@53349830641cff8d64fdf7c6b2007f4ec02c9bfa",
+      "task_manifest_match": true
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_SCIENCE_CARD_20260910.md",
+      "commit_sha": "28e99edc7ae93c1101aa78d00e46f6c71e92e81d",
+      "git_blob_exists": true,
+      "published_via": "refs/heads/codex/acvc@28e99edc7ae93c1101aa78d00e46f6c71e92e81d",
+      "task_manifest_match": true
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_DESIGN_INTAKE_20260910.md",
+      "commit_sha": "28e99edc7ae93c1101aa78d00e46f6c71e92e81d",
+      "git_blob_exists": true,
+      "published_via": "refs/heads/codex/acvc@28e99edc7ae93c1101aa78d00e46f6c71e92e81d",
+      "task_manifest_match": true
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_PROSPECTIVE_FACTS_20260910.json",
+      "commit_sha": "28e99edc7ae93c1101aa78d00e46f6c71e92e81d",
+      "git_blob_exists": true,
+      "published_via": "refs/heads/codex/acvc@28e99edc7ae93c1101aa78d00e46f6c71e92e81d",
+      "task_manifest_match": true
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_FIXED_RETRACE_REUSE_E01_INTAKE_20260909.md",
+      "commit_sha": "b74c3206ecbed7ceb401abc2262be5a3b3f99155",
+      "git_blob_exists": true,
+      "published_via": "refs/heads/codex/acvc@28e99edc7ae93c1101aa78d00e46f6c71e92e81d",
+      "task_manifest_match": true
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_P80_CONVERGENCE_INTAKE_20260909.md",
+      "commit_sha": "b74c3206ecbed7ceb401abc2262be5a3b3f99155",
+      "git_blob_exists": true,
+      "published_via": "refs/heads/codex/acvc@28e99edc7ae93c1101aa78d00e46f6c71e92e81d",
+      "task_manifest_match": true
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_TIMING_B02_INTAKE_20260910.md",
+      "commit_sha": "99168437c1c0d52101b6326fe4db491f760fe28d",
+      "git_blob_exists": true,
+      "published_via": "refs/heads/main@99168437c1c0d52101b6326fe4db491f760fe28d",
+      "task_manifest_match": true
+    },
+    {
+      "path": "docs/research/candidates/vsp_03/VSP03_B07_INTAKE_20260910.md",
+      "commit_sha": "99168437c1c0d52101b6326fe4db491f760fe28d",
+      "git_blob_exists": true,
+      "published_via": "refs/heads/main@99168437c1c0d52101b6326fe4db491f760fe28d",
+      "task_manifest_match": true
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B03_FRESH1000_S21_EXECUTION_20260910.md",
+      "commit_sha": "99168437c1c0d52101b6326fe4db491f760fe28d",
+      "git_blob_exists": true,
+      "published_via": "refs/heads/main@99168437c1c0d52101b6326fe4db491f760fe28d",
+      "task_manifest_match": true
+    },
+    {
+      "path": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_RESERVE_READINESS_INTAKE_20260910.md",
+      "commit_sha": "99168437c1c0d52101b6326fe4db491f760fe28d",
+      "git_blob_exists": true,
+      "published_via": "refs/heads/main@99168437c1c0d52101b6326fe4db491f760fe28d",
+      "task_manifest_match": true
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "commit_sha": "99168437c1c0d52101b6326fe4db491f760fe28d",
+      "git_blob_exists": true,
+      "published_via": "refs/heads/main@99168437c1c0d52101b6326fe4db491f760fe28d",
+      "task_manifest_match": true
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "commit_sha": "99168437c1c0d52101b6326fe4db491f760fe28d",
+      "git_blob_exists": true,
+      "published_via": "refs/heads/main@99168437c1c0d52101b6326fe4db491f760fe28d",
+      "task_manifest_match": true
+    }
+  ],
+  "publication_proves": "Exact paths exist in published Git history; this does not establish current Pro connector access.",
+  "scientific_or_model_or_test_invocations": 0,
+  "provider_sends": 0
+}
