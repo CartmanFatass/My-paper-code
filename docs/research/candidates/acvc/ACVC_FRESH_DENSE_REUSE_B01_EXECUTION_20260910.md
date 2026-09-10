@@ -1,6 +1,6 @@
 # ACVC fresh DENSE reuse B01 — engineering and execution
 
-Date: 2026-09-10. **Implementation active; no accepted scientific process or result.**
+Date: 2026-09-10. **Source accepted; the single scientific submission is next.**
 
 ## Authority and owned work
 
@@ -50,11 +50,11 @@ The actual complete charge must cover the supervisor start/end boundary conserva
 fractional command wall and final supervisor wall are reported separately. Any measured
 cap breach is retained. No timing probe or uncharged verification phase is selected.
 
-Current new support used: **0s**. Current scientific accepted invocations: **0**.
+Current new support used: **3.7175557s**. Current scientific accepted invocations: **0**.
 No model, RNG master, native episode, learner update or evaluation has been created by
 this engineering assignment.
 
-## Exact execution inputs still to be accepted
+## Exact execution inputs
 
 Node is `wsl_4070` / `hmasd-wsl-node`, repository `/home/wu/projects/HMASD`,
 interpreter `/home/wu/.venvs/hmasd/bin/python`, CPU FP32 and Torch intra/inter-op1/1.
@@ -114,3 +114,61 @@ actual correction diff. The four-epoch helper and all protected scientific paths
 unchanged. Real gradients, native checkpoint loading and timing remain facts for the
 one actual study; no separate native pilot is required or allocated. Focused runtime
 verification is next; the candidate is independently source-reviewed, not launched.
+
+## Focused verification and source acceptance
+
+Final source **60d42dd739ef125a505772f2b1d698b099b43a16** is independently reviewed and now technically accepted
+for its exact one-study execution. No scientific result has yet been accepted.
+The remote detached checkout is `/home/wu/hmasd-worktrees/acvc-fresh-dense-b01-60d42dd73`; its HEAD and clean initial status were
+read directly after creation. Required missing blobs were hydrated through the configured
+`zsh -lic` network shell with the configured sparse source directories. An old
+`origin/codex/acvc/next-object-20260904` tracking ref prevented writing the new parent
+tracking-ref name, but the exact published commit was fetched and used directly. No old
+ref was deleted or rewritten. The first non-network-shell fetch/hydration stalled;
+only their verified owned process groups were stopped, and Git removed its unfinished
+checkout. The subsequent exact-SHA sparse checkout completed. These were Git preparation,
+not scientific attempts or runtime tests; their wall is outside the allocated runtime bill.
+
+One focused test target, under the source above:
+`tests/experiments/candidates/acvc/native_link_loss_b01/test_fresh_dense_b01.py::test_fresh_dense_orchestration_counts_and_publication`.
+The enclosing check also ran `bash -n scripts/run_acvc_fresh_dense_reuse_b01.sh`.
+Both used the configured remote Python, disabled bytecode/cache, and explicit owned temp
+paths. No real model, native environment or learning/evaluation panel was executed by the
+synthetic check. Its complete, evaluation-failure and two-Adam interrupted-update cases
+exercise the changed orchestration/primary publication and alarm ordering.
+
+| Check invocation | Observation | Remote process wall | Charged client wall including SSH/readback/cleanup |
+|---|---|---:|---:|
+| first | Fixture setup error: missing parent of pytest basetemp; test body did not run |1.61s|2.3801562s|
+| second, after creating the exact test parent | **1 passed**, pytest0.72s; shell syntax passed |0.95s|1.3373995s|
+
+Both owned scratch directories are directly confirmed absent after creator cleanup.
+Failure and success logs/time files remain separately under the checkout's
+`temp/directions/acvc/fresh_dense_b01_support_check{,_02}{.log,_time.txt}`.
+No test failure or charged time is discarded. New support used is **3.7175557s**;
+**26.2824443s** remains for collection/readback and numerical intake. Conservatively
+charging both client walls to the existing directory test total gives27.7442098s/300s.
+No further source change or repeated check is needed absent a new concrete defect.
+
+## Frozen single submission
+
+Source SHA: `60d42dd739ef125a505772f2b1d698b099b43a16`. Node/interpreter/device/thread boundary remains above.
+Supervisor handle: `acvc-fresh-dense-b01-8921-60d42dd73`. One submission is selected, not yet accepted.
+Scientific output and admission/timing paths remain those named above. The exact command
+passed as one `agent-task run` payload is:
+
+```bash
+cd /home/wu/hmasd-worktrees/acvc-fresh-dense-b01-60d42dd73 && export HMASD_PYTHON=/home/wu/.venvs/hmasd/bin/python PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 CUDA_VISIBLE_DEVICES= && /usr/bin/time -f 'whole_command_wall_s=%e\npeak_rss_kib=%M\nexit_code=%x' -o temp/directions/acvc/fresh_dense_reuse_b01_8921_task_time.txt timeout --signal=TERM --kill-after=1 327 bash scripts/run_acvc_fresh_dense_reuse_b01.sh 60d42dd739ef125a505772f2b1d698b099b43a16
+```
+
+The shell's admission and runner remain joined by&&; the whole outer timer includes
+admission/startup and subsequent publication/exit. The supervisor's own start/end/exit
+witness will supply the wider task boundary; a conservative charge includes timestamp
+rounding and its final short exit delay. The actual330s task and30s support sublimits
+remain independent. No admission receipt or launch handle is inferred from source acceptance.
+
+At this clean boundary the primary owner's review directory still contains only the
+previously handled September4–5 reviews. The ACVC instruction at
+`reviews/2026-09-05.md:19` remains continue at lowest sequencing priority; no new
+review or owner override changes this allocated batch. Source acceptance and the
+partial-record correction are recorded in the September10 audit ledger.
