@@ -1,6 +1,6 @@
 # ACVC fresh DENSE reuse B01 / 8931 — execution
 
-Date: 2026-09-10. One supervisor submission accepted; Monitor adoption confirmed; terminal collection pending.
+Date: 2026-09-10. One native study complete and accepted; scientific intake complete with an inclusive cost-accounting limitation; scoped remote cleanup pending.
 
 ## L0 and ownership
 
@@ -157,3 +157,32 @@ Root subsequently forwarded **MONITOR_ADOPTED** for this exact handle/source/nod
 Observation ownership is now confirmed with the shared Monitor. No exact acceptance
 timestamp accompanied that receipt; none is invented. Authoritative supervisor start/
 exit timestamps remain for terminal collection. All output and stop boundaries are unchanged.
+
+## Terminal collection and acceptance
+
+Root routed the same handle's terminal fact. Authoritative preserved supervisor start/
+exit are2026-09-11T07:42:21+08:00 /07:45:07+08:00, duration166s, finished/exit0.
+Whole-command time166.05s and peakRSS549820KiB are retained. The joined admission
+passed with15,633,240,064 available physical/effective bytes. Direct collection found
+the exact source clean and tmux absent, then archived all14 captured files. The full
+remote/local archive SHA256 matches c3b637e02295dadd20db62587a96f5be0a64ea8a78f9474c776c3fc04e738de6;
+the final checkpoint hash is2078fc6495a777e306f4831d9878e82ec5b4a83e97caa41961b649c70e29c312.
+
+The complete row/update reduction passes:512 training episodes,256 sequential
+two-episode rollouts,1024 finite Adam/update records,192 evaluations in C/F/dwell
+order, all180224 native team steps and actual actor/critic movement. Both primaries
+are UP. The [E0](ACVC_FRESH_DENSE_REUSE_B01_8931_RESULT_EVIDENCE_20260910.md) and
+[intake](ACVC_FRESH_DENSE_REUSE_B01_8931_INTAKE_20260910.md) preserve conditional
+meaning, every outcome, predictions and object-tier choices. No source repair,
+scientific retry, panel extension or successor was required or selected.
+
+Conservative native charge169s passes270s. Measured DM support through preservation
+is4.6189937s. Monitor's1.082s is explicitly partial: Root obtained its correction
+that two approximately.8s observation intervals and unmeasured message/publication
+overhead were omitted. Full90s support/360s complete conformance remains unestablished,
+with no asserted new overrun and no numerical-result quarantine. The Monitor local
+timestamp's inconsistent zone is retained verbatim, not used for native duration.
+The [collection receipt](ACVC_FRESH_DENSE_REUSE_B01_8931_COLLECTION_20260910.json)
+holds the complete known accounting and exact cleanup inventory. Only this finished
+remote checkout/supervisor root will be reclaimed after preserving evidence; shared
+authoring and historical evidence stay retained.

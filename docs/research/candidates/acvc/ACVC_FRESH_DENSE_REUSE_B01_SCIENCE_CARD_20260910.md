@@ -3,7 +3,7 @@ Binding MARL structure: (d) multi-agent partial observability: each UAV uses its
 
 # ACVC fresh DENSE reuse B01 — science card
 
-Date: 2026-09-10. **B/EXPLORE; original 8921 result complete; one new 8931 fit allocated in §10.**
+Date: 2026-09-10. **B/EXPLORE; original8921 and separately allocated8931 results complete.**
 Section8 records the later Portfolio allocation. The original design-stage statements in
 §§1,6–7 below remain historical; §8 supersedes their no-execution boundary prospectively.
 The [design intake](ACVC_FRESH_DENSE_REUSE_B01_DESIGN_INTAKE_20260910.md) records the decision;
@@ -372,3 +372,18 @@ Object-tier options: (a) bind the one allocated fit to fresh 8931/8932 with the 
 law; (b) substitute a retained or screened base; (c) alter panels or seek another law.
 Recommend/select (a), the only conforming realization of the Portfolio allocation.
 **Owner-delegated decision (unattended, 2026-09-03 instruction): (a).**
+
+## 11. Completed independent fit8931
+
+The §10 binding completed once at dfee6e8a3cecfde866da07fef60ffcdd319956b5.
+All512 training episodes,1024 updates and192 final evaluations are intact. F−C
++.0915279844J and F−dwell +.0638998669J are UP; dwell−C +.0276281175J is UP.
+Four F−C and eleven F−dwell adverse worlds remain. The new predictions are scored
+in the [8931 intake](ACVC_FRESH_DENSE_REUSE_B01_8931_INTAKE_20260910.md); prospective
+probabilities and the older result above remain unchanged.
+
+The169s conservative native charge passes270s. The inclusive90s support/360s total
+bill is not fully established because Monitor measured only part of its work; the
+known components and missing overhead are explicit in the new collection/intake.
+This does not rewrite the old8921 accounting deviation or the new valid primaries.
+The new numerical allocation is finished; no retry or successor is authorized.
