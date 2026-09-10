@@ -1,5 +1,31 @@
 # Direction degraded_incumbent_shadow_handover: degraded incumbent shadow handover
 
+## Tested arrival-bridge retention family parked — 2026-09-10
+
+Convergence's complete post-B08 decision parks the retained-A03 finite-training received-
+snapshot retention programme instantiated by HALF_RETAIN versus full learned REPLACE.
+REPLACE remains the development default and no successor is selected. This is a reversible
+direction-family boundary; it does not close the broader ordinary-source agenda or change
+DISH's Portfolio lifecycle, priority, recast count or UAV-entry state.
+
+The active pre-CAS receipt→standby control→learner path was the strongest support for the
+question. The contrary native observation is−6.5 mean service ticks with differences
+−15,0,−8,−3 and four added final invalid commits. The strongest counterweight to parking
+is the small inside±24 effect from one pair and lower mean energy. Full REPLACE/GRU may
+already retain useful information; stale history, finite co-adaptation and run-specific
+variation remain. No equivalence, stable inferiority or isolated memory cause is established.
+Zero ordinary TRAIN/EVAL CAS leaves source-origin and COPY−RETAIN/SHADOW−COPY unestimated.
+
+No next discriminator or allocation is selected. Reentry needs a concrete decision-relevant
+receipt-to-control question and native-service comparison, or an explicit use/research
+decision making independent-pair uncertainty about0.5 worth revisiting. This is not an
+instruction for continued screening or a proof, positive-prior, headroom or census gate.
+Prior B06/B07 and forecast-package stops and the finite B08 evidence remain intact.
+
+Authority: [complete Convergence response](pro_packets/20260910_post_b08_convergence/archive/RESPONSE.md)
+at `b0fe38d19c7b6245a4ce1d2c4b29c4e9a2fc6599`, applied as `PRO_FINAL / OWNER_DELEGATED`
+in [post-B08 conformance intake](DISH_POST_B08_CONVERGENCE_INTAKE_20260910.md).
+
 ## B08 arrival-bridge finite observation — 2026-09-10
 
 The one fresh matched pair on retained A03 gives HALF_RETAIN minus REPLACE final service

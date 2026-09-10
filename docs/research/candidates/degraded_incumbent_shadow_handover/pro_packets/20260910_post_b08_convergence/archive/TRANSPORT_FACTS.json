@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "request_id": "2026-09-10-dish-post-b08-convergence-01",
+  "workflow_node": "em_convergence",
+  "conversation_binding_key": "em:degraded_incumbent_shadow_handover:convergence",
+  "direction_id": "degraded_incumbent_shadow_handover",
+  "direction_ids": [
+    "degraded_incumbent_shadow_handover"
+  ],
+  "decision_authority": "pro_final",
+  "conversation_id": "6a9bec54-df00-83e8-9840-46440458f316",
+  "provider_url": "https://chatgpt.com/c/6a9bec54-df00-83e8-9840-46440458f316",
+  "tab_id": "2",
+  "tab_lifecycle": "CLOSED",
+  "user_message_id": "today-15:35|TASK.md@a96cfa7a52bf22e89bbd6d255eb1953a7af2fafb|current-round-user-node",
+  "assistant_message_id": "today-15:35|Worked for 9m 55s|current-round-assistant-node",
+  "visible_model": "6 Pro",
+  "underlying_model": "Latest",
+  "thinking_effort": "Pro, 5 of 5.",
+  "source_mode": "paste",
+  "prompt_sha256": "575ece553f295136b4dd6ffb44652b0cb347750026465c1bb62b46a73e96a26c",
+  "response_sha256": "603a8ce805f54d71e7738359adc6089ad5410fb4fe73808068ac7deda5c0bcbf",
+  "response_bytes": 358,
+  "response_characters": 357,
+  "send_click_count": 1,
+  "wait_status": "NATURAL_COMPLETION",
+  "observed_page_state": "Worked for 9m 55s; complete assistant response with two delivery links; no active generation control",
+  "identity_validation": "PASS",
+  "archive_status": "ARCHIVED",
+  "timestamps": {
+    "completed_at": "2026-09-10T22:47:35Z",
+    "captured_at": "2026-09-10T22:47:35Z",
+    "archived_at": "2026-09-10T22:47:35Z"
+  },
+  "github_delivery": {
+    "response_url": "https://github.com/CartmanFatass/My-paper-code/blob/b0fe38d19c7b6245a4ce1d2c4b29c4e9a2fc6599/docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260910_post_b08_convergence/archive/RESPONSE.md",
+    "delivery_comment_url": "https://github.com/CartmanFatass/My-paper-code/issues/4#issuecomment-5626441130",
+    "response_commit": "b0fe38d19c7b6245a4ce1d2c4b29c4e9a2fc6599"
+  },
+  "archive_paths": {
+    "manifest_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\degraded_incumbent_shadow_handover\\2026-09-10_dish_post_b08\\PACKET_MANIFEST.json",
+    "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\degraded_incumbent_shadow_handover\\2026-09-10_dish_post_b08\\PROMPT_BODY.md",
+    "response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\degraded_incumbent_shadow_handover\\2026-09-10_dish_post_b08\\RESPONSE.md",
+    "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\degraded_incumbent_shadow_handover\\2026-09-10_dish_post_b08\\TRANSPORT_FACTS.json",
+    "response_sha256": "603a8ce805f54d71e7738359adc6089ad5410fb4fe73808068ac7deda5c0bcbf"
+  },
+  "return_receipt": {
+    "required": true,
+    "source_thread_id": "01a08d61-df0e-7892-9beb-9d32b110453c",
+    "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+    "destination_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+    "status": "SENT",
+    "attempt_count": 1,
+    "message_key": "2026-09-10-dish-post-b08-convergence-01|degraded_incumbent_shadow_handover|6a9bec54-df00-83e8-9840-46440458f316|603a8ce805f54d71e7738359adc6089ad5410fb4fe73808068ac7deda5c0bcbf",
+    "retry_allowed": false,
+    "routing_mode": "PARENT_SESSION",
+    "delivery_mode": "bounded_single_attempt",
+    "return_control_after_attempt": true,
+    "archive_paths": {
+      "manifest_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\degraded_incumbent_shadow_handover\\2026-09-10_dish_post_b08\\PACKET_MANIFEST.json",
+      "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\degraded_incumbent_shadow_handover\\2026-09-10_dish_post_b08\\PROMPT_BODY.md",
+      "response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\degraded_incumbent_shadow_handover\\2026-09-10_dish_post_b08\\RESPONSE.md",
+      "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\degraded_incumbent_shadow_handover\\2026-09-10_dish_post_b08\\TRANSPORT_FACTS.json",
+      "response_sha256": "603a8ce805f54d71e7738359adc6089ad5410fb4fe73808068ac7deda5c0bcbf"
+    },
+    "response_sha256": "603a8ce805f54d71e7738359adc6089ad5410fb4fe73808068ac7deda5c0bcbf",
+    "staged_at": "2026-09-10T22:48:03Z",
+    "fallback_enabled": false,
+    "delivery_status": "accepted",
+    "updated_at": "2026-09-10T22:48:35Z",
+    "sent_at": "2026-09-10T22:48:35Z"
+  }
+}

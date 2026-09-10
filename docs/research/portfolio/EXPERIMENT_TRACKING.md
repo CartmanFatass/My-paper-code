@@ -8,17 +8,20 @@ fully preserved/closed through `28c15dd3e`: final T-G `+0.0001930852`, T-F
 `-0.0110732137`; 8701's DOWN did not recur, while T again trails F. RCLE seed23 is accepted and
 closed through `a84313d7e`: Delta_U `+0.3033203125`, but all eight fragmentation cells worsen,
 reference U remains better by `0.1162374`, and no stable or unqualified nonharm claim follows.
-SCDMP's complete direction response narrowly PARKS only the fixed opening t1-3->t4/full-MC/
-coefficient1 package and is closed through `6801a5cd8`, without successor or budget.
+SCDMP narrowly PARKS only the fixed opening t1-3->t4/full-MC/coefficient1 package through
+`6801a5cd8`. DISH parks only the tested arrival-bridge retention family through `c4449cfa2`. FOLR
+accepts one preliminary HALF_EVENT advantage, `+1.56546875` above MEI1, and is fully preserved and
+closed through `462bff4c1`; historical reversals and the one-instance ceiling remain. None has an
+authorized successor.
 
-Two direction chains currently advance: FOLR's single frozen HALF_EVENT arm is Monitor-owned at
-source `c6be208cd` after RETAIN completed at mean `1.68046875`; DISH's exact post-B08 Convergence
-request is Transport-owned through `cc67137bb`, asking the Pro node to choose narrow PARK or one
-justified bounded continuation. A designated recently active DM is preparing a zero-exposure
-`portfolio:cross_direction` request to fill the three current vacancies and bind fallbacks. CBSC
-and FRRIE still have no permitted executable next action; VNFC retains `SEND_UNCERTAIN` with no
-blind resend. Scheduling changes no lifecycle, priority, recast count or scientific meaning. No
-owner review is pending at this boundary.
+All five direction slots are vacant at this boundary. The exact zero-exposure
+`portfolio:cross_direction` request `2026-09-10-rolling-successor-allocation-portfolio-01` is
+Transport-owned through `9caa25608` and can select at most four ordered replacement chains and
+fallbacks. Its bytes predate FOLR closeout and DISH's applied PARK and therefore are not rewritten;
+a fifth-vacancy decision will use the same Portfolio node after this response is intaken so it can
+avoid duplicate selections. CBSC and FRRIE still have no permitted executable next action; VNFC
+retains `SEND_UNCERTAIN` with no blind resend. Scheduling changes no lifecycle, priority, recast
+count or scientific meaning. No owner review is pending at this boundary.
 
 ## 2026-09-10 research restart and Portfolio selection
 
