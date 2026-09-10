@@ -1,5 +1,15 @@
 # HMASD Research Portfolio
 
+## Current execution boundary — 2026-09-10
+
+OWNER_DIRECT “开始研究” resumes the loop after the complete 2026-09-09 synthesis batch. No
+direction currently has accepted native work, a live experiment or an accepted Pro generation,
+so the actual advancing-direction count is zero. Root assigned the relevant recent UCOPE DM to
+author the next `portfolio:cross_direction` question from current evidence and specifications.
+That preparation does not change lifecycle, priority, recast, result polarity or allocation and
+does not consume a direction slot. A conforming formed Portfolio Pro decision will select the next
+working set; Root will route and apply it without locally substituting scientific choices.
+
 ## 2026-09-10 control-plane migration
 
 [OWNER_DIRECT consolidation](decisions/2026-09-10-control-plane-consolidation.md) changes future
