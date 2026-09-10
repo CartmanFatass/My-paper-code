@@ -124,3 +124,10 @@ cost-conformance limitation. It consumes no C object and grants no second invoca
 retry, selected checkpoint, extra panel, successor or lifecycle decision. Remote
 reclamation status and exact absence verification are maintained in the collection
 receipt; the shared authoring checkout stays active for Root integration.
+
+
+Scoped remote closeout is complete after pushed preservation94a001969/7edbb1ce0:
+checkout and supervisor absent on disk, checkout unregistered, shared authoring and
+local complete archive retained. Final known DM support5.0119838s and partial measured
+Monitor1.082s give175.0939838s native-plus-measured subtotal. Missing Monitor overhead
+remains explicit; this subtotal is not an unconditional360s-compliance claim.

@@ -1,0 +1,8 @@
+Preservation commits:94a001969 and7edbb1ce0 (both pushed before removal).
+Root confirmed cleanup scope and retention of shared authoring/local full archive.
+Validated source dfee6e8a3cecfde866da07fef60ffcdd319956b5 and clean checkout, finished/exit0, no active tmux.
+Removed exact checkout /home/wu/hmasd-worktrees/acvc-fresh-dense-b01-8931-dfee6e8a3 using git worktree remove --force.
+Removed exact supervisor /home/wu/.agent-tasks/acvc-fresh-dense-b01-8931-dfee6e8a3.
+Direct command output: exact_remote_checkout_and_supervisor_absent_and_worktree_unregistered
+SSH exit_code=0
+charged_cleanup_client_wall_s=0.3929901

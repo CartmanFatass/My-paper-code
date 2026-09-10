@@ -1,6 +1,6 @@
 # ACVC fresh DENSE reuse B01 / 8931 — execution
 
-Date: 2026-09-10. One native study complete and accepted; scientific intake complete with an inclusive cost-accounting limitation; scoped remote cleanup pending.
+Date: 2026-09-10. One native study complete and accepted; scientific intake complete with an inclusive cost-accounting limitation; scoped remote cleanup complete.
 
 ## L0 and ownership
 
@@ -186,3 +186,22 @@ The [collection receipt](ACVC_FRESH_DENSE_REUSE_B01_8931_COLLECTION_20260910.jso
 holds the complete known accounting and exact cleanup inventory. Only this finished
 remote checkout/supervisor root will be reclaimed after preserving evidence; shared
 authoring and historical evidence stay retained.
+
+## Verified scoped closeout
+
+Preservation commits94a001969 and7edbb1ce0 were pushed before removal. Root accepted
+this cleanup scope while requiring retention of the shared authoring checkout and
+local full archive. DM validated both exact resolved remote paths, exact clean source,
+finished/exit0 supervisor and no active tmux. Git removed the completed remote worktree;
+only its supervisor root was then removed. The same command directly verified both
+paths absent on disk and the checkout absent from Git worktree registration, exit0.
+No shared, active or other-direction path was touched.
+
+Cleanup client wall .3929901s is charged as support. Final measured DM support is
+**5.0119838s**; adding the partial measured Monitor1.082s yields **6.0939838s measured
+support subtotal** and **175.0939838s native-plus-measured subtotal**. These do not
+silently include the estimated/unmeasured Monitor components; full90/360 conformance
+remains unestablished. All valid scientific facts and the old accounting deviation
+remain unchanged. The raw closeout witness and collection JSON contain exact paths.
+The local full archive/checkpoint and shared `codex/acvc` authoring checkout remain.
+The assigned batch is complete; Root integrates final commits and accepts reclamation.
