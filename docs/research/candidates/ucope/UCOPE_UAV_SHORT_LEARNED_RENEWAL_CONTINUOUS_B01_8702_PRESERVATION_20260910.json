@@ -1,0 +1,189 @@
+{
+  "handle": "ucope-uav-short-learned-renewal-continuous-b01-8702-20260910",
+  "source": "b6c75d5cf8e1781bb0e3c6824ab2dc9cb32dbce9",
+  "recorded_at": "2026-09-10T19:54:56.986617+00:00",
+  "status": "local recovery archive verified; remote source reference preserved; scoped removal pending Root acceptance",
+  "local_archive": {
+    "path": "C:/Projects/HMASD-worktrees/dm-ucope-native-return-prep-20260906/temp/directions/ucope/closeout/ucope-uav-short-learned-renewal-continuous-b01-8702-20260910/ucope-8702-recovery.zip",
+    "bytes": 978361,
+    "sha256": "cde5efe2eb347e35c6a7e5da0953339350206720551a7d4de631444cb77ed61f",
+    "members": {
+      "analyze_8702_partial.py": {
+        "bytes": 9818,
+        "sha256": "0009939400a5618b1cc7d8dd3ce9653a3c618112d45fb1f5d089accbb82eb813"
+      },
+      "author_card_8702.py": {
+        "bytes": 25345,
+        "sha256": "88b29b24bb485ecdf81691e87ca0ac4251e41513fca570554e3ce50ea38b6038"
+      },
+      "check_8702.py": {
+        "bytes": 2143,
+        "sha256": "18607b53664a20847155d42c85d3a52ffd864c779d66ef4787f1b87a792b1b19"
+      },
+      "collect_8702.py": {
+        "bytes": 3419,
+        "sha256": "e1a993c1a3137059076d24e337c3c9c92041086e318cf6c8231b53061e7c7ec3"
+      },
+      "collection/COLLECTION.json": {
+        "bytes": 5547,
+        "sha256": "753e6b1e579153ca6f30e7503e735fc47f870230b15944eeadeda0562bf8631e"
+      },
+      "collection/monitor-terminal.txt": {
+        "bytes": 599,
+        "sha256": "9cbf27c624b7a928089e34acdf8aa509127c32506e024d9c67f6f6c27549a28a"
+      },
+      "collection/native/episodes.jsonl": {
+        "bytes": 1367323,
+        "sha256": "834eb8591faa78d63e0ffeae7053277ca5e5bedc75fbde6bc739c01888cd0761"
+      },
+      "collection/native/rollouts.jsonl": {
+        "bytes": 781572,
+        "sha256": "cd044b74411e74892b7490ffc238893d02e401c75fa7fb7add7704445fcc8df9"
+      },
+      "collection/native/summary.json": {
+        "bytes": 28471,
+        "sha256": "0530466fdfe3d097d324fd7b04de544451689b19a16ba4f3409d323cafa823e0"
+      },
+      "collection/remote-readback.json": {
+        "bytes": 3174,
+        "sha256": "b45fb8492f44a995205d7c4d35eebf1e5a33bf6be7aff2286d193016f14121d9"
+      },
+      "collection/supervisor/exit_code": {
+        "bytes": 2,
+        "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+      },
+      "collection/supervisor/pid": {
+        "bytes": 8,
+        "sha256": "c67808c9d1ce63ed8907da98ec8cd87999aafd4f2c306b4ae0f5347798a653df"
+      },
+      "collection/supervisor/resource_admission.json": {
+        "bytes": 504,
+        "sha256": "35f08cee3193d1effd7aa750b10376611663a49947855c2731858dcd0c3ac17a"
+      },
+      "collection/supervisor/runner.sh": {
+        "bytes": 1454,
+        "sha256": "286b822f1ae3db412326d536b50cbd2760c8e54500b9d0632281e47bba2f6135"
+      },
+      "collection/supervisor/start_time": {
+        "bytes": 11,
+        "sha256": "39d900e1146dac653280ace37f11373169bb709cb486b4fad384cdac4932cdda"
+      },
+      "collection/supervisor/status": {
+        "bytes": 7,
+        "sha256": "6da5b18878e110928643ebcc38dbb7552cf3a296eea56493e23edc2b93eecff8"
+      },
+      "collection/supervisor/task.log": {
+        "bytes": 3098,
+        "sha256": "8e99ac680ddad7a4f3f09c33029b465e02255dee126118c6b29f113f1cfa07f6"
+      },
+      "LAUNCH_READBACK.json": {
+        "bytes": 1006,
+        "sha256": "e98012d5b367021953d6bc8eb2f1eccdf825f89d296c6710bfc52ea965bb8cc3"
+      },
+      "observe_launch_8702.py": {
+        "bytes": 1029,
+        "sha256": "ade757f8f99e4d197d0cf20c21ee39fe2bd02689e2a89d4def35001d0ce7e5ba"
+      },
+      "OWNER_PUBLICATION.json": {
+        "bytes": 553,
+        "sha256": "5a4b8794eede91af52258a34921dd685beac50c6b441f04a6f5df3720c8fda31"
+      },
+      "preparation/focused-check-2.sh": {
+        "bytes": 1568,
+        "sha256": "cc656a9192e366568a1629a3c76948b8554b8b05c91818792097aecdae63b9c6"
+      },
+      "preparation/focused-check-attempt1.json": {
+        "bytes": 1829,
+        "sha256": "7f5269433272997a2b36774702aa73af16f0147fdd9f3d3fc5aff637ad3e50e7"
+      },
+      "preparation/focused-check.json": {
+        "bytes": 850,
+        "sha256": "e1472e94c747641535ab54d29dcbc9539b0e7f2bf65866e7c3a8e78047e641f3"
+      },
+      "preparation/focused-check.sh": {
+        "bytes": 1524,
+        "sha256": "ae7b54283b8b09c86d48797374453d83f019cbd396b3d8fa62881ee4cd647310"
+      },
+      "preparation/FOCUSED_CHECK_ATTEMPT2.json": {
+        "bytes": 763,
+        "sha256": "d4668937703c3cf68c72ff96a213494e6365da8c877d7c07178704b7557e81e9"
+      },
+      "preparation/PREPARATION.json": {
+        "bytes": 5323,
+        "sha256": "e33b9e355dedd3ac1927477454add752c2af43747c6b14ab4a3499cbc338f3c8"
+      },
+      "preparation/prepare-remote.sh": {
+        "bytes": 1482,
+        "sha256": "ff74f75d7d81949e10fe7d760c182e6bb3635ec4d70f624ec5d2765c5e8ed97e"
+      },
+      "preparation/source-facts.json": {
+        "bytes": 2473,
+        "sha256": "8de042b669b080776e56c74dd4dbf09e06c31269901e7b5e651e13d4ae47cfd3"
+      },
+      "preparation/submit-command.txt": {
+        "bytes": 301,
+        "sha256": "d498c8b949eba0599afe554525bbc37f20951c0db93a3cfc5740e8b2d1d4394b"
+      },
+      "preparation/ucope-learned-8702-source.pack": {
+        "bytes": 400083,
+        "sha256": "029d1f6d4db26c222f8eff20e730361d87385e76afe7e36661199bb27faba444"
+      },
+      "preparation/ucope-uav-short-learned-renewal-continuous-b01-8702-20260910.sh": {
+        "bytes": 552,
+        "sha256": "151dd01a280e797721fab7e7ec034c892a9d74d4054c041215d44bb654778fc9"
+      },
+      "prepare_8702.py": {
+        "bytes": 6735,
+        "sha256": "b6dba4f5ddea96835c8743c52a1f6746325703509665f884d4d1c414de66fd26"
+      },
+      "preserve_8702.py": {
+        "bytes": 4097,
+        "sha256": "1499a81b3bca34834a5acea26e28780d89e4aac9f52d25e9315491877b0cfe63"
+      },
+      "publish_card_8702.py": {
+        "bytes": 5102,
+        "sha256": "d3523614508dea961c8a58c702077fff503ab8755ecdd24af6e31e8f09a13f91"
+      },
+      "record_launch_8702.py": {
+        "bytes": 6303,
+        "sha256": "87e5b4149092644fa501ec2dacf2d60060fdb35ee2638275bd405e2f5f504b1d"
+      },
+      "SUBMISSION.json": {
+        "bytes": 1198,
+        "sha256": "54813974cb7556e4e11be855afeb0bbf346bb2a58aab3fb6ef3f4a670ab71fa6"
+      },
+      "submit_8702.py": {
+        "bytes": 1163,
+        "sha256": "8526c5d56d69af67131fbe5dbe344eb7dd606e29a53a362840b0e58c765aae11"
+      },
+      "write_partial_intake_8702.py": {
+        "bytes": 17931,
+        "sha256": "b87bb06e940ef355ec924bb48e515d478297f245038ffc839800421221bc94ab"
+      }
+    },
+    "member_count": 38,
+    "all_entries_read_back_and_hash_verified": true
+  },
+  "remote_source_ref": {
+    "node": "hmasd-wsl-node",
+    "ref": "refs/hmasd-recovery/ucope-8702-20260910",
+    "source": "b6c75d5cf8e1781bb0e3c6824ab2dc9cb32dbce9",
+    "receipt": {
+      "returncode": 0,
+      "stdout": "b6c75d5cf8e1781bb0e3c6824ab2dc9cb32dbce9\n",
+      "stderr": "",
+      "wall_seconds": 0.6096428000018932
+    }
+  },
+  "cleanup_inventory": [
+    "/home/wu/hmasd-worktrees/ucope-uav-short-learned-renewal-continuous-b01-8702-20260910",
+    "/home/wu/.agent-tasks/ucope-uav-short-learned-renewal-continuous-b01-8702-20260910",
+    "/home/wu/hmasd-inputs/ucope-uav-short-learned-renewal-continuous-b01-8702-20260910.sh",
+    "/home/wu/hmasd-inputs/ucope-learned-8702-source.pack"
+  ],
+  "preservation_boundary": "All10 collected native/supervisor files, source pack, exact wrapper, launch/check/analysis scripts and receipts are archived; durable scientific interpretation and future reporting repair are in Git. No final fitted weights were produced. Original local evidence remains in place.",
+  "historical_error": "INCOMPLETE with unlocalized step-interface ValueError; no comparison or scientific polarity; no attempt to reconstruct missing frame/weights",
+  "next_cleanup_owner": "DM after Root integration/preservation acceptance, exact four paths only",
+  "no_new_scientific_invocations": true,
+  "whole_preservation_wall_seconds": 0.7643548000050941
+}

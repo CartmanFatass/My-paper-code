@@ -324,3 +324,26 @@ future stack traces through the existing supervisor log if another invocation
 is independently selected; it does not recover the missing8702 traceback or
 fix the unknown dimension failure. No scope budget or scientific meaning was
 changed, and no new native allocation follows.
+
+### Verified preservation before scoped removal
+
+Partial intake and the3-line reporting repair are published at
+**58bc8d91ebd1b61d67e151a3dc75d8f0ae723b2c**. The local recovery archive is
+`temp/directions/ucope/closeout/ucope-uav-short-learned-renewal-continuous-b01-8702-20260910/ucope-8702-recovery.zip`,
+**978361 bytes**, SHA256
+`cde5efe2eb347e35c6a7e5da0953339350206720551a7d4de631444cb77ed61f`.
+All38 entries were read back and compared by byte count/hash with the original
+local files. They include every collected native/supervisor file, original
+source pack/wrapper and launch/check/analysis scripts/receipts. Original local
+evidence remains. Durable interpretation and prospective source changes are
+in Git; no final fitted weight existed to preserve.
+
+Remote source reference `refs/hmasd-recovery/ucope-8702-20260910` was created
+and read back at exact **b6c75d5cf8e1781bb0e3c6824ab2dc9cb32dbce9**. Archive
+and reference creation took0.7685452000005171s internally,1.0416371s outer tool.
+The [preservation record](UCOPE_UAV_SHORT_LEARNED_RENEWAL_CONTINUOUS_B01_8702_PRESERVATION_20260910.json)
+lists every archive member and the exact four completed remote targets:
+this execution cwd, supervisor directory, staged wrapper and source pack.
+Root has the accepted result/source commit and preservation facts for
+integration/acceptance. DM retains scoped removal ownership; no unrelated
+checkout, evidence root, branch or scratch is a cleanup target.

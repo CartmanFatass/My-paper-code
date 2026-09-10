@@ -133,3 +133,7 @@ new scientific allocation. The exact failing operation remains unresolved.
 The [Chinese brief](../../portfolio/owner/briefs/ucope/2026-09-10_learned-renewal-continuous-8702-incomplete.md)
 and [full partial summary](UCOPE_UAV_SHORT_LEARNED_RENEWAL_CONTINUOUS_B01_8702_RESULT_SUMMARY_20260910.json)
 retain the bounded reading.
+
+Verified recovery: the [preservation record](UCOPE_UAV_SHORT_LEARNED_RENEWAL_CONTINUOUS_B01_8702_PRESERVATION_20260910.json)
+retains the38-entry local archive, its SHA256 and the exact remote source
+reference. Original local partial evidence remains alongside the archive.
