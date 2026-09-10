@@ -250,3 +250,29 @@ added to shared cost rather than hidden; the selected300s remains. This leaves a
 in-process common work before the60s follow-up reserve. The same returned budget is never
 reset by a new script. Exact H/scratch and full aggregate CPU remain unmeasured; no exact
 whole-resource-cost claim follows from the conservative wall charge.
+
+
+## 9. Accepted launch and observation handover
+
+The exact committed command was submitted once and accepted at2026-09-10T21:18:17Z.
+[Launch receipt](evidence/2026-09-10-b08-launch-receipt.json) records supervisor acceptance;
+[adjacent memory admission](evidence/2026-09-10-b08-memory-admission.json) passed on wsl_4070
+at21:18:16.757Z with physical/effective available15,631,826,944 bytes each, above4GiB.
+Preflight whole-process wall was0.04s. No other scientific invocation was submitted.
+Known prelaunch charge including final checks/publication/submission/admission is209.4782804s,
+within the conservative215s runner input; remaining exposure and costs await terminal evidence.
+
+MONITOR_ADD was delivered directly to the live primary-config endpoint
+`01a087e5-2044-7301-abb6-7a1709a98197`; Root then confirmed actual Monitor adoption of the same
+handle/source/cwd/root. Dispatch and adoption are separate recorded facts. The Monitor was asked
+to retain observation-command wall (including explicit allocation for batched reads), observe
+only the accepted handle and send terminal facts to Root. DM has stopped routine polling.
+
+Return boundary: **accepted running invocation, Monitor adopted, pending DM collection**.
+There is no native service result or scientific polarity at this handover. Root resumes this
+same DM on the routed terminal fact. DM then collects full results/checkpoints/timing/admission,
+reconciles the complete shared/exclusive charge, writes E0/intake/Chinese brief, scores the
+prediction and selects or escalates only the next decision actually supported by the outcome.
+The remote checkout and supervisor/output roots remain live; no cleanup is performed on them.
+Both focused-test invocation directories were removed. Shared local authoring checkout remains
+owned by this direction for collection/intake; Root owns main integration and later reclamation.
