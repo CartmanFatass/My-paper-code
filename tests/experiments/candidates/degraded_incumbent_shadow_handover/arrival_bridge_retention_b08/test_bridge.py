@@ -215,5 +215,5 @@ def test_primary_branches_and_separate_caps(delta,positive,band,negative):
     result={"status":"COMPLETE","arms":arms}
     study.allocate_cost(result,0,20,now=390)
     assert result["budget_exhausted"]  # Shared310 cannot borrow unused arm allowance.
-    assert study.shared_deadline({"arms":{}},0,20,now=30)==190
+    assert study.shared_deadline({"arms":{}},0,20,now=30)==220
     assert study.planned_cost()["per_arm"]["whole_arm_cap_seconds"]==1050

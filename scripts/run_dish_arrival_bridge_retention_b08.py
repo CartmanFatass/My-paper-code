@@ -33,8 +33,8 @@ def main():
     parser.add_argument("--launch-sha", required=True)
     parser.add_argument("--prior-shared-seconds", type=float, required=True)
     args = parser.parse_args()
-    if not 0 <= args.prior_shared_seconds < 210:
-        parser.error("Prior shared work must leave the selected 90-second external reserve")
+    if not 0 <= args.prior_shared_seconds < 240:
+        parser.error("Prior shared work must leave the selected 60-second external reserve")
     args.output.mkdir(parents=True)
     result = {"object": "DISH-ARRIVAL-BRIDGE-RETENTION-B08", "seed": args.seed,
               "launch_sha": args.launch_sha, "status": "INCOMPLETE", "arms": {},
@@ -50,7 +50,7 @@ def main():
         signal.setitimer(signal.ITIMER_REAL, max(0.001, deadline - time.perf_counter()))
 
     signal.signal(signal.SIGALRM, timeout)
-    set_deadline(STARTED + 300 - args.prior_shared_seconds - 90)
+    set_deadline(STARTED + 300 - args.prior_shared_seconds - 60)
     study = None
     try:
         from experiments.candidates.degraded_incumbent_shadow_handover.arrival_bridge_retention_b08 import study
@@ -63,8 +63,8 @@ def main():
     finally:
         # Keep a terminating alarm through publication, flush and interpreter closure.
         signal.signal(signal.SIGALRM, signal.SIG_DFL)
-        deadline = (study.shared_deadline(result, STARTED, args.prior_shared_seconds, reserve=80)
-                    if study is not None else STARTED + 300 - args.prior_shared_seconds - 80)
+        deadline = (study.shared_deadline(result, STARTED, args.prior_shared_seconds, reserve=50)
+                    if study is not None else STARTED + 300 - args.prior_shared_seconds - 50)
         set_deadline(deadline)
     if study is not None:
         result["primary"] = study.reduce_pair(result["arms"])
