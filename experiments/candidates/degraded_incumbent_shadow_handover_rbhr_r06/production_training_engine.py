@@ -27,6 +27,7 @@ class ExactPolicyGraph(nn.Module):
 
     def __init__(self) -> None:
         super().__init__()
+        self.arrival_bridge_mode = "REPLACE"
         self.encoder1 = nn.Linear(54, 128)
         self.encoder2 = nn.Linear(128, 128)
         self.wz = nn.Linear(128, 128); self.uz = nn.Linear(128, 128, bias=False)
@@ -99,6 +100,8 @@ class ExactPolicyGraph(nn.Module):
             bridged = torch.tanh(
                 self.snapshot_bridge(torch.cat((standby, encoded_snapshot), dim=-1))
             )
+            if self.arrival_bridge_mode == "HALF_RETAIN":
+                bridged = 0.5 * standby + 0.5 * bridged
             edited = hidden.clone()
             edited[lane, standby_index] = torch.where(active[:, None], bridged, standby)
             hidden = edited
@@ -545,6 +548,7 @@ def run_full_4096_dry_update(
         if resume_checkpoint_bytes is not None:
             restored_input = torch.load(io.BytesIO(bytes(resume_checkpoint_bytes)), map_location="cpu", weights_only=False)
             model.load_state_dict(restored_input["model"])
+            model.arrival_bridge_mode = restored_input.get("arrival_bridge_mode", "REPLACE")
             optimizer.load_state_dict(restored_input["optimizer"])
             previous_update = int(restored_input["update"])
         initial_hidden = data["initial_hidden"]
@@ -654,6 +658,8 @@ def run_full_4096_dry_update(
             "welford": {"actor": actor_welford, "snapshot": snapshot_welford, "critic": critic_welford},
             "update": previous_update + 1, "evaluation_checkpoint": previous_update + 1 == 1_024,
         }
+        if restored_input is not None and "arrival_bridge_mode" in restored_input:
+            checkpoint["arrival_bridge_mode"] = model.arrival_bridge_mode
         stream = io.BytesIO(); torch.save(checkpoint, stream); checkpoint_bytes = stream.getvalue()
         resume_equal = bool(checkpoint_bytes) and checkpoint["update"] == previous_update + 1
         checkpoint_sha256 = hashlib.sha256(checkpoint_bytes).hexdigest()

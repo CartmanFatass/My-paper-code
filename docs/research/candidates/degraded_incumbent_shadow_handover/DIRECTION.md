@@ -1,5 +1,21 @@
 # Direction degraded_incumbent_shadow_handover: degraded incumbent shadow handover
 
+## Accepted arrival-bridge question — 2026-09-10
+
+Convergence selected one narrow B08 performance pair: ordinary receipt replaces the standby
+shadow with the full learned bridge in REPLACE, versus fixed half previous state plus half
+bridge in HALF_RETAIN, followed by unchanged GRU/control/replay. Both are newly trained with
+equal exposure on retained A03; the next discriminator is complete final native service and
+costs. This is an untested finite-learning hypothesis, not a diagnosed overwrite defect.
+Strongest support is a receipt-to-standby-action and learner path active before CAS; historical
+masked samples12321/12309 establish exposure only. Strongest alternative is useful retention
+already learned by full bridge/GRU, while the fixed skip may preserve staleness. The one-pair
+claim ceiling excludes memory necessity, isolated source value and formal UAV validation.
+P62/P67 and B06/B07 adverse readings remain; no old treatment, recast or Portfolio change follows.
+Authority/evidence: [complete Pro response](pro_packets/20260910_arrival_bridge_retention/archive/RESPONSE.md),
+[conformance intake §8](DISH_ARRIVAL_BRIDGE_RETENTION_REENTRY_INTAKE_20260910.md#8-complete-convergence-intake-and-application--2026-09-10),
+[B08 card](DISH_ARRIVAL_BRIDGE_RETENTION_B08_SCIENCE_CARD_20260910.md).
+
 ## Research organization — 2026-09-04
 
 This source belongs to route **N3 — 状态保留、重建与迁移**, in the **成员变化后的恢复** family

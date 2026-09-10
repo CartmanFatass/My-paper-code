@@ -251,3 +251,60 @@ this DM against the fixed question/current specifications. No model, native proc
 root, test scratch, monitor registration or Pro provider Send has been created by preparation.
 The shared checkout remains for its scoped response and subsequent intake; Root owns later
 integration/reclamation. No historical scratch-cleanup rejection is retried or bypassed.
+
+## 8. Complete Convergence intake and application — 2026-09-10
+
+**Direction decision: execute option (a), one narrow HALF_RETAIN versus newly trained REPLACE
+B/EXPLORE comparison.** Provenance is `PRO_FINAL / OWNER_DELEGATED`, under AGENTS §§2,4;
+this opens only the arrival-bridge ordinary-service question. It is neither a recast nor a
+Portfolio, C, UAV, source-fork or historical treatment decision. P62/P67's actual no-successor
+boundaries and B06/B07's negative readings remain historical facts, not replenished budgets.
+
+I read the complete 180-line response directly from immutable commit
+`9e99e48dca9fe34b25c11cb7814ba4d54e83a2b5` (36,690 bytes,
+SHA256 `9c546ba09f072f0cbb04c0c595ff95b2c631f01f8ed4198a357031587726a991`).
+Its only changed path is the authorized `archive/RESPONSE.md`, descending directly from the
+published handoff. The fixed TASK is `8d5ca0162f0325fe45e5bb13da1ce48ce2ec1fdc`;
+Issue4 delivery comment5625186169 names that TASK and response. All thirteen input path/SHA/byte
+mappings matched the publication record. Current primary methods at
+`1f63c0168f7535ef1af8fc03c3db764ff2eb9455` are unchanged on the relevant AGENTS, evidence,
+engineering, Root-operations and compute surfaces relative to the fixed method revision.
+[Response readback](pro_packets/20260910_arrival_bridge_retention/RESPONSE_READBACK.json)
+retains these checks; `archive/transport/` retains the original four Transport files.
+Transport's 362-byte chat response is a delivery receipt, not the scientific answer.
+One Send and natural completion were reported; no author Send or resend occurred.
+
+The rule applied verbatim from AGENTS §2 is: “A complete archived Pro response that decides the
+posed question at its declared evidence class and within current owner instructions and applicable
+specifications is final for its node.” The response selects the posed finite learning question,
+keeps same-information REPLACE, gives a nonzero learner exposure and primary, and uses the exact
+submitted new cap. Its reset/mask/promotion/gradient and checkpoint clarifications protect the
+selected recurrent comparison; they require no stronger evidence class, source-prevalence A,
+exact upper, policy search or specification exception. No concrete conflict remains.
+
+The accepted source chain is packet receipt → standby shadow → ordinary action and prediction →
+native consequence → recorded rollout and existing private labels → PPO/AdamW → final service.
+Historical masks prove this path was used, not that replacement is harmful. The strongest support
+for purchasing B is a concrete active control and learning path. The strongest contradiction is
+that the full bridge/GRU can already retain useful information and the blend may retain staleness.
+The earlier scientific-reading assumptions remain current: recurrent state need not be sufficient,
+fixed-state displacement is not learned return, and model expressiveness does not establish
+finite-training equivalence. The pinned local literature supplies no evidence for factor0.5.
+
+### Decisions this intake produces
+
+1. **Direction:** (a) open the specified one-pair arrival-bridge B; (b) retain no successor.
+   Pro recommends and selects (a); execute (a), with the close call and strong null retained.
+   Trace existing owner item `20260910-dish-001` as applied, without inventing an owner reply.
+2. **Object:** (a) freeze B08 with fresh seed137 and the new B08 master family, unchanged selected
+   exposure and fixed0.5; (b) change exposure, coefficient, comparator or conditions; (c) wait for
+   a proxy diagnosis. Recommend/select (a). **Owner-delegated decision (unattended,
+   2026-09-03 instruction): (a).** The [B08 card](DISH_ARRIVAL_BRIDGE_RETENTION_B08_SCIENCE_CARD_20260910.md)
+   records exact inputs, predictions, cost, branches and L0 before implementation and any output.
+3. **Technical acceptance:** still pending the actual source diff, focused checks and independent
+   high-risk review. No scientific launch or empirical effect is inferred from this Pro intake.
+
+Main/direction all-age owner reviews were checked at receipt and card freeze; no relevant pending
+reply was returned. Owner prediction: not taken (unattended). Record the new card P2 item and both
+decisions in the existing audit. The next discriminator is B08's complete final service contrast
+and native costs under its one-pair allowance; no automatic replication follows any result.

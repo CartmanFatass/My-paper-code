@@ -163,6 +163,7 @@ def _load_policy(checkpoint_bytes: bytes | None) -> ExactPolicyGraph:
         if set(("model", "optimizer", "welford", "update")) - set(value):
             raise RecurrentTrainerError("persistent checkpoint schema differs")
         model.load_state_dict(value["model"])
+        model.arrival_bridge_mode = value.get("arrival_bridge_mode", "REPLACE")
     model.eval()
     return model
 
