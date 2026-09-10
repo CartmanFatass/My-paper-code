@@ -7,7 +7,7 @@
 
 基线来自 HMASD `1385b56b6a0761d4064dcafbce0c66c590ecc5a2`：
 Astra/medium CM 默认直接实现，语义改动由 Astra/high 独立 reviewer 审查。
-五项交接是当前 L0；强制使用 Terra/high implementer 是委派场景的实验处理，
+五项交接是当前 L0；委派实现职责是委派场景的实验处理，模型组合由用户选择，Terra/high仅为默认建议，
 不是当前生产默认。来源路径、角色哈希和适配说明见 [_host/BASELINE.json](_host/BASELINE.json)。
 
 独立目录中新打开的顶层 session 就是 CM；不要再创建 CM 子代理或第二个 CM CLI。

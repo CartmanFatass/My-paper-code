@@ -67,7 +67,8 @@ def report(directory, state, status):
     semantic = judgement.get("semantic_review")
     semantic = semantic if isinstance(semantic, dict) else {}
     semantic_result = semantic.get("semantic_passed")
-    if semantic_result is False and semantic.get("policy_adherence") == "insufficient_evidence":
+    if (semantic_result is False and semantic.get("policy_adherence") == "insufficient_evidence"
+            and not (directory / "assessment/input.txt").is_file()):
         semantic_result = None
     rows = "\n".join(f"- `{task}`：{state['task_metadata'][task]['difficulty']}（预估）" for task in state["tasks"])
     content = (f"# CM benchmark {state['id']}\n\n自动收尾状态：{status}\n\n抽题 seed：`{state['seed']}`。本轮两题：\n\n{rows}\n\n"

@@ -141,6 +141,13 @@ class ProtocolTests(unittest.TestCase):
             with patch.object(runtime.subprocess, "run", return_value=fake):
                 checked = runtime.judge(directory, state, BASE)
             self.assertEqual(checked["full_run_passed"], wanted)
+        materials.write(directory / "assessment/input.txt", "complete closed evidence")
+        for semantic, wanted in ((False, False), (None, None), (True, None)):
+            runner.save(directory / "assessment/report.json", {"semantic_passed": semantic,
+                "policy_adherence": "insufficient_evidence", "native_workflow": "insufficient_evidence"})
+            with patch.object(runtime.subprocess, "run", return_value=fake):
+                checked = runtime.judge(directory, state, BASE)
+            self.assertEqual(checked["full_run_passed"], wanted)
         with self.assertRaises(ValueError):
             runner.checkpoint(argparse.Namespace(boundary="accepted", note=note), directory, state)
         # Tamper only with calibration snapshot evidence, never a real submitted run.
@@ -234,6 +241,9 @@ class ProtocolTests(unittest.TestCase):
         report = (self.root / "REPORT.md").read_text(encoding="utf-8")
         self.assertIn("完整判定：未完成/无法确认", report)
         self.assertIn("独立代码语义：未完成/无法确认", report)
+        materials.write(self.root / "assessment/input.txt", "complete closed evidence")
+        completion.report(self.root, state, "finished")
+        self.assertIn("独立代码语义：未通过", (self.root / "REPORT.md").read_text(encoding="utf-8"))
 
     def test_existing_session_begin_does_not_launch_a_cm(self):
         output = io.StringIO()

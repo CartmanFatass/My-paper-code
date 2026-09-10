@@ -1,7 +1,7 @@
 {
   "type": "object",
   "properties": {
-    "semantic_passed": {"type": "boolean"},
+    "semantic_passed": {"type": ["boolean", "null"]},
     "policy_adherence": {"type": "string", "enum": ["conforming", "deviation", "insufficient_evidence"]},
     "native_workflow": {"type": "string", "enum": ["conforming", "deviation", "insufficient_evidence"]},
     "spec_assessment": {"type": "string"},

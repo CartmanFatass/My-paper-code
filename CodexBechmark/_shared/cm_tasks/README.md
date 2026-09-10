@@ -7,7 +7,7 @@
 入口速查见 [一句话启动](QUICKSTART.md)。两个并列场景：
 
 - [直接实现](../../cm_direct_review/README.md)：当前 HMASD 的 Astra/medium CM + Astra/high 独立 reviewer 基线。
-- [委派与复用](../../cm_delegation_granularity/README.md)：固定 CM/reviewer，实际委派给 Terra/high，比较 L0–L3 和 fresh/reuse。
+- [委派与复用](../../cm_delegation_granularity/README.md)：用户选择 CM/implementer/reviewer 组合，比较 L0–L3 和 fresh/reuse；默认模型仅作起始建议。
 
 每轮从五个经典任务中抽一题，再从三个非范例中抽一题；默认两题预估难度不同。
 seed 与题库字节冻结。任务依据当前 HMASD 代码边界重新构造，都是明确标注的 synthetic

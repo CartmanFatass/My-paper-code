@@ -1,7 +1,7 @@
 # CM 委派说明颗粒度与复用
 
-固定 Astra/medium CM、Terra/high implementer、Astra/high 独立 reviewer，
-测试交接详细度和局部范例复用。L0 是当前项目五项交接；强制 Terra 委派是实验处理。
+模型组合由用户选择；默认建议 Astra/medium CM、Terra/high implementer、Astra/high 独立 reviewer。
+测试交接详细度和局部范例复用。L0 是当前项目五项交接；委派职责是实验处理，模型不是固定限制。
 
 在 `C:/Projects/CodexBechmark/cm_delegation_granularity/workspace` 打开新 session，说：
 
