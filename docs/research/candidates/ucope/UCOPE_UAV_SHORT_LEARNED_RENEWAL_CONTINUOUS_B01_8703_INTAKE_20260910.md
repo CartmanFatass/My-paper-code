@@ -119,3 +119,68 @@ with the Chinese decision packet, exact evidence quotes, alternatives and
 consequences. They record the actual selected option/card, not a launch or an
 owner reply. Selection audit row [29](../../portfolio/audit/2026-09-10.md#L29)
 carries close-call. No response is required to continue the existing assignment.
+
+
+### Source, review and focused check acceptance
+
+Card/selection **0c88c81b14adeda97b9543daaf4e2bdee1d5d6f8** was pushed before source edits.
+Exact source **c40a4cd66cacc892d13afd9b277407b6505b8742** adds only the 8703 card constant/branch and
+CLI seed, plus the existing routing test's new valid/invalid cases. Production
+is **+4/−2 lines**; tests **+5/−4**. Scope§4 additions: none. No learner,
+policy, reward/information, numerical, evaluation, cap or A01 path changed.
+All three changed files parsed; focused diff/whitespace checks passed.
+
+The existing independent reviewer returned **no material finding** and no
+additional probe gap. It traced the master into actual model/head initialization,
+constructor/train/evaluation resets and private T/F/G/checkpoint streams,
+confirmed B keeps failure_location=False and old routes/card bindings remain
+unchanged. It ran no tests or scientific calls. DM accepts the concrete finding
+within that source-review limit; prior semantic review remains applicable.
+
+The exact committed source was staged remotely, using a 103866-byte source pack
+SHA256 `4682e945ce0c3b54ea48496ac484b70584166bf9a6a671d3f33dabb7b9eb9317`
+from retained b1 to c40a4cd66. All 14 declared source/test hashes, wrapper/pack
+hashes, source HEAD and clean tracked state matched. The staged 552-byte wrapper
+SHA256 is `ceb128861c7f998d0a5432c7ddae183bf325273537e8e869caabb105b009c45d`.
+It passed Bash syntax checking. Local declared source surfaces still match
+the committed revision; intervening documentation does not change that surface.
+
+One focused routing test initially failed during pytest tmp_path setup because
+the scratch parent did not exist. This occurred before the test body or any
+model/RNG/native call; its receipt records FileNotFoundError and confirmed the
+owned scratch was absent. DM created only the intended parent in the exact
+execution checkout and repeated the same test. No source, recipe or SHA changed.
+The corrected test **passed: 1 passed in 0.82s**. Whole pytest processes took
+1.0536312749609351s failed /1.0666544620180503s passed, totaling
+**2.1202857369789854s** within the 15s new-check
+budget. Cumulative directory test time is **50.37948836694706s**
+within 300s. The test's owned scratch was removed by its Bash trap and absence
+confirmed; bytecode/cache output was disabled for this check. No full learner
+smoke or scientific probe was added. Both outcomes remain in launch facts.
+
+Measured outer support commands through this preparation total **6.816054s**;
+their subprocess timings are nested, not added again. All further required
+support stays inside 300s and the 5400s complete budget. This technical setup
+failure does not change scientific polarity or the earlier native crash record.
+
+### Exact prepared command and decision
+
+```text
+/usr/local/bin/agent-task run ucope-uav-short-learned-renewal-continuous-b01-8703-20260910 '/usr/bin/time -f whole_wall_seconds=%e,peak_rss_kib=%M /usr/bin/timeout --signal=KILL 5100s /bin/bash --noprofile --norc /home/wu/hmasd-inputs/ucope-uav-short-learned-renewal-continuous-b01-8703-20260910.sh'
+```
+
+The wrapper changes to `/home/wu/hmasd-worktrees/ucope-uav-short-learned-renewal-continuous-b01-8703-20260910` and joins the executing node's canonical
+`admit-memory` by `&&` to the existing committed runner with learned selector,
+`--seed 8703` and its own scientific output root. Physical/effective memory
+must each be ≥4GiB immediately before root/RNG/model creation. No actual admission
+or accepted process is claimed at this technical acceptance boundary.
+
+Options: (a) accept the narrowly verified binding and execute the already
+selected one-invocation allowance when fresh admission passes; (b) repair a
+remaining concrete defect; (c) expand checks. Recommend/select(a): the setup
+defect is resolved and no remaining source/measurement gap is identified.
+**Owner-delegated decision (unattended, 2026-09-03 instruction): (a).** This is
+object-tier technical acceptance, owner flag none; the earlier scientific
+selection retains its close-call flag. Main owner reviews again returned `[]`.
+The [launch facts](UCOPE_UAV_SHORT_LEARNED_RENEWAL_CONTINUOUS_B01_8703_LAUNCH_FACTS_20260910.json) retain direct receipts.
+No extra allowance, new mechanism meaning or crash-fix assertion follows.
