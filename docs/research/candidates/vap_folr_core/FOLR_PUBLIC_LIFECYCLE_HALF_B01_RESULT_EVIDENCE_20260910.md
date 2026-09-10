@@ -1,6 +1,6 @@
 # FOLR public lifecycle HALF-B01 technical evidence
 
-Current state: source and focused checks accepted; no scientific invocation submitted.
+Current state: RETAIN complete and technically accepted; HALF_EVENT remains preselected and unsubmitted. Earlier preparation boundaries remain chronological evidence.
 
 ## 1. Fixed comparison and changed implementation
 
@@ -138,3 +138,75 @@ Handle `folr-public-lifecycle-half-b01-half-event-20260910`.
 Source-route read/transfer/import checks add2.9893583s, taking scoped support to **43.7468483s/300s**. Git bundle construction and publication are administrative. No scientific result or full runtime has yet been observed.
 
 Both exact commands passed `bash -n`; both named supervisor/output roots were absent. The record whitespace check passed. This check took 0.7180000s, making current scoped support **44.4648483s/300s**. No command payload was executed by the syntax check.
+
+## 6. RETAIN accepted and direct observation handed over
+
+Source c6be208cd and command publication3a3ea076d5db7d52dd357e278a83ee3031a3995f
+were both pushed before submission. At **2026-09-10T21:59:27.130588+00:00** this DM
+submitted only the original RETAIN command; the supervisor returned exit0 with explicit
+tmux-start at **2026-09-10T21:59:27.768852+00:00**. Actual handle is
+`folr-public-lifecycle-half-b01-retain-20260910`, tmux
+`agent_folr-public-lifecycle-half-b01-retain-20260910`. The exact frozen source surface
+passed its currentness comparison, and the handle was absent before submission.
+[RESULT_SUMMARY](FOLR_PUBLIC_LIFECYCLE_HALF_B01_RESULT_SUMMARY_20260910.json) preserves
+the complete submission command, clocks and raw stdout/stderr; local original receipt
+is in `public_lifecycle_half_b01_control_20260910/retain_launch_receipt.json`.
+
+This is accepted invocation **1 of2**. Fresh destination admission and the exact
+runner share the outer1800s chain; their actual memory receipt, learner progress and
+primary output have not been collected. Supervisor acceptance alone establishes no
+valid run or result. HALF_EVENT remains the single unsubmitted preselected second arm.
+
+DM sent MONITOR_ADD directly to the live-primary configured Monitor
+`01a087e5-2044-7301-abb6-7a1709a98197`; app delivery succeeded. Root subsequently confirmed **actual Monitor adoption**
+for this same handle/source/cwd and the source/command integrations29e0f2f07→74f8e7ce9.
+The forwarded adoption receipt supplies no separate observation timestamp; the
+submission timestamp is not relabeled as adoption time. Original collection/acceptance/science
+owner is `/root/dm_folr_p68_reentry`; parent/receipt Root is
+`01a07249-b095-7821-8ce2-e9c32ba85267`. No optional implementation executor owns the
+scientific handle and no duplicate DM polling follows. Root resumes this same DM
+for terminal collection and technical acceptance, then the already selected HALF_EVENT
+submission if RETAIN completed validly, followed by complete-pair scientific intake
+and scoped closeout. A failed original invocation stops the dependent sequence under
+the card; there is no replacement or additional allocation.
+
+The source check and submission took0.6410000s. Current scoped support is **45.1058483s/300s**; directory tests remain32.4911638s. Complete scientific wall/CPU and study elapsed remain unobserved. Root receives this accepted-handle boundary for integration and observation continuation; source, budgets and outcome interpretation remain with this direction.
+
+The final accepted-handle/source/command/count/scratch/publication check passed in0.1100000s; scoped support at this handover is **45.2158483s/300s**. It confirmed one accepted handle, no complete result, unchanged accepted source/tests and one preselected unsubmitted arm. No scientific replay, new test or status poll was performed.
+
+## 7. Restart recovery and RETAIN terminal acceptance
+
+Root explicitly transferred remaining DM responsibility to `/root/dm_folr_restart_recovery`
+after the app restart. The shared checkout was at command commit3a3ea076d with two
+dirty result-record files containing the prior acceptance/adoption facts; those facts
+are preserved above. Source and tests still match c6be208cd. No legacy CM was resumed.
+The live-primary Monitor endpoint remains01a087e5-2044-7301-abb6-7a1709a98197.
+
+Root routed the original-handle terminal receipt, and this DM collected the complete
+RETAIN output/checkpoint, seven supervisor files and fresh memory receipt. All **10**
+local file lengths/digests match remote originals; the compact receipt is
+`evidence/2026-09-10-folr-public-lifecycle-half-b01-retain-collection.json`.
+Raw copies remain in the owned control directory's `collected/`. No remote root has
+been removed. The source-input directory, complete exact-SHA worktree and two named
+supervisors form the later closeout inventory; HALF_EVENT's supervisor is still absent.
+
+RETAIN finished exit0 at2026-09-11T06:12:00+08:00. Its summary and final log object
+agree:5000 train episodes/100000 ticks/4969 RMSprop,128 final episodes/2560 ticks,
+all25 progress rows, CPU FP32 and Torch1/1. The128 recorded returns recompute to
+**1.68046875** (conditional sample SD5.60026938); cumulative training sum−26706.82,
+mean−5.341364. Both phase attenuation and full-reset totals are zero. Fresh actual-node
+admission passed at21:59:27.415727Z with15,632,941,056 physical/effective available bytes.
+Complete outer wall **753.10s**, user/system CPU732.34/22.12s, total754.46 CPU-s;
+narrower runner wall752.75510065s. These satisfy this arm's1800s cap. No pair branch
+can be read before HALF_EVENT's completion.
+
+The Monitor text labels its local observation22:13:12−07:00, inconsistent with the
+same receipt's remote terminal clock and current UTC chronology. Preserve that label
+as supplied; do not use it for study elapsed or change the scientific result. Direct
+supervisor start/exit clocks and `/usr/bin/time` provide the execution facts.
+
+Technical acceptance is recorded separately in the [intake](FOLR_PUBLIC_LIFECYCLE_HALF_B01_INTAKE_20260910.md#1-recovery-and-retain-technical-acceptance).
+No source repair, new test, policy replay or scientific retry occurred. Recovery
+procedure/source reads are conservatively charged10s; collection4.1652834s and
+acceptance analysis0.0490410s bring scoped support to **59.4301727s/300s**.
+Whole engineering/Monitor elapsed is unmeasured and is not invented as zero.
