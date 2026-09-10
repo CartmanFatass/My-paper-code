@@ -31,7 +31,8 @@ def run(seed, out, launch_sha, started, node, command):
     torch.set_num_interop_threads(1)
     activity = {"episodes_started": 0, "episodes_completed": 0, "team_ticks": 0,
                 "target_transitions": 0, "decision_rows": 0, "rollout_policy_forwards": 0}
-    summary = {"object": "VSP03_B06", "seed": seed, "launch_sha": launch_sha,
+    summary = {"object": "VSP03_B07" if seed == 10804 else "VSP03_B06",
+        "seed": seed, "launch_sha": launch_sha,
         "node": node, "command": command, "status": "incomplete", "arms": {}, "checkpoints": {},
         "actual_rollouts": activity, "model_constructions": 0, "optimizer_steps": 0,
         "device": "cpu", "dtype": "float32", "compute_threads": 1,

@@ -1,0 +1,75 @@
+{
+  "id": "20260910-vsp03-001",
+  "created": "2026-09-10T09:39:40-07:00",
+  "direction": "vsp_03",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "B07 one fresh continuous512 G fit",
+  "context": "One new independent continuous512 G fit on the fully public fixed-N2 shared-slot task. Fixed 128/512 four-mode panels, primary update512 greedy-minus-R0, paired Q, fresh10804/50804. Card is frozen under Portfolio PRO_FINAL A and Root allocation; execution has not started.",
+  "options": [
+    {
+      "key": "a",
+      "label": "Keep the frozen one-fit card",
+      "consequence": "Retain the allocated one-fit recipe and recorded predictions; proceed through technical acceptance and execution without an owner reply."
+    },
+    {
+      "key": "b",
+      "label": "Stop the unexecuted part",
+      "consequence": "Preserve existing evidence and effects; stop affected unexecuted work, with no replacement or extra run."
+    },
+    {
+      "key": "c",
+      "label": "Specify a concrete amendment",
+      "consequence": "Reconcile the named scientific change before dependent execution without changing historical cards or results."
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "This binds the exact fresh instance selected by Portfolio; all old results and stopped-family boundaries remain.",
+  "evidence": [
+    "docs/research/candidates/vsp_03/VSP03_B07_CONTINUOUS512_SCIENCE_CARD_20260910.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-10.md#L10",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "保留已按Portfolio决定冻结的B07单次continuous512卡，还是对尚未执行的部分作具体干预？",
+    "changes_if_approved": [
+      {
+        "target": "VSP03_B07_CONTINUOUS512_SCIENCE_CARD_20260910.md",
+        "from": "Portfolio已选择一次新的同预算训练，instance与预测尚未绑定",
+        "to": "冻结10804/50804、固定128与512评估、512主指标、两项低信心预测；仅一个60秒完整调用"
+      }
+    ],
+    "if_refused": "保留已有证据和已发生效果，停止受影响的未执行部分；不替换seed、不追加运行，也不自动改成其他科学问题。",
+    "evidence_for": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260910_next_five_chains/archive/RESPONSE.md",
+        "quote": "I select one new same-budget fit because its native comparison is already interpretable, the observed complete runtime is small, and the new learning history can change whether further development is worthwhile.",
+        "why": "完整Pro已选择这个有限复现问题；新卡只补足实例、预测和执行事实。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260910_next_five_chains/archive/RESPONSE.md",
+        "quote": "The main countercase is diminishing decision value from another small result.",
+        "why": "B06均值仍在0.02尺度内，原生分量和执行模式存在损失；便宜并不保证继续投入有价值。"
+      }
+    ],
+    "uncertainty": [
+      "一个新学习过程只能提供一个训练实例的原生表现，不能确认稳定优势或收敛。",
+      "Q保留共同世界的端点评估依赖；成功、等待和尝试成本可能方向相反。",
+      "若再出现小正收益，按Pro意见倾向结束不变配方的重复投入，但不在结果前预先处分整个方向。"
+    ],
+    "cost": {
+      "compute": "1模型、512 Adam、73728 episodes、2949120 team ticks；一个60秒完整调用。B06完整耗时8.38–8.89秒仅供规划。目录测试累计300秒不重置，已有记录59.658848秒且早期短命令部分未计。",
+      "owner_time": "无需逐项批准；本项供异步干预。",
+      "reversibility": "costly",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "Recommend and select **(a)**.",
+    "source": "docs/research/candidates/vsp_03/VSP03_B07_CONTINUOUS512_SCIENCE_CARD_20260910.md"
+  },
+  "starred": false
+}
