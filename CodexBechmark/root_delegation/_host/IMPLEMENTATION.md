@@ -6,7 +6,7 @@ Python standard library only. `start` freezes prompt/events/supplements/rubric p
 `submit` records one UTF-8 response; `status` supports recovery; `export` requires
 completion and emits transcript/metadata plus a separate host-only judge prompt.
 
-Focused check: `python -B CodexBechmark/_host/test_runner.py` in the maintained HMASD
+Focused check: `python -B CodexBechmark/root_delegation/_host/test_runner.py` in the maintained HMASD
 checkout. Three checks passed: complete 13-event replay/export and separate rubric;
 pending event replay, missing/empty/out-of-order/duplicate responses and invalid run ID;
 frozen fixtures and current-only evidence. Test scratch is invocation-owned under
@@ -14,7 +14,7 @@ frozen fixtures and current-only evidence. Test scratch is invocation-owned unde
 fixtures, not candidate-model results. No research or model API invocation occurred.
 
 Deployment is a maintained file copy at `C:/Projects/CodexBechmark`; candidate cwd is
-its `workspace/`, outside HMASD. Source remains versioned in HMASD. Installation updates
+its `root_delegation/workspace/`, outside HMASD. Source remains versioned in HMASD. Installation updates
 must preserve `_host/runs` and `workspace/responses`. No global Codex settings changed.
 
 Limits: single writer per run; no semantic auto-grader, model detection, token/cost

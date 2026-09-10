@@ -13,7 +13,7 @@ SOURCE = Path(__file__).resolve().parents[1]
 class RunnerTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        scratch_parent = SOURCE.parent / "temp/tests"
+        scratch_parent = SOURCE.parents[1] / "temp/tests"
         scratch_parent.mkdir(parents=True, exist_ok=True)
         cls.scratch = Path(tempfile.mkdtemp(prefix="codex-benchmark-", dir=scratch_parent)).resolve()
         cls.parent = scratch_parent.resolve()
@@ -28,12 +28,11 @@ class RunnerTest(unittest.TestCase):
 
     def setUp(self):
         self.base = self.scratch / self._testMethodName
-        (self.base / "_host/root_delegation").mkdir(parents=True)
-        (self.base / "root_delegation").mkdir()
+        (self.base / "_host").mkdir(parents=True)
         shutil.copy2(SOURCE / "runner.py", self.base / "runner.py")
         for name in ("EVENTS.md", "GRADING.md"):
-            shutil.copy2(SOURCE / "_host/root_delegation" / name, self.base / "_host/root_delegation" / name)
-        shutil.copy2(SOURCE / "root_delegation/ROOT_PROMPT.md", self.base / "root_delegation/ROOT_PROMPT.md")
+            shutil.copy2(SOURCE / "_host" / name, self.base / "_host" / name)
+        shutil.copy2(SOURCE / "ROOT_PROMPT.md", self.base / "ROOT_PROMPT.md")
         output = self.call("start", "--label", "PROTOCOL_TEST_NOT_MODEL_RESULT")
         self.run_id = output.split("RUN_ID=", 1)[1].splitlines()[0]
 
@@ -93,8 +92,8 @@ class RunnerTest(unittest.TestCase):
         self.call("status", "--run", "../escape", ok=False)
 
     def test_frozen_inputs_and_current_evidence_only(self):
-        (self.base / "_host/root_delegation/EVENTS.md").write_text("modified", encoding="utf-8")
-        (self.base / "_host/root_delegation/GRADING.md").write_text("modified", encoding="utf-8")
+        (self.base / "_host/EVENTS.md").write_text("modified", encoding="utf-8")
+        (self.base / "_host/GRADING.md").write_text("modified", encoding="utf-8")
         first = self.command("next")
         self.assertNotIn("E02", first)
         self.assertIn("未提供额外证据", self.command("evidence"))

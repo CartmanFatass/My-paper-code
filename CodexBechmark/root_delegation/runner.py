@@ -23,7 +23,7 @@ def save(path, value):
 
 
 def fixtures(base):
-    source = (base / "_host/root_delegation/EVENTS.md").read_text(encoding="utf-8")
+    source = (base / "_host/EVENTS.md").read_text(encoding="utf-8")
     body, extra = source.split("## 固定补充", 1)
     parts = re.split(r"(?m)^## (E\d{2}[^\n]*)\n", body)
     events = [{"id": parts[i][:3], "text": parts[i] + "\n" + parts[i + 1].strip()}
@@ -70,13 +70,13 @@ def main(argv=None, base=BASE):
         directory = run_path(base, run_id)
         state = {"id": run_id, "version": VERSION, "started": now(),
                  "model_reported": args.model, "effort_reported": args.effort,
-                 "label": args.label, "prompt": (base / "root_delegation/ROOT_PROMPT.md").read_text(encoding="utf-8"),
+                 "label": args.label, "prompt": (base / "ROOT_PROMPT.md").read_text(encoding="utf-8"),
                  "events": events, "supplements": supplements, "responses": [],
                  "pending": None, "commands": [], "finished": None}
         log(state, "start")
         save(directory / "state.json", state)
         (directory / "GRADING.md").write_text(
-            (base / "_host/root_delegation/GRADING.md").read_text(encoding="utf-8"), encoding="utf-8")
+            (base / "_host/GRADING.md").read_text(encoding="utf-8"), encoding="utf-8")
         (base / "workspace/responses" / run_id).mkdir(parents=True)
         print(f"RUN_ID={run_id}\nVERSION={VERSION}\n\n{state['prompt']}")
         print(f"\nNext: python runner.py next --run {run_id} (use the runner's actual path)")
