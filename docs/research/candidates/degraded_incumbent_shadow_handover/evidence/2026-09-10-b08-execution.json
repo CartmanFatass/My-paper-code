@@ -28,7 +28,7 @@
     "cd /home/wu/hmasd-worktrees/dish-b08-db2480c2 && export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 MAX_JOBS=1 PYTHONPATH=. PYTHONDONTWRITEBYTECODE=1 && mkdir -p temp/directions/degraded_incumbent_shadow_handover/exp && /usr/bin/time -f 'preflight_wall_seconds=%e\npreflight_exit=%x' -o temp/directions/degraded_incumbent_shadow_handover/exp/arrival_bridge_retention_b08_seed137_20260910_run01_preflight_wall.txt /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/degraded_incumbent_shadow_handover/exp/arrival_bridge_retention_b08_seed137_20260910_run01_memory.json && /usr/bin/time -f 'runner_process_wall_seconds=%e\nrunner_exit=%x' -o temp/directions/degraded_incumbent_shadow_handover/exp/arrival_bridge_retention_b08_seed137_20260910_run01_runner_wall.txt /home/wu/.venvs/hmasd/bin/python -m scripts.run_dish_arrival_bridge_retention_b08 --seed 137 --output temp/directions/degraded_incumbent_shadow_handover/exp/arrival_bridge_retention_b08_seed137_20260910_run01 --launch-sha a01522a6f6cf12e5549b3e03596ce58642b68cf1 --prior-shared-seconds 215.0"
   ],
   "command": "cd /home/wu/hmasd-worktrees/dish-b08-db2480c2 && export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 MAX_JOBS=1 PYTHONPATH=. PYTHONDONTWRITEBYTECODE=1 && mkdir -p temp/directions/degraded_incumbent_shadow_handover/exp && /usr/bin/time -f 'preflight_wall_seconds=%e\npreflight_exit=%x' -o temp/directions/degraded_incumbent_shadow_handover/exp/arrival_bridge_retention_b08_seed137_20260910_run01_preflight_wall.txt /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/degraded_incumbent_shadow_handover/exp/arrival_bridge_retention_b08_seed137_20260910_run01_memory.json && /usr/bin/time -f 'runner_process_wall_seconds=%e\nrunner_exit=%x' -o temp/directions/degraded_incumbent_shadow_handover/exp/arrival_bridge_retention_b08_seed137_20260910_run01_runner_wall.txt /home/wu/.venvs/hmasd/bin/python -m scripts.run_dish_arrival_bridge_retention_b08 --seed 137 --output temp/directions/degraded_incumbent_shadow_handover/exp/arrival_bridge_retention_b08_seed137_20260910_run01 --launch-sha a01522a6f6cf12e5549b3e03596ce58642b68cf1 --prior-shared-seconds 215.0",
-  "launch_state": "ACCEPTED_MONITOR_ADOPTED",
+  "launch_state": "COMPLETE_COLLECTED",
   "shared_prior_charge_seconds": 215.0,
   "known_support_charge_components": [
     {
@@ -131,12 +131,21 @@
     "head": "a01522a6f6cf12e5549b3e03596ce58642b68cf1",
     "ssh_wall_seconds": 1.0421782000048552
   },
-  "actual_scientific_counts": "pending terminal collection",
+  "actual_scientific_counts": {
+    "fresh_learners": 2,
+    "matched_training_pairs": 1,
+    "training_transitions": 131072,
+    "optimizer_calls": 1024,
+    "final_evaluation_episodes": 8,
+    "evaluation_ticks": 9600,
+    "initial_evaluations": 0,
+    "Delta_bridge": -6.5
+  },
   "launch_receipt": "docs/research/candidates/degraded_incumbent_shadow_handover/evidence/2026-09-10-b08-launch-receipt.json",
   "memory_admission_receipt": "docs/research/candidates/degraded_incumbent_shadow_handover/evidence/2026-09-10-b08-memory-admission.json",
   "monitor_dispatch": "accepted by app tool; live endpoint read immediately before dispatch",
   "monitor_adoption": "confirmed by Root native message after Monitor direct adoption; no DM routine polling",
-  "pending_action": "Root resumes original DM on Monitor terminal for collection, technical acceptance and scientific intake",
+  "pending_action": "Root integration and retention acceptance; no successor selected; remote execution checkout removed with verified preservation.",
   "prelaunch_deliverable_actual_components": [
     {
       "scope": "execution record assembly",
@@ -182,5 +191,10 @@
       "charged_seconds": 6.0,
       "measurement": "actual commit command reconciled at collection; no double count"
     }
-  ]
+  ],
+  "terminal_collection": "docs/research/candidates/degraded_incumbent_shadow_handover/evidence/2026-09-10-b08-collection.json",
+  "terminal_cleanup": "docs/research/candidates/degraded_incumbent_shadow_handover/evidence/2026-09-10-b08-cleanup.json",
+  "complete_accounting": "docs/research/candidates/degraded_incumbent_shadow_handover/evidence/2026-09-10-b08-accounting.json",
+  "result_document": "DISH_ARRIVAL_BRIDGE_RETENTION_B08_RESULT_EVIDENCE_20260910.md",
+  "scientific_intake": "DISH_ARRIVAL_BRIDGE_RETENTION_B08_RESULT_INTAKE_20260910.md"
 }
