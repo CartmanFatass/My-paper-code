@@ -172,3 +172,47 @@ and joins it by `&&` to `exec` of the committed runner with
 temp/directions/ucope/exp/ucope-uav-short-learned-renewal-continuous-b01-8702-20260910`.
 Scientific root/model/RNG creation occurs only after that admission. Supervisor
 acceptance, actual memory and Monitor adoption are still unobserved here.
+
+### Actual single acceptance and Monitor handover
+
+Exactly one `agent-task run` was accepted. Local submission began
+**2026-09-10T19:22:49.128084+00:00**, returned **2026-09-10T19:22:49.684522+00:00**, exit zero,
+and created tmux `agent_ucope-uav-short-learned-renewal-continuous-b01-8702-20260910`. Submission subprocess wall was
+0.5580670999916038s. It used the exact command frozen above and source
+**b6c75d5cf8e1781bb0e3c6824ab2dc9cb32dbce9**; no source or command changed after acceptance.
+
+The executing node's canonical memory receipt was assessed at
+**2026-09-10T19:22:48.906934Z**, measurement `/proc/meminfo`, physical and
+effective available **15243468800 bytes**, both
+above **4294967296 bytes**. It passed with no
+failure reason; cgroup-specific memory telemetry is null. The preflight and
+`exec` runner are adjacent in that same supervised command. Local submission
+and node admission clocks differ slightly; their timestamps are preserved as
+observed, and are not subtracted to infer timing or invocation order.
+
+One initial readback at **2026-09-10T19:23:24.389387+00:00** confirmed
+**running**, supervisor PID **3096219**, uptime **35s**,
+tmux active, exit code null. It did not inspect reward or interim checkpoints.
+The live run root is that exact cwd plus `temp/directions/ucope/exp/ucope-uav-short-learned-renewal-continuous-b01-8702-20260910`;
+supervisor/receipt/log root is `/home/wu/.agent-tasks/ucope-uav-short-learned-renewal-continuous-b01-8702-20260910`.
+Raw command, readback and source facts are preserved in
+[launch facts](UCOPE_UAV_SHORT_LEARNED_RENEWAL_CONTINUOUS_B01_8702_LAUNCH_FACTS_20260910.json)
+and the local `SUBMISSION.json` / `LAUNCH_READBACK.json`.
+
+DM read the Monitor endpoint from live `C:/Projects/HMASD/.codex/hmasd-monitor.toml`
+and directly sent `MONITOR_ADD` to **01a087e5-2044-7301-abb6-7a1709a98197**.
+The app accepted delivery (`isError=false`, same thread ID). Adoption was
+pending at dispatch, not inferred from the send. Root was notified natively
+with source, handle, exact paths, memory and initial process facts, and then
+**confirmed independent Monitor adoption for this exact handle/source** after
+canonical admission passed. Root also confirmed main integration through
+**368b9a9db** of card/source/technical acceptance. DM stops routine polling;
+the Monitor owns future observation and sends Root the terminal event for
+this original DM to collect and interpret.
+
+The direction is at a recoverable execution boundary. The shared authoring
+checkout remains in use, and this exact remote checkout/supervisor/wrapper/pack
+has the live 8702 dependency. DM owns preservation and scoped cleanup after
+terminal collection and Root acceptance. No native outcome, actual completed
+exposure or complete time is claimed yet. No third instance, retry, resume or
+replacement is allocated; the frozen B rule remains the later reading rule.
