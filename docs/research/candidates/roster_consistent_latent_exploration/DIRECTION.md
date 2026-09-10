@@ -533,3 +533,16 @@ work remain visible. The next discriminator is a traceback-equipped, separately 
 completion attempt using the intact W1 control, or the actual failure location if it
 stops again. No cause is assigned to the error or linked to the historical signal11;
 no family/lifecycle/class decision or automatic retry follows.
+
+## Seed22 native comparison completion selected — 2026-09-10
+
+The next object-tier discriminator is one fresh-initialization W100 seed22 fit at
+the same1000 endpoint, with the verified completed W1 control and reference on success:
+`RCLE_B03_FRESH1000_S22_RECOVERY_SCIENCE_CARD_20260910.md`. The original failed attempt
+remains incomplete; its favorable training curve supplies no paired effect. This
+selection preserves the same law, information, reference and reading rules, includes
+the accepted ordinary traceback reporting, and consumes a separate900s complete cap.
+It tests the missing native contrast or records a concrete failure location; neither
+a second independent seed sample from repetition nor a crash-cure claim follows.
+S21 is still the only complete same1000 pair at selection. Prior reference/recovery
+deficits and all failed exposure remain visible. No family/class/lifecycle change.
