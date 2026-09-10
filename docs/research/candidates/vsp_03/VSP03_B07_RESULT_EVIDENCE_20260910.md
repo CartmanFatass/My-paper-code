@@ -107,3 +107,24 @@ Preserve every outcome and failure; no positive-sign or significance gate applie
 There is no scientific branch classification before the actual result. The
 one-fit primary and Q predictions remain unscored here. Publication/test success
 does not establish learner performance.
+
+## Actual launch and Monitor handover
+
+The frozen source/card revision is `adcff0a92559ac5552e24a9861e2b65572b478c5`.
+The eleven staged source files matched their committed bytes in detached remote
+cwd `/home/wu/hmasd-worktrees/vsp03-b07-adcff0a92559ac5552e24a9861e2b65572b478c5`;
+Git status was clean, no CRLF source files or pre-existing scientific root/task
+wrapper were present. The exact committed B07 wrapper was submitted **once**
+on `hmasd-wsl-node` at2026-09-10T16:52:30.893856Z and returned at16:52:41.014914Z.
+SSH returned0. Systemd reported handle `vsp03-b07-10804-20260910.service`,
+invocation `3d9b2ce7fe1a4657a2319a83d7737bc4`, `Finished with result: success`,
+`code=exited/status=0`, service runtime8.927s, CPU9.244s and outer memory peak8.3M.
+These are direct wrapper observations; collection must establish the complete
+manager-origin chain, inner resource/count facts and trustworthy measurements.
+
+[Launch receipt](VSP03_B07_LAUNCH_20260910.json) preserves the exact command and
+raw return. `MONITOR_ADD` was sent directly to live configured Monitor
+`01a087e5-2044-7301-abb6-7a1709a98197`; app delivery was accepted without error.
+Adoption is pending at this publication. Monitor reports adoption/terminal to
+Root, who forwards collection to the original DM. DM has no parallel remote
+status loop. No retry, second fit, fallback or successor was started.
