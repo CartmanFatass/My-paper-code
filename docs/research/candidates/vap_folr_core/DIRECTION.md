@@ -453,3 +453,50 @@ References:
 - `pro_packets/20260910_timing_family_convergence/archive/RESPONSE.md`
 - `FOLR_PUBLIC_LIFECYCLE_TIMING_FAMILY_CONVERGENCE_INTAKE_20260910.md`
 - `FOLR_PUBLIC_LIFECYCLE_HALF_B01_SCIENCE_CARD_20260910.md`
+
+## Accepted public-lifecycle half-attenuation B01 science — 2026-09-10
+
+**Conclusion.** The new matched7807/107807 fitting instance gives HALF_EVENT3.2459375
+and RETAIN1.68046875 after5000 training and128 final episodes per arm. The fixed
+half-attenuation package's native-return difference **+1.56546875** selects
+HALF_EVENT_ABOVE_MEI at absolute MEI1. The low-confidence WITHIN_MEI forecast missed.
+Both complete real learners, all256 final returns and every progress/counter record
+are retained. This supplies a first positive observation for the fixed .5 rule.
+
+**Bounded claim.** A preliminary advantage of one complete learned package over fresh
+generic retention on this explicit public-lifecycle host. One matched training pair
+cannot estimate training-population uncertainty; conditional final-return SDs5.6003
+and6.8335 describe the two fitted policies. Equal evaluation seed labels do not pair
+action-dependent traffic worlds. No stable winner, equivalence, pure timing, useful
+memory-content preservation, superiority over omitted RANDOM/full-EVENT controls,
+old-loss recovery, transfer/UAV/C or Portfolio conclusion follows. Tuned headroom
+remains absent and the ordinary matching RETAIN comparator is untuned.
+
+**Strongest support and contradiction.** The positive final native point and completed
+equal learning exposure support bounded interest in fixed attenuation. Cumulative
+training means also favor HALF_EVENT (−4.419048 versus−5.341364) as a separate endpoint.
+Actual attenuation occurred48079/1350 times in training/final phases, with zero full
+survivor resets. No independent attenuation recurrence has been observed. Older
+full-EVENT local positives, within-MEI nonrecurrence and TIMING-B03's−5.44609375 loss
+remain contrary to any general advantage for clearing, without being pooled as the
+current law's evidence or a direct HALF_EVENT/full-EVENT comparison.
+
+**Surviving alternative.** The return gap may involve useful context, representation,
+optimization/data paths, joint intervention, partner co-adaptation or conditional
+evaluation variation. Correct before-GRU and acting/replay state handling does not
+localize why the package helped, and numerical attenuation is not a measurement of
+the fraction of useful information retained.
+
+**Next discriminator.** A separately chosen fresh independent matched pair of the
+unchanged fixed HALF_EVENT/RETAIN laws could ask whether this positive point recurs.
+That is direction-local advice, not a new allocation, recast or automatic successor.
+The present two-invocation allocation is complete; historical evidence and Portfolio
+lifecycle/priority keep their meanings.
+
+References:
+
+- `FOLR_PUBLIC_LIFECYCLE_HALF_B01_SCIENCE_CARD_20260910.md`
+- `FOLR_PUBLIC_LIFECYCLE_HALF_B01_RESULT_EVIDENCE_20260910.md` §§9–10
+- `FOLR_PUBLIC_LIFECYCLE_HALF_B01_RESULT_SUMMARY_20260910.json`
+- `FOLR_PUBLIC_LIFECYCLE_HALF_B01_INTAKE_20260910.md` §§5–6
+- `evidence/2026-09-10-folr-public-lifecycle-half-b01-run-analysis.json`
