@@ -317,3 +317,48 @@ References:
 - `FOLR_PUBLIC_LIFECYCLE_TIMING_B01_RESULT_SUMMARY_20260909.json`
 - `FOLR_PUBLIC_LIFECYCLE_TIMING_B01_INTAKE_20260909.md` §§9–13
 - `evidence/2026-09-09-folr-public-lifecycle-timing-b01-run-analysis.json`
+
+## Accepted public-lifecycle timing B02 science — 2026-09-10
+
+**Conclusion.** A new matched fitting instance at7805/107805 gives RETAIN2.64265625,
+EVENT2.051953125 and RANDOM2.501796875 after equal5000-episode training and128 final
+episodes per arm. EVENT−RETAIN−0.590703125, RANDOM−RETAIN−0.140859375 and EVENT−RANDOM
+−0.44984375 are all inside absolute MEI1; the unchanged rule selects MIXED_OR_REVERSE.
+The low-confidence DM EVENT_CLEAR_ADVANTAGE prediction missed. The preceding timing
+triple's above-MEI event-clearing advantage did not recur in this new instance.
+
+**Bounded claim.** This is one more complete-trained-package comparison, not equivalence,
+stable retention superiority, causal harm, pure event timing or transfer. Two observed
+128-endpoint fitting instances leave uncertainty large; their descriptive mean EVENT−
+RETAIN+1.10703125 does not replace the current rule. The earlier32-episode pairs remain
+separate and unpooled. Same-information tuned headroom is still absent.
+
+**Strongest support and contradiction.** TIMING-B01's real above-MEI EVENT advantage
+over both legal controls remains the strongest local support. TIMING-B02 provides no
+above-MEI gain on any contrast, while the older B03 pair favored retention. Both timing
+triples' cumulative training means favor RETAIN. Current means−4.468676/−5.001920/−5.204832
+for RETAIN/EVENT/RANDOM are reported separately from final returns; no training curve
+was recorded or reconstructed. Conditional final spread remains broad: SD7.965/6.385/6.777.
+
+**Surviving alternative.** Actual train/final reset fractions are18.1317%/18.7074% for
+EVENT and10.0476%/9.4681% for RANDOM. Preset p=.1 remains unmatched in dose. Nonzero
+clearing occurred, but timing, dose, joint reset patterns, data/optimization and partner
+co-adaptation can contribute jointly. Common entity freshness and consistent replay
+masks preserve the intended action/history comparison without isolating its causal path.
+
+**Next discriminator.** Repeatability of useful native benefit over competent retention
+across independent fitting instances remains unresolved. The complete mixed history
+favors reconsidering unchanged-law spending; it does not select another run or close the
+family. A later allocated real-learning comparison could answer that question; exact
+policy search or more rollouts of these checkpoints would not supply new training
+instances. This finite triple is complete without an automatic successor, C promotion
+or direction/Portfolio disposition.
+
+References:
+
+- `FOLR_PUBLIC_LIFECYCLE_TIMING_B02_SCIENCE_CARD_20260910.md`
+- `FOLR_PUBLIC_LIFECYCLE_TIMING_B02_RESULT_EVIDENCE_20260910.md`
+- `FOLR_PUBLIC_LIFECYCLE_TIMING_B02_RESULT_SUMMARY_20260910.json`
+- `FOLR_PUBLIC_LIFECYCLE_TIMING_B02_INTAKE_20260910.md` §§7–12
+- `evidence/2026-09-10-folr-public-lifecycle-timing-b02-run-analysis.json`
+- `evidence/2026-09-10-folr-public-lifecycle-timing-b02-matched-128-analysis.json`
