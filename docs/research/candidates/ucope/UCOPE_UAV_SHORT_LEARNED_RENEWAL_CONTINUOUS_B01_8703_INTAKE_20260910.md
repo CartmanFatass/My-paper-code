@@ -105,7 +105,7 @@ bounded engineering change directly and reuses the existing reviewer.
 
 ## 4. Implementation, execution and scientific intake
 
-No8703 native result has been observed. Append exact source, checks/review,
+No 8703 native result has been observed. Append exact source, checks/review,
 command, admission and accepted handle/adoption here. At terminal verify the
 card against every outcome, score predictions, write E0/intake/Chinese brief,
 preserve and close the execution, then take the next separate object boundary.
@@ -184,3 +184,61 @@ object-tier technical acceptance, owner flag none; the earlier scientific
 selection retains its close-call flag. Main owner reviews again returned `[]`.
 The [launch facts](UCOPE_UAV_SHORT_LEARNED_RENEWAL_CONTINUOUS_B01_8703_LAUNCH_FACTS_20260910.json) retain direct receipts.
 No extra allowance, new mechanism meaning or crash-fix assertion follows.
+
+
+### Actual accepted launch and confirmed Monitor handover
+
+Exactly one detached `agent-task run` was accepted at
+**2026-09-10T21:19:15.342213+00:00**, source
+**c40a4cd66cacc892d13afd9b277407b6505b8742**, under technical acceptance
+**b2e4f5afe68ac0ad2d39fba7c8b8df1497c5b67b**. Submission returned exit 0,
+empty stderr and the expected tmux creation message; its SSH subprocess took
+0.3241538000002038s. No duplicate submission or source change followed.
+This executes only the already frozen 8703 allowance, not an 8702/A01 retry.
+
+Actual-node canonical admission passed at **2026-09-10T21:19:14.748389Z**:
+physical and effective available memory were **15260344320 bytes**,
+above **4294967296 bytes** required. Failure reasons
+were empty; /proc/meminfo supplied the measurements, and cgroup-specific values
+were unavailable. Admission and runner were adjacent through `&&` before
+scientific root/RNG/model construction. Cross-node timestamps are preserved
+literally and are not subtracted to infer ordering or duration.
+
+One initial direct readback at **2026-09-10T21:19:16.008123+00:00** found **running**,
+PID **3132956**, tmux active, exit null and uptime 1s. It read only supervisor
+and admission facts, not intermediate rewards or learner output. The combined
+readback took 0.6660809000022709s; the outer submission/readback command
+took 1.2039085s, so these durations are nested.
+
+- Handle: `ucope-uav-short-learned-renewal-continuous-b01-8703-20260910`; node: `hmasd-wsl-node`.
+- Cwd: `/home/wu/hmasd-worktrees/ucope-uav-short-learned-renewal-continuous-b01-8703-20260910`.
+- Scientific output: that cwd plus `/temp/directions/ucope/exp/ucope-uav-short-learned-renewal-continuous-b01-8703-20260910`.
+- Supervisor/log/admission: `/home/wu/.agent-tasks/ucope-uav-short-learned-renewal-continuous-b01-8703-20260910`.
+- Original execution/DM owner: `/root/dm_ucope_p47_resume`.
+
+DM read the live main Monitor configuration and sent **MONITOR_ADD** directly
+to **01a087e5-2044-7301-abb6-7a1709a98197**. The tool returned that task ID and
+isError=false. The exact source/handle/cwd/output/supervisor, PID, admission,
+budget and original owners were included; Root was also informed natively.
+Root then **confirmed Monitor adoption for this exact handle/node/source/cwd/
+output/supervisor and accepted time**, with running PID3132956 and active tmux.
+Its native instruction is to publish these facts, stop routine polling and
+resume from Root's terminal handoff. Adoption is thus confirmed by Root's
+actual observation receipt, not inferred from successful message dispatch.
+The existing Monitor owns further observation and sends terminal facts to
+Root; this DM resumes collection/intake from Root's handoff. No second observer
+or ACK loop is created.
+
+Main and direction owner-review queries returned `[]` immediately before launch.
+No prospective reply or override was fabricated. The close-call selection flag
+and all fixed forecasts remain unchanged. No 8703 performance result, completed
+fit count or recurrence outcome is claimed yet. The one fresh B invocation
+retains 1800s/fit,5100s science and 5400s complete including≤300s support; no retry,
+replacement, new independent seed or mechanism change is implicitly allocated.
+
+The shared authoring checkout remains in use. The exact remote worktree,
+supervisor, staged wrapper and source pack have this live execution dependency;
+DM owns preservation/scoped closeout after terminal collection under Root's
+handoff. Source, check, setup-correction, admission, submission and dispatch
+receipts are retained in the [launch facts](UCOPE_UAV_SHORT_LEARNED_RENEWAL_CONTINUOUS_B01_8703_LAUNCH_FACTS_20260910.json)
+and the local runtime root. Root owns integration and observation continuity.

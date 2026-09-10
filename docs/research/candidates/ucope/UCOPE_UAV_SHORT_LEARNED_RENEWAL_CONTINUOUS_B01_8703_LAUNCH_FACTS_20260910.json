@@ -25,8 +25,8 @@
   "node": "hmasd-wsl-node",
   "cwd": "/home/wu/hmasd-worktrees/ucope-uav-short-learned-renewal-continuous-b01-8703-20260910",
   "handle": "ucope-uav-short-learned-renewal-continuous-b01-8703-20260910",
-  "status": "TECHNICALLY_ACCEPTED; exact remote source/check ready, no scientific launch yet",
-  "scientific_invocations": 0,
+  "status": "ACCEPTED; initial direct readback RUNNING; Monitor adoption confirmed by Root; terminal result pending",
+  "scientific_invocations": 1,
   "technical_acceptance_at": "2026-09-10T21:17:53Z",
   "frozen_card_commit": "0c88c81b14adeda97b9543daaf4e2bdee1d5d6f8",
   "protected_runtime_source": "b1d347ef303083824a72dd259c2fbb54e2b5ef75",
@@ -197,10 +197,102 @@
   },
   "measured_support_subtotal_seconds": 6.816054,
   "timing_boundary": "Each outer command includes its nested subprocesses; do not add test-process times to these again. Later acceptance/collection/publication work is also within the 300 s support reserve.",
-  "canonical_admission": "Not yet run; actual-node admit-memory is adjacent through && in the exact staged wrapper before the runner.",
+  "canonical_admission": "Actual-node PASS in the wrapper, joined by && immediately before this runner.",
   "monitor_endpoint": "01a087e5-2044-7301-abb6-7a1709a98197",
   "root_endpoint": "01a07249-b095-7821-8ce2-e9c32ba85267",
   "execution_constraints": "One new 8703 B invocation only, CPU FP32/thread1; 1800 s per fit,5100 s complete science,5400 s including<=300 s support; no accepted retry/resume/replacement.",
   "owner_reviews_main": [],
-  "actual_process_accepted": false
+  "actual_process_accepted": true,
+  "accepted_scientific_invocations": 1,
+  "submission": {
+    "started_at": "2026-09-10T21:19:15.021934+00:00",
+    "returned_at": "2026-09-10T21:19:15.342213+00:00",
+    "source": "c40a4cd66cacc892d13afd9b277407b6505b8742",
+    "acceptance_record": "b2e4f5afe68ac0ad2d39fba7c8b8df1497c5b67b",
+    "handle": "ucope-uav-short-learned-renewal-continuous-b01-8703-20260910",
+    "cwd": "/home/wu/hmasd-worktrees/ucope-uav-short-learned-renewal-continuous-b01-8703-20260910",
+    "argv": [
+      "ssh",
+      "-o",
+      "BatchMode=yes",
+      "-o",
+      "ConnectTimeout=10",
+      "hmasd-wsl-node",
+      "/usr/local/bin/agent-task run ucope-uav-short-learned-renewal-continuous-b01-8703-20260910 '/usr/bin/time -f whole_wall_seconds=%e,peak_rss_kib=%M /usr/bin/timeout --signal=KILL 5100s /bin/bash --noprofile --norc /home/wu/hmasd-inputs/ucope-uav-short-learned-renewal-continuous-b01-8703-20260910.sh'"
+    ],
+    "returncode": 0,
+    "stdout": "Task 'ucope-uav-short-learned-renewal-continuous-b01-8703-20260910' started in tmux session 'agent_ucope-uav-short-learned-renewal-continuous-b01-8703-20260910'. Output: /home/wu/.agent-tasks/ucope-uav-short-learned-renewal-continuous-b01-8703-20260910/task.log\n",
+    "stderr": "",
+    "wall_seconds": 0.3241538000002038
+  },
+  "initial_readback": {
+    "supervisor": {
+      "returncode": 0,
+      "stdout": "{\"task\": \"ucope-uav-short-learned-renewal-continuous-b01-8703-20260910\", \"status\": \"running\", \"exit_code\": null, \"pid\": 3132956, \"uptime_seconds\": 1, \"tmux_active\": true}\n",
+      "stderr": ""
+    },
+    "admission": {
+      "returncode": 0,
+      "stdout": "{\n  \"assessed_at\": \"2026-09-10T21:19:14.748389Z\",\n  \"available_physical_bytes\": 15260344320,\n  \"captured_at\": \"2026-09-10T21:19:14.748073Z\",\n  \"cgroup_headroom_bytes\": null,\n  \"cgroup_memory_current_bytes\": null,\n  \"cgroup_memory_max_bytes\": null,\n  \"effective_available_bytes\": 15260344320,\n  \"effective_floor_pass\": true,\n  \"failure_reasons\": [],\n  \"measurement_source\": \"/proc/meminfo\",\n  \"minimum_available_bytes\": 4294967296,\n  \"passed\": true,\n  \"physical_floor_pass\": true,\n  \"schema_version\": 1\n}\n",
+      "stderr": ""
+    },
+    "observed_at": "2026-09-10T21:19:16.008123+00:00",
+    "wall_seconds": 0.6660809000022709
+  },
+  "actual_admission": {
+    "assessed_at": "2026-09-10T21:19:14.748389Z",
+    "available_physical_bytes": 15260344320,
+    "captured_at": "2026-09-10T21:19:14.748073Z",
+    "cgroup_headroom_bytes": null,
+    "cgroup_memory_current_bytes": null,
+    "cgroup_memory_max_bytes": null,
+    "effective_available_bytes": 15260344320,
+    "effective_floor_pass": true,
+    "failure_reasons": [],
+    "measurement_source": "/proc/meminfo",
+    "minimum_available_bytes": 4294967296,
+    "passed": true,
+    "physical_floor_pass": true,
+    "schema_version": 1
+  },
+  "initial_supervisor": {
+    "task": "ucope-uav-short-learned-renewal-continuous-b01-8703-20260910",
+    "status": "running",
+    "exit_code": null,
+    "pid": 3132956,
+    "uptime_seconds": 1,
+    "tmux_active": true
+  },
+  "monitor_dispatch": {
+    "thread_id": "01a087e5-2044-7301-abb6-7a1709a98197",
+    "endpoint_source": "live C:/Projects/HMASD/.codex/hmasd-monitor.toml",
+    "tool": "mcp__codex_app__send_message_to_thread",
+    "payload_type": "MONITOR_ADD",
+    "isError": false,
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"threadId\":\"01a087e5-2044-7301-abb6-7a1709a98197\"}"
+        }
+      ],
+      "isError": false
+    },
+    "handle": "ucope-uav-short-learned-renewal-continuous-b01-8703-20260910",
+    "source": "c40a4cd66cacc892d13afd9b277407b6505b8742",
+    "original_owner": "/root/dm_ucope_p47_resume",
+    "original_execution_owner": "/root/dm_ucope_p47_resume",
+    "root_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+    "reading": "Accepted dispatch; Monitor must directly observe and send adoption to Root. No adoption is inferred from dispatch."
+  },
+  "monitor_adoption": {
+    "state": "confirmed",
+    "root_confirmation": "Root native message 2026-09-10 confirms exact handle/node/source/cwd/output/supervisor/accepted time, running PID3132956 and active tmux; publish facts, stop routine polling, resume from Root terminal handoff.",
+    "handle": "ucope-uav-short-learned-renewal-continuous-b01-8703-20260910",
+    "source": "c40a4cd66cacc892d13afd9b277407b6505b8742",
+    "pid": 3132956,
+    "tmux_active": true
+  },
+  "next_responsibility": "Existing Monitor observes and notifies Root; Root confirmed adoption and resumes original DM at terminal for collection/intake/preservation/closeout. No DM routine polling.",
+  "updated_at": "2026-09-10T21:23:01.457554+00:00"
 }
