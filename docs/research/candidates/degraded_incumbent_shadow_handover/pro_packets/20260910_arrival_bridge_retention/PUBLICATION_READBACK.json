@@ -91,5 +91,26 @@
     }
   ],
   "mapped_reference_count": 13,
-  "initial_handoff_routing_checked": true
+  "initial_handoff_routing_checked": true,
+  "task_publication": {
+    "checked_at_utc": "2026-09-10T20:16:47.179490+00:00",
+    "task_commit": "8d5ca0162f0325fe45e5bb13da1ce48ce2ec1fdc",
+    "task_url": "https://github.com/CartmanFatass/My-paper-code/blob/8d5ca0162f0325fe45e5bb13da1ce48ce2ec1fdc/docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260910_arrival_bridge_retention/TASK.md",
+    "task_bytes": 25668,
+    "task_sha256": "eb7a554cc7aa990dfa7bad828c7fd268848f1fe9475ca55a3d642f209650950c",
+    "working_bytes_equal_committed": true,
+    "remote_branch_head_at_binding": "8d5ca0162f0325fe45e5bb13da1ce48ce2ec1fdc",
+    "dispatch_state": "READY_TO_DISPATCH",
+    "provider_send_performed_by_author": false,
+    "source_thread_id": "01a08ce3-e08f-7022-8570-d9cf65f3e756",
+    "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+    "operator_thread_id": "01a087a3-4f12-7021-9a4d-6da9da2bafcc",
+    "github_fixed_task_readback": {
+      "observed_at_utc": "2026-09-10T20:17:35.404392+00:00",
+      "git_blob_sha": "051b24f672d1b360c0f7604b44322cfe3aae5197",
+      "bytes": 25668,
+      "sha256": "eb7a554cc7aa990dfa7bad828c7fd268848f1fe9475ca55a3d642f209650950c",
+      "matches_local_and_committed": true
+    }
+  }
 }
