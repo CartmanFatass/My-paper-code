@@ -121,13 +121,19 @@ def install_stubs(monkeypatch, time_state=None, fail_h=False, partial=False):
     return calls
 
 
-def test_study_plumbing_counts_seeds_final_only_and_readback(monkeypatch,tmp_path):
+@pytest.mark.parametrize("use_b02", [False, True])
+def test_study_plumbing_counts_seeds_final_only_and_readback(monkeypatch,tmp_path,use_b02):
     calls = install_stubs(monkeypatch)
     constructors=[]
     def factory(seed):
         env=object();constructors.append((seed,env));return env
-    result = study.run_pair(study.Config.engineering(), tmp_path, 0, clock=lambda:0, factory=factory)
+    identity = dict(object_name="SCDMP-NATIVE-HOLD-RESIDUAL-B02",
+                    card_path=study.CARD.replace("B01_SCIENCE_CARD_20260909", "B02_SCIENCE_CARD_20260910")) if use_b02 else {}
+    result = study.run_pair(study.Config.engineering(), tmp_path, 0, clock=lambda:0, factory=factory, **identity)
     assert result["status"] == "COMPLETE" and result["publication_readback"] == "complete"
+    assert result["object"] == identity.get("object_name", study.OBJECT)
+    assert result["card"] == identity.get("card_path", study.CARD)
+    assert study.checkpoint_identity(study.Config(), study.ARMS[0], "unused")["object"] == "SCDMP-NATIVE-HOLD-RESIDUAL-B01"
     assert result["counts"]["team_steps"]==80 and result["counts"]["optimizer_steps"]==8
     assert result["counts"]["eval_episodes"]==6 and result["counts"]["constructor_resets"]==2
     assert result["primary"]["reading"]=="DOWN"
@@ -140,10 +146,12 @@ def test_study_plumbing_counts_seeds_final_only_and_readback(monkeypatch,tmp_pat
     assert calls[0][7] is calls[1][7] and calls[0][7] is not calls[4][7]
     loaded=json.loads((tmp_path/"summary.json").read_text())
     assert loaded["primary"]==result["primary"]
+    assert (loaded["object"], loaded["card"]) == (result["object"], result["card"])
     assert len((tmp_path/"episodes.jsonl").read_text().splitlines())==10
     for arm in study.ARMS:
         saved=torch.load(tmp_path/f"final_{arm}.pt",weights_only=True)
         assert saved["algorithm"]==arm and saved["seed"]==9001
+        assert saved["object"]==result["object"]
         assert saved["ratio_grouping"]=="agent_compound"
         assert "duration.weight" in saved["actor"]
 
@@ -214,3 +222,21 @@ def test_cli_fixed_configuration_without_running_fixture(monkeypatch,tmp_path):
     assert module.main(["--seed","8201","--out",str(tmp_path)])==0
     assert captured[-1]==study.Config()
     with pytest.raises(SystemExit):module.main(["--seed","9001","--out",str(tmp_path)])
+
+
+def test_b02_cli_fixed_master_and_identity_without_training(monkeypatch,tmp_path):
+    path=Path(__file__).resolve().parents[5]/"scripts/run_scdmp_native_hold_residual_b02.py"
+    spec=importlib.util.spec_from_file_location("scdmp_b02_cli",path)
+    module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+    monkeypatch.setattr(torch,"set_num_threads",lambda n:None)
+    monkeypatch.setattr(torch,"set_num_interop_threads",lambda n:None)
+    captured=[]
+    def fake(config,out,start,**identity):
+        captured.append((config,identity));return dict(mode="UAV_B_EXPLORE",status="COMPLETE")
+    monkeypatch.setattr(study,"run_pair",fake)
+    assert module.main(["--seed","8202","--out",str(tmp_path)])==0
+    assert captured == [(study.Config(seed=8202), dict(object_name=module.OBJECT, card_path=module.CARD))]
+    assert module.OBJECT == "SCDMP-NATIVE-HOLD-RESIDUAL-B02"
+    assert module.CARD.endswith("SCDMP_NATIVE_HOLD_RESIDUAL_B02_SCIENCE_CARD_20260910.md")
+    with pytest.raises(SystemExit):module.main(["--seed","8201","--out",str(tmp_path)])
+    assert len(captured)==1
