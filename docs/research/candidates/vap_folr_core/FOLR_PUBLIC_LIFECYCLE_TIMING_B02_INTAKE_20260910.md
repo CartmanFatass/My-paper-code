@@ -167,3 +167,27 @@ registered the accepted handle and received Root's actual Monitor-adoption confi
 E0 records the complete command and handover. Monitor remains sole observer; this DM
 resumes on terminal notice to collect EVENT and then execute the preselected RANDOM.
 No three-arm scientific conclusion or prediction score is drawn at this boundary.
+
+## 6. EVENT technical acceptance; RANDOM remains preselected
+
+The DM checked EVENT's full artifacts against the card as recorded in
+[E0](FOLR_PUBLIC_LIFECYCLE_TIMING_B02_RESULT_EVIDENCE_20260910.md#event-terminal-collection-and-technical-acceptance).
+All8 remote/local hashes, final log/file identity, finite128-return mean,5000 train/
+4969 update counts, fresh memory floors and769.66s complete chain agree. Mean2.051953125
+is0.590703125 below RETAIN, inside MEI1; cumulative training mean−5.001920000000013
+and47153/1262 actual train/final survivor resets remain visible. This result is intact
+despite its lower return, and does not become a three-arm conclusion from terminal status.
+
+**Decisions this intake produces (object tier).** Options: (a) accept complete EVENT
+and continue the already-preselected RANDOM; (b) quarantine a concrete dependent defect
+and stop. Recommend/select **(a)**. No defect warrants (b); adverse or small native
+differences do not remove an arm. The same card §5 rule is applied verbatim:
+**"Execute RETAIN → EVENT → RANDOM, exactly one accepted invocation each, all selected
+before output regardless of earlier signs."** **Owner-delegated decision (unattended,
+2026-09-03 instruction): (a).** No new allocation or source/test edit follows.
+
+Live-primary all-age owner reviews again returned `[]`; owner prediction is not taken,
+and the prospective DM triple prediction remains unscored. Support24.6055824/300s,
+directory tests25.9131638/300s; partial whole-run sum1602.15s. The old scratch rejection
+and cgroup limits persist separately. This ordinary technical decision has no new
+owner-console item, family/Portfolio disposition or automatic successor.

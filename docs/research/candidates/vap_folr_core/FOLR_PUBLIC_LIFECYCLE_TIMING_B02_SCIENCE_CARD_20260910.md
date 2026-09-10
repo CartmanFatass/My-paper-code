@@ -5,7 +5,7 @@ Binding MARL structure: (a) roster change; (d) other-agent non-stationarity or p
 
 ## 1. Question, authority and interpretation boundary
 
-**B/EXPLORE; RETAIN technically complete; EVENT accepted and Monitor-adopted; RANDOM unsubmitted.** Root applied Portfolio
+**B/EXPLORE; RETAIN/EVENT technically complete; RANDOM unsubmitted; triple result pending.** Root applied Portfolio
 PRO_FINAL A and assigned this complete triple on 2026-09-10; see
 [execution mapping, FOLR](../../portfolio/pro_packets/20260910_next_five_chains/EXECUTION_MAPPING.md#folr--one-new-timing-triple)
 and [conforming Portfolio intake](../../portfolio/decisions/2026-09-10-next-five-chains.md).

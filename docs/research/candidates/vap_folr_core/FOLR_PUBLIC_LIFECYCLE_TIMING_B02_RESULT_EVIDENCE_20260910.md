@@ -162,3 +162,46 @@ confirmed **actual direct Monitor adoption** with the identical handle/source/cw
 `_seed7805_event` result root, acknowledging RETAIN predecessor collection. Monitor owns
 observation; DM returns pending terminal collection and does not poll. RANDOM is still
 unsubmitted and remains the already-selected next law after complete EVENT acceptance.
+
+## EVENT terminal collection and technical acceptance
+
+Root delivered Monitor's terminal observation `2026-09-10T17:23:20.5924043Z`: finished,
+exit0, remote start `2026-09-11T01:10:24+08:00`, exit `2026-09-11T01:23:14+08:00`,
+rounded duration770s. The DM collected the same8 artifact types as RETAIN into local
+`temp/directions/vap_folr_core/exp/public_lifecycle_timing_b02_seed7805_event` plus sibling
+`_memory.json`; **all8 remote/local hashes agree**. The copied Monitor terminal receipt,
+all128 returns, progress rows and full hash/source mapping are retained alongside the
+expanded result summary. No model/checkpoint reload or scientific call was made.
+
+EVENT is complete at the frozen source/seeds7805/107805, with5000 training episodes,
+100000 training ticks,4969 optimizer steps,128 final episodes/2560 ticks and threads1/1.
+All128 finite returns reproduce the published **2.051953125** mean to native-return
+precision; the final printed log JSON equals the file and progress ends at5000/4969.
+Training sum−25009.600000000064 gives mean **−5.001920000000013**. Actual training
+counters are births21773/departures8704/event-bound survivor opportunities47153/all
+eligible260059/resets47153; final562/201/1262/6746/1262. EVENT resets equal the eligible
+event-bound survivor opportunities, with nonzero control exposure. Terminal and common
+freshness conventions remain those of the accepted source.
+
+Fresh admission assessed `2026-09-10T17:10:24.790916Z` passes physical/effective floors
+at15603605504 bytes each. Null cgroup fields remain `resources_unmeasured`. Outer
+whole-chain wall is **769.66s**, user754.09s + system17.91s = **772.00 CPU-s**,
+peak RSS658888KiB, exit0; cap1800s is met. Runner wall727.8214852970559s/RSS641220KiB
+remain separate. The outer-minus-runner interval is not assigned to a specific phase.
+Two completed laws sum1602.15s whole wall and1604.87 CPU-s; RANDOM and full study elapsed
+remain pending. The whole-triple cap is not inferred from an unfinished triple.
+
+The observed EVENT−RETAIN point is **−0.590703125**, inside the ±1 MEI, with EVENT's
+lower cumulative training return preserved. This is a partial comparison, not a selected
+two-arm replacement for the allocated triple or a completed three-arm reading. No
+intermediate sign changes which law runs next. The fixed RANDOM submission remains due.
+
+Supporting charge through this collection is **24.6055824/300s**: preceding EVENT
+handover0.4067036s, terminal/owner read0.3910993s, remote raw read0.7249654s, remote hash
+read0.4488745s, local enclosing readback/assembly0.2054369s added to22.4285027s. Its
+internal0.0169563s is nested, not double charged. SCP4.9776862s is administrative
+transport. No new tests; cumulative directory test time stays25.9131638/300s.
+
+Technical acceptance is complete and supports the preselected **RANDOM** under the
+existing finite allocation. No primary/learning/information/publication/budget defect
+was found; no retry, replacement, source change, added test or extra evaluation is needed.
