@@ -135,3 +135,28 @@ Root subsequently confirmed actual direct Monitor adoption at this same clean bo
 E0 records that update after the historical pending-dispatch entry. RETAIN observation
 is handed over, with terminal collection still due. EVENT/RANDOM remain unsubmitted.
 No new scientific decision, source edit, test or invocation follows this receipt.
+
+## 5. RETAIN technical acceptance; fixed sequence continues
+
+The DM checked actual remote/local artifacts and the card, beyond the terminal summary.
+[E0's terminal collection](FOLR_PUBLIC_LIFECYCLE_TIMING_B02_RESULT_EVIDENCE_20260910.md#retain-terminal-collection-and-technical-acceptance)
+records all8 artifact hash matches, complete counts/receipts and intact final publication.
+RETAIN mean2.64265625 is supported by all128 retained returns; cumulative training mean
+is−4.468676000000037. Complete wall832.49s/CPU832.87s meet the per-law cap; narrower
+runner wall790.0774647570215s is not substituted for whole-chain time. Cgroup fields
+remain unmeasured. There is no new complete comparison or prediction score at this stage.
+
+**Decisions this intake produces (object tier).** Options: (a) accept technically
+complete RETAIN and continue the preselected EVENT; (b) quarantine a concrete dependent
+defect and stop the sequence. Recommendation and selection: **(a)**, because source,
+seeds, counts, primary mean, complete exit, memory floors and whole cap agree. The rule
+applied verbatim is card §5: **"Execute RETAIN → EVENT → RANDOM, exactly one accepted
+invocation each, all selected before output regardless of earlier signs."**
+**Owner-delegated decision (unattended, 2026-09-03 instruction): (a).** The next law is
+already allocated; this is not outcome-based arm selection or new spend. No local source
+change, new test, replacement or additional evaluation is authorized or needed.
+
+Owner review read returned `[]`; prediction remains not taken/unscored while the triple
+is incomplete. Current support22.4285027/300s and cumulative tests25.9131638/300s remain
+bounded. The operational scratch rejection persists separately. There is no new material
+dissent, close call, family or Portfolio decision; no additional owner-console item is made.
