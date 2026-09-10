@@ -1,0 +1,705 @@
+{
+  "created_at": "2026-09-09T08:16:17.553058+00:00",
+  "method": "Python standard library arithmetic and extraction from accepted DM analysis files; no scientific source import or execution",
+  "input_direction_head": "e3de6a89ca8d2cbb120cb113a5519e740e8ac94e",
+  "owner_restart_plan_sha": "b52d0e1562376cdf833fc30d0543cce64e910e1a",
+  "current_consultation_exposure": {
+    "scientific_invocations": 0,
+    "model_constructions": 0,
+    "checkpoint_loads": 0,
+    "training_starts": 0,
+    "training_transitions": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0,
+    "simulation_steps": 0,
+    "profiling_invocations": 0,
+    "checkpoint_replays": 0,
+    "scientific_validation_invocations": 0
+  },
+  "machine_exposure_line": "scientific_invocations=0; model_constructions=0; checkpoint_loads=0; training_starts=0; training_transitions=0; optimizer_steps=0; evaluation_episodes=0; simulation_steps=0; profiling_invocations=0; checkpoint_replays=0; scientific_validation_invocations=0",
+  "existing_completed_records": [
+    {
+      "allocation": "P70",
+      "source_path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_INDIVIDUAL_RENEWAL_B01_P70_DM_ANALYSIS_20260908.json",
+      "source_sha256": "20ac61c6b56181be94817f27d1a6ec17644a148d84d9a135a179299b6b69deb6",
+      "pair": {
+        "independent_training_pairs": 1,
+        "paired_endpoint_episodes": 32,
+        "mean": -0.049670563167111874,
+        "sample_sd": 0.13442151634285882,
+        "conditional_se": 0.023762591435853447,
+        "mei": 0.01,
+        "reading": "opposite_sign",
+        "positive_endpoints": 12,
+        "negative_endpoints": 20,
+        "zero_endpoints": 0,
+        "training_population_uncertainty": "not estimated from one training pair",
+        "dm_forecast": "inside inclusive [-.01,.01], low confidence",
+        "dm_forecast_score": "miss",
+        "owner_prediction": "not taken (unattended)"
+      },
+      "arms": {
+        "D0": {
+          "mean_J": 0.26946095234781076,
+          "training_seed": 770503,
+          "evaluation_seed": 780503,
+          "training_mean_native_J": [
+            0.2441620027058621,
+            0.2373040315790039,
+            0.2737892342931295,
+            0.3147706815508942,
+            0.32551798705140694
+          ],
+          "training_cause_totals": {
+            "reset": 80,
+            "team_gap": 0,
+            "team_cap": 3920,
+            "gap": 0,
+            "cap": 0
+          },
+          "training_activity_totals": {
+            "steps": 40000,
+            "decision_steps": 4000,
+            "team_decisions": 4000,
+            "sampled_total": 24000,
+            "forced_total": 216000,
+            "rows_M_agent": 24000,
+            "rows_M_team": 4000,
+            "rows_M": 4000
+          },
+          "optimizer_calls": {
+            "coordinator": 525,
+            "discoverer_actor": 11250,
+            "discoverer_critic": 11250,
+            "team_discriminator": 75,
+            "individual_discriminator": 300
+          },
+          "evaluation_d2_metrics": {
+            "steps": 16000,
+            "decision_steps": 1600,
+            "team_decisions": 1600,
+            "sampled_total": 9600,
+            "forced_total": 86400,
+            "mean_S_t": 0.6,
+            "S_t_fraction": 0.09999999999999999,
+            "switch_rate_by_agent": [
+              0.005375,
+              0.0065,
+              0.0063125,
+              0.006125,
+              0.006875,
+              0.0070625
+            ],
+            "switch_count_by_agent": [
+              86,
+              104,
+              101,
+              98,
+              110,
+              113
+            ],
+            "gap_agent_hist": {
+              "count": 95808,
+              "mean": 0.0007611964869704259,
+              "std": 0.011748692964246531,
+              "min": 0.0,
+              "max": 0.507358193397522,
+              "quantiles": [
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "gap_team_hist": {
+              "count": 15968,
+              "mean": 0.0007347607815298504,
+              "std": 0.008829174256396444,
+              "min": 0.0,
+              "max": 0.3002128601074219,
+              "quantiles": [
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "cause_counts": {
+              "reset": 32,
+              "team_gap": 0,
+              "team_cap": 1568,
+              "gap": 0,
+              "cap": 0
+            },
+            "coordinator_inference_seconds": 11.94892454094952,
+            "coordinator_inference_calls": 549,
+            "segment_length_agent_mean": 0.0,
+            "segment_length_team_mean": 0.0,
+            "rows_M_agent": 0,
+            "rows_M_team": 0,
+            "rows_M": 0,
+            "optimizer_steps": 0,
+            "param_displacement": 0.0,
+            "target_scale_team": 0.0,
+            "target_scale_agent": 0.0,
+            "target_var_team": 0.0,
+            "target_var_agent": 0.0
+          },
+          "summary_sha256": "c7b8f32ddfa949147a29c4b3847bf3ac07d388d0258bfe8fc1ec0acfff979906",
+          "launch_sha": "ca36e2f941d6c4d4e996a9bd919378af44ea0e93"
+        },
+        "I": {
+          "mean_J": 0.21979038918069888,
+          "training_seed": 770503,
+          "evaluation_seed": 780503,
+          "training_mean_native_J": [
+            0.22203045145211742,
+            0.12171461438291079,
+            0.1409502642611887,
+            0.17168119065393064,
+            0.22073143238466128
+          ],
+          "training_cause_totals": {
+            "reset": 80,
+            "team_gap": 0,
+            "team_cap": 3920,
+            "gap": 54390,
+            "cap": 0
+          },
+          "training_activity_totals": {
+            "steps": 40000,
+            "decision_steps": 28351,
+            "team_decisions": 4000,
+            "sampled_total": 78390,
+            "forced_total": 161610,
+            "rows_M_agent": 78390,
+            "rows_M_team": 4000,
+            "rows_M": 28351
+          },
+          "optimizer_calls": {
+            "coordinator": 3345,
+            "discoverer_actor": 11250,
+            "discoverer_critic": 11250,
+            "team_discriminator": 75,
+            "individual_discriminator": 300
+          },
+          "evaluation_d2_metrics": {
+            "steps": 16000,
+            "decision_steps": 1600,
+            "team_decisions": 1600,
+            "sampled_total": 9600,
+            "forced_total": 86400,
+            "mean_S_t": 0.6,
+            "S_t_fraction": 0.09999999999999999,
+            "switch_rate_by_agent": [
+              0.0100625,
+              0.0133125,
+              0.0143125,
+              0.0160625,
+              0.018,
+              0.0170625
+            ],
+            "switch_count_by_agent": [
+              161,
+              213,
+              229,
+              257,
+              288,
+              273
+            ],
+            "gap_agent_hist": {
+              "count": 95808,
+              "mean": 0.0003717250076009666,
+              "std": 0.004310795999794043,
+              "min": 0.0,
+              "max": 0.2119182050228119,
+              "quantiles": [
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "gap_team_hist": {
+              "count": 15968,
+              "mean": 0.0019974771491391864,
+              "std": 0.014153716273429486,
+              "min": 0.0,
+              "max": 0.30563807487487793,
+              "quantiles": [
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "cause_counts": {
+              "reset": 32,
+              "team_gap": 0,
+              "team_cap": 1568,
+              "gap": 0,
+              "cap": 0
+            },
+            "coordinator_inference_seconds": 12.19528075947892,
+            "coordinator_inference_calls": 549,
+            "segment_length_agent_mean": 0.0,
+            "segment_length_team_mean": 0.0,
+            "rows_M_agent": 0,
+            "rows_M_team": 0,
+            "rows_M": 0,
+            "optimizer_steps": 0,
+            "param_displacement": 0.0,
+            "target_scale_team": 0.0,
+            "target_scale_agent": 0.0,
+            "target_var_team": 0.0,
+            "target_var_agent": 0.0
+          },
+          "summary_sha256": "e60fddb3e99719e1a7e760f7e05791d39c48df3b94d1f3a8204de3c46a3b8b0f",
+          "launch_sha": "ca36e2f941d6c4d4e996a9bd919378af44ea0e93"
+        }
+      },
+      "component_contrasts": {
+        "coverage_reward": 0.02418375000000006,
+        "quality_reward": -0.028570901271244925,
+        "energy_penalty": 0.05802791778573846,
+        "total_reward": -0.04967056316711185
+      },
+      "weighted_native_contributions": {
+        "coverage": 0.01692862500000004,
+        "quality": -0.008571270381373477,
+        "altitude": -0.05802791778573846
+      },
+      "exposure": {
+        "model_constructions": 4,
+        "training_starts": 2,
+        "checkpoint_loads": 0,
+        "training_transitions": 80000,
+        "stored_training_transitions": 80000,
+        "training_episodes": 160,
+        "update_stages": 10,
+        "training_agent_step_batches": 5000,
+        "evaluation_steps": 32000,
+        "evaluation_episodes": 64,
+        "evaluation_agent_step_batches": 1000,
+        "environment_steps": 112000,
+        "agent_step_observations": 672000,
+        "learner_evaluator_batch_calls": 6000,
+        "optimizer_step_calls_all_groups": 49620,
+        "independent_training_pairs": 1
+      },
+      "resources": {
+        "arms": {
+          "D0": {
+            "elapsed_seconds": 471.89,
+            "peak_rss_kib": 1610396.0,
+            "user_seconds": 1844.48,
+            "system_seconds": 15.18,
+            "exit_status": 0.0
+          },
+          "I": {
+            "elapsed_seconds": 1221.49,
+            "peak_rss_kib": 1623988.0,
+            "user_seconds": 4829.98,
+            "system_seconds": 32.63,
+            "exit_status": 0.0
+          }
+        },
+        "supervisor_clocks": {
+          "D0": {
+            "start_epoch_s": 1788930536,
+            "end_epoch_s": 1788931008.0
+          },
+          "I": {
+            "start_epoch_s": 1788931131,
+            "end_epoch_s": 1788932353.0
+          }
+        },
+        "summed_wall_seconds": 1693.38,
+        "aggregate_cpu_seconds": 6722.2699999999995,
+        "study_critical_path_seconds_at_1s_resolution": 1817.0,
+        "caps_pass": true
+      }
+    },
+    {
+      "allocation": "P72",
+      "source_path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_INDIVIDUAL_RENEWAL_B02_P72_DM_ANALYSIS_20260909.json",
+      "source_sha256": "9255a1f37c7491885204a0df803cf70f85ed58bd75745e02454351f722586778",
+      "pair": {
+        "independent_training_pairs": 1,
+        "paired_endpoint_episodes": 32,
+        "mean": -0.035312725297886094,
+        "sample_sd": 0.07084355729934733,
+        "conditional_se": 0.012523489942436556,
+        "mei": 0.01,
+        "reading": "opposite_sign",
+        "positive_endpoints": 9,
+        "negative_endpoints": 23,
+        "zero_endpoints": 0,
+        "dm_forecast": "below -.01, low confidence; prospective after P70",
+        "dm_forecast_score": "met",
+        "owner_prediction": "not taken (unattended)",
+        "reported_scalar_max_error": 0.0
+      },
+      "arms": {
+        "D0": {
+          "mean_J": 0.4854120288125866,
+          "training_seed": 770603,
+          "evaluation_seed": 780603,
+          "training_mean_native_J": [
+            0.23932652226302936,
+            0.15876695362476242,
+            0.18396404549580508,
+            0.23147043398473738,
+            0.13445342978777022
+          ],
+          "training_cause_totals": {
+            "reset": 80,
+            "team_gap": 0,
+            "team_cap": 3920,
+            "gap": 0,
+            "cap": 0
+          },
+          "training_activity_totals": {
+            "steps": 40000,
+            "decision_steps": 4000,
+            "team_decisions": 4000,
+            "sampled_total": 24000,
+            "forced_total": 216000,
+            "rows_M": 4000,
+            "rows_M_agent": 24000,
+            "rows_M_team": 4000
+          },
+          "optimizer_calls": {
+            "coordinator": 525,
+            "discoverer_actor": 11250,
+            "discoverer_critic": 11250,
+            "team_discriminator": 75,
+            "individual_discriminator": 300
+          },
+          "evaluation_d2_metrics": {
+            "steps": 16000,
+            "decision_steps": 1600,
+            "team_decisions": 1600,
+            "sampled_total": 9600,
+            "forced_total": 86400,
+            "mean_S_t": 0.6,
+            "S_t_fraction": 0.09999999999999999,
+            "switch_rate_by_agent": [
+              0.004,
+              0.0068125,
+              0.0085625,
+              0.0095,
+              0.00925,
+              0.009375
+            ],
+            "switch_count_by_agent": [
+              64,
+              109,
+              137,
+              152,
+              148,
+              150
+            ],
+            "gap_agent_hist": {
+              "count": 95808,
+              "mean": 0.0008854511447914029,
+              "std": 0.010144303358022607,
+              "min": 0.0,
+              "max": 0.36094850301742554,
+              "quantiles": [
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "gap_team_hist": {
+              "count": 15968,
+              "mean": 0.0005659230703390941,
+              "std": 0.00807456395429468,
+              "min": 0.0,
+              "max": 0.32396402955055237,
+              "quantiles": [
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "cause_counts": {
+              "reset": 32,
+              "team_gap": 0,
+              "team_cap": 1568,
+              "gap": 0,
+              "cap": 0
+            },
+            "coordinator_inference_seconds": 12.12954955972964,
+            "coordinator_inference_calls": 549,
+            "segment_length_agent_mean": 0.0,
+            "segment_length_team_mean": 0.0,
+            "rows_M_agent": 0,
+            "rows_M_team": 0,
+            "rows_M": 0,
+            "optimizer_steps": 0,
+            "param_displacement": 0.0,
+            "target_scale_team": 0.0,
+            "target_scale_agent": 0.0,
+            "target_var_team": 0.0,
+            "target_var_agent": 0.0
+          },
+          "summary_sha256": "6d84eaf98151954e0ad21fab301123d5cf0b33cbc17ade05eb9f50de83f08891",
+          "launch_sha": "08199a932671d9bacdbe4eb0bfebab38c37fca1f"
+        },
+        "I": {
+          "mean_J": 0.45009930351470057,
+          "training_seed": 770603,
+          "evaluation_seed": 780603,
+          "training_mean_native_J": [
+            0.2330399174374506,
+            0.2226187703439438,
+            0.24996768804195463,
+            0.24726314602419047,
+            0.2832216120232257
+          ],
+          "training_cause_totals": {
+            "reset": 80,
+            "team_gap": 0,
+            "team_cap": 3920,
+            "gap": 65761,
+            "cap": 0
+          },
+          "training_activity_totals": {
+            "steps": 40000,
+            "decision_steps": 31821,
+            "team_decisions": 4000,
+            "sampled_total": 89761,
+            "forced_total": 150239,
+            "rows_M": 31821,
+            "rows_M_agent": 89761,
+            "rows_M_team": 4000
+          },
+          "optimizer_calls": {
+            "coordinator": 3765,
+            "discoverer_actor": 11250,
+            "discoverer_critic": 11250,
+            "team_discriminator": 75,
+            "individual_discriminator": 300
+          },
+          "evaluation_d2_metrics": {
+            "steps": 16000,
+            "decision_steps": 1600,
+            "team_decisions": 1600,
+            "sampled_total": 9600,
+            "forced_total": 86400,
+            "mean_S_t": 0.6,
+            "S_t_fraction": 0.09999999999999999,
+            "switch_rate_by_agent": [
+              0.0113125,
+              0.0120625,
+              0.012,
+              0.0148125,
+              0.015,
+              0.0143125
+            ],
+            "switch_count_by_agent": [
+              181,
+              193,
+              192,
+              237,
+              240,
+              229
+            ],
+            "gap_agent_hist": {
+              "count": 95808,
+              "mean": 0.0004907732357957843,
+              "std": 0.007394840897002121,
+              "min": 0.0,
+              "max": 0.23604077100753784,
+              "quantiles": [
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "gap_team_hist": {
+              "count": 15968,
+              "mean": 0.0018082617367720436,
+              "std": 0.017318313108741684,
+              "min": 0.0,
+              "max": 0.3946577310562134,
+              "quantiles": [
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "cause_counts": {
+              "reset": 32,
+              "team_gap": 0,
+              "team_cap": 1568,
+              "gap": 0,
+              "cap": 0
+            },
+            "coordinator_inference_seconds": 13.36615722917486,
+            "coordinator_inference_calls": 549,
+            "segment_length_agent_mean": 0.0,
+            "segment_length_team_mean": 0.0,
+            "rows_M_agent": 0,
+            "rows_M_team": 0,
+            "rows_M": 0,
+            "optimizer_steps": 0,
+            "param_displacement": 0.0,
+            "target_scale_team": 0.0,
+            "target_scale_agent": 0.0,
+            "target_var_team": 0.0,
+            "target_var_agent": 0.0
+          },
+          "summary_sha256": "ce88a406fee0f0eb2784af8650be74a458460df36ca04276f9b0ed2c14f95573",
+          "launch_sha": "08199a932671d9bacdbe4eb0bfebab38c37fca1f"
+        }
+      },
+      "component_contrasts": {
+        "coverage_reward": -0.05259874999999892,
+        "quality_reward": 0.0017461461134342104,
+        "energy_penalty": -0.0009825558680834762,
+        "total_reward": -0.035312725297886205
+      },
+      "weighted_native_contributions": {
+        "coverage": -0.03681912499999924,
+        "quality": 0.0005238438340302631,
+        "altitude": 0.0009825558680834762
+      },
+      "exposure": {
+        "model_constructions": 4,
+        "training_starts": 2,
+        "checkpoint_loads": 0,
+        "training_transitions": 80000,
+        "stored_training_transitions": 80000,
+        "training_episodes": 160,
+        "update_stages": 10,
+        "training_agent_step_batches": 5000,
+        "evaluation_steps": 32000,
+        "evaluation_episodes": 64,
+        "evaluation_agent_step_batches": 1000,
+        "independent_training_pairs": 1,
+        "environment_steps": 112000,
+        "agent_step_observations": 672000,
+        "batch_control_calls": 6000,
+        "optimizer_step_calls": 50040
+      },
+      "resources": {
+        "arms": {
+          "D0": {
+            "elapsed_seconds": 471.5,
+            "peak_rss_kib": 1659568.0,
+            "user_seconds": 1840.09,
+            "system_seconds": 17.63,
+            "exit_status": 0.0
+          },
+          "I": {
+            "elapsed_seconds": 1297.28,
+            "peak_rss_kib": 1610200.0,
+            "user_seconds": 5128.39,
+            "system_seconds": 30.74,
+            "exit_status": 0.0
+          }
+        },
+        "supervisor_clocks": {
+          "D0": {
+            "start_epoch_s": 1788935406,
+            "end_epoch_s": 1788935878.0
+          },
+          "I": {
+            "start_epoch_s": 1788936019,
+            "end_epoch_s": 1788937317.0
+          }
+        },
+        "summed_wall_seconds": 1768.78,
+        "aggregate_cpu_seconds": 7016.85,
+        "study_critical_path_seconds_at_1s_resolution": 1911.0,
+        "caps_pass": true
+      }
+    }
+  ],
+  "two_instance_summary": {
+    "pair_means": [
+      -0.049670563167111874,
+      -0.035312725297886094
+    ],
+    "descriptive_mean": -0.04249164423249899,
+    "sample_sd": 0.01015252452050656,
+    "interpretation": "Two independent learning instances with fresh paired evaluation panels; finite endpoint noise remains. Not pure training variance, stable population superiority, or 64 training seeds."
+  },
+  "existing_two_pair_exposure": {
+    "independent_training_pairs": 2,
+    "training_transitions": 160000,
+    "stored_training_transitions": 160000,
+    "update_stages": 20,
+    "evaluation_steps": 64000,
+    "evaluation_episodes": 128,
+    "environment_steps": 224000,
+    "agent_step_observations": 1344000,
+    "model_constructions": 8,
+    "training_starts": 4,
+    "checkpoint_loads": 0,
+    "optimizer_step_calls": 99660,
+    "summed_complete_wall_seconds": 3462.16,
+    "aggregate_cpu_seconds": 13739.12
+  },
+  "old_remaining_authorized_submissions": {
+    "D0": 0,
+    "I": 0
+  },
+  "proposal_A_new_scientific_work": 0,
+  "proposal_B": {
+    "status": "alternative only; no card/source change, key or invocation allocated",
+    "question": "Does the same I/D0 package yield a native benefit at one longer twenty-rollout training budget? This does not isolate why the early-budget losses occurred.",
+    "arms": 2,
+    "new_matched_training_pairs": 1,
+    "training_rollouts_per_arm": 20,
+    "training_lanes": 16,
+    "horizon": 500,
+    "evaluation_lanes_per_arm": 32,
+    "native_agents": 6,
+    "training_transitions": 320000,
+    "training_episodes": 640,
+    "update_stages": 40,
+    "evaluation_steps": 32000,
+    "evaluation_episodes": 64,
+    "environment_steps": 352000,
+    "agent_step_observations": 2112000,
+    "learned_batch_control_calls": 21000,
+    "model_constructions": 4,
+    "training_starts": 2,
+    "checkpoint_loads": 0,
+    "nested_candidate_or_trajectory_search_calls": 0,
+    "extra_scientific_validation_steps": 0,
+    "D0_per_rollout_joint_rows": 800,
+    "D0_per_rollout_individual_positions": 4800,
+    "I_per_rollout_max_joint_rows": 8000,
+    "I_per_rollout_max_individual_positions": 48000,
+    "both_per_rollout_team_rows": 800,
+    "actual_optimizer_calls": "unknown; data-dependent coordinator work; no forced compute matching",
+    "new_training_and_evaluation_keys": "unassigned",
+    "complete_wall_reference_seconds": {
+      "D0": 471.89,
+      "I": 1297.28
+    },
+    "wall_scenario_formula": "4 * max(observed complete five-rollout arm wall over P70/P72); all old work scaled, including unchanged endpoint",
+    "illustrative_complete_wall_seconds": {
+      "D0": 1887.56,
+      "I": 5189.12
+    },
+    "illustrative_summed_wall_seconds": 7076.68,
+    "cost_limit": "illustration only, not a measured twenty-rollout rate, verified upper bound or forecast guarantee; I row frequency may change",
+    "prospective_new_complete_caps_seconds": {
+      "D0": 3600,
+      "I": 18000,
+      "sum": 21600
+    },
+    "cap_boundary": "initialization through learning, unique final endpoint and closed-file publication; no retry/resume or split allowance; numeric caps reuse a planning scale, not old allocation",
+    "host_route": "portable existing remote-first CPU4/FP32; hardware not estimand; fresh admission only for later explicitly allocated calls"
+  },
+  "known_count_expressions": {
+    "train": "2*20*16*500",
+    "score": "2*32*500",
+    "batch_calls": "2*(20*500+500)",
+    "D0_rows": "16*500/10",
+    "I_max_rows": "16*500"
+  },
+  "scope": "no Engineering Scope Spec section4 additions requested; proposal preserves existing trustworthy native primary and exposure measurements"
+}

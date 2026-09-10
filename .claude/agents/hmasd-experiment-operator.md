@@ -49,8 +49,11 @@ acceptance is uncertain, query the exact task id before doing anything else. A l
 allowed only when no remote process exists, the frozen assignment already permits both nodes, and
 a fresh local preflight passes; you never decide portability after seeing output. If observation
 is lost after launch, reconnect only to the same known handle; never retry or create a second
-process. A wait timeout is not terminal. Do not busy-poll: one early check after launch, then
-return; the hub dispatches `hmasd-experiment-tracker` for later observation.
+process. A wait timeout is not terminal. OWNER_DIRECT 2026-09-09 assigns later observation to
+the shared independent Luna/low Monitor under docs/project/EXPERIMENT_MONITOR.md. After confirmed
+launch, send the exact handle to it when a cross-task tool is available; otherwise return that
+routing gap and the handle to Root/hub for forwarding. Do not add a parallel tracker or CM loop
+for a handle already assigned to Monitor. Retain terminal collection responsibility.
 
 Return: whether the command launched (and, if short, terminated), the exact command, execution
 node, process or task handle with PID/start time or task name, receipt path and its verdict,

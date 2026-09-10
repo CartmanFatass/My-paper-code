@@ -1,0 +1,44 @@
+{
+  "base_sha": "13b7da7012f4879607074bdcbd7bbbae597ccf85",
+  "focused_check": {
+    "argv": [
+      "C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe",
+      "-m",
+      "pytest",
+      "-q",
+      "-p",
+      "no:cacheprovider",
+      "--basetemp",
+      "temp/directions/vsp_c1/test/b10_p76_focused1",
+      "tests/experiments/candidates/vsp_c1/native_hold_value_b10",
+      "tests/experiments/candidates/vsp_c1/native_hold_value_b08/test_schedule.py"
+    ],
+    "exit_code": 0,
+    "wall_seconds": 4.257573100000627,
+    "stdout": ".......................                                                  [100%]\n============================== warnings summary ===============================\n..\\..\\..\\Users\\fires\\.conda\\envs\\hmasd-amd-cpu\\lib\\site-packages\\_pytest\\config\\__init__.py:1464\n  C:\\Users\\fires\\.conda\\envs\\hmasd-amd-cpu\\lib\\site-packages\\_pytest\\config\\__init__.py:1464: PytestConfigWarning: Unknown config option: cache_dir\n  \n    self._warn_or_fail_if_strict(f\"Unknown config option: {key}\\n\")\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n23 passed, 1 warning in 3.27s\n",
+    "stderr": ""
+  },
+  "independent_review": {
+    "reviewer": "/root/dm_vspc1_p49_value_question/cm_am_vspc1_hold_value_b01/review_b10_boundary",
+    "finding": "No material finding; no repair requested",
+    "method": "Independent read-only review; no tests or model/native execution",
+    "boundaries": [
+      "completed updates at512/768; same training models/optimizer/RNG/data/cumulative moments",
+      "distinct training/evaluation environment per arm; four constructors; private native/adapter reset RNG",
+      "fresh private32 evaluation generator pairs at each endpoint; episode-local recurrent state/storage",
+      "identity-paired change and conditional SE; missing learned endpoint suppresses C; missing H does not",
+      "actual endpoint exposure/checkpoints/moments/counts; default final-only behavior; continuous deadlines"
+    ],
+    "limits": [
+      "actual count/publication/resource acceptance awaits terminal collection",
+      "native means and conditional SE must be reported from retained J vectors at collection/intake"
+    ]
+  },
+  "scratch": {
+    "path": "temp/directions/vsp_c1/test/b10_p76_focused1",
+    "removed": false,
+    "blocker": "Automatic approval review rejected both exact-resolved recursive and nonrecursive PowerShell removal as blocked by policy before execution; no bypass or escalation",
+    "owner": "CM creator; retain until permitted cleanup available"
+  },
+  "new_scientific_exposure": 0
+}

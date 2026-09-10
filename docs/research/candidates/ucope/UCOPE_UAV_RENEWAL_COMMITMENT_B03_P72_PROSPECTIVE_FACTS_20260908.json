@@ -1,0 +1,72 @@
+{
+  "prepared_at": "2026-09-08T23:36:41-07:00",
+  "object": "UCOPE-UAV-RENEWAL-COMMITMENT-B03",
+  "pair": "renewal_b03",
+  "master": 7501,
+  "authoring_start": "77caf846dbb534505a72558d5bc1d12a0efefc86",
+  "accepted_algorithm_source": "7adc5aae35542ba35b4b8a2c07fc8285e958ce4d",
+  "bounded_nonreuse_check": "No matches before this preparation for master7501/base750100000/renewal_b03/RENEWAL-COMMITMENT-B03 in current UCOPE direction docs and mapped source/tests; not a global RNG census.",
+  "rng": {
+    "b": 750100000,
+    "initialization": 750100011,
+    "duration_head": 750100012,
+    "train_velocity": 750100021,
+    "train_duration": 750100022,
+    "train_reset_first_last": [
+      750101000,
+      750101511
+    ],
+    "final_reset_first_last": [
+      750102000,
+      750102031
+    ],
+    "final_velocity_first_last": [
+      750103000,
+      750103031
+    ],
+    "final_duration_first_last": [
+      750104000,
+      750104031
+    ]
+  },
+  "work": {
+    "new_training_pairs": 1,
+    "trained_arms": 2,
+    "train_episodes_per_arm": 512,
+    "native_steps_per_arm": 131072,
+    "rollouts_per_arm": 256,
+    "Adam_per_arm": 1024,
+    "total_native_steps": 286720,
+    "total_Adam_calls": 2048,
+    "final_evaluation_episodes": 96,
+    "explicit_resets": 1120,
+    "constructor_resets": 2,
+    "diagnostic_rows": 1600,
+    "T_head_rows_bounds": [
+      1003520,
+      4014080
+    ],
+    "T_head_dense_MAC_bounds": [
+      2215772160,
+      8863088640
+    ],
+    "G_velocity_selections": 696320,
+    "T_parameters": 68553,
+    "G_parameters": 66311,
+    "T_duration_parameters": 2242,
+    "learning_rate": 0.0003
+  },
+  "P71_measured_reference": {
+    "T_arm_seconds": 158.1893359690439,
+    "G_arm_seconds": 138.41656891599996,
+    "whole_seconds": 306.04,
+    "duration_head_rows": 1514598,
+    "guarantees_new_seconds": false
+  },
+  "caps": {
+    "complete_arm_seconds": 1800,
+    "complete_invocation_seconds": 3600,
+    "max_accepted_submissions": 1
+  },
+  "new_scientific_exposure_at_preparation": 0
+}

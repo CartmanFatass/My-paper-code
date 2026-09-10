@@ -1,0 +1,76 @@
+{
+  "id": "20260909-ucope-007",
+  "created": "2026-09-09T06:25:19-07:00",
+  "direction": "ucope",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "P82：缩短固定承诺至一或两步，比较合法反馈",
+  "context": "固定随机一或两步续约，在一次新训练上能否比合法逐步反馈获得更高原生回报？结构是部分可观测五机团队的异步时长承诺。旧一或四步结果全部保留，F-G为新主比较，两项悬停比较另列。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "按Root P82分配执行一次8101，完整一次后停止，保留所有结果符号。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "在下一可执行边界停止本卡未来工作，保留已发生结果与旧卡。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "在下一可执行边界按明确指令修订未来工作，不重写已有结果。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "两次反馈损失与悬停收益并存，使缩短承诺成为有界的新性能问题；不据此解释旧损失。",
+  "evidence": [
+    "docs/research/candidates/ucope/UCOPE_UAV_SHORT_FIXED_RENEWAL_B01_SCIENCE_CARD_20260909.md",
+    "docs/research/candidates/ucope/UCOPE_UAV_SHORT_FIXED_RENEWAL_B01_P82_INTAKE_20260909.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-09.md#L25",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否接受P82一次新训练，把固定续约从一或四步改为一或两步，前瞻比较F-G并保留两项悬停比较？",
+    "changes_if_approved": [
+      {
+        "target": "docs/research/candidates/ucope/UCOPE_UAV_SHORT_FIXED_RENEWAL_B01_SCIENCE_CARD_20260909.md",
+        "from": "P81已完成，旧支持{1,4}全部保留",
+        "to": "仅P82新F使用{1,2}各半、8101和F-G主比较，完整一次后停止"
+      }
+    ],
+    "if_refused": "在下一可执行边界停止或修订本卡的未来工作，保留已有原始结果与旧卡。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_UAV_FIXED_RENEWAL_B03_P81_INTAKE_20260909.md",
+        "quote": "The latest two adverse feedback points make another unchanged fit a less useful next question than testing less persistence.",
+        "why": "反馈损失与悬停收益并存，缩短承诺是更具体的下一性能问题。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_UAV_SHORT_FIXED_RENEWAL_B01_SCIENCE_CARD_20260909.md",
+        "quote": "The new observation cannot isolate duration support from training variation.",
+        "why": "一次新训练不能把差异归因于缩短时长，也不能证明稳定优势。"
+      }
+    ],
+    "uncertainty": [
+      "新F头调用下界翻倍，实际用时未知。",
+      "旧结果有正有负，两个悬停比较不能挽救新的F-G损失。",
+      "缺少同信息调优基线的余量记录。"
+    ],
+    "cost": {
+      "compute": "286720原生步、2048次Adam、96次最终评估；F头2007040–4014080行；每臂1800秒/全调用3600秒上限，检查≤300秒。",
+      "owner_time": "可异步复核，无需回复才继续。",
+      "reversibility": "costly",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "Recommend and execute **(a)**. Repeated feedback losses with useful hover margins\nmake reduced persistence a bounded performance question, while the result will\nnot identify why the old support lost. Preserve categorical credit and input\nscaling so the declared amendment remains physical duration support.",
+    "source": "docs/research/candidates/ucope/UCOPE_UAV_SHORT_FIXED_RENEWAL_B01_P82_INTAKE_20260909.md"
+  },
+  "starred": false
+}

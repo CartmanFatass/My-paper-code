@@ -1,0 +1,49 @@
+{
+  "unit": "caller-declared independent training run",
+  "inference": "descriptive only; no confidence interval or success classification",
+  "groups": [
+    {
+      "task": "vspc1_native_hold_value_b05_wide133",
+      "arm": "GATED-V",
+      "n": 1,
+      "mean": 0.194786498888121,
+      "sample_sd": null,
+      "min": 0.194786498888121,
+      "max": 0.194786498888121,
+      "runs": {
+        "8301": 0.194786498888121
+      }
+    },
+    {
+      "task": "vspc1_native_hold_value_b05_wide133",
+      "arm": "MLP-V",
+      "n": 1,
+      "mean": 0.17819458751184225,
+      "sample_sd": null,
+      "min": 0.17819458751184225,
+      "max": 0.17819458751184225,
+      "runs": {
+        "8301": 0.17819458751184225
+      }
+    }
+  ],
+  "paired_differences": [
+    {
+      "task": "vspc1_native_hold_value_b05_wide133",
+      "arm": "GATED-V",
+      "baseline": "MLP-V",
+      "summary": {
+        "n": 1,
+        "mean": 0.016591911376278745,
+        "sample_sd": null,
+        "min": 0.016591911376278745,
+        "max": 0.016591911376278745
+      },
+      "differences": {
+        "8301": 0.016591911376278745
+      },
+      "unmatched_arm_seeds": [],
+      "unmatched_baseline_seeds": []
+    }
+  ]
+}

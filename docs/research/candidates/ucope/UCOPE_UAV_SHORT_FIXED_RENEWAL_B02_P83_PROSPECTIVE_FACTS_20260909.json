@@ -1,0 +1,138 @@
+{
+  "prepared_at": "2026-09-09T07:07:29-07:00",
+  "object": "UCOPE-UAV-SHORT-FIXED-RENEWAL-B02",
+  "selector": "renewal_short_fixed_b02",
+  "master": 8201,
+  "authoring_start": "cf71b59f6e0161831c6f2870602d24b566bf7089",
+  "starting_source": "d99ae3c73e9c6ee73638c8a20afe748ce97b77ec",
+  "main_required_inputs_checked_at": "5f1891b881fb6d0d5a12bb330997d9d973bc53b8",
+  "required_input_delta": "Relevant normative bytes agree. Main mapped source/tests still match pre-P82 ed5386; preserve accepted d99ae3c changes. No newer shared input missing.",
+  "calculation": "Actual AST Config defaults; accepted unchanged P82 architecture/epoch dimensions and cost law; no source import/model/native execution.",
+  "bounded_nonreuse_check": "Word-boundary master/base and exact selector/object search in UCOPE docs and mapped source/runner/tests found no prior match.",
+  "treatment": {
+    "duration_support": [
+      1,
+      2
+    ],
+    "categorical_labels": [
+      0,
+      1
+    ],
+    "label_probabilities": [
+      0.5,
+      0.5
+    ],
+    "countdown_feature_divisor": 4,
+    "entire_initial_duration_head_frozen": true,
+    "actual_d2_counts": true,
+    "d4_means_four_steps": true,
+    "old_support_unchanged": [
+      1,
+      4
+    ]
+  },
+  "rng": {
+    "b": 820100000,
+    "common_initialization": 820100011,
+    "F_initial_duration_head": 820100012,
+    "G_private_train_velocity": 820100021,
+    "G_private_train_duration": 820100022,
+    "F_private_train_velocity": 820100031,
+    "F_private_train_duration": 820100032,
+    "common_train_reset_first_last": [
+      820101000,
+      820101511
+    ],
+    "common_final_reset_first_last": [
+      820102000,
+      820102031
+    ],
+    "G_private_final_velocity_first_last": [
+      820103000,
+      820103031
+    ],
+    "G_private_final_duration_first_last": [
+      820104000,
+      820104031
+    ],
+    "F_private_final_velocity_first_last": [
+      820105000,
+      820105031
+    ],
+    "F_private_final_duration_first_last": [
+      820106000,
+      820106031
+    ]
+  },
+  "work": {
+    "matched_training_instances": 1,
+    "fitted_arms": 2,
+    "train_episodes_per_arm": 512,
+    "train_native_steps_per_arm": 131072,
+    "rollouts_per_arm": 256,
+    "Adam_per_arm": 1024,
+    "total_rollouts": 512,
+    "total_Adam_calls": 2048,
+    "total_native_steps": 286720,
+    "final_evaluation_episodes": 96,
+    "explicit_resets": 1120,
+    "constructor_resets": 2,
+    "existing_diagnostic_rows": 1600,
+    "F_renewal_head_forward_rows_bounds": [
+      2007040,
+      4014080
+    ],
+    "F_head_dense_MAC_bounds": [
+      4431544320,
+      8863088640
+    ],
+    "F_parameters": 68553,
+    "G_parameters": 66311,
+    "F_frozen_duration_parameters": 2242,
+    "total_parameters": 134864,
+    "trainable_parameters": 132622,
+    "learning_rate": 0.0003
+  },
+  "primary": {
+    "contrast": "F_minus_G",
+    "mean": "paired native episode differences on new 8201 only",
+    "MEI_absolute": 0.01,
+    "secondary_contrasts": [
+      "F_minus_H",
+      "G_minus_H"
+    ],
+    "past_primaries_unchanged": true
+  },
+  "predictions": {
+    "F_minus_G_above_0_01_probability": 0.45,
+    "F_minus_H_above_0_01_probability": 0.6,
+    "owner": "not taken (unattended)"
+  },
+  "caps": {
+    "complete_arm_seconds": 1800,
+    "complete_invocation_seconds": 3600,
+    "max_accepted_submissions": 1,
+    "focused_checks_seconds": 300
+  },
+  "new_scientific_exposure_at_preparation": 0,
+  "pooled_primary_or_training_population_interval": false,
+  "new_cross_instance_mean_or_SD": false,
+  "exposure_line": "matched_training_instances=1; fitted_arms=2; native_steps=286720; optimizer_steps=2048; final_eval_episodes=96; lr=0.0003; F_parameters=68553; G_parameters=66311; F_frozen_duration_parameters=2242; trainable_parameters=132622",
+  "P82_measured_reference": {
+    "F_arm_seconds": 166.0954182019923,
+    "G_including_H_seconds": 135.13421400700463,
+    "outer_seconds": 315.65,
+    "F_head_rows": 2682298,
+    "guarantees_new_seconds": false
+  },
+  "multipliers_vs_P82": {
+    "training": 1.0,
+    "final_eval": 1.0,
+    "native_steps": 1.0,
+    "F_head_row_lower_bound": 1.0,
+    "F_head_row_upper_bound": 1.0
+  },
+  "new_wall_seconds": null,
+  "scope_section4": "none",
+  "new_scientific_change": "one new independent learning history; physical support/algorithm unchanged"
+}

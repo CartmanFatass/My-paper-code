@@ -1,0 +1,81 @@
+{
+  "technical_acceptance": "conformant",
+  "launch_sha": "6b269374d98886bce120ccde9bd6879ddc32882b",
+  "counts": {
+    "base_loads": 6,
+    "environment_constructors": 6,
+    "unscored_constructor_resets": 6,
+    "explicit_resets": 384,
+    "step_calls": 98304,
+    "team_steps": 98304,
+    "eval_episodes": 384,
+    "base_agent_forwards": 491520,
+    "learned_gate_agent_forwards": 0,
+    "retained_base_fits": 2,
+    "new_fits": 0,
+    "training_episodes": 0,
+    "training_team_steps": 0,
+    "optimizer_updates": 0,
+    "gate_constructions": 0,
+    "critic_constructions": 0
+  },
+  "contrasts": {
+    "8201": {
+      "F-C": {
+        "mean_J": 0.10769858009718353,
+        "conditional_SE_J": 0.0066070153719637115,
+        "reading": "UP"
+      },
+      "F-dwell": {
+        "mean_J": 0.06892961182535369,
+        "conditional_SE_J": 0.007195484983059177,
+        "reading": "UP"
+      },
+      "dwell-C": {
+        "mean_J": 0.038768968271829844,
+        "conditional_SE_J": 0.006520051903074366,
+        "reading": "UP"
+      }
+    },
+    "8202": {
+      "F-C": {
+        "mean_J": 0.08791620353401795,
+        "conditional_SE_J": 0.007910710200633306,
+        "reading": "UP"
+      },
+      "F-dwell": {
+        "mean_J": 0.05744529646936167,
+        "conditional_SE_J": 0.008615935185277559,
+        "reading": "UP"
+      },
+      "dwell-C": {
+        "mean_J": 0.03047090706465629,
+        "conditional_SE_J": 0.007330299818264649,
+        "reading": "UP"
+      }
+    }
+  },
+  "parameter_displacement": 0,
+  "process_wall_s": 79.46,
+  "aggregate_cpu_s": 79.35,
+  "peak_rss_kib": 415800,
+  "exit_code": 0,
+  "admission_available_bytes": 15217790976,
+  "remote_source_clean": true,
+  "remote_checkpoint_digests_match": true,
+  "artifact_sha256": {
+    "e01_admission.json": "d34b0ba4963fa543f8f4f30f52b5f1999bf997ba6066c30fba001b9108be1343",
+    "e01_process_time.txt": "f39c5f61866482c8c4eccb5a0991c5aa004cd3c9991c5ff1418e95224e99ac43",
+    "episodes.jsonl": "75c25d81755f7101fa97e2f887986555a5802711194d71d5e7854aed78e96c10",
+    "summary.json": "2ab5942b0872cdca7877f0f5fade2d09e18c09b5a7a8aa1686b0af2c52f8ccae",
+    "task.log": "16d71266395e2d730d77c5f7faa30c114cb042e1c1fd73fe792178e8cb03d09c"
+  },
+  "focused_support_wall_s": 4.35,
+  "collection_readback_wall_s": 3.0,
+  "total_support_wall_s": 7.35,
+  "complete_logical_wall_s": 86.81,
+  "support_cap_s": 30,
+  "complete_cap_s": 180,
+  "resource_limitations": "Peak RSS is process maximum; no per-thread CPU-affinity claim. Admission is actual-node physical/effective memory, not a runtime memory-floor trace.",
+  "claim_ceiling": "Conditional on two selected retained bases and fresh evaluation panels; no training-population inference."
+}

@@ -1,0 +1,11 @@
+{
+  "task": "acvc-p78-native-link-loss-8901-f42902116",
+  "status": "finished",
+  "exit_code": 0,
+  "pid": 3045659,
+  "uptime_seconds_at_terminal_observation": 419,
+  "tmux_active": false,
+  "task_log_exit_timestamp": "2026-09-09T19:12:13+08:00",
+  "task_log_duration_seconds": 360,
+  "note": "Supervisor uptime is age at observation, not scientific process wall; /usr/bin/time records 359.17 seconds."
+}

@@ -1,0 +1,43 @@
+{
+  "question": "是否采纳 DM 的窄家族暂停建议，或选择一次额外独立 G 训练？本项向原 Convergence 提交，尚未执行任一科学选项。",
+  "changes_if_approved": [
+    {
+      "target": "vsp_03 当前 ordinary-G、update128、公开固定 N2 共享槽 greedy 替代规则的测试家族",
+      "from": "P67 已完成；无后继分配，家族无新处置",
+      "to": "若原 Convergence 形成选择(a)的合规决定，暂停这一窄测试家族、不选后继；整个方向仍由原 Portfolio 决定"
+    }
+  ],
+  "if_refused": "请 Convergence 判断具体的一次独立 G 备选；当前不自动开跑，也不改 N1/T 暂停、recasts1、Portfolio 或 UAV 状态。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/vsp_03/VSP03_B04_P67_INTAKE_20260908.md#4-independent-training-answer-and-retained-contrary-evidence",
+      "quote": "Both greedy primary magnitudes are inside the 0.02 MEI, while both stochastic comparisons to fixed rules are negative.",
+      "why": "两个前瞻 greedy 结果一负一正，目前不足以形成日常替代固定 readiness 的实际理由；这是边际研究价值判断，不是效应阈值门槛。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/vsp_03/VSP03_B04_P67_INTAKE_20260908.md",
+      "quote": "**Seed 6 supports a small sampled greedy-G gain over both fixed rules:**",
+      "why": "新正值与独立性不确定性支持再做一个有界 B；该信号不能因落在 MEI 内而删去。"
+    },
+    {
+      "path": "docs/research/candidates/vsp_03/VSP03_P74_POST_B04_FACTS_20260909.json",
+      "quote": "\"seed6_whole_invocation_wall_s\": 3.253184",
+      "why": "现有完整路径很快，建议暂停不是成本拒绝，也不能用未知未来成本阻止一个有价值的 B。"
+    }
+  ],
+  "uncertainty": [
+    "两个独立训练实例无法建立总体稳定优势、劣势或等价。",
+    "随机亏损并不解释 greedy 符号变化的唯一原因；不要求先完成因果诊断。",
+    "再做一个同配置实例仍可能有价值，所以这是 close-call。"
+  ],
+  "cost": {
+    "compute": "本次咨询新增训练、模型、环境交互、评价、科学 probe 和 Pro Send 均为0。备选(b)若以后被选择：1 G ×128更新×128 episodes，4×1024最终执行；合计20480 episodes/1638400 target transitions/128 Adam，一次完整上限120秒，未来耗时未知。",
+    "owner_time": "可异步复核 close-call；无等待。",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing; this preparation returns a ready question, with neither scientific option applied"
+  },
+  "verdict_text": "DM recommends asking Convergence to pause only the tested ordinary-G, update-128 greedy-replacement family on the public fixed-N2 shared-service host, with no successor selected. One further independent G is a credible, close alternative.",
+  "source": "docs/research/candidates/vsp_03/VSP03_P74_POST_B04_QUESTION_INTAKE_20260909.md"
+}

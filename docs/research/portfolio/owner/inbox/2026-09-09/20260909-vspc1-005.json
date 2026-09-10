@@ -1,0 +1,88 @@
+{
+  "id": "20260909-vspc1-005",
+  "created": "2026-09-09T04:36:17-07:00",
+  "direction": "vsp_c1",
+  "tier": "direction",
+  "kind": "decision",
+  "title": "P79：完整普通网络加门，还是结束当前比较",
+  "context": "P78完整结果已接受。三对相对优势从512到768均下降；512为UP/UP/DOWN，768为WITHIN/WITHIN/DOWN，所有原生与悬停损失保留。DM提出完整普通网络再加640参数门的一次最小B供节点比较，但建议结束此实例；方向裁决尚未形成，零新科学调用。",
+  "options": [
+    {
+      "key": "continue",
+      "label": "选择完整普通网络加门的一次B",
+      "consequence": "节点形成决定后，另行分配417792步、3072次Adam、96评价的一次新配对训练；不证明唯一机制。"
+    },
+    {
+      "key": "stop",
+      "label": "结束当前门控价值比较",
+      "consequence": "仅结束当前实例，不改变生命周期或宣告所有持有信用机制失败；尚未自动执行。"
+    },
+    {
+      "key": "unchanged",
+      "label": "再测一对原协议",
+      "consequence": "增加原协议的一次训练实现，434176步、3072次Adam、160评价；不是必须补齐的种子门槛。"
+    }
+  ],
+  "recommended": "stop",
+  "auto_applied": "continue",
+  "dm_reason": "晚期无UP且8503缺口较大，使当前实例的继续投资理由不足；早期正例和具体小改动是最强反方。",
+  "evidence": [
+    "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_P79_QUESTION_20260909.md",
+    "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B12_INTAKE_20260909.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-09.md#L34",
+  "brief": "docs/research/portfolio/owner/briefs/vsp_c1/2026-09-09_VSPC1_P79_PREPARATION.md",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否结束当前门控价值比较，或选择一个保留完整普通网络再加持有门的最小B？这是向方向节点的建议，尚未执行家族决定。",
+    "changes_if_approved": [
+      {
+        "target": "vsp_c1 当前原生门控价值比较",
+        "from": "P78完成，未选择后继对象",
+        "to": "建议结束这个具体实例；仍保留其他持有信用问题，方向生命周期不变"
+      }
+    ],
+    "if_refused": "节点可选择一次完整普通网络加门的B，或精确修正候选；先形成方向决定，再按独立分配实施，不使用P79启动实验。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B12_INTAKE_20260909.md",
+        "quote": "All three Cs are CHANGE_DOWN.512 is UP/UP/DOWN;768 is WITHIN/WITHIN/DOWN.",
+        "why": "三次相对优势收缩，晚期没有超过所选尺度的正例，且8503晚期有较大缺口。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_P79_QUESTION_20260909.md",
+        "quote": "This preserves the strongest attained generic body and tests adding the bias without replacing ordinary units.",
+        "why": "早期仍有正例；给处理臂也保留完整普通网络，是一个具体且有限的继续方案，但尚无新结果。"
+      }
+    ],
+    "uncertainty": [
+      "三对结果不证明稳定总体劣势、预算因果或持有信用机制无效。",
+      "新增640参数，容量、初始化、共同裁剪和优化均可影响结果。",
+      "调优同信息headroom与新增架构的时间成本仍未知；所有参照损失保留。"
+    ],
+    "cost": {
+      "compute": "当前准备零科学调用；候选一对2×768×256训练步+3×32×256评价步=417792步，3072次Adam，96评价；完整1800秒/臂、3600秒/对拟议。原协议475.85/507.29/504.91秒是参考，非新方案保证。",
+      "owner_time": "可异步覆盖建议，无需逐项批准。",
+      "reversibility": "reversible",
+      "waits_on_this": "现有方向节点的后继对象或结束实例裁决；Root可继续其他工作。"
+    },
+    "verdict_text": "DM建议在现有证据下结束当前门控价值比较，不选择这个实例的后继B。这只是提交给em:vsp_c1:convergence的建议，尚未执行；不代表所有持有信用机制失败，也不改变Portfolio生命周期或优先级。",
+    "source": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_P79_PREPARATION_INTAKE_20260909.md"
+  },
+  "starred": true,
+  "approval_correction": "原DM停止建议未执行，现由完整合规的方向节点继续决定覆盖；没有伪造所有者回复，也没有重发咨询。",
+  "execution_history": [
+    {
+      "at": "2026-09-09T12:21:57+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/vsp_c1/pro_packets/20260909_native_hold_value_post_b12_convergence/archive/RESPONSE.md",
+      "record": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_P79_CONVERGENCE_INTAKE_20260909.md",
+      "state": "applied",
+      "summary": "已完整读取GitHub固定提交77687230cb1f3898e55c21d23c05ba1840d820ea的31711字节答复和匹配评论。节点选择两臂保留完整普通体、处理臂加原门的一次B；不是RECAST。仅采纳方向选择，本次未建卡、未命名新种子、未派实现或运行。短回复的阻塞说法原样保留，实际交付已核实；Root负责后续整合与分配。",
+      "correction": "原DM停止建议未执行，现由完整合规的方向节点继续决定覆盖；没有伪造所有者回复，也没有重发咨询。"
+    }
+  ]
+}

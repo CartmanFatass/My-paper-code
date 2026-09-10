@@ -1,0 +1,406 @@
+{
+  "prepared_utc": "2026-09-09T13:28:57.582002+00:00",
+  "purpose": "Direction-question preparation from accepted records only; no new result, experiment, model import or changed candidate.",
+  "source_commit": "0c7b5402e1c605c3d1eb3b7ee0bc7441f1c97f14",
+  "configuration_source": "experiments/candidates/vsp_c1/native_hold_value_b01/study.py",
+  "configuration_defaults_from_AST": {
+    "seed": 8101,
+    "fixture": false,
+    "horizon": 256,
+    "train_episodes": 512,
+    "eval_episodes": 32,
+    "chunk": 32,
+    "arm_cap": 1800,
+    "pair_cap": 3600,
+    "ratio_grouping": "agent_compound"
+  },
+  "observed_B13": {
+    "source": "results/native_hold_value_b13_8601_20260909/dm_analysis.json",
+    "source_scientific_sha": "23ebb0f5e22286d9ea77a145f980bedacc32d9da",
+    "master": 8601,
+    "point_reading": "DOWN",
+    "independent_unit": "one prospectively matched training pair, two fits; conditional 32-layout panels are not training replicates",
+    "native_controllers": {
+      "GATED-V": {
+        "mean_J": 0.14432349607139883,
+        "conditional_se": 0.011874970947597617
+      },
+      "MLP-V": {
+        "mean_J": 0.1763920765685144,
+        "conditional_se": 0.009401179652869822
+      },
+      "H": {
+        "mean_J": 0.1408296189671304,
+        "conditional_se": 0.011045898140768612
+      }
+    },
+    "contrasts": {
+      "GATED-V_minus_MLP-V": {
+        "mean": -0.032068580497115584,
+        "conditional_se": 0.010110683526267093,
+        "negative_count": 25,
+        "n_evaluation_identities": 32
+      },
+      "GATED-V_minus_H": {
+        "mean": 0.003493877104268443,
+        "conditional_se": 0.012229797520304786,
+        "negative_count": 15,
+        "n_evaluation_identities": 32
+      },
+      "MLP-V_minus_H": {
+        "mean": 0.035562457601384025,
+        "conditional_se": 0.011536662333789827,
+        "negative_count": 11,
+        "n_evaluation_identities": 32
+      }
+    },
+    "actual_counts": {
+      "train_team_steps": 393216,
+      "eval_team_steps": 24576,
+      "team_steps": 417792,
+      "optimizer_steps": 3072,
+      "train_episodes": 1536,
+      "eval_episodes": 96,
+      "velocity_decisions": 2035658,
+      "duration_decisions": 8000,
+      "d4": 4114,
+      "recurrent_observations": 2048000,
+      "explicit_resets": 1632,
+      "constructor_resets": 4,
+      "constructors": 4,
+      "step_calls": 417792,
+      "scientific_uav_calls": 417792,
+      "diagnostic_frames": 0,
+      "completed_episode_steps": 417792,
+      "rollouts": 768,
+      "partial_episode_steps": 0
+    },
+    "parameters": {
+      "ordinary_body133": 34827,
+      "gate": 640,
+      "gated_body133_plus_gate": 35467,
+      "increase_percent": 1.8376546931978064,
+      "capacity_matched": false
+    },
+    "training_nonzero_r": {
+      "GATED-V": {
+        "rows": 2235,
+        "fraction": 0.0113677978515625
+      },
+      "MLP-V": {
+        "rows": 2220,
+        "fraction": 0.01129150390625
+      }
+    },
+    "total_relative_displacement": {
+      "GATED-V": 0.3104761031520962,
+      "MLP-V": 0.31910682722979045
+    },
+    "zero_initial_norm_reporting": {
+      "GATED-V": {
+        "duration": {
+          "initial_norm": 0.0,
+          "absolute_displacement": 0.24620351195335388,
+          "relative_displacement": null,
+          "reason": "undefined from zero initialization"
+        },
+        "gate": {
+          "initial_norm": 0.0,
+          "absolute_displacement": 0.6176927089691162,
+          "relative_displacement": null,
+          "reason": "undefined from zero initialization"
+        }
+      },
+      "MLP-V": {
+        "duration": {
+          "initial_norm": 0.0,
+          "absolute_displacement": 0.1575537919998169,
+          "relative_displacement": null,
+          "reason": "undefined from zero initialization"
+        }
+      }
+    },
+    "prediction_scores": {
+      "pro": {
+        "event": "Delta_new <= 0.01",
+        "probability": 0.65,
+        "event_observed": true,
+        "brier_score": 0.12249999999999998
+      },
+      "dm": {
+        "event": "-0.01 <= Delta_new <= 0.01",
+        "probability": 0.45,
+        "event_observed": false,
+        "brier_score": 0.2025
+      },
+      "owner": {
+        "status": "not taken (unattended)",
+        "score": null
+      }
+    },
+    "resource_reading": {
+      "native_summary_label": "resources_unmeasured",
+      "enclosing_wall_seconds": 477.99,
+      "runner_wall_seconds": 456.0979581460124,
+      "unpartitioned_residual_seconds": 21.89204185398762,
+      "conservative_arm_upper_bounds_seconds": {
+        "GATED-V": 267.9594930490223,
+        "MLP-V": 231.92254880496534
+      },
+      "peak_rss_mib": 544.7109375,
+      "aggregate_cpu_seconds": null,
+      "accepted_submissions": 1,
+      "valid_results": 1,
+      "wall_per_valid_result_seconds": 477.99,
+      "accepted_invocation_wall_per_valid_result_seconds": 477.99,
+      "timed_source_and_artifact_checks_seconds": 6.228452299998025,
+      "qualification": "Whole wall and RSS measured externally; aggregate CPU/components and complete engineering/collection wall remain unmeasured. No cross-protocol pooling."
+    }
+  },
+  "older_two_panel_pairs_separate": [
+    {
+      "master": 8501,
+      "source": "docs/research/candidates/vsp_c1/results/native_hold_value_b10_8501_20260909/dm_analysis.json",
+      "primary_reading": "CHANGE_DOWN",
+      "endpoint_readings": {
+        "512": "UP",
+        "768": "WITHIN"
+      },
+      "native_means": {
+        "GATED-V_512": 0.2003165067135222,
+        "GATED-V_768": 0.2041025987306807,
+        "MLP-V_512": 0.13643680275066952,
+        "MLP-V_768": 0.19446198815446067,
+        "H": 0.17061603371582315
+      },
+      "contrasts": {
+        "GATED-V_512_minus_MLP-V_512": {
+          "mean": 0.06387970396285268,
+          "conditional_se": 0.007659844646370837,
+          "negative_count": 2
+        },
+        "GATED-V_512_minus_H": {
+          "mean": 0.029700472997699057,
+          "conditional_se": 0.00993866482007968,
+          "negative_count": 10
+        },
+        "MLP-V_512_minus_H": {
+          "mean": -0.03417923096515363,
+          "conditional_se": 0.009625718152610459,
+          "negative_count": 23
+        },
+        "GATED-V_768_minus_MLP-V_768": {
+          "mean": 0.009640610576220038,
+          "conditional_se": 0.008087733771552252,
+          "negative_count": 15
+        },
+        "GATED-V_768_minus_H": {
+          "mean": 0.033486565014857556,
+          "conditional_se": 0.011232046212940232,
+          "negative_count": 10
+        },
+        "MLP-V_768_minus_H": {
+          "mean": 0.023845954438637518,
+          "conditional_se": 0.010912814962417269,
+          "negative_count": 13
+        },
+        "change": {
+          "mean": -0.054239093386632645,
+          "conditional_se": 0.00921549713046484,
+          "negative_count": 26
+        }
+      }
+    },
+    {
+      "master": 8502,
+      "source": "docs/research/candidates/vsp_c1/results/native_hold_value_b11_8502_20260909/dm_analysis.json",
+      "primary_reading": "CHANGE_DOWN",
+      "endpoint_readings": {
+        "512": "UP",
+        "768": "WITHIN"
+      },
+      "native_means": {
+        "GATED-V_512": 0.20911290995288803,
+        "GATED-V_768": 0.20939916833462438,
+        "MLP-V_512": 0.18779805902515903,
+        "MLP-V_768": 0.20000856769719094,
+        "H": 0.1623154235179454
+      },
+      "contrasts": {
+        "GATED-V_512_minus_MLP-V_512": {
+          "mean": 0.02131485092772898,
+          "conditional_se": 0.004356590412006853,
+          "negative_count": 5
+        },
+        "GATED-V_512_minus_H": {
+          "mean": 0.04679748643494264,
+          "conditional_se": 0.009331146689612803,
+          "negative_count": 5
+        },
+        "MLP-V_512_minus_H": {
+          "mean": 0.025482635507213653,
+          "conditional_se": 0.009665856195865335,
+          "negative_count": 10
+        },
+        "GATED-V_768_minus_MLP-V_768": {
+          "mean": 0.00939060063743342,
+          "conditional_se": 0.007632995071817825,
+          "negative_count": 16
+        },
+        "GATED-V_768_minus_H": {
+          "mean": 0.047083744816678985,
+          "conditional_se": 0.012223403798776655,
+          "negative_count": 7
+        },
+        "MLP-V_768_minus_H": {
+          "mean": 0.03769314417924557,
+          "conditional_se": 0.011170102300392303,
+          "negative_count": 9
+        },
+        "change": {
+          "mean": -0.011924250290295561,
+          "conditional_se": 0.0074169720617037575,
+          "negative_count": 22
+        }
+      }
+    },
+    {
+      "master": 8503,
+      "source": "docs/research/candidates/vsp_c1/results/native_hold_value_b12_8503_20260909/dm_analysis.json",
+      "primary_reading": "CHANGE_DOWN",
+      "endpoint_readings": {
+        "512": "DOWN",
+        "768": "DOWN"
+      },
+      "native_means": {
+        "GATED-V_512": 0.1653390673217001,
+        "GATED-V_768": 0.16116423753388723,
+        "MLP-V_512": 0.18032066449288034,
+        "MLP-V_768": 0.23475399331738186,
+        "H": 0.13949774240497692
+      },
+      "contrasts": {
+        "GATED-V_512_minus_MLP-V_512": {
+          "mean": -0.014981597171180248,
+          "conditional_se": 0.007221301873164606,
+          "negative_count": 20
+        },
+        "GATED-V_512_minus_H": {
+          "mean": 0.025841324916723158,
+          "conditional_se": 0.010929284701044272,
+          "negative_count": 11
+        },
+        "MLP-V_512_minus_H": {
+          "mean": 0.040822922087903404,
+          "conditional_se": 0.012961360088402474,
+          "negative_count": 11
+        },
+        "GATED-V_768_minus_MLP-V_768": {
+          "mean": -0.07358975578349462,
+          "conditional_se": 0.010358654286610857,
+          "negative_count": 31
+        },
+        "GATED-V_768_minus_H": {
+          "mean": 0.0216664951289103,
+          "conditional_se": 0.013570936930895502,
+          "negative_count": 14
+        },
+        "MLP-V_768_minus_H": {
+          "mean": 0.09525625091240493,
+          "conditional_se": 0.014361484251913985,
+          "negative_count": 5
+        },
+        "change": {
+          "mean": -0.05860815861231437,
+          "conditional_se": 0.011459089552918031,
+          "negative_count": 28
+        }
+      }
+    }
+  ],
+  "older_final_protocols_source": "VSPC1_NATIVE_HOLD_VALUE_P79_PREPARATION_FACTS_20260909.json: older_final512_protocol, older_final768_protocol, historical_boundaries; all native/H amounts and adverse identities retained there.",
+  "historical_boundaries": {
+    "final_only_768": "B08/8401 and B09/8402 remain separate; use B09 intake6 for their n=2 summary and all H losses",
+    "final_only_512": "B05/8301, B06/8302, B07/8303 remain separate; use B09 intake6 for their n=3 summary",
+    "older": "width128 and unnormalized results/quarantines remain unchanged"
+  },
+  "cost_reference_only_unallocated": {
+    "configuration": {
+      "fixture": false,
+      "horizon": 256,
+      "train_episodes": 768,
+      "eval_episodes": 32,
+      "chunk": 32,
+      "arm_cap": 1800,
+      "pair_cap": 3600,
+      "ratio_grouping": "agent_compound"
+    },
+    "future_master": null,
+    "formula": "2*768*256 + 3*32*256 team steps; 2*(768/2)*4 Adam; 3*32 evaluation episodes",
+    "work": {
+      "matched_pairs": 1,
+      "fits": 2,
+      "train_team_steps": 393216,
+      "eval_team_steps": 24576,
+      "team_steps": 417792,
+      "rollouts": 768,
+      "moment_merges": 768,
+      "optimizer_steps": 3072,
+      "eval_episodes": 96,
+      "scored_episodes": 1632,
+      "learned_final_checkpoints": 2,
+      "H_banks": 1,
+      "environment_constructors": 4,
+      "target_rows": 393216,
+      "four_epoch_target_terms": 1572864,
+      "nested_search_candidates": 0,
+      "solver_calls": 0,
+      "new_diagnostic_or_extra_panels": 0
+    },
+    "per_arm_work": {
+      "train_steps": 196608,
+      "adam": 1536,
+      "moment_merges": 384,
+      "targets_per_merge": 512,
+      "target_rows": 196608,
+      "learned_eval_steps": 8192,
+      "gated_total_steps": 204800,
+      "mlp_with_hover_total_steps": 212992
+    },
+    "same_count_observed_whole_wall_seconds": 477.99,
+    "same_count_observed_arm_upper_bounds_seconds": {
+      "GATED-V": 267.9594930490223,
+      "MLP-V": 231.92254880496534
+    },
+    "same_count_observed_peak_rss_mib": 544.7109375,
+    "timed_checks_separate_seconds": 6.228452299998025,
+    "aggregate_CPU_seconds": null,
+    "full_engineering_collection_seconds": null,
+    "future_runtime_guarantee": false,
+    "reference_complete_arm_cap_seconds": 1800,
+    "reference_complete_pair_cap_seconds": 3600,
+    "method": "Existing accepted counts and Config AST; no profiler, cost experiment, policy search or timing forecast experiment."
+  },
+  "current_new_exposure": {
+    "scientific_invocations": 0,
+    "accepted_submissions": 0,
+    "training_pairs": 0,
+    "fits": 0,
+    "model_constructions": 0,
+    "environment_constructions": 0,
+    "native_team_steps": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0,
+    "extra_panels": 0,
+    "tuning_trials": 0,
+    "cost_probes": 0
+  },
+  "exposure_line": "P81 preparation: zero new scientific invocations/model/environment constructions, training pairs/fits, team steps, optimizer steps, evaluations, tuning and cost probes. Existing B13/8601 only: 393216 training team steps, 3072 Adam, 96 evaluation episodes; total relative displacement GATED=0.3104761031520962, MLP=0.3191068272297904, absolute gate displacement=0.6176927089691162. Gate and duration heads start at zero, so their relative displacements are undefined. A future pair/master is unallocated.",
+  "headroom": "Tuned matching same-information headroom absent; H untuned, not upper or competence certificate.",
+  "literature_reuse": {
+    "source": "VSPC1_NATIVE_HOLD_VALUE_P79_PREPARATION_FACTS_20260909.json: literature; VSPC1_NATIVE_HOLD_VALUE_P79_QUESTION_20260909.md section5",
+    "verified_coverage_retained": "Inst-sci190 real records; My-lib inspected mechanism index2 synthetic fixtures/page index0 real rows. No new search or acquisition.",
+    "decision_change": "MARC local observation/action-value/SAC setting does not identify this centralized value/PPO loss or mandate a different baseline. No new mechanism proposal."
+  },
+  "engineering_scope_section4": "none"
+}

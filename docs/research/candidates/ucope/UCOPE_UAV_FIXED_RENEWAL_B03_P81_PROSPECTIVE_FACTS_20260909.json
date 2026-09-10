@@ -1,0 +1,110 @@
+{
+  "prepared_at": "2026-09-09T05:39:42-07:00",
+  "object": "UCOPE-UAV-FIXED-RENEWAL-B03",
+  "selector": "renewal_fixed_b03",
+  "master": 8001,
+  "authoring_start": "a8785f147d55d0938635ad152f98a99d92045066",
+  "preserved_algorithm_source": "a1a3dd77aa4e02a07e1f6ed17eea04fea633cc11",
+  "main_required_inputs_checked_at": "e628653ee441f09b4aefb71886b87b3e8c8bac4c",
+  "required_input_delta": "Relevant normative and learner/policy/native adapter bytes agree. At comparison main lacked P80; Root subsequently reported exact P80 integration at 1e86d4b8d without new source changes. Preserve a1a3dd77 and unrelated config-import relocations that do not enter UCOPE make_real.",
+  "calculation": "AST Config literal defaults; fixed rollout/epoch and architecture work reused from accepted P80; no source import, model or native execution.",
+  "bounded_nonreuse_check": "Word-boundary master/base and exact selector/object search in UCOPE docs and mapped source/runner/tests returned no match before preparation. No global RNG census.",
+  "rng": {
+    "b": 800100000,
+    "common_initialization": 800100011,
+    "F_initial_duration_head": 800100012,
+    "G_private_train_velocity": 800100021,
+    "G_private_train_duration": 800100022,
+    "F_private_train_velocity": 800100031,
+    "F_private_train_duration": 800100032,
+    "common_train_reset_first_last": [
+      800101000,
+      800101511
+    ],
+    "common_final_reset_first_last": [
+      800102000,
+      800102031
+    ],
+    "G_private_final_velocity_first_last": [
+      800103000,
+      800103031
+    ],
+    "G_private_final_duration_first_last": [
+      800104000,
+      800104031
+    ],
+    "F_private_final_velocity_first_last": [
+      800105000,
+      800105031
+    ],
+    "F_private_final_duration_first_last": [
+      800106000,
+      800106031
+    ]
+  },
+  "work": {
+    "matched_training_instances": 1,
+    "fitted_arms": 2,
+    "train_episodes_per_arm": 512,
+    "train_native_steps_per_arm": 131072,
+    "rollouts_per_arm": 256,
+    "Adam_per_arm": 1024,
+    "total_rollouts": 512,
+    "total_Adam_calls": 2048,
+    "total_native_steps": 286720,
+    "final_evaluation_episodes": 96,
+    "explicit_resets": 1120,
+    "constructor_resets": 2,
+    "existing_diagnostic_rows": 1600,
+    "F_renewal_head_forward_rows_bounds": [
+      1003520,
+      4014080
+    ],
+    "F_parameters": 68553,
+    "G_parameters": 66311,
+    "F_frozen_duration_parameters": 2242,
+    "total_parameters": 134864,
+    "trainable_parameters": 132622,
+    "learning_rate": 0.0003,
+    "F_head_dense_MAC_bounds": [
+      2215772160,
+      8863088640
+    ]
+  },
+  "primary": {
+    "contrast": "F_minus_G",
+    "mean": "paired native episode differences on new 8001 only",
+    "MEI_absolute": 0.01,
+    "secondary_contrasts": [
+      "F_minus_H",
+      "G_minus_H"
+    ],
+    "past_primaries_unchanged": true
+  },
+  "predictions": {
+    "F_minus_G_above_0_01_probability": 0.5,
+    "F_minus_H_above_0_01_probability": 0.6,
+    "owner": "not taken (unattended)"
+  },
+  "caps": {
+    "complete_arm_seconds": 1800,
+    "complete_invocation_seconds": 3600,
+    "max_accepted_submissions": 1,
+    "focused_checks_seconds": 300
+  },
+  "new_scientific_exposure_at_preparation": 0,
+  "pooled_primary_or_training_population_interval": false,
+  "exposure_line": "matched_training_instances=1; fitted_arms=2; native_steps=286720; optimizer_steps=2048; final_eval_episodes=96; lr=0.0003; F_parameters=68553; G_parameters=66311; F_frozen_duration_parameters=2242; trainable_parameters=132622",
+  "P80_measured_reference": {
+    "F_arm_seconds": 155.5547909429879,
+    "G_including_H_seconds": 136.1789815700031,
+    "outer_seconds": 306.09,
+    "guarantees_new_seconds": false
+  },
+  "multipliers_vs_P80": {
+    "training": 1.0,
+    "final_eval": 1.0,
+    "native_steps": 1.0
+  },
+  "new_cross_instance_mean_or_SD": false
+}

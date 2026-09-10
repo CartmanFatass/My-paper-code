@@ -356,7 +356,158 @@ intake: `pro_packets/20260908_post_b03_convergence/archive/RESPONSE.md` at
 PRO_FINAL / OWNER_DELEGATED; current Portfolio lifecycle and priority remain
 unchanged.
 
-## Objects and their state (2026-09-08)
+## Native individual-renewal UAV boundary (P67, 2026-09-08)
+
+Complete Convergence selects only the new scenario1 fixed-team-clock individual
+internal-renewal B family and one I/authentic-D0 early-learning pair. P52's
+supplied-public-mask extension stays ended and the ordinary public-cue corridor
+family stays paused. This existing D2 internal-threshold question is explicitly
+not a recast; no whole-direction lifecycle, priority, capacity or formal UAV-entry
+registration follows. There is no new native UAV performance evidence yet.
+
+The accepted hypothesis is that motion and partner co-adaptation change service
+geometry enough for an additional individual skill decision to help the current
+recurrent actor. Source verifies internal partial assignment → real continuous
+movement → native reward and own subsequent learner data. The strongest null is
+authentic D0's same-information, every-step reactive actor with memory; extra
+policy gaps may instead disturb skills or add optimizer/segment work. Old E3
+competent losses remain the strongest empirical caution, alongside small-seed
+support and E2's duration control. B03's local H−D0 gain and native G shortfall
+remain corridor observations and are not evidence of this new intervention.
+
+The next discriminator is one prospective new I/D0 pair on six fixed UAVs,
+fifty users, uniform/free-space H500, latent 6/6, common team k10 and caps10:
+I individual cost .25/team infinity, D0 both infinity. Each learns for five
+16×500 rollouts and receives one final 32-episode evaluation. Native mean team
+reward is 6×adapter episode return/500; MEI .01. Positive, within-MEI, opposite
+and incomplete readings all end one intake, without automatic expansion.
+This is a package-performance comparison, with arm-local data/credit/optimizer
+work; it cannot isolate timing causality or establish stable superiority.
+Tuned same-information scenario1 headroom remains absent; E0 supplies its
+permitted exposure/integrity and historical cost facts, not a return ranking.
+
+Full per-arm caps are D0 3600/I 18000 seconds, including initialization through
+publication; the tenfold decision-row stress scenario is not a measured wall
+bound. The card and bounded CM specification are prepared; this intake assigns
+no implementation or experiment. Source: `pro_packets/20260908_p67_uav_internal_renewal/archive/RESPONSE.md`
+at `48b000c08d2a82192de733740230545c97b2a7ab`, its `CONVERGENCE_INTAKE.md`, and
+`FSD_UAV_INDIVIDUAL_RENEWAL_B01_SCIENCE_CARD_20260908.md`. Decision provenance:
+PRO_FINAL / OWNER_DELEGATED. P67 increments the recast count by zero.
+
+## Accepted native individual-renewal UAV result (B01/P70, 2026-09-08)
+
+One newly trained scenario1 I/authentic-D0 pair gives native I−D0
+−.049670563167111874, below the .01 MEI. Means are.21979038918069888 I and
+.26946095234781076 D0, with five16×500 learning rollouts and one32-episode
+endpoint per arm. Sample SD.13442151634285882 and conditional SE.023762591435853447
+describe this pair's endpoint spread only. The exact .25 individual-gap,
+common-team-clock10 configuration is weakened at this early budget; D0 is the
+better observed native outcome here. This does not establish stable D0
+superiority or close every threshold, the selected family or FSD.
+
+The strongest contradiction to benefit is the native loss despite higher
+coverage+.02418375. Quality falls.028570901271244925 and altitude penalty rises
+.05802791778573846; these outweigh the coverage component gain. All12 positive
+and20 negative endpoint differences are retained. The positive coverage signal
+and prior corridor B03 gain remain bounded support for broader exploration,
+with B03's public-rule shortfall and earlier competent E3 losses preserved.
+Neither the corridor evidence nor parameter movement establishes UAV benefit.
+
+I has54390 gap-triggered individual decisions in training, shorter segments and
+3345 coordinator optimizer steps versus525 for D0. Both arms execute real
+learning; other network step counts match while data/weights remain arm-local.
+At deterministic evaluation, both have zero individual gap causes and identical
+decision timing counts, despite different learned policies and token switches.
+The surviving alternative is a training-data/credit/control change interacting
+with native motion and altitude cost, rather than reliable added endpoint
+renewal value. The loss cannot be causally assigned to one training component.
+Endpoint segment lengths are unmeasured by empty storage buffers; the native
+primary and decision counters remain trustworthy. No sparse-observation,
+learned-termination, matched-compute or transfer claim follows.
+
+Both original handles completed at exact source ca36e2f94 with fresh admission,
+full walls471.89/1221.49s and summed1693.38s within the original caps. This is
+actual native UAV learning/evaluation evidence under the P67-selected B card,
+not a Portfolio lifecycle/priority action. Tuned same-information headroom
+remains absent. P70 is finished; no next experiment is selected. If a later
+learning-reliability question is allocated, one unchanged independent training
+pair is the smallest direct discriminator of recurrence; no sweep or causal
+census precedes it. P52's corridor stops and recast count remain unchanged.
+Evidence: `FSD_UAV_INDIVIDUAL_RENEWAL_B01_P70_RESULT_EVIDENCE_20260908.md`,
+`FSD_UAV_INDIVIDUAL_RENEWAL_B01_P70_INTAKE_20260908.md`, and the original card.
+
+## Accepted native UAV loss recurrence (B02/P72, 2026-09-09)
+
+One new unchanged .25/clock10/five-update I/authentic-D0 pair gives native
+I−D0−.035312725297886094, below the .01 MEI. Means are.45009930351470057 I
+and.4854120288125866 D0; conditional endpoint SE is.012523489942436556.
+Together with P70−.049670563167111874, the two observed learning instances
+have descriptive mean−.04249164423249899 and sample SD.01015252452050656.
+Each has its own finite paired endpoint panel; the variation does not isolate
+training-only variance or establish stable D0 superiority. The bounded claim
+is recurrence of native loss for this configuration and early budget.
+
+The strongest contradiction to benefit is the pair of native losses. P72's
+coverage falls.05259875 while quality rises.00174615 and altitude penalty
+falls.00098256. This differs from P70's coverage gain with quality/altitude
+harm, so altitude harm is not a shared necessary accounting explanation.
+The new small component benefits,9 positive endpoint contrasts and higher
+stochastic training returns on rollouts2–5 remain as narrower support;
+none replaces the final deterministic native loss. Prior corridor positives,
+their public-rule shortfall and competent E3 negatives remain unchanged.
+
+Training I again changes exposure:65761 individual gap decisions and3765
+coordinator optimizer steps versus0/525 D0; its complete wall is2.7514 times
+D0. At both deterministic endpoints there are zero extra gap decisions and
+identical timing counts, although learned policies and token switches differ.
+The surviving explanation remains a training-data/credit/control package
+changing native spatial behavior. Neither common component causality nor a
+deployed renewal benefit is established. Empty evaluator storage leaves
+duration statistics unmeasured; native primary and decision counters remain valid.
+
+The allocated independent-pair recurrence discriminator is answered. No next
+scientific discriminator, family closure or recast is selected. Further family
+disposition belongs to the existing direction node. Tuned same-information UAV
+headroom remains absent. Both original P72 arms are complete, with1768.78s
+summed wall/7016.85s aggregate CPU and no added scientific invocation.
+Evidence: `FSD_UAV_INDIVIDUAL_RENEWAL_B02_P72_RESULT_EVIDENCE_20260909.md`,
+`FSD_UAV_INDIVIDUAL_RENEWAL_B02_P72_INTAKE_20260909.md`, and the B02 card.
+
+## Post-native-UAV-B02 extension boundary (P74, 2026-09-09)
+
+Complete Convergence selects **A: end the unchanged scenario1 individual
+cost .25, k10/caps10, five-update extension; no next object or twenty-rollout
+pair is selected**. The two real native I/D0 learning instances are complete;
+this stops their exact early-budget extension without claiming stable D0
+superiority, all-budget failure or broad FSD invalidity. Other thresholds,
+training budgets and questions remain empirically unresolved. P52 and the
+ordinary corridor stops remain; no recast or Portfolio disposition is added.
+
+The strongest contradiction to benefit is I−D0−.049670563167111874 and
+−.035312725297886094 with greater I training work. P70's coverage gain and
+P72's higher sampled training returns on rollouts2–5, small quality/altitude
+benefits and positive endpoint contrasts remain support for possible further
+exploration. P70 gains coverage with quality/altitude harm; P72 loses coverage
+while improving the other terms. Their signs do not identify a common cause.
+Both deterministic endpoints have zero extra gap causes, so the observations
+remain learning/data/credit/control package comparisons, not isolated online
+renewal effects. Two finite endpoint panels do not establish population
+superiority; authentic D0 remains valid but untuned, with tuned headroom absent.
+
+The surviving alternative is a possible native benefit after more training.
+The specified twenty-rollout B is a legal different question, but the node
+judges its current information value insufficient for its visible additional
+work. This is not a prior-positive, competence, headroom, exact-diagnostic or
+convergence gate. No ten/twenty-rollout substitute, third unchanged pair,
+search, profile or next discriminator is selected. All existing results and
+frozen card meanings remain intact.
+
+Evidence: `pro_packets/20260909_p74_post_uav_b02_convergence/archive/RESPONSE.md`
+(full immutable Pro commit `c01801fc2fcead64c417deeb8a7e214252d47d1f`),
+`pro_packets/20260909_p74_post_uav_b02_convergence/CONVERGENCE_INTAKE.md`,
+and the accepted P70/P72 result/intake records above.
+
+## Objects and their state (2026-09-09)
 
 | Object | State | Record |
 | --- | --- | --- |
@@ -372,6 +523,9 @@ unchanged.
 | Native-renewal learning B02 / P40–P43 | complete valid B, new770303/770304 pair; H−C+.52039 above .01, G−H+.01085 full; all3 arms/665.01s retained; separate from B01, no successor | `FSD_NATIVE_RENEWAL_LEARNING_B02_SCIENCE_CARD_20260908.md`; `FSD_NATIVE_RENEWAL_LEARNING_B02_RESULT_EVIDENCE_20260908.md`; `FSD_NATIVE_RENEWAL_LEARNING_B02_INTAKE_20260908.md` |
 | Native-renewal learning B03 / P46–P47 | complete valid B, one new770403/770404 H/D0 pair; H−D0+.39286 above .01, G−H+.11529 full; all3 arms/898.61s retained; weak actual D0 remains valid, no successor | `FSD_NATIVE_RENEWAL_LEARNING_B03_SCIENCE_CARD_20260908.md`; `FSD_NATIVE_RENEWAL_LEARNING_B03_RESULT_EVIDENCE_20260908.md`; `FSD_NATIVE_RENEWAL_LEARNING_B03_INTAKE_20260908.md` |
 | Post-B03 Convergence / P52 | complete PRO_FINAL A; tested supplied-public-mask learning extension ended, ordinary family pause retained, no successor/recast/UAV entry; all B results preserved | `pro_packets/20260908_post_b03_convergence/archive/RESPONSE.md`; `pro_packets/20260908_post_b03_convergence/CONVERGENCE_INTAKE.md` |
+| Native individual-renewal UAV B01 / P67–P70 | complete valid B, one new770503/780503 I/D0 pair; native I−D0−.0496705632 below−.01 MEI, coverage gain retained, training gaps but zero endpoint gaps; both exit0,1693.38s summed wall; no successor or broader closure | `FSD_UAV_INDIVIDUAL_RENEWAL_B01_P70_RESULT_EVIDENCE_20260908.md`; `FSD_UAV_INDIVIDUAL_RENEWAL_B01_P70_INTAKE_20260908.md`; original card/P67 decision |
+| Native individual-renewal UAV B02 / P72 | complete valid B, new770603/780603 pair; I−D0−.0353127253 below−.01, native loss in both observed learning instances; different component balance, training activity and endpoint inactivity retained;1768.78s summed wall; no successor selected | `FSD_UAV_INDIVIDUAL_RENEWAL_B02_P72_RESULT_EVIDENCE_20260909.md`; `FSD_UAV_INDIVIDUAL_RENEWAL_B02_P72_INTAKE_20260909.md`; B02 card |
+| Post-native-UAV-B02 Convergence / P74 | complete PRO_FINAL A; end only unchanged .25/k10/five-update extension, no twenty-rollout B or successor selected; longer-budget value remains unresolved, no recast or Portfolio change | `pro_packets/20260909_p74_post_uav_b02_convergence/archive/RESPONSE.md`; `pro_packets/20260909_p74_post_uav_b02_convergence/CONVERGENCE_INTAKE.md` |
 | Advancement plan | E1 → E2 → E2b/E3 → E4 → C-gate; E2b is not selected at this boundary | `docs/Claude_docs/plans/RESEARCH_ADVANCEMENT_PLAN_20260902.md` |
 
 ## Code

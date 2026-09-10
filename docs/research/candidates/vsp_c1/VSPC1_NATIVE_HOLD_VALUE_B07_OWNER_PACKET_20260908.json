@@ -1,0 +1,38 @@
+{
+  "question": "是否接受B07新卡：保持归一化门控与宽133普通MLP/H比较，用8303补一对独立训练以观察已见差异？",
+  "changes_if_approved": [
+    {
+      "target": "VSPC1 B07科学卡与P72对象层下一阶",
+      "from": "同一比较已有8301正向UP和8302负号WITHIN两对，P71已完整结束",
+      "to": "P72仅一对新独立训练，主键8303，事前WITHIN概率55%，不改变比较、工作量或时限"
+    }
+  ],
+  "if_refused": "在下一干净边界应用指令，保留所有已发生证据和真实接受状态；不改写前两对，也不重复不确定的提交。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B07_SCIENCE_CARD_20260908.md",
+      "quote": "One fresh training unit directly addresses the observed variation.",
+      "why": "新的训练单位直接补充已观察到的训练差异；无需先要求结果同号或重评旧策略。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B07_SCIENCE_CARD_20260908.md",
+      "quote": "Their descriptive mean .0049786966\nand SD .0164235659 describe two training pairs, not a stable population result.",
+      "why": "已有主差值0.01659与负0.00663，均值低于门槛；第三对可能再次为负或门槛内，不能当作确认性结论。"
+    }
+  ],
+  "uncertainty": [
+    "三对仍只报告逐对结果和描述性差异，不建立总体确认规则。",
+    "初始化、门控结构、共享裁剪、价值尺度、浮点与伙伴共适应未区分。",
+    "同信息调优余量记录缺失；H为未调优参考，各臂的不利回合继续保留。"
+  ],
+  "cost": {
+    "compute": "仅一对，最多一次接受的提交：2×512×256训练加3×32×256评估，共286720步、2048次Adam、96次评估；每完整臂1800秒、整对3600秒上限。前两对315.20/407.33秒仅作规划参考。最小绑定检查总额≤300秒，无试跑、调参、追加评估或自动续跑。",
+    "owner_time": "已按对象层站立委托选择，无需等待回复，可异步纠正。",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing；Root已分配完整P72，科学选择由DM对象层委托执行"
+  },
+  "verdict_text": "Options: (a) select one independent unchanged-comparison pair to assess variation;\n(b) change method/comparator; (c) add diagnostics or infer a stronger claim.\nRecommend/select(a). Owner-delegated decision (unattended,2026-09-03 instruction):\n(a), **OWNER_DELEGATED object tier**, within Root's complete P72 allocation.",
+  "source": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B07_SCIENCE_CARD_20260908.md"
+}

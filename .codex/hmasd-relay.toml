@@ -1,0 +1,9 @@
+schema_version = 1
+status = "active"
+thread_id = "01a08456-2cf3-7f02-8595-42d84ba41a4c"
+root_thread_id = "01a07249-b095-7821-8ce2-e9c32ba85267"
+model = "gpt-5.6-luna"
+reasoning_effort = "low"
+instructions_path = "docs/project/SIBLING_COMMUNICATION.md"
+# Model/effort describe creation only. Every cross-task send omits both overrides.
+# Only Root-action handoffs use this relay; ordinary native traffic stays native.

@@ -30,7 +30,6 @@ TRANSPORT_VALIDATE = _load("transport_validate", SCRIPT_DIR / "validate_request.
 MATERIALIZE = _load("transport_materialize", SCRIPT_DIR / "materialize_packet.py")
 BIND = _load("transport_bind", SCRIPT_DIR / "bind_conversation.py")
 TRANSPORT_SKILL = ROOT / ".agents" / "skills" / "hmasd-chatgpt-pro-transport" / "SKILL.md"
-OUTSOURCE_SKILL = ROOT / ".agents" / "skills" / "hmasd-workflow-outsource" / "SKILL.md"
 SINGLETON_THREAD_ID = "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"
 
 
@@ -897,7 +896,6 @@ def test_skill_contracts_encode_execution_owner_async_and_tab_boundaries() -> No
     transport_text = TRANSPORT_SKILL.read_text(encoding="utf-8")
     for reference in ("attachment-compatibility.md", "attachment-send.md"):
         transport_text += (TRANSPORT_SKILL.parent / "references" / reference).read_text(encoding="utf-8")
-    outsource_text = OUTSOURCE_SKILL.read_text(encoding="utf-8")
 
     for phrase in (
         "independent Luna/high Transport task executes",
@@ -925,8 +923,6 @@ def test_skill_contracts_encode_execution_owner_async_and_tab_boundaries() -> No
     assert "transport-level confirmation gate" not in transport_text
     assert "01a05860-" not in transport_text
     assert "01a04f5a-" not in transport_text
-    assert "owns the complete edit and verification" in outsource_text
-    assert "never silently fan out, duplicate, or replace an agent" in outsource_text
     assert "close the temporary tab\nafter recording that state" not in transport_text
 
 

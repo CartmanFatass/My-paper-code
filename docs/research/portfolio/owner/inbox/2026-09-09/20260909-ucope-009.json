@@ -1,0 +1,76 @@
+{
+  "id": "20260909-ucope-009",
+  "created": "2026-09-09T07:49:34-07:00",
+  "direction": "ucope",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "P84：新学习历史中的完整反馈与悬停模式",
+  "context": "固定1或2步随机续约，在另一条独立学习历史上是否重现完整反馈与悬停差值模式？结构是部分可观测五机团队的异步时长承诺。保留P83反馈输给悬停和P82主差值在阈值内，固定评估预算，不默认第四次同方比较。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "按Root P84分配执行一次8301，任何符号都结束，不自动重复或追加评估。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "在下一可执行边界停止本卡未来工作，保留已发生的全部结果。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "在下一可执行边界按明确新指令修订未来工作，不重写旧卡或结果。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "两次短承诺的完整反馈与悬停模式不同；按本次固定预算观察另一学习历史，并保留所有符号。",
+  "evidence": [
+    "docs/research/candidates/ucope/UCOPE_UAV_SHORT_FIXED_RENEWAL_B03_SCIENCE_CARD_20260909.md",
+    "docs/research/candidates/ucope/UCOPE_UAV_SHORT_FIXED_RENEWAL_B03_P84_INTAKE_20260909.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-09.md#L31",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否接受P84一次新训练，保持固定1或2步续约，观察完整反馈与悬停差值模式是否重现？",
+    "changes_if_approved": [
+      {
+        "target": "docs/research/candidates/ucope/UCOPE_UAV_SHORT_FIXED_RENEWAL_B03_SCIENCE_CARD_20260909.md",
+        "from": "P83主差值为正但反馈输给悬停，P82主差值在阈值内",
+        "to": "只新增8301一次独立训练，固定{1,2}和评估预算，保留全部符号"
+      }
+    ],
+    "if_refused": "在下一可执行边界停止或修订本卡未来工作；不重写已发生的结果或旧卡。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_UAV_SHORT_FIXED_RENEWAL_B02_P83_INTAKE_20260909.md",
+        "quote": "F's hover gains on both short fits and\none above-MEI F−G point support bounded performance exploration; P82 WITHIN\nand new G−H loss make the full contrast pattern in another learning history\nthe immediate uncertainty.",
+        "why": "有可继续观察的原生信号，但完整反馈与悬停模式尚不一致。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_UAV_SHORT_FIXED_RENEWAL_B03_SCIENCE_CARD_20260909.md",
+        "quote": "No stable, equivalence, causal-shortening or baseline-competence claim follows.",
+        "why": "单次新历史不能证明稳定性、短承诺因果效果或反馈基线能力。"
+      }
+    ],
+    "uncertainty": [
+      "新结果的任何符号都必须保留；不默认第四次同方比较。",
+      "317.61秒仅是P83测量，新用时未知。",
+      "同信息调优基线余量缺失。"
+    ],
+    "cost": {
+      "compute": "286720原生步、2048次Adam、96次评估；F头2007040–4014080行；每臂1800秒/全调用3600秒，检查≤300秒。",
+      "owner_time": "可异步复核，无需回复才继续。",
+      "reversibility": "costly",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "Recommend and execute **(a)**. The question is whether the full feedback/hover\npattern recurs in a fresh learning history under the fixed budget. Preserve\nP83's G−H loss and P82 WITHIN; every new sign completes the allocation. No\ndefault fourth unchanged history follows.",
+    "source": "docs/research/candidates/ucope/UCOPE_UAV_SHORT_FIXED_RENEWAL_B03_P84_INTAKE_20260909.md"
+  },
+  "starred": false
+}

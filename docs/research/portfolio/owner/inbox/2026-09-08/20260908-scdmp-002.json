@@ -78,5 +78,15 @@
     "verdict_text": "Application is blocked by a confirmed owner transport-policy conflict.",
     "source": "docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260908_held_residual_convergence/CONVERGENCE_INTAKE.md"
   },
-  "starred": true
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-09T16:37:50+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260908_held_residual_context_repair/archive/RESPONSE.md",
+      "record": "docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260908_held_residual_context_repair/CONVERGENCE_INTAKE_20260909.md",
+      "state": "applied",
+      "summary": "P58在合规新上下文形成完整裁决，应用原单组B及实质第二重铸；旧P56答复仍未追溯应用。所有者09-09恢复指令只改变交付执行权限，单组科学预算沿P56/P58原继续路径，Root已确认。"
+    }
+  ]
 }

@@ -79,5 +79,15 @@
     "verdict_text": "**Recommendation:** prepare one three-law B candidate with a preset **unmatched p=.1**\nrandom-clearing arm, the same real training recipe and128 once-fixed final episodes per\narm. Confidence that EVENT will usefully beat both nulls is lower after B03. Nevertheless,\nthe extra legal control can change which trained memory rule merits a later bounded\nfollow-up; another unchanged pair cannot observe that comparator. This is a performance\nquestion with a deliberately limited timing/dose interpretation, not a claim that event\nclearing is already useful or that a causal explanation must precede learning. Existing\ntrustworthy positive points can justify bounded exploration despite a new opposing sign\nunder evidence-spec §§11.8.2–3. This recommendation does not itself allocate its compute.",
     "source": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_TIMING_B01_INTAKE_20260909.md"
   },
-  "starred": false
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-09T22:26:46+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/decisions/2026-09-09-synthesis-execution.md",
+      "record": "docs/research/portfolio/decisions/2026-09-09-synthesis-execution.md",
+      "state": "applied",
+      "summary": "Root accepted prepared card fffffdff4 as main d7d7d9800; branch audit20 maps main163. Owner synthesis and standing object delegation now explicitly allocate original DM/CM complete three-law batch,5400s triple300s support,no scientific retry; no result or owner reply fabricated."
+    }
+  ]
 }

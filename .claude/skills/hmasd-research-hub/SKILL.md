@@ -19,6 +19,12 @@ handoff, and the actual Git state. Codex and Claude read the same specification 
 Codex role definitions in `.codex/agents/*.toml` are the source the Claude agents were ported
 from and remain the reference when a Claude agent's wording is unclear.
 
+Scientific reading: after the current assignment/card and relevant spec sections,
+use `.agents/skills/hmasd-scientific-tools/SKILL.md` scientific-reading mode for
+mechanism/card/comparator/estimand choices, result intake and scientific Pro questions.
+Reuse relevant current reads; record the concrete assumption and limit in the existing
+scientific record. Mechanical operations do not trigger this route.
+
 ## Capacity
 
 At most **two directions** advance concurrently in a Claude session (owner, 2026-09-03,

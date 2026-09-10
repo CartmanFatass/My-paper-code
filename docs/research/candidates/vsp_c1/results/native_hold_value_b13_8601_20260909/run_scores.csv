@@ -1,0 +1,3 @@
+task,seed,arm,score
+B13_intact_body_final768,8601,GATED-V,0.14432349607139883
+B13_intact_body_final768,8601,MLP-V,0.1763920765685144
