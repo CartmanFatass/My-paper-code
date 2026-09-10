@@ -1,8 +1,8 @@
 {
   "object": "FOLR-PUBLIC-LIFECYCLE-HALF-B01",
-  "state": "source_accepted_no_scientific_submission",
+  "state": "source_staged_commands_prepared_no_scientific_submission",
   "source_base": "ade8a1c7fe92fb420c981e15148ee7166047b122",
-  "source_sha": null,
+  "source_sha": "c6be208cd514b5d12fb13c7637e2d6376de11eb6",
   "arms": [
     "RETAIN",
     "HALF_EVENT"
@@ -40,15 +40,33 @@
     "preservation_check_seconds": [
       0.2677569,
       0.1479143
+    ],
+    "prepared_commands": [
+      {
+        "arm": "RETAIN",
+        "syntax_passed": true,
+        "handle_absent": true,
+        "scientific_output_absent": true
+      },
+      {
+        "arm": "HALF_EVENT",
+        "syntax_passed": true,
+        "handle_absent": true,
+        "scientific_output_absent": true
+      }
     ]
   },
   "support": {
     "carried_directory_test_seconds": 25.9131638,
     "directory_test_cumulative_seconds": 32.4911638,
     "preparatory_allowance_seconds": 5,
-    "total_seconds": 40.757490000000004,
+    "total_seconds": 44.464848299993484,
     "cap_seconds": 300,
-    "full_engineering_elapsed": "unmeasured"
+    "full_engineering_elapsed": "unmeasured",
+    "stage_read_seconds": 0.6438701,
+    "source_transfer_verify_seconds": 1.3604184,
+    "source_import_worktree_seconds": 0.9850698,
+    "command_syntax_publication_seconds": 0.7179999999934807
   },
   "budget": {
     "accepted_invocations": 0,
@@ -56,5 +74,46 @@
     "seconds_per_complete_arm": 1800,
     "summed_pair_seconds": 3600,
     "retry": false
+  },
+  "launch_plans": [
+    {
+      "arm": "RETAIN",
+      "node": "hmasd-wsl-node",
+      "handle": "folr-public-lifecycle-half-b01-retain-20260910",
+      "source_sha": "c6be208cd514b5d12fb13c7637e2d6376de11eb6",
+      "cwd": "/home/wu/hmasd-worktrees/folr-public-lifecycle-half-b01-c6be208cd",
+      "out": "temp/directions/vap_folr_core/exp/public_lifecycle_half_b01_seed7807_retain",
+      "memory_receipt": "temp/directions/vap_folr_core/exp/public_lifecycle_half_b01_seed7807_retain_memory.json",
+      "command": "/usr/bin/time -v -o /home/wu/.agent-tasks/folr-public-lifecycle-half-b01-retain-20260910/whole.time /usr/bin/timeout --signal=TERM --kill-after=5s 1800s bash -lc 'cd /home/wu/hmasd-worktrees/folr-public-lifecycle-half-b01-c6be208cd && /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/vap_folr_core/exp/public_lifecycle_half_b01_seed7807_retain_memory.json && /home/wu/.venvs/hmasd/bin/python scripts/run_folr_public_lifecycle_b01.py --arm RETAIN --seed 7807 --evaluation-seed 107807 --launch-sha c6be208cd514b5d12fb13c7637e2d6376de11eb6 --out temp/directions/vap_folr_core/exp/public_lifecycle_half_b01_seed7807_retain'",
+      "state": "prepared_not_submitted"
+    },
+    {
+      "arm": "HALF_EVENT",
+      "node": "hmasd-wsl-node",
+      "handle": "folr-public-lifecycle-half-b01-half-event-20260910",
+      "source_sha": "c6be208cd514b5d12fb13c7637e2d6376de11eb6",
+      "cwd": "/home/wu/hmasd-worktrees/folr-public-lifecycle-half-b01-c6be208cd",
+      "out": "temp/directions/vap_folr_core/exp/public_lifecycle_half_b01_seed7807_half_event",
+      "memory_receipt": "temp/directions/vap_folr_core/exp/public_lifecycle_half_b01_seed7807_half_event_memory.json",
+      "command": "/usr/bin/time -v -o /home/wu/.agent-tasks/folr-public-lifecycle-half-b01-half-event-20260910/whole.time /usr/bin/timeout --signal=TERM --kill-after=5s 1800s bash -lc 'cd /home/wu/hmasd-worktrees/folr-public-lifecycle-half-b01-c6be208cd && /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/vap_folr_core/exp/public_lifecycle_half_b01_seed7807_half_event_memory.json && /home/wu/.venvs/hmasd/bin/python scripts/run_folr_public_lifecycle_b01.py --arm HALF_EVENT --seed 7807 --evaluation-seed 107807 --launch-sha c6be208cd514b5d12fb13c7637e2d6376de11eb6 --out temp/directions/vap_folr_core/exp/public_lifecycle_half_b01_seed7807_half_event'",
+      "state": "prepared_not_submitted"
+    }
+  ],
+  "source_staging": {
+    "method": "verified committed-source Git bundle; prior remote GitHub SSL timeout route reused",
+    "bundle_name": "folr-half-b01-c6be208cd.bundle",
+    "bundle_bytes": 905410,
+    "bundle_sha256": "b89483bfa6ea548d0d5cb4a0e29544ef762b63e8a03770dbafcc489dc30ec820",
+    "prerequisites": [
+      "e58b4b7a67ad31e2b245002d0f47987d755980a7",
+      "6fb1e1f6d6f726f133e9aab9c9d96758e3b6d36c"
+    ],
+    "remote_input_root": "/home/wu/hmasd-inputs/folr-public-lifecycle-half-b01-20260910",
+    "remote_cwd": "/home/wu/hmasd-worktrees/folr-public-lifecycle-half-b01-c6be208cd",
+    "remote_sha256_match": true,
+    "remote_bundle_verify": true,
+    "remote_source_sha": "c6be208cd514b5d12fb13c7637e2d6376de11eb6",
+    "remote_tracked_status": "clean",
+    "new_source_input_stage_is_closeout_inventory": true
   }
 }
