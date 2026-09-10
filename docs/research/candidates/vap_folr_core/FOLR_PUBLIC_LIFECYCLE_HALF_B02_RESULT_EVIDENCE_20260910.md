@@ -1,6 +1,6 @@
 # FOLR public-lifecycle HALF-B02 technical evidence
 
-Current state: new pair selected and bound; no accepted invocation or scientific result.
+Current state: RETAIN accepted and Monitor adoption confirmed by Root; HALF_EVENT remains preselected and unsubmitted. No scientific result collected.
 
 ## 1. Accepted reuse and focused new binding
 
@@ -92,3 +92,48 @@ failed readback and its corrected follow-up; scientific and Monitor work remain 
 The summary carries each measured component. Next: commit/push these exact inputs,
 submit RETAIN once with its fresh joined admission, and directly hand the accepted
 handle to Monitor with this study's inclusive support-attribution instruction.
+
+## 5. Published inputs, RETAIN acceptance and actual Monitor adoption
+
+Selection/card/plan/commands and the three unchanged Portfolio dependency files were
+committed and immediately pushed at **ea73b1c3dabafe6482db03df8a9e51c1ad672260**.
+Scientific source remains **c6be208cd514b5d12fb13c7637e2d6376de11eb6**; a doc publication
+does not substitute different execution bytes. The submitted RETAIN command equals
+that published payload, with its fresh memory admission and runner inside one 1800s chain.
+
+This DM submitted RETAIN at **2026-09-10T23:47:46.571111+00:00**; explicit tmux-start
+returned at **23:47:46.884434+00:00**, command exit0 and no stderr. Accepted handle is
+`folr-public-lifecycle-half-b02-retain-20260910` on hmasd-wsl-node, at the exact source,
+cwd and output named in §2. Original receipt is
+`public_lifecycle_half_b02_control_20260910/retain_launch_receipt.json`; the committed
+summary retains its full command, clocks and raw acceptance output. Source comparison
+and absent-handle/output checks passed. This is accepted invocation **1 of 2**.
+Actual admission/learning/final data have not yet been collected; supervisor acceptance
+is not technical result acceptance. HALF_EVENT is the sole unsubmitted second arm.
+
+Direct MONITOR_ADD to 01a087e5-2044-7301-abb6-7a1709a98197 was delivered successfully,
+with the source/cwd/output/root/owner and inclusive 300s support-accounting instructions.
+Root confirmed actual adoption of the same RETAIN handle; no distinct observation
+timestamp was supplied, so the tmux acceptance clock is not relabeled as adoption.
+Monitor will track actual enclosing query seconds and return cumulative attributable
+work through the existing receipt path. Its current total is **pending**, not zero.
+This DM performs no routine remote polling. Root routes terminal facts back to
+`/root/dm_folr_restart_recovery` for collection/acceptance and the preselected second arm.
+
+The initial support subtotal used narrower helper timings. The summary now conservatively
+charges enclosing command/tool wall, including startup, nested remote work and source
+publication, once. A default Windows decoder failed while reading the Chinese owner
+item before that bookkeeping update; explicit UTF-8 readback passed before submission,
+and the published scientific card/commands were unaffected. Both mechanical readback
+failures remain charged and neither was a scientific invocation.
+
+Known DM command wall through RETAIN submission is **9.7291575s**, plus **.182s** direct
+Monitor dispatch, giving **9.9111575s through dispatch**. Later handover/publication work
+and actual Monitor seconds remain to be added at the next natural boundary. This is
+a current subtotal, not an asserted complete 300s support bill. The 300/3600/3900 caps,
+no-transfer rule, required terminal observation and no-retry allocation remain intact.
+
+At the adopted-boundary readback, measured DM support is **10.7798254s**. Primary owner
+reviews returned no unapplied items. One handover bookkeeping command has no returned
+elapsed receipt; it remains unmeasured, not zero. Final publication and actual Monitor
+work are also pending reconciliation, so no complete-support total is claimed here.
