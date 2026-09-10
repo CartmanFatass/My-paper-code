@@ -22,6 +22,29 @@ def test_fresh_dense_orchestration_counts_and_publication(tmp_path, monkeypatch)
     monkeypatch.setattr(torch, "set_num_interop_threads", lambda _threads: None)
     spec.loader.exec_module(module)
 
+    alarm = {"armed": False, "events": [], "handlers": []}
+
+    def fake_signal(_number, handler):
+        alarm["handlers"].append(handler)
+        return "outer-handler"
+
+    def fake_setitimer(_timer, seconds):
+        alarm["armed"] = seconds > 0
+        alarm["events"].append(seconds)
+
+    monkeypatch.setattr(module.signal, "SIGALRM", 1001, raising=False)
+    monkeypatch.setattr(module.signal, "ITIMER_REAL", 1002, raising=False)
+    monkeypatch.setattr(module.signal, "signal", fake_signal)
+    monkeypatch.setattr(module.signal, "setitimer", fake_setitimer, raising=False)
+    source_final_panel = module.final_panel
+    finalization_alarm_states = []
+
+    def observed_final_panel(rows, expected):
+        finalization_alarm_states.append(alarm["armed"])
+        return source_final_panel(rows, expected)
+
+    monkeypatch.setattr(module, "final_panel", observed_final_panel)
+
     calls = {"templates": [], "dense": [], "generators": [], "envs": [],
              "training": [], "updates": [], "loads": [], "evaluation": []}
 
@@ -158,9 +181,12 @@ def test_fresh_dense_orchestration_counts_and_publication(tmp_path, monkeypatch)
     assert saved["counts"]["eval_team_steps"] == 72
     assert saved["counts"]["optimizer_steps"] == 8
     assert saved["counts"]["backward_calls"] == 8
+    assert saved["counts"]["backward_calls_lower_bound"] == 8
     assert saved["counts"]["update_records"] == 8
     assert saved["counts"]["replayed_actor_agent_steps"] == 640
+    assert saved["counts"]["replayed_actor_agent_steps_lower_bound"] == 640
     assert saved["counts"]["critic_update_rows"] == 128
+    assert saved["counts"]["critic_update_rows_lower_bound"] == 128
     assert saved["counts"]["fresh_dense_initializations"] == 1
     assert saved["counts"]["post_fit_loads"] == 3
     assert saved["parameters"] == {"actor": 34902, "critic": 34177, "total": 69079}
@@ -171,6 +197,9 @@ def test_fresh_dense_orchestration_counts_and_publication(tmp_path, monkeypatch)
     assert len((output / "episodes.jsonl").read_text(encoding="utf-8").splitlines()) == 13
     assert len((output / "updates.jsonl").read_text(encoding="utf-8").splitlines()) == 8
     assert (output / "final_DENSE.pt").exists()
+    assert finalization_alarm_states == [False]
+    assert alarm["events"][-1] == 0
+    assert alarm["handlers"][-1] == "outer-handler"
 
     complete_collect = module.collect
     evaluation_calls = 0
@@ -193,3 +222,45 @@ def test_fresh_dense_orchestration_counts_and_publication(tmp_path, monkeypatch)
     assert failed["evaluation_rows"] == 1
     assert failed["error"] == "RuntimeError: synthetic panel failure"
     assert len((partial / "episodes.jsonl").read_text(encoding="utf-8").splitlines()) == 5
+
+    monkeypatch.setattr(module, "collect", complete_collect)
+
+    def interrupted_update(actor, critic, optimizer, episodes, chunk, check,
+                           counts, **options):
+        counts["optimizer_steps"] += 2
+        raise RuntimeError("synthetic interrupted update")
+
+    monkeypatch.setattr(module, "update", interrupted_update)
+    interrupted = tmp_path / "interrupted-update"
+    assert module.run(interrupted, "synthetic", time.monotonic(), 20.0,
+                      make_env=fake_env, train_episodes=4, horizon=8,
+                      eval_episodes=3) == 1
+    stopped = json.loads((interrupted / "summary.json").read_text(encoding="utf-8"))
+    assert stopped["status"] == "incomplete"
+    assert stopped["counts"]["optimizer_steps"] == 2
+    assert stopped["counts"]["update_records"] == 0
+    assert stopped["counts"]["backward_calls"] is None
+    assert stopped["counts"]["replayed_actor_agent_steps"] is None
+    assert stopped["counts"]["critic_update_rows"] is None
+    assert stopped["counts"]["backward_calls_lower_bound"] == 2
+    assert stopped["counts"]["replayed_actor_agent_steps_lower_bound"] == 160
+    assert stopped["counts"]["critic_update_rows_lower_bound"] == 32
+    assert stopped["interrupted_update"] == {
+        "rollout": 0,
+        "completed_adam_steps": 2,
+        "completed_adam_epoch_records_missing": 2,
+        "record_limit": (
+            "The protected four-epoch update helper returned no partial epoch list; "
+            "no values are claimed for the missing records."
+        ),
+    }
+    assert stopped["unavailable_measurements"] == [
+        "exact backward calls across the interrupted update",
+        "exact replayed actor-agent steps across the interrupted update",
+        "exact critic update rows across the interrupted update",
+    ]
+    assert stopped["training_rows"] == 2 and stopped["evaluation_rows"] == 0
+    assert not stopped["fit_complete"] and not stopped["checkpoint_complete"]
+    assert not (interrupted / "final_DENSE.pt").exists()
+    assert (interrupted / "updates.jsonl").read_text(encoding="utf-8") == ""
+    assert finalization_alarm_states == [False, False, False]
