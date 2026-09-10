@@ -214,6 +214,12 @@ class ProtocolTests(unittest.TestCase):
         state = runner.read(Path(result["run"]) / "state.json")
         self.assertEqual(state["launch"]["session_id"], "fixture-root")
         self.assertEqual(state["launch"]["mode"], "existing_session")
+        self.assertEqual(state["expected_models"], {})
+        with patch.object(runtime, "session_metadata", return_value={"sessions": []}):
+            exported = silent(runtime.export, argparse.Namespace(session="fixture-root", codex_home=str(self.root)),
+                              Path(result["run"]), state, BASE)
+        self.assertEqual(exported["requested"]["models"], {})
+        self.assertEqual(exported["generated_role_defaults"]["cm"], ["gpt-6-astra", "medium"])
         entry = self.root / "cm_direct_review/workspace"
         self.assertTrue(Path(result["run"]).is_relative_to(entry))
         self.assertTrue(Path(result["workspace"]).is_relative_to(entry))
