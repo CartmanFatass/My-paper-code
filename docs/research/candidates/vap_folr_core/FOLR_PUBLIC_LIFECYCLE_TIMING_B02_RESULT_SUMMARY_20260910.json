@@ -1,6 +1,6 @@
 {
   "object": "FOLR-PUBLIC-LIFECYCLE-TIMING-B02",
-  "technical_state": "RETAIN technically accepted; EVENT accepted and Monitor-adopted; RANDOM unsubmitted",
+  "technical_state": "RETAIN and EVENT technically accepted; RANDOM unsubmitted",
   "launch_sha": "6a8eacdad072c37d477aca95a9c871aba68cee78",
   "remote_node": "hmasd-wsl-node",
   "remote_cwd": "/home/wu/hmasd-worktrees/folr-public-lifecycle-timing-b02-6a8eacda",
@@ -392,6 +392,394 @@
         }
       ],
       "technical_acceptance": "Complete counts and finite native mean agree with frozen card; all8 remote/local artifact hashes match; summary/log/exit/admission/whole cap agree; no checkpoint reload or new scientific call."
+    },
+    "EVENT": {
+      "handle": "folr-public-lifecycle-timing-b02-event-20260910",
+      "summary": {
+        "arm": "EVENT",
+        "training_seed": 7805,
+        "evaluation_seed": 107805,
+        "launch_sha": "6a8eacdad072c37d477aca95a9c871aba68cee78",
+        "status": "complete",
+        "training_episodes": 5000,
+        "training_ticks": 100000,
+        "optimizer_steps": 4969,
+        "evaluation_episodes": 128,
+        "evaluation_ticks": 2560,
+        "evaluation_returns": [
+          -4.069999999999999,
+          -1.8800000000000006,
+          4.290000000000001,
+          5.79,
+          8.149999999999999,
+          4.740000000000001,
+          12.129999999999999,
+          -6.710000000000003,
+          6.149999999999998,
+          13.260000000000002,
+          9.790000000000001,
+          -1.3300000000000005,
+          -0.21000000000000035,
+          -7.19,
+          8.469999999999999,
+          -3.4000000000000012,
+          -0.15000000000000024,
+          11.74,
+          -4.1499999999999995,
+          -5.85,
+          6.03,
+          -0.5400000000000007,
+          1.409999999999998,
+          -0.4800000000000013,
+          13.700000000000001,
+          -1.8899999999999997,
+          -9.469999999999999,
+          7.559999999999999,
+          12.150000000000002,
+          -0.05999999999999983,
+          -7.09,
+          -6.110000000000003,
+          11.559999999999999,
+          8.059999999999999,
+          -2.280000000000001,
+          -11.83,
+          6.9300000000000015,
+          -4.62,
+          -2.4299999999999997,
+          5.33,
+          4.079999999999999,
+          -2.6399999999999992,
+          6.389999999999999,
+          -2.34,
+          -2.6599999999999993,
+          0.7900000000000005,
+          -0.2000000000000024,
+          -4.540000000000001,
+          8.920000000000002,
+          1.4099999999999997,
+          -0.1400000000000019,
+          10.230000000000002,
+          5.459999999999997,
+          -1.650000000000002,
+          0.009999999999998899,
+          0.41999999999999993,
+          9.370000000000001,
+          -1.2300000000000009,
+          5.6099999999999985,
+          -1.010000000000001,
+          4.040000000000001,
+          -12.509999999999996,
+          5.719999999999999,
+          -4.210000000000001,
+          -0.19000000000000195,
+          6.65,
+          -4.020000000000001,
+          5.5299999999999985,
+          4.6499999999999995,
+          -3.369999999999999,
+          -12.819999999999997,
+          5.139999999999999,
+          6.300000000000001,
+          0.7499999999999984,
+          -3.5300000000000007,
+          11.319999999999999,
+          7.249999999999999,
+          13.92,
+          12.92,
+          -1.650000000000001,
+          13.24,
+          13.79,
+          2.2499999999999982,
+          -4.3000000000000025,
+          -3.1899999999999977,
+          4.229999999999999,
+          8.87,
+          -1.2300000000000013,
+          12.749999999999998,
+          13.639999999999997,
+          3.24,
+          9.769999999999998,
+          3.68,
+          -3.3200000000000016,
+          0.09999999999999898,
+          -2.650000000000002,
+          4.1,
+          7.47,
+          -0.7299999999999993,
+          0.9199999999999999,
+          -7.630000000000001,
+          4.939999999999998,
+          6.619999999999998,
+          8.98,
+          -1.1799999999999993,
+          1.4699999999999993,
+          -2.2100000000000017,
+          12.639999999999999,
+          -3.850000000000003,
+          -1.4800000000000002,
+          -6.310000000000003,
+          5.059999999999999,
+          -1.7899999999999974,
+          -4.820000000000001,
+          -8.219999999999999,
+          4.29,
+          -2.300000000000001,
+          -0.3999999999999997,
+          -0.010000000000000675,
+          -5.320000000000001,
+          -2.880000000000001,
+          -1.570000000000001,
+          4.689999999999999,
+          1.4899999999999998,
+          17.4,
+          4.9399999999999995,
+          -3.770000000000003,
+          7.5699999999999985
+        ],
+        "training_return_sum": -25009.600000000064,
+        "training_events": {
+          "births": 21773,
+          "departures": 8704,
+          "survivor_opportunities": 47153,
+          "eligible_survivor_opportunities": 260059,
+          "survivor_resets": 47153
+        },
+        "evaluation_events": {
+          "births": 562,
+          "departures": 201,
+          "survivor_opportunities": 1262,
+          "eligible_survivor_opportunities": 6746,
+          "survivor_resets": 1262
+        },
+        "mean_native_return": 2.051953125,
+        "exposure": "100000 real native training ticks; 4969 actor/mixer RMSprop steps at lr=0.0005; 128 final greedy evaluation episodes",
+        "rng": "Python/global NumPy/Torch seeded before model construction; native traffic and replay share global NumPy; source epsilon selector uses Torch including greedy and terminal draws; all three reset to107805 for final evaluation",
+        "torch_version": "2.7.0+cu118",
+        "numpy_version": "1.26.3",
+        "torch_threads": [
+          1,
+          1
+        ],
+        "wall_seconds": 727.8214852970559,
+        "peak_rss_kib": 641220
+      },
+      "memory_receipt": {
+        "assessed_at": "2026-09-10T17:10:24.790916Z",
+        "available_physical_bytes": 15603605504,
+        "captured_at": "2026-09-10T17:10:24.790644Z",
+        "cgroup_headroom_bytes": null,
+        "cgroup_memory_current_bytes": null,
+        "cgroup_memory_max_bytes": null,
+        "effective_available_bytes": 15603605504,
+        "effective_floor_pass": true,
+        "failure_reasons": [],
+        "measurement_source": "/proc/meminfo",
+        "minimum_available_bytes": 4294967296,
+        "passed": true,
+        "physical_floor_pass": true,
+        "schema_version": 1
+      },
+      "whole_chain": {
+        "elapsed_seconds": 769.66,
+        "user_cpu_seconds": 754.09,
+        "system_cpu_seconds": 17.91,
+        "cpu_seconds": 772.0,
+        "peak_rss_kib": 658888,
+        "exit_code": 0,
+        "scope": "outer time/timeout around bash, fresh admission and runner through complete exit"
+      },
+      "runner_summary_wall_seconds": 727.8214852970559,
+      "unattributed_whole_minus_runner_seconds": 41.83851470294405,
+      "supervisor_start": "2026-09-11T01:10:24+08:00",
+      "supervisor_exit": "2026-09-11T01:23:14+08:00",
+      "supervisor_integer_duration_seconds": 770,
+      "monitor_observed_at": "2026-09-10T17:23:20.5924043Z",
+      "monitor_receipt_path": "temp/directions/vap_folr_core/exp/public_lifecycle_timing_b02_seed7805_event/monitor_terminal.txt",
+      "progress_rows": [
+        {
+          "episode": 200,
+          "updates": 169,
+          "wall_seconds": 29.064427377015818
+        },
+        {
+          "episode": 400,
+          "updates": 369,
+          "wall_seconds": 60.79974157502875
+        },
+        {
+          "episode": 600,
+          "updates": 569,
+          "wall_seconds": 91.26622820401099
+        },
+        {
+          "episode": 800,
+          "updates": 769,
+          "wall_seconds": 121.67458859801991
+        },
+        {
+          "episode": 1000,
+          "updates": 969,
+          "wall_seconds": 151.9431665360462
+        },
+        {
+          "episode": 1200,
+          "updates": 1169,
+          "wall_seconds": 179.8271075450466
+        },
+        {
+          "episode": 1400,
+          "updates": 1369,
+          "wall_seconds": 207.9488559930469
+        },
+        {
+          "episode": 1600,
+          "updates": 1569,
+          "wall_seconds": 236.648013861035
+        },
+        {
+          "episode": 1800,
+          "updates": 1769,
+          "wall_seconds": 265.98849023605
+        },
+        {
+          "episode": 2000,
+          "updates": 1969,
+          "wall_seconds": 295.66070522001246
+        },
+        {
+          "episode": 2200,
+          "updates": 2169,
+          "wall_seconds": 325.06234925304307
+        },
+        {
+          "episode": 2400,
+          "updates": 2369,
+          "wall_seconds": 353.10780074301874
+        },
+        {
+          "episode": 2600,
+          "updates": 2569,
+          "wall_seconds": 381.1108101000427
+        },
+        {
+          "episode": 2800,
+          "updates": 2769,
+          "wall_seconds": 409.1271105580381
+        },
+        {
+          "episode": 3000,
+          "updates": 2969,
+          "wall_seconds": 437.0989575260319
+        },
+        {
+          "episode": 3200,
+          "updates": 3169,
+          "wall_seconds": 464.98377550404985
+        },
+        {
+          "episode": 3400,
+          "updates": 3369,
+          "wall_seconds": 492.9991779680131
+        },
+        {
+          "episode": 3600,
+          "updates": 3569,
+          "wall_seconds": 521.1141021350049
+        },
+        {
+          "episode": 3800,
+          "updates": 3769,
+          "wall_seconds": 549.4389139640261
+        },
+        {
+          "episode": 4000,
+          "updates": 3969,
+          "wall_seconds": 578.4424774160143
+        },
+        {
+          "episode": 4200,
+          "updates": 4169,
+          "wall_seconds": 608.1760487120482
+        },
+        {
+          "episode": 4400,
+          "updates": 4369,
+          "wall_seconds": 637.2077093300177
+        },
+        {
+          "episode": 4600,
+          "updates": 4569,
+          "wall_seconds": 666.7700887550018
+        },
+        {
+          "episode": 4800,
+          "updates": 4769,
+          "wall_seconds": 696.362382537045
+        },
+        {
+          "episode": 5000,
+          "updates": 4969,
+          "wall_seconds": 726.2824289520504
+        }
+      ],
+      "mean_recomputed_from_all128": 2.0519531249999994,
+      "training_return_mean": -5.001920000000013,
+      "resources_unmeasured": [
+        "cgroup_headroom_bytes",
+        "cgroup_memory_current_bytes",
+        "cgroup_memory_max_bytes"
+      ],
+      "artifact_hashes": [
+        {
+          "remote_path": "/home/wu/hmasd-worktrees/folr-public-lifecycle-timing-b02-6a8eacda/temp/directions/vap_folr_core/exp/public_lifecycle_timing_b02_seed7805_event/summary.json",
+          "local_path": "temp/directions/vap_folr_core/exp/public_lifecycle_timing_b02_seed7805_event/summary.json",
+          "bytes": 4093,
+          "sha256": "391f6a13c5bae70bdd826c091604d302bd506fca5da3a4ee869ff04962922ac5"
+        },
+        {
+          "remote_path": "/home/wu/hmasd-worktrees/folr-public-lifecycle-timing-b02-6a8eacda/temp/directions/vap_folr_core/exp/public_lifecycle_timing_b02_seed7805_event/final.pt",
+          "local_path": "temp/directions/vap_folr_core/exp/public_lifecycle_timing_b02_seed7805_event/final.pt",
+          "bytes": 4662779,
+          "sha256": "f7f1f7e53658e7c3d39980689ab0a9a2e9a2aa93a6a14de49d89d37eef04917b"
+        },
+        {
+          "remote_path": "/home/wu/hmasd-worktrees/folr-public-lifecycle-timing-b02-6a8eacda/temp/directions/vap_folr_core/exp/public_lifecycle_timing_b02_seed7805_event_memory.json",
+          "local_path": "temp/directions/vap_folr_core/exp/public_lifecycle_timing_b02_seed7805_event_memory.json",
+          "bytes": 504,
+          "sha256": "4b501c352a54e6ee6b437f34e616e4ab80f498eb9e8b2bb4b3603e5b3d982bd6"
+        },
+        {
+          "remote_path": "/home/wu/.agent-tasks/folr-public-lifecycle-timing-b02-event-20260910/whole.time",
+          "local_path": "temp/directions/vap_folr_core/exp/public_lifecycle_timing_b02_seed7805_event/whole.time",
+          "bytes": 1313,
+          "sha256": "5045b75202c120fda8c951c2bc95151da8e8583a1f29cdd3bebcdd073453bb23"
+        },
+        {
+          "remote_path": "/home/wu/.agent-tasks/folr-public-lifecycle-timing-b02-event-20260910/task.log",
+          "local_path": "temp/directions/vap_folr_core/exp/public_lifecycle_timing_b02_seed7805_event/task.log",
+          "bytes": 5946,
+          "sha256": "35c4247a6133cf31e8ca8245cf42aca5aca7bbe1e961ff8a0f5d6071ca3a5b5c"
+        },
+        {
+          "remote_path": "/home/wu/.agent-tasks/folr-public-lifecycle-timing-b02-event-20260910/runner.sh",
+          "local_path": "temp/directions/vap_folr_core/exp/public_lifecycle_timing_b02_seed7805_event/runner.sh",
+          "bytes": 1814,
+          "sha256": "322acdad7eda3dbc2433b0e72f234942d69d87f7bde583e8d4e604f07c0da37f"
+        },
+        {
+          "remote_path": "/home/wu/.agent-tasks/folr-public-lifecycle-timing-b02-event-20260910/status",
+          "local_path": "temp/directions/vap_folr_core/exp/public_lifecycle_timing_b02_seed7805_event/status",
+          "bytes": 9,
+          "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+        },
+        {
+          "remote_path": "/home/wu/.agent-tasks/folr-public-lifecycle-timing-b02-event-20260910/exit_code",
+          "local_path": "temp/directions/vap_folr_core/exp/public_lifecycle_timing_b02_seed7805_event/exit_code",
+          "bytes": 2,
+          "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+        }
+      ],
+      "technical_acceptance": "Complete counts and finite native mean agree with card; all8 remote/local hashes match; summary/log/exit/admission/whole cap agree; EVENT resets equal event-bound survivor opportunities. No checkpoint reload or new scientific call."
     }
   },
   "contrasts_and_combined_rule": "pending all three preselected laws; no interim winner selection",
@@ -399,11 +787,11 @@
   "collection_readback_script_seconds": 0.014246599996113218,
   "support_charge_after_collection_seconds": 22.4285027,
   "collection_readback_command_seconds": 0.1811988,
-  "pending_runtime": {
-    "arm": "EVENT",
-    "handle": "folr-public-lifecycle-timing-b02-event-20260910",
-    "source": "6a8eacdad072c37d477aca95a9c871aba68cee78",
-    "result_root": "temp/directions/vap_folr_core/exp/public_lifecycle_timing_b02_seed7805_event",
-    "monitor_adoption": "Root-confirmed actual direct adoption; no DM parallel status poll"
-  }
+  "partial_EVENT_minus_RETAIN": -0.5907031250000001,
+  "event_collection_readback_script_seconds": 0.016956300009042025,
+  "support_charge_before_event_assembly_seconds": 24.4001455,
+  "event_collection_readback_command_seconds": 0.2054369,
+  "support_charge_after_event_collection_seconds": 24.6055824,
+  "completed_laws_whole_wall_seconds": 1602.15,
+  "completed_laws_cpu_seconds": 1604.87
 }
