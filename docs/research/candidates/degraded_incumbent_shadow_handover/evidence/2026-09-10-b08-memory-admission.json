@@ -1,0 +1,20 @@
+{
+  "memory": {
+    "assessed_at": "2026-09-10T21:18:16.757682Z",
+    "available_physical_bytes": 15631826944,
+    "captured_at": "2026-09-10T21:18:16.757422Z",
+    "cgroup_headroom_bytes": null,
+    "cgroup_memory_current_bytes": null,
+    "cgroup_memory_max_bytes": null,
+    "effective_available_bytes": 15631826944,
+    "effective_floor_pass": true,
+    "failure_reasons": [],
+    "measurement_source": "/proc/meminfo",
+    "minimum_available_bytes": 4294967296,
+    "passed": true,
+    "physical_floor_pass": true,
+    "schema_version": 1
+  },
+  "preflight_time": "preflight_wall_seconds=0.04\npreflight_exit=0\n",
+  "launch_admission_read_wall_seconds": 0.32749039999907836
+}

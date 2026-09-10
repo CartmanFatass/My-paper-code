@@ -28,7 +28,7 @@
     "cd /home/wu/hmasd-worktrees/dish-b08-db2480c2 && export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 MAX_JOBS=1 PYTHONPATH=. PYTHONDONTWRITEBYTECODE=1 && mkdir -p temp/directions/degraded_incumbent_shadow_handover/exp && /usr/bin/time -f 'preflight_wall_seconds=%e\npreflight_exit=%x' -o temp/directions/degraded_incumbent_shadow_handover/exp/arrival_bridge_retention_b08_seed137_20260910_run01_preflight_wall.txt /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/degraded_incumbent_shadow_handover/exp/arrival_bridge_retention_b08_seed137_20260910_run01_memory.json && /usr/bin/time -f 'runner_process_wall_seconds=%e\nrunner_exit=%x' -o temp/directions/degraded_incumbent_shadow_handover/exp/arrival_bridge_retention_b08_seed137_20260910_run01_runner_wall.txt /home/wu/.venvs/hmasd/bin/python -m scripts.run_dish_arrival_bridge_retention_b08 --seed 137 --output temp/directions/degraded_incumbent_shadow_handover/exp/arrival_bridge_retention_b08_seed137_20260910_run01 --launch-sha a01522a6f6cf12e5549b3e03596ce58642b68cf1 --prior-shared-seconds 215.0"
   ],
   "command": "cd /home/wu/hmasd-worktrees/dish-b08-db2480c2 && export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 MAX_JOBS=1 PYTHONPATH=. PYTHONDONTWRITEBYTECODE=1 && mkdir -p temp/directions/degraded_incumbent_shadow_handover/exp && /usr/bin/time -f 'preflight_wall_seconds=%e\npreflight_exit=%x' -o temp/directions/degraded_incumbent_shadow_handover/exp/arrival_bridge_retention_b08_seed137_20260910_run01_preflight_wall.txt /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/degraded_incumbent_shadow_handover/exp/arrival_bridge_retention_b08_seed137_20260910_run01_memory.json && /usr/bin/time -f 'runner_process_wall_seconds=%e\nrunner_exit=%x' -o temp/directions/degraded_incumbent_shadow_handover/exp/arrival_bridge_retention_b08_seed137_20260910_run01_runner_wall.txt /home/wu/.venvs/hmasd/bin/python -m scripts.run_dish_arrival_bridge_retention_b08 --seed 137 --output temp/directions/degraded_incumbent_shadow_handover/exp/arrival_bridge_retention_b08_seed137_20260910_run01 --launch-sha a01522a6f6cf12e5549b3e03596ce58642b68cf1 --prior-shared-seconds 215.0",
-  "launch_state": "NOT_SUBMITTED",
+  "launch_state": "ACCEPTED_MONITOR_ADOPTED",
   "shared_prior_charge_seconds": 215.0,
   "known_support_charge_components": [
     {
@@ -116,7 +116,7 @@
   "prelaunch_delivery_admission_allowance_within_215": 13.214380600000027,
   "support_measurement": "Wrapper walls where recorded; enclosing charges20.80/128.98 cover measured child20.5825781/128.7516418. Pre-card20 is coarse conservative charge. No claim of exact CPU/H/scratch measurement. Do not double-count component and containing command.",
   "external_reserve_seconds": 60.0,
-  "scientific_invocations_accepted": 0,
+  "scientific_invocations_accepted": 1,
   "source_currentness": "Published source checked by tree content; documentation descendants do not alter this exact execution SHA.",
   "monitor_live_config": "C:/Projects/HMASD/.codex/hmasd-monitor.toml",
   "monitor_thread_id": "01a087e5-2044-7301-abb6-7a1709a98197",
@@ -130,5 +130,57 @@
     "syntax_stderr": "",
     "head": "a01522a6f6cf12e5549b3e03596ce58642b68cf1",
     "ssh_wall_seconds": 1.0421782000048552
-  }
+  },
+  "actual_scientific_counts": "pending terminal collection",
+  "launch_receipt": "docs/research/candidates/degraded_incumbent_shadow_handover/evidence/2026-09-10-b08-launch-receipt.json",
+  "memory_admission_receipt": "docs/research/candidates/degraded_incumbent_shadow_handover/evidence/2026-09-10-b08-memory-admission.json",
+  "monitor_dispatch": "accepted by app tool; live endpoint read immediately before dispatch",
+  "monitor_adoption": "confirmed by Root native message after Monitor direct adoption; no DM routine polling",
+  "pending_action": "Root resumes original DM on Monitor terminal for collection, technical acceptance and scientific intake",
+  "prelaunch_deliverable_actual_components": [
+    {
+      "scope": "execution record assembly",
+      "wall_seconds": 0.2488644
+    },
+    {
+      "scope": "final owner reviews",
+      "wall_seconds": 0.5962591
+    },
+    {
+      "scope": "source-content and shell-syntax check",
+      "wall_seconds": 1.2733898
+    },
+    {
+      "scope": "exact invocation binding commit/push",
+      "wall_seconds": 4.5944137
+    },
+    {
+      "scope": "submission enclosing tool wall",
+      "wall_seconds": 0.939734
+    },
+    {
+      "scope": "adjacent preflight external time",
+      "wall_seconds": 0.04
+    }
+  ],
+  "prelaunch_charge_crosscheck": {
+    "known_charged_plus_final": 209.47828039999996,
+    "enclosing_runner_prior_charge": 215.0,
+    "within_prior_charge": true
+  },
+  "postlaunch_charges_before_collection": [
+    {
+      "scope": "live Monitor configuration and accepted app dispatch conservative enclosing charge",
+      "charged_seconds": 0.75
+    },
+    {
+      "scope": "adjacent admission receipt read enclosing tool",
+      "charged_seconds": 0.5688494
+    },
+    {
+      "scope": "this launch/adoption record publication reserve",
+      "charged_seconds": 6.0,
+      "measurement": "actual commit command reconciled at collection; no double count"
+    }
+  ]
 }
