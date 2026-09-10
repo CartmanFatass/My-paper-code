@@ -210,3 +210,43 @@ changes. Ten of the60 seconds are available for in-process final publication/clo
 at least50 for external follow-up after the runner's reserved deadline. The exact pre-run
 support amount and remaining common-init budget are recorded before launch; a concrete
 insufficiency returns as a technical gap, without borrowing either arm's allowance.
+
+## 8. Technical acceptance and exact launch binding
+
+DM accepts the source at **`a01522a6f6cf12e5549b3e03596ce58642b68cf1`** for the card's
+bounded comparison. Independent review of the reserve correction found no material finding;
+cumulative review command work3.0921831s. The remote focused suite passed eleven cases; its
+twelfth never entered because the fresh checkout lacked the test-basetemp parent. After creating
+that parent, only this publication/pair case was rerun and passed. Thus all twelve selected
+cases passed, including two synthetic32-step learner updates, both bridge/live-replay modes,
+gradients, likelihood, reconstruction, reduction and inherited terminal/first-transfer behavior.
+There were zero native/scientific initializers or result-bearing invocations in these checks.
+Both exact test scratch directories were verified absent after cleanup.
+
+Receipts: [first focused run](evidence/2026-09-10-b08-focused-tests-a015.json) (4.709324313s pytest
+command,5.132161400s enclosing SSH) and [only missing publication check](evidence/2026-09-10-b08-publication-test-a015.json)
+(1.753304701s pytest,2.406257500s enclosing SSH). Shared charges use the outer tool walls,5.3676824s
+and2.634038s, without adding their contained pytest/SSH durations twice. The existing pytest
+`cache_dir` warning is unrelated to the tested contract; no cache or global dependency change.
+
+The [committed execution record](evidence/2026-09-10-b08-execution.json) is the exact command,
+node, source, cwd, output/receipt paths and support allocation. Its shell syntax check returned0,
+and the declared source directories have no byte-content diff against the bound source. Doc-only
+descendants do not change execution bytes. All-age main/direction owner-review queries returned[]
+at this acceptance boundary. New-card owner item is `20260910-dish-002`.
+
+Run handle: `dish-b08-s137-a01522a6-20260910`; cwd
+`/home/wu/hmasd-worktrees/dish-b08-db2480c2`; output
+`temp/directions/degraded_incumbent_shadow_handover/exp/arrival_bridge_retention_b08_seed137_20260910_run01`.
+The command explicitly exports OMP/OPENBLAS/MKL/NUMEXPR threads1 and MAX_JOBS1, invokes fresh
+same-node admission, then the CPU runner. `/usr/bin/time` records preflight and complete runner
+process wall/exit; runner publishes the exclusive/shared decomposition. No preflight has yet
+been accepted at this record's publication; no launch is inferred from source acceptance.
+
+The runner uses prior shared charge**215s**, enclosing the201.7856194s charged at execution-record
+creation plus13.2143806s reserved for this final source/command/owner check, commit/push,
+submission and actual adjacent preflight. If their measured total exceeds215, the difference is
+added to shared cost rather than hidden; the selected300s remains. This leaves at most25s for
+in-process common work before the60s follow-up reserve. The same returned budget is never
+reset by a new script. Exact H/scratch and full aggregate CPU remain unmeasured; no exact
+whole-resource-cost claim follows from the conservative wall charge.
