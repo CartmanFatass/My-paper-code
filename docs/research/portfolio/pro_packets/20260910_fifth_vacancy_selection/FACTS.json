@@ -1,0 +1,182 @@
+{
+  "prepared_at_utc": "2026-09-10T23:47:43.671595+00:00",
+  "main_input_sha": "674f246a202eef1467b084fdd25e2eeb531c0b1e",
+  "authoring_reconciliation_sha": "94ab7c4fdf97ea5e708b8bac4041c947e4fcb5ed",
+  "prior_authoring_sha": "83b5593a3ed55acfb2b2129a61f3f13da174030f",
+  "checkout_ownership": "prior RCLE author explicitly relinquished; clean checkout and absent index.lock checked; exact main tree adopted with explicit paths",
+  "owner_item004_preserved": true,
+  "local_audit_rows_missing_from_main_before_reconciliation": 0,
+  "author_thread_id": "01a08d62-3e51-7983-b7c2-bc4292af3f15",
+  "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "operator_thread_id": "01a087a3-4f12-7021-9a4d-6da9da2bafcc",
+  "workflow_node": "portfolio_decision",
+  "caller_role": "portfolio",
+  "binding": "portfolio:cross_direction",
+  "provider_conversation_id": "6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+  "binding_provenance": "Root current assignment plus prior completed request/intake; no pending prior write; no provider access by this author",
+  "target_advancing_chains": 5,
+  "already_allocated": [
+    "vap_folr_core",
+    "ucope",
+    "roster_consistent_latent_exploration",
+    "acvc"
+  ],
+  "allocation_authority": "complete PRO_FINAL A intake at main674f246a2, original complete response b4d71be60f789e97bf1f4c7130bb9995fc84f387",
+  "new_vacancies": 1,
+  "scope_remaining_active": [
+    {
+      "direction": "capability_bound_semantic_currentness",
+      "lifecycle": "ACTIVE",
+      "priority": "HIGH"
+    },
+    {
+      "direction": "commitment_residual_triggered_options",
+      "lifecycle": "ACTIVE",
+      "priority": "MEDIUM"
+    },
+    {
+      "direction": "degraded_incumbent_shadow_handover",
+      "lifecycle": "ACTIVE",
+      "priority": "MEDIUM"
+    },
+    {
+      "direction": "finite_resource_relational_inductive_efficiency",
+      "lifecycle": "ACTIVE",
+      "priority": "HIGH"
+    },
+    {
+      "direction": "flexible_skill_duration",
+      "lifecycle": "ACTIVE",
+      "priority": "HIGH"
+    },
+    {
+      "direction": "metric_ground_transport_allocation",
+      "lifecycle": "ACTIVE",
+      "priority": "MEDIUM"
+    },
+    {
+      "direction": "semigroup_consistent_duration_model_policy",
+      "lifecycle": "ACTIVE",
+      "priority": "HIGH"
+    },
+    {
+      "direction": "variable_n_fleet_churn",
+      "lifecycle": "ACTIVE",
+      "priority": "HIGH"
+    },
+    {
+      "direction": "vsp_02",
+      "lifecycle": "ACTIVE",
+      "priority": "LOW"
+    },
+    {
+      "direction": "vsp_03",
+      "lifecycle": "ACTIVE",
+      "priority": "LOW"
+    },
+    {
+      "direction": "vsp_c1",
+      "lifecycle": "ACTIVE",
+      "priority": "MEDIUM"
+    }
+  ],
+  "outside_scope_parked": [
+    {
+      "direction": "active_post_churn_population_flow_identification",
+      "lifecycle": "PARKED",
+      "priority": "LOW"
+    },
+    {
+      "direction": "ec4g_r1",
+      "lifecycle": "PARKED",
+      "priority": "LOW"
+    },
+    {
+      "direction": "eociv_lite",
+      "lifecycle": "PARKED",
+      "priority": "MEDIUM"
+    },
+    {
+      "direction": "expressibility_gated_renewal_credit_relay",
+      "lifecycle": "PARKED",
+      "priority": "MEDIUM"
+    },
+    {
+      "direction": "orbit_shadow_read",
+      "lifecycle": "PARKED",
+      "priority": "LOW"
+    },
+    {
+      "direction": "recct_lite",
+      "lifecycle": "PARKED",
+      "priority": "MEDIUM"
+    },
+    {
+      "direction": "scope_1s",
+      "lifecycle": "PARKED",
+      "priority": "LOW"
+    }
+  ],
+  "restriction_or_send_uncertainty": [
+    "capability_bound_semantic_currentness",
+    "finite_resource_relational_inductive_efficiency",
+    "variable_n_fleet_churn"
+  ],
+  "otherwise_screenable_count": 8,
+  "recommendation_only": {
+    "primary": "flexible_skill_duration",
+    "fallback": "metric_ground_transport_allocation",
+    "selected_action": "one concrete source/design return per activated direction, at most one additional active chain at a time",
+    "numerical_invocation_allowance": 0,
+    "implementation_allowed": false
+  },
+  "strongest_other_option": "vsp_03; cheap positive final results and mixed continuation Q retained",
+  "scope_limits": [
+    "no mutation/reallocation of four selected chains",
+    "one primary plus one conditional unused fallback for this vacancy",
+    "preserve current family stops, priorities/recasts and access restrictions",
+    "no new scientific result, family opening, lifecycle/priority/recast/fusion/C/UAV decision",
+    "no provider Send or blind VNFC resend"
+  ],
+  "cost_arithmetic": {
+    "fsd_two_pair_wall_s": 3462.16,
+    "fsd_valid_pair_count": 2,
+    "fsd_wall_per_valid_pair_in_named_window_s": 1731.08,
+    "mgtap_one_valid_two_master_result_wall_s": 722.64,
+    "mgtap_native_component_sum_s": 721.83,
+    "scdmp_two_pair_wall_s": 618.05,
+    "scdmp_wall_per_valid_pair_in_named_window_s": 309.025,
+    "vsp03_b07_complete_one_fit_wall_s": 8.92788,
+    "vsp03_historical_training_episodes": 65536,
+    "vsp03_historical_evaluation_episodes": 8192,
+    "vsp03_historical_total_episodes": 73728,
+    "vsp03_historical_team_ticks": 2949120,
+    "mgtap_historical_per_fit_training_steps": 131072,
+    "mgtap_historical_per_fit_final_steps": 8192,
+    "mgtap_historical_per_fit_adam": 1024,
+    "warning": "distinct task/threading/result windows; no total efficiency ranking, future cost projection or new budget follows"
+  },
+  "zero_exposure": {
+    "scientific_invocations": 0,
+    "models": 0,
+    "checkpoint_loads": 0,
+    "environments": 0,
+    "training_episodes": 0,
+    "native_steps": 0,
+    "synthetic_steps": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0,
+    "replay": 0,
+    "profiling": 0,
+    "source_tests": 0,
+    "test_fixtures": 0,
+    "support_search": 0,
+    "provider_sends": 0
+  },
+  "exposure_line": "FIFTH_VACANCY_PORTFOLIO_PREPARATION: scientific_invocations=0; models=0; checkpoint_loads=0; environments=0; native_steps=0; synthetic_steps=0; training_episodes=0; optimizer_steps=0; evaluation_episodes=0; replay=0; profiling=0; source_tests=0; test_fixtures=0; support_search=0; provider_sends=0; parameter_displacement=not applicable: no learner",
+  "reviews_unapplied": [],
+  "decision_state": "recommendation only; no Portfolio disposition or selected numerical allowance applied",
+  "reviews_checked_at_utc": "2026-09-10T23:54:22.103183+00:00",
+  "later_main_checked_sha": "a1141b03d57198f5e811fadba602b63d7ba89e23",
+  "later_main_changes_scope": "UCOPE/RCLE design and ACVC execution within the four excluded allocations; no changes to listed remaining-direction intakes or applicable governance/spec files"
+}
