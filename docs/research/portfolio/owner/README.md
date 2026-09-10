@@ -31,6 +31,14 @@ python tools/owner_console/item.py trace <id> --authority "PRO_FINAL / OWNER_DEL
 
 `--state planned|applied|blocked`；仅已执行可填 `--auto-applied`。`--authority OWNER_DIRECT` 仅用于有明确 owner 指令的事项。application record 列出变化前后、修改文件和提交定位；`execution_history` 逐条追加时间、来源、状态与记录链接。`--correction` 用于保留原回复并明确纠正其授权归因，不冒充新回复。新 owner 回复仍按原流程生效。此记录不新增运行关卡。
 
+## 2026-09-10 Portfolio 裁决与异步覆盖
+
+按 AGENTS §4.8，新 Portfolio Pro 裁决由指定 DM 完整读取并检查适用规范，Root 执行符合范围的裁决，不等逐项 ratify。
+新默认选项为 keep/refuse/amend；keep 或 agree 只表示已阅，不增加运行授权。
+refuse/amend 在下一个干净边界覆盖后续执行，保留已执行效果和历史，不隐含重跑或回滚。
+旧 ratify 条目与回复保留原语义；自定义选项保留其实际含义。执行状态仍用 trace 的 planned/applied/blocked，
+auto_applied 只填实际已执行选项。保留的 packet 字段 changes_if_approved 描述变更内容，不构成新批准关卡。
+
 ## 所有者每天怎么用（约 15 分钟）
 
 1. 打开批改台的收件箱，查看新卡片、方向决定、重大异议、close-call、二次重铸和 Portfolio 提案。
@@ -116,14 +124,14 @@ Options per kind:
 | `new-card` | `accept`, `reject`, `revise` | reject or revise carries the reason in the comment; launch is not blocked meanwhile |
 | `critic-dissent`, `close-call` | the DM's options plus the critic's position as one option | as `decision` |
 | `second-recast` | `continue-low-priority`, `park` | park is a Portfolio record; continue keeps lowest sequencing priority |
-| `portfolio` | `ratify`, `refuse`, `amend` | ratification or refusal of a Portfolio proposal; amend with the comment |
+| `portfolio` | `keep`, `refuse`, `amend` | keep acknowledges the formed Pro disposition; refuse/amend overrides at the next clean boundary, preserving executed effects and history |
 
 Created items can be cited by their ledger row. Ordinary audit records cite the card/intake;
 a `skipped` result supplies no item path.
 
 ## Decision packet (P1/P2 items)
 
-An item the owner must rule on (`portfolio`, `second-recast`, `critic-dissent`, `close-call`,
+An item requiring a P1/P2 review packet (`portfolio`, `second-recast`, `critic-dissent`, `close-call`,
 `new-card`, and any direction- or portfolio-tier item) carries a `packet` object, written in
 Chinese, and every option has a non-empty `consequence`. `item.py add --packet <file.json>`
 refuses the item otherwise; the console shows an incomplete one as 上下文不足 and the owner's

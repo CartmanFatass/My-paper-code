@@ -1,0 +1,30 @@
+{
+  "source_revision": "1385b56b6a0761d4064dcafbce0c66c590ecc5a2",
+  "roles": {
+    "hmasd-cm": {
+      "source": ".codex/agents/hmasd-cm.toml",
+      "sha256": "31c773a3d1938613b133baf9ab5cdfc713cdc9806368a3391dbd41d7a80dbf60",
+      "model": "gpt-6-astra",
+      "effort": "medium"
+    },
+    "hmasd-implementer": {
+      "source": ".codex/agents/hmasd-implementer.toml",
+      "sha256": "468eeabc0731b6ea2b36dacda0ce4b98b7dbcb180d03ff7a1365a80ff206eaa6",
+      "model": "gpt-6-astra",
+      "effort": "medium"
+    },
+    "hmasd-reviewer": {
+      "source": ".codex/agents/hmasd-reviewer.toml",
+      "sha256": "d5dd80072a310346220a32c7a9331a5b0582ff2bbeaefb070b1c3136bc59dc70",
+      "model": "gpt-6-astra",
+      "effort": "high"
+    }
+  },
+  "default_architecture": "CM implements directly; optional implementer for independent work; independent reviewer for high-risk diffs",
+  "delegation_L0": "current five-item handoff",
+  "experimental_implementer": [
+    "gpt-5.6-terra",
+    "high"
+  ],
+  "adaptation": "benchmark role prose is a scoped adaptation, not a byte-identical production prompt; local synthetic tasks, frozen facts, local bare origin, fixed checkpoints, no remote research/Pro access"
+}

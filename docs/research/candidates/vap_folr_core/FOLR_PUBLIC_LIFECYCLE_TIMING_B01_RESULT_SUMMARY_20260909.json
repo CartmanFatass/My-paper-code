@@ -1,0 +1,1122 @@
+{
+  "object": "FOLR-PUBLIC-LIFECYCLE-TIMING-B01",
+  "status": "complete_technical_acceptance",
+  "launch_sha": "74d023d7d55453da8a5d5dccebd518e4ffdb65c8",
+  "card": "FOLR_PUBLIC_LIFECYCLE_TIMING_B01_SCIENCE_CARD_20260909.md",
+  "arms": {
+    "RETAIN": {
+      "summary": {
+        "arm": "RETAIN",
+        "training_seed": 7804,
+        "evaluation_seed": 107804,
+        "launch_sha": "74d023d7d55453da8a5d5dccebd518e4ffdb65c8",
+        "status": "complete",
+        "training_episodes": 5000,
+        "training_ticks": 100000,
+        "optimizer_steps": 4969,
+        "evaluation_episodes": 128,
+        "evaluation_ticks": 2560,
+        "evaluation_returns": [
+          -6.9300000000000015,
+          2.440000000000002,
+          11.690000000000001,
+          8.32,
+          6.4300000000000015,
+          -4.560000000000003,
+          -5.610000000000003,
+          -1.6799999999999993,
+          3.7099999999999986,
+          -4.140000000000001,
+          -0.5000000000000002,
+          -3.070000000000001,
+          -4.659999999999999,
+          -3.1999999999999993,
+          -1.929999999999998,
+          13.039999999999997,
+          3.3800000000000034,
+          13.910000000000002,
+          9.709999999999999,
+          14.740000000000002,
+          1.6799999999999997,
+          -2.8099999999999996,
+          -6.409999999999996,
+          2.910000000000001,
+          14.17,
+          -0.10000000000000164,
+          -0.9200000000000002,
+          3.820000000000001,
+          4.869999999999997,
+          -0.7200000000000009,
+          7.779999999999999,
+          -3.4400000000000004,
+          13.499999999999998,
+          -2.87,
+          1.7899999999999991,
+          -2.24,
+          -4.189999999999998,
+          9.049999999999997,
+          4.67,
+          11.940000000000001,
+          -3.16,
+          1.3199999999999994,
+          15.15,
+          -1.6900000000000004,
+          1.5799999999999996,
+          4.8,
+          6.529999999999999,
+          18.85,
+          -2.35,
+          6.529999999999999,
+          1.5199999999999996,
+          19.429999999999996,
+          4.01,
+          -4.919999999999996,
+          3.6299999999999994,
+          1.800000000000001,
+          2.759999999999999,
+          -6.829999999999999,
+          6.440000000000001,
+          0.039999999999998925,
+          5.92,
+          -2.5500000000000016,
+          9.290000000000001,
+          9.05,
+          5.159999999999998,
+          -3.5300000000000002,
+          8.8,
+          10.220000000000002,
+          3.220000000000001,
+          2.3799999999999972,
+          2.4899999999999998,
+          -3.860000000000001,
+          -1.1200000000000012,
+          11.219999999999999,
+          -9.270000000000003,
+          -0.14000000000000057,
+          -0.37000000000000033,
+          18.01,
+          6.5,
+          0.7099999999999984,
+          -2.89,
+          4.159999999999998,
+          4.150000000000001,
+          -5.209999999999999,
+          3.2499999999999982,
+          8.319999999999997,
+          -0.8600000000000028,
+          5.1099999999999985,
+          -1.1300000000000006,
+          -0.07000000000000095,
+          10.68,
+          1.119999999999999,
+          1.479999999999995,
+          -2.95,
+          4.580000000000003,
+          3.630000000000001,
+          2.1499999999999977,
+          7.34,
+          6.739999999999998,
+          6.509999999999999,
+          -2.6900000000000017,
+          3.169999999999999,
+          4.270000000000001,
+          0.4599999999999991,
+          -5.120000000000001,
+          3.8199999999999985,
+          1.4799999999999993,
+          3.0399999999999996,
+          -2.980000000000002,
+          1.4099999999999997,
+          2.8,
+          -8.860000000000003,
+          -2.1700000000000026,
+          -2.0200000000000014,
+          7.029999999999999,
+          2.8099999999999996,
+          1.1199999999999997,
+          10.250000000000002,
+          -2.0100000000000002,
+          3.8499999999999974,
+          0.3499999999999994,
+          -10.589999999999996,
+          16.240000000000002,
+          -4.01,
+          -3.3000000000000007,
+          -3.5399999999999996,
+          5.749999999999999,
+          -2.1100000000000003
+        ],
+        "training_return_sum": -21655.78999999989,
+        "training_events": {
+          "births": 22047,
+          "departures": 9020,
+          "survivor_opportunities": 47723,
+          "eligible_survivor_opportunities": 258975,
+          "survivor_resets": 0
+        },
+        "evaluation_events": {
+          "births": 556,
+          "departures": 172,
+          "survivor_opportunities": 1244,
+          "eligible_survivor_opportunities": 6798,
+          "survivor_resets": 0
+        },
+        "mean_native_return": 2.5445312499999995,
+        "exposure": "100000 real native training ticks; 4969 actor/mixer RMSprop steps at lr=0.0005; 128 final greedy evaluation episodes",
+        "rng": "Python/global NumPy/Torch seeded before model construction; native traffic and replay share global NumPy; source epsilon selector uses Torch including greedy and terminal draws; all three reset to107804 for final evaluation",
+        "torch_version": "2.7.0+cu118",
+        "numpy_version": "1.26.3",
+        "torch_threads": [
+          1,
+          1
+        ],
+        "wall_seconds": 737.9055410069996,
+        "peak_rss_kib": 638144
+      },
+      "admission": {
+        "assessed_at": "2026-09-09T22:40:22.539599Z",
+        "available_physical_bytes": 15626567680,
+        "captured_at": "2026-09-09T22:40:22.539236Z",
+        "cgroup_headroom_bytes": null,
+        "cgroup_memory_current_bytes": null,
+        "cgroup_memory_max_bytes": null,
+        "effective_available_bytes": 15626567680,
+        "effective_floor_pass": true,
+        "failure_reasons": [],
+        "measurement_source": "/proc/meminfo",
+        "minimum_available_bytes": 4294967296,
+        "passed": true,
+        "physical_floor_pass": true,
+        "schema_version": 1
+      },
+      "artifacts": {
+        "summary.json": {
+          "path": "temp/directions/vap_folr_core/exp/public_lifecycle_timing_b01_seed7804_retain/summary.json",
+          "sha256": "959b9bad13a785105789abc56107fc57c4b2a396cb71372fd982607f190c0f83"
+        },
+        "final.pt": {
+          "path": "temp/directions/vap_folr_core/exp/public_lifecycle_timing_b01_seed7804_retain/final.pt",
+          "sha256": "ca76e264863100eb7006b9ef3744fa08cb70ab10a5685a52ac4527f38774d96a"
+        },
+        "process.time": {
+          "path": "temp/directions/vap_folr_core/exp/public_lifecycle_timing_b01_seed7804_retain/process.time",
+          "sha256": "c0fc8ae8ce3ed514fca793e948608328d1ac98117dc285fda53cecba6a367b72"
+        },
+        "task.log": {
+          "path": "temp/directions/vap_folr_core/exp/public_lifecycle_timing_b01_seed7804_retain/task.log",
+          "sha256": "db27b3b8c2c4e9fcfff3889f81fa64b830e11d223d19ae285c3c7e4e2065709c"
+        },
+        "memory_receipt": {
+          "path": "temp/directions/vap_folr_core/exp/public_lifecycle_timing_b01_seed7804_retain_memory.json",
+          "sha256": "7afbec5d81df7c9254419ee90c1fa0c67e85291d26571c5e8d45585fc9b95e02"
+        }
+      },
+      "resource": {
+        "user_cpu_seconds": 732.93,
+        "system_cpu_seconds": 6.28,
+        "aggregate_cpu_seconds": 739.2099999999999,
+        "peak_rss_kib": 673136,
+        "exit_code": 0,
+        "runner_process_wall_seconds": 738.2,
+        "runner_process_scope": "External time wraps timeout/runner, including startup, learner, evaluation and publication; excludes prior preflight/mkdir",
+        "supervisor_integer_duration_seconds": 738,
+        "whole_supervisor_wall_upper_bound_seconds": 739,
+        "whole_supervisor_scope": "Task start through command exit including preflight/mkdir; integer epoch endpoints, duration+1 second is a conservative rounding upper charge",
+        "cpu_scope": "External time user+system for timeout/runner; preflight/mkdir CPU not measured"
+      },
+      "training_log_extent": {
+        "training_return_sum": -21655.78999999989,
+        "training_return_mean": -4.331157999999978,
+        "progress_records": [
+          {
+            "episode": 200,
+            "updates": 169,
+            "wall_seconds": 27.706984477001242
+          },
+          {
+            "episode": 400,
+            "updates": 369,
+            "wall_seconds": 57.21102835203055
+          },
+          {
+            "episode": 600,
+            "updates": 569,
+            "wall_seconds": 86.4442362980335
+          },
+          {
+            "episode": 800,
+            "updates": 769,
+            "wall_seconds": 115.71354801399866
+          },
+          {
+            "episode": 1000,
+            "updates": 969,
+            "wall_seconds": 144.87464186904253
+          },
+          {
+            "episode": 1200,
+            "updates": 1169,
+            "wall_seconds": 174.18453485000646
+          },
+          {
+            "episode": 1400,
+            "updates": 1369,
+            "wall_seconds": 203.1335193029954
+          },
+          {
+            "episode": 1600,
+            "updates": 1569,
+            "wall_seconds": 232.33153988799313
+          },
+          {
+            "episode": 1800,
+            "updates": 1769,
+            "wall_seconds": 261.43990154302446
+          },
+          {
+            "episode": 2000,
+            "updates": 1969,
+            "wall_seconds": 290.78666154603707
+          },
+          {
+            "episode": 2200,
+            "updates": 2169,
+            "wall_seconds": 319.8771025360329
+          },
+          {
+            "episode": 2400,
+            "updates": 2369,
+            "wall_seconds": 349.19994750100886
+          },
+          {
+            "episode": 2600,
+            "updates": 2569,
+            "wall_seconds": 378.46282296604477
+          },
+          {
+            "episode": 2800,
+            "updates": 2769,
+            "wall_seconds": 408.1438084660331
+          },
+          {
+            "episode": 3000,
+            "updates": 2969,
+            "wall_seconds": 437.7101153260446
+          },
+          {
+            "episode": 3200,
+            "updates": 3169,
+            "wall_seconds": 467.09085436700843
+          },
+          {
+            "episode": 3400,
+            "updates": 3369,
+            "wall_seconds": 496.41848156700144
+          },
+          {
+            "episode": 3600,
+            "updates": 3569,
+            "wall_seconds": 525.7632379360148
+          },
+          {
+            "episode": 3800,
+            "updates": 3769,
+            "wall_seconds": 555.8815188920125
+          },
+          {
+            "episode": 4000,
+            "updates": 3969,
+            "wall_seconds": 586.208350425004
+          },
+          {
+            "episode": 4200,
+            "updates": 4169,
+            "wall_seconds": 616.1119943700032
+          },
+          {
+            "episode": 4400,
+            "updates": 4369,
+            "wall_seconds": 646.236970930011
+          },
+          {
+            "episode": 4600,
+            "updates": 4569,
+            "wall_seconds": 677.0155388200074
+          },
+          {
+            "episode": 4800,
+            "updates": 4769,
+            "wall_seconds": 706.8350519720116
+          },
+          {
+            "episode": 5000,
+            "updates": 4969,
+            "wall_seconds": 736.2661867120187
+          }
+        ],
+        "per_episode_training_returns_published": false,
+        "return_curve_available": false,
+        "note": "Every200 episodes only episode/update/wall; final aggregate training return sum, no per-episode training-return curve or retained replay"
+      }
+    },
+    "EVENT": {
+      "summary": {
+        "arm": "EVENT",
+        "training_seed": 7804,
+        "evaluation_seed": 107804,
+        "launch_sha": "74d023d7d55453da8a5d5dccebd518e4ffdb65c8",
+        "status": "complete",
+        "training_episodes": 5000,
+        "training_ticks": 100000,
+        "optimizer_steps": 4969,
+        "evaluation_episodes": 128,
+        "evaluation_ticks": 2560,
+        "evaluation_returns": [
+          -1.9900000000000033,
+          -1.3999999999999986,
+          3.96,
+          2.459999999999999,
+          -0.9300000000000008,
+          7.840000000000002,
+          6.57,
+          5.869999999999997,
+          3.09,
+          11.290000000000001,
+          13.930000000000001,
+          0.8400000000000007,
+          21.57,
+          11.95,
+          21.06,
+          4.759999999999999,
+          -4.1400000000000015,
+          10.040000000000001,
+          7.6899999999999995,
+          11.450000000000001,
+          21.830000000000002,
+          17.009999999999998,
+          8.340000000000003,
+          7.63,
+          1.669999999999998,
+          0.8799999999999977,
+          6.449999999999999,
+          10.469999999999997,
+          3.79,
+          12.42,
+          -2.1999999999999984,
+          2.159999999999998,
+          0.40000000000000036,
+          -1.84,
+          11.94,
+          5.83,
+          -14.629999999999995,
+          1.5199999999999991,
+          -2.1600000000000015,
+          -3.150000000000001,
+          10.42,
+          22.810000000000002,
+          -6.970000000000001,
+          1.1599999999999997,
+          12.540000000000001,
+          9.030000000000001,
+          15.499999999999998,
+          23.449999999999996,
+          7.29,
+          2.9700000000000033,
+          14.92,
+          10.929999999999998,
+          -2.210000000000002,
+          8.3,
+          3.959999999999999,
+          1.8699999999999988,
+          -2.8799999999999994,
+          0.5899999999999976,
+          -10.110000000000001,
+          5.3999999999999995,
+          3.0499999999999994,
+          3.580000000000001,
+          -0.11999999999999855,
+          14.79,
+          8.34,
+          -3.9300000000000015,
+          -5.639999999999999,
+          8.600000000000001,
+          19.580000000000002,
+          5.26,
+          6.069999999999999,
+          -11.739999999999998,
+          4.059999999999999,
+          -1.4600000000000009,
+          1.8399999999999996,
+          2.23,
+          10.299999999999999,
+          -0.23999999999999916,
+          2.1,
+          10.19,
+          4.940000000000001,
+          6.780000000000001,
+          2.5300000000000007,
+          4.049999999999998,
+          7.35,
+          8.48,
+          -2.210000000000001,
+          -2.0799999999999983,
+          5.5600000000000005,
+          9.22,
+          -1.0900000000000007,
+          18.93,
+          13.060000000000002,
+          -1.2999999999999992,
+          -6.490000000000003,
+          8.67,
+          20.72,
+          5.299999999999999,
+          14.45,
+          5.380000000000001,
+          -1.3800000000000017,
+          2.710000000000001,
+          3.6200000000000006,
+          -2.0199999999999987,
+          0.77,
+          -1.9199999999999995,
+          4.940000000000001,
+          -7.890000000000001,
+          -0.48999999999999955,
+          11.729999999999999,
+          4.609999999999999,
+          -5.8100000000000005,
+          4.92,
+          -0.1800000000000006,
+          10.47,
+          3.67,
+          18.87,
+          11.48,
+          17.12,
+          19.12,
+          10.89,
+          1.0000000000000022,
+          11.830000000000002,
+          13.200000000000001,
+          -0.5700000000000005,
+          1.55,
+          8.86,
+          -8.739999999999998
+        ],
+        "training_return_sum": -24354.86999999995,
+        "training_events": {
+          "births": 21775,
+          "departures": 8833,
+          "survivor_opportunities": 47375,
+          "eligible_survivor_opportunities": 257715,
+          "survivor_resets": 47375
+        },
+        "evaluation_events": {
+          "births": 611,
+          "departures": 277,
+          "survivor_opportunities": 1416,
+          "eligible_survivor_opportunities": 6294,
+          "survivor_resets": 1416
+        },
+        "mean_native_return": 5.349296874999999,
+        "exposure": "100000 real native training ticks; 4969 actor/mixer RMSprop steps at lr=0.0005; 128 final greedy evaluation episodes",
+        "rng": "Python/global NumPy/Torch seeded before model construction; native traffic and replay share global NumPy; source epsilon selector uses Torch including greedy and terminal draws; all three reset to107804 for final evaluation",
+        "torch_version": "2.7.0+cu118",
+        "numpy_version": "1.26.3",
+        "torch_threads": [
+          1,
+          1
+        ],
+        "wall_seconds": 786.4365202680347,
+        "peak_rss_kib": 643268
+      },
+      "admission": {
+        "assessed_at": "2026-09-09T22:56:48.618552Z",
+        "available_physical_bytes": 15633895424,
+        "captured_at": "2026-09-09T22:56:48.618268Z",
+        "cgroup_headroom_bytes": null,
+        "cgroup_memory_current_bytes": null,
+        "cgroup_memory_max_bytes": null,
+        "effective_available_bytes": 15633895424,
+        "effective_floor_pass": true,
+        "failure_reasons": [],
+        "measurement_source": "/proc/meminfo",
+        "minimum_available_bytes": 4294967296,
+        "passed": true,
+        "physical_floor_pass": true,
+        "schema_version": 1
+      },
+      "artifacts": {
+        "summary.json": {
+          "path": "temp/directions/vap_folr_core/exp/public_lifecycle_timing_b01_seed7804_event/summary.json",
+          "sha256": "9e724abbdd5ba9c0892585b622a74dae2284b52ddeba138dd60828423faca64c"
+        },
+        "final.pt": {
+          "path": "temp/directions/vap_folr_core/exp/public_lifecycle_timing_b01_seed7804_event/final.pt",
+          "sha256": "258c323ae643f54d03a1edfdf1a2782d2f0a4e8ecb289746c51a466e08aaeef6"
+        },
+        "process.time": {
+          "path": "temp/directions/vap_folr_core/exp/public_lifecycle_timing_b01_seed7804_event/process.time",
+          "sha256": "b3faad808e61f4958542bc43a2480e269de15ca1a2ee1e6205078a4f8b4af863"
+        },
+        "task.log": {
+          "path": "temp/directions/vap_folr_core/exp/public_lifecycle_timing_b01_seed7804_event/task.log",
+          "sha256": "030797cd6ad77c90dfb3a669ac7bd4e2dff86640e85643096e84cc596acdfef6"
+        },
+        "memory_receipt": {
+          "path": "temp/directions/vap_folr_core/exp/public_lifecycle_timing_b01_seed7804_event_memory.json",
+          "sha256": "675434a6f467a9f454a5297cb678e655ad98fe94348157e459f8bf5e7d8edfc5"
+        }
+      },
+      "resource": {
+        "user_cpu_seconds": 765.45,
+        "system_cpu_seconds": 22.68,
+        "aggregate_cpu_seconds": 788.13,
+        "peak_rss_kib": 670720,
+        "exit_code": 0,
+        "runner_process_wall_seconds": 786.72,
+        "runner_process_scope": "External time wraps timeout/runner, including startup, learner, evaluation and publication; excludes prior preflight/mkdir",
+        "supervisor_integer_duration_seconds": 787,
+        "whole_supervisor_wall_upper_bound_seconds": 788,
+        "whole_supervisor_scope": "Task start through command exit including preflight/mkdir; integer epoch endpoints, duration+1 second is a conservative rounding upper charge",
+        "cpu_scope": "External time user+system for timeout/runner; preflight/mkdir CPU not measured"
+      },
+      "training_log_extent": {
+        "training_return_sum": -24354.86999999995,
+        "training_return_mean": -4.870973999999991,
+        "progress_records": [
+          {
+            "episode": 200,
+            "updates": 169,
+            "wall_seconds": 27.69075306499144
+          },
+          {
+            "episode": 400,
+            "updates": 369,
+            "wall_seconds": 57.94269912701566
+          },
+          {
+            "episode": 600,
+            "updates": 569,
+            "wall_seconds": 87.57562047202373
+          },
+          {
+            "episode": 800,
+            "updates": 769,
+            "wall_seconds": 117.06595106201712
+          },
+          {
+            "episode": 1000,
+            "updates": 969,
+            "wall_seconds": 146.42326338100247
+          },
+          {
+            "episode": 1200,
+            "updates": 1169,
+            "wall_seconds": 175.9120249300031
+          },
+          {
+            "episode": 1400,
+            "updates": 1369,
+            "wall_seconds": 206.41391580499476
+          },
+          {
+            "episode": 1600,
+            "updates": 1569,
+            "wall_seconds": 236.16631921299268
+          },
+          {
+            "episode": 1800,
+            "updates": 1769,
+            "wall_seconds": 266.9394868480158
+          },
+          {
+            "episode": 2000,
+            "updates": 1969,
+            "wall_seconds": 299.46079516602913
+          },
+          {
+            "episode": 2200,
+            "updates": 2169,
+            "wall_seconds": 332.589390248002
+          },
+          {
+            "episode": 2400,
+            "updates": 2369,
+            "wall_seconds": 363.21189285902074
+          },
+          {
+            "episode": 2600,
+            "updates": 2569,
+            "wall_seconds": 393.42105247901054
+          },
+          {
+            "episode": 2800,
+            "updates": 2769,
+            "wall_seconds": 424.41851172503084
+          },
+          {
+            "episode": 3000,
+            "updates": 2969,
+            "wall_seconds": 455.4398119490361
+          },
+          {
+            "episode": 3200,
+            "updates": 3169,
+            "wall_seconds": 486.73080277798
+          },
+          {
+            "episode": 3400,
+            "updates": 3369,
+            "wall_seconds": 520.0631652930169
+          },
+          {
+            "episode": 3600,
+            "updates": 3569,
+            "wall_seconds": 554.1698978210334
+          },
+          {
+            "episode": 3800,
+            "updates": 3769,
+            "wall_seconds": 588.2267836030223
+          },
+          {
+            "episode": 4000,
+            "updates": 3969,
+            "wall_seconds": 622.124083696981
+          },
+          {
+            "episode": 4200,
+            "updates": 4169,
+            "wall_seconds": 656.7318010710296
+          },
+          {
+            "episode": 4400,
+            "updates": 4369,
+            "wall_seconds": 689.5924432590255
+          },
+          {
+            "episode": 4600,
+            "updates": 4569,
+            "wall_seconds": 722.8106230709818
+          },
+          {
+            "episode": 4800,
+            "updates": 4769,
+            "wall_seconds": 754.5438486679923
+          },
+          {
+            "episode": 5000,
+            "updates": 4969,
+            "wall_seconds": 784.8077499860083
+          }
+        ],
+        "per_episode_training_returns_published": false,
+        "return_curve_available": false,
+        "note": "Every200 episodes only episode/update/wall; final aggregate training return sum, no per-episode training-return curve or retained replay"
+      }
+    },
+    "RANDOM": {
+      "summary": {
+        "arm": "RANDOM",
+        "training_seed": 7804,
+        "evaluation_seed": 107804,
+        "launch_sha": "74d023d7d55453da8a5d5dccebd518e4ffdb65c8",
+        "status": "complete",
+        "training_episodes": 5000,
+        "training_ticks": 100000,
+        "optimizer_steps": 4969,
+        "evaluation_episodes": 128,
+        "evaluation_ticks": 2560,
+        "evaluation_returns": [
+          -3.3600000000000003,
+          11.53,
+          -0.2400000000000055,
+          13.189999999999998,
+          4.5,
+          4.74,
+          10.829999999999998,
+          -4.359999999999999,
+          7.66,
+          4.2,
+          5.07,
+          -2.1899999999999995,
+          -0.3400000000000003,
+          3.370000000000002,
+          0.11000000000000032,
+          6.82,
+          6.27,
+          -6.970000000000001,
+          2.7800000000000025,
+          -7.94,
+          13.320000000000002,
+          11.17,
+          11.85,
+          3.8299999999999996,
+          5.81,
+          1.119999999999997,
+          14.370000000000001,
+          -9.84,
+          0.5299999999999998,
+          -1.1600000000000026,
+          14.839999999999996,
+          2.5999999999999996,
+          -2.11,
+          4.010000000000002,
+          1.1200000000000008,
+          9.639999999999999,
+          12.81,
+          7.1,
+          7.410000000000001,
+          -9.729999999999999,
+          0.5799999999999994,
+          8.860000000000001,
+          8.969999999999999,
+          13.62,
+          0.23999999999999932,
+          11.670000000000002,
+          25.46,
+          15.700000000000001,
+          4.609999999999999,
+          4.009999999999999,
+          3.8899999999999997,
+          -1.3200000000000007,
+          -3.6300000000000003,
+          7.919999999999998,
+          -8.629999999999997,
+          -2.240000000000001,
+          13.400000000000002,
+          5.049999999999999,
+          3.1599999999999993,
+          6.129999999999994,
+          6.45,
+          -8.589999999999998,
+          5.270000000000001,
+          -0.5199999999999991,
+          -7.290000000000001,
+          -4.1599999999999975,
+          6.679999999999999,
+          8.66,
+          3.8099999999999996,
+          18.07,
+          -5.680000000000003,
+          -0.5300000000000007,
+          5.149999999999999,
+          -6.240000000000004,
+          4.38,
+          -11.300000000000002,
+          2.26,
+          11.100000000000001,
+          5.65,
+          -5.080000000000004,
+          -5.28,
+          -4.87,
+          2.919999999999999,
+          7.879999999999999,
+          12.14,
+          -6.210000000000001,
+          3.140000000000004,
+          9.789999999999997,
+          0.4199999999999988,
+          17.41,
+          1.6100000000000008,
+          5.3900000000000015,
+          7.219999999999999,
+          2.79,
+          11.12,
+          13.72,
+          -2.04,
+          -7.0000000000000036,
+          12.57,
+          11.84,
+          4.180000000000001,
+          0.0900000000000003,
+          15.510000000000003,
+          2.39,
+          2.080000000000001,
+          10.419999999999998,
+          0.2599999999999998,
+          13.059999999999999,
+          26.329999999999995,
+          0.6499999999999979,
+          3.8799999999999972,
+          12.24,
+          3.4400000000000013,
+          -1.6200000000000028,
+          0.9299999999999995,
+          2.52,
+          7.190000000000001,
+          -2.139999999999998,
+          -4.380000000000001,
+          -6.360000000000001,
+          -5.3999999999999995,
+          12.97,
+          0.06999999999999901,
+          7.16,
+          11.009999999999998,
+          9.47,
+          -9.589999999999998,
+          -0.6600000000000006
+        ],
+        "training_return_sum": -23578.120000000046,
+        "training_events": {
+          "births": 21693,
+          "departures": 8492,
+          "survivor_opportunities": 47239,
+          "eligible_survivor_opportunities": 261232,
+          "survivor_resets": 26050
+        },
+        "evaluation_events": {
+          "births": 562,
+          "departures": 233,
+          "survivor_opportunities": 1377,
+          "eligible_survivor_opportunities": 6644,
+          "survivor_resets": 649
+        },
+        "mean_native_return": 3.985625,
+        "exposure": "100000 real native training ticks; 4969 actor/mixer RMSprop steps at lr=0.0005; 128 final greedy evaluation episodes",
+        "mask_rng": {
+          "bit_generator": "PCG64",
+          "training_seed": 207804,
+          "evaluation_seed": 307804,
+          "probability": 0.1,
+          "draws_per_episode": 105,
+          "frequency_matched": false
+        },
+        "rng": "Python/global NumPy/Torch seeded before model construction; native traffic and replay share global NumPy; source epsilon selector uses Torch including greedy and terminal draws; all three reset to107804 for final evaluation",
+        "torch_version": "2.7.0+cu118",
+        "numpy_version": "1.26.3",
+        "torch_threads": [
+          1,
+          1
+        ],
+        "wall_seconds": 818.7989385410328,
+        "peak_rss_kib": 647880
+      },
+      "admission": {
+        "assessed_at": "2026-09-09T23:13:06.186769Z",
+        "available_physical_bytes": 15633313792,
+        "captured_at": "2026-09-09T23:13:06.186480Z",
+        "cgroup_headroom_bytes": null,
+        "cgroup_memory_current_bytes": null,
+        "cgroup_memory_max_bytes": null,
+        "effective_available_bytes": 15633313792,
+        "effective_floor_pass": true,
+        "failure_reasons": [],
+        "measurement_source": "/proc/meminfo",
+        "minimum_available_bytes": 4294967296,
+        "passed": true,
+        "physical_floor_pass": true,
+        "schema_version": 1
+      },
+      "artifacts": {
+        "summary.json": {
+          "path": "temp/directions/vap_folr_core/exp/public_lifecycle_timing_b01_seed7804_random/summary.json",
+          "sha256": "40ba74368fd0b52882227cacddc6104b0b489f8b6a5d72dad1215d063390a029"
+        },
+        "final.pt": {
+          "path": "temp/directions/vap_folr_core/exp/public_lifecycle_timing_b01_seed7804_random/final.pt",
+          "sha256": "92f58d70014155f2013f8fe2ee846c0b2b952c6863512f1d2d1bbd615cd9e172"
+        },
+        "process.time": {
+          "path": "temp/directions/vap_folr_core/exp/public_lifecycle_timing_b01_seed7804_random/process.time",
+          "sha256": "b00084f264d7b40dfdfd0772066b9d347af59c0a9f5c98f32c3ef53dc5f49833"
+        },
+        "task.log": {
+          "path": "temp/directions/vap_folr_core/exp/public_lifecycle_timing_b01_seed7804_random/task.log",
+          "sha256": "5e586515cf2ef04f9a055594e65dcf39dc8ebbc8ee6e8c7ab8ea4ede4e950859"
+        },
+        "memory_receipt": {
+          "path": "temp/directions/vap_folr_core/exp/public_lifecycle_timing_b01_seed7804_random_memory.json",
+          "sha256": "36c1e957a02a06c2ac827bae9ee7462c0de0e3dfeb2fe1a16f17ec78c7775540"
+        }
+      },
+      "resource": {
+        "user_cpu_seconds": 800.4,
+        "system_cpu_seconds": 20.06,
+        "aggregate_cpu_seconds": 820.4599999999999,
+        "peak_rss_kib": 656492,
+        "exit_code": 0,
+        "runner_process_wall_seconds": 819.15,
+        "runner_process_scope": "External time wraps timeout/runner, including startup, learner, evaluation and publication; excludes prior preflight/mkdir",
+        "supervisor_integer_duration_seconds": 819,
+        "whole_supervisor_wall_upper_bound_seconds": 820,
+        "whole_supervisor_scope": "Task start through command exit including preflight/mkdir; integer epoch endpoints, duration+1 second is a conservative rounding upper charge",
+        "cpu_scope": "External time user+system for timeout/runner; preflight/mkdir CPU not measured"
+      },
+      "training_log_extent": {
+        "training_return_sum": -23578.120000000046,
+        "training_return_mean": -4.715624000000009,
+        "progress_records": [
+          {
+            "episode": 200,
+            "updates": 169,
+            "wall_seconds": 27.450901909032837
+          },
+          {
+            "episode": 400,
+            "updates": 369,
+            "wall_seconds": 59.30669759603916
+          },
+          {
+            "episode": 600,
+            "updates": 569,
+            "wall_seconds": 91.37831059005111
+          },
+          {
+            "episode": 800,
+            "updates": 769,
+            "wall_seconds": 123.47391811903799
+          },
+          {
+            "episode": 1000,
+            "updates": 969,
+            "wall_seconds": 155.23486984701594
+          },
+          {
+            "episode": 1200,
+            "updates": 1169,
+            "wall_seconds": 187.19738995702937
+          },
+          {
+            "episode": 1400,
+            "updates": 1369,
+            "wall_seconds": 219.46324163401732
+          },
+          {
+            "episode": 1600,
+            "updates": 1569,
+            "wall_seconds": 251.87817679304862
+          },
+          {
+            "episode": 1800,
+            "updates": 1769,
+            "wall_seconds": 284.6907591530471
+          },
+          {
+            "episode": 2000,
+            "updates": 1969,
+            "wall_seconds": 317.7325095470296
+          },
+          {
+            "episode": 2200,
+            "updates": 2169,
+            "wall_seconds": 350.16599183605285
+          },
+          {
+            "episode": 2400,
+            "updates": 2369,
+            "wall_seconds": 383.1644117470132
+          },
+          {
+            "episode": 2600,
+            "updates": 2569,
+            "wall_seconds": 415.5217548219953
+          },
+          {
+            "episode": 2800,
+            "updates": 2769,
+            "wall_seconds": 447.55574383202475
+          },
+          {
+            "episode": 3000,
+            "updates": 2969,
+            "wall_seconds": 479.6198175200261
+          },
+          {
+            "episode": 3200,
+            "updates": 3169,
+            "wall_seconds": 512.1971207470051
+          },
+          {
+            "episode": 3400,
+            "updates": 3369,
+            "wall_seconds": 545.8475745390169
+          },
+          {
+            "episode": 3600,
+            "updates": 3569,
+            "wall_seconds": 579.640449936036
+          },
+          {
+            "episode": 3800,
+            "updates": 3769,
+            "wall_seconds": 614.0347401340259
+          },
+          {
+            "episode": 4000,
+            "updates": 3969,
+            "wall_seconds": 648.3698156370083
+          },
+          {
+            "episode": 4200,
+            "updates": 4169,
+            "wall_seconds": 682.9041198470513
+          },
+          {
+            "episode": 4400,
+            "updates": 4369,
+            "wall_seconds": 716.7955794199952
+          },
+          {
+            "episode": 4600,
+            "updates": 4569,
+            "wall_seconds": 751.096949608007
+          },
+          {
+            "episode": 4800,
+            "updates": 4769,
+            "wall_seconds": 783.8439818870393
+          },
+          {
+            "episode": 5000,
+            "updates": 4969,
+            "wall_seconds": 816.9002133080503
+          }
+        ],
+        "per_episode_training_returns_published": false,
+        "return_curve_available": false,
+        "note": "Every200 episodes only episode/update/wall; final aggregate training return sum, no per-episode training-return curve or retained replay"
+      }
+    }
+  },
+  "primary": {
+    "J_RETAIN": 2.5445312499999995,
+    "J_EVENT": 5.349296874999999,
+    "J_RANDOM": 3.985625,
+    "contrasts": {
+      "d_ER": {
+        "difference": 2.804765625,
+        "rule": "EVENT_ABOVE_MEI"
+      },
+      "d_MR": {
+        "difference": 1.4410937500000007,
+        "rule": "RANDOM_ABOVE_MEI"
+      },
+      "d_EM": {
+        "difference": 1.3636718749999992,
+        "rule": "EVENT_ABOVE_MEI"
+      }
+    },
+    "rule": "EVENT_CLEAR_ADVANTAGE"
+  },
+  "claim": "One new fitting instance per arm; unmatched p=.1 trained-package comparison; no pure timing or stable-winner claim",
+  "cost": {
+    "sum_aggregate_cpu_seconds": 2347.7999999999997,
+    "critical_path_seconds": 2782.460401,
+    "critical_path_boundary": "First RETAIN admission to final RANDOM supervisor exit (second precision), includes inter-arm monitor/collection/sequencing gaps; excludes prior staging and final collection",
+    "per_arm_cap_seconds": 1800,
+    "triple_cap_seconds": 5400,
+    "sum_runner_process_wall_seconds": 2344.07,
+    "sum_whole_supervisor_wall_upper_bound_seconds": 2347,
+    "cpu_scope": "Preserved measured timeout/runner CPU sum; excludes preflight/mkdir CPU",
+    "cap_evidence": "Conservative whole supervisor wall upper charges739/788/820 seconds, sum2347, each below1800 and total below5400"
+  },
+  "checks": {
+    "exact_source_seeds_counts": true,
+    "all384_returns_finite": true,
+    "means_match": true,
+    "reset_exposure_consistent": true,
+    "three_fresh_admissions_pass": true,
+    "three_exit_zero": true,
+    "per_arm_and_triple_wall_caps_met": true
+  }
+}

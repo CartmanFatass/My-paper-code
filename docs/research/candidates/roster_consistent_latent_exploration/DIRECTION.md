@@ -411,3 +411,57 @@ not a new card or an automatic execution. Supporting evidence is the recovery E0
 `a83d397e9b1d85a22df76933f1e41ba0d7a764dd`, the intake's full eight-cell/reference/curve
 reading and `b03_actor100_recovery_20260909/DM_RESULT_ANALYSIS.json`. The accepted recovery
 changes current comparison knowledge without rewriting the incomplete-attempt section.
+
+## Fresh independent actor100 pair selected for preparation — 2026-09-09
+
+Under object-tier delegation, `RCLE_B03_S20_SELECTION_INTAKE_20260909.md` and
+`RCLE_B03_S20_SCIENCE_CARD_20260909.md` select one new seed-20 W1/W100 pair with the
+same 200-update learning laws and native endpoints. Both fits will start fresh under
+one paired new root; the historical fitted W1 is not reused. The discriminator is
+whether the small U benefit and final-roster-12 fragmentation cost recur across a new
+learning instance. Deferral remains the close runner-up because the existing gain is
+below MEI and recovery/reference competence remains poor.
+
+The original CM's source-read-only feasibility at `17aa7f01533887750b74a6ca62465e67b41a4580`
+finds a minimal explicit seed/reporting path and no required host/learner change. That
+is engineering feasibility, not a scientific observation or source acceptance. The
+prospective card fixes 33,792 episodes/400 calls and a 1,500s complete ceiling, with
+zero implementation/test/scientific invocation allocated at freeze. Root receives the
+concrete next batch for allocation. No new stable/causal claim, recast, family closure,
+priority or lifecycle decision follows; all seed-19 results and failures remain.
+
+## Actor-score weighting: fresh seed reproduces small U gain, not uniform F pattern — 2026-09-09
+
+The valid fresh seed-20 B in `RCLE_B03_S20_RESULT_INTAKE_20260909.md` adds one
+independently generated matched W1/W100 pair at the same 200-update law and endpoints.
+Actual new root and initial tensors distinguish it from seed 19; both arms make 200
+nonzero updates. Equal-path ACTIVE_CONTINUATION U_W1−U_W100 is **+0.0093241374**,
+conditional scenario interval [0.0065071,0.0121411], versus seed 19's +0.0132242839.
+W100 initialization gain is +0.0100097656. Both primary paths and all 8 U/Y cell means
+favor W100. Two paired training instances show limited recurrence, not stable population
+superiority; the historical recovery selection, failed attempt and unknown prefix remain.
+
+The strongest support is the new complete same-information learned-law comparison and
+late declining W100 training U. The strongest competence limits remain sub-MEI size,
+every learned recovery score 40, and reference primary U 0.2757894 versus W100 0.6898132
+(gap 0.4140238). H_A1 remains unidentified. W100 fragmentation worsens in both 8→12 cells
+but slightly improves in both 12→12 cells. Thus the old final-roster 12 all-four-loss
+pattern does not recur uniformly; its positive four-cell mean is much smaller here.
+Both the small-positive branch and end-this-200-update-spend branch apply unchanged.
+
+A full normalized joint-law effect through shared encoders, manager/FLEX heads,
+baselines or visitation remains an alternative to pure actor-credit attribution.
+These two seeds do not establish useful complete recovery, a general roster-scaling
+law, component causality, C promotion, family closure or a recast. Complete scientific
+support is E0 `a8fd7f915e5b115578b30edb6cf983f15816b572`, the intake's full cell/curve
+reading and `b03_actor100_s20_20260909/DM_RESULT_ANALYSIS.json`; the four endpoint rows
+and run summary retain seed-level outcomes without pooling scenario units.
+
+The recommended next discriminator is one separately selected fresh matched pair at
+one fixed 1,000-update endpoint, preserving the native law and required panels, to ask
+about practically sized learning and the W100/W1 contrast at that endpoint. It is not
+a causal 200-versus1,000 estimate or an extrapolated promised gain. Another unchanged
+200-update pair offers less information about the competence gap; deferral is a close
+runner-up. The bounded recommendation names 136,192 episodes / 8,716,288 ticks / 2,000 calls and
+rough 855.1s runner projection within a candidate 1500s complete cap. No successor card,
+invocation, priority/lifecycle disposition or Pro request is made by this recommendation.

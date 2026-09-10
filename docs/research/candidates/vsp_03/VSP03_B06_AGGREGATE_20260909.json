@@ -1,0 +1,672 @@
+{
+  "object": "VSP03_B06",
+  "source_sha": "edb74aaf5292600480763403cd30cbd733dd1583",
+  "complete_fits": 3,
+  "selected_fits": [
+    10801,
+    10802,
+    10803
+  ],
+  "independent_unit": "one continuous fit; not endpoint/panel/world",
+  "rows": [
+    {
+      "fit": 10801,
+      "primary512": {
+        "mean": 0.025996093749999998,
+        "conditional_world_sd": 0.21876326153768835,
+        "conditional_world_se": 0.006836351923052761,
+        "worlds": 1024
+      },
+      "D128": {
+        "mean": 0.02076171875,
+        "conditional_world_sd": 0.11068967946980889,
+        "conditional_world_se": 0.0034590524834315277,
+        "worlds": 1024
+      },
+      "Q": {
+        "mean": 0.0052343749999999994,
+        "conditional_world_sd": 0.219871871846595,
+        "conditional_world_se": 0.006870995995206094,
+        "worlds": 1024
+      },
+      "wall_s": 8.888241000007838,
+      "cpu_s": 8.762,
+      "peak_rss_bytes": 494186496,
+      "panels": {
+        "128": {
+          "absolute": {
+            "G_greedy": {
+              "episodes": 1024,
+              "return": 0.3721875,
+              "fixed_clocks": 17.0,
+              "pending_clocks": 8.60546875,
+              "eligible_decisions": 6.6171875,
+              "blocked_pending": 1.98828125,
+              "blocked_final_clocks": 0.0126953125,
+              "success_per_team": 0.986328125,
+              "attempt_per_team": 1.953125,
+              "failed_attempt_per_team": 0.966796875,
+              "non_submission_per_team": 0.046875,
+              "waiting_ticks_per_team": 28.859375
+            },
+            "G_stochastic": {
+              "episodes": 1024,
+              "return": 0.326142578125,
+              "fixed_clocks": 17.0,
+              "pending_clocks": 7.6884765625,
+              "eligible_decisions": 5.6943359375,
+              "blocked_pending": 1.994140625,
+              "blocked_final_clocks": 0.0107421875,
+              "success_per_team": 0.8759765625,
+              "attempt_per_team": 1.974609375,
+              "failed_attempt_per_team": 1.0986328125,
+              "non_submission_per_team": 0.025390625,
+              "waiting_ticks_per_team": 24.9921875
+            },
+            "R0": {
+              "episodes": 1024,
+              "return": 0.35142578125,
+              "fixed_clocks": 17.0,
+              "pending_clocks": 8.853515625,
+              "eligible_decisions": 6.865234375,
+              "blocked_pending": 1.98828125,
+              "blocked_final_clocks": 0.0126953125,
+              "success_per_team": 0.94921875,
+              "attempt_per_team": 1.83984375,
+              "failed_attempt_per_team": 0.890625,
+              "non_submission_per_team": 0.16015625,
+              "waiting_ticks_per_team": 30.875
+            },
+            "R": {
+              "episodes": 1024,
+              "return": 0.352822265625,
+              "fixed_clocks": 17.0,
+              "pending_clocks": 8.8603515625,
+              "eligible_decisions": 6.8720703125,
+              "blocked_pending": 1.98828125,
+              "blocked_final_clocks": 0.013671875,
+              "success_per_team": 0.9521484375,
+              "attempt_per_team": 1.83984375,
+              "failed_attempt_per_team": 0.8876953125,
+              "non_submission_per_team": 0.16015625,
+              "waiting_ticks_per_team": 30.90234375
+            }
+          },
+          "comparisons": {
+            "G_greedy-R0": {
+              "mean": 0.02076171875,
+              "conditional_world_sd": 0.11068967946980889,
+              "conditional_world_se": 0.0034590524834315277,
+              "worlds": 1024
+            },
+            "G_greedy-R": {
+              "mean": 0.019365234375,
+              "conditional_world_sd": 0.11411732486418576,
+              "conditional_world_se": 0.003566166402005805,
+              "worlds": 1024
+            },
+            "G_stochastic-R0": {
+              "mean": -0.025283203125,
+              "conditional_world_sd": 0.31343564583071193,
+              "conditional_world_se": 0.009794863932209748,
+              "worlds": 1024
+            },
+            "G_stochastic-R": {
+              "mean": -0.026679687499999993,
+              "conditional_world_sd": 0.3135937141178265,
+              "conditional_world_se": 0.009799803566182078,
+              "worlds": 1024
+            },
+            "G_stochastic-G_greedy": {
+              "mean": -0.046044921875000006,
+              "conditional_world_sd": 0.32073120566753077,
+              "conditional_world_se": 0.010022850177110337,
+              "worlds": 1024
+            }
+          }
+        },
+        "512": {
+          "absolute": {
+            "G_greedy": {
+              "episodes": 1024,
+              "return": 0.377421875,
+              "fixed_clocks": 17.0,
+              "pending_clocks": 8.81640625,
+              "eligible_decisions": 6.828125,
+              "blocked_pending": 1.98828125,
+              "blocked_final_clocks": 0.013671875,
+              "success_per_team": 1.0009765625,
+              "attempt_per_team": 1.9619140625,
+              "failed_attempt_per_team": 0.9609375,
+              "non_submission_per_team": 0.0380859375,
+              "waiting_ticks_per_team": 29.607421875
+            },
+            "G_stochastic": {
+              "episodes": 1024,
+              "return": 0.380478515625,
+              "fixed_clocks": 17.0,
+              "pending_clocks": 8.8515625,
+              "eligible_decisions": 6.8642578125,
+              "blocked_pending": 1.9873046875,
+              "blocked_final_clocks": 0.0166015625,
+              "success_per_team": 1.0078125,
+              "attempt_per_team": 1.958984375,
+              "failed_attempt_per_team": 0.951171875,
+              "non_submission_per_team": 0.041015625,
+              "waiting_ticks_per_team": 29.78125
+            },
+            "R0": {
+              "episodes": 1024,
+              "return": 0.35142578125,
+              "fixed_clocks": 17.0,
+              "pending_clocks": 8.853515625,
+              "eligible_decisions": 6.865234375,
+              "blocked_pending": 1.98828125,
+              "blocked_final_clocks": 0.0126953125,
+              "success_per_team": 0.94921875,
+              "attempt_per_team": 1.83984375,
+              "failed_attempt_per_team": 0.890625,
+              "non_submission_per_team": 0.16015625,
+              "waiting_ticks_per_team": 30.875
+            },
+            "R": {
+              "episodes": 1024,
+              "return": 0.352822265625,
+              "fixed_clocks": 17.0,
+              "pending_clocks": 8.8603515625,
+              "eligible_decisions": 6.8720703125,
+              "blocked_pending": 1.98828125,
+              "blocked_final_clocks": 0.013671875,
+              "success_per_team": 0.9521484375,
+              "attempt_per_team": 1.83984375,
+              "failed_attempt_per_team": 0.8876953125,
+              "non_submission_per_team": 0.16015625,
+              "waiting_ticks_per_team": 30.90234375
+            }
+          },
+          "comparisons": {
+            "G_greedy-R0": {
+              "mean": 0.025996093749999998,
+              "conditional_world_sd": 0.21876326153768835,
+              "conditional_world_se": 0.006836351923052761,
+              "worlds": 1024
+            },
+            "G_greedy-R": {
+              "mean": 0.024599609374999998,
+              "conditional_world_sd": 0.2205503554213518,
+              "conditional_world_se": 0.0068921986069172434,
+              "worlds": 1024
+            },
+            "G_stochastic-R0": {
+              "mean": 0.029052734374999997,
+              "conditional_world_sd": 0.2105565198402957,
+              "conditional_world_se": 0.00657989124500924,
+              "worlds": 1024
+            },
+            "G_stochastic-R": {
+              "mean": 0.02765625,
+              "conditional_world_sd": 0.21132506821832095,
+              "conditional_world_se": 0.00660390838182253,
+              "worlds": 1024
+            },
+            "G_stochastic-G_greedy": {
+              "mean": 0.003056640625,
+              "conditional_world_sd": 0.1792342316346994,
+              "conditional_world_se": 0.005601069738584356,
+              "worlds": 1024
+            }
+          }
+        }
+      }
+    },
+    {
+      "fit": 10802,
+      "primary512": {
+        "mean": 0.014506835937500002,
+        "conditional_world_sd": 0.1283317500714123,
+        "conditional_world_se": 0.004010367189731634,
+        "worlds": 1024
+      },
+      "D128": {
+        "mean": 0.011074218749999993,
+        "conditional_world_sd": 0.23665902888431753,
+        "conditional_world_se": 0.007395594652634923,
+        "worlds": 1024
+      },
+      "Q": {
+        "mean": 0.0034326171875000097,
+        "conditional_world_sd": 0.24895354662646277,
+        "conditional_world_se": 0.0077797983320769615,
+        "worlds": 1024
+      },
+      "wall_s": 8.718388999986928,
+      "cpu_s": 8.712,
+      "peak_rss_bytes": 493867008,
+      "panels": {
+        "128": {
+          "absolute": {
+            "G_greedy": {
+              "episodes": 1024,
+              "return": 0.3714111328125,
+              "fixed_clocks": 17.0,
+              "pending_clocks": 10.37890625,
+              "eligible_decisions": 8.412109375,
+              "blocked_pending": 1.966796875,
+              "blocked_final_clocks": 0.04296875,
+              "success_per_team": 1.01953125,
+              "attempt_per_team": 1.833984375,
+              "failed_attempt_per_team": 0.814453125,
+              "non_submission_per_team": 0.166015625,
+              "waiting_ticks_per_team": 37.001953125
+            },
+            "G_stochastic": {
+              "episodes": 1024,
+              "return": 0.30843261718750004,
+              "fixed_clocks": 17.0,
+              "pending_clocks": 7.904296875,
+              "eligible_decisions": 5.9111328125,
+              "blocked_pending": 1.9931640625,
+              "blocked_final_clocks": 0.0078125,
+              "success_per_team": 0.8447265625,
+              "attempt_per_team": 1.9384765625,
+              "failed_attempt_per_team": 1.09375,
+              "non_submission_per_team": 0.0615234375,
+              "waiting_ticks_per_team": 26.1875
+            },
+            "R0": {
+              "episodes": 1024,
+              "return": 0.3603369140625,
+              "fixed_clocks": 17.0,
+              "pending_clocks": 8.931640625,
+              "eligible_decisions": 6.9482421875,
+              "blocked_pending": 1.9833984375,
+              "blocked_final_clocks": 0.017578125,
+              "success_per_team": 0.96875,
+              "attempt_per_team": 1.8203125,
+              "failed_attempt_per_team": 0.8515625,
+              "non_submission_per_team": 0.1796875,
+              "waiting_ticks_per_team": 31.412109375
+            },
+            "R": {
+              "episodes": 1024,
+              "return": 0.3616552734375,
+              "fixed_clocks": 17.0,
+              "pending_clocks": 8.947265625,
+              "eligible_decisions": 6.9638671875,
+              "blocked_pending": 1.9833984375,
+              "blocked_final_clocks": 0.017578125,
+              "success_per_team": 0.9716796875,
+              "attempt_per_team": 1.8212890625,
+              "failed_attempt_per_team": 0.849609375,
+              "non_submission_per_team": 0.1787109375,
+              "waiting_ticks_per_team": 31.4609375
+            }
+          },
+          "comparisons": {
+            "G_greedy-R0": {
+              "mean": 0.011074218749999993,
+              "conditional_world_sd": 0.23665902888431753,
+              "conditional_world_se": 0.007395594652634923,
+              "worlds": 1024
+            },
+            "G_greedy-R": {
+              "mean": 0.009755859374999993,
+              "conditional_world_sd": 0.2363764807047135,
+              "conditional_world_se": 0.007386765022022297,
+              "worlds": 1024
+            },
+            "G_stochastic-R0": {
+              "mean": -0.051904296875,
+              "conditional_world_sd": 0.3321281781283192,
+              "conditional_world_se": 0.010379005566509975,
+              "worlds": 1024
+            },
+            "G_stochastic-R": {
+              "mean": -0.05322265625,
+              "conditional_world_sd": 0.33287730080963157,
+              "conditional_world_se": 0.010402415650300987,
+              "worlds": 1024
+            },
+            "G_stochastic-G_greedy": {
+              "mean": -0.062978515625,
+              "conditional_world_sd": 0.34017944998044314,
+              "conditional_world_se": 0.010630607811888848,
+              "worlds": 1024
+            }
+          }
+        },
+        "512": {
+          "absolute": {
+            "G_greedy": {
+              "episodes": 1024,
+              "return": 0.37484375000000003,
+              "fixed_clocks": 17.0,
+              "pending_clocks": 8.484375,
+              "eligible_decisions": 6.498046875,
+              "blocked_pending": 1.986328125,
+              "blocked_final_clocks": 0.015625,
+              "success_per_team": 0.9892578125,
+              "attempt_per_team": 1.962890625,
+              "failed_attempt_per_team": 0.9736328125,
+              "non_submission_per_team": 0.037109375,
+              "waiting_ticks_per_team": 28.28515625
+            },
+            "G_stochastic": {
+              "episodes": 1024,
+              "return": 0.368330078125,
+              "fixed_clocks": 17.0,
+              "pending_clocks": 8.4521484375,
+              "eligible_decisions": 6.458984375,
+              "blocked_pending": 1.9931640625,
+              "blocked_final_clocks": 0.0146484375,
+              "success_per_team": 0.9755859375,
+              "attempt_per_team": 1.970703125,
+              "failed_attempt_per_team": 0.9951171875,
+              "non_submission_per_team": 0.029296875,
+              "waiting_ticks_per_team": 28.078125
+            },
+            "R0": {
+              "episodes": 1024,
+              "return": 0.3603369140625,
+              "fixed_clocks": 17.0,
+              "pending_clocks": 8.931640625,
+              "eligible_decisions": 6.9482421875,
+              "blocked_pending": 1.9833984375,
+              "blocked_final_clocks": 0.017578125,
+              "success_per_team": 0.96875,
+              "attempt_per_team": 1.8203125,
+              "failed_attempt_per_team": 0.8515625,
+              "non_submission_per_team": 0.1796875,
+              "waiting_ticks_per_team": 31.412109375
+            },
+            "R": {
+              "episodes": 1024,
+              "return": 0.3616552734375,
+              "fixed_clocks": 17.0,
+              "pending_clocks": 8.947265625,
+              "eligible_decisions": 6.9638671875,
+              "blocked_pending": 1.9833984375,
+              "blocked_final_clocks": 0.017578125,
+              "success_per_team": 0.9716796875,
+              "attempt_per_team": 1.8212890625,
+              "failed_attempt_per_team": 0.849609375,
+              "non_submission_per_team": 0.1787109375,
+              "waiting_ticks_per_team": 31.4609375
+            }
+          },
+          "comparisons": {
+            "G_greedy-R0": {
+              "mean": 0.014506835937500002,
+              "conditional_world_sd": 0.1283317500714123,
+              "conditional_world_se": 0.004010367189731634,
+              "worlds": 1024
+            },
+            "G_greedy-R": {
+              "mean": 0.013188476562500002,
+              "conditional_world_sd": 0.1310871328053203,
+              "conditional_world_se": 0.0040964729001662595,
+              "worlds": 1024
+            },
+            "G_stochastic-R0": {
+              "mean": 0.007993164062500002,
+              "conditional_world_sd": 0.15696458109592806,
+              "conditional_world_se": 0.004905143159247752,
+              "worlds": 1024
+            },
+            "G_stochastic-R": {
+              "mean": 0.006674804687500003,
+              "conditional_world_sd": 0.15917124903700705,
+              "conditional_world_se": 0.00497410153240647,
+              "worlds": 1024
+            },
+            "G_stochastic-G_greedy": {
+              "mean": -0.006513671875,
+              "conditional_world_sd": 0.14209748353704182,
+              "conditional_world_se": 0.004440546360532557,
+              "worlds": 1024
+            }
+          }
+        }
+      }
+    },
+    {
+      "fit": 10803,
+      "primary512": {
+        "mean": 0.009687500000000003,
+        "conditional_world_sd": 0.12831889192716497,
+        "conditional_world_se": 0.0040099653727239054,
+        "worlds": 1024
+      },
+      "D128": {
+        "mean": 4.394531249999386e-05,
+        "conditional_world_sd": 0.2306985503559254,
+        "conditional_world_se": 0.007209329698622669,
+        "worlds": 1024
+      },
+      "Q": {
+        "mean": 0.00964355468750001,
+        "conditional_world_sd": 0.2419800507548193,
+        "conditional_world_se": 0.007561876586088103,
+        "worlds": 1024
+      },
+      "wall_s": 8.380173999990802,
+      "cpu_s": 8.313,
+      "peak_rss_bytes": 494153728,
+      "panels": {
+        "128": {
+          "absolute": {
+            "G_greedy": {
+              "episodes": 1024,
+              "return": 0.352099609375,
+              "fixed_clocks": 17.0,
+              "pending_clocks": 9.73828125,
+              "eligible_decisions": 7.7568359375,
+              "blocked_pending": 1.9814453125,
+              "blocked_final_clocks": 0.0341796875,
+              "success_per_team": 0.96875,
+              "attempt_per_team": 1.845703125,
+              "failed_attempt_per_team": 0.876953125,
+              "non_submission_per_team": 0.154296875,
+              "waiting_ticks_per_team": 34.453125
+            },
+            "G_stochastic": {
+              "episodes": 1024,
+              "return": 0.317021484375,
+              "fixed_clocks": 17.0,
+              "pending_clocks": 7.775390625,
+              "eligible_decisions": 5.779296875,
+              "blocked_pending": 1.99609375,
+              "blocked_final_clocks": 0.0107421875,
+              "success_per_team": 0.859375,
+              "attempt_per_team": 1.951171875,
+              "failed_attempt_per_team": 1.091796875,
+              "non_submission_per_team": 0.048828125,
+              "waiting_ticks_per_team": 25.5546875
+            },
+            "R0": {
+              "episodes": 1024,
+              "return": 0.3520556640625,
+              "fixed_clocks": 17.0,
+              "pending_clocks": 8.7890625,
+              "eligible_decisions": 6.796875,
+              "blocked_pending": 1.9921875,
+              "blocked_final_clocks": 0.0166015625,
+              "success_per_team": 0.94921875,
+              "attempt_per_team": 1.822265625,
+              "failed_attempt_per_team": 0.873046875,
+              "non_submission_per_team": 0.177734375,
+              "waiting_ticks_per_team": 30.798828125
+            },
+            "R": {
+              "episodes": 1024,
+              "return": 0.35190429687499997,
+              "fixed_clocks": 17.0,
+              "pending_clocks": 8.806640625,
+              "eligible_decisions": 6.81640625,
+              "blocked_pending": 1.990234375,
+              "blocked_final_clocks": 0.017578125,
+              "success_per_team": 0.94921875,
+              "attempt_per_team": 1.8193359375,
+              "failed_attempt_per_team": 0.8701171875,
+              "non_submission_per_team": 0.1806640625,
+              "waiting_ticks_per_team": 30.888671875
+            }
+          },
+          "comparisons": {
+            "G_greedy-R0": {
+              "mean": 4.394531249999386e-05,
+              "conditional_world_sd": 0.2306985503559254,
+              "conditional_world_se": 0.007209329698622669,
+              "worlds": 1024
+            },
+            "G_greedy-R": {
+              "mean": 0.00019531249999999497,
+              "conditional_world_sd": 0.2306925925884294,
+              "conditional_world_se": 0.0072091435183884185,
+              "worlds": 1024
+            },
+            "G_stochastic-R0": {
+              "mean": -0.0350341796875,
+              "conditional_world_sd": 0.30792239473063343,
+              "conditional_world_se": 0.009622574835332295,
+              "worlds": 1024
+            },
+            "G_stochastic-R": {
+              "mean": -0.0348828125,
+              "conditional_world_sd": 0.3087409172681865,
+              "conditional_world_se": 0.009648153664630827,
+              "worlds": 1024
+            },
+            "G_stochastic-G_greedy": {
+              "mean": -0.03507812499999999,
+              "conditional_world_sd": 0.3118283887607824,
+              "conditional_world_se": 0.00974463714877445,
+              "worlds": 1024
+            }
+          }
+        },
+        "512": {
+          "absolute": {
+            "G_greedy": {
+              "episodes": 1024,
+              "return": 0.36174316406249996,
+              "fixed_clocks": 17.0,
+              "pending_clocks": 8.2314453125,
+              "eligible_decisions": 6.236328125,
+              "blocked_pending": 1.9951171875,
+              "blocked_final_clocks": 0.013671875,
+              "success_per_team": 0.9580078125,
+              "attempt_per_team": 1.974609375,
+              "failed_attempt_per_team": 1.0166015625,
+              "non_submission_per_team": 0.025390625,
+              "waiting_ticks_per_team": 27.158203125
+            },
+            "G_stochastic": {
+              "episodes": 1024,
+              "return": 0.3564453125,
+              "fixed_clocks": 17.0,
+              "pending_clocks": 8.419921875,
+              "eligible_decisions": 6.42578125,
+              "blocked_pending": 1.994140625,
+              "blocked_final_clocks": 0.017578125,
+              "success_per_team": 0.951171875,
+              "attempt_per_team": 1.9736328125,
+              "failed_attempt_per_team": 1.0224609375,
+              "non_submission_per_team": 0.0263671875,
+              "waiting_ticks_per_team": 27.919921875
+            },
+            "R0": {
+              "episodes": 1024,
+              "return": 0.3520556640625,
+              "fixed_clocks": 17.0,
+              "pending_clocks": 8.7890625,
+              "eligible_decisions": 6.796875,
+              "blocked_pending": 1.9921875,
+              "blocked_final_clocks": 0.0166015625,
+              "success_per_team": 0.94921875,
+              "attempt_per_team": 1.822265625,
+              "failed_attempt_per_team": 0.873046875,
+              "non_submission_per_team": 0.177734375,
+              "waiting_ticks_per_team": 30.798828125
+            },
+            "R": {
+              "episodes": 1024,
+              "return": 0.35190429687499997,
+              "fixed_clocks": 17.0,
+              "pending_clocks": 8.806640625,
+              "eligible_decisions": 6.81640625,
+              "blocked_pending": 1.990234375,
+              "blocked_final_clocks": 0.017578125,
+              "success_per_team": 0.94921875,
+              "attempt_per_team": 1.8193359375,
+              "failed_attempt_per_team": 0.8701171875,
+              "non_submission_per_team": 0.1806640625,
+              "waiting_ticks_per_team": 30.888671875
+            }
+          },
+          "comparisons": {
+            "G_greedy-R0": {
+              "mean": 0.009687500000000003,
+              "conditional_world_sd": 0.12831889192716497,
+              "conditional_world_se": 0.0040099653727239054,
+              "worlds": 1024
+            },
+            "G_greedy-R": {
+              "mean": 0.009838867187500005,
+              "conditional_world_sd": 0.13386337125341405,
+              "conditional_world_se": 0.004183230351669189,
+              "worlds": 1024
+            },
+            "G_stochastic-R0": {
+              "mean": 0.004389648437500001,
+              "conditional_world_sd": 0.19650910781146433,
+              "conditional_world_se": 0.00614090961910826,
+              "worlds": 1024
+            },
+            "G_stochastic-R": {
+              "mean": 0.004541015625000002,
+              "conditional_world_sd": 0.1989524970131933,
+              "conditional_world_se": 0.006217265531662291,
+              "worlds": 1024
+            },
+            "G_stochastic-G_greedy": {
+              "mean": -0.005297851562500002,
+              "conditional_world_sd": 0.16900847687149229,
+              "conditional_world_se": 0.005281514902234134,
+              "worlds": 1024
+            }
+          }
+        }
+      }
+    }
+  ],
+  "primary512_mean": 0.016730143229166668,
+  "primary512_sample_sd_ddof1": 0.008378536806060969,
+  "Q_descriptive_mean": 0.006103515625000007,
+  "Q_descriptive_sample_sd_ddof1": 0.003195385771193459,
+  "summed_complete_wall_s": 25.98680399998557,
+  "study_elapsed_first_manager_start_to_last_finished_s": 457.61611599999014,
+  "aggregate_cpu_s": 25.787,
+  "cpu_precision": "each unit reported to milliseconds",
+  "actual_total_rollouts": {
+    "episodes_started": 221184,
+    "episodes_completed": 221184,
+    "team_ticks": 8847360,
+    "target_transitions": 17694720,
+    "decision_rows": 1360653,
+    "rollout_policy_forwards": 26125
+  },
+  "model_constructions": 3,
+  "backward_calls": 1536,
+  "optimizer_steps": 1536,
+  "train_episodes": 196608,
+  "eval_episodes": 24576,
+  "gradient_rows": 1194757,
+  "validation_models": 0,
+  "validation_episodes": 0,
+  "validation_updates": 0,
+  "all_1536_curve_entropy_coefficients_verified": true,
+  "failures": [],
+  "missing_endpoints": [],
+  "old128_results_pooled": false
+}

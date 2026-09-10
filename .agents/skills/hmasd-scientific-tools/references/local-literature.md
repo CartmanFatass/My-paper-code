@@ -8,7 +8,7 @@ needs evidence. This is question-driven retrieval, not a new mandatory reading l
 Retrieve when designing or recasting a mechanism, selecting a comparator, examining
 an unexpected result, or assessing related-work overlap. State the question first.
 Reuse relevant evidence already checked in the current card/intake unless the question,
-source version or required coverage changed. Ordinary CM implementation does not trigger
+source version or required coverage changed. Ordinary engineering implementation does not trigger
 a fresh search. Historical research and every cited paper are not startup reading.
 
 ## Existing entry points
@@ -25,7 +25,7 @@ integration is assigned; this document does not claim it is already complete.
   documents the existing local CLI and mechanism/evidence records. Use its existing
   verified real-collection index and supported search interface. A CLI search uses the library's Innovation
   Brief and explicit collection selection; derive these from the current question,
-  without asking DM or CM to rewrite the science card. Inspect relevant returned
+  without asking the DM to rewrite the science card. Inspect relevant returned
   source pointers, conditions and differences. No new index, service or acquisition
   pipeline is needed for HMASD integration.
 - **Inst-sci — formal source corpus:** the formal library is
@@ -53,7 +53,7 @@ no match in the searched snapshot, not absence of prior work. Extend to official
 external sources for a specific gap or freshness need, rather than forcing local coverage.
 
 Record the paper identity/version, source JSON/PDF path and page/section, bounded claim,
-and which current choice it informs in the existing card or intake. CM receives only
+and which current choice it informs in the existing card or intake. An implementation delegate receives only
 the relevant algorithm, equation or passage needed for its deliverable, with a precise
 pointer or excerpt if the source is inaccessible. Do not attach the whole paper set,
 repeat the research history, or create a separate literature report by default.

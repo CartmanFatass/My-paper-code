@@ -7,15 +7,15 @@ Independent Transport observes Pro requests under its own skill.
 ## Independent monitor — OWNER_DIRECT 2026-09-09
 
 One reusable independent Luna/low Codex task, configured in `.codex/hmasd-monitor.toml`,
-observes multiple explicitly assigned accepted experiments. CM/Operator owns launch, terminal
-collection and technical acceptance; DM owns scientific intake. After confirmed monitor adoption,
-CM, DM and Root do not maintain parallel status-polling loops. Independent Transport remains
+observes multiple explicitly assigned accepted experiments. DM owns launch, terminal collection, technical acceptance and separate scientific intake;
+an optional Operator executes its assigned batch. After confirmed monitor adoption,
+DM and Root do not maintain parallel status-polling loops. Independent Transport remains
 separate and observes Pro requests.
 
 Read the endpoint from the live primary control checkout (currently
 `C:/Projects/HMASD/.codex/hmasd-monitor.toml`, supplied in the handoff), not a stale direction
 checkout or the frozen remote scientific SHA. Endpoint currentness does not change scientific
-source bindings. Root carries this exact live configuration path in new CM/DM assignments.
+source bindings. Root carries this exact live configuration path in new DM assignments.
 
 The monitor uses an active goal: observe all explicitly adopted accepted experiments, deliver
 each terminal notification, and finish when no observation or notification remains outstanding.
@@ -29,35 +29,35 @@ A completed goal is not an idle timer: a later assignment starts a new goal in
 the same task. Never claim to edit an existing goal through an unsupported tool operation.
 
 Keep a small recoverable task-local list of assigned node, handle, launch SHA, cwd, output and
-receipt paths, Root destination, original CM/DM, latest observation and notification state.
+receipt paths, Root destination, original execution/DM owners, latest observation and notification state.
 This is the monitor's working record, not a new repository registry, service or scheduler.
 Root's existing tracking records monitor assignment and material changes. Do not discover work
 by scanning historical handles or create a task/worktree per experiment.
 
 ## Assignment, adoption and return
 
-After launch acceptance, CM/Operator sends `MONITOR_ADD` directly to the configured monitor
+After launch acceptance, DM/Operator sends `MONITOR_ADD` directly to the configured monitor
 with the exact handle facts and original owners. This direct dispatch is authorized by
 OWNER_DIRECT 2026-09-09; it does not wait for Root to forward the launch or create another goal.
 The monitor itself creates or continues its set-scoped goal. A runtime without the cross-task
 tool returns the exact routing gap and handle to Root for forwarding; it must not invent a
-message API or silently substitute a second observer. CM records the accepted dispatch
+message API or silently substitute a second observer. DM records the accepted dispatch
 and returns pending collection; it does not continue a routine remote-status polling loop.
 The monitor checks the same supervisor and sends `MONITOR_ADOPTED` directly to Root with its
 actual task ID, goal state, observation time and direct status. Root confirms adoption to the
-original DM/CM. A dispatched message alone is not adoption: until confirmed, record adoption
+original execution/DM owner. A dispatched message alone is not adoption: until confirmed, record adoption
 as pending; a rejected/unavailable dispatch or reported observation loss returns promptly to
-Root for the same-handle recovery. This pending boundary is not a second CM polling loop.
+Root for the same-handle recovery. This pending boundary is not a second DM polling loop.
 A first query may already be
 terminal; then adoption and terminal facts can be delivered together.
 
 The monitor saves direct terminal status and useful bounded log evidence in its own outputs,
-then sends `MONITOR_TERMINAL` directly to Root, including a stable event ID, original CM/DM,
+then sends `MONITOR_TERMINAL` directly to Root, including a stable event ID, original execution/DM owners,
 handle/source/cwd/root and evidence paths. No second Relay copy is needed. Root deduplicates
-against already received native facts and uses native `followup_task` on the original DM/CM
+against already received native facts and uses native `followup_task` on the original execution/DM owner
 when collection/intake still needs execution. If they already collected and are acting, convey
 only the new facts without dispatching duplicate work. Monitor exit-zero facts are not technical
-or scientific acceptance. CM collects and verifies artifacts; DM interprets the result.
+or scientific acceptance. DM collects and verifies artifacts and separately interprets the result.
 
 Cross-task messages omit model/effort overrides. A monitor app task cannot address Root's native
 children by inventing app IDs. Record accepted or uncertain message delivery. Reconcile an
@@ -89,3 +89,6 @@ another actual observer. No fresh scientific invocation follows. This goal-drive
 remote callback or a guarantee of progress while the app/session is unavailable. No heartbeat or
 additional scheduler is enabled by this instruction. On owner pause, follow the specific permitted
 observation/closeout boundary and preserve accepted identities.
+
+For legacy accepted CM handles, preserve the original owner and parent until explicit closeout
+or transfer to DM. Role consolidation never changes a supervisor handle or authorizes a new run.

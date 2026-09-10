@@ -12,18 +12,19 @@ persistent ChatGPT conversation, and preserves transport/response evidence witho
 interpreting or overriding the decision. The independent Luna/high Transport task executes
 the complete Send, wait, archive and return-receipt lifecycle. Root retains direction dispatch,
 experiment-observer ownership/reconciliation under EXPERIMENT_MONITOR.md, integration
-and native DM/CM routing; Root observes only its explicitly owned/adopted handles.
+and native DM routing (legacy CM returns keep their bound parents); Root observes only its explicitly owned/adopted handles.
 It does not operate Pro browsers.
 
 A link-only chat reply is a receipt, not the full decision or evidence that the
 response file contains no decision. Report chat identity and delivery/archive facts
 separately: verified immutable response path/commit, unavailable delivery or conflict;
-scientific formation/conformance remains for the original DM, or Root for Portfolio.
+scientific formation/conformance remains for the designated DM, including Portfolio.
+Root is the receipt parent and operational integrator, not the scientific checker.
 An uncertain delivery returns to the same Transport; scientific conformance goes to
 the scientific parent. This adds no receipt schema or Send-state transition.
 
 Archive completeness is a transport fact, not specification-conformance acceptance.
-The receiving Root/DM checks the formed decision against current owner/spec constraints
+The designated DM checks the formed decision against current owner/spec constraints
 at its existing intake. Transport preserves the full answer and reports it without
 adjudicating or rewriting scientific requirements; a conflict never permits a duplicate Send.
 
@@ -54,7 +55,7 @@ paste transport request. Send its short fixed task link verbatim, no attachment,
 read-only preamble or copied evidence. Dispatch only a bound READY_TO_DISPATCH task;
 TASK_NOT_PUBLISHED has no provider payload. This mode authorizes Pro's named file
 and comment; Transport does not write them. Archive the complete short chat reply
-and actual URLs unchanged. Root/DM retrieves the full file for scientific intake;
+and actual URLs unchanged. The designated DM retrieves the full file for scientific intake after Root receipt forwarding;
 a delivery receipt alone is not a formed Pro decision. Repeated/uncertain receipt
 handling observes existing state, never repeats Send. Keep request-scoped existing
 waiting and cleanup, provider binding and parent model unchanged. The singleton endpoint is
@@ -86,10 +87,10 @@ do not infer them from the provider conversation URL, a task title, or prose.
 `parent_thread_id` is the sole completion or terminal-blocker receipt destination.
 `source_thread_id` identifies the handoff author but is not a receipt destination.
 `operator_thread_id` is the Codex execution endpoint, never a provider-conversation binding.
-For native DM/CM requests, source is the actual author UUID, parent is Root's app-task UUID,
+For native DM requests (and already accepted legacy CM requests), source is the actual author UUID, parent is Root's app-task UUID,
 and operator is Transport's UUID. Do not send a receipt to a native child or replace parent
 with source. Root forwards the original receipt to the named native recipient from its command.
-For a Portfolio request, Root is both author and receipt parent. Default handoffs must
+For a new Portfolio request, the designated DM is the actual author/source and Root is the receipt parent. Preserve accepted historical bindings. Default handoffs must
 declare `dispatch_mode=REUSE_SINGLETON`, `operator_reuse_required=true`,
 `operator_model=gpt-5.6-luna`, and `operator_thinking=high`; validate all four and
 validate new handoffs against the current project endpoint. Transport records its actual

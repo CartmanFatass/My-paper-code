@@ -1,0 +1,358 @@
+{
+  "object": "FOLR-PUBLIC-LIFECYCLE-TIMING-B01",
+  "evidence_class": "B/EXPLORE",
+  "analysis_kind": "fixed final endpoint; no new environment/model/evaluation",
+  "input": {
+    "commit": "4df1881725b4428338b5cecb6b483ccf40f0d772",
+    "path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_TIMING_B01_RESULT_SUMMARY_20260909.json",
+    "git_blob_sha256": "7c4f4b249667ec3b65c4b1fd3c5b31538a4c4a7c52d1a55cd99906479c170912"
+  },
+  "launch_sha": "74d023d7d55453da8a5d5dccebd518e4ffdb65c8",
+  "generated_at": "2026-09-09T23:39:10.476176+00:00",
+  "unit": "one independently fitted package per arm, matched base initialization; one training instance per arm",
+  "conditional_se_assumption": "SD/sqrt(128), conditional on the fitted package and ordinary independent PRNG episode interpretation; not training-population uncertainty",
+  "cross_arm_coupling": "same base seeds do not establish same exogenous trajectories or paired evaluation episodes; action-dependent traffic/draw consumption and RANDOM private masks can diverge; no contrast CI or paired-episode inference",
+  "arms": {
+    "RETAIN": {
+      "training_seed": 7804,
+      "evaluation_seed": 107804,
+      "n_eval": 128,
+      "final_mean": 2.5445312499999995,
+      "published_mean": 2.5445312499999995,
+      "mean_roundoff_delta": 0.0,
+      "conditional_sample_sd": 6.106862134752513,
+      "conditional_mean_se_iid": 0.5397754534068572,
+      "median": 1.9749999999999992,
+      "min": -10.589999999999996,
+      "max": 19.429999999999996,
+      "negative_episodes": 49,
+      "zero_episodes": 0,
+      "positive_episodes": 79,
+      "training_return_sum": -21655.78999999989,
+      "training_return_mean": -4.331157999999978,
+      "counts": {
+        "training_episodes": 5000,
+        "training_ticks": 100000,
+        "optimizer_steps": 4969,
+        "evaluation_episodes": 128,
+        "evaluation_ticks": 2560
+      },
+      "lifecycle": {
+        "training_events": {
+          "births": 22047,
+          "departures": 9020,
+          "survivor_opportunities": 47723,
+          "eligible_survivor_opportunities": 258975,
+          "survivor_resets": 0,
+          "reset_fraction_of_eligible": 0.0,
+          "event_fraction_of_eligible": 0.18427647456318177
+        },
+        "evaluation_events": {
+          "births": 556,
+          "departures": 172,
+          "survivor_opportunities": 1244,
+          "eligible_survivor_opportunities": 6798,
+          "survivor_resets": 0,
+          "reset_fraction_of_eligible": 0.0,
+          "event_fraction_of_eligible": 0.1829949985289791
+        }
+      },
+      "resource": {
+        "user_cpu_seconds": 732.93,
+        "system_cpu_seconds": 6.28,
+        "aggregate_cpu_seconds": 739.2099999999999,
+        "peak_rss_kib": 673136,
+        "exit_code": 0,
+        "runner_process_wall_seconds": 738.2,
+        "runner_process_scope": "External time wraps timeout/runner, including startup, learner, evaluation and publication; excludes prior preflight/mkdir",
+        "supervisor_integer_duration_seconds": 738,
+        "whole_supervisor_wall_upper_bound_seconds": 739,
+        "whole_supervisor_scope": "Task start through command exit including preflight/mkdir; integer epoch endpoints, duration+1 second is a conservative rounding upper charge",
+        "cpu_scope": "External time user+system for timeout/runner; preflight/mkdir CPU not measured"
+      },
+      "admission": {
+        "assessed_at": "2026-09-09T22:40:22.539599Z",
+        "available_physical_bytes": 15626567680,
+        "captured_at": "2026-09-09T22:40:22.539236Z",
+        "cgroup_headroom_bytes": null,
+        "cgroup_memory_current_bytes": null,
+        "cgroup_memory_max_bytes": null,
+        "effective_available_bytes": 15626567680,
+        "effective_floor_pass": true,
+        "failure_reasons": [],
+        "measurement_source": "/proc/meminfo",
+        "minimum_available_bytes": 4294967296,
+        "passed": true,
+        "physical_floor_pass": true,
+        "schema_version": 1
+      },
+      "mask_rng": null,
+      "training_log_extent": {
+        "progress_record_count": 25,
+        "first": {
+          "episode": 200,
+          "updates": 169,
+          "wall_seconds": 27.706984477001242
+        },
+        "last": {
+          "episode": 5000,
+          "updates": 4969,
+          "wall_seconds": 736.2661867120187
+        },
+        "return_curve_available": false
+      }
+    },
+    "EVENT": {
+      "training_seed": 7804,
+      "evaluation_seed": 107804,
+      "n_eval": 128,
+      "final_mean": 5.349296875,
+      "published_mean": 5.349296874999999,
+      "mean_roundoff_delta": 8.881784197001252e-16,
+      "conditional_sample_sd": 7.604447433020033,
+      "conditional_mean_se_iid": 0.6721445433831373,
+      "median": 4.84,
+      "min": -14.629999999999995,
+      "max": 23.449999999999996,
+      "negative_episodes": 33,
+      "zero_episodes": 0,
+      "positive_episodes": 95,
+      "training_return_sum": -24354.86999999995,
+      "training_return_mean": -4.870973999999991,
+      "counts": {
+        "training_episodes": 5000,
+        "training_ticks": 100000,
+        "optimizer_steps": 4969,
+        "evaluation_episodes": 128,
+        "evaluation_ticks": 2560
+      },
+      "lifecycle": {
+        "training_events": {
+          "births": 21775,
+          "departures": 8833,
+          "survivor_opportunities": 47375,
+          "eligible_survivor_opportunities": 257715,
+          "survivor_resets": 47375,
+          "reset_fraction_of_eligible": 0.18382709582290516,
+          "event_fraction_of_eligible": 0.18382709582290516
+        },
+        "evaluation_events": {
+          "births": 611,
+          "departures": 277,
+          "survivor_opportunities": 1416,
+          "eligible_survivor_opportunities": 6294,
+          "survivor_resets": 1416,
+          "reset_fraction_of_eligible": 0.224976167778837,
+          "event_fraction_of_eligible": 0.224976167778837
+        }
+      },
+      "resource": {
+        "user_cpu_seconds": 765.45,
+        "system_cpu_seconds": 22.68,
+        "aggregate_cpu_seconds": 788.13,
+        "peak_rss_kib": 670720,
+        "exit_code": 0,
+        "runner_process_wall_seconds": 786.72,
+        "runner_process_scope": "External time wraps timeout/runner, including startup, learner, evaluation and publication; excludes prior preflight/mkdir",
+        "supervisor_integer_duration_seconds": 787,
+        "whole_supervisor_wall_upper_bound_seconds": 788,
+        "whole_supervisor_scope": "Task start through command exit including preflight/mkdir; integer epoch endpoints, duration+1 second is a conservative rounding upper charge",
+        "cpu_scope": "External time user+system for timeout/runner; preflight/mkdir CPU not measured"
+      },
+      "admission": {
+        "assessed_at": "2026-09-09T22:56:48.618552Z",
+        "available_physical_bytes": 15633895424,
+        "captured_at": "2026-09-09T22:56:48.618268Z",
+        "cgroup_headroom_bytes": null,
+        "cgroup_memory_current_bytes": null,
+        "cgroup_memory_max_bytes": null,
+        "effective_available_bytes": 15633895424,
+        "effective_floor_pass": true,
+        "failure_reasons": [],
+        "measurement_source": "/proc/meminfo",
+        "minimum_available_bytes": 4294967296,
+        "passed": true,
+        "physical_floor_pass": true,
+        "schema_version": 1
+      },
+      "mask_rng": null,
+      "training_log_extent": {
+        "progress_record_count": 25,
+        "first": {
+          "episode": 200,
+          "updates": 169,
+          "wall_seconds": 27.69075306499144
+        },
+        "last": {
+          "episode": 5000,
+          "updates": 4969,
+          "wall_seconds": 784.8077499860083
+        },
+        "return_curve_available": false
+      }
+    },
+    "RANDOM": {
+      "training_seed": 7804,
+      "evaluation_seed": 107804,
+      "n_eval": 128,
+      "final_mean": 3.9856249999999998,
+      "published_mean": 3.985625,
+      "mean_roundoff_delta": -4.440892098500626e-16,
+      "conditional_sample_sd": 7.318011944435295,
+      "conditional_mean_se_iid": 0.6468269838392936,
+      "median": 3.8849999999999985,
+      "min": -11.300000000000002,
+      "max": 26.329999999999995,
+      "negative_episodes": 36,
+      "zero_episodes": 0,
+      "positive_episodes": 92,
+      "training_return_sum": -23578.120000000046,
+      "training_return_mean": -4.715624000000009,
+      "counts": {
+        "training_episodes": 5000,
+        "training_ticks": 100000,
+        "optimizer_steps": 4969,
+        "evaluation_episodes": 128,
+        "evaluation_ticks": 2560
+      },
+      "lifecycle": {
+        "training_events": {
+          "births": 21693,
+          "departures": 8492,
+          "survivor_opportunities": 47239,
+          "eligible_survivor_opportunities": 261232,
+          "survivor_resets": 26050,
+          "reset_fraction_of_eligible": 0.09971978930605745,
+          "event_fraction_of_eligible": 0.18083159796655845
+        },
+        "evaluation_events": {
+          "births": 562,
+          "departures": 233,
+          "survivor_opportunities": 1377,
+          "eligible_survivor_opportunities": 6644,
+          "survivor_resets": 649,
+          "reset_fraction_of_eligible": 0.09768211920529801,
+          "event_fraction_of_eligible": 0.2072546658639374
+        }
+      },
+      "resource": {
+        "user_cpu_seconds": 800.4,
+        "system_cpu_seconds": 20.06,
+        "aggregate_cpu_seconds": 820.4599999999999,
+        "peak_rss_kib": 656492,
+        "exit_code": 0,
+        "runner_process_wall_seconds": 819.15,
+        "runner_process_scope": "External time wraps timeout/runner, including startup, learner, evaluation and publication; excludes prior preflight/mkdir",
+        "supervisor_integer_duration_seconds": 819,
+        "whole_supervisor_wall_upper_bound_seconds": 820,
+        "whole_supervisor_scope": "Task start through command exit including preflight/mkdir; integer epoch endpoints, duration+1 second is a conservative rounding upper charge",
+        "cpu_scope": "External time user+system for timeout/runner; preflight/mkdir CPU not measured"
+      },
+      "admission": {
+        "assessed_at": "2026-09-09T23:13:06.186769Z",
+        "available_physical_bytes": 15633313792,
+        "captured_at": "2026-09-09T23:13:06.186480Z",
+        "cgroup_headroom_bytes": null,
+        "cgroup_memory_current_bytes": null,
+        "cgroup_memory_max_bytes": null,
+        "effective_available_bytes": 15633313792,
+        "effective_floor_pass": true,
+        "failure_reasons": [],
+        "measurement_source": "/proc/meminfo",
+        "minimum_available_bytes": 4294967296,
+        "passed": true,
+        "physical_floor_pass": true,
+        "schema_version": 1
+      },
+      "mask_rng": {
+        "bit_generator": "PCG64",
+        "training_seed": 207804,
+        "evaluation_seed": 307804,
+        "probability": 0.1,
+        "draws_per_episode": 105,
+        "frequency_matched": false
+      },
+      "training_log_extent": {
+        "progress_record_count": 25,
+        "first": {
+          "episode": 200,
+          "updates": 169,
+          "wall_seconds": 27.450901909032837
+        },
+        "last": {
+          "episode": 5000,
+          "updates": 4969,
+          "wall_seconds": 816.9002133080503
+        },
+        "return_curve_available": false
+      }
+    }
+  },
+  "primary": {
+    "J_RETAIN": 2.5445312499999995,
+    "J_EVENT": 5.349296875,
+    "J_RANDOM": 3.9856249999999998,
+    "d_ER": 2.804765625000001,
+    "d_MR": 1.4410937500000003,
+    "d_EM": 1.3636718750000005,
+    "combined_rule": "EVENT_CLEAR_ADVANTAGE",
+    "individual_rules": {
+      "d_ER": "EVENT_ABOVE_MEI",
+      "d_MR": "RANDOM_ABOVE_MEI",
+      "d_EM": "EVENT_ABOVE_MEI"
+    },
+    "margins_above_positive_mei": {
+      "d_ER": 1.8047656250000008,
+      "d_MR": 0.4410937500000003,
+      "d_EM": 0.36367187500000053
+    }
+  },
+  "training_mean_contrasts": {
+    "EVENT_minus_RETAIN": -0.5398160000000125,
+    "RANDOM_minus_RETAIN": -0.38446600000003084,
+    "EVENT_minus_RANDOM": -0.15534999999998167
+  },
+  "historical_context": {
+    "contrast": "RETAIN-minus-EVENT (historical RESET label)",
+    "separate_32_episode_pairs": {
+      "B01": -2.0021875,
+      "B02": -1.9228125,
+      "B03": 2.559375
+    },
+    "source": "FOLR_PUBLIC_LIFECYCLE_B03_INTAKE_20260909.md sections4-7",
+    "pooled_with_new_128_branches": false
+  },
+  "total_counts": {
+    "training_episodes": 15000,
+    "training_ticks": 300000,
+    "optimizer_steps": 14907,
+    "evaluation_episodes": 384,
+    "evaluation_ticks": 7680,
+    "all_native_ticks": 307680
+  },
+  "cost": {
+    "sum_aggregate_cpu_seconds": 2347.7999999999997,
+    "critical_path_seconds": 2782.460401,
+    "critical_path_boundary": "First RETAIN admission to final RANDOM supervisor exit (second precision), includes inter-arm monitor/collection/sequencing gaps; excludes prior staging and final collection",
+    "per_arm_cap_seconds": 1800,
+    "triple_cap_seconds": 5400,
+    "sum_runner_process_wall_seconds": 2344.07,
+    "sum_whole_supervisor_wall_upper_bound_seconds": 2347,
+    "cpu_scope": "Preserved measured timeout/runner CPU sum; excludes preflight/mkdir CPU",
+    "cap_evidence": "Conservative whole supervisor wall upper charges739/788/820 seconds, sum2347, each below1800 and total below5400"
+  },
+  "prediction": {
+    "dm": "MIXED_OR_REVERSE (low confidence)",
+    "observed": "EVENT_CLEAR_ADVANTAGE",
+    "score": "miss",
+    "owner": "not taken (unattended)"
+  },
+  "limitations": [
+    "One matched new training instance; no training-population interval or stable winner.",
+    "EVENT and RANDOM differ in realized reset dose, timing and joint reset pattern; no pure timing or forgetting cause.",
+    "Training return curves were not recorded: only aggregate sums/means and25 episode/update/wall progress rows per arm.",
+    "New EVENT final endpoint leads while its cumulative training mean is lower than both comparators.",
+    "Cgroup memory fields remain unmeasured; resource floor receipts and process RSS are available."
+  ],
+  "decision_basis": "Frozen new-triple primary endpoint only; all384 returns included; no outcome filtering, checkpoint selection or evaluation top-up."
+}

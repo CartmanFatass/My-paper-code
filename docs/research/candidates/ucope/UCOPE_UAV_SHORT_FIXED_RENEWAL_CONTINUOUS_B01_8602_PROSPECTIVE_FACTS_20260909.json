@@ -1,0 +1,183 @@
+{
+  "object": "UCOPE-UAV-SHORT-FIXED-RENEWAL-CONTINUOUS-B01",
+  "selector": "renewal_short_fixed_continuous_b01",
+  "master": 8602,
+  "base": 860200000,
+  "generated_at": "2026-09-09T16:01:51-07:00",
+  "method": "stdlib arithmetic from unchanged accepted loops and recorded8601 costs; no runtime imports, models, RNG creation or environment calls",
+  "authority": "Root1040f2d97f600ca8cb2b531b3c44d8066927d4d6 final UCOPE conditional-second-pair allocation under owner-adopted synthesis §§2/5.1 and object delegation",
+  "counts": {
+    "independent_matched_training_instances": 1,
+    "fitted_arms": 2,
+    "train_episodes_per_arm": 2048,
+    "train_episodes": 4096,
+    "horizon": 256,
+    "agents": 5,
+    "training_native_steps_per_arm": 524288,
+    "training_native_steps": 1048576,
+    "rollout_episodes": 2,
+    "rollouts_per_arm": 1024,
+    "rollouts": 2048,
+    "epochs_per_rollout": 4,
+    "adam_calls_per_arm": 4096,
+    "adam_calls": 8192,
+    "evaluation_checkpoints": [
+      512,
+      1024,
+      2048
+    ],
+    "eval_episodes_per_arm_per_checkpoint": 64,
+    "learned_eval_episodes": 384,
+    "hover_eval_episodes": 64,
+    "evaluation_episodes": 448,
+    "evaluation_native_steps": 114688,
+    "F_complete_native_steps": 573440,
+    "G_with_H_complete_native_steps": 589824,
+    "native_steps": 1163264,
+    "explicit_resets": 4544,
+    "constructors": 2,
+    "constructor_resets": 2,
+    "extra_native_smoke_or_diagnostic_steps": 0
+  },
+  "exposure": {
+    "learning_rate": 0.0003,
+    "actor_parameters_per_fit": 32134,
+    "critic_parameters_per_fit": 34177,
+    "trainable_parameters_per_fit": 66311,
+    "F_duration_parameters_frozen": 2242,
+    "F_total_parameters": 68553,
+    "G_total_parameters": 66311,
+    "value_moments": null,
+    "preparation_scientific_invocations": 0,
+    "allocated_scientific_invocations": 1
+  },
+  "F_head_work": {
+    "law": "6 * training renewals + 2 * all three evaluation-panel renewals",
+    "training_renewal_bounds": [
+      1310720,
+      2621440
+    ],
+    "evaluation_renewal_bounds": [
+      122880,
+      245760
+    ],
+    "rows_bounds": [
+      8110080,
+      16220160
+    ],
+    "dense_MACs_per_row": 2208,
+    "dense_MACs_bounds": [
+      17907056640,
+      35814113280
+    ],
+    "bound_source": "physical duration {1,2}; five agents; complete horizon256; ceil(256/2)..256 renewals per agent episode"
+  },
+  "projection": {
+    "source": "UCOPE_UAV_SHORT_FIXED_RENEWAL_CONTINUOUS_B01_8601_RESULT_SUMMARY_20260909.json",
+    "reference_master": 8601,
+    "reference_F_s": 712.5588719120133,
+    "reference_G_with_H_s": 576.5732727329596,
+    "reference_outer_s": 1289.5,
+    "per_arm_native_work_ratios": {
+      "F": 1.0,
+      "G_with_H": 1.0
+    },
+    "training_and_Adam_ratio": 1.0,
+    "evaluation_ratio": 1.0,
+    "initialization_ratio": 1.0,
+    "projected_F_s": 712.5588719120133,
+    "projected_G_with_H_s": 576.5732727329596,
+    "projected_internal_sum_s": 1289.1321446449729,
+    "projected_outer_s": 1289.5,
+    "reference_unpartitioned_outer_overhead_s": 0.36785285000223666,
+    "limitations": "Same declared work, trajectory-dependent cost unknown; recorded reference is not a runtime guarantee. No timing probe is allocated."
+  },
+  "seed_offsets": {
+    "common_initialization": 11,
+    "F_duration_initialization": 12,
+    "G_train_velocity": 21,
+    "G_train_duration_unused": 22,
+    "F_train_velocity": 31,
+    "F_train_duration": 32,
+    "train_reset_inclusive": [
+      10000,
+      12047
+    ],
+    "eval_reset_inclusive": [
+      20000,
+      20063
+    ],
+    "evaluation_panel_reused_at_all_checkpoints_and_H": true,
+    "F_eval_velocity": "30000 + 1000*j + e",
+    "F_eval_duration": "40000 + 1000*j + e",
+    "G_eval_velocity": "50000 + 1000*j + e",
+    "G_eval_duration_unused": "60000 + 1000*j + e",
+    "checkpoint_index_j": [
+      0,
+      1,
+      2
+    ],
+    "evaluation_episode_e": [
+      0,
+      63
+    ]
+  },
+  "predictions": {
+    "P_final_F_minus_G_gt_0.01": 0.6,
+    "P_final_F_minus_H_gt_0": 0.65,
+    "P_G2048_minus_G512_gt_0": 0.7,
+    "owner": "not taken (unattended)"
+  },
+  "execution": {
+    "node": "hmasd-wsl-node",
+    "device": "CPU",
+    "dtype": "FP32",
+    "torch_threads": 1,
+    "complete_arm_cap_seconds": 1800,
+    "complete_invocation_cap_seconds": 3600,
+    "supporting_engineering_check_cap_seconds": 300,
+    "remote_memory_admission_minimum_bytes": 4294967296,
+    "monitor_config_live_primary": "C:/Projects/HMASD/.codex/hmasd-monitor.toml",
+    "launch_source": "pending original CM minimal CLI/card binding, changed-boundary acceptance/review and immediate publication; no extra Root source gate",
+    "new_scientific_invocations_so_far": 0
+  },
+  "preserved_shared_source": {
+    "reference_commit": "52bf50a089d3389d9fada0b531e4f4e56e83f9b8",
+    "worktree_start": "c4de46df3bb9ca9be49377d2133ca282d9541982",
+    "blobs": {
+      "experiments/candidates/ucope/uav_motion_prefix_b01/study.py": "baea9644805275c62325f0a99e4cdd2f92b358d1",
+      "experiments/candidates/ucope/uav_motion_prefix_b01/policy.py": "28e98a47256f10a60f085cc9d97d7b8ba9a4183c",
+      "experiments/candidates/ucope/uav_motion_prefix_b01/learner.py": "3f40f56ffbab1a334589640c4a0dff799b752b93",
+      "experiments/candidates/ucope/uav_motion_prefix_b01/environment.py": "4b59281bfb76245dd3283fe860327e35463c2b26"
+    },
+    "accepted_continuous_source": "8a2e20630c6d68f7faed1c54a39ffc792b922fc6"
+  },
+  "exposure_line": "matched_training_instances=1 new(8602), prior8601 separate; fitted_arms=2; native_steps=1163264; Adam_calls=8192; evaluation_episodes=448; checkpoints=512/1024/2048; actor_critic_trainable_per_fit=66311; F_duration_frozen=2242; Adam_calls_per_fit=4096; lr=0.0003; value_moments=None; new_preparation_scientific_invocations=0; allocated_invocations=1",
+  "instance": "continuous8602",
+  "card": "UCOPE_UAV_SHORT_FIXED_RENEWAL_CONTINUOUS_B01_8602_SCIENCE_CARD_20260909.md",
+  "seed_namespace": {
+    "base": 860200000,
+    "all_created_or_reserved_seed_addresses": 2886,
+    "min": 860200011,
+    "max": 860262063,
+    "prior8601_addresses": 2886,
+    "overlap_with8601": 0,
+    "initialization": 860200011,
+    "F_duration_initialization": 860200012,
+    "G_train_velocity": 860200021,
+    "G_train_duration_unused": 860200022,
+    "F_train_velocity": 860200031,
+    "F_train_duration": 860200032,
+    "train_reset_inclusive": [
+      860210000,
+      860212047
+    ],
+    "eval_reset_inclusive": [
+      860220000,
+      860220063
+    ],
+    "intentional_sharing": "F/G common template initialization and train reset worlds; all checkpoints/F/G/H share evaluation reset worlds; constructor reset equals first train reset. No retained policy/optimizer/state reused.",
+    "scoped_prior_master_search": "No prior8602 master/base allocation in UCOPE scientific records/source before this preparation; not a global RNG census.",
+    "verification": "Arithmetic over the source-declared address law; CM checks new CLI/card/seed wiring before launch. This is documentation, not a runtime refusal guard."
+  }
+}

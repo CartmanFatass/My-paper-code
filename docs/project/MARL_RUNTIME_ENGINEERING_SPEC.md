@@ -20,6 +20,12 @@ results or measured HMASD speedups. Archived draft and historical measurements r
 
 ## General requirements
 
+OWNER_DIRECT 2026-09-10 prospective responsibility mapping: in the general requirements below,
+CM engineering duties belong to the DM; semantic/routine implementer names denote the optional
+unified Implementer. AGENTS and ENGINEERING_SCOPE_SPEC §7 control current role and acceptance
+methods. This mapping changes no scientific requirement, frozen object appendix (including
+VNFC E01), numerical boundary, execution budget or historical assignment.
+
 ### 1．目的、适用范围与调查阈值
 
 本规范要求以适当的算法实现、数据布局和执行方式完成已经选定的科学观察。工程优化不得通过删除比较器、世界、种子、候选、独立检查、完整终局或必需输出，把不同科学对象冒充为更快的原对象。

@@ -47,8 +47,9 @@ follow-up; state the narrower ceiling and the evidence needed for the stronger c
 project-wide exact replay, extreme tolerances, exhaustive cause-first diagnosis, full historical
 replay, or a line-ratio pass unless the current claim or a concrete correctness risk requires it.
 
-Retrieve a needed primary-source fact directly through the scientific-tools skill. You may use
-a CM Scout for one code/configuration fact that creates or removes a material objection.
+Retrieve a needed primary-source fact directly through the scientific-tools skill. Do not create
+children. Return a missing code/configuration fact that could change the objection to the assigning
+DM so it can resolve the question or assign a Scout sibling.
 If a premise remains ambiguous after checking
 one exact cited artifact, state a conditional objection and needed discriminator. Return the
 strongest material objection or that none was found, decisive discriminator, counterevidence,
