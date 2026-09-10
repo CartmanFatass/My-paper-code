@@ -506,3 +506,15 @@ its row/checkpoint/count readback, and `b03_fresh1000_s21_20260910/DM_RESULT_ANA
 The next discriminator recommended for separate allocation is one fresh matched pair
 at the same fixed1,000 endpoint with all outcomes retained. The current allocation
 ends; no successor, seed, priority/lifecycle disposition or Pro request is created.
+
+## Same-endpoint independent training pair selected — 2026-09-10
+
+The accepted seed21 native learning signal motivates the object-tier continuation in
+`RCLE_B03_FRESH1000_S22_SCIENCE_CARD_20260910.md`: one fresh matched seed22 pair at the
+same1,000-update endpoint. The mechanism, W1/W100 comparator, information and four panels
+remain fixed. This next observation tests recurrence under independent training, rather
+than adding evaluation to the one existing trained pair. Standing delegation and the
+owner's independent-progression instruction select it; no family/class/lifecycle change
+is made. S21 remains n1 at selection, with its reference gap, saturated recovery,
+whole-law attribution limits and all earlier failures retained. Every S22 outcome will
+be reported; no all-positive seed rule or causal200-to1000 claim follows.
