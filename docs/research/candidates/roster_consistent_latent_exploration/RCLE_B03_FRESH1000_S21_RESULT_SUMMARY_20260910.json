@@ -1491,9 +1491,30 @@
       "members_sha256": "1c2872aa5b5379c7aae2412865c191dbda51febc6e622da3275b7b8075db9fb6",
       "complete_preservation_seconds": 18.439461600006325,
       "archive_copy_seconds": 15.106213899998693,
-      "removed_paths": [],
+      "removed_paths": [
+        "/home/wu/hmasd-worktrees/rcle-b03-fresh1000-s21-20260910",
+        "/home/wu/.agent-tasks/rcle-b03-fresh1000-s21-20260910",
+        "/home/wu/hmasd-inputs/rcle-b03-fresh1000-s21-20260910"
+      ],
+      "scientific_invocations": 0,
+      "disk_absence_verified": true,
+      "worktree_registration_absence_verified": true,
+      "pid_absence_verified": true
+    },
+    "closeout_removal": {
+      "source": "806d378054774c5ab4f91d1acaba80292c660f67",
+      "paths": [
+        "/home/wu/hmasd-worktrees/rcle-b03-fresh1000-s21-20260910",
+        "/home/wu/.agent-tasks/rcle-b03-fresh1000-s21-20260910",
+        "/home/wu/hmasd-inputs/rcle-b03-fresh1000-s21-20260910"
+      ],
+      "exit_code": 0,
+      "stdout": "exact worktree registration absent\n806d378054774c5ab4f91d1acaba80292c660f67\n6146ace6e62ed2cf752fdab31b5bebbcecf158a884eb0d6b1bf80547a5c61675  /home/wu/hmasd-recovery/rcle-b03-fresh1000-s21-20260910/remote.tar.gz\nexact-paths-absent-and-source-evidence-retained\n",
+      "stderr": "",
+      "complete_removal_seconds": 0.48694289999548346,
       "scientific_invocations": 0
-    }
+    },
+    "closeout_complete": true
   },
   "supervisor": {
     "exit_code": "0\n",

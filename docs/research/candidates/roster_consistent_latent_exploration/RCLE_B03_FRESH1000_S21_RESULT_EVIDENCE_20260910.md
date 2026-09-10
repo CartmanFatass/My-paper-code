@@ -171,3 +171,13 @@ supervisor and source-only stage are the scoped closeout inventory in the execut
 record. Preserve their complete bytes and source before removal; keep shared authoring,
 native cache, old evidence and other scratch. Final preservation/removal facts are
 appended to the scientific intake and existing closeout report, without another run.
+
+**Closeout completed after publication14932f87e.** The local/remote52,530,884-byte archive,
+SHA2566146ace6e62ed2cf752fdab31b5bebbcecf158a884eb0d6b1bf80547a5c61675, preserves2,357
+regular members and all23 matched output/supervisor files plus source bundle. After
+verified preservation, the exact three remote execution paths were removed; disk and
+Git worktree-registry absence, PID absence, retained source ref and archive digest were
+checked. Preservation18.4394616s and removal.4869429s stay inside the same support charge.
+Full facts are in the intake and `temp/directions/roster_consistent_latent_exploration/
+closeout/b03-fresh1000-s21-20260910/REPORT.md`. No further technical/scientific work or
+cleanup remains for this allocated pair; Root owns integration and acceptance of return.
