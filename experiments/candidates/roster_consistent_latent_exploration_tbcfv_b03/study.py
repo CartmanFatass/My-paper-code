@@ -3,6 +3,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 import json
 import time
+import traceback
 
 import numpy as np
 import torch
@@ -173,6 +174,7 @@ def run(arm, out, launch_sha, admission_receipt, started, wall_cap, control_summ
         host.check_wall(started, wall_cap)
         summary["status"] = "COMPLETE"
     except Exception as exc:
+        traceback.print_exc()
         summary["status"] = "TECHNICAL_STOP"
         summary["stop_reason"] = f"{type(exc).__name__}: {exc}"
         if isinstance(exc, host.ArmWallExpired) and exc.evaluated_rows:
