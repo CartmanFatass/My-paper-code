@@ -80,3 +80,37 @@ against its original identity; no second scientific invocation follows.
 Stop at complete all-outcome intake or bounded failure. No retry, slice, replacement,
 extra panel, dropped panel, tuning, retained-base substitution or successor is allocated.
 ACVC's second-recast lowest contention priority and learned T/G end remain unchanged.
+
+## Published candidate and independent review
+
+Candidate080f4502cd6116b96fa3d87cf9ff3b6e4e109f89 was committed/pushed before any
+remote verification. Its source has412 new non-test lines:403-line Python runner and
+9-line shell; the focused test has195 lines. Protected dependencies are unchanged.
+The Implementer returned zero runtime/import/model/test/launch/Git work. DM inspected
+the changed orchestration, CLI, output/count schema, test and unchanged dependency diff.
+
+Independent read-only Reviewer `rv_ah_acvc_fresh_dense_b01` found the normal path
+conforming on initialization/draw order, optimizer and objective, replay, checkpoint,
+fixed-rule state/command ownership and paired primary reading. It identified two P2
+partial-failure defects: the computation alarm remains armed during final publication,
+and an interrupted four-epoch helper call can have more backward/replay work than the
+completed Adam count while returning no partial epoch records. No added prohibited
+machinery or source/runner-budget breach was found. No runtime verification was performed.
+
+DM returned both defects to the same Implementer. The selected remedy is to disarm the
+inner alarm on entering finalization while retaining the outer task timeout, and to
+report completed-Adam lower bounds plus explicitly unavailable interrupted-update work
+and records. Healthy complete-run counts remain unchanged. Alternatives were changing
+the protected helper for per-epoch publication or accepting inaccurate exact partial
+counts. The first expands an unnecessary shared-code surface; the second is rejected.
+**Owner-delegated decision (unattended,2026-09-03 instruction): explicit lower bounds
+and unavailable partial quantities.** This follows empirical§11.8.7 and the card's
+trustworthy-partial-facts clause; no performance polarity or scientific recipe changes.
+The same Reviewer inspected the precise correction and resolved both material findings;
+no new material issue remains. The changed runner has432 lines plus the9-line shell
+(441 non-test lines total), with266 test lines. The same focused synthetic test now
+checks disarmed-alarm ordering and a mocked two-Adam interrupted update. DM checked the
+actual correction diff. The four-epoch helper and all protected scientific paths remain
+unchanged. Real gradients, native checkpoint loading and timing remain facts for the
+one actual study; no separate native pilot is required or allocated. Focused runtime
+verification is next; the candidate is independently source-reviewed, not launched.

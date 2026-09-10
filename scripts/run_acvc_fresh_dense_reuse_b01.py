@@ -64,6 +64,8 @@ def _counts():
         "step_calls", "team_steps", "train_team_steps", "eval_team_steps",
         "completed_episode_steps", "train_episodes", "eval_episodes", "rollouts",
         "optimizer_steps", "backward_calls", "update_records",
+        "backward_calls_lower_bound", "replayed_actor_agent_steps_lower_bound",
+        "critic_update_rows_lower_bound",
         "base_agent_forwards", "train_actor_agent_forwards", "eval_actor_agent_forwards",
         "critic_forwards", "replayed_actor_agent_steps", "critic_update_rows",
         "learned_gate_agent_forwards", "recurrent_observations", "velocity_decisions",
@@ -183,6 +185,8 @@ def run(output, launch_sha, process_start, execution_seconds, make_env=make_real
     rows = []
     actor = critic = initial = None
     old_handler = None
+    alarm_installed = False
+    scientific_path_complete = False
 
     def timeout(*_):
         raise TimeoutError(f"{OBJECT} remaining process timeout reached")
@@ -195,6 +199,7 @@ def run(output, launch_sha, process_start, execution_seconds, make_env=make_real
         old_handler = signal.signal(signal.SIGALRM, timeout)
         remaining = max(0.001, execution_seconds - (time.monotonic() - process_start))
         signal.setitimer(signal.ITIMER_REAL, remaining)
+        alarm_installed = True
 
     episode_path = output / "episodes.jsonl"
     update_path = output / "updates.jsonl"
@@ -250,22 +255,35 @@ def run(output, launch_sha, process_start, execution_seconds, make_env=make_real
                     episodes.append(episode)
                     episode_ids.append(episode_index)
                 before_updates = counts["optimizer_steps"]
-                records = update(
-                    actor, critic, optimizer, episodes, 32, check, counts,
-                    ratio_grouping="agent_compound", entropy_coef=0.01,
-                    value_moments=None,
-                )
+                try:
+                    records = update(
+                        actor, critic, optimizer, episodes, 32, check, counts,
+                        ratio_grouping="agent_compound", entropy_coef=0.01,
+                        value_moments=None,
+                    )
+                except Exception:
+                    completed_adam = counts["optimizer_steps"] - before_updates
+                    summary["interrupted_update"] = {
+                        "rollout": rollout_index,
+                        "completed_adam_steps": completed_adam,
+                        "completed_adam_epoch_records_missing": completed_adam,
+                        "record_limit": (
+                            "The protected four-epoch update helper returned no partial epoch "
+                            "list; no values are claimed for the missing records."
+                        ),
+                    }
+                    raise
+                performed = counts["optimizer_steps"] - before_updates
+                counts["backward_calls"] += performed
+                counts["replayed_actor_agent_steps"] += performed * 2 * horizon * 5
+                counts["critic_update_rows"] += performed * 2 * horizon
                 for record in records:
                     update_file.write(json.dumps(dict(
                         record, master=MASTER, rollout=rollout_index,
                         episodes=episode_ids,
                     ), allow_nan=False) + "\n")
+                    counts["update_records"] += 1
                 update_file.flush()
-                performed = counts["optimizer_steps"] - before_updates
-                counts["backward_calls"] += performed
-                counts["update_records"] += len(records)
-                counts["replayed_actor_agent_steps"] += performed * 2 * horizon * 5
-                counts["critic_update_rows"] += performed * 2 * horizon
                 counts["rollouts"] += 1
                 if (rollout_index + 1) % 16 == 0:
                     print(json.dumps({
@@ -338,18 +356,32 @@ def run(output, launch_sha, process_start, execution_seconds, make_env=make_real
                     "process_wall_s": time.monotonic() - process_start,
                 }), flush=True)
                 check()
-            summary["primary"] = final_panel(rows, eval_episodes)
-            summary["status"] = "complete" if summary["primary"]["complete"] else "incomplete"
+            scientific_path_complete = True
         except Exception as error:
             summary["error"] = f"{type(error).__name__}: {error}"
             summary["traceback"] = traceback.format_exc()
             print(summary["traceback"], flush=True)
         finally:
-            counts["backward_calls"] = counts["optimizer_steps"]
-            counts["replayed_actor_agent_steps"] = (
+            if alarm_installed:
+                signal.setitimer(signal.ITIMER_REAL, 0)
+                signal.signal(signal.SIGALRM, old_handler)
+            counts["backward_calls_lower_bound"] = counts["optimizer_steps"]
+            counts["replayed_actor_agent_steps_lower_bound"] = (
                 counts["optimizer_steps"] * 2 * horizon * 5)
-            counts["critic_update_rows"] = counts["optimizer_steps"] * 2 * horizon
+            counts["critic_update_rows_lower_bound"] = (
+                counts["optimizer_steps"] * 2 * horizon)
+            if "interrupted_update" in summary:
+                counts["backward_calls"] = None
+                counts["replayed_actor_agent_steps"] = None
+                counts["critic_update_rows"] = None
+                summary["unavailable_measurements"] = [
+                    "exact backward calls across the interrupted update",
+                    "exact replayed actor-agent steps across the interrupted update",
+                    "exact critic update rows across the interrupted update",
+                ]
             summary["primary"] = final_panel(rows, eval_episodes)
+            if scientific_path_complete and summary["primary"]["complete"]:
+                summary["status"] = "complete"
             if initial is not None and actor is not None and critic is not None:
                 try:
                     summary["exposure"] = geometry_exposure(initial, actor, critic)
@@ -383,9 +415,6 @@ def run(output, launch_sha, process_start, execution_seconds, make_env=make_real
                 summary["limits"].append(f"publication: {type(error).__name__}: {error}")
                 cleaned = clean_json(summary, summary["limits"])
                 write_json(output / "summary.json", cleaned)
-            if old_handler is not None:
-                signal.setitimer(signal.ITIMER_REAL, 0)
-                signal.signal(signal.SIGALRM, old_handler)
     return 0 if summary["status"] == "complete" else 1
 
 
