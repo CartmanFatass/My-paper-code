@@ -2,7 +2,7 @@
   "object": "FOLR_PUBLIC_LIFECYCLE_TIMING_B03",
   "evidence_class": "B/EXPLORE",
   "frozen_launch_sha": "6fb1e1f6d6f726f133e9aab9c9d96758e3b6d36c",
-  "current_status": "RETAIN_TECHNICALLY_ACCEPTED_EVENT_PRESELECTED_UNSUBMITTED",
+  "current_status": "RETAIN_TECHNICALLY_ACCEPTED_EVENT_ACCEPTED_MONITOR_DISPATCHED",
   "current_pair_rule": null,
   "arms": {
     "RETAIN": {
@@ -394,7 +394,7 @@
   "training_seed": 7806,
   "evaluation_seed": 107806,
   "complete_pair": false,
-  "accepted_invocations": 1,
+  "accepted_invocations": 2,
   "authorized_invocations": 2,
   "cost_accounting": {
     "scientific_whole_wall_seconds_recorded": "755.40",
@@ -405,17 +405,41 @@
     "support_cap_seconds": 300,
     "cumulative_directory_test_seconds": "25.9131638",
     "directory_test_cap_seconds": 300,
-    "scoped_support_seconds_before_event_launch": "16.0895574"
+    "scoped_support_seconds_before_event_launch": "16.0895574",
+    "scoped_support_seconds_through_event_submission": "17.3407252",
+    "scoped_support_seconds_through_event_handover": "17.8892036"
   },
   "closeout_inventory": [
     "/home/wu/hmasd-worktrees/folr-public-lifecycle-timing-b03-6fb1e1f6",
     "/home/wu/.agent-tasks/folr-public-lifecycle-timing-b03-retain-20260910",
-    "/home/wu/.agent-tasks/folr-public-lifecycle-timing-b03-event-20260910 (not created yet)",
+    "/home/wu/.agent-tasks/folr-public-lifecycle-timing-b03-event-20260910",
     "/home/wu/hmasd-inputs/folr-public-lifecycle-timing-b03-20260910"
   ],
   "prediction": {
     "dm": "WITHIN_MEI; low confidence",
     "score": "pending complete pair",
     "owner": "not taken (unattended)"
+  },
+  "event_launch": {
+    "submitted_at_utc": "2026-09-10T19:51:41.483559+00:00",
+    "returned_at_utc": "2026-09-10T19:51:41.499511+00:00",
+    "accepted": true,
+    "returncode": 0,
+    "stdout": "Task 'folr-public-lifecycle-timing-b03-event-20260910' started in tmux session 'agent_folr-public-lifecycle-timing-b03-event-20260910'. Output: /home/wu/.agent-tasks/folr-public-lifecycle-timing-b03-event-20260910/task.log\n",
+    "stderr": "",
+    "source_sha": "6fb1e1f6d6f726f133e9aab9c9d96758e3b6d36c",
+    "remote_cwd": "/home/wu/hmasd-worktrees/folr-public-lifecycle-timing-b03-6fb1e1f6",
+    "handle": "folr-public-lifecycle-timing-b03-event-20260910",
+    "output_root": "temp/directions/vap_folr_core/exp/public_lifecycle_timing_b03_seed7806_event",
+    "memory_receipt": "temp/directions/vap_folr_core/exp/public_lifecycle_timing_b03_seed7806_event_memory.json",
+    "supervisor_root": "/home/wu/.agent-tasks/folr-public-lifecycle-timing-b03-event-20260910",
+    "command": "/usr/bin/time -v -o /home/wu/.agent-tasks/folr-public-lifecycle-timing-b03-event-20260910/whole.time /usr/bin/timeout --signal=TERM --kill-after=5s 1800s bash -lc 'cd /home/wu/hmasd-worktrees/folr-public-lifecycle-timing-b03-6fb1e1f6 && /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/vap_folr_core/exp/public_lifecycle_timing_b03_seed7806_event_memory.json && /home/wu/.venvs/hmasd/bin/python scripts/run_folr_public_lifecycle_b01.py --arm EVENT --seed 7806 --evaluation-seed 107806 --launch-sha 6fb1e1f6d6f726f133e9aab9c9d96758e3b6d36c --out temp/directions/vap_folr_core/exp/public_lifecycle_timing_b03_seed7806_event'",
+    "monitor_registration": {
+      "thread_id": "01a087e5-2044-7301-abb6-7a1709a98197",
+      "tool_delivery_accepted": true,
+      "adoption_confirmed_to_dm": false,
+      "original_owner": "/root/dm_folr_p68_reentry",
+      "parent": "/root"
+    }
   }
 }

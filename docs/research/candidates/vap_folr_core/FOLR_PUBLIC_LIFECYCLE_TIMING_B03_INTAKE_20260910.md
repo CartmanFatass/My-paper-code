@@ -220,3 +220,16 @@ command. Total accepted invocations remain 1 of 2 at this publication. Support t
 collection is **15.6963948/300s**; directory tests remain **25.9131638/300s**. The exact
 remaining invocation and observation handover are recorded in E0, then Root owns
 integration while this DM retains collection, pair intake and scoped closeout.
+
+## 8. EVENT accepted under the same preselected allocation
+
+After publication of RETAIN acceptance at `ad749ff7f4eb173215455475cd7d2a7bda39ecf6`,
+the sole preselected EVENT invocation was accepted at 2026-09-10T19:51:41.499511Z. The
+source, seeds, learner, comparator, complete budget and frozen pair rule remain unchanged.
+E0 and RESULT_SUMMARY carry the exact receipt/command and current closeout inventory.
+Direct Monitor registration was delivered; actual adoption is pending confirmation here.
+The DM does not duplicate Monitor polling and retains terminal collection, full pair
+interpretation and closeout. Root retains integration and execution-closure acceptance.
+This execution applies §7's technical continuation; no new scientific selection is made.
+The pair rule and prediction score remain pending. Scoped support through submission is
+**17.3407252/300s**, separate from RETAIN's 755.40s complete scientific wall.

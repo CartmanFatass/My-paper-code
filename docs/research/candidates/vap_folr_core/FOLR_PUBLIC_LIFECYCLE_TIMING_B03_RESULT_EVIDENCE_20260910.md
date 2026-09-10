@@ -174,3 +174,39 @@ register it directly with the live Monitor and distinguish registration from ado
 The RETAIN intake/card-preservation/whitespace check passed in 0.3931626s; support
 through that pre-EVENT publication check is **16.0895574/300s**. No scientific source
 or test change was made. The live-primary FOLR audit owner column is also empty.
+
+## EVENT accepted: registration delivered, adoption pending
+
+RETAIN's technical acceptance was committed and immediately pushed at
+`ad749ff7f4eb173215455475cd7d2a7bda39ecf6` before the original second arm was submitted.
+The existing remote tracked source was clean at full `6fb1e1f6d6f726f133e9aab9c9d96758e3b6d36c`; the EVENT handle and
+scientific output root were absent. The command above passed one shell syntax check
+and `/usr/local/bin/agent-task run` returned 0 with an explicit tmux-start receipt.
+Submission: **2026-09-10T19:51:41.483559Z**; acceptance return:
+**2026-09-10T19:51:41.499511Z**. Handle `folr-public-lifecycle-timing-b03-event-20260910`, tmux `agent_folr-public-lifecycle-timing-b03-event-20260910`.
+The full raw receipt and exact command are retained in RESULT_SUMMARY `event_launch`.
+
+This is accepted invocation **2 of 2**, with its own fresh adjacent admission and complete
+1800s time/timeout command. No RETAIN result selected or altered this precommitted arm.
+The actual EVENT memory receipt, progress and final evidence have not yet been collected
+by the DM; acceptance alone does not establish their values or a complete pair result.
+
+Direct `MONITOR_ADD` was delivered successfully to live-configured Monitor
+`01a087e5-2044-7301-abb6-7a1709a98197`, including the exact source, cwd, handle, paths,
+command, 1800s cap and original DM return route. Actual adoption is **pending confirmation
+to the DM at this publication**. Root was notified natively of the accepted invocation,
+RETAIN acceptance and this distinction. No parallel DM status polling follows. Monitor
+reports directly to Root; Root resumes this same DM for collection, full pair intake
+and scoped closeout. No scientific invocation remains after this EVENT allocation.
+
+The launch/source/command check and submission took 1.2511678s of scoped support.
+Cumulative support through submission is **17.3407252/300s**; directory tests remain
+**25.9131638/300s**. No source/test changes, new arm, scientific retry or result-bearing
+verification were added. The full exact worktree, both supervisor roots and the staged
+Git bundle remain in the closeout inventory. Every future archive/original byte comparison
+must precede scoped removal; the historical B02 omission remains separate.
+
+The handover publication check and focused observation-procedure read add 0.5484784s,
+bringing support to **17.8892036/300s**. EXPERIMENT_MONITOR.md “Assignment, adoption
+and return” permits returning pending collection after accepted registration, with actual
+adoption explicitly pending until Root confirms it. No duplicate observation or send follows.
