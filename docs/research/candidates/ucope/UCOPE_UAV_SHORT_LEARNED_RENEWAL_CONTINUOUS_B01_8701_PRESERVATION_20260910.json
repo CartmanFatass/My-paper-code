@@ -1,0 +1,188 @@
+{
+  "object": "UCOPE-UAV-SHORT-LEARNED-RENEWAL-CONTINUOUS-B01",
+  "master": 8701,
+  "source": "3182c4c844803ab362034c2b3d5d22f7f62bca3a",
+  "handle": "ucope-uav-short-learned-renewal-continuous-b01-8701-20260910",
+  "node": "hmasd-wsl-node",
+  "prepared_at_utc": "2026-09-10T18:18:19.209721+00:00",
+  "state": "PRESERVED; ROOT_INTEGRATION_AND_RETENTION_ACCEPTANCE_PENDING",
+  "cleanup_owner": "original DM /root/dm_ucope_p47_resume",
+  "cleanup_event": "After Root accepts named result commit and this preservation, verify terminal identity again, preserve source recovery ref, then remove only exact listed completed execution paths.",
+  "local_scientific_root": "C:\\Projects\\HMASD-worktrees\\dm-ucope-native-return-prep-20260906\\temp\\directions\\ucope\\exp\\ucope-uav-short-learned-renewal-continuous-b01-8701-20260910",
+  "archive": "C:\\Projects\\HMASD-worktrees\\dm-ucope-native-return-prep-20260906\\temp\\directions\\ucope\\closeout\\ucope-uav-short-learned-renewal-continuous-b01-8701-20260910\\ucope-8701-recovery.zip",
+  "archive_bytes": 11813891,
+  "archive_sha256": "4c31e9858d034cd207a856c3beb5836f34ed808d0d3ce953ebca7f5987edc9cf",
+  "archive_entries": {
+    "analysis/ANALYSIS_FACTS.json": {
+      "bytes": 2616,
+      "sha256": "a16071f38522a9ec08c4234c470ea7d769e66d9053ff2ec698159411b71d75d9"
+    },
+    "analysis/endpoint_scores.csv": {
+      "bytes": 245,
+      "sha256": "c3309606d14427ad304584b7f9b6c1f8f807e6467fb291d71262373f654b2d74"
+    },
+    "analysis/RUN_LEVEL_SUMMARY.json": {
+      "bytes": 2033,
+      "sha256": "44e2e79158918ede97d120809a0930b889926d28742b05f3c21ab6b01f0b3b73"
+    },
+    "analyze_8701.py": {
+      "bytes": 13506,
+      "sha256": "00c670b1e4f19bb15e344a190f2730efbb3350750ba7ccdc27197bffcafc5264"
+    },
+    "collect_8701.py": {
+      "bytes": 3360,
+      "sha256": "a8cfddada0d12e0edb3225526d04e4c616308c30ac9d309684de14cae54e5b3c"
+    },
+    "collection/COLLECTION.json": {
+      "bytes": 6270,
+      "sha256": "0d5f0d7d2c7e848bc82b8195d14bdbb7a962023d8332d9883d51119676da7160"
+    },
+    "collection/monitor-terminal.txt": {
+      "bytes": 1323,
+      "sha256": "426e28a61a6082a979c234ae01f50fa354cdf78bf6022fa7d788980c9e32ef13"
+    },
+    "collection/native/episodes.jsonl": {
+      "bytes": 4949022,
+      "sha256": "466d3b84bd1d03c24209eb017c5f4d8623573b364addf2e4e8550360ce486c97"
+    },
+    "collection/native/final_F.pt": {
+      "bytes": 280682,
+      "sha256": "beb2abc29fc450edca4c8e7ae2800f396d42d384a9a6a128e6877c21f181416c"
+    },
+    "collection/native/final_G.pt": {
+      "bytes": 270582,
+      "sha256": "ede0e1a82e773788ea9624c4b3613c96c1950e22f750de6f7e3b0a88c0b8ffb0"
+    },
+    "collection/native/final_T.pt": {
+      "bytes": 280682,
+      "sha256": "27da4cd311aabf5df7fc8ffb9b30537656dfd2d2486243be5ec194c57af88492"
+    },
+    "collection/native/rollouts.jsonl": {
+      "bytes": 2763700,
+      "sha256": "c563e9c189ba84d45a80b1471c8151bbe0961e7d6c1b3e0abf4ada48008f8719"
+    },
+    "collection/native/summary.json": {
+      "bytes": 171153,
+      "sha256": "7410aec1594683f3f609e2b25e857ea295629d9e4f246b7ca9067d5a2d94dcf3"
+    },
+    "collection/remote-readback.json": {
+      "bytes": 3440,
+      "sha256": "bd500893e23e314629ae9948d8f5de3e0ad83111da9ddda83d31ee55687efe6c"
+    },
+    "collection/supervisor/exit_code": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "collection/supervisor/pid": {
+      "bytes": 8,
+      "sha256": "957073daeba81f82046aed514ee7b214f7d102f6668af0764319bbe6c52ab7d1"
+    },
+    "collection/supervisor/resource_admission.json": {
+      "bytes": 504,
+      "sha256": "14a309217b8aff14e890e9af575ab1ff67e92d9b100f0e229e0c2c4af0d3fb61"
+    },
+    "collection/supervisor/runner.sh": {
+      "bytes": 1454,
+      "sha256": "409aefafdc3293cb5d451a191d51f5a56c2fde6662c23eff711a9fd5614a4740"
+    },
+    "collection/supervisor/start_time": {
+      "bytes": 11,
+      "sha256": "860a36b6697a1cbe006c29f3948b7babc083dfe390854847c9e13cebcb3dc3c8"
+    },
+    "collection/supervisor/status": {
+      "bytes": 9,
+      "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+    },
+    "collection/supervisor/task.log": {
+      "bytes": 19403,
+      "sha256": "3e97d32a7fa4d60c0b2b76175ce55dc7658f2434ebf1af363ef617810f1ea45e"
+    },
+    "preparation/acceptance-admission.json": {
+      "bytes": 766,
+      "sha256": "8eeb8abb17bc11f2b13e74b98fa2c4e0d1929cc5e832cfb651db79c808a74aa2"
+    },
+    "preparation/monitor-dispatch.json": {
+      "bytes": 149,
+      "sha256": "91cd346100a4dbe28aad2bb9cea2b35a4dbb3d6870513f740f435a3fd6adf958"
+    },
+    "preparation/payload-facts.json": {
+      "bytes": 358,
+      "sha256": "afcc1d02afcc76da92648324a1c1089428a8f363197ce3814deab52fb0fc5f9e"
+    },
+    "preparation/source-facts.json": {
+      "bytes": 1824,
+      "sha256": "fd3f27e267bca5ab68a52be42d64fb7dedd11ad00d7c53574c0a58dca57e8b09"
+    },
+    "preparation/source-input-readback.json": {
+      "bytes": 1797,
+      "sha256": "b59deb4069048816c5f80f1b728292fce0c40f34082862c1d6aa934ec3cfcb3f"
+    },
+    "preparation/source.pack": {
+      "bytes": 9375677,
+      "sha256": "e2ca851713dc2d2ac42d85a827ef37f6ca6c47e52616c13aee0b505f4004d6b0"
+    },
+    "preparation/submission-receipt.txt": {
+      "bytes": 262,
+      "sha256": "97ee7008b63dc11ba9ce7787ced8b686e6179929a9d0e333828f7d2127eeed54"
+    },
+    "preparation/submit.ps1": {
+      "bytes": 380,
+      "sha256": "f0ad49fa42f500822eb77ebdfeb43e5335a2d30eaabd18bfec3e1a9b2c9e7fe7"
+    },
+    "preparation/ucope-uav-short-learned-renewal-continuous-b01-8701-20260910.sh": {
+      "bytes": 552,
+      "sha256": "4b6440d5a18facf539c95cb814d3c31be7920c490acaacdf357554f0f825b710"
+    },
+    "preserve_8701.py": {
+      "bytes": 4571,
+      "sha256": "93f13b172c3fa81417643b3feefe7f8c263ff69e55dec3b4a4ba6ce9d221d873"
+    },
+    "write_intake_8701.py": {
+      "bytes": 28536,
+      "sha256": "13de5428e7155a32731ca7fd4dbaa10df8380cccf9b848836c9665c633feda64"
+    }
+  },
+  "all_archive_entries_read_back_and_hashed": true,
+  "raw_native_supervisor_files": 13,
+  "declared_source_paths": 11,
+  "source_recovery": "Source3182c4c84 is an ancestor of the retained shared codex/ucope branch; the verified incremental source.pack and its explicit base revisions are archived. Remote recovery ref will be made before source worktree retirement.",
+  "remote_inventory": {
+    "source_checkout": {
+      "path": "/home/wu/hmasd-worktrees/ucope-uav-short-learned-renewal-continuous-b01-8701-20260910",
+      "resolved_path": "/home/wu/hmasd-worktrees/ucope-uav-short-learned-renewal-continuous-b01-8701-20260910",
+      "exists": true,
+      "is_symlink": false
+    },
+    "supervisor": {
+      "path": "/home/wu/.agent-tasks/ucope-uav-short-learned-renewal-continuous-b01-8701-20260910",
+      "resolved_path": "/home/wu/.agent-tasks/ucope-uav-short-learned-renewal-continuous-b01-8701-20260910",
+      "exists": true,
+      "is_symlink": false
+    },
+    "wrapper": {
+      "path": "/home/wu/hmasd-inputs/ucope-uav-short-learned-renewal-continuous-b01-8701-20260910.sh",
+      "resolved_path": "/home/wu/hmasd-inputs/ucope-uav-short-learned-renewal-continuous-b01-8701-20260910.sh",
+      "exists": true,
+      "is_symlink": false,
+      "bytes": 552,
+      "sha256": "4b6440d5a18facf539c95cb814d3c31be7920c490acaacdf357554f0f825b710"
+    },
+    "source_pack": {
+      "path": "/home/wu/hmasd-inputs/ucope-learned-8701-source.pack",
+      "resolved_path": "/home/wu/hmasd-inputs/ucope-learned-8701-source.pack",
+      "exists": true,
+      "is_symlink": false,
+      "bytes": 9375677,
+      "sha256": "e2ca851713dc2d2ac42d85a827ef37f6ca6c47e52616c13aee0b505f4004d6b0"
+    }
+  },
+  "remote_scientific_root": "/home/wu/hmasd-worktrees/ucope-uav-short-learned-renewal-continuous-b01-8701-20260910/temp/directions/ucope/exp/ucope-uav-short-learned-renewal-continuous-b01-8701-20260910",
+  "retain": [
+    "shared codex/ucope authoring checkout/branch",
+    "all local scientific originals",
+    "C:\\Projects\\HMASD-worktrees\\dm-ucope-native-return-prep-20260906\\temp\\directions\\ucope\\closeout\\ucope-uav-short-learned-renewal-continuous-b01-8701-20260910\\ucope-8701-recovery.zip"
+  ],
+  "not_in_scope": "any other old run, test scratch, worktree, branch, supervisor or staging file",
+  "preservation_wall_s": 1.3337338999990607,
+  "new_scientific_invocations": 0
+}

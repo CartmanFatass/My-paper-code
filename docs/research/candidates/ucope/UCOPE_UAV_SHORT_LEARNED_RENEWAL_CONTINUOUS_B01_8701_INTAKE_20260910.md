@@ -1,5 +1,8 @@
 # UCOPE learned short renewal continuous B01 /8701 intake, 2026-09-10
 
+**Current scientific state: VALID COMPLETE / DOWN.** Sections1–4 retain the
+prospective and operational record; completed scientific intake is in§§5–8.
+
 ## 1. Prospective boundary and checked authority
 
 The [card](UCOPE_UAV_SHORT_LEARNED_RENEWAL_CONTINUOUS_B01_SCIENCE_CARD_20260910.md)
@@ -65,7 +68,7 @@ with8601/8602,12288 Adam calls and1736704 native ticks; the command outer wall w
    Stop and return a concrete scope/scientific/budget conflict. DM owns publication,
    one remote invocation, Monitor, collection, intake and cleanup inventory.
 
-## 4. Execution and result intake (pending)
+## 4. Execution preparation and observation history
 
 Source acceptance, exact published SHA, command/node/cwd/root/handle, admission,
 Monitor adoption and technical measurements will be appended before/after their
@@ -288,3 +291,138 @@ result/supervisor preservation inventory after collection; Root confirms main
 integration/retention before scoped reclamation. Shared `codex/ucope` authoring
 checkout remains in use. No other branch, checkout, historical scratch or evidence
 is in this cleanup scope. No further work is allocated after this one triple/intake.
+
+## 5. Terminal result and scientific intake
+
+Root returned the adopted Monitor terminal for the exact8701 handle, observed
+at2026-09-10T18:00:36.2246356Z: COMPLETE/exit0, end18:00:11Z. DM resumed the same
+checkout at clean6c9fa5c5c. The [E0 result](UCOPE_UAV_SHORT_LEARNED_RENEWAL_CONTINUOUS_B01_8701_RESULT_EVIDENCE_20260910.md)
+and [numerical summary](UCOPE_UAV_SHORT_LEARNED_RENEWAL_CONTINUOUS_B01_8701_RESULT_SUMMARY_20260910.json)
+record direct collection and offline verification; no fresh scientific call.
+
+**Checked against card§§2–6:** source3182c4c844803ab362034c2b3d5d22f7f62bca3a,
+all11 declared source paths, all13 native/supervisor file digests, canonical
+actual-node admission, COMPLETE state, all6784 episode rows and3072 rollouts,
+every fixed panel/world identity, native `J=reward_sum/256`, all18 paired
+vectors/means/conditional SE/signs, saved finite FP32 weights and whole-head
+exposure. All relevant facts match. Trustworthy native reward/information
+semantics come from the accepted source and independent review, not from a
+new environment replay. T/F/G each trained2048 episodes with4096 Adam calls;
+total1736704 native ticks/12288 Adam/6144 training episodes/640 evaluations.
+Full histories, all nine panels and H are present; no partial or discarded arm.
+
+**Rule applied verbatim, card§5:** “DOWN: Delta_2048 < −0.01” — “Adverse
+learned-short package evidence at the final budget; earlier gains or hover
+comparisons do not rescue the primary.” Delta_2048=−0.0433782967180869,
+conditional SE0.008647802126527484,14/50 positive/negative worlds, distance
+from−0.01=−0.0333782967180869. This is **VALID COMPLETE / DOWN** at B class.
+
+The secondary T−F=−0.03097854039363236 is adverse; F−G=−0.012399756324454534
+is also adverse. The illustrative card case T≤F while F>G was not observed.
+Final T/F/G/H means are0.1797696893117976/0.21074822970542995/
+0.22314798602988448/0.1702509856782161. T−H=+0.00951870363358151 is WITHIN,
+while F−H=+0.04049724402721387 and G−H=+0.05289700035166841 are UP. T's
+earlier hover losses−0.09445599185286593/−0.02994933313281248 and F's
+−0.011998961129821654/−0.008055650357333641 remain explicit. Final mean gains
+coexist with29/20/13 individual hover losses for T/F/G. E0§3 shows every panel.
+
+Actual T head displacement0.8411278128623962 and2242 changed coordinates
+exclude “T accidentally remained F's frozen head” on these saved weights.
+F's entire head stayed fixed and all evaluation group displacements are zero.
+This supports a learned-package comparison; it does not identify the cause
+of the deficit or prove a pure duration effect. T/F trajectories, duration
+decisions, credit paths and five partners' adaptation differ together.
+
+## 6. Bounded interpretation, support, contradiction and next discriminator
+
+**Bounded claim:** learned physical{1,2} renewal did not improve final native
+return over primitive feedback or the frozen short law on this fresh instance
+at2048 episodes. The fixed comparator also lost to feedback here. The claim
+under test has an adverse observation; no family or direction is closed.
+
+**Strongest support:** T−G and T−F are DOWN at all three fixed checkpoints,
+with an actually moving T head and final hover-above comparators. This is
+direct performance evidence and not merely an engineering certificate.
+**Strongest contrary/limiting facts:** T's own mean rises0.10397469548644746
+between512 and2048 and finishes slightly above hover. One training instance
+cannot estimate training-seed population uncertainty; the wide conditional
+spread and remaining adverse worlds survive. These limits do not change DOWN.
+
+The prior accepted fixed2048 F−G results are8601+0.020735036726797745 UP and
+8602+0.0066306049391794825 WITHIN. The current F−G−0.012399756324454534 is a
+new adverse comparator observation on8701; no old result is reclassified or
+world panels pooled. Historical P77 learned{1,4}/512 T−G−0.04379734649032291,
+T−F−0.06808369803930205 and T−H−0.02623673364744934 remain adverse under
+their different treatment/budget. No exact same-recipe learned replication
+has occurred. Tuned current-host same-information headroom is absent; recasts1.
+
+**Surviving alternative:** finite optimization and exploration/partner
+co-adaptation may explain this package loss. Earlier fixed-law gains do not
+establish a universal duration advantage or a benefit from learning that law.
+The verified UTE passages already recorded in P82 intake§8 motivate temporal
+extension and its risks, not a guarantee for these policies. Foundations§6
+and empirical§11.8.2–3 fix the independence limit: common evaluation worlds
+and three checkpoints do not become new training samples. This reused
+grounding changes interpretation only; no new novelty or causal claim/search.
+
+**Next discriminator, advice only:** one separately allocated independent
+same-recipe T/F/G instance would distinguish recurrence of the observed loss
+from this fit's variation. It has known dominant exposure3×2048×256 training
+ticks plus640×256 evaluation ticks and3×1024×4 Adam calls; the present complete
+outer cost is2111.61s, not a runtime guarantee. I recommend ending this
+unchanged spending allocation now rather than selecting that follow-up or a
+component-search prerequisite. There is no successor/card/master/budget here.
+Any future investment belongs to a new applicable selection; Portfolio
+sequencing/lifecycle remains Root's responsibility, direction decisions Pro's.
+
+## 7. Predictions, owner flags and decisions this intake produces
+
+The three frozen events are false/false/true, with Brier losses
+.16/.1225/.16 and mean.1475. This scores the probability forecasts as recorded;
+it does not replace them by categorical claims. Owner prediction **not taken
+(unattended)**. `item.py reviews --json` returned[] in main and this checkout
+at terminal intake; no owner instruction or prediction reply was invented.
+The [Chinese brief](../../portfolio/owner/briefs/ucope/2026-09-10_learned-renewal-continuous-8701.md)
+accompanies this valid result. Ordinary result/technical decisions stay here
+and in the audit; the existing P2 new-card item remains historical auto_applied.
+
+1. **Technical acceptance, object tier.** Options(a) accept intact observed
+   result;(b) quarantine for an actual dependent defect;(c) add validation.
+   Recommend/select(a): actual source, native measurement, training exposure,
+   comparators and completeness are readable and intact. The separate cleanup
+   violation in§4 remains recorded; no dependent scientific defect is observed.
+2. **Scientific reading, object tier.** Options(a) apply final DOWN with all
+   curves/hover outcomes;(b) substitute a larger within-history improvement or
+   hover gain;(c) infer stable population harm. Recommend/select(a), exactly
+   under the frozen rule and B ceiling. No close call in the primary branch;
+   smaller descriptive F−G boundary margins are explicitly reported.
+3. **Allocation boundary, object tier.** Options(a) complete this one allocation
+   and preserve/close its execution;(b) spend a successor fit;(c) close/recast
+   the broader family. Recommend/select(a). No extra invocation is allocated;
+   no local direction/Portfolio disposition follows. The candidate discriminator
+   in§6 is unallocated advice, not an executed investment decision.
+
+**Owner-delegated decision (unattended, 2026-09-03 instruction): (a) for1–3.**
+Owner flags: no material critic dissent, primary close call or second recast;
+the recorded operational policy violation remains visible. Aggregate CPU is
+unmeasured and headroom absent. These limits do not erase the native result.
+
+## 8. Cost, preservation and integration boundary
+
+Complete outer2111.61s includes the120.67366450298823s not localized by arm
+timers; no cause is assigned to it. Conservatively charging all300s support
+gives2411.61s against5400, with each fit still below1800 even if all unlocalized
+outer/support work were assigned to it. Actual support command timings and
+the unchanged42.9793062s cumulative directory-test total are in E0§5/summary;
+preservation timings follow in its receipt. Aggregate CPU/total authoring time
+are unmeasured. No scientific cap or Scope§5 breach was observed. The earlier
+cleanup policy violation and two corrected offline readback errors remain
+explicit; none created a new scientific exposure or altered raw artifacts.
+
+The exact local/remote inventory and verified archive are in
+[PRESERVATION](UCOPE_UAV_SHORT_LEARNED_RENEWAL_CONTINUOUS_B01_8701_PRESERVATION_20260910.json).
+Root integrates named accepted commits and confirms retention; DM then performs
+only the listed completed-run reclamation and returns disk/registration checks.
+The source was published on shared `codex/ucope`; that authoring checkout and
+all local scientific evidence remain. No broader cleanup or successor is part
+of this return. Current closeout state is recorded in the preservation receipt.
