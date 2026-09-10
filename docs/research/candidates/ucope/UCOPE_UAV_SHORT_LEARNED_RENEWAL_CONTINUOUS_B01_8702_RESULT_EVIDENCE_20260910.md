@@ -137,3 +137,12 @@ retain the bounded reading.
 Verified recovery: the [preservation record](UCOPE_UAV_SHORT_LEARNED_RENEWAL_CONTINUOUS_B01_8702_PRESERVATION_20260910.json)
 retains the38-entry local archive, its SHA256 and the exact remote source
 reference. Original local partial evidence remains alongside the archive.
+
+Remote closeout completed at **2026-09-10T20:02:11.421887+00:00** after Root
+accepted main **ebe006a6202741ca8eb7dc4e61f059b2dc96d104**. The exact four
+preserved targets are absent from disk, the cwd is absent from Git registration,
+and the recorded PID/session are absent. All 12 remote file hashes matched before
+removal; all 38 original local members and the archive remain verified afterward.
+The source recovery reference remains at b6. The preservation record retains an
+initial `/proc/639/cwd` permission failure before removal and the successful
+scoped receipt; no scientific invocation or claim changed.

@@ -347,3 +347,41 @@ this execution cwd, supervisor directory, staged wrapper and source pack.
 Root has the accepted result/source commit and preservation facts for
 integration/acceptance. DM retains scoped removal ownership; no unrelated
 checkout, evidence root, branch or scratch is a cleanup target.
+
+
+### Completed scoped remote closeout
+
+Root accepted integration and preservation at main **ebe006a6202741ca8eb7dc4e61f059b2dc96d104**
+and instructed the exact four-path removal on 2026-09-10 at 19:58Z. At this
+technical boundary, options were (a) reclaim those terminal remote paths after
+verified preservation or (b) retain them for an actual live dependency.
+Recommend/select (a): the accepted task had failed with exit 1, no live dependency
+remained, and its evidence/source were preserved. **Owner-delegated decision
+(unattended, 2026-09-03 instruction): (a)**, executed under Root's explicit
+integration/preservation acceptance. Owner flag **none**; this is no new
+scientific selection. Main and direction owner-review queries both returned
+`[]`; there was no prediction or override to apply.
+
+At **2026-09-10T20:02:11.421887+00:00**, the exact execution cwd,
+supervisor directory, staged wrapper and source pack were all absent on disk;
+the cwd was also absent from the remote Git worktree registry. Recorded
+PID 3096219 and the exact `agent-task` tmux session were absent before and after
+removal. All 10 collected artifact hashes plus the wrapper/pack hashes matched
+before removal; remote source HEAD and the preserved reference matched b6.
+The reference still resolves to **b6c75d5cf8e1781bb0e3c6824ab2dc9cb32dbce9**.
+The 38 original local members were rechecked after removal, and the archive
+SHA256 is unchanged. Shared authoring checkout, original local evidence and
+unrelated paths were not cleanup targets.
+
+The first cleanup command stopped before any removal because an optional broad
+process scan could not read `/proc/639/cwd` (`PermissionError: [Errno 13]`). Its
+receipt and exact script remain in the local closeout directory. No permission
+override or repeated denied read followed; the successful command verified the
+recorded experiment PID/session directly. It does not claim an exhaustive
+system-wide process census. First-command wall time was
+0.4513125000084983 s; successful-command wall time was
+0.9348233000055188 s. These are cleanup operations with
+**zero scientific invocations**, unrelated to the unlocalized historical step
+failure. The [preservation record](UCOPE_UAV_SHORT_LEARNED_RENEWAL_CONTINUOUS_B01_8702_PRESERVATION_20260910.json)
+contains both receipts and the completed inventory. The existing one-invocation
+allocation has ended; no retry, restart or new scientific allowance was used.
