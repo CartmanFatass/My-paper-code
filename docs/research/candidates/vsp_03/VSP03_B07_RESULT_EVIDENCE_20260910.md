@@ -236,3 +236,32 @@ The shared local authoring checkout remains in use through Root integration;
 Root owns its later reuse/reclamation decision. DM's new policy-blocked local
 scratch and the two older CM-owned B06 scratch directories are excluded from
 remote reclamation. No bypass or repeated rejected local removal is authorized.
+
+## Completed scoped remote closeout
+
+At2026-09-10T17:21:35.216252Z DM completed the named remote reclamation.
+The detached source cwd is absent on disk and absent from `git worktree list`;
+the one supervisor wrapper directory and private socket directory are absent.
+Fresh checks found no target process before removal. All20 original scientific
+files and adjacent receipts retain their recorded hashes. Scientific output
+root and receipts remain on the node, with both pushed recovery archives at
+`1067e2025a49df639feae2ad51babb75e7b03d7b`.
+
+An earlier cleanup SSH command timed out after50s while its own Git fetch
+remained running; it had not reached removal. A first combined reconciliation
+returned no JSON, so DM read exact paths/processes directly: all three targets
+were still present and the cleanup Python/Git fetch were live. DM terminated
+only that verified orphaned cleanup process and its three Git descendants by
+PID/start identity; no same processes remained. The separate permitted cleanup
+then used the already byte-verified, pushed local Git archives, without
+repeating the fetch. It removed only the declared targets. This repaired a
+post-result transport/cleanup issue, with no new scientific invocation or
+change to results, budgets, resource admission or frozen reading.
+
+Collection retains the timeout, reconciliation, exact termination identities,
+successful commands, path/registration absence and preserved-byte checks. The
+remote companion is `b07_10804_20260910_closeout.json` beside the retained root.
+Root accepts final integration/retention and this reclamation receipt. The
+shared local authoring checkout remains through that integration boundary.
+The separate policy-blocked local scratch directories remain excluded and
+unchanged; no retry or bypass of their rejected deletion occurred.
