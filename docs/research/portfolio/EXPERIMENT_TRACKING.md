@@ -1,5 +1,22 @@
 # HMASD experiment tracking
 
+## 2026-09-10 rolling execution update
+
+The five advancing direction chains are independent and do not wait at a batch barrier. UCOPE handle
+`ucope-uav-short-learned-renewal-continuous-b01-8703-20260910` remains Monitor-owned at exact
+source `c40a4cd66`; its one fresh T/F/G fit has no accepted result yet. RCLE seed23 handle
+`rcle-b03-fresh1000-s23-20260910` finished exit 0 in 729 seconds at source `9a7b7a3d1`; W1, W100
+and reference are complete with all three admissions passed, and the original DM owns collection,
+intake and verified closeout. DISH B08 source `a01522a6` finished one valid HALF_RETAIN/REPLACE
+pair (mean delta -6.5, 65,536 transitions and 512 optimizer calls per arm); the DM is recording the
+fixed-candidate negative result and closeout without a successor. FOLR's complete Convergence
+response is archived and applied at `11b861ed0`: one fixed HALF_EVENT-versus-RETAIN B is selected,
+with no sweep or extra arm, and implementation remains with the original DM. SCDMP B02 is accepted
+WITHIN at `71b935c89`; its original DM is preparing the direction-tier narrow-family disposition for
+the existing independent Transport task. VNFC remains parked on its recorded `SEND_UNCERTAIN`
+receipt with no resend while provider acceptance is uncertain. CBSC readiness is reconciled but has
+no permitted executable next action. No owner reviews are pending at this boundary.
+
 ## 2026-09-10 research restart and Portfolio selection
 
 OWNER_DIRECT: “开始研究”. Root resumed the research loop under the consolidated control plane.
