@@ -14,6 +14,10 @@ from experiments.candidates.roster_consistent_latent_exploration_tbcfv_b03 impor
      "065798a1a4115ac244accada16fc267f814deb622cfd05b9657418892c656e3b"),
     (21, 1000, "RCLE-TBCFV-B03-ACTOR100-FRESH1000-S21", "run_rcle_tbcfv_b03_fresh1000.sh",
      "f6a8584fe1948509b3501011e27178e8914f63fc794731e5d92b328415c7b6d8"),
+    (22, 1000, "RCLE-TBCFV-B03-ACTOR100-FRESH1000-S22", "run_rcle_tbcfv_b03_fresh1000_s22.sh",
+     "9e02ca6eed367ce80c7b396fc99a128c501c744d0e888e374803b5b2a4feb9fa"),
+    (23, 1000, "RCLE-TBCFV-B03-ACTOR100-FRESH1000-S23", "run_rcle_tbcfv_b03_fresh1000_s23.sh",
+     "c358b8a5e90f8e9814642a3455b108620b54a61f530b755deb5c7bac6af23d66"),
 ])
 def test_seed_and_new_control_publication(monkeypatch, tmp_path, seed, updates, label,
                                          wrapper_name, root_hex):

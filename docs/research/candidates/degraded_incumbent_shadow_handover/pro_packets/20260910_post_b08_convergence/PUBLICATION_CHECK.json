@@ -1,0 +1,126 @@
+{
+  "checked_at": "2026-09-10T22:25:12.526934+00:00",
+  "repository": "https://github.com/CartmanFatass/My-paper-code",
+  "request_id": "2026-09-10-dish-post-b08-convergence-01",
+  "observed_published_remote_heads": {
+    "refs/heads/codex/pro-dish-post-b06-20260907": "ff2cfddb629a16b5e38efb1af6bb46579b407a99",
+    "refs/heads/main": "4d625c906c8b519ef983baeaa3edafac5ff08065"
+  },
+  "reference_mappings": [
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260910_post_b08_convergence/SCIENCE_BRIEF.md",
+      "commit_sha": "ff2cfddb629a16b5e38efb1af6bb46579b407a99",
+      "blob": "c25ed7161ad5b26dc5c8252bd3b72365164168c6",
+      "published_through": [
+        "refs/heads/codex/pro-dish-post-b06-20260907"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_ARRIVAL_BRIDGE_RETENTION_B08_SCIENCE_CARD_20260910.md",
+      "commit_sha": "7e00e69145c1f1aed63ce8e931c5a640d666bea1",
+      "blob": "4ddbd9e05a7070ff11b1f0f161d38184dddfe61e",
+      "published_through": [
+        "refs/heads/codex/pro-dish-post-b06-20260907"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_ARRIVAL_BRIDGE_RETENTION_B08_RESULT_EVIDENCE_20260910.md",
+      "commit_sha": "7e00e69145c1f1aed63ce8e931c5a640d666bea1",
+      "blob": "57d6b20008cd64ff907fa5958372b14ff9e44e2d",
+      "published_through": [
+        "refs/heads/codex/pro-dish-post-b06-20260907"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_ARRIVAL_BRIDGE_RETENTION_B08_RESULT_INTAKE_20260910.md",
+      "commit_sha": "7e00e69145c1f1aed63ce8e931c5a640d666bea1",
+      "blob": "7d1971a686f484e96466532806a3e7b4ff6e6aaf",
+      "published_through": [
+        "refs/heads/codex/pro-dish-post-b06-20260907"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260910_arrival_bridge_retention/archive/RESPONSE.md",
+      "commit_sha": "9e99e48dca9fe34b25c11cb7814ba4d54e83a2b5",
+      "blob": "0f4eaadc44e3537dca3be2e59789642e733d99ff",
+      "published_through": [
+        "refs/heads/codex/pro-dish-post-b06-20260907"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_ARRIVAL_BRIDGE_RETENTION_REENTRY_INTAKE_20260910.md",
+      "commit_sha": "b666f575a95ad15da9b9ff9f23cbc003f2e34450",
+      "blob": "424545495afe514ec3e2da685af09e0b25fa07b2",
+      "published_through": [
+        "refs/heads/codex/pro-dish-post-b06-20260907"
+      ]
+    },
+    {
+      "path": "experiments/candidates/degraded_incumbent_shadow_handover_rbhr_r06/production_training_engine.py",
+      "commit_sha": "a01522a6f6cf12e5549b3e03596ce58642b68cf1",
+      "blob": "57c1f569cb97fa68ce62fd317ed87aca6ad3489c",
+      "published_through": [
+        "refs/heads/codex/pro-dish-post-b06-20260907"
+      ]
+    },
+    {
+      "path": "experiments/candidates/degraded_incumbent_shadow_handover_rbhr_r06/production_recurrent_trainer.py",
+      "commit_sha": "a01522a6f6cf12e5549b3e03596ce58642b68cf1",
+      "blob": "54e184b692051b9cc18b0e9b20cb992ee761e09a",
+      "published_through": [
+        "refs/heads/codex/pro-dish-post-b06-20260907"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260910_post_b08_convergence/EXPOSURE_AND_COST.json",
+      "commit_sha": "ff2cfddb629a16b5e38efb1af6bb46579b407a99",
+      "blob": "11e5e69633fc096084a973b98083f5eeb8fc98d6",
+      "published_through": [
+        "refs/heads/codex/pro-dish-post-b06-20260907"
+      ]
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "commit_sha": "74f8e7ce958d0af92d59b1874f13a0b09180b52b",
+      "blob": "c520f24f1440ca0638943d7a5126cfd5bc34440c",
+      "published_through": [
+        "refs/heads/main"
+      ]
+    },
+    {
+      "path": "AGENTS.md",
+      "commit_sha": "74f8e7ce958d0af92d59b1874f13a0b09180b52b",
+      "blob": "2875c3199337666b22276e490f63358a86d6d426",
+      "published_through": [
+        "refs/heads/main"
+      ]
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "commit_sha": "74f8e7ce958d0af92d59b1874f13a0b09180b52b",
+      "blob": "72f81d5650d9c1ddde12df3a6ed37add99f436be",
+      "published_through": [
+        "refs/heads/main"
+      ]
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "commit_sha": "74f8e7ce958d0af92d59b1874f13a0b09180b52b",
+      "blob": "05b3dc8d8628e2510431250c119b533f2ac3c29a",
+      "published_through": [
+        "refs/heads/main"
+      ]
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "commit_sha": "74f8e7ce958d0af92d59b1874f13a0b09180b52b",
+      "blob": "9bae14c6deb8e3d1bee6bb567828e4667a426174",
+      "published_through": [
+        "refs/heads/main"
+      ]
+    }
+  ],
+  "scientific_input_sha": "7e00e69145c1f1aed63ce8e931c5a640d666bea1",
+  "task_utf8_sha256": "5aa9ae04ff2062b1b4212eac5a4e75e32c0436345f7fba59bd80c44c66d3a84f",
+  "scope": "Document/publication verification only; TASK still unpublished, no dispatch or Send. Publication proves available Git objects, not current Pro connector access."
+}

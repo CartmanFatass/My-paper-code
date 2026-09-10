@@ -1,0 +1,81 @@
+{
+  "id": "20260910-scdmp-001",
+  "created": "2026-09-10T12:18:03-07:00",
+  "direction": "semigroup_consistent_duration_model_policy",
+  "tier": "direction",
+  "kind": "close-call",
+  "title": "B01 之后：暂停残差包家族，还是提出一次新B",
+  "context": "完整B01的原生差值+0.0067374，位于预先±0.01范围内；单个训练对和323.02秒科学进程也保留继续的可能。DM建议仅暂停当前开场保持残差包家族，并将一次有具体问题的新B作为替代交同一Convergence节点。尚无Pro新裁决，也没有执行暂停、改生命周期或分配新运行。",
+  "options": [
+    {
+      "key": "a",
+      "label": "仅暂停当前残差包家族",
+      "consequence": "保留B01 WITHIN和重入讨论；SCDMP生命周期、两次recast及旧D6 PARK不变。"
+    },
+    {
+      "key": "b",
+      "label": "选择一个有具体理由的新B",
+      "consequence": "先明确新问题、处理与完整MC比较器、独立训练单位和单对上限，再以新卡执行；B01不改判。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "b",
+  "dm_reason": "原规则没有给原样重复提供选定尺度上的理由；正点估计、单训练对和低已测成本构成必须保留的反证。",
+  "evidence": [
+    "docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260910_post_b01_convergence/SCIENCE_BRIEF.md",
+    "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_NATIVE_HOLD_RESIDUAL_B01_INTAKE_20260909.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-10.md#L46",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": {
+    "question": "是否在当前边界暂停这个开场保持段残差MC家族，或为一个明确的新学习问题选择一次有界B？目前只有DM建议，等待同一Convergence节点裁决，不等待所有者答复。",
+    "changes_if_approved": [
+      {
+        "target": "SCDMP 当前 opening held-residual package family",
+        "from": "B01完整WITHIN，尚未选择后继；家族未暂停",
+        "to": "建议仅暂停这个家族，保留重入讨论条件；ACTIVE/HIGH、recasts2及旧D6 PARK均不变"
+      }
+    ],
+    "if_refused": "由同一节点明确选择一个有理由的新B，写清问题、比较器、独立训练单位、观测与预算后再形成新卡；不把B01改判成功。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_NATIVE_HOLD_RESIDUAL_B01_INTAKE_20260909.md",
+        "quote": "Valid complete B/EXPLORE, WITHIN: master8201's final sampled RESIDUAL-MC minus MLP-MC native return is +0.0067374074558942025, inside the card's inclusive ±0.01 scale.",
+        "why": "完整预算没有达到预先选定的改善尺度；原规则没有给原样重复提供选定尺度上的理由。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_NATIVE_HOLD_RESIDUAL_B01_INTAKE_20260909.md",
+        "quote": "Strongest support for further scientific plausibility is a real nonzero two-ended update followed by a positive native point difference on a complete fair comparison.",
+        "why": "独立训练对只有一个，条件评价SE不能排除有用的训练平均效应；科学配对进程323.02秒，一次新B可能仍有价值。"
+      }
+    ],
+    "uncertainty": [
+      "没有测到跨训练seed的方差，也没有建立统计等价。",
+      "无法区分通用残差正则、梯度裁剪、抵消、后继噪声与遗漏历史。",
+      "同信息调优headroom缺失；H是已达到的参考而非上界。"
+    ],
+    "cost": {
+      "compute": "本咨询新增模型/训练/评价/科学调用均为0。备选单对预计286720原生步、2048 Adam、96评价；历史科学进程323.02秒为参考，仍保留每臂1800秒、整对3600秒上限；未分配新seed或预算。",
+      "owner_time": "可异步介入；无需回复来推动咨询。",
+      "reversibility": "reversible",
+      "waits_on_this": "本家族下一裁决等待Pro完整响应；其他方向继续。"
+    },
+    "verdict_text": "DM recommendation: park the current opening held-segment residual-MC package family at this boundary; do not infer a general residual-method failure or change SCDMP lifecycle.",
+    "source": "docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260910_post_b01_convergence/SCIENCE_BRIEF.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-10T20:44:51+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260910_post_b01_convergence/archive/RESPONSE.md",
+      "record": "docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260910_post_b01_convergence/CONVERGENCE_INTAKE_20260910.md",
+      "state": "applied",
+      "summary": "完整不可变响应2b1a8d7a8395827ed654dac120641710e6a6c87a已全文读取并通过14路径/SHA及现行规范核对。Pro选择(b)不变比较的新独立B02配对，拒绝DM立即PARK建议；已分配master8202并形成新卡，尚未运行。保留B01 WITHIN、recasts2、旧D6 PARK及Portfolio状态，无第三recast。此记录是Pro裁决应用，不是所有者回复。"
+    }
+  ]
+}

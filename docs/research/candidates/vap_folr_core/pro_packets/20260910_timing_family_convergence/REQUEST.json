@@ -1,0 +1,176 @@
+{
+  "caller_role": "em",
+  "workflow_node": "em_convergence",
+  "request_id": "folr-public-lifecycle-timing-family-convergence-20260910",
+  "source_thread_id": "01a08438-c6e4-7981-b75d-ba81fabd4c2f",
+  "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "direction_id": "vap_folr_core",
+  "repository": "CartmanFatass/My-paper-code",
+  "repository_url": "https://github.com/CartmanFatass/My-paper-code",
+  "commit_or_ref": "867f0c9145af12e459494e58350927569883179e",
+  "execution_mode": "REUSE_SINGLETON",
+  "delivery_mode": "github_delivery",
+  "conversation_id": "6aa18137-9d88-83e8-a01f-46630813faf8",
+  "scientific_question": "Decide the next direction-local disposition of the unchanged blanket EVENT-clearing family on the explicitly public-lifecycle easy Traffic Junction host after all three timing instances. The author recommends a narrow pause of this exact full-erasure / 5000-training-episode / 128-final-episode recipe, with ordinary RETAIN retained as a usable generic baseline. This is an unexecuted recommendation and a close call, not a local family decision. The original P78 node selected the real learned comparison; its answer and the old32-endpoint/B04/P68/P77 boundaries remain unchanged.\n\nThe complete128-endpoint evidence is: at7804/107804, RETAIN2.54453125, EVENT5.349296875, RANDOM3.985625, EVENT−RETAIN+2.804765625 and EVENT−RANDOM+1.363671875 (EVENT_CLEAR_ADVANTAGE); at7805/107805, RETAIN2.64265625, EVENT2.051953125, RANDOM2.501796875, both EVENT contrasts negative but within MEI1 and all three individual contrasts within1 (MIXED_OR_REVERSE); at7806/107806, RETAIN6.893125, EVENT1.44703125, EVENT−RETAIN−5.44609375 (RETAIN_ABOVE_MEI). RANDOM was explicitly omitted from the third object after outcomes were known. Its earlier two-instance mean3.2437109375 exceeds RETAIN2.59359375 on those two instances, so no dismissal or all-controls claim follows. The accepted three-instance R/E mean difference−1.07734375 and sample SD4.146900581 are descriptive and outcome-informed, not a new reading rule or stable training-population result. Earlier32-episode RETAIN−EVENT pairs−2.0021875/−1.9228125/+2.559375 remain separate and unpooled. All three low-confidence timing predictions missed; owner prediction slots were not taken.\n\nB01 remains the strongest support for EVENT; B03 is the strongest contrary128-endpoint point, following B02 nonrecurrence. Cumulative training means favor retention in all three, but are not final evaluation or a recorded learning curve. Real EVENT erasure occurred on about18.1–18.4% of eligible training survivor controls and18.7–22.5% of final controls; the RANDOM p=.1 dose is unmatched. No-effect exposure, pure timing, stale-memory cause or optimization cause has been established. The n=3 fitting history cannot establish equivalence, population harm/superiority or transfer. Absolute MEI1 retains its host reason (one progress unit/one tenth collision penalty); current tuned same-information baseline/upper headroom is absent, not zero or a refusal condition.\n\nThe native chain is actual arrival/departure, including same-step refill → true physical survivor ownership C → shared public E and own-birth information plus local observation history → incoming survivor state law before GRU processing → the same arm law in acting and online/target replay throughout real training → later native movement/reward. Entrants/inactive/episode state is fresh in every arm; survivor previous-action history remains legal; terminal computational passes are not control opportunities. Full recurrent memory includes teammate history, and learned teammates co-adapt. This is the changed public-information variant, never original-CAMA performance or strictly-self ancestry. The accepted CAMA recurrent comparator and Sable acting/training-boundary passages are reused from B01 intake§3; no new literature-dependent performance assertion or library-wide coverage claim is made.\n\nOptions: (a) narrow pause of the unchanged full-EVENT package on this recipe; (b) one distinct bounded performance question using a single fixed partial-attenuation law; (c) one more unchanged R/E fitting instance for a specifically stated repeatability question. The concrete (b) is h_in←.5*h_in for true survivors at the same E boundary, before the GRU; all other survivor, entrant, inactive, previous-action, observation/reward, optimizer and terminal handling stays common. Train that law and competent RETAIN separately in one fresh matched fitting instance, then compare full128-episode final native means at the same absolute MEI1. No .5 sweep, best coefficient/seed/checkpoint, diagnostic-before-B or old-policy evaluation substitution is proposed. .5 is one outcome-informed intermediate treatment, not an optimum or a guarantee of preserved useful information. Its two-arm ceiling is benefit over retention only: no superiority over RANDOM, pure timing or recovery of the full-EVENT loss. A selected stronger control question must name its needed comparison and work; another RANDOM arm alone would still not match timing/dose.\n\nThe reason to favor (a) is incremental question value after both useful gains and substantial losses have been observed: another unchanged sign is not automatically the next best observation. This is not a demand for a stable winner, novelty, significance, complete causal diagnosis, headroom or all-positive seeds. Address the strongest case against pausing: B01 is a valid positive signal, three fitting instances leave large uncertainty, and another pair has a measured scale around25minutes. A new B may be justified without positive replication or a located defect. If selecting (b), explain why this concrete preserved-vector change is worth measuring without claiming its reason has already been proved. If selecting (c), name what its outcome would decide and why it is preferable to a changed treatment or pause. If a true RECAST/new mechanism family is necessary, make that scientific scope explicit; do not relabel a treatment constant as a recast, silently rewrite an old boundary, or assign Portfolio consequences.\n\nHistorical timing exposure is8 fresh fits across3 independent fitting instances,800000 training ticks,39752 RMSprop steps,1024 final episodes/20480 final ticks,820480 native ticks. Complete whole-arm wall charges are2347s(B01 conservative supervisor sum),2423.79s(B02),1519.65s(B03); support15.5107405/45.9904959/48.3790650s gives2362.5107405/2469.7804959/1568.0290650s per respective valid triple/triple/pair, sum6400.3203014s. B01 narrower runner wall2344.07s and CPU2347.80s exclude preflight; B02/B03 whole CPU2427.91/1522.30s have their stated scope. Do not turn mixed arm sets, CPU, elapsed and engineering labor into a common unstated unit. Full engineering/control-plane elapsed is unmeasured. B02's missing required pre-delete archive comparison remains a historical procedural failure with intact primary data; B03's2706-member comparison preceded removal. No later result repairs historical quarantine or changes a frozen rule.\n\nAn unallocated two-arm scale for (b) or (c) is2×5000×20 training +2×128×20 final=205120 native ticks,9938 actual RMSprop,256 final episodes, one endpoint/arm. Per-arm exposure100000 training ticks/4969 updates at lr.0005/128final; nominal lr×steps2.4845 is not displacement. Dominant replay2×4969×32×21×5×2=66783360 GRU row forwards plus backward/mixing; acting2×5128×21×5=1076880 rows. (b) adds at most one64-vector rescaling per eligible visited boundary; no nested candidate/trajectory/solver search. Existing full RETAIN755.40s/EVENT764.25s give1519.65s unchanged-pair point cost. The changed arm's time is unmeasured; using EVENT's time is only a proxy and its additional overhead is unknown. A prospective card could retain1800s per complete arm/3600s pair plus≤300s scoped support, but nothing is allocated here. A fresh RANDOM arm would add102560ticks/4969updates/128final/33391680 replay rows and last821.64s point time. Pause uses zero science. No cost pilot, finite exact search, support census, broader diagnostics or moved-to-A prerequisite is requested; compare any such proposal's question value and known work with the real-learning minimum.\n\nIf a B is selected, its class-correct scope/card, actual finite allocation and proportionate changed-behavior/primary checks follow through the same DM. Preserve remote_first hmasd-wsl-node/configured Python, CPU FP32/Torch1+1, exact published source, detached supervision, immediate actual-node memory admission and the complete initialization→training→evaluation→publication→exit cap. Do not add universal tests or mechanistic prerequisites. This consultation uses no new section4 machinery, scientific invocation, target import, model, environment, RNG master, learner, replay, evaluation, diagnostic, test or profiling. Its only product is the direction decision delivered at the scoped response path; it does not change lifecycle ACTIVE/MEDIUM, priority, capacity, family state or code directly.\n\nExplicitly adopt only the named sections at each effective fixed SHA in the manifest. Evidence-spec§11 controls; the ACVC named exception and VNFC appendix do not apply. Foundations§§2–4,6 and04_EMPIRICAL explain the actual unit and claim limits, not the investment decision or an extra gate. Unlisted sources/comments/linked history cannot expand this task. A complete answer is final at this node only within applicable current instructions/specifications; cite a concrete scientific/specification/access conflict if one prevents a formed conforming decision. Do not turn an access blocker or procedural failure into negative science.",
+  "deliverable": "Give one formed direction-local selection: narrowly pause the unchanged blanket-EVENT recipe, or select one specifically justified distinct or unchanged bounded real-learning question. Assess the strongest evidence against the recommended pause. If choosing a B, state its exact question, treatment/comparator, independent unit, primary observable, effect scale, necessary known work/cost and honest result ceiling, without executing it or allocating hidden extra arms/diagnostics. If a true family recast or specification exception is necessary, name that scope and concrete reason instead of silently applying it. Preserve every historical result and distinguish direct facts from interpretation. Answer conclusion-first scientific prose; no routing envelope or exhaustive diagnostic plan is requested.",
+  "claim_ceiling": "A family-level next-question decision from three exploratory timing instances and retained earlier observations. Each completed B remains at its own rule and one fitting-instance ceiling; the combined display is outcome-informed and descriptive. No stable population winner, equivalence, causal harm, pure event-timing or memory necessity, tuned headroom, original-CAMA result, strictly-self ancestry, novelty, transfer/UAV/C/safety/deployment claim or Portfolio lifecycle/priority/capacity disposition. Preparation authorizes zero scientific execution.",
+  "reference_files": [
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_TIMING_FAMILY_QUESTION_INTAKE_20260910.md",
+      "purpose": "Sections1–7: present direction question, complete descriptive record, bounded claim, concrete options and unexecuted close-call recommendation; cost and applicable-rule mappings.",
+      "commit_sha": "867f0c9145af12e459494e58350927569883179e",
+      "provenance": "Current DM interpretation after the complete B03 result; recommendations are not a formed direction decision."
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260910_timing_family_convergence/EXPOSURE_AND_COST.json",
+      "purpose": "Current-consultation exposure line, exact historical counts/cost units and unallocated two-arm work/cost scale; no learner was imported.",
+      "commit_sha": "867f0c9145af12e459494e58350927569883179e",
+      "provenance": "Machine-generated from retained summaries and loop bounds; existing descriptive analysis is reused, not new training evidence."
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260910_timing_family_convergence/ISSUE_SNAPSHOT.json",
+      "purpose": "Issue15 body and one prior delivery comment as historical discussion provenance only; current question is this fixed TASK.",
+      "commit_sha": "867f0c9145af12e459494e58350927569883179e",
+      "provenance": "Read-back of the mutable Issue before this new question update; the P78 preparation-state text is historical."
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260909_p78_public_lifecycle_convergence/archive/RESPONSE.md",
+      "purpose": "Original formed Convergence scope: complete response, especially selection, interface, smallest trained comparison, decision value and historical boundaries.",
+      "commit_sha": "653727422183894b2f4d1c82a458fbc55aaf6ee0",
+      "provenance": "Immutable original node decision; preserve it and its meaning. Its linked older specification versions do not expand or supersede the current explicit method manifest."
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_TIMING_B01_SCIENCE_CARD_20260909.md",
+      "purpose": "Sections2–6: exact three-law state and replay semantics, common information, p=.1 random law, learner/exposure, MEI/rule and original caps.",
+      "commit_sha": "74d023d7d55453da8a5d5dccebd518e4ffdb65c8",
+      "provenance": "Frozen B01 source/card version before output; do not rewrite it."
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_TIMING_B02_SCIENCE_CARD_20260910.md",
+      "purpose": "Sections1–6: fresh7805/107805/private207805/307805 binding, same three-law learner and frozen result rule.",
+      "commit_sha": "6a8eacdad072c37d477aca95a9c871aba68cee78",
+      "provenance": "Frozen B02 source/card version; its unchanged MEI and limited triple claim remain."
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_TIMING_B03_SCIENCE_CARD_20260910.md",
+      "purpose": "Sections1–6: outcome-informed two-arm narrowing, independent7806/107806 fit, exact 5000/128 recipe, MEI1, prediction, work and limits.",
+      "commit_sha": "6fb1e1f6d6f726f133e9aab9c9d96758e3b6d36c",
+      "provenance": "Frozen B03 source/card before output; no fresh RANDOM was allocated."
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_TIMING_B01_INTAKE_20260909.md",
+      "purpose": "Sections3,9–13: verified CAMA/Sable passages, full positive triple, all controls, conditional spread, dose and final cost/closeout.",
+      "commit_sha": "cfc1b60d1a3edd729e89edda928ea07d15098abd",
+      "provenance": "Accepted DM scientific/technical intake; historical exposure and procedural defects remain at their actual scope."
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_TIMING_B01_RESULT_SUMMARY_20260909.json",
+      "purpose": "Read arm summaries, all endpoint outcomes/counts, original rule and cost fields used by that intake; no episode is an independent training seed.",
+      "commit_sha": "cfc1b60d1a3edd729e89edda928ea07d15098abd",
+      "provenance": "Retained primary evidence. Full final-return vectors are available in these summaries; no new evaluation is required."
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_TIMING_B02_INTAKE_20260910.md",
+      "purpose": "Sections7–12: complete within-MEI triple, nonrecurrence, accepted measurement, final scoped cost and historical closeout omission.",
+      "commit_sha": "cfc1b60d1a3edd729e89edda928ea07d15098abd",
+      "provenance": "Accepted DM scientific/technical intake; historical exposure and procedural defects remain at their actual scope."
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_TIMING_B02_RESULT_SUMMARY_20260910.json",
+      "purpose": "Read arm summaries, all endpoint outcomes/counts, original rule and cost fields used by that intake; no episode is an independent training seed.",
+      "commit_sha": "cfc1b60d1a3edd729e89edda928ea07d15098abd",
+      "provenance": "Retained primary evidence. Full final-return vectors are available in these summaries; no new evaluation is required."
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_TIMING_B03_INTAKE_20260910.md",
+      "purpose": "Sections9–13: complete adverse pair, original rule, missed forecast, all receipts, cost/verified preservation and present next-question advice.",
+      "commit_sha": "cfc1b60d1a3edd729e89edda928ea07d15098abd",
+      "provenance": "Accepted DM scientific/technical intake; historical exposure and procedural defects remain at their actual scope."
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_TIMING_B03_RESULT_SUMMARY_20260910.json",
+      "purpose": "Read arm summaries, all endpoint outcomes/counts, original rule and cost fields used by that intake; no episode is an independent training seed.",
+      "commit_sha": "cfc1b60d1a3edd729e89edda928ea07d15098abd",
+      "provenance": "Retained primary evidence. Full final-return vectors are available in these summaries; no new evaluation is required."
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/evidence/2026-09-10-folr-public-lifecycle-timing-b03-matched-128-analysis.json",
+      "purpose": "The complete three-instance R/E descriptive display, matched fitting-unit differences and SD; no confidence interval or success reclassification.",
+      "commit_sha": "cfc1b60d1a3edd729e89edda928ea07d15098abd",
+      "provenance": "Existing analysis from one endpoint per declared fitting instance; outcome-informed display only."
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/DIRECTION.md",
+      "purpose": "Accepted public-lifecycle scope and B01–B03/timingB01–B03 science sections; preserve older32-episode signs, strongest support/contradiction and provenance boundary.",
+      "commit_sha": "cfc1b60d1a3edd729e89edda928ea07d15098abd",
+      "provenance": "Accepted scientific position, not a launch requirement or authority to reopen older stopped families; no citation-tree preload."
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "purpose": "Adopt only §§3–4,5.2,6.1,7–8,11.3–11.4,11.7–11.10: evidence ceiling, direction versus Portfolio, real B, independent units, cost/question proportionality, dependency-based failure and current knowledge-use rules. Section11 controls; ACVC11.4.1 is inapplicable.",
+      "commit_sha": "0d3c0a7aae861f0600acebe35a841d8c0865b5a5",
+      "provenance": "Current normative sections; do not silently import a stronger inherited class or a different named-object exception."
+    },
+    {
+      "path": "AGENTS.md",
+      "purpose": "Adopt §§2–7: tier authority, unattended object delegation, clean direction boundary/owner review, independent rolling direction chains, shared branch, remote-first and per-invocation admission.",
+      "commit_sha": "0d3c0a7aae861f0600acebe35a841d8c0865b5a5",
+      "provenance": "Current owner instructions; no cross-direction wait, Portfolio disposition, extra scientific allocation or Pro-as-general-B-gate follows."
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "purpose": "Adopt §§4–5: needed machinery must be named; 2000/600 line and existing test budgets, four launch conditions; this consultation needs no section4 item.",
+      "commit_sha": "0d3c0a7aae861f0600acebe35a841d8c0865b5a5",
+      "provenance": "Current engineering scope authority; no new machinery or scientific code is commissioned by preparation."
+    },
+    {
+      "path": "docs/project/MARL_RUNTIME_ENGINEERING_SPEC.md",
+      "purpose": "Adopt general §§1–3,6–8 only: complete logical invocation, separate study elapsed/wall/CPU, dominant work and proportionate verification. VNFC-specific appendix is inapplicable.",
+      "commit_sha": "0d3c0a7aae861f0600acebe35a841d8c0865b5a5",
+      "provenance": "Current cost semantics; known complete-chain timings are points, not validation-run estimates or a new budget."
+    },
+    {
+      "path": ".codex/hmasd-compute.toml",
+      "purpose": "Current remote_first route and configured node/interpreter facts only; prospective CPU FP32/thread1 boundary is preserved by the cards.",
+      "commit_sha": "0d3c0a7aae861f0600acebe35a841d8c0865b5a5",
+      "provenance": "Runtime routing facts, no new accepted invocation or telemetry demand."
+    },
+    {
+      "path": "docs/project/GITHUB_RESEARCH_COLLABORATION.md",
+      "purpose": "Adopt Task and delivery scope, Normal sequence and applicable partial-success rows: scoped response on current descendant branch HEAD, immutable task/evidence inputs and readback before final receipt.",
+      "commit_sha": "0d3c0a7aae861f0600acebe35a841d8c0865b5a5",
+      "provenance": "Current delivery authority; no source/main/PR/direction-state writes and no accepted-request rewrite."
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "purpose": "Only §§2–4,6: partial observation/history, joint information/learning, finite training versus representational claims and independent empirical units.",
+      "commit_sha": "0d3c0a7aae861f0600acebe35a841d8c0865b5a5",
+      "provenance": "Explanatory knowledge, not a decision authority or universal gate. Do not follow unlisted citations."
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "purpose": "Sections on comparison targets, randomness hierarchy, package versus mechanism attribution, return/cost and claim-calibrated evidence.",
+      "commit_sha": "0d3c0a7aae861f0600acebe35a841d8c0865b5a5",
+      "provenance": "Explains why current final means, training totals, fitting-seed variation and causal claims remain distinct; no fixed seed quota."
+    }
+  ],
+  "constraints": [
+    "FOLR_TIMING_FAMILY_CONSULTATION: new_scientific_invocations=0; models=0; native_steps=0; training_episodes=0; evaluation_episodes=0; optimizer_steps=0; replay=0; diagnostics=0; source_changes=0; new_cards=0; parameter_displacement=not applicable (no learner).",
+    "The original Convergence conversation must be reused. Prior P78 accepted request and response are historical immutable evidence, not a request to resend or change them.",
+    "No new scientific source/card/run is authorized by this preparation. The response is scoped decision prose only; Root dispatches and the same DM intakes it.",
+    "The current preparation needs no Engineering Scope Spec§4 machinery. Proposed future exposure/cost are unallocated scales, not grants of a run or an added validation requirement.",
+    "Keep the input evidence at its declared immutable versions. Add only the specified new RESPONSE.md on the current descendant HEAD of codex/vap-folr, preserving all other files. No main, code, PR or direction/Portfolio-state edits."
+  ],
+  "response_schema": [
+    "Concluded direction choice and its limited scientific reason, including the strongest contrary case.",
+    "Preserved evidence/MEI/headroom/uncertainty, actual independent unit, and complete cost scopes.",
+    "If another B is selected, one concrete next question with proportionate comparison/work and no unasked stronger-class or diagnostic prerequisite; otherwise the smallest pause unit and useful class-correct re-entry condition.",
+    "Concrete unresolved conflict/access gap if it prevents a decision; no invented facts or provisional direction selection."
+  ],
+  "github_delivery": {
+    "branch": "codex/vap-folr",
+    "base_sha": "867f0c9145af12e459494e58350927569883179e",
+    "response_path": "docs/research/candidates/vap_folr_core/pro_packets/20260910_timing_family_convergence/archive/RESPONSE.md",
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/15"
+  }
+}

@@ -24,7 +24,7 @@
     }
   ],
   "recommended": "a",
-  "auto_applied": null,
+  "auto_applied": "a",
   "dm_reason": "实际拟合法和成本已有限绑定；一个新训练实例能直接减少旧底座选择限制，同时保留条件性与成本未知。投资最终由Portfolio Pro决定。",
   "evidence": [
     "docs/research/portfolio/pro_packets/20260910_acvc_fresh_dense_allocation/SCIENCE_BRIEF.md",
@@ -83,5 +83,17 @@
     "verdict_text": "The designated DM recommends A below; no Portfolio option has been selected locally, no implementation is allocated, and no scientific or provider invocation has occurred in this consultation.",
     "source": "docs/research/portfolio/pro_packets/20260910_acvc_fresh_dense_allocation/SCIENCE_BRIEF.md"
   },
-  "starred": true
+  "starred": true,
+  "approval_correction": "原提案的无分配状态保留为历史；实际裁决与中文说明见pro_packets/20260910_acvc_fresh_dense_allocation/DECISION_OWNER_PACKET.json。本次选择审计行以决策文档为准，Root集成时映射实际行号。完整科学答复与470字节聊天回执分开记录；旧Send时间已纠正为未知，不补发。",
+  "execution_history": [
+    {
+      "at": "2026-09-10T17:59:40+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "https://github.com/CartmanFatass/My-paper-code/blob/caf8cf61d92fb3a669f93439a0e2b9967eca943c/docs/research/portfolio/pro_packets/20260910_acvc_fresh_dense_allocation/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/decisions/2026-09-10-acvc-fresh-dense-allocation.md",
+      "state": "applied",
+      "summary": "完整Pro答复已读；DM未发现科学或规范冲突，Root已接受合规结论。应用A为一次完整工程与运行任务：330秒整段加累计30秒支持、总360秒。实现、独立审查、运行及结果尚未接受；主人未被要求再次批准。",
+      "correction": "原提案的无分配状态保留为历史；实际裁决与中文说明见pro_packets/20260910_acvc_fresh_dense_allocation/DECISION_OWNER_PACKET.json。本次选择审计行以决策文档为准，Root集成时映射实际行号。完整科学答复与470字节聊天回执分开记录；旧Send时间已纠正为未知，不补发。"
+    }
+  ]
 }

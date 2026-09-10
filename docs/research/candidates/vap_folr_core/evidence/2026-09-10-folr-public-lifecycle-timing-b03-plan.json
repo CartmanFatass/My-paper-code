@@ -1,0 +1,67 @@
+{
+  "object": "FOLR-PUBLIC-LIFECYCLE-TIMING-B03",
+  "class": "B/EXPLORE",
+  "question": "Useful event-clearing final native benefit over retention in one new independent matched fitting instance.",
+  "selection": "two-arm narrowing within accepted mechanism after TIMING-B02; RANDOM historical outcomes retained but no new RANDOM fit",
+  "source_reuse": "scripts/run_folr_public_lifecycle_b01.py and its current scientific modules/tests byte-identical to6a8eacdad072c37d477aca95a9c871aba68cee78",
+  "generation_method": "Python AST reads accepted runner range literals; remaining loop factors from accepted card and source; no target imports or scientific invocation",
+  "training_seed": 7806,
+  "evaluation_seed": 107806,
+  "arms": [
+    "RETAIN",
+    "EVENT"
+  ],
+  "per_arm": {
+    "training_episodes": 5000,
+    "training_ticks": 100000,
+    "optimizer_steps": 4969,
+    "learning_rate": 0.0005,
+    "nominal_lr_times_steps": 2.4845,
+    "evaluation_episodes": 128,
+    "evaluation_ticks": 2560,
+    "total_native_ticks": 102560,
+    "exposure_line": "100000 real native training ticks; 4969 actor/mixer RMSprop steps at lr=0.0005; 128 final non-learning greedy episodes"
+  },
+  "total": {
+    "training_episodes": 10000,
+    "training_ticks": 200000,
+    "optimizer_steps": 9938,
+    "evaluation_episodes": 256,
+    "evaluation_ticks": 5120,
+    "total_native_ticks": 205120
+  },
+  "dominant_work": {
+    "replay_actor_rows_expression": "2 arms *4969 updates *32 episodes *21 positions *5 slots *2 online/target passes",
+    "replay_actor_rows": 66783360,
+    "acting_actor_rows_expression": "2 arms *(5000+128) episodes *21 positions *5 slots",
+    "acting_actor_rows": 1076880,
+    "plus": "backpropagation and mixing; no nested candidate search, extra simulator, dose calibration or timing pilot",
+    "random_private_draws": 0
+  },
+  "projection": {
+    "RETAIN": {
+      "work_ratio_to_completed_B02": 1,
+      "previous_complete_chain_wall_seconds": 832.49,
+      "projected_complete_chain_wall_seconds": 832.49,
+      "per_arm_wall_cap_seconds": 1800
+    },
+    "EVENT": {
+      "work_ratio_to_completed_B02": 1,
+      "previous_complete_chain_wall_seconds": 769.66,
+      "projected_complete_chain_wall_seconds": 769.66,
+      "per_arm_wall_cap_seconds": 1800
+    }
+  },
+  "caps": {
+    "accepted_invocations": 2,
+    "per_complete_arm_seconds": 1800,
+    "summed_pair_scientific_seconds": 3600,
+    "support_seconds": 300,
+    "directory_tests_cumulative_seconds_already_used": 25.9131638,
+    "directory_test_cap_seconds": 300
+  },
+  "stop": "RETAIN then EVENT, both preselected; failure stops dependent sequence; no scientific retry/replacement/evaluation top-up inside this object. A later object needs a fresh recorded selection under current authority.",
+  "claim_ceiling": "one fresh fitting-instance EVENT-versus-RETAIN package contrast; no event-specific advantage over random clearing, causal timing, stable population, equivalence or transfer claim",
+  "projection_sum_seconds": 1602.15,
+  "omitted_random_point_cost_seconds": 821.64
+}

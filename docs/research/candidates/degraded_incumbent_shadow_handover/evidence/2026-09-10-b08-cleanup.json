@@ -1,0 +1,19 @@
+{
+  "target": "/home/wu/hmasd-worktrees/dish-b08-db2480c2",
+  "remove_exit": 0,
+  "remove_stdout": "",
+  "remove_stderr": "",
+  "disk_absent": true,
+  "registration_absent": true,
+  "preserved_unique_file_count": 8,
+  "source_sha": "a01522a6f6cf12e5549b3e03596ce58642b68cf1",
+  "retained_supervisor_receipt_root": "/home/wu/.agent-tasks/dish-b08-s137-a01522a6-20260910",
+  "local_verified_archive": "C:\\Projects\\HMASD-worktrees\\dm-dish-b06-scientific-intake-20260907\\temp\\directions\\degraded_incumbent_shadow_handover\\exp\\b08_s137_a01522a6_collected\\complete_evidence.tar.gz",
+  "archive_sha256": "abb98590a104842175ae43e8062020ffc336c5f9e765cccb4e334999ce56655e",
+  "published_source_ancestor_of_upstream": true,
+  "authority": "Root terminal collection assignment and explicit proceed-with-bounded-intake-and-closeout continuation, 2026-09-10",
+  "primary_control_preserved_archive": "C:\\Projects\\HMASD\\temp\\directions\\degraded_incumbent_shadow_handover\\exp\\b08_s137_a01522a6_collected\\complete_evidence.tar.gz",
+  "primary_control_archive_sha256": "abb98590a104842175ae43e8062020ffc336c5f9e765cccb4e334999ce56655e",
+  "shared_authoring_checkout_retained": "C:/Projects/HMASD-worktrees/dm-dish-b06-scientific-intake-20260907",
+  "retention_owner_event": "Root integrates the result and accepts archive retention/reclamation; shared direction authoring checkout remains the designated reusable checkout."
+}

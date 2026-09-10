@@ -1,5 +1,12 @@
 # VSP03 B07 — technical acceptance and result evidence
 
+**Complete and accepted:** one fresh fit10804, primary512 greedy−R0
++0.0115673828125, paired Q−0.0016064453125;73728 episodes and512 Adam steps.
+Complete wall8.927880s under the60s cap. Full scientific interpretation and
+prediction scores are in [B07 intake](VSP03_B07_INTAKE_20260910.md). The following
+pre-execution and launch sections preserve their original publication boundaries;
+the completed result below supersedes their pending status.
+
 ## Pre-execution boundary
 
 The [B07 card](VSP03_B07_CONTINUOUS512_SCIENCE_CARD_20260910.md) is frozen and
@@ -128,3 +135,133 @@ raw return. `MONITOR_ADD` was sent directly to live configured Monitor
 Adoption is pending at this publication. Monitor reports adoption/terminal to
 Root, who forwards collection to the original DM. DM has no parallel remote
 status loop. No retry, second fit, fallback or successor was started.
+
+## Completed result and technical acceptance
+
+Root forwarded Monitor adoption/terminal observed2026-09-10T16:56:07.3329491Z:
+finished, exit0, tmuxfalse, PID3086929. DM then collected the actual bytes once;
+no new scientific invocation, model, world, optimizer or evaluation was made.
+The exact frozen source and execution cwd match the launch record. New summary
+identity/instance are B07 /10804 /Torch50804; raw B04 adapter provenance was
+predeclared and retained. The one continuous model/Adam finished512 updates.
+
+[Collection](VSP03_B07_COLLECTION_20260910.json) retains summary, admission,
+controller/payload, raw journal, Monitor evidence and readback. The raw archive
+[VSP03_B07_ARTIFACTS_20260910.tar.gz](VSP03_B07_ARTIFACTS_20260910.tar.gz)
+has219454 bytes, SHA256
+`0cd6a91504065af646cf1e7d036aa31ff64e3b5a168f179120e7c4b4db677741`.
+All20 scientific file hashes/sizes match the remote originals. It includes
+all native outputs, two snapshots,512 curve rows, adjacent admission/terminal/
+payload receipts and six supervisor files. No scientific evidence is discarded.
+
+Readback verified8192 rows' native integer utility and opportunity accounting,
+four absolute means and all five contrasts at each fixed endpoint, common world/
+phase alignment, exact R0/R panel identity, and the1024 actual dependent Q rows.
+All512 curve updates and entropy coefficients are intact; gradient and total
+decision counts reconcile with the native panels. Exactly128/512 snapshot files
+exist with the recorded successful immediate readback. No checkpoint was loaded
+into a model for collection. The float64 recomputation tolerance is1e-9 absolute,
+well below a single1/(400*1024) native mean quantum. Analysis tools establish
+these arithmetic facts; they do not choose the scientific interpretation.
+
+| Quantity | Accepted direct observation |
+| --- | ---: |
+| Models / backward calls / Adam steps |1 /512 /512|
+| Training / evaluation / total episodes |65536 /8192 /73728|
+| Team ticks / target transitions |2949120 /5898240|
+| Gradient rows / all decision rows |377648 /431296|
+| Rollout model calls |8716, below8772 bound excluding objective/critic/backward|
+| D128 greedy−R0 |+0.013173828125|
+| Primary D512 greedy−R0 |+0.0115673828125|
+| D512 greedy−R |+0.013076171875|
+| Paired Q / conditional SD / SE |−0.0016064453125 /0.05288252531171355 /0.0016525789159910485|
+| D512 stochastic−R0 /−R /−greedy |+0.011767578125 /+0.0132763671875 /+0.0002001953125|
+| Complete wall / study invocation elapsed |8.927880s /8.927880s|
+| Unit-reported aggregate CPU |9.244309s|
+| Learner peak RSS |493867008 bytes|
+
+Primary conditional world SD/SE are0.09613782948786226 /0.0030043071714956956.
+One independent training unit is retained; no across-fit SD or B06 pooling.
+The intact fixed512 primary and Q are both available. The frozen rule above
+selects endpoint support without positive greedy continuation improvement.
+That bounded scientific reading is separate from this technical acceptance.
+Full modes, native components, curves and prediction scores are in
+[intake](VSP03_B07_INTAKE_20260910.md) and
+[analysis](VSP03_B07_DM_ANALYSIS_20260910.json).
+
+The complete wall is journal Finished monotonic517789.808114 minus earliest
+manager517780.880234. It includes fresh actual-node admission, imports,
+initialization, learning, all panels/snapshots/publication/readback, exit and
+descendant termination; no slice reset occurs. Unit CPU uses raw9244309000ns,
+not the rounded CLI display. Study elapsed equals complete invocation wall for
+this one-fit study and excludes authoring/collection/support, which are not
+measured. Work50/cleanup58/kill59 boundaries and60s cap remain respected.
+
+Fresh physical/effective available memory was15183974400 bytes, above4GiB.
+Cgroup headroom/current/max are missing and marked `resources_unmeasured`;
+no failed instrumentation limits the primary. The outer8785920-byte memory
+peak is distinct from learner RSS. Controller/payload/supervisor exited0,
+with no timeout/error/remaining descendants. The raw killed/reaped lists
+remain normal containment observations; no statement erases their presence.
+All actual training/evaluation and gradient counts are nonzero. Scope §5 has
+no known breach; no unrequested §4 machinery was added. Test accounting remains
+the pre-execution cumulative63.4287585s documented subtotal plus earlier partly
+untimed short commands, without a new allowance or scientific validation run.
+
+## Scoped closeout inventory
+
+DM owns remote source cwd
+`/home/wu/hmasd-worktrees/vsp03-b07-adcff0a92559ac5552e24a9861e2b65572b478c5`,
+supervisor directory `/home/wu/.agent-tasks/vsp03-b07-10804-20260910`, and
+private socket directory
+`/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b07_10804_20260910_terminal.tmux`.
+No scientific execution remains. Root confirms integration/retention and accepts
+scoped reclamation after preserving unique source/evidence. Preserve the actual
+scientific output root and all three adjacent receipts, with committed source
+and the raw artifact archive. Do not delete scientific roots or another task's
+files. Source/disk/registration/process absence checks will be recorded at
+closeout; this inventory does not falsely claim deletion has already occurred.
+
+The source checkout has no tracked or untracked changes except six ignored
+generated pyc files. All eleven source files match the frozen Git bytes. The
+complete seventeen-file sparse source contents, including those generated files,
+are preserved in `VSP03_B07_EXECUTION_SOURCE_20260910.tar.gz` (42506 bytes,
+SHA256 `ca11417e981aed9314af54e751dacd441210813fe8897636375e592dcd9e8f6d`).
+Collection records its member digests and confirms all six supervisor files in
+the scientific archive match their remote originals. The initial broad process
+query matched only its own read-only Python command; it is not evidence of an
+extra scientific process. Fresh exact target checks precede reclamation.
+
+The shared local authoring checkout remains in use through Root integration;
+Root owns its later reuse/reclamation decision. DM's new policy-blocked local
+scratch and the two older CM-owned B06 scratch directories are excluded from
+remote reclamation. No bypass or repeated rejected local removal is authorized.
+
+## Completed scoped remote closeout
+
+At2026-09-10T17:21:35.216252Z DM completed the named remote reclamation.
+The detached source cwd is absent on disk and absent from `git worktree list`;
+the one supervisor wrapper directory and private socket directory are absent.
+Fresh checks found no target process before removal. All20 original scientific
+files and adjacent receipts retain their recorded hashes. Scientific output
+root and receipts remain on the node, with both pushed recovery archives at
+`1067e2025a49df639feae2ad51babb75e7b03d7b`.
+
+An earlier cleanup SSH command timed out after50s while its own Git fetch
+remained running; it had not reached removal. A first combined reconciliation
+returned no JSON, so DM read exact paths/processes directly: all three targets
+were still present and the cleanup Python/Git fetch were live. DM terminated
+only that verified orphaned cleanup process and its three Git descendants by
+PID/start identity; no same processes remained. The separate permitted cleanup
+then used the already byte-verified, pushed local Git archives, without
+repeating the fetch. It removed only the declared targets. This repaired a
+post-result transport/cleanup issue, with no new scientific invocation or
+change to results, budgets, resource admission or frozen reading.
+
+Collection retains the timeout, reconciliation, exact termination identities,
+successful commands, path/registration absence and preserved-byte checks. The
+remote companion is `b07_10804_20260910_closeout.json` beside the retained root.
+Root accepts final integration/retention and this reclamation receipt. The
+shared local authoring checkout remains through that integration boundary.
+The separate policy-blocked local scratch directories remain excluded and
+unchanged; no retry or bypass of their rejected deletion occurred.

@@ -71,5 +71,23 @@
     "verdict_text": "Recommend and select **(a)**.",
     "source": "docs/research/candidates/vsp_03/VSP03_B07_CONTINUOUS512_SCIENCE_CARD_20260910.md"
   },
-  "starred": false
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-10T17:10:04+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260910_next_five_chains/archive/RESPONSE.md at 08e989073839fe5f0f91c6a8ad90a399bee37b6c",
+      "record": "docs/research/candidates/vsp_03/VSP03_B07_INTAKE_20260910.md",
+      "state": "applied",
+      "summary": "B07单次训练已完成并接收：D512为+0.0115673828125，paired Q为-0.0016064453125；主预测符合、Q预测未符合。保留全部成本与随机执行恢复。无追加训练或方向处置，正在按范围收尾。"
+    },
+    {
+      "at": "2026-09-10T17:24:25+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260910_next_five_chains/archive/RESPONSE.md at 08e989073839fe5f0f91c6a8ad90a399bee37b6c",
+      "record": "docs/research/candidates/vsp_03/VSP03_B07_RESULT_EVIDENCE_20260910.md#completed-scoped-remote-closeout",
+      "state": "applied",
+      "summary": "本次训练与科学入库已完成，无追加分配。远端执行checkout、wrapper和私有socket已移除并核对未注册；20份原始科学文件与回执未改，恢复归档已推送。之前cleanup连接超时已查清并完成收尾；本地测试scratch的blocked by policy拒绝单独保留。"
+    }
+  ]
 }

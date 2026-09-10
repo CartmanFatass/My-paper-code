@@ -1,0 +1,24 @@
+{
+  "source_sha": "a01522a6f6cf12e5549b3e03596ce58642b68cf1",
+  "command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "/home/wu/hmasd-worktrees/dish-b08-db2480c2/temp/directions/degraded_incumbent_shadow_handover/test/b08-a01522a6",
+    "tests/experiments/candidates/degraded_incumbent_shadow_handover/arrival_bridge_retention_b08/test_bridge.py",
+    "tests/experiments/candidates/degraded_incumbent_shadow_handover/own_command_mean_b07/test_own_command_mean.py::test_native_terminal_and_first_post_step_tick_with_intercepted_native"
+  ],
+  "scientific_invocations": 0,
+  "native_calls": 0,
+  "synthetic_only": true,
+  "exit_code": 1,
+  "stdout": "......F.....                                                             [100%]\n=================================== FAILURES ===================================\n_______________ test_final_only_pair_counts_mode_and_publication _______________\n\nmonkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x768a27697550>\ntmp_path_factory = TempPathFactory(_given_basetemp=PosixPath('/home/wu/hmasd-worktrees/dish-b08-db2480c2/temp/directions/degraded_incumbent_shadow_handover/test/b08-a01522a6'), _trace=<pluggy._tracing.TagTracerSub object at 0x768af632d750>, _basetemp=None)\n\n    def test_final_only_pair_counts_mode_and_publication(monkeypatch,tmp_path_factory):\n>       out = tmp_path_factory.mktemp(\"pair\")\n\ntests/experiments/candidates/degraded_incumbent_shadow_handover/arrival_bridge_retention_b08/test_bridge.py:143: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n../../.venvs/hmasd/lib/python3.10/site-packages/_pytest/tmpdir.py:93: in mktemp\n    basename = self._ensure_relative_to_basetemp(basename)\n../../.venvs/hmasd/lib/python3.10/site-packages/_pytest/tmpdir.py:74: in _ensure_relative_to_basetemp\n    if (self.getbasetemp() / basename).resolve().parent != self.getbasetemp():\n../../.venvs/hmasd/lib/python3.10/site-packages/_pytest/tmpdir.py:111: in getbasetemp\n    basetemp.mkdir(mode=0o700)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = PosixPath('/home/wu/hmasd-worktrees/dish-b08-db2480c2/temp/directions/degraded_incumbent_shadow_handover/test/b08-a01522a6')\nmode = 448, parents = False, exist_ok = False\n\n    def mkdir(self, mode=0o777, parents=False, exist_ok=False):\n        \"\"\"\n        Create a new directory at this given path.\n        \"\"\"\n        try:\n>           self._accessor.mkdir(self, mode)\nE           FileNotFoundError: [Errno 2] No such file or directory: '/home/wu/hmasd-worktrees/dish-b08-db2480c2/temp/directions/degraded_incumbent_shadow_handover/test/b08-a01522a6'\n\n../../.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/pathlib.py:1175: FileNotFoundError\n=============================== warnings summary ===============================\n../../.venvs/hmasd/lib/python3.10/site-packages/_pytest/config/__init__.py:1249\n  /home/wu/.venvs/hmasd/lib/python3.10/site-packages/_pytest/config/__init__.py:1249: PytestConfigWarning: Unknown config option: cache_dir\n  \n    self._warn_or_fail_if_strict(f\"Unknown config option: {key}\\n\")\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ============================\nFAILED tests/experiments/candidates/degraded_incumbent_shadow_handover/arrival_bridge_retention_b08/test_bridge.py::test_final_only_pair_counts_mode_and_publication\n1 failed, 11 passed, 1 warning in 4.31s\n",
+  "stderr": "",
+  "test_command_wall_seconds": 4.7093243130948395,
+  "scratch_absent": true,
+  "complete_ssh_test_wall_seconds": 5.132161400018958
+}

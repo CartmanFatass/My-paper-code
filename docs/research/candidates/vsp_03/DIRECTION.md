@@ -62,6 +62,22 @@ beat both rules, with G−R0 mean +0.016730143229166668 and sample SD
 remain the independent units; neither the modest mean nor positive signs establish
 stable superiority, undertraining or convergence. No successor is allocated.
 
+The selected Portfolio follow-up B07 is now complete as one separate fresh fit.
+Its final greedy G−R0 is+0.0115673828125 and G−R is+0.013076171875, but paired
+128→512 Q is−0.0016064453125. The endpoint gain survives while positive greedy
+continuation does not recur in this instance. Stochastic execution recovers
+against both rules; success/attempt/waiting costs remain. The one-unit result
+is not pooled with B06 and supplies no stable superiority or convergence claim.
+The selected one-fit allocation ends here without a successor or family disposition.
+
+The complete post-B07 Convergence decision now pauses only the unchanged
+ordinary-G continuous512 / fixed128-and512-panel / public fixed-N2 shared-slot
+greedy-replacement family. It selects no successor as a reversible close call,
+preserving the positive endpoints, negative B07 Q and stochastic recovery.
+One more unchanged independent fit remains legitimate B evidence if later
+selected; a new use, mechanism or stronger evidence class is not required.
+This family decision adds no recast and does not change Portfolio lifecycle.
+
 ## Current position
 
 The historical bootstrap sentence from `RESEARCH_MAP.md` remains provenance:
@@ -331,17 +347,75 @@ unallocated, not an automatic fourth B06 fit, longer-budget sweep or reopening
 of the old independent128/N1/T pauses. Full scientific intake preserves all
 outcomes and the three-unit claim ceiling.
 
+**Accepted B07 result, 2026-09-10:** the fresh fit10804 retains a small final
+margin over both rules, D512=+0.0115673828125, while D128=+0.013173828125.
+Actual paired Q=−0.0016064453125, conditional world SD0.05288252531171355
+and SE0.0016525789159910485; this is one fit, without a training-population
+uncertainty estimate. The primary0<D512<=.02 forecast matched; the Q>0 forecast
+did not. Final stochastic G exceeds R0 by+0.011767578125 and R by
++0.0132763671875, with a tiny+0.0002001953125 point over greedy. Its128 losses
+remain, and this mode recovery is distinct from negative greedy Q.
+
+Final greedy G gains successes and reduces waiting relative to R0 at the
+price of extra attempts. Along continuation it loses successes and adds
+attempts; less waiting does not offset those costs. Stochastic continuation
+recovers successes and reduces attempts while adding waiting. Neither net
+effect supplies a pure optimization or unique MARL account. The real fit used
+512 Adam calls and73728 episodes in8.927880s complete wall. All curves,
+fixed panels and native accounting are retained. The positive endpoint/negative-Q
+branch supports this sampled controller without showing that continuation
+produced its advantage. MEI stays.02 and tuned current-N2 headroom is absent.
+
+The selected fresh-path discriminator retained the endpoint gain and contradicted
+its positive-Q prediction. This further small gain and the lack of greedy
+continuation benefit favor ending unchanged repetitions under the current
+finite assignment. That intake selected no additional fit, longer update budget
+or concrete new treatment; family disposition remained with the original
+direction node. The following decision now applies that boundary and clarifies
+the future same-configuration option, preserving the historical intake.
+
+**PRO_FINAL, post-B07, 2026-09-10: pause only unchanged ordinary-G continuous512
+with fixed128/512 panels on the public fixed-N2 shared-slot greedy-replacement
+comparison; no successor, recasts: 1.** The complete response at
+`50db79b04bbeb0baf92335dde5502859fc4fc2e9` retains the same target law, two jobs,
+eight-tick slot, 40-tick utility and complete team credit, 14 public features,
+generic2083-parameter actor-critic, original Adam/objective, continuous512×128
+learning, strict logit>0 final512 greedy G−R0 primary and paired-world Q,
+with R and every stochastic/native-component comparison preserved.
+The independent128, N1 and T pauses remain; no wider direction or Portfolio
+disposition, second recast, C promotion or UAV entry follows.
+
+The node slightly prefers ending this unchanged sequence after B07 repeats a
+small positive endpoint while its greedy continuation change turns negative.
+That is a bounded research choice, not a negative primary, readiness victory,
+convergence claim or four-fit stopping rule. The strongest case against pausing
+is the repeated real endpoint gains in both modes, B06's above-MEI point and
+the complete8.380174–8.927880s cost range. Another fit could still change the
+judgment; its expected value has not been estimated as zero. Native sacrifices
+and the separate B06/B07 units retain their original meanings.
+
+A future same-purpose, same-configuration independent fit is a legitimate B
+discriminator of final D512, paired Q, both modes and success/attempt/waiting
+tradeoffs. The earlier wording about a changed decision question does not
+require a new use, algorithm, mechanism, positive sign, above-MEI gain, tuned
+headroom or stable superiority. Such an observation is currently unselected
+and unallocated; changing this particular family pause uses its existing
+direction authority. Ordinary B work elsewhere gains no Pro gate, and no
+direction waits for a batch or sibling result.
+
 The strongest surviving alternative is that public dwell age already suffices and the generic
 MLP matches the prior, or that all advantage is the fixed rule rather than learning. In the new
 host R0, R or ordinary G may handle scheduling, while the local readiness prior could occupy the
 slot too early and harm its partner. The strongest current support is the shared-slot action
 consequence and all three B06 fixed512 gains over both rules with positive paired
-budget changes and stochastic recovery. The earlier P67/seed6 and P76/seed7 gains
+budget changes and stochastic recovery, now joined by B07's small final gains
+but negative greedy Q. The earlier P67/seed6 and P76/seed7 gains
 and seed-4 discovery remain distinct support. B03's loss to both rules remains
 contrary to repeatable ordinary-G replacement at the old128 budget; all three
 old stochastic losses remain adverse. B06's inside-MEI mean, noisy Q, native
 component costs and two final stochastic-versus-greedy losses limit the new
-longer-budget claim. The strongest current contradiction
+longer-budget claim; B07 further shows that a fresh same-budget path can retain
+an endpoint gain while its greedy continuation change is negative. The strongest current contradiction
 to a useful initialization/learned-T gain is T matching R0 across every saved B02 world;
 the stochastic losses and three N1 final T=G=F observations remain contrary evidence with
 their distinct populations and budgets. Waiting price,
@@ -351,8 +425,17 @@ sharing K1 does not pool polarity or reopen that family.
 
 ## Evidence set
 
-The evidence set includes historical observations, the separately recorded selection
-and the completed B06 result:
+The evidence set includes historical observations, the separately recorded selection,
+the completed B06 and separate B07 results, and the post-B07 family decision:
+
+- `docs/research/candidates/vsp_03/VSP03_POST_B07_CONVERGENCE_INTAKE_20260910.md`
+- `docs/research/candidates/vsp_03/pro_packets/20260910_post_b07_convergence/archive/RESPONSE.md` at `50db79b04bbeb0baf92335dde5502859fc4fc2e9`
+- `docs/research/candidates/vsp_03/VSP03_B07_INTAKE_20260910.md`
+- `docs/research/candidates/vsp_03/VSP03_B07_RESULT_EVIDENCE_20260910.md`
+- `docs/research/candidates/vsp_03/VSP03_B07_DM_ANALYSIS_20260910.json`
+- `docs/research/candidates/vsp_03/VSP03_B07_COLLECTION_20260910.json`
+- `docs/research/candidates/vsp_03/VSP03_B07_CURVES_20260910.png`
+- `docs/research/candidates/vsp_03/VSP03_B07_CONTINUOUS512_SCIENCE_CARD_20260910.md`
 
 - `docs/research/candidates/vsp_03/VSP03_B06_INTAKE_20260909.md`
 - `docs/research/candidates/vsp_03/VSP03_B06_RESULT_EVIDENCE_20260909.md`

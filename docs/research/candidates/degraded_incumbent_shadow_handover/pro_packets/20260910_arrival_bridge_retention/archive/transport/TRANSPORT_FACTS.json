@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "request_id": "2026-09-10-dish-arrival-bridge-retention-convergence-01",
+  "workflow_node": "em_convergence",
+  "conversation_binding_key": "em:degraded_incumbent_shadow_handover:convergence",
+  "direction_id": "degraded_incumbent_shadow_handover",
+  "direction_ids": [
+    "degraded_incumbent_shadow_handover"
+  ],
+  "decision_authority": "pro_final",
+  "conversation_id": "6a9bec54-df00-83e8-9840-46440458f316",
+  "provider_url": "https://chatgpt.com/c/6a9bec54-df00-83e8-9840-46440458f316",
+  "tab_id": "9",
+  "tab_lifecycle": "OPEN",
+  "user_message_id": "8ccb099e-c928-4f69-999d-e1656c83cad4",
+  "assistant_message_id": "9435244d-8061-4b08-9bc1-e20f3e7cb54b",
+  "visible_model": "6 Pro",
+  "underlying_model": "Latest",
+  "thinking_effort": "Pro, 5 of 5.",
+  "source_mode": "paste",
+  "prompt_sha256": "6f31d73befda12459626f038f448ae9d49d4c7d7a96bfe2c686c593cdc992226",
+  "response_sha256": "412eb28c076c6b7ed8a2246aee390ac83d7c9902ae6fe56d15acb1ad34f8e6bc",
+  "response_bytes": 362,
+  "response_characters": 361,
+  "send_click_count": 1,
+  "send_evidence": {
+    "send_click_count": 1,
+    "send_attempted": true,
+    "url_observed": true,
+    "user_node_observed": true,
+    "user_node_exact": true,
+    "paste_mode": true,
+    "prompt_sha256": "6f31d73befda12459626f038f448ae9d49d4c7d7a96bfe2c686c593cdc992226",
+    "user_message_id": "8ccb099e-c928-4f69-999d-e1656c83cad4",
+    "provider_url_observed": "https://chatgpt.com/c/6a9bec54-df00-83e8-9840-46440458f316",
+    "binding_match": true
+  },
+  "wait_status": "NATURAL_COMPLETION",
+  "observed_page_state": "Thought for 12m 51s; complete response links present; no active generation control",
+  "capture_method": "Current-round scoped Copy response control via CUA clipboard.readText",
+  "identity_validation": "PASS",
+  "identity_expected": {
+    "conversation_id": "6a9bec54-df00-83e8-9840-46440458f316",
+    "user_message_id": "8ccb099e-c928-4f69-999d-e1656c83cad4",
+    "assistant_message_id": "9435244d-8061-4b08-9bc1-e20f3e7cb54b"
+  },
+  "identity_observed": {
+    "conversation_id": "6a9bec54-df00-83e8-9840-46440458f316",
+    "user_message_id": "8ccb099e-c928-4f69-999d-e1656c83cad4",
+    "assistant_message_id": "9435244d-8061-4b08-9bc1-e20f3e7cb54b"
+  },
+  "archive_status": "ARCHIVED",
+  "archive_paths": {
+    "manifest_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\degraded_incumbent_shadow_handover\\20260910_dish_arrival\\PACKET_MANIFEST.json",
+    "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\degraded_incumbent_shadow_handover\\20260910_dish_arrival\\PROMPT_BODY.md",
+    "response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\degraded_incumbent_shadow_handover\\20260910_dish_arrival\\RESPONSE.md",
+    "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\degraded_incumbent_shadow_handover\\20260910_dish_arrival\\TRANSPORT_FACTS.json",
+    "response_sha256": "412eb28c076c6b7ed8a2246aee390ac83d7c9902ae6fe56d15acb1ad34f8e6bc"
+  },
+  "captured_at": "2026-09-10T20:46:56Z",
+  "archived_at": "2026-09-10T20:46:56Z",
+  "scientific_decision_formed": false
+}

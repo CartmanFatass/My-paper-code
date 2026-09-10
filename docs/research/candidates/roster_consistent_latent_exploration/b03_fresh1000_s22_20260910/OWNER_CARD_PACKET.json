@@ -1,0 +1,38 @@
+{
+  "question": "保留已自动选择的下一步：以新配对种子22重复同一1000次更新比较，检验种子21的大幅服务改善是否再现。",
+  "changes_if_approved": [
+    {
+      "target": "RCLE B03 fresh1000 seed22 科学卡",
+      "from": "种子21已完成，只有一个1000次训练对；同预算新种子是建议",
+      "to": "按既有对象层授权选择种子22；两臂各1000次更新，四套面板，完整预算1500秒"
+    }
+  ],
+  "if_refused": "在下一个安全边界执行所有者异步修订，保留已发生的所有结果；不自动换种子或重跑。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B03_FRESH1000_S22_SCIENCE_CARD_20260910.md",
+      "quote": "S21 remains **one** training pair: Delta_U +.3791442871 and W100 initialization gain\n+.38115234375; all eight U/Y/F cell means favored W100.",
+      "why": "已有真实环境中的较大改善；新训练对能区分这种改善是否只出现在一个种子。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B03_FRESH1000_S22_SCIENCE_CARD_20260910.md",
+      "quote": "Reference primary U remained\n.0419108073 lower than W100 and 2035/2048 W100 recovery scores were failure-coded 40.",
+      "why": "恢复仍差、参考策略仍更好；重复正值也不能支持广泛能力或稳定优势。"
+    }
+  ],
+  "uncertainty": [
+    "这次选择受种子21结果启发；若完成，同终点只有两个训练对，旧200次结果不能并入。",
+    "完整归一化学习规律的比较不能定位单个网络部件的因果作用。",
+    "历史signal11及未知失败前缀仍保留；成功不会追认旧失败，失败不会自动成为负面科学结果。"
+  ],
+  "cost": {
+    "compute": "136192回合、8716288原始tick、2000次反向更新；W1/W100/reference上限600/600/30秒；完整支持同计1500秒，已有同形运行预测746.89秒。",
+    "owner_time": "可异步审阅，无需逐项批准。",
+    "reversibility": "costly",
+    "waits_on_this": "nothing；方向独立推进，不等待其他方向"
+  },
+  "verdict_text": "Recommend and select (a), using the next\nunused B03 master **22**.",
+  "source": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B03_FRESH1000_S22_SCIENCE_CARD_20260910.md"
+}

@@ -3,9 +3,9 @@ Binding MARL structure: (d) multi-agent partial observability: each UAV uses its
 
 # ACVC fresh DENSE reuse B01 — science card
 
-Date: 2026-09-10. **B/EXPLORE; scientific design selected; execution unallocated.**
-This is one fresh-fit design, with proposed numerical limits. No source change, test, model,
-training, evaluation, pilot or performance probe belongs to this authoring assignment.
+Date: 2026-09-10. **B/EXPLORE; the sole allocated scientific result is complete.**
+Section8 records the later Portfolio allocation. The original design-stage statements in
+§§1,6–7 below remain historical; §8 supersedes their no-execution boundary prospectively.
 The [design intake](ACVC_FRESH_DENSE_REUSE_B01_DESIGN_INTAKE_20260910.md) records the decision;
 the [prospective facts](ACVC_FRESH_DENSE_REUSE_B01_PROSPECTIVE_FACTS_20260910.json) contain
 tool-computed counts and retained-timing arithmetic. They contain no new empirical outcome.
@@ -268,3 +268,46 @@ extend training. A weak but intact fit continues to all panels within the same c
 optional resource telemetry is recorded as resources_unmeasured; §11.8.7 limits only claims
 dependent on damaged measurement. This authoring assignment stops at published design and
 Root return, with zero numerical work and no local allocation.
+
+## 8. Prospective execution allocation after complete Pro intake
+
+The [Portfolio decision](../../portfolio/decisions/2026-09-10-acvc-fresh-dense-allocation.md)
+records full conformance intake of immutable Pro response
+`caf8cf61d92fb3a669f93439a0e2b9967eca943c`. Option A now allocates exactly this study
+under AGENTS§4.8; Root accepted the conformance and assigned its complete implementation,
+independent review, verification, execution and all-outcome intake to the existing ACVC DM.
+This supersedes only the historical design-only/no-allocation statements above. The
+scientific recipe, data/RNG, final endpoint, comparator set, predictions and reading rule
+remain exactly those selected at28e99edc7. No implementation or process is accepted by Pro.
+
+Allocated limits are **330s whole supervised task**, **30s cumulative runtime support**,
+**360s complete charge**. Admission/startup through actual descendant exit stays inside330s;
+checks and numerical readback share one30s allowance with the existing directory-test limit.
+Unused time cannot enlarge either sublimit. No retry, resumed slice, replacement, extra or
+smaller panel, tuning, retained-base substitute or automatic successor is allocated.
+A weak intact fit still receives all panels; broken dependent output is a technical limit.
+The [execution mapping](../../portfolio/pro_packets/20260910_acvc_fresh_dense_allocation/EXECUTION_MAPPING.md)
+supplies the five engineering facts and current DM/Monitor responsibilities. Scope§4:none.
+
+At application publication, source implementation/independent review/runtime checks/launch
+are pending, and new scientific exposure remains zero. Actual command, published source SHA,
+resource receipt, supervised handle and complete costs belong in the execution/result record.
+
+## 9. Completed observation and accounting boundary
+
+The exact recipe above completed once at source60d42dd739ef125a505772f2b1d698b099b43a16.
+The [E0 result](ACVC_FRESH_DENSE_REUSE_B01_RESULT_EVIDENCE_20260910.md) and
+[scientific intake](ACVC_FRESH_DENSE_REUSE_B01_INTAKE_20260910.md) retain all512 training
+episodes,1024 update records and192 final evaluation rows. F−C +0.1229328560 J and
+F−dwell +0.0877164686 J are UP under the unchanged rule; dwell−C +0.0352163875 J is UP.
+Both prospective predictions are now scored in the intake; the original probabilities
+above remain the pre-output record. Owner prediction was not taken. One fit is not a
+training population, and the old retained fits are not pooled into this fresh result.
+
+The native task's conservative charge is172s and measured DM runtime support8.0564878s.
+Independent Monitor bookkeeping reports a separate retained tool-wall lower bound>44.34s
+with exact aggregate unavailable. Thus full support≤30/complete≤360 conformance is
+unestablished if Monitor observation is included; the intake records this budget/accounting
+deviation without changing the scientific rule or exempting the Monitor surface.
+All raw evidence and the checkpoint are preserved; scoped remote closeout is complete.
+No retry, successor, T/G restart, C promotion, disposition or additional budget follows.

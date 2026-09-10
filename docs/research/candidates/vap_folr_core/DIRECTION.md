@@ -317,3 +317,139 @@ References:
 - `FOLR_PUBLIC_LIFECYCLE_TIMING_B01_RESULT_SUMMARY_20260909.json`
 - `FOLR_PUBLIC_LIFECYCLE_TIMING_B01_INTAKE_20260909.md` §§9–13
 - `evidence/2026-09-09-folr-public-lifecycle-timing-b01-run-analysis.json`
+
+## Accepted public-lifecycle timing B02 science — 2026-09-10
+
+**Conclusion.** A new matched fitting instance at7805/107805 gives RETAIN2.64265625,
+EVENT2.051953125 and RANDOM2.501796875 after equal5000-episode training and128 final
+episodes per arm. EVENT−RETAIN−0.590703125, RANDOM−RETAIN−0.140859375 and EVENT−RANDOM
+−0.44984375 are all inside absolute MEI1; the unchanged rule selects MIXED_OR_REVERSE.
+The low-confidence DM EVENT_CLEAR_ADVANTAGE prediction missed. The preceding timing
+triple's above-MEI event-clearing advantage did not recur in this new instance.
+
+**Bounded claim.** This is one more complete-trained-package comparison, not equivalence,
+stable retention superiority, causal harm, pure event timing or transfer. Two observed
+128-endpoint fitting instances leave uncertainty large; their descriptive mean EVENT−
+RETAIN+1.10703125 does not replace the current rule. The earlier32-episode pairs remain
+separate and unpooled. Same-information tuned headroom is still absent.
+
+**Strongest support and contradiction.** TIMING-B01's real above-MEI EVENT advantage
+over both legal controls remains the strongest local support. TIMING-B02 provides no
+above-MEI gain on any contrast, while the older B03 pair favored retention. Both timing
+triples' cumulative training means favor RETAIN. Current means−4.468676/−5.001920/−5.204832
+for RETAIN/EVENT/RANDOM are reported separately from final returns; no training curve
+was recorded or reconstructed. Conditional final spread remains broad: SD7.965/6.385/6.777.
+
+**Surviving alternative.** Actual train/final reset fractions are18.1317%/18.7074% for
+EVENT and10.0476%/9.4681% for RANDOM. Preset p=.1 remains unmatched in dose. Nonzero
+clearing occurred, but timing, dose, joint reset patterns, data/optimization and partner
+co-adaptation can contribute jointly. Common entity freshness and consistent replay
+masks preserve the intended action/history comparison without isolating its causal path.
+
+**Next discriminator.** Repeatability of useful native benefit over competent retention
+across independent fitting instances remains unresolved. The complete mixed history
+favors reconsidering unchanged-law spending; it does not select another run or close the
+family. A later allocated real-learning comparison could answer that question; exact
+policy search or more rollouts of these checkpoints would not supply new training
+instances. This finite triple is complete without an automatic successor, C promotion
+or direction/Portfolio disposition.
+
+References:
+
+- `FOLR_PUBLIC_LIFECYCLE_TIMING_B02_SCIENCE_CARD_20260910.md`
+- `FOLR_PUBLIC_LIFECYCLE_TIMING_B02_RESULT_EVIDENCE_20260910.md`
+- `FOLR_PUBLIC_LIFECYCLE_TIMING_B02_RESULT_SUMMARY_20260910.json`
+- `FOLR_PUBLIC_LIFECYCLE_TIMING_B02_INTAKE_20260910.md` §§7–12
+- `evidence/2026-09-10-folr-public-lifecycle-timing-b02-run-analysis.json`
+- `evidence/2026-09-10-folr-public-lifecycle-timing-b02-matched-128-analysis.json`
+
+## Accepted public-lifecycle timing B03 science — 2026-09-10
+
+**Conclusion.** A new matched fitting instance at 7806/107806 gives RETAIN 6.893125
+and EVENT 1.44703125 after equal 5000-episode training and 128 fixed final episodes
+per arm. EVENT−RETAIN **−5.44609375** selects the unchanged RETAIN_ABOVE_MEI branch.
+The low-confidence WITHIN_MEI forecast missed. This fresh comparison supplies a
+native counterexample to a useful event-clearing advantage in the observed instance.
+
+**Bounded claim.** This is one complete-trained-package comparison on the explicit
+public-lifecycle Traffic Junction variant. The outcome-informed three-instance
+128-endpoint R/E display has descriptive mean EVENT−RETAIN −1.07734375 and sample
+SD 4.146900581; it does not replace any frozen rule or establish a stable population
+winner. Earlier 32-episode pairs stay separate. Omitting a fresh RANDOM fit was an
+explicit outcome-informed narrowing; its two previous outcomes remain, and this
+pair cannot establish an all-controls or event-exclusive timing claim. Same-information
+tuned headroom remains absent. No equivalence, causal harm, transfer or C claim follows.
+
+**Strongest support and contradiction.** TIMING-B01's EVENT advantage over both legal
+controls remains the strongest local support for clearing: +2.804765625 over RETAIN
+and +1.363671875 over RANDOM. The current −5.44609375 is the strongest contrary
+128-endpoint point, alongside TIMING-B02's within-MEI nonrecurrence and the older
+32-episode retention advantage. All observed outcomes remain visible. Current cumulative
+training means also favor retention (−3.76395 versus −5.073054), but are distinct
+from final greedy returns and do not form a recorded learning curve.
+
+**Surviving alternative.** EVENT actually reset 18.0880%/19.1760% of eligible train/final
+survivor controls, while RETAIN reset none. Common entity freshness, public/local
+information, legal survivor actions and consistent acting/learner histories remain
+matched. The measured loss can involve useful history, optimization/data paths, joint
+resets, partner co-adaptation and evaluation variation. Conditional final-return SDs
+7.820/6.710 do not estimate training-population uncertainty; equal seeds do not pair
+final traffic worlds. Actual clearing exposure and reconstruction conformance do not
+identify the causal explanation.
+
+**Next discriminator.** The mixed history and new native loss favor reconsidering
+unchanged-law spending. A separately selected question could ask whether a defined
+clearing change preserves useful survivor history while improving native return over
+competent retention; a timing-specific claim would also need the relevant reset-law
+comparison. This is unselected direction-local advice. No new run, exact diagnostic,
+recast, family closure, promotion or Portfolio disposition follows from this result.
+
+References:
+
+- `FOLR_PUBLIC_LIFECYCLE_TIMING_B03_SCIENCE_CARD_20260910.md`
+- `FOLR_PUBLIC_LIFECYCLE_TIMING_B03_RESULT_SUMMARY_20260910.json`
+- `FOLR_PUBLIC_LIFECYCLE_TIMING_B03_RESULT_EVIDENCE_20260910.md`
+- `FOLR_PUBLIC_LIFECYCLE_TIMING_B03_INTAKE_20260910.md` §§9–13
+- `evidence/2026-09-10-folr-public-lifecycle-timing-b03-run-analysis.json`
+- `evidence/2026-09-10-folr-public-lifecycle-timing-b03-matched-128-analysis.json`
+
+## Accepted timing-family Convergence — 2026-09-10
+
+**Conclusion.** The complete original-node response at
+`f64b461cd918ecefc7058a6e1e83aaa1b9f96ce6` selects one fixed0.5 before-GRU survivor-state
+attenuation comparison against freshly trained RETAIN. This in-family treatment
+refinement supersedes the DM's unexecuted narrow-pause recommendation. No fourth
+unchanged full-EVENT fit, RANDOM arm, coefficient sweep, true RECAST or Portfolio
+change is selected. Ordinary retention remains the usable generic baseline.
+
+**Bounded claim.** This is a selected B question, not attenuation performance evidence.
+The next pair asks for final native benefit over retention at the same5000-train /
+128-final recipe and absolute MEI1. The altered state path remains common across
+acting and online/target learning; a nonzero incoming-vector dependence neither means
+half the useful information nor identifies memory ancestry. No stable winner,
+equivalence, causal timing, improvement over RANDOM or recovery of the historical
+full-EVENT loss follows. Tuned same-information headroom remains absent.
+
+**Strongest support and contradiction.** TIMING-B01's real gain over both controls
+supports examining one concrete changed rule. B02 nonrecurrence, B03's−5.44609375
+EVENT−RETAIN point, retention's better cumulative training means and the absence of
+any attenuation observation favor caution. The node judged this next question more
+useful than another unchanged sign, as a close call; no positive-result quota follows.
+
+**Surviving alternative.** Attenuation may preserve useful numerical context, change
+optimization/co-adaptation, have no practical effect or cause another native loss.
+Partial observation does not make all old survivor memory obsolete. Existing CAMA/
+Sable and empirical-foundation readings support the comparator and consistent
+reconstruction, not a winning multiplier or uniquely localized cause.
+
+**Next discriminator.** The separately selected HALF-B01 card binds one fresh
+RETAIN/HALF_EVENT fitting instance at7807/107807, with205120 total native ticks /
+9938 RMSprop /256 final episodes and1800s per complete arm. Implementation/acceptance
+and actual invocation remain to occur. Earlier results, stopped families, recast
+counts and Portfolio lifecycle/priority retain their meanings.
+
+References:
+
+- `pro_packets/20260910_timing_family_convergence/archive/RESPONSE.md`
+- `FOLR_PUBLIC_LIFECYCLE_TIMING_FAMILY_CONVERGENCE_INTAKE_20260910.md`
+- `FOLR_PUBLIC_LIFECYCLE_HALF_B01_SCIENCE_CARD_20260910.md`

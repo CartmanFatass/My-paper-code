@@ -20,7 +20,7 @@ def publish(out, summary):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--arm', required=True, choices=['RETAIN', 'EVENT', 'RANDOM'])
+    parser.add_argument('--arm', required=True, choices=['RETAIN', 'EVENT', 'RANDOM', 'HALF_EVENT'])
     parser.add_argument('--seed', type=int, default=7805)
     parser.add_argument('--evaluation-seed', type=int, default=107805)
     parser.add_argument('--launch-sha', required=True)
@@ -31,8 +31,8 @@ def main():
                    launch_sha=args.launch_sha, status='incomplete', training_episodes=0,
                    training_ticks=0, optimizer_steps=0, evaluation_episodes=0,
                    evaluation_ticks=0, evaluation_returns=[], training_return_sum=0.0,
-                   training_events=dict(births=0, departures=0, survivor_opportunities=0, eligible_survivor_opportunities=0, survivor_resets=0),
-                   evaluation_events=dict(births=0, departures=0, survivor_opportunities=0, eligible_survivor_opportunities=0, survivor_resets=0))
+                   training_events=dict(births=0, departures=0, survivor_opportunities=0, eligible_survivor_opportunities=0, survivor_resets=0, survivor_attenuations=0),
+                   evaluation_events=dict(births=0, departures=0, survivor_opportunities=0, eligible_survivor_opportunities=0, survivor_resets=0, survivor_attenuations=0))
 
     def timed_out(signum, frame):
         raise TimeoutError('1800-second complete logical arm cap')

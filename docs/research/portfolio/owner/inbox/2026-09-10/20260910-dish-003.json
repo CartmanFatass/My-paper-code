@@ -1,0 +1,71 @@
+{
+  "id": "20260910-dish-003",
+  "created": "2026-09-10T15:21:07-07:00",
+  "direction": "degraded_incumbent_shadow_handover",
+  "tier": "direction",
+  "kind": "close-call",
+  "title": "DISH B08 后：建议暂停已测试桥保留家族，交同一 Pro 裁决",
+  "context": "B08 一组真实配对最终服务差为 -6.5，四条件 -15/0/-8/-3；平均能耗更低但服务更少，新增四次最终无效提交。固定 HALF_RETAIN 扩展已按卡停止，家族未处置。DM 建议暂停测试家族；Pro 可选一个有具体理由的有限后续。无新预算或本地裁决，完整且符合范围的 Pro 答复按持续委托执行，所有者异步覆盖。",
+  "options": [
+    {
+      "key": "a",
+      "label": "暂停已测试家族，不选后继",
+      "consequence": "仅在完整 Pro 裁决选定并经 DM 检查后暂停测试家族；保留 REPLACE、未解来源问题及 ACTIVE/MEDIUM。"
+    },
+    {
+      "key": "b",
+      "label": "由 Pro 选一个具体有限后续",
+      "consequence": "Pro 须说明具体问题、比较器、观测价值与完整新预算；不继承 B08 额度，不自动续种子或调系数。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": null,
+  "dm_reason": "一组小负结果不证明总体无效，但已购比较没有正向服务信号；新的有限后续必须有具体决策价值。",
+  "evidence": [
+    "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_ARRIVAL_BRIDGE_RETENTION_B08_RESULT_INTAKE_20260910.md",
+    "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260910_post_b08_convergence/SCIENCE_BRIEF.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-10.md#L11",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": {
+    "question": "B08 后是否暂停已测试的到达桥记忆保留家族，或由 Convergence 选定一个有具体理由的有限后续？DM 只建议(a)，尚无方向裁决。",
+    "changes_if_approved": [
+      {
+        "target": "DISH 到达桥记忆保留家族",
+        "from": "固定 HALF_RETAIN 扩展已停止，家族尚未处置",
+        "to": "若 Pro 选(a)，暂停该测试家族且不选后继；DISH 的 ACTIVE/MEDIUM 和来源价值问题不变"
+      }
+    ],
+    "if_refused": "若不采用建议，由同一 Pro 节点明确一个值得投入的有限问题及完整预算；不自动补种子、调系数或重跑 B08。所有者可异步覆盖；不等待逐项批准。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_ARRIVAL_BRIDGE_RETENTION_B08_RESULT_INTAKE_20260910.md",
+        "quote": "The four differences are−15,0,−8,−3; none is positive.",
+        "why": "原生服务没有出现支持固定半保留扩展的正差，且增加四次最终无效提交。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_ARRIVAL_BRIDGE_RETENTION_B08_RESULT_INTAKE_20260910.md",
+        "quote": "The single matched seed137 pair gives−6.5 mean final service ticks,\ninside the±24 effect band.",
+        "why": "损失小且仅一组配对，不能当成总体劣势、等价或全部记忆机制无效；平均能耗也较低。"
+      }
+    ],
+    "uncertainty": [
+      "普通训练和评价 CAS 均为零；来源资格、COPY−RETAIN 和 SHADOW−COPY 仍未估计。",
+      "同信息完整桥可学习保留，旧状态陈旧、有限共同适应及单次波动尚未区分。",
+      "Monitor 观察命令墙钟未测；不能认证完整成本，也不能据此否定独立可信的服务结果。"
+    ],
+    "cost": {
+      "compute": "本次只准备文档和发布：新增学习器、原生调用、优化步及评价均为0。后续预算尚未分配。",
+      "owner_time": "可异步阅读，无需逐项批准",
+      "reversibility": "reversible",
+      "waits_on_this": "仅该方向的家族决定等待同一 Convergence；其他方向独立推进"
+    },
+    "verdict_text": "DM recommendation, not a disposition: park the tested arrival-bridge retention family, retain REPLACE, and select no successor.",
+    "source": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260910_post_b08_convergence/SCIENCE_BRIEF.md"
+  },
+  "starred": true
+}
