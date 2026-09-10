@@ -96,3 +96,45 @@ owner reviews were `[]`; no owner takeover or prediction was inferred.
 
 Next: publish the full source SHA and exact commands, stage the committed source,
 execute the first preselected arm and hand accepted observation to the existing Monitor.
+
+## 5. Published source, transport and exact prepared commands
+
+Accepted source is **c6be208cd514b5d12fb13c7637e2d6376de11eb6**, committed and
+immediately pushed. The existing committed-source bundle route was reused after the
+prior remote GitHub SSL timeout; no new failed GitHub fetch or scientific fallback
+was attempted. Bundle folr-half-b01-c6be208cd.bundle is905410 bytes, SHA-256
+`b89483bfa6ea548d0d5cb4a0e29544ef762b63e8a03770dbafcc489dc30ec820`.
+It carries this full source and requires e58b4b7a67ad31e2b245002d0f47987d755980a7
+and6fb1e1f6d6f726f133e9aab9c9d96758e3b6d36c. Local/remote bundle verification
+passed, raw transfer digest matched, and the exact detached worktree was created at
+`/home/wu/hmasd-worktrees/folr-public-lifecycle-half-b01-c6be208cd` with clean status.
+
+The local bundle remains under
+`temp/directions/vap_folr_core/exp/public_lifecycle_half_b01_control_20260910/`; its
+remote input directory `/home/wu/hmasd-inputs/folr-public-lifecycle-half-b01-20260910`
+joins the later worktree/two-supervisor closeout inventory. All archive members must
+be compared to originals before removal. No scientific output root was created or
+accepted invocation submitted during source staging.
+
+Both commands are frozen before submission. Each source/seed/budget is preselected;
+HALF_EVENT follows a technically valid RETAIN completion regardless of its score.
+
+### RETAIN — prepared, not submitted
+
+Handle `folr-public-lifecycle-half-b01-retain-20260910`.
+
+```sh
+/usr/bin/time -v -o /home/wu/.agent-tasks/folr-public-lifecycle-half-b01-retain-20260910/whole.time /usr/bin/timeout --signal=TERM --kill-after=5s 1800s bash -lc 'cd /home/wu/hmasd-worktrees/folr-public-lifecycle-half-b01-c6be208cd && /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/vap_folr_core/exp/public_lifecycle_half_b01_seed7807_retain_memory.json && /home/wu/.venvs/hmasd/bin/python scripts/run_folr_public_lifecycle_b01.py --arm RETAIN --seed 7807 --evaluation-seed 107807 --launch-sha c6be208cd514b5d12fb13c7637e2d6376de11eb6 --out temp/directions/vap_folr_core/exp/public_lifecycle_half_b01_seed7807_retain'
+```
+
+### HALF_EVENT — prepared, not submitted
+
+Handle `folr-public-lifecycle-half-b01-half-event-20260910`.
+
+```sh
+/usr/bin/time -v -o /home/wu/.agent-tasks/folr-public-lifecycle-half-b01-half-event-20260910/whole.time /usr/bin/timeout --signal=TERM --kill-after=5s 1800s bash -lc 'cd /home/wu/hmasd-worktrees/folr-public-lifecycle-half-b01-c6be208cd && /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/vap_folr_core/exp/public_lifecycle_half_b01_seed7807_half_event_memory.json && /home/wu/.venvs/hmasd/bin/python scripts/run_folr_public_lifecycle_b01.py --arm HALF_EVENT --seed 7807 --evaluation-seed 107807 --launch-sha c6be208cd514b5d12fb13c7637e2d6376de11eb6 --out temp/directions/vap_folr_core/exp/public_lifecycle_half_b01_seed7807_half_event'
+```
+
+Source-route read/transfer/import checks add2.9893583s, taking scoped support to **43.7468483s/300s**. Git bundle construction and publication are administrative. No scientific result or full runtime has yet been observed.
+
+Both exact commands passed `bash -n`; both named supervisor/output roots were absent. The record whitespace check passed. This check took 0.7180000s, making current scoped support **44.4648483s/300s**. No command payload was executed by the syntax check.
