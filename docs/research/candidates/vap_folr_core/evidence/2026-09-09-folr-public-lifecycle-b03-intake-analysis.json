@@ -1,0 +1,247 @@
+{
+  "object": "FOLR-PUBLIC-LIFECYCLE-B03",
+  "analyzed_at": "2026-09-09T21:56:17.993387+00:00",
+  "method": "All declared final returns aggregated once per independent training run, paired only at declared within-seed arm level; standard summarize_runs helper on6endpoint rows. No episode resampling, no common-traffic episode pairing, no new environment/learner/evaluation.",
+  "source_summaries": {
+    "B01": {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_B01_RESULT_SUMMARY_20260909.json",
+      "sha256_local_bytes": "5a608e726032cab571e2b719533ea875eac661b9cbce3375627d734c742b9dd2",
+      "sha256_lf_normalized_bytes": "3270e807fb7b88460e21de5e6fae5596c94ab5b3735a9d0238a3db91a35d74f7"
+    },
+    "B02": {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_B02_RESULT_SUMMARY_20260909.json",
+      "sha256_local_bytes": "e15843540cd7f9d923084cdd104dfa8053812af948f5a283a78a74df2d55b07b",
+      "sha256_lf_normalized_bytes": "aaa112976ad3e07ab6947b78087116ac2f0daa22d7022296f252493fcec00960"
+    },
+    "B03": {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_B03_RESULT_SUMMARY_20260909.json",
+      "sha256_local_bytes": "00d2bb3a46b7876f72efd29355f2f54c5d52455de7d8da23f6987eb5dc033636",
+      "sha256_lf_normalized_bytes": "3e21be6f2506183234dd502ef1a9e6d68f49eae2f55d8c12de3e8d784545f445"
+    }
+  },
+  "objects": {
+    "B01": {
+      "RETAIN": {
+        "training_seed": 7801,
+        "evaluation_seed": 107801,
+        "final_mean": 2.1043749999999997,
+        "conditional_episode_n": 32,
+        "conditional_episode_sample_sd": 6.888062575818188,
+        "conditional_episode_median": 0.6050000000000002,
+        "conditional_episode_min": -11.709999999999997,
+        "conditional_episode_max": 16.31,
+        "conditional_negative_episode_count": 14,
+        "training_mean": -5.044871999999994,
+        "training_counts": {
+          "training_episodes": 5000,
+          "training_ticks": 100000,
+          "optimizer_steps": 4969
+        },
+        "evaluation_native_ticks": 640,
+        "training_events": {
+          "births": 20925,
+          "departures": 7417,
+          "survivor_opportunities": 45511,
+          "survivor_resets": 0
+        },
+        "evaluation_events": {
+          "births": 138,
+          "departures": 40,
+          "survivor_opportunities": 304,
+          "survivor_resets": 0
+        }
+      },
+      "RESET": {
+        "training_seed": 7801,
+        "evaluation_seed": 107801,
+        "final_mean": 4.1065625,
+        "conditional_episode_n": 32,
+        "conditional_episode_sample_sd": 7.996783066666406,
+        "conditional_episode_median": 4.425,
+        "conditional_episode_min": -14.049999999999999,
+        "conditional_episode_max": 18.44,
+        "conditional_negative_episode_count": 8,
+        "training_mean": -5.225858000000012,
+        "training_counts": {
+          "training_episodes": 5000,
+          "training_ticks": 100000,
+          "optimizer_steps": 4969
+        },
+        "evaluation_native_ticks": 640,
+        "training_events": {
+          "births": 21550,
+          "departures": 8584,
+          "survivor_opportunities": 46929,
+          "survivor_resets": 46929
+        },
+        "evaluation_events": {
+          "births": 154,
+          "departures": 80,
+          "survivor_opportunities": 337,
+          "survivor_resets": 337
+        }
+      },
+      "difference": -2.0021875000000002,
+      "reading": "RESET_ABOVE_MEI"
+    },
+    "B02": {
+      "RETAIN": {
+        "training_seed": 7802,
+        "evaluation_seed": 107802,
+        "final_mean": 1.3278124999999996,
+        "conditional_episode_n": 32,
+        "conditional_episode_sample_sd": 5.519984066348556,
+        "conditional_episode_median": -0.26000000000000023,
+        "conditional_episode_min": -8.93,
+        "conditional_episode_max": 11.33,
+        "conditional_negative_episode_count": 17,
+        "training_mean": -4.716158,
+        "training_counts": {
+          "training_episodes": 5000,
+          "training_ticks": 100000,
+          "optimizer_steps": 4969
+        },
+        "evaluation_native_ticks": 640,
+        "training_events": {
+          "births": 21110,
+          "departures": 7855,
+          "survivor_opportunities": 46125,
+          "survivor_resets": 0
+        },
+        "evaluation_events": {
+          "births": 136,
+          "departures": 36,
+          "survivor_opportunities": 292,
+          "survivor_resets": 0
+        }
+      },
+      "RESET": {
+        "training_seed": 7802,
+        "evaluation_seed": 107802,
+        "final_mean": 3.250625,
+        "conditional_episode_n": 32,
+        "conditional_episode_sample_sd": 9.253384712040901,
+        "conditional_episode_median": 3.6649999999999983,
+        "conditional_episode_min": -16.020000000000003,
+        "conditional_episode_max": 24.700000000000003,
+        "conditional_negative_episode_count": 13,
+        "training_mean": -3.7982300000000127,
+        "training_counts": {
+          "training_episodes": 5000,
+          "training_ticks": 100000,
+          "optimizer_steps": 4969
+        },
+        "evaluation_native_ticks": 640,
+        "training_events": {
+          "births": 22474,
+          "departures": 10395,
+          "survivor_opportunities": 50469,
+          "survivor_resets": 50469
+        },
+        "evaluation_events": {
+          "births": 174,
+          "departures": 99,
+          "survivor_opportunities": 389,
+          "survivor_resets": 389
+        }
+      },
+      "difference": -1.9228125000000003,
+      "reading": "RESET_ABOVE_MEI"
+    },
+    "B03": {
+      "RETAIN": {
+        "training_seed": 7803,
+        "evaluation_seed": 107803,
+        "final_mean": 2.8206249999999997,
+        "conditional_episode_n": 32,
+        "conditional_episode_sample_sd": 6.463094703403415,
+        "conditional_episode_median": 2.114999999999999,
+        "conditional_episode_min": -8.339999999999998,
+        "conditional_episode_max": 15.639999999999999,
+        "conditional_negative_episode_count": 12,
+        "training_mean": -4.892247999999988,
+        "training_counts": {
+          "training_episodes": 5000,
+          "training_ticks": 100000,
+          "optimizer_steps": 4969
+        },
+        "evaluation_native_ticks": 640,
+        "training_events": {
+          "births": 21249,
+          "departures": 8205,
+          "survivor_opportunities": 46234,
+          "survivor_resets": 0
+        },
+        "evaluation_events": {
+          "births": 132,
+          "departures": 28,
+          "survivor_opportunities": 321,
+          "survivor_resets": 0
+        }
+      },
+      "RESET": {
+        "training_seed": 7803,
+        "evaluation_seed": 107803,
+        "final_mean": 0.2612499999999996,
+        "conditional_episode_n": 32,
+        "conditional_episode_sample_sd": 5.4071044961474595,
+        "conditional_episode_median": -0.6950000000000003,
+        "conditional_episode_min": -8.3,
+        "conditional_episode_max": 11.540000000000003,
+        "conditional_negative_episode_count": 18,
+        "training_mean": -5.837703999999997,
+        "training_counts": {
+          "training_episodes": 5000,
+          "training_ticks": 100000,
+          "optimizer_steps": 4969
+        },
+        "evaluation_native_ticks": 640,
+        "training_events": {
+          "births": 21151,
+          "departures": 7846,
+          "survivor_opportunities": 45808,
+          "survivor_resets": 45808
+        },
+        "evaluation_events": {
+          "births": 131,
+          "departures": 35,
+          "survivor_opportunities": 290,
+          "survivor_resets": 290
+        }
+      },
+      "difference": 2.559375,
+      "reading": "RETAIN_ABOVE_MEI"
+    }
+  },
+  "descriptive_three_pair_summary": {
+    "n_matched_training_pairs": 3,
+    "differences_retain_minus_reset": [
+      -2.0021875000000002,
+      -1.9228125000000003,
+      2.559375
+    ],
+    "mean_difference": -0.45520833333333344,
+    "sample_sd_difference": 2.6110073923420027,
+    "positive_above_mei_pairs": 1,
+    "negative_above_mei_pairs": 2,
+    "within_mei_pairs": 0,
+    "interpretation": "descriptive observed variation only; not a new object branch, equivalence result, stable population superiority or causal memory attribution"
+  },
+  "b03_prediction": {
+    "fixed_before_output": "RESET_ABOVE_MEI",
+    "observed": "RETAIN_ABOVE_MEI",
+    "score": "miss",
+    "owner_prediction": "not taken (unattended)"
+  },
+  "b03_resources": {
+    "summed_complete_arm_wall_seconds": 1507.7800000000002,
+    "aggregate_cpu_seconds": 1509.69,
+    "study_critical_path_seconds": 1694,
+    "study_critical_path_scope": "first admission21:22:19Z to final exit21:50:33Z, rounded seconds; includes186s between first exit21:34:53Z and next admission21:37:59Z and Monitor/collection sequencing; excludes prior staging and later final collection"
+  },
+  "cm_support_seconds": 5.6860701,
+  "dm_final_result_read_seconds": 0.3113268,
+  "support_seconds_before_this_analysis": 5.9973969,
+  "analysis_internal_prepublication_seconds": 0.10428690000117058,
+  "resource_claim_limit": "cgroup fields null; runner timing narrower than complete external process; no CPU-efficiency causal comparison"
+}

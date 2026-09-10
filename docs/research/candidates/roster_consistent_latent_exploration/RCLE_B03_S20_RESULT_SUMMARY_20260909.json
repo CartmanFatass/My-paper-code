@@ -1,0 +1,891 @@
+{
+  "source": "4d96a832eeaa875b2e6178bd9014067ce32d0339",
+  "root_key_hex": "065798a1a4115ac244accada16fc267f814deb622cfd05b9657418892c656e3b",
+  "arms": {
+    "W1": {
+      "actor_score_weight": 1.0,
+      "admission_receipt": "/home/wu/hmasd-worktrees/rcle-b03-s20-20260909/temp/directions/roster_consistent_latent_exploration/exp/b03-actor100-s20-20260909/W1-admission.json",
+      "allocations": {
+        "models": 6,
+        "training_instances": 1,
+        "untrained_helpers": 5
+      },
+      "arm": "W1",
+      "block_digest_hex": "ff12639b17ff1d6ab0297322f7a62ffcdd7cc8b3d1c6d718e22ceeaeee623516",
+      "cells": {
+        "12_to_12.ACTIVE_CONTINUATION": {
+          "40U_mean": 27.521484375,
+          "F_mean": 0.25071614583333335,
+          "U_mean": 0.688037109375,
+          "Y_mean": 0.3113810221354167,
+          "episodes": 256,
+          "tau40_count": 256,
+          "tau40_fraction": 1.0,
+          "tau_mean": 40.0
+        },
+        "12_to_12.NEW_EPOCH": {
+          "40U_mean": 27.525390625,
+          "F_mean": 0.25055338541666666,
+          "U_mean": 0.688134765625,
+          "Y_mean": 0.3125762939453125,
+          "episodes": 256,
+          "tau40_count": 256,
+          "tau40_fraction": 1.0,
+          "tau_mean": 40.0
+        },
+        "12_to_8.ACTIVE_CONTINUATION": {
+          "40U_mean": 28.423828125,
+          "F_mean": 0.32197265625,
+          "U_mean": 0.710595703125,
+          "Y_mean": 0.2990773518880208,
+          "episodes": 256,
+          "tau40_count": 256,
+          "tau40_fraction": 1.0,
+          "tau_mean": 40.0
+        },
+        "12_to_8.NEW_EPOCH": {
+          "40U_mean": 28.4052734375,
+          "F_mean": 0.3181640625,
+          "U_mean": 0.7101318359375,
+          "Y_mean": 0.2999827067057292,
+          "episodes": 256,
+          "tau40_count": 256,
+          "tau40_fraction": 1.0,
+          "tau_mean": 40.0
+        },
+        "8_to_12.ACTIVE_CONTINUATION": {
+          "40U_mean": 27.507161458333332,
+          "F_mean": 0.24931640624999998,
+          "U_mean": 0.6876790364583333,
+          "Y_mean": 0.3031107584635417,
+          "episodes": 256,
+          "tau40_count": 256,
+          "tau40_fraction": 1.0,
+          "tau_mean": 40.0
+        },
+        "8_to_12.NEW_EPOCH": {
+          "40U_mean": 27.523763020833336,
+          "F_mean": 0.24899088541666667,
+          "U_mean": 0.6880940755208333,
+          "Y_mean": 0.30460611979166663,
+          "episodes": 256,
+          "tau40_count": 256,
+          "tau40_fraction": 1.0,
+          "tau_mean": 40.0
+        },
+        "8_to_8.ACTIVE_CONTINUATION": {
+          "40U_mean": 28.47021484375,
+          "F_mean": 0.319775390625,
+          "U_mean": 0.71175537109375,
+          "Y_mean": 0.287872314453125,
+          "episodes": 256,
+          "tau40_count": 256,
+          "tau40_fraction": 1.0,
+          "tau_mean": 40.0
+        },
+        "8_to_8.NEW_EPOCH": {
+          "40U_mean": 28.6689453125,
+          "F_mean": 0.3181640625,
+          "U_mean": 0.7167236328125,
+          "Y_mean": 0.28673553466796875,
+          "episodes": 256,
+          "tau40_count": 256,
+          "tau40_fraction": 1.0,
+          "tau_mean": 40.0
+        }
+      },
+      "counts": {
+        "backward_step_calls": 200,
+        "final_episodes": 2048,
+        "init_episodes": 2048,
+        "nonzero_steps": 200,
+        "training_episodes": 12800,
+        "zero_steps": 0
+      },
+      "eight_cell_mean": {
+        "40U_mean": 28.005757649739582,
+        "F_mean": 0.2847066243489583,
+        "U_mean": 0.7001439412434896,
+        "Y_mean": 0.30066776275634766,
+        "cells": [
+          "8_to_8.ACTIVE_CONTINUATION",
+          "8_to_8.NEW_EPOCH",
+          "12_to_12.ACTIVE_CONTINUATION",
+          "12_to_12.NEW_EPOCH",
+          "8_to_12.ACTIVE_CONTINUATION",
+          "8_to_12.NEW_EPOCH",
+          "12_to_8.ACTIVE_CONTINUATION",
+          "12_to_8.NEW_EPOCH"
+        ],
+        "tau40_fraction": 1.0,
+        "tau_mean": 40.0
+      },
+      "final_baselines": [
+        0.28485307220926404,
+        0.2859197228766702,
+        0.2979591315681643,
+        0.3000796194923324,
+        0.295407234271416,
+        0.29432135260744524,
+        0.29193466161047593,
+        0.2905659712688314
+      ],
+      "final_displacement": 0.39759874927951655,
+      "initial_parameter_norm": 21.169477626755096,
+      "initialization_summary": {
+        "cells": {
+          "12_to_12.ACTIVE_CONTINUATION": {
+            "40U_mean": 27.550130208333332,
+            "F_mean": 0.2500325520833333,
+            "U_mean": 0.6887532552083333,
+            "Y_mean": 0.3107706705729167,
+            "episodes": 256,
+            "tau40_count": 256,
+            "tau40_fraction": 1.0,
+            "tau_mean": 40.0
+          },
+          "12_to_12.NEW_EPOCH": {
+            "40U_mean": 27.517578125,
+            "F_mean": 0.25071614583333335,
+            "U_mean": 0.687939453125,
+            "Y_mean": 0.3123931884765625,
+            "episodes": 256,
+            "tau40_count": 256,
+            "tau40_fraction": 1.0,
+            "tau_mean": 40.0
+          },
+          "12_to_8.ACTIVE_CONTINUATION": {
+            "40U_mean": 28.41943359375,
+            "F_mean": 0.322900390625,
+            "U_mean": 0.71048583984375,
+            "Y_mean": 0.29854075113932294,
+            "episodes": 256,
+            "tau40_count": 256,
+            "tau40_fraction": 1.0,
+            "tau_mean": 40.0
+          },
+          "12_to_8.NEW_EPOCH": {
+            "40U_mean": 28.4833984375,
+            "F_mean": 0.319384765625,
+            "U_mean": 0.7120849609375,
+            "Y_mean": 0.29840087890625,
+            "episodes": 256,
+            "tau40_count": 256,
+            "tau40_fraction": 1.0,
+            "tau_mean": 40.0
+          },
+          "8_to_12.ACTIVE_CONTINUATION": {
+            "40U_mean": 27.56640625,
+            "F_mean": 0.24957682291666666,
+            "U_mean": 0.68916015625,
+            "Y_mean": 0.301788330078125,
+            "episodes": 256,
+            "tau40_count": 256,
+            "tau40_fraction": 1.0,
+            "tau_mean": 40.0
+          },
+          "8_to_12.NEW_EPOCH": {
+            "40U_mean": 27.490885416666664,
+            "F_mean": 0.24944661458333334,
+            "U_mean": 0.6872721354166667,
+            "Y_mean": 0.3047231038411458,
+            "episodes": 256,
+            "tau40_count": 256,
+            "tau40_fraction": 1.0,
+            "tau_mean": 40.0
+          },
+          "8_to_8.ACTIVE_CONTINUATION": {
+            "40U_mean": 28.52587890625,
+            "F_mean": 0.320068359375,
+            "U_mean": 0.71314697265625,
+            "Y_mean": 0.2864990234375,
+            "episodes": 256,
+            "tau40_count": 256,
+            "tau40_fraction": 1.0,
+            "tau_mean": 40.0
+          },
+          "8_to_8.NEW_EPOCH": {
+            "40U_mean": 28.630859375,
+            "F_mean": 0.319775390625,
+            "U_mean": 0.715771484375,
+            "Y_mean": 0.28722381591796875,
+            "episodes": 256,
+            "tau40_count": 256,
+            "tau40_fraction": 1.0,
+            "tau_mean": 40.0
+          }
+        },
+        "eight_cell_mean": {
+          "40U_mean": 28.0230712890625,
+          "F_mean": 0.2852376302083333,
+          "U_mean": 0.7005767822265625,
+          "Y_mean": 0.30004247029622394,
+          "cells": [
+            "8_to_8.ACTIVE_CONTINUATION",
+            "8_to_8.NEW_EPOCH",
+            "12_to_12.ACTIVE_CONTINUATION",
+            "12_to_12.NEW_EPOCH",
+            "8_to_12.ACTIVE_CONTINUATION",
+            "8_to_12.NEW_EPOCH",
+            "12_to_8.ACTIVE_CONTINUATION",
+            "12_to_8.NEW_EPOCH"
+          ],
+          "tau40_fraction": 1.0,
+          "tau_mean": 40.0
+        }
+      },
+      "launch_sha": "4d96a832eeaa875b2e6178bd9014067ce32d0339",
+      "native": {
+        "abi": {
+          "abi_version": 2,
+          "event_input_size": 64,
+          "fixture_input_size": 224,
+          "fixture_magic": 5927665395199787847,
+          "snapshot_size": 464,
+          "step_input_size": 64
+        },
+        "artifact_sha256": "5b918da7e23d7b65251fb20efcb6678e4a17e62538f6ebdedbda1d9e96221983",
+        "build_key": "a70147fa7b390c5d12fd6e16060105bf2ea530a09f21cb8487d51d6fcfc24fdb",
+        "load_seconds": 0.005930888990405947,
+        "path": "/tmp/hmasd_rcle_tbcfv_native/a70147fa7b390c5d12fd6e16060105bf2ea530a09f21cb8487d51d6fcfc24fdb/tbcfv_backend.so",
+        "resolved_build_root": "/tmp/hmasd_rcle_tbcfv_native",
+        "runtime_abi": {
+          "byteorder": "little",
+          "cache_tag": "cpython-310",
+          "event_input_size": 64,
+          "fixture_input_size": 224,
+          "implementation": "cpython",
+          "machine": "x86_64",
+          "pointer_bits": 64,
+          "python_version": [
+            3,
+            10,
+            21
+          ],
+          "snapshot_size": 464,
+          "step_input_size": 64
+        },
+        "source_sha256": "18d45b95a29c1ca8d17b4d192a9328ddc9c56a821a2690f118de44dbf0054819",
+        "toolchain": {
+          "compile_flags": [
+            "-std=c++17",
+            "-O2",
+            "-fexceptions",
+            "-shared",
+            "-fPIC",
+            "-fno-fast-math",
+            "-ffp-contract=off",
+            "-fno-unsafe-math-optimizations"
+          ],
+          "compiler_path": "/usr/bin/x86_64-linux-gnu-g++-13",
+          "compiler_sha256": "1353e9bdd29a7295c7226bf6c63abccce056d8cac31f112e5cdbecc3f28c2769"
+        }
+      },
+      "object": "RCLE-TBCFV-B03-ACTOR100-S20",
+      "package": "FLEX-REKEY",
+      "peak_rss_bytes": 580497408,
+      "root_key_hex": "065798a1a4115ac244accada16fc267f814deb622cfd05b9657418892c656e3b",
+      "seed": 20,
+      "status": "COMPLETE",
+      "wall_seconds": 89.5265922130202
+    },
+    "W100": {
+      "actor_score_weight": 100.0,
+      "admission_receipt": "/home/wu/hmasd-worktrees/rcle-b03-s20-20260909/temp/directions/roster_consistent_latent_exploration/exp/b03-actor100-s20-20260909/W100-admission.json",
+      "allocations": {
+        "models": 6,
+        "training_instances": 1,
+        "untrained_helpers": 5
+      },
+      "arm": "W100",
+      "block_digest_hex": "ff12639b17ff1d6ab0297322f7a62ffcdd7cc8b3d1c6d718e22ceeaeee623516",
+      "cells": {
+        "12_to_12.ACTIVE_CONTINUATION": {
+          "40U_mean": 26.9873046875,
+          "F_mean": 0.2503580729166667,
+          "U_mean": 0.6746826171875,
+          "Y_mean": 0.3234914143880208,
+          "episodes": 256,
+          "tau40_count": 256,
+          "tau40_fraction": 1.0,
+          "tau_mean": 40.0
+        },
+        "12_to_12.NEW_EPOCH": {
+          "40U_mean": 27.125325520833332,
+          "F_mean": 0.24996744791666667,
+          "U_mean": 0.6781331380208333,
+          "Y_mean": 0.3228607177734375,
+          "episodes": 256,
+          "tau40_count": 256,
+          "tau40_fraction": 1.0,
+          "tau_mean": 40.0
+        },
+        "12_to_8.ACTIVE_CONTINUATION": {
+          "40U_mean": 28.07470703125,
+          "F_mean": 0.30771484375,
+          "U_mean": 0.70186767578125,
+          "Y_mean": 0.30709075927734375,
+          "episodes": 256,
+          "tau40_count": 256,
+          "tau40_fraction": 1.0,
+          "tau_mean": 40.0
+        },
+        "12_to_8.NEW_EPOCH": {
+          "40U_mean": 28.048828125,
+          "F_mean": 0.302978515625,
+          "U_mean": 0.701220703125,
+          "Y_mean": 0.3083140055338542,
+          "episodes": 256,
+          "tau40_count": 256,
+          "tau40_fraction": 1.0,
+          "tau_mean": 40.0
+        },
+        "8_to_12.ACTIVE_CONTINUATION": {
+          "40U_mean": 27.1103515625,
+          "F_mean": 0.25201822916666666,
+          "U_mean": 0.6777587890625,
+          "Y_mean": 0.31603240966796875,
+          "episodes": 256,
+          "tau40_count": 256,
+          "tau40_fraction": 1.0,
+          "tau_mean": 40.0
+        },
+        "8_to_12.NEW_EPOCH": {
+          "40U_mean": 27.1455078125,
+          "F_mean": 0.2501302083333333,
+          "U_mean": 0.6786376953125,
+          "Y_mean": 0.3159942626953125,
+          "episodes": 256,
+          "tau40_count": 256,
+          "tau40_fraction": 1.0,
+          "tau_mean": 40.0
+        },
+        "8_to_8.ACTIVE_CONTINUATION": {
+          "40U_mean": 28.3125,
+          "F_mean": 0.303271484375,
+          "U_mean": 0.7078125,
+          "Y_mean": 0.2959442138671875,
+          "episodes": 256,
+          "tau40_count": 256,
+          "tau40_fraction": 1.0,
+          "tau_mean": 40.0
+        },
+        "8_to_8.NEW_EPOCH": {
+          "40U_mean": 28.1171875,
+          "F_mean": 0.29873046875,
+          "U_mean": 0.7029296875,
+          "Y_mean": 0.30063629150390625,
+          "episodes": 256,
+          "tau40_count": 256,
+          "tau40_fraction": 1.0,
+          "tau_mean": 40.0
+        }
+      },
+      "counts": {
+        "backward_step_calls": 200,
+        "final_episodes": 2048,
+        "init_episodes": 0,
+        "nonzero_steps": 200,
+        "training_episodes": 12800,
+        "zero_steps": 0
+      },
+      "eight_cell_mean": {
+        "40U_mean": 27.615214029947914,
+        "F_mean": 0.2768961588541667,
+        "U_mean": 0.6903803507486979,
+        "Y_mean": 0.3112955093383789,
+        "cells": [
+          "8_to_8.ACTIVE_CONTINUATION",
+          "8_to_8.NEW_EPOCH",
+          "12_to_12.ACTIVE_CONTINUATION",
+          "12_to_12.NEW_EPOCH",
+          "8_to_12.ACTIVE_CONTINUATION",
+          "8_to_12.NEW_EPOCH",
+          "12_to_8.ACTIVE_CONTINUATION",
+          "12_to_8.NEW_EPOCH"
+        ],
+        "tau40_fraction": 1.0,
+        "tau_mean": 40.0
+      },
+      "final_baselines": [
+        0.29168544521308265,
+        0.29106847128004754,
+        0.30769792966141035,
+        0.30981246608210716,
+        0.3038216075002974,
+        0.30024483271147834,
+        0.29963557536469515,
+        0.2961900824113865
+      ],
+      "final_displacement": 0.5640297973052217,
+      "initial_parameter_norm": 21.169477626755096,
+      "launch_sha": "4d96a832eeaa875b2e6178bd9014067ce32d0339",
+      "native": {
+        "abi": {
+          "abi_version": 2,
+          "event_input_size": 64,
+          "fixture_input_size": 224,
+          "fixture_magic": 5927665395199787847,
+          "snapshot_size": 464,
+          "step_input_size": 64
+        },
+        "artifact_sha256": "5b918da7e23d7b65251fb20efcb6678e4a17e62538f6ebdedbda1d9e96221983",
+        "build_key": "a70147fa7b390c5d12fd6e16060105bf2ea530a09f21cb8487d51d6fcfc24fdb",
+        "load_seconds": 0.00247872102772817,
+        "path": "/tmp/hmasd_rcle_tbcfv_native/a70147fa7b390c5d12fd6e16060105bf2ea530a09f21cb8487d51d6fcfc24fdb/tbcfv_backend.so",
+        "resolved_build_root": "/tmp/hmasd_rcle_tbcfv_native",
+        "runtime_abi": {
+          "byteorder": "little",
+          "cache_tag": "cpython-310",
+          "event_input_size": 64,
+          "fixture_input_size": 224,
+          "implementation": "cpython",
+          "machine": "x86_64",
+          "pointer_bits": 64,
+          "python_version": [
+            3,
+            10,
+            21
+          ],
+          "snapshot_size": 464,
+          "step_input_size": 64
+        },
+        "source_sha256": "18d45b95a29c1ca8d17b4d192a9328ddc9c56a821a2690f118de44dbf0054819",
+        "toolchain": {
+          "compile_flags": [
+            "-std=c++17",
+            "-O2",
+            "-fexceptions",
+            "-shared",
+            "-fPIC",
+            "-fno-fast-math",
+            "-ffp-contract=off",
+            "-fno-unsafe-math-optimizations"
+          ],
+          "compiler_path": "/usr/bin/x86_64-linux-gnu-g++-13",
+          "compiler_sha256": "1353e9bdd29a7295c7226bf6c63abccce056d8cac31f112e5cdbecc3f28c2769"
+        }
+      },
+      "object": "RCLE-TBCFV-B03-ACTOR100-S20",
+      "package": "FLEX-REKEY",
+      "paired_primary": {
+        "Delta_U": 0.009324137369791666,
+        "G_U_W1": 0.0006856282552083343,
+        "G_U_W100": 0.010009765625,
+        "MEI_U": 0.05,
+        "SE": 0.0014372501854969077,
+        "active_paths": [
+          {
+            "Delta_U": 0.009920247395833335,
+            "G_U_W1": 0.0014811197916666705,
+            "G_U_W100": 0.011401367187500006,
+            "SE": 0.0016407600424031047,
+            "W100_U": 0.6777587890625,
+            "W1_U": 0.6876790364583333,
+            "cell": "8_to_12.ACTIVE_CONTINUATION",
+            "init_U": 0.68916015625,
+            "n": 256
+          },
+          {
+            "Delta_U": 0.008728027343749997,
+            "G_U_W1": -0.000109863281250002,
+            "G_U_W100": 0.008618164062499996,
+            "SE": 0.0023602243253760744,
+            "W100_U": 0.7018676757812501,
+            "W1_U": 0.710595703125,
+            "cell": "12_to_8.ACTIVE_CONTINUATION",
+            "init_U": 0.71048583984375,
+            "n": 256
+          }
+        ],
+        "approximate_95_interval": [
+          0.0065071270062177266,
+          0.012141147733365606
+        ],
+        "positive_favors": "W100",
+        "uncertainty": "conditional scenario Monte Carlo; distinct cell RNG domains; one training pair"
+      },
+      "peak_rss_bytes": 579899392,
+      "root_key_hex": "065798a1a4115ac244accada16fc267f814deb622cfd05b9657418892c656e3b",
+      "seed": 20,
+      "status": "COMPLETE",
+      "wall_seconds": 80.3472653219942
+    },
+    "reference": {
+      "Y_note": "ScriptedEpisodeResult has no Y; Y is null",
+      "admission_receipt": "/home/wu/hmasd-worktrees/rcle-b03-s20-20260909/temp/directions/roster_consistent_latent_exploration/exp/b03-actor100-s20-20260909/reference-admission.json",
+      "allocations": {
+        "models": 0,
+        "training_instances": 0
+      },
+      "arm": "reference",
+      "block_digest_hex": "ff12639b17ff1d6ab0297322f7a62ffcdd7cc8b3d1c6d718e22ceeaeee623516",
+      "cells": {
+        "12_to_12.ACTIVE_CONTINUATION": {
+          "40U_mean": 9.466145833333336,
+          "F_mean": 0.23665364583333334,
+          "U_mean": 0.23665364583333337,
+          "Y_mean": null,
+          "episodes": 256,
+          "tau40_count": 253,
+          "tau40_fraction": 0.98828125,
+          "tau_mean": 39.53125
+        },
+        "12_to_12.NEW_EPOCH": {
+          "40U_mean": 10.11588541666667,
+          "F_mean": 0.23307291666666669,
+          "U_mean": 0.25289713541666675,
+          "Y_mean": null,
+          "episodes": 256,
+          "tau40_count": 254,
+          "tau40_fraction": 0.9921875,
+          "tau_mean": 39.69921875
+        },
+        "12_to_8.ACTIVE_CONTINUATION": {
+          "40U_mean": 12.2421875,
+          "F_mean": 0.3060546875,
+          "U_mean": 0.3060546875,
+          "Y_mean": null,
+          "episodes": 256,
+          "tau40_count": 248,
+          "tau40_fraction": 0.96875,
+          "tau_mean": 39.3125
+        },
+        "12_to_8.NEW_EPOCH": {
+          "40U_mean": 13.63623046875,
+          "F_mean": 0.32353515625,
+          "U_mean": 0.34090576171875,
+          "Y_mean": null,
+          "episodes": 256,
+          "tau40_count": 247,
+          "tau40_fraction": 0.96484375,
+          "tau_mean": 38.9453125
+        },
+        "8_to_12.ACTIVE_CONTINUATION": {
+          "40U_mean": 9.820963541666668,
+          "F_mean": 0.2431640625,
+          "U_mean": 0.2455240885416667,
+          "Y_mean": null,
+          "episodes": 256,
+          "tau40_count": 256,
+          "tau40_fraction": 1.0,
+          "tau_mean": 40.0
+        },
+        "8_to_12.NEW_EPOCH": {
+          "40U_mean": 10.379231770833336,
+          "F_mean": 0.2451171875,
+          "U_mean": 0.25948079427083337,
+          "Y_mean": null,
+          "episodes": 256,
+          "tau40_count": 254,
+          "tau40_fraction": 0.9921875,
+          "tau_mean": 39.703125
+        },
+        "8_to_8.ACTIVE_CONTINUATION": {
+          "40U_mean": 12.4765625,
+          "F_mean": 0.3119140625,
+          "U_mean": 0.3119140625,
+          "Y_mean": null,
+          "episodes": 256,
+          "tau40_count": 246,
+          "tau40_fraction": 0.9609375,
+          "tau_mean": 38.8125
+        },
+        "8_to_8.NEW_EPOCH": {
+          "40U_mean": 13.22607421875,
+          "F_mean": 0.3140625,
+          "U_mean": 0.33065185546875,
+          "Y_mean": null,
+          "episodes": 256,
+          "tau40_count": 249,
+          "tau40_fraction": 0.97265625,
+          "tau_mean": 39.19921875
+        }
+      },
+      "counts": {
+        "backward_step_calls": 0,
+        "final_episodes": 2048,
+        "init_episodes": 0,
+        "nonzero_steps": 0,
+        "training_episodes": 0,
+        "zero_steps": 0
+      },
+      "eight_cell_mean": {
+        "40U_mean": 11.42041015625,
+        "F_mean": 0.27669677734375,
+        "U_mean": 0.28551025390625,
+        "Y_mean": null,
+        "cells": [
+          "8_to_8.ACTIVE_CONTINUATION",
+          "8_to_8.NEW_EPOCH",
+          "12_to_12.ACTIVE_CONTINUATION",
+          "12_to_12.NEW_EPOCH",
+          "8_to_12.ACTIVE_CONTINUATION",
+          "8_to_12.NEW_EPOCH",
+          "12_to_8.ACTIVE_CONTINUATION",
+          "12_to_8.NEW_EPOCH"
+        ],
+        "tau40_fraction": 0.97998046875,
+        "tau_mean": 39.400390625
+      },
+      "launch_sha": "4d96a832eeaa875b2e6178bd9014067ce32d0339",
+      "native": {
+        "abi": {
+          "abi_version": 2,
+          "event_input_size": 64,
+          "fixture_input_size": 224,
+          "fixture_magic": 5927665395199787847,
+          "snapshot_size": 464,
+          "step_input_size": 64
+        },
+        "artifact_sha256": "5b918da7e23d7b65251fb20efcb6678e4a17e62538f6ebdedbda1d9e96221983",
+        "build_key": "a70147fa7b390c5d12fd6e16060105bf2ea530a09f21cb8487d51d6fcfc24fdb",
+        "load_seconds": 0.0021691840374842286,
+        "path": "/tmp/hmasd_rcle_tbcfv_native/a70147fa7b390c5d12fd6e16060105bf2ea530a09f21cb8487d51d6fcfc24fdb/tbcfv_backend.so",
+        "resolved_build_root": "/tmp/hmasd_rcle_tbcfv_native",
+        "runtime_abi": {
+          "byteorder": "little",
+          "cache_tag": "cpython-310",
+          "event_input_size": 64,
+          "fixture_input_size": 224,
+          "implementation": "cpython",
+          "machine": "x86_64",
+          "pointer_bits": 64,
+          "python_version": [
+            3,
+            10,
+            21
+          ],
+          "snapshot_size": 464,
+          "step_input_size": 64
+        },
+        "source_sha256": "18d45b95a29c1ca8d17b4d192a9328ddc9c56a821a2690f118de44dbf0054819",
+        "toolchain": {
+          "compile_flags": [
+            "-std=c++17",
+            "-O2",
+            "-fexceptions",
+            "-shared",
+            "-fPIC",
+            "-fno-fast-math",
+            "-ffp-contract=off",
+            "-fno-unsafe-math-optimizations"
+          ],
+          "compiler_path": "/usr/bin/x86_64-linux-gnu-g++-13",
+          "compiler_sha256": "1353e9bdd29a7295c7226bf6c63abccce056d8cac31f112e5cdbecc3f28c2769"
+        }
+      },
+      "object": "RCLE-TBCFV-B03-ACTOR100-S20",
+      "package": "reference",
+      "peak_rss_bytes": 396988416,
+      "root_key_hex": "065798a1a4115ac244accada16fc267f814deb622cfd05b9657418892c656e3b",
+      "seed": 20,
+      "status": "COMPLETE",
+      "wall_seconds": 2.5841910199960694
+    }
+  },
+  "acceptance": {
+    "initial_tensors_equal": true,
+    "initial_tensors_differ_seed19": true,
+    "parameter_scalars": 26161,
+    "dtype": "torch.float64",
+    "learned_readback": {
+      "W1": {
+        "baseline_reconstructed_from_zero_max_error": 4.440892098500626e-16,
+        "final_displacement_readback": 0.39759874927951594,
+        "counts": {
+          "backward_step_calls": 200,
+          "final_episodes": 2048,
+          "init_episodes": 2048,
+          "nonzero_steps": 200,
+          "training_episodes": 12800,
+          "zero_steps": 0
+        },
+        "agent_ticks_training": 6553600,
+        "claim_decisions_training": 1638400
+      },
+      "W100": {
+        "baseline_reconstructed_from_zero_max_error": 3.885780586188048e-16,
+        "final_displacement_readback": 0.5640297973052215,
+        "counts": {
+          "backward_step_calls": 200,
+          "final_episodes": 2048,
+          "init_episodes": 0,
+          "nonzero_steps": 200,
+          "training_episodes": 12800,
+          "zero_steps": 0
+        },
+        "agent_ticks_training": 6553600,
+        "claim_decisions_training": 1638400
+      }
+    },
+    "primary_recomputed": {
+      "Delta_U": 0.009324137369791666,
+      "SE": 0.0014372501854969077,
+      "paths": [
+        {
+          "cell": "8_to_12.ACTIVE_CONTINUATION",
+          "Delta_U": 0.009920247395833335,
+          "SE": 0.0016407600424031047
+        },
+        {
+          "cell": "12_to_8.ACTIVE_CONTINUATION",
+          "Delta_U": 0.008728027343749997,
+          "SE": 0.0023602243253760744
+        }
+      ]
+    },
+    "verified_output_supervisor_files": 23,
+    "arithmetic_readback_seconds_excluding_imports": 0.16494379999494413
+  },
+  "all_cell_W100_minus_W1": {
+    "12_to_12.ACTIVE_CONTINUATION": {
+      "U": -0.013354492187499956,
+      "Y": 0.01211039225260413,
+      "tau": 0.0,
+      "F": -0.00035807291666667407
+    },
+    "12_to_12.NEW_EPOCH": {
+      "U": -0.010001627604166674,
+      "Y": 0.010284423828125,
+      "tau": 0.0,
+      "F": -0.0005859374999999944
+    },
+    "12_to_8.ACTIVE_CONTINUATION": {
+      "U": -0.00872802734375,
+      "Y": 0.008013407389322935,
+      "tau": 0.0,
+      "F": -0.014257812499999967
+    },
+    "12_to_8.NEW_EPOCH": {
+      "U": -0.0089111328125,
+      "Y": 0.008331298828125,
+      "tau": 0.0,
+      "F": -0.015185546875000011
+    },
+    "8_to_12.ACTIVE_CONTINUATION": {
+      "U": -0.009920247395833304,
+      "Y": 0.012921651204427065,
+      "tau": 0.0,
+      "F": 0.0027018229166666796
+    },
+    "8_to_12.NEW_EPOCH": {
+      "U": -0.009456380208333393,
+      "Y": 0.01138814290364587,
+      "tau": 0.0,
+      "F": 0.0011393229166666574
+    },
+    "8_to_8.ACTIVE_CONTINUATION": {
+      "U": -0.003942871093750022,
+      "Y": 0.0080718994140625,
+      "tau": 0.0,
+      "F": -0.016503906249999978
+    },
+    "8_to_8.NEW_EPOCH": {
+      "U": -0.0137939453125,
+      "Y": 0.0139007568359375,
+      "tau": 0.0,
+      "F": -0.019433593750000033
+    }
+  },
+  "admissions": {
+    "W1": {
+      "assessed_at": "2026-09-09T23:05:00.781170Z",
+      "available_physical_bytes": 15209025536,
+      "captured_at": "2026-09-09T23:05:00.780856Z",
+      "cgroup_headroom_bytes": null,
+      "cgroup_memory_current_bytes": null,
+      "cgroup_memory_max_bytes": null,
+      "effective_available_bytes": 15209025536,
+      "effective_floor_pass": true,
+      "failure_reasons": [],
+      "measurement_source": "/proc/meminfo",
+      "minimum_available_bytes": 4294967296,
+      "passed": true,
+      "physical_floor_pass": true,
+      "schema_version": 1
+    },
+    "W100": {
+      "assessed_at": "2026-09-09T23:06:30.650915Z",
+      "available_physical_bytes": 15215370240,
+      "captured_at": "2026-09-09T23:06:30.650629Z",
+      "cgroup_headroom_bytes": null,
+      "cgroup_memory_current_bytes": null,
+      "cgroup_memory_max_bytes": null,
+      "effective_available_bytes": 15215370240,
+      "effective_floor_pass": true,
+      "failure_reasons": [],
+      "measurement_source": "/proc/meminfo",
+      "minimum_available_bytes": 4294967296,
+      "passed": true,
+      "physical_floor_pass": true,
+      "schema_version": 1
+    },
+    "reference": {
+      "assessed_at": "2026-09-09T23:07:51.320271Z",
+      "available_physical_bytes": 15197548544,
+      "captured_at": "2026-09-09T23:07:51.319967Z",
+      "cgroup_headroom_bytes": null,
+      "cgroup_memory_current_bytes": null,
+      "cgroup_memory_max_bytes": null,
+      "effective_available_bytes": 15197548544,
+      "effective_floor_pass": true,
+      "failure_reasons": [],
+      "measurement_source": "/proc/meminfo",
+      "minimum_available_bytes": 4294967296,
+      "passed": true,
+      "physical_floor_pass": true,
+      "schema_version": 1
+    }
+  },
+  "hashes": {
+    "temp\\directions\\roster_consistent_latent_exploration\\exp\\b03-actor100-s20-20260909\\W1-admission.json": "19a0851487ce2d1179f37da1c0b2ea2e1e60dfa9a315d25dae06e77f9f9ee119",
+    "temp\\directions\\roster_consistent_latent_exploration\\exp\\b03-actor100-s20-20260909\\W1-time.txt": "c1fc088339c45ad2aa1808a6756e3d900d734535dca2b61ddca2c17f8cc858ba",
+    "temp\\directions\\roster_consistent_latent_exploration\\exp\\b03-actor100-s20-20260909\\W1\\completed_blocks.jsonl": "4cafbc7cf54aaf206ab2a275d6f80f571a10950b62960fd08ca8e22971930a31",
+    "temp\\directions\\roster_consistent_latent_exploration\\exp\\b03-actor100-s20-20260909\\W1\\init_scenarios.json": "30462ceee143fb97bfa4b5eeac1e0218bc66750f6f9d9a050bc0a7cd9b40e32b",
+    "temp\\directions\\roster_consistent_latent_exploration\\exp\\b03-actor100-s20-20260909\\W1\\initial_parameters.pt": "c747dedc32a2e666c4ab44867db302cf4571c871d38294cd3dcb1e5510dcd02b",
+    "temp\\directions\\roster_consistent_latent_exploration\\exp\\b03-actor100-s20-20260909\\W1\\parameters.pt": "fd47904b292915318f97d5b07ada41198e76596ef7e720569c9e5db1f67aa932",
+    "temp\\directions\\roster_consistent_latent_exploration\\exp\\b03-actor100-s20-20260909\\W1\\summary.json": "9cc4c8f95e72f84d20e06ce000cd6cb7f00aa49ab521507c05f79c6aeaec5d02",
+    "temp\\directions\\roster_consistent_latent_exploration\\exp\\b03-actor100-s20-20260909\\W100-admission.json": "c4e722847216cc2ea35065e3bff97500dd045d5e2041596646d2ca57b7e65805",
+    "temp\\directions\\roster_consistent_latent_exploration\\exp\\b03-actor100-s20-20260909\\W100-time.txt": "aea4b20940383afc73c2e0c194d12863c345c81f892a616a2e2cfe1c8566cb13",
+    "temp\\directions\\roster_consistent_latent_exploration\\exp\\b03-actor100-s20-20260909\\W100\\completed_blocks.jsonl": "e04dd9d106d1bce7f0cb6c401daa3178d419f543dd8b229eed6fb8c53904e9b0",
+    "temp\\directions\\roster_consistent_latent_exploration\\exp\\b03-actor100-s20-20260909\\W100\\initial_parameters.pt": "c747dedc32a2e666c4ab44867db302cf4571c871d38294cd3dcb1e5510dcd02b",
+    "temp\\directions\\roster_consistent_latent_exploration\\exp\\b03-actor100-s20-20260909\\W100\\parameters.pt": "ed53f819db10abe76596b7c0cb6b0ae4f8611dddb6bd1b75563a70f463ddec9d",
+    "temp\\directions\\roster_consistent_latent_exploration\\exp\\b03-actor100-s20-20260909\\W100\\summary.json": "c6ad6664f154393b59b0c459f9409bc3b9319f26368d49d27ea10c7654b8f644",
+    "temp\\directions\\roster_consistent_latent_exploration\\exp\\b03-actor100-s20-20260909\\chain-time.txt": "8a217d303b4f10b1f88af329132d5dd7a9bcbcaf3d45dbb5505d6da74194ff87",
+    "temp\\directions\\roster_consistent_latent_exploration\\exp\\b03-actor100-s20-20260909\\reference-admission.json": "2cc6add5289f87820549783276bbdad72e53f65d29f53639aaff816652349cf8",
+    "temp\\directions\\roster_consistent_latent_exploration\\exp\\b03-actor100-s20-20260909\\reference-time.txt": "c29da0c0f350c57c32301860de969cdefb5514fa198ba33c402deda2283cc361",
+    "temp\\directions\\roster_consistent_latent_exploration\\exp\\b03-actor100-s20-20260909\\reference\\summary.json": "9fa5e80e4330ae0365f2797a41f893050d32549fc40a0a95765913ae858e61b8",
+    "temp\\directions\\roster_consistent_latent_exploration\\s20-preparation\\supervisor\\exit_code": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "temp\\directions\\roster_consistent_latent_exploration\\s20-preparation\\supervisor\\pid": "c7c364c61a93aba20825bb518f527b0adb1f163de9c0975ec291b6905951abec",
+    "temp\\directions\\roster_consistent_latent_exploration\\s20-preparation\\supervisor\\runner.sh": "6cf03b1703964d150d5da650211887bce10fb7b963bcd99e6e7b6da4043bde13",
+    "temp\\directions\\roster_consistent_latent_exploration\\s20-preparation\\supervisor\\start_time": "e7c0e8d851075ff7f8a73fa2c1412f30fc6e83e1c197a2a79956e84e70ac3141",
+    "temp\\directions\\roster_consistent_latent_exploration\\s20-preparation\\supervisor\\status": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983",
+    "temp\\directions\\roster_consistent_latent_exploration\\s20-preparation\\supervisor\\task.log": "2699fdcc4ee15dff540c1e53687e0edaa823493c2828267060d3353ea9a1ae74"
+  },
+  "cost": {
+    "prelaunch_conservative_seconds_including_DM": 250,
+    "complete_W1_seconds": 89.83,
+    "complete_W100_seconds": 80.62,
+    "complete_reference_seconds": 2.85,
+    "sum_invocations_seconds": 173.29999999999998,
+    "chain_seconds": 173.43,
+    "collection_seconds": 3.6190638,
+    "aggregate_CPU_seconds": null,
+    "readback_complete_seconds": 2.2984716,
+    "collection_publication_conservative_seconds": 25,
+    "complete_conservative_seconds": 448.43
+  },
+  "supervisor": {
+    "exit_code": "0\n",
+    "pid": "3079849\n",
+    "runner.sh": "#!/usr/bin/env bash\necho $$ > \"/home/wu/.agent-tasks/rcle-b03-s20-20260909/pid\"\nSTART_TS=$(date +%s)\necho \"=== Task 'rcle-b03-s20-20260909' started at $(date -Iseconds) ===\" >> \"/home/wu/.agent-tasks/rcle-b03-s20-20260909/task.log\"\n\n# Execute command capturing output\nset +e\neval 'cd /home/wu/hmasd-worktrees/rcle-b03-s20-20260909 && mkdir -p temp/directions/roster_consistent_latent_exploration/exp/b03-actor100-s20-20260909 && HMASD_PYTHON=/home/wu/.venvs/hmasd/bin/python /usr/bin/time -f wall_s=%e,peak_rss_kib=%M,exit=%x -o temp/directions/roster_consistent_latent_exploration/exp/b03-actor100-s20-20260909/chain-time.txt timeout 1150 bash scripts/run_rcle_tbcfv_b03_s20.sh 4d96a832eeaa875b2e6178bd9014067ce32d0339 /home/wu/hmasd-worktrees/rcle-b03-s20-20260909/temp/directions/roster_consistent_latent_exploration/exp/b03-actor100-s20-20260909' >> \"/home/wu/.agent-tasks/rcle-b03-s20-20260909/task.log\" 2>&1\nEXIT_CODE=$?\nset -e\n\nEND_TS=$(date +%s)\necho $EXIT_CODE > \"/home/wu/.agent-tasks/rcle-b03-s20-20260909/exit_code\"\nif [ $EXIT_CODE -eq 0 ]; then\n    echo \"finished\" > \"/home/wu/.agent-tasks/rcle-b03-s20-20260909/status\"\nelse\n    echo \"failed\" > \"/home/wu/.agent-tasks/rcle-b03-s20-20260909/status\"\nfi\necho \"=== Task 'rcle-b03-s20-20260909' exited with code $EXIT_CODE at $(date -Iseconds) (Duration: $((END_TS - START_TS))s) ===\" >> \"/home/wu/.agent-tasks/rcle-b03-s20-20260909/task.log\"\n\n# Keep session alive briefly for inspection, then exit\nsleep 1\n",
+    "start_time": "1788995100\n",
+    "status": "finished\n",
+    "task.log": "=== Task 'rcle-b03-s20-20260909' started at 2026-09-10T07:05:00+08:00 ===\n{\n  \"assessed_at\": \"2026-09-09T23:05:00.781170Z\",\n  \"available_physical_bytes\": 15209025536,\n  \"captured_at\": \"2026-09-09T23:05:00.780856Z\",\n  \"cgroup_headroom_bytes\": null,\n  \"cgroup_memory_current_bytes\": null,\n  \"cgroup_memory_max_bytes\": null,\n  \"effective_available_bytes\": 15209025536,\n  \"effective_floor_pass\": true,\n  \"failure_reasons\": [],\n  \"measurement_source\": \"/proc/meminfo\",\n  \"minimum_available_bytes\": 4294967296,\n  \"passed\": true,\n  \"physical_floor_pass\": true,\n  \"schema_version\": 1\n}\nCOMPLETE W1\n{\n  \"assessed_at\": \"2026-09-09T23:06:30.650915Z\",\n  \"available_physical_bytes\": 15215370240,\n  \"captured_at\": \"2026-09-09T23:06:30.650629Z\",\n  \"cgroup_headroom_bytes\": null,\n  \"cgroup_memory_current_bytes\": null,\n  \"cgroup_memory_max_bytes\": null,\n  \"effective_available_bytes\": 15215370240,\n  \"effective_floor_pass\": true,\n  \"failure_reasons\": [],\n  \"measurement_source\": \"/proc/meminfo\",\n  \"minimum_available_bytes\": 4294967296,\n  \"passed\": true,\n  \"physical_floor_pass\": true,\n  \"schema_version\": 1\n}\nCOMPLETE W100\n{\n  \"assessed_at\": \"2026-09-09T23:07:51.320271Z\",\n  \"available_physical_bytes\": 15197548544,\n  \"captured_at\": \"2026-09-09T23:07:51.319967Z\",\n  \"cgroup_headroom_bytes\": null,\n  \"cgroup_memory_current_bytes\": null,\n  \"cgroup_memory_max_bytes\": null,\n  \"effective_available_bytes\": 15197548544,\n  \"effective_floor_pass\": true,\n  \"failure_reasons\": [],\n  \"measurement_source\": \"/proc/meminfo\",\n  \"minimum_available_bytes\": 4294967296,\n  \"passed\": true,\n  \"physical_floor_pass\": true,\n  \"schema_version\": 1\n}\nCOMPLETE reference\n=== Task 'rcle-b03-s20-20260909' exited with code 0 at 2026-09-10T07:07:54+08:00 (Duration: 174s) ===\n"
+  },
+  "published_artifact_hashes": {
+    "CURVES.json": "28634a659e1e18c2180584d557d42f62a83441141a71883fff56f311d1b817d9",
+    "SCENARIOS.csv": "acf2887545cf0f617ac29db03f2581d58b2b6cf47ace8d4454d37c1e637fad58"
+  }
+}

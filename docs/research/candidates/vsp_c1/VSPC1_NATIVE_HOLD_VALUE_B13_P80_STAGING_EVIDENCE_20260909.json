@@ -1,0 +1,225 @@
+{
+  "source_sha": "23ebb0f5e22286d9ea77a145f980bedacc32d9da",
+  "node": "hmasd-wsl-node",
+  "cwd": "/home/wu/hmasd-worktrees/vspc1-native-hold-value-b13-8601-23ebb0f5e222",
+  "handle": "vspc1_hold_value_b13_8601_23ebb0f5e222",
+  "script": "/home/wu/hmasd-inputs/vspc1_hold_value_b13_8601_23ebb0f5e222.sh",
+  "output_root": "/home/wu/projects/HMASD/temp/directions/vsp_c1/exp/native_hold_value_b13_8601_23ebb0f5e222",
+  "admission": "/home/wu/projects/HMASD/temp/directions/vsp_c1/exp/native_hold_value_b13_8601_23ebb0f5e222_admission.json",
+  "script_sha256": "f7b02dce93d632e7263303291953cbec63f82ad098e272ef39514738c30f0df9",
+  "script_bytes": 595,
+  "source_hashes": {
+    "scripts/run_vspc1_native_hold_value_b13.py": "8248132b5a1ce3e5d258a1e4dc70caa74420ba5248eb7784c160748f563249ce",
+    "scripts/hmasd_resource_preflight.py": "cb0525e9247f1c7262c198bf051e542282f5928982137b3023d36d5d69eda4dc",
+    "experiments/candidates/vsp_c1/native_hold_value_b01/study.py": "73476ae8f6db851702fd7a55959382668a58526bb5d45cd2f4e979e768118557",
+    "experiments/candidates/vsp_c1/native_hold_value_b01/critic.py": "8e352af844441c2c0049aac3a98d087696e49fc949478ffcaa4cbd19c9a62c47",
+    "experiments/candidates/vsp_c1/native_hold_value_b03/value_normalization.py": "989748345ef59ac672b7f6b326d4230e3a01061c91d25ce8c1137088a8971c55",
+    "experiments/candidates/ucope/uav_motion_prefix_b01/__init__.py": "9ac022e8f48f07e80a45cb3ff30d499dcf9285b5d97ccbdf6601ee08b40eb84d",
+    "experiments/candidates/ucope/uav_motion_prefix_b01/environment.py": "871e29bca8de89b8fee8fbe61f46e668ac140693655178e8ecc1c3b8ac5461f1",
+    "experiments/candidates/ucope/uav_motion_prefix_b01/learner.py": "6b7c7d9f315f2c86f911b67ece38cdc5d165fa1a321e6068b751b1423e53b8bf",
+    "experiments/candidates/ucope/uav_motion_prefix_b01/policy.py": "888638cb762e6449bc3f9d200e7f483cf52a21c342ea485d96c8fc580c6615f0",
+    "experiments/candidates/ucope/uav_motion_prefix_b01/study.py": "93190c51a7407f8fa1251af1c15ed9502d11fb1f9d44b7d0ddba9a0026e57990",
+    "envs/pettingzoo/uav_env.py": "f50d74cdba92d5ef976c8ba53d2697fc72742683fcb746b404b8c8807f463803",
+    "envs/pettingzoo/env_adapter.py": "8b42c1c3e7ef44cb814f79225b4af944b1018ad764dfeb17e9e1cc294df79d40",
+    "experiments/candidates/vsp_c1/native_hold_value_b05/critic.py": "e23ca312dda6052adc893f6bab71bf349cd37f0f0f6ef350696a7dfc172437f7",
+    "experiments/candidates/vsp_c1/native_hold_value_b05/__init__.py": "176919ff5b6c3ab8c26e0bef8f1976ef299ba93a86f79dd9e2381cf6e8d618c3"
+  },
+  "submission_argv": [
+    "ssh",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "ConnectTimeout=10",
+    "hmasd-wsl-node",
+    "/usr/local/bin/agent-task",
+    "run",
+    "vspc1_hold_value_b13_8601_23ebb0f5e222",
+    "/bin/bash",
+    "/home/wu/hmasd-inputs/vspc1_hold_value_b13_8601_23ebb0f5e222.sh"
+  ],
+  "wrapper_sha": "83b6e2f8c28cbf5e9925252c31057446cce3362e",
+  "staging_checks": {
+    "cwd": {
+      "argv": [
+        "ssh",
+        "-o",
+        "BatchMode=yes",
+        "-o",
+        "ConnectTimeout=10",
+        "hmasd-wsl-node",
+        "git",
+        "-C",
+        "/home/wu/hmasd-worktrees/vspc1-native-hold-value-b13-8601-23ebb0f5e222",
+        "rev-parse",
+        "--show-toplevel"
+      ],
+      "exit_code": 0,
+      "stdout": "/home/wu/hmasd-worktrees/vspc1-native-hold-value-b13-8601-23ebb0f5e222\n",
+      "stderr": ""
+    },
+    "head": {
+      "argv": [
+        "ssh",
+        "-o",
+        "BatchMode=yes",
+        "-o",
+        "ConnectTimeout=10",
+        "hmasd-wsl-node",
+        "git",
+        "-C",
+        "/home/wu/hmasd-worktrees/vspc1-native-hold-value-b13-8601-23ebb0f5e222",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0,
+      "stdout": "23ebb0f5e22286d9ea77a145f980bedacc32d9da\n",
+      "stderr": ""
+    },
+    "clean": {
+      "argv": [
+        "ssh",
+        "-o",
+        "BatchMode=yes",
+        "-o",
+        "ConnectTimeout=10",
+        "hmasd-wsl-node",
+        "git",
+        "-C",
+        "/home/wu/hmasd-worktrees/vspc1-native-hold-value-b13-8601-23ebb0f5e222",
+        "status",
+        "--porcelain"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "detached": {
+      "argv": [
+        "ssh",
+        "-o",
+        "BatchMode=yes",
+        "-o",
+        "ConnectTimeout=10",
+        "hmasd-wsl-node",
+        "git",
+        "-C",
+        "/home/wu/hmasd-worktrees/vspc1-native-hold-value-b13-8601-23ebb0f5e222",
+        "symbolic-ref",
+        "-q",
+        "HEAD"
+      ],
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": ""
+    },
+    "sources": {
+      "argv": [
+        "ssh",
+        "-o",
+        "BatchMode=yes",
+        "-o",
+        "ConnectTimeout=10",
+        "hmasd-wsl-node",
+        "sha256sum",
+        "/home/wu/hmasd-worktrees/vspc1-native-hold-value-b13-8601-23ebb0f5e222/scripts/run_vspc1_native_hold_value_b13.py",
+        "/home/wu/hmasd-worktrees/vspc1-native-hold-value-b13-8601-23ebb0f5e222/scripts/hmasd_resource_preflight.py",
+        "/home/wu/hmasd-worktrees/vspc1-native-hold-value-b13-8601-23ebb0f5e222/experiments/candidates/vsp_c1/native_hold_value_b01/study.py",
+        "/home/wu/hmasd-worktrees/vspc1-native-hold-value-b13-8601-23ebb0f5e222/experiments/candidates/vsp_c1/native_hold_value_b01/critic.py",
+        "/home/wu/hmasd-worktrees/vspc1-native-hold-value-b13-8601-23ebb0f5e222/experiments/candidates/vsp_c1/native_hold_value_b03/value_normalization.py",
+        "/home/wu/hmasd-worktrees/vspc1-native-hold-value-b13-8601-23ebb0f5e222/experiments/candidates/ucope/uav_motion_prefix_b01/__init__.py",
+        "/home/wu/hmasd-worktrees/vspc1-native-hold-value-b13-8601-23ebb0f5e222/experiments/candidates/ucope/uav_motion_prefix_b01/environment.py",
+        "/home/wu/hmasd-worktrees/vspc1-native-hold-value-b13-8601-23ebb0f5e222/experiments/candidates/ucope/uav_motion_prefix_b01/learner.py",
+        "/home/wu/hmasd-worktrees/vspc1-native-hold-value-b13-8601-23ebb0f5e222/experiments/candidates/ucope/uav_motion_prefix_b01/policy.py",
+        "/home/wu/hmasd-worktrees/vspc1-native-hold-value-b13-8601-23ebb0f5e222/experiments/candidates/ucope/uav_motion_prefix_b01/study.py",
+        "/home/wu/hmasd-worktrees/vspc1-native-hold-value-b13-8601-23ebb0f5e222/envs/pettingzoo/uav_env.py",
+        "/home/wu/hmasd-worktrees/vspc1-native-hold-value-b13-8601-23ebb0f5e222/envs/pettingzoo/env_adapter.py",
+        "/home/wu/hmasd-worktrees/vspc1-native-hold-value-b13-8601-23ebb0f5e222/experiments/candidates/vsp_c1/native_hold_value_b05/critic.py",
+        "/home/wu/hmasd-worktrees/vspc1-native-hold-value-b13-8601-23ebb0f5e222/experiments/candidates/vsp_c1/native_hold_value_b05/__init__.py"
+      ],
+      "exit_code": 0,
+      "stdout": "8248132b5a1ce3e5d258a1e4dc70caa74420ba5248eb7784c160748f563249ce  /home/wu/hmasd-worktrees/vspc1-native-hold-value-b13-8601-23ebb0f5e222/scripts/run_vspc1_native_hold_value_b13.py\ncb0525e9247f1c7262c198bf051e542282f5928982137b3023d36d5d69eda4dc  /home/wu/hmasd-worktrees/vspc1-native-hold-value-b13-8601-23ebb0f5e222/scripts/hmasd_resource_preflight.py\n73476ae8f6db851702fd7a55959382668a58526bb5d45cd2f4e979e768118557  /home/wu/hmasd-worktrees/vspc1-native-hold-value-b13-8601-23ebb0f5e222/experiments/candidates/vsp_c1/native_hold_value_b01/study.py\n8e352af844441c2c0049aac3a98d087696e49fc949478ffcaa4cbd19c9a62c47  /home/wu/hmasd-worktrees/vspc1-native-hold-value-b13-8601-23ebb0f5e222/experiments/candidates/vsp_c1/native_hold_value_b01/critic.py\n989748345ef59ac672b7f6b326d4230e3a01061c91d25ce8c1137088a8971c55  /home/wu/hmasd-worktrees/vspc1-native-hold-value-b13-8601-23ebb0f5e222/experiments/candidates/vsp_c1/native_hold_value_b03/value_normalization.py\n9ac022e8f48f07e80a45cb3ff30d499dcf9285b5d97ccbdf6601ee08b40eb84d  /home/wu/hmasd-worktrees/vspc1-native-hold-value-b13-8601-23ebb0f5e222/experiments/candidates/ucope/uav_motion_prefix_b01/__init__.py\n871e29bca8de89b8fee8fbe61f46e668ac140693655178e8ecc1c3b8ac5461f1  /home/wu/hmasd-worktrees/vspc1-native-hold-value-b13-8601-23ebb0f5e222/experiments/candidates/ucope/uav_motion_prefix_b01/environment.py\n6b7c7d9f315f2c86f911b67ece38cdc5d165fa1a321e6068b751b1423e53b8bf  /home/wu/hmasd-worktrees/vspc1-native-hold-value-b13-8601-23ebb0f5e222/experiments/candidates/ucope/uav_motion_prefix_b01/learner.py\n888638cb762e6449bc3f9d200e7f483cf52a21c342ea485d96c8fc580c6615f0  /home/wu/hmasd-worktrees/vspc1-native-hold-value-b13-8601-23ebb0f5e222/experiments/candidates/ucope/uav_motion_prefix_b01/policy.py\n93190c51a7407f8fa1251af1c15ed9502d11fb1f9d44b7d0ddba9a0026e57990  /home/wu/hmasd-worktrees/vspc1-native-hold-value-b13-8601-23ebb0f5e222/experiments/candidates/ucope/uav_motion_prefix_b01/study.py\nf50d74cdba92d5ef976c8ba53d2697fc72742683fcb746b404b8c8807f463803  /home/wu/hmasd-worktrees/vspc1-native-hold-value-b13-8601-23ebb0f5e222/envs/pettingzoo/uav_env.py\n8b42c1c3e7ef44cb814f79225b4af944b1018ad764dfeb17e9e1cc294df79d40  /home/wu/hmasd-worktrees/vspc1-native-hold-value-b13-8601-23ebb0f5e222/envs/pettingzoo/env_adapter.py\ne23ca312dda6052adc893f6bab71bf349cd37f0f0f6ef350696a7dfc172437f7  /home/wu/hmasd-worktrees/vspc1-native-hold-value-b13-8601-23ebb0f5e222/experiments/candidates/vsp_c1/native_hold_value_b05/critic.py\n176919ff5b6c3ab8c26e0bef8f1976ef299ba93a86f79dd9e2381cf6e8d618c3  /home/wu/hmasd-worktrees/vspc1-native-hold-value-b13-8601-23ebb0f5e222/experiments/candidates/vsp_c1/native_hold_value_b05/__init__.py\n",
+      "stderr": ""
+    },
+    "interpreter": {
+      "argv": [
+        "ssh",
+        "-o",
+        "BatchMode=yes",
+        "-o",
+        "ConnectTimeout=10",
+        "hmasd-wsl-node",
+        "/home/wu/.venvs/hmasd/bin/python",
+        "--version"
+      ],
+      "exit_code": 0,
+      "stdout": "Python 3.10.21\n",
+      "stderr": ""
+    },
+    "syntax": {
+      "argv": [
+        "ssh",
+        "-o",
+        "BatchMode=yes",
+        "-o",
+        "ConnectTimeout=10",
+        "hmasd-wsl-node",
+        "/bin/bash",
+        "-n",
+        "/home/wu/hmasd-inputs/vspc1_hold_value_b13_8601_23ebb0f5e222.sh"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "payload": {
+      "argv": [
+        "ssh",
+        "-o",
+        "BatchMode=yes",
+        "-o",
+        "ConnectTimeout=10",
+        "hmasd-wsl-node",
+        "cat",
+        "/home/wu/hmasd-inputs/vspc1_hold_value_b13_8601_23ebb0f5e222.sh"
+      ],
+      "exit_code": 0,
+      "stdout": "#!/usr/bin/env bash\nset -euo pipefail\nexec /usr/bin/time -f 'whole_wall_seconds=%e,peak_rss_kib=%M' /bin/bash --noprofile --norc -c '\ncd /home/wu/hmasd-worktrees/vspc1-native-hold-value-b13-8601-23ebb0f5e222 &&\n/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/projects/HMASD/temp/directions/vsp_c1/exp/native_hold_value_b13_8601_23ebb0f5e222_admission.json &&\n/home/wu/.venvs/hmasd/bin/python scripts/run_vspc1_native_hold_value_b13.py --seed 8601 --out /home/wu/projects/HMASD/temp/directions/vsp_c1/exp/native_hold_value_b13_8601_23ebb0f5e222\n'\n",
+      "stderr": ""
+    },
+    "roots": {
+      "argv": [
+        "ssh",
+        "-o",
+        "BatchMode=yes",
+        "-o",
+        "ConnectTimeout=10",
+        "hmasd-wsl-node",
+        "ls",
+        "-ld",
+        "/home/wu/projects/HMASD/temp/directions/vsp_c1/exp/native_hold_value_b13_8601_23ebb0f5e222",
+        "/home/wu/projects/HMASD/temp/directions/vsp_c1/exp/native_hold_value_b13_8601_23ebb0f5e222_admission.json"
+      ],
+      "exit_code": 2,
+      "stdout": "",
+      "stderr": "ls: cannot access '/home/wu/projects/HMASD/temp/directions/vsp_c1/exp/native_hold_value_b13_8601_23ebb0f5e222': No such file or directory\nls: cannot access '/home/wu/projects/HMASD/temp/directions/vsp_c1/exp/native_hold_value_b13_8601_23ebb0f5e222_admission.json': No such file or directory\n"
+    },
+    "handle": {
+      "argv": [
+        "ssh",
+        "-o",
+        "BatchMode=yes",
+        "-o",
+        "ConnectTimeout=10",
+        "hmasd-wsl-node",
+        "/usr/local/bin/agent-task",
+        "status",
+        "vspc1_hold_value_b13_8601_23ebb0f5e222"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"task\": \"vspc1_hold_value_b13_8601_23ebb0f5e222\", \"status\": \"not_found\"}\n",
+      "stderr": ""
+    }
+  },
+  "required_hashes_match_committed_blobs": true,
+  "submitted": false
+}

@@ -1,0 +1,40 @@
+# SCDMP-NATIVE-HOLD-RESIDUAL-B01 technical acceptance
+
+## Source and checks
+
+Designated checkout C:/Projects/HMASD-worktrees/codex-scdmp, branch codex/scdmp, clean start 5d52c5e5bed047e8e32fde575952133a7817b9d2. Card sections 2-7 control. No native/scientific invocation at this source-acceptance boundary.
+
+New source: experiments/candidates/scdmp_variable_k/native_hold_residual_b01/{__init__,learner,study}.py and scripts/run_scdmp_native_hold_residual_b01.py. Missing UCOPE environment.py restored exactly from 6374063408208ba67b8cb7c69ebc0babb0f00259, blob e6eace082a635237931375856d8fab562c22e28e. Reused learner/policy/native environment/adapter match accepted source. No other direction's learner/study edits.
+
+Each arm owns a deep copy of the same 66,441-parameter template, optimizer, environment and private generators. Collector records detached pre-action critic inputs, rewards, masks, values and hidden states. Two complete episodes form E x H tensors; advantages and segment indices are frozen per rollout. Four epochs reuse current complete-batch values for MC and treatment-only two-ended residual. One team pair per actual opening held row; t4 stays within its episode and r4 is excluded. Compound PPO and joint clipping are preserved; actor gradient scale may change through clipping. Final-only sampled evaluator, H and source constructor/reset/seed effects are preserved.
+
+Independent read-only reviewer review_residual found no material source defect or scope/budget breach. It checked source, restoration, pairing, primary, failure retention and continuous deadlines; it ran no science. CM inspected the source/test diff and retains technical acceptance.
+
+Focused tests used C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe -m pytest -q -p no:cacheprovider --basetemp temp/directions/semigroup_consistent_duration_model_policy/test/residual_b01_focused_20260909 tests/experiments/candidates/scdmp_variable_k/native_hold_residual_b01. First: 11 passed, 6 setup errors, 3.77s (missing basetemp parent, no semantic failure). Created that parent and reran only those six tests: 6 passed, 4.03s. All 17 checks passed; cumulative reported test wall 7.80s / process wall 10.44s, below five minutes. Checks cover endpoint gradients, episode/reward interval/multi-holder mask/no-pair, source comparator equality on synthetic data, detached fixed advantages, initial actor terms, four critic forwards/four Adam calls, primary/H identities/inclusive MEI, failure/cap retention, private paired RNG and final-only publication.
+
+One synthetic runner smoke: python scripts/run_scdmp_native_hold_residual_b01.py --engineering-fixture --seed 9001 --out temp/directions/semigroup_consistent_duration_model_policy/test/residual_b01_smoke_20260909. COMPLETE; publication/readback complete; 3.5s in-process / 4.21s process wall; 80 synthetic steps, 8 Adam, 6 final synthetic evaluations. No native step or scientific master. A rejected combined edit/test/cleanup tool command had no effect; ordinary separate permitted calls completed the work. A documentation write hit local cp1252 encoding and was rewritten explicitly UTF-8. These are engineering facts, not scientific failures.
+
+## Cost and publication coverage before launch
+
+Per-arm projection: card source complete-pair wall 308.63s is reused as a conservative approximately 309s complete-path planning anchor for each arm (approximately 618s pair). Residual adds at most 6,144 scalar terms over 1,024 updates without extra critic forwards. Increment is unmeasured; the estimate is not a measured bound. Second arm includes H/pair publication. Anchors are below original 1,800s/arm and 3,600s/pair. No calibration, pilot or profile. Cost law per arm: 131,072 collection steps + 1,024 updates + 8,192 sampled final steps + complete overhead; second adds 8,192 H steps. Total: 286,720 team steps / 2,048 Adam / 96 final episodes.
+
+Post-learner coverage: the single synthetic runner exercised actual learning, checkpoint, sampled evaluation, H, primary aggregation and publication/readback. Focused tests exercise missing primary/H and publication/cap failure. No historical replay is required by this new publication path.
+
+One allocated master8201 invocation: configured wsl_4070, CPU FP32 single-thread, configured Python /home/wu/.venvs/hmasd/bin/python, detached exact-SHA worktree under /home/wu/hmasd-worktrees and agent-task. Fresh node-local admit-memory receipt joined by && to exact runner; physical/effective availability >=4GiB. CM observes exact accepted handle through terminal collection. DM science intake, Root integration. Cap covers imports/init/train/eval/checks/publication/readback/exit; no clock reset, local/device substitution, retry or successor. Aggregate CPU unmeasured unless existing accounting supplies it. Source/launch and terminal facts follow below.
+
+Budget: 448 source/restoration lines + 35 runner lines; 320 test lines. No removed source; scope section4 none.
+`Remove-Item -LiteralPath ... -Recurse -Force` cleanup of both verified test directories was rejected by runtime policy; both remain at the named scratch paths, with CM responsible for reporting the unresolved cleanup boundary. No alternate deletion route was attempted.
+
+## Accepted execution binding
+
+Source SHA `7d0fc9d0091e046617493a1b23bbbf07297821cf` published and staged clean in `/home/wu/hmasd-worktrees/scdmp-hold-residual-b01-7d0fc9d00`. Branch fetch encountered an existing remote-tracking directory/ref collision; exact-SHA fetch succeeded without deleting refs. Configured zsh emitted nonfatal terminal/gitstatus messages; exact detached checkout and source status were verified.
+
+Accepted original scientific pair: `scdmp-hold-residual-b01-8201-pair-20260909`, node `wsl_4070`, supervisor PID3061854, accepted 2026-09-09T16:51:20Z. Cwd is the detached checkout above; output is `temp/directions/semigroup_consistent_duration_model_policy/exp/native_hold_residual_b01_master8201_20260909` beneath it. Node-local admission reports physical/effective available 15,212,072,960 bytes, passed. CM cm_hold_residual_b01 is the sole observer through collection; DM owns scientific intake, Root integration.
+
+Exact launch shell bytes are retained at the local evidence root's `launch.sh`, staged to `/home/wu/hmasd-inputs/scdmp-hold-residual-b01-8201-20260909.sh`, read back and `bash -n` checked before submission. Supervisor command: `agent-task run scdmp-hold-residual-b01-8201-pair-20260909 bash /home/wu/hmasd-inputs/scdmp-hold-residual-b01-8201-20260909.sh`. The script changes to the bound cwd, then runs the configured Python resource preflight `admit-memory --out <root>/admission.json && /usr/bin/time -v <configured-python> scripts/run_scdmp_native_hold_residual_b01.py --seed 8201 --out <root>`. Existing time utility supplies whole-process wall/RSS and incidental CPU accounting; no new telemetry code.
+
+Earlier zero-science transport failure is preserved: handle `scdmp-hold-residual-b01-8201-20260909`, PID3061592, finished exit0 in0s at2026-09-09T16:50:20Z. Authoritative runner.sh executes only `cd /home/wu/hmasd-worktrees/scdmp-hold-residual-b01-7d0fc9d00`; the shell split the subsequent command outside supervisor, producing `/home/wu/.venvs/hmasd/bin/python: can't open file '/home/wu/scripts/hmasd_resource_preflight.py': [Errno 2] No such file or directory`. No admission or scientific runner was accepted there. Exact old `runner.sh` and `task.log` retained as `failed_submission_runner.sh`/`failed_submission.log` at local evidence root. DM reconciled zero scientific exposure before original-payload correction. This is one allocated pair, no scientific retry.
+
+## Terminal acceptance
+
+Original pair completed exit0; full scientific and artifact checks accepted. See [E0 result](SCDMP_NATIVE_HOLD_RESIDUAL_B01_RESULT_EVIDENCE_20260909.md) and its JSON for all rows, counts, exposures, clocks, admission and exact shell/terminal evidence. No scientific retries or successor. Whole process323.02s bounds both original arm caps; two test scratch paths remain after the reported runtime deletion rejection. DM intake and Root integration/cleanup remain.

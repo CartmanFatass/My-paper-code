@@ -1,0 +1,942 @@
+{
+  "technical_acceptance": "PASS",
+  "primary": {
+    "Delta_U": 0.013224283854166657,
+    "G_U_W1": 0.00015462239583334102,
+    "G_U_W100": 0.01337890625,
+    "MEI_U": 0.05,
+    "SE": 0.0015969401899458364,
+    "active_paths": [
+      {
+        "Delta_U": 0.013435872395833309,
+        "G_U_W1": 8.951822916668456e-05,
+        "G_U_W100": 0.013525390624999993,
+        "SE": 0.001984067595863753,
+        "W100_U": 0.6789143880208334,
+        "W1_U": 0.6923502604166666,
+        "cell": "8_to_12.ACTIVE_CONTINUATION",
+        "init_U": 0.6924397786458333,
+        "n": 256
+      },
+      {
+        "Delta_U": 0.013012695312500005,
+        "G_U_W1": 0.00021972656249999748,
+        "G_U_W100": 0.013232421875000004,
+        "SE": 0.002502867886265754,
+        "W100_U": 0.70330810546875,
+        "W1_U": 0.71632080078125,
+        "cell": "12_to_8.ACTIVE_CONTINUATION",
+        "init_U": 0.71654052734375,
+        "n": 256
+      }
+    ],
+    "approximate_95_interval": [
+      0.010094281081872818,
+      0.016354286626460497
+    ],
+    "positive_favors": "W100",
+    "uncertainty": "conditional scenario Monte Carlo; distinct cell RNG domains; one training pair"
+  },
+  "independent_row_recalculation": [
+    {
+      "cell": "8_to_12.ACTIVE_CONTINUATION",
+      "Delta_U": 0.013435872395833309,
+      "SE": 0.001984067595863753,
+      "levels": {
+        "historical_W1": 0.6923502604166667,
+        "historical_init": 0.6924397786458334,
+        "W100": 0.6789143880208334,
+        "reference": 0.2502522786458334
+      },
+      "G_U_W100": 0.013525390625000022,
+      "negative": 84,
+      "zero": 2,
+      "positive": 170
+    },
+    {
+      "cell": "12_to_8.ACTIVE_CONTINUATION",
+      "Delta_U": 0.013012695312500006,
+      "SE": 0.002502867886265754,
+      "levels": {
+        "historical_W1": 0.71632080078125,
+        "historical_init": 0.71654052734375,
+        "W100": 0.70330810546875,
+        "reference": 0.321875
+      },
+      "G_U_W100": 0.013232421874999956,
+      "negative": 87,
+      "zero": 9,
+      "positive": 160
+    }
+  ],
+  "new_counts": {
+    "training_instances": 1,
+    "training_episodes": 12800,
+    "final_episodes": 2048,
+    "reference_episodes": 2048,
+    "episodes": 16896,
+    "ticks": 1081344,
+    "backward_step_calls": 200,
+    "model_allocations": 6,
+    "untrained_helpers": 5
+  },
+  "historical_unknown_prefix_retained": true,
+  "known_cumulative": {
+    "episodes": 33792,
+    "ticks": 2162688,
+    "backward_step_calls": 400,
+    "plus": "unknown original W100 training prefix"
+  },
+  "summaries": {
+    "historical_W1": {
+      "actor_score_weight": 1.0,
+      "admission_receipt": "/home/wu/hmasd-worktrees/rcle-b03-actor100-20260909/temp/directions/roster_consistent_latent_exploration/exp/b03-actor100-20260909/W1-admission.json",
+      "allocations": {
+        "models": 6,
+        "training_instances": 1,
+        "untrained_helpers": 5
+      },
+      "arm": "W1",
+      "block_digest_hex": "c1a1a91a691a02e2ac2dd3fa052e96045d968137db30e64acd3c6be0228d188e",
+      "cells": {
+        "12_to_12.ACTIVE_CONTINUATION": {
+          "40U_mean": 27.584635416666664,
+          "F_mean": 0.25478515625,
+          "U_mean": 0.6896158854166666,
+          "Y_mean": 0.3090922037760417,
+          "episodes": 256,
+          "tau40_count": 256,
+          "tau40_fraction": 1.0,
+          "tau_mean": 40.0
+        },
+        "12_to_12.NEW_EPOCH": {
+          "40U_mean": 27.615559895833336,
+          "F_mean": 0.24912109375,
+          "U_mean": 0.6903889973958334,
+          "Y_mean": 0.3103281656901042,
+          "episodes": 256,
+          "tau40_count": 256,
+          "tau40_fraction": 1.0,
+          "tau_mean": 40.0
+        },
+        "12_to_8.ACTIVE_CONTINUATION": {
+          "40U_mean": 28.65283203125,
+          "F_mean": 0.330517578125,
+          "U_mean": 0.71632080078125,
+          "Y_mean": 0.29271697998046875,
+          "episodes": 256,
+          "tau40_count": 256,
+          "tau40_fraction": 1.0,
+          "tau_mean": 40.0
+        },
+        "12_to_8.NEW_EPOCH": {
+          "40U_mean": 28.578125,
+          "F_mean": 0.330078125,
+          "U_mean": 0.714453125,
+          "Y_mean": 0.2951100667317708,
+          "episodes": 256,
+          "tau40_count": 256,
+          "tau40_fraction": 1.0,
+          "tau_mean": 40.0
+        },
+        "8_to_12.ACTIVE_CONTINUATION": {
+          "40U_mean": 27.694010416666668,
+          "F_mean": 0.25224609375,
+          "U_mean": 0.6923502604166667,
+          "Y_mean": 0.29983266194661456,
+          "episodes": 256,
+          "tau40_count": 256,
+          "tau40_fraction": 1.0,
+          "tau_mean": 40.0
+        },
+        "8_to_12.NEW_EPOCH": {
+          "40U_mean": 27.534505208333332,
+          "F_mean": 0.24938151041666667,
+          "U_mean": 0.6883626302083333,
+          "Y_mean": 0.3032175699869792,
+          "episodes": 256,
+          "tau40_count": 256,
+          "tau40_fraction": 1.0,
+          "tau_mean": 40.0
+        },
+        "8_to_8.ACTIVE_CONTINUATION": {
+          "40U_mean": 28.77587890625,
+          "F_mean": 0.329931640625,
+          "U_mean": 0.71939697265625,
+          "Y_mean": 0.2839508056640625,
+          "episodes": 256,
+          "tau40_count": 256,
+          "tau40_fraction": 1.0,
+          "tau_mean": 40.0
+        },
+        "8_to_8.NEW_EPOCH": {
+          "40U_mean": 28.634765625,
+          "F_mean": 0.331982421875,
+          "U_mean": 0.715869140625,
+          "Y_mean": 0.28537750244140625,
+          "episodes": 256,
+          "tau40_count": 256,
+          "tau40_fraction": 1.0,
+          "tau_mean": 40.0
+        }
+      },
+      "counts": {
+        "backward_step_calls": 200,
+        "final_episodes": 2048,
+        "init_episodes": 2048,
+        "nonzero_steps": 200,
+        "training_episodes": 12800,
+        "zero_steps": 0
+      },
+      "eight_cell_mean": {
+        "40U_mean": 28.1337890625,
+        "F_mean": 0.2910054524739583,
+        "U_mean": 0.7033447265625,
+        "Y_mean": 0.29745324452718097,
+        "cells": [
+          "8_to_8.ACTIVE_CONTINUATION",
+          "8_to_8.NEW_EPOCH",
+          "12_to_12.ACTIVE_CONTINUATION",
+          "12_to_12.NEW_EPOCH",
+          "8_to_12.ACTIVE_CONTINUATION",
+          "8_to_12.NEW_EPOCH",
+          "12_to_8.ACTIVE_CONTINUATION",
+          "12_to_8.NEW_EPOCH"
+        ],
+        "tau40_fraction": 1.0,
+        "tau_mean": 40.0
+      },
+      "final_baselines": [
+        0.2835102779714208,
+        0.28395134382232645,
+        0.2959581393735735,
+        0.29100854148477034,
+        0.2898951203942347,
+        0.2894292233180747,
+        0.2869282478094233,
+        0.28621573522950666
+      ],
+      "final_displacement": 0.15598634254049473,
+      "initial_parameter_norm": 21.230992499025053,
+      "initialization_summary": {
+        "cells": {
+          "12_to_12.ACTIVE_CONTINUATION": {
+            "40U_mean": 27.588541666666664,
+            "F_mean": 0.25576171875,
+            "U_mean": 0.6897135416666667,
+            "Y_mean": 0.30890401204427087,
+            "episodes": 256,
+            "tau40_count": 256,
+            "tau40_fraction": 1.0,
+            "tau_mean": 40.0
+          },
+          "12_to_12.NEW_EPOCH": {
+            "40U_mean": 27.660807291666668,
+            "F_mean": 0.24811197916666666,
+            "U_mean": 0.6915201822916667,
+            "Y_mean": 0.3095499674479167,
+            "episodes": 256,
+            "tau40_count": 256,
+            "tau40_fraction": 1.0,
+            "tau_mean": 40.0
+          },
+          "12_to_8.ACTIVE_CONTINUATION": {
+            "40U_mean": 28.66162109375,
+            "F_mean": 0.329931640625,
+            "U_mean": 0.71654052734375,
+            "Y_mean": 0.29250335693359375,
+            "episodes": 256,
+            "tau40_count": 256,
+            "tau40_fraction": 1.0,
+            "tau_mean": 40.0
+          },
+          "12_to_8.NEW_EPOCH": {
+            "40U_mean": 28.591796875,
+            "F_mean": 0.3294921875,
+            "U_mean": 0.714794921875,
+            "Y_mean": 0.29449462890625,
+            "episodes": 256,
+            "tau40_count": 256,
+            "tau40_fraction": 1.0,
+            "tau_mean": 40.0
+          },
+          "8_to_12.ACTIVE_CONTINUATION": {
+            "40U_mean": 27.697591145833336,
+            "F_mean": 0.25361328125,
+            "U_mean": 0.6924397786458334,
+            "Y_mean": 0.3000590006510417,
+            "episodes": 256,
+            "tau40_count": 256,
+            "tau40_fraction": 1.0,
+            "tau_mean": 40.0
+          },
+          "8_to_12.NEW_EPOCH": {
+            "40U_mean": 27.582356770833336,
+            "F_mean": 0.2486328125,
+            "U_mean": 0.6895589192708333,
+            "Y_mean": 0.3021036783854167,
+            "episodes": 256,
+            "tau40_count": 256,
+            "tau40_fraction": 1.0,
+            "tau_mean": 40.0
+          },
+          "8_to_8.ACTIVE_CONTINUATION": {
+            "40U_mean": 28.78369140625,
+            "F_mean": 0.330029296875,
+            "U_mean": 0.71959228515625,
+            "Y_mean": 0.28327178955078125,
+            "episodes": 256,
+            "tau40_count": 256,
+            "tau40_fraction": 1.0,
+            "tau_mean": 40.0
+          },
+          "8_to_8.NEW_EPOCH": {
+            "40U_mean": 28.609375,
+            "F_mean": 0.330810546875,
+            "U_mean": 0.715234375,
+            "Y_mean": 0.28548431396484375,
+            "episodes": 256,
+            "tau40_count": 256,
+            "tau40_fraction": 1.0,
+            "tau_mean": 40.0
+          }
+        },
+        "eight_cell_mean": {
+          "40U_mean": 28.14697265625,
+          "F_mean": 0.29079793294270834,
+          "U_mean": 0.70367431640625,
+          "Y_mean": 0.29704634348551434,
+          "cells": [
+            "8_to_8.ACTIVE_CONTINUATION",
+            "8_to_8.NEW_EPOCH",
+            "12_to_12.ACTIVE_CONTINUATION",
+            "12_to_12.NEW_EPOCH",
+            "8_to_12.ACTIVE_CONTINUATION",
+            "8_to_12.NEW_EPOCH",
+            "12_to_8.ACTIVE_CONTINUATION",
+            "12_to_8.NEW_EPOCH"
+          ],
+          "tau40_fraction": 1.0,
+          "tau_mean": 40.0
+        }
+      },
+      "launch_sha": "ad2fdfb854e295d6d9dddb229dd17cde58465919",
+      "native": {
+        "abi": {
+          "abi_version": 2,
+          "event_input_size": 64,
+          "fixture_input_size": 224,
+          "fixture_magic": 5927665395199787847,
+          "snapshot_size": 464,
+          "step_input_size": 64
+        },
+        "artifact_sha256": "5b918da7e23d7b65251fb20efcb6678e4a17e62538f6ebdedbda1d9e96221983",
+        "build_key": "a70147fa7b390c5d12fd6e16060105bf2ea530a09f21cb8487d51d6fcfc24fdb",
+        "load_seconds": 0.005518749007023871,
+        "path": "/tmp/hmasd_rcle_tbcfv_native/a70147fa7b390c5d12fd6e16060105bf2ea530a09f21cb8487d51d6fcfc24fdb/tbcfv_backend.so",
+        "resolved_build_root": "/tmp/hmasd_rcle_tbcfv_native",
+        "runtime_abi": {
+          "byteorder": "little",
+          "cache_tag": "cpython-310",
+          "event_input_size": 64,
+          "fixture_input_size": 224,
+          "implementation": "cpython",
+          "machine": "x86_64",
+          "pointer_bits": 64,
+          "python_version": [
+            3,
+            10,
+            21
+          ],
+          "snapshot_size": 464,
+          "step_input_size": 64
+        },
+        "source_sha256": "18d45b95a29c1ca8d17b4d192a9328ddc9c56a821a2690f118de44dbf0054819",
+        "toolchain": {
+          "compile_flags": [
+            "-std=c++17",
+            "-O2",
+            "-fexceptions",
+            "-shared",
+            "-fPIC",
+            "-fno-fast-math",
+            "-ffp-contract=off",
+            "-fno-unsafe-math-optimizations"
+          ],
+          "compiler_path": "/usr/bin/x86_64-linux-gnu-g++-13",
+          "compiler_sha256": "1353e9bdd29a7295c7226bf6c63abccce056d8cac31f112e5cdbecc3f28c2769"
+        }
+      },
+      "object": "RCLE-TBCFV-B03-ACTOR100",
+      "package": "FLEX-REKEY",
+      "peak_rss_bytes": 584744960,
+      "root_key_hex": "4b17629c25d71afceed93bbe657c0b5799d468d1f5673d90a7ceee644ec474c5",
+      "seed": 19,
+      "status": "COMPLETE",
+      "wall_seconds": 75.43952194601297
+    },
+    "W100": {
+      "actor_score_weight": 100.0,
+      "admission_receipt": "/home/wu/hmasd-worktrees/rcle-b03-recovery-20260909/temp/directions/roster_consistent_latent_exploration/exp/b03-actor100-recovery-20260909/W100-admission.json",
+      "allocations": {
+        "models": 6,
+        "training_instances": 1,
+        "untrained_helpers": 5
+      },
+      "arm": "W100",
+      "block_digest_hex": "c1a1a91a691a02e2ac2dd3fa052e96045d968137db30e64acd3c6be0228d188e",
+      "cells": {
+        "12_to_12.ACTIVE_CONTINUATION": {
+          "40U_mean": 27.0126953125,
+          "F_mean": 0.25807291666666665,
+          "U_mean": 0.6753173828125,
+          "Y_mean": 0.3232167561848958,
+          "episodes": 256,
+          "tau40_count": 256,
+          "tau40_fraction": 1.0,
+          "tau_mean": 40.0
+        },
+        "12_to_12.NEW_EPOCH": {
+          "40U_mean": 26.961588541666668,
+          "F_mean": 0.2576171875,
+          "U_mean": 0.6740397135416667,
+          "Y_mean": 0.3244222005208333,
+          "episodes": 256,
+          "tau40_count": 256,
+          "tau40_fraction": 1.0,
+          "tau_mean": 40.0
+        },
+        "12_to_8.ACTIVE_CONTINUATION": {
+          "40U_mean": 28.13232421875,
+          "F_mean": 0.316015625,
+          "U_mean": 0.70330810546875,
+          "Y_mean": 0.30604807535807294,
+          "episodes": 256,
+          "tau40_count": 256,
+          "tau40_fraction": 1.0,
+          "tau_mean": 40.0
+        },
+        "12_to_8.NEW_EPOCH": {
+          "40U_mean": 28.0546875,
+          "F_mean": 0.313623046875,
+          "U_mean": 0.7013671875,
+          "Y_mean": 0.3076273600260417,
+          "episodes": 256,
+          "tau40_count": 256,
+          "tau40_fraction": 1.0,
+          "tau_mean": 40.0
+        },
+        "8_to_12.ACTIVE_CONTINUATION": {
+          "40U_mean": 27.156575520833336,
+          "F_mean": 0.26100260416666665,
+          "U_mean": 0.6789143880208334,
+          "Y_mean": 0.3136698404947917,
+          "episodes": 256,
+          "tau40_count": 256,
+          "tau40_fraction": 1.0,
+          "tau_mean": 40.0
+        },
+        "8_to_12.NEW_EPOCH": {
+          "40U_mean": 27.064778645833336,
+          "F_mean": 0.2574544270833333,
+          "U_mean": 0.6766194661458333,
+          "Y_mean": 0.31508127848307294,
+          "episodes": 256,
+          "tau40_count": 256,
+          "tau40_fraction": 1.0,
+          "tau_mean": 40.0
+        },
+        "8_to_8.ACTIVE_CONTINUATION": {
+          "40U_mean": 28.28955078125,
+          "F_mean": 0.31962890625,
+          "U_mean": 0.70723876953125,
+          "Y_mean": 0.2979888916015625,
+          "episodes": 256,
+          "tau40_count": 256,
+          "tau40_fraction": 1.0,
+          "tau_mean": 40.0
+        },
+        "8_to_8.NEW_EPOCH": {
+          "40U_mean": 28.240234375,
+          "F_mean": 0.316259765625,
+          "U_mean": 0.706005859375,
+          "Y_mean": 0.29808807373046875,
+          "episodes": 256,
+          "tau40_count": 256,
+          "tau40_fraction": 1.0,
+          "tau_mean": 40.0
+        }
+      },
+      "counts": {
+        "backward_step_calls": 200,
+        "final_episodes": 2048,
+        "init_episodes": 0,
+        "nonzero_steps": 200,
+        "training_episodes": 12800,
+        "zero_steps": 0
+      },
+      "eight_cell_mean": {
+        "40U_mean": 27.614054361979168,
+        "F_mean": 0.28745930989583335,
+        "U_mean": 0.6903513590494792,
+        "Y_mean": 0.31076780954996747,
+        "cells": [
+          "8_to_8.ACTIVE_CONTINUATION",
+          "8_to_8.NEW_EPOCH",
+          "12_to_12.ACTIVE_CONTINUATION",
+          "12_to_12.NEW_EPOCH",
+          "8_to_12.ACTIVE_CONTINUATION",
+          "8_to_12.NEW_EPOCH",
+          "12_to_8.ACTIVE_CONTINUATION",
+          "12_to_8.NEW_EPOCH"
+        ],
+        "tau40_fraction": 1.0,
+        "tau_mean": 40.0
+      },
+      "final_baselines": [
+        0.29219566698307625,
+        0.28888668205279533,
+        0.3086791359391139,
+        0.30994955089619763,
+        0.3001496114816375,
+        0.2996738145110401,
+        0.2985706238968147,
+        0.296969615321441
+      ],
+      "final_displacement": 0.5938813516434148,
+      "initial_parameter_norm": 21.230992499025053,
+      "launch_sha": "4e89f24197a79d0b4fc724018f0223ca2c1e4289",
+      "native": {
+        "abi": {
+          "abi_version": 2,
+          "event_input_size": 64,
+          "fixture_input_size": 224,
+          "fixture_magic": 5927665395199787847,
+          "snapshot_size": 464,
+          "step_input_size": 64
+        },
+        "artifact_sha256": "5b918da7e23d7b65251fb20efcb6678e4a17e62538f6ebdedbda1d9e96221983",
+        "build_key": "a70147fa7b390c5d12fd6e16060105bf2ea530a09f21cb8487d51d6fcfc24fdb",
+        "load_seconds": 0.005815309006720781,
+        "path": "/tmp/hmasd_rcle_tbcfv_native/a70147fa7b390c5d12fd6e16060105bf2ea530a09f21cb8487d51d6fcfc24fdb/tbcfv_backend.so",
+        "resolved_build_root": "/tmp/hmasd_rcle_tbcfv_native",
+        "runtime_abi": {
+          "byteorder": "little",
+          "cache_tag": "cpython-310",
+          "event_input_size": 64,
+          "fixture_input_size": 224,
+          "implementation": "cpython",
+          "machine": "x86_64",
+          "pointer_bits": 64,
+          "python_version": [
+            3,
+            10,
+            21
+          ],
+          "snapshot_size": 464,
+          "step_input_size": 64
+        },
+        "source_sha256": "18d45b95a29c1ca8d17b4d192a9328ddc9c56a821a2690f118de44dbf0054819",
+        "toolchain": {
+          "compile_flags": [
+            "-std=c++17",
+            "-O2",
+            "-fexceptions",
+            "-shared",
+            "-fPIC",
+            "-fno-fast-math",
+            "-ffp-contract=off",
+            "-fno-unsafe-math-optimizations"
+          ],
+          "compiler_path": "/usr/bin/x86_64-linux-gnu-g++-13",
+          "compiler_sha256": "1353e9bdd29a7295c7226bf6c63abccce056d8cac31f112e5cdbecc3f28c2769"
+        }
+      },
+      "object": "RCLE-TBCFV-B03-ACTOR100",
+      "package": "FLEX-REKEY",
+      "paired_primary": {
+        "Delta_U": 0.013224283854166657,
+        "G_U_W1": 0.00015462239583334102,
+        "G_U_W100": 0.01337890625,
+        "MEI_U": 0.05,
+        "SE": 0.0015969401899458364,
+        "active_paths": [
+          {
+            "Delta_U": 0.013435872395833309,
+            "G_U_W1": 8.951822916668456e-05,
+            "G_U_W100": 0.013525390624999993,
+            "SE": 0.001984067595863753,
+            "W100_U": 0.6789143880208334,
+            "W1_U": 0.6923502604166666,
+            "cell": "8_to_12.ACTIVE_CONTINUATION",
+            "init_U": 0.6924397786458333,
+            "n": 256
+          },
+          {
+            "Delta_U": 0.013012695312500005,
+            "G_U_W1": 0.00021972656249999748,
+            "G_U_W100": 0.013232421875000004,
+            "SE": 0.002502867886265754,
+            "W100_U": 0.70330810546875,
+            "W1_U": 0.71632080078125,
+            "cell": "12_to_8.ACTIVE_CONTINUATION",
+            "init_U": 0.71654052734375,
+            "n": 256
+          }
+        ],
+        "approximate_95_interval": [
+          0.010094281081872818,
+          0.016354286626460497
+        ],
+        "positive_favors": "W100",
+        "uncertainty": "conditional scenario Monte Carlo; distinct cell RNG domains; one training pair"
+      },
+      "peak_rss_bytes": 580116480,
+      "root_key_hex": "4b17629c25d71afceed93bbe657c0b5799d468d1f5673d90a7ceee644ec474c5",
+      "seed": 19,
+      "status": "COMPLETE",
+      "wall_seconds": 70.71193205902819
+    },
+    "reference": {
+      "Y_note": "ScriptedEpisodeResult has no Y; Y is null",
+      "admission_receipt": "/home/wu/hmasd-worktrees/rcle-b03-recovery-20260909/temp/directions/roster_consistent_latent_exploration/exp/b03-actor100-recovery-20260909/reference-admission.json",
+      "allocations": {
+        "models": 0,
+        "training_instances": 0
+      },
+      "arm": "reference",
+      "block_digest_hex": "c1a1a91a691a02e2ac2dd3fa052e96045d968137db30e64acd3c6be0228d188e",
+      "cells": {
+        "12_to_12.ACTIVE_CONTINUATION": {
+          "40U_mean": 9.752604166666668,
+          "F_mean": 0.24381510416666669,
+          "U_mean": 0.2438151041666667,
+          "Y_mean": null,
+          "episodes": 256,
+          "tau40_count": 255,
+          "tau40_fraction": 0.99609375,
+          "tau_mean": 39.84375
+        },
+        "12_to_12.NEW_EPOCH": {
+          "40U_mean": 9.926106770833336,
+          "F_mean": 0.2275390625,
+          "U_mean": 0.24815266927083338,
+          "Y_mean": null,
+          "episodes": 256,
+          "tau40_count": 254,
+          "tau40_fraction": 0.9921875,
+          "tau_mean": 39.6953125
+        },
+        "12_to_8.ACTIVE_CONTINUATION": {
+          "40U_mean": 12.875,
+          "F_mean": 0.321875,
+          "U_mean": 0.321875,
+          "Y_mean": null,
+          "episodes": 256,
+          "tau40_count": 252,
+          "tau40_fraction": 0.984375,
+          "tau_mean": 39.6875
+        },
+        "12_to_8.NEW_EPOCH": {
+          "40U_mean": 13.5205078125,
+          "F_mean": 0.3201171875,
+          "U_mean": 0.3380126953125,
+          "Y_mean": null,
+          "episodes": 256,
+          "tau40_count": 249,
+          "tau40_fraction": 0.97265625,
+          "tau_mean": 39.3828125
+        },
+        "8_to_12.ACTIVE_CONTINUATION": {
+          "40U_mean": 10.010091145833336,
+          "F_mean": 0.248046875,
+          "U_mean": 0.2502522786458334,
+          "Y_mean": null,
+          "episodes": 256,
+          "tau40_count": 256,
+          "tau40_fraction": 1.0,
+          "tau_mean": 40.0
+        },
+        "8_to_12.NEW_EPOCH": {
+          "40U_mean": 10.023763020833336,
+          "F_mean": 0.2353515625,
+          "U_mean": 0.2505940755208334,
+          "Y_mean": null,
+          "episodes": 256,
+          "tau40_count": 255,
+          "tau40_fraction": 0.99609375,
+          "tau_mean": 39.8515625
+        },
+        "8_to_8.ACTIVE_CONTINUATION": {
+          "40U_mean": 12.44921875,
+          "F_mean": 0.31123046875,
+          "U_mean": 0.31123046875,
+          "Y_mean": null,
+          "episodes": 256,
+          "tau40_count": 248,
+          "tau40_fraction": 0.96875,
+          "tau_mean": 39.125
+        },
+        "8_to_8.NEW_EPOCH": {
+          "40U_mean": 13.74072265625,
+          "F_mean": 0.32587890625,
+          "U_mean": 0.34351806640625,
+          "Y_mean": null,
+          "episodes": 256,
+          "tau40_count": 250,
+          "tau40_fraction": 0.9765625,
+          "tau_mean": 39.4140625
+        }
+      },
+      "counts": {
+        "backward_step_calls": 0,
+        "final_episodes": 2048,
+        "init_episodes": 0,
+        "nonzero_steps": 0,
+        "training_episodes": 0,
+        "zero_steps": 0
+      },
+      "eight_cell_mean": {
+        "40U_mean": 11.537251790364584,
+        "F_mean": 0.27923177083333334,
+        "U_mean": 0.2884312947591146,
+        "Y_mean": null,
+        "cells": [
+          "8_to_8.ACTIVE_CONTINUATION",
+          "8_to_8.NEW_EPOCH",
+          "12_to_12.ACTIVE_CONTINUATION",
+          "12_to_12.NEW_EPOCH",
+          "8_to_12.ACTIVE_CONTINUATION",
+          "8_to_12.NEW_EPOCH",
+          "12_to_8.ACTIVE_CONTINUATION",
+          "12_to_8.NEW_EPOCH"
+        ],
+        "tau40_fraction": 0.98583984375,
+        "tau_mean": 39.625
+      },
+      "launch_sha": "4e89f24197a79d0b4fc724018f0223ca2c1e4289",
+      "native": {
+        "abi": {
+          "abi_version": 2,
+          "event_input_size": 64,
+          "fixture_input_size": 224,
+          "fixture_magic": 5927665395199787847,
+          "snapshot_size": 464,
+          "step_input_size": 64
+        },
+        "artifact_sha256": "5b918da7e23d7b65251fb20efcb6678e4a17e62538f6ebdedbda1d9e96221983",
+        "build_key": "a70147fa7b390c5d12fd6e16060105bf2ea530a09f21cb8487d51d6fcfc24fdb",
+        "load_seconds": 0.0020679029985331,
+        "path": "/tmp/hmasd_rcle_tbcfv_native/a70147fa7b390c5d12fd6e16060105bf2ea530a09f21cb8487d51d6fcfc24fdb/tbcfv_backend.so",
+        "resolved_build_root": "/tmp/hmasd_rcle_tbcfv_native",
+        "runtime_abi": {
+          "byteorder": "little",
+          "cache_tag": "cpython-310",
+          "event_input_size": 64,
+          "fixture_input_size": 224,
+          "implementation": "cpython",
+          "machine": "x86_64",
+          "pointer_bits": 64,
+          "python_version": [
+            3,
+            10,
+            21
+          ],
+          "snapshot_size": 464,
+          "step_input_size": 64
+        },
+        "source_sha256": "18d45b95a29c1ca8d17b4d192a9328ddc9c56a821a2690f118de44dbf0054819",
+        "toolchain": {
+          "compile_flags": [
+            "-std=c++17",
+            "-O2",
+            "-fexceptions",
+            "-shared",
+            "-fPIC",
+            "-fno-fast-math",
+            "-ffp-contract=off",
+            "-fno-unsafe-math-optimizations"
+          ],
+          "compiler_path": "/usr/bin/x86_64-linux-gnu-g++-13",
+          "compiler_sha256": "1353e9bdd29a7295c7226bf6c63abccce056d8cac31f112e5cdbecc3f28c2769"
+        }
+      },
+      "object": "RCLE-TBCFV-B03-ACTOR100",
+      "package": "reference",
+      "peak_rss_bytes": 396935168,
+      "root_key_hex": "4b17629c25d71afceed93bbe657c0b5799d468d1f5673d90a7ceee644ec474c5",
+      "seed": 19,
+      "status": "COMPLETE",
+      "wall_seconds": 2.370696695987135
+    }
+  },
+  "admissions": {
+    "reference-admission.json": {
+      "assessed_at": "2026-09-09T21:54:06.787778Z",
+      "available_physical_bytes": 15635030016,
+      "captured_at": "2026-09-09T21:54:06.787492Z",
+      "cgroup_headroom_bytes": null,
+      "cgroup_memory_current_bytes": null,
+      "cgroup_memory_max_bytes": null,
+      "effective_available_bytes": 15635030016,
+      "effective_floor_pass": true,
+      "failure_reasons": [],
+      "measurement_source": "/proc/meminfo",
+      "minimum_available_bytes": 4294967296,
+      "passed": true,
+      "physical_floor_pass": true,
+      "schema_version": 1
+    },
+    "W100-admission.json": {
+      "assessed_at": "2026-09-09T21:52:55.793416Z",
+      "available_physical_bytes": 15634997248,
+      "captured_at": "2026-09-09T21:52:55.793155Z",
+      "cgroup_headroom_bytes": null,
+      "cgroup_memory_current_bytes": null,
+      "cgroup_memory_max_bytes": null,
+      "effective_available_bytes": 15634997248,
+      "effective_floor_pass": true,
+      "failure_reasons": [],
+      "measurement_source": "/proc/meminfo",
+      "minimum_available_bytes": 4294967296,
+      "passed": true,
+      "physical_floor_pass": true,
+      "schema_version": 1
+    }
+  },
+  "timing": {
+    "chain-time.txt": "wall_s=73.62,peak_rss_kib=591452,exit=0\n",
+    "reference-time.txt": "wall_s=2.59 peak_rss_kib=429500 exit=0\n",
+    "W100-time.txt": "wall_s=70.95 peak_rss_kib=591452 exit=0\n"
+  },
+  "supervisor": {
+    "exit_code": "0\n",
+    "pid": "3071849\n",
+    "runner.sh": "#!/usr/bin/env bash\necho $$ > \"/home/wu/.agent-tasks/rcle-b03-recovery-20260909/pid\"\nSTART_TS=$(date +%s)\necho \"=== Task 'rcle-b03-recovery-20260909' started at $(date -Iseconds) ===\" >> \"/home/wu/.agent-tasks/rcle-b03-recovery-20260909/task.log\"\n\n# Execute command capturing output\nset +e\neval 'cd /home/wu/hmasd-worktrees/rcle-b03-recovery-20260909 && mkdir -p temp/directions/roster_consistent_latent_exploration/exp/b03-actor100-recovery-20260909 && HMASD_PYTHON=/home/wu/.venvs/hmasd/bin/python /usr/bin/time -f wall_s=%e,peak_rss_kib=%M,exit=%x -o temp/directions/roster_consistent_latent_exploration/exp/b03-actor100-recovery-20260909/chain-time.txt timeout 700 bash scripts/run_rcle_tbcfv_b03_recovery.sh 4e89f24197a79d0b4fc724018f0223ca2c1e4289 /home/wu/hmasd-worktrees/rcle-b03-recovery-20260909/temp/directions/roster_consistent_latent_exploration/exp/b03-actor100-recovery-20260909 /home/wu/hmasd-inputs/rcle-b03-recovery-20260909/W1-summary.json' >> \"/home/wu/.agent-tasks/rcle-b03-recovery-20260909/task.log\" 2>&1\nEXIT_CODE=$?\nset -e\n\nEND_TS=$(date +%s)\necho $EXIT_CODE > \"/home/wu/.agent-tasks/rcle-b03-recovery-20260909/exit_code\"\nif [ $EXIT_CODE -eq 0 ]; then\n    echo \"finished\" > \"/home/wu/.agent-tasks/rcle-b03-recovery-20260909/status\"\nelse\n    echo \"failed\" > \"/home/wu/.agent-tasks/rcle-b03-recovery-20260909/status\"\nfi\necho \"=== Task 'rcle-b03-recovery-20260909' exited with code $EXIT_CODE at $(date -Iseconds) (Duration: $((END_TS - START_TS))s) ===\" >> \"/home/wu/.agent-tasks/rcle-b03-recovery-20260909/task.log\"\n\n# Keep session alive briefly for inspection, then exit\nsleep 1\n",
+    "start_time": "1788990775\n",
+    "status": "finished\n",
+    "task.log": "=== Task 'rcle-b03-recovery-20260909' started at 2026-09-10T05:52:55+08:00 ===\n{\n  \"assessed_at\": \"2026-09-09T21:52:55.793416Z\",\n  \"available_physical_bytes\": 15634997248,\n  \"captured_at\": \"2026-09-09T21:52:55.793155Z\",\n  \"cgroup_headroom_bytes\": null,\n  \"cgroup_memory_current_bytes\": null,\n  \"cgroup_memory_max_bytes\": null,\n  \"effective_available_bytes\": 15634997248,\n  \"effective_floor_pass\": true,\n  \"failure_reasons\": [],\n  \"measurement_source\": \"/proc/meminfo\",\n  \"minimum_available_bytes\": 4294967296,\n  \"passed\": true,\n  \"physical_floor_pass\": true,\n  \"schema_version\": 1\n}\nCOMPLETE W100\n{\n  \"assessed_at\": \"2026-09-09T21:54:06.787778Z\",\n  \"available_physical_bytes\": 15635030016,\n  \"captured_at\": \"2026-09-09T21:54:06.787492Z\",\n  \"cgroup_headroom_bytes\": null,\n  \"cgroup_memory_current_bytes\": null,\n  \"cgroup_memory_max_bytes\": null,\n  \"effective_available_bytes\": 15635030016,\n  \"effective_floor_pass\": true,\n  \"failure_reasons\": [],\n  \"measurement_source\": \"/proc/meminfo\",\n  \"minimum_available_bytes\": 4294967296,\n  \"passed\": true,\n  \"physical_floor_pass\": true,\n  \"schema_version\": 1\n}\nCOMPLETE reference\n=== Task 'rcle-b03-recovery-20260909' exited with code 0 at 2026-09-10T05:54:09+08:00 (Duration: 74s) ===\n"
+  },
+  "verified_files": [
+    "W100-admission.json",
+    "reference\\summary.json",
+    "W100-time.txt",
+    "reference-admission.json",
+    "chain-time.txt",
+    "reference-time.txt",
+    "W100\\summary.json",
+    "W100\\initial_parameters.pt",
+    "W100\\parameters.pt",
+    "W100\\completed_blocks.jsonl",
+    "supervisor\\runner.sh",
+    "supervisor\\exit_code",
+    "supervisor\\status",
+    "supervisor\\start_time",
+    "supervisor\\pid",
+    "supervisor\\task.log"
+  ],
+  "inventory": {
+    "chain-time.txt": {
+      "bytes": 40,
+      "sha256": "270d283382c05610c93d42ab8729b7d828156688ff3bd45ea7a4d4461d73dd07"
+    },
+    "collect_analysis.py": {
+      "bytes": 5370,
+      "sha256": "55054e462cf4606e13a9b119f8c9b4c9f623a3b7062c9de5d6868b11192fbd9a"
+    },
+    "reference-admission.json": {
+      "bytes": 504,
+      "sha256": "779825fad9656aba3ed914b7ec9bcb35dc0f0f6f58e1ba2af6768921cb6157ee"
+    },
+    "reference-time.txt": {
+      "bytes": 39,
+      "sha256": "f05a8273a4654b7f8e8ba9c4b9bd5d8d97196daf6808a950afcef32541347764"
+    },
+    "remote-output-sha256.txt": {
+      "bytes": 898,
+      "sha256": "39f113cb7a27e100b4d749dab617de4921d93b29b5325b646ebd90aaf38463b1"
+    },
+    "remote-supervisor-sha256.txt": {
+      "bytes": 465,
+      "sha256": "54e41b03bb1e64e007a712fab6de1f871c89f6e3b2f77606809bf949ce0f09cc"
+    },
+    "W100-admission.json": {
+      "bytes": 504,
+      "sha256": "8b61ecdd1a4f7739268cb3124463fcb7af4d979a8e40f2985fc8a16a2840de38"
+    },
+    "W100-time.txt": {
+      "bytes": 40,
+      "sha256": "21dbb86c9970d18ae2b903cbd6ff8a263633b2f502771321eb7aeb89f235df11"
+    },
+    "reference\\summary.json": {
+      "bytes": 390844,
+      "sha256": "0f6041cd8dd65174489554fe4ff39145ea28c5f5cbce2aefdb4f420d449e56b1"
+    },
+    "supervisor\\exit_code": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "supervisor\\pid": {
+      "bytes": 8,
+      "sha256": "e873f8e725df37934836a85f68ba23e936b8718e5db628a190a135a3c920f47b"
+    },
+    "supervisor\\runner.sh": {
+      "bytes": 1604,
+      "sha256": "99ff06725a92aa37847024a4a636fb92e0b577dda6efed4160c1a3bd776d2de3"
+    },
+    "supervisor\\start_time": {
+      "bytes": 11,
+      "sha256": "9c9f3c7e5382c8d046c4840123cb2020f74465a71dc409f0622c2b6703f19e46"
+    },
+    "supervisor\\status": {
+      "bytes": 9,
+      "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+    },
+    "supervisor\\task.log": {
+      "bytes": 1226,
+      "sha256": "6069555eb7b027286d919bee6587461de8fa54858bfcf35262075598edf10254"
+    },
+    "W100\\completed_blocks.jsonl": {
+      "bytes": 308621,
+      "sha256": "adf1e601fc0ebfe5b3b8435c9f54f6cf982c1726076e5d87af39d708afe49555"
+    },
+    "W100\\initial_parameters.pt": {
+      "bytes": 219733,
+      "sha256": "9c5ba67eb37dabdb9bdd35913f8664f10cf6b8cf52e1e0d1e772cdf0a7286b53"
+    },
+    "W100\\parameters.pt": {
+      "bytes": 219445,
+      "sha256": "2cd4a9289ecbee94853f3844eef69125949527a508f85e6aadfb644e6bed5068"
+    },
+    "W100\\summary.json": {
+      "bytes": 910960,
+      "sha256": "e75d2e4fc35ee7a9f8b93f97802f15c244a8445c92b32c0b90f6e867c122debb"
+    }
+  },
+  "costs": {
+    "complete_W100_wall_s": 70.95,
+    "complete_reference_wall_s": 2.59,
+    "logical_invocation_sum_s": 73.54,
+    "remote_chain_and_critical_path_s": 73.62,
+    "focused_check_s": 5.0949401,
+    "staging_verification_s": 0.5501623,
+    "collection_s": 3.0204332,
+    "digest_readback_s": 0.8780937,
+    "analysis_publication_s": 0.3649094,
+    "checkpoint_input_verification_s": 2.7547207,
+    "conservative_incremental_charge_s": 100,
+    "incremental_cap_s": 750,
+    "old_conservative_charge_s": 160.5983968,
+    "named_old_plus_new_charge_s": 260.5983968,
+    "aggregate_cpu_s": null,
+    "overall_check_to_E0_elapsed_s": null
+  },
+  "acceptance_checks": {
+    "parameter_count": 26161,
+    "all_final_tensors_finite_fp64": true,
+    "initial_checkpoint_bytes_equal_historical": true,
+    "native_identity_equal_historical": true,
+    "all200_JSONL_rows_equal_final_curves": true,
+    "all8cells_all256indices_retained": true
+  }
+}

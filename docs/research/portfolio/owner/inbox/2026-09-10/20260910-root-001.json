@@ -1,0 +1,72 @@
+{
+  "id": "20260910-root-001",
+  "created": "2026-09-10T00:21:18-07:00",
+  "direction": "portfolio",
+  "tier": "portfolio",
+  "kind": "portfolio",
+  "title": "控制面整合：Root执行、DM工程合一与Portfolio Pro裁决",
+  "context": "OWNER_DIRECT 已授权实施；配置重启生效，科研未因此重启。",
+  "options": [
+    {
+      "key": "implement",
+      "label": "执行已批准整合",
+      "consequence": "更新控制面文件，保留历史与当前有限预算；重启加载模型配置。"
+    },
+    {
+      "key": "amend",
+      "label": "按所有者后续明确指令修订",
+      "consequence": "在干净边界按明确指令修改后续行为，保留已执行历史。"
+    }
+  ],
+  "recommended": "implement",
+  "auto_applied": "implement",
+  "dm_reason": "",
+  "evidence": [
+    "docs/research/portfolio/decisions/2026-09-10-control-plane-consolidation.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-10.md#L5",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": {
+    "question": "记录所有者已批准的控制面整合；是否需要异步修订？",
+    "changes_if_approved": [
+      {
+        "target": "AGENTS / .codex / .agents / 当前规范与路由 / owner-console",
+        "from": "Root承担科学规划，DM与CM分层，Portfolio逐项ratify",
+        "to": "Root执行协调，DM科学工程合一，Portfolio Pro范围内最终裁决，异步覆盖"
+      }
+    ],
+    "if_refused": "在下一个干净边界执行明确的所有者修订；保留现有证据与已执行记录，不隐含重跑或回滚。",
+    "evidence_for": [
+      {
+        "path": "docs/research/portfolio/decisions/2026-09-10-control-plane-consolidation.md",
+        "quote": "删除outsource技能与对应subagent 其余同意 开始执行",
+        "why": "所有者明确批准实施，配置重启后生效。"
+      }
+    ],
+    "evidence_against": [],
+    "uncertainty": [
+      "当前运行会话不宣称已换模型；重启后采用配置。"
+    ],
+    "cost": {
+      "compute": "零新增科研调用",
+      "owner_time": "异步阅览",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "删除outsource技能与对应subagent 其余同意 开始执行",
+    "source": "docs/research/portfolio/decisions/2026-09-10-control-plane-consolidation.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-10T07:22:16+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/decisions/2026-09-10-control-plane-consolidation.md",
+      "record": "docs/research/portfolio/decisions/2026-09-10-control-plane-consolidation.md",
+      "state": "applied",
+      "summary": "已实施控制面文件与owner-console变更并完成针对性验收；模型配置重启后生效，未增加科研调用。"
+    }
+  ]
+}

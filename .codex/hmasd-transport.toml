@@ -3,9 +3,10 @@ mode = "singleton"
 status = "active"
 
 # OWNER_DIRECT 2026-09-07: one independent reusable Transport task.
+# OWNER_DIRECT 2026-09-09: replace owner-archived stalled endpoint; keep Luna/high and provider bindings.
 # Root dispatches and receives native-direction receipts; Transport owns Pro observation.
 # No scheduled automation; preserve request-specific bindings, archives and receipt state.
-thread_id = "01a07e52-f085-76a0-886a-4127f490421f"
+thread_id = "01a087a3-4f12-7021-9a4d-6da9da2bafcc"
 task_title = "HMASD Pro Transport"
 execution_owner = "transport"
 project_id = "177ab8d8-53ae-448c-9a9e-aaa2fecd2498"

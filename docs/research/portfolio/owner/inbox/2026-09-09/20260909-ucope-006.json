@@ -1,0 +1,76 @@
+{
+  "id": "20260909-ucope-006",
+  "created": "2026-09-09T05:40:44-07:00",
+  "direction": "ucope",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "P81：新训练复查固定续约与反馈反转",
+  "context": "固定随机续约在新独立训练上能否比合法逐步反馈获得更高原生回报？结构为部分可观测多机团队中的时长承诺与终止。P80悬停增益和反馈损失全部保留；新卡前瞻选择F-G。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "按Root P81分配执行一次8001，完成后停止并保留所有符号。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "在可执行边界停止本卡后续工作，保留已经发生的结果与证据。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "在可执行边界按新指令修订未来工作，不重写已发生结果。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "已有悬停收益与反馈反转使新独立反馈比较最能回答当前问题。",
+  "evidence": [
+    "docs/research/candidates/ucope/UCOPE_UAV_FIXED_RENEWAL_B03_SCIENCE_CARD_20260909.md",
+    "docs/research/candidates/ucope/UCOPE_UAV_FIXED_RENEWAL_B03_P81_INTAKE_20260909.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-09.md#L22",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否接受P81这一次新训练，以固定续约相对逐步反馈的原生回报差为前瞻主问题，并保留悬停比较和全部旧结果？",
+    "changes_if_approved": [
+      {
+        "target": "UCOPE 固定续约 B03 科学卡",
+        "from": "P80已经结束；尚无P81科学卡绑定",
+        "to": "按Root分配绑定新8001及私有随机流，F−G主问题，0.01阈值，单次完整运行后停止"
+      }
+    ],
+    "if_refused": "在下个可执行边界应用你的拒绝或修订；保留已经发生的运行、全部原始证据和P80原主问题，不把反馈损失或旧正结果删去。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_UAV_FIXED_RENEWAL_HOVER_B01_P80_INTAKE_20260909.md",
+        "quote": "The stronger legal feedback null has a larger sampled return,\nso this observation does not establish a benefit from choosing commitment over\nordinary feedback.",
+        "why": "已有悬停增益不能回答固定续约是否比灵活反馈更好；新独立训练针对这一反转。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_UAV_FIXED_RENEWAL_HOVER_B01_P80_INTAKE_20260909.md",
+        "quote": "There is no stable superiority/harm, learned-duration value,\ncausal timing/information effect, equivalence or deployment conclusion.",
+        "why": "当前观测和旧符号只支持有限探索，不能据一次新训练给出稳定优势或原因判断。"
+      }
+    ],
+    "uncertainty": [
+      "新训练和评价噪声仍混合，只有一个新配对训练实例。",
+      "没有调优同信息基线的余量记录；悬停不是上界。",
+      "新结果可能仍为负，所有符号都结束本次分配。"
+    ],
+    "cost": {
+      "compute": "2×512次训练回合、3×32次最终评价，共286720原生步和2048次Adam更新；每臂1800秒、全程3600秒；检查≤300秒。P80完整306.09秒仅作参考。",
+      "owner_time": "无需回复即可按既有授权执行；可在卡片或审核中覆盖下一步。",
+      "reversibility": "costly",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "推荐按P81另做一次独立训练8001，将固定续约相对逐步反馈的原生回报差设为前瞻主问题，查看新训练历史下反馈反转是否继续。保留悬停比较和全部旧符号，沿用0.01阈值与原预算；不改P80主问题，也不要求新结果有利。",
+    "source": "docs/research/candidates/ucope/UCOPE_UAV_FIXED_RENEWAL_B03_P81_INTAKE_20260909.md"
+  },
+  "starred": false
+}

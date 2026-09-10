@@ -1,9 +1,10 @@
 # Native agents and Transport communication
 
-Root combines research planning and execution. Use native `collaboration` tools for its agent
+Root coordinates execution within accepted decisions. Use native `collaboration` tools for its agent
 tree and `send_message_to_thread` for the independent Transport task in `.codex/hmasd-transport.toml`.
-ROOT_OPERATIONS.md defines responsibility and observation. Planning, replacement selection and
-Portfolio intake happen locally in Root.
+ROOT_OPERATIONS.md defines responsibility and observation. Root handles operational replacement and integration; the designated DM prepares Portfolio
+materials and checks its Pro response. Codex App provides native/app task lifecycle and delivery
+behavior; this document specifies recipients and responsibilities, not a new messaging service.
 
 ## Native agent messages
 
@@ -50,7 +51,7 @@ scientific decision by the relay. Publish required artifacts first; for a blocke
 commit, include the exact evidence and unfinished effect/acceptance state.
 
 **Keep native:** progress/commentary, ordinary questions, acknowledgements, unchanged waits,
-and CM/specialist/reviewer results whose actual next owner is their assigning DM/CM. Those
+and specialist/reviewer results whose actual next owner is their assigning DM. Those
 parents continue and send their own Root-action return when ready. Do not copy every nested
 completion to Root. Root-to-native work still uses `followup_task`; notifications use
 `send_message`. Existing independent Transport receipts already use cross-task messaging
@@ -89,23 +90,35 @@ cross-task send to Root with the same envelope and reports the relay failure. If
 is uncertain, reconcile the same event first; do not use fallback to duplicate an uncertain
 send. Root alone accepts evidence and resumes the original native recipient.
 
+## Independent experiment monitor — OWNER_DIRECT 2026-09-09
+
+DM/Operator sends `MONITOR_ADD` directly for explicitly accepted handles to the shared Luna/low app task in
+`.codex/hmasd-monitor.toml`. It uses one goal over multiple experiments and replies directly to
+Root with adoption and individual terminal facts under EXPERIMENT_MONITOR.md. It does not use
+the Relay as a second copy or address native owner names as app task IDs. Root resumes the
+original native owner with `followup_task` when collection/intake remains, deduplicating any
+already completed native work. Cross-task messages omit model/effort overrides. A terminal
+notification's accepted app delivery is distinct from DM technical or scientific acceptance.
+
 ## Independent Transport (existing receipt route)
 
-App messages omit `model` and `thinking` to preserve the recipient's settings. Native DM/CM
+App messages omit `model` and `thinking` to preserve the recipient's settings. Native DM
 authors deliver ready packets to Root; Root sends the exact committed handoff to Transport.
 New requests name the actual author as source, Root as parent and Transport as operator.
-Root-authored Portfolio questions use Root for both source and parent. Transport returns one
+The designated Portfolio DM is the actual source for new Portfolio questions; Root remains
+parent and dispatches the handoff. Transport returns one
 factual receipt to the declared parent; source is not a fallback receipt destination.
-Root forwards direction evidence with `followup_task` when intake or continuation is required
-and performs Portfolio intake itself. Preserve unknown Send state and reconcile the original
+Root forwards direction evidence to its direction DM and Portfolio evidence to the designated
+author/checking DM with `followup_task`. The DM returns conformance/intake and the operational
+mapping; Root implements the conforming Pro decision, not another scientific verdict. Preserve unknown Send state and reconcile the original
 request before recovery. No second Send follows from a routing failure.
 
 ## Experiment and specialist returns
 
-Return evidence and out-of-scope questions to the actual assigning parent, including when that
-parent is a Reviewer or Implementer. CM retains final technical acceptance; do not bypass a
-parent merely because a role name mentions CM. Reuse the original request and actual tool
-address when forwarding a nested result.
+New specialists return directly to their assigning DM (or Root for its own control-plane work),
+which retains technical acceptance. No new Reviewer/Implementer child chain is created. Existing
+legacy nested returns retain their actual parent and request until their accepted work closes;
+Root and DM explicitly transfer unfinished responsibility without changing accepted external IDs.
 
 Observation ownership and transfer are maintained in EXPERIMENT_MONITOR.md; Root tracking and
 integration are maintained in ROOT_OPERATIONS.md. An accepted-handle message does not transfer

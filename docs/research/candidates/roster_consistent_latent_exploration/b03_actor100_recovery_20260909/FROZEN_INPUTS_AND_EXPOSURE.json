@@ -1,0 +1,191 @@
+{
+  "record": "prospective B03 missing-only recovery plan; zero new scientific calls allocated by this publication",
+  "historical_source_sha": "ad2fdfb854e295d6d9dddb229dd17cde58465919",
+  "historical_E0_sha": "813d236fa8a9ed60bae5bbe1827b912b743f38b3",
+  "historical_intake_sha": "905be66c868ae2840a10243e0696bcd674127f3a",
+  "feasibility_sha": "15bafb899c54fd7122ab1a34d8acafe274bc89fa",
+  "authoring_start_sha": "15bafb899c54fd7122ab1a34d8acafe274bc89fa",
+  "run_label": "RCLE-TBCFV-B03-ACTOR100-RECOVERY01",
+  "scientific_OBJECT_ID": "RCLE-TBCFV-B03-ACTOR100",
+  "seed": 19,
+  "true_rng_package": "FLEX-REKEY",
+  "root_key_hex": "4b17629c25d71afceed93bbe657c0b5799d468d1f5673d90a7ceee644ec474c5",
+  "block_digest_hex": "c1a1a91a691a02e2ac2dd3fa052e96045d968137db30e64acd3c6be0228d188e",
+  "block_index": 0,
+  "retained_inputs": [
+    {
+      "path": "temp/directions/roster_consistent_latent_exploration/exp/b03-actor100-20260909/W1/summary.json",
+      "bytes": 1367051,
+      "sha256": "a678a5d115a0c4c9d176423ab291f2daa4629bfb13e4f2286e7b68dacfe7acdf",
+      "use": "stage exact control summary for historical W1/init comparison"
+    },
+    {
+      "path": "temp/directions/roster_consistent_latent_exploration/exp/b03-actor100-20260909/W1/init_scenarios.json",
+      "bytes": 417164,
+      "sha256": "623c1c4cd16e5202c2619111c541dfc00e179c3e03fb7585265e4c7afd2d0ebd",
+      "use": "retained identity evidence only; no model loading/re-evaluation"
+    },
+    {
+      "path": "temp/directions/roster_consistent_latent_exploration/exp/b03-actor100-20260909/W1/initial_parameters.pt",
+      "bytes": 219733,
+      "sha256": "9c5ba67eb37dabdb9bdd35913f8664f10cf6b8cf52e1e0d1e772cdf0a7286b53",
+      "use": "retained identity evidence only; no model loading/re-evaluation"
+    },
+    {
+      "path": "temp/directions/roster_consistent_latent_exploration/exp/b03-actor100-20260909/W1/parameters.pt",
+      "bytes": 219445,
+      "sha256": "3d6661b5e968564360ca2ea3ad0aacbe9befce087f984b2f4dde2bc5f843b64a",
+      "use": "retained identity evidence only; no model loading/re-evaluation"
+    },
+    {
+      "path": "temp/directions/roster_consistent_latent_exploration/exp/b03-actor100-20260909/W100/initial_parameters.pt",
+      "bytes": 219733,
+      "sha256": "9c5ba67eb37dabdb9bdd35913f8664f10cf6b8cf52e1e0d1e772cdf0a7286b53",
+      "use": "retained identity evidence only; no model loading/re-evaluation"
+    }
+  ],
+  "historical_summary_counts": {
+    "backward_step_calls": 200,
+    "final_episodes": 2048,
+    "init_episodes": 2048,
+    "nonzero_steps": 200,
+    "training_episodes": 12800,
+    "zero_steps": 0
+  },
+  "historical_native_identity": {
+    "abi": {
+      "abi_version": 2,
+      "event_input_size": 64,
+      "fixture_input_size": 224,
+      "fixture_magic": 5927665395199787847,
+      "snapshot_size": 464,
+      "step_input_size": 64
+    },
+    "artifact_sha256": "5b918da7e23d7b65251fb20efcb6678e4a17e62538f6ebdedbda1d9e96221983",
+    "build_key": "a70147fa7b390c5d12fd6e16060105bf2ea530a09f21cb8487d51d6fcfc24fdb",
+    "load_seconds": 0.005518749007023871,
+    "path": "/tmp/hmasd_rcle_tbcfv_native/a70147fa7b390c5d12fd6e16060105bf2ea530a09f21cb8487d51d6fcfc24fdb/tbcfv_backend.so",
+    "resolved_build_root": "/tmp/hmasd_rcle_tbcfv_native",
+    "runtime_abi": {
+      "byteorder": "little",
+      "cache_tag": "cpython-310",
+      "event_input_size": 64,
+      "fixture_input_size": 224,
+      "implementation": "cpython",
+      "machine": "x86_64",
+      "pointer_bits": 64,
+      "python_version": [
+        3,
+        10,
+        21
+      ],
+      "snapshot_size": 464,
+      "step_input_size": 64
+    },
+    "source_sha256": "18d45b95a29c1ca8d17b4d192a9328ddc9c56a821a2690f118de44dbf0054819",
+    "toolchain": {
+      "compile_flags": [
+        "-std=c++17",
+        "-O2",
+        "-fexceptions",
+        "-shared",
+        "-fPIC",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-fno-unsafe-math-optimizations"
+      ],
+      "compiler_path": "/usr/bin/x86_64-linux-gnu-g++-13",
+      "compiler_sha256": "1353e9bdd29a7295c7226bf6c63abccce056d8cac31f112e5cdbecc3f28c2769"
+    }
+  },
+  "new_if_allocated_complete": {
+    "model_allocations": 6,
+    "untrained_helpers": 5,
+    "training_instances_started": 1,
+    "completed_training_instances_if_successful": 1,
+    "new_independent_training_seeds": 0,
+    "training_episodes": 12800,
+    "training_ticks": 819200,
+    "W100_final_episodes": 2048,
+    "reference_episodes": 2048,
+    "eval_episodes": 4096,
+    "episodes": 16896,
+    "ticks": 1081344,
+    "backward_calls": 200,
+    "joint_step_calls": 200
+  },
+  "old_retained_plus_unknown": {
+    "model_allocations": 12,
+    "untrained_helpers": 10,
+    "training_instances_started": 2,
+    "completed_training_instances": 1,
+    "training_episodes": 12800,
+    "eval_episodes": 4096,
+    "episodes": 16896,
+    "ticks": 1081344,
+    "backward_step_calls": 200,
+    "unknown_old_W100_training_episodes_bounds": [
+      0,
+      12800
+    ],
+    "unknown_old_W100_training_ticks_bounds": [
+      0,
+      819200
+    ],
+    "unknown_old_W100_backward_calls_bounds": [
+      0,
+      200
+    ]
+  },
+  "cumulative_if_new_complete": {
+    "known_episodes_if_new_complete": 33792,
+    "known_ticks_if_new_complete": 2162688,
+    "known_backward_calls_if_new_complete": 400,
+    "episodes_including_unknown_old_prefix_bounds": [
+      33792,
+      46592
+    ],
+    "ticks_including_unknown_old_prefix_bounds": [
+      2162688,
+      2981888
+    ],
+    "backward_calls_including_unknown_old_prefix_bounds": [
+      400,
+      600
+    ],
+    "model_allocations": 18,
+    "untrained_helpers": 15,
+    "training_instances_started": 3,
+    "completed_training_instances_if_new_complete": 2,
+    "completed_paired_training_seeds_if_new_complete": 1,
+    "distinct_training_seed_labels": 1,
+    "old_failed_fit_completion_status": "unknown training prefix; no complete final endpoint"
+  },
+  "cost_windows_s": {
+    "old_remote_chain_wall": 132.54,
+    "old_measured_CM_complete_charge": 155.787568,
+    "old_conservative_CM_charge": 160,
+    "old_DM_retained_analysis": 0.5983968,
+    "selected_incremental_total_cap": 750,
+    "W100_complete_cap": 600,
+    "reference_complete_cap": 30,
+    "focused_check_cap": 30,
+    "remaining_allowance_for_other_preparation_and_collection_publication": 90,
+    "named_old_conservative_plus_DM_plus_new_cap": "910.5983968",
+    "rough_new_planning_range_not_measured": [
+      80,
+      120
+    ],
+    "full_history_or_agent_git_network_closeout_feasibility_wall": "not measured as one window; no aggregate CPU or complete efficiency claim"
+  },
+  "current_publication_scientific_exposure": {
+    "models": 0,
+    "episodes": 0,
+    "native_calls": 0,
+    "backwards": 0,
+    "updates": 0,
+    "experiments": 0
+  },
+  "binding_read_arithmetic_body_wall_s": 0.05106559999694582,
+  "binding_read_arithmetic_command_wall_s": 0.2593855
+}

@@ -1,0 +1,49 @@
+{
+  "schema_version": 4,
+  "request_id": "2026-09-09-rcle-post-a02-innovator-recovery-01",
+  "workflow_node": "em_innovator",
+  "conversation_binding_key": "em:roster_consistent_latent_exploration:innovator",
+  "direction_id": "roster_consistent_latent_exploration",
+  "direction_ids": [
+    "roster_consistent_latent_exploration"
+  ],
+  "decision_authority": "pro_final",
+  "conversation_id": "6aa18a89-e0c8-83e8-8d8c-e859d9596429",
+  "provider_url": "https://chatgpt.com/c/6aa18a89-e0c8-83e8-8d8c-e859d9596429",
+  "tab_id": "12",
+  "tab_lifecycle": "CLOSED",
+  "visible_model": "6 Pro",
+  "underlying_model": "Latest",
+  "thinking_effort": "Pro, 5 of 5.",
+  "source_mode": "paste",
+  "prompt_sha256": "e465735fca32db267e4e7f3f0d65d9891092c2218f579ff4662d1df7366900ca",
+  "response_sha256": "ad88d9c5f86a6a60750f5fe10cb3881581562bcda4c1aa7fe5b85d38bb7058ea",
+  "response_bytes": 409,
+  "response_characters": 409,
+  "user_message_id": "7640e23e-ab8b-4cb4-b725-15d136364a25",
+  "assistant_message_id": "dfce413c-aa98-41bf-b657-59936af4a6e7",
+  "send_click_count": 1,
+  "send_state": "SEND_CONFIRMED",
+  "wait_status": "NATURAL_COMPLETION",
+  "observed_page_state": "Worked for 12m 52s; complete assistant response; no active generation control",
+  "archive_status": "ARCHIVED",
+  "archive": {
+    "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\roster_consistent_latent_exploration\\2026-09-09-rcle-post-a02-innovator-recovery-01\\2026-09-09-rcle-post-a02-innovator-recovery-01--roster_consistent_latent_exploration__00_PROMPT.md",
+    "response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\roster_consistent_latent_exploration\\2026-09-09-rcle-post-a02-innovator-recovery-01\\2026-0~1.MD",
+    "packet_manifest": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\roster_consistent_latent_exploration\\2026-09-09-rcle-post-a02-innovator-recovery-01\\2026-09-09-rcle-post-a02-innovator-recovery-01--roster_consistent_latent_exploration__PACKET_MANIFEST.json",
+    "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\roster_consistent_latent_exploration\\2026-09-09-rcle-post-a02-innovator-recovery-01\\TRANSPORT_FACTS.json"
+  },
+  "captured_at": "2026-09-09T16:52:28.935370Z",
+  "archived_at": "2026-09-09T16:52:28.935370Z",
+  "github_delivery": {
+    "commit": "c80efaea6b0df9f22fb08bc1a5706492108836a9",
+    "response_url": "https://github.com/CartmanFatass/My-paper-code/blob/c80efaea6b0df9f22fb08bc1a5706492108836a9/docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260909_post_a02_innovator_recovery/archive/RESPONSE.md",
+    "comment_url": "https://github.com/CartmanFatass/My-paper-code/issues/8#issuecomment-5605475814"
+  },
+  "reset": {
+    "previous_request_id": "2026-09-06-rcle-post-b02-innovator-02",
+    "quarantined_conversation_id": "6a9d9a3a-fd40-83e8-9e80-ad720582aaee",
+    "authority": "OWNER_DIRECT"
+  },
+  "scientific_decision_formed": false
+}

@@ -1,0 +1,39 @@
+{
+  "question": "是否保留已按站立授权选定的 B03：再做一对从零训练的 RETAIN/RESET 比较，所有结果均保留？",
+  "changes_if_approved": [
+    {
+      "target": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_B03_SCIENCE_CARD_20260909.md",
+      "from": "B02 已完成，下一对只有方向内建议",
+      "to": "固定新训练种子7803、评估种子107803；复用source434，执行Root已分配的两次顺序调用并完成收集和科学解读"
+    }
+  ],
+  "if_refused": "在下个安全边界应用异步意见；未启动部分不再启动，已接受调用按明确边界收集并保留证据，不抹去结果。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_B02_INTAKE_20260909.md",
+      "quote": "two above-MEI native points justify considering one\nmore independent observation",
+      "why": "两个独立训练实例均有超过1分的最终RESET点估计；新训练对可直接检验这种整体训练效果是否继续出现。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_B03_SCIENCE_CARD_20260909.md",
+      "quote": "Three fitting instances still do not establish stable population superiority, transfer or\nwhy clearing helps.",
+      "why": "少量训练实例、最终局间离散和B01训练期反向结果限制结论；不以第三对制造稳定优势或机理解释。"
+    }
+  ],
+  "uncertainty": [
+    "本次继续是在看到B01/B02后选择的探索；未试跑或筛选任何候选种子。",
+    "每臂新进程、新参数、优化器、回放、环境和随机状态；同一对的seed相同仍不保证相同交通。",
+    "无同信息调优基线和上界的headroom；近似折扣Q学习与未折扣最终回报的区别保留。",
+    "新pair独立按±1分含等号分支判读，旧pair分别展示；负号、门槛内、反转和失败均保留。"
+  ],
+  "cost": {
+    "compute": "本次计划共201280原生步、9938次RMSprop更新、64个最终评估回合；历史同工作量平均1519.265秒/对，非保证上界。每臂完整上限1800秒、整对3600秒、支持性检查读回共60秒；只分配两次接受调用，无重试或自动后继。",
+    "owner_time": "可异步查看，无需立即回复。",
+    "reversibility": "costly",
+    "waits_on_this": "nothing；卡和预算已获当前研究分配授权，不以owner回复等待执行。"
+  },
+  "verdict_text": "Owner-delegated decision (unattended, 2026-09-03 instruction): (a), execute one B03 pair\nunder Root's explicit finite allocation.",
+  "source": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_B03_INTAKE_20260909.md"
+}

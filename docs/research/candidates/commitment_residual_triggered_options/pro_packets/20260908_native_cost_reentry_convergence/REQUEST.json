@@ -1,0 +1,89 @@
+{
+  "delivery_mode": "github_delivery",
+  "caller_role": "em",
+  "workflow_node": "em_convergence",
+  "request_id": "2026-09-08-crto-native-cost-reentry-convergence-01",
+  "source_thread_id": "01a08438-5664-7b23-b9b1-76f197c9ca15",
+  "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "direction_id": "commitment_residual_triggered_options",
+  "repository": "CartmanFatass/My-paper-code",
+  "repository_url": "https://github.com/CartmanFatass/My-paper-code",
+  "commit_or_ref": "c9690db8ef340ac8201043183a864454f08c0431",
+  "scientific_question": "Does the single native-cost legal-action B specified in the P68 assessment meet this node's existing re-entry condition for CRTO, and merit selection now, or should the selected-panel family remain PARK because it is still insufficiently discriminating?\n\nThe next observation would compare aligned residual, containing RAW and calibrated derangement under the identical masked expected-native-cost objective, using real training and the existing native G16 action evaluation. Its single reused joint seed-0 package and 33/258 readouts are deliberately development-informed; it does not repair the two weak seeds or create independent replication. The old competent RAW endpoints remain separate comparator floors, so weakening RAW cannot manufacture a positive. All gains and new losses must be counted at original MEI .0025, equivalent to net >.04 over 16 decisions.\n\nDM narrowly recommends selecting this one B, while forecasting that no original-MEI alignment gain is more likely. Direct cost credit is source-grounded and non-equivalent to B07, but could help RAW equally. Decide the investment value of that contrast against preserving PARK; source motivation is not empirical support for residual superiority. The present consultation runs nothing and does not itself freeze a card or allocate compute.",
+  "deliverable": "Return one explicit direction decision: select this precisely bounded native-cost B (with any scientifically necessary correction stated), or retain the current family PARK and name the missing discriminator. Explain the strongest support and contradiction, whether the same-objective controls plus historical RAW floor resolve the actual residual question, the reused-seed limitation, attainable original-MEI reading, and known versus unmeasured work. Do not select an unchanged repeat, an automatic seed/budget search, a specification exception by implication, or a Portfolio disposition. A conforming selection can proceed to a new card through ordinary authority; a source, connector or transport blocker forms no decision.",
+  "claim_ceiling": "P68 currently supports source/arithmetic facts only. The proposed experiment is adaptive B/EXPLORE on the exact 64 selected members, repeatedly exposed 16 EVAL identities, fixed four-agent K8/elapsed4/cost4 histories and one reused joint seed. No independent confirmation, stable superiority/equivalence, information/function-class or policy/MARL/UAV claim, transfer, safety, theorem, tuned headroom or resource-efficiency conclusion.",
+  "reference_files": [
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "purpose": "Sections 3-5.2 and 11, especially 11.4 and 11.8-11.9: class-correct question selection, launch burdens and proportional work.",
+      "provenance": "Current controlling owner-calibrated specification at the fixed input SHA."
+    },
+    {
+      "path": "docs/research/candidates/commitment_residual_triggered_options/CRTO_NATIVE_COST_P68_REENTRY_ASSESSMENT_20260908.md",
+      "purpose": "Read this bounded assessment: actual-source and literature retrieval, one specified B, same-objective controls plus historical RAW floor, predictions, all-loss accounting and recommendation.",
+      "provenance": "P68 native DM preparation; sources/arithmetic only, not a new scientific result or formed direction decision."
+    },
+    {
+      "path": "docs/research/candidates/commitment_residual_triggered_options/CRTO_NATIVE_COST_P68_ARITHMETIC_20260908.json",
+      "purpose": "Machine-generated zero-new-exposure line, old B04 parameter movement and stages, known work factors, prospective per-arm/shared projections and native attainability accounting.",
+      "provenance": "Python stdlib arithmetic from the accepted B04 result; no experiment, model import or new cost probe."
+    },
+    {
+      "path": "docs/research/candidates/commitment_residual_triggered_options/DIRECTION.md",
+      "purpose": "Balanced-family Convergence disposition (2026-09-05); relevant B04-B07 support/contradiction only.",
+      "provenance": "Current accepted direction science; PARK family and selected-panel ceiling remain until a proper formed decision."
+    },
+    {
+      "path": "docs/research/candidates/commitment_residual_triggered_options/CRTO_BALANCED_FAMILY_CONVERGENCE_INTAKE_20260905.md",
+      "purpose": "Final decision, bounded reading, precise re-entry and limits.",
+      "provenance": "Prior PRO_FINAL / DM_EXECUTED intake; historical provenance and current family authority are distinguished."
+    },
+    {
+      "path": "docs/research/candidates/commitment_residual_triggered_options/pro/2026-09-05-crto-balanced-family-convergence-01/RESPONSE.md",
+      "purpose": "NEXT_DISCRIMINATOR_OR_REENTRY and strongest contradiction; consult other passages only for a concrete ambiguity.",
+      "provenance": "Byte-preserved complete prior Convergence response. New P68 does not amend or resend that accepted request."
+    },
+    {
+      "path": "docs/research/candidates/commitment_residual_triggered_options/CRTO_RESIDUAL_CYCLE_ENDPOINTS_B04_RESULT_20260904.json",
+      "purpose": "Recorded seed-0 representation regrets/actions at SHORT/LONG, competence, cost_law measured stages, exposure and resources; no replay.",
+      "provenance": "Accepted direct result at its recorded launch SHA; historical observation, not new independent evidence."
+    },
+    {
+      "path": "experiments/candidates/commitment_residual_triggered_options/residual_cycle_endpoints_b04/experiment.py",
+      "purpose": "prepare, packet_sets, train_path and score_summary: exact reusable learner/comparator/exposure structure and source cost pattern.",
+      "provenance": "Actual mapped research source; read only, no implementation in this request."
+    },
+    {
+      "path": "experiments/candidates/commitment_residual_triggered_options/raw_centered_loss_b07/experiment.py",
+      "purpose": "centered_loss and matched training loop: determine why proposed native-cost objective differs from B07.",
+      "provenance": "Actual completed B07 implementation, preserved unchanged."
+    },
+    {
+      "path": "experiments/candidates/commitment_residual_triggered_options_common_history_gate_r01/evaluation.py",
+      "purpose": "select_printed_action and native_regret only: legal printed-order argmax and native G16 measurement.",
+      "provenance": "Actual mapped host-gate evaluator; supplied to assess scientific semantics, not engineering acceptance."
+    },
+    {
+      "path": "docs/research/candidates/commitment_residual_triggered_options/CRTO_BALANCED_RESIDUAL_B01_R1_SCIENCE_CARD_20260904.md",
+      "purpose": "Sections 3,5-7 and9: information, legal action, original .0025 margin, competence qualifier and shared host work law. Read population table only for a concrete ambiguity.",
+      "provenance": "Frozen historical B definition; P68 proposes only the explicitly named objective and exposure scope, not a rewrite of prior readings."
+    }
+  ],
+  "constraints": [
+    "Existing family PARK remains effective pending the formed direction decision. No local reopening, recast, new family, lifecycle/priority/capacity change, accepted-request rewrite or new scientific call has occurred. Root owns allocation and integration after direction intake.",
+    "Preserve the competent seed-0 B04 residual negative; comparator-limited B05 seeds1/2; B06 KEEP-side native gain and B07 offsetting legal-action changes; old natural-support closure; unresolved A01 crash; selected-panel ceiling; original residual MEI .0025 and separate diagnostic MEI .000625.",
+    "The proposed common loss is L=mean_i sum_legal softmax(z_i)(a)*(max_legal G16_i-G16_i(a))/.01 with fixed temperature1, equal row weights and unchanged legal argmax evaluation. The same loss goes to RAW, TRUE and DERANGED. Source/literature motivation does not assert an empirical diagnosis or a theorem for this learner.",
+    "Reused joint seed0 is an explicitly new B scope and no independent seed. It is not repair of both weak seed packages; no seed/budget entitlement carries from old objects. The precise seed/exposure proposal may be questioned on decision value, but no positive result or independent replication is a B launch prerequisite.",
+    "Machine-generated consultation exposure is zero new scientific/environment/model/native/evaluator calls and zero optimizer updates. Historical B04 LONG has finite movement in all arms; new objective movement is unknown. The arithmetic reference records all initial scales and displacements.",
+    "Prospective algorithm work: one shared seed package, three trajectories x258 gate Adam x32=24768 examples/774 updates, shared predictor100x128, 3x2x16=96 evaluated decisions, host-step upper73728 including <=64x8x16 label branches, and <=198144 softmax-cost terms. No nested policy/trajectory search. Validation is the focused changed-loss/output and branch-rule check, with no extra scientific arm or repeated-smoke prerequisite.",
+    "B04 wsl_4070 stage arithmetic projects 413.97090837899304/411.96144017999904/413.06858835300955 seconds per arm and 515.3820955440096 for the one shared invocation. Proposed caps1200/arm and1500/shared are unallocated. New objective/check/publication overhead and current node load are unmeasured. No extra cost experiment or exact diagnostic is required before the direct B; unknown cost is not zero.",
+    "Preserve CPU FP32/thread1, information, source labels, fixed selected panel, no EVAL training, canonical order, once-charged replacement and common16-step future. Future portable execution uses the current remote-first node and fresh actual-node resource admission. Only evidence-spec11.4 launch conditions apply; knowledge-integration v3 is unimplemented and not a gate.",
+    "The local-library coverage and primary-paper passages were verified by the DM and are summarized in the assessment. Treat the stated cost-sensitive adaptation as a DM inference, not a proved paper result or a novelty verdict. No request for a new literature pipeline, asynchronous-credit framework or code change follows."
+  ],
+  "github_delivery": {
+    "branch": "codex/crto",
+    "base_sha": "c9690db8ef340ac8201043183a864454f08c0431",
+    "response_path": "docs/research/candidates/commitment_residual_triggered_options/pro_packets/20260908_native_cost_reentry_convergence/archive/RESPONSE.md",
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/13"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "request_id": "2026-09-08-fsd-p67-uav-individual-renewal-01",
+  "workflow_node": "em_convergence",
+  "conversation_binding_key": "em:flexible_skill_duration:convergence",
+  "direction_id": "flexible_skill_duration",
+  "direction_ids": [
+    "flexible_skill_duration"
+  ],
+  "decision_authority": "pro_final",
+  "conversation_id": "6a9c2865-14a8-83e8-b556-e7f5836d9236",
+  "provider_url": "https://chatgpt.com/c/6a9c2865-14a8-83e8-b556-e7f5836d9236",
+  "tab_id": "15",
+  "visible_model": "6 Pro",
+  "underlying_model": "Latest",
+  "thinking_effort": "Pro, 5 of 5.",
+  "source_mode": "paste",
+  "prompt_sha256": "6625eaccf33a7c6e358835f82e9a8f3836ffe50b5017d76680dca506dc3ff7c1",
+  "response_sha256": "2fef71e66bb201edbc964a8da82c00e58b25e761ef40086c442c7d7e2b088d00",
+  "send_click_count": 1,
+  "send_evidence": "SEND_CONFIRMED; exact current user node observed; Pro thinking then natural completion",
+  "wait_status": "NATURAL_COMPLETION",
+  "observed_page_state": "Worked for 13m 7s; complete assistant response; Copy response present; no active generation control",
+  "capture_method": "Current-round Copy response control via CUA clipboard.readText",
+  "archive_status": "ARCHIVED",
+  "scientific_decision_formed": false,
+  "archive_paths": {
+    "manifest_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\flexible_skill_duration\\2026-09-08-fsd-p67-uav-individual-renewal-01\\2026-09-08-fsd-p67-uav-individual-renewal-01--flexible_skill_duration__PACKET_MANIFEST.json",
+    "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\flexible_skill_duration\\2026-09-08-fsd-p67-uav-individual-renewal-01\\2026-09-08-fsd-p67-uav-individual-renewal-01--flexible_skill_duration__00_PROMPT.md",
+    "response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\flexible_skill_duration\\2026-09-08-fsd-p67-uav-individual-renewal-01\\2026-09-08-fsd-p67-uav-individual-renewal-01--flexible_skill_duration--attempt-01__02_RESPONSE.md",
+    "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\flexible_skill_duration\\2026-09-08-fsd-p67-uav-individual-renewal-01\\2026-09-08-fsd-p67-uav-individual-renewal-01--flexible_skill_duration--attempt-01__03_TRANSPORT_FACTS.json"
+  },
+  "response_bytes": 375
+}

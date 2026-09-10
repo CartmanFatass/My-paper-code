@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "request_id": "2026-09-09-acvc-fixed-retrace-reuse-exception-convergence-03",
+  "workflow_node": "em_convergence",
+  "conversation_binding_key": "em:acvc:convergence",
+  "direction_id": "acvc",
+  "direction_ids": [
+    "acvc"
+  ],
+  "conversation_id": "6aa12e74-8e54-83e8-95f6-001681b456f7",
+  "provider_url": "https://chatgpt.com/c/6aa12e74-8e54-83e8-95f6-001681b456f7",
+  "user_message_id": "c6b3d101-e4d9-41d1-ac2e-9c3619b81b89",
+  "assistant_message_id": "61f07a3d-2122-4957-8e43-46d97fac99fd",
+  "visible_model": "6 Pro",
+  "underlying_model": "Latest",
+  "thinking_effort": "Pro, 5 of 5.",
+  "prompt_sha256": "1128390320fe420fa8196fbfe2f72d6404ae4c8b76bf5b73c4e648f26eeaf745",
+  "response_sha256": "1d1d790b6cca384c18fc875f7fdbe0c61f3cf5c52e514d59de49df5929e7be1b",
+  "response_bytes": 384,
+  "response_characters": 384,
+  "send_click_count": 1,
+  "identity_validation": "PASS",
+  "identity_expected": {
+    "conversation_id": "6aa12e74-8e54-83e8-95f6-001681b456f7",
+    "user_message_id": "c6b3d101-e4d9-41d1-ac2e-9c3619b81b89",
+    "assistant_message_id": "61f07a3d-2122-4957-8e43-46d97fac99fd"
+  },
+  "identity_observed": {
+    "conversation_id": "6aa12e74-8e54-83e8-95f6-001681b456f7",
+    "user_message_id": "c6b3d101-e4d9-41d1-ac2e-9c3619b81b89",
+    "assistant_message_id": "61f07a3d-2122-4957-8e43-46d97fac99fd"
+  },
+  "natural_completion_observed": "Worked for 9m 5s; response and delivery links present; no active generation control",
+  "captured_at": "2026-09-09T22:23:25Z",
+  "archive_paths": {
+    "manifest_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\acvc\\2026-09-09-acvc-fixed-retrace-reuse-exception-convergence-03\\2026-09-09-acvc-fixed-retrace-reuse-exception-convergence-03--acvc__PACKET_MANIFEST.json",
+    "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\acvc\\2026-09-09-acvc-fixed-retrace-reuse-exception-convergence-03\\2026-09-09-acvc-fixed-retrace-reuse-exception-convergence-03--acvc__00_PROMPT.md",
+    "response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\acvc\\2026-09-09-acvc-fixed-retrace-reuse-exception-convergence-03\\2026-09-09-acvc-fixed-retrace-reuse-exception-convergence-03--acvc--attempt-01__02_RESPONSE.md",
+    "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\acvc\\2026-09-09-acvc-fixed-retrace-reuse-exception-convergence-03\\2026-09-09-acvc-fixed-retrace-reuse-exception-convergence-03--acvc--attempt-01__03_TRANSPORT_FACTS.json",
+    "response_sha256": "1d1d790b6cca384c18fc875f7fdbe0c61f3cf5c52e514d59de49df5929e7be1b"
+  },
+  "notes": [
+    "Captured with paired Copy response control via CUA clipboard.readText.",
+    "No second Send was attempted."
+  ]
+}

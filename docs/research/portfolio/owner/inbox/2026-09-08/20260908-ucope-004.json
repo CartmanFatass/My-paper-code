@@ -1,0 +1,77 @@
+{
+  "id": "20260908-ucope-004",
+  "created": "2026-09-08T15:47:24-07:00",
+  "direction": "ucope",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "B04：一对7201的自有动作条件化开场持续时间比较",
+  "context": "T开场持续时间读取本机刚采样的速度，保持1或4步承诺；五个部分可观测且共同学习的UAV。完整Pro已选一对真实B，当前卡已冻结但源码尚未接受或执行。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "沿P61实施/审查并在源码接受后只运行7201一对；全部结果完成即结束分配。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "在下个干净边界停止这张卡的后续动作并保留既有结果，不自动选择替代科学任务。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "在下个干净边界应用具体修改；若触及既定方向科学范围则交回同一节点。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "已形成的合规方向决定选择这一具体动作依赖和完整两臂预算；反面历史、稀疏信用与新增容量限制已写入卡。",
+  "evidence": [
+    "docs/research/candidates/ucope/UCOPE_UAV_MOTION_PREFIX_B04_SCIENCE_CARD_20260908.md",
+    "docs/research/candidates/ucope/UCOPE_POST_B03_CONVERGENCE_INTAKE_20260908.md",
+    "docs/research/candidates/ucope/pro_packets/20260908_post_b03_convergence/archive/RESPONSE.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-08.md#L57",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "执行已形成的P61决定：一对7201的动作条件化开场持续时间B04，是否需要异步改动这张卡？",
+    "changes_if_approved": [
+      {
+        "target": "docs/research/candidates/ucope/UCOPE_UAV_MOTION_PREFIX_B04_SCIENCE_CARD_20260908.md",
+        "from": "B03已完成；P61已选下一比较",
+        "to": "只让T持续时间读取自有刚采样速度；67→32→2头，一对7201；普通反馈G和hover H保持原定义"
+      }
+    ],
+    "if_refused": "在下一干净边界应用实际卡片修改或拒绝指令；保留历史结果和完整Pro决定，不增加试验或静默改选其他科学对象。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/ucope/pro_packets/20260908_post_b03_convergence/archive/RESPONSE.md",
+        "quote": "Select the proposed fresh matched pair, master **7201**, with the full two-fit budget below and no automatic second pair.",
+        "why": "完整Convergence明确选择这一个真实学习比较；动作依赖可用而时间与信息边界不变。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_POST_B03_CONVERGENCE_INTAKE_20260908.md",
+        "quote": "The strongest contradiction is B02's two T−G losses (−0.0472671044, −0.0061362058)\nand both negative T−H endpoints, followed by B03's −0.010093085146628955\nagainst a G with positive sampled G−H +0.0475679623.",
+        "why": "条件化不是已证实的补救；停止家族仍是认真考虑过的备选。"
+      }
+    ],
+    "uncertainty": [
+      "一对训练不能估计训练总体不确定性；32评估回合不是32对。",
+      "新增2112参数属于算法包，不能单独归因条件化或纯信息价值。",
+      "没有调优headroom；新头实际耗时和位移尚未测量。"
+    ],
+    "cost": {
+      "compute": "2真实学习臂，各512×256训练步/1024 Adam；T/G/H各32评估回合，共286720队伍步。1800秒/臂、3600秒整次；一个≤300秒目录测试及独立语义审查。",
+      "owner_time": "可异步查看；循环不等回复。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing；实施接受和实际资源检查仍按原路径进行"
+    },
+    "verdict_text": "Every outcome ends this single allocation at intake.",
+    "source": "docs/research/candidates/ucope/pro_packets/20260908_post_b03_convergence/archive/RESPONSE.md"
+  },
+  "starred": false
+}

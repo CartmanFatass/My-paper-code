@@ -1,0 +1,70 @@
+{
+  "schema_version": 4,
+  "request_id": "2026-09-09-foundations-scientific-validity-review-01",
+  "workflow_node": "portfolio_decision",
+  "conversation_binding_key": "portfolio:cross_direction",
+  "direction_id": "portfolio",
+  "direction_ids": ["ucope", "vap_folr_core", "roster_consistent_latent_exploration", "semigroup_consistent_duration_model_policy", "flexible_skill_duration", "vsp_c1", "vsp_03", "acvc", "metric_ground_transport_allocation", "commitment_residual_triggered_options"],
+  "conversation_id": "6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+  "provider_url": "https://chatgpt.com/c/6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+  "source_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "operator_thread_id": "01a087a3-4f12-7021-9a4d-6da9da2bafcc",
+  "original_operator_thread_id": "01a07e52-f085-76a0-886a-4127f490421f",
+  "visible_model": "6 Pro",
+  "underlying_model": "Latest",
+  "thinking_effort": "Pro, 5 of 5.",
+  "source_mode": "paste",
+  "prompt_sha256": "2a7e53fe70b2e724b01e5a7f5bb65e084e97896295313f3691dd27ca9d99c786",
+  "prompt_materialization": {
+    "archive_prompt_bytes": 1237,
+    "archive_prompt_sha256": "72caf06646446da038b9fddd4a41778f99a68cc5d93a01e40776a5206d6ea3df",
+    "archive_prompt_has_trailing_lf": true,
+    "sent_body_sha256_without_trailing_lf": "2a7e53fe70b2e724b01e5a7f5bb65e084e97896295313f3691dd27ca9d99c786"
+  },
+  "send_evidence": {
+    "send_click_count": 1,
+    "send_confirmed_at": "2026-09-09T18:36:24Z",
+    "user_message_id": "74def42a-892e-4760-9e04-0823cdf0bfdd",
+    "user_node_observed": true,
+    "provider_url_observed": true,
+    "duplicate_send": false
+  },
+  "observation": {
+    "observed_at": "2026-09-09T19:31:07Z",
+    "tab_id": "1",
+    "page_title": "投资裁决摘要",
+    "user_message_id": "74def42a-892e-4760-9e04-0823cdf0bfdd",
+    "assistant_message_id": "23e73a34-ce0f-4006-afe9-84831931a838",
+    "turn_id": "efa9c2e4-a3e8-4fbb-8476-57c6d1ab4bae",
+    "natural_completion": true,
+    "completion_signal": "Worked for 41m 39s; no active generation control; response actions present",
+    "response_copy_verified": true,
+    "response_sha256": "906dfa66b84e82da9af5eab71b6b97898479f61f7555776b0f29a2637877f8e3",
+    "response_bytes": 362
+  },
+  "archive": {
+    "prompt_file": "C:/Projects/HMASD/temp/sessions/hmasd-chatgpt-pro-transport/archive/portfolio/2026-09-09-foundations-scientific-validity-review-01/2026-09-09-foundations-scientific-validity-review-01--portfolio__00_PROMPT.md",
+    "response_file": "C:/Projects/HMASD/temp/sessions/hmasd-chatgpt-pro-transport/archive/portfolio/2026-09-09-foundations-scientific-validity-review-01/2026-09-09-foundations-scientific-validity-review-01--portfolio--attempt-01__02_RESPONSE.md",
+    "manifest_file": "C:/Projects/HMASD/temp/sessions/hmasd-chatgpt-pro-transport/archive/portfolio/2026-09-09-foundations-scientific-validity-review-01/2026-09-09-foundations-scientific-validity-review-01--portfolio__PACKET_MANIFEST.json",
+    "transport_fact_file": "C:/Projects/HMASD/temp/sessions/hmasd-chatgpt-pro-transport/archive/portfolio/2026-09-09-foundations-scientific-validity-review-01/2026-09-09-foundations-scientific-validity-review-01--portfolio--attempt-01__03_TRANSPORT_FACTS.json"
+  },
+  "github_delivery_reconciliation": {
+    "provider_reply_claim": "No write-capable GitHub operation; target archive/RESPONSE.md 404 at c18cbc6ae64603f2a70e2474c9ddf9d13c8aaedb; Issue #16 had no comments; no write attempted.",
+    "root_verified_response_file": "docs/research/portfolio/pro_packets/20260909_foundations_special_review/archive/RESPONSE.md",
+    "root_verified_commit": "e865e7b25beb16a7348070181161f18706fced4e",
+    "root_verified_blob": "cf4a77e01707e910220e7cecc47ca132dc477af8",
+    "root_verified_bytes": 60183,
+    "root_verified_sha256": "906c474084f770d96b9d13672e080ed3dc57cbd2f1f0b1e45c985d8e34e97958",
+    "issue_number": 16,
+    "issue_comment_confirmed": false,
+    "status": "FILE_CONFIRMED_BY_ROOT_READBACK_COMMENT_UNCONFIRMED",
+    "chat_reply_scientific_decision_formed": false,
+    "transport_scientific_conformance": "NOT_ASSESSED",
+    "scientific_formation_scope": "The archived chat reply is a delivery receipt, not the scientific response; this field does not classify the independently verified full GitHub file.",
+    "discrepancy_preserved": true
+  },
+  "archive_status": "ARCHIVED",
+  "tab_lifecycle": "CLOSED_AFTER_ARCHIVE",
+  "notes": ["The exact natural-language chat reply is archived; it is a delivery receipt, not the full scientific response.", "Root's independently verified GitHub file is recorded as separate reconciliation evidence; the provider's contrary claim is preserved.", "No Send, rebind, provider-context reset, GitHub write, or Issue comment was performed by this Transport task."]
+}

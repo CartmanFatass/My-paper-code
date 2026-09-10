@@ -311,3 +311,63 @@ facts return to the same CM for collection and this DM for all-outcome intake.
 Actual native return, movement, moment counts and resource conformance remain
 unmeasured until that sole invocation. The preparation's zero-exposure boundary
 and original reading rules remain historical and unchanged.
+
+## 9. Pre-admission failure and corrected supervisor identity
+
+The original accepted supervisor handle failed at the missing-cwd `cd` before
+admission or scientific execution. The [intake](VSPC1_NATIVE_HOLD_VALUE_B03_INTAKE_20260908.md)
+records the full boundary, zero native exposure and object-tier correction;
+[CM evidence](VSPC1_NATIVE_HOLD_VALUE_B03_CWD_CORRECTION_EVIDENCE_20260908.json),
+commit `698b8aeff26f2b9ae21d4cb8d1bf8a255b161d38`, now establishes the exact
+detached cwd exists clean at accepted source `7a8ed3aa5d25ded71164aa338749d09318124dcf`.
+The original log and supervisor metadata remain preserved. No source, script,
+scientific key, work allowance, prediction or reading rule changes.
+
+Root's corrected submission uses only a fresh supervisor name:
+
+```text
+ssh -o BatchMode=yes -o ConnectTimeout=10 hmasd-wsl-node /usr/local/bin/agent-task run vspc1_hold_value_b03_8201_7a8ed3aa5d25_cwd1 /bin/bash /home/wu/hmasd-inputs/vspc1_hold_value_b03_8201_7a8ed3aa5d25.sh
+```
+
+This supersedes §8's pending staging and original submission identity. The new
+handle is not yet accepted at correction intake. The selected scientific pair
+remains unrun, with fresh admission and the original complete limits in the
+unchanged script; no duplicate scientific execution or extra retry is authorized.
+
+## 10. Corrected execution accepted
+
+Following §9's completed correction, CM reports Root has accepted
+`vspc1_hold_value_b03_8201_7a8ed3aa5d25_cwd1`, PID3010237, with fresh actual-node
+physical/effective available memory15634731008 bytes each. The same CM is
+collecting the existing run. This supersedes the prior pending-submission state;
+do not execute another payload. The original failed shell remains preserved and
+had no scientific exposure. Actual normalized-regime results and terminal
+conformance are pending, with source7a8ed3aa5d25 and every frozen scientific
+field unchanged. See [intake §6](VSPC1_NATIVE_HOLD_VALUE_B03_INTAKE_20260908.md#6-corrected-handle-accepted--collection-in-progress).
+
+## 11. Completed result and allocation boundary
+
+The sole corrected handle finished exit0/COMPLETE. CM collection
+`df899599d4aa474ba252ce32740ec8e7eceddd79` and the
+[scientific intake §§7–11](VSPC1_NATIVE_HOLD_VALUE_B03_INTAKE_20260908.md#7-completed-pair-what-i-checked)
+establish a valid complete **UP**: GATED−MLP +.03980171530455754, conditional
+SE .006008657101475142; GATED−H +.03521279747565949 and MLP−H
+−.004588917828898052. All32 matched evaluations survive, including4/9/19 adverse
+differences for those respective contrasts. This is one normalized training pair,
+kept separate from the old regime's two pairs. The H qualification and original
+claim ceiling apply; normalization is not established as a repair or causal effect.
+
+All286720 native team steps,2048 Adam calls and96 final evaluations completed.
+Both arms' moments have n131072/256 updates and match checkpoint/summary with
+evaluation/H frozen. Enclosing310.79s and conservative complete arm bounds
+161.333584841s/149.829881700s conform to the original caps; no limit or breach
+is recorded. [E0](VSPC1_NATIVE_HOLD_VALUE_B03_RESULT_EVIDENCE_20260908.md) and
+[analysis](VSPC1_NATIVE_HOLD_VALUE_B03_ANALYSIS_20260908.json) retain resources,
+exposure, every outcome and the original pre-admission failure separately.
+
+WITHIN(.55) missed, Brier .3025; owner prediction was not taken. Sections1–7
+remain frozen as specified before output. **P60 is exhausted after this intake**;
+no further run, evaluation, tuning, source change or fresh key is allocated.
+The recommended later independent normalized pair is unallocated advice through
+Root to Portfolio. B has no consumption state; family, lifecycle, priority,
+recast count, C status and formal UAV-entry determination are unchanged.

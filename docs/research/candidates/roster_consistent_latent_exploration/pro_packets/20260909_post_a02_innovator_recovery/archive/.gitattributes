@@ -1,0 +1,6 @@
+# Preserve the exact external captures, including Transport's original CRLF facts.
+/SENT_PROMPT.md -text -whitespace
+/CHAT_RECEIPT.md -text -whitespace
+/PACKET_MANIFEST.json -text -whitespace
+/TRANSPORT_FACTS.json -text -whitespace
+/ISSUE_COMMENT_5605475814.json -text -whitespace

@@ -1,0 +1,236 @@
+{
+  "object": "FOLR-PUBLIC-LIFECYCLE-B03",
+  "evidence_class": "B/EXPLORE",
+  "technical_status": "accepted",
+  "source_sha": "434f10cf95f16dd342cbf754382aa76155fcd2b7",
+  "independent_unit": "one fresh matched training pair seed7803; final evaluation107803; rollout rows are not training replicates",
+  "primary": {
+    "J_RETAIN": 2.8206249999999997,
+    "J_RESET": 0.26124999999999954,
+    "difference": 2.559375,
+    "rule": "RETAIN_ABOVE_MEI"
+  },
+  "arms": {
+    "RETAIN": {
+      "arm": "RETAIN",
+      "training_seed": 7803,
+      "evaluation_seed": 107803,
+      "launch_sha": "434f10cf95f16dd342cbf754382aa76155fcd2b7",
+      "status": "complete",
+      "training_episodes": 5000,
+      "training_ticks": 100000,
+      "optimizer_steps": 4969,
+      "evaluation_episodes": 32,
+      "evaluation_ticks": 640,
+      "evaluation_returns": [
+        -5.130000000000001,
+        -4.359999999999999,
+        13.47,
+        11.53,
+        -2.51,
+        13.61,
+        8.180000000000001,
+        11.75,
+        5.1,
+        -2.4099999999999984,
+        -2.760000000000001,
+        -2.0800000000000005,
+        0.41999999999999926,
+        3.4699999999999984,
+        5.16,
+        0.9899999999999971,
+        -8.339999999999998,
+        10.839999999999998,
+        3.5700000000000003,
+        -5.63,
+        -2.6300000000000003,
+        1.7299999999999993,
+        3.9399999999999995,
+        9.089999999999998,
+        0.4099999999999986,
+        -2.4500000000000006,
+        2.4999999999999982,
+        6.1,
+        -4.51,
+        15.639999999999999,
+        7.259999999999999,
+        -1.6900000000000004
+      ],
+      "training_return_sum": -24461.23999999994,
+      "training_events": {
+        "births": 21249,
+        "departures": 8205,
+        "survivor_opportunities": 46234,
+        "survivor_resets": 0
+      },
+      "evaluation_events": {
+        "births": 132,
+        "departures": 28,
+        "survivor_opportunities": 321,
+        "survivor_resets": 0
+      },
+      "mean_native_return": 2.8206249999999997,
+      "exposure": "100000 real native training ticks; 4969 actor/mixer RMSprop steps at lr=0.0005; 32 final greedy evaluation episodes",
+      "rng": "Python/global NumPy/Torch seeded before model construction; native traffic and replay share global NumPy; source epsilon selector uses Torch including greedy and terminal draws; all three reset to107803 for final evaluation",
+      "torch_version": "2.7.0+cu118",
+      "numpy_version": "1.26.3",
+      "torch_threads": [
+        1,
+        1
+      ],
+      "wall_seconds": 753.3915334369522,
+      "peak_rss_kib": 637332,
+      "external_resources": {
+        "wall_seconds": 753.84,
+        "user_cpu_seconds": 735.05,
+        "system_cpu_seconds": 19.32,
+        "peak_rss_kib": 650884
+      },
+      "artifact_root": "temp/directions/vap_folr_core/exp/public_lifecycle_b03_seed7803_retain",
+      "receipt": {
+        "assessed_at": "2026-09-09T21:22:19.461212Z",
+        "available_physical_bytes": 15633620992,
+        "captured_at": "2026-09-09T21:22:19.460946Z",
+        "cgroup_headroom_bytes": null,
+        "cgroup_memory_current_bytes": null,
+        "cgroup_memory_max_bytes": null,
+        "effective_available_bytes": 15633620992,
+        "effective_floor_pass": true,
+        "failure_reasons": [],
+        "measurement_source": "/proc/meminfo",
+        "minimum_available_bytes": 4294967296,
+        "passed": true,
+        "physical_floor_pass": true,
+        "schema_version": 1
+      }
+    },
+    "RESET": {
+      "arm": "RESET",
+      "training_seed": 7803,
+      "evaluation_seed": 107803,
+      "launch_sha": "434f10cf95f16dd342cbf754382aa76155fcd2b7",
+      "status": "complete",
+      "training_episodes": 5000,
+      "training_ticks": 100000,
+      "optimizer_steps": 4969,
+      "evaluation_episodes": 32,
+      "evaluation_ticks": 640,
+      "evaluation_returns": [
+        1.7600000000000013,
+        -1.8000000000000005,
+        0.9099999999999991,
+        -8.3,
+        11.540000000000003,
+        0.4099999999999977,
+        -4.15,
+        5.22,
+        10.14,
+        -4.33,
+        6.2600000000000025,
+        5.459999999999999,
+        -4.92,
+        3.250000000000001,
+        3.3499999999999996,
+        -5.9,
+        -2.670000000000001,
+        -3.959999999999999,
+        -5.8000000000000025,
+        -2.8000000000000016,
+        -0.05999999999999878,
+        -2.300000000000001,
+        -0.10000000000000087,
+        7.539999999999999,
+        -1.2899999999999998,
+        9.249999999999998,
+        -6.0600000000000005,
+        -4.300000000000002,
+        -5.740000000000002,
+        -1.9000000000000012,
+        0.8699999999999981,
+        8.78
+      ],
+      "training_return_sum": -29188.519999999986,
+      "training_events": {
+        "births": 21151,
+        "departures": 7846,
+        "survivor_opportunities": 45808,
+        "survivor_resets": 45808
+      },
+      "evaluation_events": {
+        "births": 131,
+        "departures": 35,
+        "survivor_opportunities": 290,
+        "survivor_resets": 290
+      },
+      "mean_native_return": 0.26124999999999954,
+      "exposure": "100000 real native training ticks; 4969 actor/mixer RMSprop steps at lr=0.0005; 32 final greedy evaluation episodes",
+      "rng": "Python/global NumPy/Torch seeded before model construction; native traffic and replay share global NumPy; source epsilon selector uses Torch including greedy and terminal draws; all three reset to107803 for final evaluation",
+      "torch_version": "2.7.0+cu118",
+      "numpy_version": "1.26.3",
+      "torch_threads": [
+        1,
+        1
+      ],
+      "wall_seconds": 753.639940183959,
+      "peak_rss_kib": 639496,
+      "external_resources": {
+        "wall_seconds": 753.94,
+        "user_cpu_seconds": 736.05,
+        "system_cpu_seconds": 19.27,
+        "peak_rss_kib": 661928
+      },
+      "artifact_root": "temp/directions/vap_folr_core/exp/public_lifecycle_b03_seed7803_reset",
+      "receipt": {
+        "assessed_at": "2026-09-09T21:37:59.894378Z",
+        "available_physical_bytes": 15633948672,
+        "captured_at": "2026-09-09T21:37:59.894105Z",
+        "cgroup_headroom_bytes": null,
+        "cgroup_memory_current_bytes": null,
+        "cgroup_memory_max_bytes": null,
+        "effective_available_bytes": 15633948672,
+        "effective_floor_pass": true,
+        "failure_reasons": [],
+        "measurement_source": "/proc/meminfo",
+        "minimum_available_bytes": 4294967296,
+        "passed": true,
+        "physical_floor_pass": true,
+        "schema_version": 1
+      }
+    }
+  },
+  "counts": {
+    "training_ticks": 200000,
+    "optimizer_steps": 9938,
+    "evaluation_episodes": 64,
+    "evaluation_ticks": 1280,
+    "total_native_ticks": 201280
+  },
+  "resources": {
+    "summed_complete_arm_wall_seconds": 1507.7800000000002,
+    "aggregate_cpu_seconds": 1509.69,
+    "study_critical_path_seconds": 1694,
+    "study_critical_path_scope": "first admission21:22:19Z to final exit21:50:33Z, rounded seconds; includes186s between first exit21:34:53Z and next admission21:37:59Z and Monitor/collection sequencing; excludes prior staging and later final collection"
+  },
+  "historical_results": {
+    "b01": "FOLR_PUBLIC_LIFECYCLE_B01_RESULT_SUMMARY_20260909.json",
+    "b02": "FOLR_PUBLIC_LIFECYCLE_B02_RESULT_SUMMARY_20260909.json",
+    "not_pooled": true
+  },
+  "execution": {
+    "accepted_submissions": 2,
+    "retries": 0,
+    "extra_evaluations": 0,
+    "source_edits": 0,
+    "local_fallbacks": 0,
+    "observation": "shared Monitor adopted both; original CM collected after Root terminal handoffs",
+    "handles": [
+      "folr-public-lifecycle-b03-retain-20260909",
+      "folr-public-lifecycle-b03-reset-20260909"
+    ]
+  },
+  "remaining": [
+    "DM scientific intake and Root integration",
+    "Root-triggered verified preservation/reclamation of remote worktree and both supervisor directories",
+    "Previously policy-blocked local scratch retained untouched"
+  ]
+}

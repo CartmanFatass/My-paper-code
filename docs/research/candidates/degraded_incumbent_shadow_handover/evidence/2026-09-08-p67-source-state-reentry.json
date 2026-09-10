@@ -1,0 +1,185 @@
+{
+  "recorded_at_utc": "2026-09-09T02:45:25+00:00",
+  "assessment_class": "A/RECON",
+  "result": "NO_READY_CONTINUATION",
+  "assignment": "docs/research/portfolio/handoffs/2026-09-08-research-resume.md, DISH row",
+  "assignment_commit": "6d0c12153a266735d8c2e13e8e59eb7601735a26",
+  "starting_source_commit": "bdfcf10b62ca323340acf965e057f7a727d043a5",
+  "tracked_start": "clean; HEAD equals upstream",
+  "authority_preserved": "P62 PRO_FINAL 0086cfd7e8f7326fbadf879f844b757f661e8809; DIRECT and B07/B06 narrow stops remain; source value unestimated",
+  "source_question": "What recurrent information reaches ordinary promotion, and does the existing source/evidence support a concrete new source comparison distinct from B07/B06?",
+  "source_reads": [
+    {
+      "path": "experiments/candidates/degraded_incumbent_shadow_handover_rbhr_r06/native/rbhr_r06_production_backend.cpp",
+      "ranges": [
+        "304-318",
+        "433-484"
+      ],
+      "git_blob_sha256": "1601a83999c59675dcea9ce0263a910cea03070f682cbe466c871bc6a52deef2"
+    },
+    {
+      "path": "experiments/candidates/degraded_incumbent_shadow_handover_rbhr_r06/production_training_engine.py",
+      "ranges": [
+        "88-163"
+      ],
+      "git_blob_sha256": "69369e5058081177086e4e5e5834c0cb91e146fb2d107116eb67d396810907e6"
+    },
+    {
+      "path": "experiments/candidates/degraded_incumbent_shadow_handover_rbhr_r06/production_recurrent_trainer.py",
+      "ranges": [
+        "234-243",
+        "273-386"
+      ],
+      "git_blob_sha256": "c61e4bc27d342ee213041f80836f532b0c8fb157a36b59213e66eb8978a8a4a5"
+    },
+    {
+      "path": "experiments/candidates/degraded_incumbent_shadow_handover/control_low_lr_b04/study.py",
+      "ranges": [
+        "146-213"
+      ],
+      "git_blob_sha256": "9ef0d8b17c3b4503402ad9e5ff0e276263afde931b5da66934599ac6e7305161"
+    },
+    {
+      "path": "experiments/candidates/degraded_incumbent_shadow_handover/control_low_lr_b05/study.py",
+      "ranges": [
+        "1-12"
+      ],
+      "git_blob_sha256": "181b3ddc65ead65dd4aba818cd709a96029d37ad947aeca4f780d1be6814cf32"
+    },
+    {
+      "path": "experiments/candidates/degraded_incumbent_shadow_handover/first_trigger_source_scout_b01/study.py",
+      "ranges": [
+        "164-214 (historical scaffold, not a current command)"
+      ],
+      "git_blob_sha256": "0a7c7b213b199786db610d91be5893f30e9b97b07513ed3170e1b2c6b8c39a70"
+    }
+  ],
+  "bounded_path_findings": {
+    "physical_entities": 2,
+    "policy_copies_per_entity": 2,
+    "hidden_values_per_copy": 128,
+    "snapshot_fields": 18,
+    "snapshot_scope": "forecast/control packet bridged into existing standby shadow; not serialized incumbent hidden state",
+    "promotion_scope": "ordinary cas_applied selects/mixes standby shadow and full old-incumbent hidden for new incumbent; matching replay path",
+    "pretransfer_scope": "standby shadow already drives standby motion and commit/prediction heads; changing the bridge is a different information-processing treatment",
+    "conditional_inference": "post-CAS-only source intervention is inactive on recorded zero-CAS trajectories; no impossibility or future prevalence claim",
+    "historical_training_transfers": "B05 CONTROL 3; accepted intake record, not newly collected matched source outcomes",
+    "publication_reading": "B05 binds B04 run_arm; loop publishes curves and final checkpoint, not pre-application event forks"
+  },
+  "literature": {
+    "question": "Causal recurrent memory and delayed-message information at an ordinary owner change; source/control nulls and setting limits",
+    "catalog_path": "C:\\Projects\\Inst-sci\\papers\\MyLib\\llm-index\\catalog.v2.jsonl",
+    "catalog_sha256": "2e682c6d1131d503ad48920794dd8005ccf8f535dc9ff75679b0c8502533efc0",
+    "catalog_records": 190,
+    "query_terms": [
+      "hidden state",
+      "recurrent state",
+      "state transfer",
+      "handover",
+      "delayed communication",
+      "asynchronous communication",
+      "stale",
+      "memory reconstruction"
+    ],
+    "metadata_hits": [
+      {
+        "id": "MARL-0066",
+        "title": "CoDe: Communication Delay-Tolerant Multi-Agent Collaboration via Dual Alignment of Intent and Timeliness",
+        "matched_terms": [
+          "asynchronous communication"
+        ]
+      },
+      {
+        "id": "MARL-0411",
+        "title": "Cooperative Multi-Agent Reinforcement Learning: Asynchronous Communication and Linear Function Approximation",
+        "matched_terms": [
+          "asynchronous communication"
+        ]
+      },
+      {
+        "id": "MARL-0588",
+        "title": "Multi-Agent Coordination via Multi-Level Communication",
+        "matched_terms": [
+          "hidden state"
+        ]
+      }
+    ],
+    "metadata_hits_are_claim_support": false,
+    "mylib_registry_path": "C:\\Projects\\My-lib\\registry\\papers.yaml",
+    "mylib_registry_sha256": "f2972d0f305bcec2b1d6257577b10f36b1af3d95b13cfc3b08d37ab880a1e68d",
+    "mylib_excluded_fixture_ids": [
+      "P-SYN-001",
+      "P-SYN-002"
+    ],
+    "coverage_limit": "Formal Inst-sci catalog and checked My-lib tracked registry only; no claim of unified/untracked/all-literature coverage",
+    "verified_source": {
+      "id": "MARL-0066",
+      "title": "CoDe: Communication Delay-Tolerant Multi-Agent Collaboration via Dual Alignment of Intent and Timeliness",
+      "authors": "Shoucheng Song et al.",
+      "year": 2025,
+      "venue": "AAAI",
+      "doi": "10.1609/aaai.v39i22.34497",
+      "official_url": "https://ojs.aaai.org/index.php/AAAI/article/view/34497",
+      "source_path": "C:\\Projects\\Inst-sci\\papers\\MyLib\\json\\MARL-0066.json",
+      "source_sha256": "0b18d3dc866bbf4d451fc8949923d806005f86b00dd964a9cdc1a416c8ca295f",
+      "passages": [
+        "page1 element_index5 id25",
+        "page3 element_index69 id155",
+        "page3 element_index70 id156",
+        "page4 element_index71 id158",
+        "page4 element_index78 id165",
+        "page4 element_index82 id170",
+        "page4 element_index88 id176"
+      ],
+      "metadata_quality": "official_title_matched; grade A; warnings []; abstract-grounded tags",
+      "decision_impact": "Verified new intent/message representations and future-action/continuity/diversity learning objectives are a different package; analogy about delayed messages does not select a DISH source replacement"
+    }
+  },
+  "unallocated_real_B_scale": {
+    "arms": 2,
+    "independent_training_pairs": 1,
+    "updates_per_arm": 16,
+    "lanes": 32,
+    "rollout_ticks_per_update": 128,
+    "ordinary_transitions_per_arm": 65536,
+    "ordinary_transitions_total": 131072,
+    "optimizer_steps_per_arm": 512,
+    "optimizer_steps_total": 1024,
+    "final_episodes_per_arm": 4,
+    "final_episodes_total": 8,
+    "max_episode_ticks": 1200,
+    "max_final_ticks_total": 9600,
+    "batched_controller_forward_ticks_per_arm": 2048,
+    "native_training_cost_law": "2N+2E+H; 0<=E<=N; 0<=H<=20E",
+    "native_training_calls_per_arm_bounds": [
+      131072,
+      1572864
+    ],
+    "native_training_calls_total_bounds": [
+      262144,
+      3145728
+    ],
+    "private_label_work": "existing algorithm work, not added validation",
+    "historical_B07_accounted_seconds": 463.83358418601875,
+    "complete_current_runtime": "unmeasured; historical syntax cost additional",
+    "allocated": false
+  },
+  "new_exposure": {
+    "models": 0,
+    "transitions": 0,
+    "optimizer_steps": 0,
+    "episodes": 0,
+    "native_calls": 0,
+    "scientific_invocations": 0,
+    "provider_sends": 0
+  },
+  "owner_boundary": {
+    "main_all_age_reviews": [],
+    "direction_all_age_reviews": [],
+    "nonempty_DISH_audit_owner_columns": [],
+    "empirical_prediction": "not taken; no new prediction"
+  },
+  "scope_items_required": [],
+  "next_selected_discriminator": null,
+  "intake": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_P67_SOURCE_STATE_REENTRY_INTAKE_20260908.md"
+}

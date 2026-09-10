@@ -96,6 +96,14 @@
       "record": "docs/research/candidates/vsp_03/VSP03_B06_CONTINUOUS512_SCIENCE_CARD_20260909.md",
       "state": "applied",
       "summary": "按Root当前指令冻结完整B06科学卡、低置信度均值幅度预测及配对Q/缺失规则，发布CM五项提案。卡/实现提案已就绪，source、测试、fit均未分配或执行；由Root下一具体任务给出有限分配。六栏中文brief见2026-09-09_continuous512_convergence.md。未虚构owner回复；原准备packet保留为历史，当前执行状态以此trace及intake为准。"
+    },
+    {
+      "at": "2026-09-09T22:34:43+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/vsp_03/pro_packets/20260909_continuous512_convergence/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/decisions/2026-09-09-synthesis-execution.md",
+      "state": "applied",
+      "summary": "Full Pro/DM/card accepted and integrateda36158793/319ecb159; branch audit28–30 mapsmain169–171. Root now allocates exact three-fit B06 under standing delegation, unchanged60s perfit/noextra validation/cumulative test cap. Close-call and oldpauses retained; no result or owner reply fabricated."
     }
   ]
 }

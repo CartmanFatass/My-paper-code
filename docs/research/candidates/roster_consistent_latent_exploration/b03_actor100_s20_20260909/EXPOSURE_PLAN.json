@@ -1,0 +1,190 @@
+{
+  "reporting_object": "RCLE-TBCFV-B03-ACTOR100-S20",
+  "evidence_class": "B/EXPLORE",
+  "rng_namespace": "RCLE-TBCFV-B03-ACTOR100",
+  "master_seed": 20,
+  "block_index": 0,
+  "root_key_expression": "SHA256(ASCII(RCLE-TBCFV-B03-ACTOR100/seed/20))",
+  "root_key_hex": "065798a1a4115ac244accada16fc267f814deb622cfd05b9657418892c656e3b",
+  "historical_seed19_root_preserved": "4b17629c25d71afceed93bbe657c0b5799d468d1f5673d90a7ceee644ec474c5",
+  "true_rng_package": "FLEX-REKEY",
+  "report_labels_outside_rng": [
+    "W1",
+    "W100",
+    "RCLE-TBCFV-B03-ACTOR100-S20"
+  ],
+  "scientific_calls_allocated_now": 3,
+  "implementation_and_tests_allocated_now": true,
+  "new_training_pairs_if_later_allocated": 1,
+  "fresh_fits": 2,
+  "updates_each": 200,
+  "episodes_per_update": 64,
+  "horizon": 64,
+  "training_cells": [
+    "6→6",
+    "10→10",
+    "6→10",
+    "10→6"
+  ],
+  "training_conditions": [
+    "ACTIVE_CONTINUATION",
+    "NEW_EPOCH"
+  ],
+  "training_episodes_per_cell_per_update": 8,
+  "evaluation_cells": [
+    "8→8",
+    "12→12",
+    "8→12",
+    "12→8"
+  ],
+  "evaluation_conditions": [
+    "ACTIVE_CONTINUATION",
+    "NEW_EPOCH"
+  ],
+  "evaluation_episodes_per_cell": 256,
+  "panels": [
+    "new_W1_initialization",
+    "new_W1_final",
+    "new_W100_final",
+    "new_reference"
+  ],
+  "historical_fitted_control_reused": false,
+  "old_checkpoint_loaded": false,
+  "topology": [
+    {
+      "order": 1,
+      "arm": "W1",
+      "training_episodes": 12800,
+      "init_episodes": 2048,
+      "final_episodes": 2048,
+      "total_episodes": 16896,
+      "ticks": 1081344,
+      "backward_step_calls": 200,
+      "complete_cap_seconds": 600
+    },
+    {
+      "order": 2,
+      "arm": "W100",
+      "training_episodes": 12800,
+      "init_episodes": 0,
+      "final_episodes": 2048,
+      "total_episodes": 14848,
+      "ticks": 950272,
+      "backward_step_calls": 200,
+      "control_summary": "new S20 W1 summary only",
+      "complete_cap_seconds": 600
+    },
+    {
+      "order": 3,
+      "arm": "reference",
+      "training_episodes": 0,
+      "final_episodes": 2048,
+      "total_episodes": 2048,
+      "ticks": 131072,
+      "backward_step_calls": 0,
+      "complete_cap_seconds": 30
+    }
+  ],
+  "new_counts": {
+    "training_episodes": 25600,
+    "evaluation_episodes": 8192,
+    "total_episodes": 33792,
+    "training_ticks": 1638400,
+    "evaluation_ticks": 524288,
+    "total_ticks": 2162688,
+    "backward_step_calls": 400,
+    "nonzero_steps": "observed in actual execution, not presumed",
+    "model_allocations": 12,
+    "training_instances": 2,
+    "untrained_helpers": 10
+  },
+  "learner_motion": {
+    "parameters_per_fit": 26161,
+    "step_norm_if_nonzero": 0.02,
+    "summed_parameter_path_length_budget_per_fit": 4.0,
+    "net_displacement": "measured, not equal to path length",
+    "new_initial_parameter_norm": "unmeasured until allocated initialization",
+    "extra_exposure_probe": false
+  },
+  "prior_b03_known_counts": {
+    "total_episodes": 33792,
+    "total_ticks": 2162688,
+    "backward_step_calls": 400,
+    "scientific_model_allocations": 18,
+    "started_training_instances": 3,
+    "completed_training_instances": 2,
+    "untrained_helpers": 15
+  },
+  "old_failed_W100_unknown_prefix_bounds": {
+    "training_episodes": [
+      0,
+      12800
+    ],
+    "primitive_ticks": [
+      0,
+      819200
+    ],
+    "backward_step_calls": [
+      0,
+      200
+    ]
+  },
+  "if_new_pair_completes_known_cumulative": {
+    "total_episodes": 67584,
+    "total_ticks": 4325376,
+    "backward_step_calls": 800,
+    "scientific_model_allocations": 30,
+    "started_training_instances": 5,
+    "completed_training_instances": 4,
+    "untrained_helpers": 25,
+    "independent_complete_training_pairs": 2
+  },
+  "nominal_cumulative_upper_bounds_not_observed_totals": {
+    "total_episodes": 80384,
+    "total_ticks": 5144576,
+    "backward_step_calls": 1000
+  },
+  "proposed_cost_caps_seconds": {
+    "each_complete_learned_invocation": 600,
+    "reference": 30,
+    "one_future_focused_check": 30,
+    "complete_new_object": 1500,
+    "remaining_other_support_if_sublimits_used": 240
+  },
+  "planning_times_seconds": {
+    "prior_complete_W1": 79.24,
+    "recovered_complete_W100": 70.95,
+    "recovered_reference": 2.59,
+    "sum": 152.78,
+    "estimate_not_bound": true,
+    "failed_prefix_used_for_throughput": false
+  },
+  "named_prior_cost_seconds": 261.3980053,
+  "named_prior_plus_new_cap_seconds": 1761.3980053,
+  "full_history_or_CPU_cost_claim": false,
+  "computation": "Python stdlib integer arithmetic/hash only; no project imports, models, RNG objects, native calls or experiment",
+  "feasibility_commit": "17aa7f01533887750b74a6ca62465e67b41a4580",
+  "source_baseline": "4e89f24197a79d0b4fc724018f0223ca2c1e4289",
+  "status": "explicit complete batch allocated; no S20 scientific execution yet at allocation binding",
+  "future_cli_seed_choices": [
+    19,
+    20
+  ],
+  "future_cli_default_seed": 19,
+  "future_reporting_argument": "--reporting-object; emitted object only, outside RNG",
+  "episode_batch_topology_not_native_kernel_call_count": {
+    "episodes_per_batch": 32,
+    "training_batches_per_update": 2,
+    "training_batch_evaluations": 800,
+    "panel_batch_evaluations": 256
+  },
+  "allocation_commit": "fb4f3e0ae9058675162bcb183f34182a969a935f",
+  "allocation_source": "docs/research/portfolio/decisions/2026-09-09-synthesis-execution.md / RCLE fresh S20 pair now explicitly allocated",
+  "scientific_freeze_commit": "2da8ec66be12da255e69721d0bdc672ce07edc33",
+  "allocation_time_scientific_calls_observed": 0,
+  "pre_handoff_conservative_DM_preparation_seconds_inside_cap": 15,
+  "remaining_complete_allowance_at_handoff_seconds": 1485,
+  "known_directory_checks_spent_seconds": 19.4703507,
+  "known_directory_allowance_remaining_seconds": 280.5296493,
+  "directory_check_accounting_note": "CM must reconcile any additional recorded spend; no budget reset; selected S20 check remains at most30s."
+}

@@ -1,0 +1,117 @@
+{
+  "read_at": "2026-09-09T08:56:55.674948+00:00",
+  "method": "Read-only GitHub CLI/API and immutable git object read; no provider Send or GitHub file/comment write",
+  "original_transport_archive_files": [
+    {
+      "original_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\flexible_skill_duration\\2026-09-09-fsd-p74-post-uav-b02-convergence-01\\2026-09-09-fsd-p74-post-uav-b02-convergence-01--flexible_skill_duration--attempt-01__02_RESPONSE.md",
+      "canonical_path": "docs/research/candidates/flexible_skill_duration/pro_packets/20260909_p74_post_uav_b02_convergence/archive/TRANSPORT_BLOCKER_RESPONSE.md",
+      "bytes": 865,
+      "sha256": "b0822efd91fcc357d4491d4e6fb9bc173d19c7fdd157b828f1b8a11af55dcd86"
+    },
+    {
+      "original_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\flexible_skill_duration\\2026-09-09-fsd-p74-post-uav-b02-convergence-01\\2026-09-09-fsd-p74-post-uav-b02-convergence-01--flexible_skill_duration--attempt-01__03_TRANSPORT_FACTS.json",
+      "canonical_path": "docs/research/candidates/flexible_skill_duration/pro_packets/20260909_p74_post_uav_b02_convergence/archive/TRANSPORT_FACTS_ORIGINAL.json",
+      "bytes": 4538,
+      "sha256": "fb45afc15315eddcac6f3adbdc5e4b5fc69508b0280968dd70f709012fdc600e"
+    },
+    {
+      "original_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\flexible_skill_duration\\2026-09-09-fsd-p74-post-uav-b02-convergence-01\\2026-09-09-fsd-p74-post-uav-b02-convergence-01--flexible_skill_duration__PACKET_MANIFEST.json",
+      "canonical_path": "docs/research/candidates/flexible_skill_duration/pro_packets/20260909_p74_post_uav_b02_convergence/archive/PACKET_MANIFEST_ORIGINAL.json",
+      "bytes": 1860,
+      "sha256": "6771e843176a2b34373c62a5e5477303ba6dc9917a5a19664c8ef83ae9df4abb"
+    },
+    {
+      "original_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\flexible_skill_duration\\2026-09-09-fsd-p74-post-uav-b02-convergence-01\\2026-09-09-fsd-p74-post-uav-b02-convergence-01--flexible_skill_duration__00_PROMPT.md",
+      "canonical_path": "docs/research/candidates/flexible_skill_duration/pro_packets/20260909_p74_post_uav_b02_convergence/archive/PROMPT_ORIGINAL.md",
+      "bytes": 1263,
+      "sha256": "a5a6a21251a0208fed7755820f4b7e3385af46d2da735bb49e0bd12ee2d12fa2"
+    }
+  ],
+  "historical_transport_claim": {
+    "status": "UNCONFIRMED",
+    "commit": "16344379366621e743caa3bf7e8af73683e9e17a",
+    "response_sha256": "b0822efd91fcc357d4491d4e6fb9bc173d19c7fdd157b828f1b8a11af55dcd86",
+    "assistant_message_id": "2e492066-25b8-442d-90ef-33c1d9232614",
+    "receipt_staged_at": "2026-09-09T08:50:19Z",
+    "receipt_sent_at": "2026-09-09T08:51:11Z",
+    "send_click_count": 1
+  },
+  "live_branch_read": {
+    "ref": "refs/heads/codex/fsd",
+    "node_id": "REF_kwDOO8trO7RyZWZzL2hlYWRzL2NvZGV4L2ZzZA",
+    "url": "https://api.github.com/repos/CartmanFatass/My-paper-code/git/refs/heads/codex/fsd",
+    "object": {
+      "sha": "c01801fc2fcead64c417deeb8a7e214252d47d1f",
+      "type": "commit",
+      "url": "https://api.github.com/repos/CartmanFatass/My-paper-code/git/commits/c01801fc2fcead64c417deeb8a7e214252d47d1f"
+    }
+  },
+  "immutable_delivery": {
+    "commit": "c01801fc2fcead64c417deeb8a7e214252d47d1f",
+    "parents": [
+      "16344379366621e743caa3bf7e8af73683e9e17a"
+    ],
+    "author_date": "2026-09-09T08:49:13Z",
+    "committer_date": "2026-09-09T08:49:13Z",
+    "commit_url": "https://github.com/CartmanFatass/My-paper-code/commit/c01801fc2fcead64c417deeb8a7e214252d47d1f",
+    "changed_files": [
+      {
+        "path": "docs/research/candidates/flexible_skill_duration/pro_packets/20260909_p74_post_uav_b02_convergence/archive/RESPONSE.md",
+        "status": "added",
+        "additions": 179,
+        "deletions": 0
+      }
+    ],
+    "response_path": "docs/research/candidates/flexible_skill_duration/pro_packets/20260909_p74_post_uav_b02_convergence/archive/RESPONSE.md",
+    "response_url": "https://github.com/CartmanFatass/My-paper-code/blob/c01801fc2fcead64c417deeb8a7e214252d47d1f/docs/research/candidates/flexible_skill_duration/pro_packets/20260909_p74_post_uav_b02_convergence/archive/RESPONSE.md",
+    "response_blob_sha": "d7c8c9889cafce811513c2974a3fe89e7829d44b",
+    "response_bytes": 30817,
+    "response_sha256": "08ad8e9175073b7961de24bced88936134c27b99b388cf0a60ca09a437505fea",
+    "response_read_complete": true,
+    "git_blob_matches_github_content": true
+  },
+  "live_issue_read": {
+    "url": "https://github.com/CartmanFatass/My-paper-code/issues/10",
+    "state": "OPEN",
+    "total_comments": 6,
+    "matching_p74_comments": [
+      {
+        "id": "IC_kwDOO8trO88AAAABTbuarA",
+        "author": {
+          "login": "CartmanFatass"
+        },
+        "authorAssociation": "OWNER",
+        "body": "本轮 P74「两次 native UAV I/D0 结果后的 Convergence」完整研究答复已交付，并已按交付提交读回全文。\n\n[完整研究答复（不可变提交 c01801fc2fcead64c417deeb8a7e214252d47d1f）](https://github.com/CartmanFatass/My-paper-code/blob/c01801fc2fcead64c417deeb8a7e214252d47d1f/docs/research/candidates/flexible_skill_duration/pro_packets/20260909_p74_post_uav_b02_convergence/archive/RESPONSE.md)\n\n对应[本轮固定 TASK](https://github.com/CartmanFatass/My-paper-code/blob/b2342c20a2cbc01ec750a0442025a5615809eb13/docs/research/candidates/flexible_skill_duration/pro_packets/20260909_p74_post_uav_b02_convergence/TASK.md)，科学证据固定于 1fd266b76de99e43cbda4c9bee1b2e96dba82e1f。此为 post-native-UAV-B02 P74，不是早先 corridor post-B02、P52 或 P67 的重复交付。\n\n已核对该提交在 codex/fsd 当前后继上仅新增本轮指定 archive/RESPONSE.md，保留所有其他路径及历史交付。未执行科研代码、加载模型、运行实验、选择数值 keys，或修改 main、source、card、CM spec、DIRECTION、audit、Portfolio。完整方向选择、最小适用范围、相反证据、未知数与无后继边界以答复为准；本轮没有新增科学调用分配。",
+        "createdAt": "2026-09-09T08:50:09Z",
+        "includesCreatedEdit": false,
+        "isMinimized": false,
+        "minimizedReason": "",
+        "reactionGroups": [],
+        "url": "https://github.com/CartmanFatass/My-paper-code/issues/10#issuecomment-5599107756",
+        "viewerDidAuthor": true
+      }
+    ]
+  },
+  "old_commit_response_read": {
+    "commit": "16344379366621e743caa3bf7e8af73683e9e17a",
+    "exit_code": 1,
+    "stdout": "{\"message\":\"Not Found\",\"documentation_url\":\"https://docs.github.com/rest/repos/contents#get-repository-content\",\"status\":\"404\"}",
+    "stderr": "gh: Not Found (HTTP 404)",
+    "interpretation": "404 is true at the older pre-delivery commit; it cannot establish absence at the subsequent delivery commit."
+  },
+  "bounded_finding": "Current immutable GitHub file and matching Issue comment contradict the earlier blocker/UNCONFIRMED receipt. The copied blocker alone forms no decision. The actual full response exists and was directly read; scientific application is not performed in this blocker-only assignment. No cause for the inconsistent provider/Transport records is inferred.",
+  "metadata_limit": "Original facts archive_paths github_response_file/github_commit fields point to the copied blocker and older HEAD while github_delivery.status is UNCONFIRMED. These field names are not provenance for the actual GitHub response bytes. Original facts are preserved unchanged.",
+  "new_exposure": {
+    "scientific_invocations": 0,
+    "model_constructions": 0,
+    "training_starts": 0,
+    "training_transitions": 0,
+    "evaluation_episodes": 0,
+    "diagnostic_invocations": 0,
+    "provider_sends": 0,
+    "retries": 0,
+    "github_file_or_comment_writes": 0
+  },
+  "next_owner": "Same original DM performs the extended scientific intake; Root/Transport separately reconcile the historical terminal receipt without a new Send, then Root integrates the complete return.",
+  "followup_scope": "After this readback was reported, Root explicitly extended the same assignment to complete-response scientific conformity and direction application if matching and complete; see ../CONVERGENCE_INTAKE.md. No resend, implementation or new invocation."
+}

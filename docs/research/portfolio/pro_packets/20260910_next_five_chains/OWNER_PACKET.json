@@ -1,0 +1,37 @@
+{
+  "question": "下一批五条实际推进链是否采用建议A，或改用有明确可执行第一步的替代项？",
+  "changes_if_approved": [
+    {
+      "target": "Portfolio下一批working set",
+      "from": "前批五方向有限预算结束；当前无运行实验",
+      "to": "建议FOLR、UCOPE、VSP03、RCLE、ACVC；具体选择由Portfolio Pro形成，ACVC保持最低争用排序"
+    }
+  ],
+  "if_refused": "按异步指令修订建议；本次未选择五链、未建卡、未启动实验，不推断新的预算。",
+  "evidence_for": [
+    {
+      "path": "docs/research/portfolio/pro_packets/20260910_next_five_chains/SCIENCE_BRIEF.md",
+      "quote": "It allocates no experiment locally.",
+      "why": "有真实的新投资边界和五条有限问题。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/portfolio/pro_packets/20260910_next_five_chains/SCIENCE_BRIEF.md",
+      "quote": "A blocked chain is not counted merely to reach five.",
+      "why": "两个备用方向依赖未解；RCLE低于MEI，ACVC使用选择后的旧基座。"
+    }
+  ],
+  "uncertainty": [
+    "FOLR新三臂只有一个训练实例且剂量不匹配；UCOPE旧T负结果保留。",
+    "ACVC新基座训练成本、UCOPE新头成本和两个备用方向的可执行第一步未知。"
+  ],
+  "cost": {
+    "compute": "本次新增训练、更新、评估、探针均为0；提议乘法与成本见SCIENCE_BRIEF。",
+    "owner_time": "异步阅读和覆盖，无逐项批准等待。",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing"
+  },
+  "verdict_text": "建议A：FOLR、UCOPE、VSP03、RCLE、ACVC；检验现有信号的有限延续，ACVC保持最低争用顺序。建议未执行，Portfolio Pro最终选择。",
+  "source": "docs/research/portfolio/pro_packets/20260910_next_five_chains/SCIENCE_BRIEF.md"
+}

@@ -1,0 +1,47 @@
+{
+  "question": "是否保留已固定的首个 UAV I/D0 学习卡片和本轮仅准备实现的边界？",
+  "changes_if_approved": [
+    {
+      "target": "docs/research/candidates/flexible_skill_duration/FSD_UAV_INDIVIDUAL_RENEWAL_B01_SCIENCE_CARD_20260908.md",
+      "from": "Pro 选择问题，具体新 keys 和实现检查尚未落卡",
+      "to": "固定训练770503与评价780503、两臂各五轮和唯一32回合终点、native mean reward及.01 MEI；只把完整 CM spec 交 Root"
+    }
+  ],
+  "if_refused": "按实际 reject/revise 指令修改或暂停受影响卡片；历史证据和完整 Pro 裁决不删改，不自动替换问题或扩大预算。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_INDIVIDUAL_RENEWAL_B01_SCIENCE_CARD_20260908.md",
+      "quote": "**B/EXPLORE; one new matched training pair; prospective and unlaunched.**",
+      "why": "一个前瞻训练对直接回答已选 B 问题，没有历史 checkpoint 或分数选优。"
+    },
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/pro_packets/20260908_p67_uav_internal_renewal/archive/RESPONSE.md",
+      "quote": "选择 A：只开放 scenario1 上“固定团队时钟内的个体内部技能续约”这一有界 B/EXPLORE 对象族，并只选择一对新的 I／authentic D0 真实学习比较。",
+      "why": "卡片落实原节点的唯一选择，未新增团队 gap、flat baseline 或原因矩阵。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_INDIVIDUAL_RENEWAL_B01_SCIENCE_CARD_20260908.md",
+      "quote": "The independent training unit is one matched pair; episode\nspread does not estimate uncertainty over training seeds.",
+      "why": "32回合差值的 SE 只描述同一训练对的评价变化，不能包装成稳定优势。"
+    },
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/pro_packets/20260908_p67_uav_internal_renewal/archive/RESPONSE.md",
+      "quote": "反对开放的最强理由是：D0 已经保留逐步观察、连续动作和记忆，新增 gap 可能只是增加离散技能扰动、样本分布变化及更新成本；旧 E3 对 competent fixed clock 的亏损让这种担忧有实质依据。",
+      "why": "处理可能无益且昂贵，卡片保留小值和反向结果。"
+    }
+  ],
+  "uncertainty": [
+    "实现尚未完成；新 runner 必须正确传入 I evaluator 参数并使用 fresh reset state。",
+    "预测均值在±.01内、信心低，尚不可评分，owner prediction 未填写。"
+  ],
+  "cost": {
+    "compute": "本次零模型、零训练、零评价；实现检查限 fake-only，未来真实调用仍是D0/I 3600/18000秒完整上限。",
+    "owner_time": "异步 accept/reject/revise 即可；循环不等待。",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing；Root 可分配实现，本回执未分配实验。"
+  },
+  "verdict_text": "Owner-delegated decision (unattended, 2026-09-03 instruction): (a)",
+  "source": "docs/research/candidates/flexible_skill_duration/pro_packets/20260908_p67_uav_internal_renewal/CONVERGENCE_INTAKE.md"
+}

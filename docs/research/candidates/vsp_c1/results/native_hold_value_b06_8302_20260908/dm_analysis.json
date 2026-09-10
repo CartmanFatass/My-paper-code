@@ -1,0 +1,596 @@
+{
+  "object": "VSPC1-NATIVE-HOLD-VALUE-B06",
+  "independent_unit": "matched training pair; two independently initialized pairs 8301 and8302 of unchanged normalized width133 comparison",
+  "selection": "all fixed final sampled native J endpoints,32 reset identities per arm and no outcome exclusion; H is an untrained native reference",
+  "per_pair": {
+    "8301": {
+      "object": "B05",
+      "source_sha": "bda90e1db76a00123ba889ed6c4b05225473f4cb",
+      "evidence_path": "docs/research/candidates/vsp_c1/results/native_hold_value_b05_8301_20260908/evidence.json",
+      "evidence_sha256": "4c6c6038cb5caf29abf099f1a6ce0abb1732437d4ca6634c0d0c25f659472358",
+      "native_means": {
+        "GATED-V": 0.194786498888121,
+        "MLP-V": 0.17819458751184225,
+        "H": 0.16509972954531915
+      },
+      "contrasts": {
+        "GATED-V_minus_MLP-V": {
+          "mean": 0.01659191137627875,
+          "conditional_sample_sd": 0.04581605592838047,
+          "conditional_se": 0.008099210958544987,
+          "evaluation_n": 32,
+          "adverse_count": 13,
+          "adverse_episode_reset_identities": [
+            [
+              1,
+              830102001
+            ],
+            [
+              3,
+              830102003
+            ],
+            [
+              6,
+              830102006
+            ],
+            [
+              12,
+              830102012
+            ],
+            [
+              15,
+              830102015
+            ],
+            [
+              16,
+              830102016
+            ],
+            [
+              17,
+              830102017
+            ],
+            [
+              19,
+              830102019
+            ],
+            [
+              21,
+              830102021
+            ],
+            [
+              23,
+              830102023
+            ],
+            [
+              25,
+              830102025
+            ],
+            [
+              28,
+              830102028
+            ],
+            [
+              29,
+              830102029
+            ]
+          ]
+        },
+        "GATED-V_minus_H": {
+          "mean": 0.029686769342801844,
+          "conditional_sample_sd": 0.06347795368729839,
+          "conditional_se": 0.011221422877033574,
+          "evaluation_n": 32,
+          "adverse_count": 8,
+          "adverse_episode_reset_identities": [
+            [
+              0,
+              830102000
+            ],
+            [
+              3,
+              830102003
+            ],
+            [
+              5,
+              830102005
+            ],
+            [
+              14,
+              830102014
+            ],
+            [
+              20,
+              830102020
+            ],
+            [
+              21,
+              830102021
+            ],
+            [
+              29,
+              830102029
+            ],
+            [
+              31,
+              830102031
+            ]
+          ]
+        },
+        "MLP-V_minus_H": {
+          "mean": 0.013094857966523096,
+          "conditional_sample_sd": 0.07069941319211685,
+          "conditional_se": 0.01249800862351387,
+          "evaluation_n": 32,
+          "adverse_count": 13,
+          "adverse_episode_reset_identities": [
+            [
+              0,
+              830102000
+            ],
+            [
+              2,
+              830102002
+            ],
+            [
+              3,
+              830102003
+            ],
+            [
+              5,
+              830102005
+            ],
+            [
+              7,
+              830102007
+            ],
+            [
+              13,
+              830102013
+            ],
+            [
+              14,
+              830102014
+            ],
+            [
+              18,
+              830102018
+            ],
+            [
+              20,
+              830102020
+            ],
+            [
+              24,
+              830102024
+            ],
+            [
+              27,
+              830102027
+            ],
+            [
+              29,
+              830102029
+            ],
+            [
+              31,
+              830102031
+            ]
+          ]
+        }
+      },
+      "point_region": "UP",
+      "max_native_J_error": 0.0,
+      "independent_training_pairs": 1
+    },
+    "8302": {
+      "object": "B06",
+      "source_sha": "fd4c9f4a65c7c4049f9c0e5f18b28534f14abe01",
+      "evidence_path": "docs/research/candidates/vsp_c1/results/native_hold_value_b06_8302_20260908/evidence.json",
+      "evidence_sha256": "f82946864336a34643abc97239b838deda60b7402ab33f49e119d54d0e403bc6",
+      "native_means": {
+        "GATED-V": 0.16886691046202362,
+        "MLP-V": 0.17550142866866406,
+        "H": 0.1491892365481063
+      },
+      "contrasts": {
+        "GATED-V_minus_MLP-V": {
+          "mean": -0.006634518206640422,
+          "conditional_sample_sd": 0.03949725547887606,
+          "conditional_se": 0.006982194296842694,
+          "evaluation_n": 32,
+          "adverse_count": 18,
+          "adverse_episode_reset_identities": [
+            [
+              1,
+              830202001
+            ],
+            [
+              2,
+              830202002
+            ],
+            [
+              4,
+              830202004
+            ],
+            [
+              5,
+              830202005
+            ],
+            [
+              6,
+              830202006
+            ],
+            [
+              8,
+              830202008
+            ],
+            [
+              10,
+              830202010
+            ],
+            [
+              11,
+              830202011
+            ],
+            [
+              12,
+              830202012
+            ],
+            [
+              15,
+              830202015
+            ],
+            [
+              17,
+              830202017
+            ],
+            [
+              18,
+              830202018
+            ],
+            [
+              21,
+              830202021
+            ],
+            [
+              23,
+              830202023
+            ],
+            [
+              24,
+              830202024
+            ],
+            [
+              25,
+              830202025
+            ],
+            [
+              28,
+              830202028
+            ],
+            [
+              29,
+              830202029
+            ]
+          ]
+        },
+        "GATED-V_minus_H": {
+          "mean": 0.0196776739139173,
+          "conditional_sample_sd": 0.07851911220560537,
+          "conditional_se": 0.01388034917333274,
+          "evaluation_n": 32,
+          "adverse_count": 11,
+          "adverse_episode_reset_identities": [
+            [
+              0,
+              830202000
+            ],
+            [
+              1,
+              830202001
+            ],
+            [
+              2,
+              830202002
+            ],
+            [
+              6,
+              830202006
+            ],
+            [
+              7,
+              830202007
+            ],
+            [
+              8,
+              830202008
+            ],
+            [
+              10,
+              830202010
+            ],
+            [
+              11,
+              830202011
+            ],
+            [
+              23,
+              830202023
+            ],
+            [
+              25,
+              830202025
+            ],
+            [
+              30,
+              830202030
+            ]
+          ]
+        },
+        "MLP-V_minus_H": {
+          "mean": 0.02631219212055772,
+          "conditional_sample_sd": 0.0670519724591017,
+          "conditional_se": 0.011853226104441108,
+          "evaluation_n": 32,
+          "adverse_count": 8,
+          "adverse_episode_reset_identities": [
+            [
+              0,
+              830202000
+            ],
+            [
+              7,
+              830202007
+            ],
+            [
+              8,
+              830202008
+            ],
+            [
+              10,
+              830202010
+            ],
+            [
+              11,
+              830202011
+            ],
+            [
+              16,
+              830202016
+            ],
+            [
+              25,
+              830202025
+            ],
+            [
+              30,
+              830202030
+            ]
+          ]
+        }
+      },
+      "point_region": "WITHIN",
+      "max_native_J_error": 0.0,
+      "independent_training_pairs": 1
+    }
+  },
+  "same_comparison_descriptive": {
+    "GATED-V_minus_MLP-V": {
+      "training_pairs": 2,
+      "per_pair": {
+        "8301": 0.01659191137627875,
+        "8302": -0.006634518206640422
+      },
+      "mean": 0.004978696584819163,
+      "sample_sd": 0.016423565860833978,
+      "reading": "descriptive only; sample dispersion mixes training and finite evaluation randomness, not stable population uncertainty"
+    },
+    "GATED-V_minus_H": {
+      "training_pairs": 2,
+      "per_pair": {
+        "8301": 0.029686769342801844,
+        "8302": 0.0196776739139173
+      },
+      "mean": 0.02468222162835957,
+      "sample_sd": 0.007077499251307537,
+      "reading": "descriptive only; sample dispersion mixes training and finite evaluation randomness, not stable population uncertainty"
+    },
+    "MLP-V_minus_H": {
+      "training_pairs": 2,
+      "per_pair": {
+        "8301": 0.013094857966523096,
+        "8302": 0.02631219212055772
+      },
+      "mean": 0.019703525043540407,
+      "sample_sd": 0.009346066609526443,
+      "reading": "descriptive only; sample dispersion mixes training and finite evaluation randomness, not stable population uncertainty"
+    }
+  },
+  "pooling_boundary": "old normalized width128 n=2 and old unnormalized n=2 remain separate; no evaluation episode or checkpoint treated as a training seed",
+  "mei_absolute": 0.01,
+  "b06_point_region": "WITHIN",
+  "b06_distance_to_lower_mei_boundary": 0.0033654817933595786,
+  "b06_lower_boundary_distance_below_conditional_se": true,
+  "dm_b06_forecast": {
+    "event": "Delta>.01",
+    "probability": 0.55,
+    "observed": false,
+    "binary_brier": 0.30250000000000005
+  },
+  "owner_prediction": "not taken (unattended), unless an actual later review changes this record",
+  "b06_native_counts": {
+    "train_team_steps": 262144,
+    "eval_team_steps": 24576,
+    "team_steps": 286720,
+    "optimizer_steps": 2048,
+    "train_episodes": 1024,
+    "eval_episodes": 96,
+    "velocity_decisions": 1383919,
+    "duration_decisions": 5440,
+    "d4": 2907,
+    "recurrent_observations": 1392640,
+    "explicit_resets": 1120,
+    "constructor_resets": 2,
+    "constructors": 2,
+    "step_calls": 286720,
+    "scientific_uav_calls": 286720,
+    "diagnostic_frames": 0,
+    "completed_episode_steps": 286720,
+    "rollouts": 512,
+    "partial_episode_steps": 0
+  },
+  "b06_algorithm_work": {
+    "fits": 2,
+    "training_pairs": 1,
+    "training_team_steps": 262144,
+    "evaluation_team_steps": 24576,
+    "moment_merges": 512,
+    "scalar_target_rows": 262144,
+    "four_epoch_value_target_terms": 1048576
+  },
+  "b06_hold_rows": {
+    "GATED-V": {
+      "train": 1503,
+      "eval": 93
+    },
+    "MLP-V": {
+      "train": 1503,
+      "eval": 93
+    }
+  },
+  "b06_training_hold_fraction": {
+    "GATED-V": 0.01146697998046875,
+    "MLP-V": 0.01146697998046875
+  },
+  "b06_actual_exposure": {
+    "GATED-V": {
+      "common_actor": {
+        "parameters": 32134,
+        "initial_norm": 12.375629425048828,
+        "final_norm": 12.745136260986328,
+        "displacement": 2.984342098236084,
+        "relative_displacement": 0.2411466920781743
+      },
+      "critic": {
+        "parameters": 34817,
+        "initial_norm": 9.271607398986816,
+        "final_norm": 9.876267433166504,
+        "displacement": 3.3135452270507812,
+        "relative_displacement": 0.3573862745107738
+      },
+      "duration": {
+        "parameters": 130,
+        "initial_norm": 0.0,
+        "final_norm": 0.22281232476234436,
+        "displacement": 0.22281232476234436,
+        "relative_displacement": 222812324762.34436
+      },
+      "total": {
+        "parameters": 67081,
+        "initial_norm": 15.463465690612793,
+        "final_norm": 16.125402450561523,
+        "displacement": 4.464920520782471,
+        "relative_displacement": 0.2887399636093637
+      },
+      "gate": {
+        "parameters": 640,
+        "initial_norm": 0.0,
+        "final_norm": 0.6655405759811401,
+        "displacement": 0.6655405759811401,
+        "relative_displacement": null,
+        "reason": "undefined: gate initial norm is zero"
+      }
+    },
+    "MLP-V": {
+      "common_actor": {
+        "parameters": 32134,
+        "initial_norm": 12.375629425048828,
+        "final_norm": 12.662827491760254,
+        "displacement": 2.7939136028289795,
+        "relative_displacement": 0.22575931347570471
+      },
+      "critic": {
+        "parameters": 34827,
+        "initial_norm": 9.35964298248291,
+        "final_norm": 9.99160385131836,
+        "displacement": 3.3902595043182373,
+        "relative_displacement": 0.36222102815918655
+      },
+      "duration": {
+        "parameters": 130,
+        "initial_norm": 0.0,
+        "final_norm": 0.1754722148180008,
+        "displacement": 0.1754722148180008,
+        "relative_displacement": 175472214818.0008
+      },
+      "total": {
+        "parameters": 67091,
+        "initial_norm": 15.516411781311035,
+        "final_norm": 16.13103675842285,
+        "displacement": 4.396658897399902,
+        "relative_displacement": 0.2833553890787584
+      }
+    }
+  },
+  "b06_moments": {
+    "GATED-V": {
+      "n": 131072,
+      "mean": 15.098034858703613,
+      "M2": 23365812.0,
+      "scale": 13.351666450500488,
+      "updates": 256
+    },
+    "MLP-V": {
+      "n": 131072,
+      "mean": 14.530430793762207,
+      "M2": 24520682.0,
+      "scale": 13.677644729614258,
+      "updates": 256
+    }
+  },
+  "b06_resources": {
+    "enclosing_wall_seconds": 407.33,
+    "supervisor_duration_seconds": 408,
+    "internal_wall_seconds": 395.74447249498917,
+    "mlp_start_pair_elapsed": 196.92065112799173,
+    "unpartitioned_residual_seconds": 11.585527505010816,
+    "arm_wall_upper_bounds_seconds": {
+      "GATED-V": 208.50617863300255,
+      "MLP-V": 210.40934887200825
+    },
+    "whole_caps_conform": true,
+    "peak_rss_kib": 558000,
+    "peak_rss_mib": 544.921875,
+    "aggregate_cpu_seconds": null,
+    "admission": {
+      "assessed_at": "2026-09-09T05:23:49.853098Z",
+      "available_physical_bytes": 14689787904,
+      "captured_at": "2026-09-09T05:23:49.852470Z",
+      "cgroup_headroom_bytes": null,
+      "cgroup_memory_current_bytes": null,
+      "cgroup_memory_max_bytes": null,
+      "effective_available_bytes": 14689787904,
+      "effective_floor_pass": true,
+      "failure_reasons": [],
+      "measurement_source": "/proc/meminfo",
+      "minimum_available_bytes": 4294967296,
+      "passed": true,
+      "physical_floor_pass": true,
+      "schema_version": 1
+    }
+  },
+  "resources_qualification": "native resources_unmeasured retained; independent enclosing wall/RSS measured, aggregate CPU and isolated width/normalization overhead unmeasured",
+  "same_comparison_native_wall_window": {
+    "per_valid_pair_seconds": {
+      "8301": 315.2,
+      "8302": 407.33
+    },
+    "sum_seconds": 722.53,
+    "valid_pairs": 2,
+    "seconds_per_valid_pair": 361.265,
+    "includes": "these two native complete pair chains only",
+    "excludes": "historical regimes, source checks, collection/analysis and unmeasured aggregate CPU; not an end-to-end workflow cost"
+  },
+  "analysis_method": "stdlib statistics.mean/stdev over declared endpoint and pair units; raw saved J/reward and identity consistency checked; reuse CM technical collection without model or native replay",
+  "run_level_command": "python .agents/skills/hmasd-scientific-tools/scripts/summarize_runs.py docs/research/candidates/vsp_c1/results/native_hold_value_b06_8302_20260908/run_scores.csv --paired --baseline MLP-V --out docs/research/candidates/vsp_c1/results/native_hold_value_b06_8302_20260908/run_level_summary.json"
+}

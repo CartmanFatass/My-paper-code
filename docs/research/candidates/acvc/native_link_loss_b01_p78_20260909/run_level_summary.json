@@ -1,0 +1,49 @@
+{
+  "unit": "caller-declared independent training run",
+  "inference": "descriptive only; no confidence interval or success classification",
+  "groups": [
+    {
+      "task": "ACVC-NATIVE-LINK-LOSS-B01",
+      "arm": "G",
+      "n": 1,
+      "mean": 0.19751402293456757,
+      "sample_sd": null,
+      "min": 0.19751402293456757,
+      "max": 0.19751402293456757,
+      "runs": {
+        "8901": 0.19751402293456757
+      }
+    },
+    {
+      "task": "ACVC-NATIVE-LINK-LOSS-B01",
+      "arm": "T",
+      "n": 1,
+      "mean": 0.23448272818841664,
+      "sample_sd": null,
+      "min": 0.23448272818841664,
+      "max": 0.23448272818841664,
+      "runs": {
+        "8901": 0.23448272818841664
+      }
+    }
+  ],
+  "paired_differences": [
+    {
+      "task": "ACVC-NATIVE-LINK-LOSS-B01",
+      "arm": "T",
+      "baseline": "G",
+      "summary": {
+        "n": 1,
+        "mean": 0.03696870525384907,
+        "sample_sd": null,
+        "min": 0.03696870525384907,
+        "max": 0.03696870525384907
+      },
+      "differences": {
+        "8901": 0.03696870525384907
+      },
+      "unmatched_arm_seeds": [],
+      "unmatched_baseline_seeds": []
+    }
+  ]
+}
