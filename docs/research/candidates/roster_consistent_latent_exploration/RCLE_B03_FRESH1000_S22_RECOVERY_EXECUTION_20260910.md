@@ -121,3 +121,24 @@ reading, per-seed scientific intake, Chinese brief and preservation/closeout. Pr
 old failure/control evidence and exact new execution/stage/supervisor content before
 scoped removal; Root accepts integration/retention. Dispatch is not experiment completion.
 Actual launch/adoption/terminal facts append below without changing this binding.
+
+## Actual launch and confirmed Monitor adoption
+
+At **2026-09-10T20:44:50.044659+00:00**, the published literal payload from execution record
+`ededd1900a0b1ed3e9e1b86184486cb9afbf74e9` was submitted **once**. `agent-task run`
+returned0 in **0.5228918000066187s**, with tmux
+`agent_rcle-b03-fresh1000-s22-recovery-20260910` and the bound supervisor log.
+`fresh1000-s22-recovery-preparation/launch.json` retains exact argv/stdout.
+This is accepted supervisor execution, not proof of a passing per-invocation
+resource admission or a complete scientific result.
+
+Direct MONITOR_ADD to live primary task `01a087e5-2044-7301-abb6-7a1709a98197`
+was accepted by the app. Root then **confirmed actual Monitor adoption**, forwarding
+the matching handle/node/source/cwd/output/supervisor identity and acceptance time.
+No adoption timestamp beyond those forwarded facts is invented. DM has ceased routine
+polling and has made no remote status/scientific-output query after launch.
+
+Live-primary owner reviews remained [] at this handover; no owner override or actual
+pre-execution prediction is recorded. Root will resume this same DM on terminal for
+collection, technical acceptance, scientific intake, Chinese brief and exact preserved
+closeout. The launched allocation remains open; no extra fit or retry is selected.
