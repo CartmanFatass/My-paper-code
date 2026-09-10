@@ -605,3 +605,22 @@ addressing absolute U/reference deficit with explicit fragmentation consequences
 rather than another immediate unchanged-law replica. Current allocation ends after
 preserved closeout; no new card, seed, budget, family/lifecycle/priority disposition or
 C promotion is selected. Evidence: the S23 E0/readback and three-root analysis.
+
+## Competence comparison designed, with no numerical allocation — 2026-09-10
+
+The accepted Portfolio design assignment is completed in
+RCLE_SERVICE_COMPARISON_DESIGN_INTAKE_20260910.md. Its proposed next discriminator
+is one fresh nearest-guided FLEX fit at 200 updates versus its untrained initialization
+and the attained deterministic INDEPENDENT-NEAREST reference. A fixed action preference
+uses the already legal candidate-distance feature; the learner may override it using
+the same native Y and FLEX state/information path. The primary is absolute post-churn
+U improvement over the reference, with all F/recovery consequences retained.
+
+This is a source-grounded object-design recommendation, not a performance result,
+frozen card, new family or numerical allocation. Proposed complete work is 18,944
+episodes/1,212,416 ticks/200 updates, within a requested 300 s including all runtime support
+and Monitor work. Current new exposure is zero. The prior can itself harm service and
+the learner may not improve it; old seed23 service gains, all-eight F harm, reference
+deficit and failure-coded recovery remain the strongest support and contradiction.
+No fourth unchanged same 1000 root, F exchange rate, headroom or causal claim is added.
+Root receives the concrete design and separate allocation need; ACTIVE/MEDIUM persists.
