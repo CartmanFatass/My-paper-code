@@ -1,0 +1,301 @@
+{
+  "checked_at_utc": "2026-09-10T23:58:42.559643+00:00",
+  "request_id": "2026-09-10-fifth-vacancy-portfolio-01",
+  "observed_remote_refs": {
+    "refs/heads/codex/portfolio": "1e6f58f6605f26cbef8f9462bbe57e0baed9959a",
+    "refs/heads/main": "af41f76669299efb48c34c9fce7ea83360a2d496"
+  },
+  "github_issue": {
+    "number": 17,
+    "state": "OPEN",
+    "url": "https://github.com/CartmanFatass/My-paper-code/issues/17"
+  },
+  "effective_reference_count": 27,
+  "effective_references": [
+    {
+      "path": "docs/research/portfolio/pro_packets/20260910_fifth_vacancy_selection/SCIENCE_BRIEF.md",
+      "commit_sha": "1e6f58f6605f26cbef8f9462bbe57e0baed9959a",
+      "git_blob": "4016fdd3d8a8eda17e879c35606117b7d3948df4",
+      "sha256": "bf35be4579859c8419dd11f91a4a1bb54ac3d53dd907a539a277466bb16d3202",
+      "published_reachable_refs": [
+        "refs/heads/codex/portfolio"
+      ],
+      "authoring_surface_matches": true
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260910_fifth_vacancy_selection/FACTS.json",
+      "commit_sha": "1e6f58f6605f26cbef8f9462bbe57e0baed9959a",
+      "git_blob": "dc8be2adb2c7414869315ebb2d88b403c3d84f76",
+      "sha256": "aef7221f0195ee71a864ddda0a8eb7ab8f2aff2f6a8940e050bd360b0940b1ea",
+      "published_reachable_refs": [
+        "refs/heads/codex/portfolio"
+      ],
+      "authoring_surface_matches": true
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260910_fifth_vacancy_selection/ISSUE_SNAPSHOT.json",
+      "commit_sha": "1e6f58f6605f26cbef8f9462bbe57e0baed9959a",
+      "git_blob": "6eb1b1d01c8156877844c8a93f195a3ce341ee56",
+      "sha256": "0cabd83d6e657c5e08ee4866adbececa3270537888fb9f3dd6072b14603e7811",
+      "published_reachable_refs": [
+        "refs/heads/codex/portfolio"
+      ],
+      "authoring_surface_matches": true
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260910_rolling_successor_allocation/archive/RESPONSE.md",
+      "commit_sha": "b4d71be60f789e97bf1f4c7130bb9995fc84f387",
+      "git_blob": "ef62b21358c4f693cbcdb27b1b6ee327af0662a2",
+      "sha256": "2425ab285bc8f1d026fed880045bd92b75868a0fc85774ea2e77312a74590142",
+      "published_reachable_refs": [
+        "refs/heads/codex/portfolio"
+      ],
+      "authoring_surface_matches": true
+    },
+    {
+      "path": "docs/research/portfolio/decisions/2026-09-10-rolling-successor-allocation.md",
+      "commit_sha": "674f246a202eef1467b084fdd25e2eeb531c0b1e",
+      "git_blob": "74affa588c9b941e28c33323b67114d72d963438",
+      "sha256": "81da1f27ef4c00c3cfee9aa85ff275edbcc88d423e4d7a7951b3b0dd458673ae",
+      "published_reachable_refs": [
+        "refs/heads/main"
+      ],
+      "authoring_surface_matches": true
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260910_rolling_successor_allocation/EXECUTION_MAPPING.md",
+      "commit_sha": "674f246a202eef1467b084fdd25e2eeb531c0b1e",
+      "git_blob": "74e8328e07c86d7f5cc2ef6fa4dc7060d3ab5a21",
+      "sha256": "8876be70f001b6d6415b457ca26c557c688c141545868320f924dcbd10021522",
+      "published_reachable_refs": [
+        "refs/heads/main"
+      ],
+      "authoring_surface_matches": true
+    },
+    {
+      "path": "AGENTS.md",
+      "commit_sha": "674f246a202eef1467b084fdd25e2eeb531c0b1e",
+      "git_blob": "2875c3199337666b22276e490f63358a86d6d426",
+      "sha256": "417364067f9f41bea9069d0f8399fda4454d5fd1cc09b4b94f3cf2ef0dd82fc6",
+      "published_reachable_refs": [
+        "refs/heads/main"
+      ],
+      "authoring_surface_matches": true
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "commit_sha": "674f246a202eef1467b084fdd25e2eeb531c0b1e",
+      "git_blob": "c520f24f1440ca0638943d7a5126cfd5bc34440c",
+      "sha256": "44418af31752086f6752f8f3d6874b260134e4c91b6c82ed8dbc61e4ef0b87e1",
+      "published_reachable_refs": [
+        "refs/heads/main"
+      ],
+      "authoring_surface_matches": true
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "commit_sha": "674f246a202eef1467b084fdd25e2eeb531c0b1e",
+      "git_blob": "72f81d5650d9c1ddde12df3a6ed37add99f436be",
+      "sha256": "a52a26e3b9ba876cb954ef4e671b5826ff9e1bab573320ca6da1033e12e64996",
+      "published_reachable_refs": [
+        "refs/heads/main"
+      ],
+      "authoring_surface_matches": true
+    },
+    {
+      "path": "docs/project/ROOT_OPERATIONS.md",
+      "commit_sha": "674f246a202eef1467b084fdd25e2eeb531c0b1e",
+      "git_blob": "d16ea3b8a45a99eed27f99722ab713b9d467c5f5",
+      "sha256": "8c6a400f52474a6ccc9583c1d60406b43446a31608e8a7ef3123df518733553a",
+      "published_reachable_refs": [
+        "refs/heads/main"
+      ],
+      "authoring_surface_matches": true
+    },
+    {
+      "path": "docs/research/portfolio/PORTFOLIO.md",
+      "commit_sha": "674f246a202eef1467b084fdd25e2eeb531c0b1e",
+      "git_blob": "68ee0c81ac1c21b7b3b511fa4497e307ecd5e74c",
+      "sha256": "7a51af1f2c8ad137d69bf5cba4d7bef646883720da9a358554e86460bfd41a8e",
+      "published_reachable_refs": [
+        "refs/heads/main"
+      ],
+      "authoring_surface_matches": true
+    },
+    {
+      "path": "docs/research/portfolio/EXPERIMENT_TRACKING.md",
+      "commit_sha": "674f246a202eef1467b084fdd25e2eeb531c0b1e",
+      "git_blob": "d2c2cca598d0c29e2629f11e8772a4f09ea52262",
+      "sha256": "5b7c958349bef231d00435c8198d53418ddce1b348fc70538774ba057b6c7a41",
+      "published_reachable_refs": [
+        "refs/heads/main"
+      ],
+      "authoring_surface_matches": true
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "commit_sha": "674f246a202eef1467b084fdd25e2eeb531c0b1e",
+      "git_blob": "05b3dc8d8628e2510431250c119b533f2ac3c29a",
+      "sha256": "c1f7d6c68fcec55de48ea555346d5d65af8d311e28502be43a2b05436a174247",
+      "published_reachable_refs": [
+        "refs/heads/main"
+      ],
+      "authoring_surface_matches": true
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "commit_sha": "674f246a202eef1467b084fdd25e2eeb531c0b1e",
+      "git_blob": "9bae14c6deb8e3d1bee6bb567828e4667a426174",
+      "sha256": "99b7e727a890d4e93a64b5c0f44fe588e383b5de56f2da663fb3f864c6d8293c",
+      "published_reachable_refs": [
+        "refs/heads/main"
+      ],
+      "authoring_surface_matches": true
+    },
+    {
+      "path": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_RESERVE_READINESS_INTAKE_20260910.md",
+      "commit_sha": "fad4c006887addfa675404b047a6c9e6157c531e",
+      "git_blob": "8f86bc15c82504a862a88ab54c473536eaad7a57",
+      "sha256": "ff2f75a5646b6ad39fb1d27e13b08f6dad5f816daef808406a6c67c9f31f6e7b",
+      "published_reachable_refs": [
+        "refs/heads/codex/portfolio",
+        "refs/heads/main"
+      ],
+      "authoring_surface_matches": true
+    },
+    {
+      "path": "docs/research/candidates/commitment_residual_triggered_options/CRTO_POST_B08_P72_CONVERGENCE_INTAKE_20260908.md",
+      "commit_sha": "fad4c006887addfa675404b047a6c9e6157c531e",
+      "git_blob": "33432916ad5c511107f47e5a36f5d8367e470562",
+      "sha256": "c11713394af09e56f6d3b53c67e6fdae4fda24fb386ad6cbbd2719b25b2f6417",
+      "published_reachable_refs": [
+        "refs/heads/codex/portfolio",
+        "refs/heads/main"
+      ],
+      "authoring_surface_matches": true
+    },
+    {
+      "path": "docs/research/candidates/finite_resource_relational_inductive_efficiency/NATIVE_CRASH_P63_READINESS_INTAKE_20260910.md",
+      "commit_sha": "fad4c006887addfa675404b047a6c9e6157c531e",
+      "git_blob": "fbf434d010a03034413ac51531caf1bae73c214a",
+      "sha256": "11270b36208761d089956255648d9b3b54467476ed281caf09def5408494a823",
+      "published_reachable_refs": [
+        "refs/heads/codex/portfolio",
+        "refs/heads/main"
+      ],
+      "authoring_surface_matches": true
+    },
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/pro_packets/20260909_p74_post_uav_b02_convergence/CONVERGENCE_INTAKE.md",
+      "commit_sha": "fad4c006887addfa675404b047a6c9e6157c531e",
+      "git_blob": "6fcf912b6f7311883a5e93aec00152f7b0b9718e",
+      "sha256": "a3a3f141428af7b324840633b1dd09b91e682ec12e6b483cb186ec220bbabadc",
+      "published_reachable_refs": [
+        "refs/heads/codex/portfolio",
+        "refs/heads/main"
+      ],
+      "authoring_surface_matches": true
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_NATIVE_GROUND_GEOMETRY_B01_POST_B01_CONVERGENCE_INTAKE_20260909.md",
+      "commit_sha": "fad4c006887addfa675404b047a6c9e6157c531e",
+      "git_blob": "06219ee428928ccc2b7d2042f9787f15a787dcc3",
+      "sha256": "5387694954b1fb03b14120836362321bd4af5851e8bc5abafb785d6a4160cfac",
+      "published_reachable_refs": [
+        "refs/heads/codex/portfolio",
+        "refs/heads/main"
+      ],
+      "authoring_surface_matches": true
+    },
+    {
+      "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260910_post_b02_convergence/CONVERGENCE_INTAKE_20260910.md",
+      "commit_sha": "fad4c006887addfa675404b047a6c9e6157c531e",
+      "git_blob": "b96e8fcc099635ac5e3e445cdf46327a5821d2c1",
+      "sha256": "b4e2b46e26fb1b1b663f8f79a7fe569af655f7c27d29318f4522f0b3551eb425",
+      "published_reachable_refs": [
+        "refs/heads/codex/portfolio",
+        "refs/heads/main"
+      ],
+      "authoring_surface_matches": true
+    },
+    {
+      "path": "docs/research/candidates/variable_n_fleet_churn/VNFC_NATIVE_SERVICE_CREDIT_REENTRY_INTAKE_20260910.md",
+      "commit_sha": "fad4c006887addfa675404b047a6c9e6157c531e",
+      "git_blob": "77c22df0c5c7e19d8f84acc543c07a703c19ab2d",
+      "sha256": "1972529ec34e21f84cf937218c46b25ca8d477087bdd4637639d458ecda9eb62",
+      "published_reachable_refs": [
+        "refs/heads/codex/portfolio",
+        "refs/heads/main"
+      ],
+      "authoring_surface_matches": true
+    },
+    {
+      "path": "docs/research/candidates/vsp_02/VSP02_TEAMMATE_POLICY_CHANGE_POST_B01_CONVERGENCE_INTAKE_20260907.md",
+      "commit_sha": "fad4c006887addfa675404b047a6c9e6157c531e",
+      "git_blob": "ce9f8228ce3000e61e86e7f232bb7aee694e3e5f",
+      "sha256": "2d6e919065051af22ecb5585d161760ddd706db04bc752855f9d5c2703a3bcd8",
+      "published_reachable_refs": [
+        "refs/heads/codex/portfolio",
+        "refs/heads/main"
+      ],
+      "authoring_surface_matches": true
+    },
+    {
+      "path": "docs/research/candidates/vsp_03/VSP03_POST_B07_CONVERGENCE_INTAKE_20260910.md",
+      "commit_sha": "fad4c006887addfa675404b047a6c9e6157c531e",
+      "git_blob": "2dd0c26993f09e7be0b6991e9b8c8c552e883964",
+      "sha256": "afdbc00071644d5f0eb5128b370a20a0442060078ea23e72460861073af7ed1e",
+      "published_reachable_refs": [
+        "refs/heads/codex/portfolio",
+        "refs/heads/main"
+      ],
+      "authoring_surface_matches": true
+    },
+    {
+      "path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_P81_CONVERGENCE_INTAKE_20260909.md",
+      "commit_sha": "fad4c006887addfa675404b047a6c9e6157c531e",
+      "git_blob": "3c38de8b5dd8dc9d9dd4c3b87579290e6b7acc2d",
+      "sha256": "975b69fb3e13177c19448c48e28b35f1f1c2b6658e32155649a65d8e8dec44a0",
+      "published_reachable_refs": [
+        "refs/heads/codex/portfolio",
+        "refs/heads/main"
+      ],
+      "authoring_surface_matches": true
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_POST_B08_CONVERGENCE_INTAKE_20260910.md",
+      "commit_sha": "674f246a202eef1467b084fdd25e2eeb531c0b1e",
+      "git_blob": "c0389d933edef3ad653891a9445727e45001ccdb",
+      "sha256": "b1b9699268788e300e67b5ceee3ff15228e3931d348287bba2e7d8a62c3b73e7",
+      "published_reachable_refs": [
+        "refs/heads/main"
+      ],
+      "authoring_surface_matches": true
+    },
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_P74_POST_UAV_B02_QUESTION_INTAKE_20260909.md",
+      "commit_sha": "fad4c006887addfa675404b047a6c9e6157c531e",
+      "git_blob": "49da0513aef5833f6e222257ccd03d978a1ad63b",
+      "sha256": "09b180f0e5bf6ba9b8dc4e0f76997f851012273de3575f9495050d7a03ac895e",
+      "published_reachable_refs": [
+        "refs/heads/codex/portfolio",
+        "refs/heads/main"
+      ],
+      "authoring_surface_matches": true
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_NATIVE_GROUND_GEOMETRY_B01_P75_INTAKE_20260909.md",
+      "commit_sha": "fad4c006887addfa675404b047a6c9e6157c531e",
+      "git_blob": "941848393aaba1bb77f9e06eacd6f8b85bfc53a5",
+      "sha256": "56d87d42bd9477135ef04208d5f7bff56a38067b77f82628fbd35131d6873b19",
+      "published_reachable_refs": [
+        "refs/heads/codex/portfolio",
+        "refs/heads/main"
+      ],
+      "authoring_surface_matches": true
+    }
+  ],
+  "authoring_operations": "Git/JSON/owner-record/reference publication checks only; no scientific/model/test/provider operation",
+  "provider_access_claim": "none; publication checks do not establish Pro access",
+  "task_binding": "pending committed TASK"
+}
