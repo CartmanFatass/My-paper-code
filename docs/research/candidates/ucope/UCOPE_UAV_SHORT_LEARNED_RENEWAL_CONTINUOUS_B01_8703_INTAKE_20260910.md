@@ -1,4 +1,4 @@
-# UCOPE learned short renewal /8703 — selection intake, 2026-09-10
+# UCOPE learned short renewal /8703 — selection and terminal intake, 2026-09-10
 
 ## 1. Current authority, evidence and checkout
 
@@ -105,7 +105,7 @@ bounded engineering change directly and reuses the existing reviewer.
 
 ## 4. Implementation, execution and scientific intake
 
-No 8703 native result has been observed. Append exact source, checks/review,
+At the prelaunch boundary no 8703 native result had been observed. Append exact source, checks/review,
 command, admission and accepted handle/adoption here. At terminal verify the
 card against every outcome, score predictions, write E0/intake/Chinese brief,
 preserve and close the execution, then take the next separate object boundary.
@@ -242,3 +242,128 @@ DM owns preservation/scoped closeout after terminal collection under Root's
 handoff. Source, check, setup-correction, admission, submission and dispatch
 receipts are retained in the [launch facts](UCOPE_UAV_SHORT_LEARNED_RENEWAL_CONTINUOUS_B01_8703_LAUNCH_FACTS_20260910.json)
 and the local runtime root. Root owns integration and observation continuity.
+
+
+## 5. Terminal technical acceptance and scientific intake
+
+Root's app-restart recovery assignment resumed collection of this exact completed
+handle in the existing `codex/ucope` checkout; it was clean at50bbc7f9ddee3b06f0b51a0d1b342bd75b393caa.
+DM now owns collection, technical acceptance, science and Git directly. No legacy
+CM was restarted, and no overlapping local writer or missing source dependency
+was found. Read current card, previous8701/8702/A01 intakes, DIRECTION, main
+Portfolio row, current AGENTS/Root Operations/Scope and Evidence§§4,5.2,11.8.
+The main Portfolio's old execution status does not override this terminal handoff.
+
+Technical acceptance is **VALID COMPLETE**. The
+[E0](UCOPE_UAV_SHORT_LEARNED_RENEWAL_CONTINUOUS_B01_8703_RESULT_EVIDENCE_20260910.md#2-verbatim-reading-rule-and-technical-checks)
+records the rule verbatim, matched13 artifact/14 source hashes, exact source,
+fresh admission, exit0, all6144 train/640 eval episodes and12288 Adam calls,
+all18 comparisons, final tensor/measurement checks and cost. The fixed T/G
+primary and all three full fits/nine panels/H are complete. Source/checkpoint,
+reward/information, raw targets, private RNG and selected endpoint remain as
+accepted; analysis created no fresh native exposure. No optional resource gap
+or historical failure is used as scientific polarity.
+
+Scientific reading is **WITHIN**: Delta2048=+0.00019308516986599905,
+SE0.007538303464769532,31/33/0 worlds, signed distances +0.010193085169865999
+from−0.01 and−0.009806914830134001 from+0.01. The card's claim under test,
+recurrence of8701's final adverse T/G point band, is **not observed**.
+This is no useful point gain at MEI0.01, not equivalence. T−F remains DOWN
+at−0.01107321367085382, close to−0.01; F−G is UP at+0.01126629884071982.
+Final T−H/F−H/G−H are+0.062103492173288755/+0.07317670584414257/
++0.061910407003422756, alongside11/10/9 adverse worlds. All earlier losses
+and fixed panels are published; the T/G1024 DOWN is not substituted for final2048.
+
+## 6. Bounded reading, strongest support and contradiction
+
+**Strongest support against further unchanged learned-short spending:** neither
+complete final T/G comparison demonstrates a point gain exceeding0.01, and T
+trails frozen F by more than0.01 at all three panels in both complete instances.
+Both T heads actually moved; the secondary loss is not a failure to enable head
+learning. This is observed package behavior under the declared primitive-credit
+learner, native host, co-adaptation and budget, not a uniquely localized cause.
+
+**Strongest contradiction and surviving alternative:**8703's final T/G loss
+does not recur; it is near zero with a substantial final advantage over hover.
+F/G also flips from8701−0.012399756324454534 to8703+0.01126629884071982,
+and T's own curve improves. Between-instance training and evaluation variation,
+optimization and partner co-adaptation remain viable explanations. Different
+evaluation-world panels mean the cross-instance change mixes fitted-policy
+variation with evaluation variation. No return-noise or mechanism partition is
+identified, and no extension of training is predicted to rescue the method.
+
+The summary contains explicitly **outcome-informed descriptive** aggregation
+with the scientific-tools run summarizer: one endpoint score per arm for each
+of8701 and8703, paired within the declared matched triple, G baseline. Final
+T/G readings are DOWN/WITHIN, arithmetic mean−0.02159260577411045; T/F values
+−0.03097854039363236/−0.01107321367085382 average−0.021025877032243092.
+These two complete independent triples are not six independent seeds or384
+independent panel observations. No pooled episode confidence interval, training
+population claim or new success rule is used. Incomplete8702 is explicitly
+retained without a final contrast; A01 repeated its prefix and is not an
+independent performance observation or crash fix. The crash remains unexplained.
+
+Scientific-reading grounding: Foundations§§5–6 and04_EMPIRICAL's stochastic
+hierarchy/method-comparison passages support treating native return as the
+consequence of the entire learned package and64 common worlds as conditional
+evaluation units. The concrete assumption is that the card's disjoint8703
+training/RNG block creates one fresh fitted instance, while panels reuse that
+instance. Source/reset facts support that assumption. Its limit is that neither
+conditional SE nor two instances supplies stable-population or causal evidence.
+No new mechanism/comparator/novelty question is decided; the card's verified
+UTE grounding is reused without another literature search. Scope§4 additions:none.
+
+Claim ceiling: bounded B observations on this native simulator recipe, with
+no stable benefit/harm, equivalence, causal duration effect, transfer, safety,
+deployment or formal UAV-validation advancement. Recasts1 and missing tuned
+same-information headroom persist; H is neither tuned headroom nor an upper.
+
+## 7. Decisions this terminal intake produces
+
+1. **Object-tier result intake.** Options: (a) accept complete/WITHIN and retain
+   all adverse secondary/earlier results; (b) declare replicated final DOWN;
+   (c) infer equivalence or a learned-duration benefit. Recommend/select(a):
+   the unchanged final rule directly gives WITHIN, and neither stronger reading
+   is supported. **Owner-delegated decision (unattended, 2026-09-03 instruction): (a).**
+2. **Object-tier allocation boundary.** Options: (a) end this one-invocation
+   allowance, preserve and perform Root-assigned scoped closeout; (b) create an
+   automatic additional same-recipe instance; (c) launch a credit/mechanism change.
+   Recommend/select(a). The card and recovery assignment grant no automatic
+   successor, accepted-run retry, fourth fit or new mechanism experiment.
+   Neither positive nor negative interpretation creates budget. A later distinct
+   question requires its own explicit object selection/card; family disposition
+   belongs to Convergence, and Portfolio disposition is not local authority.
+   **Owner-delegated decision (unattended, 2026-09-03 instruction): (a).**
+
+Owner flag none for these terminal technical decisions. The prospective8703
+selection retains its historical close-call flag. Existing P2 items005/006
+remain asynchronous; no new ordinary result item is created. Forecasts score
+false/false/true with Brier.04/.04/.2025 (mean.09416666666666666); owner
+prediction not taken. Main/direction reviews returned[]; no owner override or
+reply is fabricated. Audit entries cite this intake; the Chinese
+[owner brief](../../portfolio/owner/briefs/ucope/2026-09-10_8703.md) records the result.
+
+The next scientific discriminator would need to distinguish an actual change
+to learning/credit from this unchanged recipe with a real native comparator.
+That is **unallocated advice**, not a selected successor, mechanism recast,
+family stop, lifecycle/priority change or C consumption decision. No routine
+historical replay or causal audit is made a prerequisite. End the assigned
+allocation and return the completed boundary to Root.
+
+## 8. Preservation, cost and integration boundary
+
+Prepared terminal intake at **2026-09-10T22:22:46.148393+00:00**. E0/summary/figures, this intake,
+accepted-science DIRECTION update, brief and audit are published together.
+Local raw originals include the three final weight files, full episodes/
+rollouts/summary, supervisor/admission and preparation/check receipts.
+Before removing the completed execution, preserve those originals plus the
+incremental source pack/wrapper and verify every archive member and input.
+Only four remote paths are assigned: this handle's exact detached cwd,
+supervisor directory, staged wrapper and `ucope-learned-8703-source.pack`.
+The shared authoring checkout/branch and historical evidence stay intact.
+
+Root's recovery assignment already authorizes this preservation/scoped closeout;
+no further per-edit approval is needed. Root still owns main integration and
+acceptance of the returned preservation/reclamation facts. Append actual archive,
+source recovery reference, disk/registration absence and final support accounting
+below; do not claim cleanup or Root acceptance before those facts exist.
