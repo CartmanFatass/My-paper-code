@@ -80,3 +80,16 @@ The card was frozen at **2026-09-10T20:17:31Z**, with selection audit row
 as a P2 new-card item. It records the actual card selection, Chinese decision
 packet and consequences; it does not claim a run or an owner reply. No wait
 or new approval condition follows from publishing it.
+
+### Pre-execution card wording correction
+
+The independent reviewer found one concrete wording conflict: the first A01
+card said “primitive GAE,” while its linked accepted 8702 recipe and unchanged
+learner use **raw gamma=1 Monte Carlo returns with no bootstrap**. Correct that
+phrase to the existing recipe. Options are (a) correct the card wording or
+(b) change the learner to GAE. Recommend/select (a): this object explicitly
+preserves the historical prefix; (b) would change the scientific question.
+**Owner-delegated decision (unattended, 2026-09-03 instruction): (a).** This is
+a technical card correction with owner flag none, not material critic dissent
+or a new algorithm selection. No test or native invocation preceded it, and
+no learner source was changed. Original card revision remains in Git.
