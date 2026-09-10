@@ -165,8 +165,11 @@ is not the estimand; this allocation has no local fallback. Each supervised comm
 places fresh destination `admit-memory && runner` inside one outer1800s time/timeout
 chain. Register actually accepted handles directly with the existing Monitor; acceptance
 and Monitor adoption are separate facts. Follow the existing explicit observation
-handover, without duplicate polling. Root owns integration and final execution closure;
-CM owns the delegated technical batch and this DM performs scientific intake.
+handover, without duplicate polling. Root owns integration and final execution closure.
+This DM owns implementation, independent review disposition, publication, execution,
+collection, technical acceptance and separate scientific intake under the 2026-09-10
+control-plane consolidation. A bounded optional implementation executor may edit and
+check the named source/tests without Git/index, result-bearing launch or child delegation.
 
 At closeout preserve raw files/checkpoints/receipts and archive this object's exact
 worktree, supervisors and any owned staging. Compare archive members to originals

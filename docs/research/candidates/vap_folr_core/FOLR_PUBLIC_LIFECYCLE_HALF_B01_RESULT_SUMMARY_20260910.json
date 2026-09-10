@@ -1,0 +1,60 @@
+{
+  "object": "FOLR-PUBLIC-LIFECYCLE-HALF-B01",
+  "state": "source_accepted_no_scientific_submission",
+  "source_base": "ade8a1c7fe92fb420c981e15148ee7166047b122",
+  "source_sha": null,
+  "arms": [
+    "RETAIN",
+    "HALF_EVENT"
+  ],
+  "training_seed": 7807,
+  "evaluation_seed": 107807,
+  "training_episodes_per_arm": 5000,
+  "training_ticks_per_arm": 100000,
+  "updates_per_arm": 4969,
+  "final_evaluation_episodes_per_arm": 128,
+  "final_evaluation_ticks_per_arm": 2560,
+  "primary": null,
+  "arms_results": {},
+  "accepted_handles": [],
+  "source_diff": {
+    "non_test_added": 15,
+    "non_test_deleted": 4,
+    "tests_added": 57,
+    "tests_deleted": 8,
+    "total_module_plus_runner_lines": 796,
+    "runner_lines": 108
+  },
+  "checks": {
+    "pytest_passed": 26,
+    "pytest_reported_seconds": 5.24,
+    "check_and_cleanup_seconds": 6.578,
+    "scratch": "temp/directions/vap_folr_core/test/half_b01_check_r68ib396",
+    "scratch_absent": true,
+    "independent_review": "no material finding; inspection only",
+    "review_command_wall_seconds": 2.7044562,
+    "review_full_elapsed": "unmeasured",
+    "frozen_card_sections_2_to_5_unchanged": true,
+    "preservation_first_check": "default Windows decode failed comparison; explicit UTF-8 passed",
+    "dm_diff_seconds": 0.1461988,
+    "preservation_check_seconds": [
+      0.2677569,
+      0.1479143
+    ]
+  },
+  "support": {
+    "carried_directory_test_seconds": 25.9131638,
+    "directory_test_cumulative_seconds": 32.4911638,
+    "preparatory_allowance_seconds": 5,
+    "total_seconds": 40.757490000000004,
+    "cap_seconds": 300,
+    "full_engineering_elapsed": "unmeasured"
+  },
+  "budget": {
+    "accepted_invocations": 0,
+    "allocated_invocations": 2,
+    "seconds_per_complete_arm": 1800,
+    "summed_pair_seconds": 3600,
+    "retry": false
+  }
+}

@@ -40,6 +40,9 @@ class Actor(nn.Module):
             elif self.arm == "RANDOM":
                 carry = carry & ~batch["reset_mask"][:, t].bool()
             h = h * carry.reshape(bs * ne, 1).to(h.dtype)
+            if self.arm == "HALF_EVENT":
+                attenuate = carry & batch["event"][:, t, None].bool()
+                h = h * (1 - 0.5 * attenuate.reshape(bs * ne, 1).to(h.dtype))
             h = self.rnn(x3[:, t].reshape(bs * ne, 64), h)
             h = h.masked_fill(batch["entity_mask"][:, t].reshape(bs * ne, 1).bool(), 0)
             hs.append(h.reshape(bs, ne, 64))
