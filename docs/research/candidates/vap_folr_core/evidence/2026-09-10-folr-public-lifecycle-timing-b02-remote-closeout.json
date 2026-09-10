@@ -1,0 +1,22 @@
+{
+  "checked_at_utc": "2026-09-10T18:02:55.291262+00:00",
+  "kind": "post-deletion read-only closure verification",
+  "recovery_ref": "refs/archive/folr-public-lifecycle-timing-b02-20260910",
+  "source_sha": "6a8eacdad072c37d477aca95a9c871aba68cee78",
+  "paths_absent": {
+    "/home/wu/hmasd-worktrees/folr-public-lifecycle-timing-b02-6a8eacda": true,
+    "/home/wu/.agent-tasks/folr-public-lifecycle-timing-b02-retain-20260910": true,
+    "/home/wu/.agent-tasks/folr-public-lifecycle-timing-b02-event-20260910": true,
+    "/home/wu/.agent-tasks/folr-public-lifecycle-timing-b02-random-20260910": true
+  },
+  "worktree_registration_absent": true,
+  "recorded_pids_inactive": {
+    "3086548": true,
+    "3088772": true,
+    "3090888": true
+  },
+  "archive_sha256": {
+    "folr-public-lifecycle-timing-b02-supervisors.tar.gz": "ad71fbc382349d060ab233764027b2bee7eac135daaa4593c3b00e2ec75a52da",
+    "folr-public-lifecycle-timing-b02-worktree.tar.gz": "d76ca3acc5c84d51fe5ae3e0c5706781950bf3489cd05b2e6a4f2e300f48468c"
+  }
+}

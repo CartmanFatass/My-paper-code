@@ -1,6 +1,6 @@
 {
   "object": "FOLR-PUBLIC-LIFECYCLE-TIMING-B02",
-  "technical_state": "RETAIN and EVENT technically accepted; RANDOM accepted and Monitor-adopted; complete triple result pending",
+  "technical_state": "all three allocated arms complete; scientific result accepted by DM; scoped closeout has recorded pre-deletion procedural nonconformance; Root integration/closeout acceptance pending",
   "launch_sha": "6a8eacdad072c37d477aca95a9c871aba68cee78",
   "remote_node": "hmasd-wsl-node",
   "remote_cwd": "/home/wu/hmasd-worktrees/folr-public-lifecycle-timing-b02-6a8eacda",
@@ -780,9 +780,419 @@
         }
       ],
       "technical_acceptance": "Complete counts and finite native mean agree with card; all8 remote/local hashes match; summary/log/exit/admission/whole cap agree; EVENT resets equal event-bound survivor opportunities. No checkpoint reload or new scientific call."
+    },
+    "RANDOM": {
+      "handle": "folr-public-lifecycle-timing-b02-random-20260910",
+      "summary": {
+        "arm": "RANDOM",
+        "training_seed": 7805,
+        "evaluation_seed": 107805,
+        "launch_sha": "6a8eacdad072c37d477aca95a9c871aba68cee78",
+        "status": "complete",
+        "training_episodes": 5000,
+        "training_ticks": 100000,
+        "optimizer_steps": 4969,
+        "evaluation_episodes": 128,
+        "evaluation_ticks": 2560,
+        "evaluation_returns": [
+          -5.990000000000001,
+          1.9499999999999975,
+          -2.8100000000000005,
+          2.579999999999999,
+          12.299999999999999,
+          0.9499999999999996,
+          -20.57,
+          -3.860000000000001,
+          5.720000000000001,
+          4.310000000000003,
+          13.29,
+          2.750000000000001,
+          6.64,
+          -0.8199999999999992,
+          2.000000000000002,
+          -2.950000000000001,
+          -2.9799999999999995,
+          9.7,
+          -4.460000000000001,
+          7.59,
+          16.490000000000002,
+          -2.799999999999998,
+          0.06999999999999562,
+          -8.080000000000004,
+          -4.059999999999997,
+          16.910000000000004,
+          18.79,
+          -10.039999999999997,
+          5.799999999999999,
+          -0.49000000000000044,
+          -7.12,
+          6.6400000000000015,
+          -2.21,
+          0.039999999999998925,
+          4.159999999999998,
+          6.939999999999999,
+          4.239999999999998,
+          0.23999999999999932,
+          2.63,
+          4.519999999999999,
+          15.520000000000005,
+          1.4599999999999995,
+          1.5499999999999987,
+          -2.6500000000000012,
+          3.500000000000001,
+          -3.079999999999995,
+          3.01,
+          6.270000000000001,
+          -6.23,
+          5.840000000000001,
+          6.8400000000000025,
+          13.299999999999997,
+          -1.1799999999999995,
+          -0.6000000000000008,
+          -6.11,
+          -4.68,
+          -3.36,
+          11.9,
+          -5.210000000000001,
+          -4.209999999999999,
+          6.07,
+          14.61,
+          -9.529999999999998,
+          18.129999999999995,
+          11.97,
+          2.200000000000001,
+          -0.09999999999999898,
+          -2.24,
+          -1.4200000000000006,
+          6.56,
+          -0.7999999999999996,
+          -2.110000000000002,
+          -2.5700000000000003,
+          10.110000000000001,
+          -5.6,
+          7.390000000000001,
+          5.93,
+          5.7700000000000005,
+          2.38,
+          12.809999999999997,
+          4.21,
+          -4.090000000000001,
+          8.489999999999998,
+          3.2399999999999993,
+          5.619999999999997,
+          4.909999999999998,
+          14.11,
+          0.4600000000000002,
+          5.6899999999999995,
+          -4.930000000000001,
+          -0.20000000000000062,
+          -6.749999999999997,
+          -9.48,
+          9.26,
+          -1.2,
+          8.209999999999999,
+          0.5300000000000025,
+          -0.910000000000001,
+          7.79,
+          4.83,
+          7.050000000000001,
+          5.899999999999999,
+          5.970000000000001,
+          1.5799999999999992,
+          9.52,
+          10.52,
+          -4.490000000000001,
+          -2.9300000000000006,
+          10.479999999999997,
+          -4.36,
+          -1.3200000000000016,
+          -1.2300000000000004,
+          13.250000000000002,
+          -8.46,
+          3.17,
+          -0.8000000000000004,
+          7.090000000000002,
+          12.9,
+          2.029999999999999,
+          -0.16999999999999948,
+          9.2,
+          1.2700000000000025,
+          -6.15,
+          -3.8800000000000012,
+          2.4400000000000004,
+          8.0,
+          2.680000000000001,
+          1.729999999999998
+        ],
+        "training_return_sum": -26024.15999999992,
+        "training_events": {
+          "births": 21778,
+          "departures": 8932,
+          "survivor_opportunities": 47458,
+          "eligible_survivor_opportunities": 259266,
+          "survivor_resets": 26050
+        },
+        "evaluation_events": {
+          "births": 561,
+          "departures": 209,
+          "survivor_opportunities": 1309,
+          "eligible_survivor_opportunities": 6580,
+          "survivor_resets": 623
+        },
+        "mean_native_return": 2.5017968749999993,
+        "exposure": "100000 real native training ticks; 4969 actor/mixer RMSprop steps at lr=0.0005; 128 final greedy evaluation episodes",
+        "mask_rng": {
+          "bit_generator": "PCG64",
+          "training_seed": 207805,
+          "evaluation_seed": 307805,
+          "probability": 0.1,
+          "draws_per_episode": 105,
+          "frequency_matched": false
+        },
+        "rng": "Python/global NumPy/Torch seeded before model construction; native traffic and replay share global NumPy; source epsilon selector uses Torch including greedy and terminal draws; all three reset to107805 for final evaluation",
+        "torch_version": "2.7.0+cu118",
+        "numpy_version": "1.26.3",
+        "torch_threads": [
+          1,
+          1
+        ],
+        "wall_seconds": 776.1771740689874,
+        "peak_rss_kib": 646284
+      },
+      "memory_receipt": {
+        "assessed_at": "2026-09-10T17:28:47.372241Z",
+        "available_physical_bytes": 15319556096,
+        "captured_at": "2026-09-10T17:28:47.371961Z",
+        "cgroup_headroom_bytes": null,
+        "cgroup_memory_current_bytes": null,
+        "cgroup_memory_max_bytes": null,
+        "effective_available_bytes": 15319556096,
+        "effective_floor_pass": true,
+        "failure_reasons": [],
+        "measurement_source": "/proc/meminfo",
+        "minimum_available_bytes": 4294967296,
+        "passed": true,
+        "physical_floor_pass": true,
+        "schema_version": 1
+      },
+      "whole_chain": {
+        "elapsed_seconds": 821.64,
+        "user_cpu_seconds": 799.34,
+        "system_cpu_seconds": 23.7,
+        "cpu_seconds": 823.0400000000001,
+        "peak_rss_kib": 652756,
+        "exit_code": 0,
+        "scope": "outer time/timeout around bash, fresh admission and runner through complete exit"
+      },
+      "runner_summary_wall_seconds": 776.1771740689874,
+      "unattributed_whole_minus_runner_seconds": 45.46282593101262,
+      "supervisor_start": "2026-09-11T01:28:47+08:00",
+      "supervisor_exit": "2026-09-11T01:42:28+08:00",
+      "supervisor_integer_duration_seconds": 821,
+      "monitor_observed_at": "2026-09-10T17:43:15.3236157Z",
+      "monitor_receipt_path": "temp/directions/vap_folr_core/exp/public_lifecycle_timing_b02_seed7805_random/monitor_terminal.txt",
+      "progress_rows": [
+        {
+          "episode": 200,
+          "updates": 169,
+          "wall_seconds": 27.58361569599947
+        },
+        {
+          "episode": 400,
+          "updates": 369,
+          "wall_seconds": 58.25669416296296
+        },
+        {
+          "episode": 600,
+          "updates": 569,
+          "wall_seconds": 89.16719285101863
+        },
+        {
+          "episode": 800,
+          "updates": 769,
+          "wall_seconds": 119.82378826697823
+        },
+        {
+          "episode": 1000,
+          "updates": 969,
+          "wall_seconds": 150.37342451000586
+        },
+        {
+          "episode": 1200,
+          "updates": 1169,
+          "wall_seconds": 181.05900622101035
+        },
+        {
+          "episode": 1400,
+          "updates": 1369,
+          "wall_seconds": 211.52505259797908
+        },
+        {
+          "episode": 1600,
+          "updates": 1569,
+          "wall_seconds": 242.08150338497944
+        },
+        {
+          "episode": 1800,
+          "updates": 1769,
+          "wall_seconds": 272.7688915960025
+        },
+        {
+          "episode": 2000,
+          "updates": 1969,
+          "wall_seconds": 303.4540185239748
+        },
+        {
+          "episode": 2200,
+          "updates": 2169,
+          "wall_seconds": 334.2450502329739
+        },
+        {
+          "episode": 2400,
+          "updates": 2369,
+          "wall_seconds": 364.6875760559924
+        },
+        {
+          "episode": 2600,
+          "updates": 2569,
+          "wall_seconds": 395.5999361050199
+        },
+        {
+          "episode": 2800,
+          "updates": 2769,
+          "wall_seconds": 426.47938309801975
+        },
+        {
+          "episode": 3000,
+          "updates": 2969,
+          "wall_seconds": 457.2672370329965
+        },
+        {
+          "episode": 3200,
+          "updates": 3169,
+          "wall_seconds": 488.83764653099934
+        },
+        {
+          "episode": 3400,
+          "updates": 3369,
+          "wall_seconds": 519.897398919973
+        },
+        {
+          "episode": 3600,
+          "updates": 3569,
+          "wall_seconds": 551.3078497569659
+        },
+        {
+          "episode": 3800,
+          "updates": 3769,
+          "wall_seconds": 583.0231568720192
+        },
+        {
+          "episode": 4000,
+          "updates": 3969,
+          "wall_seconds": 614.7942243819707
+        },
+        {
+          "episode": 4200,
+          "updates": 4169,
+          "wall_seconds": 646.1283011579653
+        },
+        {
+          "episode": 4400,
+          "updates": 4369,
+          "wall_seconds": 678.2655859049992
+        },
+        {
+          "episode": 4600,
+          "updates": 4569,
+          "wall_seconds": 710.221261314
+        },
+        {
+          "episode": 4800,
+          "updates": 4769,
+          "wall_seconds": 742.1453134259791
+        },
+        {
+          "episode": 5000,
+          "updates": 4969,
+          "wall_seconds": 774.5658185600187
+        }
+      ],
+      "mean_recomputed_from_all128": 2.5017968749999997,
+      "training_return_mean": -5.204831999999984,
+      "resources_unmeasured": [
+        "cgroup_headroom_bytes",
+        "cgroup_memory_current_bytes",
+        "cgroup_memory_max_bytes"
+      ],
+      "artifact_hashes": [
+        {
+          "remote_path": "/home/wu/hmasd-worktrees/folr-public-lifecycle-timing-b02-6a8eacda/temp/directions/vap_folr_core/exp/public_lifecycle_timing_b02_seed7805_random/summary.json",
+          "local_path": "temp/directions/vap_folr_core/exp/public_lifecycle_timing_b02_seed7805_random/summary.json",
+          "bytes": 4061,
+          "sha256": "30ae0fb2e209c5650eca1df7d0ee18ad05978b4ae5e4d3d714353c3143ce4d1f"
+        },
+        {
+          "remote_path": "/home/wu/hmasd-worktrees/folr-public-lifecycle-timing-b02-6a8eacda/temp/directions/vap_folr_core/exp/public_lifecycle_timing_b02_seed7805_random/final.pt",
+          "local_path": "temp/directions/vap_folr_core/exp/public_lifecycle_timing_b02_seed7805_random/final.pt",
+          "bytes": 4662779,
+          "sha256": "47d52cf4da6efb76f420bff0f8d41382c7db7a4f02bc7d5e30f2fd4589edef4c"
+        },
+        {
+          "remote_path": "/home/wu/hmasd-worktrees/folr-public-lifecycle-timing-b02-6a8eacda/temp/directions/vap_folr_core/exp/public_lifecycle_timing_b02_seed7805_random_memory.json",
+          "local_path": "temp/directions/vap_folr_core/exp/public_lifecycle_timing_b02_seed7805_random_memory.json",
+          "bytes": 504,
+          "sha256": "458bd8dbfb11444654f711f3d7e55db35d5f1e53854efccf475dd379b1be2912"
+        },
+        {
+          "remote_path": "/home/wu/.agent-tasks/folr-public-lifecycle-timing-b02-random-20260910/whole.time",
+          "local_path": "temp/directions/vap_folr_core/exp/public_lifecycle_timing_b02_seed7805_random/whole.time",
+          "bytes": 1313,
+          "sha256": "efe0c4b468255079934f634d09cb3c5e9ab5ef1fc7fa6f30c31899c6abaea40b"
+        },
+        {
+          "remote_path": "/home/wu/.agent-tasks/folr-public-lifecycle-timing-b02-random-20260910/task.log",
+          "local_path": "temp/directions/vap_folr_core/exp/public_lifecycle_timing_b02_seed7805_random/task.log",
+          "bytes": 5886,
+          "sha256": "6b49e6ce70cd63bd7869485895464e0691b8184836906bbe5eb99e46b1532f4d"
+        },
+        {
+          "remote_path": "/home/wu/.agent-tasks/folr-public-lifecycle-timing-b02-random-20260910/runner.sh",
+          "local_path": "temp/directions/vap_folr_core/exp/public_lifecycle_timing_b02_seed7805_random/runner.sh",
+          "bytes": 1827,
+          "sha256": "5945e41a0926217ddaf4e6c91a8bf0fe09d4b61d4e1223a06a749cd0777b982b"
+        },
+        {
+          "remote_path": "/home/wu/.agent-tasks/folr-public-lifecycle-timing-b02-random-20260910/status",
+          "local_path": "temp/directions/vap_folr_core/exp/public_lifecycle_timing_b02_seed7805_random/status",
+          "bytes": 9,
+          "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+        },
+        {
+          "remote_path": "/home/wu/.agent-tasks/folr-public-lifecycle-timing-b02-random-20260910/exit_code",
+          "local_path": "temp/directions/vap_folr_core/exp/public_lifecycle_timing_b02_seed7805_random/exit_code",
+          "bytes": 2,
+          "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+        }
+      ],
+      "technical_acceptance": "Complete counts, finite native mean and private PCG64 phase-seed metadata agree with card; all8 remote/local hashes match; summary/log/exit/admission/whole cap agree; nonzero actual resets. No checkpoint reload or new scientific call."
     }
   },
-  "contrasts_and_combined_rule": "pending all three preselected laws; no interim winner selection",
+  "contrasts_and_combined_rule": {
+    "contrasts": {
+      "EVENT_minus_RETAIN": -0.5907031250000001,
+      "RANDOM_minus_RETAIN": -0.14085937500000068,
+      "EVENT_minus_RANDOM": -0.44984374999999943
+    },
+    "individual_branches": {
+      "EVENT_minus_RETAIN": "WITHIN_MEI",
+      "RANDOM_minus_RETAIN": "WITHIN_MEI",
+      "EVENT_minus_RANDOM": "WITHIN_MEI"
+    },
+    "combined_branch": "MIXED_OR_REVERSE",
+    "absolute_mei": 1.0,
+    "scope": "frozen B02 triple only"
+  },
   "prior_support_charge_seconds": 22.2473039,
   "collection_readback_script_seconds": 0.014246599996113218,
   "support_charge_after_collection_seconds": 22.4285027,
@@ -794,11 +1204,196 @@
   "support_charge_after_event_collection_seconds": 24.6055824,
   "completed_laws_whole_wall_seconds": 1602.15,
   "completed_laws_cpu_seconds": 1604.87,
-  "pending_runtime": {
-    "arm": "RANDOM",
-    "handle": "folr-public-lifecycle-timing-b02-random-20260910",
-    "source": "6a8eacdad072c37d477aca95a9c871aba68cee78",
-    "result_root": "temp/directions/vap_folr_core/exp/public_lifecycle_timing_b02_seed7805_random",
-    "monitor_adoption": "Root-confirmed actual direct adoption; no DM parallel status poll"
+  "complete_triple": {
+    "training_episodes": 15000,
+    "training_ticks": 300000,
+    "optimizer_steps": 14907,
+    "evaluation_episodes": 384,
+    "evaluation_ticks": 7680,
+    "total_native_ticks": 307680,
+    "whole_wall_seconds": 2423.79,
+    "whole_cpu_seconds": 2427.91,
+    "runner_summary_wall_seconds": 2294.076124123065,
+    "study_elapsed_first_admission_to_rounded_final_exit_seconds": 3170.24377,
+    "elapsed_scope": "First RETAIN admission timestamp to final RANDOM exit recorded at whole-second resolution; includes between-arm control-plane gaps, excludes prior staging/later final collection."
+  },
+  "random_collection_readback_script_seconds": 0.021397399992565624,
+  "support_charge_before_random_assembly_seconds": 26.9682836,
+  "conditional_descriptive_analysis": {
+    "unit": "final episode conditional on the one fitted package per arm; episodes are not paired worlds across arms",
+    "limits": "Marginal sample spread and illustrative conditional Monte Carlo SE under independent-episode approximation; no episode-paired contrast interval, training-population uncertainty or equivalence inference. Phase RNG streams persist across episodes.",
+    "arms": {
+      "RETAIN": {
+        "final_episode_count": 128,
+        "sample_sd": 7.964677382177219,
+        "conditional_mc_se_under_independent_episode_model": 0.7039846733625788,
+        "median": 3.059999999999999,
+        "min": -13.679999999999998,
+        "max": 23.919999999999998,
+        "negative_episodes": 52,
+        "training_return_sum": -22343.380000000183,
+        "training_mean": -4.468676000000037,
+        "realized_control_counts": {
+          "training": {
+            "births": 20978,
+            "departures": 8373,
+            "survivor_opportunities": 46007,
+            "eligible_survivor_opportunities": 260235,
+            "survivor_resets": 0,
+            "actual_reset_fraction_of_eligible": 0.0,
+            "event_bound_fraction_of_eligible": 0.17679020884969354
+          },
+          "evaluation": {
+            "births": 588,
+            "departures": 306,
+            "survivor_opportunities": 1402,
+            "eligible_survivor_opportunities": 6159,
+            "survivor_resets": 0,
+            "actual_reset_fraction_of_eligible": 0.0,
+            "event_bound_fraction_of_eligible": 0.22763435622666017
+          }
+        }
+      },
+      "EVENT": {
+        "final_episode_count": 128,
+        "sample_sd": 6.385381934894603,
+        "conditional_mc_se_under_independent_episode_model": 0.5643933583287564,
+        "median": 0.7699999999999995,
+        "min": -12.819999999999997,
+        "max": 17.4,
+        "negative_episodes": 60,
+        "training_return_sum": -25009.600000000064,
+        "training_mean": -5.001920000000013,
+        "realized_control_counts": {
+          "training": {
+            "births": 21773,
+            "departures": 8704,
+            "survivor_opportunities": 47153,
+            "eligible_survivor_opportunities": 260059,
+            "survivor_resets": 47153,
+            "actual_reset_fraction_of_eligible": 0.1813165473988595,
+            "event_bound_fraction_of_eligible": 0.1813165473988595
+          },
+          "evaluation": {
+            "births": 562,
+            "departures": 201,
+            "survivor_opportunities": 1262,
+            "eligible_survivor_opportunities": 6746,
+            "survivor_resets": 1262,
+            "actual_reset_fraction_of_eligible": 0.187073821523866,
+            "event_bound_fraction_of_eligible": 0.187073821523866
+          }
+        }
+      },
+      "RANDOM": {
+        "final_episode_count": 128,
+        "sample_sd": 6.777138437957,
+        "conditional_mc_se_under_independent_episode_model": 0.599020068314925,
+        "median": 2.115,
+        "min": -20.57,
+        "max": 18.79,
+        "negative_episodes": 50,
+        "training_return_sum": -26024.15999999992,
+        "training_mean": -5.204831999999984,
+        "realized_control_counts": {
+          "training": {
+            "births": 21778,
+            "departures": 8932,
+            "survivor_opportunities": 47458,
+            "eligible_survivor_opportunities": 259266,
+            "survivor_resets": 26050,
+            "actual_reset_fraction_of_eligible": 0.10047595905363603,
+            "event_bound_fraction_of_eligible": 0.18304752647859726
+          },
+          "evaluation": {
+            "births": 561,
+            "departures": 209,
+            "survivor_opportunities": 1309,
+            "eligible_survivor_opportunities": 6580,
+            "survivor_resets": 623,
+            "actual_reset_fraction_of_eligible": 0.09468085106382979,
+            "event_bound_fraction_of_eligible": 0.19893617021276597
+          }
+        }
+      }
+    }
+  },
+  "historical_same_endpoint_comparison": {
+    "unit": "two matched initialization/training instances, labels7804 and7805; each arm is independently fit within each instance",
+    "purpose": "descriptive juxtaposition only; old result excluded from current frozen rule; earlier32-episode pairs unpooled",
+    "prior_means": {
+      "RETAIN": 2.5445312499999995,
+      "EVENT": 5.349296874999999,
+      "RANDOM": 3.985625
+    },
+    "current_means": {
+      "RETAIN": 2.64265625,
+      "EVENT": 2.051953125,
+      "RANDOM": 2.5017968749999993
+    },
+    "prior_rule": "EVENT_CLEAR_ADVANTAGE",
+    "current_rule": "MIXED_OR_REVERSE",
+    "run_rows": "evidence/2026-09-10-folr-public-lifecycle-timing-b02-run-rows.csv",
+    "run_analysis": "evidence/2026-09-10-folr-public-lifecycle-timing-b02-run-analysis.json",
+    "two_instance_rows": "evidence/2026-09-10-folr-public-lifecycle-timing-b02-matched-128-rows.csv",
+    "two_instance_analysis": "evidence/2026-09-10-folr-public-lifecycle-timing-b02-matched-128-analysis.json"
+  },
+  "analysis_script_seconds": 0.028105599994887598,
+  "scientific_acceptance": {
+    "class": "B/EXPLORE",
+    "status": "accepted",
+    "combined_rule": "MIXED_OR_REVERSE",
+    "prediction": {
+      "dm_prospective": "EVENT_CLEAR_ADVANTAGE",
+      "confidence": "low",
+      "score": "missed",
+      "owner": "not taken (unattended)"
+    },
+    "claim_ceiling": "one new matched fitting instance of separately trained packages; no stable population, causal timing, equivalence, transfer or C claim",
+    "no_successor_allocated": true
+  },
+  "closeout": {
+    "status": "scoped remote paths reclaimed; preservation reconciled after deletion; pre-deletion tar-to-original comparison omitted",
+    "root_acceptance": "pending",
+    "operator_report": "evidence/2026-09-10-folr-public-lifecycle-timing-b02-operator-closeout.md",
+    "archive_reconciliation": "evidence/2026-09-10-folr-public-lifecycle-timing-b02-archive-reconciliation.json",
+    "remote_readback": "evidence/2026-09-10-folr-public-lifecycle-timing-b02-remote-closeout.json",
+    "known_scientific_files_retained_and_matched": 24,
+    "configured_sparse_tracked_files_matched": 2312,
+    "remaining_risk": "Cannot retrospectively establish pre-deletion comparison conformance or exclude unknown untracked originals omitted from all preserved records.",
+    "separate_local_test_cleanup_blocker": "temp/directions/vap_folr_core/test/timing_b02_check01 retained after original pre-execution blocked by policy rejection; no bypass"
+  },
+  "cost_accounting": {
+    "scientific_complete_chain_wall_seconds": 2423.79,
+    "scientific_complete_chain_cpu_seconds": 2427.91,
+    "support_charge_before_final_publication_checks_seconds": 44.8846417,
+    "support_charge_basis": "Prior charge27.6495774 plus subsequent recorded command walls5.1350643, including post-deletion readback failures/corrections; plus Operator rounded12.1s command-wall charge. Inner script clocks are nested, not added again. Final publication checks are added separately.",
+    "support_cap_seconds": 300,
+    "directory_test_cumulative_seconds": 25.9131638,
+    "directory_test_cap_seconds": 300,
+    "excluded_scope": "Full authoring/engineering elapsed, Git and messages; previously separately excluded SCP. This conservatively charges Operator copying/archiving command wall as support.",
+    "valid_complete_triples": 1,
+    "final_publication_check_charge_seconds": 1.1058542,
+    "support_charge_seconds": 45.9904959,
+    "scoped_charged_seconds_per_valid_triple": 2469.7804959,
+    "scope_note": "One valid three-law B result. Charged sum mixes measured scientific walls with scoped measured/rounded support charges; it is not total engineering elapsed or a full CPU measure."
+  },
+  "publication_checks": {
+    "artifact_card_counts_links": "passed",
+    "frozen_card_sections_2_through_6_unchanged": true,
+    "first_two_card_lines_unchanged": true,
+    "brief_characters": 378,
+    "whole_result_units": [
+      1,
+      2
+    ],
+    "source_and_test_diff_since_launch": "none",
+    "format_correction": "Initial diff-check found trailing blank lines in appended DIRECTION/intake; removed without changing scientific text.",
+    "command_seconds": [
+      0.4270124,
+      0.3374814,
+      0.3413604
+    ],
+    "final_diff_whitespace_check": "passed after trailing-blank-line correction; native CRLF/LF conversion notices are not scientific changes"
   }
 }

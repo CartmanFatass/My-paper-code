@@ -1,5 +1,11 @@
 # FOLR public lifecycle TIMING-B02 technical evidence
 
+**Final state:** all three allocated arms completed and DM scientific intake accepted
+MIXED_OR_REVERSE, with all contrasts WITHIN_MEI. The final sections below supersede
+historical pending/cost entries without rewriting the frozen card. Remote preservation
+was reconciled after deletion; the omitted required pre-delete comparison remains a
+procedural nonconformance. Root integration and closeout acceptance are pending.
+
 ## Source and focused acceptance
 
 Allocation and scientific meaning: [card §§1–6](FOLR_PUBLIC_LIFECYCLE_TIMING_B02_SCIENCE_CARD_20260910.md).
@@ -229,3 +235,144 @@ RANDOM training/mask/publication conformance remain terminal-collection facts, n
 inferences from submission. The Monitor alone observes this handle; the DM returns
 pending terminal collection. Full three-law scientific intake, Chinese brief and scoped
 remote closeout follow this final arm, with every outcome retained.
+
+
+## RANDOM terminal collection and full-triple acceptance
+
+Root forwarded the terminal Monitor receipt: observed2026-09-10T17:43:15.3236157Z,
+finished exit0, actual supervisor exit2026-09-11T01:42:28+08 and integer duration821s.
+The DM collected all eight RANDOM artifacts from the accepted exact-source worktree
+and supervisor to `temp/directions/vap_folr_core/exp/public_lifecycle_timing_b02_seed7805_random/`
+and the sibling memory receipt. The original Monitor receipt was copied as
+`monitor_terminal.txt`. Every remote/local size and SHA-256 matched before reclamation.
+
+- `summary.json`:4061 bytes,
+  `30ae0fb2e209c5650eca1df7d0ee18ad05978b4ae5e4d3d714353c3143ce4d1f`.
+- `final.pt`:4662779 bytes,
+  `47d52cf4da6efb76f420bff0f8d41382c7db7a4f02bc7d5e30f2fd4589edef4c`.
+- Memory receipt, complete outer time, task log, accepted runner command, terminal status
+  and exit-code bytes have all six additional hashes in the
+  [result summary](FOLR_PUBLIC_LIFECYCLE_TIMING_B02_RESULT_SUMMARY_20260910.json).
+
+Final printed JSON equals the collected summary. All128 returns are finite and support
+mean2.5017968749999993. Counts5000 train episodes/100000 ticks/4969 updates and128 final/
+2560 ticks, source6a8eacda,7805/107805, CPU FP32 and threads1/1 match the card. There are25
+progress rows at200-episode intervals through5000/4969. Training return sum is
+−26024.15999999992, mean−5.204831999999984. Training births21778/departures8932/event-bound
+opportunities47458/all eligible259266/actual resets26050; final561/209/1309/6580/623.
+RANDOM reports private PCG64207805/307805, p=.1,105 draws/episode and `frequency_matched=false`.
+No output-informed mask change, checkpoint reload, extra evaluation, simulator call or
+scientific test was made during collection.
+
+Fresh admission at2026-09-10T17:28:47.372241Z reports physical/effective available
+15319556096 bytes, both above4294967296. Cgroup fields remain null, recorded
+`resources_unmeasured`. Outer `/usr/bin/time -v` reports821.64s elapsed,799.34s user CPU,
+23.70s system CPU, peak RSS652756KiB and exit0; whole CPU is823.04s. Narrower summary
+wall776.1771740689874s/RSS646284KiB is separately retained. The45.4628259310s clock gap
+has no demonstrated cause. Both fresh admission and complete1800s cap pass.
+
+The full three-arm exposure is15000 training episodes/300000 train ticks/14907 RMSprop,
+384 final episodes/7680 final ticks =307680 native ticks. All24 recorded artifact pairs
+matched at collection. Final means are RETAIN2.64265625, EVENT2.051953125 and RANDOM
+2.501796875; differences EVENT−RETAIN−0.590703125, RANDOM−RETAIN−0.140859375 and EVENT−
+RANDOM−0.44984375 are each WITHIN_MEI at1. The rule applied verbatim from card §4 is:
+
+1. **EVENT_CLEAR_ADVANTAGE:** `d_ER>=1` and `d_EM>=1`.
+2. **SHARED_RESET_GAIN:** `d_ER>=1`, `d_MR>=1` and `-1<d_EM<1`.
+3. **MIXED_OR_REVERSE:** all remaining cases.
+
+Therefore MIXED_OR_REVERSE applies; low-confidence DM EVENT_CLEAR_ADVANTAGE prediction
+missed, owner prediction not taken. [Full intake §§7–12](FOLR_PUBLIC_LIFECYCLE_TIMING_B02_INTAKE_20260910.md#7-complete-result-against-the-frozen-card)
+interprets the conditional spread, historical positive result and current nonrecurrence,
+training-return evidence and unmatched reset dose. Its B claim is one new fitting-instance
+comparison. No equivalence, pure timing/causal claim, stable winner, transfer, C consumption,
+family disposition or automatically allocated successor follows.
+
+## Complete cost and retained operational exceptions
+
+Complete-chain wall RETAIN832.49/EVENT769.66/RANDOM821.64 sums **2423.79s** for one valid
+triple; whole CPU832.87/772.00/823.04 sums2427.91s. Every law is below1800s and the sum
+below5400s. Narrower runner walls sum2294.076124s. First-admission to whole-second final
+exit elapsed3170.24377s includes between-arm control gaps, excludes earlier staging and
+later collection, and is not aggregate CPU or summed invocation wall. Resource and
+measurement scopes are retained individually in the result summary.
+
+Supporting accounting before final record checks is44.8846417/300s: prior27.6495774s
+through raw collection/closeout input reads, then5.1350643s additional measured reads,
+analysis and archive reconciliation, plus the Operator's rounded12.1s command wall.
+The latter conservatively includes archive/copy/reclamation work. Inner script clocks
+are nested, not additional time. Failed scope/encoding readbacks remain charged. The
+final publication-check increment is recorded below and in JSON `cost_accounting`.
+Directory tests remain25.9131638/300s cumulative. Full authoring/engineering/transport/
+closeout elapsed remains unmeasured; Git/messages and separately excluded earlier SCP
+are not silently represented by these scoped charges.
+
+No Scope Spec §4 machinery or §5 source/test budget breach was added. The original local
+test/finally-cleanup command was rejected before execution by automatic approval review,
+exact reason `blocked by policy`. The permitted test-only check passed; its owned
+`temp/directions/vap_folr_core/test/timing_b02_check01` remains. This separate rejected
+operation was not bypassed, retried through another method or touched by the Operator.
+
+## Remote preservation, actual reclamation and acceptance limitation
+
+The Operator's [corrected closeout report](evidence/2026-09-10-folr-public-lifecycle-timing-b02-operator-closeout.md)
+preserves exact ordering: archive creation → successful `tar -tzf` reads → local copy
+and whole-archive digest matches → second inactive-PID check → exact path removal →
+absence/registration check. **The assigned tar-to-original byte comparison was omitted
+before deletion.** This is a procedural failure, not an unqualified conforming closeout.
+Root explicitly instructed post-deletion reconciliation; no scientific compensation follows.
+
+The removed paths were exactly:
+
+- `/home/wu/hmasd-worktrees/folr-public-lifecycle-timing-b02-6a8eacda`
+- `/home/wu/.agent-tasks/folr-public-lifecycle-timing-b02-retain-20260910`
+- `/home/wu/.agent-tasks/folr-public-lifecycle-timing-b02-event-20260910`
+- `/home/wu/.agent-tasks/folr-public-lifecycle-timing-b02-random-20260910`
+
+Recovery archives are retained remotely at
+`/home/wu/hmasd-recovery/folr-public-lifecycle-timing-b02-20260910` and locally at
+`temp/directions/vap_folr_core/exp/folr-public-lifecycle-timing-b02-20260910/`:
+
+| Archive | Bytes | SHA-256 |
+| --- | ---: | --- |
+| folr-public-lifecycle-timing-b02-worktree.tar.gz | 21355901 | d76ca3acc5c84d51fe5ae3e0c5706781950bf3489cd05b2e6a4f2e300f48468c |
+| folr-public-lifecycle-timing-b02-supervisors.tar.gz | 6234 | ad71fbc382349d060ab233764027b2bee7eac135daaa4593c3b00e2ec75a52da |
+
+The DM independently [read and reconciled the archives after deletion](evidence/2026-09-10-folr-public-lifecycle-timing-b02-archive-reconciliation.json)
+without extracting them. All24 recorded scientific/supervisor files equal pre-deletion
+hashes and retained local bytes; all2312 tracked files on the configured sparse surface
+match frozen Git contents. There are17 extra regular worktree files: nine recorded
+scientific files and eight pycache files. The supervisor archive retains21 regular files.
+The initial comparison against all repository paths failed on directories outside the
+configured sparse surface; its scope correction and one UTF-8 read correction are
+recorded, with unchanged archive/result bytes. No missing scoped tracked source remains.
+
+[Remote readback](evidence/2026-09-10-folr-public-lifecycle-timing-b02-remote-closeout.json)
+at2026-09-10T18:02:55.291262Z confirms all four exact paths absent, worktree unregistered,
+recorded PIDs inactive, remote archive digests equal, and recovery ref
+`refs/archive/folr-public-lifecycle-timing-b02-20260910` pointing to full
+`6a8eacdad072c37d477aca95a9c871aba68cee78`. Collected raw outputs, checkpoints, admissions,
+logs and Monitor copies remain under their original local arm roots; the shared authoring
+checkout remains the direction's live authoring surface.
+
+The preserved scientific files and committed source are recoverable. A post-delete check
+cannot demonstrate the omitted pre-delete comparison or exclude unknown untracked originals
+missing from every preserved record. Scientific acceptance rests on separately retained
+primary bytes and matched counts; Root receives this explicit residual closeout risk for
+its own integration and execution-closure acceptance. The DM does not claim Root has
+already accepted this new full result or closeout.
+
+## Final publication accounting
+
+Artifact/card/count/link checks passed; card first lines and §§2–6 match the frozen
+source text, including RNG, reading rule and prospective prediction. Scientific source
+and tests are unchanged from launch. The378-character Chinese brief has all six required
+headings. Initial whitespace checking found two extra trailing blank lines; they were
+removed and the focused diff check passed. Run-level CSVs are explicitly retained despite
+the repository's general CSV ignore rule. No new target calls or tests were made.
+
+Final record checks charge1.1058542s. Total separate support is **45.9904959/300s**;
+complete scientific wall2423.79s plus support gives **2469.7804959s scoped charged cost
+per one valid triple**. Whole CPU2427.91s, narrower runner wall2294.076124s and study
+elapsed3170.24377s retain their separate scopes. These figures do not measure total
+authoring/engineering elapsed; subsequent explicit-path Git publication is administrative.
