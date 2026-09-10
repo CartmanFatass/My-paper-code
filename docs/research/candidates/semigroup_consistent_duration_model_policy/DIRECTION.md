@@ -692,3 +692,29 @@ facts are in `SCDMP_NATIVE_HOLD_RESIDUAL_B01_RESULT_EVIDENCE_20260909.md`; scien
 intake, decisions and bounded alternatives are in
 `SCDMP_NATIVE_HOLD_RESIDUAL_B01_INTAKE_20260909.md`. Recasts: 2 and old D6 family PARK
 remain unchanged. No next scientific discriminator is currently selected.
+
+## Unchanged residual-MC independent pair B02 — 2026-09-10
+
+The complete post-B01 Convergence response at immutable commit
+2b1a8d7a8395827ed654dac120641710e6a6c87a selects one unchanged independent training
+pair and declines the DM's immediate narrow-PARK recommendation. This continues the
+accepted mechanism; recasts remain2, old D6 family stays PARK and Portfolio state is
+unchanged. B01 remains valid WITHIN at absolute MEI0.01, not retrospectively successful.
+
+The accepted question adds a training instance while holding residual-MC versus intact
+MLP-MC fixed. Strongest support is a real nonzero intervention with a positive native
+point difference and an existing323.02-second full process observation. Strongest
+contradiction is the within-scale result,14/32 adverse paired evaluations and competitive
+MLP. Generic regularization, clipping/optimization, cancellation, successor noise and
+omitted history survive. Another pair does not establish stable superiority or unique causality.
+
+The next discriminator is SCDMP-NATIVE-HOLD-RESIDUAL-B02, fresh master8202 with unchanged
+coefficient1, native law, learner/comparator, final sampled evaluation and MEI0.01. Its
+Δ2, both H contrasts, adverse episodes, conditional uncertainty, actual intervention
+exposure and full cost are read alongside B01. WITHIN or DOWN strengthens the recommendation
+to park this fixed opening t1–3→t4 package; UP adds one local signal. No branch allocates a
+third pair or already executes a future family disposition.
+
+References: [decision and conformance intake](pro_packets/20260910_post_b01_convergence/CONVERGENCE_INTAKE_20260910.md),
+[B02 card](SCDMP_NATIVE_HOLD_RESIDUAL_B02_SCIENCE_CARD_20260910.md) and preserved
+[B01 result intake](SCDMP_NATIVE_HOLD_RESIDUAL_B01_INTAKE_20260909.md).
