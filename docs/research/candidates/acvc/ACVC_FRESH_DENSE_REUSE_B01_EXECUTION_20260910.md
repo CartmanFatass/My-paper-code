@@ -1,6 +1,6 @@
 # ACVC fresh DENSE reuse B01 — engineering and execution
 
-Date: 2026-09-10. **Source accepted; the single scientific submission is next.**
+Date: 2026-09-10. **One scientific submission accepted; monitor adoption and collection pending.**
 
 ## Authority and owned work
 
@@ -50,9 +50,9 @@ The actual complete charge must cover the supervisor start/end boundary conserva
 fractional command wall and final supervisor wall are reported separately. Any measured
 cap breach is retained. No timing probe or uncharged verification phase is selected.
 
-Current new support used: **3.7175557s**. Current scientific accepted invocations: **0**.
-No model, RNG master, native episode, learner update or evaluation has been created by
-this engineering assignment.
+Current new support used: **3.7175557s**. Current scientific accepted invocations: **1**.
+Before submission no model, RNG master, native episode, learner update or evaluation
+had been created by this engineering assignment. Actual exposure awaits collection.
 
 ## Exact execution inputs
 
@@ -153,7 +153,7 @@ No further source change or repeated check is needed absent a new concrete defec
 ## Frozen single submission
 
 Source SHA: `60d42dd739ef125a505772f2b1d698b099b43a16`. Node/interpreter/device/thread boundary remains above.
-Supervisor handle: `acvc-fresh-dense-b01-8921-60d42dd73`. One submission is selected, not yet accepted.
+Supervisor handle: `acvc-fresh-dense-b01-8921-60d42dd73`. One submission was accepted below.
 Scientific output and admission/timing paths remain those named above. The exact command
 passed as one `agent-task run` payload is:
 
@@ -172,3 +172,23 @@ previously handled September4–5 reviews. The ACVC instruction at
 `reviews/2026-09-05.md:19` remains continue at lowest sequencing priority; no new
 review or owner override changes this allocated batch. Source acceptance and the
 partial-record correction are recorded in the September10 audit ledger.
+
+## Accepted submission and observation handover
+
+The one supervisor submission started at `2026-09-10T18:37:58.6419883Z` and
+returned exit0 in0.6461753s client wall. Direct receipt:
+
+> Task 'acvc-fresh-dense-b01-8921-60d42dd73' started in tmux session 'agent_acvc-fresh-dense-b01-8921-60d42dd73'.
+
+Its log is `/home/wu/.agent-tasks/acvc-fresh-dense-b01-8921-60d42dd73/task.log`.
+This is process acceptance, not admission success or completed scientific evidence.
+The exact source and command are unchanged from the published pre-submission record309c5b1a5.
+The submit-client interval is retained for conservative wider task charging at intake.
+
+DM directly sent MONITOR_ADD to the live primary-configured monitor task
+`01a087e5-2044-7301-abb6-7a1709a98197`; the app accepted the message.
+**Monitor adoption is pending Root-forwarded direct confirmation.** Root is
+`01a07249-b095-7821-8ce2-e9c32ba85267`, original native execution/science owner
+`/root/dm_acvc_p68_reentry` (source task01a08447-a33c-7881-8c2a-a6e7e918b2a7).
+DM has no parallel polling loop and retains collection, engineering acceptance and
+separate scientific intake. There is no second submission, retry or successor.
