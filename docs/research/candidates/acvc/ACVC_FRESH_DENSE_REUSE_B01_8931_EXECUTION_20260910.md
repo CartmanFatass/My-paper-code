@@ -1,6 +1,6 @@
 # ACVC fresh DENSE reuse B01 / 8931 — execution
 
-Date: 2026-09-10. One new study allocated; no scientific invocation accepted yet.
+Date: 2026-09-10. Source accepted for the one allocated study; submission pending.
 
 ## L0 and ownership
 
@@ -72,7 +72,7 @@ duplicate or purely bookkeeping queries, and report any actual incomplete accoun
 
 ## Review, support and launch status
 
-Pending independent review and one focused check. Scientific invocations0, native
+Before source review/check, scientific invocations0, native
 steps0, learner/model constructions0. Owner reviews from the live primary were[];
 no new owner instruction or prediction was present. The prior lowest-priority
 instruction remains applied. Selection is in card§10 and the audit ledger.
@@ -83,3 +83,45 @@ finding. All protected dependencies are unchanged; publication-alarm and interru
 update corrections remain. DM corrected the minor grace-period wording above. Review
 performed no runtime/model work. Actual native/thread/count/cost facts remain pending;
 synthetic verification cannot establish native empirical validity.
+
+## Focused check and exact committed submission
+
+Accepted source: **dfee6e8a3cecfde866da07fef60ffcdd319956b5**, committed and pushed.
+Exact remote checkout:
+`/home/wu/hmasd-worktrees/acvc-fresh-dense-b01-8931-dfee6e8a3`.
+Git preparation initially used an abbreviated fetch ref, which the server did not
+resolve. The subsequent full-SHA fetch and sparse detached checkout succeeded;
+its directly read HEAD matches and initial status is clean. No numerical attempt
+occurred during Git preparation, and no old ref/source was removed.
+
+One focused target ran once at that source, using the configured remote interpreter:
+`tests/experiments/candidates/acvc/native_link_loss_b01/test_fresh_dense_b01.py::test_fresh_dense_orchestration_counts_and_publication`.
+Result: **1 passed**, pytest1.28s, whole pytest process1.71s/exit0; shell `bash -n`
+also passed. Charged complete client wall including SSH, syntax and cleanup is
+**2.0633717s**. Its synthetic complete/panel-failure/interrupted-update cases use
+substitutes and no native model/training. The exact owned basetemp was verified and
+removed, with direct `owned_test_scratch_absent` output.
+
+The enclosing ad-hoc receipt command ended with shell exit2 because its final `exit`
+argument carried a trailing CR from the Windows stdin pipe; the test had completed
+exit0 and cleanup was already confirmed. This is retained as a technical receipt
+defect, not a test failure or scientific attempt. No test was repeated. The scientific
+payload below is a directly quoted command invoking the committed LF shell wrapper;
+it does not reuse that stdin transport. One supervisor usage read cost **.6127231s**,
+returned its usage text/exit1, and is also conservatively charged as support. Total
+prelaunch measured support is **2.6760948s**; directory tests are29.8075815s/300s.
+No other runtime checking is needed without a new defect.
+
+Planned handle: **acvc-fresh-dense-b01-8931-dfee6e8a3**. The following exact payload
+is supplied as one command to `/usr/local/bin/agent-task run <handle>`:
+
+```bash
+cd /home/wu/hmasd-worktrees/acvc-fresh-dense-b01-8931-dfee6e8a3 && export HMASD_PYTHON=/home/wu/.venvs/hmasd/bin/python PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 CUDA_VISIBLE_DEVICES= && /usr/bin/time -f 'whole_command_wall_s=%e\npeak_rss_kib=%M\nexit_code=%x' -o temp/directions/acvc/fresh_dense_reuse_b01_8931_task_time.txt timeout --signal=TERM --kill-after=1 267 bash scripts/run_acvc_fresh_dense_reuse_b01.sh dfee6e8a3cecfde866da07fef60ffcdd319956b5
+```
+
+The source declaration/card, one-fit counts, private-state comparison, independent
+review and passed target support technical acceptance of this exact execution.
+Actual-node admission remains joined inside the wrapper, followed by the only
+authorized result-bearing invocation if it passes. Launch acceptance/adoption and
+eventual empirical acceptance remain separate facts. The source surface has no
+subsequent code change; documentation-only commits do not alter the bound bytes.

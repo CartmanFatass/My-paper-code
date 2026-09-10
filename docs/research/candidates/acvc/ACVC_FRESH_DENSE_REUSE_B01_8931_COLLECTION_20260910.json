@@ -1,0 +1,41 @@
+{
+  "object": "ACVC_FRESH_DENSE_REUSE_B01",
+  "master": 8931,
+  "evaluation_namespace": 8932,
+  "source_sha": "dfee6e8a3cecfde866da07fef60ffcdd319956b5",
+  "supervisor_handle": "acvc-fresh-dense-b01-8931-dfee6e8a3",
+  "execution_node": "wsl_4070",
+  "remote_checkout": "/home/wu/hmasd-worktrees/acvc-fresh-dense-b01-8931-dfee6e8a3",
+  "status": "source accepted; submission pending",
+  "checks": [
+    {
+      "name": "single focused synthetic target, shell syntax and creator cleanup",
+      "charge_s": 2.0633717,
+      "method": "client Stopwatch including SSH/readback/cleanup",
+      "remote_process_s": 1.71,
+      "test_exit_code": 0,
+      "test_result": "1 passed in 1.28s; shell syntax passed; owned scratch absent",
+      "enclosing_receipt_exit_code": 2,
+      "receipt_defect": "trailing CR in final exit argument of ad-hoc stdin shell; occurred after test success and cleanup; retained with no repeat"
+    },
+    {
+      "name": "supervisor usage read",
+      "charge_s": 0.6127231,
+      "method": "client Stopwatch including SSH",
+      "exit_code": 1,
+      "result": "usage text received; no scientific submission"
+    }
+  ],
+  "timing": {
+    "whole_task_cap_s": 270,
+    "all_support_including_monitor_cap_s": 90,
+    "complete_cap_s": 360,
+    "prelaunch_support_s": 2.6760948,
+    "prior_directory_test_s": 27.7442098,
+    "new_directory_test_s": 2.0633717,
+    "directory_test_total_s": 29.8075815,
+    "monitor_observation_s": null,
+    "whole_task_charge_s": null,
+    "complete_charge_s": null
+  }
+}
