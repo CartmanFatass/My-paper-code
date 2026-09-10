@@ -225,6 +225,16 @@ class ProtocolTests(unittest.TestCase):
         self.assertNotIn("private", json.dumps(evidence))
         self.assertIn("test passed", json.dumps(evidence))
 
+    def test_report_distinguishes_unassessed_from_code_failure(self):
+        state = {"id": "fixture", "seed": 17, "tasks": [], "task_metadata": {}}
+        runner.save(self.root / "judgement.json", {"behavior_passed": True,
+            "protocol_artifacts_passed": True, "full_run_passed": None,
+            "semantic_review": {"semantic_passed": False, "policy_adherence": "insufficient_evidence"}})
+        completion.report(self.root, state, "finished")
+        report = (self.root / "REPORT.md").read_text(encoding="utf-8")
+        self.assertIn("完整判定：未完成/无法确认", report)
+        self.assertIn("独立代码语义：未完成/无法确认", report)
+
     def test_existing_session_begin_does_not_launch_a_cm(self):
         output = io.StringIO()
         with patch.object(runtime, "launch") as launch, contextlib.redirect_stdout(output):

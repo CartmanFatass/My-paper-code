@@ -64,16 +64,26 @@ def report(directory, state, status):
     judgement_file = directory / "judgement.json"
     judgement = json.loads(judgement_file.read_text(encoding="utf-8")) if judgement_file.is_file() else {}
     label = lambda value: "通过" if value is True else "未通过" if value is False else "未完成/无法确认"
+    semantic = judgement.get("semantic_review")
+    semantic = semantic if isinstance(semantic, dict) else {}
+    semantic_result = semantic.get("semantic_passed")
+    if semantic_result is False and semantic.get("policy_adherence") == "insufficient_evidence":
+        semantic_result = None
     rows = "\n".join(f"- `{task}`：{state['task_metadata'][task]['difficulty']}（预估）" for task in state["tasks"])
     content = (f"# CM benchmark {state['id']}\n\n自动收尾状态：{status}\n\n抽题 seed：`{state['seed']}`。本轮两题：\n\n{rows}\n\n"
         f"行为检查：{label(judgement.get('behavior_passed'))}；流程产物：{label(judgement.get('protocol_artifacts_passed'))}；"
         f"完整判定：{label(judgement.get('full_run_passed'))}。\n\n"
         "证据不足或裁判执行受阻显示为未完成/无法确认，不等于代码缺陷。模型默认值不是固定测试组合；实际配置见导出记录。\n\n"
+        f"独立代码语义：{label(semantic_result)}；"
+        f"工作流证据：{semantic.get('native_workflow', 'not_run')}；"
+        f"模型元数据核验：{judgement.get('configuration', {}).get('status', 'unmeasured')}。\n\n"
         "- [逐题与流程评分](judgement.json)\n- [实际会话与配置](export.json)\n"
         "- [独立裁判](assessment/report.json)\n- [CM 团队成本原始报告](cost/team.md)\n"
         "- [独立裁判成本原始报告](cost/evaluator.md)\n- [成本提取状态](cost/status.json)\n\n"
         "费用是冻结 API Standard 费率的参考值，不是订阅额度或实际账单；未处理单请求超长/tier 倍率。"
         "未完成、缺失或 UNPRICED 的项目不能按零费用或通过处理。一次流程不能得出最佳策略。\n")
+    if (directory / "assessment_attempts").is_dir():
+        content += "\n前次裁判原件保留在 assessment_attempts/；成本提取状态包含每次已结束裁判，不能只计最新一次。\n"
     (directory / "REPORT.md").write_text(content, encoding="utf-8")
 
 
