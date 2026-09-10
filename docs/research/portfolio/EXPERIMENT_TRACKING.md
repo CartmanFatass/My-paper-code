@@ -21,6 +21,18 @@ alternatives if a slot becomes actionable. See
 [`2026-09-10-next-five-chains.md`](decisions/2026-09-10-next-five-chains.md) and the packet's
 [`EXECUTION_MAPPING.md`](pro_packets/20260910_next_five_chains/EXECUTION_MAPPING.md).
 
+Current execution update: FOLR source/card `6a8eacdad` is Root-integrated and RETAIN handle
+`folr-public-lifecycle-timing-b02-retain-20260910` is directly Monitor-adopted; EVENT/RANDOM are
+preselected but unsubmitted. VSP03 source/card `adcff0a925` is Root-integrated; handle
+`vsp03-b07-10804-20260910` was Monitor-adopted and then terminal exit0, with the original DM
+collecting and intaking rather than inferring a result from the terminal summary. UCOPE card8701 is
+Root-integrated and implementation continues without a submitted handle. RCLE implementation/review
+continues from its published fresh1000 card. ACVC completed its design-only assignment at
+`28e99edc7`; Root integrated the card and published its design audit/P2 item. The design resolves
+the fitting recipe but releases zero numerical invocations, so completed ACVC authoring no longer
+fills a direction slot. Its proposed360s execution needs a separate Portfolio allocation; reserve
+readiness work may fill the vacancy without treating an unresolved allocation as advancing.
+
 ## 2026-09-10 control-plane migration
 
 [OWNER_DIRECT consolidation](decisions/2026-09-10-control-plane-consolidation.md) changes future
