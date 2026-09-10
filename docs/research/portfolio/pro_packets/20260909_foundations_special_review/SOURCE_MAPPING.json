@@ -1,0 +1,2293 @@
+{
+  "purpose": "Read-only fixed-source mapping for unique-path TASK references; snapshot bytes equal original Git blobs.",
+  "source_mapping": [
+    {
+      "task_path": "docs/research/candidates/ucope/UCOPE_UAV_MEAN_VELOCITY_RENEWAL_B01_SCIENCE_CARD_20260909.md",
+      "task_commit_sha": "52bf50a089d3389d9fada0b531e4f4e56e83f9b8",
+      "originals": [
+        {
+          "id": "UCOPE-card-001",
+          "path": "docs/research/candidates/ucope/UCOPE_UAV_MEAN_VELOCITY_RENEWAL_B01_SCIENCE_CARD_20260909.md",
+          "commit_sha": "52bf50a089d3389d9fada0b531e4f4e56e83f9b8",
+          "git_blob": "d7bdd805625e4405ee6b5447e81c97ff472726ba",
+          "sha256": "c92b13b5e4ddb7dce0109df8b8b66d969ea963650e62c73daa1367c78cd94714",
+          "direction": "UCOPE"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "docs/research/candidates/ucope/UCOPE_UAV_MEAN_VELOCITY_RENEWAL_B01_P85_INTAKE_20260909.md",
+      "task_commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+      "originals": [
+        {
+          "id": "UCOPE-intake-002",
+          "path": "docs/research/candidates/ucope/UCOPE_UAV_MEAN_VELOCITY_RENEWAL_B01_P85_INTAKE_20260909.md",
+          "commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+          "git_blob": "e0a8ad238b2d18e7f656f17864b73ca4860b56c4",
+          "sha256": "679a8fbf2d0cbe387ac10dd4f13c2f43cdaffb80dc47853b03c8fe6dd5bb0390",
+          "direction": "UCOPE"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "docs/research/candidates/ucope/UCOPE_UAV_MEAN_VELOCITY_RENEWAL_B01_P85_RESULT_EVIDENCE_20260909.md",
+      "task_commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+      "originals": [
+        {
+          "id": "UCOPE-result-003",
+          "path": "docs/research/candidates/ucope/UCOPE_UAV_MEAN_VELOCITY_RENEWAL_B01_P85_RESULT_EVIDENCE_20260909.md",
+          "commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+          "git_blob": "97dcbec1e021424653a7c0b0613c34cb954bae87",
+          "sha256": "fd97cdf4aa9ddbcf75f81b16e8c87c15badfcecfabbfe899a9a6c76f24e61520",
+          "direction": "UCOPE"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "docs/research/candidates/ucope/UCOPE_POST_MEAN_VELOCITY_B01_CONVERGENCE_INTAKE_20260909.md",
+      "task_commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+      "originals": [
+        {
+          "id": "UCOPE-intake-004",
+          "path": "docs/research/candidates/ucope/UCOPE_POST_MEAN_VELOCITY_B01_CONVERGENCE_INTAKE_20260909.md",
+          "commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+          "git_blob": "ac46f469be7a8109405686ac9e8a3b46d5b64fd2",
+          "sha256": "91facd3820f10d2f365ed518d7ade8118e60c395b9a32f4812ae635c06e61bb7",
+          "direction": "UCOPE"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "docs/research/candidates/ucope/DIRECTION.md",
+      "task_commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+      "originals": [
+        {
+          "id": "UCOPE-direction-005",
+          "path": "docs/research/candidates/ucope/DIRECTION.md",
+          "commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+          "git_blob": "aa3ec6221cec2fd0eb0a14316a4adaf441e3239d",
+          "sha256": "6e29e44eda56e324a34b4f5a8518a183a7f8b11a9bbd36e06bb15ad7c2bd5987",
+          "direction": "UCOPE"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "scripts/run_ucope_uav_motion_prefix_b01.py",
+      "task_commit_sha": "52bf50a089d3389d9fada0b531e4f4e56e83f9b8",
+      "originals": [
+        {
+          "id": "UCOPE-code-006",
+          "path": "scripts/run_ucope_uav_motion_prefix_b01.py",
+          "commit_sha": "52bf50a089d3389d9fada0b531e4f4e56e83f9b8",
+          "git_blob": "a9167ff182a6a86f632f0dfae3c3b4c432fd0744",
+          "sha256": "5a4e8193cb034612b4180d465ce2803eff41d9f63b426cb4f2d8cc0202789e8a",
+          "direction": "UCOPE"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "docs/research/portfolio/pro_packets/20260909_foundations_special_review/source_snapshots/baea9644805275c62325f0a99e4cdd2f92b358d1/experiments/candidates/ucope/uav_motion_prefix_b01/study.py",
+      "task_commit_sha": null,
+      "originals": [
+        {
+          "id": "UCOPE-code-007",
+          "path": "experiments/candidates/ucope/uav_motion_prefix_b01/study.py",
+          "commit_sha": "52bf50a089d3389d9fada0b531e4f4e56e83f9b8",
+          "git_blob": "baea9644805275c62325f0a99e4cdd2f92b358d1",
+          "sha256": "0e787d017f6486603aa573ce29b3be9ac6c4ce8c775df55412fdaa20afe5e5f1",
+          "direction": "UCOPE"
+        }
+      ],
+      "snapshot": true
+    },
+    {
+      "task_path": "docs/research/portfolio/pro_packets/20260909_foundations_special_review/source_snapshots/56839624b05976ead457c51b35882c038da9f593/experiments/candidates/ucope/uav_motion_prefix_b01/study.py",
+      "task_commit_sha": null,
+      "originals": [
+        {
+          "id": "SCDMP-code-048",
+          "path": "experiments/candidates/ucope/uav_motion_prefix_b01/study.py",
+          "commit_sha": "7d0fc9d0091e046617493a1b23bbbf07297821cf",
+          "git_blob": "56839624b05976ead457c51b35882c038da9f593",
+          "sha256": "93190c51a7407f8fa1251af1c15ed9502d11fb1f9d44b7d0ddba9a0026e57990",
+          "direction": "SCDMP"
+        },
+        {
+          "id": "VSPC1-code-075",
+          "path": "experiments/candidates/ucope/uav_motion_prefix_b01/study.py",
+          "commit_sha": "23ebb0f5e22286d9ea77a145f980bedacc32d9da",
+          "git_blob": "56839624b05976ead457c51b35882c038da9f593",
+          "sha256": "93190c51a7407f8fa1251af1c15ed9502d11fb1f9d44b7d0ddba9a0026e57990",
+          "direction": "VSPC1"
+        }
+      ],
+      "snapshot": true
+    },
+    {
+      "task_path": "docs/research/portfolio/pro_packets/20260909_foundations_special_review/source_snapshots/a49deaab043d85a1bc384615e65188cbcdd785b0/experiments/candidates/ucope/uav_motion_prefix_b01/study.py",
+      "task_commit_sha": null,
+      "originals": [
+        {
+          "id": "MGTAP-code-110",
+          "path": "experiments/candidates/ucope/uav_motion_prefix_b01/study.py",
+          "commit_sha": "4f65eefb1b15e44b42d694376630fba0c230cc6c",
+          "git_blob": "a49deaab043d85a1bc384615e65188cbcdd785b0",
+          "sha256": "fcd9e8e5e74f84f98db369729c0a68595836438a3ea6a90a0bcc620ec724f6a3",
+          "direction": "MGTAP"
+        }
+      ],
+      "snapshot": true
+    },
+    {
+      "task_path": "docs/research/portfolio/pro_packets/20260909_foundations_special_review/source_snapshots/3f40f56ffbab1a334589640c4a0dff799b752b93/experiments/candidates/ucope/uav_motion_prefix_b01/learner.py",
+      "task_commit_sha": null,
+      "originals": [
+        {
+          "id": "UCOPE-code-008",
+          "path": "experiments/candidates/ucope/uav_motion_prefix_b01/learner.py",
+          "commit_sha": "52bf50a089d3389d9fada0b531e4f4e56e83f9b8",
+          "git_blob": "3f40f56ffbab1a334589640c4a0dff799b752b93",
+          "sha256": "e0f907921ab8b48f6755b2513431b78a7f4a95ebce9a631e925fb82c0dfed911",
+          "direction": "UCOPE"
+        }
+      ],
+      "snapshot": true
+    },
+    {
+      "task_path": "docs/research/portfolio/pro_packets/20260909_foundations_special_review/source_snapshots/766c48a860b39e93216e2969bf3d045e55465e28/experiments/candidates/ucope/uav_motion_prefix_b01/learner.py",
+      "task_commit_sha": null,
+      "originals": [
+        {
+          "id": "SCDMP-code-050",
+          "path": "experiments/candidates/ucope/uav_motion_prefix_b01/learner.py",
+          "commit_sha": "7d0fc9d0091e046617493a1b23bbbf07297821cf",
+          "git_blob": "766c48a860b39e93216e2969bf3d045e55465e28",
+          "sha256": "a838e1d1d1ad06ca6aeb658512c9b2035b2e4df861ee0e245eb74a0874bbf06d",
+          "direction": "SCDMP"
+        }
+      ],
+      "snapshot": true
+    },
+    {
+      "task_path": "docs/research/portfolio/pro_packets/20260909_foundations_special_review/source_snapshots/09a4c1cb832f5968d5de5b4ba562294fcc8640fb/experiments/candidates/ucope/uav_motion_prefix_b01/learner.py",
+      "task_commit_sha": null,
+      "originals": [
+        {
+          "id": "VSPC1-code-077",
+          "path": "experiments/candidates/ucope/uav_motion_prefix_b01/learner.py",
+          "commit_sha": "23ebb0f5e22286d9ea77a145f980bedacc32d9da",
+          "git_blob": "09a4c1cb832f5968d5de5b4ba562294fcc8640fb",
+          "sha256": "6b7c7d9f315f2c86f911b67ece38cdc5d165fa1a321e6068b751b1423e53b8bf",
+          "direction": "VSPC1"
+        }
+      ],
+      "snapshot": true
+    },
+    {
+      "task_path": "docs/research/portfolio/pro_packets/20260909_foundations_special_review/source_snapshots/21c1a773170f40799606387688f7837ba11efe53/experiments/candidates/ucope/uav_motion_prefix_b01/learner.py",
+      "task_commit_sha": null,
+      "originals": [
+        {
+          "id": "MGTAP-code-112",
+          "path": "experiments/candidates/ucope/uav_motion_prefix_b01/learner.py",
+          "commit_sha": "4f65eefb1b15e44b42d694376630fba0c230cc6c",
+          "git_blob": "21c1a773170f40799606387688f7837ba11efe53",
+          "sha256": "8d253b86c6d7c8777f79ce428193efa36d31f8e7015226b4ebdd0553c3c983bd",
+          "direction": "MGTAP"
+        }
+      ],
+      "snapshot": true
+    },
+    {
+      "task_path": "docs/research/portfolio/pro_packets/20260909_foundations_special_review/source_snapshots/28e98a47256f10a60f085cc9d97d7b8ba9a4183c/experiments/candidates/ucope/uav_motion_prefix_b01/policy.py",
+      "task_commit_sha": null,
+      "originals": [
+        {
+          "id": "UCOPE-code-009",
+          "path": "experiments/candidates/ucope/uav_motion_prefix_b01/policy.py",
+          "commit_sha": "52bf50a089d3389d9fada0b531e4f4e56e83f9b8",
+          "git_blob": "28e98a47256f10a60f085cc9d97d7b8ba9a4183c",
+          "sha256": "08873c2e0e918cf3194c7e7d7c81cac34d117d82611e2d4082d814f6b3d40944",
+          "direction": "UCOPE"
+        }
+      ],
+      "snapshot": true
+    },
+    {
+      "task_path": "docs/research/portfolio/pro_packets/20260909_foundations_special_review/source_snapshots/504e476f8c2c049821970ec56db33590a7895355/experiments/candidates/ucope/uav_motion_prefix_b01/policy.py",
+      "task_commit_sha": null,
+      "originals": [
+        {
+          "id": "SCDMP-code-051",
+          "path": "experiments/candidates/ucope/uav_motion_prefix_b01/policy.py",
+          "commit_sha": "7d0fc9d0091e046617493a1b23bbbf07297821cf",
+          "git_blob": "504e476f8c2c049821970ec56db33590a7895355",
+          "sha256": "888638cb762e6449bc3f9d200e7f483cf52a21c342ea485d96c8fc580c6615f0",
+          "direction": "SCDMP"
+        },
+        {
+          "id": "VSPC1-code-078",
+          "path": "experiments/candidates/ucope/uav_motion_prefix_b01/policy.py",
+          "commit_sha": "23ebb0f5e22286d9ea77a145f980bedacc32d9da",
+          "git_blob": "504e476f8c2c049821970ec56db33590a7895355",
+          "sha256": "888638cb762e6449bc3f9d200e7f483cf52a21c342ea485d96c8fc580c6615f0",
+          "direction": "VSPC1"
+        }
+      ],
+      "snapshot": true
+    },
+    {
+      "task_path": "docs/research/portfolio/pro_packets/20260909_foundations_special_review/source_snapshots/9e8174cf08aac2d47cc2b20f7e05421e2078662a/experiments/candidates/ucope/uav_motion_prefix_b01/policy.py",
+      "task_commit_sha": null,
+      "originals": [
+        {
+          "id": "MGTAP-code-113",
+          "path": "experiments/candidates/ucope/uav_motion_prefix_b01/policy.py",
+          "commit_sha": "4f65eefb1b15e44b42d694376630fba0c230cc6c",
+          "git_blob": "9e8174cf08aac2d47cc2b20f7e05421e2078662a",
+          "sha256": "5370d299b933ce0f9e8ce1b7c7d0e10a1172876c8b2be7d629f99ec353df54c4",
+          "direction": "MGTAP"
+        }
+      ],
+      "snapshot": true
+    },
+    {
+      "task_path": "docs/research/portfolio/pro_packets/20260909_foundations_special_review/source_snapshots/4b59281bfb76245dd3283fe860327e35463c2b26/experiments/candidates/ucope/uav_motion_prefix_b01/environment.py",
+      "task_commit_sha": null,
+      "originals": [
+        {
+          "id": "UCOPE-code-010",
+          "path": "experiments/candidates/ucope/uav_motion_prefix_b01/environment.py",
+          "commit_sha": "52bf50a089d3389d9fada0b531e4f4e56e83f9b8",
+          "git_blob": "4b59281bfb76245dd3283fe860327e35463c2b26",
+          "sha256": "fb25e48857cc8531ac9b80f13243ccd6ca88fa5bf2b194a43dffed21c80690e6",
+          "direction": "UCOPE"
+        },
+        {
+          "id": "ACVC-code-099",
+          "path": "experiments/candidates/ucope/uav_motion_prefix_b01/environment.py",
+          "commit_sha": "4e019ca35b930c2216fdfe110ba587e222ca7384",
+          "git_blob": "4b59281bfb76245dd3283fe860327e35463c2b26",
+          "sha256": "fb25e48857cc8531ac9b80f13243ccd6ca88fa5bf2b194a43dffed21c80690e6",
+          "direction": "ACVC"
+        },
+        {
+          "id": "MGTAP-code-111",
+          "path": "experiments/candidates/ucope/uav_motion_prefix_b01/environment.py",
+          "commit_sha": "4f65eefb1b15e44b42d694376630fba0c230cc6c",
+          "git_blob": "4b59281bfb76245dd3283fe860327e35463c2b26",
+          "sha256": "fb25e48857cc8531ac9b80f13243ccd6ca88fa5bf2b194a43dffed21c80690e6",
+          "direction": "MGTAP"
+        }
+      ],
+      "snapshot": true
+    },
+    {
+      "task_path": "docs/research/portfolio/pro_packets/20260909_foundations_special_review/source_snapshots/e6eace082a635237931375856d8fab562c22e28e/experiments/candidates/ucope/uav_motion_prefix_b01/environment.py",
+      "task_commit_sha": null,
+      "originals": [
+        {
+          "id": "SCDMP-code-049",
+          "path": "experiments/candidates/ucope/uav_motion_prefix_b01/environment.py",
+          "commit_sha": "7d0fc9d0091e046617493a1b23bbbf07297821cf",
+          "git_blob": "e6eace082a635237931375856d8fab562c22e28e",
+          "sha256": "871e29bca8de89b8fee8fbe61f46e668ac140693655178e8ecc1c3b8ac5461f1",
+          "direction": "SCDMP"
+        },
+        {
+          "id": "VSPC1-code-076",
+          "path": "experiments/candidates/ucope/uav_motion_prefix_b01/environment.py",
+          "commit_sha": "23ebb0f5e22286d9ea77a145f980bedacc32d9da",
+          "git_blob": "e6eace082a635237931375856d8fab562c22e28e",
+          "sha256": "871e29bca8de89b8fee8fbe61f46e668ac140693655178e8ecc1c3b8ac5461f1",
+          "direction": "VSPC1"
+        }
+      ],
+      "snapshot": true
+    },
+    {
+      "task_path": "envs/pettingzoo/uav_env.py",
+      "task_commit_sha": "52bf50a089d3389d9fada0b531e4f4e56e83f9b8",
+      "originals": [
+        {
+          "id": "UCOPE-code-011",
+          "path": "envs/pettingzoo/uav_env.py",
+          "commit_sha": "52bf50a089d3389d9fada0b531e4f4e56e83f9b8",
+          "git_blob": "21b0474e8d7ba6cdc46ed344fa65bf98ef66a907",
+          "sha256": "f50d74cdba92d5ef976c8ba53d2697fc72742683fcb746b404b8c8807f463803",
+          "direction": "UCOPE"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "envs/pettingzoo/env_adapter.py",
+      "task_commit_sha": "52bf50a089d3389d9fada0b531e4f4e56e83f9b8",
+      "originals": [
+        {
+          "id": "UCOPE-code-012",
+          "path": "envs/pettingzoo/env_adapter.py",
+          "commit_sha": "52bf50a089d3389d9fada0b531e4f4e56e83f9b8",
+          "git_blob": "58da35c3263e00319d90b93169a6d14b0f7e5bda",
+          "sha256": "8b42c1c3e7ef44cb814f79225b4af944b1018ad764dfeb17e9e1cc294df79d40",
+          "direction": "UCOPE"
+        },
+        {
+          "id": "FSD-code-062",
+          "path": "envs/pettingzoo/env_adapter.py",
+          "commit_sha": "08199a932671d9bacdbe4eb0bfebab38c37fca1f",
+          "git_blob": "58da35c3263e00319d90b93169a6d14b0f7e5bda",
+          "sha256": "8b42c1c3e7ef44cb814f79225b4af944b1018ad764dfeb17e9e1cc294df79d40",
+          "direction": "FSD"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_B01_SCIENCE_CARD_20260909.md",
+      "task_commit_sha": "387a40f3f1c15ba0ddc4c59d9245ff2b47bc2358",
+      "originals": [
+        {
+          "id": "FOLR-card-013",
+          "path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_B01_SCIENCE_CARD_20260909.md",
+          "commit_sha": "387a40f3f1c15ba0ddc4c59d9245ff2b47bc2358",
+          "git_blob": "bbf202119d892d63308cc08fea12a9837deee9c9",
+          "sha256": "0e474046e62eea957f92b5b5e532a2033adfc51a4f358c168f51473880602f31",
+          "direction": "FOLR"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_B01_INTAKE_20260909.md",
+      "task_commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+      "originals": [
+        {
+          "id": "FOLR-intake-014",
+          "path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_B01_INTAKE_20260909.md",
+          "commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+          "git_blob": "a84814550ea35ce6131c79038233ce51925f189f",
+          "sha256": "920a2181a1cbe55d772fd358e5171ba638489918c7f2bad64fc35b1e923e4d17",
+          "direction": "FOLR"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_B01_RESULT_EVIDENCE_20260909.md",
+      "task_commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+      "originals": [
+        {
+          "id": "FOLR-result-015",
+          "path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_B01_RESULT_EVIDENCE_20260909.md",
+          "commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+          "git_blob": "d1b98bbb704e81f6176d490ea083b8ca2b02a607",
+          "sha256": "6b72f42b37a79c670a0dd81b27a6126f9327db7f97393c16daad6112f3869bbe",
+          "direction": "FOLR"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_B01_RESULT_SUMMARY_20260909.json",
+      "task_commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+      "originals": [
+        {
+          "id": "FOLR-result-016",
+          "path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_B01_RESULT_SUMMARY_20260909.json",
+          "commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+          "git_blob": "41e3c3b10424a75a5e11824a65078ecdfb54a070",
+          "sha256": "3270e807fb7b88460e21de5e6fae5596c94ab5b3735a9d0238a3db91a35d74f7",
+          "direction": "FOLR"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "docs/research/candidates/vap_folr_core/DIRECTION.md",
+      "task_commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+      "originals": [
+        {
+          "id": "FOLR-direction-017",
+          "path": "docs/research/candidates/vap_folr_core/DIRECTION.md",
+          "commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+          "git_blob": "0006973b2d55e73f4bbcd84a42b9e1e04c713f43",
+          "sha256": "658ddb13e1d56622cc9d0addc7880dfef7fd2c0f0c1dfa7fe40906b710cf4eae",
+          "direction": "FOLR"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "scripts/run_folr_public_lifecycle_b01.py",
+      "task_commit_sha": "387a40f3f1c15ba0ddc4c59d9245ff2b47bc2358",
+      "originals": [
+        {
+          "id": "FOLR-code-018",
+          "path": "scripts/run_folr_public_lifecycle_b01.py",
+          "commit_sha": "387a40f3f1c15ba0ddc4c59d9245ff2b47bc2358",
+          "git_blob": "0c465876320084481a74e53f3d40623924d8f3c3",
+          "sha256": "cf3f71dbb7220c7a5cb86efef2ba942e631af4e8f3f18cbdb9286bfc0becb9cd",
+          "direction": "FOLR"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/environment.py",
+      "task_commit_sha": "387a40f3f1c15ba0ddc4c59d9245ff2b47bc2358",
+      "originals": [
+        {
+          "id": "FOLR-code-019",
+          "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/environment.py",
+          "commit_sha": "387a40f3f1c15ba0ddc4c59d9245ff2b47bc2358",
+          "git_blob": "523719a035bd22345f19f2f760b8e2b505f086d8",
+          "sha256": "a413d3ea7c10b40e5d9ce92d4006696b15695a14de63b7f6aad93cf0416f724a",
+          "direction": "FOLR"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/collection.py",
+      "task_commit_sha": "387a40f3f1c15ba0ddc4c59d9245ff2b47bc2358",
+      "originals": [
+        {
+          "id": "FOLR-code-020",
+          "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/collection.py",
+          "commit_sha": "387a40f3f1c15ba0ddc4c59d9245ff2b47bc2358",
+          "git_blob": "eb15cbb11c8c351875e422b06c836d9248e4e2ab",
+          "sha256": "9e017d4848fef8b16b84703bc842664e4c9658d97b1a4e29f9b15ed2a3d1383b",
+          "direction": "FOLR"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/learner.py",
+      "task_commit_sha": "387a40f3f1c15ba0ddc4c59d9245ff2b47bc2358",
+      "originals": [
+        {
+          "id": "FOLR-code-021",
+          "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/learner.py",
+          "commit_sha": "387a40f3f1c15ba0ddc4c59d9245ff2b47bc2358",
+          "git_blob": "250fe41e2631335930998116c519dcc530cf0695",
+          "sha256": "01770613528bc8e1f3b86c4cafa934dda98c9639490733a123b101c48723e54a",
+          "direction": "FOLR"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/model.py",
+      "task_commit_sha": "387a40f3f1c15ba0ddc4c59d9245ff2b47bc2358",
+      "originals": [
+        {
+          "id": "FOLR-code-022",
+          "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/model.py",
+          "commit_sha": "387a40f3f1c15ba0ddc4c59d9245ff2b47bc2358",
+          "git_blob": "72b265860551c990b4da2160d4ccb551e51997b8",
+          "sha256": "8fc9423c09f79a494a4f0250bcdd642dd3613eca02a30a5079f53449e3df7e15",
+          "direction": "FOLR"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/flex_qmix.py",
+      "task_commit_sha": "387a40f3f1c15ba0ddc4c59d9245ff2b47bc2358",
+      "originals": [
+        {
+          "id": "FOLR-code-023",
+          "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/flex_qmix.py",
+          "commit_sha": "387a40f3f1c15ba0ddc4c59d9245ff2b47bc2358",
+          "git_blob": "006bb0573f4c4bcfbdd709ed191d30b4d7e972ed",
+          "sha256": "ae141219443ad169c5b7f58608e6785eadbd60a8de63c2d9366716ddd19fed9a",
+          "direction": "FOLR"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/native_env.py",
+      "task_commit_sha": "387a40f3f1c15ba0ddc4c59d9245ff2b47bc2358",
+      "originals": [
+        {
+          "id": "FOLR-code-024",
+          "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/native_env.py",
+          "commit_sha": "387a40f3f1c15ba0ddc4c59d9245ff2b47bc2358",
+          "git_blob": "f1a5e40a3008aed1ef2d8c49298a87c2acf9e4da",
+          "sha256": "dc342eefc74af9be788b006dfc70ef471088380543a3d005af19b0309d57fc86",
+          "direction": "FOLR"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_TBCFV_B03_ACTOR100_SCIENCE_CARD_20260909.md",
+      "task_commit_sha": "ad2fdfb854e295d6d9dddb229dd17cde58465919",
+      "originals": [
+        {
+          "id": "RCLE-card-025",
+          "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_TBCFV_B03_ACTOR100_SCIENCE_CARD_20260909.md",
+          "commit_sha": "ad2fdfb854e295d6d9dddb229dd17cde58465919",
+          "git_blob": "c8edc8a67292640e3f7b86f43648903ad7ad4b2d",
+          "sha256": "2863250ddc127b0d7d8d85071f071574f9585a06076bc852f42513372a6ddc41",
+          "direction": "RCLE"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_TBCFV_B03_ACTOR100_RESULT_EVIDENCE_20260909.md",
+      "task_commit_sha": "813d236fa8a9ed60bae5bbe1827b912b743f38b3",
+      "originals": [
+        {
+          "id": "RCLE-result-026",
+          "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_TBCFV_B03_ACTOR100_RESULT_EVIDENCE_20260909.md",
+          "commit_sha": "813d236fa8a9ed60bae5bbe1827b912b743f38b3",
+          "git_blob": "1c470ad2bf91d3eb1b37f979520b8a9a03860483",
+          "sha256": "228c5cfbf4efbfa9bed52fa0dd35aeed469ee1c688965b50fa53d70dd9c45d03",
+          "direction": "RCLE"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_TBCFV_B03_ACTOR100_RESULT_SUMMARY_20260909.json",
+      "task_commit_sha": "813d236fa8a9ed60bae5bbe1827b912b743f38b3",
+      "originals": [
+        {
+          "id": "RCLE-result-027",
+          "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_TBCFV_B03_ACTOR100_RESULT_SUMMARY_20260909.json",
+          "commit_sha": "813d236fa8a9ed60bae5bbe1827b912b743f38b3",
+          "git_blob": "453e3456ede0fd13e84d36f637120eed54913ba6",
+          "sha256": "77d3dc8d94f6979de839daca158da029bede453df684c68f9cd163ecea90de7c",
+          "direction": "RCLE"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_TBCFV_B03_ACTOR100_RAW_ROWS_20260909.csv",
+      "task_commit_sha": "813d236fa8a9ed60bae5bbe1827b912b743f38b3",
+      "originals": [
+        {
+          "id": "RCLE-result-028",
+          "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_TBCFV_B03_ACTOR100_RAW_ROWS_20260909.csv",
+          "commit_sha": "813d236fa8a9ed60bae5bbe1827b912b743f38b3",
+          "git_blob": "e48ab04795cc9fe28f2352a0179b9a9752a68bf1",
+          "sha256": "d367ddb0a80375fe71ffe7c2ae907471637cc4e37ff4b948f5786d617be7b189",
+          "direction": "RCLE"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_TBCFV_B03_ACTOR100_TRAINING_CURVES_20260909.json",
+      "task_commit_sha": "813d236fa8a9ed60bae5bbe1827b912b743f38b3",
+      "originals": [
+        {
+          "id": "RCLE-result-029",
+          "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_TBCFV_B03_ACTOR100_TRAINING_CURVES_20260909.json",
+          "commit_sha": "813d236fa8a9ed60bae5bbe1827b912b743f38b3",
+          "git_blob": "149df7f626e2689c3984fa308ebe0814e388f645",
+          "sha256": "072208f2281a2f92f8b79637b339e7dfdc8172baf2268b1366f858dc6e62da5f",
+          "direction": "RCLE"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_TBCFV_POST_A02_INNOVATOR_INTAKE_20260909.md",
+      "task_commit_sha": "61a7c33a4619be1ed96be3ee10b65058f09026e2",
+      "originals": [
+        {
+          "id": "RCLE-intake-030",
+          "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_TBCFV_POST_A02_INNOVATOR_INTAKE_20260909.md",
+          "commit_sha": "61a7c33a4619be1ed96be3ee10b65058f09026e2",
+          "git_blob": "6700111d028031e7d4c2c155ea39cfab1b7da311",
+          "sha256": "f1da8f5d021998ec7400f0a4cc118d41165264c0821077f91f3c40819bdd2317",
+          "direction": "RCLE"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "docs/research/candidates/roster_consistent_latent_exploration/DIRECTION.md",
+      "task_commit_sha": "905be66c868ae2840a10243e0696bcd674127f3a",
+      "originals": [
+        {
+          "id": "RCLE-direction-031",
+          "path": "docs/research/candidates/roster_consistent_latent_exploration/DIRECTION.md",
+          "commit_sha": "905be66c868ae2840a10243e0696bcd674127f3a",
+          "git_blob": "bd9f9f09de768f87c831d51a29804255cde6a439",
+          "sha256": "f77dd87481983e8250ee4d885a1e54f85f7550378b8d3d673bb7922c98dc63dc",
+          "direction": "RCLE"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "scripts/run_rcle_tbcfv_b03.py",
+      "task_commit_sha": "ad2fdfb854e295d6d9dddb229dd17cde58465919",
+      "originals": [
+        {
+          "id": "RCLE-code-032",
+          "path": "scripts/run_rcle_tbcfv_b03.py",
+          "commit_sha": "ad2fdfb854e295d6d9dddb229dd17cde58465919",
+          "git_blob": "0645d62c23df5e9190f408a17f679cf79bc900cd",
+          "sha256": "240091e2427104bba1991d0f9e67c48a7b47a793a5e7bd93ced334c12d39d02c",
+          "direction": "RCLE"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "experiments/candidates/roster_consistent_latent_exploration_tbcfv_b03/study.py",
+      "task_commit_sha": "ad2fdfb854e295d6d9dddb229dd17cde58465919",
+      "originals": [
+        {
+          "id": "RCLE-code-033",
+          "path": "experiments/candidates/roster_consistent_latent_exploration_tbcfv_b03/study.py",
+          "commit_sha": "ad2fdfb854e295d6d9dddb229dd17cde58465919",
+          "git_blob": "41f684f2e544b26c3684e147eddcac928ea00cdf",
+          "sha256": "85470f112737e433ca0908ff740edb4340f9781abe40965de5d44685ce96a228",
+          "direction": "RCLE"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "experiments/candidates/roster_consistent_latent_exploration_tbcfv/config.py",
+      "task_commit_sha": "ad2fdfb854e295d6d9dddb229dd17cde58465919",
+      "originals": [
+        {
+          "id": "RCLE-code-034",
+          "path": "experiments/candidates/roster_consistent_latent_exploration_tbcfv/config.py",
+          "commit_sha": "ad2fdfb854e295d6d9dddb229dd17cde58465919",
+          "git_blob": "366500d5cbe3357e234c0225eabf0aed391b57f6",
+          "sha256": "00dcef339c1db82e2bdacc09bcd0ac59980f062ea1307679a91e5d7fec5a73d4",
+          "direction": "RCLE"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "experiments/candidates/roster_consistent_latent_exploration_tbcfv/empirical_runner.py",
+      "task_commit_sha": "ad2fdfb854e295d6d9dddb229dd17cde58465919",
+      "originals": [
+        {
+          "id": "RCLE-code-035",
+          "path": "experiments/candidates/roster_consistent_latent_exploration_tbcfv/empirical_runner.py",
+          "commit_sha": "ad2fdfb854e295d6d9dddb229dd17cde58465919",
+          "git_blob": "fc49d15bf3c9aac7ac0032f8f37b5677bcc8f38a",
+          "sha256": "7ca7cb568489f141f38995f420f05d1fd1ed2f87f6e3b4a75a076308b9826417",
+          "direction": "RCLE"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "experiments/candidates/roster_consistent_latent_exploration_tbcfv/models.py",
+      "task_commit_sha": "ad2fdfb854e295d6d9dddb229dd17cde58465919",
+      "originals": [
+        {
+          "id": "RCLE-code-036",
+          "path": "experiments/candidates/roster_consistent_latent_exploration_tbcfv/models.py",
+          "commit_sha": "ad2fdfb854e295d6d9dddb229dd17cde58465919",
+          "git_blob": "fdcf5eccb53d115c10787e42950afdd6f1707690",
+          "sha256": "7f05cbcbc4f7b09ba4f22c46df7beabfc81658443d300aa3438b03e76abbc5f9",
+          "direction": "RCLE"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "experiments/candidates/roster_consistent_latent_exploration_tbcfv/native_backend.py",
+      "task_commit_sha": "ad2fdfb854e295d6d9dddb229dd17cde58465919",
+      "originals": [
+        {
+          "id": "RCLE-code-037",
+          "path": "experiments/candidates/roster_consistent_latent_exploration_tbcfv/native_backend.py",
+          "commit_sha": "ad2fdfb854e295d6d9dddb229dd17cde58465919",
+          "git_blob": "88c0d9cd1c0b644ab86b0c8d95b10a3e745d7ee3",
+          "sha256": "1e66532c4cdc45a16faca5bb8b4f67b73d7ce4734b2214dc798abecc6fc9b834",
+          "direction": "RCLE"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "experiments/candidates/roster_consistent_latent_exploration_tbcfv/native/tbcfv_backend.cpp",
+      "task_commit_sha": "ad2fdfb854e295d6d9dddb229dd17cde58465919",
+      "originals": [
+        {
+          "id": "RCLE-code-038",
+          "path": "experiments/candidates/roster_consistent_latent_exploration_tbcfv/native/tbcfv_backend.cpp",
+          "commit_sha": "ad2fdfb854e295d6d9dddb229dd17cde58465919",
+          "git_blob": "04379bd11916366675004e7f4ad81ea0cf0b2f32",
+          "sha256": "18d45b95a29c1ca8d17b4d192a9328ddc9c56a821a2690f118de44dbf0054819",
+          "direction": "RCLE"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "experiments/candidates/roster_consistent_latent_exploration_tbcfv_b01/study.py",
+      "task_commit_sha": "ad2fdfb854e295d6d9dddb229dd17cde58465919",
+      "originals": [
+        {
+          "id": "RCLE-code-039",
+          "path": "experiments/candidates/roster_consistent_latent_exploration_tbcfv_b01/study.py",
+          "commit_sha": "ad2fdfb854e295d6d9dddb229dd17cde58465919",
+          "git_blob": "c1b773e46043592f127bc3dee9337740474b9a33",
+          "sha256": "9b784801863d430e573bab408b3c9bf5c4fac862ac48b4526478334ffa6d8f38",
+          "direction": "RCLE"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "experiments/candidates/roster_consistent_latent_exploration_tbcfv_b02/study.py",
+      "task_commit_sha": "ad2fdfb854e295d6d9dddb229dd17cde58465919",
+      "originals": [
+        {
+          "id": "RCLE-code-040",
+          "path": "experiments/candidates/roster_consistent_latent_exploration_tbcfv_b02/study.py",
+          "commit_sha": "ad2fdfb854e295d6d9dddb229dd17cde58465919",
+          "git_blob": "3473cade01e24090f9802cd40f7c4f6b74efa861",
+          "sha256": "abd1f972479c0b4f86cdde9a3e9be67d943a2ecfeaeffd4f9020675068a39451",
+          "direction": "RCLE"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_NATIVE_HOLD_RESIDUAL_B01_SCIENCE_CARD_20260909.md",
+      "task_commit_sha": "7d0fc9d0091e046617493a1b23bbbf07297821cf",
+      "originals": [
+        {
+          "id": "SCDMP-card-041",
+          "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_NATIVE_HOLD_RESIDUAL_B01_SCIENCE_CARD_20260909.md",
+          "commit_sha": "7d0fc9d0091e046617493a1b23bbbf07297821cf",
+          "git_blob": "9f7c7d43a97f3e8670b2bb4585e2e69e3f47a1c8",
+          "sha256": "eefc728bd81e40b29da48224875b916874d4b250bf55fe213ac535ef41bbec25",
+          "direction": "SCDMP"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_NATIVE_HOLD_RESIDUAL_B01_INTAKE_20260909.md",
+      "task_commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+      "originals": [
+        {
+          "id": "SCDMP-intake-042",
+          "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_NATIVE_HOLD_RESIDUAL_B01_INTAKE_20260909.md",
+          "commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+          "git_blob": "a6eeb017f358778c1f929a38fb999768713c6e4f",
+          "sha256": "c4009661746162723e7c89b584a5ed296d82554b54bfa03010e52af5c78311b3",
+          "direction": "SCDMP"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_NATIVE_HOLD_RESIDUAL_B01_RESULT_EVIDENCE_20260909.md",
+      "task_commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+      "originals": [
+        {
+          "id": "SCDMP-result-043",
+          "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_NATIVE_HOLD_RESIDUAL_B01_RESULT_EVIDENCE_20260909.md",
+          "commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+          "git_blob": "1e6be68483e30d48c796a611395ef709322af938",
+          "sha256": "54addcfafafb6a35f1596eccd1e88c885c5fea975db25e60767bc36214533479",
+          "direction": "SCDMP"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "docs/research/candidates/semigroup_consistent_duration_model_policy/DIRECTION.md",
+      "task_commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+      "originals": [
+        {
+          "id": "SCDMP-direction-044",
+          "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/DIRECTION.md",
+          "commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+          "git_blob": "2ffab9e48fedd1ae1941359705f1f98d10a7aeac",
+          "sha256": "ec667927daa18c2a7e5918800d7d29766a3b411d026d9c67088812ea196cdf30",
+          "direction": "SCDMP"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "scripts/run_scdmp_native_hold_residual_b01.py",
+      "task_commit_sha": "7d0fc9d0091e046617493a1b23bbbf07297821cf",
+      "originals": [
+        {
+          "id": "SCDMP-code-045",
+          "path": "scripts/run_scdmp_native_hold_residual_b01.py",
+          "commit_sha": "7d0fc9d0091e046617493a1b23bbbf07297821cf",
+          "git_blob": "388b228621fdf8b4ea47bd2891186a701001e171",
+          "sha256": "df90ddb8059afee49c738781374d9968092fc67e05705fbeb4ee0bed8cb6f0f3",
+          "direction": "SCDMP"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "experiments/candidates/scdmp_variable_k/native_hold_residual_b01/study.py",
+      "task_commit_sha": "7d0fc9d0091e046617493a1b23bbbf07297821cf",
+      "originals": [
+        {
+          "id": "SCDMP-code-046",
+          "path": "experiments/candidates/scdmp_variable_k/native_hold_residual_b01/study.py",
+          "commit_sha": "7d0fc9d0091e046617493a1b23bbbf07297821cf",
+          "git_blob": "0b479e47f875fb240fc1ef794f75dac4d5fb169b",
+          "sha256": "a17dba9ae81462dc1ec62951ab51d58050e150cdef398094c63abdabd5a61f4b",
+          "direction": "SCDMP"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "experiments/candidates/scdmp_variable_k/native_hold_residual_b01/learner.py",
+      "task_commit_sha": "7d0fc9d0091e046617493a1b23bbbf07297821cf",
+      "originals": [
+        {
+          "id": "SCDMP-code-047",
+          "path": "experiments/candidates/scdmp_variable_k/native_hold_residual_b01/learner.py",
+          "commit_sha": "7d0fc9d0091e046617493a1b23bbbf07297821cf",
+          "git_blob": "1cc0c07c2ec74f2312d282246cd3c3ac9e3946af",
+          "sha256": "588f0a5225cc760a54303cd94ab06174c4c552f42591e0de166cb2ed30e2f4f1",
+          "direction": "SCDMP"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_INDIVIDUAL_RENEWAL_B02_SCIENCE_CARD_20260908.md",
+      "task_commit_sha": "08199a932671d9bacdbe4eb0bfebab38c37fca1f",
+      "originals": [
+        {
+          "id": "FSD-card-052",
+          "path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_INDIVIDUAL_RENEWAL_B02_SCIENCE_CARD_20260908.md",
+          "commit_sha": "08199a932671d9bacdbe4eb0bfebab38c37fca1f",
+          "git_blob": "ae78db342d12c639fbaad058eb6a29e4e84d930f",
+          "sha256": "cc06794763aa7c15e79514fd7f67eebcec48422e1b666baa0ed07a2004010782",
+          "direction": "FSD"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_INDIVIDUAL_RENEWAL_B02_P72_RESULT_EVIDENCE_20260909.md",
+      "task_commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+      "originals": [
+        {
+          "id": "FSD-result-053",
+          "path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_INDIVIDUAL_RENEWAL_B02_P72_RESULT_EVIDENCE_20260909.md",
+          "commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+          "git_blob": "465a1a59ec066ebaf77a56ae19e924a016a8661c",
+          "sha256": "4b931383d36d8ef804c686c68fda5810144a7fa0df252e4ceabe07950c5075ae",
+          "direction": "FSD"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_INDIVIDUAL_RENEWAL_B02_P72_INTAKE_20260909.md",
+      "task_commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+      "originals": [
+        {
+          "id": "FSD-intake-054",
+          "path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_INDIVIDUAL_RENEWAL_B02_P72_INTAKE_20260909.md",
+          "commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+          "git_blob": "6031279bb46aba00a4b6f14d4336551949f76e8c",
+          "sha256": "187503cb1a18eaf11f4bc24ac8fb710180fa5f47262db412860450d9d1532d68",
+          "direction": "FSD"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "docs/research/candidates/flexible_skill_duration/pro_packets/20260909_p74_post_uav_b02_convergence/CONVERGENCE_INTAKE.md",
+      "task_commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+      "originals": [
+        {
+          "id": "FSD-intake-055",
+          "path": "docs/research/candidates/flexible_skill_duration/pro_packets/20260909_p74_post_uav_b02_convergence/CONVERGENCE_INTAKE.md",
+          "commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+          "git_blob": "6fcf912b6f7311883a5e93aec00152f7b0b9718e",
+          "sha256": "a3a3f141428af7b324840633b1dd09b91e682ec12e6b483cb186ec220bbabadc",
+          "direction": "FSD"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "docs/research/candidates/flexible_skill_duration/DIRECTION.md",
+      "task_commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+      "originals": [
+        {
+          "id": "FSD-direction-056",
+          "path": "docs/research/candidates/flexible_skill_duration/DIRECTION.md",
+          "commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+          "git_blob": "ed218beb08d841e3f7fc8e41be7bd2ed571e1aa2",
+          "sha256": "c0bc5e2aea094a0e45616520c603cfe2ba3cab1c927118fad6be64f8ef62ecda",
+          "direction": "FSD"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "scripts/run_fsd_uav_individual_renewal_b02.py",
+      "task_commit_sha": "08199a932671d9bacdbe4eb0bfebab38c37fca1f",
+      "originals": [
+        {
+          "id": "FSD-code-057",
+          "path": "scripts/run_fsd_uav_individual_renewal_b02.py",
+          "commit_sha": "08199a932671d9bacdbe4eb0bfebab38c37fca1f",
+          "git_blob": "08f4d63d3389b212e057e2d3eda4ede3cf24841d",
+          "sha256": "39b85c67256c2d16f667e635e66f9d15e5884f3bd29f0d02a5d34971f6b63043",
+          "direction": "FSD"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "scripts/run_fsd_uav_individual_renewal_b01.py",
+      "task_commit_sha": "08199a932671d9bacdbe4eb0bfebab38c37fca1f",
+      "originals": [
+        {
+          "id": "FSD-code-058",
+          "path": "scripts/run_fsd_uav_individual_renewal_b01.py",
+          "commit_sha": "08199a932671d9bacdbe4eb0bfebab38c37fca1f",
+          "git_blob": "f9863674859e93a55d275a1e9835be66403f4261",
+          "sha256": "31775a944b1f6b95dde37078e49250919217102be8d2a7a95870295582c452c4",
+          "direction": "FSD"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "scripts/run_flexible_skill_duration_e0.py",
+      "task_commit_sha": "08199a932671d9bacdbe4eb0bfebab38c37fca1f",
+      "originals": [
+        {
+          "id": "FSD-code-059",
+          "path": "scripts/run_flexible_skill_duration_e0.py",
+          "commit_sha": "08199a932671d9bacdbe4eb0bfebab38c37fca1f",
+          "git_blob": "dae0ab7274e823acc9fd43cdc37e07e01bcd10ed",
+          "sha256": "84c2cf487b6577563ef27de8b253a1284f6e85560d29cb6f2fd9ec834a193366",
+          "direction": "FSD"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "configs/config_1.py",
+      "task_commit_sha": "08199a932671d9bacdbe4eb0bfebab38c37fca1f",
+      "originals": [
+        {
+          "id": "FSD-code-060",
+          "path": "configs/config_1.py",
+          "commit_sha": "08199a932671d9bacdbe4eb0bfebab38c37fca1f",
+          "git_blob": "4be746b2573de92e01ba54e09e86147402e0348b",
+          "sha256": "c3e6ac74076c50b44b8d6dffb6f00809d8e1b646057e1e85f74dcc4eaa8a63b4",
+          "direction": "FSD"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "envs/pettingzoo/scenario1.py",
+      "task_commit_sha": "08199a932671d9bacdbe4eb0bfebab38c37fca1f",
+      "originals": [
+        {
+          "id": "FSD-code-061",
+          "path": "envs/pettingzoo/scenario1.py",
+          "commit_sha": "08199a932671d9bacdbe4eb0bfebab38c37fca1f",
+          "git_blob": "8fa3e35de12183ebfe55934fb0cb7852b0966145",
+          "sha256": "e5b3eb7d755a7d7866cc7cd01531383bee821f0c6d72a81a3d4fa9cb5954939e",
+          "direction": "FSD"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "hmasd/agent.py",
+      "task_commit_sha": "08199a932671d9bacdbe4eb0bfebab38c37fca1f",
+      "originals": [
+        {
+          "id": "FSD-code-063",
+          "path": "hmasd/agent.py",
+          "commit_sha": "08199a932671d9bacdbe4eb0bfebab38c37fca1f",
+          "git_blob": "83deb59054660d9ca8dd47c48d2eed78ef14a86e",
+          "sha256": "24b103cf52601c8850bc40790aa205873d68809da89b070240ab71534352c27c",
+          "direction": "FSD"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "hmasd/networks.py",
+      "task_commit_sha": "08199a932671d9bacdbe4eb0bfebab38c37fca1f",
+      "originals": [
+        {
+          "id": "FSD-code-064",
+          "path": "hmasd/networks.py",
+          "commit_sha": "08199a932671d9bacdbe4eb0bfebab38c37fca1f",
+          "git_blob": "d2f2da48ab3436f22fe2fa2549e8c43b76aa242b",
+          "sha256": "81e22a3ff16d9281e616e20a87a8bee0cf2c56d24fce73debe0de525cb4d1140",
+          "direction": "FSD"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B13_SCIENCE_CARD_20260909.md",
+      "task_commit_sha": "23ebb0f5e22286d9ea77a145f980bedacc32d9da",
+      "originals": [
+        {
+          "id": "VSPC1-card-065",
+          "path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B13_SCIENCE_CARD_20260909.md",
+          "commit_sha": "23ebb0f5e22286d9ea77a145f980bedacc32d9da",
+          "git_blob": "f012cc0447edd0286b97e4bbd34eeb2b4a1f6fc4",
+          "sha256": "4e1e740ba24266d9cff851f36edd901a581c30718ebe1208983e25ded1da9c44",
+          "direction": "VSPC1"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B13_INTAKE_20260909.md",
+      "task_commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+      "originals": [
+        {
+          "id": "VSPC1-intake-066",
+          "path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B13_INTAKE_20260909.md",
+          "commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+          "git_blob": "4a8080b572338f645aeadf23c6cce6d4128342fa",
+          "sha256": "7a145c48e4647dca7ea33c5a322364f5daa540bc5179688076daed51887ee63b",
+          "direction": "VSPC1"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B13_RESULT_EVIDENCE_20260909.md",
+      "task_commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+      "originals": [
+        {
+          "id": "VSPC1-result-067",
+          "path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B13_RESULT_EVIDENCE_20260909.md",
+          "commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+          "git_blob": "bcd8d8ff71022fb13621c851202fb4507e9ac642",
+          "sha256": "a8fc13a627030042b0c1021c34199e8b0d1fe65ac386c2b0414dad0459837ed4",
+          "direction": "VSPC1"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_P81_CONVERGENCE_INTAKE_20260909.md",
+      "task_commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+      "originals": [
+        {
+          "id": "VSPC1-intake-068",
+          "path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_P81_CONVERGENCE_INTAKE_20260909.md",
+          "commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+          "git_blob": "3c38de8b5dd8dc9d9dd4c3b87579290e6b7acc2d",
+          "sha256": "975b69fb3e13177c19448c48e28b35f1f1c2b6658e32155649a65d8e8dec44a0",
+          "direction": "VSPC1"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "docs/research/candidates/vsp_c1/DIRECTION.md",
+      "task_commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+      "originals": [
+        {
+          "id": "VSPC1-direction-069",
+          "path": "docs/research/candidates/vsp_c1/DIRECTION.md",
+          "commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+          "git_blob": "b08e8d63134b74b359234e97ffc7ab88e386981e",
+          "sha256": "063d9291faba212941c75a7ab0e14f69c741bcfbc0c4cdca95573d8b9a88020b",
+          "direction": "VSPC1"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "scripts/run_vspc1_native_hold_value_b13.py",
+      "task_commit_sha": "23ebb0f5e22286d9ea77a145f980bedacc32d9da",
+      "originals": [
+        {
+          "id": "VSPC1-code-070",
+          "path": "scripts/run_vspc1_native_hold_value_b13.py",
+          "commit_sha": "23ebb0f5e22286d9ea77a145f980bedacc32d9da",
+          "git_blob": "4c01f0c3d1146f0ce8e73356b60039f7385a14ee",
+          "sha256": "8248132b5a1ce3e5d258a1e4dc70caa74420ba5248eb7784c160748f563249ce",
+          "direction": "VSPC1"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "experiments/candidates/vsp_c1/native_hold_value_b01/study.py",
+      "task_commit_sha": "23ebb0f5e22286d9ea77a145f980bedacc32d9da",
+      "originals": [
+        {
+          "id": "VSPC1-code-071",
+          "path": "experiments/candidates/vsp_c1/native_hold_value_b01/study.py",
+          "commit_sha": "23ebb0f5e22286d9ea77a145f980bedacc32d9da",
+          "git_blob": "cd1f5127d21925ffc1e6e193b4f016d1aa7d43c1",
+          "sha256": "73476ae8f6db851702fd7a55959382668a58526bb5d45cd2f4e979e768118557",
+          "direction": "VSPC1"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "experiments/candidates/vsp_c1/native_hold_value_b01/critic.py",
+      "task_commit_sha": "23ebb0f5e22286d9ea77a145f980bedacc32d9da",
+      "originals": [
+        {
+          "id": "VSPC1-code-072",
+          "path": "experiments/candidates/vsp_c1/native_hold_value_b01/critic.py",
+          "commit_sha": "23ebb0f5e22286d9ea77a145f980bedacc32d9da",
+          "git_blob": "f29425ec558c250e15eebeff6e679cf2a27750a1",
+          "sha256": "8e352af844441c2c0049aac3a98d087696e49fc949478ffcaa4cbd19c9a62c47",
+          "direction": "VSPC1"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "experiments/candidates/vsp_c1/native_hold_value_b03/value_normalization.py",
+      "task_commit_sha": "23ebb0f5e22286d9ea77a145f980bedacc32d9da",
+      "originals": [
+        {
+          "id": "VSPC1-code-073",
+          "path": "experiments/candidates/vsp_c1/native_hold_value_b03/value_normalization.py",
+          "commit_sha": "23ebb0f5e22286d9ea77a145f980bedacc32d9da",
+          "git_blob": "5bb58ac94fda961c4f9cd330e9ed96a15e60d50c",
+          "sha256": "989748345ef59ac672b7f6b326d4230e3a01061c91d25ce8c1137088a8971c55",
+          "direction": "VSPC1"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "experiments/candidates/vsp_c1/native_hold_value_b05/critic.py",
+      "task_commit_sha": "23ebb0f5e22286d9ea77a145f980bedacc32d9da",
+      "originals": [
+        {
+          "id": "VSPC1-code-074",
+          "path": "experiments/candidates/vsp_c1/native_hold_value_b05/critic.py",
+          "commit_sha": "23ebb0f5e22286d9ea77a145f980bedacc32d9da",
+          "git_blob": "18e073049e87bbd2b61b910e2bc9a7dd2ceb15c0",
+          "sha256": "e23ca312dda6052adc893f6bab71bf349cd37f0f0f6ef350696a7dfc172437f7",
+          "direction": "VSPC1"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "docs/research/candidates/vsp_03/VSP03_B05_P76_SCIENCE_CARD_20260909.md",
+      "task_commit_sha": "32ce8a7355b86bee64956e3d24b76d01c31a8d77",
+      "originals": [
+        {
+          "id": "VSP03-card-079",
+          "path": "docs/research/candidates/vsp_03/VSP03_B05_P76_SCIENCE_CARD_20260909.md",
+          "commit_sha": "32ce8a7355b86bee64956e3d24b76d01c31a8d77",
+          "git_blob": "9d8fd8bca11b2599b499bd42751f5a9b32e9b4d4",
+          "sha256": "c1408027a48cedf36f66683232fb1237a0eaa76b877c17d804df095bb46eed7a",
+          "direction": "VSP03"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "docs/research/candidates/vsp_03/VSP03_B05_P76_RESULT_EVIDENCE_20260909.md",
+      "task_commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+      "originals": [
+        {
+          "id": "VSP03-result-080",
+          "path": "docs/research/candidates/vsp_03/VSP03_B05_P76_RESULT_EVIDENCE_20260909.md",
+          "commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+          "git_blob": "071e8f821b75d3e2e2f7af7f693d54e0ee7cc15b",
+          "sha256": "f743345763f7d56d6b6c81dbc13fe8b95358e381b2e2fef5195d54afc5359e53",
+          "direction": "VSP03"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "docs/research/candidates/vsp_03/VSP03_B05_P76_INTAKE_20260909.md",
+      "task_commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+      "originals": [
+        {
+          "id": "VSP03-intake-081",
+          "path": "docs/research/candidates/vsp_03/VSP03_B05_P76_INTAKE_20260909.md",
+          "commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+          "git_blob": "388467a8438e2343446b253daf64e57ad2c648be",
+          "sha256": "a970ec21e778d74395ba31f4c752e68e91dc7e8ca053bce402d439090ceabc1c",
+          "direction": "VSP03"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "docs/research/candidates/vsp_03/VSP03_B05_P76_RESULT_ARTIFACTS_20260909/science/summary.json",
+      "task_commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+      "originals": [
+        {
+          "id": "VSP03-result-082",
+          "path": "docs/research/candidates/vsp_03/VSP03_B05_P76_RESULT_ARTIFACTS_20260909/science/summary.json",
+          "commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+          "git_blob": "f3158a281c3b1441d30b08961846f225d59a5ccb",
+          "sha256": "5facdb93ebbb7a3700a0f4bf8776740f8736b6faa94b028eca25bf23ccf24834",
+          "direction": "VSP03"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "docs/research/candidates/vsp_03/VSP03_POST_B05_CONVERGENCE_INTAKE_20260909.md",
+      "task_commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+      "originals": [
+        {
+          "id": "VSP03-intake-083",
+          "path": "docs/research/candidates/vsp_03/VSP03_POST_B05_CONVERGENCE_INTAKE_20260909.md",
+          "commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+          "git_blob": "dae1f22e03464bb001ae421677652100c06eb1c3",
+          "sha256": "8cb85e31fba90324daa5b13de83ab5f829c6ed95467bd1b7d47b606c83f8a31b",
+          "direction": "VSP03"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "docs/research/candidates/vsp_03/DIRECTION.md",
+      "task_commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+      "originals": [
+        {
+          "id": "VSP03-direction-084",
+          "path": "docs/research/candidates/vsp_03/DIRECTION.md",
+          "commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+          "git_blob": "8232c280bfe33de6b924df2050ba6831920b245e",
+          "sha256": "bde85995d8db6fcc69b2b7c26ca19072a148cbe57c7a1e6a61fda983b0747e3c",
+          "direction": "VSP03"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "scripts/run_vsp03_b05.py",
+      "task_commit_sha": "32ce8a7355b86bee64956e3d24b76d01c31a8d77",
+      "originals": [
+        {
+          "id": "VSP03-code-085",
+          "path": "scripts/run_vsp03_b05.py",
+          "commit_sha": "32ce8a7355b86bee64956e3d24b76d01c31a8d77",
+          "git_blob": "075d2e36057fd387cb5dd47f3d58873a51e25bb8",
+          "sha256": "d2c8f63e5427869c726ba783a3b237c5ccd28036e14d0bf67724381ce4f26da8",
+          "direction": "VSP03"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "experiments/candidates/vsp_03/vsp03_b03/b03.py",
+      "task_commit_sha": "32ce8a7355b86bee64956e3d24b76d01c31a8d77",
+      "originals": [
+        {
+          "id": "VSP03-code-086",
+          "path": "experiments/candidates/vsp_03/vsp03_b03/b03.py",
+          "commit_sha": "32ce8a7355b86bee64956e3d24b76d01c31a8d77",
+          "git_blob": "da81197a67e6e7113c64558d016ae86ac40606f8",
+          "sha256": "ca8e6af3881591ddccc22314c490dde5a5edc598a93c37c569c603af234bf9b3",
+          "direction": "VSP03"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "experiments/candidates/vsp_03/vsp03_b02/b02.py",
+      "task_commit_sha": "32ce8a7355b86bee64956e3d24b76d01c31a8d77",
+      "originals": [
+        {
+          "id": "VSP03-code-087",
+          "path": "experiments/candidates/vsp_03/vsp03_b02/b02.py",
+          "commit_sha": "32ce8a7355b86bee64956e3d24b76d01c31a8d77",
+          "git_blob": "381b82795625442414bfb22dcee07009d5c7747d",
+          "sha256": "9cb1bf9cc44e5cad8185997e3d6b2e71d1d581580c283b1cc77599e80da86be4",
+          "direction": "VSP03"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "experiments/candidates/vsp_03/vsp03_b01/b01.py",
+      "task_commit_sha": "32ce8a7355b86bee64956e3d24b76d01c31a8d77",
+      "originals": [
+        {
+          "id": "VSP03-code-088",
+          "path": "experiments/candidates/vsp_03/vsp03_b01/b01.py",
+          "commit_sha": "32ce8a7355b86bee64956e3d24b76d01c31a8d77",
+          "git_blob": "ba0db7107e19ca5404e999f0aed9ff49bd8ec798",
+          "sha256": "39481f270f2d26349f872b5965754b918f0e5cfd6517e7f043afc1571fd195ed",
+          "direction": "VSP03"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_B02_SCIENCE_CARD_20260909.md",
+      "task_commit_sha": "4e019ca35b930c2216fdfe110ba587e222ca7384",
+      "originals": [
+        {
+          "id": "ACVC-card-089",
+          "path": "docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_B02_SCIENCE_CARD_20260909.md",
+          "commit_sha": "4e019ca35b930c2216fdfe110ba587e222ca7384",
+          "git_blob": "07dec0aaa24f1073dea14485430ed1e8f5bb38f9",
+          "sha256": "0cd76e1ad6d24e73c4db7b8fccbb6a1db4482aa3340ffd1e1cbc2a0c92c4337b",
+          "direction": "ACVC"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_B02_INTAKE_20260909.md",
+      "task_commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+      "originals": [
+        {
+          "id": "ACVC-intake-090",
+          "path": "docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_B02_INTAKE_20260909.md",
+          "commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+          "git_blob": "b816bf62dc886e45776d697fe6ecc5da722762ad",
+          "sha256": "649e3e138db715af2694d1613a25fdd5db71e5d778f809e16218a0e3b2c89f11",
+          "direction": "ACVC"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_B02_RESULT_EVIDENCE_20260909.md",
+      "task_commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+      "originals": [
+        {
+          "id": "ACVC-result-091",
+          "path": "docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_B02_RESULT_EVIDENCE_20260909.md",
+          "commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+          "git_blob": "0dea2dda67cf1db6c9517128959d4877f950b217",
+          "sha256": "12d6dd1978a705f3fee7fb3f1cb20b5b213ef09370cfa5a0e8810e861c04da21",
+          "direction": "ACVC"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_P80_CONVERGENCE_INTAKE_20260909.md",
+      "task_commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+      "originals": [
+        {
+          "id": "ACVC-intake-092",
+          "path": "docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_P80_CONVERGENCE_INTAKE_20260909.md",
+          "commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+          "git_blob": "e4bf4cd3fd2bdd4fda53f48f4b30a277f95becdd",
+          "sha256": "06a17c7e22133ddd0f7b2ca4fa87762979bdae7798339bdf34b03b4d475a0ac3",
+          "direction": "ACVC"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "docs/research/candidates/acvc/DIRECTION.md",
+      "task_commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+      "originals": [
+        {
+          "id": "ACVC-direction-093",
+          "path": "docs/research/candidates/acvc/DIRECTION.md",
+          "commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+          "git_blob": "48519b473ea130fb7faeaef51fd61ef5a0fd1560",
+          "sha256": "f7124d7e763f21138fb70fc5de25b72683e7a3909631ef38507576161ece699c",
+          "direction": "ACVC"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "scripts/run_acvc_native_link_loss_b01.py",
+      "task_commit_sha": "4e019ca35b930c2216fdfe110ba587e222ca7384",
+      "originals": [
+        {
+          "id": "ACVC-code-094",
+          "path": "scripts/run_acvc_native_link_loss_b01.py",
+          "commit_sha": "4e019ca35b930c2216fdfe110ba587e222ca7384",
+          "git_blob": "233e8ae36d047a7a0816132376380426fd83fb24",
+          "sha256": "ca20520d83ec776a96311496d2b0f52d608632b10a096d10bc93ab87537163e8",
+          "direction": "ACVC"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "experiments/candidates/acvc/native_link_loss_b01/binding.py",
+      "task_commit_sha": "4e019ca35b930c2216fdfe110ba587e222ca7384",
+      "originals": [
+        {
+          "id": "ACVC-code-095",
+          "path": "experiments/candidates/acvc/native_link_loss_b01/binding.py",
+          "commit_sha": "4e019ca35b930c2216fdfe110ba587e222ca7384",
+          "git_blob": "ba7ba363199c8a44fc4056bf69157813f89524bf",
+          "sha256": "3af648c75eec9cbb80b253b047bcf08e6268fcbbe69ad761cff028eabd830e35",
+          "direction": "ACVC"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "experiments/candidates/acvc/native_link_loss_b01/model.py",
+      "task_commit_sha": "4e019ca35b930c2216fdfe110ba587e222ca7384",
+      "originals": [
+        {
+          "id": "ACVC-code-096",
+          "path": "experiments/candidates/acvc/native_link_loss_b01/model.py",
+          "commit_sha": "4e019ca35b930c2216fdfe110ba587e222ca7384",
+          "git_blob": "ffe192a9ff060e1c2059d901240914c39e115807",
+          "sha256": "91041fef3e31a616d944a6af2119c962cc9686108700d7734fcbba56fb4d20c3",
+          "direction": "ACVC"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "experiments/candidates/acvc/native_link_loss_b01/learner.py",
+      "task_commit_sha": "4e019ca35b930c2216fdfe110ba587e222ca7384",
+      "originals": [
+        {
+          "id": "ACVC-code-097",
+          "path": "experiments/candidates/acvc/native_link_loss_b01/learner.py",
+          "commit_sha": "4e019ca35b930c2216fdfe110ba587e222ca7384",
+          "git_blob": "ea95f16d99ba9da2279f3f396c10e303ef223417",
+          "sha256": "98fb55050f68dc589f8c545725dd89e1b9998e82dc97a7c4feb2f7dbe03314e4",
+          "direction": "ACVC"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "experiments/candidates/acvc/native_link_loss_b01/report.py",
+      "task_commit_sha": "4e019ca35b930c2216fdfe110ba587e222ca7384",
+      "originals": [
+        {
+          "id": "ACVC-code-098",
+          "path": "experiments/candidates/acvc/native_link_loss_b01/report.py",
+          "commit_sha": "4e019ca35b930c2216fdfe110ba587e222ca7384",
+          "git_blob": "a9507e3d5ca0b4bba22c1f826a15eb15071ae2e8",
+          "sha256": "b44481a7aba68b0190c7a6c43b7c2056fb45a04e10c2907cc50aff48ffc22794",
+          "direction": "ACVC"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_NATIVE_GROUND_GEOMETRY_B01_SCIENCE_CARD_20260908.md",
+      "task_commit_sha": "4f65eefb1b15e44b42d694376630fba0c230cc6c",
+      "originals": [
+        {
+          "id": "MGTAP-card-100",
+          "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_NATIVE_GROUND_GEOMETRY_B01_SCIENCE_CARD_20260908.md",
+          "commit_sha": "4f65eefb1b15e44b42d694376630fba0c230cc6c",
+          "git_blob": "0547896730e45e559a41107eea753a19a6631b0d",
+          "sha256": "97debb3069dd916e8f04ac4c6e3b9670f5ca08d8dbb27929c1586e12040d45eb",
+          "direction": "MGTAP"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_NATIVE_GROUND_GEOMETRY_B01_P75_INTAKE_20260909.md",
+      "task_commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+      "originals": [
+        {
+          "id": "MGTAP-intake-101",
+          "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_NATIVE_GROUND_GEOMETRY_B01_P75_INTAKE_20260909.md",
+          "commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+          "git_blob": "941848393aaba1bb77f9e06eacd6f8b85bfc53a5",
+          "sha256": "56d87d42bd9477135ef04208d5f7bff56a38067b77f82628fbd35131d6873b19",
+          "direction": "MGTAP"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_NATIVE_GROUND_GEOMETRY_B01_P75_TECHNICAL_RESULT.json",
+      "task_commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+      "originals": [
+        {
+          "id": "MGTAP-result-102",
+          "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_NATIVE_GROUND_GEOMETRY_B01_P75_TECHNICAL_RESULT.json",
+          "commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+          "git_blob": "54ef38a1fa338a23da57a2284c006ddd29509a50",
+          "sha256": "dded61a1c872a69c0a95358b4af4d7d7bc3d086cb5d62b076056ca9e4c137409",
+          "direction": "MGTAP"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_NATIVE_GROUND_GEOMETRY_B01_P75_8201_TECHNICAL_COLLECTION.json",
+      "task_commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+      "originals": [
+        {
+          "id": "MGTAP-result-103",
+          "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_NATIVE_GROUND_GEOMETRY_B01_P75_8201_TECHNICAL_COLLECTION.json",
+          "commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+          "git_blob": "2b1e4e97161d25acae21835140d3710da99459af",
+          "sha256": "17df3a8ba1a8b29e4a86c6a77012dcd180170b89fb911e25b7be68d0a99e14ce",
+          "direction": "MGTAP"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_NATIVE_GROUND_GEOMETRY_B01_P75_8202_TECHNICAL_COLLECTION.json",
+      "task_commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+      "originals": [
+        {
+          "id": "MGTAP-result-104",
+          "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_NATIVE_GROUND_GEOMETRY_B01_P75_8202_TECHNICAL_COLLECTION.json",
+          "commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+          "git_blob": "96b227a3cdb0102eea3d3402244a3da0067b9c6c",
+          "sha256": "23f8f34c65e2d270f7da6a6ac877ec2257064136d26b56c57d18bc211c17ffb3",
+          "direction": "MGTAP"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_NATIVE_GROUND_GEOMETRY_B01_POST_B01_CONVERGENCE_INTAKE_20260909.md",
+      "task_commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+      "originals": [
+        {
+          "id": "MGTAP-intake-105",
+          "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_NATIVE_GROUND_GEOMETRY_B01_POST_B01_CONVERGENCE_INTAKE_20260909.md",
+          "commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+          "git_blob": "06219ee428928ccc2b7d2042f9787f15a787dcc3",
+          "sha256": "5387694954b1fb03b14120836362321bd4af5851e8bc5abafb785d6a4160cfac",
+          "direction": "MGTAP"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "docs/research/candidates/metric_ground_transport_allocation/DIRECTION.md",
+      "task_commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+      "originals": [
+        {
+          "id": "MGTAP-direction-106",
+          "path": "docs/research/candidates/metric_ground_transport_allocation/DIRECTION.md",
+          "commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+          "git_blob": "293b0c5ae982a394a3e9551ddd3134d1e82913df",
+          "sha256": "5c7e7bbc64c868a8e390adfbf902abf21d7e024be4d541fda49712928d7114d3",
+          "direction": "MGTAP"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "scripts/run_mgtap_native_ground_geometry_b01.py",
+      "task_commit_sha": "4f65eefb1b15e44b42d694376630fba0c230cc6c",
+      "originals": [
+        {
+          "id": "MGTAP-code-107",
+          "path": "scripts/run_mgtap_native_ground_geometry_b01.py",
+          "commit_sha": "4f65eefb1b15e44b42d694376630fba0c230cc6c",
+          "git_blob": "63d2d40faf49cc7e0b1ce94b3cc69b443388ea7e",
+          "sha256": "fc4d0d8d4de4592e26ebc672a510b2387476b316ccca88663844a5dcbd591390",
+          "direction": "MGTAP"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "experiments/candidates/metric_ground_transport_allocation/mgtap_native_ground_geometry_b01/runner.py",
+      "task_commit_sha": "4f65eefb1b15e44b42d694376630fba0c230cc6c",
+      "originals": [
+        {
+          "id": "MGTAP-code-108",
+          "path": "experiments/candidates/metric_ground_transport_allocation/mgtap_native_ground_geometry_b01/runner.py",
+          "commit_sha": "4f65eefb1b15e44b42d694376630fba0c230cc6c",
+          "git_blob": "4ce7b7c093715b8de4c01c41ea27a560ccb1b06d",
+          "sha256": "dc86eb5cfc939e85782a6d50a5ab63578e6e1d9d9c9b0a98561a0fa61941e9f1",
+          "direction": "MGTAP"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "experiments/candidates/metric_ground_transport_allocation/mgtap_native_ground_geometry_b01/geometry.py",
+      "task_commit_sha": "4f65eefb1b15e44b42d694376630fba0c230cc6c",
+      "originals": [
+        {
+          "id": "MGTAP-code-109",
+          "path": "experiments/candidates/metric_ground_transport_allocation/mgtap_native_ground_geometry_b01/geometry.py",
+          "commit_sha": "4f65eefb1b15e44b42d694376630fba0c230cc6c",
+          "git_blob": "ad11c172b0b36a34af03464556fb09732c64ea08",
+          "sha256": "4cb405233ac34c5798b39664f4bf709996afb06df50d9dda8518c2baa4fb4307",
+          "direction": "MGTAP"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "docs/research/candidates/commitment_residual_triggered_options/CRTO_NATIVE_COST_B08_SCIENCE_CARD_20260908.md",
+      "task_commit_sha": "d9f643b761d57584de313b1f837d6c2c0becc931",
+      "originals": [
+        {
+          "id": "CRTO-card-114",
+          "path": "docs/research/candidates/commitment_residual_triggered_options/CRTO_NATIVE_COST_B08_SCIENCE_CARD_20260908.md",
+          "commit_sha": "d9f643b761d57584de313b1f837d6c2c0becc931",
+          "git_blob": "2e5bef61fd5906a121179025a0598e4b04349138",
+          "sha256": "43268365b5c887d2b75f3e6945cec3eeb03a2d1b2fed0f4f730311a0cb55fae7",
+          "direction": "CRTO"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "docs/research/candidates/commitment_residual_triggered_options/CRTO_NATIVE_COST_B08_P71_RESULT_20260908.json",
+      "task_commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+      "originals": [
+        {
+          "id": "CRTO-result-115",
+          "path": "docs/research/candidates/commitment_residual_triggered_options/CRTO_NATIVE_COST_B08_P71_RESULT_20260908.json",
+          "commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+          "git_blob": "adcb4d46ae3a62082e602333f82858fe44f5720e",
+          "sha256": "5fa2fcb91a643f1d377393994e38d390ae64ee3b39b270616ea788985e08fb61",
+          "direction": "CRTO"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "docs/research/candidates/commitment_residual_triggered_options/CRTO_NATIVE_COST_B08_P71_INTAKE_20260908.md",
+      "task_commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+      "originals": [
+        {
+          "id": "CRTO-intake-116",
+          "path": "docs/research/candidates/commitment_residual_triggered_options/CRTO_NATIVE_COST_B08_P71_INTAKE_20260908.md",
+          "commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+          "git_blob": "50d15750c521f0d725476ba6398a393bae6d04b6",
+          "sha256": "a2e622848b5e6b497b03e78748fb1a056bb4d828f753f35b082382f76cd053cf",
+          "direction": "CRTO"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "docs/research/candidates/commitment_residual_triggered_options/CRTO_POST_B08_P72_CONVERGENCE_INTAKE_20260908.md",
+      "task_commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+      "originals": [
+        {
+          "id": "CRTO-intake-117",
+          "path": "docs/research/candidates/commitment_residual_triggered_options/CRTO_POST_B08_P72_CONVERGENCE_INTAKE_20260908.md",
+          "commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+          "git_blob": "33432916ad5c511107f47e5a36f5d8367e470562",
+          "sha256": "c11713394af09e56f6d3b53c67e6fdae4fda24fb386ad6cbbd2719b25b2f6417",
+          "direction": "CRTO"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "docs/research/candidates/commitment_residual_triggered_options/CRTO_RESTART_HANDOFF_20260909.md",
+      "task_commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+      "originals": [
+        {
+          "id": "CRTO-intake-118",
+          "path": "docs/research/candidates/commitment_residual_triggered_options/CRTO_RESTART_HANDOFF_20260909.md",
+          "commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+          "git_blob": "27340b0c76fcddda4de6f42b06caa2650b22a33a",
+          "sha256": "d1baa3af9cbc2c74f75f7424360a58538a4632a4ba8acf26a6abe572d972aade",
+          "direction": "CRTO"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "docs/research/candidates/commitment_residual_triggered_options/DIRECTION.md",
+      "task_commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+      "originals": [
+        {
+          "id": "CRTO-direction-119",
+          "path": "docs/research/candidates/commitment_residual_triggered_options/DIRECTION.md",
+          "commit_sha": "05b17ef2388c355579e4251facc7f57c26b3c837",
+          "git_blob": "b76a4878f065703b4766fad75a4db9ade0e33d86",
+          "sha256": "3522f67f1ed92078b6ba4954cc94ae1985d52a1a3b43fd5e59b36069f71d8ad2",
+          "direction": "CRTO"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "scripts/run_crto_native_cost_b08.py",
+      "task_commit_sha": "d9f643b761d57584de313b1f837d6c2c0becc931",
+      "originals": [
+        {
+          "id": "CRTO-code-120",
+          "path": "scripts/run_crto_native_cost_b08.py",
+          "commit_sha": "d9f643b761d57584de313b1f837d6c2c0becc931",
+          "git_blob": "00a938af4ee6dc2c4de44c2bdab06d285567f611",
+          "sha256": "eeac8b8982c9bea9ebce1c4d56cfba97846049d0fbbc3ab11374cdbfaeef1f0c",
+          "direction": "CRTO"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "experiments/candidates/commitment_residual_triggered_options/native_cost_b08/experiment.py",
+      "task_commit_sha": "d9f643b761d57584de313b1f837d6c2c0becc931",
+      "originals": [
+        {
+          "id": "CRTO-code-121",
+          "path": "experiments/candidates/commitment_residual_triggered_options/native_cost_b08/experiment.py",
+          "commit_sha": "d9f643b761d57584de313b1f837d6c2c0becc931",
+          "git_blob": "e0791e97bff15e620ef055bb1ba9c367276ec668",
+          "sha256": "3811118f9a502398fb225404f98a77b272149b849ac36fb475e2303da5d5c18f",
+          "direction": "CRTO"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "experiments/candidates/commitment_residual_triggered_options/residual_cycle_endpoints_b04/experiment.py",
+      "task_commit_sha": "d9f643b761d57584de313b1f837d6c2c0becc931",
+      "originals": [
+        {
+          "id": "CRTO-code-122",
+          "path": "experiments/candidates/commitment_residual_triggered_options/residual_cycle_endpoints_b04/experiment.py",
+          "commit_sha": "d9f643b761d57584de313b1f837d6c2c0becc931",
+          "git_blob": "04fee9cfd5186ab71995235099959294f54c0934",
+          "sha256": "77f986c9950b86b7d96c7e1e46842b36ff87fb1de470bcd5dae9d79c4da24186",
+          "direction": "CRTO"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "experiments/candidates/commitment_residual_triggered_options/raw_cycle_readout_b02/experiment.py",
+      "task_commit_sha": "d9f643b761d57584de313b1f837d6c2c0becc931",
+      "originals": [
+        {
+          "id": "CRTO-code-123",
+          "path": "experiments/candidates/commitment_residual_triggered_options/raw_cycle_readout_b02/experiment.py",
+          "commit_sha": "d9f643b761d57584de313b1f837d6c2c0becc931",
+          "git_blob": "6f5c71c506c7300517ac488902c927ea7846a3df",
+          "sha256": "8ad7afb67040038b1e8c3c9a084e9efce0478efc2cd6d552a61d61fd8f7db50a",
+          "direction": "CRTO"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "experiments/candidates/commitment_residual_triggered_options/balanced_residual_b01_r1/experiment.py",
+      "task_commit_sha": "d9f643b761d57584de313b1f837d6c2c0becc931",
+      "originals": [
+        {
+          "id": "CRTO-code-124",
+          "path": "experiments/candidates/commitment_residual_triggered_options/balanced_residual_b01_r1/experiment.py",
+          "commit_sha": "d9f643b761d57584de313b1f837d6c2c0becc931",
+          "git_blob": "c34833bb5d548e5366a3b6f03878880f30edc689",
+          "sha256": "c01c4b86ac98c603540f48b15f2023320fb38362e7064ef23951108e2af4825d",
+          "direction": "CRTO"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "task_commit_sha": "d89be7656d367ca10f75ca1185797081b5d722fa",
+      "originals": [
+        {
+          "id": "COMMON-current_method-125",
+          "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+          "commit_sha": "d89be7656d367ca10f75ca1185797081b5d722fa",
+          "git_blob": "bf14c9a0d86c7082596588f8319b318f0b877722",
+          "sha256": "63f0c82b945a525d44f8bcde569609c931b9eb51407dc9a7321ed91e298d8eff",
+          "direction": "COMMON"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "docs/research/portfolio/pro_packets/20260909_foundations_special_review/source_snapshots/56d3b72fd670da4b4710e2a2adfc9d6485b4ba8d/docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "task_commit_sha": null,
+      "originals": [
+        {
+          "id": "UCOPE-historical_method-130",
+          "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+          "commit_sha": "52bf50a089d3389d9fada0b531e4f4e56e83f9b8",
+          "git_blob": "56d3b72fd670da4b4710e2a2adfc9d6485b4ba8d",
+          "sha256": "23bf6599178a66abd5b76af4d9427c8d125e227e9904b5800c8f048d7e98b461",
+          "direction": "UCOPE"
+        },
+        {
+          "id": "FOLR-historical_method-131",
+          "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+          "commit_sha": "387a40f3f1c15ba0ddc4c59d9245ff2b47bc2358",
+          "git_blob": "56d3b72fd670da4b4710e2a2adfc9d6485b4ba8d",
+          "sha256": "23bf6599178a66abd5b76af4d9427c8d125e227e9904b5800c8f048d7e98b461",
+          "direction": "FOLR"
+        },
+        {
+          "id": "RCLE-historical_method-132",
+          "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+          "commit_sha": "ad2fdfb854e295d6d9dddb229dd17cde58465919",
+          "git_blob": "56d3b72fd670da4b4710e2a2adfc9d6485b4ba8d",
+          "sha256": "23bf6599178a66abd5b76af4d9427c8d125e227e9904b5800c8f048d7e98b461",
+          "direction": "RCLE"
+        },
+        {
+          "id": "SCDMP-historical_method-133",
+          "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+          "commit_sha": "7d0fc9d0091e046617493a1b23bbbf07297821cf",
+          "git_blob": "56d3b72fd670da4b4710e2a2adfc9d6485b4ba8d",
+          "sha256": "23bf6599178a66abd5b76af4d9427c8d125e227e9904b5800c8f048d7e98b461",
+          "direction": "SCDMP"
+        },
+        {
+          "id": "FSD-historical_method-134",
+          "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+          "commit_sha": "08199a932671d9bacdbe4eb0bfebab38c37fca1f",
+          "git_blob": "56d3b72fd670da4b4710e2a2adfc9d6485b4ba8d",
+          "sha256": "23bf6599178a66abd5b76af4d9427c8d125e227e9904b5800c8f048d7e98b461",
+          "direction": "FSD"
+        },
+        {
+          "id": "VSPC1-historical_method-135",
+          "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+          "commit_sha": "23ebb0f5e22286d9ea77a145f980bedacc32d9da",
+          "git_blob": "56d3b72fd670da4b4710e2a2adfc9d6485b4ba8d",
+          "sha256": "23bf6599178a66abd5b76af4d9427c8d125e227e9904b5800c8f048d7e98b461",
+          "direction": "VSPC1"
+        },
+        {
+          "id": "VSP03-historical_method-136",
+          "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+          "commit_sha": "32ce8a7355b86bee64956e3d24b76d01c31a8d77",
+          "git_blob": "56d3b72fd670da4b4710e2a2adfc9d6485b4ba8d",
+          "sha256": "23bf6599178a66abd5b76af4d9427c8d125e227e9904b5800c8f048d7e98b461",
+          "direction": "VSP03"
+        },
+        {
+          "id": "ACVC-historical_method-137",
+          "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+          "commit_sha": "4e019ca35b930c2216fdfe110ba587e222ca7384",
+          "git_blob": "56d3b72fd670da4b4710e2a2adfc9d6485b4ba8d",
+          "sha256": "23bf6599178a66abd5b76af4d9427c8d125e227e9904b5800c8f048d7e98b461",
+          "direction": "ACVC"
+        },
+        {
+          "id": "CRTO-historical_method-139",
+          "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+          "commit_sha": "d9f643b761d57584de313b1f837d6c2c0becc931",
+          "git_blob": "56d3b72fd670da4b4710e2a2adfc9d6485b4ba8d",
+          "sha256": "23bf6599178a66abd5b76af4d9427c8d125e227e9904b5800c8f048d7e98b461",
+          "direction": "CRTO"
+        }
+      ],
+      "snapshot": true
+    },
+    {
+      "task_path": "docs/research/portfolio/pro_packets/20260909_foundations_special_review/source_snapshots/d5834d93f550e83731891cedd2718968fda700d2/docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "task_commit_sha": null,
+      "originals": [
+        {
+          "id": "MGTAP-historical_method-138",
+          "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+          "commit_sha": "4f65eefb1b15e44b42d694376630fba0c230cc6c",
+          "git_blob": "d5834d93f550e83731891cedd2718968fda700d2",
+          "sha256": "ae660831d32488e83528002fbcf7ebbe527727dd3a3cf02bb2114827fc689110",
+          "direction": "MGTAP"
+        }
+      ],
+      "snapshot": true
+    },
+    {
+      "task_path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "task_commit_sha": "d89be7656d367ca10f75ca1185797081b5d722fa",
+      "originals": [
+        {
+          "id": "COMMON-current_method-126",
+          "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+          "commit_sha": "d89be7656d367ca10f75ca1185797081b5d722fa",
+          "git_blob": "05b3dc8d8628e2510431250c119b533f2ac3c29a",
+          "sha256": "c1f7d6c68fcec55de48ea555346d5d65af8d311e28502be43a2b05436a174247",
+          "direction": "COMMON"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "task_commit_sha": "d89be7656d367ca10f75ca1185797081b5d722fa",
+      "originals": [
+        {
+          "id": "COMMON-current_method-127",
+          "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+          "commit_sha": "d89be7656d367ca10f75ca1185797081b5d722fa",
+          "git_blob": "9bae14c6deb8e3d1bee6bb567828e4667a426174",
+          "sha256": "99b7e727a890d4e93a64b5c0f44fe588e383b5de56f2da663fb3f864c6d8293c",
+          "direction": "COMMON"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "docs/rl-marl-foundations-20260907/topic-notes/02_MARL.md",
+      "task_commit_sha": "d89be7656d367ca10f75ca1185797081b5d722fa",
+      "originals": [
+        {
+          "id": "COMMON-current_method-128",
+          "path": "docs/rl-marl-foundations-20260907/topic-notes/02_MARL.md",
+          "commit_sha": "d89be7656d367ca10f75ca1185797081b5d722fa",
+          "git_blob": "1b3ceff0c80a63f8b12f6b8686265a92fbcc9fb4",
+          "sha256": "4dae3729dc54db39599a689712fa1f6ccdb80d5fd2f08e96757bcf8686e6e0b9",
+          "direction": "COMMON"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "docs/rl-marl-foundations-20260907/topic-notes/03_HIERARCHY_ASYNC.md",
+      "task_commit_sha": "d89be7656d367ca10f75ca1185797081b5d722fa",
+      "originals": [
+        {
+          "id": "COMMON-current_method-129",
+          "path": "docs/rl-marl-foundations-20260907/topic-notes/03_HIERARCHY_ASYNC.md",
+          "commit_sha": "d89be7656d367ca10f75ca1185797081b5d722fa",
+          "git_blob": "d816b6e3446f0e2527602970a177d1620fc6b3de",
+          "sha256": "9fd3736fefe5c3cf52432b1ab3d4ed220188b1666bf10163ad55f5dcca69f06c",
+          "direction": "COMMON"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_TBCFV_B03_ACTOR100_RESULT_INTAKE_20260909.md",
+      "task_commit_sha": "905be66c868ae2840a10243e0696bcd674127f3a",
+      "originals": [
+        {
+          "id": "RCLE-intake-140",
+          "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_TBCFV_B03_ACTOR100_RESULT_INTAKE_20260909.md",
+          "commit_sha": "905be66c868ae2840a10243e0696bcd674127f3a",
+          "git_blob": "f6a9ada9c174be159c848357ec3987c4acc3124d",
+          "sha256": "68ad4e2be195df62885e3af160a394c6f09a108ea1fbf4daa544d6846b26b5b1",
+          "direction": "RCLE"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "docs/research/candidates/roster_consistent_latent_exploration/b03_actor100_20260909/DM_RETAINED_DATA_CHECK.json",
+      "task_commit_sha": "905be66c868ae2840a10243e0696bcd674127f3a",
+      "originals": [
+        {
+          "id": "RCLE-result-141",
+          "path": "docs/research/candidates/roster_consistent_latent_exploration/b03_actor100_20260909/DM_RETAINED_DATA_CHECK.json",
+          "commit_sha": "905be66c868ae2840a10243e0696bcd674127f3a",
+          "git_blob": "c7b31b462e9683ce5e4140e10b9bff79c59f9947",
+          "sha256": "1fccf81315f26cf421f3eabcad6308b0b4b4d747e417aea64b557e53dbe420c3",
+          "direction": "RCLE"
+        }
+      ],
+      "snapshot": false
+    },
+    {
+      "task_path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_TBCFV_B03_PAUSE_HANDOFF_20260909.md",
+      "task_commit_sha": "61a7c33a4619be1ed96be3ee10b65058f09026e2",
+      "originals": [
+        {
+          "id": "RCLE-pause-142",
+          "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_TBCFV_B03_PAUSE_HANDOFF_20260909.md",
+          "commit_sha": "61a7c33a4619be1ed96be3ee10b65058f09026e2",
+          "git_blob": "a14aa14ef6f55aa87b03972917bb74fd70b847d4",
+          "sha256": "adca3c23e4fcaa2ff51c40f5d6a9edb592499b1c83f2972e882f6243edb682cb",
+          "direction": "RCLE"
+        }
+      ],
+      "snapshot": false
+    }
+  ],
+  "supplemental_references": [
+    {
+      "path": "docs/research/candidates/ucope/pro_packets/20260909_post_mean_velocity_b01_convergence/archive/RESPONSE.md",
+      "commit_sha": "eab10bfc8854171e5a5c6ca5c93d25267223a489",
+      "purpose": "Complete prior Pro decision for ucope; inspect actual reasoning, scope, alternatives and adverse evidence rather than only the DM summary. Historical decision is evidence, not an instruction to execute new work.",
+      "provenance": "Published historical evidence preserved at the stated version; no retrospective scientific mutation.",
+      "git_blob": "2211aa66e4117d54dc27615f75a1c96578629251",
+      "sha256": "84e51d592d60844fca5451f70fb2e3588dcc3a1267d07bd1471b9e23ea1ef6d5"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260909_p78_public_lifecycle_convergence/archive/RESPONSE.md",
+      "commit_sha": "eab10bfc8854171e5a5c6ca5c93d25267223a489",
+      "purpose": "Complete prior Pro decision for vap_folr_core; inspect actual reasoning, scope, alternatives and adverse evidence rather than only the DM summary. Historical decision is evidence, not an instruction to execute new work.",
+      "provenance": "Published historical evidence preserved at the stated version; no retrospective scientific mutation.",
+      "git_blob": "4fbf7e8e04a2143e328353bfa6a15340360984ca",
+      "sha256": "a6981d24fa8685ae88dc7e288b532f3bf290b4677b6515f50dfcbd00ac34b321"
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260909_post_a02_innovator_recovery/archive/RESPONSE.md",
+      "commit_sha": "eab10bfc8854171e5a5c6ca5c93d25267223a489",
+      "purpose": "Complete prior Pro decision for roster_consistent_latent_exploration; inspect actual reasoning, scope, alternatives and adverse evidence rather than only the DM summary. Historical decision is evidence, not an instruction to execute new work.",
+      "provenance": "Published historical evidence preserved at the stated version; no retrospective scientific mutation.",
+      "git_blob": "7c1a9088aac8cdd1d21f053d4468ea898a400095",
+      "sha256": "3e4e149a5a3095c014fea5354df7a04a081943c616fbb01e3cf9e2a303b81b0f"
+    },
+    {
+      "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260908_held_residual_context_repair/archive/RESPONSE.md",
+      "commit_sha": "eab10bfc8854171e5a5c6ca5c93d25267223a489",
+      "purpose": "Complete prior Pro decision for semigroup_consistent_duration_model_policy; inspect actual reasoning, scope, alternatives and adverse evidence rather than only the DM summary. Historical decision is evidence, not an instruction to execute new work.",
+      "provenance": "Published historical evidence preserved at the stated version; no retrospective scientific mutation.",
+      "git_blob": "28009b98231811dc7e3b0504699aba724b71ba9f",
+      "sha256": "bbf51f5f7448071bb177628059468bf8d15c89f6688ef4d45f01b7517037b845"
+    },
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/pro_packets/20260909_p74_post_uav_b02_convergence/archive/RESPONSE.md",
+      "commit_sha": "eab10bfc8854171e5a5c6ca5c93d25267223a489",
+      "purpose": "Complete prior Pro decision for flexible_skill_duration; inspect actual reasoning, scope, alternatives and adverse evidence rather than only the DM summary. Historical decision is evidence, not an instruction to execute new work.",
+      "provenance": "Published historical evidence preserved at the stated version; no retrospective scientific mutation.",
+      "git_blob": "d7c8c9889cafce811513c2974a3fe89e7829d44b",
+      "sha256": "08ad8e9175073b7961de24bced88936134c27b99b388cf0a60ca09a437505fea"
+    },
+    {
+      "path": "docs/research/candidates/vsp_c1/pro_packets/20260909_native_hold_value_post_b13_convergence/archive/RESPONSE.md",
+      "commit_sha": "eab10bfc8854171e5a5c6ca5c93d25267223a489",
+      "purpose": "Complete prior Pro decision for vsp_c1; inspect actual reasoning, scope, alternatives and adverse evidence rather than only the DM summary. Historical decision is evidence, not an instruction to execute new work.",
+      "provenance": "Published historical evidence preserved at the stated version; no retrospective scientific mutation.",
+      "git_blob": "05495cb7431f226e754a50de5dd9ca6900762b56",
+      "sha256": "1451ce15635f31e432fc3860e472485a1eb37b5c9887ede9da6597fa73661e8a"
+    },
+    {
+      "path": "docs/research/candidates/vsp_03/pro_packets/20260909_post_b05_convergence/archive/RESPONSE.md",
+      "commit_sha": "eab10bfc8854171e5a5c6ca5c93d25267223a489",
+      "purpose": "Complete prior Pro decision for vsp_03; inspect actual reasoning, scope, alternatives and adverse evidence rather than only the DM summary. Historical decision is evidence, not an instruction to execute new work.",
+      "provenance": "Published historical evidence preserved at the stated version; no retrospective scientific mutation.",
+      "git_blob": "576b0de01f1d81dbae85d2fe18d87b629028df4f",
+      "sha256": "39a1891fd3d8e002913d1c3f79e6150ebba33e0fdcaf1fc1313db2bda43f1c5a"
+    },
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260909_native_link_loss_followup_convergence/archive/RESPONSE.md",
+      "commit_sha": "eab10bfc8854171e5a5c6ca5c93d25267223a489",
+      "purpose": "Complete prior Pro decision for acvc; inspect actual reasoning, scope, alternatives and adverse evidence rather than only the DM summary. Historical decision is evidence, not an instruction to execute new work.",
+      "provenance": "Published historical evidence preserved at the stated version; no retrospective scientific mutation.",
+      "git_blob": "81d36c0c2215e4ea4416495182f0d9277a38f76f",
+      "sha256": "41e7a9fd1b6e3950e90a51fa07ac8689d83b9cf464a4a2fd217dd95ea4295159"
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260909_post_b01_convergence/archive/RESPONSE.md",
+      "commit_sha": "eab10bfc8854171e5a5c6ca5c93d25267223a489",
+      "purpose": "Complete prior Pro decision for metric_ground_transport_allocation; inspect actual reasoning, scope, alternatives and adverse evidence rather than only the DM summary. Historical decision is evidence, not an instruction to execute new work.",
+      "provenance": "Published historical evidence preserved at the stated version; no retrospective scientific mutation.",
+      "git_blob": "6f97d60dbd2ac488d3b97a272002fef2070131d3",
+      "sha256": "ceca06f450697cb497240a2bff76edfd8db9087b9a94bdb5bc7470e96f79cc69"
+    },
+    {
+      "path": "docs/research/candidates/commitment_residual_triggered_options/pro_packets/20260908_post_b08_convergence/archive/RESPONSE.md",
+      "commit_sha": "eab10bfc8854171e5a5c6ca5c93d25267223a489",
+      "purpose": "Complete prior Pro decision for commitment_residual_triggered_options; inspect actual reasoning, scope, alternatives and adverse evidence rather than only the DM summary. Historical decision is evidence, not an instruction to execute new work.",
+      "provenance": "Published historical evidence preserved at the stated version; no retrospective scientific mutation.",
+      "git_blob": "d5e895197b1e024187500bffef9edc2cb0c30c5e",
+      "sha256": "a713550d6730eb23496620b149359375a156cb90f1753b5d22d721fa971eef2d"
+    },
+    {
+      "path": "docs/research/candidates/ucope/UCOPE_UAV_SHORT_FIXED_RENEWAL_B02_P83_INTAKE_20260909.md",
+      "commit_sha": "eab10bfc8854171e5a5c6ca5c93d25267223a489",
+      "purpose": "Earlier bounded evidence or scope decision actually invoked by the current continue/stop rationale. Inspect selection, outcome and uncertainty; this is not a full-history code audit.",
+      "provenance": "Published historical evidence preserved at the stated version; no retrospective scientific mutation.",
+      "git_blob": "ee7e82dfc885e5107c7b8ea5c9a92aef5b3a3d3f",
+      "sha256": "bdd725756b58285a05b8c23bdce2f02929e3592a1b010da101dcaa2d129fcd79"
+    },
+    {
+      "path": "docs/research/candidates/ucope/UCOPE_UAV_SHORT_FIXED_RENEWAL_B03_P84_INTAKE_20260909.md",
+      "commit_sha": "eab10bfc8854171e5a5c6ca5c93d25267223a489",
+      "purpose": "Earlier bounded evidence or scope decision actually invoked by the current continue/stop rationale. Inspect selection, outcome and uncertainty; this is not a full-history code audit.",
+      "provenance": "Published historical evidence preserved at the stated version; no retrospective scientific mutation.",
+      "git_blob": "7743e3ba83f6f51bda31821f4502211ddb45dd9e",
+      "sha256": "a06a32f5619b47a2b512ed0f677503960fccf6551ec979a02cabd6354d409a37"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_P78_LIFETIME_INTERFACE_QUESTION_INTAKE_20260909.md",
+      "commit_sha": "eab10bfc8854171e5a5c6ca5c93d25267223a489",
+      "purpose": "Earlier bounded evidence or scope decision actually invoked by the current continue/stop rationale. Inspect selection, outcome and uncertainty; this is not a full-history code audit.",
+      "provenance": "Published historical evidence preserved at the stated version; no retrospective scientific mutation.",
+      "git_blob": "dfff9e47faf8a7dc9b3c94dd343e6696ad10ccb1",
+      "sha256": "9cb7c6e11f64f721938a74e2ba78f3efa9bfecb39e3a4518facc2825d2724ab0"
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_TBCFV_A02_RESULT_INTAKE_20260906.md",
+      "commit_sha": "eab10bfc8854171e5a5c6ca5c93d25267223a489",
+      "purpose": "Earlier bounded evidence or scope decision actually invoked by the current continue/stop rationale. Inspect selection, outcome and uncertainty; this is not a full-history code audit.",
+      "provenance": "Published historical evidence preserved at the stated version; no retrospective scientific mutation.",
+      "git_blob": "4e69ee1bbcf975f7ac1c2c7bf86978b7b2b5ccea",
+      "sha256": "9befb297b901b1617c7849ee81330e5f5bb4419c029fa003f8e9206ccfd4ff12"
+    },
+    {
+      "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260908_held_residual_context_repair/CONVERGENCE_INTAKE_20260909.md",
+      "commit_sha": "eab10bfc8854171e5a5c6ca5c93d25267223a489",
+      "purpose": "Earlier bounded evidence or scope decision actually invoked by the current continue/stop rationale. Inspect selection, outcome and uncertainty; this is not a full-history code audit.",
+      "provenance": "Published historical evidence preserved at the stated version; no retrospective scientific mutation.",
+      "git_blob": "999bd6e078b0241306361669c391723f87b1e391",
+      "sha256": "e459092416c7d850953671e9b06fa16779deaeeb02a6cdf3d9e3bf239f115ff3"
+    },
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_INDIVIDUAL_RENEWAL_B01_P70_INTAKE_20260908.md",
+      "commit_sha": "eab10bfc8854171e5a5c6ca5c93d25267223a489",
+      "purpose": "Earlier bounded evidence or scope decision actually invoked by the current continue/stop rationale. Inspect selection, outcome and uncertainty; this is not a full-history code audit.",
+      "provenance": "Published historical evidence preserved at the stated version; no retrospective scientific mutation.",
+      "git_blob": "0440a52808eb0a9adaf1d2ccb66871d7ec70bbf3",
+      "sha256": "52ff98eda9fe164e608056462997d3b3eb7bb50f9118cc794ea0da1bcf32659e"
+    },
+    {
+      "path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B05_INTAKE_20260908.md",
+      "commit_sha": "eab10bfc8854171e5a5c6ca5c93d25267223a489",
+      "purpose": "Earlier bounded evidence or scope decision actually invoked by the current continue/stop rationale. Inspect selection, outcome and uncertainty; this is not a full-history code audit.",
+      "provenance": "Published historical evidence preserved at the stated version; no retrospective scientific mutation.",
+      "git_blob": "52ed66193f911941bfd0e18769a7f29ba7d90528",
+      "sha256": "50ad2cf71c4a8995c0d25b8d0d40e148ab751ad4483df58d7f9e12a05a487445"
+    },
+    {
+      "path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B06_INTAKE_20260908.md",
+      "commit_sha": "eab10bfc8854171e5a5c6ca5c93d25267223a489",
+      "purpose": "Earlier bounded evidence or scope decision actually invoked by the current continue/stop rationale. Inspect selection, outcome and uncertainty; this is not a full-history code audit.",
+      "provenance": "Published historical evidence preserved at the stated version; no retrospective scientific mutation.",
+      "git_blob": "072f5661acfff13cc431748a9c5ef9b1c4a710ea",
+      "sha256": "8f177e6e10291876a63932bb9b50559dff6341f0231b4859a346ce376739f976"
+    },
+    {
+      "path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B07_INTAKE_20260908.md",
+      "commit_sha": "eab10bfc8854171e5a5c6ca5c93d25267223a489",
+      "purpose": "Earlier bounded evidence or scope decision actually invoked by the current continue/stop rationale. Inspect selection, outcome and uncertainty; this is not a full-history code audit.",
+      "provenance": "Published historical evidence preserved at the stated version; no retrospective scientific mutation.",
+      "git_blob": "124e6ed40541406d381cb93903a8122caf46c0f2",
+      "sha256": "bbce161dad91d8c890ad7f229afe683c712262e8c2176fd84a1a04b07cace822"
+    },
+    {
+      "path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B08_INTAKE_20260908.md",
+      "commit_sha": "eab10bfc8854171e5a5c6ca5c93d25267223a489",
+      "purpose": "Earlier bounded evidence or scope decision actually invoked by the current continue/stop rationale. Inspect selection, outcome and uncertainty; this is not a full-history code audit.",
+      "provenance": "Published historical evidence preserved at the stated version; no retrospective scientific mutation.",
+      "git_blob": "ead5eb763e97736054256c570d54060d0f08792e",
+      "sha256": "1e6e37f5ae1733e96226f454fd2685932deb33648d15d6ffaa2fa919b0298dd4"
+    },
+    {
+      "path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B09_INTAKE_20260909.md",
+      "commit_sha": "eab10bfc8854171e5a5c6ca5c93d25267223a489",
+      "purpose": "Earlier bounded evidence or scope decision actually invoked by the current continue/stop rationale. Inspect selection, outcome and uncertainty; this is not a full-history code audit.",
+      "provenance": "Published historical evidence preserved at the stated version; no retrospective scientific mutation.",
+      "git_blob": "c5d2f7151032199def57abde779a9f2eb7c03f89",
+      "sha256": "5c4951c98a5800802f4d6378b4d3d8d397109ce3292c65c5b531dc003b8f0fa6"
+    },
+    {
+      "path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B12_INTAKE_20260909.md",
+      "commit_sha": "eab10bfc8854171e5a5c6ca5c93d25267223a489",
+      "purpose": "Earlier bounded evidence or scope decision actually invoked by the current continue/stop rationale. Inspect selection, outcome and uncertainty; this is not a full-history code audit.",
+      "provenance": "Published historical evidence preserved at the stated version; no retrospective scientific mutation.",
+      "git_blob": "4d9c3c254414d2bbec3168ee2b4811b0625bc38d",
+      "sha256": "c2ec374f6b29fcb0b874bd7305b1ea70e8bc5e13250db7dea5475bbc4744b3ba"
+    },
+    {
+      "path": "docs/research/candidates/vsp_03/VSP03_B03_INTAKE_20260908.md",
+      "commit_sha": "eab10bfc8854171e5a5c6ca5c93d25267223a489",
+      "purpose": "Earlier bounded evidence or scope decision actually invoked by the current continue/stop rationale. Inspect selection, outcome and uncertainty; this is not a full-history code audit.",
+      "provenance": "Published historical evidence preserved at the stated version; no retrospective scientific mutation.",
+      "git_blob": "538d4f66aa5b2bf4e2f31feb05302f01aff9680d",
+      "sha256": "909522bfddf51b14ca6f3ac8bfd705c4f567d0113768af7d46c65b907abc86d1"
+    },
+    {
+      "path": "docs/research/candidates/vsp_03/VSP03_B04_P67_INTAKE_20260908.md",
+      "commit_sha": "eab10bfc8854171e5a5c6ca5c93d25267223a489",
+      "purpose": "Earlier bounded evidence or scope decision actually invoked by the current continue/stop rationale. Inspect selection, outcome and uncertainty; this is not a full-history code audit.",
+      "provenance": "Published historical evidence preserved at the stated version; no retrospective scientific mutation.",
+      "git_blob": "073f31f3a2c721167bcd29caa4054ff43a665d0c",
+      "sha256": "d83d2b8f55ccad467cceef1df82c40065f87afd48bccc885f7b17e2f53d07b76"
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_B01_INTAKE_20260909.md",
+      "commit_sha": "eab10bfc8854171e5a5c6ca5c93d25267223a489",
+      "purpose": "Earlier bounded evidence or scope decision actually invoked by the current continue/stop rationale. Inspect selection, outcome and uncertainty; this is not a full-history code audit.",
+      "provenance": "Published historical evidence preserved at the stated version; no retrospective scientific mutation.",
+      "git_blob": "546193ce36c022b2c3df9dcb56901cf814848d00",
+      "sha256": "945e18db68f981eafc7c3beeee603bdf5d1a49ad9475e40590687eca7a8ac4d3"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/01_RL.md",
+      "commit_sha": "d89be7656d367ca10f75ca1185797081b5d722fa",
+      "purpose": "Read baseline/critic, reward transformations, task/observation and finite-training distinctions for this validity review.",
+      "provenance": "Published historical evidence preserved at the stated version; no retrospective scientific mutation.",
+      "git_blob": "6aac92dac18cfa3158121e079af99a052a792839",
+      "sha256": "16911fe7cffd5070b732484de76dbd9a7a5a8a0502ea645d22ebbaa8c2a23a64"
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "commit_sha": "d89be7656d367ca10f75ca1185797081b5d722fa",
+      "purpose": "Adopt relevant research/core distinction, §4 scope and source/check budgets; no new machinery or science launch is authorized.",
+      "provenance": "Published historical evidence preserved at the stated version; no retrospective scientific mutation.",
+      "git_blob": "89d7d66e7c61a894793cebe600234922da467111",
+      "sha256": "db182762f5da60ac850013f4350c70da13a2de41652eb08b6bae2572d7154f8c"
+    },
+    {
+      "path": "docs/project/MARL_RUNTIME_ENGINEERING_SPEC.md",
+      "commit_sha": "d89be7656d367ca10f75ca1185797081b5d722fa",
+      "purpose": "Adopt relevant cost-window definitions and invocation boundaries; distinguish CPU work, elapsed and summed wall without cross-hardware efficiency claims.",
+      "provenance": "Published historical evidence preserved at the stated version; no retrospective scientific mutation.",
+      "git_blob": "5d89f5039b0913f5d2e2855190dfb08445973cf2",
+      "sha256": "596f6f24a93d338360c82e49b83e5d0e1394d634ebf0c0256c9dc32e3cfddf3d"
+    },
+    {
+      "path": "AGENTS.md",
+      "commit_sha": "d89be7656d367ca10f75ca1185797081b5d722fa",
+      "purpose": "Adopt relevant decision ladder, current standing owner delegation, integrity and Portfolio scope; historical running descriptions do not allocate a new experiment.",
+      "provenance": "Published historical evidence preserved at the stated version; no retrospective scientific mutation.",
+      "git_blob": "7964ddcdbca986c636ae2ceda873136ebeac4b25",
+      "sha256": "80ee1d3085d9161b92b43714219873369f44f62cfdbca5d56e2a706bb6fd3396"
+    }
+  ],
+  "snapshot_paths": [
+    "docs/research/portfolio/pro_packets/20260909_foundations_special_review/source_snapshots/baea9644805275c62325f0a99e4cdd2f92b358d1/experiments/candidates/ucope/uav_motion_prefix_b01/study.py",
+    "docs/research/portfolio/pro_packets/20260909_foundations_special_review/source_snapshots/56839624b05976ead457c51b35882c038da9f593/experiments/candidates/ucope/uav_motion_prefix_b01/study.py",
+    "docs/research/portfolio/pro_packets/20260909_foundations_special_review/source_snapshots/a49deaab043d85a1bc384615e65188cbcdd785b0/experiments/candidates/ucope/uav_motion_prefix_b01/study.py",
+    "docs/research/portfolio/pro_packets/20260909_foundations_special_review/source_snapshots/3f40f56ffbab1a334589640c4a0dff799b752b93/experiments/candidates/ucope/uav_motion_prefix_b01/learner.py",
+    "docs/research/portfolio/pro_packets/20260909_foundations_special_review/source_snapshots/766c48a860b39e93216e2969bf3d045e55465e28/experiments/candidates/ucope/uav_motion_prefix_b01/learner.py",
+    "docs/research/portfolio/pro_packets/20260909_foundations_special_review/source_snapshots/09a4c1cb832f5968d5de5b4ba562294fcc8640fb/experiments/candidates/ucope/uav_motion_prefix_b01/learner.py",
+    "docs/research/portfolio/pro_packets/20260909_foundations_special_review/source_snapshots/21c1a773170f40799606387688f7837ba11efe53/experiments/candidates/ucope/uav_motion_prefix_b01/learner.py",
+    "docs/research/portfolio/pro_packets/20260909_foundations_special_review/source_snapshots/28e98a47256f10a60f085cc9d97d7b8ba9a4183c/experiments/candidates/ucope/uav_motion_prefix_b01/policy.py",
+    "docs/research/portfolio/pro_packets/20260909_foundations_special_review/source_snapshots/504e476f8c2c049821970ec56db33590a7895355/experiments/candidates/ucope/uav_motion_prefix_b01/policy.py",
+    "docs/research/portfolio/pro_packets/20260909_foundations_special_review/source_snapshots/9e8174cf08aac2d47cc2b20f7e05421e2078662a/experiments/candidates/ucope/uav_motion_prefix_b01/policy.py",
+    "docs/research/portfolio/pro_packets/20260909_foundations_special_review/source_snapshots/4b59281bfb76245dd3283fe860327e35463c2b26/experiments/candidates/ucope/uav_motion_prefix_b01/environment.py",
+    "docs/research/portfolio/pro_packets/20260909_foundations_special_review/source_snapshots/e6eace082a635237931375856d8fab562c22e28e/experiments/candidates/ucope/uav_motion_prefix_b01/environment.py",
+    "docs/research/portfolio/pro_packets/20260909_foundations_special_review/source_snapshots/56d3b72fd670da4b4710e2a2adfc9d6485b4ba8d/docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+    "docs/research/portfolio/pro_packets/20260909_foundations_special_review/source_snapshots/d5834d93f550e83731891cedd2718968fda700d2/docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md"
+  ],
+  "limits": [
+    "Snapshot files are evidence only, not scientific execution source.",
+    "Original full source SHAs remain attached to every snapshot; identical bytes can share a TASK reference.",
+    "Not an all-history or complete transitive code audit. Pro must state uninspected dependencies and scope.",
+    "task_commit_sha null for snapshots inherits the subsequently published packet input SHA."
+  ]
+}

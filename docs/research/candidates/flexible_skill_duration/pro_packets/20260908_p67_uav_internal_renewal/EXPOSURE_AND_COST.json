@@ -1,0 +1,90 @@
+{
+  "generated_at": "2026-09-09T02:43:38+00:00",
+  "method": "Python standard-library arithmetic and AST literals; no research module execution",
+  "input_sha": "fbe5e67b96f8b390751635fe9c826910c8b3f0a4",
+  "current_consultation": {
+    "scientific_invocations": 0,
+    "model_constructions": 0,
+    "checkpoint_loads": 0,
+    "training_starts": 0,
+    "training_transitions": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0,
+    "simulation_steps": 0,
+    "profiling_invocations": 0,
+    "checkpoint_replays": 0,
+    "scientific_validation_invocations": 0
+  },
+  "current_exposure_line": "scientific_invocations=0; model_constructions=0; checkpoint_loads=0; training_starts=0; training_transitions=0; optimizer_steps=0; evaluation_episodes=0; simulation_steps=0; profiling_invocations=0; checkpoint_replays=0; scientific_validation_invocations=0",
+  "source_config_literals": {
+    "n_Z": 6,
+    "n_z": 6,
+    "lr_coordinator": 0.0001,
+    "gamma": 0.99,
+    "gae_lambda": 0.95,
+    "ppo_epochs": 15
+  },
+  "prospective_only": {
+    "status": "Unselected B proposal; no source/key/experiment allocation",
+    "arms": [
+      "I_individual_gap_with_fixed_team_clock",
+      "authentic_D0_fixed_clock"
+    ],
+    "independent_matched_training_pairs": 1,
+    "num_envs_per_arm": 16,
+    "rollouts_per_arm": 5,
+    "horizon": 500,
+    "agents": 6,
+    "users": 50,
+    "final_eval_episodes_per_arm": 32,
+    "training_transitions": 80000,
+    "training_episodes": 160,
+    "update_stages": 10,
+    "eval_steps": 32000,
+    "eval_episodes": 64,
+    "total_environment_steps": 112000,
+    "agent_step_observations": 672000,
+    "model_constructions": 4,
+    "training_starts": 2,
+    "checkpoint_loads": 0,
+    "learner_and_evaluator_batch_control_calls": 6000,
+    "D0_joint_decision_rows_per_rollout": 800,
+    "D0_individual_decision_rows_per_rollout": 4800,
+    "I_team_rows_per_rollout": 800,
+    "I_max_joint_decision_rows_per_rollout": 8000,
+    "I_max_individual_decision_rows_per_rollout": 48000,
+    "maximum_decision_row_factor": 10,
+    "optimizer_steps": "unknown; update stages and rows are not optimizer.step counts",
+    "nested_candidate_trajectory_solver_search_calls": 0,
+    "added_scientific_validation_invocations": 0,
+    "native_reward_scale": {
+      "team_reward_per_step": "6 * adapter_episode_return / 500",
+      "mei": 0.01,
+      "mei_team_episode_points": 5.0,
+      "mei_adapter_episode_points": 0.8333333333333334
+    },
+    "cost": {
+      "historical_source": "docs/Claude_docs/experiments/E0_EXPOSURE_PROBE_SET_RESULT_20260902.md sections 2-4",
+      "historical_host": "local Windows CPU4, E0 scenario1 D0; not current remote timing",
+      "historical_rollout_seconds": 225.2,
+      "historical_complete_seconds": 2392.4,
+      "historical_rollouts": 10,
+      "historical_eval_episodes_total": 16,
+      "historical_nonrollout_remainder_seconds": 140.4,
+      "D0_formula": "1.15 * (5*225.2 + 2*(2392.4 - 10*225.2))",
+      "D0_illustrative_seconds": 1617.82,
+      "I_formula": "10 * D0_illustrative_seconds",
+      "I_stress_scenario_seconds": 16178.2,
+      "interpretation": "All D0 work is multiplied by the known maximum decision-row factor, including evaluation; deliberately loose scenario, not measured current rate or verified upper bound. Initialization, environment work and fixed actor work do not all scale this way; current hardware/source and data-dependent optimizer work remain unknown.",
+      "proposed_complete_caps_seconds": {
+        "D0": 3600,
+        "I": 18000
+      },
+      "proposed_sum_caps_seconds": 21600,
+      "separate_pilot_profile_cost_experiment": false,
+      "remote_first_if_later_allocated": true,
+      "hardware_part_of_estimand": false
+    },
+    "engineering_scope_section_4_items_requested": []
+  }
+}

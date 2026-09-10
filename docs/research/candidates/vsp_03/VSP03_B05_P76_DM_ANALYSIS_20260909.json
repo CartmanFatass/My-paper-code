@@ -1,0 +1,237 @@
+{
+  "object": "VSP03_B05",
+  "allocation": "P76",
+  "card_sha": "3eda7ac6dd9d1f888ccff7799d5616e0eb19867f",
+  "source_sha": "32ce8a7355b86bee64956e3d24b76d01c31a8d77",
+  "CM_result_commit": "f988ec921ef40a127030ff014fa67fa74700adcf",
+  "independent_training_instances": 3,
+  "seeds": [
+    5,
+    6,
+    7
+  ],
+  "summary_sources": {
+    "5": {
+      "path": "docs/research/candidates/vsp_03/VSP03_B03_RESULT_ARTIFACTS_20260908/summary.json",
+      "sha256": "3a8e37bb3e2089967d06677a3045f1314374c97e7a4f77679946ecca6124b484"
+    },
+    "6": {
+      "path": "docs/research/candidates/vsp_03/VSP03_B04_P67_RESULT_ARTIFACTS_20260908/science/summary.json",
+      "sha256": "1182980dbb169b0b0bcbac8b5054026f83bc9a5e2acddaf6caff57158d49ab8c"
+    },
+    "7": {
+      "path": "docs/research/candidates/vsp_03/VSP03_B05_P76_RESULT_ARTIFACTS_20260909/science/summary.json",
+      "sha256": "5facdb93ebbb7a3700a0f4bf8776740f8736b6faa94b028eca25bf23ccf24834"
+    }
+  },
+  "primary_name": "G_greedy-R0",
+  "new_primary": {
+    "mean": 0.0023291015624999968,
+    "conditional_world_sd": 0.2454496344717988,
+    "conditional_world_se": 0.007670301077243712,
+    "worlds": 1024
+  },
+  "mei_absolute": 0.02,
+  "prediction": {
+    "text": "abs(final greedy G minus R0)<=0.02",
+    "confidence": "low",
+    "matched": true,
+    "not_a_sign_prediction": true,
+    "owner_prediction": "not taken (unattended)",
+    "old_P64_P65_prediction": "unscored; zero scientific exposure remains"
+  },
+  "native_accounting_seed7": {
+    "G_greedy-R0": {
+      "native_mean_deltas": {
+        "success_per_team": 0.009765625,
+        "attempt_per_team": 0.115234375,
+        "waiting_ticks_per_team": -0.130859375,
+        "non_submission_per_team": -0.115234375,
+        "blocked_pending": 0.0,
+        "blocked_final_clocks": 0.00390625
+      },
+      "utility_components": {
+        "success": 0.0048828125,
+        "attempt_cost": -0.002880859375,
+        "waiting_cost": 0.0003271484375
+      },
+      "sum": 0.0023291015625,
+      "published_mean": 0.0023291015624999968,
+      "accounting_minus_published": 3.0357660829594124e-18,
+      "interpretation": "Accounting identity over saved native outcomes; not a causal diagnosis or policy-equivalence claim."
+    },
+    "G_greedy-R": {
+      "native_mean_deltas": {
+        "success_per_team": 0.01171875,
+        "attempt_per_team": 0.1142578125,
+        "waiting_ticks_per_team": -0.17578125,
+        "non_submission_per_team": -0.1142578125,
+        "blocked_pending": 0.0,
+        "blocked_final_clocks": 0.00390625
+      },
+      "utility_components": {
+        "success": 0.005859375,
+        "attempt_cost": -0.0028564453125,
+        "waiting_cost": 0.000439453125
+      },
+      "sum": 0.0034423828125000003,
+      "published_mean": 0.0034423828124999973,
+      "accounting_minus_published": 3.0357660829594124e-18,
+      "interpretation": "Accounting identity over saved native outcomes; not a causal diagnosis or policy-equivalence claim."
+    },
+    "G_stochastic-R0": {
+      "native_mean_deltas": {
+        "success_per_team": -0.1474609375,
+        "attempt_per_team": 0.1396484375,
+        "waiting_ticks_per_team": -10.27734375,
+        "non_submission_per_team": -0.1396484375,
+        "blocked_pending": 0.009765625,
+        "blocked_final_clocks": -0.009765625
+      },
+      "utility_components": {
+        "success": -0.07373046875,
+        "attempt_cost": -0.0034912109375,
+        "waiting_cost": 0.025693359375
+      },
+      "sum": -0.0515283203125,
+      "published_mean": -0.051528320312499994,
+      "accounting_minus_published": -6.938893903907228e-18,
+      "interpretation": "Accounting identity over saved native outcomes; not a causal diagnosis or policy-equivalence claim."
+    },
+    "G_stochastic-R": {
+      "native_mean_deltas": {
+        "success_per_team": -0.1455078125,
+        "attempt_per_team": 0.138671875,
+        "waiting_ticks_per_team": -10.322265625,
+        "non_submission_per_team": -0.138671875,
+        "blocked_pending": 0.009765625,
+        "blocked_final_clocks": -0.009765625
+      },
+      "utility_components": {
+        "success": -0.07275390625,
+        "attempt_cost": -0.003466796875,
+        "waiting_cost": 0.0258056640625
+      },
+      "sum": -0.0504150390625,
+      "published_mean": -0.0504150390625,
+      "accounting_minus_published": 0.0,
+      "interpretation": "Accounting identity over saved native outcomes; not a causal diagnosis or policy-equivalence claim."
+    },
+    "G_stochastic-G_greedy": {
+      "native_mean_deltas": {
+        "success_per_team": -0.1572265625,
+        "attempt_per_team": 0.0244140625,
+        "waiting_ticks_per_team": -10.146484375,
+        "non_submission_per_team": -0.0244140625,
+        "blocked_pending": 0.009765625,
+        "blocked_final_clocks": -0.013671875
+      },
+      "utility_components": {
+        "success": -0.07861328125,
+        "attempt_cost": -0.0006103515625,
+        "waiting_cost": 0.0253662109375
+      },
+      "sum": -0.053857421875,
+      "published_mean": -0.05385742187499999,
+      "accounting_minus_published": -6.938893903907228e-18,
+      "interpretation": "Accounting identity over saved native outcomes; not a causal diagnosis or policy-equivalence claim."
+    }
+  },
+  "discovery_seed4": "separate outcome-informed discovery; excluded from three-instance description",
+  "failed_P64_P65": "preserved failure; not a trained instance or zero-valued endpoint",
+  "unit_warning": "Five contrast groups share the same three G learners. Evaluation worlds, fixed rules and modes are not additional training replicates. The continuation sequence was outcome-informed; endpoint SD includes finite evaluation variation.",
+  "run_level_summary": {
+    "unit": "caller-declared independent training run",
+    "inference": "descriptive only; no confidence interval or success classification",
+    "groups": [
+      {
+        "task": "VSP03_greedy_use_adaptive_description",
+        "arm": "G_greedy-R",
+        "n": 3,
+        "mean": -0.0032096354166666705,
+        "sample_sd": 0.010053876147056055,
+        "min": -0.01477539062500001,
+        "max": 0.0034423828124999973,
+        "runs": {
+          "5": -0.01477539062500001,
+          "6": 0.0017041015625000008,
+          "7": 0.0034423828124999973
+        }
+      },
+      {
+        "task": "VSP03_greedy_use_adaptive_description",
+        "arm": "G_greedy-R0",
+        "n": 3,
+        "mean": -0.0030110677083333365,
+        "sample_sd": 0.009495761444457974,
+        "min": -0.013974609375000007,
+        "max": 0.0026123046875000007,
+        "runs": {
+          "5": -0.013974609375000007,
+          "6": 0.0026123046875000007,
+          "7": 0.0023291015624999968
+        }
+      },
+      {
+        "task": "VSP03_greedy_use_adaptive_description",
+        "arm": "G_stochastic-G_greedy",
+        "n": 3,
+        "mean": -0.04010579427083333,
+        "sample_sd": 0.021697666354176973,
+        "min": -0.05385742187499999,
+        "max": -0.015092773437499997,
+        "runs": {
+          "5": -0.015092773437499997,
+          "6": -0.0513671875,
+          "7": -0.05385742187499999
+        }
+      },
+      {
+        "task": "VSP03_greedy_use_adaptive_description",
+        "arm": "G_stochastic-R",
+        "n": 3,
+        "mean": -0.043315429687500004,
+        "sample_sd": 0.011651741198959465,
+        "min": -0.0504150390625,
+        "max": -0.029868164062499997,
+        "runs": {
+          "5": -0.029868164062499997,
+          "6": -0.049663085937500004,
+          "7": -0.0504150390625
+        }
+      },
+      {
+        "task": "VSP03_greedy_use_adaptive_description",
+        "arm": "G_stochastic-R0",
+        "n": 3,
+        "mean": -0.043116861979166664,
+        "sample_sd": 0.012245974339861732,
+        "min": -0.051528320312499994,
+        "max": -0.0290673828125,
+        "runs": {
+          "5": -0.0290673828125,
+          "6": -0.0487548828125,
+          "7": -0.051528320312499994
+        }
+      }
+    ],
+    "paired_differences": []
+  },
+  "new_scientific_exposure_from_analysis": {
+    "models": 0,
+    "episodes": 0,
+    "optimizer_steps": 0,
+    "evaluations": 0
+  },
+  "analysis_method": "Read three preserved summaries; select each of five frozen final contrasts once per trained G. Compute native utility=(200*success-10*attempt-waiting_ticks)/400 from saved means. Use existing run-level summarizer without --paired, no new learner/world/evaluation or CM check repetition.",
+  "run_summary_command": "python .agents/skills/hmasd-scientific-tools/scripts/summarize_runs.py temp\\directions\\vsp_03\\exp\\p76_dm_intake_20260909\\endpoint_scores.csv --out temp\\directions\\vsp_03\\exp\\p76_dm_intake_20260909\\run_summary.json",
+  "generated_at_utc": "2026-09-09T09:25:29.441883+00:00",
+  "parent_acceptance": {
+    "selected_summary_matches_remote_manifest_and_result_commit": true,
+    "all_17_manifest_artifacts_present_in_result_commit": true,
+    "source_diff_and_independent_review_read": true,
+    "CM_execution_and_checks_not_repeated": true,
+    "owner_reviews_and_vsp_audit_overrides": [],
+    "owner_scan_utc": "2026-09-09T09:31:52Z"
+  }
+}

@@ -1,0 +1,24 @@
+=== Task 'acvc-fixed-retrace-reuse-e01-20260909' started at 2026-09-10T07:00:59+08:00 ===
+{
+  "assessed_at": "2026-09-09T23:00:59.794760Z",
+  "available_physical_bytes": 15217790976,
+  "captured_at": "2026-09-09T23:00:59.794468Z",
+  "cgroup_headroom_bytes": null,
+  "cgroup_memory_current_bytes": null,
+  "cgroup_memory_max_bytes": null,
+  "effective_available_bytes": 15217790976,
+  "effective_floor_pass": true,
+  "failure_reasons": [],
+  "measurement_source": "/proc/meminfo",
+  "minimum_available_bytes": 4294967296,
+  "passed": true,
+  "physical_floor_pass": true,
+  "schema_version": 1
+}
+{"base": 8201, "arm": "C", "episodes": 64, "parameter_displacement_after_loading": 0.0, "wall_s": 11.96904265502235}
+{"base": 8201, "arm": "F", "episodes": 64, "parameter_displacement_after_loading": 0.0, "wall_s": 13.479934598028194}
+{"base": 8201, "arm": "dwell", "episodes": 64, "parameter_displacement_after_loading": 0.0, "wall_s": 13.654578721965663}
+{"base": 8202, "arm": "C", "episodes": 64, "parameter_displacement_after_loading": 0.0, "wall_s": 11.83161417604424}
+{"base": 8202, "arm": "F", "episodes": 64, "parameter_displacement_after_loading": 0.0, "wall_s": 13.806098793982528}
+{"base": 8202, "arm": "dwell", "episodes": 64, "parameter_displacement_after_loading": 0.0, "wall_s": 13.679409444972407}
+=== Task 'acvc-fixed-retrace-reuse-e01-20260909' exited with code 0 at 2026-09-10T07:02:19+08:00 (Duration: 80s) ===

@@ -98,3 +98,20 @@ one accepted receipt18:10:36Z,tab closed18:10:53Z,and retired PAUSED request hea
 The13m23s provider generation window is not experiment compute. All four archive files are
 now present; no companion-archive gap remains. P2 item20260905-fsd-010 records applied PARK
 with exact Pro source and this intake; no owner vote is invented.
+
+## P13 source-preparation boundary (2026-09-07)
+
+`FSD_P13_REENTRY_SOURCE_PREPARATION_20260907.md` completes the specifically assigned source
+re-entry preparation. The actual source separates native lease renewal from the recurrent
+skill-conditioned role emitter. One unselected question is returned: on the accepted large
+seed2 final policy, replace only the native renewal actuator with public-flag renewal, retain
+the policy's own skill/state trajectory, and compare native service with intact D2 and the
+competent public-greedy controller. This is an actuator/control question, not synchronized
+D2 interruption or learning benefit. Checkpoint presence/digest, disabled observation/state
+normalization, enabled value normalization, fresh-episode reset path and missing mid-episode
+state are explicit. Zero new experiment, learner, evaluation, source implementation or Pro Send.
+
+No re-entry, new family, recast or successor is selected; the applied PRO_FINAL above remains.
+Any disposition belongs to the existing Convergence node under a later Portfolio command.
+The source preparation contains its prospective estimand, contrasting outcomes, bounded work,
+cost uncertainty and stop proposal. Its claim ceiling is A/RECON source/state facts.

@@ -6,7 +6,7 @@ new algorithm is not confused with HMASD presets in ``config_1.py``.
 
 from __future__ import annotations
 
-from config_1 import Config as EnvConfig
+from configs.config_1 import Config as EnvConfig
 
 
 class Config(EnvConfig):

@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "request_id": "2026-09-09-vspc1-native-hold-value-post-b12-convergence-01",
+  "workflow_node": "em_convergence",
+  "conversation_binding_key": "em:vsp_c1:convergence",
+  "direction_id": "vsp_c1",
+  "direction_ids": [
+    "vsp_c1"
+  ],
+  "conversation_id": "6a9cfac6-4d34-83e8-9f0a-088c03f4fb0c",
+  "provider_url": "https://chatgpt.com/c/6a9cfac6-4d34-83e8-9f0a-088c03f4fb0c",
+  "user_message_id": "65697065-3289-490f-8d6a-b6a3249b1183",
+  "assistant_message_id": "e787e57a-fd96-49a6-a967-c1b7e1b0909d",
+  "visible_model": "6 Pro",
+  "underlying_model": "Latest",
+  "thinking_effort": "Pro, 5 of 5.",
+  "source_mode": "paste",
+  "prompt_sha256": "ed5a7f93921b8a74485ca4005339e173f389ba744e838060a54bf49f852c9ada",
+  "response_sha256": "dece925efd93a0472de96de3987ac06f0061d392a8c9685b3d9cf44e441f5829",
+  "response_characters": 829,
+  "response_bytes": 829,
+  "send_click_count": 1,
+  "send_evidence": {
+    "send_click_count": 1,
+    "send_attempted": true,
+    "url_observed": true,
+    "user_node_observed": true,
+    "user_node_exact": true,
+    "attachment_observed": false,
+    "paste_mode": true,
+    "prompt_sha256": "ed5a7f93921b8a74485ca4005339e173f389ba744e838060a54bf49f852c9ada",
+    "user_message_id": "65697065-3289-490f-8d6a-b6a3249b1183",
+    "provider_url_observed": "https://chatgpt.com/c/6a9cfac6-4d34-83e8-9f0a-088c03f4fb0c",
+    "binding_match": true
+  },
+  "identity_validation": "PASS",
+  "identity_expected": {
+    "conversation_id": "6a9cfac6-4d34-83e8-9f0a-088c03f4fb0c",
+    "user_message_id": "65697065-3289-490f-8d6a-b6a3249b1183",
+    "assistant_message_id": "e787e57a-fd96-49a6-a967-c1b7e1b0909d"
+  },
+  "identity_observed": {
+    "conversation_id": "6a9cfac6-4d34-83e8-9f0a-088c03f4fb0c",
+    "user_message_id": "65697065-3289-490f-8d6a-b6a3249b1183",
+    "assistant_message_id": "e787e57a-fd96-49a6-a967-c1b7e1b0909d"
+  },
+  "archive_paths": {
+    "manifest_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_c1\\2026-09-09-vspc1-native-hold-value-post-b12-convergence-01\\2026-09-09-vspc1-native-hold-value-post-b12-convergence-01--vsp_c1__PACKET_MANIFEST.json",
+    "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_c1\\2026-09-09-vspc1-native-hold-value-post-b12-convergence-01\\2026-09-09-vspc1-native-hold-value-post-b12-convergence-01--vsp_c1__00_PROMPT.md",
+    "reference_files": [],
+    "response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_c1\\2026-09-09-vspc1-native-hold-value-post-b12-convergence-01\\2026-09-09-vspc1-native-hold-value-post-b12-convergence-01--vsp_c1--attempt-01__02_RESPONSE.md",
+    "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_c1\\2026-09-09-vspc1-native-hold-value-post-b12-convergence-01\\2026-09-09-vspc1-native-hold-value-post-b12-convergence-01--vsp_c1--attempt-01__03_TRANSPORT_FACTS.json",
+    "response_sha256": "dece925efd93a0472de96de3987ac06f0061d392a8c9685b3d9cf44e441f5829"
+  },
+  "wait_status": "NATURAL_COMPLETION",
+  "observed_page_state": "Worked for 16m 33s; complete assistant response; Copy response present; no active generation control",
+  "capture_method": "Current-round scoped Copy response control via CUA clipboard.read; raw UTF-8 response preserved",
+  "archive_status": "ARCHIVED",
+  "timestamps": {
+    "completed_at": "2026-09-09T12:08:50Z",
+    "captured_at": "2026-09-09T12:08:50Z",
+    "archived_at": "2026-09-09T12:08:50Z"
+  },
+  "scientific_decision_formed": false,
+  "github_roundtrip_report": {
+    "delivery_tool_blocker": true,
+    "reported_gap": "No callable GitHub file/comment write action; response path 404 at HEAD 0923a4215fbdfed55e262802d7908cfab8dc27ac; no matching Issue #5 comment.",
+    "scientific_decision_formed": false
+  },
+  "return_receipt": {
+    "required": true,
+    "source_thread_id": "01a081d4-89c6-7821-97d8-209ac47172f1",
+    "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+    "destination_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+    "status": "SENT",
+    "attempt_count": 1,
+    "message_key": "2026-09-09-vspc1-native-hold-value-post-b12-convergence-01|vsp_c1|6a9cfac6-4d34-83e8-9f0a-088c03f4fb0c|dece925efd93a0472de96de3987ac06f0061d392a8c9685b3d9cf44e441f5829",
+    "retry_allowed": false,
+    "routing_mode": "PARENT_SESSION",
+    "delivery_mode": "bounded_single_attempt",
+    "return_control_after_attempt": true,
+    "archive_paths": {
+      "manifest_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_c1\\2026-09-09-vspc1-native-hold-value-post-b12-convergence-01\\2026-09-09-vspc1-native-hold-value-post-b12-convergence-01--vsp_c1__PACKET_MANIFEST.json",
+      "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_c1\\2026-09-09-vspc1-native-hold-value-post-b12-convergence-01\\2026-09-09-vspc1-native-hold-value-post-b12-convergence-01--vsp_c1__00_PROMPT.md",
+      "reference_files": [],
+      "response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_c1\\2026-09-09-vspc1-native-hold-value-post-b12-convergence-01\\2026-09-09-vspc1-native-hold-value-post-b12-convergence-01--vsp_c1--attempt-01__02_RESPONSE.md",
+      "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_c1\\2026-09-09-vspc1-native-hold-value-post-b12-convergence-01\\2026-09-09-vspc1-native-hold-value-post-b12-convergence-01--vsp_c1--attempt-01__03_TRANSPORT_FACTS.json",
+      "response_sha256": "dece925efd93a0472de96de3987ac06f0061d392a8c9685b3d9cf44e441f5829"
+    },
+    "response_sha256": "dece925efd93a0472de96de3987ac06f0061d392a8c9685b3d9cf44e441f5829",
+    "staged_at": "2026-09-09T12:08:50Z",
+    "fallback_enabled": false,
+    "delivery_status": "accepted",
+    "updated_at": "2026-09-09T12:09:41Z",
+    "sent_at": "2026-09-09T12:09:41Z"
+  },
+  "tab_lifecycle": "CLOSED",
+  "tab_closed_at": "2026-09-09T12:10:00Z"
+}

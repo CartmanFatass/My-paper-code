@@ -1,0 +1,37 @@
+{
+  "schema_version": 4,
+  "packet_id": "2026-09-09-foundations-scientific-validity-review-01--portfolio",
+  "attempt": 1,
+  "canonical_form": "logical_packet_manifest",
+  "request_id": "2026-09-09-foundations-scientific-validity-review-01",
+  "direction_id": "portfolio",
+  "direction_ids": ["ucope", "vap_folr_core", "roster_consistent_latent_exploration", "semigroup_consistent_duration_model_policy", "flexible_skill_duration", "vsp_c1", "vsp_03", "acvc", "metric_ground_transport_allocation", "commitment_residual_triggered_options"],
+  "workflow_node": "portfolio_decision",
+  "conversation_binding_key": "portfolio:cross_direction",
+  "decision_authority": "pro_final",
+  "conversation_id": "6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+  "provider_url": "https://chatgpt.com/c/6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+  "source_mode": "paste",
+  "body": {
+    "role": "prompt",
+    "source_path": "<paste>",
+    "canonical_filename": "2026-09-09-foundations-scientific-validity-review-01--portfolio__00_PROMPT.md",
+    "bytes": 1236,
+    "sha256": "2a7e53fe70b2e724b01e5a7f5bb65e084e97896295313f3691dd27ca9d99c786"
+  },
+  "materialized_archive_prompt": {
+    "path": "C:/Projects/HMASD/temp/sessions/hmasd-chatgpt-pro-transport/archive/portfolio/2026-09-09-foundations-scientific-validity-review-01/2026-09-09-foundations-scientific-validity-review-01--portfolio__00_PROMPT.md",
+    "bytes": 1237,
+    "sha256": "72caf06646446da038b9fddd4a41778f99a68cc5d93a01e40776a5206d6ea3df",
+    "trailing_lf": true,
+    "sent_body_sha256_without_trailing_lf": "2a7e53fe70b2e724b01e5a7f5bb65e084e97896295313f3691dd27ca9d99c786"
+  },
+  "references": [],
+  "reference_order_is_authoritative": true,
+  "provider_filename_policy": "record_observed_name_only",
+  "companion_prompt_is_transport_ui_only": true,
+  "user_message_id": "74def42a-892e-4760-9e04-0823cdf0bfdd",
+  "assistant_message_id": "23e73a34-ce0f-4006-afe9-84831931a838",
+  "turn_id": "efa9c2e4-a3e8-4fbb-8476-57c6d1ab4bae",
+  "manifest_path": "C:/Projects/HMASD/temp/sessions/hmasd-chatgpt-pro-transport/archive/portfolio/2026-09-09-foundations-scientific-validity-review-01/2026-09-09-foundations-scientific-validity-review-01--portfolio__PACKET_MANIFEST.json"
+}

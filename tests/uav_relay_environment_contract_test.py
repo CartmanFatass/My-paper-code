@@ -10,7 +10,7 @@ import pytest
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 pytest.importorskip("gymnasium")
 
-from config_1 import Config
+from configs.config_1 import Config
 from envs.pettingzoo.relay.belief_map import UAVBeliefMapEnv
 from envs.pettingzoo.relay.forced_relay import UAVForcedRelayEnv
 from envs.pettingzoo.relay.progressive import UAVProgressiveRelayEnv

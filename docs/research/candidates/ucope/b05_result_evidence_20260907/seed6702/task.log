@@ -1,0 +1,20 @@
+=== Task 'ucope-shared-return-b05-seed6702-p12-lf-20260907' started at 2026-09-08T05:39:43+08:00 ===
+{
+  "assessed_at": "2026-09-07T21:39:43.785421Z",
+  "available_physical_bytes": 15667040256,
+  "captured_at": "2026-09-07T21:39:43.785135Z",
+  "cgroup_headroom_bytes": null,
+  "cgroup_memory_current_bytes": null,
+  "cgroup_memory_max_bytes": null,
+  "effective_available_bytes": 15667040256,
+  "effective_floor_pass": true,
+  "failure_reasons": [],
+  "measurement_source": "/proc/meminfo",
+  "minimum_available_bytes": 4294967296,
+  "passed": true,
+  "physical_floor_pass": true,
+  "schema_version": 1
+}
+{"seed": 6702, "status": "COMPLETE", "branch": "RM-A", "wall_seconds": 4.76555313001154}
+whole_wall_seconds=4.84 peak_rss_kib=20300
+=== Task 'ucope-shared-return-b05-seed6702-p12-lf-20260907' exited with code 0 at 2026-09-08T05:39:48+08:00 (Duration: 5s) ===

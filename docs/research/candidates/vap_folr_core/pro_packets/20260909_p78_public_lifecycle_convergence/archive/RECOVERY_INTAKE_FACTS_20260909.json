@@ -1,0 +1,112 @@
+{
+  "request_id": "folr-public-lifecycle-p78-convergence-20260909",
+  "record_kind": "formed direction-decision intake and explicit Root execution allocation; no scientific result yet",
+  "captured_at_utc": "2026-09-09T16:13:28.003747+00:00",
+  "source_checkout": "C:/Projects/HMASD-worktrees/codex-vap-folr",
+  "starting_sha": "d3148908bb7fad4a05d0dfc19162dd3c5bdb12ec",
+  "reconciled_delivery_sha": "653727422183894b2f4d1c82a458fbc55aaf6ee0",
+  "reconciliation": "clean fast-forward; delivery commit adds only the declared RESPONSE.md",
+  "response_sha256": "a6981d24fa8685ae88dc7e288b532f3bf290b4677b6515f50dfcbd00ac34b321",
+  "chat_response_sha256": "51e67e5026e7ec7e15cca6a7c0a4336d6e502f7eb4e5fcebfe26d202c0554d48",
+  "prompt_sha256": "f8719a67576ee1f05e32357c8d008e98ab95c0e1c7ff76babd6499a77ea1090d",
+  "original_handoff_values_unchanged": true,
+  "raw_byte_copies": {
+    "TRANSPORT_FACTS.json": {
+      "source_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\root-recovery\\folr-p78-20260909\\archive\\TRANSPORT_FACTS.json",
+      "bytes": 11149,
+      "sha256": "9bd5b442d1f2d7c1e647a2cce1248c88fd77e72b9be6901f750ff87bb519b469",
+      "copy": "unchanged bytes"
+    },
+    "PROMPT.md": {
+      "source_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\root-recovery\\folr-p78-20260909\\archive\\PROMPT.md",
+      "bytes": 1257,
+      "sha256": "f8719a67576ee1f05e32357c8d008e98ab95c0e1c7ff76babd6499a77ea1090d",
+      "copy": "unchanged bytes"
+    },
+    "HANDOFF.json": {
+      "source_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\root-recovery\\folr-p78-20260909\\archive\\HANDOFF.json",
+      "bytes": 5786,
+      "sha256": "6e8c4ee29cd74fed07477269acd7a669af8ff289204d75c11d86679f7db21b04",
+      "copy": "unchanged bytes"
+    },
+    "GITHUB_RESPONSE.md": {
+      "source_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\root-recovery\\folr-p78-20260909\\archive\\GITHUB_RESPONSE.md",
+      "bytes": 22849,
+      "sha256": "a6981d24fa8685ae88dc7e288b532f3bf290b4677b6515f50dfcbd00ac34b321",
+      "copy": "unchanged bytes"
+    },
+    "GITHUB_COMMENT.json": {
+      "source_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\root-recovery\\folr-p78-20260909\\archive\\GITHUB_COMMENT.json",
+      "bytes": 4797,
+      "sha256": "e0d97a0d48405f9d465e781f2c61a4a4aed15fd51729dee2c608d95acde139b1",
+      "copy": "unchanged bytes"
+    },
+    "CHAT_RESPONSE.md": {
+      "source_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\root-recovery\\folr-p78-20260909\\archive\\CHAT_RESPONSE.md",
+      "bytes": 392,
+      "sha256": "51e67e5026e7ec7e15cca6a7c0a4336d6e502f7eb4e5fcebfe26d202c0554d48",
+      "copy": "unchanged bytes"
+    }
+  },
+  "root_reported_delivery": {
+    "conversation_id": "6aa18137-9d88-83e8-a01f-46630813faf8",
+    "user_message_id": "3bdc9ffd-1c79-4f8d-9eba-e91c268da272",
+    "assistant_message_id": "c4762fcb-b847-4fda-b5f5-96851b78443b",
+    "issue_comment_id": 5604869278,
+    "natural_completion": "7m44s",
+    "browser_closed_after_verified_archive": true,
+    "source": "Root native completion message; copied TRANSPORT_FACTS was captured before the reported close and still says OPEN",
+    "prior_unconfirmed_clicks": 2,
+    "root_authorized_recovery_clicks": 1,
+    "new_dm_provider_actions": 0
+  },
+  "direction_selection": "PRO_FINAL: select explicit public-lifecycle extension for a later bounded real trained RETAIN/RESET comparison; no experiment allocation in Pro response",
+  "root_execution_allocation_verbatim": "I read full immutable response; agree it selected scope only, not an execution allocation. Root now explicitly extends your assignment to card + bounded CM engineering/review + ONE new matched RETAIN/RESET class-B pair under this conforming selected scope. Maximum allocation: 5,000 twenty-step training episodes/arm, updates only at stated one/new episode after32 available (4969/arm), one frozen final32-episode greedy evaluation/arm; 1800s complete logical invocation/arm,3600pair, supporting changed-boundary checks<=300s total. No pilot, repeats, tuning sweep, extra checkpoint evaluation or automatic successor. You choose/freeze concrete seed, MEI with reason, common epsilon/configuration and exact counting under ordinary object-tier delegated decision; do not silently inherit an exploration schedule inappropriate to the declared budget. Machine-generate exact cost/exposure, disclose unknown wall; no cost-only run. Record predictions, no-owner-slot unattended. Preserve every Pro information/state/nativeRNG/terminal-opportunity constraint, online+target unroll parity, and native primary/all negatives. Use remote-first exact committed source, fresh per-invocation admission, detached supervisor and sole CM observation. Independent changed-semantic review required; ordinary no new scope4 machinery. If implementation exceeds scope budget or actual admission/cap fails, return exact boundary no new invocation. This is Root's new finite execution allocation under resumed research/object delegation, not a claim Pro already granted it.",
+  "current_intake_new_scientific_exposure": {
+    "target_imports": 0,
+    "model_calls": 0,
+    "models": 0,
+    "native_episodes": 0,
+    "training_ticks": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0,
+    "diagnostics": 0,
+    "scientific_invocations": 0,
+    "provider_sends_by_dm": 0
+  },
+  "historical_b04_counts_raw": {
+    "train_episodes": 98304,
+    "eval_episodes": 49920,
+    "updates": 1536,
+    "primitive_transitions": 444672,
+    "complete_episodes": 148224
+  },
+  "historical_b04_expected_counts_raw": {
+    "writer_training_episodes": 24576,
+    "routing_training_episodes": 73728,
+    "training_episodes": 98304,
+    "writer_updates": 384,
+    "routing_updates": 1152,
+    "learner_updates": 1536,
+    "writer_evaluation_episodes": 6912,
+    "routing_evaluation_episodes": 41472,
+    "latch_evaluation_episodes": 1536,
+    "evaluation_episodes": 49920,
+    "complete_episodes": 148224,
+    "primitive_transitions": 444672
+  },
+  "historical_correction": "444672 is primitive transitions including train and evaluation, not training-only; prior frozen files and fixed TASK remain unchanged",
+  "direct_vs_reported": "DM read full immutable Git response and exact copied bytes. Provider model, send, paired chat completion and close are Root-reported facts; DM performed no browser observation or action.",
+  "exact_byte_archive": {
+    "path": "root_recovery_20260909/ROOT_RECOVERY_EXACT_BYTES.zip",
+    "reason": "Preserves captured CRLF bytes across ordinary Git text normalization; adjacent files are readable copies.",
+    "bytes": 16560,
+    "sha256": "5da3ca3c2a576f6a76574f1253d705c0b4f14a558cfbff6d204999dc3e1219bb"
+  },
+  "historical_b04_corrected_transition_split": {
+    "training_primitive_transitions": 294912,
+    "evaluation_primitive_transitions": 149760,
+    "total_primitive_transitions": 444672,
+    "source": "B04 three-step episodes; train/evaluation counts are the immutable summary counts"
+  }
+}

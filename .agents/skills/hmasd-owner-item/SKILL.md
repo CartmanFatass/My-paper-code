@@ -1,6 +1,6 @@
 ---
 name: hmasd-owner-item
-description: Use when DM, Portfolio or Root records a P1/P2 owner item (new card, direction decision, material dissent, close call, second recast or Portfolio proposal), and at clean boundaries to apply owner reviews.
+description: Use when DM or Root records a P1/P2 owner item (new card, direction decision, material dissent, close call, second recast or Portfolio proposal), and at clean boundaries to apply owner reviews.
 ---
 
 # HMASD owner items
@@ -34,7 +34,7 @@ Rule text: `AGENTS.md` §4.4–4.5. Controlling decision:
 | you overrule a critic return ending `MATERIAL_DISSENT: yes` | `critic-dissent` | your options plus the critic's position as one option | `--evidence` = the critic return and the card |
 | your recommendation and its runner-up were not clearly separated | `close-call` | as `decision` | as `decision` |
 | Convergence returns a second `RECAST` for the direction | `second-recast` | default `continue-low-priority / park` | `--tier direction`, `--evidence` = the Pro archive |
-| Portfolio records a proposal, or a DM returns a direction recommendation | `portfolio` | default `ratify / refuse / amend` | `--tier portfolio`, `--direction portfolio` for cross-direction items |
+| Portfolio records its conforming Pro decision | `portfolio` | default `keep / refuse / amend` | `--tier portfolio`, `--direction portfolio` for cross-direction items |
 
 For a created P1/P2 item, the audit row can cite the returned item path. A `skipped`
 result has no item path; ordinary audit rows cite the card/intake directly.
@@ -50,7 +50,7 @@ python tools/owner_console/item.py add --direction <direction-id> --kind close-c
 `--direction` is the direction id from `docs/research/RESEARCH_MAP.md` (or `portfolio`); the id
 prefix is derived from it. Kinds with default options need no `--option`.
 
-## Decision packet (required for anything the owner must rule on)
+## Decision packet (required for P1/P2 review)
 
 `item.py add` refuses a `portfolio`, `second-recast`, `critic-dissent`, `close-call` or
 `new-card` item, and any direction- or portfolio-tier item, without `--packet <file.json>` and a
@@ -85,16 +85,24 @@ Required: `question`, `changes_if_approved` (at least one entry, or one string `
 ## Read point (every clean boundary)
 
 ```
-python tools/owner_console/item.py reviews          # unapplied owner instructions, last 2 days
+python tools/owner_console/item.py reviews          # all unapplied owner instructions, regardless of age
 python tools/owner_console/item.py reviews --json
 python tools/owner_console/item.py mark-answered <id> [<id> ...]
 ```
 
 Apply each `instruction` that differs from what already ran (an override of a delegated decision
 takes effect at this boundary; a `reject` or `revise` on a card is applied before its next launch;
-a `prediction` reply is scored at intake; `ratify` is the owner's Portfolio ratification), cite
+a `prediction` reply is scored at intake; legacy `ratify` retains its original meaning), cite
 the review line in the ledger, then `mark-answered`. `agree` needs no action beyond
 `mark-answered`. Nothing here holds a launch (`AGENTS.md` §4.5; evidence spec §11.4).
+
+For prospective Portfolio decisions under AGENTS §4.8, `keep` or `agree` acknowledges the
+record without granting fresh authorization. `refuse` or `amend` is an asynchronous override
+at the next clean boundary; preserve executed effects and do not infer a rerun or reversal.
+Custom option keys retain their actual recorded meanings. Preserve historical items and replies.
+Use `trace` for planned/applied/blocked state; `auto_applied` records only an executed option.
+The retained packet field `changes_if_approved` describes the disposition's changes, not a new
+ratification gate. Read/archive Pro and record the designated DM's conformance check before application.
 
 ## What not to do
 

@@ -1,0 +1,32 @@
+{
+  "id": "20260908-mgtap-002",
+  "created": "2026-09-08T11:22:58-07:00",
+  "direction": "metric_ground_transport_allocation",
+  "tier": "object",
+  "kind": "brief",
+  "title": "N5：原生几何 Pro 暂缓边界简报",
+  "context": "简报概括本轮来源检查和 Pro 方向裁决：原生任务是五 UAV 速度控制，奖励经信道、干扰、SINR、容量和关联耦合；旧配置分配器、基站距离和排序槽位均不是已定义的原生比较。当前家族可逆暂缓，几何 actor 仍可在未来以同信息 generic comparator 重新提出；没有新训练或 Portfolio 变化。",
+  "options": [
+    {
+      "key": "reading-agreed",
+      "label": "the reading stands",
+      "consequence": "the reading stands"
+    },
+    {
+      "key": "reading-disputed",
+      "label": "re-read per the comment",
+      "consequence": "re-read per the comment"
+    }
+  ],
+  "recommended": null,
+  "auto_applied": null,
+  "dm_reason": "",
+  "evidence": [
+    "docs/research/candidates/metric_ground_transport_allocation/MGTAP_NATIVE_GEOMETRY_CONVERGENCE_INTAKE_20260908.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-08.md#n5-native-geometry-convergence-final-brief",
+  "brief": "docs/research/portfolio/owner/briefs/metric_ground_transport_allocation/2026-09-08_native_geometry_convergence.md",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

@@ -1,0 +1,104 @@
+{
+  "id": "20260909-scdmp-002",
+  "created": "2026-09-09T09:37:50-07:00",
+  "direction": "semigroup_consistent_duration_model_policy",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "B01：真实保持段双端残差对完整MC",
+  "context": "在完整MC与同信息MLP上增加固定双端残差；五UAV原生任务，一组新训练，最终sampled回报差为主量。绑定结构是时间抽象或终止；独立训练单位只有一组。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "按master8201固定卡完成实现、独立review和一次上限内运行，完整保留所有结果。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "停止未开始的本卡工作，不自动改选机制或种子。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "按明确修改意见更正未来工作，保留已经发生的证据与预算。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "原单组预算已由方向裁决和既有继续路径分配；完整梯度与原生收益对比是所选最小观察。",
+  "evidence": [
+    "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_NATIVE_HOLD_RESIDUAL_B01_SCIENCE_CARD_20260909.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-09.md#L6",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260908_held_residual_context_repair/archive/RESPONSE.md",
+        "quote": "选择原候选 SCDMP-NATIVE-HOLD-RESIDUAL-B01，作为一次方向局部的 B/EXPLORE；确认先前完整答复的对象选择，也确认其“新的实质 RECAST”分类。",
+        "why": "新合规上下文中的完整方向裁决，只选原有一组比较，并要求真实记录重铸。"
+      },
+      {
+        "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_NATIVE_HOLD_RESIDUAL_B01_SCIENCE_CARD_20260909.md",
+        "quote": "Both values come from the current epoch's complete-batch critic output and both retain gradients.",
+        "why": "这是改变学习目标的双端梯度耦合，保留完整MC与同信息比较器。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260908_held_residual_context_repair/CONVERGENCE_INTAKE_20260909.md",
+        "quote": "Strongest contradiction: sparse opening pairs can couple imperfect predictions, the full MLP may suffice, and residual/clipping effects can harm control.",
+        "why": "已有MLP可能足够；少量残差对不保证原生收益。"
+      },
+      {
+        "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260908_held_residual_context_repair/archive/RESPONSE.md",
+        "quote": "两组 T−G 均负、两个 T−H 也负，是对乐观可用控制预期的更近反证，不是新残差已失败。",
+        "why": "保留另一个原生时长实验的不利背景，不能借门控正号预判本方法。"
+      }
+    ],
+    "uncertainty": [
+      "尚无新损失的训练结果；一组训练不能估计训练总体方差。",
+      "两臂都可能低于H，残差下降不能补偿原生损失。",
+      "保持支持稀疏，可能得到合法但零辅助项的观察。",
+      "同信息调优headroom缺失；不增设前置测量。"
+    ],
+    "cost": {
+      "compute": "只给原来一组：286720原生步、2048次Adam、96次最终评价，1800秒/臂、3600秒/整对；无额外种子、pilot或自动重试。",
+      "owner_time": "无需立即回复；可在批改台异步改变后续安排。",
+      "reversibility": "costly",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "选择原候选 SCDMP-NATIVE-HOLD-RESIDUAL-B01，作为一次方向局部的 B/EXPLORE；确认先前完整答复的对象选择，也确认其“新的实质 RECAST”分类。",
+    "source": "docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260908_held_residual_context_repair/archive/RESPONSE.md",
+    "question": "接受这张固定单组残差MC对比卡，按原预算完成实现、review、一次运行和全部结果intake吗？",
+    "changes_if_approved": [
+      {
+        "target": "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_NATIVE_HOLD_RESIDUAL_B01_SCIENCE_CARD_20260909.md",
+        "from": "来源阶段候选，未冻结当前B卡",
+        "to": "master8201双臂、完整MC、固定双端残差、最终sampled评价与H，按原上限实施。"
+      }
+    ],
+    "if_refused": "按所有者拒绝或修订指令处理尚未执行部分；不擅自换机制、种子、预算或解释已见结果。"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-09T16:52:46+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260908_held_residual_context_repair/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/root-log/2026-09-09.md",
+      "state": "applied",
+      "summary": "Root accepted/integrated the exact one-pair card4c618f335. Original branch ledger L6 maps to main audit2026-09-09 L122. CM owns its accepted source7d0fc9d00 one-pair execution and observation; no extra allocation."
+    },
+    {
+      "at": "2026-09-09T17:13:24+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260908_held_residual_context_repair/archive/RESPONSE.md",
+      "record": "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_NATIVE_HOLD_RESIDUAL_B01_INTAKE_20260909.md",
+      "state": "applied",
+      "summary": "原单组已完整实现、独立review、运行并intake；主差+0.006737落在±0.01内。全部286720步、2048 Adam和96次评价完整；不重复原惩罚、不追加种子或后继。保留双端非零曝光、14次负对照差及两项H结果。"
+    }
+  ]
+}

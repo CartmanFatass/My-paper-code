@@ -1,0 +1,355 @@
+{
+  "request": "VSP03 P74 post-B04 direction consultation",
+  "generated_at_utc": "2026-09-09T08:12:06.328035+00:00",
+  "method": "Python standard library read-only extraction of accepted summaries, saved run-level analysis and known configuration arithmetic; no scientific module imported or executed",
+  "current_input_sync_sha": "f5a1080e7e645353aebc71ac169ac32081fcac39",
+  "accepted_intake_sha": "daf20eeee83f045445f1f78d0b4667db80e7e4f5",
+  "sources": [
+    {
+      "seed": 5,
+      "path": "docs/research/candidates/vsp_03/VSP03_B03_RESULT_ARTIFACTS_20260908/summary.json",
+      "sha256": "3a8e37bb3e2089967d06677a3045f1314374c97e7a4f77679946ecca6124b484",
+      "primary": {
+        "mean": -0.013974609375000007,
+        "conditional_world_sd": 0.2337120721914452,
+        "conditional_world_se": 0.007303502255982663,
+        "worlds": 1024
+      },
+      "comparisons": {
+        "G_greedy-R0": {
+          "mean": -0.013974609375000007,
+          "conditional_world_sd": 0.2337120721914452,
+          "conditional_world_se": 0.007303502255982663,
+          "worlds": 1024
+        },
+        "G_greedy-R": {
+          "mean": -0.01477539062500001,
+          "conditional_world_sd": 0.23061511596272738,
+          "conditional_world_se": 0.007206722373835231,
+          "worlds": 1024
+        },
+        "G_stochastic-R0": {
+          "mean": -0.0290673828125,
+          "conditional_world_sd": 0.3153095646421544,
+          "conditional_world_se": 0.009853423895067326,
+          "worlds": 1024
+        },
+        "G_stochastic-R": {
+          "mean": -0.029868164062499997,
+          "conditional_world_sd": 0.3164075554653686,
+          "conditional_world_se": 0.009887736108292768,
+          "worlds": 1024
+        },
+        "G_stochastic-G_greedy": {
+          "mean": -0.015092773437499997,
+          "conditional_world_sd": 0.319897368968617,
+          "conditional_world_se": 0.00999679278026928,
+          "worlds": 1024
+        }
+      },
+      "model_parameters": 2083,
+      "optimizer_steps": 128,
+      "initial_total_l2": 5.832952976226807,
+      "first_displacement_over_initial_l2": 0.004009584689103836,
+      "final_displacement_over_initial_l2": 0.5059411789278623
+    },
+    {
+      "seed": 6,
+      "path": "docs/research/candidates/vsp_03/VSP03_B04_P67_RESULT_ARTIFACTS_20260908/science/summary.json",
+      "sha256": "1182980dbb169b0b0bcbac8b5054026f83bc9a5e2acddaf6caff57158d49ab8c",
+      "primary": {
+        "mean": 0.0026123046875000007,
+        "conditional_world_sd": 0.07382005733582478,
+        "conditional_world_se": 0.0023068767917445243,
+        "worlds": 1024
+      },
+      "comparisons": {
+        "G_greedy-R0": {
+          "mean": 0.0026123046875000007,
+          "conditional_world_sd": 0.07382005733582478,
+          "conditional_world_se": 0.0023068767917445243,
+          "worlds": 1024
+        },
+        "G_greedy-R": {
+          "mean": 0.0017041015625000008,
+          "conditional_world_sd": 0.08871131992187342,
+          "conditional_world_se": 0.0027722287475585444,
+          "worlds": 1024
+        },
+        "G_stochastic-R0": {
+          "mean": -0.0487548828125,
+          "conditional_world_sd": 0.33946141787887213,
+          "conditional_world_se": 0.010608169308714754,
+          "worlds": 1024
+        },
+        "G_stochastic-R": {
+          "mean": -0.049663085937500004,
+          "conditional_world_sd": 0.34142005323555175,
+          "conditional_world_se": 0.010669376663610992,
+          "worlds": 1024
+        },
+        "G_stochastic-G_greedy": {
+          "mean": -0.0513671875,
+          "conditional_world_sd": 0.33904253365337467,
+          "conditional_world_se": 0.010595079176667958,
+          "worlds": 1024
+        }
+      },
+      "model_parameters": 2083,
+      "optimizer_steps": 128,
+      "initial_total_l2": 5.734800338745117,
+      "first_displacement_over_initial_l2": 0.004078225390812213,
+      "final_displacement_over_initial_l2": 0.4365440266978239
+    }
+  ],
+  "run_level_summary_reused_from": "docs/research/candidates/vsp_03/VSP03_B04_P67_DM_ANALYSIS_20260908.json",
+  "run_level_summary": {
+    "unit": "caller-declared independent training run",
+    "inference": "descriptive only; no confidence interval or success classification",
+    "groups": [
+      {
+        "task": "VSP03_greedy_use_prospective",
+        "arm": "G_greedy-R",
+        "n": 2,
+        "mean": -0.006535644531250004,
+        "sample_sd": 0.01165276067629199,
+        "min": -0.01477539062500001,
+        "max": 0.0017041015625000008,
+        "runs": {
+          "5": -0.01477539062500001,
+          "6": 0.0017041015625000008
+        }
+      },
+      {
+        "task": "VSP03_greedy_use_prospective",
+        "arm": "G_greedy-R0",
+        "n": 2,
+        "mean": -0.005681152343750003,
+        "sample_sd": 0.011728719412552262,
+        "min": -0.013974609375000007,
+        "max": 0.0026123046875000007,
+        "runs": {
+          "5": -0.013974609375000007,
+          "6": 0.0026123046875000007
+        }
+      },
+      {
+        "task": "VSP03_greedy_use_prospective",
+        "arm": "G_stochastic-G_greedy",
+        "n": 2,
+        "mean": -0.033229980468749996,
+        "sample_sd": 0.025649884167162414,
+        "min": -0.0513671875,
+        "max": -0.015092773437499997,
+        "runs": {
+          "5": -0.015092773437499997,
+          "6": -0.0513671875
+        }
+      },
+      {
+        "task": "VSP03_greedy_use_prospective",
+        "arm": "G_stochastic-R",
+        "n": 2,
+        "mean": -0.039765625,
+        "sample_sd": 0.013997123490870433,
+        "min": -0.049663085937500004,
+        "max": -0.029868164062499997,
+        "runs": {
+          "5": -0.029868164062499997,
+          "6": -0.049663085937500004
+        }
+      },
+      {
+        "task": "VSP03_greedy_use_prospective",
+        "arm": "G_stochastic-R0",
+        "n": 2,
+        "mean": -0.0389111328125,
+        "sample_sd": 0.013921164754610152,
+        "min": -0.0487548828125,
+        "max": -0.0290673828125,
+        "runs": {
+          "5": -0.0290673828125,
+          "6": -0.0487548828125
+        }
+      }
+    ],
+    "paired_differences": []
+  },
+  "unit_warning": "Five contrast groups share the same two G learners; worlds and fixed rules are not training replicates.",
+  "discovery_seed4": "outcome-informed; excluded from prospective summary",
+  "failed_P64_P65": "retained failure; not a trained instance or zero-valued endpoint",
+  "native_accounting_seed6": {
+    "G_greedy-R0": {
+      "native_mean_deltas": {
+        "success_per_team": 0.0029296875,
+        "attempt_per_team": 0.03515625,
+        "waiting_ticks_per_team": -0.810546875,
+        "non_submission_per_team": -0.03515625,
+        "blocked_pending": 0.0,
+        "blocked_final_clocks": 0.0
+      },
+      "utility_components": {
+        "success": 0.00146484375,
+        "attempt_cost": -0.00087890625,
+        "waiting_cost": 0.0020263671875
+      },
+      "sum": 0.0026123046875000003,
+      "published_mean": 0.0026123046875000007,
+      "accounting_minus_published": -4.336808689942018e-19,
+      "interpretation": "Accounting identity on sampled native outcomes, not a causal or per-world policy-equivalence claim."
+    },
+    "G_greedy-R": {
+      "native_mean_deltas": {
+        "success_per_team": 0.0009765625,
+        "attempt_per_team": 0.0322265625,
+        "waiting_ticks_per_team": -0.80859375,
+        "non_submission_per_team": -0.0322265625,
+        "blocked_pending": 0.0,
+        "blocked_final_clocks": 0.0
+      },
+      "utility_components": {
+        "success": 0.00048828125,
+        "attempt_cost": -0.0008056640625,
+        "waiting_cost": 0.002021484375
+      },
+      "sum": 0.0017041015624999999,
+      "published_mean": 0.0017041015625000008,
+      "accounting_minus_published": -8.673617379884035e-19,
+      "interpretation": "Accounting identity on sampled native outcomes, not a causal or per-world policy-equivalence claim."
+    },
+    "G_stochastic-R0": {
+      "native_mean_deltas": {
+        "success_per_team": -0.138671875,
+        "attempt_per_team": 0.1357421875,
+        "waiting_ticks_per_team": -9.58984375,
+        "non_submission_per_team": -0.1357421875,
+        "blocked_pending": 0.013671875,
+        "blocked_final_clocks": -0.01171875
+      },
+      "utility_components": {
+        "success": -0.0693359375,
+        "attempt_cost": -0.0033935546875,
+        "waiting_cost": 0.023974609375
+      },
+      "sum": -0.0487548828125,
+      "published_mean": -0.0487548828125,
+      "accounting_minus_published": 0.0,
+      "interpretation": "Accounting identity on sampled native outcomes, not a causal or per-world policy-equivalence claim."
+    },
+    "G_stochastic-R": {
+      "native_mean_deltas": {
+        "success_per_team": -0.140625,
+        "attempt_per_team": 0.1328125,
+        "waiting_ticks_per_team": -9.587890625,
+        "non_submission_per_team": -0.1328125,
+        "blocked_pending": 0.013671875,
+        "blocked_final_clocks": -0.01171875
+      },
+      "utility_components": {
+        "success": -0.0703125,
+        "attempt_cost": -0.0033203125,
+        "waiting_cost": 0.0239697265625
+      },
+      "sum": -0.049663085937500004,
+      "published_mean": -0.049663085937500004,
+      "accounting_minus_published": 0.0,
+      "interpretation": "Accounting identity on sampled native outcomes, not a causal or per-world policy-equivalence claim."
+    },
+    "G_stochastic-G_greedy": {
+      "native_mean_deltas": {
+        "success_per_team": -0.1416015625,
+        "attempt_per_team": 0.1005859375,
+        "waiting_ticks_per_team": -8.779296875,
+        "non_submission_per_team": -0.1005859375,
+        "blocked_pending": 0.013671875,
+        "blocked_final_clocks": -0.01171875
+      },
+      "utility_components": {
+        "success": -0.07080078125,
+        "attempt_cost": -0.0025146484375,
+        "waiting_cost": 0.0219482421875
+      },
+      "sum": -0.0513671875,
+      "published_mean": -0.0513671875,
+      "accounting_minus_published": 0.0,
+      "interpretation": "Accounting identity on sampled native outcomes, not a causal or per-world policy-equivalence claim."
+    }
+  },
+  "mei_absolute": 0.02,
+  "headroom": "No tuned same-information N2 baseline versus stated upper record; absence, not zero",
+  "recasts": 1,
+  "new_exposure": {
+    "models": 0,
+    "learner_starts": 0,
+    "training_seeds": 0,
+    "environment_episodes": 0,
+    "optimizer_steps": 0,
+    "evaluations": 0,
+    "replays": 0,
+    "profiling_calls": 0,
+    "result_bearing_invocations": 0,
+    "source_implementation_changes": 0,
+    "Pro_Sends": 0
+  },
+  "historical_whole_run_cost": {
+    "source": "docs/research/candidates/vsp_03/VSP03_B04_P67_INTAKE_20260908.md section 5; manager journal",
+    "seed6_whole_invocation_wall_s": 3.253184,
+    "seed6_whole_unit_cpu_s": 3.27877,
+    "seed6_process_peak_rss_bytes": 492875776,
+    "interpretation": "One observed complete run, not a future upper or cost refusal"
+  },
+  "unselected_additional_G_candidate": {
+    "selected": false,
+    "allocation": "none; alternative for the direction node, no local third-seed allocation",
+    "proposed_seed": 7,
+    "proposed_torch_initialization": 40007,
+    "G_arm_index": 1,
+    "learning_arms": 1,
+    "independent_training_seeds": 1,
+    "actor_direct_parameters": 1570,
+    "critic_parameters": 513,
+    "total_parameters": 2083,
+    "updates": 128,
+    "episodes_per_update": 128,
+    "Adam_steps": 128,
+    "learning_rate": 0.001,
+    "training_joint_episodes": 16384,
+    "evaluation_modes": 4,
+    "worlds_per_mode": 1024,
+    "learner_evaluation_episodes": 2048,
+    "reference_evaluation_episodes": 2048,
+    "evaluation_joint_episodes": 4096,
+    "total_joint_episodes": 20480,
+    "total_team_ticks": 819200,
+    "total_target_transitions": 1638400,
+    "policy_batch_call_upper": 2210,
+    "policy_call_upper_excludes": "objective/critic/backward work",
+    "new_validation_models": 0,
+    "new_validation_episodes": 0,
+    "new_validation_optimizer_steps": 0,
+    "candidate_or_trajectory_search_calls": 0,
+    "solver_calls": 0,
+    "maximum_result_bearing_submissions_if_selected": 1,
+    "complete_invocation_cap_s": 120,
+    "prospective_complete_wall_s": null,
+    "cost_law": "admission/imports + G initialization + 128*C(128 episodes,40 ticks,2 targets) + 4*E(1024 worlds,40 ticks,2 targets) + normal weights/primary readback/publication/exit; one clock, no phase restart",
+    "execution": "remote-first wsl_4070; CPU float32; one compute thread; float64 worlds; existing committed implementation/adapter; fresh adjacent admission"
+  },
+  "unselected_family_pause": {
+    "new_scientific_work": {
+      "models": 0,
+      "learner_starts": 0,
+      "training_seeds": 0,
+      "environment_episodes": 0,
+      "optimizer_steps": 0,
+      "evaluations": 0,
+      "replays": 0,
+      "profiling_calls": 0,
+      "result_bearing_invocations": 0,
+      "source_implementation_changes": 0,
+      "Pro_Sends": 0
+    },
+    "scope": "Only tested ordinary-G update128 greedy-replacement family on unchanged public fixed-N2 shared-service host; not Portfolio lifecycle, global direction retirement or N1/T pause revision"
+  },
+  "exposure_line": "Consultation: 0 new models/training starts/seeds/environment episodes/optimizer steps/evaluations/replays/profiling/invocations/Pro Sends. Observed P67 G: 2083 parameters, 128 Adam steps at lr0.001, initial total L2=5.734800338745117, final displacement/initial L2=0.4365440266978239. Unselected one-G alternative: 2083 parameters, 128 real Adam steps, 16384 training + 4096 final-execution episodes = 20480 joint episodes, 819200 team ticks, 1638400 target transitions. Future displacement and wall unknown; historical movement does not predict gain."
+}

@@ -1,0 +1,76 @@
+{
+  "id": "20260908-vspc1-012",
+  "created": "2026-09-08T22:11:19-07:00",
+  "direction": "vsp_c1",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "B06：不变的宽133对照再做一对独立训练",
+  "context": "Claim: the normalized gated critic local native-return advantage over width-133 MLP recurs in a fresh matched training pair. Binding MARL structure: temporal abstraction or termination, with five co-adapting agents and separate partial histories. P71已分配完整路线；8302、UP概率55%、MEI0.01与全部结果规则事前固定。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "按既有对象层委托执行P71一对新训练；不改变方法、计数和时限。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "下一干净边界应用拒绝，保留实际证据与提交状态，不追加新运行。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "在受影响步骤前记录具体修改及其科学意义；不静默改变已冻结或已执行内容。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "第一对可信但噪声较大的局部结果支持一个新独立训练单位，不需要稳定优势或全部正向结果。",
+  "evidence": [
+    "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B06_SCIENCE_CARD_20260908.md",
+    "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B06_INTAKE_20260908.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-08.md#L87",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否接受B06这张新卡：保持归一化门控与加宽普通MLP比较，用8302独立训练一对并保留所有结果？",
+    "changes_if_approved": [
+      {
+        "target": "VSPC1 B06科学卡与P71对象层下一阶",
+        "from": "B05的一对局部UP已经完整记录；P70额度已结束",
+        "to": "在P71新额度下执行同一比较的一对独立训练，主键8302，事前UP概率55%，不改变方法、计数或时限"
+      }
+    ],
+    "if_refused": "在下一干净边界应用拒绝或修改指令，保留已发生的证据与接受状态；不改写P70，也不在不确定的提交状态下重复运行。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B06_SCIENCE_CARD_20260908.md",
+        "quote": "Section11.8.2–3 of the evidence spec permits one credible B observation to\nsupport this bounded independent training follow-up.",
+        "why": "第一对主差值0.01659且两臂均值高于H，足以支持有限跟进；新的训练种子直接询问信号能否再现。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B06_SCIENCE_CARD_20260908.md",
+        "quote": "Both learned mean returns exceed H, but the\n.0065919114 margin above MEI is smaller than conditional SE.",
+        "why": "现有结果仍有13/32个主比较不利回合，不能推出稳定优势；新种子可以为负或落在门槛内。"
+      }
+    ],
+    "uncertainty": [
+      "两个宽133训练对也只支持逐种子和描述性分散程度，不能保证总体稳定优势。",
+      "初始化、门控结构、共享梯度裁剪、价值尺度、浮点计算与伙伴共适应仍未区分。",
+      "无同信息调优余量记录；H是未调优参考。"
+    ],
+    "cost": {
+      "compute": "P71新额度仅一对、最多一次接受的提交：2×512×256训练加3×32×256评估，共286720步、2048次Adam、96次评估；每完整臂1800秒、整对3600秒上限。B05实测315.20秒仅供规划。新绑定测试总额不超过300秒，无原生试跑、额外评估或自动续跑。",
+      "owner_time": "已按站立对象层委托选择；无需等待回复，可异步纠正。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing；Root已分配完整P71任务，科学选择由DM对象层委托执行"
+    },
+    "verdict_text": "Options: (a) select this one independent pair with unchanged comparison;\n(b) change method/comparator again; (c) require exact diagnostics or promote\nthe existing claim. Recommend/select(a). Owner-delegated decision (unattended,\n2026-09-03 instruction): (a), **OWNER_DELEGATED object tier**, within Root's\nexplicit P71 complete-route assignment. No direction-tier question is needed.",
+    "source": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B06_SCIENCE_CARD_20260908.md"
+  },
+  "starred": false
+}

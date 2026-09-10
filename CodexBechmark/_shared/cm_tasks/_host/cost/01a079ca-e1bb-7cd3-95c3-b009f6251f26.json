@@ -1,0 +1,68 @@
+{
+  "comparison_mode": "observational",
+  "pricing": {
+    "source": "C:\\Users\\fires\\.agents\\skills\\codex-task-cost-analysis\\references\\default-pricing.json",
+    "effective_date": "2026-07-26",
+    "unit": "USD_per_million_tokens"
+  },
+  "selection": {
+    "thread_count": 1,
+    "cost_scope": "self"
+  },
+  "session_name_mappings": {
+    "01a079ca-e1bb-7cd3-95c3-b009f6251f26": "Huygens"
+  },
+  "time_window": {
+    "start": "2026-09-06T00:00:00-07:00",
+    "end": "2026-09-09T18:00:00-07:00",
+    "label": "2026-09-06,00:00 本地起到2026-09-09,18:00"
+  },
+  "excluded_incomplete": {
+    "turn": 0,
+    "task": 0,
+    "mixed_configuration_task": 0
+  },
+  "summaries": {
+    "turn": [
+      {
+        "group": "current_cm",
+        "model": "gpt-6-astra",
+        "reasoning_effort": "medium",
+        "sample_count": 2,
+        "priced_sample_count": 0,
+        "total_cost_usd": null,
+        "total_tokens": 12602607,
+        "mean_cost_usd": null,
+        "median_cost_usd": null,
+        "cost_range_usd": null,
+        "mean_total_tokens": 6301303.5,
+        "median_total_tokens": 6301303.5,
+        "token_range": [
+          6007793.0,
+          6594814.0
+        ],
+        "cached_input_share": 0.961426614296566,
+        "median_output_tokens": 23166.5,
+        "median_reasoning_tokens": 4838.5,
+        "mean_duration_seconds": 1164.1905,
+        "median_duration_seconds": 1164.1905,
+        "duration_range_seconds": [
+          936.939,
+          1391.442
+        ],
+        "mean_tree_cost_usd": null,
+        "median_tree_cost_usd": null,
+        "median_usage": {
+          "input_tokens": 5981840,
+          "cached_input_tokens": 5573120,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 25953,
+          "reasoning_output_tokens": 3474,
+          "total_tokens": 6007793
+        }
+      }
+    ]
+  },
+  "analysis": [],
+  "show_session_map": false
+}

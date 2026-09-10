@@ -1,0 +1,23 @@
+{
+  "observed_at": "2026-09-09T09:45:32.992056+00:00",
+  "source": "fresh gh issue view and contents API reads",
+  "issue": {
+    "body": "The next ACVC direction question is whether one private, coordinate-bound observation of lost link eligibility can support useful learned motion correction on the existing native five-UAV service host. The proposed real B reuses a trained frozen DENSE motion controller and compares structured and containing generic gates with fixed apply/retrace controls.\r\n\r\n[Source mapping, comparison, contrary evidence and computed work](https://github.com/CartmanFatass/My-paper-code/blob/e2a175ef418c05e99a7784f2e5b57856e027281a/docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_P76_PREPARATION_INTAKE_20260909.md).\r\n\r\nThis is DM synthesis and a proposed direction question, not a formed Pro decision. Own-link eligibility loss can be a beneficial teammate handoff; no native gain is established. The inherited 1/4 return threshold needs an explicit episode-sum versus per-step-mean interpretation by the original node. R03's closed finite host, all prior losses, recasts 2 and the current Portfolio state remain unchanged.\r\n\r\nP76 prepares a committed TASK/HANDOFF only: zero model, training, evaluator, diagnostic or probe calls; no new science card, master, experiment allocation or preparer Send. The proposed one matched instance is 294912 native team steps, 2048 optimizer updates and 128 final evaluations, with actual new runtime and gate opportunities unknown. No exact upper or tuning prerequisite is requested.\r\n\r\nThe fixed TASK will authorize Pro to add only `docs/research/candidates/acvc/pro_packets/20260909_native_link_loss_convergence/archive/RESPONSE.md` on `codex/acvc` and one immutable delivery-link comment here. Root handles the single Transport dispatch and receives the response for DM intake. The source/code, main, cards, Portfolio state and experiments are outside Pro's write scope.\r\n\r\n[Published fixed research TASK](https://github.com/CartmanFatass/My-paper-code/blob/58b5d723e5687f94a81a4f1b787641806d8b1421/docs/research/candidates/acvc/pro_packets/20260909_native_link_loss_convergence/TASK.md). The task is bound and ready for Root to dispatch once through Transport; no provider Send has occurred in this preparation.\r\n",
+    "comments": [],
+    "number": 14,
+    "state": "OPEN",
+    "title": "ACVC: native link-loss correction and fixed history controls",
+    "updatedAt": "2026-09-09T09:45:27Z",
+    "url": "https://github.com/CartmanFatass/My-paper-code/issues/14"
+  },
+  "fixed_task": {
+    "commit": "58b5d723e5687f94a81a4f1b787641806d8b1421",
+    "path": "docs/research/candidates/acvc/pro_packets/20260909_native_link_loss_convergence/TASK.md",
+    "url": "https://github.com/CartmanFatass/My-paper-code/blob/58b5d723e5687f94a81a4f1b787641806d8b1421/docs/research/candidates/acvc/pro_packets/20260909_native_link_loss_convergence/TASK.md",
+    "blob_sha": "8955ce6bd6b6560e1e0cbe4b3a5dcf0ec5508b88",
+    "sha256": "c85e7cffc5b2ae02bfefb214e4cb94558a3b7f2282a0ac486b629be6c44217ad",
+    "remote_equals_committed_bytes": true
+  },
+  "provider_send_count_by_preparer": 0,
+  "transport_dispatch_count_by_preparer": 0
+}

@@ -1,0 +1,38 @@
+{
+  "question": "是否按完整 Convergence 决定，仅开放一次固定检查点的原生续约控制观察？",
+  "changes_if_approved": [
+    {
+      "target": "flexible_skill_duration/DIRECTION.md · Native-renewal Convergence boundary",
+      "from": "固定 K2 policy-gap 学习分支暂停，尚未选择具体后继",
+      "to": "仅选 C/H/G 固定检查点原生控制观察；普通学习分支仍暂停，无运行分配或 recast"
+    }
+  ],
+  "if_refused": "保留旧学习分支暂停与全部 E3/E4 证据，按所有者新指令修订方向内选择；本轮没有需要停止的实验。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/pro_packets/20260907_native_renewal_convergence/archive/RESPONSE.md",
+      "quote": "选择（a）：允许一次严格限于已选检查点的原生续约控制重入；不恢复整个固定 K2 policy-gap 学习收益分支，也不在本轮选择新的训练。",
+      "why": "完整答复在固定证据上选择了有实际环境动作、反馈路径与公开信息比较器的有限问题。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/pro_packets/20260907_native_renewal_convergence/archive/RESPONSE.md",
+      "quote": "medium/large 六个合格配对全部失利；不能因为重新选择 large seed2 而把其旧负结果改称技术无效。",
+      "why": "新选择不能改写旧负结果；固定权重下的控制改善也不能证明 D2 学习有效。"
+    }
+  ],
+  "uncertainty": [
+    "H 的自身轨迹和内部状态会改变，不能称为纯 timing 直接效应或同步 D2。",
+    "检查点恢复、新 batch-32 和完整加载/发布成本尚未验证。",
+    "一个按旧结果选出的检查点不能估计训练种子总体表现。"
+  ],
+  "cost": {
+    "compute": "当前新增科学调用为零。后继设计为 96 回合、38400 环境评分步，每策略完整调用上限 180 秒、合计 540 秒；未分配运行。",
+    "owner_time": "无需等待批复；可异步覆盖方向内选择。",
+    "reversibility": "reversible",
+    "waits_on_this": "无；后续卡/规格及执行由新的有界任务给出。"
+  },
+  "verdict_text": "选择（a）：允许一次严格限于已选检查点的原生续约控制重入；不恢复整个固定 K2 policy-gap 学习收益分支，也不在本轮选择新的训练。",
+  "source": "https://github.com/CartmanFatass/My-paper-code/blob/a19678fb7e0618db0c665dabe3d3cc769dc93ff5/docs/research/candidates/flexible_skill_duration/pro_packets/20260907_native_renewal_convergence/archive/RESPONSE.md"
+}

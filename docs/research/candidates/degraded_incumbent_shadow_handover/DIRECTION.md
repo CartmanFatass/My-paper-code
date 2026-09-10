@@ -885,3 +885,202 @@ Support: `DISH_SAMPLED_EXECUTION_B06_RESULT_INTAKE_20260907.md` §§1–7;
 `DISH_SAMPLED_EXECUTION_B06_RESULT_EVIDENCE_20260907.md` (integrated33db0d860);
 `sampled_execution_b06_20260907_run01/DM_READBACK.json`; frozen card §§4–7;
 `pro_packets/20260907_post_b06_convergence/EXPOSURE_AND_COST.json`.
+
+## Accepted post-B06 boundary: stop the tested joint-rule extension — 2026-09-07
+
+Complete Convergence at immutable `f7b58f1b88d7282f98ca6be531e9b4c27f85b690` is a conforming
+**PRO_FINAL** direction decision: stop current extension of the tested joint Gaussian-motion /
+Bernoulli-intent rule on the corrected A03 host with the existing LOW_LR learner and ordinary
+renewal boundaries; retain modal execution as this instance's development default. No new A,
+B or scientific invocation is selected. The first-ordinary-legal-application RETAIN/COPY/SHADOW
+agenda remains open; no whole-direction PARK, CLOSE, RECAST or Portfolio action follows.
+
+The bounded reason is B06's complete -77.5 sampled-minus-modal mean and four adverse condition
+means (-92.5/-41/-94/-82.5), with invalid-commit and energy means increasing in every condition.
+The adverse and zero-transfer card branches apply; the low-confidence <=-24 prediction hits
+its sign/threshold. All 16 evaluation episodes complete 1200 ticks, so early evaluation stopping
+or a missing primary does not explain this finite loss. Complete charged wall remains 226.02 s;
+this decision buys no new exposure.
+
+Strongest contradiction: only one trained controller and two samples per condition were tested;
+two sampled episodes win (+14/+3), modal improves 292.5 over initialization, and sampled improves
+215 overall while retaining TERRAIN/K8 -57. That last contrast combines learning and execution.
+Another learner or component-only rule could change sign. Joint motion/intent sampling changes
+future observations and recurrent state, so event increases do not isolate a noise component.
+These limits prevent a population negative or causal diagnosis without forcing another seed
+before this finite development stop.
+
+All reference/final rows and the B06 learner have zero legal transfers. Source-origin eligibility
+and COPY−RETAIN/SHADOW−COPY value remain unestimated, not zero; private label clones are not
+ordinary source applications. Native training costs (1030 invalid commits, 3 separation breaches,
+35 terminal events), prior B04/B05 LR gains and their adverse conditions remain separate facts.
+B06 is not a third LR pair. No safety, stable superiority or transfer-impossibility claim is made.
+
+The next scientific discriminator, if separately selected for a concrete decision, could be a
+new independent controller's native sampled-minus-modal contrast; component-only performance
+remains another unestimated question. Neither is selected now. The finite measured comparison
+already answers B06's chosen question; no exact search, forced transfer or full causal diagnosis
+is required. No tuned-baseline/upper headroom record exists, and this absence does not negate B06.
+Portfolio receives the clean return through Root and owns the next bounded task assignment.
+
+References: `DISH_POST_B06_CONVERGENCE_INTAKE_20260907.md` §§1–7;
+`pro_packets/20260907_post_b06_delivery_correction/archive/RESPONSE.md` §§1–7;
+`DISH_SAMPLED_EXECUTION_B06_RESULT_INTAKE_20260907.md` §§2–7. Prior delivery blockers and
+prepared-only statements remain historical provenance; this section records the accepted answer.
+
+## Accepted P53 source boundary — 2026-09-08
+
+Source reconnaissance identifies each physical vehicle's already-observed applied acceleration
+in actor indices8:10 and retained `actor_raw` training fragments. Current motion uses a direct
+`3*tanh(m)` mean. Prepare is selected from the incumbent recurrent copy and commit from the
+standby shadow copy before serialization in the owner's native slot. The actor's repeated
+prepare/warmup fields are not the native readiness/version/origin certificate. Native certification
+uses additional joint source, prediction, geometry and timing state; private future labels and
+their forced promotion remain supervision, not ordinary application evidence.
+
+This supports one source-grounded question about a fixed own-command input inside the motion
+mean, with the accepted direct-mean learner as the same-information comparator. It supplies no
+observed performance gain or B06 cause. Strongest contrary case: the generic network already
+sees the input, projection already handles applied slew, and persistence can worsen tracking.
+The proposed next discriminator is one matched new training pair's native service contrast;
+selection remains with Convergence. No successor, source-value estimate, launch, recast or
+Portfolio disposition is applied. The accepted post-B06 narrow stop remains unchanged.
+
+Reference: `DISH_P53_NATIVE_PROPOSAL_SOURCE_INTAKE_20260908.md` §§1–8, particularly the
+source/information map, ordinary mean comparison, contrary outcome and zero-execution boundary.
+
+## Accepted P53 discriminator: own applied command in the mean — 2026-09-08
+
+Complete Convergence at immutable `ddb4c9ff20167837c99d146b2177c3e784066411` is a
+conforming **PRO_FINAL** direction decision selecting only **DISH-OWN-COMMAND-MEAN-B07,
+B/EXPLORE**. One new matched seed127 pair compares `3*tanh(m+a_prev/3)` with the newly
+trained direct mean `3*tanh(m)`. The fixed input is each physical vehicle's pre-decision
+raw actor acceleration8:10 from its incumbent/shadow copy. It changes how already
+available own information reaches the motion proposal under the existing partially
+observed multi-agent host. Prepare remains incumbent-owned; commit remains standby-shadow
+owned and serialized in the native owner's slot. No certificate or privileged mask is added.
+
+Both arms retain STRUCTURED initialization, LOW_LR3e-5, common exogenous streams, raw
+Gaussian likelihood/noise, modal final execution and all native projection, information,
+reward and timing semantics. Each arm receives sixteen updates/65536 transitions/512
+optimizer steps, four own-initial modal rows and four final modal rows. The primary is
+the mean of four final OWN-minus-DIRECT native-service differences at update16; MEI+24
+ticks (2% of1200), opposite scale−24. Complete cap is1800s/arm and3600s/pair, including
+shared work counted once. Initial-relative changes and costs remain companion facts.
+
+Strongest support is the inspected own-input path in both live behavior and stored replay,
+making a competent same-information learner comparison possible without a diagnostic
+prerequisite. Strongest contradiction is redundancy with the existing network input and
+native slew projection, or harmful persistence of a bad acceleration. Other certificate
+conditions can still block transfer. The input path gives no legal-transfer guarantee,
+causal account of B06, stable superiority or uniquely MARL benefit. Native partner/summary
+features keep the accepted A03 information ceiling; a strict fresh-message decentralized
+claim is unavailable.
+
+B06's−77.5 joint-sampling loss, all adverse condition means, increased invalid commits and
+energy, two positive sampled exceptions and zero transfers remain unchanged. Earlier LR
+means and adverse conditions stay separate. COPY−RETAIN/SHADOW−COPY value remains
+unestimated; the existing joint-rule stop is not reopened. No tuned-baseline/upper
+headroom record exists. A future one-pair B result can support only a finite native-service
+signal; transfer observations and source value are separate quantities.
+
+The low-confidence positive-sign prediction is pending and MEI crossing uncertain. The
+next discriminator is the selected pair's complete native final-service contrast, with
+adverse conditions, actual terminal exposure, energy and hard events preserved separately.
+This intake records selection only: no new implementation, RNG master, learner or run.
+The existing route continues through a prospective card and full CM specification; no
+second Send, recast, C promotion, UAV-validation entry or Portfolio disposition follows.
+
+References: `DISH_P53_NATIVE_PROPOSAL_SOURCE_INTAKE_20260908.md` §9;
+`pro_packets/20260908_p53_own_command_mean/archive/RESPONSE.md` §§一–七;
+the adjacent exact chat receipt, Transport facts and Issue4 comment snapshot.
+
+## B07 native-service result and narrow stop — 2026-09-08
+
+The sole matched seed127 **B/EXPLORE** pair gives final OWN_COMMAND_MEAN557.75 versus
+DIRECT693 mean service ticks: **−135.25**, below the frozen−24 opposite scale. Condition
+differences are−221,+74,−329,−65. Both real learners completed16 updates/65536 transitions/
+512 optimizer steps; all16 initial/final modal rows completed1200 ticks. The card's negative
+branch is applied at object tier: **retain DIRECT and stop this fixed own-command mean's
+current extension**. No unchanged extra seed, arm, coefficient tuning or diagnostic is selected.
+
+The bounded claim is a native-service loss on this observed pair, not stable inferiority,
+universal rejection of own-command parameterization, mechanism identification or source-value
+evidence. DIRECT improves+164.5 from its own initialization and OWN+55.75, with individual
+initial-relative losses retained. These changes do not rebase the final primary or isolate
+learning speed. The prior low-confidence positive-sign prediction missed.
+
+Strongest remaining support for OWN is the+74 final condition, fewer final invalid commits
+(32 versus119) and positive own-initial mean change. Strongest contradiction is the mean
+loss, three negative conditions and greater native energy in every final condition
+(mean+13715.5899), all at equal1200-tick duration. TRAIN is separate: OWN has4405 versus4366
+invalid commits and2 versus1 separation breaches. No event-count or training proxy rescues
+the final service result. The already recorded persistence caution remains a possible
+explanation, alongside redundant information/projection and changed control/co-adaptation;
+the experiment does not identify the cause.
+
+Zero ordinary legal transfers occur in every evaluation row and both training arms. Native
+service remains valid ordinary/incumbent evidence; origin eligibility and COPY−RETAIN/
+SHADOW−COPY value remain unestimated. The accepted information ceiling, absent tuned/upper
+headroom, earlier B06 negative and LR means/adverse rows remain. H/resource gaps and unmeasured
+syntax-check cost limit their own quantities, not the complete service comparison.
+
+No further B07 discriminator is selected at this intake. A next experiment requires a
+specifically justified new comparison; this result provides no automatic successor or
+source-value answer. Whole-direction lifecycle, priority, recast count and UAV status are
+unchanged. This is the existing card's narrow stop, not closure of the source agenda.
+
+References: `DISH_OWN_COMMAND_MEAN_B07_RESULT_EVIDENCE_20260908.md` §§1–5;
+`DISH_OWN_COMMAND_MEAN_B07_RESULT_INTAKE_20260908.md` §§2–6;
+frozen card §§3–5 and `own_command_mean_b07_20260908_run01/` evidence.
+
+## P62 accepted scope: narrow stops and no successor — 2026-09-08
+
+Complete Convergence at immutable `0086cfd7e8f7326fbadf879f844b757f661e8809` is a
+conforming **PRO_FINAL** decision selecting no successor. Retain DIRECT and the already
+applied stops of B07's fixed own-command mean and B06's joint sampled-execution rule.
+The bounded post-B07 assessment advanced no distinct intervention with a supported
+native-value rationale. This does not close or recast the retained-host ordinary-source
+family; its RETAIN/COPY/SHADOW agenda remains unresolved without a continuing assessment
+or experiment selected in this round.
+
+Strongest support is B07's−135.25 native-service mean and energy increase in all four
+conditions, B06's separate−77.5 loss, and no nominated successor. The two treatments and
+estimands are different and cannot be pooled as source-family replication. Strongest
+contrary evidence to a broader stop remains B07's+74 condition and fewer final invalid
+commits, both moved learners and positive own-initial means, prior LOW_LR gains with
+adverse conditions, and B05 CONTROL's three ordinary training transfers.
+
+Neither this bounded screening nor the negative means identify a persistence or auxiliary
+gradient cause. Other legal parameterizations remain possible. Current zero transfers
+leave origin eligibility and COPY−RETAIN/SHADOW−COPY value unestimated; the A03 information
+ceiling remains. DIRECT is a development default, with no optimality, safety or stable
+superiority claim. There is no tuned-baseline/upper headroom record, and none is required
+to justify a future specifically chosen B.
+
+No next empirical discriminator is selected. The no-successor scope question is answered;
+this round allocates no new card, seed, diagnostic or scientific exposure. It makes no
+recast, C or Portfolio lifecycle/priority decision and no UAV-validation entry.
+
+References: `DISH_POST_B07_DIRECTION_QUESTION_INTAKE_20260908.md` §8;
+`pro_packets/20260908_p62_post_b07_scope/archive/RESPONSE.md` §§一–七, immutable commit above;
+B07 E0/intake and the previous B06/LR evidence retained in the preceding sections.
+
+## P67 source-path distinction — 2026-09-08
+
+The resumed source assessment confirms that ordinary source-state selection is distinct
+from B07's mean and B06's sampled-execution rule. The native snapshot carries18 forecast/
+control fields; it does not transmit the128-dimensional incumbent GRU state. The snapshot
+bridge updates the standby shadow's existing history. At a legal application, source
+promotion instead selects/mixes that history and the full old-incumbent history before
+subsequent control. These are different information paths, with the A03 ceiling preserved.
+
+No new source effect is measured. B07's zero ordinary transfers leave the conditional
+contrast unestimated; B05 CONTROL's three training transfers preserve path existence.
+Own-history control, copying and causal reconstruction remain alternatives, without an
+observed source defect, replay-absorption result or unique-information claim. The bounded
+P67 assessment nominates no new intervention or empirical discriminator. P62's narrow
+stops and the unresolved ordinary-source agenda remain; no broader closure/recast follows.
+
+Reference: `DISH_P67_SOURCE_STATE_REENTRY_INTAKE_20260908.md` §§2–6 and its scoped
+source/literature/count record `evidence/2026-09-08-p67-source-state-reentry.json`.

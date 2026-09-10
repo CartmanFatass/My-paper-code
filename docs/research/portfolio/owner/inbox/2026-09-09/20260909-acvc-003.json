@@ -1,0 +1,86 @@
+{
+  "id": "20260909-acvc-003",
+  "created": "2026-09-09T03:50:49-07:00",
+  "direction": "acvc",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "ACVC P78：一次原生失联门控比较",
+  "context": "Claim: On the existing five-UAV host and a fixed trained DENSE proposer, a private learned link-loss gate may improve native return over always-apply and cue-triggered retrace, with any structured-package advantage assessed against a containing generic gate.\nBinding MARL structure: (d) other-agent non-stationarity or partial observability.",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "按已分配P78执行一次T/G/C/F；保留所有结果，无后续自动运行。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "按新主人指令停止未开始动作，保留卡、证据和已经产生的事实。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "明确指出需修改的卡字段；影响科学含义的动作在修订前停止。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "原Convergence已选问题，Root已分配单次比较；普通小头和随机流由DM冻结。",
+  "evidence": [
+    "docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_B01_SCIENCE_CARD_20260909.md",
+    "docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_B01_P78_PROSPECTIVE_FACTS_20260909.json"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-09.md#L60",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "执行已由原Convergence选定、由Root分配的一次原生学习纠正比较，并冻结小型门控头与随机流。",
+    "changes_if_approved": [
+      {
+        "target": "docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_B01_SCIENCE_CARD_20260909.md",
+        "from": "已选问题，尚无新卡或运行",
+        "to": "B01卡冻结；一个新训练实例、T/G两个学习器、C/F两个固定对照，单次远程比较"
+      }
+    ],
+    "if_refused": "按主人明确的新指令处理卡或停止尚未开始的动作；不改写旧结果，也不自动替换运行。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/acvc/pro_packets/20260909_native_link_loss_convergence/archive/RESPONSE.md",
+        "quote": "Select the one bounded native B/EXPLORE comparison.",
+        "why": "科学节点已选定直接训练与原生回报比较，Root的P78已分配本批。"
+      },
+      {
+        "path": "docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_B01_SCIENCE_CARD_20260909.md",
+        "quote": "G copies that entire T path and adds a private residual:",
+        "why": "通用对照保留结构化方法的完整能力和信息，同时保留两个固定规则。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/acvc/pro_packets/20260909_native_link_loss_convergence/archive/RESPONSE.md",
+        "quote": "Selection occurred with both outcomes visible, and 8201 is the better of these two original DENSE means.",
+        "why": "固定底座选择已有结果暴露，后续结论只能条件于它。"
+      },
+      {
+        "path": "docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_B01_SCIENCE_CARD_20260909.md",
+        "quote": "Loss of own-link eligibility is not proof of a global service loss; a teammate may have taken over.",
+        "why": "看见失联不保证纠正有用，原生收益可能下降。"
+      }
+    ],
+    "uncertainty": [
+      "门控机会频率、实际参数移动和新增运行耗时未知。",
+      "单一训练实例不估计训练种子总体不确定性。",
+      "低于均值0.01的正差仍是正观察，但不是该卡的投资尺度增益。"
+    ],
+    "cost": {
+      "compute": "294912团队步、2048次Adam、128个最终评估；完整学习臂1800秒、全批3600秒，含必要检查和发布；无重试。",
+      "owner_time": "不等待答复；新指令在下一清洁边界处理。",
+      "reversibility": "costly",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "Owner-delegated decision (unattended, 2026-09-03 instruction): (a).",
+    "source": "docs/research/candidates/acvc/ACVC_NATIVE_LINK_LOSS_B01_SCIENCE_CARD_20260909.md"
+  },
+  "starred": false
+}

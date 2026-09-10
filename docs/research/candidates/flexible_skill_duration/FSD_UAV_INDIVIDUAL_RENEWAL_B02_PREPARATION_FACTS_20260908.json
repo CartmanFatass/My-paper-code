@@ -1,0 +1,142 @@
+{
+  "object": "FSD_UAV_INDIVIDUAL_RENEWAL_B02",
+  "allocation": "P72",
+  "prepared_utc": "2026-09-09T06:08:56.862979+00:00",
+  "source_sha_before_binding": "52609ba8438836de9805014dc783e818010dcc06",
+  "method": "Integer configuration arithmetic, prior completed-pair timing readback, and literal identifier search only; no scientific import or execution.",
+  "training_seed": 770603,
+  "evaluation_seed": 780603,
+  "training_lane_seeds": [
+    770603,
+    770604,
+    770605,
+    770606,
+    770607,
+    770608,
+    770609,
+    770610,
+    770611,
+    770612,
+    770613,
+    770614,
+    770615,
+    770616,
+    770617,
+    770618
+  ],
+  "evaluation_lane_seeds": [
+    780603,
+    780604,
+    780605,
+    780606,
+    780607,
+    780608,
+    780609,
+    780610,
+    780611,
+    780612,
+    780613,
+    780614,
+    780615,
+    780616,
+    780617,
+    780618,
+    780619,
+    780620,
+    780621,
+    780622,
+    780623,
+    780624,
+    780625,
+    780626,
+    780627,
+    780628,
+    780629,
+    780630,
+    780631,
+    780632,
+    780633,
+    780634
+  ],
+  "identifier_search": {
+    "argv": [
+      "git",
+      "grep",
+      "-n",
+      "-E",
+      "\\b(770603|780603)\\b",
+      "HEAD",
+      "--",
+      "docs",
+      "scripts",
+      "tests",
+      "experiments"
+    ],
+    "source_sha": "52609ba8438836de9805014dc783e818010dcc06",
+    "returncode": 1,
+    "stdout": "",
+    "limit": "No selected literal base identifiers in this tracked scope; not a universal search over past RNG consumption."
+  },
+  "current_p72_exposure": {
+    "model_constructions": 0,
+    "training_starts": 0,
+    "checkpoint_loads": 0,
+    "training_transitions": 0,
+    "optimizer_calls": 0,
+    "evaluation_steps": 0,
+    "accepted_submissions": 0
+  },
+  "future_counts": {
+    "arms": 2,
+    "independent_training_pairs": 1,
+    "training_transitions": 80000,
+    "training_episodes": 160,
+    "update_stages": 10,
+    "evaluation_steps": 32000,
+    "evaluation_episodes": 64,
+    "environment_steps": 112000,
+    "agent_step_observations": 672000,
+    "model_constructions": 4,
+    "training_starts": 2,
+    "checkpoint_loads": 0,
+    "learner_evaluator_batch_calls": 6000
+  },
+  "work_factors": {
+    "training": "2 arms x 5 rollouts x 16 lanes x 500 primitive steps",
+    "evaluation": "2 arms x 32 lanes x 500 primitive steps, one final endpoint each",
+    "D0_joint_rows_per_rollout": 800,
+    "I_max_joint_rows_per_rollout": 8000,
+    "team_rows_per_rollout_each": 800,
+    "D0_individual_rows_per_rollout": 4800,
+    "I_max_individual_rows_per_rollout": 48000,
+    "new_nested_candidates_trajectories_solver_calls": 0,
+    "added_scientific_validation_calls": 0,
+    "actual_I_optimizer_work": "data dependent; retain actual counts, no forced matching or minimum activity"
+  },
+  "cost_reference": {
+    "P70_measured_arm_walls": {
+      "D0": 471.89,
+      "I": 1221.49
+    },
+    "P70_measured_sum_wall": 1693.38,
+    "P70_aggregate_cpu": 6722.2699999999995,
+    "historical_card_scenarios": {
+      "D0": 1617.82,
+      "I": 16178.2
+    },
+    "caps": {
+      "D0": 3600,
+      "I": 18000,
+      "sum": 21600
+    },
+    "interpretation": "Previous same-method measured walls and retained original cost scenarios; not future rate measurements or verified upper bounds. No timing pilot is selected."
+  },
+  "mei_absolute_native_J": 0.01,
+  "dm_prediction": {
+    "mean_branch": "below -.01",
+    "confidence": "low",
+    "basis": "Outcome-informed prospective B02 forecast from the P70 native loss, with one-pair and endpoint-inactivity limits; not calibrated probability."
+  },
+  "owner_prediction": "not taken (unattended)",
+  "engineering_scope_section4": "none"
+}

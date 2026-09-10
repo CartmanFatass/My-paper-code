@@ -1,0 +1,44 @@
+{
+  "question": "是否接受P60已分配的一次归一化比较的具体卡：固定主键8201，两臂都只用自身训练回报更新同一种统计量，按原生回报判断？",
+  "changes_if_approved": [
+    {
+      "target": "VSPC1-NATIVE-HOLD-VALUE-B03",
+      "from": "旧设置两对门控收益均为正，但MLP两次都低于悬停；新的归一化比较尚未实现或运行",
+      "to": "按P60执行一对新设置比较：训练目标累计均值与方差、标准差下限0.0001、原生单位优势、主键8201和WITHIN概率0.55均事前固定"
+    }
+  ],
+  "if_refused": "依据真实反馈停止或修订尚未执行的B03，保留旧结果和已经产生的证据；不把拒绝当作科学负面、方向关闭或优先级变化。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B02_INTAKE_20260908.md",
+      "quote": "Both individual primary means exceed .01.",
+      "why": "旧设置存在两次局部收益，值得在同一个更改后的共同训练规则下检查一次。"
+    },
+    {
+      "path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B03_SCIENCE_CARD_20260908.md",
+      "quote": "Historical differences cannot identify a normalization effect\nbecause regime and fresh training/evaluation randomness change together.",
+      "why": "明确限定为一次新设置中的比较，不把新旧结果差异冒充归一化的因果收益。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/vsp_c1/DIRECTION.md",
+      "quote": "The strongest qualification is MLP below H in both pairs, markedly in B02.",
+      "why": "当前较大的门控差值伴随弱比较器，尚未证明特定的持续动作信用机制。"
+    }
+  ],
+  "uncertainty": [
+    "归一化可能帮助、无效或伤害任一臂；不是已经诊断出的修复。",
+    "门控额外容量、共同梯度裁剪、统计更新造成的值偏移和训练种子差异仍是解释。",
+    "一对新设置训练不能估计训练总体不确定性，也不能与旧两对合并成三次同设置复现。",
+    "缺少调好的同信息headroom；悬停是已达到的参考，不是上界。"
+  ],
+  "cost": {
+    "compute": "2×512×256训练团队步加3×32×256最终评价团队步，共286720原生步、2048次Adam和96次评价。每臂256次统计更新，每次512个原生目标行。完整上限1800秒/学习臂、3600秒/对，含悬停和发布退出；新增统计开销未知且包含在上限内，不另做计时或校准实验。",
+    "owner_time": "异步查看即可，无须现在回复。",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing; P60已分配此有界任务，按既有授权推进，不虚构所有者批准"
+  },
+  "verdict_text": "Freeze master8201, WITHIN(.55), the normalization rule, native MEI and complete\nwork limits before model construction or output.",
+  "source": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B03_SCIENCE_CARD_20260908.md"
+}

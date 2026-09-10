@@ -1,0 +1,203 @@
+{
+  "acceptance": "technical complete; no scientific disposition",
+  "analysis_scope": "persisted outputs only; zero new models/rollouts/updates",
+  "counts": {
+    "episodes_started": 38920,
+    "episodes_completed": 38920,
+    "team_ticks": 1556800,
+    "target_transitions": 3113600,
+    "decision_rows": 187200,
+    "rollout_policy_forwards": 4295
+  },
+  "model_constructions": 2,
+  "optimizer_steps": 256,
+  "endpoint_native_totals": {
+    "T_greedy": {
+      "fixed_clocks": 17408,
+      "pending_clocks": 9042,
+      "eligible_decisions": 7001,
+      "blocked_pending": 2041,
+      "blocked_final_clocks": 11,
+      "success": 970,
+      "attempt": 1863,
+      "failed_attempt": 893,
+      "non_submission": 185,
+      "waiting_ticks": 31734
+    },
+    "T_stochastic": {
+      "fixed_clocks": 17408,
+      "pending_clocks": 8737,
+      "eligible_decisions": 6696,
+      "blocked_pending": 2041,
+      "blocked_final_clocks": 11,
+      "success": 940,
+      "attempt": 1973,
+      "failed_attempt": 1033,
+      "non_submission": 75,
+      "waiting_ticks": 29492
+    },
+    "G_greedy": {
+      "fixed_clocks": 17408,
+      "pending_clocks": 8306,
+      "eligible_decisions": 6259,
+      "blocked_pending": 2047,
+      "blocked_final_clocks": 10,
+      "success": 964,
+      "attempt": 2019,
+      "failed_attempt": 1055,
+      "non_submission": 29,
+      "waiting_ticks": 27338
+    },
+    "G_stochastic": {
+      "fixed_clocks": 17408,
+      "pending_clocks": 6121,
+      "eligible_decisions": 4073,
+      "blocked_pending": 2048,
+      "blocked_final_clocks": 0,
+      "success": 786,
+      "attempt": 2037,
+      "failed_attempt": 1251,
+      "non_submission": 11,
+      "waiting_ticks": 18440
+    },
+    "R": {
+      "fixed_clocks": 17408,
+      "pending_clocks": 9053,
+      "eligible_decisions": 7012,
+      "blocked_pending": 2041,
+      "blocked_final_clocks": 11,
+      "success": 968,
+      "attempt": 1862,
+      "failed_attempt": 894,
+      "non_submission": 186,
+      "waiting_ticks": 31788
+    },
+    "R0": {
+      "fixed_clocks": 17408,
+      "pending_clocks": 9042,
+      "eligible_decisions": 7001,
+      "blocked_pending": 2041,
+      "blocked_final_clocks": 11,
+      "success": 970,
+      "attempt": 1863,
+      "failed_attempt": 893,
+      "non_submission": 185,
+      "waiting_ticks": 31734
+    }
+  },
+  "comparisons_recomputed": {
+    "T_greedy-R": {
+      "mean": 0.0010839843749999999,
+      "conditional_world_sd": 0.022572718967533434,
+      "conditional_world_se": 0.0007053974677354198,
+      "worlds": 1024
+    },
+    "T_greedy-G_greedy": {
+      "mean": -0.003994140625000004,
+      "conditional_world_sd": 0.13732115878442092,
+      "conditional_world_se": 0.004291286212013154,
+      "worlds": 1024
+    },
+    "G_greedy-R": {
+      "mean": 0.0050781250000000045,
+      "conditional_world_sd": 0.1391688909393137,
+      "conditional_world_se": 0.004349027841853553,
+      "worlds": 1024
+    },
+    "T_greedy-R0": {
+      "mean": 0.0,
+      "conditional_world_sd": 0.0,
+      "conditional_world_se": 0.0,
+      "worlds": 1024
+    },
+    "G_greedy-R0": {
+      "mean": 0.003994140625000004,
+      "conditional_world_sd": 0.13732115878442092,
+      "conditional_world_se": 0.004291286212013154,
+      "worlds": 1024
+    },
+    "T_stochastic-R": {
+      "mean": -0.010776367187500002,
+      "conditional_world_sd": 0.2516362053669968,
+      "conditional_world_se": 0.00786363141771865,
+      "worlds": 1024
+    },
+    "T_stochastic-R0": {
+      "mean": -0.011860351562500001,
+      "conditional_world_sd": 0.25148431508427144,
+      "conditional_world_se": 0.007858884846383482,
+      "worlds": 1024
+    },
+    "T_stochastic-T_greedy": {
+      "mean": -0.011860351562500001,
+      "conditional_world_sd": 0.25148431508427144,
+      "conditional_world_se": 0.007858884846383482,
+      "worlds": 1024
+    },
+    "G_stochastic-R": {
+      "mean": -0.060551757812499996,
+      "conditional_world_sd": 0.35268937878113155,
+      "conditional_world_se": 0.01102154308691036,
+      "worlds": 1024
+    },
+    "G_stochastic-R0": {
+      "mean": -0.06163574218749999,
+      "conditional_world_sd": 0.3537717937382875,
+      "conditional_world_se": 0.011055368554321484,
+      "worlds": 1024
+    },
+    "G_stochastic-G_greedy": {
+      "mean": -0.06562988281249998,
+      "conditional_world_sd": 0.358912047710543,
+      "conditional_world_se": 0.01121600149095447,
+      "worlds": 1024
+    }
+  },
+  "arms": {
+    "T": {
+      "curve_rows": 128,
+      "valid_gradient_rows": 90504,
+      "weight_parameters": 2083,
+      "weight_tensors": 11,
+      "all_weights_finite_float32": true,
+      "final_norms_match": true,
+      "first_batch_return": 0.31242187499999996,
+      "final_batch_return": 0.410703125
+    },
+    "G": {
+      "curve_rows": 128,
+      "valid_gradient_rows": 58610,
+      "weight_parameters": 2083,
+      "weight_tensors": 11,
+      "all_weights_finite_float32": true,
+      "final_norms_match": true,
+      "first_batch_return": 0.273125,
+      "final_batch_return": 0.32132812499999996
+    }
+  },
+  "T_greedy_R0_all1024_records_equal": true,
+  "fixture_saved_rows_checked": 8,
+  "file_sizes": {
+    "focused_check.json": 5939,
+    "G_curve.jsonl": 70614,
+    "G_final.pt": 12354,
+    "G_greedy.json": 646109,
+    "G_stochastic.json": 645589,
+    "paired_differences.json": 431306,
+    "R.json": 646301,
+    "R0.json": 646293,
+    "summary.json": 19505,
+    "T_curve.jsonl": 71547,
+    "T_final.pt": 12354,
+    "T_greedy.json": 646293,
+    "T_stochastic.json": 646379
+  },
+  "supervisor": {
+    "status": "finished",
+    "exit_code": 0,
+    "pid": 2745786,
+    "whole_wall_seconds": 5.05,
+    "peak_rss_kib": 514736
+  },
+  "admission_available_physical_and_effective_bytes": 15664111616
+}

@@ -1,0 +1,640 @@
+{
+  "object": "FOLR-P68-MULTISTEP-READINESS",
+  "class": "A/RECON source/readiness assessment",
+  "observed_at_utc": "2026-09-09T03:41:47.115587+00:00",
+  "author": "/root/dm_folr_p68_reentry",
+  "checkout": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr",
+  "branch": "codex/vap-folr",
+  "input_revision": "8e19cda9bcb3b94deb428b885c854318f35bd70d",
+  "analysis_interpreter": "3.11.9",
+  "independent_unit": "source/evidence reading, not an independent training run",
+  "current_exposure": {
+    "scientific_invocations": 0,
+    "model_calls": 0,
+    "training_transitions": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0,
+    "native_calls": 0,
+    "pro_sends": 0,
+    "code_implementation": 0
+  },
+  "historical_b04": {
+    "launch_sha": "0f83132fb3484f8366eaaa5863559d203f0cb369",
+    "configuration": {
+      "seeds": [
+        96041,
+        96042,
+        96043
+      ],
+      "updates": 128,
+      "batch_size": 64,
+      "eval_episodes": 256,
+      "eval_every": 16,
+      "technical_only": false,
+      "device": "cpu",
+      "dtype": "float32",
+      "learning_rate": 0.025,
+      "torch_threads": 1,
+      "rng": "Explicit seed namespaces; paired routing initialization, data and action uniforms; fixed separate evaluation tapes."
+    },
+    "counts": {
+      "train_episodes": 98304,
+      "eval_episodes": 49920,
+      "updates": 1536,
+      "primitive_transitions": 444672,
+      "complete_episodes": 148224
+    },
+    "result_rule": {
+      "branch": "B04_WITHIN_MEI",
+      "mean_stale_auc_difference": 0.0026041666666666665,
+      "seed_stale_auc_differences": [
+        0.001953125,
+        -0.000244140625,
+        0.006103515625
+      ],
+      "mei": 0.05
+    },
+    "descriptive_flags": {
+      "writer_weak": false,
+      "simple_control_headroom": false,
+      "mean_final_writer_return": 1.0,
+      "mean_final_latch_stale_return": 0.9986979166666666,
+      "mean_final_stale_return_by_arm": {
+        "TYPED": 0.98828125,
+        "GENERIC": 0.98828125,
+        "RESET": 0.5065104166666666
+      }
+    },
+    "exposure": {
+      "updates_per_learner": 128,
+      "Adam_lr": 0.025,
+      "nominal_coordinate_path": 3.2,
+      "writer_min_nonzero_Xavier_RMS": 0.5773502691896257,
+      "writer_nominal_ratio": 5.542562584220408,
+      "router_min_nonzero_Xavier_RMS": 0.408248290463863,
+      "router_nominal_ratio": 7.8383671769061705,
+      "meaning": "Nominal learning-rate path, not a realized displacement bound."
+    },
+    "resources": {
+      "wall_seconds": 40.371824955997,
+      "peak_rss_bytes": 484229120,
+      "status": "measured"
+    }
+  },
+  "repository_source_reads": [
+    {
+      "path": "docs/research/candidates/vap_folr_core/DIRECTION.md",
+      "sha256": "d75e56821a2de62bcbdb44838561c7802e0fe70c8e275d1136ed5736e7190c30",
+      "ranges": [
+        "Accepted N3 B04 science -- 2026-09-04"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/N3_FOLR_ROUTING_B04_INTAKE_20260904.md",
+      "sha256": "58d3a06f3fe29cfbf7aa419374b1f44540c30904ee87844dda4499a0e3a20f57",
+      "ranges": [
+        "Bounded observation and prediction check",
+        "Strongest support, contradiction, headroom and next discriminator"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/N3_FOLR_ROUTING_B04_SCIENCE_CARD_20260904.md",
+      "sha256": "fbc41ea9bea7ee17acc5fd1744ef07d58ee46c75f7e1b2e97272dfea58b2c7ba",
+      "ranges": [
+        "3. Environment-to-consequence trace",
+        "4. Arms and strongest live nulls",
+        "5. Fixed budget, RNG, evaluation, and measurements"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/N3_FOLR_ROUTING_B04_RESULT_SUMMARY_20260904.json",
+      "sha256": "ad29d42447f307ccbdd4ee32f2572db2e24490bc3816fcbc00f49b49836fb64b",
+      "ranges": [
+        "configuration",
+        "counts",
+        "result_rule",
+        "descriptive_flags",
+        "exposure",
+        "resources"
+      ]
+    },
+    {
+      "path": "experiments/candidates/folr_core/partner_writer_stale_load_routing_host.py",
+      "sha256": "2c05e555e28287c19443cf7d2f62d9200110f2c8bd9eca99e17f5992d843df68",
+      "ranges": [
+        "routed_inputs:355-368",
+        "terminal_transition:370-387"
+      ]
+    },
+    {
+      "path": "experiments/candidates/folr_core/partner_writer_stale_load_routing.py",
+      "sha256": "d29c39d6cd6254b2e61f5c889a1e1c283631a0f3f4cc1936de0d73a163cddfcf",
+      "ranges": [
+        "MatchedRoutedActor:184-244"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_B3_CALIBRATED_PARTNER_WRITER_STALE_LOAD_ROUTING_CODE_SCIENCE_INDEX.md",
+      "sha256": "1dd86c3994015ed57099dfd774624cb45eddd8f2ef67f4c41a078a3b75ca970c",
+      "ranges": [
+        "Real lifecycle host and treatment delta",
+        "Claim boundary"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_B1_OWNER_EPOCH_SURVIVOR_BIT_LEARNABILITY_CODE_SCIENCE_INDEX.md",
+      "sha256": "178f31b95fde7e368c93dbff4e49a5500659ef9804280bc56f3299a5120463ce",
+      "ranges": [
+        "Conclusion and publication state",
+        "Claim boundary and pending authority"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_P67_SOURCE_STATE_REENTRY_INTAKE_20260908.md",
+      "sha256": "e2d085962e2cffd5bf9ad11747e4596fe4b8dd0afebc19372bc5162b21d75fc3",
+      "ranges": [
+        "2. What the source actually makes distinct",
+        "3. Why no concrete continuation is nominated",
+        "6. Decisions this intake produces and return"
+      ]
+    },
+    {
+      "path": "docs/external-review/rounds/20260731_explorer_toy_validation_p1_vap_folr_design_assertion_correction_recheck/evidence/FOLR_SHARED_INTERFACE_EXCERPT.md",
+      "sha256": "276a813c4b4e95dda4831eede84c6b09e77f0b8ea94059aec65b1448be21f19b",
+      "ranges": [
+        "MRM-02/MRM-03/MRM-10",
+        "lines28-86,124-156,252-255"
+      ]
+    },
+    {
+      "path": "docs/external-review/rounds/20260731_explorer_toy_validation_p1_vap_folr_design_assertion_correction_recheck/evidence/local_research/2026-07-31_variable_agent_population_folr_core_advisory_delta_v4.json",
+      "sha256": "2f95adcedcb2fe667f580a1bd92ac2b50df399d9e111812b3074cffec673b435",
+      "ranges": [
+        "claim_split.downstream_marl_claim",
+        "source_to_mechanism_boundary"
+      ]
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "sha256": "d1616b24e4ef890451f10597825539b09c9e593e85ceb973fbb2e373717ad1f6",
+      "ranges": [
+        "3-5.2",
+        "11.4",
+        "11.7-11.9"
+      ]
+    }
+  ],
+  "literature": {
+    "Inst_sci": {
+      "catalog": "C:\\Projects\\Inst-sci\\papers\\MyLib\\llm-index\\catalog.v2.jsonl",
+      "sha256": "2e682c6d1131d503ad48920794dd8005ccf8f535dc9ff75679b0c8502533efc0",
+      "records": 190,
+      "terms": [
+        "ad hoc",
+        "ad-hoc",
+        "open team",
+        "open multi",
+        "dynamic team",
+        "recurrent",
+        "memory",
+        "variable",
+        "population",
+        "agent number",
+        "agent count",
+        "lifelong",
+        "forget",
+        "retention"
+      ],
+      "matching_records": 25,
+      "hits": [
+        {
+          "id": "MARL-0015",
+          "title": "Learning from Good Trajectories in Offline Multi-Agent Reinforcement Learning",
+          "terms": [
+            "memory"
+          ]
+        },
+        {
+          "id": "MARL-0020",
+          "title": "Quantum Multi-Agent Meta Reinforcement Learning",
+          "terms": [
+            "memory"
+          ]
+        },
+        {
+          "id": "MARL-0022",
+          "title": "Robust Multi-Agent Coordination via Evolutionary Generation of Auxiliary Adversarial Attackers",
+          "terms": [
+            "population"
+          ]
+        },
+        {
+          "id": "MARL-0075",
+          "title": "GTDE: Grouped Training with Decentralized Execution for Multi-agent Actor-Critic",
+          "terms": [
+            "variable",
+            "population"
+          ]
+        },
+        {
+          "id": "MARL-0104",
+          "title": "ADAPT: Adaptive Decentralized Architecture with Perception-Aligned Training for Structural Generalization in Multi-Agent RL",
+          "terms": [
+            "variable",
+            "population"
+          ]
+        },
+        {
+          "id": "MARL-0114",
+          "title": "Autonomous Partner Selection for Cooperative Multi-Agent Reinforcement Learning",
+          "terms": [
+            "variable",
+            "population"
+          ]
+        },
+        {
+          "id": "MARL-0134",
+          "title": "Emergent Fast-Slow Dynamics in Multi-Agent Q-Learning for Networked Stochastic Games",
+          "terms": [
+            "population"
+          ]
+        },
+        {
+          "id": "MARL-0199",
+          "title": "TMAE:Learning Targeted Multi-Agent Exploration via Causal Inference",
+          "terms": [
+            "variable"
+          ]
+        },
+        {
+          "id": "MARL-0209",
+          "title": "Adaptive Value Decomposition with Greedy Marginal Contribution Computation for Cooperative Multi-Agent Reinforcement Learning",
+          "terms": [
+            "variable",
+            "population"
+          ]
+        },
+        {
+          "id": "MARL-0409",
+          "title": "Complementary Attention for Multi-Agent Reinforcement Learning",
+          "terms": [
+            "dynamic team",
+            "variable",
+            "population"
+          ]
+        },
+        {
+          "id": "MARL-0454",
+          "title": "Counterfactual Effect Decomposition in Multi-Agent Sequential Decision Making",
+          "terms": [
+            "variable"
+          ]
+        },
+        {
+          "id": "MARL-0458",
+          "title": "Distributionally Robust Multi-Agent Reinforcement Learning for Dynamic Chute Mapping",
+          "terms": [
+            "population"
+          ]
+        },
+        {
+          "id": "MARL-0471",
+          "title": "Learning Progress Driven Multi-Agent Curriculum",
+          "terms": [
+            "variable",
+            "population"
+          ]
+        },
+        {
+          "id": "MARL-0485",
+          "title": "Sable: a Performant, Efficient and Scalable Sequence Model for MARL",
+          "terms": [
+            "memory",
+            "variable",
+            "population",
+            "retention"
+          ]
+        },
+        {
+          "id": "MARL-0509",
+          "title": "Scalable Communication for Multi-Agent Reinforcement Learning via Transformer-Based Email Mechanism",
+          "terms": [
+            "variable",
+            "population"
+          ]
+        },
+        {
+          "id": "MARL-0523",
+          "title": "Population-Based Diverse Exploration for Sparse-Reward Multi-Agent Tasks",
+          "terms": [
+            "population"
+          ]
+        },
+        {
+          "id": "MARL-0533",
+          "title": "From General Relation Patterns to Task-Specific Decision-Making in Continual Multi-Agent Coordination",
+          "terms": [
+            "variable",
+            "population",
+            "forget"
+          ]
+        },
+        {
+          "id": "MARL-0543",
+          "title": "Variational Offline Multi-agent Skill Discovery",
+          "terms": [
+            "variable",
+            "population"
+          ]
+        },
+        {
+          "id": "MARL-0547",
+          "title": "Counterfactual Conservative Q Learning for Offline Multi-agent Reinforcement Learning",
+          "terms": [
+            "agent number"
+          ]
+        },
+        {
+          "id": "MARL-0561",
+          "title": "Mutual-Information Regularized Multi-Agent Policy Iteration",
+          "terms": [
+            "dynamic team",
+            "variable",
+            "population"
+          ]
+        },
+        {
+          "id": "MARL-0568",
+          "title": "Team-PSRO for Learning Approximate TMECor in Large Team Games via Cooperative Reinforcement Learning",
+          "terms": [
+            "population"
+          ]
+        },
+        {
+          "id": "MARL-0579",
+          "title": "Language Grounded Multi-agent Reinforcement Learning with Human-interpretable Communication",
+          "terms": [
+            "ad-hoc"
+          ]
+        },
+        {
+          "id": "MARL-0653",
+          "title": "Oryx: a Scalable Sequence Model for Many-Agent Coordination in Offline MARL",
+          "terms": [
+            "variable",
+            "population",
+            "retention"
+          ]
+        },
+        {
+          "id": "MARL-0660",
+          "title": "Revisiting Multi-Agent World Modeling from a Diffusion-Inspired Perspective",
+          "terms": [
+            "variable"
+          ]
+        },
+        {
+          "id": "VS-0004",
+          "title": "STAIRS-Former: Spatio-Temporal Attention with Interleaved Recursive Structure Transformer for Offline Multi-task Multi-agent Reinforcement Learning",
+          "terms": [
+            "variable",
+            "population"
+          ]
+        }
+      ],
+      "source_verified": [
+        {
+          "id": "MARL-0409",
+          "title": "Complementary Attention for Multi-Agent Reinforcement Learning",
+          "year": "2023",
+          "venue": "ICML",
+          "official_url": "https://proceedings.mlr.press/v202/shao23b.html",
+          "json_path": "C:\\Projects\\Inst-sci\\papers\\MyLib\\json\\MARL-0409.json",
+          "json_sha256": "ee9d7b6adc209780a1bb0ad95d73332e9fe4456bfe7ed738926510f70448b20b",
+          "pdf_path": "C:\\Projects\\Inst-sci\\papers\\MyLib\\pdf\\MARL-0409.pdf",
+          "pdf_sha256": "31dddddb47fb56bb4d39240762f4e4bdfd6976482c71ee63962679a57b0dca53",
+          "quality": {
+            "bibliographic_status": "official_enriched",
+            "grade": "A",
+            "identity_status": "official_title_matched",
+            "json_status": "json_ready",
+            "score": 95,
+            "semantic_status": "luna_json_abstract_grounded",
+            "warnings": [
+              "doi_missing_or_not_applicable"
+            ]
+          },
+          "passages": [
+            {
+              "kids_index": 3,
+              "element_id": 104,
+              "page": 1
+            },
+            {
+              "kids_index": 17,
+              "element_id": 122,
+              "page": 2
+            },
+            {
+              "kids_index": 30,
+              "element_id": 138,
+              "page": 3
+            },
+            {
+              "kids_index": 45,
+              "element_id": 155,
+              "page": 3
+            },
+            {
+              "kids_index": 46,
+              "element_id": 156,
+              "page": 3
+            },
+            {
+              "kids_index": 140,
+              "element_id": 281,
+              "page": 7
+            },
+            {
+              "kids_index": 307,
+              "element_id": 496,
+              "page": 16
+            },
+            {
+              "kids_index": 308,
+              "element_id": 497,
+              "page": 16
+            },
+            {
+              "kids_index": 309,
+              "element_id": 498,
+              "page": 16
+            },
+            {
+              "kids_index": 310,
+              "element_id": 502,
+              "page": 17
+            },
+            {
+              "kids_index": 311,
+              "element_id": 504,
+              "page": 17
+            },
+            {
+              "kids_index": 312,
+              "element_id": 506,
+              "page": 17
+            },
+            {
+              "kids_index": 313,
+              "element_id": 507,
+              "page": 17
+            }
+          ],
+          "bounded_reading": "Dynamic entity observations and local GRU history; modified Traffic Junction has native multi-step navigation, collision/distance/time reward and within-episode arrivals/inactivations. These passages do not define a FOLR self-only survivor-state partition or test typed retention."
+        },
+        {
+          "id": "MARL-0485",
+          "title": "Sable: a Performant, Efficient and Scalable Sequence Model for MARL",
+          "year": "2025",
+          "venue": "ICML",
+          "official_url": "https://proceedings.mlr.press/v267/mahjoub25a.html",
+          "json_path": "C:\\Projects\\Inst-sci\\papers\\MyLib\\json\\MARL-0485.json",
+          "json_sha256": "2c3242b6947b0f6328140e825c75a7f092803712b3c8bca95f84a348c480a61b",
+          "pdf_path": "C:\\Projects\\Inst-sci\\papers\\MyLib\\pdf\\MARL-0485.pdf",
+          "pdf_sha256": "e4f621f63692aabf265519bea4439cdf2e4f82f45c4ceb388f9bdaa3e922ffdb",
+          "quality": {
+            "bibliographic_status": "official_enriched",
+            "grade": "A",
+            "identity_status": "official_title_matched",
+            "json_status": "json_ready",
+            "score": 95,
+            "semantic_status": "luna_json_abstract_grounded",
+            "warnings": [
+              "doi_missing_or_not_applicable"
+            ]
+          },
+          "passages": [
+            {
+              "kids_index": 3,
+              "element_id": 2196,
+              "page": 1
+            },
+            {
+              "kids_index": 33,
+              "element_id": 2235,
+              "page": 2
+            },
+            {
+              "kids_index": 34,
+              "element_id": 2236,
+              "page": 2
+            },
+            {
+              "kids_index": 36,
+              "element_id": 2241,
+              "page": 3
+            },
+            {
+              "kids_index": 1227,
+              "element_id": 8722,
+              "page": 33
+            },
+            {
+              "kids_index": 1228,
+              "element_id": 8723,
+              "page": 33
+            },
+            {
+              "kids_index": 1229,
+              "element_id": 8724,
+              "page": 33
+            }
+          ],
+          "bounded_reading": "Sable is centralized sequence modeling with observation-history memory and episode-boundary resets. Its memory and scaling evidence is not a selective survivor-retention experiment under within-episode membership replacement."
+        }
+      ]
+    },
+    "My_lib": {
+      "registry_scan": "existing **/registry/papers.yaml files; no index rebuild/acquisition/model search",
+      "registries": [
+        {
+          "path": "C:\\Projects\\My-lib\\.local-acquisition\\ticket-01-smoke\\registry\\papers.yaml",
+          "sha256": "c1c2b5626aca0384b919c1c74c77bd9525e22fbd0f245542fba44ffdc977c654",
+          "records": 1,
+          "source_types": [
+            "SYNTHETIC_FIXTURE"
+          ],
+          "collections": [
+            "phase-0-synthetic"
+          ]
+        },
+        {
+          "path": "C:\\Projects\\My-lib\\registry\\papers.yaml",
+          "sha256": "f2972d0f305bcec2b1d6257577b10f36b1af3d95b13cfc3b08d37ab880a1e68d",
+          "records": 2,
+          "source_types": [
+            "SYNTHETIC_FIXTURE"
+          ],
+          "collections": [
+            "synthetic-core"
+          ]
+        }
+      ],
+      "scientific_query": "not issued against fixture-only collections",
+      "coverage_limit": "No real selectable collection was verified in these registries; this does not claim the absence of all source files or all prior work. Unified integration v3 is unimplemented and not a gate."
+    }
+  },
+  "prospective_work_examples": {
+    "extended_B04_scale": {
+      "status": "NOT_SELECTED; hypothetical 12-transition repeated-query extension with the B04 writer unchanged",
+      "arms": 2,
+      "paired_training_instances_per_arm": 1,
+      "updates_per_learner": 128,
+      "batch_episodes": 64,
+      "evaluation_checkpoints": 9,
+      "eval_episodes_per_regime_checkpoint": 256,
+      "receiver_horizon": 12,
+      "routing_training_episodes": 16384,
+      "routing_training_transitions": 196608,
+      "routing_optimizer_steps": 256,
+      "writer_optimizer_steps": 128,
+      "routing_evaluation_episodes": 9216,
+      "writer_training_episodes": 8192,
+      "writer_evaluation_episodes": 2304,
+      "latch_final_evaluation_episodes": 512,
+      "total_primitive_transitions": 344832,
+      "total_optimizer_steps": 384,
+      "new_independent_evidence_generated": 0,
+      "unit_wall_time": "unknown for the changed host/learner; original B04 wall is only historical scale"
+    },
+    "source_TJ_scale": {
+      "status": "NOT_SELECTED; counting example for two real recurrent REINFORCE learners, one pair, no writer/LATCH or hyperparameter sweep",
+      "source_host": "CAMA G.2 one-lane Traffic Junction; max_steps20/Nmax5",
+      "arms": 2,
+      "paired_training_instances_per_arm": 1,
+      "optimizer_steps_if_one_step_per_batch": 256,
+      "training_environment_tick_cap": 327680,
+      "evaluation_environment_tick_cap": 92160,
+      "total_environment_tick_cap": 419840,
+      "max_agent_action_rows": 2099200,
+      "nested_search_candidates": 0,
+      "hypothetical_future_trajectories": 0,
+      "controller_batch_ticks_at_most": 5480,
+      "controller_batch_tick_meaning": "only if all64 train or256 evaluation episodes are synchronously batched; agent rows are not Python/controller-call counts",
+      "unknowns": [
+        "accepted state-partition intervention",
+        "exact actor-input mapping on a selected adapter",
+        "recurrent learner size and cost",
+        "unit wall time",
+        "any empirical tuning exposure"
+      ],
+      "new_independent_evidence_generated": 0
+    }
+  },
+  "decision": "NO_READY_CONTINUATION",
+  "decision_tier": "object-tier readiness return only; no new direction/Portfolio decision",
+  "headroom": "No tuned same-information host baseline pair; not the readiness-refusal reason",
+  "engineering_scope_section4": "none",
+  "engineering_scope_section5_breach": false
+}

@@ -1,0 +1,86 @@
+{
+  "id": "20260908-ucope-006",
+  "created": "2026-09-08T21:03:45-07:00",
+  "direction": "ucope",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "UCOPE：各自到期再选承诺的一对训练卡",
+  "context": "全程在自身承诺到期时，以当前私有历史和已选动作决定1或4步，比较同信息逐步反馈的原生收益。绑定结构：时间抽象/终止，固定五机部分观测与共同适应。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "保留已选的一对7301比较卡，先实现并接受源码，再按具体额度运行，所有结果都结束本次额度。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "停止依赖该新卡的后续工作，保留Pro和旧结果；不自动重跑、补评或关闭方向。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "按异步意见在影响结果前记录并应用合规修改；涉及方向含义则回到同一节点。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "节点选定的真实到期事件尚未测过；严格保留普通反馈、旧负结果、完整成本和单次边界。",
+  "evidence": [
+    "docs/research/candidates/ucope/UCOPE_UAV_RENEWAL_COMMITMENT_B01_SCIENCE_CARD_20260908.md",
+    "docs/research/candidates/ucope/UCOPE_POST_B04_RENEWAL_CONVERGENCE_INTAKE_20260908.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-08.md#L84",
+  "brief": "docs/research/portfolio/owner/briefs/ucope/2026-09-08_post-b04-renewal-convergence.md",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否保留Pro已经选择的一次到期再决策B及其有界卡片？你可异步接受、拒绝或修改，当前不等待回复。",
+    "changes_if_approved": [
+      {
+        "target": "docs/research/candidates/ucope/UCOPE_UAV_RENEWAL_COMMITMENT_B01_SCIENCE_CARD_20260908.md",
+        "from": "B04开局对象已结束，尚无续约实验实现",
+        "to": "固定一次7301训练对的全程各自到期再决策、普通反馈比较及原生收益规则；先实现和接受源码"
+      }
+    ],
+    "if_refused": "保留所有旧结果与本次完整Pro答复，停止依赖该卡的新工作；不重跑B04、不补种子或评价，不私自关闭整个方向。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/ucope/pro_packets/20260908_post_b04_renewal_convergence/archive/RESPONSE.md",
+        "quote": "Select the renewable own-expiry comparison, and classify the change as a direction-level RECAST from opening-only commitment to renewable commitment.",
+        "why": "这是同一方向节点的完整裁决，改变真实决策事件，未把旧负结果解释为缺陷。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/ucope/pro_packets/20260908_post_b04_renewal_convergence/archive/RESPONSE.md",
+        "quote": "The strongest alternative remains ordinary feedback doing the useful control itself; repeated commitments may amplify poor commands or delay adaptation to moving partners.",
+        "why": "反馈仍是最强合法替代；B04均值落后，旧B02/B03/P24不利结果全部保留。"
+      }
+    ],
+    "uncertainty": [
+      "仅一对独立训练，不能估计训练总体不确定性或证明稳定优势。",
+      "尚无调好基线的余量记录，新增头部秒数未知。",
+      "当前记录增加一次真实Convergence RECAST；没有完整历史数字账，未凭名称制造second-recast。"
+    ],
+    "cost": {
+      "compute": "一次未来比较：286720原生步、2048 Adam、96最终评价；1800秒/臂、3600秒完整上限。持续时间头前向1003520–4014080行，是B04的64–256倍；新增秒数未知。新增检查限300秒及独立审查，无单独烟测、计时试验或第四轮模型比较。",
+      "owner_time": "可异步覆写；不等待回复。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing; 当前只准备代码任务，实验须具体额度和接受的源码"
+    },
+    "verdict_text": "**Select the renewable own-expiry comparison, and classify the change as a direction-level RECAST from opening-only commitment to renewable commitment.** Retain exactly one new B/EXPLORE object, **UCOPE-UAV-RENEWAL-COMMITMENT-B01**, with fresh matched training-pair master **7301**, the proposed two-fit budget, and no automatic second pair. The specific reason is that the tested duration policy never chooses persistence using an evolved within-episode history: it acts only at reset. Repeated own-expiry decisions test a materially different temporal control opportunity without changing the task, free information, architecture or native-step/update budget. This is worth one bounded performance comparison, narrowly, despite the adverse history and materially greater duration-head work. It is not a finding that sparse opening exposure caused B04 or that renewal will improve return.",
+    "source": "docs/research/candidates/ucope/pro_packets/20260908_post_b04_renewal_convergence/archive/RESPONSE.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-09T04:04:21+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/ucope/pro_packets/20260908_post_b04_renewal_convergence/archive/RESPONSE.md",
+      "record": "docs/research/candidates/ucope/UCOPE_POST_B04_RENEWAL_CONVERGENCE_INTAKE_20260908.md",
+      "state": "applied",
+      "summary": "落实同一Convergence选定的新卡及原始代码验收：一次7301训练对、完整原生收益、1800/3600秒上限。当前只冻结卡，源码接受与具体执行安排尚待后续；零新科学调用。"
+    }
+  ]
+}

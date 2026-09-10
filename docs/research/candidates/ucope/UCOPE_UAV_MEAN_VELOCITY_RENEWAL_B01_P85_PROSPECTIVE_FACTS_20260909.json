@@ -1,0 +1,170 @@
+{
+  "prepared_at": "2026-09-09T08:35:11-07:00",
+  "object": "UCOPE-UAV-MEAN-VELOCITY-RENEWAL-B01",
+  "selector": "renewal_mean_velocity_b01",
+  "master": 8401,
+  "authoring_start": "f2cc6399a06461f5be017fcfdb5412c481ed4c65",
+  "starting_source": "6384613b4f8c4204a154427a61ed8012e97af917",
+  "main_required_inputs_checked_at": "4d111466e11fec526ba22975ae1e2490becbad30",
+  "required_input_delta": "Relevant normative and mapped source/test bytes agree; no missing required input.",
+  "calculation": "Actual AST Config defaults/epoch count; accepted architecture and two-episode rollout/head work law; no model/native execution.",
+  "bounded_nonreuse_check": "Pre-authoring scoped master/base and exact object/selector search in UCOPE docs/source/runner/tests found no prior match.",
+  "treatment": {
+    "duration_support": [
+      1,
+      2
+    ],
+    "categorical_labels": [
+      0,
+      1
+    ],
+    "label_probabilities": [
+      0.5,
+      0.5
+    ],
+    "countdown_feature_divisor": 4,
+    "entire_initial_duration_head_frozen": true,
+    "actual_d2_counts": true,
+    "d4_means_four_steps": true,
+    "old_support_unchanged": [
+      1,
+      4
+    ]
+  },
+  "rng": {
+    "b": 840100000,
+    "common_initialization": 840100011,
+    "F_initial_duration_head": 840100012,
+    "G_private_train_velocity": 840100021,
+    "G_private_train_duration": 840100022,
+    "F_private_train_velocity": 840100031,
+    "F_private_train_duration": 840100032,
+    "common_train_reset_first_last": [
+      840101000,
+      840101511
+    ],
+    "common_final_reset_first_last": [
+      840102000,
+      840102031
+    ],
+    "G_sampled_private_final_velocity_first_last": [
+      840103000,
+      840103031
+    ],
+    "G_sampled_private_final_duration_unused_first_last": [
+      840104000,
+      840104031
+    ],
+    "F_sampled_private_final_velocity_first_last": [
+      840105000,
+      840105031
+    ],
+    "F_sampled_and_F_mean_separate_duration_generators_first_last": [
+      840106000,
+      840106031
+    ],
+    "mean_velocity_draws": 0,
+    "G_mean_duration_draws": 0,
+    "H_action_draws": 0
+  },
+  "work": {
+    "matched_training_instances": 1,
+    "fitted_arms": 2,
+    "train_episodes_per_arm": 512,
+    "train_native_steps_per_arm": 131072,
+    "rollouts_per_arm": 256,
+    "Adam_per_arm": 1024,
+    "total_rollouts": 512,
+    "total_Adam_calls": 2048,
+    "total_native_steps": 303104,
+    "final_evaluation_episodes": 160,
+    "final_modes": [
+      "F_mean",
+      "G_mean",
+      "F_sampled",
+      "G_sampled",
+      "H"
+    ],
+    "explicit_resets": 1184,
+    "constructor_resets": 2,
+    "existing_diagnostic_rows": 3200,
+    "recurrent_agent_observations": 1474560,
+    "F_renewal_head_forward_rows_bounds": [
+      2048000,
+      4096000
+    ],
+    "F_head_dense_MAC_bounds": [
+      4521984000,
+      9043968000
+    ],
+    "F_parameters": 68553,
+    "G_parameters": 66311,
+    "F_frozen_duration_parameters": 2242,
+    "total_parameters": 134864,
+    "trainable_parameters": 132622,
+    "learning_rate": 0.0003
+  },
+  "primary": {
+    "contrast": "F_mean_minus_G_mean",
+    "mean": "paired final reset episode differences on new 8401 fits",
+    "MEI_absolute": 0.01,
+    "all_contrasts": [
+      "F_mean_minus_G_mean",
+      "F_sampled_minus_G_sampled",
+      "F_mean_minus_H",
+      "G_mean_minus_H",
+      "F_sampled_minus_H",
+      "G_sampled_minus_H",
+      "F_mean_minus_F_sampled",
+      "G_mean_minus_G_sampled"
+    ],
+    "past_primaries_unchanged": true
+  },
+  "predictions": {
+    "F_mean_minus_G_mean_above_0_01_probability": 0.5,
+    "F_mean_minus_H_above_0_01_probability": 0.55,
+    "F_mean_minus_F_sampled_above_0_01_probability": 0.6,
+    "G_mean_minus_G_sampled_above_0_01_probability": 0.6,
+    "owner": "not taken (unattended)"
+  },
+  "caps": {
+    "complete_arm_seconds": 1800,
+    "complete_invocation_seconds": 3600,
+    "max_accepted_submissions": 1,
+    "focused_checks_seconds": 300
+  },
+  "new_scientific_exposure_at_preparation": 0,
+  "pooled_primary_or_training_population_interval": false,
+  "new_cross_instance_mean_or_SD": false,
+  "exposure_line": "matched_training_instances=1; fitted_arms=2; native_steps=303104; optimizer_steps=2048; final_eval_episodes=160; lr=0.0003; F_parameters=68553; G_parameters=66311; F_frozen_duration_parameters=2242; trainable_parameters=132622",
+  "P84_measured_reference": {
+    "F_arm_seconds": 163.87369038298493,
+    "G_including_H_seconds": 133.33607813803246,
+    "outer_seconds": 313.9,
+    "F_head_rows": 2678988,
+    "guarantees_new_seconds": false
+  },
+  "per_arm_prospective_work": {
+    "F": {
+      "training_steps": 131072,
+      "Adam": 1024,
+      "policy_eval_steps": 16384,
+      "hover_steps": 0
+    },
+    "G": {
+      "training_steps": 131072,
+      "Adam": 1024,
+      "policy_eval_steps": 16384,
+      "hover_steps": 8192
+    }
+  },
+  "multipliers_vs_P84": {
+    "training": 1.0,
+    "final_eval": 1.6666666666666667,
+    "native_steps": 1.0571428571428572,
+    "F_head_bounds": 1.0204081632653061
+  },
+  "new_wall_seconds": null,
+  "scope_section4": "none",
+  "new_scientific_change": "mean and sampled velocity evaluation on the same fresh F/G fits; training unchanged"
+}

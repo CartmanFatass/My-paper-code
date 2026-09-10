@@ -1,0 +1,135 @@
+{
+  "question": "Does the B07 result support a distinct legal action/learning intervention, especially persistence or auxiliary-gradient changes, with native-service decision value on the retained host?",
+  "read_at": "2026-09-08T21:46:02.514120+00:00",
+  "catalog_path": "C:\\Projects\\Inst-sci\\papers\\MyLib\\llm-index\\catalog.v2.jsonl",
+  "catalog_sha256": "2e682c6d1131d503ad48920794dd8005ccf8f535dc9ff75679b0c8502533efc0",
+  "catalog_records": 190,
+  "index_query_terms": [
+    "action repetition",
+    "residual",
+    "action smoothing",
+    "gradient interference",
+    "auxiliary task",
+    "policy parameterization",
+    "multi-task"
+  ],
+  "index_hits": [
+    {
+      "id": "MARL-0149",
+      "title": "Gradient-Protected Value Decomposition for Cooperative Multi-Agent Reinforcement Learning",
+      "matched_terms": [
+        "gradient interference"
+      ]
+    },
+    {
+      "id": "MARL-0227",
+      "title": "Learning Structured Communication for Multi-Agent Reinforcement Learning",
+      "matched_terms": [
+        "auxiliary task"
+      ]
+    },
+    {
+      "id": "MARL-0410",
+      "title": "Context-Aware Bayesian Network Actor-Critic Methods for Cooperative Multi-Agent Reinforcement Learning",
+      "matched_terms": [
+        "policy parameterization"
+      ]
+    },
+    {
+      "id": "MARL-0502",
+      "title": "MA2CL:Masked Attentive Contrastive Learning for Multi-Agent Reinforcement Learning",
+      "matched_terms": [
+        "auxiliary task"
+      ]
+    },
+    {
+      "id": "MARL-0543",
+      "title": "Variational Offline Multi-agent Skill Discovery",
+      "matched_terms": [
+        "multi-task"
+      ]
+    },
+    {
+      "id": "MARL-0549",
+      "title": "Decompose a Task into Generalizable Subtasks in Multi-Agent Reinforcement Learning",
+      "matched_terms": [
+        "multi-task"
+      ]
+    },
+    {
+      "id": "MARL-0561",
+      "title": "Mutual-Information Regularized Multi-Agent Policy Iteration",
+      "matched_terms": [
+        "multi-task"
+      ]
+    },
+    {
+      "id": "MARL-0609",
+      "title": "Bi-Level Knowledge Transfer for Multi-Task Multi-Agent Reinforcement Learning",
+      "matched_terms": [
+        "multi-task"
+      ]
+    },
+    {
+      "id": "MARL-0622",
+      "title": "HyperMARL: Adaptive Hypernetworks for Multi-Agent RL",
+      "matched_terms": [
+        "gradient interference"
+      ]
+    },
+    {
+      "id": "MARL-0629",
+      "title": "Learning and Planning Multi-Agent Tasks via an MoE-based World Model",
+      "matched_terms": [
+        "multi-task"
+      ]
+    },
+    {
+      "id": "VS-0004",
+      "title": "STAIRS-Former: Spatio-Temporal Attention with Interleaved Recursive Structure Transformer for Offline Multi-task Multi-agent Reinforcement Learning",
+      "matched_terms": [
+        "multi-task"
+      ]
+    },
+    {
+      "id": "VS-0005",
+      "title": "Learning Uncertainty-Aware Temporally-Extended Actions",
+      "matched_terms": [
+        "action repetition"
+      ]
+    }
+  ],
+  "index_hits_are_evidence": false,
+  "mylib_registry_path": "C:\\Projects\\My-lib\\registry\\papers.yaml",
+  "mylib_registry_sha256": "f2972d0f305bcec2b1d6257577b10f36b1af3d95b13cfc3b08d37ab880a1e68d",
+  "mylib_registry_records": 2,
+  "mylib_excluded_synthetic_ids": [
+    "P-SYN-001",
+    "P-SYN-002"
+  ],
+  "coverage_limit": "Verified formal Inst-sci catalog and My-lib tracked registry only; no claim that all untracked/private collections or all literature were searched. No fixed scientific purpose assigned to either library.",
+  "verified_sources": [
+    {
+      "id": "VS-0005",
+      "source_path": "C:/Projects/Inst-sci/papers/MyLib/json/VS-0005.json",
+      "source_sha256": "557fff1f849ae5129224ed41ec6b4851aed6a6b2687653e57abf1ce5397f14e3",
+      "passages": "page1 elements62-63; page2 element73",
+      "method": "reuse P53 intake section6 verified retrieval",
+      "change_to_current_interpretation": "Retain persistence as a possible contrary explanation; do not infer it caused B07 loss or adopt action-duration/ensemble changes."
+    },
+    {
+      "id": "MARL-0149",
+      "title": "Gradient-Protected Value Decomposition for Cooperative Multi-Agent Reinforcement Learning",
+      "authors": "Jie Hou et al.",
+      "year": 2026,
+      "doi": "10.1609/aaai.v40i26.39329",
+      "official_url": "https://ojs.aaai.org/index.php/AAAI/article/view/39329",
+      "source_path": "C:/Projects/Inst-sci/papers/MyLib/json/MARL-0149.json",
+      "source_sha256": "5b3f1a2b1d6546264fcd66ce2f15cc49b88e5cd62e28319c46f279e5470592bd",
+      "passages": "page1 abstract element39 and introduction element44",
+      "metadata_quality": "official_title_matched, gradeA, json_ready, warnings[]; research tags abstract_only",
+      "bounded_source_reading": "The inspected source concerns gradient protection across collaborative action samples in value decomposition, with state grouping and intrinsic reward. It does not evaluate DISH shared auxiliary-gradient isolation.",
+      "change_to_current_choice": "Do not nominate a GPVD transplant or suppress auxiliary gradients merely from a search-term match. No negative or novelty verdict on those algorithms."
+    }
+  ]
+}

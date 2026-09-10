@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "request_id": "2026-09-09-vsp03-continuous512-convergence-01",
+  "workflow_node": "em_convergence",
+  "conversation_binding_key": "em:vsp_03:convergence",
+  "direction_id": "vsp_03",
+  "direction_ids": [
+    "vsp_03"
+  ],
+  "conversation_id": "6a9cbb9d-374c-83e8-b600-23d3a8033a69",
+  "provider_url": "https://chatgpt.com/c/6a9cbb9d-374c-83e8-b600-23d3a8033a69",
+  "user_message_id": "581c862f-708c-4088-9cbc-0358fd189ac7",
+  "assistant_message_id": "afcde6b3-a8b0-4bcb-8f29-561b9461ef8b",
+  "visible_model": "6 Pro",
+  "underlying_model": "Latest",
+  "thinking_effort": "Pro, 5 of 5.",
+  "prompt_sha256": "3749ed0c1690cb3eb19372f8a2ddfacc0099319eb35b9d59d9bb7a8b6b938172",
+  "response_sha256": "a5f524cf0f55c09ae61cbc4ed301e67f5f729ae3b35d4c89a7bcd8652cd2a4e5",
+  "response_bytes": 327,
+  "response_characters": 325,
+  "send_click_count": 1,
+  "identity_validation": "PASS",
+  "identity_expected": {
+    "conversation_id": "6a9cbb9d-374c-83e8-b600-23d3a8033a69",
+    "user_message_id": "581c862f-708c-4088-9cbc-0358fd189ac7",
+    "assistant_message_id": "afcde6b3-a8b0-4bcb-8f29-561b9461ef8b"
+  },
+  "identity_observed": {
+    "conversation_id": "6a9cbb9d-374c-83e8-b600-23d3a8033a69",
+    "user_message_id": "581c862f-708c-4088-9cbc-0358fd189ac7",
+    "assistant_message_id": "afcde6b3-a8b0-4bcb-8f29-561b9461ef8b"
+  },
+  "natural_completion_observed": "Worked for 12m 25s; Response and Delivery comment links present; no active generation control",
+  "captured_at": "2026-09-09T22:09:37Z",
+  "archive_paths": {
+    "manifest_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_03\\2026-09-09-vsp03-continuous512-convergence-01\\2026-09-09-vsp03-continuous512-convergence-01--vsp_03__PACKET_MANIFEST.json",
+    "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_03\\2026-09-09-vsp03-continuous512-convergence-01\\2026-09-09-vsp03-continuous512-convergence-01--vsp_03__00_PROMPT.md",
+    "response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_03\\2026-09-09-vsp03-continuous512-convergence-01\\2026-09-09-vsp03-continuous512-convergence-01--vsp_03--attempt-01__02_RESPONSE.md",
+    "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_03\\2026-09-09-vsp03-continuous512-convergence-01\\2026-09-09-vsp03-continuous512-convergence-01--vsp_03--attempt-01__03_TRANSPORT_FACTS.json",
+    "response_sha256": "a5f524cf0f55c09ae61cbc4ed301e67f5f729ae3b35d4c89a7bcd8652cd2a4e5"
+  },
+  "notes": [
+    "Captured with paired Copy response control via CUA clipboard.readText.",
+    "No second Send was attempted."
+  ]
+}

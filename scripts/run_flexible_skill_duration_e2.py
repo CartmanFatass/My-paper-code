@@ -53,7 +53,7 @@ if str(REPO_ROOT) not in sys.path:
 if str(REPO_ROOT / "scripts") not in sys.path:
     sys.path.insert(0, str(REPO_ROOT / "scripts"))
 
-from config_1 import Config  # noqa: E402
+from configs.config_1 import Config  # noqa: E402
 from envs.relay_corridor.adapter import RelayCorridorAdapter  # noqa: E402
 from envs.relay_corridor.config import RelayCorridorConfig, validate_horizon  # noqa: E402
 from envs.relay_corridor.hmasd_driver import (  # noqa: E402

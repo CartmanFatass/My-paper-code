@@ -1,0 +1,98 @@
+{
+  "id": "20260907-cbsc-006",
+  "created": "2026-09-07T18:11:37-07:00",
+  "direction": "capability_bound_semantic_currentness",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "CBSC P16：实现完整限时命令，不实际运行",
+  "context": "Claim: one task-specific command can express the observed local Windows acquisition route and pinned remote setup inside one bounded invocation. Binding structure: systems / information flow. P16 only implements and checks inert fixtures; actual acquisition and science remain unallocated.",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "按卡实现和检查一次性完整命令；独立复核后交回，实际执行仍需另行分配。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "结束本次实现，保留 P15 交回和全部失败证据。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "按批注调整实现范围与假检查；不改变冻结输入或运行实际候选。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "P16明确选择这个有界实现；固定同一预算及失败边界，用假工作直接检查缺口。",
+  "evidence": [
+    "docs/research/candidates/capability_bound_semantic_currentness/CBSC_LOCAL_ACQUISITION_P16_SCIENCE_CARD_20260907.md",
+    "docs/research/candidates/capability_bound_semantic_currentness/CBSC_LOCAL_ACQUISITION_P16_CODE_SPEC_20260907.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-07.md#L120",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否保留 P16 这次有界命令实现？它只实现和用假数据检查，不实际下载或运行候选环境。",
+    "changes_if_approved": [
+      {
+        "target": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_LOCAL_ACQUISITION_P16_SCIENCE_CARD_20260907.md",
+        "from": "P15 发现本地直连可访问文件头，但没有覆盖完整过程的限时命令",
+        "to": "按同一完整规格实现本地获取、传输和远程安装命令，用无害进程检查失败和超时边界，再独立复核"
+      }
+    ],
+    "if_refused": "结束本次实现，保留 P15 的访问事实、全部失败文件和未解决的获取依赖，不运行实际候选。",
+    "evidence_for": [
+      {
+        "path": "docs/research/portfolio/handoffs/2026-09-07-p16-cbsc-acquisition-command.md",
+        "quote": "This explicitly supersedes P15's no-new-source boundary only for a disposable single-task command enclosing local acquisition, transfer and remote setup/import.",
+        "why": "本轮明确允许补上此前缺失的命令实现，而不是再做文件头检查。"
+      },
+      {
+        "path": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_LOCAL_ACQUISITION_P15_RESULT_EVIDENCE_20260907.md",
+        "quote": "Local direct header access is observed; no complete acquisition command is accepted.",
+        "why": "已有不同获取条件的直接观察，但尚缺完整执行边界。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_LOCAL_ACQUISITION_P15_INTAKE_20260907.md",
+        "quote": "Known prior candidate-command work remains 743.35 s with no ready environment.",
+        "why": "实现和假检查成功也不意味着能完整下载、及时安装或解释 B04 失败。"
+      }
+    ],
+    "uncertainty": [
+      "跨系统时钟、启动延迟和断开客户端后的进程终止需要独立检查。",
+      "未来完整文件交付与安装耗时仍未知；本轮不测吞吐率。"
+    ],
+    "cost": {
+      "compute": "本轮真实请求、下载、安装、导入和学习均为 0；研究测试目录最多 5 分钟。若 CM 比较仍有名额，五份隔离实现也不增加实验调用。未来请求才可能分配完整 600 秒，其中工作截止为同一起点后 540 秒。",
+      "owner_time": "可异步批改，无需立即回复。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing；按已有委托推进准备，不启动实际运行。"
+    },
+    "verdict_text": "Only preparation is selected; future execution and any Portfolio action remain unallocated.",
+    "source": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_LOCAL_ACQUISITION_P16_SCIENCE_CARD_20260907.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-08T02:29:43+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/decisions/2026-09-03-unattended-delegation.md",
+      "record": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_LOCAL_ACQUISITION_P16_INTAKE_20260907.md",
+      "state": "applied",
+      "summary": "P16 command preparation accepted: source 5828af584, exact handoff 35a4fcaea, 18 inert cases passed and independent findings resolved under documented clock/scheduling assumptions. Actual Linux behavior, body acquisition and target import remain unobserved. The card now records a request for one complete 600 s / 540 s-work invocation; no allocation or launch follows. This records completed preparation and the prospective request, not an owner reply or runtime readiness."
+    },
+    {
+      "at": "2026-09-08T03:06:43+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/decisions/2026-09-03-unattended-delegation.md",
+      "record": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_LOCAL_ACQUISITION_P17_INTAKE_20260907.md",
+      "state": "applied",
+      "summary": "P17 allocated and completed the single prepared command: PATH_PREPARED, local/remote exit0, all23 pins and primary readback match, complete outer174.5612299s. Both full cp312 bodies retained. Zero learner execution; recommend prospective fresh same-runtime paired B preparation only. Prior failures remain; no new execution allocation or owner reply."
+    }
+  ]
+}

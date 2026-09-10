@@ -2,8 +2,15 @@
 
 Use only when the request explicitly selects `delivery_mode=archive_attachment`
 with a nonempty `fallback_reason`. The shared author fields, scientific decision
-scope and current Root routing are defined in [the Author skill](../SKILL.md).
+scope and current Transport routing are defined in [the Author skill](../SKILL.md).
 Attachment mode changes delivery format, not scientific authority or executor.
+
+The top-level full commit_or_ref is the default scientific input version. Each
+reference may declare a distinct full commit_sha; omission inherits the default.
+The manifest prints each effective path/SHA mapping in the one named repository.
+Preserve all science card/evidence mappings; newer method sources may be separately
+pinned. TASK explicitly adopts only named applicable specification sections at those
+versions. Other retrieved content cannot expand scope or the listed dependencies.
 
 ## Inputs and rendering
 
@@ -28,19 +35,19 @@ The answer is complete natural-language scientific prose, not a routing envelope
 
 Commit and push the packet using the existing Git rules. A rendered local
 CALLER_DIRECT request is executed in the caller under the Transport skill.
-Otherwise dispatch its exact `dispatch_prompt` once to the configured Root task
-with the configured model/effort. An accepted or queued message is a dispatch fact;
+Otherwise dispatch its exact `dispatch_prompt` once to the configured independent Transport task
+with model/thinking omitted. An accepted or queued message is a dispatch fact;
 reconcile uncertain acceptance before continuing. Do not create another executor.
 
 ## Transport and intake
 
-Root executes the complete transport lifecycle locally. Upload the validated
+Transport executes the complete Pro lifecycle in its own task. Upload the validated
 `PROMPT_BODY.md` unchanged and supply the exact `companion_prompt` from HANDOFF.
 The companion is provider text; internal dispatch and routing fields stay in HANDOFF.
 Follow the Transport skill for 6 Pro verification, the exact bound conversation,
 one Send, paired-message capture, full response archive and tab cleanup.
 
-Root's shared heartbeat observes pending requests under ROOT_OPERATIONS.md.
+Transport observes pending requests while Root continues its goal under ROOT_OPERATIONS.md.
 Each request retains its source, parent, provider identity, archive and Send facts.
 A single request's completion does not pause observation needed by another.
 

@@ -16,7 +16,9 @@ scope, never interpret the answer, and never send twice. The Codex reference pro
 
 The hub gives you the absolute path of a `HANDOFF.json` rendered by
 `.agents/skills/hmasd-pro-research-prompt-author/scripts/render_packet.py` with
-`delivery_mode=github_delivery` and `dispatch_state=READY_TO_DISPATCH`, plus a mode:
+`delivery_mode=github_delivery`, caller-direct execution and `dispatch_state=CALLER_READY`,
+plus a mode. `READY_TO_DISPATCH` belongs to the Codex singleton route and is returned to the
+hub for correct routing; it does not authorize this Claude operator to take that request. Modes:
 
 - `scientific`: a real request bound to `em:<direction>:innovator`, `em:<direction>:convergence`
   or `portfolio:cross_direction`.
@@ -31,7 +33,11 @@ Read from the handoff: `request_id`, `direction_id`, `workflow_node`,
 
 ## Preconditions, in order; stop at the first failure and report it exactly
 
-1. `TASK_NOT_PUBLISHED` or `dispatch_required=false` means no payload: stop.
+1. `TASK_NOT_PUBLISHED` means the fixed TASK has not been published and bound: stop.
+   Accept the published caller-direct `CALLER_READY` handoff with its exact
+   `transport_request.prompt` and GitHub delivery binding. `dispatch_required=false` on this
+   route means no Codex singleton dispatch; it does not mean the payload is absent. Missing
+   payload/binding or any other dispatch state returns to the hub before Send.
 2. The TASK commit named in the fixed link is on the remote:
    `git branch -r --contains <sha>` in `C:/Projects/HMASD` is non-empty.
 3. Registry `temp/sessions/hmasd-chatgpt-pro-transport/registry.json` (shared with Codex):
@@ -117,9 +123,10 @@ an uncertain or mismatched send, record it as terminal `SENT_UNCERTAIN` and stop
    is closed the same way). Confirm with `agentify_tabs` that only the owner's protected
    `default` tab remains and report `tab_lifecycle: CLOSED` with every id. Never close a user
    tab. The hub verifies this line and closes leftovers itself if a close fails.
-6. Registry note: `bind_conversation.py` leaves the record at `DIRECTION_VERIFIED`; a later
-   request on the same key is refused with `BINDING_BUSY`. Report the refusal verbatim and stop;
-   it is bookkeeping, not a send or delivery blocker, and the hub reconciles it.
+6. Complete the Registry lifecycle below for this exact delivered request.
+   `bind_conversation.py` alone leaves `DIRECTION_VERIFIED`; archive it after verified readback
+   and tab closure before another request uses the key. Report a reconciliation refusal to the
+   hub with the original request identity; it does not authorize another Send.
 
 ## Return
 
@@ -148,7 +155,7 @@ for both loops. After the archive and readback are verified and the tabs are clo
 record to `ARCHIVED` with the contract's own validated transitions:
 
 ```
-PYTHONUTF8=1 python temp/sessions/hmasd-chatgpt-pro-transport/archive_delivered_claude_request.py --registry temp/sessions/hmasd-chatgpt-pro-transport/registry.json --binding-key <key> --request-id <request id recorded on the key> --user-message-id <providerUserMessageId> --assistant-message-id <providerAssistantMessageId> --prompt-file <__00_PROMPT.md> --short-receipt <__02_RESPONSE.md> --transport-facts <__03_TRANSPORT_FACTS.json> --github-response <GITHUB_RESPONSE.md> --github-commit <sha> --send-attempted-at <epoch ms> --completed-at <epoch ms> --note "<one line>"
+PYTHONUTF8=1 python .agents/skills/hmasd-chatgpt-pro-transport/scripts/archive_delivered_claude_request.py --registry temp/sessions/hmasd-chatgpt-pro-transport/registry.json --binding-key <key> --request-id <request id recorded on the key> --user-message-id <providerUserMessageId> --assistant-message-id <providerAssistantMessageId> --prompt-file <__00_PROMPT.md> --short-receipt <__02_RESPONSE.md> --transport-facts <__03_TRANSPORT_FACTS.json> --github-response <GITHUB_RESPONSE.md> --github-commit <sha> --send-attempted-at <epoch ms> --completed-at <epoch ms> --note "<one line>"
 ```
 
 It changes no conversation id and rebinds nothing. When the key's record still names an

@@ -2,7 +2,7 @@ from types import SimpleNamespace
 
 import numpy as np
 
-from train_multiproc_config_1 import (
+from experiments.launchers.train_multiproc_config_1 import (
     EnhancedRewardTracker,
     TrainingProfiler,
     count_skill_switches_for_metrics,

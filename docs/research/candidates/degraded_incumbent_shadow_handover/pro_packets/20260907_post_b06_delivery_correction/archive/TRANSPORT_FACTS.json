@@ -1,0 +1,169 @@
+{
+  "schema_version": 4,
+  "mode": "scientific",
+  "request_id": "2026-09-07-dish-post-b06-delivery-correction-01",
+  "workflow_node": "em_convergence",
+  "direction_id": "degraded_incumbent_shadow_handover",
+  "direction_ids": [
+    "degraded_incumbent_shadow_handover"
+  ],
+  "conversation_binding_key": "em:degraded_incumbent_shadow_handover:convergence",
+  "decision_authority": "pro_final",
+  "source_thread_id": "01a079c8-166d-7aa0-9a5b-4261860a9ae8",
+  "creator_thread_id": "01a079c8-166d-7aa0-9a5b-4261860a9ae8",
+  "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "operator_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "execution_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "return_route": "PARENT_SESSION",
+  "repository": "CartmanFatass/My-paper-code",
+  "provider_requirement": {
+    "model": "GPT-6 Astra",
+    "mode": "Pro",
+    "label": "6 Pro",
+    "selector_hint": "Latest"
+  },
+  "conversation": {
+    "id": "6a9bec54-df00-83e8-9840-46440458f316",
+    "url": "https://chatgpt.com/c/6a9bec54-df00-83e8-9840-46440458f316",
+    "reuse_required": true,
+    "rebound_or_reset": false
+  },
+  "tab": {
+    "id": "14",
+    "key": "em:degraded_incumbent_shadow_handover:convergence",
+    "origin": "agent",
+    "lifecycle": "CLOSED"
+  },
+  "model_preflight": {
+    "requested_product_model": "GPT-6 Astra",
+    "provider_visible_label": "6 Pro",
+    "matched_product_model": "Latest",
+    "reasoning_effort_requested": "Pro",
+    "matched_reasoning_effort": "Pro, 5 of 5."
+  },
+  "prompt": {
+    "path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\degraded_incumbent_shadow_handover\\2026-09-07-dish-post-b06-delivery-correction-01\\PROMPT_BODY.md",
+    "sha256": "3b9e8d29e195f0cb6d1a96d66684a8e44ac8f2612f92b00b39d1d7d0d175e540",
+    "bytes": 1274,
+    "source": "canonical packet prompt"
+  },
+  "send": {
+    "send_click_count": 1,
+    "send_attempted": true,
+    "provider_user_message_id": "94e79976-b462-4c76-8994-31f6c41c5c60",
+    "provider_assistant_message_id": "not-exposed-by-AX-manual-pairing",
+    "assistant_message_id_exposed": false,
+    "observed_conversation_url": "https://chatgpt.com/c/6a9bec54-df00-83e8-9840-46440458f316",
+    "observed_conversation_id": "6a9bec54-df00-83e8-9840-46440458f316",
+    "user_node_exact": true,
+    "prompt_link_resource_pill_observed": true,
+    "prompt_link": "https://github.com/CartmanFatass/My-paper-code/blob/25c93b776b8d8a8d706ef1259601775d15210594/docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260907_post_b06_delivery_correction/TASK.md",
+    "expected_binding": "em:degraded_incumbent_shadow_handover:convergence",
+    "observed_binding": "em:degraded_incumbent_shadow_handover:convergence",
+    "binding_match": true,
+    "attachment_observed": false
+  },
+  "wait_status": "NATURAL_COMPLETION",
+  "observed_page_state": "Worked for 10m 48s; complete assistant response; no active generation control",
+  "capture_method": "Copy response control and clipboard via CUA; exact question/reply manually paired because assistant DOM ID was not exposed",
+  "short_receipt": {
+    "path": "\\\\?\\C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\degraded_incumbent_shadow_handover\\2026-09-07-dish-post-b06-delivery-correction-01\\2026-09-07-dish-post-b06-delivery-correction-01--degraded_incumbent_shadow_handover--attempt-01__02_RESPONSE.md",
+    "sha256": "64197894d124d07a947ef5823ccf51a062bfbe6230c501e1dd41eb39b1f36147",
+    "bytes": 356,
+    "characters": 327
+  },
+  "github_response": {
+    "path": "\\\\?\\C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\degraded_incumbent_shadow_handover\\2026-09-07-dish-post-b06-delivery-correction-01\\GITHUB_RESPONSE.md",
+    "sha256": "a2e4e03f1631c3b24e7e70b9397d0c6a08e37c79716eda10b43232d38297fdd5",
+    "bytes": 28039,
+    "characters": 15983
+  },
+  "github_delivery": {
+    "branch": "codex/pro-dish-post-b06-20260907",
+    "task_url": "https://github.com/CartmanFatass/My-paper-code/blob/25c93b776b8d8a8d706ef1259601775d15210594/docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260907_post_b06_delivery_correction/TASK.md",
+    "task_commit_sha": "25c93b776b8d8a8d706ef1259601775d15210594",
+    "input_base_sha": "8a5cf6205b2ea0c0df8541b4c461234d81ec615a",
+    "response_path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260907_post_b06_delivery_correction/archive/RESPONSE.md",
+    "response_commit_sha": "f7b58f1b88d7282f98ca6be531e9b4c27f85b690",
+    "response_url": "https://github.com/CartmanFatass/My-paper-code/blob/f7b58f1b88d7282f98ca6be531e9b4c27f85b690/docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260907_post_b06_delivery_correction/archive/RESPONSE.md",
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/4",
+    "issue_comment_id": 5574756410,
+    "issue_comment_url": "https://github.com/CartmanFatass/My-paper-code/issues/4#issuecomment-5574756410",
+    "response_file_confirmed": true,
+    "delivery_comment_confirmed": true,
+    "scientific_decision_formed": true,
+    "github_response_sha256": "a2e4e03f1631c3b24e7e70b9397d0c6a08e37c79716eda10b43232d38297fdd5"
+  },
+  "response_identity": {
+    "expected_binding": "em:degraded_incumbent_shadow_handover:convergence",
+    "observed_binding": "em:degraded_incumbent_shadow_handover:convergence",
+    "binding_match": true,
+    "paired_by_manual_exact_question_and_reply": true,
+    "user_message_id": "94e79976-b462-4c76-8994-31f6c41c5c60",
+    "assistant_message_id": "not-exposed-by-AX-manual-pairing",
+    "identity_note": "provider AX tree exposed no assistant DOM ID; exact correction question and the immediately paired completed reply were inspected"
+  },
+  "archive_status": "ARCHIVED",
+  "response_sha256": "64197894d124d07a947ef5823ccf51a062bfbe6230c501e1dd41eb39b1f36147",
+  "github_response_sha256": "a2e4e03f1631c3b24e7e70b9397d0c6a08e37c79716eda10b43232d38297fdd5",
+  "archive_paths": {
+    "manifest_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\degraded_incumbent_shadow_handover\\2026-09-07-dish-post-b06-delivery-correction-01\\PACKET_MANIFEST.json",
+    "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\degraded_incumbent_shadow_handover\\2026-09-07-dish-post-b06-delivery-correction-01\\PROMPT_BODY.md",
+    "reference_files": [],
+    "response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\degraded_incumbent_shadow_handover\\2026-09-07-dish-post-b06-delivery-correction-01\\RESPONSE.md",
+    "short_response_file": "\\\\?\\C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\degraded_incumbent_shadow_handover\\2026-09-07-dish-post-b06-delivery-correction-01\\2026-09-07-dish-post-b06-delivery-correction-01--degraded_incumbent_shadow_handover--attempt-01__02_RESPONSE.md",
+    "github_response_file": "\\\\?\\C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\degraded_incumbent_shadow_handover\\2026-09-07-dish-post-b06-delivery-correction-01\\GITHUB_RESPONSE.md",
+    "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\degraded_incumbent_shadow_handover\\2026-09-07-dish-post-b06-delivery-correction-01\\TRANSPORT_FACTS.json",
+    "response_sha256": "64197894d124d07a947ef5823ccf51a062bfbe6230c501e1dd41eb39b1f36147",
+    "github_response_sha256": "a2e4e03f1631c3b24e7e70b9397d0c6a08e37c79716eda10b43232d38297fdd5"
+  },
+  "heartbeat": {
+    "automation_id": "hmasd-experiment-monitor",
+    "status": "ACTIVE",
+    "next_wake_at": null,
+    "retired_at": null,
+    "retirement_verified": false
+  },
+  "timestamps": {
+    "received_at": "2026-09-07T19:03:38Z",
+    "send_attempted_at": "2026-09-07T19:03:38Z",
+    "sent_at": "2026-09-07T19:03:38Z",
+    "generation_started_at": "2026-09-07T19:03:38Z",
+    "completed_at": "2026-09-07T19:28:07Z",
+    "captured_at": "2026-09-07T19:28:07Z",
+    "archived_at": "2026-09-07T19:28:07Z"
+  },
+  "return_receipt": {
+    "required": false,
+    "source_thread_id": "01a079c8-166d-7aa0-9a5b-4261860a9ae8",
+    "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+    "destination_thread_id": null,
+    "status": "LOCAL",
+    "attempt_count": 0,
+    "message_key": "2026-09-07-dish-post-b06-delivery-correction-01|degraded_incumbent_shadow_handover|6a9bec54-df00-83e8-9840-46440458f316|64197894d124d07a947ef5823ccf51a062bfbe6230c501e1dd41eb39b1f36147",
+    "retry_allowed": false,
+    "routing_mode": "LOCAL",
+    "delivery_mode": "bounded_single_attempt",
+    "return_control_after_attempt": true,
+    "archive_paths": {
+      "manifest_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\degraded_incumbent_shadow_handover\\2026-09-07-dish-post-b06-delivery-correction-01\\PACKET_MANIFEST.json",
+      "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\degraded_incumbent_shadow_handover\\2026-09-07-dish-post-b06-delivery-correction-01\\PROMPT_BODY.md",
+      "reference_files": [],
+      "response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\degraded_incumbent_shadow_handover\\2026-09-07-dish-post-b06-delivery-correction-01\\RESPONSE.md",
+      "short_response_file": "\\\\?\\C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\degraded_incumbent_shadow_handover\\2026-09-07-dish-post-b06-delivery-correction-01\\2026-09-07-dish-post-b06-delivery-correction-01--degraded_incumbent_shadow_handover--attempt-01__02_RESPONSE.md",
+      "github_response_file": "\\\\?\\C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\degraded_incumbent_shadow_handover\\2026-09-07-dish-post-b06-delivery-correction-01\\GITHUB_RESPONSE.md",
+      "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\degraded_incumbent_shadow_handover\\2026-09-07-dish-post-b06-delivery-correction-01\\TRANSPORT_FACTS.json",
+      "response_sha256": "64197894d124d07a947ef5823ccf51a062bfbe6230c501e1dd41eb39b1f36147",
+      "github_response_sha256": "a2e4e03f1631c3b24e7e70b9397d0c6a08e37c79716eda10b43232d38297fdd5"
+    },
+    "response_sha256": "64197894d124d07a947ef5823ccf51a062bfbe6230c501e1dd41eb39b1f36147",
+    "staged_at": "2026-09-07T19:28:07Z",
+    "fallback_enabled": false
+  },
+  "notes": [
+    "Exactly one provider Send was confirmed; no duplicate Send occurred.",
+    "This correction request changed delivery authorization only; scientific content is the fixed response at the immutable GitHub commit.",
+    "The prior stale delivery record is preserved in binding_reconciliation; current response and comment are both confirmed."
+  ],
+  "tab_lifecycle": "CLOSED"
+}

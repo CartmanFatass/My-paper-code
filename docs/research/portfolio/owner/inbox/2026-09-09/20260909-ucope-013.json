@@ -1,0 +1,99 @@
+{
+  "id": "20260909-ucope-013",
+  "created": "2026-09-09T12:36:08-07:00",
+  "direction": "ucope",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "归一化反馈B01：累计FP32目标统计，新配对8501",
+  "context": "检验训练时价值目标归一化是否使合法反馈的原生回报超过原版0.01；绑定多智能体信用：团队baseline为五个私有循环策略提供已detach优势。本卡补齐累计矩、原生单位、rollout顺序、评价冻结和独立配对；当前只准备，无源码或调用。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "保留具体卡供后来实现和分配使用；本次没有训练或源码写入。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "撤回该卡准备，保留Pro原文与所有旧事实，不自动改变整个方向。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "应用你的明确修改后再作为以后技术任务输入；不静默变更原生主量、对照或旧结果。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "在已接受选项c内选取简单、现有源代码明确的累计统计，避免新增遗忘超参；收益仍须由原生比较检验。",
+  "evidence": [
+    "docs/research/candidates/ucope/UCOPE_UAV_FEEDBACK_VALUE_NORMALIZATION_B01_SCIENCE_CARD_20260909.md",
+    "docs/research/candidates/ucope/UCOPE_UAV_FEEDBACK_VALUE_NORMALIZATION_B01_PREPARATION_INTAKE_20260909.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-09.md#L40",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否保留已准备好的UCOPE归一化反馈B01科学卡，作为后来实现/分配的具体输入？",
+    "changes_if_approved": [
+      {
+        "target": "UCOPE-UAV-FEEDBACK-VALUE-NORMALIZATION-B01 科学卡及DIRECTION",
+        "from": "Pro已选归一化G/原G/悬停，统计细节与新配对尚未落定",
+        "to": "冻结累计FP32总体矩、方差下限1e-8、rollout更新顺序/评价冻结、新配对8501、0.01原生主差与完整预算；本次只提交文档，没有源码实现或实验调用"
+      }
+    ],
+    "if_refused": "按你的具体改判修改或撤回本次准备；保留Pro原文、所有P85损失与旧收益。本次没有新运行，也不因拒绝卡就自动关闭方向。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_POST_MEAN_VELOCITY_B01_CONVERGENCE_INTAKE_20260909.md",
+        "quote": "G_raw uses `value_moments=None`. G_normalized maintains its own training-only scalar moments of complete return-to-go targets.",
+        "why": "已有节点选择一个可实际训练和比较的明确干预；本卡补齐实现需要的统计定义。"
+      },
+      {
+        "path": "docs/research/portfolio/pro_packets/20260909_foundations_special_review/archive/RESPONSE.md",
+        "quote": "保留现有完整 Pro 对未来 normalized-G/raw-G/H 问题的选择，同时保留“尚未定位原因”。",
+        "why": "专项复审保留该问题，同时要求不把归一化说成已证明的疗法。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_UAV_FEEDBACK_VALUE_NORMALIZATION_B01_PREPARATION_INTAKE_20260909.md",
+        "quote": "Strongest contradiction is that raw G sometimes beats H, normalization has no current UAV effect evidence, and stopping work was a close direction-level runner-up.",
+        "why": "这个配方可能不改善回报；累计统计可能滞后于队友共同学习后的数据变化，一对新训练不足以证明稳定收益。"
+      }
+    ],
+    "uncertainty": [
+      "实际收益、完整运行时间、归一化对共同裁剪/未来baseline的具体影响尚未测量。",
+      "完整目标相同不代表有限优化轨迹相同；本法不做PopArt输出补偿。",
+      "同信息调好基线/上界headroom仍缺失，不能把悬停当作上界，也不是先做调参的条件。"
+    ],
+    "cost": {
+      "compute": "当前仅文档/源码只读及配置算术，0模型/仿真/训练/评价/Pro Send。未来卡为286720原生步、2048次Adam、96次最终评价；1800秒/完整臂、3600秒/完整调用，未分配；实现检查上限300秒也未执行。",
+      "owner_time": "异步查看具体配方和原生读法；无需现在回复。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing；卡已准备，Root以后另行安排实现和实验，不等待owner回复。"
+    },
+    "verdict_text": "Freeze the concrete B/EXPLORE card under accepted option (c): cumulative FP32 target moments, G_normalized versus G_raw plus H, fresh matched master8501.",
+    "source": "docs/research/candidates/ucope/UCOPE_UAV_FEEDBACK_VALUE_NORMALIZATION_B01_PREPARATION_INTAKE_20260909.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-09T19:39:05+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/candidates/ucope/UCOPE_UAV_FEEDBACK_VALUE_NORMALIZATION_B01_PREPARATION_INTAKE_20260909.md",
+      "record": "docs/research/candidates/ucope/UCOPE_UAV_FEEDBACK_VALUE_NORMALIZATION_B01_SCIENCE_CARD_20260909.md",
+      "state": "applied",
+      "summary": "Root只授权本次准备。accept实际仅表示科学卡已准备；工具默认标签launch as carded在此不代表源码实施、科学调用已被授权或已运行。当前运行额度0，所有未来实现/分配仍由Root具体任务处理。"
+    },
+    {
+      "at": "2026-09-09T19:47:33+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/ucope/UCOPE_UAV_FEEDBACK_VALUE_NORMALIZATION_B01_PREPARATION_INTAKE_20260909.md",
+      "record": "docs/research/portfolio/decisions/2026-09-09-foundations-scientific-validity-review.md",
+      "state": "applied",
+      "summary": "Root已核对并集成科学卡为7dcffabcc；主分支对应audit/2026-09-09.md#L141，原item行号为方向分支位置。当前accept表示卡已准备；另已给原DM/CM代码和合成检查任务，结果性实验调用仍为0。"
+    }
+  ]
+}

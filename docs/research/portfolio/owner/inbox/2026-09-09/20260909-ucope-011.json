@@ -1,0 +1,95 @@
+{
+  "id": "20260909-ucope-011",
+  "created": "2026-09-09T09:36:23-07:00",
+  "direction": "ucope",
+  "tier": "direction",
+  "kind": "close-call",
+  "title": "P85后续：再一对训练、结束均值执行，或检验归一化反馈",
+  "context": "P85已完整接收为WITHIN，四个悬停差和两个均值减采样差均负。Root仅授权向原Convergence咨询，不分配新运行。DM窄幅保留新独立历史建议，明确零工作备选与归一化G对原G的训练备选。",
+  "options": [
+    {
+      "key": "a",
+      "label": "建议一对新五模式训练",
+      "consequence": "检验同一拟合内的模式损失是否在新学习历史重现；当前只提交建议，裁决和新分配前不运行。"
+    },
+    {
+      "key": "b",
+      "label": "结束已测均值执行方案",
+      "consequence": "零新增经验工作，保留所有损失与较早采样收益；不改变整个方向生命周期。"
+    },
+    {
+      "key": "c",
+      "label": "比较归一化G与原G",
+      "consequence": "转向明确的反馈学习改动，两臂加悬停；不能声称续约收益或P85损失已被解释。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "c",
+  "dm_reason": "仅一对新模式比较留下学习历史依赖问题，但现有损失也足以支持立即停止；把这次边际取舍交原节点。",
+  "evidence": [
+    "docs/research/candidates/ucope/UCOPE_POST_MEAN_VELOCITY_B01_CONVERGENCE_PREPARATION_INTAKE_20260909.md",
+    "docs/research/candidates/ucope/UCOPE_POST_MEAN_VELOCITY_B01_CONVERGENCE_FACTS_20260909.json"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-09.md#L37",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "P85均值动作没有改善原生收益：下一步再做一对独立训练，结束均值执行方案，还是比较一个明确的训练改动？",
+    "changes_if_approved": [
+      {
+        "target": "UCOPE 原 Convergence 问题",
+        "from": "P85完整接收，未分配后续实验",
+        "to": "提交三项选择；DM窄幅推荐一对新训练，并保留零实验停止与归一化训练备选；裁决前不生成新实验卡或调用"
+      }
+    ],
+    "if_refused": "停止建议的重复方案，由原节点处理明确的停止或训练改动选项；P85结果和所有原生损失保留，不自动运行。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_POST_MEAN_VELOCITY_B01_CONVERGENCE_PREPARATION_INTAKE_20260909.md",
+        "quote": "One new independent fit can reveal whether both adverse within-fit mode effects recur.",
+        "why": "新训练可以改变当前仅一对拟合政策上的执行方式判断；多评估旧模型不能提供另一段学习经历。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_UAV_MEAN_VELOCITY_RENEWAL_B01_P85_INTAKE_20260909.md",
+        "quote": "Thus tanh(mu) did not rescue native performance on these fits.",
+        "why": "均值F−G仅在±0.01内，四个悬停差和两个均值减采样差全部负；现在就结束均值方案是有实质依据的零工作备选。"
+      }
+    ],
+    "uncertainty": [
+      "P85只有一对独立训练，条件评价误差不代表训练总体不确定性。",
+      "新历史的边际价值是否足够，不能只因完整运行331.58秒而回答。",
+      "归一化G对原G的两臂B有文献和现有接口支持，但没有UAV修复证据，也不直接检验续约。",
+      "同信息调好基线的headroom缺失；不是启动B的前置条件。"
+    ],
+    "cost": {
+      "compute": "本咨询0新仿真/训练/评价。候选a为303104原生步、2048次Adam、160次终局评价；候选b为0；候选c为286720步、2048次Adam、96次评价。未来墙钟未知；提议1800秒/臂、3600秒完整调用。",
+      "owner_time": "异步查看；无需回复后才发布",
+      "reversibility": "reversible",
+      "waits_on_this": "只有后续科学选择等原节点完整答复；Root未分配新实验。"
+    },
+    "verdict_text": "Recommend (a), narrowly over (b), while exposing (c) as a concrete alternative.",
+    "source": "docs/research/candidates/ucope/UCOPE_POST_MEAN_VELOCITY_B01_CONVERGENCE_PREPARATION_INTAKE_20260909.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-09T16:52:46+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/root-log/2026-09-09.md",
+      "record": "docs/research/portfolio/root-log/2026-09-09.md",
+      "state": "planned",
+      "summary": "Consultation-only packet integratedce85d3dcc/2fb3dc43f/e2efe64e6 and dispatched once to dedicated Transport. Original branch ledger L37 maps to main audit2026-09-09 L124. Provider acceptance pending; no option executed, new card or experiment allocated."
+    },
+    {
+      "at": "2026-09-09T17:22:52+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/ucope/pro_packets/20260909_post_mean_velocity_b01_convergence/archive/RESPONSE.md",
+      "record": "docs/research/candidates/ucope/UCOPE_POST_MEAN_VELOCITY_B01_CONVERGENCE_INTAKE_20260909.md",
+      "state": "applied",
+      "summary": "Pro完整合规裁决改选c；原准备建议a仅保留为历史。当前方向决策及新中文包见20260909-ucope-012。应用仅为intake和DIRECTION科学记录，未新增卡、种子、源码或实验分配；Transport短回执的未确认判断已用GitHub实物核对，原文保留。"
+    }
+  ]
+}

@@ -1,0 +1,235 @@
+{
+  "object": "FOLR-PUBLIC-LIFECYCLE-TIMING-B01",
+  "prepared_at": "2026-09-09T22:13:22.051792+00:00",
+  "status": "prospective candidate only; no implementation or scientific invocation allocated",
+  "evidence_class": "B/EXPLORE",
+  "parent_scientific_intake": "254efb863e60eaf2f2349599a40331d26bb72e6e",
+  "implementation_base_source": "434f10cf95f16dd342cbf754382aa76155fcd2b7",
+  "launch_source_sha": null,
+  "training_seed": 7804,
+  "final_evaluation_seed": 107804,
+  "arms": [
+    "RETAIN",
+    "EVENT",
+    "RANDOM"
+  ],
+  "public_information": "identical accepted local attention plus public E and own B; no private native information or reset-mask input feature added",
+  "random_control": {
+    "p": 0.1,
+    "matched_frequency": false,
+    "label": "one preset unmatched Bernoulli survivor-reset law",
+    "train_private_rng": "NumPy Generator(PCG64(207804))",
+    "evaluation_private_rng": "NumPy Generator(PCG64(307804))",
+    "schedule": "RANDOM draws one5-vector at each controller position t=0..20 in slot order0..4, including ineligible slots; U<.1 intersects current true-survivor C; continuous stream across phase episodes, separate fresh eval generator; current mask sampled once before GRU and stored with actual episode",
+    "mask_reuse": "exact same realized mask at original episode position in acting, online and target replay; no replay resampling; masked hidden is prior state before GRU update; no new actor input feature",
+    "terminal_and_entrant": "C false at episode entry/new birth; inactive/new state follows common clear. Terminal masks may affect the final controller pass but have no native action or bootstrap and are excluded from reset/opportunity counts.",
+    "training_private_random_scalar_draws": 525000,
+    "evaluation_private_random_scalar_draws": 13440,
+    "whole_private_random_scalar_draws": 538440,
+    "training_stored_mask_boolean_entries": 525000
+  },
+  "retained_denominator_reading": {
+    "denominator_status": "not retained; do not reconstruct by a scientific rerun",
+    "training_event_summary_keys_by_prior_object": {
+      "B01": {
+        "RETAIN": [
+          "births",
+          "departures",
+          "survivor_opportunities",
+          "survivor_resets"
+        ],
+        "RESET": [
+          "births",
+          "departures",
+          "survivor_opportunities",
+          "survivor_resets"
+        ]
+      },
+      "B02": {
+        "RETAIN": [
+          "births",
+          "departures",
+          "survivor_opportunities",
+          "survivor_resets"
+        ],
+        "RESET": [
+          "births",
+          "departures",
+          "survivor_opportunities",
+          "survivor_resets"
+        ]
+      },
+      "B03": {
+        "RETAIN": [
+          "births",
+          "departures",
+          "survivor_opportunities",
+          "survivor_resets"
+        ],
+        "RESET": [
+          "births",
+          "departures",
+          "survivor_opportunities",
+          "survivor_resets"
+        ]
+      }
+    },
+    "final_checkpoint_keys_from_save_source": [
+      "actor",
+      "mixer",
+      "target_actor",
+      "target_mixer",
+      "optimiser",
+      "updates",
+      "arm"
+    ],
+    "b03_collected_files": {
+      "RETAIN": [
+        "final.pt",
+        "process.time",
+        "summary.json",
+        "task.log"
+      ],
+      "RESET": [
+        "final.pt",
+        "process.time",
+        "summary.json",
+        "task.log"
+      ]
+    },
+    "source_pointers": [
+      "experiments/candidates/vap_folr_core/public_lifecycle_b01/environment.py:52-60 event-gated opportunity count",
+      "experiments/candidates/vap_folr_core/public_lifecycle_b01/collection.py:20-50 in-memory episode then replay; no trajectory publication",
+      "experiments/candidates/vap_folr_core/public_lifecycle_b01/learner.py:57-64 final save contains weights/optimiser/updates/arm, no replay",
+      "scripts/run_folr_public_lifecycle_b01.py:48-90 only every200 episode/update/wall logs and final summary/checkpoint"
+    ],
+    "inference": "aggregate births/departures/returns lack per-decision membership timing; old event-only opportunity totals cannot identify the all-eligible denominator"
+  },
+  "per_arm": {
+    "training_episodes": 5000,
+    "training_native_ticks": 100000,
+    "optimizer_steps": 4969,
+    "final_evaluation_episodes": 128,
+    "evaluation_native_ticks": 2560,
+    "total_native_ticks": 102560,
+    "acting_controller_calls": 107688,
+    "acting_gru_row_forwards": 538440,
+    "online_plus_target_replay_gru_row_forwards": 33391680,
+    "sampled_td_timepoints": 3180160
+  },
+  "whole_triple": {
+    "training_episodes": 15000,
+    "training_native_ticks": 300000,
+    "optimizer_steps": 14907,
+    "final_evaluation_episodes": 384,
+    "evaluation_native_ticks": 7680,
+    "total_native_ticks": 307680,
+    "acting_controller_calls": 323064,
+    "acting_gru_row_forwards": 1615320,
+    "online_plus_target_replay_gru_row_forwards": 100175040,
+    "sampled_td_timepoints": 9540480
+  },
+  "dominant_factors": "3arms x4969updates x32replay episodes x21positions x5slots x2actor passes, plus backward and mixing; acting3 x5128 x21 x5; onlyRANDOM has5128 x21 x5 private uniform draws and stored masks, no nested candidate search",
+  "exposure_line": "Per arm:100000 real native training ticks;4969 trainable actor/mixer RMSprop steps atlr0.0005, nominallr*steps2.4845;128 once-fixed final greedy episodes. Nominal product is not parameter displacement.",
+  "historical_complete_wall_seconds": {
+    "RETAIN": [
+      770.69,
+      767.84,
+      753.84
+    ],
+    "EVENT": [
+      746.89,
+      753.11,
+      753.94
+    ]
+  },
+  "cost_projection": {
+    "historical_per_arm_mean_seconds": {
+      "RETAIN": 764.1233333333333,
+      "EVENT": 751.3133333333334,
+      "RANDOM": 757.7183333333334
+    },
+    "native_and_acting_work_ratio_to_b03": 1.0190779014308426,
+    "learner_replay_work_ratio_to_b03": 1.0,
+    "point_seconds": {
+      "RETAIN": 778.7012029676736,
+      "EVENT": 765.6468150503446,
+      "RANDOM": 772.1740090090091
+    },
+    "triple_point_seconds": 2316.5220270270274,
+    "triple_point_minutes": 38.608700450450456,
+    "assumption": "Multiply historical full-arm means by5128/5032 for planning despite unchanged replay training; no phase timing exists. RANDOM uses midpoint of RETAIN/EVENT means as unmeasured proxy; its mask overhead and changed trajectory costs are unknown. This is no guaranteed upper or extra budget."
+  },
+  "proposed_limits": {
+    "complete_arm_wall_seconds": 1800,
+    "whole_triple_wall_seconds": 5400,
+    "supporting_engineering_checks_and_readbacks_seconds": 300,
+    "accepted_scientific_submissions_if_later_allocated": 3,
+    "submissions_per_arm": 1,
+    "scientific_retries": 0,
+    "automatic_successors": 0,
+    "new_scientific_invocations_currently_allocated": 0
+  },
+  "literature": {
+    "question": "Does verified local literature justify a stronger history comparator, frequency-matched random within-episode reset law, or a claim that replay masks may be resampled?",
+    "my_lib_verified_current_coverage": "CLI coverage:2papers/2mechanisms, synthetic-core only, coverage date2026-07-26; fictional entries excluded, no scientific search against fixtures",
+    "inst_sci_catalog": {
+      "path": "C:\\Projects\\Inst-sci\\papers\\MyLib\\llm-index\\catalog.v2.jsonl",
+      "records": 190,
+      "sha256": "2e682c6d1131d503ad48920794dd8005ccf8f535dc9ff75679b0c8502533efc0"
+    },
+    "bounded_queries": {
+      "explicit_random_state_reset": [],
+      "hidden_or_recurrent_metadata": [],
+      "dropout_metadata": [
+        "MARL-0521",
+        "VS-0004"
+      ],
+      "cama_or_sable_metadata": [
+        "MARL-0409",
+        "MARL-0485",
+        "MARL-0653"
+      ]
+    },
+    "verified_source_passages": [
+      {
+        "id": "MARL-0409",
+        "title": "Complementary Attention for Multi-Agent Reinforcement Learning",
+        "source_json": "C:\\Projects\\Inst-sci\\papers\\MyLib\\json\\MARL-0409.json",
+        "page": 3,
+        "elements": [
+          155,
+          156
+        ],
+        "claim": "local GRU observation-action history is part of a competent recurrent comparator; no survivor-reset advantage or frequency rule established",
+        "official_url": "https://proceedings.mlr.press/v202/shao23b.html"
+      },
+      {
+        "id": "MARL-0485",
+        "title": "Sable: a Performant, Efficient and Scalable Sequence Model for MARL",
+        "source_json": "C:\\Projects\\Inst-sci\\papers\\MyLib\\json\\MARL-0485.json",
+        "page": 33,
+        "elements": [
+          8722,
+          8723,
+          8724
+        ],
+        "claim": "episode reset boundaries are represented consistently during acting and full-trajectory training; this is not a within-episode random-reset result",
+        "official_url": "https://proceedings.mlr.press/v267/mahjoub25a.html"
+      }
+    ],
+    "choice_impact": "retain competent full-history arm and consistent history reconstruction; p=.1 comes from explicit owner-approved synthesis fallback, not a literature optimum or frequency match. No novelty or absence-of-prior-work claim."
+  },
+  "new_exposure_in_preparation": {
+    "target_imports": 0,
+    "models_constructed": 0,
+    "environment_steps": 0,
+    "training_episodes": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0,
+    "resource_admissions": 0,
+    "scientific_invocations": 0,
+    "source_edits": 0,
+    "pro_sends": 0
+  }
+}

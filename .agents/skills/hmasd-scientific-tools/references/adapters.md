@@ -20,7 +20,7 @@ First-batch references: PyTorch2.7 `torch.profiler` and `torch.utils.benchmark` 
 https://docs.pytorch.org/docs/2.7/profiler.html and
 https://docs.pytorch.org/docs/2.7/benchmark_utils.html . Existing native cost evidence
 may be sufficient without either tool. Approved optional bounded profiling is part of
-the concrete CM assignment, not a standing profiler framework or compulsory extra A.
+the concrete engineering assignment, not a standing profiler framework or compulsory extra A.
 
 PufferLib, JaxMARL/Mava and VMAS migration are third-batch work and are not introduced
 by this adoption. Using the existing reference reports read-only remains allowed.

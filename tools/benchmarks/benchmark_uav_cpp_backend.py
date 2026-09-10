@@ -30,7 +30,7 @@ from envs.pettingzoo.uav_cpp_backend import (
     step_geometry_reference_batch,
     step_geometry_batch,
 )
-from config_1 import Config
+from configs.config_1 import Config
 
 
 SPEEDUP_THRESHOLD = 1.20

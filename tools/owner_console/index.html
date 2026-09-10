@@ -199,6 +199,7 @@ const KIND_ZH = {decision:'决定','new-card':'新卡片',prediction:'预测',br
   'second-recast':'二次重铸',portfolio:'组合提案'};
 const GROUPS = {1:['P1','重要决定与追溯'],2:['P2','新卡片与异议'],3:['P3','已按委托执行，可复核'],4:['P4','简报与技术项']};
 const DPR = {HIGH:0,MEDIUM:1,LOW:2};
+const isProOverride = it => { const keys = (it.options||[]).map(o=>o.key); return keys.length===3 && ['keep','refuse','amend'].every(k=>keys.includes(k)); };
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
@@ -264,7 +265,7 @@ function renderBay(){
   const v = visible();
   let h = `<div class="sorts"><span>显示</span><button class="${S.showAnswered?'on':''}" data-a="ans">已答条目</button><button data-a="days">最近 ${S.days} 天</button><span style="margin-left:auto">${v.length} 条</span></div>`;
   if (S.tab === 'starred') h = `<div class="status">★ 重要改动 · 全部历史，含已答条目 · ${v.length} 条<br>按授权与完整 6 Pro 裁决执行，可在此追溯并提出异议；星标不表示你已逐项批准。</div>`;
-  if (!v.length) h += `<div class="empty"><b>这里没有待批改的条目</b>Codex 写入新条目后会出现在这里。要复核已答条目，打开“已答条目”。</div>`;
+  if (!v.length) h += `<div class="empty"><b>这里没有待复核的条目</b>Codex 写入新条目后会出现在这里。要复核已答条目，打开“已答条目”。</div>`;
   let idx = 0, last = null;
   for (const it of v){
     if (it.priority !== last){ if (last !== null) h += '</div>'; last = it.priority; const cnt = v.filter(x=>x.priority===it.priority).length;
@@ -279,13 +280,15 @@ function renderBay(){
 
 function strip(it, idx){
   const sel = S.sel[it.id] ?? (it.reply ? it.reply.choice : null);
+  const proFinal = it.kind === 'portfolio' && isProOverride(it);
   const opts = (it.options||[]).map(o => `<div class="opt ${sel===o.key?'sel':''}" data-k="${esc(o.key)}"><span class="k">${esc(o.key)}</span><div class="lbl">${esc(o.label)}${o.key===it.recommended?'<span class="tag rec">★ 推荐</span>':''}${o.key===it.auto_applied?'<span class="tag ran">✓ 已执行</span>':''}${o.consequence?`<div class="cons">${esc(o.consequence)}</div>`:''}</div></div>`).join('');
   const marks = `${it.recommended?`<span class="rec">★${esc(it.recommended)}</span>`:''} ${it.auto_applied?`<span class="ran">✓${esc(it.auto_applied)}</span>`:''}`;
   const links = [...(it.evidence||[]).map(e=>`<a data-doc="${esc(e)}">${esc(e.split('/').pop())}</a>`), it.brief?`<a data-doc="${esc(it.brief)}">简报</a>`:'', it.ledger_row?`<a data-doc="${esc(it.ledger_row)}">账本行</a>`:'', `<a data-doc="${esc(it.path)}">item.json</a>`].join('');
   return `<article class="strip p${it.priority} ${S.open.has(it.id)?'open':''} ${idx===S.focus?'focus':''} ${it.status==='answered'?'answered':''}" data-id="${esc(it.id)}" data-idx="${idx}">
     <div class="srow"><span class="t">${esc(when(it.created||it.day))}</span><span class="code">${esc(it.code)}</span><span class="kind">${KIND_ZH[it.kind]||esc(it.kind)}</span><span class="title" title="${esc(it.title)}">${it.starred?'<b class="rec" aria-label="重要改动">★ </b>':''}${esc(it.title)}</span><span class="marks">${marks}</span><span class="dp ${esc(it.dir_priority)}" title="方向优先级 ${esc(it.dir_priority)}"></span><span class="chev">▶</span></div>
     <div class="body"><div>
-      ${(it.context_problems||[]).length?`<div class="lack"><b>上下文不足，无法裁决</b>${it.context_problems.map(p=>`<span>${esc(p)}</span>`).join('')}<button class="btn quiet" data-act="needs">要求补充决策包</button></div>`:''}
+      ${proFinal?`<div class="status"><b>Pro 裁决已形成</b> · 此条目用于追溯和异步覆写，不等待逐项批准。keep 或“同意”只表示保留现状，不产生新的决定或启动授权。</div>`:''}
+      ${(it.context_problems||[]).length?`<div class="lack"><b>上下文不足，无法复核</b>${it.context_problems.map(p=>`<span>${esc(p)}</span>`).join('')}<button class="btn quiet" data-act="needs">要求补充决策包</button></div>`:''}
       ${it.context?`<div class="ctx">${esc(it.context)}</div>`:'<div class="ctx"></div>'}${it.dm_reason?`<div class="dm">DM：${esc(it.dm_reason)}</div>`:''}
       ${executionTrace(it)}
       ${packet(it)}
@@ -309,8 +312,8 @@ function packet(it){
   const ev = (list, cls) => (list||[]).map(e => `<blockquote class="${cls}">${esc(e.quote||'')}<small>${esc(e.why||'')} ${e.path?`<a data-doc="${esc(e.path)}">${esc(e.path.split('/').pop())}</a>`:''}</small></blockquote>`).join('');
   const changes = Array.isArray(pk.changes_if_approved) ? pk.changes_if_approved : [];
   return `<div class="pk">
-    ${pk.question?`<h5>要你裁决的问题</h5><p>${esc(pk.question)}</p>`:''}
-    ${changes.length?`<h5>批准后改变什么</h5><table>${changes.map(c => typeof c === 'string' ? `<tr><td colspan="2">${esc(c)}</td></tr>` : `<tr><td>${esc(c.target||'')}</td><td>${esc(c.from||'')}<span class="arrow">→</span><b>${esc(c.to||'')}</b></td></tr>`).join('')}</table>`:''}
+    ${pk.question?`<h5>${it.kind === 'portfolio' && isProOverride(it) ? '可复核的问题' : '要你裁决的问题'}</h5><p>${esc(pk.question)}</p>`:''}
+    ${changes.length?`<h5>${it.kind === 'portfolio' && isProOverride(it) ? 'Pro 处置包含的改变' : '批准后改变什么'}</h5><table>${changes.map(c => typeof c === 'string' ? `<tr><td colspan="2">${esc(c)}</td></tr>` : `<tr><td>${esc(c.target||'')}</td><td>${esc(c.from||'')}<span class="arrow">→</span><b>${esc(c.to||'')}</b></td></tr>`).join('')}</table>`:''}
     ${pk.if_refused?`<h5>拒绝会怎样</h5><p>${esc(pk.if_refused)}</p>`:''}
     ${(pk.evidence_for||[]).length?`<h5>支持证据</h5>${ev(pk.evidence_for,'')}`:''}
     ${(pk.evidence_against||[]).length?`<h5>反对或谨慎的证据</h5>${ev(pk.evidence_against,'against')}`:''}
@@ -366,9 +369,9 @@ async function renderBoard(){
                open: r => [r.lifecycle!=='ACTIVE', -r.p1, -r.open, DPR[r.priority]??9],
                recent: r => [r.lifecycle!=='ACTIVE', -(new Date(r.last_item||0)), -(new Date(r.updated||0))]}[S.boardSort];
   rows.sort((x,y) => { const a=key(x), c=key(y); for (let i=0;i<a.length;i++){ if (a[i]<c[i]) return -1; if (a[i]>c[i]) return 1; } return 0; });
-  let h = `<div class="status">组合快照 ${esc(b.updated)} · <b>${t.active}</b> ACTIVE · ${t.parked} PARKED · 待批 <b>${t.open}</b> · 今日已答 ${t.answered_today}</div>
-    <div class="sorts"><span>排序</span><button data-s="priority" class="${S.boardSort==='priority'?'on':''}">优先级 · 投资波</button><button data-s="open" class="${S.boardSort==='open'?'on':''}">待批数</button><button data-s="recent" class="${S.boardSort==='recent'?'on':''}">最近活动</button></div>
-    <table class="board"><thead><tr><th>波</th><th>方向</th><th>优先级</th><th>待批</th><th>最近条目</th><th>快照更新</th><th>当前位置</th><th></th></tr></thead><tbody>`;
+  let h = `<div class="status">组合快照 ${esc(b.updated)} · <b>${t.active}</b> ACTIVE · ${t.parked} PARKED · 待复核 <b>${t.open}</b> · 今日已答 ${t.answered_today}</div>
+    <div class="sorts"><span>排序</span><button data-s="priority" class="${S.boardSort==='priority'?'on':''}">优先级 · 投资波</button><button data-s="open" class="${S.boardSort==='open'?'on':''}">待复核数</button><button data-s="recent" class="${S.boardSort==='recent'?'on':''}">最近活动</button></div>
+    <table class="board"><thead><tr><th>波</th><th>方向</th><th>优先级</th><th>待复核</th><th>最近条目</th><th>快照更新</th><th>当前位置</th><th></th></tr></thead><tbody>`;
   let parkedShown = false;
   for (const r of rows){
     if (r.lifecycle !== 'ACTIVE' && !parkedShown){ parkedShown = true; h += `<tr><td colspan="8" style="background:none;border:0;padding:0"><div class="divider">已停放 · 不参与排序</div></td></tr>`; }

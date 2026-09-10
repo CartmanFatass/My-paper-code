@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "recorded_at_utc": "2026-09-08T04:28:44.0861740Z",
+  "launch_sha": "01770d8dd6bb59460667efa26e3d94677e65ab37",
+  "source_path": "C:\\Projects\\HMASD\\.claude\\worktrees\\agent-a88287f2315bb99a0\\temp\\directions\\flexible_skill_duration\\exp\\E3_20260904\\large_d2_seed2\\checkpoint_final.pt",
+  "remote_path": "/home/wu/hmasd-inputs/fsd-native-renewal-a01-p21/large_d2_seed2/checkpoint_final.pt",
+  "source_size_bytes": 64782527,
+  "source_sha256": "2f9f6c771d757db51991bab71b53687f34057dc4ddae5132b24d42afae683b89",
+  "remote_verification": [
+    "64782527",
+    "2f9f6c771d757db51991bab71b53687f34057dc4ddae5132b24d42afae683b89  /home/wu/hmasd-inputs/fsd-native-renewal-a01-p21/large_d2_seed2/checkpoint_final.pt"
+  ],
+  "transport": "scp/copy bytes only; no unpickling or model construction",
+  "status": "verified"
+}

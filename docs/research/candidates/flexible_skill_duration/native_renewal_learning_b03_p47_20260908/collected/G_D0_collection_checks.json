@@ -1,0 +1,85 @@
+{
+  "G": {
+    "checks": "passed: source/object/masters, publication, finite numerical JSON, endpoint/count/config/mask aggregates, return-denominator/role arithmetic, supervisor/admission/complete cap",
+    "complete_wall_seconds": 2.47,
+    "complete_peak_rss_kib": 458008,
+    "runner_prepublication_wall_seconds": 2.0303997159935534,
+    "runner_peak_rss_bytes": 425340928,
+    "counts": {
+      "model_constructions": 0,
+      "training_starts": 0,
+      "checkpoint_loads": 0,
+      "training_host_steps": 0,
+      "training_transitions": 0,
+      "training_episodes": 0,
+      "update_stages": 0,
+      "training_agent_step_batches": 0,
+      "scoring_steps": 12800,
+      "evaluation_episodes": 32,
+      "evaluation_agent_step_batches": 0,
+      "greedy_act_batches": 400,
+      "agent_observations": 76800
+    },
+    "optimizer_calls": {
+      "coordinator": 0,
+      "discoverer_actor": 0,
+      "discoverer_critic": 0,
+      "team_discriminator": 0,
+      "individual_discriminator": 0
+    },
+    "return_full_mean": 0.89078125,
+    "return_post_mean": 0.8905075187969925,
+    "evaluation_internal_renew_full_total": null,
+    "evaluation_applied_renew_full_total": 8388,
+    "training_displacement_first": null,
+    "training_displacement_final": null
+  },
+  "D0": {
+    "checks": "passed: source/object/masters, publication, finite numerical JSON, endpoint/count/config/mask aggregates, return-denominator/role arithmetic, supervisor/admission/complete cap",
+    "complete_wall_seconds": 462.1,
+    "complete_peak_rss_kib": 1361948,
+    "runner_prepublication_wall_seconds": 436.20912062202115,
+    "runner_peak_rss_bytes": 1394634752,
+    "counts": {
+      "model_constructions": 2,
+      "training_starts": 1,
+      "checkpoint_loads": 0,
+      "training_host_steps": 32000,
+      "training_transitions": 32000,
+      "training_episodes": 80,
+      "update_stages": 5,
+      "training_agent_step_batches": 2000,
+      "scoring_steps": 12800,
+      "evaluation_episodes": 32,
+      "evaluation_agent_step_batches": 400,
+      "greedy_act_batches": 0,
+      "agent_observations": 268800
+    },
+    "optimizer_calls": {
+      "coordinator": 750,
+      "discoverer_actor": 18000,
+      "discoverer_critic": 18000,
+      "team_discriminator": 75,
+      "individual_discriminator": 300
+    },
+    "return_full_mean": 0.38263020833333333,
+    "return_post_mean": 0.3835891812865497,
+    "evaluation_internal_renew_full_total": 15360,
+    "evaluation_applied_renew_full_total": 15360,
+    "training_displacement_first": {
+      "coordinator": 0.0420678438397249,
+      "discoverer_actor": 0.16310496068644406,
+      "discoverer_critic": 0.23391077816361372,
+      "team_discriminator": 0.009919068465227089,
+      "individual_discriminator": 0.012512077618690618
+    },
+    "training_displacement_final": {
+      "coordinator": 0.05148022031720795,
+      "discoverer_actor": 0.37690678226886815,
+      "discoverer_critic": 0.46573913790195504,
+      "team_discriminator": 0.022220754553483685,
+      "individual_discriminator": 0.025663196218311264
+    }
+  },
+  "scope": "G and D0 only; no H or pair assembled; no rerun. Aggregate mask checks corroborate accepted source wiring, not a raw action/storage trace. Numeric runtime infinities rely on accepted source/config evidence; serialized costs are declared strings."
+}

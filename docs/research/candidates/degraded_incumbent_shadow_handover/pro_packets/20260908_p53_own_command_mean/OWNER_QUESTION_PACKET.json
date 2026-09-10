@@ -1,0 +1,48 @@
+{
+  "question": "是否为DISH选择一个固定本机上一指令输入的运动均值B比较，或保留无后继？目前只建议提交方向节点问题。",
+  "changes_if_approved": [
+    {
+      "target": "DISH后续对象",
+      "from": "B06结束后没有新A/B",
+      "to": "若Convergence选择：一组新种子、两臂真实学习比较；先形成卡片与完整CM规范，P53本身不实施或运行"
+    }
+  ],
+  "if_refused": "保留当前模态默认与B06窄停止；不追加实验，返回已有队列路线。来源应用议程和ACTIVE状态不变。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_P53_NATIVE_PROPOSAL_SOURCE_INTAKE_20260908.md#2-what-the-accepted-source-actually-supplies",
+      "quote": "Each motion controller already has the proposed acceleration input.",
+      "why": "本机实际加速度已同时存在于执行输入与actor_raw训练片段，不需要新增信息或私有证书。"
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_P53_NATIVE_PROPOSAL_SOURCE_INTAKE_20260908.md#3-the-single-surviving-intervention-and-fair-comparator",
+      "quote": "candidate mean  = 3 * tanh(m + a_prev / 3)",
+      "why": "仅改变既有运动均值的固定输入路径，两臂保留信息、噪声、预算和原生投影。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_P53_NATIVE_PROPOSAL_SOURCE_INTAKE_20260908.md#4-decision-value-contrary-evidence-and-honest-ceiling",
+      "quote": "the existing network already sees this input and native projection already enforces applied slew",
+      "why": "可能重复已有能力，或保持错误加速度而损失服务；非法提交减少也不能代替服务增益。"
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_POST_B06_CONVERGENCE_INTAKE_20260907.md",
+      "quote": "With no ordinary legal evaluation transfer, source-origin eligibility and matched COPY−RETAIN or SHADOW−COPY value remain **unestimated**, not zero.",
+      "why": "新参数化尚无效果证据，也不能借历史零换主证明原因或改善来源价值。"
+    }
+  ],
+  "uncertainty": [
+    "单组新训练配对只能给有限B信号，不能估计训练种子总体稳定性。",
+    "本机输入不等于原生证书，预测、版本或几何问题可能继续阻止换主。",
+    "既有宿主部分名义本地字段来自原生摘要；候选仅用明确的本机加速度，整体信息口径不扩大。"
+  ],
+  "cost": {
+    "compute": "P53零模型、零原生调用。建议未来每臂65536转移/512优化步，合计16评价回合；拟完整1800秒/臂、3600秒/对，未批准启动。",
+    "owner_time": "可异步修改建议；本轮提问无需等待所有者。",
+    "reversibility": "reversible",
+    "waits_on_this": "不等待所有者；任何后续对象由既有Convergence路线决定"
+  },
+  "verdict_text": "DM recommends posing the single OWN_COMMAND_MEAN versus DIRECT_MEAN B/EXPLORE comparison to Convergence; no experiment is selected locally.",
+  "source": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_P53_NATIVE_PROPOSAL_SOURCE_INTAKE_20260908.md"
+}

@@ -1,0 +1,201 @@
+{
+  "prepared_at": "2026-09-09T12:29:55-07:00",
+  "object": "UCOPE-UAV-FEEDBACK-VALUE-NORMALIZATION-B01",
+  "selector": "feedback_value_normalization_b01",
+  "evidence_class": "B/EXPLORE; prospective definition only",
+  "authoring_start": "34c129c393e34a807e9b837246a00ec5fb15e811",
+  "authority": {
+    "direction_response_commit": "18356085f60fab3bb0d9e092c50bfcc5005f907f",
+    "direction_intake_commit": "ea3bce8066b77582b3de8e1dbc788d9cd3acbc45",
+    "review_commit": "34c129c39",
+    "review_sections": "2.1 UCOPE; 4 cost and preparation sequence only; Root owns Portfolio decisions",
+    "current_main_read": "dc5ef52586c2b4353858693ae2686382405c6ba9",
+    "knowledge_spec_commit": "d89be7656d367ca10f75ca1185797081b5d722fa",
+    "assignment": "Root 2026-09-09 preparation only; no runtime implementation or result-bearing invocation"
+  },
+  "new_actual_exposure": {
+    "native_steps": 0,
+    "model_calls": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0,
+    "profiling": 0,
+    "diagnostics": 0,
+    "result_bearing_invocations": 0,
+    "pro_sends": 0
+  },
+  "prospective_binding": {
+    "master": 8501,
+    "base": 850100000,
+    "matched_learning_instances": 1,
+    "fits": [
+      "G_normalized",
+      "G_raw"
+    ],
+    "final_outcomes": [
+      "G_normalized",
+      "G_raw",
+      "H"
+    ],
+    "train_episodes_per_fit": 512,
+    "horizon": 256,
+    "evaluation_episodes_per_outcome": 32,
+    "chunk": 32,
+    "ratio_grouping": "agent_compound",
+    "entropy_coef": 0.0,
+    "gamma": 1.0,
+    "learning_rate": 0.0003,
+    "epochs_per_rollout": 4,
+    "rollout_episodes": 2,
+    "invocation_allowance_in_this_assignment": 0
+  },
+  "seeds": {
+    "initialization": 850100011,
+    "G_raw_train_velocity": 850100021,
+    "G_raw_unused_train_duration": 850100022,
+    "G_normalized_train_velocity": 850100031,
+    "G_normalized_unused_train_duration": 850100032,
+    "train_reset_range": [
+      850101000,
+      850101511
+    ],
+    "final_reset_range": [
+      850102000,
+      850102031
+    ],
+    "G_raw_final_velocity_range": [
+      850103000,
+      850103031
+    ],
+    "G_raw_unused_final_duration_range": [
+      850104000,
+      850104031
+    ],
+    "G_normalized_final_velocity_range": [
+      850105000,
+      850105031
+    ],
+    "G_normalized_unused_final_duration_range": [
+      850106000,
+      850106031
+    ],
+    "no_duration_draws": true,
+    "scope": "Declared domains and separately instantiated generators; no RNG object created during preparation. Common reset panels pair episodes, not trajectories."
+  },
+  "parameters": {
+    "actor_per_fit": 32134,
+    "critic_per_fit": 34177,
+    "total_trainable_per_fit": 66311,
+    "total_trainable_fits": 132622,
+    "duration_head_parameters": 0,
+    "moments_trainable_parameters": 0
+  },
+  "planned_counts": {
+    "training_episodes": 1024,
+    "training_native_steps": 262144,
+    "final_native_steps": 24576,
+    "total_native_steps": 286720,
+    "training_steps_per_fit": 131072,
+    "rollouts_per_fit": 256,
+    "optimizer_steps_per_fit": 1024,
+    "optimizer_steps": 2048,
+    "final_episodes": 96,
+    "explicit_resets": 1120,
+    "constructors": 2,
+    "constructor_resets": 2,
+    "normalized_moments_updates": 256,
+    "targets_per_moments_update": 512,
+    "normalized_final_moments_n": 131072,
+    "normalized_value_decode_steps": 139264,
+    "duration_head_calls": 0
+  },
+  "normalization": {
+    "moments": "cumulative population, equal weight per complete team-time MC target",
+    "dtype": "CPU float32 scalar tensors; integer n/updates",
+    "initial": {
+      "n": 0,
+      "updates": 0,
+      "mean": 0.0,
+      "M2": 0.0,
+      "scale": 1.0
+    },
+    "population_variance_floor": 1e-08,
+    "scale_floor": 0.0001,
+    "batch_size": 512,
+    "update": "once per two-episode rollout, after detached raw advantages and before four epochs",
+    "evaluation": "frozen final parameters and moments; no fit/epoch/episode update",
+    "no_output_preserving_rescale": true,
+    "normalization_source": {
+      "commit": "7c80750ea7493af2d70d28fe2072e517b6f45e97",
+      "path": "experiments/candidates/vsp_c1/native_hold_value_b03/value_normalization.py",
+      "blob": "5bb58ac94fda961c4f9cd330e9ed96a15e60d50c",
+      "sha256": "989748345ef59ac672b7f6b326d4230e3a01061c91d25ce8c1137088a8971c55",
+      "bytes": 1388,
+      "same_bytes_at_current_main": true,
+      "status": "read-only arithmetic reference; not imported, implemented or technically accepted for this new UCOPE object"
+    }
+  },
+  "per_arm_cost_projection": {
+    "G_normalized": {
+      "law": "startup/init + 131072*c_collect + 1024*c_Adam_epoch + 8192*c_eval + 256*c_moments_merge(512) + 131072*c_normalize_scalar + 139264*c_decode_scalar + publication",
+      "wall_cap_seconds": 1800,
+      "future_wall_seconds": null
+    },
+    "G_raw": {
+      "law": "init + 131072*c_collect + 1024*c_Adam_epoch + 8192*c_eval + 8192*c_hover + complete publication/exit",
+      "wall_cap_seconds": 1800,
+      "future_wall_seconds": null
+    },
+    "whole_invocation_cap_seconds": 3600,
+    "future_focused_check_cap_seconds": 300,
+    "no_nested_search": true,
+    "new_runtime_machinery": []
+  },
+  "measurement": {
+    "primary": "mean_e(G_normalized_J - G_raw_J)",
+    "MEI_absolute": 0.01,
+    "secondary": [
+      "G_normalized_minus_H",
+      "G_raw_minus_H"
+    ],
+    "conditional_episode_se": "sample_sd(paired differences)/sqrt(32)",
+    "training_population_uncertainty_estimable": false
+  },
+  "predictions": [
+    {
+      "event": "Delta_N > 0.01",
+      "probability": 0.5
+    },
+    {
+      "event": "mean(G_normalized-H) > 0",
+      "probability": 0.55
+    },
+    {
+      "event": "mean(G_raw-H) > 0",
+      "probability": 0.5
+    }
+  ],
+  "source_base": {
+    "sha": "52bf50a089d3389d9fada0b531e4f4e56e83f9b8",
+    "surfaces": {
+      "study": {
+        "path": "experiments/candidates/ucope/uav_motion_prefix_b01/study.py",
+        "blob": "baea9644805275c62325f0a99e4cdd2f92b358d1"
+      },
+      "policy": {
+        "path": "experiments/candidates/ucope/uav_motion_prefix_b01/policy.py",
+        "blob": "28e98a47256f10a60f085cc9d97d7b8ba9a4183c"
+      },
+      "learner": {
+        "path": "experiments/candidates/ucope/uav_motion_prefix_b01/learner.py",
+        "blob": "3f40f56ffbab1a334589640c4a0dff799b752b93"
+      },
+      "environment": {
+        "path": "experiments/candidates/ucope/uav_motion_prefix_b01/environment.py",
+        "blob": "4b59281bfb76245dd3283fe860327e35463c2b26"
+      }
+    }
+  },
+  "headroom": "Tuned same-information current-host/upper-reference pair absent; H is untuned, not an upper",
+  "recasts": 1,
+  "exposure_line": "prospective_matched_instances=1; fitted_arms=2; train_steps_per_arm=131072; Adam_calls_per_arm=1024; trainable_parameters_per_arm=66311; lr=0.0003; all_actor_critic_parameters_trainable; native_steps=286720; final_eval_episodes=96; actual_new_scientific_exposure=0; current_invocation_allowance=0"
+}

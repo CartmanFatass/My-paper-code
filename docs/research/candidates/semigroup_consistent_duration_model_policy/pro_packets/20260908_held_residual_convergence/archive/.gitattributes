@@ -1,0 +1,7 @@
+# Preserve this packet's response and receipt bytes through Git checkout.
+RESPONSE.md -text
+CHAT_RECEIPT.md -text
+TRANSPORT_FACTS.json -text
+RECONCILIATION_FACTS.json -text
+DELIVERY_COMMENT.json -text
+DM_READBACK.json -text

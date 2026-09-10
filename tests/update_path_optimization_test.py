@@ -2,7 +2,7 @@ import torch
 import pytest
 from torch.distributions import Categorical
 
-from config_test import Config
+from configs.config_test import Config
 from hmasd.networks import SkillCoordinator, SkillDiscoverer
 
 

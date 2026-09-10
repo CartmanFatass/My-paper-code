@@ -1,0 +1,48 @@
+{
+  "question": "冻结并执行Root新分配的单对公开生命周期RETAIN/RESET B探索卡；这不是要求确认稳定优势。",
+  "changes_if_approved": [
+    {
+      "target": "FOLR-PUBLIC-LIFECYCLE-B01",
+      "from": "范围已选择，原P78例子没有执行额度",
+      "to": "Root新授权一对；种子7801、每组5000训练回合、末次32回合评估、每组1800秒；两组同样的信息、架构与训练安排"
+    }
+  ],
+  "if_refused": "按所有者新指令停止尚未接受的执行或修订后续卡，保留已接受进程与证据；不自动重跑。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_B01_SCIENCE_CARD_20260909.md",
+      "quote": "The shorter common epsilon anneal is deliberate: half the 100,000-tick exposure remains at\nthe final exploration rate.",
+      "why": "两组在同一有限预算内都有较长的低探索学习阶段，不机械沿用过长探索期。"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260909_p78_public_lifecycle_convergence/archive/RESPONSE.md",
+      "quote": "The primary observation should remain the difference in mean full-episode native team return at final frozen greedy evaluation, with RETAIN minus RESET as the stated sign.",
+      "why": "固定末次原生回报并保留两组读数，避免挑选瞬时或事件子集。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_B01_SCIENCE_CARD_20260909.md",
+      "quote": "One training pair cannot estimate\ntraining-seed population uncertainty; evaluation variation is conditional rollout variation.",
+      "why": "结果只能是本设置的探索信号；大量评估不能替代独立训练样本。"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260909_p78_public_lifecycle_convergence/archive/RESPONSE.md",
+      "quote": "Wall cost remains unknown.",
+      "why": "计算量已知但实际耗时未知；达到完整上限就返回，不追加试验。"
+    }
+  ],
+  "uncertainty": [
+    "真实幸存车机会可能少，限制记忆删除解释；仍报告可信的完整回报。",
+    "绝对MEI为每回合1个原生回报单位，源于一个目标进展单位，不沿用B04量纲。",
+    "实现须保持原生等待、随机数消耗、同槽换车和在线/目标回放一致性；独立审查尚待完成。"
+  ],
+  "cost": {
+    "compute": "仅一对；每组100000训练步、4969更新、640评估步。每组完整上限1800秒、两组3600秒，全部支持性检查300秒。无试跑、调参、重复、额外检查点评估或自动后继。",
+    "owner_time": "可异步改卡，无需立即回复。",
+    "reversibility": "costly",
+    "waits_on_this": "nothing；CM继续已授权的工程、审查及一次有界执行。"
+  },
+  "verdict_text": "**B/EXPLORE; selected and frozen for the explicit Root allocation of 2026-09-09.**",
+  "source": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_B01_SCIENCE_CARD_20260909.md"
+}

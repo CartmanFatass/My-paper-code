@@ -1,0 +1,22 @@
+{
+  "checked_utc": "2026-09-09T21:48:53.097460+00:00",
+  "task_sha": "22a51d7b7ad25ac6439f5bfea6dd19086ccc914a",
+  "task_url": "https://github.com/CartmanFatass/My-paper-code/blob/22a51d7b7ad25ac6439f5bfea6dd19086ccc914a/docs/research/candidates/acvc/pro_packets/20260909_fixed_retrace_reuse_exception/TASK.md",
+  "task_bytes": 31019,
+  "task_github_blob_sha": "75c246f393c3174e031fc28eb4d52400c182b9b2",
+  "github_bytes_match_immutable_git_blob": true,
+  "all_16_reference_paths_verified_at_effective_published_sha": true,
+  "input_sha": "db8651a43237a2560b674bcd324c3d95e8f348d3",
+  "preserved_P80_response_sha": "b7e659e8b0fb7f250c2b2fe43e179f2c2d0f14c4",
+  "ready_state": "READY_TO_DISPATCH",
+  "operator_thread_id": "01a087a3-4f12-7021-9a4d-6da9da2bafcc",
+  "source_thread_id": "01a08447-a33c-7881-8c2a-a6e7e918b2a7",
+  "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "issue_body_readback": "matching text after line-ending normalization",
+  "historical_delivery_comments_preserved": [
+    "https://github.com/CartmanFatass/My-paper-code/issues/14#issuecomment-5600188833",
+    "https://github.com/CartmanFatass/My-paper-code/issues/14#issuecomment-5602246491"
+  ],
+  "provider_sends_by_preparer": 0,
+  "transport_dispatches_by_preparer": 0
+}

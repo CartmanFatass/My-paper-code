@@ -1,0 +1,75 @@
+{
+  "supervisor_status": {
+    "argv": [
+      "/usr/local/bin/agent-task",
+      "status",
+      "vspc1_hold_value_b04_8202_a33a3820fe9d"
+    ],
+    "exit_code": 0,
+    "stdout": "{\"task\": \"vspc1_hold_value_b04_8202_a33a3820fe9d\", \"status\": \"failed\", \"exit_code\": 127, \"pid\": 3014192, \"uptime_seconds\": 791, \"tmux_active\": false}\n",
+    "stderr": ""
+  },
+  "supervisor_log": {
+    "argv": [
+      "cat",
+      "/home/wu/.agent-tasks/vspc1_hold_value_b04_8202_a33a3820fe9d/task.log"
+    ],
+    "exit_code": 0,
+    "stdout": "=== Task 'vspc1_hold_value_b04_8202_a33a3820fe9d' started at 2026-09-09T07:55:19+08:00 ===\n/bin/bash: /home/wu-inputs/vspc1_hold_value_b04_8202_a33a3820fe9d.sh: No such file or directory\n=== Task 'vspc1_hold_value_b04_8202_a33a3820fe9d' exited with code 127 at 2026-09-09T07:55:19+08:00 (Duration: 0s) ===\n",
+    "stderr": ""
+  },
+  "supervisor_wrapper": {
+    "argv": [
+      "cat",
+      "/home/wu/.agent-tasks/vspc1_hold_value_b04_8202_a33a3820fe9d/runner.sh"
+    ],
+    "exit_code": 0,
+    "stdout": "#!/usr/bin/env bash\necho $$ > \"/home/wu/.agent-tasks/vspc1_hold_value_b04_8202_a33a3820fe9d/pid\"\nSTART_TS=$(date +%s)\necho \"=== Task 'vspc1_hold_value_b04_8202_a33a3820fe9d' started at $(date -Iseconds) ===\" >> \"/home/wu/.agent-tasks/vspc1_hold_value_b04_8202_a33a3820fe9d/task.log\"\n\n# Execute command capturing output\nset +e\neval '/bin/bash /home/wu-inputs/vspc1_hold_value_b04_8202_a33a3820fe9d.sh' >> \"/home/wu/.agent-tasks/vspc1_hold_value_b04_8202_a33a3820fe9d/task.log\" 2>&1\nEXIT_CODE=$?\nset -e\n\nEND_TS=$(date +%s)\necho $EXIT_CODE > \"/home/wu/.agent-tasks/vspc1_hold_value_b04_8202_a33a3820fe9d/exit_code\"\nif [ $EXIT_CODE -eq 0 ]; then\n    echo \"finished\" > \"/home/wu/.agent-tasks/vspc1_hold_value_b04_8202_a33a3820fe9d/status\"\nelse\n    echo \"failed\" > \"/home/wu/.agent-tasks/vspc1_hold_value_b04_8202_a33a3820fe9d/status\"\nfi\necho \"=== Task 'vspc1_hold_value_b04_8202_a33a3820fe9d' exited with code $EXIT_CODE at $(date -Iseconds) (Duration: $((END_TS - START_TS))s) ===\" >> \"/home/wu/.agent-tasks/vspc1_hold_value_b04_8202_a33a3820fe9d/task.log\"\n\n# Keep session alive briefly for inspection, then exit\nsleep 1\n",
+    "stderr": ""
+  },
+  "raw_status": {
+    "argv": [
+      "cat",
+      "/home/wu/.agent-tasks/vspc1_hold_value_b04_8202_a33a3820fe9d/status"
+    ],
+    "exit_code": 0,
+    "stdout": "failed\n",
+    "stderr": ""
+  },
+  "raw_exit": {
+    "argv": [
+      "cat",
+      "/home/wu/.agent-tasks/vspc1_hold_value_b04_8202_a33a3820fe9d/exit_code"
+    ],
+    "exit_code": 0,
+    "stdout": "127\n",
+    "stderr": ""
+  },
+  "absent_admission_and_output": {
+    "argv": [
+      "ls",
+      "-ld",
+      "/home/wu/projects/HMASD/temp/directions/vsp_c1/exp/native_hold_value_b04_8202_a33a3820fe9d",
+      "/home/wu/projects/HMASD/temp/directions/vsp_c1/exp/native_hold_value_b04_8202_a33a3820fe9d_admission.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "ls: cannot access '/home/wu/projects/HMASD/temp/directions/vsp_c1/exp/native_hold_value_b04_8202_a33a3820fe9d': No such file or directory\nls: cannot access '/home/wu/projects/HMASD/temp/directions/vsp_c1/exp/native_hold_value_b04_8202_a33a3820fe9d_admission.json': No such file or directory\n"
+  },
+  "handle": "vspc1_hold_value_b04_8202_a33a3820fe9d",
+  "accepted_source_sha": "a33a3820fe9d4a46a3231bcf267afc956554b6c5",
+  "intended_script": "/home/wu/hmasd-inputs/vspc1_hold_value_b04_8202_a33a3820fe9d.sh",
+  "submitted_script": "/home/wu-inputs/vspc1_hold_value_b04_8202_a33a3820fe9d.sh",
+  "scientific_exposure": {
+    "native_preflight": 0,
+    "models": 0,
+    "learner_updates": 0,
+    "evaluation_episodes": 0,
+    "scientific_steps": 0
+  },
+  "disposition": "P66 invocation consumed by explicit Root safe-stop instruction; no correction, retry or relaunch",
+  "primary": null,
+  "native_wall_seconds": null,
+  "native_peak_rss": null,
+  "supervisor_displayed_duration_seconds": 0
+}

@@ -45,8 +45,8 @@ C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe -m pytest -q tests/hmasd_run
 ... -m pytest -q -p no:cacheprovider --basetemp C:/Projects/HMASD/temp/directions/<direction-id>/test/<run-tag>
 
 # original HMASD/UAV route
-python main.py --mode train --scenario 1 --n_uavs 5 --n_users 50
-python main.py --mode eval  --scenario 2 --model_path models/hmasd_model.pt --render
+python experiments/launchers/main.py --mode train --scenario 1 --n_uavs 5 --n_users 50
+python experiments/launchers/main.py --mode eval  --scenario 2 --model_path models/hmasd_model.pt --render
 
 # standalone process-core route
 python -m ha_ctse_process.train

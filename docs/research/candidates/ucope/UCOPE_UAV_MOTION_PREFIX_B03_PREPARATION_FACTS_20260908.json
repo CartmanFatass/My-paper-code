@@ -1,0 +1,133 @@
+{
+  "object": "UCOPE-UAV-MOTION-PREFIX-B03",
+  "master": 7101,
+  "assignment_sha": "68c7dab578d4e64d201a34028b574469bf1c598f",
+  "authoring_start_sha": "33a421daabc6567b4d84f3673efc0694835fb5dc",
+  "accepted_source": "6374063408208ba67b8cb7c69ebc0babb0f00259",
+  "scientific_change": "both T/G total explicit entropy coefficient 0.01 -> 0.0; stochastic Gaussian/categorical policy and common agent-compound clipping retained",
+  "fresh_master_search": {
+    "roots": [
+      "docs/research/candidates/ucope",
+      "experiments/candidates/ucope"
+    ],
+    "files_searched": 262,
+    "exact_7101_matches": [],
+    "scope": "bounded current UCOPE record/source search before writing this object; not a global namespace proof"
+  },
+  "seeds": {
+    "initialization": 710100011,
+    "train_velocity": 710100021,
+    "train_duration": 710100022,
+    "train_reset_start": 710101000,
+    "eval_reset_start": 710102000,
+    "eval_velocity_start": 710103000,
+    "eval_duration_start": 710104000
+  },
+  "counts": {
+    "independent_training_pairs": 1,
+    "fits": 2,
+    "train_team_steps": 262144,
+    "eval_team_steps": 24576,
+    "team_steps": 286720,
+    "adam_calls": 2048,
+    "rollouts": 512,
+    "train_episodes": 1024,
+    "eval_episodes": 96,
+    "complete_episodes": 1120,
+    "diagnostic_frames": 1600
+  },
+  "cost_law": {
+    "T": "init + 131072*c_env_actor + 1024*c_update + 8192*c_eval + publication",
+    "G": "131072*c_env_actor + 1024*c_update + 8192*c_eval + 8192*c_hover + publication",
+    "extra_scientific_forwards_or_evaluations": 0,
+    "nested_search_candidates": 0,
+    "historical_complete_arm_seconds": {
+      "7001_T": 137.78884596005082,
+      "7001_G": 137.53816204698524,
+      "7002_T": 138.25656845699996,
+      "7002_G": 134.6804691849975
+    },
+    "projected_T_reference_seconds": 138.25656845699996,
+    "projected_G_reference_seconds": 137.53816204698524,
+    "projected_reference_sum_seconds": 275.7947305039852,
+    "projection_limit": "same loop reference, coefficients unknown; scalar bonus removal adds no dominant work and is not a timing guarantee"
+  },
+  "caps_seconds": {
+    "arm": 1800,
+    "complete_pair": 3600
+  },
+  "logged_entropy_evidence": [
+    {
+      "master": 7001,
+      "arm": "G",
+      "raw_path": "C:/Projects/HMASD/temp/directions/ucope/exp/uav-motion-prefix-b02-7001-p47-20260908/rollouts.jsonl",
+      "sha256": "c97df00d4f09b51c1a9ad5921e1ba353e06c4e5035387deef58f1f0b56e87d9f",
+      "first_rollout_first_epoch_logged_entropy": 21.284074783325195,
+      "last_rollout_last_epoch_logged_entropy": 22.000486373901367,
+      "measurement_boundary": "logged pre-update objective value; not the final checkpoint distribution",
+      "source_inferred_geometric_mean_latent_std_at_last_logged_epoch": 1.0489194702855607
+    },
+    {
+      "master": 7002,
+      "arm": "G",
+      "raw_path": "C:/Projects/HMASD/temp/directions/ucope/exp/uav-motion-prefix-b02-7002-p47-20260908/rollouts.jsonl",
+      "sha256": "ae394f44243bf9af1719b75b9906d9d4d287de352a60b69bfd730432525f547c",
+      "first_rollout_first_epoch_logged_entropy": 21.284074783325195,
+      "last_rollout_last_epoch_logged_entropy": 22.25330924987793,
+      "measurement_boundary": "logged pre-update objective value; not the final checkpoint distribution",
+      "source_inferred_geometric_mean_latent_std_at_last_logged_epoch": 1.0667486918465752
+    }
+  ],
+  "code_derived_bonus_partial_derivative": {
+    "for": "G, 5 active agents, each interior log_std coordinate, before gradient clipping/optimizer",
+    "loss_derivative_from_bonus_alpha_0_01": -0.05,
+    "loss_derivative_from_bonus_alpha_0": 0.0,
+    "limitation": "one objective contribution only; not an observed causal contribution to B02 returns"
+  },
+  "literature": {
+    "mylib_coverage": "current coverage CLI: synthetic-core only, two papers/two mechanisms; excluded from scientific support",
+    "inst_sci_catalog_records": 190,
+    "bounded_entropy_exploration_ppo_candidates": 27,
+    "verified_source_path": "C:/Projects/Inst-sci/papers/MyLib/json/MARL-0405.json",
+    "verified_source_sha256": "db327b3b9c91bcb4c59eb3520d82438a11d7ab61366382672e00e508f803f2f2",
+    "verified_passages": [
+      {
+        "kid_index": 9,
+        "element_id": 113,
+        "page": 1,
+        "bounded_reading": "Exploration needs differ across agents; one agent can interfere with others while exploring.",
+        "short_quote": "one agent’s exploration can hinder other agents’ exploitation"
+      },
+      {
+        "kid_index": 13,
+        "element_id": 120,
+        "page": 2,
+        "bounded_reading": "The continuous two-agent example changes which agent needs to vary its action across phases."
+      },
+      {
+        "kid_index": 16,
+        "element_id": 123,
+        "page": 2,
+        "bounded_reading": "ADER allocates exploration using its effect on pure return; it does not equate more entropy with higher return."
+      },
+      {
+        "kid_index": 181,
+        "element_id": 306,
+        "page": 6,
+        "bounded_reading": "ADER includes protection against agents losing early exploration, contrary to a universal zero-bonus recommendation."
+      }
+    ],
+    "inference": "entropy needs can differ across co-adapting agents; zero common bonus is a bounded simpler choice, not ADER or a guaranteed improvement; ADER also protects exploration against collapse"
+  },
+  "prospective_exposure_line": "2 real fits; each131072 train steps/1024 Adam calls at lr=0.0003; T66441/G66311 parameters; prior B02 total relative movement T/G .544038820/.529811807 (7001), .352969559/.507274977 (7002); B03 movement unobserved before launch",
+  "actual_preparation_exposure": {
+    "models": 0,
+    "training_steps": 0,
+    "adam_calls": 0,
+    "evaluation_episodes": 0,
+    "diagnostic_invocations": 0,
+    "replays": 0,
+    "scientific_invocations": 0
+  },
+  "engineering_scope_section4": "none"
+}

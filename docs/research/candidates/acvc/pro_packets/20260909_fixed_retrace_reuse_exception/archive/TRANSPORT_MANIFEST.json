@@ -1,0 +1,36 @@
+{
+  "schema_version": 4,
+  "packet_id": "2026-09-09-acvc-fixed-retrace-reuse-exception-convergence-03--acvc",
+  "attempt": 1,
+  "canonical_form": "logical_packet_manifest",
+  "request_id": "2026-09-09-acvc-fixed-retrace-reuse-exception-convergence-03",
+  "direction_id": "acvc",
+  "direction_ids": [
+    "acvc"
+  ],
+  "workflow_node": "em_convergence",
+  "conversation_binding_key": "em:acvc:convergence",
+  "decision_authority": "pro_final",
+  "source_mode": "paste",
+  "body": {
+    "role": "prompt",
+    "source_path": "<paste>",
+    "canonical_filename": "2026-09-09-acvc-fixed-retrace-reuse-exception-convergence-03--acvc__00_PROMPT.md",
+    "bytes": 1245,
+    "sha256": "1128390320fe420fa8196fbfe2f72d6404ae4c8b76bf5b73c4e648f26eeaf745",
+    "materialized_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-09-acvc-fixed-retrace-reuse-exception-convergence-03\\2026-09-09-acvc-fixed-retrace-reuse-exception-convergence-03--acvc__00_PROMPT.md"
+  },
+  "references": [],
+  "reference_order_is_authoritative": true,
+  "provider_filename_policy": "record_observed_name_only",
+  "companion_prompt_is_transport_ui_only": true,
+  "manifest_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-09-acvc-fixed-retrace-reuse-exception-convergence-03\\2026-09-09-acvc-fixed-retrace-reuse-exception-convergence-03--acvc__PACKET_MANIFEST.json",
+  "materialized_artifacts": {
+    "body": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-09-acvc-fixed-retrace-reuse-exception-convergence-03\\2026-09-09-acvc-fixed-retrace-reuse-exception-convergence-03--acvc__00_PROMPT.md",
+    "references": []
+  },
+  "materialized_hashes": {
+    "body": "1128390320fe420fa8196fbfe2f72d6404ae4c8b76bf5b73c4e648f26eeaf745",
+    "references": []
+  }
+}
