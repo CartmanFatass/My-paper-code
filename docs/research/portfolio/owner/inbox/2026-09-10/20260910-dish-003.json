@@ -19,7 +19,7 @@
     }
   ],
   "recommended": "a",
-  "auto_applied": null,
+  "auto_applied": "a",
   "dm_reason": "一组小负结果不证明总体无效，但已购比较没有正向服务信号；新的有限后续必须有具体决策价值。",
   "evidence": [
     "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_ARRIVAL_BRIDGE_RETENTION_B08_RESULT_INTAKE_20260910.md",
@@ -67,5 +67,15 @@
     "verdict_text": "DM recommendation, not a disposition: park the tested arrival-bridge retention family, retain REPLACE, and select no successor.",
     "source": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260910_post_b08_convergence/SCIENCE_BRIEF.md"
   },
-  "starred": true
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-10T22:54:24+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "https://github.com/CartmanFatass/My-paper-code/blob/b0fe38d19c7b6245a4ce1d2c4b29c4e9a2fc6599/docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260910_post_b08_convergence/archive/RESPONSE.md",
+      "record": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_POST_B08_CONVERGENCE_INTAKE_20260910.md",
+      "state": "applied",
+      "summary": "已完整读取并核对 Pro 裁决 b0fe38d19：只暂停已测试的到达桥保留家族，保留 REPLACE，不选后继、不续预算。DIRECTION、intake 与审计已应用；DISH 的 ACTIVE/MEDIUM 及未解来源问题不变。原建议保留，所有者可异步覆盖，无需逐项 ratify。"
+    }
+  ]
 }
