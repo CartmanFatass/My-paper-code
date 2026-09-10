@@ -115,3 +115,10 @@ intake/Chinese brief and scoped closeout. Full assignment remains open at this h
 The remote worktree, source-only stage, supervisor and all local evidence remain available;
 their cleanup owner is this DM after preserved result acceptance, with Root integration/
 retention confirmation. No cleanup, successor or additional invocation has occurred.
+
+After that publication, Root forwarded **direct Monitor adoption confirmation** for
+this same handle, node, source, cwd and output. Observation is now transferred to the
+existing Monitor; the earlier pending label records the dispatch boundary only. DM
+continues no polling and resumes collection solely on Root-forwarded terminal facts.
+This handover does not intake the memory receipts or scientific outputs; those remain
+actual-artifact checks at collection, and no completed result is asserted here.
