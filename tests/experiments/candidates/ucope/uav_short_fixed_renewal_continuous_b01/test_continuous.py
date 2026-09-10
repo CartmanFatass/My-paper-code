@@ -130,6 +130,129 @@ def rows_for_curve():
             for e,x in enumerate(values)] + [dict(arm="H", phase="eval", episode=e, checkpoint=None, J=2.) for e in range(3)]
 
 
+def test_learned_head_freeze_rng_and_six_contrasts(tmp_path, monkeypatch):
+    torch.set_num_threads(1)
+    originals = learner.optimizer_for, learner.update, learner.collect_episode
+    fits, calls, learned_gradient = {}, [], []
+
+    def arm_of(actor):
+        if actor.duration is None:
+            return "G"
+        return "T" if any(p.requires_grad for p in actor.duration.parameters()) else "F"
+
+    def optimizer(actor, critic):
+        arm = arm_of(actor)
+        opt = originals[0](actor, critic)
+        fits[arm] = dict(actor=actor, critic=critic,
+                         optimizer=opt,
+                         initial_duration=copy.deepcopy(actor.duration.state_dict()) if actor.duration else None)
+        return opt
+
+    def updating(*args, **kwargs):
+        result = originals[1](*args, **kwargs)
+        actor = args[0]
+        if arm_of(actor) == "T":
+            learned_gradient.append(any(p.grad is not None and p.grad.count_nonzero() > 0
+                                        for p in actor.duration.parameters()))
+        return result
+
+    def collection(*args, **kwargs):
+        meta = args[7]
+        calls.append((meta.copy(), args[5], args[6]))
+        if meta["arm"] == "H":
+            return originals[2](*args, **kwargs)
+        fit = fits[meta["arm"]]
+        if meta["phase"] == "train":
+            fit.setdefault("training_generators", (args[5], args[6]))
+            return originals[2](*args, **kwargs)
+        before = copy.deepcopy((fit["actor"].state_dict(), fit["critic"].state_dict(),
+                                fit["optimizer"].state_dict(),
+                                *(g.get_state() for g in fit["training_generators"]),
+                                torch.get_rng_state()))
+        result = originals[2](*args, **kwargs)
+        equal_tree(before, (fit["actor"].state_dict(), fit["critic"].state_dict(),
+                            fit["optimizer"].state_dict(),
+                            *(g.get_state() for g in fit["training_generators"]),
+                            torch.get_rng_state()))
+        return result
+
+    monkeypatch.setattr(learner, "optimizer_for", optimizer)
+    monkeypatch.setattr(learner, "update", updating)
+    monkeypatch.setattr(learner, "collect_episode", collection)
+    result = study.run_pair(study.Config.learned(fixture=True), tmp_path, time.monotonic())
+
+    assert result["status"] == "COMPLETE", result["limits"]
+    assert result["pair"] == study.LEARNED_SELECTOR and result["seed"] == 9002
+    assert result["counts"]["team_steps"] == 304
+    assert result["counts"]["optimizer_steps"] == 36
+    assert result["counts"]["explicit_resets"] == 38
+    assert result["counts"]["constructors"] == result["counts"]["constructor_resets"] == 3
+    assert result["arms"]["T"]["trainable_parameters"] == 68553
+    assert result["arms"]["F"]["trainable_parameters"] == result["arms"]["G"]["trainable_parameters"] == 66311
+    equal_tree(fits["T"]["initial_duration"], fits["F"]["initial_duration"])
+    equal_tree(fits["F"]["initial_duration"], fits["F"]["actor"].duration.state_dict())
+    assert any(learned_gradient)
+    assert result["arms"]["T"]["exposure"]["duration"]["displacement"] > 0
+    assert result["arms"]["F"]["exposure"]["duration"]["displacement"] == 0
+    for fit in fits.values():
+        assert {int(state["step"]) for state in fit["optimizer"].state.values()} == {12}
+    for arm in ("T", "F", "G"):
+        assert list(result["arms"][arm]["checkpoints"]) == ["2", "4", "6"]
+        for point in result["arms"][arm]["checkpoints"].values():
+            assert all(x["displacement"] == 0
+                       for x in point["evaluation_parameter_exposure"].values())
+    for arm, train_offsets, eval_offsets in (("T", (41, 42), (70000, 80000)),
+                                              ("F", (31, 32), (30000, 40000)),
+                                              ("G", (21, 22), (50000, 60000))):
+        train = [c for c in calls if c[0]["arm"] == arm and c[0]["phase"] == "train"]
+        assert [train[0][i].initial_seed() for i in (1, 2)] == [900200000+x for x in train_offsets]
+        evaluations = [c for c in calls if c[0]["arm"] == arm and c[0]["phase"] == "eval"]
+        assert [evaluations[0][i].initial_seed() for i in (1, 2)] == [900200000+x for x in eval_offsets]
+    assert [c[0]["arm"] for c in calls] == (["T"]*12 + ["F"]*12 + ["G"]*12 + ["H"]*2)
+    panel = result["primary"]
+    contrasts = ("T_minus_G", "T_minus_F", "F_minus_G", "T_minus_H", "F_minus_H", "G_minus_H")
+    assert panel["selected_contrast"] == "T_minus_G" and panel["complete"]
+    assert all(panel[name]["complete"] for name in contrasts)
+    assert all((tmp_path/f"final_{arm}.pt").exists() for arm in ("T", "F", "G"))
+
+
+def test_learned_f_failure_preserves_partial_facts_and_stops(tmp_path, monkeypatch):
+    original = learner.collect_episode
+
+    def collection(*args, **kwargs):
+        meta = args[7]
+        if meta["arm"] == "F" and meta["phase"] == "eval" and meta["checkpoint"] == 6:
+            raise RuntimeError("synthetic missing F final panel")
+        return original(*args, **kwargs)
+
+    monkeypatch.setattr(learner, "collect_episode", collection)
+    result = study.run_pair(study.Config.learned(fixture=True), tmp_path, time.monotonic())
+    assert result["status"] == "INCOMPLETE"
+    assert result["arms"]["T"]["complete"]
+    assert not result["arms"]["F"]["complete"]
+    assert result["arms"]["F"]["fit_complete"] and result["arms"]["F"]["counts"]["optimizer_steps"] == 12
+    assert "G" not in result["arms"]
+    assert not result["primary"]["complete"] and not result["primary"]["T_minus_G"]["complete"]
+    assert not result["primary"]["T_minus_F"]["complete"]
+    assert not result["primary"]["hover_complete"]
+    assert any("synthetic missing F final panel" in limit for limit in result["limits"])
+
+
+@pytest.mark.parametrize("missing", ["F", "H"])
+def test_learned_primary_completeness_follows_only_t_and_g(missing):
+    rows = [dict(arm=arm, phase="eval", episode=e,
+                 checkpoint=None if arm == "H" else 2048, J=value)
+            for arm, values in (("T", (2., 3.)), ("F", (1., 1.)),
+                                ("G", (0., 1.)), ("H", (0., 0.)))
+            if arm != missing for e, value in enumerate(values)]
+    panel = study.panel_from_rows(rows, 2, 2048, study.LEARNED_LABELS)
+    assert panel["complete"] and panel["reading"] == "UP"
+    assert not panel["all_outcomes_complete"]
+    assert panel["T_minus_G"]["complete"]
+    dependent = "T_minus_F" if missing == "F" else "T_minus_H"
+    assert not panel[dependent]["complete"]
+
+
 @pytest.mark.parametrize("missing", [None, "H", "F_512", "F_2048"])
 def test_curve_identity_partial_and_final_primary(missing):
     rows = [r for r in rows_for_curve() if not (missing == "H" and r["arm"] == "H")
@@ -186,6 +309,37 @@ def test_cli_and_real_seed_domains_without_scientific_rng(tmp_path, monkeypatch)
     assert len(seen) == 2
 
 
+def test_learned_cli_selects_only_8701_and_fixture9002(tmp_path, monkeypatch):
+    spec = importlib.util.spec_from_file_location(
+        "continuous_learned_runner", "scripts/run_ucope_uav_short_fixed_renewal_continuous_b01.py")
+    runner = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(runner)
+    monkeypatch.setattr(torch, "set_num_interop_threads", lambda n: None)
+    seen = []
+    monkeypatch.setattr(runner, "run_pair",
+                        lambda c, *args: seen.append(c) or
+                        dict(mode="stub", status="COMPLETE", primary={}, counts={}))
+    for seed, fixture in ((8701, False), (9002, True)):
+        argv = ["runner", "--pair", study.LEARNED_SELECTOR, "--seed", str(seed),
+                "--out", str(tmp_path)]
+        if fixture:
+            argv.append("--engineering-fixture")
+        monkeypatch.setattr(sys, "argv", argv)
+        assert runner.main() == 0
+        assert seen[-1].selector == study.LEARNED_SELECTOR
+        assert seen[-1].fixture == fixture and seen[-1].seed == seed
+        assert seen[-1].pair_cap == 5100
+    for seed, fixture in ((8701, True), (9002, False), (8601, False)):
+        argv = ["runner", "--pair", study.LEARNED_SELECTOR, "--seed", str(seed),
+                "--out", str(tmp_path)]
+        if fixture:
+            argv.append("--engineering-fixture")
+        monkeypatch.setattr(sys, "argv", argv)
+        with pytest.raises(SystemExit):
+            runner.main()
+    assert [c.seed for c in seen] == [8701, 9002]
+
+
 @pytest.mark.parametrize("failure_arm", ["F", "H"])
 def test_final_evaluation_failure_preserves_fit_and_primary(tmp_path, monkeypatch, failure_arm):
     original = learner.collect_episode
@@ -220,6 +374,7 @@ def test_8602_cli_seed_and_card_without_scientific_draws(tmp_path, monkeypatch):
         assert runner.main()==1
         result=json.loads((out/"summary.json").read_text())
         assert seen[-1]==seed and result['seed']==seed and result['configuration']['seed']==seed
+        assert 'selector' not in result['configuration']
         assert result['card']==(study.CARD_8602 if seed==8602 else study.CARD)
         assert result['card_section']==(6 if fixture else 5)
         assert result['counts']['scientific_uav_calls']==0
