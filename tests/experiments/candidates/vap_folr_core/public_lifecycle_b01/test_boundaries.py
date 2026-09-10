@@ -315,7 +315,7 @@ def test_runner_seed_routing_with_standins(tmp_path, monkeypatch, arm):
     argv = [str(path), '--arm', arm, '--launch-sha', 'fixture', '--out', str(tmp_path)]
     monkeypatch.setattr(sys, 'argv', argv)
     runner.main()
-    train, final = 7804, 107804
+    train, final = 7805, 107805
     assert calls == [('python', train), ('numpy', train), ('torch', train),
                      ('learner', arm), ('environment', train),
                      ('python', final), ('numpy', final), ('torch', final),
@@ -330,7 +330,11 @@ def test_runner_seed_routing_with_standins(tmp_path, monkeypatch, arm):
         assert all(x is masks[0] for x in masks[:5000])
         assert all(x is masks[5000] for x in masks[5000:])
         assert masks[0] is not masks[5000]
-        for rng, seed in [(masks[0], 207804), (masks[5000], 307804)]:
+        for rng, seed in [(masks[0], 207805), (masks[5000], 307805)]:
             np.testing.assert_array_equal(rng.random(5), np.random.Generator(np.random.PCG64(seed)).random(5))
+        assert summary['mask_rng'] == dict(bit_generator='PCG64', training_seed=207805,
+                                           evaluation_seed=307805, probability=0.1,
+                                           draws_per_episode=105, frequency_matched=False)
     else:
         assert all(x is None for x in masks)
+        assert 'mask_rng' not in summary
