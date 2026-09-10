@@ -19,7 +19,7 @@
     }
   ],
   "recommended": "a",
-  "auto_applied": null,
+  "auto_applied": "a",
   "dm_reason": "两次完整实例均未达到原来选定尺度，且尚无从现有事实选出的不同处理问题；这不是等价或残差方法失败证明。",
   "evidence": [
     "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_NATIVE_HOLD_RESIDUAL_B02_INTAKE_20260910.md"
@@ -66,5 +66,15 @@
     "verdict_text": "Recommend narrow PARK of this unchanged opening residual-MC package after intake; no third pair to seek positivity, equivalence or broad residual-method failure.",
     "source": "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_NATIVE_HOLD_RESIDUAL_B02_INTAKE_20260910.md"
   },
-  "starred": true
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-10T22:21:52+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260910_post_b02_convergence/archive/RESPONSE.md",
+      "record": "docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260910_post_b02_convergence/CONVERGENCE_INTAKE_20260910.md",
+      "state": "applied",
+      "summary": "Convergence full response 1eef68f01 conforms: narrow PARK of fixed opening t1-3 to t4/full-MC/coefficient1 package applied after two WITHIN pairs. Both positive gaps, old D6 PARK, recasts2 and Portfolio state preserved; no successor or new scientific budget. Full decision and chat-receipt digests recorded separately."
+    }
+  ]
 }

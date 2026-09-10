@@ -743,3 +743,35 @@ selected. This intake does not change old D6 PARK, recasts 2 or Portfolio state.
 References: [B02 E0](SCDMP_NATIVE_HOLD_RESIDUAL_B02_RESULT_EVIDENCE_20260910.md),
 [B02 intake](SCDMP_NATIVE_HOLD_RESIDUAL_B02_INTAKE_20260910.md),
 [B02 card](SCDMP_NATIVE_HOLD_RESIDUAL_B02_SCIENCE_CARD_20260910.md).
+
+## Fixed opening-held residual-MC family PARK — 2026-09-10
+
+The complete post-B02 Convergence response at immutable commit
+1eef68f018b16470e870876f1c8acb985409f785 is accepted and applied as **PRO_FINAL**:
+narrowly PARK the fixed opening t1–3→same-episode t4, two-ended residual,
+full-MC-anchored coefficient1 package on the existing five-UAV native task.
+The full response SHA256 is 0fc4de0d2e5a4a22924f7e4b611de2e9172623c6cd7ff8a081bef0a8e5ba935b.
+No third pair, loss modification, diagnostic or successor is selected.
+
+The strongest support for stopping this package is the completed independent follow-up:
+B01 +0.006737407456 and B02 +0.003658055973 both remain WITHIN absolute MEI 0.01 against
+intact same-information MLP-MC. The strongest contradiction is two positive native point
+gaps after real nonzero treatment, uncertain training-population behavior and low measured
+323.02s/295.03s scientific-process costs. The decision explicitly weighs this contrary
+evidence; it is not equivalence, a negative population mean or general residual-method failure.
+B02 MLP−H = −0.000659550956 remains a separate native loss; H is attained and tuned headroom absent.
+
+Small useful regularization, clipping/optimization, baseline changes, endpoint cancellation,
+successor noise, omitted history and conditional evaluation variation survive. The ceiling
+remains two bounded package observations, with no stable superiority, unique hold/semigroup
+causality, expected-Bellman guarantee, transfer, safety, C promotion or automatic UAV entry.
+
+No next scientific discriminator is currently selected. Re-entry may propose a concrete
+loss/credit hypothesis within the accepted mechanism, or a replication whose cross-training
+variation now changes a specific use/research decision. It need not first prove a bug,
+positive effect, significance, exact upper, headroom or complete mechanism explanation.
+These are future question-selection reasons, not an allocated run or a universal Pro gate.
+A different family remains a scope decision under the existing ladder. Old D6 family PARK,
+recasts2, lowest-contention ordering and Portfolio lifecycle/priority remain unchanged.
+
+Reference: [complete decision, conformance and application intake](pro_packets/20260910_post_b02_convergence/CONVERGENCE_INTAKE_20260910.md).
