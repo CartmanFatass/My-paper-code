@@ -1,0 +1,119 @@
+{
+  "caller_role": "em",
+  "workflow_node": "em_convergence",
+  "request_id": "2026-09-10-scdmp-post-b01-family-convergence-01",
+  "source_thread_id": "01a08293-427f-71e0-930f-6cd91d33a011",
+  "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "direction_id": "semigroup_consistent_duration_model_policy",
+  "repository": "CartmanFatass/My-paper-code",
+  "repository_url": "https://github.com/CartmanFatass/My-paper-code",
+  "commit_or_ref": "a1d06fadc6a6875a1d52a7b318a809150486f156",
+  "execution_mode": "REUSE_SINGLETON",
+  "delivery_mode": "github_delivery",
+  "conversation_id": "6aa1834e-c600-83e8-b20e-630f175aecf3",
+  "github_delivery": {
+    "branch": "codex/scdmp",
+    "base_sha": "a1d06fadc6a6875a1d52a7b318a809150486f156",
+    "response_path": "docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260910_post_b01_convergence/archive/RESPONSE.md",
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/12"
+  },
+  "scientific_question": "请裁决当前开场保持段 residual-MC 家族的下一步：在完整B01已经得到WITHIN结果后，是暂时PARK这个具体家族，还是选择一个有具体理由的新B/EXPLORE？DM建议窄范围PARK，只是提交给同一Convergence节点的建议，并未执行。旧D6 action-choice/source-countdown-search家族仍PARK；SCDMP仍沿现有ACTIVE/HIGH及recasts2/最低ACTIVE争用顺序，不请求生命周期、第三次recast、新家族或C/UAV进入裁决。\n\nB01 master8201是一个真实、完整、非零干预的独立训练配对：最终sampled native Δ=+0.0067374074558942025，conditional evaluation SE=0.0055965465359414865，14/32配对episode偏向完整MLP-MC；绝对MEI=.01，原规则明确为WITHIN，不能改判成功或统计等价。两项对H均值为+0.007086659468526168/+0.00034925201263196577，负episode为15/32和18/32，均未达到.01。H是已达到的参考，不是上界，调优同信息headroom仍缺失。每臂实际1500合格保持pair，处理臂6000残差项，不能解释成未暴露或空处理。完整证据与原规则在各自固定原提交直接列出。\n\n暂停建议最强的理由是这个具体包未给出原来选定尺度上的原样重复理由，也没有从已测事实选出一个新的处理问题。最强反证是它具有正的原生点差、真实非零更新、只观察了一个训练pair，而且科学配对进程只花323.02秒；它不能排除有用的跨训练效应。请实际评估这项反证，不把缺显著性、缺独有机制归因、缺headroom或缺方法新颖性当作B的否决条件。当前规范也允许没有改善时提出具体有理由的新B。FOUNDATIONS§§4、6和实证专题帮助分清条件评价、独立训练和包级/组件级结论；这些知识本身不作投入裁决。\n\n备选限制为当前已接受held-residual机制内的一个有明确问题的有界B。若选原比较的新独立训练pair，说明它回答什么，以及为什么该新问题值得投入；不把B01改判或要求新seed为正。若选单一有理由的处理变化，明确它改哪个loss/credit环节，保留完整同信息MLP-MC、原生任务、真实学习和最终sampled-return比较；不能以系数/seed搜索或事后最好指标取代新问题。未测的梯度抵消、共同裁剪、后继噪声与遗漏历史是存活解释，不是已经定位的缺陷；也无需先把它们逐个诊断完。若必须换到另一个机制家族，指出范围问题，不在本请求静默打开它。\n\n一个新B的候选规划包只有一对新learner（未分配seed）：2×512×256训练+3×32×256最终评价=286720 native team steps、2048真实Adam、96评价episode。保持最终checkpoint、每臂32次sampled评价及同reset的H；不新增中间选择、旧权重评价、先行A、候选/轨迹/controller/solver搜索。原双端loss最多每训练臂1536pair、处理四epoch6144scalar项；若改处理，新增实际工作须点明。每臂成本131072*c_collection+1024*c_update+8192*c_eval+完整开销；第二臂另有8192 H步与整对发布。历史完整科学进程wall323.02秒/CPU321.77秒/peakRSS558232KiB为计划参考，不是新的上界或完整工程工时，完整各臂成本未测。保留1800秒/臂、3600秒/整对上限，不分片重置时钟；无额外成本实验。验证仅做变更行为/主观测所需的相称检查及适用高风险review，不重复整个历史。\n\n若选择PARK，请给出最小暂停单元与有用的重入条件，而非否定所有残差方法；重入条件不能隐含统计显著、先有阳性、精确上界或昂贵诊断才能B的门槛。若选择B，请给出一个具体问题、处理/比较器差异、独立训练单位、主要观测、单对counts/cap及全部结果的有限读法。原MEI=.01与B01解释保持不变；任何新对象的尺度变化都要明确其科学理由，不能追着既见结果降低门槛。\n\n当前仅咨询，无任何新模型、环境、训练、评价、replay、profiling或科学调用。后续选择仍须由同一DM完整intake、写新卡/确切allocation与成本、落实适用检查和已发布source，才在原remote-first wsl_4070 CPU FP32/thread1边界内以detached监督及紧邻实际运行的≥4GiB admission执行。没有新handle。这个Pro回合处理的是家族去向，不是额外的通用B启动关卡。Root负责既有路由和集成；不要写main、源码、方向状态或旧响应。\n\nB01 accepted: 2 learners x 66441 parameters; 262144 training + 24576 evaluation = 286720 native team steps; 2048 actual Adam; 96 final episodes; 1 independent training pair; 1500 eligible training pairs per arm; 6000 treatment residual terms; total displacement/initial-L2=0.4964386918799212/0.5153558478035093; scientific pair-process wall=323.02s, CPU=321.77s, peakRSS=558232KiB.\nSCDMP_POST_B01_CONSULTATION: models=0; environments=0; native_steps=0; synthetic_steps=0; training_episodes=0; evaluation_episodes=0; optimizer_steps=0; replay=0; profiling=0; support_search=0; new_scientific_invocations=0; parameter_displacement=not applicable: no learner",
+  "deliverable": "Give one formed direction-local decision on the current opening held-residual package family: narrowly PARK with an evidence-bounded re-entry condition, or select one specific bounded real B inside the accepted mechanism. Address the strongest evidence against the DM recommendation. If selecting B, identify the exact new question and minimal learner/comparator/primary/independent-unit/count/cap/result-reading specification needed for the same DM to prepare it; no execution is authorized inside Pro. If the decision requires another family or a specification exception, identify that concrete issue without silently executing it. Answer in conclusion-first Chinese scientific prose; no routing envelope or fixed heading schema is required.",
+  "claim_ceiling": "Family-level next-disposition advice from one valid complete B/EXPLORE and retained source facts. B01 remains WITHIN at absolute MEI0.01 and n=1; a possible new B is a bounded package comparison, not stable superiority, equivalence, unique hold/semigroup causality, expected-Bellman guarantee, novelty, TD/gate superiority, transfer, safety, deployment, C promotion or automatic UAV entry. No Portfolio lifecycle/priority/capacity change, no new family or third recast in this request.",
+  "reference_files": [
+    {
+      "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260910_post_b01_convergence/SCIENCE_BRIEF.md",
+      "commit_sha": "a1d06fadc6a6875a1d52a7b318a809150486f156",
+      "purpose": "Sections 1 and 3-7: exact family question, native action/credit path, recommendation versus contrary evidence, scientific-reading use, bounded alternative, zero-exposure and recovery boundary; section2 is a navigational summary of the original evidence below.",
+      "provenance": "New DM-authored recommendation, not a formed direction decision, new result or science card. The linked historical evidence keeps its own listed SHA."
+    },
+    {
+      "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260910_post_b01_convergence/PREPARATION_FACTS.json",
+      "commit_sha": "a1d06fadc6a6875a1d52a7b318a809150486f156",
+      "purpose": "actual_consultation_exposure, machine_exposure_line, measured_historical_exposure_line and prospective_one_pair_counts_not_allocated; these are arithmetic/source facts, not an allocation.",
+      "provenance": "Tool-produced configuration arithmetic and values imported from accepted B01 bytes; no resampling, new run or new fitted policy."
+    },
+    {
+      "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_NATIVE_HOLD_RESIDUAL_B01_SCIENCE_CARD_20260909.md",
+      "commit_sha": "5d52c5e5bed047e8e32fde575952133a7817b9d2",
+      "purpose": "Sections 1-7, especially the exact complete-MC comparison, MEI and frozen WITHIN row in section5, and the original one-pair scope/cost boundary in sections6-7.",
+      "provenance": "Original selected B01 card, preserved at its publication commit; newer methods do not retrospectively rewrite this object."
+    },
+    {
+      "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_NATIVE_HOLD_RESIDUAL_B01_RESULT_EVIDENCE_20260909.json",
+      "commit_sha": "e5ed770301e8f5bac9fd77063edd24bee550fb5f",
+      "purpose": "rule_verbatim, rule_reading, summary counts/primary/limits/status, final_episode_rows, process_resources, cost_scope and collection_checks; preserve all primary and H outcomes plus declared deviations.",
+      "provenance": "Accepted E0 direct output and receipts of the single master8201 training pair. More evaluation rows are not more independent fits; engineering checks are not scientific polarity."
+    },
+    {
+      "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_NATIVE_HOLD_RESIDUAL_B01_INTAKE_20260909.md",
+      "commit_sha": "40b27ad1862c4c3201ce1b073377d587f3fc715c",
+      "purpose": "Sections 1 and 3-8: bounded WITHIN interpretation, support/contradiction, true exposure/cost, original no-successor decision and claim ceiling.",
+      "provenance": "DM scientific intake at original publication; no change to this result or its prior assignment boundary is requested."
+    },
+    {
+      "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/DIRECTION.md",
+      "commit_sha": "40b27ad1862c4c3201ce1b073377d587f3fc715c",
+      "purpose": "Only D6 action-choice family park (2026-09-04), Native held-segment residual-MC recast and B01 result (2026-09-09): smallest historical family boundary, current accepted mechanism and recasts2.",
+      "provenance": "Accepted mechanism-level science; earlier historical sections do not create new requirements, and Portfolio lifecycle is outside this node question."
+    },
+    {
+      "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260908_held_residual_context_repair/archive/RESPONSE.md",
+      "commit_sha": "ac1d97f5920fe2dfc88698681d389af0b907dbfe",
+      "purpose": "The formed P58 choice/recast, next-observation reading rule, budget and final family boundary; use the complete applied response as historical authority without reopening its delivery dispute.",
+      "provenance": "Immutable full applied Pro response; it selected B01 and a second substantive recast, not an automatic successor. The retired-context P56 answer remains historically unapplied."
+    },
+    {
+      "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_NATIVE_RETURN_COMPOSITION_P56_SOURCE_INTAKE_20260908.md",
+      "commit_sha": "21a801279bd449c09907f5cf040efa693ae345a3",
+      "purpose": "Sections 3-4 only: error-difference identity, two-ended residual versus semi-gradient/MC/gate, direct actor-path limit, and verified local-corpus/primary-paper coverage.",
+      "provenance": "Existing DM source inspection and literature retrieval. This supplies attributed containing-method evidence, not direct Pro access to those local libraries or paper passages; do not follow unlisted paper/source links."
+    },
+    {
+      "path": "experiments/candidates/scdmp_variable_k/native_hold_residual_b01/learner.py",
+      "commit_sha": "7d0fc9d0091e046617493a1b23bbbf07297821cf",
+      "purpose": "Actual segment_pairs/residual_loss/update implementation: pair mask, two critic endpoints, loss normalization, unchanged full MC/actor terms, detached advantage and shared clipping path, only as needed to specify a bounded continuation.",
+      "provenance": "Exact implementation used by B01. Source semantics and executed package were technically accepted; this consultation grants no coding or execution."
+    },
+    {
+      "path": "experiments/candidates/scdmp_variable_k/native_hold_residual_b01/study.py",
+      "commit_sha": "7d0fc9d0091e046617493a1b23bbbf07297821cf",
+      "purpose": "Config, training/final sampled evaluation loop, primary_from_rows and cost/allocation boundaries; use only the actual single-pair recipe if selecting continuation.",
+      "provenance": "Exact B01 runner support; frozen final evaluation, private matched RNG and H exposure. No automatic new seed or invocation follows from this code."
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "commit_sha": "4e8ce22f5263a4ebbf096cca6c4af225a0559831",
+      "purpose": "Applicable sections4,5.2,6.1,11.4,11.7-11.10: B integrity, no consumption, allowed launch requirements, MEI/headroom, question/value/cost calibration, independent units, dependency-based interpretation and scientific-knowledge use.",
+      "provenance": "Current published methodology separately pinned from every frozen science path. TASK adopts only these applicable requirements; no named unrelated object exception applies."
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "commit_sha": "4e8ce22f5263a4ebbf096cca6c4af225a0559831",
+      "purpose": "Sections4 and6 only: theory/representation versus finite learning, endpoint/package versus component attribution and independent training versus repeated evaluation.",
+      "provenance": "Explanatory knowledge, not decision authority, global ranking, seed quota or a replacement of B01 scientific meaning."
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "commit_sha": "4e8ce22f5263a4ebbf096cca6c4af225a0559831",
+      "purpose": "Randomness levels, complete-method comparison versus mechanism attribution, and claim-dependent strength of evidence; use these concrete inferential limits.",
+      "provenance": "Explanatory topic selected for this family continuation judgment; no need to follow its unlisted references or read SESSION_CHOICES."
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "commit_sha": "4e8ce22f5263a4ebbf096cca6c4af225a0559831",
+      "purpose": "Sections4-5 and applicable section7 acceptance only: scope machinery needs none for this consultation; a future B keeps ordinary source/runner/check limits and risk-proportionate review.",
+      "provenance": "Current engineering requirements, separately pinned; no new implementation, diagnostic, profiler, validator or scope exception is requested."
+    }
+  ],
+  "constraints": [
+    "Keep every effective science path/SHA as listed; current methodology references use their separately listed full SHA. Do not fetch moving main, related unlisted documents, papers, local libraries or old Issue links as additional scientific input.",
+    "Apply only the named current empirical/engineering specification sections. No frozen B01 result, primary, MEI, RNG, card or historical quarantine is rewritten. The old no-successor statement closes its allocation, not every future justified B.",
+    "PARK is the DM recommendation only, not a pre-decided conclusion; retain the positive local effect, one-pair uncertainty and measured process cost. Absence of significance, headroom, novelty or complete mechanism attribution is not a B veto.",
+    "The alternative is at most one specifically selected matched training pair on the accepted native recipe and original 1800s/arm,3600s/pair caps. No new scientific calls occur in this consultation. A changed loss must preserve intact full MLP-MC comparison and name actual added work; a sweep or source/trajectory search is outside the offered envelope.",
+    "Only the exact current opening-held-residual family disposition is requested. Preserve the old D6 family PARK and recasts2; no lifecycle/priority change, family recast, C freeze or UAV-entry decision is selected by this task.",
+    "Issue12 is the existing delivery discussion. Its older task/response clauses describe their own preserved rounds and do not replace this TASK. Read its current state only for delivery reconciliation; this question uses only the fixed listed files as scientific input.",
+    "The current verified provider conversation is reused under the existing binding; earlier excluded provider context and historic delivery failures are not a new science question or polarity. Do not duplicate an existing response or delivery comment.",
+    "A complete response is intaken by the same DM for current owner/spec conformance. A concrete conflict goes back to this same node, while independent conforming work continues. There is no new owner confirmation or launch gate."
+  ]
+}

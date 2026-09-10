@@ -252,6 +252,14 @@ When the owner is absent the loop keeps running under a standing delegation (own
 
 ## 5. Capacity and resume
 
+OWNER_DIRECT 2026-09-10: directions advance as independent rolling chains. Each direction proceeds
+from its own accepted evidence, decision, dependencies and fresh resource admission; it never waits
+for a named batch, Portfolio bundle, sibling result/intake/cleanup or a global stage boundary. A
+result, blocker, failed admission, Pro wait or closeout affects only that direction. Root integrates
+and replaces work continuously. A prior `no successor` closes only the named allocation; it creates
+no synchronization barrier. Cross-direction choices remain Portfolio-tier decisions, while
+independent authorized work continues during their preparation and resolution.
+
 Root applies the `hmasd-loop-dispatch` skill's stable next-action trigger at goal-turn entry,
 native return, Transport receipt and before blocking waits. Check owner pause/stop instructions
 first. A workflow edit or status question does not resume paused research.
@@ -262,11 +270,12 @@ cards. Count active native work, accepted running experiments and accepted Pro g
 per direction. Completed returns, unresolved waits and queued intentions do not count. Root,
 Transport, specialists and detached processes do not each consume another direction slot.
 
-The loop skill owns event ordering and rolling dispatch. ROOT_OPERATIONS.md maps complete
+The loop skill owns per-direction event ordering and rolling dispatch. ROOT_OPERATIONS.md maps complete
 deliverables to Root, DM and optional Operator; EXPERIMENT_MONITOR.md owns observation
 transfer. Root resolves readiness and cross-direction dependencies while DM carries its
 assigned direction through scientific/technical acceptance. Temporary overlap drains at clean
-boundaries. Scheduling alone changes no lifecycle, scientific meaning, priority or budget.
+boundaries of the affected directions; there is no global clean boundary. Scheduling alone changes
+no lifecycle, scientific meaning, priority or budget.
 
 There is no fixed limit on concurrent implementers or result-bearing runs within the direction
 working set. Root plans from actual runtime capacity and dependencies; DM apply the fresh

@@ -1,0 +1,38 @@
+{
+  "checked_at": "2026-09-10T22:51:17.951393+00:00",
+  "request_id": "2026-09-10-dish-post-b08-convergence-01",
+  "response_commit": "b0fe38d19c7b6245a4ce1d2c4b29c4e9a2fc6599",
+  "response_path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260910_post_b08_convergence/archive/RESPONSE.md",
+  "response_git_blob": "a3240e760736cd1bc5d3ea2004dda2a9d6b81348",
+  "science_response_sha256": "e4ec6a3eceef18930d83dbcf85621cd73cdb84b289c96e00a5cfeb4d2dc2bfc4",
+  "science_response_bytes": 31189,
+  "science_response_lines": 167,
+  "science_github_bytes_equal_immutable_git_blob": true,
+  "transport_chat_receipt_sha256": "603a8ce805f54d71e7738359adc6089ad5410fb4fe73808068ac7deda5c0bcbf",
+  "transport_chat_receipt_bytes": 358,
+  "digest_boundary": "Transport response_sha256 names the short chat receipt, not the complete scientific response.",
+  "response_parent": "1900f067e28e5c40312b515dbe9852e0494044b0",
+  "changed_paths": [
+    "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260910_post_b08_convergence/archive/RESPONSE.md"
+  ],
+  "task_sha": "a96cfa7a52bf22e89bbd6d255eb1953a7af2fafb",
+  "accepted_task_request_handoff_unchanged": true,
+  "provider_conversation": "6a9bec54-df00-83e8-9840-46440458f316",
+  "binding": "em:degraded_incumbent_shadow_handover:convergence",
+  "send_count": 1,
+  "completion": "NATURAL_COMPLETION",
+  "provider_work_duration_observed": "9m55s",
+  "issue_comment_url": "https://github.com/CartmanFatass/My-paper-code/issues/4#issuecomment-5626441130",
+  "comment_commit_matches": true,
+  "conformance": "PASS: narrow tested family PARK; REPLACE retained; no successor or new budget; current authority surfaces unchanged from bound method version.",
+  "application": "Applied in DIRECTION.md and DISH_POST_B08_CONVERGENCE_INTAKE_20260910.md under PRO_FINAL / OWNER_DELEGATED; Portfolio lifecycle unchanged.",
+  "packet_state": "CLOSED: complete response archived, DM conformance and direction decision applied; no resend or successor.",
+  "new_scientific_exposure": {
+    "learners": 0,
+    "native_calls": 0,
+    "transitions": 0,
+    "optimizer_steps": 0,
+    "evaluations": 0,
+    "model_selection_trials": 0
+  }
+}

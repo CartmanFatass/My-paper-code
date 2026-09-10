@@ -1,0 +1,180 @@
+{
+  "independent_unit": "one matched training pair, seed137; four within-pair conditions",
+  "checkpoints": {
+    "REPLACE": {
+      "update": 16,
+      "arrival_bridge_mode": "REPLACE",
+      "learning_rates": [
+        3e-05,
+        3e-05
+      ],
+      "parameter_count": 204211,
+      "parameter_l2": 1.884492348853397,
+      "relative_parameter_l2": 0.04933326012856163,
+      "welford_counts": {
+        "actor": 262144,
+        "snapshot": 13263,
+        "critic": 65536
+      },
+      "optimizer_state_step_values": [
+        398,
+        512
+      ],
+      "all_model_parameters_finite_fp32": true
+    },
+    "HALF_RETAIN": {
+      "update": 16,
+      "arrival_bridge_mode": "HALF_RETAIN",
+      "learning_rates": [
+        3e-05,
+        3e-05
+      ],
+      "parameter_count": 204211,
+      "parameter_l2": 1.9350219357396847,
+      "relative_parameter_l2": 0.05065605098816194,
+      "welford_counts": {
+        "actor": 262144,
+        "snapshot": 13949,
+        "critic": 65536
+      },
+      "optimizer_state_step_values": [
+        397,
+        512
+      ],
+      "all_model_parameters_finite_fp32": true
+    }
+  },
+  "rows": [
+    {
+      "coordinate": "DISH/RBHR/R06/EVALUATION_COORDINATE/0/CLAIM/TARGET_VISUAL_MASK/K8/0",
+      "regime": "TARGET_VISUAL_MASK",
+      "schedule": "K8",
+      "replace_service": 507,
+      "half_service": 492,
+      "difference": -15,
+      "replace_energy": 272828.9530546969,
+      "half_energy": 272157.6317685255,
+      "energy_difference": -671.3212861713837,
+      "replace_hard_events": {
+        "buffer_clear": 0,
+        "command_slew_breach": 0,
+        "dual_owner": 0,
+        "dual_payload": 0,
+        "invalid_commit": 0,
+        "separation_breach": 0,
+        "token_gap": 0
+      },
+      "half_hard_events": {
+        "buffer_clear": 0,
+        "command_slew_breach": 0,
+        "dual_owner": 0,
+        "dual_payload": 0,
+        "invalid_commit": 0,
+        "separation_breach": 0,
+        "token_gap": 0
+      }
+    },
+    {
+      "coordinate": "DISH/RBHR/R06/EVALUATION_COORDINATE/0/CLAIM/TARGET_VISUAL_MASK/K4_TO_K12/0",
+      "regime": "TARGET_VISUAL_MASK",
+      "schedule": "K4_TO_K12",
+      "replace_service": 163,
+      "half_service": 163,
+      "difference": 0,
+      "replace_energy": 268951.6895058306,
+      "half_energy": 270019.6100053577,
+      "energy_difference": 1067.9204995271284,
+      "replace_hard_events": {
+        "buffer_clear": 0,
+        "command_slew_breach": 0,
+        "dual_owner": 0,
+        "dual_payload": 0,
+        "invalid_commit": 0,
+        "separation_breach": 0,
+        "token_gap": 0
+      },
+      "half_hard_events": {
+        "buffer_clear": 0,
+        "command_slew_breach": 0,
+        "dual_owner": 0,
+        "dual_payload": 0,
+        "invalid_commit": 0,
+        "separation_breach": 0,
+        "token_gap": 0
+      }
+    },
+    {
+      "coordinate": "DISH/RBHR/R06/EVALUATION_COORDINATE/0/CLAIM/TERRAIN_RELAY_MASK/K8/0",
+      "regime": "TERRAIN_RELAY_MASK",
+      "schedule": "K8",
+      "replace_service": 921,
+      "half_service": 913,
+      "difference": -8,
+      "replace_energy": 269910.6682639672,
+      "half_energy": 269718.9524703319,
+      "energy_difference": -191.71579363528872,
+      "replace_hard_events": {
+        "buffer_clear": 0,
+        "command_slew_breach": 0,
+        "dual_owner": 0,
+        "dual_payload": 0,
+        "invalid_commit": 0,
+        "separation_breach": 0,
+        "token_gap": 0
+      },
+      "half_hard_events": {
+        "buffer_clear": 0,
+        "command_slew_breach": 0,
+        "dual_owner": 0,
+        "dual_payload": 0,
+        "invalid_commit": 0,
+        "separation_breach": 0,
+        "token_gap": 0
+      }
+    },
+    {
+      "coordinate": "DISH/RBHR/R06/EVALUATION_COORDINATE/0/CLAIM/TERRAIN_RELAY_MASK/K4_TO_K12/0",
+      "regime": "TERRAIN_RELAY_MASK",
+      "schedule": "K4_TO_K12",
+      "replace_service": 173,
+      "half_service": 170,
+      "difference": -3,
+      "replace_energy": 261032.18423816038,
+      "half_energy": 250842.54457246515,
+      "energy_difference": -10189.639665695227,
+      "replace_hard_events": {
+        "buffer_clear": 0,
+        "command_slew_breach": 0,
+        "dual_owner": 0,
+        "dual_payload": 0,
+        "invalid_commit": 0,
+        "separation_breach": 0,
+        "token_gap": 0
+      },
+      "half_hard_events": {
+        "buffer_clear": 0,
+        "command_slew_breach": 0,
+        "dual_owner": 0,
+        "dual_payload": 0,
+        "invalid_commit": 4,
+        "separation_breach": 0,
+        "token_gap": 0
+      }
+    }
+  ],
+  "Delta_bridge": -6.5,
+  "fraction_of_horizon": -0.005416666666666667,
+  "relative_to_REPLACE": -0.01473922902494331,
+  "mean_energy_difference": -2496.189061493693,
+  "initial_welford_counts": {
+    "actor": 0,
+    "snapshot": 0,
+    "critic": 0
+  },
+  "actual_native_training_call_lower": 372718,
+  "actual_native_training_call_upper": 1478458,
+  "all_eight_final_episodes_complete_1200": true,
+  "prediction_score": "weak positive sign missed; uncertain24 forecast was not a numerical probability",
+  "source_label_note": "new:LOW_LR:update16 is the inherited LR-recipe string; arm/arrival_bridge_mode and checkpoint metadata distinguish the actual B08 policies",
+  "scientific_reexecution": false
+}

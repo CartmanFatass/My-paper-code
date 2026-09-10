@@ -1,0 +1,80 @@
+{
+  "object": "RCLE-TBCFV-B03-ACTOR100-FRESH1000-S22-RECOVERY",
+  "seed": 22,
+  "count_basis": "configuration arithmetic only; no model, RNG or native invocation",
+  "parameters_per_fit": 26161,
+  "fresh_fits": 1,
+  "models_allocated": 6,
+  "untrained_helpers": 5,
+  "updates_per_fit": 1000,
+  "nonzero_step_norm": 0.02,
+  "path_length_opportunity": 20.0,
+  "not_net_displacement": true,
+  "prior_seed22_initial_norm": 21.20666078552823,
+  "path_opportunity_over_same_seed_initial_norm": 0.9430999157419601,
+  "seed_root_hex": "9e02ca6eed367ce80c7b396fc99a128c501c744d0e888e374803b5b2a4feb9fa",
+  "arms": {
+    "W100": {
+      "training_episodes": 64000,
+      "evaluation_episodes": 2048,
+      "episodes": 66048,
+      "primitive_ticks": 4227072,
+      "backward_step_calls": 1000,
+      "cap_s": 600,
+      "observed_same_shape_complete_wall_s": 355.01
+    },
+    "reference": {
+      "training_episodes": 0,
+      "evaluation_episodes": 2048,
+      "episodes": 2048,
+      "primitive_ticks": 131072,
+      "backward_step_calls": 0,
+      "cap_s": 30,
+      "observed_same_shape_complete_wall_s": 2.7
+    }
+  },
+  "new_total": {
+    "training_episodes": 64000,
+    "evaluation_episodes": 4096,
+    "episodes": 68096,
+    "primitive_ticks": 4358144,
+    "backward_step_calls": 1000,
+    "training_batches": 2000,
+    "evaluation_batches": 128
+  },
+  "prior_known_lower": {
+    "episodes": 334784,
+    "primitive_ticks": 21426176,
+    "backward_step_calls": 4783,
+    "models": 54
+  },
+  "complete_new_plus_prior_known_lower": {
+    "episodes": 402880,
+    "primitive_ticks": 25784320,
+    "backward_step_calls": 5783,
+    "models": 60
+  },
+  "additional_unknown_exposure_upper_not_actual": {
+    "historical_W100_prefix": {
+      "episodes": 12800,
+      "primitive_ticks": 819200,
+      "backward_step_calls": 200
+    },
+    "seed22_one_unfinished_block": {
+      "episodes": 64,
+      "primitive_ticks": 4096,
+      "backward_step_calls": 1
+    }
+  },
+  "cost": {
+    "pre_support_charge_s": 100,
+    "outer_sequence_cap_s": 650,
+    "post_support_charge_s": 150,
+    "complete_cap_s": 900,
+    "same_shape_sequence_forecast_s": 357.71,
+    "complete_forecast_with_conservative_support_s": 607.71,
+    "prior_same1000_scoped_charge_s": 1891.01,
+    "prior_complete_same1000_pairs": 1,
+    "units": "sequence wall once plus scoped conservative support; full-study calendar and aggregate CPU remain separate"
+  }
+}

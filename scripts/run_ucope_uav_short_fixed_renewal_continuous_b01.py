@@ -21,13 +21,13 @@ def main():
     args = parser.parse_args()
     learned = args.pair == LEARNED_SELECTOR
     expected = (9002,) if learned and args.engineering_fixture else \
-               (8701,) if learned else (9001,) if args.engineering_fixture else (8601, 8602)
+               (8701, 8702, 8703) if learned else (9001,) if args.engineering_fixture else (8601, 8602)
     if args.seed not in expected:
         parser.error("seed does not match the selected study and fixture mode")
     import torch
     torch.set_num_threads(1)
     torch.set_num_interop_threads(1)
-    config = Config.learned(args.engineering_fixture) if learned else \
+    config = Config.learned(args.engineering_fixture, seed=args.seed) if learned else \
              Config.engineering() if args.engineering_fixture else Config(args.seed)
     result = run_pair(config, args.out, WHOLE_START)
     print(json.dumps(dict(mode=result["mode"], status=result["status"], primary=result["primary"], counts=result["counts"]), allow_nan=False))

@@ -1,0 +1,78 @@
+{
+  "unit": "caller-declared independent training run",
+  "inference": "descriptive only; no confidence interval or success classification",
+  "groups": [
+    {
+      "task": "FOLR_TIMING_128",
+      "arm": "EVENT",
+      "n": 1,
+      "mean": 2.051953125,
+      "sample_sd": null,
+      "min": 2.051953125,
+      "max": 2.051953125,
+      "runs": {
+        "7805": 2.051953125
+      }
+    },
+    {
+      "task": "FOLR_TIMING_128",
+      "arm": "RANDOM",
+      "n": 1,
+      "mean": 2.5017968749999993,
+      "sample_sd": null,
+      "min": 2.5017968749999993,
+      "max": 2.5017968749999993,
+      "runs": {
+        "7805": 2.5017968749999993
+      }
+    },
+    {
+      "task": "FOLR_TIMING_128",
+      "arm": "RETAIN",
+      "n": 1,
+      "mean": 2.64265625,
+      "sample_sd": null,
+      "min": 2.64265625,
+      "max": 2.64265625,
+      "runs": {
+        "7805": 2.64265625
+      }
+    }
+  ],
+  "paired_differences": [
+    {
+      "task": "FOLR_TIMING_128",
+      "arm": "EVENT",
+      "baseline": "RETAIN",
+      "summary": {
+        "n": 1,
+        "mean": -0.5907031250000001,
+        "sample_sd": null,
+        "min": -0.5907031250000001,
+        "max": -0.5907031250000001
+      },
+      "differences": {
+        "7805": -0.5907031250000001
+      },
+      "unmatched_arm_seeds": [],
+      "unmatched_baseline_seeds": []
+    },
+    {
+      "task": "FOLR_TIMING_128",
+      "arm": "RANDOM",
+      "baseline": "RETAIN",
+      "summary": {
+        "n": 1,
+        "mean": -0.14085937500000068,
+        "sample_sd": null,
+        "min": -0.14085937500000068,
+        "max": -0.14085937500000068
+      },
+      "differences": {
+        "7805": -0.14085937500000068
+      },
+      "unmatched_arm_seeds": [],
+      "unmatched_baseline_seeds": []
+    }
+  ]
+}

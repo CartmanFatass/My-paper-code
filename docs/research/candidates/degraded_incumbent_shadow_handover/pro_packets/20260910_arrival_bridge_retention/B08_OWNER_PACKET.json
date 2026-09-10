@@ -1,0 +1,37 @@
+{
+  "question": "执行 Pro 已选择的一次普通快照到达时保留一半状态的学习比较；所有者可异步覆盖。",
+  "changes_if_approved": [
+    {
+      "target": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_ARRIVAL_BRIDGE_RETENTION_B08_SCIENCE_CARD_20260910.md",
+      "from": "无 B08 实验",
+      "to": "seed137、REPLACE 与 HALF_RETAIN 各16轮训练，只读最终四种条件"
+    }
+  ],
+  "if_refused": "在下个清晰边界停止或修订未执行部分；保留已有证据，不自动重跑。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260910_arrival_bridge_retention/archive/RESPONSE.md",
+      "quote": "Select option (a): open one narrow arrival-bridge ordinary-service B/EXPLORE comparison, HALF_RETAIN versus newly trained REPLACE.",
+      "why": "到达的快照在换手前已影响备用实体的动作，比较路径与预算明确。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_ARRIVAL_BRIDGE_RETENTION_B08_SCIENCE_CARD_20260910.md",
+      "quote": "It can already learn useful retention; factor0.5 may retain stale state or slow adaptation.",
+      "why": "没有观察到旧桥造成损害，完整桥可能已足够。"
+    }
+  ],
+  "uncertainty": [
+    "一个训练配对无法给出训练总体不确定性。",
+    "没有调优上界与基线的余量记录；无换手不阻止读取普通服务差。"
+  ],
+  "cost": {
+    "compute": "每臂独占900秒，共享最多300秒，总计2100秒；含检查与发布，不自动追加种子。",
+    "owner_time": "无需回复，异步覆盖即可。",
+    "reversibility": "costly",
+    "waits_on_this": "nothing"
+  },
+  "verdict_text": "执行一次新鲜匹配训练，比较完整替换与固定一半保留；只按最终服务及原生代价解释。",
+  "source": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_ARRIVAL_BRIDGE_RETENTION_B08_SCIENCE_CARD_20260910.md"
+}

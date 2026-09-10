@@ -199,3 +199,243 @@ EVENT acceptance as main `091919892`. E0 preserves the exact command and same-ha
 handover. All three planned submissions are accepted; RANDOM's terminal collection and
 the full scientific intake/brief/closeout remain due. Monitor is sole observer; no new
 source, test, arm, replacement or premature triple conclusion follows this boundary.
+
+## 7. Complete result against the frozen card
+
+**Valid B/EXPLORE result: MIXED_OR_REVERSE; all three contrasts WITHIN_MEI.** The DM
+checked the actual result documents against card §§3–6, all three complete final return
+vectors, log/file publication agreement, source/seed/thread bindings, recorded counts,
+admission receipts and whole-chain clocks. All24 remote/local artifact hashes matched
+before reclamation; the subsequent archive reconciliation is separately described in §11.
+All three fresh processes used source `6a8eacdad072c37d477aca95a9c871aba68cee78`, base
+seeds7805/107805 and CPU FP32 with Torch compute/interop1. RANDOM used the declared
+private PCG64207805/307805, p=.1 and105 draws per episode, once-sampled for replay.
+
+Every arm completed5000 training episodes/100000 ticks/4969 RMSprop updates and128
+final non-learning episodes/2560 ticks. Final logs contain25 progress rows per arm,
+episode200 through5000, ending at4969 updates. All384 final returns are finite and
+retained in [result summary](FOLR_PUBLIC_LIFECYCLE_TIMING_B02_RESULT_SUMMARY_20260910.json).
+No episode, seed, failed tail or adverse arm was selected away; there was no extra
+scientific evaluation, checkpoint selection, replacement or repeat. RANDOM's observed
+terminal exit0 is supported by its collected artifacts, rather than accepted as science
+from Monitor status alone. Its last receipt was observed2026-09-10T17:43:15.3236157Z.
+
+| Arm | Final native mean,128 episodes | Conditional episode SD | Cumulative training mean,5000 episodes |
+| --- | ---: | ---: | ---: |
+| RETAIN | 2.64265625 | 7.964677 | -4.468676 |
+| EVENT | 2.051953125 | 6.385382 | -5.001920 |
+| RANDOM | 2.501796875 | 6.777138 | -5.204832 |
+
+| Frozen contrast | Observed difference | Individual reading at absolute MEI1 |
+| --- | ---: | --- |
+| EVENT−RETAIN | -0.590703125 | WITHIN_MEI |
+| RANDOM−RETAIN | -0.140859375 | WITHIN_MEI |
+| EVENT−RANDOM | -0.44984375 | WITHIN_MEI |
+
+The complete combined reading rule applied **verbatim**, card §4:
+
+1. **EVENT_CLEAR_ADVANTAGE:** `d_ER>=1` and `d_EM>=1`.
+2. **SHARED_RESET_GAIN:** `d_ER>=1`, `d_MR>=1` and `-1<d_EM<1`.
+3. **MIXED_OR_REVERSE:** all remaining cases.
+
+The first two conditions fail; the third applies. The preset labels describe this
+single new fitting instance. Within-MEI point differences establish neither equivalence
+nor absence of a useful population effect. EVENT's two negative contrasts are retained
+without interpreting them as causal harm or a stable RETAIN advantage.
+
+## 8. Independent unit, uncertainty and prediction check
+
+The independent learning unit is the fresh fitting instance per arm, matched in base
+initialization across arms. There is one new instance, not128 independent fits. The
+scientific-tools `summarize_runs.py` was applied to one declared final endpoint per
+training instance with `baseline=RETAIN, paired=True`; card §3 declares the matching.
+[New run rows](evidence/2026-09-10-folr-public-lifecycle-timing-b02-run-rows.csv) and
+[descriptive analysis](evidence/2026-09-10-folr-public-lifecycle-timing-b02-run-analysis.json)
+retain n=1 and null training-run SD. Pairing is at the declared fitting-instance level;
+equal evaluation seed labels do not pair traffic trajectories or same-index episodes.
+
+The reported episode SDs describe conditional rollout spread. Under an independent-
+episode approximation, marginal Monte Carlo SEs are0.7040/0.5644/0.5990 for RETAIN/EVENT/
+RANDOM; the phase RNG streams persist across episodes. These are not training-population
+uncertainty, contrast intervals or evidence for equivalence. No bootstrapped episode
+contrast, seed-level confidence interval or significance gate is used.
+
+**Prospective DM prediction: EVENT_CLEAR_ADVANTAGE, low confidence — missed.** The new
+triple selects MIXED_OR_REVERSE. The prior positive triple made recurrence plausible;
+its narrow EVENT−RANDOM margin and prior contrary evidence were accurately listed as
+reasons for low confidence, not reasons to erase this miss. Owner prediction: **not taken
+(unattended)**. Live-primary all-age owner reviews returned `[]` at full intake, and the
+current FOLR audit owner cells contained no override. No owner reply is invented.
+
+## 9. What the new observation changes
+
+The preceding same-host/same128-endpoint triple at7804/107804 selected EVENT_CLEAR_ADVANTAGE
+with EVENT−RETAIN+2.804765625 and EVENT−RANDOM+1.363671875. The new instance does not
+repeat that above-MEI package advantage. This weakens the evidence for repeatability;
+it does not negate the old local result or impose an all-positive-seed requirement.
+
+For transparent descriptive juxtaposition, the [six run rows](evidence/2026-09-10-folr-public-lifecycle-timing-b02-matched-128-rows.csv)
+and [two-instance summary](evidence/2026-09-10-folr-public-lifecycle-timing-b02-matched-128-analysis.json)
+show both128-endpoint instances. Their mean EVENT−RETAIN is+1.10703125 with sample
+SD2.40095898; mean RANDOM−RETAIN is+0.6501171875 with SD1.11860978. Two observed instances
+leave performance uncertainty large. This outcome-informed summary is not a new test,
+prospective confirmation or replacement of either frozen result rule. The earlier32-
+episode RETAIN−event pairs−2.0021875/−1.9228125/+2.559375 remain separate and unpooled.
+
+**Strongest support:** the old timing triple's above-MEI EVENT advantage against both
+legal controls remains direct native evidence; the first two earlier pairs also favored
+event clearing within their own endpoints. **Strongest contradiction:** the current
+triple has no above-MEI gain on any contrast and lower EVENT than RETAIN point return;
+the earlier B03 observation favored RETAIN by2.559375. In both128-endpoint triples,
+cumulative training mean favored RETAIN. Current EVENT and RANDOM are respectively
+0.533244 and0.736156 lower in cumulative training mean than RETAIN. Training aggregates
+are distinct from final learned performance; they do not reconstruct an unrecorded curve.
+
+| Arm/phase | Eligible survivor controls | Event-bound opportunities | Actual survivor resets | Reset fraction of eligible |
+| --- | ---: | ---: | ---: | ---: |
+| RETAIN train | 260235 | 46007 | 0 | 0% |
+| RETAIN final | 6159 | 1402 | 0 | 0% |
+| EVENT train | 260059 | 47153 | 47153 | 18.1317% |
+| EVENT final | 6746 | 1262 | 1262 | 18.7074% |
+| RANDOM train | 259266 | 47458 | 26050 | 10.0476% |
+| RANDOM final | 6580 | 1309 | 623 | 9.4681% |
+
+Birth/departure totals and all denominators are preserved in the result summary.
+Nonzero actual clearing rules out an unexposed intervention here. The per-action
+counts omit terminal masks, common entrant resets and episode clears as frozen.
+Preset RANDOM p=.1 is visibly unmatched in dose; no post-result tuning is performed.
+
+**Surviving alternatives and ceiling:** event timing, reset dose, joint clearing
+patterns, sampled data/optimization paths and partner co-adaptation remain entangled
+in separately trained packages. Public membership changes define entity ownership;
+common fresh births and inactive-state zeros precede true-survivor retention/clearing,
+which changes incoming recurrent history and the consistent acting/online/target path,
+then the native team reward. Local observations and public events do not reveal the
+full state; survivor history includes teammates. The observed ordering cannot identify
+which of those paths produced it. No pure timing, stale-memory cause, self-only memory,
+event-exclusive gain, stable population winner, original-CAMA benchmark, transfer or C
+claim follows. Same-information tuned headroom remains absent.
+
+## 10. Actual exposure, cost and engineering boundary
+
+Total exposure is15000 training episodes/300000 training ticks/14907 RMSprop calls,
+384 final episodes/7680 final ticks, **307680 native ticks** across three accepted
+invocations. Each was selected before output. All three are complete; the finite
+submission allocation has no remaining slot. As a B object it has no C consumption state.
+
+| Arm | Complete chain wall s | Complete chain CPU s | Whole-chain peak RSS KiB | Narrower runner wall s |
+| --- | ---: | ---: | ---: | ---: |
+| RETAIN | 832.49 | 832.87 | 651624 | 790.077465 |
+| EVENT | 769.66 | 772.00 | 658888 | 727.821485 |
+| RANDOM | 821.64 | 823.04 | 652756 | 776.177174 |
+| Sum | **2423.79** | **2427.91** | per invocation | 2294.076124 |
+
+The scientific wall is the outer time/timeout chain from fresh admission through
+runner exit, including imports/initialization, training, final evaluation and publication.
+All three laws remain below1800s, and the sum below5400s. The runner-summary clock has a
+narrower scope and is not substituted for complete chain time. The per-arm42.41/41.84/
+45.46s outer-minus-runner gaps are observed differences without a supported phase/cause
+attribution. Aggregate CPU work is separate from summed wall or elapsed critical path.
+
+Study elapsed from the first admission timestamp2026-09-10T16:49:37.756230Z to final
+whole-second exit17:42:28Z is3170.24377s; it includes between-arm control gaps and excludes
+prior staging and subsequent collection. Final endpoint resolution is one second. Scope
+of full engineering/authoring/transport/closeout elapsed is not measured by that interval.
+Every remote admission passed both4GiB floors; assessed available bytes were15631716352,
+15603605504 and15319556096. Cgroup fields remain null, marked **resources_unmeasured**;
+trustworthy native return and measured RSS/wall remain reportable.
+
+The final supporting charge is **45.9904959/300s**, and complete scientific wall plus
+support is **2469.7804959s scoped charged cost per one valid triple**; E0 and JSON
+`cost_accounting` retain the components. It includes scoped recorded checks/reads, analysis and a
+conservative charge for the operator's rounded12.1s command wall. Administrative
+source/card authoring, Git, message transport and earlier separately excluded SCP are
+not total-compute claims. Directory tests remain25.9131638s cumulative of300s; no new
+test or target call followed the accepted three stand-in cases and independent review.
+The source diff remained7 runner lines added/7 removed, with no new Scope Spec §4
+machinery or §5 source/test budget breach. Artifact comparison below responds to a
+concrete preservation gap; it introduces no runtime guard or universal launch gate.
+
+## 11. Scoped closeout, preserved evidence and procedural failure
+
+The scoped Operator archived the one exact remote worktree and its three terminal
+supervisors, listed both tar archives, copied them locally, matched whole-archive digests,
+rechecked inactive PIDs and removed the four named paths. **It omitted the explicitly
+assigned tar-to-original byte comparison before deletion.** The
+[corrected Operator report](evidence/2026-09-10-folr-public-lifecycle-timing-b02-operator-closeout.md)
+records that actual ordering. The DM identified the omission during acceptance and
+reported it immediately. Root instructed post-deletion reconciliation while preserving
+the procedural failure and the separation from scientific acceptance; no compensating
+scientific work was authorized or performed.
+
+The DM's [post-deletion archive reconciliation](evidence/2026-09-10-folr-public-lifecycle-timing-b02-archive-reconciliation.json)
+read archive members in memory without extraction and found:
+
+- All24 question-relevant result/checkpoint/admission/supervisor members match their
+  pre-deletion remote/local hashes and still-retained local bytes.
+- All2312 tracked files on the configured sparse execution surface match frozen Git
+  blob contents. The initial whole-repository assertion was too broad for that sparse
+  checkout; it was corrected to the declared roots without changing archive or result
+  bytes. Other committed directories remain available through the frozen Git source.
+- The17 extra worktree files are the nine recorded scientific files and eight pycache
+  files. The supervisor archive contains all21 regular files, including three recorded
+  PIDs and start times. This classifies archived contents; it cannot enumerate any
+  unknown untracked originals omitted before deletion.
+- Both complete archive digests match the originally transferred manifest and the
+  remote retained copies. The scientific evidence and materialized source are recoverable.
+
+The [independent remote readback](evidence/2026-09-10-folr-public-lifecycle-timing-b02-remote-closeout.json)
+at2026-09-10T18:02:55.291262Z confirms all four exact paths absent, the worktree absent
+from Git registration, recorded PIDs3086548/3088772/3090888 inactive, and recovery ref
+`refs/archive/folr-public-lifecycle-timing-b02-20260910` at full launch6a8eacda. Exact paths,
+archive roots/digests and local evidence retention are in E0. The shared authoring
+checkout and each collected raw scientific root remain retained.
+
+**Bounded remaining risk:** post-deletion equality to independently retained bytes
+establishes their recoverability; it cannot establish that the required pre-delete
+comparison happened, or exclude loss of unknown untracked originals absent from every
+preserved record. This is a closeout-conformance failure. There is no observed defect
+in reward, information, training, comparison or the primary measurement requiring
+scientific quarantine. Root owns final integration and reclamation acceptance.
+
+The separately rejected local test-cleanup target remains unchanged and DM-owned:
+`temp/directions/vap_folr_core/test/timing_b02_check01`. Automatic approval review rejected
+the original combined test/finally deletion before execution, reason `blocked by policy`.
+No alternate deletion or escalation bypass was attempted; that gap is not repaired by
+the remote closeout. Earlier evidence or another invocation's scratch was not touched.
+
+## 12. Decisions this intake produces
+
+**Scientific acceptance, object tier.** Options: (a) accept the intact complete triple
+under the frozen MIXED_OR_REVERSE rule, retain all signs and score the missed prediction;
+(b) quarantine a concrete primary-measurement or scientific-boundary defect. Recommendation
+and selection: **(a)**. The counts, full outcomes, prior hashes, frozen source and receipts
+support the declared comparison. The procedural archive omission does not invalidate
+independently preserved scientific bytes. **Owner-delegated decision (unattended,
+2026-09-03 instruction): (a).** Owner flag: none; the interpretation is bounded rather
+than a close-call selection between scientific plans.
+
+**Execution return, object tier technical record.** Options: (a) return the completed
+finite batch, preserved archives and explicitly nonconforming pre-delete procedure for
+Root's integration/closeout acceptance; (b) claim unqualified closeout conformance;
+(c) launch extra scientific work. Recommend/select **(a)**. Options(b) and(c) contradict
+the observed procedure and supplied allocation. **Owner-delegated decision (unattended,
+2026-09-03 instruction): (a).** The read-only post-deletion reconciliation follows Root's
+explicit instruction; deletion remains the recorded irreversible action, not a claim
+that the procedure was reversible or compliant. No extra owner-console item is created
+for these ordinary technical/result decisions.
+
+**Direction-local advice, unselected:** reconsider spending on an unchanged third
+triple from the complete positive-plus-within-MEI history, rather than treating B01's
+ordering as established. The unresolved next discriminator is repeatability of useful
+native benefit over competent retention across independent fitting instances. If later
+selected and allocated, a small real-learning comparison would answer that performance
+question more directly than exact policy-class search or extra rollouts of these
+checkpoints; no such run, new arm, seed, dose-matching object or budget is selected here.
+This is neither a family close/park/recast nor a Portfolio lifecycle, priority, capacity,
+fusion, promotion or investment action. The assigned allocation ends at this clean return.
+
+The [Chinese owner brief](../../portfolio/owner/briefs/vap_folr_core/2026-09-10_FOLR_PUBLIC_LIFECYCLE_TIMING_B02.md)
+is written with the valid-result intake. Current owner instructions remain applied;
+no reply is awaited. Root receives the result, cost, preservation evidence and bounded
+procedural risk for its required integration and execution acceptance.

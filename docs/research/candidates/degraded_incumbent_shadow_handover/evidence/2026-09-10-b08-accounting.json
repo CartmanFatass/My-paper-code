@@ -1,0 +1,180 @@
+{
+  "object": "DISH-ARRIVAL-BRIDGE-RETENTION-B08",
+  "source_sha": "a01522a6f6cf12e5549b3e03596ce58642b68cf1",
+  "accounting_date": "2026-09-10",
+  "selected_limits_seconds": {
+    "REPLACE_exclusive": 900,
+    "HALF_RETAIN_exclusive": 900,
+    "shared": 300,
+    "charged_per_arm": 1050,
+    "complete_pair": 2100
+  },
+  "prior_shared_conservative_charge_seconds": 215,
+  "known_prelaunch_charge_seconds": 209.4782804,
+  "exclusive_arm_seconds": {
+    "REPLACE": 224.20338408101816,
+    "HALF_RETAIN": 226.97875767503865
+  },
+  "runner_summary_in_run_seconds": 454.032020866056,
+  "external_complete_runner_process_seconds": 454.5,
+  "external_process_reporting_precision": "centiseconds; no false exact precision beyond external receipt",
+  "added_shared_process_wall_beyond_summary_seconds": 0.4679791339440271,
+  "shared_process_work_seconds": 3.317858243943192,
+  "postlaunch_external_command_components": [
+    {
+      "name": "live Monitor config and accepted dispatch conservative charge",
+      "wall_seconds": 0.75
+    },
+    {
+      "name": "adjacent admission receipt read",
+      "wall_seconds": 0.5688494
+    },
+    {
+      "name": "accepted launch record commit/push actual (replaces 6s reserve)",
+      "wall_seconds": 4.9603287
+    },
+    {
+      "name": "postlaunch owner review and main surface read",
+      "wall_seconds": 0.6339835
+    },
+    {
+      "name": "terminal assignment/source/card read",
+      "wall_seconds": 0.4228209
+    },
+    {
+      "name": "terminal owner/specification/scientific-reading",
+      "wall_seconds": 0.8018043
+    },
+    {
+      "name": "full terminal collection enclosing tool",
+      "wall_seconds": 2.4165496
+    },
+    {
+      "name": "initial monitor path read and empirical foundation",
+      "wall_seconds": 0.1689238
+    },
+    {
+      "name": "all native rows and training table read",
+      "wall_seconds": 0.2204233
+    },
+    {
+      "name": "monitor receipt path inventory",
+      "wall_seconds": 0.1498403
+    },
+    {
+      "name": "terminal receipt and analysis CLI read",
+      "wall_seconds": 0.222784
+    },
+    {
+      "name": "Monitor timing-reconciliation app request and thread read conservative charge",
+      "wall_seconds": 0.25
+    },
+    {
+      "name": "context_boundary_inventory",
+      "wall_seconds": 0.3610541
+    },
+    {
+      "name": "card_direction_summary_shape_read",
+      "wall_seconds": 0.2251132
+    },
+    {
+      "name": "card_direction_summary_shape_read_utf8",
+      "wall_seconds": 0.2171774
+    },
+    {
+      "name": "checkpoint_fields_analysis_cli_read",
+      "wall_seconds": 0.2006851
+    },
+    {
+      "name": "checkpoint_metadata_read",
+      "wall_seconds": 2.2135338
+    },
+    {
+      "name": "checkpoint_independent_reduction_analysis",
+      "wall_seconds": 2.142215
+    },
+    {
+      "name": "checkpoint_reduction_analysis_correct_total_step_assumption",
+      "wall_seconds": 1.9668149000000001
+    },
+    {
+      "name": "conditional_optimizer_source_and_intake_record_shapes",
+      "wall_seconds": 0.1799974
+    },
+    {
+      "name": "terminal_remote_cleanup_inventory",
+      "wall_seconds": 0.9727811
+    },
+    {
+      "name": "E0_intake_convention_resource_scope_read",
+      "wall_seconds": 0.179398
+    },
+    {
+      "name": "scope_inventory_and_monitor_receipt_preservation",
+      "wall_seconds": 0.239032
+    },
+    {
+      "name": "preservation_verified_terminal_worktree_removal",
+      "wall_seconds": 0.735778
+    },
+    {
+      "name": "final_owner_review_and_ledger_check",
+      "wall_seconds": 0.7186788
+    },
+    {
+      "name": "primary_control_archive_preservation",
+      "wall_seconds": 0.2356516
+    },
+    {
+      "name": "card_append_boundary_read",
+      "wall_seconds": 0.1453098
+    },
+    {
+      "name": "E0_intake_brief_card_direction_audit_write",
+      "wall_seconds": 0.029,
+      "measurement": "enclosing tool call wall"
+    },
+    {
+      "name": "durable_record_inventory_and_attribution_check",
+      "wall_seconds": 0.3854514
+    }
+  ],
+  "postlaunch_external_known_charge_seconds": 22.713979400000003,
+  "shared_known_charge_before_final_publication_seconds": 241.0318376439432,
+  "complete_pair_known_charge_before_final_publication_seconds": 692.2139794,
+  "final_record_check_commit_push_return_conservative_allowance_seconds": 12,
+  "final_allowance_note": "The remaining necessary accounting write, focused document check and final commit/push are enclosed by this 12-second charge. Their actual enclosing wall is returned to Root; if greater, add the excess. This allowance is not a measurement of Monitor work and does not change any selected cap.",
+  "shared_known_charge_including_final_allowance_seconds": 253.0318376439432,
+  "charged_arm_known_including_final_allowance_seconds": {
+    "REPLACE": 350.71930290298974,
+    "HALF_RETAIN": 353.49467649701023
+  },
+  "complete_pair_known_charge_including_final_allowance_seconds": 704.2139794,
+  "remaining_shared_margin_before_unmeasured_monitor_seconds": 46.96816235605681,
+  "monitor_observation_command_wall_seconds": null,
+  "monitor_measurement": "UNMEASURED: aggregate SSH/status/log command wall was requested at adoption and receipt reconciliation but is absent from the returned receipt. Root directed preservation of the gap. Supervisor Duration455 is experiment wall already counted, not observation work.",
+  "retained_monitor_receipt": "evidence/b08_seed137_20260910/monitor_terminal.txt",
+  "supervisor_duration_seconds": 455,
+  "observation_timestamp_note": "Raw Monitor local_observation_time=2026-09-10T21:26:14-07:00 has a time-zone/date label mismatch against contemporaneous remote exit/dispatch. Authoritative remote exit is2026-09-11T05:25:51+08:00=2026-09-10T21:25:51Z. No observation duration is inferred from these timestamps.",
+  "complete_category_cost_conformance": "UNVERIFIED_MISSING_OBSERVATION_WALL",
+  "measured_exclusive_limits_passed": true,
+  "measured_complete_cost_breach": null,
+  "resource_unmeasured_quantities": [
+    "exact consequence H",
+    "aggregate CPU work",
+    "scratch peak",
+    "Monitor command wall"
+  ],
+  "peak_self_rss_bytes": 621748224,
+  "peak_child_rss_bytes": 621748224,
+  "rss_note": "Separate recorded peaks; do not sum.",
+  "scientific_primary_status": "VALID_B_EXPLORE; resource/cost gap does not damage the independently checked primary under section11.8.7",
+  "no_double_count": [
+    "prior component details are contained by215s",
+    "contained pytest/SSH times are not added to enclosing charged commands",
+    "6s launch-record publication reserve replaced by actual4.9603287s",
+    "455s supervisor duration is not added to454.50s runner wall",
+    "post-summary process0.467979s is charged to shared once"
+  ],
+  "remaining_scientific_invocations_selected": 0
+}

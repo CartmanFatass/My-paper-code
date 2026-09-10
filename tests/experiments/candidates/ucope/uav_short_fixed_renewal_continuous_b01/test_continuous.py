@@ -309,27 +309,47 @@ def test_cli_and_real_seed_domains_without_scientific_rng(tmp_path, monkeypatch)
     assert len(seen) == 2
 
 
-def test_learned_cli_selects_only_8701_and_fixture9002(tmp_path, monkeypatch):
+def test_learned_cli_seed_and_card_without_scientific_draws(tmp_path, monkeypatch):
     spec = importlib.util.spec_from_file_location(
         "continuous_learned_runner", "scripts/run_ucope_uav_short_fixed_renewal_continuous_b01.py")
     runner = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(runner)
+    monkeypatch.setattr(torch, "set_num_threads", lambda n: None)
     monkeypatch.setattr(torch, "set_num_interop_threads", lambda n: None)
     seen = []
-    monkeypatch.setattr(runner, "run_pair",
-                        lambda c, *args: seen.append(c) or
-                        dict(mode="stub", status="COMPLETE", primary={}, counts={}))
-    for seed, fixture in ((8701, False), (9002, True)):
+
+    def no_templates(seed):
+        seen.append(seed)
+        raise RuntimeError("mock boundary before model/RNG")
+
+    monkeypatch.setattr(policy, "templates", no_templates)
+    for seed, fixture in ((8701, False), (8702, False), (8703, False), (9002, True)):
+        out = tmp_path / str(seed)
         argv = ["runner", "--pair", study.LEARNED_SELECTOR, "--seed", str(seed),
-                "--out", str(tmp_path)]
+                "--out", str(out)]
         if fixture:
             argv.append("--engineering-fixture")
         monkeypatch.setattr(sys, "argv", argv)
-        assert runner.main() == 0
-        assert seen[-1].selector == study.LEARNED_SELECTOR
-        assert seen[-1].fixture == fixture and seen[-1].seed == seed
-        assert seen[-1].pair_cap == 5100
-    for seed, fixture in ((8701, True), (9002, False), (8601, False)):
+        assert runner.main() == 1
+        result = json.loads((out / "summary.json").read_text())
+        assert seen[-1] == result["seed"] == result["configuration"]["seed"] == seed
+        assert result["pair"] == study.LEARNED_SELECTOR
+        assert result["configuration"]["fixture"] == fixture
+        assert result["configuration"]["pair_cap"] == 5100
+        assert result["card"] == (study.LEARNED_CARD_8703 if seed == 8703 else
+                                  study.LEARNED_CARD_8702 if seed == 8702 else study.LEARNED_CARD)
+        assert result["card_section"] == (6 if fixture else 5)
+        assert result["counts"]["scientific_uav_calls"] == 0
+        b = seed * 100000
+        assert result["seeds"] == dict(
+            initialization=b+11, duration_head=b+12, train_reset_start=b+10000,
+            eval_reset_start=b+20000, T_train_velocity=b+41, T_train_duration=b+42,
+            F_train_velocity=b+31, F_train_duration=b+32, G_train_velocity=b+21,
+            G_train_duration=b+22, T_eval_velocity_start=b+70000,
+            T_eval_duration_start=b+80000, F_eval_velocity_start=b+30000,
+            F_eval_duration_start=b+40000, G_eval_velocity_start=b+50000,
+            G_eval_duration_start=b+60000, eval_checkpoint_stride=1000)
+    for seed, fixture in ((8701, True), (8702, True), (8703, True), (8704, False), (9002, False), (8601, False)):
         argv = ["runner", "--pair", study.LEARNED_SELECTOR, "--seed", str(seed),
                 "--out", str(tmp_path)]
         if fixture:
@@ -337,7 +357,9 @@ def test_learned_cli_selects_only_8701_and_fixture9002(tmp_path, monkeypatch):
         monkeypatch.setattr(sys, "argv", argv)
         with pytest.raises(SystemExit):
             runner.main()
-    assert [c.seed for c in seen] == [8701, 9002]
+    assert seen == [8701, 8702, 8703, 9002]
+    assert study.Config.learned().seed == 8701
+    assert study.Config.learned(fixture=True, seed=8702).seed == 9002
 
 
 @pytest.mark.parametrize("failure_arm", ["F", "H"])
