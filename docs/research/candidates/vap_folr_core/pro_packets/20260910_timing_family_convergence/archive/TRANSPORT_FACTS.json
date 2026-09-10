@@ -1,0 +1,43 @@
+{
+  "request_id": "folr-public-lifecycle-timing-family-convergence-20260910",
+  "workflow_node": "em_convergence",
+  "conversation_binding_key": "em:vap_folr_core:convergence",
+  "direction_id": "vap_folr_core",
+  "direction_ids": [
+    "vap_folr_core"
+  ],
+  "conversation_id": "6aa18137-9d88-83e8-a01f-46630813faf8",
+  "provider_url": "https://chatgpt.com/c/6aa18137-9d88-83e8-a01f-46630813faf8",
+  "tab_id": "11",
+  "visible_model": "6 Pro",
+  "underlying_model": "Latest",
+  "thinking_effort": "Pro, 5 of 5.",
+  "source_mode": "paste",
+  "prompt_sha256": "02d15a9504bd1b14fbd0bf2ec3ad7eda0ce02f0599e274491358a4f652a48b81",
+  "response_sha256": "6156259c6f9211206c31414c50a5c36f65b424ee02fad17d69956bfbc2499300",
+  "user_message_id": "today-14:08|TASK.md@6a400c4ca8c8076bf8701d8977f60fc56d9a1e2c|current-round-user-node",
+  "assistant_message_id": "today-14:08|Complete response at commit f64b461cd918ecefc7058a6e1e83aaa1b9f96ce6|current-round-assistant-node",
+  "send_evidence": {
+    "send_click_count": 1,
+    "url_observed": true,
+    "user_node_observed": true,
+    "user_node_exact": true,
+    "attachment_observed": false,
+    "binding_match": true
+  },
+  "natural_completion": "Thought 13m 54s; complete response and delivery comment links; no active generation",
+  "archive_paths": {
+    "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vap_folr_core\\20260910_timing_family_convergence\\PROMPT_BODY.md",
+    "response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vap_folr_core\\20260910_timing_family_convergence\\RESPONSE.md",
+    "packet_manifest": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vap_folr_core\\20260910_timing_family_convergence\\PACKET_MANIFEST.json",
+    "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vap_folr_core\\20260910_timing_family_convergence\\TRANSPORT_FACTS.json"
+  },
+  "return_receipt": {
+    "status": "SENT",
+    "attempt_count": 1,
+    "delivery_status": "accepted",
+    "message_key": "folr-public-lifecycle-timing-family-convergence-20260910|vap_folr_core|6aa18137-9d88-83e8-a01f-46630813faf8|6156259c6f9211206c31414c50a5c36f65b424ee02fad17d69956bfbc2499300",
+    "sent_at": "2026-09-10T21:25:14Z",
+    "destination_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267"
+  }
+}

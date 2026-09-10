@@ -24,7 +24,7 @@
     }
   ],
   "recommended": "a",
-  "auto_applied": null,
+  "auto_applied": "b",
   "dm_reason": "原样收益已跨实例翻转且最新反向幅度最大；与具体改动相比，再买一个原样符号的边际价值较低，但这仍是接近的选择。",
   "evidence": [
     "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_TIMING_FAMILY_QUESTION_INTAKE_20260910.md"
@@ -72,5 +72,17 @@
     "verdict_text": "Recommend a narrow pause of the unchanged blanket EVENT-clearing package on this public-lifecycle easy Traffic Junction / 5000-train / 128-final recipe. This is an unexecuted DM recommendation to the original Convergence node.",
     "source": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_TIMING_FAMILY_QUESTION_INTAKE_20260910.md"
   },
-  "starred": true
+  "starred": true,
+  "approval_correction": "保留原来推荐a作为历史建议；当前方向选择以完整Pro的b为准，不伪造所有者回复。",
+  "execution_history": [
+    {
+      "at": "2026-09-10T21:38:06+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/vap_folr_core/pro_packets/20260910_timing_family_convergence/archive/RESPONSE.md",
+      "record": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_TIMING_FAMILY_CONVERGENCE_INTAKE_20260910.md",
+      "state": "applied",
+      "summary": "已完整读取并核对 f64b461cd 的原Convergence响应。Pro选择选项b：一次固定半衰减与RETAIN的新问题，超越DM原来建议的窄暂停；这是家族内处理细化，未发生RECAST或Portfolio变更。实际新卡与两次调用预算在同一DM intake单独记录。",
+      "correction": "保留原来推荐a作为历史建议；当前方向选择以完整Pro的b为准，不伪造所有者回复。"
+    }
+  ]
 }
