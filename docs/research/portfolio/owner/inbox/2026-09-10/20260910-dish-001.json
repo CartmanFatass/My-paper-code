@@ -1,0 +1,80 @@
+{
+  "id": "20260910-dish-001",
+  "created": "2026-09-10T13:10:49-07:00",
+  "direction": "degraded_incumbent_shadow_handover",
+  "tier": "direction",
+  "kind": "close-call",
+  "title": "DISH：快照到达时半保留记忆，还是继续无后继",
+  "context": "普通快照桥接在零交接时也参与待机车辆控制。建议向 Convergence 提出一次新的半保留对完整桥接比较；现有桥接本已可学习保留，0.5 未经验证，因此属于接近选择。现在仅准备问题，零新科学暴露。",
+  "options": [
+    {
+      "key": "a",
+      "label": "选择一次半保留对完整桥接的新 B",
+      "consequence": "由 Convergence 形成方向决定后，DM 才冻结新卡、种子、源码、完整2100秒上限和命令；不恢复旧停止项。"
+    },
+    {
+      "key": "b",
+      "label": "保留窄停止及无后继",
+      "consequence": "不启动新实验，保留 DIRECT、未估计的来源状态价值和 ACTIVE/MEDIUM。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": null,
+  "dm_reason": "旧掩码样本证据与普通动作路径支持一个可测的有限训练问题，但不证明机制收益。",
+  "evidence": [
+    "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_ARRIVAL_BRIDGE_RETENTION_REENTRY_INTAKE_20260910.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-10.md#L5",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否让 DISH 开启一次普通快照到达时 HALF_RETAIN 对 REPLACE 的配对 B，还是继续无后继？",
+    "changes_if_approved": [
+      {
+        "target": "DISH arrival-bridge ordinary-service comparison",
+        "from": "P62/P67 无后继；没有桥接比较卡片或调用",
+        "to": "只开放所述一次新 B 家族；由 DM 冻结卡片、种子、源码、成本和命令后执行"
+      }
+    ],
+    "if_refused": "保留 DIRECT、B06/B07 两项窄停止和未估计的来源状态价值；不启动新实验，不改变 ACTIVE/MEDIUM。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_ARRIVAL_BRIDGE_RETENTION_REENTRY_INTAKE_20260910.md#2",
+        "quote": "The intervention can therefore affect ordinary actions **before** any CAS.",
+        "why": "桥接后的待机记忆已经参与物理控制，因此不必先搜索交接原点。"
+      },
+      {
+        "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_OWN_COMMAND_MEAN_B07_RESULT_EVIDENCE_20260908.md#2",
+        "quote": "snapshot counts12321/12309 respectively.",
+        "why": "旧训练确实有大量掩码快照样本，但这不是桥接有害或半保留有效的证据。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_ARRIVAL_BRIDGE_RETENTION_REENTRY_INTAKE_20260910.md#2",
+        "quote": "the full bridge and following GRU can already learn to preserve useful history",
+        "why": "现有比较器具有保留能力，固定半保留也可能拖慢有效信息适应。"
+      },
+      {
+        "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_POST_B07_DIRECTION_QUESTION_INTAKE_20260908.md#8",
+        "quote": "The strongest support for no successor remains B07’s−135.25 final service difference",
+        "why": "历史改动有实际损失；新提案不能把旧负结果包装为本机制的正证据。"
+      }
+    ],
+    "uncertainty": [
+      "0.5 是未经优化的首次探索选择，未测得收到快照时的伤害。",
+      "新收益即使出现，也只支持此宿主、一次训练配对的完整策略性能；不证明交接后的 SHADOW-COPY 价值。",
+      "未来原生辅助标签工作、轨迹和完整运行时间未知；旧耗时只是尺度参照。"
+    ],
+    "cost": {
+      "compute": "当前咨询零新实验；拟 2 学习器、131072 普通训练步、1024 优化器步、8 终点回合≤9600 ticks；每臂独占900秒、共享支持≤300秒、完整配对≤2100秒，均尚未分配。",
+      "owner_time": "可异步阅读、覆盖；无逐项批准等待。",
+      "reversibility": "costly",
+      "waits_on_this": "只有 DISH 的新桥接家族选择；其他方向独立推进。"
+    },
+    "verdict_text": "DM建议：请 Convergence 选择一次 HALF_RETAIN 对 REPLACE 的新 B 比较，只改变普通快照到达时的记忆混合；当前仅提交问题，不启动训练，也不恢复已停止的执行规则。",
+    "source": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_ARRIVAL_BRIDGE_RETENTION_REENTRY_INTAKE_20260910.md"
+  },
+  "starred": true
+}
