@@ -191,3 +191,11 @@ and the prospective DM triple prediction remains unscored. Support24.6055824/300
 directory tests25.9131638/300s; partial whole-run sum1602.15s. The old scratch rejection
 and cgroup limits persist separately. This ordinary technical decision has no new
 owner-console item, family/Portfolio disposition or automatic successor.
+
+After publishing EVENT acceptance at `149ae560c832c416b1b03945883687218b71ff79`, the
+DM submitted the one allocated RANDOM law at the unchanged full source, directly
+registered it and received Root's actual Monitor-adoption confirmation. Root integrated
+EVENT acceptance as main `091919892`. E0 preserves the exact command and same-handle
+handover. All three planned submissions are accepted; RANDOM's terminal collection and
+the full scientific intake/brief/closeout remain due. Monitor is sole observer; no new
+source, test, arm, replacement or premature triple conclusion follows this boundary.
