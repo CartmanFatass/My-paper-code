@@ -241,7 +241,43 @@ without a distinct count-state architecture because RAW contains the sufficient
 count. The direct-service alternative remains separated by the frozen
 `Gamma=I+D` decomposition and analytic `D≈-0.02` boundary.
 
-## Current scientific position — 2026-09-10 learned short renewal loses to both comparators on8701
+## Current scientific position — 2026-09-10 learned short renewal ends DOWN/WITHIN across two complete instances
+
+**Conclusion and bounded claim.** Fresh8703 completes the exact learned-short
+T/F/G recipe and is VALID COMPLETE/WITHIN: final2048 T−G
+**+0.00019308516986599905**, conditional evaluation SE0.007538303464769532,
+against MEI0.01.8701's final DOWN−0.0433782967180869 does not recur. Neither
+complete instance shows a final useful point gain; WITHIN is not equivalence.
+
+**Strongest support.** T trails frozen-head F on all three panels of both
+complete instances. Final T−F is−0.03097854039363236/−0.01107321367085382
+for8701/8703; both learned heads moved. Own expiry/private history leads to
+held velocity/duration, primitive-row credit and native joint reward while
+partners co-adapt. This is bounded adverse secondary package evidence, not
+a causal identification of duration learning or stable harm.
+
+**Strongest contradiction and surviving alternative.**8703 finishes near G
+and above hover: T−H+0.062103492173288755, with11 adverse worlds. F−G flips
+from8701−0.012399756324454534 to8703+0.01126629884071982; all8703 final
+learned means exceed hover. Training/evaluation variation, optimization and
+co-adaptation remain unresolved. Retain8703's earlier T/G1024 DOWN and512
+hover loss. Two-run mean T−G−0.02159260577411045 is descriptive, not a new
+decision rule.8702 stays incomplete; A01's repeated prefix neither repairs
+its unexplained crash nor adds an independent performance sample.
+
+**Next discriminator and ceiling.** End8703's allocated comparison and scoped
+closeout with no automatic successor. A later real comparison of a distinct
+learning/credit question is unallocated advice. No family/lifecycle/priority,
+recast or C disposition follows; recasts1, tuned headroom absent. No stable,
+causal, transfer, safety, deployment or formal UAV-validation advancement claim.
+8703 completes1736704 native steps/12288 Adam/640 evaluations in2108.73s;
+technical conformance is separate from its WITHIN scientific reading.
+
+See [all outcomes/E0](UCOPE_UAV_SHORT_LEARNED_RENEWAL_CONTINUOUS_B01_8703_RESULT_EVIDENCE_20260910.md),
+[intake§§5–8](UCOPE_UAV_SHORT_LEARNED_RENEWAL_CONTINUOUS_B01_8703_INTAKE_20260910.md#5-terminal-technical-acceptance-and-scientific-intake),
+and [full vectors and two-run descriptive summary](UCOPE_UAV_SHORT_LEARNED_RENEWAL_CONTINUOUS_B01_8703_RESULT_SUMMARY_20260910.json).
+
+## Previous scientific position — 2026-09-10 learned short renewal loses to both comparators on8701
 
 **Conclusion and bounded claim.** One fresh matched T/F/G training instance
 completed2048 episodes per fit. Learned physical{1,2} renewal is VALID
