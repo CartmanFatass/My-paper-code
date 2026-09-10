@@ -19,7 +19,7 @@
     }
   ],
   "recommended": "a",
-  "auto_applied": null,
+  "auto_applied": "a",
   "dm_reason": "旧掩码样本证据与普通动作路径支持一个可测的有限训练问题，但不证明机制收益。",
   "evidence": [
     "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_ARRIVAL_BRIDGE_RETENTION_REENTRY_INTAKE_20260910.md"
@@ -76,5 +76,15 @@
     "verdict_text": "DM建议：请 Convergence 选择一次 HALF_RETAIN 对 REPLACE 的新 B 比较，只改变普通快照到达时的记忆混合；当前仅提交问题，不启动训练，也不恢复已停止的执行规则。",
     "source": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_ARRIVAL_BRIDGE_RETENTION_REENTRY_INTAKE_20260910.md"
   },
-  "starred": true
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-10T21:03:29+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260910_arrival_bridge_retention/archive/RESPONSE.md",
+      "record": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_ARRIVAL_BRIDGE_RETENTION_REENTRY_INTAKE_20260910.md",
+      "state": "applied",
+      "summary": "Conforming full response9e99e48d selected one narrow arrival-bridge B pair; DM applied direction choice and froze B08. No owner reply, run or Portfolio disposition inferred."
+    }
+  ]
 }
