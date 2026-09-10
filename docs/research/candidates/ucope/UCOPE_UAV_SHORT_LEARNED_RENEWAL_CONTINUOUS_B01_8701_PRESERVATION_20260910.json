@@ -5,9 +5,9 @@
   "handle": "ucope-uav-short-learned-renewal-continuous-b01-8701-20260910",
   "node": "hmasd-wsl-node",
   "prepared_at_utc": "2026-09-10T18:18:19.209721+00:00",
-  "state": "PRESERVED; ROOT_INTEGRATION_AND_RETENTION_ACCEPTANCE_PENDING",
+  "state": "SCOPED_REMOTE_CLOSEOUT_COMPLETE",
   "cleanup_owner": "original DM /root/dm_ucope_p47_resume",
-  "cleanup_event": "After Root accepts named result commit and this preservation, verify terminal identity again, preserve source recovery ref, then remove only exact listed completed execution paths.",
+  "cleanup_event": "Completed after Root accepted integration and preservation; exact final checks are in closeout_result.",
   "local_scientific_root": "C:\\Projects\\HMASD-worktrees\\dm-ucope-native-return-prep-20260906\\temp\\directions\\ucope\\exp\\ucope-uav-short-learned-renewal-continuous-b01-8701-20260910",
   "archive": "C:\\Projects\\HMASD-worktrees\\dm-ucope-native-return-prep-20260906\\temp\\directions\\ucope\\closeout\\ucope-uav-short-learned-renewal-continuous-b01-8701-20260910\\ucope-8701-recovery.zip",
   "archive_bytes": 11813891,
@@ -145,7 +145,7 @@
   "all_archive_entries_read_back_and_hashed": true,
   "raw_native_supervisor_files": 13,
   "declared_source_paths": 11,
-  "source_recovery": "Source3182c4c84 is an ancestor of the retained shared codex/ucope branch; the verified incremental source.pack and its explicit base revisions are archived. Remote recovery ref will be made before source worktree retirement.",
+  "source_recovery": "Remote refs/hmasd-recovery/ucope-8701-20260910 resolves to source3182c4c844803ab362034c2b3d5d22f7f62bca3a. Shared local/published codex/ucope retains it, with source.pack and base revisions inside the verified recovery archive.",
   "remote_inventory": {
     "source_checkout": {
       "path": "/home/wu/hmasd-worktrees/ucope-uav-short-learned-renewal-continuous-b01-8701-20260910",
@@ -184,5 +184,73 @@
   ],
   "not_in_scope": "any other old run, test scratch, worktree, branch, supervisor or staging file",
   "preservation_wall_s": 1.3337338999990607,
-  "new_scientific_invocations": 0
+  "new_scientific_invocations": 0,
+  "root_accepted_result_commit": "f21171215b37eebc6396e62d15c22ef1ad0e3055",
+  "root_integrated_main_commit": "4e00f5cf898242b11c942d1eb4e06a86b5259d6f",
+  "root_acceptance_received_before_utc": "2026-09-10T18:24:38.391410+00:00",
+  "remote_inventory_is_precleanup_snapshot": true,
+  "closeout_attempts": [
+    {
+      "root_acceptance": "Root accepted/integrated/pushed f21171215 as main4e00f5cf8 and accepted preservation for only the recorded remote cwd/wrapper/pack/supervisor. Shared authoring/local evidence retained; no extra fit/successor.",
+      "acceptance_recorded_at_utc": "2026-09-10T18:24:38.391410+00:00",
+      "archive_recheck_sha256": "4c31e9858d034cd207a856c3beb5836f34ed808d0d3ce953ebca7f5987edc9cf",
+      "script_sha256": "0ae59e6bd028d806bcb579ce08dbe1ca418fe33184de7274efdef6e70498388e",
+      "command": [
+        "ssh",
+        "hmasd-wsl-node",
+        "/bin/bash --noprofile --norc -s"
+      ],
+      "exit_code": 2,
+      "stdout": "",
+      "stderr": "/bin/bash: line 2: set: pipefail\n: invalid option name\n",
+      "wall_s": 0.3251933999999892,
+      "finished_at_utc": "2026-09-10T18:24:38.719255+00:00"
+    },
+    {
+      "prior_attempt": "C:\\Projects\\HMASD-worktrees\\dm-ucope-native-return-prep-20260906\\temp\\directions\\ucope\\closeout\\ucope-uav-short-learned-renewal-continuous-b01-8701-20260910\\CLOSEOUT_ATTEMPT.json",
+      "technical_correction": "Windows text-mode stdin translated LF to CRLF. Bash stopped at line2 invalid pipefail option before any path operation. All four exact targets remain present. Submit identical prepared Bash bytes with binary stdin; no interpreter or policy substitution.",
+      "reconciled_all_four_targets_present": {
+        "/home/wu/hmasd-worktrees/ucope-uav-short-learned-renewal-continuous-b01-8701-20260910": true,
+        "/home/wu/.agent-tasks/ucope-uav-short-learned-renewal-continuous-b01-8701-20260910": true,
+        "/home/wu/hmasd-inputs/ucope-uav-short-learned-renewal-continuous-b01-8701-20260910.sh": true,
+        "/home/wu/hmasd-inputs/ucope-learned-8701-source.pack": true
+      },
+      "script_sha256": "0ae59e6bd028d806bcb579ce08dbe1ca418fe33184de7274efdef6e70498388e",
+      "command": [
+        "ssh",
+        "hmasd-wsl-node",
+        "/bin/bash --noprofile --norc -s"
+      ],
+      "started_at_utc": "2026-09-10T18:25:25.731587+00:00",
+      "exit_code": 0,
+      "stdout": "/home/wu/hmasd-worktrees/ucope-uav-short-learned-renewal-continuous-b01-8701-20260910/temp/directions/ucope/exp/ucope-uav-short-learned-renewal-continuous-b01-8701-20260910/episodes.jsonl: OK\n/home/wu/hmasd-worktrees/ucope-uav-short-learned-renewal-continuous-b01-8701-20260910/temp/directions/ucope/exp/ucope-uav-short-learned-renewal-continuous-b01-8701-20260910/final_F.pt: OK\n/home/wu/hmasd-worktrees/ucope-uav-short-learned-renewal-continuous-b01-8701-20260910/temp/directions/ucope/exp/ucope-uav-short-learned-renewal-continuous-b01-8701-20260910/final_G.pt: OK\n/home/wu/hmasd-worktrees/ucope-uav-short-learned-renewal-continuous-b01-8701-20260910/temp/directions/ucope/exp/ucope-uav-short-learned-renewal-continuous-b01-8701-20260910/final_T.pt: OK\n/home/wu/hmasd-worktrees/ucope-uav-short-learned-renewal-continuous-b01-8701-20260910/temp/directions/ucope/exp/ucope-uav-short-learned-renewal-continuous-b01-8701-20260910/rollouts.jsonl: OK\n/home/wu/hmasd-worktrees/ucope-uav-short-learned-renewal-continuous-b01-8701-20260910/temp/directions/ucope/exp/ucope-uav-short-learned-renewal-continuous-b01-8701-20260910/summary.json: OK\n/home/wu/.agent-tasks/ucope-uav-short-learned-renewal-continuous-b01-8701-20260910/exit_code: OK\n/home/wu/.agent-tasks/ucope-uav-short-learned-renewal-continuous-b01-8701-20260910/pid: OK\n/home/wu/.agent-tasks/ucope-uav-short-learned-renewal-continuous-b01-8701-20260910/resource_admission.json: OK\n/home/wu/.agent-tasks/ucope-uav-short-learned-renewal-continuous-b01-8701-20260910/runner.sh: OK\n/home/wu/.agent-tasks/ucope-uav-short-learned-renewal-continuous-b01-8701-20260910/start_time: OK\n/home/wu/.agent-tasks/ucope-uav-short-learned-renewal-continuous-b01-8701-20260910/status: OK\n/home/wu/.agent-tasks/ucope-uav-short-learned-renewal-continuous-b01-8701-20260910/task.log: OK\n/home/wu/hmasd-inputs/ucope-uav-short-learned-renewal-continuous-b01-8701-20260910.sh: OK\n/home/wu/hmasd-inputs/ucope-learned-8701-source.pack: OK\n{\"state\": \"SCOPED_REMOTE_CLOSEOUT_COMPLETE\", \"checked_at_utc\": \"2026-09-10T18:25:24.387644+00:00\", \"removed_paths\": [\"/home/wu/hmasd-worktrees/ucope-uav-short-learned-renewal-continuous-b01-8701-20260910\", \"/home/wu/.agent-tasks/ucope-uav-short-learned-renewal-continuous-b01-8701-20260910\", \"/home/wu/hmasd-inputs/ucope-uav-short-learned-renewal-continuous-b01-8701-20260910.sh\", \"/home/wu/hmasd-inputs/ucope-learned-8701-source.pack\"], \"all_absent_on_disk\": true, \"source_worktree_absent_from_registration\": true, \"recovery_ref\": \"refs/hmasd-recovery/ucope-8701-20260910\", \"recovery_sha\": \"3182c4c844803ab362034c2b3d5d22f7f62bca3a\", \"scientific_invocations\": 0}\n",
+      "stderr": "",
+      "wall_s": 0.5916199000057532,
+      "finished_at_utc": "2026-09-10T18:25:26.323045+00:00"
+    }
+  ],
+  "closeout_result": {
+    "state": "SCOPED_REMOTE_CLOSEOUT_COMPLETE",
+    "checked_at_utc": "2026-09-10T18:25:24.387644+00:00",
+    "removed_paths": [
+      "/home/wu/hmasd-worktrees/ucope-uav-short-learned-renewal-continuous-b01-8701-20260910",
+      "/home/wu/.agent-tasks/ucope-uav-short-learned-renewal-continuous-b01-8701-20260910",
+      "/home/wu/hmasd-inputs/ucope-uav-short-learned-renewal-continuous-b01-8701-20260910.sh",
+      "/home/wu/hmasd-inputs/ucope-learned-8701-source.pack"
+    ],
+    "all_absent_on_disk": true,
+    "source_worktree_absent_from_registration": true,
+    "recovery_ref": "refs/hmasd-recovery/ucope-8701-20260910",
+    "recovery_sha": "3182c4c844803ab362034c2b3d5d22f7f62bca3a",
+    "scientific_invocations": 0
+  },
+  "local_archive_rechecked_after_closeout": true,
+  "all_13_local_native_supervisor_files_still_present": true,
+  "closeout_command_outer_walls_s": [
+    0.5791032,
+    1.2196918
+  ],
+  "cleanup_preparation_command_wall_s": 0.2200321,
+  "final_owner_review_check": "No unapplied owner instructions in direction checkout at final closeout; main checked again at publication.",
+  "closeout_format_diagnosis_status": "Inference from Windows text-mode submission, Bash line2 error and successful unchanged Bash bytes over binary stdin; first on-wire stdin bytes were not captured. All four targets were directly reconciled present before the corrected command."
 }
