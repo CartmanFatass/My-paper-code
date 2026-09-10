@@ -1,6 +1,6 @@
 # ACVC fresh DENSE reuse B01 — engineering and execution
 
-Date: 2026-09-10. **One scientific submission accepted; monitor adoption and collection pending.**
+Date: 2026-09-10. **One scientific submission accepted; monitor adopted; collection pending.**
 
 ## Authority and owned work
 
@@ -187,7 +187,8 @@ The submit-client interval is retained for conservative wider task charging at i
 
 DM directly sent MONITOR_ADD to the live primary-configured monitor task
 `01a087e5-2044-7301-abb6-7a1709a98197`; the app accepted the message.
-**Monitor adoption is pending Root-forwarded direct confirmation.** Root is
+Root subsequently forwarded **actual monitor adoption confirmed** for the exact
+handle/source/cwd/root on wsl_4070, with the independent monitor goal active. Root is
 `01a07249-b095-7821-8ce2-e9c32ba85267`, original native execution/science owner
 `/root/dm_acvc_p68_reentry` (source task01a08447-a33c-7881-8c2a-a6e7e918b2a7).
 DM has no parallel polling loop and retains collection, engineering acceptance and
