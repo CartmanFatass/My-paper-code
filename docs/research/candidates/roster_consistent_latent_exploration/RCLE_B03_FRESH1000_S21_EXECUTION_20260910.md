@@ -122,3 +122,26 @@ existing Monitor; the earlier pending label records the dispatch boundary only. 
 continues no polling and resumes collection solely on Root-forwarded terminal facts.
 This handover does not intake the memory receipts or scientific outputs; those remain
 actual-artifact checks at collection, and no completed result is asserted here.
+
+## Terminal collection and accepted result
+
+Root forwarded the adopted Monitor's terminal receipt: finished/exit0, remote exit
+2026-09-10T17:10:22Z, observed17:10:40.9512461Z, PID3087467/tmuxfalse. This same DM
+collected the exact root and supervisor. All23 transferred file hashes and source bytes
+match; both fresh initial vectors match and differ from20;1,000 nonzero updates per arm,
+all four panels and2,000 curves are complete. E0 and separate scientific intake accept
+the trustworthy new B result, with primary Delta_U+.3791442871 and W100 G_U+.38115234375.
+Historical failure, seed200-endpoint meanings and native reference/recovery limits remain.
+Complete wall389.18/355.01/2.70s and sequence747.01s fit their bounds. No additional
+scientific invocation, test or successor follows.
+
+Preservation before removal is verified in
+`temp/directions/roster_consistent_latent_exploration/closeout/b03-fresh1000-s21-20260910/`.
+The identical local/remote archive is52,530,884 bytes with2,357 regular members,
+SHA2566146ace6e62ed2cf752fdab31b5bebbcecf158a884eb0d6b1bf80547a5c61675.
+It retains the full sparse execution checkout, supervisor and source-only bundle stage;
+all23 result/supervisor files and source bundle match retained originals. Recovery ref
+`refs/recovery/rcle-b03-fresh1000-s21-20260910` retains806d37805 on the remote repository.
+This is scoped closeout within Root's complete assignment; removal facts are appended
+after exact-path absence and worktree-registration checks. Shared authoring and old
+evidence remain outside this cleanup.
