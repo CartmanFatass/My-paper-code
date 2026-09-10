@@ -216,3 +216,111 @@ has the live 8702 dependency. DM owns preservation and scoped cleanup after
 terminal collection and Root acceptance. No native outcome, actual completed
 exposure or complete time is claimed yet. No third instance, retry, resume or
 replacement is allocated; the frozen B rule remains the later reading rule.
+
+## 5. Terminal partial-result intake
+
+Root returned the exact Monitor terminal receipt for the accepted handle.
+The primary comparison is **INCOMPLETE / unobserved**. I checked the result
+document against the immutable b6 card §5, applied its final-T/G completeness
+and exception-stop wording verbatim in [E0](UCOPE_UAV_SHORT_LEARNED_RENEWAL_CONTINUOUS_B01_8702_RESULT_EVIDENCE_20260910.md), reconciled all10
+artifact hashes and12 source/test hashes, and recomputed the20 relevant
+row/count/panel facts in [partial summary](UCOPE_UAV_SHORT_LEARNED_RENEWAL_CONTINUOUS_B01_8702_RESULT_SUMMARY_20260910.json).
+No scientific result was substituted from an earlier checkpoint or old seed.
+
+The direct limit is `ValueError: input operand has more dimensions than allowed
+by the axis remapping`. Counts narrow it to an environment/adapter step attempt
+during partial T episode1738 after164 returned steps; exact internal location
+is **provisional/unresolved** because the runner retained only type/message,
+not a traceback or failing frame. No missing 8702 F/G/H outcome is imputed.
+The completed1738 train episodes/128 evaluations/3476 Adam calls are real
+partial exposure; the two T means and reported head movement remain reportable
+at that ceiling. All three final prediction events and Brier scores are null,
+**not scorable**; owner prediction not taken(unattended), current reviews `[]`.
+
+**Strongest support:** real T training and two intact T-only native evaluation
+panels establish that the path learned and produced finite recorded returns.
+**Strongest contradiction/limit:** no comparison or final endpoint exists;
+8701 remains the only exact learned-short complete comparison and is DOWN at
+all three checkpoints against both F and G. Its small final hover benefit and
+earlier fixed-law gains remain alongside that adverse evidence. This failure
+adds no scientific recurrence, stable harm, mechanism cause or investment
+polarity. Recasts1, headroom absence, family, lifecycle and priority stay fixed.
+
+The next scientific discriminator remains a **complete independently trained
+same-recipe final T/G comparison**, with T/F and hover retained. It has not been
+observed here and is not newly allocated by classifying this error. The current
+repair concerns exception evidence only; it is not an exact-cause prerequisite
+or a claim to have repaired the unknown environment operation.
+
+### Decisions this intake produces
+
+1. **Object, technical classification.** Options (a) retain incomplete primary
+   and independently trustworthy partial facts; (b) label it DOWN/recurrence;
+   (c) discard the whole partial record. Recommend/select(a). The card's
+   completeness condition is false, while recorded rows and source/counters
+   support the narrower facts. **Owner-delegated decision (unattended,
+   2026-09-03 instruction): (a).** No historical quarantine is changed.
+2. **Object, allocation boundary.** Options (a) end this used invocation and
+   preserve it; (b) restart/resume/replace it; (c) close/recast the family.
+   Recommend/select(a). One invocation was accepted and the card allocates no
+   retry; neither missing primary nor603.07s spent supplies another allowance
+   or scientific polarity. **Owner-delegated decision (unattended,
+   2026-09-03 instruction): (a).** No new scientific allocation is selected at
+   this boundary and no direction-tier disposition is taken.
+3. **Object, technical repair.** Options (a) emit standard traceback text in
+   existing caught-exception stderr for future invocations; (b) guess an array
+   or environment patch from the message; (c) spend another native trajectory
+   to obtain a stack. Recommend/select(a): the missing failure location is a
+   concrete reporting gap, addressable without scientific work. This improves
+   future diagnostics; it does not locate or fix the historical shape error.
+   **Owner-delegated decision (unattended, 2026-09-03 instruction): (a).**
+
+These technical choices have owner flag **none**. They introduce no new card,
+family or Portfolio proposal, and no P3/P4 item is created. The existing P2
+close-call/new-card items retain their executed8702 selection, not an invented
+owner reply. Chinese brief: [2026-09-10_learned-renewal-continuous-8702-incomplete.md](../../portfolio/owner/briefs/ucope/2026-09-10_learned-renewal-continuous-8702-incomplete.md).
+
+## 6. Selected bounded reporting repair and preservation
+
+Five implementation facts, applying Scope Spec §7.1:
+
+- Deliver standard caught-exception stack text into the already captured task
+  stderr; no environment, learner or numerical remedy is claimed.
+- Own only `experiments/candidates/ucope/uav_short_fixed_renewal_continuous_b01/study.py`
+  in the existing shared `codex/ucope` checkout. Historical remote/source b6
+  stays unchanged, and current source changes are prospective only.
+- Preserve type/message limits, first exception stop, later-arm stopping,
+  partial counts/publication, reward, RNG, optimizer and every card reading.
+- Acceptance is inspection of the import and both existing catch sites plus
+  AST syntax parsing with no imports or model/native calls. This mechanical
+  stderr-only edit is not a high-risk semantic change under Scope Spec §7.3;
+  no duplicate learner test or review round is needed. Card §5/§6 and Evidence
+  Spec §4/§11.8.6–7 remain the reading and dependency boundary.
+- At most5 added production lines and a short syntax/readback check within
+  the original300s support reserve. **Scope Spec §4: none newly needed**;
+  ordinary traceback output adds no logging framework, replay, guard or
+  telemetry system. Zero result-bearing/learner/evaluation calls. Stop for an
+  actual conflicting writer or unintended semantic diff; retain the failure.
+
+Repair execution and verified preservation are appended after these selected
+facts. Root receives the result/repair for integration and preservation
+acceptance; DM retains exact remote closeout ownership. No terminal receipt
+is treated as permission for another scientific invocation.
+
+### Reporting repair accepted, zero scientific exposure
+
+Implemented exactly **3 added production lines**: standard-library `traceback`
+import and `traceback.print_exc()` at the existing per-fit and outer exception
+catch sites. Inspection confirms that type/message limits, `break` after a
+failed fit, partial publication and all scientific calculations are unchanged.
+AST parsing completed in0.0035219999990658835s; the full local syntax/diff
+readback tool was0.3876683s. It imported no project modules and created no
+model, RNG, native process or evaluation. No test was added for this simple
+stderr-only change; existing semantic checks remain applicable. The changed
+source was not launched, and historical b6 artifacts remain byte-identical.
+
+This is technical acceptance of the selected reporting repair. It supplies
+future stack traces through the existing supervisor log if another invocation
+is independently selected; it does not recover the missing8702 traceback or
+fix the unknown dimension failure. No scope budget or scientific meaning was
+changed, and no new native allocation follows.
