@@ -79,3 +79,37 @@ The Reviewer confirmed this closes the planned consumer question without another
 command. Focused tests, executed collection and runtime-budget conformance remain
 unverified until their respective receipts arrive. DM accepts the source review
 as technical evidence and continues the already selected focused checks.
+
+## Focused checks accepted; exact command preparation
+
+Published source8d518ff300c13d809f8d88d0a259a3d8f6ff59d6 is present in the clean
+remote detached checkout. All ten selected changed-risk cases passed: eight on the
+first command, then the two initially prevented by an absent pytest scratch parent.
+The latter failure was fixture setup, before their bodies; creating that parent and
+running only those two produced two passes. No source repair, repeated passing test,
+real learner pilot or scientific retry occurred. Both exact scratch directories were
+removed and absence checked. Test process clocks2.323280826+1.917242191s make known
+cumulative test-directory wall36.731686817s, inside300s. SSH/cleanup-inclusive clocks
+are charged as support instead of charging these nested test clocks a second time.
+The runner stand-in check covers all5000 updates/128 final calls and publication/seed
+routing without invoking the environment/learner. The real learner fixture supplies
+two synthetic optimizer updates, independent target reconstruction and checkpoint load.
+
+DM technical acceptance: source review plus these actual checks support the changed
+contract on the declared CPU route. They do not predict native benefit or certify a
+runtime cap. The first staging command's final `agent-task --help` returned1 after
+printing syntax; fetch and exact worktree creation had already succeeded and were
+not repeated. zsh prompt diagnostics did not block those operations. No native
+scientific root/learner was created by preparation. Both prospective handles were
+not_found and exact output/memory paths absent before command binding.
+
+The [result summary](FOLR_LEARNED_RETENTION_B01_RESULT_SUMMARY_20260911.json) now
+contains both literal supervisor command payloads and all check receipts. The two
+arms are preselected, submitted consecutively as independent detached commands with
+one adjacent fresh admission each. Each native chain has its own1800s outer clock;
+no shared RNG/state or outcome-dependent choice occurs. A known rejection before
+acceptance is recorded; uncertain acceptance is reconciled by the same handle.
+Any accepted arm remains unique and is handed directly to the sole configured Monitor.
+Full native/support conformance, adoption and scientific result remain pending.
+
+The next read-only SSH command-syntax check timed out connecting to192.168.1.12:22 before any remote command or scientific submission. Published source and ten passed checks remain valid; no handle or new scientific exposure exists. Preserve the exact commands and retry connection reconciliation under the same allocation, without local/device fallback or a second numerical attempt.
