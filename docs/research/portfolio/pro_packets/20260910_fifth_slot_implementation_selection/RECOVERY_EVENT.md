@@ -1,5 +1,22 @@
 # Event that can resume factual reconciliation of the queued question
 
+## Current event is satisfied: full fifth-slot delivery
+
+This question has delivered its complete response at
+`ade6a687d53b97b5f6cc2fe97da39daa2ad9bfa9`, with matching Issue17
+comment5629909662, and passed the
+[full conformance intake](../../decisions/2026-09-10-fifth-slot-implementation-selection.md#complete-delivery-and-conformance-intake--2026-09-11).
+The original one-Send 675-byte chat report is preserved as a contradictory
+historical observation; the exact 38,903-byte GitHub answer is the current science
+input. No further material event or retry is needed to obtain a Portfolio choice.
+
+Root can apply the [bounded FSD mapping](EXECUTION_MAPPING.md) and route
+[Transport's factual reconciliation](TRANSPORT_RECONCILIATION_NEXT_ACTION.txt)
+of this same delivery, without another Send. The older event criteria below are
+fulfilled historical recovery records, not current waiting or dispatch commands.
+
+## Preserved earlier event
+
 **Received and intaken:** Root's owner-directed resend of the older request
 completed naturally with a full capability-gap reply. The complete captured text
 and independent GitHub checks are recorded in the

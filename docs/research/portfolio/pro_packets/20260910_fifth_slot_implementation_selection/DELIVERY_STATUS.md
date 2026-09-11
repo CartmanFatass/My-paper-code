@@ -1,6 +1,31 @@
 # Fifth-slot implementation request delivery status
 
-## Current state after verified four-slot delivery
+## Current state: complete fifth-slot delivery verified — 2026-09-11
+
+**DELIVERED / CONFORMING: Portfolio selects A, one FSD implementation return
+and at most one 60-second synthetic fixture command.** Full response
+`ade6a687d53b97b5f6cc2fe97da39daa2ad9bfa9` is 38,903 bytes, SHA256
+`ddff4be7a79b775839ce867865a7c106811b79c2bb3f9977f505186ad5508069`, and
+matches the actual GitHub file plus Issue17 comment5629909662. The commit adds
+only this round's response, on parent 685c955a3. See the
+[complete intake](../../decisions/2026-09-10-fifth-slot-implementation-selection.md#complete-delivery-and-conformance-intake--2026-09-11)
+and [execution mapping](EXECUTION_MAPPING.md). Root integration and FSD dispatch
+are pending; real B and MGTAP work remain unallocated.
+
+The exact [675-byte chat blocker](archive/CHAT_BLOCKER_RESPONSE.md), its
+[Transport facts](archive/CHAT_BLOCKER_TRANSPORT_FACTS.json), prompt and manifest
+are preserved separately. One Send naturally completed 12m22s. The report says
+the required writes were absent, but direct GitHub readback found them. The
+server file/comment timestamps precede chat capture; no cause or additional
+provider action is inferred. The old fallback-disabled request remains unchanged.
+
+The question no longer needs a scientific retry. Dedicated Transport reconciles
+the archived short receipt/binding to this exact full delivery under the
+[current no-Send action](TRANSPORT_RECONCILIATION_NEXT_ACTION.txt). REQUEST,
+TASK, HANDOFF, original author/parent/operator and prompt digest remain fixed.
+Earlier queued and blocker statuses below are dated evidence, not current state.
+
+## Preserved state after verified four-slot delivery
 
 **QUEUED, no fifth-slot Portfolio choice or allocation.** The older four-slot
 request delivered the complete47134-byte response at
@@ -47,7 +72,7 @@ Binding was refused because the older four-slot request still has `state=BLOCKED
 on `portfolio:cross_direction`. Its tab is CLOSED and blocker receipt SENT;
 its `archive_status=ARCHIVED` field does not establish binding availability.
 
-For this **new** request: opened tabs0, pastes0, Sends0, retries0, registry
+For this **new** request: opened tabs0, pastes0, Sends 0, retries0, registry
 mutations0, provider acceptance0. Its TASK/REQUEST/HANDOFF remain unchanged.
 Handoff `READY_TO_DISPATCH` and the publication record's exact dispatch line are
 historical preparation facts; they are not a current repeat-dispatch instruction.
