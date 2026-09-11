@@ -3,7 +3,7 @@ Binding MARL structure: (b) temporal abstraction or termination; asynchronous in
 
 # FSD renewal batch B02 — fresh unchanged pair
 
-**B/EXPLORE. First allocation770803/780803 ended; fresh allocation770903/780903 is frozen in §6 below, with zero exposure at freeze.**
+**B/EXPLORE. First allocation770803/780803 ended; fresh allocation770903/780903 in §6 also ended unlaunched after a bounded source-fetch failure; both have zero exposure.**
 The allocated pair ended unlaunched with a preparation/support-cost limitation;
 see [the execution-limitation intake](FSD_UAV_RENEWAL_BATCH_B02_EXECUTION_LIMITATION_INTAKE_20260911.md).
 The accepted binding and prospective reading below remain unchanged. No retry
@@ -252,3 +252,7 @@ Recommended and selected(a), with that bounded return rule.
 Owner flag:none. Live owner reviews were empty at preparation. Exact node,
 source, commands, accepted handles, Monitor and collection status are in
 [FSD_UAV_RENEWAL_BATCH_B02_770903_EXECUTION_20260911.md](FSD_UAV_RENEWAL_BATCH_B02_770903_EXECUTION_20260911.md).
+
+**Instance770903 boundary:** one bounded source staging failed before admission/science.
+[The limitation intake](FSD_UAV_RENEWAL_BATCH_B02_770903_EXECUTION_LIMITATION_INTAKE_20260911.md)
+preserves exact receipts, unscored prediction and original reading rule. No retry followed.

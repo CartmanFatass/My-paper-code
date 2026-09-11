@@ -1,6 +1,6 @@
 # FSD B02 fresh instance770903 execution
 
-Prospective freeze, zero scientific submissions. The current allocation is
+Closed with a bounded source-fetch limitation and zero scientific submissions. The current allocation is
 [card§6](FSD_UAV_RENEWAL_BATCH_B02_SCIENCE_CARD_20260911.md#6-fresh-allocated-instance770903--prospective-freeze2026-09-11),
 Portfolio response6c32ade3216c374ecf2f5179b15d559729cd45c9 §§1–2,9.
 The ended770803 allocation and its old commands remain untouched.
@@ -12,8 +12,8 @@ clean reconciled base a235697babcfff9fdc19a1f475f9995fd770a33b.
 DM /root/dm_fsd_i1280_implementation owns preparation, technical acceptance,
 launch, collection, scientific intake and assigned cleanup. Root integrates.
 Only the existing B02 entry's identity changes. The accepted source-delivery
-helper and shared scientific source stay unchanged. Published launch SHA will
-be recorded after commit/push and before submission.
+helper and shared scientific source stay unchanged. Published source SHA is e4b40906d5e956b91f03c51c971c592abcfc08a4.
+It is not a scientific launch SHA because no scientific process was submitted.
 
 Use the live C:/Projects/HMASD/.codex/hmasd-compute.toml: hmasd-wsl-node,
 /home/wu/projects/HMASD, /home/wu/.venvs/hmasd/bin/python and
@@ -74,3 +74,12 @@ Preserve unique source and evidence before removal. This instance's detached
 checkout, input directory and two supervisor roots are the cleanup inventory;
 retain actual result artifacts and receipts before authorized removal and verify
 disk/worktree-registration absence. Keep the shared authoring checkout intact.
+
+## Final technical boundary
+
+The single45s-bounded staging command exited1 after3.969s complete helper wall;
+remote git fetch returned128 with GnuTLS decoding error/early EOF. No source
+checkout, admission or scientific handle was accepted. The exact four remote
+paths and execution worktree registration were absent at21:19:16.622859Z.
+No removal or Monitor handoff was necessary. Full evidence, costs, prediction
+and decisions: [limitation intake](FSD_UAV_RENEWAL_BATCH_B02_770903_EXECUTION_LIMITATION_INTAKE_20260911.md).
