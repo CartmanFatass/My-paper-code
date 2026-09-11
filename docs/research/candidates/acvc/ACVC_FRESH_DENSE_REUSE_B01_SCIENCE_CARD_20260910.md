@@ -462,3 +462,9 @@ unscored, and no8941 primary or polarity exists. The
 support breach and exact no-ready return. This allocation ends; no retry,
 replacement, budget transfer or new fit is authorized. All previous scientific
 results and their limits remain unchanged.
+
+The later, separately assigned [technical recovery](ACVC_FRESH_DENSE_REUSE_B01_8941_INTAKE_20260910.md#6-separately-assigned-remote-effect-recovery)
+verified the exact remote checkout absent/unregistered and stopped the directly
+identified abandoned reconciliation tree. The remaining recorded helper tree was
+also absent at the final read; its initially uncertain origin stays explicit.
+No named cleanup dependency, scientific output or new execution allowance remains.
