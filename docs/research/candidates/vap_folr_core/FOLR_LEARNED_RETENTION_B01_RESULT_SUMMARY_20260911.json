@@ -1,6 +1,6 @@
 {
   "object": "FOLR-LEARNED-RETENTION-B01",
-  "state": "technical_checks_passed_exact_commands_prepared_not_launched",
+  "state": "two_arms_accepted_and_monitor_adopted_collection_pending",
   "authority_sha": "6c32ade3216c374ecf2f5179b15d559729cd45c9",
   "source_sha": "8d518ff300c13d809f8d88d0a259a3d8f6ff59d6",
   "training_seed": 7809,
@@ -20,7 +20,50 @@
       "whole_time": "temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_retain_whole_time.txt",
       "command": "cd /home/wu/hmasd-worktrees/folr-learned-retention-b01-8d518ff30 && mkdir -p temp/directions/vap_folr_core/exp && /usr/bin/time -v -o temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_retain_whole_time.txt /usr/bin/timeout --signal=TERM --kill-after=5s 1800s bash -lc '/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_retain_memory.json && /home/wu/.venvs/hmasd/bin/python -B scripts/run_folr_public_lifecycle_b01.py --arm RETAIN --seed 7809 --evaluation-seed 107809 --launch-sha 8d518ff300c13d809f8d88d0a259a3d8f6ff59d6 --out temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_retain'",
       "supervisor_command": "/usr/local/bin/agent-task run folr-learned-retention-b01-retain-20260911 'cd /home/wu/hmasd-worktrees/folr-learned-retention-b01-8d518ff30 && mkdir -p temp/directions/vap_folr_core/exp && /usr/bin/time -v -o temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_retain_whole_time.txt /usr/bin/timeout --signal=TERM --kill-after=5s 1800s bash -lc '\"'\"'/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_retain_memory.json && /home/wu/.venvs/hmasd/bin/python -B scripts/run_folr_public_lifecycle_b01.py --arm RETAIN --seed 7809 --evaluation-seed 107809 --launch-sha 8d518ff300c13d809f8d88d0a259a3d8f6ff59d6 --out temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_retain'\"'\"''",
-      "status": "not_submitted"
+      "status": "accepted_running_at_initial_readback",
+      "launch_receipt": {
+        "timestamp": "2026-09-11T21:28:08.036212+00:00",
+        "arm": "RETAIN",
+        "handle": "folr-learned-retention-b01-retain-20260911",
+        "command_commit": "b28f7c1c2bebf7f9632959ce96e8478b36e0d354",
+        "returncode": 0,
+        "output": "Task 'folr-learned-retention-b01-retain-20260911' started in tmux session 'agent_folr-learned-retention-b01-retain-20260911'. Output: /home/wu/.agent-tasks/folr-learned-retention-b01-retain-20260911/task.log\n"
+      },
+      "initial_supervisor": {
+        "task": "folr-learned-retention-b01-retain-20260911",
+        "status": "running",
+        "exit_code": null,
+        "pid": 3351044,
+        "uptime_seconds": 13,
+        "tmux_active": true
+      },
+      "memory_admission": {
+        "assessed_at": "2026-09-11T21:28:07.913784Z",
+        "available_physical_bytes": 15323598848,
+        "captured_at": "2026-09-11T21:28:07.913462Z",
+        "cgroup_headroom_bytes": null,
+        "cgroup_memory_current_bytes": null,
+        "cgroup_memory_max_bytes": null,
+        "effective_available_bytes": 15323598848,
+        "effective_floor_pass": true,
+        "failure_reasons": [],
+        "measurement_source": "/proc/meminfo",
+        "minimum_available_bytes": 4294967296,
+        "passed": true,
+        "physical_floor_pass": true,
+        "schema_version": 1
+      },
+      "monitor_dispatch": {
+        "accepted": true,
+        "thread_id": "01a087e5-2044-7301-abb6-7a1709a98197",
+        "model_thinking_overrides": false
+      },
+      "monitor_adoption": {
+        "confirmed_by": "Root forwarded authoritative MONITOR_ADOPTED",
+        "status": "running",
+        "observation_command_seconds": 0.9,
+        "same_handle_source_cwd_output": true
+      }
     },
     {
       "arm": "LEARNED_EVENT",
@@ -31,7 +74,50 @@
       "whole_time": "temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_learned_event_whole_time.txt",
       "command": "cd /home/wu/hmasd-worktrees/folr-learned-retention-b01-8d518ff30 && mkdir -p temp/directions/vap_folr_core/exp && /usr/bin/time -v -o temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_learned_event_whole_time.txt /usr/bin/timeout --signal=TERM --kill-after=5s 1800s bash -lc '/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_learned_event_memory.json && /home/wu/.venvs/hmasd/bin/python -B scripts/run_folr_public_lifecycle_b01.py --arm LEARNED_EVENT --seed 7809 --evaluation-seed 107809 --launch-sha 8d518ff300c13d809f8d88d0a259a3d8f6ff59d6 --out temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_learned_event'",
       "supervisor_command": "/usr/local/bin/agent-task run folr-learned-retention-b01-learned-event-20260911 'cd /home/wu/hmasd-worktrees/folr-learned-retention-b01-8d518ff30 && mkdir -p temp/directions/vap_folr_core/exp && /usr/bin/time -v -o temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_learned_event_whole_time.txt /usr/bin/timeout --signal=TERM --kill-after=5s 1800s bash -lc '\"'\"'/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_learned_event_memory.json && /home/wu/.venvs/hmasd/bin/python -B scripts/run_folr_public_lifecycle_b01.py --arm LEARNED_EVENT --seed 7809 --evaluation-seed 107809 --launch-sha 8d518ff300c13d809f8d88d0a259a3d8f6ff59d6 --out temp/directions/vap_folr_core/exp/learned_retention_b01_seed7809_learned_event'\"'\"''",
-      "status": "not_submitted"
+      "status": "accepted_running_at_initial_readback",
+      "launch_receipt": {
+        "timestamp": "2026-09-11T21:29:10.728038+00:00",
+        "arm": "LEARNED_EVENT",
+        "handle": "folr-learned-retention-b01-learned-event-20260911",
+        "command_commit": "b28f7c1c2bebf7f9632959ce96e8478b36e0d354",
+        "returncode": 0,
+        "output": "Task 'folr-learned-retention-b01-learned-event-20260911' started in tmux session 'agent_folr-learned-retention-b01-learned-event-20260911'. Output: /home/wu/.agent-tasks/folr-learned-retention-b01-learned-event-20260911/task.log\n"
+      },
+      "initial_supervisor": {
+        "task": "folr-learned-retention-b01-learned-event-20260911",
+        "status": "running",
+        "exit_code": null,
+        "pid": 3351209,
+        "uptime_seconds": 14,
+        "tmux_active": true
+      },
+      "memory_admission": {
+        "assessed_at": "2026-09-11T21:29:10.676083Z",
+        "available_physical_bytes": 15228657664,
+        "captured_at": "2026-09-11T21:29:10.675810Z",
+        "cgroup_headroom_bytes": null,
+        "cgroup_memory_current_bytes": null,
+        "cgroup_memory_max_bytes": null,
+        "effective_available_bytes": 15228657664,
+        "effective_floor_pass": true,
+        "failure_reasons": [],
+        "measurement_source": "/proc/meminfo",
+        "minimum_available_bytes": 4294967296,
+        "passed": true,
+        "physical_floor_pass": true,
+        "schema_version": 1
+      },
+      "monitor_dispatch": {
+        "accepted": true,
+        "thread_id": "01a087e5-2044-7301-abb6-7a1709a98197",
+        "model_thinking_overrides": false
+      },
+      "monitor_adoption": {
+        "confirmed_by": "Root forwarded authoritative MONITOR_ADOPTED",
+        "status": "running",
+        "observation_command_seconds": 0.8,
+        "same_handle_source_cwd_output": true
+      }
     }
   ],
   "execution_plan": "two preselected independent detached arms, submit consecutively with fresh per-arm admission; each preserves its whole1800s cap, no retry or replacement. No result-dependent arm choice.",
@@ -88,7 +174,8 @@
     "handles_before_submission": "both not_found",
     "scientific_output_and_memory_paths_before_submission": "absent",
     "command_return_note": "fetch/worktree creation succeeded; final agent-task --help returns1 after printing usage, causing local assertion. Do not repeat accepted staging. zsh prompt initialization diagnostics did not reject fetch/add.",
-    "literal_command_syntax_check": "SSH connect timeout before invocation; not yet checked"
+    "literal_command_syntax_check": "both passed after transient SSH connect recovery; same command bytes",
+    "syntax_reconciliation_output": "8d518ff300c13d809f8d88d0a259a3d8f6ff59d6\n\nreturncode=0\n"
   },
   "support": {
     "measured_invoked_commands": [
@@ -207,23 +294,88 @@
       {
         "label": "supervisor command ownership and prospective namespace absence",
         "seconds": 0.6904653
+      },
+      {
+        "label": "focused-check acceptance and exact launch command publication preparation",
+        "seconds": 0.2943448
+      },
+      {
+        "label": "exact command syntax/current source acceptance commit and immediate push",
+        "seconds": 10.0119252
+      },
+      {
+        "label": "command publication completion wait (invoked wall continued)",
+        "seconds": 2.1e-06
+      },
+      {
+        "label": "local command/check evidence commit and immediate push after no-effect SSH timeout",
+        "seconds": 4.9980025
+      },
+      {
+        "label": "same read-only command syntax and remote source reconciliation",
+        "seconds": 0.8333313
+      },
+      {
+        "label": "prelaunch owner/source/monitor boundary 0",
+        "seconds": 0.5279781
+      },
+      {
+        "label": "prelaunch owner/source/monitor boundary 1",
+        "seconds": 0.343688
+      },
+      {
+        "label": "RETAIN supervisor submission control call",
+        "seconds": 0.7917308
+      },
+      {
+        "label": "RETAIN immediate launch/admission acceptance readback",
+        "seconds": 1.063376
+      },
+      {
+        "label": "direct RETAIN Monitor dispatch app call",
+        "seconds": 0.169
+      },
+      {
+        "label": "LEARNED_EVENT supervisor submission control call",
+        "seconds": 0.6807742
+      },
+      {
+        "label": "LEARNED_EVENT immediate launch/admission acceptance readback",
+        "seconds": 0.8827406
+      },
+      {
+        "label": "direct LEARNED_EVENT Monitor dispatch app call",
+        "seconds": 0.18
+      },
+      {
+        "label": "Monitor RETAIN adoption observation command (Root receipt)",
+        "seconds": 0.9
+      },
+      {
+        "label": "Monitor LEARNED_EVENT adoption observation command (Root receipt)",
+        "seconds": 0.8
       }
     ],
     "native_clocks_not_in_support": true,
     "full_budget_conformance": "pending; unknown/unitemized terms stay unknown",
-    "note": "outer command durations include their nested operations once; test subclocks and reviewer detail are not double charged. Tool editing/authoring outside measured commands is not claimed zero."
+    "note": "outer command durations include their nested operations once; test subclocks and reviewer detail are not double charged. Tool editing/authoring outside measured commands is not claimed zero.",
+    "known_seconds_through_snapshot": 51.914235899999994,
+    "monitor_adoption_seconds_included": 1.7
   },
   "monitor": {
     "thread_id": "01a087e5-2044-7301-abb6-7a1709a98197",
     "source": "live primary .codex/hmasd-monitor.toml and Root correction",
-    "dispatch": "not_sent",
-    "adoption": "not_yet",
+    "dispatch": "both direct app sends accepted",
+    "adoption": "both MONITOR_ADOPTED receipts forwarded by Root",
     "routine_DM_polling": false
   },
   "cleanup": {
     "local_shared_worktree": "retained for live DM/execution/intake",
     "remote_worktree": "/home/wu/hmasd-worktrees/folr-learned-retention-b01-8d518ff30",
     "owner": "DM through collection and authorized cleanup; Root accepts preservation/reclamation",
-    "test_scratch": "both invocations absent; control receipts retained"
-  }
+    "test_scratch": "both invocations absent; control receipts retained",
+    "remote_worktree_retention_reason": "two active accepted numerical handles; preserve both until terminal collection and unique evidence copied",
+    "local_control_retention_reason": "current launch/test/control receipts until full intake and preservation; no other invocation scratch owned"
+  },
+  "command_commit": "b28f7c1c2bebf7f9632959ce96e8478b36e0d354"
 }

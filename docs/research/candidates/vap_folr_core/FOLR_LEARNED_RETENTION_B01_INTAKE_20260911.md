@@ -113,3 +113,26 @@ Any accepted arm remains unique and is handed directly to the sole configured Mo
 Full native/support conformance, adoption and scientific result remain pending.
 
 The next read-only SSH command-syntax check timed out connecting to192.168.1.12:22 before any remote command or scientific submission. Published source and ten passed checks remain valid; no handle or new scientific exposure exists. Preserve the exact commands and retry connection reconciliation under the same allocation, without local/device fallback or a second numerical attempt.
+
+## Accepted launch and observation handover
+
+The same remote connection recovered; both bound commands passed bash syntax and
+source readback. The already published literal payloads were accepted once each:
+RETAIN21:28:08Z/PID3351044 and LEARNED_EVENT21:29:10Z/PID3351209 on2026-09-11.
+Fresh adjacent memory admissions passed15,323,598,848 and15,228,657,664 physical/
+effective bytes, respectively. Initial status for both was running/tmux active.
+Both direct MONITOR_ADD sends to app01a087e5-2044-7301-abb6-7a1709a98197 were accepted;
+Root separately forwarded both authoritative MONITOR_ADOPTED receipts. Monitor
+adoption command work0.9+0.8s is charged once in support. No message went to the
+completed native monitor route. DM has stopped routine remote polling.
+
+Object-tier technical selection: accept the independent source review and actual
+focused checks, submit the two preselected committed commands once under fresh
+admission, and transfer observation to the configured Monitor. The alternative to
+invent runtime success or send a duplicate is rejected. Owner-delegated decision
+(unattended,2026-09-03 instruction): this technical selection. Both scientific
+outcomes, complete clocks and executed collection/claim checks remain pending;
+[launch evidence](FOLR_LEARNED_RETENTION_B01_RESULT_EVIDENCE_20260911.md) and its
+machine summary fix all restart inputs. No valid-result brief or performance
+verdict is due before a trustworthy result. Full collection, intake and scoped
+cleanup remain this DM's assignment on Root's routed terminal facts.
