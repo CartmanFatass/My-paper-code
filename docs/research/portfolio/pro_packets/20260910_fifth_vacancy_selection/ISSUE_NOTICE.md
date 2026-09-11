@@ -1,0 +1,5 @@
+Prepared a separate Portfolio question for the **one remaining fifth vacancy** after the complete A decision allocated FOLR, UCOPE, RCLE and ACVC. Those four allocations remain unchanged and excluded here.
+
+[Read the fixed task](https://github.com/CartmanFatass/My-paper-code/blob/9ada5ce1793862fc57aea4fd9b71ca9a83a64514/docs/research/portfolio/pro_packets/20260910_fifth_vacancy_selection/TASK.md). Recommendation only: one bounded FSD source/design return, with MGTAP as the single conditional fallback; VSP03 is a substantive competing option. The requested first actions have zero numerical allowance and preserve existing family stops, priorities/recasts and access restrictions.
+
+This is preparation for the normal Transport route, not a formed Portfolio decision. The complete response belongs only at `docs/research/portfolio/pro_packets/20260910_fifth_vacancy_selection/archive/RESPONSE.md` on `codex/portfolio`, with its own immutable delivery-link comment. Previous accepted tasks and deliveries remain intact.
