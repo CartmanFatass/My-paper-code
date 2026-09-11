@@ -1,5 +1,5 @@
 {
-  "status": "D0 accepted, Monitor dispatch confirmed; adoption/terminal and I1280 pending; accounting open",
+  "status": "D0 collected and accepted; I1280 pending launch; support accounting open",
   "metric": "sum of complete tool/command execution wall charged once; idle waiting and reasoning elapsed distinct; unmeasured enclosing overhead remains unknown",
   "cap_seconds": 300,
   "charges": [
@@ -115,8 +115,63 @@
       "phase": "launch_D0",
       "operation": "write_staging_acceptance_and_monitor_handover",
       "wall_seconds": 0.015
+    },
+    {
+      "phase": "launch_D0",
+      "operation": "persist_support_and_boundary_owner_reviews",
+      "wall_seconds": 0.4877292
+    },
+    {
+      "phase": "launch_D0",
+      "operation": "publish_accepted_launch_and_monitor_handover",
+      "wall_seconds": 4.7786068
+    },
+    {
+      "phase": "D0_monitor",
+      "operation": "known_terminal_query_only; shared cumulative1.423s and adoption attribution remain unresolved",
+      "wall_seconds": 0.598
+    },
+    {
+      "phase": "D0_collection",
+      "operation": "resume_card_entry_and_checkout_read",
+      "wall_seconds": 0.4365725
+    },
+    {
+      "phase": "D0_collection",
+      "operation": "terminal_receipts_and_output_inventory",
+      "wall_seconds": 0.5854042
+    },
+    {
+      "phase": "D0_collection",
+      "operation": "preserve_primary_admission_time_supervisor_and_read_structure",
+      "wall_seconds": 2.1350262
+    },
+    {
+      "phase": "D0_collection",
+      "operation": "read_actual_primary_shape_and_dependent_reducer_contract",
+      "wall_seconds": 0.2577556
+    },
+    {
+      "phase": "D0_collection",
+      "operation": "primary_integrity_and_own_arm_arithmetic",
+      "wall_seconds": 0.1615345
+    },
+    {
+      "phase": "D0_collection",
+      "operation": "destination_collection_digest_read",
+      "wall_seconds": 0.7526944
+    },
+    {
+      "phase": "D0_collection",
+      "operation": "record_technical_acceptance_terminal_facts_and_audit",
+      "wall_seconds": 0.033
     }
   ],
-  "recorded_support_seconds": 28.230757699999998,
-  "remaining_from_recorded_seconds": 271.7692423
+  "monitor_cost_attribution": {
+    "reported_shared_cumulative_seconds": 1.423,
+    "known_FSD_terminal_query_seconds": 0.598,
+    "remaining_shared_or_adoption_attribution": "unknown; do not add the shared total on top of the charged subset"
+  },
+  "recorded_support_seconds": 38.4570811,
+  "remaining_from_recorded_seconds": 261.5429189
 }
