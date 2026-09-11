@@ -1,0 +1,52 @@
+{
+  "status": "pass",
+  "type": "single_static_AST_and_stub_contract_check",
+  "source_lines": 115,
+  "stub_cases": [
+    {
+      "command": [
+        "ssh",
+        "-o",
+        "BatchMode=yes",
+        "-o",
+        "ConnectTimeout=8",
+        "-o",
+        "ServerAliveInterval=3",
+        "-o",
+        "ServerAliveCountMax=1",
+        "hmasd-wsl-node",
+        "/usr/bin/timeout --signal=KILL 35.0s /home/wu/.venvs/hmasd/bin/python -u -"
+      ],
+      "binary": true,
+      "cr_bytes": 0,
+      "timeout": 39.96799999999348,
+      "text_argument": null
+    },
+    {
+      "command": [
+        "ssh",
+        "-o",
+        "BatchMode=yes",
+        "-o",
+        "ConnectTimeout=8",
+        "-o",
+        "ServerAliveInterval=3",
+        "-o",
+        "ServerAliveCountMax=1",
+        "hmasd-wsl-node",
+        "/usr/bin/timeout --signal=KILL 35.0s /home/wu/.venvs/hmasd/bin/python -u -"
+      ],
+      "binary": true,
+      "cr_bytes": 0,
+      "timeout": 39.96799999999348,
+      "text_argument": null
+    }
+  ],
+  "scratch_removed": true,
+  "real_transport_calls": 0,
+  "models": 0,
+  "environments": 0,
+  "scientific_exposure": 0,
+  "inner_seconds": 0.046999999991385266,
+  "limit": "Verifies exact bytes/EOF-compatible input, timeout parameters and receipt labels; does not simulate learner or establish remote delivery."
+}
