@@ -77,7 +77,7 @@
     "source": "docs/research/portfolio/pro_packets/20260911_two_vacancy_refill/SCIENCE_BRIEF.md"
   },
   "starred": true,
-  "approval_correction": "旧标题和内嵌包记录最初两个空槽的历史提案；当前计数和来源以新PREPARATION_INTAKE及OWNER_PACKET为准。未设置auto_applied。",
+  "approval_correction": "原标题与内嵌提案保留历史。四条原链均已完成的后来事实按答复第6节更新实际计数，不改固定问题，也不自动新增预算。auto_applied继续为空，待Root实际整合记录。",
   "execution_history": [
     {
       "at": "2026-09-11T18:10:19+00:00",
@@ -87,6 +87,24 @@
       "state": "planned",
       "summary": "按既有OWNER_DIRECT滚动规则作事实更正，非所有者新科研裁决：Root已恢复VNFC原DM，当前四链一空槽；ACVC8951准备no-ready，收尾后为三链两空槽，零科学暴露且不重试。仍只建议零追加，Portfolio未决定。最新中文材料见docs/research/portfolio/pro_packets/20260911_two_vacancy_refill/OWNER_PACKET.json。",
       "correction": "旧标题和内嵌包记录最初两个空槽的历史提案；当前计数和来源以新PREPARATION_INTAKE及OWNER_PACKET为准。未设置auto_applied。"
+    },
+    {
+      "at": "2026-09-11T19:15:42+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "https://github.com/CartmanFatass/My-paper-code/blob/a9adb7f003780e976f8d24d2390efa9517d469bc/docs/research/portfolio/pro_packets/20260911_two_vacancy_refill/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/decisions/2026-09-11-current-vacancies-refill.md",
+      "state": "planned",
+      "summary": "Portfolio完整答复已通过DM合规入库，选择A：本轮零追加任务和预算；无需所有者另行确认。后续FOLR窄OPEN但当前额度0、RCLE有效总体负向且无后继、VNFC缺主结果且无重试、ACVC零暴露结束，按真实完成事实更新计数。Root主分支整合与执行记录待完成，auto_applied仍为空。当前中文包：docs/research/portfolio/pro_packets/20260911_two_vacancy_refill/INTAKE_OWNER_PACKET.json；简报：docs/research/portfolio/owner/briefs/portfolio/2026-09-11_CURRENT_VACANCIES_REFILL.md；选择审计：docs/research/portfolio/audit/2026-09-11.md#L68。",
+      "correction": "原标题和内嵌包保留最初提案快照；现在Pro已作零追加决定，后续实际计数不再固定为四链或三链。科学选择已通过合规检查，尚未把Root待整合的操作记为auto_applied。"
+    },
+    {
+      "at": "2026-09-11T19:19:54+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "https://github.com/CartmanFatass/My-paper-code/blob/a9adb7f003780e976f8d24d2390efa9517d469bc/docs/research/portfolio/pro_packets/20260911_two_vacancy_refill/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/decisions/2026-09-11-current-vacancies-refill.md",
+      "state": "planned",
+      "summary": "最终事实更新：Root已在758dfdbdc整合RCLE远端收尾；固定快照中的四条链及其已授权执行收尾均已完成，当前不再计入推进链。Portfolio仍为A零追加，FOLR窄OPEN且当前额度0、RCLE无后继、VNFC缺主结果且无重试保持不变。Root对本次Portfolio入库的主分支整合与记录待完成，无需所有者另行确认。当前中文包：docs/research/portfolio/pro_packets/20260911_two_vacancy_refill/INTAKE_OWNER_PACKET.json；简报：docs/research/portfolio/owner/briefs/portfolio/2026-09-11_CURRENT_VACANCIES_REFILL.md；审计：docs/research/portfolio/audit/2026-09-11.md#L68。",
+      "correction": "原标题与内嵌提案保留历史。四条原链均已完成的后来事实按答复第6节更新实际计数，不改固定问题，也不自动新增预算。auto_applied继续为空，待Root实际整合记录。"
     }
   ]
 }
