@@ -1,0 +1,28 @@
+{
+  "assignment": "one original-node post8801 question and full intake; zero numerical/implementation work",
+  "authority_response": "ed0c4e1c3cd28be353253e8533bc89a261f25357",
+  "required_main_input": "5bbae6d90723217336222105366774926084a00c",
+  "source_thread_id": "01a08ed9-bd3f-7c40-8087-687d6f08d705",
+  "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "native_return_target": "/root/dm_ucope_restart_recovery2",
+  "new_exposure": {
+    "implementation": 0,
+    "scientific_source_imports": 0,
+    "models_constructed": 0,
+    "model_or_checkpoint_loads": 0,
+    "environments": 0,
+    "native_steps": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0,
+    "numerical_reanalysis": 0,
+    "tests": 0,
+    "replay": 0,
+    "profiling": 0,
+    "new_cards": 0,
+    "new_masters": 0,
+    "new_invocation_allowance": 0,
+    "provider_sends_by_DM": 0
+  },
+  "exposure_basis": "Machine-written record of this consultation's literal zero-scientific-operation boundary. Only document, Git, GitHub discussion and routing reads plus publication/rendering are performed; existing results and work counts are quoted without recomputation.",
+  "recorded_at_utc": "2026-09-11T08:04:19.988787+00:00"
+}
