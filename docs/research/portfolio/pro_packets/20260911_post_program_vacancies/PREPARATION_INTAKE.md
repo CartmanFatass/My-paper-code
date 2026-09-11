@@ -176,3 +176,23 @@ Known support becomes63.1389747s MGTAP and66.7732663s ACVC at their named cutoff
 full support remains unestablished. Updated Root tracking at3c7181282 is read
 alongside these final receipts. Only factual preparation snapshots changed;
 no new science, old request or local investment choice was changed.
+
+## FOLR terminal fact before publication/binding
+
+The first renderer returned TASK_NOT_PUBLISHED with dispatch_required=false;
+TASK had no published/bound SHA, READY handoff, dispatch or provider Send.
+Root then reported both FOLR arms terminal complete/exit0 and supplied native
+834.9379585/867.4317784s, supervisor836/868s, RSS638384/649364KiB and one shared
+1.2s terminal query. The original DM is collecting/accepting; no primary polarity
+is accepted here. Root explicitly asked this still-unfrozen packet to state the
+fifth vacancy horizon instead of live execution. The unpublished draft is updated
+under that instruction, before binding final TASK once; no accepted bytes are
+regenerated or resent. The old unpublished TASK digest was3fbb6fb7b76f4c3b65f8e8bf557f71f223ea4aa1e4b316232ea8b4bdad47d89c
+(40761 bytes). Its evidence commit remains historicalb4a4ff8efe39d9e3d47e3bed4de5874cee4c1b8e.
+
+SCIENCE_BRIEF section8 now requires an explicit fifth-slot choice: recommend
+deferring numerical funding until complete FOLR intake, while Pro may either
+leave the slot vacant or commission exactly one original-Convergence question/
+intake on the first gate/RETAIN outcome, zero implementation/numerical allowance.
+The four A/B/C/D investments are not silently expanded. Current FOLR intake work
+continues independently and is not counted as two arms or as its future task.

@@ -97,6 +97,14 @@
       "record": "docs/research/portfolio/pro_packets/20260911_post_program_vacancies/PREPARATION_INTAKE.md",
       "state": "planned",
       "summary": "按Root拓宽后的准备任务发布建议，投资尚未执行。MGTAP和ACVC科学intake及远端收尾均已完成，本地重复件因执行前策略拒绝而保留，不占科研链。现仅FOLR运行，VNFC条件排队，四个空位；A/B/C/D仍由Portfolio决定。"
+    },
+    {
+      "at": "2026-09-11T22:05:41+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/pro_packets/20260911_post_program_vacancies/PREPARATION_INTAKE.md",
+      "record": "docs/research/portfolio/pro_packets/20260911_post_program_vacancies/PREPARATION_INTAKE.md",
+      "state": "planned",
+      "summary": "TASK首次仅生成未发布草稿时Root追加FOLR双臂终态：结果仍由原DM收集和接受，未推断正负。当前四空位在FOLR intake后成为五个；原A/B/C/D四项建议不变，另请Pro明确第五位留空或仅给FOLR一个零数值额度的原Convergence问题。本轮投资尚未执行。"
     }
   ]
 }

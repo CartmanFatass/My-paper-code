@@ -5,7 +5,7 @@
 Decide whether to invest in up to four independently executable replacements after
 FSD770903 ended before scientific exposure, VNFC remained technically unready,
 and MGTAP8213/ACVC8961 produced new valid results and are completing intake/closeout.
-Preserve the still-live FOLR7809 pair and finish the accepted MGTAP/ACVC intakes
+Preserve FOLR7809 through its terminal-result acceptance and finish the accepted MGTAP/ACVC intakes
 without interruption. This is a new investment question
 based on those actual execution returns, not a correction or resend of the
 complete open-direction decision at6c32ade3216c374ecf2f5179b15d559729cd45c9.
@@ -69,18 +69,19 @@ complete program intake. FACTS.json distinguishes the dated observations.
 | FSD, ACTIVE/HIGH | New770903 staging reached its one remote Git fetch, which returned128 with GnuTLS receive/decode error, early EOF and invalid index-pack. The helper ended before checkout or admission. Exact execution/input/supervisor paths and checkout registration were absent. | The allocated unit is closed. Zero models, RNG masters, transitions, updates, evaluations or primary differences; no new scientific polarity. A further pair requires a newly selected investment, not reuse of770903. |
 | VNFC, ACTIVE/HIGH, recasts2 | Exact interpreter mapping expects40 bytes, while the retained failing block has32-byte metadata and a False keyword at offset32. Allocation-time counts/request and corrupting history are missing. Independent review found that the proposed numerical/path-exclusion checks do not establish corruption independence. Production remains unchanged and the draft checks unrun. | Existing conditional900-second funding remains unused unless Pro expressly changes it. Current repair/readiness assignment is closed NOT READY. No fresh scientific launch, additional diagnostic or alternate executor is selected here. |
 | MGTAP, ACTIVE/MEDIUM | Published valid COMPLETE COND_ADVERSE: COND.19342135238526614 versus DENSE.21589092584121028; delta−.02246957345594415, conditional SE.004312411137154014,5/32 positive. Full counts and binding pass; native358.11s. | Its scientific intake and remote closeout are complete; no successor is selected. Its completion creates an additional vacancy. A new pair is proposed separately, not released by this result. |
-| FOLR, ACTIVE/MEDIUM | Both7809 RETAIN/LEARNED_EVENT handles and actual Monitor adoption are recorded in the current result-evidence file. Completion and primary acceptance were still pending at that record. | Preserve its3900-second allocation. It is one direction chain, not two slots; no additional training is proposed. |
+| FOLR, ACTIVE/MEDIUM | Both7809 handles/adoption are published. Root now reports both terminal complete/exit0, native834.9379585s RETAIN and867.4317784s LEARNED_EVENT; the owning DM is collecting/accepting and primary polarity is pending. | Preserve its3900-second allocation through intake. It is one advancing intake chain, not two slots; a fifth vacancy follows its completion and requires an explicit decision. |
 | ACVC, ACTIVE/MEDIUM, recasts2 | Published valid complete B: F−C+.1414322041 J and F−dwell+.0944113176 J, both UP; dwell−C+.0470208865. All704 episode rows,1024 updates and exact8961/8962 keys pass; conservative native178s. | Its scientific intake and remote closeout are complete; no successor or promotion selected. C/dwell remain own-history controls, not F-clock/dose matches. Its third fresh gain changes the value of a direction decision. |
 
-FOLR is still live at the latest routed snapshot. MGTAP and ACVC have completed
+FOLR is now terminal and its owning DM is still collecting/accepting the result. MGTAP and ACVC have completed
 their scientific intakes and remote closeout: MGTAP at
 a267ba0a30a86f7e49edd320354c195016081cda, ACVC at
 d4f4baba7dc4c9a8d05c18f07a9eddf3cbbd85a6. Their local duplicate removals were
 rejected before execution and remain owned by their DMs; unique evidence is
 preserved. Those residues are not advancing chains or scientific blocks. The
 current vacancy set is four: FSD, VNFC, MGTAP and ACVC. Replacement work is
-dispatched direction by direction at each ready boundary, without a global wait. A later
-FOLR completion does not silently expand these four investments or buy a successor.
+dispatched direction by direction at each ready boundary, without a global wait. FOLR
+intake completion creates a fifth vacancy horizon; section8 asks for an explicit
+fifth-slot choice, without inferring its still-pending scientific outcome.
 Root maintains actual execution state; queued funding is not an active chain.
 
 All15 scoped directions remain ACTIVE. Priorities, recasts, family pauses, formal
@@ -112,7 +113,7 @@ recast count; it is not zero.
 | DISH / MEDIUM / NR | HALF_RETAIN−REPLACE service−6.5, lower energy but four extra invalid commits; ordinary CAS=0 leaves source-origin effect unmeasured. MEI24 service ticks. | Preserve arrival-bridge family pause; no generic source-transfer conclusion or receipt experiment selected. |
 | VSP02 / LOW /1 | Adaptation RESET−CARRY+.0185547/−.0087891, both inside.5 deliveries; two common-prefix learning units. | Preserve instantiated-family pause; no new optimizer/host/member intervention proposed. |
 | MGTAP / MEDIUM / NR | First COND−DENSE+.0057613214 inside.01 J; new8213−.0224695735 beyond the adverse margin,27/32 adverse worlds. DENSE can learn context allocation; two histories do not estimate stable superiority. | One newly allocated unchanged third pair proposed; existing8213 ends first on its own boundary. |
-| FOLR / MEDIUM / NR | Learned gate was open but unmeasured; fixed HALF+1.56547/−4.29305 are contrary context, not its test. RETAIN already has recurrent gates. Current MEI1 native return. | Preserve current7809 allocation and same legal information, without functional policy-class containment or a stable claim. |
+| FOLR / MEDIUM / NR | Learned gate was open but unmeasured; fixed HALF+1.56547/−4.29305 are contrary context, not its test. RETAIN already has recurrent gates. Current MEI1 native return. | Preserve current7809 terminal intake and same legal information; its unaccepted primary has no claimed sign. Section8 addresses its fifth-vacancy horizon. |
 | ACVC / MEDIUM /2 | Third fresh base adds F−C+.1414322 and F−dwell+.0944113 to+.122933/+.091528 and+.0877165/+.0638999. Fresh F−dwell adverse worlds are5/11/5; all three mean dwell−C gains remain. MEI.01 J. | One original-Convergence claim/investment question proposed; no automatic fourth fit, C freeze or UAV entry, lowest contention retained. |
 
 Absence of a positive, optimal, novel, fully diagnosed or formally bounded result
@@ -349,7 +350,45 @@ would not answer either missing question. No unchanged52-tape/P63/R09 invocation
 expired120-second allowance, cleanup bypass or executor substitution is proposed.
 The question does not rule out a separately specified credible future path.
 
-## 8. Interpretation, execution and revisit boundaries
+## 8. FOLR terminal intake and the fifth vacancy horizon
+
+After the first unpublished TASK render, Root reported both FOLR arms complete/
+exit0: RETAIN native834.9379585s, supervisor836s, RSS638384KiB;
+LEARNED_EVENT native867.4317784s, supervisor868s, RSS649364KiB. The shared
+terminal query1.2s is a whole enclosing observation. The DM is collecting and
+accepting; no primary score, counts/measurement acceptance or scientific polarity
+is supplied by that terminal report. Earlier launch-only evidence retains its
+scope. The full existing3900-second allocation still ends at its own intake.
+
+Thus the current four vacancies become five when the FOLR intake chain finishes.
+A supplies four new tasks; it cannot be described as restoring five after that
+boundary. **Recommend deferring any fifth numerical allocation until FOLR's
+complete intake is available.** Pro must explicitly choose whether the fifth
+slot remains unallocated, or whether to commission **one original FOLR
+Convergence question/full intake after its current result is accepted**, with
+zero implementation/numerical allowance. This choice is separable from A/B/C/D
+and adds no native allowance to their4200/3000/0/0 sums. If no useful formed
+scientific question remains after that intake, return that precise finite fact;
+no automatic repair/experiment or substitute question follows.
+
+The optional question is concrete: for the first learned event-retention gate
+versus RETAIN at the frozen5000-training/128-final episode law, what next
+bounded learning or family decision does the complete native comparison justify?
+It preserves the129-coefficient event gate, true-survivor ownership, newborn/
+departed state rules, acting and replay/target behavior, equally legal information,
+current1-return MEI and native traffic reward. Fixed-HALF history is not a gate
+replication. The original DM supplies its actually accepted outcome, every arm,
+exposure, cost and prediction to the original node; no favorable, negative or
+complete-primary result is assumed here. No next fit or C freeze is funded by
+this question. This is an optional next direction decision, not a requirement
+that ordinary B elsewhere obtain Pro approval.
+
+No other direction waits for FOLR's intake, and its current work is not counted
+twice with a later selected task. A terminal label alone does not authorize a
+performance claim. Root applies the current independent dispatch boundaries and
+returns the completed FOLR facts at the next appropriate scientific decision.
+
+## 9. Interpretation, execution and revisit boundaries
 
 Apply current AGENTS §§2,4.4–4.8,5–7 and empirical-spec §§4,7–8.1,11.3–11.4,
 11.7–11.10. Technical nonacceptance cannot become scientific polarity. A/B work
@@ -370,5 +409,6 @@ uncertainty, concrete revisit condition and execution mapping: each selected
 direction, exact deliverable, proper owner/tier, new or retained caps, dependencies,
 stop and consequence for actual advancing count. State explicitly whether VNFC's
 conditional funding remains queued. Finish current MGTAP/ACVC intakes independently
-and preserve live FOLR; a later FOLR completion is not an automatic new allocation.
+and preserve FOLR terminal acceptance; explicitly settle the fifth-slot choice
+in section8 without inventing its pending outcome or an automatic allocation.
 Apply a complete conforming Portfolio decision without per-item owner ratification.

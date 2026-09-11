@@ -38,8 +38,10 @@
     "vacancies_after_current_MGTAP_ACVC_closeout": 4,
     "actual_NEW_author_scientific_units": 0,
     "current_MGTAP_ACVC_advancing_chains_after_closeout": 0,
-    "current_live_FOLR_directions": 1,
-    "current_vacancies_after_closeout": 4
+    "current_live_FOLR_directions": 0,
+    "current_vacancies_after_closeout": 4,
+    "current_advancing_FOLR_intake_chains": 1,
+    "vacancy_horizon_after_FOLR_intake": 5
   },
   "actual_new_results": {
     "MGTAP8213": {
@@ -260,5 +262,29 @@
     },
     "complete_support_certified": false,
     "scientific_successor_selected": false
+  },
+  "FOLR_later_terminal_report": {
+    "provenance": "Root message after first TASK_NOT_PUBLISHED render; owning DM collecting/accepting; no scientific polarity inferred",
+    "RETAIN_native_seconds": 834.9379585,
+    "LEARNED_EVENT_native_seconds": 867.4317784,
+    "sum_native_seconds": 1702.3697369000001,
+    "RETAIN_supervisor_seconds": 836,
+    "LEARNED_EVENT_supervisor_seconds": 868,
+    "RETAIN_RSS_KiB": 638384,
+    "LEARNED_EVENT_RSS_KiB": 649364,
+    "shared_terminal_query_seconds_unsplit": 1.2,
+    "terminal": "both complete/exit0",
+    "accepted_primary": null,
+    "new_scientific_successor": false
+  },
+  "optional_fifth_task": {
+    "direction": "vap_folr_core",
+    "kind": "one original Convergence question and intake after own current acceptance",
+    "recommendation": "defer numerical allocation; Pro explicitly leaves vacancy or selects this zero-numerical task",
+    "numerical_allowance": 0,
+    "implementation_allowance": 0,
+    "new_native_caps": 0,
+    "outcome_assumed": null,
+    "not_automatically_selected": true
   }
 }
