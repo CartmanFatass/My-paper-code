@@ -1,0 +1,37 @@
+{
+  "object_id": "FSD_UAV_RENEWAL_BATCH_B01",
+  "training_seed": 770703,
+  "evaluation_seed": 780703,
+  "source_schedule": "scripts/run_fsd_uav_renewal_batch_b01.py and shared runner constants; card sections 2,5,6,8",
+  "evidence_class": "B/EXPLORE",
+  "actual_prelaunch_scientific_invocations": 0,
+  "prospective": {
+    "arms": 2,
+    "fits": 2,
+    "model_constructions": 4,
+    "training_steps": 80000,
+    "training_episodes": 160,
+    "update_stages": 10,
+    "evaluation_steps": 32000,
+    "evaluation_episodes": 64,
+    "native_steps": 112000,
+    "agent_step_observations": 672000,
+    "batched_control_calls": 6000,
+    "D0_scheduled_coordinator_chunks": 525,
+    "I1280_scheduled_coordinator_chunks_upper": 525
+  },
+  "cost_law": {
+    "D0": "C_admission+startup+init + 5*(500*c_collect16 + c_update(M=800,batch128,epochs15)) + 500*c_eval32 + C_publication+exit",
+    "I1280": "C_admission+startup+init + sum_r(500*c_collect16 + c_update(M_r,batch1280,epochs15)) + 500*c_eval32 + C_publication+exit",
+    "new_coefficients_seconds": null,
+    "not_estimated_from_old_batch128_I_rate": true
+  },
+  "caps_seconds": {
+    "D0": 900,
+    "I1280": 1800,
+    "support": 300,
+    "complete": 3000
+  },
+  "headroom": "tuned same-information scenario1 headroom absent",
+  "exposure_line": "Two preselected real fits; five nonzero learner update stages per arm with existing nonzero learning rates; actual per-module optimizer calls and displacement relative to initial parameter norm recorded each rollout. Four model constructions; no fit/checkpoint selection or extra evaluation."
+}

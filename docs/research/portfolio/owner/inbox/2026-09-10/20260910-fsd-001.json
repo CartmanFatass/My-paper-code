@@ -86,6 +86,14 @@
       "record": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B01_IMPLEMENTATION_INTAKE_20260910.md",
       "state": "applied",
       "summary": "后续独立的 Portfolio A 已分配并完成一次 I1280/D0 实现返回：源码0207d0b3c，一次纯合成检查4.885秒通过并清理；仅接受配置、遍历和读数发布。真实训练、环境和实验调用仍为零，3000秒方案未分配；不改原设计选项或伪造所有者回复。"
+    },
+    {
+      "at": "2026-09-11T08:02:33+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260911_five_chain_refill/archive/RESPONSE.md",
+      "record": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B01_EXECUTION_20260911.md",
+      "state": "planned",
+      "summary": "新的 Portfolio A 已单独分配完整 I1280/D0 原生 B 对：训练770703、评价780703，D0/I1280各900/1800秒，支持300秒，总计3000秒。当前仅完成绑定与启动准备，尚无科学调用接受；复用已通过的实现检查，无第三臂、重试或后继。"
     }
   ]
 }

@@ -1,0 +1,108 @@
+# FSD renewal-batch B01 / 770703 — exact execution and collection record
+
+**Allocated, preparation underway; no scientific command accepted yet.**
+This is the complete one-pair task from Portfolio option A, immutable response
+`ed0c4e1c3cd28be353253e8533bc89a261f25357`, applied through the
+[FSD execution mapping](../../portfolio/pro_packets/20260911_five_chain_refill/EXECUTION_MAPPING.md#fsd--complete-one-fresh-i1280d0-b-pair).
+The [card §8 L0](FSD_UAV_RENEWAL_BATCH_B01_DESIGN_CARD_20260910.md#8-allocated-real-pair-l0--2026-09-11)
+controls the complete technical batch. Earlier design/fixture-only intakes are
+historical; this allocation grants no fixture repeat, third arm or successor.
+
+## Current source, identity and exact inputs
+
+Existing authoring checkout `C:/Projects/HMASD-worktrees/codex-fsd`, branch
+`codex/fsd`, started clean at `a325bfc7a` and fast-forwarded/pushed required
+main `5bbae6d90`. No concurrent FSD writer or changed learner source was found.
+The accepted entry/shared runner/core surfaces remain those reviewed and checked
+at `0207d0b3cf307f656b5f46b298b74efa438608b8`. New work is card/allocation,
+literal execution commands and evidence only.
+
+Training770703/evaluation780703 is the one preselected new identity. Scoped
+local launch/tracking records and the destination's FSD supervisor/worktree
+inventory show only older completed FSD instances, no matching accepted run.
+This reconciliation does not certify all historical RNG consumption and is not
+seed screening. No scientific output/model/master is created by these reads.
+Remote main's unrelated `dish.bundle`, `frrie_p59_branch.bundle`, `vspc1.bundle`
+are untouched; source runs from a new detached exact-SHA checkout.
+
+| Input | Exact value |
+| --- | --- |
+| Node / interpreter | `hmasd-wsl-node` / `/home/wu/.venvs/hmasd/bin/python` |
+| Execution checkout | `/home/wu/hmasd-worktrees/fsd-uav-renewal-batch-b01-770703-20260911` |
+| Scientific root, relative to checkout | `temp/directions/flexible_skill_duration/exp/uav_renewal_batch_b01_770703` |
+| Admission/time directory | `/home/wu/hmasd-inputs/fsd-uav-renewal-batch-b01-770703-20260911` |
+| D0 handle | `fsd-uav-renewal-batch-b01-770703-D0-20260911` |
+| I1280 handle (CLI arm I) | `fsd-uav-renewal-batch-b01-770703-I-20260911` |
+| Dtype/device/threads | CPU FP32 / four Torch threads; no CUDA substitution |
+| Arm caps / support / complete | 900 / 1800 / 300 / 3000 seconds, no borrowing |
+
+Committed commands: [D0.sh](uav_renewal_batch_b01_770703_20260911/D0.sh),
+[I.sh](uav_renewal_batch_b01_770703_20260911/I.sh), and
+[literal supervisor commands](uav_renewal_batch_b01_770703_20260911/LAUNCH_COMMANDS.txt).
+D0 first; after the routed terminal fact and its primary collection, execute
+the already selected I1280 against that fresh D0 summary. Each command has its
+own adjacent destination memory admission joined by `&&` to the runner.
+`timeout --signal=KILL` encloses admission through exit. `/usr/bin/time`
+records complete wall/RSS and existing aggregate user+system CPU accounting.
+No grace interval or independent validation trajectory is introduced.
+
+The destination checkout must include `configs` and the FSD command directory
+in addition to all actual source dependencies; the generic sparse list alone
+omits both. Read actual committed shell bytes and run only `bash -n` before
+launch. Launch SHA and actual staging facts will be added after publication.
+
+## Exposure, cost and evidence limits
+
+[Machine-generated prospective counts](uav_renewal_batch_b01_770703_20260911/PROSPECTIVE_COUNTS.json):
+two fits/four models, 80000 training steps/160 episodes/ten update stages,
+32000 final evaluation steps/64 episodes, complete112000 native steps and
+672000 agent-step observations. D0 schedules525 coordinator chunks; I1280's
+upper is525 under at most8000 valid rows per rollout. Actual row/decoding work
+remains, and actual executed optimizer calls/displacement must be read.
+The full per-arm cost expressions include startup, admission, initialization,
+collection, updates, the only final endpoint and publication. New timing
+coefficients, activation memory and support overhead remain unknown.
+
+Reuse the already accepted4.8851396-second synthetic fixture and prior collector
+coverage; no additional numerical verification is allocated. The same independent
+Astra/high Reviewer found no material issue in the new launch contract: correct
+cwd/identity/companion, admission before scientific creation, complete timeout,
+unchanged source and explicit staging dependency. It ran no imports/tests/science.
+Review execution charge is2.3s outer tool wall, encompassing0.8451889s shell wall;
+do not add the overlapping values. Actual remote readback, admission/acceptance,
+complete time and primary integrity remain execution facts to obtain.
+
+Support is measured tool/command execution wall charged once, with conservative
+rounding for unavailable enclosing precision. Agent reasoning, idle waiting,
+and study elapsed are distinct. Monitor must return its observation cost so it
+is included rather than treated as free. Unknown overhead is not silently zero.
+Support charges and allowance are retained beside this record. Essential terminal
+observation/preservation continues even if a breach must be reported.
+
+## Decisions, owner and handover
+
+Options: (a) bind and execute exactly the allocated fresh pair through one intake;
+(b) return a concrete dependent conflict; (c) add a validation run or extension.
+Recommend/execute(a), subject to actual destination admission and bounded failure.
+**Owner-delegated decision (unattended, 2026-09-03 instruction): (a)**, within
+the conforming Portfolio allocation and Root assignment. Owner flags:none;
+current primary owner review returned[] and no prediction reply was present.
+Existing new-card item `20260910-fsd-001` now carries a planned execution trace
+to the new Portfolio archive and this record; its earlier design-only options
+and implementation history remain historical. The object selection is recorded
+in the 2026-09-11 audit ledger.
+DM prediction remains below−.01, low confidence; owner prediction not taken.
+Both old I−D0 losses remain contrary evidence, with their component positives;
+one new pair can support only a bounded package observation.
+
+Live Monitor was read from primary `C:/Projects/HMASD/.codex/hmasd-monitor.toml`:
+thread `01a087e5-2044-7301-abb6-7a1709a98197`, Root
+`01a07249-b095-7821-8ce2-e9c32ba85267`. Send MONITOR_ADD directly after each
+accepted handle, record dispatch and adoption separately, and stop DM polling.
+Root routes terminal facts back to this DM for collection and scientific intake.
+
+Preparation/launch state: **pending publication/staging/admission**. No handle
+is yet accepted. No scientific or test scratch exists for this allocation.
+Preservation and cleanup inventory will be prepared during collection; remove
+only completed owned roots after unique source/evidence preservation and Root's
+integration/retention reconciliation. Keep the shared authoring checkout.
