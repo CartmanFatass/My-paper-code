@@ -78,7 +78,8 @@
   "checkout_disk_bytes": 47354344,
   "remote_archive": {
     "path": "/home/wu/hmasd-inputs/ucope-continue-end-credit-b01-8801-20260911-evidence.tar.gz",
-    "sha256": "beeb1e5dfcf2e08ea1a915dc82fe4166d7cd137ef9ee6c9fc5ade72105863602"
+    "sha256": "beeb1e5dfcf2e08ea1a915dc82fe4166d7cd137ef9ee6c9fc5ade72105863602",
+    "status": "removed after Root confirmed main integration and local archive retention; this is the original collection location"
   },
   "remote_local_all_14_files_match": true,
   "readback_wall_seconds": 1.012620399997104,
@@ -88,11 +89,12 @@
     "sha256": "beeb1e5dfcf2e08ea1a915dc82fe4166d7cd137ef9ee6c9fc5ade72105863602"
   },
   "cleanup": {
-    "remote_execution_checkout": "retained pending Root integration/retention reconciliation; exact terminal checkout only",
-    "remote_archive": "retain outside execution checkout",
-    "local_collection_archive": "retain as independent recovery copy",
-    "local_preparation": "retains published-source transfer pack and preparation receipts; reclaimable after preservation",
-    "shared_authoring_checkout": "retain: active direction checkout codex/ucope; DM authoring, Root integration",
-    "creator_test_scratch": "retained; two automatic policy rejections before removal, blocked by policy; no bypass or further deletion attempt"
+    "remote_execution_checkout": "removed; verified absent from disk and worktree registration",
+    "remote_supervisor_source_pack_admission_archive": "all four named paths removed and verified absent",
+    "local_collection_archive": "retained and reverified at beeb1e5dfcf2e08ea1a915dc82fe4166d7cd137ef9ee6c9fc5ade72105863602",
+    "local_preparation": "redundant36,226,108-byte source.pack removed; the two unique JSON preparation receipts remain",
+    "shared_authoring_checkout": "retained active codex/ucope direction checkout; Root main integration confirmed b2fe78755",
+    "creator_test_scratch": "untouched; two automatic policy-rejected cleanup payloads, exact reason blocked by policy",
+    "receipt": "UCOPE_UAV_CONTINUE_END_CREDIT_B01_8801_CLEANUP_FACTS_20260911.json"
   }
 }

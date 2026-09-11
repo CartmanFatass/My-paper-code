@@ -244,27 +244,49 @@ training-population SD or interval is estimated. Reuse the card/design-intake
 Foundations §§5–6, hierarchy and empirical reading; no new mechanism or source
 claim required another literature retrieval.
 
-## 6. Preservation and cleanup inventory
+## 6. Preservation and cleanup completion
 
-Complete evidence is retained at the two archive locations and hashes listed
-in [collection facts](UCOPE_UAV_CONTINUE_END_CREDIT_B01_8801_COLLECTION_FACTS_20260911.json).
-The unique native source is committed/pushed471a3383d; code integration is
-Root-owned. Exact terminal remote checkout
-`/home/wu/hmasd-worktrees/ucope-continue-end-credit-b01-8801-20260911`
-has no tracked modifications and47354344bytes; its only ignored addition is
-this direction's output. Root receives preservation facts and confirms
-integration/retention for assigned reclamation. The remote archive outside it
-and local collection archive survive execution-checkout removal. Shared
-codex/ucope authoring checkout remains active. Local preparation pack/receipts
-are separately inventoried; their removal cannot erase the retained source.
+Result commit **bbe7958cb32a4746f56ab5b7e1a84d909f95489e** was pushed and
+Root confirmed integration at main **b2fe78755f0fae16bbd715fcfa704f01a5166afc**.
+All six declared launch-source surfaces at integrated main match source471a3383d.
+The committed native summary's Git blob also matches its original SHA256.
+Current owner reviews returned[]; no new owner instruction changes this result.
+
+Under Root's explicit reclamation assignment, final readback found the exact
+remote handle finished/exit0, no matching live process, a clean detached
+registration at471a3383d, and only the seven already archived native output
+files. All14 source evidence files matched the verified local archive before
+removal. The exact remote execution checkout, supervisor, source pack,
+admission file and evidence staging archive are now **absent on disk**;
+the checkout is also **absent from git worktree registration**. The redundant
+36,226,108-byte local source pack was removed after its digest check. Two
+small unique preparation receipts, the local complete evidence archive and
+the active shared codex/ucope authoring checkout remain.
+
+The first remote SSH/Bash text payload returned129 and only partly removed
+staging: source pack, admission and five supervisor files were gone while the
+checkout, registration, task.log and archive remained. Original stderr was
+not retained by that subprocess exception. Authoritative state and every
+remaining original hash were reconciled before continuing the same authorized
+scope with LF-byte delivery, which completed with exit0. Windows text newline
+translation is the inferred cause; there was no policy bypass, additional
+scientific invocation or evidence loss. Both failed and successful command
+time are included in the existing40s closeout charge.
+
+[Cleanup facts](UCOPE_UAV_CONTINUE_END_CREDIT_B01_8801_CLEANUP_FACTS_20260911.json)
+record the exact paths, execution/readback and measured pre-receipt command
+wall11.9792466s. A15s receipt-publication charge fits with that observation
+inside the already charged40s; neither is added again to support254.4329552s
+or complete1638.5729552s. Exact complete support overhead and aggregate CPU
+remain resources_unmeasured.
 
 Creator test scratch remains
 `temp/directions/ucope/test/continue-end-8801-20260911` under the shared
-checkout. Two previous cleanup payloads were rejected by automatic policy
-before creation, with exact reason **blocked by policy**. No third attempt,
-interpreter substitution or claim of successful cleanup is made. DM retains
-cleanup responsibility when a permitted route exists; Root has the blocker.
-This does not hold the empirical result or change its polarity.
+checkout, untouched as Root instructed. Both previous cleanup payloads were
+rejected by automatic policy before creation, with exact reason **blocked by
+policy**. No third attempt or interpreter substitution is made. DM retains
+this scoped cleanup responsibility when a permitted route exists; Root has
+the concrete blocker. It does not hold the valid empirical result.
 
 ## Decisions this intake produces
 

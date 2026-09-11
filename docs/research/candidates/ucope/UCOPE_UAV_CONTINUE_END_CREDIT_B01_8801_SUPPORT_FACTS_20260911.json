@@ -1,5 +1,5 @@
 {
-  "as_of": "terminal collected; native accepted, final documentation/cleanup charged separately",
+  "as_of": "native result and scoped remote cleanup complete; final receipt publication covered by existing40s charge",
   "initial_recovery_conservative_charge_s": 60,
   "failed_fetch_conservative_charge_s": 45,
   "failed_fetch_returned_wait_intervals_s": 15.0119164,
@@ -198,7 +198,7 @@
   ],
   "terminal_collection_command_wall_s": 11.2746888,
   "final_closeout_conservative_charge_s": 40,
-  "final_closeout_charge_scope": "Writing E0/intake/brief, final focused document checks, owner review, explicit commit/push/readback, assigned cleanup and receipt publication; compare actual returned command walls with40s and disclose excess. This is a charge, not a measured duration.",
+  "final_closeout_charge_scope": "Includes both the partial cleanup delivery and its reconciled completion, local redundant-pack removal, receipt checks and publication. Actual pre-receipt command wall plus15s publication charge is within40; no charge is added twice.",
   "charged_complete_support_s": 254.4329552,
   "charged_complete_allocation_s": 1638.5729552,
   "cap_assessment": {
@@ -212,5 +212,9 @@
     "aggregate_CPU_work",
     "exact_complete_support_elapsed_including_unmeasured_Monitor_overhead"
   ],
-  "interpretation": "Native complete wall is measured. Support and complete-allocation compliance use measured commands plus disclosed conservative charges; no measured or charged breach. These charges do not establish exact physical support elapsed."
+  "interpretation": "Native complete wall is measured. Support and complete-allocation compliance use measured commands plus disclosed conservative charges; no measured or charged breach. These charges do not establish exact physical support elapsed.",
+  "final_closeout_command_wall_before_receipt_s": 11.9792466,
+  "remaining_receipt_publication_charge_inside_existing40_s": 15,
+  "final_closeout_observed_plus_remaining_charge_s": 26.9792466,
+  "final_closeout_receipt": "UCOPE_UAV_CONTINUE_END_CREDIT_B01_8801_CLEANUP_FACTS_20260911.json"
 }
