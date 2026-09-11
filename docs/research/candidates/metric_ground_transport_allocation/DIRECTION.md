@@ -12,6 +12,36 @@ second-recast counts and stopped object-family boundaries remain unchanged.
 
 This authority preserves the direction's source-grounded scientific question, evidence references, and provenance.
 
+## Conditional pooling native B01 result — 2026-09-11
+
+The sole allocated COND/DENSE native pair8212 is complete and intaken as a valid
+B/EXPLORE package observation. Mean final J is0.16707705881756274 for COND and
+0.1613157374462142 for intact same-information DENSE. The mean of all32 ordered
+paired differences is **+0.005761321371348559**, conditional evaluation
+SE0.00888326841451271, with19 positive and13 negative worlds. It is inside the
+card's inclusive±0.01 band: retain the positive sign; DENSE remains the generic
+choice. Both real fits completed the declared512×256 training and32×256 final
+sampled episodes, with nonzero actor/critic/recurrent/branch movement.
+
+The strongest support is this positive complete native package observation;
+the strongest contradiction is that it does not reach the declared MEI, retains
+13 negative worlds including a−0.1396754570 difference, and sits alongside the
+separate old REL adverse aggregate−0.02396310430506595 (including its inside-MEI
+second master). Shared legal information allows generic DENSE adaptation; finite
+training variation and conditional pooling that helps some worlds but harms
+others remain live alternatives. Movement does not isolate attention causality.
+One trained pair supplies no training-population uncertainty or stable-superiority
+claim; tuned same-information native headroom is still absent.
+
+The named allocation ends here without another seed, evaluation, retry or automatic
+successor. A possible future discriminator is a separately allocated independent
+matched training pair assessing this small positive sign across training variation;
+none is selected here. No direction/Portfolio disposition, historical family
+boundary or recast count changes. Evidence:
+[card](MGTAP_CONDITIONAL_POOLING_B01_SCIENCE_CARD_20260911.md),
+[complete result](MGTAP_CONDITIONAL_POOLING_B01_RESULT_20260911.md),
+[scientific and technical intake](MGTAP_CONDITIONAL_POOLING_B01_INTAKE_20260911.md).
+
 ## Conditional user-pooling eligibility — 2026-09-10
 
 The complete original Convergence response at
