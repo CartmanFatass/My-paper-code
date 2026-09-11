@@ -1,5 +1,11 @@
 # Published unsent Portfolio handoff
 
+**Subsequent status: [QUEUED / BLOCKED_PRE_SEND — BINDING_BUSY](DELIVERY_STATUS.md).**
+Transport validated the exact prompt but opened no tab and made no paste/Send/retry
+or registry mutation. The publication facts and exact line below are preserved as
+history, not a current repeat-dispatch instruction. Recovery requires the recorded
+[material event](RECOVERY_EVENT.md); no Portfolio option or numerical allowance exists.
+
 Publication check: `2026-09-11T02:58:07.788152+00:00`. No implementation, source test, model, environment,
 scientific invocation, Pro Send, registry write or local Portfolio decision occurred.
 
