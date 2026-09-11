@@ -71,5 +71,15 @@
     "verdict_text": "建议P：另选一个新的相同LEARNED_EVENT/RETAIN真实训练对，完整上限3900秒；Q仅问原Convergence，R留空。此建议与四项A/B/C/D独立，尚未执行。",
     "source": "docs/research/portfolio/pro_packets/20260911_post_program_vacancies/SCIENCE_BRIEF.md"
   },
-  "starred": true
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-11T22:27:02+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/pro_packets/20260911_post_program_vacancies/PREPARATION_INTAKE.md",
+      "record": "docs/research/portfolio/pro_packets/20260911_post_program_vacancies/PREPARATION_INTAKE.md",
+      "state": "planned",
+      "summary": "FOLR完整intake/E0/摘要已发布8da607b4b并集成bc78a6bf8，全文已读；五个旧分配均结束，五个空位。建议P另投3900秒相同比较，Q仅问方向、R留空，尚未执行。原生1703.12秒；完整支持未知，本地重复件策略拒绝仅限制清理。"
+    }
+  ]
 }

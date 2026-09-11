@@ -3,7 +3,7 @@
   "changes_if_approved": [
     {
       "target": "本轮新增研究投入",
-      "from": "FSD已结束；MGTAP和ACVC科学intake及远端收尾完成；VNFC未就绪；FOLR新结果已被原DM接受",
+      "from": "五个旧分配均到终态边界，现有五个执行空位；VNFC未就绪且保留条件额度",
       "to": "建议新增FSD3000秒、MGTAP1200秒各一个完整比较，并各给RCLE、ACVC一个无数值额度的原Convergence问题"
     }
   ],

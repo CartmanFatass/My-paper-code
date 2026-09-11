@@ -60,11 +60,14 @@ Pro cost to experiment cost has been estimated.
 
 ## 1. Current state and what changed
 
-The current integrated snapshot is maind4f4baba7dc4c9a8d05c18f07a9eddf3cbbd85a6.
+The current integrated snapshot is mainbc78a6bf86854f9b3cbdc47880053337bcb72277.
 It includes MGTAP's full intake/E0 at5321b69fdecdc6de81fd5e8fb9efe648a5950e6e
 and ACVC's full intake/E0 from source6a24944011e1f11f105e7bd045700cd0ece90094.
-Both were read completely before freezing; Root's earlier reports retain their
-dated provenance. No result was inferred from a terminal label alone.
+Both were read completely before freezing. FOLR full294-line intake and142-line
+E0, plus scoped machine-summary fields and the new DIRECTION section, were then read
+at8da607b4b7fb415b4212e0e20d74f9dc9c20a32e. Root integrated them on the current
+main snapshot above. Earlier reports retain their dated provenance. No result was
+inferred from a terminal label alone.
 The dated Portfolio/tracking opening paragraphs contain older states; use their
 lifecycle/priority rows together with the later accepted records below and the
 complete program intake. FACTS.json distinguishes the dated observations.
@@ -74,24 +77,23 @@ complete program intake. FACTS.json distinguishes the dated observations.
 | FSD, ACTIVE/HIGH | New770903 staging reached its one remote Git fetch, which returned128 with GnuTLS receive/decode error, early EOF and invalid index-pack. The helper ended before checkout or admission. Exact execution/input/supervisor paths and checkout registration were absent. | The allocated unit is closed. Zero models, RNG masters, transitions, updates, evaluations or primary differences; no new scientific polarity. A further pair requires a newly selected investment, not reuse of770903. |
 | VNFC, ACTIVE/HIGH, recasts2 | Exact interpreter mapping expects40 bytes, while the retained failing block has32-byte metadata and a False keyword at offset32. Allocation-time counts/request and corrupting history are missing. Independent review found that the proposed numerical/path-exclusion checks do not establish corruption independence. Production remains unchanged and the draft checks unrun. | Existing conditional900-second funding remains unused unless Pro expressly changes it. Current repair/readiness assignment is closed NOT READY. No fresh scientific launch, additional diagnostic or alternate executor is selected here. |
 | MGTAP, ACTIVE/MEDIUM | Published valid COMPLETE COND_ADVERSE: COND.19342135238526614 versus DENSE.21589092584121028; delta−.02246957345594415, conditional SE.004312411137154014,5/32 positive. Full counts and binding pass; native358.11s. | Its scientific intake and remote closeout are complete; no successor is selected. Its completion creates an additional vacancy. A new pair is proposed separately, not released by this result. |
-| FOLR, ACTIVE/MEDIUM | Root forwarded owning-DM acceptance: LEARNED_EVENT1.60328125 versus RETAIN−.160078125, difference+1.763359375, LEARNED_EVENT_ABOVE_MEI. Both5000 training episodes/4969 optimizer steps/128 final returns; finite checkpoints and exact target copies; gate L2 displacement1.353121908. Whole native835.33+867.79=1703.12s. | One valid trained pair, no successor. Preserve its current complete intake/closeout; separately choose P/Q/R for the fifth vacancy. Full result publication is pinned when supplied before final TASK binding. |
+| FOLR, ACTIVE/MEDIUM | Root forwarded owning-DM acceptance: LEARNED_EVENT1.60328125 versus RETAIN−.160078125, difference+1.763359375, LEARNED_EVENT_ABOVE_MEI. Both5000 training episodes/4969 optimizer steps/128 final returns; finite checkpoints and exact target copies; gate L2 displacement1.353121908. Whole native835.33+867.79=1703.12s. | One valid trained pair, full intake and remote closeout complete, no successor. Source8da607b4b and mainbc78a6bf8 are pinned. Separately choose P/Q/R for the fifth vacancy; original DM retains only local duplicate cleanup after policy rejection. |
 | ACVC, ACTIVE/MEDIUM, recasts2 | Published valid complete B: F−C+.1414322041 J and F−dwell+.0944113176 J, both UP; dwell−C+.0470208865. All704 episode rows,1024 updates and exact8961/8962 keys pass; conservative native178s. | Its scientific intake and remote closeout are complete; no successor or promotion selected. C/dwell remain own-history controls, not F-clock/dose matches. Its third fresh gain changes the value of a direction decision. |
 
-MGTAP and ACVC have completed scientific intake and remote closeout at
- a267ba0a30a86f7e49edd320354c195016081cda and
- d4f4baba7dc4c9a8d05c18f07a9eddf3cbbd85a6, respectively. Their local duplicate
-removals were rejected before execution and remain owned by their DMs; unique
-evidence is preserved. Those residues are not advancing chains or scientific
-blocks. FOLR's original DM has accepted its primary and is completing publication/
-closeout. Four vacancies already exist; the next scientific allocation ends at
-FOLR's own boundary, creating the fifth. A continuing intake may count once while
-it is actual work; terminal handles or a future intention do not count.
+MGTAP/ACVC/FOLR scientific intakes and remote closeout are complete. Their local
+redundant removals were rejected before execution and remain owned by the original
+DMs; unique evidence is preserved. Those residues are neither advancing chains
+nor scientific blocks. Root confirms all five prior allocations have reached
+terminal scientific/technical boundaries. Thus **all five execution slots are
+currently vacant**; no automatic successor was selected. VNFC's conditional900
+remains an unready queued allocation, not a running direction.
 
-Section8 asks for an explicit fifth choice using the accepted positive result.
-No direction waits for another's intake or cleanup, and no old/new task counts
-twice for one direction. Root maintains actual execution state; queued VNFC
-funding is not an active chain. The packet supplies up to five independent next
-tasks rather than asserting five are already advancing.
+Section8 asks for an explicit fifth choice using the accepted FOLR result.
+Each selected next task starts at its own ready boundary, with no cross-direction
+intake/cleanup wait or old/new double count. Root maintains live execution state;
+this packet supplies up to five independent tasks, not an assertion that five
+are already advancing. A question or queued intention counts only when actual
+native work or its accepted Pro generation is advancing, under AGENTS§5.
 
 All15 scoped directions remain ACTIVE. Priorities, recasts, family pauses, formal
 UAV entry and lifecycle are unchanged unless Pro explicitly selects a prospective
@@ -367,16 +369,30 @@ RETAIN mean−.160078125; LEARNED_EVENT mean1.60328125; d_LR=+1.763359375 native
 return. At the frozen inclusive thresholds, this is LEARNED_EVENT_ABOVE_MEI.
 Both arms completed5000 training episodes,4969 RMSprop calls and all128 final
 returns. Checkpoints are finite, target-copy checks exact, and the129-coefficient
-gate moves L2=1.353121908 across4969 updates. These are owning-DM accepted facts;
-full immutable intake/E0 publication is pinned before final delivery when available.
-No primary was inferred from the earlier terminal labels.
+gate moves L2=1.353121908 across4969 updates. The full intake and E0 are now published at
+8da607b4b7fb415b4212e0e20d74f9dc9c20a32e and integrated atbc78a6bf86854f9b3cbdc47880053337bcb72277.
+Their complete contents were read directly, with accepted machine-summary fields.
+No primary was inferred from the earlier terminal labels. Conditional final-episode
+SDs are6.842348275 RETAIN and6.588527623 LEARNED_EVENT; these are not training-run
+uncertainty. The low-confidence WITHIN_MEI forecast missed; owner prediction was
+not taken. Eligible learned-gate opportunities45865 training/1317 final establish
+exposure, not a gate-value distribution or which histories were useful.
 
 The once-charged whole native windows are835.33/867.79 seconds, sum1703.12.
 Earlier runner834.9379585/867.4317784 and supervisor836/868 are overlapping
-windows, not extra work. RSS638384/649364KiB and the shared1.2-second terminal
-query retain their windows. Full support and aggregate CPU are not measured zero.
-The original3900-second allocation ends at its own complete intake/closeout;
-its unspent difference is not available funding and no successor was selected.
+windows, not extra work. Runner RSS638384/649364KiB and whole-chain peaks669112/671092KiB have different
+windows. The shared1.2-second terminal query is unsplit; native study elapsed is
+about931s and aggregate CPU user+system1706.13s. Published known support is
+72.7315400s, known native-plus-support1775.8515400s. The DM separately reported
+its later5.3739167-second publication command, making a later known support
+subtotal78.1054567s and native-plus-support1781.2254567s; this last increment is
+attributed to the DM receipt, not claimed present in the fixed earlier snapshot.
+Full support remains unknown and complete300/3900-cap conformance uncertified;
+native caps pass with no measured breach. The original3900-second allocation is
+now closed after complete intake and remote closeout. Local duplicate cleanup
+was blocked by automatic approval review before process creation; only those
+residues remain with the original DM. Its unspent difference is not available
+funding, and no successor was selected.
 
 | Separate fifth choice | What Pro would select | New allowance and stop |
 | --- | --- | --- |
@@ -440,7 +456,8 @@ credible alternative if Portfolio values defining the next claim over this finit
 repeat; it must ask a real direction question rather than rubber-stamp B. R declines
 additional investment without claiming futility. Contrary evidence remains one
 trained history, existing RETAIN adaptability, extra capacity/lifetime confounding,
-and fixed-half signs+1.56546875/−4.293046875 from another operation. A fresh gain
+initial.99 scaling versus learned adaptation, and fixed-half signs
++1.56546875/−4.293046875 from another operation. A fresh gain
 would not erase those distinctions or establish population-stable superiority.
 
 ## 9. Interpretation, execution and revisit boundaries
