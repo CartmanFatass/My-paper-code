@@ -1136,3 +1136,27 @@ FSD/VNFC limitations and MGTAP/ACVC outcomes. It will ask for concrete independe
 or an explicit vacant-capacity choice while preserving live FOLR and queued conditional VNFC. No
 local cross-direction selection, promotion, lifecycle change, cap transfer or new result-bearing
 launch is implied by that pending request.
+
+## Five-vacancy Portfolio request dispatched
+
+FOLR subsequently completed technical and scientific intake: LEARNED_EVENT mean `1.60328125`
+versus RETAIN `-0.160078125`, a `+1.763359375` difference and
+`LEARNED_EVENT_ABOVE_MEI` under the prospective inclusive plus/minus1 rule. Both5000-episode arms,
+4969 updates per arm and128 final worlds per arm passed; whole native wall totaled1703.12 seconds.
+The result supports one-pair gain only, and no successor was selected. Intake, E0, brief and scoped
+closeout are integrated through `bc78a6bf8`. All five program allocations are therefore terminal,
+with no automatically authorized successor.
+
+The designated Portfolio DM published request
+`2026-09-11-post-program-vacancies-portfolio-01` and its READY handoff through `3dbc336b0`. The
+fixed question exposes all five vacancies and separately offers new FSD, MGTAP and FOLR B pairs,
+RCLE and ACVC zero-numerical direction questions, and explicit vacant-capacity alternatives; the
+recommended `A+P` package projects8100 seconds of new nontransferable caps. Root delivered the exact
+bound prompt to the configured Transport task without model or thinking overrides. The Transport
+task remained attached to an older interrupted turn, so three same-task handoff recoveries were
+attempted; Git transfer steps completed each time, but destination-thread switching failed. The
+configured task and requested Pro conversation showed fresh app activity, while fresh GitHub reads
+still showed no new response commit or Issue17 comment. The request is therefore in uncertain
+acceptance/delivery state: no resend, local scientific substitute or replacement launch is allowed
+until Transport or immutable delivery state resolves it. Worktree `C:/Users/fires/.codex/worktrees/4947/HMASD`
+was created/reused by the handoff recovery and is retained as a live recovery dependency.
