@@ -1,6 +1,7 @@
 # FSD renewal-batch B01 / 770703 — exact execution and collection record
 
-**Allocated, preparation underway; no scientific command accepted yet.**
+**D0 accepted and dispatched to Monitor; adoption/terminal collection pending.
+I1280 is preselected and unlaunched.**
 This is the complete one-pair task from Portfolio option A, immutable response
 `ed0c4e1c3cd28be353253e8533bc89a261f25357`, applied through the
 [FSD execution mapping](../../portfolio/pro_packets/20260911_five_chain_refill/EXECUTION_MAPPING.md#fsd--complete-one-fresh-i1280d0-b-pair).
@@ -49,7 +50,13 @@ No grace interval or independent validation trajectory is introduced.
 The destination checkout must include `configs` and the FSD command directory
 in addition to all actual source dependencies; the generic sparse list alone
 omits both. Read actual committed shell bytes and run only `bash -n` before
-launch. Launch SHA and actual staging facts will be added after publication.
+launch. Published launch SHA is `c70f01ea30d6c4d063dcc46d8499b26bfe037da8`.
+The destination was fetched and staged at that exact detached SHA, with `configs`
+and the committed command directory included. Both `bash -n` checks passed;
+source checkout was clean and literal shell readback matched. The network shell
+printed noninteractive zsh/gitstatus diagnostics but fetch and all staging/check
+operations exited0. This required no import, numeric test, model or environment.
+See [destination receipt](uav_renewal_batch_b01_770703_20260911/DESTINATION_STAGING.txt).
 
 ## Exposure, cost and evidence limits
 
@@ -101,8 +108,16 @@ thread `01a087e5-2044-7301-abb6-7a1709a98197`, Root
 accepted handle, record dispatch and adoption separately, and stop DM polling.
 Root routes terminal facts back to this DM for collection and scientific intake.
 
-Preparation/launch state: **pending publication/staging/admission**. No handle
-is yet accepted. No scientific or test scratch exists for this allocation.
+Launch/handover state, recorded 2026-09-11T08:07:41.457Z: supervisor accepted the
+named D0 task and tmux session; direct MONITOR_ADD returned the live Monitor
+thread ID. **Dispatch is confirmed; actual adoption is pending.** This is one
+accepted scientific-command attempt; its adjacent admission/learner/publication
+facts are not yet observed by DM. The Monitor was asked to report those facts
+and its observation execution cost through Root to this native DM. No routine
+DM polling follows. I1280 remains preselected and unlaunched until D0 terminal
+and primary collection, with no change to either cap. See
+[D0 dispatch receipt](uav_renewal_batch_b01_770703_20260911/D0_DISPATCH.json).
+No additional numerical fixture or test scratch was created.
 Preservation and cleanup inventory will be prepared during collection; remove
 only completed owned roots after unique source/evidence preservation and Root's
 integration/retention reconciliation. Keep the shared authoring checkout.
