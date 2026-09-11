@@ -2,7 +2,8 @@
 
 ## Current state and assignment
 
-Prospective preparation only; no new native result exists yet. Root forwards Portfolio
+Both arms are accepted, running and separately Monitor-adopted; final results and intake
+remain pending. No performance polarity is assigned. Root forwards Portfolio
 conformance PASS for option P at response `41c46303f66005f74a18dccf45974d99771b155b`,
 `docs/research/portfolio/pro_packets/20260911_post_program_vacancies/archive/RESPONSE.md`
 §§1,3. The exact source-grounded new [B02 card](FOLR_LEARNED_RETENTION_B02_SCIENCE_CARD_20260911.md)
@@ -65,3 +66,45 @@ Their parameters are the declared7810/107810 identities, original runner and1800
 whole-chain timeout. Source is published before remote staging; commands are committed
 before submission. Fresh-binding shell syntax and namespace absence will be checked
 without a model, rollout, fixture or repeated accepted test. No handle is accepted yet.
+
+## Accepted launch and Monitor handover
+
+Exact source/card2b22270b3b076df60f4afd3203c3f09aeab3b98b and command commit
+1c9c7c12fba7e54486e2a91061f17990e97ad33d are published. Remote checkout is
+/home/wu/hmasd-worktrees/folr-learned-retention-b02-2b22270b3 on wsl_4070.
+All10 declared source/test files match accepted source8d518ff; tracked source is clean.
+Both new namespaces were absent and both literal commands passed shell syntax checking.
+No model, fixture or passing accepted test was rerun. One initial control preparation
+received Windows text-mode CRLF, making shell/ref parsing fail before source staging;
+disk/registration/handle absence was reconciled and the same inputs succeeded over
+binary LF transport. No scientific invocation, replacement seed or retry arose from that repair.
+
+| Arm | Accepted handle | Accepted UTC | Initial PID | Adjacent available bytes |
+| --- | --- | --- | ---: | ---: |
+| RETAIN | folr-learned-retention-b02-retain-20260911 | 23:36:39.666744 |3354804|14551658496|
+| LEARNED_EVENT | folr-learned-retention-b02-learned-event-20260911 |23:37:40.476495|3354968|14309847040|
+
+Both immediate supervisor states were running with active detached sessions, and each
+physical/effective admission passed the4294967296-byte minimum before its runner.
+Each actual arm uses the committed5000/128/7810/107810 invocation and independent
+1800-second whole-chain timeout. Both were submitted without observing a score.
+
+Direct MONITOR_ADD delivery to live app thread01a087e5-2044-7301-abb6-7a1709a98197 was
+accepted separately for both handles. Root forwarded each actual MONITOR_ADOPTED,
+with running source/cwd/output matching and0.7 seconds observation cost each. Dispatch
+and adoption are now both confirmed. DM has stopped routine status polling; Monitor
+owns observation, and Root resumes this same DM for terminal collection.
+
+Known invoked support through this snapshot is 29.1637400 seconds including1.4 reported
+Monitor seconds. Native wall/RSS, complete support and scientific exposure remain pending;
+unitemized terms are unknown. No complete3900-second certificate is asserted. Both live
+scientific/supervisor roots and the exact worktree remain intact for collection. Owned
+control receipts are at temp/directions/vap_folr_core/exp/learned_retention_b02_control_20260911.
+Prior B01 policy-blocked duplicates are outside this new launch and were not touched.
+
+Object technical decision: accept these exact two detached handles and the observed
+Monitor handover, preserving pending result status. Alternative is to infer a primary
+or repeat a run without terminal evidence; reject it. Owner-delegated decision
+(unattended,2026-09-03 instruction): accept the handover. Root integrates these published
+records; neither launch nor adoption is scientific acceptance. The next action is terminal
+collection of the same handles, not a new invocation or consultation.
