@@ -3,9 +3,12 @@ Binding MARL structure: (b) temporal abstraction or termination; asynchronous in
 
 # FSD renewal batch B01 — source-grounded prospective design
 
-**DESIGN ONLY; proposed B/EXPLORE; zero implementation and zero numerical allowance.**
-One existing configuration consumer supports the proposed operation. This is ready
-as a source/design return, not as an accepted executable or a launch assignment.
+**Proposed B/EXPLORE; implementation-only allocation, zero real B exposure.**
+The original design-only return is complete. The subsequent Portfolio selection
+allocates one source/technical return and at most one complete 60-second synthetic
+fixture. The real B and the proposed 3000-second envelope remain unallocated.
+Technical acceptance and its limits are recorded in the
+[implementation intake](FSD_UAV_RENEWAL_BATCH_B01_IMPLEMENTATION_INTAKE_20260910.md).
 
 ## 1. Authority, question and bounded selection
 
@@ -15,6 +18,14 @@ allocate one FSD document return. Root assigned the existing `codex/fsd` checkou
 main input `867f5e3092b3279cab3b5fb668085dc3cd8f4481` was reconciled in
 `48d315a61b081f0492ced1a7f30b871fa4a958cf`, the source inspected here.
 The complete Portfolio response is immutable `f4fce9a4fd9603db66463ad8c81bb9464533e260`.
+
+The subsequent [implementation mapping](../../portfolio/pro_packets/20260910_fifth_slot_implementation_selection/EXECUTION_MAPPING.md)
+applies the conforming Portfolio option A from full response
+`ade6a687d53b97b5f6cc2fe97da39daa2ad9bfa9`, integrated at
+`75d4fa18e1a0a6dbda50b11f5b9f9a6467cc86ef`. Root assigns only that named
+implementation return; merge `eec2ec260` brings these exact inputs into the
+existing `codex/fsd` worktree. This prospectively supersedes only the earlier
+zero-implementation/check allowance, without rewriting its completed design intake.
 
 The one proposed question is: after five ordinary native training rollouts, does
 **I1280**, the existing .25 individual-renewal package with coordinator batches
@@ -220,35 +231,64 @@ be counted as zero. No borrowing, grace, extra fit, retry or automatic extension
 If separately allocated, retain remote-first CPU four threads/FP32 and fresh
 destination memory admission; no admission or launch occurs in this return.
 
-Current exposure: **scientific invocations=0; models=0; checkpoint loads=0;
+At the original design return, exposure was: **scientific invocations=0; models=0; checkpoint loads=0;
 environments=0; training/native/synthetic steps=0; optimizer calls=0;
 evaluations=0; tests/fixtures=0; replay/profiling/support search=0; Pro Sends=0;
 parameter displacement=not applicable (no learner)**.
-This reuses the accepted allocation's zero-exposure definition; file/Git and
+That reused the design allocation's zero-exposure definition; file/Git and
 owner-console operations are document work. No claim is made that authoring is free.
 
-## 7. Remaining engineering boundary
+## 7. Selected implementation boundary and L0
 
-The existing algorithm/configuration consumer is real, but the old fixed runner
-is **not** already a runnable I1280 object. `make_config` sets only the old arm
-cost; `main` has no batching argument; `assemble_pair` requires all configuration
-fields except the old cost to match. Running it unchanged would not implement
-this design. No monkeypatch, permissive pair validator or old-card rewrite is
-selected as a substitute.
+Deliverable: one explicit I1280/D0 entry, the matching strict primary readout,
+and one complete technical acceptance return. The entry is
+`scripts/run_fsd_uav_renewal_batch_b01.py`; it reuses the B01 runner's collection,
+learning and final evaluation path. Its retained CLI/summary arm `I` denotes
+I1280 only under new object ID `FSD_UAV_RENEWAL_BATCH_B01`, this card, and
+training/evaluation bases 770703/780703. D0 keeps its identity. The entry binds
+the proposed future per-arm caps 900/1800 seconds; these constants do not fund
+an invocation, and the proposed shared 300-second support reserve is unallocated.
 
-A later bounded binding would explicitly pass the coordinator batch value to
-both learner and evaluator, preserve B01/B02 defaults, name the new object/seeds,
-and permit exactly the declared 1280/128 distinction in its own pair readout.
-The core `agent.py`, `utils.py`, config defaults, native environment and credit
-formulas need no algorithm change for this operation. Existing snapshots already
-include the field when present. Focused future checks need to falsify that actual
-D2 batching consumer and the new primary/configuration readout; none was run here.
+Owned paths/checkout: `scripts/run_fsd_uav_individual_renewal_b01.py`, the new
+entry, `tests/experiments/candidates/flexible_skill_duration/uav_renewal_batch_b01/`,
+this card and direction technical intake in
+`C:/Projects/HMASD-worktrees/codex-fsd`, branch `codex/fsd`. Root owns main
+integration and Portfolio/tracking. Keep existing historical evidence intact.
 
-Engineering Scope §4 needs **none** for this document return or the proposed
-ordinary binding; no new execution/retry/telemetry/registry machinery is requested.
-The current five-fact L0 is Root's one-return assignment: owned direction docs
-and audit/item records in `codex/fsd`; unchanged source and historical semantics;
-acceptance by these inspected consumers and explicit remaining gaps; zero
-implementation/numerical budget; stop after this complete committed return.
-Any later implementation, focused checks, source acceptance or execution must
-have its own actual allocation. This document creates none.
+Preserved semantics: §§2–5 control. A default-false `renewal_batch` argument
+passes through learner and evaluator construction and the paired readout.
+Only the new entry enables it. It sets 1280/128 before either model is built;
+both snapshots record the field. The new readout requires those exact values
+before removing that one additional comparison field. Every other configuration
+field remains compared; the existing .25/infinity cost distinction remains exact.
+B01/B02 retain their default arguments, object IDs, seeds and command behavior.
+The summary's per-arm cap now supplies the existing deadline check, with B01/B02
+retaining their original caps. No core algorithm, shared configuration default,
+environment, reward, duration credit, RNG or recurrent-state path changes.
+
+Acceptance: independent read-only high-risk review under Engineering Scope §7.3;
+inspect changed/imported paths before the single fixture. Exercise the real D2
+sampler and new reducer with visibly synthetic records, covering complete row
+visitation/final chunk, declared new configuration difference, old defaults,
+undeclared-difference rejection and missing primary. Static inspection and
+accepted prior evidence cover unchanged full collection/evaluation behavior;
+do not run a model, environment or old full-learner smoke for this assignment.
+
+Budget/stop: at most **one** whole fixture command, **60 seconds** including
+imports, publication, this invocation's scratch cleanup and exit; **four**
+lightweight Config objects; **one** deterministic buffer with at most **1281**
+valid joint rows; **two** real sampler traversals, once at 1280 and once at 128;
+**four** synthetic pair readouts, each with 32 supplied scores per arm.
+Models/encoders/critics, checkpoint loads, environments/steps, collection/training,
+optimizer calls, real endpoint evaluations, replay, profiling, support search
+and scientific invocations are **zero**. A pass establishes only binding,
+traversal and synthetic primary publication. Full learner numerics, activation
+memory, new complete cost and native benefit remain unmeasured. No second
+numerical invocation follows a failure, correction or review. Report any gap
+left by an invalidated check; finish one committed return, including an
+incomplete return if necessary. No MGTAP fallback or automatic successor.
+
+Engineering Scope §4 needs **none**. Existing 2000/600-line and cumulative
+five-minute directory test limits remain. The fixture owns a unique directory
+under this checkout's `temp/`; retain its useful report and remove only that
+scratch. There is no result-bearing root or Monitor handle in this assignment.
