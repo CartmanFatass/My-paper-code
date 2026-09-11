@@ -1,0 +1,77 @@
+{
+  "object_id": "FSD_UAV_RENEWAL_BATCH_B02",
+  "status": "prelaunch_incomplete",
+  "accounting_unit": "Each actually invoked support command/tool execution wall charged once; summed independent commands, not a study calendar span.",
+  "charges": [
+    {
+      "label": "new_assignment_checkout_live_control_owner_read",
+      "seconds": 0.6868672
+    },
+    {
+      "label": "reused_source_current_intake_and_instruction_diff_read",
+      "seconds": 0.3136765
+    },
+    {
+      "label": "fresh_binding_scope_and_skill_refresh",
+      "seconds": 0.4594083
+    },
+    {
+      "label": "integrate_required_accepted_inputs_and_push",
+      "seconds": 5.2429845
+    },
+    {
+      "label": "fresh_binding_focused_read_0",
+      "seconds": 0.1278892
+    },
+    {
+      "label": "fresh_binding_focused_read_1",
+      "seconds": 1.9130103
+    },
+    {
+      "label": "prospective_identity_and_changed_contract_read_0",
+      "seconds": 1.1482385
+    },
+    {
+      "label": "prospective_identity_and_changed_contract_read_1",
+      "seconds": 0.8913437
+    },
+    {
+      "label": "corrected_prospective_search_and_focused_contract_read",
+      "seconds": 0.3682921
+    },
+    {
+      "label": "write_fresh_entry_card_exact_commands_and_owner_packet",
+      "seconds": 0.021
+    },
+    {
+      "label": "one_in_memory_stub_AST_and_count_publication_live_monitor_read",
+      "seconds": 0.4525386
+    },
+    {
+      "label": "independent_changed_binding_review_four_read_only_commands",
+      "seconds": 1.3121286
+    },
+    {
+      "label": "record_changed_binding_acceptance_support_and_identity_facts",
+      "seconds": 0.018
+    },
+    {
+      "label": "freeze_new_card_owner_item_audit_and_cost_snapshot",
+      "seconds": 0.4117251
+    }
+  ],
+  "known_support_seconds": 13.367102600000003,
+  "support_cap_seconds": 300,
+  "complete_cap_seconds": 3000,
+  "unknown_attribution": [
+    "Tool envelope/native message dispatch time not supplied is unknown, not zero.",
+    "Future staging, Monitor observation, collection/reduction/publication/cleanup are not yet incurred."
+  ],
+  "exclusions": [
+    "Agent authoring and reasoning",
+    "Pro time",
+    "Idle calendar waiting"
+  ],
+  "validation": "No numerical fixture, model smoke, native validation or profiling.",
+  "interpretation": "A known subtotal is not full cost certification; missing attribution alone is not a breach."
+}
