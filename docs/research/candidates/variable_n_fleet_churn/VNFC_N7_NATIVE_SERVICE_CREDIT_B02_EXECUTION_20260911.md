@@ -78,3 +78,51 @@ and subsequent intake. The old unpublished request draft remains under the prese
 assignment in re-entry intake section7. Terminal collection will preserve unique evidence,
 then inventory exact execution/test artifacts for authorized cleanup. Root confirms
 integration/retention and eventual worktree reclamation. No remote run is accepted yet.
+## Exact execution command
+
+Reviewed scientific source was committed and pushed at
+`76d4afca664f988fbaabca2923a0c891f8a784ff`. This exact SHA, not a later documentary HEAD,
+is the execution input. Node `wsl_4070`; prospective detached checkout
+`/home/wu/hmasd-worktrees/vnfc-b02-credit-20260911-01`; handle
+`vnfc-b02-credit-20260911-01`. Source staging alone starts no scientific process.
+
+After committed source staging, the one supervisor command is:
+
+```bash
+/usr/local/bin/agent-task run vnfc-b02-credit-20260911-01 "cd /home/wu/hmasd-worktrees/vnfc-b02-credit-20260911-01 && /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/variable_n_fleet_churn/exp/b02_credit_20260911_01_memory.json && /usr/bin/time -f 'elapsed_seconds=%e\npeak_rss_kib=%M\nexit_status=%x' -o temp/directions/variable_n_fleet_churn/exp/b02_credit_20260911_01_outer_time.txt timeout --signal=TERM --kill-after=1s 600s /home/wu/.venvs/hmasd/bin/python scripts/run_vnfc_native_service_credit_b02.py --seed 2026091101 --eval-seed 2026091102 --out temp/directions/variable_n_fleet_churn/exp/b02_credit_20260911_01 --launch-sha 76d4afca664f988fbaabca2923a0c891f8a784ff"
+```
+
+The timer includes the timeout wrapper, Python imports/build through final process exit.
+The600s timeout bounds the complete scientific invocation; any kill-grace overshoot is
+reported as a cost breach, not accepted as within600s. Native outputs are under the named
+run root. The memory receipt and outer time file are sibling files outside that root.
+Supervisor log/status are `/home/wu/.agent-tasks/vnfc-b02-credit-20260911-01/`.
+
+The live Monitor endpoint was reread from
+`C:/Projects/HMASD/.codex/hmasd-monitor.toml`: `01a087e5-2044-7301-abb6-7a1709a98197`,
+Root `01a07249-b095-7821-8ce2-e9c32ba85267`. On acceptance the DM sends the exact handle,
+SHA, node/cwd/run/receipt paths and original owners directly, with observation command
+wall charged to this object's support budget. Dispatch and actual adoption are separate.
+Owner reviews again returned `[]`. No launch acceptance or model result is asserted here.
+
+## Exact source staging receipt
+
+The first remote HTTPS fetch timed out (exit124), outer wall37.02s; no scientific
+process existed. The configured network-login shell was not used for that fetch, so
+this is a command-level network timeout, not evidence that remote source is unavailable.
+The permitted exact-byte alternative used an incremental Git bundle against the
+already-present `2482db44052705b130b3970456415d2309c99e2b`. A first bundle command naming
+only the raw commit produced `Refusing to create empty bundle`; it transferred nothing.
+Using HEAD at the same bound SHA produced89,959 bytes; `git bundle list-heads` returned
+`76d4afca664f988fbaabca2923a0c891f8a784ff HEAD`. Creation plus SCP took0.7596152s internally.
+Remote import took0.12s; detached worktree creation took0.21s. The new exact checkout
+reported the bound SHA and an empty short status. No uncommitted source was staged.
+The37.02s fetch wall is conservatively included in support accounting, including its
+network wait; no administrative exclusion is used to hide this failed operation.
+
+Local bundle:
+`temp/directions/variable_n_fleet_churn/source_staging/b02_76d4afca6.bundle`.
+Remote bundle: `/home/wu/hmasd-inputs/vnfc_b02_76d4afca6.bundle`.
+Both are this DM's source-staging artifacts for collection-time cleanup after evidence
+preservation; the detached execution checkout remains until terminal collection/acceptance.
+Source commit/push command added5.3752014s displayed support wall.
