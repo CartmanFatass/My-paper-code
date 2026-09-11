@@ -41,9 +41,9 @@ def save_model(model, path):
                 "model": "NearestPriorModel"}, path)
 
 
-def make_rng(seed):
-    key = host.seed_root_key(f"{OBJECT_ID}/seed/{seed}")
-    digest = host.block_digest_hex(key, OBJECT_ID, 0)
+def make_rng(seed, object_id=OBJECT_ID):
+    key = host.seed_root_key(f"{object_id}/seed/{seed}")
+    digest = host.block_digest_hex(key, object_id, 0)
     authority = host.B01BlockAuthority(
         certificate={"native": host.native_certificate_payload()}, block_index=0, root_digest=digest)
     return authority, b03.SemanticRNG(authority, 0, now=datetime.now(timezone.utc))
@@ -97,26 +97,27 @@ def reading(delta, gain, mixed):
     return branches
 
 
-def run(arm, out, launch_sha, admission_receipt, started, wall_cap, learned_summary=None, seed=SEED):
+def run(arm, out, launch_sha, admission_receipt, started, wall_cap, learned_summary=None, seed=SEED,
+        *, updates=UPDATES, object_id=OBJECT_ID, panel_label="B04"):
     out.mkdir(parents=True, exist_ok=True)
-    summary = dict(object=OBJECT_ID, seed=seed, arm=arm, launch_sha=launch_sha,
+    summary = dict(object=object_id, seed=seed, arm=arm, launch_sha=launch_sha,
                    admission_receipt=str(admission_receipt), action_law=LAW,
                    status="IN_PROGRESS", scenarios=[], curves=[])
     try:
-        authority, rng = make_rng(seed)
-        summary.update(root_key_hex=host.seed_root_key(f"{OBJECT_ID}/seed/{seed}").hex(),
+        authority, rng = make_rng(seed, object_id=object_id)
+        summary.update(root_key_hex=host.seed_root_key(f"{object_id}/seed/{seed}").hex(),
                        block_digest_hex=authority.root_digest, native=authority.certificate["native"])
         if arm == "learned":
             model = initialize_model(rng)
             initial = host.flat_parameters(model).clone()
             summary.update(allocations=dict(models=7, training_instances=1, untrained_helpers=6),
                            initial_parameter_norm=float(torch.linalg.vector_norm(initial)),
-                           actor_score_weight=100, updates_per_fit=UPDATES)
+                           actor_score_weight=100, updates_per_fit=updates)
             save_model(model, out / "initial_parameters.pt")
-            summary["initialization_panel"] = b03.panel(model, rng, "B04-INITIAL", started, wall_cap)
+            summary["initialization_panel"] = b03.panel(model, rng, f"{panel_label}-INITIAL", started, wall_cap)
             host.write_json(out / "init_scenarios.json", summary["initialization_panel"])
             baselines = torch.zeros(8, dtype=torch.float64)
-            for update in range(UPDATES):
+            for update in range(updates):
                 host.check_wall(started, wall_cap)
                 baselines, curve = b03.training_update(model, rng, update, baselines, 100.0)
                 summary["curves"].append(curve)
@@ -124,7 +125,7 @@ def run(arm, out, launch_sha, admission_receipt, started, wall_cap, learned_summ
                     blocks.write(b03.json.dumps(curve, allow_nan=False) + "\n")
             save_model(model, out / "parameters.pt")
             host.write_json(out / "summary.json", summary)
-            summary["scenarios"] = b03.panel(model, rng, "B04-FINAL", started, wall_cap)
+            summary["scenarios"] = b03.panel(model, rng, f"{panel_label}-FINAL", started, wall_cap)
             summary["initialization_summary"] = b03.panel_summary(summary["initialization_panel"])
             summary["final_displacement"] = float(torch.linalg.vector_norm(host.flat_parameters(model) - initial))
             summary["final_baselines"] = baselines.tolist()
