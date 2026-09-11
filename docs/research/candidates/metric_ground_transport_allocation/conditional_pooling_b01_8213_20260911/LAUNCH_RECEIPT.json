@@ -23,6 +23,15 @@
       ],
       "isError": false
     },
-    "adoption": "pending; Root forwards actual MONITOR_ADOPTED"
+    "adoption": {
+      "source": "Root native message",
+      "handle": "mgtap-cond-b01-8213-20260911",
+      "status": "running",
+      "admission_passed": true,
+      "physical_effective_gb_reported": 15.63,
+      "memory_floor_gb": 4,
+      "source_sha": "323cdf576a7b7290bd74bbccf47c0386072dc4c2",
+      "observation_command_wall_seconds": 0.7
+    }
   }
 }
