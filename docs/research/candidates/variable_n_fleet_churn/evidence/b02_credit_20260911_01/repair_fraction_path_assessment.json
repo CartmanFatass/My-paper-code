@@ -1,0 +1,119 @@
+{
+  "recorded_at": "2026-09-11T21:25:03.292894+00:00",
+  "question": "Does the exact-build static mapping and proposed arithmetic/constructor-exclusion regression meet Portfolio section6 repair acceptance?",
+  "portfolio_response_sha": "6c32ade3216c374ecf2f5179b15d559729cd45c9",
+  "static_evidence_commit": "06fc94e6268072a3be02abc78738d32813b950f0",
+  "static_evidence": "repair_exact_interpreter_static.json",
+  "expected_layout": {
+    "positional_values": 3,
+    "keyword_values": 1,
+    "reserved_pointer_slots": 1,
+    "pointer_bytes": 8,
+    "expected_bytes": 40,
+    "saved_debug_header_bytes": 32,
+    "expected_false_offset_bytes": 32,
+    "relocated_false_address": "0x5722fcf9bac0",
+    "saved_tail_address_value": "0x5722fcf9bac0"
+  },
+  "direct_vs_inferred": "Header32 and tail value are saved observations. Formula40 follows the exact installed instructions and expected declared call counts. Allocation-time counts/requested size are not captured.",
+  "source_boundary_conclusion": "No missing-eight-byte allocation formula is established. False at32 is valid within the expected40-byte vector and conflicts with the saved32-byte header. The origin remains unestablished.",
+  "candidate": "repair_fraction_path_candidate.patch",
+  "candidate_test_sha256": "ae06c830e6368954856b2c8dd01b7d79b41af1bf6208e0d9719ecf3cd632e25f",
+  "candidate_effect": "Exact arithmetic and removal of the implicated Fraction constructor path; no demonstrated independence from prior corruption.",
+  "independent_review_finding": "The proposed tests can check exact output, rounding, order, input/gradient ownership and path exclusion, but do not fill the allocation-time/metadata-origin gap required by Portfolio section6.",
+  "decision": "Retain the candidate and regression as unadopted/unrun; production source unchanged; readiness NOT READY.",
+  "decision_provenance": "OWNER_DELEGATED — Owner-delegated decision (unattended, 2026-09-03 instruction): retain the precise technical gap and decline unsupported adoption.",
+  "remaining_fact": "Actual allocation-time positional/keyword counts and requested size versus subsequently observed debug size metadata. Existing static receipts cannot distinguish changed call state, size-metadata corruption, or another earlier corruption, and do not identify the first erroneous writer.",
+  "readiness": {
+    "current_source_repair_accepted": false,
+    "focused_regression_executed": false,
+    "independent_review": "complete; material readiness gap accepted by DM",
+    "repaired_source_remote_staging": "not performed; no adopted repaired source",
+    "scientific_launch_authorized": false
+  },
+  "execution_counts": {
+    "debugger": 0,
+    "dynamic_fixture": 0,
+    "pytest": 0,
+    "scientific_model": 0,
+    "environment": 0,
+    "optimizer": 0,
+    "scientific_rng_master": 0,
+    "training": 0,
+    "evaluation": 0,
+    "scientific_invocation": 0
+  },
+  "cost": {
+    "unit": "wall_seconds",
+    "components": [
+      {
+        "name": "DM initial direction evidence read",
+        "seconds": "0.4755889"
+      },
+      {
+        "name": "DM Portfolio/runtime read",
+        "seconds": "0.3435054"
+      },
+      {
+        "name": "DM source/test instructions read",
+        "seconds": "0.4023114"
+      },
+      {
+        "name": "DM scope and existing-test read",
+        "seconds": "0.3045266"
+      },
+      {
+        "name": "DM Portfolio/specification read",
+        "seconds": "0.3322765"
+      },
+      {
+        "name": "Refused fast-forward, no merge effect",
+        "seconds": "0.2822376"
+      },
+      {
+        "name": "Main reconciliation merge and immediate push",
+        "seconds": "5.4534294"
+      },
+      {
+        "name": "Portfolio section read",
+        "seconds": "0.2318806"
+      },
+      {
+        "name": "Failed default-code-page response read",
+        "seconds": "0.3248927"
+      },
+      {
+        "name": "Corrected UTF-8 response read",
+        "seconds": "0.2801"
+      },
+      {
+        "name": "Published static artifact read",
+        "seconds": "0.3142329"
+      },
+      {
+        "name": "Preserve unadopted source and regression draft",
+        "seconds": "0.3385655"
+      },
+      {
+        "name": "Independent static reviewer seven commands",
+        "seconds": "4.9540463"
+      },
+      {
+        "name": "Independent exact-static artifact publication",
+        "seconds": "6.3729295"
+      },
+      {
+        "name": "Independent current diff/regression review",
+        "seconds": "0.6660973"
+      }
+    ],
+    "documented_component_sum_seconds": "21.0766206",
+    "scope": "This maintenance continuation only; separate from the conditionally funded900-second scientific unit. Nested reviewer capture0.6437807s and enclosing tool clocks are not added.",
+    "unmeasured": [
+      "Document patching, this assessment write, final check/commit/push and Root integration not included; final command clocks returned separately"
+    ],
+    "maintenance_planning_bound_seconds": 120,
+    "complete_support_total": false
+  },
+  "retention": "Both prior cores, original11-file archive, supervisor and retained historical local copies/scratch preserved. Only the new unadopted test-source draft was removed after exact preservation in the candidate patch."
+}
