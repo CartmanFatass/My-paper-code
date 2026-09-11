@@ -1,0 +1,70 @@
+{
+  "source_sha": "323cdf576a7b7290bd74bbccf47c0386072dc4c2",
+  "retained_native_files": {
+    "admission.json": {
+      "bytes": 504,
+      "sha256": "35036729aaf845cdbee72558deab9710a68815aa20651f38c966092bcb00ae0a"
+    },
+    "episodes.jsonl": {
+      "bytes": 763736,
+      "sha256": "fa713f4b9a8428aff6f81ab0972eb9161836b9a7379b0dc43b5cbaeb96876f19"
+    },
+    "final_COND.pt": {
+      "bytes": 282869,
+      "sha256": "cb29cfda66b15aac9a0c1e85978aba666d2bdf9862089ac079389971bf3ed13b"
+    },
+    "final_DENSE.pt": {
+      "bytes": 282893,
+      "sha256": "8be19cfb6246838428cad411cabd91904bec5824a625a6b4d6dd4c9f29b7b818"
+    },
+    "rollouts.jsonl": {
+      "bytes": 420811,
+      "sha256": "e1b0ed7125d63ff4c880e70800ebbe9eb2f9ba7fdaea1c4f58aca037cbd2cded"
+    },
+    "summary.json": {
+      "bytes": 1016805,
+      "sha256": "b610d941dce2a5bd3449d2af2f4dcd06f040808e332eed52139e11f1bd727ee6"
+    }
+  },
+  "retained_supervisor_files": {
+    "exit_code": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "pid": {
+      "bytes": 8,
+      "sha256": "57a4407de235061c17bce042cd2b1d9ceb10adc4f52a15d01efddcbb5a98d50b"
+    },
+    "runner.sh": {
+      "bytes": 1026,
+      "sha256": "57b60870f7b9469a63bdc5eb55a584ee523a1414393754b6ad5ab563406b0a7a"
+    },
+    "start_time": {
+      "bytes": 11,
+      "sha256": "f3e1a79446d71f1160829470d5070051bc2db3a8f436ce3e3046f3373a0401e5"
+    },
+    "status": {
+      "bytes": 9,
+      "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+    },
+    "task.log": {
+      "bytes": 3501,
+      "sha256": "34becbfbc5fa276c4ca6200c6e31cde98044049710cf5841a98b8aec8c9e02bd"
+    }
+  },
+  "raw_readback_matches_remote": true,
+  "archive_sha256": {
+    "native": "5426b5dc1a5c1a09ac1d989239174f1e4a204c098e633cd4eb2a2837ceaa1fb4",
+    "supervisor": "6d6e55923e75c90334dcce9ddfdb634f05ae4fd745bc37fba154f069486505ca"
+  },
+  "remote_cleanup_pending": [
+    "/home/wu/hmasd-worktrees/mgtap-cond-b01-8213-20260911",
+    "/home/wu/hmasd-inputs/mgtap-cond-b01-8213-20260911",
+    "/home/wu/.agent-tasks/mgtap-cond-b01-8213-20260911"
+  ],
+  "local_cleanup_pending": "C:\\Projects\\HMASD-worktrees\\dm-n5-continue-20260904\\temp\\directions\\metric_ground_transport_allocation\\exp\\conditional_pooling_b01_20260911_8213_source",
+  "shared_authoring_checkout_retained": "C:\\Projects\\HMASD-worktrees\\dm-n5-continue-20260904",
+  "cleanup_owner": "original DM /root/dm_mgtap_cond_implementation",
+  "cleanup_event": "after Root integration/retention fact, remove owned duplicate artifacts and verify absence",
+  "brief_characters": 304
+}
