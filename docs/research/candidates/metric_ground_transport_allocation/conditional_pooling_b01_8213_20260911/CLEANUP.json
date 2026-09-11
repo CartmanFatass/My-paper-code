@@ -1,0 +1,29 @@
+{
+  "root_integration": "5321b69fd",
+  "evidence_commit": "9cb609a52014b96e8077582bc589d494a7e9409d",
+  "remote_worktree": "/home/wu/hmasd-worktrees/mgtap-cond-b01-8213-20260911",
+  "remote_worktree_disk_absent": true,
+  "remote_worktree_registration_absent": true,
+  "staging": "/home/wu/hmasd-inputs/mgtap-cond-b01-8213-20260911",
+  "staging_absent": true,
+  "supervisor": "/home/wu/.agent-tasks/mgtap-cond-b01-8213-20260911",
+  "supervisor_absent": true,
+  "all_remote_raw_bytes_rechecked_before_removal": true,
+  "exact_owned_paths_only": true,
+  "removed_stage_files": [
+    "COMMAND.sh",
+    "source.bundle",
+    "native_result.tar.gz",
+    "supervisor_result.tar.gz"
+  ],
+  "removed_supervisor_files": [
+    "exit_code",
+    "pid",
+    "runner.sh",
+    "start_time",
+    "status",
+    "task.log"
+  ],
+  "command_inner_wall_seconds": 0.09328832407481968,
+  "remote_cleanup_outer_command_seconds": 0.5883755999966525
+}
