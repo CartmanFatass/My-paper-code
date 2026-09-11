@@ -877,3 +877,26 @@ numerical or implementation work. All four were dispatched to their existing dir
 each DM retains technical/scientific acceptance and its own Monitor handoff where a real B is
 accepted. The fifth direction slot remains explicitly unallocated, and no paused or blocked family
 was revived to fill it.
+
+## Post-option-A execution refill applied
+
+Transport archived request `2026-09-11-post-a-execution-refill-portfolio-01` after one accepted
+Send and natural completion; response `4bf41fd519d5df6ae20beaa27c90f0b581285c0ad254ff74107f2f79348b552d`
+is delivered at `9a2789640`. The designated Portfolio DM verified the complete 218-line response,
+all 26 fixed references, TASK and Issue delivery, accepted conforming option A at `b6e4a4d9d`, and
+Root integrated it through `d5a45a4da`.
+
+Root actually dispatched the exact complete FSD and MGTAP assignments to their existing DMs. FSD
+now owns one prospectively fresh unchanged I1280/D0 pair inside 900/1800-second arm, 300-second
+support and 3000-second complete limits. MGTAP now owns a minimal native driver and one first
+COND/DENSE pair inside 450/450-second arm, 300-second support and 1200-second complete limits. Both
+must publish exact source before remote admission/launch and obtain shared Monitor adoption; neither
+has an accepted experiment handle at this record boundary. No numerical smoke, retry, third/second
+pair or automatic successor was added.
+
+UCOPE's existing post8801 Convergence request was separately resumed through the configured
+singleton Transport and has one confirmed Send on the original binding; Pro generation is active.
+These are three advancing direction chains. The Portfolio response left three execution slots
+unallocated, so Root returned a new refill question to the designated Portfolio DM for proper-node
+selection rather than choosing another direction locally. Existing pauses, no-successor boundaries,
+lifecycle, priority, recasts and contrary evidence remain unchanged.

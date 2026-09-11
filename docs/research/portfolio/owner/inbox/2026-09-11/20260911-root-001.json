@@ -29,7 +29,7 @@
     }
   ],
   "recommended": "a",
-  "auto_applied": null,
+  "auto_applied": "a",
   "dm_reason": "FSD独立复现与MGTAP首次真实效果分别回答具体问题；旧损失和成本未知仍构成反对理由。",
   "evidence": [
     "docs/research/portfolio/pro_packets/20260911_post_a_execution_refill/SCIENCE_BRIEF.md"
@@ -98,6 +98,14 @@
       "record": "docs/research/portfolio/decisions/2026-09-11-post-option-a-execution-refill.md",
       "state": "planned",
       "summary": "完整218行回应与固定TASK、26项引用、Transport及Issue回执一致，合规接受Pro的A：FSD一次新同包配对完整3000秒，MGTAP最小入口及首次配对完整1200秒；其余三槽未分配。旧浏览器阻塞已归档，当前所有者登录状态规则保留。Root实际派发待执行，作者未发起实验，auto_applied仍为null。中文决定包：docs/research/portfolio/pro_packets/20260911_post_a_execution_refill/INTAKE_OWNER_PACKET.json；完整任务映射同目录EXECUTION_MAPPING.md。"
+    },
+    {
+      "at": "2026-09-11T16:18:33+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260911_post_a_execution_refill/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/pro_packets/20260911_post_a_execution_refill/EXECUTION_MAPPING.md; Root dispatch on main d5a45a4da",
+      "state": "applied",
+      "summary": "Root integrated the conforming Portfolio option A at main d5a45a4da and dispatched the exact bounded FSD and MGTAP assignments to their existing DMs. FSD owns one fresh unchanged I1280/D0 pair; MGTAP owns the minimal native driver and first COND/DENSE pair. Three slots remain unallocated by this decision; no extra numerical validation, retry or successor was added."
     }
   ]
 }

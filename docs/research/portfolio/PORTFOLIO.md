@@ -1,5 +1,27 @@
 # HMASD Research Portfolio
 
+## Current post-option-A refill — 2026-09-11
+
+The complete Portfolio response for
+`2026-09-11-post-a-execution-refill-portfolio-01` passed its designated-DM
+conformance check and selects option A under `PRO_FINAL / OWNER_DELEGATED`.
+[Decision](decisions/2026-09-11-post-option-a-execution-refill.md) and
+[execution mapping](pro_packets/20260911_post_a_execution_refill/EXECUTION_MAPPING.md)
+are integrated on main at `d5a45a4da`. Root has dispatched both independent
+assignments to their existing DMs:
+
+| Direction | Current selected investment | Separate complete limits |
+| --- | --- | --- |
+| flexible_skill_duration, ACTIVE/HIGH | One prospectively fresh unchanged I1280/D0 matched pair, preserving all prior gains and losses. | D0 900/I1280 1800/native2700/support300/complete3000 seconds. |
+| metric_ground_transport_allocation, ACTIVE/MEDIUM | One minimal native driver and first COND/DENSE matched pair; no preliminary numerical task. | COND450/DENSE450/native900/support300/complete1200 seconds. |
+
+UCOPE's existing post8801 direction request is independently accepted by the
+singleton Transport and generating on its original Convergence conversation.
+The Portfolio decision leaves three execution slots unallocated; Root has returned
+the remaining refill question to the designated Portfolio DM rather than selecting
+directions locally. No retry, extra validation, probability, successor, lifecycle,
+priority or recast change is implied.
+
 ## Current four-slot allocation — 2026-09-11
 
 The full Portfolio response at `1ea43d8fbc846807d71d4d894136f357f65551b6`
