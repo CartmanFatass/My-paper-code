@@ -89,3 +89,27 @@ chain; each wrapper arm retains its own admission and complete cap. Known suppor
 through staging is 18.3388434 s. Command publication/submission and later observation,
 collection/intake/preservation/cleanup/Root integration are added once on receipts.
 Launch acceptance and actual Monitor adoption remain pending until directly recorded.
+
+## Accepted launch and actual Monitor adoption
+
+The pending preparation status above is superseded. The literal command committed at
+`e761cf581e01ba0a633c7c5321a5907e12e1919a` was submitted once through configured
+agent-task. It returned exit0 and confirmed tmux
+`agent_rcle-b06-nearest99-s26-20260911` with empty stderr. Source remains
+`baf63642a776ef3e60f4310ce47d76c45168c283`. Enclosing submission cost .8973439 s
+already includes the embedded .6482001 s SSH timer.
+
+DM read live main compute/Monitor configuration and empty owner reviews, then sent
+MONITOR_ADD directly to 01a087e5-2044-7301-abb6-7a1709a98197. Accepted app dispatch
+cost .189 s. Root then forwarded actual adoption: correct source/cwd/output/supervisor,
+running, and admission reported passed at 15.63 GB versus 4 GB. Exact admission bytes
+will be collected at terminal. Adoption observation cost .9 s is charged once.
+Root supplied no prior timing; whether it was the first observation remains to be
+clarified from existing records, without another query or fabricated zero.
+
+[LAUNCH_RECEIPT.json](b06_nearest99_prior1000_20260911/LAUNCH_RECEIPT.json) preserves
+acceptance, actual adoption and known support through adoption of 25.4168224 s.
+Receipt publication, later observations and terminal intake/integration/closeout
+remain additional components, with unknowns retained. No complete-runtime or
+scientific-validity conclusion is drawn yet. DM has stopped routine polling and
+returns pending collection to the same Root/DM route. No retry or successor follows.
