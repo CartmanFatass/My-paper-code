@@ -1,0 +1,79 @@
+{
+  "id": "20260911-mgtap-002",
+  "created": "2026-09-11T09:36:17-07:00",
+  "direction": "metric_ground_transport_allocation",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "COND/DENSE 唯一原生训练配对",
+  "context": "检验一次新训练配对中，伙伴几何条件化是否比同信息 DENSE 提高最终团队回报超过0.01。绑定结构为多智能体部分可观测性与非平稳性。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "执行已分配的一次配对并完成全部结果收取；无重试或自动后继。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "在下个干净边界停止尚未发生的部分，保留已发生证据。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "记录具体修改；未解决的科学冲突返回原决策节点，不私自改动已绑定预算。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "唯一原生性能观察直接回答当前分配的问题。",
+  "evidence": [
+    "docs/research/candidates/metric_ground_transport_allocation/MGTAP_CONDITIONAL_POOLING_B01_SCIENCE_CARD_20260911.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-11.md",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "按已分配预算完成唯一一对 COND/DENSE 原生训练，观察伙伴几何条件化是否提高最终团队回报。",
+    "changes_if_approved": [
+      {
+        "target": "MGTAP_CONDITIONAL_POOLING_B01_SCIENCE_CARD_20260911.md",
+        "from": "已接受编码器但尚无 COND 原生结果",
+        "to": "使用未筛选新主种子8212，运行一次完整训练配对并收取所有结果"
+      }
+    ],
+    "if_refused": "在下一个干净边界应用异步覆盖；保留已发生的结果和原有 REL 负证据，不补跑。",
+    "evidence_for": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260911_post_a_execution_refill/EXECUTION_MAPPING.md",
+        "quote": "One prospectively unused master without screening/load;",
+        "why": "Portfolio 已正式分配这一次原生比较。"
+      },
+      {
+        "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_CONDITIONAL_POOLING_IMPLEMENTATION_INTAKE_20260911.md",
+        "quote": "3.8409721",
+        "why": "之前唯一的编码器检查已完成，当前只检查新接线，不重复数值试验。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_CONDITIONAL_POOLING_B01_SCIENCE_CARD_20260911.md",
+        "quote": "strongest contrary evidence remains old REL−DENSE−0.02396310430506595",
+        "why": "旧包在原生环境中落后；新编码器通过技术检查不代表原生收益。"
+      }
+    ],
+    "uncertainty": [
+      "一对训练只支持本地包比较，32个评估世界不能估计训练种子总体的不确定性。",
+      "缺少调优同信息基线的原生余量记录；COND 吞吐量未知。"
+    ],
+    "cost": {
+      "compute": "COND至多450秒，DENSE至多450秒，额外调用支持300秒，完整至多1200秒；无重试或第二对。",
+      "owner_time": "无需等待答复",
+      "reversibility": "costly",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "Recommend/select(a): it directly supplies the requested native performance observation.",
+    "source": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_CONDITIONAL_POOLING_B01_SCIENCE_CARD_20260911.md"
+  },
+  "starred": false
+}
