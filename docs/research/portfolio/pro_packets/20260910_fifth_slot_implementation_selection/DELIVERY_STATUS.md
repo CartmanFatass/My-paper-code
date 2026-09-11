@@ -1,5 +1,26 @@
 # Fifth-slot implementation request delivery status
 
+## Current state after verified four-slot delivery
+
+**QUEUED, no fifth-slot Portfolio choice or allocation.** The older four-slot
+request delivered the complete47134-byte response at
+`1ea43d8fbc846807d71d4d894136f357f65551b6`, Issue17 comment5629259208, and passed
+designated-DM scientific/specification intake. Its selected UCOPE/RCLE/FOLR/ACVC
+work leaves this one FSD/MGTAP question disjoint and unselected. This supersedes
+the older no-four-slot-decision statements below, not their historical observations.
+
+The latest observed primary registry still carries the old BLOCKED/ARCHIVED
+fields and null response digest. The [updated bounded reconciliation](TRANSPORT_RECONCILIATION_NEXT_ACTION.txt)
+uses actual full delivery and Root's distinct downloaded sidecar. Dedicated
+Transport returns same-binding availability; no Send or registry write is done
+by this DM. Subsequent dispatch of the unchanged fifth-slot handoff remains
+Root's existing responsibility after factual reconciliation. The fixed TASK,
+HANDOFF and prompt92a9a6c40ef82232aa2e8fc2271c4b873c7501bf6c96bbf482366fd10d05e5f8
+remain unchanged. Owner root007 retains `auto_applied=null`.
+See the [current intake](../../decisions/2026-09-10-fifth-slot-implementation-selection.md#effect-of-the-complete-four-slot-decision--2026-09-11).
+
+## Preserved earlier material event
+
 **Current status: material event intaken; queued pending Transport reconciliation.**
 The older owner-directed Root resend completed naturally with a full capability-gap
 reply and no scientific choice. Actual GitHub readback at

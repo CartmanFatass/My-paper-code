@@ -1,0 +1,441 @@
+{
+  "recorded_at_utc": "2026-09-11T04:39:11.063407+00:00",
+  "request_id": "2026-09-10-four-slot-rolling-refill-01",
+  "response_checker": {
+    "native_name": "/root/dm_mgtap_conditional_fallback",
+    "task_id": "01a08e10-2ada-7d31-8e3a-6bc8f05f59d5",
+    "assignment": "Root explicitly transferred the unavailable original four-slot Portfolio response-check scope; original author/request bindings remain unchanged",
+    "original_request_source_thread_id": "01a08d62-3e51-7983-b7c2-bc4292af3f15",
+    "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267"
+  },
+  "checkout": {
+    "path": "C:\\Projects\\HMASD-worktrees\\codex-portfolio",
+    "branch": "codex/portfolio",
+    "started_clean_at": "080b17bc4bcbb2f208db9d37ea83aa0033a323d6",
+    "response_fast_forward": "1ea43d8fbc846807d71d4d894136f357f65551b6",
+    "preserving_main_merge": "fa97fb0e350e4c61d55af474f1722db34a0943f1",
+    "primary_main_at_read": "f188f443aafddb15641656fb23e98a5b4550ec00",
+    "merge_resolution": "Retained both the unique 03:59:47 material-event row and main 04:05 output-fallback row; inherited committed inputs only"
+  },
+  "response": {
+    "immutable_commit": "1ea43d8fbc846807d71d4d894136f357f65551b6",
+    "path": "docs/research/portfolio/pro_packets/20260910_four_slot_rolling_refill/archive/RESPONSE.md",
+    "bytes": 47134,
+    "lines": 177,
+    "sha256": "bb7763097d3aceabdbe85d6f06193e3cc79b4be2cc9140c64c616340d30d388f",
+    "full_text_read": true,
+    "read_limit": "Entire response read; truncated tool windows supplemented before conformance. Provider source-access assertions are attributed, not independently audited tool activity.",
+    "single_path_commit": [
+      "docs/research/portfolio/pro_packets/20260910_four_slot_rolling_refill/archive/RESPONSE.md"
+    ],
+    "download_equal": true,
+    "sidecar_equal": true,
+    "sidecar": "docs/research/portfolio/pro_packets/20260910_four_slot_rolling_refill/archive/CHAT_FALLBACK_RESPONSE.md",
+    "root_download_facts": "docs/research/portfolio/pro_packets/20260910_four_slot_rolling_refill/archive/CHAT_FALLBACK_DOWNLOAD_FACTS.json"
+  },
+  "delivery_comment": {
+    "id": 5629259208,
+    "html_url": "https://github.com/CartmanFatass/My-paper-code/issues/17#issuecomment-5629259208",
+    "created_at": "2026-09-11T04:02:55Z",
+    "updated_at": "2026-09-11T04:02:55Z",
+    "body": "Delivered the complete four-slot rolling-refill Portfolio decision for this round:\nhttps://github.com/CartmanFatass/My-paper-code/blob/1ea43d8fbc846807d71d4d894136f357f65551b6/docs/research/portfolio/pro_packets/20260910_four_slot_rolling_refill/archive/RESPONSE.md\n\nFixed task:\nhttps://github.com/CartmanFatass/My-paper-code/blob/0a49fcc5659723e260f4d64d9892d25d3234b16c/docs/research/portfolio/pro_packets/20260910_four_slot_rolling_refill/TASK.md\n\nCommit 1ea43d8fbc846807d71d4d894136f357f65551b6 adds only the specified response file on codex/portfolio, preserving concurrent changes. The complete response was read back, and comparison with its actual parent confirms the single-path scope. No experiment, source/card/Portfolio-state edit, main change or rewrite of a previous response was performed."
+  },
+  "bound_sources": [
+    {
+      "path": "docs/research/portfolio/pro_packets/20260910_four_slot_rolling_refill/SCIENCE_BRIEF.md",
+      "bound_commit": "9f410a2887fba0a5ef457a83993f13cf8dcf6e4f",
+      "bound_blob": "604639b691c3539c27ed5dd773b52232f0bbcd6f",
+      "current_blob": "604639b691c3539c27ed5dd773b52232f0bbcd6f",
+      "current_equals_bound": true
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260910_four_slot_rolling_refill/FACTS.json",
+      "bound_commit": "9f410a2887fba0a5ef457a83993f13cf8dcf6e4f",
+      "bound_blob": "62a5b0320132a24422529a8e0c610ca3c695c768",
+      "current_blob": "62a5b0320132a24422529a8e0c610ca3c695c768",
+      "current_equals_bound": true
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260910_four_slot_rolling_refill/ISSUE_SNAPSHOT.json",
+      "bound_commit": "9f410a2887fba0a5ef457a83993f13cf8dcf6e4f",
+      "bound_blob": "610ad7eb039f37ffd0a079ff821a52023d37463e",
+      "current_blob": "610ad7eb039f37ffd0a079ff821a52023d37463e",
+      "current_equals_bound": true
+    },
+    {
+      "path": "AGENTS.md",
+      "bound_commit": "7ac21b081400db29cdadb2c79030f6341041825e",
+      "bound_blob": "2875c3199337666b22276e490f63358a86d6d426",
+      "current_blob": "4a901541441e3a4ecfd71f1709fa77970782ccd6",
+      "current_equals_bound": false
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "bound_commit": "7ac21b081400db29cdadb2c79030f6341041825e",
+      "bound_blob": "c520f24f1440ca0638943d7a5126cfd5bc34440c",
+      "current_blob": "c520f24f1440ca0638943d7a5126cfd5bc34440c",
+      "current_equals_bound": true
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "bound_commit": "7ac21b081400db29cdadb2c79030f6341041825e",
+      "bound_blob": "72f81d5650d9c1ddde12df3a6ed37add99f436be",
+      "current_blob": "72f81d5650d9c1ddde12df3a6ed37add99f436be",
+      "current_equals_bound": true
+    },
+    {
+      "path": "docs/project/ROOT_OPERATIONS.md",
+      "bound_commit": "7ac21b081400db29cdadb2c79030f6341041825e",
+      "bound_blob": "d16ea3b8a45a99eed27f99722ab713b9d467c5f5",
+      "current_blob": "719ad8b120d9fa15c438181d33f42d1c3d0713d4",
+      "current_equals_bound": false
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "bound_commit": "7ac21b081400db29cdadb2c79030f6341041825e",
+      "bound_blob": "05b3dc8d8628e2510431250c119b533f2ac3c29a",
+      "current_blob": "05b3dc8d8628e2510431250c119b533f2ac3c29a",
+      "current_equals_bound": true
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "bound_commit": "7ac21b081400db29cdadb2c79030f6341041825e",
+      "bound_blob": "9bae14c6deb8e3d1bee6bb567828e4667a426174",
+      "current_blob": "9bae14c6deb8e3d1bee6bb567828e4667a426174",
+      "current_equals_bound": true
+    },
+    {
+      "path": "docs/research/portfolio/PORTFOLIO.md",
+      "bound_commit": "7ac21b081400db29cdadb2c79030f6341041825e",
+      "bound_blob": "68ee0c81ac1c21b7b3b511fa4497e307ecd5e74c",
+      "current_blob": "68ee0c81ac1c21b7b3b511fa4497e307ecd5e74c",
+      "current_equals_bound": true
+    },
+    {
+      "path": "docs/research/portfolio/EXPERIMENT_TRACKING.md",
+      "bound_commit": "7ac21b081400db29cdadb2c79030f6341041825e",
+      "bound_blob": "d2c2cca598d0c29e2629f11e8772a4f09ea52262",
+      "current_blob": "d2c2cca598d0c29e2629f11e8772a4f09ea52262",
+      "current_equals_bound": true
+    },
+    {
+      "path": "docs/research/portfolio/decisions/2026-09-10-rolling-successor-allocation.md",
+      "bound_commit": "7ac21b081400db29cdadb2c79030f6341041825e",
+      "bound_blob": "74affa588c9b941e28c33323b67114d72d963438",
+      "current_blob": "74affa588c9b941e28c33323b67114d72d963438",
+      "current_equals_bound": true
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260910_fifth_vacancy_selection/archive/RESPONSE.md",
+      "bound_commit": "f4fce9a4fd9603db66463ad8c81bb9464533e260",
+      "bound_blob": "3ddb10f2e3a7268b2a7ac9512caaf31900280023",
+      "current_blob": "3ddb10f2e3a7268b2a7ac9512caaf31900280023",
+      "current_equals_bound": true
+    },
+    {
+      "path": "docs/research/portfolio/decisions/2026-09-10-fifth-vacancy-selection.md",
+      "bound_commit": "7ac21b081400db29cdadb2c79030f6341041825e",
+      "bound_blob": "7aa48235b8d8c48647bf0ccbc1d4d3059a882fea",
+      "current_blob": "7aa48235b8d8c48647bf0ccbc1d4d3059a882fea",
+      "current_equals_bound": true
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260910_fifth_vacancy_selection/EXECUTION_MAPPING.md",
+      "bound_commit": "7ac21b081400db29cdadb2c79030f6341041825e",
+      "bound_blob": "3bfc9d1ed6f47ce6c835dcc9ffe2448f54681373",
+      "current_blob": "3bfc9d1ed6f47ce6c835dcc9ffe2448f54681373",
+      "current_equals_bound": true
+    },
+    {
+      "path": "docs/research/candidates/ucope/UCOPE_UAV_CONTINUE_END_CREDIT_B01_DESIGN_CARD_20260910.md",
+      "bound_commit": "7ac21b081400db29cdadb2c79030f6341041825e",
+      "bound_blob": "1193964b7c0762e5cf630634da57e61e601dcfab",
+      "current_blob": "1193964b7c0762e5cf630634da57e61e601dcfab",
+      "current_equals_bound": true
+    },
+    {
+      "path": "docs/research/candidates/ucope/UCOPE_UAV_CONTINUE_END_CREDIT_B01_DESIGN_INTAKE_20260910.md",
+      "bound_commit": "7ac21b081400db29cdadb2c79030f6341041825e",
+      "bound_blob": "b75eb4682bc551b8c6801512e4d4143ad4110207",
+      "current_blob": "b75eb4682bc551b8c6801512e4d4143ad4110207",
+      "current_equals_bound": true
+    },
+    {
+      "path": "docs/research/candidates/ucope/UCOPE_UAV_CONTINUE_END_CREDIT_B01_DESIGN_FACTS_20260910.json",
+      "bound_commit": "7ac21b081400db29cdadb2c79030f6341041825e",
+      "bound_blob": "8543ccf2eaf7f8b1d992429233f23b11f9f2b2f3",
+      "current_blob": "8543ccf2eaf7f8b1d992429233f23b11f9f2b2f3",
+      "current_equals_bound": true
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_SERVICE_COMPARISON_DESIGN_INTAKE_20260910.md",
+      "bound_commit": "7ac21b081400db29cdadb2c79030f6341041825e",
+      "bound_blob": "72cdda81bbbbd25c8161add6af56d4eb7e3245e2",
+      "current_blob": "72cdda81bbbbd25c8161add6af56d4eb7e3245e2",
+      "current_equals_bound": true
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_HALF_B02_INTAKE_20260910.md",
+      "bound_commit": "7ac21b081400db29cdadb2c79030f6341041825e",
+      "bound_blob": "6307ab2f6a2605df444215ee1f80bdf4d39b3c95",
+      "current_blob": "6307ab2f6a2605df444215ee1f80bdf4d39b3c95",
+      "current_equals_bound": true
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_SCIENCE_CARD_20260910.md",
+      "bound_commit": "7ac21b081400db29cdadb2c79030f6341041825e",
+      "bound_blob": "568ea5cf681a5965f597dd6394e6a7d3d0c53adb",
+      "current_blob": "568ea5cf681a5965f597dd6394e6a7d3d0c53adb",
+      "current_equals_bound": true
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_8931_INTAKE_20260910.md",
+      "bound_commit": "7ac21b081400db29cdadb2c79030f6341041825e",
+      "bound_blob": "51c53225e50a52d5bd2c57d3b0d4efa6881e71a3",
+      "current_blob": "51c53225e50a52d5bd2c57d3b0d4efa6881e71a3",
+      "current_equals_bound": true
+    },
+    {
+      "path": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_RESERVE_READINESS_INTAKE_20260910.md",
+      "bound_commit": "fad4c006887addfa675404b047a6c9e6157c531e",
+      "bound_blob": "8f86bc15c82504a862a88ab54c473536eaad7a57",
+      "current_blob": "8f86bc15c82504a862a88ab54c473536eaad7a57",
+      "current_equals_bound": true
+    },
+    {
+      "path": "docs/research/candidates/commitment_residual_triggered_options/CRTO_POST_B08_P72_CONVERGENCE_INTAKE_20260908.md",
+      "bound_commit": "fad4c006887addfa675404b047a6c9e6157c531e",
+      "bound_blob": "33432916ad5c511107f47e5a36f5d8367e470562",
+      "current_blob": "33432916ad5c511107f47e5a36f5d8367e470562",
+      "current_equals_bound": true
+    },
+    {
+      "path": "docs/research/candidates/finite_resource_relational_inductive_efficiency/NATIVE_CRASH_P63_READINESS_INTAKE_20260910.md",
+      "bound_commit": "fad4c006887addfa675404b047a6c9e6157c531e",
+      "bound_blob": "fbf434d010a03034413ac51531caf1bae73c214a",
+      "current_blob": "fbf434d010a03034413ac51531caf1bae73c214a",
+      "current_equals_bound": true
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_NATIVE_GROUND_GEOMETRY_B01_POST_B01_CONVERGENCE_INTAKE_20260909.md",
+      "bound_commit": "fad4c006887addfa675404b047a6c9e6157c531e",
+      "bound_blob": "06219ee428928ccc2b7d2042f9787f15a787dcc3",
+      "current_blob": "06219ee428928ccc2b7d2042f9787f15a787dcc3",
+      "current_equals_bound": true
+    },
+    {
+      "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260910_post_b02_convergence/CONVERGENCE_INTAKE_20260910.md",
+      "bound_commit": "fad4c006887addfa675404b047a6c9e6157c531e",
+      "bound_blob": "b96e8fcc099635ac5e3e445cdf46327a5821d2c1",
+      "current_blob": "b96e8fcc099635ac5e3e445cdf46327a5821d2c1",
+      "current_equals_bound": true
+    },
+    {
+      "path": "docs/research/candidates/variable_n_fleet_churn/VNFC_NATIVE_SERVICE_CREDIT_REENTRY_INTAKE_20260910.md",
+      "bound_commit": "fad4c006887addfa675404b047a6c9e6157c531e",
+      "bound_blob": "77c22df0c5c7e19d8f84acc543c07a703c19ab2d",
+      "current_blob": "77c22df0c5c7e19d8f84acc543c07a703c19ab2d",
+      "current_equals_bound": true
+    },
+    {
+      "path": "docs/research/candidates/vsp_02/VSP02_TEAMMATE_POLICY_CHANGE_POST_B01_CONVERGENCE_INTAKE_20260907.md",
+      "bound_commit": "fad4c006887addfa675404b047a6c9e6157c531e",
+      "bound_blob": "ce9f8228ce3000e61e86e7f232bb7aee694e3e5f",
+      "current_blob": "ce9f8228ce3000e61e86e7f232bb7aee694e3e5f",
+      "current_equals_bound": true
+    },
+    {
+      "path": "docs/research/candidates/vsp_03/VSP03_POST_B07_CONVERGENCE_INTAKE_20260910.md",
+      "bound_commit": "fad4c006887addfa675404b047a6c9e6157c531e",
+      "bound_blob": "2dd0c26993f09e7be0b6991e9b8c8c552e883964",
+      "current_blob": "2dd0c26993f09e7be0b6991e9b8c8c552e883964",
+      "current_equals_bound": true
+    },
+    {
+      "path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_P81_CONVERGENCE_INTAKE_20260909.md",
+      "bound_commit": "fad4c006887addfa675404b047a6c9e6157c531e",
+      "bound_blob": "3c38de8b5dd8dc9d9dd4c3b87579290e6b7acc2d",
+      "current_blob": "3c38de8b5dd8dc9d9dd4c3b87579290e6b7acc2d",
+      "current_equals_bound": true
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_POST_B08_CONVERGENCE_INTAKE_20260910.md",
+      "bound_commit": "674f246a202eef1467b084fdd25e2eeb531c0b1e",
+      "bound_blob": "c0389d933edef3ad653891a9445727e45001ccdb",
+      "current_blob": "c0389d933edef3ad653891a9445727e45001ccdb",
+      "current_equals_bound": true
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_NATIVE_GROUND_GEOMETRY_B01_P75_INTAKE_20260909.md",
+      "bound_commit": "fad4c006887addfa675404b047a6c9e6157c531e",
+      "bound_blob": "941848393aaba1bb77f9e06eacd6f8b85bfc53a5",
+      "current_blob": "941848393aaba1bb77f9e06eacd6f8b85bfc53a5",
+      "current_equals_bound": true
+    }
+  ],
+  "scientific_conformance": {
+    "classification": "COMPLETE_CONFORMING",
+    "authority": "PRO_FINAL / OWNER_DELEGATED (AGENTS 4.8)",
+    "selected_option": "a",
+    "concrete_conflicts": [],
+    "scope": "Four independent rolling investments only; no lifecycle/priority/recast/fusion/C/UAV-entry changes; no fifth-slot implementation choice",
+    "scientific_reading_assumption": "A complete changed learner/package may justify a bounded B comparison without unique component attribution. Independent training fits/pairs, not evaluation rows, are the learning units. Own-action-insensitive immediate reward in UCOPE is an ordering rationale; estimated baselines and separate clipping do not prove unbiased or improved learning.",
+    "scientific_reading_limit": "Reuse current unchanged Foundations 4-6 and hierarchy/empirical topic reads; local source designs are evidence of specified laws, not accepted implementation. Historical support and tuned same-information headroom remain incomplete. No common cross-host reward/cost rank or new empirical result is inferred."
+  },
+  "selected_future_work": {
+    "ucope": {
+      "training_fits": 2,
+      "training_episodes": 4096,
+      "training_team_steps": 1048576,
+      "evaluation_episodes": 128,
+      "evaluation_team_steps": 32768,
+      "total_team_steps": 1081344,
+      "adam_calls": 8192,
+      "residual_parameters": 2209,
+      "residual_forward_rows_min": 6553600,
+      "residual_forward_rows_max": 13056000,
+      "L_cap_s": 1800,
+      "F_cap_s": 1200,
+      "native_sum_cap_s": 3000,
+      "all_support_cap_s": 300,
+      "complete_cap_s": 3300
+    },
+    "roster_consistent_latent_exploration": {
+      "training_fits": 1,
+      "training_episodes": 12800,
+      "evaluation_episodes": 6144,
+      "total_episodes": 18944,
+      "total_native_ticks": 1212416,
+      "backward_update_calls": 200,
+      "model_allocations": 7,
+      "untrained_helpers": 6,
+      "neural_agent_claim_decisions": 2293760,
+      "six_candidate_scores": 13762560,
+      "learned_cap_s": 150,
+      "reference_cap_s": 10,
+      "all_support_cap_s": 140,
+      "complete_cap_s": 300
+    },
+    "vap_folr_core": {
+      "first_action": "one original-node post-HALF-B02 Convergence question and complete intake",
+      "training_fits": 0,
+      "numerical_cap_s": 0,
+      "unallocated_third_pair_proposal_s": 3900
+    },
+    "acvc": {
+      "training_fits": 1,
+      "training_episodes": 512,
+      "evaluation_episodes": 192,
+      "total_scored_episodes": 704,
+      "training_team_steps": 131072,
+      "total_scored_native_steps": 180224,
+      "adam_calls": 1024,
+      "actor_replay_steps": 2621440,
+      "cue_coordinate_check_upper": 6553600,
+      "unscored_constructor_resets": 4,
+      "native_cap_s": 270,
+      "all_support_cap_s": 90,
+      "complete_cap_s": 360
+    }
+  },
+  "sum_selected_complete_caps_s": 3960,
+  "cap_interpretation": "Separate finite upper allocations, not measured runtime, a study critical path, shared reserve or transfer permission. Native full-chain and all additional support/Monitor are charged once.",
+  "fallbacks": [
+    {
+      "direction": "vsp_03",
+      "first_action": "one original-node Convergence question/intake",
+      "numerical_cap_s": 0,
+      "implementation": false
+    },
+    {
+      "direction": "vsp_c1",
+      "first_action": "one source/design return or precise original-family question/no-ready",
+      "numerical_cap_s": 0,
+      "implementation": false
+    }
+  ],
+  "fallback_trigger": "Once in order only for actual selected-primary cannot-start, unresolved execution/scope dependency or no-ready and an eligible vacancy; a valid completed B/question/design does not activate one; no duplicate allocation/cycling.",
+  "fifth_slot": {
+    "request_id": "2026-09-10-fifth-slot-implementation-01",
+    "choice": null,
+    "new_implementation_or_numerical_allowance": 0,
+    "scope_unchanged": true,
+    "fixed_task_sha": "8e09049351afdd582bb4d4b264f34a821ad2e988",
+    "fixed_handoff_sha": "5b74f54129257a76a9065729fa202b5b3ec7e163",
+    "prompt_sha256": "92a9a6c40ef82232aa2e8fc2271c4b873c7501bf6c96bbf482366fd10d05e5f8",
+    "next_action": "Root routes dedicated Transport archival/binding reconciliation of actual four-slot delivery; return factual availability for unchanged queued fifth question. No DM provider operation or automatic Send."
+  },
+  "current_raw_registry_observation": {
+    "path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\registry.json",
+    "sha256": "f0190c65ea8cbe159379acff0125b596f4b7516c8922ef8b1bd905412ab45619",
+    "binding_fields": {
+      "request_id": "2026-09-10-four-slot-rolling-refill-01",
+      "state": "BLOCKED",
+      "conversation_binding_key": "portfolio:cross_direction",
+      "conversation_id": "6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+      "archive_status": "ARCHIVED",
+      "response_sha256": null,
+      "tab_lifecycle": "CLOSED",
+      "send_click_count": 2
+    },
+    "limit": "Read-only raw fields may lag actual immutable delivery and cannot override the formed Portfolio decision or establish availability. Historical imported fields are not reused."
+  },
+  "owner_reviews": [],
+  "nonempty_primary_ledger_owner_rows": [],
+  "preserved_published_packet_bytes": {
+    "four_slot": {
+      "REQUEST.json": "323797916ff5207542092ae50d618a74dea565ddc1a58cda2ad89024631c91d1",
+      "TASK.md": "3fefdb53c6d2b66718c79d52fbffa92c5771f7dbd1e9ade7b0e02f77fb6ebae7",
+      "HANDOFF.json": "8aed92b4a1d93ca246d084ac49ae94148c3f5d83afdf94bcd5a194983d862799",
+      "SCIENCE_BRIEF.md": "4980abab46fb51c94671aa2b5da8a9b46e247f9cbe23580fbf78905c92b97b3c",
+      "FACTS.json": "a0f8a34b2c21b82b03ed76219a54a3b4cf437c8285c634ed6346a64f0f4cc6ee"
+    },
+    "fifth_slot": {
+      "REQUEST.json": "4c24f2cdf8b9553883af0ec5233ba0ffa0e69926d81259bf8c3dd0175f16e44e",
+      "TASK.md": "fe6f9d767bcdcd75245626eddebb68660ca1a933f21b5898e7d5e0628a0bca43",
+      "HANDOFF.json": "3a6ebf8bfb8a2f8f655ae5673a9c79800fca414e5954877d43c3e29f64c1fa87",
+      "SCIENCE_BRIEF.md": "d8d0e40ee9a5c1c6ae0d3bc325d62bd4758ab3a1716c575669b0d7007fae5ffa",
+      "FACTS.json": "d299164ca8c3d974260a15edaff2fce71c1a58cc7c271b40b5a1da42070b66a7"
+    }
+  },
+  "performed_exposure": {
+    "scientific_invocations": 0,
+    "models": 0,
+    "checkpoint_loads": 0,
+    "environments": 0,
+    "native_steps": 0,
+    "synthetic_steps": 0,
+    "training_episodes": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0,
+    "replay": 0,
+    "profiling": 0,
+    "source_tests": 0,
+    "test_fixtures": 0,
+    "support_search": 0,
+    "provider_sends": 0,
+    "registry_writes": 0
+  },
+  "exposure_line": "FOUR_SLOT_RESPONSE_INTAKE: scientific_invocations=0; models=0; checkpoint_loads=0; environments=0; native_steps=0; synthetic_steps=0; training_episodes=0; optimizer_steps=0; evaluation_episodes=0; replay=0; profiling=0; source_tests=0; test_fixtures=0; support_search=0; provider_sends=0; registry_writes=0; parameter_displacement=not applicable: no learner",
+  "cleanup": "No scientific/test root or scratch created. Shared Portfolio checkout remains required for queued fifth-slot delivery/checking; Root owns its later retention/reclamation. Download, sidecar, response and historical receipts preserved.",
+  "application_audit": {
+    "path": "docs/research/portfolio/audit/2026-09-10.md",
+    "selection_line": 160,
+    "technical_line": 161
+  },
+  "record_validation": {
+    "at_utc": "2026-09-11T04:52:15.191791+00:00",
+    "result": "PASS",
+    "checks": [
+      "Published four-slot and fifth-slot REQUEST/TASK/HANDOFF/SCIENCE_BRIEF/FACTS byte digests unchanged",
+      "Immutable response and separate sidecar byte equality retained",
+      "Every new or changed path lies in assigned Portfolio documentation surfaces",
+      "All changed/new JSON parses and local Markdown file links resolve",
+      "Every preexisting audit row retained",
+      "Owner root006 option a applied; root007 remains null; prior options, packets, histories and actual replies preserved",
+      "Chinese application verdict and quoted evidence equal exact Pro response passages",
+      "git diff --check passed"
+    ],
+    "limit": "Static record verification only; no source tests, model fixtures, experiment modules, environment calls or scientific invocation. Main unrelated untracked artifacts remained untouched."
+  }
+}

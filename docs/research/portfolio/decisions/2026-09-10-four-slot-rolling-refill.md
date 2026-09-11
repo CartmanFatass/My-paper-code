@@ -1,4 +1,198 @@
-# Four-slot rolling refill — terminal blocker intake
+# Four-slot rolling refill — complete Pro conformance intake
+
+## Current decision and application — 2026-09-11
+
+**PRO_FINAL / OWNER_DELEGATED: apply option A.** The complete immutable
+[response](../pro_packets/20260910_four_slot_rolling_refill/archive/RESPONSE.md)
+at `1ea43d8fbc846807d71d4d894136f357f65551b6` selects one UCOPE L/F comparison,
+one RCLE nearest-prior comparison, one zero-numerical FOLR Convergence question
+and intake, and one fresh ACVC fit. Their separate complete allocations are
+**3300, 300, 0 and 360 seconds**. VSP03 question-only, then VSPC1 source/design-only,
+are the two finite zero-numerical fallbacks. The response passes the complete
+scientific/specification check below. This supersedes the earlier no-decision
+state; it does not erase those dated delivery failures.
+
+The Portfolio allocation and owner trace are applied in this record and
+[PORTFOLIO.md](../PORTFOLIO.md). Root's integration and dispatch remain pending
+at this authoring boundary; **no implementation or scientific invocation is
+claimed as performed by this intake**. Root resumes the existing DMs using the
+[execution mapping](../pro_packets/20260910_four_slot_rolling_refill/EXECUTION_MAPPING.md).
+No per-item owner ratification is required. Lifecycle, priority, recasts, family
+dispositions, C status and formal UAV entry do not change.
+
+### What I checked and the applicable rule
+
+Root explicitly transferred the unavailable original author's remaining response-check
+scope to this recently active DM, `/root/dm_mgtap_conditional_fallback`
+(`01a08e10-2ada-7d31-8e3a-6bc8f05f59d5`). This is a checking-role transfer;
+the original request author `01a08d62-3e51-7983-b7c2-bc4292af3f15`, Root parent,
+Transport endpoint, request ID, fixed TASK and accepted prompt remain unchanged.
+Work uses the existing `C:/Projects/HMASD-worktrees/codex-portfolio`, branch
+`codex/portfolio`, initially clean at `080b17bc4bcbb2f208db9d37ea83aa0033a323d6`.
+I fast-forwarded the delivered response, then merged Root's published main inputs
+through pushed `fa97fb0e3`. The merge preserved both unique contemporaneous audit rows.
+
+I read the **entire 177-line, 47,134-byte response**, supplementing truncated tool
+windows, against the fixed TASK/SCIENCE_BRIEF, requested options/constraints,
+current applicable AGENTS, evidence-spec §§7–8.1,11.4,11.7–11.10 and engineering
+requirements. I checked the actual UCOPE card/intake, RCLE design and ACVC/FOLR
+result/cost sections; relevant previously read direction evidence and scientific
+foundations were reused. All 33 declared source paths resolve at their bound
+commits. Their present blobs match, except AGENTS/ROOT_OPERATIONS, whose current
+changes add the owner-directed Markdown output fallback and do not change this
+scientific decision. Source existence/currentness is not a claim to have audited
+every historical artifact or Pro tool call.
+
+Direct Git inspection shows the response commit adds only its scoped response.
+Direct GitHub readback of [Issue17 comment5629259208](https://github.com/CartmanFatass/My-paper-code/issues/17#issuecomment-5629259208)
+matches both that immutable response and fixed TASK
+`0a49fcc5659723e260f4d64d9892d25d3234b16c`. I independently compared the committed
+bytes, Root's downloaded `FOUR_SLOT_ROLLING_REFILL_RESPONSE.md`, and the retained
+`archive/CHAT_FALLBACK_RESPONSE.md`: all have SHA256
+`bb7763097d3aceabdbe85d6f06193e3cc79b4be2cc9140c64c616340d30d388f` and are equal.
+Root's [download/event facts](../pro_packets/20260910_four_slot_rolling_refill/archive/CHAT_FALLBACK_DOWNLOAD_FACTS.json)
+remain separately preserved. Provider source-access assertions are attributed
+to Pro; I did not independently observe its browser or reproduce the experiments.
+The [machine-generated intake facts](../pro_packets/20260910_four_slot_rolling_refill/INTAKE_FACTS.json)
+retain these checks, source blobs, static counts and current raw registry fields.
+
+AGENTS §4.8, applied verbatim:
+
+> A complete archived response from
+> `portfolio:cross_direction` decides the bound investment, priority, lifecycle, capacity,
+> fusion/separation or registration question within current owner instructions and specifications.
+> The designated DM checks scientific/specification conformance; Root implements and records the
+> decision without per-item owner ratification.
+
+Evidence-spec §11.9, applied verbatim:
+
+> Pro decisions are final within current owner instructions and applicable specifications. In the
+> existing intake, the designated DM cites any concrete conflict and returns it to the same node for correction
+> before executing the affected requirement, while independent conforming work continues.
+
+**No concrete conflict was found.** This is application of the formed Portfolio
+choice, not a new local Portfolio verdict or an exception under AGENTS §4.7.
+
+### Scientific, scope and cost conformance
+
+| Selected action | Checked meaning and bound |
+| --- | --- |
+| UCOPE L/F | The bound own-expiry {1,2} package, separate velocity/duration PPO clips, detached suffix baseline, final-tick mask and primitive-row denominator are preserved. Two fresh 2048-episode fits, final64 per arm, 8192 Adam calls and 1,081,344 native team steps. Fresh F is attained fixed-short source, not a selected old checkpoint. L≤1800/F≤1200, native sum≤3000, all support≤300, complete≤3300 seconds; sequential L then F. Final L−F uses strict ±.01, with signed WITHIN. One matched training pair cannot establish training-population superiority or identify a repaired credit cause. |
+| RCLE nearest-prior | B04/master24 is prospectively bound as specified. Legal distance gives .9/.02 initial probabilities; the same overridable distribution supplies actions and their score gradient. Preserve weight100 whole-law training, normalized .02 update, 200 updates, initial/final/reference roles, 18,944 episodes and 1,212,416 ticks. One learned fit plus six untrained initializer helpers; no second fit. Learned≤150/reference≤10/all support≤140/complete≤300 seconds. Primary reference-minus-final U, initialization gain, all U/F/tau paths and unavailable reference Y retain their meanings; ≥.05 plus positive learning gain is not replaced by UCOPE's strict rule. |
+| FOLR | One question/intake at `em:vap_folr_core:convergence` after the complete HALF pairs +1.56546875 and −4.293046875. Compare the narrow family's disposition with the value of another independent pair. Numerical allowance is zero: the mentioned 3900-second pair is an unallocated alternative. No third pair, coefficient change, diagnostic, implementation or local family verdict follows. This is a named investment question, not a universal B consultation condition. |
+| ACVC | One new unscreened DENSE fit under the accepted recipe: 256 two-episode rollouts×4 PPO epochs, 512 training episodes, 1024 Adam calls and final C/F/dwell64 panels. Total704 scored episodes/180,224 steps plus four unscored constructor resets. Both primaries retain strict ±.01 and conditional paired-world SE. Own-history rules, actual-command feedback and 69,079 trained parameters remain. Native≤270/all support≤90/complete≤360 seconds; recasts2 lowest contention remains. No E01 zero-update exception, base screening or fourth fresh fit. |
+
+Static arithmetic independently confirms **3960 seconds** as the sum of three
+separate maximum numerical allocations. It is not measured runtime, a shared
+reserve, a critical path or transferable savings. The dominant work includes
+UCOPE's 6,553,600–13,056,000 added residual-forward rows plus backward/Adam,
+RCLE's 2,293,760 neural claim decisions×6 scores, and ACVC's 2,621,440 recurrent
+replay-agent steps and up to6,553,600 cue coordinate checks. No policy search,
+extra validation trajectories, timing pilot or profiler is introduced. Necessary
+focused checks remain inside their support and cumulative test budgets.
+
+Complete native timing includes adjacent admission, startup/imports, initialization,
+training, evaluation/checkpoint/publication and actual exit. Additional invoked
+support, including preparation/build/checks, Monitor, collection/reduction,
+publication/readback and scoped closeout, is charged once. Missing historical
+measurements stay missing: ACVC8931's169 native+6.0939838 known support subtotal
+does not certify full90/360 compliance; 8921's old inclusive-support issue remains.
+FOLR's bound intake reports1517.20 summed native and67.6955750 known support before
+final publication, with omitted components. Neither incomplete bill becomes a
+measured total breach, a scientific negative or retrospective exemption.
+Future complete support and added learner cost remain unknown until executed.
+
+The strongest case for A is real learner discrimination against attained
+alternatives, plus one limited fresh ACVC instance. The strongest opposing case
+is VSP03's four positive final512 histories and roughly8–9-second native fit:
+a same-recipe follow-up is legitimate, and another consultation is not assumed
+cheaper. Pro explicitly weighed that tradeoff and narrowly preferred the FOLR
+disposition question; ACVC's diminishing marginal information remains a countercase.
+UCOPE's six T/F panel losses, RCLE's reference/recovery deficit and seed23 all-cell
+fragmentation harm, FOLR's reversal and ACVC8931's11/64 F−dwell and4/64 F−C losses
+are all retained. No common raw-return or wall-time ranking is inferred.
+
+Scientific-reading assumption: a changed complete learning package can justify
+bounded real B work without isolating a component cause. The independent unit is
+the fresh training fit/pair. Evaluation rows remain conditional observations;
+FOLR's equal row indices do not pair action-dependent traffic worlds. UCOPE's
+first-command ordering motivates its suffix credit but cannot prove an unbiased
+clipped update or lower variance. Current unchanged Foundations §§4–6 and
+03_HIERARCHY_ASYNC/04_EMPIRICAL support those distinctions; the evidence-spec
+calibration controls the burden. No new literature claim requires another corpus
+search. Tuned same-information headroom is absent; that limits interpretation and
+informs sequencing without excluding these B investments.
+
+### Fallbacks and the separate fifth-slot question
+
+The two fallbacks activate **once, in order**, only for a selected primary that
+cannot start, has an actual unresolved execution/scope dependency, or returns
+no-ready, with an eligible vacancy. Root records the fact and no longer counts
+the blocked primary as advancing. First VSP03 receives one original-node question
+and intake, zero numerical/implementation work. Second VSPC1 receives one concrete
+remaining-hold source/design return or precise original-family question/no-ready,
+also zero implementation/numerical work. Neither is an unbounded refill queue.
+A valid completed B or useful question/design does not activate a fallback or
+authorize a successor. Independent chains never wait for sibling results/cleanup.
+
+The response explicitly excludes FSD and preserves the separate MGTAP assignment.
+Their earlier design allocations have now finished; this chronological fact does
+not enlarge the four-slot scope or duplicate MGTAP. The queued
+[`2026-09-10-fifth-slot-implementation-01`](2026-09-10-fifth-slot-implementation-selection.md)
+still asks only for the next FSD-versus-MGTAP implementation investment. A/B/C,
+the proposed fixture allowance and real training remain unselected/unallocated
+there. Its immutable TASK/HANDOFF/science bytes remain unchanged. The old
+four-slot BLOCKED wording in that fixed preparation is historical; its excluded
+directions and one-slot question still match the actual disjoint scope.
+
+Actual delivery is now a verified material event. The observed primary Transport
+registry still contains the old `BLOCKED`, `archive_status=ARCHIVED`, null response
+digest and original two-click fields. Those stale fields do not undo the science
+decision or establish binding availability. Root routes the updated
+[bounded reconciliation action](../pro_packets/20260910_fifth_slot_implementation_selection/TRANSPORT_RECONCILIATION_NEXT_ACTION.txt)
+to dedicated Transport; this DM sends nothing and edits no registry. Preserve the
+old Transport attempt, Root's separate consumed resend and the later owner-requested
+Markdown delivery as distinct events. Root may subsequently route the unchanged
+fifth-slot handoff after actual binding readiness, under its existing assignment.
+
+### Decisions this intake produces
+
+1. **Portfolio investment:** Pro chose A over B's conditional VSP03 fit and the
+   permitted fewer/concrete alternatives. Apply its exact four investments and
+   finite fallbacks as `PRO_FINAL / OWNER_DELEGATED`; recommendation and executed
+   record are A. This is allocation-record application, with runtime execution
+   still pending Root/DM dispatch. No local family/lifecycle/priority selection.
+2. **Technical conformance/application:** options are (a) record/apply the complete
+   conforming response, or (b) return a concrete conflict to the same node. Select
+   (a) because the checked question, meanings, class and caps match.
+   **Owner-delegated decision (unattended, 2026-09-03 instruction): (a).** Root's
+   exact transfer authorizes this completed check; no additional approval follows.
+3. **Fifth-slot readiness:** preserve the independent unselected question and route
+   actual-delivery reconciliation, not a duplicate Send or a local choice. The
+   updated fifth-slot intake records this technical action separately.
+
+Owner item `20260910-root-006` is traced through `item.py` to the actual immutable
+Pro source and this applied allocation record, with `auto_applied=a`; its old
+blocked histories and proposal packet remain historical. The Chinese
+[application packet](../pro_packets/20260910_four_slot_rolling_refill/APPLICATION_OWNER_PACKET.json)
+states the formed choice and remaining execution state. Current primary reviews
+and nonempty ledger-owner instructions were empty; owner prediction is not taken.
+This consultation intake is not a new empirical result, so it creates no empirical
+prediction score or valid-result brief. Audit rows record the actual provenance.
+
+Claim ceiling: finite Portfolio investment in exploratory package comparisons,
+plus a narrow direction question. Next discriminators are final L−F, learned
+RCLE versus both initialization and nearest with companion harms, FOLR's formed
+family disposition, and ACVC's next unscreened pair of rule contrasts. No outcome
+automatically buys another fit. No new science/test scratch was created. The
+shared Portfolio checkout remains required for the queued fifth-slot delivery and
+check; all response/download/history evidence is retained and Root owns later
+integration/retention. The exact exposure line and checks are in INTAKE_FACTS.
+
+## Preserved pre-delivery blocker history
+
+The sections below record their original observation times. Their no-decision
+statements are superseded for current state only by the complete intake above.
 
 ## Owner-directed resend terminal update — 2026-09-11
 

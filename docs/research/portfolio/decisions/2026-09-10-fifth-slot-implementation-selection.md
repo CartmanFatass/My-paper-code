@@ -1,4 +1,56 @@
-# Fifth-slot implementation question — pre-send blocker intake
+# Fifth-slot implementation question — queued independent investment
+
+## Effect of the complete four-slot decision — 2026-09-11
+
+**This fifth-slot question remains unselected and queued.** The older four-slot
+question has now delivered a complete conforming option A at
+`1ea43d8fbc846807d71d4d894136f357f65551b6`; its
+[intake](2026-09-10-four-slot-rolling-refill.md) applies UCOPE, RCLE, FOLR and ACVC
+investments and two finite fallbacks. It explicitly leaves FSD/MGTAP outside
+that decision. No fifth-slot implementation, fixture budget or scientific
+invocation is released by the four-slot answer, and no A/B/C option is inferred
+here. The completed earlier FSD design and one-time MGTAP fallback do not revive.
+
+The fixed fifth-slot question is still scientifically current: it compares only
+the next FSD I1280/D0 implementation return, exact MGTAP COND/DENSE implementation,
+and no additional investment for one disjoint vacancy. Its excluded four-slot
+directions remain excluded. Its preparation-time statements that the four-slot
+answer was blocked are now historical, superseded by actual delivery and intake;
+they do not change its question, comparators, claim ceiling or proposed bounds.
+TASK `8e09049351afdd582bb4d4b264f34a821ad2e988`, HANDOFF
+`5b74f54129257a76a9065729fa202b5b3ec7e163`, prompt SHA256
+`92a9a6c40ef82232aa2e8fc2271c4b873c7501bf6c96bbf482366fd10d05e5f8` and all
+published scientific bytes remain unchanged. No new provider action is performed
+or claimed by this DM.
+
+I read the complete four-slot response and verified its direct Issue17 delivery
+comment5629259208, single-path Git commit and byte equality with Root's downloaded
+and archived Markdown. This is a verified material event stronger than the
+earlier capability-gap response. The observed primary Transport binding still
+says old request BLOCKED/ARCHIVED with null response digest; that stale raw state
+does not undo the formed four-slot decision or establish reuse readiness.
+See the dated [intake facts](../pro_packets/20260910_four_slot_rolling_refill/INTAKE_FACTS.json).
+
+The updated [bounded Transport task](../pro_packets/20260910_fifth_slot_implementation_selection/TRANSPORT_RECONCILIATION_NEXT_ACTION.txt)
+now names the actual full delivery and distinct owner-requested download event.
+Root routes ordinary archival/binding reconciliation through dedicated Transport,
+preserving the original attempt, Root's consumed resend, and the later download.
+This task makes no Send and no manual registry rewrite. Transport returns actual
+same-binding availability or its exact remaining blocker; Root can then route the
+unchanged fifth-slot handoff under its existing assignment. No new scientific
+packet, local Portfolio decision or permission handshake is required.
+
+**Decisions this update produces:** technical options are (a) recognize the
+formed four-slot decision and preserve this independent unselected question while
+returning actual-delivery reconciliation, or (b) treat the old BLOCKED field as
+current scientific authority, duplicate the four-slot request or select fifth-slot
+work locally. Recommend/execute (a). **Owner-delegated decision (unattended,
+2026-09-03 instruction): (a)** under Root's transferred response-check scope.
+Owner item root007 receives an updated queued/blocked delivery trace only and
+retains `auto_applied=null`; its original packet/options are preserved. Current
+primary owner reviews/nonempty ledger-owner instructions were empty. No science,
+model, environment, numerical fixture/test, implementation or provider Send was
+performed. The earlier dated refusals below remain evidence, not current answers.
 
 ## Material event intake — 2026-09-11
 
