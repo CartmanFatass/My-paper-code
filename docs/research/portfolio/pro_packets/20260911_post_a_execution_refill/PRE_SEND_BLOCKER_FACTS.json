@@ -6,7 +6,7 @@
   "conversation_binding_key": "portfolio:cross_direction",
   "conversation_id": "6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
   "provider_url": "https://chatgpt.com/c/6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
-  "state": "ROOT_SCOPED_IAB_NOT_TRANSFERABLE",
+  "state": "OWNER_CORRECTED_BROWSER_SCOPE_NOT_PERMISSION_BLOCKER",
   "send_click_count": 0,
   "provider_send_accepted": false,
   "composer_text_entered": false,
@@ -24,7 +24,7 @@
     "response_path_status": "ABSENT",
     "matching_issue_comment": null
   },
-  "recovery_route": "The owning authenticated IAB must be opened/exposed within the dedicated Transport task 01a087a3-4f12-7021-9a4d-6da9da2bafcc. Only then may Transport resume the same unsent request on its original conversation after reconciling actual delivery. A Root-scoped tab or cross-task mention alone is insufficient; no alternate account/conversation or new request is selected.",
+  "recovery_route": "Use any browser surface accessible to Transport when the target ChatGPT session is actually logged in; preserve the unchanged conversation/request binding and reconcile provider Send state before the sole Send. Browser ownership by a Codex task is irrelevant to authority.",
   "recorded_at": "2026-09-11T09:21:26Z",
   "scientific_conformance": "NOT_ASSESSED_BY_TRANSPORT",
   "initial_transport_receipt": {
@@ -63,5 +63,15 @@
     "portfolio_decision_formed": false,
     "allocation_applied": null,
     "required_next_fact": "Owning authenticated IAB is opened/exposed within the dedicated Transport task, on the unchanged bound conversation."
+  },
+  "owner_correction": {
+    "date": "2026-09-11",
+    "provenance": "OWNER_DIRECT",
+    "rule": "Browser/task ownership neither grants nor blocks Pro Send authority. Readiness follows actual target ChatGPT login state, exact conversation/request binding, provider/model state, and one-Send reconciliation.",
+    "supersedes_current_effect_of": [
+      "ROOT_SCOPED_IAB_NOT_TRANSFERABLE",
+      "owning_authenticated_IAB_must_be_exposed_within_dedicated_transport_task"
+    ],
+    "historical_facts_preserved": true
   }
 }

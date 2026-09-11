@@ -46,6 +46,10 @@ designated DM for scientific/specification checking and intake, including Portfo
 Transport never selects science. Root uses `hmasd-loop-dispatch` for execution; the designated DM
 uses `hmasd-portfolio-task` for cross-direction materials and Pro intake. Procedure ownership is
 indexed in `docs/project/ROOT_OPERATIONS.md`.
+OWNER_DIRECT 2026-09-11: Transport Send readiness is independent of which Codex task opened or
+owns a browser surface. Browser/task scope is not a permission blocker. Transport determines
+readiness from the actual target ChatGPT session login state, exact conversation/request binding,
+provider state and one-Send reconciliation, and may use any accessible logged-in browser surface.
 Each DM owns its card, predictions, implementation, technical acceptance, result collection,
 scientific intake and authorized continuation. Scout, Implementer, Reviewer, Critic, Verifier and
 Operator are optional working methods, not additional authorities. Legacy CM tasks retain only
