@@ -24,7 +24,7 @@
     }
   ],
   "recommended": "pause",
-  "auto_applied": null,
+  "auto_applied": "pause",
   "dm_reason": "再收集一个相同配方的符号增益有限，但已有正结果使独立复测仍是最强备选；提交原节点判断。",
   "evidence": [
     "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_HALF_FAMILY_QUESTION_INTAKE_20260911.md",
@@ -71,5 +71,15 @@
     "verdict_text": "The DM recommends a narrow pause of the exact fixed .5/host/5000-training/128-final recipe as a close call. This recommendation is unexecuted; the original Convergence node decides.",
     "source": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_HALF_FAMILY_QUESTION_INTAKE_20260911.md"
   },
-  "starred": true
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-11T06:01:00+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/vap_folr_core/pro_packets/20260911_half_family_convergence/archive/RESPONSE.md",
+      "record": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_HALF_FAMILY_CONVERGENCE_INTAKE_20260911.md",
+      "state": "applied",
+      "summary": "已完整读取并核对Pro原始裁决，暂停固定0.5 / 当前交通环境 / 5000训练+128最终评价的具体配方，保留RETAIN与两次相反结果；没有新运行、重铸或Portfolio生命周期变化。"
+    }
+  ]
 }

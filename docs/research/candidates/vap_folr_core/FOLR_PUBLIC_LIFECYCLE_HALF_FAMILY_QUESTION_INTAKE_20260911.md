@@ -128,3 +128,17 @@ live delivery/intake dependency; this DM owns its next authoring event and Root
 retains main integration/reclamation. No remote execution checkout exists for this
 question. Return at a clean boundary pending that routed response, without routine
 provider polling or another request. Scientific/specification acceptance is pending.
+
+## 6. Assigned question/intake completed
+
+Root forwarded the complete immutable response and accepted Transport receipt.
+The full response at `e1e9a600bd4f715328b514fe746bb367775ff3a7` passes the
+[scientific/specification intake](FOLR_PUBLIC_LIFECYCLE_HALF_FAMILY_CONVERGENCE_INTAKE_20260911.md).
+It selects and this DM applies a reversible narrow pause of the exact fixed-half
+recipe, retaining ordinary RETAIN and both original results. No successor, recast,
+Portfolio disposition or numerical continuation is selected. The accepted full
+response has29325 bytes and SHA256138b97ed8501db446068c236ad137d8b61661155fe06a962b8e7fd2c7e9b7563;
+the384-byte Transport chat receipt is archived separately at its original hash.
+This is successful completion of the single allocated question/intake, not a
+no-ready/failure fallback trigger. Root retains integration and subsequent queue
+coordination. No further provider observation or numerical batch remains here.

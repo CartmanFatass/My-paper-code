@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "request_id": "folr-public-lifecycle-half-family-convergence-20260911",
+  "workflow_node": "em_convergence",
+  "conversation_binding_key": "em:vap_folr_core:convergence",
+  "direction_id": "vap_folr_core",
+  "direction_ids": [
+    "vap_folr_core"
+  ],
+  "conversation_id": "6aa18137-9d88-83e8-a01f-46630813faf8",
+  "provider_url": "https://chatgpt.com/c/6aa18137-9d88-83e8-a01f-46630813faf8",
+  "tab_id": "2",
+  "user_message_id": "today-current-round|TASK.md@a790e8e6f68849f06a542ca4e36bee87445a40e0|user-node",
+  "assistant_message_id": "today-current-round|Complete response at commit e1e9a600bd4f715328b514fe746bb367775ff3a7|current-round-assistant-node",
+  "visible_model": "6 Pro",
+  "underlying_model": "Latest",
+  "thinking_effort": "Pro, 5 of 5.",
+  "prompt_sha256": "da1bf2f2935a429c54fd853ce12c963a1cb6aad8aa83e02fcf23b989f84aeb82",
+  "response_sha256": "d893e56d1106183a9f658ac63a7b707f283c1af0e7b93feedc68fa2160661e02",
+  "response_characters": 384,
+  "response_bytes": 384,
+  "send_click_count": 1,
+  "source_mode": "paste",
+  "attachment_observed": false,
+  "identity_validation": "PASS_WITH_DOM_ID_UNAVAILABLE",
+  "identity_expected": {
+    "conversation_id": "6aa18137-9d88-83e8-a01f-46630813faf8",
+    "user_message_id": "today-current-round|TASK.md@a790e8e6f68849f06a542ca4e36bee87445a40e0|user-node",
+    "assistant_message_id": "today-current-round|Complete response at commit e1e9a600bd4f715328b514fe746bb367775ff3a7|current-round-assistant-node"
+  },
+  "identity_observed": {
+    "conversation_id": "6aa18137-9d88-83e8-a01f-46630813faf8",
+    "user_message_id": "today-current-round|TASK.md@a790e8e6f68849f06a542ca4e36bee87445a40e0|user-node",
+    "assistant_message_id": "today-current-round|Complete response at commit e1e9a600bd4f715328b514fe746bb367775ff3a7|current-round-assistant-node"
+  },
+  "archive_paths": {
+    "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vap_folr_core\\folr-public-lifecycle-half-family-convergence-20260911\\PROMPT_BODY.md",
+    "response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vap_folr_core\\folr-public-lifecycle-half-family-convergence-20260911\\RESPONSE.md",
+    "packet_manifest": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vap_folr_core\\folr-public-lifecycle-half-family-convergence-20260911\\PACKET_MANIFEST.json",
+    "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vap_folr_core\\folr-public-lifecycle-half-family-convergence-20260911\\TRANSPORT_FACTS.json"
+  },
+  "natural_completion_observed": "Worked for 14m 48s; complete response at commit e1e9a600bd4f715328b514fe746bb367775ff3a7 and delivery comment link; no Stop answering control",
+  "captured_at": "2026-09-11T05:51:31Z",
+  "notes": [
+    "Copied paired current-round assistant receipt with CUA clipboard.readText.",
+    "No second Send was attempted."
+  ]
+}

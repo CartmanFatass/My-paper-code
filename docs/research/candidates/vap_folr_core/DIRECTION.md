@@ -545,3 +545,48 @@ References:
 - `FOLR_PUBLIC_LIFECYCLE_HALF_B02_RESULT_SUMMARY_20260910.json`
 - `FOLR_PUBLIC_LIFECYCLE_HALF_B02_INTAKE_20260910.md` §§8–9
 - `evidence/2026-09-10-folr-public-lifecycle-half-b02-run-analysis.json`
+
+## Accepted fixed-half family Convergence — 2026-09-11
+
+**Conclusion.** The complete original-node response at
+`e1e9a600bd4f715328b514fe746bb367775ff3a7` selects a reversible narrow pause of the
+exact fixed .5 public birth/departure incoming-state attenuation / easy Traffic
+Junction /5000-training/128-final recipe against RETAIN. Ordinary generic RETAIN
+remains the usable baseline. No third pair, coefficient change or replacement
+mechanism is selected. This is an accepted direction-local family decision, with
+zero numerical continuation; Portfolio lifecycle/priority and recast counts remain
+unchanged. The single allocated question and complete intake are finished.
+
+**Bounded claim.** This is a judgment about marginal work on the exact recipe under
+unresolved recurrence, not proof of expected HALF harm, stable RETAIN superiority,
+equivalence or a universal attenuation negative. The two original B rules and
+opposite-signed observations retain their meanings. It does not retire general
+survivor-memory research or establish causal timing, stale-memory content, useful
+information fraction, omitted-control superiority, original-CAMA performance,
+tuned headroom, transfer or C/UAV evidence. Same-information tuned headroom remains
+absent; attained generic RETAIN is competent but untuned.
+
+**Strongest support and contradiction.** HALF-B01's +1.56546875 remains the strongest
+support for further fixed-half interest. HALF-B02's -4.293046875 matched native loss
+is the strongest contradiction, accompanied by its separately worse changing-policy
+training mean. Actual attenuation and consistent acting/replay prove exercised
+operations, not effective memory contents or a cause. Conditional evaluation spread
+does not estimate training-population variance, and equal row indices do not pair
+action-dependent traffic worlds. Earlier full-EVENT and32-final evidence remain
+separate, including all gains/losses and omitted/unmatched controls.
+
+**Surviving alternative and next discriminator.** One more unchanged independent
+HALF/RETAIN pair is legitimate B work and the strongest alternative to this close-call
+pause. It is unselected because the node judged its current marginal decision value
+insufficient, not because replication is inadmissible or presumed prohibitively
+costly. Re-entry is a concrete renewed need for the recurrence estimate in an actual
+retention-rule choice; no new mechanism, positive pilot, tuned-headroom project or
+causal diagnosis is required. The direct discriminator would be one fresh unchanged
+pair at the same final128 endpoint and MEI1, preserving every outcome. It remains
+unfunded; no old3900-second allowance or repeated consultation series follows.
+
+References:
+
+- `pro_packets/20260911_half_family_convergence/archive/RESPONSE.md`
+- `FOLR_PUBLIC_LIFECYCLE_HALF_FAMILY_CONVERGENCE_INTAKE_20260911.md`
+- `pro_packets/20260911_half_family_convergence/archive/DM_READBACK.json`
