@@ -102,6 +102,14 @@
       "record": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B01_INTAKE_20260911.md",
       "state": "applied",
       "summary": "后续独立分配的I1280/D0真实B对已完成：原生差值+0.05698，超过0.01；24集胜8集负，只有一对训练。两臂完整耗时519.94/1020.68秒，均在限额内；十次监测循环耗时缺失，支持及总限额无法完全核实。保留旧两次负结果和原设计历史，不自动启动后继；清理等待Root整合保留核对。"
+    },
+    {
+      "at": "2026-09-11T09:04:45+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260911_five_chain_refill/archive/RESPONSE.md",
+      "record": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B01_INTAKE_20260911.md",
+      "state": "applied",
+      "summary": "Root已整合完整结果至maincc22d3ca4并接受保留。22份原始证据逐字节核对已提交版本后，已清理指定执行工作树、输入目录及两个终止监督目录；磁盘、Git登记及监督句柄均确认不存在。共享编写工作树保留，科学结论及监测耗时缺口不变；没有新运行、测试或后继。"
     }
   ]
 }
