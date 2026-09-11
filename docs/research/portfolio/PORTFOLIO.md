@@ -28,6 +28,18 @@ Root has actually dispatched all three to their existing DMs and shared checkout
 allocation and cleanup are complete, so three chains advance and two target slots remain vacant.
 No MGTAP successor, cap transfer, fallback or local fourth/fifth investment was selected.
 
+Current execution supersedes that dispatch-time count. RCLE B06 is running with actual Monitor
+adoption. ACVC8951 closed before admission or scientific exposure after its one bounded remote
+preparation received CRLF-contaminated shell input; no retry or successor follows. FOLR has one
+confirmed Send and active original-node Pro generation. VNFC's delayed existing response was
+reconciled without another Send; its original DM is applying the response-selected B02 direction
+decision and preparing the exact600/300/900-second object. Thus RCLE, FOLR and VNFC currently advance.
+
+The fixed current-vacancies Portfolio packet at `5b9bfee40`, integrated through `99c9fd935`,
+recommends zero additions from the other accepted rows and records two vacancies after ACVC closeout.
+It remains queued behind FOLR on the serial Transport route; no Portfolio selection has formed from
+that packet.
+
 ## Post-option-A refill decision — 2026-09-11
 
 The complete Portfolio response for

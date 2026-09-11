@@ -927,3 +927,23 @@ and FOLR one learned-retention candidate plus original Convergence question/full
 implementation and zero numerical allowance. MGTAP cleanup is complete and integrated through
 `084775b84`; no MGTAP successor was selected. Three chains now advance and two target slots remain
 vacant. Owner item `20260911-root-002` records option A as actually auto-applied.
+
+Subsequent independent execution changed the live count. RCLE B06/master26 source `baf63642a` and
+launch/adoption receipt `944358c34` are integrated through `d8f2d3913`; handle
+`rcle-b06-nearest99-s26-20260911` is running under the configured Monitor after destination
+admission passed. ACVC8951 ended at a precise preparation no-ready: CRLF in SSH stdin made the one
+bounded remote preparation fail before checkout creation, admission, supervisor, model or scientific
+exposure. Its preserved zero-exposure closeout is integrated through `ece2de702`; no retry or
+successor was selected.
+
+VNFC's delayed original-request delivery was reconciled without a new Send. Verified response
+`10bb08476`, 31,994 bytes, and Issue1 comment5637667527 match; the original DM read option(a), one
+native-service-credit B02 pair under600 native/300 support/900 complete seconds, and is performing
+conformance/card/minimal implementation on the existing chain. The response is integrated through
+`df042c4ac`. FOLR's fixed learned-retention question is integrated through `36b7b546c` and has one
+confirmed Send with `WAITING_GENERATION`; Transport remains its sole observer. These are the three
+current advancing directions.
+
+The next current-vacancies Portfolio handoff is integrated through `99c9fd935`, recommends zero
+eligible additions under the named exclusions, and awaits serial Transport dispatch after FOLR
+clears. It records two vacancies after ACVC closeout; it does not itself select science or fill them.
