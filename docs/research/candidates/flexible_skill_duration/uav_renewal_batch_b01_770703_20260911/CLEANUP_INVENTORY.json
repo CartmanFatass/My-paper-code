@@ -1,5 +1,5 @@
 {
-  "status": "preserved raw evidence; cleanup pending Root integration/retention reconciliation",
+  "status": "complete; exact four paths removed and absence verified",
   "source_sha": "c70f01ea30d6c4d063dcc46d8499b26bfe037da8",
   "source_publication": "already committed and pushed on codex/fsd before launch; source remains reachable from the shared direction branch",
   "evidence_publication": "the accompanying result commit includes all22 collected raw primary/admission/time/supervisor files; see PAIRED_ANALYSIS.json sha256",
@@ -11,31 +11,38 @@
       "kind": "detached execution worktree",
       "bytes": 43644768,
       "terminal": "both accepted handles finished exit0",
-      "action": "remove and unregister after reconciliation"
+      "action": "remove and unregister after reconciliation",
+      "completion": "removed; disk absence verified"
     },
     {
       "path": "/home/wu/hmasd-inputs/fsd-uav-renewal-batch-b01-770703-20260911",
       "kind": "four admission/time files",
       "bytes": 1209,
-      "action": "remove after preservation"
+      "action": "remove after preservation",
+      "completion": "removed; disk absence verified"
     },
     {
       "path": "/home/wu/.agent-tasks/fsd-uav-renewal-batch-b01-770703-D0-20260911",
       "kind": "six supervisor files",
       "bytes": 2311,
-      "action": "remove after preservation"
+      "action": "remove after preservation",
+      "completion": "removed; disk absence verified"
     },
     {
       "path": "/home/wu/.agent-tasks/fsd-uav-renewal-batch-b01-770703-I-20260911",
       "kind": "six supervisor files",
       "bytes": 2300,
-      "action": "remove after preservation"
+      "action": "remove after preservation",
+      "completion": "removed; disk absence verified"
     }
   ],
   "retained": [
     "C:/Projects/HMASD-worktrees/codex-fsd shared authoring checkout",
     "all unrelated or active remote paths"
   ],
-  "removal_performed": false,
-  "absence_verified": false
+  "removal_performed": true,
+  "absence_verified": true,
+  "root_integrated_commit": "cc22d3ca4dbeef070dd4f90c12f94c3a970507a2",
+  "root_retention_accepted": true,
+  "completion_facts": "CLEANUP_FACTS.json"
 }

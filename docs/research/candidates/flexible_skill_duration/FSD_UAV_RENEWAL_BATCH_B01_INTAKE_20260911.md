@@ -108,8 +108,9 @@ Chinese owner brief:
 4. **Preservation/cleanup, technical.** Options: (a) preserve the published source
    and all raw evidence, then remove the four completed owned remote paths after
    Root reconciles integration/retention; (b) retain for an actual live/unique-state
-   dependency. Recommend(a); preservation is prepared, removal remains pending
-   that factual reconciliation. The shared authoring checkout remains active.
+   dependency. Recommend/execute(a). Root integrated through maincc22d3ca4 and
+   accepted retention; the four-path cleanup is now complete and verified below.
+   The shared authoring checkout remains active.
 
 **Owner-delegated decision (unattended, 2026-09-03 instruction): (a) for each
 decision above, with the explicitly stated executed/planned boundary.**
@@ -133,7 +134,19 @@ No checkpoint files were produced by these runners.
 | /home/wu/.agent-tasks/fsd-uav-renewal-batch-b01-770703-D0-20260911 | 2311 | six copied supervisor files, terminal exit0; remove after preservation |
 | /home/wu/.agent-tasks/fsd-uav-renewal-batch-b01-770703-I-20260911 | 2300 | six copied supervisor files, terminal exit0; remove after preservation |
 
-DM owns the assigned cleanup. Root owns integration/retention reconciliation.
-No path is removed yet and no absence is claimed. Preserve the shared authoring
-checkout and every unrelated/active remote checkout. The final cleanup return
-must verify both disk absence and worktree-registration absence.
+This table records the original inventory and removal conditions. Root integrated
+and pushed the complete result through `cc22d3ca4dbeef070dd4f90c12f94c3a970507a2`,
+accepted retention and assigned exact cleanup. Before removal, all22 current remote
+raw files matched the preserved blobs in that integrated commit; launch source
+c70f01ea3 is its ancestor. The execution checkout had only the six identified
+ignored result files, and the other three roots had exactly the16 copied receipts/
+supervisor files. Both handles were finished/exit0 without active tmux sessions.
+
+At 2026-09-11T09:03:09.254996+00:00, DM removed exactly the four inventoried
+paths. All four are absent on disk; the detached execution worktree is absent
+from Git registration; both supervisor status calls return `not_found`, with
+their directories absent and tmux inactive. See
+[CLEANUP_FACTS.json](uav_renewal_batch_b01_770703_20260911/CLEANUP_FACTS.json).
+The shared authoring checkout and unrelated/active paths remain. No new scientific
+work, test or successor was performed. Cleanup is complete; partial support
+telemetry remains a recorded cost-certification limit.

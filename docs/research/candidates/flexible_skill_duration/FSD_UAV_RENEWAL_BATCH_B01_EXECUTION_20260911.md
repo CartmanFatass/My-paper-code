@@ -1,7 +1,7 @@
 # FSD renewal-batch B01 / 770703 — exact execution and collection record
 
 **Both arms complete and the paired primary accepted: one above-MEI native
-package gain. Partial support telemetry; cleanup pending integration/retention.**
+package gain. Scoped cleanup is complete; partial support telemetry remains.**
 This is the complete one-pair task from Portfolio option A, immutable response
 `ed0c4e1c3cd28be353253e8533bc89a261f25357`, applied through the
 [FSD execution mapping](../../portfolio/pro_packets/20260911_five_chain_refill/EXECUTION_MAPPING.md#fsd--complete-one-fresh-i1280d0-b-pair).
@@ -199,3 +199,16 @@ Known I observation commands cost6.893s; ten earlier loop command walls remain
 unknown. Both arm caps pass; support/complete-cap certification stays incomplete.
 The accepted pair is the final allocated numerical work. No retry, new seed,
 third arm or successor is launched. Cleanup removal is not yet performed.
+
+## Scoped cleanup completion — 2026-09-11T09:03:09.254996+00:00
+
+Root integrated through maincc22d3ca4 and accepted retention. All22 current remote
+raw evidence files were verified against that commit, which also preserves launch
+source c70f01ea3. Only the declared six result files and16 receipt/supervisor files
+were found outside tracked source. DM removed exactly the inventoried execution
+worktree, input directory and two terminal supervisor directories. All four disk
+paths and worktree registration are absent; both supervisor queries return
+`not_found`, with inactive tmux. The shared authoring checkout remains.
+See [cleanup facts](uav_renewal_batch_b01_770703_20260911/CLEANUP_FACTS.json)
+and the [final intake](FSD_UAV_RENEWAL_BATCH_B01_INTAKE_20260911.md#5-preservation-and-cleanup-inventory).
+No further invocation, fixture, test or successor was run.

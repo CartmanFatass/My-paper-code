@@ -1,5 +1,5 @@
 {
-  "status": "valid complete paired result; support telemetry incomplete; cleanup and final publication accounting remain open",
+  "status": "assigned pair and cleanup complete; recorded support is a lower bound with telemetry gaps",
   "metric": "sum of measured tool/command execution wall charged once; idle waiting/reasoning/study elapsed separate; unmeasured enclosing/native-message overhead unknown",
   "cap_seconds": 300,
   "charges": [
@@ -270,6 +270,61 @@
       "phase": "paired_intake",
       "operation": "trace_applied_real_pair_and_current_portfolio_row",
       "wall_seconds": 0.3783915
+    },
+    {
+      "phase": "paired_intake",
+      "operation": "verify_preservation_brief_audit_and_publish_complete_intake",
+      "wall_seconds": 10.0012848
+    },
+    {
+      "phase": "paired_intake",
+      "operation": "complete_existing_intake_publication_session",
+      "wall_seconds": 2.8e-06
+    },
+    {
+      "phase": "paired_intake",
+      "operation": "publish_existing_CSV_artifacts_excluded_by_default_ignore",
+      "wall_seconds": 10.0130527
+    },
+    {
+      "phase": "paired_intake",
+      "operation": "complete_existing_CSV_publication_session",
+      "wall_seconds": 3.0041384
+    },
+    {
+      "phase": "cleanup",
+      "operation": "cleanup_assignment_local_state_inventory_owner_read",
+      "wall_seconds": 0.4610309
+    },
+    {
+      "phase": "cleanup",
+      "operation": "remote_unique_file_and_terminal_boundary_read",
+      "wall_seconds": 0.9475463
+    },
+    {
+      "phase": "cleanup",
+      "operation": "verify_22_raw_blobs_in_Root_integrated_commit_and_source_ancestry",
+      "wall_seconds": 1.4051611
+    },
+    {
+      "phase": "cleanup",
+      "operation": "verify_current_remote_22_raw_artifact_digests",
+      "wall_seconds": 0.6830327
+    },
+    {
+      "phase": "cleanup",
+      "operation": "remove_exact_four_completed_paths_and_verify_disk_worktree_supervisor_absence",
+      "wall_seconds": 0.933475
+    },
+    {
+      "phase": "cleanup",
+      "operation": "write_verified_cleanup_facts_and_closeout_records",
+      "wall_seconds": 0.02
+    },
+    {
+      "phase": "cleanup",
+      "operation": "trace_completed_cleanup_on_existing_owner_card",
+      "wall_seconds": 0.2997214
     }
   ],
   "monitor_cost_attribution": {
@@ -279,8 +334,8 @@
     "unmeasured_I_earlier_loop_commands": 10,
     "remaining_adoption_shared_native_message_execution_seconds": null
   },
-  "cap_assessment": "both arm caps verified; support<=300 and complete<=3000 not fully certified; no observed cap breach; resources_unmeasured applies only to partial support telemetry",
-  "recorded_support_seconds": 63.014946800000004,
-  "remaining_from_recorded_seconds": 236.98505319999998,
-  "known_arm_plus_recorded_support_seconds": 1603.6349467999999
+  "final_publication_note": "This snapshot precedes its own final publication; that command's measured wall is returned to Root separately. No complete support/total-cap certification is asserted.",
+  "cap_assessment": "both arm caps verified; support<=300 and complete<=3000 remain not fully certified; no observed cap breach; resources_unmeasured applies to partial support telemetry",
+  "recorded_support_seconds": 90.7833929,
+  "known_arm_plus_recorded_support_seconds": 1631.4033929
 }
