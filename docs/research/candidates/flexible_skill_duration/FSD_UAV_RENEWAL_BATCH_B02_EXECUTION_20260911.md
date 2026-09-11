@@ -1,6 +1,9 @@
 # FSD renewal batch B02 execution
 
-**Prepared; zero new arms accepted.** Training770803/evaluation780803.
+**Bounded return complete; allocated pair unlaunched.** Training770803/evaluation780803.
+Silent preparation commands exhausted the support allowance before any admission
+or scientific submission. [The limitation intake](FSD_UAV_RENEWAL_BATCH_B02_EXECUTION_LIMITATION_INTAKE_20260911.md)
+records the source acceptance, projected cost overrun and zero empirical polarity.
 The [card](FSD_UAV_RENEWAL_BATCH_B02_SCIENCE_CARD_20260911.md) controls the
 unchanged full endpoint, all-sign rule, exposure, L0 and stop.
 
@@ -10,7 +13,8 @@ Existing local checkout:`C:/Projects/HMASD-worktrees/codex-fsd`, branch`codex/fs
 clean required input`d5a45a4da5c21aa818dd85fec9c9ec8920ea3c2c`.
 Accepted shared source:`c70f01ea30d6c4d063dcc46d8499b26bfe037da8`;
 new entry`scripts/run_fsd_uav_renewal_batch_b02.py` changes only instance binding.
-Exact launch SHA will be the commit publishing this entry/card/commands.
+Published input SHA is2b8bd8f7094b7023a892fcf92ab49dc6421fc8f0.
+No launch SHA or accepted experiment handle exists; the exact commands were not run.
 FSD DM`/root/dm_fsd_i1280_implementation` owns launch/adoption/collection/intake/
 cleanup; Root integrates and accepts retention/reclamation.
 
@@ -83,7 +87,9 @@ updates. Report both this unit and old I1280 unit separately, preserving old-I
 losses. Run-level analysis uses one selected endpoint row per arm/training unit.
 No result-based retry, extra evaluation or third pair follows.
 
-Prepare the scoped cleanup inventory during collection. After evidence is
-preserved and Root confirms integration/retention, remove only this completed
-execution checkout, receipt directory and the two exact supervisor directories;
-verify disk/worktree-registration absence. Keep the shared authoring checkout.
+Final reconciliation found the four prospective remote paths absent and no
+execution worktree registration; CLEANUP_FACTS.json records the direct facts.
+No removal was necessary and no scientific evidence exists to collect. The
+accepted published source and all preparation receipts are retained. Keep the
+shared authoring checkout. No Monitor adoption was dispatched because no handle
+was submitted or accepted.
