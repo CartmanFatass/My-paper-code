@@ -1,0 +1,56 @@
+{
+  "master": 8302,
+  "b": 830200000,
+  "common_initialization": 830200011,
+  "extra_initialization": 830200012,
+  "training_velocity": 830200021,
+  "training_duration": 830200022,
+  "constructor_reset": 830201000,
+  "training_resets": [
+    830201000,
+    830201511
+  ],
+  "evaluation_resets": [
+    830202000,
+    830202031
+  ],
+  "evaluation_velocity": [
+    830203000,
+    830203031
+  ],
+  "evaluation_duration": [
+    830204000,
+    830204031
+  ],
+  "unique_integer_keys": 612,
+  "overlap_with_prior": {
+    "8101": 0,
+    "8102": 0,
+    "8201": 0,
+    "8202": 0,
+    "8301": 0
+  },
+  "algorithm_work": {
+    "train_steps": 262144,
+    "eval_steps": 24576,
+    "steps": 286720,
+    "adam": 2048,
+    "moment_merges": 512,
+    "target_rows": 262144,
+    "four_epoch_target_terms": 1048576,
+    "scored_episodes": 1120,
+    "eval_episodes": 96,
+    "fits": 2,
+    "matched_pairs": 1,
+    "constructors": 2
+  },
+  "actual_new_exposure_at_definition": {
+    "scientific_invocations": 0,
+    "accepted_submissions": 0,
+    "native_steps": 0,
+    "training_pairs": 0,
+    "models": 0,
+    "adam": 0,
+    "eval_episodes": 0
+  }
+}

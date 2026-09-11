@@ -1,0 +1,217 @@
+# FOLR public-lifecycle HALF-B02 technical evidence
+
+Current state: RETAIN complete and technically accepted; HALF_EVENT accepted and Monitor adoption confirmed by Root. The paired scientific endpoint is pending.
+
+## 1. Accepted reuse and focused new binding
+
+[Card §§2–5](FOLR_PUBLIC_LIFECYCLE_HALF_B02_SCIENCE_CARD_20260910.md#2-reused-intervention-task-and-learner)
+reuses sourcec6be208cd514b5d12fb13c7637e2d6376de11eb6, its26 focused checks and independent
+semantic review from HALF-B01. Current module/runner/preflight/test content matches that
+accepted source. New source lines0; no model load, suite, pilot or scientific execution.
+Training7808/evaluation107808 are new explicit process arguments, retaining the existing
+Python/global NumPy/Torch setup before construction and final reset. Native/replay RNG,
+CPU FP32/Torch1/1, before-GRU attenuation, acting/online/target reconstruction, reward,
+information, optimizer and endpoint remain unchanged. No private mask stream is added.
+
+The actual runner AST contains training `range(1,5001)` and final `range(128)`.
+Machine-generated [plan](evidence/2026-09-10-folr-public-lifecycle-half-b02-plan.json)
+reports2×102560=205120 native ticks,9938 RMSprop and256 final episodes. Every arm's
+new command passes `--seed 7808 --evaluation-seed 107808` explicitly; old CLI defaults
+cannot choose this pair's streams. Previous cumulative directory tests32.4911638s remain.
+The unchanged source reuse is technically accepted; final actual admission, learner
+counts, outputs, whole timing and comparison still require real execution/collection.
+
+## 2. Exact preselected execution inputs
+
+The [summary](FOLR_PUBLIC_LIFECYCLE_HALF_B02_RESULT_SUMMARY_20260910.json) preserves the
+two complete literal command payloads before submission. Remote source worktree:
+`/home/wu/hmasd-worktrees/folr-public-lifecycle-half-b02-c6be208cd`, CPU FP32/Torch1/1,
+Python `/home/wu/.venvs/hmasd/bin/python`. RETAIN precedes HALF_EVENT, one accepted
+invocation each, at the same fixed7808/107808 bindings. Both arms are preselected
+regardless of the first return; a failure stops the dependent sequence without retry.
+
+- RETAIN handle `folr-public-lifecycle-half-b02-retain-20260910`; output
+  `temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_seed7808_retain`.
+- HALF_EVENT handle `folr-public-lifecycle-half-b02-half-event-20260910`; output
+  `temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_seed7808_half_event`.
+
+Each fresh memory receipt is the corresponding output path plus `_memory.json`.
+The receipt-producing `admit-memory && runner` shares one outer `/usr/bin/time -v`
+and `/usr/bin/timeout --signal=TERM --kill-after=5s 1800s` chain. Its complete source,
+arm, seed, evaluation-seed and output arguments are fixed in the command record.
+No scientific output root is created by preparing these strings or by source staging.
+
+## 3. Runtime support and ownership
+
+The new allocation is1800s per arm,3600s scientific sum and≤300s all additional
+runtime support including Monitor,3900s total. Existing command/tool durations charge
+preparation/checks/staging, observation, collection/analysis/readback and preservation/
+closeout once. No idle wait or already counted native time is duplicated. The summary
+maintains attributable DM command seconds and actual Monitor receipts for these two
+handles; an old missing total is not imputed zero. Before an accepted handle exists,
+this object has invoked zero Monitor work.
+
+This DM owns source/command publication, launch, collection, technical acceptance,
+scientific intake and scoped closeout in the shared local checkout. The live-primary
+Monitor endpoint is01a087e5-2044-7301-abb6-7a1709a98197 from
+`C:/Projects/HMASD/.codex/hmasd-monitor.toml`; Root receipt destination is
+01a07249-b095-7821-8ce2-e9c32ba85267. Send actual accepted handles directly, record
+dispatch separately from adoption, and request this study's actual Monitor command
+cost with adoption/terminal facts. No mirrored DM polling or new monitoring service.
+
+No new scope §4 machinery or source-budget breach is present. The six existing totals
+for each phase/arm remain the only selected event instrumentation. Root owns main
+integration and accepts completed reclamation. No third pair or successor is allocated.
+
+## 4. Exact source ready and new command readback accepted
+
+The source commit was already published and retained in the compute repository. A
+new detached worktree was created at the exact §2 path with sourcec6be208cd and clean
+tracked status; no source bundle/input stage was needed. Both prospective supervisor,
+scientific output and memory-receipt paths were absent. Each complete literal command
+passed `bash -n`, and the isolated runner portion carries the exact7808/107808/arm/
+source/output arguments. No command payload, model, optimizer or scientific RNG was
+executed by these checks. Local original preparation receipts are in
+`temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_control_20260910/`.
+
+The first readback checker selected the first `--out` in the joined command, which
+belongs to `admit-memory`, and asserted against the runner output. This was a checker
+error after source checkout creation, not a source/command mismatch. The corrected
+readback isolates the command after the last `&&`; both commands then passed. Original
+stderr is retained; the exact commands and scientific source were never changed.
+Zero scientific invocations occurred, and this creates no replacement allowance.
+
+The three Portfolio input files imported from674f246a2 have matching Git blob content;
+unrelated histories/paths were not reconciled. Owner CLI created
+`docs/research/portfolio/owner/inbox/2026-09-10/20260910-folr-005.json` for the new card.
+The selection audit row points to this card/intake and carries the existing unattended
+delegation, not a waiting permission question.
+
+At this preparation boundary actual recorded support is **3.4691497s**, including the
+failed readback and its corrected follow-up; scientific and Monitor work remain zero.
+The summary carries each measured component. Next: commit/push these exact inputs,
+submit RETAIN once with its fresh joined admission, and directly hand the accepted
+handle to Monitor with this study's inclusive support-attribution instruction.
+
+## 5. Published inputs, RETAIN acceptance and actual Monitor adoption
+
+Selection/card/plan/commands and the three unchanged Portfolio dependency files were
+committed and immediately pushed at **ea73b1c3dabafe6482db03df8a9e51c1ad672260**.
+Scientific source remains **c6be208cd514b5d12fb13c7637e2d6376de11eb6**; a doc publication
+does not substitute different execution bytes. The submitted RETAIN command equals
+that published payload, with its fresh memory admission and runner inside one 1800s chain.
+
+This DM submitted RETAIN at **2026-09-10T23:47:46.571111+00:00**; explicit tmux-start
+returned at **23:47:46.884434+00:00**, command exit0 and no stderr. Accepted handle is
+`folr-public-lifecycle-half-b02-retain-20260910` on hmasd-wsl-node, at the exact source,
+cwd and output named in §2. Original receipt is
+`public_lifecycle_half_b02_control_20260910/retain_launch_receipt.json`; the committed
+summary retains its full command, clocks and raw acceptance output. Source comparison
+and absent-handle/output checks passed. This is accepted invocation **1 of 2**.
+Actual admission/learning/final data have not yet been collected; supervisor acceptance
+is not technical result acceptance. HALF_EVENT is the sole unsubmitted second arm.
+
+Direct MONITOR_ADD to 01a087e5-2044-7301-abb6-7a1709a98197 was delivered successfully,
+with the source/cwd/output/root/owner and inclusive 300s support-accounting instructions.
+Root confirmed actual adoption of the same RETAIN handle; no distinct observation
+timestamp was supplied, so the tmux acceptance clock is not relabeled as adoption.
+Monitor will track actual enclosing query seconds and return cumulative attributable
+work through the existing receipt path. Its current total is **pending**, not zero.
+This DM performs no routine remote polling. Root routes terminal facts back to
+`/root/dm_folr_restart_recovery` for collection/acceptance and the preselected second arm.
+
+The initial support subtotal used narrower helper timings. The summary now conservatively
+charges enclosing command/tool wall, including startup, nested remote work and source
+publication, once. A default Windows decoder failed while reading the Chinese owner
+item before that bookkeeping update; explicit UTF-8 readback passed before submission,
+and the published scientific card/commands were unaffected. Both mechanical readback
+failures remain charged and neither was a scientific invocation.
+
+Known DM command wall through RETAIN submission is **9.7291575s**, plus **.182s** direct
+Monitor dispatch, giving **9.9111575s through dispatch**. Later handover/publication work
+and actual Monitor seconds remain to be added at the next natural boundary. This is
+a current subtotal, not an asserted complete 300s support bill. The 300/3600/3900 caps,
+no-transfer rule, required terminal observation and no-retry allocation remain intact.
+
+At the adopted-boundary readback, measured DM support is **10.7798254s**. Primary owner
+reviews returned no unapplied items. One handover bookkeeping command has no returned
+elapsed receipt; it remains unmeasured, not zero. Final publication and actual Monitor
+work are also pending reconciliation, so no complete-support total is claimed here.
+
+## 6. RETAIN terminal collection and technical acceptance
+
+Root routed the original accepted handle's exit0 terminal fact. Its supervisor started
+at **2026-09-10T23:47:46Z** and ended **2026-09-11T00:00:15Z**, an integer-clock749s.
+The complete outer `time` chain measured **748.47s**, below1800s, with732.50s user,
+17.53s system and656744KiB peak RSS. Runner wall was748.1175824130187s and its peak
+644236KiB. These nested timings are not added together. Fresh admission at
+23:47:46.781396Z measured physical and effective available memory **15631994880 bytes**,
+both above4GiB, before the fresh learner. No cap stop or scientific retry occurred.
+
+The [collection receipt](evidence/2026-09-10-folr-public-lifecycle-half-b02-retain-collection.json)
+records all **10 files /4675780 bytes** matching original remote lengths and SHA256:
+summary/checkpoint, seven supervisor files and the memory receipt. The original
+Monitor terminal text is also retained. Exact source surfaces still matchc6be208cd;
+the raw final log JSON equals `summary.json`, all25 progress rows have episode200..5000
+and updates=episode−31, and `final.pt` exists at4662779 bytes. No checkpoint was loaded
+or re-evaluated. Raw copies remain under the named B02 control root's `collected/`.
+
+RETAIN completed **5000 train episodes /100000 ticks /4969 updates**, then **128 final
+episodes /2560 ticks** with training7808/evaluation107808 and Torch1/1. All128 returns
+and25 progress rows are preserved in the result summary. Final mean native return is
+**9.471796875**; sample SD9.89217605684 describes rollouts conditional on this fitted
+policy, not training-instance uncertainty. Training return sum is−1567.5800000000443,
+mean−.31351600000000884. Train phase counts are births23382, departures11932,
+event-survivor opportunities54125 and eligible survivor controls242948; final counts
+are709,435,1616,5657 respectively. Both phases have zero full resets and attenuations.
+
+These facts technically accept this arm under the card's original counts and endpoint.
+HALF_EVENT's trained result is absent, so `d_HR`, the branch and prediction scoring
+remain pending. RETAIN's point does not select a replacement arm or change the fixed.5
+coefficient. The two arms were already selected regardless of the first arm's score.
+
+Monitor reports **4.476s** of measured queries, with twelve components preserved in the
+summary; additional yielded query runtimes and messaging remain unmeasured. Its local
+observation label00:00:52−07 conflicts with the native00:00:15Z terminal; preserve that
+label but use supervisor/whole-chain clocks for elapsed. It has no scientific polarity.
+After collection and acceptance arithmetic, known DM support is **18.5884657s**, plus
+4.476s measured Monitor work: **23.0644657s known support**. The earlier bookkeeping
+duration and omitted Monitor durations remain unknown, not zero; later publication,
+HALF_EVENT support and required preservation are still to be charged. No complete300s
+or3900s compliance is asserted. Unchanged short remaining support is still credible
+within the allocation; no concrete exhaustion has been observed. No cost experiment,
+support transfer or extra invocation is introduced.
+
+The remote B02 worktree remains needed by the preselected second arm; retain its
+evidence and RETAIN supervisor until complete-pair archive verification and scoped
+closeout. No remote or local evidence has been removed. Primary owner reviews again
+returned no unapplied items at this boundary.
+
+## 7. HALF_EVENT accepted and observation adopted
+
+RETAIN acceptance and its collection receipt were committed and immediately pushed
+at **fb98e0fe8afab80d51553ac274b99479acfdaad2** before the second submission. The
+HALF_EVENT command was checked against the original published ea73b1c3d payload;
+source surfaces still matched **c6be208cd514b5d12fb13c7637e2d6376de11eb6**, and its
+supervisor/output/memory paths were absent. No source or scientific input changed.
+
+The sole remaining preselected arm was submitted at **2026-09-11T00:08:07.523443Z**;
+explicit tmux-start returned **00:08:08.331457Z**, command exit0 and no stderr. Handle
+`folr-public-lifecycle-half-b02-half-event-20260910` runs in the original B02 remote
+worktree with output `public_lifecycle_half_b02_seed7808_half_event`. The original
+receipt is retained under the B02 control root and in the result summary. Fresh
+destination admission and the exact runner share the original outer 1800s chain.
+This is accepted invocation **2 of 2**; no scientific allocation remains unsubmitted.
+
+Direct MONITOR_ADD succeeded and Root confirmed actual adoption of this same handle,
+source, cwd, output and supervisor root. No separate adoption observation time was
+supplied; the tmux clock remains supervisor acceptance only. Monitor owns observation
+and actual query-cost accounting; this DM stops routine remote polling and retains
+terminal collection, technical acceptance, pair intake and verified scoped closeout.
+Root routes the terminal fact to `/root/dm_folr_restart_recovery`.
+
+Known invoked support through second submission and direct dispatch is **29.0471481s**:
+24.5711481s DM plus4.476s measured RETAIN Monitor work. This excludes later publication
+and the explicitly unmeasured bookkeeping/query/messaging durations; it is not a
+complete bill or a 300s/3900s compliance claim. The caps and no-transfer rule remain
+unchanged. No retry, third fitting pair, additional arm or successor is allocated.

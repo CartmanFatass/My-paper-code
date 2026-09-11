@@ -1,0 +1,86 @@
+{
+  "kind": "SOURCE_ONLY_PREPARATION_AND_PROSPECTIVE_ARITHMETIC",
+  "created_at": "2026-09-09T09:33:59.994795+00:00",
+  "exposure": {
+    "new_scientific_invocations": 0,
+    "model_instantiations_or_imports": 0,
+    "native_steps": 0,
+    "optimizer_updates": 0,
+    "evaluation_episodes": 0,
+    "counterfactual_probes": 0
+  },
+  "exposure_line": "P76 consultation: new scientific invocations=0; model instantiations/imports=0; native steps=0; optimizer updates=0; evaluation episodes=0; counterfactual probes=0. Proposed gate exposure remains unmeasured; no model was instantiated.",
+  "proposed_one_matched_instance": {
+    "training_arms": 2,
+    "independent_training_instances": 1,
+    "train_episodes_per_arm": 512,
+    "horizon": 256,
+    "final_evaluation_arms": 4,
+    "final_evaluation_episodes_per_arm": 32,
+    "train_team_steps": 262144,
+    "eval_team_steps": 32768,
+    "total_team_steps": 294912,
+    "optimizer_updates": 2048,
+    "rollouts": 512,
+    "explicit_resets": 1152,
+    "evaluation_episodes": 128,
+    "base_actor_agent_forwards": 1474560,
+    "learned_gate_agent_forwards_upper": 1392640,
+    "row_matching_team_steps_upper": 286720,
+    "coordinate_pair_comparisons_upper": 28672000,
+    "gate_decisions_nonzero_actual": "unknown",
+    "gate_only_actor_displacement": "unknown",
+    "relative_steps_to_MGTAP_pair": 1.0285714285714285,
+    "arm_complete_cap_seconds_proposed": 1800,
+    "study_complete_cap_seconds_proposed": 3600,
+    "actual_new_wall_seconds": "unknown",
+    "retained_anchors_per_agent": 1,
+    "anchor_selection": "previous lowest-SINR nonpadding observed user; retain its coordinate, not its row slot",
+    "removed_unnecessary_work": "Matching all 20 prior rows would cost up to 573440000 coordinate pairs. One prospective anchor suffices for this bounded performance question, reducing the upper count to 28672000 without any measured outcome or policy/trajectory search."
+  },
+  "return_units": {
+    "raw_episode_threshold": 0.25,
+    "raw_threshold_as_mean_per_step": 0.0009765625,
+    "mean_per_step_proposed_mei": 0.01,
+    "mei_as_raw_sum": 2.56,
+    "coverage_component_per_extra_user_step": 0.013999999999999999,
+    "eighteen_extra_user_steps_coverage_component": 0.252,
+    "qualification": "Arithmetic only; the average-quality term and partner responses can reverse the net effect. The Pro node must settle inherited threshold units."
+  },
+  "reused_fixed_base": {
+    "master": 8201,
+    "kind": "DENSE",
+    "source_sha": "4f65eefb1b15e44b42d694376630fba0c230cc6c",
+    "checkpoint_name": "final_DENSE.pt",
+    "checkpoint_path": "C:\\Projects\\HMASD\\temp\\directions\\metric_ground_transport_allocation\\exp\\mgtap_b01_8201_4f65eefb1b15e44b42d694376630fba0c230cc6c\\final_DENSE.pt",
+    "file_exists": true,
+    "sha256_observed": "f648f2b100d07335ccd9c79c0476b8e9dba0c1644ae837d622b0c5f711030790",
+    "sha256_accepted": "f648f2b100d07335ccd9c79c0476b8e9dba0c1644ae837d622b0c5f711030790",
+    "inspection": "bytes/digest only; no tensor or model load",
+    "selection": "first listed P75 DENSE checkpoint; both original outcomes are already known; new result would be conditional on this outcome-informed fixed-base choice"
+  },
+  "separate_MGTAP_source_results": [
+    {
+      "master": 8201,
+      "J_means": {
+        "REL": 0.14755318111961258,
+        "DENSE": 0.19223570628409348,
+        "H": 0.14784738196394714
+      },
+      "REL_minus_DENSE": -0.04468252516448091,
+      "process_wall_seconds": 353.71,
+      "DENSE_actor_relative_displacement": 0.24094148728424344
+    },
+    {
+      "master": 8202,
+      "J_means": {
+        "REL": 0.16551813448740704,
+        "DENSE": 0.16876181793305803,
+        "H": 0.14136717177746932
+      },
+      "REL_minus_DENSE": -0.003243683445650989,
+      "process_wall_seconds": 368.12,
+      "DENSE_actor_relative_displacement": 0.17732148332316217
+    }
+  ]
+}

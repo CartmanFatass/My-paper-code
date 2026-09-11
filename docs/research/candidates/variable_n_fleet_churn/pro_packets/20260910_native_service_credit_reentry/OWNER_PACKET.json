@@ -1,0 +1,49 @@
+{
+  "question": "是否只重开一个 N7 原生服务时间信用 B 比较，还是继续保留当前暂停？本地仅建议(a)，科学决定交原 Convergence 节点。",
+  "changes_if_approved": [
+    {
+      "target": "VNFC 当前方向边界",
+      "from": "B01 原配置 MAPR/DIRECT 比较与部署方式问题暂停；无后继",
+      "to": "仅新增 INTERVAL 对 TERMINAL 的同 MAPR 真训练比较；两个旧暂停、ACTIVE/HIGH、recasts=2 不变"
+    }
+  ],
+  "if_refused": "保留当前窄暂停和全部证据；不训练、不重跑 E01、不用其他方向或批次作等待条件。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/variable_n_fleet_churn/VNFC_NATIVE_SERVICE_CREDIT_REENTRY_INTAKE_20260910.md",
+      "quote": "The proposal needs their six differences, not counterfactual trajectories, a new controller, an extra rollout or a native ABI change.",
+      "why": "已有接口能给出明确、低额外工作的时间信用处理，解决上轮未定义估计器的问题。"
+    },
+    {
+      "path": "docs/research/candidates/variable_n_fleet_churn/VNFC_POST_DEPMODE_CONVERGENCE_INTAKE_20260906.md",
+      "quote": "Reopening conditions: a new learning proposal that selects one information, representation, credit or optimization intervention on the existing reusable path",
+      "why": "重新提问符合已形成的窄暂停重开条件；并非原样补 seed。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/variable_n_fleet_churn/VNFC_NATIVE_SERVICE_CREDIT_REENTRY_INTAKE_20260910.md",
+      "quote": "There are only six decisions, so the original lambda weighting at the earliest decision is .95^5 = .7737809375, not a very long delayed-reward chain.",
+      "why": "原方法已能学习，新标签不保证降低方差；可能没有足够新的决策价值。"
+    },
+    {
+      "path": "docs/research/candidates/variable_n_fleet_churn/VNFC_N7_DIRECT_RETURN_B01_TWO_SEED_RESULT_INTAKE_20260905.md",
+      "quote": "Both final learners remain below BCRH on all four metrics in both zones.",
+      "why": "既有收益不支持 MAPR 特有效益，BCRH 差距也没有被定位为时间信用问题。"
+    }
+  ],
+  "uncertainty": [
+    "一个新训练对只能提供局部 B 信号；64 个评价世界不能代替训练总体。",
+    "终点分母仅在完整轨迹结束后构造训练标签，不给 actor 未来信息；非 Markov 的标签和有限 GAE/PPO 可能改变偏差。",
+    "新处理额外耗时未知；旧 MAPR 单位时间只用于规划。",
+    "该提案未执行，Pro 未形成决定；没有 owner 审批等待。"
+  ],
+  "cost": {
+    "compute": "本次0新科学暴露；拟议一次双臂共4544 episode/1090560 native ticks/4096更新，完整机器工时900秒（native600 + 全部支持300）；无自动重试/加评/后继。",
+    "owner_time": "可异步查看理由和反证，无需回复才能送 Pro。",
+    "reversibility": "reversible",
+    "waits_on_this": "仅VNFC的新数值工作等待自身Convergence决定；独立方向继续。"
+  },
+  "verdict_text": "DM recommendation: (a) Open only the specified native-service temporal-credit B comparison. No scientific option is auto_applied before the formed decision.",
+  "source": "docs/research/candidates/variable_n_fleet_churn/VNFC_NATIVE_SERVICE_CREDIT_REENTRY_INTAKE_20260910.md"
+}

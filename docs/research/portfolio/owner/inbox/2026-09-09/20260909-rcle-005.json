@@ -1,0 +1,98 @@
+{
+  "id": "20260909-rcle-005",
+  "created": "2026-09-09T15:43:05-07:00",
+  "direction": "roster_consistent_latent_exploration",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "RCLE S20：冻结一对全新训练的前瞻卡",
+  "context": "主张：同一FLEX学习法把动作评分权重从1改为100，在一对全新seed20训练中再次减少阵容变化后的未满足需求。绑定结构：多智能体信用分配。保留200次更新、原始终点及0.05效应尺度；旧结果只有小收益、恢复饱和和四格碎片化损失。本次冻结准备卡，不分配实现、测试或运行。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "保留冻结的S20计划和预测，Root接受具体交付后另行分配；当前仍为零实验调用。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "不按此卡分配后续；保留恢复结果与失败事实，方向状态不变。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "DM修订对象定义并保留旧证据，修订本身不启动实验。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "一对新独立训练能检验小收益与代价是否再现；CM已从源码确认最小seed传播和完整调用成本。暂缓仍为接近选项，未改变现有close-call记录。",
+  "evidence": [
+    "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B03_S20_SCIENCE_CARD_20260909.md",
+    "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B03_S20_SELECTION_INTAKE_20260909.md",
+    "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B03_S20_FEASIBILITY_20260909.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-09.md#L135",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否保留已按对象层授权冻结的S20卡：同法同额度新增一对独立训练，观察小收益及碎片化代价是否再现？本次只完成前瞻准备，尚未分配实现、测试或实验调用。",
+    "changes_if_approved": [
+      {
+        "target": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B03_S20_SCIENCE_CARD_20260909.md",
+        "from": "恢复结果后的有界建议，尚无后续冻结卡",
+        "to": "冻结seed20的新W1/W100配对卡及预测；保留seed19失败与结果；Root接受具体交付后另行分配完整工程和调用"
+      }
+    ],
+    "if_refused": "保留既有恢复结果和失败记录，暂不按此卡分配调用；DM修改对象或采用暂缓建议。方向生命周期、优先级和已观察到的小收益均不改写。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B03_S20_SELECTION_INTAKE_20260909.md §2",
+        "quote": "The next observation must decide whether those native gains and costs recur on another\nlearning instance.",
+        "why": "新独立训练直接观察学习实例差异；重复旧检查点评价或加梯度诊断不能回答这个问题。"
+      },
+      {
+        "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B03_S20_FEASIBILITY_20260909.md §4",
+        "quote": "Training is2×200×64=25,600 episodes; evaluation is4×8×256=8,192.",
+        "why": "CM从实际循环验证了全部训练、初始化、终点和参考面板，费用没有遗漏公共初始化或重复复用旧控制。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B03_S20_SELECTION_INTAKE_20260909.md §2",
+        "quote": "The only completed paired training result remains seed 19: Delta_U +0.0132242839,\nbelow MEI 0.05; all eight U/Y means favorable, tau 40 throughout, fragmentation worse\nin all four final-roster-12 cells.",
+        "why": "既有改善低于预定有用尺度，恢复仍饱和且四格有代价；暂缓仍是接近的合理选择。"
+      },
+      {
+        "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B03_S20_FEASIBILITY_20260909.md §3",
+        "quote": "The existing `host.load_control_summary` checks file/readable JSON-object shape only.\nB03 `primary` checks matched unique cell/index sequences, not seed/root/object identity.",
+        "why": "未来必须真实传入新seed并固定使用新W1；只改标签或误接历史摘要会破坏比较。"
+      }
+    ],
+    "uncertainty": [
+      "尚无seed20结果，未来成本和成败未测。",
+      "两次配对即使同号，也不证明稳定总体优势、纯动作信用归因或任意阵容规律。",
+      "旧信号11原因仍不明；保留现有失败捕获不等于修复，失败不自动重试。",
+      "既有close-call项20260909-rcle-004保留；本次冻结不新增生命周期或Pro决策。"
+    ],
+    "cost": {
+      "compute": "当前仅源码阅读和标准库算术。后续若明确分配：两臂各200×64训练加4×8×256评价，共33792回合、2162688步、400次反传；12模型含2fit和10helper。600秒/学习臂、30秒参考、1500秒全链含≤30秒针对性检查。历史完整类比152.78秒仅供投影。",
+      "owner_time": "无需等待你的回复；可异步改选暂缓或修订。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing；Root将按具体卡及可行性作下一分配，而不是再次请求所有者批准"
+    },
+    "verdict_text": "Recommend/select\n   (a), preserving (b) as the close runner-up and item `20260909-rcle-004`.",
+    "source": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B03_S20_SELECTION_INTAKE_20260909.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-09T22:50:14+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/decisions/2026-09-09-synthesis-execution.md",
+      "record": "docs/research/portfolio/decisions/2026-09-09-synthesis-execution.md",
+      "state": "applied",
+      "summary": "Root accepted complete card/intake and read-only feasibility at bb3854c61/7296b485d. Selected fresh S20 implementation/review/three-invocation/collection batch now allocated to original DM/CM under synthesis continuation;600/600/30s within1500 complete including≤30s check. No execution observed yet; close-call004 and contrary outcomes preserved."
+    }
+  ]
+}

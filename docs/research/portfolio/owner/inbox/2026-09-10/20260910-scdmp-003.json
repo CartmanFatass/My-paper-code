@@ -1,0 +1,80 @@
+{
+  "id": "20260910-scdmp-003",
+  "created": "2026-09-10T14:45:03-07:00",
+  "direction": "semigroup_consistent_duration_model_policy",
+  "tier": "direction",
+  "kind": "decision",
+  "title": "两个独立WITHIN后，裁决固定开场残差包去向",
+  "context": "B01与B02各完成真实独立训练配对，原生差值+0.0067374与+0.0036581均在原MEI0.01内。DM建议仅暂停当前固定包；保留两次小正差、训练不确定性与低单对进程成本作为反证。下一方向决定交同一Convergence，尚未执行PARK或新预算。",
+  "options": [
+    {
+      "key": "a",
+      "label": "窄范围暂停当前固定残差包",
+      "consequence": "只暂停这个包；保留旧D6 PARK、方向生命周期和recasts2；重入需具体新问题，无阳性或显著性门槛。"
+    },
+    {
+      "key": "b",
+      "label": "为明确问题选择单一有界B",
+      "consequence": "同一节点明确问题、比较器、独立单位、主观测与预算；DM另写确切卡后执行，不追加未分配seed。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "两次完整实例均未达到原来选定尺度，且尚无从现有事实选出的不同处理问题；这不是等价或残差方法失败证明。",
+  "evidence": [
+    "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_NATIVE_HOLD_RESIDUAL_B02_INTAKE_20260910.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-10.md#L51",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "完成所选独立B02后，只暂停当前固定开场残差包，还是为一个具体问题再选择有界B？这是提交Convergence的建议，尚未形成下一方向裁决。",
+    "changes_if_approved": [
+      {
+        "target": "SCDMP 当前 opening held-residual full-MC/coefficient1 family",
+        "from": "两个完整WITHIN训练配对；无后继预算；该家族尚未正式暂停",
+        "to": "建议仅暂停这个固定包，保留按具体原生动作或credit理由提出新问题的路径；旧D6 PARK和recasts2不变"
+      }
+    ],
+    "if_refused": "同一节点明确选择一个具体有界B及其问题、比较器、独立训练、观测与预算，之后由DM写卡执行；不改判既有两个WITHIN，也不自动追加seed。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_NATIVE_HOLD_RESIDUAL_B02_INTAKE_20260910.md",
+        "quote": "neither instance attains the selected effect scale. B02's gap is smaller than B01's, conditional evaluation spread is substantial, and the second MLP policy is slightly below H.",
+        "why": "两次完整独立训练均未达到原先选定的0.01尺度；B02完整MC对H略有原生损失也被保留。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_NATIVE_HOLD_RESIDUAL_B02_INTAKE_20260910.md",
+        "quote": "two independent fitted pairs produce small positive native treatment/comparator means; the intact same-information MLP comparator trains fully, and the second run exercises 1,494 actual held team pairs and 5,976 residual terms with moved learners.",
+        "why": "两个小正差、真实非零惩罚和约五分钟的单对进程成本，使进一步小规模B仍可能有价值；少量实例不能排除更大总体效应。"
+      }
+    ],
+    "uncertainty": [
+      "两个训练对不能提供可靠的训练总体方差；32次评价只描述每次已训练策略的条件变动。",
+      "未区分通用正则、优化/裁剪、误差抵消、后继噪声和遗漏历史；这些不是已定位缺陷。",
+      "同信息调优headroom仍缺失；缺失不构成B启动门槛。"
+    ],
+    "cost": {
+      "compute": "本咨询新增科学曝光为0。备选单对已知规模286720原生步、2048 Adam、96评价；历史完整科学进程295.03/323.02秒。若节点选择，保留1800秒/臂、3600秒/对上限；现未分配新seed或预算。",
+      "owner_time": "可异步介入，无需回复来推动既定咨询。",
+      "reversibility": "reversible",
+      "waits_on_this": "本固定家族的下一方向决定；其他方向独立推进。"
+    },
+    "verdict_text": "Recommend narrow PARK of this unchanged opening residual-MC package after intake; no third pair to seek positivity, equivalence or broad residual-method failure.",
+    "source": "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_NATIVE_HOLD_RESIDUAL_B02_INTAKE_20260910.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-10T22:21:52+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260910_post_b02_convergence/archive/RESPONSE.md",
+      "record": "docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260910_post_b02_convergence/CONVERGENCE_INTAKE_20260910.md",
+      "state": "applied",
+      "summary": "Convergence full response 1eef68f01 conforms: narrow PARK of fixed opening t1-3 to t4/full-MC/coefficient1 package applied after two WITHIN pairs. Both positive gaps, old D6 PARK, recasts2 and Portfolio state preserved; no successor or new scientific budget. Full decision and chat-receipt digests recorded separately."
+    }
+  ]
+}

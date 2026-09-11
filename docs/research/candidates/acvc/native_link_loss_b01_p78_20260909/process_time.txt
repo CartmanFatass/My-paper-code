@@ -1,0 +1,3 @@
+process_wall_s=359.17
+peak_rss_kib=552292
+exit_code=0

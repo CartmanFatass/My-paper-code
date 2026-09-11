@@ -1,0 +1,39 @@
+{
+  "question": "三个独立训练实例呈现支持、未复现和明显反向结果后，是否窄暂停原样的事件整段清空方案，或选择一个具体有界的新问题？",
+  "changes_if_approved": [
+    {
+      "target": "FOLR 当前 public-lifecycle timing 家族",
+      "from": "三次有效 B 已完成，下一步尚未选择",
+      "to": "若选 a，仅窄暂停当前整段 EVENT 清空与既定训练/评价配方；普通 RETAIN 可继续作为基线，方向仍 ACTIVE/MEDIUM"
+    }
+  ],
+  "if_refused": "由原 Convergence 节点裁决固定半衰减方案或一次明确目的的原样复现；当前仅提交问题，不新增模型、训练或评价。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_TIMING_FAMILY_QUESTION_INTAKE_20260910.md",
+      "quote": "B03's −5.44609375 is the largest contrary 128-endpoint point, following B02's nonrecurrence.",
+      "why": "同一尺度上已有显著幅度的原生反向观察，原样再跑的增量问题价值需要解释；这不证明总体负效应。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_TIMING_FAMILY_QUESTION_INTAKE_20260910.md",
+      "quote": "B01 is a trustworthy positive signal, three instances leave large uncertainty, and a new matched pair has a measured scale of about 25 minutes.",
+      "why": "早期真实收益仍足以支持有明确问题的小规模 B；缺显著性、完整机制诊断或调优余量都不是否决理由。"
+    }
+  ],
+  "uncertainty": [
+    "训练实例只有三个，128次评价不是128个训练seed；合并均差−1.07734375仅描述性。",
+    "随机清空 p=.1 的两个历史结果保留，B03未分配该臂；不支持所有清空方案的排序。",
+    "HALF_EVENT 在同样事件处把入 GRU 状态乘 .5 的新方案尚未实现或运行，不保证保留有用记忆。",
+    "当前同信息调优基线/上界余量缺失；没有机制新颖性或因果归因结论。"
+  ],
+  "cost": {
+    "compute": "本次新科学调用为0。既有两组三臂和一组双臂总计820480原生步，计入范围内6400.3203014秒；新双臂规模205120步/9938更新/256评价，旧完整进程约1519.65秒，仅规划参考，未分配。",
+    "owner_time": "可异步看这三个选项；不需要回复才能提交 Pro。",
+    "reversibility": "reversible",
+    "waits_on_this": "方向去向由原 Convergence 节点形成；其他方向独立推进。"
+  },
+  "verdict_text": "Recommend a narrow pause of the unchanged blanket EVENT-clearing package on this public-lifecycle easy Traffic Junction / 5000-train / 128-final recipe. This is an unexecuted DM recommendation to the original Convergence node.",
+  "source": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_TIMING_FAMILY_QUESTION_INTAKE_20260910.md"
+}

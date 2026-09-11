@@ -1,0 +1,28 @@
+{
+  "verified": "complete retained native T/G/C/F comparison",
+  "scientific_process_exit_code": 0,
+  "process_wall_s": 359.17,
+  "logical_study_bill_s": 373.4069735,
+  "shared_bill_s": 41.9255968340064,
+  "complete_arm_bill_s": {
+    "T": 199.8208294399871,
+    "G": 215.51174089401928
+  },
+  "peak_rss_kib": 552292,
+  "peak_rss_gib": 0.5267066955566406,
+  "publication_and_exit_tail_s": 15.519041384004538,
+  "all_episodes": 1152,
+  "rollout_records": 512,
+  "adam_records": 2048,
+  "source_sha": "f429021166eefa9ee6d9b275ac8c91f1b13a8f28",
+  "artifact_sha256": {
+    "admission.json": "82fc2ce6c40c8736d5d17a6375c1bee809e25d71b46bd8f0dc3226a1f31fb261",
+    "episodes.jsonl": "4191d4b25bd7e46dbf4840cb4384b3fa47c79c4a3be9eb40fe63d077d25df4bb",
+    "final_G.pt": "78ef0151e8535d7b2447540313b58fcf0a61cc024734891be0bd9c980414b141",
+    "final_T.pt": "1b8992be0dce86a5e02add7015dd0455c97817475438b196f71ec0baef1f479a",
+    "process_time.txt": "9fadde62e768b9840cebd257ca65e9a800e129378aaaa2ef3fce086c0625bcb5",
+    "summary.json": "86cfb31b56838ccff4099a3fb7e1d0cccb2620de422684a0b647f8a6319c15e5",
+    "task.log": "600de8c3ba9f5f457c7d181354454e79f51649394920d647055047e55d1f1eea",
+    "updates.jsonl": "56857eca92ae9adf2d5bd2e4e5e7351246e1774745825c9eb56f006ecbaa8029"
+  }
+}

@@ -1,0 +1,1226 @@
+{
+  "prepared_at_utc": "2026-09-10T19:17:38.826194+00:00",
+  "class": "source-only consultation; no new empirical object or allocation",
+  "branch": "codex/scdmp",
+  "starting_head": "40b27ad1862c4c3201ce1b073377d587f3fc715c",
+  "method_sha": "4e8ce22f5263a4ebbf096cca6c4af225a0559831",
+  "frozen_sources": {
+    "card": "5d52c5e5bed047e8e32fde575952133a7817b9d2",
+    "E0": "e5ed770301e8f5bac9fd77063edd24bee550fb5f",
+    "intake": "40b27ad1862c4c3201ce1b073377d587f3fc715c",
+    "P58_response": "ac1d97f5920fe2dfc88698681d389af0b907dbfe",
+    "implementation": "7d0fc9d0091e046617493a1b23bbbf07297821cf"
+  },
+  "accepted_B01": {
+    "object": "SCDMP-NATIVE-HOLD-RESIDUAL-B01",
+    "launch_sha": "7d0fc9d0091e046617493a1b23bbbf07297821cf",
+    "training_pair": 8201,
+    "independent_training_pairs": 1,
+    "mean_J": {
+      "RESIDUAL-MC": 0.1549340414324733,
+      "MLP-MC": 0.14819663397657912,
+      "H": 0.14784738196394714
+    },
+    "selected_delta": 0.0067374074558942025,
+    "MEI_absolute": 0.01,
+    "reading": "WITHIN",
+    "conditional_evaluation_SE": 0.0055965465359414865,
+    "SE_is_training_population_uncertainty": false,
+    "eligible_pairs_by_arm": {
+      "RESIDUAL-MC": 1500,
+      "MLP-MC": 1500
+    },
+    "treatment_residual_terms": 6000,
+    "source_exposure_verified_from_accepted_E0": {
+      "RESIDUAL-MC": {
+        "common_actor": {
+          "parameters": 32134,
+          "initial_norm": 12.363519668579102,
+          "final_norm": 12.508277893066406,
+          "displacement": 1.856449007987976,
+          "relative_displacement": 0.1501553811335653
+        },
+        "critic": {
+          "parameters": 34177,
+          "initial_norm": 9.265983581542969,
+          "final_norm": 12.13939094543457,
+          "displacement": 7.436262607574463,
+          "relative_displacement": 0.8025335402477991
+        },
+        "duration": {
+          "parameters": 130,
+          "initial_norm": 0.0,
+          "final_norm": 0.2954736649990082,
+          "displacement": 0.2954736649990082,
+          "relative_displacement": null,
+          "reason": "undefined: zero initial norm"
+        },
+        "total": {
+          "parameters": 66441,
+          "initial_norm": 15.450409889221191,
+          "final_norm": 17.4329833984375,
+          "displacement": 7.6701812744140625,
+          "relative_displacement": 0.4964386918799212
+        }
+      },
+      "MLP-MC": {
+        "common_actor": {
+          "parameters": 32134,
+          "initial_norm": 12.363519668579102,
+          "final_norm": 12.525110244750977,
+          "displacement": 1.93837308883667,
+          "relative_displacement": 0.15678165609771574
+        },
+        "critic": {
+          "parameters": 34177,
+          "initial_norm": 9.265983581542969,
+          "final_norm": 12.313504219055176,
+          "displacement": 7.7204484939575195,
+          "relative_displacement": 0.8332033427444385
+        },
+        "duration": {
+          "parameters": 130,
+          "initial_norm": 0.0,
+          "final_norm": 0.19526587426662445,
+          "displacement": 0.19526587426662445,
+          "relative_displacement": null,
+          "reason": "undefined: zero initial norm"
+        },
+        "total": {
+          "parameters": 66441,
+          "initial_norm": 15.450409889221191,
+          "final_norm": 17.56526756286621,
+          "displacement": 7.962459087371826,
+          "relative_displacement": 0.5153558478035093
+        }
+      }
+    },
+    "complete_process_resources": {
+      "whole_wall_seconds": 323.02,
+      "user_seconds": 320.87,
+      "system_seconds": 0.9,
+      "aggregate_cpu_seconds": 321.77,
+      "max_rss_kib": 558232,
+      "scope": "GNU time Python invocation including subprocess accounting; no GPU; exit0"
+    },
+    "original_summary_resources_flag": "resources_unmeasured",
+    "recasts": 2
+  },
+  "accepted_counts": {
+    "train_team_steps": 262144,
+    "eval_team_steps": 24576,
+    "team_steps": 286720,
+    "optimizer_steps": 2048,
+    "train_episodes": 1024,
+    "eval_episodes": 96,
+    "velocity_decisions": 1383877,
+    "duration_decisions": 5440,
+    "d4": 2921,
+    "recurrent_observations": 1392640,
+    "explicit_resets": 1120,
+    "constructor_resets": 2,
+    "constructors": 2,
+    "step_calls": 286720,
+    "scientific_uav_calls": 286720,
+    "diagnostic_frames": 0,
+    "completed_episode_steps": 286720,
+    "rollouts": 512,
+    "partial_episode_steps": 0
+  },
+  "accepted_primary": {
+    "complete": true,
+    "hover_complete": true,
+    "J": {
+      "RESIDUAL-MC": [
+        0.11058728074492469,
+        0.22146931586732674,
+        0.18754477435284575,
+        0.17476561134655041,
+        0.14226987301160263,
+        0.11990185108499618,
+        0.02495947282821687,
+        0.1450443672965112,
+        0.1985912812367679,
+        0.18818061607637693,
+        0.26653084250622405,
+        0.21376525809986938,
+        0.1669618298194393,
+        0.15278128601136068,
+        0.19218178676076494,
+        0.2007681718907535,
+        0.12901203611145995,
+        0.1457763898141305,
+        0.15669465389010842,
+        0.21442919286023598,
+        0.1403551410031659,
+        0.1317001789698432,
+        0.14775942290821187,
+        0.14109135974055143,
+        0.13858465538518105,
+        0.12625320336039678,
+        0.1083059492173325,
+        0.06609178836638861,
+        0.1122905141583469,
+        0.14245215107706397,
+        0.13468303601436737,
+        0.21610603402783032
+      ],
+      "MLP-MC": [
+        0.08894250091435271,
+        0.21351400848959715,
+        0.2240897311667547,
+        0.1502843154989305,
+        0.12226530950636225,
+        0.12490949078738116,
+        0.04327001504636749,
+        0.09075960191356926,
+        0.22155659613081338,
+        0.19172519251367492,
+        0.255884209847016,
+        0.1968477251639004,
+        0.13122815179755207,
+        0.14671439505021466,
+        0.1847923955398259,
+        0.19869535918607703,
+        0.07909784202365469,
+        0.10579703881430416,
+        0.0642465466718802,
+        0.18831011124781424,
+        0.1590214130683871,
+        0.2139222794764931,
+        0.11760915446455662,
+        0.15631834724232815,
+        0.12880966395336504,
+        0.13762900494636934,
+        0.11698421475548937,
+        0.08042694047401922,
+        0.13061459213874896,
+        0.14980807376654018,
+        0.14907210670043314,
+        0.17914595895375832
+      ],
+      "H": [
+        0.07484390263888724,
+        0.2536782553436938,
+        0.13880344088362825,
+        0.10806132490465817,
+        0.1070667803926152,
+        0.10603412858918383,
+        0.046592652183707034,
+        0.08747145390624673,
+        0.27852908531061504,
+        0.255047881886624,
+        0.25946622487107573,
+        0.08312981945638954,
+        0.13799938712428578,
+        0.23708219399266287,
+        0.20788519927835136,
+        0.1531842380673751,
+        0.05179601730746562,
+        0.06897848565358079,
+        0.07995058676867006,
+        0.23811677240015988,
+        0.17285681839729944,
+        0.2221376958999438,
+        0.05455110855346323,
+        0.2019071904137295,
+        0.03242791468449389,
+        0.17007956069059627,
+        0.14490580166765527,
+        0.17653613980648167,
+        0.14870755147579476,
+        0.09899692189897633,
+        0.22208622699966954,
+        0.11220546139832878
+      ]
+    },
+    "identities": {
+      "RESIDUAL-MC": [
+        [
+          0,
+          820102000
+        ],
+        [
+          1,
+          820102001
+        ],
+        [
+          2,
+          820102002
+        ],
+        [
+          3,
+          820102003
+        ],
+        [
+          4,
+          820102004
+        ],
+        [
+          5,
+          820102005
+        ],
+        [
+          6,
+          820102006
+        ],
+        [
+          7,
+          820102007
+        ],
+        [
+          8,
+          820102008
+        ],
+        [
+          9,
+          820102009
+        ],
+        [
+          10,
+          820102010
+        ],
+        [
+          11,
+          820102011
+        ],
+        [
+          12,
+          820102012
+        ],
+        [
+          13,
+          820102013
+        ],
+        [
+          14,
+          820102014
+        ],
+        [
+          15,
+          820102015
+        ],
+        [
+          16,
+          820102016
+        ],
+        [
+          17,
+          820102017
+        ],
+        [
+          18,
+          820102018
+        ],
+        [
+          19,
+          820102019
+        ],
+        [
+          20,
+          820102020
+        ],
+        [
+          21,
+          820102021
+        ],
+        [
+          22,
+          820102022
+        ],
+        [
+          23,
+          820102023
+        ],
+        [
+          24,
+          820102024
+        ],
+        [
+          25,
+          820102025
+        ],
+        [
+          26,
+          820102026
+        ],
+        [
+          27,
+          820102027
+        ],
+        [
+          28,
+          820102028
+        ],
+        [
+          29,
+          820102029
+        ],
+        [
+          30,
+          820102030
+        ],
+        [
+          31,
+          820102031
+        ]
+      ],
+      "MLP-MC": [
+        [
+          0,
+          820102000
+        ],
+        [
+          1,
+          820102001
+        ],
+        [
+          2,
+          820102002
+        ],
+        [
+          3,
+          820102003
+        ],
+        [
+          4,
+          820102004
+        ],
+        [
+          5,
+          820102005
+        ],
+        [
+          6,
+          820102006
+        ],
+        [
+          7,
+          820102007
+        ],
+        [
+          8,
+          820102008
+        ],
+        [
+          9,
+          820102009
+        ],
+        [
+          10,
+          820102010
+        ],
+        [
+          11,
+          820102011
+        ],
+        [
+          12,
+          820102012
+        ],
+        [
+          13,
+          820102013
+        ],
+        [
+          14,
+          820102014
+        ],
+        [
+          15,
+          820102015
+        ],
+        [
+          16,
+          820102016
+        ],
+        [
+          17,
+          820102017
+        ],
+        [
+          18,
+          820102018
+        ],
+        [
+          19,
+          820102019
+        ],
+        [
+          20,
+          820102020
+        ],
+        [
+          21,
+          820102021
+        ],
+        [
+          22,
+          820102022
+        ],
+        [
+          23,
+          820102023
+        ],
+        [
+          24,
+          820102024
+        ],
+        [
+          25,
+          820102025
+        ],
+        [
+          26,
+          820102026
+        ],
+        [
+          27,
+          820102027
+        ],
+        [
+          28,
+          820102028
+        ],
+        [
+          29,
+          820102029
+        ],
+        [
+          30,
+          820102030
+        ],
+        [
+          31,
+          820102031
+        ]
+      ],
+      "H": [
+        [
+          0,
+          820102000
+        ],
+        [
+          1,
+          820102001
+        ],
+        [
+          2,
+          820102002
+        ],
+        [
+          3,
+          820102003
+        ],
+        [
+          4,
+          820102004
+        ],
+        [
+          5,
+          820102005
+        ],
+        [
+          6,
+          820102006
+        ],
+        [
+          7,
+          820102007
+        ],
+        [
+          8,
+          820102008
+        ],
+        [
+          9,
+          820102009
+        ],
+        [
+          10,
+          820102010
+        ],
+        [
+          11,
+          820102011
+        ],
+        [
+          12,
+          820102012
+        ],
+        [
+          13,
+          820102013
+        ],
+        [
+          14,
+          820102014
+        ],
+        [
+          15,
+          820102015
+        ],
+        [
+          16,
+          820102016
+        ],
+        [
+          17,
+          820102017
+        ],
+        [
+          18,
+          820102018
+        ],
+        [
+          19,
+          820102019
+        ],
+        [
+          20,
+          820102020
+        ],
+        [
+          21,
+          820102021
+        ],
+        [
+          22,
+          820102022
+        ],
+        [
+          23,
+          820102023
+        ],
+        [
+          24,
+          820102024
+        ],
+        [
+          25,
+          820102025
+        ],
+        [
+          26,
+          820102026
+        ],
+        [
+          27,
+          820102027
+        ],
+        [
+          28,
+          820102028
+        ],
+        [
+          29,
+          820102029
+        ],
+        [
+          30,
+          820102030
+        ],
+        [
+          31,
+          820102031
+        ]
+      ]
+    },
+    "reading": "WITHIN",
+    "independent_training_pairs": 1,
+    "RESIDUAL-MC_minus_MLP-MC": {
+      "differences": [
+        0.021644779830571975,
+        0.007955307377729592,
+        -0.03654495681390896,
+        0.024481295847619905,
+        0.02000456350524038,
+        -0.005007639702384978,
+        -0.018310542218150618,
+        0.054284765382941955,
+        -0.02296531489404549,
+        -0.003544576437297997,
+        0.010646632659208066,
+        0.016917532935968982,
+        0.03573367802188723,
+        0.006066890961146015,
+        0.00738939122093904,
+        0.0020728127046764633,
+        0.04991419408780526,
+        0.03997935099982633,
+        0.09244810721822821,
+        0.02611908161242174,
+        -0.0186662720652212,
+        -0.08222210050664988,
+        0.030150268443655245,
+        -0.015226987501776729,
+        0.00977499143181601,
+        -0.011375801585972567,
+        -0.00867826553815687,
+        -0.014335152107630603,
+        -0.01832407798040206,
+        -0.007355922689476213,
+        -0.014389070686065764,
+        0.03696007507407201
+      ],
+      "mean": 0.0067374074558942025,
+      "conditional_se": 0.0055965465359414865,
+      "negative_episodes": 14,
+      "complete": true,
+      "identities": [
+        [
+          0,
+          820102000
+        ],
+        [
+          1,
+          820102001
+        ],
+        [
+          2,
+          820102002
+        ],
+        [
+          3,
+          820102003
+        ],
+        [
+          4,
+          820102004
+        ],
+        [
+          5,
+          820102005
+        ],
+        [
+          6,
+          820102006
+        ],
+        [
+          7,
+          820102007
+        ],
+        [
+          8,
+          820102008
+        ],
+        [
+          9,
+          820102009
+        ],
+        [
+          10,
+          820102010
+        ],
+        [
+          11,
+          820102011
+        ],
+        [
+          12,
+          820102012
+        ],
+        [
+          13,
+          820102013
+        ],
+        [
+          14,
+          820102014
+        ],
+        [
+          15,
+          820102015
+        ],
+        [
+          16,
+          820102016
+        ],
+        [
+          17,
+          820102017
+        ],
+        [
+          18,
+          820102018
+        ],
+        [
+          19,
+          820102019
+        ],
+        [
+          20,
+          820102020
+        ],
+        [
+          21,
+          820102021
+        ],
+        [
+          22,
+          820102022
+        ],
+        [
+          23,
+          820102023
+        ],
+        [
+          24,
+          820102024
+        ],
+        [
+          25,
+          820102025
+        ],
+        [
+          26,
+          820102026
+        ],
+        [
+          27,
+          820102027
+        ],
+        [
+          28,
+          820102028
+        ],
+        [
+          29,
+          820102029
+        ],
+        [
+          30,
+          820102030
+        ],
+        [
+          31,
+          820102031
+        ]
+      ]
+    },
+    "RESIDUAL-MC_minus_H": {
+      "differences": [
+        0.03574337810603745,
+        -0.03220893947636708,
+        0.048741333469217496,
+        0.06670428644189225,
+        0.03520309261898742,
+        0.013867722495812349,
+        -0.021633179355490164,
+        0.05757291339026448,
+        -0.07993780407384715,
+        -0.06686726581024705,
+        0.007064617635148318,
+        0.13063543864347982,
+        0.028962442695153523,
+        -0.08430090798130219,
+        -0.015703412517586418,
+        0.04758393382337839,
+        0.07721601880399433,
+        0.0767979041605497,
+        0.07674406712143836,
+        -0.023687579539923898,
+        -0.03250167739413354,
+        -0.0904375169301006,
+        0.09320831435474863,
+        -0.060815830673178084,
+        0.10615674070068717,
+        -0.04382635733019949,
+        -0.03659985245032277,
+        -0.11044435144009306,
+        -0.03641703731744786,
+        0.04345522917808764,
+        -0.08740319098530216,
+        0.10390057262950154
+      ],
+      "mean": 0.007086659468526168,
+      "conditional_se": 0.011858107098025586,
+      "negative_episodes": 15,
+      "complete": true,
+      "identities": [
+        [
+          0,
+          820102000
+        ],
+        [
+          1,
+          820102001
+        ],
+        [
+          2,
+          820102002
+        ],
+        [
+          3,
+          820102003
+        ],
+        [
+          4,
+          820102004
+        ],
+        [
+          5,
+          820102005
+        ],
+        [
+          6,
+          820102006
+        ],
+        [
+          7,
+          820102007
+        ],
+        [
+          8,
+          820102008
+        ],
+        [
+          9,
+          820102009
+        ],
+        [
+          10,
+          820102010
+        ],
+        [
+          11,
+          820102011
+        ],
+        [
+          12,
+          820102012
+        ],
+        [
+          13,
+          820102013
+        ],
+        [
+          14,
+          820102014
+        ],
+        [
+          15,
+          820102015
+        ],
+        [
+          16,
+          820102016
+        ],
+        [
+          17,
+          820102017
+        ],
+        [
+          18,
+          820102018
+        ],
+        [
+          19,
+          820102019
+        ],
+        [
+          20,
+          820102020
+        ],
+        [
+          21,
+          820102021
+        ],
+        [
+          22,
+          820102022
+        ],
+        [
+          23,
+          820102023
+        ],
+        [
+          24,
+          820102024
+        ],
+        [
+          25,
+          820102025
+        ],
+        [
+          26,
+          820102026
+        ],
+        [
+          27,
+          820102027
+        ],
+        [
+          28,
+          820102028
+        ],
+        [
+          29,
+          820102029
+        ],
+        [
+          30,
+          820102030
+        ],
+        [
+          31,
+          820102031
+        ]
+      ]
+    },
+    "MLP-MC_minus_H": {
+      "differences": [
+        0.014098598275465474,
+        -0.04016424685409667,
+        0.08528629028312645,
+        0.04222299059427234,
+        0.015198529113747042,
+        0.018875362198197326,
+        -0.003322637137339546,
+        0.003288148007322522,
+        -0.05697248917980166,
+        -0.06332268937294905,
+        -0.003582015024059748,
+        0.11371790570751085,
+        -0.00677123532673371,
+        -0.0903677989424482,
+        -0.023092803738525458,
+        0.045511121118701925,
+        0.02730182471618907,
+        0.03681855316072337,
+        -0.015704040096789856,
+        -0.04980666115234564,
+        -0.013835405328912337,
+        -0.008215416423450722,
+        0.0630580459110934,
+        -0.045588843171401355,
+        0.09638174926887116,
+        -0.03245055574422692,
+        -0.027921586912165897,
+        -0.09610919933246245,
+        -0.0180929593370458,
+        0.05081115186756385,
+        -0.0730141202992364,
+        0.06694049755542954
+      ],
+      "mean": 0.00034925201263196577,
+      "conditional_se": 0.00934944486292681,
+      "negative_episodes": 18,
+      "complete": true,
+      "identities": [
+        [
+          0,
+          820102000
+        ],
+        [
+          1,
+          820102001
+        ],
+        [
+          2,
+          820102002
+        ],
+        [
+          3,
+          820102003
+        ],
+        [
+          4,
+          820102004
+        ],
+        [
+          5,
+          820102005
+        ],
+        [
+          6,
+          820102006
+        ],
+        [
+          7,
+          820102007
+        ],
+        [
+          8,
+          820102008
+        ],
+        [
+          9,
+          820102009
+        ],
+        [
+          10,
+          820102010
+        ],
+        [
+          11,
+          820102011
+        ],
+        [
+          12,
+          820102012
+        ],
+        [
+          13,
+          820102013
+        ],
+        [
+          14,
+          820102014
+        ],
+        [
+          15,
+          820102015
+        ],
+        [
+          16,
+          820102016
+        ],
+        [
+          17,
+          820102017
+        ],
+        [
+          18,
+          820102018
+        ],
+        [
+          19,
+          820102019
+        ],
+        [
+          20,
+          820102020
+        ],
+        [
+          21,
+          820102021
+        ],
+        [
+          22,
+          820102022
+        ],
+        [
+          23,
+          820102023
+        ],
+        [
+          24,
+          820102024
+        ],
+        [
+          25,
+          820102025
+        ],
+        [
+          26,
+          820102026
+        ],
+        [
+          27,
+          820102027
+        ],
+        [
+          28,
+          820102028
+        ],
+        [
+          29,
+          820102029
+        ],
+        [
+          30,
+          820102030
+        ],
+        [
+          31,
+          820102031
+        ]
+      ]
+    },
+    "negative_J_episodes": {
+      "RESIDUAL-MC": 0,
+      "MLP-MC": 0,
+      "H": 0
+    }
+  },
+  "retained_configuration": {
+    "seed": 8201,
+    "fixture": false,
+    "horizon": 256,
+    "train_episodes": 512,
+    "eval_episodes": 32,
+    "chunk": 32,
+    "arm_cap": 1800,
+    "pair_cap": 3600,
+    "ratio_grouping": "agent_compound"
+  },
+  "prospective_one_pair_counts_not_allocated": {
+    "training_pairs": 1,
+    "learners": 2,
+    "parameters_per_learner": 66441,
+    "training_episodes": 1024,
+    "training_native_steps": 262144,
+    "rollouts_per_arm": 256,
+    "optimizer_steps_per_arm": 1024,
+    "optimizer_steps_total": 2048,
+    "evaluation_episodes": 96,
+    "evaluation_native_steps": 24576,
+    "total_native_steps": 286720,
+    "max_eligible_pairs_per_training_arm": 1536,
+    "max_residual_terms_across_treatment_epochs": 6144,
+    "nested_candidate_trajectory_controller_solver_calls": 0,
+    "wall_cap_seconds_per_arm": 1800,
+    "wall_cap_seconds_complete_pair": 3600,
+    "cost_law_per_arm": "131072*c_collection + 1024*c_update + 8192*c_eval + complete overhead; second arm additionally 8192 H steps and pair publication",
+    "planning_anchor_scientific_pair_process_wall_seconds": 323.02,
+    "planning_anchor_CPU_seconds": 321.77,
+    "complete_per_arm_wall_seconds": "unmeasured; do not infer from internal arm timers",
+    "additional_validation": "only applicable changed-behavior/primary checks and high-risk review; no scientific qualification run or cost experiment",
+    "future_budget_or_seed_allocated": false
+  },
+  "actual_consultation_exposure": {
+    "models": 0,
+    "environments": 0,
+    "native_steps": 0,
+    "synthetic_steps": 0,
+    "training_episodes": 0,
+    "evaluation_episodes": 0,
+    "optimizer_steps": 0,
+    "replay": 0,
+    "profiling": 0,
+    "support_search": 0,
+    "new_scientific_invocations": 0,
+    "parameter_displacement": "not applicable: no learner"
+  },
+  "machine_exposure_line": "SCDMP_POST_B01_CONSULTATION: models=0; environments=0; native_steps=0; synthetic_steps=0; training_episodes=0; evaluation_episodes=0; optimizer_steps=0; replay=0; profiling=0; support_search=0; new_scientific_invocations=0; parameter_displacement=not applicable: no learner",
+  "measured_historical_exposure_line": "B01 accepted: 2 learners x 66441 parameters; 262144 training + 24576 evaluation = 286720 native team steps; 2048 actual Adam; 96 final episodes; 1 independent training pair; 1500 eligible training pairs per arm; 6000 treatment residual terms; total displacement/initial-L2=0.4964386918799212/0.5153558478035093; scientific pair-process wall=323.02s, CPU=321.77s, peakRSS=558232KiB.",
+  "rule_preserved_verbatim": "| Complete trustworthy observation | Reading and recommendation |\n| --- | --- |\n| Δ>0.01 | One package-level native signal may justify considering an independent training pair after full intake. No stable superiority or automatic additional seed. |\n| −0.01≤Δ≤0.01 | WITHIN, including both boundaries: no selected-scale improvement reason to repeat the unchanged penalty. Not statistical equivalence; a small positive Δ or lower residual is not success. |\n| Δ<−0.01 | This instance favors intact MC. Preserve the loss; no automatic retuning, seed change, added budget or alternative arm. Does not close SCDMP or all residual methods. |\n| Primary dependency incomplete | No complete-budget package judgment dependent on missing facts. Preserve independently trustworthy rows/counts/errors. Missing H limits H-dependent claims only if the learner comparison is independently complete. |",
+  "unchanged_B01_reading": "WITHIN",
+  "scientific_decision_formed": false,
+  "recommendation_only": "narrow current opening held-residual package-family PARK",
+  "alternative": "one explicitly justified bounded B within the accepted mechanism",
+  "owner_reviews_unapplied": [],
+  "owner_review_check_main_sha": "4e8ce22f5263a4ebbf096cca6c4af225a0559831",
+  "method_use": {
+    "foundations": [
+      "4",
+      "6"
+    ],
+    "topic": "04_EMPIRICAL",
+    "assumption": "An endpoint package comparison and conditional evaluation uncertainty do not establish independent training repeatability or component attribution.",
+    "decision_effect": "Preserve WITHIN and n=1; allow class-correct justified new B without a significance or causal-diagnosis prerequisite.",
+    "limit": "Knowledge does not select family disposition or investment."
+  },
+  "existing_literature_reused": "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_NATIVE_RETURN_COMPOSITION_P56_SOURCE_INTAKE_20260908.md sections 3-4; no new search or novelty verdict",
+  "scope_section4": "none",
+  "new_code": false,
+  "new_handle": null,
+  "route": {
+    "author": "01a08293-427f-71e0-930f-6cd91d33a011",
+    "parent": "01a07249-b095-7821-8ce2-e9c32ba85267",
+    "operator": "01a087a3-4f12-7021-9a4d-6da9da2bafcc",
+    "binding": "em:semigroup_consistent_duration_model_policy:convergence",
+    "conversation": "6aa1834e-c600-83e8-b20e-630f175aecf3"
+  }
+}

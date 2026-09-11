@@ -1,0 +1,113 @@
+{
+  "caller_role": "em",
+  "workflow_node": "em_convergence",
+  "request_id": "2026-09-10-dish-arrival-bridge-retention-convergence-01",
+  "source_thread_id": "01a08ce3-e08f-7022-8570-d9cf65f3e756",
+  "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "direction_id": "degraded_incumbent_shadow_handover",
+  "conversation_id": "6a9bec54-df00-83e8-9840-46440458f316",
+  "repository": "CartmanFatass/My-paper-code",
+  "repository_url": "https://github.com/CartmanFatass/My-paper-code",
+  "commit_or_ref": "b666f575a95ad15da9b9ff9f23cbc003f2e34450",
+  "delivery_mode": "github_delivery",
+  "github_delivery": {
+    "branch": "codex/pro-dish-post-b06-20260907",
+    "base_sha": "b666f575a95ad15da9b9ff9f23cbc003f2e34450",
+    "response_path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260910_arrival_bridge_retention/archive/RESPONSE.md",
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/4"
+  },
+  "scientific_question": "P62 selected no successor while preserving DIRECT and the B06/B07 narrow stops; P67 then returned no ready candidate. The current owner-authorized rolling reentry permits a newly justified direction question independently of sibling outcomes. Please decide this specific new choice: (a) open one arrival-bridge ordinary-service B comparison, HALF_RETAIN versus REPLACE, with the proposed bounded pair below (DM recommendation); or (b) select no successor and retain the narrow stops/source agenda unresolved. Neither a broader family closure nor Portfolio lifecycle, priority or recast is requested. The reason for consulting is this family-opening choice, not a generic Pro prerequisite for B.\n\nAt ordinary received snapshot arrival, the current source replaces the standby shadow h with b=tanh(W_bridge[ h, tanh(W_encoder packet) ]), then advances the usual actor GRU. Proposed HALF_RETAIN instead uses 0.5*h+0.5*b at exactly that mask; all parameters, inputs, resets, ownership and downstream rules stay. The same function serves live control and PPO replay. Standby shadow controls physical standby motion and commit/prediction before any CAS. B07 recorded 12321/12309 masked snapshot training samples despite zero ordinary training/evaluation transfers. Those old counts establish exposure to the path, not harmful overwriting, independent messages or expected future counts.\n\nThe inspiration is a finite-training inductive bias: preserve a direct component of physical local history while incorporating the complete existing partner packet. Fixed-input bridge displacement is halved, but no action/trajectory/return guarantee follows. Strongest null: the full bridge and following GRU can already learn useful retention; retaining stale state may delay correct adaptation. This is a close call, not a prior positive effect or a discovered bug. P67 already identified this pre-CAS path but nominated no variant; this explicitly changed, outcome-informed recommendation does not rewrite P67. The read local communication literature informs the distinction between local history and message influence; its attacked-message/intent-learning packages do not validate this fixed factor or show unreliable DISH packets.\n\nIf option(a) is selected, the proposed one-pair B retrains competent REPLACE and HALF_RETAIN from matched fresh initialization: same retained GROUND-TERMINAL-LINEAR-CLEARANCE-A03 host, corrected renewal, STRUCTURED/DIRECT_MEAN, original PPO/AdamW and auxiliary/private-label recipe, 3e-5 LR in both groups, 16*32*128 transitions per arm, native float64/policy FP32, CPU/thread1. Select final update16 only; four fresh-master native condition/reset coordinates per arm under the unchanged modal deployment rule. Physical/exogenous worlds retain the sampled addressed law; this is not a revival of joint sampled execution. The final primary is equal-condition HALF_RETAIN-minus-REPLACE service ticks; preserve every condition, energy/hard events and ordinary transfer count, with TRAIN/EVAL separate. No initial-policy evaluation, new gate mask, source fork, origin search, oracle, replay absorption test or diagnostic campaign is bundled. One matched training pair cannot estimate training-population uncertainty; four conditions are not four learners.\n\nThe proposed card MEI is24 service ticks (2% of1200), a practical scale for a same-parameter exploratory change, not a universal threshold or automatic all-positive rule. Above-MEI improvement would favor considering a separately selected replication; a small positive mean can still have value with costs/uncertainty; an opposite sign favors REPLACE. Tuned same-information baseline/upper headroom is absent, not zero. Zero CAS would leave the post-CAS RETAIN/COPY/SHADOW estimands unestimated but would not invalidate the all-trajectory service comparison. A result can support finite-budget policy performance only, not memory necessity, uniquely MARL value, isolated causality or formal UAV validation.\n\nThe proposed new allowance is arm-exclusive900s each plus shared necessary support<=300s, complete pair<=2100s. Shared support is charged once, split equally for charged per-arm ceiling1050s; include checks/build/load/common init, staging computation, observation tool work, collection/intake/publication and preservation/closeout computation. Administrative/provider latency is separate, without exempting machine work. Reserve publication inside those limits; failures/slices do not reset them. This is a new proposed cap, not historical remaining budget. B07 known subtotal463.83358418601877s plus unknown syntax cost and B05 complete432.82s are scale anchors, not guarantees. Actual E/H and runtime remain unknown; no calibration experiment is requested. Native work is2N+2E+H, N65536, E<=N, H<=20E per arm; future bridge uses are unknown. Existing private labels are algorithm work, the 128-wide blend adds no candidate/solver tree, and validation is one focused changed-bridge/live-replay/primary check with independent high-risk review, not another scientific run.\n\nPreserve adverse evidence: B07 final mean-135.25, condition differences-221,+74,-329,-65 and higher energy in all four; fewer invalid commits119 to32 and moved learners; B06 separate-77.5; prior LOW_LR gains/adverse conditions and B05 CONTROL's three ordinary training transfers. These different treatments are not pooled replications of the bridge proposal. Existing A03 information ceiling remains; the18-field packet is not an incumbent GRU-state transmission. No stopped mean/execution rule or frozen historical obligation is altered.\n\nPlease give a formed direction decision, its support and strongest contradiction, exact selected scope or narrow no-successor scope, and the honest claim/cost limits. DM will freeze the actual card/new seed/master/source/command only if selected, then implement and accept the exact selected rule. The complete response must conform to the listed current method requirements; name any concrete conflict rather than silently exempting it or replacing this question with a stronger evidence class. No science is run in this consultation.\n\nMachine-generated exposure line: Consultation: 0 initializers/models/learners/transitions/backward/optimizer/evaluation/native calls/invocations. Proposed only: 2 learners; 2*16*32*128=131072 ordinary training transitions; 2*16*4*8=1024 backward/AdamW steps; 2*4=8 final episodes <= 9600 native ticks; native training calls 262144..3145728 plus evaluation. Same-recipe historical DIRECT relative parameter L2=0.04690254949701972; no new movement measured.",
+  "deliverable": "A conclusion-first final Convergence decision choosing the proposed narrow arrival-bridge B comparison or no successor, with strongest support/contradiction, precise scope, claim/cost limits and no Portfolio disposition. If selecting the proposal, identify its rule, comparison and complete cap so DM can freeze the new card; no implementation or execution by Pro.",
+  "claim_ceiling": "A/source-and-existing-B evidence consultation; future one-pair B may support a preliminary retained-host finite-budget ordinary-service comparison only. No measured bridge effect now, no post-CAS source-value/unique-information/causal diagnosis/stability/safety/optimality/strict-decentralization/C/UAV claim.",
+  "constraints": [
+    "Current consultation exposure is zero. P62/P67 historical boundaries and budgets remain; no B06/B07 replay, source fork, new diagnostics or result-bearing run is selected by this packet. Pro decides the new direction family choice; no asynchronous owner reply is a gate.",
+    "HALF_RETAIN is fixed0.5 old standby shadow plus0.5 complete learned bridge at the existing delivery mask, after reset and before normal GRU advance. REPLACE and HALF_RETAIN have identical allowed inputs and parameter count. Preserve physical/copy/owner mapping, ordinary promotion, losses, stochastic training, modal deployment and numerical/RNG host boundary.",
+    "The proposed new cap is900s arm-exclusive each +300s shared support =2100s complete pair; at most1050s charged per arm after equal shared allocation. It includes necessary observation/collection/publication/closeout work and has no retry renewal. Do not silently enlarge it or infer actual runtime from old incomplete cost records.",
+    "A credible B does not require a positive prior, unique cause, tuned headroom, source prevalence experiment, exact replay/upper, significance or all-positive seeds. Preserve the strong competent full-bridge null and all adverse outcomes. If declining this proposal, decline its bounded value rather than claiming absence of source value.",
+    "The named main method versions govern current workflow; frozen scientific references remain at their declared versions. Read only the declared ranges; other cited repository text, local skills or external papers do not expand required inputs. Local metadata and DM passage summaries do not prove provider access to full papers.",
+    "Use the existing branch and Issue4 only for the one specified response and current-round delivery comment. Preserve prior accepted requests, response files and unrelated branch changes; no code, main, PR, card, DIRECTION or other-path write. Report concrete missing evidence or specification conflict rather than inventing a final answer from a transport blocker."
+  ],
+  "response_schema": [
+    "Lead with selected option and exact direction-family scope; distinguish formed decision from execution.",
+    "Explain the native causal path, finite-training hypothesis and strongest competing explanation without upgrading it to observed effect.",
+    "Give sufficient bounded next evidence and full work/cost scope, or precise no-successor scope; preserve current stops, lifecycle and historical evidence."
+  ],
+  "reference_files": [
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_ARRIVAL_BRIDGE_RETENTION_REENTRY_INTAKE_20260910.md",
+      "purpose": "Sections1-7: start here; concrete hypothesis, changed recommendation, protected scope, full proposed work/cost, decision options and authority.",
+      "provenance": "Current DM A/source assessment; no direction choice/card/invocation is selected."
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_P67_SOURCE_STATE_REENTRY_INTAKE_20260908.md",
+      "purpose": "Sections2-6: predecessor source distinction, strongest alternatives and actual no-ready boundary. Historical workflow prose is not current authority.",
+      "provenance": "Accepted P67 intake at f9d3aa52d; no experiment or further assessment was selected then.",
+      "commit_sha": "f9d3aa52d398ddbb32ccad21e8033c662c07b283"
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260908_p62_post_b07_scope/archive/RESPONSE.md",
+      "purpose": "Full formed P62 response: no successor, narrow stops and source agenda unresolved; preserve actual scope.",
+      "provenance": "Immutable complete Convergence response; historical decision, not a blanket future B prohibition.",
+      "commit_sha": "0086cfd7e8f7326fbadf879f844b757f661e8809"
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_OWN_COMMAND_MEAN_B07_RESULT_EVIDENCE_20260908.md",
+      "purpose": "Sections2-5: actual moved learners, masked snapshot counts, all service/native outcomes, zero ordinary transfers and cost limitations.",
+      "provenance": "Accepted finite B07 evidence; different treatment from this untested bridge.",
+      "commit_sha": "f9d3aa52d398ddbb32ccad21e8033c662c07b283"
+    },
+    {
+      "path": "experiments/candidates/degraded_incumbent_shadow_handover_rbhr_r06/production_training_engine.py",
+      "purpose": "Lines35-54,88-163,647-675: graph/GRU, exact arrival replacement, live/replay common function and masked snapshot count update.",
+      "provenance": "Accepted scientific source; read only named ranges, no code execution.",
+      "commit_sha": "f9d3aa52d398ddbb32ccad21e8033c662c07b283"
+    },
+    {
+      "path": "experiments/candidates/degraded_incumbent_shadow_handover_rbhr_r06/production_recurrent_trainer.py",
+      "purpose": "Lines234-243,273-386,486-509: separate promotion, live receipt-to-standby-control path, stored snapshot mask.",
+      "provenance": "Accepted scientific source; no ordinary CAS or hidden-state receipt is fabricated.",
+      "commit_sha": "f9d3aa52d398ddbb32ccad21e8033c662c07b283"
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260910_arrival_bridge_retention/EXPOSURE_AND_COST.json",
+      "purpose": "Machine-generated zero consultation exposure, proposed pair multipliers, per-arm/full cap and historical movement/cost limits.",
+      "provenance": "Configuration arithmetic only; all future seed/card/budget fields remain proposed."
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/evidence/2026-09-10-arrival-bridge-reentry.json",
+      "purpose": "Accessed source ranges, literature coverage and primary-passage locations, owner-boundary check, and limits.",
+      "provenance": "DM verified local readings; metadata hits are not empirical support and local source paths do not imply provider access."
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "purpose": "Apply sections4,5.2,11.4,11.7-11.10: common integrity, ordinary real B, proportionate burden, current scientific reading and conforming Pro finality. Section11 controls older wording.",
+      "provenance": "Current normative method; not an unchanged B07 card or exception.",
+      "commit_sha": "9b0c700b33d307745a5d7fbf88b1fb490a65d2ab"
+    },
+    {
+      "path": "AGENTS.md",
+      "purpose": "Apply sections1-2,4,5 opening rolling-chain paragraphs,6-7: proper direction authority, standing object delegation, asynchronous owner surface, independent advancement, exact source/Git and actual-node resource admission.",
+      "provenance": "Current owner-directed control-plane consolidation and rolling operation; not historical P67 role wording.",
+      "commit_sha": "9b0c700b33d307745a5d7fbf88b1fb490a65d2ab"
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "purpose": "Apply sections4-5 and7.1-7.3: no unrequested machinery, ordinary budgets, L0 and independent high-risk review for a later selected recurrent change; no code is commissioned now.",
+      "provenance": "Current engineering method; no old object appendix transfers.",
+      "commit_sha": "9b0c700b33d307745a5d7fbf88b1fb490a65d2ab"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "purpose": "Only sections2-4: distinguish information/history dynamics from learning, actual actor information and finite-training limits.",
+      "provenance": "Explanatory scientific knowledge; no independent policy/approval authority.",
+      "commit_sha": "9b0c700b33d307745a5d7fbf88b1fb490a65d2ab"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/02_MARL.md",
+      "purpose": "Only first two sections through CTDE/parameter sharing: actual allowed inputs and recurrent-memory performance caveat.",
+      "provenance": "Explanatory counterpart to the explicit assumption in the DM intake; linked references need not be opened.",
+      "commit_sha": "9b0c700b33d307745a5d7fbf88b1fb490a65d2ab"
+    }
+  ],
+  "discussion_urls": []
+}

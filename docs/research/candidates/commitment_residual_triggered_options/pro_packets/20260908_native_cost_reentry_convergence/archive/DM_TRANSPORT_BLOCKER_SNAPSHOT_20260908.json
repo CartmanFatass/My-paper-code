@@ -1,0 +1,152 @@
+{
+  "kind": "DM_READ_ONLY_REGISTRY_PROJECTION_NOT_RAW_UI_OR_TRANSPORT_ARCHIVE",
+  "captured_at": "2026-09-09T04:12:49+00:00",
+  "source_registry_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\registry.json",
+  "source_node": "bindings.em:commitment_residual_triggered_options:convergence",
+  "direction_mirror_equal": true,
+  "fields_copied_without_semantic_edit": {
+    "request_id": "2026-09-08-crto-native-cost-reentry-convergence-01",
+    "conversation_binding_key": "em:commitment_residual_triggered_options:convergence",
+    "workflow_node": "em_convergence",
+    "direction_id": "commitment_residual_triggered_options",
+    "source_thread_id": "01a08438-5664-7b23-b9b1-76f197c9ca15",
+    "creator_thread_id": "01a08438-5664-7b23-b9b1-76f197c9ca15",
+    "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+    "operator_thread_id": "01a07e52-f085-76a0-886a-4127f490421f",
+    "return_route": "PARENT_SESSION",
+    "conversation_id": "6a9bf8a7-e398-83e8-9633-04f776f27cb6",
+    "provider_url": "https://chatgpt.com/c/6a9bf8a7-e398-83e8-9633-04f776f27cb6",
+    "packet_id": "2026-09-08-crto-native-cost-reentry-convergence-01--commitment_residual_triggered_options",
+    "packet": {
+      "packet_id": "2026-09-08-crto-native-cost-reentry-convergence-01--commitment_residual_triggered_options",
+      "canonical_form": "logical_packet_manifest",
+      "manifest_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-08-crto-native-cost-reentry-convergence-01\\2026-09-08-crto-native-cost-reentry-convergence-01--commitment_residual_triggered_options__PACKET_MANIFEST.json"
+    },
+    "visible_model": "6 Pro",
+    "underlying_model": "Latest",
+    "thinking_effort": "Pro, 5 of 5.",
+    "source_mode": "paste",
+    "prompt_sha256": "bb8548587d96bfd21db225e07edb25d5ccccea3de0fc8c5012ff585269a4d44a",
+    "state": "SENT_INPUT_MISMATCH",
+    "send_click_count": 1,
+    "send_evidence": {
+      "send_click_count": 1,
+      "send_attempted": true,
+      "url_observed": true,
+      "user_node_observed": true,
+      "user_node_exact": false,
+      "paste_mode": true,
+      "prompt_sha256": "bb8548587d96bfd21db225e07edb25d5ccccea3de0fc8c5012ff585269a4d44a",
+      "provider_url_observed": "https://chatgpt.com/c/6a9bf8a7-e398-83e8-9633-04f776f27cb6",
+      "binding_match": true,
+      "mismatch": "visible user node had extra trailing character 跨"
+    },
+    "monitor": {
+      "identity_key": "2026-09-08-crto-native-cost-reentry-convergence-01|em:commitment_residual_triggered_options:convergence|6a9bf8a7-e398-83e8-9633-04f776f27cb6|https://chatgpt.com/c/6a9bf8a7-e398-83e8-9633-04f776f27cb6",
+      "provider_url": "https://chatgpt.com/c/6a9bf8a7-e398-83e8-9633-04f776f27cb6",
+      "last_observed_url": "https://chatgpt.com/c/6a9bf8a7-e398-83e8-9633-04f776f27cb6",
+      "last_observed_state": "SENT_INPUT_MISMATCH; exact prompt plus extra trailing character 跨; no retry authorized",
+      "last_observed_at": "2026-09-09T04:03:30Z",
+      "cursor": null
+    },
+    "return_receipt": {
+      "required": true,
+      "source_thread_id": "01a08438-5664-7b23-b9b1-76f197c9ca15",
+      "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+      "destination_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+      "status": "SENT",
+      "attempt_count": 1,
+      "message_key": "2026-09-08-crto-native-cost-reentry-convergence-01|em:commitment_residual_triggered_options:convergence|6a9bf8a7-e398-83e8-9633-04f776f27cb6|BLOCKER|SENT_INPUT_MISMATCH|9fd99871f9be5793",
+      "retry_allowed": false,
+      "routing_mode": "PARENT_SESSION",
+      "kind": "TERMINAL_BLOCKER",
+      "blocker_state": "SENT_INPUT_MISMATCH",
+      "error": "The bound conversation user node contains the intended CRTO prompt plus an extra trailing character 跨; submission is mismatched and must not be retried.",
+      "delivery_mode": "bounded_single_attempt",
+      "return_control_after_attempt": true,
+      "staged_at": "2026-09-09T04:03:30Z",
+      "fallback_enabled": false,
+      "delivery_status": "accepted",
+      "updated_at": "2026-09-09T04:03:56Z",
+      "sent_at": "2026-09-09T04:03:56Z"
+    },
+    "tab_lifecycle": "CLOSED",
+    "tab_lease": {
+      "handle": null,
+      "lifecycle": "CLOSED",
+      "origin": "agent",
+      "reusable": false,
+      "last_observed_at": "2026-09-09T04:03:30Z",
+      "lease_expires_at": null,
+      "closed_at": "2026-09-09T04:03:30Z",
+      "close_reason": "terminal input mismatch; no retry"
+    },
+    "updated_at": "2026-09-09T04:03:30Z",
+    "archive_status": "NOT_ARCHIVED_INPUT_MISMATCH",
+    "archive": null,
+    "response_sha256": null,
+    "timestamps": {
+      "received_at": "2026-09-05T11:11:09Z",
+      "sent_at": "2026-09-05T11:11:09Z",
+      "generation_started_at": "2026-09-05T11:11:09Z",
+      "completed_at": "2026-09-05T11:21:55Z",
+      "captured_at": "2026-09-05T11:21:55Z",
+      "archived_at": "2026-09-05T11:21:55Z"
+    },
+    "last_provider_selection": {
+      "visible_model": "6 Pro",
+      "underlying_model": "Latest",
+      "thinking_effort": "Pro, 5 of 5.",
+      "verified_at": "2026-09-05T11:11:09Z"
+    },
+    "upload_evidence": {
+      "expected_file": "PROMPT_BODY.md",
+      "bytes": 14828,
+      "sha256": "c98335cfe400018080e96b44551a14ee62c2ac1955ee87db7d3ce6f2706ccecb",
+      "provider_filename": "PROMPT_BODY(20260905-111018).md",
+      "attachment_observed": true
+    },
+    "binding_reconciliation": {
+      "kind": "archived_direction_mirror",
+      "stale_binding_state": "ARCHIVED",
+      "stale_binding_updated_at": "2026-09-05T11:22:58Z"
+    }
+  },
+  "intended_handoff": {
+    "commit": "b6af4d6ee9807baea8f1a5a62b0e2df11a6763c0",
+    "path": "docs/research/candidates/commitment_residual_triggered_options/pro_packets/20260908_native_cost_reentry_convergence/HANDOFF.json",
+    "task_url": "https://github.com/CartmanFatass/My-paper-code/blob/d0b1d364c4de28fc449918c351bd999e4276141d/docs/research/candidates/commitment_residual_triggered_options/pro_packets/20260908_native_cost_reentry_convergence/TASK.md",
+    "utf8_prompt_bytes": 1280,
+    "prompt_sha256": "bb8548587d96bfd21db225e07edb25d5ccccea3de0fc8c5012ff585269a4d44a",
+    "registry_intended_hash_matches": true
+  },
+  "availability_checked": [
+    {
+      "path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\commitment_residual_triggered_options\\2026-09-08-crto-native-cost-reentry-convergence-01",
+      "checked_with_windows_extended_path": true,
+      "exists": false
+    },
+    {
+      "path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-08-crto-native-cost-reentry-convergence-01",
+      "checked_with_windows_extended_path": true,
+      "exists": false
+    }
+  ],
+  "limits": [
+    "DM read the registry; DM did not operate the browser or independently inspect the visible user node.",
+    "The registry prompt hash identifies the intended prompt, not an exact sent payload; no raw observed user-node bytes or sent-payload hash were supplied.",
+    "The timestamps, last_provider_selection and upload_evidence include September5 provenance. They do not establish current-request elapsed time, fresh model-verification timing or a new attachment.",
+    "archive=null, response_sha256=null and missing local archive directories do not establish absence of provider generation or GitHub writes. No provider response or delivery was read in this intake.",
+    "The remote codex/crto HEAD was separately observed at b6af4d6ee9807baea8f1a5a62b0e2df11a6763c0; this is not a global no-write or future-delivery guarantee."
+  ],
+  "current_intake_counts": {
+    "DM_scientific_invocations": 0,
+    "DM_environment_model_evaluator_native_calls": 0,
+    "DM_optimizer_updates": 0,
+    "DM_provider_sends": 0,
+    "transport_send_clicks_reported": 1,
+    "exact_input_observed": false,
+    "formed_scientific_decisions": 0
+  },
+  "scope_section_4": "none; one bounded documentary projection, no runtime machinery"
+}

@@ -1,0 +1,77 @@
+{
+  "reporting_object": "RCLE-TBCFV-B03-ACTOR100-FRESH1000-S22",
+  "class": "B/EXPLORE",
+  "allocation": "OWNER_DELEGATED object-tier continuation under 2026-09-03 standing delegation; Root OWNER_DIRECT independent progression 2026-09-10 at main e58b4b7a67ad31e2b245002d0f47987d755980a7",
+  "master": 22,
+  "block": 0,
+  "scientific_RNG_namespace": "RCLE-TBCFV-B03-ACTOR100",
+  "root_key_hex": "9e02ca6eed367ce80c7b396fc99a128c501c744d0e888e374803b5b2a4feb9fa",
+  "true_learned_package": "FLEX-REKEY",
+  "parameters_per_fit": 26161,
+  "updates_per_fit": 1000,
+  "step_norm_nonzero": 0.02,
+  "path_length_opportunity_per_fit": 20.0,
+  "arms": 2,
+  "fresh_paired_training_instances": 1,
+  "model_allocations": 12,
+  "fits": 2,
+  "untrained_helpers": 10,
+  "training_episodes": 128000,
+  "evaluation_episodes": 8192,
+  "total_episodes": 136192,
+  "primitive_ticks": 8716288,
+  "backward_step_calls": 2000,
+  "per_invocation_episodes": {
+    "W1": 68096,
+    "W100": 66048,
+    "reference": 2048
+  },
+  "episode_batches": {
+    "training": 4000,
+    "evaluation": 256
+  },
+  "cost_proxy_seconds": {
+    "W1": 389.18,
+    "W100": 355.01,
+    "reference": 2.7,
+    "sum": 746.89
+  },
+  "caps_seconds": {
+    "W1": 600,
+    "W100": 600,
+    "reference": 30,
+    "complete_all_support": 1500,
+    "focused_check_selected_maximum": 30,
+    "directory_test_cumulative_limit": 300
+  },
+  "prior_recorded_directory_tests_seconds": 37.26654039999295,
+  "known_B03_prior": {
+    "episodes": 203776,
+    "ticks": 13041664,
+    "calls": 2800,
+    "models": 42
+  },
+  "known_B03_if_complete": {
+    "episodes": 339968,
+    "ticks": 21757952,
+    "calls": 4800,
+    "models": 54
+  },
+  "unknown_original_W100_prefix_upper_bound": {
+    "episodes": 12800,
+    "ticks": 819200,
+    "calls": 200
+  },
+  "scientific_exposure_at_authoring": 0,
+  "historical_same_endpoint_pairs": 1,
+  "do_not_pool": "One prospective seed22 pair and selected motivating seed21 pair form two descriptive same-endpoint training pairs if complete; old two200-update pairs remain separate. Retain all outcomes; no stable or causal budget claim.",
+  "cost_proxy_source": "S21 actual complete GNU time W1/W100/reference; same endpoint and shape; no timing pilot or guaranteed upper bound",
+  "cost_law": "Two fixed learned invocations of 1000 x (8 cells x 8 episodes), plus four 8 x 256 panels. Existing complete invocation observations provide the same-shape forecast; fixed overhead is included.",
+  "budget_split_seconds": {
+    "prelaunch_support_conservative": 100,
+    "complete_sequence_outer_cap": 1250,
+    "collection_intake_publication_closeout_support": 150,
+    "sum": 1500
+  },
+  "same_endpoint_pairs_if_complete": 2
+}

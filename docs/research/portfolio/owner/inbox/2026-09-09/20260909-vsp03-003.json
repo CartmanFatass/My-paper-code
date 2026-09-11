@@ -1,0 +1,86 @@
+{
+  "id": "20260909-vsp03-003",
+  "created": "2026-09-09T02:46:39-07:00",
+  "direction": "vsp_03",
+  "tier": "direction",
+  "kind": "close-call",
+  "title": "三实例后的 G：暂停窄家族，还是再买一次独立观察？",
+  "context": "P76 已被 Root 接受。三次普通 G 的 greedy 主指标两小正一较大负，随机执行均负。DM 略推荐暂停已测窄家族，但两个独立正值和已测约3.25至4.19秒的完整成本构成强反方证据；原 Convergence 决定，两项均未执行。",
+  "options": [
+    {
+      "key": "a",
+      "label": "暂停已测试的窄 G greedy 替代规则家族，不选后继",
+      "consequence": "形成合规裁决后只暂停这个同配方家族，保留全部证据及整个方向现有状态。"
+    },
+    {
+      "key": "b",
+      "label": "选择一次有具体价值的额外独立 G 观察",
+      "consequence": "若形成合规裁决并获得后续具体分配，只做一项同配置独立 G；不自动 seed8，不追求全为正。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "P74 的同配置观察理由成立；P76 又得到小而不确定的差，当前稍倾向结束同配方追加，但低成本和两个独立正值使这是 close-call。",
+  "evidence": [
+    "docs\\research\\candidates\\vsp_03\\VSP03_POST_B05_QUESTION_INTAKE_20260909.md",
+    "docs\\research\\candidates\\vsp_03\\VSP03_B05_P76_INTAKE_20260909.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-09.md#L23",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": {
+    "question": "三次 ordinary G 已完成后，暂停这个窄 greedy 替代规则家族，还是选择一次有具体价值的额外独立观察？DM 略推荐暂停；两项均尚未执行，交原 Convergence 判断。",
+    "changes_if_approved": [
+      {
+        "target": "vsp_03 的 ordinary-G、update128、公开固定N2共享槽 greedy 替代 R0/R 测试家族",
+        "from": "P76 已完成；三实例为两小正一较大负，后继未分配",
+        "to": "若 Convergence 形成(a)的合规决定，仅暂停这一窄家族，不选后继；不改变整个方向或 Portfolio 状态"
+      }
+    ],
+    "if_refused": "请原 Convergence 评估具体的一次独立 G 备选及其边际价值。准备本身不冻结卡或分配 seed8，不退回更强证据门槛。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/vsp_03/VSP03_B05_P76_INTAKE_20260909.md#4-three-instance-description-support-and-contradiction",
+        "quote": "Fixed readiness remains the competent reference and there is no basis here for generally replacing it.",
+        "why": "P76 再次给出小且不确定的净收益，原生计账有信息，但目前稍倾向结束这段同配方追加序列；这不是认定任何未来 B 无效。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/vsp_03/VSP03_B05_P76_INTAKE_20260909.md#4-three-instance-description-support-and-contradiction",
+        "quote": "The two new small positive greedy points strengthen the evidence that this recipe can yield sampled gains at its fixed budget.",
+        "why": "两个独立训练控制器都略胜两条固定规则，额外实例仍能直接观察学习变化，不能因结果小而取消其价值。"
+      },
+      {
+        "path": "docs/research/candidates/vsp_03/VSP03_POST_B05_QUESTION_FACTS_20260909.json",
+        "quote": "\"whole_monotonic_wall_s\": 4.191728",
+        "why": "当前完整实现的已知运行成本很低，支持再买一次有界观察；未来成本仍未知。"
+      }
+    ],
+    "uncertainty": [
+      "P74 明确指出同配置独立观察本身是合法 B 收益，本次推荐不重新要求新用途、算法改动或稳定证明。",
+      "三个实例与有限评价不能可靠估计第四个实例的符号、幅度或投入价值，所以这是 close-call。",
+      "缺 headroom、MEI 内小差和随机亏损都不是阻止 greedy B 的自动门槛。"
+    ],
+    "cost": {
+      "compute": "本次新增模型、科学导入、episodes、优化、评价、诊断、source/card/master/run 和 Pro Send 均为0。未选备选为1 G、128更新、20480 episodes、1638400 target transitions；最多一次完整120秒调用，额外验证为0。已测P67/P76完整耗时3.253184/4.191728秒，未来耗时未知。",
+      "owner_time": "异步查看 close-call；不等待。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing; this preparation returns the ready question with neither scientific option applied"
+    },
+    "verdict_text": "**DM recommendation: ask Convergence to select (a), a reversible pause of only\nthe tested ordinary-G, update-128, public fixed-N2 greedy-replacement family,\nwith no successor selected. This is a close call; neither (a) nor (b) has run.**",
+    "source": "docs/research/candidates/vsp_03/VSP03_POST_B05_QUESTION_INTAKE_20260909.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-09T10:32:48+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/vsp_03/pro_packets/20260909_post_b05_convergence/archive/RESPONSE.md",
+      "record": "docs/research/candidates/vsp_03/VSP03_POST_B05_CONVERGENCE_INTAKE_20260909.md",
+      "state": "applied",
+      "summary": "完整 Pro 答复3da3a0c44ff7296c19e85342a56ee3128dce1451选择(a)，DM已合规接收并在DIRECTION应用已测ordinary-G/update128/公开固定N2 greedy替代规则窄家族的可逆暂停，不选后继。保留两小正/seed5负值及全部随机损失、低成本继续理由和P74纠正，仍为close-call；N1/T暂停、recasts1不变，无Portfolio处置。记录audit/2026-09-09.md#L25；source/card/master/model/science/Pro Send新增均0。原推荐和未回复状态保留，不虚构owner回答。"
+    }
+  ]
+}

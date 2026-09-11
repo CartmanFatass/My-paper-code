@@ -1,0 +1,22 @@
+{
+  "observed_at_utc": "2026-09-10T23:17:51.572400+00:00",
+  "first_attempt_receipt_sha256": "8c232cf46cf2055e5ff217c1a40c09c0feab24fd114fa67e4498ef8f527ad0e9",
+  "first_attempt_bytes": 639,
+  "first_attempt_send_count": 1,
+  "first_attempt_duration": "12m19s",
+  "first_attempt_state": "BLOCKED / GITHUB_DELIVERY_UNAVAILABLE; no decision formed in that attempt",
+  "root_authorized_recovery": "One exact retry by existing Transport in same conversation after confirmed absence; preserve prompt/binding/scope",
+  "recovery_send_count_observed_by_dm": null,
+  "later_published_response_commit": "b4d71be60f789e97bf1f4c7130bb9995fc84f387",
+  "later_response_path": "docs/research/portfolio/pro_packets/20260910_rolling_successor_allocation/archive/RESPONSE.md",
+  "later_response_bytes": 45614,
+  "later_response_sha256": "2425ab285bc8f1d026fed880045bd92b75868a0fc85774ea2e77312a74590142",
+  "changed_paths_in_later_commit": [
+    "docs/research/portfolio/pro_packets/20260910_rolling_successor_allocation/archive/RESPONSE.md"
+  ],
+  "later_receipt_association": "pending Root/Transport immutable receipt; do not infer from commit alone",
+  "scientific_conformance": "not performed in this mechanical record assignment",
+  "portfolio_application": "none",
+  "author_new_scientific_exposure": 0,
+  "author_provider_sends": 0
+}

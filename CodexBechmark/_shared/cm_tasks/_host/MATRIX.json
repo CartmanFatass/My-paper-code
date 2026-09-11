@@ -1,0 +1,188 @@
+{
+  "version": "cm-pair-v1",
+  "status": "implemented_offline_checked_no_candidate_runs",
+  "primary_question": "spec granularity and reusable RL task patterns under continuous context",
+  "source_revision": "1385b56b6a0761d4064dcafbce0c66c590ecc5a2",
+  "models": {
+    "AM": {
+      "model": "gpt-6-astra",
+      "effort": "medium"
+    },
+    "AH": {
+      "model": "gpt-6-astra",
+      "effort": "high"
+    },
+    "TH": {
+      "model": "gpt-5.6-terra",
+      "effort": "high"
+    },
+    "LMX": {
+      "model": "gpt-5.6-luna",
+      "effort": "max"
+    }
+  },
+  "primary_context": "continuous_same_cm",
+  "spec_screen": [
+    {
+      "id": "S-L0-FRESH",
+      "cm": "AM",
+      "reviewer": "AH",
+      "implementer": "TH",
+      "level": "L0",
+      "delivery": "fresh",
+      "status": "not_run"
+    },
+    {
+      "id": "S-L0-REUSE",
+      "cm": "AM",
+      "reviewer": "AH",
+      "implementer": "TH",
+      "level": "L0",
+      "delivery": "reuse",
+      "status": "not_run"
+    },
+    {
+      "id": "S-L1-FRESH",
+      "cm": "AM",
+      "reviewer": "AH",
+      "implementer": "TH",
+      "level": "L1",
+      "delivery": "fresh",
+      "status": "not_run"
+    },
+    {
+      "id": "S-L1-REUSE",
+      "cm": "AM",
+      "reviewer": "AH",
+      "implementer": "TH",
+      "level": "L1",
+      "delivery": "reuse",
+      "status": "not_run"
+    },
+    {
+      "id": "S-L2-FRESH",
+      "cm": "AM",
+      "reviewer": "AH",
+      "implementer": "TH",
+      "level": "L2",
+      "delivery": "fresh",
+      "status": "not_run"
+    },
+    {
+      "id": "S-L2-REUSE",
+      "cm": "AM",
+      "reviewer": "AH",
+      "implementer": "TH",
+      "level": "L2",
+      "delivery": "reuse",
+      "status": "not_run"
+    },
+    {
+      "id": "S-L3-FRESH",
+      "cm": "AM",
+      "reviewer": "AH",
+      "implementer": "TH",
+      "level": "L3",
+      "delivery": "fresh",
+      "status": "not_run"
+    },
+    {
+      "id": "S-L3-REUSE",
+      "cm": "AM",
+      "reviewer": "AH",
+      "implementer": "TH",
+      "level": "L3",
+      "delivery": "reuse",
+      "status": "not_run"
+    }
+  ],
+  "direct_baseline": {
+    "id": "D-AM-AH",
+    "cm": "AM",
+    "reviewer": "AH",
+    "implementer": null,
+    "status": "not_run"
+  },
+  "optional_model_extension": {
+    "status": "optional_configuration_catalog_not_selected_not_run",
+    "implementer_transfer": {
+      "selected_spec_policy_limit": 2,
+      "additional_implementers": [
+        "AM",
+        "LMX"
+      ]
+    },
+    "direct_cm": [
+      "TH",
+      "LMX"
+    ],
+    "reviewer_followup": {
+      "selected_cm_limit": 2,
+      "additional_reviewers": [
+        "TH",
+        "LMX"
+      ],
+      "mode": "fresh_end_to_end_episode"
+    },
+    "exploratory_episode_counts": {
+      "implementer_transfer_max": 4,
+      "direct_cm_extension": 2,
+      "reviewer_followup_max": 4
+    },
+    "exploratory_total_max": 10,
+    "requires_new_heldout_validation_before_model_winner_claim": true
+  },
+  "optional_not_in_matrix": [
+    {
+      "model": "gpt-5.6-sol",
+      "effort": "high"
+    },
+    "paired warm/cold handoff diagnostic",
+    "fixed-packet implementer diagnostic"
+  ],
+  "budget": {
+    "trial_tokens": null,
+    "trial_wall_seconds": null,
+    "phase_usd_reference": null,
+    "status": "single_two_task_run_only_no_batch_selected_no_dollar_cap_measured"
+  },
+  "notes": [
+    "Model and effort are separately recorded; actual runtime settings must be verified.",
+    "Spec quality, errors, assumption mismatch and directive adherence are outcomes.",
+    "Reuse has separately accounted pattern-authoring and maintenance costs.",
+    "Final grading is independent of the in-team reviewer.",
+    "No scientific invocation is authorized by a fixture or simulated receipt."
+  ],
+  "default_run": {
+    "task_count": 2,
+    "classic_count": 1,
+    "non_example_count": 1,
+    "sampling": "seeded_one_classic_then_one_non_example",
+    "difficulty_policy": "different_estimated_labels",
+    "cm": "existing_fresh_top_level_session",
+    "level": "L0",
+    "delivery": "fresh",
+    "automatic_matrix": false,
+    "soft_minutes_per_task": 30
+  },
+  "legacy_preimplementation_campaign": {
+    "screen_episode": "S1_FOLR",
+    "heldout_episodes": [
+      "H1_UCOPE",
+      "H2_RCLE"
+    ],
+    "heldout": {
+      "spec_policy_limit": 2,
+      "direct_baseline_config_count": 1,
+      "repeats_per_config_episode": 2,
+      "status": "not_run"
+    },
+    "planned_primary_episode_counts": {
+      "spec_screen": 8,
+      "direct_baseline_screen": 1,
+      "heldout_max": 12
+    },
+    "planned_primary_total_max_excluding_calibration_and_diagnostics": 21,
+    "status": "superseded_by_two_task_owner_scope_not_scheduled"
+  }
+}

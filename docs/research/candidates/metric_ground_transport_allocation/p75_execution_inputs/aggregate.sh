@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -euo pipefail
+cd /home/wu/hmasd-worktrees/mgtap_b01_4f65eefb1b15e44b42d694376630fba0c230cc6c
+/usr/bin/time -q -f '%e' -o /home/wu/hmasd-worktrees/mgtap_b01_4f65eefb1b15e44b42d694376630fba0c230cc6c/temp/directions/metric_ground_transport_allocation/exp/aggregate_process_wall_seconds.txt /home/wu/.venvs/hmasd/bin/python scripts/run_mgtap_native_ground_geometry_b01.py --aggregate /home/wu/hmasd-worktrees/mgtap_b01_4f65eefb1b15e44b42d694376630fba0c230cc6c/temp/directions/metric_ground_transport_allocation/exp/b01_8201/summary.json /home/wu/hmasd-worktrees/mgtap_b01_4f65eefb1b15e44b42d694376630fba0c230cc6c/temp/directions/metric_ground_transport_allocation/exp/b01_8202/summary.json --output /home/wu/hmasd-worktrees/mgtap_b01_4f65eefb1b15e44b42d694376630fba0c230cc6c/temp/directions/metric_ground_transport_allocation/exp/aggregate_summary.json

@@ -1,0 +1,83 @@
+{
+  "read_at": "2026-09-09T16:24:38.425573+00:00",
+  "request_id": "2026-09-08-scdmp-p58-held-residual-context-repair-01",
+  "input_sha": "7ba73a1be84be571f436d0499f3dbd5111802678",
+  "original_scientific_sha": "21a801279bd449c09907f5cf040efa693ae345a3",
+  "task_sha": "362ccdae4b26ea25730df45c550c8a7efdfa5371",
+  "response_commit": "ac1d97f5920fe2dfc88698681d389af0b907dbfe",
+  "response_bytes": 29522,
+  "response_lines": 159,
+  "response_sha256": "bbf51f5f7448071bb177628059468bf8d15c89f6688ef4d45f01b7517037b845",
+  "full_response_read": true,
+  "comment_id": 5605042763,
+  "comment_url": "https://github.com/CartmanFatass/My-paper-code/issues/12#issuecomment-5605042763",
+  "chat_sha256": "b9df01dfec8e5093222ddf952eb5ea306e82647678765bd286b00e5b4abe6c84",
+  "prompt_sha256": "d0918a42d9754bddba00943aa1b500bdc1a7c9841fe3bb2cc91fdce0a9445a1f",
+  "prompt_matches_bound_handoff": true,
+  "conversation_id": "6aa1834e-c600-83e8-b20e-630f175aecf3",
+  "user_message_id": "07312f21-a918-455e-89ff-c304aa2dd71f",
+  "assistant_message_id": "46355b96-4b34-4c27-935c-87e6e44ed360",
+  "provider_evidence": {
+    "source": "Root recovery receipt and current archive/top-level fields; inherited nested fields retained as historical",
+    "visible_model": "6 Pro",
+    "underlying_model": "Latest",
+    "thinking_effort": "Pro, 5 of 5.",
+    "natural_completion": "Worked for 11m 17s; response actions; no active generation",
+    "root_recovery_clicks": 1,
+    "previous_no_effect_clicks": 2,
+    "confirmed_recovery_submissions": 1,
+    "receipt_state": "LOCAL",
+    "tab_closed_at": "2026-09-09T16:17:17.695924+00:00"
+  },
+  "stale_inherited_fields": [
+    "model_verification",
+    "transport_facts",
+    "observed_page_state",
+    "policy_reconciliation",
+    "timestamps",
+    "response_bytes",
+    "response_characters",
+    "scientific_decision_formed"
+  ],
+  "scientific_decision": {
+    "formed": true,
+    "conforms_to_current_specs": true,
+    "selected_object": "SCDMP-NATIVE-HOLD-RESIDUAL-B01",
+    "direction_verdict": "SELECT_ORIGINAL_PAIR_AND_SUBSTANTIVE_RECAST",
+    "application": "PRO_FINAL / OWNER_DELEGATED",
+    "recasts": 2,
+    "run_allocation": "one original bounded pair under P56/P58 continuation, RESPONSE lines 99-119; Root confirmed allocation in native return; no recovery-policy allocation or automatic successor"
+  },
+  "copied_raw_files": [
+    {
+      "path": "archive/RECOVERY_CHAT_RESPONSE.md",
+      "source_filename": "CHAT_RESPONSE.md",
+      "bytes": 419,
+      "sha256": "b9df01dfec8e5093222ddf952eb5ea306e82647678765bd286b00e5b4abe6c84"
+    },
+    {
+      "path": "archive/RECOVERY_GITHUB_COMMENT.json",
+      "source_filename": "GITHUB_COMMENT.json",
+      "bytes": 5061,
+      "sha256": "f6b3b913d541c89f9aa1c412b1cee5275166e8d04cc5c6b42b270c0b222cf250"
+    },
+    {
+      "path": "archive/RECOVERY_HANDOFF.json",
+      "source_filename": "HANDOFF.json",
+      "bytes": 6440,
+      "sha256": "d7168826733ea2d600de09a4a27a427db4d2baa1680962bda1161168e72bd006"
+    },
+    {
+      "path": "archive/RECOVERY_PROMPT.md",
+      "source_filename": "PROMPT.md",
+      "bytes": 1282,
+      "sha256": "d0918a42d9754bddba00943aa1b500bdc1a7c9841fe3bb2cc91fdce0a9445a1f"
+    },
+    {
+      "path": "archive/RECOVERY_TRANSPORT_FACTS.json",
+      "source_filename": "TRANSPORT_FACTS.json",
+      "bytes": 123927,
+      "sha256": "0d0e684ac4f56d37c480510ba33deee4aedb44b011198866903a3a2861e3e7b0"
+    }
+  ]
+}

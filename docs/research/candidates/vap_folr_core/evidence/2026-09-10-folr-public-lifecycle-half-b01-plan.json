@@ -1,0 +1,108 @@
+{
+  "object": "FOLR-PUBLIC-LIFECYCLE-HALF-B01",
+  "class": "B/EXPLORE",
+  "question": "Useful native benefit of fixed .5 before-GRU event-bound survivor attenuation over retention in one new fitting instance.",
+  "selection": "PRO_FINAL fixed half-attenuation question f64b461cd; separate OWNER_DELEGATED finite card/allocation under Root conforming continuation instruction2026-09-10",
+  "source_reuse": "Extend the accepted runner/model/collection path from6fb1e1f6; no duplicate learner or changed legacy numerical state laws. Exact new source SHA pending CM implementation and focused acceptance.",
+  "generation_method": "Python AST rechecks accepted runner training/final loop literals; other unchanged work bounds reused from the accepted B03 plan. No target import or scientific invocation.",
+  "training_seed": 7807,
+  "evaluation_seed": 107807,
+  "arms": [
+    "RETAIN",
+    "HALF_EVENT"
+  ],
+  "per_arm": {
+    "training_episodes": 5000,
+    "training_ticks": 100000,
+    "optimizer_steps": 4969,
+    "learning_rate": 0.0005,
+    "nominal_lr_times_steps": 2.4845,
+    "evaluation_episodes": 128,
+    "evaluation_ticks": 2560,
+    "total_native_ticks": 102560,
+    "exposure_line": "100000 real native training ticks; 4969 actor/mixer RMSprop steps at lr=0.0005; 128 final non-learning greedy episodes"
+  },
+  "total": {
+    "training_episodes": 10000,
+    "training_ticks": 200000,
+    "optimizer_steps": 9938,
+    "evaluation_episodes": 256,
+    "evaluation_ticks": 5120,
+    "total_native_ticks": 205120
+  },
+  "dominant_work": {
+    "replay_actor_rows_expression": "2 arms *4969 updates *32 episodes *21 positions *5 slots *2 online/target passes",
+    "replay_actor_rows": 66783360,
+    "acting_actor_rows_expression": "2 arms *(5000+128) episodes *21 positions *5 slots",
+    "acting_actor_rows": 1076880,
+    "plus": "backpropagation/mixing and at most one64-vector state rescaling per eligible visited boundary for HALF_EVENT; no nested candidates, trajectory search, diagnosis, calibration or profiler",
+    "random_private_draws": 0
+  },
+  "projection": {
+    "RETAIN": {
+      "work_ratio_to_completed_B03": 1,
+      "previous_complete_chain_wall_seconds": 755.4,
+      "projected_complete_chain_wall_seconds": 755.4,
+      "per_arm_wall_cap_seconds": 1800
+    },
+    "HALF_EVENT": {
+      "work_ratio_to_completed_event_B03": 1,
+      "event_complete_chain_wall_proxy_seconds": 764.25,
+      "projected_complete_chain_wall_point_seconds": 764.25,
+      "new_arm_runtime": "unmeasured; proxy only, additional rescaling/trajectory/contention overhead unknown",
+      "per_arm_wall_cap_seconds": 1800
+    }
+  },
+  "caps": {
+    "accepted_invocations": 2,
+    "per_complete_arm_seconds": 1800,
+    "summed_pair_scientific_seconds": 3600,
+    "support_seconds": 300,
+    "directory_tests_cumulative_seconds_already_used": 25.9131638,
+    "directory_test_cap_seconds": 300
+  },
+  "stop": "RETAIN then HALF_EVENT, both preselected; one accepted invocation each. Failed invocation stops dependent sequence and preserves partial evidence. No scientific retry/replacement/additional arm/evaluation top-up in this allocation.",
+  "claim_ceiling": "one new matched fitting-instance half-attenuation-versus-retention trained-package contrast; no RANDOM superiority, recovery of old full-EVENT loss, causal timing, information preservation, stable population or transfer claim",
+  "projection_sum_seconds": 1519.65,
+  "omitted_random_point_cost_seconds": 821.64,
+  "source_loop_ranges_observed": [
+    [
+      1,
+      5001
+    ],
+    [
+      128
+    ]
+  ],
+  "state_rule": {
+    "RETAIN": "keep incoming true-survivor h",
+    "HALF_EVENT": "true survivor and public E: h_in=.5*h_in before GRU; otherwise carry h",
+    "factor": 0.5,
+    "sweep": false,
+    "common_freshness": "birth/inactive/episode fresh state; true-trip previous actions retained",
+    "reconstruction": "same selected rule in acting and online/target unrolls"
+  },
+  "scope_section4_counter_quantities": {
+    "counter_keys": [
+      "births",
+      "departures",
+      "survivor_opportunities",
+      "eligible_survivor_opportunities",
+      "survivor_resets",
+      "survivor_attenuations"
+    ],
+    "phases": [
+      "training",
+      "evaluation"
+    ],
+    "arms": [
+      "RETAIN",
+      "HALF_EVENT"
+    ],
+    "aggregate_totals": 24,
+    "attenuation_definition": "control-eligible true-survivor E boundary where .5 law is applied, even if the input vector is zero; excludes terminal computations and common fresh-state clears",
+    "new_framework": false
+  },
+  "seed_binding_search": "7807/107807 absent as standalone bindings in direction docs, scientific modules, runner and mirrored tests before the card was written; ordinary PRNG independence assumption, not paired final trajectories.",
+  "new_scientific_invocations_at_card_selection": 0
+}

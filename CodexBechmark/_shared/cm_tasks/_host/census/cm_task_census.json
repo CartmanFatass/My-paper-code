@@ -1,0 +1,536 @@
+{
+  "scope": {
+    "strict_agent_role": "hmasd-cm",
+    "all_strict_sessions": 131,
+    "window_start": "2026-09-06T07:00:00Z",
+    "window_end_exclusive": "2026-09-10T01:00:00Z",
+    "window_sessions": 27,
+    "cwd_rule": "HMASD or HMASD-worktrees, including \\?\\ prefix"
+  },
+  "category_counts": {
+    "new_or_extended_implementation": 13,
+    "bug_repair": 7,
+    "parameter_wiring": 2,
+    "integration": 1,
+    "execution_collection": 3,
+    "governance_support": 1
+  },
+  "rows": [
+    {
+      "thread_id": "01a079ca-e1bb-7cd3-95c3-b009f6251f26",
+      "agent_path": "/root/dm_amx_rcle_a02/cm_am_rcle_a02",
+      "created_utc": "2026-09-07T02:55:34Z",
+      "primary_category": "bug_repair",
+      "secondary_tags": [
+        "gradient",
+        "review"
+      ],
+      "excerpt_kind": "assistant_plan_summary",
+      "initial_assignment_excerpt": "inspect gradient path; repair A02",
+      "observed_session_git_sha": "4572ab1a7727c8d1098e5c52ac8a9bb7a8a3ff4c",
+      "source_pointers": [
+        "rollout:13",
+        "RCLE empirical_runner.py"
+      ],
+      "notes": "handoff unavailable"
+    },
+    {
+      "thread_id": "01a079cf-8ac8-7a00-aac3-cc5e627d7edc",
+      "agent_path": "/root/dm_amx_dish_seed101/cm_am_dish_seed101",
+      "created_utc": "2026-09-07T03:00:39Z",
+      "primary_category": "parameter_wiring",
+      "secondary_tags": [
+        "seed",
+        "master",
+        "review"
+      ],
+      "excerpt_kind": "assistant_plan_summary",
+      "initial_assignment_excerpt": "B05 seed plumbing",
+      "observed_session_git_sha": "c24ddec624b26e8d251384193a4f6660eef1e63e",
+      "source_pointers": [
+        "rollout:13",
+        "DISH control_low_lr_b04/study.py"
+      ],
+      "notes": ""
+    },
+    {
+      "thread_id": "01a079fc-2cce-7b43-b0ba-6ef080848e48",
+      "agent_path": "/root/dm_amx_cbsc_next/cm_cbsc_opportunity_b04",
+      "created_utc": "2026-09-07T03:49:25Z",
+      "primary_category": "new_or_extended_implementation",
+      "secondary_tags": [
+        "actor",
+        "Adam",
+        "runner",
+        "review"
+      ],
+      "excerpt_kind": "assistant_plan_summary",
+      "initial_assignment_excerpt": "build B04 learner path",
+      "observed_session_git_sha": "77c249ff51d9b39cecade317fd3b00610159672d",
+      "source_pointers": [
+        "rollout:13",
+        "CBSC omrc_b01/ppo.py,tapes.py"
+      ],
+      "notes": "new learner"
+    },
+    {
+      "thread_id": "01a07a35-4139-7a50-b804-c8bd6e5c74e5",
+      "agent_path": "/root/dm_amx_vspc1_next/cm_reactive_queues_b01",
+      "created_utc": "2026-09-07T04:51:45Z",
+      "primary_category": "new_or_extended_implementation",
+      "secondary_tags": [
+        "terminal",
+        "queue",
+        "runner"
+      ],
+      "excerpt_kind": "assistant_plan_summary",
+      "initial_assignment_excerpt": "implement reactive queues B01",
+      "observed_session_git_sha": "daed52c9f5256da355cd75de54db4053853f7e74",
+      "source_pointers": [
+        "rollout:13",
+        "VSPC1 k4_reactive_queues_b01",
+        "run_vspc1...py"
+      ],
+      "notes": "new path"
+    },
+    {
+      "thread_id": "01a07ab8-1c13-7281-9ffa-5365532558d3",
+      "agent_path": "/root/dm_ucope_question_prep/cm_am_ucope_native_return_b01",
+      "created_utc": "2026-09-07T07:14:41Z",
+      "primary_category": "new_or_extended_implementation",
+      "secondary_tags": [
+        "RNG",
+        "gradient",
+        "collector",
+        "evaluator"
+      ],
+      "excerpt_kind": "assistant_plan_summary",
+      "initial_assignment_excerpt": "implement native return collector/evaluator",
+      "observed_session_git_sha": "373d187200a91942385e9380770dcf9f8098aada",
+      "source_pointers": [
+        "rollout:13",
+        "UCOPE native_return_acquisition_b01"
+      ],
+      "notes": "new learner/runner"
+    },
+    {
+      "thread_id": "01a07d38-165d-70a2-b4bf-de6eeba82032",
+      "agent_path": "/root/dm_amx_vsp03_next/cm_vsp03_b02",
+      "created_utc": "2026-09-07T18:53:42Z",
+      "primary_category": "new_or_extended_implementation",
+      "secondary_tags": [
+        "publication",
+        "review"
+      ],
+      "excerpt_kind": "assistant_plan_summary",
+      "initial_assignment_excerpt": "prepare VSP03 B02 implementation",
+      "observed_session_git_sha": "33ed0594070f26092ec90fd842efc1543abdc839",
+      "source_pointers": [
+        "rollout:13",
+        "VSP03 path unresolved"
+      ],
+      "notes": ""
+    },
+    {
+      "thread_id": "01a07db1-80bd-7520-b309-cc62a6bac48d",
+      "agent_path": "/root/cm_ucope_p11_b05_collect",
+      "created_utc": "2026-09-07T21:06:19Z",
+      "primary_category": "execution_collection",
+      "secondary_tags": [
+        "terminal",
+        "receipt"
+      ],
+      "excerpt_kind": "assistant_plan_summary",
+      "initial_assignment_excerpt": "collect accepted UCOPE evidence",
+      "observed_session_git_sha": "d6844bb25f6f1030aa7123467935861dcc719450",
+      "source_pointers": [
+        "rollout:13",
+        "rollout JSONL"
+      ],
+      "notes": "no code"
+    },
+    {
+      "thread_id": "01a07dc3-d972-7c71-aedb-02cc3c6d5288",
+      "agent_path": "/root/cm_frrie_p12_a04_collect",
+      "created_utc": "2026-09-07T21:26:22Z",
+      "primary_category": "execution_collection",
+      "secondary_tags": [
+        "terminal",
+        "receipt"
+      ],
+      "excerpt_kind": "assistant_plan_summary",
+      "initial_assignment_excerpt": "collect FRRIE terminal evidence",
+      "observed_session_git_sha": "39b9446614e8304992b1e916c40f6f8a7518b6a5",
+      "source_pointers": [
+        "rollout:13",
+        "rollout JSONL"
+      ],
+      "notes": "no code"
+    },
+    {
+      "thread_id": "01a07e34-311b-7682-b4d8-125677f33acd",
+      "agent_path": "/root/vsp02_cm_baseline_b01",
+      "created_utc": "2026-09-07T23:29:04Z",
+      "primary_category": "new_or_extended_implementation",
+      "secondary_tags": [
+        "baseline",
+        "review"
+      ],
+      "excerpt_kind": "assistant_plan_summary",
+      "initial_assignment_excerpt": "implement VSP02 baseline",
+      "observed_session_git_sha": "2e25a1276f8bd9d920b7a9229e7dfc2200e14d57",
+      "source_pointers": [
+        "rollout:13",
+        "VSP02 path unresolved"
+      ],
+      "notes": ""
+    },
+    {
+      "thread_id": "01a07e89-46e5-7882-8202-2f19645fbfce",
+      "agent_path": "/root/fsd_cm_baseline_a01",
+      "created_utc": "2026-09-08T01:02:00Z",
+      "primary_category": "new_or_extended_implementation",
+      "secondary_tags": [
+        "baseline",
+        "review"
+      ],
+      "excerpt_kind": "assistant_plan_summary",
+      "initial_assignment_excerpt": "implement FSD baseline",
+      "observed_session_git_sha": "c8d09a7750b5c238e8547758392310fdc8e6a82f",
+      "source_pointers": [
+        "rollout:13",
+        "FSD path unresolved"
+      ],
+      "notes": ""
+    },
+    {
+      "thread_id": "01a07e93-8a85-7fc2-a471-92380a62eb65",
+      "agent_path": "/root/ucope_cm_baseline_b01",
+      "created_utc": "2026-09-08T01:13:13Z",
+      "primary_category": "new_or_extended_implementation",
+      "secondary_tags": [
+        "baseline",
+        "review"
+      ],
+      "excerpt_kind": "assistant_plan_summary",
+      "initial_assignment_excerpt": "implement UCOPE baseline",
+      "observed_session_git_sha": "7ade976631b1e82d4032c2e00855715e7ae03f8f",
+      "source_pointers": [
+        "rollout:13",
+        "UCOPE uav_motion_prefix_b01"
+      ],
+      "notes": ""
+    },
+    {
+      "thread_id": "01a07f54-6106-72d2-9e0e-556bddfb9360",
+      "agent_path": "/root/dm_frrie_p13_intake/cm_frrie_p22_collection",
+      "created_utc": "2026-09-08T04:43:51Z",
+      "primary_category": "execution_collection",
+      "secondary_tags": [
+        "failure_trace",
+        "receipt"
+      ],
+      "excerpt_kind": "assistant_plan_summary",
+      "initial_assignment_excerpt": "collect artifacts and trace failure",
+      "observed_session_git_sha": "79a29fd70c3edcf8caac18d8658c75c53917f447",
+      "source_pointers": [
+        "rollout:13",
+        "rollout JSONL"
+      ],
+      "notes": "evidence only"
+    },
+    {
+      "thread_id": "01a081bf-7d4b-76e0-9322-0bd6198070d8",
+      "agent_path": "/root/dm_ucope_p47_resume/cm_am_ucope_b02_p47",
+      "created_utc": "2026-09-08T16:00:05Z",
+      "primary_category": "bug_repair",
+      "secondary_tags": [
+        "clipping",
+        "gradient",
+        "terminal",
+        "review"
+      ],
+      "excerpt_kind": "assistant_plan_summary",
+      "initial_assignment_excerpt": "repair B02 clipping/credit path",
+      "observed_session_git_sha": "6dd7570e9e8045fb3818c553953a92c9caa587cb",
+      "source_pointers": [
+        "rollout:13,47,68,75,161,211,255",
+        "UCOPE uav_motion_prefix_b01"
+      ],
+      "notes": "reused through 7001/7002 and B03/B04"
+    },
+    {
+      "thread_id": "01a081bf-b176-7dd2-9ee8-6a232f6de382",
+      "agent_path": "/root/dm_fsd_p47_resume/cm_am_fsd_b03_p47",
+      "created_utc": "2026-09-08T16:00:18Z",
+      "primary_category": "bug_repair",
+      "secondary_tags": [
+        "resume",
+        "fake_only",
+        "review"
+      ],
+      "excerpt_kind": "assistant_plan_summary",
+      "initial_assignment_excerpt": "repair FSD B03",
+      "observed_session_git_sha": "6dd7570e9e8045fb3818c553953a92c9caa587cb",
+      "source_pointers": [
+        "rollout:13",
+        "FSD path unresolved"
+      ],
+      "notes": ""
+    },
+    {
+      "thread_id": "01a081c0-46d6-7cf2-a521-f405bff38bb8",
+      "agent_path": "/root/dm_frrie_p47_repair/cm_am_frrie_p47_repair",
+      "created_utc": "2026-09-08T16:00:57Z",
+      "primary_category": "bug_repair",
+      "secondary_tags": [
+        "adapter",
+        "diagnostic",
+        "review"
+      ],
+      "excerpt_kind": "assistant_plan_summary",
+      "initial_assignment_excerpt": "resolve adapter fault hypothesis",
+      "observed_session_git_sha": "6dd7570e9e8045fb3818c553953a92c9caa587cb",
+      "source_pointers": [
+        "rollout:13",
+        "FRRIE path unresolved"
+      ],
+      "notes": ""
+    },
+    {
+      "thread_id": "01a081c2-7890-7163-abd6-415c89e0d60b",
+      "agent_path": "/root/dm_cbsc_p47_repair/cm_am_cbsc_p47_repair",
+      "created_utc": "2026-09-08T16:03:20Z",
+      "primary_category": "bug_repair",
+      "secondary_tags": [
+        "prefix",
+        "diagnostic",
+        "review"
+      ],
+      "excerpt_kind": "assistant_plan_summary",
+      "initial_assignment_excerpt": "repair CBSC prefix boundary",
+      "observed_session_git_sha": "6dd7570e9e8045fb3818c553953a92c9caa587cb",
+      "source_pointers": [
+        "rollout:13",
+        "CBSC path unresolved"
+      ],
+      "notes": ""
+    },
+    {
+      "thread_id": "01a0822a-1f07-7601-83a8-a26126a6c30f",
+      "agent_path": "/root/dm_vspc1_p49_value_question/cm_am_vspc1_hold_value_b01",
+      "created_utc": "2026-09-08T17:56:33Z",
+      "primary_category": "new_or_extended_implementation",
+      "secondary_tags": [
+        "duration",
+        "comparison",
+        "review"
+      ],
+      "excerpt_kind": "assistant_plan_summary",
+      "initial_assignment_excerpt": "implement hold-value comparison",
+      "observed_session_git_sha": "3dc17b74b6050679dd84fd4a561fc7579cae36d2",
+      "source_pointers": [
+        "rollout:13",
+        "VSPC1 native_hold_value_b01"
+      ],
+      "notes": ""
+    },
+    {
+      "thread_id": "01a0828e-2172-7803-b10e-2aee46759a00",
+      "agent_path": "/root/dm_dish_p53_native_proposal_question/cm_am_dish_b07",
+      "created_utc": "2026-09-08T19:45:47Z",
+      "primary_category": "parameter_wiring",
+      "secondary_tags": [
+        "mode",
+        "identity",
+        "review"
+      ],
+      "excerpt_kind": "assistant_plan_summary",
+      "initial_assignment_excerpt": "propagate DISH mode",
+      "observed_session_git_sha": "f5d6edf873b45a34f231b6cc31e41e7f09ee07a4",
+      "source_pointers": [
+        "rollout:13",
+        "DISH path unresolved"
+      ],
+      "notes": ""
+    },
+    {
+      "thread_id": "01a082ac-28b2-7c82-8fd2-e0a7ef062390",
+      "agent_path": "/root/dm_vsp03_p54_reentry/cm_b03_single_g",
+      "created_utc": "2026-09-08T20:18:35Z",
+      "primary_category": "new_or_extended_implementation",
+      "secondary_tags": [
+        "single_path",
+        "review"
+      ],
+      "excerpt_kind": "assistant_plan_summary",
+      "initial_assignment_excerpt": "implement VSP03 single-G path",
+      "observed_session_git_sha": "a58a6f98b7adb2d129a01f0c3d74954f7e8f2596",
+      "source_pointers": [
+        "rollout:13",
+        "VSP03 path unresolved"
+      ],
+      "notes": ""
+    },
+    {
+      "thread_id": "01a0847a-24aa-7c23-a51a-378f4aeb8539",
+      "agent_path": "/root/dm_crto_p68_reentry/cm_crto_native_cost_b08",
+      "created_utc": "2026-09-09T04:43:12Z",
+      "primary_category": "bug_repair",
+      "secondary_tags": [
+        "loss",
+        "accounting",
+        "review"
+      ],
+      "excerpt_kind": "assistant_plan_summary",
+      "initial_assignment_excerpt": "repair CRTO loss/accounting",
+      "observed_session_git_sha": "7e7ad937b42dfee4f81a1b99ff74c993c6d9cff7",
+      "source_pointers": [
+        "rollout:13",
+        "CRTO path unresolved"
+      ],
+      "notes": ""
+    },
+    {
+      "thread_id": "01a0847a-43eb-7731-be5c-98c0297fa0e1",
+      "agent_path": "/root/cm_ucope_main_integration_p70",
+      "created_utc": "2026-09-09T04:43:20Z",
+      "primary_category": "integration",
+      "secondary_tags": [
+        "normalization",
+        "merge",
+        "review"
+      ],
+      "excerpt_kind": "assistant_plan_summary",
+      "initial_assignment_excerpt": "reconcile UCOPE renewal with main",
+      "observed_session_git_sha": "7e7ad937b42dfee4f81a1b99ff74c993c6d9cff7",
+      "source_pointers": [
+        "rollout:13",
+        "experiments/candidates/ucope"
+      ],
+      "notes": ""
+    },
+    {
+      "thread_id": "01a084ef-b7a9-7991-96ff-835148902291",
+      "agent_path": "/root/cm_mgtap_p72_repair",
+      "created_utc": "2026-09-09T06:51:37Z",
+      "primary_category": "bug_repair",
+      "secondary_tags": [
+        "readiness",
+        "review"
+      ],
+      "excerpt_kind": "assistant_plan_summary",
+      "initial_assignment_excerpt": "repair MGTAP readiness gaps",
+      "observed_session_git_sha": "6485fe0080abafe7521ed89f3425516407303d78",
+      "source_pointers": [
+        "rollout:13",
+        "MGTAP path unresolved"
+      ],
+      "notes": ""
+    },
+    {
+      "thread_id": "01a085cc-17b3-7bd1-a8fc-24830a30c5d7",
+      "agent_path": "/root/dm_acvc_p68_reentry/cm_am_acvc_native_b01",
+      "created_utc": "2026-09-09T10:52:20Z",
+      "primary_category": "new_or_extended_implementation",
+      "secondary_tags": [
+        "recurrence",
+        "gate_loss",
+        "RNG",
+        "review"
+      ],
+      "excerpt_kind": "assistant_plan_summary",
+      "initial_assignment_excerpt": "implement ACVC native link-loss path",
+      "observed_session_git_sha": "a601e6078a2182218f5e5460180656c47c78928e",
+      "source_pointers": [
+        "rollout:13",
+        "ACVC native_link_loss_b01"
+      ],
+      "notes": "new learner/runner"
+    },
+    {
+      "thread_id": "01a08702-d1ef-7ca0-afe3-45ba22d88518",
+      "agent_path": "/root/dm_folr_p68_reentry/cm_public_lifecycle_b01",
+      "created_utc": "2026-09-09T16:31:44Z",
+      "primary_category": "new_or_extended_implementation",
+      "secondary_tags": [
+        "terminal",
+        "state",
+        "RNG",
+        "review"
+      ],
+      "excerpt_kind": "assistant_plan_summary",
+      "initial_assignment_excerpt": "implement FOLR lifecycle path",
+      "observed_session_git_sha": "75df5334089d7d26e1d7f9dc460599c1b9466930",
+      "source_pointers": [
+        "rollout:13,67,72,97,106,121,165,173,193,205,257,267,275,288,363,566,575",
+        "vap_folr_core/public_lifecycle_b01",
+        "delivered 387a40f3"
+      ],
+      "notes": "new adapter/runner/tests"
+    },
+    {
+      "thread_id": "01a0870c-2ef0-7393-bea5-e0ee2e424100",
+      "agent_path": "/root/dm_scdmp_p56_return_composition/cm_hold_residual_b01",
+      "created_utc": "2026-09-09T16:41:57Z",
+      "primary_category": "new_or_extended_implementation",
+      "secondary_tags": [
+        "duration",
+        "discount",
+        "residual",
+        "review"
+      ],
+      "excerpt_kind": "assistant_plan_summary",
+      "initial_assignment_excerpt": "implement held-segment residual path",
+      "observed_session_git_sha": "56e5b6b2f9d748713e73731496f412cca68165d3",
+      "source_pointers": [
+        "rollout:13",
+        "SCDMP path unresolved"
+      ],
+      "notes": ""
+    },
+    {
+      "thread_id": "01a08730-10fe-74e3-a163-29be9c8bd61d",
+      "agent_path": "/root/dm_rcle_p47_transport_recovery/cm_actor100_b03",
+      "created_utc": "2026-09-09T17:21:09Z",
+      "primary_category": "new_or_extended_implementation",
+      "secondary_tags": [
+        "seed",
+        "identity",
+        "weighted_loss",
+        "RNG",
+        "review"
+      ],
+      "excerpt_kind": "assistant_plan_summary",
+      "initial_assignment_excerpt": "implement actor100 loss and seed wiring",
+      "observed_session_git_sha": "664afecaf36c6f436dbe870fd6c80afb11a05d75",
+      "source_pointers": [
+        "rollout:13,1046,1059,1064,1078,1105,1114,1123,1131,1228,1257,1268,1291,1321",
+        "RCLE tbcfv_b03/study.py",
+        "delivered 4d96a832e"
+      ],
+      "notes": "same CM reused through recovery/launch/collection"
+    },
+    {
+      "thread_id": "01a0873a-02fa-7362-a51d-90e70126c44d",
+      "agent_path": "/root/cm_foundations_activation",
+      "created_utc": "2026-09-09T17:32:01Z",
+      "primary_category": "governance_support",
+      "secondary_tags": [
+        "renderer",
+        "skill_activation",
+        "review"
+      ],
+      "excerpt_kind": "assistant_plan_summary",
+      "initial_assignment_excerpt": "repair activation renderer/output modes",
+      "observed_session_git_sha": "05f7473af6454e597e815e50bf69ac503d8e35b0",
+      "source_pointers": [
+        "rollout:13",
+        "foundations audit"
+      ],
+      "notes": "control-plane"
+    }
+  ],
+  "observed_session_git_sha_note": "SQLite threads.git_sha observed at session creation; not asserted to be delivered patch or frozen input.",
+  "full_detail_csv": "cm_task_census.csv"
+}

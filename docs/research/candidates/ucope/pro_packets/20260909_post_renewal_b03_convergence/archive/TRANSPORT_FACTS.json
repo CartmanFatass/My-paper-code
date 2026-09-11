@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "request_id": "2026-09-09-ucope-post-renewal-b03-convergence-01",
+  "workflow_node": "em_convergence",
+  "conversation_binding_key": "em:ucope:convergence",
+  "direction_id": "ucope",
+  "direction_ids": [
+    "ucope"
+  ],
+  "conversation_id": "6a9c6b1c-1c34-83e8-8ebc-dee64b334240",
+  "provider_url": "https://chatgpt.com/c/6a9c6b1c-1c34-83e8-8ebc-dee64b334240",
+  "user_message_id": "453af7d8-ffb2-4ec4-ba22-874bed3810fb",
+  "assistant_message_id": "2b74a54f-b9c5-47e7-bf34-28abed57d974",
+  "visible_model": "6 Pro",
+  "underlying_model": "Latest",
+  "thinking_effort": "Pro, 5 of 5.",
+  "source_mode": "paste",
+  "prompt_sha256": "80a299ccc2a866d046574b650219103e16c2953a636b0aa2a09dbb18f756ddce",
+  "response_sha256": "279fe49d06bb83138c84aa7420e4e8273f47ba44bf542c4751276bdf196d051e",
+  "response_characters": 398,
+  "response_bytes": 402,
+  "send_click_count": 1,
+  "send_evidence": {
+    "send_click_count": 1,
+    "send_attempted": true,
+    "url_observed": true,
+    "user_node_observed": true,
+    "user_node_exact": true,
+    "user_message_id": "453af7d8-ffb2-4ec4-ba22-874bed3810fb",
+    "provider_url_observed": "https://chatgpt.com/c/6a9c6b1c-1c34-83e8-8ebc-dee64b334240",
+    "binding_match": true,
+    "paste_mode": true
+  },
+  "identity_validation": "PASS",
+  "identity_expected": {
+    "conversation_id": "6a9c6b1c-1c34-83e8-8ebc-dee64b334240",
+    "user_message_id": "453af7d8-ffb2-4ec4-ba22-874bed3810fb",
+    "assistant_message_id": "2b74a54f-b9c5-47e7-bf34-28abed57d974"
+  },
+  "identity_observed": {
+    "conversation_id": "6a9c6b1c-1c34-83e8-8ebc-dee64b334240",
+    "user_message_id": "453af7d8-ffb2-4ec4-ba22-874bed3810fb",
+    "assistant_message_id": "2b74a54f-b9c5-47e7-bf34-28abed57d974"
+  },
+  "archive_paths": {
+    "manifest_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\ucope\\2026-09-09-ucope-post-renewal-b03-convergence-01\\2026-09-09-ucope-post-renewal-b03-convergence-01--ucope__PACKET_MANIFEST.json",
+    "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\ucope\\2026-09-09-ucope-post-renewal-b03-convergence-01\\2026-09-09-ucope-post-renewal-b03-convergence-01--ucope__00_PROMPT.md",
+    "reference_files": [],
+    "response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\ucope\\2026-09-09-ucope-post-renewal-b03-convergence-01\\2026-09-09-ucope-post-renewal-b03-convergence-01--ucope--attempt-01__02_RESPONSE.md",
+    "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\ucope\\2026-09-09-ucope-post-renewal-b03-convergence-01\\2026-09-09-ucope-post-renewal-b03-convergence-01--ucope--attempt-01__03_TRANSPORT_FACTS.json",
+    "response_sha256": "279fe49d06bb83138c84aa7420e4e8273f47ba44bf542c4751276bdf196d051e"
+  },
+  "wait_status": "NATURAL_COMPLETION",
+  "observed_page_state": "Worked for 17m 20s; complete assistant response; Copy response present; no active generation control",
+  "capture_method": "Current-round scoped Copy response control via CUA clipboard.read; raw UTF-8 response preserved",
+  "archive_status": "ARCHIVED",
+  "timestamps": {
+    "completed_at": "2026-09-09T09:22:26Z",
+    "captured_at": "2026-09-09T09:22:26Z",
+    "archived_at": "2026-09-09T09:22:26Z"
+  },
+  "scientific_decision_formed": false,
+  "return_receipt": {
+    "required": true,
+    "source_thread_id": "01a081bd-a835-78c0-8a7a-89471ed262f8",
+    "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+    "destination_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+    "status": "SENT",
+    "attempt_count": 1,
+    "message_key": "2026-09-09-ucope-post-renewal-b03-convergence-01|ucope|6a9c6b1c-1c34-83e8-8ebc-dee64b334240|279fe49d06bb83138c84aa7420e4e8273f47ba44bf542c4751276bdf196d051e",
+    "retry_allowed": false,
+    "routing_mode": "PARENT_SESSION",
+    "delivery_mode": "bounded_single_attempt",
+    "return_control_after_attempt": true,
+    "archive_paths": {
+      "manifest_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\ucope\\2026-09-09-ucope-post-renewal-b03-convergence-01\\2026-09-09-ucope-post-renewal-b03-convergence-01--ucope__PACKET_MANIFEST.json",
+      "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\ucope\\2026-09-09-ucope-post-renewal-b03-convergence-01\\2026-09-09-ucope-post-renewal-b03-convergence-01--ucope__00_PROMPT.md",
+      "reference_files": [],
+      "response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\ucope\\2026-09-09-ucope-post-renewal-b03-convergence-01\\2026-09-09-ucope-post-renewal-b03-convergence-01--ucope--attempt-01__02_RESPONSE.md",
+      "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\ucope\\2026-09-09-ucope-post-renewal-b03-convergence-01\\2026-09-09-ucope-post-renewal-b03-convergence-01--ucope--attempt-01__03_TRANSPORT_FACTS.json",
+      "response_sha256": "279fe49d06bb83138c84aa7420e4e8273f47ba44bf542c4751276bdf196d051e"
+    },
+    "response_sha256": "279fe49d06bb83138c84aa7420e4e8273f47ba44bf542c4751276bdf196d051e",
+    "staged_at": "2026-09-09T09:22:26Z",
+    "fallback_enabled": false,
+    "delivery_status": "accepted",
+    "sent_at": "2026-09-09T09:23:22Z",
+    "updated_at": "2026-09-09T09:23:22Z"
+  },
+  "tab_lifecycle": "CLOSED",
+  "tab_closed_at": "2026-09-09T09:22:51Z"
+}

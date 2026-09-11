@@ -1,0 +1,75 @@
+{
+  "id": "20260909-ucope-015",
+  "created": "2026-09-09T16:07:05-07:00",
+  "direction": "ucope",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "UCOPE：第二个独立连续训练对8602",
+  "context": "Claim: useful final short-renewal package gain recurs on a fresh matched continuous2048 training pair. Binding MARL structure: temporal abstraction or termination, five partially observed co-adapting UAVs. Root1040f2d97 allocates one pair after full8601 intake; freeze8602 with new actual RNG streams and unchanged raw F/G/H, final2048 primary and all fixed checkpoints. This item records card freeze, not an accepted launch.",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "完成新卡冻结，并依Root既有分配推进一个训练对；无自动第三对或后继。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "在下一干净边界停止尚未接受的后续执行，保留已有证据。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "先应用明确修订，再推进受影响的尚未执行部分；不改写8601。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "8601的最终包增益与两臂悬停收益支持一次独立训练历史；完整混合曲线和所有新结果仍保留。",
+  "evidence": [
+    "docs/research/candidates/ucope/UCOPE_UAV_SHORT_FIXED_RENEWAL_CONTINUOUS_B01_8602_SCIENCE_CARD_20260909.md",
+    "docs/research/candidates/ucope/UCOPE_UAV_SHORT_FIXED_RENEWAL_CONTINUOUS_B01_8602_INTAKE_20260909.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-09.md#L183",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "按既有分配，冻结并执行第二个独立的连续2048轮F/G训练对8602，检查最终收益与悬停优势能否再现吗？",
+    "changes_if_approved": [
+      {
+        "target": "docs/research/candidates/ucope/UCOPE_UAV_SHORT_FIXED_RENEWAL_CONTINUOUS_B01_8602_SCIENCE_CARD_20260909.md",
+        "from": "8601已完成，尚无8602科学输出",
+        "to": "冻结8602新初始化、训练与评价种子；同配方一对训练及完整曲线，最终2048为主"
+      }
+    ],
+    "if_refused": "在下一干净边界应用你的异步覆盖，停止尚未接受的后续执行并保留已有事实；不改写8601或自动替换试验。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_UAV_SHORT_FIXED_RENEWAL_CONTINUOUS_B01_8601_RESULT_EVIDENCE_20260909.md",
+        "quote": "The owner-selected final budget yields a favorable fixed-renewal package point\nwith separate F and G hover gains on this instance.",
+        "why": "最终包差异超过.01，两个学习策略都高于悬停，支持一个新的独立历史。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_UAV_SHORT_FIXED_RENEWAL_CONTINUOUS_B01_8601_RESULT_EVIDENCE_20260909.md",
+        "quote": "The1024 WITHIN point and\n37/64 final favorable F−G worlds limit any uniform-advantage reading.",
+        "why": "中间点并不领先，且只有一个训练实例；不应把条件评价误差当作跨训练不确定性。"
+      }
+    ],
+    "uncertainty": [
+      "8602可能正向、混合或反向，所有结果保留；两对仍不证明稳定优越或纯时长因果。",
+      "调优的同信息headroom仍缺失，悬停不是上界。"
+    ],
+    "cost": {
+      "compute": "一对新增1163264 native步、8192 Adam、448评价；同工作量参考1289.50秒，1800秒/完整臂、3600秒/整体、300秒新支持工作，原测试目录耗时仍累计。",
+      "owner_time": "异步查看，无需逐项批准；已有Root分配1040f2d97。",
+      "reversibility": "costly",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "冻结并执行已分配的8602独立训练对，保持raw F/G/H、固定短保持、连续2048轮与三个固定评价点；不自动追加第三对或可学习时长。",
+    "source": "docs/research/candidates/ucope/UCOPE_UAV_SHORT_FIXED_RENEWAL_CONTINUOUS_B01_8602_INTAKE_20260909.md"
+  },
+  "starred": false
+}

@@ -17,6 +17,10 @@ or uncertain external acceptance needs factual reconciliation with the assigning
 continue independent authorized work. This instruction grants no new scientific invocation,
 write ownership, destructive operation, or authority beyond the existing assignment.
 
+Scientific reading: for the reviewed scientific claim, use
+`.agents/skills/hmasd-scientific-tools/SKILL.md` scientific-reading mode after the
+assignment and relevant spec sections. Limit reading to concepts affecting this claim.
+
 Tool adoption (OWNER_DIRECT 2026-09-05): when the task involves retrieval, arithmetic,
 analysis, profiling or a baseline/adapter, read .agents/skills/hmasd-scientific-tools/SKILL.md
 and only the relevant reference. Use retrieved primary sources and computed comparisons for factual objections; generic statistical checklists do not define MARL exploratory adequacy.
@@ -43,8 +47,9 @@ follow-up; state the narrower ceiling and the evidence needed for the stronger c
 project-wide exact replay, extreme tolerances, exhaustive cause-first diagnosis, full historical
 replay, or a line-ratio pass unless the current claim or a concrete correctness risk requires it.
 
-Retrieve a needed primary-source fact directly through the scientific-tools skill. You may use
-a CM Scout for one code/configuration fact that creates or removes a material objection.
+Retrieve a needed primary-source fact directly through the scientific-tools skill. Do not create
+children. Return a missing code/configuration fact that could change the objection to the assigning
+DM so it can resolve the question or assign a Scout sibling.
 If a premise remains ambiguous after checking
 one exact cited artifact, state a conditional objection and needed discriminator. Return the
 strongest material objection or that none was found, decisive discriminator, counterevidence,

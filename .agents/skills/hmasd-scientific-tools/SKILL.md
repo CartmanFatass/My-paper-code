@@ -1,6 +1,6 @@
 ---
 name: hmasd-scientific-tools
-description: Use for HMASD literature retrieval, computed experiment counts, run-table analysis and plots, a concrete performance bottleneck, or choosing a MARL baseline/environment adapter. Supplies executable analysis and task-specific tool routing.
+description: Use for HMASD scientific design, comparison, interpretation or review, literature retrieval, computed experiment counts, run-table analysis and plots, a concrete performance bottleneck, or choosing a MARL baseline/environment adapter. Supplies executable analysis and task-specific tool routing.
 ---
 
 # HMASD scientific tools
@@ -9,6 +9,12 @@ Owner approved adoption batches 1 and 2 on 2026-09-05. Use tools to retrieve,
 calculate and measure facts instead of repeatedly deriving them in prose. Select
 only the mode needed now; this is not a launch checklist or new review layer.
 
+- **Scientific reading:** for DM/Claude hub mechanism/card/comparator/estimand choices,
+  intake or scientific Pro questions, the designated DM's Portfolio material preparation and Pro-response conformance, and a
+  critic's reviewed claim, use [scientific-reading.md](references/scientific-reading.md).
+  Implementer/reviewer use it only for affected reward, information, termination, duration or
+  inference semantics. Start from the current assignment and relevant spec sections.
+  Formatting, Git, receipts and accepted technical collection do not trigger this mode.
 - **DM/Root literature:** for a concrete mechanism, comparator, unexpected-result or
   related-work question, start with the two local libraries using
   [local-literature.md](references/local-literature.md). Search indexes first and
@@ -32,7 +38,7 @@ only the mode needed now; this is not a launch checklist or new review layer.
   Do not pass episode rows or repeated checkpoints as independent training seeds.
   For curves or different estimands use a short task-specific Pandas/SciPy/Matplotlib
   script instead. A tool's output does not choose the estimand or establish validity.
-- **CM performance:** use existing timings first; if a concrete decision remains,
+- **Engineering performance:** use existing timings first; if a concrete decision remains,
   scope a short torch.profiler window or torch.utils.benchmark call in the current
   engineering assignment. Preserve declared scientific semantics; separate profiling
   overhead/microbenchmarks from complete-run wall. No repeated mandatory profiling,
@@ -49,7 +55,7 @@ do not upgrade the live research interpreter. Frozen experiments keep their cont
 New tools do not authorize new arms, altered reward/information or changed dtypes.
 
 Keep compact tool-produced tables/timings and relevant source snippets in the normal
-intake/engineering record. Root/DM/Pro judge scientific implications; reviewers name
+intake/engineering record. DM/Pro judge scientific implications within their respective decision scopes; reviewers name
 concrete risks to actual measurements. Do not add generic power, normality, p-value,
 exactness or all-seeds-positive prerequisites. One seed remains a local observation.
 

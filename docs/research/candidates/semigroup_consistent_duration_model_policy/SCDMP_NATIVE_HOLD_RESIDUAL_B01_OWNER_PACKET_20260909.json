@@ -1,0 +1,49 @@
+{
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260908_held_residual_context_repair/archive/RESPONSE.md",
+      "quote": "选择原候选 SCDMP-NATIVE-HOLD-RESIDUAL-B01，作为一次方向局部的 B/EXPLORE；确认先前完整答复的对象选择，也确认其“新的实质 RECAST”分类。",
+      "why": "新合规上下文中的完整方向裁决，只选原有一组比较，并要求真实记录重铸。"
+    },
+    {
+      "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_NATIVE_HOLD_RESIDUAL_B01_SCIENCE_CARD_20260909.md",
+      "quote": "Both values come from the current epoch's complete-batch critic output and both retain gradients.",
+      "why": "这是改变学习目标的双端梯度耦合，保留完整MC与同信息比较器。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260908_held_residual_context_repair/CONVERGENCE_INTAKE_20260909.md",
+      "quote": "Strongest contradiction: sparse opening pairs can couple imperfect predictions, the full MLP may suffice, and residual/clipping effects can harm control.",
+      "why": "已有MLP可能足够；少量残差对不保证原生收益。"
+    },
+    {
+      "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260908_held_residual_context_repair/archive/RESPONSE.md",
+      "quote": "两组 T−G 均负、两个 T−H 也负，是对乐观可用控制预期的更近反证，不是新残差已失败。",
+      "why": "保留另一个原生时长实验的不利背景，不能借门控正号预判本方法。"
+    }
+  ],
+  "uncertainty": [
+    "尚无新损失的训练结果；一组训练不能估计训练总体方差。",
+    "两臂都可能低于H，残差下降不能补偿原生损失。",
+    "保持支持稀疏，可能得到合法但零辅助项的观察。",
+    "同信息调优headroom缺失；不增设前置测量。"
+  ],
+  "cost": {
+    "compute": "只给原来一组：286720原生步、2048次Adam、96次最终评价，1800秒/臂、3600秒/整对；无额外种子、pilot或自动重试。",
+    "owner_time": "无需立即回复；可在批改台异步改变后续安排。",
+    "reversibility": "costly",
+    "waits_on_this": "nothing"
+  },
+  "verdict_text": "选择原候选 SCDMP-NATIVE-HOLD-RESIDUAL-B01，作为一次方向局部的 B/EXPLORE；确认先前完整答复的对象选择，也确认其“新的实质 RECAST”分类。",
+  "source": "docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260908_held_residual_context_repair/archive/RESPONSE.md",
+  "question": "接受这张固定单组残差MC对比卡，按原预算完成实现、review、一次运行和全部结果intake吗？",
+  "changes_if_approved": [
+    {
+      "target": "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_NATIVE_HOLD_RESIDUAL_B01_SCIENCE_CARD_20260909.md",
+      "from": "来源阶段候选，未冻结当前B卡",
+      "to": "master8201双臂、完整MC、固定双端残差、最终sampled评价与H，按原上限实施。"
+    }
+  ],
+  "if_refused": "按所有者拒绝或修订指令处理尚未执行部分；不擅自换机制、种子、预算或解释已见结果。"
+}

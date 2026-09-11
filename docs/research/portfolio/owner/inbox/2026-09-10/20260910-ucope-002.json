@@ -1,0 +1,76 @@
+{
+  "id": "20260910-ucope-002",
+  "created": "2026-09-10T12:13:26-07:00",
+  "direction": "ucope",
+  "tier": "object",
+  "kind": "close-call",
+  "title": "UCOPE 8702：一次独立同配方复测的接近取舍",
+  "context": "8701的T/G与T/F三个点均为负，但精确学习短续约只有一个独立实例。选择新8702一次T/F/G复测，检验负结果是否重现；不改机制，不自动重复。",
+  "options": [
+    {
+      "key": "a",
+      "label": "一次新8702同配方T/F/G",
+      "consequence": "新额度三fit各2048局，完整5400秒内；保留每个结果后再决定。"
+    },
+    {
+      "key": "b",
+      "label": "现在结束同配方支出",
+      "consequence": "不再新增本次计算；实际方向处置问题送原方向节点。"
+    },
+    {
+      "key": "c",
+      "label": "先改变时长学习或信用路径",
+      "consequence": "需要另行明确机制与预算，不能用变更配方回答此次重现问题。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "一次独立三fit直接区分已有负结果的重现与实例变动，成本已知，但与结束支出的取舍接近。",
+  "evidence": [
+    "docs/research/candidates/ucope/UCOPE_UAV_SHORT_LEARNED_RENEWAL_CONTINUOUS_B01_8702_SCIENCE_CARD_20260910.md",
+    "docs/research/candidates/ucope/UCOPE_UAV_SHORT_LEARNED_RENEWAL_CONTINUOUS_B01_8702_INTAKE_20260910.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-10.md#L17",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否保留这个接近取舍边界的一次独立同配方复测8702及其新卡？",
+    "changes_if_approved": [
+      {
+        "target": "UCOPE learned-short ·8702",
+        "from": "8701已完整结束且结果为负；只有一组精确同配方训练证据",
+        "to": "独立执行一次新T/F/G训练，每个2048局；保留所有固定检查点与悬停比较，不自动追加第三组"
+      }
+    ],
+    "if_refused": "在下一清洁边界应用明确异议，保留已发生支出和全部结果；结束这个新额度，不改旧结果。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_UAV_SHORT_LEARNED_RENEWAL_CONTINUOUS_B01_8701_INTAKE_20260910.md",
+        "quote": "one separately allocated independent\nsame-recipe T/F/G instance would distinguish recurrence of the observed loss\nfrom this fit's variation.",
+        "why": "目前精确学习短续约只有一组；固定F相对G的符号也随实例变化，另一组能直接检验负结果是否重现。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_UAV_SHORT_LEARNED_RENEWAL_CONTINUOUS_B01_8701_INTAKE_20260910.md",
+        "quote": "T−G and T−F are DOWN at all three fixed checkpoints,\nwith an actually moving T head and final hover-above comparators.",
+        "why": "不是头没学习或比较器停在悬停的假失败；继续同配方投入与现在结束支出之间是close-call。"
+      }
+    ],
+    "uncertainty": [
+      "一组新结果仍不足以证明稳定增益或伤害；两个实例的差别也含评估噪声。",
+      "不以正结果为继续的必要条件，也不无限重复直到转正。",
+      "当前同信息调优基线余量缺失，时长反传的独立耗时未测。"
+    ],
+    "cost": {
+      "compute": "一次3fits，共6144训练局、12288 Adam、640评估、1736704原生步；1800秒/完整fit，5400秒完整研究含300秒支持，内部5100秒。前例外层2111.61秒仅作参考。",
+      "owner_time": "异步复审；不等待回复，也不等待其他方向。",
+      "reversibility": "costly",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "Owner-delegated decision (unattended, 2026-09-03 instruction): (a), under OWNER_DIRECT independent-direction continuation2026-09-10.",
+    "source": "docs/research/candidates/ucope/UCOPE_UAV_SHORT_LEARNED_RENEWAL_CONTINUOUS_B01_8702_SCIENCE_CARD_20260910.md"
+  },
+  "starred": true
+}

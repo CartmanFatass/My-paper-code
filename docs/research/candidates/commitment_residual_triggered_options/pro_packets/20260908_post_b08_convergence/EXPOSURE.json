@@ -1,0 +1,54 @@
+{
+  "prepared_at_utc": "2026-09-09T06:10:43.738069+00:00",
+  "consultation": "P72 post-B08 direction question; no experimental allocation",
+  "source_input_sha": "601d9d8f0612461f4c04ef5f855a9ddd2aed9cee",
+  "source_result_commit": "8ea7fa71622f8f436b87fbeb3beee0b3b918fc67",
+  "source_result_sha256": "5fa2fcb91a643f1d377393994e38d390ae64ee3b39b270616ea788985e08fb61",
+  "new_scientific_exposure": {
+    "result_bearing_invocations": 0,
+    "environment_calls": 0,
+    "scientific_model_calls": 0,
+    "native_calls": 0,
+    "evaluator_calls": 0,
+    "optimizer_updates": 0
+  },
+  "historical_B08": {
+    "valid_packages": 1,
+    "joint_training_seeds": [
+      0
+    ],
+    "arms": 3,
+    "endpoint_updates": [
+      33,
+      258
+    ],
+    "gate_updates": 774,
+    "gate_processed_examples": 24768,
+    "predictor_updates": 100,
+    "predictor_processed_examples": 12800,
+    "evaluation_decisions": 96,
+    "unique_eval_identities": 16,
+    "environment_transitions": 54848,
+    "common_future_branch_steps": 3520,
+    "complete_wall_seconds": 169.0,
+    "charged_arm_seconds": {
+      "RAW": 139.1011370769702,
+      "TRUE_RESIDUAL": 137.73502852593083,
+      "CALIBRATED_DERANGEMENT": 138.23890201293398
+    },
+    "aggregate_cpu_seconds": null
+  },
+  "original_residual_MEI": 0.0025,
+  "diagnostic_margin": 0.000625,
+  "recorded_new_RAW_gain_ceiling": 0.0021294544930598857,
+  "recorded_new_RAW_total_gain_ceiling": 0.03407127188895817,
+  "original_required_total_gain_strictly_above": 0.04,
+  "future_work": {
+    "selected_configuration": null,
+    "allocated_invocations": 0,
+    "allocated_seconds": 0,
+    "algorithm_cost": "unknown until a justified new B is selected; historical timing is not a new budget",
+    "added_validation": "none in P72; proportionate changed-behavior/output checks only for any later selected work"
+  },
+  "method": "stdlib arithmetic from accepted recorded P71 JSON only; no source/model import or experiment"
+}

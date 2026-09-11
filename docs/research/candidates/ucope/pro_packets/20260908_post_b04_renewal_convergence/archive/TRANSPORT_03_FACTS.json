@@ -1,0 +1,33 @@
+{
+  "request_id": "2026-09-08-ucope-post-b04-renewal-convergence-01",
+  "workflow_node": "em_convergence",
+  "conversation_binding_key": "em:ucope:convergence",
+  "direction_id": "ucope",
+  "direction_ids": [
+    "ucope"
+  ],
+  "decision_authority": "pro_final",
+  "conversation_id": "6a9c6b1c-1c34-83e8-8ebc-dee64b334240",
+  "provider_url": "https://chatgpt.com/c/6a9c6b1c-1c34-83e8-8ebc-dee64b334240",
+  "tab_id": "14",
+  "visible_model": "6 Pro",
+  "underlying_model": "Latest",
+  "thinking_effort": "Pro, 5 of 5.",
+  "source_mode": "paste",
+  "prompt_sha256": "b7054d5b3649c6a8c32deb8d6c88b15b257bf5362f633e8b96f858e12134c270",
+  "response_sha256": "ce4c3f21c49f91365ff5b697df5cb87c5108bac8c38e764517a0d8df9d1a15bf",
+  "send_click_count": 1,
+  "send_evidence": "SEND_CONFIRMED; exact current user node observed; Pro thinking then natural completion",
+  "wait_status": "NATURAL_COMPLETION",
+  "observed_page_state": "Worked for 12m 15s; complete assistant response; Copy response present; no active generation control",
+  "capture_method": "Current-round Copy response control via CUA clipboard.readText",
+  "archive_status": "ARCHIVED",
+  "scientific_decision_formed": false,
+  "archive_paths": {
+    "manifest_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\ucope\\2026-09-08-ucope-post-b04-renewal-convergence-01\\2026-09-08-ucope-post-b04-renewal-convergence-01--ucope__PACKET_MANIFEST.json",
+    "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\ucope\\2026-09-08-ucope-post-b04-renewal-convergence-01\\2026-09-08-ucope-post-b04-renewal-convergence-01--ucope__00_PROMPT.md",
+    "response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\ucope\\2026-09-08-ucope-post-b04-renewal-convergence-01\\2026-09-08-ucope-post-b04-renewal-convergence-01--ucope--attempt-01__02_RESPONSE.md",
+    "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\ucope\\2026-09-08-ucope-post-b04-renewal-convergence-01\\2026-09-08-ucope-post-b04-renewal-convergence-01--ucope--attempt-01__03_TRANSPORT_FACTS.json"
+  },
+  "response_bytes": 402
+}

@@ -1,0 +1,75 @@
+{
+  "id": "20260909-vspc1-004",
+  "created": "2026-09-09T03:40:47-07:00",
+  "direction": "vsp_c1",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "P78：第三组固定512/768独立比较（8503）",
+  "context": "Claim under test: normalized GATED-minus-width133 ordinary MLP native advantage again decreases by more than absolute .01 from512 to768 episodes in a third independent training pair.\nBinding MARL structure: (b) temporal abstraction or termination, with five co-adapting agents retaining separate partial-observation histories.",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "执行已分配的一组新训练，保留任何结果。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "在下一干净边界停止此卡的后续动作，保留已发生的证据。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "在下一干净边界按实际指示修订未执行部分，不重写旧结果。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "新训练直接测量实例变化；追加旧评估不能提供独立训练单位。",
+  "evidence": [
+    "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B12_SCIENCE_CARD_20260909.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-09.md#L27",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "P78已单独分配一组新训练，是否保留8503同一512/768端点和悬停参照的第三组独立比较卡？",
+    "changes_if_approved": [
+      {
+        "target": "VSPC1 B12 card",
+        "from": "P77已完成，新组尚未定义",
+        "to": "8503一组全新配对，沿用方法、主次读数与预算，预先记录CHANGE_DOWN(.60)"
+      }
+    ],
+    "if_refused": "在下一干净边界应用拒绝或修订；保留前两组和所有旧正负结果，不补跑、不把操作决定当科学负证据。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B12_SCIENCE_CARD_20260909.md#1-question-and-authority",
+        "quote": "The new pair directly observes another training realization.",
+        "why": "前两组变化幅度不同，新训练配对比追加旧端点评估更直接反映训练实例之间的变化。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B12_SCIENCE_CARD_20260909.md#1-question-and-authority",
+        "quote": "Their amplitudes differ;8502 is only\n.0019242503 below negative MEI with conditional SE .0074169721.",
+        "why": "第二组靠近边界，两个负点值还不足以识别稳定趋势或预算因果。"
+      }
+    ],
+    "uncertainty": [
+      "第三组不必同号，也不是解释前两组的前提。",
+      "三个训练配对仍不足以作稳定总体结论；各自评估回合和检查点不是独立训练单位。",
+      "同信息调优余量仍缺失；悬停参照不是调优基线或上界。"
+    ],
+    "cost": {
+      "compute": "最多一次被接受的提交，434176团队步、3072次Adam、160次评估、四次构造；完整每臂1800秒、整组3600秒。前两组475.85/507.29秒仅作计划；新绑定检查不超过300秒，无额外模型或原生试跑。",
+      "owner_time": "异步阅读，不等待回复。",
+      "reversibility": "costly",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "Options: (a) one fresh independent unchanged two-endpoint pair; (b) extra8502\nevaluation/checkpoints or best-checkpoint selection; (c) exact diagnosis or\nstronger class. Recommend/select(a).",
+    "source": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B12_SCIENCE_CARD_20260909.md"
+  },
+  "starred": false
+}

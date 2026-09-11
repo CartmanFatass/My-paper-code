@@ -1,0 +1,50 @@
+{
+  "schema_version": 4,
+  "request_id": "2026-09-09-ucope-post-mean-velocity-b01-convergence-01",
+  "workflow_node": "em_convergence",
+  "conversation_binding_key": "em:ucope:convergence",
+  "direction_id": "ucope",
+  "direction_ids": [
+    "ucope"
+  ],
+  "decision_authority": "pro_final",
+  "conversation_id": "6a9c6b1c-1c34-83e8-8ebc-dee64b334240",
+  "provider_url": "https://chatgpt.com/c/6a9c6b1c-1c34-83e8-8ebc-dee64b334240",
+  "tab_id": "13",
+  "tab_lifecycle": "CLOSED",
+  "visible_model": "6 Pro",
+  "underlying_model": "Latest",
+  "thinking_effort": "Pro, 5 of 5.",
+  "source_mode": "paste",
+  "prompt_sha256": "cfac8ecf94558e0bf70da94af51cd402fd6b53d0d441d393fbff60af5a329250",
+  "response_sha256": "2d08a8ccc76fc5dc439105dfce48163b24e51507f2ef34fb4d09fcf3611fb29f",
+  "response_bytes": 718,
+  "response_characters": 718,
+  "user_message_id": "05ef47eb-5327-404a-b546-d6825a0c6527",
+  "assistant_message_id": "3f67461a-0e4f-49b6-a62c-9a3dc5b4b3e4",
+  "send_click_count": 1,
+  "send_state": "SEND_CONFIRMED",
+  "wait_status": "NATURAL_COMPLETION",
+  "observed_page_state": "Worked for 13m 5s; complete assistant response; no active generation control",
+  "archive_status": "ARCHIVED",
+  "archive": {
+    "manifest_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\ucope\\2026-09-09-ucope-post-mean-velocity-b01-convergence-01\\2026-09-09-ucope-post-mean-velocity-b01-convergence-01--ucope__PACKET_MANIFEST.json",
+    "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\ucope\\2026-09-09-ucope-post-mean-velocity-b01-convergence-01\\2026-09-09-ucope-post-mean-velocity-b01-convergence-01--ucope__00_PROMPT.md",
+    "response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\ucope\\2026-09-09-ucope-post-mean-velocity-b01-convergence-01\\2026-09-09-ucope-post-mean-velocity-b01-convergence-01--ucope--attempt-01__02_RESPONSE.md",
+    "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\ucope\\2026-09-09-ucope-post-mean-velocity-b01-convergence-01\\2026-09-09-ucope-post-mean-velocity-b01-convergence-01--ucope--attempt-01__03_TRANSPORT_FACTS.json",
+    "reference_files": [],
+    "response_sha256": "2d08a8ccc76fc5dc439105dfce48163b24e51507f2ef34fb4d09fcf3611fb29f"
+  },
+  "github_delivery": {
+    "status": "UNCONFIRMED",
+    "branch": "codex/ucope",
+    "observed_head": "8c27cfa825cc7f56e3eea8cd734b453f0282451f",
+    "response_path": "docs/research/candidates/ucope/pro_packets/20260909_post_mean_velocity_b01_convergence/archive/RESPONSE.md",
+    "response_read": "404",
+    "issue": "11",
+    "comment_match": false
+  },
+  "scientific_decision_formed": false,
+  "captured_at": "2026-09-09T17:09:45.716965Z",
+  "archived_at": "2026-09-09T17:09:45.716965Z"
+}

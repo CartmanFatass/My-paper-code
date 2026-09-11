@@ -1,0 +1,1568 @@
+{
+  "recorded_at": "2026-09-09T08:06:15-07:00",
+  "object": "UCOPE-UAV-SHORT-FIXED-RENEWAL-B03",
+  "evidence_class": "B/EXPLORE",
+  "master": 8301,
+  "selector": "renewal_short_fixed_b03",
+  "validity": "valid complete",
+  "selected_primary": "F_minus_G",
+  "primary_reading": "UP",
+  "independent_training_instances": 1,
+  "training_population_SD_or_interval": null,
+  "fixed_reference_H_is_training_replicate": false,
+  "frozen_card": "docs/research/candidates/ucope/UCOPE_UAV_SHORT_FIXED_RENEWAL_B03_SCIENCE_CARD_20260909.md",
+  "card_section": 5,
+  "configuration": {
+    "seed": 8301,
+    "fixture": false,
+    "horizon": 256,
+    "train_episodes": 512,
+    "eval_episodes": 32,
+    "chunk": 32,
+    "arm_cap": 1800,
+    "pair_cap": 3600,
+    "pair": "renewal_short_fixed_b03",
+    "ratio_grouping": "agent_compound",
+    "entropy_coef": 0.0,
+    "treatment_duration_mode": "sampled_command",
+    "treatment_duration_head_seed": 830100012
+  },
+  "treatment": {
+    "duration_support": [
+      1,
+      2
+    ],
+    "categorical_labels": [
+      0,
+      1
+    ],
+    "label_probabilities": [
+      0.5,
+      0.5
+    ],
+    "countdown_feature_divisor": 4,
+    "entire_initial_duration_head_frozen": true,
+    "actual_d2_counts": true,
+    "d4_means_four_steps": true,
+    "old_support_unchanged": [
+      1,
+      4
+    ]
+  },
+  "rng": {
+    "b": 830100000,
+    "common_initialization": 830100011,
+    "F_initial_duration_head": 830100012,
+    "G_private_train_velocity": 830100021,
+    "G_private_train_duration": 830100022,
+    "F_private_train_velocity": 830100031,
+    "F_private_train_duration": 830100032,
+    "common_train_reset_first_last": [
+      830101000,
+      830101511
+    ],
+    "common_final_reset_first_last": [
+      830102000,
+      830102031
+    ],
+    "G_private_final_velocity_first_last": [
+      830103000,
+      830103031
+    ],
+    "G_private_final_duration_first_last": [
+      830104000,
+      830104031
+    ],
+    "F_private_final_velocity_first_last": [
+      830105000,
+      830105031
+    ],
+    "F_private_final_duration_first_last": [
+      830106000,
+      830106031
+    ]
+  },
+  "source": {
+    "card_allocation": "3d2d8e58003725ebd11acbd16c3087c1d2837276",
+    "scientific_source": "6384613b4f8c4204a154427a61ed8012e97af917",
+    "prelaunch_acceptance_payload": "e84451ad734a5d9f4f47131990fb6fb276ac9e73",
+    "CM_terminal_collection": "b34442c957d4c505020f37addb0236778f637ee8",
+    "preserved_semantics": "a2dbdc2452ecf17ef4578962abb20c0cea617d43; P82 physical semantics d99ae3c73e9c6ee73638c8a20afe748ce97b77ec"
+  },
+  "native_estimand": "mean_e(F-G), J=sum_t sum(info['rewards_dict'].values())/256",
+  "rule_applied_verbatim": "Preliminary favorable short fixed-renewal package evidence on this fresh fit; it does not establish stable advantage across training histories.",
+  "distance_above_positive_MEI_boundary": 0.05439366516106426,
+  "J": {
+    "F": [
+      0.18583295197359928,
+      0.2249515007706223,
+      0.16698686656438302,
+      0.12410804497289682,
+      0.09715135171566523,
+      0.1733740103627186,
+      0.157739003982625,
+      0.1060553739466457,
+      0.1475905259550112,
+      0.1745498240216232,
+      0.1808390761692886,
+      0.09340001234384511,
+      0.04606715909603533,
+      0.13095114737489127,
+      0.11772772347120172,
+      0.13621071328479342,
+      0.08482940440455859,
+      0.17666285978873264,
+      0.11719611939626318,
+      0.14209432765004673,
+      0.17211539418739777,
+      0.09718296279720856,
+      0.1179946448366902,
+      0.21346744335040901,
+      0.04923208634640688,
+      0.08847203637011562,
+      0.14270626906712242,
+      0.1199319996355779,
+      0.10953771335081351,
+      0.22254741795064512,
+      0.15367649173733458,
+      0.07810670276175387
+    ],
+    "G": [
+      0.09318181295163708,
+      0.07392218445138511,
+      0.06441925969226765,
+      0.08057346896951242,
+      0.06689131968136491,
+      0.06228995042687174,
+      0.12114255874551395,
+      0.05088627572728589,
+      0.07849583822717675,
+      0.09716187046044836,
+      0.06492432390727627,
+      0.07248293409457046,
+      0.07685464217051663,
+      0.05886765262031797,
+      0.05066938605578554,
+      0.09635570032379515,
+      0.09657283595416528,
+      0.0878019024897545,
+      0.028761659632678523,
+      0.07719838608706449,
+      0.09017681210764687,
+      0.06679559893381952,
+      0.03717108104551228,
+      0.10219446719912105,
+      0.03062886304448379,
+      0.12393609104730088,
+      0.0691686253384798,
+      0.06251173093743564,
+      0.042361273707614444,
+      0.04289634116606164,
+      0.07317221748421159,
+      0.04822480980178962
+    ],
+    "H": [
+      0.28300083542647897,
+      0.15485036965024848,
+      0.1937542623902004,
+      0.3003265531072413,
+      0.12406811491224518,
+      0.3010646047158142,
+      0.14063832405990226,
+      0.22446917104668343,
+      0.177417207642603,
+      0.17858359558790418,
+      0.104319401404567,
+      0.12140856645663353,
+      0.0656964627854216,
+      0.128897041168418,
+      0.2826427827431621,
+      0.20184522136347013,
+      0.06719922540574422,
+      0.1399504900686313,
+      0.08787640704009451,
+      0.10110760968709444,
+      0.2611214072678237,
+      0.19841955409811662,
+      0.10582157283636479,
+      0.18477442088477097,
+      0.08347641446304975,
+      0.11500003405535589,
+      0.15440193985842343,
+      0.16318335077086557,
+      0.09061261825317858,
+      0.13077242632816694,
+      0.15029648859024272,
+      0.26619487138129555
+    ]
+  },
+  "arm_means": {
+    "F": 0.13591528623865382,
+    "G": 0.07152162107758955,
+    "H": 0.16509972954531915
+  },
+  "contrasts": {
+    "F_minus_G": {
+      "differences": [
+        0.0926511390219622,
+        0.15102931631923716,
+        0.10256760687211537,
+        0.043534576003384395,
+        0.03026003203430032,
+        0.11108405993584686,
+        0.036596445237111044,
+        0.05516909821935981,
+        0.06909468772783446,
+        0.07738795356117484,
+        0.11591475226201232,
+        0.020917078249274648,
+        -0.0307874830744813,
+        0.0720834947545733,
+        0.06705833741541618,
+        0.039855012960998276,
+        -0.011743431549606692,
+        0.08886095729897814,
+        0.08843445976358466,
+        0.06489594156298224,
+        0.0819385820797509,
+        0.03038736386338904,
+        0.08082356379117792,
+        0.11127297615128796,
+        0.018603223301923086,
+        -0.03546405467718526,
+        0.07353764372864262,
+        0.05742026869814225,
+        0.06717643964319907,
+        0.17965107678458347,
+        0.080504274253123,
+        0.029881892959964247
+      ],
+      "mean": 0.06439366516106426,
+      "conditional_se": 0.008200587980245644,
+      "positive": 29,
+      "negative": 3,
+      "zero": 0,
+      "complete": true,
+      "published_mean_error": 0.0,
+      "published_se_error": 0.0,
+      "published_vector_matches": true,
+      "scale_reading": "UP",
+      "distance_to_nearest_MEI_boundary": 0.05439366516106426
+    },
+    "F_minus_H": {
+      "differences": [
+        -0.09716788345287969,
+        0.0701011311203738,
+        -0.026767395825817386,
+        -0.1762185081343445,
+        -0.026916763196579943,
+        -0.1276905943530956,
+        0.01710067992272274,
+        -0.11841379710003773,
+        -0.029826681687591783,
+        -0.004033771566280986,
+        0.0765196747647216,
+        -0.028008554112788422,
+        -0.01962930368938627,
+        0.002054106206473283,
+        -0.1649150592719604,
+        -0.06563450807867671,
+        0.017630178998814375,
+        0.036712369720101334,
+        0.029319712356168662,
+        0.04098671796295229,
+        -0.08900601308042591,
+        -0.10123659130090806,
+        0.012173072000325413,
+        0.02869302246563804,
+        -0.03424432811664287,
+        -0.026527997685240265,
+        -0.011695670791301016,
+        -0.04325135113528768,
+        0.01892509509763493,
+        0.09177499162247818,
+        0.003380003147091859,
+        -0.1880881686195417
+      ],
+      "mean": -0.029184443306665326,
+      "conditional_se": 0.012741511301119637,
+      "positive": 13,
+      "negative": 19,
+      "zero": 0,
+      "complete": true,
+      "published_mean_error": 0.0,
+      "published_se_error": 0.0,
+      "published_vector_matches": true,
+      "scale_reading": "DOWN",
+      "distance_to_nearest_MEI_boundary": 0.019184443306665327
+    },
+    "G_minus_H": {
+      "differences": [
+        -0.1898190224748419,
+        -0.08092818519886337,
+        -0.12933500269793274,
+        -0.2197530841377289,
+        -0.05717679523088026,
+        -0.23877465428894246,
+        -0.019495765314388305,
+        -0.17358289531939752,
+        -0.09892136941542624,
+        -0.08142172512745582,
+        -0.03939507749729072,
+        -0.04892563236206307,
+        0.01115817938509503,
+        -0.07002938854810002,
+        -0.2319733966873766,
+        -0.10548952103967499,
+        0.029373610548421067,
+        -0.052148587578876804,
+        -0.05911474740741599,
+        -0.02390922360002995,
+        -0.1709445951601768,
+        -0.1316239551642971,
+        -0.0686504917908525,
+        -0.08257995368564992,
+        -0.05284755141856596,
+        0.008936056991944996,
+        -0.08523331451994363,
+        -0.10067161983342993,
+        -0.04825134454556414,
+        -0.0878760851621053,
+        -0.07712427110603114,
+        -0.21797006157950594
+      ],
+      "mean": -0.09357810846772958,
+      "conditional_se": 0.012620868136163161,
+      "positive": 3,
+      "negative": 29,
+      "zero": 0,
+      "complete": true,
+      "published_mean_error": 0.0,
+      "published_se_error": 0.0,
+      "published_vector_matches": true,
+      "scale_reading": "DOWN",
+      "distance_to_nearest_MEI_boundary": 0.08357810846772959
+    }
+  },
+  "counts": {
+    "train_team_steps": 262144,
+    "eval_team_steps": 24576,
+    "team_steps": 286720,
+    "optimizer_steps": 2048,
+    "train_episodes": 1024,
+    "eval_episodes": 96,
+    "velocity_decisions": 1161034,
+    "duration_decisions": 464714,
+    "d4": 0,
+    "recurrent_observations": 1392640,
+    "explicit_resets": 1120,
+    "constructor_resets": 2,
+    "constructors": 2,
+    "step_calls": 286720,
+    "scientific_uav_calls": 286720,
+    "diagnostic_frames": 1600,
+    "completed_episode_steps": 286720,
+    "rollouts": 512,
+    "horizon_censored_holds": 899,
+    "suppressed_decisions": 231606,
+    "train_velocity_decisions": 1092750,
+    "train_duration_decisions": 437390,
+    "train_d4": 0,
+    "train_horizon_censored_holds": 842,
+    "train_suppressed_decisions": 217970,
+    "eval_velocity_decisions": 68284,
+    "eval_duration_decisions": 27324,
+    "eval_d4": 0,
+    "eval_horizon_censored_holds": 57,
+    "eval_suppressed_decisions": 13636,
+    "d2": 232505,
+    "train_d2": 218812,
+    "eval_d2": 13693,
+    "partial_episode_steps": 0
+  },
+  "fitted_arm_records": {
+    "F": {
+      "counts": {
+        "train_team_steps": 131072,
+        "eval_team_steps": 8192,
+        "team_steps": 139264,
+        "optimizer_steps": 1024,
+        "train_episodes": 512,
+        "eval_episodes": 32,
+        "velocity_decisions": 464714,
+        "duration_decisions": 464714,
+        "d4": 0,
+        "recurrent_observations": 696320,
+        "explicit_resets": 544,
+        "constructor_resets": 1,
+        "constructors": 1,
+        "step_calls": 139264,
+        "scientific_uav_calls": 139264,
+        "diagnostic_frames": 800,
+        "completed_episode_steps": 139264,
+        "rollouts": 256,
+        "horizon_censored_holds": 899,
+        "suppressed_decisions": 231606,
+        "train_velocity_decisions": 437390,
+        "train_duration_decisions": 437390,
+        "train_d4": 0,
+        "train_horizon_censored_holds": 842,
+        "train_suppressed_decisions": 217970,
+        "eval_velocity_decisions": 27324,
+        "eval_duration_decisions": 27324,
+        "eval_d4": 0,
+        "eval_horizon_censored_holds": 57,
+        "eval_suppressed_decisions": 13636,
+        "d2": 232505,
+        "train_d2": 218812,
+        "eval_d2": 13693
+      },
+      "complete": true,
+      "fit_complete": true,
+      "learning_rate": 0.0003,
+      "entropy_coef": 0.0,
+      "elapsed_wall": 163.87369038298493,
+      "duration_support": [
+        1,
+        2
+      ],
+      "duration_mode": "sampled_command",
+      "duration_head_seed": 830100012,
+      "total_parameters": 68553,
+      "trainable_parameters": 66311,
+      "duration_frozen": true,
+      "training_counts": {
+        "train_team_steps": 131072,
+        "eval_team_steps": 0,
+        "team_steps": 131072,
+        "optimizer_steps": 1024,
+        "train_episodes": 512,
+        "eval_episodes": 0,
+        "velocity_decisions": 437390,
+        "duration_decisions": 437390,
+        "d4": 0,
+        "recurrent_observations": 655360,
+        "explicit_resets": 512,
+        "constructor_resets": 1,
+        "constructors": 1,
+        "step_calls": 131072,
+        "scientific_uav_calls": 131072,
+        "diagnostic_frames": 0,
+        "completed_episode_steps": 131072,
+        "rollouts": 256,
+        "horizon_censored_holds": 842,
+        "suppressed_decisions": 217970,
+        "train_velocity_decisions": 437390,
+        "train_duration_decisions": 437390,
+        "train_d4": 0,
+        "train_horizon_censored_holds": 842,
+        "train_suppressed_decisions": 217970,
+        "eval_velocity_decisions": 0,
+        "eval_duration_decisions": 0,
+        "eval_d4": 0,
+        "eval_horizon_censored_holds": 0,
+        "eval_suppressed_decisions": 0,
+        "d2": 218812,
+        "train_d2": 218812,
+        "eval_d2": 0
+      },
+      "exposure": {
+        "common_actor": {
+          "parameters": 32134,
+          "initial_norm": 12.367474555969238,
+          "final_norm": 12.75344181060791,
+          "displacement": 3.041435718536377,
+          "relative_displacement": 0.2459221326692088
+        },
+        "critic": {
+          "parameters": 34177,
+          "initial_norm": 9.269352912902832,
+          "final_norm": 11.378190040588379,
+          "displacement": 6.447686672210693,
+          "relative_displacement": 0.6955918857329181
+        },
+        "duration": {
+          "parameters": 2242,
+          "initial_norm": 3.2817656993865967,
+          "final_norm": 3.2817656993865967,
+          "displacement": 0.0,
+          "relative_displacement": 0.0
+        },
+        "duration_hidden": {
+          "parameters": 2176,
+          "initial_norm": 3.2817656993865967,
+          "final_norm": 3.2817656993865967,
+          "displacement": 0.0,
+          "relative_displacement": 0.0
+        },
+        "duration_final": {
+          "parameters": 66,
+          "initial_norm": 0.0,
+          "final_norm": 0.0,
+          "displacement": 0.0,
+          "relative_displacement": null
+        },
+        "total": {
+          "parameters": 68553,
+          "initial_norm": 15.800163269042969,
+          "final_norm": 17.40354347229004,
+          "displacement": 7.129024028778076,
+          "relative_displacement": 0.4511993899927236
+        }
+      },
+      "evaluation_counts": {
+        "train_team_steps": 0,
+        "eval_team_steps": 8192,
+        "team_steps": 8192,
+        "optimizer_steps": 0,
+        "train_episodes": 0,
+        "eval_episodes": 32,
+        "velocity_decisions": 27324,
+        "duration_decisions": 27324,
+        "d4": 0,
+        "recurrent_observations": 40960,
+        "explicit_resets": 32,
+        "constructor_resets": 0,
+        "constructors": 0,
+        "step_calls": 8192,
+        "scientific_uav_calls": 8192,
+        "diagnostic_frames": 800,
+        "completed_episode_steps": 8192,
+        "rollouts": 0,
+        "horizon_censored_holds": 57,
+        "suppressed_decisions": 13636,
+        "train_velocity_decisions": 0,
+        "train_duration_decisions": 0,
+        "train_d4": 0,
+        "train_horizon_censored_holds": 0,
+        "train_suppressed_decisions": 0,
+        "eval_velocity_decisions": 27324,
+        "eval_duration_decisions": 27324,
+        "eval_d4": 0,
+        "eval_horizon_censored_holds": 57,
+        "eval_suppressed_decisions": 13636,
+        "d2": 13693,
+        "train_d2": 0,
+        "eval_d2": 13693
+      },
+      "sampled_d4_frequency": 0.0
+    },
+    "G": {
+      "counts": {
+        "train_team_steps": 131072,
+        "eval_team_steps": 16384,
+        "team_steps": 147456,
+        "optimizer_steps": 1024,
+        "train_episodes": 512,
+        "eval_episodes": 64,
+        "velocity_decisions": 696320,
+        "duration_decisions": 0,
+        "d4": 0,
+        "recurrent_observations": 696320,
+        "explicit_resets": 576,
+        "constructor_resets": 1,
+        "constructors": 1,
+        "step_calls": 147456,
+        "scientific_uav_calls": 147456,
+        "diagnostic_frames": 800,
+        "completed_episode_steps": 147456,
+        "rollouts": 256,
+        "horizon_censored_holds": 0,
+        "suppressed_decisions": 0,
+        "train_velocity_decisions": 655360,
+        "train_duration_decisions": 0,
+        "train_d4": 0,
+        "train_horizon_censored_holds": 0,
+        "train_suppressed_decisions": 0,
+        "eval_velocity_decisions": 40960,
+        "eval_duration_decisions": 0,
+        "eval_d4": 0,
+        "eval_horizon_censored_holds": 0,
+        "eval_suppressed_decisions": 0,
+        "d2": 0,
+        "train_d2": 0,
+        "eval_d2": 0
+      },
+      "complete": true,
+      "fit_complete": true,
+      "learning_rate": 0.0003,
+      "entropy_coef": 0.0,
+      "elapsed_wall": 133.33607813803246,
+      "duration_support": null,
+      "duration_mode": "none",
+      "duration_head_seed": null,
+      "total_parameters": 66311,
+      "trainable_parameters": 66311,
+      "duration_frozen": false,
+      "training_counts": {
+        "train_team_steps": 131072,
+        "eval_team_steps": 0,
+        "team_steps": 131072,
+        "optimizer_steps": 1024,
+        "train_episodes": 512,
+        "eval_episodes": 0,
+        "velocity_decisions": 655360,
+        "duration_decisions": 0,
+        "d4": 0,
+        "recurrent_observations": 655360,
+        "explicit_resets": 512,
+        "constructor_resets": 1,
+        "constructors": 1,
+        "step_calls": 131072,
+        "scientific_uav_calls": 131072,
+        "diagnostic_frames": 0,
+        "completed_episode_steps": 131072,
+        "rollouts": 256,
+        "horizon_censored_holds": 0,
+        "suppressed_decisions": 0,
+        "train_velocity_decisions": 655360,
+        "train_duration_decisions": 0,
+        "train_d4": 0,
+        "train_horizon_censored_holds": 0,
+        "train_suppressed_decisions": 0,
+        "eval_velocity_decisions": 0,
+        "eval_duration_decisions": 0,
+        "eval_d4": 0,
+        "eval_horizon_censored_holds": 0,
+        "eval_suppressed_decisions": 0,
+        "d2": 0,
+        "train_d2": 0,
+        "eval_d2": 0
+      },
+      "exposure": {
+        "common_actor": {
+          "parameters": 32134,
+          "initial_norm": 12.367474555969238,
+          "final_norm": 12.86082649230957,
+          "displacement": 3.567142963409424,
+          "relative_displacement": 0.28842937555811926
+        },
+        "critic": {
+          "parameters": 34177,
+          "initial_norm": 9.269352912902832,
+          "final_norm": 10.420440673828125,
+          "displacement": 4.446179389953613,
+          "relative_displacement": 0.47966448486000607
+        },
+        "total": {
+          "parameters": 66311,
+          "initial_norm": 15.455589294433594,
+          "final_norm": 16.552532196044922,
+          "displacement": 5.700264930725098,
+          "relative_displacement": 0.36881576121964543
+        }
+      },
+      "evaluation_counts": {
+        "train_team_steps": 0,
+        "eval_team_steps": 8192,
+        "team_steps": 8192,
+        "optimizer_steps": 0,
+        "train_episodes": 0,
+        "eval_episodes": 32,
+        "velocity_decisions": 40960,
+        "duration_decisions": 0,
+        "d4": 0,
+        "recurrent_observations": 40960,
+        "explicit_resets": 32,
+        "constructor_resets": 0,
+        "constructors": 0,
+        "step_calls": 8192,
+        "scientific_uav_calls": 8192,
+        "diagnostic_frames": 800,
+        "completed_episode_steps": 8192,
+        "rollouts": 0,
+        "horizon_censored_holds": 0,
+        "suppressed_decisions": 0,
+        "train_velocity_decisions": 0,
+        "train_duration_decisions": 0,
+        "train_d4": 0,
+        "train_horizon_censored_holds": 0,
+        "train_suppressed_decisions": 0,
+        "eval_velocity_decisions": 40960,
+        "eval_duration_decisions": 0,
+        "eval_d4": 0,
+        "eval_horizon_censored_holds": 0,
+        "eval_suppressed_decisions": 0,
+        "d2": 0,
+        "train_d2": 0,
+        "eval_d2": 0
+      },
+      "sampled_d4_frequency": null,
+      "hover_counts": {
+        "train_team_steps": 0,
+        "eval_team_steps": 8192,
+        "team_steps": 8192,
+        "optimizer_steps": 0,
+        "train_episodes": 0,
+        "eval_episodes": 32,
+        "velocity_decisions": 0,
+        "duration_decisions": 0,
+        "d4": 0,
+        "recurrent_observations": 0,
+        "explicit_resets": 32,
+        "constructor_resets": 0,
+        "constructors": 0,
+        "step_calls": 8192,
+        "scientific_uav_calls": 8192,
+        "diagnostic_frames": 0,
+        "completed_episode_steps": 8192,
+        "rollouts": 0,
+        "horizon_censored_holds": 0,
+        "suppressed_decisions": 0,
+        "train_velocity_decisions": 0,
+        "train_duration_decisions": 0,
+        "train_d4": 0,
+        "train_horizon_censored_holds": 0,
+        "train_suppressed_decisions": 0,
+        "eval_velocity_decisions": 0,
+        "eval_duration_decisions": 0,
+        "eval_d4": 0,
+        "eval_horizon_censored_holds": 0,
+        "eval_suppressed_decisions": 0,
+        "d2": 0,
+        "train_d2": 0,
+        "eval_d2": 0
+      }
+    }
+  },
+  "recorded_action_counts": {
+    "F": {
+      "train": {
+        "velocity_decisions": 437390,
+        "duration_decisions": 437390,
+        "d2": 218812,
+        "d4": 0,
+        "suppressed_decisions": 217970,
+        "horizon_censored_holds": 842,
+        "episode_d2_fields_present": true,
+        "opportunities_match_executed_primitive_rows": true
+      },
+      "eval": {
+        "velocity_decisions": 27324,
+        "duration_decisions": 27324,
+        "d2": 13693,
+        "d4": 0,
+        "suppressed_decisions": 13636,
+        "horizon_censored_holds": 57,
+        "episode_d2_fields_present": true,
+        "opportunities_match_executed_primitive_rows": true
+      }
+    },
+    "G": {
+      "train": {
+        "velocity_decisions": 655360,
+        "duration_decisions": 0,
+        "d2": 0,
+        "d4": 0,
+        "suppressed_decisions": 0,
+        "horizon_censored_holds": 0,
+        "episode_d2_fields_present": true
+      },
+      "eval": {
+        "velocity_decisions": 40960,
+        "duration_decisions": 0,
+        "d2": 0,
+        "d4": 0,
+        "suppressed_decisions": 0,
+        "horizon_censored_holds": 0,
+        "episode_d2_fields_present": true
+      }
+    },
+    "H": {
+      "train": {
+        "velocity_decisions": 0,
+        "duration_decisions": 0,
+        "d2": 0,
+        "d4": 0,
+        "suppressed_decisions": 0,
+        "horizon_censored_holds": 0,
+        "episode_d2_fields_present": true
+      },
+      "eval": {
+        "velocity_decisions": 0,
+        "duration_decisions": 0,
+        "d2": 0,
+        "d4": 0,
+        "suppressed_decisions": 0,
+        "horizon_censored_holds": 0,
+        "episode_d2_fields_present": true
+      }
+    }
+  },
+  "F_duration_head_forward_rows": 2678988,
+  "F_duration_dense_MACs": 5915205504,
+  "resource_admission": {
+    "assessed_at": "2026-09-09T14:55:02.034332Z",
+    "available_physical_bytes": 15633850368,
+    "captured_at": "2026-09-09T14:55:02.034052Z",
+    "cgroup_headroom_bytes": null,
+    "cgroup_memory_current_bytes": null,
+    "cgroup_memory_max_bytes": null,
+    "effective_available_bytes": 15633850368,
+    "effective_floor_pass": true,
+    "failure_reasons": [],
+    "measurement_source": "/proc/meminfo",
+    "minimum_available_bytes": 4294967296,
+    "passed": true,
+    "physical_floor_pass": true,
+    "schema_version": 1
+  },
+  "execution": {
+    "node": "hmasd-wsl-node",
+    "device": "CPU",
+    "dtype": "FP32",
+    "torch_threads": 1,
+    "handle": "ucope-uav-short-fixed-renewal-b03-8301-p84-20260909",
+    "pid": 3058083,
+    "status": "finished",
+    "start": "2026-09-09T22:55:02+08:00",
+    "end": "2026-09-09T23:00:15+08:00",
+    "exit_code": 0,
+    "tmux_active": false,
+    "remote_cwd": "/home/wu/hmasd-worktrees/ucope-uav-short-fixed-renewal-b03-8301-p84-20260909",
+    "local_collection": "temp/directions/ucope/exp/ucope-uav-short-fixed-renewal-b03-8301-p84-20260909",
+    "wrapper": "/home/wu/hmasd-inputs/ucope-uav-short-fixed-renewal-b03-8301-p84-20260909.sh",
+    "wrapper_bytes": 791,
+    "wrapper_SHA256": "0d4f0d8a9457ef779b6f14e70fbbc984c83efe0523edd24da1041f121efffb4e",
+    "accepted_scientific_submissions": 1,
+    "observer": "CM cm_am_ucope_b02_p47"
+  },
+  "cost": {
+    "whole_wall_seconds": 313.9,
+    "peak_rss_kib": 554744,
+    "F_complete_arm_seconds": 163.87369038298493,
+    "G_including_H_seconds": 133.33607813803246,
+    "sum_complete_arm_seconds": 297.2097685210174,
+    "runner_seconds": 297.20977014803793,
+    "aggregate_CPU_seconds": null,
+    "resources": "resources_unmeasured (aggregate CPU)",
+    "measured_complete_seconds_per_valid_result": 313.9,
+    "accepted_attempt_seconds_per_valid_result": 313.9,
+    "scientific_caps_breached": false,
+    "engineering_section5_breached": false,
+    "planning_projection": {
+      "work": {
+        "matched_training_instances": 1,
+        "fitted_arms": 2,
+        "train_episodes_per_arm": 512,
+        "train_native_steps_per_arm": 131072,
+        "rollouts_per_arm": 256,
+        "Adam_per_arm": 1024,
+        "total_rollouts": 512,
+        "total_Adam_calls": 2048,
+        "total_native_steps": 286720,
+        "final_evaluation_episodes": 96,
+        "explicit_resets": 1120,
+        "constructor_resets": 2,
+        "existing_diagnostic_rows": 1600,
+        "F_renewal_head_forward_rows_bounds": [
+          2007040,
+          4014080
+        ],
+        "F_head_dense_MAC_bounds": [
+          4431544320,
+          8863088640
+        ],
+        "F_parameters": 68553,
+        "G_parameters": 66311,
+        "F_frozen_duration_parameters": 2242,
+        "total_parameters": 134864,
+        "trainable_parameters": 132622,
+        "learning_rate": 0.0003
+      },
+      "reference": {
+        "F_arm_seconds": 167.0972740459838,
+        "G_including_H_seconds": 133.13975488004507,
+        "outer_seconds": 317.61,
+        "F_head_rows": 2678452,
+        "guarantees_new_seconds": false
+      },
+      "multipliers": {
+        "training": 1.0,
+        "final_eval": 1.0,
+        "native_steps": 1.0,
+        "F_head_row_lower_bound": 1.0,
+        "F_head_row_upper_bound": 1.0
+      },
+      "caps": {
+        "complete_arm_seconds": 1800,
+        "complete_invocation_seconds": 3600,
+        "max_accepted_submissions": 1,
+        "focused_checks_seconds": 300
+      }
+    },
+    "timing_claim": "One complete serial invocation; study critical path and sum of invocation wall are 313.90 s. Nested arm/runner timings exclude outer startup/tail. No controlled speed comparison."
+  },
+  "engineering": {
+    "scope_section4_additions": "none",
+    "production_added_lines": 27,
+    "production_removed_lines": 21,
+    "runner_lines": 54,
+    "focused_tests_passed": 7,
+    "focused_tests_deselected": 124,
+    "focused_outer_seconds": 0.23,
+    "focused_pytest_seconds": 0.07,
+    "focused_peak_RSS_KiB": 30792,
+    "focused_exit_code": 0,
+    "scratch_cleanup": "complete",
+    "independent_review": "P82 accepted semantic review reused with P83 binding coverage; no new review round or physical suite",
+    "technical_acceptance": "PASS",
+    "CM_readback": {
+      "episode_rows": 1120,
+      "rollout_rows": 512,
+      "diagnostic_rows": 1600,
+      "finite_fp32_F_G_checkpoints": true,
+      "all_reset_associations_and_J_from_reward_sum_match": true,
+      "all_rollout_optimizer_counts_match": true,
+      "contrasts": {
+        "F_minus_G": {
+          "differences": [
+            0.0926511390219622,
+            0.15102931631923716,
+            0.10256760687211537,
+            0.043534576003384395,
+            0.03026003203430032,
+            0.11108405993584686,
+            0.036596445237111044,
+            0.05516909821935981,
+            0.06909468772783446,
+            0.07738795356117484,
+            0.11591475226201232,
+            0.020917078249274648,
+            -0.0307874830744813,
+            0.0720834947545733,
+            0.06705833741541618,
+            0.039855012960998276,
+            -0.011743431549606692,
+            0.08886095729897814,
+            0.08843445976358466,
+            0.06489594156298224,
+            0.0819385820797509,
+            0.03038736386338904,
+            0.08082356379117792,
+            0.11127297615128796,
+            0.018603223301923086,
+            -0.03546405467718526,
+            0.07353764372864262,
+            0.05742026869814225,
+            0.06717643964319907,
+            0.17965107678458347,
+            0.080504274253123,
+            0.029881892959964247
+          ],
+          "mean": 0.06439366516106426,
+          "conditional_se": 0.008200587980245644
+        },
+        "G_minus_H": {
+          "differences": [
+            -0.1898190224748419,
+            -0.08092818519886337,
+            -0.12933500269793274,
+            -0.2197530841377289,
+            -0.05717679523088026,
+            -0.23877465428894246,
+            -0.019495765314388305,
+            -0.17358289531939752,
+            -0.09892136941542624,
+            -0.08142172512745582,
+            -0.03939507749729072,
+            -0.04892563236206307,
+            0.01115817938509503,
+            -0.07002938854810002,
+            -0.2319733966873766,
+            -0.10548952103967499,
+            0.029373610548421067,
+            -0.052148587578876804,
+            -0.05911474740741599,
+            -0.02390922360002995,
+            -0.1709445951601768,
+            -0.1316239551642971,
+            -0.0686504917908525,
+            -0.08257995368564992,
+            -0.05284755141856596,
+            0.008936056991944996,
+            -0.08523331451994363,
+            -0.10067161983342993,
+            -0.04825134454556414,
+            -0.0878760851621053,
+            -0.07712427110603114,
+            -0.21797006157950594
+          ],
+          "mean": -0.09357810846772958,
+          "conditional_se": 0.012620868136163161
+        },
+        "F_minus_H": {
+          "differences": [
+            -0.09716788345287969,
+            0.0701011311203738,
+            -0.026767395825817386,
+            -0.1762185081343445,
+            -0.026916763196579943,
+            -0.1276905943530956,
+            0.01710067992272274,
+            -0.11841379710003773,
+            -0.029826681687591783,
+            -0.004033771566280986,
+            0.0765196747647216,
+            -0.028008554112788422,
+            -0.01962930368938627,
+            0.002054106206473283,
+            -0.1649150592719604,
+            -0.06563450807867671,
+            0.017630178998814375,
+            0.036712369720101334,
+            0.029319712356168662,
+            0.04098671796295229,
+            -0.08900601308042591,
+            -0.10123659130090806,
+            0.012173072000325413,
+            0.02869302246563804,
+            -0.03424432811664287,
+            -0.026527997685240265,
+            -0.011695670791301016,
+            -0.04325135113528768,
+            0.01892509509763493,
+            0.09177499162247818,
+            0.003380003147091859,
+            -0.1880881686195417
+          ],
+          "mean": -0.029184443306665326,
+          "conditional_se": 0.012741511301119637
+        }
+      },
+      "arm_means": {
+        "F": 0.13591528623865382,
+        "G": 0.07152162107758955,
+        "H": 0.16509972954531915
+      },
+      "checkpoint_groups": {
+        "F": {
+          "common_actor": {
+            "parameters": 32134,
+            "checkpoint_final_norm": 12.75344181060791
+          },
+          "critic": {
+            "parameters": 34177,
+            "checkpoint_final_norm": 11.378190040588379
+          },
+          "total": {
+            "parameters": 68553,
+            "checkpoint_final_norm": 17.403541564941406
+          },
+          "duration": {
+            "parameters": 2242,
+            "checkpoint_final_norm": 3.2817656993865967
+          },
+          "duration_hidden": {
+            "parameters": 2176,
+            "checkpoint_final_norm": 3.2817656993865967
+          },
+          "duration_final": {
+            "parameters": 66,
+            "checkpoint_final_norm": 0.0
+          }
+        },
+        "G": {
+          "common_actor": {
+            "parameters": 32134,
+            "checkpoint_final_norm": 12.86082649230957
+          },
+          "critic": {
+            "parameters": 34177,
+            "checkpoint_final_norm": 10.420440673828125
+          },
+          "total": {
+            "parameters": 66311,
+            "checkpoint_final_norm": 16.552532196044922
+          }
+        }
+      },
+      "all_numeric_json_finite": true,
+      "supervisor_primary_and_admission_match": true,
+      "F_head_fixed_and_final_zero_layers_verified": true,
+      "actual_renewal_counts_verified": true,
+      "F_duration_head_forward_rows": 2678988,
+      "F_duration_dense_forward_multiply_adds": 5915205504,
+      "short_support_literal_d2_d4_and_diagnostic_expiry_verified": true
+    }
+  },
+  "dm_checks": {
+    "identities": {
+      "F_train": {
+        "count": 512,
+        "expected": 512,
+        "ids_complete": true,
+        "unique": true,
+        "master_reset_steps_correct": true
+      },
+      "F_eval": {
+        "count": 32,
+        "expected": 32,
+        "ids_complete": true,
+        "unique": true,
+        "master_reset_steps_correct": true
+      },
+      "G_train": {
+        "count": 512,
+        "expected": 512,
+        "ids_complete": true,
+        "unique": true,
+        "master_reset_steps_correct": true
+      },
+      "G_eval": {
+        "count": 32,
+        "expected": 32,
+        "ids_complete": true,
+        "unique": true,
+        "master_reset_steps_correct": true
+      },
+      "H_train": {
+        "count": 0,
+        "expected": 0,
+        "ids_complete": true,
+        "unique": true,
+        "master_reset_steps_correct": true
+      },
+      "H_eval": {
+        "count": 32,
+        "expected": 32,
+        "ids_complete": true,
+        "unique": true,
+        "master_reset_steps_correct": true
+      }
+    },
+    "recorded_episode_rows": 1120,
+    "maximum_recorded_J_identity_error": 0.0,
+    "all_published_J_match": true,
+    "all_three_vectors_means_SE_match": true,
+    "source_diff_checked_against_card": true,
+    "raw_focused_receipt_read": true,
+    "P82_semantic_review_reused": true,
+    "terminal_admission_wrapper_collection_read": true,
+    "CM_checkpoint_checks_accepted_without_repeat": true,
+    "DM_native_or_model_execution": 0,
+    "collected_local_hashes": {
+      "remote_and_local_sha256": {
+        "summary.json": true,
+        "episodes.jsonl": true,
+        "rollouts.jsonl": true,
+        "diagnostics.jsonl": true,
+        "final_F.pt": true,
+        "final_G.pt": true,
+        "resource_admission.json": true
+      },
+      "supervisor_sha256": {
+        "exit_code": true,
+        "pid": true,
+        "resource_admission.json": true,
+        "runner.sh": true,
+        "start_time": true,
+        "status": true,
+        "task.log": true
+      }
+    }
+  },
+  "primary_binding_interpretation": "selected_contrast absent on accepted fixed F-G path by design; source/card/fixture bind F-G and F/G completeness. P80 retains distinct F-H selection.",
+  "fitted_run_tool_meaning": "New matched F-G endpoints only; H is an untrained reference and earlier objects are excluded from training-run rows",
+  "run_level_tool_summary": {
+    "unit": "caller-declared independent training run",
+    "inference": "descriptive only; no confidence interval or success classification",
+    "groups": [
+      {
+        "task": "UCOPE-UAV-SHORT-FIXED-RENEWAL-B03",
+        "arm": "F",
+        "n": 1,
+        "mean": 0.13591528623865382,
+        "sample_sd": null,
+        "min": 0.13591528623865382,
+        "max": 0.13591528623865382,
+        "runs": {
+          "8301": 0.13591528623865382
+        }
+      },
+      {
+        "task": "UCOPE-UAV-SHORT-FIXED-RENEWAL-B03",
+        "arm": "G",
+        "n": 1,
+        "mean": 0.07152162107758955,
+        "sample_sd": null,
+        "min": 0.07152162107758955,
+        "max": 0.07152162107758955,
+        "runs": {
+          "8301": 0.07152162107758955
+        }
+      }
+    ],
+    "paired_differences": [
+      {
+        "task": "UCOPE-UAV-SHORT-FIXED-RENEWAL-B03",
+        "arm": "F",
+        "baseline": "G",
+        "summary": {
+          "n": 1,
+          "mean": 0.06439366516106426,
+          "sample_sd": null,
+          "min": 0.06439366516106426,
+          "max": 0.06439366516106426
+        },
+        "differences": {
+          "8301": 0.06439366516106426
+        },
+        "unmatched_arm_seeds": [],
+        "unmatched_baseline_seeds": []
+      }
+    ]
+  },
+  "run_level_endpoint_vs_native_absolute_rounding": 0.0,
+  "prior_context_separate": [
+    {
+      "label": "P78",
+      "source": "docs/research/candidates/ucope/UCOPE_UAV_FIXED_RENEWAL_B01_P78_RESULT_SUMMARY_20260909.json",
+      "master": 7701,
+      "original_primary": "F_minus_G",
+      "original_primary_reading": "UP",
+      "contrasts": {
+        "F_minus_G": {
+          "mean": 0.026550516654013076,
+          "conditional_se": 0.011109495362659165
+        },
+        "F_minus_H": {
+          "mean": 0.030122962641204728,
+          "conditional_se": 0.014904708941129195
+        },
+        "G_minus_H": {
+          "mean": 0.0035724459871916527,
+          "conditional_se": 0.01461525282953026
+        }
+      },
+      "duration_support": [
+        1,
+        4
+      ]
+    },
+    {
+      "label": "P79",
+      "source": "docs/research/candidates/ucope/UCOPE_UAV_FIXED_RENEWAL_B02_P79_RESULT_SUMMARY_20260909.json",
+      "master": 7801,
+      "original_primary": "F_minus_G",
+      "original_primary_reading": "UP",
+      "contrasts": {
+        "F_minus_G": {
+          "mean": 0.030362608571553623,
+          "conditional_se": 0.008159350975084483
+        },
+        "F_minus_H": {
+          "mean": -0.0035128012832155745,
+          "conditional_se": 0.011513244819621678
+        },
+        "G_minus_H": {
+          "mean": -0.033875409854769195,
+          "conditional_se": 0.009095001328253357
+        }
+      },
+      "duration_support": [
+        1,
+        4
+      ]
+    },
+    {
+      "label": "P80",
+      "source": "docs/research/candidates/ucope/UCOPE_UAV_FIXED_RENEWAL_HOVER_B01_P80_RESULT_SUMMARY_20260909.json",
+      "master": 7901,
+      "original_primary": "F_minus_H",
+      "original_primary_reading": "UP",
+      "contrasts": {
+        "F_minus_G": {
+          "mean": -0.025803909613053323,
+          "conditional_se": 0.010415763733291592
+        },
+        "F_minus_H": {
+          "mean": 0.018660096017418804,
+          "conditional_se": 0.010755224968186065
+        },
+        "G_minus_H": {
+          "mean": 0.04446400563047213,
+          "conditional_se": 0.010847038932735921
+        }
+      },
+      "duration_support": [
+        1,
+        4
+      ]
+    },
+    {
+      "label": "P81",
+      "source": "docs/research/candidates/ucope/UCOPE_UAV_FIXED_RENEWAL_B03_P81_RESULT_SUMMARY_20260909.json",
+      "master": 8001,
+      "original_primary": "F_minus_G",
+      "original_primary_reading": "DOWN",
+      "contrasts": {
+        "F_minus_G": {
+          "mean": -0.021798883942210363,
+          "conditional_se": 0.010646977126718544
+        },
+        "F_minus_H": {
+          "mean": 0.015269670011827153,
+          "conditional_se": 0.012567527601623765
+        },
+        "G_minus_H": {
+          "mean": 0.03706855395403751,
+          "conditional_se": 0.011330703710254264
+        }
+      },
+      "duration_support": [
+        1,
+        4
+      ]
+    },
+    {
+      "label": "P82",
+      "source": "docs/research/candidates/ucope/UCOPE_UAV_SHORT_FIXED_RENEWAL_B01_P82_RESULT_SUMMARY_20260909.json",
+      "master": 8101,
+      "original_primary": "F_minus_G",
+      "original_primary_reading": "WITHIN",
+      "duration_support": [
+        1,
+        2
+      ],
+      "contrasts": {
+        "F_minus_G": {
+          "mean": 0.008551004914111454,
+          "conditional_se": 0.008905535922158366
+        },
+        "F_minus_H": {
+          "mean": 0.02854870179583208,
+          "conditional_se": 0.011099555695402165
+        },
+        "G_minus_H": {
+          "mean": 0.019997696881720626,
+          "conditional_se": 0.012754543531711954
+        }
+      }
+    },
+    {
+      "label": "P83",
+      "source": "docs/research/candidates/ucope/UCOPE_UAV_SHORT_FIXED_RENEWAL_B02_P83_RESULT_SUMMARY_20260909.json",
+      "master": 8201,
+      "original_primary": "F_minus_G",
+      "original_primary_reading": "UP",
+      "duration_support": [
+        1,
+        2
+      ],
+      "contrasts": {
+        "F_minus_G": {
+          "mean": 0.04205514630433558,
+          "conditional_se": 0.008895069330742151
+        },
+        "F_minus_H": {
+          "mean": 0.01688043904880538,
+          "conditional_se": 0.011210216975722664
+        },
+        "G_minus_H": {
+          "mean": -0.025174707255530195,
+          "conditional_se": 0.011893075742872027
+        }
+      }
+    }
+  ],
+  "historical_comparison_limits": "P82 remains same-{1,2} WITHIN with both hover gains; P83 remains UP with F-H gain/G-H loss. P78-P81 use {1,4}; original primaries/all signs, P79 old n=2 and P77 learned-T losses unchanged. No new cross-instance mean/SD, pooled primary, causal shortening estimate or training-population interval.",
+  "predictions": [
+    {
+      "event": "F_minus_G>0.01",
+      "probability": 0.55,
+      "observed": true,
+      "Brier_loss": 0.20249999999999996
+    },
+    {
+      "event": "F_minus_H>0.01",
+      "probability": 0.65,
+      "observed": false,
+      "Brier_loss": 0.42250000000000004
+    },
+    {
+      "event": "G_minus_H<-0.01",
+      "probability": 0.45,
+      "observed": true,
+      "Brier_loss": 0.30250000000000005
+    }
+  ],
+  "mean_Brier_loss": 0.3091666666666667,
+  "owner_prediction": "not taken (unattended)",
+  "owner_flags": "none",
+  "recasts": 1,
+  "headroom": "tuned same-information host headroom absent",
+  "raw_sha256": {
+    "summary.json": "b25f74fa012d852a97ee0aa61b701ee8a71afc6be50148efc2790a07dfefe5d4",
+    "episodes.jsonl": "d4f5f27898dcef922879340b844eb0ab1c1d8cce8f213f4652eb926dc2c9a71f",
+    "rollouts.jsonl": "68eb26dba42c5a700149f1530699efd58c92b829265a3e7319523c283cb14ff5",
+    "diagnostics.jsonl": "7b458b3410b5cff35f25e4f96ac10d25958feabd5f3dbc5c4b3f083297984855",
+    "final_F.pt": "ef4ddd6946400b259feb6eb782ec8d7576d77e35f8e07f35da1ec39e34660631",
+    "final_G.pt": "dbdf94deef49d20ccc418e596422ba39c8f8bf6b2ce7faf6c094be5920687773",
+    "resource_admission.json": "d31db6f1547943f1230f59b7707297aa97f66202a03d4b139cf89b19ee440064"
+  },
+  "supervisor_sha256": {
+    "exit_code": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "pid": "e18027fcb51fad966a084c16ee53396f8d7f8fc176c9659b2dc93775b1b11799",
+    "resource_admission.json": "d31db6f1547943f1230f59b7707297aa97f66202a03d4b139cf89b19ee440064",
+    "runner.sh": "d024fce2918ae25ebbbed5fa95643c306d09be9652d930ff32619eb7be25e600",
+    "start_time": "118677ffebfb7fc3ae43a87a12b91839a5301ecd09a89b051418991ee71c23fc",
+    "status": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983",
+    "task.log": "a93effaf154bfd3c7310d76397d962de3ba409863489b04a115edd8e0f64d21a"
+  },
+  "evidence_paths": {
+    "raw_root": "temp/directions/ucope/exp/ucope-uav-short-fixed-renewal-b03-8301-p84-20260909",
+    "CM_intake": "docs/research/candidates/ucope/UCOPE_UAV_SHORT_FIXED_RENEWAL_B03_P84_INTAKE_20260909.md",
+    "primary_analysis": "temp/directions/ucope/exp/ucope-uav-short-fixed-renewal-b03-8301-p84-20260909/dm_analysis/analysis.json",
+    "endpoint_summary": "temp/directions/ucope/exp/ucope-uav-short-fixed-renewal-b03-8301-p84-20260909/dm_analysis/fitted_endpoint_summary.json",
+    "collection": "temp/directions/ucope/exp/ucope-uav-short-fixed-renewal-b03-8301-p84-20260909/collection-readback.json",
+    "source_and_payload": "temp/directions/ucope/exp/ucope-uav-short-fixed-renewal-b03-8301-p84-20260909/preparation",
+    "reused_independent_review": "temp/directions/ucope/exp/ucope-uav-short-fixed-renewal-b01-8101-p82-20260909/checks/independent-review.md"
+  },
+  "local_literature": {
+    "reused_UTE": "docs/research/candidates/ucope/UCOPE_UAV_FIXED_RENEWAL_B03_P81_INTAKE_20260909.md#8-bounded-interpretation-grounding-and-predictions",
+    "new_question": "Is mean-velocity execution a sensible bounded follow-up after both sampled learned policies lose to hover?",
+    "local_search": "Inst-sci real catalog.v2.jsonl searched for proximal policy, what matters, on-policy, deterministic, Gaussian; only unrelated TAPE MARL-0056 matched. Prior verified My-lib synthetic-core-only published coverage remains excluded; no new library-wide claim.",
+    "code_grounding": "6384613b4f8c4204a154427a61ed8012e97af917: policy.py sample lines106-120 and learner.py collect_episode sampled u.tanh() call; read-only source inspection.",
+    "source_support": {
+      "title": "Stable Baselines3 2.7.0 RL Tips and Tricks, How to evaluate an RL algorithm?",
+      "url": "https://stable-baselines3.readthedocs.io/en/v2.7.0/guide/rl_tips.html",
+      "quote": "this frequently leads to better performance",
+      "bounded_claim": "Suggests trying deterministic prediction for stochastic PPO/A2C; neither tests this UAV host nor guarantees an improvement."
+    },
+    "source_limit": {
+      "title": "Spinning Up, Experiment Outputs, deterministic flag",
+      "url": "https://spinningup.openai.com/en/latest/user/saving_and_loading.html",
+      "bounded_claim": "Its deterministic test flag is SAC-only; stochastic PPO evaluation remains legitimate. This does not establish that P84 used a defective evaluation method."
+    },
+    "current_change": "Recommend a newly declared mean-velocity B comparison retaining sampled modes. Do not retroactively change P84, infer noise caused the losses, add an A prerequisite, or claim novelty."
+  },
+  "decision": {
+    "validity_options": [
+      "accept valid UP while retaining both learned-policy hover losses",
+      "replace or negate the primary using hover",
+      "claim stable or competent-comparator advantage"
+    ],
+    "selected_validity": "accept valid UP while retaining both learned-policy hover losses",
+    "next_options": [
+      "end P84; recommend a separately allocated fresh B comparing mean-velocity F/G with within-fit stochastic execution and hover",
+      "narrow fixed-checkpoint mean-velocity A measurement only",
+      "a fourth unchanged stochastic training history"
+    ],
+    "selected_next": "end P84; recommend a separately allocated fresh B comparing mean-velocity F/G with within-fit stochastic execution and hover",
+    "rationale": "P83 F-G advantage and G-H loss recur in sign, but F-H changes sign. A fourth unchanged history does not directly test execution choice. The actual policy samples Gaussian velocities. A prespecified mean-velocity comparison can test a useful control option against the same-extraction feedback null, while evaluating both modes on one fresh fit avoids attributing a cross-history change to extraction. The existing-checkpoint A is narrower; it is not an added prerequisite. No claim that sampling caused P84 losses, mean execution will improve, or the stochastic evaluation is defective follows.",
+    "tier": "object",
+    "provenance": "Owner-delegated decision (unattended, 2026-09-03 instruction): (a)",
+    "executed": "P84 all-outcome stop and recommendation only; no next card/master/source/budget, automatic repeat, extra evaluation or Pro Send created",
+    "claim_ceiling": "Preliminary package gain against this fitted G; both learned policies lose to hover. No stable or tuned-comparator superiority, learned-duration value, equivalence, causal shortening or deployment claim.",
+    "strongest_support": "F-G +0.06439366516106426,29/32 positive differences; earlier short fits have positive F-H points.",
+    "strongest_contradiction": "F-H -0.029184443306665326 and G-H -0.09357810846772958; P82 F-G WITHIN and prior mixed hover/feedback patterns remain."
+  },
+  "next_recommendation_known_work": {
+    "question": "In one separately allocated fresh B, does fixed short renewal retain native value against feedback and hover when velocity execution uses tanh(mu), with both original stochastic policies evaluated on that same fit?",
+    "purpose": "Real-learning performance exploration of a declared execution policy; no fourth unchanged history or post-hoc choice of the better evaluation mode.",
+    "evidence_class": "B/EXPLORE (recommendation only)",
+    "fitted_arms": 2,
+    "independent_training_instances": 1,
+    "unchanged_training_episodes_per_arm": 512,
+    "unchanged_training_steps_per_arm": 131072,
+    "optimizer_steps": 2048,
+    "proposed_final_groups": [
+      "F_mean_velocity",
+      "G_mean_velocity",
+      "F_sampled_velocity",
+      "G_sampled_velocity",
+      "H"
+    ],
+    "final_episodes_per_group": 32,
+    "final_evaluation_episodes": 160,
+    "native_steps": 303104,
+    "F_head_forward_row_bounds": [
+      2048000,
+      4096000
+    ],
+    "F_head_dense_MAC_bounds": [
+      4521984000,
+      9043968000
+    ],
+    "primary_recommendation": "F_mean_velocity_minus_G_mean_velocity; all hover contrasts and within-fit mean-minus-sampled differences remain explicit",
+    "F_duration_rule": "unchanged fixed half-each {1,2} at own expiry; duration draws remain stochastic",
+    "velocity_rule": "replace only latent Gaussian velocity sample by mu at legal action opportunities, then tanh; this is not E[tanh(U)] and F is not fully deterministic",
+    "native_step_multiplier_vs_current": 1.0571428571428572,
+    "F_head_row_bound_multipliers": [
+      1.0204081632653061,
+      1.0204081632653061
+    ],
+    "unchanged_B_alternative": {
+      "native_steps": 286720,
+      "optimizer_steps": 2048,
+      "final_evaluation_episodes": 96,
+      "default_next": false
+    },
+    "finite_fixed_checkpoint_alternative": {
+      "evidence_class": "A/RECON measurement ceiling only",
+      "checkpoints": "P84 F/G, outcome-selected after hover losses",
+      "new_training": 0,
+      "optimizer_steps": 0,
+      "final_evaluation_episodes": 96,
+      "native_steps": 24576,
+      "F_head_forward_row_bounds": [
+        40960,
+        81920
+      ],
+      "F_head_dense_MAC_bounds": [
+        90439680,
+        180879360
+      ],
+      "decision_value": "Can measure these selected checkpoints under mean-velocity execution, but supplies no fresh learning instance or algorithm-effect claim; not selected and not a prerequisite."
+    },
+    "exact_diagnostic_or_nested_search": false,
+    "added_validation": "future changed-boundary verification counted separately; no extra probe commissioned",
+    "current_outer_wall_reference_seconds": 313.9,
+    "current_F_G_seconds": [
+      163.87369038298493,
+      133.33607813803246
+    ],
+    "future_wall_seconds": null,
+    "guarantees_future_seconds": false,
+    "prospective_master": null,
+    "new_card_or_allowance_created": false,
+    "new_source_edit": false,
+    "automatic_repeat": false,
+    "new_native_execution": 0
+  },
+  "owner_review_boundary": {
+    "checked_at": "2026-09-09T08:06:15-07:00",
+    "reviews": [
+      {
+        "checkout": "C:\\Projects\\HMASD-worktrees\\dm-ucope-native-return-prep-20260906",
+        "reviews": []
+      },
+      {
+        "checkout": "C:\\Projects\\HMASD",
+        "reviews": []
+      }
+    ],
+    "ucope_audit_owner_overrides": [],
+    "local_collected_hashes": {
+      "remote_and_local_sha256": {
+        "summary.json": true,
+        "episodes.jsonl": true,
+        "rollouts.jsonl": true,
+        "diagnostics.jsonl": true,
+        "final_F.pt": true,
+        "final_G.pt": true,
+        "resource_admission.json": true
+      },
+      "supervisor_sha256": {
+        "exit_code": true,
+        "pid": true,
+        "resource_admission.json": true,
+        "runner.sh": true,
+        "start_time": true,
+        "status": true,
+        "task.log": true
+      }
+    }
+  }
+}

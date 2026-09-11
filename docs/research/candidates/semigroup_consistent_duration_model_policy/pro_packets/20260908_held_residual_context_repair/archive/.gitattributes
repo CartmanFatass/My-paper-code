@@ -1,0 +1,8 @@
+# Preserve immutable delivery bytes and exact recovery evidence.
+RESPONSE.md -text whitespace=cr-at-eol
+RECOVERY_CHAT_RESPONSE.md -text whitespace=cr-at-eol
+RECOVERY_GITHUB_COMMENT.json -text whitespace=cr-at-eol
+RECOVERY_HANDOFF.json -text whitespace=cr-at-eol
+RECOVERY_PROMPT.md -text whitespace=cr-at-eol
+RECOVERY_TRANSPORT_FACTS.json -text whitespace=cr-at-eol
+DM_READBACK.json -text whitespace=cr-at-eol

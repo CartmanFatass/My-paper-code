@@ -1,0 +1,104 @@
+{
+  "delivery_mode": "github_delivery",
+  "caller_role": "em",
+  "workflow_node": "em_convergence",
+  "request_id": "2026-09-08-crto-post-b08-convergence-01",
+  "source_thread_id": "01a08438-5664-7b23-b9b1-76f197c9ca15",
+  "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "direction_id": "commitment_residual_triggered_options",
+  "repository": "CartmanFatass/My-paper-code",
+  "repository_url": "https://github.com/CartmanFatass/My-paper-code",
+  "commit_or_ref": "eb25f0993ac6882e56e4c2115d82c6399f006498",
+  "scientific_question": "After the accepted native-cost B08 result, does any specifically justified new B/EXPLORE question remain beyond the common-policy/low-regret observation at the original .0025 alignment margin, or should this Convergence node retain the prior selected-panel family boundary and state the concrete scientific yield?\n\nThe valid B08 has complete trustworthy primary measurements but weak new RAW-LONG: KEEP8/8 and REPLAN5/8, with both side-mean regret limits passing. All three arms at33/258 select identical native actions and have mean regret .0021294544930598857. Delta_R and Delta_D are zero at both endpoints. Historical RAW gains are +.0044524264964700775 SHORT and +.0016519755926440258 LONG, with3 and2 loss rows and negative REPLAN mean changes. Historical TRUE improves substantially, but neither matched new control is beaten. This is diagnostic native evidence without competent residual polarity, not a competent negative or an alignment success.\n\nAn outcome-informed arithmetic fact bounds this particular comparison: even zero treatment regret permits gain only .0021294544930598857 against the recorded new RAW, below .0025; correcting all three remaining errors yields total .03407127188895817, below required >.04. That fixed-baseline fact cannot justify shrinking the MEI, weakening the comparator or searching for a favorable seed/panel. It also does not require exact policy-class maxima, exhaustive causal diagnosis or a headroom experiment before any later justified B.\n\nDM recommends retaining the prior family boundary with the bounded yield unless you can specify one distinct, scientifically justified B discriminator. This is advice, not a local disposition. The strongest countercase is real native improvement and remaining action errors, together with the fact that exact-count competence is not a total ordering of value; an actually different action-credit question could remain worth exploring. Decide the scientific value of that next observation at B, without treating missing unrequested C evidence as a negative. The present consultation runs nothing and allocates no successor.",
+  "deliverable": "Give a conclusion-first direction decision: either select exactly one justified new B question, or retain the prior family boundary with its concrete yield and the missing discriminator that would change that choice. If selecting B, state what its next observation decides, the particular legal-action/credit intervention, real learner, containing same-information comparator and alignment control, primary native observable, original-MEI interpretation including weak-comparator and native-loss outcomes, and a bounded prospective exposure/work plan. Make any changed data/host/comparator meaning explicit and scientifically motivated; do not relabel an unchanged seed/budget or exact-count repair as a new question.\n\nIf retaining the boundary, preserve the common native improvement and REPLAN tradeoffs while explaining what the zero matched contrasts and recorded-baseline ceiling do and do not establish. Do not turn this into competent residual failure, family exhaustion, function-class equivalence or a Portfolio lifecycle/priority decision. No recast or other scientific scope change may be implicit. Name any genuine out-of-scope or source-access conflict rather than inventing a completed decision.\n\nApply evidence-spec11.8 to the selected question itself. For any proposed work, state known arms/seeds/updates/evaluation and nested candidate/trajectory/controller factors, distinguish algorithm work from added validation, compare any costly diagnostic with a minimal real B or finite measurement, and keep unknown cost unknown. No extra cost pilot, full support census, exact upper, universal held-out requirement or Pro-as-launch-gate follows. Cite the relevant pinned evidence and preserve the strongest support, contradiction and claim ceiling in plain scientific prose.",
+  "claim_ceiling": "Consultation over one valid adaptive B/EXPLORE and recorded-byte A/RECON arithmetic: one reused joint seed, exposed64-member panel/16 EVAL identities and two endpoint facets, weak comparator qualification. No independent confirmation, competent residual negative, stable superiority/equivalence, family exhaustion, tuned headroom, policy-class information limits, full-policy MARL/UAV return or resource-efficiency conclusion. A proposed continuation remains B unless an explicit separate direction decision changes scope.",
+  "reference_files": [
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "purpose": "Sections11.4,11.7 and11.8 control the question, evidence ceiling and proportionate work; sections3-5 only for concrete integrity/class questions.",
+      "provenance": "Current controlling specification; committed surface equals primary at preparation."
+    },
+    {
+      "path": "docs/research/candidates/commitment_residual_triggered_options/pro_packets/20260908_post_b08_convergence/READINESS.md",
+      "purpose": "The one direction question, recommendation/countercase, bounded yield, original-margin arithmetic, known work and zero-exposure scope.",
+      "provenance": "Current P72 DM authoring assessment; recommendation only, no formed family decision or new experiment."
+    },
+    {
+      "path": "docs/research/candidates/commitment_residual_triggered_options/pro_packets/20260908_post_b08_convergence/EXPOSURE.json",
+      "purpose": "Machine-generated zero-new-scientific-exposure line, actual B08 work/time and recorded-comparator bound; future work is unselected/unallocated.",
+      "provenance": "Stdlib arithmetic from accepted P71 records, without model/environment/native/evaluator calls."
+    },
+    {
+      "path": "docs/research/candidates/commitment_residual_triggered_options/CRTO_NATIVE_COST_B08_P71_INTAKE_20260908.md",
+      "purpose": "Final sections1-5: technical/scientific acceptance, rule applied verbatim, all gains/losses, weak qualifier, scope and the exact next-node dependency. Initial allocation section is preserved history.",
+      "provenance": "Accepted DM scientific intake at601d9d8f0612461f4c04ef5f855a9ddd2aed9cee; one valid adaptive B, not a competent negative."
+    },
+    {
+      "path": "docs/research/candidates/commitment_residual_triggered_options/CRTO_NATIVE_COST_B08_P71_RESULT_20260908.json",
+      "purpose": "Primary representations/side means/qualification atSHORT andLONG, all three contrasts and signed historical loss rows, objective/exposure/counts. The complete96-row output is available; no universal replay or full-row rereading obligation is added.",
+      "provenance": "Original411368-byte result at8ea7fa71622f8f436b87fbeb3beee0b3b918fc67; SHA2565fa2fcb91a643f1d377393994e38d390ae64ee3b39b270616ea788985e08fb61, byte-preserved and accepted."
+    },
+    {
+      "path": "docs/research/candidates/commitment_residual_triggered_options/CRTO_NATIVE_COST_B08_P71_DM_ANALYSIS_20260908.json",
+      "purpose": "Endpoint arm/native comparisons, retained loss details, policy/error identities and fixed-new-RAW attainable-gain arithmetic; one paired joint-seed observation per endpoint facet.",
+      "provenance": "Recorded-byte DM arithmetic and existing summarize_runs output; no new empirical result, independent replication or tuned headroom."
+    },
+    {
+      "path": "docs/research/candidates/commitment_residual_triggered_options/CRTO_NATIVE_COST_B08_P71_RUNTIME_RECEIPTS_20260908.json",
+      "purpose": "Complete_accounting, terminal task.log, actual-node admission and technical_collection_checks establish169s total command, per-arm charges and primary integrity.",
+      "provenance": "Direct CM staging/submission/terminal/collection receipts for exactly one fixed invocation; post-exit uptime is not runtime."
+    },
+    {
+      "path": "docs/research/candidates/commitment_residual_triggered_options/CRTO_NATIVE_COST_B08_SCIENCE_CARD_20260908.md",
+      "purpose": "Sections1-6: fixed mechanism/information/comparators, common native-cost objective, original margins/qualification and exposure. Original zero-allocation status describes its freeze only; P71 intake records later authorized execution.",
+      "provenance": "Frozen prospective B card at68044fdcbd77ca8875526b099a01f4bb3f892ece; no retrospective branch or comparator rewrite."
+    },
+    {
+      "path": "docs/research/candidates/commitment_residual_triggered_options/DIRECTION.md",
+      "purpose": "Last three sections: prior balanced-family boundary, P68 bounded re-entry and B08 accepted science; earlier sections only to resolve a concrete scope ambiguity.",
+      "provenance": "Accepted mechanism-level record; no family exhaustion, Portfolio disposition or recast from P71."
+    },
+    {
+      "path": "docs/research/candidates/commitment_residual_triggered_options/pro_packets/20260908_native_cost_reentry_convergence/archive/RESPONSE.md",
+      "purpose": "Complete prior Convergence decision selecting only the specified B08, especially weak-RAW reading, historical-floor interpretation, cost correction and limited re-entry scope.",
+      "provenance": "Immutable Pro response originally delivered atfebfad9778a0a69d3be2618739a31eec86721caa and fully accepted; not regenerated or resent."
+    },
+    {
+      "path": "docs/research/candidates/commitment_residual_triggered_options/CRTO_NATIVE_COST_P68_CONVERGENCE_INTAKE_20260908.md",
+      "purpose": "Authority/conformance and decisions: prior response accepted from immutable Git delivery while one inexact provider Send remains preserved.",
+      "provenance": "Direct complete-response intake; scientific authority and historical transport provenance are separate."
+    },
+    {
+      "path": "experiments/candidates/commitment_residual_triggered_options/native_cost_b08/experiment.py",
+      "purpose": "expected_native_cost_loss, train_path, score/result_reading and WallBudget only as needed to assess what was changed and any genuinely new action-credit question. Do not commission an engineering replay.",
+      "provenance": "Accepted source atd9f643b761d57584de313b1f837d6c2c0becc931, unchanged duringP71."
+    },
+    {
+      "path": "docs/research/candidates/commitment_residual_triggered_options/pro_packets/20260908_post_b08_convergence/ISSUE_SNAPSHOT.json",
+      "purpose": "Pinned actual Issue13 body/comment readback, including current question and preserved P68 delivery link; mutable discussion is not scientific authority.",
+      "provenance": "Fresh author readback after one body update; existing P68 response comment preserved; no new Pro Send."
+    }
+  ],
+  "discussion_urls": [
+    "https://github.com/CartmanFatass/My-paper-code/issues/13"
+  ],
+  "constraints": [
+    "P72 is preparation/consultation only: zero new result-bearing, environment, scientific-model, native, evaluator or optimizer calls; zero experimental budget. Root dispatches the new bound request, and Pro may only deliver the scoped response/comment. No code, model, evaluation, profiling, test, runtime or local scientific-state change is requested.",
+    "Preserve B08 exactly as WEAK_NEW_RAW_LONG_DIAGNOSTICS_ONLY: complete trustworthy data, failed REPLAN exact-count qualifier, zero Delta_R/Delta_D at both endpoints, every historical gain/loss and one reused seed/exposed panel. Do not substitute historical RAW competence or erase losses to create a positive or competent negative.",
+    "Original residual MEI .0025 and separate diagnostic .000625 remain fixed. The outcome-informed recorded-new-RAW ceiling .0021294544930598857 limits that fixed comparison; it is not a trained/tuned headroom record or an accessible zero-regret policy. A post-hoc weaker baseline, lower threshold or seed/panel search is not authorized.",
+    "B04 retains its one competent seed0 negative, B05/B06/B07 retain their comparator limits and native changes, natural-support closure and A01 uncertainty remain, and B08 adds no independent replication or full-policy MARL/UAV claim. A/B have no consumption state; no C promotion is requested.",
+    "The prior P68 Pro decision selected only B08 re-entry with competence, interpretation and complete-time corrections. It did not open an arbitrary repair ladder or recast. Root now asks this new direction question after acceptedP71; the old provider Send mismatch remains historical and is not relabelled exact or resent.",
+    "Machine-generated historical work is1 joint seed x3 gate paths x258 updates x32=774 updates/24768 examples, shared predictor100x128=12800,3x2x16=96 decisions on16 identities,54848 environment transitions/3520 fixed-future branch steps. P72 adds0 to all scientific counts. No nested policy search was run.",
+    "Actual B08 complete command169s, charged RAW139.1011370769702s/TRUE137.73502852593083s/DERANGED138.23890201293398s, all1200/1500s caps passed; do not sum conservative arm charges. Old shared515.3820955440096s was a projection. Future configuration/cost is unselected and unallocated, not free or assumed to equal169s. AggregateCPU and tuned same-information headroom are absent.",
+    "Keep the distinction between observed action agreement/native returns and inferred causes. A common objective or preprocessing benefit remains possible, not demonstrated by failed alignment controls. Existing verified P68 literature motivates the completed cost intervention only; library availability is neither polarity nor a novelty verdict.",
+    "A justified future B uses a real learner and native sampled measurement with transparent exposure. Competence can be an interpretation qualifier and comparator repair may occur inside that B; prior positivity, full causal diagnosis, exact maxima and complete headroom are not extra launch prerequisites. Only evidence-spec11.4 launch conditions apply.",
+    "Current committed evidence/engineering specifications match the primary checkout at preparation. The frozen B08 card has historical prospective status, while P71 intake records later source acceptance, allocation and terminal execution; do not mistake the old status line for an unexecuted result or new authority.",
+    "No local family/lifecycle/priority/recast/UAV decision is made by this packet. Portfolio status is ACTIVE/MEDIUM; Root owns allocation, integration, working-set planning and detached-checkout reclamation. A scientific node decision is distinct from those Portfolio actions."
+  ],
+  "github_delivery": {
+    "branch": "codex/crto",
+    "base_sha": "eb25f0993ac6882e56e4c2115d82c6399f006498",
+    "response_path": "docs/research/candidates/commitment_residual_triggered_options/pro_packets/20260908_post_b08_convergence/archive/RESPONSE.md",
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/13"
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "id": "20260909-ucope-008",
+  "created": "2026-09-09T07:08:36-07:00",
+  "direction": "ucope",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "P83：同一短承诺比较，观察一次新学习历史",
+  "context": "固定1或2步随机续约，在另一条独立学习历史上与逐步反馈和悬停如何比较？结构是部分可观测五机团队的异步时长承诺。保留P82未达到0.01的正主差值和所有旧符号，固定最终评估预算。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "按Root P83分配执行一次8201，任何符号都结束本次，不自动重复或追加评估。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "在下一可执行边界停止本卡未来工作，保留已发生的全部结果。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "在下一可执行边界按明确新指令修订未来工作，不重写旧卡或结果。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "一次有用原生收益但主差值未达尺度的短承诺结果，值得按固定预算观察另一学习历史。",
+  "evidence": [
+    "docs/research/candidates/ucope/UCOPE_UAV_SHORT_FIXED_RENEWAL_B02_SCIENCE_CARD_20260909.md",
+    "docs/research/candidates/ucope/UCOPE_UAV_SHORT_FIXED_RENEWAL_B02_P83_INTAKE_20260909.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-09.md#L28",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否接受P83一次新训练，保持1或2步固定续约与反馈、悬停比较，前瞻观察另一条学习历史？",
+    "changes_if_approved": [
+      {
+        "target": "docs/research/candidates/ucope/UCOPE_UAV_SHORT_FIXED_RENEWAL_B02_SCIENCE_CARD_20260909.md",
+        "from": "P82已完成WITHIN，全部旧结果保留",
+        "to": "只新增8201一次独立训练，固定{1,2}和评估预算，F-G为主比较"
+      }
+    ],
+    "if_refused": "在下一可执行边界停止或修订本卡未来工作；不重写已发生的结果或旧卡。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_UAV_SHORT_FIXED_RENEWAL_B01_P82_INTAKE_20260909.md",
+        "quote": "One real short-support fit yields useful sampled\nF−H and a positive F−G below MEI.",
+        "why": "有原生收益信号，但一次训练不能描述另一次学习历史。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_UAV_SHORT_FIXED_RENEWAL_B02_SCIENCE_CARD_20260909.md",
+        "quote": "Every\nsign ends the allocation; extra evaluation cannot be used to seek a sign or\ncross a boundary.",
+        "why": "不是重复到成功；下一次正负结果都必须保留，不能靠追加评估越线。"
+      }
+    ],
+    "uncertainty": [
+      "新训练可能正、零或负；不能据此保证稳定优势。",
+      "315.65秒仅是P82测量，新用时未知。",
+      "同信息调优基线余量缺失。"
+    ],
+    "cost": {
+      "compute": "286720原生步、2048次Adam、96次评估；F头2007040–4014080行；每臂1800秒/全调用3600秒，检查≤300秒。",
+      "owner_time": "可异步复核，无需回复才继续。",
+      "reversibility": "costly",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "Recommend and\nexecute **(a)**. The question is another independent learning history under\nthe same fixed budget, preserving P82 WITHIN and its native gains. No favorable\noutcome is required for completion or retention.",
+    "source": "docs/research/candidates/ucope/UCOPE_UAV_SHORT_FIXED_RENEWAL_B02_P83_INTAKE_20260909.md"
+  },
+  "starred": false
+}
