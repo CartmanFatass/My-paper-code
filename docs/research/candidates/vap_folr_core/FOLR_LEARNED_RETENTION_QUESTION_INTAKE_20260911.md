@@ -138,3 +138,15 @@ response/specification intake remain pending, distinct facts. The shared directi
 checkout is retained for this live delivery/intake dependency; no remote execution
 or scientific root was created. Root integrates the named commits, preserving its
 concurrent audit rows and the three Portfolio inputs already present on main.
+
+## 6. Completed response and intake
+
+Root returned the complete archived response at
+`a2a47f1d73a3fd1bc2f724e77b2a7f0859332788`. The
+[full Convergence intake](FOLR_LEARNED_RETENTION_CONVERGENCE_INTAKE_20260911.md)
+passes scientific/specification conformance and applies narrow OPEN of the exact
+learned event-retention question as an in-family extension, not RECAST. Generic
+event-aware RETAIN is the sole primary comparator. The fixed-half pause remains.
+The response grants zero implementation or numerical allowance and no automatic
+successor. This completes the single Portfolio-allocated question/intake chain;
+the earlier READY/pending statements above describe their preparation boundary.
