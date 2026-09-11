@@ -1009,3 +1009,26 @@ closeouts. The current advancing-direction count is zero. No lifecycle, priority
 state changes; no cap transfers, retries, new source/check tasks, repeated empty-set consultation or
 automatic successors are selected. A future refill requires a concrete attributable eligibility
 change and a specific ready task under the then-applicable authority.
+
+## Owner-directed non-scientific blocker repair and new Portfolio advice
+
+The owner explicitly directed that non-scientific blockers must not block research and requested a
+new Portfolio recommendation over the existing open directions. This current instruction expands
+beyond the completed fixed-vacancy question. Root resumed the designated Portfolio DM to prepare an
+evidence-grounded program that separates scientific selection/budget from technical readiness and
+assigns each repair an owner, bounded action, verification and exit condition.
+
+Root also actually resumed three original direction DMs for independent technical unblocking. ACVC
+owns a minimal CRLF/SSH-input preparation repair and LF/readback readiness proof. VNFC owns bounded
+exit139 diagnosis and, if attributable without changing semantics, a minimal reviewed fix. FSD owns
+deterministic remote staging/readback and a prospective bounded support path. Each retains its ended
+scientific attempt, no-retry/no-successor record, original comparator/estimand/MEI and caps. The
+assignments permit no result-bearing launch, model/environment construction, new RNG master, training
+or evaluation. A repair makes a direction technically ready for later selection; it does not itself
+allocate a scientific invocation.
+
+These three direction chains now advance once each. Portfolio authoring is not another direction
+slot. Unknown timing terms and VNFC's policy-blocked retained duplicate/scratch files remain explicit
+limitations but are not counted as scientific blockers. CBSC, FRRIE and other missing-operation rows
+will be classified in the Portfolio packet as mechanical repair versus scientific-method choice;
+only the latter remains with its proper scientific decision tier.

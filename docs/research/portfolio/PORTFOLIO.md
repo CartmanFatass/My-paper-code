@@ -1,5 +1,28 @@
 # HMASD Research Portfolio
 
+## Owner-directed technical unblocking and forward recommendation — 2026-09-11
+
+The owner directed that non-scientific blockers must not block research and asked Portfolio for
+forward recommendations across the existing open directions. This is a broader current assignment
+than the completed fixed-vacancy decision below. A designated Portfolio DM is preparing a new
+cross-direction packet that separates scientific selection and budget from engineering readiness,
+and requires a named repair owner and exit condition for each technical blocker.
+
+Three direction-local technical repair chains are actually dispatched and advancing:
+
+| Direction | Non-scientific repair | Scientific boundary preserved |
+| --- | --- | --- |
+| ACVC | Repair CRLF/SSH-stdin remote preparation and prove byte-stable LF staging/readback. | The ended8951 allocation is not retried; no fit, model or numerical exposure. |
+| VNFC | Diagnose and minimally repair the attributable exit139/core-dump path from preserved B02 evidence. | The incomplete B02 primary remains unscored; no rerun, new seed or successor. |
+| FSD | Repair deterministic remote staging/readback and bound the prospective support path. | The ended770803/780803 allocation and 300-second support cap are not reused or bypassed. |
+
+These repairs may use bounded static, transport and synthetic checks that do not construct the
+scientific workload. Any future result-bearing invocation still needs its own scientific selection,
+frozen card, exact source, fresh destination admission and Monitor adoption. Missing cost telemetry
+and policy-blocked duplicate cleanup remain qualified evidence/retention facts rather than scientific
+stops. The current advancing-direction count is three; Portfolio authoring is cross-direction work
+and is not counted as another chain.
+
 ## Current zero-addition Portfolio boundary — 2026-09-11
 
 The canonical Transport archived request
