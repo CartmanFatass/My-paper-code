@@ -1,0 +1,95 @@
+{
+  "collected_at": "2026-09-11T18:44:21.103042+00:00",
+  "object": "VNFC-N7-NATIVE-SERVICE-CREDIT-B02",
+  "source_sha": "76d4afca664f988fbaabca2923a0c891f8a784ff",
+  "node": "wsl_4070",
+  "remote_cwd": "/home/wu/hmasd-worktrees/vnfc-b02-credit-20260911-01",
+  "handle": "vnfc-b02-credit-20260911-01",
+  "archive": {
+    "path": "raw_artifacts.tgz",
+    "bytes": 1416174,
+    "sha256": "1bbcfbe499e8a15bb1d5f4a0d4fdaf0fa8a52feda65da4de4f2f3e2abc575de5",
+    "remote_path": "/home/wu/hmasd-inputs/vnfc_b02_partial_20260911.tgz",
+    "remote_sha256_observed": "1bbcfbe499e8a15bb1d5f4a0d4fdaf0fa8a52feda65da4de4f2f3e2abc575de5",
+    "remote_local_archive_hashes_match": true
+  },
+  "files": [
+    {
+      "path": "temp/directions/variable_n_fleet_churn/exp/b02_credit_20260911_01/INTERVAL_initial.pt",
+      "bytes": 722421,
+      "sha256": "55306096c5718b812d10c1ba185619d8a6f54b92f3a8b9e9b7ec8d4ce62c95b2"
+    },
+    {
+      "path": "temp/directions/variable_n_fleet_churn/exp/b02_credit_20260911_01/TERMINAL_initial.pt",
+      "bytes": 722421,
+      "sha256": "f63932e28cb2c7b722a788870f53ad5bb8f0de750ff2ee4d8fa008c2e16af5d0"
+    },
+    {
+      "path": "temp/directions/variable_n_fleet_churn/exp/b02_credit_20260911_01/b01_native.so",
+      "bytes": 133704,
+      "sha256": "1e72526547c0709e2fbc8feb3101a09f0d9896d3e09ba52ce6e0e4ede3f1f5d8"
+    },
+    {
+      "path": "temp/directions/variable_n_fleet_churn/exp/b02_credit_20260911_01_memory.json",
+      "bytes": 504,
+      "sha256": "a98813a8a45fe04803939b927210ee58814824215bb7462f28011998504f11bc"
+    },
+    {
+      "path": "temp/directions/variable_n_fleet_churn/exp/b02_credit_20260911_01_outer_time.txt",
+      "bytes": 88,
+      "sha256": "8ef9c11f5e25d4f695d2b2e95f0dac01eb85c514a822555e2cc3fcd49e725b84"
+    },
+    {
+      "path": "vnfc-b02-credit-20260911-01/exit_code",
+      "bytes": 4,
+      "sha256": "690e07064753123c967bbac0180f32da6a753a5bd8b79a47644cef58e776d9f0"
+    },
+    {
+      "path": "vnfc-b02-credit-20260911-01/pid",
+      "bytes": 8,
+      "sha256": "a9bbf3288d5ab5783a30e9bbf0205c16a780f4d2fbb54932ad9e99e592a9bfb9"
+    },
+    {
+      "path": "vnfc-b02-credit-20260911-01/runner.sh",
+      "bytes": 1628,
+      "sha256": "bb6a9fa1b3264a321a85c75bfd1b505425f1224e82d6b9ac73ede7164c915c0b"
+    },
+    {
+      "path": "vnfc-b02-credit-20260911-01/start_time",
+      "bytes": 11,
+      "sha256": "088e16f3015981152debd9cb53b9c497500e956e7f6bc9b265c60b091f6aa0a1"
+    },
+    {
+      "path": "vnfc-b02-credit-20260911-01/status",
+      "bytes": 7,
+      "sha256": "6da5b18878e110928643ebcc38dbb7552cf3a296eea56493e23edc2b93eecff8"
+    },
+    {
+      "path": "vnfc-b02-credit-20260911-01/task.log",
+      "bytes": 5028,
+      "sha256": "c3c75444597709f8a5fd0839dbf7d4ec524492042513bddc36dc13003453d1ed"
+    }
+  ],
+  "supervisor_status": "failed",
+  "supervisor_exit_code": 139,
+  "outer_time": {
+    "signal": 11,
+    "elapsed_seconds": 77.84,
+    "peak_rss_kib": 768712,
+    "peak_rss_bytes": 787161088,
+    "reported_percent_x_exit_status": 0,
+    "interpretation": "Signal termination and supervisor139 establish failure; GNU time percent-x zero does not establish success."
+  },
+  "absent": [
+    "summary.json",
+    "training_curves.json",
+    "training_episodes.json",
+    "evaluation_episodes.json",
+    "INTERVAL_midpoint.pt",
+    "TERMINAL_midpoint.pt",
+    "INTERVAL_final.pt",
+    "TERMINAL_final.pt"
+  ],
+  "inspection": "Read archive members and parse text/JSON with Python standard library only; no checkpoint deserialization, executable import, model, environment, test or replay.",
+  "core_scope": "No core* file observed at the execution checkout root in collection inventory; global WSL crash-capture stores were not searched."
+}
