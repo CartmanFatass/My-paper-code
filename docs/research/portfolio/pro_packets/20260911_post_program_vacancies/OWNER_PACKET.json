@@ -3,11 +3,11 @@
   "changes_if_approved": [
     {
       "target": "本轮新增研究投入",
-      "from": "FSD已结束；MGTAP和ACVC完成本轮收尾；VNFC未就绪；FOLR仍运行",
+      "from": "FSD已结束；MGTAP和ACVC科学intake及远端收尾完成；VNFC未就绪；FOLR新结果已被原DM接受",
       "to": "建议新增FSD3000秒、MGTAP1200秒各一个完整比较，并各给RCLE、ACVC一个无数值额度的原Convergence问题"
     }
   ],
-  "if_refused": "按Pro实际选择保留相应空位；继续FOLR并完成已有收尾。VNFC原900秒建议仍条件排队，不挪作修复或其他方向预算。",
+  "if_refused": "按Pro实际选择保留相应空位；原DM各自完成收尾。VNFC原900秒建议仍条件排队，不挪作修复或其他方向预算。FOLR第五位P/Q/R在单独条目中说明。",
   "evidence_for": [
     {
       "path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_770903_EXECUTION_LIMITATION_INTAKE_20260911.md",
@@ -42,7 +42,7 @@
     "compute": "建议新增上限4200秒：FSD3000、MGTAP1200各自独立，不是共享池；两个方向问题零实现及数值额度。完整成本的未知部分保留。",
     "owner_time": "无需等待所有者逐项回复；可异步覆盖Pro的合规决定。",
     "reversibility": "costly",
-    "waits_on_this": "只有新增四项投入等待Portfolio决定；FOLR和已有收尾独立继续。"
+    "waits_on_this": "A/B/C/D四项新增投入等待Portfolio决定；各方向现有收尾独立继续。FOLR第五位独立选择。"
   },
   "verdict_text": "建议A：新选FSD与MGTAP各一个完整比较，并各选RCLE、ACVC一个原Convergence问题；保留VNFC条件排队。尚未执行任何本轮投资选项。",
   "source": "docs/research/portfolio/pro_packets/20260911_post_program_vacancies/SCIENCE_BRIEF.md"

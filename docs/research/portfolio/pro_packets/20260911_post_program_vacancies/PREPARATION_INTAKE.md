@@ -196,3 +196,54 @@ leave the slot vacant or commission exactly one original-Convergence question/
 intake on the first gate/RETAIN outcome, zero implementation/numerical allowance.
 The four A/B/C/D investments are not silently expanded. Current FOLR intake work
 continues independently and is not counted as two arms or as its future task.
+
+## Accepted FOLR result and revised fifth proposal before publication
+
+At2026-09-11T22:08:53.672988Z Root forwarded original-DM scientific acceptance:
+RETAIN−.160078125, LEARNED_EVENT1.60328125, d_LR+1.763359375,
+LEARNED_EVENT_ABOVE_MEI; both5000 training episodes/4969 optimizer calls/128 final
+returns, finite checkpoints and exact target copying, gate129 parameters with
+L2 displacement1.353121908. Whole native835.33+867.79=1703.12 seconds. The earlier
+terminal-only account remains historical and is not substituted for this later
+acceptance. Original full intake/E0 is requested for fixed-source publication.
+No outcome analysis or extra invocation was performed by this author.
+
+Under Root's still-unpublished preparation assignment, section8 now has independent
+P/Q/R options: recommend P, one new unchanged FOLR pair3900 seconds; Q is one
+zero-implementation/zero-numerical original-Convergence question; R leaves vacancy.
+The earlier recommendation to defer all fifth numerical investment is superseded
+by the new accepted result, before TASK publication/READY/Send. A/B/C/D retain their
+four-task meanings. A+P would be five next tasks, three real paired learning units
+and two direction questions, with separate new caps3000+1200+3900=8100 seconds.
+No local Portfolio selection or reuse of ended budgets occurs. No sixth task follows.
+
+Scientific-reading application: the new result changes the direct-B value judgment;
+one fresh matched training pair, rather than its256 evaluation episodes, is the
+independent unit. Equally legal information and a gate that actually updates do not
+separate extra capacity/lifetime dynamics from a causal memory effect. Reuse the
+accepted FOLR card's verified CAMA local-history/reward passages (MARL-0409 pp2–3,
+16–17) and current Foundations §§2–4,6/empirical topic. No new mechanism, literature
+novelty verdict, diagnostic or search is needed to propose this unchanged real B.
+The strongest contrary case remains one training history and an already adaptive
+RETAIN null. All proposed numerical work is new and conditional on Portfolio choice.
+
+The first renderer produced a40761-byte TASK_NOT_PUBLISHED draft at evidenceb4a4ff8e.
+A second attempt in the same output directory returned the exact error
+`malformed_input: use a fresh output directory; preserve existing packet and send state`.
+It created no accepted request or provider Send. Preserve those earlier draft bytes
+under unpublished_draft and use a fresh delivery subdirectory, as instructed by the
+renderer, on the same branch/request. This is the permitted correction, not a bypass
+of the rejection or regeneration of an accepted packet. Final TASK is bound once
+after publication. Both earlier stages remain attributable preparation history.
+
+The separate fifth-choice proposal has a new technical publication audit row98;
+prior row95 and both later main closeout rows are preserved. A separate P2 item
+records P/Q/R rather than changing the historical A/B/C/D option meanings. No
+owner reply or Portfolio option is auto-applied.
+
+The maintained fifth-choice item is20260911-root-006 (P2, Portfolio), created only
+through item.py with P/Q/R, recommendationP and auto_applied=null. Original005's
+A/B/C/D options remain unchanged and its planned trace points here. Both owner
+review queries (own checkout and current primary checkout) returned[] at this
+boundary. No valid-result brief is created for this zero-exposure preparation;
+the actual result's Chinese brief belongs to the original FOLR DM.

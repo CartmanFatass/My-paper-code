@@ -1,6 +1,6 @@
 {
   "created_utc": "2026-09-11T21:50:36.301205+00:00",
-  "question": "Post-program four-vacancy investment, widened by Root before first rendering",
+  "question": "Post-program up-to-five next-task investment; four A/B/C/D tasks plus separate FOLR P/Q/R",
   "authority": "Preparation only; no new allocation, family decision or provider Send",
   "launch_technical_snapshot_sha": "02d61f605644da23d044d529b4361c4b701ece6c",
   "new_MGTAP_intake_sha": "5321b69fdecdc6de81fd5e8fb9efe648a5950e6e",
@@ -41,7 +41,10 @@
     "current_live_FOLR_directions": 0,
     "current_vacancies_after_closeout": 4,
     "current_advancing_FOLR_intake_chains": 1,
-    "vacancy_horizon_after_FOLR_intake": 5
+    "vacancy_horizon_after_FOLR_intake": 5,
+    "FOLR_primary_accepted_before_TASK_publication": true,
+    "next_task_horizon_after_current_FOLR_closeout": 5,
+    "actual_author_new_allocations": 0
   },
   "actual_new_results": {
     "MGTAP8213": {
@@ -88,6 +91,26 @@
       "full_support_complete_caps_certified": false,
       "known_support_through_analysis": 58.732128,
       "same_fit_policy_initialization_gain": "unmeasured; no initial-policy panel"
+    },
+    "FOLR7809": {
+      "provenance": "Root forwarded original-DM scientific acceptance2026-09-11T22:08:53.672988Z; immutable full intake/E0 pin pending",
+      "status": "VALID COMPLETE LEARNED_EVENT_ABOVE_MEI",
+      "independent_training_units": 1,
+      "RETAIN_mean": -0.160078125,
+      "LEARNED_EVENT_mean": 1.60328125,
+      "difference": 1.763359375,
+      "training_episodes": 10000,
+      "optimizer_steps": 9938,
+      "final_episodes": 256,
+      "gate_parameters": 129,
+      "gate_parameter_L2": 1.353121908,
+      "whole_native_seconds": {
+        "RETAIN": 835.33,
+        "LEARNED_EVENT": 867.79,
+        "sum": 1703.12
+      },
+      "full_support_complete_caps_certified": false,
+      "new_successor_selected": false
     }
   },
   "shared_terminal_observation_seconds": {
@@ -157,6 +180,37 @@
         "8213_DENSE_nested": 158.81344886882232
       },
       "total_team_ticks": 278528
+    },
+    {
+      "direction": "vap_folr_core",
+      "kind": "proposed P new unchanged LEARNED_EVENT/RETAIN B pair",
+      "independent_training_units": 1,
+      "learners": 2,
+      "model_constructions": null,
+      "training_episodes": 10000,
+      "training_team_ticks": 200000,
+      "evaluation_episodes": 256,
+      "evaluation_team_ticks": 5120,
+      "total_team_ticks": 205120,
+      "optimizer_steps": 9938,
+      "replay_GRU_rows": 66783360,
+      "acting_GRU_rows": 1076880,
+      "learned_gate_forward_rows": 33930120,
+      "gate_parameters": 129,
+      "new_proposed_caps_seconds": {
+        "RETAIN": 1800,
+        "LEARNED_EVENT": 1800,
+        "native_sum": 3600,
+        "support": 300,
+        "complete": 3900
+      },
+      "anchor_whole_native_seconds": {
+        "RETAIN": 835.33,
+        "LEARNED_EVENT": 867.79,
+        "sum": 1703.12
+      },
+      "per_arm_cost_law": "admission/startup/imports/constructors +5000 native training episodes +4969 replay/RMSprop calls +128 final episodes +checkpoint/publication/exit",
+      "future_unit_rates": null
     }
   ],
   "proposed_direction_questions": [
@@ -222,16 +276,17 @@
     "no_cross_host_performance_aggregate": true
   },
   "existing_preserved_caps_seconds": {
-    "live_FOLR_complete": 3900,
     "conditional_queued_VNFC_complete": 900,
     "VNFC_native": 600,
     "VNFC_support": 300,
-    "additional_VNFC_repair_allowance": 0
+    "additional_VNFC_repair_allowance": 0,
+    "original_FOLR_through_current_closeout": 3900
   },
   "unselected_ended_caps_are_not_available_balances": [
     "FSD770903",
     "MGTAP8213",
-    "ACVC8961"
+    "ACVC8961",
+    "FOLR7809 at current allocation closeout"
   ],
   "cost_limitations": [
     "Caps are willingness-to-spend ceilings, not forecasts or transferable pool",
@@ -264,7 +319,7 @@
     "scientific_successor_selected": false
   },
   "FOLR_later_terminal_report": {
-    "provenance": "Root message after first TASK_NOT_PUBLISHED render; owning DM collecting/accepting; no scientific polarity inferred",
+    "provenance": "Historical terminal-only report; superseded for scientific acceptance by later actual_new_results.FOLR7809, narrower native clocks not added to whole commands",
     "RETAIN_native_seconds": 834.9379585,
     "LEARNED_EVENT_native_seconds": 867.4317784,
     "sum_native_seconds": 1702.3697369000001,
@@ -279,12 +334,48 @@
   },
   "optional_fifth_task": {
     "direction": "vap_folr_core",
-    "kind": "one original Convergence question and intake after own current acceptance",
-    "recommendation": "defer numerical allocation; Pro explicitly leaves vacancy or selects this zero-numerical task",
-    "numerical_allowance": 0,
-    "implementation_allowance": 0,
-    "new_native_caps": 0,
-    "outcome_assumed": null,
-    "not_automatically_selected": true
+    "recommended": "P",
+    "P": "one new unchanged real B pair3900s; no automatic successor",
+    "Q": "one original-Convergence question/intake; zero implementation/numerical allowance",
+    "R": "explicit vacancy; no new work",
+    "author_selected": null
+  },
+  "updated_utc": "2026-09-11T22:15:54.363008+00:00",
+  "fifth_option_new_caps_seconds": {
+    "P": 3900,
+    "Q": 0,
+    "R": 0
+  },
+  "combined_complete_caps_seconds": {
+    "A+P": 8100,
+    "A+Q": 4200,
+    "A+R": 4200,
+    "B+P": 6900,
+    "B+Q": 3000,
+    "B+R": 3000,
+    "C+P": 3900,
+    "C+Q": 0,
+    "C+R": 0,
+    "D+P": 3900,
+    "D+Q": 0,
+    "D+R": 0
+  },
+  "A_plus_P_factors": {
+    "B_units": 3,
+    "direction_question_units": 2,
+    "advancing_direction_tasks_if_each_ready": 5,
+    "learners": 6,
+    "independent_training_comparison_units": 3,
+    "train_episodes": 11184,
+    "evaluation_episodes": 384,
+    "total_team_ticks": 595648,
+    "optimizer_steps_total": null,
+    "known_MGTAP_plus_FOLR_optimizer_steps": 11986,
+    "FSD_optimizer_steps_unknown": true,
+    "native_caps_sum": 7200,
+    "support_caps_sum": 900,
+    "complete_caps_sum": 8100,
+    "model_constructions_total": null,
+    "no_cross_host_performance_aggregate": true
   }
 }
