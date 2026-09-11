@@ -19,7 +19,7 @@
     }
   ],
   "recommended": "b",
-  "auto_applied": null,
+  "auto_applied": "a",
   "dm_reason": "四条终点阳性值得一次独立挑战，但边际收益不确定；这是尚未执行的close-call建议。",
   "evidence": [
     "docs/research/candidates/vsp_03/VSP03_FALLBACK_QUESTION_INTAKE_20260911.md"
@@ -72,5 +72,15 @@
     "verdict_text": "DM weakly recommends **(b)**. Four separately reported positive final histories\nmake a further direct challenge to the final-controller advantage a plausible\nuse of a bounded B investment.",
     "source": "docs/research/candidates/vsp_03/VSP03_FALLBACK_QUESTION_INTAKE_20260911.md"
   },
-  "starred": true
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-11T06:19:44+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "https://github.com/CartmanFatass/My-paper-code/blob/00315dc9f1bfd9e58167696d7e53be881d685459/docs/research/candidates/vsp_03/pro_packets/20260911_question_fallback/archive/RESPONSE.md",
+      "record": "docs/research/candidates/vsp_03/VSP03_FALLBACK_CONVERGENCE_INTAKE_20260911.md",
+      "state": "applied",
+      "summary": "完整184行30288字节答复及13项固定来源已核对，规范无冲突。Pro选择(a)保留原continuous512窄暂停，没有采纳DM略偏(b)；四个正终点、负Q及原生代价保留。一次零数值fallback到此intake完成，30/30/60提案、fit、实现和重复问询均未分配。原DM建议与packet保留，实际auto_applied=a；无owner新回复、生命周期或recast变化。"
+    }
+  ]
 }
