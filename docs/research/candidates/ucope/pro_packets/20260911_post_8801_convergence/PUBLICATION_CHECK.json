@@ -1,0 +1,114 @@
+{
+  "observed_delivery_ref": "bf73d627794b5fc45848634c9a012f2a062cf5e9",
+  "reference_files": [
+    {
+      "path": "docs/research/candidates/ucope/pro_packets/20260911_post_8801_convergence/PREPARATION_INTAKE.md",
+      "commit_sha": "bf73d627794b5fc45848634c9a012f2a062cf5e9",
+      "exists": true,
+      "reachable_from_observed_remote": "refs/heads/codex/ucope@bf73d627794b5fc45848634c9a012f2a062cf5e9"
+    },
+    {
+      "path": "docs/research/candidates/ucope/pro_packets/20260911_post_8801_convergence/EXPOSURE_FACTS.json",
+      "commit_sha": "bf73d627794b5fc45848634c9a012f2a062cf5e9",
+      "exists": true,
+      "reachable_from_observed_remote": "refs/heads/codex/ucope@bf73d627794b5fc45848634c9a012f2a062cf5e9"
+    },
+    {
+      "path": "docs/research/candidates/ucope/UCOPE_UAV_CONTINUE_END_CREDIT_B01_8801_SCIENCE_CARD_20260911.md",
+      "commit_sha": "471a3383d23b16bb01469a6f30e3987910c3e47f",
+      "exists": true,
+      "reachable_from_observed_remote": "refs/heads/codex/ucope@bf73d627794b5fc45848634c9a012f2a062cf5e9"
+    },
+    {
+      "path": "docs/research/candidates/ucope/UCOPE_UAV_CONTINUE_END_CREDIT_B01_8801_RESULT_EVIDENCE_20260911.md",
+      "commit_sha": "8865eff4f42403dd9f10919c109e77f7b5ed408c",
+      "exists": true,
+      "reachable_from_observed_remote": "refs/heads/codex/ucope@bf73d627794b5fc45848634c9a012f2a062cf5e9"
+    },
+    {
+      "path": "docs/research/candidates/ucope/UCOPE_UAV_CONTINUE_END_CREDIT_B01_8801_INTAKE_20260911.md",
+      "commit_sha": "8865eff4f42403dd9f10919c109e77f7b5ed408c",
+      "exists": true,
+      "reachable_from_observed_remote": "refs/heads/codex/ucope@bf73d627794b5fc45848634c9a012f2a062cf5e9"
+    },
+    {
+      "path": "docs/research/candidates/ucope/UCOPE_UAV_CONTINUE_END_CREDIT_B01_DESIGN_CARD_20260910.md",
+      "commit_sha": "7ac21b081400db29cdadb2c79030f6341041825e",
+      "exists": true,
+      "reachable_from_observed_remote": "refs/heads/codex/ucope@bf73d627794b5fc45848634c9a012f2a062cf5e9"
+    },
+    {
+      "path": "docs/research/candidates/ucope/UCOPE_UAV_CONTINUE_END_CREDIT_B01_DESIGN_INTAKE_20260910.md",
+      "commit_sha": "7ac21b081400db29cdadb2c79030f6341041825e",
+      "exists": true,
+      "reachable_from_observed_remote": "refs/heads/codex/ucope@bf73d627794b5fc45848634c9a012f2a062cf5e9"
+    },
+    {
+      "path": "docs/research/candidates/ucope/UCOPE_UAV_SHORT_LEARNED_RENEWAL_CONTINUOUS_B01_8701_RESULT_EVIDENCE_20260910.md",
+      "commit_sha": "5bbae6d90723217336222105366774926084a00c",
+      "exists": true,
+      "reachable_from_observed_remote": "refs/heads/codex/ucope@bf73d627794b5fc45848634c9a012f2a062cf5e9"
+    },
+    {
+      "path": "docs/research/candidates/ucope/UCOPE_UAV_SHORT_LEARNED_RENEWAL_CONTINUOUS_B01_8703_RESULT_EVIDENCE_20260910.md",
+      "commit_sha": "5bbae6d90723217336222105366774926084a00c",
+      "exists": true,
+      "reachable_from_observed_remote": "refs/heads/codex/ucope@bf73d627794b5fc45848634c9a012f2a062cf5e9"
+    },
+    {
+      "path": "docs/research/candidates/ucope/DIRECTION.md",
+      "commit_sha": "5bbae6d90723217336222105366774926084a00c",
+      "exists": true,
+      "reachable_from_observed_remote": "refs/heads/codex/ucope@bf73d627794b5fc45848634c9a012f2a062cf5e9"
+    },
+    {
+      "path": "docs/research/candidates/ucope/pro_packets/20260909_post_mean_velocity_b01_convergence/archive/RESPONSE.md",
+      "commit_sha": "18356085f60fab3bb0d9e092c50bfcc5005f907f",
+      "exists": true,
+      "reachable_from_observed_remote": "refs/heads/codex/ucope@bf73d627794b5fc45848634c9a012f2a062cf5e9"
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260911_five_chain_refill/archive/RESPONSE.md",
+      "commit_sha": "ed0c4e1c3cd28be353253e8533bc89a261f25357",
+      "exists": true,
+      "reachable_from_observed_remote": "refs/heads/codex/ucope@bf73d627794b5fc45848634c9a012f2a062cf5e9"
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "commit_sha": "5bbae6d90723217336222105366774926084a00c",
+      "exists": true,
+      "reachable_from_observed_remote": "refs/heads/codex/ucope@bf73d627794b5fc45848634c9a012f2a062cf5e9"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "commit_sha": "5bbae6d90723217336222105366774926084a00c",
+      "exists": true,
+      "reachable_from_observed_remote": "refs/heads/codex/ucope@bf73d627794b5fc45848634c9a012f2a062cf5e9"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/03_HIERARCHY_ASYNC.md",
+      "commit_sha": "5bbae6d90723217336222105366774926084a00c",
+      "exists": true,
+      "reachable_from_observed_remote": "refs/heads/codex/ucope@bf73d627794b5fc45848634c9a012f2a062cf5e9"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "commit_sha": "5bbae6d90723217336222105366774926084a00c",
+      "exists": true,
+      "reachable_from_observed_remote": "refs/heads/codex/ucope@bf73d627794b5fc45848634c9a012f2a062cf5e9"
+    },
+    {
+      "path": "AGENTS.md",
+      "commit_sha": "5bbae6d90723217336222105366774926084a00c",
+      "exists": true,
+      "reachable_from_observed_remote": "refs/heads/codex/ucope@bf73d627794b5fc45848634c9a012f2a062cf5e9"
+    },
+    {
+      "path": "docs/research/candidates/ucope/pro_packets/20260911_post_8801_convergence/ISSUE_SNAPSHOT.json",
+      "commit_sha": "bf73d627794b5fc45848634c9a012f2a062cf5e9",
+      "exists": true,
+      "reachable_from_observed_remote": "refs/heads/codex/ucope@bf73d627794b5fc45848634c9a012f2a062cf5e9"
+    }
+  ],
+  "publication_not_provider_access": true
+}
