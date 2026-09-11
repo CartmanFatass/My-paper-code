@@ -1,0 +1,696 @@
+{
+  "status": "VALID_COMPLETE_B_EXPLORE; resources_unmeasured limited to part of support telemetry",
+  "source_sha": "c70f01ea30d6c4d063dcc46d8499b26bfe037da8",
+  "card_reading": "above_mei",
+  "checks": {
+    "D0_complete_source_identity": true,
+    "D0_finite_measurements": true,
+    "D0_full_counts": true,
+    "D0_published_training_rows": true,
+    "D0_stage0_learning": true,
+    "D0_stage0_coordinator_law": true,
+    "D0_stage1_learning": true,
+    "D0_stage1_coordinator_law": true,
+    "D0_stage2_learning": true,
+    "D0_stage2_coordinator_law": true,
+    "D0_stage3_learning": true,
+    "D0_stage3_coordinator_law": true,
+    "D0_stage4_learning": true,
+    "D0_stage4_coordinator_law": true,
+    "D0_cumulative_optimizer_counts": true,
+    "D0_learner_config": true,
+    "D0_evaluation_config": true,
+    "D0_only_complete_endpoint": true,
+    "D0_raw_and_native_scores": true,
+    "D0_native_components": true,
+    "D0_admission": true,
+    "D0_exit_and_cap": true,
+    "I_complete_source_identity": true,
+    "I_finite_measurements": true,
+    "I_full_counts": true,
+    "I_published_training_rows": true,
+    "I_stage0_learning": true,
+    "I_stage0_coordinator_law": true,
+    "I_stage1_learning": true,
+    "I_stage1_coordinator_law": true,
+    "I_stage2_learning": true,
+    "I_stage2_coordinator_law": true,
+    "I_stage3_learning": true,
+    "I_stage3_coordinator_law": true,
+    "I_stage4_learning": true,
+    "I_stage4_coordinator_law": true,
+    "I_cumulative_optimizer_counts": true,
+    "I_learner_config": true,
+    "I_evaluation_config": true,
+    "I_only_complete_endpoint": true,
+    "I_raw_and_native_scores": true,
+    "I_native_components": true,
+    "I_admission": true,
+    "I_exit_and_cap": true,
+    "pair_card": true,
+    "pair_host": true,
+    "pair_training_lane_seeds": true,
+    "pair_evaluation_lane_seeds": true,
+    "pair_device": true,
+    "pair_torch_threads": true,
+    "pair_learner_precision": true,
+    "pair_reward_return_precision": true,
+    "pair_native_score_factor": true,
+    "declared_host_device": true,
+    "only_declared_learner_config_differences": true,
+    "only_declared_evaluation_config_differences": true,
+    "published_pair_complete": true,
+    "published_ordered_pair_arithmetic": true,
+    "published_fixed_rule": true,
+    "component_accounting_sums_to_native_gap": true
+  },
+  "primary": {
+    "mean_I1280_minus_D0_J": 0.05697746721968016,
+    "sample_sd": 0.13685461584668487,
+    "conditional_se": 0.024192706725467705,
+    "positive": 24,
+    "negative": 8,
+    "zero": 0,
+    "min": -0.3817552181578228,
+    "max": 0.34339361701587157,
+    "relative_gain_to_D0": 0.1368747641029713,
+    "independent_training_pairs": 1,
+    "training_seed_uncertainty": "not estimable from one training pair",
+    "ordered_rows": [
+      {
+        "episode_id": 0,
+        "D0_U": 22.937840961884227,
+        "I1280_U": 35.50360122667956,
+        "D0_J": 0.2752540915426107,
+        "I1280_J": 0.42604321472015466,
+        "I1280_minus_D0_J": 0.15078912317754395
+      },
+      {
+        "episode_id": 1,
+        "D0_U": 18.451388871174213,
+        "I1280_U": 38.6492215314253,
+        "D0_J": 0.22141666645409055,
+        "I1280_J": 0.4637906583771036,
+        "I1280_minus_D0_J": 0.24237399192301304
+      },
+      {
+        "episode_id": 2,
+        "D0_U": 31.159156980194574,
+        "I1280_U": 36.322032746042254,
+        "D0_J": 0.37390988376233486,
+        "I1280_J": 0.43586439295250706,
+        "I1280_minus_D0_J": 0.0619545091901722
+      },
+      {
+        "episode_id": 3,
+        "D0_U": 42.67784617814477,
+        "I1280_U": 48.29002441974591,
+        "D0_J": 0.5121341541377372,
+        "I1280_J": 0.5794802930369509,
+        "I1280_minus_D0_J": 0.0673461388992137
+      },
+      {
+        "episode_id": 4,
+        "D0_U": 21.20887558711271,
+        "I1280_U": 43.566430131561944,
+        "D0_J": 0.25450650704535255,
+        "I1280_J": 0.5227971615787432,
+        "I1280_minus_D0_J": 0.2682906545333907
+      },
+      {
+        "episode_id": 5,
+        "D0_U": 36.228501690641586,
+        "I1280_U": 41.810496354029766,
+        "D0_J": 0.434742020287699,
+        "I1280_J": 0.5017259562483571,
+        "I1280_minus_D0_J": 0.06698393596065816
+      },
+      {
+        "episode_id": 6,
+        "D0_U": 44.379383917501755,
+        "I1280_U": 43.45764214405964,
+        "D0_J": 0.5325526070100212,
+        "I1280_J": 0.5214917057287157,
+        "I1280_minus_D0_J": -0.011060901281305435
+      },
+      {
+        "episode_id": 7,
+        "D0_U": 33.93178140020631,
+        "I1280_U": 34.73655547774407,
+        "D0_J": 0.40718137680247574,
+        "I1280_J": 0.4168386657329288,
+        "I1280_minus_D0_J": 0.00965728893045309
+      },
+      {
+        "episode_id": 8,
+        "D0_U": 38.98124980502221,
+        "I1280_U": 34.6795453505317,
+        "D0_J": 0.46777499766026653,
+        "I1280_J": 0.4161545442063804,
+        "I1280_minus_D0_J": -0.05162045345388616
+      },
+      {
+        "episode_id": 9,
+        "D0_U": 33.54686160557027,
+        "I1280_U": 42.9622656896117,
+        "D0_J": 0.40256233926684326,
+        "I1280_J": 0.5155471882753404,
+        "I1280_minus_D0_J": 0.11298484900849715
+      },
+      {
+        "episode_id": 10,
+        "D0_U": 36.85700482152574,
+        "I1280_U": 40.86876204210629,
+        "D0_J": 0.4422840578583089,
+        "I1280_J": 0.4904251445052755,
+        "I1280_minus_D0_J": 0.048141086646966647
+      },
+      {
+        "episode_id": 11,
+        "D0_U": 27.097982342294916,
+        "I1280_U": 39.126960488630885,
+        "D0_J": 0.325175788107539,
+        "I1280_J": 0.4695235258635706,
+        "I1280_minus_D0_J": 0.1443477377560316
+      },
+      {
+        "episode_id": 12,
+        "D0_U": 41.289062297817075,
+        "I1280_U": 9.47612745133184,
+        "D0_J": 0.4954687475738049,
+        "I1280_J": 0.11371352941598206,
+        "I1280_minus_D0_J": -0.3817552181578228
+      },
+      {
+        "episode_id": 13,
+        "D0_U": 41.54808552398206,
+        "I1280_U": 30.76414832806639,
+        "D0_J": 0.4985770262877848,
+        "I1280_J": 0.36916977993679667,
+        "I1280_minus_D0_J": -0.1294072463509881
+      },
+      {
+        "episode_id": 14,
+        "D0_U": 42.90172994704176,
+        "I1280_U": 44.4841518667052,
+        "D0_J": 0.5148207593645011,
+        "I1280_J": 0.5338098224004624,
+        "I1280_minus_D0_J": 0.018989063035961262
+      },
+      {
+        "episode_id": 15,
+        "D0_U": 36.77320718545773,
+        "I1280_U": 48.8978644993969,
+        "D0_J": 0.44127848622549276,
+        "I1280_J": 0.5867743739927628,
+        "I1280_minus_D0_J": 0.14549588776727002
+      },
+      {
+        "episode_id": 16,
+        "D0_U": 12.980290215227146,
+        "I1280_U": 32.64690933127669,
+        "D0_J": 0.15576348258272577,
+        "I1280_J": 0.39176291197532026,
+        "I1280_minus_D0_J": 0.2359994293925945
+      },
+      {
+        "episode_id": 17,
+        "D0_U": 45.111883070528265,
+        "I1280_U": 46.48111377358529,
+        "D0_J": 0.5413425968463391,
+        "I1280_J": 0.5577733652830235,
+        "I1280_minus_D0_J": 0.01643076843668434
+      },
+      {
+        "episode_id": 18,
+        "D0_U": 41.58514993501594,
+        "I1280_U": 44.34873459459124,
+        "D0_J": 0.49902179922019124,
+        "I1280_J": 0.532184815135095,
+        "I1280_minus_D0_J": 0.033163015914903726
+      },
+      {
+        "episode_id": 19,
+        "D0_U": 46.104181521008044,
+        "I1280_U": 39.90936101598171,
+        "D0_J": 0.5532501782520964,
+        "I1280_J": 0.4789123321917805,
+        "I1280_minus_D0_J": -0.07433784606031596
+      },
+      {
+        "episode_id": 20,
+        "D0_U": 30.57331536298545,
+        "I1280_U": 36.23859876471367,
+        "D0_J": 0.3668797843558254,
+        "I1280_J": 0.4348631851765641,
+        "I1280_minus_D0_J": 0.06798340082073867
+      },
+      {
+        "episode_id": 21,
+        "D0_U": 17.819670907600987,
+        "I1280_U": 42.283000693511326,
+        "D0_J": 0.21383605089121185,
+        "I1280_J": 0.5073960083221359,
+        "I1280_minus_D0_J": 0.2935599574309241
+      },
+      {
+        "episode_id": 22,
+        "D0_U": 37.78354150149978,
+        "I1280_U": 42.256049808285375,
+        "D0_J": 0.4534024980179974,
+        "I1280_J": 0.5070725976994245,
+        "I1280_minus_D0_J": 0.05367009968142705
+      },
+      {
+        "episode_id": 23,
+        "D0_U": 17.603284530088022,
+        "I1280_U": 46.21941928141066,
+        "D0_J": 0.21123941436105628,
+        "I1280_J": 0.5546330313769279,
+        "I1280_minus_D0_J": 0.34339361701587157
+      },
+      {
+        "episode_id": 24,
+        "D0_U": 41.578292925208956,
+        "I1280_U": 39.890230075735495,
+        "D0_J": 0.49893951510250745,
+        "I1280_J": 0.4786827609088259,
+        "I1280_minus_D0_J": -0.02025675419368156
+      },
+      {
+        "episode_id": 25,
+        "D0_U": 36.83322009335666,
+        "I1280_U": 29.679610902112092,
+        "D0_J": 0.4419986411202799,
+        "I1280_J": 0.3561553308253451,
+        "I1280_minus_D0_J": -0.0858433102949348
+      },
+      {
+        "episode_id": 26,
+        "D0_U": 26.79836370687334,
+        "I1280_U": 29.331295970025778,
+        "D0_J": 0.32158036448248006,
+        "I1280_J": 0.35197555164030936,
+        "I1280_minus_D0_J": 0.030395187157829295
+      },
+      {
+        "episode_id": 27,
+        "D0_U": 42.57508829428454,
+        "I1280_U": 39.90952879580042,
+        "D0_J": 0.5109010595314145,
+        "I1280_J": 0.47891434554960505,
+        "I1280_minus_D0_J": -0.03198671398180947
+      },
+      {
+        "episode_id": 28,
+        "D0_U": 37.94143023761465,
+        "I1280_U": 40.728017954831394,
+        "D0_J": 0.4552971628513758,
+        "I1280_J": 0.48873621545797674,
+        "I1280_minus_D0_J": 0.03343905260660096
+      },
+      {
+        "episode_id": 29,
+        "D0_U": 34.27502829124036,
+        "I1280_U": 41.08412123406425,
+        "D0_J": 0.4113003394948843,
+        "I1280_J": 0.493009454808771,
+        "I1280_minus_D0_J": 0.0817091153138867
+      },
+      {
+        "episode_id": 30,
+        "D0_U": 45.50263794410626,
+        "I1280_U": 49.85940040698039,
+        "D0_J": 0.5460316553292752,
+        "I1280_J": 0.5983128048837647,
+        "I1280_minus_D0_J": 0.05228114955448948
+      },
+      {
+        "episode_id": 31,
+        "D0_U": 45.02986378630248,
+        "I1280_U": 47.54389167375145,
+        "D0_J": 0.5403583654356298,
+        "I1280_J": 0.5705267000850174,
+        "I1280_minus_D0_J": 0.030168334649387618
+      }
+    ]
+  },
+  "arms": {
+    "D0": {
+      "mean_U": 34.689537544953524,
+      "mean_J": 0.4162744505394423,
+      "sample_sd_J": 0.11349368648111476,
+      "conditional_se_J": 0.020063038833164057,
+      "component_means": {
+        "coverage_reward": 0.5233575000000001,
+        "quality_reward": 0.16859029594450917,
+        "energy_penalty": 0.0006528882439104148,
+        "total_reward": 0.41627445053944234
+      },
+      "optimizer_calls": {
+        "coordinator": 525,
+        "discoverer_actor": 11250,
+        "discoverer_critic": 11250,
+        "team_discriminator": 75,
+        "individual_discriminator": 300
+      },
+      "final_relative_initialization_displacement": {
+        "coordinator": 0.042214461382935886,
+        "discoverer_actor": 0.40391436880732556,
+        "discoverer_critic": 0.1600676771072308,
+        "team_discriminator": 0.02708519427179745,
+        "individual_discriminator": 0.05007107184818438
+      },
+      "training_rows_M": [
+        800,
+        800,
+        800,
+        800,
+        800
+      ],
+      "training_coordinator_calls": [
+        105,
+        105,
+        105,
+        105,
+        105
+      ],
+      "training_individual_gap_causes": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "total_training_individual_gap_causes": 0,
+      "training_agent_segment_means": [
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0
+      ],
+      "training_mean_U": [
+        21.027556027459486,
+        19.935021122827845,
+        13.190409450386142,
+        17.81496071952134,
+        15.784987941354814
+      ],
+      "training_mean_J": [
+        0.25233067232951384,
+        0.2392202534739341,
+        0.1582849134046337,
+        0.21377952863425612,
+        0.18941985529625777
+      ],
+      "evaluation_cause_counts": {
+        "reset": 32,
+        "team_gap": 0,
+        "team_cap": 1568,
+        "gap": 0,
+        "cap": 0
+      },
+      "evaluation_segment_record": {
+        "agent": {
+          "count": 0,
+          "total_length": 0,
+          "min": null,
+          "max": null,
+          "mean": null
+        },
+        "team": {
+          "count": 0,
+          "total_length": 0,
+          "min": null,
+          "max": null,
+          "mean": null
+        }
+      },
+      "process_time": {
+        "elapsed_seconds": 519.94,
+        "peak_rss_kib": 1620164.0,
+        "user_seconds": 2025.59,
+        "system_seconds": 17.98,
+        "exit_status": 0.0
+      },
+      "aggregate_cpu_seconds": 2043.57,
+      "admission": {
+        "assessed_at": "2026-09-11T08:05:13.283863Z",
+        "available_physical_bytes": 15634173952,
+        "captured_at": "2026-09-11T08:05:13.283538Z",
+        "cgroup_headroom_bytes": null,
+        "cgroup_memory_current_bytes": null,
+        "cgroup_memory_max_bytes": null,
+        "effective_available_bytes": 15634173952,
+        "effective_floor_pass": true,
+        "failure_reasons": [],
+        "measurement_source": "/proc/meminfo",
+        "minimum_available_bytes": 4294967296,
+        "passed": true,
+        "physical_floor_pass": true,
+        "schema_version": 1
+      },
+      "counts": {
+        "model_constructions": 2,
+        "training_starts": 1,
+        "checkpoint_loads": 0,
+        "training_transitions": 40000,
+        "stored_training_transitions": 40000,
+        "training_episodes": 80,
+        "update_stages": 5,
+        "training_agent_step_batches": 2500,
+        "evaluation_steps": 16000,
+        "evaluation_episodes": 32,
+        "evaluation_agent_step_batches": 500
+      }
+    },
+    "I": {
+      "mean_U": 39.437659813260204,
+      "mean_J": 0.47325191775912245,
+      "sample_sd_J": 0.09292703233334625,
+      "conditional_se_J": 0.01642733367961267,
+      "component_means": {
+        "coverage_reward": 0.6095600000000004,
+        "quality_reward": 0.1812237355268749,
+        "energy_penalty": 0.007807202898939975,
+        "total_reward": 0.47325191775912245
+      },
+      "optimizer_calls": {
+        "coordinator": 330,
+        "discoverer_actor": 11250,
+        "discoverer_critic": 11250,
+        "team_discriminator": 75,
+        "individual_discriminator": 300
+      },
+      "final_relative_initialization_displacement": {
+        "coordinator": 0.04270731322134893,
+        "discoverer_actor": 0.42406773897781685,
+        "discoverer_critic": 0.15681196154784144,
+        "team_discriminator": 0.027171192377394505,
+        "individual_discriminator": 0.0427760907767613
+      },
+      "training_rows_M": [
+        5215,
+        4448,
+        4769,
+        4942,
+        5125
+      ],
+      "training_coordinator_calls": [
+        75,
+        60,
+        60,
+        60,
+        75
+      ],
+      "training_individual_gap_causes": [
+        9127,
+        7518,
+        8112,
+        8384,
+        9102
+      ],
+      "total_training_individual_gap_causes": 42243,
+      "training_agent_segment_means": [
+        3.4465426868672364,
+        3.896736483195324,
+        3.717472118959108,
+        3.6407766990291264,
+        3.452740612861459
+      ],
+      "training_mean_U": [
+        19.595614052355383,
+        17.7583371956463,
+        19.346401323126003,
+        24.267087645451685,
+        25.657175064576425
+      ],
+      "training_mean_J": [
+        0.23514736862826457,
+        0.2131000463477556,
+        0.23215681587751202,
+        0.2912050517454202,
+        0.3078861007749171
+      ],
+      "evaluation_cause_counts": {
+        "reset": 32,
+        "team_gap": 0,
+        "team_cap": 1568,
+        "gap": 8,
+        "cap": 0
+      },
+      "evaluation_segment_record": {
+        "agent": {
+          "count": 0,
+          "total_length": 0,
+          "min": null,
+          "max": null,
+          "mean": null
+        },
+        "team": {
+          "count": 0,
+          "total_length": 0,
+          "min": null,
+          "max": null,
+          "mean": null
+        }
+      },
+      "process_time": {
+        "elapsed_seconds": 1020.68,
+        "peak_rss_kib": 3544424.0,
+        "user_seconds": 3995.63,
+        "system_seconds": 41.59,
+        "exit_status": 0.0
+      },
+      "aggregate_cpu_seconds": 4037.2200000000003,
+      "admission": {
+        "assessed_at": "2026-09-11T08:21:14.425461Z",
+        "available_physical_bytes": 15632523264,
+        "captured_at": "2026-09-11T08:21:14.425203Z",
+        "cgroup_headroom_bytes": null,
+        "cgroup_memory_current_bytes": null,
+        "cgroup_memory_max_bytes": null,
+        "effective_available_bytes": 15632523264,
+        "effective_floor_pass": true,
+        "failure_reasons": [],
+        "measurement_source": "/proc/meminfo",
+        "minimum_available_bytes": 4294967296,
+        "passed": true,
+        "physical_floor_pass": true,
+        "schema_version": 1
+      },
+      "counts": {
+        "model_constructions": 2,
+        "training_starts": 1,
+        "checkpoint_loads": 0,
+        "training_transitions": 40000,
+        "stored_training_transitions": 40000,
+        "training_episodes": 80,
+        "update_stages": 5,
+        "training_agent_step_batches": 2500,
+        "evaluation_steps": 16000,
+        "evaluation_episodes": 32,
+        "evaluation_agent_step_batches": 500
+      }
+    }
+  },
+  "config_differences": {
+    "learner_config": {
+      "coordinator_batch_size": [
+        128,
+        1280
+      ],
+      "interruption_cost_c": [
+        "Infinity",
+        0.25
+      ]
+    },
+    "evaluation_config": {
+      "coordinator_batch_size": [
+        128,
+        1280
+      ],
+      "interruption_cost_c": [
+        "Infinity",
+        0.25
+      ]
+    }
+  },
+  "component_differences": {
+    "coverage_reward": 0.08620250000000029,
+    "quality_reward": 0.012633439582365735,
+    "energy_penalty": 0.00715431465502956,
+    "total_reward": 0.05697746721968011
+  },
+  "component_contributions": {
+    "coverage": 0.0603417500000002,
+    "quality": 0.0037900318747097206,
+    "altitude": -0.00715431465502956
+  },
+  "observed_exposure": {
+    "independent_training_pairs": 1,
+    "fits": 2,
+    "models": 4,
+    "training_transitions": 80000,
+    "training_episodes": 160,
+    "update_stages": 10,
+    "evaluation_steps": 32000,
+    "evaluation_episodes": 64,
+    "native_steps": 112000,
+    "native_agent_step_observations": 672000,
+    "training_and_evaluation_batched_control_calls": 6000,
+    "checkpoint_loads": 0,
+    "extra_validation_episodes": 0,
+    "extra_fixtures": 0
+  },
+  "cost": {
+    "summed_complete_arm_wall_seconds": 1540.62,
+    "aggregate_arm_cpu_seconds": 6080.79,
+    "I_to_D0_wall_ratio": 1.963072662230257,
+    "coordinator_call_reduction_fraction": 0.37142857142857144,
+    "I_to_D0_valid_training_rows_ratio": 6.12475,
+    "I_valid_training_rows_sum": 24499,
+    "D0_valid_training_rows_sum": 4000,
+    "study_elapsed_first_supervisor_start_to_last_exit_seconds": 1982.0,
+    "support": "known charges in SUPPORT.json; ten earlier Monitor loop command walls and adoption/native-message attribution incomplete",
+    "cap_assessment": "D0<=900 and I1280<=1800 verified; support<=300 and complete<=3000 not fully certified because support telemetry incomplete; no observed cap breach"
+  },
+  "historical_unpooled_contradictions": {
+    "P70_original_I_minus_D0_J": -0.049670563167111874,
+    "P72_original_I_minus_D0_J": -0.035312725297886094,
+    "difference": "Original I used coordinator batch128; both training identities differ. No historical score enters the new primary."
+  },
+  "sha256": {
+    "D0/manifest.json": "70a41d2fc586d7c8617fc07c3b28ee6a0352f9bdd7183f5bab595e89f029c51d",
+    "D0/summary.json": "cfd24b9fee9b51d91f3c71df9e731e375d5ae9685c74ba2605a1634f07eb5fe1",
+    "D0/training.jsonl": "23661bb010998cea24ec7a5b85fb6cfe31ebc31c08e847f3262b5f24a3ee4274",
+    "I/manifest.json": "416ad4160fe9681531e9a907385a237b16ce8be8c97b724f80d7e0cabd629120",
+    "I/summary.json": "ae8e3e3780472443cddef5a9f6aff14888b2b402abc749e0966aef955a85ef0d",
+    "I/training.jsonl": "349d66ee528796dc6dd19c76c4d0e78250a6d5bfa96da9c4ad7746a9082c4e2d",
+    "D0_receipts/D0_admission.json": "5cabac9b0476ceffad0037f4b89601db8c0c036d23d0588da0cb1f681bc8b0b3",
+    "D0_receipts/D0_process_time.txt": "12b0767c17fc6477bed4e82f7ed95e1d80ef754e8cee36aa44cc78219e1ee100",
+    "I_receipts/I_admission.json": "24567659b3feddd47d0cf9f04d81d27deaba4aefab6a48b48eeb3a66e6f9a76c",
+    "I_receipts/I_process_time.txt": "b69d2db6256e278132791d23c432bd0b07983d99a6aae57ce0ab2bfd92124fd6",
+    "D0_supervisor/exit_code": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "D0_supervisor/pid": "4566f2011fe059dd1a76982290b0e9073582a386821d1de1c9a8b7b0f57baafd",
+    "D0_supervisor/runner.sh": "238ba45b93e7770b4b5817a81ab9fefc2a900604a72afe0642fa5b8ebe93c51c",
+    "D0_supervisor/start_time": "4f1f955e7f0a7bac2d027e6cd02f50f6621eb68328c16cf1c383cd69ab658333",
+    "D0_supervisor/status": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983",
+    "D0_supervisor/task.log": "c8fb9e93d93723e2b1c45176262e6719409bcc3033b9ec62d0d2b9178f97fe08",
+    "I_supervisor/exit_code": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "I_supervisor/pid": "7d50aa24f709b56e4d8377a61c58cdfd59b9cac7181d41d43555dd34e701fff2",
+    "I_supervisor/runner.sh": "c9e64b304da38772cd375755b27d99065596444bafc3bd49f51467d152f288a2",
+    "I_supervisor/start_time": "055732c87f249dcbcf962afb0b8fcda64e94c0f40d60ddfb86ed51db0ce73674",
+    "I_supervisor/status": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983",
+    "I_supervisor/task.log": "95fe84787c4326b1a659459669c9fc76b39405232e3f096d9e27b1d939aff778"
+  },
+  "intake_numerical_exposure": {
+    "training_starts": 0,
+    "models": 0,
+    "environment_steps": 0,
+    "evaluation_episodes": 0,
+    "operation": "arithmetic over preserved bytes only"
+  },
+  "I_primary_and_admission_time_copy_verified": true
+}

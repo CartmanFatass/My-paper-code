@@ -94,6 +94,14 @@
       "record": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B01_EXECUTION_20260911.md",
       "state": "planned",
       "summary": "新的 Portfolio A 已单独分配完整 I1280/D0 原生 B 对：训练770703、评价780703，D0/I1280各900/1800秒，支持300秒，总计3000秒。当前仅完成绑定与启动准备，尚无科学调用接受；复用已通过的实现检查，无第三臂、重试或后继。"
+    },
+    {
+      "at": "2026-09-11T08:54:07+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260911_five_chain_refill/archive/RESPONSE.md",
+      "record": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B01_INTAKE_20260911.md",
+      "state": "applied",
+      "summary": "后续独立分配的I1280/D0真实B对已完成：原生差值+0.05698，超过0.01；24集胜8集负，只有一对训练。两臂完整耗时519.94/1020.68秒，均在限额内；十次监测循环耗时缺失，支持及总限额无法完全核实。保留旧两次负结果和原设计历史，不自动启动后继；清理等待Root整合保留核对。"
     }
   ]
 }

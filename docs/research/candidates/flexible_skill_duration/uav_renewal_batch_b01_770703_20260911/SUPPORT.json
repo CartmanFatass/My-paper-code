@@ -1,6 +1,6 @@
 {
-  "status": "D0 complete and accepted; I1280 accepted with native Monitor dispatch; adoption/terminal pending; accounting open",
-  "metric": "sum of complete tool/command execution wall charged once; idle waiting and reasoning elapsed distinct; unmeasured enclosing/native-message overhead remains unknown",
+  "status": "valid complete paired result; support telemetry incomplete; cleanup and final publication accounting remain open",
+  "metric": "sum of measured tool/command execution wall charged once; idle waiting/reasoning/study elapsed separate; unmeasured enclosing/native-message overhead unknown",
   "cap_seconds": 300,
   "charges": [
     {
@@ -180,14 +180,107 @@
       "phase": "launch_I",
       "operation": "write_I_acceptance_and_native_monitor_handover",
       "wall_seconds": 0.018
+    },
+    {
+      "phase": "launch_I",
+      "operation": "publish_I_handover_D0_raw_log_and_support",
+      "wall_seconds": 4.7624778
+    },
+    {
+      "phase": "I_monitor",
+      "operation": "known_I_observation_commands_only; ten earlier loop command walls unknown",
+      "wall_seconds": 6.893
+    },
+    {
+      "phase": "I_collection",
+      "operation": "resume_direction_context_and_spec_index",
+      "wall_seconds": 0.2365719
+    },
+    {
+      "phase": "I_collection",
+      "operation": "terminal_receipts_and_output_inventory",
+      "wall_seconds": 0.5383369
+    },
+    {
+      "phase": "I_collection",
+      "operation": "preserve_I_primary_receipts_supervisor_and_read_pair",
+      "wall_seconds": 2.5788219
+    },
+    {
+      "phase": "I_collection",
+      "operation": "relevant_scientific_intake_rules_and_current_direction_read",
+      "wall_seconds": 0.2097512
+    },
+    {
+      "phase": "paired_intake",
+      "operation": "scientific_reading_and_library_route_analysis_format",
+      "wall_seconds": 0.1790369
+    },
+    {
+      "phase": "paired_intake",
+      "operation": "run_unit_foundation_and_library_entry_read",
+      "wall_seconds": 0.1353966
+    },
+    {
+      "phase": "paired_intake",
+      "operation": "bounded_real_corpus_index_search_for_seed_and_batch_interpretation",
+      "wall_seconds": 0.1598611
+    },
+    {
+      "phase": "paired_intake",
+      "operation": "verified_local_collection_inventory_and_foundation_passages",
+      "wall_seconds": 0.2608071
+    },
+    {
+      "phase": "paired_intake",
+      "operation": "read_only_existing_library_index_schema_for_real_coverage",
+      "wall_seconds": 0.2592673
+    },
+    {
+      "phase": "paired_intake",
+      "operation": "bounded_library_index_candidates_and_fixture_exclusion",
+      "wall_seconds": 0.20486
+    },
+    {
+      "phase": "paired_intake",
+      "operation": "paired_primary_integrity_and_all_outcome_arithmetic_with_run_summary_tool",
+      "wall_seconds": 0.2213006
+    },
+    {
+      "phase": "paired_intake",
+      "operation": "I_destination_digests_and_owned_cleanup_size_inventory",
+      "wall_seconds": 0.8636637
+    },
+    {
+      "phase": "paired_intake",
+      "operation": "scope_metric_boundary_prediction_owner_and_final_table_read",
+      "wall_seconds": 0.4794443
+    },
+    {
+      "phase": "paired_intake",
+      "operation": "write_E0_result_intake_brief_and_accepted_direction_science",
+      "wall_seconds": 0.027
+    },
+    {
+      "phase": "paired_intake",
+      "operation": "write_terminal_and_cleanup_inventory",
+      "wall_seconds": 0.02
+    },
+    {
+      "phase": "paired_intake",
+      "operation": "trace_applied_real_pair_and_current_portfolio_row",
+      "wall_seconds": 0.3783915
     }
   ],
   "monitor_cost_attribution": {
-    "reported_shared_cumulative_seconds": 1.423,
-    "known_FSD_terminal_query_seconds": 0.598,
-    "remaining_shared_or_adoption_attribution": "unknown; do not add shared total on top of charged subset",
-    "I_native_dispatch_execution_seconds": null
+    "known_D0_terminal_query_seconds": 0.598,
+    "reported_shared_D0_RCLE_cumulative_seconds": 1.423,
+    "known_I_observation_seconds": 6.893,
+    "unmeasured_I_earlier_loop_commands": 10,
+    "remaining_adoption_shared_native_message_execution_seconds": null
   },
-  "recorded_support_seconds": 44.606958000000006,
-  "remaining_from_recorded_seconds": 255.39304199999998
+  "cap_assessment": "both arm caps verified; support<=300 and complete<=3000 not fully certified; no observed cap breach; resources_unmeasured applies only to partial support telemetry",
+  "recorded_support_seconds": 63.014946800000004,
+  "remaining_from_recorded_seconds": 236.98505319999998,
+  "known_arm_plus_recorded_support_seconds": 1603.6349467999999
 }

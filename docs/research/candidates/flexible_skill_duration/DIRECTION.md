@@ -507,7 +507,40 @@ Evidence: `pro_packets/20260909_p74_post_uav_b02_convergence/archive/RESPONSE.md
 `pro_packets/20260909_p74_post_uav_b02_convergence/CONVERGENCE_INTAKE.md`,
 and the accepted P70/P72 result/intake records above.
 
-## Objects and their state (2026-09-09)
+## Accepted native UAV renewal-batch gain (B01/770703, 2026-09-11)
+
+One fresh I1280/authentic-D0 pair gives native I1280−D0
+**+.05697746721968016**, above the .01 MEI. Means are.47325191775912245
+and.4162744505394423, with conditional endpoint SE.024192706725467705;
+24 episode contrasts are positive and8 negative. This is one native package
+observation at the declared five-update exposure, not stable superiority or
+isolated batching causality. The two old batch128 I losses remain unpooled.
+
+Coverage and quality improvements outweigh higher altitude penalty in this pair.
+I1280 produces42243 training individual-gap causes and24499 valid joint rows,
+versus0/4000 D0, while using330 versus525 coordinator updates. The first two
+sampled training means are lower and last three higher. At final evaluation
+there are eight extra individual-gap causes versuszero, so sparse online
+renewal is present but its causal contribution is unresolved. Empty evaluator
+segment storage leaves endpoint duration statistics unmeasured.
+
+Strongest support is the observed final native gain and24 positive contrasts.
+The eight negative contrasts, higher altitude cost,1.96307× D0 wall, and old
+P70/P72 losses remain contradictions to broad benefit. Seed variation, changed
+training data/credit, optimization grouping and learned spatial behavior remain
+alternatives. Tuned same-information UAV headroom is still absent.
+
+Both original arm caps pass (519.94/1020.68s;1540.62s summed wall).
+Partial Monitor/support telemetry leaves support300s/complete3000s certification
+unresolved without damaging the native primary. The allocated comparison is
+complete. One separately allocated fresh same-package pair is the recommended
+next discriminator; none is selected for execution here. P52/P74 stops and
+Portfolio lifecycle/priority remain unchanged.
+
+Evidence: `FSD_UAV_RENEWAL_BATCH_B01_RESULT_EVIDENCE_20260911.md`,
+`FSD_UAV_RENEWAL_BATCH_B01_INTAKE_20260911.md`, and the unchanged card.
+
+## Objects and their state (2026-09-11)
 
 | Object | State | Record |
 | --- | --- | --- |
@@ -526,6 +559,7 @@ and the accepted P70/P72 result/intake records above.
 | Native individual-renewal UAV B01 / P67–P70 | complete valid B, one new770503/780503 I/D0 pair; native I−D0−.0496705632 below−.01 MEI, coverage gain retained, training gaps but zero endpoint gaps; both exit0,1693.38s summed wall; no successor or broader closure | `FSD_UAV_INDIVIDUAL_RENEWAL_B01_P70_RESULT_EVIDENCE_20260908.md`; `FSD_UAV_INDIVIDUAL_RENEWAL_B01_P70_INTAKE_20260908.md`; original card/P67 decision |
 | Native individual-renewal UAV B02 / P72 | complete valid B, new770603/780603 pair; I−D0−.0353127253 below−.01, native loss in both observed learning instances; different component balance, training activity and endpoint inactivity retained;1768.78s summed wall; no successor selected | `FSD_UAV_INDIVIDUAL_RENEWAL_B02_P72_RESULT_EVIDENCE_20260909.md`; `FSD_UAV_INDIVIDUAL_RENEWAL_B02_P72_INTAKE_20260909.md`; B02 card |
 | Post-native-UAV-B02 Convergence / P74 | complete PRO_FINAL A; end only unchanged .25/k10/five-update extension, no twenty-rollout B or successor selected; longer-budget value remains unresolved, no recast or Portfolio change | `pro_packets/20260909_p74_post_uav_b02_convergence/archive/RESPONSE.md`; `pro_packets/20260909_p74_post_uav_b02_convergence/CONVERGENCE_INTAKE.md` |
+| UAV renewal batch B01 / 770703 | complete valid B, one I1280/D0 pair; native+.0569774672 above+.01,24 positive/8 negative contrasts;1540.62s arm wall, partial support telemetry; no successor allocated | `FSD_UAV_RENEWAL_BATCH_B01_RESULT_EVIDENCE_20260911.md`; `FSD_UAV_RENEWAL_BATCH_B01_INTAKE_20260911.md`; original card |
 | Advancement plan | E1 → E2 → E2b/E3 → E4 → C-gate; E2b is not selected at this boundary | `docs/Claude_docs/plans/RESEARCH_ADVANCEMENT_PLAN_20260902.md` |
 
 ## Code

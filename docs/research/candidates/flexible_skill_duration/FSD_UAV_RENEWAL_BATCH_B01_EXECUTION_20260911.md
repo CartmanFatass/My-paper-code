@@ -1,7 +1,7 @@
 # FSD renewal-batch B01 / 770703 — exact execution and collection record
 
-**D0 complete and its primary accepted; I1280 accepted and dispatched to the
-native recovery Monitor. I adoption/terminal collection is pending.**
+**Both arms complete and the paired primary accepted: one above-MEI native
+package gain. Partial support telemetry; cleanup pending integration/retention.**
 This is the complete one-pair task from Portfolio option A, immutable response
 `ed0c4e1c3cd28be353253e8533bc89a261f25357`, applied through the
 [FSD execution mapping](../../portfolio/pro_packets/20260911_five_chain_refill/EXECUTION_MAPPING.md#fsd--complete-one-fresh-i1280d0-b-pair).
@@ -184,3 +184,18 @@ D0 event and was not repeated for I. DM stops routine polling. Actual I admissio
 learning, complete primary/pair readout and wall facts await routed terminal
 collection. Native message execution duration is unavailable and remains an
 explicit support-accounting limit. No third arm or automatic successor follows.
+
+## Complete pair intake — 2026-09-11T08:53:18.064Z
+
+Root routed I terminal exit0, PID3343214, inactive tmux, exact source/cwd and
+2026-09-11T16:38:15+08:00 terminal time. The complete I wall is1020.68s;
+its destination admission passed. All I primary/admission/time/supervisor files
+are collected and both arms' required primary/count/configuration checks pass.
+The ordered native contrast is+.05697746721968016, card `above_mei`.
+See the [result evidence](FSD_UAV_RENEWAL_BATCH_B01_RESULT_EVIDENCE_20260911.md)
+and [DM intake](FSD_UAV_RENEWAL_BATCH_B01_INTAKE_20260911.md) for the full
+rule, all signs, prediction score, resource limit and four-path cleanup inventory.
+Known I observation commands cost6.893s; ten earlier loop command walls remain
+unknown. Both arm caps pass; support/complete-cap certification stays incomplete.
+The accepted pair is the final allocated numerical work. No retry, new seed,
+third arm or successor is launched. Cleanup removal is not yet performed.

@@ -1,0 +1,37 @@
+Root-routed I terminal: exit0, PID3343214, tmux inactive, exact c70f01ea30d6c4d063dcc46d8499b26bfe037da8/cwd; supervisor duration1021s, terminal2026-09-11T16:38:15+08:00.
+Known I observation command wall6.893s; ten earlier Monitor loop command walls unknown. This is incomplete resource telemetry, not a primary-dependent failure.
+
+DM terminal receipt and inventory:
+c70f01ea30d6c4d063dcc46d8499b26bfe037da8
+summary.json 51234 bytes
+training.jsonl 22424 bytes
+manifest.json 1597 bytes
+elapsed_seconds=1020.68,peak_rss_kib=3544424,user_seconds=3995.63,system_seconds=41.59,exit_status=0
+{
+  "assessed_at": "2026-09-11T08:21:14.425461Z",
+  "available_physical_bytes": 15632523264,
+  "captured_at": "2026-09-11T08:21:14.425203Z",
+  "cgroup_headroom_bytes": null,
+  "cgroup_memory_current_bytes": null,
+  "cgroup_memory_max_bytes": null,
+  "effective_available_bytes": 15632523264,
+  "effective_floor_pass": true,
+  "failure_reasons": [],
+  "measurement_source": "/proc/meminfo",
+  "minimum_available_bytes": 4294967296,
+  "passed": true,
+  "physical_floor_pass": true,
+  "schema_version": 1
+}
+{"task": "fsd-uav-renewal-batch-b01-770703-I-20260911", "status": "finished", "exit_code": 0, "pid": 3343214, "uptime_seconds": 1111, "tmux_active": false}
+
+Remote digests and cleanup size inventory:
+ae8e3e3780472443cddef5a9f6aff14888b2b402abc749e0966aef955a85ef0d  I/summary.json
+349d66ee528796dc6dd19c76c4d0e78250a6d5bfa96da9c4ad7746a9082c4e2d  I/training.jsonl
+416ad4160fe9681531e9a907385a237b16ce8be8c97b724f80d7e0cabd629120  I/manifest.json
+24567659b3feddd47d0cf9f04d81d27deaba4aefab6a48b48eeb3a66e6f9a76c  /home/wu/hmasd-inputs/fsd-uav-renewal-batch-b01-770703-20260911/I_admission.json
+b69d2db6256e278132791d23c432bd0b07983d99a6aae57ce0ab2bfd92124fd6  /home/wu/hmasd-inputs/fsd-uav-renewal-batch-b01-770703-20260911/I_process_time.txt
+43644768	/home/wu/hmasd-worktrees/fsd-uav-renewal-batch-b01-770703-20260911
+1209	/home/wu/hmasd-inputs/fsd-uav-renewal-batch-b01-770703-20260911
+2311	/home/wu/.agent-tasks/fsd-uav-renewal-batch-b01-770703-D0-20260911
+2300	/home/wu/.agent-tasks/fsd-uav-renewal-batch-b01-770703-I-20260911
