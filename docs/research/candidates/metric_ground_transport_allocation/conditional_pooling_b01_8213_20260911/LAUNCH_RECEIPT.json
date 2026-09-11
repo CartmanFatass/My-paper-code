@@ -1,0 +1,28 @@
+{
+  "dispatch_started_utc": "2026-09-11T21:18:19.832Z",
+  "dispatch_returned_utc": "2026-09-11T21:18:20.532Z",
+  "source_sha": "323cdf576a7b7290bd74bbccf47c0386072dc4c2",
+  "binding_sha": "ebbefa210fa32321559a51e97379f0441ff1da9a",
+  "handle": "mgtap-cond-b01-8213-20260911",
+  "result": {
+    "chunk_id": "fc8d4e",
+    "wall_time_seconds": 0.5056258,
+    "exit_code": 0,
+    "original_token_count": 42,
+    "output": "Task 'mgtap-cond-b01-8213-20260911' started in tmux session 'agent_mgtap-cond-b01-8213-20260911'. Output: /home/wu/.agent-tasks/mgtap-cond-b01-8213-20260911/task.log\n"
+  },
+  "monitor_dispatch": {
+    "thread_id": "01a087e5-2044-7301-abb6-7a1709a98197",
+    "accepted": true,
+    "tool_result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"threadId\":\"01a087e5-2044-7301-abb6-7a1709a98197\"}"
+        }
+      ],
+      "isError": false
+    },
+    "adoption": "pending; Root forwards actual MONITOR_ADOPTED"
+  }
+}

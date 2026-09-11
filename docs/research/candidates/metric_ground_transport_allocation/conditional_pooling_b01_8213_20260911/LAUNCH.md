@@ -61,3 +61,13 @@ its trace corrects the initial audit-line link to the actual8213 selection row.
 
 At this publication boundary no scientific handle has been accepted and no
 question-relevant output has been observed.
+
+## Accepted supervisor and dispatched Monitor
+
+At2026-09-11T21:18:20.532Z the single launch returned accepted/started in tmux
+`agent_mgtap-cond-b01-8213-20260911`, supervisor log
+`/home/wu/.agent-tasks/mgtap-cond-b01-8213-20260911/task.log`.
+Direct MONITOR_ADD to the live-primary app succeeded; actual adoption is pending.
+[Launch receipt](LAUNCH_RECEIPT.json) records exact source/binding and dispatch.
+DM has stopped routine polling; Root forwards adoption and the terminal fact for
+this DM's collection/intake. No final scientific observation has been read here.
