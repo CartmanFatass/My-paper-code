@@ -95,3 +95,23 @@ After launch acceptance send MONITOR_ADD to live-main configured thread
 original DM `/root/dm_rcle_restart_recovery2`. Routine polling stops; actual adoption
 and routed terminal are separate. DM retains collection/scientific intake and exact
 cleanup inventory. Shared `codex/rcle` remains in use through that boundary.
+
+## Accepted launch and adopted observation
+
+The sole `agent-task run` submission returned exit0 and the exact tmux/session/output
+receipt for `rcle-b04-nearest-prior-s24-20260910`. Submission subprocess .5848266s;
+complete control command .8468777s. Exact command/stdout/stderr are retained in
+`b04_nearest_prior_20260910/LAUNCH_RECEIPT.json`. No second invocation was submitted.
+
+MONITOR_ADD direct app delivery to `01a087e5-2044-7301-abb6-7a1709a98197` was accepted.
+Root then confirmed **MONITOR_ADOPTED** for this exact handle/source/cwd/output and
+140s support boundary. DM performs no routine polling. Terminal status, actual
+admissions, produced checkpoints/counts/native comparisons and full runtime cost
+remain pending collection and separate technical/scientific intake.
+
+`SUPPORT_TO_LAUNCH.json` retains component charges and remaining support scope;
+no unmeasured phase is represented as zero. On routed terminal, collect the output
+and supervisor receipt, verify meaningful count/comparison/publication contracts,
+prepare E0/intake/Chinese brief and preserve unique runtime evidence before any
+authorized cleanup. Remote execution worktree and staging are retained for that live
+dependency; DM owns their collection/cleanup inventory and Root accepts reclamation.
