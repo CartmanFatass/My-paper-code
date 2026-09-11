@@ -62,3 +62,36 @@ remain inside140s, with each learned/reference complete arm bounded separately.
 Reasoning/calendar effort and aggregate CPU are unmeasured, not called runtime wall.
 No numerical/native launch occurred before this source publication. The exact SHA,
 committed command, accepted handle and Monitor dispatch will be appended next.
+
+## Exact launch binding
+
+Source/card/test SHA **72c6287b7bbf721d1e031ae5a9b28b92cab8a9bd** is published
+on `codex/rcle`. Source-only bundle staging completed in8.7155167s. Remote checkout
+`/home/wu/hmasd-worktrees/rcle-b04-nearest-prior-s24-20260910` is detached at exactly
+that SHA with the configured sparse source paths; `bash -n` passed without execution.
+The same named source staging directory is under `/home/wu/hmasd-inputs/`.
+No pre-existing handle/worktree was found in the bounded recovery query. No old fitted
+or scientific input is staged.
+
+The exact supervisor payload is committed in
+[LAUNCH_COMMAND.txt](b04_nearest_prior_20260910/LAUNCH_COMMAND.txt).
+Handle `rcle-b04-nearest-prior-s24-20260910`; supervisor root
+`/home/wu/.agent-tasks/rcle-b04-nearest-prior-s24-20260910`.
+The outer receipt/log container holds admission/time files; each scientific per-arm
+output directory and RNG/model state is created by the runner only after its passed
+adjacent admission. Each arm's external timeout includes admission through process
+exit (150/10s); internal148/8s allows publication/exit margin. The two-command chain
+has an outer160s timeout. No return or update endpoint is reduced.
+
+Known/conservatively charged support before this launch-binding publication is
+56.5545929s, including the30s initial allowance. Current live-main owner reviews
+again return[]; no applicable override. This command's publication, submission,
+Monitor, collection, analysis/publication and cleanup remain within the remaining
+140s support allowance; support facts distinguish component charge from a cap.
+`PREPARATION_FACTS.json` preserves the source/fixture/review/staging facts.
+
+After launch acceptance send MONITOR_ADD to live-main configured thread
+`01a087e5-2044-7301-abb6-7a1709a98197`, Root `01a07249-b095-7821-8ce2-e9c32ba85267`,
+original DM `/root/dm_rcle_restart_recovery2`. Routine polling stops; actual adoption
+and routed terminal are separate. DM retains collection/scientific intake and exact
+cleanup inventory. Shared `codex/rcle` remains in use through that boundary.
