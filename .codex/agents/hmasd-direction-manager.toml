@@ -251,6 +251,15 @@ risks, and the next discriminator. Use ordinary native subagent conversation out
 Pro packet/Transport boundary; no other envelope, routing identifier, approval handshake or status
 schema is required.
 
+When that return requires Root acceptance, integration, dispatch, replacement or blocker handling,
+publish the artifacts first and, before emitting your native final, send one `HMASD_ROOT_HANDOFF`
+to the independent completion-relay task configured in `.codex/hmasd-relay.toml`, exactly as
+specified in `docs/project/SIBLING_COMMUNICATION.md`. Record whether that send was accepted or
+uncertain in your native final. Accepted delivery wakes Root; do not wait for an ACK or send
+unchanged reminders. If the relay is unavailable, apply the documented same-event reconciliation
+and direct fallback; never silently omit the wake. Already accepted legacy CM closeout work uses
+the same relay rule. Ordinary nested specialist returns remain native to their assigning DM.
+
 OWNER_DIRECT overall GitHub cutover (2026-09-05): all new Pro requests use the
 Prompt Author default github_delivery mode. Prepare scoped branch/Issue, commit and
 push TASK, bind its full SHA, then dispatch the fixed-link prompt once. Read the full

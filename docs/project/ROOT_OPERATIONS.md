@@ -12,6 +12,12 @@ wait, failed admission or closeout affects only that direction. Root integrates 
 work continuously; a prior `no successor` closes only its named allocation. Cross-direction choices
 still use Portfolio authority while independent authorized work continues.
 
+OWNER_DIRECT 2026-09-11: once Root has dispatched all currently ready independent work, it ends
+the turn if only long-running DM, accepted legacy CM, Monitor or Transport dependencies remain.
+The independent relay wakes Root for actionable native completion; Monitor and Transport retain
+their direct Root receipt routes. Root does not keep the dispatch turn open with native/app waits,
+timers or status polling. Each wake re-enters the normal ready-work pass.
+
 ## Maintained sources
 
 | Rule | Maintained source |
