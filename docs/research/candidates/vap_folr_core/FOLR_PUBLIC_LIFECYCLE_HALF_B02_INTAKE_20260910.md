@@ -110,3 +110,48 @@ At the adopted-boundary readback, measured DM support is **10.7798254s**. Primar
 reviews returned no unapplied items. One handover bookkeeping command has no returned
 elapsed receipt; it remains unmeasured, not zero. Final publication and actual Monitor
 work are also pending reconciliation, so no complete-support total is claimed here.
+
+## 6. RETAIN technical intake and preselected continuation
+
+Checked [E0 §6](FOLR_PUBLIC_LIFECYCLE_HALF_B02_RESULT_EVIDENCE_20260910.md#6-retain-terminal-collection-and-technical-acceptance)
+and the byte-verified original summary, checkpoint, supervisor and memory records
+against card §§3–5:5000 training episodes/100000 ticks/4969 updates,128 final episodes/
+2560 ticks, exact source/streams,25 progress rows, raw-log/publication equality and all
+phase counters. All pass. Native outer wall748.47s is within1800s; fresh physical and
+effective memory15631994880 bytes passes4GiB. Technical acceptance is complete for
+RETAIN only. Full128 returns are retained; its mean9.471796875 is one fitted-policy
+observation, and the paired scientific result is not yet available.
+
+The card's applicable continuation rule, verbatim: “Execute **RETAIN then HALF_EVENT**,
+both preselected regardless of RETAIN's score, one accepted invocation each. Failure
+retains evidence and stops the dependent sequence.” No failure was found. The primary
+reading rule remains `d_HR=J_HALF_EVENT−J_RETAIN`; its original three branches and the
+prospective WITHIN_MEI forecast remain unscored. Owner prediction is not taken
+(unattended). There is no claim about HALF_EVENT from RETAIN alone.
+
+Decisions this intake produces:
+
+- **Technical object continuation:** (a) accept complete RETAIN and execute the already
+  selected HALF_EVENT once; (b) stop the sequence if the collected integrity/counts
+  fail. Recommend and select(a), because original artifacts satisfy the card and no
+  failure branch applies. **Owner-delegated decision (unattended,2026-09-03 instruction):
+  (a).** Root's routed continuation also explicitly requests this same conditional step.
+  This makes no new treatment, budget, direction or Portfolio selection.
+- **Cost reading:** retain all known and missing durations without claiming complete
+  cap compliance. The known subtotal after acceptance arithmetic is23.0644657s,
+  including4.476s measured Monitor queries. One bookkeeping duration and some Monitor
+  query/messaging time remain unmeasured. They do not become a scientific negative or
+  zero cost. Remaining existing observation/collection/preservation is still credible
+  within300s; no concrete exhaustion is observed. No extra accounting experiment or
+  invocation follows, and actual later costs/overruns must remain visible.
+
+Owner flags: incomplete support bill and inconsistent Monitor local offset, both
+preserved in the original receipt and summary; no observed source/count/publication
+defect. Use native supervisor/time clocks for elapsed. No ordinary owner-console item
+is needed for this technical continuation. Complete-pair intake, prediction scoring,
+Chinese brief and accepted mechanism-level update remain due after HALF_EVENT.
+
+Publish this acceptance, then execute only the original HALF_EVENT command with fresh
+destination memory admission in its outer1800s chain. Directly transfer the accepted
+handle to the live-primary Monitor; no routine DM polling. The shared remote worktree
+and RETAIN evidence remain intact for final verified preservation and scoped closeout.

@@ -1,6 +1,6 @@
 # FOLR public-lifecycle HALF-B02 technical evidence
 
-Current state: RETAIN accepted and Monitor adoption confirmed by Root; HALF_EVENT remains preselected and unsubmitted. No scientific result collected.
+Current state: RETAIN complete and technically accepted; HALF_EVENT remains preselected and unsubmitted. The paired scientific endpoint is pending.
 
 ## 1. Accepted reuse and focused new binding
 
@@ -137,3 +137,52 @@ At the adopted-boundary readback, measured DM support is **10.7798254s**. Primar
 reviews returned no unapplied items. One handover bookkeeping command has no returned
 elapsed receipt; it remains unmeasured, not zero. Final publication and actual Monitor
 work are also pending reconciliation, so no complete-support total is claimed here.
+
+## 6. RETAIN terminal collection and technical acceptance
+
+Root routed the original accepted handle's exit0 terminal fact. Its supervisor started
+at **2026-09-10T23:47:46Z** and ended **2026-09-11T00:00:15Z**, an integer-clock749s.
+The complete outer `time` chain measured **748.47s**, below1800s, with732.50s user,
+17.53s system and656744KiB peak RSS. Runner wall was748.1175824130187s and its peak
+644236KiB. These nested timings are not added together. Fresh admission at
+23:47:46.781396Z measured physical and effective available memory **15631994880 bytes**,
+both above4GiB, before the fresh learner. No cap stop or scientific retry occurred.
+
+The [collection receipt](evidence/2026-09-10-folr-public-lifecycle-half-b02-retain-collection.json)
+records all **10 files /4675780 bytes** matching original remote lengths and SHA256:
+summary/checkpoint, seven supervisor files and the memory receipt. The original
+Monitor terminal text is also retained. Exact source surfaces still matchc6be208cd;
+the raw final log JSON equals `summary.json`, all25 progress rows have episode200..5000
+and updates=episode−31, and `final.pt` exists at4662779 bytes. No checkpoint was loaded
+or re-evaluated. Raw copies remain under the named B02 control root's `collected/`.
+
+RETAIN completed **5000 train episodes /100000 ticks /4969 updates**, then **128 final
+episodes /2560 ticks** with training7808/evaluation107808 and Torch1/1. All128 returns
+and25 progress rows are preserved in the result summary. Final mean native return is
+**9.471796875**; sample SD9.89217605684 describes rollouts conditional on this fitted
+policy, not training-instance uncertainty. Training return sum is−1567.5800000000443,
+mean−.31351600000000884. Train phase counts are births23382, departures11932,
+event-survivor opportunities54125 and eligible survivor controls242948; final counts
+are709,435,1616,5657 respectively. Both phases have zero full resets and attenuations.
+
+These facts technically accept this arm under the card's original counts and endpoint.
+HALF_EVENT's trained result is absent, so `d_HR`, the branch and prediction scoring
+remain pending. RETAIN's point does not select a replacement arm or change the fixed.5
+coefficient. The two arms were already selected regardless of the first arm's score.
+
+Monitor reports **4.476s** of measured queries, with twelve components preserved in the
+summary; additional yielded query runtimes and messaging remain unmeasured. Its local
+observation label00:00:52−07 conflicts with the native00:00:15Z terminal; preserve that
+label but use supervisor/whole-chain clocks for elapsed. It has no scientific polarity.
+After collection and acceptance arithmetic, known DM support is **18.5884657s**, plus
+4.476s measured Monitor work: **23.0644657s known support**. The earlier bookkeeping
+duration and omitted Monitor durations remain unknown, not zero; later publication,
+HALF_EVENT support and required preservation are still to be charged. No complete300s
+or3900s compliance is asserted. Unchanged short remaining support is still credible
+within the allocation; no concrete exhaustion has been observed. No cost experiment,
+support transfer or extra invocation is introduced.
+
+The remote B02 worktree remains needed by the preselected second arm; retain its
+evidence and RETAIN supervisor until complete-pair archive verification and scoped
+closeout. No remote or local evidence has been removed. Primary owner reviews again
+returned no unapplied items at this boundary.
