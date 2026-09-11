@@ -128,3 +128,11 @@ declared TBCFV population/information and sampled evaluator. The next accepted
 discriminator and its budget must be separately selected; this intake executes no
 local direction/Portfolio substitution. DM returns exact evidence and cleanup
 inventory to Root for main integration, retention and final reclamation acceptance.
+
+Final operational closeout: Root integrated the accepted intake on mainb8012f3c5;
+the exact completed remote worktree/staging have been removed and verified absent.
+The execution record and SUPPORT_FINAL retain **198.0414s charged complete work per
+valid result** (81.78 native +116.2614 support, with explicit conservative publication/
+integration allowance). This is below the300s complete and140s support allocations;
+it is not an exactly measured whole-study wall. Local7-file/724,042B fixture scratch
+remains solely because all three cleanup methods were policy-rejected before effect.
