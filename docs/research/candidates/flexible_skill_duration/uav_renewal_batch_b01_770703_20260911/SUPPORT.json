@@ -1,0 +1,122 @@
+{
+  "status": "D0 accepted, Monitor dispatch confirmed; adoption/terminal and I1280 pending; accounting open",
+  "metric": "sum of complete tool/command execution wall charged once; idle waiting and reasoning elapsed distinct; unmeasured enclosing overhead remains unknown",
+  "cap_seconds": 300,
+  "charges": [
+    {
+      "phase": "initial main assignment/compute/owner read",
+      "wall_seconds": 0.5220331
+    },
+    {
+      "phase": "initial FSD state/card/intake and spec diff read",
+      "wall_seconds": 0.3872928
+    },
+    {
+      "phase": "monitor/scientific tools/runtime read",
+      "wall_seconds": 0.1007797
+    },
+    {
+      "phase": "reconcile required main inputs",
+      "wall_seconds": 0.5816591
+    },
+    {
+      "phase": "push reconciled branch",
+      "wall_seconds": 4.6207464
+    },
+    {
+      "phase": "evidence/previous execution/support/acceptance identity read",
+      "wall_seconds": 0.3613833
+    },
+    {
+      "phase": "remote supervisor/source/accepted-identity reconciliation",
+      "wall_seconds": 2.119393
+    },
+    {
+      "phase": "focused destination FSD identity and supervisor semantics read",
+      "wall_seconds": 1.6978711
+    },
+    {
+      "phase": "write allocated card and exact arm commands",
+      "wall_seconds": 0.019
+    },
+    {
+      "phase": "prospective configuration/exposure arithmetic and wrapper attributes",
+      "wall_seconds": 0.2575644
+    },
+    {
+      "phase": "independent launch-contract review (enclosing tools, rounded)",
+      "wall_seconds": 2.3
+    },
+    {
+      "phase": "write execution record",
+      "wall_seconds": 0.013
+    },
+    {
+      "phase": "prelaunch",
+      "operation": "resume_readback",
+      "wall_seconds": 0.279163
+    },
+    {
+      "phase": "prelaunch",
+      "operation": "owner_skill_and_assignment",
+      "wall_seconds": 0.2256045
+    },
+    {
+      "phase": "prelaunch",
+      "operation": "owner_trace_and_literal_command_read",
+      "wall_seconds": 0.3209152
+    },
+    {
+      "phase": "prelaunch",
+      "operation": "trace_allocated_pair_on_existing_owner_card",
+      "wall_seconds": 0.2809729
+    },
+    {
+      "phase": "prelaunch",
+      "operation": "record_object_selection_and_support",
+      "wall_seconds": 0.02
+    },
+    {
+      "phase": "prelaunch",
+      "operation": "check_scoped_documents_sum_support_and_publish_launch_commit",
+      "wall_seconds": 4.9300359
+    },
+    {
+      "phase": "prelaunch",
+      "operation": "exact_sha_and_live_compute_monitor_read",
+      "wall_seconds": 0.2199741
+    },
+    {
+      "phase": "prelaunch",
+      "operation": "remote_exact_sha_staging_and_committed_shell_readback",
+      "wall_seconds": 7.3665336
+    },
+    {
+      "phase": "launch_D0",
+      "operation": "agent_task_dispatch_and_acceptance",
+      "wall_seconds": 0.5035793
+    },
+    {
+      "phase": "launch_D0",
+      "operation": "direct_monitor_add_dispatch",
+      "wall_seconds": 0.762
+    },
+    {
+      "phase": "launch_D0",
+      "operation": "failed_document_patch_rounded_up",
+      "wall_seconds": 0.1
+    },
+    {
+      "phase": "launch_D0",
+      "operation": "reconcile_document_patch_context",
+      "wall_seconds": 0.2262563
+    },
+    {
+      "phase": "launch_D0",
+      "operation": "write_staging_acceptance_and_monitor_handover",
+      "wall_seconds": 0.015
+    }
+  ],
+  "recorded_support_seconds": 28.230757699999998,
+  "remaining_from_recorded_seconds": 271.7692423
+}

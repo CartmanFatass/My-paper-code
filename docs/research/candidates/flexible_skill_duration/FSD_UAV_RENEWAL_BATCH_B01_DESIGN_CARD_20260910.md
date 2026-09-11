@@ -3,15 +3,19 @@ Binding MARL structure: (b) temporal abstraction or termination; asynchronous in
 
 # FSD renewal batch B01 — source-grounded prospective design
 
-**Proposed B/EXPLORE; implementation-only allocation, zero real B exposure.**
-The original design-only return is complete. The subsequent Portfolio selection
-allocates one source/technical return and at most one complete 60-second synthetic
-fixture. The real B and the proposed 3000-second envelope remain unallocated.
+**Allocated B/EXPLORE: one fresh I1280/D0 pair, training770703/evaluation780703.**
+Portfolio option A in the 2026-09-11 five-chain refill now allocates the real pair:
+D0 at most 900 seconds, I1280 at most 1800 seconds, support at most 300 seconds,
+complete at most 3000 seconds. This prospectively supersedes the earlier
+implementation-only spending boundary. The completed design and implementation
+intakes retain their historical zero-real-exposure meaning. No successor is funded.
 Technical acceptance and its limits are recorded in the
 [implementation intake](FSD_UAV_RENEWAL_BATCH_B01_IMPLEMENTATION_INTAKE_20260910.md).
 The one permitted fixture passed at source `0207d0b3c` in 4.8851396 seconds
 including publication, cleanup and exit. Acceptance covers binding, traversal
 and synthetic primary publication; it provides no new native performance fact.
+The current execution assignment and exact commands are in
+[the real-pair execution record](FSD_UAV_RENEWAL_BATCH_B01_EXECUTION_20260911.md).
 
 ## 1. Authority, question and bounded selection
 
@@ -30,7 +34,7 @@ implementation return; merge `eec2ec260` brings these exact inputs into the
 existing `codex/fsd` worktree. This prospectively supersedes only the earlier
 zero-implementation/check allowance, without rewriting its completed design intake.
 
-The one proposed question is: after five ordinary native training rollouts, does
+The one allocated question is: after five ordinary native training rollouts, does
 **I1280**, the existing .25 individual-renewal package with coordinator batches
 of 1280 joint rows, exceed a freshly trained intact **D0**, with its ordinary
 128-row coordinator batches, by more than .01 native mean team reward?
@@ -196,7 +200,7 @@ losses and the possibility of undertraining support caution; changed grouping
 could nevertheless alter the outcome. This is not a prediction score or a
 reason to reject a future trustworthy result. Owner prediction: not taken.
 
-## 6. Work, proposed limits and current zero exposure
+## 6. Work, complete limits and exposure by stage
 
 Reuse the existing B02 count record for the unchanged two-arm environment
 budget: 80000 training transitions, 160 training episodes, ten update stages,
@@ -223,16 +227,16 @@ I1280 cost prediction. Larger batch memory, full new wall time, technical
 support and authoring cost remain unmeasured. Fewer optimizer calls do not
 prove lower total work or a faster completed result.
 
-For a later allocation, **request** complete command caps D0 900 seconds and
-I1280 1800 seconds, plus at most 300 seconds of shared technical support within
-a 3000-second total envelope. These are proposed spending ceilings, not timing
-estimates or currently granted budget. Command time includes adjacent admission,
+The 2026-09-11 Portfolio allocation now grants complete command caps D0 900 seconds
+and I1280 1800 seconds, plus at most 300 seconds of shared technical support within
+a 3000-second total envelope. These are spending ceilings, not timing
+estimates. Command time includes adjacent admission,
 imports, construction, collection, updates, the unique endpoint, readout and
 closed-file publication. The support reserve includes focused verification,
 staging/launch, Monitor queries and collection/readback; unknown support cannot
 be counted as zero. No borrowing, grace, extra fit, retry or automatic extension.
-If separately allocated, retain remote-first CPU four threads/FP32 and fresh
-destination memory admission; no admission or launch occurs in this return.
+Retain remote-first CPU four threads/FP32 and fresh destination memory admission
+immediately before each arm. No cap borrowing, seed replacement or extension.
 
 At the original design return, exposure was: **scientific invocations=0; models=0; checkpoint loads=0;
 environments=0; training/native/synthetic steps=0; optimizer calls=0;
@@ -246,10 +250,11 @@ records one command, four configurations, one buffer/1281 valid rows, two sample
 traversals and four synthetic pair readouts. Models, checkpoint loads,
 environments/steps, training starts, optimizer calls, real evaluations, replay,
 explicit profiling, support search and scientific invocations remain zero.
-The complete fixture wall is 4.8851396 seconds; all allowance beyond this one
-source/check return remains unallocated. No new numerical invocation follows.
+The complete fixture wall was 4.8851396 seconds; at that implementation return,
+all subsequent allowance was unallocated. The new real-pair allocation changes
+that spending boundary prospectively; it does not fund another fixture.
 
-## 7. Selected implementation boundary and L0
+## 7. Completed implementation boundary and L0 (historical allocation)
 
 Deliverable: one explicit I1280/D0 entry, the matching strict primary readout,
 and one complete technical acceptance return. The entry is
@@ -303,3 +308,53 @@ Engineering Scope §4 needs **none**. Existing 2000/600-line and cumulative
 five-minute directory test limits remain. The fixture owns a unique directory
 under this checkout's `temp/`; retain its useful report and remove only that
 scratch. There is no result-bearing root or Monitor handle in this assignment.
+
+## 8. Allocated real-pair L0 — 2026-09-11
+
+Authority: conforming Portfolio option A, complete immutable response
+`ed0c4e1c3cd28be353253e8533bc89a261f25357`; the
+[exact FSD mapping](../../portfolio/pro_packets/20260911_five_chain_refill/EXECUTION_MAPPING.md#fsd--complete-one-fresh-i1280d0-b-pair)
+and Root's named assignment. Required main `5bbae6d90` fast-forwarded the clean
+shared `codex/fsd` checkout; the accepted learner/entry/readout source is unchanged.
+
+Deliverable: one exact fresh pair through full collection, terminal publication,
+technical/scientific intake and scoped closeout, or a bounded dependent failure.
+Owned paths: this card, the execution record and its command/evidence directory,
+result/intake/brief/audit/owner records under FSD. Existing source is reused;
+no new learner implementation, tests or altered algorithms are selected.
+
+Preserved semantics: §§2–5, including all score outcomes and contrary P70/P72
+losses. Training770703/evaluation780703 is reconciled with local accepted records
+and destination FSD supervisor/worktree listings before first acceptance; no
+matching prior run was found. This is one declared fresh identity, not seed screening.
+
+Execution: one detached exact-SHA remote checkout at
+`/home/wu/hmasd-worktrees/fsd-uav-renewal-batch-b01-770703-20260911`, Linux node
+`hmasd-wsl-node`, `/home/wu/.venvs/hmasd/bin/python`, CPU FP32/four Torch threads.
+Private learner/evaluator RNG and lane laws are unchanged; Linux/CPU was the
+predeclared portable route, with no CUDA use or precision substitution.
+D0 runs first; after its terminal primary is collected, I1280 uses that same
+fresh D0 summary. Separate `agent-task` handles and KILL timeouts include each
+arm's destination admission, imports, initialization, learning, endpoint and exit.
+The mandatory admission precedes creation of any scientific output/model/RNG.
+
+Acceptance: reuse the unchanged reviewed fixture and collector/evaluator evidence;
+read the actual new wrapper inputs and syntax-check the committed shell bytes
+without running the payload. Inspect terminal exit, exact source, primary/counts,
+configured batches, all outcomes and complete time receipts. Check evidence
+against the frozen reading rule, with one independent training pair and conditional
+episode uncertainty. No additional scientific validation or required positive sign.
+
+Support accounting charges measured tool/command wall for preparation, review
+execution, staging, publication/readback, Monitor observation, collection/reduction
+and preservation/cleanup once; idle waiting and study elapsed remain separately
+reported. Unknown overhead stays unknown, not zero. The execution record retains
+charges and the remaining 300-second allowance. No added profiling or timing pilot.
+
+Budget/stop: D0≤900s, I1280≤1800s, support≤300s, sum≤3000s; two fits/four models,
+80000 training plus 32000 final evaluation steps, final32 episodes per arm.
+Complete both preselected arms or stop at a bounded dependent failure; no third
+arm, replacement, automatic retry, longer training, reduced endpoint or successor.
+Monitor gets each accepted handle directly; DM stops routine polling and returns
+pending collection to Root. Engineering Scope §4 needs **none**. Preserve unique
+source/evidence before any scoped removal and leave the active authoring checkout.
