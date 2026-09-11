@@ -19,16 +19,21 @@ LAW = {"nearest_probability": .9, "other_probability": .02,
 
 
 class NearestPriorModel(TBCFVModel):
+    def __init__(self, action_law=None):
+        super().__init__()
+        self.action_law = dict(LAW if action_law is None else action_law)
+
     def claim_probabilities(self, pointer_inputs):
         logits = self.pointer_logits(pointer_inputs)
-        nearest = pointer_inputs[..., 76].abs().argmin(dim=-1, keepdim=True)
-        offset = torch.zeros_like(logits).scatter_(-1, nearest, math.log(45.0))
+        nearest = pointer_inputs[..., self.action_law["distance_field"]].abs().argmin(dim=-1, keepdim=True)
+        odds = self.action_law["nearest_probability"] / self.action_law["other_probability"]
+        offset = torch.zeros_like(logits).scatter_(-1, nearest, math.log(odds))
         return torch.softmax(logits + offset, dim=-1)
 
 
-def initialize_model(rng):
+def initialize_model(rng, action_law=None):
     helpers = b03.initialize_block_models(rng)
-    model = NearestPriorModel()
+    model = NearestPriorModel(action_law=action_law)
     model.load_state_dict(helpers[b03.FLEX].state_dict())
     with torch.no_grad():
         model.pointer_score.weight.zero_()
@@ -37,7 +42,7 @@ def initialize_model(rng):
 
 
 def save_model(model, path):
-    torch.save({"state_dict": model.state_dict(), "action_law": LAW,
+    torch.save({"state_dict": model.state_dict(), "action_law": model.action_law,
                 "model": "NearestPriorModel"}, path)
 
 
@@ -98,17 +103,18 @@ def reading(delta, gain, mixed):
 
 
 def run(arm, out, launch_sha, admission_receipt, started, wall_cap, learned_summary=None, seed=SEED,
-        *, updates=UPDATES, object_id=OBJECT_ID, panel_label="B04"):
+        *, updates=UPDATES, object_id=OBJECT_ID, panel_label="B04", action_law=None):
+    action_law = dict(LAW if action_law is None else action_law)
     out.mkdir(parents=True, exist_ok=True)
     summary = dict(object=object_id, seed=seed, arm=arm, launch_sha=launch_sha,
-                   admission_receipt=str(admission_receipt), action_law=LAW,
+                   admission_receipt=str(admission_receipt), action_law=action_law,
                    status="IN_PROGRESS", scenarios=[], curves=[])
     try:
         authority, rng = make_rng(seed, object_id=object_id)
         summary.update(root_key_hex=host.seed_root_key(f"{object_id}/seed/{seed}").hex(),
                        block_digest_hex=authority.root_digest, native=authority.certificate["native"])
         if arm == "learned":
-            model = initialize_model(rng)
+            model = initialize_model(rng, action_law=action_law)
             initial = host.flat_parameters(model).clone()
             summary.update(allocations=dict(models=7, training_instances=1, untrained_helpers=6),
                            initial_parameter_norm=float(torch.linalg.vector_norm(initial)),

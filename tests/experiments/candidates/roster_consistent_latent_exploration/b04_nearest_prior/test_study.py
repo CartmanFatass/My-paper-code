@@ -58,7 +58,7 @@ def test_action_score_checkpoint_and_publication(monkeypatch, tmp_path):
              for cell in study.host.HELDOUT_CELLS for i in range(4)]
             for u, f in ((.4, .1), (.2, .15), (.3, .1))]
     monkeypatch.setattr(study, "make_rng", lambda seed, object_id=study.OBJECT_ID: (SimpleNamespace(root_digest="fixture", certificate={"native": {}}), None))
-    monkeypatch.setattr(study, "initialize_model", lambda rng: model)
+    monkeypatch.setattr(study, "initialize_model", lambda rng, action_law=None: model)
     monkeypatch.setattr(study.b03, "panel", lambda m, rng, label, *args: rows[0 if label == "B04-INITIAL" else 1])
     calls = []
     def supplied_update(m, rng, update, baselines, weight):
