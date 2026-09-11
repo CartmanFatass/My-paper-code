@@ -21,8 +21,14 @@ These repairs may use bounded static, transport and synthetic checks that do not
 scientific workload. Any future result-bearing invocation still needs its own scientific selection,
 frozen card, exact source, fresh destination admission and Monitor adoption. Missing cost telemetry
 and policy-blocked duplicate cleanup remain qualified evidence/retention facts rather than scientific
-stops. The current advancing-direction count is zero; Portfolio authoring and Transport are cross-direction work
-and is not counted as another chain.
+stops. At that boundary the advancing-direction count was zero; Portfolio authoring and Transport
+are cross-direction work and are not counted as direction chains.
+
+After the fixed Portfolio request was queued, Root resumed the original CBSC and FRRIE DMs for
+independent zero-exposure technical readiness work. CBSC is reconciling the exact P47/retained52
+observation path; FRRIE is reconciling the P59/P63 factory-observation path. These are two advancing
+direction-local engineering chains. Neither assignment selects, launches or funds the scientific
+object, and each must return an attributable repair or a concrete executable exit condition.
 
 ## Current zero-addition Portfolio boundary — 2026-09-11
 

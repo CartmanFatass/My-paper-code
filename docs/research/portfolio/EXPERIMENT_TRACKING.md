@@ -17,6 +17,14 @@ than scientific exclusions. No B02 retry, model, environment, training or new al
 The current direction-chain count is zero while Portfolio selection and independent technical
 readiness work proceed.
 
+Root subsequently resumed the original CBSC and FRRIE DMs on their shared direction checkouts for
+bounded technical readiness work. CBSC owns exact P47/retained52 observation-path reconciliation;
+FRRIE owns exact P59/P63 factory-observation reconciliation. Static and tiny synthetic source-only
+checks are permitted, but no model, environment, optimizer, RNG, training, evaluation or
+result-bearing invocation is allocated. The actual advancing direction-chain count is therefore
+two while the Portfolio request remains queued behind Transport's confirmed-live prior
+reconciliation.
+
 ## FSD source-delivery repair accepted — 2026-09-11
 
 The complete direction-local repair series is accepted and integrated through `20258e5ef`.
