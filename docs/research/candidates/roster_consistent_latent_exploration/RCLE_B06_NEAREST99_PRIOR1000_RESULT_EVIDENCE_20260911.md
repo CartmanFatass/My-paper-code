@@ -181,6 +181,14 @@ later publication/integration/cleanup also follow the snapshot. Mark resources_u
 do not certify140s-support/750s-complete conformance or infer an overrun. This is
 not an additional scientific invocation or a change of native performance polarity.
 
+At the later closeout boundary, [SUPPORT_FINAL.json](b06_nearest99_prior1000_20260911/SUPPORT_FINAL.json)
+records 81.3036131s of known support and 417.1636131s of native-plus-known charges.
+This includes Root result integration's reported 9.2s once and exact remote cleanup's
+1.0372888s enclosing command. Receipt preparation, final publication and Root closeout
+integration follow that boundary and are returned as separate measured charges.
+The same unknown Monitor components and yielded-push tail remain; full cap
+conformance remains unmeasured.
+
 ## E0 bounded conclusion and closeout
 
 This fresh .99-prior1000 recipe did not establish positive aggregate learning or
@@ -191,8 +199,12 @@ identity, stable inferiority, probability causality, general recovery or family 
 
 The named allocation ends after intake, preservation and authorized scoped closeout.
 No retry, new probability, seed, endpoint, longer training or automatic successor is
-selected. Root receives these records and the exact cleanup inventory for integration/
-retention; remote reclamation follows that acceptance. Shared checkout and local
-scientific evidence remain. B06 created no test scratch; historical B04/B05 cleanup
+selected. Root integrated result/intake at main364b98f42 and accepted preservation.
+[CLOSEOUT.json](b06_nearest99_prior1000_20260911/CLOSEOUT.json) records successful
+removal of the exact remote execution checkout and two-file staging directory at
+2026-09-11T19:02:25Z. Both are absent on disk and the execution checkout is absent
+from Git registration. Source/archive hashes were verified again before removal;
+local raw evidence, source bundle, shared authoring checkout and completed supervisor
+receipts remain. B06 created no test scratch; historical B04/B05 cleanup
 exceptions retain their separate records. Full decisions/prediction score are in the
 [intake](RCLE_B06_NEAREST99_PRIOR1000_RESULT_INTAKE_20260911.md).

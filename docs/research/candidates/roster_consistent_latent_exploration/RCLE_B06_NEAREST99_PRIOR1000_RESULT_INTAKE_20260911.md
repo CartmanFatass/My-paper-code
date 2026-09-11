@@ -128,10 +128,21 @@ waits are recorded, but the full process-wall tail was not measured. Later resul
 publication/integration/cleanup remain to be charged. Mark resources_unmeasured:
 no140s-support/750s-complete cap pass or overrun is inferred from incomplete timing.
 This is an accounting limitation, not observed scientific failure or extra budget.
+The later [SUPPORT_FINAL.json](b06_nearest99_prior1000_20260911/SUPPORT_FINAL.json)
+records 81.3036131s known support and 417.1636131s native-plus-known charges through
+accepted remote cleanup and its publication insertion-point readback. Root's
+reported 9.2s result integration and the 1.0372888s cleanup command are counted once.
+Receipt preparation, final publication and Root closeout integration follow that
+boundary; their measured charges are returned to Root. Earlier timing unknowns remain.
 
-All unique outputs/source are preserved locally. The exact clean remote checkout
-and two-file staging inventory is ready for Root integration/retention acceptance,
-then scoped reclamation. B06 created no test scratch; prior B04/B05 policy-rejected
+All unique outputs/source are preserved locally. Root integrated the result/intake
+at main364b98f42 and accepted preservation. At 2026-09-11T19:02:25Z the exact clean
+remote checkout and two-file staging inventory were removed successfully after
+checking source, terminal status and source/archive hashes. Both paths are absent
+on disk and the checkout is absent from Git registration; see
+[CLOSEOUT.json](b06_nearest99_prior1000_20260911/CLOSEOUT.json). Local evidence and
+source, shared authoring checkout and completed supervisor receipts remain.
+B06 created no test scratch; prior B04/B05 policy-rejected
 scratch exceptions remain separate. Chinese brief:
 [2026-09-11_RCLE_B06_NEAREST99_PRIOR1000.md](../../portfolio/owner/briefs/roster_consistent_latent_exploration/2026-09-11_RCLE_B06_NEAREST99_PRIOR1000.md).
 
