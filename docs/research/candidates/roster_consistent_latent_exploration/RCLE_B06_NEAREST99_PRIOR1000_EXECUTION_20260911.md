@@ -113,3 +113,45 @@ Receipt publication, later observations and terminal intake/integration/closeout
 remain additional components, with unknowns retained. No complete-runtime or
 scientific-validity conclusion is drawn yet. DM has stopped routine polling and
 returns pending collection to the same Root/DM route. No retry or successor follows.
+
+## Terminal technical acceptance and scientific intake
+
+The pending collection status above is superseded. Root forwarded finished/exit0
+at 2026-09-11T18:12:38Z; direct collection verified exact source, supervisor and
+both COMPLETE arms. The [E0](RCLE_B06_NEAREST99_PRIOR1000_RESULT_EVIDENCE_20260911.md)
+and [intake](RCLE_B06_NEAREST99_PRIOR1000_RESULT_INTAKE_20260911.md) accept one valid
+B with1000 nonzero updates,70144 total episodes and4489216 native ticks. All three
+roles have2048 matched unique rows. Two retained tensor loads verify26161 finite
+FP64 values, initial pointer zero, exact .99/.002 law and displacement.714670178467
+from norm21.1477941906. No new model/RNG/rollout/backward or optimizer ran at intake.
+
+Primary Delta_ref−.005757649740 and G_U−.000107828776 yield frozen rows4 and5:
+no positive aggregate learning claim and mixed native consequences. All8 reference
+U cells lose;504/512 primary initialization U scores tie, without an action-identity
+claim. Five reference F contrasts are positive. The raw five-positive initial F
+count includes one+3.25e−19 contrast with equal displayed means; E0 preserves its
+precision qualification. Delta_ref sign prediction matched; G_U prediction missed;
+owner prediction was not taken. No successor is selected.
+
+Complete native chain335.86s includes learned333.40/reference2.45s and.01s boundary/
+rounding difference; each arm passes its cap. Both fresh memory receipts pass4GiB
+physical/effective. PeakRSS595300KiB. Internal313.3898086/2.2206822s timers are not
+complete costs; the supervisor's336s is a coarse observation of the same chain.
+Known post-analysis support snapshot55.4565082s includes Root launch integration
+4.9832446s, Monitor adoption.9s and the whole shared RCLE+VNFC terminal query1.3s,
+charged once to RCLE without splitting. Other observation components and the full
+wall tail of a yielded terminal-input push are unknown. Native-plus-known charges
+are391.3165082s at that snapshot; later publication/integration/cleanup are added
+once. Full140/750s conformance remains resources_unmeasured, not an inferred overrun.
+
+Verified local terminal archive807556B/SHA256
+4c3188b056ccc91a67482663a3d97f9d38f216d41b55b331127ab1b744202494 and source bundle
+1928525B/SHA2569e22ced7157debd250e289f57855ef513e36ba7dfc575da5b8921b21b2feffd6
+preserve all17 output/supervisor files and source. Collection mapped directly to
+short raw paths. Compact curve bounds accompany the full preserved1000 records;
+the corrected result figure was visually checked. The Chinese six-heading brief
+contains347 characters. [CLEANUP_INVENTORY.json](b06_nearest99_prior1000_20260911/CLEANUP_INVENTORY.json)
+identifies the completed clean48,502,754B exact-source checkout and2,736,081B staging
+directory containing only source.bundle and terminal.tar.gz. Root integration and
+preservation acceptance precede exact reclamation. Shared checkout/local evidence
+remain; no B06 test scratch was created. Prior B04/B05 exceptions are separate.

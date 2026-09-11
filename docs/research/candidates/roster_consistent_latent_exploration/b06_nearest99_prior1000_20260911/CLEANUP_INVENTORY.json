@@ -1,0 +1,35 @@
+{
+  "source_sha": "baf63642a776ef3e60f4310ce47d76c45168c283",
+  "handle": "rcle-b06-nearest99-s26-20260911",
+  "execution_checkout": {
+    "path": "/home/wu/hmasd-worktrees/rcle-b06-nearest99-s26-20260911",
+    "bytes_at_collection": 48502754,
+    "source_verified": true,
+    "tracked_and_untracked_status": ""
+  },
+  "staging": {
+    "path": "/home/wu/hmasd-inputs/rcle-b06-nearest99-s26-20260911",
+    "bytes_at_collection": 2736081,
+    "files": [
+      "source.bundle",
+      "terminal.tar.gz"
+    ]
+  },
+  "local_archive": {
+    "path": "temp/directions/roster_consistent_latent_exploration/exp/b06-nearest99-prior1000-s26-20260911/terminal.tar.gz",
+    "bytes": 807556,
+    "sha256": "4c3188b056ccc91a67482663a3d97f9d38f216d41b55b331127ab1b744202494"
+  },
+  "local_source_bundle": {
+    "path": "temp\\directions\\roster_consistent_latent_exploration\\b06-nearest99-prior1000-preparation\\source.bundle",
+    "bytes": 1928525,
+    "sha256": "9e22ced7157debd250e289f57855ef513e36ba7dfc575da5b8921b21b2feffd6"
+  },
+  "all_17_terminal_files_preserved": true,
+  "shared_checkout_retained": "C:/Projects/HMASD-worktrees/dm-rcle-a02-20260906",
+  "supervisor_receipts": "retain completed /home/wu/.agent-tasks/rcle-b06-nearest99-s26-20260911",
+  "B06_test_scratch": "none created",
+  "historical_exceptions": "B04/B05 creator-owned policy-rejected scratch unchanged; not part of B06 deletion inventory",
+  "reclamation": "pending Root result integration and preservation acceptance; exact cwd/staging only",
+  "cleanup_owner": "/root/dm_rcle_restart_recovery2"
+}
