@@ -1,6 +1,6 @@
 {
-  "status": "D0 collected and accepted; I1280 pending launch; support accounting open",
-  "metric": "sum of complete tool/command execution wall charged once; idle waiting and reasoning elapsed distinct; unmeasured enclosing overhead remains unknown",
+  "status": "D0 complete and accepted; I1280 accepted with native Monitor dispatch; adoption/terminal pending; accounting open",
+  "metric": "sum of complete tool/command execution wall charged once; idle waiting and reasoning elapsed distinct; unmeasured enclosing/native-message overhead remains unknown",
   "cap_seconds": 300,
   "charges": [
     {
@@ -165,13 +165,29 @@
       "phase": "D0_collection",
       "operation": "record_technical_acceptance_terminal_facts_and_audit",
       "wall_seconds": 0.033
+    },
+    {
+      "phase": "D0_collection",
+      "operation": "verify_copy_persist_support_review_owner_and_publish_collection",
+      "wall_seconds": 5.3831374
+    },
+    {
+      "phase": "launch_I",
+      "operation": "agent_task_dispatch_and_acceptance",
+      "wall_seconds": 0.7487395
+    },
+    {
+      "phase": "launch_I",
+      "operation": "write_I_acceptance_and_native_monitor_handover",
+      "wall_seconds": 0.018
     }
   ],
   "monitor_cost_attribution": {
     "reported_shared_cumulative_seconds": 1.423,
     "known_FSD_terminal_query_seconds": 0.598,
-    "remaining_shared_or_adoption_attribution": "unknown; do not add the shared total on top of the charged subset"
+    "remaining_shared_or_adoption_attribution": "unknown; do not add shared total on top of charged subset",
+    "I_native_dispatch_execution_seconds": null
   },
-  "recorded_support_seconds": 38.4570811,
-  "remaining_from_recorded_seconds": 261.5429189
+  "recorded_support_seconds": 44.606958000000006,
+  "remaining_from_recorded_seconds": 255.39304199999998
 }

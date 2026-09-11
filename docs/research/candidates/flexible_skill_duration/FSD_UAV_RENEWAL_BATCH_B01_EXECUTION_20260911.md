@@ -1,6 +1,7 @@
 # FSD renewal-batch B01 / 770703 — exact execution and collection record
 
-**D0 complete and its primary accepted; I1280 is preselected and unlaunched.**
+**D0 complete and its primary accepted; I1280 accepted and dispatched to the
+native recovery Monitor. I adoption/terminal collection is pending.**
 This is the complete one-pair task from Portfolio option A, immutable response
 `ed0c4e1c3cd28be353253e8533bc89a261f25357`, applied through the
 [FSD execution mapping](../../portfolio/pro_packets/20260911_five_chain_refill/EXECUTION_MAPPING.md#fsd--complete-one-fresh-i1280d0-b-pair).
@@ -163,3 +164,23 @@ Known FSD terminal-query cost0.598s is charged. Reported shared cumulative1.423s
 needs attribution; remaining shared/adoption overhead remains explicitly unknown.
 The original exact I command and c70f01ea3 source remain unchanged, using the
 fresh remote D0 summary and fresh adjacent destination admission; complete cap1800s.
+
+## I1280 accepted handover — 2026-09-11T08:22:37.618Z
+
+D0 collection/technical acceptance was committed and pushed at `07f60d525`
+before the I launch. I's exact existing command was then accepted by the remote
+supervisor as `fsd-uav-renewal-batch-b01-770703-I-20260911`, tmux
+`agent_fsd-uav-renewal-batch-b01-770703-I-20260911`. Execution remains at
+unchanged source `c70f01ea30d6c4d063dcc46d8499b26bfe037da8`; the fresh
+D0 companion's digest is in the [I dispatch receipt](uav_renewal_batch_b01_770703_20260911/I_DISPATCH.json).
+Adjacent admission and the complete1800-second KILL cap are part of the literal
+committed I command, with no new source, seed, fixture or validation episode.
+
+Exact MONITOR_ADD was sent natively to `/root/monitor_fsd_rcle_20260911`, with
+the accepted handle, source/cwd, cap, evidence roots, terminal route and cost
+attribution request; Root was also notified. **Native dispatch is confirmed;
+adoption is pending.** The earlier configured app Monitor delivery is a separate
+D0 event and was not repeated for I. DM stops routine polling. Actual I admission,
+learning, complete primary/pair readout and wall facts await routed terminal
+collection. Native message execution duration is unavailable and remains an
+explicit support-accounting limit. No third arm or automatic successor follows.
