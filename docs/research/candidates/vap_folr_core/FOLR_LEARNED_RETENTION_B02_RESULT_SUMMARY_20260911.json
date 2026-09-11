@@ -1,11 +1,11 @@
 {
   "object": "FOLR-LEARNED-RETENTION-B02",
-  "state": "prospective_preparation",
+  "state": "published_card_exact_command_preparation",
   "authority_sha": "41c46303f66005f74a18dccf45974d99771b155b",
   "authority_path": "docs/research/portfolio/pro_packets/20260911_post_program_vacancies/archive/RESPONSE.md",
   "authority_response_sha256": "1dc62ab2a10aef042c4a3ca3ba53b26daecbea0529e653359167cc03ecb76752",
   "root_conformance": "PASS forwarded in native assignment 2026-09-11",
-  "source_sha": null,
+  "source_sha": "2b22270b3b076df60f4afd3203c3f09aeab3b98b",
   "accepted_source_reused": "8d518ff300c13d809f8d88d0a259a3d8f6ff59d6",
   "accepted_result_intake_sha": "8da607b4b7fb415b4212e0e20d74f9dc9c20a32e",
   "source_surface": [
@@ -78,7 +78,30 @@
     "LEARNED_EVENT"
   ],
   "primary": null,
-  "commands": [],
+  "commands": [
+    {
+      "arm": "RETAIN",
+      "handle": "folr-learned-retention-b02-retain-20260911",
+      "cwd": "/home/wu/hmasd-worktrees/folr-learned-retention-b02-2b22270b3",
+      "output": "temp/directions/vap_folr_core/exp/learned_retention_b02_seed7810_retain",
+      "memory_receipt": "temp/directions/vap_folr_core/exp/learned_retention_b02_seed7810_retain_memory.json",
+      "whole_time": "temp/directions/vap_folr_core/exp/learned_retention_b02_seed7810_retain_whole_time.txt",
+      "command": "cd /home/wu/hmasd-worktrees/folr-learned-retention-b02-2b22270b3 && mkdir -p temp/directions/vap_folr_core/exp && /usr/bin/time -v -o temp/directions/vap_folr_core/exp/learned_retention_b02_seed7810_retain_whole_time.txt /usr/bin/timeout --signal=TERM --kill-after=5s 1800s bash -lc '/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/vap_folr_core/exp/learned_retention_b02_seed7810_retain_memory.json && /home/wu/.venvs/hmasd/bin/python -B scripts/run_folr_public_lifecycle_b01.py --arm RETAIN --seed 7810 --evaluation-seed 107810 --launch-sha 2b22270b3b076df60f4afd3203c3f09aeab3b98b --out temp/directions/vap_folr_core/exp/learned_retention_b02_seed7810_retain'",
+      "supervisor_command": "/usr/local/bin/agent-task run folr-learned-retention-b02-retain-20260911 'cd /home/wu/hmasd-worktrees/folr-learned-retention-b02-2b22270b3 && mkdir -p temp/directions/vap_folr_core/exp && /usr/bin/time -v -o temp/directions/vap_folr_core/exp/learned_retention_b02_seed7810_retain_whole_time.txt /usr/bin/timeout --signal=TERM --kill-after=5s 1800s bash -lc '\"'\"'/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/vap_folr_core/exp/learned_retention_b02_seed7810_retain_memory.json && /home/wu/.venvs/hmasd/bin/python -B scripts/run_folr_public_lifecycle_b01.py --arm RETAIN --seed 7810 --evaluation-seed 107810 --launch-sha 2b22270b3b076df60f4afd3203c3f09aeab3b98b --out temp/directions/vap_folr_core/exp/learned_retention_b02_seed7810_retain'\"'\"''",
+      "status": "committed_plan_not_submitted"
+    },
+    {
+      "arm": "LEARNED_EVENT",
+      "handle": "folr-learned-retention-b02-learned-event-20260911",
+      "cwd": "/home/wu/hmasd-worktrees/folr-learned-retention-b02-2b22270b3",
+      "output": "temp/directions/vap_folr_core/exp/learned_retention_b02_seed7810_learned_event",
+      "memory_receipt": "temp/directions/vap_folr_core/exp/learned_retention_b02_seed7810_learned_event_memory.json",
+      "whole_time": "temp/directions/vap_folr_core/exp/learned_retention_b02_seed7810_learned_event_whole_time.txt",
+      "command": "cd /home/wu/hmasd-worktrees/folr-learned-retention-b02-2b22270b3 && mkdir -p temp/directions/vap_folr_core/exp && /usr/bin/time -v -o temp/directions/vap_folr_core/exp/learned_retention_b02_seed7810_learned_event_whole_time.txt /usr/bin/timeout --signal=TERM --kill-after=5s 1800s bash -lc '/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/vap_folr_core/exp/learned_retention_b02_seed7810_learned_event_memory.json && /home/wu/.venvs/hmasd/bin/python -B scripts/run_folr_public_lifecycle_b01.py --arm LEARNED_EVENT --seed 7810 --evaluation-seed 107810 --launch-sha 2b22270b3b076df60f4afd3203c3f09aeab3b98b --out temp/directions/vap_folr_core/exp/learned_retention_b02_seed7810_learned_event'",
+      "supervisor_command": "/usr/local/bin/agent-task run folr-learned-retention-b02-learned-event-20260911 'cd /home/wu/hmasd-worktrees/folr-learned-retention-b02-2b22270b3 && mkdir -p temp/directions/vap_folr_core/exp && /usr/bin/time -v -o temp/directions/vap_folr_core/exp/learned_retention_b02_seed7810_learned_event_whole_time.txt /usr/bin/timeout --signal=TERM --kill-after=5s 1800s bash -lc '\"'\"'/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/vap_folr_core/exp/learned_retention_b02_seed7810_learned_event_memory.json && /home/wu/.venvs/hmasd/bin/python -B scripts/run_folr_public_lifecycle_b01.py --arm LEARNED_EVENT --seed 7810 --evaluation-seed 107810 --launch-sha 2b22270b3b076df60f4afd3203c3f09aeab3b98b --out temp/directions/vap_folr_core/exp/learned_retention_b02_seed7810_learned_event'\"'\"''",
+      "status": "committed_plan_not_submitted"
+    }
+  ],
   "caps_seconds": {
     "each_whole_arm": 1800,
     "native_sum": 3600,
@@ -213,9 +236,17 @@
       {
         "label": "create P2 B02 card item through owner console",
         "seconds": 0.2423863
+      },
+      {
+        "label": "prospective known support and owner/audit linkage publication preparation",
+        "seconds": 0.3540629
+      },
+      {
+        "label": "B02 source/card binding commit and immediate configured upstream push",
+        "seconds": 4.2584685
       }
     ],
-    "known_seconds_through_snapshot": 9.170955600000001,
+    "known_seconds_through_snapshot": 13.783487000000001,
     "native_clocks_not_in_support": true,
     "unmeasured_terms": [
       "unitemized authoring/tool effort",
@@ -228,7 +259,22 @@
   "cleanup": {
     "shared_checkout": "retain for live direction authoring/integration",
     "new_roots": "not yet created",
-    "old_B01_local_duplicates": "preserved, policy-blocked; no renewed deletion attempted or launch dependency"
+    "old_B01_local_duplicates": "preserved, policy-blocked; no renewed deletion attempted or launch dependency",
+    "control_root": "temp/directions/vap_folr_core/exp/learned_retention_b02_control_20260911"
   },
-  "owner_item": "docs/research/portfolio/owner/inbox/2026-09-11/20260911-folr-003.json"
+  "owner_item": "docs/research/portfolio/owner/inbox/2026-09-11/20260911-folr-003.json",
+  "execution_plan": {
+    "node": "wsl_4070",
+    "ssh_target": "hmasd-wsl-node",
+    "repo": "/home/wu/projects/HMASD",
+    "cwd": "/home/wu/hmasd-worktrees/folr-learned-retention-b02-2b22270b3",
+    "python": "/home/wu/.venvs/hmasd/bin/python",
+    "device": "cpu",
+    "dtype": "float32",
+    "torch_threads": 1,
+    "torch_interop_threads": 1,
+    "supervisor": "/usr/local/bin/agent-task",
+    "portability": "Linux CPU only for this declared native publication; no Windows fallback",
+    "staging": "new detached exact source worktree; published source only"
+  }
 }

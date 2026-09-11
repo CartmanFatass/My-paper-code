@@ -56,3 +56,12 @@ unique-evidence preservation are part of collection; shared/live checkouts remai
 P2 new-card item: docs/research/portfolio/owner/inbox/2026-09-11/20260911-folr-003.json,
 created through the owner CLI; accepted card selection is auto-applied without inventing
 an owner reply. Audit row105 records the delegated binding and reused-check method.
+
+## Published exact execution inputs
+
+Source/card commit: 2b22270b3b076df60f4afd3203c3f09aeab3b98b. The two literal supervisor commands, fresh output and
+memory paths are recorded in FOLR_LEARNED_RETENTION_B02_RESULT_SUMMARY_20260911.json.
+Their parameters are the declared7810/107810 identities, original runner and1800-second
+whole-chain timeout. Source is published before remote staging; commands are committed
+before submission. Fresh-binding shell syntax and namespace absence will be checked
+without a model, rollout, fixture or repeated accepted test. No handle is accepted yet.
