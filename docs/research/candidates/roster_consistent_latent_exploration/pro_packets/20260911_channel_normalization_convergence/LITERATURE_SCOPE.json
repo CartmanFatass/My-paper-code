@@ -1,0 +1,57 @@
+{
+  "question": "Does existing evidence justify describing separate manager/claim normalization as conflict removal or only an untested update-allocation heuristic?",
+  "my_lib": {
+    "entry": "C:/Projects/My-lib/README.md",
+    "actual_command": "python -m my_lib coverage with local src on PYTHONPATH",
+    "collections": [
+      "synthetic-core"
+    ],
+    "paper_count": 2,
+    "mechanism_count": 2,
+    "coverage_date": "2026-07-26",
+    "scientific_use": "excluded; synthetic fixtures only, no real-paper search claimed"
+  },
+  "inst_sci": {
+    "index": "C:\\Projects\\Inst-sci\\papers\\MyLib\\llm-index\\catalog.v2.jsonl",
+    "sha256": "2e682c6d1131d503ad48920794dd8005ccf8f535dc9ff75679b0c8502533efc0",
+    "rows": 190,
+    "query": "gradnorm|gradient surgery|gradient.*conflict|hypermar|gradient normalization|normaliz.*gradient",
+    "matching_ids": [
+      "MARL-0464",
+      "MARL-0622",
+      "MARL-0629"
+    ],
+    "scope": "Catalog metadata recall only for three hits; this is not a novelty or exhaustive coverage statement.",
+    "verified_source": {
+      "id": "MARL-0622",
+      "title": "HyperMARL: Adaptive Hypernetworks for Multi-Agent RL",
+      "path": "C:\\Projects\\Inst-sci\\papers\\MyLib\\json\\MARL-0622.json",
+      "sha256": "b9c206f980627c88d9a9ed6324f0799001814a530c27f4976ae871483d5edd2a",
+      "pages_and_elements": {
+        "4": [
+          1426,
+          1427
+        ],
+        "5": [
+          1430,
+          1432
+        ],
+        "6": [
+          1458,
+          1476
+        ],
+        "7": [
+          1690,
+          1774
+        ]
+      },
+      "reading": "HyperMARL distinguishes observation/agent-conditioned gradient factorization and measures inter-agent interference/variance. Its decomposition and empirical setting differ from the present manager/claim channel split. No architecture, variance reduction, conflict diagnosis or efficacy is imported."
+    }
+  },
+  "reused_records": [
+    "RCLE_TBCFV_A02_RESULT_INTAKE_20260906.md section3 literature grounding and frozen-state limits",
+    "RCLE_SERVICE_COMPARISON_DESIGN_INTAKE_20260910.md section6 legal overridable action prior"
+  ],
+  "effect_on_proposal": "Frame normalization as a finite learning-recipe candidate, preserve cancellation and shared tensors explicitly, and ask for native performance evidence rather than an assumed conflict repair.",
+  "retrieval_limit": "One local terminal text encoding error was resolved by ASCII-escaped JSON output; no scientific workload ran."
+}
