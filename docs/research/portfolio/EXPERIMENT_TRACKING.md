@@ -1,5 +1,15 @@
 # HMASD experiment tracking
 
+## FSD source-delivery repair accepted — 2026-09-11
+
+The complete direction-local repair series is accepted and integrated through `20258e5ef`.
+Finite binary stdin and the configured network context now cover fetch, sparse checkout and exact
+readback for the remote partial clone. The accepted check matched all nine required committed
+paths, passed both shell checks and completed in 5.672 seconds; the owned temporary checkout is
+absent from disk and Git registration. No admission, model, RNG, training, evaluation or scientific
+retry occurred. B02 remains ended with zero exposure and any future pair requires a separate
+Portfolio allocation. VNFC is the one remaining advancing technical repair chain.
+
 ## ACVC input-transport repair accepted — 2026-09-11
 
 The direction-local repair is accepted and integrated at `88f9e87d5`. The attributable Windows
