@@ -1,0 +1,41 @@
+{
+  "status": "preserved raw evidence; cleanup pending Root integration/retention reconciliation",
+  "source_sha": "c70f01ea30d6c4d063dcc46d8499b26bfe037da8",
+  "source_publication": "already committed and pushed on codex/fsd before launch; source remains reachable from the shared direction branch",
+  "evidence_publication": "the accompanying result commit includes all22 collected raw primary/admission/time/supervisor files; see PAIRED_ANALYSIS.json sha256",
+  "cleanup_owner": "/root/dm_fsd_i1280_implementation",
+  "integration_retention_owner": "/root",
+  "paths": [
+    {
+      "path": "/home/wu/hmasd-worktrees/fsd-uav-renewal-batch-b01-770703-20260911",
+      "kind": "detached execution worktree",
+      "bytes": 43644768,
+      "terminal": "both accepted handles finished exit0",
+      "action": "remove and unregister after reconciliation"
+    },
+    {
+      "path": "/home/wu/hmasd-inputs/fsd-uav-renewal-batch-b01-770703-20260911",
+      "kind": "four admission/time files",
+      "bytes": 1209,
+      "action": "remove after preservation"
+    },
+    {
+      "path": "/home/wu/.agent-tasks/fsd-uav-renewal-batch-b01-770703-D0-20260911",
+      "kind": "six supervisor files",
+      "bytes": 2311,
+      "action": "remove after preservation"
+    },
+    {
+      "path": "/home/wu/.agent-tasks/fsd-uav-renewal-batch-b01-770703-I-20260911",
+      "kind": "six supervisor files",
+      "bytes": 2300,
+      "action": "remove after preservation"
+    }
+  ],
+  "retained": [
+    "C:/Projects/HMASD-worktrees/codex-fsd shared authoring checkout",
+    "all unrelated or active remote paths"
+  ],
+  "removal_performed": false,
+  "absence_verified": false
+}

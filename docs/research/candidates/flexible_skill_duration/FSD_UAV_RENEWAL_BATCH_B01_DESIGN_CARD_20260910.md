@@ -3,7 +3,11 @@ Binding MARL structure: (b) temporal abstraction or termination; asynchronous in
 
 # FSD renewal batch B01 — source-grounded prospective design
 
-**Allocated B/EXPLORE: one fresh I1280/D0 pair, training770703/evaluation780703.**
+**Complete B/EXPLORE: one fresh I1280/D0 pair, training770703/evaluation780703.**
+The [result](FSD_UAV_RENEWAL_BATCH_B01_RESULT_EVIDENCE_20260911.md) and
+[intake](FSD_UAV_RENEWAL_BATCH_B01_INTAKE_20260911.md) apply the original rule:
+one local above-MEI package gain, with incomplete support-cost telemetry.
+No successor is allocated by this result; the prospective rule below is unchanged.
 Portfolio option A in the 2026-09-11 five-chain refill now allocates the real pair:
 D0 at most 900 seconds, I1280 at most 1800 seconds, support at most 300 seconds,
 complete at most 3000 seconds. This prospectively supersedes the earlier
