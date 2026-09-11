@@ -144,3 +144,29 @@ and the completed supervisor handle after preserving its retained metadata/log.
 The shared authoring checkout`C:/Projects/HMASD-worktrees/dm-n5-continue-20260904`
 stays in use. Creator test scratch is already absent. Final verified disk and
 worktree-registration absence will be appended at closeout; none is claimed here.
+
+### Completed cleanup and final boundary
+
+Root integrated/pushed the accepted result at`811f353382721a87e8aa6596bac4271165889f81`
+and returned the existing scoped cleanup assignment. All six native files and six
+supervisor/log files were checked against those integrated Git bytes before removal.
+The remote worktree's ignored inventory contained exactly the six preserved native
+files; source was clean, supervisor finished/exit0 and tmux inactive. Resolved
+absolute targets matched the inventory. The exact completed detached worktree is
+now absent both on disk and in Git worktree registration; remote staging and
+supervisor directories are absent, with supervisor`not_found` after removal.
+The local duplicate bundle/native/supervisor archive directory is absent. Shared
+`codex/mgtap` authoring checkout remains present and registered. See
+[CLEANUP.json](conditional_pooling_b01_20260911/CLEANUP.json) for actual receipts;
+there is no unresolved cleanup blocker and no native retry or successor.
+
+Through completed cleanup, accounted support is212.8876126s and native plus
+accounted support is577.6776126s. Final receipt publication/commit/push is
+reported in the native return after it completes. The conservative142s source-fetch
+bound and approximate2.3s Monitor query work remain explicit; unitemized support
+still prevents a complete300/1200s certificate. No observed cap breach is inferred
+from that limitation. Source, primary, all outcomes and prediction reading are
+unchanged. Two shell preparation/data-write commands were rejected before execution
+by automatic approval review (`blocked by policy`); explicit creator-file cleanup
+and purpose-built file patching completed the authorized work. Those rejections
+created no scientific exposure or unresolved blocker.

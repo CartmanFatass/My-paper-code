@@ -1,12 +1,13 @@
 {
-  "recorded_utc": "2026-09-11T17:19:39.106Z",
-  "accounted_support_seconds": 201.3589346,
+  "recorded_utc": "2026-09-11T17:27:28.855Z",
+  "accounted_support_seconds": 212.88761259999998,
   "bound_component_seconds": 142,
   "approximate_monitor_observation_seconds": 2.3,
   "native_complete_seconds": 364.79,
+  "native_plus_accounted_support_seconds": 577.6776126,
   "unknown_components": [
     "Unitemized Monitor/other invoked support work, if any; approximately reported Monitor command timings are not exact.",
-    "Subsequent publication/cleanup commands are appended at their completion."
+    "Final receipt publication and commit/push wall are returned separately after completion."
   ],
   "cap_certification": "Native450/450/900 caps pass. Full support300/complete1200 caps remain uncertified from this accounted subtotal; no breach inferred from unknown precision/terms.",
   "receipts": [
@@ -375,6 +376,54 @@
       "phase": "support_receipt_data_read",
       "status": "fulfilled",
       "wall_seconds": 0.1940648,
+      "exit_code": 0
+    },
+    {
+      "phase": "terminal_intake_receipts_patch_publication",
+      "status": "fulfilled",
+      "wall_seconds": 0.023,
+      "exit_code": 0
+    },
+    {
+      "phase": "intake_audit_and_document_checks",
+      "status": "fulfilled",
+      "wall_seconds": 0.3424112,
+      "exit_code": 1
+    },
+    {
+      "phase": "utf8_brief_and_diff_check",
+      "status": "fulfilled",
+      "wall_seconds": 0.3868097,
+      "exit_code": 0
+    },
+    {
+      "phase": "valid_result_preservation_intake_commit_push",
+      "status": "fulfilled",
+      "wall_seconds": 7.5824332,
+      "exit_code": 0
+    },
+    {
+      "phase": "git_blob_preservation_verified_before_cleanup",
+      "status": "fulfilled",
+      "wall_seconds": 1.0081365,
+      "exit_code": 0
+    },
+    {
+      "phase": "root_integrated_bytes_verified_before_removal",
+      "status": "fulfilled",
+      "wall_seconds": 0.8878731,
+      "exit_code": 0
+    },
+    {
+      "phase": "authorized_remote_duplicate_cleanup",
+      "status": "fulfilled",
+      "wall_seconds": 0.9565585,
+      "exit_code": 0
+    },
+    {
+      "phase": "authorized_local_duplicate_archive_cleanup",
+      "status": "fulfilled",
+      "wall_seconds": 0.3414558,
       "exit_code": 0
     }
   ]
