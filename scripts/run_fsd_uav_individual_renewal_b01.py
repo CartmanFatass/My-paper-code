@@ -62,7 +62,7 @@ def measured(value, label):
 
 
 def check_deadline(summary, stage):
-    if time.perf_counter() - PROCESS_START >= CAPS[summary["arm"]]:
+    if time.perf_counter() - PROCESS_START >= summary["cap_seconds"]:
         raise TimeoutError(f"complete-command cap at {stage}")
 
 
@@ -84,12 +84,14 @@ def publish(out, summary, stage):
     check_deadline(summary, stage + ":published")
 
 
-def make_config(arm, envs, seed):
+def make_config(arm, envs, seed, *, renewal_batch=False):
     # E0 provides the ordinary config. Apply I's cost before either model exists.
     config = e0._make_config("D0", seed, len(envs), HORIZON, HORIZON, N_UAVS,
                              N_USERS, ROLLOUTS, envs[0].state_dim, envs[0].obs_dim)
     config.interruption_cost_c = .25 if arm == "I" else float("inf")
     config.n_Z = config.n_z = 6
+    if renewal_batch:
+        config.coordinator_batch_size = 1280 if arm == "I" else 128
     return config
 
 
@@ -122,7 +124,8 @@ def renewal_metrics(agent):
     return result
 
 
-def base_summary(arm, *, training_seed=TRAIN_SEED, evaluation_seed=EVAL_SEED, object_id=OBJECT_ID, card=CARD):
+def base_summary(arm, *, training_seed=TRAIN_SEED, evaluation_seed=EVAL_SEED, object_id=OBJECT_ID, card=CARD,
+                 caps=CAPS):
     return {
         "object_id": object_id, "card": card, "arm": arm, "launch_sha": e0._git("rev-parse", "HEAD"),
         "training_seed": training_seed, "evaluation_seed": evaluation_seed,
@@ -133,7 +136,7 @@ def base_summary(arm, *, training_seed=TRAIN_SEED, evaluation_seed=EVAL_SEED, ob
                  "channel_model": "free_space"},
         "device": "cpu", "torch_threads": 4, "learner_precision": "float32",
         "reward_return_precision": "float64", "native_score_factor": N_UAVS / HORIZON,
-        "cap_seconds": CAPS[arm], "summed_pair_cap_seconds": sum(CAPS.values()),
+        "cap_seconds": caps[arm], "summed_pair_cap_seconds": sum(caps.values()),
         "status": "incomplete", "failure": None, "learner_config": None,
         "evaluation_config": None, "training_rows": [], "evaluation": None,
         "initial_parameter_norms": {}, "optimizer_calls": dict.fromkeys(NETWORKS, 0),
@@ -143,12 +146,12 @@ def base_summary(arm, *, training_seed=TRAIN_SEED, evaluation_seed=EVAL_SEED, ob
                                  "evaluation_episodes", "evaluation_agent_step_batches"), 0)}
 
 
-def build_learner(summary, out, *, training_seed=TRAIN_SEED):
+def build_learner(summary, out, *, training_seed=TRAIN_SEED, renewal_batch=False):
     check_deadline(summary, "learner setup")
     torch.set_num_threads(4)
     seed_rng(training_seed)
     envs = e0._make_envs(TRAIN_LANES, training_seed, N_UAVS, N_USERS, HORIZON)
-    config = make_config(summary["arm"], envs, training_seed)
+    config = make_config(summary["arm"], envs, training_seed, renewal_batch=renewal_batch)
     summary["learner_config"] = config_snapshot(config)
     agent = HMASDAgent(config, log_dir=str(out / "learner_logs"), device=torch.device("cpu"))
     summary["counts"]["model_constructions"] += 1
@@ -243,19 +246,19 @@ def collect_training(envs, agent, theta0, counters, summary, out):
 class Evaluator(e0.Evaluator):
     """Reuse E0's active-module/normalizer synchronization, with our arm builder."""
 
-    def __init__(self, arm, out, *, evaluation_seed=EVAL_SEED):
+    def __init__(self, arm, out, *, evaluation_seed=EVAL_SEED, renewal_batch=False):
         self.lanes = EVAL_LANES
         self.envs = e0._make_envs(EVAL_LANES, evaluation_seed, N_UAVS, N_USERS, HORIZON)
-        self.config = make_config(arm, self.envs, evaluation_seed)
+        self.config = make_config(arm, self.envs, evaluation_seed, renewal_batch=renewal_batch)
         self.agent = HMASDAgent(self.config, log_dir=str(out / "evaluation_logs"), device=torch.device("cpu"))
         self.agent.train(False)
 
 
-def final_evaluation(learner, summary, out, *, evaluation_seed=EVAL_SEED):
+def final_evaluation(learner, summary, out, *, evaluation_seed=EVAL_SEED, renewal_batch=False):
     with e0._preserve_rng():
         check_deadline(summary, "evaluator construction")
         seed_rng(evaluation_seed)
-        evaluator = Evaluator(summary["arm"], out, evaluation_seed=evaluation_seed)
+        evaluator = Evaluator(summary["arm"], out, evaluation_seed=evaluation_seed, renewal_batch=renewal_batch)
         summary["counts"]["model_constructions"] += 1
         summary["evaluation_config"] = config_snapshot(evaluator.config)
         evaluator.agent.clear_buffers()
@@ -314,7 +317,7 @@ def final_evaluation(learner, summary, out, *, evaluation_seed=EVAL_SEED):
 
 
 def assemble_pair(treatment, control, *, training_seed=TRAIN_SEED, evaluation_seed=EVAL_SEED,
-                  object_id=OBJECT_ID, card=CARD):
+                  object_id=OBJECT_ID, card=CARD, renewal_batch=False):
     for name, arm in (("I", treatment), ("D0", control)):
         require_finite(arm, f"{name} companion measurements")
         if arm["arm"] != name or arm["status"] != "complete":
@@ -358,9 +361,13 @@ def assemble_pair(treatment, control, *, training_seed=TRAIN_SEED, evaluation_se
                         "interruption_cost_c_Z": "Infinity", "k": 10, "skill_cap_k_max": 10, "team_cap_k_Z": 10,
                         "interruption_delta": 1, "age_feature": "off", "n_Z": 6, "n_z": 6, "n_agents": N_UAVS,
                         "n_users": N_USERS, "num_envs": lanes, "rollout_length": HORIZON, "seed": seed}
+            if renewal_batch:
+                expected["coordinator_batch_size"] = 1280 if name == "I" else 128
             if any(config[k] != v for k, v in expected.items()):
                 raise ValueError(f"{name} {key} construction mismatch")
             config.pop("interruption_cost_c")
+            if renewal_batch:
+                config.pop("coordinator_batch_size")
             configs.append(config)
         if configs[0] != configs[1]:
             raise ValueError(f"pair mismatch: {key}")
@@ -372,7 +379,8 @@ def assemble_pair(treatment, control, *, training_seed=TRAIN_SEED, evaluation_se
             "card_reading": "above_mei" if mean > .01 else "opposite_sign" if mean < -.01 else "small_or_resolution_limited"}
 
 
-def main(argv=None, *, training_seed=TRAIN_SEED, evaluation_seed=EVAL_SEED, object_id=OBJECT_ID, card=CARD):
+def main(argv=None, *, training_seed=TRAIN_SEED, evaluation_seed=EVAL_SEED, object_id=OBJECT_ID, card=CARD,
+         renewal_batch=False, caps=CAPS):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--arm", choices=("D0", "I"), required=True)
     parser.add_argument("--output-root", type=Path, required=True)
@@ -383,15 +391,16 @@ def main(argv=None, *, training_seed=TRAIN_SEED, evaluation_seed=EVAL_SEED, obje
     out = args.output_root.resolve()
     out.mkdir(parents=True, exist_ok=True)
     summary = base_summary(args.arm, training_seed=training_seed, evaluation_seed=evaluation_seed,
-                           object_id=object_id, card=card)
+                           object_id=object_id, card=card, caps=caps)
     try:
         check_deadline(summary, "manifest")
         write_json(out / "manifest.json", {k: v for k, v in summary.items()
                    if k not in ("status", "failure", "training_rows", "evaluation", "counts")})
         publish(out, summary, "setup")
-        envs, learner, theta0, counters = build_learner(summary, out, training_seed=training_seed)
+        envs, learner, theta0, counters = build_learner(summary, out, training_seed=training_seed,
+                                                       renewal_batch=renewal_batch)
         collect_training(envs, learner, theta0, counters, summary, out)
-        final_evaluation(learner, summary, out, evaluation_seed=evaluation_seed)
+        final_evaluation(learner, summary, out, evaluation_seed=evaluation_seed, renewal_batch=renewal_batch)
         summary["status"] = "complete"
         if args.arm == "I":
             summary["comparison_input"] = str(args.d0_summary)
@@ -401,7 +410,7 @@ def main(argv=None, *, training_seed=TRAIN_SEED, evaluation_seed=EVAL_SEED, obje
                     raise ValueError("D0 companion unavailable")
                 control = json.loads(args.d0_summary.read_text(encoding="utf-8"))
                 summary["pair"] = assemble_pair(summary, control, training_seed=training_seed,
-                    evaluation_seed=evaluation_seed, object_id=object_id, card=card)
+                    evaluation_seed=evaluation_seed, object_id=object_id, card=card, renewal_batch=renewal_batch)
             except (OSError, KeyError, TypeError, ValueError) as exc:
                 summary["pair"] = {"status": "incomplete", "failure": str(exc)}
         try:

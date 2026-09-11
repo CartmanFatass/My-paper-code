@@ -1,0 +1,42 @@
+{
+  "directions": {
+    "request_id": "2026-09-07-fsd-post-native-control-convergence-01",
+    "conversation_binding_key": "em:flexible_skill_duration:convergence",
+    "conversation_id": "6a9c2865-14a8-83e8-b556-e7f5836d9236",
+    "state": "BLOCKED",
+    "tab_lifecycle": "CLOSED",
+    "updated_at": "2026-09-08T06:34:33Z",
+    "send_click_count": 1,
+    "visible_model": "6 Pro",
+    "underlying_model": "Latest",
+    "thinking_effort": "Pro, 5 of 5.",
+    "return_receipt": {
+      "status": "SENT",
+      "kind": "TERMINAL_BLOCKER",
+      "delivery_status": "accepted",
+      "closure_evidence": null
+    }
+  },
+  "bindings": {
+    "request_id": "2026-09-07-fsd-post-native-control-convergence-01",
+    "conversation_binding_key": "em:flexible_skill_duration:convergence",
+    "conversation_id": "6a9c2865-14a8-83e8-b556-e7f5836d9236",
+    "state": "BLOCKED",
+    "tab_lifecycle": "CLOSED",
+    "updated_at": "2026-09-08T06:34:33Z",
+    "send_click_count": 1,
+    "visible_model": "6 Pro",
+    "underlying_model": "Latest",
+    "thinking_effort": "Pro, 5 of 5.",
+    "return_receipt": {
+      "status": "SENT",
+      "kind": "TERMINAL_BLOCKER",
+      "delivery_status": "accepted",
+      "closure_evidence": null
+    }
+  },
+  "new_request_present_in_registry": false,
+  "observed_at": "2026-09-08T12:05:49.116171+00:00",
+  "source_registry": "C:/Projects/HMASD/temp/sessions/hmasd-chatgpt-pro-transport/registry.json",
+  "interpretation": "Prior P25 BLOCKED transport mirror conflicts with accepted full eaff53a response/comment. Existing Transport reconciles the terminal record before the new P45 Send; no P25 resend or registry mutation by DM."
+}
