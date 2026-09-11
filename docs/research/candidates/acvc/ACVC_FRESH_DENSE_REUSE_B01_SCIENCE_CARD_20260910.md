@@ -525,3 +525,19 @@ Object-tier options: (a) bind the allocated unchanged fit to fresh8951/8952;
 (b) use a retained/screened identity; (c) alter learning or panels. Recommend/select
 (a), the conforming realization. **Owner-delegated decision (unattended,
 2026-09-03 instruction): (a).**
+
+## 15. 8951 technical no-ready boundary
+
+Published sourcee61facdff70091cd9cdd33bc231a149ed9106d35 passed actual changed-risk
+review and the single allowed stub publication check. Full source bundling and
+transfer succeeded once; the one bounded remote preparation exited128 because
+Windows text-mode shell input carried carriage returns in commands and paths.
+No memory admission, scientific submission, model/RNG construction, training or
+evaluation occurred. The exact checkout and registration were later directly
+verified absent during scoped closeout; the staged duplicate was preserved then
+removed. The [8951 intake](ACVC_FRESH_DENSE_REUSE_B01_8951_INTAKE_20260911.md)
+records the rule, receipts and accounting limits. Forecasts stay unscored.
+
+The allocation ends without repeating preparation or launching a substitute.
+This supplies no new performance evidence and changes no prior scientific result,
+mechanism conclusion, lifecycle or priority. Unused native time grants no retry.

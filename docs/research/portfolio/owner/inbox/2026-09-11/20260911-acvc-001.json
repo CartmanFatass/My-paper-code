@@ -71,5 +71,15 @@
     "verdict_text": "Owner-delegated decision (unattended, 2026-09-03 instruction): (a).",
     "source": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_SCIENCE_CARD_20260910.md"
   },
-  "starred": false
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-11T18:12:13+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260911_remaining_capacity_refill/archive/RESPONSE.md",
+      "record": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_8951_INTAKE_20260911.md",
+      "state": "blocked",
+      "summary": "8951绑定、源码、审查与桩检查已完成；一次远端准备因CRLF传输失败，零科学调用。按分配结束，不重复准备；证据保留且所属临时副本已清理。"
+    }
+  ]
 }

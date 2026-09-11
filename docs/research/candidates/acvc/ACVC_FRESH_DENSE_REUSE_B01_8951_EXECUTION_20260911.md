@@ -1,6 +1,6 @@
 # ACVC fresh DENSE reuse B01 /8951 — execution
 
-Date:2026-09-11 (America/Los_Angeles). Prospective allocation; no scientific output yet.
+Date:2026-09-11 (America/Los_Angeles). **Technical no-ready; zero scientific launches.**
 
 ## L0 and acceptance
 
@@ -102,3 +102,35 @@ Owner item`20260911-acvc-001` records the applied new card; live owner reviews r
 empty. Forecasts.75/.65 are still unscored. The standard source bundle will include
 all reachable source history with no prerequisite; the sibling RCLE recipe was
 incremental and is not treated as a verified self-contained ACVC method.
+
+## Published source and single preparation failure
+
+Source **e61facdff70091cd9cdd33bc231a149ed9106d35** was committed and pushed.
+The commit client timed out after15s; direct read then showed this accepted HEAD,
+a clean checkout and no matching process/lock. The accepted commit was pushed,
+without repeating it. No exact scientific submission was made.
+
+The standard no-prerequisite bundle contained113339685 bytes and the sole advertised
+HEAD e61facdff; creation took5.266s. One SCP transfer succeeded in8.844s. The single
+remote preparation, enclosed by43s TERM/+2s kill and50s client limits, exited128
+in.265s. Its first`set -eu` rejected an invalid option; all seven Git calls rejected
+CR-suffixed repository/worktree paths. The Windows`text=True` stdin producer and
+retained CRLF script explain these errors; stdin bytes were not independently
+captured. Full command/output and reconstruction limits are in the
+[preparation evidence](ACVC_FRESH_DENSE_REUSE_B01_8951_PREPARATION_20260911.json).
+This is an input-transport failure, not missing Git objects or a learner failure.
+
+No preparation correction/repetition, admission, supervisor submission or Monitor
+message followed. A separate bounded **closeout-only** command used binary UTF-8
+stdin, verified the intended checkout absent on disk and from worktree registration,
+and the never-submitted supervisor root absent. It matched the staged duplicate's
+SHA256 to the locally retained source bundle, removed only that duplicate, and
+verified absence. This .515s command performed no fetch, checkout or scientific
+work. The [cleanup receipt](ACVC_FRESH_DENSE_REUSE_B01_8951_CLEANUP_20260911.json)
+preserves the exact operation. Unique receipts/source remain; local duplicate
+cleanup and Root integration facts are recorded with the terminal intake.
+
+The [E0 technical result](ACVC_FRESH_DENSE_REUSE_B01_8951_RESULT_20260911.md) and
+[intake](ACVC_FRESH_DENSE_REUSE_B01_8951_INTAKE_20260911.md) end this allocation
+at the mandated precise no-ready boundary. No scientific polarity, retry, successor
+or direction/Portfolio disposition follows.
