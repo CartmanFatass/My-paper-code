@@ -1,6 +1,6 @@
 # FOLR public-lifecycle HALF-B02 technical evidence
 
-Current state: RETAIN complete and technically accepted; HALF_EVENT remains preselected and unsubmitted. The paired scientific endpoint is pending.
+Current state: RETAIN complete and technically accepted; HALF_EVENT accepted and Monitor adoption confirmed by Root. The paired scientific endpoint is pending.
 
 ## 1. Accepted reuse and focused new binding
 
@@ -186,3 +186,32 @@ The remote B02 worktree remains needed by the preselected second arm; retain its
 evidence and RETAIN supervisor until complete-pair archive verification and scoped
 closeout. No remote or local evidence has been removed. Primary owner reviews again
 returned no unapplied items at this boundary.
+
+## 7. HALF_EVENT accepted and observation adopted
+
+RETAIN acceptance and its collection receipt were committed and immediately pushed
+at **fb98e0fe8afab80d51553ac274b99479acfdaad2** before the second submission. The
+HALF_EVENT command was checked against the original published ea73b1c3d payload;
+source surfaces still matched **c6be208cd514b5d12fb13c7637e2d6376de11eb6**, and its
+supervisor/output/memory paths were absent. No source or scientific input changed.
+
+The sole remaining preselected arm was submitted at **2026-09-11T00:08:07.523443Z**;
+explicit tmux-start returned **00:08:08.331457Z**, command exit0 and no stderr. Handle
+`folr-public-lifecycle-half-b02-half-event-20260910` runs in the original B02 remote
+worktree with output `public_lifecycle_half_b02_seed7808_half_event`. The original
+receipt is retained under the B02 control root and in the result summary. Fresh
+destination admission and the exact runner share the original outer 1800s chain.
+This is accepted invocation **2 of 2**; no scientific allocation remains unsubmitted.
+
+Direct MONITOR_ADD succeeded and Root confirmed actual adoption of this same handle,
+source, cwd, output and supervisor root. No separate adoption observation time was
+supplied; the tmux clock remains supervisor acceptance only. Monitor owns observation
+and actual query-cost accounting; this DM stops routine remote polling and retains
+terminal collection, technical acceptance, pair intake and verified scoped closeout.
+Root routes the terminal fact to `/root/dm_folr_restart_recovery`.
+
+Known invoked support through second submission and direct dispatch is **29.0471481s**:
+24.5711481s DM plus4.476s measured RETAIN Monitor work. This excludes later publication
+and the explicitly unmeasured bookkeeping/query/messaging durations; it is not a
+complete bill or a 300s/3900s compliance claim. The caps and no-transfer rule remain
+unchanged. No retry, third fitting pair, additional arm or successor is allocated.

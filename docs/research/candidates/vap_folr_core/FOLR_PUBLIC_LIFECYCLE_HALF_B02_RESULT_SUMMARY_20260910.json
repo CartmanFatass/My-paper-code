@@ -1,6 +1,6 @@
 {
   "object": "FOLR-PUBLIC-LIFECYCLE-HALF-B02",
-  "state": "RETAIN_complete_technically_accepted_HALF_EVENT_preselected_unsubmitted",
+  "state": "RETAIN_complete_accepted_HALF_EVENT_accepted_Monitor_adoption_confirmed_pending_terminal_collection",
   "source_sha": "c6be208cd514b5d12fb13c7637e2d6376de11eb6",
   "authority_commit": "674f246a202eef1467b084fdd25e2eeb531c0b1e",
   "starting_checkout_commit": "85a443f413e07773a5d89904dd21476c5b4b8550",
@@ -185,7 +185,8 @@
     }
   },
   "accepted_handles": [
-    "folr-public-lifecycle-half-b02-retain-20260910"
+    "folr-public-lifecycle-half-b02-retain-20260910",
+    "folr-public-lifecycle-half-b02-half-event-20260910"
   ],
   "budget": {
     "accepted_invocations": 2,
@@ -195,7 +196,7 @@
     "complete_seconds": 3900,
     "cumulative_directory_tests_already_used_seconds": 32.4911638,
     "directory_tests_cap_seconds": 300,
-    "accepted_invocations_so_far": 1
+    "accepted_invocations_so_far": 2
   },
   "launch_plans": [
     {
@@ -218,7 +219,7 @@
       "out": "temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_seed7808_half_event",
       "memory_receipt": "temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_seed7808_half_event_memory.json",
       "command": "/usr/bin/time -v -o /home/wu/.agent-tasks/folr-public-lifecycle-half-b02-half-event-20260910/whole.time /usr/bin/timeout --signal=TERM --kill-after=5s 1800s bash -lc 'cd /home/wu/hmasd-worktrees/folr-public-lifecycle-half-b02-c6be208cd && /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_seed7808_half_event_memory.json && /home/wu/.venvs/hmasd/bin/python scripts/run_folr_public_lifecycle_b01.py --arm HALF_EVENT --seed 7808 --evaluation-seed 107808 --launch-sha c6be208cd514b5d12fb13c7637e2d6376de11eb6 --out temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_seed7808_half_event'",
-      "state": "prepared_not_submitted"
+      "state": "accepted_Monitor_adoption_confirmed"
     }
   ],
   "checks": {
@@ -260,7 +261,7 @@
     "scope": "all additional invoked runtime work including Monitor, once; excludes idle waiting and double-counted native chains",
     "initial_preparation_reads_seconds": 1.5200933,
     "binding_and_plan_seconds": 0.05237610000767745,
-    "dm_seconds": 18.6134657,
+    "dm_seconds": 24.589148100000003,
     "monitor_seconds": null,
     "total_seconds": null,
     "cap_seconds": 300,
@@ -349,15 +350,31 @@
       {
         "activity": "RETAIN E0 and technical intake update",
         "seconds": 0.025
+      },
+      {
+        "activity": "RETAIN acceptance record check/commit/push",
+        "seconds": 4.6273702
+      },
+      {
+        "activity": "original HALF_EVENT command readback/source check and detached submission",
+        "seconds": 1.0943122
+      },
+      {
+        "activity": "direct HALF_EVENT Monitor dispatch API wall",
+        "seconds": 0.236
+      },
+      {
+        "activity": "HALF_EVENT E0 and intake handover update",
+        "seconds": 0.018
       }
     ],
     "accounting_method": "Enclosing invoked command/tool wall including startup and nested remote work once; narrower helper durations not separately summed. Publication commands included conservatively.",
-    "known_subtotal_seconds": 23.089465699999998,
-    "subtotal_boundary": "through RETAIN acceptance checks and intake update; this publication command and later work pending",
+    "known_subtotal_seconds": 29.065148100000002,
+    "subtotal_boundary": "through HALF_EVENT submission, Monitor dispatch and handover update; this publication command and later work pending",
     "unmeasured_pending_work": [
       "one prior handover bookkeeping command has no returned elapsed receipt; not imputed zero",
-      "Monitor queries whose sleep+query calls yielded without captured stopwatch output and messaging overhead",
-      "current acceptance analysis/publication and later HALF_EVENT support will be added at natural boundaries"
+      "RETAIN Monitor queries whose sleep+query calls yielded without stopwatch output and messaging overhead; subsequent Monitor actual bill pending",
+      "this final handover record-check/commit/push will be added at the next natural boundary"
     ],
     "monitor_measured_seconds": 4.475999999999999,
     "monitor_receipts": {
@@ -387,11 +404,23 @@
     "thread_id": "01a087e5-2044-7301-abb6-7a1709a98197",
     "root_thread": "01a07249-b095-7821-8ce2-e9c32ba85267",
     "collection_owner": "/root/dm_folr_restart_recovery",
-    "new_registration": "delivered",
-    "adoption": "confirmed_by_Root",
-    "adoption_observation_timestamp": "not separately supplied;23:47:46.884434Z is supervisor acceptance",
+    "new_registration": "HALF_EVENT_delivered",
+    "adoption": "HALF_EVENT_confirmed_by_Root",
+    "adoption_observation_timestamp": "not separately supplied;00:08:08.331457Z is HALF_EVENT supervisor acceptance",
     "actual_enclosing_query_seconds": "RETAIN measured4.476s plus explicitly unmeasured observations/messaging; no complete Monitor total",
-    "RETAIN_terminal": "routed_by_Root_and_collected"
+    "RETAIN_terminal": "routed_by_Root_and_collected",
+    "RETAIN": {
+      "state": "complete_collected_technically_accepted",
+      "adoption": "previously_confirmed_by_Root",
+      "terminal_receipt": "evidence/2026-09-10-folr-public-lifecycle-half-b02-retain-collection.json"
+    },
+    "HALF_EVENT": {
+      "handle": "folr-public-lifecycle-half-b02-half-event-20260910",
+      "registration": "delivered",
+      "adoption": "confirmed_by_Root",
+      "adoption_observation_timestamp": "not separately supplied;00:08:08.331457Z is supervisor acceptance",
+      "actual_query_cost_accounting": "Monitor retains actual query runtime separately from idle waits"
+    }
   },
   "full_engineering_elapsed": "not measured as command runtime; not imputed zero",
   "owner_reviews": [],
@@ -645,5 +674,19 @@
     "rule": "Execute RETAIN then HALF_EVENT, both preselected regardless of RETAIN score, one accepted invocation each. Failure retains evidence and stops the dependent sequence.",
     "new_scientific_selection": false,
     "support_complete_compliance_claimed": false
+  },
+  "half_event_launch": {
+    "submission_started_utc": "2026-09-11T00:08:07.523443+00:00",
+    "returned_utc": "2026-09-11T00:08:08.331457+00:00",
+    "command_record_commit": "ea73b1c3dabafe6482db03df8a9e51c1ad672260",
+    "acceptance_intake_commit": "fb98e0fe8afab80d51553ac274b99479acfdaad2",
+    "source_sha": "c6be208cd514b5d12fb13c7637e2d6376de11eb6",
+    "command": "/usr/bin/time -v -o /home/wu/.agent-tasks/folr-public-lifecycle-half-b02-half-event-20260910/whole.time /usr/bin/timeout --signal=TERM --kill-after=5s 1800s bash -lc 'cd /home/wu/hmasd-worktrees/folr-public-lifecycle-half-b02-c6be208cd && /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_seed7808_half_event_memory.json && /home/wu/.venvs/hmasd/bin/python scripts/run_folr_public_lifecycle_b01.py --arm HALF_EVENT --seed 7808 --evaluation-seed 107808 --launch-sha c6be208cd514b5d12fb13c7637e2d6376de11eb6 --out temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_seed7808_half_event'",
+    "remote_submission": "git -C /home/wu/hmasd-worktrees/folr-public-lifecycle-half-b02-c6be208cd diff --exit-code c6be208cd514b5d12fb13c7637e2d6376de11eb6 -- experiments/candidates/vap_folr_core/public_lifecycle_b01 scripts/run_folr_public_lifecycle_b01.py scripts/hmasd_resource_preflight.py && test ! -e /home/wu/.agent-tasks/folr-public-lifecycle-half-b02-half-event-20260910 && test ! -e /home/wu/hmasd-worktrees/folr-public-lifecycle-half-b02-c6be208cd/temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_seed7808_half_event && test ! -e /home/wu/hmasd-worktrees/folr-public-lifecycle-half-b02-c6be208cd/temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_seed7808_half_event_memory.json && /usr/local/bin/agent-task run folr-public-lifecycle-half-b02-half-event-20260910 '/usr/bin/time -v -o /home/wu/.agent-tasks/folr-public-lifecycle-half-b02-half-event-20260910/whole.time /usr/bin/timeout --signal=TERM --kill-after=5s 1800s bash -lc '\"'\"'cd /home/wu/hmasd-worktrees/folr-public-lifecycle-half-b02-c6be208cd && /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_seed7808_half_event_memory.json && /home/wu/.venvs/hmasd/bin/python scripts/run_folr_public_lifecycle_b01.py --arm HALF_EVENT --seed 7808 --evaluation-seed 107808 --launch-sha c6be208cd514b5d12fb13c7637e2d6376de11eb6 --out temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_seed7808_half_event'\"'\"''",
+    "handle": "folr-public-lifecycle-half-b02-half-event-20260910",
+    "returncode": 0,
+    "stdout": "Task 'folr-public-lifecycle-half-b02-half-event-20260910' started in tmux session 'agent_folr-public-lifecycle-half-b02-half-event-20260910'. Output: /home/wu/.agent-tasks/folr-public-lifecycle-half-b02-half-event-20260910/task.log\n",
+    "stderr": "",
+    "local_inner_seconds": 0.8920250000082888
   }
 }
