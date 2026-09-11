@@ -1,0 +1,25 @@
+{
+  "purpose": "bounded read-only reconciliation after stopped preparation; no staging or scientific retry",
+  "started_utc": "2026-09-11T16:38:03.782187+00:00",
+  "timeout_seconds": 15,
+  "command": [
+    "ssh",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "ConnectTimeout=8",
+    "-o",
+    "ServerAliveInterval=3",
+    "-o",
+    "ServerAliveCountMax=1",
+    "hmasd-wsl-node",
+    "/home/wu/.venvs/hmasd/bin/python",
+    "-"
+  ],
+  "returncode": 0,
+  "stdout": "{\"worktree_exists\": false, \"input_exists\": false, \"input_files\": [], \"handles\": {\"fsd-uav-renewal-batch-b02-770803-D0-20260911\": false, \"fsd-uav-renewal-batch-b02-770803-I-20260911\": false}, \"fsd_fetch_processes\": []}\n",
+  "stderr": "",
+  "status": "returned",
+  "actual_wall_seconds": 0.6474401000014041,
+  "ended_utc": "2026-09-11T16:38:04.429696+00:00"
+}

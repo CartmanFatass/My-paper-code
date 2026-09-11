@@ -3,8 +3,11 @@ Binding MARL structure: (b) temporal abstraction or termination; asynchronous in
 
 # FSD renewal batch B02 — fresh unchanged pair
 
-**B/EXPLORE; prospective training770803/evaluation780803; two fits allocated,
-neither launched at this freeze.** This is a separately identified instance of
+**B/EXPLORE; prospective training770803/evaluation780803; zero empirical exposure.**
+The allocated pair ended unlaunched with a preparation/support-cost limitation;
+see [the execution-limitation intake](FSD_UAV_RENEWAL_BATCH_B02_EXECUTION_LIMITATION_INTAKE_20260911.md).
+The accepted binding and prospective reading below remain unchanged. No retry
+or automatic successor follows. This is a separately identified instance of
 the accepted package, with no pooling into the B01 primary.
 
 ## 1. Authority and question

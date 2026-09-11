@@ -76,5 +76,15 @@
     "verdict_text": "Owner-delegated decision (unattended, 2026-09-03 instruction): (a).",
     "source": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_SCIENCE_CARD_20260911.md"
   },
-  "starred": false
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-11T16:42:47+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260911_post_a_execution_refill/archive/RESPONSE.md",
+      "record": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_EXECUTION_LIMITATION_INTAKE_20260911.md",
+      "state": "blocked",
+      "summary": "Source/card freeze completed at2b8bd8f70; silent preparation-command wall exhausts support before any admission or scientific submission. Return zero-exposure execution limitation; exact four prospective paths/registration absent. No retry, result polarity or lifecycle change."
+    }
+  ]
 }
