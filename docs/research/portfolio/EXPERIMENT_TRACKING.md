@@ -857,3 +857,23 @@ VNFC's one Send remains `SEND_UNCERTAIN`. Read-only reconciliation found no curr
 assistant response in the bound conversation, so no decision or archive exists and no resend is
 permitted while acceptance is unresolved. The same fixed request remains queued; its blocker record is
 integrated through `73d4ef889`. This parked direction does not hold any sibling chain.
+
+## 2026-09-11 rolling refill after completed allocations
+
+The complete `portfolio:cross_direction` response for request
+`2026-09-11-five-chain-refill-portfolio-01` is preserved at delivery commit `ed0c4e1c3` and was
+transported with exactly one accepted Send, natural completion after 29m45s, and no generation
+control or retry. The designated Portfolio DM verified all 35 fixed references and found the
+response scientifically and specification conforming. PRO_FINAL option A and its exact execution
+mapping are integrated through `5bbae6d90`.
+
+Four direction chains now advance independently. FSD owns one fresh I1280/D0 B pair inside the
+900/1,800-second arm caps, 300-second support cap and 3,000-second complete cap. RCLE owns one
+separately bound final1000 nearest-prior fit/reference inside 600/10-second execution caps,
+140-second support cap and 750-second complete cap. MGTAP owns the exact COND implementation and
+one encoder-only fixture capped at 60 seconds, with full policy, environment, training and future B
+work unallocated. UCOPE owns one original-node post8801 direction question and intake with zero
+numerical or implementation work. All four were dispatched to their existing direction checkouts;
+each DM retains technical/scientific acceptance and its own Monitor handoff where a real B is
+accepted. The fifth direction slot remains explicitly unallocated, and no paused or blocked family
+was revived to fill it.
