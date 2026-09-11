@@ -1,0 +1,234 @@
+{
+  "object": "FOLR-LEARNED-RETENTION-B02",
+  "state": "prospective_preparation",
+  "authority_sha": "41c46303f66005f74a18dccf45974d99771b155b",
+  "authority_path": "docs/research/portfolio/pro_packets/20260911_post_program_vacancies/archive/RESPONSE.md",
+  "authority_response_sha256": "1dc62ab2a10aef042c4a3ca3ba53b26daecbea0529e653359167cc03ecb76752",
+  "root_conformance": "PASS forwarded in native assignment 2026-09-11",
+  "source_sha": null,
+  "accepted_source_reused": "8d518ff300c13d809f8d88d0a259a3d8f6ff59d6",
+  "accepted_result_intake_sha": "8da607b4b7fb415b4212e0e20d74f9dc9c20a32e",
+  "source_surface": [
+    {
+      "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/attention.py",
+      "git_blob": "1509a32ad88912263c60d63bd7eba2e1da6d932c",
+      "sha256": "775e598921ee7b09721b205624c7e7ac30e1ace177bdcb720b9120c5f4443fa3",
+      "same_as_accepted_and_working": true
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/collection.py",
+      "git_blob": "77c2fda3f3f6132ec0e9605413f569f9c029898d",
+      "sha256": "0b95da626bab87c1cab7d38886b53291fd1a5167b66bfabf9e0dc33d5e81ed03",
+      "same_as_accepted_and_working": true
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/environment.py",
+      "git_blob": "50b1b72d4888aa3014189c8a3a05a82f767d73d0",
+      "sha256": "29dc8e1a18426a42f3cf01f0eba03f6bfa44eeeefddeec684d6458c7139b774c",
+      "same_as_accepted_and_working": true
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/flex_qmix.py",
+      "git_blob": "006bb0573f4c4bcfbdd709ed191d30b4d7e972ed",
+      "sha256": "ae141219443ad169c5b7f58608e6785eadbd60a8de63c2d9366716ddd19fed9a",
+      "same_as_accepted_and_working": true
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/learner.py",
+      "git_blob": "250fe41e2631335930998116c519dcc530cf0695",
+      "sha256": "01770613528bc8e1f3b86c4cafa934dda98c9639490733a123b101c48723e54a",
+      "same_as_accepted_and_working": true
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/model.py",
+      "git_blob": "afc1f521464019800baf3d01a0b74cf4dff43993",
+      "sha256": "3936fd69b99d1b65c7644821848e419a9e3118120efbcc57667fba5ef5db3dc1",
+      "same_as_accepted_and_working": true
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/native_env.py",
+      "git_blob": "f1a5e40a3008aed1ef2d8c49298a87c2acf9e4da",
+      "sha256": "dc342eefc74af9be788b006dfc70ef471088380543a3d005af19b0309d57fc86",
+      "same_as_accepted_and_working": true
+    },
+    {
+      "path": "scripts/hmasd_resource_preflight.py",
+      "git_blob": "4127cd22d2e0c4cc1ad6df85aafeb7131c3d07b2",
+      "sha256": "cb0525e9247f1c7262c198bf051e542282f5928982137b3023d36d5d69eda4dc",
+      "same_as_accepted_and_working": true
+    },
+    {
+      "path": "scripts/run_folr_public_lifecycle_b01.py",
+      "git_blob": "51c2d81317df75d25a80a0d913a2c09746832aa5",
+      "sha256": "30d021557e10c25638cdc313274cae4e13cdacd75832c58ebafa87b4dad8026c",
+      "same_as_accepted_and_working": true
+    },
+    {
+      "path": "tests/experiments/candidates/vap_folr_core/public_lifecycle_b01/test_boundaries.py",
+      "git_blob": "c12963e53b321f15045fbfcb819170f889df92aa",
+      "sha256": "faf58e6103cbf234a711e6870481b9145b1705a0ebc3a6578efa2ad85bff4d29",
+      "same_as_accepted_and_working": true
+    }
+  ],
+  "training_seed": 7810,
+  "evaluation_seed": 107810,
+  "identity_selection": "advance prior unscreened 7809/107809 once; no sampling or screening",
+  "arms": [
+    "RETAIN",
+    "LEARNED_EVENT"
+  ],
+  "primary": null,
+  "commands": [],
+  "caps_seconds": {
+    "each_whole_arm": 1800,
+    "native_sum": 3600,
+    "invoked_support": 300,
+    "complete": 3900
+  },
+  "prospective_exposure": {
+    "real_training_fits": 2,
+    "matched_initialization_pairs": 1,
+    "training_episodes": 10000,
+    "training_team_ticks": 200000,
+    "optimizer_steps": 9938,
+    "evaluation_episodes": 256,
+    "evaluation_team_ticks": 5120,
+    "total_team_ticks": 205120,
+    "replay_gru_rows": 66783360,
+    "acting_rows": 1076880,
+    "learned_gate_forward_rows": 33930120,
+    "new_validation_model_fixture_test_invocations": 0
+  },
+  "cost_projection": {
+    "basis": "same complete runner cost law and B01 accepted whole-arm measured clocks; no new profiling",
+    "RETAIN": {
+      "anchor_whole_seconds": 835.33,
+      "cap_seconds": 1800
+    },
+    "LEARNED_EVENT": {
+      "anchor_whole_seconds": 867.79,
+      "cap_seconds": 1800
+    },
+    "anchor_sum_seconds": 1703.12,
+    "current_wall_rss_and_complete_support": "unknown; anchors are not guaranteed forecasts or isolated gate overhead"
+  },
+  "acceptance_reuse": {
+    "independent_review": {
+      "agent": "learned_retention_review",
+      "model": "Astra/high",
+      "read_only": true,
+      "material_findings": 0,
+      "review_command_seconds": 2.2064189,
+      "consumer_question": "complete finite arrays must be checked before learned_primary",
+      "consumer_plan_accepted": true,
+      "runtime_acceptance_asserted": false
+    },
+    "accepted_focused_cases": 10,
+    "accepted_check_source_sha": "8d518ff300c13d809f8d88d0a259a3d8f6ff59d6",
+    "rerun_count": 0,
+    "new_changed_risk": "fresh identity, exact source and command/publication binding only"
+  },
+  "prediction": {
+    "dm_branch": "WITHIN_MEI",
+    "confidence": "low",
+    "owner": "not taken (unattended)",
+    "score": "pending"
+  },
+  "monitor": {
+    "thread_id": "01a087e5-2044-7301-abb6-7a1709a98197",
+    "configuration_source": "live primary .codex/hmasd-monitor.toml",
+    "dispatch": "not yet",
+    "adoption": "not yet"
+  },
+  "support": {
+    "measured_invoked_commands": [
+      {
+        "label": "current direction checkout and AGENTS",
+        "seconds": 0.4935406
+      },
+      {
+        "label": "current primary authority and live execution routing",
+        "seconds": 0.4856444
+      },
+      {
+        "label": "current scientific and owner skills and docs guidance",
+        "seconds": 0.2513101
+      },
+      {
+        "label": "fresh Portfolio lookup and live node config",
+        "seconds": 0.333324
+      },
+      {
+        "label": "relay routing scientific reading and method delta",
+        "seconds": 0.2048692
+      },
+      {
+        "label": "accepted B01 card intake and direction science reuse",
+        "seconds": 0.2134188
+      },
+      {
+        "label": "read current Portfolio FOLR allocation",
+        "seconds": 0.3155278
+      },
+      {
+        "label": "reuse B01 exact technical facts and owner reviews",
+        "seconds": 0.4790001
+      },
+      {
+        "label": "current monitor and relay procedure pointers",
+        "seconds": 0.2002346
+      },
+      {
+        "label": "exact Portfolio repeat law and Monitor message fields",
+        "seconds": 0.2716435
+      },
+      {
+        "label": "unchanged accepted source surface and command extraction",
+        "seconds": 0.3404827
+      },
+      {
+        "label": "read exact FOLR decision section after UTF8 display correction",
+        "seconds": 0.3098831
+      },
+      {
+        "label": "write B02 unchanged-law card and prospective intake",
+        "seconds": 0.014
+      },
+      {
+        "label": "compute B02 exposure verify source bytes import exact authority and prepare owner/audit records",
+        "seconds": 2.2170314
+      },
+      {
+        "label": "finish prospective JSON owner/audit after documentation variable correction",
+        "seconds": 2.2672601
+      },
+      {
+        "label": "new-card CLI and owned write inventory",
+        "seconds": 0.3284564
+      },
+      {
+        "label": "owner ID namespace and current relay boundary",
+        "seconds": 0.2029425
+      },
+      {
+        "label": "create P2 B02 card item through owner console",
+        "seconds": 0.2423863
+      }
+    ],
+    "known_seconds_through_snapshot": 9.170955600000001,
+    "native_clocks_not_in_support": true,
+    "unmeasured_terms": [
+      "unitemized authoring/tool effort",
+      "Monitor work until receipts arrive",
+      "main integration until supplied",
+      "later publication and cleanup"
+    ],
+    "full_budget_conformance": "pending"
+  },
+  "cleanup": {
+    "shared_checkout": "retain for live direction authoring/integration",
+    "new_roots": "not yet created",
+    "old_B01_local_duplicates": "preserved, policy-blocked; no renewed deletion attempted or launch dependency"
+  },
+  "owner_item": "docs/research/portfolio/owner/inbox/2026-09-11/20260911-folr-003.json"
+}
