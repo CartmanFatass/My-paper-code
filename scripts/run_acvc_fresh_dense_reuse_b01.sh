@@ -2,8 +2,8 @@
 # One fresh DENSE fit and three final panels; called inside the whole-task timer.
 set -eu
 source_sha="$1"
-output="temp/directions/acvc/exp/fresh_dense_reuse_b01_8941_20260910"
+output="temp/directions/acvc/exp/fresh_dense_reuse_b01_8951_20260911"
 "${HMASD_PYTHON}" scripts/hmasd_resource_preflight.py admit-memory \
-    --out temp/directions/acvc/fresh_dense_reuse_b01_8941_admission.json &&
+    --out temp/directions/acvc/fresh_dense_reuse_b01_8951_admission.json &&
 exec "${HMASD_PYTHON}" scripts/run_acvc_fresh_dense_reuse_b01.py \
-    --seed 8941 --output "$output" --launch-sha "$source_sha" --execution-seconds 260
+    --seed 8951 --output "$output" --launch-sha "$source_sha" --execution-seconds 260

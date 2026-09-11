@@ -468,3 +468,76 @@ verified the exact remote checkout absent/unregistered and stopped the directly
 identified abandoned reconciliation tree. The remaining recorded helper tree was
 also absent at the final read; its initially uncertain origin stays explicit.
 No named cleanup dependency, scientific output or new execution allowance remains.
+
+## 14. New allocation: unscreened fit8951 with explicit preparation support
+
+The [2026-09-11 Portfolio mapping, ACVC](../../portfolio/pro_packets/20260911_remaining_capacity_refill/EXECUTION_MAPPING.md#acvc--one-new-unchanged-fresh-fit-explicit-preparation-investment),
+complete response0dbbcbf807509ccc34a3a1de353114be88896897 and Root assignment
+allocate one new unchanged fit. The failed8941 allocation stays ended and unscored.
+Select training master **8951** and evaluation namespace **8952** before any new
+scientific output; neither appeared as a binding in the scoped ACVC cards/intakes/
+facts searched at selection. This is an unscreened choice, not a global registry claim.
+
+Use §§2–5 unchanged with m=8951/q=8952: one DENSE fit,512 training episodes,
+256 sequential two-episode rollouts,1024 Adam/backward calls, all69079 actor/critic
+parameters eligible for nonzero-lr loss-dependent updates, and only the final
+checkpoint. Evaluate C→F→dwell64 episodes each even for an intact weak fit.
+Intrinsic work is512×256×5 collection actor rows,256×4 updates replaying2×256×5
+agent rows, and3×64×256×5 evaluation rows:704 scored episodes/180224 team steps.
+There are nine top-level model constructions,3 post-fit loads and4 unscored
+constructor resets. No numerical fixture, smoke, pilot, profiling or added panel.
+The [prospective facts](ACVC_FRESH_DENSE_REUSE_B01_8951_PROSPECTIVE_FACTS_20260911.json)
+calculate the full seed/count/cost law without constructing a model or RNG.
+
+Read F−C and F−dwell separately, with dwell−C secondary: **UP** if mean>+.01J,
+**DOWN** if mean<−.01J, otherwise **WITHIN**, retaining sign and both boundaries.
+MEI.01J retains the native practical-margin rationale. Pre-output predictions are
+**P(F−C is UP)=.75; P(F−dwell is UP)=.65**; owner prediction **not taken (unattended)**.
+The independent learning unit is the whole fit. SD/sqrt64 describes conditional
+paired initial worlds, not training-population uncertainty. Scientific-reading
+mode reuses FOUNDATIONS§6 and04_EMPIRICAL: divergent own histories/private streams
+are part of the compared packages; no pure-retrace or matched-dose claim follows.
+
+Above the MEI against both comparators extends the observed package support;
+inside it is not equivalence; an opposite sign or competitive dwell weakens further
+investment. Every intact outcome and adverse world is retained. Existing8921/8931
+F−dwell gains coexist with5/11 adverse worlds and positive dwell−C means. No tuned
+same-information native headroom record exists; F is attained performance, not an
+upper reference. No unresolved mechanism or comparator change needs new retrieval.
+Recasts2, lowest contention and the ended learned T/G package remain unchanged.
+
+This allocation fixes **270s complete native chain +330s all invoked support =600s
+complete**, with no transfer. Support includes source preparation, actual review/check
+commands, Monitor, collection/reduction/preservation/publication and Root integration,
+charged once. Every preparation command receives a whole-lifetime bound; connection
+timeout alone is insufficient. Existing169/172s native observations and the retained
+222.1996846s projection are analogies, not guaranteed new costs. Unknown components
+remain unknown. No repeated preparation, retry, replacement, resumed slice or successor.
+Cap/technical failure preserves evidence without scientific polarity.
+
+Engineering-scope§4: **none needed**. CPU FP32/Torch1/1, exact committed source,
+joined destination memory admission and detached remote execution remain. Existing
+engineering/test budgets are not reset. The [execution record](ACVC_FRESH_DENSE_REUSE_B01_8951_EXECUTION_20260911.md)
+contains L0, changed-risk review, one allowed static/stub publication check, exact
+command, actual Monitor adoption, full collection and cleanup ownership.
+
+Object-tier options: (a) bind the allocated unchanged fit to fresh8951/8952;
+(b) use a retained/screened identity; (c) alter learning or panels. Recommend/select
+(a), the conforming realization. **Owner-delegated decision (unattended,
+2026-09-03 instruction): (a).**
+
+## 15. 8951 technical no-ready boundary
+
+Published sourcee61facdff70091cd9cdd33bc231a149ed9106d35 passed actual changed-risk
+review and the single allowed stub publication check. Full source bundling and
+transfer succeeded once; the one bounded remote preparation exited128 because
+Windows text-mode shell input carried carriage returns in commands and paths.
+No memory admission, scientific submission, model/RNG construction, training or
+evaluation occurred. The exact checkout and registration were later directly
+verified absent during scoped closeout; the staged duplicate was preserved then
+removed. The [8951 intake](ACVC_FRESH_DENSE_REUSE_B01_8951_INTAKE_20260911.md)
+records the rule, receipts and accounting limits. Forecasts stay unscored.
+
+The allocation ends without repeating preparation or launching a substitute.
+This supplies no new performance evidence and changes no prior scientific result,
+mechanism conclusion, lifecycle or priority. Unused native time grants no retry.

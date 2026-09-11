@@ -1,0 +1,37 @@
+{
+  "question": "记录新分配的一次未筛选DENSE训练8951及固定C/F/dwell比较；所有者可异步覆盖尚未执行的选择。",
+  "changes_if_approved": [
+    {
+      "target": "ACVC卡第14节",
+      "from": "8941准备失败且已结束；未产生科学结果",
+      "to": "新增8951训练、8952评价；原生270秒、全部支持330秒、总600秒"
+    }
+  ],
+  "if_refused": "按所有者明确覆盖处理尚未执行的工作，保留已有证据；不自动替换或重跑。",
+  "evidence_for": [
+    {
+      "path": "docs/research/portfolio/pro_packets/20260911_remaining_capacity_refill/EXECUTION_MAPPING.md",
+      "quote": "The8941 allocation is ended and not retried; select a new unscreened identity before output.",
+      "why": "完整Portfolio决定分配了另一次原生训练及明确准备支持。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_8931_INTAKE_20260910.md",
+      "quote": "The strongest contrary evidence is **11/64 F−dwell losses**",
+      "why": "前两次均值正向仍有反例；停留控制也有收益，不能推断稳定优势或纯回撤效应。"
+    }
+  ],
+  "uncertainty": [
+    "新实例可能弱或反向，仍保留全部三组评价。",
+    "旧准备失败与账目缺口不被改写；新任务的全部支持含Monitor及Root整合。"
+  ],
+  "cost": {
+    "compute": "一次704回合、180224团队步、1024 Adam；原生270秒、全部支持330秒、总600秒。",
+    "owner_time": "无需等待回复",
+    "reversibility": "costly",
+    "waits_on_this": "nothing"
+  },
+  "verdict_text": "Owner-delegated decision (unattended, 2026-09-03 instruction): (a).",
+  "source": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_SCIENCE_CARD_20260910.md"
+}
