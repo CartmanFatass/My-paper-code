@@ -1,0 +1,37 @@
+{
+  "schema_version": 4,
+  "packet_id": "2026-09-10-fifth-slot-implementation-01--portfolio",
+  "attempt": 1,
+  "canonical_form": "logical_packet_manifest",
+  "request_id": "2026-09-10-fifth-slot-implementation-01",
+  "direction_id": "portfolio",
+  "direction_ids": [
+    "flexible_skill_duration",
+    "metric_ground_transport_allocation"
+  ],
+  "workflow_node": "portfolio_decision",
+  "conversation_binding_key": "portfolio:cross_direction",
+  "decision_authority": "pro_final",
+  "source_mode": "paste",
+  "body": {
+    "role": "prompt",
+    "source_path": "<paste>",
+    "canonical_filename": "2026-09-10-fifth-slot-implementation-01--portfolio__00_PROMPT.md",
+    "bytes": 1245,
+    "sha256": "92a9a6c40ef82232aa2e8fc2271c4b873c7501bf6c96bbf482366fd10d05e5f8",
+    "materialized_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-10-fifth-slot-implementation-01\\2026-09-10-fifth-slot-implementation-01--portfolio__00_PROMPT.md"
+  },
+  "references": [],
+  "reference_order_is_authoritative": true,
+  "provider_filename_policy": "record_observed_name_only",
+  "companion_prompt_is_transport_ui_only": true,
+  "manifest_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-10-fifth-slot-implementation-01\\2026-09-10-fifth-slot-implementation-01--portfolio__PACKET_MANIFEST.json",
+  "materialized_artifacts": {
+    "body": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-10-fifth-slot-implementation-01\\2026-09-10-fifth-slot-implementation-01--portfolio__00_PROMPT.md",
+    "references": []
+  },
+  "materialized_hashes": {
+    "body": "92a9a6c40ef82232aa2e8fc2271c4b873c7501bf6c96bbf482366fd10d05e5f8",
+    "references": []
+  }
+}

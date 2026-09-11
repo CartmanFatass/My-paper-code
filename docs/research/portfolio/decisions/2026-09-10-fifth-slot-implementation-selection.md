@@ -1,4 +1,158 @@
-# Fifth-slot implementation question — queued independent investment
+# Fifth-slot implementation selection — FSD bounded return
+
+## Complete delivery and conformance intake — 2026-09-11
+
+**PRO_FINAL / OWNER_DELEGATED: select A, one FSD I1280/D0 implementation return
+with at most one synthetic fixture-check command capped at 60 seconds.** The
+complete [immutable response](https://github.com/CartmanFatass/My-paper-code/blob/ade6a687d53b97b5f6cc2fe97da39daa2ad9bfa9/docs/research/portfolio/pro_packets/20260910_fifth_slot_implementation_selection/archive/RESPONSE.md)
+decides this bound Portfolio question. The designated-DM check finds no material
+scientific or specification conflict. Root integration and assignment of the
+[exact implementation mapping](../pro_packets/20260910_fifth_slot_implementation_selection/EXECUTION_MAPPING.md)
+remain the next operational actions; implementation and numerical acceptance are
+not claimed completed. No real B, MGTAP implementation or fallback is allocated.
+
+### What was checked, including the contradictory chat receipt
+
+Root assigned intake of Transport's completed short blocker receipt. I read all
+675 bytes and independently matched SHA256
+`12a08703b23b154c9ce03978f475aaed418934937c418dbe28f18279a7fde5e5`.
+The [exact chat text](../pro_packets/20260910_fifth_slot_implementation_selection/archive/CHAT_BLOCKER_RESPONSE.md)
+reports a GitHub write-action gap, response404 at `685c955a3`, no matching Issue17
+comment, no write request and incomplete scientific review. The preserved
+[Transport facts](../pro_packets/20260910_fifth_slot_implementation_selection/archive/CHAT_BLOCKER_TRANSPORT_FACTS.json)
+record one Send, natural completion after **12m22s**, capture at
+`2026-09-11T05:26:44Z`, receipt accepted by Root at `05:28:38Z`, and
+`fallback_enabled=false`. The fixed accepted request predates the new Markdown
+fallback; its REQUEST, TASK, HANDOFF and prompt were not rewritten to add it.
+This short text contains no Portfolio decision. The technical extraction fact
+does not establish the absence of a separately delivered full answer.
+
+Fresh direct GitHub reads during this intake instead found the matching complete
+delivery. Root was notified immediately of this factual conflict with the
+blocker-only assignment, before recording any application. The
+[intake facts](../pro_packets/20260910_fifth_slot_implementation_selection/INTAKE_FACTS.json)
+retain the direct readback, complete matching comment and fixed-input checks:
+
+| Quantity | Direct observation |
+| --- | --- |
+| Complete response | `ade6a687d53b97b5f6cc2fe97da39daa2ad9bfa9`, **38,903 bytes / 163 lines**, SHA256 `ddff4be7a79b775839ce867865a7c106811b79c2bb3f9977f505186ad5508069`; GitHub bytes equal the immutable Git blob. |
+| Delivery scope | The commit adds only this request's `archive/RESPONSE.md`, with parent `685c955a34ea4d6d0b2f2814b5a2200a4b2ca29f`; created at `2026-09-11T05:23:21Z`. |
+| Matching notification | Issue17 [comment5629909662](https://github.com/CartmanFatass/My-paper-code/issues/17#issuecomment-5629909662), created at `05:25:11Z`, names this full response and exact TASK. Eight comments returned; only this comment delivers this request. |
+| Fixed identity | TASK `8e09049351afdd582bb4d4b264f34a821ad2e988`; HANDOFF `5b74f54129257a76a9065729fa202b5b3ec7e163`; prompt SHA256 `92a9a6c40ef82232aa2e8fc2271c4b873c7501bf6c96bbf482366fd10d05e5f8`. |
+| Checkout | Clean `C:/Projects/HMASD-worktrees/codex-portfolio` at `685c955a3` fast-forwarded to the response commit. No local source or accepted packet bytes changed. |
+
+The server timestamps place file/comment creation before the short-text capture.
+This intake does **not** infer why the provider report disagreed, claim a new
+Send caused delivery, or generalize about connector write capability. Direct
+immutable delivery supports current intake; both contradictory histories remain.
+The old `BINDING_BUSY` and queued paragraphs below retain their dated meanings.
+The same question no longer needs a scientific retry. Dedicated Transport owns
+any remaining archive/binding/receipt reconciliation, without another Send or
+manual registry rewrite by this DM.
+
+### Rule applied and scientific/specification check
+
+AGENTS §2, applied verbatim:
+
+> A complete archived Pro response that decides the posed question at its declared evidence class
+> and within current owner instructions and applicable specifications is final for its node.
+> Completeness alone does not authorize a silent specification exception.
+
+AGENTS §3 also controls the historical short receipt:
+
+> A connector, evidence, or transport blocker means no Pro decision was formed.
+
+That rule applies to the blocker report; it does not erase the now-verified
+complete response. Final authority belongs to `portfolio:cross_direction`, not
+this DM's recommendation or the Transport summary. This is prospective investment
+under AGENTS §4.8; no specification change or owner ratification is needed.
+
+I read the complete response, fixed TASK/brief and selected FSD card/intake,
+current FSD/MGTAP rows and relevant direction science, narrow COND eligibility,
+the cited runner configuration/construction/primary boundaries and the MGTAP
+parameter-count definition. Applied evidence-spec §§7–8.1, 11.7–11.10 and
+Engineering Scope §§4–5, 7.1–7.3. The selected source/card surfaces are unchanged
+from their pinned input. The conformance findings are:
+
+| Bound requirement | Finding |
+| --- | --- |
+| One disjoint choice | A selected; B is the strongest runner-up; C unselected. No other-direction allocation, fallback, lifecycle/priority/recast or formal-UAV change. |
+| Exact treatment and intact null | Explicit coordinator batches I1280=1280 and D0=128 before both learner and evaluator; individual costs .25/infinity and all other declared settings retained. D0 still observes, updates its GRU and produces primitive actions every step. |
+| Owned implementation | FSD runner/small named entry, matching FSD tests and direction documentation only. Historical B01/B02 behavior remains; core agent/utils, shared defaults, environment/reward and duration-credit algorithms are protected. |
+| Actual numerical allowance | One complete 60-second command; at most four lightweight configs, one deterministic buffer of at most 1281 valid joint rows, two real sampler traversals at 1280/128, four synthetic paired readouts of 32 scores/arm. No model, environment, training, optimizer, native endpoint, replay, profiling, search or scientific invocation. |
+| Acceptance and stopping | Configuration binding, row visitation/final chunk and dependent primary publication only; required read-only high-risk review adds no invocation. Stop at one return even on failure/incomplete coverage; no second numerical check or uncharged probe. |
+| Scientific ceiling | Technical/source readiness only. A future one-pair B endpoint remains unallocated; no batching equivalence, pure update-count causality, stable superiority or training-population uncertainty from evaluation episodes. |
+| Evidence and investment rationale | Existing FSD consumer makes its remaining computation surface smaller than new COND pooling; no measured engineering-time or expected-return advantage is asserted. Both FSD losses, P75 aggregate/per-master outcomes and narrower positives remain. |
+| Cost and calibration | Missing tuned host headroom is not a veto. Old host-specific complete walls/CPU/critical paths remain separate, with new runtime, memory and support unknown. FSD's proposed 3000-second B envelope and all MGTAP old caps remain unallocated. No stronger-class or search-before-learning prerequisite appears. |
+
+Two editorial limitations are explicit rather than silently repaired. The
+delivery comment clarifies the table's `I1280/128 versus D0/128` phrase to mean
+batch **1280 versus 128**, agreeing with the response's configuration row and
+fixed card §2. The same comment corrects `twenty` current-source paths to
+**nineteen**. A tool count of the fixed manifest gives **25** paths: 19 current
+source, 3 packet and 3 individually versioned files. These do not change the
+selected operation, budget or source mapping. The response's separate correction
+of the misleading 69,079 `actor` label is also supported by actual
+`parameter_summary` calling `parameter_count(actor, critic)`; it is a combined
+learner count, not evidence for an actor-only match. No affected source/card is
+silently rewritten by this Portfolio intake.
+
+Scientific-tools reading used FOUNDATIONS §§2–6 and the hierarchy/empirical
+topics. Concrete assumptions: held skill, primitive reaction and optimizer update
+are different processes; changed batch normalization may change finite learning;
+equal legal information/parameter counts do not establish equivalent function
+classes; conditional endpoint episodes are not independent training instances.
+These retain both capable comparators and the response's technical ceiling.
+No new mechanism, unexpected empirical result or unresolved primary-literature
+claim requires another corpus search. Prior source/literature retrieval stays
+attributed to its original record; Pro's reported 25-path access is not a new
+independent library audit by this DM.
+
+### Decisions this intake produces
+
+1. **Portfolio investment:** options A (FSD), B (COND), C (zero work). Pro selects
+   **A**, matching the DM recommendation, with the exact finite check above.
+   Record `PRO_FINAL / OWNER_DELEGATED`; Root application/dispatch is planned.
+   No local scientific selection substitutes for the response.
+2. **Technical reconciliation:** options (a) preserve the short blocker and
+   intake the verified full delivery; (b) retain the short receipt as current
+   absence; (c) Send again or choose locally. Recommend and execute (a).
+   **Owner-delegated decision (unattended, 2026-09-03 instruction): (a)** under
+   the standing same-request recovery rule and Root's assigned intake scope.
+3. **Execution continuation:** return the exact FSD implementation mapping to
+   Root. This DM does not start the FSD task, spend its fixture, dispatch Pro,
+   alter Transport state or assign MGTAP. Full-delivery reconciliation reuses this
+   response; independent authorized directions continue without waiting for it.
+
+Existing P2 item `20260910-root-007` retains its original proposal and historical
+blocked traces, with a new truthful complete-delivery/application trace through
+the owner CLI: `state=planned`, `auto_applied=null` until Root's actual operational
+application. This describes execution state, not another scientific decision or
+an owner acknowledgement requirement. Audit rows
+[162–163](../audit/2026-09-10.md#L162) record reconciliation and the Pro selection.
+Prediction is `not taken`; no new empirical result or valid-result
+Chinese brief is manufactured. Owner flag: portfolio; no critic override or
+second recast. Current primary owner reviews were empty; the relevant audit owner
+cells had no instruction. The audit records the Portfolio choice separately from
+the technical reconciliation.
+
+**Strongest support:** the actual FSD sampler consumer and specific missing
+binding/readout. **Strongest contradiction:** former I−D0 losses
+−0.049670563167111874/−0.035312725297886094, with more update work; COND remains a
+substantive unselected competitor despite P75−0.02396310430506595.
+**Next discriminator:** one bounded implementation/check return establishing
+whether the binding and primary can be preserved within scope. Only a separately
+funded native I1280−D0 pair could supply the subsequent performance observation.
+
+Current intake exposure: source implementation 0, fixture commands 0, models 0,
+environments 0, training/optimizer/evaluation/scientific invocations 0, Sends 0,
+registry writes 0. Administrative file/Git/readback/publication work is not claimed
+free. No test scratch, execution root or remote worktree was created. Commit/push
+the exact record and return to Root; the shared Portfolio checkout remains for
+integration and actual delivery reconciliation, with Root responsible for its
+later retention. Engineering Scope §4 needs **none**.
+
+## Preserved earlier queued and blocker intakes
 
 ## Effect of the complete four-slot decision — 2026-09-11
 
