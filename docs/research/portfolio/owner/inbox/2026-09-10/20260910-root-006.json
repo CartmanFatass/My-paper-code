@@ -97,6 +97,14 @@
       "record": "docs/research/portfolio/decisions/2026-09-10-four-slot-rolling-refill.md",
       "state": "blocked",
       "summary": "按既有所有者阻塞规则和Root本次指令记录：两次点击中一次确认受理，终止节点没有完整答复；GitHub新响应404且仅有准备评论。没有Portfolio裁决，A/B及候补未执行，禁止再次Send。既有第五席MGTAP设计候补由Root独立激活，与本题无关。"
+    },
+    {
+      "at": "2026-09-11T03:50:11+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/pro_packets/20260910_four_slot_rolling_refill/archive/OWNER_DIRECT_RESEND_TERMINAL_FACTS.json",
+      "record": "docs/research/portfolio/decisions/2026-09-10-four-slot-rolling-refill.md",
+      "state": "blocked",
+      "summary": "所有者亲自重发指令已由Root按固定提示执行一次；6 Pro自然运行12分16秒后完整返回能力缺口，未写响应或评论并明确科学审查未完成。新GitHub读取仍为77b9d573、response404、只有准备评论。A/B未选、额度未释放、不得再次Send。"
     }
   ]
 }

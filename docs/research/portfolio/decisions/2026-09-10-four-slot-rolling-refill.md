@@ -1,5 +1,24 @@
 # Four-slot rolling refill — terminal blocker intake
 
+## Owner-directed resend terminal update — 2026-09-11
+
+The owner's explicit instruction `你来亲自重新发送` authorized Root to execute one caller-direct
+resend of the exact fixed prompt. Root verified the existing conversation and required `6 Pro`
+state, sent once, and observed the exact new user node. The accepted generation completed
+naturally after `12m 16s`, but its complete assistant text reported a capability gap, no write,
+no response file or matching Issue17 delivery comment, and an incomplete scientific review.
+Root's fresh GitHub read at `2026-09-11T03:48:31.0030398+00:00` independently confirmed branch
+`77b9d573aa609bac253544ca9d4429b39b3a0adb`, response404 and preparation comment
+`5627828518` only. A delayed second read at `2026-09-11T03:50:35.2353441+00:00` found the same actual state; the blocker therefore rests on authoritative repository/comment readback rather than Pro's upload self-report. See the exact [terminal response](../pro_packets/20260910_four_slot_rolling_refill/archive/OWNER_DIRECT_RESEND_RESPONSE.md)
+and [terminal facts](../pro_packets/20260910_four_slot_rolling_refill/archive/OWNER_DIRECT_RESEND_TERMINAL_FACTS.json).
+
+This material event resolves the waiting-generation state but still forms no Portfolio decision.
+Under AGENTS§3 the question remains parked, A/B remain unselected, and none of the proposed
+implementation or numerical allowances is released. The owner-directed resend allowance is
+consumed; no retry, Continue, Stop, model change or additional Send is authorized. The now-idle
+binding may be reconciled for the separately prepared fifth-slot request without treating this
+capability-gap text as scientific evidence.
+
 **No Portfolio decision was formed.** The accepted request ended with Transport's
 `BLOCKED / PARTIAL_RESPONSE` receipt; the fresh GitHub check found no later complete
 response or delivery comment. Park this question at a clean boundary under AGENTS§3.

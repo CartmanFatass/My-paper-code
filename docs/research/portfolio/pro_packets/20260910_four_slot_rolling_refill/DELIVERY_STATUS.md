@@ -1,13 +1,13 @@
 # Four-slot request delivery status
 
-**WAITING_GENERATION after OWNER_DIRECT Root resend — no Portfolio decision yet.** The owner
+**BLOCKED after completed OWNER_DIRECT Root resend — no Portfolio decision.** The owner
 instructed Root to resend this exact request personally. At
 `2026-09-11T03:35:17.603414+00:00`, Root verified the original bound conversation,
 `6 Pro` and `Pro, 5 of 5`, pasted the canonical HANDOFF prompt, and clicked Send once.
 The exact new user-message node appeared with the fixed TASK link and the provider entered
 `Pro 思考中`; no retry or generation control was used. The prior `BLOCKED / PARTIAL_RESPONSE`
-record and Transport's two-click history remain preserved below. This accepted resend has not
-yet produced a response or Portfolio decision. Exact facts:
+record and Transport's two-click history remain preserved below. The accepted resend
+completed with the terminal capability gap recorded below. Exact send facts:
 [`OWNER_DIRECT_RESEND_FACTS.json`](OWNER_DIRECT_RESEND_FACTS.json).
 
 Before that owner-directed resend, Root forwarded the accepted-Send terminal blocker; the
@@ -20,6 +20,20 @@ The fixed request remains `2026-09-10-four-slot-rolling-refill-01`, TASK
 `portfolio:cross_direction` / `6a9c109e-b264-83e8-a78b-f9ea1b767b7b`.
 TASK, REQUEST and HANDOFF remain unchanged. HANDOFF's READY_TO_DISPATCH describes its
 publication state before the now-accepted attempt; **it is not a current dispatch command**.
+
+That accepted generation completed naturally after `12m 16s`. Its full assistant text is a
+transport capability gap: it found no available action to create the required response file or
+delivery comment, attempted no write, and explicitly left the scientific review incomplete.
+Root's fresh read at `2026-09-11T03:48:31.0030398+00:00` confirmed
+`codex/portfolio` at `77b9d573aa609bac253544ca9d4429b39b3a0adb`, the exact response
+path absent, and only preparation comment `5627828518`. The exact terminal text and observation
+are retained in [`archive/OWNER_DIRECT_RESEND_RESPONSE.md`](archive/OWNER_DIRECT_RESEND_RESPONSE.md)
+and [`archive/OWNER_DIRECT_RESEND_TERMINAL_FACTS.json`](archive/OWNER_DIRECT_RESEND_TERMINAL_FACTS.json).
+This is a complete transport response but not a formed Portfolio decision. It releases no
+allocation, and no further Send is authorized.
+A second delayed read at `2026-09-11T03:50:35.2353441+00:00`, made after the owner
+called out false negative upload self-reports, found the same HEAD, absent file and sole preparation
+comment. Delivery classification is based on these repository/comment readbacks, not Pro's claim.
 
 Transport reports two clicks: the first left the unchanged composer with no user node;
 the permitted unchanged-control retry produced the current user node and Pro generation.
