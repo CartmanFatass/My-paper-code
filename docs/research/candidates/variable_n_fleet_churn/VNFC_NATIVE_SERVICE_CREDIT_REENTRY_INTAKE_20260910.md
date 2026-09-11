@@ -351,3 +351,80 @@ the receipt, its technical audit row and that trace change. No scientific/source
 needed for a documentary receipt update. The direction checkout remains retained for the
 unresolved delivery and subsequent DM intake, with this DM owning draft preservation and
 Root owning integration and eventual reclamation as recorded in section 7.
+
+## 9. Reconciled full response and direction decision — 2026-09-11
+
+Root returned the original request's reconciled delivery with `no_new_send=true`.
+The DM directly read all 235 lines / 31,994 bytes from response commit
+`10bb08476ff58afd25b90b21cd2d1a739b25ca4b`, SHA256
+`11076fff024affb030dd692e1a8637fa2b36043274495b1419ad93a13bccd117`.
+The [complete response](pro_packets/20260910_native_service_credit_reentry/archive/RESPONSE.md)
+is the decision; the short chat receipt and section 8 blocker remain historical facts.
+The response commit adds only that authorized file on the prior branch descendant.
+This checkout fast-forwarded cleanly from `2e1ab2ffb4a3b1b55f1d355d278e03f6bee5d341`.
+
+The current Issue 1 body and [delivery comment 5637667527](https://github.com/CartmanFatass/My-paper-code/issues/1#issuecomment-5637667527)
+were read through `gh api` on 2026-09-11 (DM boundary began 18:04 UTC): the Issue is open,
+has five comments, and the new comment points to that response and fixed TASK
+`b03b1471ff8808d5cf3c9256889b724d501ae92f`. The old Issue body is historical, as Pro states.
+Executable Git/regex checks found all 19 response source path/SHA pairs, exactly matching
+REQUEST and fixed TASK; every Git object exists. Four historical versions and the other
+15 sources at `b610a07986d839e4a44159d8c7c5a85ca300606c` are preserved. Pro reports its actual
+source scope, including partial native-code reading, and does not claim new execution or
+direct paper access. The requested sections, counts, comparison, costs, limitations and
+both choices are answered. No missing source or out-of-scope delivery change was found.
+
+**Rule applied verbatim — AGENTS section 2:** "A complete archived Pro response that
+decides the posed question at its declared evidence class and within current owner
+instructions and applicable specifications is final for its node."
+
+**Scientific/specification acceptance:** conforming. Response opening and sections III–VI
+select precisely one ordinary B pair, INTERVAL versus TERMINAL, with the unchanged full
+native objective, retrospective labels, gamma=1/lambda=.95 PPO, 64x32 training per arm,
+0/32/64 fixed evaluations and the one BCRH panel. It accepts native<=600 s,
+support<=300 s, total<=900 s without transfers, pilots, retries or successors. It imposes
+no exact-headroom, causal-diagnosis, positive-result or stronger-class prerequisite.
+The current evidence-spec sections 4, 5.2, 11.4 and 11.7–11.10, Engineering Scope sections
+4–5 and 7, rolling execution and current Transport ownership are consistent with the
+selected requirements. No correction round is needed. Technical source acceptance and
+actual execution have not yet occurred at this decision boundary.
+
+Scientific-reading application: FOUNDATIONS sections 1–4 and 6 and the RL topic's
+data/critic/reward passages support the distinction between a preserved full trajectory
+return and changed finite GAE/PPO targets. Complete labels may use terminal demand after
+collection; behavior and observation-only critic inputs may not. A bootstrapping critic
+does not establish Markov closure, variance reduction or identical finite gradients.
+Reuse the specific literature retrieval in section 4; no new literature search changes
+the question. One paired training draw is the independent unit; 64 shared evaluation
+worlds only supply conditional evaluation uncertainty.
+
+**Decisions this intake produces.** Direction options remain section 6 (a) the exact
+credit comparison and (b) retain the narrow pause. Pro selects **(a)**; DM recommends
+and applies that conforming selection as **PRO_FINAL / OWNER_DELEGATED**. Only the named
+credit comparison reopens. Old B01/deployment/E01/R03 stops, every prior result and
+quarantine, ACTIVE/HIGH, recasts=2 and lowest contention sequencing remain unchanged.
+No Portfolio decision or third recast follows. Object choice: bind this accepted scope
+to the [B02 science card](VNFC_N7_NATIVE_SERVICE_CREDIT_B02_SCIENCE_CARD_20260911.md),
+fresh seed 2026091101, evaluation seed 2026091102 and namespace
+`VNFC-N7-NATIVE-SERVICE-CREDIT-B02-20260911`.
+**Owner-delegated decision (unattended, 2026-09-03 instruction): bind this one fresh B02
+pair and implement its selected comparison.** No historical seed or checkpoint is reused.
+
+Strongest support remains the now-defined native-label intervention and already
+observed learning; strongest contradiction remains the six-decision horizon, common
+old gains, native BCRH losses and absence of a diagnosed credit bottleneck. There is
+still no new effect measurement. Claim ceiling: one local B signal or counterexample,
+not stable superiority, equivalence, pure causal attribution, tuned headroom or transfer.
+Next discriminator is the card's final INTERVAL-minus-TERMINAL native recovery, with
+full J and intact/zone costs retained. No automatic next invocation follows its intake.
+
+The existing P2 decision item receives an applied Pro trace with option (a), preserving
+its earlier blocked trace. A new-card item links the same selected scope. Owner reviews
+returned `[]`; prediction not taken (unattended). The [Chinese decision brief](../../portfolio/owner/briefs/variable_n_fleet_churn/2026-09-11_B02_CONVERGENCE.md)
+explicitly says no new run has occurred. Root integration support is included in the
+card's cost record: 5.3663749 s internally timed plus approximately 1.0, 2.6 and 0.1 s
+displayed tool walls; approximation is retained. Support work without a reliable timer
+will not be replaced with zero.
+
+DM application summary used in the new-card packet (a summary, not a verbatim Pro quote):
+选择（a）：仅开放 VNFC-N7-NATIVE-SERVICE-CREDIT-B02 的一次新训练对，比较 INTERVAL 与 TERMINAL；完整机器工作最多900秒。

@@ -19,13 +19,32 @@ This authority preserves the direction's source-grounded scientific question, ev
 
 ## Scientific question
 
-Can a shared MAPR-4 policy learn post-loss recovery from unshaped external return on the
-post-loss `N=7` distribution, and how does its sampled native recovery compare separately with
-the same-information `DIRECT-SET-AR` learner and fixed `BCRH-PERSIST` controller on fresh episodes
-from that distribution? The older N={3,5}-training/N7-transfer question and its bounded negative
-comparisons remain historical evidence; this new B does not identify their unique cause.
+On the post-loss `N=7` distribution, can assigning native service return to its six occurrence
+intervals improve a shared MAPR-4 learner over the same learner's terminal-credit update?
+Both optimize the same complete external objective and retain the same execution information.
+The old MAPR–DIRECT comparison, N={3,5}-training/N7-transfer question and their bounded
+results remain historical evidence; this B does not identify their unique cause.
 
 ## Current scientific disposition
+
+### One native-service temporal-credit comparison opened — 2026-09-11
+
+The [full Convergence response](pro_packets/20260910_native_service_credit_reentry/archive/RESPONSE.md)
+at `10bb08476ff58afd25b90b21cd2d1a739b25ca4b`, checked in
+[intake section 9](VNFC_NATIVE_SERVICE_CREDIT_REENTRY_INTAKE_20260910.md#9-reconciled-full-response-and-direction-decision--2026-09-11),
+selects one [B02 INTERVAL/TERMINAL training pair](VNFC_N7_NATIVE_SERVICE_CREDIT_B02_SCIENCE_CARD_20260911.md).
+The concrete credit labels now use existing own-trajectory counters and sum to the same full
+J; this supplies a discriminator that the previously unspecified credit idea lacked. The
+strongest contrary facts remain the six-decision horizon, both prior learners' real gains,
+small unstable architecture separation and losses to BCRH. Counter occurrence time does not
+identify causal action/agent contribution, and finite GAE can change bias as well as variance.
+
+No new performance fact exists at selection. The claim ceiling is a local learning signal or
+counterexample on this host. The next discriminator is final INTERVAL-minus-TERMINAL recovery
+with full-J/intact/zone costs retained. Exactly one fresh pair uses the 900 s complete allocation
+(native600/support300), with no retry or automatic successor. The old architecture comparison
+and deployment-mode pauses below remain; E01/R03, prior quarantines/results and recasts=2 are
+unchanged. This opens only the defined credit sub-question, with no Portfolio disposition.
 
 ### Convergence pause of the B01 comparison family — 2026-09-06
 
