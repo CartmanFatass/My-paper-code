@@ -1,6 +1,6 @@
 {
   "object": "FOLR-LEARNED-RETENTION-B02",
-  "state": "published_card_exact_command_preparation",
+  "state": "both_arms_accepted_and_monitor_adopted_pending_collection",
   "authority_sha": "41c46303f66005f74a18dccf45974d99771b155b",
   "authority_path": "docs/research/portfolio/pro_packets/20260911_post_program_vacancies/archive/RESPONSE.md",
   "authority_response_sha256": "1dc62ab2a10aef042c4a3ca3ba53b26daecbea0529e653359167cc03ecb76752",
@@ -88,7 +88,51 @@
       "whole_time": "temp/directions/vap_folr_core/exp/learned_retention_b02_seed7810_retain_whole_time.txt",
       "command": "cd /home/wu/hmasd-worktrees/folr-learned-retention-b02-2b22270b3 && mkdir -p temp/directions/vap_folr_core/exp && /usr/bin/time -v -o temp/directions/vap_folr_core/exp/learned_retention_b02_seed7810_retain_whole_time.txt /usr/bin/timeout --signal=TERM --kill-after=5s 1800s bash -lc '/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/vap_folr_core/exp/learned_retention_b02_seed7810_retain_memory.json && /home/wu/.venvs/hmasd/bin/python -B scripts/run_folr_public_lifecycle_b01.py --arm RETAIN --seed 7810 --evaluation-seed 107810 --launch-sha 2b22270b3b076df60f4afd3203c3f09aeab3b98b --out temp/directions/vap_folr_core/exp/learned_retention_b02_seed7810_retain'",
       "supervisor_command": "/usr/local/bin/agent-task run folr-learned-retention-b02-retain-20260911 'cd /home/wu/hmasd-worktrees/folr-learned-retention-b02-2b22270b3 && mkdir -p temp/directions/vap_folr_core/exp && /usr/bin/time -v -o temp/directions/vap_folr_core/exp/learned_retention_b02_seed7810_retain_whole_time.txt /usr/bin/timeout --signal=TERM --kill-after=5s 1800s bash -lc '\"'\"'/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/vap_folr_core/exp/learned_retention_b02_seed7810_retain_memory.json && /home/wu/.venvs/hmasd/bin/python -B scripts/run_folr_public_lifecycle_b01.py --arm RETAIN --seed 7810 --evaluation-seed 107810 --launch-sha 2b22270b3b076df60f4afd3203c3f09aeab3b98b --out temp/directions/vap_folr_core/exp/learned_retention_b02_seed7810_retain'\"'\"''",
-      "status": "committed_plan_not_submitted"
+      "status": "accepted_running_pending_collection",
+      "launch_receipt": {
+        "timestamp": "2026-09-11T23:36:39.666744+00:00",
+        "arm": "RETAIN",
+        "handle": "folr-learned-retention-b02-retain-20260911",
+        "command_commit": "1c9c7c12fba7e54486e2a91061f17990e97ad33d",
+        "returncode": 0,
+        "stdout": "Task 'folr-learned-retention-b02-retain-20260911' started in tmux session 'agent_folr-learned-retention-b02-retain-20260911'. Output: /home/wu/.agent-tasks/folr-learned-retention-b02-retain-20260911/task.log\n",
+        "stderr": ""
+      },
+      "initial_supervisor": {
+        "task": "folr-learned-retention-b02-retain-20260911",
+        "status": "running",
+        "exit_code": null,
+        "pid": 3354804,
+        "uptime_seconds": 18,
+        "tmux_active": true
+      },
+      "memory_admission": {
+        "assessed_at": "2026-09-11T23:36:39.540351Z",
+        "available_physical_bytes": 14551658496,
+        "captured_at": "2026-09-11T23:36:39.539958Z",
+        "cgroup_headroom_bytes": null,
+        "cgroup_memory_current_bytes": null,
+        "cgroup_memory_max_bytes": null,
+        "effective_available_bytes": 14551658496,
+        "effective_floor_pass": true,
+        "failure_reasons": [],
+        "measurement_source": "/proc/meminfo",
+        "minimum_available_bytes": 4294967296,
+        "passed": true,
+        "physical_floor_pass": true,
+        "schema_version": 1
+      },
+      "monitor_dispatch": {
+        "accepted": true,
+        "thread_id": "01a087e5-2044-7301-abb6-7a1709a98197",
+        "model_thinking_overrides": false
+      },
+      "monitor_adoption": {
+        "confirmed_by": "Root forwarded separate authoritative MONITOR_ADOPTED",
+        "status": "running",
+        "observation_command_seconds": 0.7,
+        "same_handle_source_cwd_output": true
+      }
     },
     {
       "arm": "LEARNED_EVENT",
@@ -99,7 +143,51 @@
       "whole_time": "temp/directions/vap_folr_core/exp/learned_retention_b02_seed7810_learned_event_whole_time.txt",
       "command": "cd /home/wu/hmasd-worktrees/folr-learned-retention-b02-2b22270b3 && mkdir -p temp/directions/vap_folr_core/exp && /usr/bin/time -v -o temp/directions/vap_folr_core/exp/learned_retention_b02_seed7810_learned_event_whole_time.txt /usr/bin/timeout --signal=TERM --kill-after=5s 1800s bash -lc '/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/vap_folr_core/exp/learned_retention_b02_seed7810_learned_event_memory.json && /home/wu/.venvs/hmasd/bin/python -B scripts/run_folr_public_lifecycle_b01.py --arm LEARNED_EVENT --seed 7810 --evaluation-seed 107810 --launch-sha 2b22270b3b076df60f4afd3203c3f09aeab3b98b --out temp/directions/vap_folr_core/exp/learned_retention_b02_seed7810_learned_event'",
       "supervisor_command": "/usr/local/bin/agent-task run folr-learned-retention-b02-learned-event-20260911 'cd /home/wu/hmasd-worktrees/folr-learned-retention-b02-2b22270b3 && mkdir -p temp/directions/vap_folr_core/exp && /usr/bin/time -v -o temp/directions/vap_folr_core/exp/learned_retention_b02_seed7810_learned_event_whole_time.txt /usr/bin/timeout --signal=TERM --kill-after=5s 1800s bash -lc '\"'\"'/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/vap_folr_core/exp/learned_retention_b02_seed7810_learned_event_memory.json && /home/wu/.venvs/hmasd/bin/python -B scripts/run_folr_public_lifecycle_b01.py --arm LEARNED_EVENT --seed 7810 --evaluation-seed 107810 --launch-sha 2b22270b3b076df60f4afd3203c3f09aeab3b98b --out temp/directions/vap_folr_core/exp/learned_retention_b02_seed7810_learned_event'\"'\"''",
-      "status": "committed_plan_not_submitted"
+      "status": "accepted_running_pending_collection",
+      "launch_receipt": {
+        "timestamp": "2026-09-11T23:37:40.476495+00:00",
+        "arm": "LEARNED_EVENT",
+        "handle": "folr-learned-retention-b02-learned-event-20260911",
+        "command_commit": "1c9c7c12fba7e54486e2a91061f17990e97ad33d",
+        "returncode": 0,
+        "stdout": "Task 'folr-learned-retention-b02-learned-event-20260911' started in tmux session 'agent_folr-learned-retention-b02-learned-event-20260911'. Output: /home/wu/.agent-tasks/folr-learned-retention-b02-learned-event-20260911/task.log\n",
+        "stderr": ""
+      },
+      "initial_supervisor": {
+        "task": "folr-learned-retention-b02-learned-event-20260911",
+        "status": "running",
+        "exit_code": null,
+        "pid": 3354968,
+        "uptime_seconds": 21,
+        "tmux_active": true
+      },
+      "memory_admission": {
+        "assessed_at": "2026-09-11T23:37:40.261222Z",
+        "available_physical_bytes": 14309847040,
+        "captured_at": "2026-09-11T23:37:40.260635Z",
+        "cgroup_headroom_bytes": null,
+        "cgroup_memory_current_bytes": null,
+        "cgroup_memory_max_bytes": null,
+        "effective_available_bytes": 14309847040,
+        "effective_floor_pass": true,
+        "failure_reasons": [],
+        "measurement_source": "/proc/meminfo",
+        "minimum_available_bytes": 4294967296,
+        "passed": true,
+        "physical_floor_pass": true,
+        "schema_version": 1
+      },
+      "monitor_dispatch": {
+        "accepted": true,
+        "thread_id": "01a087e5-2044-7301-abb6-7a1709a98197",
+        "model_thinking_overrides": false
+      },
+      "monitor_adoption": {
+        "confirmed_by": "Root forwarded separate authoritative MONITOR_ADOPTED",
+        "status": "running",
+        "observation_command_seconds": 0.7,
+        "same_handle_source_cwd_output": true
+      }
     }
   ],
   "caps_seconds": {
@@ -160,8 +248,10 @@
   "monitor": {
     "thread_id": "01a087e5-2044-7301-abb6-7a1709a98197",
     "configuration_source": "live primary .codex/hmasd-monitor.toml",
-    "dispatch": "not yet",
-    "adoption": "not yet"
+    "dispatch": "both direct app sends accepted",
+    "adoption": "both separately confirmed by Root",
+    "routine_DM_polling": false,
+    "terminal": "pending"
   },
   "support": {
     "measured_invoked_commands": [
@@ -244,9 +334,65 @@
       {
         "label": "B02 source/card binding commit and immediate configured upstream push",
         "seconds": 4.2584685
+      },
+      {
+        "label": "prepare exact B02 supervisor commands and owned control scratch",
+        "seconds": 0.2653722
+      },
+      {
+        "label": "exact B02 command binding commit and immediate upstream push",
+        "seconds": 4.5334637
+      },
+      {
+        "label": "remote exact published source staging and new binding/source/namespace syntax checks",
+        "seconds": 1.1365638
+      },
+      {
+        "label": "reconcile no staging effect and correct Windows CRLF transport for same published inputs",
+        "seconds": 3.7651083
+      },
+      {
+        "label": "prelaunch unapplied owner reviews and current live Monitor",
+        "seconds": 0.4162353
+      },
+      {
+        "label": "prelaunch clean command commit and source surface guard",
+        "seconds": 0.2950307
+      },
+      {
+        "label": "RETAIN B02 exact committed supervisor submission",
+        "seconds": 0.8622769
+      },
+      {
+        "label": "RETAIN B02 immediate launch source supervisor and adjacent admission acceptance",
+        "seconds": 0.5700672
+      },
+      {
+        "label": "direct live Monitor dispatch for accepted B02 RETAIN handle",
+        "seconds": 0.189
+      },
+      {
+        "label": "LEARNED_EVENT B02 exact committed supervisor submission",
+        "seconds": 1.1732372
+      },
+      {
+        "label": "LEARNED_EVENT B02 immediate source supervisor and adjacent admission acceptance",
+        "seconds": 0.6048977
+      },
+      {
+        "label": "Monitor RETAIN B02 adoption observation reported by Root",
+        "seconds": 0.7
+      },
+      {
+        "label": "direct live Monitor dispatch for accepted B02 LEARNED_EVENT handle",
+        "seconds": 0.169
+      },
+      {
+        "label": "Monitor LEARNED_EVENT B02 adoption observation reported by Root",
+        "seconds": 0.7
       }
     ],
-    "known_seconds_through_snapshot": 13.783487000000001,
+    "known_seconds_through_snapshot": 29.163740000000004,
     "native_clocks_not_in_support": true,
     "unmeasured_terms": [
       "unitemized authoring/tool effort",
@@ -254,11 +400,12 @@
       "main integration until supplied",
       "later publication and cleanup"
     ],
-    "full_budget_conformance": "pending"
+    "full_budget_conformance": "pending native completion and complete support; unitemized terms remain unknown",
+    "known_monitor_adoption_seconds": 1.4
   },
   "cleanup": {
     "shared_checkout": "retain for live direction authoring/integration",
-    "new_roots": "not yet created",
+    "new_roots": "LIVE: exact detached worktree, two supervisor roots and two scientific output roots; preserve at collection before authorized removal",
     "old_B01_local_duplicates": "preserved, policy-blocked; no renewed deletion attempted or launch dependency",
     "control_root": "temp/directions/vap_folr_core/exp/learned_retention_b02_control_20260911"
   },
@@ -276,5 +423,34 @@
     "supervisor": "/usr/local/bin/agent-task",
     "portability": "Linux CPU only for this declared native publication; no Windows fallback",
     "staging": "new detached exact source worktree; published source only"
+  },
+  "staging": {
+    "first_control_attempt": {
+      "observed_at": "2026-09-11T23:34:33.811565+00:00",
+      "command_commit": "1c9c7c12fba7e54486e2a91061f17990e97ad33d",
+      "source_sha": "2b22270b3b076df60f4afd3203c3f09aeab3b98b",
+      "elapsed_seconds": 0.8646693000046071,
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "bash: line 1: set: -\n: invalid option\nset: usage: set [-abefhkmnptuvxBCEHPT] [-o option-name] [--] [-] [arg ...]\n(eval):1: can't change option: zle\n(anon):setopt:7: can't change option: monitor\n\n[\u001b[31mERROR\u001b[39m]: gitstatus failed to initialize.\n\n\n  Add the following parameter to ~/.zshrc for extra diagnostics on error:\n\n    GITSTATUS_LOG_LEVEL=DEBUG\n\n  Restart Zsh to retry gitstatus initialization:\n\n    \u001b[32mexec zsh\u001b[39m\nfatal: invalid refspec 'codex/vap-folr?'\nfatal: invalid reference: 2b22270b3b076df60f4afd3203c3f09aeab3b98b?\nTraceback (most recent call last):\n  File \"<stdin>\", line 5, in <module>\n  File \"/home/wu/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/subprocess.py\", line 421, in check_output\n    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,\n  File \"/home/wu/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/subprocess.py\", line 503, in run\n    with Popen(*popenargs, **kwargs) as process:\n  File \"/home/wu/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/subprocess.py\", line 971, in __init__\n    self._execute_child(args, executable, preexec_fn, close_fds,\n  File \"/home/wu/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/subprocess.py\", line 1863, in _execute_child\n    raise child_exception_type(errno_num, err_msg, err_filename)\nFileNotFoundError: [Errno 2] No such file or directory: PosixPath('/home/wu/hmasd-worktrees/folr-learned-retention-b02-2b22270b3')\n"
+    },
+    "corrected_same_source": {
+      "observed_at": "2026-09-11T23:35:28.992975+00:00",
+      "command_commit": "1c9c7c12fba7e54486e2a91061f17990e97ad33d",
+      "source_sha": "2b22270b3b076df60f4afd3203c3f09aeab3b98b",
+      "elapsed_seconds": 3.5335758999863174,
+      "returncode": 0,
+      "stdout": "{\"prior_preparation_effect\": \"no execution worktree on disk or in registry; both handles absent\", \"scientific_invocations\": 0}\nHEAD is now at 2b22270b3 Bind fresh unchanged FOLR learned-retention B02 pair\n{\"source_sha\": \"2b22270b3b076df60f4afd3203c3f09aeab3b98b\", \"tracked_status\": \"clean\", \"source_paths_verified\": 10, \"new_handles_outputs_memory_time_paths\": \"all absent\", \"both_literal_commands_bash_n\": true, \"python_only_readback_no_models\": true}\n",
+      "stderr": "(eval):1: can't change option: zle\n(anon):setopt:7: can't change option: monitor\n\n[\u001b[31mERROR\u001b[39m]: gitstatus failed to initialize.\n\n\n  Add the following parameter to ~/.zshrc for extra diagnostics on error:\n\n    GITSTATUS_LOG_LEVEL=DEBUG\n\n  Restart Zsh to retry gitstatus initialization:\n\n    \u001b[32mexec zsh\u001b[39m\nFrom https://github.com/CartmanFatass/My-paper-code\n * branch                codex/vap-folr -> FETCH_HEAD\n   8d518ff30..1c9c7c12f  codex/vap-folr -> origin/codex/vap-folr\nPreparing worktree (detached HEAD 2b22270b3)\n",
+      "correction": "binary LF transport of same source/binding; no scientific retry"
+    },
+    "classification": "Windows text-mode SSH transport introduced CRLF into shell input; initial source fetch/add failed before any scientific execution; exact cwd/registration/handles absence reconciled, same published source staged with binary LF input",
+    "scientific_retry": false,
+    "accepted_new_binding_checks": "all10 source/test files exact, clean source, both namespaces absent, both commands bash -n pass; zero new model/test invocations"
+  },
+  "command_commit": "1c9c7c12fba7e54486e2a91061f17990e97ad33d",
+  "relay": {
+    "thread_id": "01a08456-2cf3-7f02-8595-42d84ba41a4c",
+    "delivery": "one Root-action handoff planned after this publication; actual send receipt retained in control root and final return"
   }
 }
