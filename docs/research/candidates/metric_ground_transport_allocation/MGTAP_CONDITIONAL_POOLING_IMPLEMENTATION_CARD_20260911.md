@@ -95,8 +95,9 @@ route, using the declared existing Windows CPU interpreter. Current primary-cont
 compute/Monitor configuration was read. The portable future study remains remote-first;
 this fixture creates no detached experiment or Monitor obligation. Before any encoder,
 the entry runs the existing local `admit-memory` command; both available-memory values
-must meet4GiB. The published exact command will give the outer child a60-second timeout
-covering admission, imports, fixture, publication, cleanup and process exit. No retry.
+must meet4GiB. The published exact command has a60-second complete cap and a55-second
+child timeout, leaving room for outer publication/exit and timeout preservation/cleanup.
+The bound child includes admission, imports, fixture, publication, cleanup and exit. No retry.
 
 Runtime output: `temp/directions/metric_ground_transport_allocation/exp/conditional_pooling_implementation_20260911_8211/`.
 Creator scratch: this checkout's `temp/directions/metric_ground_transport_allocation/test/cond_pooling_20260911_8211/`;
@@ -148,3 +149,9 @@ item supplies asynchronous visibility, not another permission gate. Primary-cont
 unapplied owner reviews returned`[]` at preparation; relevant current audit owner cells
 were empty. Technical acceptance/intake, including the actual review and fixture
 receipt, follows in the existing result record. Stop there and return to Root.
+
+Pre-execution source publication is`4be7f07a3f9dab19b21e5f70705e605fdbd1feec`.
+The exact [command](conditional_pooling_implementation_20260911/COMMAND.ps1) binds
+that unchanged source surface; [independent review](conditional_pooling_implementation_20260911/INDEPENDENT_REVIEW.md)
+found no unresolved material defect after two failure-preservation corrections.
+Code/command syntax checks parsed source only. No fixture has yet run at this boundary.
