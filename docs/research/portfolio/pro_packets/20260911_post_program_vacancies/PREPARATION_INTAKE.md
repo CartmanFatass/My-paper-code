@@ -247,3 +247,51 @@ A/B/C/D options remain unchanged and its planned trace points here. Both owner
 review queries (own checkout and current primary checkout) returned[] at this
 boundary. No valid-result brief is created for this zero-exposure preparation;
 the actual result's Chinese brief belongs to the original FOLR DM.
+
+The complete current original-DM FOLR intake was then read read-only in its shared
+authoring checkout, including complete arrays/checkpoint checks, one-pair estimator,
+prediction miss, event-opportunity counts, full native clocks and qualified support.
+At that read it was not yet committed; no uncommitted source is exposed as a fixed
+Pro reference. This author awaits its publication while completing independent
+packet work, and preserves Root's already explicit acceptance as earlier provenance.
+The old E0 file at that time was still launch-only, so it is not described as the
+final scientific result. The final intake/summary binding is recorded below when
+published. No rerun, extra reducer or copy of another DM's source was performed.
+
+## Final fixed FOLR evidence and actual five-vacancy boundary
+
+The original DM published8da607b4b7fb415b4212e0e20d74f9dc9c20a32e; Root integrated
+and pushedbc78a6bf86854f9b3cbdc47880053337bcb72277. Read all294 lines/19895 bytes
+of the intake and all142 lines/8559 bytes of E0, the newly accepted DIRECTION
+section, and the complete parsed83806-byte machine summary's decision-relevant
+primary, pair counts, scientific intake, prediction, cost and cleanup fields.
+Earlier reads and parent reports are now supplemented by immutable source;
+no uncommitted snapshot was copied or presented as published evidence.
+
+The scientific result and first-pair limit match the proposed P question. Both
+conditional episode SDs, actual gate displacement/opportunities and .99-initial/
+capacity/co-adaptation alternatives are preserved. The DM's low-confidence
+WITHIN_MEI forecast missed; owner prediction was not taken. All20 preserved files
+and both source refs are accounted for in the original records. Remote checkout
+and supervisor roots are absent/unregistered; only the original DM's two redundant
+local directories remain after automatic approval review rejected deletion before
+process creation. No bypass, scientific limitation or new cleanup ownership follows.
+Root explicitly confirms all five old allocations are at terminal boundaries:
+current advancing count0, five vacancies, conditional VNFC900 still queued/unready.
+This supersedes the dated four-plus-FOLR-intake stage without erasing that history.
+
+Published invoked support72.7315400 seconds and native1703.12 total1775.8515400.
+The original DM separately reported its subsequent publication command5.3739167s;
+Decimal addition gives later known support78.1054567 and total1781.2254567 seconds.
+The latter increment is attributed to that receipt, not retroactively to the fixed
+source. Complete support remains unknown. Native study elapsedabout931s, CPU
+user+system1706.13s, whole-chain and sampled RSS remain different windows. No cost
+window is pooled with sibling results, and no extra result analysis was run here.
+
+The factual update changes no A/B/C/D or P/Q/R recommendation. Original owner005
+uses option keys a/b/c/d; new006 uses P/Q/R as supplied. Both auto_applied fields
+remain null. Two short mechanical checks first assumed the wrong key case; reading
+the actual records resolved that check-only mismatch. No source or scientific
+execution resulted. Original first-render bytes are preserved in ORIGINAL_BYTES.zip
+because Git normalizes textual HANDOFF CRLF; the ZIP entries match the original
+digests. The final fresh delivery has not been rendered or bound yet.

@@ -28,24 +28,6 @@
     "parameter_displacement": "not applicable: no learner"
   },
   "exposure_line": "POST_PROGRAM_VACANCIES_PREPARATION: scientific_invocations=0; policy_models=0; encoder_modules=0; checkpoint_loads=0; environments=0; native_steps=0; synthetic_environment_steps=0; training_episodes=0; optimizer_steps=0; evaluation_episodes=0; replay=0; profiling=0; source_tests=0; numerical_fixtures=0; support_search=0; raw_result_reanalysis=0; source_implementation_edits=0; provider_sends=0; parameter_displacement=not applicable: no learner",
-  "count_snapshots": {
-    "target_advancing_directions": 5,
-    "scoped_ACTIVE_directions": 15,
-    "live_FOLR_directions": 1,
-    "MGTAP_ACVC_current_intake_chains_at_root_report": 2,
-    "FSD_ended": 1,
-    "VNFC_unready_queued_not_advancing": 1,
-    "vacancies_after_current_MGTAP_ACVC_closeout": 4,
-    "actual_NEW_author_scientific_units": 0,
-    "current_MGTAP_ACVC_advancing_chains_after_closeout": 0,
-    "current_live_FOLR_directions": 0,
-    "current_vacancies_after_closeout": 4,
-    "current_advancing_FOLR_intake_chains": 1,
-    "vacancy_horizon_after_FOLR_intake": 5,
-    "FOLR_primary_accepted_before_TASK_publication": true,
-    "next_task_horizon_after_current_FOLR_closeout": 5,
-    "actual_author_new_allocations": 0
-  },
   "actual_new_results": {
     "MGTAP8213": {
       "independent_training_units": 1,
@@ -93,7 +75,7 @@
       "same_fit_policy_initialization_gain": "unmeasured; no initial-policy panel"
     },
     "FOLR7809": {
-      "provenance": "Root forwarded original-DM scientific acceptance2026-09-11T22:08:53.672988Z; immutable full intake/E0 pin pending",
+      "provenance": "Complete294-line intake/142-line E0 directly read at8da607b4b7fb415b4212e0e20d74f9dc9c20a32e; integratedbc78a6bf86854f9b3cbdc47880053337bcb72277",
       "status": "VALID COMPLETE LEARNED_EVENT_ABOVE_MEI",
       "independent_training_units": 1,
       "RETAIN_mean": -0.160078125,
@@ -110,7 +92,34 @@
         "sum": 1703.12
       },
       "full_support_complete_caps_certified": false,
-      "new_successor_selected": false
+      "new_successor_selected": false,
+      "conditional_episode_SD": {
+        "RETAIN": 6.842348275,
+        "LEARNED_EVENT": 6.588527623
+      },
+      "native_caps_pass": true,
+      "known_support_seconds_published": 72.73154,
+      "known_native_plus_support_seconds_published": 1775.85154,
+      "later_publication_seconds_DM_report": 5.3739167,
+      "known_support_seconds_after_DM_report": 78.1054567,
+      "known_native_plus_support_seconds_after_DM_report": 1781.2254567,
+      "later_increment_provenance": "Original DM native message after publication; not inside fixed original snapshot",
+      "native_study_elapsed_seconds_approx": 931,
+      "CPU_user_plus_system_seconds": 1706.13,
+      "whole_chain_RSS_KiB": {
+        "RETAIN": 669112,
+        "LEARNED_EVENT": 671092
+      },
+      "eligible_gate_opportunities": {
+        "training": 45865,
+        "final": 1317
+      },
+      "gate_value_distribution_measured": false,
+      "DM_prediction": "WITHIN_MEI low confidence: miss",
+      "owner_prediction": "not taken",
+      "remote_disk_and_registration_absent": true,
+      "local_redundant_directories_retained": 2,
+      "local_cleanup_blocker": "automatic approval review blocked by policy before process creation; original DM owns same paths; no bypass"
     }
   },
   "shared_terminal_observation_seconds": {
@@ -279,21 +288,20 @@
     "conditional_queued_VNFC_complete": 900,
     "VNFC_native": 600,
     "VNFC_support": 300,
-    "additional_VNFC_repair_allowance": 0,
-    "original_FOLR_through_current_closeout": 3900
+    "additional_VNFC_repair_allowance": 0
   },
   "unselected_ended_caps_are_not_available_balances": [
     "FSD770903",
     "MGTAP8213",
     "ACVC8961",
-    "FOLR7809 at current allocation closeout"
+    "FOLR7809"
   ],
   "cost_limitations": [
     "Caps are willingness-to-spend ceilings, not forecasts or transferable pool",
     "Pro/authoring calendar and unknown full support/CPU are not measured as zero",
     "Question-only units release no illustrative future fit or causal audit"
   ],
-  "current_integrated_snapshot_sha": "d4f4baba7dc4c9a8d05c18f07a9eddf3cbbd85a6",
+  "current_integrated_snapshot_sha": "bc78a6bf86854f9b3cbdc47880053337bcb72277",
   "new_ACVC_main_integration_sha": "7c2873dd31529ee24b3a2ca9615ae1fa08c3f51b",
   "closeout_snapshot": {
     "read_utc": "2026-09-11T22:01:38.476844+00:00",
@@ -340,7 +348,7 @@
     "R": "explicit vacancy; no new work",
     "author_selected": null
   },
-  "updated_utc": "2026-09-11T22:15:54.363008+00:00",
+  "updated_utc": "2026-09-11T22:27:02.263702+00:00",
   "fifth_option_new_caps_seconds": {
     "P": 3900,
     "Q": 0,
@@ -377,5 +385,36 @@
     "complete_caps_sum": 8100,
     "model_constructions_total": null,
     "no_cross_host_performance_aggregate": true
-  }
+  },
+  "earlier_count_snapshots_before_final_FOLR_closeout": {
+    "target_advancing_directions": 5,
+    "scoped_ACTIVE_directions": 15,
+    "live_FOLR_directions": 1,
+    "MGTAP_ACVC_current_intake_chains_at_root_report": 2,
+    "FSD_ended": 1,
+    "VNFC_unready_queued_not_advancing": 1,
+    "vacancies_after_current_MGTAP_ACVC_closeout": 4,
+    "actual_NEW_author_scientific_units": 0,
+    "current_MGTAP_ACVC_advancing_chains_after_closeout": 0,
+    "current_live_FOLR_directions": 0,
+    "current_vacancies_after_closeout": 4,
+    "current_advancing_FOLR_intake_chains": 1,
+    "vacancy_horizon_after_FOLR_intake": 5,
+    "FOLR_primary_accepted_before_TASK_publication": true,
+    "next_task_horizon_after_current_FOLR_closeout": 5,
+    "actual_author_new_allocations": 0
+  },
+  "count_snapshots": {
+    "as_of_main": "bc78a6bf86854f9b3cbdc47880053337bcb72277",
+    "target_advancing_directions": 5,
+    "scoped_ACTIVE_directions": 15,
+    "current_advancing_direction_chains": 0,
+    "current_vacancies": 5,
+    "prior_allocations_at_terminal_boundaries": 5,
+    "VNFC_conditional_queued_unready_not_advancing": 1,
+    "actual_author_new_allocations": 0,
+    "proposed_A_plus_P_next_direction_tasks_if_selected_and_ready": 5
+  },
+  "new_FOLR_intake_sha": "8da607b4b7fb415b4212e0e20d74f9dc9c20a32e",
+  "closed_FOLR_original_complete_cap_seconds": 3900
 }
