@@ -1,4 +1,4 @@
-"""One FOLR-PUBLIC-LIFECYCLE-TIMING-B02 arm; external timeout covers startup too."""
+"""One card-bound FOLR public-lifecycle arm; external timeout covers startup too."""
 import time
 START = time.monotonic()
 import argparse
@@ -20,7 +20,7 @@ def publish(out, summary):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--arm', required=True, choices=['RETAIN', 'EVENT', 'RANDOM', 'HALF_EVENT'])
+    parser.add_argument('--arm', required=True, choices=['RETAIN', 'EVENT', 'RANDOM', 'HALF_EVENT', 'LEARNED_EVENT'])
     parser.add_argument('--seed', type=int, default=7805)
     parser.add_argument('--evaluation-seed', type=int, default=107805)
     parser.add_argument('--launch-sha', required=True)

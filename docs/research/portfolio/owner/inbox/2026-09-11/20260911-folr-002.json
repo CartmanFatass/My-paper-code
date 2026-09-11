@@ -1,0 +1,74 @@
+{
+  "id": "20260911-folr-002",
+  "created": "2026-09-11T14:18:48-07:00",
+  "direction": "vap_folr_core",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "FOLR 学到的事件保留门首次B",
+  "context": "已开放的129参数保留门，与相同信息的普通GRU保留比较。Portfolio新分配一次真实学习对，保持原生奖励和车辆身份。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "按本卡执行一次已选比较并完整收取结果。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "在下一干净边界落实实际停止指示，保留已发生暴露。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "仅按实际新指示修订，保留已经绑定的历史和预算。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "以一次有限真实学习比较直接回答未测的门结构价值。",
+  "evidence": [
+    "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_B01_SCIENCE_CARD_20260911.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-11.md#L76",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "按已选预算执行一次学到的保留门与普通保留比较，是否需要异步干预本卡？",
+    "changes_if_approved": [
+      {
+        "target": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_B01_SCIENCE_CARD_20260911.md",
+        "from": "方向内已开放，尚未实现或测量",
+        "to": "新种子7809，两个各5000训练加128终评的真实学习分支，绝对差1为实用尺度"
+      }
+    ],
+    "if_refused": "在下一干净边界执行实际指示，保留已经发生的暴露；不自动更换机制或重跑。",
+    "evidence_for": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260911_open_directions_program/archive/RESPONSE.md",
+        "quote": "I select the first real B rather than preparation alone.",
+        "why": "Portfolio已明确分配本次实现与比较预算。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_CANDIDATE_20260911.md",
+        "quote": "Generic RETAIN already receives public event and own-birth information",
+        "why": "原GRU有相同信息和适应能力，新门可能多余或有害；旧固定半保留的两次结果相反。"
+      }
+    ],
+    "uncertainty": [
+      "新门的训练后收益、耗时和内存尚未测量。",
+      "一次训练对不能支持稳定优势，也不隔离纯粹的记忆机制。"
+    ],
+    "cost": {
+      "compute": "新上限每臂1800秒、原生合计3600秒、全部额外调用支持300秒、完整3900秒；不可跨项借用。",
+      "owner_time": "无需等待回复",
+      "reversibility": "costly",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "执行已开放的129参数学到的保留门首次B；完成本对或准确的有界失败后结束，不追加种子、阈值、初始化、端点或重试。",
+    "source": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_B01_SCIENCE_CARD_20260911.md"
+  },
+  "starred": false
+}
