@@ -128,3 +128,58 @@ Preserve these uncertain effects, without asserting cleanup or forcing removal.
 Root owns coordination of their exact-path/process reconciliation at a separately
 authorized infrastructure recovery event; this allocation performs no further
 remote operations. No unique scientific evidence is known to exist there.
+
+## 6. Separately assigned remote-effect recovery
+
+Root subsequently assigned bounded technical recovery of this preparation only,
+with no experiment allowance, preparation retry or launch. The
+[recovery evidence](ACVC_FRESH_DENSE_REUSE_B01_8941_RECOVERY_20260910.json) preserves
+both exact remote inspections, process identities/signals and the final offline
+object check. These later facts resolve parts of §5's historical uncertainty:
+
+- Local preparation PID40204 is absent. No original preparation command bearing
+  this source SHA/path remained in either scoped process snapshot.
+- The exact target resolves to
+  `/home/wu/hmasd-worktrees/acvc-fresh-dense-b01-8941-cafef130c`, directly under the
+  intended `/home/wu/hmasd-worktrees` root. It is not a symlink, does not exist on
+  disk and is absent from the successful Git worktree listing. No directory or
+  registration removal was needed. There is no checkout-local unique source,
+  scientific output, live process or delivery dependency to preserve at that absent
+  location; published local/origin source and all evidence remain intact.
+- With lazy fetching disabled and transport forbidden for this read,
+  `cat-file -e cafef130c9d4d89febda8fd788ad9458b6985aca^{commit}` returned128 and
+  `Not a valid object name`. The source commit is not available locally in the
+  remote object database; this check did not fetch or stage it.
+- The earlier nominal read-only reconciliation had left exact orphaned shell
+  PID3333752 and `cat-file` child3333754. Its observed descendants3333927/3333928/
+  3333929 were a promisor lazy-fetch/HTTPS chain. Thus `cat-file` was not free of
+  remote effects in this partial clone. Matching parent relations and recorded
+  start ticks were verified before SIGTERM; all five recorded identities were
+  absent afterward. No unrelated process was signaled.
+
+A separate lazy-fetch tree3334180→3334181→3334182, all start_ticks56189684,
+remained at the05:25:55Z specific read. Its timing and commands suggest the first
+4s-bounded recovery `cat-file` query created it, but the original parent was
+already absent and no ACVC SHA/path or retained parent identity survived. That
+attribution is an inference. It was initially left untouched under the instruction
+to stop only exact matching preparation processes, and its identities were returned
+to Root. The final bounded read at05:28:50Z found all three PIDs already absent,
+before any signal. Their exact origin remains unproved; their termination is
+directly observed. All recorded preparation/reconciliation/helper identities are
+now absent, with no remaining named cleanup dependency.
+
+The four new remote client durations sum to6.5347410s, with local record/Git
+overhead separate. This is the separately assigned technical recovery and does
+not reset or retroactively repair the earlier support-cap breach. No explicit
+preparation retry or scientific invocation occurred. The unintended lazy-fetch
+effect of the earlier object query is reported rather than relabelled as purely
+read-only. Future object-presence queries on this node must avoid that hydration
+effect; no shared configuration, source change or new launch is made here.
+
+**Recovery decision — object tier.** Options: (a) stop the identity-verified
+abandoned tree, retain the absent-path/offline-object facts and reconcile the
+initially unattributed residual's eventual absence; (b) kill every Git/HTTPS helper by command similarity;
+(c) recreate or fetch the absent source. Recommend/select **(a)**.
+**Owner-delegated decision (unattended, 2026-09-03 instruction): (a)** under Root's
+explicit recovery assignment. Scientific evidence, predictions and Portfolio
+sequencing remain as in §§3–4; Root retains integration and reclamation acceptance.

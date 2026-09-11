@@ -118,3 +118,23 @@ cap rule, counts, uncertainty, decisions and preservation inventory. No result
 polarity, cost transfer, retry, local fallback or additional scientific allowance
 follows. The shared authoring checkout remains; the remote path is retained as
 an uncertain effect pending Root's separately authorized recovery coordination.
+
+## Separate recovery return
+
+Root's subsequent bounded technical recovery resolved the exact checkout as
+absent on disk and unregistered, and sourcecafef130c as unavailable in the remote
+object store with lazy fetching disabled. Local PID40204 was absent. The exact
+abandoned reconciliation tree3333752/3333754 and its observed promisor-fetch
+descendants3333927/3333928/3333929 were identity-checked, terminated and verified
+absent. No checkout deletion was needed and no scientific work ran.
+
+The [recovery evidence](ACVC_FRESH_DENSE_REUSE_B01_8941_RECOVERY_20260910.json) and
+[intake §6](ACVC_FRESH_DENSE_REUSE_B01_8941_INTAKE_20260910.md#6-separately-assigned-remote-effect-recovery)
+retain a further3334180/3334181/3334182 helper tree whose timing suggests this
+recovery's first object read but whose original parent identity was unavailable.
+It was not signaled and was subsequently absent at05:28:50Z. All recorded process
+remnants and the exact checkout/registration are now absent; no named cleanup
+dependency remains. The initial attribution limit is preserved. The earlier nominal
+read-only Git query demonstrably triggered lazy fetching. The final presence
+query disabled that effect. This separate recovery grants no fit or preparation
+retry and does not retroactively erase the102.1040615s support breach.
