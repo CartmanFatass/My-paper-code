@@ -71,3 +71,9 @@ Direct MONITOR_ADD to the live-primary app succeeded; actual adoption is pending
 [Launch receipt](LAUNCH_RECEIPT.json) records exact source/binding and dispatch.
 DM has stopped routine polling; Root forwards adoption and the terminal fact for
 this DM's collection/intake. No final scientific observation has been read here.
+
+Root subsequently routed actual MONITOR_ADOPTED: exact source/cwd/output matched,
+supervisor running and admission passed (15.63GB reported versus4GB floor).
+The adoption observation enclosing command wall is0.7s; prior/shared Monitor timing
+remains unknown. This confirms observation handover. DM returns pending collection
+and resumes on Root's terminal notice; no duplicate polling or launch is made.
