@@ -655,3 +655,35 @@ discriminator is one fresh final1000 comparison of the same prior against its ow
 initialization and nearest, asking longer-budget performance rather than budget
 causality. No successor, new seed/card, family/lifecycle/priority change or C claim
 is selected here. References: B04 card, E0, retained-data analysis and full intake.
+
+## Fresh nearest-prior1000: reference deficit persists — 2026-09-11
+
+The separately allocated B05/master25 is VALID_COMPLETE_B_EXPLORE under
+RCLE_B05_NEAREST_PRIOR1000_RESULT_INTAKE_20260911.md. Final1000 primary U.3379089355
+remains above attained nearest.2838907878; Delta_ref−.0540181478, conditional
+SE.0041478589. All8 final U means lose to nearest. Initialization gain+.0013387044
+has conditional95% interval[−.0021551607,+.0048325696] and opposite active-path signs.
+This one fit did not establish competent-reference service superiority.
+
+Strongest direct support:4/8 initialization U gains, active8→12 gain+.0057779948
+and all-cell native Y gain+.0018723806. Strongest contradiction: all8 reference U
+losses, active12→8 initialization U loss.0031005859, F worsening in6/8 cells versus
+both initialization and nearest, and2036/2048 final tau40 outcomes. All-cell F and
+failure-coded tau worsen from initialization despite small favorable primary means.
+No scalar tradeoff, general recovery or unqualified nonharm follows.
+
+The recorded1000 nonzero updates moved26,161 FP64 parameters by.8522123003 from
+fresh norm21.0707719761, along total normalized path20. Those exposure facts do
+not diagnose why service changes are small. Initial action-law exploration,
+finite learnability, normalized update allocation and partner co-adaptation remain
+surviving explanations. This fresh root and B04/master24 have different endpoints;
+their observations retain separate meaning and do not isolate training-budget
+causality or constitute matched1000 replication. Tuned headroom remains absent.
+
+This allocation ends at intake and preserved closeout. If further investment is
+selected, a possible discriminator is a specifically changed initial action law
+tested against its own initialization and the same attained nearest, with all
+F/recovery consequences. A lower exploratory mass is an unallocated option, not
+an established cause or selected successor. No new probability, seed, card, budget,
+family/lifecycle/priority disposition or C claim is created. References: B05 card,
+E0, compact summaries, retained-data analysis and full intake.

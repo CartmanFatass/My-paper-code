@@ -86,8 +86,58 @@ notified promptly with the exact handle/source/cwd/output and original collectio
 owner. DM does not poll routinely and returns pending collection. Source, command,
 handle and state are recoverable here; terminal facts resume this same owner.
 
-Support through dispatch is29.7720462s, including the explicit3s initial-read
+Support through dispatch is29.7720s (rounded), including the explicit3s initial-read
 allowance and1s Monitor dispatch allowance. This publication and later observation,
 collection/reduction/intake/preservation/cleanup/Root integration are added on
 receipt within140s. Native measured wall is still unknown; no saving or assumed
 completion is recorded.
+
+## Terminal technical acceptance and scientific intake
+
+The pending historical handover above is superseded. Root forwarded actual Monitor
+adoption at PID3341809/exact source/cwd/tmux active, then finished/exit0/tmux inactive.
+Direct collection verified the supervisor and both COMPLETE native summaries.
+The [E0](RCLE_B05_NEAREST_PRIOR1000_RESULT_EVIDENCE_20260911.md) and
+[intake](RCLE_B05_NEAREST_PRIOR1000_RESULT_INTAKE_20260911.md) accept one valid B
+result:1000 nonzero updates,70144 episodes, primary Delta_ref−.0540181477865 and
+small G_U+.0013387044271 with its conditional interval spanning zero. All8 U
+reference losses and6/8 F harms against both initial/reference are preserved.
+No successor is selected. Prediction signs match; owner prediction was not taken.
+
+Each of the three endpoint roles has exactly2048 index-unique rows across8 cells;
+1000 JSONL blocks agree with curves. Weights-only loads verify26,161 finite FP64
+values and actual displacement.8522123003 from fresh norm21.0707719761. Intake
+constructed no models/RNG and ran no new backward/environment/rollout. The existing
+scientific-tools summarizer receives one independent final-U row,n1 with unavailable
+between-fit SD/SE. All six card rows and the367-character six-heading Chinese brief
+passed publication readback; the figure's overlapping legend was moved and viewed.
+
+Native complete wall447.63s consists of444.45 learned and3.18 reference, within
+600/10. Both adjacent memory admissions pass4GiB physical/effective. PeakRSS580920KiB.
+Internal summary timers426.3435/2.8618s are not complete invocation costs; all later
+publication/exit remains in the external times. Root's447s supervisor duration is
+a coarser observation of the same chain, not an additional charge.
+
+Verified terminal archive807465B/SHA256
+356a1c2aabca9badfdda30a2268aebc3c63cc5d4abd81fdfb09d019abf566e42 and source bundle
+2143640B/SHA256d3734822bae9ce945df6c666ed1d322689c04ee987b1368ae758621e0812e671
+remain local. The first extraction failed on a deeply nested Windows filename;
+same-byte extraction into shorter raw/learned, raw/reference and raw/supervisor
+paths completed. Any partial duplicate extraction is unused inside the retained
+collection root. This was an operational repair with no new scientific exposure.
+
+Known support charges through pre-result-publication are47.0384929s; with447.63
+native, known charged components are494.6684929s. Those charges include explicit
+conservative allowances and are not exactly measured whole-study elapsed. The
+Monitor preserved only terminal query.825s; earlier initial/intermediate observation
+wall is unknown. Mark `resources_unmeasured`: no total-support/complete-cap pass or
+overrun is inferred. Root integration and remaining publication/cleanup charges
+are added when supplied. [SUPPORT_SNAPSHOT.json](b05_nearest_prior1000_20260911/SUPPORT_SNAPSHOT.json)
+retains components and the unknowns; missing observations are never charged as zero.
+
+[CLEANUP_INVENTORY.json](b05_nearest_prior1000_20260911/CLEANUP_INVENTORY.json)
+records the completed clean48,445,788B exact-source checkout and2,951,105B staging
+directory containing only source.bundle and terminal.tar.gz. All unique scientific
+source/evidence is preserved before reclamation; Root integrates and accepts
+retention/reclamation. Shared authoring checkout and local evidence remain.
+The B05 test fixture's policy-rejected cleanup exception remains creator-owned.

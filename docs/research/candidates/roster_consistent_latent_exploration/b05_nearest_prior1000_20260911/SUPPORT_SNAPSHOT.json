@@ -1,0 +1,191 @@
+{
+  "source_sha": "3ffa65cb4e1a67182b90dce3822d0018ac623c72",
+  "valid_results": 1,
+  "native_chain_s": 447.63,
+  "native_arms_s": {
+    "learned": 444.45,
+    "reference": 3.18
+  },
+  "support_components": [
+    {
+      "name": "initial assignment/status/card reads",
+      "charged_s": 3,
+      "kind": "conservative command-wall allowance"
+    },
+    {
+      "name": "input fast-forward/push and skill reads",
+      "measured_s": 4.4970322,
+      "charged_s": 4.4970322
+    },
+    {
+      "name": "focused instructions/config/source read",
+      "charged_s": 0.0000047
+    },
+    {
+      "name": "focused instructions/config/source read",
+      "charged_s": 0.2298883
+    },
+    {
+      "name": "focused instructions/config/source read",
+      "charged_s": 0.1672678
+    },
+    {
+      "name": "scope/evidence/testing focused reads",
+      "charged_s": 0.2071085
+    },
+    {
+      "name": "live configuration/reviews/owner route read",
+      "charged_s": 0.3724381
+    },
+    {
+      "name": "binding/exposure/current science read",
+      "charged_s": 0.2415526
+    },
+    {
+      "name": "learner/reading/identity/Monitor route",
+      "charged_s": 1.0840579
+    },
+    {
+      "name": "identity and analysis assumptions",
+      "charged_s": 0.2357005
+    },
+    {
+      "name": "configuration exposure calculation",
+      "charged_s": 0.2236061
+    },
+    {
+      "name": "one changed-binding supplied-tensor/stub check",
+      "charged_s": 3.1091643
+    },
+    {
+      "name": "independent changed-contract review",
+      "charged_s": 1.1534143
+    },
+    {
+      "name": "owner item/reviews, scratch inventory and diff readback",
+      "charged_s": 0.4997325
+    },
+    {
+      "name": "owner item/reviews, scratch inventory and diff readback",
+      "charged_s": 0.3154755
+    },
+    {
+      "name": "card/source/owner audit publication",
+      "charged_s": 5.0743308
+    },
+    {
+      "name": "source bundle and exact detached remote checkout/shell syntax",
+      "charged_s": 2.8261416
+    },
+    {
+      "name": "exact command publication",
+      "charged_s": 4.70613
+    },
+    {
+      "name": "single detached launch submission",
+      "charged_s": 0.5118815
+    },
+    {
+      "name": "live Monitor and owner read at dispatch",
+      "charged_s": 0.317019
+    },
+    {
+      "name": "Monitor dispatch",
+      "charged_s": 1,
+      "kind": "conservative"
+    },
+    {
+      "name": "accepted launch/Monitor receipt publication",
+      "charged_s": 4.3584034
+    },
+    {
+      "name": "Monitor recorded-cost request",
+      "charged_s": 1,
+      "kind": "conservative"
+    },
+    {
+      "name": "collection checkout and owner read",
+      "charged_s": 0.4228145
+    },
+    {
+      "name": "collection checkout and owner read",
+      "charged_s": 0.5010979
+    },
+    {
+      "name": "terminal archive preservation/transfer/extraction",
+      "charged_s": 1.9584834
+    },
+    {
+      "name": "Monitor terminal query",
+      "charged_s": 0.825,
+      "earlier_observation_wall": "unknown; retained Monitor history has no earlier values"
+    },
+    {
+      "name": "same-byte shorter extraction and terminal readback",
+      "charged_s": 0.3394561
+    },
+    {
+      "name": "retained summary/count/domain initial intake read",
+      "charged_s": 0.2856255
+    },
+    {
+      "name": "reuse retained analysis and E0 format lookup",
+      "charged_s": 0.2630097
+    },
+    {
+      "name": "retained-data analysis and one-training-unit summarizer",
+      "charged_s": 2.1642658
+    },
+    {
+      "name": "retained-data result figure",
+      "charged_s": 1.4324237
+    },
+    {
+      "name": "figure visual readback",
+      "charged_s": 1,
+      "kind": "conservative"
+    },
+    {
+      "name": "figure layout correction after visual readback",
+      "charged_s": 0.8358969
+    },
+    {
+      "name": "corrected figure visual readback",
+      "charged_s": 1,
+      "kind": "conservative"
+    },
+    {
+      "name": "E0 table generation/card-row and brief readback",
+      "charged_s": 0.2727358
+    },
+    {
+      "name": "completed remote cleanup inventory",
+      "charged_s": 0.607334
+    }
+  ],
+  "known_charged_support_s": 47.03849290000001,
+  "known_measured_support_s": 40.03849290000001,
+  "known_charged_complete_components_s": 494.6684929,
+  "unknown_support_components": [
+    {
+      "name": "Monitor initial/intermediate observation-command wall",
+      "seconds": null,
+      "source": "Root forwarded Monitor retained-history limitation; known terminal0.825s already included"
+    },
+    {
+      "name": "Root scoped integration/acceptance wall",
+      "seconds": null,
+      "status": "not yet supplied"
+    }
+  ],
+  "pending_work": "This result publication and scoped closeout are not yet included; final record follows receipts.",
+  "resource_flag": "resources_unmeasured",
+  "caps_s": {
+    "learned": 600,
+    "reference": 10,
+    "support": 140,
+    "complete": 750
+  },
+  "cap_reading": "Native arm caps pass. Full support/complete conformance is unmeasured; missing components are not zero and are not inferred overruns.",
+  "units": "sum of scoped invoked work charges, not whole-study elapsed or aggregate CPU"
+}
