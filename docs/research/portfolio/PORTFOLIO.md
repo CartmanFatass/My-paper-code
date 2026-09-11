@@ -8,20 +8,38 @@ than the completed fixed-vacancy decision below. A designated Portfolio DM is pr
 cross-direction packet that separates scientific selection and budget from engineering readiness,
 and requires a named repair owner and exit condition for each technical blocker.
 
-Three direction-local technical repair chains are actually dispatched and advancing:
+Three direction-local technical repair chains were dispatched. ACVC and FSD completed their
+repairs; VNFC completed its bounded investigation without an attributable fix:
 
 | Direction | Non-scientific repair | Scientific boundary preserved |
 | --- | --- | --- |
-| ACVC | Repair CRLF/SSH-stdin remote preparation and prove byte-stable LF staging/readback. | The ended8951 allocation is not retried; no fit, model or numerical exposure. |
-| VNFC | Diagnose and minimally repair the attributable exit139/core-dump path from preserved B02 evidence. | The incomplete B02 primary remains unscored; no rerun, new seed or successor. |
-| FSD | Repair deterministic remote staging/readback and bound the prospective support path. | The ended770803/780803 allocation and 300-second support cap are not reused or bypassed. |
+| ACVC | **Complete through `88f9e87d5`:** repaired CRLF/SSH-stdin preparation and proved byte-stable LF staging/readback for all 975 bytes. | The ended8951 allocation was not retried; no fit, model or numerical exposure. |
+| VNFC | **Closed through `f68fcb952` as NOT READY:** saved evidence narrows the failure to changed padding in a 32-byte CPython call-argument block during `Fraction` construction, but does not identify the writer; production source remains unchanged. | The incomplete B02 primary remains unscored; no rerun, new seed or successor. |
+| FSD | **Complete through `20258e5ef`:** deterministic binary staging/readback matched all nine paths, including lazy blob fetches in the configured network context; owned technical checkout removed. | The ended770803/780803 allocation and 300-second support cap were not reused or bypassed. |
 
 These repairs may use bounded static, transport and synthetic checks that do not construct the
 scientific workload. Any future result-bearing invocation still needs its own scientific selection,
 frozen card, exact source, fresh destination admission and Monitor adoption. Missing cost telemetry
 and policy-blocked duplicate cleanup remain qualified evidence/retention facts rather than scientific
-stops. The current advancing-direction count is three; Portfolio authoring is cross-direction work
-and is not counted as another chain.
+stops. At that boundary the advancing-direction count was zero; Portfolio authoring and Transport
+are cross-direction work and are not counted as direction chains.
+
+After the fixed Portfolio request was queued, Root resumed the original CBSC and FRRIE DMs for
+independent zero-exposure technical readiness work. CBSC is reconciling the exact P47/retained52
+observation path; FRRIE is reconciling the P59/P63 factory-observation path. These are two advancing
+direction-local engineering chains. Neither assignment selects, launches or funds the scientific
+object, and each must return an attributable repair or a concrete executable exit condition.
+
+CBSC's source-only observation is accepted through `929f95c37`: all six saved edits reconstruct the
+published retained52 source and AST exactly. No attributable transport defect can be repaired because
+the old rejection lacks a tool, payload and full event record. Retained52 remains unrun and
+unallocated. FRRIE's source-only method is accepted through `77028e93b`: it maps all nine P59
+frames across six files without importing workload modules, but no production fault is attributable
+from the retained evidence. P63 remains unrun and unallocated. No direction-local technical chain
+is now advancing. The owner separately directed
+Transport to resolve and retry failures itself when authoritative state proves no external effect,
+then accept the resulting receipt; uncertain or accepted Sends still require same-request
+reconciliation before any retry.
 
 ## Current zero-addition Portfolio boundary — 2026-09-11
 
