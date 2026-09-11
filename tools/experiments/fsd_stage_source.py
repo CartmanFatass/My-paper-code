@@ -13,7 +13,7 @@ from pathlib import Path
 
 
 REMOTE = r'''
-import json, pathlib, shlex, subprocess, time
+import json, pathlib, subprocess, time
 started = time.monotonic()
 def run(argv):
     result = subprocess.run(argv, stdin=subprocess.DEVNULL, capture_output=True,
@@ -27,8 +27,7 @@ try:
     if work.exists():
         raise FileExistsError(str(work))
     print(json.dumps({"boundary": "payload_received", "destination": str(work)}), flush=True)
-    fetch = shlex.join(["git", "-C", str(repo), "fetch", "origin", p["sha"]])
-    run(shlex.split(p["network_shell"]) + [fetch])
+    run(["git", "-C", str(repo), "fetch", "origin", p["sha"]])
     run(["git", "-C", str(repo), "worktree", "add", "--detach", "--no-checkout",
          str(work), p["sha"]])
     git = ["git", "-C", str(work), "-c", "core.autocrlf=false"]
@@ -80,16 +79,17 @@ def main():
     readback += [args.commands_dir + "/" + arm + ".sh" for arm in ("D0", "I")]
     payload = dict(repo=node["repo_root"], worktree_root=node["worktree_root"],
                    destination=args.destination, sha=args.sha,
-                   network_shell=node["network_shell"],
                    sparse=node["sparse_checkout"] + ["configs", args.commands_dir],
                    readback=readback)
     code = ("p = " + repr(payload) + "\n" + REMOTE).replace("\r\n", "\n").encode("utf-8")
+    python_command = "exec " + shlex.join([node["python"], "-u", "-"])
     remote = shlex.join(["/usr/bin/timeout", "--signal=KILL", str(args.seconds - 10) + "s",
-                        node["python"], "-u", "-"])
+                        *shlex.split(node["network_shell"]), python_command])
     command = ["ssh", "-o", "BatchMode=yes", "-o", "ConnectTimeout=8",
                "-o", "ServerAliveInterval=3", "-o", "ServerAliveCountMax=1",
                node["ssh_target"], remote]
     receipt = dict(sha=args.sha, destination=args.destination, command=command,
+                   network_context=node["network_shell"],
                    payload_bytes=len(code), cr_bytes=code.count(b"\r"),
                    requested_outer_limit_seconds=args.seconds,
                    remote_limit_seconds=args.seconds - 10, scientific_submissions=0)

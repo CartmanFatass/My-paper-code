@@ -78,3 +78,32 @@ A single temporary technical checkout
 target. It is not either ended B02 scientific path. No input/admission/result
 directory or supervisor handle is created. Final source, actual command,
 readback, costs and cleanup will be recorded here.
+## Concrete checkout dependency and correction
+
+The first published helper c0cede0ad4ac2276a022b80973d8f5de5a3c0c1a received
+the finite binary payload and reached its35s remote limit. Complete helper wall
+was35.625s, including its receipt/exit; the local transport return was4294967295,
+and the helper returned1. Preserve FETCH_ONLY_CONTEXT_READBACK.json and
+FETCH_ONLY_CONTEXT_COMMAND_RECEIPT.json; this is one source-only failed check,
+not a scientific invocation or a retry of B02.
+
+Direct reconciliation found the new commit present and the technical worktree
+registered at that SHA. Its sparse patterns were set but all requested source
+files were absent. The remote repository has`remote.origin.promisor=true`
+and`remote.origin.partialclonefilter=blob:none`, no LFS filter, and an owned
+zero-byte index.lock. This exposes a concrete dependency: checkout and source
+readback may fetch promised blobs after the explicit commit fetch. The original
+helper supplied the configured network context only to the explicit fetch.
+
+The correction runs the **entire source operation** inside the configured
+network shell, under the existing35s remote timeout. Git checkout and readback
+now inherit that same network environment. No repository/proxy setting or
+scientific source is changed. The new facts support this dependency correction;
+they do not prove the exact cause of every historical silent command.
+
+The failed technical checkout contained only .git. After preserving its
+receipts and published source, the creating DM removed that exact checkout;
+PARTIAL_TECHNICAL_CLEANUP.json verifies disk and registration absence.
+One additional bounded source-only check is selected solely to verify this
+concrete correction at a newly published repair SHA, within the same180s
+technical target. It is not an automatic retry rule or a new scientific budget.

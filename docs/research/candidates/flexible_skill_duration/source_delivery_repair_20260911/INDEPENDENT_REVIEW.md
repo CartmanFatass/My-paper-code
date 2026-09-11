@@ -21,3 +21,14 @@ Final return: **the timing finding is resolved; no material finding remains.**
 Actual staging and cleanup remain to collect. The historical silent-session
 cause is not established by this static review or the new transport diagnosis.
 DM accepts the corrected source, with live transfer/readback evidence pending.
+
+## Partial-clone network-context correction
+
+After the actual bounded failure exposed the promisor/blob:none dependency,
+the reviewer inspected only the correction that encloses the whole remote
+Python operation in configured zsh -lic. No material finding remains:
+quoting keeps exec/Python/stdin as one command; fetch, sparse checkout, checkout
+and git show inherit one network context; remote35s includes shell startup,
+and local40s/outer45s boundaries and binary EOF remain intact.
+Incremental review command wall .3180176s. Actual corrected completion is still
+an execution fact to collect; no historical timeout cause is inferred as proven.
