@@ -1,0 +1,38 @@
+{
+  "archive_sha256": "e8509b9e00c48bb12cf05859b6ab7fc11d8e2a9fca05534bc9054d145c2db259",
+  "members": [
+    "temp/directions/roster_consistent_latent_exploration/exp/b04-nearest-prior-s24-20260910",
+    "temp/directions/roster_consistent_latent_exploration/exp/b04-nearest-prior-s24-20260910/reference",
+    "temp/directions/roster_consistent_latent_exploration/exp/b04-nearest-prior-s24-20260910/reference/summary.json",
+    "temp/directions/roster_consistent_latent_exploration/exp/b04-nearest-prior-s24-20260910/learned",
+    "temp/directions/roster_consistent_latent_exploration/exp/b04-nearest-prior-s24-20260910/learned/summary.json",
+    "temp/directions/roster_consistent_latent_exploration/exp/b04-nearest-prior-s24-20260910/learned/initial_parameters.pt",
+    "temp/directions/roster_consistent_latent_exploration/exp/b04-nearest-prior-s24-20260910/learned/init_scenarios.json",
+    "temp/directions/roster_consistent_latent_exploration/exp/b04-nearest-prior-s24-20260910/learned/parameters.pt",
+    "temp/directions/roster_consistent_latent_exploration/exp/b04-nearest-prior-s24-20260910/learned/completed_blocks.jsonl",
+    "temp/directions/roster_consistent_latent_exploration/exp/b04-nearest-prior-s24-20260910/reference-admission.json",
+    "temp/directions/roster_consistent_latent_exploration/exp/b04-nearest-prior-s24-20260910/chain-time.txt",
+    "temp/directions/roster_consistent_latent_exploration/exp/b04-nearest-prior-s24-20260910/learned-admission.json",
+    "temp/directions/roster_consistent_latent_exploration/exp/b04-nearest-prior-s24-20260910/learned-time.txt",
+    "temp/directions/roster_consistent_latent_exploration/exp/b04-nearest-prior-s24-20260910/reference-time.txt",
+    ".agent-tasks/rcle-b04-nearest-prior-s24-20260910",
+    ".agent-tasks/rcle-b04-nearest-prior-s24-20260910/runner.sh",
+    ".agent-tasks/rcle-b04-nearest-prior-s24-20260910/exit_code",
+    ".agent-tasks/rcle-b04-nearest-prior-s24-20260910/status",
+    ".agent-tasks/rcle-b04-nearest-prior-s24-20260910/start_time",
+    ".agent-tasks/rcle-b04-nearest-prior-s24-20260910/pid",
+    ".agent-tasks/rcle-b04-nearest-prior-s24-20260910/task.log"
+  ],
+  "remote_stdout": "e8509b9e00c48bb12cf05859b6ab7fc11d8e2a9fca05534bc9054d145c2db259  /home/wu/hmasd-inputs/rcle-b04-nearest-prior-s24-20260910/terminal.tar.gz\n{\"task\": \"rcle-b04-nearest-prior-s24-20260910\", \"status\": \"finished\", \"exit_code\": 0, \"pid\": 3333981, \"uptime_seconds\": 215, \"tmux_active\": false}\n",
+  "remote_stderr": "",
+  "scp_stderr": "",
+  "wall_s": 1.4463217000011355,
+  "monitor_root_routed_fact": {
+    "status": "finished",
+    "exit_code": 0,
+    "chain_s": 81.78,
+    "learned_s": 79.21,
+    "reference_s": 2.56,
+    "query_wall_s": 1.021
+  }
+}
