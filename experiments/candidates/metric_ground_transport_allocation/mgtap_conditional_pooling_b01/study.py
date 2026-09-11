@@ -23,7 +23,7 @@ from experiments.candidates.metric_ground_transport_allocation.mgtap_native_grou
 )
 
 
-MASTER = 8212
+MASTER = 8213
 CARD = "docs/research/candidates/metric_ground_transport_allocation/MGTAP_CONDITIONAL_POOLING_B01_SCIENCE_CARD_20260911.md"
 SOURCE_SHA = "4be7f07a3f9dab19b21e5f70705e605fdbd1feec"
 HORIZON, TRAIN_EPISODES, EVAL_EPISODES = 256, 512, 32

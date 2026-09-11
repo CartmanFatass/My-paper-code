@@ -1,0 +1,183 @@
+{
+  "window": "master8213 assignment through accepted Monitor adoption",
+  "known_support_seconds": 41.189610400000014,
+  "entries": [
+    {
+      "phase": "current_assignment_and_state_read",
+      "seconds": 1.2091758,
+      "exit_code": 0
+    },
+    {
+      "phase": "allocation_and_current_tools",
+      "seconds": 0.4507314,
+      "exit_code": 0
+    },
+    {
+      "phase": "current_bound_inputs_0",
+      "seconds": 0.6348428,
+      "exit_code": 0
+    },
+    {
+      "phase": "current_bound_inputs_1",
+      "seconds": 0.3502663,
+      "exit_code": 0
+    },
+    {
+      "phase": "immutable_allocation_and_owned_source",
+      "seconds": 0.3689672,
+      "exit_code": 1
+    },
+    {
+      "phase": "applicable_routes_and_caps_0",
+      "seconds": 0.3356749,
+      "exit_code": 0
+    },
+    {
+      "phase": "applicable_routes_and_caps_1",
+      "seconds": 1.4464327,
+      "exit_code": 0
+    },
+    {
+      "phase": "fresh_identity_and_exact_allocation",
+      "seconds": 0.5403979,
+      "exit_code": 0
+    },
+    {
+      "phase": "reconcile_checkout_or_fresh_handle_0",
+      "seconds": 4.9819037999999995,
+      "exit_code": 0
+    },
+    {
+      "phase": "reconcile_checkout_or_fresh_handle_1",
+      "seconds": 0.7326321,
+      "exit_code": 0
+    },
+    {
+      "phase": "binding_check_scope",
+      "seconds": 0.5210223,
+      "exit_code": 0
+    },
+    {
+      "phase": "minimal_identity_patch",
+      "seconds": null,
+      "exit_code": null
+    },
+    {
+      "phase": "fresh_card_and_command",
+      "seconds": 0.019,
+      "exit_code": null
+    },
+    {
+      "phase": "one_changed_binding_stub_and_static_facts",
+      "seconds": 0.8082398,
+      "exit_code": 0
+    },
+    {
+      "phase": "fresh_selection_audit",
+      "seconds": 0.017,
+      "exit_code": null
+    },
+    {
+      "phase": "owner_card_visibility",
+      "seconds": 0.5162502,
+      "exit_code": 0
+    },
+    {
+      "phase": "owner_ledger_link_correction_route",
+      "seconds": 0.3462206,
+      "exit_code": 0
+    },
+    {
+      "phase": "independent_review_command1",
+      "seconds": 0.3820111,
+      "exit_code": null
+    },
+    {
+      "phase": "independent_review_command2",
+      "seconds": 0.3299369,
+      "exit_code": null
+    },
+    {
+      "phase": "independent_review_command3",
+      "seconds": 0.2447248,
+      "exit_code": null
+    },
+    {
+      "phase": "owner_trace_arguments",
+      "seconds": 0.4078315,
+      "exit_code": 0
+    },
+    {
+      "phase": "review_and_support_publication",
+      "seconds": 0.013,
+      "exit_code": null
+    },
+    {
+      "phase": "source_card_commit_and_immediate_push",
+      "seconds": 5.5366723,
+      "exit_code": 0
+    },
+    {
+      "phase": "published_bundle_and_binary_stage",
+      "seconds": 2.47114,
+      "exit_code": 0
+    },
+    {
+      "phase": "exact_detached_destination_and_published_blob_readback",
+      "seconds": 1.7354902,
+      "exit_code": 0
+    },
+    {
+      "phase": "exact_launch_binding_write",
+      "seconds": 0.018,
+      "exit_code": null
+    },
+    {
+      "phase": "prelaunch_current_owner_and_binding_commit_push",
+      "seconds": 4.9209183,
+      "exit_code": 0
+    },
+    {
+      "phase": "supervisor_launch_dispatch",
+      "seconds": 0.5056258,
+      "exit_code": 0
+    },
+    {
+      "phase": "MONITOR_ADD_delivery",
+      "seconds": 0.615,
+      "exit_code": null
+    },
+    {
+      "phase": "accepted_launch_receipt_write",
+      "seconds": 0.02,
+      "exit_code": null
+    },
+    {
+      "phase": "accepted_launch_receipt_commit_push",
+      "seconds": 10.0104978,
+      "exit_code": null
+    },
+    {
+      "phase": "accepted_launch_receipt_commit_push_continued",
+      "seconds": 0.0000039,
+      "exit_code": 0
+    },
+    {
+      "phase": "Monitor_adoption_observation_Root_receipt",
+      "seconds": 0.7,
+      "exit_code": null
+    }
+  ],
+  "unknown": [
+    "initial short identity-patch wall unitemized",
+    "commit/push session86778 complete wall not returned: partial tool wait10.0104978s is included as a lower bound, not the complete command",
+    "Monitor prior/shared observation timing unknown"
+  ],
+  "native_result": "pending",
+  "caps_seconds": {
+    "native": 900,
+    "support": 300,
+    "complete": 1200
+  },
+  "note": "Later publication/collection/cleanup/integration adds separately. No full support/complete cap certification from this subtotal; no known breach."
+}

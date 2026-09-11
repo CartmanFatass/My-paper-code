@@ -367,3 +367,102 @@ clocks gives183.698311s of documented support, plus approximate3.7s prior Root p
 This is a partial sum, not a claim that the entire support cap passed. The last record
 formatting/restoration command cost0.404504s; final commit/push timing is returned to
 Root separately so accounting does not create an endless publication cycle.
+
+## Portfolio-conditioned technical continuation — 2026-09-11
+
+Portfolio response `6c32ade3216c374ecf2f5179b15d559729cd45c9` §6 funds a future fresh
+pair conditionally. Its technical acceptance rule is: "The existing technical DM must
+demonstrate a supported repair of the affected path, or a credible same-meaning
+alternative whose independence from the corruption is established by relevant focused
+evidence." The existing workaround algebra alone is explicitly insufficient. The new
+900-second scientific allocation is not this repair's diagnostic/support allowance.
+Root first limited the continuation to static mapping, then supplied that mapping and
+assigned assessment of the minimal replacement, focused regression and independent review.
+No scientific execution or Monitor handoff is part of this assignment.
+
+L0: deliver a technically assessed replacement of `models.py::exact_binary64_mean`
+that eliminates the implicated Fraction-constructor argument-vector path, or retain
+the precise unresolved acceptance gap. DM owns that helper, mirrored
+`tests/experiments/candidates/variable_n_fleet_churn_bpcr_r09/test_exact_mean.py` and
+this direction's records in the same `codex/vnfc` checkout. Current main was reconciled
+by merge `388850322` after fast-forward was correctly refused; no history rewrite.
+The independent reviewer owns only its separately coordinated static evidence publication.
+Production adoption remains pending the focused evidence and review below.
+
+Preserve the finite, nonempty two-dimensional binary64 input contract, exact rational
+summation followed by one binary64 division, order independence, output dtype/shape,
+input ownership and `_ExactRosterMean.backward` gradient divided by roster size.
+Both arms keep the same helper; every model, seed, reward, information, checkpoint,
+optimizer, comparator and native rule is unchanged. The implementation uses existing
+integer arithmetic on each float's exact ratio; no new Engineering Scope §4 item.
+
+Acceptance is deliberately bounded: the actual static receipt and its limitation,
+one focused remote pytest command on the committed source, independent high-risk review,
+and exact source staging/readback. Two tiny deterministic regressions check bitwise
+agreement with a Fraction reference over cancellation/rounding/underflow/finite maximum,
+and forbid the former constructor path through the real custom-autograd helper while
+checking output, gradient and unchanged input. They construct tensors/arrays only,
+with no scientific model/environment/optimizer/RNG master, native trajectory, training,
+evaluation or scientific result root. No new debugger or allocator trace is planned.
+The focused command has a 20-second timeout; maintenance work is bounded at120 seconds
+of additional measured support, recorded separately from all scientific allowances.
+Stop at accepted bounded alternative or the concrete remaining conformance gap; no
+scientific pair launches until Root accepts and integrates readiness.
+
+### Static mapping, review and disposition
+
+The reviewer published the exact installed source/symbol/disassembly bytes at
+`06fc94e6268072a3be02abc78738d32813b950f0`, in
+[repair_exact_interpreter_static.json](evidence/b02_credit_20260911_01/repair_exact_interpreter_static.json).
+Its ELF digest matches the executable digest recorded beside the preserved core:
+`ca420bd4614ae7757b4cd4938b3c663e98d2b631bda518610071d9a4ca0b509e`, CPython3.10.21,
+Clang22.1.3. This uses the bound remote installation, not the local Windows interpreter.
+
+The declared `Fraction(n,d,_normalize=False)` constructor call adds `cls`, giving three
+positional values and one keyword. Exact `_PyStack_UnpackDict` instructions allocate
+`(3 + 1 + 1 reserved) ×8 = 40` bytes. The final keyword occupies byte offset32.
+Relocating `_Py_FalseStruct` gives exactly the saved tail value `0x5722fcf9bac0`.
+Thus `False` there is expected within the40-byte argument vector and conflicts with
+the saved debug header's32-byte boundary. The existing binary already includes its
+reserved slot; no missing-eight-byte allocation formula is demonstrated. The block
+is a CPython argument vector, distinct from Fraction instance storage and the512-byte
+numeric output. The static counts are the expected call, not captured allocation-time
+operands; that distinction controls the conclusion.
+
+I prepared the same exact-ratio replacement plus two focused tiny-array tests. The
+independent reviewer found no numerical/gradient defect and judged the tests meaningful
+for exact rounding, cancellation, order, ownership, gradient and former-path exclusion.
+It also found a **material readiness gap**: none of those observations establishes
+independence from the corruption that may have occurred before detection. Original
+primitive/autograd passes already coexist with the later allocator failure. The source
+formula and tail identity do not recover the actual allocation-time counts/request or
+explain subsequently observed size metadata. The DM accepts this finding.
+
+Consequently the proposed test command was **not run** and the temporary production
+edit was restored. The code and regression survive only as an
+[unadopted candidate patch](evidence/b02_credit_20260911_01/repair_fraction_path_candidate.patch);
+the test draft's SHA256 is `ae06c830e6368954856b2c8dd01b7d79b41af1bf6208e0d9719ecf3cd632e25f`.
+No corrected-source remote staging or scientific launch is asserted. The earlier L0
+above describes the conditional plan, not completed acceptance. The
+[assessment](evidence/b02_credit_20260911_01/repair_fraction_path_assessment.json)
+records the arithmetic, exact gap and actual states. Production remains at the
+previous accepted implementation. This continuation ran no debugger, fixture, test,
+model, environment, optimizer, scientific RNG, training, evaluation or scientific invocation.
+
+The unresolved fact is allocation-time positional/keyword counts and requested size
+versus the later debug size metadata, or equivalent evidence establishing that a minimal
+alternative is independent of the corruption. Algebraic equivalence and path exclusion
+alone are not that fact. Status remains **NOT READY under Portfolio §6**. Its new
+scientific funding remains conditional and unused; the earlier incomplete B02 is not
+reopened or given performance polarity. Root receives the precise gap rather than a
+local relaxation of the Portfolio condition. Both cores and all previously retained
+evidence/copies remain preserved; the only removed file was this newly authored,
+unrun test draft after its preservation in the candidate patch.
+
+Selected maintenance command costs through assessment preparation total21.0766206s,
+including4.9540463s earlier exact-static review,6.3729295s static-artifact publication
+and0.6660973s subsequent diff/regression review. The reviewer capture0.6437807s is nested
+within its publication cost. These receipts remain separate from the new900-second
+scientific allowance; no diagnostic cost is hidden in that allowance. The assessment
+write/restoration/audit command added0.3643131s; final checks/publication are returned
+separately. No complete aggregate support measurement is claimed.

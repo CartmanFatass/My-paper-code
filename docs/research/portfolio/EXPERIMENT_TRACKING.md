@@ -1099,3 +1099,64 @@ slot. Unknown timing terms and VNFC's policy-blocked retained duplicate/scratch 
 limitations but are not counted as scientific blockers. CBSC, FRRIE and other missing-operation rows
 will be classified in the Portfolio packet as mechanical repair versus scientific-method choice;
 only the latter remains with its proper scientific decision tier.
+
+## Open-directions program execution and post-program vacancies
+
+The complete open-directions Portfolio response selected five separate fresh B units and was
+accepted as `PRO_FINAL / OWNER_DELEGATED`; its decision, full conformance intake and execution
+mapping are integrated through `5c9794087`. Root dispatched all five named chains. FSD770903 ended
+at its single bounded source-delivery transaction before checkout, admission or scientific
+submission: remote Git returned fetch128 with a GnuTLS decode error and early EOF. The zero-exposure
+limitation and cleanup evidence are integrated through `9c70b4286`; no retry or successor was
+selected. VNFC's exact-build static mapping established a required 40-byte CPython argument vector
+against the saved 32-byte allocator header, but did not establish the allocation-time origin or an
+independent repaired path. Production remained unchanged, the conditional900-second allocation was
+unused, and the NOT READY intake is integrated through `d1199ce0d`.
+
+Three selected numerical units were accepted by the configured shared Monitor. MGTAP8213 completed
+valid `COND_ADVERSE`: `COND-DENSE=-0.02246957345594415`, conditional SE
+`0.004312411137154014`, with 5 positive and 27 adverse worlds. Native wall358.11 seconds passes the
+native caps; full support/complete certification remains qualified by unitemized timing. Its intake
+and exact retained evidence are integrated through `5321b69fd`; no successor was selected. ACVC8961
+completed valid `UP` against both controls: `F-C=+0.1414322041` (SE `0.0079158399`) and
+`F-dwell=+0.0944113176` (SE `0.0082975516`), with `dwell-C=+0.0470208865`. Conservative native
+wall178 seconds passes its270-second cap. Its intake and readable evidence are integrated through
+`7c2873dd3`; the unique checkpoint and full archive remain at the retained local runtime root, and
+no successor or Portfolio disposition was inferred. Both owning DMs retain scoped cleanup and cost
+closeout.
+
+FOLR's RETAIN and learned-event arms, source `8d518ff30`, remain running and Monitor-adopted under
+handles `folr-learned-retention-b01-retain-20260911` and
+`folr-learned-retention-b01-learned-event-20260911`; source, checks, exact commands and adoption
+evidence are integrated through `02d61f605`. Routine observation remains with the shared Monitor.
+
+The accepted Portfolio response contains no automatic replacement rule. The designated Portfolio
+DM is preparing a new fixed question over the actual post-program vacancy set, using the published
+FSD/VNFC limitations and MGTAP/ACVC outcomes. It will ask for concrete independent replacement units
+or an explicit vacant-capacity choice while preserving live FOLR and queued conditional VNFC. No
+local cross-direction selection, promotion, lifecycle change, cap transfer or new result-bearing
+launch is implied by that pending request.
+
+## Five-vacancy Portfolio request dispatched
+
+FOLR subsequently completed technical and scientific intake: LEARNED_EVENT mean `1.60328125`
+versus RETAIN `-0.160078125`, a `+1.763359375` difference and
+`LEARNED_EVENT_ABOVE_MEI` under the prospective inclusive plus/minus1 rule. Both5000-episode arms,
+4969 updates per arm and128 final worlds per arm passed; whole native wall totaled1703.12 seconds.
+The result supports one-pair gain only, and no successor was selected. Intake, E0, brief and scoped
+closeout are integrated through `bc78a6bf8`. All five program allocations are therefore terminal,
+with no automatically authorized successor.
+
+The designated Portfolio DM published request
+`2026-09-11-post-program-vacancies-portfolio-01` and its READY handoff through `3dbc336b0`. The
+fixed question exposes all five vacancies and separately offers new FSD, MGTAP and FOLR B pairs,
+RCLE and ACVC zero-numerical direction questions, and explicit vacant-capacity alternatives; the
+recommended `A+P` package projects8100 seconds of new nontransferable caps. Root delivered the exact
+bound prompt to the configured Transport task without model or thinking overrides. The Transport
+task remained attached to an older interrupted turn, so three same-task handoff recoveries were
+attempted; Git transfer steps completed each time, but destination-thread switching failed. The
+configured task and requested Pro conversation showed fresh app activity, while fresh GitHub reads
+still showed no new response commit or Issue17 comment. The request is therefore in uncertain
+acceptance/delivery state: no resend, local scientific substitute or replacement launch is allowed
+until Transport or immutable delivery state resolves it. Worktree `C:/Users/fires/.codex/worktrees/4947/HMASD`
+was created/reused by the handoff recovery and is retained as a live recovery dependency.
