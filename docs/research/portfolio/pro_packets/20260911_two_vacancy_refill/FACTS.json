@@ -1,5 +1,5 @@
 {
-  "request_id": "2026-09-11-two-vacancy-refill-portfolio-01",
+  "request_id": "2026-09-11-current-vacancies-refill-portfolio-01",
   "at_utc": "2026-09-11T18:01:44.792124+00:00",
   "assignment_snapshot_sha": "14744af1f733e08aa8b7ab25730576ade02f344f",
   "branch": "codex/portfolio",
@@ -43,40 +43,6 @@
     "parameter_displacement": "not applicable: no learner"
   },
   "exposure_line": "TWO_VACANCY_PREPARATION: scientific_invocations=0; policy_models=0; encoder_modules=0; checkpoint_loads=0; environments=0; native_steps=0; synthetic_environment_steps=0; training_episodes=0; optimizer_steps=0; evaluation_episodes=0; replay=0; profiling=0; source_tests=0; numerical_fixtures=0; support_search=0; raw_result_reanalysis=0; source_implementation_edits=0; provider_sends=0; parameter_displacement=not applicable: no learner",
-  "eligibility_snapshot": {
-    "target": 5,
-    "already_advancing": [
-      "roster_consistent_latent_exploration",
-      "acvc",
-      "vap_folr_core"
-    ],
-    "completed_boundary_or_family_pause": [
-      "flexible_skill_duration",
-      "metric_ground_transport_allocation",
-      "ucope",
-      "vsp_03",
-      "vsp_c1",
-      "semigroup_consistent_duration_model_policy",
-      "commitment_residual_triggered_options",
-      "degraded_incumbent_shadow_handover",
-      "vsp_02"
-    ],
-    "unavailable_exact_operation": [
-      "capability_bound_semantic_currentness",
-      "finite_resource_relational_inductive_efficiency"
-    ],
-    "existing_request_intake_dependency": [
-      "variable_n_fleet_churn"
-    ],
-    "count_already_advancing": 3,
-    "count_completed_boundary": 9,
-    "count_operation_dependencies": 2,
-    "count_decision_dependencies": 1,
-    "count_eligible_additions": 0,
-    "assignment_vacancies": 2,
-    "proposed_added_chains": 0,
-    "scope_limit": "Counts classify this assigned question, not scientific worth or whole-direction lifecycle; new actual intake/dispatch facts can change the execution count independently."
-  },
   "already_allocated_caps_seconds": {
     "roster_consistent_latent_exploration": {
       "learned": 600,
@@ -87,12 +53,17 @@
     "acvc": {
       "native": 270,
       "support": 330,
-      "complete": 600
+      "complete": 600,
+      "current_state": "8951 preparation no-ready; closure accounting only, no retry or successor"
     },
     "vap_folr_core": {
       "implementation": 0,
       "numerical": 0,
       "scope": "one candidate note plus original Convergence and full intake"
+    },
+    "variable_n_fleet_churn": {
+      "new_allocation_here": 0,
+      "scope": "original-DM full intake and response-mapped continuation actually resumed;600/300/900 response proposal is not locally accepted here"
     }
   },
   "new_proposed_direction_caps": {
@@ -187,7 +158,7 @@
       "new_direction_consultations": 0
     }
   },
-  "science_recommendation": "A zero additions; one/two are considered but have no eligible named member/cap under current exclusions. No auto-allocation upon a future condition.",
+  "science_recommendation": "A zero additions for one current/two imminent vacancies; B/C nonzero options have no eligible named member/cap under exclusions. No auto-allocation upon future conditions.",
   "portfolio_choice_applied": null,
   "vnfc_new_presence": {
     "commit": "10bb08476ff58afd25b90b21cd2d1a739b25ca4b",
@@ -199,7 +170,8 @@
     "original_dm_full_intake_by_this_author": false,
     "root_informed": true,
     "new_send_requested": false,
-    "effect": "do not assert current file absence; preserve original request/intake route and exclude from this allocation"
+    "effect": "four current chains/one vacancy; no file-absence claim, no duplicate Send or local allocation",
+    "current_status": "Transport verified; original DM actually resumed. Live/excluded, original scientific intake pending."
   },
   "scientific_reading": {
     "sources": [
@@ -422,5 +394,109 @@
   "owner_item_path": "docs/research/portfolio/owner/inbox/2026-09-11/20260911-root-003.json",
   "owner_item": "20260911-root-003",
   "owner_auto_applied": null,
-  "preparation_issue_resolved": "item.py add returned a path, not JSON; item003 and one audit row were created successfully. Metadata parser corrected without repeating creation."
+  "preparation_issue_resolved": "item.py add returned a path, not JSON; item003 and one audit row were created successfully. Metadata parser corrected without repeating creation.",
+  "original_assignment_eligibility_snapshot": {
+    "target": 5,
+    "already_advancing": [
+      "roster_consistent_latent_exploration",
+      "acvc",
+      "vap_folr_core"
+    ],
+    "completed_boundary_or_family_pause": [
+      "flexible_skill_duration",
+      "metric_ground_transport_allocation",
+      "ucope",
+      "vsp_03",
+      "vsp_c1",
+      "semigroup_consistent_duration_model_policy",
+      "commitment_residual_triggered_options",
+      "degraded_incumbent_shadow_handover",
+      "vsp_02"
+    ],
+    "unavailable_exact_operation": [
+      "capability_bound_semantic_currentness",
+      "finite_resource_relational_inductive_efficiency"
+    ],
+    "existing_request_intake_dependency": [
+      "variable_n_fleet_churn"
+    ],
+    "count_already_advancing": 3,
+    "count_completed_boundary": 9,
+    "count_operation_dependencies": 2,
+    "count_decision_dependencies": 1,
+    "count_eligible_additions": 0,
+    "assignment_vacancies": 2,
+    "proposed_added_chains": 0,
+    "scope_limit": "Counts classify this assigned question, not scientific worth or whole-direction lifecycle; new actual intake/dispatch facts can change the execution count independently."
+  },
+  "eligibility_snapshot": {
+    "target": 5,
+    "already_advancing": [
+      "roster_consistent_latent_exploration",
+      "acvc",
+      "vap_folr_core",
+      "variable_n_fleet_churn"
+    ],
+    "completed_boundary_or_family_pause": [
+      "flexible_skill_duration",
+      "metric_ground_transport_allocation",
+      "ucope",
+      "vsp_03",
+      "vsp_c1",
+      "semigroup_consistent_duration_model_policy",
+      "commitment_residual_triggered_options",
+      "degraded_incumbent_shadow_handover",
+      "vsp_02"
+    ],
+    "unavailable_exact_operation": [
+      "capability_bound_semantic_currentness",
+      "finite_resource_relational_inductive_efficiency"
+    ],
+    "existing_request_intake_dependency": [],
+    "count_already_advancing": 4,
+    "count_completed_boundary": 9,
+    "count_operation_dependencies": 2,
+    "count_decision_dependencies": 0,
+    "count_eligible_additions": 0,
+    "proposed_added_chains": 0,
+    "scope_limit": "Counts classify this assigned question, not scientific worth or whole-direction lifecycle; new actual intake/dispatch facts can change the execution count independently.",
+    "current_vacancies": 1,
+    "acvc_counts_only_through_active_intake_cleanup": true,
+    "projected_after_acvc_complete": {
+      "advancing": [
+        "roster_consistent_latent_exploration",
+        "vap_folr_core",
+        "variable_n_fleet_churn"
+      ],
+      "count_advancing": 3,
+      "vacancies": 2,
+      "count_eligible_additions": 0,
+      "effect": "ACVC moves from live exclusion to completed no-successor exclusion; no automatic replacement"
+    }
+  },
+  "current_execution_update": {
+    "recorded_at_utc": "2026-09-11T18:06:55.387035+00:00",
+    "source": "Root native current-fact correction, preserved verbatim in PREPARATION_INTAKE.md",
+    "transport_verified_delayed_vnfc_response": true,
+    "new_provider_send": false,
+    "original_dm_actually_resumed": "/root/dm_vnfc_rolling_reentry",
+    "work": "full conformance/intake and response-mapped continuation",
+    "count_once_as_fourth_chain": true,
+    "vnfc_full_scientific_conformance_remains_with_original_dm": true,
+    "historical_preparation_commit": "c04de197f10181f3f24b718f3ef4c2c7bf4054d9"
+  },
+  "acvc_no_ready_update": {
+    "recorded_at_utc": "2026-09-11T18:09:45.701898+00:00",
+    "source": "Root routed native execution fact, quoted verbatim in PREPARATION_INTAKE.md",
+    "identity": "ACVC8951",
+    "status": "preparation no-ready; intake/cleanup still active, then no successor",
+    "observed_by_author": "Root report only; no independent remote probe/diagnosis",
+    "facts": "bundle/SCP succeeded; CR-contaminated SSH stdin caused shell/path failure; zero checkout/admission/agent-task/model/RNG/scientific exposure",
+    "repeat_preparation_selected": false,
+    "scientific_polarity": null,
+    "new_investment_here": 0
+  },
+  "current_fact_audit_row": "docs/research/portfolio/audit/2026-09-11.md#L51",
+  "owner_trace_state": "planned",
+  "owner_trace_meaning": "Current execution facts under existing OWNER_DIRECT rolling rule; not a new owner scientific selection, Portfolio disposition or auto_applied option."
 }

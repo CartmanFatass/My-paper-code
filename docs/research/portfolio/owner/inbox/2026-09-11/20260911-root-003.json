@@ -76,5 +76,17 @@
     "verdict_text": "DM建议A：在本轮明确排除范围内零追加投入，保留空缺；这不是Portfolio已作裁决，也不关闭任何方向。",
     "source": "docs/research/portfolio/pro_packets/20260911_two_vacancy_refill/SCIENCE_BRIEF.md"
   },
-  "starred": true
+  "starred": true,
+  "approval_correction": "旧标题和内嵌包记录最初两个空槽的历史提案；当前计数和来源以新PREPARATION_INTAKE及OWNER_PACKET为准。未设置auto_applied。",
+  "execution_history": [
+    {
+      "at": "2026-09-11T18:10:19+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "AGENTS.md#5-capacity-and-resume",
+      "record": "docs/research/portfolio/pro_packets/20260911_two_vacancy_refill/PREPARATION_INTAKE.md",
+      "state": "planned",
+      "summary": "按既有OWNER_DIRECT滚动规则作事实更正，非所有者新科研裁决：Root已恢复VNFC原DM，当前四链一空槽；ACVC8951准备no-ready，收尾后为三链两空槽，零科学暴露且不重试。仍只建议零追加，Portfolio未决定。最新中文材料见docs/research/portfolio/pro_packets/20260911_two_vacancy_refill/OWNER_PACKET.json。",
+      "correction": "旧标题和内嵌包记录最初两个空槽的历史提案；当前计数和来源以新PREPARATION_INTAKE及OWNER_PACKET为准。未设置auto_applied。"
+    }
+  ]
 }
