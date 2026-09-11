@@ -1,5 +1,10 @@
 # Portfolio pre-Send blocker intake — 2026-09-11
 
+**Current disposition: complete delivery received and Portfolio option A accepted.**
+The pre-Send observations below are historical. See the [complete intake](../../decisions/2026-09-11-post-option-a-execution-refill.md)
+and [operational mapping](EXECUTION_MAPPING.md); this request is no longer queued
+on browser access.
+
 **PRO_BLOCKED: no Portfolio decision formed.** The exact published post-option-A
 refill request is queued at a clean execution boundary. Neither the recommended
 FSD/MGTAP pair of B assignments nor any alternative has been selected or allocated.
@@ -127,3 +132,19 @@ the unchanged conversation/request binding, provider state and one-Send reconcil
 Accordingly, `ROOT_SCOPED_IAB_NOT_TRANSFERABLE` is preserved as historical
 pre-correction evidence, not a current recovery condition. Transport may use any
 accessible logged-in browser surface for this exact unsent request.
+
+## Complete delivery and conformance — 2026-09-11
+
+Root routed Transport's completed receipt at unchanged prompt/request/conversation.
+Transport captured one Send and natural completion on2026-09-11T15:58:25Z; the
+complete55041-byte response at9a2789640f3e5663b4cd72736ba953bfa809095d and Issue17
+comment5637047130 match the fixed TASK. The Portfolio author read all218 lines,
+verified the archive/binding and current specifications, and accepted option A
+under AGENTS4.8. [INTAKE_FACTS](INTAKE_FACTS.json) records the checks and limits.
+
+The earlier zero-Send and task-scope facts stay dated, with their original bytes
+preserved in Git. Current owner guidance76e7b09c8 already superseded browser-task
+ownership as a permission condition; that correction is retained. No additional
+Send, account/conversation replacement or local Portfolio substitute occurred in
+this intake. Root's two mapped assignments are planned; actual experiments and
+application are not claimed complete by this archival closure.
