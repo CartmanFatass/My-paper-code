@@ -5,8 +5,8 @@ resources_unmeasured.** Final1000 remains worse than attained INDEPENDENT-NEARES
 in all8 cells. Primary reference-minus-final U is−.0540181477865; initialization
 gain+.0013387044271 has a conditional interval spanning zero and opposite path
 signs. Technical conformance and the bounded scientific comparison are accepted
-separately. Missing earlier Monitor wall does not establish an overrun or change
-this native performance polarity.
+separately. Missing support timing does not establish an overrun or change this
+native performance polarity.
 
 ## E0 source, population and receipts
 
@@ -165,9 +165,20 @@ native Y gains remain visible beside opposite learning paths, all-cell reference
 deficits and F/recovery harms. Neither a pure budget effect against B04/master24,
 stable superiority, causal diagnosis nor family retirement follows.
 
-The named allocation ends after this intake and preservation/authorized closeout;
-no successor, retry or new endpoint is selected. Source, evidence and cleanup
-inventory return to Root for integration/retention/reclamation. The B05 six-file
+The named allocation has ended; no successor, retry or new endpoint is selected.
+Root integrated result commit `f78b808112090d0441279162f4470a038320ddca` through
+main `66da2218eb016f77667441afc13c56a55de81fa3` and accepted preservation. The exact
+completed remote checkout and staging directory were then reclaimed; both disk
+absence and Git worktree-registration absence passed. Shared authoring checkout,
+local source/evidence archives and terminal supervisor receipt remain preserved.
+[CLOSEOUT.json](b05_nearest_prior1000_20260911/CLOSEOUT.json) supplies the receipt.
+Known support charges through reclamation/final owner readback are 61.0232442 s
+(54.0232442 recorded command wall plus 7 conservative); native-plus-known-support
+charges are 508.6532442 s. Earlier Monitor observations, Root's intervening conflict
+overhead and subsequent publication/integration are not silently charged as zero;
+[SUPPORT_FINAL.json](b05_nearest_prior1000_20260911/SUPPORT_FINAL.json) fixes the
+snapshot boundary and missing terms. Full support/cap conformance remains unmeasured.
+The B05 six-file
 189324B fixture remains because automatic approval review rejected removal before
 execution as `blocked by policy`; its creator retains ownership. The historical
 B04 fixture exception is separate. Operational accounting/cleanup limitations do

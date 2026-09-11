@@ -137,5 +137,29 @@ Chinese brief: [2026-09-11_RCLE_B05_NEAREST_PRIOR1000.md](../../portfolio/owner/
 
 Claim ceiling: one outcome-informed B05/master25 at1000 updates, on the declared
 TBCFV population/information and sampled evaluator. Strongest support, reference
-deficits and harms remain together. DM returns source/evidence and cleanup inventory
-for Root integration/retention/reclamation; no local Portfolio disposition is made.
+deficits and harms remain together; no local Portfolio disposition is made.
+
+## Closeout applied
+
+Root integrated/pushed result commit `f78b808112090d0441279162f4470a038320ddca`
+through main `66da2218eb016f77667441afc13c56a55de81fa3`, accepted preservation and
+directed exact remote reclamation. DM verified preserved source/evidence digests,
+the completed inactive handle and exact clean source, then removed the completed
+remote checkout and its two-file staging directory. Disk absence and Git worktree-
+registration absence passed. Shared checkout, local archives/scientific outputs
+and the terminal supervisor receipt remain. The [closeout receipt](b05_nearest_prior1000_20260911/CLOSEOUT.json)
+supersedes pending inventory status without changing the scientific reading.
+
+Known support charges through this closeout and final owner readback are
+61.0232442 s; with native 447.63 s, known charged components total 508.6532442 s.
+These include 7 s of explicit conservative allowances. Root supplied 5.5722703 s
+of enclosing integration commands but could not recover intervening conflict-
+resolution overhead; earlier Monitor wall is also unknown. The [final support snapshot](b05_nearest_prior1000_20260911/SUPPORT_FINAL.json)
+retains each component and explicitly excludes still-unmeasured later publication/
+integration. No 140 s support/750 s complete cap pass or overrun is inferred.
+This accounting limitation is separate from the accepted native result.
+
+Final live main owner reviews were empty; relevant audit owner columns had no
+override. This allocation is closed with no successor. The six-file/189324 B
+local B05 fixture remains creator-owned after the prior policy rejection, without
+a repeated removal or bypass; full local scratch cleanup is not claimed complete.

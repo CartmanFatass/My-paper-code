@@ -1,0 +1,24 @@
+{
+  "source_sha": "3ffa65cb4e1a67182b90dce3822d0018ac623c72",
+  "root_integration": "66da2218eb016f77667441afc13c56a55de81fa3",
+  "root_preservation_accepted": true,
+  "command": "set -e\ncase /home/wu/hmasd-worktrees/rcle-b05-nearest-prior1000-s25-20260911 in /home/wu/hmasd-worktrees/*) ;; *) exit 41;; esac\ntest \"$(realpath /home/wu/hmasd-worktrees/rcle-b05-nearest-prior1000-s25-20260911)\" = /home/wu/hmasd-worktrees/rcle-b05-nearest-prior1000-s25-20260911\ntest \"$(realpath /home/wu/hmasd-inputs/rcle-b05-nearest-prior1000-s25-20260911)\" = /home/wu/hmasd-inputs/rcle-b05-nearest-prior1000-s25-20260911\ntest \"$(git -C /home/wu/hmasd-worktrees/rcle-b05-nearest-prior1000-s25-20260911 rev-parse HEAD)\" = 3ffa65cb4e1a67182b90dce3822d0018ac623c72\ntest -z \"$(git -C /home/wu/hmasd-worktrees/rcle-b05-nearest-prior1000-s25-20260911 status --porcelain --untracked-files=all)\"\ntest \"$(cat /home/wu/.agent-tasks/rcle-b05-nearest-prior1000-s25-20260911/status)\" = finished\ntest \"$(cat /home/wu/.agent-tasks/rcle-b05-nearest-prior1000-s25-20260911/exit_code)\" = 0\nif tmux has-session -t agent_rcle-b05-nearest-prior1000-s25-20260911 2>/dev/null; then exit 42; fi\ntest \"$(sha256sum /home/wu/hmasd-inputs/rcle-b05-nearest-prior1000-s25-20260911/source.bundle | cut -d ' ' -f1)\" = d3734822bae9ce945df6c666ed1d322689c04ee987b1368ae758621e0812e671\ntest \"$(sha256sum /home/wu/hmasd-inputs/rcle-b05-nearest-prior1000-s25-20260911/terminal.tar.gz | cut -d ' ' -f1)\" = 356a1c2aabca9badfdda30a2268aebc3c63cc5d4abd81fdfb09d019abf566e42\ngit -C /home/wu/projects/HMASD worktree remove --force /home/wu/hmasd-worktrees/rcle-b05-nearest-prior1000-s25-20260911\nrm -- /home/wu/hmasd-inputs/rcle-b05-nearest-prior1000-s25-20260911/source.bundle /home/wu/hmasd-inputs/rcle-b05-nearest-prior1000-s25-20260911/terminal.tar.gz\nrmdir -- /home/wu/hmasd-inputs/rcle-b05-nearest-prior1000-s25-20260911\ntest ! -e /home/wu/hmasd-worktrees/rcle-b05-nearest-prior1000-s25-20260911\ntest ! -e /home/wu/hmasd-inputs/rcle-b05-nearest-prior1000-s25-20260911\n/home/wu/.venvs/hmasd/bin/python -c 'import subprocess; s=subprocess.check_output([\"git\",\"-C\",\"/home/wu/projects/HMASD\",\"worktree\",\"list\",\"--porcelain\"],text=True); assert \"worktree /home/wu/hmasd-worktrees/rcle-b05-nearest-prior1000-s25-20260911\\n\" not in s; print(\"execution_disk_absent=true; staging_disk_absent=true; worktree_registration_absent=true; local_archives_preserved=true\")'\n",
+  "exit_code": 0,
+  "stdout": "execution_disk_absent=true; staging_disk_absent=true; worktree_registration_absent=true; local_archives_preserved=true\n",
+  "stderr": "",
+  "remote_cleanup_wall_s": 0.48127649998059496,
+  "local_preservation": [
+    {
+      "path": "temp\\directions\\roster_consistent_latent_exploration\\exp\\b05-nearest-prior1000-s25-20260911\\terminal.tar.gz",
+      "sha256": "356a1c2aabca9badfdda30a2268aebc3c63cc5d4abd81fdfb09d019abf566e42",
+      "bytes": 807465
+    },
+    {
+      "path": "temp\\directions\\roster_consistent_latent_exploration\\b05-nearest-prior1000-preparation\\source.bundle",
+      "sha256": "d3734822bae9ce945df6c666ed1d322689c04ee987b1368ae758621e0812e671",
+      "bytes": 2143640
+    }
+  ],
+  "shared_checkout_retained": "C:/Projects/HMASD-worktrees/dm-rcle-a02-20260906",
+  "test_scratch_exception": "B05 six files/189324B retained after policy rejection; no new removal attempted"
+}
