@@ -1,0 +1,91 @@
+{
+  "object": "RCLE-TBCFV-B03-ACTOR100-FRESH1000-S23",
+  "seed": 23,
+  "seed_root_hex": "c358b8a5e90f8e9814642a3455b108620b54a61f530b755deb5c7bac6af23d66",
+  "count_basis": "configuration arithmetic only; zero model/native/RNG calls",
+  "parameters_per_fit": 26161,
+  "fresh_fits": 2,
+  "models_allocated": 12,
+  "untrained_helpers": 10,
+  "updates_per_fit": 1000,
+  "nonzero_step_norm": 0.02,
+  "path_length_opportunity_per_fit": 20.0,
+  "not_net_displacement": true,
+  "initial_norm": "new root unknown until produced-checkpoint readback; prior21/22 actual scales retained as context",
+  "arms": {
+    "W1": {
+      "training_episodes": 64000,
+      "evaluation_episodes": 4096,
+      "episodes": 68096,
+      "primitive_ticks": 4358144,
+      "backward_step_calls": 1000,
+      "cap_s": 600,
+      "latest_complete_same_shape_wall_s": 333.18
+    },
+    "W100": {
+      "training_episodes": 64000,
+      "evaluation_episodes": 2048,
+      "episodes": 66048,
+      "primitive_ticks": 4227072,
+      "backward_step_calls": 1000,
+      "cap_s": 600,
+      "latest_complete_same_shape_wall_s": 322.04
+    },
+    "reference": {
+      "training_episodes": 0,
+      "evaluation_episodes": 2048,
+      "episodes": 2048,
+      "primitive_ticks": 131072,
+      "backward_step_calls": 0,
+      "cap_s": 30,
+      "latest_complete_same_shape_wall_s": 2.52
+    }
+  },
+  "new_total": {
+    "training_episodes": 128000,
+    "evaluation_episodes": 8192,
+    "episodes": 136192,
+    "primitive_ticks": 8716288,
+    "backward_step_calls": 2000,
+    "training_batches": 4000,
+    "evaluation_batches": 256
+  },
+  "prior_known_lower": {
+    "episodes": 402880,
+    "primitive_ticks": 25784320,
+    "backward_step_calls": 5783,
+    "models": 60
+  },
+  "complete_new_plus_prior_known_lower": {
+    "episodes": 539072,
+    "primitive_ticks": 34500608,
+    "backward_step_calls": 7783,
+    "models": 72
+  },
+  "additional_unknown_prior_upper_not_actual": {
+    "historical_prefix": {
+      "episodes": 12800,
+      "primitive_ticks": 819200,
+      "backward_step_calls": 200
+    },
+    "original_seed22_unfinished_block": {
+      "episodes": 64,
+      "primitive_ticks": 4096,
+      "backward_step_calls": 1
+    }
+  },
+  "cost": {
+    "pre_support_charge_s": 100,
+    "outer_sequence_cap_s": 1250,
+    "post_support_charge_s": 150,
+    "complete_cap_s": 1500,
+    "same_shape_sequence_forecast_s": 657.74,
+    "complete_forecast_with_conservative_support_s": 907.74,
+    "prior_same1000_scoped_charge_s": 2465.65,
+    "prior_complete_same1000_pairs": 2,
+    "prior_charge_per_complete_pair_s": 1232.825,
+    "forecast_window_if_complete_s": 3373.39,
+    "forecast_window_per_complete_pair_s": 1124.4633333333334,
+    "full_history_aggregate_CPU_s": null
+  }
+}

@@ -1,0 +1,1228 @@
+{
+  "object": "VSP03_B07",
+  "collected_utc": "2026-09-10T16:59:00.080148+00:00",
+  "source_sha": "adcff0a92559ac5552e24a9861e2b65572b478c5",
+  "summary": {
+    "object": "VSP03_B07",
+    "seed": 10804,
+    "launch_sha": "adcff0a92559ac5552e24a9861e2b65572b478c5",
+    "node": "wsl_4070",
+    "command": "bash -c '/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out \"$1\" && /home/wu/.venvs/hmasd/bin/python scripts/run_vsp03_b06.py --seed \"$2\" --out \"$3\" --node wsl_4070 --started-monotonic \"$VSP03_B04_STARTED\"' bash /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b07_10804_20260910_admission.json 10804 /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b07_10804_20260910",
+    "status": "complete",
+    "arms": {
+      "G": {
+        "initial": {
+          "actor": {
+            "parameters": 1570,
+            "initial_l2": 4.779683589935303,
+            "initial_rms": 0.12062833458185196,
+            "current_l2": 4.779683589935303,
+            "displacement_l2": 0.0,
+            "displacement_over_initial_l2": 0.0
+          },
+          "critic": {
+            "parameters": 513,
+            "initial_l2": 3.3480474948883057,
+            "initial_rms": 0.1478199064731598,
+            "current_l2": 3.3480474948883057,
+            "displacement_l2": 0.0,
+            "displacement_over_initial_l2": 0.0
+          },
+          "total": {
+            "parameters": 2083,
+            "initial_l2": 5.835648059844971,
+            "initial_rms": 0.12786288559436798,
+            "current_l2": 5.835648059844971,
+            "displacement_l2": 0.0,
+            "displacement_over_initial_l2": 0.0
+          }
+        },
+        "training_episodes": 65536,
+        "training_team_ticks": 2621440,
+        "training_target_transitions": 5242880,
+        "training_valid_rows": 377648,
+        "gradient_rows": 377648,
+        "optimizer_steps": 512,
+        "backward_calls": 512,
+        "evaluation_episodes": 8192,
+        "first": {
+          "actor": {
+            "parameters": 1570,
+            "initial_l2": 4.779683589935303,
+            "initial_rms": 0.12062833458185196,
+            "current_l2": 4.77968692779541,
+            "displacement_l2": 0.0058309296146035194,
+            "displacement_over_initial_l2": 0.0012199405054514176
+          },
+          "critic": {
+            "parameters": 513,
+            "initial_l2": 3.3480474948883057,
+            "initial_rms": 0.1478199064731598,
+            "current_l2": 3.347179889678955,
+            "displacement_l2": 0.022649358958005905,
+            "displacement_over_initial_l2": 0.006764945536939437
+          },
+          "total": {
+            "parameters": 2083,
+            "initial_l2": 5.835648059844971,
+            "initial_rms": 0.12786288559436798,
+            "current_l2": 5.835154056549072,
+            "displacement_l2": 0.023387886583805084,
+            "displacement_over_initial_l2": 0.004007761664850365
+          }
+        },
+        "128": {
+          "actor": {
+            "parameters": 1570,
+            "initial_l2": 4.779683589935303,
+            "initial_rms": 0.12062833458185196,
+            "current_l2": 5.637790679931641,
+            "displacement_l2": 2.590357542037964,
+            "displacement_over_initial_l2": 0.5419516780341994
+          },
+          "critic": {
+            "parameters": 513,
+            "initial_l2": 3.3480474948883057,
+            "initial_rms": 0.1478199064731598,
+            "current_l2": 3.3614485263824463,
+            "displacement_l2": 0.553089439868927,
+            "displacement_over_initial_l2": 0.16519760866993874
+          },
+          "total": {
+            "parameters": 2083,
+            "initial_l2": 5.835648059844971,
+            "initial_rms": 0.12786288559436798,
+            "current_l2": 6.563841819763184,
+            "displacement_l2": 2.648746967315674,
+            "displacement_over_initial_l2": 0.4538908001566565
+          }
+        },
+        "512": {
+          "actor": {
+            "parameters": 1570,
+            "initial_l2": 4.779683589935303,
+            "initial_rms": 0.12062833458185196,
+            "current_l2": 7.536132335662842,
+            "displacement_l2": 5.445645332336426,
+            "displacement_over_initial_l2": 1.139331763258023
+          },
+          "critic": {
+            "parameters": 513,
+            "initial_l2": 3.3480474948883057,
+            "initial_rms": 0.1478199064731598,
+            "current_l2": 3.4206666946411133,
+            "displacement_l2": 0.7654324769973755,
+            "displacement_over_initial_l2": 0.22862055516417074
+          },
+          "total": {
+            "parameters": 2083,
+            "initial_l2": 5.835648059844971,
+            "initial_rms": 0.12786288559436798,
+            "current_l2": 8.276124954223633,
+            "displacement_l2": 5.499176502227783,
+            "displacement_over_initial_l2": 0.9423420408210624
+          }
+        },
+        "arm_wall_s": 7.284978263021912
+      }
+    },
+    "checkpoints": {
+      "128": {
+        "update": 128,
+        "status": "complete",
+        "absolute": {
+          "G_greedy": {
+            "episodes": 1024,
+            "return": 0.3583056640625,
+            "fixed_clocks": 17.0,
+            "pending_clocks": 8.73046875,
+            "eligible_decisions": 6.7412109375,
+            "blocked_pending": 1.9892578125,
+            "blocked_final_clocks": 0.0166015625,
+            "success_per_team": 0.9609375,
+            "attempt_per_team": 1.921875,
+            "failed_attempt_per_team": 0.9609375,
+            "non_submission_per_team": 0.078125,
+            "waiting_ticks_per_team": 29.646484375
+          },
+          "G_stochastic": {
+            "episodes": 1024,
+            "return": 0.29670410156250004,
+            "fixed_clocks": 17.0,
+            "pending_clocks": 6.6767578125,
+            "eligible_decisions": 4.6796875,
+            "blocked_pending": 1.9970703125,
+            "blocked_final_clocks": 0.0009765625,
+            "success_per_team": 0.796875,
+            "attempt_per_team": 1.9833984375,
+            "failed_attempt_per_team": 1.1865234375,
+            "non_submission_per_team": 0.0166015625,
+            "waiting_ticks_per_team": 20.859375
+          },
+          "R0": {
+            "episodes": 1024,
+            "return": 0.3451318359375,
+            "fixed_clocks": 17.0,
+            "pending_clocks": 8.9443359375,
+            "eligible_decisions": 6.9560546875,
+            "blocked_pending": 1.98828125,
+            "blocked_final_clocks": 0.0185546875,
+            "success_per_team": 0.9384765625,
+            "attempt_per_team": 1.81640625,
+            "failed_attempt_per_team": 0.8779296875,
+            "non_submission_per_team": 0.18359375,
+            "waiting_ticks_per_team": 31.478515625
+          },
+          "R": {
+            "episodes": 1024,
+            "return": 0.343623046875,
+            "fixed_clocks": 17.0,
+            "pending_clocks": 8.94921875,
+            "eligible_decisions": 6.9609375,
+            "blocked_pending": 1.98828125,
+            "blocked_final_clocks": 0.01953125,
+            "success_per_team": 0.935546875,
+            "attempt_per_team": 1.81640625,
+            "failed_attempt_per_team": 0.880859375,
+            "non_submission_per_team": 0.18359375,
+            "waiting_ticks_per_team": 31.49609375
+          }
+        },
+        "weights_readback": true,
+        "comparisons": {
+          "G_greedy-R0": {
+            "mean": 0.013173828124999998,
+            "conditional_world_sd": 0.09105488584990667,
+            "conditional_world_se": 0.0028454651828095836,
+            "worlds": 1024
+          },
+          "G_greedy-R": {
+            "mean": 0.0146826171875,
+            "conditional_world_sd": 0.0974517543645329,
+            "conditional_world_se": 0.0030453673238916533,
+            "worlds": 1024
+          },
+          "G_stochastic-R0": {
+            "mean": -0.04842773437499999,
+            "conditional_world_sd": 0.31479293672673747,
+            "conditional_world_se": 0.009837279272710546,
+            "worlds": 1024
+          },
+          "G_stochastic-R": {
+            "mean": -0.046918945312499995,
+            "conditional_world_sd": 0.31470385817527197,
+            "conditional_world_se": 0.009834495567977249,
+            "worlds": 1024
+          },
+          "G_stochastic-G_greedy": {
+            "mean": -0.061601562500000005,
+            "conditional_world_sd": 0.32163313320135845,
+            "conditional_world_se": 0.010051035412542451,
+            "worlds": 1024
+          }
+        }
+      },
+      "512": {
+        "update": 512,
+        "status": "complete",
+        "absolute": {
+          "G_greedy": {
+            "episodes": 1024,
+            "return": 0.35669921875,
+            "fixed_clocks": 17.0,
+            "pending_clocks": 8.5908203125,
+            "eligible_decisions": 6.6025390625,
+            "blocked_pending": 1.98828125,
+            "blocked_final_clocks": 0.0185546875,
+            "success_per_team": 0.955078125,
+            "attempt_per_team": 1.9453125,
+            "failed_attempt_per_team": 0.990234375,
+            "non_submission_per_team": 0.0546875,
+            "waiting_ticks_per_team": 28.8828125
+          },
+          "G_stochastic": {
+            "episodes": 1024,
+            "return": 0.35689941406250003,
+            "fixed_clocks": 17.0,
+            "pending_clocks": 8.5205078125,
+            "eligible_decisions": 6.533203125,
+            "blocked_pending": 1.9873046875,
+            "blocked_final_clocks": 0.015625,
+            "success_per_team": 0.9541015625,
+            "attempt_per_team": 1.95703125,
+            "failed_attempt_per_team": 1.0029296875,
+            "non_submission_per_team": 0.04296875,
+            "waiting_ticks_per_team": 28.490234375
+          },
+          "R0": {
+            "episodes": 1024,
+            "return": 0.3451318359375,
+            "fixed_clocks": 17.0,
+            "pending_clocks": 8.9443359375,
+            "eligible_decisions": 6.9560546875,
+            "blocked_pending": 1.98828125,
+            "blocked_final_clocks": 0.0185546875,
+            "success_per_team": 0.9384765625,
+            "attempt_per_team": 1.81640625,
+            "failed_attempt_per_team": 0.8779296875,
+            "non_submission_per_team": 0.18359375,
+            "waiting_ticks_per_team": 31.478515625
+          },
+          "R": {
+            "episodes": 1024,
+            "return": 0.343623046875,
+            "fixed_clocks": 17.0,
+            "pending_clocks": 8.94921875,
+            "eligible_decisions": 6.9609375,
+            "blocked_pending": 1.98828125,
+            "blocked_final_clocks": 0.01953125,
+            "success_per_team": 0.935546875,
+            "attempt_per_team": 1.81640625,
+            "failed_attempt_per_team": 0.880859375,
+            "non_submission_per_team": 0.18359375,
+            "waiting_ticks_per_team": 31.49609375
+          }
+        },
+        "weights_readback": true,
+        "comparisons": {
+          "G_greedy-R0": {
+            "mean": 0.011567382812500002,
+            "conditional_world_sd": 0.09613782948786226,
+            "conditional_world_se": 0.0030043071714956956,
+            "worlds": 1024
+          },
+          "G_greedy-R": {
+            "mean": 0.013076171875000002,
+            "conditional_world_sd": 0.10228479809054714,
+            "conditional_world_se": 0.003196399940329598,
+            "worlds": 1024
+          },
+          "G_stochastic-R0": {
+            "mean": 0.011767578125,
+            "conditional_world_sd": 0.14249007677062117,
+            "conditional_world_se": 0.004452814899081912,
+            "worlds": 1024
+          },
+          "G_stochastic-R": {
+            "mean": 0.013276367187500002,
+            "conditional_world_sd": 0.14667488464964026,
+            "conditional_world_se": 0.004583590145301258,
+            "worlds": 1024
+          },
+          "G_stochastic-G_greedy": {
+            "mean": 0.00020019531249999985,
+            "conditional_world_sd": 0.11991111060975396,
+            "conditional_world_se": 0.003747222206554811,
+            "worlds": 1024
+          }
+        }
+      }
+    },
+    "actual_rollouts": {
+      "episodes_started": 73728,
+      "episodes_completed": 73728,
+      "team_ticks": 2949120,
+      "target_transitions": 5898240,
+      "decision_rows": 431296,
+      "rollout_policy_forwards": 8716
+    },
+    "model_constructions": 1,
+    "optimizer_steps": 512,
+    "device": "cpu",
+    "dtype": "float32",
+    "compute_threads": 1,
+    "rng": {
+      "worlds": "PCG64 SeedSequence([302,seed,split,episode,target]);40 uniforms",
+      "phase": "[302,seed,split,episode,2];one integers(0,2)",
+      "actions": "[303,seed,split,mode,arm,episode];17 calendar-position uniforms",
+      "splits": "train100/evaluation200",
+      "modes": "train0/stochastic-evaluation1",
+      "arms": "G1",
+      "initialization": 50804
+    },
+    "cost_law": "admission+imports+G_init+512*batch128x40x2+8*eval1024x40x2+weights+publication/readback/exit",
+    "independent_training_instances": 1,
+    "validation_models": 0,
+    "validation_episodes": 0,
+    "validation_optimizer_steps": 0,
+    "aggregate_cpu_s": null,
+    "primary": {
+      "mean": 0.011567382812500002,
+      "conditional_world_sd": 0.09613782948786226,
+      "conditional_world_se": 0.0030043071714956956,
+      "worlds": 1024
+    },
+    "primary_name": "update512:G_greedy-R0",
+    "budget_change": {
+      "mean": -0.0016064453124999994,
+      "conditional_world_sd": 0.05288252531171355,
+      "conditional_world_se": 0.0016525789159910485,
+      "worlds": 1024
+    },
+    "elapsed_through_output_start_s": 8.365503572043963,
+    "peak_rss_bytes": 493867008
+  },
+  "admission": {
+    "assessed_at": "2026-09-10T16:52:30.902188Z",
+    "available_physical_bytes": 15183974400,
+    "captured_at": "2026-09-10T16:52:30.901859Z",
+    "cgroup_headroom_bytes": null,
+    "cgroup_memory_current_bytes": null,
+    "cgroup_memory_max_bytes": null,
+    "effective_available_bytes": 15183974400,
+    "effective_floor_pass": true,
+    "failure_reasons": [],
+    "measurement_source": "/proc/meminfo",
+    "minimum_available_bytes": 4294967296,
+    "passed": true,
+    "physical_floor_pass": true,
+    "schema_version": 1
+  },
+  "terminal": {
+    "object": "VSP03_B04",
+    "unit": "vsp03-b07-10804-20260910.service",
+    "manager_properties": {
+      "Type": "oneshot",
+      "TimeoutStartUSec": "59s",
+      "TimeoutStartFailureMode": "kill",
+      "KillMode": "control-group",
+      "InactiveExitTimestampMonotonic": "517780880234"
+    },
+    "started_monotonic": 517780.880234,
+    "cap_s": 60.0,
+    "shutdown_publication_reserve_s": 10.0,
+    "task_exit_code": 0,
+    "supervisor_exit_code": 0,
+    "payload": {
+      "object": "VSP03_B04",
+      "command": [
+        "bash",
+        "-c",
+        "/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out \"$1\" && /home/wu/.venvs/hmasd/bin/python scripts/run_vsp03_b06.py --seed \"$2\" --out \"$3\" --node wsl_4070 --started-monotonic \"$VSP03_B04_STARTED\"",
+        "bash",
+        "/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b07_10804_20260910_admission.json",
+        "10804",
+        "/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b07_10804_20260910"
+      ],
+      "cwd": "/home/wu/hmasd-worktrees/vsp03-b07-adcff0a92559ac5552e24a9861e2b65572b478c5",
+      "started_unix_s": null,
+      "started_monotonic": 517780.880234,
+      "observed_unix_s": 1789059150.8705254,
+      "observed_monotonic": 517780.951406507,
+      "deadline_monotonic": 517840.880234,
+      "cap_s": 60.0,
+      "shutdown_publication_reserve_s": 10.0,
+      "root_returncode": 0,
+      "task_exit_code": 0,
+      "timed_out": false,
+      "error": null,
+      "descendants_killed": [],
+      "descendants_reaped": [],
+      "descendants_remaining": [],
+      "all_descendants_terminated": true,
+      "elapsed_before_terminal_publication_s": 8.901619348034728
+    },
+    "error": null,
+    "descendants_killed": [
+      3086928,
+      3086928,
+      3086929,
+      3086942
+    ],
+    "descendants_reaped": [
+      {
+        "pid": 3086928,
+        "wait_status": 9
+      },
+      {
+        "pid": 3086929,
+        "wait_status": 1
+      },
+      {
+        "pid": 3086942,
+        "wait_status": 1
+      }
+    ],
+    "descendants_remaining": [],
+    "all_descendants_terminated": true,
+    "elapsed_before_terminal_publication_s": 8.923692061041947
+  },
+  "payload": {
+    "object": "VSP03_B04",
+    "command": [
+      "bash",
+      "-c",
+      "/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out \"$1\" && /home/wu/.venvs/hmasd/bin/python scripts/run_vsp03_b06.py --seed \"$2\" --out \"$3\" --node wsl_4070 --started-monotonic \"$VSP03_B04_STARTED\"",
+      "bash",
+      "/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b07_10804_20260910_admission.json",
+      "10804",
+      "/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b07_10804_20260910"
+    ],
+    "cwd": "/home/wu/hmasd-worktrees/vsp03-b07-adcff0a92559ac5552e24a9861e2b65572b478c5",
+    "started_unix_s": null,
+    "started_monotonic": 517780.880234,
+    "observed_unix_s": 1789059150.8705254,
+    "observed_monotonic": 517780.951406507,
+    "deadline_monotonic": 517840.880234,
+    "cap_s": 60.0,
+    "shutdown_publication_reserve_s": 10.0,
+    "root_returncode": 0,
+    "task_exit_code": 0,
+    "timed_out": false,
+    "error": null,
+    "descendants_killed": [],
+    "descendants_reaped": [],
+    "descendants_remaining": [],
+    "all_descendants_terminated": true,
+    "elapsed_before_terminal_publication_s": 8.901619348034728
+  },
+  "journal": [
+    {
+      "CODE_FUNC": "job_emit_start_message",
+      "CODE_LINE": "609",
+      "_TRANSPORT": "journal",
+      "_CAP_EFFECTIVE": "0",
+      "_SYSTEMD_CGROUP": "/user.slice/user-1000.slice/user@1000.service/init.scope",
+      "JOB_TYPE": "start",
+      "_RUNTIME_SCOPE": "system",
+      "_EXE": "/usr/lib/systemd/systemd",
+      "__SEQNUM": "176111",
+      "_UID": "1000",
+      "PRIORITY": "6",
+      "_SELINUX_CONTEXT": "kernel",
+      "CODE_FILE": "src/core/job.c",
+      "_AUDIT_LOGINUID": "1000",
+      "USER_UNIT": "vsp03-b07-10804-20260910.service",
+      "_SYSTEMD_USER_UNIT": "init.scope",
+      "_SYSTEMD_SLICE": "user-1000.slice",
+      "_SYSTEMD_UNIT": "user@1000.service",
+      "_MACHINE_ID": "6910bce2db53443699ddeaa436cc2d2a",
+      "_SYSTEMD_OWNER_UID": "1000",
+      "__MONOTONIC_TIMESTAMP": "517780880275",
+      "MESSAGE": "Starting vsp03-b07-10804-20260910.service - /home/wu/.venvs/hmasd/bin/python /home/wu/hmasd-worktrees/vsp03-b07-adcff0a92559ac5552e24a9861e2b65572b478c5/experiments/candidates/vsp_03/vsp03_b04/control.py --unit=vsp03-b07-10804-20260910.service --name=vsp03-b07-10804-20260910 --record=/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b07_10804_20260910_terminal.json --cap=60 --reserve=10 -- bash -c \"/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out \\\"\\$1\\\" && /home/wu/.venvs/hmasd/bin/python scripts/run_vsp03_b06.py --seed \\\"\\$2\\\" --out \\\"\\$3\\\" --node wsl_4070 --started-monotonic \\\"\\$VSP03_B04_STARTED\\\"\" bash /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b07_10804_20260910_admission.json 10804 /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b07_10804_20260910...",
+      "USER_INVOCATION_ID": "3d9b2ce7fe1a4657a2319a83d7737bc4",
+      "__CURSOR": "s=ecbd01ef5f624e2a9c9bd9c3dd5cbeb8;i=2afef;b=5afa96f012d9434283af54a9a85c7e9f;m=788e253b93;t=65b23cb2a6221;x=982b9699313ed599",
+      "TID": "638",
+      "SYSLOG_FACILITY": "3",
+      "_SOURCE_REALTIME_TIMESTAMP": "1789059150799367",
+      "SYSLOG_IDENTIFIER": "systemd",
+      "_BOOT_ID": "5afa96f012d9434283af54a9a85c7e9f",
+      "MESSAGE_ID": "7d4958e842da4a758f6c1cdc7b36dcc5",
+      "__REALTIME_TIMESTAMP": "1789059150799393",
+      "__SEQNUM_ID": "ecbd01ef5f624e2a9c9bd9c3dd5cbeb8",
+      "_HOSTNAME": "LAPTOP-U9TDKC8A",
+      "_CMDLINE": "/usr/lib/systemd/systemd --user --deserialize=8",
+      "_AUDIT_SESSION": "2",
+      "_GID": "1000",
+      "JOB_ID": "1374",
+      "_SYSTEMD_USER_SLICE": "-.slice",
+      "_COMM": "systemd",
+      "_PID": "638"
+    },
+    {
+      "__REALTIME_TIMESTAMP": "1789059150855710",
+      "PRIORITY": "6",
+      "_GID": "1000",
+      "SYSLOG_FACILITY": "3",
+      "_SYSTEMD_SLICE": "user-1000.slice",
+      "_STREAM_ID": "4fd8da4342c8463d9ff6875e22333ef1",
+      "_SELINUX_CONTEXT": "kernel",
+      "__SEQNUM": "176113",
+      "_AUDIT_LOGINUID": "1000",
+      "_SYSTEMD_CGROUP": "/user.slice/user-1000.slice/user@1000.service/app.slice/vsp03-b07-10804-20260910.service",
+      "_SYSTEMD_USER_UNIT": "vsp03-b07-10804-20260910.service",
+      "_PID": "3086918",
+      "__MONOTONIC_TIMESTAMP": "517780936592",
+      "_HOSTNAME": "LAPTOP-U9TDKC8A",
+      "_AUDIT_SESSION": "2",
+      "_COMM": "bash",
+      "MESSAGE": "Task 'vsp03-b07-10804-20260910' started in tmux session 'agent_vsp03-b07-10804-20260910'. Output: /home/wu/.agent-tasks/vsp03-b07-10804-20260910/task.log",
+      "__SEQNUM_ID": "ecbd01ef5f624e2a9c9bd9c3dd5cbeb8",
+      "_SYSTEMD_UNIT": "user@1000.service",
+      "_SYSTEMD_INVOCATION_ID": "3d9b2ce7fe1a4657a2319a83d7737bc4",
+      "_CAP_EFFECTIVE": "0",
+      "_TRANSPORT": "stdout",
+      "_BOOT_ID": "5afa96f012d9434283af54a9a85c7e9f",
+      "_SYSTEMD_USER_SLICE": "app.slice",
+      "__CURSOR": "s=ecbd01ef5f624e2a9c9bd9c3dd5cbeb8;i=2aff1;b=5afa96f012d9434283af54a9a85c7e9f;m=788e261790;t=65b23cb2b3e1e;x=8c1634f9e1640726",
+      "_MACHINE_ID": "6910bce2db53443699ddeaa436cc2d2a",
+      "_UID": "1000",
+      "_SYSTEMD_OWNER_UID": "1000",
+      "SYSLOG_IDENTIFIER": "python",
+      "_RUNTIME_SCOPE": "system"
+    },
+    {
+      "PRIORITY": "6",
+      "_PID": "3086916",
+      "__MONOTONIC_TIMESTAMP": "517789804185",
+      "_SELINUX_CONTEXT": "kernel",
+      "_BOOT_ID": "5afa96f012d9434283af54a9a85c7e9f",
+      "_SYSTEMD_OWNER_UID": "1000",
+      "_SYSTEMD_SLICE": "user-1000.slice",
+      "_SYSTEMD_USER_UNIT": "vsp03-b07-10804-20260910.service",
+      "_GID": "1000",
+      "_UID": "1000",
+      "_SYSTEMD_UNIT": "user@1000.service",
+      "SYSLOG_IDENTIFIER": "python",
+      "_TRANSPORT": "stdout",
+      "_CMDLINE": "/home/wu/.venvs/hmasd/bin/python /home/wu/hmasd-worktrees/vsp03-b07-adcff0a92559ac5552e24a9861e2b65572b478c5/experiments/candidates/vsp_03/vsp03_b04/control.py --unit=vsp03-b07-10804-20260910.service --name=vsp03-b07-10804-20260910 --record=/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b07_10804_20260910_terminal.json --cap=60 --reserve=10 -- bash -c \"/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out \\\"\\$1\\\" && /home/wu/.venvs/hmasd/bin/python scripts/run_vsp03_b06.py --seed \\\"\\$2\\\" --out \\\"\\$3\\\" --node wsl_4070 --started-monotonic \\\"\\$VSP03_B04_STARTED\\\"\" bash /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b07_10804_20260910_admission.json 10804 /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b07_10804_20260910",
+      "_RUNTIME_SCOPE": "system",
+      "__CURSOR": "s=ecbd01ef5f624e2a9c9bd9c3dd5cbeb8;i=2aff2;b=5afa96f012d9434283af54a9a85c7e9f;m=788ead6699;t=65b23cbb28d28;x=4c9f42f86f1250cf",
+      "_HOSTNAME": "LAPTOP-U9TDKC8A",
+      "_SYSTEMD_INVOCATION_ID": "3d9b2ce7fe1a4657a2319a83d7737bc4",
+      "_COMM": "python",
+      "_AUDIT_LOGINUID": "1000",
+      "__SEQNUM_ID": "ecbd01ef5f624e2a9c9bd9c3dd5cbeb8",
+      "_AUDIT_SESSION": "2",
+      "_STREAM_ID": "4fd8da4342c8463d9ff6875e22333ef1",
+      "__REALTIME_TIMESTAMP": "1789059159723304",
+      "_SYSTEMD_USER_SLICE": "app.slice",
+      "SYSLOG_FACILITY": "3",
+      "_EXE": "/home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu/bin/python3.10",
+      "MESSAGE": "{\"terminal_published\": \"/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b07_10804_20260910_terminal.json\", \"task_exit_code\": 0, \"elapsed_through_terminal_readback_s\": 8.923879990004934}",
+      "_CAP_EFFECTIVE": "0",
+      "_SYSTEMD_CGROUP": "/user.slice/user-1000.slice/user@1000.service/app.slice/vsp03-b07-10804-20260910.service",
+      "__SEQNUM": "176114",
+      "_MACHINE_ID": "6910bce2db53443699ddeaa436cc2d2a"
+    },
+    {
+      "__CURSOR": "s=ecbd01ef5f624e2a9c9bd9c3dd5cbeb8;i=2aff3;b=5afa96f012d9434283af54a9a85c7e9f;m=788ead75f2;t=65b23cbb29c80;x=8f37a8446e30dda2",
+      "USER_INVOCATION_ID": "3d9b2ce7fe1a4657a2319a83d7737bc4",
+      "_SYSTEMD_CGROUP": "/user.slice/user-1000.slice/user@1000.service/init.scope",
+      "_SOURCE_REALTIME_TIMESTAMP": "1789059159727214",
+      "_SYSTEMD_UNIT": "user@1000.service",
+      "CODE_FILE": "src/core/job.c",
+      "USER_UNIT": "vsp03-b07-10804-20260910.service",
+      "_AUDIT_LOGINUID": "1000",
+      "_SYSTEMD_USER_UNIT": "init.scope",
+      "_COMM": "systemd",
+      "_BOOT_ID": "5afa96f012d9434283af54a9a85c7e9f",
+      "_HOSTNAME": "LAPTOP-U9TDKC8A",
+      "MESSAGE_ID": "39f53479d3a045ac8e11786248231fbf",
+      "_MACHINE_ID": "6910bce2db53443699ddeaa436cc2d2a",
+      "MESSAGE": "Finished vsp03-b07-10804-20260910.service - /home/wu/.venvs/hmasd/bin/python /home/wu/hmasd-worktrees/vsp03-b07-adcff0a92559ac5552e24a9861e2b65572b478c5/experiments/candidates/vsp_03/vsp03_b04/control.py --unit=vsp03-b07-10804-20260910.service --name=vsp03-b07-10804-20260910 --record=/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b07_10804_20260910_terminal.json --cap=60 --reserve=10 -- bash -c \"/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out \\\"\\$1\\\" && /home/wu/.venvs/hmasd/bin/python scripts/run_vsp03_b06.py --seed \\\"\\$2\\\" --out \\\"\\$3\\\" --node wsl_4070 --started-monotonic \\\"\\$VSP03_B04_STARTED\\\"\" bash /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b07_10804_20260910_admission.json 10804 /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b07_10804_20260910.",
+      "_AUDIT_SESSION": "2",
+      "CODE_LINE": "796",
+      "_EXE": "/usr/lib/systemd/systemd",
+      "JOB_TYPE": "start",
+      "__MONOTONIC_TIMESTAMP": "517789808114",
+      "_UID": "1000",
+      "_SELINUX_CONTEXT": "kernel",
+      "JOB_ID": "1374",
+      "__SEQNUM": "176115",
+      "TID": "638",
+      "__REALTIME_TIMESTAMP": "1789059159727232",
+      "SYSLOG_FACILITY": "3",
+      "_RUNTIME_SCOPE": "system",
+      "SYSLOG_IDENTIFIER": "systemd",
+      "PRIORITY": "6",
+      "_GID": "1000",
+      "__SEQNUM_ID": "ecbd01ef5f624e2a9c9bd9c3dd5cbeb8",
+      "_SYSTEMD_SLICE": "user-1000.slice",
+      "JOB_RESULT": "done",
+      "_CMDLINE": "/usr/lib/systemd/systemd --user --deserialize=8",
+      "_CAP_EFFECTIVE": "0",
+      "_SYSTEMD_OWNER_UID": "1000",
+      "CODE_FUNC": "job_emit_done_message",
+      "_SYSTEMD_USER_SLICE": "-.slice",
+      "_PID": "638",
+      "_TRANSPORT": "journal"
+    },
+    {
+      "_TRANSPORT": "journal",
+      "USER_UNIT": "vsp03-b07-10804-20260910.service",
+      "MEMORY_SWAP_PEAK": "0",
+      "_EXE": "/usr/lib/systemd/systemd",
+      "_AUDIT_SESSION": "2",
+      "USER_INVOCATION_ID": "3d9b2ce7fe1a4657a2319a83d7737bc4",
+      "_SYSTEMD_SLICE": "user-1000.slice",
+      "_SYSTEMD_USER_UNIT": "init.scope",
+      "__SEQNUM": "176116",
+      "MESSAGE_ID": "ae8f7b866b0347b9af31fe1c80b127c0",
+      "_RUNTIME_SCOPE": "system",
+      "_CMDLINE": "/usr/lib/systemd/systemd --user --deserialize=8",
+      "_COMM": "systemd",
+      "_BOOT_ID": "5afa96f012d9434283af54a9a85c7e9f",
+      "_PID": "638",
+      "SYSLOG_FACILITY": "3",
+      "_SYSTEMD_CGROUP": "/user.slice/user-1000.slice/user@1000.service/init.scope",
+      "SYSLOG_IDENTIFIER": "systemd",
+      "MEMORY_PEAK": "8785920",
+      "CODE_LINE": "2577",
+      "__SEQNUM_ID": "ecbd01ef5f624e2a9c9bd9c3dd5cbeb8",
+      "_GID": "1000",
+      "__CURSOR": "s=ecbd01ef5f624e2a9c9bd9c3dd5cbeb8;i=2aff4;b=5afa96f012d9434283af54a9a85c7e9f;m=788ead76fa;t=65b23cbb29d88;x=ac006b5bc0651724",
+      "CODE_FILE": "src/core/unit.c",
+      "MESSAGE": "vsp03-b07-10804-20260910.service: Consumed 9.244s CPU time, 8.3M memory peak, 0B memory swap peak.",
+      "TID": "638",
+      "__MONOTONIC_TIMESTAMP": "517789808378",
+      "_MACHINE_ID": "6910bce2db53443699ddeaa436cc2d2a",
+      "_SELINUX_CONTEXT": "kernel",
+      "_SOURCE_REALTIME_TIMESTAMP": "1789059159727332",
+      "_AUDIT_LOGINUID": "1000",
+      "_SYSTEMD_OWNER_UID": "1000",
+      "CPU_USAGE_NSEC": "9244309000",
+      "_UID": "1000",
+      "CODE_FUNC": "unit_log_resources",
+      "_SYSTEMD_UNIT": "user@1000.service",
+      "_HOSTNAME": "LAPTOP-U9TDKC8A",
+      "__REALTIME_TIMESTAMP": "1789059159727496",
+      "_CAP_EFFECTIVE": "0",
+      "PRIORITY": "6",
+      "_SYSTEMD_USER_SLICE": "-.slice"
+    }
+  ],
+  "artifact_readback": {
+    "artifact": "VSP03_B07_ARTIFACTS_20260910.tar.gz",
+    "sha256": "0cd6a91504065af646cf1e7d036aa31ff64e3b5a168f179120e7c4b4db677741",
+    "bytes": 219454,
+    "all_scientific_bytes_match_remote": true,
+    "remote_files": {
+      "b07_10804_20260910/G_128.pt": {
+        "bytes": 11936,
+        "sha256": "1b054ef7ba7f73ac1dd10c3e8e85a5a306b13a27e2512b039fac7b5d4c0dc6b1"
+      },
+      "b07_10804_20260910/G_512.pt": {
+        "bytes": 11936,
+        "sha256": "f79b703e1884540f68ae6f8544b45b90ff705808885f3efaeadb421934074894"
+      },
+      "b07_10804_20260910/G_curve.jsonl": {
+        "bytes": 284570,
+        "sha256": "140db265779ca9937ff22337b36b21a53b3b95b5063662b09beee90bff99e5fa"
+      },
+      "b07_10804_20260910/G_greedy_128.json": {
+        "bytes": 646407,
+        "sha256": "596a3acb8d2fa29b5a12da0cb098ff7b48ed5c08d603ad65f972ebf655b79457"
+      },
+      "b07_10804_20260910/G_greedy_512.json": {
+        "bytes": 646359,
+        "sha256": "7060013214d543b86903974b0ba944febb8be2ca2551ac17c9c6574010987bb2"
+      },
+      "b07_10804_20260910/G_stochastic_128.json": {
+        "bytes": 645745,
+        "sha256": "ffb015acaf9c0c4f606d82b6fae38b13082a75bfddb7077f5e0f774ecb343f65"
+      },
+      "b07_10804_20260910/G_stochastic_512.json": {
+        "bytes": 646363,
+        "sha256": "365bfbf0383aa247bbcecabafbf221b36584bd0b44fc54d506a3193f055b6ef3"
+      },
+      "b07_10804_20260910/R0_128.json": {
+        "bytes": 646462,
+        "sha256": "3733a50221579699e66632292efb173c714195c6103ae6a42b6c04457e9cab93"
+      },
+      "b07_10804_20260910/R0_512.json": {
+        "bytes": 646462,
+        "sha256": "3733a50221579699e66632292efb173c714195c6103ae6a42b6c04457e9cab93"
+      },
+      "b07_10804_20260910/R_128.json": {
+        "bytes": 646470,
+        "sha256": "39e4290995a25b668ed155806d9144e15d2f3d4c8a240e04f6758968fa2777b5"
+      },
+      "b07_10804_20260910/R_512.json": {
+        "bytes": 646470,
+        "sha256": "39e4290995a25b668ed155806d9144e15d2f3d4c8a240e04f6758968fa2777b5"
+      },
+      "b07_10804_20260910/checkpoint_128.json": {
+        "bytes": 2983,
+        "sha256": "873f243802d558a40c74e6438d4a9f0dc645be8116990bdb0d4709638bd18d9b"
+      },
+      "b07_10804_20260910/checkpoint_512.json": {
+        "bytes": 2985,
+        "sha256": "cf0ee1c2f76b09bc96cdc35fa1878f713c9b5dce6b859954ad6e7428f02a2194"
+      },
+      "b07_10804_20260910/paired_budget_change.json": {
+        "bytes": 73206,
+        "sha256": "e738eb3b1f8b687eecb8ad18a63b101f7dc3a55e3c4e2838d2c33948d8bce509"
+      },
+      "b07_10804_20260910/paired_differences_128.json": {
+        "bytes": 228157,
+        "sha256": "ff8ccaadd59a5315f36c6577cd6c7a4029770e3e7f83f988d8a04b640986c10c"
+      },
+      "b07_10804_20260910/paired_differences_512.json": {
+        "bytes": 215250,
+        "sha256": "34f4dc1fbeafcc68c50a79b94b00f7052711d52de79113d5bd3da8dd2f9c5e46"
+      },
+      "b07_10804_20260910/summary.json": {
+        "bytes": 12806,
+        "sha256": "9295b32fd00dc3fcc485a4cdf5f49fd9698d79cc06d0d00136355707b85852fe"
+      },
+      "b07_10804_20260910_admission.json": {
+        "bytes": 504,
+        "sha256": "2f7c6bc5c75a70be8782e8da376cda2510514105b2b26281e25f897525feeafc"
+      },
+      "b07_10804_20260910_terminal.json": {
+        "bytes": 2055,
+        "sha256": "3ca87cc068339906cbda9ca21f12f2a71a46319b819d7757801cf3450dc3eca3"
+      },
+      "b07_10804_20260910_terminal.payload.json": {
+        "bytes": 1118,
+        "sha256": "cef89fc72371ee9753ea8b1097ea23e722a143978242d52b983a1eb32c8deafe"
+      }
+    },
+    "archive_members": [
+      {
+        "name": "b07_10804_20260910",
+        "bytes": 0,
+        "type": "5"
+      },
+      {
+        "name": "b07_10804_20260910/G_128.pt",
+        "bytes": 11936,
+        "type": "0"
+      },
+      {
+        "name": "b07_10804_20260910/summary.json",
+        "bytes": 12806,
+        "type": "0"
+      },
+      {
+        "name": "b07_10804_20260910/G_stochastic_128.json",
+        "bytes": 645745,
+        "type": "0"
+      },
+      {
+        "name": "b07_10804_20260910/G_stochastic_512.json",
+        "bytes": 646363,
+        "type": "0"
+      },
+      {
+        "name": "b07_10804_20260910/checkpoint_512.json",
+        "bytes": 2985,
+        "type": "0"
+      },
+      {
+        "name": "b07_10804_20260910/G_512.pt",
+        "bytes": 11936,
+        "type": "0"
+      },
+      {
+        "name": "b07_10804_20260910/R0_128.json",
+        "bytes": 646462,
+        "type": "0"
+      },
+      {
+        "name": "b07_10804_20260910/G_curve.jsonl",
+        "bytes": 284570,
+        "type": "0"
+      },
+      {
+        "name": "b07_10804_20260910/paired_differences_128.json",
+        "bytes": 228157,
+        "type": "0"
+      },
+      {
+        "name": "b07_10804_20260910/checkpoint_128.json",
+        "bytes": 2983,
+        "type": "0"
+      },
+      {
+        "name": "b07_10804_20260910/R_128.json",
+        "bytes": 646470,
+        "type": "0"
+      },
+      {
+        "name": "b07_10804_20260910/paired_budget_change.json",
+        "bytes": 73206,
+        "type": "0"
+      },
+      {
+        "name": "b07_10804_20260910/G_greedy_128.json",
+        "bytes": 646407,
+        "type": "0"
+      },
+      {
+        "name": "b07_10804_20260910/paired_differences_512.json",
+        "bytes": 215250,
+        "type": "0"
+      },
+      {
+        "name": "b07_10804_20260910/R_512.json",
+        "bytes": 646470,
+        "type": "0"
+      },
+      {
+        "name": "b07_10804_20260910/R0_512.json",
+        "bytes": 646462,
+        "type": "0"
+      },
+      {
+        "name": "b07_10804_20260910/G_greedy_512.json",
+        "bytes": 646359,
+        "type": "0"
+      },
+      {
+        "name": "b07_10804_20260910_admission.json",
+        "bytes": 504,
+        "type": "0"
+      },
+      {
+        "name": "b07_10804_20260910_terminal.json",
+        "bytes": 2055,
+        "type": "0"
+      },
+      {
+        "name": "b07_10804_20260910_terminal.payload.json",
+        "bytes": 1118,
+        "type": "0"
+      },
+      {
+        "name": "vsp03-b07-10804-20260910",
+        "bytes": 0,
+        "type": "5"
+      },
+      {
+        "name": "vsp03-b07-10804-20260910/runner.sh",
+        "bytes": 1662,
+        "type": "0"
+      },
+      {
+        "name": "vsp03-b07-10804-20260910/exit_code",
+        "bytes": 2,
+        "type": "0"
+      },
+      {
+        "name": "vsp03-b07-10804-20260910/status",
+        "bytes": 9,
+        "type": "0"
+      },
+      {
+        "name": "vsp03-b07-10804-20260910/start_time",
+        "bytes": 11,
+        "type": "0"
+      },
+      {
+        "name": "vsp03-b07-10804-20260910/pid",
+        "bytes": 8,
+        "type": "0"
+      },
+      {
+        "name": "vsp03-b07-10804-20260910/task.log",
+        "bytes": 2015,
+        "type": "0"
+      }
+    ],
+    "native_rows": 8192,
+    "curve_rows": 512,
+    "rule_panels_identical": true,
+    "five_contrasts_both_endpoints": true,
+    "paired_world_Q": true,
+    "entropy_schedule": true,
+    "two_immediate_snapshot_files": [
+      "b07_10804_20260910/G_128.pt",
+      "b07_10804_20260910/G_512.pt"
+    ],
+    "primary_source_and_receipts": true,
+    "exposure_counts_reconciled_from_curve_and_native_rows": {
+      "episodes_started": 73728,
+      "episodes_completed": 73728,
+      "team_ticks": 2949120,
+      "target_transitions": 5898240,
+      "decision_rows": 431296
+    },
+    "supervisor_files_match_remote": {
+      "exit_code": {
+        "bytes": 2,
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "pid": {
+        "bytes": 8,
+        "sha256": "6fa2e4d8540f546e29ef3c03eb26a0ff7a7f66d07ebfd9b1998151210bb3d719"
+      },
+      "runner.sh": {
+        "bytes": 1662,
+        "sha256": "edabe63887dec06c9d05946db19ddaf93e245d21b82c9a2cd407d87fcbbe8ca7"
+      },
+      "start_time": {
+        "bytes": 11,
+        "sha256": "486a39fca86dd7f3aa526263370a14415503d16e4ae487f24c3d76bb79502fa8"
+      },
+      "status": {
+        "bytes": 9,
+        "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+      },
+      "task.log": {
+        "bytes": 2015,
+        "sha256": "1c4c70cbf0b693d0e2b7043bc3f78a20da0c88c05dac20855efb25606bd536c9"
+      }
+    }
+  },
+  "monitor_terminal_evidence": "VSP03 B07 terminal evidence\ntask: vsp03-b07-10804-20260910\nlocal_observation_time: 2026-09-10T16:56:07.3329491Z\nstatus: finished\nexit_code: 0\npid: 3086929\ntmux_active: false\nremote_start: 2026-09-11T00:52:30+08:00\nremote_exit: 2026-09-11T00:52:39+08:00\nduration_seconds: 9\ncompletion: complete\narm: G\nepisodes_started: 73728\nepisodes_completed: 73728\nteam_ticks: 2949120\ntarget_transitions: 5898240\ndecision_rows: 431296\nrollout_policy_forwards: 8716\noptimizer_steps: 512\nresource_preflight: passed=true, available_physical_bytes=15183974400\nterminal_published: /home/wu/projects/HMASD/temp/directions/vsp_03/exp/b07_10804_20260910_terminal.payload.json\nall_descendants_terminated: true\n",
+  "scientific_reexecution": {
+    "models": 0,
+    "worlds": 0,
+    "optimizer_steps": 0
+  },
+  "complete_wall_s": 8.927880000032019,
+  "study_elapsed_s": 8.927880000032019,
+  "aggregate_cpu_s": 9.244309,
+  "unit_memory_peak_bytes": 8785920,
+  "earliest_manager_monotonic_s": 517780.880234,
+  "finished_journal_monotonic_us": 517789808114,
+  "resources_unmeasured": [
+    "cgroup_headroom_bytes",
+    "cgroup_memory_current_bytes",
+    "cgroup_memory_max_bytes"
+  ],
+  "cleanup_inventory": {
+    "source_cwd": "/home/wu/hmasd-worktrees/vsp03-b07-adcff0a92559ac5552e24a9861e2b65572b478c5",
+    "source_status_including_ignored": "!! experiments/candidates/vsp_03/vsp03_b01/__pycache__/b01.cpython-310.pyc\n!! experiments/candidates/vsp_03/vsp03_b02/__pycache__/b02.cpython-310.pyc\n!! experiments/candidates/vsp_03/vsp03_b04/__pycache__/deadline.cpython-310.pyc\n!! experiments/candidates/vsp_03/vsp03_b06/__pycache__/__init__.cpython-310.pyc\n!! experiments/candidates/vsp_03/vsp03_b06/__pycache__/b06.cpython-310.pyc\n!! scripts/__pycache__/hmasd_platform.cpython-310.pyc\n",
+    "supervisor_directory": "/home/wu/.agent-tasks/vsp03-b07-10804-20260910",
+    "private_socket_directory": "/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b07_10804_20260910_terminal.tmux",
+    "read_only_process_query": "Only the collection Python process matched the initial broad pgrep; scientific terminal already confirmed. Fresh exact-cwd/argv checks precede cleanup.",
+    "preserve": [
+      "/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b07_10804_20260910",
+      "adjacent _admission.json, _terminal.json, _terminal.payload.json",
+      "committed scientific archive and launch source"
+    ],
+    "source_recovery_archive": {
+      "path": "VSP03_B07_EXECUTION_SOURCE_20260910.tar.gz",
+      "bytes": 42506,
+      "sha256": "ca11417e981aed9314af54e751dacd441210813fe8897636375e592dcd9e8f6d",
+      "members": {
+        "scripts/hmasd_resource_preflight.py": {
+          "bytes": 21314,
+          "sha256": "cb0525e9247f1c7262c198bf051e542282f5928982137b3023d36d5d69eda4dc"
+        },
+        "scripts/__pycache__/hmasd_platform.cpython-310.pyc": {
+          "bytes": 2850,
+          "sha256": "13c2ad30beb25499edc1909d22b5ed29fc60578137f44ef17dc7a19b229d702c"
+        },
+        "scripts/run_vsp03_b06.py": {
+          "bytes": 1280,
+          "sha256": "d425cf2b0ca40d6d8666b557ba4f2eda2764f3513821ed72a4de7c056e9295fd"
+        },
+        "scripts/hmasd_platform.py": {
+          "bytes": 2599,
+          "sha256": "f9e1fd0a88f9c0eef9b706802ae3aaceac4bc2f8ea394e895d01146e8e17865b"
+        },
+        "experiments/candidates/vsp_03/vsp03_b04/launch.sh": {
+          "bytes": 838,
+          "sha256": "77987fcbb3d9467a53836392f4f7ee652f442f65467dfa058ec8db7ea41ef74c"
+        },
+        "experiments/candidates/vsp_03/vsp03_b04/control.py": {
+          "bytes": 4781,
+          "sha256": "cee3ade931bbd06dcbf3a9f0480efe933c435c6b0d341ec4a3e5e959670fc552"
+        },
+        "experiments/candidates/vsp_03/vsp03_b04/__pycache__/deadline.cpython-310.pyc": {
+          "bytes": 4267,
+          "sha256": "bbb4a995c0b755e6368edac277d3f435ae9805a591ace856e217e335ef0d2a18"
+        },
+        "experiments/candidates/vsp_03/vsp03_b04/deadline.py": {
+          "bytes": 5243,
+          "sha256": "abe9e120f5a9489bb8e0a012a4ceef6ee2f979ecb27834ba834ce3719760bc86"
+        },
+        "experiments/candidates/vsp_03/vsp03_b02/b02.py": {
+          "bytes": 16014,
+          "sha256": "9cb1bf9cc44e5cad8185997e3d6b2e71d1d581580c283b1cc77599e80da86be4"
+        },
+        "experiments/candidates/vsp_03/vsp03_b02/__pycache__/b02.cpython-310.pyc": {
+          "bytes": 13897,
+          "sha256": "f1fc68d75cdba6851300aec4da47b85a0470cc86c0c4eddba046254cd10de839"
+        },
+        "experiments/candidates/vsp_03/vsp03_b06/launch_b07.sh": {
+          "bytes": 623,
+          "sha256": "c6f34678e151526e069aef49b5259878dc67e9906831451dd8f26898fb72261b"
+        },
+        "experiments/candidates/vsp_03/vsp03_b06/b06.py": {
+          "bytes": 8735,
+          "sha256": "a8bd7e95000a4dfe94c5573e90a5da898d5248ae57f084a37463d3016f6e70c6"
+        },
+        "experiments/candidates/vsp_03/vsp03_b06/__pycache__/b06.cpython-310.pyc": {
+          "bytes": 7230,
+          "sha256": "e295ea17d794d33c58514959ac61f92c70ba84c3f77537e65589c8e12c0b0664"
+        },
+        "experiments/candidates/vsp_03/vsp03_b06/__pycache__/__init__.cpython-310.pyc": {
+          "bytes": 259,
+          "sha256": "b896ede7a2094e98d885e6945ac97b94fb983641ae2dc7748e456341e27fa9ec"
+        },
+        "experiments/candidates/vsp_03/vsp03_b06/__init__.py": {
+          "bytes": 34,
+          "sha256": "e8b2225d4cd089038426761068fac425ea7df80ffa5830b6cb2878996985b77d"
+        },
+        "experiments/candidates/vsp_03/vsp03_b01/b01.py": {
+          "bytes": 22425,
+          "sha256": "39481f270f2d26349f872b5965754b918f0e5cfd6517e7f043afc1571fd195ed"
+        },
+        "experiments/candidates/vsp_03/vsp03_b01/__pycache__/b01.cpython-310.pyc": {
+          "bytes": 17026,
+          "sha256": "728de1a7eccbd428eedec660e67424d08052f394b164c80b83ac033c6b1bec7f"
+        }
+      },
+      "all_11_source_files_match_frozen_Git": true,
+      "six_generated_pyc_files_preserved": true
+    },
+    "state": "completed remotely; source/wrapper/socket absent, source unregistered, original scientific evidence preserved; local scratch policy blocker excluded"
+  },
+  "closeout": {
+    "status": "resolved_scoped_remote_closeout_complete",
+    "observed_utc": "2026-09-10T17:17:47.698922+00:00",
+    "transport_error": "subprocess.TimeoutExpired: SSH cleanup command timed out after 50 seconds; no stdout receipt returned",
+    "effects": "unknown pending read-only reconciliation; do not repeat removal command",
+    "science": "already complete, no new scientific invocation",
+    "path_process_reconciliation": {
+      "observed_utc": "2026-09-10T17:19:11.982605+00:00",
+      "returncode": 0,
+      "stdout": "{\"paths_exist\": {\"/home/wu/hmasd-worktrees/vsp03-b07-adcff0a92559ac5552e24a9861e2b65572b478c5\": true, \"/home/wu/.agent-tasks/vsp03-b07-10804-20260910\": true, \"/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b07_10804_20260910_terminal.tmux\": true}, \"matching_processes\": [{\"pid\": 3089450, \"ppid\": \"1\", \"argv_prefix\": \"/home/wu/.venvs/hmasd/bin/python -c import json,pathlib,subprocess,hashlib,os,tarfile,io\\nfrom datetime import datetime,timezone\\nsource=pathlib.Path('/home/wu/hmasd-worktrees/vsp03-b07-adcff0a92559ac5552e24a9861e2b65572b478c5')\\nwrapper=pathlib.Path('/\"}, {\"pid\": 3089452, \"ppid\": \"3089450\", \"argv_prefix\": \"git -C /home/wu/projects/HMASD fetch origin 1067e2025a49df639feae2ad51babb75e7b03d7b \"}], \"preserved_files\": {\"b07_10804_20260910/G_128.pt\": \"1b054ef7ba7f73ac1dd10c3e8e85a5a306b13a27e2512b039fac7b5d4c0dc6b1\", \"b07_10804_20260910/G_512.pt\": \"f79b703e1884540f68ae6f8544b45b90ff705808885f3efaeadb421934074894\", \"b07_10804_20260910/G_curve.jsonl\": \"140db265779ca9937ff22337b36b21a53b3b95b5063662b09beee90bff99e5fa\", \"b07_10804_20260910/G_greedy_128.json\": \"596a3acb8d2fa29b5a12da0cb098ff7b48ed5c08d603ad65f972ebf655b79457\", \"b07_10804_20260910/G_greedy_512.json\": \"7060013214d543b86903974b0ba944febb8be2ca2551ac17c9c6574010987bb2\", \"b07_10804_20260910/G_stochastic_128.json\": \"ffb015acaf9c0c4f606d82b6fae38b13082a75bfddb7077f5e0f774ecb343f65\", \"b07_10804_20260910/G_stochastic_512.json\": \"365bfbf0383aa247bbcecabafbf221b36584bd0b44fc54d506a3193f055b6ef3\", \"b07_10804_20260910/R0_128.json\": \"3733a50221579699e66632292efb173c714195c6103ae6a42b6c04457e9cab93\", \"b07_10804_20260910/R0_512.json\": \"3733a50221579699e66632292efb173c714195c6103ae6a42b6c04457e9cab93\", \"b07_10804_20260910/R_128.json\": \"39e4290995a25b668ed155806d9144e15d2f3d4c8a240e04f6758968fa2777b5\", \"b07_10804_20260910/R_512.json\": \"39e4290995a25b668ed155806d9144e15d2f3d4c8a240e04f6758968fa2777b5\", \"b07_10804_20260910/checkpoint_128.json\": \"873f243802d558a40c74e6438d4a9f0dc645be8116990bdb0d4709638bd18d9b\", \"b07_10804_20260910/checkpoint_512.json\": \"cf0ee1c2f76b09bc96cdc35fa1878f713c9b5dce6b859954ad6e7428f02a2194\", \"b07_10804_20260910/paired_budget_change.json\": \"e738eb3b1f8b687eecb8ad18a63b101f7dc3a55e3c4e2838d2c33948d8bce509\", \"b07_10804_20260910/paired_differences_128.json\": \"ff8ccaadd59a5315f36c6577cd6c7a4029770e3e7f83f988d8a04b640986c10c\", \"b07_10804_20260910/paired_differences_512.json\": \"34f4dc1fbeafcc68c50a79b94b00f7052711d52de79113d5bd3da8dd2f9c5e46\", \"b07_10804_20260910/summary.json\": \"9295b32fd00dc3fcc485a4cdf5f49fd9698d79cc06d0d00136355707b85852fe\", \"b07_10804_20260910_admission.json\": \"2f7c6bc5c75a70be8782e8da376cda2510514105b2b26281e25f897525feeafc\", \"b07_10804_20260910_terminal.json\": \"3ca87cc068339906cbda9ca21f12f2a71a46319b819d7757801cf3450dc3eca3\", \"b07_10804_20260910_terminal.payload.json\": \"cef89fc72371ee9753ea8b1097ea23e722a143978242d52b983a1eb32c8deafe\"}}\n",
+      "stderr": "",
+      "facts": {
+        "paths_exist": {
+          "/home/wu/hmasd-worktrees/vsp03-b07-adcff0a92559ac5552e24a9861e2b65572b478c5": true,
+          "/home/wu/.agent-tasks/vsp03-b07-10804-20260910": true,
+          "/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b07_10804_20260910_terminal.tmux": true
+        },
+        "matching_processes": [
+          {
+            "pid": 3089450,
+            "ppid": "1",
+            "argv_prefix": "/home/wu/.venvs/hmasd/bin/python -c import json,pathlib,subprocess,hashlib,os,tarfile,io\nfrom datetime import datetime,timezone\nsource=pathlib.Path('/home/wu/hmasd-worktrees/vsp03-b07-adcff0a92559ac5552e24a9861e2b65572b478c5')\nwrapper=pathlib.Path('/"
+          },
+          {
+            "pid": 3089452,
+            "ppid": "3089450",
+            "argv_prefix": "git -C /home/wu/projects/HMASD fetch origin 1067e2025a49df639feae2ad51babb75e7b03d7b "
+          }
+        ],
+        "preserved_files": {
+          "b07_10804_20260910/G_128.pt": "1b054ef7ba7f73ac1dd10c3e8e85a5a306b13a27e2512b039fac7b5d4c0dc6b1",
+          "b07_10804_20260910/G_512.pt": "f79b703e1884540f68ae6f8544b45b90ff705808885f3efaeadb421934074894",
+          "b07_10804_20260910/G_curve.jsonl": "140db265779ca9937ff22337b36b21a53b3b95b5063662b09beee90bff99e5fa",
+          "b07_10804_20260910/G_greedy_128.json": "596a3acb8d2fa29b5a12da0cb098ff7b48ed5c08d603ad65f972ebf655b79457",
+          "b07_10804_20260910/G_greedy_512.json": "7060013214d543b86903974b0ba944febb8be2ca2551ac17c9c6574010987bb2",
+          "b07_10804_20260910/G_stochastic_128.json": "ffb015acaf9c0c4f606d82b6fae38b13082a75bfddb7077f5e0f774ecb343f65",
+          "b07_10804_20260910/G_stochastic_512.json": "365bfbf0383aa247bbcecabafbf221b36584bd0b44fc54d506a3193f055b6ef3",
+          "b07_10804_20260910/R0_128.json": "3733a50221579699e66632292efb173c714195c6103ae6a42b6c04457e9cab93",
+          "b07_10804_20260910/R0_512.json": "3733a50221579699e66632292efb173c714195c6103ae6a42b6c04457e9cab93",
+          "b07_10804_20260910/R_128.json": "39e4290995a25b668ed155806d9144e15d2f3d4c8a240e04f6758968fa2777b5",
+          "b07_10804_20260910/R_512.json": "39e4290995a25b668ed155806d9144e15d2f3d4c8a240e04f6758968fa2777b5",
+          "b07_10804_20260910/checkpoint_128.json": "873f243802d558a40c74e6438d4a9f0dc645be8116990bdb0d4709638bd18d9b",
+          "b07_10804_20260910/checkpoint_512.json": "cf0ee1c2f76b09bc96cdc35fa1878f713c9b5dce6b859954ad6e7428f02a2194",
+          "b07_10804_20260910/paired_budget_change.json": "e738eb3b1f8b687eecb8ad18a63b101f7dc3a55e3c4e2838d2c33948d8bce509",
+          "b07_10804_20260910/paired_differences_128.json": "ff8ccaadd59a5315f36c6577cd6c7a4029770e3e7f83f988d8a04b640986c10c",
+          "b07_10804_20260910/paired_differences_512.json": "34f4dc1fbeafcc68c50a79b94b00f7052711d52de79113d5bd3da8dd2f9c5e46",
+          "b07_10804_20260910/summary.json": "9295b32fd00dc3fcc485a4cdf5f49fd9698d79cc06d0d00136355707b85852fe",
+          "b07_10804_20260910_admission.json": "2f7c6bc5c75a70be8782e8da376cda2510514105b2b26281e25f897525feeafc",
+          "b07_10804_20260910_terminal.json": "3ca87cc068339906cbda9ca21f12f2a71a46319b819d7757801cf3450dc3eca3",
+          "b07_10804_20260910_terminal.payload.json": "cef89fc72371ee9753ea8b1097ea23e722a143978242d52b983a1eb32c8deafe"
+        }
+      }
+    },
+    "orphaned_own_cleanup_termination": {
+      "observed_utc": "2026-09-10T17:20:14.787766+00:00",
+      "returncode": 0,
+      "stdout": "{\"owned_cleanup_pid\": 3089450, \"actions\": [{\"pid\": 3089450, \"name\": \"python\", \"start_ticks\": \"51912513\", \"signal\": \"SIGTERM\"}, {\"pid\": 3089452, \"name\": \"git\", \"start_ticks\": \"51912515\", \"signal\": \"SIGTERM\"}, {\"pid\": 3089453, \"name\": \"git\", \"start_ticks\": \"51912515\", \"signal\": \"SIGTERM\"}, {\"pid\": 3089454, \"name\": \"git-remote-http\", \"start_ticks\": \"51912515\", \"signal\": \"SIGTERM\"}], \"remaining_same_processes\": []}\n",
+      "stderr": "",
+      "facts": {
+        "owned_cleanup_pid": 3089450,
+        "actions": [
+          {
+            "pid": 3089450,
+            "name": "python",
+            "start_ticks": "51912513",
+            "signal": "SIGTERM"
+          },
+          {
+            "pid": 3089452,
+            "name": "git",
+            "start_ticks": "51912515",
+            "signal": "SIGTERM"
+          },
+          {
+            "pid": 3089453,
+            "name": "git",
+            "start_ticks": "51912515",
+            "signal": "SIGTERM"
+          },
+          {
+            "pid": 3089454,
+            "name": "git-remote-http",
+            "start_ticks": "51912515",
+            "signal": "SIGTERM"
+          }
+        ],
+        "remaining_same_processes": []
+      }
+    },
+    "resolved_execution": {
+      "submitted_utc": "2026-09-10T17:21:37.244322+00:00",
+      "returncode": 0,
+      "stdout": "{\"started_utc\": \"2026-09-10T17:21:35.188943+00:00\", \"recovery_commit\": \"1067e2025a49df639feae2ad51babb75e7b03d7b\", \"retention\": \"Two local Git archives byte-verified and pushed before cleanup; original scientific roots/receipts remain. Unneeded remote fetch was terminated after transport timeout; no prior removal occurred.\", \"operations\": [{\"argv\": [\"git\", \"-C\", \"/home/wu/hmasd-worktrees/vsp03-b07-adcff0a92559ac5552e24a9861e2b65572b478c5\", \"rev-parse\", \"HEAD\"], \"returncode\": 0, \"stdout\": \"adcff0a92559ac5552e24a9861e2b65572b478c5\\n\", \"stderr\": \"\"}, {\"argv\": [\"git\", \"-C\", \"/home/wu/projects/HMASD\", \"worktree\", \"remove\", \"/home/wu/hmasd-worktrees/vsp03-b07-adcff0a92559ac5552e24a9861e2b65572b478c5\"], \"returncode\": 0, \"stdout\": \"\", \"stderr\": \"\"}, {\"argv\": [\"rm\", \"-r\", \"--\", \"/home/wu/.agent-tasks/vsp03-b07-10804-20260910\"], \"returncode\": 0, \"stdout\": \"\", \"stderr\": \"\"}, {\"action\": \"remove inactive private socket and empty directories\", \"path\": \"/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b07_10804_20260910_terminal.tmux\"}, {\"argv\": [\"git\", \"-C\", \"/home/wu/projects/HMASD\", \"worktree\", \"list\", \"--porcelain\"], \"returncode\": 0, \"stdout\": \"worktree /home/wu/projects/HMASD\\nHEAD 72f798c5908b69d9627e2facf88d3f6ff7dd6c26\\nbranch refs/heads/main\\n\\nworktree /home/wu/hmasd-worktrees/acvc-actual-upper-3918fc97\\nHEAD 3918fc9753be023efd461830093e177a4e4ae882\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/acvc-actual-upper-c4c46e50\\nHEAD c4c46e50af614c8f3c12c7ec3a7290befc7c6dd8\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/acvc-r02-3831a66d\\nHEAD 3831a66da19788f549e39faeb8a898221186252a\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/acvc-upper-prefix-cost-782f6965\\nHEAD 782f696588c075d7aa22f3608ebf98bf4d1490f4\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/acvc-upper-prefix-cost-b18a098d\\nHEAD b18a098d3a5b24434946cb7c7857fc778d347687\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/cbsc-approved-repair-8003b96bd-20260905\\nHEAD 8003b96bd79910864e9372ad6f1ea81f1c80520c\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/cbsc-b1-r06-2aaf43a8a8-01\\nHEAD 2aaf43a8a8824eabe10c2cfb8d55cb025cadf1d9\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/cbsc-b1-r06-a138b01534-01\\nHEAD a138b01534f41f88d1045179fadc464aefa79e9e\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/cbsc-b1-r07-b230e476ec-01\\nHEAD b230e476ec72ca6ac93f9fe3f78bfe5d1d2852c2\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/cbsc-b1-venv-5a1b1b7fe-01\\nHEAD 5a1b1b7feae9f67063ba0a5dd1d66085684a0d4b\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/cbsc-b1-venv-7508b8b72-01\\nHEAD 7508b8b72f01bd1fdb6ae65283d3f8ec3f47fb23\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/cbsc-defect8-4f8fe0f6e\\nHEAD 4f8fe0f6eaca799a79e05fe75ec408acb05f979f\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/cbsc-direct-return-b02-2c9254f70-20260905\\nHEAD 2c9254f70c3a8ef9d95ac6dc3f6585382304be41\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/cbsc-direct-return-b03-65bf24865-20260905\\nHEAD 65bf2486594fc29b4813df2d1d79dec82f5756af\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/cbsc-local-acquisition-p16-20260907\\nHEAD 5828af584c5f5e6764f5a44c9951473d82bf04ad\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/cbsc-opportunity-credit-b04-20260906\\nHEAD a3c2a49bf7002639d43a94f460b688d50c6c42dd\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/cbsc-opportunity-credit-b05-20260907\\nHEAD d2753be86c12bfa63c404ac2cac513b914371115\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/cbsc-p47-minimal-prefix-20260908\\nHEAD ae9383512f7754813c4fcde8de86154a5b4daef4\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/cbsc-p47-train51-20260908\\nHEAD d843b5f903663dcc5a699c0a85fbae4e5252d20f\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/cbsc-post-a03-acquisition-proposal-20260907\\nHEAD ec8866b3968fcb1566976ce405d7c552d4d9a5de\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/cbsc-r07-formal-profile-ce94f5afd-01\\nHEAD ce94f5afd1ea91b2b212ea219467ef5dc9dd27f8\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/cbsc-r07-formal-profile-f15b77ecc-01\\nHEAD f15b77ecc1d5b6cdb5c9a58486d8b28782f33527\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/cbsc-r07-resource-profile-261ca37e28-01\\nHEAD 261ca37e2825af36d37ef58647a8b1fc8f6e0f98\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/cbsc-system-runtime-a01-20260907\\nHEAD ee8b4b36834f9d15793976b2af0aa23f923e1579\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/cbsc-system-runtime-a02-20260907\\nHEAD ff4b2cca900e6569d6aa99be8c4c430209b16350\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/cbsc-system-runtime-a03-20260907\\nHEAD ec8866b3968fcb1566976ce405d7c552d4d9a5de\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/cbsc-test-only-initial-prefix-20260908\\nHEAD 2177880ca74b4afd9cf0445d33cb66cb9a8d9c09\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/cbsc-test-only-native-replay-20260908\\nHEAD 61f3243cfe5d01079f0a01c7f0d29a13889773eb\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/cbsc-zero-cpu-55e405a2\\nHEAD 55e405a2feaed89d95852ad195d068cbe586a024\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/cm-n3-folr-b04-20260904-a1\\nHEAD 0f83132fb3484f8366eaaa5863559d203f0cb369\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/cm-ucope-native-return-b01-20260907\\nHEAD a0b00f561159ddeedf66b65711cf3f7d2ec93b04\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/crto-b02-2b667289\\nHEAD 2b667289603b0f7b82508119b902090ddb841728\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/crto-b03-fd76e7d7\\nHEAD fd76e7d7fabcef34e9465c1c3a4f4406ff23b040\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/crto-b04-c53f3bb1\\nHEAD c53f3bb19c91d01ef87cb2c4b9737811eb10d795\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/crto-b05-s1-c53f3bb1\\nHEAD c53f3bb19c91d01ef87cb2c4b9737811eb10d795\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/crto-b05-s2-c53f3bb1\\nHEAD c53f3bb19c91d01ef87cb2c4b9737811eb10d795\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/crto-b06-s1-7cad2758\\nHEAD 7cad2758a156ebde0bd150b24ecee70bcc68982a\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/crto-b06-s2-7cad2758\\nHEAD 7cad2758a156ebde0bd150b24ecee70bcc68982a\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/crto-b07-s1-5a4b5c20\\nHEAD 5a4b5c20dd3e54350a0b18377541a0ae585d38bc\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/crto-b07-s2-5a4b5c20\\nHEAD 5a4b5c20dd3e54350a0b18377541a0ae585d38bc\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/crto-raw-phase-a01-c8247c2d\\nHEAD c8247c2d19ac7965208c397a2a87519a1efb6310\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/crto-raw-phase-probe-c8247c2d-02\\nHEAD c8247c2d19ac7965208c397a2a87519a1efb6310\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/crto-resume-a01-8d1c5978-r02\\nHEAD 8d1c597871b38edc7d5f139f34f5a3ce2941c7d0\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/dish-b01-c03-b0c63b69\\nHEAD b0c63b69cabd1cdaceac4ea6370def6d97a93c15\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/dish-b01-c04-e0541d0c\\nHEAD e0541d0cb3e9e63731c72f4dacb10b44d268fd39\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/dish-b01-c04-e15c1794\\nHEAD e15c1794ee2be2907d3b692f8ab7c347c5bc688e\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/dish-b04-ef23d92\\nHEAD ef23d927045e449a0aa831e6a94a99d976e91924\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/dish-b05-seed101-20260906\\nHEAD 1d87e02194158d6bca0eaa4e7f70a1c1098bb121\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/dish-b06-seed113-20260907-run01\\nHEAD 373d187200a91942385e9380770dcf9f8098aada\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/dish-b07-seed127-20260908-run01\\nHEAD a4612a020921d24269a19a3471cc03fa62c082c8\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/dish-certificate-a04-d543146c\\nHEAD d543146cc11ccf880da1245bfb6884356772dd38\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/dish-endpoint-a03-818b2566\\nHEAD 818b2566d1bac7cafcc71ed0bbb90b8abd1c6b65\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/dish-ground-a02-dd0e01bb\\nHEAD dd0e01bbc4aa0efd3c22b475585511232c1de4fc\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/dish-prefix-a01-bfe4952b\\nHEAD bfe4952beeff9cff237d5b16325c02e5c0c08664\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/dish-witness-3c0ed5c\\nHEAD 3c0ed5c87f91ec0e4692aa7dd0214f83482b4418\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/dish_a01_ffa23bf8d\\nHEAD ffa23bf8d551add61fba33e3170b106ae57a2be7\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/dish_a02_3f4d447f6\\nHEAD 3f4d447f662db638dbdf0c75d49dfa8b230dc002\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/folr-public-lifecycle-timing-b02-6a8eacda\\nHEAD 6a8eacdad072c37d477aca95a9c871aba68cee78\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/frrie-a01-check-b41a6ba7\\nHEAD b41a6ba779e514937e35c9b0c1dbc69a50ec68d5\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/frrie-a03-50283c9cf\\nHEAD 50283c9cfffeaba913572fe43f5a8dbf311abe7e\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/frrie-a04-d6844bb25f6f\\nHEAD d6844bb25f6f1030aa7123467935861dcc719450\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/frrie-a05-first-exception-p27-43eec21e\\nHEAD 43eec21e9584c83e5e8d940402d7e4570b454e59\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/frrie-a05-inert-p27-66106b3f2\\nHEAD 30643b7359b35c6e9d5751147d0999bc629a966d\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/frrie-a06-fatal-callpath-p31-43eec21e\\nHEAD 43eec21e9584c83e5e8d940402d7e4570b454e59\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/frrie-a07-scheduled-stack-p35-43eec21e\\nHEAD 43eec21e9584c83e5e8d940402d7e4570b454e59\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/frrie-contact-r02-36b538ba\\nHEAD 36b538ba1b91eede9f528dd315fa624f8c1d53e5\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/frrie-contact-r02-diag-36b538ba\\nHEAD 36b538ba1b91eede9f528dd315fa624f8c1d53e5\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/frrie-contact-r02-r04-732cc2b2\\nHEAD 732cc2b2299821a58d644e202c4b95c392932447\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/frrie-contact-r02-r05-5e6d47f0\\nHEAD 5e6d47f0cc05dfdf345bfe7f3f8661d1ffcf7ecc\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/frrie-contact-r06-72b1bd00\\nHEAD 72b1bd001f7aff4d383f7cbec296bed2edf675dd\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/frrie-contact-r07-10ae9781\\nHEAD 10ae9781f74ae26931fa8231918844f4921b80f2\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/frrie-contact-r08-58710424\\nHEAD 58710424a6b25f3e4bdf019dc337423d2d54a75b\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/frrie-contact-r09-43eec21e\\nHEAD 43eec21e9584c83e5e8d940402d7e4570b454e59\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/frrie-contact-repair-check-732cc2b2\\nHEAD 732cc2b2299821a58d644e202c4b95c392932447\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/frrie-native-repair-801511a18\\nHEAD 801511a18d999e6f27f8bc1006550d2535d46acf\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/frrie-p47-input-factory-20260908\\nHEAD 2fa3b1da8a9a9f05af73e2ae03bf8204a1f2cb52\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/frrie-p47-native-boundary-20260908\\nHEAD 389d6222eb0eefde7f49e47aa35d6a57ecb661c3\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/frrie-p59-input-factory-20260908\\nHEAD 5831dafaab0e47d0c13fe1cbefcc94e5a817b1bc\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/frrie-r04-a01-b41a6ba7\\nHEAD b41a6ba779e514937e35c9b0c1dbc69a50ec68d5\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/frrie-r06-check-72b1bd00\\nHEAD 72b1bd001f7aff4d383f7cbec296bed2edf675dd\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/frrie-r06-check-eb5a4547\\nHEAD eb5a4547f2496cc8ff5793f4f242ba262e63a69a\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/frrie-r06-import-f0bfe7a5\\nHEAD f0bfe7a59125273751bb132e30beb5d498695e04\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/frrie-r07-check-10ae9781\\nHEAD 10ae9781f74ae26931fa8231918844f4921b80f2\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/frrie-r08-check-58710424\\nHEAD 58710424a6b25f3e4bdf019dc337423d2d54a75b\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/frrie-r09-check-43eec21e\\nHEAD 43eec21e9584c83e5e8d940402d7e4570b454e59\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/frrie-r09-segfault-a01-43eec21e-20260905\\nHEAD 43eec21e9584c83e5e8d940402d7e4570b454e59\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/frrie-r09-segfault-a02-43eec21e-20260906\\nHEAD 43eec21e9584c83e5e8d940402d7e4570b454e59\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/frrie-r09-system312-offline-p21-43eec21e\\nHEAD 43eec21e9584c83e5e8d940402d7e4570b454e59\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/fsd-e4-census-bc3eaeecf\\nHEAD bc3eaeecf5f97e630a886028db0053ba2d08d56f\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/fsd-native-renewal-a01-p21-01770d8dd\\nHEAD 01770d8dd6bb59460667efa26e3d94677e65ab37\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/fsd-native-renewal-b01-p38-b3f86bb28\\nHEAD b3f86bb28879db239b07291c39d93a1c494abe50\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/fsd-native-renewal-b02-p43-d961c5826\\nHEAD d961c58268353f215d3ffddf0d83927e6318541d\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/fsd-native-renewal-b03-p47-f09aa00ba\\nHEAD f09aa00ba0e6f7c709af188b61be6ff8e7e6bc96\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/fsd-uav-b02-p72-08199a932\\nHEAD 08199a932671d9bacdbe4eb0bfebab38c37fca1f\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/fsd_e3_large_d0_seed1_20260904_01\\nHEAD f42dcb7a76f6341d3552a27134ca674674b29718\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/fsd_e3_large_d0_seed2_20260905_01\\nHEAD ac4db77371659c25d4ac39e1a20990fe098bc42d\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/fsd_e3_large_d0_seed3_20260905_01\\nHEAD 96ca5fbf815f142008d6622759014a98bd915d6f\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/fsd_e3_large_d2_seed1_20260905_01\\nHEAD e6d049849f717b2aca98ab1bb77092e000cd06d9\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/fsd_e3_large_d2_seed2_20260905_01\\nHEAD 6d64a95a1189523e39abb184ef284a574050b748\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/fsd_e3_large_d2_seed3_20260905_01\\nHEAD 0f31b04f245aa9d5273b9131835ef1be59955759\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/fsd_e3_medium_d0_seed1_20260904_01\\nHEAD e6108e466eeea3df31db52c53e49eef828bde41a\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/fsd_e3_medium_d0_seed1_20260904_02\\nHEAD ee7fdae278cede2200ab8c356c4f238cce980edb\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/fsd_e3_medium_d0_seed2_20260904_01\\nHEAD e72e1cf08c9510b52ef67b135e93eee89dc4ddce\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/fsd_e3_medium_d0_seed3_20260904_01\\nHEAD 9c0a990537a8ffef58306429a1ff402550fc4b82\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/fsd_e3_medium_d2_seed1_20260904_01\\nHEAD 4c60f281febd9c5c6503b12aa8053f05642aac32\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/fsd_e3_medium_d2_seed2_20260904_01\\nHEAD 4b61ddfffac042e2247c77668bc881cca68b9a78\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/fsd_e3_medium_d2_seed3_20260904_01\\nHEAD 31bfecd79fc0f708546786ee26dfd8faa9e85dfb\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/mgtap_b01_4f65eefb1b15e44b42d694376630fba0c230cc6c\\nHEAD 4f65eefb1b15e44b42d694376630fba0c230cc6c\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/mgtap_b02_20260904\\nHEAD f3595bfe3e90024f3b31eb8a82910304b90543d3\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/mgtap_b03_20260904\\nHEAD 19531d07023637a0940fd9c6cfa51005d13fe0a7\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/n3-a05-approved-20260905\\nHEAD d3884812aa30b278ccfdcdfd3fd802314b026fcb\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/n3-b02-20260905\\nHEAD 47f81c15c536c2b4c4ee463eaa7a35f720ec08c7\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/n3-b03-20260906\\nHEAD ad01757c43cb3a3df6549b024367b5f9307246b8\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/native-call-dispatch-20260908\\nHEAD e55454c633faba6f3bb6cc6e574607821e684834\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/rcle-a02-abcc376\\nHEAD abcc3766c2b2d9908c9391b0827d9f2a39f8d641\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/rcle-b01-4d40621\\nHEAD 4d40621e0a9abd26e783e8c8aeeaf2653e49cf6a\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/rcle-b02-8ad01cb\\nHEAD 8ad01cb9ea69b77a2e907947bef59bf716a8b45a\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/rcle-b03-fresh1000-s21-20260910\\nHEAD 806d378054774c5ab4f91d1acaba80292c660f67\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/route_smoke_20260904_01\\nHEAD 0852348499f5c59b150f5cb3b948983b317b15a8\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/ucope-shared-return-b02-seed6401-20260907\\nHEAD bcd55750b29014e21dd855df5ac320296256b62e\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/ucope-shared-return-b03-20260907\\nHEAD af7c7d516bbd9466a2775d9cb1e29582be1aaa36\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/ucope-shared-return-b04-20260907\\nHEAD 71433bfabb70481def4329e622a838fa0cd9eeec\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/ucope-uav-motion-prefix-b01-p21-20260907\\nHEAD 536949660fee3ab9ac92aba29c2c0455ffe9f6e1\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/ucope-uav-motion-prefix-b01-p24-20260907\\nHEAD 9c541a8047b8c33e90f09aa65e326180343a23a0\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/ucope-uav-motion-prefix-b02-p47-20260908\\nHEAD 6374063408208ba67b8cb7c69ebc0babb0f00259\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/ucope-uav-motion-prefix-b03-p57-check-20260908\\nHEAD 70900ac7e7aa3a85b4f4ad6a2a8031ccb346fd44\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/ucope-uav-motion-prefix-b04-p61-check-20260908\\nHEAD 7693b7af6b7d89cdaa028659d606a37dee9eb68e\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/ucope-uav-renewal-b01-p69-check-20260908\\nHEAD a453447cb011d50c6bb63ed7fc40180134a914b5\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/ucope-uav-renewal-b03-7501-p72-20260908\\nHEAD 7d3aaab4646360e2473ae352b09c3933ccf8dacf\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/ucope-uav-renewal-b03-p72-check-20260908\\nHEAD 7d3aaab4646360e2473ae352b09c3933ccf8dacf\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/ucope-uav-short-learned-renewal-continuous-b01-8701-20260910\\nHEAD 3182c4c844803ab362034c2b3d5d22f7f62bca3a\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/ucope_root_target_fit_r01_997f49c3_01\\nHEAD 997f49c3cbefffee88d83d7b7de750a078d1a1ca\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/ucope_root_target_fit_r01_997f49c3_02\\nHEAD 997f49c3cbefffee88d83d7b7de750a078d1a1ca\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/vnfc-causal-r03-9c41484a\\nHEAD 9c41484a068e266581b6456bddfd3f6448d3931c\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/vnfc-e01-60d21ad7d\\nHEAD 60d21ad7d2aab5dcb6e3bcaa1233ac763c8d2df0\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/vnfc-mb1024-r02-ce80bc14-20260904-01\\nHEAD 6bd4e37d88e8e7c17cead3c233d20017db964ef8\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/vnfc_b01_check_33e08f440\\nHEAD 33e08f440c2117dcfd9457d825f42fef7b38ccd7\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/vnfc_b01_check_33e08f440_02\\nHEAD 33e08f440c2117dcfd9457d825f42fef7b38ccd7\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/vnfc_b01_depmode_6fc574561\\nHEAD 6fc57456131300e8f6adbec7d6b044d50a22f783\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/vnfc_b01_formal_33e08f440_01\\nHEAD 33e08f440c2117dcfd9457d825f42fef7b38ccd7\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/vnfc_b01_formal_33e08f440_02\\nHEAD 33e08f440c2117dcfd9457d825f42fef7b38ccd7\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/vnfc_b01_seed02_33e08f440_01\\nHEAD 33e08f440c2117dcfd9457d825f42fef7b38ccd7\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/vsp02-tpc-b01-p15-s1103-a1\\nHEAD 19be5ee18393913ff92693cdf037213ec1777510\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/vsp02-tpc-b01-p17-s1117-a1\\nHEAD 19be5ee18393913ff92693cdf037213ec1777510\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/vsp03-b01-seed1-r01\\nHEAD 2c7d7ae08f978aa63d58468f3de1adb372f1339a\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/vsp03-b01-seeds23-r01\\nHEAD b77f897da7dea5df2e9230f43c8f128cc281afb3\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/vsp03-b02-p09-00ebefa5823dbb41e64aed11b90ba26a8ff97020\\nHEAD 00ebefa5823dbb41e64aed11b90ba26a8ff97020\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/vsp03-b03-p54-4eb8a36b9184633f5e28eff999a99f2dbc948040\\nHEAD 4eb8a36b9184633f5e28eff999a99f2dbc948040\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/vsp03-b04-p64-b5d605bf4f39b5ab18f01c98e04dc07e53764354\\nHEAD b5d605bf4f39b5ab18f01c98e04dc07e53764354\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/vsp03-b04-p67-828da00343e5036a4de93ccf1ec636e3b8c777b7\\nHEAD 828da00343e5036a4de93ccf1ec636e3b8c777b7\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/vspc1-b01-e2f00991f\\nHEAD e2f00991f4d6ccd169e531ef411ebc1547f2d371\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/vspc1-b01-e7e574b44\\nHEAD e7e574b4496875f45e1d1b9b41c02cd35cf3684e\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/vspc1-native-hold-value-b01-8101-65c89368ab0f\\nHEAD 65c89368ab0fc7402fb0e24254447629e829a12d\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/vspc1-native-hold-value-b02-8102-0ec208899f5e\\nHEAD 0ec208899f5e8b4c190ab7bd9806be2cc30b6fda\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/vspc1-native-hold-value-b03-8201-7a8ed3aa5d25\\nHEAD 7a8ed3aa5d25ded71164aa338749d09318124dcf\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/vspc1-native-hold-value-b04-8202-a33a3820fe9d\\nHEAD a33a3820fe9d4a46a3231bcf267afc956554b6c5\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/vspc1-native-hold-value-b04-p67-8202\\nHEAD ec8b7c458b038b3a375ec5639834d0f3527fdf8c\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/vspc1-native-hold-value-b05-8301-bda90e1db76a\\nHEAD bda90e1db76a00123ba889ed6c4b05225473f4cb\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/vspc1-native-hold-value-b08-8401-e9a05af5d51d\\nHEAD e9a05af5d51da571642f51c5b7b8f00c96f1c6b5\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/vspc1-native-hold-value-b09-8402-4c9dc8b3de9b\\nHEAD 4c9dc8b3de9b7827612b962aa4a4d085dc7cd411\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/vspc1-reactive-queues-b01-476748835\\nHEAD 47674883572bbe078ede037cbb8f99b8cd54c159\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/vspc1-service-allocation-b01-completion402-20260907\\nHEAD ec8866b3968fcb1566976ce405d7c552d4d9a5de\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/vspc1-service-allocation-b01-seed402-20260907\\nHEAD faf786e135b3f55e535c898e17e646dcc341bdec\\ndetached\\n\\nworktree /home/wu/hmasd-worktrees/vspc1_b02_90c730a098d1\\nHEAD 90c730a098d1c39d4265684c40afdf881909fa43\\ndetached\\n\\n\", \"stderr\": \"\"}], \"target_processes_before_removal\": [], \"source_absent\": true, \"wrapper_absent\": true, \"socket_absent\": true, \"source_unregistered\": true, \"preserved_20_scientific_files_unchanged\": true, \"status\": \"scoped_remote_closeout_complete\", \"finished_utc\": \"2026-09-10T17:21:35.216252+00:00\"}\n",
+      "stderr": "",
+      "facts": {
+        "started_utc": "2026-09-10T17:21:35.188943+00:00",
+        "recovery_commit": "1067e2025a49df639feae2ad51babb75e7b03d7b",
+        "retention": "Two local Git archives byte-verified and pushed before cleanup; original scientific roots/receipts remain. Unneeded remote fetch was terminated after transport timeout; no prior removal occurred.",
+        "operations": [
+          {
+            "argv": [
+              "git",
+              "-C",
+              "/home/wu/hmasd-worktrees/vsp03-b07-adcff0a92559ac5552e24a9861e2b65572b478c5",
+              "rev-parse",
+              "HEAD"
+            ],
+            "returncode": 0,
+            "stdout": "adcff0a92559ac5552e24a9861e2b65572b478c5\n",
+            "stderr": ""
+          },
+          {
+            "argv": [
+              "git",
+              "-C",
+              "/home/wu/projects/HMASD",
+              "worktree",
+              "remove",
+              "/home/wu/hmasd-worktrees/vsp03-b07-adcff0a92559ac5552e24a9861e2b65572b478c5"
+            ],
+            "returncode": 0,
+            "stdout": "",
+            "stderr": ""
+          },
+          {
+            "argv": [
+              "rm",
+              "-r",
+              "--",
+              "/home/wu/.agent-tasks/vsp03-b07-10804-20260910"
+            ],
+            "returncode": 0,
+            "stdout": "",
+            "stderr": ""
+          },
+          {
+            "action": "remove inactive private socket and empty directories",
+            "path": "/home/wu/projects/HMASD/temp/directions/vsp_03/exp/b07_10804_20260910_terminal.tmux"
+          },
+          {
+            "argv": [
+              "git",
+              "-C",
+              "/home/wu/projects/HMASD",
+              "worktree",
+              "list",
+              "--porcelain"
+            ],
+            "returncode": 0,
+            "stdout": "worktree /home/wu/projects/HMASD\nHEAD 72f798c5908b69d9627e2facf88d3f6ff7dd6c26\nbranch refs/heads/main\n\nworktree /home/wu/hmasd-worktrees/acvc-actual-upper-3918fc97\nHEAD 3918fc9753be023efd461830093e177a4e4ae882\ndetached\n\nworktree /home/wu/hmasd-worktrees/acvc-actual-upper-c4c46e50\nHEAD c4c46e50af614c8f3c12c7ec3a7290befc7c6dd8\ndetached\n\nworktree /home/wu/hmasd-worktrees/acvc-r02-3831a66d\nHEAD 3831a66da19788f549e39faeb8a898221186252a\ndetached\n\nworktree /home/wu/hmasd-worktrees/acvc-upper-prefix-cost-782f6965\nHEAD 782f696588c075d7aa22f3608ebf98bf4d1490f4\ndetached\n\nworktree /home/wu/hmasd-worktrees/acvc-upper-prefix-cost-b18a098d\nHEAD b18a098d3a5b24434946cb7c7857fc778d347687\ndetached\n\nworktree /home/wu/hmasd-worktrees/cbsc-approved-repair-8003b96bd-20260905\nHEAD 8003b96bd79910864e9372ad6f1ea81f1c80520c\ndetached\n\nworktree /home/wu/hmasd-worktrees/cbsc-b1-r06-2aaf43a8a8-01\nHEAD 2aaf43a8a8824eabe10c2cfb8d55cb025cadf1d9\ndetached\n\nworktree /home/wu/hmasd-worktrees/cbsc-b1-r06-a138b01534-01\nHEAD a138b01534f41f88d1045179fadc464aefa79e9e\ndetached\n\nworktree /home/wu/hmasd-worktrees/cbsc-b1-r07-b230e476ec-01\nHEAD b230e476ec72ca6ac93f9fe3f78bfe5d1d2852c2\ndetached\n\nworktree /home/wu/hmasd-worktrees/cbsc-b1-venv-5a1b1b7fe-01\nHEAD 5a1b1b7feae9f67063ba0a5dd1d66085684a0d4b\ndetached\n\nworktree /home/wu/hmasd-worktrees/cbsc-b1-venv-7508b8b72-01\nHEAD 7508b8b72f01bd1fdb6ae65283d3f8ec3f47fb23\ndetached\n\nworktree /home/wu/hmasd-worktrees/cbsc-defect8-4f8fe0f6e\nHEAD 4f8fe0f6eaca799a79e05fe75ec408acb05f979f\ndetached\n\nworktree /home/wu/hmasd-worktrees/cbsc-direct-return-b02-2c9254f70-20260905\nHEAD 2c9254f70c3a8ef9d95ac6dc3f6585382304be41\ndetached\n\nworktree /home/wu/hmasd-worktrees/cbsc-direct-return-b03-65bf24865-20260905\nHEAD 65bf2486594fc29b4813df2d1d79dec82f5756af\ndetached\n\nworktree /home/wu/hmasd-worktrees/cbsc-local-acquisition-p16-20260907\nHEAD 5828af584c5f5e6764f5a44c9951473d82bf04ad\ndetached\n\nworktree /home/wu/hmasd-worktrees/cbsc-opportunity-credit-b04-20260906\nHEAD a3c2a49bf7002639d43a94f460b688d50c6c42dd\ndetached\n\nworktree /home/wu/hmasd-worktrees/cbsc-opportunity-credit-b05-20260907\nHEAD d2753be86c12bfa63c404ac2cac513b914371115\ndetached\n\nworktree /home/wu/hmasd-worktrees/cbsc-p47-minimal-prefix-20260908\nHEAD ae9383512f7754813c4fcde8de86154a5b4daef4\ndetached\n\nworktree /home/wu/hmasd-worktrees/cbsc-p47-train51-20260908\nHEAD d843b5f903663dcc5a699c0a85fbae4e5252d20f\ndetached\n\nworktree /home/wu/hmasd-worktrees/cbsc-post-a03-acquisition-proposal-20260907\nHEAD ec8866b3968fcb1566976ce405d7c552d4d9a5de\ndetached\n\nworktree /home/wu/hmasd-worktrees/cbsc-r07-formal-profile-ce94f5afd-01\nHEAD ce94f5afd1ea91b2b212ea219467ef5dc9dd27f8\ndetached\n\nworktree /home/wu/hmasd-worktrees/cbsc-r07-formal-profile-f15b77ecc-01\nHEAD f15b77ecc1d5b6cdb5c9a58486d8b28782f33527\ndetached\n\nworktree /home/wu/hmasd-worktrees/cbsc-r07-resource-profile-261ca37e28-01\nHEAD 261ca37e2825af36d37ef58647a8b1fc8f6e0f98\ndetached\n\nworktree /home/wu/hmasd-worktrees/cbsc-system-runtime-a01-20260907\nHEAD ee8b4b36834f9d15793976b2af0aa23f923e1579\ndetached\n\nworktree /home/wu/hmasd-worktrees/cbsc-system-runtime-a02-20260907\nHEAD ff4b2cca900e6569d6aa99be8c4c430209b16350\ndetached\n\nworktree /home/wu/hmasd-worktrees/cbsc-system-runtime-a03-20260907\nHEAD ec8866b3968fcb1566976ce405d7c552d4d9a5de\ndetached\n\nworktree /home/wu/hmasd-worktrees/cbsc-test-only-initial-prefix-20260908\nHEAD 2177880ca74b4afd9cf0445d33cb66cb9a8d9c09\ndetached\n\nworktree /home/wu/hmasd-worktrees/cbsc-test-only-native-replay-20260908\nHEAD 61f3243cfe5d01079f0a01c7f0d29a13889773eb\ndetached\n\nworktree /home/wu/hmasd-worktrees/cbsc-zero-cpu-55e405a2\nHEAD 55e405a2feaed89d95852ad195d068cbe586a024\ndetached\n\nworktree /home/wu/hmasd-worktrees/cm-n3-folr-b04-20260904-a1\nHEAD 0f83132fb3484f8366eaaa5863559d203f0cb369\ndetached\n\nworktree /home/wu/hmasd-worktrees/cm-ucope-native-return-b01-20260907\nHEAD a0b00f561159ddeedf66b65711cf3f7d2ec93b04\ndetached\n\nworktree /home/wu/hmasd-worktrees/crto-b02-2b667289\nHEAD 2b667289603b0f7b82508119b902090ddb841728\ndetached\n\nworktree /home/wu/hmasd-worktrees/crto-b03-fd76e7d7\nHEAD fd76e7d7fabcef34e9465c1c3a4f4406ff23b040\ndetached\n\nworktree /home/wu/hmasd-worktrees/crto-b04-c53f3bb1\nHEAD c53f3bb19c91d01ef87cb2c4b9737811eb10d795\ndetached\n\nworktree /home/wu/hmasd-worktrees/crto-b05-s1-c53f3bb1\nHEAD c53f3bb19c91d01ef87cb2c4b9737811eb10d795\ndetached\n\nworktree /home/wu/hmasd-worktrees/crto-b05-s2-c53f3bb1\nHEAD c53f3bb19c91d01ef87cb2c4b9737811eb10d795\ndetached\n\nworktree /home/wu/hmasd-worktrees/crto-b06-s1-7cad2758\nHEAD 7cad2758a156ebde0bd150b24ecee70bcc68982a\ndetached\n\nworktree /home/wu/hmasd-worktrees/crto-b06-s2-7cad2758\nHEAD 7cad2758a156ebde0bd150b24ecee70bcc68982a\ndetached\n\nworktree /home/wu/hmasd-worktrees/crto-b07-s1-5a4b5c20\nHEAD 5a4b5c20dd3e54350a0b18377541a0ae585d38bc\ndetached\n\nworktree /home/wu/hmasd-worktrees/crto-b07-s2-5a4b5c20\nHEAD 5a4b5c20dd3e54350a0b18377541a0ae585d38bc\ndetached\n\nworktree /home/wu/hmasd-worktrees/crto-raw-phase-a01-c8247c2d\nHEAD c8247c2d19ac7965208c397a2a87519a1efb6310\ndetached\n\nworktree /home/wu/hmasd-worktrees/crto-raw-phase-probe-c8247c2d-02\nHEAD c8247c2d19ac7965208c397a2a87519a1efb6310\ndetached\n\nworktree /home/wu/hmasd-worktrees/crto-resume-a01-8d1c5978-r02\nHEAD 8d1c597871b38edc7d5f139f34f5a3ce2941c7d0\ndetached\n\nworktree /home/wu/hmasd-worktrees/dish-b01-c03-b0c63b69\nHEAD b0c63b69cabd1cdaceac4ea6370def6d97a93c15\ndetached\n\nworktree /home/wu/hmasd-worktrees/dish-b01-c04-e0541d0c\nHEAD e0541d0cb3e9e63731c72f4dacb10b44d268fd39\ndetached\n\nworktree /home/wu/hmasd-worktrees/dish-b01-c04-e15c1794\nHEAD e15c1794ee2be2907d3b692f8ab7c347c5bc688e\ndetached\n\nworktree /home/wu/hmasd-worktrees/dish-b04-ef23d92\nHEAD ef23d927045e449a0aa831e6a94a99d976e91924\ndetached\n\nworktree /home/wu/hmasd-worktrees/dish-b05-seed101-20260906\nHEAD 1d87e02194158d6bca0eaa4e7f70a1c1098bb121\ndetached\n\nworktree /home/wu/hmasd-worktrees/dish-b06-seed113-20260907-run01\nHEAD 373d187200a91942385e9380770dcf9f8098aada\ndetached\n\nworktree /home/wu/hmasd-worktrees/dish-b07-seed127-20260908-run01\nHEAD a4612a020921d24269a19a3471cc03fa62c082c8\ndetached\n\nworktree /home/wu/hmasd-worktrees/dish-certificate-a04-d543146c\nHEAD d543146cc11ccf880da1245bfb6884356772dd38\ndetached\n\nworktree /home/wu/hmasd-worktrees/dish-endpoint-a03-818b2566\nHEAD 818b2566d1bac7cafcc71ed0bbb90b8abd1c6b65\ndetached\n\nworktree /home/wu/hmasd-worktrees/dish-ground-a02-dd0e01bb\nHEAD dd0e01bbc4aa0efd3c22b475585511232c1de4fc\ndetached\n\nworktree /home/wu/hmasd-worktrees/dish-prefix-a01-bfe4952b\nHEAD bfe4952beeff9cff237d5b16325c02e5c0c08664\ndetached\n\nworktree /home/wu/hmasd-worktrees/dish-witness-3c0ed5c\nHEAD 3c0ed5c87f91ec0e4692aa7dd0214f83482b4418\ndetached\n\nworktree /home/wu/hmasd-worktrees/dish_a01_ffa23bf8d\nHEAD ffa23bf8d551add61fba33e3170b106ae57a2be7\ndetached\n\nworktree /home/wu/hmasd-worktrees/dish_a02_3f4d447f6\nHEAD 3f4d447f662db638dbdf0c75d49dfa8b230dc002\ndetached\n\nworktree /home/wu/hmasd-worktrees/folr-public-lifecycle-timing-b02-6a8eacda\nHEAD 6a8eacdad072c37d477aca95a9c871aba68cee78\ndetached\n\nworktree /home/wu/hmasd-worktrees/frrie-a01-check-b41a6ba7\nHEAD b41a6ba779e514937e35c9b0c1dbc69a50ec68d5\ndetached\n\nworktree /home/wu/hmasd-worktrees/frrie-a03-50283c9cf\nHEAD 50283c9cfffeaba913572fe43f5a8dbf311abe7e\ndetached\n\nworktree /home/wu/hmasd-worktrees/frrie-a04-d6844bb25f6f\nHEAD d6844bb25f6f1030aa7123467935861dcc719450\ndetached\n\nworktree /home/wu/hmasd-worktrees/frrie-a05-first-exception-p27-43eec21e\nHEAD 43eec21e9584c83e5e8d940402d7e4570b454e59\ndetached\n\nworktree /home/wu/hmasd-worktrees/frrie-a05-inert-p27-66106b3f2\nHEAD 30643b7359b35c6e9d5751147d0999bc629a966d\ndetached\n\nworktree /home/wu/hmasd-worktrees/frrie-a06-fatal-callpath-p31-43eec21e\nHEAD 43eec21e9584c83e5e8d940402d7e4570b454e59\ndetached\n\nworktree /home/wu/hmasd-worktrees/frrie-a07-scheduled-stack-p35-43eec21e\nHEAD 43eec21e9584c83e5e8d940402d7e4570b454e59\ndetached\n\nworktree /home/wu/hmasd-worktrees/frrie-contact-r02-36b538ba\nHEAD 36b538ba1b91eede9f528dd315fa624f8c1d53e5\ndetached\n\nworktree /home/wu/hmasd-worktrees/frrie-contact-r02-diag-36b538ba\nHEAD 36b538ba1b91eede9f528dd315fa624f8c1d53e5\ndetached\n\nworktree /home/wu/hmasd-worktrees/frrie-contact-r02-r04-732cc2b2\nHEAD 732cc2b2299821a58d644e202c4b95c392932447\ndetached\n\nworktree /home/wu/hmasd-worktrees/frrie-contact-r02-r05-5e6d47f0\nHEAD 5e6d47f0cc05dfdf345bfe7f3f8661d1ffcf7ecc\ndetached\n\nworktree /home/wu/hmasd-worktrees/frrie-contact-r06-72b1bd00\nHEAD 72b1bd001f7aff4d383f7cbec296bed2edf675dd\ndetached\n\nworktree /home/wu/hmasd-worktrees/frrie-contact-r07-10ae9781\nHEAD 10ae9781f74ae26931fa8231918844f4921b80f2\ndetached\n\nworktree /home/wu/hmasd-worktrees/frrie-contact-r08-58710424\nHEAD 58710424a6b25f3e4bdf019dc337423d2d54a75b\ndetached\n\nworktree /home/wu/hmasd-worktrees/frrie-contact-r09-43eec21e\nHEAD 43eec21e9584c83e5e8d940402d7e4570b454e59\ndetached\n\nworktree /home/wu/hmasd-worktrees/frrie-contact-repair-check-732cc2b2\nHEAD 732cc2b2299821a58d644e202c4b95c392932447\ndetached\n\nworktree /home/wu/hmasd-worktrees/frrie-native-repair-801511a18\nHEAD 801511a18d999e6f27f8bc1006550d2535d46acf\ndetached\n\nworktree /home/wu/hmasd-worktrees/frrie-p47-input-factory-20260908\nHEAD 2fa3b1da8a9a9f05af73e2ae03bf8204a1f2cb52\ndetached\n\nworktree /home/wu/hmasd-worktrees/frrie-p47-native-boundary-20260908\nHEAD 389d6222eb0eefde7f49e47aa35d6a57ecb661c3\ndetached\n\nworktree /home/wu/hmasd-worktrees/frrie-p59-input-factory-20260908\nHEAD 5831dafaab0e47d0c13fe1cbefcc94e5a817b1bc\ndetached\n\nworktree /home/wu/hmasd-worktrees/frrie-r04-a01-b41a6ba7\nHEAD b41a6ba779e514937e35c9b0c1dbc69a50ec68d5\ndetached\n\nworktree /home/wu/hmasd-worktrees/frrie-r06-check-72b1bd00\nHEAD 72b1bd001f7aff4d383f7cbec296bed2edf675dd\ndetached\n\nworktree /home/wu/hmasd-worktrees/frrie-r06-check-eb5a4547\nHEAD eb5a4547f2496cc8ff5793f4f242ba262e63a69a\ndetached\n\nworktree /home/wu/hmasd-worktrees/frrie-r06-import-f0bfe7a5\nHEAD f0bfe7a59125273751bb132e30beb5d498695e04\ndetached\n\nworktree /home/wu/hmasd-worktrees/frrie-r07-check-10ae9781\nHEAD 10ae9781f74ae26931fa8231918844f4921b80f2\ndetached\n\nworktree /home/wu/hmasd-worktrees/frrie-r08-check-58710424\nHEAD 58710424a6b25f3e4bdf019dc337423d2d54a75b\ndetached\n\nworktree /home/wu/hmasd-worktrees/frrie-r09-check-43eec21e\nHEAD 43eec21e9584c83e5e8d940402d7e4570b454e59\ndetached\n\nworktree /home/wu/hmasd-worktrees/frrie-r09-segfault-a01-43eec21e-20260905\nHEAD 43eec21e9584c83e5e8d940402d7e4570b454e59\ndetached\n\nworktree /home/wu/hmasd-worktrees/frrie-r09-segfault-a02-43eec21e-20260906\nHEAD 43eec21e9584c83e5e8d940402d7e4570b454e59\ndetached\n\nworktree /home/wu/hmasd-worktrees/frrie-r09-system312-offline-p21-43eec21e\nHEAD 43eec21e9584c83e5e8d940402d7e4570b454e59\ndetached\n\nworktree /home/wu/hmasd-worktrees/fsd-e4-census-bc3eaeecf\nHEAD bc3eaeecf5f97e630a886028db0053ba2d08d56f\ndetached\n\nworktree /home/wu/hmasd-worktrees/fsd-native-renewal-a01-p21-01770d8dd\nHEAD 01770d8dd6bb59460667efa26e3d94677e65ab37\ndetached\n\nworktree /home/wu/hmasd-worktrees/fsd-native-renewal-b01-p38-b3f86bb28\nHEAD b3f86bb28879db239b07291c39d93a1c494abe50\ndetached\n\nworktree /home/wu/hmasd-worktrees/fsd-native-renewal-b02-p43-d961c5826\nHEAD d961c58268353f215d3ffddf0d83927e6318541d\ndetached\n\nworktree /home/wu/hmasd-worktrees/fsd-native-renewal-b03-p47-f09aa00ba\nHEAD f09aa00ba0e6f7c709af188b61be6ff8e7e6bc96\ndetached\n\nworktree /home/wu/hmasd-worktrees/fsd-uav-b02-p72-08199a932\nHEAD 08199a932671d9bacdbe4eb0bfebab38c37fca1f\ndetached\n\nworktree /home/wu/hmasd-worktrees/fsd_e3_large_d0_seed1_20260904_01\nHEAD f42dcb7a76f6341d3552a27134ca674674b29718\ndetached\n\nworktree /home/wu/hmasd-worktrees/fsd_e3_large_d0_seed2_20260905_01\nHEAD ac4db77371659c25d4ac39e1a20990fe098bc42d\ndetached\n\nworktree /home/wu/hmasd-worktrees/fsd_e3_large_d0_seed3_20260905_01\nHEAD 96ca5fbf815f142008d6622759014a98bd915d6f\ndetached\n\nworktree /home/wu/hmasd-worktrees/fsd_e3_large_d2_seed1_20260905_01\nHEAD e6d049849f717b2aca98ab1bb77092e000cd06d9\ndetached\n\nworktree /home/wu/hmasd-worktrees/fsd_e3_large_d2_seed2_20260905_01\nHEAD 6d64a95a1189523e39abb184ef284a574050b748\ndetached\n\nworktree /home/wu/hmasd-worktrees/fsd_e3_large_d2_seed3_20260905_01\nHEAD 0f31b04f245aa9d5273b9131835ef1be59955759\ndetached\n\nworktree /home/wu/hmasd-worktrees/fsd_e3_medium_d0_seed1_20260904_01\nHEAD e6108e466eeea3df31db52c53e49eef828bde41a\ndetached\n\nworktree /home/wu/hmasd-worktrees/fsd_e3_medium_d0_seed1_20260904_02\nHEAD ee7fdae278cede2200ab8c356c4f238cce980edb\ndetached\n\nworktree /home/wu/hmasd-worktrees/fsd_e3_medium_d0_seed2_20260904_01\nHEAD e72e1cf08c9510b52ef67b135e93eee89dc4ddce\ndetached\n\nworktree /home/wu/hmasd-worktrees/fsd_e3_medium_d0_seed3_20260904_01\nHEAD 9c0a990537a8ffef58306429a1ff402550fc4b82\ndetached\n\nworktree /home/wu/hmasd-worktrees/fsd_e3_medium_d2_seed1_20260904_01\nHEAD 4c60f281febd9c5c6503b12aa8053f05642aac32\ndetached\n\nworktree /home/wu/hmasd-worktrees/fsd_e3_medium_d2_seed2_20260904_01\nHEAD 4b61ddfffac042e2247c77668bc881cca68b9a78\ndetached\n\nworktree /home/wu/hmasd-worktrees/fsd_e3_medium_d2_seed3_20260904_01\nHEAD 31bfecd79fc0f708546786ee26dfd8faa9e85dfb\ndetached\n\nworktree /home/wu/hmasd-worktrees/mgtap_b01_4f65eefb1b15e44b42d694376630fba0c230cc6c\nHEAD 4f65eefb1b15e44b42d694376630fba0c230cc6c\ndetached\n\nworktree /home/wu/hmasd-worktrees/mgtap_b02_20260904\nHEAD f3595bfe3e90024f3b31eb8a82910304b90543d3\ndetached\n\nworktree /home/wu/hmasd-worktrees/mgtap_b03_20260904\nHEAD 19531d07023637a0940fd9c6cfa51005d13fe0a7\ndetached\n\nworktree /home/wu/hmasd-worktrees/n3-a05-approved-20260905\nHEAD d3884812aa30b278ccfdcdfd3fd802314b026fcb\ndetached\n\nworktree /home/wu/hmasd-worktrees/n3-b02-20260905\nHEAD 47f81c15c536c2b4c4ee463eaa7a35f720ec08c7\ndetached\n\nworktree /home/wu/hmasd-worktrees/n3-b03-20260906\nHEAD ad01757c43cb3a3df6549b024367b5f9307246b8\ndetached\n\nworktree /home/wu/hmasd-worktrees/native-call-dispatch-20260908\nHEAD e55454c633faba6f3bb6cc6e574607821e684834\ndetached\n\nworktree /home/wu/hmasd-worktrees/rcle-a02-abcc376\nHEAD abcc3766c2b2d9908c9391b0827d9f2a39f8d641\ndetached\n\nworktree /home/wu/hmasd-worktrees/rcle-b01-4d40621\nHEAD 4d40621e0a9abd26e783e8c8aeeaf2653e49cf6a\ndetached\n\nworktree /home/wu/hmasd-worktrees/rcle-b02-8ad01cb\nHEAD 8ad01cb9ea69b77a2e907947bef59bf716a8b45a\ndetached\n\nworktree /home/wu/hmasd-worktrees/rcle-b03-fresh1000-s21-20260910\nHEAD 806d378054774c5ab4f91d1acaba80292c660f67\ndetached\n\nworktree /home/wu/hmasd-worktrees/route_smoke_20260904_01\nHEAD 0852348499f5c59b150f5cb3b948983b317b15a8\ndetached\n\nworktree /home/wu/hmasd-worktrees/ucope-shared-return-b02-seed6401-20260907\nHEAD bcd55750b29014e21dd855df5ac320296256b62e\ndetached\n\nworktree /home/wu/hmasd-worktrees/ucope-shared-return-b03-20260907\nHEAD af7c7d516bbd9466a2775d9cb1e29582be1aaa36\ndetached\n\nworktree /home/wu/hmasd-worktrees/ucope-shared-return-b04-20260907\nHEAD 71433bfabb70481def4329e622a838fa0cd9eeec\ndetached\n\nworktree /home/wu/hmasd-worktrees/ucope-uav-motion-prefix-b01-p21-20260907\nHEAD 536949660fee3ab9ac92aba29c2c0455ffe9f6e1\ndetached\n\nworktree /home/wu/hmasd-worktrees/ucope-uav-motion-prefix-b01-p24-20260907\nHEAD 9c541a8047b8c33e90f09aa65e326180343a23a0\ndetached\n\nworktree /home/wu/hmasd-worktrees/ucope-uav-motion-prefix-b02-p47-20260908\nHEAD 6374063408208ba67b8cb7c69ebc0babb0f00259\ndetached\n\nworktree /home/wu/hmasd-worktrees/ucope-uav-motion-prefix-b03-p57-check-20260908\nHEAD 70900ac7e7aa3a85b4f4ad6a2a8031ccb346fd44\ndetached\n\nworktree /home/wu/hmasd-worktrees/ucope-uav-motion-prefix-b04-p61-check-20260908\nHEAD 7693b7af6b7d89cdaa028659d606a37dee9eb68e\ndetached\n\nworktree /home/wu/hmasd-worktrees/ucope-uav-renewal-b01-p69-check-20260908\nHEAD a453447cb011d50c6bb63ed7fc40180134a914b5\ndetached\n\nworktree /home/wu/hmasd-worktrees/ucope-uav-renewal-b03-7501-p72-20260908\nHEAD 7d3aaab4646360e2473ae352b09c3933ccf8dacf\ndetached\n\nworktree /home/wu/hmasd-worktrees/ucope-uav-renewal-b03-p72-check-20260908\nHEAD 7d3aaab4646360e2473ae352b09c3933ccf8dacf\ndetached\n\nworktree /home/wu/hmasd-worktrees/ucope-uav-short-learned-renewal-continuous-b01-8701-20260910\nHEAD 3182c4c844803ab362034c2b3d5d22f7f62bca3a\ndetached\n\nworktree /home/wu/hmasd-worktrees/ucope_root_target_fit_r01_997f49c3_01\nHEAD 997f49c3cbefffee88d83d7b7de750a078d1a1ca\ndetached\n\nworktree /home/wu/hmasd-worktrees/ucope_root_target_fit_r01_997f49c3_02\nHEAD 997f49c3cbefffee88d83d7b7de750a078d1a1ca\ndetached\n\nworktree /home/wu/hmasd-worktrees/vnfc-causal-r03-9c41484a\nHEAD 9c41484a068e266581b6456bddfd3f6448d3931c\ndetached\n\nworktree /home/wu/hmasd-worktrees/vnfc-e01-60d21ad7d\nHEAD 60d21ad7d2aab5dcb6e3bcaa1233ac763c8d2df0\ndetached\n\nworktree /home/wu/hmasd-worktrees/vnfc-mb1024-r02-ce80bc14-20260904-01\nHEAD 6bd4e37d88e8e7c17cead3c233d20017db964ef8\ndetached\n\nworktree /home/wu/hmasd-worktrees/vnfc_b01_check_33e08f440\nHEAD 33e08f440c2117dcfd9457d825f42fef7b38ccd7\ndetached\n\nworktree /home/wu/hmasd-worktrees/vnfc_b01_check_33e08f440_02\nHEAD 33e08f440c2117dcfd9457d825f42fef7b38ccd7\ndetached\n\nworktree /home/wu/hmasd-worktrees/vnfc_b01_depmode_6fc574561\nHEAD 6fc57456131300e8f6adbec7d6b044d50a22f783\ndetached\n\nworktree /home/wu/hmasd-worktrees/vnfc_b01_formal_33e08f440_01\nHEAD 33e08f440c2117dcfd9457d825f42fef7b38ccd7\ndetached\n\nworktree /home/wu/hmasd-worktrees/vnfc_b01_formal_33e08f440_02\nHEAD 33e08f440c2117dcfd9457d825f42fef7b38ccd7\ndetached\n\nworktree /home/wu/hmasd-worktrees/vnfc_b01_seed02_33e08f440_01\nHEAD 33e08f440c2117dcfd9457d825f42fef7b38ccd7\ndetached\n\nworktree /home/wu/hmasd-worktrees/vsp02-tpc-b01-p15-s1103-a1\nHEAD 19be5ee18393913ff92693cdf037213ec1777510\ndetached\n\nworktree /home/wu/hmasd-worktrees/vsp02-tpc-b01-p17-s1117-a1\nHEAD 19be5ee18393913ff92693cdf037213ec1777510\ndetached\n\nworktree /home/wu/hmasd-worktrees/vsp03-b01-seed1-r01\nHEAD 2c7d7ae08f978aa63d58468f3de1adb372f1339a\ndetached\n\nworktree /home/wu/hmasd-worktrees/vsp03-b01-seeds23-r01\nHEAD b77f897da7dea5df2e9230f43c8f128cc281afb3\ndetached\n\nworktree /home/wu/hmasd-worktrees/vsp03-b02-p09-00ebefa5823dbb41e64aed11b90ba26a8ff97020\nHEAD 00ebefa5823dbb41e64aed11b90ba26a8ff97020\ndetached\n\nworktree /home/wu/hmasd-worktrees/vsp03-b03-p54-4eb8a36b9184633f5e28eff999a99f2dbc948040\nHEAD 4eb8a36b9184633f5e28eff999a99f2dbc948040\ndetached\n\nworktree /home/wu/hmasd-worktrees/vsp03-b04-p64-b5d605bf4f39b5ab18f01c98e04dc07e53764354\nHEAD b5d605bf4f39b5ab18f01c98e04dc07e53764354\ndetached\n\nworktree /home/wu/hmasd-worktrees/vsp03-b04-p67-828da00343e5036a4de93ccf1ec636e3b8c777b7\nHEAD 828da00343e5036a4de93ccf1ec636e3b8c777b7\ndetached\n\nworktree /home/wu/hmasd-worktrees/vspc1-b01-e2f00991f\nHEAD e2f00991f4d6ccd169e531ef411ebc1547f2d371\ndetached\n\nworktree /home/wu/hmasd-worktrees/vspc1-b01-e7e574b44\nHEAD e7e574b4496875f45e1d1b9b41c02cd35cf3684e\ndetached\n\nworktree /home/wu/hmasd-worktrees/vspc1-native-hold-value-b01-8101-65c89368ab0f\nHEAD 65c89368ab0fc7402fb0e24254447629e829a12d\ndetached\n\nworktree /home/wu/hmasd-worktrees/vspc1-native-hold-value-b02-8102-0ec208899f5e\nHEAD 0ec208899f5e8b4c190ab7bd9806be2cc30b6fda\ndetached\n\nworktree /home/wu/hmasd-worktrees/vspc1-native-hold-value-b03-8201-7a8ed3aa5d25\nHEAD 7a8ed3aa5d25ded71164aa338749d09318124dcf\ndetached\n\nworktree /home/wu/hmasd-worktrees/vspc1-native-hold-value-b04-8202-a33a3820fe9d\nHEAD a33a3820fe9d4a46a3231bcf267afc956554b6c5\ndetached\n\nworktree /home/wu/hmasd-worktrees/vspc1-native-hold-value-b04-p67-8202\nHEAD ec8b7c458b038b3a375ec5639834d0f3527fdf8c\ndetached\n\nworktree /home/wu/hmasd-worktrees/vspc1-native-hold-value-b05-8301-bda90e1db76a\nHEAD bda90e1db76a00123ba889ed6c4b05225473f4cb\ndetached\n\nworktree /home/wu/hmasd-worktrees/vspc1-native-hold-value-b08-8401-e9a05af5d51d\nHEAD e9a05af5d51da571642f51c5b7b8f00c96f1c6b5\ndetached\n\nworktree /home/wu/hmasd-worktrees/vspc1-native-hold-value-b09-8402-4c9dc8b3de9b\nHEAD 4c9dc8b3de9b7827612b962aa4a4d085dc7cd411\ndetached\n\nworktree /home/wu/hmasd-worktrees/vspc1-reactive-queues-b01-476748835\nHEAD 47674883572bbe078ede037cbb8f99b8cd54c159\ndetached\n\nworktree /home/wu/hmasd-worktrees/vspc1-service-allocation-b01-completion402-20260907\nHEAD ec8866b3968fcb1566976ce405d7c552d4d9a5de\ndetached\n\nworktree /home/wu/hmasd-worktrees/vspc1-service-allocation-b01-seed402-20260907\nHEAD faf786e135b3f55e535c898e17e646dcc341bdec\ndetached\n\nworktree /home/wu/hmasd-worktrees/vspc1_b02_90c730a098d1\nHEAD 90c730a098d1c39d4265684c40afdf881909fa43\ndetached\n\n",
+            "stderr": ""
+          }
+        ],
+        "target_processes_before_removal": [],
+        "source_absent": true,
+        "wrapper_absent": true,
+        "socket_absent": true,
+        "source_unregistered": true,
+        "preserved_20_scientific_files_unchanged": true,
+        "status": "scoped_remote_closeout_complete",
+        "finished_utc": "2026-09-10T17:21:35.216252+00:00"
+      }
+    },
+    "initial_status": "uncertain_external_state_after_transport_timeout",
+    "resolved_utc": "2026-09-10T17:21:35.216252+00:00",
+    "owner_boundary": {
+      "checked_utc": "2026-09-10T17:22:43.690714+00:00",
+      "main_sha": "d21a88d437bc196dc92e1e022e3d7a4fd8a52047",
+      "unapplied_reviews": [],
+      "vsp03_owner_overrides": []
+    }
+  }
+}

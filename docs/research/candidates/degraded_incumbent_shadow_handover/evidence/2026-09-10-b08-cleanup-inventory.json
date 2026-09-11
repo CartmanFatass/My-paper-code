@@ -1,0 +1,49 @@
+{
+  "target": "/home/wu/hmasd-worktrees/dish-b08-db2480c2",
+  "head": "a01522a6f6cf12e5549b3e03596ce58642b68cf1",
+  "registered": "worktree /home/wu/hmasd-worktrees/dish-b08-db2480c2\nHEAD a01522a6f6cf12e5549b3e03596ce58642b68cf1\ndetached",
+  "tracked_or_untracked_status": "",
+  "untracked_and_ignored": [
+    {
+      "relative": "temp/directions/degraded_incumbent_shadow_handover/exp/arrival_bridge_retention_b08_seed137_20260910_run01/half_retain/checkpoint_update16.pt",
+      "bytes": 2356639,
+      "kind": "ignored"
+    },
+    {
+      "relative": "temp/directions/degraded_incumbent_shadow_handover/exp/arrival_bridge_retention_b08_seed137_20260910_run01/replace/checkpoint_update16.pt",
+      "bytes": 2356639,
+      "kind": "ignored"
+    },
+    {
+      "relative": "temp/directions/degraded_incumbent_shadow_handover/exp/arrival_bridge_retention_b08_seed137_20260910_run01/shared/initial_state.pt",
+      "bytes": 836667,
+      "kind": "ignored"
+    },
+    {
+      "relative": "temp/directions/degraded_incumbent_shadow_handover/exp/arrival_bridge_retention_b08_seed137_20260910_run01/shared/resets.json",
+      "bytes": 3004,
+      "kind": "ignored"
+    },
+    {
+      "relative": "temp/directions/degraded_incumbent_shadow_handover/exp/arrival_bridge_retention_b08_seed137_20260910_run01/summary.json",
+      "bytes": 70423,
+      "kind": "ignored"
+    },
+    {
+      "relative": "temp/directions/degraded_incumbent_shadow_handover/exp/arrival_bridge_retention_b08_seed137_20260910_run01_memory.json",
+      "bytes": 504,
+      "kind": "ignored"
+    },
+    {
+      "relative": "temp/directions/degraded_incumbent_shadow_handover/exp/arrival_bridge_retention_b08_seed137_20260910_run01_preflight_wall.txt",
+      "bytes": 45,
+      "kind": "ignored"
+    },
+    {
+      "relative": "temp/directions/degraded_incumbent_shadow_handover/exp/arrival_bridge_retention_b08_seed137_20260910_run01_runner_wall.txt",
+      "bytes": 49,
+      "kind": "ignored"
+    }
+  ],
+  "old_pid_exists": false
+}

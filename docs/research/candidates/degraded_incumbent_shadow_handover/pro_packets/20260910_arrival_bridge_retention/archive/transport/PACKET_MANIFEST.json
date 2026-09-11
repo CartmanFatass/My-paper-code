@@ -1,0 +1,34 @@
+{
+  "schema_version": 4,
+  "packet_id": "2026-09-10-dish-arrival-bridge-retention-convergence-01--degraded_incumbent_shadow_handover",
+  "attempt": 1,
+  "canonical_form": "logical_packet_manifest",
+  "request_id": "2026-09-10-dish-arrival-bridge-retention-convergence-01",
+  "direction_id": "degraded_incumbent_shadow_handover",
+  "direction_ids": [
+    "degraded_incumbent_shadow_handover"
+  ],
+  "workflow_node": "em_convergence",
+  "conversation_binding_key": "em:degraded_incumbent_shadow_handover:convergence",
+  "decision_authority": "pro_final",
+  "source_mode": "paste",
+  "body": {
+    "role": "prompt",
+    "source_path": "<paste>",
+    "canonical_filename": "2026-09-10-dish-arrival-bridge-retention-convergence-01--degraded_incumbent_shadow_handover__00_PROMPT.md",
+    "bytes": 1270,
+    "sha256": "6f31d73befda12459626f038f448ae9d49d4c7d7a96bfe2c686c593cdc992226",
+    "materialized_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-10-dish-arrival-bridge-retention-convergence-01\\2026-09-10-dish-arrival-bridge-retention-convergence-01--degraded_incumbent_shadow_handover__00_PROMPT.md"
+  },
+  "references": [],
+  "reference_order_is_authoritative": true,
+  "manifest_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-10-dish-arrival-bridge-retention-convergence-01\\2026-09-10-dish-arrival-bridge-retention-convergence-01--degraded_incumbent_shadow_handover__PACKET_MANIFEST.json",
+  "materialized_artifacts": {
+    "body": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-10-dish-arrival-bridge-retention-convergence-01\\2026-09-10-dish-arrival-bridge-retention-convergence-01--degraded_incumbent_shadow_handover__00_PROMPT.md",
+    "references": []
+  },
+  "materialized_hashes": {
+    "body": "6f31d73befda12459626f038f448ae9d49d4c7d7a96bfe2c686c593cdc992226",
+    "references": []
+  }
+}

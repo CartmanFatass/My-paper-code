@@ -1,0 +1,49 @@
+{
+  "request_id": "2026-09-10-fifth-vacancy-portfolio-01",
+  "workflow_node": "portfolio_decision",
+  "conversation_binding_key": "portfolio:cross_direction",
+  "direction_id": "portfolio",
+  "direction_ids": [
+    "capability_bound_semantic_currentness",
+    "commitment_residual_triggered_options",
+    "degraded_incumbent_shadow_handover",
+    "finite_resource_relational_inductive_efficiency",
+    "flexible_skill_duration",
+    "metric_ground_transport_allocation",
+    "semigroup_consistent_duration_model_policy",
+    "variable_n_fleet_churn",
+    "vsp_02",
+    "vsp_03",
+    "vsp_c1"
+  ],
+  "conversation_id": "6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+  "provider_url": "https://chatgpt.com/c/6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+  "tab_id": "7",
+  "visible_model": "6 Pro",
+  "underlying_model": "Latest",
+  "thinking_effort": "Pro, 5 of 5.",
+  "source_mode": "paste",
+  "prompt_sha256": "fc3d5fe45b738f5148f7ba7e3d3fe73c2de30586f099764ea6a370ff5c7f1e59",
+  "send_click_count": 1,
+  "send_confirmed_at": "2026-09-11T00:09:32Z",
+  "natural_completion_observed": true,
+  "completion_status": "Thought 11m58s; generation control absent; complete assistant message present",
+  "user_message_identity": "today 17:09 TASK.md@9ada5ce1793862fc57aea4fd9b71ca9a83a64514",
+  "assistant_message_identity": "current-round assistant node paired with today 17:09 user message",
+  "response_sha256": "d7fa2b960eeba34c8b96d815c8b5a8686207f4e711629eaa20a735110b633922",
+  "response_bytes": 635,
+  "archive_status": "ARCHIVED",
+  "archive_paths": {
+    "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-10_fifth_vacancy_selection\\PROMPT_BODY.md",
+    "response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-10_fifth_vacancy_selection\\RESPONSE.md",
+    "packet_manifest": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-10_fifth_vacancy_selection\\PACKET_MANIFEST.json",
+    "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-10_fifth_vacancy_selection\\TRANSPORT_FACTS.json"
+  },
+  "return_receipt": {
+    "status": "SENT",
+    "attempt_count": 1,
+    "delivery_status": "accepted",
+    "message_key": "2026-09-10-fifth-vacancy-portfolio-01|portfolio|6a9c109e-b264-83e8-a78b-f9ea1b767b7b|d7fa2b960eeba34c8b96d815c8b5a8686207f4e711629eaa20a735110b633922",
+    "sent_at": "2026-09-11T00:26:01Z"
+  }
+}

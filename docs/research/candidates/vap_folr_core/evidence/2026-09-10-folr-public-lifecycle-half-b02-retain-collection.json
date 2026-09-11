@@ -1,0 +1,104 @@
+{
+  "collected_at_utc": "2026-09-11T00:02:58.192251+00:00",
+  "roots": [
+    "/home/wu/hmasd-worktrees/folr-public-lifecycle-half-b02-c6be208cd/temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_seed7808_retain",
+    "/home/wu/.agent-tasks/folr-public-lifecycle-half-b02-retain-20260910",
+    "/home/wu/hmasd-worktrees/folr-public-lifecycle-half-b02-c6be208cd/temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_seed7808_retain_memory.json"
+  ],
+  "files": [
+    {
+      "root": "/home/wu/hmasd-worktrees/folr-public-lifecycle-half-b02-c6be208cd/temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_seed7808_retain",
+      "relative": "final.pt",
+      "bytes": 4662779,
+      "sha256": "6c631bc1d57d6b1d84e237390428d9783df3d2c96af55aa5ae6243a1c542f8d5",
+      "local_path": "temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_control_20260910/collected/public_lifecycle_half_b02_seed7808_retain/final.pt",
+      "local_matches": true
+    },
+    {
+      "root": "/home/wu/hmasd-worktrees/folr-public-lifecycle-half-b02-c6be208cd/temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_seed7808_retain",
+      "relative": "summary.json",
+      "bytes": 3753,
+      "sha256": "82ad335d991b93c4a8035683668c595f07fc2b0afca7fb2dd68a42329d98c0f1",
+      "local_path": "temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_control_20260910/collected/public_lifecycle_half_b02_seed7808_retain/summary.json",
+      "local_matches": true
+    },
+    {
+      "root": "/home/wu/.agent-tasks/folr-public-lifecycle-half-b02-retain-20260910",
+      "relative": "exit_code",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "local_path": "temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_control_20260910/collected/folr-public-lifecycle-half-b02-retain-20260910/exit_code",
+      "local_matches": true
+    },
+    {
+      "root": "/home/wu/.agent-tasks/folr-public-lifecycle-half-b02-retain-20260910",
+      "relative": "pid",
+      "bytes": 8,
+      "sha256": "21c8dc800c5068abc8b3e33575225e9f574c0461901ec537d35baee9faed6fb7",
+      "local_path": "temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_control_20260910/collected/folr-public-lifecycle-half-b02-retain-20260910/pid",
+      "local_matches": true
+    },
+    {
+      "root": "/home/wu/.agent-tasks/folr-public-lifecycle-half-b02-retain-20260910",
+      "relative": "runner.sh",
+      "bytes": 1802,
+      "sha256": "4ae1465d9632ddfc47c62fa727e00c71968d0e30028111bddc48556922e99631",
+      "local_path": "temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_control_20260910/collected/folr-public-lifecycle-half-b02-retain-20260910/runner.sh",
+      "local_matches": true
+    },
+    {
+      "root": "/home/wu/.agent-tasks/folr-public-lifecycle-half-b02-retain-20260910",
+      "relative": "start_time",
+      "bytes": 11,
+      "sha256": "8dec73d5524bf3104d81955a44bd8d41d8075654bee450fafd42e37041af3950",
+      "local_path": "temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_control_20260910/collected/folr-public-lifecycle-half-b02-retain-20260910/start_time",
+      "local_matches": true
+    },
+    {
+      "root": "/home/wu/.agent-tasks/folr-public-lifecycle-half-b02-retain-20260910",
+      "relative": "status",
+      "bytes": 9,
+      "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983",
+      "local_path": "temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_control_20260910/collected/folr-public-lifecycle-half-b02-retain-20260910/status",
+      "local_matches": true
+    },
+    {
+      "root": "/home/wu/.agent-tasks/folr-public-lifecycle-half-b02-retain-20260910",
+      "relative": "task.log",
+      "bytes": 5601,
+      "sha256": "52d1ed3eedd4237613c36870a77526a139e1b0c09bbaa0a6f08109beb20a84ab",
+      "local_path": "temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_control_20260910/collected/folr-public-lifecycle-half-b02-retain-20260910/task.log",
+      "local_matches": true
+    },
+    {
+      "root": "/home/wu/.agent-tasks/folr-public-lifecycle-half-b02-retain-20260910",
+      "relative": "whole.time",
+      "bytes": 1311,
+      "sha256": "f19d50a6a17bbc98042068deb1e8e8cf07eb401456ad79321f3a02965ea961f1",
+      "local_path": "temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_control_20260910/collected/folr-public-lifecycle-half-b02-retain-20260910/whole.time",
+      "local_matches": true
+    },
+    {
+      "root": "/home/wu/hmasd-worktrees/folr-public-lifecycle-half-b02-c6be208cd/temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_seed7808_retain_memory.json",
+      "relative": ".",
+      "bytes": 504,
+      "sha256": "69992f41d5413521ac0964b8ef4dc17a5066e687c27b3d47b1f737878ea14739",
+      "local_path": "temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_control_20260910/collected/public_lifecycle_half_b02_seed7808_retain_memory.json",
+      "local_matches": true
+    }
+  ],
+  "source_surface_matches": "c6be208cd514b5d12fb13c7637e2d6376de11eb6",
+  "object": "FOLR-PUBLIC-LIFECYCLE-HALF-B02",
+  "arm": "RETAIN",
+  "handle": "folr-public-lifecycle-half-b02-retain-20260910",
+  "node": "hmasd-wsl-node",
+  "local_byte_verification": "all original remote files match local copies",
+  "monitor_terminal": {
+    "source": "C:\\Users\\fires\\Documents\\Codex\\2026-09-09\\hmasd-folr-b02-monitor-20260909\\outputs\\folr-public-lifecycle-half-b02-retain-20260910-terminal.txt",
+    "copy": "temp\\directions\\vap_folr_core\\exp\\public_lifecycle_half_b02_control_20260910\\retain_monitor_terminal.txt",
+    "sha256": "8dc5618d48b3d7127a29ea9fedcd95faa0d65849a2197285e05f2f1e8beb00e0",
+    "text": "handle=folr-public-lifecycle-half-b02-retain-20260910\nnode=hmasd-wsl-node\nsource=c6be208cd514b5d12fb13c7637e2d6376de11eb6\ncwd=/home/wu/hmasd-worktrees/folr-public-lifecycle-half-b02-c6be208cd\noutput=temp/directions/vap_folr_core/exp/public_lifecycle_half_b02_seed7808_retain\nlocal_observation_time=2026-09-11T00:00:52-07:00\nstatus=finished\nexit_code=0\nremote_exit=2026-09-11T08:00:15+08:00\nduration_seconds=749\narm=RETAIN\ntraining_seed=7808\nevaluation_seed=107808\ntraining_episodes=5000\ntraining_ticks=100000\noptimizer_steps=4969\nevaluation_episodes=128\nevaluation_ticks=2560\nmean_native_return=9.471796875\ntraining_return_sum=-1567.5800000000443\npreflight=passed\ncompletion_status=complete\nmonitor_query_wall_seconds_measured=4.476\nmonitor_query_wall_components=0.552,0.389,0.299,0.335,0.431,0.395,0.304,0.403,0.385,0.346,0.358,0.279\nmonitor_support_unmeasured=any tool calls whose 30s sleep+query exceeded client yield and did not return captured stopwatch output; messaging overhead\n"
+  },
+  "local_verified_at_utc": "2026-09-11T00:02:59.899957+00:00",
+  "collection_inner_seconds": 1.9676223999995273
+}

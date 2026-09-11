@@ -1,0 +1,135 @@
+{
+  "object": "SCDMP-NATIVE-HOLD-RESIDUAL-B02",
+  "evidence_class": "B/EXPLORE",
+  "prepared_at_utc": "2026-09-10T20:44:17.040533+00:00",
+  "selected_by_response_commit": "2b1a8d7a8395827ed654dac120641710e6a6c87a",
+  "source_semantics_commit": "7d0fc9d0091e046617493a1b23bbbf07297821cf",
+  "master": 8202,
+  "source_config_defaults": {
+    "seed": 8201,
+    "fixture": false,
+    "horizon": 256,
+    "train_episodes": 512,
+    "eval_episodes": 32,
+    "chunk": 32,
+    "arm_cap": 1800,
+    "pair_cap": 3600,
+    "ratio_grouping": "agent_compound"
+  },
+  "configuration": {
+    "seed": 8202,
+    "fixture": false,
+    "horizon": 256,
+    "train_episodes": 512,
+    "eval_episodes": 32,
+    "chunk": 32,
+    "arm_cap": 1800,
+    "pair_cap": 3600,
+    "ratio_grouping": "agent_compound"
+  },
+  "independent_new_training_pairs": 1,
+  "historical_B01_training_pairs": 1,
+  "historical_B01_reading": "WITHIN",
+  "historical_B01_delta": 0.0067374074558942025,
+  "counts": {
+    "new_learners": 2,
+    "parameters_per_learner": 66441,
+    "training_episodes_per_arm": 512,
+    "training_steps_per_arm": 131072,
+    "rollouts_per_arm": 256,
+    "epochs_per_rollout": 4,
+    "Adam_per_arm": 1024,
+    "total_training_steps": 262144,
+    "evaluation_policies": 3,
+    "evaluation_episodes_per_policy": 32,
+    "total_evaluation_steps": 24576,
+    "total_native_steps": 286720,
+    "total_training_episodes": 1024,
+    "total_evaluation_episodes": 96,
+    "total_Adam": 2048,
+    "total_rollouts": 512,
+    "max_eligible_pairs_per_training_arm": 1536,
+    "max_treatment_residual_terms": 6144,
+    "nested_search_calls": 0
+  },
+  "random_domains": {
+    "base": 820200000,
+    "initialization": 820200011,
+    "train_velocity": 820200021,
+    "train_duration": 820200022,
+    "constructor_reset": 820201000,
+    "train_resets_inclusive": [
+      820201000,
+      820201511
+    ],
+    "eval_resets_inclusive": [
+      820202000,
+      820202031
+    ],
+    "eval_velocity_inclusive": [
+      820203000,
+      820203031
+    ],
+    "eval_duration_inclusive": [
+      820204000,
+      820204031
+    ],
+    "private_arm_generators": true,
+    "reuse_B01_weights_data_generator_states": false
+  },
+  "MEI_absolute": 0.01,
+  "prediction": {
+    "event": "WITHIN",
+    "probability": 0.6,
+    "branches": {
+      "UP": 0.3,
+      "WITHIN": 0.6,
+      "DOWN": 0.1
+    },
+    "owner": "not taken (unattended)"
+  },
+  "rule_verbatim": "| Complete trustworthy observation | Reading and recommendation |\n| --- | --- |\n| Δ2>0.01 | UP: one selected-scale residual-MC package signal alongside B01 WITHIN. Discuss further investment only after complete intake; no stable superiority, two-UP claim or automatic third pair. |\n| −0.01≤Δ2≤0.01 | WITHIN, including both boundaries: a second instance without selected-scale improvement. Recommend narrow PARK of this unchanged opening residual-MC package after intake; no third pair to seek positivity, equivalence or broad residual-method failure. |\n| Δ2<−0.01 | DOWN: this instance materially favors intact MC. Alongside B01's small positive gap it is a warning about inconsistent package outcomes; recommend narrow PARK after intake. No negative-population-mean claim or automatic coefficient change. |\n| Learner primary dependency incomplete | No complete-budget package judgment dependent on the missing facts. Preserve independently trustworthy rows/counts/errors; no replacement seed. Missing H limits H-dependent claims if the learner primary remains independently complete. |",
+  "cost": {
+    "arm_cap_seconds": 1800,
+    "pair_cap_seconds": 3600,
+    "per_arm_work": "131072*c_collection+1024*c_update+8192*c_eval+complete overhead; second arm adds8192H steps and pair publication",
+    "source_full_pair_process_wall_seconds": 323.02,
+    "planning_anchor_each_arm_seconds": 323.02,
+    "conservative_assigned_pair_anchor_seconds": 646.04,
+    "projected_each_arm_below_cap": true,
+    "assigned_pair_anchor_below_cap": true,
+    "projection_is_measured_new_bound": false,
+    "new_complete_per_arm_wall": "unmeasured",
+    "new_profiling_or_cost_invocation": 0,
+    "added_validation": "only actual binding/output checks and applicable independent review; no new science pilot"
+  },
+  "scope_section4": "none",
+  "execution_route": {
+    "node": "wsl_4070",
+    "device": "CPU",
+    "dtype": "FP32",
+    "threads": 1,
+    "python": "/home/wu/.venvs/hmasd/bin/python",
+    "supervisor": "/usr/local/bin/agent-task",
+    "local_fallback_allocated": false,
+    "admission": "new adjacent actual-node physical/effective>=4GiB before each accepted invocation",
+    "monitor_config_live": "C:/Projects/HMASD/.codex/hmasd-monitor.toml"
+  },
+  "actual_preparation_exposure": {
+    "models": 0,
+    "environments": 0,
+    "native_steps": 0,
+    "synthetic_steps": 0,
+    "training_episodes": 0,
+    "evaluation_episodes": 0,
+    "optimizer_steps": 0,
+    "replay": 0,
+    "profiling": 0,
+    "new_scientific_invocations": 0,
+    "parameter_displacement": "not applicable: no new learner"
+  },
+  "machine_exposure_line": "B02_PREPARATION: models=0; environments=0; native_steps=0; synthetic_steps=0; training_episodes=0; evaluation_episodes=0; optimizer_steps=0; replay=0; profiling=0; new_scientific_invocations=0; parameter_displacement=not applicable: no new learner",
+  "allocated_scientific_invocations": 1,
+  "accepted_scientific_invocations": 0,
+  "no_automatic_retry_or_successor": true
+}

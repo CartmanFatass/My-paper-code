@@ -1,0 +1,133 @@
+{
+  "caller_role": "em",
+  "workflow_node": "em_convergence",
+  "request_id": "2026-09-10-vnfc-native-service-credit-reentry-01",
+  "source_thread_id": "01a08ce3-ad39-7e02-987c-d94dc8f93851",
+  "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "direction_id": "variable_n_fleet_churn",
+  "repository": "CartmanFatass/My-paper-code",
+  "repository_url": "https://github.com/CartmanFatass/My-paper-code",
+  "commit_or_ref": "b610a07986d839e4a44159d8c7c5a85ca300606c",
+  "execution_mode": "REUSE_SINGLETON",
+  "delivery_mode": "github_delivery",
+  "conversation_id": "6a9c674e-6eb8-83e8-b19f-06cb6f3ebe08",
+  "github_delivery": {
+    "branch": "codex/vnfc",
+    "base_sha": "b610a07986d839e4a44159d8c7c5a85ca300606c",
+    "response_path": "docs/research/candidates/variable_n_fleet_churn/pro_packets/20260910_native_service_credit_reentry/archive/RESPONSE.md",
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/1"
+  },
+  "scientific_question": "请在原 VNFC Convergence 节点决定一个具体重开问题：(a)只开放所列 VNFC-N7-NATIVE-SERVICE-CREDIT-B02 的一次新训练对，或(b)保留当前窄暂停。DM推荐(a)，但请认真对待(b)。这是对2026-09-06已形成的比较族暂停之重开裁决，不是通用B启动审批；没有本地科学选项已执行，当前咨询科学暴露为0。保持ACTIVE/HIGH、recasts=2和其争用排序；不改Portfolio、不重跑E01/R03，不增加第三recast。owner要求方向独立滚动，没有批次/兄弟结果依赖。\n\n此前两个种子均有真实MAPR/DIRECT恢复学习，MAPR-DIRECT仅+.015469/+.003932且区1换号；两学习器所有native均值均低于BCRH。部署方式四差混合，四个J均下降。保留这些支持、反证及全部旧失败，不做唯一根因判断。上一轮明确未选择信用方案，原因是“服务差”尚无估计器定义。现在给出的是同一MAPR、同一gamma=1/lambda=.95 PPO的INTERVAL与TERMINAL训练比较，不再重复架构分离。\n\n处理定义在intake§3。每个完整own-trajectory episode，用现有native快照取得F_j/T_j，j=0..6；用终点正分母D_F/D_T。INTERVAL的六reward为0.5*(F_(j+1)-F_j)/D_F+0.5*(T_(j+1)-T_j)/D_T；TERMINAL为末步J，其余0。六项和等于原完整J=0.5R_fail_60+0.5U_total，60s之后failed增量0、total继续至120s。两臂均完整收集，再构造训练目标；不能把未来分母输入actor/critic、改成分段比值、删掉完整服务或添加bonus。delta=r+V_next-V，A=delta+.95*A_next，terminal V/A=0；保持原归一化/PPO/AdamW/entropy/value/clip设置及canonical action path。两臂相同新初始MAPR张量和独立optimizer，共同world、独立arm actions/minibatches；2,048更新/臂。只有时间分解的训练标签和随后学习轨迹改变；不声明全部训练信息相同、梯度等价或纯方差降低。有限观察critic/未来正常化和六决策时域是实质限制，.95^5=.7737809375并非很长延迟。RUDDER/GAE作为方法解释；不是移植其网络、证明Markov性或已知改善。\n\n一次训练对、每臂64x32训练、三个固定0/32/64端点各64world，终点64为primary；fixed BCRH同panel一次，仅作原生参考，逐字段同信息未证明。primary是final INTERVAL-TERMINAL R_fail_60；报告双方init gain/BCRH差及所有J/U_total/U_intact、分区、失败和不利服务。MEI提议.02，原因是既有.04-.06参照差距中可见的一部分；不改旧B01 .10，不变成显著/全正/等价线。若局部改善且完整J保持，可能值得另选独立pair；mixed或反向保留并限制此recipe，不能改读为全方向负面。64world的SE条件于这一训练对，不是训练总体。\n\n机器work/cost JSON给精确乘法：2新model各89090参数，4096训练+384学习评价+64参考=4544完整episode，1090560native ticks，4096backward/optimizer，384完整BCRH calls；无外部policy/trajectory/counterfactual search。历史MAPR单位最大实测值的规划项每臂170.353471s，共享项在内的两MAPR替换项400.288409s，新counter/target/output额外秒数未知。旧真实完整两臂wall306.68/388.75也非新保证。拟议一次完整累计900s=600s native完整调用(双臂/build/init/所有eval/reference/publication)+300s全部支持机器工作(准备、focused checks、source staging、Monitor命令、collect/readback/closeout)。支持缺失计时不得补0；行政思考/队列闲置单列。无校准实验、第二accepted invocation、retry/替换seed、加评或自动后继。旧2700s余额不转移。原生真实训练前仍要具体card、新身份、源提交/推送、同node紧邻资源admission和高风险变化审阅；本请求及你的交付不执行任何模型/测试/实验。\n\n请结论先行明确选(a)或(b)、最小范围、支持与强反方、未知/推断上限、完整成本和下一可改变决定的观察。对(a)请检查以上定义是否足以成为ordinary B，不把精确upper、完整因果归因、正pilot或额外诊断变成前置；如有实际reward/information/comparator/预算冲突，准确指出并返回本节点修正，不静默换另一个干预、追加arms/预算或扩大成Portfolio/第三recast。对(b)请说明为何这个具体新定义仍不值得这项有限观察，而不是用缺headroom、排序或未显著作理由。旧暂停及E01保持不变直到形成符合当前规范的明确决定。",
+  "deliverable": "中文结论先行的方向选择：开放上述唯一native-service temporal-credit B比较或保留暂停，说明最小scope、处理/对照/信息/完整目标与成本是否自洽、支持和反证、未决风险及下一判别。明确区分已知观察、DM推断和你所形成的决定；不声称执行卡/代码/实验或更改Portfolio。",
+  "claim_ceiling": "Direction-local ordinary B/EXPLORE proposal only: no new empirical finding, stable superiority/equivalence, pure causal attribution, optimality/tuned headroom, cross-N/repeated churn/UAV transfer, safety/deployment, Portfolio disposition or third recast.",
+  "reference_files": [
+    {
+      "path": "docs/research/candidates/variable_n_fleet_churn/VNFC_NATIVE_SERVICE_CREDIT_REENTRY_INTAKE_20260910.md",
+      "purpose": "全文§§1–6：当前权威边界、支持与强反方、唯一具体信用处理、原生因果链/信息限制、真实训练与对照、native tradeoffs、成本和未执行选项。",
+      "provenance": "本轮DM完整提案与读取记录，不是已选科学对象或已执行方向决定。"
+    },
+    {
+      "path": "docs/research/candidates/variable_n_fleet_churn/pro_packets/20260910_native_service_credit_reentry/EXPOSURE_AND_COST.json",
+      "purpose": "exposure_line、proposed_B02_unselected、per_arm_cost_projection、shared_projection_terms_seconds、历史记录与caps：核对单位、精确算术、旧实测与新未知项。",
+      "provenance": "Python标准库读取既有JSON并计算配置；没有新模型、world、实验、test或profile。"
+    },
+    {
+      "path": "docs/research/candidates/variable_n_fleet_churn/pro_packets/20260906_post_depmode_convergence/archive/RESPONSE.md",
+      "purpose": "全文，尤其§§三–六：原B01比较族最小暂停、未定义信用提案和明确重开条件；原决定中的全部反证与成本校正。",
+      "provenance": "已形成并应用的完整Convergence答复；新问题不能重写此决定或将其泛化为全方向关闭。",
+      "commit_sha": "6b466abedfb5d1dee88145e3d3990fce98fd2717"
+    },
+    {
+      "path": "docs/research/candidates/variable_n_fleet_churn/VNFC_POST_DEPMODE_CONVERGENCE_INTAKE_20260906.md",
+      "purpose": "§§2–4：旧决定的已执行范围、recasts2、非headroom/排序否定理由、两种累计时间边界。",
+      "provenance": "历史应用记录；当时离开working set不是当前滚动方向的同步条件。",
+      "commit_sha": "1952f7b35bce656b778b00db2c466ec3574b46e8"
+    },
+    {
+      "path": "docs/research/candidates/variable_n_fleet_churn/VNFC_N7_DIRECT_RETURN_B01_TWO_SEED_RESULT_INTAKE_20260905.md",
+      "purpose": "完整性限制、Per-seed results and native tradeoffs、曲线、实际暴露及费用：真实双臂学习、小分离、BCRH亏损、历史故障上限。",
+      "provenance": "已接受的两个独立训练对；新B不加载、汇池或增加其训练样本数。",
+      "commit_sha": "da2ba5a194ddb66acee253b5fb42619479e37fab"
+    },
+    {
+      "path": "docs/research/candidates/variable_n_fleet_churn/VNFC_N7_DIRECT_RETURN_B01_SCIENCE_CARD_20260905.md",
+      "purpose": "Question/population、Treatments、Seeds/schedule、Complete cost章节：原native主目标、N7两区/一次loss、120s完整端点、原2700s累计范围。",
+      "provenance": "冻结历史B01卡；此次未来B是新对象，旧禁塑形和预算不被静默重写。",
+      "commit_sha": "b6f8f0257bbf5dc93437662853990d6bc4c57812"
+    },
+    {
+      "path": "docs/research/candidates/variable_n_fleet_churn/DIRECTION.md",
+      "purpose": "Scientific question、Current scientific disposition中2026-09-06暂停/部署方式和E01完成段；无需读取后面的完整历史法则。",
+      "provenance": "当前接受的机制级科学位置；生命周期由Portfolio控制。"
+    },
+    {
+      "path": "experiments/candidates/variable_n_fleet_churn_n7_direct_b01/learning.py",
+      "purpose": "initialize、terminal_metrics、rollout、update：MAPR接口、收集的public输入、原终点J进GAE的精确位置和真实PPO。",
+      "provenance": "已接受旧学习路径；只读代码证据，不授权执行或改变旧文件。"
+    },
+    {
+      "path": "experiments/candidates/variable_n_fleet_churn_bpcr_r09/training.py",
+      "purpose": "gae_terminal、normalize_advantages、ppo_loss、adamw_decay_groups：确认gamma1/lambda.95、完整奖励/critic/归一化/裁剪系数。",
+      "provenance": "既有实现语义，旧frozen_minibatches和R09全量工作合同不作为新B任务。"
+    },
+    {
+      "path": "experiments/candidates/variable_n_fleet_churn_bpcr_r09/native/bpcr_general.hpp",
+      "purpose": "GS/GInteractiveOutput、gtick、ginteractive_snapshot/reset/step：post-loss计数、60秒failed-zone/120秒total边界、可直接复用的累计整数；不要求读控制器枚举算法。",
+      "provenance": "实际native累计量与物理角色/成员处理；初步源码判断不冒充新运行验证。"
+    },
+    {
+      "path": "experiments/candidates/variable_n_fleet_churn_bpcr_r09/native_backend.py",
+      "purpose": "_interactive_dict和NativeInteractiveBatch reset/step接口（约416–446行）：累计字段在现有Python接口可得。",
+      "provenance": "已有native适配输出；没有新增ABI/辅助轨迹。"
+    },
+    {
+      "path": "experiments/candidates/variable_n_fleet_churn_n7_direct_b01/experiment.py",
+      "purpose": "bcrh、cost_projection与run的config/exposure/publication段：旧384次完整BCRH参考工作、单位时间公式、每臂真实更新与完整产物。",
+      "provenance": "既有实现与规划公式；不把旧秒数保证为新处理成本。"
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "purpose": "本TASK采纳§4、§5.2与§11全部适用要求，重点§11.4、§11.7–11.10：B证据负担、新干预、独立单位、失败依赖、比例化工作及知识使用。",
+      "provenance": "当前适用规范；不是要求以原E01/精确headroom/阳性pilot作为新B前置。"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "purpose": "§§1–4和6：完整return、部分观测、团队信用、有限训练与评价单位。",
+      "provenance": "解释性知识，非授权；用于检查新标签是否被误说成新原生目标或稳定学习优势。"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/01_RL.md",
+      "purpose": "数据与更新、策略梯度/baseline/critic、reward变换的边界：解释gamma1目标保持与有限GAE的差别。",
+      "provenance": "解释性知识；具体GAE/RUDDER原文读取范围和限制已写在本轮intake§4，不要求展开未列文献树。"
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "purpose": "§§4–5、§7.1与§7.3：无需新scope machinery、普通行数/检查预算、最小L0和高风险reward/learner独立审阅；E01例外不外推。",
+      "provenance": "本TASK采用这些普通工程要求；未分配实现或测试执行。"
+    },
+    {
+      "path": "AGENTS.md",
+      "purpose": "§§1–2、§4、§5滚动/remote-first、§§6–8与Appendix A节点复用：本TASK采纳当前决策权、unattended、预算/资源、共享分支/Pro交付边界。",
+      "provenance": "当前owner指令来源；Root为协调/集成，DM著题和intake，Transport操作原Pro节点。"
+    },
+    {
+      "path": "docs/research/portfolio/PORTFOLIO.md",
+      "purpose": "仅variable_n_fleet_churn行、第二recast和队列/working-set区分：ACTIVE/HIGH保持；旧执行快照不产生新授权。",
+      "provenance": "当前执行/生命周期记录，只读取不提议修改；不等待任何兄弟方向或batch。"
+    },
+    {
+      "path": "docs/research/candidates/variable_n_fleet_churn/pro_packets/20260910_native_service_credit_reentry/ISSUE_SNAPSHOT.json",
+      "purpose": "读取准备时Issue1状态、已有四条交付讨论和当前开放性；旧正文未训练等文字为历史，不能覆盖固定最新intake。",
+      "provenance": "2026-09-10 gh只读快照，mutable discussion的明确观察时间；交付前需fresh readback。"
+    }
+  ],
+  "discussion_urls": [
+    "https://github.com/CartmanFatass/My-paper-code/issues/1"
+  ],
+  "constraints": [
+    "Adopt the explicitly named applicable sections of current AGENTS, empirical evidence specification and Engineering Scope at their exact listed input versions; no silent specification exception.",
+    "Read only the explicit scientific and method passages; other citations and Issue text cannot expand scope or create new obligations.",
+    "Preserve every historical stop, frozen E01 requirement, old scientific input version, training outcome, cost boundary and recast/lifecycle/priority.",
+    "No code execution, test, profile, model load, RNG creation, environment interaction or source modification is authorized by this Pro task. Write only the scoped response and delivery-link comment."
+  ]
+}

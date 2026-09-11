@@ -1,0 +1,123 @@
+{
+  "record": "Post-B08 consultation; existing-result arithmetic only, no project execution",
+  "scientific_input_sha": "7e00e69145c1f1aed63ce8e931c5a640d666bea1",
+  "sources": [
+    "docs/research/candidates/degraded_incumbent_shadow_handover/evidence/b08_seed137_20260910/summary.json",
+    "docs/research/candidates/degraded_incumbent_shadow_handover/evidence/2026-09-10-b08-accounting.json"
+  ],
+  "new_consultation_exposure": {
+    "learners": 0,
+    "native_calls": 0,
+    "ordinary_transitions": 0,
+    "optimizer_calls": 0,
+    "evaluation_episodes": 0,
+    "model_selection_trials": 0
+  },
+  "exposure_line": "New consultation exposure: 0 learners; 0 native calls; 0 ordinary transitions; 0 optimizer calls; 0 evaluation episodes; 0 model-selection trials. Read existing bytes only.",
+  "historical_b08": {
+    "independent_unit": "one matched training pair, seed137; four within-pair conditions",
+    "training_pairs": 1,
+    "learners": 2,
+    "per_arm_exposure": {
+      "REPLACE": {
+        "completed_updates": 16,
+        "ordinary_training_transitions": 65536,
+        "optimizer_steps": 512,
+        "final_evaluation_rows": 4,
+        "ordinary_evaluation_ticks": 4800,
+        "initial_evaluation_episodes": 0
+      },
+      "HALF_RETAIN": {
+        "completed_updates": 16,
+        "ordinary_training_transitions": 65536,
+        "optimizer_steps": 512,
+        "final_evaluation_rows": 4,
+        "ordinary_evaluation_ticks": 4800,
+        "initial_evaluation_episodes": 0
+      }
+    },
+    "total_training_transitions": 131072,
+    "total_optimizer_calls": 1024,
+    "mean_service": {
+      "HALF_RETAIN": 434.5,
+      "REPLACE": 441.0
+    },
+    "condition_differences": [
+      -15,
+      0,
+      -8,
+      -3
+    ],
+    "Delta_bridge": -6.5,
+    "MEI": 24,
+    "relative_to_REPLACE_percent": -1.473922902494331,
+    "mean_energy_difference": -2496.189061493693,
+    "ordinary_TRAIN_CAS": {
+      "REPLACE": 0,
+      "HALF_RETAIN": 0
+    },
+    "ordinary_EVAL_CAS": {
+      "REPLACE": 0,
+      "HALF_RETAIN": 0
+    },
+    "final_invalid_commits": {
+      "REPLACE": 0,
+      "HALF_RETAIN": 4
+    },
+    "parameter_movement": {
+      "REPLACE": {
+        "absolute_l1_displacement": 642.5483533189829,
+        "final_norm": 38.25250600197718,
+        "initial_norm": 38.19922591660154,
+        "l2_displacement": 1.884492348853397,
+        "relative_l2_displacement": 0.04933326012856164
+      },
+      "HALF_RETAIN": {
+        "absolute_l1_displacement": 660.2497958184094,
+        "final_norm": 38.255205102070775,
+        "initial_norm": 38.19922591660154,
+        "l2_displacement": 1.9350219357396847,
+        "relative_l2_displacement": 0.05065605098816194
+      }
+    },
+    "source_value": "unestimated; zero ordinary CAS is not zero COPY-RETAIN/SHADOW-COPY value",
+    "exclusive_arm_wall_seconds": {
+      "REPLACE": 224.20338408101816,
+      "HALF_RETAIN": 226.97875767503865
+    },
+    "complete_runner_process_seconds": 454.5,
+    "Monitor_observation_command_wall_seconds": null,
+    "Monitor_wall_status": "unmeasured/unverified; experiment Duration455 is already included once",
+    "complete_shared_and_pair_cost_conformance": "uncertifiable with missing Monitor command wall; no measured breach inferred",
+    "resources_unmeasured": true,
+    "tuned_same_host_headroom": null,
+    "native_cost_law": "2N+2E+H per arm; 0<=E<=N and 0<=H<=20E",
+    "actual_pair_native_training_lower": 372718,
+    "actual_pair_native_training_upper": 1478458,
+    "exact_H": null
+  },
+  "unselected_minimal_B_reference_scale": {
+    "allocation_status": "NOT_SELECTED; comparison-size reference, not a successor or cap",
+    "arms": 2,
+    "matched_training_seeds": 1,
+    "updates_per_arm": 16,
+    "lanes": 32,
+    "ticks_per_update": 128,
+    "transitions_per_arm": 65536,
+    "ppo_epochs": 4,
+    "minibatches": 8,
+    "optimizer_calls_per_arm": 512,
+    "selected_checkpoints": 1,
+    "final_episodes_per_arm": 4,
+    "horizon": 1200,
+    "native_training_calls_per_arm_bound": [
+      131072,
+      1572864
+    ],
+    "evaluation_native_steps_pair_upper": 9600,
+    "nested_work": "Existing private next labels, 2E delay steps and H consequence calls are algorithm work; no retention coefficient tree, support census, origin search or extra validation is selected.",
+    "new_runtime_projection_seconds": null,
+    "new_complete_cap_seconds": null,
+    "cost_limit": "Unknown new cost stays unknown. If a future comparison changes the question, recompute its work law. Pro selection must state a fresh complete cap and stop scope; no old allowance is renewed."
+  }
+}

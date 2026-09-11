@@ -1,0 +1,172 @@
+{
+  "object": "ACVC_FRESH_DENSE_REUSE_B01",
+  "binding": "8931",
+  "selected_at": "2026-09-10T23:37:54.738893+00:00",
+  "authority_main_sha": "674f246a2",
+  "authoring_base": "12a19f870",
+  "status": "one new allocated unscreened independent fit; no scientific invocation yet",
+  "calculation_method": "Python integer/retained-timing arithmetic only; no project imports, model/RNG construction, native probe or new empirical output.",
+  "observed_new_scientific_exposure": {
+    "scientific_invocations": 0,
+    "model_constructions": 0,
+    "model_loads": 0,
+    "training_episodes": 0,
+    "optimizer_updates": 0,
+    "evaluation_episodes": 0,
+    "native_steps": 0
+  },
+  "proposed_exposure": {
+    "independent_fresh_fits": 1,
+    "retained_fit_substitutions": 0,
+    "training_episodes": 512,
+    "training_team_steps": 131072,
+    "two_episode_rollouts": 256,
+    "adam_calls": 1024,
+    "backward_calls": 1024,
+    "training_actor_agent_forwards": 655360,
+    "training_critic_primitive_forwards": 131072,
+    "recurrent_update_batch_calls": 1024,
+    "recurrent_replay_agent_steps": 2621440,
+    "critic_update_rows": 524288,
+    "replay_shape_per_update": {
+      "time_steps": 32,
+      "independent_sequences": 80,
+      "hidden_width": 64
+    },
+    "evaluation_panels": 3,
+    "evaluation_episodes": 192,
+    "evaluation_team_steps": 49152,
+    "evaluation_actor_agent_forwards": 245760,
+    "total_episodes": 704,
+    "total_team_steps": 180224,
+    "total_collection_actor_agent_forwards": 901120,
+    "training_environment_constructors": 1,
+    "evaluation_environment_constructors": 3,
+    "total_unscored_constructor_resets": 4,
+    "fresh_DENSE_initializations": 1,
+    "postfit_checkpoint_loads": 3,
+    "gate_constructions": 0,
+    "duration_head_constructions": 0,
+    "selector_optimizer_updates": 0,
+    "evaluation_optimizer_updates": 0,
+    "coordinate_pair_check_upper_bound": 6553600
+  },
+  "parameter_arithmetic": {
+    "raw_encoder": 6976,
+    "dense_inner": 1744,
+    "dense_projection": 1024,
+    "gru": 24960,
+    "mean_head": 195,
+    "log_std": 3,
+    "actor": 34902,
+    "critic": 34177,
+    "actor_plus_critic": 69079
+  },
+  "rng": {
+    "training_master": 8931,
+    "evaluation_namespace": 8932,
+    "common_actor_then_critic_initialization": 893100011,
+    "dense_branch_initialization": 893100012,
+    "persistent_training_velocity_seed": 893100021,
+    "training_constructor_seed": 893101000,
+    "training_episode_reset_keys": [
+      893101000,
+      893101511
+    ],
+    "training_unused_duration_seed_keys": [
+      893104000,
+      893104511
+    ],
+    "evaluation_load_construction_seed": 893200014,
+    "evaluation_constructor_seeds": {
+      "C": 893200062,
+      "F": 893200063,
+      "dwell": 893200064
+    },
+    "paired_evaluation_reset_keys": [
+      893202000,
+      893202063
+    ],
+    "private_evaluation_proposal_keys": {
+      "C": [
+        893230200,
+        893230263
+      ],
+      "F": [
+        893230300,
+        893230363
+      ],
+      "dwell": [
+        893230400,
+        893230463
+      ]
+    },
+    "unused_evaluation_gate_keys": {
+      "C": [
+        893240200,
+        893240263
+      ],
+      "F": [
+        893240300,
+        893240363
+      ],
+      "dwell": [
+        893240400,
+        893240463
+      ]
+    },
+    "old_primary_fit_and_evaluation_namespaces": [
+      8201,
+      8202,
+      8901,
+      8902,
+      8911,
+      8912,
+      8921,
+      8922
+    ],
+    "namespace_search_scope": "No exact8931/8932 occurrence in owned ACVC markdown/card/facts before binding; not a global registry claim.",
+    "no_rng_initialized_during_binding": true
+  },
+  "prospective_exposure_line": "1 fresh fit;69079 trainable actor+critic parameters;nonzero lr0.0003 loss-dependent Adam1024;512train/131072train team steps;192eval/49152eval team steps;0selector/eval updates. Can move; actual relative displacement awaits execution.",
+  "cost": {
+    "whole_supervised_task_cap_s": 270,
+    "all_support_including_monitor_cap_s": 90,
+    "complete_cap_s": 360,
+    "planned_dm_support_s": 30,
+    "planned_monitor_support_s": 60,
+    "prior_same_recipe_whole_task_s": 172,
+    "prior_same_recipe_panel_windows_s": {
+      "C": 9.556061281007715,
+      "F": 11.978827791986987,
+      "dwell": 11.570943174010608
+    },
+    "older_conservative_projection_s": 222.19968455692754,
+    "older_projection_plus_full_support_s": 312.19968455692754,
+    "older_per_panel_projection_s": {
+      "C": 11.96904265502235,
+      "F": 13.806098793982528,
+      "dwell": 13.679409444972407
+    },
+    "shared_fit_charge": "one common fit, never multiply by three panels",
+    "internal_timeout_s": 260,
+    "outer_term_s": 267,
+    "outer_kill_after_s": 1,
+    "old_inclusive_support_lower_bound_s": 52.3964878,
+    "old_inclusive_support_bound_is_strict": true,
+    "old_exact_total_unavailable": true,
+    "prior_directory_test_s": 27.7442098,
+    "test_directory_cap_s": 300,
+    "limitations": [
+      "New trajectory/contention wall unknown; prior timings are projections, not admission.",
+      "No support/task budget transfer. All runtime observation, checks, collection/reduction and closeout charged, failed commands included.",
+      "No timing pilot, extra scientific attempt, replacement or panel."
+    ]
+  },
+  "predictions": {
+    "F_minus_C_probability_UP": 0.75,
+    "F_minus_dwell_probability_UP": 0.65,
+    "owner": "not taken (unattended); unscored for8931"
+  },
+  "engineering_scope_section4": "none"
+}

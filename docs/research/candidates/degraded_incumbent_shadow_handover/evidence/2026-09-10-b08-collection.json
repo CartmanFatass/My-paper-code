@@ -1,0 +1,92 @@
+{
+  "collection_wall_seconds": 2.1646633000054862,
+  "archive_path": "temp\\directions\\degraded_incumbent_shadow_handover\\exp\\b08_s137_a01522a6_collected\\complete_evidence.tar.gz",
+  "archive_bytes": 4589570,
+  "archive_sha256": "abb98590a104842175ae43e8062020ffc336c5f9e765cccb4e334999ce56655e",
+  "remote_stderr": "{\"remote_collection_wall_seconds\": 0.8098138339119032, \"files\": 14}\n",
+  "all_archived_files_match": true,
+  "handle": "dish-b08-s137-a01522a6-20260910",
+  "source_sha": "a01522a6f6cf12e5549b3e03596ce58642b68cf1",
+  "status": {
+    "task": "dish-b08-s137-a01522a6-20260910",
+    "status": "finished",
+    "exit_code": 0,
+    "pid": 3104675,
+    "uptime_seconds": 661,
+    "tmux_active": false
+  },
+  "actual_run_root": "/home/wu/hmasd-worktrees/dish-b08-db2480c2/temp/directions/degraded_incumbent_shadow_handover/exp/arrival_bridge_retention_b08_seed137_20260910_run01",
+  "files": [
+    {
+      "path": "run/summary.json",
+      "bytes": 70423,
+      "sha256": "918dba48bc428d1d08e3656e186969a3888c9f491734afac602debcc1bd45f4c"
+    },
+    {
+      "path": "run/replace/checkpoint_update16.pt",
+      "bytes": 2356639,
+      "sha256": "24d88f533ad722ba6cd8b6d29a07fbde43ceceb2c1c97b42b700a190a6e1b0c0"
+    },
+    {
+      "path": "run/shared/resets.json",
+      "bytes": 3004,
+      "sha256": "b12711975a2802ea87f225a8c35b04eadc347fd1f57c721d8e7f8b7755bbf8ee"
+    },
+    {
+      "path": "run/shared/initial_state.pt",
+      "bytes": 836667,
+      "sha256": "24c7e28f880b73a4f603e891d5c79d6b614820dd4830217b69886a0a4d165982"
+    },
+    {
+      "path": "run/half_retain/checkpoint_update16.pt",
+      "bytes": 2356639,
+      "sha256": "dd55c0c799261b46f1f3cbe247bd241b2e581ef2fb9a3af1ca92cefb74569a99"
+    },
+    {
+      "path": "receipts/arrival_bridge_retention_b08_seed137_20260910_run01_memory.json",
+      "bytes": 504,
+      "sha256": "81a258ee3ecb3e7634bd621fb9563626c1c3fda228b409c60ea09732986d734d"
+    },
+    {
+      "path": "receipts/arrival_bridge_retention_b08_seed137_20260910_run01_preflight_wall.txt",
+      "bytes": 45,
+      "sha256": "65f47892f623b5d1a5fcc09b05c07af5f7c9c6b96bf270ac9dd354eb4ed53718"
+    },
+    {
+      "path": "receipts/arrival_bridge_retention_b08_seed137_20260910_run01_runner_wall.txt",
+      "bytes": 49,
+      "sha256": "db032ab736ac530fe5c5a16d318bdcff44c49e70c80964c4360193630f5d91d5"
+    },
+    {
+      "path": "supervisor/task.log",
+      "bytes": 15131,
+      "sha256": "d078a861ddf23e5d86c6bfb39e75f28047c2b500ecd0c140eb50ea2c5628b7b6"
+    },
+    {
+      "path": "supervisor/status",
+      "bytes": 9,
+      "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+    },
+    {
+      "path": "supervisor/exit_code",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "supervisor/start_time",
+      "bytes": 11,
+      "sha256": "c0e0298c7dd18da50981261242e12df8388b8ded61a68edd1e8748237616f932"
+    },
+    {
+      "path": "supervisor/runner.sh",
+      "bytes": 2135,
+      "sha256": "ad847f6b58918c8ea784aff1a000ba903ba5099054e6a93a564f75f381aa8e0d"
+    },
+    {
+      "path": "supervisor/pid",
+      "bytes": 8,
+      "sha256": "1278486c72bad3e5086065a3f7b777a872f1965386c8943e66a9ee9097778d70"
+    }
+  ],
+  "root_message_path_without_run01_exists": false
+}

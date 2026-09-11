@@ -5,6 +5,13 @@ science and the former CM engineering responsibilities. Portfolio is the persist
 not a native session. Authority, budgets and owner pause/stop instructions remain in AGENTS.md.
 The current consolidation record is `docs/research/portfolio/decisions/2026-09-10-control-plane-consolidation.md`.
 
+OWNER_DIRECT 2026-09-10: directions run as independent rolling chains. A direction advances from
+its own evidence, decision, dependencies and resource admission without waiting for a named batch,
+Portfolio bundle, sibling result/intake/cleanup or global stage boundary. Its result, blocker, Pro
+wait, failed admission or closeout affects only that direction. Root integrates and replaces ready
+work continuously; a prior `no successor` closes only its named allocation. Cross-direction choices
+still use Portfolio authority while independent authorized work continues.
+
 ## Maintained sources
 
 | Rule | Maintained source |
@@ -67,11 +74,21 @@ Root checks published artifact/route facts and dispatches the exact handoff. It 
 omissions to the author instead of rewriting the packet. Transport receipts still go only to Root;
 Root forwards the complete response to the designated DM using `followup_task`.
 
+New GitHub-delivery prompts include an in-turn downloadable Markdown fallback. If Pro cannot
+expose or complete its scoped GitHub writes after checking actual state, it finishes the review
+and attaches the full `RESPONSE.md` in chat. Transport downloads it, binds it to the accepted request and paired response, records its byte
+count and SHA-256, stores `<archive_id>__02_RESPONSE.md`, and retains the same bytes as repository
+sidecar `archive/CHAT_FALLBACK_RESPONSE.md`. The GitHub `archive/RESPONSE.md` remains reserved for
+actual connector delivery.
+Root forwards that artifact to the designated DM for the same conformance intake. This fallback
+does not assert a GitHub commit/comment and does not authorize another Send.
+
 The DM reads the full response and checks the bound question, current owner/spec constraints,
 scientific meaning and evidence. It returns the actual decision and operational mapping, or a
 concrete conflict for the same Pro node. It does not locally overrule or add approval to a formed
 conforming decision. Root applies the conforming decision, updates Portfolio/tracking and assigns
 follow-on work within the existing limits. Unresolved questions do not block independent work.
+Apply Portfolio consequences direction by direction as each affected path becomes ready.
 
 ## Execution inputs and observation
 
@@ -98,12 +115,15 @@ as a fresh invocation merely because an observation was lost.
 Root owns main and its index, and integrates named accepted commits after checking what is already
 integrated. DM owns its direction branch/checkout and code publication. Preserve one editing owner
 for overlapping work. Independent paths can proceed concurrently; every authorized commit pushes
-immediately. A role migration does not create a new branch or a new scientific object.
+immediately. Do not hold an accepted commit for a sibling result or batch merge. A role migration
+does not create a new branch or a new scientific object.
 
 Root maintains `docs/research/portfolio/PORTFOLIO.md` as the current disposition/readiness snapshot
 and `EXPERIMENT_TRACKING.md` as accepted handles, owners, terminal facts and pending work. Scientific
 statements cite DM intake/Pro authority; Root integration is not another verdict. Batch useful
-routine record edits and apply actual owner overrides at clean boundaries via hmasd-owner-item.
+routine record edits only when they are already ready together; never wait for multiple directions
+to manufacture a combined update. Apply actual owner overrides at the affected direction's clean
+boundary via hmasd-owner-item.
 
 DM prepares its exact cleanup inventory during collection. Assigned executors preserve unique
 source/evidence and verify removed paths absent from disk and worktree registration; Root confirms

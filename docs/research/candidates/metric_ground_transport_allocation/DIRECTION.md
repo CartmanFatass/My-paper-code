@@ -12,6 +12,46 @@ second-recast counts and stopped object-family boundaries remain unchanged.
 
 This authority preserves the direction's source-grounded scientific question, evidence references, and provenance.
 
+## Conditional user-pooling eligibility — 2026-09-10
+
+The complete original Convergence response at
+`319c51a5fdc411eaaf1a47557d032f23ed269265` is intaken as conforming and final:
+**reopen only the named COND/DENSE question's scientific eligibility for later,
+separately allocated B work**. This creates one narrow exception to the native
+actor-family PARK recorded below. It does not select a card, implementation,
+test, master, numerical invocation or machine-time allowance. The old
+balanced-allocation-coordinate family remains PARKed; P75's ended allocation,
+all historical C meanings, recast count and Portfolio state remain unchanged.
+
+The accepted hypothesis uses learned visible-UAV context to change relative
+user weights before pooling, with the exact existing row maps and projection.
+COND and DENSE both retain all 108 raw local components, own recurrent history,
+the primitive velocity action and unchanged native reward/PPO credit path.
+Unlike a constant mean-to-sum rescaling, the specified interaction can change
+relative user emphasis at fixed user rows/counts when observed partner geometry
+changes. Its proposed value is finite-learning use of that context, not new
+information or a proved larger policy class.
+
+The strongest support is this specific computation and plausible native
+event-to-velocity consequence. The strongest contrary evidence remains P75's
+REL−DENSE aggregate `-0.02396310430506595`, including its inside-MEI second
+master, against intact same-information DENSE. A cancelling or unhelpful UAV
+summary, partner co-adaptation and generic DENSE learning remain live
+alternatives. COND is source/design ready only: benefit, runtime, activation
+memory and support cost remain unknown; the tuned native-headroom record is absent.
+
+The next empirical discriminator, only if separately allocated, is one fresh
+COND/DENSE training pair with the complete sampled native-return difference,
+proposed absolute MEI `0.01`, and the exposure/limitations in the source return
+§6. It can supply one realized package observation, not stable superiority or
+attention/geometry/credit causality. No positive pilot, count census, baseline
+qualification or exact upper is a prerequisite. No independent implementation
+or numerical continuation is currently allocated.
+
+Evidence: [full decision and conformance intake](pro_packets/20260910_conditional_pooling_reentry/CONVERGENCE_INTAKE.md),
+[immutable response](https://github.com/CartmanFatass/My-paper-code/blob/319c51a5fdc411eaaf1a47557d032f23ed269265/docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260910_conditional_pooling_reentry/archive/RESPONSE.md),
+and [source/design return](MGTAP_CONDITIONAL_POOLING_SOURCE_DESIGN_RETURN_20260910.md).
+
 ## Native ground-geometry B01 P75 result — 2026-09-09
 
 The accepted P75 native execution and scientific intake are now part of the

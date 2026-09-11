@@ -1,0 +1,25 @@
+{
+  "checked_at": "2026-09-10T22:20:43.931443+00:00",
+  "binding": {
+    "conversation_binding_key": "em:degraded_incumbent_shadow_handover:convergence",
+    "request_id": "2026-09-10-dish-arrival-bridge-retention-convergence-01",
+    "conversation_id": "6a9bec54-df00-83e8-9840-46440458f316",
+    "provider_url": "https://chatgpt.com/c/6a9bec54-df00-83e8-9840-46440458f316",
+    "state": "ARCHIVED",
+    "visible_model": "6 Pro",
+    "underlying_model": "Latest",
+    "thinking_effort": "Pro, 5 of 5.",
+    "updated_at": "2026-09-10T20:47:25Z"
+  },
+  "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/4",
+  "issue_state": "OPEN",
+  "issue_title": "DISH B05: two LR pairs and the next ordinary-application question",
+  "issue_snapshot": "ISSUE_READBACK.json",
+  "last_comment_url": "https://github.com/CartmanFatass/My-paper-code/issues/4#issuecomment-5625186169",
+  "new_request_send_count": 0,
+  "new_request_dispatch_count": 0,
+  "source_thread_id": "01a08d61-df0e-7892-9beb-9d32b110453c",
+  "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "operator_thread_id": "01a087a3-4f12-7021-9a4d-6da9da2bafcc",
+  "scope": "Read-only reconciliation; registry unchanged. Historical Issue body and accepted requests preserved; fixed TASK defines the new round."
+}

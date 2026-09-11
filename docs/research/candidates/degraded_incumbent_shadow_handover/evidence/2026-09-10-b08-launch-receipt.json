@@ -1,0 +1,11 @@
+{
+  "submitted_at_utc": "2026-09-10T21:18:17.341764+00:00",
+  "binding_commit": "fdc813bfe638966469c4c39c1d1876940c2ef1b5",
+  "source_sha": "a01522a6f6cf12e5549b3e03596ce58642b68cf1",
+  "handle": "dish-b08-s137-a01522a6-20260910",
+  "ssh_exit": 0,
+  "stdout": "Task 'dish-b08-s137-a01522a6-20260910' started in tmux session 'agent_dish-b08-s137-a01522a6-20260910'. Output: /home/wu/.agent-tasks/dish-b08-s137-a01522a6-20260910/task.log\n",
+  "stderr": "",
+  "submission_wall_seconds": 0.6553453000087757,
+  "accepted": true
+}

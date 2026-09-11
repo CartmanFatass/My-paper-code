@@ -1,0 +1,132 @@
+{
+  "checked_at_utc": "2026-09-10T20:54:26.751434+00:00",
+  "response_commit": "9e99e48dca9fe34b25c11cb7814ba4d54e83a2b5",
+  "response_bytes": 36690,
+  "response_sha256": "9c546ba09f072f0cbb04c0c595ff95b2c631f01f8ed4198a357031587726a991",
+  "input_mappings": [
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_ARRIVAL_BRIDGE_RETENTION_REENTRY_INTAKE_20260910.md",
+      "sha": "b666f575a95ad15da9b9ff9f23cbc003f2e34450",
+      "bytes": 19137,
+      "sha256": "42499ee206342fb18c29dec96d6253d169a1ae85065f35a3d55862187e0538ae",
+      "equal": true
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_P67_SOURCE_STATE_REENTRY_INTAKE_20260908.md",
+      "sha": "f9d3aa52d398ddbb32ccad21e8033c662c07b283",
+      "bytes": 14633,
+      "sha256": "06d17204fbc1dfb5e62112f49b4bbfd406c384ee4f9b1e9c62a5a021ab6d9683",
+      "equal": true
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260908_p62_post_b07_scope/archive/RESPONSE.md",
+      "sha": "0086cfd7e8f7326fbadf879f844b757f661e8809",
+      "bytes": 27061,
+      "sha256": "2351fdda3c924746197785279ff4463de649d8090c1e6c97aff0db6c0b015d80",
+      "equal": true
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_OWN_COMMAND_MEAN_B07_RESULT_EVIDENCE_20260908.md",
+      "sha": "f9d3aa52d398ddbb32ccad21e8033c662c07b283",
+      "bytes": 10678,
+      "sha256": "1aef8fb00a8c1557142a5f02fcdd9c91abc1d690801040c203c4fdfbe9468904",
+      "equal": true
+    },
+    {
+      "path": "experiments/candidates/degraded_incumbent_shadow_handover_rbhr_r06/production_training_engine.py",
+      "sha": "f9d3aa52d398ddbb32ccad21e8033c662c07b283",
+      "bytes": 38273,
+      "sha256": "69369e5058081177086e4e5e5834c0cb91e146fb2d107116eb67d396810907e6",
+      "equal": true
+    },
+    {
+      "path": "experiments/candidates/degraded_incumbent_shadow_handover_rbhr_r06/production_recurrent_trainer.py",
+      "sha": "f9d3aa52d398ddbb32ccad21e8033c662c07b283",
+      "bytes": 32288,
+      "sha256": "c61e4bc27d342ee213041f80836f532b0c8fb157a36b59213e66eb8978a8a4a5",
+      "equal": true
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260910_arrival_bridge_retention/EXPOSURE_AND_COST.json",
+      "sha": "b666f575a95ad15da9b9ff9f23cbc003f2e34450",
+      "bytes": 3715,
+      "sha256": "a845e10343ee1ddb175232b68d635b04352583ac9446e7c0cc122865ffa7411d",
+      "equal": true
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/evidence/2026-09-10-arrival-bridge-reentry.json",
+      "sha": "b666f575a95ad15da9b9ff9f23cbc003f2e34450",
+      "bytes": 8334,
+      "sha256": "0fbef2ca67dc9432e472a9dc3a3f5d2930e7aebbf8345e2aaac7b11a475594a1",
+      "equal": true
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "sha": "9b0c700b33d307745a5d7fbf88b1fb490a65d2ab",
+      "bytes": 45053,
+      "sha256": "44418af31752086f6752f8f3d6874b260134e4c91b6c82ed8dbc61e4ef0b87e1",
+      "equal": true
+    },
+    {
+      "path": "AGENTS.md",
+      "sha": "9b0c700b33d307745a5d7fbf88b1fb490a65d2ab",
+      "bytes": 42101,
+      "sha256": "417364067f9f41bea9069d0f8399fda4454d5fd1cc09b4b94f3cf2ef0dd82fc6",
+      "equal": true
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "sha": "9b0c700b33d307745a5d7fbf88b1fb490a65d2ab",
+      "bytes": 20899,
+      "sha256": "a52a26e3b9ba876cb954ef4e671b5826ff9e1bab573320ca6da1033e12e64996",
+      "equal": true
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "sha": "9b0c700b33d307745a5d7fbf88b1fb490a65d2ab",
+      "bytes": 7819,
+      "sha256": "c1f7d6c68fcec55de48ea555346d5d65af8d311e28502be43a2b05436a174247",
+      "equal": true
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/02_MARL.md",
+      "sha": "9b0c700b33d307745a5d7fbf88b1fb490a65d2ab",
+      "bytes": 4038,
+      "sha256": "4dae3729dc54db39599a689712fa1f6ccdb80d5fd2f08e96757bcf8686e6e0b9",
+      "equal": true
+    }
+  ],
+  "transport_archive": [
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260910_arrival_bridge_retention/archive/transport/PACKET_MANIFEST.json",
+      "bytes": 1921,
+      "sha256": "9431126cd41d01a66aee6ad5eb6a3fce4b67c47a96e96955d2fa4e8a7118e4c2"
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260910_arrival_bridge_retention/archive/transport/PROMPT_BODY.md",
+      "bytes": 1270,
+      "sha256": "6f31d73befda12459626f038f448ae9d49d4c7d7a96bfe2c686c593cdc992226"
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260910_arrival_bridge_retention/archive/transport/RESPONSE.md",
+      "bytes": 362,
+      "sha256": "412eb28c076c6b7ed8a2246aee390ac83d7c9902ae6fe56d15acb1ad34f8e6bc"
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260910_arrival_bridge_retention/archive/transport/TRANSPORT_FACTS.json",
+      "bytes": 3229,
+      "sha256": "a33e2e2c97dfa238fa70379a0972bb27830c053ccfb377a29a32079c7f3df810"
+    }
+  ],
+  "current_method_head": "1f63c0168f7535ef1af8fc03c3db764ff2eb9455",
+  "method_paths_unchanged": [
+    "AGENTS.md",
+    "docs/project/ENGINEERING_SCOPE_SPEC.md",
+    "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+    "docs/project/ROOT_OPERATIONS.md",
+    ".codex/hmasd-compute.toml"
+  ],
+  "decision": "option a: one narrow arrival-bridge B pair",
+  "conformance": "complete, class-correct and conforming; no specification exception",
+  "source_access_limit": "Pro reports the thirteen fixed paths; local paper reports remain attributed to the pinned DM evidence, not proved full-paper access"
+}

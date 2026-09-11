@@ -1,0 +1,99 @@
+{
+  "id": "20260910-root-003",
+  "created": "2026-09-10T10:16:31-07:00",
+  "direction": "portfolio",
+  "tier": "portfolio",
+  "kind": "portfolio",
+  "title": "ACVC新DENSE：一次360秒分配或保持设计与候补",
+  "context": "ACVC单次新拟合卡片已接收但配额仍为零。建议由既有Portfolio Pro选择A：只运行master8921的512回合拟合和全部C/F/dwell面板，完整上限360秒含支持工作。其他四条已分配链与最低争用顺序保持；本地未选定投资，也未发送Pro。",
+  "options": [
+    {
+      "key": "a",
+      "label": "分配一次完整360秒",
+      "consequence": "完整合规Pro决定后由Root映射一次实现与训练评价；330秒整段运行加至多30秒支持，保留所有结果和最低争用顺序。"
+    },
+    {
+      "key": "b",
+      "label": "保留设计暂不运行",
+      "consequence": "数值和源码任务配额仍为零；保留卡片，写明再次考虑的具体条件，不永久占槽。"
+    },
+    {
+      "key": "c",
+      "label": "延后并选获准候补动作",
+      "consequence": "ACVC仍为零配额；仅推进固定证据支持的有限且确实获准的CBSC或FRRIE就绪动作，不越过限制或隐含新B预算。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "实际拟合法和成本已有限绑定；一个新训练实例能直接减少旧底座选择限制，同时保留条件性与成本未知。投资最终由Portfolio Pro决定。",
+  "evidence": [
+    "docs/research/portfolio/pro_packets/20260910_acvc_fresh_dense_allocation/SCIENCE_BRIEF.md",
+    "docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_SCIENCE_CARD_20260910.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-10.md#L19",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": {
+    "question": "ACVC的新DENSE设计已完成：是否投入一次完整上限360秒的实现与训练评价，还是保持仅设计，或把当前空位让给一个确实获准的候补动作？这是给既有Portfolio Pro节点的提案，尚未本地选定。",
+    "changes_if_approved": [
+      {
+        "target": "ACVC_FRESH_DENSE_REUSE_B01 的数值分配",
+        "from": "卡片已接收；数值配额0秒、0次；完成的文档不永久占槽",
+        "to": "建议A：只释放一次新拟合及全部C/F/dwell；完整360秒含整段运行330秒与支持工作至多30秒；最低争用排序保持"
+      }
+    ],
+    "if_refused": "B保留设计而不运行，并说明重新考虑的具体条件。C同样不给ACVC配额，仅以固定证据中确实获准的CBSC或FRRIE有限就绪动作替代；不能借旧上限、未知许可或改名动作越过限制。其他四条已分配链继续原任务。",
+    "evidence_for": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260910_acvc_fresh_dense_allocation/SCIENCE_BRIEF.md",
+        "quote": "A new independently initialized/trained base directly reduces the old-base selection limitation.",
+        "why": "旧结果支持有限后续，但选择过的旧底座不能替代一个事前选定、真正新训练的实例。"
+      },
+      {
+        "path": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_SCIENCE_CARD_20260910.md",
+        "quote": "Evaluate this final checkpoint regardless of its mean training return, apparent learning speed or base attractiveness.",
+        "why": "新卡已有实际拟合法、固定端点、所有结果保留和完整成本提案，不以底座好坏挑选证据。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/acvc/ACVC_FIXED_RETRACE_REUSE_E01_INTAKE_20260909.md",
+        "quote": "The strongest contrary observations inside E01 are **7/64 and 11/64 adverse F-dwell pairs**;",
+        "why": "旧面板仍有反向世界，而且dwell本身有收益；新观察也不能独立识别物理回退的因果作用。"
+      },
+      {
+        "path": "docs/research/portfolio/pro_packets/20260910_acvc_fresh_dense_allocation/SCIENCE_BRIEF.md",
+        "quote": "Standalone fresh initialization/imports, trajectories, contention, checks and collection are unmeasured.",
+        "why": "252.200秒只是历史计时推算；360秒包含支持工作，不能当成已证明可运行的时长。"
+      }
+    ],
+    "uncertainty": [
+      "只有一个新拟合，64个共同初始世界给条件误差，不能估计训练种子总体或稳定优势。",
+      "其他四条链已有有限任务；ACVC第二次重构后的最低争用顺序不变，不抢占现有运行。",
+      "CBSC和FRRIE是否已有确切可执行的候补动作尚无新证据；缺少许可或技术事实不形成科学负面。",
+      "如果完整实施与必要检查无法装入360秒，保留事实返回，不加预算、不换底座、不补跑。"
+    ],
+    "cost": {
+      "compute": "本提案科学调用、模型、训练、测试和Pro发送均为零。A建议1个新训练实例：131072训练步、1024次更新，再49152评价步；名义完整252.200秒，申请完整上限360秒含至多30秒支持。历史E01的180秒上限和89.35秒消耗不供给任何新预算。",
+      "owner_time": "可异步查看或覆盖；完整合规的Portfolio Pro决定按现有委托应用，不另等逐项批准。",
+      "reversibility": "costly",
+      "waits_on_this": "等待既有Portfolio Pro形成该有限分配决定；不等待主人逐项批准。其他已授权链继续。"
+    },
+    "verdict_text": "The designated DM recommends A below; no Portfolio option has been selected locally, no implementation is allocated, and no scientific or provider invocation has occurred in this consultation.",
+    "source": "docs/research/portfolio/pro_packets/20260910_acvc_fresh_dense_allocation/SCIENCE_BRIEF.md"
+  },
+  "starred": true,
+  "approval_correction": "原提案的无分配状态保留为历史；实际裁决与中文说明见pro_packets/20260910_acvc_fresh_dense_allocation/DECISION_OWNER_PACKET.json。本次选择审计行以决策文档为准，Root集成时映射实际行号。完整科学答复与470字节聊天回执分开记录；旧Send时间已纠正为未知，不补发。",
+  "execution_history": [
+    {
+      "at": "2026-09-10T17:59:40+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "https://github.com/CartmanFatass/My-paper-code/blob/caf8cf61d92fb3a669f93439a0e2b9967eca943c/docs/research/portfolio/pro_packets/20260910_acvc_fresh_dense_allocation/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/decisions/2026-09-10-acvc-fresh-dense-allocation.md",
+      "state": "applied",
+      "summary": "完整Pro答复已读；DM未发现科学或规范冲突，Root已接受合规结论。应用A为一次完整工程与运行任务：330秒整段加累计30秒支持、总360秒。实现、独立审查、运行及结果尚未接受；主人未被要求再次批准。",
+      "correction": "原提案的无分配状态保留为历史；实际裁决与中文说明见pro_packets/20260910_acvc_fresh_dense_allocation/DECISION_OWNER_PACKET.json。本次选择审计行以决策文档为准，Root集成时映射实际行号。完整科学答复与470字节聊天回执分开记录；旧Send时间已纠正为未知，不补发。"
+    }
+  ]
+}

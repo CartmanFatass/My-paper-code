@@ -1,0 +1,160 @@
+{
+  "caller_role": "em",
+  "workflow_node": "em_convergence",
+  "request_id": "2026-09-10-mgtap-conditional-pooling-reentry-01",
+  "source_thread_id": "01a08e10-2ada-7d31-8e3a-6bc8f05f59d5",
+  "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "direction_id": "metric_ground_transport_allocation",
+  "conversation_id": "6a9b6b01-a918-83e8-8b06-ca9dd8184dab",
+  "repository": "CartmanFatass/My-paper-code",
+  "repository_url": "https://github.com/CartmanFatass/My-paper-code",
+  "commit_or_ref": "55ff973fc8b6cb4947b263a7f4581dbaa15e626d",
+  "delivery_mode": "github_delivery",
+  "scientific_question": "Does the single learned UAV-conditioned user-pooling operation COND in the accepted source/design return §§3–4 now justify reopening only that narrowly scoped native actor-family comparison against intact parameter-matched recurrent DENSE, or should the existing native ground-geometry family PARK be retained? The conditional weighting is source-specified but unimplemented and untested. Judge whether its predicted use of visible partner geometry to change user emphasis and primitive velocity is a substantive, useful next B question after P75's adverse aggregate −0.02396310430506595, preserving the complete raw local information/history and all contrary outcomes. Compare this exact prospective package with zero further work; do not open a menu of recasts or substitute another family question.",
+  "deliverable": "Return one final direction choice in natural language: reopen only the named COND/DENSE prospective comparison for later separately allocated B work, or retain the current native actor-family PARK. Explain whether the new operation meets the previous node's source-backed re-entry condition, its credible native decision consequence, the strongest support and contradiction, the runner-up and why it loses. Assess the proposed one-pair primary-only B, independent unit, MEI, outcome readings, dominant work and unknown costs proportionately. Reopening means scientific eligibility only: this question allocates no implementation, test, numerical invocation, master or machine-time allowance and freezes no card. Retaining PARK must name the concrete unresolved scientific yield without inventing a positive-pilot, baseline-qualification, exact-upper or census prerequisite. Preserve the old balanced-allocation-coordinate family PARK, historical C conclusions and all Portfolio state.",
+  "claim_ceiling": "A direction-tier decision about a prospective B/EXPLORE package question on the fixed five-UAV native host. Current evidence supports source/design readiness only; COND is not executable or empirically accepted. A later single training pair could support only its realized sampled native-return difference, not training-population superiority, equivalence, attention/geometry/credit causality, optimal transport, tuned competence, scaling/churn, transfer, deployment, formal UAV-validation entry or Portfolio investment. No local disposition or new scientific result is supplied by the author.",
+  "reference_files": [
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_CONDITIONAL_POOLING_SOURCE_DESIGN_RETURN_20260910.md",
+      "commit_sha": "e4666a5c1aecc9a4d84cad4c724970e5392cfc25",
+      "purpose": "Read §§2–7: the sole COND operation, intact comparator, native event/action/credit prediction, prospective primary/MEI/work and source-reading limits. §1/§8 describe the completed prior fallback, not current task authorization.",
+      "provenance": "Accepted source/design return integrated by Root; source-only evidence, zero implementation or numerical exposure. Its local-library findings are explicitly secondary to the listed source trace and supply no result or novelty claim."
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260909_post_b01_convergence/archive/RESPONSE.md",
+      "commit_sha": "251bffbc4bb58cce3f10f8622a1a615fd8e48acb",
+      "purpose": "Read the opening decision and §§1–8, with §9 preserving contrary history: the original native-family PARK, why a sum rescaling did not justify another B, its actual re-entry condition, and recorded primary-only exposure/cost.",
+      "provenance": "Complete immutable original-node PRO_FINAL answer, not a chat-link receipt. It is the current family boundary being asked about."
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/DIRECTION.md",
+      "commit_sha": "e4666a5c1aecc9a4d84cad4c724970e5392cfc25",
+      "purpose": "Read the opening native-family/P75/post-B01 sections through the current scientific boundary, and the cited historical conclusions only as stated there; preserve the old coordinate-family PARK and historical C meanings.",
+      "provenance": "Current accepted direction science at assigned main; historical entries are evidence, not authorization to repeat work."
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_NATIVE_GROUND_GEOMETRY_B01_P75_INTAKE_20260909.md",
+      "commit_sha": "d9723c7bdd91d44a97cc34365891c42b2a41772e",
+      "purpose": "Read the complete P75 result and its reading, comparator validity, per-master pattern, cost window and claim ceiling; do not rewrite its original rule.",
+      "provenance": "Accepted original-DM scientific intake at the prior fixed scientific input version."
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_NATIVE_GROUND_GEOMETRY_B01_P75_TECHNICAL_RESULT.json",
+      "commit_sha": "d9723c7bdd91d44a97cc34365891c42b2a41772e",
+      "purpose": "Read aggregate.primary, aggregate.pairs including all J and paired differences, and per_master/count/timing facts relevant to the intake; retain every REL/DENSE/H outcome.",
+      "provenance": "Original machine-readable P75 technical collection with raw sampled primary rows and accepted aggregate, read-only and unrecomputed."
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_NATIVE_GROUND_GEOMETRY_B01_SCIENCE_CARD_20260908.md",
+      "commit_sha": "d9723c7bdd91d44a97cc34365891c42b2a41772e",
+      "purpose": "Read native binding/information, treatment/comparator, fixed learner/exposure, native primary and original result branches. This freezes only the old REL/DENSE object, not the proposed COND object.",
+      "provenance": "Original P75 B/EXPLORE card; its historical budgets and seed identifiers are not new allocations."
+    },
+    {
+      "path": "experiments/candidates/metric_ground_transport_allocation/mgtap_native_ground_geometry_b01/geometry.py",
+      "commit_sha": "e4666a5c1aecc9a4d84cad4c724970e5392cfc25",
+      "purpose": "Inspect RelationResidualEncoder, DenseResidualEncoder, NativeGeometryActor and build_pair plus existing geometry exposure: exact legal raw slices, block shapes, recurrent insertion and common/private initialization. Confirm that COND is a proposed replacement computation and is absent here.",
+      "provenance": "Current source-only actor insertion point; do not import or execute."
+    },
+    {
+      "path": "experiments/candidates/metric_ground_transport_allocation/mgtap_native_ground_geometry_b01/runner.py",
+      "commit_sha": "e4666a5c1aecc9a4d84cad4c724970e5392cfc25",
+      "purpose": "Inspect run_pair, primary and aggregate consumers as needed to see that the existing REL/DENSE/H two-master binding cannot execute a newly relabelled COND study.",
+      "provenance": "Existing historical runner, read-only implementation feasibility and publication-boundary evidence."
+    },
+    {
+      "path": "experiments/candidates/ucope/uav_motion_prefix_b01/environment.py",
+      "commit_sha": "e4666a5c1aecc9a4d84cad4c724970e5392cfc25",
+      "purpose": "Inspect make_real, actor_features and team_reward: fixed native constructor, actor-only 108-component information and original rewards_dict sum; diagnostic local_indices is not a proposed mask input.",
+      "provenance": "Shared source consumer, read-only; an adapter scalar or diagnostic field does not enlarge actor information."
+    },
+    {
+      "path": "experiments/candidates/ucope/uav_motion_prefix_b01/policy.py",
+      "commit_sha": "e4666a5c1aecc9a4d84cad4c724970e5392cfc25",
+      "purpose": "Inspect Actor.forward and joint_terms: existing GRU/history, primitive velocity head and agent-compound likelihood; the complete actor remains in both arms.",
+      "provenance": "Shared recurrent actor source, unchanged by the proposed encoder computation."
+    },
+    {
+      "path": "experiments/candidates/ucope/uav_motion_prefix_b01/learner.py",
+      "commit_sha": "e4666a5c1aecc9a4d84cad4c724970e5392cfc25",
+      "purpose": "Inspect collect_episode, recurrent_outputs and update only: native reward-to-team-advantage path, recurrent replay, four full-rollout optimizer epochs and recorded exposure law.",
+      "provenance": "Current PPO source, not an executed check or a proposed credit change."
+    },
+    {
+      "path": "envs/pettingzoo/uav_env.py",
+      "commit_sha": "e4666a5c1aecc9a4d84cad4c724970e5392cfc25",
+      "purpose": "Inspect the SINR selection/normalization and observation packing near lines 382 and 575, greedy capacity/association near 947, and default reward near 1421 to ground masks and the event-to-native-return path; no simulation.",
+      "provenance": "Native environment source; presence of internal global arrays grants no actor access."
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "commit_sha": "e4666a5c1aecc9a4d84cad4c724970e5392cfc25",
+      "purpose": "Adopt §§3–5.2 and 11.4, 11.7–11.10 for evidence class, B launch burden, card MEI/headroom, question selection, independent units, proportional verification and failure-dependent interpretation; §11 controls.",
+      "provenance": "Applicable current normative empirical standard; do not apply stronger C obligations to this prospective B question."
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "commit_sha": "e4666a5c1aecc9a4d84cad4c724970e5392cfc25",
+      "purpose": "Adopt §§4–5 and 7.1 as the source/design scope and bounded-work constraints: this task requires none of §4 machinery and permits no implementation or numerical probe.",
+      "provenance": "Applicable current engineering scope; no source execution, runtime allowance or engineering acceptance is created by consultation."
+    },
+    {
+      "path": "AGENTS.md",
+      "commit_sha": "e4666a5c1aecc9a4d84cad4c724970e5392cfc25",
+      "purpose": "Adopt §§1–4 for original-node finality, separate decision tiers and standing delegation; §6 for existing shared-branch scoped publication. This TASK's explicit operation and zero-numerical boundary control.",
+      "provenance": "Current owner instructions at assigned main. Historical request scopes remain historical and do not enlarge this task."
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "commit_sha": "e4666a5c1aecc9a4d84cad4c724970e5392cfc25",
+      "purpose": "Read §§2–4 and 6: partial observation/history, MARL joint consequence and team credit, representability versus finite learning, and evidence limits.",
+      "provenance": "Explanatory scientific knowledge only; no independent task or approval authority."
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "commit_sha": "e4666a5c1aecc9a4d84cad4c724970e5392cfc25",
+      "purpose": "Read the comparison unit, hierarchy of randomness, package-versus-mechanism distinction and cost/return interpretation for one prospective matched training pair.",
+      "provenance": "Explanatory empirical-method knowledge, not a stronger evidence-class requirement."
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260910_conditional_pooling_reentry/ISSUE_SNAPSHOT.json",
+      "purpose": "Read only the three MGTAP delivery comments as historical discussion and the recorded observation time. The full mixed Issue snapshot is retained; its VSP-C1 body and other comments are outside MGTAP evidence.",
+      "provenance": "Direct complete GitHub Issue readback at 2026-09-11T01:50:06.1012925Z, pinned before TASK. Discussion comments locate history; the complete pinned response decides science."
+    }
+  ],
+  "discussion_urls": [
+    "https://github.com/CartmanFatass/My-paper-code/issues/5"
+  ],
+  "constraints": [
+    "Root's new assignment is preparation of this one original Convergence question after the prior fallback document was completed. The prior return's statement that no TASK or subsequent assignment was created describes that earlier boundary, not a restriction against this now-authorized consultation. The current task permits source reading and the specified response delivery only; implementation, imports, model construction, tests, simulation, training, evaluation, replay, profiling, diagnostics, cost probes and numerical allocation are zero.",
+    "Preserve P75's complete technically accepted observation, not a source-defect reinterpretation: aggregate REL−DENSE −0.02396310430506595; 8201 −0.04468252516448091; 8202 −0.003243683445650989 inside MEI with 14 positive/18 negative worlds; all first-master worlds adverse. Both branches learned. Preserve every raw sampled arm return and historical counterexample without pooling it into a COND estimate or treating evaluation episodes as independent fits.",
+    "Assess exactly the accepted return §3 operation: masks from the legal positive-SINR components; existing learned user/UAV row embeddings; mean visible UAV embedding's first 20 components as query; masked user dot-score softmax; nU/20-scaled weighted user context and old sum/10 UAV context; unchanged raw residual, tanh, GRU and velocity output. Empty user context is zero; absent UAV context gives uniform user weights. The parameter blocks are unchanged, and the full raw 108-component path/history remains in both arms. No count-only rescaling, extra feature, entity memory, global connection data or changed actor information is substituted.",
+    "DENSE remains the complete existing nonlinear raw-input residual and recurrent actor, with the recorded branch/encoder/complete learner counts 2768/9744/69079 matched in both arms. It already can use partner geometry and row occupancy. Equal parameter count is not equal effective capacity, computation, optimization or hypothesis class; no weakened comparator or exclusive-information claim.",
+    "The proposed event is several visible user bearings with a visible other UAV approaching one group, where conditional weighting might help change primitive velocity toward another observed group. Local geometry/SINR does not reveal partner intent, assignments or unseen users. Native interference, capacity-limited association, the original sum of per-agent rewards and unchanged team PPO credit decide usefulness. The attention summary can cancel useful geometry or co-adapt badly, and DENSE may learn the behavior as well or better. No event census or motion/attention diagnostic is selected.",
+    "Preserve fixed five UAVs/fifty users, the current ranked local rows and own history, legal three-coordinate primitive velocity, native channel/interference/SINR/capacity/association/reward and existing recurrent PPO. Membership is fixed; no join/leave, temporal abstraction, counterfactual credit, communication or entity identity is added.",
+    "The smallest proposed future empirical comparison is one fresh matched COND/DENSE training pair with separate arm learners and the existing private RNG-domain/common initialization law, no H, no old checkpoint reuse, no intermediate/selected endpoint. The inherited prospective scale is 512 training episodes × 256 native steps per fit, 256 two-episode rollouts, four full-rollout PPO epochs, 1024 Adam calls and 32 sampled final 256-step episodes per fit. The previously recorded two-fit total is 1024 training episodes, 64 learned final episodes, 278528 native team steps and 2048 Adam calls. Retain CPU FP32/thread1 and the inherited optimizer settings if later allocated; the future master is unassigned.",
+    "The proposed primary is mean over the complete 32 paired final episodes of J_COND−J_DENSE, where J is the native team-reward sum divided by 256. Report all signs and conditional evaluation uncertainty; one matched training pair cannot estimate training-seed population uncertainty. The proposed absolute MEI is 0.01 native time-average team reward with the existing host-specific reason (an additional connected user's coverage contribution is 0.014 before the quality term). Above MEI suggests separately selected bounded repeatability work, inside MEI does not demonstrate useful gain or equivalence, and below −MEI weighs against this exact package. No branch automatically authorizes a run.",
+    "Known complete cost law per arm is C_init + 131072*c_env+actor + 1024*c_update + 8192*c_eval + C_publication. The previous response records 3317760 logical actor-row evaluations per fit across collection, final evaluation and PPO replay; COND's masking/query/dot-score/softmax/reduction acts on those rows. Five actors, environment radio/association work and four optimizer passes are multiplicative algorithm work, not free validation. No nested candidate, trajectory, controller search, user×UAV pair table or solver is required. Added acceptance and staging/Monitor/collection effort remains separate and unknown. No timing probe or width search is allocated.",
+    "Historical P75 pair-command wall 353.71/368.12 seconds plus aggregate 0.81 seconds (722.64 total) and study critical path 899.395665 seconds are preserved in their own window. They are not isolated DENSE timing, a COND forecast, a new machine-time cap or a release of old allowances. Candidate wall/CPU, activation memory, benefit and complete support cost remain unknown.",
+    "Tuned same-information headroom on this native host is absent. The scenario1 six-UAV/500-step exposure record is not a substitute. Reuse the actual intact P75 DENSE algorithm/configuration prospectively with a fresh fit; neither extra baseline tuning nor headroom measurement holds this family question. The question is a bounded performance comparison, not an exact policy maximum or unique causal diagnosis.",
+    "Apply the explicitly listed current evidence-spec sections, with §11 controlling, to question selection and burden. Do not impose a positive pilot, exhaustive/bounded search, count census, exact upper, complete mechanism proof, mandatory cost experiment or stronger C requirement before a justified B. Source feasibility permits a question; it is not evidence of benefit or a requirement that Convergence reopen.",
+    "Keep current broad direction ACTIVE/MEDIUM, old coordinate-family PARK, existing recast count, historical C meanings, capacity, priority, investment and formal UAV-entry record unchanged. This node decides only the narrow family boundary. No native author, Root publication or owner item chooses the direction verdict; a complete conforming original-node answer is final within this scope.",
+    "Use each manifest path at its own full SHA. The accepted design and current method/source are pinned separately from the frozen P75 card/result and immutable prior Pro decision. The prior response's linked historical tree is not an instruction to recursively fetch unlisted dependencies; preserve the history as stated and report a concrete unresolved fact if it matters. The mixed Issue's unrelated VSP-C1 content cannot authorize MGTAP work.",
+    "Author preparation exposure at handoff, before Transport dispatch, copied mechanically verbatim from accepted source-return §8: scientific invocations=0; model constructions=0; checkpoint loads=0; environments/datasets=0; native/synthetic/training/evaluation steps=0; optimizer calls=0; tests/fixtures=0; replay/profiling/support search=0; Pro Sends=0; parameter displacement=not applicable (no learner). This is a reuse of the existing zero-exposure record, not a new measurement. Administrative retrieval, rendering, owner-console and Git work are not claimed free. Pro's scoped response publication is the only newly requested external write.",
+    "If a critical scientific input cannot be accessed or the bounded decision cannot be reached, identify the exact gap and state that no decision formed; failed access or transport is not negative evidence and creates no local decision authority. An unavailable explanatory source alone need not block use of the available decisive evidence. Do not manufacture access, a numerical result or an allocation."
+  ],
+  "response_schema": [
+    "Start with one clear final narrow-family choice and its principal scientific reason. Do not echo routing fields or machine-readable envelopes.",
+    "Separate direct prior observation, source inference, future prediction and scientific disposition. State the strongest evidence for the choice, strongest contradiction and residual uncertainty, including why the intact DENSE null remains strong.",
+    "Explain whether conditional weighting gives a substantive event-to-action/credit/native-return discriminator rather than a renamed scale. Preserve the proposed computation if reopening; if it cannot justify this exact question, retain PARK with a concrete explanation rather than silently replacing it.",
+    "Assess the minimal prospective B's one matched training pair, full sampled native primary, MEI/outcome meanings, algorithmic work factors and unknown costs without allocating implementation, a run or a budget. State the claim ceiling and relinquished claims.",
+    "Keep family effects distinct from unchanged direction lifecycle/Portfolio effects. Give a bounded revisit condition for PARK or the exact scientific eligibility created by reopening; no automatic successor, recast, code or seed selection.",
+    "Report actual accessed fixed sources/sections, the Issue read time and any material gap. The complete answer belongs in the one scoped response file; chat only carries confirmed delivery links or a precise unresolved delivery gap."
+  ],
+  "github_delivery": {
+    "branch": "codex/mgtap",
+    "base_sha": "55ff973fc8b6cb4947b263a7f4581dbaa15e626d",
+    "response_path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260910_conditional_pooling_reentry/archive/RESPONSE.md",
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/5"
+  }
+}
