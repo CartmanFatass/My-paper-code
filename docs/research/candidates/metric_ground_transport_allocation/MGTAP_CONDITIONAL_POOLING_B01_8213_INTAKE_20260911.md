@@ -151,3 +151,42 @@ collection archive directory, then verifies disk and worktree-registration
 absence. The shared `C:/Projects/HMASD-worktrees/dm-n5-continue-20260904`
 authoring checkout stays intact. No other direction's active/shared state is
 part of this cleanup. Final cleanup receipt and closeout follow in this section.
+
+## 6. Closeout after Root integration
+
+Root confirmed result/evidence commit9cb609a52014b96e8077582bc589d494a7e9409d
+integrated and pushed at main5321b69fdecdc6de81fd5e8fb9efe648a5950e6e.
+All twelve native/supervisor files match their published Git blobs.
+[Cleanup inventory](conditional_pooling_b01_8213_20260911/CLEANUP_INVENTORY.json)
+contained only the declared six ignored native files, four staged inputs/archives
+and six finished supervisor files; source/tracked status was clean.
+
+The remote detached8213 checkout was removed and is absent both on disk and from
+Git's worktree registration. Its exact staging and finished supervisor directories
+were also removed after hash checks. [Remote receipt](conditional_pooling_b01_8213_20260911/CLEANUP.json)
+records verified absence. Shared authoring checkout remains present/registered;
+creator test scratch is absent.
+
+**Local duplicate cleanup remains blocked.** Automatic approval review rejected
+the guarded PowerShell cleanup compound before CreateProcess with
+`blocked by policy`. The attempted compound checked the exact resolved path,
+hashes and four known files, then requested explicit nonrecursive Remove-Item
+calls/empty directory removal and receipt writing. No part executed; the rejection
+does not identify an independently denied subcommand. No alternate deletion,
+executor or retry was used. Subsequent read-only inspection confirmed four intact
+duplicate files,4487368bytes, under
+`temp/directions/metric_ground_transport_allocation/exp/conditional_pooling_b01_20260911_8213_source/`.
+Their hashes, exact paths, original-DM cleanup ownership and same-path future
+cleanup boundary are recorded in [local receipt](conditional_pooling_b01_8213_20260911/LOCAL_CLEANUP_LIMITATION.json).
+Unique evidence is already preserved on origin/main; no full detached checkout
+is retained as a backup. Root received this exact remaining restriction.
+
+At this closeout snapshot, known support is**63.13897470000001s** and native plus
+accounted support is**421.2489747s**; final receipt publication/commit/push
+adds separately in the handoff. [Complete account snapshot](conditional_pooling_b01_8213_20260911/SUPPORT_CLOSEOUT.json)
+keeps prior/shared unknowns explicit and does not certify300/1200s or infer a
+breach. The pre-effect rejected command creates no new process/scientific attempt.
+No budget, result sign, claim ceiling, retry allowance or successor changes.
+Current primary-control owner reviews remain empty; prediction remains missed/
+owner not taken. This is the final scientific intake, with only the reported
+local duplicate-reclamation restriction outstanding.
