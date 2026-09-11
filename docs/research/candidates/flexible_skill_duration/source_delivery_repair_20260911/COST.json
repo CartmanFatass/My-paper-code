@@ -48,9 +48,65 @@
     {
       "label": "record_review_resolution_and_bounded_check_evidence",
       "seconds": 0.016
+    },
+    {
+      "label": "publish_repaired_source_exact_check_command_and_review",
+      "seconds": 5.0079214
+    },
+    {
+      "label": "reconcile_same_bounded_source_fetch_failure_before_correction",
+      "seconds": 0.9497087
+    },
+    {
+      "label": "locate_remaining_partial_checkout_readback_surface",
+      "seconds": 0.8961339
+    },
+    {
+      "label": "identify_partial_clone_checkout_dependency",
+      "seconds": 0.6541957
+    },
+    {
+      "label": "extend_configured_network_context_through_lazy_blob_checkout",
+      "seconds": 0.018
+    },
+    {
+      "label": "preserve_failed_transfer_and_clean_empty_owned_technical_checkout",
+      "seconds": 1.1686167
+    },
+    {
+      "label": "record_actual_partial_clone_dependency_and_scoped_correction",
+      "seconds": 0.014
+    },
+    {
+      "label": "record_partial_clone_correction_independent_review",
+      "seconds": 0.016
+    },
+    {
+      "label": "independent_review_network_context_correction",
+      "seconds": 0.3180176
+    },
+    {
+      "label": "publish_exact_partial_clone_context_correction",
+      "seconds": 5.0661682
+    },
+    {
+      "label": "one_correction_source_only_staging_and_exact_readback_check",
+      "seconds": 5.923768
+    },
+    {
+      "label": "cleanup_completed_source_only_checkout_and_verify_absence",
+      "seconds": 0.8156059
+    },
+    {
+      "label": "write_ready_technical_acceptance_and_prospective_limits",
+      "seconds": 0.015
+    },
+    {
+      "label": "failed_complete_helper_including_receipt_and_exit",
+      "seconds": 35.625
     }
   ],
-  "recorded_invoked_support_seconds": 9.2387378,
+  "recorded_invoked_support_seconds": 65.7268739,
   "technical_target_seconds": 180,
   "diagnosis_limit_seconds": 20,
   "source_only_complete_check_limit_seconds": 45,
@@ -58,5 +114,27 @@
   "static_review_limit_seconds": 30,
   "new_scientific_exposure": 0,
   "old_support_refund": false,
-  "note": "Inner check and remote timings are subsets of these enclosing command charges. Final publication/collection costs append at later boundaries."
+  "note": "Inner check and remote timings are subsets of these enclosing command charges. Final publication/collection costs append at later boundaries.",
+  "status": "ready_after_concrete_correction",
+  "partial_waits_replaced_not_added": [
+    {
+      "label": "one_published_source_only_staging_and_exact_readback_check",
+      "seconds": 10.0159432
+    },
+    {
+      "label": "collect_same_bounded_source_readback_command",
+      "seconds": 5.0040492
+    },
+    {
+      "label": "collect_same_bounded_source_readback_command_2",
+      "seconds": 4.470595
+    }
+  ],
+  "successful_complete_helper_seconds": 5.672000000020489,
+  "unknown_attribution": [
+    "Caller setup/own receipt overhead for the yielded failed helper was not fully measured; helper duration is complete.",
+    "Native message dispatch overhead and final publication after this snapshot remain additional."
+  ],
+  "scope": "Technical repair only; old B02 spending and scientific allocation remain unchanged.",
+  "snapshot_boundary": "Through readiness write; final cost persistence/commit/push is reported separately, not recursively backfilled."
 }

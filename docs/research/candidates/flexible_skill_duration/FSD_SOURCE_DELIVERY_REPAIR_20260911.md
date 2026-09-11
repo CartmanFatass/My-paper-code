@@ -1,6 +1,6 @@
 # FSD exact-source delivery repair — 2026-09-11
 
-**OWNER_DIRECT technical repair; no scientific allocation.** Root assigns repair
+**READY — OWNER_DIRECT technical repair; no scientific allocation.** Root assigns repair
 of the staging/readback/support path after ended B02, under the current
 [technical unblocking record](../../portfolio/PORTFOLIO.md#owner-directed-technical-unblocking-and-forward-recommendation--2026-09-11).
 The B02 allocation,770803/780803 identities, algorithms/comparator/.01 rule and
@@ -107,3 +107,48 @@ PARTIAL_TECHNICAL_CLEANUP.json verifies disk and registration absence.
 One additional bounded source-only check is selected solely to verify this
 concrete correction at a newly published repair SHA, within the same180s
 technical target. It is not an automatic retry rule or a new scientific budget.
+## Technical acceptance and decisions produced
+
+**READY**, at published repair source
+`acaa4f67e2685f559c22bd57dedde0a1a0b9e28b`. The single correction check
+completed with exit0 in **5.672000000020489s** for the complete helper
+(startup, transport, readback, helper receipt publication, stdout and exit).
+Remote work was4.897623604047112s; enclosing command5.923768s. These intervals
+nest and are not added together. The35/40/45-second boundaries remain explicit.
+
+STAGING_READBACK.json records matching full SHA and all **nine** selected
+source/shell paths. Both published shell files are CR-free and pass bash -n.
+The payload contained3200 UTF-8 bytes and zero CR bytes. Existing zsh
+gitstatus/zle/monitor startup diagnostics were preserved in stderr; they did
+not prevent source delivery or change exit0/readback. No shell/profile or
+shared repository configuration was edited to silence them.
+
+CLEANUP.json verifies that the completed technical checkout was clean, had no
+scientific temp directory, and was removed by its creating DM. Disk and
+worktree-registration absence are both true. The local direction checkout is
+retained. Both failed and successful technical-check evidence remain preserved;
+the ended B02 record and its spent/uncertain historical support are unchanged.
+
+Options:(a) accept this bounded source-delivery path as technically ready;
+(b) return a residual source/readback/deadline defect. Recommended/selected(a):
+independent review is resolved and actual exact-source delivery and cleanup pass.
+**Owner-delegated decision (unattended, 2026-09-03 instruction): (a)**, technical
+object tier under Root's explicit OWNER_DIRECT repair assignment. No Portfolio
+investment, direction disposition or successor is selected; owner flag:none.
+
+COST.json keeps this repair's invoked work separate from ended B02. The first
+failed helper's full35.625s replaces its partial wait chunks; successful-check
+and review inner times are subsets of their enclosing charges. Remaining
+unmeasured caller/native-message overhead is named, not zero or a refund.
+The prospective reusable staging path is the committed CHECK_COMMAND.ps1
+pattern with a45s complete helper bound; this is not a new universal preflight.
+
+Limits: this is one successful corrected source delivery, with current cached
+objects and network state. It does not prove every historical silence had one
+cause or guarantee future network service. A future source operation returns
+readiness or a bounded concrete failure; it does not silently restart.
+No admission, scientific root, RNG master, model, learner, evaluation, fixture
+or agent-task scientific command occurred. Scientific execution still requires
+a separately selected unchanged-pair allocation and its own exact binding,
+fresh admission and observation handover. This repair neither resumes770803/
+780803 nor changes the prior one-pair scientific claim ceiling.
