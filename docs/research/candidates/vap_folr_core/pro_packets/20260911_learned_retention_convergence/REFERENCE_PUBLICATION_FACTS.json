@@ -1,0 +1,425 @@
+{
+  "checked_at_utc": "2026-09-11T18:08:39.758419+00:00",
+  "observed_remote_refs": [
+    {
+      "sha": "c04de197f10181f3f24b718f3ef4c2c7bf4054d9",
+      "ref": "refs/heads/codex/portfolio"
+    },
+    {
+      "sha": "cb5d883bcaf614a1b0817b322f72462c954853e1",
+      "ref": "refs/heads/codex/vap-folr"
+    },
+    {
+      "sha": "df042c4ac1162d22f62d7d1830cecbd3ed2ff44c",
+      "ref": "refs/heads/main"
+    }
+  ],
+  "reference_count": 22,
+  "references": [
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_CANDIDATE_20260911.md",
+      "commit_sha": "cb5d883bcaf614a1b0817b322f72462c954853e1",
+      "bytes": 10495,
+      "git_blob": "6d76a988490188a7b9d67fb712eb40998a914ae1",
+      "sha256": "a05279829edd6ef06e8665bf12a6f2df326d143fb892dde19784876765af91b5",
+      "published_reachable_refs": [
+        {
+          "sha": "cb5d883bcaf614a1b0817b322f72462c954853e1",
+          "ref": "refs/heads/codex/vap-folr"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260911_learned_retention_convergence/FACTS.json",
+      "commit_sha": "cb5d883bcaf614a1b0817b322f72462c954853e1",
+      "bytes": 17236,
+      "git_blob": "ede7f841926fe537905b5de3e9bc64ca5a78cbeb",
+      "sha256": "945c44d4bd2febe0d6e60896321db23e0cd8539942752122a290e1809f05dbd8",
+      "published_reachable_refs": [
+        {
+          "sha": "cb5d883bcaf614a1b0817b322f72462c954853e1",
+          "ref": "refs/heads/codex/vap-folr"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_HALF_FAMILY_CONVERGENCE_INTAKE_20260911.md",
+      "commit_sha": "5ca3911c5b722a97eb936f3381b347224fb8ffb0",
+      "bytes": 13932,
+      "git_blob": "aa2da17f7d4f685ffabab7c085340b8fcb3a8338",
+      "sha256": "07f2df1233b6a59996d850fd369135709cdf4717d2ab5350705b8fce45fc97a4",
+      "published_reachable_refs": [
+        {
+          "sha": "c04de197f10181f3f24b718f3ef4c2c7bf4054d9",
+          "ref": "refs/heads/codex/portfolio"
+        },
+        {
+          "sha": "cb5d883bcaf614a1b0817b322f72462c954853e1",
+          "ref": "refs/heads/codex/vap-folr"
+        },
+        {
+          "sha": "df042c4ac1162d22f62d7d1830cecbd3ed2ff44c",
+          "ref": "refs/heads/main"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260911_half_family_convergence/archive/RESPONSE.md",
+      "commit_sha": "e1e9a600bd4f715328b514fe746bb367775ff3a7",
+      "bytes": 29325,
+      "git_blob": "50be313d35ca71bc9f751b2eb4d0cfc465353e50",
+      "sha256": "138b97ed8501db446068c236ad137d8b61661155fe06a962b8e7fd2c7e9b7563",
+      "published_reachable_refs": [
+        {
+          "sha": "c04de197f10181f3f24b718f3ef4c2c7bf4054d9",
+          "ref": "refs/heads/codex/portfolio"
+        },
+        {
+          "sha": "cb5d883bcaf614a1b0817b322f72462c954853e1",
+          "ref": "refs/heads/codex/vap-folr"
+        },
+        {
+          "sha": "df042c4ac1162d22f62d7d1830cecbd3ed2ff44c",
+          "ref": "refs/heads/main"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_HALF_B01_RESULT_SUMMARY_20260910.json",
+      "commit_sha": "7ac21b081400db29cdadb2c79030f6341041825e",
+      "bytes": 42609,
+      "git_blob": "f258feed1030747300f93d4eeedf8da31632e4d9",
+      "sha256": "2566394e3604f718fe9cb0141684fd68c9f6f3a5500eb2b4a676defedd5303d5",
+      "published_reachable_refs": [
+        {
+          "sha": "c04de197f10181f3f24b718f3ef4c2c7bf4054d9",
+          "ref": "refs/heads/codex/portfolio"
+        },
+        {
+          "sha": "df042c4ac1162d22f62d7d1830cecbd3ed2ff44c",
+          "ref": "refs/heads/main"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_HALF_B02_RESULT_SUMMARY_20260910.json",
+      "commit_sha": "7ac21b081400db29cdadb2c79030f6341041825e",
+      "bytes": 48414,
+      "git_blob": "f58bb24065ec009d4d87562e16c9106bd7f84766",
+      "sha256": "62683d5f5d7c7ac24206a473d1dc177b630dddf4331d519da23c1d7027b70ce4",
+      "published_reachable_refs": [
+        {
+          "sha": "c04de197f10181f3f24b718f3ef4c2c7bf4054d9",
+          "ref": "refs/heads/codex/portfolio"
+        },
+        {
+          "sha": "df042c4ac1162d22f62d7d1830cecbd3ed2ff44c",
+          "ref": "refs/heads/main"
+        }
+      ]
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/model.py",
+      "commit_sha": "c6be208cd514b5d12fb13c7637e2d6376de11eb6",
+      "bytes": 2338,
+      "git_blob": "259732e15a683d4e2bcb2eb7c19ee007f0be65bd",
+      "sha256": "0eeea3a368eeb2738a4c9157cccf69f0a6cb8b0c02da18270332d617b311b970",
+      "published_reachable_refs": [
+        {
+          "sha": "c04de197f10181f3f24b718f3ef4c2c7bf4054d9",
+          "ref": "refs/heads/codex/portfolio"
+        },
+        {
+          "sha": "cb5d883bcaf614a1b0817b322f72462c954853e1",
+          "ref": "refs/heads/codex/vap-folr"
+        },
+        {
+          "sha": "df042c4ac1162d22f62d7d1830cecbd3ed2ff44c",
+          "ref": "refs/heads/main"
+        }
+      ]
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/environment.py",
+      "commit_sha": "c6be208cd514b5d12fb13c7637e2d6376de11eb6",
+      "bytes": 2569,
+      "git_blob": "8e70a71215c52907f0af28fbd6bd7f2bf6153220",
+      "sha256": "126df7c17e2d0a845bf12c76b03e7658706cc12b1921a182d0437ae4423c8f86",
+      "published_reachable_refs": [
+        {
+          "sha": "c04de197f10181f3f24b718f3ef4c2c7bf4054d9",
+          "ref": "refs/heads/codex/portfolio"
+        },
+        {
+          "sha": "cb5d883bcaf614a1b0817b322f72462c954853e1",
+          "ref": "refs/heads/codex/vap-folr"
+        },
+        {
+          "sha": "df042c4ac1162d22f62d7d1830cecbd3ed2ff44c",
+          "ref": "refs/heads/main"
+        }
+      ]
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/attention.py",
+      "commit_sha": "c6be208cd514b5d12fb13c7637e2d6376de11eb6",
+      "bytes": 1791,
+      "git_blob": "1509a32ad88912263c60d63bd7eba2e1da6d932c",
+      "sha256": "775e598921ee7b09721b205624c7e7ac30e1ace177bdcb720b9120c5f4443fa3",
+      "published_reachable_refs": [
+        {
+          "sha": "c04de197f10181f3f24b718f3ef4c2c7bf4054d9",
+          "ref": "refs/heads/codex/portfolio"
+        },
+        {
+          "sha": "cb5d883bcaf614a1b0817b322f72462c954853e1",
+          "ref": "refs/heads/codex/vap-folr"
+        },
+        {
+          "sha": "df042c4ac1162d22f62d7d1830cecbd3ed2ff44c",
+          "ref": "refs/heads/main"
+        }
+      ]
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/collection.py",
+      "commit_sha": "c6be208cd514b5d12fb13c7637e2d6376de11eb6",
+      "bytes": 4036,
+      "git_blob": "8df4460b78e8fe5f6aa0eedaeb1a9ae55d72f150",
+      "sha256": "28f2d62d78a05a7d4f0d7b72936d2a55b4265b3b1fd7745b314a94b4941c1d3c",
+      "published_reachable_refs": [
+        {
+          "sha": "c04de197f10181f3f24b718f3ef4c2c7bf4054d9",
+          "ref": "refs/heads/codex/portfolio"
+        },
+        {
+          "sha": "cb5d883bcaf614a1b0817b322f72462c954853e1",
+          "ref": "refs/heads/codex/vap-folr"
+        },
+        {
+          "sha": "df042c4ac1162d22f62d7d1830cecbd3ed2ff44c",
+          "ref": "refs/heads/main"
+        }
+      ]
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/learner.py",
+      "commit_sha": "c6be208cd514b5d12fb13c7637e2d6376de11eb6",
+      "bytes": 2927,
+      "git_blob": "250fe41e2631335930998116c519dcc530cf0695",
+      "sha256": "01770613528bc8e1f3b86c4cafa934dda98c9639490733a123b101c48723e54a",
+      "published_reachable_refs": [
+        {
+          "sha": "c04de197f10181f3f24b718f3ef4c2c7bf4054d9",
+          "ref": "refs/heads/codex/portfolio"
+        },
+        {
+          "sha": "cb5d883bcaf614a1b0817b322f72462c954853e1",
+          "ref": "refs/heads/codex/vap-folr"
+        },
+        {
+          "sha": "df042c4ac1162d22f62d7d1830cecbd3ed2ff44c",
+          "ref": "refs/heads/main"
+        }
+      ]
+    },
+    {
+      "path": "scripts/run_folr_public_lifecycle_b01.py",
+      "commit_sha": "c6be208cd514b5d12fb13c7637e2d6376de11eb6",
+      "bytes": 5852,
+      "git_blob": "a3192f783f70c3f205cf4147a64816aa48ee8d68",
+      "sha256": "e1f33c4d98ced0fed809d672813528a059326c137d223c8db9e32b5012c5b0f1",
+      "published_reachable_refs": [
+        {
+          "sha": "c04de197f10181f3f24b718f3ef4c2c7bf4054d9",
+          "ref": "refs/heads/codex/portfolio"
+        },
+        {
+          "sha": "cb5d883bcaf614a1b0817b322f72462c954853e1",
+          "ref": "refs/heads/codex/vap-folr"
+        },
+        {
+          "sha": "df042c4ac1162d22f62d7d1830cecbd3ed2ff44c",
+          "ref": "refs/heads/main"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_HALF_B02_SCIENCE_CARD_20260910.md",
+      "commit_sha": "ea73b1c3dabafe6482db03df8a9e51c1ad672260",
+      "bytes": 11730,
+      "git_blob": "7b33b4398cc3ad79ea2a1a17fd9e5dd82660fde8",
+      "sha256": "5d55b73d4f43bf06e7591c3a689d715427041812c81e99d53ba2f2c1f492f003",
+      "published_reachable_refs": [
+        {
+          "sha": "c04de197f10181f3f24b718f3ef4c2c7bf4054d9",
+          "ref": "refs/heads/codex/portfolio"
+        },
+        {
+          "sha": "cb5d883bcaf614a1b0817b322f72462c954853e1",
+          "ref": "refs/heads/codex/vap-folr"
+        },
+        {
+          "sha": "df042c4ac1162d22f62d7d1830cecbd3ed2ff44c",
+          "ref": "refs/heads/main"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260911_remaining_capacity_refill/archive/RESPONSE.md",
+      "commit_sha": "0dbbcbf807509ccc34a3a1de353114be88896897",
+      "bytes": 59218,
+      "git_blob": "da12cf8e1d756369cee40f84833e69f469ea35ca",
+      "sha256": "f4e2c50db1b743edba5e5cede0a9c1c0146afc82f9e4c8541d9fea4e03834322",
+      "published_reachable_refs": [
+        {
+          "sha": "c04de197f10181f3f24b718f3ef4c2c7bf4054d9",
+          "ref": "refs/heads/codex/portfolio"
+        },
+        {
+          "sha": "df042c4ac1162d22f62d7d1830cecbd3ed2ff44c",
+          "ref": "refs/heads/main"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260911_remaining_capacity_refill/EXECUTION_MAPPING.md",
+      "commit_sha": "bb40797dc5312641ac640664cbf7c2bd174d9815",
+      "bytes": 17500,
+      "git_blob": "fce376ac1a73e93dccb2f3c9b858ea6b27ba4375",
+      "sha256": "213d86ef04398b3b2a3336d11c364018f1d100085811b81aec763177ec6facf3",
+      "published_reachable_refs": [
+        {
+          "sha": "c04de197f10181f3f24b718f3ef4c2c7bf4054d9",
+          "ref": "refs/heads/codex/portfolio"
+        },
+        {
+          "sha": "df042c4ac1162d22f62d7d1830cecbd3ed2ff44c",
+          "ref": "refs/heads/main"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/decisions/2026-09-11-remaining-capacity-refill.md",
+      "commit_sha": "bb40797dc5312641ac640664cbf7c2bd174d9815",
+      "bytes": 14476,
+      "git_blob": "f4a6a1d3213bdf343d14a5ecad4fe6299dcce87b",
+      "sha256": "6a8f73cf78a0403bf83bd4d0b9819cfbf580c5d28ce4f9cba31d169434d5d8af",
+      "published_reachable_refs": [
+        {
+          "sha": "c04de197f10181f3f24b718f3ef4c2c7bf4054d9",
+          "ref": "refs/heads/codex/portfolio"
+        },
+        {
+          "sha": "df042c4ac1162d22f62d7d1830cecbd3ed2ff44c",
+          "ref": "refs/heads/main"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "commit_sha": "14744af1f733e08aa8b7ab25730576ade02f344f",
+      "bytes": 45053,
+      "git_blob": "c520f24f1440ca0638943d7a5126cfd5bc34440c",
+      "sha256": "44418af31752086f6752f8f3d6874b260134e4c91b6c82ed8dbc61e4ef0b87e1",
+      "published_reachable_refs": [
+        {
+          "sha": "c04de197f10181f3f24b718f3ef4c2c7bf4054d9",
+          "ref": "refs/heads/codex/portfolio"
+        },
+        {
+          "sha": "df042c4ac1162d22f62d7d1830cecbd3ed2ff44c",
+          "ref": "refs/heads/main"
+        }
+      ]
+    },
+    {
+      "path": "AGENTS.md",
+      "commit_sha": "14744af1f733e08aa8b7ab25730576ade02f344f",
+      "bytes": 42984,
+      "git_blob": "657dc14480c90cd514f308ffb1f5ec2552554a8b",
+      "sha256": "cfbe996017cd6ffd7e4a8e8af0321b8bc28904f7529626d1d0f7548222b0c4b5",
+      "published_reachable_refs": [
+        {
+          "sha": "c04de197f10181f3f24b718f3ef4c2c7bf4054d9",
+          "ref": "refs/heads/codex/portfolio"
+        },
+        {
+          "sha": "df042c4ac1162d22f62d7d1830cecbd3ed2ff44c",
+          "ref": "refs/heads/main"
+        }
+      ]
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "commit_sha": "14744af1f733e08aa8b7ab25730576ade02f344f",
+      "bytes": 20899,
+      "git_blob": "72f81d5650d9c1ddde12df3a6ed37add99f436be",
+      "sha256": "a52a26e3b9ba876cb954ef4e671b5826ff9e1bab573320ca6da1033e12e64996",
+      "published_reachable_refs": [
+        {
+          "sha": "c04de197f10181f3f24b718f3ef4c2c7bf4054d9",
+          "ref": "refs/heads/codex/portfolio"
+        },
+        {
+          "sha": "df042c4ac1162d22f62d7d1830cecbd3ed2ff44c",
+          "ref": "refs/heads/main"
+        }
+      ]
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "commit_sha": "14744af1f733e08aa8b7ab25730576ade02f344f",
+      "bytes": 7819,
+      "git_blob": "05b3dc8d8628e2510431250c119b533f2ac3c29a",
+      "sha256": "c1f7d6c68fcec55de48ea555346d5d65af8d311e28502be43a2b05436a174247",
+      "published_reachable_refs": [
+        {
+          "sha": "c04de197f10181f3f24b718f3ef4c2c7bf4054d9",
+          "ref": "refs/heads/codex/portfolio"
+        },
+        {
+          "sha": "df042c4ac1162d22f62d7d1830cecbd3ed2ff44c",
+          "ref": "refs/heads/main"
+        }
+      ]
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "commit_sha": "14744af1f733e08aa8b7ab25730576ade02f344f",
+      "bytes": 4252,
+      "git_blob": "9bae14c6deb8e3d1bee6bb567828e4667a426174",
+      "sha256": "99b7e727a890d4e93a64b5c0f44fe588e383b5de56f2da663fb3f864c6d8293c",
+      "published_reachable_refs": [
+        {
+          "sha": "c04de197f10181f3f24b718f3ef4c2c7bf4054d9",
+          "ref": "refs/heads/codex/portfolio"
+        },
+        {
+          "sha": "df042c4ac1162d22f62d7d1830cecbd3ed2ff44c",
+          "ref": "refs/heads/main"
+        }
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260911_learned_retention_convergence/ISSUE_SNAPSHOT.json",
+      "commit_sha": "cb5d883bcaf614a1b0817b322f72462c954853e1",
+      "bytes": 10832,
+      "git_blob": "99386c03bd957cdc2d4b4174836ea699789b9e3a",
+      "sha256": "43044f7ad0348a514aa51c4b9c3f1014d4487f634a66de1b9a38bd01bc2e39ab",
+      "published_reachable_refs": [
+        {
+          "sha": "cb5d883bcaf614a1b0817b322f72462c954853e1",
+          "ref": "refs/heads/codex/vap-folr"
+        }
+      ]
+    }
+  ],
+  "manifest_exact_match": true,
+  "original_task_preserved": true,
+  "local_prepublication_events": [
+    "Initial local reference check incorrectly expected full blob URLs; generated TASK uses exact path/commit manifest pairs. All22 actual pairs matched.",
+    "Renderer rejected cosmetic regeneration: use a fresh output directory; preserve existing packet and send state. Original generated TASK/HANDOFF retained, cosmetic REQUEST edits dropped to match original task; no dispatch or extra packet."
+  ],
+  "limit": "Exact path/content and published ancestry checks, not proof of current Pro connector access; no numerical/source execution."
+}
