@@ -125,7 +125,7 @@ Execution is pinned to configured `wsl_4070`, CPU float64, one computation threa
 unchanged single-process native batch path. No local fallback is selected. Use detached
 exact committed/pushed SHA worktree and existing `agent-task`; fresh physical/effective
 memory>=4 GiB admission on that node immediately precedes the invocation with `&&`.
-Use the existing supervisor timeout for this complete invocation; no new restart machinery.
+Use the existing OS timeout around this complete invocation; no new restart machinery.
 DM sends MONITOR_ADD to the live primary-control config endpoint, then stops routine polling.
 
 ## L0 implementation and acceptance
