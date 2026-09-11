@@ -161,3 +161,29 @@ No extra arm, retry, evaluation or successor is authorized by this handover.
 Command/staging documentary commit/push added4.6467948s displayed support wall. Final
 support accounting will distinguish internal clocks, displayed enclosing alternatives,
 approximations and genuinely unmeasured components without double-counting.
+
+## Terminal collection and closeout
+
+Root routed Monitor's terminal fact on2026-09-11: the same handle failed exit139 at
+2026-09-12T02:28:09+08:00 after78s. Collection confirms signal11/77.84s, two initial
+checkpoints and15 logged arm-rounds, with no complete primary. The
+[E0 collection](VNFC_N7_NATIVE_SERVICE_CREDIT_B02_RESULT_EVIDENCE_20260911.md) and
+[DM intake](VNFC_N7_NATIVE_SERVICE_CREDIT_B02_RESULT_INTAKE_20260911.md) preserve this
+incomplete attempt without performance polarity. No retry, workaround invocation,
+extra test, source change or successor occurred. The earlier pending-collection text
+is historical launch state, superseded by these terminal records.
+
+Raw11-file archive SHA256
+`1bbcfbe499e8a15bb1d5f4a0d4fdaf0fa8a52feda65da4de4f2f3e2abc575de5`
+matched remote/local. The additional local recovery archive preserves the unpublished
+draft, source bundle and synthetic scratch bytes. Both archives and complete inventories
+are under `evidence/b02_credit_20260911_01/`. Exact source remains published and unchanged.
+Root source/launch integration through mainf6fb5606b added10.4s displayed support wall;
+the shared1.3s RCLE+VNFC terminal observation is charged only to RCLE per Root. Other
+timings and missing scopes are explicit in `support_costs.json`; full cost is unestablished.
+
+At first collection publication, scoped remote checkout/staging cleanup awaits Root's
+integration acceptance of the preserved evidence. The scratch `blocked by policy`
+rejection remains unresolved; no bypass or repeated deletion attempt is authorized.
+The shared authoring checkout is retained for this intake/cleanup, with eventual
+reclamation owned by Root. Verified deletion or remaining-path facts will follow here.
