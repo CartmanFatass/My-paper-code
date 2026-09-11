@@ -1,0 +1,81 @@
+{
+  "status": "pass",
+  "utc": "2026-09-11T23:29:57.988876+00:00",
+  "inner_wall_seconds": 0.10784229999990202,
+  "entry_lines": 29,
+  "forwarded_calls": [
+    [
+      "make_config",
+      [
+        "D0",
+        [
+          "fake"
+        ],
+        771003
+      ],
+      {
+        "renewal_batch": true
+      }
+    ],
+    [
+      "make_config",
+      [
+        "I",
+        [
+          "fake"
+        ],
+        771003
+      ],
+      {
+        "renewal_batch": true
+      }
+    ],
+    [
+      "assemble_pair",
+      [
+        "treatment",
+        "control"
+      ],
+      {
+        "training_seed": 771003,
+        "evaluation_seed": 781003,
+        "object_id": "FSD_UAV_RENEWAL_BATCH_B02_771003",
+        "card": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_SCIENCE_CARD_20260911.md",
+        "renewal_batch": true
+      }
+    ],
+    [
+      "main",
+      [
+        [
+          "--arm",
+          "I",
+          "--d0-summary",
+          "fresh/D0/summary.json"
+        ]
+      ],
+      {
+        "training_seed": 771003,
+        "evaluation_seed": 781003,
+        "object_id": "FSD_UAV_RENEWAL_BATCH_B02_771003",
+        "card": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_SCIENCE_CARD_20260911.md",
+        "renewal_batch": true,
+        "caps": {
+          "D0": 900.0,
+          "I": 1800.0
+        }
+      }
+    ]
+  ],
+  "checked": [
+    "fresh seeds/object/card to configuration and publication",
+    "exact new shell/admission/cap/companion paths",
+    "one45s outer source transaction",
+    "shared six scientific paths equal accepted c70; helper unchanged"
+  ],
+  "numerical_imports": 0,
+  "scientific_constructions": 0,
+  "scientific_submissions": 0,
+  "scratch_created": false,
+  "limit": "Only changed binding/command contract. Unchanged numerical evidence reused; actual staging, admission and primary remain unobserved."
+}
