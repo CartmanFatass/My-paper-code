@@ -1,0 +1,49 @@
+{
+  "question": "当前四个空位应投入两个新训练比较和两个方向问题，还是少投并保留空位？",
+  "changes_if_approved": [
+    {
+      "target": "本轮新增研究投入",
+      "from": "FSD已结束；MGTAP和ACVC完成本轮收尾；VNFC未就绪；FOLR仍运行",
+      "to": "建议新增FSD3000秒、MGTAP1200秒各一个完整比较，并各给RCLE、ACVC一个无数值额度的原Convergence问题"
+    }
+  ],
+  "if_refused": "按Pro实际选择保留相应空位；继续FOLR并完成已有收尾。VNFC原900秒建议仍条件排队，不挪作修复或其他方向预算。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_770903_EXECUTION_LIMITATION_INTAKE_20260911.md",
+      "quote": "There is no new test of whether I1280's final gain recurs.",
+      "why": "最新传输失败没有检验已有收益是否复现；可以明确选择一次新的有限投入。"
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_8961_INTAKE_20260911.md",
+      "quote": "This supports a repeated bounded package signal across these three completed fresh\nrealizations of an outcome-informed recipe.",
+      "why": "第三次新训练仍有收益，值得原方向节点决定下一层主张，但不等于已经稳定优越或应自动升级。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_CONDITIONAL_POOLING_B01_8213_INTAKE_20260911.md",
+      "quote": "The small first positive sign did not recur in this independently trained\nunchanged pair.",
+      "why": "新一次损失超过0.01，第三次不变比较的价值可能低于直接留空。"
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B06_NEAREST99_PRIOR1000_SCIENCE_CARD_20260911.md",
+      "quote": "The observation asks whether this selected less exploratory prior plus 1000 real\nupdates beats nearest while improving its own initialization.",
+      "why": "该目标尚未达到；新的梯度分配只是待原节点判断的候选，并无已经修好学习器的证据。"
+    }
+  ],
+  "uncertainty": [
+    "FSD下一次源获取能否成功未知；建议仅一次45秒以内事务，纳入新300秒支持上限。",
+    "MGTAP仅两个方向相反的训练历史；新第三对不是寻找阳性，也不是统计充分性门槛。",
+    "ACVC三次收益不证明纯回撤机制；较简单dwell也有收益，仍有负样本。",
+    "VNFC缺少分配时参数和后续元数据的事实，等价计算候选不足以证明不受旧损坏影响。"
+  ],
+  "cost": {
+    "compute": "建议新增上限4200秒：FSD3000、MGTAP1200各自独立，不是共享池；两个方向问题零实现及数值额度。完整成本的未知部分保留。",
+    "owner_time": "无需等待所有者逐项回复；可异步覆盖Pro的合规决定。",
+    "reversibility": "costly",
+    "waits_on_this": "只有新增四项投入等待Portfolio决定；FOLR和已有收尾独立继续。"
+  },
+  "verdict_text": "建议A：新选FSD与MGTAP各一个完整比较，并各选RCLE、ACVC一个原Convergence问题；保留VNFC条件排队。尚未执行任何本轮投资选项。",
+  "source": "docs/research/portfolio/pro_packets/20260911_post_program_vacancies/SCIENCE_BRIEF.md"
+}
