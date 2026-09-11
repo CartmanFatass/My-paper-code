@@ -149,3 +149,37 @@ still01a087e5-2044-7301-abb6-7a1709a98197. No ready-VNFC contention notice was
 received. This is the selected new allocation with fresh caps, not a retry.
 Source surface is unchanged by this documentation commit. Actual destination
 admission, acceptance, adoption and empirical outputs remain separate pending facts.
+
+## Accepted handle and direct observation handoff
+
+The exact command, published at2477981b33f1e84433e5014aa11cd2ea2bf5c684,
+was submitted **once** at2026-09-11T21:26:13.036882Z. Supervisor exit0
+unambiguously accepted`acvc-fresh-dense-b01-8961-62d7eae7d`, tmux
+`agent_acvc-fresh-dense-b01-8961-62d7eae7d`, log
+`/home/wu/.agent-tasks/acvc-fresh-dense-b01-8961-62d7eae7d/task.log`.
+The [submission receipt](ACVC_FRESH_DENSE_REUSE_B01_8961_LAUNCH_20260911.json)
+preserves the exact command and0.6491287s SSH client time. Its enclosing local
+command0.9550454s is charged to support without counting the inner time again.
+
+Direct MONITOR_ADD delivery to the live primary app task
+`01a087e5-2044-7301-abb6-7a1709a98197` succeeded. It carried exact ownership,
+handle/source/cwd/output/admission/timing/log facts, all270/330/600 caps and the
+inclusive accounting requirement. App delivery took0.181s. **Actual adoption is
+pending**, distinct from accepted dispatch. DM has stopped routine status polling.
+Root was notified and will forward the Monitor's adoption and terminal facts;
+the collecting DM remains`/root/dm_acvc_restart_successor2`.
+
+Known support through this delivery is48.1570585s/330s. Complete known components
+are retained in the [support receipt](ACVC_FRESH_DENSE_REUSE_B01_8961_SUPPORT_20260911.json).
+This record's publication, later observation/collection/integration/cleanup and
+unmeasured client/message overhead are not silently zero. No actual destination
+admission, native counts or empirical polarity is inferred from launch acceptance.
+The allocation remains one fit and three final panels, with no retry or successor.
+
+Root subsequently routed **MONITOR_ADOPTED** for the exact8961 handle/source/
+node/cwd/output/supervisor. Its direct observation found the task running and
+admission passed with approximately15.63GB available versus the4GiB floor.
+The adoption query took0.7s, bringing known invoked support to48.8570585s before
+this publication. The precise admission bytes and execution timestamps remain
+for terminal artifact collection. Monitor now owns observation; DM owns collection,
+technical acceptance and scientific intake on Root's routed terminal fact.
