@@ -70,3 +70,22 @@ cleanup inventory, preserve unique source/evidence, and obtain Root's integratio
 retention fact before assigned remote reclamation. Verify disk and Git-registration
 absence; keep shared checkout and local scientific evidence. This allocation ends
 at its one fit/reference/intake/closeout, with no automatic successor.
+
+## Published exact source and command
+
+Source/card/check/review commit `baf63642a776ef3e60f4310ce47d76c45168c283` is pushed on codex/rcle.
+The incremental Git bundle names the previously present B05 source prerequisite
+3ffa65cb4e1a67182b90dce3822d0018ac623c72; it is not a claim of a fully self-contained
+pack. The remote handle, cwd and staging path were absent before preparation.
+Bundle fetch, detached sparse checkout at the exact source and `bash -n` passed.
+[STAGING_FACTS.json](b06_nearest99_prior1000_20260911/STAGING_FACTS.json) records all
+commands and source readback; the complete invoked staging command cost 2.473154 s
+inside its 25 s lifetime bound. Embedded per-step timings are not added again.
+No model, admission or native episode ran during preparation.
+
+[LAUNCH_COMMAND.txt](b06_nearest99_prior1000_20260911/LAUNCH_COMMAND.txt) is the literal
+single supervisor payload. It binds the source above and the declared 610 s native
+chain; each wrapper arm retains its own admission and complete cap. Known support
+through staging is 18.3388434 s. Command publication/submission and later observation,
+collection/intake/preservation/cleanup/Root integration are added once on receipts.
+Launch acceptance and actual Monitor adoption remain pending until directly recorded.
