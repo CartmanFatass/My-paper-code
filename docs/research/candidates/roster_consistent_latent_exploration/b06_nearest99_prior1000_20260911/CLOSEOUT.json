@@ -1,0 +1,148 @@
+{
+  "object": "RCLE-TBCFV-B06-NEAREST99-PRIOR1000",
+  "root_preservation_acceptance": {
+    "main_commit": "364b98f42",
+    "instruction": "Complete only the published exact remote cwd/staging inventory after integrated result and preservation acceptance."
+  },
+  "local_preservation_verified": [
+    {
+      "kind": "local_archive",
+      "path": "temp/directions/roster_consistent_latent_exploration/exp/b06-nearest99-prior1000-s26-20260911/terminal.tar.gz",
+      "bytes": 807556,
+      "sha256": "4c3188b056ccc91a67482663a3d97f9d38f216d41b55b331127ab1b744202494"
+    },
+    {
+      "kind": "local_source_bundle",
+      "path": "temp/directions/roster_consistent_latent_exploration/b06-nearest99-prior1000-preparation/source.bundle",
+      "bytes": 1928525,
+      "sha256": "9e22ced7157debd250e289f57855ef513e36ba7dfc575da5b8921b21b2feffd6"
+    }
+  ],
+  "argv": [
+    "ssh",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "ConnectTimeout=10",
+    "hmasd-wsl-node",
+    "/home/wu/.venvs/hmasd/bin/python -B -"
+  ],
+  "remote_script": "\nimport datetime,hashlib,json,pathlib,subprocess,time\nstarted=time.perf_counter()\nhandle='rcle-b06-nearest99-s26-20260911'\nsource='baf63642a776ef3e60f4310ce47d76c45168c283'\nrepo=pathlib.Path('/home/wu/projects/HMASD')\ncwd=pathlib.Path('/home/wu/hmasd-worktrees/rcle-b06-nearest99-s26-20260911')\nstage=pathlib.Path('/home/wu/hmasd-inputs/rcle-b06-nearest99-s26-20260911')\nsupervisor=pathlib.Path('/home/wu/.agent-tasks')/handle\nsteps=[]\ndef call(argv,expected=0):\n r=subprocess.run(argv,capture_output=True,text=True,timeout=max(1,15-(time.perf_counter()-started)))\n steps.append({'argv':argv,'exit_code':r.returncode,'stdout':r.stdout,'stderr':r.stderr})\n assert r.returncode==expected,(argv,r.returncode,r.stderr)\n return r.stdout\nfor path,parent in [(cwd,'/home/wu/hmasd-worktrees'),(stage,'/home/wu/hmasd-inputs')]:\n assert path.name==handle and path.parent==pathlib.Path(parent)\n assert not path.is_symlink() and path.is_dir() and path.resolve(strict=True)==path\nassert (supervisor/'status').read_text().strip()=='finished'\nassert (supervisor/'exit_code').read_text().strip()=='0'\ncall(['tmux','has-session','-t','=agent_'+handle],expected=1)\nassert call(['git','-C',str(cwd),'rev-parse','HEAD']).strip()==source\nassert call(['git','-C',str(cwd),'status','--porcelain','--untracked-files=all'])==''\nbefore=call(['git','-C',str(repo),'worktree','list','--porcelain'])\nassert 'worktree '+str(cwd)+'\\n' in before\nexpected_hashes={'source.bundle':'9e22ced7157debd250e289f57855ef513e36ba7dfc575da5b8921b21b2feffd6','terminal.tar.gz':'4c3188b056ccc91a67482663a3d97f9d38f216d41b55b331127ab1b744202494'}\nassert {p.name for p in stage.iterdir()}==set(expected_hashes)\nfor name,digest in expected_hashes.items():\n p=stage/name\n assert p.is_file() and not p.is_symlink()\n assert hashlib.sha256(p.read_bytes()).hexdigest()==digest\ncall(['git','-C',str(repo),'worktree','remove','--force',str(cwd)])\nfor name in ['source.bundle','terminal.tar.gz']:\n (stage/name).unlink()\nstage.rmdir()\nafter=call(['git','-C',str(repo),'worktree','list','--porcelain'])\nassert not cwd.exists() and not stage.exists()\nassert 'worktree '+str(cwd)+'\\n' not in after\nassert supervisor.is_dir() and (supervisor/'status').read_text().strip()=='finished'\nprint(json.dumps({'status':'EXACT_REMOTE_CWD_AND_STAGING_REMOVED','at_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'source_sha':source,'handle':handle,'execution_checkout':str(cwd),'staging':str(stage),'execution_checkout_disk_absent':True,'staging_disk_absent':True,'execution_checkout_registration_absent':True,'source_and_archive_remote_hashes_verified':expected_hashes,'supervisor_retained':str(supervisor),'steps':steps,'remote_command_wall_s':time.perf_counter()-started}))\n",
+  "exit_code": 0,
+  "stderr": "",
+  "command_wall_s": 0.7837431999796536,
+  "shared_authoring_checkout": "C:/Projects/HMASD-worktrees/dm-rcle-a02-20260906",
+  "local_raw_and_archives_retained": true,
+  "B06_test_scratch": "none created",
+  "historical_B04_B05_scratch": "separate prior policy-rejected exceptions; untouched",
+  "remote": {
+    "status": "EXACT_REMOTE_CWD_AND_STAGING_REMOVED",
+    "at_utc": "2026-09-11T19:02:25.514350+00:00",
+    "source_sha": "baf63642a776ef3e60f4310ce47d76c45168c283",
+    "handle": "rcle-b06-nearest99-s26-20260911",
+    "execution_checkout": "/home/wu/hmasd-worktrees/rcle-b06-nearest99-s26-20260911",
+    "staging": "/home/wu/hmasd-inputs/rcle-b06-nearest99-s26-20260911",
+    "execution_checkout_disk_absent": true,
+    "staging_disk_absent": true,
+    "execution_checkout_registration_absent": true,
+    "source_and_archive_remote_hashes_verified": {
+      "source.bundle": "9e22ced7157debd250e289f57855ef513e36ba7dfc575da5b8921b21b2feffd6",
+      "terminal.tar.gz": "4c3188b056ccc91a67482663a3d97f9d38f216d41b55b331127ab1b744202494"
+    },
+    "supervisor_retained": "/home/wu/.agent-tasks/rcle-b06-nearest99-s26-20260911",
+    "steps": [
+      {
+        "argv": [
+          "tmux",
+          "has-session",
+          "-t",
+          "=agent_rcle-b06-nearest99-s26-20260911"
+        ],
+        "exit_code": 1,
+        "stdout": "",
+        "stderr": "no server running on /tmp/tmux-1000/default\n"
+      },
+      {
+        "argv": [
+          "git",
+          "-C",
+          "/home/wu/hmasd-worktrees/rcle-b06-nearest99-s26-20260911",
+          "rev-parse",
+          "HEAD"
+        ],
+        "exit_code": 0,
+        "stdout": "baf63642a776ef3e60f4310ce47d76c45168c283\n",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "git",
+          "-C",
+          "/home/wu/hmasd-worktrees/rcle-b06-nearest99-s26-20260911",
+          "status",
+          "--porcelain",
+          "--untracked-files=all"
+        ],
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "git",
+          "-C",
+          "/home/wu/projects/HMASD",
+          "worktree",
+          "list",
+          "--porcelain"
+        ],
+        "exit_code": 0,
+        "stderr": "",
+        "target_registration_blocks": [
+          "worktree /home/wu/hmasd-worktrees/rcle-b06-nearest99-s26-20260911\nHEAD baf63642a776ef3e60f4310ce47d76c45168c283\ndetached"
+        ],
+        "complete_output_sha256": "0ac4e352199793ecc5cdca392b3f1798718eaa9f556ee716e78e1c6df7b86315",
+        "complete_output_retained_in": "temp/directions/roster_consistent_latent_exploration/b06-nearest99-prior1000-preparation/closeout-raw.json"
+      },
+      {
+        "argv": [
+          "git",
+          "-C",
+          "/home/wu/projects/HMASD",
+          "worktree",
+          "remove",
+          "--force",
+          "/home/wu/hmasd-worktrees/rcle-b06-nearest99-s26-20260911"
+        ],
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "git",
+          "-C",
+          "/home/wu/projects/HMASD",
+          "worktree",
+          "list",
+          "--porcelain"
+        ],
+        "exit_code": 0,
+        "stderr": "",
+        "target_registration_blocks": [],
+        "complete_output_sha256": "9b43ef18f679243c33e8c24f6bae5c167c5ed5a4449dad205215166c717495db",
+        "complete_output_retained_in": "temp/directions/roster_consistent_latent_exploration/b06-nearest99-prior1000-preparation/closeout-raw.json"
+      }
+    ],
+    "remote_command_wall_s": 0.06205749895889312
+  },
+  "status": "CLEANUP_COMPLETE",
+  "raw_receipt": {
+    "path": "temp/directions/roster_consistent_latent_exploration/b06-nearest99-prior1000-preparation/closeout-raw.json",
+    "bytes": 91655,
+    "sha256": "801ef7793e6a52ad227a35aa0ea86c753df7d691ac88c2d35a6da96f8ca1c68b",
+    "contents": "Complete SSH stdout and both full worktree-list outputs; only the named B06 target was removed."
+  },
+  "support_command_wall_s": 1.0372888,
+  "support_wall_note": "Charge this enclosing command wall once. Internal SSH and remote timers are included, not additional."
+}

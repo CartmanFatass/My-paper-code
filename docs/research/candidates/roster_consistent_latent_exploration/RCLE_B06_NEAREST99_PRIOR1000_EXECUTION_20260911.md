@@ -155,3 +155,33 @@ identifies the completed clean48,502,754B exact-source checkout and2,736,081B st
 directory containing only source.bundle and terminal.tar.gz. Root integration and
 preservation acceptance precede exact reclamation. Shared checkout/local evidence
 remain; no B06 test scratch was created. Prior B04/B05 exceptions are separate.
+
+## Accepted remote closeout
+
+Root integrated and pushed the result/intake through main364b98f42, accepted
+preservation and assigned only the published execution/staging inventory for removal.
+The shared authoring branch was fast-forwarded to that integration and pushed.
+Live main owner reviews were empty at the cleanup boundary.
+
+[CLOSEOUT.json](b06_nearest99_prior1000_20260911/CLOSEOUT.json) records completed
+reclamation at 2026-09-11T19:02:25Z. Before removal, the exact absolute paths resolved
+inside their declared roots, source baf63642a matched, Git status was clean,
+supervisor status was finished/exit0, the tmux session was absent and both preserved
+archive/source hashes matched. The named remote checkout and staging directory are
+now absent on disk; the checkout is also absent from Git worktree registration.
+The staging directory contained only source.bundle and terminal.tar.gz.
+The operation's enclosing command wall was 1.0372888s; its internal timers are
+included. Full command output is retained in the linked local raw closeout receipt.
+
+All 17 collected files, local terminal archive, local source bundle, shared authoring
+checkout and completed remote supervisor receipts remain. B06 created no test scratch;
+prior B04/B05 cleanup exceptions were untouched. No new test, empirical invocation,
+endpoint or successor was performed.
+
+[SUPPORT_FINAL.json](b06_nearest99_prior1000_20260911/SUPPORT_FINAL.json) records
+81.3036131s known support and 417.1636131s native-plus-known charges through cleanup
+and its publication insertion-point readback, including Root's reported 9.2s result
+integration once. Final receipt preparation/publication and Root closeout integration
+follow that boundary and are returned for recording once. Other Monitor components
+and the yielded terminal-input push's full wall tail remain unknown. No complete
+140s-support/750s-allocation cap pass or overrun is inferred.

@@ -5,7 +5,9 @@
     "path": "/home/wu/hmasd-worktrees/rcle-b06-nearest99-s26-20260911",
     "bytes_at_collection": 48502754,
     "source_verified": true,
-    "tracked_and_untracked_status": ""
+    "tracked_and_untracked_status": "",
+    "disk_absent_after_cleanup": true,
+    "registration_absent_after_cleanup": true
   },
   "staging": {
     "path": "/home/wu/hmasd-inputs/rcle-b06-nearest99-s26-20260911",
@@ -13,7 +15,8 @@
     "files": [
       "source.bundle",
       "terminal.tar.gz"
-    ]
+    ],
+    "disk_absent_after_cleanup": true
   },
   "local_archive": {
     "path": "temp/directions/roster_consistent_latent_exploration/exp/b06-nearest99-prior1000-s26-20260911/terminal.tar.gz",
@@ -30,6 +33,7 @@
   "supervisor_receipts": "retain completed /home/wu/.agent-tasks/rcle-b06-nearest99-s26-20260911",
   "B06_test_scratch": "none created",
   "historical_exceptions": "B04/B05 creator-owned policy-rejected scratch unchanged; not part of B06 deletion inventory",
-  "reclamation": "pending Root result integration and preservation acceptance; exact cwd/staging only",
-  "cleanup_owner": "/root/dm_rcle_restart_recovery2"
+  "reclamation": "complete after Root integrated result/intake and accepted preservation at main364b98f42",
+  "cleanup_owner": "/root/dm_rcle_restart_recovery2",
+  "cleanup_receipt": "CLOSEOUT.json"
 }
