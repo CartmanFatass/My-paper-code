@@ -1,7 +1,7 @@
 # FSD renewal-batch B01 / 770703 — exact execution and collection record
 
-**D0 accepted and dispatched to Monitor; adoption/terminal collection pending.
-I1280 is preselected and unlaunched.**
+**D0 complete and its primary accepted; I1280 accepted and dispatched to the
+native recovery Monitor. I adoption/terminal collection is pending.**
 This is the complete one-pair task from Portfolio option A, immutable response
 `ed0c4e1c3cd28be353253e8533bc89a261f25357`, applied through the
 [FSD execution mapping](../../portfolio/pro_packets/20260911_five_chain_refill/EXECUTION_MAPPING.md#fsd--complete-one-fresh-i1280d0-b-pair).
@@ -121,3 +121,66 @@ No additional numerical fixture or test scratch was created.
 Preservation and cleanup inventory will be prepared during collection; remove
 only completed owned roots after unique source/evidence preservation and Root's
 integration/retention reconciliation. Keep the shared authoring checkout.
+
+## D0 collection and dependent continuation — 2026-09-11T08:19:56.763Z
+
+Root routed adoption (PID3341743, active tmux, exact source/cwd) followed by
+terminal exit0/inactive tmux. DM then collected the three published primary
+files, admission, complete time receipt and six supervisor files. The three
+primary and both admission/time hashes match their remote originals. The
+initial manifest intentionally predates model construction; final configurations
+and learning appear in summary and the identical five-row training JSONL.
+See [D0 collection facts](uav_renewal_batch_b01_770703_20260911/D0_COLLECTION_FACTS.json)
+and [terminal/digest receipt](uav_renewal_batch_b01_770703_20260911/D0_TERMINAL.txt).
+
+Recorded-byte checks confirm the declared identity/configuration, CPU FP32/four
+threads, all five complete8000-transition learning stages,80 training episodes,
+two model constructions/one fit/no checkpoint loads, and the final32 ordered
+500-step episodes after update5. All numeric measurements are finite; each
+training stage has nonzero optimizer calls and parameter displacement, with525
+total coordinator calls as declared. Evaluator optimizer counts are all zero.
+All raw U and J values survive, with `J=6U/500` checked. D0 meanU is
+34.689537544953524 and meanJ is0.4162744505394423; episode sampleSD is
+0.11349368648111476 and conditionalSE0.020063038833164057. These are one
+completed control fit's observations, without a paired polarity or reliability claim.
+
+Complete D0 wall is519.94s≤900s; aggregate user+system CPU is2043.57s,
+and peak RSS is1620164KiB. Adjacent destination admission passed with
+15634173952 physical/effective available bytes. Summary's499.12669676193036s
+before publication is a different interval and does not replace complete wall.
+There was no extra environment, model, evaluation or numerical fixture.
+
+**Decisions this collection produces.** Options: (a) accept this complete
+own-arm primary and proceed with the already preselected I1280; (b) return a
+concrete dependent defect. Recommend/execute(a), with no selection based on D0's
+score and no additional allocation. **Owner-delegated decision (unattended,
+2026-09-03 instruction): (a).** This is technical acceptance of the control;
+the final pair reading, owner prediction score/brief and scientific intake remain pending.
+
+Root's current recovery Monitor is native `/root/monitor_fsd_rcle_20260911`.
+After I1280 acceptance send exact MONITOR_ADD there and record adoption separately.
+The configured app dispatch is historical; it is not the operative adoption route.
+Known FSD terminal-query cost0.598s is charged. Reported shared cumulative1.423s
+needs attribution; remaining shared/adoption overhead remains explicitly unknown.
+The original exact I command and c70f01ea3 source remain unchanged, using the
+fresh remote D0 summary and fresh adjacent destination admission; complete cap1800s.
+
+## I1280 accepted handover — 2026-09-11T08:22:37.618Z
+
+D0 collection/technical acceptance was committed and pushed at `07f60d525`
+before the I launch. I's exact existing command was then accepted by the remote
+supervisor as `fsd-uav-renewal-batch-b01-770703-I-20260911`, tmux
+`agent_fsd-uav-renewal-batch-b01-770703-I-20260911`. Execution remains at
+unchanged source `c70f01ea30d6c4d063dcc46d8499b26bfe037da8`; the fresh
+D0 companion's digest is in the [I dispatch receipt](uav_renewal_batch_b01_770703_20260911/I_DISPATCH.json).
+Adjacent admission and the complete1800-second KILL cap are part of the literal
+committed I command, with no new source, seed, fixture or validation episode.
+
+Exact MONITOR_ADD was sent natively to `/root/monitor_fsd_rcle_20260911`, with
+the accepted handle, source/cwd, cap, evidence roots, terminal route and cost
+attribution request; Root was also notified. **Native dispatch is confirmed;
+adoption is pending.** The earlier configured app Monitor delivery is a separate
+D0 event and was not repeated for I. DM stops routine polling. Actual I admission,
+learning, complete primary/pair readout and wall facts await routed terminal
+collection. Native message execution duration is unavailable and remains an
+explicit support-accounting limit. No third arm or automatic successor follows.
