@@ -1,0 +1,39 @@
+{
+  "recorded_utc": "2026-09-11T17:18:45.643Z",
+  "handle": "mgtap-cond-b01-8212-20260911",
+  "source_sha": "2814fbd3e24877464e4dd7c12df55c24567e8723",
+  "direct_supervisor": {
+    "status": "finished",
+    "exit_code": 0,
+    "pid": 3346551,
+    "tmux_active": false
+  },
+  "start_epoch": 1789145139,
+  "terminal_utc": "2026-09-11T16:51:43Z",
+  "native": {
+    "exit": 0,
+    "enclosing_wall_seconds": 364.79,
+    "COND_seconds": 192.9329937697621,
+    "DENSE_seconds_including_exit": 171.85700623023791,
+    "peak_RSS_KiB": 559056
+  },
+  "monitor": {
+    "adopted": true,
+    "terminal_routed_by": "Root",
+    "observation_command_seconds_approximate": 2.3,
+    "breakdown": "approximately1.0s adoption+1.3s terminal",
+    "other_components": "unknown"
+  },
+  "collection": {
+    "exact_source_head": true,
+    "source_status_clean": true,
+    "native_file_count": 6,
+    "archive_sha256": "b08986047da84cfc4afe5308afd809d3a2876c02177f5cd7e70a842358924288",
+    "archive_remote_local_match": true,
+    "individual_native_hashes_remote_local_match": true,
+    "supervisor_archive_sha256": "ff14a8533639933303047743c12a96ec0fe9a438a1bc26ae9b7acc7fe42603db",
+    "supervisor_archive_remote_local_match": true
+  },
+  "scientific_status": "VALID_B_INSIDE_MEI",
+  "primary": 0.005761321371348559
+}

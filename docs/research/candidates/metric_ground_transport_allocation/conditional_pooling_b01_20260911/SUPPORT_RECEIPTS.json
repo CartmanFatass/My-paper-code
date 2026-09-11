@@ -1,11 +1,14 @@
 {
-  "recorded_utc": "2026-09-11T16:47:23.046Z",
-  "accounted_support_seconds": 186.86340740000003,
+  "recorded_utc": "2026-09-11T17:19:39.106Z",
+  "accounted_support_seconds": 201.3589346,
   "bound_component_seconds": 142,
+  "approximate_monitor_observation_seconds": 2.3,
+  "native_complete_seconds": 364.79,
   "unknown_components": [
-    "Monitor adoption observation-command wall: reported unknown by Root; future observation/collection/publication/cleanup not yet incurred or complete"
+    "Unitemized Monitor/other invoked support work, if any; approximately reported Monitor command timings are not exact.",
+    "Subsequent publication/cleanup commands are appended at their completion."
   ],
-  "cap_certification": "No final support/complete cap certification from this subtotal; unknown is not a breach.",
+  "cap_certification": "Native450/450/900 caps pass. Full support300/complete1200 caps remain uncertified from this accounted subtotal; no breach inferred from unknown precision/terms.",
   "receipts": [
     {
       "phase": "initial_read_0",
@@ -120,7 +123,7 @@
       "status": "rejected",
       "wall_seconds": null,
       "exit_code": null,
-      "blocker": "exec_command failed: CreateProcess { message: \"Rejected(\\\"`\\\\\\\"C:\\\\\\\\\\\\\\\\Users\\\\\\\\\\\\\\\\fires\\\\\\\\\\\\\\\\.cache\\\\\\\\\\\\\\\\codex-runtimes\\\\\\\\\\\\\\\\codex-primary-runtime\\\\\\\\\\\\\\\\dependencies\\\\\\\\\\\\\\\\native\\\\\\\\\\\\\\\\powershell\\\\\\\\\\\\\\\\pwsh.exe\\\\\\\" -Command '$nativeTestRoot = [IO.Path]::GetFullPath('\\\\\\\"'C:/Projects/HMASD-worktrees/dm-n5-continue-20260904/temp/directions/metric_ground_transport_allocation/test/native_binding_8212'); \\\\\\\"'$nativeTempBoundary = [IO.Pa…419 chars truncated…= '\\\\\\\"'1'; try { python tests/experiments/candidates/metric_ground_transport_allocation/mgtap_conditional_pooling_b01/test_native_binding.py; \\\\\\\"'$nativeTestExit = $LASTEXITCODE } finally { if (Test-Path -LiteralPath $nativeTestRoot) { Remove-Item -LiteralPath $nativeTestRoot -Recurse -Force }; Write-Output ('\\\\\\\"'scratch_absent=' + (-not (Test-Path -LiteralPath \\\\\\\"'$nativeTestRoot))) }; exit $nativeTestExit'` rejected: blocked by policy\\\")\" }"
+      "blocker": "blocked by policy; no command process accepted"
     },
     {
       "phase": "first_allowed_checks_1",
@@ -282,6 +285,96 @@
       "phase": "monitor_add_dispatch",
       "status": "fulfilled",
       "wall_seconds": 0.827,
+      "exit_code": 0
+    },
+    {
+      "phase": "launch_and_adoption_receipt_publication",
+      "status": "fulfilled",
+      "wall_seconds": 0.021,
+      "exit_code": 0
+    },
+    {
+      "phase": "launch_receipt_commit_push",
+      "status": "fulfilled",
+      "wall_seconds": 4.7219857,
+      "exit_code": 0
+    },
+    {
+      "phase": "monitor_total_observation_work",
+      "status": "fulfilled",
+      "wall_seconds": 2.3,
+      "exit_code": 0
+    },
+    {
+      "phase": "terminal_collection_initial_0",
+      "status": "fulfilled",
+      "wall_seconds": 0.3048582,
+      "exit_code": 0
+    },
+    {
+      "phase": "terminal_collection_initial_1",
+      "status": "fulfilled",
+      "wall_seconds": 1.1646477,
+      "exit_code": 0
+    },
+    {
+      "phase": "terminal_preserve_and_intake_read_0",
+      "status": "fulfilled",
+      "wall_seconds": 0.4292559,
+      "exit_code": 0
+    },
+    {
+      "phase": "terminal_preserve_and_intake_read_1",
+      "status": "fulfilled",
+      "wall_seconds": 1.8210551000000001,
+      "exit_code": 0
+    },
+    {
+      "phase": "closed_artifact_preservation_and_analysis",
+      "status": "fulfilled",
+      "wall_seconds": 0.5976371,
+      "exit_code": 0
+    },
+    {
+      "phase": "intake_current_authority_and_endpoint_read",
+      "status": "fulfilled",
+      "wall_seconds": 0.6024907,
+      "exit_code": 0
+    },
+    {
+      "phase": "valid_result_scientific_intake_authoring",
+      "status": "fulfilled",
+      "wall_seconds": 0.023,
+      "exit_code": 0
+    },
+    {
+      "phase": "terminal_metadata_and_preservation_inventory",
+      "status": "fulfilled",
+      "wall_seconds": 0.9528248,
+      "exit_code": 0
+    },
+    {
+      "phase": "supervisor_unique_metadata_preservation",
+      "status": "fulfilled",
+      "wall_seconds": 1.3627072,
+      "exit_code": 0
+    },
+    {
+      "phase": "receipt_patch_rejected_before_write",
+      "status": "fulfilled",
+      "wall_seconds": 0,
+      "exit_code": 1
+    },
+    {
+      "phase": "receipt_shell_write_rejected_before_execution",
+      "status": "fulfilled",
+      "wall_seconds": 0,
+      "exit_code": 1
+    },
+    {
+      "phase": "support_receipt_data_read",
+      "status": "fulfilled",
+      "wall_seconds": 0.1940648,
       "exit_code": 0
     }
   ]
