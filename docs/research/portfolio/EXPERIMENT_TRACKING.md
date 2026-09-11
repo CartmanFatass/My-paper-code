@@ -33,6 +33,14 @@ A separate guarded cleanup command was rejected before process creation, leaving
 scratch preserved without affecting scientific readiness. FRRIE is now the sole advancing technical
 chain.
 
+FRRIE subsequently returned and Root accepted its source-only observation through `77028e93b`, with
+the two audit rows integrated through `6903e5d66`. The 76-line AST reader mapped all nine P59 frames
+across six unchanged files in two checks totaling 0.535 seconds without workload imports. The
+traceback line is a function declaration and the retained dump contains no attributable native fault
+context, so production source remains unchanged. A combined wrapper was rejected before execution;
+the narrower direct read-only method succeeded. P63 remains unrun and no old allowance was reused.
+The direction-local advancing count returns to zero pending Portfolio's decision.
+
 Root also delivered the owner's current Transport instruction to the configured singleton: retry the
 same exact payload after resolving a failure only when authoritative state proves non-acceptance/no
 external effect, and process the resulting receipt itself. An uncertain or accepted Send is first
