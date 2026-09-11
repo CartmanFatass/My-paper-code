@@ -1,5 +1,10 @@
 # UCOPE post8801 Convergence — preparation intake
 
+Current execution state, 2026-09-11: **PRO_BLOCKED before Send; the same request
+is queued**. Transport's owning-account browser surface is unavailable. Send
+count is zero, and no Pro direction decision exists. The published handoff
+below remains the fixed recovery input; the final section records the receipt.
+
 ## 1. Assignment and current boundary
 
 Portfolio PRO_FINAL option A, immutable response
@@ -214,3 +219,55 @@ after dispatch and resume /root/dm_ucope_restart_recovery2 for the complete
 immutable response/conformance intake. Until then there is no new direction
 verdict or numerical allocation. No independent work is pending under this
 zero-numerical authoring assignment.
+
+## Pre-send blocker and recovery boundary — 2026-09-11
+
+Root forwarded the authoritative Transport pre-send receipt for
+2026-09-11-ucope-post8801-convergence-01 and assigned this documentation-only
+closeout. Read the complete source BLOCKER_FACTS.json recorded at
+2026-09-11T08:17:08Z; its byte-identical durable copy is
+[PRE_SEND_BLOCKER_FACTS.json](PRE_SEND_BLOCKER_FACTS.json), SHA256
+40d5f5e84156ab3e0db844b73444faa0afb431c2bc6b8f85ca24108f51112e6b.
+The original is under
+C:/Projects/HMASD/temp/sessions/hmasd-chatgpt-pro-transport/archive/ucope/2026-09-11-ucope-post8801-convergence-01--pre-send-blocker/.
+
+Root reports packet validation PASS, no Issue11 delivery and the observed
+remote codex/ucope at279d4cdb89e0865447aed8b51244d515ca8f7130. Transport records
+zero Send clicks, provider_send_accepted=false and composer_text_entered=false.
+It observed only Edge Profile1, where the exact bound URL returned
+“You don’t have access to this conversation”. After Root queued that URL and
+Transport reset/rechecked the available surfaces, the in-app browser remained
+unavailable. These are reported access and delivery observations; this DM
+performed no additional browser action or account substitution.
+
+The binding remains em:ucope:convergence, conversation
+6a9c6b1c-1c34-83e8-8ebc-dee64b334240. Its preceding request was ARCHIVED and
+the binding was not mutated. The fixed prompt SHA256 is
+843daecccc51634379991b62bc92d1810ecd0c13a7eb1083a093e6cf71ec59fe;
+the DM recomputed that delivery-text digest from the preserved HANDOFF and it
+matches the receipt. TASK atc86f7d93977d291eca65a45b61cc1795f0f07512,
+HANDOFF at279d4cdb89e0865447aed8b51244d515ca8f7130, the question, response
+path and original conversation are unchanged.
+
+AGENTS §3 applies verbatim: “**Direction and Portfolio tiers**: the direction
+parks at a clean boundary (everything committed, runs detached, state
+recoverable from the repository) and Root advances independent authorized work.
+Nothing is decided provisionally at these tiers.” This is an execution wait
+at the clean direction boundary, without a Portfolio lifecycle change. No
+answer exists for scientific/specification intake; the8801 evidence and DM
+advice retain their prior meanings and gain no scientific polarity from this
+access failure. No local direction choice, numerical work, implementation,
+new request, alternate conversation/account or resend is authorized here.
+
+The same unsent request remains queued for Root and the dedicated Transport
+to recover only when a browser surface authenticated to the owning account
+is available. Transport retains reconciliation and any eventual single Send;
+Root routes its complete immutable response back to this DM for the already
+allocated full intake. The current bounded task ends after publication of this
+receipt. No automatic Send or additional consultation series follows this record.
+
+At this boundary the authoring checkout was clean at279d4cdb89e0865447aed8b51244d515ca8f7130.
+Primary-main owner reviews returned[] at1a97ffc90467e68f71b2013e679f57d0e6c1da38.
+There is no new card or formed direction decision, so this technical fact is
+recorded here and in the audit ledger without a P1/P2 decision item.
+All new scientific-exposure entries remain zero. Scope §4 additions: none.
