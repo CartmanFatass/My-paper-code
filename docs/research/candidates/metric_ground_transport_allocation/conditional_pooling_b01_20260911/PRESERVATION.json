@@ -12,7 +12,9 @@
     "remote_local_match": true,
     "raw_metadata_and_log_preserved": true
   },
-  "pending_cleanup": [
+  "removed": true,
+  "shared_authoring_checkout_retained": "C:/Projects/HMASD-worktrees/dm-n5-continue-20260904",
+  "inventory": [
     {
       "path": "/home/wu/hmasd-worktrees/mgtap-cond-b01-8212-20260911",
       "kind": "completed detached exact-source worktree",
@@ -50,6 +52,7 @@
       ]
     }
   ],
-  "removed": false,
-  "shared_authoring_checkout_retained": "C:/Projects/HMASD-worktrees/dm-n5-continue-20260904"
+  "cleanup_completed_utc": "2026-09-11T17:27:28.855Z",
+  "cleanup_record": "CLEANUP.json",
+  "root_integration_sha": "811f353382721a87e8aa6596bac4271165889f81"
 }
