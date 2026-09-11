@@ -1,8 +1,18 @@
 # Four-slot request delivery status
 
-**BLOCKED / PARTIAL_RESPONSE — no Portfolio decision.** Root forwarded the accepted-Send
-terminal blocker; the designated DM's fresh GitHub check at
-`2026-09-11T01:22:00.398184+00:00` found no later complete response or matching delivery comment.
+**WAITING_GENERATION after OWNER_DIRECT Root resend — no Portfolio decision yet.** The owner
+instructed Root to resend this exact request personally. At
+`2026-09-11T03:35:17.603414+00:00`, Root verified the original bound conversation,
+`6 Pro` and `Pro, 5 of 5`, pasted the canonical HANDOFF prompt, and clicked Send once.
+The exact new user-message node appeared with the fixed TASK link and the provider entered
+`Pro 思考中`; no retry or generation control was used. The prior `BLOCKED / PARTIAL_RESPONSE`
+record and Transport's two-click history remain preserved below. This accepted resend has not
+yet produced a response or Portfolio decision. Exact facts:
+[`OWNER_DIRECT_RESEND_FACTS.json`](OWNER_DIRECT_RESEND_FACTS.json).
+
+Before that owner-directed resend, Root forwarded the accepted-Send terminal blocker; the
+designated DM's fresh GitHub check at `2026-09-11T01:22:00.398184+00:00` found no later complete
+response or matching delivery comment.
 
 The fixed request remains `2026-09-10-four-slot-rolling-refill-01`, TASK
 `0a49fcc5659723e260f4d64d9892d25d3234b16c`, bound HANDOFF
