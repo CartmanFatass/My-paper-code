@@ -11,11 +11,11 @@
 
 三句话：
 
-1. **上次崩溃的成因未定，本机配置里有充分的路径冲突素材。** 初版把它归给上游缺陷，
-   那是从 issue 反推的，证据不足，已收回（见第 10 节）。同一时期确有上游缺陷，
-   但本机配置里同时存在 51 条 Windows 盘符项目条目、两条 `\\?\` 扩展长度的
-   marketplace 源、若干 `.exe` 命令，以及一条 `CODEX_CLI_PATH` 指向 Windows 的
-   `codex.exe`，任何一条在 Linux 侧都无法解析（见 6.3）。切换前先按 6.3 清一遍。
+1. **切换前有一份按官方配置文档推出的准备清单，不做完就会出问题。** 最关键的一条是
+   信任条目：本机 51 条全部以 Windows 盘符为键，WSL 下项目路径变成 `/mnt/c/...`，
+   匹配不上；而文档规定未信任的项目不加载任何项目级 `.codex/` 层。结果是本仓库的
+   七个 agent 定义和 agentify MCP **静默失效**。完整清单见 6.3。
+   上次崩溃的具体成因未定，初版归给上游缺陷是从 issue 反推的，已收回（见第 10 节）。
 2. **性能账上，全 Linux 终局确实比现状便宜，而且不是只便宜一点。** 进程创建快 33 倍，
    解释器启动快 4.4 倍，同侧逐文件读取快 3.8 倍。跨环境调用 Agentify 的代价是每次 38–81 ms，
    在任何合理的调用频率下都可以忽略。
@@ -285,11 +285,36 @@ WSL 的 `~/.codex`，并列出了由此产生的配置漂移。它是一份**尚
 它可以留在 Windows 侧由 WSL 通过 interop 调用，但 MCP 的 command 必须改写成 interop
 形式，不能照抄 `command = "node"`。按 3.3 的实测，这种调用每次 38–81 ms。
 
-### 6.3 配置里的 Windows 专用路径（切换前必须清的一份清单）
+### 6.3 按官方配置文档推出的切换前清单
+
+本节的每一条都来自 Codex 的配置文档，不是从 issue 反推的。
+
+#### 6.3.1 最重要的一条：项目会变成未信任，于是项目级配置整份失效
+
+文档对信任与项目级配置层的规定：
+
+> For security, Codex loads project `.codex/` layers only when you trust the project.
+> If the project is untrusted, Codex ignores project `.codex/` layers, including
+> `.codex/config.toml`, project-local hooks, and project-local rules.
+
+MCP 页面重复了同一条：项目级 MCP server 是 **trusted projects only**。
+
+信任条目的键是路径。本机 51 条全部是小写化的 Windows 盘符路径，例如
+`[projects.'c:\projects\my-lib']`，POSIX 键 0 条。而 WSL 模式下同一个项目的路径是
+`/mnt/c/Projects/HMASD`。
+
+于是链条是：**路径形式变了 → 匹配不到信任条目 → 项目未信任 → 项目级
+`.codex/config.toml` 整份不加载**。对本仓库，这意味着七个 `[agents.HMASD*]` 定义、
+`[features] multi_agent_v2`、`[agents] max_concurrent_threads_per_session = 40`
+以及 `mcp_servers.agentify-desktop` 全部静默失效，而不是报错。
+
+文档没有写跨 Windows/POSIX 两种路径形式时键如何归一化，所以这一条需要在 7.2 里实测确认。
+准备动作是明确的：切换前为 `/mnt/c/Projects/HMASD` 补一条信任条目。
+
+#### 6.3.2 用户级配置里的 Windows 专用路径
 
 按 6.2，app 在两种 agent environment 下用的都是 `%USERPROFILE%\.codex`。
-所以 WSL 模式下，Linux 侧的 app-server 要加载的正是下面这份满是 Windows 绝对路径的配置。
-这是本机最具体的"路径冲突"来源，也是切换前唯一真正需要动手的准备。
+所以 WSL 模式下，Linux 侧的 app-server 加载的正是下面这份配置。
 
 用户级 `%USERPROFILE%\.codex\config.toml`（990 行，2026-09-10 实测）：
 
@@ -310,10 +335,56 @@ WSL 的 `~/.codex`，并列出了由此产生的配置漂移。它是一份**尚
 | --- | --- | --- |
 | `[mcp_servers.agentify-desktop] args` | `['C:\Projects\agentify-desktop\bin\agentify-desktop.mjs', "mcp"]` | node 拿到 Windows 路径，起不来 |
 
+关于 `marketplaces.<name>.source`，配置参考的原话是
+"Use an absolute path for a local source"。`\?\C:\...` 是合法的 Windows 绝对路径，
+在 Linux 侧不是。`notify` 的定义是 "Command invoked for notifications"，
+文档同时说明项目级配置会忽略 `notify` 并在启动时打印警告，所以它只在用户级生效。
+
+`CODEX_CLI_PATH` **不在配置参考里**。本机它出现在 `[mcp_servers.node_repl.env]` 下，
+只是传给那一个 MCP server 的环境变量，不是全局的 CLI 定位器。
+初版把它当成 #28086 那个全局变量，范围说大了。
+
 还有一条要知道的性质：**这些路径是应用自己生成并持续重写的**，不是你手写的。
 本次会话内实测，`config.toml` 在 22:01:55 被重写过一次，其中
 `runtimes\cua_node\<hash>` 的哈希与两小时前那次读取不同。所以清理之后要复查，
 应用更新或重启可能把 Windows 路径写回来。
+
+#### 6.3.3 文档给出的分环境配置机制：profile
+
+配置文档描述的层叠顺序，由低到高：
+
+1. 用户级 `~/.codex/config.toml`
+2. profile 覆盖层 `~/.codex/<profile-name>.config.toml`，需 `--profile <name>` 选中
+3. 项目级 `.codex/config.toml`，自工作目录向上逐层加载
+4. CLI 覆盖
+
+> Profiles let you save named configuration layers and switch between them from the CLI.
+
+这是文档给出的"同一台机器上保留两套设置"的正式机制。本机**没有任何 profile 文件**。
+需要注意它不随 agent environment 自动切换：`profile` 是一个配置键，选中后全局生效，
+所以切换 agent environment 时要同时改这个键。
+
+#### 6.3.4 一个未完成的文档化步骤
+
+配置参考里有一个键 `windows_wsl_setup_acknowledged`，布尔值，
+用途是记录 Windows 侧针对 WSL 配置的 onboarding 确认。
+
+本机 `config.toml` 与 `.codex-global-state.json` 里**都没有这个键**。
+也就是说这台机器从未走完（或从未记录）那一步确认。切换时留意应用是否弹出该引导，
+并在事后确认这个键出现。
+
+#### 6.3.5 文档建议与本机实测冲突的一处
+
+Windows 应用文档对项目位置的建议是：
+
+> prefer storing projects on your Windows filesystem and accessing them from WSL through
+> `/mnt/<drive>/...`，"more reliable than opening projects directly from the WSL filesystem"
+
+这正是第 5 节里的配置 B。文档是从**可靠性**角度说的（`\wsl$` 下 git 检测不到等问题），
+而 3.1 的实测是从**性能**角度说的：本仓库在这个组合下 `git status` 要 82 秒。
+两者不矛盾但指向相反的选择。对本仓库的规模，B 不可用；文档的建议适用于小仓库。
+文档同时说明：WSL1 自 Codex 0.115 起不再支持，且应用**不会**在发行版里安装 Codex CLI，
+需要自备（本机已有 0.154.0）。
 
 ### 6.4 治理声明
 
@@ -390,9 +461,12 @@ remote_receipt_admits_local = false
   半 Windows 半 Linux 的混合会话（#28086）。
 - 按 6.2，**不需要**预先改 `/home/fires/.codex/config.toml`。那是 WSL CLI 的家目录，
   按文档与 app 无关。切换前先把它当天的 mtime 记下来，作为下面那项检查的基线。
-- **按 6.3 清一遍 Windows 专用路径**，用户级和项目级两份都要。这是切换前唯一
-  真正需要动手的准备，也是本机最可能的崩溃来源。清完记录 `config.toml` 的 mtime，
-  切换后复查一次，确认应用没有把 Windows 路径写回来。
+- **按 6.3 做完四件事**，这是切换前真正需要动手的准备：
+  1. 为 `/mnt/c/Projects/HMASD` 补一条信任条目（6.3.1）。不补，项目级
+     `.codex/config.toml` 整份不加载，七个 agent 定义和 agentify MCP 静默失效。
+  2. 处理用户级配置里的 Windows 专用路径（6.3.2），或按 6.3.3 用 profile 覆盖。
+  3. 留意 `windows_wsl_setup_acknowledged` 引导（6.3.4）。
+  4. 清完记录 `config.toml` 的 mtime，切换后复查，应用会重写它。
 
 冒烟集，五项对应五个已知缺陷，任一失败即回滚：
 
@@ -403,6 +477,8 @@ remote_receipt_admits_local = false
 | 任意线程跑一条 shell 命令 | 不报 `invalid transport` | #40732 |
 | 改一个文件并 `git status` | 结果正确 | 常规 |
 | 核对 agent 实际生效的模型与审批策略 | 与 Windows 侧一致，且 `/home/fires/.codex` 没有新写入 | #22759 |
+| 在一次性项目里确认项目级 `.codex/config.toml` 仍被加载 | 项目显示为 trusted，项目级键生效 | 6.3.1 |
+| 确认启动时没有配置警告 | 无 Windows 路径相关告警 | 6.3.2 |
 
 切换方式：设置里改 Agent environment，**从托盘完全退出**，再启动。不是关窗口。
 
@@ -518,7 +594,19 @@ integratedTerminalShell = "gitBash"
 已把第 2 节拆成 2.1（本机可查的配置路径冲突）与 2.2（同期的上游缺陷），
 不再给单一结论；新增 6.3 作为切换前的路径清单；结论第 1 条相应改写。
 
-三次更正的共同原因是同一个：从外部材料推断本机状态，而没有先读本机的配置和证据。
+### 更正四：应该先读配置文档
+
+前三次更正之后，owner 指出真正的问题是我既没读本机内容也没读 OpenAI 文档，
+只在 GitHub issue 之间打转。据此重读了配置文档（配置参考、进阶配置、MCP、Windows 应用），
+6.3 整节改写为从文档推出的清单，其中 6.3.1 的信任条目链条是之前完全没有发现的，
+而它是本机切换后最可能出问题的一条，因为它**静默失效**而不是报错。
+
+同时收窄了一处范围：`CODEX_CLI_PATH` 不在配置参考里，本机它只是
+`[mcp_servers.node_repl.env]` 下传给单个 MCP server 的环境变量，
+不是 #28086 说的那个全局 CLI 定位器。
+
+四次更正的共同原因是同一个：从外部材料推断本机状态，而没有先读一手文档与本机配置。
+正确的顺序是文档、本机配置、实测，最后才是 issue。
 
 ---
 
