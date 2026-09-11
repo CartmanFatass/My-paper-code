@@ -107,3 +107,28 @@ allocated one-pair native COND/DENSE final-return comparison described by the
 Convergence decision. Its512 training episodes per arm,32 final episodes per arm
 and native time are still unallocated. This return supplies tested implementation
 facts for Root; it does not authorize that next run or claim an empirical benefit.
+
+## Accepted scoped cleanup — 2026-09-11
+
+Root integrated and pushed the accepted return through main
+`a3d148747709516f174a6f0e1fd257d0d1603efb`, accepted preservation, and assigned
+deletion of the three copied runtime files only. This DM verified their original
+SHA-256 digests and byte-identical evidence copies, and confirmed that both copies
+map to the accepted main Git blobs before removal. One initial non-destructive
+comparison stopped at `admission.json`; correcting the quoted Git `--path` argument
+reconciled the comparison before any deletion. No evidence difference remained.
+
+At `2026-09-11T08:21:20.6539758Z`, `admission.json`, `COMMAND_RECEIPT.json` and
+`summary.json` were removed from the named runtime directory and individually
+verified absent. The [cleanup record](conditional_pooling_implementation_20260911/CLEANUP.json)
+retains exact paths, sizes, digests, accepted blobs and absence facts. The directory
+is now empty and remains because the assignment named files only. Creator test
+scratch remains absent; the shared authoring checkout exists and stays registered.
+
+Object-tier technical choice: (a) complete the exact Root-assigned cleanup after
+accepted preservation; (b) return a concrete preservation/ownership conflict if
+one remains. Recommend and execute (a). **Owner-delegated decision (unattended,
+2026-09-03 instruction): (a)** under Root's explicit closeout instruction. Owner
+flag: none. Primary-control owner reviews were `[]` at this boundary. No fixture,
+test, model, environment, numerical analysis or future B was invoked or allocated.
+The duplicate-file cleanup is complete; no dependent gap remains.
