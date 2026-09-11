@@ -24,7 +24,7 @@
     }
   ],
   "recommended": "A",
-  "auto_applied": null,
+  "auto_applied": "A",
   "dm_reason": "DM建议A：分别为FSD、FOLR、MGTAP、ACVC、VNFC选择一个新的有限B研究单元，总提议上限9600秒，各方向及子项互不转账。技术修复独立推进；VNFC须有被接受的相关修复。此处只发布建议，Portfolio尚未裁决或放款。",
   "evidence": [
     "docs\\research\\portfolio\\pro_packets\\20260911_open_directions_program\\SCIENCE_BRIEF.md",
@@ -89,7 +89,7 @@
     "source": "docs/research/portfolio/pro_packets/20260911_open_directions_program/PREPARATION_INTAKE.md"
   },
   "starred": true,
-  "approval_correction": "并发FSD审计追加后，本作者发布记录的正确链接为 docs/research/portfolio/audit/2026-09-11.md#L71；条目原始L70链接保留为创建时记录。没有owner答复或科学放款。",
+  "approval_correction": "当前裁决审计行为 docs/research/portfolio/audit/2026-09-11.md#L84（本作者分支），合规行L83；较早L82链接保留为同步前历史。当前完整中文材料见 docs/research/portfolio/pro_packets/20260911_open_directions_program/INTAKE_OWNER_PACKET.json。",
   "execution_history": [
     {
       "at": "2026-09-11T20:13:03+00:00",
@@ -99,6 +99,24 @@
       "state": "planned",
       "summary": "建议仍未执行；当前ACVC/FSD修复均已接受，VNFC是唯一推进的技术链。新研究建议A或更小方案由Portfolio裁决；完整更新见引用材料。",
       "correction": "并发FSD审计追加后，本作者发布记录的正确链接为 docs/research/portfolio/audit/2026-09-11.md#L71；条目原始L70链接保留为创建时记录。没有owner答复或科学放款。"
+    },
+    {
+      "at": "2026-09-11T21:26:50+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260911_open_directions_program/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/decisions/2026-09-11-open-directions-research-program.md",
+      "state": "applied",
+      "summary": "完整回复已由原作者DM确认合规；Pro选择A，Root已派出五条原DM链。后续MGTAP运行并接管，FOLR/ACVC继续，FSD770903零暴露交付失败、VNFC未就绪且900秒有条件排队。两空位无自动替补；Root另委托新Portfolio问题。",
+      "correction": "原建议及创建时链接保留历史。当前裁决、比较器勘误和实际状态见 docs/research/portfolio/pro_packets/20260911_open_directions_program/INTAKE_OWNER_PACKET.json；新裁决审计行 docs/research/portfolio/audit/2026-09-11.md#L82。ACVC按原卡自身历史比较，未修改冻结材料。无owner答复或等待。"
+    },
+    {
+      "at": "2026-09-11T21:28:54+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260911_open_directions_program/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/decisions/2026-09-11-open-directions-research-program.md",
+      "state": "applied",
+      "summary": "仅同步并发审计引用：已保留main新增FOLR/ACVC绑定记录，A实际派发和后续两空位状态不变；当前中文包及brief已更新。",
+      "correction": "当前裁决审计行为 docs/research/portfolio/audit/2026-09-11.md#L84（本作者分支），合规行L83；较早L82链接保留为同步前历史。当前完整中文材料见 docs/research/portfolio/pro_packets/20260911_open_directions_program/INTAKE_OWNER_PACKET.json。"
     }
   ]
 }
