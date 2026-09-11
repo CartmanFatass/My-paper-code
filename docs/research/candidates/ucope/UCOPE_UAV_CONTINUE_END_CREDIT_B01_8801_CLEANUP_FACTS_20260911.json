@@ -1,0 +1,141 @@
+{
+  "recorded_at_utc": "2026-09-11T06:15:30.902961+00:00",
+  "root_integration": "main b2fe78755, Root confirmation after result bbe7958cb",
+  "root_assigned_scope": [
+    "/home/wu/hmasd-worktrees/ucope-continue-end-credit-b01-8801-20260911",
+    "/home/wu/.agent-tasks/ucope-continue-end-credit-b01-8801-20260911",
+    "/home/wu/hmasd-inputs/ucope-continue-end-credit-b01-8801-source.pack",
+    "/home/wu/hmasd-inputs/ucope-continue-end-credit-b01-8801-20260911-memory.json",
+    "/home/wu/hmasd-inputs/ucope-continue-end-credit-b01-8801-20260911-evidence.tar.gz"
+  ],
+  "corrected_remaining_command": "set -eu\ngit -C /home/wu/projects/HMASD worktree remove --force -- /home/wu/hmasd-worktrees/ucope-continue-end-credit-b01-8801-20260911\nrm -f -- /home/wu/.agent-tasks/ucope-continue-end-credit-b01-8801-20260911/task.log\nrmdir -- /home/wu/.agent-tasks/ucope-continue-end-credit-b01-8801-20260911\nrm -f -- /home/wu/hmasd-inputs/ucope-continue-end-credit-b01-8801-20260911-evidence.tar.gz\ntest ! -e /home/wu/hmasd-worktrees/ucope-continue-end-credit-b01-8801-20260911\ntest ! -e /home/wu/.agent-tasks/ucope-continue-end-credit-b01-8801-20260911\ntest ! -e /home/wu/hmasd-inputs/ucope-continue-end-credit-b01-8801-source.pack\ntest ! -e /home/wu/hmasd-inputs/ucope-continue-end-credit-b01-8801-20260911-memory.json\ntest ! -e /home/wu/hmasd-inputs/ucope-continue-end-credit-b01-8801-20260911-evidence.tar.gz\ngit -C /home/wu/projects/HMASD worktree list --porcelain\n",
+  "exit_code": 0,
+  "stderr": "",
+  "input_transport": "explicit UTF-8 LF bytes, no Windows text newline conversion",
+  "initial_attempt": {
+    "exit_code": 129,
+    "stderr": "not retained by initial subprocess check=True exception",
+    "removed": "source pack, admission and five supervisor files",
+    "remaining_after_authoritative_readback": "execution checkout and registration; supervisor task.log; remote evidence archive",
+    "cause": "Windows text newline translation is the inferred delivery cause; the original stderr is unavailable",
+    "scientific_invocations": 0
+  },
+  "wall_seconds": 0.44476539999595843,
+  "remote_paths_absent_on_disk": [
+    "/home/wu/hmasd-worktrees/ucope-continue-end-credit-b01-8801-20260911",
+    "/home/wu/.agent-tasks/ucope-continue-end-credit-b01-8801-20260911",
+    "/home/wu/hmasd-inputs/ucope-continue-end-credit-b01-8801-source.pack",
+    "/home/wu/hmasd-inputs/ucope-continue-end-credit-b01-8801-20260911-memory.json",
+    "/home/wu/hmasd-inputs/ucope-continue-end-credit-b01-8801-20260911-evidence.tar.gz"
+  ],
+  "remote_worktree_registration_absent": true,
+  "reclaimed_checkout_bytes": 47354344,
+  "reclaimed_source_pack_bytes": 36226108,
+  "reclaimed_staging_archive_bytes": 1756246,
+  "supervisor_and_admission_also_removed": true,
+  "preserved_local_archive": "C:\\Projects\\HMASD-worktrees\\dm-ucope-native-return-prep-20260906\\temp\\directions\\ucope\\exp\\uav_continue_end_credit_b01_8801_collection\\evidence.tar.gz",
+  "preserved_local_archive_sha256": "beeb1e5dfcf2e08ea1a915dc82fe4166d7cd137ef9ee6c9fc5ade72105863602",
+  "preserved_shared_checkout": "C:\\Projects\\HMASD-worktrees\\dm-ucope-native-return-prep-20260906",
+  "creator_test_scratch": "untouched; prior automatic policy blocked both cleanup payloads before process creation",
+  "local_preparation_pack": {
+    "path": "C:\\Projects\\HMASD-worktrees\\dm-ucope-native-return-prep-20260906\\temp\\directions\\ucope\\exp\\uav_continue_end_credit_b01_8801_preparation\\source.pack",
+    "bytes": 36226108,
+    "sha256": "6fab271637cbe60a1eec59f138f61b48e8b1c2ec9b6bd3021c4fea2a832a81cf",
+    "absent": true,
+    "retained_source": "471a3383d23b16bb01469a6f30e3987910c3e47f in origin/codex/ucope and Root-integrated main b2fe78755",
+    "retained_preparation_receipts": [
+      "PREPARATION_TRANSFER.json",
+      "PREPARED_DESTINATION.json"
+    ],
+    "test_scratch": "untouched"
+  },
+  "publication_readback": {
+    "result_commit": "bbe7958cb32a4746f56ab5b7e1a84d909f95489e",
+    "upstream_at_publication": "bbe7958cb32a4746f56ab5b7e1a84d909f95489e",
+    "native_summary_committed_blob_sha256": "9f8187b279f15485524cf3ad9dc785ed45f2e0509ff1f4e15780ff647ee16282",
+    "tracked_checkout_clean": true,
+    "shared_checkout": "C:/Projects/HMASD-worktrees/dm-ucope-native-return-prep-20260906",
+    "source_sha": "471a3383d23b16bb01469a6f30e3987910c3e47f"
+  },
+  "root_integrated_main_sha": "b2fe78755f0fae16bbd715fcfa704f01a5166afc",
+  "launch_source_surfaces_equal_integrated_main": true,
+  "source_surface_comparison": [
+    "experiments/candidates/ucope/uav_motion_prefix_b01/policy.py",
+    "experiments/candidates/ucope/uav_motion_prefix_b01/learner.py",
+    "experiments/candidates/ucope/uav_continue_end_credit_b01/credit.py",
+    "experiments/candidates/ucope/uav_continue_end_credit_b01/study.py",
+    "experiments/candidates/ucope/uav_continue_end_credit_b01/command.sh",
+    "scripts/run_ucope_uav_continue_end_credit_b01.py"
+  ],
+  "final_closeout_commands_before_receipt_publication": [
+    {
+      "label": "write durable E0, intake, analysis, preservation inventory, brief and audit",
+      "seconds": 0.20012
+    },
+    {
+      "label": "review scoped docs diff and owner brief",
+      "seconds": 0.5047403
+    },
+    {
+      "label": "current main owner-review boundary",
+      "seconds": 0.4075548
+    },
+    {
+      "label": "check result links, brief headings, cost arithmetic and final document diff",
+      "seconds": 0.3405377
+    },
+    {
+      "label": "commit and immediately push completed result/intake/brief by explicit paths",
+      "seconds": 5.3205776
+    },
+    {
+      "label": "verify published result commit, clean direction branch and exact native-summary Git blob",
+      "seconds": 0.4405154
+    },
+    {
+      "label": "fresh terminal/process/registration/unique-file and local-archive checks for Root-assigned reclamation",
+      "seconds": 0.8706373
+    },
+    {
+      "label": "reclaim exact Root-assigned remote execution/supervisor/staging paths and verify disk/registration absence",
+      "seconds": 0.6354903
+    },
+    {
+      "label": "reconcile failed cleanup Git exit129 before any retry; preserve authoritative existence/registration and usage",
+      "seconds": 0.7885657
+    },
+    {
+      "label": "verify exact partial cleanup effect and all remaining source/evidence before corrected delivery",
+      "seconds": 0.7892381
+    },
+    {
+      "label": "complete reconciled remote cleanup with LF bytes and verify all five disk paths plus registration absent",
+      "seconds": 0.6300155
+    },
+    {
+      "label": "inventory retained local preparation and evidence receipts for final retention record",
+      "seconds": 0.2634123
+    },
+    {
+      "label": "remove verified redundant local committed-source pack while retaining unique preparation receipts",
+      "seconds": 0.2127544
+    },
+    {
+      "label": "confirm Root integration retains all six launch-source surfaces",
+      "seconds": 0.2607843
+    },
+    {
+      "label": "final owner review boundary after cleanup",
+      "seconds": 0.3143029
+    }
+  ],
+  "final_closeout_command_wall_before_receipt_s": 11.9792466,
+  "remaining_receipt_publication_charge_s": 15,
+  "final_closeout_retained_charge_s": 40,
+  "closeout_accounting": "Observed commands plus15s for this receipt write/check/commit/push/readback fit within the existing40s conservative charge. No additional40 or15 is added to total support. Exact complete support overhead remains unmeasured.",
+  "current_owner_reviews": "[] at final main boundary; no unapplied instruction",
+  "unique_retained_preparation_receipts": [
+    "temp/directions/ucope/exp/uav_continue_end_credit_b01_8801_preparation/PREPARATION_TRANSFER.json",
+    "temp/directions/ucope/exp/uav_continue_end_credit_b01_8801_preparation/PREPARED_DESTINATION.json"
+  ]
+}

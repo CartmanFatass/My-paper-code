@@ -107,8 +107,8 @@ charges **254.4329552s** within300s and complete native plus support
 11.2746888s measured collection commands,
 45s Monitor charge and40s final document/cleanup/publication charge. Monitor
 query wall16.479s is measured; its28.521s additional charge is not measured
-overhead. Likewise40s is a conservative closeout charge to be compared with
-returned command time. No measured or charged breach is observed; exact total
+overhead. Likewise40s is a conservative closeout charge; the final cleanup receipt
+compares observed commands plus receipt publication against that charge. No measured or charged breach is observed; exact total
 support elapsed is not established. Mark **resources_unmeasured** for this
 support-telemetry gap and aggregate CPU. Neither limits the trustworthy primary.
 
@@ -120,17 +120,26 @@ retain the original paths and checksums. Native summary SHA256:
 `9f8187b279f15485524cf3ad9dc785ed45f2e0509ff1f4e15780ff647ee16282`.
 Complete archive1756246bytes, SHA256
 `beeb1e5dfcf2e08ea1a915dc82fe4166d7cd137ef9ee6c9fc5ade72105863602`,
-is retained both at remote
-`/home/wu/hmasd-inputs/ucope-continue-end-credit-b01-8801-20260911-evidence.tar.gz`
-and in this direction checkout's
+was initially retained at the remote staging location and in this direction
+checkout's
 `temp/directions/ucope/exp/uav_continue_end_credit_b01_8801_collection/evidence.tar.gz`.
-It contains raw training/evaluation/rollout rows, both final checkpoints,
-arm summaries, supervisor terminal output and admission. Remote checkout
-47354344bytes is terminal and tracked-clean; reclamation is separate.
+The local archive remains verified and contains raw training/evaluation/rollout
+rows, both final checkpoints, arm summaries, supervisor output and admission.
+After Root confirmed integration on main b2fe78755 and local retention, the
+47,354,344-byte remote checkout, its registration, supervisor, source pack,
+admission and remote archive staging path were removed and verified absent.
+The redundant local source pack was also removed after its digest check; two
+unique preparation receipts remain. The shared authoring checkout stays active.
+See the [cleanup receipt](UCOPE_UAV_CONTINUE_END_CREDIT_B01_8801_CLEANUP_FACTS_20260911.json).
 
 The earlier test-scratch deletion rejection is **blocked by policy**, twice
 before process creation. No deletion succeeded and no bypass was attempted.
-This is an outstanding cleanup restriction, not a scientific failure. The
+This is an outstanding cleanup restriction, not a scientific failure.
+A remote cleanup text-delivery attempt returned129 after removing only the
+source pack, admission and five supervisor files. Authoritative remaining-state
+and archive checks preceded a successful LF-byte completion of the same
+authorized scope. Original stderr was not retained; newline translation is an
+inferred cause. No scientific run or evidence loss followed from this incident. The
 initial failed source fetch also created no run and was reconciled before the
 single accepted launch. Frozen science and invocation count were unchanged.
 
