@@ -1,0 +1,173 @@
+{
+  "caller_role": "em",
+  "workflow_node": "em_convergence",
+  "request_id": "folr-learned-retention-convergence-20260911",
+  "source_thread_id": "01a08ed9-f1da-71c2-948f-a09c3c2d9b64",
+  "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "direction_id": "vap_folr_core",
+  "repository": "CartmanFatass/My-paper-code",
+  "repository_url": "https://github.com/CartmanFatass/My-paper-code",
+  "commit_or_ref": "cb5d883bcaf614a1b0817b322f72462c954853e1",
+  "execution_mode": "REUSE_SINGLETON",
+  "delivery_mode": "github_delivery",
+  "conversation_id": "6aa18137-9d88-83e8-a01f-46630813faf8",
+  "scientific_question": "Decide whether to open the particular learned-retention candidate in FOLR_LEARNED_RETENTION_CANDIDATE_20260911.md for a later separately allocated B, or make no new family investment. This is the one original-node design/question/intake selected by current Portfolio. The DM recommends narrow opening as an UNEXECUTED CLOSE CALL. Its strongest alternative is generic event-aware RETAIN with no successor: its GRU already learns input/history-dependent gates from the same public event and own-birth inputs. A new scalar has no information advantage and could be redundant, destroy useful memory or worsen optimization. Do not assume a theorem of redundancy or that adaptive retention is necessary because old fixed-half signs differ.\n\nThe sole proposed change is one shared sigmoid scalar from64 current local x3 input plus64 prior own hidden coordinates,128 weights+1 bias. Apply it to incoming state only for a true survivor at a completed public birth/departure event, before the ordinary GRU; otherwise preserve generic continuation. Propose zero weights and bias log99, initially.99: one untuned near-RETAIN value, not exact policy equality. Preserve true-trip identity, no old history/action on same-slot newcomers, legal acting information, consistent acting/online/target replay transformation and target copying, common actor/mixer initial parameters, isolated added gate RNG draws, existing sampling/native RNG/reward and partner co-adaptation. Source reads assess these consumers but do not accept an unimplemented path. You may reject the candidate or justify a stronger legal comparator in this question; name its protected decision and do not silently replace the mechanism.\n\nThe old exact fixed.5/easy Traffic Junction/5000-training/128-final recipe remains narrowly paused. Both valid pair contrasts,+1.56546875 and-4.293046875, their opposite training evidence and active attenuation counts remain. They are neither adaptive-gate evidence nor a settled training population. This is not a third half pair or a repeated audit of that pause. Matching tuned headroom is absent; provisional MEI1 native return has the existing tenth-collision-penalty rationale and would need its own later-card justification. Keep original-CAMA, causal stale/useful-memory, stable superiority/equivalence, transfer,C/UAV and Portfolio claims outside the ceiling.\n\nIf opening, state what the smallest sufficient B observation would decide and why that value merits family eligibility against no new investment. The concrete UNALLOCATED minimal pair is2 real learners*5000 training episodes/100000 ticks/4969 updates each, then128 final episodes each:10000 training,9938 updates,256 final,205120 team ticks; retained base66783360 online/target replay GRU rows and1076880 acting rows plus gate work. New wall/memory/support/cap are unknown and unallocated; historical1517.20s native and67.6955750s known support do not price the new mechanism or renew3900s. Same episode indices are not paired post-action traffic worlds. Do not substitute an exact upper/full-support/cause/search prerequisite or demand a favorable pilot/novelty proof. No validation/cost experiment or further consultation series is requested.\n\nCurrent allowance stays ZERO implementation and ZERO numerical work even if you select OPEN/RECAST. Give a direction-local decision and classification with its strongest support, contradiction and re-entry/next-discriminator meaning. Future engineering or B investment remains outside this allocation. If a concrete source-access or specification conflict prevents a formed answer, identify it precisely and preserve the boundary rather than inventing a verdict.",
+  "deliverable": "One complete conclusion-first direction decision: select narrow opening of this candidate or no new family investment; specify the exact unit,OPEN/in-family/RECAST classification,strongest support and contrary case,source assumptions and limits,competent comparator,smallest useful future B or re-entry condition and dominant work. Preserve current zero implementation/numerical allocation and the earlier fixed-half pause. A direct answer need not solve causal attribution or prove architectural equivalence. Identify a concrete access/specification conflict if one prevents the decision. Write only the scoped response and delivery-link comment, or the entire downloadable Markdown fallback after actual-state readback.",
+  "claim_ceiling": "Direction-local eligibility/disposition for one specified learned-retention question using source assessment and existing B evidence. No learned-gate result,runtime acceptance,stable winner,equivalence,causal memory/timing proof,original-CAMA superiority,tuned headroom,C/UAV,Portfolio lifecycle/priority/capacity change or empirical/implementation allocation.",
+  "reference_files": [
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_CANDIDATE_20260911.md",
+      "commit_sha": "cb5d883bcaf614a1b0817b322f72462c954853e1",
+      "purpose": "Read the complete concise candidate note: exact proposed scalar, competent null, physical identity, source requirements, unexecuted close-call recommendation, retained evidence and known work.",
+      "provenance": "DM-authored candidate assessment; not a B card, accepted implementation, formed direction decision or new numerical result."
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260911_learned_retention_convergence/FACTS.json",
+      "commit_sha": "cb5d883bcaf614a1b0817b322f72462c954853e1",
+      "purpose": "Read exposure, source inspection, proposed129 parameters and near-RETAIN initialization, unallocated future-B counts/cost, historical HALF results and selected literature-readback fields.",
+      "provenance": "Machine-generated extraction and integer recipe arithmetic, with direct local CAMA readback attributed to DM. No model, fixture, replay/reanalysis, empirical computation or new literature-wide claim."
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_HALF_FAMILY_CONVERGENCE_INTAKE_20260911.md",
+      "commit_sha": "5ca3911c5b722a97eb936f3381b347224fb8ffb0",
+      "purpose": "Read sections2-6: the accepted narrow fixed-half pause, both signed observations, strongest contrary case, independent unit, missing cost/headroom and re-entry meaning.",
+      "provenance": "Accepted prior direction intake; its fixed-half recipe remains paused and is not re-audited or extended by this new question."
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260911_half_family_convergence/archive/RESPONSE.md",
+      "commit_sha": "e1e9a600bd4f715328b514fe746bb367775ff3a7",
+      "purpose": "Read the concluded paused unit, limits and final disposition; do not traverse its historical reference tree.",
+      "provenance": "Complete immutable prior original-node decision; no old scientific authority is silently replaced."
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_HALF_B01_RESULT_SUMMARY_20260910.json",
+      "commit_sha": "7ac21b081400db29cdadb2c79030f6341041825e",
+      "purpose": "Read primary, arm means/counts, attenuation and training_return_sum, totals and support limits. No episode-array reanalysis is needed.",
+      "provenance": "Preserved valid completed fixed-half B observation. It contains no learned-scalar experiment, stable training-population estimate or matched post-action traffic-world pairing."
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_HALF_B02_RESULT_SUMMARY_20260910.json",
+      "commit_sha": "7ac21b081400db29cdadb2c79030f6341041825e",
+      "purpose": "Read primary, arm means/counts, attenuation and training_return_sum, totals and support limits. No episode-array reanalysis is needed.",
+      "provenance": "Preserved valid completed fixed-half B observation. It contains no learned-scalar experiment, stable training-population estimate or matched post-action traffic-world pairing."
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/model.py",
+      "commit_sha": "c6be208cd514b5d12fb13c7637e2d6376de11eb6",
+      "purpose": "Read Actor.__init__/forward: local attention to130-input fc2 to64-wide x3; event/own-birth already visible; lifetime carry before GRU; existing HALF_EVENT operation and masks.",
+      "provenance": "Existing committed source, read-only. Candidate integration properties are future design requirements; this is not runtime acceptance of an unimplemented gate."
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/environment.py",
+      "commit_sha": "c6be208cd514b5d12fb13c7637e2d6376de11eb6",
+      "purpose": "Read LifecycleEnv reset/step/observation and lifecycle bookkeeping: completed public event, true physical-trip continuation, same-slot departure/refill and previous-action masking.",
+      "provenance": "Existing committed source, read-only. Candidate integration properties are future design requirements; this is not runtime acceptance of an unimplemented gate."
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/attention.py",
+      "commit_sha": "c6be208cd514b5d12fb13c7637e2d6376de11eb6",
+      "purpose": "Read EntityAttentionLayer.forward: observation mask and entity mask delimit the current local input; no new privileged input is proposed.",
+      "provenance": "Existing committed source, read-only. Candidate integration properties are future design requirements; this is not runtime acceptance of an unimplemented gate."
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/collection.py",
+      "commit_sha": "c6be208cd514b5d12fb13c7637e2d6376de11eb6",
+      "purpose": "Read collect/select_action/sample: carried acting state, terminal controller pass, stored complete episodes and global NumPy minibatch sampling; source selector RNG draws persist.",
+      "provenance": "Existing committed source, read-only. Candidate integration properties are future design requirements; this is not runtime acceptance of an unimplemented gate."
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/learner.py",
+      "commit_sha": "c6be208cd514b5d12fb13c7637e2d6376de11eb6",
+      "purpose": "Read Learner.__init__/update/save: actor before mixer construction, shared online/target forward law, RMSprop parameters, target state-dict copying and publication contents.",
+      "provenance": "Existing committed source, read-only. Candidate integration properties are future design requirements; this is not runtime acceptance of an unimplemented gate."
+    },
+    {
+      "path": "scripts/run_folr_public_lifecycle_b01.py",
+      "commit_sha": "c6be208cd514b5d12fb13c7637e2d6376de11eb6",
+      "purpose": "Read main construction/seeding,5000 collection episodes,4969 complete-episode updates,final checkpoint then128 greedy evaluation and native-return publication.",
+      "provenance": "Existing fixed-half runner and count law; its source choices and1800-second historical arm cap do not authorize or price new learned-gate work."
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_HALF_B02_SCIENCE_CARD_20260910.md",
+      "commit_sha": "ea73b1c3dabafe6482db03df8a9e51c1ad672260",
+      "purpose": "Read original comparator,MEI1/counts and complete3900-second historical cap; no allocation is renewed.",
+      "provenance": "Historical fixed-half B card. It grounds the provisional margin and count comparison, not a learned-retention card or frozen future rule."
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260911_remaining_capacity_refill/archive/RESPONSE.md",
+      "commit_sha": "0dbbcbf807509ccc34a3a1de353114be88896897",
+      "purpose": "Read section5 FOLR in full, opening allocation and FOLR stop boundary only.",
+      "provenance": "Current PRO_FINAL Portfolio investment: one source-grounded candidate, one original-node question and full intake; zero implementation/numerical allocation even after OPEN/RECAST."
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260911_remaining_capacity_refill/EXECUTION_MAPPING.md",
+      "commit_sha": "bb40797dc5312641ac640664cbf7c2bd174d9815",
+      "purpose": "Read the FOLR section161-215 only: assigned owner/path,exact gate/null/comparator/data/RNG facts,unallocated count scale and finite stop.",
+      "provenance": "Current Root execution mapping under accepted Portfolio authority; no family opening is delegated locally."
+    },
+    {
+      "path": "docs/research/portfolio/decisions/2026-09-11-remaining-capacity-refill.md",
+      "commit_sha": "bb40797dc5312641ac640664cbf7c2bd174d9815",
+      "purpose": "Read current optionA decision, FOLR conformance and cost/stop boundaries only.",
+      "provenance": "Complete designated-DM conformance record accepted/integrated by Root; this request is its finite direction-local implementation."
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "commit_sha": "14744af1f733e08aa8b7ab25730576ade02f344f",
+      "purpose": "Apply sections3-5.2,6.1,11.1-4 and11.7-11.10: class-correct B performance questions,integrity,MEI/headroom,independent fit,decision value,scope conformance and no stronger-class/search/causal gate.",
+      "provenance": "Current normative scientific requirements; section11 controls. The consultation is not a universal A/B launch condition and selects no empirical budget."
+    },
+    {
+      "path": "AGENTS.md",
+      "commit_sha": "14744af1f733e08aa8b7ab25730576ade02f344f",
+      "purpose": "Apply sections2-4 and5-6, plus relevant AppendixA routing: correct decision tier,original binding,finite allocation,scoped Git delivery and preserve owner overrides.",
+      "provenance": "Current owner-governance authority; no permission layer or local substitution for a direction decision."
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "commit_sha": "14744af1f733e08aa8b7ab25730576ade02f344f",
+      "purpose": "Apply sections4-5 and7.1-7.3 to proposed burdens: needs no section4 machinery, no code/tests now, and no unasked validation or implementation budget.",
+      "provenance": "Current engineering constraints; future correctness requirements do not constitute acceptance or an allocation."
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "commit_sha": "14744af1f733e08aa8b7ab25730576ade02f344f",
+      "purpose": "Read sections2-4 and6 only: partial observation/own history,finite optimization versus capacity,causal package versus mechanism attribution.",
+      "provenance": "Explanatory knowledge informing the question; not new authority, an equivalence theorem or unlisted reading dependencies."
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "commit_sha": "14744af1f733e08aa8b7ab25730576ade02f344f",
+      "purpose": "Read comparison target,randomness hierarchy,whole-package versus attribution and evidence-strength passages.",
+      "provenance": "Explanatory support for the trained pair as unit and conditional evaluation; no extra empirical burden."
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260911_learned_retention_convergence/ISSUE_SNAPSHOT.json",
+      "commit_sha": "cb5d883bcaf614a1b0817b322f72462c954853e1",
+      "purpose": "Read as the recorded prior discussion/delivery state only; current question is fully in this fixed task.",
+      "provenance": "Mutable Issue15 snapshotted before this request; all earlier task/response links remain historical and cannot expand this request."
+    }
+  ],
+  "constraints": [
+    "FOLR_LEARNED_RETENTION_CONSULTATION: new_scientific_invocations=0; models=0; training_episodes=0; native_steps=0; evaluation_episodes=0; optimizer_steps=0; replay=0; diagnostics=0; implementation_changes=0; tests=0; checkpoints=0; parameter_displacement=not applicable (no learner).",
+    "One source-grounded candidate,one fixed original-node question and complete intake,or exact unresolved conflict only. No repeated consultation series,B card/freeze,implementation,fixture,test,checkpoint/model construction,environment,replay/reanalysis,profile,cost experiment,coefficient search or automatic successor.",
+    "Generic event-aware RETAIN is the primary legal null. The proposed event scalar uses only existing local/public information and129 extra parameters; .99 initialization is near RETAIN,not exact policy equality. Source assessment is not runtime acceptance.",
+    "Preserve the complete narrow fixed-half pause and both opposite valid B results,prior full-EVENT/32-endpoint histories,original branches,missing tuned headroom and incomplete historical support costs. No recast count change follows preparation; the node must state any actual direction classification.",
+    "An OPEN/RECAST at this proper node is a direction decision only. This Portfolio allocation still gives zero implementation and empirical allowance; no historical3900-second envelope is renewed.",
+    "Apply the pinned current evidence-spec requirements to the selected question. No stronger class,causal explanation,exact maximum,search,positive result,tuned baseline or extra consultation becomes an ordinary B prerequisite.",
+    "No Engineering Scope Spec section4 machinery is needed; do not commission an implementation or additional validation step to answer this source-grounded direction question.",
+    "Preserve every effective reference path/SHA. Add only the new scoped RESPONSE.md on the current descendant HEAD of codex/vap-folr and one delivery-link comment to Issue15,retaining unrelated changes. No main,source,tests,card,DIRECTION or Portfolio edits."
+  ],
+  "response_schema": [
+    "Precise direction choice and classification,unexecuted author advice distinguished from the formed decision.",
+    "Strongest support and contrary case against competent event-aware RETAIN; physical identity,information,initialization and source-acceptance limits.",
+    "Bounded future discriminator or re-entry condition,known multiplicative work and unknown costs; zero current numerical/implementation allowance.",
+    "Exact decision-critical source/specification conflict if no formed answer is possible."
+  ],
+  "github_delivery": {
+    "branch": "codex/vap-folr",
+    "base_sha": "cb5d883bcaf614a1b0817b322f72462c954853e1",
+    "response_path": "docs/research/candidates/vap_folr_core/pro_packets/20260911_learned_retention_convergence/archive/RESPONSE.md",
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/15"
+  }
+}
