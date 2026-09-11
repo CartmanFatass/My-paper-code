@@ -1,0 +1,43 @@
+{
+  "completed_at": "2026-09-11T08:21:20.6539758+00:00",
+  "authority": "Root accepted integration/preservation at main a3d148747 and assigned cleanup of the three duplicate files only",
+  "accepted_main": "a3d148747709516f174a6f0e1fd257d0d1603efb",
+  "files": [
+    {
+      "file": "admission.json",
+      "runtime_path": "C:\\Projects\\HMASD-worktrees\\dm-n5-continue-20260904\\temp\\directions\\metric_ground_transport_allocation\\exp\\conditional_pooling_implementation_20260911_8211\\admission.json",
+      "bytes": 511,
+      "sha256": "EC01F7C0361D62FA9BD8AFA1CA835FF3D5B5A0A383FCDF1276DC3C0804D78817",
+      "accepted_git_blob": "9e8191eeb70efeae805e78ac4e1158a6cbbaeb5b",
+      "preserved_in_accepted_main": true,
+      "removed": true
+    },
+    {
+      "file": "COMMAND_RECEIPT.json",
+      "runtime_path": "C:\\Projects\\HMASD-worktrees\\dm-n5-continue-20260904\\temp\\directions\\metric_ground_transport_allocation\\exp\\conditional_pooling_implementation_20260911_8211\\COMMAND_RECEIPT.json",
+      "bytes": 1617,
+      "sha256": "89A9371C22FB2DEFE5E950A6FCC9796AE4E6EE9EE8B2EDA504CAD128F39800A7",
+      "accepted_git_blob": "6aea3ddb4f82f5acc021ed08b054c08ebc3aab2c",
+      "preserved_in_accepted_main": true,
+      "removed": true
+    },
+    {
+      "file": "summary.json",
+      "runtime_path": "C:\\Projects\\HMASD-worktrees\\dm-n5-continue-20260904\\temp\\directions\\metric_ground_transport_allocation\\exp\\conditional_pooling_implementation_20260911_8211\\summary.json",
+      "bytes": 16211,
+      "sha256": "7A6D016323BDE7ED476243B16D1BDDADBEC141F0238E32AD536198FA8EB1D14B",
+      "accepted_git_blob": "1628abd5ea7397acfb879de34fc7b24bdebf6550",
+      "preserved_in_accepted_main": true,
+      "removed": true
+    }
+  ],
+  "initial_comparison": "One non-destructive comparison stopped at admission.json; properly quoted --path argument reconciled runtime/evidence/accepted Git blobs and original digests before any removal",
+  "runtime_directory": "C:\\Projects\\HMASD-worktrees\\dm-n5-continue-20260904\\temp\\directions\\metric_ground_transport_allocation\\exp\\conditional_pooling_implementation_20260911_8211",
+  "runtime_directory_empty": true,
+  "runtime_directory_retained": "Empty directory retained because the assignment named three files only",
+  "test_scratch_absent": true,
+  "shared_checkout_exists": true,
+  "shared_checkout_registered": true,
+  "new_fixture_or_test_invocations": 0,
+  "new_scientific_exposure": 0
+}

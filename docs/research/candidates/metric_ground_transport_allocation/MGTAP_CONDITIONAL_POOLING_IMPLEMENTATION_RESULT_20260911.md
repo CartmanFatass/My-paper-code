@@ -94,8 +94,16 @@ tested technical properties. No native COND runtime is inferred from3.84s.
 The three runtime JSON files were copied and checked byte-identical at collection;
 [preservation facts](conditional_pooling_implementation_20260911/PRESERVATION.json)
 record original working-file lengths/digests before ordinary Git text normalization.
-Creator scratch is absent. The small runtime output directory is retained for
-Root's integration/retention acceptance; it contains only those three copied files.
+Creator scratch is absent. At collection, the small runtime output directory was
+retained for Root's integration/retention acceptance and held only those three copied files.
 No remote worktree or experiment handle was created. The active shared authoring
 checkout and unrelated work remain intact. Cleanup ownership remains with this DM
 after Root accepts preservation; no full checkout is kept merely as a backup.
+
+Root accepted integration and preservation at main `a3d148747` and explicitly
+assigned removal of the three duplicates. At `2026-09-11T08:21:20.6539758Z`, the DM
+verified each original digest and accepted Git blob, removed exactly those files,
+and checked all three absent. [Cleanup facts](conditional_pooling_implementation_20260911/CLEANUP.json)
+record the evidence checks and paths. The runtime directory is empty; no directory
+or shared checkout was removed because the assignment named the three files only.
+Test scratch remains absent. New fixture/test/scientific exposure is zero.
