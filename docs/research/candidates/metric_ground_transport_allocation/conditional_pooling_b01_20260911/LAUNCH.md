@@ -63,3 +63,17 @@ Root accepts retention/reclamation. Keep shared authoring checkout intact.
 Owner new-card item:`20260911-mgtap-002`; prediction remains not taken.
 
 At this prelaunch publication boundary, no native handle has yet been accepted.
+
+## Accepted launch and observation handover
+
+The exact command subsequently returned accepted/started in
+`agent_mgtap-cond-b01-8212-20260911`, with supervisor log
+`/home/wu/.agent-tasks/mgtap-cond-b01-8212-20260911/task.log`.
+Direct MONITOR_ADD delivery succeeded. Root then routed MONITOR_ADOPTED: supervisor
+healthy/running, admission passed (15.63GB available reported), exact source/cwd/root
+matched. Root integrated the launch binding at main`a22b3606a` and pushed.
+See [launch receipt](LAUNCH_RECEIPT.json) and [support accounting](SUPPORT_RECEIPTS.json).
+The adoption observation-command wall is **unknown**; no final support/complete
+cap certification follows from the measured subtotal, and no breach is inferred.
+DM stops routine polling and returns pending collection; the same DM collects and
+intakes on Root's routed terminal fact. No native endpoint has been read at this boundary.
