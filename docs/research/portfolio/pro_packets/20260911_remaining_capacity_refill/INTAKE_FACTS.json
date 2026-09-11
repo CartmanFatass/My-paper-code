@@ -1,0 +1,435 @@
+{
+  "request_id": "2026-09-11-remaining-capacity-refill-portfolio-01",
+  "checked_at_utc": "2026-09-11T17:39:27.327571+00:00",
+  "response_commit": "0dbbcbf807509ccc34a3a1de353114be88896897",
+  "response_path": "docs/research/portfolio/pro_packets/20260911_remaining_capacity_refill/archive/RESPONSE.md",
+  "response_bytes": 59218,
+  "response_characters": 58963,
+  "response_physical_lines": 247,
+  "response_nonempty_lines": 163,
+  "response_sha256": "f4e2c50db1b743edba5e5cede0a9c1c0146afc82f9e4c8541d9fea4e03834322",
+  "response_Git_equals_Transport": true,
+  "response_Git_equals_GitHub": true,
+  "full_DM_read_character_ranges": [
+    [
+      0,
+      14000
+    ],
+    [
+      14000,
+      28000
+    ],
+    [
+      28000,
+      42000
+    ],
+    [
+      42000,
+      58963
+    ]
+  ],
+  "fixed_reference_mapping_exact": true,
+  "fixed_reference_checks": [
+    {
+      "path": "docs/research/portfolio/pro_packets/20260911_remaining_capacity_refill/SCIENCE_BRIEF.md",
+      "commit_sha": "4aee3ff842cbed18d73300d7f645cba5b0134286",
+      "bytes": 28701,
+      "sha256": "27aa30ff12babb2980579b9142ff88ca1e2446ceb2e7597800e4b39b478611be",
+      "GitHub_equals_Git": true
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260911_remaining_capacity_refill/FACTS.json",
+      "commit_sha": "4aee3ff842cbed18d73300d7f645cba5b0134286",
+      "bytes": 9970,
+      "sha256": "d80ed2478bdac13ad4e13b39566e6d7fff15448e39276316a7f8a10a312a9a30",
+      "GitHub_equals_Git": true
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260911_remaining_capacity_refill/PREPARATION_INTAKE.md",
+      "commit_sha": "4aee3ff842cbed18d73300d7f645cba5b0134286",
+      "bytes": 4969,
+      "sha256": "f4cbb4ea601ec60b7cc480349846c38b08f568510891dac3b9fa2e4a6c808497",
+      "GitHub_equals_Git": true
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260911_remaining_capacity_refill/archive/VNFC_TRANSPORT_FACTS.json",
+      "commit_sha": "4aee3ff842cbed18d73300d7f645cba5b0134286",
+      "bytes": 8159,
+      "sha256": "9faccb8f262e81cda57f956091756cc0a895e747b600e0f922362fdf81818f8c",
+      "GitHub_equals_Git": true
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260911_remaining_capacity_refill/archive/VNFC_DELIVERY_GAP.md",
+      "commit_sha": "4aee3ff842cbed18d73300d7f645cba5b0134286",
+      "bytes": 546,
+      "sha256": "aebcaccc9250763f01bd36955c36ae5f11b1787283e62fa1a03f53874761f00d",
+      "GitHub_equals_Git": true
+    },
+    {
+      "path": "AGENTS.md",
+      "commit_sha": "4aee3ff842cbed18d73300d7f645cba5b0134286",
+      "bytes": 42984,
+      "sha256": "cfbe996017cd6ffd7e4a8e8af0321b8bc28904f7529626d1d0f7548222b0c4b5",
+      "GitHub_equals_Git": true
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "commit_sha": "4aee3ff842cbed18d73300d7f645cba5b0134286",
+      "bytes": 45053,
+      "sha256": "44418af31752086f6752f8f3d6874b260134e4c91b6c82ed8dbc61e4ef0b87e1",
+      "GitHub_equals_Git": true
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "commit_sha": "4aee3ff842cbed18d73300d7f645cba5b0134286",
+      "bytes": 20899,
+      "sha256": "a52a26e3b9ba876cb954ef4e671b5826ff9e1bab573320ca6da1033e12e64996",
+      "GitHub_equals_Git": true
+    },
+    {
+      "path": "docs/project/ROOT_OPERATIONS.md",
+      "commit_sha": "4aee3ff842cbed18d73300d7f645cba5b0134286",
+      "bytes": 10764,
+      "sha256": "09f31d16810b7fca039b6895af0e97b201dee7962b8ed526312188385ab06ef8",
+      "GitHub_equals_Git": true
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "commit_sha": "4aee3ff842cbed18d73300d7f645cba5b0134286",
+      "bytes": 7819,
+      "sha256": "c1f7d6c68fcec55de48ea555346d5d65af8d311e28502be43a2b05436a174247",
+      "GitHub_equals_Git": true
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "commit_sha": "4aee3ff842cbed18d73300d7f645cba5b0134286",
+      "bytes": 4252,
+      "sha256": "99b7e727a890d4e93a64b5c0f44fe588e383b5de56f2da663fb3f864c6d8293c",
+      "GitHub_equals_Git": true
+    },
+    {
+      "path": "docs/research/portfolio/PORTFOLIO.md",
+      "commit_sha": "4aee3ff842cbed18d73300d7f645cba5b0134286",
+      "bytes": 57080,
+      "sha256": "9d5458007f42f9358e6016f18b40f48644cf731f08e2debd8581b24187704fb1",
+      "GitHub_equals_Git": true
+    },
+    {
+      "path": "docs/research/portfolio/decisions/2026-09-11-post-option-a-execution-refill.md",
+      "commit_sha": "4aee3ff842cbed18d73300d7f645cba5b0134286",
+      "bytes": 12408,
+      "sha256": "c12764253de1b5a6b39dcbe42f4a03e2ccf869382a00f2f9817e36651ddb9611",
+      "GitHub_equals_Git": true
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260911_post_a_execution_refill/SCIENCE_BRIEF.md",
+      "commit_sha": "4aee3ff842cbed18d73300d7f645cba5b0134286",
+      "bytes": 21783,
+      "sha256": "c8608a8e6b919e6354156a8cc2ae950ec9f29275fd85fff0334f26f20077e4fe",
+      "GitHub_equals_Git": true
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B05_NEAREST_PRIOR1000_SCIENCE_CARD_20260911.md",
+      "commit_sha": "4aee3ff842cbed18d73300d7f645cba5b0134286",
+      "bytes": 10873,
+      "sha256": "e7a9ee2575457efecb30f182eaa3d27eeef44bc61c81fbf6276252f24d196298",
+      "GitHub_equals_Git": true
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B05_NEAREST_PRIOR1000_RESULT_INTAKE_20260911.md",
+      "commit_sha": "4aee3ff842cbed18d73300d7f645cba5b0134286",
+      "bytes": 11274,
+      "sha256": "02ec55c7841be6e599b30e19954149b2fe7c14dec2cc13b6159e668f96ea5b63",
+      "GitHub_equals_Git": true
+    },
+    {
+      "path": "experiments/candidates/roster_consistent_latent_exploration/b04_nearest_prior/study.py",
+      "commit_sha": "4aee3ff842cbed18d73300d7f645cba5b0134286",
+      "bytes": 8834,
+      "sha256": "beba532672384891b10f04d58cf2a9d32e8ea99f361eaa4aa473ecfd550e6388",
+      "GitHub_equals_Git": true
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_SCIENCE_CARD_20260910.md",
+      "commit_sha": "4aee3ff842cbed18d73300d7f645cba5b0134286",
+      "bytes": 33600,
+      "sha256": "340d00f6f8dc8f9da1bb20e1f7131bbad966e5b604fe2c2861eed4ccf28c7c69",
+      "GitHub_equals_Git": true
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_8941_INTAKE_20260910.md",
+      "commit_sha": "4aee3ff842cbed18d73300d7f645cba5b0134286",
+      "bytes": 11967,
+      "sha256": "cfb314cc9c2292ad99efe120db0f8d76056544be7a6dd0688ae7631a5974cb13",
+      "GitHub_equals_Git": true
+    },
+    {
+      "path": "scripts/run_acvc_fresh_dense_reuse_b01.py",
+      "commit_sha": "4aee3ff842cbed18d73300d7f645cba5b0134286",
+      "bytes": 19709,
+      "sha256": "52b4385a2f82f48c860ad93b834373040f9410ddb458f48ddaf72076423a43c8",
+      "GitHub_equals_Git": true
+    },
+    {
+      "path": "experiments/candidates/acvc/native_link_loss_b01/model.py",
+      "commit_sha": "4aee3ff842cbed18d73300d7f645cba5b0134286",
+      "bytes": 4310,
+      "sha256": "f571b8a98cd4d02bdb77280bb23f819f9f0d1ceceb58a00d73433c29a016e092",
+      "GitHub_equals_Git": true
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_HALF_FAMILY_CONVERGENCE_INTAKE_20260911.md",
+      "commit_sha": "4aee3ff842cbed18d73300d7f645cba5b0134286",
+      "bytes": 13932,
+      "sha256": "07f2df1233b6a59996d850fd369135709cdf4717d2ab5350705b8fce45fc97a4",
+      "GitHub_equals_Git": true
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/public_lifecycle_b01/model.py",
+      "commit_sha": "4aee3ff842cbed18d73300d7f645cba5b0134286",
+      "bytes": 2338,
+      "sha256": "0eeea3a368eeb2738a4c9157cccf69f0a6cb8b0c02da18270332d617b311b970",
+      "GitHub_equals_Git": true
+    },
+    {
+      "path": "docs/research/candidates/ucope/pro_packets/20260911_post_8801_convergence/INTAKE.md",
+      "commit_sha": "4aee3ff842cbed18d73300d7f645cba5b0134286",
+      "bytes": 16941,
+      "sha256": "078565a003095a77ceb562f74cf855cd1d1c31bdc26adb7d3540745c7264377b",
+      "GitHub_equals_Git": true
+    },
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_EXECUTION_LIMITATION_INTAKE_20260911.md",
+      "commit_sha": "4aee3ff842cbed18d73300d7f645cba5b0134286",
+      "bytes": 8586,
+      "sha256": "c045a21221efbfcfdcce22cc74a4ed059d8956c77fd3f15635df8d8715cc886e",
+      "GitHub_equals_Git": true
+    },
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/uav_renewal_batch_b02_770803_20260911/SUPPORT.json",
+      "commit_sha": "4aee3ff842cbed18d73300d7f645cba5b0134286",
+      "bytes": 5630,
+      "sha256": "e0da98f9398df1dd33b65dda0562b61e8fee056c8f65da878264a609f2765f3f",
+      "GitHub_equals_Git": true
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_CONDITIONAL_POOLING_B01_SCIENCE_CARD_20260911.md",
+      "commit_sha": "4aee3ff842cbed18d73300d7f645cba5b0134286",
+      "bytes": 11541,
+      "sha256": "412f90c94a44ab96fd686fd516f9adb21357a3a7f06deeeddc5778cc50bfc351",
+      "GitHub_equals_Git": true
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/conditional_pooling_b01_20260911/LAUNCH.md",
+      "commit_sha": "ea8ef25d63710173de3efeb2e82c277b4e4fb099",
+      "bytes": 5041,
+      "sha256": "552945b8aa495dfd1af36a61ccc4e8fd66960c3cdf288368b1b49a8e51874ee9",
+      "GitHub_equals_Git": true
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260911_remaining_capacity_refill/TASK.md",
+      "commit_sha": "aa5ba9120e63c8520e121af58892b1c4118324f0",
+      "bytes": 32455,
+      "sha256": "0c42277a0902d9320410dbb83cc5fee8e872a7e468f33a8161135f37fd2223b9",
+      "GitHub_equals_Git": true
+    }
+  ],
+  "references_count_without_TASK": 28,
+  "RCLE_six_reading_rows_verbatim_match": true,
+  "transport_copies": [
+    {
+      "source": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-11-remaining-capacity-refill-portfolio-01--portfolio--attempt-01\\2026-09-11-remaining-capacity-refill-portfolio-01--portfolio--attempt-01__03_TRANSPORT_FACTS.json",
+      "path": "docs/research/portfolio/pro_packets/20260911_remaining_capacity_refill/archive/TRANSPORT_FACTS.json",
+      "bytes": 1909,
+      "sha256": "d620645a011659733232ac3a2eb9619040155ef8cfc37eb0bedfa30ec4984e3b"
+    },
+    {
+      "source": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-11-remaining-capacity-refill-portfolio-01--portfolio--attempt-01\\2026-09-11-remaining-capacity-refill-portfolio-01--portfolio--attempt-01__04_CHAT_RECEIPT.md",
+      "path": "docs/research/portfolio/pro_packets/20260911_remaining_capacity_refill/archive/CHAT_RECEIPT.md",
+      "bytes": 468,
+      "sha256": "92d7390da6594855926b94d18cb107919236403d506e8f6ae63d78c166b8a405"
+    },
+    {
+      "source": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-11-remaining-capacity-refill-portfolio-01--portfolio--attempt-01\\2026-09-11-remaining-capacity-refill-portfolio-01--portfolio--attempt-01__PACKET_MANIFEST.json",
+      "path": "docs/research/portfolio/pro_packets/20260911_remaining_capacity_refill/archive/TRANSPORT_PACKET_MANIFEST.json",
+      "bytes": 2651,
+      "sha256": "d288c1f71216d65a16bacf41e89326eb3834cc027e988b027497198a62b878bc"
+    }
+  ],
+  "transport_prompt_matches_handoff_ignoring_terminal_newline_only": true,
+  "transport_prompt_file_sha256": "97f87083ff13c16695873bb2b12877bda18e29c447751da917b21b3a56ecf40f",
+  "handoff_prompt_utf8_sha256": "97f87083ff13c16695873bb2b12877bda18e29c447751da917b21b3a56ecf40f",
+  "issue_comment": {
+    "id": 5638193779,
+    "created_at": "2026-09-11T17:27:49Z",
+    "updated_at": "2026-09-11T17:27:49Z",
+    "html_url": "https://github.com/CartmanFatass/My-paper-code/issues/17#issuecomment-5638193779",
+    "body": "Delivered the complete remaining-capacity refill Portfolio decision for this round:\nhttps://github.com/CartmanFatass/My-paper-code/blob/0dbbcbf807509ccc34a3a1de353114be88896897/docs/research/portfolio/pro_packets/20260911_remaining_capacity_refill/archive/RESPONSE.md\n\nFixed task:\nhttps://github.com/CartmanFatass/My-paper-code/blob/aa5ba9120e63c8520e121af58892b1c4118324f0/docs/research/portfolio/pro_packets/20260911_remaining_capacity_refill/TASK.md\n\nCommit 0dbbcbf807509ccc34a3a1de353114be88896897 adds only the specified response file on codex/portfolio. The complete 247-line response, including all fixed-reference definitions, was read back. Comparison with parent 3f6b888fcd55180d354323b99dc87a5e91216799 confirms the single-path addition. No scientific execution, source/card/Portfolio-state edit, main change or rewrite of earlier responses was performed.\n\nProvenance clarification, preserving the delivered file: section 2's VNFC original-click no-effect statement comes from SCIENCE_BRIEF section 1, which summarizes Transport reconciliation. The archived Transport JSON records the retry and terminal receipt. This is supplied evidence, not a fresh browser observation by this reviewer; the allocation, budgets, no-further-Send boundary and scientific conclusions are unchanged."
+  },
+  "actual_DM_scientific_exposure": {
+    "scientific_invocations": 0,
+    "models": 0,
+    "checkpoint_loads": 0,
+    "native_steps": 0,
+    "training_episodes": 0,
+    "optimizer_calls": 0,
+    "evaluations": 0,
+    "raw_result_reanalysis": 0,
+    "numerical_fixtures": 0,
+    "profiling": 0,
+    "source_edits": 0,
+    "provider_sends": 0
+  },
+  "selected_option": "A",
+  "scientific_conformance": "PASS; final narrative intake records assessment and current MGTAP completion",
+  "application_state": "Root direction dispatch pending; no DM launch",
+  "current_checkout_revision": "44d7b29749831ed49b4463b1a07618cf70541a7d",
+  "allocated_work": {
+    "RCLE": {
+      "independent_fits": 1,
+      "model_allocations": 7,
+      "untrained_helpers": 6,
+      "trainable_parameters": 26161,
+      "training_updates": 1000,
+      "training_episodes": 64000,
+      "training_ticks": 4096000,
+      "evaluation_panels": 3,
+      "evaluation_episodes": 6144,
+      "total_episodes": 70144,
+      "total_ticks": 4489216,
+      "training_rollout_batches": 2000,
+      "neural_agent_claims_card_count": 8847360,
+      "candidate_scores": 53084160,
+      "l2_path_budget": 20.0,
+      "nearest_probability": 0.99,
+      "other_probability": 0.002,
+      "logit_offset": 6.20455776256869,
+      "offset_ratio": 495,
+      "nonnearest_mass": 0.01,
+      "former_nonnearest_mass": 0.1,
+      "mass_reduction_factor": 10,
+      "caps_s": {
+        "learned": 600,
+        "reference": 10,
+        "support": 140,
+        "complete": 750
+      },
+      "retained_B05_s": {
+        "learned": 444.45,
+        "reference": 3.18,
+        "native": 447.63,
+        "known_support": 61.0232442,
+        "known_components": 508.6532442
+      },
+      "new_wall": "unknown; unchanged work counts, changed trajectory law; retained B05 is analogy only"
+    },
+    "ACVC": {
+      "independent_fits": 1,
+      "fresh_DENSE_initializations": 1,
+      "postfit_checkpoint_loads": 3,
+      "top_level_model_constructions_including_helpers": 9,
+      "model_construction_law": "training Actor helper + Critic + NativeGeometryActor; each of three load_base calls constructs Actor helper + NativeGeometryActor",
+      "trainable_actor_parameters": 34902,
+      "trainable_critic_parameters": 34177,
+      "training_episodes": 512,
+      "training_team_steps": 131072,
+      "two_episode_rollouts": 256,
+      "adam_calls": 1024,
+      "training_actor_agent_rows": 655360,
+      "replayed_actor_agent_rows": 2621440,
+      "critic_update_rows": 524288,
+      "evaluation_panels": 3,
+      "evaluation_episodes": 192,
+      "evaluation_team_steps": 49152,
+      "evaluation_actor_agent_rows": 245760,
+      "total_episodes": 704,
+      "total_team_steps": 180224,
+      "environment_constructors": 4,
+      "unscored_constructor_resets": 4,
+      "coordinate_pair_check_upper": 6553600,
+      "caps_s": {
+        "native": 270,
+        "support": 330,
+        "complete": 600
+      },
+      "old_8941_s": {
+        "source_preparation": 102.1040615,
+        "reconciliation": 12.0324544,
+        "known_original_support": 114.1365159,
+        "separate_root_recovery": 6.534741,
+        "old_support_cap": 90
+      },
+      "retained_earlier_native_charges_s": [
+        172,
+        169
+      ],
+      "retained_proxy_process_projection_s": 222.2,
+      "new_complete_wall": "unknown; new staging/trajectories/contention; old complete support unmeasured"
+    },
+    "FOLR": {
+      "allocation_proposed": "one source-grounded design and original em:vap_folr_core:convergence question plus complete intake",
+      "numerical_allowance": 0,
+      "implementation_allowance": 0,
+      "candidate_constructions": 0,
+      "proposed_gate_parameter_increment_if_later_chosen": 129,
+      "future_B_not_allocated": {
+        "training_fits": 2,
+        "training_episodes": 10000,
+        "training_ticks": 200000,
+        "optimizer_updates": 9938,
+        "final_evaluation_episodes": 256,
+        "total_team_ticks": 205120,
+        "retained_pair_replay_GRU_rows": 66783360,
+        "retained_pair_acting_rows": 1076880,
+        "scope_note": "retained pair count law plus a new scalar gate on one arm; any selected later card fixes its full cost, no B cap allocated"
+      },
+      "retained_fixed_half_B02_s": {
+        "native_pair": 1517.2,
+        "known_support": 67.695575
+      },
+      "new_design_Pro_calendar_cost": "unmeasured; zero numerical work does not mean zero authoring/Pro cost"
+    }
+  },
+  "allocated_complete_cap_sum_s": 1350,
+  "owner_item": "20260911-root-002",
+  "owner_trace_state": "planned",
+  "owner_auto_applied": null,
+  "audit_rows": {
+    "conformance": 48,
+    "portfolio_selection": 49
+  },
+  "current_MGTAP": {
+    "main_revision": "44d7b29749831ed49b4463b1a07618cf70541a7d",
+    "source": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_CONDITIONAL_POOLING_B01_INTAKE_20260911.md",
+    "status": "valid within-MEI B; named allocation and cleanup complete; no successor",
+    "mean_COND_minus_DENSE": 0.005761321371348559,
+    "conditional_SE": 0.00888326841451271,
+    "signs": [
+      19,
+      13
+    ],
+    "interpretation_source": "accepted original-DM intake, not reanalysis here",
+    "effect_on_mapping": "three new selected chains, two target vacancies; fixed four-chain snapshot preserved historically"
+  },
+  "owner_reviews_at_intake": {
+    "primary": [],
+    "shared": []
+  },
+  "conformance_findings": {
+    "material_conflicts": [],
+    "RCLE": "exact new law/native comparisons and six rules; explicit metadata gap",
+    "ACVC": "new namespace/caps without old refund; unchanged one-fit three-panel protocol",
+    "FOLR": "only one design/original direction question; no implementation/numerical budget or local family choice",
+    "VNFC_provenance": "Issue17 delivery comment clarifies original-click no-effect sourced from brief summary, retry/terminal facts from Transport; no effect on decision",
+    "MGTAP_later_completion": "execution update only, no new funding or conflict"
+  },
+  "final_doc_check": {
+    "all_new_json_parse": true,
+    "all_original_packet_files_unchanged": true,
+    "response_preserved": true,
+    "transport_copies_preserved": true,
+    "owner_auto_applied_null": true,
+    "owner_reviews_primary": [],
+    "owner_reviews_shared": []
+  }
+}

@@ -82,5 +82,15 @@
     "verdict_text": "DM recommendation only: A, RCLE plus ACVC plus one zero-numerical FOLR direction question; fewer than five explicit.",
     "source": "docs/research/portfolio/pro_packets/20260911_remaining_capacity_refill/SCIENCE_BRIEF.md"
   },
-  "starred": true
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-11T17:47:06+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "https://github.com/CartmanFatass/My-paper-code/blob/0dbbcbf807509ccc34a3a1de353114be88896897/docs/research/portfolio/pro_packets/20260911_remaining_capacity_refill/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/decisions/2026-09-11-remaining-capacity-refill.md",
+      "state": "planned",
+      "summary": "完整247行Pro回应已检查，选择A：RCLE750秒、ACVC600秒、FOLR仅零数值原节点问题。Root派发待执行，未由作者启动。MGTAP后来完成，当前新增最多三条、空两位。最强备选B和风险见 docs/research/portfolio/pro_packets/20260911_remaining_capacity_refill/INTAKE_OWNER_PACKET.json；精确任务见 docs/research/portfolio/pro_packets/20260911_remaining_capacity_refill/EXECUTION_MAPPING.md。"
+    }
+  ]
 }
