@@ -1,0 +1,75 @@
+{
+  "id": "20260910-root-009",
+  "created": "2026-09-10T23:42:25-07:00",
+  "direction": "portfolio",
+  "tier": "portfolio",
+  "kind": "portfolio",
+  "title": "科研续接建议：四条、三条或零投入",
+  "context": "四槽和 VSP03 有限回退已结束，当前推进数为零。建议两项真实学习、MGTAP 实现和 UCOPE 一次方向讨论；三条与零投入为明确替代。本地未分配预算，等待完整合规 Portfolio Pro 决策而非所有者逐项批准。",
+  "options": [
+    {
+      "key": "a",
+      "label": "四条独立链",
+      "consequence": "FSD 配对3000秒、RCLE 新1000比较750秒、MGTAP 单次测试60秒以及 UCOPE 零数值方向讨论；不自动填第五条。"
+    },
+    {
+      "key": "b",
+      "label": "三条具体链",
+      "consequence": "执行前三条；UCOPE 暂不发起新问题，留下两个空位。"
+    },
+    {
+      "key": "c",
+      "label": "零投入",
+      "consequence": "没有新工作，记录重新考虑所需事实；不改变方向生命周期。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": null,
+  "dm_reason": "前三项有明确实现或学习路径；8801新损失使一次 UCOPE 方向选择有价值，但三条是接近的替代。",
+  "evidence": [
+    "docs/research/portfolio/pro_packets/20260911_five_chain_refill/SCIENCE_BRIEF.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-11.md#L10",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": {
+    "question": "上一轮全部结束后，是否按建议投入四条独立链，还是只做三条或暂不投入？这是给 Portfolio Pro 的建议，尚未执行。",
+    "changes_if_approved": [
+      {
+        "target": "独立研究工作集",
+        "from": "当前没有正在推进的方向；原分配已结束",
+        "to": "建议 FSD 新批量配对、RCLE 新1000更新比较、MGTAP 条件聚合实现、UCOPE 一次方向讨论；不为凑五条重启暂停对象"
+      }
+    ],
+    "if_refused": "采用三条或零投入选项，并写明重新考虑所需的具体事实；现有暂停、优先级和预算不自动改变。",
+    "evidence_for": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260911_five_chain_refill/SCIENCE_BRIEF.md",
+        "quote": "FSD has completed the exact binding and publication implementation; RCLE has an explicit DM-advised finite learning question after almost no movement from its attained prior; MGTAP has accepted narrow eligibility and a concrete unimplemented operation; UCOPE now needs a direction choice after a distinct credit package also lost.",
+        "why": "每项都有具体下一步，能分别结束和判断。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260911_five_chain_refill/SCIENCE_BRIEF.md",
+        "quote": "Why B: another UCOPE consultation could consume attention without producing a better learner, whereas the first three have concrete code/data paths.",
+        "why": "三条是接近的替代建议；旧收益、合法表示和实现通过都不能保证新收益。"
+      }
+    ],
+    "uncertainty": [
+      "FSD 新批量、RCLE 新终点的实际运行成本未知；MGTAP 尚无实现或新结果。",
+      "其余方向存在刚确认的窄暂停、执行限制或未决传输；这些不是科学负面。",
+      "当前材料没有匹配的调优基线余量；部分 recast 数未重述，不推断为零。"
+    ],
+    "cost": {
+      "compute": "建议 FSD 完整3000秒、RCLE 完整750秒、MGTAP 单次完整测试60秒；UCOPE 零数值工作。3810秒不是总研究历时；作者和传输历时未测。",
+      "owner_time": "无需等待所有者；完整合规 Pro 决策回传后按既有授权落实，可异步改写。",
+      "reversibility": "costly",
+      "waits_on_this": "仅本次新投入；独立已授权工作继续。"
+    },
+    "verdict_text": "DM recommendation only: A, four independent chains. Fund one FSD I1280/D0 learning pair, one RCLE nearest-prior final1000 learning comparison, one MGTAP COND implementation return, and one UCOPE post8801 direction question/intake.",
+    "source": "docs/research/portfolio/pro_packets/20260911_five_chain_refill/SCIENCE_BRIEF.md"
+  },
+  "starred": true
+}
