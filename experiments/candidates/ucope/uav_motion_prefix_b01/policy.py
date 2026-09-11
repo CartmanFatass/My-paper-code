@@ -103,6 +103,16 @@ def joint_terms(actor, mean, recurrent, u, durations, velocity_mask, duration_ma
     return logp, entropy
 
 
+def separate_terms(actor, mean, recurrent, u, durations, velocity_mask, duration_mask):
+    """Conditional velocity and duration densities for the opt-in credit package."""
+    velocity = torch.where(velocity_mask, tanh_log_prob(u, mean, actor.log_std), 0)
+    inputs = torch.cat((recurrent[duration_mask], u[duration_mask].detach().tanh()), -1)
+    log_probs = actor.duration(inputs).log_softmax(-1)
+    chosen = log_probs.gather(-1, durations[duration_mask][..., None]).squeeze(-1)
+    duration = torch.zeros_like(velocity).masked_scatter(duration_mask, chosen)
+    return velocity, duration
+
+
 def sample(actor, mean, recurrent, active, opening, velocity_rng, duration_rng,
            duration_mask=None, velocity_mode="sampled"):
     u = torch.zeros_like(mean)

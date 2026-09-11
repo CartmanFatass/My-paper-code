@@ -1,0 +1,65 @@
+{
+  "as_of": "before source publication",
+  "initial_recovery_conservative_charge_s": 60,
+  "independent_review": {
+    "subprocess_wall_s": 3.9007485,
+    "enclosing_tool_wall_approx_s": 10.1,
+    "charged_s": 12
+  },
+  "subsequent_support_commands": [
+    {
+      "label": "read reused helpers",
+      "seconds": 0.2900064
+    },
+    {
+      "label": "write card and opt-in collection",
+      "seconds": 0.019
+    },
+    {
+      "label": "implement separate-credit learner and final-only study",
+      "seconds": 0.02
+    },
+    {
+      "label": "add focused semantic and publication tests",
+      "seconds": 0.403
+    },
+    {
+      "label": "focused synthetic suite",
+      "seconds": 6.6831561
+    },
+    {
+      "label": "read exact supervisor and prior command facts",
+      "seconds": 0.8433707
+    },
+    {
+      "label": "write exact native wrapper and prelaunch intake",
+      "seconds": 0.164
+    },
+    {
+      "label": "read bound UCOPE allocation exact cost text",
+      "seconds": 0.240795
+    },
+    {
+      "label": "read bound UCOPE native/support cost scope",
+      "seconds": 0.2015052
+    },
+    {
+      "label": "read explicit support and stop terms",
+      "seconds": 0.2334315
+    },
+    {
+      "label": "compute prospective facts and publish owner new-card item",
+      "seconds": 0.406642
+    },
+    {
+      "label": "record independent review and source acceptance",
+      "seconds": 0.015
+    }
+  ],
+  "subsequent_command_wall_s": 9.5199069,
+  "charged_subtotal_s": 81.5199069,
+  "cap_s": 300,
+  "monitor": "pending; request attributable ordinary invocation timings",
+  "native": "not launched",
+  "limits": "Conservative charges and measured command wall are distinct. No double counting of nested suite/reviewer measures. Further preparation, launch, monitor, collection and publication remain."
+}
