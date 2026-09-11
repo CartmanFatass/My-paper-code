@@ -1,0 +1,17 @@
+{
+  "target": "tests/experiments/candidates/acvc/native_link_loss_b01/test_fresh_dense_b01.py::test_fresh_dense_orchestration_counts_and_publication",
+  "mode": "existing changed-binding stub only; no real model/environment/optimizer/learner or scientific RNG execution",
+  "returncode": 0,
+  "stdout": ".                                                                        [100%]\n1 passed in 4.20s\n",
+  "stderr": "",
+  "test_wall_s": 5.625,
+  "scratch_absent": true,
+  "cumulative_focused_check_wall_s": 42.24558149996554,
+  "shell_syntax": {
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "",
+    "wall_s": 0.09399999998277053
+  },
+  "complete_check_and_cleanup_wall_s": 5.7189999999827705
+}

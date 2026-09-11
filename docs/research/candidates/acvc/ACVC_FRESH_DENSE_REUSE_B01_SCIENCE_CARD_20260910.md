@@ -541,3 +541,72 @@ records the rule, receipts and accounting limits. Forecasts stay unscored.
 The allocation ends without repeating preparation or launching a substitute.
 This supplies no new performance evidence and changes no prior scientific result,
 mechanism conclusion, lifecycle or priority. Unused native time grants no retry.
+
+## 16. New Portfolio allocation: fresh8961 fit and8962 final panels
+
+The new [Portfolio response §§1,5,7,9](../../portfolio/pro_packets/20260911_open_directions_program/archive/RESPONSE.md),
+immutable source6c32ade3216c374ecf2f5179b15d559729cd45c9, selects one new unchanged
+ACVC unit under PRO_FINAL / OWNER_DELEGATED. Root assigned it on2026-09-11.
+This does not retry8951 or reuse its preparation, learner state, namespace or cap.
+Its separately accepted LF/binary-input repair supplies the preparation method.
+
+Select unscreened training master **8961** and evaluation namespace **8962** before
+any scientific output; the scoped ACVC card/facts/intake search found no previous
+binding for either. This is a direction-local identity check, not a global registry.
+Use §§2–5 with m=8961/q=8962 and otherwise unchanged law:512×256 training,
+256 sequential two-episode rollouts,1024 full-rollout Adam/backward calls,
+final checkpoint, then C→F→dwell64 episodes each, including an intact weak fit.
+The [prospective facts](ACVC_FRESH_DENSE_REUSE_B01_8961_PROSPECTIVE_FACTS_20260911.json)
+calculate every seed and count without model/RNG/native execution.
+
+The Portfolio clarification is binding: **C always sends the sampled proposal**.
+**Dwell sends zero only on its own evolving history's accepted predicate, otherwise
+its sampled proposal**. It borrows neither F's event times nor dose. F retains
+`binding.py`'s prior unambiguous lowest-SINR anchor, loss/away-motion cue and clipped
+reversal of its own preceding actual displacement/30. Every arm advances private
+recurrence each tick and receives its own actual command. Current code already
+implements these facts; no comparator, binding or native learner change is needed.
+C cue counters remain unmeasured incidence. The erroneous shorthand in the old
+Portfolio brief supplies no alternative controller law.
+
+Read F−C and F−dwell separately, dwell−C secondary: **UP** if mean>+.01J,
+**DOWN** if mean<−.01J, otherwise **WITHIN**, retaining sign and both boundaries.
+MEI.01J=2.56S retains the native practical-margin rationale. New pre-output
+predictions: **P(F−C is UP)=.75; P(F−dwell is UP)=.65**. Owner prediction:
+**not taken (unattended)**. Historical forecasts remain separately scored/unscored.
+
+Scientific-reading mode reuses FOUNDATIONS§6 and04_EMPIRICAL: the complete fit is
+the independent learning unit. Paired initial worlds support conditional SD/SE,
+not training-population uncertainty; private proposals, histories and intervention
+opportunities diverge. A third above-MEI fresh-fit observation would extend bounded
+package support. Competitive dwell, within-MEI differences or reversal weaken
+further spending; inside does not prove equivalence. Preserve every adverse world
+and all final rules. No pure-retrace, matched-dose, stable-superiority, headroom,
+transfer, C or formal UAV-entry claim follows. No unresolved new mechanism or
+comparator question requires another corpus search. Tuned native headroom remains
+absent; prior positive means and5/11 F−dwell adverse worlds remain separate.
+
+This fresh allocation caps **the whole native chain at270s**, **all additional
+invoked support at330s**, and **complete work at600s**. The three panels share the
+270s native cap. No transfer, pilot, numerical fixture, extra panel, screening,
+retry/replacement, old namespace/state or automatic successor is authorized.
+Intrinsic work remains704 scored episodes/180224 team steps,655360 collection
+actor rows,2621440 replay actor rows,524288 critic-update rows,245760 evaluation
+actor rows,9 top-level constructions,3 loads and4 unscored constructor resets;
+up to6553600 coordinate-pair checks belong to the algorithm. Prior172/169s native
+observations and222.1996846s projection are planning anchors, not new timing facts.
+Source preparation/review/check, Monitor, collection/reduction/publication,
+integration and scoped cleanup are charged once to support. Unknowns remain unknown.
+
+Engineering-scope§4: **none needed**. Preserve CPU FP32/Torch1/1, remote exact
+published source, joined destination memory admission and detached execution.
+Reuse the LF helper/sender with local syntax checking before new remote effects;
+do not repeat its unchanged byte-echo test. The [execution record](ACVC_FRESH_DENSE_REUSE_B01_8961_EXECUTION_20260911.md)
+holds L0, review, exact command, actual Monitor adoption and collection/cleanup.
+Recasts2/lowest contention persist; ready HIGH VNFC precedes ready ACVC, while
+unready VNFC creates no hold. Root coordinates contention.
+
+Object-tier options: (a) realize the allocated unchanged unit with fresh8961/8962;
+(b) reuse a failed identity/state; (c) alter training or the comparator/panels.
+Recommend/select **(a)**. **Owner-delegated decision (unattended,
+2026-09-03 instruction): (a).**

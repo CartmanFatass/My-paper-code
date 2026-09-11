@@ -144,21 +144,21 @@ def test_fresh_dense_orchestration_counts_and_publication(tmp_path, monkeypatch)
     code = module.run(output, "synthetic", time.monotonic(), 20.0,
                       make_env=fake_env, train_episodes=4, horizon=8, eval_episodes=3)
     assert code == 0
-    assert calls["templates"] == [8951]
-    assert calls["dense"][0][1:] == (module.DENSE, 895100012)
+    assert calls["templates"] == [8961]
+    assert calls["dense"][0][1:] == (module.DENSE, 896100012)
     assert [item["constructor_seed"] for item in calls["envs"]] == [
-        895101000, 895200062, 895200063, 895200064,
+        896101000, 896200062, 896200063, 896200064,
     ]
-    assert [item[1] for item in calls["loads"]] == [8952, 8952, 8952]
+    assert [item[1] for item in calls["loads"]] == [8962, 8962, 8962]
     assert [item[2] for item in calls["evaluation"]] == [
         arm for arm in ("C", "F", "dwell") for _episode in range(3)
     ]
     assert [item["reset_seed"] for item in calls["training"]] == [
-        895101000, 895101001, 895101002, 895101003,
+        896101000, 896101001, 896101002, 896101003,
     ]
     assert len({id(item["velocity_rng"]) for item in calls["training"]}) == 1
     assert [item["duration_rng"]["seed"] for item in calls["training"]] == [
-        895104000, 895104001, 895104002, 895104003,
+        896104000, 896104001, 896104002, 896104003,
     ]
     assert all(item["options"] == {
         "real": True, "diagnostics": False,
@@ -174,7 +174,7 @@ def test_fresh_dense_orchestration_counts_and_publication(tmp_path, monkeypatch)
 
     saved = json.loads((output / "summary.json").read_text(encoding="utf-8"))
     assert saved["status"] == "complete"
-    assert saved["master"] == 8951 and saved["evaluation_namespace"] == 8952
+    assert saved["master"] == 8961 and saved["evaluation_namespace"] == 8962
     assert saved["allocation_seconds"] == {
         "whole_supervised_task": 270,
         "cumulative_runtime_support": 330,
