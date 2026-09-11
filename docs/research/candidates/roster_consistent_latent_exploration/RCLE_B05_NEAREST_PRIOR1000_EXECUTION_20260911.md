@@ -141,3 +141,33 @@ directory containing only source.bundle and terminal.tar.gz. All unique scientif
 source/evidence is preserved before reclamation; Root integrates and accepts
 retention/reclamation. Shared authoring checkout and local evidence remain.
 The B05 test fixture's policy-rejected cleanup exception remains creator-owned.
+
+## Final integration and remote closeout
+
+Root integrated result commit `f78b808112090d0441279162f4470a038320ddca` and pushed
+main `66da2218eb016f77667441afc13c56a55de81fa3`, accepted preservation, and directed
+the exact completed remote checkout/staging reclamation. Before removal, DM verified
+both local archive digests against the remote copies, exact source SHA, clean checkout,
+finished/exit0 supervisor and inactive tmux. The one authorized reclamation completed.
+[CLOSEOUT.json](b05_nearest_prior1000_20260911/CLOSEOUT.json) records the exact command
+and successful checks: execution directory absent on disk, staging directory absent
+on disk, and execution worktree absent from Git registration. The shared authoring
+checkout, both local archives, extracted scientific evidence and terminal supervisor
+receipt remain. No new scientific execution or repeated scratch removal occurred.
+
+[SUPPORT_FINAL.json](b05_nearest_prior1000_20260911/SUPPORT_FINAL.json) records the
+cost snapshot after reclamation and final owner readback: known support charges
+61.0232442 s, consisting of 54.0232442 s in recorded command-wall components and
+7 s of explicitly conservative allowances. Together with native 447.63 s, known
+charged components total 508.6532442 s. This includes Root's retained integration
+commands (5.5722703 s) and the full reclamation command (0.7338136 s); the embedded
+remote cleanup timer is not added again. Earlier Monitor wall and Root's intervening
+conflict-resolution overhead remain unknown. Final closeout publication and Root's
+integration of that record follow this snapshot; retained tail timings are returned
+separately. Complete support/allocation cost remains `resources_unmeasured`, so no
+140 s support or 750 s complete cap conformance is certified.
+
+Live main owner reviews were empty and relevant audit owner columns had no override
+at final closeout. The named scientific allocation has ended with no successor.
+The six-file/189324 B B05 fixture exception remains explicitly creator-owned; remote
+reclamation is complete, but that local scratch cleanup is not claimed complete.
