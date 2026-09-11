@@ -262,3 +262,25 @@ the receipts; no material reviewer dissent or close threshold call. Ordinary res
 acceptance is recorded here and in the audit ledger without a separate console item.
 The accepted direction record preserves both opposite-signed instances. Return the
 completed result and verified closeout to Root for integration/reclamation acceptance.
+
+## 10. Closeout delivered and final boundary
+
+The [E0 §11](FOLR_PUBLIC_LIFECYCLE_HALF_B02_RESULT_EVIDENCE_20260910.md#11-verified-preservation-and-scoped-closeout)
+and linked receipts verify2708 archive members against their originals before removal,
+two retained local archives totaling17112603 bytes, unchanged-original reconciliation
+immediately before deletion, and all three exact remote roots absent on disk with the
+worktree absent from Git registration. Verification preceded removal: remote archives
+00:34:08Z, retained local copies00:35:16Z, unchanged-original check00:36:44.727865Z,
+verified absence00:36:44.836110Z. Both control/compute source refs preservec6be208cd;
+all local raw evidence/checkpoints remain. The shared authoring checkout and older
+objects are retained. No failed operation or additional source/evidence deletion arose.
+
+The selected closeout option is executed; Root integration and reclamation acceptance
+remain. Primary owner reviews again returned no unapplied instruction. Ordinary
+technical completion is recorded here and in the audit ledger, without a new console
+item. The Chinese brief now reports completed preservation and cleanup.
+
+Final measured support subtotal before this publication is67.6955750s; the final
+publication duration is returned separately. The partial bill remains resources_unmeasured,
+so complete300s/3900s compliance is unverified. This limit does not change the valid
+RETAIN_ABOVE_MEI branch or create exposure. No successor is selected or allocated.

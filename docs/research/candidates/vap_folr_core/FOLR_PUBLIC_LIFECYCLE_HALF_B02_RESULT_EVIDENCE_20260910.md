@@ -1,6 +1,6 @@
 # FOLR public-lifecycle HALF-B02 technical evidence
 
-Current state: both arms complete and technically accepted; the paired endpoint selects RETAIN_ABOVE_MEI. Verified scoped closeout is in progress.
+Current state: both arms complete and intaken under RETAIN_ABOVE_MEI; scoped remote closeout is verified. Root integration and reclamation acceptance remain.
 
 ## 1. Accepted reuse and focused new binding
 
@@ -306,3 +306,37 @@ archive member with its original before deletion, verify retained local archive 
 reconcile unchanged originals immediately before deletion, then verify disk and Git
 worktree-registration absence. The shared local authoring checkout and older objects
 remain intact. Root integrates published evidence and accepts reclamation.
+
+## 11. Verified preservation and scoped closeout
+
+The [archive verification receipt](evidence/2026-09-10-folr-public-lifecycle-half-b02-archive-verification.json)
+and [remote closeout receipt](evidence/2026-09-10-folr-public-lifecycle-half-b02-remote-closeout.json)
+record the completed preservation/removal sequence. All **2708 members** (2350 regular
+files,358 directories,zero symlinks) were compared by content/type/mode with original
+members before removal. This includes2692 worktree members and16 supervisor members.
+`worktree.tar.gz` is17107603 bytes; `supervisors.tar.gz` is5000 bytes. Both retained
+local archives, **17112603 bytes** total, match the verified remote SHA256/lengths.
+The full member inventory and original verification receipt are retained with them.
+
+Archive/original verification completed **2026-09-11T00:34:08.186904Z**; local archive
+preservation passed **00:35:16.478752Z**. Original content/metadata were rechecked
+unchanged immediately before removal at **00:36:44.727865Z**. Disk absence for all
+three exact completed roots, plus worktree-registration absence, was verified at
+**00:36:44.836110Z**. The source worktree was removed through Git worktree removal;
+only the two named completed supervisor roots were removed with it. No rejection or
+fallback deletion occurred. No input stage existed for this object.
+
+Retained archives live under the B02 local control root's
+`folr-public-lifecycle-half-b02-20260910/` directory and the remote recovery directory
+of the same name. All local `collected/` raw files, checkpoints and receipts remain.
+Control and compute Git both retain `refs/archive/folr-public-lifecycle-half-b02-20260910`
+at exact sourcec6be208cd514b5d12fb13c7637e2d6376de11eb6. The shared local
+`C:/Projects/HMASD-worktrees/codex-vap-folr` checkout and all older objects remain
+intact. Root integrates the published result/closeout commits and accepts reclamation.
+
+Known support through verified closeout and the final owner/artifact checks is **67.6955750s**
+(46.7885750s DM +20.907s measured Monitor queries). This final publication
+command is reported separately in the handoff. Missing historical support durations
+remain unmeasured; no complete300s/3900s compliance is certified. Native whole-chain
+wall is1517.20s and both arm caps passed. Primary owner reviews returned no unapplied
+items. The paired result, prediction score and no-successor allocation are unchanged.
