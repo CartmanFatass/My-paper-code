@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "request_id": "2026-09-11-post-a-execution-refill-portfolio-01",
+  "workflow_node": "portfolio_decision",
+  "direction_id": "portfolio",
+  "conversation_binding_key": "portfolio:cross_direction",
+  "conversation_id": "6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+  "provider_url": "https://chatgpt.com/c/6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+  "state": "BLOCKED_PRE_SEND_BROWSER_SURFACE_UNAVAILABLE",
+  "send_click_count": 0,
+  "provider_send_accepted": false,
+  "composer_text_entered": false,
+  "prompt_sha256": "b462bfe7f9dffaa01f7add0f13d7089c292b11ac78cf9ea3ee3789ea0f3f8379",
+  "packet_manifest": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-11-post-a-execution-refill-portfolio-01\\2026-09-11-post-a-execution-refill-portfolio-01--portfolio__PACKET_MANIFEST.json",
+  "registry_preflight": {
+    "previous_request_id": "2026-09-11-five-chain-refill-portfolio-01",
+    "previous_state": "ARCHIVED",
+    "binding_conversation_matches": true,
+    "active_binding_mutated": false
+  },
+  "browser_observation": "Only Edge Profile 1 is exposed; the owning in-app browser is absent. Per exact assignment, no alternate account or conversation was opened.",
+  "delivery_preflight": {
+    "remote_branch_head": "84ea5030f63a243da5ee1e201479023a29b5b1f2",
+    "response_path_status": "ABSENT",
+    "matching_issue_comment": null
+  },
+  "recovery_route": "Resume this exact unsent request only when the in-app browser account owning the bound conversation is available.",
+  "recorded_at": "2026-09-11T09:21:26Z",
+  "scientific_conformance": "NOT_ASSESSED_BY_TRANSPORT"
+}
