@@ -590,3 +590,51 @@ References:
 - `pro_packets/20260911_half_family_convergence/archive/RESPONSE.md`
 - `FOLR_PUBLIC_LIFECYCLE_HALF_FAMILY_CONVERGENCE_INTAKE_20260911.md`
 - `pro_packets/20260911_half_family_convergence/archive/DM_READBACK.json`
+
+## Accepted learned-retention Convergence — 2026-09-11
+
+**Conclusion.** The complete original-node response at
+`a2a47f1d73a3fd1bc2f724e77b2a7f0859332788` narrowly opens the specified learned
+event-retention question as an **in-family extension, not RECAST**. Its sole
+primary null is generic event-aware RETAIN. The exact fixed-half recipe remains
+paused. This is direction eligibility for a later separately allocated B; it
+supplies no implementation, B card, experiment or new cap. Portfolio disposition,
+recast counts and C/UAV status are unchanged.
+
+**Accepted candidate and bounded claim.** A shared scalar sigmoid of the existing
+64-wide local GRU input and 64-wide continuing trip's incoming hidden state scales
+that lifetime-masked state at a completed public membership event before the
+ordinary GRU. Other positions use ordinary continuation. The 129 coefficients
+start at zero weights and log(99) bias, initially .99 rather than exact RETAIN.
+Physical newcomers/replacements inherit no departed trip's state or action.
+The hypothesis concerns finite-training native-return value of an added learned
+package under the same information; no learned-gate result, information advantage,
+architectural equivalence/necessity or memory/timing cause is established.
+
+**Strongest support and contradiction.** Fixed-half B01's +1.56546875 versus its
+matching RETAIN supports bounded interest in changing this path; B02's
+-4.293046875 and separately worse training mean are the strongest empirical
+counterweight. Neither tests the learned gate or shows that histories predict
+beneficial attenuation. The strongest source objection is RETAIN's already
+learned input/history-dependent GRU gates. The extra scalar may be redundant,
+attenuate useful memory or hinder optimization. Same information still permits
+different finite-learning behavior; opening is a close qualitative judgment,
+not an expected-gain estimate. Every prior observation and pause remains intact.
+
+**Surviving alternative and next discriminator.** No new family investment and
+ordinary RETAIN remain the strong alternative. If later separately selected,
+one fresh learned-gate/RETAIN pair at 5000 training and 128 final episodes per arm
+would directly measure preliminary package value. A later card must state its
+own margin; MEI 1 and its collision-scale rationale are provisional. No fixed-.99
+or capacity ablation is required for this B package claim, and a gain would not
+isolate gate adaptation, initialization, added parameters or partner co-adaptation.
+Matching tuned headroom is absent. New wall/memory/support/cap are unknown; old
+3900 s is not renewed. No automatic fit, repeated consultation or implementation
+follows this completed question allocation.
+
+References:
+
+- `FOLR_LEARNED_RETENTION_CANDIDATE_20260911.md`
+- `pro_packets/20260911_learned_retention_convergence/archive/RESPONSE.md`
+- `FOLR_LEARNED_RETENTION_CONVERGENCE_INTAKE_20260911.md`
+- `pro_packets/20260911_learned_retention_convergence/archive/DM_READBACK.json`

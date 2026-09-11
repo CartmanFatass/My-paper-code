@@ -19,7 +19,7 @@
     }
   ],
   "recommended": "open",
-  "auto_applied": null,
+  "auto_applied": "open",
   "dm_reason": "具体事件边界操作可形成直接的有限学习比较，但RETAIN已会基于同样信息门控，因此只是close call。",
   "evidence": [
     "docs\\research\\candidates\\vap_folr_core\\FOLR_LEARNED_RETENTION_CANDIDATE_20260911.md",
@@ -67,5 +67,15 @@
     "verdict_text": "The DM recommends the narrow opening as an **unexecuted close call**.",
     "source": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_QUESTION_INTAKE_20260911.md"
   },
-  "starred": true
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-11T18:41:07+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "https://github.com/CartmanFatass/My-paper-code/blob/a2a47f1d73a3fd1bc2f724e77b2a7f0859332788/docs/research/candidates/vap_folr_core/pro_packets/20260911_learned_retention_convergence/archive/RESPONSE.md",
+      "record": "docs/research/candidates/vap_folr_core/FOLR_LEARNED_RETENTION_CONVERGENCE_INTAKE_20260911.md",
+      "state": "applied",
+      "summary": "完整137行回复已核对，窄范围开启指定129参数可学习保留门问题，原家族内扩展而非RECAST。RETAIN为唯一主比较器；固定半衰减暂停保留。已记录方向结论，现有实现和数值分配仍为零，无自动后继。"
+    }
+  ]
 }
