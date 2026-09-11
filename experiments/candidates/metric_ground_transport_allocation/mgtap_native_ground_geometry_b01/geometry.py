@@ -10,6 +10,7 @@ from experiments.candidates.ucope.uav_motion_prefix_b01.policy import snapshot, 
 
 
 REL = "REL"
+COND = "COND"
 DENSE = "DENSE"
 INPUT_SIZE = 108
 HIDDEN_SIZE = 64
@@ -62,30 +63,65 @@ class DenseResidualEncoder(nn.Module):
         return (self.raw(flat) + residual).reshape(observations.shape[:-1] + (HIDDEN_SIZE,))
 
 
+class ConditionalResidualEncoder(RelationResidualEncoder):
+    """Visible-UAV-conditioned user pooling, with the intact raw affine path."""
+
+    def forward(self, observations):
+        flat = observations.reshape(-1, INPUT_SIZE)
+        users = flat[:, 3:63].reshape(-1, USER_ROWS, USER_WIDTH)
+        uavs = flat[:, 63:103].reshape(-1, UAV_ROWS, UAV_WIDTH)
+        user_mask = users[..., 2] > 0
+        uav_mask = uavs[..., 3] > 0
+        user_embeddings = torch.tanh(self.user_map(users))
+        uav_embeddings = torch.tanh(self.uav_map(uavs)) * uav_mask[..., None]
+        user_count = user_mask.sum(dim=1, keepdim=True)
+        uav_count = uav_mask.sum(dim=1, keepdim=True)
+        query = uav_embeddings[..., :20].sum(dim=1) / uav_count.clamp_min(1)
+        scores = (user_embeddings * query[:, None, :]).sum(dim=-1) / math.sqrt(20)
+        scores = scores.masked_fill(~user_mask, -torch.inf)
+        # Empty rows use a harmless finite softmax input, then exactly zero weights.
+        scores = torch.where(user_count > 0, scores, torch.zeros_like(scores))
+        weights = scores.softmax(dim=1).masked_fill(~user_mask, 0)
+        user_context = (weights[..., None] * user_embeddings).sum(dim=1)
+        user_context = user_context * (user_count / USER_ROWS)
+        uav_context = uav_embeddings.sum(dim=1) / UAV_ROWS
+        residual = self.context(torch.cat((user_context, uav_context), dim=-1))
+        return (self.raw(flat) + residual).reshape(observations.shape[:-1] + (HIDDEN_SIZE,))
+
+
+def make_encoder(kind, branch_seed, raw_state):
+    """Build only the selected encoder, preserving the B01 private RNG law."""
+    if kind not in (REL, COND, DENSE):
+        raise ValueError(f"unknown native geometry actor kind: {kind}")
+    with torch.random.fork_rng(devices=[]):
+        torch.manual_seed(branch_seed)
+        if kind == REL:
+            encoder = RelationResidualEncoder()
+        elif kind == COND:
+            encoder = ConditionalResidualEncoder()
+        else:
+            encoder = DenseResidualEncoder()
+        if kind in (REL, COND):
+            _fan_in_uniform(encoder.user_map, USER_WIDTH)
+            _fan_in_uniform(encoder.uav_map, UAV_WIDTH)
+            _fan_in_uniform(encoder.context, 41)
+        else:
+            _fan_in_uniform(encoder.hidden, INPUT_SIZE)
+            nn.init.zeros_(encoder.hidden.bias)
+            _fan_in_uniform(encoder.context, 16)
+        nn.init.zeros_(encoder.context.weight)
+    encoder.raw.load_state_dict(raw_state)
+    return encoder
+
+
 class NativeGeometryActor(nn.Module):
-    """UCOPE Actor-compatible wrapper using REL or DENSE as ``encoder``."""
+    """UCOPE Actor-compatible wrapper; COND is separately bound from old B01."""
 
     def __init__(self, common_actor, kind, branch_seed):
-        if kind not in (REL, DENSE):
-            raise ValueError(f"unknown B01 actor kind: {kind}")
         super().__init__()
-        with torch.random.fork_rng(devices=[]):
-            torch.manual_seed(branch_seed)
-            self.encoder = (RelationResidualEncoder() if kind == REL
-                            else DenseResidualEncoder())
-            if kind == REL:
-                _fan_in_uniform(self.encoder.user_map, USER_WIDTH)
-                _fan_in_uniform(self.encoder.uav_map, UAV_WIDTH)
-                _fan_in_uniform(self.encoder.context, 41)
-            else:
-                _fan_in_uniform(self.encoder.hidden, INPUT_SIZE)
-                nn.init.zeros_(self.encoder.hidden.bias)
-                _fan_in_uniform(self.encoder.context, 16)
-            nn.init.zeros_(self.encoder.context.weight)
-
         # The raw path and every downstream policy component are copied from
         # the reviewed source template. Only the private branch differs.
-        self.encoder.raw.load_state_dict(common_actor.encoder.state_dict())
+        self.encoder = make_encoder(kind, branch_seed, common_actor.encoder.state_dict())
         self.gru = copy.deepcopy(common_actor.gru)
         self.mean = copy.deepcopy(common_actor.mean)
         self.log_std = nn.Parameter(common_actor.log_std.detach().clone())
@@ -99,7 +135,7 @@ class NativeGeometryActor(nn.Module):
 
     @property
     def branch_parameters(self):
-        if self.kind == REL:
+        if self.kind in (REL, COND):
             return (self.encoder.user_map.weight,
                     self.encoder.uav_map.weight,
                     self.encoder.context.weight)

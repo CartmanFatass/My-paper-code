@@ -1,0 +1,74 @@
+{
+  "id": "20260911-mgtap-001",
+  "created": "2026-09-11T01:04:20-07:00",
+  "direction": "metric_ground_transport_allocation",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "MGTAP 精确条件汇聚实现：一次60秒编码器夹具",
+  "context": "只验给定张量上的精确 COND 运算、完整 DENSE 和两臂读数。结构来自多智能体部分可观测性；不构造完整策略，不运行环境或训练，后续 B 无分配。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "执行已分配的精确实现及一次夹具；随后停止。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "停止尚未执行的部分，保留代码和已花费证据。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "按明确修订调整未执行部分；不自动增加夹具或科学额度。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "当前 Portfolio 已给出明确实现边界；技术结果不推断原生收益。",
+  "evidence": [
+    "docs/research/candidates/metric_ground_transport_allocation/MGTAP_CONDITIONAL_POOLING_IMPLEMENTATION_CARD_20260911.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-11.md#L13",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "按已生效的 Portfolio 分配，实施精确 COND/DENSE 接口，并只用一次不超过60秒的编码器夹具完成技术验收。",
+    "changes_if_approved": [
+      {
+        "target": "MGTAP 条件用户汇聚",
+        "from": "原节点已确认研究资格，尚无实现",
+        "to": "实现已指定运算和两臂读数；只允许一次编码器技术夹具"
+      }
+    ],
+    "if_refused": "按所有者的新指令停止或修订尚未执行的部分；保存已花费的检查和旧 P75 证据，不自动重跑。",
+    "evidence_for": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260911_five_chain_refill/EXECUTION_MAPPING.md",
+        "quote": "Only numerical allowance: one CPU FP32 complete command≤60s",
+        "why": "Portfolio 已选择这一有明确边界的实施任务，不等待额外确认。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_CONDITIONAL_POOLING_SOURCE_DESIGN_RETURN_20260910.md",
+        "quote": "The strongest contradictory empirical evidence is P75",
+        "why": "旧 REL/DENSE 原生差为−0.0239631043；新张量运算没有收益证据。"
+      }
+    ],
+    "uncertainty": [
+      "COND 原生训练收益、整次运行成本和激活内存仍未知。",
+      "合成夹具只能验技术性质，不能证明策略学会协调。"
+    ],
+    "cost": {
+      "compute": "最多2个独立编码器，各4次前向和1次给定损失反向；4组每臂32分的合成读数；整条命令≤60秒；训练和环境均为0。",
+      "owner_time": "无需回复；可异步改动尚未执行的选择。",
+      "reversibility": "costly",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "Recommend and select(a). Owner-delegated decision (unattended, 2026-09-03 instruction): (a), executing the current Portfolio PRO_FINAL allowance.",
+    "source": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_CONDITIONAL_POOLING_IMPLEMENTATION_CARD_20260911.md"
+  },
+  "starred": false
+}
