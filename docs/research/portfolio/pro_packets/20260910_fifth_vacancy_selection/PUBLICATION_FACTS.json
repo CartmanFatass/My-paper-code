@@ -297,5 +297,23 @@
   ],
   "authoring_operations": "Git/JSON/owner-record/reference publication checks only; no scientific/model/test/provider operation",
   "provider_access_claim": "none; publication checks do not establish Pro access",
-  "task_binding": "pending committed TASK"
+  "task_binding": {
+    "task_commit_sha": "9ada5ce1793862fc57aea4fd9b71ca9a83a64514",
+    "task_url": "https://github.com/CartmanFatass/My-paper-code/blob/9ada5ce1793862fc57aea4fd9b71ca9a83a64514/docs/research/portfolio/pro_packets/20260910_fifth_vacancy_selection/TASK.md",
+    "dispatch_state": "READY_TO_DISPATCH",
+    "author_pro_send_count": 0,
+    "checked_at_utc": "2026-09-11T00:02:55.842827+00:00"
+  },
+  "binding_path_correction": {
+    "first_attempt": "rejected before binding: main project root did not contain TASK in designated worktree",
+    "resolution": "same published TASK bound with codex-portfolio project root; no TASK regeneration or provider action"
+  },
+  "issue_preparation_comment": {
+    "url": "https://github.com/CartmanFatass/My-paper-code/issues/17#issuecomment-5627190792",
+    "id": 5627190792,
+    "body_readback_matches_after_crlf_normalization": true,
+    "raw_api_response_preserved": "ISSUE_PUBLICATION.json",
+    "initial_check": "raw body mismatch was CRLF versus LF; actual accepted comment read back and retained; no repost",
+    "meaning": "prepared fixed task only; neither a provider Send nor a Pro response"
+  }
 }
