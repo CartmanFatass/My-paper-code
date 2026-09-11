@@ -99,7 +99,7 @@ def terminal_metrics(row):
 
 
 def rollout(library, fixtures, model, arm, namespace, action_source, round_index, training, check_presentation=False,
-            evaluation_uniforms=None):
+            evaluation_uniforms=None, collect_service=False):
     """`evaluation_uniforms` is an optional per-epoch uniform supplier used only when
     `training` is false; absent (the default) every existing call keeps its behavior."""
     started = perf_counter()
@@ -111,6 +111,7 @@ def rollout(library, fixtures, model, arm, namespace, action_source, round_index
         model.residual_observation = [0.0, 0, 0.0]
     with Batch(library, fixtures) as batch:
         rows = batch.initial
+        service = [[list(row["fail_endpoint"] + row["total_endpoint"])] for row in rows] if collect_service else None
         failed = [row["failed_rank"] for row in rows]
         for epoch in range(6):
             traces = [row["next_observation"] for row in rows]
@@ -161,6 +162,8 @@ def rollout(library, fixtures, model, arm, namespace, action_source, round_index
                     failed_executor_state=trace["token_state"][failed_zone * 2]))
             rows = batch.step(commands)
             for index, row in enumerate(rows):
+                if service is not None:
+                    service[index].append(list(row["fail_endpoint"] + row["total_endpoint"]))
                 if tuple(row["applied_decision"]["command"]) != commands[index]:
                     raise AssertionError("presented command did not reach its physical native entity/token")
                 checks["physical_commands"] += 1
@@ -170,6 +173,9 @@ def rollout(library, fixtures, model, arm, namespace, action_source, round_index
         metrics = [dict(terminal_metrics(row), zone=fixture.failed_zone, world=index,
                         recovery_observations_20s=public_context[index])
                    for index, (row, fixture) in enumerate(zip(rows, fixtures))]
+        if service is not None:
+            for row, counters in zip(metrics, service):
+                row["service_counters"] = counters
     residual = None
     if arm == "DIRECT":
         squared, elements, maximum = model.residual_observation
@@ -181,12 +187,12 @@ def rollout(library, fixtures, model, arm, namespace, action_source, round_index
                 model_forward_decisions=count * (6 + checks["presentation_checks"]))
 
 
-def update(model, optimizer, rollout_data, seed, namespace, arm, round_index):
+def update(model, optimizer, rollout_data, seed, namespace, arm, round_index, targets=None):
     started = perf_counter()
     records = rollout_data["records"]
     values = torch.stack([row["old_value"] for row in records]).reshape(-1, 6)
     objectives = torch.tensor([row["J_ext"] for row in rollout_data["episodes"]], dtype=torch.float64)
-    advantages, returns = gae_terminal(values, objectives)
+    advantages, returns = gae_terminal(values, objectives) if targets is None else targets
     advantages, returns = normalize_advantages(advantages).reshape(-1), returns.reshape(-1)
     old_logp = torch.stack([row["old_logp"] for row in records])
     all_inputs = tuple(torch.cat([row["inputs"][column] for row in records]) for column in range(6))

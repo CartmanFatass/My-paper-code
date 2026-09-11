@@ -19,7 +19,7 @@
     }
   ],
   "recommended": "a",
-  "auto_applied": null,
+  "auto_applied": "a",
   "dm_reason": "此前未定义的信用替代已有明确更新定义、真实训练对照和可复用计数路径；六步时域和有限GAE风险仍使保留暂停成为强反方。",
   "evidence": [
     "docs/research/candidates/variable_n_fleet_churn/VNFC_NATIVE_SERVICE_CREDIT_REENTRY_INTAKE_20260910.md"
@@ -86,6 +86,14 @@
       "record": "docs/research/candidates/variable_n_fleet_churn/VNFC_NATIVE_SERVICE_CREDIT_REENTRY_INTAKE_20260910.md",
       "state": "blocked",
       "summary": "按 AGENTS 第3节阻断规则记录：Pro 点击一次后接收状态未明，原请求等待 Transport 核对；无裁决、无本地代选、无新增科学预算或暴露，auto_applied 仍为空。此项只记录流程状态，不代表 owner 选择科学选项。"
+    },
+    {
+      "at": "2026-09-11T18:11:06+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/variable_n_fleet_churn/pro_packets/20260910_native_service_credit_reentry/archive/RESPONSE.md",
+      "record": "docs/research/candidates/variable_n_fleet_churn/VNFC_NATIVE_SERVICE_CREDIT_REENTRY_INTAKE_20260910.md",
+      "state": "applied",
+      "summary": "完整答复10bb08476已读取并符合原问题及现行规范；选择(a)只开放一个INTERVAL/TERMINAL训练对，native600+support300，旧暂停和两次recast不变。尚无新实验结果。"
     }
   ]
 }
