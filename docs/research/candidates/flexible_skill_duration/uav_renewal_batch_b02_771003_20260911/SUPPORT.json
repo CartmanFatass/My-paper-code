@@ -32,9 +32,27 @@
     {
       "purpose": "independent reviewer three bounded read commands",
       "wall_seconds": 0.8934921
+    },
+    {
+      "purpose": "record technical acceptance, owner boundary and publish exact source/commands",
+      "wall_seconds": 5.3834134
+    },
+    {
+      "purpose": "single accepted implementation source-delivery transaction",
+      "wall_seconds": 7.5772148,
+      "session_id": null
+    },
+    {
+      "purpose": "prepare receipt path and submit exact detached D0 command",
+      "wall_seconds": 1.1716084,
+      "session_id": null
+    },
+    {
+      "purpose": "direct Monitor assignment API elapsed, excluding Monitor observation work",
+      "wall_seconds": 0.184
     }
   ],
-  "known_support_seconds": 9.7851818,
+  "known_support_seconds": 24.1014184,
   "caps_seconds": {
     "D0": 900,
     "I": 1800,
@@ -43,7 +61,15 @@
     "complete": 3000,
     "one_source_transaction": 45
   },
-  "scientific_submissions": 0,
+  "scientific_submissions": 1,
   "accounting": "Each invoked command once; inner check, staging and SSH durations are not additional charges. Authoring/Pro/idle calendar time excluded. Source publication, delivery, Monitor, collection/reduction, integration and cleanup remain pending; unknown attribution stays unknown.",
-  "complete_cost_certified": false
+  "complete_cost_certified": false,
+  "source_transaction": {
+    "complete_helper_wall_seconds": 7.35899999999674,
+    "enclosing_command_wall_seconds": 7.5772148,
+    "remote_wall_seconds": 6.490008224034682,
+    "returncode": 0,
+    "count": 1
+  },
+  "pending": "D0 native wall/admission/terminal, Monitor observation attribution, I invocation, collection/intake, integration/publication and cleanup. Enclosed source clocks are not summed."
 }
