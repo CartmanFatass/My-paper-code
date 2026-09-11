@@ -1,0 +1,502 @@
+{
+  "request_id": "2026-09-11-current-vacancies-refill-portfolio-01",
+  "at_utc": "2026-09-11T18:01:44.792124+00:00",
+  "assignment_snapshot_sha": "14744af1f733e08aa8b7ab25730576ade02f344f",
+  "branch": "codex/portfolio",
+  "worktree": "C:\\Projects\\HMASD-worktrees\\codex-portfolio",
+  "direction_ids": [
+    "acvc",
+    "capability_bound_semantic_currentness",
+    "commitment_residual_triggered_options",
+    "degraded_incumbent_shadow_handover",
+    "finite_resource_relational_inductive_efficiency",
+    "flexible_skill_duration",
+    "metric_ground_transport_allocation",
+    "roster_consistent_latent_exploration",
+    "semigroup_consistent_duration_model_policy",
+    "ucope",
+    "vap_folr_core",
+    "variable_n_fleet_churn",
+    "vsp_02",
+    "vsp_03",
+    "vsp_c1"
+  ],
+  "actual_author_exposure": {
+    "scientific_invocations": 0,
+    "policy_models": 0,
+    "encoder_modules": 0,
+    "checkpoint_loads": 0,
+    "environments": 0,
+    "native_steps": 0,
+    "synthetic_environment_steps": 0,
+    "training_episodes": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0,
+    "replay": 0,
+    "profiling": 0,
+    "source_tests": 0,
+    "numerical_fixtures": 0,
+    "support_search": 0,
+    "raw_result_reanalysis": 0,
+    "source_implementation_edits": 0,
+    "provider_sends": 0,
+    "parameter_displacement": "not applicable: no learner"
+  },
+  "exposure_line": "TWO_VACANCY_PREPARATION: scientific_invocations=0; policy_models=0; encoder_modules=0; checkpoint_loads=0; environments=0; native_steps=0; synthetic_environment_steps=0; training_episodes=0; optimizer_steps=0; evaluation_episodes=0; replay=0; profiling=0; source_tests=0; numerical_fixtures=0; support_search=0; raw_result_reanalysis=0; source_implementation_edits=0; provider_sends=0; parameter_displacement=not applicable: no learner",
+  "already_allocated_caps_seconds": {
+    "roster_consistent_latent_exploration": {
+      "learned": 600,
+      "reference": 10,
+      "support": 140,
+      "complete": 750
+    },
+    "acvc": {
+      "native": 270,
+      "support": 330,
+      "complete": 600,
+      "current_state": "8951 preparation no-ready; closure accounting only, no retry or successor"
+    },
+    "vap_folr_core": {
+      "implementation": 0,
+      "numerical": 0,
+      "scope": "one candidate note plus original Convergence and full intake"
+    },
+    "variable_n_fleet_churn": {
+      "new_allocation_here": 0,
+      "scope": "original-DM full intake and response-mapped continuation actually resumed;600/300/900 response proposal is not locally accepted here"
+    }
+  },
+  "new_proposed_direction_caps": {
+    "acvc": {
+      "scientific_invocations": 0,
+      "implementation_tasks": 0,
+      "additional_support_tasks": 0,
+      "new_direction_consultations": 0
+    },
+    "capability_bound_semantic_currentness": {
+      "scientific_invocations": 0,
+      "implementation_tasks": 0,
+      "additional_support_tasks": 0,
+      "new_direction_consultations": 0
+    },
+    "commitment_residual_triggered_options": {
+      "scientific_invocations": 0,
+      "implementation_tasks": 0,
+      "additional_support_tasks": 0,
+      "new_direction_consultations": 0
+    },
+    "degraded_incumbent_shadow_handover": {
+      "scientific_invocations": 0,
+      "implementation_tasks": 0,
+      "additional_support_tasks": 0,
+      "new_direction_consultations": 0
+    },
+    "finite_resource_relational_inductive_efficiency": {
+      "scientific_invocations": 0,
+      "implementation_tasks": 0,
+      "additional_support_tasks": 0,
+      "new_direction_consultations": 0
+    },
+    "flexible_skill_duration": {
+      "scientific_invocations": 0,
+      "implementation_tasks": 0,
+      "additional_support_tasks": 0,
+      "new_direction_consultations": 0
+    },
+    "metric_ground_transport_allocation": {
+      "scientific_invocations": 0,
+      "implementation_tasks": 0,
+      "additional_support_tasks": 0,
+      "new_direction_consultations": 0
+    },
+    "roster_consistent_latent_exploration": {
+      "scientific_invocations": 0,
+      "implementation_tasks": 0,
+      "additional_support_tasks": 0,
+      "new_direction_consultations": 0
+    },
+    "semigroup_consistent_duration_model_policy": {
+      "scientific_invocations": 0,
+      "implementation_tasks": 0,
+      "additional_support_tasks": 0,
+      "new_direction_consultations": 0
+    },
+    "ucope": {
+      "scientific_invocations": 0,
+      "implementation_tasks": 0,
+      "additional_support_tasks": 0,
+      "new_direction_consultations": 0
+    },
+    "vap_folr_core": {
+      "scientific_invocations": 0,
+      "implementation_tasks": 0,
+      "additional_support_tasks": 0,
+      "new_direction_consultations": 0
+    },
+    "variable_n_fleet_churn": {
+      "scientific_invocations": 0,
+      "implementation_tasks": 0,
+      "additional_support_tasks": 0,
+      "new_direction_consultations": 0
+    },
+    "vsp_02": {
+      "scientific_invocations": 0,
+      "implementation_tasks": 0,
+      "additional_support_tasks": 0,
+      "new_direction_consultations": 0
+    },
+    "vsp_03": {
+      "scientific_invocations": 0,
+      "implementation_tasks": 0,
+      "additional_support_tasks": 0,
+      "new_direction_consultations": 0
+    },
+    "vsp_c1": {
+      "scientific_invocations": 0,
+      "implementation_tasks": 0,
+      "additional_support_tasks": 0,
+      "new_direction_consultations": 0
+    }
+  },
+  "science_recommendation": "A zero additions for one current/two imminent vacancies; B/C nonzero options have no eligible named member/cap under exclusions. No auto-allocation upon future conditions.",
+  "portfolio_choice_applied": null,
+  "vnfc_new_presence": {
+    "commit": "10bb08476ff58afd25b90b21cd2d1a739b25ca4b",
+    "path": "docs/research/candidates/variable_n_fleet_churn/pro_packets/20260910_native_service_credit_reentry/archive/RESPONSE.md",
+    "bytes": 31994,
+    "lines": 235,
+    "sha256": "11076fff024affb030dd692e1a8637fa2b36043274495b1419ad93a13bccd117",
+    "author_read_scope": "opening16lines plus commit/path metadata",
+    "original_dm_full_intake_by_this_author": false,
+    "root_informed": true,
+    "new_send_requested": false,
+    "effect": "four current chains/one vacancy; no file-absence claim, no duplicate Send or local allocation",
+    "current_status": "Transport verified; original DM actually resumed. Live/excluded, original scientific intake pending."
+  },
+  "scientific_reading": {
+    "sources": [
+      "FOUNDATIONS section6",
+      "04_EMPIRICAL comparison/randomness/cost/claim sections"
+    ],
+    "assumption": "Independent training process is the learning unit; endpoint worlds remain conditional. Existing small/mixed results do not prove futility or require stable superiority before a legitimate B.",
+    "limit": "No new empirical comparison or local Portfolio choice; eligibility is scoped acceptance/decision evidence, not estimated scientific value.",
+    "new_library_search": false,
+    "reason_no_new_retrieval": "No new mechanism/comparator or unresolved primary-source claim; reuse current accepted retrieval."
+  },
+  "fixed_source_checks": [
+    {
+      "path": "AGENTS.md",
+      "commit_sha": "14744af1f733e08aa8b7ab25730576ade02f344f",
+      "purpose": "Read sections2,4.8,5 and6 for decision tiers, rolling scope and exact publication; do not use old no-successor text as a global barrier.",
+      "provenance": "Accepted source record at the pinned published snapshot; read only named sections. Earlier observations and decisions retain original scope, not new allocation.",
+      "bytes": 42984,
+      "sha256": "cfbe996017cd6ffd7e4a8e8af0321b8bc28904f7529626d1d0f7548222b0c4b5"
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "commit_sha": "14744af1f733e08aa8b7ab25730576ade02f344f",
+      "purpose": "Apply sections7,8.1,11.7-11.10: smallest disposition, honest B ceiling, investment descriptions and proportionate questions.",
+      "provenance": "Accepted source record at the pinned published snapshot; read only named sections. Earlier observations and decisions retain original scope, not new allocation.",
+      "bytes": 45053,
+      "sha256": "44418af31752086f6752f8f3d6874b260134e4c91b6c82ed8dbc61e4ef0b87e1"
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "commit_sha": "14744af1f733e08aa8b7ab25730576ade02f344f",
+      "purpose": "Read sections4-5 and7 only; this document-only question needs none of the section4 machinery and funds no engineering task.",
+      "provenance": "Accepted source record at the pinned published snapshot; read only named sections. Earlier observations and decisions retain original scope, not new allocation.",
+      "bytes": 20899,
+      "sha256": "a52a26e3b9ba876cb954ef4e671b5826ff9e1bab573320ca6da1033e12e64996"
+    },
+    {
+      "path": "docs/project/ROOT_OPERATIONS.md",
+      "commit_sha": "14744af1f733e08aa8b7ab25730576ade02f344f",
+      "purpose": "Read current Root/DM/Transport ownership and integration; this author prepares only and Root routes the full response to its designated checker.",
+      "provenance": "Accepted source record at the pinned published snapshot; read only named sections. Earlier observations and decisions retain original scope, not new allocation.",
+      "bytes": 10764,
+      "sha256": "09f31d16810b7fca039b6895af0e97b201dee7962b8ed526312188385ab06ef8"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "commit_sha": "14744af1f733e08aa8b7ab25730576ade02f344f",
+      "purpose": "Read section6 only: independent training unit, conditional evaluation and limited package observations do not establish broad futility.",
+      "provenance": "Accepted source record at the pinned published snapshot; read only named sections. Earlier observations and decisions retain original scope, not new allocation.",
+      "bytes": 7819,
+      "sha256": "c1f7d6c68fcec55de48ea555346d5d65af8d311e28502be43a2b05436a174247"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "commit_sha": "14744af1f733e08aa8b7ab25730576ade02f344f",
+      "purpose": "Read comparison, randomness, cost and claim-boundary sections; knowledge bounds inference, not Portfolio authority.",
+      "provenance": "Accepted source record at the pinned published snapshot; read only named sections. Earlier observations and decisions retain original scope, not new allocation.",
+      "bytes": 4252,
+      "sha256": "99b7e727a890d4e93a64b5c0f44fe588e383b5de56f2da663fb3f864c6d8293c"
+    },
+    {
+      "path": "docs/research/portfolio/PORTFOLIO.md",
+      "commit_sha": "14744af1f733e08aa8b7ab25730576ade02f344f",
+      "purpose": "Read opening current remaining-capacity dispatch and lifecycle/headroom rows; dated prior execution snapshots do not override the latest accepted intake.",
+      "provenance": "Accepted source record at the pinned published snapshot; read only named sections. Earlier observations and decisions retain original scope, not new allocation.",
+      "bytes": 59237,
+      "sha256": "f0d3e91a2c0f68a0d8d26a331d0bfd0cfa0083f02718429bd9f7f4b20cb9c068"
+    },
+    {
+      "path": "docs/research/portfolio/EXPERIMENT_TRACKING.md",
+      "commit_sha": "14744af1f733e08aa8b7ab25730576ade02f344f",
+      "purpose": "Read final remaining-capacity section only: actual three-direction dispatch and completed MGTAP/no successor.",
+      "provenance": "Accepted source record at the pinned published snapshot; read only named sections. Earlier observations and decisions retain original scope, not new allocation.",
+      "bytes": 209185,
+      "sha256": "8dc49c411a1857a5c6fc51b220b48fbb212221ef9728794820a6a5c78c75e227"
+    },
+    {
+      "path": "docs/research/portfolio/decisions/2026-09-11-remaining-capacity-refill.md",
+      "commit_sha": "14744af1f733e08aa8b7ab25730576ade02f344f",
+      "purpose": "Read accepted option A, latest MGTAP correction and Decisions this intake produces; no added successor or local cap transfer.",
+      "provenance": "Accepted source record at the pinned published snapshot; read only named sections. Earlier observations and decisions retain original scope, not new allocation.",
+      "bytes": 14476,
+      "sha256": "6a8f73cf78a0403bf83bd4d0b9819cfbf580c5d28ce4f9cba31d169434d5d8af"
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260911_remaining_capacity_refill/EXECUTION_MAPPING.md",
+      "commit_sha": "14744af1f733e08aa8b7ab25730576ade02f344f",
+      "purpose": "Read the three actually dispatched RCLE/ACVC/FOLR scopes and caps only. These are live exclusions, not new candidates or new funding.",
+      "provenance": "Accepted source record at the pinned published snapshot; read only named sections. Earlier observations and decisions retain original scope, not new allocation.",
+      "bytes": 17500,
+      "sha256": "213d86ef04398b3b2a3336d11c364018f1d100085811b81aec763177ec6facf3"
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260911_remaining_capacity_refill/SCIENCE_BRIEF.md",
+      "commit_sha": "14744af1f733e08aa8b7ab25730576ade02f344f",
+      "purpose": "Read section6 current alternative investment-field rows for unchanged MEI/recast/historical cost metadata only. Its prior proposal/readiness is superseded by the new brief and current dispatch.",
+      "provenance": "Accepted source record at the pinned published snapshot; read only named sections. Earlier observations and decisions retain original scope, not new allocation.",
+      "bytes": 28701,
+      "sha256": "27aa30ff12babb2980579b9142ff88ca1e2446ceb2e7597800e4b39b478611be"
+    },
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_EXECUTION_LIMITATION_INTAKE_20260911.md",
+      "commit_sha": "14744af1f733e08aa8b7ab25730576ade02f344f",
+      "purpose": "Read zero-exposure closure, support limitation and no-retry/no-successor boundary; technical failure has no paired scientific polarity.",
+      "provenance": "Accepted source record at the pinned published snapshot; read only named sections. Earlier observations and decisions retain original scope, not new allocation.",
+      "bytes": 8586,
+      "sha256": "c045a21221efbfcfdcce22cc74a4ed059d8956c77fd3f15635df8d8715cc886e"
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_CONDITIONAL_POOLING_B01_INTAKE_20260911.md",
+      "commit_sha": "14744af1f733e08aa8b7ab25730576ade02f344f",
+      "purpose": "Read sections1-4 and final cleanup/accounting update: one valid inside-MEI pair, full-support uncertainty and sole allocation complete.",
+      "provenance": "Accepted source record at the pinned published snapshot; read only named sections. Earlier observations and decisions retain original scope, not new allocation.",
+      "bytes": 11445,
+      "sha256": "554aabaa00370b404d5c6b723ed85276b6613b04bd7fea6632f9812b71e1676d"
+    },
+    {
+      "path": "docs/research/candidates/ucope/pro_packets/20260911_post_8801_convergence/INTAKE.md",
+      "commit_sha": "14744af1f733e08aa8b7ab25730576ade02f344f",
+      "purpose": "Read sections2-6: narrow L recipe PARK/no successor, original one-pair result and unchanged recasts1.",
+      "provenance": "Accepted source record at the pinned published snapshot; read only named sections. Earlier observations and decisions retain original scope, not new allocation.",
+      "bytes": 16941,
+      "sha256": "078565a003095a77ceb562f74cf855cd1d1c31bdc26adb7d3540745c7264377b"
+    },
+    {
+      "path": "docs/research/candidates/vsp_03/VSP03_FALLBACK_CONVERGENCE_INTAKE_20260911.md",
+      "commit_sha": "14744af1f733e08aa8b7ab25730576ade02f344f",
+      "purpose": "Read opening and sections2-4/Decisions: completed fallback keeps narrow continuous512 pause, four positive histories/adverse Q, no new allowance.",
+      "provenance": "Accepted source record at the pinned published snapshot; read only named sections. Earlier observations and decisions retain original scope, not new allocation.",
+      "bytes": 14799,
+      "sha256": "94352d197635cd8c7dd0cf345a2057d7d9be46d29f97765692a8aecb51a9b9b6"
+    },
+    {
+      "path": "docs/research/candidates/vsp_c1/VSPC1_NATIVE_HOLD_VALUE_P81_CONVERGENCE_INTAKE_20260909.md",
+      "commit_sha": "14744af1f733e08aa8b7ab25730576ade02f344f",
+      "purpose": "Read opening and sections2-4/Decisions: tested768 body-plus-gate package ended, contrary512 gains retained, no successor.",
+      "provenance": "Accepted source record at the pinned published snapshot; read only named sections. Earlier observations and decisions retain original scope, not new allocation.",
+      "bytes": 13810,
+      "sha256": "975b69fb3e13177c19448c48e28b35f1f1c2b6658e32155649a65d8e8dec44a0"
+    },
+    {
+      "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/pro_packets/20260910_post_b02_convergence/CONVERGENCE_INTAKE_20260910.md",
+      "commit_sha": "14744af1f733e08aa8b7ab25730576ade02f344f",
+      "purpose": "Read sections1,3-6: fixed opening residual-MC narrow PARK, both positive within-MEI means, costs and recasts2, no third pair.",
+      "provenance": "Accepted source record at the pinned published snapshot; read only named sections. Earlier observations and decisions retain original scope, not new allocation.",
+      "bytes": 14406,
+      "sha256": "b4e2b46e26fb1b1b663f8f79a7fe569af655f7c27d29318f4522f0b3551eb425"
+    },
+    {
+      "path": "docs/research/candidates/commitment_residual_triggered_options/CRTO_POST_B08_P72_CONVERGENCE_INTAKE_20260908.md",
+      "commit_sha": "14744af1f733e08aa8b7ab25730576ade02f344f",
+      "purpose": "Read opening and decision/evidence/cost sections: selected-panel family PARK/no successor, outcome-informed RAW bound not information-class impossibility.",
+      "provenance": "Accepted source record at the pinned published snapshot; read only named sections. Earlier observations and decisions retain original scope, not new allocation.",
+      "bytes": 21072,
+      "sha256": "c11713394af09e56f6d3b53c67e6fdae4fda24fb386ad6cbbd2719b25b2f6417"
+    },
+    {
+      "path": "docs/research/candidates/commitment_residual_triggered_options/CRTO_RESTART_HANDOFF_20260909.md",
+      "commit_sha": "14744af1f733e08aa8b7ab25730576ade02f344f",
+      "purpose": "Read current maintenance update and final finite-zero repair completion only; old soft-stop wording is dated provenance, not a current global pause.",
+      "provenance": "Accepted source record at the pinned published snapshot; read only named sections. Earlier observations and decisions retain original scope, not new allocation.",
+      "bytes": 14688,
+      "sha256": "a2a6ab16f77b491ff90b57fb0dc77083c10c979f0f1a2e6e3a2d8f891766ff11"
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_POST_B08_CONVERGENCE_INTAKE_20260910.md",
+      "commit_sha": "14744af1f733e08aa8b7ab25730576ade02f344f",
+      "purpose": "Read sections2-4 and Decisions: tested arrival-bridge pause/REPLACE/no successor, small service loss and lower energy, no ordinary CAS.",
+      "provenance": "Accepted source record at the pinned published snapshot; read only named sections. Earlier observations and decisions retain original scope, not new allocation.",
+      "bytes": 12775,
+      "sha256": "b1b9699268788e300e67b5ceee3ff15228e3931d348287bba2e7d8a62c3b73e7"
+    },
+    {
+      "path": "docs/research/candidates/vsp_02/VSP02_TEAMMATE_POLICY_CHANGE_POST_B01_CONVERGENCE_INTAKE_20260907.md",
+      "commit_sha": "14744af1f733e08aa8b7ab25730576ade02f344f",
+      "purpose": "Read opening and accepted result/decision/cost sections: narrow fixed-member family ended, opposite small signs, recasts1, no successor.",
+      "provenance": "Accepted source record at the pinned published snapshot; read only named sections. Earlier observations and decisions retain original scope, not new allocation.",
+      "bytes": 16468,
+      "sha256": "2d6e919065051af22ecb5585d161760ddd706db04bc752855f9d5c2703a3bcd8"
+    },
+    {
+      "path": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_RESERVE_READINESS_INTAKE_20260910.md",
+      "commit_sha": "14744af1f733e08aa8b7ab25730576ade02f344f",
+      "purpose": "Read accepted-state findings, decisions and exact dependency: completed static readiness, no permitted retained-prefix operation established, no new probe.",
+      "provenance": "Accepted source record at the pinned published snapshot; read only named sections. Earlier observations and decisions retain original scope, not new allocation.",
+      "bytes": 13270,
+      "sha256": "ff2f75a5646b6ad39fb1d27e13b08f6dad5f816daef808406a6c67c9f31f6e7b"
+    },
+    {
+      "path": "docs/research/candidates/finite_resource_relational_inductive_efficiency/NATIVE_CRASH_P63_READINESS_INTAKE_20260910.md",
+      "commit_sha": "14744af1f733e08aa8b7ab25730576ade02f344f",
+      "purpose": "Read sections2-4: P63 turn rejected before accepted operation, method remains unestablished, no new runtime/executor/probe allowance.",
+      "provenance": "Accepted source record at the pinned published snapshot; read only named sections. Earlier observations and decisions retain original scope, not new allocation.",
+      "bytes": 14433,
+      "sha256": "11270b36208761d089956255648d9b3b54467476ed281caf09def5408494a823"
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260911_remaining_capacity_refill/archive/VNFC_DELIVERY_GAP.md",
+      "commit_sha": "14744af1f733e08aa8b7ab25730576ade02f344f",
+      "purpose": "Read complete short historical delivery-gap receipt only. It does not override newly observed response-file presence or form a scientific decision.",
+      "provenance": "Accepted source record at the pinned published snapshot; read only named sections. Earlier observations and decisions retain original scope, not new allocation.",
+      "bytes": 546,
+      "sha256": "aebcaccc9250763f01bd36955c36ae5f11b1787283e62fa1a03f53874761f00d"
+    },
+    {
+      "path": "docs/research/candidates/variable_n_fleet_churn/pro_packets/20260910_native_service_credit_reentry/archive/RESPONSE.md",
+      "commit_sha": "10bb08476ff58afd25b90b21cd2d1a739b25ca4b",
+      "purpose": "Read opening and delivery identity only for newly observed response-file presence. Original DM full conformance/receipt route is pending; do not intake, expand or allocate this direction here.",
+      "provenance": "Published origin/codex/vnfc addition discovered during required fetch; author inspected opening and commit/path metadata, not full scientific conformance.",
+      "bytes": 31994,
+      "sha256": "11076fff024affb030dd692e1a8637fa2b36043274495b1419ad93a13bccd117"
+    }
+  ],
+  "owner_reviews_entry": {
+    "primary": [],
+    "shared": []
+  },
+  "consultation_cost": "Authoring/Git/Pro cost not measured as scientific runtime; not claimed zero or free. No result-bearing invocation or new support allowance is allocated.",
+  "audit_row": "docs/research/portfolio/audit/2026-09-11.md#L50",
+  "owner_item_path": "docs/research/portfolio/owner/inbox/2026-09-11/20260911-root-003.json",
+  "owner_item": "20260911-root-003",
+  "owner_auto_applied": null,
+  "preparation_issue_resolved": "item.py add returned a path, not JSON; item003 and one audit row were created successfully. Metadata parser corrected without repeating creation.",
+  "original_assignment_eligibility_snapshot": {
+    "target": 5,
+    "already_advancing": [
+      "roster_consistent_latent_exploration",
+      "acvc",
+      "vap_folr_core"
+    ],
+    "completed_boundary_or_family_pause": [
+      "flexible_skill_duration",
+      "metric_ground_transport_allocation",
+      "ucope",
+      "vsp_03",
+      "vsp_c1",
+      "semigroup_consistent_duration_model_policy",
+      "commitment_residual_triggered_options",
+      "degraded_incumbent_shadow_handover",
+      "vsp_02"
+    ],
+    "unavailable_exact_operation": [
+      "capability_bound_semantic_currentness",
+      "finite_resource_relational_inductive_efficiency"
+    ],
+    "existing_request_intake_dependency": [
+      "variable_n_fleet_churn"
+    ],
+    "count_already_advancing": 3,
+    "count_completed_boundary": 9,
+    "count_operation_dependencies": 2,
+    "count_decision_dependencies": 1,
+    "count_eligible_additions": 0,
+    "assignment_vacancies": 2,
+    "proposed_added_chains": 0,
+    "scope_limit": "Counts classify this assigned question, not scientific worth or whole-direction lifecycle; new actual intake/dispatch facts can change the execution count independently."
+  },
+  "eligibility_snapshot": {
+    "target": 5,
+    "already_advancing": [
+      "roster_consistent_latent_exploration",
+      "acvc",
+      "vap_folr_core",
+      "variable_n_fleet_churn"
+    ],
+    "completed_boundary_or_family_pause": [
+      "flexible_skill_duration",
+      "metric_ground_transport_allocation",
+      "ucope",
+      "vsp_03",
+      "vsp_c1",
+      "semigroup_consistent_duration_model_policy",
+      "commitment_residual_triggered_options",
+      "degraded_incumbent_shadow_handover",
+      "vsp_02"
+    ],
+    "unavailable_exact_operation": [
+      "capability_bound_semantic_currentness",
+      "finite_resource_relational_inductive_efficiency"
+    ],
+    "existing_request_intake_dependency": [],
+    "count_already_advancing": 4,
+    "count_completed_boundary": 9,
+    "count_operation_dependencies": 2,
+    "count_decision_dependencies": 0,
+    "count_eligible_additions": 0,
+    "proposed_added_chains": 0,
+    "scope_limit": "Counts classify this assigned question, not scientific worth or whole-direction lifecycle; new actual intake/dispatch facts can change the execution count independently.",
+    "current_vacancies": 1,
+    "acvc_counts_only_through_active_intake_cleanup": true,
+    "projected_after_acvc_complete": {
+      "advancing": [
+        "roster_consistent_latent_exploration",
+        "vap_folr_core",
+        "variable_n_fleet_churn"
+      ],
+      "count_advancing": 3,
+      "vacancies": 2,
+      "count_eligible_additions": 0,
+      "effect": "ACVC moves from live exclusion to completed no-successor exclusion; no automatic replacement"
+    }
+  },
+  "current_execution_update": {
+    "recorded_at_utc": "2026-09-11T18:06:55.387035+00:00",
+    "source": "Root native current-fact correction, preserved verbatim in PREPARATION_INTAKE.md",
+    "transport_verified_delayed_vnfc_response": true,
+    "new_provider_send": false,
+    "original_dm_actually_resumed": "/root/dm_vnfc_rolling_reentry",
+    "work": "full conformance/intake and response-mapped continuation",
+    "count_once_as_fourth_chain": true,
+    "vnfc_full_scientific_conformance_remains_with_original_dm": true,
+    "historical_preparation_commit": "c04de197f10181f3f24b718f3ef4c2c7bf4054d9"
+  },
+  "acvc_no_ready_update": {
+    "recorded_at_utc": "2026-09-11T18:09:45.701898+00:00",
+    "source": "Root routed native execution fact, quoted verbatim in PREPARATION_INTAKE.md",
+    "identity": "ACVC8951",
+    "status": "preparation no-ready; intake/cleanup still active, then no successor",
+    "observed_by_author": "Root report only; no independent remote probe/diagnosis",
+    "facts": "bundle/SCP succeeded; CR-contaminated SSH stdin caused shell/path failure; zero checkout/admission/agent-task/model/RNG/scientific exposure",
+    "repeat_preparation_selected": false,
+    "scientific_polarity": null,
+    "new_investment_here": 0
+  },
+  "current_fact_audit_row": "docs/research/portfolio/audit/2026-09-11.md#L51",
+  "owner_trace_state": "planned",
+  "owner_trace_meaning": "Current execution facts under existing OWNER_DIRECT rolling rule; not a new owner scientific selection, Portfolio disposition or auto_applied option."
+}
