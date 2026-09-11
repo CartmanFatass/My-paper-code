@@ -1,0 +1,85 @@
+{
+  "id": "20260910-folr-006",
+  "created": "2026-09-10T22:12:55-07:00",
+  "direction": "vap_folr_core",
+  "tier": "direction",
+  "kind": "close-call",
+  "title": "FOLR：固定半衰减一正一负后的窄范围暂停建议",
+  "context": "当前仅分配一次原Convergence问题及intake，新增数值工作为零。建议暂停具体配方是尚未执行的close call；保留+1.56546875与−4.293046875，以及继续独立复测的正当理由。",
+  "options": [
+    {
+      "key": "pause",
+      "label": "暂停具体配方",
+      "consequence": "原节点若选择则暂停固定0.5配方；保留普通RETAIN及全部证据。"
+    },
+    {
+      "key": "continue",
+      "label": "提出一次具体继续问题",
+      "consequence": "仅提出有明确价值的有限B问题；执行预算仍未分配。"
+    },
+    {
+      "key": "end",
+      "label": "结束具体配方",
+      "consequence": "仅结束明确的具体配方，不推断普遍失败或改变Portfolio生命周期。"
+    }
+  ],
+  "recommended": "pause",
+  "auto_applied": "pause",
+  "dm_reason": "再收集一个相同配方的符号增益有限，但已有正结果使独立复测仍是最强备选；提交原节点判断。",
+  "evidence": [
+    "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_HALF_FAMILY_QUESTION_INTAKE_20260911.md",
+    "docs/research/candidates/vap_folr_core/pro_packets/20260911_half_family_convergence/SCIENCE_BRIEF.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-10.md#L89",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": {
+    "question": "固定0.5事件衰减的两次结果一正一负后，是否暂停这条具体配方，还是有理由申请一次独立复测？",
+    "changes_if_approved": [
+      {
+        "target": "FOLR固定0.5 / Traffic Junction / 5000训练+128最终评价配方",
+        "from": "两次独立训练对已完成；当前仅获一次问题及intake分配",
+        "to": "建议窄范围暂停，保留普通RETAIN及全部证据；建议尚未执行，由原Convergence节点裁决"
+      }
+    ],
+    "if_refused": "原节点可选择有明确价值的继续问题或结束具体配方；数值执行仍需单独分配，不能沿用3900秒。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_HALF_B02_INTAKE_20260910.md",
+        "quote": "The primary is HALF_EVENT5.17875 minus matched RETAIN9.471796875 = **−4.293046875**, below−1.",
+        "why": "第二次完整匹配学习比较明显偏向保留；只是该实例的结果，不是普遍伤害。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/vap_folr_core/DIRECTION.md",
+        "quote": "HALF-B01's+1.56546875 remains direct support for bounded interest in this same fixed law.",
+        "why": "第一次有效正结果仍在；一次独立复测可增加真实训练层面的观察，不能因为只有两次就要求结束。"
+      }
+    ],
+    "uncertainty": [
+      "两次结果不能确定稳定赢家；128条评价行不是128个训练样本或相同交通世界。",
+      "历史支持开销有缺项；不据此认定科学负面或完整预算合规。"
+    ],
+    "cost": {
+      "compute": "当前新增数值预算0；对比的3900秒独立训练对未获分配。",
+      "owner_time": "可异步查看，无须等待回复。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing; 原Convergence节点由既有Transport执行一次问题。"
+    },
+    "verdict_text": "The DM recommends a narrow pause of the exact fixed .5/host/5000-training/128-final recipe as a close call. This recommendation is unexecuted; the original Convergence node decides.",
+    "source": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_HALF_FAMILY_QUESTION_INTAKE_20260911.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-11T06:01:00+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/vap_folr_core/pro_packets/20260911_half_family_convergence/archive/RESPONSE.md",
+      "record": "docs/research/candidates/vap_folr_core/FOLR_PUBLIC_LIFECYCLE_HALF_FAMILY_CONVERGENCE_INTAKE_20260911.md",
+      "state": "applied",
+      "summary": "已完整读取并核对Pro原始裁决，暂停固定0.5 / 当前交通环境 / 5000训练+128最终评价的具体配方，保留RETAIN与两次相反结果；没有新运行、重铸或Portfolio生命周期变化。"
+    }
+  ]
+}
