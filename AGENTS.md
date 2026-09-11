@@ -46,6 +46,10 @@ designated DM for scientific/specification checking and intake, including Portfo
 Transport never selects science. Root uses `hmasd-loop-dispatch` for execution; the designated DM
 uses `hmasd-portfolio-task` for cross-direction materials and Pro intake. Procedure ownership is
 indexed in `docs/project/ROOT_OPERATIONS.md`.
+OWNER_DIRECT 2026-09-11: Transport Send readiness is independent of which Codex task opened or
+owns a browser surface. Browser/task scope is not a permission blocker. Transport determines
+readiness from the actual target ChatGPT session login state, exact conversation/request binding,
+provider state and one-Send reconciliation, and may use any accessible logged-in browser surface.
 Each DM owns its card, predictions, implementation, technical acceptance, result collection,
 scientific intake and authorized continuation. Scout, Implementer, Reviewer, Critic, Verifier and
 Operator are optional working methods, not additional authorities. Legacy CM tasks retain only
@@ -101,15 +105,6 @@ use its scientific-reading mode after the current assignment/card and relevant s
 mechanical formatting, Git, receipts and accepted technical collection do not trigger it.
 
 ## Focused reading and engineering handoffs (OWNER_DIRECT, 2026-09-06)
-
-OWNER_DIRECT 2026-09-07 temporary comparison: the next three genuinely new CM engineering
-assignments use `docs/project/CM_MODEL_COMPARISON_20260907.md` before implementation begins.
-Every arm receives the same complete code spec, task and starting code. Do not replay historical
-or already-started assignments. Native baseline/Sol and the three headless clients implement in
-isolated copies; comparison arms add no scientific invocation or research-direction slot.
-After three batches this enrollment ends. Ordinary Root execution/count/push notices remain
-in its dedicated log; only actual repair/decision needs go to Portfolio, without informational
-echoes. The owner's new goal and existing scientific boundaries continue independently.
 
 Start from the current assignment and applicable AGENTS instructions. The sender points to the
 current card/intake section, relevant specification sections, code entry points and acceptance.
@@ -261,6 +256,14 @@ When the owner is absent the loop keeps running under a standing delegation (own
 
 ## 5. Capacity and resume
 
+OWNER_DIRECT 2026-09-10: directions advance as independent rolling chains. Each direction proceeds
+from its own accepted evidence, decision, dependencies and fresh resource admission; it never waits
+for a named batch, Portfolio bundle, sibling result/intake/cleanup or a global stage boundary. A
+result, blocker, failed admission, Pro wait or closeout affects only that direction. Root integrates
+and replaces work continuously. A prior `no successor` closes only the named allocation; it creates
+no synchronization barrier. Cross-direction choices remain Portfolio-tier decisions, while
+independent authorized work continues during their preparation and resolution.
+
 Root applies the `hmasd-loop-dispatch` skill's stable next-action trigger at goal-turn entry,
 native return, Transport receipt and before blocking waits. Check owner pause/stop instructions
 first. A workflow edit or status question does not resume paused research.
@@ -271,11 +274,12 @@ cards. Count active native work, accepted running experiments and accepted Pro g
 per direction. Completed returns, unresolved waits and queued intentions do not count. Root,
 Transport, specialists and detached processes do not each consume another direction slot.
 
-The loop skill owns event ordering and rolling dispatch. ROOT_OPERATIONS.md maps complete
+The loop skill owns per-direction event ordering and rolling dispatch. ROOT_OPERATIONS.md maps complete
 deliverables to Root, DM and optional Operator; EXPERIMENT_MONITOR.md owns observation
 transfer. Root resolves readiness and cross-direction dependencies while DM carries its
 assigned direction through scientific/technical acceptance. Temporary overlap drains at clean
-boundaries. Scheduling alone changes no lifecycle, scientific meaning, priority or budget.
+boundaries of the affected directions; there is no global clean boundary. Scheduling alone changes
+no lifecycle, scientific meaning, priority or budget.
 
 There is no fixed limit on concurrent implementers or result-bearing runs within the direction
 working set. Root plans from actual runtime capacity and dependencies; DM apply the fresh
@@ -480,7 +484,12 @@ appendix and completed historical tasks remain unchanged.
 - Scoped GitHub Pro delivery is described in
   `docs/project/GITHUB_RESEARCH_COLLABORATION.md`. New requests use committed task links and
   a named branch response/comment; Transport archives its receipt and Root/DM reads
-  the complete fixed file for intake. Accepted requests remain on their original route; attachment mode is only an explicit
+  the complete fixed file for intake. When the GitHub connector cannot expose or complete the
+  scoped writes after actual-state readback, the same prompt requires Pro to attach its complete
+  answer as a downloadable Markdown document; Transport downloads and hashes those exact bytes, stores the Transport attempt artifact as
+  `<archive_id>__02_RESPONSE.md`, and retains repository sidecar `archive/CHAT_FALLBACK_RESPONSE.md`
+  for DM intake without another Send. It never synthesizes the scoped GitHub `archive/RESPONSE.md`. Accepted requests remain on their original route;
+  attachment input mode is only an explicit
   recorded capability fallback. No duplicate Send, scientific launch gate, main write or
   Pro code/PR merge authority is implied.
 
