@@ -152,6 +152,27 @@ is needed for this technical continuation. Complete-pair intake, prediction scor
 Chinese brief and accepted mechanism-level update remain due after HALF_EVENT.
 
 Publish this acceptance, then execute only the original HALF_EVENT command with fresh
-destination memory admission in its outer1800s chain. Directly transfer the accepted
+destination memory admission in its outer 1800s chain. Directly transfer the accepted
 handle to the live-primary Monitor; no routine DM polling. The shared remote worktree
 and RETAIN evidence remain intact for final verified preservation and scoped closeout.
+
+## 7. Preselected second arm launched and handed over
+
+RETAIN acceptance was published at fb98e0fe8afab80d51553ac274b99479acfdaad2. The sole
+preselected HALF_EVENT command, unchanged from ea73b1c3d, was submitted once at
+2026-09-11T00:08:07.523443Z, with explicit tmux acceptance returned 00:08:08.331457Z.
+The [E0 §7](FOLR_PUBLIC_LIFECYCLE_HALF_B02_RESULT_EVIDENCE_20260910.md#7-half_event-accepted-and-observation-adopted)
+and summary retain the exact receipt and fresh joined-admission command. Source c6
+and training7808/evaluation107808 remain fixed. Accepted invocations are 2 of 2.
+
+Monitor dispatch succeeded, followed by Root-confirmed actual adoption of the same
+handle. This is separate from supervisor acceptance; no distinct adoption clock was
+provided. The current known support subtotal through dispatch is 29.0471481s, with
+missing durations and subsequent work still explicit. Monitor will account for actual
+query work separately from idle waits. No complete-cost compliance is claimed.
+
+Return this clean boundary pending HALF_EVENT terminal collection. The pair's primary
+delta, branch, forecast score and scientific interpretation remain pending; RETAIN
+alone does not decide them. Both arms' raw evidence and the shared remote checkout
+remain for verified preservation/closeout. No further invocation or successor follows
+from this allocation.
